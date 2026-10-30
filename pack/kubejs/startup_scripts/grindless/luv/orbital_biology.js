@@ -102,11 +102,23 @@
         .recipeModifier(modifier(i), true)
         .appearanceBlock(function () { return Block.getBlock(TRUSS) })
         .pattern(function (def) { return Pat.build(def, B.specs[i]) })
-        ['tooltips(net.minecraft.network.chat.Component[])']([
-          Text.translate('grindless.machine.' + name + '.tooltip.0'),
-          Text.translate('grindless.machine.' + name + '.tooltip.1'),
-          Text.translate('grindless.machine.parallel_hatch.tooltip')
-        ])
+        ['tooltips(net.minecraft.network.chat.Component[])'](({
+          zero_g_crystal_grower: [
+            Text.translate('grindless.machine.zero_g_crystal_grower.tooltip.0'),
+            Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.microgravity_crystal_growth')),
+            Text.translate('gtceu.multiblock.parallelizable.tooltip')
+          ],
+          hydroponic_ring: [
+            Text.translate('grindless.machine.hydroponic_ring.tooltip.0'),
+            Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.greenhouse')),
+            Text.translate('gtceu.multiblock.parallelizable.tooltip')
+          ],
+          organoid_lab: [
+            Text.translate('grindless.machine.organoid_lab.tooltip.0'),
+            Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.organoid_assembly')),
+            Text.translate('gtceu.multiblock.parallelizable.tooltip')
+          ]
+        })[name])
         .workableCasingModel('grindless:block/luv/station_truss_casing', 'grindless:block/multiblock/' + name)
       if (i !== 0) builder.beforeWorking(G.noVoiding.beforeWorking(options(i)))
     })

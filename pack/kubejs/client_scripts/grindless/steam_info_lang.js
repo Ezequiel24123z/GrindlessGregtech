@@ -91,6 +91,7 @@ ClientEvents.lang('en_us', event => {
 
     add('emi.grindless.info.steam_vein_drill.0', "The Steam Vein Drill drills the vein marked by the vein sample, over and over: put the sample and drill bits in the input bus and raw ore comes out. The vein never runs dry.")
     add('emi.grindless.info.steam_vein_drill.1', "It runs several bores at once, one drill bit per run; the bits wear out by chance. It is where ore comes from in the steam age, with no hand mining.")
+    add('emi.grindless.info.steam_vein_drill.2', "It needs 1 steam hatch, 1 steam input bus and 2 steam output buses.")
 })
 
 ClientEvents.lang('es_es', event => {
@@ -182,4 +183,5 @@ ClientEvents.lang('es_es', event => {
 
     add('emi.grindless.info.steam_vein_drill.0', "La perforadora de vetas a vapor perfora la veta que marca la muestra, una y otra vez: pon la muestra y las brocas en el bus de entrada y sale mena en bruto. La veta nunca se agota.")
     add('emi.grindless.info.steam_vein_drill.1', "Trabaja con varias perforaciones a la vez, una broca por ciclo; las brocas se desgastan por probabilidad. Es de donde sale la mena en la era del vapor, sin minar a mano.")
+    add('emi.grindless.info.steam_vein_drill.2', "Necesita 1 escotilla de vapor, 1 bus de entrada de vapor y 2 buses de salida de vapor.")
 })

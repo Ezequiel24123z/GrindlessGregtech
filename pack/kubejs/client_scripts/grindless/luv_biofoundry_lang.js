@@ -14,10 +14,7 @@ ClientEvents.lang('en_us', event => {
     add('block.gtceu.biofoundry', 'Biofoundry')
     add('gtceu.sterile_culture', 'Sterile Culture')
 
-    add('grindless.machine.biofoundry.tooltip.0', 'A sealed sterile hall: plascrete and cleanroom glass, four fermenter columns, an autoclave bay, a ceiling of UV lamps and an iron-door airlock. Everything goes in and out through the back wall. The programmed circuit picks the step.')
-    add('grindless.machine.biofoundry.tooltip.1', 'GregTech\'s whole sterile chain at LuV, with no sterile cleanroom: 1-2 collagen (bone or bone meal), 3 gelatin, 4 agar, 5 bacterial sludge, 6 mutagen, 7 sterile growth medium, 8 stem cells. Same ratios and same energy as GregTech\'s own steps; merged steps keep their intermediates inside.')
-    add('grindless.machine.biofoundry.tooltip.2', '9 and 10: engineered barley and tobacco seeds for the rotating hydroponic ring, with the bacteria as the vector that carries the gene. The bacteria come from Europa\'s culture.')
-    add('grindless.machine.biofoundry.tooltip.3', 'It keeps all it makes: the stem cells\' sludge goes back to mutagen, the diluted acid and the phosphorus back to acid, and it refuses voiding. Back wall: 1-2 energy hatches, 1-4 input buses, 1-2 output buses, 1-3 input hatches and 1-2 output hatches. ME parts fit.')
+    add('grindless.machine.biofoundry.tooltip.0', '§7Runs GregTech\'s sterile bio chain without a cleanroom.')
 
     add('gtceu.recipe.grindless_biofoundry.collagen_from_bone', 'Step 1: collagen from bone and meat in sulfuric acid; the diluted acid goes back to sulfuric acid')
     add('gtceu.recipe.grindless_biofoundry.collagen_from_bone_meal', 'Step 2: collagen from bone meal and meat; the diluted acid goes back to sulfuric acid')
@@ -39,10 +36,7 @@ ClientEvents.lang('es_es', event => {
     add('block.gtceu.biofoundry', 'Biofundición')
     add('gtceu.sterile_culture', 'Cultivo estéril')
 
-    add('grindless.machine.biofoundry.tooltip.0', 'Una nave estéril y estanca: plascreto y vidrio de sala limpia, cuatro columnas de fermentación, una bahía de autoclaves, un techo de lámparas UV y una esclusa con puertas de hierro. Todo entra y sale por el muro trasero. El circuito programado elige el paso.')
-    add('grindless.machine.biofoundry.tooltip.1', 'Toda la cadena estéril de GregTech en LuV, sin sala limpia estéril: 1-2 colágeno (de hueso o de harina de hueso), 3 gelatina, 4 agar, 5 lodo bacteriano, 6 mutágeno, 7 medio de cultivo estéril, 8 células madre. Las mismas proporciones y la misma energía que los pasos de GregTech; los pasos fusionados guardan dentro sus intermedios.')
-    add('grindless.machine.biofoundry.tooltip.2', '9 y 10: semillas de cebada y de tabaco modificadas para el anillo hidropónico giratorio, con las bacterias como vector que lleva el gen. Las bacterias vienen del cultivo de Europa.')
-    add('grindless.machine.biofoundry.tooltip.3', 'Guarda todo lo que hace: el lodo de las células madre vuelve a mutágeno, el ácido diluido y el fósforo vuelven a ácido, y no acepta tirar nada. Muro trasero: 1-2 escotillas de energía, 1-4 buses de entrada, 1-2 buses de salida, 1-3 escotillas de entrada y 1-2 escotillas de salida. Valen las piezas ME.')
+    add('grindless.machine.biofoundry.tooltip.0', '§7Hace la cadena biológica estéril de GregTech sin sala limpia.')
 
     add('gtceu.recipe.grindless_biofoundry.collagen_from_bone', 'Paso 1: colágeno de hueso y carne en ácido sulfúrico; el ácido diluido vuelve a ácido sulfúrico')
     add('gtceu.recipe.grindless_biofoundry.collagen_from_bone_meal', 'Paso 2: colágeno de harina de hueso y carne; el ácido diluido vuelve a ácido sulfúrico')

@@ -227,9 +227,7 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.fluorspar_kiln.tooltip.0'),
-        Text.translate('grindless.machine.fluorspar_kiln.tooltip.1'),
-        Text.translate('grindless.machine.fluorspar_kiln.tooltip.2'),
-        Text.translate('grindless.machine.fluorspar_kiln.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.fluorspar_digestion'))
       ])
       .workableCasingModel(SHELL_TEXTURE, 'grindless:block/multiblock/fluorspar_kiln')
   })

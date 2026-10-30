@@ -262,9 +262,7 @@
       .pattern(function (def) { return Pat.build(def, CONDENSER_SPEC) })
       ['tooltips(net.minecraft.network.chat.Component[])']([
         Text.translate('grindless.machine.fumarole_condenser.tooltip.0'),
-        Text.translate('grindless.machine.fumarole_condenser.tooltip.1'),
-        Text.translate('grindless.machine.fumarole_condenser.tooltip.2'),
-        Text.translate('grindless.machine.fumarole_condenser.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.fumarole_condensing'))
       ])
       .workableCasingModel('grindless:block/luv/radiation_vault_casing', 'grindless:block/multiblock/fumarole_condenser')
 
@@ -289,9 +287,8 @@
       .pattern(function (def) { return Pat.build(def, INTAKE_SPEC) })
       ['tooltips(net.minecraft.network.chat.Component[])']([
         Text.translate('grindless.machine.volcanic_intake.tooltip.0'),
-        Text.translate('grindless.machine.volcanic_intake.tooltip.1'),
-        Text.translate('grindless.machine.volcanic_intake.tooltip.2'),
-        Text.translate('grindless.machine.volcanic_intake.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.volcanic_heat')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.io'))
       ])
       .workableCasingModel('grindless:block/luv/sulfur_concrete_casing', 'grindless:block/multiblock/volcanic_intake')
   })

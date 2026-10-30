@@ -4,12 +4,8 @@
   "gtceu.vein_drilling": "Vein Drilling",
   "gtceu.greenhouse": "Greenhouse",
 
-  "grindless.machine.steam_vein_drill.tooltip.0": "Drills the vein marked by the vein sample, over and over. It never runs dry.",
-  "grindless.machine.steam_vein_drill.tooltip.1": "Up to 4 runs at once, one drill bit per run (the bits wear out by chance).",
-  "grindless.machine.steam_vein_drill.tooltip.2": "Needs 1 steam hatch, 1 steam input bus and 2 steam output buses.",
-  "grindless.machine.steam_greenhouse.tooltip.0": "Grows trees, rubber trees and crops with a sapling or seed that is never used up.",
-  "grindless.machine.steam_greenhouse.tooltip.1": "Up to 4 runs at once. No planting, no felling.",
-  "grindless.machine.steam_greenhouse.tooltip.2": "Needs 1 steam hatch, 1 steam input bus and 1 or 2 steam output buses.",
+  "grindless.machine.steam_vein_drill.tooltip.0": "§7Drills the vein marked by the vein sample, up to 4 bores at once.",
+  "grindless.machine.steam_greenhouse.tooltip.0": "§7Grows trees, rubber trees and crops, up to 4 at once.",
 
   "item.grindless.bronze_drill_bit": "Bronze Drill Bit",
   "item.grindless.steel_drill_bit": "Steel Drill Bit",

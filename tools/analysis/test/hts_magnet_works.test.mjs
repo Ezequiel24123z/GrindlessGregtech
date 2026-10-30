@@ -296,7 +296,7 @@ test('magnet works text: the machine, the type, every recipe\'s EMI line and the
     // UXV-A8: uxv_uxv_parts_lang.js
     vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'uxv_uxv_parts_lang.js'), 'utf8'), sandbox, { filename: 'uxv_uxv_parts_lang.js' });
     const keys = ['block.gtceu.hts_magnet_works', 'gtceu.magnet_winding', 'grindless.machine.hts_magnet_works.charge.ok',
-    'grindless.machine.hts_magnet_works.charge.low', ...[0, 1, 2, 3].map((i) => 'grindless.machine.hts_magnet_works.tooltip.' + i),
+    'grindless.machine.hts_magnet_works.charge.low', ...[0].map((i) => 'grindless.machine.hts_magnet_works.tooltip.' + i),
     ...TABLE.recipes.map((r) => 'gtceu.recipe.grindless_magnet_winding.' + r.name)];
   for (const l of ['en_us', 'es_es']) for (const k of keys) assert.ok(lang[l] && lang[l][k], l + ' ' + k);
   assert.deepEqual(Object.keys(lang.en_us).sort(), Object.keys(lang.es_es).sort());

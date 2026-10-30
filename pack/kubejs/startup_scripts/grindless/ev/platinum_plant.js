@@ -173,12 +173,8 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.platinum_plant.tooltip.0'),
-        Text.translate('grindless.machine.platinum_plant.tooltip.1'),
-        Text.translate('grindless.machine.platinum_plant.tooltip.2'),
-        Text.translate('grindless.machine.platinum_plant.tooltip.4'),
-        Text.translate('grindless.machine.platinum_plant.tooltip.5'),
-        Text.translate('grindless.machine.platinum_plant.tooltip.3'),
-        Text.translate('grindless.machine.parallel_hatch.tooltip')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.pgm_refining')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(INERT_TEXTURE, 'grindless:block/multiblock/platinum_plant')
   })

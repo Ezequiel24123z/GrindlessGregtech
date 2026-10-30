@@ -4,12 +4,8 @@
   "gtceu.vein_drilling": "Perforación de vetas",
   "gtceu.greenhouse": "Invernadero",
 
-  "grindless.machine.steam_vein_drill.tooltip.0": "Perfora la veta que marca la muestra, una y otra vez. Nunca se agota.",
-  "grindless.machine.steam_vein_drill.tooltip.1": "Hasta 4 ciclos a la vez, con una broca por ciclo (las brocas se desgastan por probabilidad).",
-  "grindless.machine.steam_vein_drill.tooltip.2": "Necesita 1 escotilla de vapor, 1 bus de entrada de vapor y 2 buses de salida de vapor.",
-  "grindless.machine.steam_greenhouse.tooltip.0": "Cultiva árboles, árboles de caucho y cosechas con un plantón o una semilla que no se gasta.",
-  "grindless.machine.steam_greenhouse.tooltip.1": "Hasta 4 ciclos a la vez. Sin plantar ni talar.",
-  "grindless.machine.steam_greenhouse.tooltip.2": "Necesita 1 escotilla de vapor, 1 bus de entrada de vapor y 1 o 2 buses de salida de vapor.",
+  "grindless.machine.steam_vein_drill.tooltip.0": "§7Perfora la veta que marca la muestra, hasta 4 perforaciones a la vez.",
+  "grindless.machine.steam_greenhouse.tooltip.0": "§7Cultiva árboles, árboles de caucho y cosechas, hasta 4 a la vez.",
 
   "item.grindless.bronze_drill_bit": "Broca de bronce",
   "item.grindless.steel_drill_bit": "Broca de acero",

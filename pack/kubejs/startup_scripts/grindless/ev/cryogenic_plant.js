@@ -270,9 +270,8 @@
       .additionalDisplay(display)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.cryogenic_plant.tooltip.0'),
-        Text.translate('grindless.machine.cryogenic_plant.tooltip.1'),
-        Text.translate('grindless.machine.cryogenic_plant.tooltip.2'),
-        Text.translate('grindless.machine.cryogenic_plant.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.cryogenic_processing')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.moon'))
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/cryogenic_plant')
   })

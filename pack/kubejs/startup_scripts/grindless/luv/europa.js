@@ -158,14 +158,20 @@
     }
 
     var machines = [
-      { name: 'cryobot', type: 'vein_drilling', spec: E.cryobotSpec, next: cryobotRecipes, tooltips: 3 },
-      { name: 'algae_bioreactor', type: E.bioreactorType, spec: E.bioreactorSpec, next: overclock, tooltips: 3 }
+      { name: 'cryobot', type: 'vein_drilling', spec: E.cryobotSpec, next: cryobotRecipes, tooltips: [
+        Text.translate('grindless.machine.cryobot.tooltip.0'),
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.vein_drilling')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.europa'))
+      ] },
+      { name: 'algae_bioreactor', type: E.bioreactorType, spec: E.bioreactorSpec, next: overclock, tooltips: [
+        Text.translate('grindless.machine.algae_bioreactor.tooltip.0'),
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.bioreactor'))
+      ] }
     ]
     machines.forEach(function (m) {
       var opts = E.noVoiding[m.name]
       Pat.register('gtceu:' + m.name, m.spec)
-      var tips = []
-      for (var i = 0; i < m.tooltips; i++) tips.push(Text.translate('grindless.machine.' + m.name + '.tooltip.' + i))
+      var tips = m.tooltips
       event.create(m.name, 'multiblock')
         .rotationState(RotationState.NON_Y_AXIS)
         .recipeType(m.type)

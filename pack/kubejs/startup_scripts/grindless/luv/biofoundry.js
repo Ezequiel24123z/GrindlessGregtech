@@ -207,10 +207,8 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.biofoundry.tooltip.0'),
-        Text.translate('grindless.machine.biofoundry.tooltip.1'),
-        Text.translate('grindless.machine.biofoundry.tooltip.2'),
-        Text.translate('grindless.machine.biofoundry.tooltip.3'),
-        Text.translate('grindless.machine.parallel_hatch.tooltip')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.sterile_culture')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(PLASCRETE_TEXTURE, 'grindless:block/multiblock/biofoundry')
   })
