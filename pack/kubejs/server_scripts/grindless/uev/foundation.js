@@ -43,4 +43,9 @@ ServerEvents.recipes(function (event) {
   line('uev_energy_output_hatch_16a', 'gtceu:uev_machine_hull',
     ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity', '4x gtceu:trinium_spring'],
     'gtceu:uev_energy_output_hatch_16a')
+
+  // highTierContent is on (TP-S0F): GTM's own hull and 16 A hatch recipes for gtceu:uev_* would be a second way to make them
+  ;['shaped/uev_machine_hull', 'assembler/energy_hatch_16a_uev', 'assembler/dynamo_hatch_16a_uev'].forEach(function (id) {
+    event.remove({ id: 'gtceu:' + id })
+  })
 })

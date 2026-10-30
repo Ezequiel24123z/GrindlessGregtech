@@ -4,9 +4,7 @@
 // our own, no recipe type, no worldgen, no dimension and no recipe. Every other UXV package uses exactly these ids; they are published in
 // global.grindless.uxvFoundation. The load order is stamped by the integrator in tools/analysis/script_order.json (uxv.md, File order).
 //
-//   The UXV hull and the four hatches (2 A and 16 A, input and output) are the gtceu:uxv_* ids of S0-1. They are NOT created here: a second
-//   machine_hull or energy hatch builder crashes the boot (builder key = base id), so uev/foundation.js registers them with
-//   .tiers(UEV, UIV, UXV). Their recipes are B4's (server_scripts/grindless/uxv/foundation.js). gtceu:uxv_machine_casing is GTM's.
+//   The UXV hull and the four hatches (2 A and 16 A, input and output) are GTM's gtceu:uxv_* ids (highTierContent on, TP-S0F). They are NOT created here. Their recipes are B4's (server_scripts/grindless/uxv/foundation.js). gtceu:uxv_machine_casing is GTM's.
 //
 //   Components (grindless:, Monifactory's Post_UV_Components.js pattern, LGPL, credited): uxv_sensor (A6), uxv_electric_motor,
 //     uxv_electric_pump, uxv_electric_piston, uxv_conveyor_module, uxv_robot_arm (A8), uxv_field_generator (B3), uxv_emitter (B5).
@@ -184,7 +182,7 @@
   UXVF.items = Object.keys(ITEMS).map(function (name) { return 'grindless:' + name })
   UXVF.blocks = Object.keys(BLOCKS).map(function (name) { return 'grindless:' + name })
   UXVF.materials = Object.keys(MATERIALS)
-  // the hull and hatches are uev/foundation.js's builders at the third tier (S0-1)
+  // the hull and hatches are GTM's (highTierContent on, TP-S0F)
   UXVF.machines = ['machine_hull', 'energy_input_hatch', 'energy_input_hatch_16a', 'energy_output_hatch', 'energy_output_hatch_16a']
     .map(function (name) { return 'gtceu:uxv_' + name })
 

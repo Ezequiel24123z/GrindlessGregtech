@@ -5,7 +5,7 @@
 // are published in global.grindless.uevFoundation. GTM already registers gtceu:uev_machine_casing and the UEV wires of its own metals,
 // and its calcium, potassium, lithium, hafnium, tantalum, rhenium, ruthenium, terbium, lanthanum, yttrium, curium, californium and
 // tennessine, so none of those is re-registered (S0-1 dump; tennessine is in GTM's lang, contract F1 lists it by mistake). The hull and
-// energy hatch builders also register the UIV and UXV ones (S0-1: a second create of the same id clashes), `.tiers(UEV, UIV, UXV)`.
+// the four energy hatches are not created here any more: with highTierContent on (TP-S0F) GTM registers them for UEV, UIV and UXV.
 //
 //   Components (grindless:, Monifactory's Post_UV_Components.js pattern, LGPL, credited): uev_electric_motor (A5), uev_robot_arm (A8),
 //     uev_field_generator (B4), uev_electric_pump, uev_conveyor_module, uev_electric_piston, uev_sensor, uev_emitter (A6).
@@ -21,8 +21,8 @@
 //   Blocks (grindless:): uev_fusion_casing, degenerate_containment_casing (24, 25), photonic_casing (cleanroom grade 11-13),
 //     hftacn_coil_block (a gtceu:coil, 12,600 K, S0-7).
 //   Materials (GT materials, gtceu: ids as UHV's, DECISIONS UV-F1; uev.md writes the lay superhydride and the three fuels with grindless:).
-//   The hull and the four hatches (2 A and 16 A, input and output) are gtceu:uev_* machines as S0-1 proved; their recipes are in
-//   server_scripts/grindless/uev/foundation.js.
+//   The hull and the four hatches (2 A and 16 A, input and output) are GTM's gtceu:uev_* machines (highTierContent on, TP-S0F); our recipes
+//   are in server_scripts/grindless/uev/foundation.js and GTM's duplicates are removed there.
 //
 // Textures: tools/assets/Build-UEVFoundationTextures.ps1. Names: client_scripts/grindless/uev_foundation_lang.js.
 (function () {
@@ -165,44 +165,5 @@
       if (spec.cable) material.cableProperties(GTValues.V[UEV], 4, 0, false)
       material.flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
     })
-  })
-
-  // S0-1: the hull and the four hatches register and form with highTierContent off. UIV-F1 (S0-1 fallback): the builder key is the base
-  // id, so the five gtceu:uiv_* and the five gtceu:uxv_* come from these same builders (.tiers(UEV, UIV, UXV), UXV-F1); the labels are
-  // named by tier
-  GTCEuStartupEvents.registry('gtceu:machine', function (event) {
-    var HullMachine = Java.loadClass('com.gregtechceu.gtceu.common.machine.electric.HullMachine')
-    var EHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.EnergyHatchPartMachine')
-    var IO = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.IO')
-    var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
-
-    function hatch(id, label, io, amps, ability, model) {
-      event.create(id, 'custom')
-        .tiers(UEV, GTValues.UIV, GTValues.UXV)
-        .machine(function (holder, tier) { return new EHPM(holder, tier, io, amps) })
-        .definition(function (tier, builder) {
-          builder
-            .langValue(GTValues.VN[tier] + ' ' + label)
-            .rotationState(RotationState.ALL)
-            .abilities(ability)
-          builder.modelPropertyBool(GTModelProperties.IS_FORMED, false)
-          builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('gtceu', model))
-        })
-    }
-
-    event.create('machine_hull', 'custom')
-      .tiers(UEV, GTValues.UIV, GTValues.UXV)
-      .machine(function (holder, tier) { return new HullMachine(holder, tier) })
-      .definition(function (tier, builder) {
-        builder
-          .langValue(GTValues.VN[tier] + ' Machine Hull')
-          .rotationState(RotationState.ALL)
-          .abilities(PartAbility.PASSTHROUGH_HATCH)
-        builder['overlayTieredHullModel(java.lang.String)']('hull')
-      })
-    hatch('energy_input_hatch', 'Energy Hatch', IO.IN, 2, PartAbility.INPUT_ENERGY, 'block/machines/energy_hatch.input')
-    hatch('energy_output_hatch', 'Dynamo Hatch', IO.OUT, 2, PartAbility.OUTPUT_ENERGY, 'block/machines/energy_hatch.output')
-    hatch('energy_input_hatch_16a', '16A Energy Hatch', IO.IN, 16, PartAbility.INPUT_ENERGY, 'block/machines/energy_hatch.input_16a')
-    hatch('energy_output_hatch_16a', '16A Dynamo Hatch', IO.OUT, 16, PartAbility.OUTPUT_ENERGY, 'block/machines/energy_hatch.output_16a')
   })
 })()
