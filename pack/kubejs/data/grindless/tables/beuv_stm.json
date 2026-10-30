@@ -52,6 +52,26 @@
             { "id": "gtceu:terbium_dust", "count": 1 }
           ],
           "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A3 (opv.md line 45): the AlGaN epi patterned with the HEMT gates at 6.7 nm; the mirror comes out fouled as in c1 (c3 cleans it)",
+          "name": "algan_gates",
+          "circuit": 9,
+          "eut": 31457280,
+          "duration": 1600,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:algan_epi_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:algan_patterned_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
         }
       ]
     },

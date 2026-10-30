@@ -37,7 +37,8 @@
   ]
 
   // line 3 (W-Re can, billet, spent can) and line 45 (AlN powder to the patterned AlGaN wafer)
-  FP.items = ['field_canned_stack', 'field_frozen_billet', 'spent_field_can']
+  FP.items = ['field_canned_stack', 'field_frozen_billet', 'spent_field_can', 'aln_powder', 'aln_kerf', 'aln_boule', 'aln_wafer', 'algan_epi_wafer',
+    'algan_patterned_wafer']
 
   function abs(n) { return n < 0 ? -n : n }
   function max(a, b) { return a > b ? a : b }

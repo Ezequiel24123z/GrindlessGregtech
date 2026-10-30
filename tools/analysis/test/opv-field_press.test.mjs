@@ -1,5 +1,5 @@
-// OpV-A3 (field_press): the field-frozen press rows (machine 13, line 3), its controller line, the electron beam c22 can and re-melt, and the
-// structure of startup_scripts/grindless/opv/field_press.js. T1 is gg_test_opv_field_press.
+// OpV-A3 (field_press): the field-frozen press rows (machine 13, line 3), its controller line, the electron beam c22 can and re-melt, line 45's
+// older rows (AlN power die), and the structure of startup_scripts/grindless/opv/field_press.js. T1 is gg_test_opv_field_press.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -26,6 +26,19 @@ const V_UXV = 2 ** 27;
 const VA_OPV = 503316480;
 // every item and tag id a recipe json names
 const named = (r) => JSON.stringify(r.j).match(/"(?:item|tag|id)":"[^"]+"/g) || [];
+const circuitOf = (r) => (r.j.inputs.item || []).filter((x) => x.content.type === 'gtceu:circuit').map((x) => x.content.configuration);
+// line 45 (opv.md:836): [EMI data key, row name, type, circuit]; the cutter is GTM's and has no circuit or EMI line
+const LINE45 = [
+  ['grindless_nitride_magnet_synthesis', 'aln_powder', 'nitride_magnet_synthesis', 16],
+  ['grindless_crystal_growth', 'aln_boule', 'crystal_growth', 22],
+  [null, 'aln_wafer', 'cutter', 0],
+  ['grindless_nitride_magnet_synthesis', 'aln_kerf_repress', 'nitride_magnet_synthesis', 17],
+  [null, 'algan_epi', 'mocvd', 22],
+  ['grindless_beuv_lithography', 'algan_gates', 'beuv_lithography', 9],
+  ['grindless_silicon_carbide', 'aln_power_die', 'silicon_carbide', 8]
+];
+// the older scripts build their ids differently (some double the type); match on the type and the last path segment
+const built = (type, name) => recipes.filter((r) => r.t === `gtceu:${type}` && r.i.startsWith('grindless:') && r.i.endsWith(`/${name}`));
 
 test('the stand-in runs the OpV-A3 scripts without errors, nothing skipped, no lookup clash', () => {
   const mine = run.errors.filter((e) => /field_press/.test(String(e.file)));
@@ -80,6 +93,50 @@ test('electron beam c22: the W-Re can and its re-melt (80% back), appended at th
   for (const n of ['field_can', 'field_can_remelt']) assert.ok(find(`grindless:electron_beam_refining/${n}`), `${n} built`);
 });
 
+test('line 45: each older row built once on its machine with its circuit, and its circuit alone in its type', () => {
+  for (const [, name, type, c] of LINE45) {
+    const b = built(type, name);
+    assert.equal(b.length, 1, `${type}/${name}: ${b.map((r) => r.i)}`);
+    assert.deepEqual(circuitOf(b[0]), c ? [c] : [], `${type}/${name}`);
+    if (!c) continue;
+    const same = recipes.filter((r) => r.t === `gtceu:${type}` && circuitOf(r).includes(c));
+    assert.deepEqual(same.map((r) => r.i), [b[0].i], `${type} c${c}`);
+  }
+  assert.deepEqual(plain(FP.cutterRecipes), ['grindless:cutter/aln_wafer']);
+  for (const [file, type, name] of [['composites.json', 'nitride_magnet_synthesis', 'aln_powder'], ['composites.json', 'nitride_magnet_synthesis', 'aln_kerf_repress'],
+    ['crystals.json', 'crystal_growth', 'aln_boule'], ['beuv_stm.json', 'beuv_lithography', 'algan_gates'], ['power_devices.json', 'silicon_carbide', 'aln_power_die']]) {
+    const rows = table(file).types[type].recipes;
+    assert.ok(rows.find((r) => r.name === name)._why.startsWith('OpV-A3'), `${file} ${name} is marked`);
+  }
+});
+
+test('line 45: AlN powder -> boule -> wafer (+ kerf back) -> AlGaN epi -> BEUV gates -> power die; every link made only here', () => {
+  const only = {
+    'grindless:aln_powder': ['nitride_magnet_synthesis/aln_powder', 'nitride_magnet_synthesis/aln_kerf_repress'],
+    'grindless:aln_boule': ['crystal_growth/aln_boule'],
+    'grindless:aln_wafer': ['cutter/aln_wafer'],
+    'grindless:aln_kerf': ['cutter/aln_wafer'],
+    'grindless:algan_epi_wafer': ['mocvd/algan_epi'],
+    'grindless:algan_patterned_wafer': ['beuv_lithography/algan_gates'],
+    'grindless:aln_power_die': ['silicon_carbide/aln_power_die']
+  };
+  const tail = (r) => `${r.t.split(':')[1]}/${r.i.split('/').pop()}`;
+  for (const [id, where] of Object.entries(only)) assert.deepEqual(producers(id).map(tail).sort(), where.slice().sort(), id);
+  const ins = (type, name) => JSON.stringify(built(type, name)[0].j.inputs);
+  for (const [type, name, need] of [['crystal_growth', 'aln_boule', 'grindless:aln_powder'], ['cutter', 'aln_wafer', 'grindless:aln_boule'],
+    ['nitride_magnet_synthesis', 'aln_kerf_repress', 'grindless:aln_kerf'], ['mocvd', 'algan_epi', 'grindless:aln_wafer'],
+    ['beuv_lithography', 'algan_gates', 'grindless:algan_epi_wafer'], ['silicon_carbide', 'aln_power_die', 'grindless:algan_patterned_wafer']]) {
+    assert.ok(ins(type, name).includes(`"${need}"`), `${type}/${name} takes ${need}`);
+  }
+  // the kerf returns less powder than it took to grow it, and the BEUV mirror comes back fouled for c3 to clean
+  const beuv = table('beuv_stm.json').types.beuv_lithography.recipes;
+  assert.ok(beuv.find((r) => r.name === 'algan_gates').itemsOut.some((x) => x.id === 'grindless:fouled_beuv_mirror'));
+  const kerf = table('composites.json').types.nitride_magnet_synthesis.recipes.find((r) => r.name === 'aln_kerf_repress');
+  assert.ok(kerf.itemsOut[0].count < kerf.itemsIn[0].count);
+  for (const i of ['aln_powder', 'aln_kerf', 'aln_boule', 'aln_wafer', 'algan_epi_wafer', 'algan_patterned_wafer']) assert.ok(FP.items.includes(i), i);
+  for (const f1 of ['field_frozen_plate', 'field_frozen_casing', 'aln_power_die']) assert.ok(!FP.items.includes(f1), `${f1} is F1's`);
+});
+
 test('the controller: OpV hull, 10 OpV components of three families, 4 OpV circuits, at VA[OpV]; no field generator, no OpV hatch, nothing UXV', () => {
   assert.deepEqual(plain(FP.controllerRecipes), ['grindless:assembly_line/field_frozen_press']);
   const r = find('grindless:assembly_line/field_frozen_press');
@@ -111,6 +168,7 @@ test('lang parity: names, the short tooltip, items, EMI pages and recipe lines i
     assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'grindless', 'textures', 'item', `${i}.png`)), `${i} texture`);
   }
   for (const r of FP.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
+  for (const [dk, name] of LINE45) if (dk) keys.push(`gtceu.recipe.${dk}.${name}`);
   for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
   for (const lang of ['en_us', 'es_es']) {
     const tip = run.lang[lang]['grindless.machine.field_frozen_press.tooltip.0'];
@@ -118,7 +176,7 @@ test('lang parity: names, the short tooltip, items, EMI pages and recipe lines i
   }
   const lang = kube('client_scripts', 'grindless', 'opv_field_press_lang.js');
   const mine = [...lang.matchAll(/\['([a-z0-9_]+\.[a-z0-9_.]+)',/g)].map((m) => m[1]);
-  assert.ok(mine.length >= 20, `${mine.length} keys`);
+  assert.ok(mine.length >= 42, `${mine.length} keys`);
   for (const k of mine) assert.ok(run.lang.en_us[k] && run.lang.es_es[k], `${k} in both languages`);
   assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless', 'opv_field_press_field_frozen_press.json')), 'EMI info file');
   assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'grindless', 'textures', 'block', 'multiblock', 'field_frozen_press', 'overlay_front_active.png')), 'texture');

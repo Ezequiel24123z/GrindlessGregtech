@@ -57,7 +57,8 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 
 test('BEUV scanner: beuv_lithography circuits 1-3, figures and slots', () => {
   const rc = T.types.beuv_lithography.recipes;
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['exposure', 1], ['driver_asic', 2], ['mirror_cleaning', 3]]);
+  // OpV-A3 appends algan_gates (c9), pinned in opv-field_press.test.mjs
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['exposure', 1], ['driver_asic', 2], ['mirror_cleaning', 3], ['algan_gates', 9]]);
   for (const r of rc) {
     assert.ok(ids(r.itemsIn).length + 1 <= 4 && ids(r.itemsOut).length <= 2, r.name);
     assert.ok(ids(r.fluidsIn).length <= 1 && ids(r.fluidsOut).length === 0, r.name);
@@ -88,7 +89,7 @@ test('STM cell: stm_lithography circuits 1-3, figures and slots', () => {
 test('the lines chain: every grindless input has a producer', () => {
   const all = Object.values(T.types).flatMap((t) => t.recipes);
   const made = new Set(all.flatMap(outputs));
-  const external = ['si28_soi_wafer', 'uev_emitter', 'hafnia_dust', 'silicon_28_dust', 'si28_donor_wafer', 'si28_fz_ingot'].map((n) => `grindless:${n}`);
+  const external = ['si28_soi_wafer', 'uev_emitter', 'hafnia_dust', 'silicon_28_dust', 'si28_donor_wafer', 'si28_fz_ingot', 'algan_epi_wafer'].map((n) => `grindless:${n}`); // OpV-A3: the AlGaN epi wafer comes from uv/photonics.js (MOCVD c22)
   for (const r of all) {
     for (const id of inputs(r)) {
       if (!id.startsWith('grindless:')) continue;
@@ -102,7 +103,7 @@ test('the lines chain: every grindless input has a producer', () => {
 test('"only from" claims: no other table or script builds these outputs', () => {
   const claims = {
     'grindless:beuv_exposed_wafer': ['beuv_lithography/exposure'],
-    'grindless:fouled_beuv_mirror': ['beuv_lithography/exposure'],
+    'grindless:fouled_beuv_mirror': ['beuv_lithography/exposure', 'beuv_lithography/algan_gates'], // OpV-A3's c9 fouls the mirror too
     'grindless:beuv_driver_asic': ['beuv_lithography/driver_asic'],
     'grindless:beuv_mirror': ['assembler/beuv_mirror', 'beuv_lithography/mirror_cleaning'],
     'grindless:tb_droplet_target': ['assembler/tb_droplet_target'],
@@ -162,7 +163,10 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   for (const m of ['beuv_scanner', 'stm_lithography_cell']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   for (const t of Object.values(T.types)) {
     if (!t.dataKey) continue;
-    for (const r of t.recipes) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);
+    for (const r of t.recipes) {
+      if ((r._why || '').startsWith('OpV-A3')) continue; // its line is in opv_field_press_lang.js (opv-field_press.test.mjs)
+      assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);
+    }
   }
   for (const n of registered) assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
   for (const m of ['beuv_scanner', 'stm_lithography_cell']) {
