@@ -46,7 +46,7 @@
         b.inputFluids(Fluid.of(PLASMA, 1000), Fluid.of('gtceu:soldering_alloy', 4608), Fluid.of('gtceu:lubricant', 4000))
         b.itemOutputs(OUTPUT)
         b.stationResearch(function (r) { return r.researchStack(Item.of(RESEARCH)).CWUt(128).EUt(31457280) })
-        b.EUt(31457280).duration(1800)
+        b.EUt(125829120).duration(1800)
       }
     } catch (e) {
       console.error(LOG + H.recipeId + ' failed: ' + e)

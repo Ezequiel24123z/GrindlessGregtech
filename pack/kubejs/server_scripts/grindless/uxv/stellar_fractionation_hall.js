@@ -10,8 +10,8 @@
   const ID = 'stellar_fractionation_hall'
   const ITEMS = [
     'gtceu:uxv_machine_hull',
-    '2x gtceu:uxv_conveyor_module',
-    '2x gtceu:uxv_robot_arm',
+    '3x gtceu:uxv_conveyor_module',
+    '3x gtceu:uxv_robot_arm',
     '2x gtceu:uxv_electric_pump',
     'grindless:lasagna_plate',
     'grindless:pt_sheet',
@@ -19,7 +19,7 @@
   ]
   const FLUIDS = [['gtceu:stellar_helium_cut', 1000], ['gtceu:soldering_alloy', 2304], ['gtceu:lubricant', 2000]]
   const RESEARCH = 'gtceu:stellar_condensation_tower'
-  const EUT = 7864320
+  const EUT = 125829120
   const DURATION = 1500
 
   SH.recipeId = 'grindless:assembly_line/' + ID
