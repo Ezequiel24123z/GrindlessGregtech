@@ -12,7 +12,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 // the checkout this folder lives in (tools/quests/processing-lines)
 export const REPO = path.resolve(here, '..', '..', '..');
 export const BOOK = path.join(REPO, 'pack', 'config', 'ftbquests', 'quests');
-export const TIERS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv'];
+export const TIERS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv'];
 export const ALL = [];
 for (const f of [...TIERS.map((t) => `pl-data-${t}.mjs`), 'power-data.mjs']) {
   const file = path.join(here, f);

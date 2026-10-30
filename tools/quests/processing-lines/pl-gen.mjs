@@ -54,7 +54,7 @@ export function num(v) {
   if (Number.isInteger(v)) return v.toLocaleString('en-US');
   return String(Math.round(v * 100) / 100);
 }
-const TIER_NAMES = { ulv: 'ULV', lv: 'LV', mv: 'MV', hv: 'HV', ev: 'EV', iv: 'IV', luv: 'LuV', zpm: 'ZPM', uv: 'UV', uhv: 'UHV', uev: 'UEV', uiv: 'UIV' };
+const TIER_NAMES = { ulv: 'ULV', lv: 'LV', mv: 'MV', hv: 'HV', ev: 'EV', iv: 'IV', luv: 'LuV', zpm: 'ZPM', uv: 'UV', uhv: 'UHV', uev: 'UEV', uiv: 'UIV', uxv: 'UXV' };
 const tierName = (t) => TIER_NAMES[String(t).toLowerCase()] || String(t);
 
 function headline(f) {
