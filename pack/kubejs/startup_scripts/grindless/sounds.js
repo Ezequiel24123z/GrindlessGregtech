@@ -71,7 +71,10 @@
     'gtceu:quantum_degenerate_gas': 'loop_earth_orbit_lab',
     'gtceu:chemical_vapour_infiltration': 'loop_cvi_furnace',
     'gtceu:mtj_sputtering': 'loop_mtj_sputter_cluster',
-    'gtceu:pulsed_laser_deposition': 'loop_oxide_pld_chamber'
+    'gtceu:pulsed_laser_deposition': 'loop_oxide_pld_chamber',
+    'gtceu:vdw_stacking': 'loop_vdw_stacking_cell',
+    'gtceu:racetrack_patterning': 'loop_racetrack_fab',
+    'gtceu:liquid_phase_epitaxy': 'loop_yig_lpe_furnace'
   }
 
   StartupEvents.registry('sound_event', function (event) {

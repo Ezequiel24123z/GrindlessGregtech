@@ -1,0 +1,134 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uxv/spin_logic.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit (0 = none, GTM's own types only); 'kept' items and 'charge' fluids are not consumed; a 'chance' below 10000 makes a chanced output. vdw_stacking, racetrack_patterning and liquid_phase_epitaxy are package UXV-A5's machine types (data key = dataKey, the EMI line); assembler and lathe are GTM's (the Pt LPE crucible and the magnonic bus). Package UXV-A5, docs/eras/uxv.md machines 3-5 and process lines 15, 42.",
+  "types": {
+    "vdw_stacking": {
+      "dataKey": "grindless_vdw_stacking",
+      "recipes": [
+        {
+          "_why": "line 15: a WTe2 crystal is cleaved flake by flake in the argon glovebox; the broken flakes are WTe2 dust for A3's recrystalliser",
+          "name": "wte2_flake", "circuit": 1, "eut": 8388608, "duration": 200,
+          "itemsIn": [{ "id": "grindless:wte2_crystal", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 50 }],
+          "itemsOut": [{ "id": "grindless:wte2_flake", "count": 4 }, { "id": "gtceu:wte2_dust", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 15: an Fe3GeTe2 crystal is cleaved into flakes; broken flakes are FGT dust",
+          "name": "fgt_flake", "circuit": 2, "eut": 8388608, "duration": 200,
+          "itemsIn": [{ "id": "grindless:fgt_crystal", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 50 }],
+          "itemsOut": [{ "id": "grindless:fgt_flake", "count": 4 }, { "id": "gtceu:fe3gete2_dust", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 15: the megabar hBN crystal is cleaved into encapsulation flakes; broken flakes are hBN dust (the megabar press takes it back)",
+          "name": "hbn_flake", "circuit": 3, "eut": 8388608, "duration": 200,
+          "itemsIn": [{ "id": "grindless:hbn_crystal", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 50 }],
+          "itemsOut": [{ "id": "grindless:hbn_flake", "count": 8 }, { "id": "grindless:hbn_dust", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 15: hBN / WTe2 / FGT / hBN stacked under a dry-transfer stamp at 4 K into the SOT heterostack; flakes that tear come off as their dusts",
+          "name": "sot_heterostack", "circuit": 4, "eut": 67108864, "duration": 900,
+          "itemsIn": [{ "id": "grindless:hbn_flake", "count": 2 }, { "id": "grindless:wte2_flake", "count": 1 }, { "id": "grindless:fgt_flake", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:sot_heterostack", "count": 1 }, { "id": "gtceu:wte2_dust", "count": 1, "chance": 2500 }, { "id": "gtceu:fe3gete2_dust", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "racetrack_patterning": {
+      "dataKey": "grindless_racetrack_patterning",
+      "recipes": [
+        {
+          "_why": "line 8: the e-beam-written SAF track (A3's electron beam c16) is developed and etched into the patterned track; the platinum-group sludge from the lift-off is collected",
+          "name": "pattern_track", "circuit": 1, "eut": 33554432, "duration": 600,
+          "itemsIn": [{ "id": "grindless:written_track_wafer", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:patterned_track_wafer", "count": 1 }, { "id": "gtceu:platinum_group_sludge_dust", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 8: an MTJ die is bonded onto the patterned track as its read head: the racetrack chip",
+          "name": "racetrack_chip", "circuit": 2, "eut": 67108864, "duration": 900,
+          "itemsIn": [{ "id": "grindless:patterned_track_wafer", "count": 1 }, { "id": "grindless:mtj_die", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:racetrack_chip", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "liquid_phase_epitaxy": {
+      "dataKey": "grindless_liquid_phase_epitaxy",
+      "recipes": [
+        {
+          "_why": "line 42: PbO and B2O3 melt into the lead-borate LPE flux",
+          "name": "lpe_flux", "circuit": 1, "eut": 4194304, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:massicot_dust", "count": 4 }, { "id": "gtceu:boron_trioxide_dust", "count": 2 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:lpe_flux", "amount": 4000 }]
+        },
+        {
+          "_why": "line 42: a GGG wafer is dipped in the flux with Y2O3 and Fe2O3 in the platinum crucible; the film grows, most of the flux comes back",
+          "name": "yig_film", "circuit": 2, "eut": 33554432, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:yttrium_oxide_dust", "count": 3 }, { "id": "gtceu:hematite_dust", "count": 5 }, { "id": "grindless:ggg_wafer", "count": 1 }],
+          "kept": [{ "id": "grindless:pt_lpe_crucible", "count": 1 }], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:lpe_flux", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:yig_film_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:lpe_flux", "amount": 700 }]
+        },
+        {
+          "_why": "line 42: the used flux is skimmed; lead and boron oxides are recovered, the dross goes to A2's solvent extraction (lpe_dross_lead)",
+          "name": "flux_skim", "circuit": 3, "eut": 8388608, "duration": 400,
+          "itemsIn": [],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:lpe_flux", "amount": 2000 }],
+          "itemsOut": [{ "id": "gtceu:massicot_dust", "count": 1, "chance": 9000 }, { "id": "gtceu:boron_trioxide_dust", "count": 1, "chance": 9000 }, { "id": "grindless:lpe_dross", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "lathe": {
+      "recipes": [
+        {
+          "_why": "line 42 step 1: four platinum sheets are spun into the crucible shell",
+          "name": "pt_crucible_shell", "circuit": 0, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:pt_sheet", "count": 4 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:pt_crucible_shell", "count": 1 }, { "id": "gtceu:small_platinum_dust", "count": 2 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "_why": "line 42 step 2: the shell is welded to a sheet lid with 5N platinum under argon: the LPE crucible",
+          "name": "pt_lpe_crucible", "circuit": 0, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:pt_crucible_shell", "count": 1 }, { "id": "grindless:pt_sheet", "count": 1 }, { "id": "grindless:five_n_platinum", "count": 1 }, { "id": "gtceu:small_platinum_dust", "count": 2 }, { "id": "gtceu:small_iridium_dust", "count": 1 }, { "id": "gtceu:small_rhodium_dust", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:pt_lpe_crucible", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 12: a YIG waveguide wafer carries the STNO array between 5N platinum antennas: the magnonic bus",
+          "name": "magnonic_bus", "circuit": 0, "eut": 1966080, "duration": 800,
+          "itemsIn": [{ "id": "grindless:yig_waveguide_wafer", "count": 1 }, { "id": "grindless:stno_array", "count": 1 },           { "id": "grindless:five_n_platinum", "count": 2 }, { "id": "grindless:pt_sheet", "count": 1 }],
+                    "kept": [], "charge": [], "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }],
+          "itemsOut": [{ "id": "grindless:magnonic_bus", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
