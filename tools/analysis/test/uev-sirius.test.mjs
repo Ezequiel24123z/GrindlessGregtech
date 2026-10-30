@@ -108,13 +108,13 @@ test('the UEV field generator: assembler, pellet + the SX pump impeller, no Alph
   assert.ok(ids(r.itemsIn).includes('grindless:sx_pump_impeller'));
   assert.equal(r.fluidsIn.length, 0);
   for (const i of [...ids(r.itemsIn), ...ids(r.kept), ...ids(r.fluidsIn)]) for (const a of ALPHA) assert.ok(!i.includes(a), `${i} / ${a}`);
-  // no other table consumes the field generator: Alpha Centauri, reached before Sirius B, builds with UV field generators
+  // only the UIV field generator's row (TP-C: each tier's part takes the tier below's) consumes it; Alpha Centauri builds with UV field generators
   const users = [];
   for (const f of fs.readdirSync(tables).filter((n) => n.endsWith('.json') && n !== 'hidden_until.json')) {
     if (f === 'sirius.json') continue;
     if (JSON.stringify(table(f)).includes('gtceu:uev_field_generator')) users.push(f);
   }
-  assert.deepEqual(users, []);
+  assert.deepEqual(users, ['rx_j1856.json']);
   // nothing in the Barnard, rhenium or Alpha Centauri chains needs the field generator or the pellet
   for (const f of ['barnard.json', 'electron_beam.json', 'alpha_centauri.json']) {
     assert.ok(!/uev_field_generator|degenerate_/.test(JSON.stringify(table(f)).replace(/degenerate_eos_model/g, '')), f);

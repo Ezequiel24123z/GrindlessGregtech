@@ -40,7 +40,7 @@
           "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
           "itemsOut": [{ "id": "grindless:degenerate_containment_casing", "count": 1 }], "fluidsOut": [] },
         { "name": "uev_field_generator", "circuit": 0, "eut": 7864320, "duration": 600,
-          "itemsIn": [{ "id": "grindless:degenerate_pellet", "count": 1 }, { "id": "grindless:sx_pump_impeller", "count": 1 }, { "id": "gtceu:uev_emitter", "count": 2 }, { "id": "gtceu:uev_sensor", "count": 2 }],
+          "itemsIn": [{ "id": "gtceu:uhv_field_generator", "count": 1 }, { "id": "grindless:degenerate_pellet", "count": 1 }, { "id": "grindless:sx_pump_impeller", "count": 1 }, { "id": "gtceu:uev_emitter", "count": 2 }, { "id": "gtceu:uev_sensor", "count": 2 }],
           "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "gtceu:uev_field_generator", "count": 1 }], "fluidsOut": [] }
       ]

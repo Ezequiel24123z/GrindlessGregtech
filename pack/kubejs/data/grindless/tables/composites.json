@@ -167,7 +167,7 @@
           "itemsIn": [{ "id": "grindless:coated_w_wire", "count": 16 }, { "id": "grindless:hftac_blend_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 500 }], "charge": [],
           "itemsOut": [{ "id": "grindless:w_fibre_preform", "count": 1 }], "fluidsOut": [] },
         { "name": "uev_electric_motor", "circuit": 0, "eut": 2097152, "duration": 300,
-          "itemsIn": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 2 }, { "id": "gtceu:lay_superhydride_single_cable", "count": 4 }, { "id": "grindless:sic_sic_plate", "count": 2 }, { "id": "grindless:ffkm_seal", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "gtceu:uhv_electric_motor", "count": 1 }, { "id": "grindless:bonded_fe16n2_magnet", "count": 2 }, { "id": "gtceu:lay_superhydride_single_cable", "count": 4 }, { "id": "grindless:sic_sic_plate", "count": 2 }, { "id": "grindless:ffkm_seal", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "gtceu:uev_electric_motor", "count": 1 }], "fluidsOut": [] }
       ]
     }
