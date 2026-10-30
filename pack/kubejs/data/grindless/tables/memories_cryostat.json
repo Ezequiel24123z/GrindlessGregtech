@@ -109,6 +109,13 @@
           "itemsIn": [{ "id": "grindless:p_si_die", "count": 1 }],
           "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
           "itemsOut": [{ "id": "grindless:p_si_processor", "count": 1 }]
+        },
+        {
+          "_why": "OpV line 19 (package OpV-B1): the bonded tetron die is cooled on the millikelvin module (kept) and its parity readout tested before it goes into an array; named in client_scripts/grindless/opv_tetron_optics_lang.js",
+          "name": "tested_tetron_die", "circuit": 6, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:bonded_tetron_die", "count": 1 }],
+          "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:tested_tetron_die", "count": 1 }]
         }
       ]
     }

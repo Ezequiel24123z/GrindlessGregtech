@@ -69,6 +69,20 @@
             { "id": "grindless:heusler_am_powder", "count": 1 }
           ],
           "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
+          "_why": "OpV line 19 (package OpV-B1): indium bumps are sputtered through a shadow mask onto the tetron dies for the flip-chip bond (UIV ion slicing c8); the argon is pumped back",
+          "name": "tetron_bumps", "circuit": 9, "eut": 33554432, "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:tetron_die", "count": 4 },
+            { "id": "gtceu:indium_dust", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:bumped_tetron_die", "count": 4 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
         }
       ]
     },
