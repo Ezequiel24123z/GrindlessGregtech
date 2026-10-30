@@ -264,8 +264,7 @@
       .pattern(function (def) { return Pat.build(def, reactor.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.high_flux_reactor.tooltip.0'),
-        Text.translate('grindless.machine.high_flux_reactor.tooltip.1'),
-        Text.translate('grindless.machine.high_flux_reactor.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.high_flux_irradiation'))
       ])
       .workableCasingModel(SHIELD_TEXTURE, 'grindless:block/multiblock/high_flux_reactor')
 
@@ -279,8 +278,7 @@
       .pattern(function (def) { return Pat.build(def, facility.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.transuranium_facility.tooltip.0'),
-        Text.translate('grindless.machine.transuranium_facility.tooltip.1'),
-        Text.translate('grindless.machine.transuranium_facility.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.transuranium_processing'))
       ])
       .workableCasingModel(SHIELD_TEXTURE, 'grindless:block/multiblock/transuranium_facility')
   })

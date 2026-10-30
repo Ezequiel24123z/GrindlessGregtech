@@ -242,13 +242,14 @@
 
   // ---------------------------------------------------------------- machines
 
-  function tooltips(name) {
-    return [
-      Text.translate('grindless.machine.' + name + '.tooltip.0'),
-      Text.translate('grindless.machine.' + name + '.tooltip.1'),
-      Text.translate('grindless.machine.' + name + '.tooltip.2'),
-      Text.translate('grindless.machine.' + name + '.tooltip.3')
+  function tooltips(m) {
+    var lines = [
+      Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
+      Text.translate('grindless.machine.' + m.name + '.tooltip.1'),
+      Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type))
     ]
+    if (!m.generator) lines.push(Text.translate('gtceu.multiblock.parallelizable.tooltip'))
+    return lines
   }
 
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
@@ -265,7 +266,7 @@
         .recipeType(m.type)
         .appearanceBlock(function () { return Block.getBlock(TRUSS) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
-        ["tooltips(net.minecraft.network.chat.Component[])"](tooltips(m.name))
+        ["tooltips(net.minecraft.network.chat.Component[])"](tooltips(m))
         .workableCasingModel(TRUSS_TEXTURE, m.overlay)
     })
   })

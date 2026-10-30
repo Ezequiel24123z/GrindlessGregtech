@@ -249,8 +249,8 @@
       .pattern(function (def) { return Pat.build(def, f.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.electron_beam_furnace.tooltip.0'),
-        Text.translate('grindless.machine.electron_beam_furnace.tooltip.1'),
-        Text.translate('grindless.machine.electron_beam_furnace.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.electron_beam_refining')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/electron_beam_furnace')
 
@@ -264,8 +264,8 @@
       .pattern(function (def) { return Pat.build(def, d.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.single_crystal_foundry.tooltip.0'),
-        Text.translate('grindless.machine.single_crystal_foundry.tooltip.1'),
-        Text.translate('grindless.machine.single_crystal_foundry.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.single_crystal_casting')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(HEAT_TEXTURE, 'grindless:block/multiblock/single_crystal_foundry')
   })

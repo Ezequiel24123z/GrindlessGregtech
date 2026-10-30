@@ -9,10 +9,12 @@
     var TYPES = { swarm_segment_foundry: 'swarm_segment', swarm_control_station: 'dyson_swarm', solar_probe_bay: 'solar_probe' }
     var TEXT = {
         en_us: {
+            site: 'Works in Mercury orbit only.',
             machines: {
                 swarm_segment_foundry: {
                     name: 'Swarm Segment Foundry',
                     type: 'Swarm Segment Assembly',
+                    tip: '§7Builds the Dyson swarm\'s solar collector segments.',
                     tips: [
                         'An assembly gantry over a station truss deck that builds the Dyson swarm\'s solar collectors. Mercury\'s orbit only.',
                         'Circuit 1: 4 aluminium reflector film + 2 IMM solar arrays + a fibre laser module + a C-12 diamond spreader + a SiC power module + 2 betavoltaic cells + a sodium-potassium heat pipe -> 1 swarm segment.',
@@ -23,6 +25,7 @@
                 swarm_control_station: {
                     name: 'Swarm Control Station',
                     type: 'Dyson Swarm',
+                    tip: '§7Steers solar swarm segments and takes their power by laser.',
                     tips: [
                         'Steers swarm segments round the Sun and takes their power by laser: a generator. Mercury\'s orbit only. One run at a time; parallel hatches do nothing.',
                         'Circuit 1: 16 swarm segments + 1 oganesson propellant pod (or 1,000 mB krypton, half the run) -> 2,097,152 EU/t; 1 segment wears out and the empty tank returns.',
@@ -33,6 +36,7 @@
                 solar_probe_bay: {
                     name: 'Solar Probe Bay',
                     type: 'Solar Probe',
+                    tip: '§7Builds heat-shielded probes and launches them into the corona.',
                     tips: [
                         'Builds heat-shielded probes and launches them into the Sun\'s corona. Mercury\'s orbit only.',
                         'Circuit 2: a carbon-carbon aeroshell + 4 UHTC tiles + a SiC power module + 2 betavoltaic cells + an HPGe crystal + a UV sensor -> 1 solar probe.',
@@ -47,10 +51,12 @@
             }
         },
         es_es: {
+            site: 'Solo funciona en órbita de Mercurio.',
             machines: {
                 swarm_segment_foundry: {
                     name: 'Fundición de Segmentos de Enjambre',
                     type: 'Ensamblaje de Segmentos de Enjambre',
+                    tip: '§7Construye los segmentos colectores solares del enjambre Dyson.',
                     tips: [
                         'Un pórtico de ensamblaje sobre una cubierta de celosía de estación que construye los colectores solares del enjambre de Dyson. Solo en la órbita de Mercurio.',
                         'Circuito 1: 4 película reflectora de aluminio + 2 paneles solares IMM + un módulo de láser de fibra + un difusor de diamante C-12 + un módulo de potencia de SiC + 2 células betavoltaicas + un tubo de calor de sodio-potasio -> 1 segmento de enjambre.',
@@ -61,6 +67,7 @@
                 swarm_control_station: {
                     name: 'Estación de Control del Enjambre',
                     type: 'Enjambre de Dyson',
+                    tip: '§7Dirige los segmentos del enjambre solar y recibe su energía por láser.',
                     tips: [
                         'Guía los segmentos del enjambre alrededor del Sol y recoge su energía por láser: un generador. Solo en la órbita de Mercurio. Una ejecución a la vez; las escotillas paralelas no hacen nada.',
                         'Circuito 1: 16 segmentos de enjambre + 1 cápsula de propelente de oganesón (o 1.000 mB de kriptón, media ejecución) -> 2.097.152 EU/t; 1 segmento se desgasta y el tanque vacío vuelve.',
@@ -71,6 +78,7 @@
                 solar_probe_bay: {
                     name: 'Hangar de Sondas Solares',
                     type: 'Sonda Solar',
+                    tip: '§7Construye sondas con escudo térmico y las lanza a la corona solar.',
                     tips: [
                         'Construye sondas con escudo térmico y las lanza a la corona del Sol. Solo en la órbita de Mercurio.',
                         'Circuito 2: un aerocasco de carbono-carbono + 4 losetas UHTC + un módulo de potencia de SiC + 2 células betavoltaicas + un cristal de HPGe + un sensor UV -> 1 sonda solar.',
@@ -94,7 +102,9 @@
             Object.keys(t.machines).forEach(function (name) {
                 var m = t.machines[name]
                 add('block.gtceu.' + name, m.name)
-                for (var i = 0; i < 4; i++) add('grindless.machine.' + name + '.tooltip.' + i, m.tips[i])
+                for (var i = 0; i < 4; i++) add('emi.grindless.info.' + name + '.' + (2 + i), m.tips[i])
+                add('grindless.machine.' + name + '.tooltip.0', m.tip)
+                add('grindless.machine.' + name + '.tooltip.1', t.site)
                 add('gtceu.' + TYPES[name], m.type)
             })
             Object.keys(t.items).forEach(function (name) {

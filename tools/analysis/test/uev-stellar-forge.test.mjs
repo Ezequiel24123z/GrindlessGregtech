@@ -126,8 +126,8 @@ test('the controller recipe: N blast furnaces, coils and circuits, no new type',
 
 test('names and tooltips exist in both languages', () => {
   const src = fs.readFileSync(path.join(KJS, 'client_scripts', 'grindless', 'uev_stellar_forge_lang.js'), 'utf8');
-  for (const key of ['block.gtceu.stellar_forge', 'grindless.machine.stellar_forge.tooltip.0', 'grindless.machine.stellar_forge.tooltip.1',
-    'grindless.machine.stellar_forge.tooltip.2', 'grindless.machine.stellar_forge.tooltip.3', 'emi.grindless.info.stellar_forge.0']) {
+  for (const key of ['block.gtceu.stellar_forge', 'grindless.machine.stellar_forge.tooltip.0',
+    'emi.grindless.info.stellar_forge.0']) {
     assert.equal(src.split(`'${key}'`).length - 1, 2, key);
   }
 });

@@ -11,6 +11,8 @@
                 regolith_excavator: {
                     name: 'Regolith Excavator',
                     type: 'Regolith Excavation',
+                    tip: '§7Digs Mercury regolith with counter-rotating bucket drums.',
+                    site: 'Works on Mercury only.',
                     tips: [
                         'Two counter-rotating bucket drums dig with no net reaction force, so Mercury\'s low gravity cannot lift the machine. Mercury only.',
                         '1 excavator bucket drum (worn about 1 run in 32) + an iridosmine vein sample from Mercury (never used up) -> 64 Mercury regolith.',
@@ -21,6 +23,8 @@
                 solar_vapour_furnace: {
                     name: 'Solar Vapour Furnace',
                     type: 'Solar Vaporisation',
+                    tip: '§7Boils Mercury regolith\'s oxides off with focused sunlight.',
+                    site: 'Works on Mercury\'s day side only.',
                     tips: [
                         'Heliostats focus Mercury\'s sunlight on a vacuum chamber and boil the regolith\'s oxides off in order. Mercury\'s day side only: the recipes wait for daylight.',
                         'Circuit 1 (1,400 K): 16 Mercury regolith -> sodium-potassium + sulfur + 12 stripped regolith. Circuit 2 (2,300 K): 12 stripped regolith -> magnesium + silicon monoxide + iron + 4 alumina-calcia residue + graphite.',
@@ -44,6 +48,8 @@
                 regolith_excavator: {
                     name: 'Excavadora de Regolito',
                     type: 'Excavación de Regolito',
+                    tip: '§7Excava regolito de Mercurio con tambores de cangilones contrarrotantes.',
+                    site: 'Solo funciona en Mercurio.',
                     tips: [
                         'Dos tambores de cangilones que giran en sentidos opuestos excavan sin fuerza de reacción neta, así la baja gravedad de Mercurio no levanta la máquina. Solo en Mercurio.',
                         '1 tambor de cangilones (se desgasta 1 vez de cada 32 aprox.) + una muestra de veta de iridosmina de Mercurio (no se gasta) -> 64 regolito de Mercurio.',
@@ -54,6 +60,8 @@
                 solar_vapour_furnace: {
                     name: 'Horno Solar de Vaporización',
                     type: 'Vaporización Solar',
+                    tip: '§7Evapora los óxidos del regolito de Mercurio con luz solar concentrada.',
+                    site: 'Solo funciona en la cara diurna de Mercurio.',
                     tips: [
                         'Los helióstatos concentran la luz solar de Mercurio en una cámara de vacío y evaporan los óxidos del regolito por orden. Solo en la cara diurna de Mercurio: las recetas esperan a la luz del día.',
                         'Circuito 1 (1.400 K): 16 regolito de Mercurio -> sodio-potasio + azufre + 12 regolito despojado. Circuito 2 (2.300 K): 12 regolito despojado -> magnesio + monóxido de silicio + hierro + 4 residuo de alúmina-cal + grafito.',
@@ -82,7 +90,9 @@
             Object.keys(t.machines).forEach(function (name) {
                 var m = t.machines[name]
                 add('block.gtceu.' + name, m.name)
-                for (var i = 0; i < 4; i++) add('grindless.machine.' + name + '.tooltip.' + i, m.tips[i])
+                add('grindless.machine.' + name + '.tooltip.0', m.tip)
+                add('grindless.machine.' + name + '.tooltip.1', m.site)
+                for (var i = 0; i < 4; i++) add('emi.grindless.info.' + name + '.' + (2 + i), m.tips[i])
             })
             add('gtceu.regolith_excavation', t.machines.regolith_excavator.type)
             add('gtceu.solar_vaporisation', t.machines.solar_vapour_furnace.type)

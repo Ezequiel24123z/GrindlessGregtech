@@ -1,5 +1,5 @@
 {
   "type": "emi:info",
   "stacks": ["item:gtceu:nebula_collector"],
-  "text": ["emi.grindless.info.nebula_collector.0"]
+  "text": ["emi.grindless.info.nebula_collector.0", "emi.grindless.info.nebula_collector.1", "emi.grindless.info.nebula_collector.2", "emi.grindless.info.nebula_collector.3"]
 }
