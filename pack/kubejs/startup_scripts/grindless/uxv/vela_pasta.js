@@ -2,12 +2,12 @@
 // -----------------------------------------------------------------------------------------------
 // UXV's Vela pasta works (docs/eras/uxv.md, machines 16-20, lines 32, 33 and 48; package UXV-B4): the pasta extractor, the phase sorter, the
 // draw bench, the laminator and the polar cap tap, and their recipe types. The recipes come from data/grindless/tables/vela_pasta.json
-// (server_scripts/grindless/uxv/vela_pasta.js). No new items: every id is F1's (uxv/foundation.js).
+// (server_scripts/grindless/uxv/vela_pasta.js). One new item, grindless:lasagna_electrode (the tap's fuel); every other id is F1's (uxv/foundation.js).
 //
 //   gtceu:pasta_extractor     11 x 11 x 21 funnel, UXV. Recipe type gtceu:pasta_extraction (circuit 1 raw pasta); locked to Vela pulsar orbit.
 //   gtceu:pasta_phase_sorter  11 x 9 x 13 density arc, UXV. Recipe type gtceu:pasta_sorting (circuit 1 phases, 2 core sample).
 //   gtceu:pasta_draw_bench    5 x 5 x 23 draw line, UXV. Recipe type gtceu:pasta_drawing (circuit 1 strand wire).
-//   gtceu:pasta_laminator     9 x 11 x 9 portal press, UXV. Recipe type gtceu:pasta_lamination (circuit 1 plate, 2 electrode).
+//   gtceu:pasta_laminator     9 x 11 x 9 portal press, UXV. Recipe type gtceu:pasta_lamination (circuit 1 plate, 2 lasagna electrode).
 //   gtceu:polar_cap_tap       11 x 13 x 11 electrode mast, a generator at its final figure (lib/generators.js) through one UIV 16 A dynamo hatch.
 //                             Recipe type gtceu:polar_cap_tapping (circuit 1 tap).
 //
@@ -220,6 +220,15 @@
       }
     }
   }
+
+  // the tap's own fuel: UIV's polar_cap_electrode is not spent here
+  StartupEvents.registry('item', function (event) {
+    event.create('grindless:lasagna_electrode')
+      .texture('grindless:item/lasagna_electrode')
+      .maxStackSize(16)
+      .tooltip(Text.gray(Text.translate('tooltip.grindless.lasagna_electrode.0')))
+      .tooltip(Text.darkGray(Text.translate('tooltip.grindless.lasagna_electrode.1')))
+  })
 
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
     VP.machines.forEach(function (m) {

@@ -61,16 +61,20 @@ test('draw bench: spaghetti + aerogel (cage part kept) -> 8 strand wire; laminat
   assert.deepEqual([p.circuit, p.eut, p.duration], [1, 134217728, 1200]);
   assert.deepEqual(ids(p.itemsIn).map((x) => x[0]), ['grindless:lasagna_phase', 'grindless:wf_rhea_billet']);
   assert.deepEqual(ids(p.itemsOut), [['grindless:lasagna_plate', 4]]);
-  const e = rec('pasta_lamination', 'polar_cap_electrode');
+  const e = rec('pasta_lamination', 'lasagna_electrode');
   assert.deepEqual([e.circuit, e.eut, e.duration], [2, 33554432, 400]);
   assert.deepEqual(ids(e.itemsIn), [['grindless:lasagna_plate', 1], ['gtceu:pasta_strand_single_wire', 2]]);
-  assert.deepEqual(ids(e.itemsOut), [['grindless:polar_cap_electrode', 1]]);
+  assert.deepEqual(ids(e.itemsOut), [['grindless:lasagna_electrode', 1]]);
 });
 
-test('tap: a generator, one electrode -> 536,870,912 EU/t for 2,400 t (1,288,490,188,800 EU), through one UIV 16 A dynamo', () => {
+test('tap: a generator, one lasagna electrode -> 536,870,912 EU/t for 720 t (386,547,056,640 EU), through one UIV 16 A dynamo; returns about 2x its chain', () => {
   const t = rec('polar_cap_tapping', 'polar_cap_tap');
-  assert.deepEqual([t.circuit, t.eut, t.duration, t.site, t.generator], [1, 536870912, 2400, SITE, true]);
-  assert.equal(t.eut * t.duration, 1288490188800);
+  assert.deepEqual([t.circuit, t.eut, t.duration, t.site, t.generator], [1, 536870912, 720, SITE, true]);
+  assert.deepEqual(ids(t.itemsIn), [['grindless:lasagna_electrode', 1]]);
+  assert.equal(t.eut * t.duration, 386547056640);
+  // chain per electrode: per raw pasta extraction + sorting + drawing + pressing + 4 electrodes, four electrodes per pasta
+  const chain = (134217728 * 2400 + 67108864 * 1200 + 134217728 * 1200 + 134217728 * 1200 + 4 * 33554432 * 400) / 4;
+  assert.ok(t.eut * t.duration / chain > 1.9 && t.eut * t.duration / chain < 2.1, 'about 2x the chain');
   assert.equal(536870912, 16 * 2 ** 25, 'a UIV 16 A hatch carries it');
   assert.ok(find('grindless:polar_cap_tapping/polar_cap_tap'), 'tap recipe added');
   assert.equal(VP.dynamo, 'gtceu:uiv_energy_output_hatch_16a');
@@ -170,7 +174,8 @@ test('"only from": nothing else in the pack makes these ids (cage part and elect
   }
   const src = (id) => producers(id).map((r) => r.i).sort();
   assert.deepEqual(src('grindless:cage_part').filter((i) => /cage_part_pressing/.test(i)), ['grindless:neutronium_caging/cage_part_pressing']);
-  assert.ok(src('grindless:polar_cap_electrode').includes('grindless:pasta_lamination/polar_cap_electrode'));
+  assert.ok(src('grindless:lasagna_electrode').includes('grindless:pasta_lamination/lasagna_electrode'));
+  assert.deepEqual(src('grindless:polar_cap_electrode').filter((i) => /pasta_/.test(i)), [], 'UIV\'s electrode is not ours');
 });
 
 test('structures: not boring, three functional kinds, controller in the front slice, 16 rows at most, dominant share <= 0.62', () => {

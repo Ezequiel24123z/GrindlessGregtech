@@ -172,8 +172,8 @@ test('invariants: our pellet is never gtceu:neutronium and no recipe of ours tak
 
 test('"only from" claims: no other table or script builds these outputs', () => {
   const out = ['grindless:neutronium_pellet', 'grindless:uiv_field_generator', 'grindless:neutron_star_crust', 'grindless:kilonova_capsule',
-    'grindless:aged_kilonova_capsule', 'grindless:r_process_ash', 'grindless:flashed_target', 'grindless:es254_target',
-    'grindless:crust_lift_tether', 'grindless:mh_tether', 'grindless:fission_fragments']; // polar_cap_electrode: UXV-B4's laminator c2 makes it too
+    'grindless:aged_kilonova_capsule', 'grindless:r_process_ash', 'grindless:flashed_target',     'grindless:es254_target', 'grindless:polar_cap_electrode',
+        'grindless:crust_lift_tether', 'grindless:mh_tether', 'grindless:fission_fragments'];
   for (const id of out) {
     if (id === 'grindless:mh_tether') continue; // made by the elevator's tether_ribbon c3 row (older row)
     for (const f of OTHER_TABLES) {
