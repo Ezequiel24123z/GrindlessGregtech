@@ -360,9 +360,7 @@
       .additionalDisplay(siteLine(DRILL_OFF_SITE, V.drill.sites, 'pressurized vein drill'))
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.pressurized_vein_drill.tooltip.0'),
-        Text.translate('grindless.machine.pressurized_vein_drill.tooltip.1'),
-        Text.translate('grindless.machine.pressurized_vein_drill.tooltip.2'),
-        Text.translate('grindless.machine.pressurized_vein_drill.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.vein_drilling'))
       ])
       .workableCasingModel(INERT_TEXTURE, 'grindless:block/multiblock/pressurized_vein_drill')
 
@@ -387,9 +385,8 @@
       .pattern(function (def) { return Pat.build(def, ENGINE_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.venus_heat_engine.tooltip.0'),
-        Text.translate('grindless.machine.venus_heat_engine.tooltip.1'),
-        Text.translate('grindless.machine.venus_heat_engine.tooltip.2'),
-        Text.translate('grindless.machine.venus_heat_engine.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.venus_heat')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.venus'))
       ])
       .workableCasingModel(ROBUST_TEXTURE, 'grindless:block/multiblock/venus_heat_engine')
 
@@ -416,9 +413,8 @@
       .additionalDisplay(siteLine(WORKS_NOT_VENUS, [VENUS], 'Venus acid works'))
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.venus_acid_works.tooltip.0'),
-        Text.translate('grindless.machine.venus_acid_works.tooltip.1'),
-        Text.translate('grindless.machine.venus_acid_works.tooltip.2'),
-        Text.translate('grindless.machine.venus_acid_works.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.acid_cracking')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.venus'))
       ])
       .workableCasingModel(INERT_TEXTURE, 'grindless:block/multiblock/venus_acid_works')
   })

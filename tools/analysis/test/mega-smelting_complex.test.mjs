@@ -317,7 +317,7 @@ test('the lang file names the machine, the recipe type and its tooltips in en_us
   });
   for (const code of ['en_us', 'es_es']) {
     assert.ok(store[code], code);
-    for (const key of ['block.gtceu.smelting_complex', 'gtceu.smelting_complex', 'grindless.machine.smelting_complex.tooltip.0', 'grindless.machine.smelting_complex.tooltip.1', 'grindless.machine.smelting_complex.tooltip.2']) {
+    for (const key of ['block.gtceu.smelting_complex', 'gtceu.smelting_complex', 'grindless.machine.smelting_complex.tooltip.0']) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
     }
   }

@@ -312,9 +312,8 @@
       .allowExtendedFacing(false)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.lunar_solar_array.tooltip.0'),
-        Text.translate('grindless.machine.lunar_solar_array.tooltip.1'),
-        Text.translate('grindless.machine.lunar_solar_array.tooltip.2'),
-        Text.translate('grindless.machine.lunar_solar_array.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.lunar_solar')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.moon'))
       ])
       .workableCasingModel(SINTERED_TEXTURE, 'grindless:block/multiblock/lunar_solar_array')
 
@@ -328,9 +327,8 @@
       .allowExtendedFacing(false)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.deep_space_antenna.tooltip.0'),
-        Text.translate('grindless.machine.deep_space_antenna.tooltip.1'),
-        Text.translate('grindless.machine.deep_space_antenna.tooltip.2'),
-        Text.translate('grindless.machine.deep_space_antenna.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.deep_space_tracking')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.moon'))
       ])
       .workableCasingModel(SINTERED_TEXTURE, 'grindless:block/multiblock/deep_space_antenna')
   })

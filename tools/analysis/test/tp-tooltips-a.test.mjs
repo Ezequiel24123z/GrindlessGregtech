@@ -10,7 +10,7 @@ import { runPackScripts } from '../lib/kubejs_static.mjs';
 const PACK = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../pack');
 const PAGES = path.join(PACK, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless');
 
-// steam_vein_drill and steam_greenhouse keep their keys in assets/grindless/lang/*.json and are not part of this package
+// steam_vein_drill and steam_greenhouse keep their keys in assets/grindless/lang/*.json; the integrator shortened them and the lint checks them
 const CONTROLLERS = `advanced_multi_smelter biorefinery coil_chemical_plant coking_battery composite_autoclave engine_test_stand generator_array
 heliostat_tower hv_greenhouse hv_vein_drill large_steam_centrifuge large_steam_chemical_bath large_steam_macerator large_steam_ore_washer
 large_steam_thermal_centrifuge lava_furnace lunar_drill lv_greenhouse lv_vein_drill mv_greenhouse mv_vein_drill optical_observatory ore_plant

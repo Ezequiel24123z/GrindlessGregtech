@@ -206,10 +206,8 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.hot_cell.tooltip.0'),
-        Text.translate('grindless.machine.hot_cell.tooltip.1'),
-        Text.translate('grindless.machine.hot_cell.tooltip.2'),
-        Text.translate('grindless.machine.hot_cell.tooltip.3'),
-        Text.translate('grindless.machine.parallel_hatch.tooltip')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.hot_cell')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(SHIELD_TEXTURE, 'grindless:block/multiblock/hot_cell')
   })
