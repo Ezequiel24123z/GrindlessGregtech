@@ -15,8 +15,8 @@
 
   var OUTPUT = 'gtceu:uev_parallel_hatch'
   var HULL = 'gtceu:uev_machine_hull'
-  var SENSOR = 'grindless:uev_sensor'
-  var EMITTER = 'grindless:uev_emitter'
+  var SENSOR = 'gtceu:uev_sensor'
+  var EMITTER = 'gtceu:uev_emitter'
   var CABLE = 'gtceu:lay_superhydride_double_cable'
   var GEAR = 'grindless:near_net_neutronium_gear'
   var INPUTS = [HULL, SENSOR, '2x ' + EMITTER, '4x #gtceu:circuits/uev', '2x ' + CABLE, GEAR]

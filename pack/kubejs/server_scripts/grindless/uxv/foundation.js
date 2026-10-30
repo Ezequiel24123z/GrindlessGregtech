@@ -44,7 +44,7 @@ ServerEvents.recipes(function (event) {
 
   // the 2 A hatches take two strands of pasta wire, the 16 A ones four; each hatch adds one distinct piece (die, repeater, rhea plate, aerogel) so no two recipes share an ingredient set
   function hatch(name, wires, plates, duration, extra) {
-    var ids = ['gtceu:uxv_machine_hull', 'gtceu:pasta_strand_single_wire', 'grindless:lasagna_plate', 'grindless:uxv_sensor', 'grindless:ffkm_seal',
+    var ids = ['gtceu:uxv_machine_hull', 'gtceu:pasta_strand_single_wire', 'grindless:lasagna_plate', 'gtceu:uxv_sensor', 'grindless:ffkm_seal',
       'grindless:uxv_voltage_coil', 'grindless:ga2o3_power_die', 'gtceu:' + name]
     ids.push(extra)
     var m = missingOf(ids, FLUIDS)
@@ -57,7 +57,7 @@ ServerEvents.recipes(function (event) {
     b.itemInputs('2x grindless:ga2o3_power_die')
     b.itemInputs('2x #gtceu:circuits/uxv')
     b.itemInputs('4x grindless:ffkm_seal')
-    b.itemInputs('2x grindless:uxv_sensor')
+    b.itemInputs('2x gtceu:uxv_sensor')
     b.itemInputs('1x ' + extra)
     b.inputFluids(Fluid.of('gtceu:filtered_disk_plasma', 1000), Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000))
     b.itemOutputs('gtceu:' + name)

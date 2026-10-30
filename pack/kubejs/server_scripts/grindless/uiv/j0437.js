@@ -178,9 +178,9 @@
     var HULL = 'gtceu:uiv_machine_hull'
     var MAINFRAME = 'gtnn:optical_mainframe'
     var defs = [
-      { name: 'pulsar_wind_trap', part: 'grindless:uiv_electric_motor', research: 'grindless:gamma_bragg_mirror', domain: ['2x grindless:neon_moderator_cartridge', '2x grindless:c12_ion_milled_plate', '2x grindless:annealed_neon_cone'] },
-      { name: 'positronium_condensate_lab', part: 'grindless:uiv_electric_pump', research: 'grindless:neon_moderator_cartridge', domain: ['2x grindless:gamma_bragg_mirror', '2x grindless:c12_004_plate', '2x grindless:annealed_neon_cone'] },
-      { name: 'xray_pulse_profiler', part: 'grindless:uiv_sensor', research: 'grindless:c12_ion_milled_plate', domain: ['2x grindless:gamma_bragg_mirror', '2x grindless:neon_moderator_cartridge', '2x grindless:c12_004_plate'] }
+      { name: 'pulsar_wind_trap', part: 'gtceu:uiv_electric_motor', research: 'grindless:gamma_bragg_mirror', domain: ['2x grindless:neon_moderator_cartridge', '2x grindless:c12_ion_milled_plate', '2x grindless:annealed_neon_cone'] },
+      { name: 'positronium_condensate_lab', part: 'gtceu:uiv_electric_pump', research: 'grindless:neon_moderator_cartridge', domain: ['2x grindless:gamma_bragg_mirror', '2x grindless:c12_004_plate', '2x grindless:annealed_neon_cone'] },
+      { name: 'xray_pulse_profiler', part: 'gtceu:uiv_sensor', research: 'grindless:c12_ion_milled_plate', domain: ['2x grindless:gamma_bragg_mirror', '2x grindless:neon_moderator_cartridge', '2x grindless:c12_004_plate'] }
     ]
     J.controllerRecipes = []
     defs.forEach(function (d) {

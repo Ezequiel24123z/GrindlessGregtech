@@ -43,7 +43,7 @@ const EXISTING_MATERIALS = ['titanium', 'silicon', 'europium', 'nickel', 'terbiu
 const RECIPE_IDS = ['uiv_machine_hull', 'uiv_energy_input_hatch', 'uiv_energy_output_hatch', 'uiv_energy_input_hatch_16a', 'uiv_energy_output_hatch_16a'];
 // B1's seeds and probe, W's cell, the machine casing (UEV's gate) and the UEV pattern's ids
 const NOT_F1 = ['grindless:relay_seed', 'grindless:launched_relay_seed', 'grindless:ergosphere_probe', 'grindless:uiv_smes_cell',
-  'gtceu:uiv_machine_casing', 'grindless:uev_electric_motor', 'grindless:pulsar_navigation_chart'];
+  'gtceu:uiv_machine_casing', 'gtceu:uev_electric_motor', 'grindless:pulsar_navigation_chart'];
 const UEV_EUT = 8388608; // V[UEV]
 const UIV_V = 33554432; // V[UIV]
 

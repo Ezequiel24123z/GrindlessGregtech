@@ -90,7 +90,7 @@ test('the quench rows: circuits 3-8 once each, one item out at most, argon in ev
 
 test('the casing row takes the five line-38 items and 1,000 mB he_6n', () => {
   const c = by('assembler', 'uxv_fusion_casing');
-  assert.deepEqual(ids(c.itemsIn), ['grindless:wf_rhea_billet', 'grindless:w184_cvi_preform', 'grindless:mh_winding', 'grindless:uxv_field_generator', 'gtceu:tritanium_frame']);
+  assert.deepEqual(ids(c.itemsIn), ['grindless:wf_rhea_billet', 'grindless:w184_cvi_preform', 'grindless:mh_winding', 'gtceu:uxv_field_generator', 'gtceu:tritanium_frame']);
   assert.deepEqual(c.fluidsIn, [{ id: 'gtceu:he_6n', amount: 1000 }]);
   assert.deepEqual(c.itemsOut, [{ id: 'grindless:uxv_fusion_casing', count: 2 }]);
 });
@@ -143,7 +143,7 @@ test('the server scripts: the Mk5 and Mk4 rows are untouched and the Mk6 functio
   const mk5 = read('pack/kubejs/data/grindless/tables/fusion_mk5.json');
   assert.equal(JSON.parse(mk5).converter.recipes.length, 3);
   const s = read(SERVER);
-  for (const m of ['gtceu:uxv_machine_hull', "'gtceu:uiv_fusion_reactor'", 'gtceu:stellar_hydrogen_cut', '#gtceu:circuits/uxv', 'stationResearch', 'grindless:uxv_electric_pump', 'grindless:uxv_field_generator', 'grindless:uxv_fusion_casing']) assert.ok(s.includes(m), m);
+  for (const m of ['gtceu:uxv_machine_hull', "'gtceu:uiv_fusion_reactor'", 'gtceu:stellar_hydrogen_cut', '#gtceu:circuits/uxv', 'stationResearch', 'gtceu:uxv_electric_pump', 'gtceu:uxv_field_generator', 'grindless:uxv_fusion_casing']) assert.ok(s.includes(m), m);
 });
 
 test('the startup script: tier 12, 16 hatches, the casing, the Mk5 coil, fusion glass, the priority stamp, no loop', () => {

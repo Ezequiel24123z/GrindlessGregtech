@@ -193,10 +193,10 @@
     var MAINFRAME = 'gtnn:spintronic_mainframe'
     var defs = [
       { name: 'ejecta_knot_sweeper', research: 'grindless:cnt_whipple_shield', fluid: 'gtceu:stellar_hydrogen_cut',
-        parts: ['2x grindless:uiv_electric_pump', '2x grindless:uiv_conveyor_module', 'grindless:uxv_sensor'],
+        parts: ['2x gtceu:uiv_electric_pump', '2x gtceu:uiv_conveyor_module', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:cnt_bumper_weave', '2x grindless:mh_winding', '2x grindless:ga2o3_power_die'] },
       { name: 'annihilation_laser_works', research: 'grindless:gamma_laser_cavity', fluid: 'gtceu:he_6n',
-        parts: ['2x grindless:uiv_field_generator', '2x grindless:uiv_emitter', 'grindless:uxv_sensor'],
+        parts: ['2x gtceu:uiv_field_generator', '2x gtceu:uiv_emitter', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:mtj_die', '2x grindless:mu_metal_foil', '2x grindless:w184_cvi_preform'] }
     ]
     CA.controllerRecipes = []
@@ -227,8 +227,8 @@
   // the UXV emitter: a UIV emitter pair rebuilt around the gamma laser module (researched with it), on lasagna plates and UXV circuits.
   // It opens the UXV parallel hatch and the UXV wireless dynamo hatches and cover.
   function addEmitter(event) {
-    var items = ['2x grindless:uiv_emitter', '1x grindless:gamma_laser_module', '2x grindless:lasagna_plate', '1x grindless:uxv_sensor', '2x grindless:mtj_die']
-    var ids = items.map(function (s) { return s.replace(/^\d+x /, '') }).concat(['grindless:uxv_emitter'])
+    var items = ['2x gtceu:uiv_emitter', '1x grindless:gamma_laser_module', '2x grindless:lasagna_plate', '1x gtceu:uxv_sensor', '2x grindless:mtj_die']
+    var ids = items.map(function (s) { return s.replace(/^\d+x /, '') }).concat(['gtceu:uxv_emitter'])
     var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (!Fluid.exists('gtceu:stellar_hydrogen_cut')) missing.push('gtceu:stellar_hydrogen_cut')
     CA.emitter = []
@@ -240,7 +240,7 @@
     items.forEach(function (s) { b.itemInputs(s) })
     b.itemInputs('4x #gtceu:circuits/uxv')
     b.inputFluids(Fluid.of('gtceu:stellar_hydrogen_cut', 1000), Fluid.of('gtceu:soldering_alloy', 2304))
-    b.itemOutputs('grindless:uxv_emitter')
+    b.itemOutputs('gtceu:uxv_emitter')
     b.stationResearch(function (r) { return r.researchStack(Item.of('grindless:gamma_laser_module')).CWUt(64).EUt(7864320) })
     b.EUt(134217728).duration(1200)
     CA.emitter.push('grindless:assembly_line/uxv_emitter')

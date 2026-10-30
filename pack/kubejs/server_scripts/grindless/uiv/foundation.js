@@ -48,7 +48,7 @@ ServerEvents.recipes(function (event) {
     b.itemInputs(plateCount + 'x ' + PLATE)
     b.itemInputs('2x #gtceu:circuits/uiv')
     b.itemInputs('4x grindless:ffkm_seal')
-    b.itemInputs('2x grindless:uiv_sensor')
+    b.itemInputs('2x gtceu:uiv_sensor')
     b.itemInputs(research)
     b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:neutronium', 288))
     b.itemOutputs('gtceu:' + name)
@@ -56,10 +56,10 @@ ServerEvents.recipes(function (event) {
     b.EUt(UEV_EUT).duration(duration * 5)
   }
 
-  hatch('uiv_energy_input_hatch', SINGLE, 'grindless:uiv_electric_motor', 4, 100)
-  hatch('uiv_energy_output_hatch', SINGLE, 'grindless:uiv_electric_pump', 4, 100)
-  hatch('uiv_energy_input_hatch_16a', QUADRUPLE, 'grindless:uiv_robot_arm', 8, 200)
-  hatch('uiv_energy_output_hatch_16a', QUADRUPLE, 'grindless:uiv_conveyor_module', 8, 200)
+  hatch('uiv_energy_input_hatch', SINGLE, 'gtceu:uiv_electric_motor', 4, 100)
+  hatch('uiv_energy_output_hatch', SINGLE, 'gtceu:uiv_electric_pump', 4, 100)
+  hatch('uiv_energy_input_hatch_16a', QUADRUPLE, 'gtceu:uiv_robot_arm', 8, 200)
+  hatch('uiv_energy_output_hatch_16a', QUADRUPLE, 'gtceu:uiv_conveyor_module', 8, 200)
 
   // highTierContent is on (TP-S0F): GTM's own hull and 16 A hatch recipes for gtceu:uiv_* would be a second way to make them
   ;['shaped/uiv_machine_hull', 'assembler/energy_hatch_16a_uiv', 'assembler/dynamo_hatch_16a_uiv'].forEach(function (id) {

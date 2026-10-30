@@ -122,7 +122,7 @@ test('byproducts are routed, never voided: CH4 and H2 to the pyrolyser, HCl to t
 
 test('the motor recipe exists and takes the bonded magnet, the SiC/SiC plate and the FFKM seal', () => {
   const r = by('assembler', 'uev_electric_motor');
-  assert.equal(r.itemsOut[0].id, 'grindless:uev_electric_motor');
+  assert.equal(r.itemsOut[0].id, 'gtceu:uev_electric_motor');
   const i = ids(r.itemsIn);
   for (const x of ['grindless:bonded_fe16n2_magnet', 'grindless:sic_sic_plate', 'grindless:ffkm_seal']) assert.ok(i.includes(x), x);
 });

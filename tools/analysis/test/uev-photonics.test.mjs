@@ -108,7 +108,7 @@ test('arsine is contained: no recipe of the package outputs or vents it, and the
 test('the UEV parts get recipes (never re-registered) and the older rows exist at their circuits', () => {
   for (const n of ['uev_sensor', 'uev_emitter', 'uev_electric_pump', 'uev_conveyor_module', 'uev_electric_piston']) {
     const r = row('assembler', n);
-    assert.deepEqual(ids(r.itemsOut), [`grindless:${n}`]);
+    assert.deepEqual(ids(r.itemsOut), [`gtceu:${n}`]);
     assert.ok(!new RegExp(`event\\.create\\('${n}'`).test(startup), `${n} must not be registered here`);
   }
   assert.equal(row('zone_refining', 'fz_silicon').circuit, 4);

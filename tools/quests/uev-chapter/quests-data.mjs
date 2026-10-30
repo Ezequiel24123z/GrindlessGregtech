@@ -32,9 +32,9 @@ export const QUESTS = [
     'The &6Stellar Neighbourhood Chart&r gave you the &6UEV Machine Hull&r. One star is not enough now: three more are within reach of a drive.',
     'Home first: isotopes, pressure, light and a new fusion reactor. Then Alpha Centauri and Barnard b, and last a white dwarf.',
   ], [it('gtceu:uev_machine_hull'), it('grindless:stellar_neighbourhood_chart')], 50, { shape: 'rsquare', size: 1.5 }),
-  P('PARTS', 'UEV Parts', 'grindless:uev_emitter', ['START'], 3, 0, [
+  P('PARTS', 'UEV Parts', 'gtceu:uev_emitter', ['START'], 3, 0, [
     'The &6UEV Emitter&r, &6Sensor&r and &6Field Generator&r are built from what the UHV era left in store. The motor waits for iron from another star.',
-  ], [it('grindless:uev_emitter'), it('grindless:uev_sensor'), it('grindless:uev_field_generator')], 100),
+  ], [it('gtceu:uev_emitter'), it('gtceu:uev_sensor'), it('gtceu:uev_field_generator')], 100),
   P('HATCH', 'UEV Hatches', 'gtceu:uev_energy_input_hatch', ['PARTS'], 6, 0, [
     'The &6UEV Energy Hatch&r takes the power of a whole swarm. The wireless hatches wait for a quantum link, later in the chapter.',
   ], [it('gtceu:uev_energy_input_hatch')], 100),
@@ -159,7 +159,7 @@ export const QUESTS = [
   { rewards: [ri('gtceu:wetware_processor_assembly', 4)] }),
   M('MAG', 'A Nitride Magnet', 'gtceu:nitride_magnet_works', ['SX'], 21.5, 2, [
     'Carbonyl iron nitrided to Fe16N2 makes a magnet with no rare earth in it. The &6Nitride Magnet Works&r bonds it, and the &6UEV Electric Motor&r follows.',
-  ], [it('gtceu:nitride_magnet_works'), it('grindless:bonded_fe16n2_magnet'), it('grindless:uev_electric_motor')], 150),
+  ], [it('gtceu:nitride_magnet_works'), it('grindless:bonded_fe16n2_magnet'), it('gtceu:uev_electric_motor')], 150),
 
   // ------------------------------------------------------------------ Sirius B
   P('MK2', 'Drive Mk2', 'grindless:dfd_mk2_motor', ['MAG'], 24, 0, [

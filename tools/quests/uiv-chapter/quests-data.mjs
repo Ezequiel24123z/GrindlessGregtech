@@ -43,9 +43,9 @@ export const QUESTS = [
   P('PLATE', 'RHEA Plate', 'gtceu:rhea_plate', ['COIL'], 7.5, 0, [
     'Five refractory metals melted together in a cold crucible and forged flat: the &6RHEA Plate&r. It is what the UIV parts are cased in.',
   ], [it('gtceu:rhea_plate')], 100),
-  P('PUMP', 'UIV Parts', 'grindless:uiv_electric_pump', ['PLATE'], 10, 0, [
+  P('PUMP', 'UIV Parts', 'gtceu:uiv_electric_pump', ['PLATE'], 10, 0, [
     'The &6UIV Electric Pump&r has a printed impeller, pressed at a megabar and balanced by hand-me-down machines. The other UIV parts wait for stars further out.',
-  ], [it('grindless:uiv_electric_pump')], 150),
+  ], [it('gtceu:uiv_electric_pump')], 150),
   P('CELL', 'UIV SMES Cell', 'grindless:uiv_smes_cell', ['PUMP'], 10, 1.75, [
     'The &6UIV SMES Cell&r holds four times what the UEV cell does, in metallic hydrogen windings. It is what the wireless grid stores its surplus in from here on.',
   ], [it('grindless:uiv_smes_cell')], 100),

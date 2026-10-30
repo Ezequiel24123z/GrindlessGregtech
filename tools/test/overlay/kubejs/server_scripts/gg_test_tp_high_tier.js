@@ -1,4 +1,4 @@
-﻿// priority: -7574
+// priority: -7574
 // TEST ONLY, TP-S0F. Command: kubejs custom_command gg_test_tp_high_tier
 // Registry and recipe-manager checks only (no structures, no world blocks, no zone): highTierContent is on, GTM registers the UHV-OpV
 // components, basic machines, hulls and hatches, and the 15 UEV/UIV/UXV hull and hatch outputs keep exactly one recipe, ours.

@@ -107,7 +107,7 @@
       "recipes": [
         {
           "name": "shg_486_stage", "circuit": 0, "eut": 1966080, "duration": 400,
-          "itemsIn": [{ "id": "grindless:ppln_waveguide", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:ppln_waveguide", "count": 1 }, { "id": "gtceu:uev_emitter", "count": 1 }],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:shg_486_stage", "count": 1 }]
         },

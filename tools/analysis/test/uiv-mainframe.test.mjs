@@ -59,8 +59,8 @@ test('assembler rows: names unique, circuit 0, figures, ids', () => {
   assert.deepEqual(outputs(rc[0]), ['grindless:crossbar_on_interposer']);
   assert.deepEqual(inputs(rc[1]), ['grindless:thf4_film', 'gtceu:glass_plate']);
   assert.deepEqual(outputs(rc[1]), ['grindless:capped_thf4_film']);
-  assert.deepEqual(inputs(rc[2]), ['grindless:uev_sensor', 'grindless:eo_microcomb', 'grindless:chip_nuclear_clock']);
-  assert.deepEqual(outputs(rc[2]), ['grindless:uiv_sensor']);
+  assert.deepEqual(inputs(rc[2]), ['gtceu:uev_sensor', 'grindless:eo_microcomb', 'grindless:chip_nuclear_clock']);
+  assert.deepEqual(outputs(rc[2]), ['gtceu:uiv_sensor']);
 });
 
 test('hall rows: circuits 4-6 after the three UEV rows, within the hall slots (8 items in with the circuit, 2 out, 1 fluid in)', () => {
@@ -132,7 +132,7 @@ test('"only from" claims', () => {
     'grindless:chip_nuclear_clock': 'crystals.json:nuclear_clock/chip_clock',
     'grindless:disciplined_clock_core': 'alpha_centauri.json:pulsar_timing/repeater_discipline',
     'grindless:pulsar_timed_repeater': 'photonics_uev.json:photonic_integration/pulsar_timed_repeater',
-    'grindless:uiv_sensor': 'mainframe.json:assembler/uiv_sensor'
+    'gtceu:uiv_sensor': 'mainframe.json:assembler/uiv_sensor'
   };
   const own = [path.join('uiv', 'mainframe.js'), path.join('iv', 'fluorspar_kiln.js')];
   for (const [id, where] of Object.entries(claims)) {

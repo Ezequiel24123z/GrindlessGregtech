@@ -17,9 +17,9 @@
           "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:capped_thf4_film", "count": 1 }], "fluidsOut": [] },
         { "name": "uiv_sensor", "circuit": 0, "eut": 7864320, "duration": 400,
-          "itemsIn": [{ "id": "grindless:uev_sensor", "count": 1 }, { "id": "grindless:eo_microcomb", "count": 1 }, { "id": "grindless:chip_nuclear_clock", "count": 1 }],
+          "itemsIn": [{ "id": "gtceu:uev_sensor", "count": 1 }, { "id": "grindless:eo_microcomb", "count": 1 }, { "id": "grindless:chip_nuclear_clock", "count": 1 }],
           "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:uiv_sensor", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "gtceu:uiv_sensor", "count": 1 }], "fluidsOut": [] }
       ]
     }
   }

@@ -165,8 +165,8 @@
     var HULL = 'gtceu:uiv_machine_hull'
     var COMPUTER = 'gtnn:optical_computer'
     var defs = [
-      { name: 'beuv_scanner', part: 'grindless:uev_emitter', research: 'grindless:beuv_mirror', domain: ['2x grindless:tb_droplet_target', '2x grindless:lan_barrier_mirror', '2x grindless:si28_fz_wafer'] },
-      { name: 'stm_lithography_cell', part: 'grindless:uev_sensor', research: 'grindless:lan_barrier_mirror', domain: ['2x grindless:beuv_mirror', '2x grindless:tb_droplet_target', '2x grindless:si28_fz_wafer'] }
+      { name: 'beuv_scanner', part: 'gtceu:uev_emitter', research: 'grindless:beuv_mirror', domain: ['2x grindless:tb_droplet_target', '2x grindless:lan_barrier_mirror', '2x grindless:si28_fz_wafer'] },
+      { name: 'stm_lithography_cell', part: 'gtceu:uev_sensor', research: 'grindless:lan_barrier_mirror', domain: ['2x grindless:beuv_mirror', '2x grindless:tb_droplet_target', '2x grindless:si28_fz_wafer'] }
     ]
     BS.controllerRecipes = []
     defs.forEach(function (d) {

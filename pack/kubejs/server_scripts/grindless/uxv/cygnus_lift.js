@@ -161,13 +161,13 @@
     var MAINFRAME = 'gtnn:spintronic_mainframe'
     var defs = [
       { name: 'stellar_elevator', research: 'grindless:mh_winding', fluid: 'gtceu:he_6n',
-        parts: ['2x grindless:uiv_field_generator', '2x grindless:uiv_electric_pump', 'grindless:uxv_sensor'],
+        parts: ['2x gtceu:uiv_field_generator', '2x gtceu:uiv_electric_pump', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:ga2o3_power_die', '2x grindless:w184_cvi_preform', '2x grindless:mu_metal_foil'] },
       { name: 'plasma_mass_filter', research: 'gtceu:stellar_elevator', fluid: 'gtceu:he_6n',
-        parts: ['2x grindless:uiv_field_generator', '2x grindless:uiv_emitter', 'grindless:uxv_sensor'],
+        parts: ['2x gtceu:uiv_field_generator', '2x gtceu:uiv_emitter', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:ga2o3_power_die', '2x grindless:mh_winding', '2x grindless:w184_cvi_preform'] },
       { name: 'stellar_condensation_tower', research: 'gtceu:plasma_mass_filter', fluid: 'gtceu:stellar_helium_cut',
-        parts: ['2x grindless:uiv_electric_pump', '2x grindless:uiv_conveyor_module', 'grindless:uxv_sensor'],
+        parts: ['2x gtceu:uiv_electric_pump', '2x gtceu:uiv_conveyor_module', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:pt_sheet', '2x grindless:w184_cvi_preform', '2x grindless:iridium_crucible'] }
     ]
     CL.controllerRecipes = []

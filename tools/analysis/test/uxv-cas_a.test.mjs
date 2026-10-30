@@ -63,14 +63,14 @@ test('the trap row (antimatter storage c5, Earth orbit), the emitter line and th
   assert.deepEqual(plain(CA.emitter), ['grindless:assembly_line/uxv_emitter']);
   const e = find('grindless:assembly_line/uxv_emitter');
   const et = JSON.stringify(e.j);
-  for (const need of ['grindless:uiv_emitter', 'grindless:gamma_laser_module', 'grindless:lasagna_plate', 'gtceu:circuits/uxv', 'gtceu:stellar_hydrogen_cut', 'grindless:uxv_emitter']) assert.ok(et.includes(need), `emitter takes ${need}`);
+  for (const need of ['gtceu:uiv_emitter', 'grindless:gamma_laser_module', 'grindless:lasagna_plate', 'gtceu:circuits/uxv', 'gtceu:stellar_hydrogen_cut', 'gtceu:uxv_emitter']) assert.ok(et.includes(need), `emitter takes ${need}`);
   assert.deepEqual(plain(CA.controllerRecipes), MACHINES.map((m) => `grindless:assembly_line/${m}`));
   const research = { ejecta_knot_sweeper: 'cnt_whipple_shield', annihilation_laser_works: 'gamma_laser_cavity' };
   for (const m of MACHINES) {
     const r = find(`grindless:assembly_line/${m}`);
     assert.ok(r && r.t === 'gtceu:assembly_line', m);
     const text = JSON.stringify(r.j);
-    for (const need of [`gtceu:${m}`, 'gtceu:uiv_machine_hull', 'gtnn:spintronic_mainframe', 'gtceu:circuits/uiv', 'grindless:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', research[m]]) {
+    for (const need of [`gtceu:${m}`, 'gtceu:uiv_machine_hull', 'gtnn:spintronic_mainframe', 'gtceu:circuits/uiv', 'gtceu:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', research[m]]) {
       assert.ok(text.includes(need), `${m} takes ${need}`);
     }
     assert.ok(new Set(text.match(/"(?:id|tag|item)":"[^"]+"/g) || []).size >= 8, `${m}: at least 8 distinct ingredients`);
@@ -111,7 +111,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
     'grindless:moderated_ps_cell': 'annihilation_lasing/moderate_positronium', 'grindless:ti44_core': 'ti44_core_capsule',
     'grindless:spent_ti44_core': 'annihilation_lasing/moderate_positronium', 'grindless:positron_stack': 'antimatter_storage/positron_stack',
     'grindless:ti44_map': 'xray_pulse_profiling/ti44_map', 'gtceu:titanium_44_dust': 'calutron_separation/titanium_44',
-    'grindless:ejecta_ti_fraction_dust': 'ev/ejecta_knot_titanium', 'grindless:uxv_emitter': 'assembly_line/uxv_emitter',
+    'grindless:ejecta_ti_fraction_dust': 'ev/ejecta_knot_titanium', 'gtceu:uxv_emitter': 'assembly_line/uxv_emitter',
     'gtceu:ejecta_knot_sweeper': 'assembly_line/ejecta_knot_sweeper', 'gtceu:annihilation_laser_works': 'assembly_line/annihilation_laser_works'
   };
   for (const [id, tail] of Object.entries(only)) {

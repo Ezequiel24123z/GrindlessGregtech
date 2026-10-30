@@ -164,8 +164,8 @@
     var HULL = 'gtceu:uiv_machine_hull'
     var MAINFRAME = 'gtnn:optical_mainframe'
     var defs = [
-      { name: 'polarised_proton_source', part: 'grindless:uiv_electric_pump', research: 'grindless:cps_wetted_mesh', domain: ['2x grindless:li6_hydride', '2x grindless:first_wall_tile', '2x grindless:divertor_cassette'] },
-      { name: 'uiv_fusion_reactor', part: 'grindless:uiv_electric_piston', research: 'grindless:divertor', domain: ['2x grindless:first_wall_tile', '2x grindless:li_sn_armoured_tile', '2x grindless:cps_wetted_mesh'] }
+      { name: 'polarised_proton_source', part: 'gtceu:uiv_electric_pump', research: 'grindless:cps_wetted_mesh', domain: ['2x grindless:li6_hydride', '2x grindless:first_wall_tile', '2x grindless:divertor_cassette'] },
+      { name: 'uiv_fusion_reactor', part: 'gtceu:uiv_electric_piston', research: 'grindless:divertor', domain: ['2x grindless:first_wall_tile', '2x grindless:li_sn_armoured_tile', '2x grindless:cps_wetted_mesh'] }
     ]
     MK.controllerRecipes = []
     defs.forEach(function (d) {

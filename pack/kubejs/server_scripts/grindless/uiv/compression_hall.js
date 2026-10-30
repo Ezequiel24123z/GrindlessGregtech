@@ -15,7 +15,7 @@
 
   var OUTPUT = 'gtceu:neutronium_compression_hall'
   var HULL = 'gtceu:uiv_machine_hull'
-  var PART = 'grindless:uiv_electric_piston'
+  var PART = 'gtceu:uiv_electric_piston'
   var MAINFRAME = 'gtnn:optical_mainframe'
   var RESEARCH = 'grindless:neutron_guide'
   var DOMAIN = ['2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank', '2x grindless:cage_part']

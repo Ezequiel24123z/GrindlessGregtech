@@ -168,7 +168,7 @@
     var pellet = row('neutronium_caging', 'neutronium_pellet')
     check('pellet_row', !!pellet && pellet.itemsIn.some(function (i) { return i.id === 'grindless:cage_part' }) && pellet.itemsOut.some(function (o) { return o.id === 'grindless:neutronium_pellet' }), JSON.stringify(pellet))
     var fg = row('assembler', 'uiv_field_generator')
-    check('field_generator_row', !!fg && fg.itemsIn.some(function (i) { return i.id === 'grindless:neutronium_pellet' }) && fg.itemsOut.some(function (o) { return o.id === 'grindless:uiv_field_generator' }), JSON.stringify(fg))
+    check('field_generator_row', !!fg && fg.itemsIn.some(function (i) { return i.id === 'grindless:neutronium_pellet' }) && fg.itemsOut.some(function (o) { return o.id === 'gtceu:uiv_field_generator' }), JSON.stringify(fg))
     var dec = row('r_process_decompression', 'flash_target')
     check('flash_row', !!dec && dec.itemsOut.length === 1 && dec.itemsOut[0].id === 'grindless:flashed_target', JSON.stringify(dec))
     var older = S.older || []

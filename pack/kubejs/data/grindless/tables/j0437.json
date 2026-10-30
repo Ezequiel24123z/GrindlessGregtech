@@ -118,8 +118,8 @@
         {
           "name": "uiv_emitter", "circuit": 0, "eut": 7864320, "duration": 600,
           "_why": "UIV-B3 line 34: the gamma laser cavity is the core of a UEV emitter rebuilt on RHEA plates; this unlocks the UIV wireless hatches and the UIV parallel hatch.",
-          "itemsIn": [ { "id": "grindless:gamma_laser_cavity", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 } ], "kept": [], "fluidsIn": [ ],
-          "itemsOut": [ { "id": "grindless:uiv_emitter", "count": 1 } ], "fluidsOut": []
+          "itemsIn": [ { "id": "grindless:gamma_laser_cavity", "count": 1 }, { "id": "gtceu:uev_emitter", "count": 1 }, { "id": "gtceu:rhea_plate", "count": 2 } ], "kept": [], "fluidsIn": [ ],
+          "itemsOut": [ { "id": "gtceu:uiv_emitter", "count": 1 } ], "fluidsOut": []
         }
       ]
     },

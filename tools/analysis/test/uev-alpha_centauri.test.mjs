@@ -79,7 +79,7 @@ test('line 37: SiCl4 -> TEOS -> sol -> gel -> aged gel -> aerogel tile; ethanol 
 });
 
 test('kept inputs are never consumed: scoop coil, sensor, nuclear clock', () => {
-  const kept = [['nebula_collection', 'interstellar_gas', 'grindless:superhydride_scoop_coil'], ['interstellar_dust_analysis', 'fe60_record', 'grindless:uev_sensor'], ['pulsar_timing', 'timing_survey', 'grindless:nuclear_clock']];
+  const kept = [['nebula_collection', 'interstellar_gas', 'grindless:superhydride_scoop_coil'], ['interstellar_dust_analysis', 'fe60_record', 'gtceu:uev_sensor'], ['pulsar_timing', 'timing_survey', 'grindless:nuclear_clock']];
   for (const [type, name, id] of kept) {
     const r = row(type, name);
     assert.ok(ids(r.kept).includes(id), name);

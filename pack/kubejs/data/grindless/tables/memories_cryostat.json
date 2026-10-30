@@ -38,7 +38,7 @@
       "recipes": [
         {
           "name": "six_hour_memory", "circuit": 20, "eut": 491520, "duration": 600,
-          "itemsIn": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }, { "id": "grindless:mk_cryostat_module", "count": 1 }, { "id": "grindless:uev_sensor", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:six_hour_memory_slab", "count": 1 }, { "id": "grindless:mk_cryostat_module", "count": 1 }, { "id": "gtceu:uev_sensor", "count": 1 }],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:six_hour_memory", "count": 1 }]
         },

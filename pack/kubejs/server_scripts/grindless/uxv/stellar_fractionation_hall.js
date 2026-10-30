@@ -10,9 +10,9 @@
   const ID = 'stellar_fractionation_hall'
   const ITEMS = [
     'gtceu:uxv_machine_hull',
-    '2x grindless:uxv_conveyor_module',
-    '2x grindless:uxv_robot_arm',
-    '2x grindless:uxv_electric_pump',
+    '2x gtceu:uxv_conveyor_module',
+    '2x gtceu:uxv_robot_arm',
+    '2x gtceu:uxv_electric_pump',
     'grindless:lasagna_plate',
     'grindless:pt_sheet',
     '4x #gtceu:circuits/uxv'

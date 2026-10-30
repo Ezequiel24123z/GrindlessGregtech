@@ -95,7 +95,7 @@ test('the lines chain: every intermediate has a producer and a consumer', () => 
   assert.ok(used.has('grindless:written_crystal_blank') && used.has('grindless:verified_crystal'));
   assert.deepEqual(outputs(by('electric_blast_furnace', 'crystal_anneal')), ['grindless:data_crystal_5d']);
   assert.deepEqual(outputs(by('assembler', 'ps_cooling_laser')), ['grindless:ps_cooling_laser']);
-  assert.deepEqual(inputs(by('assembler', 'shg_486_stage')), ['grindless:ppln_waveguide', 'grindless:uev_emitter']);
+  assert.deepEqual(inputs(by('assembler', 'shg_486_stage')), ['grindless:ppln_waveguide', 'gtceu:uev_emitter']);
   assert.equal(by('chemical_reactor', 'sin_trench_fill').circuit, 0);
   assert.ok(by('electric_blast_furnace', 'crystal_anneal').temp > 0);
   assert.ok(by('assembler', 'ps_cooling_laser').eut <= 1966080 && by('assembler', 'shg_486_stage').eut <= 1966080);

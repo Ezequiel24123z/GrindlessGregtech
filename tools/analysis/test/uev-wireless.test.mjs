@@ -64,7 +64,7 @@ test('the UEV row: tier 10, 96 UV naquadria batteries (251,658,240,000 EU, past 
   assert.equal(uev.frame, null);
   assert.equal(uev.texture, 'grindless:block/wireless/smes_cell_uev');
   assert.deepEqual([uev.emitter, uev.sensor, uev.signalParts, uev.link, uev.plate, uev.wire],
-    ['grindless:uev_emitter', 'grindless:uev_sensor', 1, LINK, PLATE, 'lay_superhydride']);
+    ['gtceu:uev_emitter', 'gtceu:uev_sensor', 1, LINK, PLATE, 'lay_superhydride']);
 });
 
 test('withTiers case 10 is spelled out and the default message covers at least 10 tiers', () => {
@@ -132,8 +132,8 @@ test('the UEV hatches and covers: assembler recipes at VA[UEV] with the quantum 
     assert.equal(r.eut, STUB_VA_UEV, id);
     assert.ok(docs.some((d) => d.i === r.id && d.t === 'gtceu:assembler'), r.id + ' in the static recipes');
   }
-  assert.deepEqual(by('gtceu:uev_wireless_energy_hatch').inputs, ['1x grindless:uev_sensor', '1x gtceu:uev_energy_input_hatch', '2x #gtceu:circuits/uev', '1x ' + LINK]);
-  assert.deepEqual(by('gtceu:uev_wireless_dynamo_hatch').inputs, ['1x grindless:uev_emitter', '1x gtceu:uev_energy_output_hatch', '2x #gtceu:circuits/uev', '1x ' + LINK]);
+  assert.deepEqual(by('gtceu:uev_wireless_energy_hatch').inputs, ['1x gtceu:uev_sensor', '1x gtceu:uev_energy_input_hatch', '2x #gtceu:circuits/uev', '1x ' + LINK]);
+  assert.deepEqual(by('gtceu:uev_wireless_dynamo_hatch').inputs, ['1x gtceu:uev_emitter', '1x gtceu:uev_energy_output_hatch', '2x #gtceu:circuits/uev', '1x ' + LINK]);
   assert.deepEqual(by('gtceu:uev_wireless_energy_hatch_4a').inputs, ['1x gtceu:uev_wireless_energy_hatch', '2x ' + WIRE + 'quadruple_wire', '2x ' + PLATE]);
   assert.deepEqual(by('gtceu:uev_wireless_dynamo_hatch_16a').inputs, ['1x gtceu:uev_wireless_dynamo_hatch_4a', '2x ' + WIRE + 'octal_wire', '4x ' + PLATE]);
   assert.deepEqual(by('gtceu:uev_wireless_energy_hatch_64a').inputs, ['1x gtceu:uev_wireless_energy_hatch_16a', '2x ' + WIRE + 'hex_wire', '6x ' + PLATE]);

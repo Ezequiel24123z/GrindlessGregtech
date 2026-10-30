@@ -169,13 +169,13 @@
     var MAINFRAME = 'gtnn:spintronic_mainframe'
     var defs = [
       { name: 'accretion_disk_skimmer', research: 'grindless:mh_winding', fluid: 'gtceu:stellar_hydrogen_cut',
-        parts: ['2x grindless:uiv_electric_motor', '2x grindless:uiv_emitter', 'grindless:uxv_sensor'],
+        parts: ['2x gtceu:uiv_electric_motor', '2x gtceu:uiv_emitter', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:ga2o3_power_die', '2x grindless:w184_cvi_preform', '2x grindless:shielded_interposer'] },
       { name: 'frc_former', research: 'gtceu:accretion_disk_skimmer', fluid: 'gtceu:stellar_hydrogen_cut',
-        parts: ['2x grindless:uiv_field_generator', '2x grindless:uiv_electric_pump', 'grindless:uxv_sensor'],
+        parts: ['2x gtceu:uiv_field_generator', '2x gtceu:uiv_electric_pump', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:ga2o3_power_die', '2x grindless:mh_winding', '2x grindless:vuv_caf2_optic'] },
       { name: 'bz_dynamo', research: 'gtceu:frc_former', fluid: 'gtceu:filtered_disk_plasma',
-        parts: ['2x grindless:uiv_field_generator', '2x grindless:uiv_electric_piston', 'grindless:uxv_sensor'],
+        parts: ['2x gtceu:uiv_field_generator', '2x gtceu:uiv_electric_piston', 'gtceu:uxv_sensor'],
         domain: ['2x grindless:frc_cartridge', '2x grindless:ga2o3_power_die', '2x grindless:mh_winding'] }
     ]
     CD.controllerRecipes = []
@@ -205,11 +205,11 @@
 
   // line 30: two strand coils (each holds a cartridge), a UIV field generator, windings and plates; researched with a cartridge
   function addFieldGenerator(event) {
-    var OUTPUT = 'grindless:uxv_field_generator'
+    var OUTPUT = 'gtceu:uxv_field_generator'
     var RESEARCH = 'grindless:frc_cartridge'
     var PLASMA = 'gtceu:filtered_disk_plasma'
-    var items = ['2x grindless:strand_coil', 'grindless:uiv_field_generator', '2x grindless:mh_winding', '2x gtceu:rhea_plate']
-    var ids = [OUTPUT, RESEARCH, 'grindless:strand_coil', 'grindless:uiv_field_generator', 'grindless:mh_winding', 'gtceu:rhea_plate']
+    var items = ['2x grindless:strand_coil', 'gtceu:uiv_field_generator', '2x grindless:mh_winding', '2x gtceu:rhea_plate']
+    var ids = [OUTPUT, RESEARCH, 'grindless:strand_coil', 'gtceu:uiv_field_generator', 'grindless:mh_winding', 'gtceu:rhea_plate']
     var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (!Fluid.exists(PLASMA)) missing.push(PLASMA)
     CD.fieldGeneratorRecipe = ''

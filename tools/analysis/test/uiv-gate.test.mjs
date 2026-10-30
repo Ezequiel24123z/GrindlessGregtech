@@ -63,7 +63,7 @@ test('the UXV casing is researched only with the Kerr chart and keeps the GTM id
 });
 
 test('the casing recipe takes the UIV parts one tier up from UEV-B5', () => {
-  for (const id of ['gtceu:uiv_machine_casing', 'grindless:uiv_field_generator', 'grindless:uiv_emitter', 'gtnn:optical_mainframe']) {
+  for (const id of ['gtceu:uiv_machine_casing', 'gtceu:uiv_field_generator', 'gtceu:uiv_emitter', 'gtnn:optical_mainframe']) {
     assert.ok(code.includes(id), id);
   }
   assert.match(code, /itemOutputs\('2x ' \+ CASING\)/);

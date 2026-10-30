@@ -1759,7 +1759,7 @@
         "fluid:gtceu:iron_pentacarbonyl",
         "grindless:sx_blade",
         "grindless:bonded_fe16n2_magnet",
-        "grindless:uev_electric_motor"
+        "gtceu:uev_electric_motor"
       ]
     },
     {

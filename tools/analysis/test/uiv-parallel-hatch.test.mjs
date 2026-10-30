@@ -107,13 +107,13 @@ test('the recipe is the UEV one a tier up, guarded, with a stable id', () => {
   assert.equal(r.id, 'grindless:uiv_parallel_hatch', 'the builder id; GTM prefixes it as grindless:assembly_line/uiv_parallel_hatch');
   assert.ok(r.items.includes('gtceu:uiv_machine_hull'));
   assert.ok(r.items.includes('4x #gtceu:circuits/uiv'));
-  assert.ok(r.items.includes('grindless:uiv_sensor'));
-  assert.ok(r.items.includes('grindless:uiv_emitter'));
+  assert.ok(r.items.includes('gtceu:uiv_sensor'));
+  assert.ok(r.items.includes('gtceu:uiv_emitter'));
   assert.ok(r.items.includes('2x gtceu:metallic_hydrogen_double_cable'));
   assert.ok(r.items.includes('8x gtceu:rhea_plate'));
   assert.ok(r.items.includes('4x grindless:ffkm_seal'));
   assert.equal(r.fluids.length, 3);
-  assert.deepEqual(plain(r.research), { item: 'grindless:uiv_emitter' });
+  assert.deepEqual(plain(r.research), { item: 'gtceu:uiv_emitter' });
   assert.equal(G.uivParallelHatch.recipeId, 'grindless:assembly_line/uiv_parallel_hatch');
   assert.equal(G.uivParallelHatch.done, true);
 });

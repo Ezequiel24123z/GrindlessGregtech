@@ -64,10 +64,10 @@
 		{
 			dependencies: ["79F47DC75835B292"]
 			description: ["The &6UIV Electric Pump&r has a printed impeller, pressed at a megabar and balanced by hand-me-down machines. The other UIV parts wait for stars further out."]
-			icon: "grindless:uiv_electric_pump"
+			icon: "gtceu:uiv_electric_pump"
 			id: "17C0F46C21B9CD13"
 			rewards: [{ id: "366424FA6A7C7F5A", type: "xp", xp: 150 }]
-			tasks: [{ id: "727882A96A81D31A", item: "grindless:uiv_electric_pump", type: "item" }]
+			tasks: [{ id: "3B02C0C3C5703B00", item: "gtceu:uiv_electric_pump", type: "item" }]
 			title: "UIV Parts"
 			x: 10.0d
 			y: 0.0d

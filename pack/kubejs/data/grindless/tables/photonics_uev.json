@@ -115,19 +115,19 @@
           "itemsOut": [{ "id": "grindless:qd_source", "count": 1 }] },
         { "name": "uev_sensor", "circuit": 0, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "gtceu:uv_sensor", "count": 1 }, { "id": "grindless:snspd", "count": 2 }, { "id": "grindless:sdd", "count": 1 }, { "id": "grindless:six_n_niobium", "count": 4 }],
-          "itemsOut": [{ "id": "grindless:uev_sensor", "count": 1 }] },
+          "itemsOut": [{ "id": "gtceu:uev_sensor", "count": 1 }] },
         { "name": "uev_emitter", "circuit": 0, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "gtceu:uv_emitter", "count": 1 }, { "id": "grindless:qd_source", "count": 2 }, { "id": "grindless:graphene_modulator", "count": 1 }, { "id": "grindless:six_n_tantalum", "count": 4 }],
-          "itemsOut": [{ "id": "grindless:uev_emitter", "count": 1 }] },
+          "itemsOut": [{ "id": "gtceu:uev_emitter", "count": 1 }] },
         { "name": "uev_electric_pump", "circuit": 0, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "gtceu:uv_electric_pump", "count": 1 }, { "id": "grindless:annealed_hbn_film", "count": 2 }, { "id": "grindless:six_n_hafnium", "count": 4 }],
-          "itemsOut": [{ "id": "grindless:uev_electric_pump", "count": 1 }] },
+          "itemsOut": [{ "id": "gtceu:uev_electric_pump", "count": 1 }] },
         { "name": "uev_conveyor_module", "circuit": 0, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "gtceu:uv_conveyor_module", "count": 1 }, { "id": "grindless:graphene_film", "count": 2 },           { "id": "grindless:six_n_tantalum", "count": 4 }, { "id": "grindless:hbn_film", "count": 1 }], "fluidsIn": [],
-          "itemsOut": [{ "id": "grindless:uev_conveyor_module", "count": 1 }] },
+          "itemsOut": [{ "id": "gtceu:uev_conveyor_module", "count": 1 }] },
         { "name": "uev_electric_piston", "circuit": 0, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "gtceu:uv_electric_piston", "count": 1 }, { "id": "grindless:graphene_film", "count": 2 },           { "id": "grindless:six_n_niobium", "count": 4 }, { "id": "grindless:hbn_film", "count": 1 }], "fluidsIn": [],
-          "itemsOut": [{ "id": "grindless:uev_electric_piston", "count": 1 }] }
+          "itemsOut": [{ "id": "gtceu:uev_electric_piston", "count": 1 }] }
       ]
     },
     "snspd_fabrication": {

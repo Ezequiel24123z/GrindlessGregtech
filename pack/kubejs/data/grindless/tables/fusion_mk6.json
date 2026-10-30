@@ -6,7 +6,7 @@
       "recipes": [
         { "name": "uxv_fusion_casing", "circuit": 0, "eut": 31457280, "duration": 600,
           "itemsIn": [{ "id": "grindless:wf_rhea_billet", "count": 1 }, { "id": "grindless:w184_cvi_preform", "count": 1 }, { "id": "grindless:mh_winding", "count": 1 },
-            { "id": "grindless:uxv_field_generator", "count": 1 }, { "id": "gtceu:tritanium_frame", "count": 1 }], "kept": [], "charge": [],
+            { "id": "gtceu:uxv_field_generator", "count": 1 }, { "id": "gtceu:tritanium_frame", "count": 1 }], "kept": [], "charge": [],
           "fluidsIn": [{ "id": "gtceu:he_6n", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:uxv_fusion_casing", "count": 2 }], "fluidsOut": [] }
       ]

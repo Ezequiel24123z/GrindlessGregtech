@@ -165,8 +165,8 @@
         {
           "name": "uiv_field_generator", "circuit": 0, "eut": 31457280, "duration": 400,
           "_why": "UIV-B2 line 30: the neutronium pellet is the heart of the UIV field generator.",
-          "itemsIn": [ { "id": "grindless:neutronium_pellet", "count": 1 }, { "id": "#gtceu:circuits/uiv", "count": 2 }, { "id": "grindless:uiv_sensor", "count": 1 }, { "id": "gtceu:metallic_hydrogen_plate", "count": 4 } ],
-          "itemsOut": [ { "id": "grindless:uiv_field_generator", "count": 1 } ]
+          "itemsIn": [ { "id": "grindless:neutronium_pellet", "count": 1 }, { "id": "#gtceu:circuits/uiv", "count": 2 }, { "id": "gtceu:uiv_sensor", "count": 1 }, { "id": "gtceu:metallic_hydrogen_plate", "count": 4 } ],
+          "itemsOut": [ { "id": "gtceu:uiv_field_generator", "count": 1 } ]
         }
       ]
     }

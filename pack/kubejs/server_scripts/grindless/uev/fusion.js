@@ -75,7 +75,7 @@
       { machine: table.polariser.machine, name: 'helium3_polariser', research: 'grindless:laser_1083nm', era: 'gtceu:neutronium',
         ins: ['gtceu:uhv_machine_hull', '2x gtceu:uv_emitter', C, 'grindless:laser_1083nm', '2x grindless:wf_w_tile', 'grindless:sic_sic_plate'] },
       { machine: table.ring.machine, name: 'uev_fusion_reactor', research: table.polariser.machine, era: 'gtceu:tritanium',
-        ins: ['gtceu:uev_machine_hull', 'grindless:uev_emitter', 'grindless:uev_sensor', '2x gtnn:optical_computer', C, 'grindless:uev_fusion_casing', 'grindless:hftacn_coil_block', 'grindless:wf_w_tile'] }
+        ins: ['gtceu:uev_machine_hull', 'gtceu:uev_emitter', 'gtceu:uev_sensor', '2x gtnn:optical_computer', C, 'grindless:uev_fusion_casing', 'grindless:hftacn_coil_block', 'grindless:wf_w_tile'] }
     ]
     defs.forEach(function (d) {
       var ids = d.ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([d.machine, d.research])

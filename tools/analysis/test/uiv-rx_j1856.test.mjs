@@ -102,7 +102,7 @@ test('line 30: crust -> inner crust -> drip neutrons -> superfluid -> pellet (ca
   const fg = by('assembler', 'uiv_field_generator');
   assert.ok(ids(fg.itemsIn).includes('grindless:neutronium_pellet'));
   assert.ok(ids(fg.itemsIn).includes('#gtceu:circuits/uiv'));
-  assert.deepEqual(outputs(fg), ['grindless:uiv_field_generator']);
+  assert.deepEqual(outputs(fg), ['gtceu:uiv_field_generator']);
 });
 
 test('line 31: crust nuclei -> hot mix (fission fragments to the vault) -> capsule -> vault -> aged capsule -> ash and helium-4', () => {
@@ -171,7 +171,7 @@ test('invariants: our pellet is never gtceu:neutronium and no recipe of ours tak
 });
 
 test('"only from" claims: no other table or script builds these outputs', () => {
-  const out = ['grindless:neutronium_pellet', 'grindless:uiv_field_generator', 'grindless:neutron_star_crust', 'grindless:kilonova_capsule',
+  const out = ['grindless:neutronium_pellet', 'gtceu:uiv_field_generator', 'grindless:neutron_star_crust', 'grindless:kilonova_capsule',
     'grindless:aged_kilonova_capsule', 'grindless:r_process_ash', 'grindless:flashed_target',     'grindless:es254_target', 'grindless:polar_cap_electrode',
         'grindless:crust_lift_tether', 'grindless:mh_tether', 'grindless:fission_fragments'];
   for (const id of out) {
@@ -224,8 +224,8 @@ test('controllers read the UIV hull, 2 UIV parts and 2 optical mainframes', () =
   assert.match(server, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
   assert.match(server, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
   assert.match(server, /stationResearch/);
-  for (const m of ['crust_lift\', part: \'grindless:uiv_electric_piston\'', 'neutron_drip_separator\', part: \'grindless:uiv_electric_pump\'',
-    'neutronium_cage\', part: \'grindless:uiv_robot_arm\'', 'r_process_decompressor\', part: \'grindless:uiv_conveyor_module\'', 'decay_heat_vault\', part: \'grindless:uiv_electric_motor\'']) {
+  for (const m of ['crust_lift\', part: \'gtceu:uiv_electric_piston\'', 'neutron_drip_separator\', part: \'gtceu:uiv_electric_pump\'',
+    'neutronium_cage\', part: \'gtceu:uiv_robot_arm\'', 'r_process_decompressor\', part: \'gtceu:uiv_conveyor_module\'', 'decay_heat_vault\', part: \'gtceu:uiv_electric_motor\'']) {
     assert.ok(server.includes('name: \'' + m), m);
   }
 });

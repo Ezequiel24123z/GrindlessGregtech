@@ -105,7 +105,7 @@ test('the recipe is an assembly line researched with the UIV hatch, guarded, wit
   const r = recipes[0];
   assert.deepEqual(plain(r.outs), ['gtceu:uxv_parallel_hatch']);
   assert.equal(r.id, 'grindless:uxv_parallel_hatch', 'the builder id; GTM prefixes it as grindless:assembly_line/uxv_parallel_hatch');
-  for (const it of ['gtceu:uxv_machine_hull', '4x gtnn:spintronic_mainframe', 'grindless:uxv_field_generator', 'grindless:uxv_emitter']) assert.ok(r.items.includes(it), it);
+  for (const it of ['gtceu:uxv_machine_hull', '4x gtnn:spintronic_mainframe', 'gtceu:uxv_field_generator', 'gtceu:uxv_emitter']) assert.ok(r.items.includes(it), it);
   assert.ok(r.items.length <= 16, 'an assembly line holds 16 inputs');
   assert.ok(r.fluids.includes('gtceu:filtered_disk_plasma 1000'));
   assert.ok(r.fluids.some((f) => f.startsWith('gtceu:soldering_alloy ')));
@@ -117,9 +117,9 @@ test('the recipe is an assembly line researched with the UIV hatch, guarded, wit
 });
 
 test('a missing input skips the recipe and is reported, never throws', () => {
-  const { recipes, G } = runRecipe((id) => id !== 'grindless:uxv_emitter');
+  const { recipes, G } = runRecipe((id) => id !== 'gtceu:uxv_emitter');
   assert.equal(recipes.length, 0);
-  assert.deepEqual(plain(G.uxvParallelHatch.missing), ['grindless:uxv_emitter']);
+  assert.deepEqual(plain(G.uxvParallelHatch.missing), ['gtceu:uxv_emitter']);
   assert.equal(G.uxvParallelHatch.done, true);
 });
 

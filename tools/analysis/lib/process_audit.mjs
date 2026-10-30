@@ -203,7 +203,9 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
         if (onlyBy) add('byproduct_no_destination', k, era, file, `only a byproduct of ${prod.slice(0, 3).map((p) => p.id).join(', ')}; nothing consumes, voids or explains it`);
         else if (prod.length > 0) add('no_use', k, era, file, `made by ${prod.slice(0, 3).map((p) => p.id).join(', ')} but nothing consumes it and no page states its use`);
       }
-    } else if (!hiddenWith.has(k) && (prod.length > 0 || cons.length > 0)) {
+    } else if (!hiddenWith.has(k) && (prod.length > 0 || cons.length > 0)
+      // an old item of an earlier version (TP-D2): nothing makes it, its only use is the 1:1 conversion EMI must keep showing
+      && !(prod.length === 0 && cons.every((c) => /^grindless:crafting\/retired\//.test(c.id)))) {
       add('hidden_with_recipes', k, era, file, `hidden from the index only, yet ${prod.length} recipes make it and ${cons.length} use it (hide with grindless:hidden_with_recipes or drop the recipes)`);
     }
     // trivial step: the only producer is a 1:1 recipe from one other item of ours
