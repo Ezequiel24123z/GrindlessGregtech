@@ -149,6 +149,23 @@
     }
   ]
 
+  // OpV-D1 rows (opv.md line 20): beryllium and the beam window's scrap (the braze trim and worn windows) fluorinated to BeF2 for the
+  // electron beam's calcium reduction, Be + 2 HF -> BeF2 + H2 (the hydrogen goes back to the plant, as the ThF4 row's).
+  var OPV_ROWS = [
+    {
+      name: 'be_fluoride_from_beryllium',
+      itemIn: { id: 'gtceu:beryllium_dust', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 2000 },
+      itemOut: { id: 'grindless:be_fluoride_dust', count: 3 }, fluidOut: { id: 'gtceu:hydrogen', amount: 2000 },
+      eut: 30, duration: 64
+    },
+    {
+      name: 'be_fluoride_from_window_scrap',
+      itemIn: { id: 'grindless:be_window_scrap', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 2000 },
+      itemOut: { id: 'grindless:be_fluoride_dust', count: 3 }, fluidOut: { id: 'gtceu:hydrogen', amount: 2000 },
+      eut: 30, duration: 64
+    }
+  ]
+
   function addUevRows(event, rows) {
     ;(rows || UEV_ROWS).forEach(function (r) {
       var missing = []
@@ -208,6 +225,11 @@
       addUevRows(event, UXV_ROWS)
     } catch (e5) {
       console.error(LOG + 'fluorspar kiln UXV rows failed: ' + e5)
+    }
+    try {
+      addUevRows(event, OPV_ROWS)
+    } catch (e6) {
+      console.error(LOG + 'fluorspar kiln OpV rows failed: ' + e6)
     }
     try {
       addController(event)

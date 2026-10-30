@@ -87,6 +87,11 @@
   TABLE.push(row('nb_target', 'spark_plasma_sintering', 6, [item('gtceu:niobium_dust', 4)], [], [item('grindless:nb_target', 1)], [], UHVA, 500))
   TABLE.push(row('w_target', 'spark_plasma_sintering', 7, [item('gtceu:tungsten_dust', 4)], [], [item('grindless:w_target', 1)], [], UHVA, 500))
 
+  // OpV-D1 (opv.md lines 21, 22 and 25): the 5N iridium spallation rod (c11), the 6LiH shield tile (c12) and the TiZrV getter target (c13)
+  TABLE.push(row('ir_target_rod', 'spark_plasma_sintering', 11, [item('grindless:five_n_iridium', 4)], [], [item('grindless:ir_target_rod', 1)], [], UHVA, 600))
+  TABLE.push(row('li6h_tile', 'spark_plasma_sintering', 12, [item('grindless:li6_hydride', 2)], [], [item('grindless:li6h_tile', 1)], [], UHVA, 400))
+  TABLE.push(row('tizrv_target', 'spark_plasma_sintering', 13, [item('grindless:tizrv_ingot', 4)], [], [item('grindless:tizrv_target', 1)], [], UHVA, 500))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

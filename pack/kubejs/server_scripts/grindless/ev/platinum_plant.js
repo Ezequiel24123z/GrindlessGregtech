@@ -722,6 +722,47 @@
     })
   }
 
+  // OpV-D1 rows (opv.md line 21; circuits 15-16): a spent spallation target's iridium core, declad in the hot cell (c18), dissolved and
+  // reduced back to iridium dust (13 of the 16 that went in), which circuit 13 refines to 5N again (grindless:five_n_iridium stays
+  // UXV-A2's alone); the 3 transmuted by spallation leave as a residue, whose aqua regia leach gives back the iridium left in it with
+  // the osmium and tungsten it became (no rhenium: gtceu:rhenium_dust is Barnard's alone).
+  // Same electrode wear and no voiding of the cargo.
+  var OPV_ROWS = [
+    {
+      name: 'ir_core_recovery', circuit: 15,
+      itemIn: 'grindless:decladded_ir_core', fluidsIn: [['gtceu:chlorine', 4000], ['gtceu:hydrogen', 4000]],
+      itemsOut: [['gtceu:iridium_dust', 13], ['grindless:ir_spallation_residue', 1]], fluidsOut: [['gtceu:hydrochloric_acid', 4000]],
+      eut: 1920, duration: 1200
+    },
+    {
+      name: 'ir_spallation_residue', circuit: 16,
+      itemIn: 'grindless:ir_spallation_residue', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
+      itemsOut: [['gtceu:iridium_dust', 1], ['gtceu:osmium_dust', 1], ['gtceu:tungsten_dust', 1]],
+      fluidsOut: [['minecraft:water', 2000]],
+      eut: 1920, duration: 600
+    }
+  ]
+
+  function addOpvRows(event) {
+    OPV_ROWS.forEach(function (r) {
+      var missing = [r.itemIn].concat(r.itemsOut.map(function (o) { return o[0] })).filter(function (id) { return !Item.exists(id) })
+        .concat(r.fluidsIn.concat(r.fluidsOut).map(function (f) { return f[0] }).filter(function (id) { return !Fluid.exists(id) }))
+      if (missing.length > 0) {
+        console.error(LOG + 'pgm_refining row ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      var recipe = event.recipes.gtceu.pgm_refining('grindless:opv/' + r.name)
+      recipe.itemInputs('1x ' + r.itemIn)
+      recipe.chancedInput('1x ' + ELECTRODE, ELECTRODE_WEAR, 0)
+      recipe.circuit(r.circuit)
+      r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f[0], f[1])) })
+      r.itemsOut.forEach(function (o) { recipe.itemOutputs(o[1] + 'x ' + o[0]) })
+      r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
+      recipe.EUt(r.eut).duration(r.duration)
+      recipe.addDataBool(KEEP_KEY, true)
+    })
+  }
+
   // ---------------------------------------------------------------- crafting
 
   function missingOf(ids) {
@@ -773,6 +814,11 @@
       addUxvRows(event)
     } catch (e5) {
       console.error(LOG + 'platinum plant UXV rows failed: ' + e5)
+    }
+    try {
+      addOpvRows(event)
+    } catch (e6) {
+      console.error(LOG + 'platinum plant OpV rows failed: ' + e6)
     }
     try {
       addCrafting(event)

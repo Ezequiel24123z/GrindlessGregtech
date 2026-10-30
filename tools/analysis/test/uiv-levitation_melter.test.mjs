@@ -12,8 +12,8 @@ const kube = path.join(root, 'pack', 'kubejs');
 const tables = path.join(kube, 'data', 'grindless', 'tables');
 const read = (...p) => fs.readFileSync(path.join(kube, ...p), 'utf8');
 const T = JSON.parse(fs.readFileSync(path.join(tables, 'levitation_melter.json'), 'utf8'));
-// UXV-A3's six melts (circuits 9-14) are pinned in uxv-spin_rows.test.mjs; this file pins UIV-A3's five
-T.types.levitation_melting.recipes = T.types.levitation_melting.recipes.filter((r) => !(r._why || '').startsWith('UXV-A3'));
+// UXV-A3's six melts (circuits 9-14) are pinned in uxv-spin_rows.test.mjs; OpV-D1's c17-18 in opv-beam_hardware.test.mjs; this file pins UIV-A3's five
+T.types.levitation_melting.recipes = T.types.levitation_melting.recipes.filter((r) => !/^(UXV-A3|OpV-D1)/.test(r._why || ''));
 const MINE = 'levitation_melter.json';
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);

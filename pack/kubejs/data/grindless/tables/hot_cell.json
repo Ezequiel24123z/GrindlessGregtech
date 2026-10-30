@@ -289,6 +289,17 @@
       "fluidsIn": [],
       "itemsOut": [{ "id": "gtceu:calcium_dust", "count": 1 }, { "id": "gtceu:small_tungsten_dust", "count": 2 }],
       "fluidsOut": []
+    },
+    {
+      "_why": "OpV-D1 (opv.md line 21; the contract's c17 is ti44_core_decay's in the base, so the next free one, c18): a spent Ir spallation target declad behind the shielding; the iridium core goes to the platinum plant (c15) and the activated Ta cladding and W housing are glassed as radioactive waste",
+      "name": "spent_ir_target_decladding",
+      "circuit": 18,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [{ "id": "grindless:spent_ir_target", "count": 1 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:decladded_ir_core", "count": 1 }, { "id": "gtnn:radioactive_waste", "count": 1 }],
+      "fluidsOut": []
     }
   ]
 }
