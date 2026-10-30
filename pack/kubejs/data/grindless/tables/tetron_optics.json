@@ -1,0 +1,26 @@
+{
+  "_why": "OpV-B1 (docs/eras/opv.md, machines 1 and 2, lines 19, 34 and 35): the tetron fab and the gamma optics works. Read by server_scripts/grindless/opv/tetron_optics.js. Ids are grindless:<type>/<name>. Chance 1000 = 10 %; a charge is a fluid that is not consumed.",
+  "types": {
+    "tetron_assembly": {
+      "dataKey": "grindless_tetron_assembly",
+      "recipes": [
+        {
+          "_why": "line 19, step 1: the gated InAs-Al 2DEG wafer is diced into four tetrons (two nanowires on a superconducting backbone), each with its cryo-CMOS readout",
+          "name": "tetron_die", "circuit": 1, "eut": 268435456, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:gated_2deg_wafer", "count": 1 }, { "id": "grindless:cryo_cmos_die", "count": 1 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:tetron_die", "count": 4 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 19, last step: four parity-tested tetrons and a HEMT readout amplifier are tied into an array in a superfluid He-3 bath (kept); a die that fails the array's interferometric parity calibration is pulled (10 %) and goes to the EV extraction cascade (c25)",
+          "name": "tetron_array", "circuit": 2, "eut": 268435456, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:tested_tetron_die", "count": 4 }, { "id": "grindless:hemt_amplifier", "count": 1 }],
+          "kept": [], "charge": [{ "id": "gtceu:superfluid_helium_3", "amount": 1000 }], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:tetron_array", "count": 1 }, { "id": "grindless:failed_tetron_die", "count": 1, "chance": 1000 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}

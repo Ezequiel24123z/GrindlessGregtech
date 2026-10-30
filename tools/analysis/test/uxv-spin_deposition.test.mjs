@@ -25,7 +25,7 @@ test('the stand-in runs the UXV-A4 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(SD.skipped), []);
   assert.deepEqual(plain(SD.clashes), []);
-  assert.equal(SD.recipes.length, 12);
+  assert.equal(SD.recipes.length, 13); // OpV-B1: + mtj_sputtering tetron_bumps (c9)
 });
 
 test('5 items registered by the startup file, named in en_us and es_es', () => {
@@ -42,7 +42,8 @@ test('5 items registered by the startup file, named in en_us and es_es', () => {
 
 test('the MTJ sputter rows: circuits 1-4, figures, spent target and scrap powder back', () => {
   const rows = SD.recipes.filter((r) => r.type === 'mtj_sputtering');
-  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['mtj_stack', 1], ['mram_stack', 2], ['saf_track', 3], ['stno_stack', 4]]);
+  // OpV-B1: + ['tetron_bumps', 9] (OpV line 19, the In bumps on the tetron dies)
+  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['mtj_stack', 1], ['mram_stack', 2], ['saf_track', 3], ['stno_stack', 4], ['tetron_bumps', 9]]);
   const out = (r) => r.itemsOut.map((x) => x.id);
   assert.ok(out(rec('mtj_sputtering', 'mtj_stack')).includes('grindless:mtj_stack_wafer'));
   assert.ok(out(rec('mtj_sputtering', 'mtj_stack')).includes('grindless:spent_cofeb_target'), 'the spent CoFeB target comes back');
@@ -51,7 +52,8 @@ test('the MTJ sputter rows: circuits 1-4, figures, spent target and scrap powder
   assert.ok(out(rec('mtj_sputtering', 'stno_stack')).includes('grindless:stno_stack_wafer'), 'A3 reads stno_stack_wafer by this id');
   for (const r of rows) {
     assert.ok(r.fluidsIn.some((f) => f.id === 'gtceu:argon') && r.fluidsOut.some((f) => f.id === 'gtceu:argon' && f.amount < r.fluidsIn[0].amount), `${r.name}: argon in, a little less out`);
-    assert.ok(r.itemsIn.some((x) => x.id === 'grindless:h_si28_wafer'), `${r.name}: on a Si-28 wafer`);
+    // OpV-B1: the tetron bumps (c9) go on OpV dies, not on a Si-28 wafer
+    assert.ok(r.circuit > 4 || r.itemsIn.some((x) => x.id === 'grindless:h_si28_wafer'), `${r.name}: on a Si-28 wafer`);
     assert.ok([33554432, 67108864].includes(r.eut) && r.duration >= 600, `${r.name}: figures ${r.eut} x ${r.duration}`);
     assert.ok(find(`grindless:mtj_sputtering/${r.name}`), `${r.name} is in the recipe docs`);
   }
@@ -127,7 +129,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('no older row written: no recipe of this package sits in another package\'s file', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_deposition\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 2 + 1, 'rows, two controllers, the laser');
+  assert.equal(mine.length, 13 + 2 + 1, 'rows, two controllers, the laser'); // OpV-B1: + tetron_bumps
 });
 
 test('structures: not boring, at least two functional kinds, controller in the front slice', () => {

@@ -115,7 +115,8 @@ test('the older rows exist, each marked UIV-A6', () => {
 
 test('millikelvin cryostat works: circuits 1-3, 31457280 EU/t, module is a catalyst in c3, mixture returned', () => {
   const rc = T.types.nuclear_demagnetisation.recipes;
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['nuclear_stage', 1], ['mk_module', 2], ['p_si_processor', 3]]);
+  // OpV-B1: + ['tested_tetron_die', 6] (OpV line 19, the parity test on the kept module)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['nuclear_stage', 1], ['mk_module', 2], ['p_si_processor', 3], ['tested_tetron_die', 6]]);
   for (const r of rc) assert.equal(r.eut, 31457280, r.name);
   assert.equal(rc[0].duration, 1600);
   assert.deepEqual(inputs(rc[0]), ['gtceu:prni5_dust', 'gtceu:copper_plate']);
@@ -185,7 +186,8 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   for (const m of ['spectral_hole_burner', 'millikelvin_cryostat_works']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
-    for (const r of t.recipes) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);
+    // OpV-B1: a row marked OpV-B1 is named in opv_tetron_optics_lang.js (checked by opv-tetron_optics.test.mjs)
+    for (const r of t.recipes) if (!/OpV-B1/.test(r._why || '')) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);
   }
   for (const n of registered) {
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);

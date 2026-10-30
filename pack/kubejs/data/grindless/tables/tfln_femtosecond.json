@@ -25,6 +25,12 @@
           "name": "eo_microcomb", "circuit": 4, "eut": 31457280, "duration": 1600,
           "itemsIn": [{ "id": "grindless:annealed_damascene_ring", "count": 1 }, { "id": "grindless:lnoi_wafer", "count": 1 }],
           "itemsOut": [{ "id": "grindless:eo_microcomb", "count": 1 }]
+        },
+        {
+          "_why": "OpV line 19 (package OpV-B1): the In-bumped tetron die is flip-chip bonded to its Nb TSV interposer under the same plasma-activated bond; named in client_scripts/grindless/opv_tetron_optics_lang.js",
+          "name": "bonded_tetron_die", "circuit": 8, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:bumped_tetron_die", "count": 1 }, { "id": "grindless:nb_tsv_interposer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:bonded_tetron_die", "count": 1 }]
         }
       ]
     },

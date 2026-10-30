@@ -47,7 +47,8 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 
 test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
   const rc = T.types.ion_slicing.recipes;
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4]]);
+  // OpV-B1: + ['bonded_tetron_die', 8] (OpV line 19, the flip-chip bond)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4], ['bonded_tetron_die', 8]]);
   for (const r of rc) {
     assert.equal(r.eut, 31457280, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 3 && ids(r.itemsOut).length <= 2, r.name);
@@ -174,7 +175,8 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   for (const m of ['tfln_fab', 'femtosecond_writer']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
-    for (const r of t.recipes) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);
+    // OpV-B1: a row marked OpV-B1 is named in opv_tetron_optics_lang.js (checked by opv-tetron_optics.test.mjs)
+    for (const r of t.recipes) if (!/OpV-B1/.test(r._why || '')) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);
   }
   for (const n of registered) {
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);

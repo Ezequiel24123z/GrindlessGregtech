@@ -89,7 +89,8 @@
     'gtceu:pasta_lamination': 'loop_pasta_laminator',
     'gtceu:polar_cap_tapping': 'loop_polar_cap_tap',
     'gtceu:ejecta_sweeping': 'loop_ejecta_knot_sweeper',
-    'gtceu:annihilation_lasing': 'loop_annihilation_laser_works'
+    'gtceu:annihilation_lasing': 'loop_annihilation_laser_works',
+    'gtceu:tetron_assembly': 'loop_tetron_fab'
   }
 
   StartupEvents.registry('sound_event', function (event) {
