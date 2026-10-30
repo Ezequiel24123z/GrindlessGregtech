@@ -110,7 +110,7 @@ test('the UIV hatches and covers: assembler recipes with the link on the 2 A hat
 
 test('tiers 1-10 are untouched', () => {
   assert.deepEqual(WIRELESS.tiers.map((r) => r.name).slice(0, 10), ['lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev']);
-  assert.equal(WIRELESS.tiers.length, 12); // UXV-W appends the twelfth
+  assert.equal(WIRELESS.tiers.length, 13); // UXV-W appends the twelfth, OpV-W the thirteenth
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uev').capacity, 251658240000);
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uhv').capacity, 62914560000);
 });
