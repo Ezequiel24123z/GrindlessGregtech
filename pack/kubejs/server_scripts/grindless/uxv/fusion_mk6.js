@@ -147,15 +147,15 @@
     }
     var b = event.recipes.gtceu.assembly_line('grindless:uxv_fusion_reactor')
     b.itemInputs(HULL)
-    b.itemInputs('2x ' + MOTOR)
-    b.itemInputs('2x ' + PUMP)
+    b.itemInputs('3x ' + MOTOR)
+    b.itemInputs('3x ' + PUMP)
     b.itemInputs('2x ' + FIELD)
     b.itemInputs('2x ' + CASING)
     b.itemInputs('4x #gtceu:circuits/uxv')
     b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:stellar_hydrogen_cut', 1000))
     b.itemOutputs(MACHINE)
-    b.stationResearch(function (r) { return r.researchStack(Item.of(RESEARCH)).CWUt(64).EUt(31457280) })
-    b.EUt(31457280).duration(1800)
+    b.stationResearch(function (r) { return r.researchStack(Item.of(RESEARCH)).CWUt(64).EUt(125829120) })
+    b.EUt(125829120).duration(1800)
     MK6.controllerRecipes.push('grindless:assembly_line/uxv_fusion_reactor')
   }
 

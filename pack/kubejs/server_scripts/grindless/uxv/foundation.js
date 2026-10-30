@@ -25,7 +25,7 @@ ServerEvents.recipes(function (event) {
 
   var FLUIDS = ['gtceu:filtered_disk_plasma', 'gtceu:soldering_alloy', 'gtceu:lubricant']
 
-  var hullItems = ['gtceu:uxv_machine_casing', 'grindless:uxv_voltage_coil', 'grindless:ga2o3_power_die', 'grindless:lasagna_plate', 'gtceu:uxv_machine_hull']
+  var hullItems = ['gtceu:uxv_machine_casing', 'grindless:uxv_voltage_coil', 'grindless:ga2o3_power_die', 'grindless:lasagna_plate', 'gtceu:uxv_sensor', 'gtceu:uxv_machine_hull']
   var hm = missingOf(hullItems, FLUIDS)
   if (hm.length > 0) {
     skip('uxv_machine_hull', hm)
@@ -35,6 +35,8 @@ ServerEvents.recipes(function (event) {
     hb.itemInputs('2x grindless:uxv_voltage_coil')
     hb.itemInputs('2x grindless:ga2o3_power_die')
     hb.itemInputs('4x grindless:lasagna_plate')
+    hb.itemInputs('2x gtceu:uxv_sensor')
+    hb.itemInputs('2x #gtceu:circuits/uxv')
     hb.inputFluids(Fluid.of('gtceu:filtered_disk_plasma', 1000), Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
     hb.itemOutputs('gtceu:uxv_machine_hull')
     hb.stationResearch(function (r) { return r.researchStack(Item.of('grindless:uxv_voltage_coil')).CWUt(64).EUt(7864320) })
