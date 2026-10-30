@@ -105,9 +105,7 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.generator_array.tooltip.0'),
-        Text.translate('grindless.machine.generator_array.tooltip.1'),
-        Text.translate('grindless.machine.generator_array.tooltip.2'),
-        Text.translate('grindless.machine.generator_array.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_3.tooltip', Text.translate('gtceu.steam_turbine'), Text.translate('gtceu.combustion_generator'), Text.translate('gtceu.gas_turbine'))
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/generator_array')
   })

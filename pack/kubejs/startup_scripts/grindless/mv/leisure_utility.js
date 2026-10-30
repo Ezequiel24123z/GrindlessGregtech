@@ -459,9 +459,13 @@
 
   // ---------------------------------------------------------------- machines
 
-  function tips(id, n) {
-    var out = []
-    for (var i = 0; i < n; i++) out.push(Text.translate('grindless.machine.' + id + '.tooltip.' + i))
+  // TP-D5: what it does, its recipe type, and tooltip.1 when the controller has one machine-specific line
+  function tips(id, type, hasSpec) {
+    var out = [
+      Text.translate('grindless.machine.' + id + '.tooltip.0'),
+      Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + type))
+    ]
+    if (hasSpec) out.push(Text.translate('grindless.machine.' + id + '.tooltip.1'))
     return out
   }
 
@@ -485,7 +489,7 @@
             String(smelterLimit(controller)), String(Coils.temperature(controller))))
         } catch (e) { /* display only */ }
       })
-      ["tooltips(net.minecraft.network.chat.Component[])"](tips('advanced_multi_smelter', 4))
+      ["tooltips(net.minecraft.network.chat.Component[])"](tips('advanced_multi_smelter', 'electric_furnace', true))
       .workableCasingModel(HEATPROOF_TEXTURE, 'grindless:block/multiblock/advanced_multi_smelter')
 
     event.create('lava_furnace', 'multiblock')
@@ -495,7 +499,7 @@
       .recipeModifier(crossSmelt(FURNACE_CFG), true)
       .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
       .pattern(function (def) { return Pat.build(def, FURNACE_SPEC) })
-      ["tooltips(net.minecraft.network.chat.Component[])"](tips('lava_furnace', 4))
+      ["tooltips(net.minecraft.network.chat.Component[])"](tips('lava_furnace', 'electric_furnace', false))
       .workableCasingModel(STEEL_TEXTURE, 'grindless:block/multiblock/lava_furnace')
 
     event.create('weather_controller', 'multiblock')
@@ -506,7 +510,7 @@
       .afterWorking(weatherApply)
       .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
       .pattern(function (def) { return Pat.build(def, WEATHER_SPEC) })
-      ["tooltips(net.minecraft.network.chat.Component[])"](tips('weather_controller', 4))
+      ["tooltips(net.minecraft.network.chat.Component[])"](tips('weather_controller', 'weather_control', true))
       .workableCasingModel(STEEL_TEXTURE, 'grindless:block/multiblock/weather_controller')
   })
 })()

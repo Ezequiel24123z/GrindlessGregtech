@@ -358,9 +358,7 @@
       .pattern(function (def) { return Pat.build(def, DRILL_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.lv_vein_drill.tooltip.0'),
-        Text.translate('grindless.machine.lv_vein_drill.tooltip.1'),
-        Text.translate('grindless.machine.lv_vein_drill.tooltip.2'),
-        Text.translate('grindless.machine.lv_vein_drill.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.vein_drilling'))
       ])
       .workableCasingModel(STEEL_CASING_TEXTURE, 'grindless:block/multiblock/lv_vein_drill')
 
@@ -373,9 +371,7 @@
       .pattern(function (def) { return Pat.build(def, GREENHOUSE_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.lv_greenhouse.tooltip.0'),
-        Text.translate('grindless.machine.lv_greenhouse.tooltip.1'),
-        Text.translate('grindless.machine.lv_greenhouse.tooltip.2'),
-        Text.translate('grindless.machine.lv_greenhouse.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.greenhouse'))
       ])
       .workableCasingModel(STEEL_CASING_TEXTURE, 'grindless:block/multiblock/lv_greenhouse')
 
@@ -387,9 +383,8 @@
       .pattern(function (def) { return Pat.build(def, ARC_FURNACE_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.submerged_arc_furnace.tooltip.0'),
-        Text.translate('grindless.machine.submerged_arc_furnace.tooltip.1'),
-        Text.translate('grindless.machine.submerged_arc_furnace.tooltip.2'),
-        Text.translate('grindless.machine.submerged_arc_furnace.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.arc_smelting')),
+        Text.translate('grindless.machine.submerged_arc_furnace.tooltip.1')
       ])
       .workableCasingModel(HEAT_CASING_TEXTURE, 'grindless:block/multiblock/submerged_arc_furnace')
   })

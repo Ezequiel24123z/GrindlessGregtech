@@ -97,9 +97,8 @@
       .pattern(function (def) { return Pat.build(def, DRILL_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.lunar_drill.tooltip.0'),
-        Text.translate('grindless.machine.lunar_drill.tooltip.1'),
-        Text.translate('grindless.machine.lunar_drill.tooltip.2'),
-        Text.translate('grindless.machine.lunar_drill.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.lunar_drilling')),
+        Text.translate('grindless.machine.lunar_drill.tooltip.1')
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/lunar_drill')
   })

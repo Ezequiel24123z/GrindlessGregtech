@@ -133,8 +133,11 @@
     MACHINES.forEach(function (m) {
       Pat.register('gtceu:' + m.id, m.spec)
 
-      var tips = []
-      for (var i = 0; i < m.tooltips; i++) tips.push(Text.translate('grindless.machine.' + m.id + '.tooltip.' + i))
+      var tips = [
+        Text.translate('grindless.machine.' + m.id + '.tooltip.0'),
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
+        Text.translate('grindless.tooltip.steam', '32')
+      ]
 
       event.create(m.id, 'multiblock')
         .langValue(m.name)

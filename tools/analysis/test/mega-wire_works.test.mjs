@@ -168,7 +168,7 @@ test('the integrator stamped the priority line; the lang file names the machine 
   });
   for (const code of ['en_us', 'es_es']) {
     assert.ok(store[code], code);
-    for (const key of ['block.gtceu.wire_works', 'grindless.machine.wire_works.tooltip.0', 'grindless.machine.wire_works.tooltip.1', 'grindless.machine.wire_works.tooltip.2']) {
+    for (const key of ['block.gtceu.wire_works', 'grindless.machine.wire_works.tooltip.0']) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
     }
   }
