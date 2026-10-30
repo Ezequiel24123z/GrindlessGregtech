@@ -12,7 +12,7 @@
   var R = G.stellarForgeRecipe || (G.stellarForgeRecipe = {})
 
   var OUTPUT = 'gtceu:stellar_forge'
-  var PLAIN = ['8x gtceu:electric_blast_furnace', '16x grindless:hftacn_coil_block']
+  var PLAIN = ['8x gtceu:electric_blast_furnace', '16x grindless:hftacn_coil_block', '3x gtceu:uev_field_generator', '3x gtceu:uev_electric_pump', '2x gtceu:uev_sensor']
   var CIRCUITS = '4x #gtceu:circuits/uev'
 
   R.recipeId = 'grindless:assembly_line/stellar_forge'
@@ -30,11 +30,11 @@
         console.error(LOG + R.recipeId + ' skipped, unknown item(s): ' + missing.join(', '))
       } else {
         event.recipes.gtceu.assembly_line('grindless:stellar_forge')
-          .itemInputs(PLAIN[0], PLAIN[1], CIRCUITS, '2x grindless:ule_cavity', '2x grindless:hftacn_heating_element')
+          .itemInputs(PLAIN[0], PLAIN[1], PLAIN[2], PLAIN[3], PLAIN[4], CIRCUITS, '2x grindless:ule_cavity', '2x grindless:hftacn_heating_element')
           .inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:helium_plasma', 576))
           .itemOutputs(OUTPUT)
-          .stationResearch(function (r) { return r.researchStack(Item.of('grindless:hftacn_coil_block')).CWUt(64).EUt(2097152) })
-          .EUt(2097152)
+          .stationResearch(function (r) { return r.researchStack(Item.of('grindless:hftacn_coil_block')).CWUt(64).EUt(7864320) })
+          .EUt(7864320)
           .duration(2400)
       }
     } catch (e) {

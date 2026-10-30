@@ -13,7 +13,7 @@
   var G = global.grindless || (global.grindless = {})
   var UG = G.uevGate || (G.uevGate = {})
   var VA_UV = 491520
-  var VA_UHV = 1966080
+  var VA_UEV = 7864320
   var CHART = 'grindless:pulsar_navigation_chart'
   var CASING = 'gtceu:uiv_machine_casing'
   var CWUT = 256
@@ -29,10 +29,10 @@
     var b = event.recipes.gtceu.assembly_line('grindless:uiv_machine_casing')
     inputs.forEach(function (s) { b.itemInputs(s) })
     b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152))
-    b.itemOutputs('2x ' + CASING).EUt(VA_UHV).duration(800)
+    b.itemOutputs('2x ' + CASING).EUt(VA_UEV).duration(800)
     b.stationResearch(function (r) { return r.researchStack(Item.of(CHART)).CWUt(CWUT).EUt(VA_UV) })
     UG.casing = { id: 'grindless:assembly_line/uiv_machine_casing', items: inputs, output: '2x ' + CASING, research: CHART, cwut: CWUT,
-      researchEUt: VA_UV, eut: VA_UHV, duration: 800 }
+      researchEUt: VA_UV, eut: VA_UEV, duration: 800 }
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
