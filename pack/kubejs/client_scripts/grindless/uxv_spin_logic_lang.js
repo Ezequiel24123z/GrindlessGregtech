@@ -1,4 +1,4 @@
-// priority: 1487
+// priority: 1489
 // Gregtech Grindless - names and tooltips of UXV's vdW stacking cell, racetrack fab and YIG LPE furnace (startup_scripts/grindless/uxv/spin_logic.js; package UXV-A5):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names

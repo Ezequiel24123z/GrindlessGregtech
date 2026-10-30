@@ -1,4 +1,4 @@
-// priority: -26241
+// priority: -26240
 // -----------------------------------------------------------------------------------------------
 // Recipes of UXV's vdW stacking cell, racetrack fab and YIG LPE furnace (machines and recipe types: startup_scripts/grindless/uxv/spin_logic.js;
 // docs/eras/uxv.md, machines 3-5, process lines 8, 12, 15 and 42; package UXV-A5), generated at every server load from

@@ -1,4 +1,4 @@
-// priority: 1475
+// priority: 1479
 // Gregtech Grindless - names and tooltips of the UXV spintronic rows (startup_scripts/grindless/uxv/spin_rows.js) and the EMI lines of the
 // new rows in the shared tables:
 //

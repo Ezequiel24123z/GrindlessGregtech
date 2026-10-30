@@ -1,3 +1,4 @@
+// priority: 5185
 // Gregtech Grindless - shared multiblock tooltip lines (tier parity, docs/research/tier-parity.md TP-D5).
 //
 // A controller tooltip is at most 4 lines: grindless.machine.<id>.tooltip.0 (gray, what it does), then feature lines from GTM's keys

@@ -1,4 +1,4 @@
-// priority: -10931
+// priority: -10925
 // -----------------------------------------------------------------------------------------------
 // UXV's logic machines (docs/eras/uxv.md, machines 3, 4 and 5, lines 8, 12, 15 and 42; package UXV-A5): the vdW stacking cell, the
 // racetrack fab and the YIG LPE furnace, their recipe types, and the package's own items. The recipes come from

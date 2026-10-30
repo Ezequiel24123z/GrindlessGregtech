@@ -1,3 +1,4 @@
+// priority: -10945
 // -----------------------------------------------------------------------------------------------
 // UXV Stellar Fractionation Hall, gtceu:stellar_fractionation_hall (package UXV-M2, docs/eras/uxv.md #### M2.): the distillation member of the
 // mega family. One machine runs GTM's gtceu:distillation_tower and gtceu:distillery recipes (no new recipe type, no recipe of its own), one
