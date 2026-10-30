@@ -257,10 +257,18 @@
    "gtceu:xray_pulse_profiler"
   ],
   "uxv": [
+   "gtceu:accretion_disk_skimmer",
+   "gtceu:bz_dynamo",
+   "gtceu:frc_former",
    "gtceu:mnt_collider",
    "gtceu:mtj_sputter_cluster",
    "gtceu:oxide_pld_chamber",
+   "gtceu:pasta_draw_bench",
+   "gtceu:pasta_extractor",
+   "gtceu:pasta_laminator",
+   "gtceu:pasta_phase_sorter",
    "gtceu:plasma_mass_filter",
+   "gtceu:polar_cap_tap",
    "gtceu:racetrack_fab",
    "gtceu:shequid_works",
    "gtceu:stellar_condensation_tower",

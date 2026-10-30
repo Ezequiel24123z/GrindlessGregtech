@@ -128,13 +128,14 @@ test('"only from": nothing else in the pack makes these ids', () => {
   }
 });
 
-test('the rule and the two pending routes that waited for these stacks are gone; the others stay', () => {
+test('the rule and the pending routes that waited for these stacks are gone; the others stay', () => {
   const obtain = fs.readFileSync(path.resolve(here, '..', 'tiers', 'obtain.json'), 'utf8');
   assert.ok(!obtain.includes('UXV (B3)'), 'the B3 rule is deleted');
   const cov = json('emi_coverage.json');
   const ids = (cov.pendingRoutes || []).map((e) => e.id);
-  for (const gone of ['grindless:warp_gate/hold_vela_pulsar', 'grindless:plasma_mass_filtering/disk_filter']) assert.ok(!ids.includes(gone), gone);
-  for (const kept of ['grindless:assembler/uxv_fusion_casing', 'grindless:assembly_line/uxv_fusion_reactor', 'grindless:assembly_line/uxv_parallel_hatch']) assert.ok(ids.includes(kept), kept);
+  // the Mk6 casing and controller waited for B3 and B4 together; the B3/B4 integration deleted them
+  for (const gone of ['grindless:warp_gate/hold_vela_pulsar', 'grindless:plasma_mass_filtering/disk_filter', 'grindless:assembler/uxv_fusion_casing', 'grindless:assembly_line/uxv_fusion_reactor']) assert.ok(!ids.includes(gone), gone);
+  for (const kept of ['grindless:assembly_line/uxv_parallel_hatch']) assert.ok(ids.includes(kept), kept);
 });
 
 test('structures: not boring, at least two functional kinds, controller in the front slice', () => {

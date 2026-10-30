@@ -460,7 +460,7 @@ Sizes grew where the draft had a box; the machines, types and recipes are unchan
 ### 19. Pasta laminator: `gtceu:pasta_laminator`, type `gtceu:pasta_lamination` (Vela pulsar orbit)
 
 **What it gains:** presses caged lasagna sheets into plate. Pasta is the stiffest material computed: shear modulus near 10³⁰ erg/cm³, breaking strain near 0.1 (Caplan 2018).
-**Recipes:** c1 caged `lasagna_phase` + `grindless:wf_rhea_billet` (frame) → 4 `lasagna_plate` (134,217,728 EU/t, 1,200 t); c2 `lasagna_plate` + 2 strand wire → `polar_cap_electrode` (33,554,432 EU/t, 400 t).
+**Recipes:** c1 caged `lasagna_phase` + `grindless:wf_rhea_billet` (frame) → 4 `lasagna_plate` (134,217,728 EU/t, 1,200 t); c2 `lasagna_plate` + 2 strand wire → `grindless:lasagna_electrode` (33,554,432 EU/t, 400 t). Not UIV's `polar_cap_electrode`, which RX J1856 makes cheaply and would make the tap a free-energy loop.
 **Structure (QR):** 9x11x9 portal press: four columns carry a crosshead with rams over a bed.
 - Blocks: a `grindless:neutron_star_site_casing` base and crosshead (appearance, ~50%); `gtceu:naquadah_alloy_frame` columns; `gtceu:robust_machine_casing` platens; `gtceu:tungstensteel_gearbox` rams; a `grindless:cryostat_casing` cage bay beside the bed.
 - Kinds: frame, machine.
@@ -470,7 +470,7 @@ Sizes grew where the draft had a box; the machines, types and recipes are unchan
 ### 20. Polar cap tap: `gtceu:polar_cap_tap`, type `gtceu:polar_cap_tapping`, generator (Vela pulsar orbit)
 
 **What it gains:** a share of the open-field-line potential (named fiction): Vela's polar-cap drop is near 10¹⁵ V and its spin-down power near 7 x 10³⁶ erg/s. The tap draws current through a lasagna electrode that sputters away (rule 8).
-**Recipes:** c1 1 `polar_cap_electrode` → 536,870,912 EU/t (4 A x V[UXV]) for 2,400 t *(tune)*, out through one UIV 16 A dynamo hatch.
+**Recipes:** c1 1 `lasagna_electrode` → 536,870,912 EU/t (4 A x V[UXV]) for 720 t = 386,547,056,640 EU, out through one UIV 16 A dynamo hatch. The chain costs ~1.95e11 EU per electrode (extraction, sorting, drawing, pressing, c2), so the tap returns ~1.99x (the BZ dynamo returns ~1.64x).
 **Structure (QR):** 11x13x11 electrode mast: a broad base, an insulated mast and a vented crown pointing to the polar cap.
 - Blocks: `grindless:neutron_star_site_casing` (appearance, ~50%); a `gtceu:superconducting_coil` wrap on the mast; `gtceu:fusion_glass` insulator rings; a `gtceu:computer_heat_vent` crown.
 - Kinds: coil, glass, machine.
@@ -852,7 +852,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 - **Spintronic intermediates only from their machines:** MTJ, MRAM and SAF stacks from the sputter cluster; oxide films from the PLD chamber; vdW stacks from the stacking cell; tracks from the racetrack fab; YIG from the LPE furnace; gyros from the SHeQUID works.
 - **`gtnn:spintronic_mainframe`:** only from the UEV photonic integration hall row; at `uxv`; GT--'s own recipe stays removed (F2).
 - **The Mk6's plasmas only from the Mk6.** The Mk6, its DEC rows, the BZ dynamo and the polar cap tap are written final and not in `power/generators.js`'s list.
-- **Place-only items** as in *Only from there*: stellar plasma and cuts, disk plasma, FRC cartridges, flux-loaded plasma and the elevator log from Cygnus X-1 orbit; pasta phases, strand wire, lasagna plates, the core sample and polar cap electrodes from Vela pulsar orbit; knot dust from Cassiopeia A.
+- **Place-only items** as in *Only from there*: stellar plasma and cuts, disk plasma, FRC cartridges, flux-loaded plasma and the elevator log from Cygnus X-1 orbit; pasta phases, strand wire, lasagna plates, the core sample and lasagna electrodes from Vela pulsar orbit; knot dust from Cassiopeia A.
 - **Three substages:**
   - `uxv` (Earth, Mercury and Cygnus X-1 orbit);
   - `uxv-vela` and `uxv-cas-a` (in parallel, after the Kerr sling);
@@ -1106,7 +1106,7 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
     - lines 44-49: `stno_stack_wafer`, `stno_array`, `gum_metal_billet` (A2 → A8), `gum_metal_blank`, `gum_metal_flexspline`, `uxv_strain_wave_gear`, `encoder_ring`, `multipole_encoder_ring` (QR), `tmr_encoder`, `ga2o3_wafer`, `ga2o3_power_die`, `mu_metal_foil`, `shielded_interposer`, `finemet_ribbon` (A7 → B4), `finemet_toroid` (B4 → A3), `finemet_core` (A3 → B4), `uxv_voltage_coil` (the KrF laser reuses `grindless:vuv_caf2_optic`; no new window id);
     - superheavy: `fm257_target`, `es254_target`, `cm248_target`, `element_121_recoil`, `element_122_recoil`, `superheavy_census_iii`, `spent_actinide_target` (every spent Fm, Es and Cm target: A1's cyclotron rows and A6's collider make it, A1's waste retrieval row takes it), `u238_ion_source`, `u238_beam_charge`, `island_nuclide`, `island_chart`;
     - parts: `tetrataenite_lamination`, `tetrataenite_rotor`, `strand_stator`, `strand_tape`, `alip_duct`, `w184_cvi_preform`, `terfenol_d_rod`, `ni_mn_ga_crystal`, `cnt_bumper_weave`, `cnt_whipple_shield`, `frc_cartridge`, `gamma_laser_module`, `positron_stack`, `ti44_core`, `si28_ash`;
-    - far products: `raw_pasta`, `spaghetti_phase`, `lasagna_phase`, `gnocchi_fragment`, `anti_phase_residue`, `cage_part`, `lasagna_plate`, `pasta_core_sample`, `polar_cap_electrode`, `ejecta_knot_dust`, the four condensates;
+    - far products: `raw_pasta`, `spaghetti_phase`, `lasagna_phase`, `gnocchi_fragment`, `anti_phase_residue`, `cage_part`, `lasagna_plate`, `pasta_core_sample`, `lasagna_electrode`, `ejecta_knot_dust`, the four condensates;
     - data and charts: `vela_glitch_timing`, `vela_glitch_record`, `cygnus_vlbi_record`, `elevator_log`, `ti44_map`, `arm_chart`, `bulge_chart`; the link `grindless:pasta_strand_repeater`;
   - not here: `grindless:uxv_smes_cell` (W's `wireless_energy.json` row registers it, `lv/wireless_energy.js:149`), and each machine's own-only intermediates (its package).
 - **Allowed (extra):**

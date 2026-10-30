@@ -1,3 +1,4 @@
+// priority: 1651
 // Gregtech Grindless - names and tooltips of UXV's accretion disk skimmer, FRC former and BZ dynamo, and the strand coil
 // (startup_scripts/grindless/uxv/cygnus_disk.js; package UXV-B3):
 //
