@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:kugelblitz_forge"],
+  "text": ["emi.grindless.info.kugelblitz_forge.0", "emi.grindless.info.kugelblitz_forge.1"]
+}
