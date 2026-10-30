@@ -191,7 +191,11 @@
         { "_why": "UIV-A7 (uiv.md lines 10, 16 and 44): the pulsar-timed repeater, EO interface, telecom memory and EDFA around a disciplined clock core", "name": "pulsar_timed_repeater", "circuit": 6, "eut": 1966080, "duration": 1200,
           "itemsIn": [{ "id": "grindless:eo_transceiver", "count": 1 }, { "id": "grindless:telecom_memory", "count": 1 }, { "id": "grindless:pumped_edfa", "count": 1 },
                       { "id": "grindless:disciplined_clock_core", "count": 1 }],
-          "itemsOut": [{ "id": "grindless:pulsar_timed_repeater", "count": 1 }] }
+          "itemsOut": [{ "id": "grindless:pulsar_timed_repeater", "count": 1 }] },
+        { "_why": "UXV-A5 (uxv.md line 17): the spintronic mainframe, the only maker of gtnn:spintronic_mainframe (GT--'s own recipe is cut in uxv/cuts.js): mesoscopic logic die, racetrack chip, MRAM wafer, magnonic bus, MTJ die and a shielded interposer", "name": "spintronic_mainframe", "circuit": 7, "eut": 1966080, "duration": 3000,
+          "itemsIn": [{ "id": "grindless:meso_logic_die", "count": 1 }, { "id": "grindless:racetrack_chip", "count": 1 }, { "id": "grindless:mram_wafer", "count": 1 },
+                      { "id": "grindless:magnonic_bus", "count": 1 }, { "id": "grindless:mtj_die", "count": 1 }, { "id": "grindless:shielded_interposer", "count": 1 }],
+          "itemsOut": [{ "id": "gtnn:spintronic_mainframe", "count": 1 }] }
       ]
     }
   }
