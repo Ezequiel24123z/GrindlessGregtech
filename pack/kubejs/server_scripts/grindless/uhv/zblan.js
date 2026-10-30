@@ -83,7 +83,7 @@
   Z.skipped = []
   Z.clashes = []
   Z.crafting = { tower: 'grindless:assembly_line/zblan_draw_tower' }
-  Z.craftingParts = ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_motor', 'grindless:mu_metal_shield', 'grindless:fused_silica_tube', 'grindless:fibre_bragg_grating', 'grindless:ytterbium_fibre']
+  Z.craftingParts = ['gtceu:uhv_machine_hull', 'gtceu:uhv_electric_motor', 'gtceu:uhv_conveyor_module', 'gtceu:uhv_emitter', 'grindless:mu_metal_shield', 'grindless:fused_silica_tube', 'grindless:fibre_bragg_grating', 'grindless:ytterbium_fibre']
 
   function keysOf(r) {
     var keys = {}
@@ -153,7 +153,9 @@
     }
     var b = event.recipes.gtceu.assembly_line('grindless:zblan_draw_tower')
     b.itemInputs('gtceu:uhv_machine_hull')
-    b.itemInputs('2x gtceu:uv_electric_motor')
+    b.itemInputs('3x gtceu:uhv_electric_motor')
+    b.itemInputs('3x gtceu:uhv_conveyor_module')
+    b.itemInputs('3x gtceu:uhv_emitter')
     b.itemInputs('4x #gtceu:circuits/uhv')
     b.itemInputs('4x grindless:fused_silica_tube')
     b.itemInputs('2x grindless:fibre_bragg_grating')

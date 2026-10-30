@@ -13,14 +13,13 @@
   const QF = G.megaQuantumFabricator || (G.megaQuantumFabricator = {})
 
   const UHV_EUT = 2097152
-  const UV_EUT = 524288
   const CONTROLLER_INPUTS = [
-    '16x gtceu:uv_assembler', '1x gtceu:assembly_hall', '4x gtceu:uhv_machine_hull', '4x gtceu:uv_robot_arm',
-    '4x gtceu:uv_field_generator', '4x #gtceu:circuits/uhv'
+    '16x gtceu:uv_assembler', '1x gtceu:assembly_hall', '4x gtceu:uhv_machine_hull', '4x gtceu:uhv_robot_arm',
+    '4x gtceu:uhv_field_generator', '4x #gtceu:circuits/uhv', '4x gtceu:uhv_conveyor_module'
   ]
   const DOMAIN_INPUTS = ['4x grindless:field_ring_casing', '2x grindless:srf_cryomodule', '2x grindless:uv_electromagnet']
   const RESEARCH = 'grindless:fused_silica_tube'
-  const RING_INPUTS = ['1x gtceu:uv_field_generator', '1x gtceu:uhv_machine_casing', '1x gtceu:neutronium_plate', '1x grindless:srf_cavity']
+  const RING_INPUTS = ['1x gtceu:uhv_field_generator', '1x gtceu:uhv_machine_casing', '1x gtceu:neutronium_plate', '1x grindless:srf_cavity']
   const RING_COUNT = 2
 
   // read by the bench test
@@ -34,15 +33,15 @@
 
   ServerEvents.recipes(function (event) {
     try {
-      var ids = ['gtceu:quantum_fabricator', 'gtceu:assembly_hall', 'gtceu:uv_assembler', 'gtceu:uhv_machine_hull', 'gtceu:uv_robot_arm',
-        'gtceu:uv_field_generator', 'gtceu:uhv_machine_casing', 'gtceu:neutronium_plate', 'grindless:field_ring_casing', 'grindless:srf_cryomodule', 'grindless:uv_electromagnet', 'grindless:srf_cavity', RESEARCH]
+      var ids = ['gtceu:quantum_fabricator', 'gtceu:assembly_hall', 'gtceu:uv_assembler', 'gtceu:uhv_machine_hull', 'gtceu:uhv_robot_arm',
+        'gtceu:uhv_field_generator', 'gtceu:uhv_conveyor_module', 'gtceu:uhv_machine_casing', 'gtceu:neutronium_plate', 'grindless:field_ring_casing', 'grindless:srf_cryomodule', 'grindless:uv_electromagnet', 'grindless:srf_cavity', RESEARCH]
       var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error('[grindless/uhv] quantum fabricator recipes skipped, unknown item(s): ' + missing.join(', '))
         return
       }
       event.recipes.gtceu.assembly_line('grindless:quantum_fabricator')
-        .itemInputs(CONTROLLER_INPUTS[0], CONTROLLER_INPUTS[1], CONTROLLER_INPUTS[2], CONTROLLER_INPUTS[3], CONTROLLER_INPUTS[4], CONTROLLER_INPUTS[5])
+        .itemInputs(CONTROLLER_INPUTS[0], CONTROLLER_INPUTS[1], CONTROLLER_INPUTS[2], CONTROLLER_INPUTS[3], CONTROLLER_INPUTS[4], CONTROLLER_INPUTS[5], CONTROLLER_INPUTS[6])
         .itemInputs(DOMAIN_INPUTS[0], DOMAIN_INPUTS[1], DOMAIN_INPUTS[2])
         .inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
         .itemOutputs('gtceu:quantum_fabricator')
@@ -53,7 +52,7 @@
         .itemInputs(RING_INPUTS[0], RING_INPUTS[1], RING_INPUTS[2], RING_INPUTS[3])
         .inputFluids(Fluid.of('gtceu:lubricant', 250))
         .itemOutputs(RING_COUNT + 'x grindless:field_ring_casing')
-        .EUt(UV_EUT)
+        .EUt(UHV_EUT)
         .duration(200)
       console.info('[grindless/uhv] quantum fabricator: controller and field ring casing assembler recipes added')
     } catch (e) {

@@ -240,7 +240,7 @@
         {
           "name": "bsl4_casing",
           "circuit": 0,
-          "eut": 7680,
+          "eut": 1966080,
           "duration": 100,
           "itemsIn": [
             { "id": "gtceu:hsss_plate", "count": 6 },
@@ -257,7 +257,7 @@
         {
           "name": "hangar_casing",
           "circuit": 0,
-          "eut": 7680,
+          "eut": 1966080,
           "duration": 100,
           "itemsIn": [
             { "id": "gtceu:tungsten_steel_plate", "count": 4 },
