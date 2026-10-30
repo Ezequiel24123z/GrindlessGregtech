@@ -99,10 +99,12 @@ test('only from: each produced id has its one producer here or in its older tabl
 
 test('older rows: tables carry them with a UXV-A8 reason and the next free circuit', () => {
   const mw = tables('magnet_works');
-  assert.deepEqual(plain(mw.slice(-2).map((r) => [r.name, r.circuit, r.charge])), [['tetrataenite_rotor', 8, false], ['multipole_encoder_ring', 10, false]]);
+  // UXV-B3 appended strand_coil (c9) after A8's two rows, so A8's rows are now the two before the last one
+  const a8 = mw.slice(-3, -1);
+  assert.deepEqual(plain(a8.map((r) => [r.name, r.circuit, r.charge])), [['tetrataenite_rotor', 8, false], ['multipole_encoder_ring', 10, false]]);
   assert.deepEqual(plain(tables('hts_magnet_works').slice(-1).map((r) => [r.name, r.circuit, r.charge])), [['strand_stator', 6, true]]);
   assert.deepEqual(plain(tables('coated_conductor_line').slice(-1).map((r) => [r.name, r.circuit])), [['strand_tape', 4]]);
-  for (const r of [...mw.slice(-2), ...tables('hts_magnet_works').slice(-1), ...tables('coated_conductor_line').slice(-1)]) assert.match(r._why, /^UXV-A8/, r.name);
+  for (const r of [...a8, ...tables('hts_magnet_works').slice(-1), ...tables('coated_conductor_line').slice(-1)]) assert.match(r._why, /^UXV-A8/, r.name);
   const rotor = mw.find((r) => r.name === 'tetrataenite_rotor');
   assert.deepEqual(plain(rotor.itemsIn), [{ id: 'grindless:tetrataenite_lamination', count: 4 }, { id: 'gtceu:tungsten_steel_rod', count: 1 }]);
   const ring = mw.find((r) => r.name === 'multipole_encoder_ring');

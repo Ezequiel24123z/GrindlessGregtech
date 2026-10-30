@@ -79,7 +79,10 @@
     'gtceu:multinucleon_transfer': 'loop_mnt_collider',
     'gtceu:star_lifting': 'loop_stellar_elevator',
     'gtceu:plasma_mass_filtering': 'loop_plasma_mass_filter',
-    'gtceu:stellar_condensation': 'loop_stellar_condensation_tower'
+    'gtceu:stellar_condensation': 'loop_stellar_condensation_tower',
+    'gtceu:disk_skimming': 'loop_accretion_disk_skimmer',
+    'gtceu:frc_forming': 'loop_frc_former',
+    'gtceu:blandford_znajek': 'loop_bz_dynamo'
   }
 
   StartupEvents.registry('sound_event', function (event) {
