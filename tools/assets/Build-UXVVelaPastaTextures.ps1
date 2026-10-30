@@ -164,6 +164,17 @@ for ($m = 0; $m -lt $Dirs.Count; $m++) {
     Out-Tex (Join-Frames $emi) "$($Dirs[$m])/overlay_front_active_emissive.png" $FrameTime
 }
 
+# item/lasagna_electrode.png: a gold plate with two wire strands wound across it
+$el = New-Canvas 16 16
+$plate = Hex 'D0B870'; $strand = Hex '5878C8'
+for ($y = 2; $y -le 13; $y++) { for ($x = 3; $x -le 12; $x++) { Set-Px $el $x $y (Shade $plate (1.2 - 0.035 * ($x + $y))) } }
+foreach ($y in 5, 6, 9, 10) { for ($x = 3; $x -le 12; $x++) { Set-Px $el $x $y (Shade $strand (1.15 - 0.03 * $x)) } }
+foreach ($x in 7, 8) { for ($y = 0; $y -le 1; $y++) { Set-Px $el $x $y (Hex 'F8ECB0') } }
+Add-Outline $el
+$ItemOut = 'item/lasagna_electrode.png'
+Save-Png $el (Join-Path $OutRoot $ItemOut)
+$written.Add($ItemOut)
+
 # self-check: alpha 0 or 255, nothing pure black, ring empty, emissive a subset of the colour layer, no two frames alike
 $problems = New-Object System.Collections.Generic.List[string]
 function Test-Pixels {

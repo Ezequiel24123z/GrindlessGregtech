@@ -1,8 +1,8 @@
 // priority: -9791
 // TEST ONLY, UXV-B4 (gtceu:pasta_extractor, pasta_phase_sorter, pasta_draw_bench, pasta_laminator, polar_cap_tap). Command: kubejs custom_command gg_test_uxv_vela_pasta
 // Band ONLY: X 36928-36991, Z 0-63, Y 98-115, built in grindless:vela_pulsar_orbit (the dimension their recipes are locked to).
-//   T1 (named uncertainty: the tap's c1 row (one polar cap electrode -> 536,870,912 EU/t, a generator written final through one UIV 16 A dynamo
-//   hatch) starts, and that power crosses a run of gtceu:pasta_strand_single_wire into a UXV energy hatch; and every machine forms with UXV hatches):
+//   T1 (named uncertainty: the tap's c1 row (one lasagna electrode -> 536,870,912 EU/t for 720 t, a generator written final through one UIV 16 A dynamo
+//   hatch) starts, and that power crosses a run of gtceu:pasta_strand_quadruple_cable (16 A = 4 A x V[UXV]) into a UXV energy hatch; and every machine forms with UXV hatches):
 //     lookup     every row, line 48, the hull, the hatches and the five controllers' assembly lines are in the recipe manager
 //     formed     the five machines form (UXV hatches; the tap with a UIV 16 A dynamo hatch)
 //     tap        c1 starts at 536,870,912 EU/t (generator)
@@ -21,12 +21,12 @@
   var EUT = 536870912
   var ENERGY = 'gtceu:uxv_energy_input_hatch'
   var DYNAMO = 'gtceu:uiv_energy_output_hatch_16a'
-  var WIRE = 'gtceu:pasta_strand_single_cable'
+  var WIRE = 'gtceu:pasta_strand_quadruple_cable'
   var CIRCUIT = 'gtceu:programmed_circuit'
 
   var IDS = [
     'pasta_extraction/pasta_extraction', 'pasta_sorting/phase_sorting', 'pasta_sorting/core_sample', 'pasta_drawing/strand_drawing',
-    'pasta_lamination/plate_pressing', 'pasta_lamination/polar_cap_electrode', 'polar_cap_tapping/polar_cap_tap', 'neutronium_caging/cage_part_pressing',
+    'pasta_lamination/plate_pressing', 'pasta_lamination/lasagna_electrode', 'polar_cap_tapping/polar_cap_tap', 'neutronium_caging/cage_part_pressing',
     'telemetry_decoding/vela_glitch_timing', 'gravitational_wave_astronomy/luv/vela_glitch_record', 'assembler/finemet_toroid', 'assembler/uxv_voltage_coil',
     'assembler/pasta_strand_repeater', 'assembly_line/uxv_machine_hull', 'assembly_line/uxv_energy_input_hatch', 'assembly_line/uxv_energy_output_hatch',
     'assembly_line/uxv_energy_input_hatch_16a', 'assembly_line/uxv_energy_output_hatch_16a', 'assembly_line/pasta_extractor',
@@ -191,7 +191,7 @@
 
   function startRun(u) {
     // a generator needs room to put its power: the dynamo hatch starts empty
-    setBus(u.bus, [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:polar_cap_electrode', 1]])
+    setBus(u.bus, [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:lasagna_electrode', 1]])
     try { wireUp(u) } catch (e) { check('wire_build', false, errText(e)) }
     u.last = u.m.getRecipeLogic().getLastRecipe()
     u.started = S.tick

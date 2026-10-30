@@ -80,15 +80,15 @@
           "fluidsOut": []
         },
         {
-          "_why": "machine 19 c2: a plate carries two strands of pasta wire as the polar cap electrode",
-          "name": "polar_cap_electrode", "circuit": 2, "eut": 33554432, "duration": 400, "site": true,
+          "_why": "machine 19 c2: a plate carries two strands of pasta wire as the lasagna electrode (UXV-B4's own fuel; UIV's polar_cap_electrode is a different item and is not spent by the tap)",
+          "name": "lasagna_electrode", "circuit": 2, "eut": 33554432, "duration": 400, "site": true,
           "itemsIn": [
             { "id": "grindless:lasagna_plate", "count": 1 },
             { "id": "gtceu:pasta_strand_single_wire", "count": 2 }
           ],
           "kept": [],
           "fluidsIn": [],
-          "itemsOut": [{ "id": "grindless:polar_cap_electrode", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:lasagna_electrode", "count": 1 }],
           "fluidsOut": []
         }
       ]
@@ -98,9 +98,9 @@
       "generator": true,
       "recipes": [
         {
-          "_why": "machine 20 c1: one electrode taps the pulsar's polar cap for 2400 t at 536,870,912 EU/t (1,288,490,188,800 EU) and is spent",
-          "name": "polar_cap_tap", "circuit": 1, "eut": 536870912, "duration": 2400, "site": true,
-          "itemsIn": [{ "id": "grindless:polar_cap_electrode", "count": 1 }],
+          "_why": "machine 20 c1: one lasagna electrode taps the pulsar's polar cap for 720 t at 536,870,912 EU/t (386,547,056,640 EU) and is spent; the chain that makes it costs about 1.95e11 EU, so the tap returns about 1.99x (power generous, never free)",
+          "name": "polar_cap_tap", "circuit": 1, "eut": 536870912, "duration": 720, "site": true,
+          "itemsIn": [{ "id": "grindless:lasagna_electrode", "count": 1 }],
           "kept": [],
           "fluidsIn": [],
           "itemsOut": [],

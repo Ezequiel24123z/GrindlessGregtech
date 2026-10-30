@@ -8,7 +8,7 @@
 //   gtceu:pasta_sorting        phase sorter, circuit 1 raw pasta -> spaghetti, lasagna, gnocchi, anti-phase residue; 2 residue -> core sample.
 //   gtceu:pasta_drawing        draw bench, circuit 1 spaghetti -> eight strands of pasta wire.
 //   gtceu:pasta_lamination     laminator, circuit 1 lasagna -> four plates; 2 plate + wire -> polar cap electrode.
-//   gtceu:polar_cap_tapping    polar cap tap (a generator), circuit 1 electrode -> 536,870,912 EU/t for 2400 t.
+//   gtceu:polar_cap_tapping    polar cap tap (a generator), circuit 1 lasagna electrode -> 536,870,912 EU/t for 720 t.
 //   gtceu:neutronium_caging    UIV's type, one circuit-less companion row: pellet + mh winding -> cage part (circuits 1 and 2 are taken).
 //   assembler                  line 48: the wound finemet toroid, the voltage coil, the pasta strand repeater (machine form).
 //   assembly_line              the five controllers, grindless:assembly_line/<machine>.
