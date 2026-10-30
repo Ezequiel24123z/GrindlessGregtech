@@ -146,6 +146,8 @@ All uhv rows left the baseline. The 33 UHV controllers (antimatter x2, betavolta
 
 Process honesty: `sic_epi` returns 1800 mB of the 2000 mB hydrogen carrier; `sic_anneal` (sic_device_wafer) consumes a graphite cap; `californium_source` (californium_252_source) consumes 2 platinum foil and a 500 mB helium fill.
 
+TP-R-uhv (done): the 74 T-VOLT/T-COMP/T-COUNT findings left the baseline; controllers take UHV hull + 3 UHV component families (3 of each) chosen per machine, parts and casings run at VA[UHV]. Nothing remains in the baseline for era uhv.
+
 ### uev
 
 Fixed, QR-R8: ca48_oven_charge (ca48_crucible_load mixer), plutonium_244_target (pu244_plating_ampoule reactor), ceramic_shell_mould (ceramic_slurry mixer, green_ceramic_shell mixer, ceramic_shell_firing EBF), cnt_twisted_yarn and cnt_coiled_muscle (cnt_ribbon_draw lathe, cnt_anneal EBF, cnt_sizing reactor), superhydride_scoop_coil (scoop_winding mixer, scoop_impregnation reactor), ca48_beam (ca48_ionisation reactor), polycarbonate_foil (polycarbonate_film_cast reactor) and sealed_capsule (capsule_liner reactor) left the baseline. Still baselined, with no honest own-line chain: target_wheel and target_wheel_blank (titanium plate and berkelium oxide only).
