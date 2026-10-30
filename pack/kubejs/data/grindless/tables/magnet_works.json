@@ -98,6 +98,14 @@
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:multipole_encoder_ring", "count": 1 } ],
       "eut": 1966080, "duration": 300
+    },
+    {
+      "name": "strand_coil", "circuit": 9, "charge": true,
+      "_why": "UXV-B3 (docs/eras/uxv.md, line 30): an FRC cartridge wound into four turns of strand tape on a tungsten steel former and cold-tested in the helium charge: the strand coil that holds the field generator's plasmoid.",
+      "itemsIn": [ { "id": "grindless:strand_tape", "count": 4 }, { "id": "grindless:frc_cartridge", "count": 1 }, { "id": "gtceu:tungsten_steel_rod", "count": 1 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:strand_coil", "count": 1 } ],
+      "eut": 7864320, "duration": 400
     }
   ]
 }
