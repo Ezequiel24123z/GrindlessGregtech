@@ -12,14 +12,14 @@ const kube = path.join(root, 'pack', 'kubejs');
 const tables = path.join(kube, 'data', 'grindless', 'tables');
 const T = JSON.parse(fs.readFileSync(path.join(tables, 'crystals.json'), 'utf8'));
 const CLOCK = T.types.nuclear_clock.recipes;
-const GROW = T.types.crystal_growth.recipes.filter((r) => !(r._why || '').startsWith('UXV-')); // UXV rows are pinned in uxv-spin_rows.test.mjs (A3) and uxv-spin_logic.test.mjs (c18)
+const GROW = T.types.crystal_growth.recipes.filter((r) => !/^(UXV|OpV)-/.test(r._why || '')); // UXV rows are pinned in uxv-spin_rows.test.mjs (A3) and uxv-spin_logic.test.mjs (c18); OpV-D1's c23 ceb6_boule in opv-beam_hardware.test.mjs
 const CUT = T.types.cutter.recipes;
 const ASM = T.types.assembler.recipes;
 const PGM = T.types.pgm_refining.recipes;
 const startup = fs.readFileSync(path.join(kube, 'startup_scripts', 'grindless', 'uhv', 'crystals.js'), 'utf8');
 const server = fs.readFileSync(path.join(kube, 'server_scripts', 'grindless', 'uhv', 'crystals.js'), 'utf8');
-// UEV-A8's TGG and KTP rows keep their lang keys in the UEV file; UIV-A6's Eu-151 and Er:YSO rows in the UIV file
-const lang = ['uhv_crystals_lang.js', 'uev_earth_orbit_lang.js', 'uiv_memories_cryostat_lang.js', 'uiv_mainframe_lang.js', 'uxv_spin_rows_lang.js'].map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
+// UEV-A8's TGG and KTP rows keep their lang keys in the UEV file; UIV-A6's Eu-151 and Er:YSO rows in the UIV file; OpV-D1's ceb6_boule in its own
+const lang = ['uhv_crystals_lang.js', 'uev_earth_orbit_lang.js', 'uiv_memories_cryostat_lang.js', 'uiv_mainframe_lang.js', 'uxv_spin_rows_lang.js', 'opv_beam_hardware_lang.js'].map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
 const inputs = (r) => ids(r.itemsIn).concat(ids(r.kept), ids(r.fluidsIn), ids(r.charge));

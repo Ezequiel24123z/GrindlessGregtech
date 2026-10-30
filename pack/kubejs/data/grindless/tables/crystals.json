@@ -100,7 +100,11 @@
         { "_why": "UXV-A5 integration (uxv.md line 15): the Fe3GeTe2 dust broken off by the vdW stacking cell recrystallised by vapour transport, as c17 does for WTe2, so the leftover is not lost.", "name": "fgt_recrystallise", "circuit": 18, "eut": 491520, "duration": 800,
           "itemsIn": [{ "id": "gtceu:fe3gete2_dust", "count": 4 }, { "id": "gtceu:iodine_dust", "count": 1, "chance": 1000 }],
           "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:fgt_raw_crystal", "count": 1 }, { "id": "gtceu:iodine_dust", "count": 1, "chance": 9000 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:fgt_raw_crystal", "count": 1 }, { "id": "gtceu:iodine_dust", "count": 1, "chance": 9000 }], "fluidsOut": [] },
+        { "_why": "OpV-D1 (opv.md line 23; c23): CeB6 grown by crucible-free float zone under argon (the charge stays); the lathe's kerf comes back here as powder.", "name": "ceb6_boule", "circuit": 23, "eut": 491520, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:ceb6_powder", "count": 7 }],
+          "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:ceb6_boule", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "cutter": {
