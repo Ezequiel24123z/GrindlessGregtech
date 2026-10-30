@@ -332,9 +332,8 @@
         .pattern(function (def) { return Pat.build(def, TETHER_SPEC) })
         ['tooltips(net.minecraft.network.chat.Component[])']([
           Text.translate('grindless.machine.flux_tube_tether.tooltip.0'),
-          Text.translate('grindless.machine.flux_tube_tether.tooltip.1'),
-          Text.translate('grindless.machine.flux_tube_tether.tooltip.2'),
-          Text.translate('grindless.machine.flux_tube_tether.tooltip.3')
+          Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.electrodynamic_tether')),
+          Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.io_orbit'))
         ])
         .workableCasingModel('grindless:block/luv/station_truss_casing', 'grindless:block/multiblock/flux_tube_tether')
     }

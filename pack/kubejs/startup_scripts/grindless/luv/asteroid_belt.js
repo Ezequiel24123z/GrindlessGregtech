@@ -364,8 +364,8 @@
       .pattern(function (def) { return Pat.build(def, drillSpec) })
       ['tooltips(net.minecraft.network.chat.Component[])']([
         Text.translate('grindless.machine.harpoon_anchor_drill.tooltip.0'),
-        Text.translate('grindless.machine.harpoon_anchor_drill.tooltip.1'),
-        Text.translate('grindless.machine.harpoon_anchor_drill.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.vein_drilling')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.belt'))
       ])
       .workableCasingModel(REGOLITH_TEXTURE, 'grindless:block/multiblock/harpoon_anchor_drill')
 
@@ -390,9 +390,8 @@
       .pattern(function (def) { return Pat.build(def, processorSpec) })
       ['tooltips(net.minecraft.network.chat.Component[])']([
         Text.translate('grindless.machine.asteroid_processor.tooltip.0'),
-        Text.translate('grindless.machine.asteroid_processor.tooltip.1'),
-        Text.translate('grindless.machine.asteroid_processor.tooltip.2'),
-        Text.translate('grindless.machine.parallel_hatch.tooltip')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.asteroid_processing')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(STEEL_TEXTURE, 'grindless:block/multiblock/asteroid_processor')
 
@@ -433,8 +432,8 @@
       .pattern(function (def) { return Pat.build(def, minerSpec) })
       ['tooltips(net.minecraft.network.chat.Component[])']([
         Text.translate('grindless.machine.optical_miner.tooltip.0'),
-        Text.translate('grindless.machine.optical_miner.tooltip.1'),
-        Text.translate('grindless.machine.optical_miner.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.optical_mining')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.belt'))
       ])
       .workableCasingModel(REGOLITH_TEXTURE, 'grindless:block/multiblock/optical_miner')
   })

@@ -103,9 +103,8 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.atmosphere_processor.tooltip.0'),
-        Text.translate('grindless.machine.atmosphere_processor.tooltip.1'),
-        Text.translate('grindless.machine.atmosphere_processor.tooltip.2'),
-        Text.translate('grindless.machine.atmosphere_processor.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.atmosphere_processing')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.mars'))
       ])
       .workableCasingModel(STABLE_TEXTURE, 'grindless:block/multiblock/atmosphere_processor')
   })

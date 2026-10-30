@@ -80,8 +80,7 @@
       .allowExtendedFacing(false)
       ['tooltips(net.minecraft.network.chat.Component[])']([
         Text.translate('grindless.machine.orbital_solar_station.tooltip.0'),
-        Text.translate('grindless.machine.orbital_solar_station.tooltip.1'),
-        Text.translate('grindless.machine.orbital_solar_station.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.orbital_solar'))
       ])
       .workableCasingModel('grindless:block/luv/station_truss_casing', 'grindless:block/multiblock/orbital_solar_station')
   })

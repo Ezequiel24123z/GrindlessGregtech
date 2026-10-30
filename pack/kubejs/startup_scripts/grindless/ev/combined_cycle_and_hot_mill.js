@@ -230,9 +230,7 @@
       .pattern(function (def) { return Pat.build(def, PLANT_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.combined_cycle_plant.tooltip.0'),
-        Text.translate('grindless.machine.combined_cycle_plant.tooltip.1'),
-        Text.translate('grindless.machine.combined_cycle_plant.tooltip.2'),
-        Text.translate('grindless.machine.combined_cycle_plant.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.combined_cycle'))
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/combined_cycle_plant')
 
@@ -246,9 +244,7 @@
       .pattern(function (def) { return Pat.build(def, MILL_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.hot_strip_mill.tooltip.0'),
-        Text.translate('grindless.machine.hot_strip_mill.tooltip.1'),
-        Text.translate('grindless.machine.hot_strip_mill.tooltip.2'),
-        Text.translate('grindless.machine.hot_strip_mill.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.hot_rolling'))
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/hot_strip_mill')
   })
