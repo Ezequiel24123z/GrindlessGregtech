@@ -114,7 +114,7 @@
     "assembler": {
       "recipes": [
         {
-          "name": "neutron_star_site_casing", "circuit": 0, "eut": 1966080, "duration": 600,
+          "name": "neutron_star_site_casing", "circuit": 0, "eut": 31457280, "duration": 600,
           "_why": "UIV-B2 (integrator, at merge) line 43, last step: the rad-hard controller sealed in osmiridium with neutron reflectors makes the field-hardened casing of the four RX J1856 structures that use it (128 per site).",
           "itemsIn": [ { "id": "grindless:rad_hard_controller", "count": 1 }, { "id": "gtceu:osmiridium_plate", "count": 6 }, { "id": "gtceu:neutron_reflector", "count": 2 } ],
           "fluidsIn": [ { "id": "gtceu:polybenzimidazole", "amount": 288 } ],
