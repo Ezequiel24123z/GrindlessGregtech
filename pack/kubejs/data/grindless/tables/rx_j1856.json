@@ -69,6 +69,13 @@
           "itemsIn": [ { "id": "grindless:u238_flash_target", "count": 1 } ],
           "fluidsIn": [ { "id": "gtceu:drip_neutrons", "amount": 4000 } ],
           "itemsOut": [ { "id": "grindless:flashed_target", "count": 1 } ]
+        },
+        {
+          "name": "gnocchi_decompression", "circuit": 3, "eut": 31457280, "duration": 1600, "site": true,
+          "_why": "UXV-B4 line 33: a gnocchi fragment from Vela's pasta swells in the neutron flood into r-process ash; the fission fragments go to the decay heat vault.",
+          "itemsIn": [ { "id": "grindless:gnocchi_fragment", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:drip_neutrons", "amount": 4000 } ],
+          "itemsOut": [ { "id": "grindless:r_process_ash", "count": 2 }, { "id": "grindless:fission_fragments", "count": 1 } ]
         }
       ]
     },

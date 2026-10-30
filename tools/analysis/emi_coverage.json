@@ -82,17 +82,8 @@
   "exceptions": [
   ],
   "pendingRoutes": [
-    { "id": "grindless:assembler/uxv_wireless_energy_hatch", "reason": "UXV-W landed before Wave A and UXV-A6 made grindless:uxv_sensor visible: the hatch's other inputs (gtceu:uxv_energy_input_hatch, grindless:pasta_strand_repeater) are held until UXV-B4 writes their producers; B4 deletes this entry with its hold rule" },
-    { "id": "grindless:assembler/uxv_wireless_energy_cover", "reason": "UXV-W landed before Wave A and UXV-A6 made grindless:uxv_sensor visible: the cover's other inputs (grindless:lasagna_plate, grindless:pasta_strand_repeater) are held until UXV-B4 writes their producers; B4 deletes this entry with its hold rule" },
     { "id": "grindless:assembly_line/uxv_parallel_hatch", "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" },
-    { "id": "grindless:magnet_winding/strand_stator", "reason": "UXV-A8 landed before B4: gtceu:pasta_strand_single_wire is held until UXV-B4 writes its producer, and the stator with it; B4 deletes this entry with its hold rule (B3 and B4 merge in one batch)" },
-    { "id": "grindless:nitride_magnet_synthesis/uxv_smes_cell", "reason": "UXV-W landed before A8 and B4: grindless:strand_tape (A8) and the cell are held until UXV-B4 writes the pasta strand; B4 deletes this entry with its hold rule (B3 and B4 merge in one batch)" },
     { "id": "grindless:assembler/uxv_fusion_casing", "reason": "A7's Mk6 casing came before B3: grindless:uxv_field_generator is held until UXV-B3 writes it, and the casing with it; B4 deletes this entry with its hold rule (B3 and B4 merge in one batch)" },
-    { "id": "grindless:assembly_line/uxv_electric_motor", "reason": "UXV-A8 landed before B4: grindless:strand_stator is held until UXV-B4 writes the pasta strand; B4 deletes this entry with its hold rule (B3 and B4 merge in one batch)" },
-    { "id": "grindless:assembly_line/uxv_electric_pump", "reason": "UXV-A8 landed before B4: grindless:alip_duct and grindless:strand_tape are held until UXV-B4 writes the pasta strand and the hull; B4 deletes this entry with its hold rule (B3 and B4 merge in one batch)" },
-    { "id": "grindless:assembly_line/uxv_electric_piston", "reason": "UXV-A8 landed before B4: grindless:lasagna_plate and grindless:strand_tape are held until UXV-B4 writes their producers; B4 deletes this entry with its hold rule (B3 and B4 merge in one batch)" },
-    { "id": "grindless:assembly_line/uxv_conveyor_module", "reason": "UXV-A8 landed before B4: grindless:strand_tape is held until UXV-B4 writes the pasta strand; B4 deletes this entry with its hold rule (B3 and B4 merge in one batch)" },
-    { "id": "grindless:assembly_line/uxv_robot_arm", "reason": "UXV-A8 landed before B4: grindless:uxv_electric_piston is held until UXV-B4 writes the pasta strand; B4 deletes this entry with its hold rule (B3 and B4 merge in one batch)" },
     { "id": "grindless:assembly_line/uxv_fusion_reactor", "reason": "A7's Mk6 controller came before B3 and B4: its hull (B4), field generator (B3), casing, motor and pump are held until UXV-B3 and B4 write their producers, and the Mk6's stellar_hydrogen_cut route with them; B4 deletes this entry with its hold rule (B3 and B4 merge in one batch)" }
       ],
       "pendingUses": [

@@ -82,7 +82,12 @@
     'gtceu:stellar_condensation': 'loop_stellar_condensation_tower',
     'gtceu:disk_skimming': 'loop_accretion_disk_skimmer',
     'gtceu:frc_forming': 'loop_frc_former',
-    'gtceu:blandford_znajek': 'loop_bz_dynamo'
+    'gtceu:blandford_znajek': 'loop_bz_dynamo',
+    'gtceu:pasta_extraction': 'loop_pasta_extractor',
+    'gtceu:pasta_sorting': 'loop_pasta_phase_sorter',
+    'gtceu:pasta_drawing': 'loop_pasta_draw_bench',
+    'gtceu:pasta_lamination': 'loop_pasta_laminator',
+    'gtceu:polar_cap_tapping': 'loop_polar_cap_tap'
   }
 
   StartupEvents.registry('sound_event', function (event) {
