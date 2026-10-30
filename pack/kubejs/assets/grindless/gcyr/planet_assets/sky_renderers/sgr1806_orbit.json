@@ -1,0 +1,14 @@
+{
+  "world": "grindless:sgr1806_orbit",
+  "stars": { "fancy_count": 9000, "fast_count": 4000, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 24, "color": 13162751, "rotation": [70, 0, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 44, "color": 10535167, "rotation": [55, 60, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 120, "color": 5913120, "rotation": [20, 180, 0] }
+  ]
+}

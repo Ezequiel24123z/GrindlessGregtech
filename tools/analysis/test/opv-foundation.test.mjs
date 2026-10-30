@@ -1,7 +1,8 @@
 // OpV foundation (package OpV-F1, startup_scripts/grindless/opv/foundation.js): every shared OpV id of docs/eras/opv.md F1 is registered
 // once with en_us and es_es names, and there is no recipe. GTM registers every gtceu:opv_* and gtceu:max_* id (highTierContent on, TP-S0F;
 // OpV-S0-1): tables/opv_ids.json lists them and nothing of ours creates them. The ids are pinned (count and every id): a changed id is an
-// escalation (opv.md, F1).
+// escalation (opv.md, F1). The two tier-13 places (S0-3, S0-8) are data files published by opv/travel.js, with two relay_platforms rows
+// leaving from Cygnus X-1 and two sunlight rows; every item and block has its texture.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -70,7 +71,7 @@ const table = JSON.parse(read('data', 'grindless', 'tables', 'opv_ids.json'));
 const matOf = (key) => run.registry.materials.get(key) || run.registry.materials.get(short(key));
 
 test('the stand-in runs the OpV foundation and its names without errors', () => {
-  const mine = (e) => /(^|[\\/])opv[\\/]foundation|opv_foundation_lang/.test(String(e.file));
+  const mine = (e) => /(^|[\\/])opv[\\/](foundation|travel)|opv_foundation_lang/.test(String(e.file));
   const errs = run.errors.filter((e) => mine(e) && e.stage !== 'console.error');
   assert.deepEqual(errs, [], errs.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(run.errors.filter(mine), [], 'no console.error');
@@ -172,4 +173,97 @@ test('names and both tooltip lines in en_us and es_es; materials named', () => {
     }
   }
   for (const key of Object.keys(MATERIALS)) assert.notEqual(es[`material.${key.split(':')[0]}.${short(key)}`], en[`material.${key.split(':')[0]}.${short(key)}`], key);
+});
+
+// ---------------------------------------------------------------- the places (S0-3, S0-8) and the textures
+
+// key -> [world, gravity, temperature (K), warp gate circuit, jump row]
+const PLACES = { sgr1806: ['sgr1806_orbit', 0, 10000000, 11, 'hold_sgr1806'], terzan5: ['terzan5_core', 1, 100, 12, 'hold_terzan5'] };
+const CYGNUS = 'grindless:cygnus_x1_orbit';
+const json = (...p) => JSON.parse(read(...p));
+const plain = (o) => JSON.parse(JSON.stringify(o));
+
+test('the two places load at tier 13: dimension, planet (no air), sky; no other tier-13 planet and no rocket row', () => {
+  for (const [k, [dim, gravity, temp]] of Object.entries(PLACES)) {
+    assert.deepEqual(json('data', 'grindless', 'dimension', `${dim}.json`), { type: 'gcyr:space', generator: { type: 'gcyr:space' } }, k);
+    const pl = json('data', 'grindless', 'gcyr', 'planets', `${dim}.json`);
+    assert.equal(pl.rocket_tier, 13, k);
+    assert.equal(pl.gravity, gravity, k);
+    assert.equal(pl.temperature, temp, k);
+    assert.equal(pl.world, `grindless:${dim}`, k);
+    assert.equal(pl.orbit_world, `grindless:${dim}`, k);
+    assert.equal(pl.translation, `level.grindless.${dim}`, k);
+    assert.equal(pl.solar_system, `grindless:${k}`, k);
+    assert.equal(pl.galaxy, 'gcyr:milky_way', k);
+    assert.equal(pl.has_atmosphere, false, k);
+    assert.equal(pl.has_oxygen, false, k);
+    assert.equal(pl.solar_power, 0, k);
+    const sky = json('assets', 'grindless', 'gcyr', 'planet_assets', 'sky_renderers', `${dim}.json`);
+    assert.equal(sky.world, `grindless:${dim}`, k + ' sky');
+    assert.ok(sky.sky_objects.length >= 3, k + ' sky has objects');
+  }
+  for (const f of fs.readdirSync(path.join(kube, 'data', 'grindless', 'gcyr', 'planets'))) {
+    if (json('data', 'grindless', 'gcyr', 'planets', f).rocket_tier === 13) assert.ok(Object.values(PLACES).some(([d]) => f === `${d}.json`), f);
+  }
+  assert.deepEqual(table.places, { _why: table.places._why, sgr1806: 'grindless:sgr1806_orbit', terzan5: 'grindless:terzan5_core' });
+});
+
+test('opv/travel.js publishes the places on global.grindless.opvTravel (tier 13, from Cygnus X-1); no recipe, no registration', () => {
+  const T = plain(run.global.grindless.opvTravel);
+  assert.equal(T.tier, 13);
+  assert.equal(T.source, CYGNUS);
+  assert.deepEqual(Object.keys(T.places), Object.keys(PLACES));
+  for (const [k, [dim, , temp, circuit, jump]] of Object.entries(PLACES)) {
+    assert.deepEqual(T.places[k], { dimension: `grindless:${dim}`, circuit, jump, temperature: temp }, k);
+  }
+  for (const id of Object.values(T.ids)) assert.ok(ITEMS.includes(id), id);
+  const travel = read('startup_scripts', 'grindless', 'opv', 'travel.js').replace(/^\s*\/\/.*$/gm, '');
+  assert.doesNotMatch(travel, /ServerEvents|StartupEvents|GTCEuStartupEvents|event\.create|\.recipes/, 'data only');
+  assert.doesNotMatch(read('startup_scripts', 'grindless', 'opv', 'travel.js'), /^\/\/ priority:/m, 'the integrator stamps the priority');
+});
+
+test('relay_platforms.json: two OpV-F1 rows leaving from Cygnus X-1, one per jump; seven rows in all', () => {
+  const plat = json('data', 'grindless', 'tables', 'relay_platforms.json');
+  assert.equal(plat.platforms.length, 7);
+  const mine = plat.platforms.filter((p) => Object.hasOwn(PLACES, p.place));
+  assert.deepEqual(mine.map((p) => [p.place, p.jump, p.dimension, p.source, p.x, p.y, p.z]), Object.entries(PLACES).map(([k, [dim, , , , jump]]) =>
+    [k, jump, `grindless:${dim}`, CYGNUS, 64, 100, 64]));
+  assert.deepEqual(plat.platforms.slice(-2), mine, 'appended after the UXV rows');
+  assert.equal(new Set(plat.platforms.map((p) => p.jump)).size, 7, 'every jump once');
+});
+
+test('sunlight.json: two rows, factor 0, no_solar, era opv, always', () => {
+  const d = json('data', 'grindless', 'tables', 'sunlight.json').dimensions;
+  for (const [dim] of Object.values(PLACES)) {
+    const s = d[`grindless:${dim}`];
+    assert.ok(s, dim);
+    assert.equal(s.factor, 0, dim);
+    assert.equal(s.when, 'always', dim);
+    assert.equal(s.status, 'no_solar', dim);
+    assert.equal(s.era, 'opv', dim);
+    assert.match(s.note, /^OpV-F1:/, dim);
+  }
+  assert.equal(Object.values(d).filter((s) => s.era === 'opv').length, 2);
+});
+
+test('the places are named in en_us and es_es (level, dimension, planet)', () => {
+  for (const lang of ['en_us', 'es_es']) {
+    const L = run.lang[lang] || {};
+    for (const [k, [dim]] of Object.entries(PLACES)) {
+      for (const key of [`level.grindless.${dim}`, `dimension.grindless.${dim}`, `planet.grindless.${k}`]) assert.ok(L[key], `${lang} ${key}`);
+    }
+  }
+  assert.equal(run.lang.en_us['dimension.grindless.sgr1806_orbit'], 'SGR 1806-20 Orbit');
+  assert.equal(run.lang.es_es['dimension.grindless.sgr1806_orbit'], 'Órbita de SGR 1806-20');
+  assert.notEqual(run.lang.es_es['dimension.grindless.terzan5_core'], run.lang.en_us['dimension.grindless.terzan5_core']);
+});
+
+test('every F1 item and block has its texture (tools/assets/Build-OpVFoundationTextures.ps1)', () => {
+  const tex = path.join(kube, 'assets', 'grindless', 'textures');
+  const missing = [
+    ...ITEMS.map((id) => path.join('item', `${short(id)}.png`)),
+    ...BLOCKS.map((id) => path.join('block', 'opv', `${short(id)}.png`)),
+  ].filter((rel) => !fs.existsSync(path.join(tex, rel)));
+  assert.deepEqual(missing, []);
+  for (const id of BLOCKS) assert.ok(src.includes(`'grindless:block/opv/${short(id)}'`), id);
 });
