@@ -97,7 +97,7 @@ export default gate({
     ['luvIo', 'luvTether', 'luvSI'],
     ['zpmNaq', 'zpmMk2'],
     ['uvThorium', 'uvLaser', 'uvMuon', 'uvMk3'],
-    ['uhvSwarm', 'laterDyson', 'uivStars'],
+    ['uhvSwarm', 'laterDyson', 'uivStars', 'uxvStars'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
     ...(WITH_WIRELESS ? [['gWireless']] : []),
   ],
@@ -656,6 +656,27 @@ export default gate({
         }),
       ],
     },
+    // ---------------------------------------------------------------- UXV
+    // figures wait for a bench measurement (as UIV's row): EU/t of the plants is in docs/eras/uxv.md, "Power"
+    uxvStars: {
+      name: 'Strange stars (UXV)',
+      nodes: [
+        // (the links to the uxv_age quests 5CE1C18D40A0B8E2 'Mk6 Fusion Ring', 3611A4EAC7D055C3 'Spin Down a Black Hole' and
+        // 50C6BE5A52F4F9A0 'Tap the Polar Cap' go in once that chapter is in the book: eqUxvRing, eqUxvBZ and eqUxvTap at x 0)
+        n('uxvRing', 2.25, -1.5, M('gtceu:uxv_fusion_reactor'), 'Mk6 Fusion Ring', {
+          kind: 'info', tier: 'uxv', sub: 'A star\'s burning stages, one after another, and a direct converter takes the power off each ash',
+          desc: 'Hot CNO, helium, carbon and oxygen: the ash of each burn is quenched into the fuel of the next.',
+        }),
+        n('uxvBZ', 2.25, 0, M('gtceu:bz_dynamo'), 'BZ Dynamo', {
+          kind: 'info', tier: 'uxv', sub: 'Flux-loaded plasma spins power out of the black hole',
+          desc: 'It runs at Cygnus X-1 only, and the FRC former loads its plasma.',
+        }),
+        n('uxvTap', 2.25, 1.5, M('gtceu:polar_cap_tap'), 'Polar Cap Tap', {
+          kind: 'info', tier: 'uxv', sub: 'A lasagna electrode in the pulsar\'s polar current, burned through',
+          desc: 'It runs at Vela only; the pasta laminator makes the electrodes.',
+        }),
+      ],
+    },
     // ---------------------------------------------------------------- later
     laterDyson: {
       name: 'Dyson sphere',
@@ -768,20 +789,27 @@ export default gate({
           desc: 'The network jumps to UIV only when every formed tower holds these.',
           figs: [P.wcell('grindless:uiv_smes_cell', 'UIV SMES', 1006632960000)],
         }),
+        // UXV's cell: four UIV cells' worth, wound with pasta strand tape in the nitride magnet works
+        // (the link to the uxv_age quest 3F5ABDEF2254EC50 'UXV SMES Cell' goes in once that chapter is in the book: eqUxvCell at 0, 12)
+        n('wuxv', 2.25, 12, I('grindless:uxv_smes_cell'), 'UXV SMES Cell', {
+          kind: 'info', sub: 'Fifteen hundred and thirty-six UV batteries\' worth, wound with pasta strand',
+          desc: 'The network jumps to UXV only when every formed tower holds these.',
+          figs: [P.wcell('grindless:uxv_smes_cell', 'UXV SMES', 4026531840000)],
+        }),
         n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Generator multiblocks feed the network through it',
-          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uiv')],
+          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uxv')],
         }),
         n('wdynC', 6.75, -0.75, I('grindless:lv_wireless_dynamo_cover'), 'Wireless Dynamo Cover', {
-          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'uiv')],
+          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'uxv')],
         }),
         n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
-          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uiv')],
+          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uxv')],
         }),
         n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
           kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
-          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'uiv')],
+          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'uxv')],
         }),
       ],
     } } : {}),
