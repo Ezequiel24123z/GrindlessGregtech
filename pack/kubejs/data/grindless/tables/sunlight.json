@@ -29,6 +29,8 @@
     "grindless:rx_j1856_orbit": { "factor": 0.0, "when": "always", "status": "no_solar", "era": "uiv", "note": "UIV-B1: soft X-ray, thermal (a cooling neutron star at 700,000 K); no solar machine; sky exposure only" },
     "grindless:psr_j0437_orbit": { "factor": 0.0, "when": "always", "status": "no_solar", "era": "uiv", "note": "UIV-B1: pulsed X-ray and radio from a millisecond pulsar; no solar machine; sky exposure only" },
     "grindless:cygnus_x1_orbit": { "factor": 0.6, "when": "always", "status": "new", "era": "uiv", "distanceAU": 1.53, "note": "UIV-B1: 0.6 = 1.4 / 1.53^2 (Sun-equivalent distance); O-supergiant UV and the accretion disc's X-rays, a weak, hard light; sky exposure only" },
+    "grindless:vela_pulsar_orbit": { "factor": 0.0, "when": "always", "status": "no_solar", "era": "uxv", "note": "UXV-B1: the Vela pulsar's pulsed X-rays and radio; no solar machine; sky exposure only" },
+    "grindless:cas_a_remnant": { "factor": 0.0, "when": "always", "status": "no_solar", "era": "uxv", "note": "UXV-B1: Cassiopeia A's expanding supernova shell and its neutron star; no solar machine; sky exposure only" },
     "grindless:asteroid_belt": { "factor": 0.19, "when": "day", "status": "new", "era": "luv", "distanceAU": 2.7, "note": "1.4 / 2.7^2; id final after spike S0-1" },
     "grindless:io": { "factor": 0.052, "when": "day", "status": "new", "era": "luv", "distanceAU": 5.2, "note": "1.4 / 5.2^2; id final after spike S0-1" },
     "grindless:europa": { "factor": 0.052, "when": "day", "status": "new", "era": "luv", "distanceAU": 5.2, "note": "1.4 / 5.2^2; id final after spike S0-1" },
