@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.vela_pulsar_orbit",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:vela_pulsar",
+  "world": "grindless:vela_pulsar_orbit",
+  "orbit_world": "grindless:vela_pulsar_orbit",
+  "rocket_tier": 12,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 5,
+  "temperature": 1500000,
+  "solar_power": 0,
+  "has_oxygen": false,
+  "button_color": 3158064
+}
