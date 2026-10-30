@@ -47,14 +47,14 @@ test('names unique, EU/t and duration positive, circuits unique per type (0 only
       names.push(r.name);
       assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
       assert.ok(r.circuit > 0 || GTM.has(type), `${type}/${r.name} needs a circuit`);
-      assert.match(r._why, /^UIV-A10/, r.name);
+      assert.match(r._why, /^(UIV-A10|UXV-B6)/, r.name); // UXV-B6 appends the arm chart row (c4)
     }
   }
   assert.equal(new Set(names).size, names.length);
 });
 
 test('Matrioshka computer: circuits 1-3, 31457280 EU/t, orbit only, research NBT written only by c1', () => {
-  const rc = T.types.matrioshka_computing.recipes;
+  const rc = T.types.matrioshka_computing.recipes.filter((r) => /^UIV-A10/.test(r._why)); // UXV-B6 appends c4 arm_chart
   assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['research_write', 1], ['ns_eos_chart', 2], ['kerr_chart', 3]]);
   for (const r of rc) { assert.equal(r.eut, 31457280, r.name); assert.equal(r.site, true, r.name); assert.ok(r.itemsIn.length + 1 <= 3); }
   assert.deepEqual(inputs(by('matrioshka_computing', 'research_write')), ['grindless:data_crystal_5d', 'gtceu:data_module']);
