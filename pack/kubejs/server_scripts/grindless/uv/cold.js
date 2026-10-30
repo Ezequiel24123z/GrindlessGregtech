@@ -85,7 +85,11 @@
     // UXV-A6 (docs/eras/uxv.md, machine 6, line 18): the SHeQUID works' warmed He-II boil-off passed over the superleak again; the plant has
     // no circuit, so this row is keyed by its input fluid alone
     { name: 'he2_heat_flush', type: 'superfluid_helium', circuit: null, itemsIn: [], fluidsIn: [fluid(SUPERFLUID, 1000)], itemsOut: [],
-      fluidsOut: [fluid(SUPERFLUID, 990), fluid(HE3, 10)], eut: VA, duration: 200 }
+      fluidsOut: [fluid(SUPERFLUID, 990), fluid(HE3, 10)], eut: VA, duration: 200 },
+    // OpV-A2 (docs/eras/opv.md, line 14): two RRR sheets bonded to a copper backing plate as the sputter target of the Nb TSV fill and
+    // the NbTiN film (c8: 1-7 are taken); the trim goes to the scrap loop
+    { name: 'rrr_nb_target', type: 'srf_cavity', circuit: 8, itemsIn: [item(SHEET, 2), item('gtceu:copper_plate', 1)], fluidsIn: [],
+      itemsOut: [item('grindless:rrr_nb_target', 1), item(SCRAP, 1)], fluidsOut: [], eut: VA / 4, duration: 300 }
   ]
 
   // side steps on GTM's own machines

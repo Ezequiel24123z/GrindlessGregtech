@@ -140,6 +140,27 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:nb_trilayer", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 12): the InAs quantum well grown on semi-insulating InP from 7N indium; the arsenic off the cryoshroud comes back",
+          "name": "inas_qw",
+          "circuit": 9,
+          "eut": 1966080,
+          "duration": 1200,
+          "itemsIn": [
+            { "id": "grindless:si_inp_wafer", "count": 1 },
+            { "id": "grindless:seven_n_indium", "count": 1 },
+            { "id": "gtceu:aluminium_dust", "count": 1 },
+            { "id": "gtceu:arsenic_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:inas_qw_wafer", "count": 1 },
+            { "id": "gtceu:arsenic_dust", "count": 1, "chance": 5000 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
         }
       ]
     },
@@ -459,6 +480,22 @@
           "fluidsIn": [],
           "charge": [],
           "itemsOut": [{ "id": "grindless:implanted_sic_wafer", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 13): arsenic source and drain implanted into the cryo-CMOS pattern; c12 (the contract's c10 is taken by ZPM's qubits; c11 is left for OpV-A1, whose c9 is taken)",
+          "name": "cryo_cmos_implant",
+          "circuit": 12,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:cryo_cmos_litho_wafer", "count": 1 },
+            { "id": "gtceu:arsenic_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:cryo_cmos_implanted_wafer", "count": 1 }],
           "fluidsOut": []
         }
       ]

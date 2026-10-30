@@ -255,6 +255,26 @@
       itemsOut: [{ id: 'grindless:ejecta_ti_fraction_dust', count: 1 }, { id: 'gtceu:wollastonite_dust', count: 1 }, { id: 'gtceu:pyrite_dust', count: 1 }],
       fluidsOut: [{ id: 'gtceu:kerosene', amount: 950 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 3000 }],
       eut: 1920, duration: 100
+    },
+    // OpV-A2 (opv.md line 11): the Si-28 fusion ash hydrochlorinated to Si-28 trichlorosilane (Si + 3 HCl -> SiHCl3 + H2) for the
+    // MOCVD reactor's Siemens rod (c17), whose HCl comes back
+    {
+      name: 'si28_trichlorosilane', mode: 'opv', circuit: 24,
+      itemsIn: [{ id: 'grindless:si28_ash', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 12000 }],
+      itemsOut: [],
+      fluidsOut: [{ id: 'gtceu:si28_trichlorosilane', amount: 4000 }, { id: 'gtceu:hydrogen', amount: 4000 }],
+      eut: 1920, duration: 100
+    },
+    // OpV-A2 (opv.md line 12): the InP scrap of the boule, wafer and HEMT cuts leached in HCl; indium is won back, the phosphine goes to
+    // the STM cell or its scrubber and the chlorine to stock
+    {
+      name: 'inp_scrap_indium', mode: 'opv', circuit: 26,
+      itemsIn: [{ id: 'grindless:inp_scrap', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 6000 }],
+      itemsOut: [{ id: 'gtceu:indium_dust', count: 2 }],
+      fluidsOut: [{ id: 'gtceu:phosphine', amount: 2000 }, { id: 'gtceu:chlorine', amount: 6000 }],
+      eut: 1920, duration: 100
     }
   ]
 
