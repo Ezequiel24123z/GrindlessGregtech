@@ -36,7 +36,7 @@ test('the UXV row: tier 12, 1,536 UV naquadria batteries (four UIV cells, past 2
   const rows = WIRELESS.tiers.filter((r) => r.name === 'uxv');
   assert.equal(rows.length, 1);
   const uxv = rows[0];
-  assert.equal(WIRELESS.tiers[WIRELESS.tiers.length - 1], uxv, 'the last row');
+  assert.equal(WIRELESS.tiers[11], uxv, 'the twelfth row (OpV-W appends opv after it)');
   assert.deepEqual([uxv.tier, uxv.cell, uxv.capacity, uxv.referenceBattery, uxv.referenceCount],
     [UXV, CELL, CELL_EU, 'gtceu:uv_naquadria_battery', 1536]);
   assert.equal(uxv.capacity, uxv.referenceCount * 2621440000);
@@ -50,10 +50,10 @@ test('the UXV row: tier 12, 1,536 UV naquadria batteries (four UIV cells, past 2
     ['gtceu:uxv_emitter', 'gtceu:uxv_sensor', 1, LINK, 'grindless:lasagna_plate', 'pasta_strand']);
 });
 
-test('withTiers case 12 is spelled out and the default message says 1 to 12 tiers', () => {
+test('withTiers case 12 is spelled out and the default message says 1 to 1x tiers', () => {
   const src = fs.readFileSync(path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'lv', 'wireless_energy.js'), 'utf8');
   assert.match(src, /case 12:\s*return b\.tiers\(t\[0\], t\[1\], t\[2\], t\[3\], t\[4\], t\[5\], t\[6\], t\[7\], t\[8\], t\[9\], t\[10\], t\[11\]\)/);
-  assert.match(src, /1 to 12 tiers/);
+  assert.match(src, /1 to 1\d tiers/);
 });
 
 test('registration: the cell is a block, eight hatches and two covers, all from lv/wireless_energy.js', () => {
@@ -110,7 +110,7 @@ test('the UXV hatches and covers: assembler recipes with the link on the 2 A hat
 
 test('tiers 1-11 are untouched', () => {
   assert.deepEqual(WIRELESS.tiers.map((r) => r.name).slice(0, 11), ['lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv']);
-  assert.equal(WIRELESS.tiers.length, 12);
+  assert.equal(WIRELESS.tiers.length, 13); // OpV-W appends the thirteenth
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uiv').capacity, 1006632960000);
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uev').capacity, 251658240000);
 });
