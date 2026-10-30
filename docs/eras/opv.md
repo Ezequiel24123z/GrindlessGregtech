@@ -75,8 +75,8 @@ UXV ids reused here are only consumed or kept, never redefined. The UXV changes 
 |---|---|---|---|---|
 | Home | `minecraft:overworld` | — | — | tetron arrays, gamma optics, antihydrogen ice, stable exotic matter, annihilation power, components, cosmic mainframe |
 | Cygnus X-1 orbit | `grindless:cygnus_x1_orbit` | 11 (UIV-B1) | UIV warp gate | jet proton beam, antiprotons, strangelet seeds, Kugelblitz cores, Hawking drive, Hawking power |
-| SGR 1806−20 orbit | `grindless:sgr1806_orbit` | 13 *(S0-3; fallback 12)* | c11 bulge relay seed (A0) | chain strand, Ni-64 slab, field-frozen plate, dense positron cells |
-| Terzan 5 core | `grindless:terzan5_core` | 13 *(S0-3; fallback 12)* | c12 pathfinder (R1) | metal feedstock, sinter casing, probe seeds, collector nodes, bulge light |
+| SGR 1806−20 orbit | `grindless:sgr1806_orbit` | 13 *(S0-3 PASS)* | c11 bulge relay seed (A0) | chain strand, Ni-64 slab, field-frozen plate, dense positron cells |
+| Terzan 5 core | `grindless:terzan5_core` | 13 *(S0-3 PASS)* | c12 pathfinder (R1) | metal feedstock, sinter casing, probe seeds, collector nodes, bulge light |
 
 Site rules (the UIV-B1 SITES table; every far-place machine refuses to form elsewhere, and its T1 forms it at its site):
 
@@ -124,7 +124,7 @@ Nothing is mined by hand (rule 1), and none of these produces energy by itself: 
 - **Jet proton beam, antiprotons, strangelet seeds, Kugelblitz cores:** Cygnus orbit only.
 - **Metal feedstock, sinter casing, probe seeds, collector nodes, bulge light census:** Terzan 5 only.
 - **GTM's OpV recipes:** F2 removes GTM's shaped or assembler recipes for every `gtceu:opv_*` component, the hull, the energy and dynamo hatches and every basic machine. A0, A1, A3 and A4 then replace them with rows at OpV voltage that take OpV components and `#gtceu:circuits/opv`. The items stay hidden until those packages land: the obtain model reads `hidden_until`, and F2 names a pendingRoutes entry for each, naming the package that adds the route.
-- **GT-- cosmic circuits:** F2 removes GT--'s own recipe for `gtnn:cosmic_mainframe` and the five `gtnn:cosmic_smd_*` items. A2 replaces them on our lines (S0-4).
+- **GT-- cosmic circuits:** F2 removes GT--'s own recipe for `gtnn:cosmic_mainframe` and the five `gtnn:cosmic_smd_*` items. A2 replaces them on our lines. S0-4: GT-- registers these recipes in Java, so `event.remove` finds none; F2 locates their source in the jar before cutting them.
 
 ## Our multiblocks
 
@@ -763,11 +763,11 @@ Mk6 stays. Its DEC rows are still a UXV source. `FusionReactorMachine` gets no t
 
 - **Assembly line array** (`gtceu:assembly_line_array`, M2): the OpV member of the mega family (mega.md 4.1, 4.11, 4.12, 5, 6.6). It runs GTM `gtceu:assembly_line` recipes in parallel. Its parallels are energy-bound times the parallel hatch, and the overclock rule follows mega.md 5 as the stellar forge did (open question 6).
   - Gain: GTM's assembly line runs one recipe at a time. The array runs up to x262,144 in one structure, the one place where OpV's component-hungry recipes (the owner's rule) stop being one at a time.
-  - Research data and ordered inputs (`ConfigHolder` ordered items and fluids) under parallels are settled by S0-10.
+  - Research data and ordered inputs (`ConfigHolder` ordered items and fluids) under parallels: S0-10 saw neither an ordered nor a research recipe start on a bare array, so M2 proves both on its own frame first or takes the fallback (M2).
   - Footprint: 9 wide x 7 high x 35 long *(tune)*. MAX's largest multiblock must exceed it (Reserve for MAX).
   - GT--'s component assembly line (`gtnn:component_assline_casing_opv` in the dump) makes components from raw stock. The array does not duplicate it.
   - GTNH's advanced assembly line is an idea only (CREDITS.md).
-- **OpV parallel hatch** (`gtceu:opv_parallel_hatch`, M1): `lib/parallel_hatch.js:81` becomes `.tiers(9, 10, 11, 12, 13)`, with the name ternary at :85. x262,144 = 4^(13-4) = 2^18, which fits an int. Parallel x EU/t reaches 2^47 at OpV and must stay a long in GTM's parallel logic (S0-5). The recipe (M1) mirrors `uiv/parallel_hatch.js:17` at OpV: the hull, 4 `gtceu:opv_field_generator`, 4 robot arms, 4 sensors, 8 `#gtceu:circuits/opv`, 4 `tetron_array` and superfluid He-3.
+- **OpV parallel hatch** (`gtceu:opv_parallel_hatch`, M1): `lib/parallel_hatch.js:81` becomes `.tiers(9, 10, 11, 12, 13)`, with the name ternary at :85. x262,144 = 4^(13-4) = 2^18, which fits an int. Parallel x EU/t reaches 2^47 at OpV and must stay a long in GTM's parallel logic: S0-5 proved it with an overlay tier-13 hatch (262,144 copies of a 2,048 EU/t probe ran at 536,870,912 EU/t exactly), and HT registers no OpV parallel hatch (S0-1). The recipe (M1) mirrors `uiv/parallel_hatch.js:17` at OpV: the hull, 4 `gtceu:opv_field_generator`, 4 robot arms, 4 sensors, 8 `#gtceu:circuits/opv`, 4 `tetron_array` and superfluid He-3.
 
 ## AE2
 
@@ -1175,6 +1175,13 @@ One worker, one branch, no shipped content; each spike is the smallest native pr
 
 Order: S0-1 and S0-2 first (they gate F1 and G1), then 3, 7, 8, then the rest. The worker writes one result line per spike to the S0 handoff; the integrator copies them to DECISIONS.md.
 
+**Results (2026-10-30, `docs/research/opv-s0.md`):**
+- PASS: S0-1 (91 `gtceu:opv_*` ids, no OpV parallel hatch), S0-2 (2^33 x 1,200 t; EMI shows the tier as MAX), S0-3 and S0-8 (tier 13 places), S0-6, S0-7, S0-9 (survives a restart), S0-12. Their fallbacks are not used.
+- S0-4 PASS with a caveat: the mainframe is in `#gtceu:circuits/opv`, but GT--'s cosmic recipes are Java-registered and `event.remove` finds none (A2, F2).
+- S0-5: the library lacks tier 13 (M1 changes it); the mechanism reports x262,144 with long EU/t, so no x131,072 fallback.
+- S0-10 FAIL: M2 takes the fallback unless its own T1 proves ordered and research recipes first.
+- S0-11 FAIL (likely the harness: a consumer recipe type): R3 writes three fixed rows.
+
 ### Foundations
 
 #### F1. Ids, places and the id table
@@ -1200,7 +1207,7 @@ Order: S0-1 and S0-2 first (they gate F1 and G1), then 3, 7, 8, then the rest. T
 - **Objective:**
   - `hidden_until.json`: every F1 id at its substage; every `gtceu:opv_*` id until its producing package; every `gtceu:max_*` id until `max`;
   - class B obtain rules, one per producing package (A0-A4, B1-B3, D1-D3, E1, R1-R3, W, M1, M2, G1);
-  - cuts (`server_scripts/grindless/opv/cuts.js`): GTM's recipes for every `gtceu:opv_*` component, the hull, hatches, parallel hatch and basic machines; every `gtceu:max_*` recipe; GT--'s `gtnn:cosmic_mainframe` and the five `gtnn:cosmic_smd_*` recipes (S0-4); `gtceu:chain_strand` wiremill, extruder, bender, assembler-cable, macerator and arc-furnace routes;
+  - cuts (`server_scripts/grindless/opv/cuts.js`): GTM's recipes for every `gtceu:opv_*` component, the hull, hatches, parallel hatch and basic machines; every `gtceu:max_*` recipe; GT--'s `gtnn:cosmic_mainframe` and the five `gtnn:cosmic_smd_*` recipes (S0-4: Java-registered, so `event.remove` finds none; locate the source in the jar first, and if it cannot be cut, hide those routes from EMI and leave the obtain rule on ours); `gtceu:chain_strand` wiremill, extruder, bender, assembler-cable, macerator and arc-furnace routes;
   - the no-voiding exemption for distiller c3 (negative strangelets, line 36);
   - QR tier 13: `eraTier opv: 13`, `complexFloor "13": 10` *(tune)*, `TIER_NAMES` and process_audit `ERAS`;
   - `script_order.json` bands for `opv/`; pendingRoutes and pendingUses as each contract names them.
@@ -1240,7 +1247,7 @@ Order: S0-1 and S0-2 first (they gate F1 and G1), then 3, 7, 8, then the rest. T
 
 #### M1. OpV parallel hatch (x262,144)
 
-- **Objective:** `lib/parallel_hatch.js:81` tiers gain 13; the name ternary at :85 gains `opv_parallel_hatch`; the hatch list at :103 gains `gtceu:opv_parallel_hatch`; its recipe in `server_scripts/grindless/opv/parallel.js` (assembly line at OpV: hull, 4 field generator, 4 robot arm, 4 sensor, 8 circuits, 4 `tetron_array`, superfluid He-3), unless HT registers the hatch (S0-1: then only the recipe and the parallel figure).
+- **Objective:** `lib/parallel_hatch.js:81` tiers gain 13; the name ternary at :85 gains `opv_parallel_hatch`; the hatch list at :103 gains `gtceu:opv_parallel_hatch`; its recipe in `server_scripts/grindless/opv/parallel.js` (assembly line at OpV: hull, 4 field generator, 4 robot arm, 4 sensor, 8 circuits, 4 `tetron_array`, superfluid He-3), (S0-1: HT does not register it).
 - **`<name>`:** `parallel`.
 - **Allowed (extra):** `lib/parallel_hatch.js` (three lines; a shared library: standalone serial package); pinned tests `uev-parallel-hatch`, `uiv-parallel-hatch`, `uxv-parallel_hatch` (`.test.mjs`).
 - **References:** *Nothing one at a time*; mega.md 4.11, 4.12; DECISIONS.md:505; S0-5.
@@ -1292,7 +1299,7 @@ Order: S0-1 and S0-2 first (they gate F1 and G1), then 3, 7, 8, then the rest. T
 
 - **Objective:**
   - lines 11-18;
-  - the mainframe join on the UEV photonic integration hall c8 (`uev/photonics.js:88`): `cryo_cmos_die` + `nb_tsv_interposer` + `cryo_optical_link` + `hemt_amplifier` → `gtnn:cosmic_mainframe`, in `#gtceu:circuits/opv` as S0-4 settles; GT--'s lower cosmic items as S0-4 and F2 decide;
+  - the mainframe join on the UEV photonic integration hall c8 (`uev/photonics.js:88`): `cryo_cmos_die` + `nb_tsv_interposer` + `cryo_optical_link` + `hemt_amplifier` → `gtnn:cosmic_mainframe`, already in `#gtceu:circuits/opv` (S0-4); GT--'s lower cosmic items as S0-4 and F2 decide;
   - older rows: UXV MTJ x4 (Nb TSV fill, Au, SDD anode, NbTiN); femtosecond c6; ion slicing c5-7; BEUV c4-8; STM c4; CVI c8; SNSPD c6; crystal growth c21; MBE c9-10; SiC fab c6; zone c11; implanter c10-13; SRF c6; MOCVD c17-19 and c21; fibre c17; extraction c24 and c26-27; platinum plant c17; He refrigerator keyed.
 - **`<name>`:** `circuits`.
 - **Allowed (extra):** the rows above in their files; pinned tests `uxv-spin_deposition`, `uiv-tfln_femtosecond`, `uiv-beuv_stm`, `uev-composites`, `uev-photonics`, `uhv-crystals`, `uhv-photonics`, `uhv-power_devices`, `uv-detectors`, `zpm-qubits`, `uv-cold`, `uv-photonics`, `ev-features`.
@@ -1474,7 +1481,7 @@ Every multiblock contract below shares this acceptance: the controller follows t
 
 #### R3. Collector nodes and the bulge collector
 
-- **Objective:** machines 17 and 18 at Terzan 5 (*17*, *18*); line 40; refinery c7 (spent nodes → `si_alloy_powder`, 50%). Collector c1-c3 at 2^26, 2^28, 2^30 for 1, 4, 16 packs on one 4 A OpV dynamo hatch; c3 outputs `bulge_light_census`; balance ~1.5x *(tune)*; S0-11 decides one scaled row or three fixed rows.
+- **Objective:** machines 17 and 18 at Terzan 5 (*17*, *18*); line 40; refinery c7 (spent nodes → `si_alloy_powder`, 50%). Collector c1-c3 at 2^26, 2^28, 2^30 for 1, 4, 16 packs on one 4 A OpV dynamo hatch; c3 outputs `bulge_light_census`; balance ~1.5x *(tune)*; three fixed rows (S0-11 did not show a row scaling with packs).
 - **`<name>`:** `bulge_collector`.
 - **Allowed (extra):** machine 15's row list (1 row, R2's file).
 - **References:** *17*, *18*; line 40; *Power*; S0-11.
@@ -1495,7 +1502,8 @@ Every multiblock contract below shares this acceptance: the controller follows t
   - **Structure (QR):** 9x7x35 *(tune)*, four assembly tracks side by side under one gantry roof.
     - Blocks: `gtceu:opv_machine_casing` (appearance, ≤50%); `gtceu:assembly_line_casing`; `gtceu:assembly_line_unit` track slices; `gtceu:assembly_line_grating` between tracks; `gtceu:laminated_glass` roof lights.
     - Kinds: casing, unit, grating, glass.
-    - Hatches: item and fluid inputs along one side in order (S0-10), energy, data and the parallel hatch at the head, output bus at the tail.
+    - Hatches: item and fluid inputs along one side in order, energy, data and the parallel hatch at the head, output bus at the tail.
+  - **S0-10 fallback:** the first commit is the frame plus its T1 with one ordered and one research recipe. If either does not start after one repair, the array does not enforce input order (fiction: the gantry sorts) and still requires research; if research cannot be honoured either, M2 stops and returns the choice (keep it single) to the integrator.
 - **`<name>`:** `assembly_line_array`.
 - **Allowed (extra):** its row in the mega table if mega.md 6.6 uses one; pinned mega tests (member count only).
 - **References:** mega.md 4.1, 4.11, 4.12, 5, 6.6; DECISIONS.md:505; `lib/mega.js` (read unchanged); S0-10.
