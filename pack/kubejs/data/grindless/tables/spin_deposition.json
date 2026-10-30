@@ -69,6 +69,30 @@
             { "id": "grindless:heusler_am_powder", "count": 1 }
           ],
           "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
+          "_why": "OpV-D1 (opv.md line 21; circuit 9, after A2's four rows): the Ta seed target sputtered as a cladding over four Ir target rods; the target is used up",
+          "name": "ta_clad_ir_rod", "circuit": 9, "eut": 33554432, "duration": 700,
+          "itemsIn": [
+            { "id": "grindless:ir_target_rod", "count": 4 },
+            { "id": "grindless:ta_seed_target", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:ta_clad_ir_rod", "count": 4 }],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
+          "_why": "OpV-D1 (opv.md line 25; circuit 10): the TiZrV target sputtered as a getter film inside eight stainless steel chambers; the target is used up",
+          "name": "neg_coated_chamber", "circuit": 10, "eut": 33554432, "duration": 700,
+          "itemsIn": [
+            { "id": "grindless:tizrv_target", "count": 1 },
+            { "id": "gtceu:stainless_steel_plate", "count": 8 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:neg_coated_chamber", "count": 8 }],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
         }
       ]
     },
