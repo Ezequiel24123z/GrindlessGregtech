@@ -10,11 +10,13 @@
         ['grindless', 'grindless.tooltip.laser', 'Accepts laser target hatches.', 'Acepta escotillas láser de destino.'],
         ['grindless', 'grindless.tooltip.wireless', 'Accepts wireless energy hatches.', 'Acepta escotillas de energía inalámbrica.'],
         ['grindless', 'grindless.tooltip.site', 'Forms only at %s.', 'Solo se forma en %s.'],
+        ['grindless', 'grindless.tooltip.steam', 'Runs on steam, recipes up to %s EU/t.', 'Funciona con vapor, recetas hasta %s EU/t.'],
 
         ['gtceu', 'gtceu.machine.available_recipe_map_1.tooltip', 'Available Recipe Types: %s', 'Tipos de receta: %s'],
         ['gtceu', 'gtceu.machine.available_recipe_map_2.tooltip', 'Available Recipe Types: %s, %s', 'Tipos de receta: %s, %s'],
         ['gtceu', 'gtceu.machine.available_recipe_map_3.tooltip', 'Available Recipe Types: %s, %s, %s', 'Tipos de receta: %s, %s, %s'],
-                ['gtceu', 'gtceu.machine.available_recipe_map_4.tooltip', 'Available Recipe Types: %s, %s, %s, %s', 'Tipos de receta: %s, %s, %s, %s'],        ['gtceu', 'gtceu.multiblock.parallelizable.tooltip', 'Can parallelize with Parallel Control Hatches.', 'Admite escotillas de control de paralelos.'],
+        ['gtceu', 'gtceu.machine.available_recipe_map_4.tooltip', 'Available Recipe Types: %s, %s, %s, %s', 'Tipos de receta: %s, %s, %s, %s'],
+        ['gtceu', 'gtceu.multiblock.parallelizable.tooltip', 'Can parallelize with Parallel Control Hatches.', 'Admite escotillas de control de paralelos.'],
         ['gtceu', 'gtceu.machine.perfect_oc', 'Does not lose energy efficiency when overclocked.', 'No pierde eficiencia energética al hacer overclock.'],
         ['gtceu', 'gtceu.universal.tooltip.parallel', '§dMax Parallel: §f%d', '§dParalelo máximo: §f%d']
     ]
