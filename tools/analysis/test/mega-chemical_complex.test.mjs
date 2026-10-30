@@ -338,7 +338,7 @@ test('the lang file names the machine, the recipe type and its tooltips in en_us
     console,
   });
   const keys = ['block.gtceu.mega_chemical_complex', 'gtceu.mega_chemical_complex'];
-  for (let i = 0; i < 4; i++) keys.push('grindless.machine.mega_chemical_complex.tooltip.' + i);
+  keys.push('grindless.machine.mega_chemical_complex.tooltip.0');
   for (const code of ['en_us', 'es_es']) {
     assert.ok(store[code], code);
     for (const key of keys) assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);

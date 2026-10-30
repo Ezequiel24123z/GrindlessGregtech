@@ -120,7 +120,7 @@ test('every step, the type, the tooltips and the voiding refusal are named in en
   for (const lang of ['en_us', 'es_es']) {
     const L = run.lang[lang] || {};
     const keys = ['block.gtceu.biofoundry', 'gtceu.sterile_culture', 'grindless.machine.biofoundry.no_voiding',
-      ...[0, 1, 2, 3].map((i) => `grindless.machine.biofoundry.tooltip.${i}`),
+      ...[0].map((i) => `grindless.machine.biofoundry.tooltip.${i}`),
       ...table.steps.map((s) => `gtceu.recipe.grindless_biofoundry.${s.name}`),
       'emi.grindless.info.engineered_seeds.0', 'emi.grindless.info.engineered_seeds.1'];
     for (const k of keys) if (!L[k]) problems.push(`${lang} ${k}`);

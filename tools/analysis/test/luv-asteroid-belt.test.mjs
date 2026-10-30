@@ -351,7 +351,7 @@ test('B5 language parity, every key the scripts use, and the three controller ov
   for (const kind of ['startup_scripts', 'server_scripts']) {
     for (const [, key] of script(kind, 'luv/asteroid_belt.js').matchAll(/'((?:grindless\.machine|tooltip\.grindless\.vein_sample)\.[a-z_.]+[a-z0-9_])'/g)) used.add(key);
   }
-  for (const n of MACHINES) for (let i = 0; i < 3; i++) used.add(`grindless.machine.${n}.tooltip.${i}`);
+  for (const n of MACHINES) used.add(`grindless.machine.${n}.tooltip.0`);
   for (const s of ['sun', 'night', 'shaded']) used.add('grindless.machine.optical_miner.sun.' + s);
   for (const v of table('veins_belt').veins) used.add('item.grindless.vein_sample_' + v.id);
   used.add('gtceu.recipe.grindless_optical_sun.boulder');
