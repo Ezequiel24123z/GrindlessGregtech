@@ -5,7 +5,7 @@
 // removes them before DONE.
 // Doubt: the c11 throw survives a restart. The gate keeps its runs only in memory; bulge_relay.js keeps the c11 run in persistent data and gives it
 // back once on the next boot, so kerr_sling.js still places the SGR 1806-20 platform when the run has lasted its time.
-//   leg 1  static_*  the c11 row, the seed recipe, the chain strand wire (16 A at V[OpV], no loss)
+//   leg 1  static_*  the c11 row, the seed and hull recipes, the chain strand wire (16 A at V[OpV], no loss)
 //          formed    one warp gate with two UXV 16 A energy hatches and UXV buses forms in Cygnus X-1's orbit
 //          hold      the gate runs grindless:warp_gate/hold_sgr1806 at 2,147,483,648 EU/t, the seed is spent and the bulge chart is not
 //          kept      bulge_relay.js keeps the run (opvBulgeHold); 1,500 ticks into the 2,400 there is no platform yet; PHASE1
@@ -27,6 +27,7 @@
   var GATE = 'gtceu:warp_gate'
   var HOLD = 'grindless:warp_gate/hold_sgr1806'
   var SEED_RECIPE = 'grindless:assembly_line/bulge_relay_seed'
+  var HULL_RECIPE = 'grindless:assembly_line/opv_machine_hull'
   var EUT = 2147483648
   var DURATION = 2400
   var RESTART_AT = 1500
@@ -196,7 +197,7 @@
     check('static_hold_row', !!row && row.circuit === 11 && row.eut === EUT && row.duration === DURATION && row.site === 'cygnus_x1_orbit' &&
       row.itemsIn.length === 1 && row.itemsIn[0].id === SEED && row.kept.length === 1 && row.kept[0].id === CHART && row.itemsOut.length === 1 &&
       row.itemsOut[0].id === LAUNCHED, JSON.stringify(row || null))
-    var missing = [HOLD, SEED_RECIPE].filter(function (id) { return byId(id) === null })
+    var missing = [HOLD, SEED_RECIPE, HULL_RECIPE].filter(function (id) { return byId(id) === null })
     check('static_recipes', missing.length === 0 && B.skipped.length === 0 && (WG.skipped || []).length === 0 && (WG.clashes || []).length === 0,
       'missing ' + (missing.join(' ') || 'none') + '; skipped ' + JSON.stringify(B.skipped.concat(WG.skipped || [])) + '; clashes ' + JSON.stringify(WG.clashes || []))
     var detail = 'no material'

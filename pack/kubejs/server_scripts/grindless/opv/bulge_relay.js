@@ -1,4 +1,4 @@
-// OpV-A0, the bulge relay (docs/eras/opv.md "A0. Bulge relay, chain matter and the hull"). Two parts:
+// OpV-A0, the bulge relay (docs/eras/opv.md "A0. Bulge relay, chain matter and the hull"). Three parts:
 //
 //   1. grindless:bulge_relay_seed: an assembly line row at VA[UXV] of UXV parts only (a 32-strand pasta magsail, lasagna plates, a SHeQUID gyro,
 //      two UXV sensors and an FRC cartridge). It is a travel item made before any OpV part exists, the one OpV-stage recipe outside the component
@@ -9,6 +9,10 @@
 //      2,400 ticks would lose the throw: this script keeps the c11 run in the world's persistent data (opvBulgeHold) and, on the first boot that has
 //      not seen it, gives it back to the gate's run list once, so the poller still places the platform. Nothing is placed here.
 //      The substage opv-sgr is the tier model's grant of that arrival (tools/analysis/tiers), not a script.
+//   3. gtceu:opv_machine_hull (opv.md "Voltages and controllers"): an assembly line row of the OpV casing, 2 chain strand cables, 2 chain lamina
+//      stacks and 500 mB superfluid He-3 at V[OpV]/2 = 2^28 EU/t. No OpV machine exists yet, so it runs on GTM's assembly line with UXV 4 A hatches
+//      (4 x V[UXV] = V[OpV], opv.md "Bridges and first arrivals"). GTM's own hull recipe is removed by opv/cuts.js (OpV-F2), which spares mod
+//      grindless, so this is the only way. No research: like the seed it is a part.
 // Published in global.grindless.opvBulgeRelay: .recipes (the ids made), .skipped, .hold (the kept c11 run, or null), .restored (the run given back
 // this boot, or null), .jump, .place, .source.
 // Rhino: var + function inside every callback that runs more than once.
@@ -23,6 +27,7 @@
   var PLATFORM_KEY = 'uxvPlatform_' + PLACE
   var PERIOD = 10
   var VA_UXV = 125829120
+  var V_OPV = 536870912
   B.jump = JUMP
   B.place = PLACE
   B.source = SOURCE
@@ -38,6 +43,15 @@
 
   var SEED_PARTS = ['gtceu:pasta_strand_single_wire', 'grindless:lasagna_plate', 'grindless:shequid_gyro', 'gtceu:uxv_sensor', 'grindless:frc_cartridge',
     'grindless:bulge_relay_seed']
+  // the hull: F1's strand cable and superfluid He-3 are GT material forms (gtceu: ids, tables/opv_ids.json); the grindless: spelling is a fallback
+  var HULL_PARTS = ['gtceu:opv_machine_casing', 'grindless:chain_lamina_stack', 'gtceu:opv_machine_hull']
+  var CABLES = ['gtceu:chain_strand_single_cable', 'grindless:chain_strand_single_cable']
+  var HELIUM_3 = ['gtceu:superfluid_helium_3', 'grindless:superfluid_helium_3']
+
+  function firstExisting(ids, exists) {
+    for (var i = 0; i < ids.length; i++) if (exists(ids[i])) return ids[i]
+    return null
+  }
 
   function skip(name, missing) {
     B.skipped.push({ name: name, reason: 'unknown id(s) ' + missing.join(', ') })
@@ -67,6 +81,29 @@
     } catch (e) {
       B.skipped.push({ name: 'bulge_relay_seed', reason: String(e) })
       console.error(LOG + 'bulge relay seed recipe failed: ' + e)
+    }
+    try {
+      var cable = firstExisting(CABLES, function (id) { return Item.exists(id) })
+      var helium = firstExisting(HELIUM_3, function (id) { return Fluid.exists(id) })
+      var lost = HULL_PARTS.filter(function (id) { return !Item.exists(id) })
+      if (!cable) lost.push(CABLES.join(' or '))
+      if (!helium) lost.push(HELIUM_3.join(' or '))
+      if (lost.length > 0) {
+        skip('opv_machine_hull', lost)
+      } else {
+        var h = event.recipes.gtceu.assembly_line('grindless:opv_machine_hull')
+        h.itemInputs('gtceu:opv_machine_casing')
+        h.itemInputs('2x ' + cable)
+        h.itemInputs('2x grindless:chain_lamina_stack')
+        h.inputFluids(Fluid.of(helium, 500))
+        h.itemOutputs('gtceu:opv_machine_hull')
+        h.EUt(V_OPV / 2).duration(200)
+        B.recipes.push('grindless:assembly_line/opv_machine_hull')
+        B.hull = { cable: cable, helium: helium }
+      }
+    } catch (e) {
+      B.skipped.push({ name: 'opv_machine_hull', reason: String(e) })
+      console.error(LOG + 'OpV machine hull recipe failed: ' + e)
     }
   })
 
