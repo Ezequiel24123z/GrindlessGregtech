@@ -173,9 +173,9 @@ test('line 20: the MgB2 powder-in-tube row, circuit 5, in an iron tube; GTM\'s m
   assert.match(read('server_scripts/grindless/uv/materials.js'), /5 mgb2_wire/, 'header line');
 });
 
-test('controllers: assembly lines with station research, UHV hull + 2 UV parts + UHV circuits + 3 line items + tritanium', () => {
+test('controllers: assembly lines with station research, UHV hull + 3 UHV part families + UHV circuits + 3 line items + tritanium', () => {
   assert.deepEqual(HM.crafting, ['grindless:assembly_line/regolith_excavator', 'grindless:assembly_line/solar_vapour_furnace']);
-  const parts = { 'grindless:assembly_line/regolith_excavator': 'gtceu:uv_electric_motor', 'grindless:assembly_line/solar_vapour_furnace': 'gtceu:uv_sensor' };
+  const parts = { 'grindless:assembly_line/regolith_excavator': 'gtceu:uhv_electric_motor', 'grindless:assembly_line/solar_vapour_furnace': 'gtceu:uhv_sensor' };
   for (const id of HM.crafting) {
     const r = dump(id);
     assert.ok(r, id);

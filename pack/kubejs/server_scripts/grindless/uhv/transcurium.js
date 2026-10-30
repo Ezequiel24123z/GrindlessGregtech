@@ -166,12 +166,14 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var ARM = 'gtceu:uv_robot_arm'
-    var SENSOR = 'gtceu:uv_sensor'
-    var FIELD = 'gtceu:uv_field_generator'
+    var ARM = 'gtceu:uhv_robot_arm'
+    var SENSOR = 'gtceu:uhv_sensor'
+    var FIELD = 'gtceu:uhv_field_generator'
+    var PUMP = 'gtceu:uhv_electric_pump'
+    var CONVEYOR = 'gtceu:uhv_conveyor_module'
     var defs = [
-      { machine: TC.machines.reactor.machine, parts: [HULL, FIELD, SENSOR], research: 'grindless:lithium_breeder_blanket', domain: ['4x grindless:srf_cryomodule', '2x grindless:mu_metal_shield', '2x grindless:uv_electromagnet'], name: 'high_flux_reactor' },
-      { machine: TC.machines.facility.machine, parts: [HULL, ARM, SENSOR], research: 'grindless:pmma_coated_wafer', domain: ['4x grindless:hpge_crystal', '2x grindless:silicon_nitride_film', '2x grindless:mu_metal_shield'], name: 'transuranium_facility' }
+      { machine: TC.machines.reactor.machine, parts: [HULL, FIELD, SENSOR, PUMP], research: 'grindless:lithium_breeder_blanket', domain: ['4x grindless:srf_cryomodule', '2x grindless:mu_metal_shield', '2x grindless:uv_electromagnet'], name: 'high_flux_reactor' },
+      { machine: TC.machines.facility.machine, parts: [HULL, ARM, SENSOR, CONVEYOR], research: 'grindless:pmma_coated_wafer', domain: ['4x grindless:hpge_crystal', '2x grindless:silicon_nitride_film', '2x grindless:mu_metal_shield'], name: 'transuranium_facility' }
     ]
     TC.controllerRecipes = []
     defs.forEach(function (d) {
@@ -181,7 +183,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))

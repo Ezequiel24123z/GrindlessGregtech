@@ -178,11 +178,14 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var ARM = 'gtceu:uv_robot_arm'
-    var SENSOR = 'gtceu:uv_sensor'
+    var ARM = 'gtceu:uhv_robot_arm'
+    var SENSOR = 'gtceu:uhv_sensor'
+    var EMITTER = 'gtceu:uhv_emitter'
+    var FIELD = 'gtceu:uhv_field_generator'
+    var MOTOR = 'gtceu:uhv_electric_motor'
     var defs = [
-      { machine: CR.machines.lab.machine, parts: [HULL, SENSOR], research: 'grindless:fibre_bragg_grating', domain: ['4x grindless:sapphire_wafer', '2x grindless:srf_cavity', '2x grindless:ytterbium_fibre'], name: 'nuclear_clock_lab' },
-      { machine: CR.machines.furnace.machine, parts: [HULL, ARM], research: 'grindless:iridium_crucible', domain: ['2x grindless:iridium_crucible', '4x grindless:hpge_crystal', '2x grindless:cvd_diamond_plate'], name: 'crystal_growth_furnace' }
+      { machine: CR.machines.lab.machine, parts: [HULL, SENSOR, EMITTER, FIELD], research: 'grindless:fibre_bragg_grating', domain: ['4x grindless:sapphire_wafer', '2x grindless:srf_cavity', '2x grindless:ytterbium_fibre'], name: 'nuclear_clock_lab' },
+      { machine: CR.machines.furnace.machine, parts: [HULL, ARM, MOTOR, SENSOR], research: 'grindless:iridium_crucible', domain: ['2x grindless:iridium_crucible', '4x grindless:hpge_crystal', '2x grindless:cvd_diamond_plate'], name: 'crystal_growth_furnace' }
     ]
     CR.controllerRecipes = []
     defs.forEach(function (d) {
@@ -192,7 +195,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))

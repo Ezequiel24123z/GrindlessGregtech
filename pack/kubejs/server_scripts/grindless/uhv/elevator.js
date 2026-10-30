@@ -197,8 +197,8 @@
     works: 'grindless:assembly_line/tether_ribbon_works',
     elevator: 'grindless:assembly_line/space_elevator'
   }
-  var CRAFTING_PARTS = ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_pump', 'gtceu:uv_conveyor_module', 'gtceu:uv_field_generator',
-    'gtceu:uv_electric_motor', CLIMBER, 'gtca:space_elevator', 'gtca:space_elevator_cable', 'gtca:space_elevator_motor_mk_1', 'gtca:ultra_high_strength_concrete_floor',
+  var CRAFTING_PARTS = ['gtceu:uhv_machine_hull', 'gtceu:uhv_electric_pump', 'gtceu:uhv_conveyor_module', 'gtceu:uhv_field_generator',
+    'gtceu:uhv_electric_motor', 'gtceu:uhv_fluid_regulator', 'gtceu:uhv_robot_arm', 'gtceu:uhv_electric_piston', CLIMBER, 'gtca:space_elevator', 'gtca:space_elevator_cable', 'gtca:space_elevator_motor_mk_1', 'gtca:ultra_high_strength_concrete_floor',
     'grindless:fused_silica_tube', 'grindless:silica_aerogel', 'grindless:cvd_diamond_plate', 'grindless:srf_cryomodule', 'grindless:ytterbium_fibre', 'grindless:nbn_coated_sic_plate', 'grindless:mu_metal_shield', 'grindless:thruster_pod']
 
   function keysOf(r) {
@@ -273,7 +273,9 @@
     }
     var b = event.recipes.gtceu.assembly_line('grindless:pbo_plant')
     b.itemInputs('gtceu:uhv_machine_hull')
-    b.itemInputs('2x gtceu:uv_electric_pump')
+    b.itemInputs('3x gtceu:uhv_electric_pump')
+    b.itemInputs('3x gtceu:uhv_fluid_regulator')
+    b.itemInputs('3x gtceu:uhv_electric_motor')
     b.itemInputs('4x #gtceu:circuits/uhv')
     b.itemInputs('4x grindless:fused_silica_tube')
     b.itemInputs('2x grindless:silica_aerogel')
@@ -285,7 +287,9 @@
     b.EUt(1966080).duration(1500)
     b = event.recipes.gtceu.assembly_line('grindless:tether_ribbon_works')
     b.itemInputs('gtceu:uhv_machine_hull')
-    b.itemInputs('2x gtceu:uv_conveyor_module')
+    b.itemInputs('3x gtceu:uhv_conveyor_module')
+    b.itemInputs('3x gtceu:uhv_robot_arm')
+    b.itemInputs('3x gtceu:uhv_electric_motor')
     b.itemInputs('4x #gtceu:circuits/uhv')
     b.itemInputs('2x grindless:srf_cryomodule')
     b.itemInputs('4x grindless:ytterbium_fibre')
@@ -296,8 +300,9 @@
     b.EUt(1966080).duration(1500)
     b = event.recipes.gtceu.assembly_line('grindless:space_elevator')
     b.itemInputs('gtceu:uhv_machine_hull')
-    b.itemInputs('2x gtceu:uv_field_generator')
-    b.itemInputs('2x gtceu:uv_electric_motor')
+    b.itemInputs('3x gtceu:uhv_field_generator')
+    b.itemInputs('3x gtceu:uhv_electric_motor')
+    b.itemInputs('3x gtceu:uhv_electric_piston')
     b.itemInputs(CLIMBER)
     b.itemInputs('4x #gtceu:circuits/uhv')
     b.itemInputs('2x grindless:srf_cryomodule')

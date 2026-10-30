@@ -109,7 +109,7 @@
   P.skipped = []
   P.clashes = []
   P.crafting = { sinterer: 'grindless:assembly_line/spark_plasma_sinterer' }
-  var CRAFTING_PARTS = ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_piston', 'grindless:propellant_tank', 'grindless:silica_aerogel', 'grindless:nbn_coated_sic_plate', 'grindless:mu_metal_shield']
+  var CRAFTING_PARTS = ['gtceu:uhv_machine_hull', 'gtceu:uhv_electric_piston', 'gtceu:uhv_field_generator', 'gtceu:uhv_sensor', 'grindless:propellant_tank', 'grindless:silica_aerogel', 'grindless:nbn_coated_sic_plate', 'grindless:mu_metal_shield']
 
   function keysOf(r) {
     var keys = {}
@@ -181,7 +181,9 @@
     }
     var b = event.recipes.gtceu.assembly_line('grindless:spark_plasma_sinterer')
     b.itemInputs('gtceu:uhv_machine_hull')
-    b.itemInputs('2x gtceu:uv_electric_piston')
+    b.itemInputs('3x gtceu:uhv_electric_piston')
+    b.itemInputs('3x gtceu:uhv_field_generator')
+    b.itemInputs('3x gtceu:uhv_sensor')
     b.itemInputs('4x #gtceu:circuits/uhv')
     b.itemInputs('4x grindless:silica_aerogel')
     b.itemInputs('2x grindless:nbn_coated_sic_plate')
