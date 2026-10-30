@@ -87,6 +87,14 @@
   TABLE.push(row('nb_target', 'spark_plasma_sintering', 6, [item('gtceu:niobium_dust', 4)], [], [item('grindless:nb_target', 1)], [], UHVA, 500))
   TABLE.push(row('w_target', 'spark_plasma_sintering', 7, [item('gtceu:tungsten_dust', 4)], [], [item('grindless:w_target', 1)], [], UHVA, 500))
 
+  // OpV-A1 (opv.md line 4): the densified chain preform sintered into two composite rods, the offcuts ground to SiC dust for the
+  // UHTC blend; four rods and a lamina stack sintered into the composite rotor. opv.md's c8-9 are UXV-A1's targets (uxv/superheavy.js)
+  // and c11-15 are OpV-A2's to A4's, so these are c16 and c17.
+  TABLE.push(row('chain_composite_rod', 'spark_plasma_sintering', 16, [item('grindless:densified_chain_preform', 1)], [],
+    [item('grindless:chain_composite_rod', 2), item(SIC, 1)], [], UHVA, 600))
+  TABLE.push(row('chain_composite_rotor', 'spark_plasma_sintering', 17,
+    [item('grindless:chain_composite_rod', 4), item('grindless:chain_lamina_stack', 1)], [], [item('grindless:chain_composite_rotor', 1)], [], UHVA, 800))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),
