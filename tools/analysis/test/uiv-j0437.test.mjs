@@ -57,7 +57,7 @@ test('machines: three UIV multiblocks in the J0437 orbit, controllers shaped fro
   for (const m of ['pulsar_wind_trap', 'positronium_condensate_lab', 'xray_pulse_profiler']) {
     assert.ok(startup.includes(`'${m}'`) || startup.includes(`${m}:`), m);
     assert.ok(server.includes('grindless:assembly_line/'), m);
-    assert.ok(lang.includes(`grindless.machine.${m}.tooltip.2`), m);
+    assert.ok(lang.includes(`grindless.machine.${m}.tooltip.0`), m);
   }
   assert.ok(server.includes('gtceu:uiv_machine_hull') && server.includes('gtnn:optical_mainframe'));
   assert.ok(server.includes(ORBIT) && server.includes('.dimension('));

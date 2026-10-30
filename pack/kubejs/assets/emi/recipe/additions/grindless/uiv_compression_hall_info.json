@@ -1,5 +1,5 @@
 {
   "type": "emi:info",
   "stacks": ["item:gtceu:neutronium_compression_hall"],
-  "text": ["emi.grindless.info.neutronium_compression_hall.0"]
+  "text": ["emi.grindless.info.neutronium_compression_hall.0", "emi.grindless.info.neutronium_compression_hall.1"]
 }

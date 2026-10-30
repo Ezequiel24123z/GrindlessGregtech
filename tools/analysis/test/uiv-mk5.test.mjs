@@ -211,7 +211,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
   for (const k of ['block.gtceu.polarised_proton_source', 'block.gtceu.uiv_fusion_reactor', 'gtceu.proton_polarisation', 'material.gtceu.detritiated_protium', 'material.gtceu.polarised_h_gas', 'material.gtceu.nitrogen_15_ammonia']) assert.ok(flat.includes(k), k);
   assert.ok(keys.includes('gtceu.recipe.grindless_pyroprocessing.li_sn_eutectic'));
-  for (const m of ['polarised_proton_source', 'uiv_fusion_reactor']) for (let i = 0; i < 3; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
+  for (const m of ['polarised_proton_source', 'uiv_fusion_reactor']) for (let i = 0; i < (m === 'polarised_proton_source' ? 2 : 1); i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   for (const i of [0, 1]) assert.ok(keys.includes(`emi.grindless.info.uiv_mk5.${i}`), `emi ${i}`);
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;

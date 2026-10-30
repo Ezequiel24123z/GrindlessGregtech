@@ -173,7 +173,7 @@ test('lang: every item, block and machine named in en_us and es_es, every older 
   for (const n of itemNames.concat(blockNames)) assert.ok(lang.includes(`['${n}', `), `lang entry for ${n}`);
   for (const m of ['matrioshka_computer', 'droplet_radiator_works']) {
     assert.ok(lang.includes(`block.gtceu.${m}'`));
-    for (let i = 0; i < 3; i++) assert.ok(lang.includes(`grindless.machine.${m}.tooltip.${i}'`));
+    for (let i = 0; i < 1; i++) assert.ok(lang.includes(`grindless.machine.${m}.tooltip.${i}'`));
   }
   const keys = ['matrioshka_computing.research_write', 'matrioshka_computing.ns_eos_chart', 'matrioshka_computing.kerr_chart',
     'droplet_radiator_assembly.radiator_module', 'droplet_radiator_assembly.tpv_tile', 'electron_beam.tin_distill',

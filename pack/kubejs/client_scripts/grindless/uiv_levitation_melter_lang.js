@@ -16,14 +16,11 @@
         ['gtceu.levitation_melting', 'Levitation Melting', 'Fusión por levitación'],
 
         ['grindless.machine.levitation_melter.tooltip.0',
-            'A cold-crucible coil holds the melt in mid-air under helium, so no wall can foul it: it makes RHEA, Wf/RHEA, Ti-50, bulk metallic glass and PrNi5.',
-            'Una bobina de crisol frío sostiene la masa fundida en el aire bajo helio, así que ninguna pared la ensucia: fabrica RHEA, Wf/RHEA, Ti-50, vidrio metálico masivo y PrNi5.'],
+            '\u00a77Melts alloys levitated in helium: RHEA, Ti-50, metallic glass and PrNi5.',
+            '\u00a77Funde aleaciones levitadas en helio: RHEA, Ti-50, vidrio metálico y PrNi5.'],
         ['grindless.machine.levitation_melter.tooltip.1',
-            'Circuit 1 RHEA, 2 Wf/RHEA, 3 Ti-50, 4 bulk metallic glass, 5 PrNi5. The oxide dross goes to the extraction cascade; the beryllium fume is captured as BeO.',
-            'Circuito 1 RHEA, 2 Wf/RHEA, 3 Ti-50, 4 vidrio metálico masivo, 5 PrNi5. La escoria de óxidos va a la cascada de extracción; el humo de berilio se captura como BeO.'],
-        ['grindless.machine.levitation_melter.tooltip.2',
-            'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses, a helium hatch. Accepts a parallel hatch.',
-            'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, una escotilla de helio. Acepta una escotilla de paralelos.'],
+            'Needs a helium hatch.',
+            'Necesita una escotilla de helio.'],
 
         ['gtceu.recipe.grindless_levitation_melting.rhea_melt', 'Melts W, Mo, Nb-Ta buttons and Hf into the RHEA ingot.', 'Funde W, Mo, botones de Nb-Ta y Hf en el lingote RHEA.'],
         ['gtceu.recipe.grindless_levitation_melting.wf_rhea_melt', 'Melts a densified tungsten preform into RHEA: the Wf/RHEA billet.', 'Funde una preforma de wolframio densificada en RHEA: la palanquilla Wf/RHEA.'],

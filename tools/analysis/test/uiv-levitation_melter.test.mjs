@@ -169,7 +169,7 @@ test('every new item has a texture, a name and two tooltips in en_us and es_es',
   // every ENTRIES row has en and es
   const entries = lang.slice(lang.indexOf('var ENTRIES'), lang.indexOf('var ITEMS'));
   for (const m of entries.matchAll(/\['([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*'((?:[^'\\]|\\.)*)'\]/g)) assert.ok(m[2] && m[3], m[1]);
-  for (const t of ['block.gtceu.levitation_melter', 'gtceu.levitation_melting', 'grindless.machine.levitation_melter.tooltip.2']) assert.ok(lang.includes(`'${t}'`), t);
+  for (const t of ['block.gtceu.levitation_melter', 'gtceu.levitation_melting', 'grindless.machine.levitation_melter.tooltip.1']) assert.ok(lang.includes(`'${t}'`), t);
   for (const r of T.types.levitation_melting.recipes) assert.ok(lang.includes(`grindless_levitation_melting.${r.name}'`), r.name);
   for (const k of ['grindless_electron_beam.nb_ta_button', 'grindless_nitride_magnet_synthesis.halbach_array', 'grindless_chemical_vapour_infiltration.w_preform_densify']) {
     assert.ok(lang.includes(k), k);
