@@ -1,4 +1,3 @@
-// priority: -9900
 // TEST ONLY, OpV-A2. Command: kubejs custom_command gg_test_opv_circuits
 // Read-only; places nothing. The doubt (opv.md, A2 tests): the cosmic mainframe from our join satisfies
 // #gtceu:circuits/opv in a GTM assembly-line recipe, and GT--'s route is gone in game (S0-4 only read the tag offline).
