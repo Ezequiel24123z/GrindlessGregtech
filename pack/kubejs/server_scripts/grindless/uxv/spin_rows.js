@@ -1,4 +1,4 @@
-// priority: -26249
+// priority: -26252
 // UXV-A3 (docs/eras/uxv.md "A3"): the GTM-type steps of the spintronic rows: slicing, polishing and annealing the substrate boules, the hBN leach,
 // the CVT crystal clean-up, the mu-metal and Finemet charges, the mu-metal hot strip mill and shield can, the STNO clean. The rows on our own
 // machines are in the shared tables (electron_beam, composites, crystals, levitation_melter, megabar, photonics) and uv/photonics.js, zpm/qubits.js.

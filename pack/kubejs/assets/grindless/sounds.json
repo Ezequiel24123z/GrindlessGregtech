@@ -45,6 +45,7 @@
   "loop_polymer_works": { "sounds": [ { "name": "grindless:loop_polymer_works", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
   "loop_power_devices_fab": { "sounds": [ { "name": "grindless:loop_power_devices_fab", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
   "loop_qubit_fab": { "sounds": [ { "name": "grindless:loop_qubit_fab", "volume": 0.55, "attenuation_distance": 20, "stream": false } ] },
+  "loop_racetrack_fab": { "sounds": [ { "name": "grindless:loop_racetrack_fab", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
   "loop_refinery": { "sounds": [ { "name": "grindless:loop_refinery", "volume": 0.7, "attenuation_distance": 28, "stream": false } ] },
   "loop_reformer": { "sounds": [ { "name": "grindless:loop_reformer", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
   "loop_shequid_works": { "sounds": [ { "name": "grindless:loop_shequid_works", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
@@ -57,5 +58,7 @@
   "loop_thorium_pyro": { "sounds": [ { "name": "grindless:loop_thorium_pyro", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
   "loop_tritium_removal": { "sounds": [ { "name": "grindless:loop_tritium_removal", "volume": 0.6, "attenuation_distance": 24, "stream": false } ] },
   "loop_uranium_leaching": { "sounds": [ { "name": "grindless:loop_uranium_leaching", "volume": 0.6, "attenuation_distance": 24, "stream": false } ] },
-  "loop_warp_gate": { "sounds": [ { "name": "grindless:loop_warp_gate", "volume": 0.7, "attenuation_distance": 32, "stream": false } ] }
+  "loop_vdw_stacking_cell": { "sounds": [ { "name": "grindless:loop_vdw_stacking_cell", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
+  "loop_warp_gate": { "sounds": [ { "name": "grindless:loop_warp_gate", "volume": 0.7, "attenuation_distance": 32, "stream": false } ] },
+  "loop_yig_lpe_furnace": { "sounds": [ { "name": "grindless:loop_yig_lpe_furnace", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] }
 }

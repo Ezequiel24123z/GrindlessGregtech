@@ -1,4 +1,4 @@
-// priority: 1496
+// priority: 1499
 // Gregtech Grindless - names and tooltips of the UXV spintronic feedstock (startup_scripts/grindless/uxv/spin_feed.js):
 //
 //   grindless:<item>   item.grindless.<n> plus one tooltip line (tooltip.grindless.<n>.0)

@@ -257,8 +257,13 @@
    "gtceu:xray_pulse_profiler"
   ],
   "uxv": [
+   "gtceu:mnt_collider",
    "gtceu:mtj_sputter_cluster",
-   "gtceu:oxide_pld_chamber"
+   "gtceu:oxide_pld_chamber",
+   "gtceu:racetrack_fab",
+   "gtceu:shequid_works",
+   "gtceu:vdw_stacking_cell",
+   "gtceu:yig_lpe_furnace"
   ],
   "launch_road": [
    "gtceu:composite_autoclave",

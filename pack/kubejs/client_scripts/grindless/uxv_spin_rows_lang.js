@@ -1,4 +1,4 @@
-// priority: 1478
+// priority: 1475
 // Gregtech Grindless - names and tooltips of the UXV spintronic rows (startup_scripts/grindless/uxv/spin_rows.js) and the EMI lines of the
 // new rows in the shared tables:
 //
@@ -97,6 +97,7 @@
         ['gtceu.recipe.grindless_crystal_growth.terfenol_d_rod', 'Circuit 15: a textured Terfenol-D rod drawn from the ingot; the offcut returns as dust', 'Circuito 15: una varilla de Terfenol-D texturizada del lingote; el recorte vuelve como polvo'],
         ['gtceu.recipe.grindless_crystal_growth.ni_mn_ga_crystal_growth', 'Circuit 16: a Ni-Mn-Ga single crystal drawn from the ingot; the offcut returns as dust', 'Circuito 16: un monocristal Ni-Mn-Ga del lingote; el recorte vuelve como polvo'],
         ['gtceu.recipe.grindless_crystal_growth.wte2_recrystallise', 'Circuit 17: WTe2 dust recrystallised by vapour transport', 'Circuito 17: polvo de WTe2 recristalizado por transporte de vapor'],
+        ['gtceu.recipe.grindless_crystal_growth.fgt_recrystallise', 'Circuit 18: Fe3GeTe2 dust recrystallised by vapour transport', 'Circuito 18: polvo de Fe3GeTe2 recristalizado por transporte de vapor'],
         ['gtceu.recipe.grindless_photonic_foundry.meso_logic_die', 'Circuit 17: the MESO logic die bonded under argon; the argon is recovered', 'Circuito 17: el dado l\u00f3gico MESO unido bajo arg\u00f3n; el arg\u00f3n se recupera'],
         ['gtceu.recipe.grindless_photonic_foundry.mram_copper', 'Circuit 18: the MRAM wafer wired with copper', 'Circuito 18: la oblea MRAM cableada con cobre'],
         ['gtceu.recipe.grindless_photonic_foundry.rf_carpet_board', 'Circuit 19: a gold-plated RF carpet board', 'Circuito 19: una placa de alfombra RF chapada en oro'],

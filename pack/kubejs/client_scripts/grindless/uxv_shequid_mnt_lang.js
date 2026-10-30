@@ -1,3 +1,4 @@
+// priority: 1524
 // Gregtech Grindless - names and tooltips of UXV's SHeQUID works and MNT collider (startup_scripts/grindless/uxv/shequid_mnt.js; package UXV-A6):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names

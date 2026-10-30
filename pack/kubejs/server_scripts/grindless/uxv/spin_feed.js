@@ -1,4 +1,4 @@
-// priority: -26234
+// priority: -26230
 // UXV-A2 (docs/eras/uxv.md "A2"): the spintronic feedstock that no older plant row makes: the hot strip mill's foils, the oxide charges
 // (GTM mixer), the seven bonded sputter targets (GTM assembler), the spent-CoFeB re-press and the gum-metal sinter (powder bed).
 // The older plants' own rows are in their own files; the powder bed's atomise, print and press rows come from tables/am_powders.json.

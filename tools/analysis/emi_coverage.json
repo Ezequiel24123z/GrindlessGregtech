@@ -83,6 +83,8 @@
   ],
   "pendingRoutes": [
     { "id": "grindless:nitride_magnet_synthesis/uxv_smes_cell", "reason": "UXV-W landed before Wave A: grindless:strand_tape is held until UXV-A8 writes its producer;     A8 deletes this entry with its hold rule" },
+    { "id": "grindless:assembler/uxv_wireless_energy_hatch", "reason": "UXV-W landed before Wave A and UXV-A6 made grindless:uxv_sensor visible: the hatch's other inputs (gtceu:uxv_energy_input_hatch, grindless:pasta_strand_repeater) are held until UXV-B4 writes their producers; B4 deletes this entry with its hold rule" },
+    { "id": "grindless:assembler/uxv_wireless_energy_cover", "reason": "UXV-W landed before Wave A and UXV-A6 made grindless:uxv_sensor visible: the cover's other inputs (grindless:lasagna_plate, grindless:pasta_strand_repeater) are held until UXV-B4 writes their producers; B4 deletes this entry with its hold rule" },
     { "id": "grindless:assembly_line/uxv_parallel_hatch", "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" }
       ],
       "pendingUses": [

@@ -149,6 +149,9 @@ test('"only from": nothing else in the pack makes these ids', () => {
   assert.ok(producers('gtceu:lpe_flux').length >= 1 && JSON.stringify(find('grindless:liquid_phase_epitaxy/lpe_flux').j).includes('lpe_flux'));
   assert.ok(producers('gtceu:wte2_dust').some((r) => r.i === 'grindless:vdw_stacking/wte2_flake'));
   assert.ok(producers('gtceu:fe3gete2_dust').some((r) => r.i === 'grindless:vdw_stacking/fgt_flake'));
+  // the integrator's crystal growth c18 recrystallises the FGT flake dust, as A3's c17 does for WTe2
+  const fgt = recipes.find((r) => /crystal_growth\/(.*\/)?fgt_recrystallise$/.test(r.i));
+  assert.ok(fgt && JSON.stringify(fgt.j).includes('gtceu:fe3gete2_dust') && JSON.stringify(fgt.j).includes('grindless:fgt_raw_crystal'), 'FGT dust goes back to the raw crystal');
 });
 
 test('older rows: only the hall row sits outside this package\'s files', () => {
