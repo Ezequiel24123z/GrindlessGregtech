@@ -1,0 +1,79 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uxv/cygnus_lift.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit; 'site' true locks the recipe to grindless:cygnus_x1_orbit. star_lifting, plasma_mass_filtering and stellar_condensation are package UXV-B2's machine types (data key = dataKey, the EMI line). Package UXV-B2, docs/eras/uxv.md machines 10-12 and process line 26.",
+  "types": {
+    "star_lifting": {
+      "dataKey": "grindless_star_lifting",
+      "recipes": [
+        {
+          "_why": "machine 10 c1: liquid helium cools the lift tube while a magnetic funnel draws stellar plasma off the Cygnus X-1 donor; 900 mB of warm helium returns to UV's cold works",
+          "name": "stellar_lift", "circuit": 1, "eut": 134217728, "duration": 1200, "site": true,
+          "itemsIn": [], "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:stellar_plasma", "amount": 1000 },
+            { "id": "gtceu:helium", "amount": 900 }
+          ]
+        },
+        {
+          "_why": "machine 10 c2: a data module records the plasma column's flow; 100 mB of the plasma it samples is consumed",
+          "name": "elevator_log", "circuit": 2, "eut": 8388608, "duration": 200, "site": true,
+          "itemsIn": [{ "id": "gtceu:data_module", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:stellar_plasma", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:elevator_log", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "plasma_mass_filtering": {
+      "dataKey": "grindless_plasma_mass_filtering",
+      "recipes": [
+        {
+          "_why": "machine 11 c1: the solenoid sorts the stellar plasma by mass into four cuts",
+          "name": "stellar_cuts", "circuit": 1, "eut": 67108864, "duration": 400, "site": true,
+          "itemsIn": [], "kept": [],
+          "fluidsIn": [{ "id": "gtceu:stellar_plasma", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:stellar_hydrogen_cut", "amount": 700 },
+            { "id": "gtceu:stellar_helium_cut", "amount": 270 },
+            { "id": "gtceu:stellar_cno_cut", "amount": 15 },
+            { "id": "gtceu:stellar_heavy_cut", "amount": 15 }
+          ]
+        },
+        {
+          "_why": "machine 11 c2: the same sorting on the accretion disk's plasma (B3's disk_plasma); the heavy tenth comes out as the heavy cut",
+          "name": "disk_filter", "circuit": 2, "eut": 67108864, "duration": 400, "site": false,
+          "itemsIn": [], "kept": [],
+          "fluidsIn": [{ "id": "gtceu:disk_plasma", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:filtered_disk_plasma", "amount": 900 },
+            { "id": "gtceu:stellar_heavy_cut", "amount": 100 }
+          ]
+        }
+      ]
+    },
+    "stellar_condensation": {
+      "dataKey": "grindless_stellar_condensation",
+      "recipes": [
+        {
+          "_why": "machine 12 c1: the heavy cut condenses by stage into refractory, metal and silicate condensate; the hydrogen cut carries the volatiles off the top (to syngas)",
+          "name": "condense", "circuit": 1, "eut": 33554432, "duration": 600, "site": true,
+          "itemsIn": [], "kept": [],
+          "fluidsIn": [
+            { "id": "gtceu:stellar_heavy_cut", "amount": 100 },
+            { "id": "gtceu:stellar_hydrogen_cut", "amount": 100 }
+          ],
+          "itemsOut": [
+            { "id": "grindless:refractory_condensate", "count": 1 },
+            { "id": "grindless:metal_condensate", "count": 1 },
+            { "id": "grindless:silicate_condensate", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:volatile_condensate", "amount": 100 }]
+        }
+      ]
+    }
+  }
+}

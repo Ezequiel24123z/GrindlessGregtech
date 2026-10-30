@@ -134,7 +134,7 @@ test('the six older syngas rows are unchanged: circuits 1-4, no dimension, steam
   assert.deepEqual(shift.fluidsIn, [{ id: 'gtceu:carbon_monoxide', amount: 1000 }, { id: 'gtceu:steam', amount: 1000 }]);
   assert.deepEqual(shift.fluidsOut, [{ id: 'gtceu:hydrogen', amount: 2000 }, { id: 'gtceu:carbon_dioxide', amount: 1000 }]);
   // 6 older + Pluto shift + UEV-B3's CO-rich row (circuit 6, .uevRecipes)
-  assert.equal(recipes.filter((r) => r.t === 'gtceu:syngas').length, 9); // UIV-A10 adds c12_methanation (circuit 7)
+  assert.equal(recipes.filter((r) => r.t === 'gtceu:syngas').length, 10); // UIV-A10 adds c12_methanation (circuit 7), UXV-B2 volatile_reform (circuit 8)
 });
 
 test('every new name and tooltip has en_us and es_es text, and the textures exist', () => {
