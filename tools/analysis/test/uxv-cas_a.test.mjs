@@ -51,7 +51,7 @@ test('laser works c1 (Ti-44 core worn at 2%, neon, liquid helium -> Ps cell, war
   assert.deepEqual(plain(c1.fluidsOut.map((f) => [f.id, f.amount])), [['gtceu:helium', 1000]]);
   const c2 = rec('annihilation_lasing', 'stimulate_gamma_emission');
   assert.deepEqual([c2.circuit, c2.eut, c2.duration], [2, 134217728, 2400]);
-  assert.deepEqual(ids(c2.itemsIn), [['grindless:moderated_ps_cell', 1], ['grindless:gamma_laser_cavity', 1], ['grindless:mtj_die', 1]]);
+  assert.deepEqual(ids(c2.itemsIn), [['grindless:moderated_ps_cell', 1], ['grindless:positron_stack', 1], ['grindless:gamma_laser_cavity', 1], ['grindless:mtj_die', 1]]);
   assert.deepEqual(ids(c2.itemsOut), [['grindless:gamma_laser_module', 1]]);
 });
 

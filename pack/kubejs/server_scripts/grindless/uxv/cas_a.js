@@ -1,4 +1,4 @@
-// priority: -26290
+// priority: -26084
 // -----------------------------------------------------------------------------------------------
 // Recipes of UXV's Cassiopeia A machine and the emitter's gamma source (machines and recipe types: startup_scripts/grindless/uxv/cas_a.js;
 // docs/eras/uxv.md, machines 21 and 8, process line 25; package UXV-B5), generated at every server load from data/grindless/tables/cas_a.json,
