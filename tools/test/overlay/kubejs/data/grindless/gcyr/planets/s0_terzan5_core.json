@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.s0_terzan5_core",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:s0_terzan5_core",
+  "world": "grindless:s0_terzan5_core",
+  "orbit_world": "grindless:s0_terzan5_core",
+  "rocket_tier": 13,
+  "gravity": 1.0,
+  "has_atmosphere": false,
+  "days_in_year": 5,
+  "temperature": 100,
+  "solar_power": 100,
+  "has_oxygen": false,
+  "button_color": 3158064
+}
