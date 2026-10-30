@@ -42,7 +42,13 @@
           "itemsOut": [{ "id": "grindless:terfenol_d_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
         { "_why": "UXV-A3 integration (uxv.md line 37): the Ni-Mn-Ga crystal offcuts (crystals c16's dust) re-melted; the surface oxide leaves as dross.", "name": "ni_mn_ga_remelt", "circuit": 16, "eut": 7864320, "duration": 1200,
           "itemsIn": [{ "id": "gtceu:ni2mnga_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:ni_mn_ga_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:ni_mn_ga_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-D1 (opv.md line 25; c17): Ti, Zr and V melted together into the TiZrV getter alloy (one third each).", "name": "tizrv_melt", "circuit": 17, "eut": 7864320, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:titanium_dust", "count": 1 }, { "id": "gtceu:zirconium_dust", "count": 1 }, { "id": "gtceu:vanadium_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:tizrv_ingot", "count": 3 }], "fluidsOut": [] },
+        { "_why": "OpV-D1 (opv.md line 25; c18): chambers that did not activate re-melted; the getter film floats off as TiZrV and the stainless steel comes back as ingots; the surface oxide leaves as dross.", "name": "neg_chamber_remelt", "circuit": 18, "eut": 7864320, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:spent_neg_chamber", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "gtceu:stainless_steel_ingot", "count": 2 }, { "id": "grindless:tizrv_ingot", "count": 1 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] }
       ]
     },
     "mixer": {

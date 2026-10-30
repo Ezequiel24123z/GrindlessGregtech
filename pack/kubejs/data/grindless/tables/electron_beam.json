@@ -72,7 +72,25 @@
           "itemsOut": [{ "id": "grindless:ga2o3_gated_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
         { "_why": "UXV-A3 (uxv.md line 47; c29): the mu-metal blend melted to an ingot; the skull goes back to the melt.", "name": "mu_metal_ingot", "circuit": 29, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "grindless:mu_metal_blend", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:mu_metal_ingot", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:mu_metal_ingot", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-D1 (opv.md line 20; c24): BeF2 reduced with calcium in the beam (BeF2 + Ca -> Be + CaF2); the fluorite goes back to the fluorspar kiln's charge.", "name": "be_reduction", "circuit": 24, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:be_fluoride_dust", "count": 3 }, { "id": "gtceu:calcium_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:eb_beryllium_ingot", "count": 1 }, { "id": "gcyr:fluorite_dust", "count": 3 }], "fluidsOut": [] },
+        { "_why": "OpV-D1 (opv.md line 20; c25): two Be foils brazed into a titanium flange; the trim is window scrap, which the fluorspar kiln turns back into BeF2.", "name": "be_window_braze", "circuit": 25, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:be_window_foil", "count": 2 }, { "id": "gtceu:titanium_plate", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:brazed_be_window", "count": 1 }, { "id": "grindless:be_window_scrap", "count": 1, "chance": 2500 }], "fluidsOut": [] },
+        { "_why": "OpV-D1 (opv.md line 24; c25 again, distinct inputs as F3 allows): the pickup array brazed into its stainless steel tank.", "name": "pickup_tank_braze", "circuit": 25, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:pickup_array", "count": 1 }, { "id": "gtceu:stainless_steel_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:brazed_pickup_tank", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-D1 (opv.md line 22; c26): two 6LiH tiles sealed in a stainless steel can by beam welding.", "name": "li6h_canning", "circuit": 26, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:li6h_tile", "count": 2 }, { "id": "gtceu:stainless_steel_plate", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:canned_li6h_block", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-D1 (opv.md line 25; c30): the NEG chambers baked to activate the getter film; the one that does not activate goes back to the levitation melter (c18).", "name": "neg_activation", "circuit": 30, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:neg_coated_chamber", "count": 8 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:activated_neg_chamber", "count": 7 }, { "id": "grindless:spent_neg_chamber", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-D1 (opv.md line 24; c31): A2's NbTiN film welded onto RRR niobium as the pickup electrodes; the trim is niobium powder for c4.", "name": "pickup_array", "circuit": 31, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:nbtin_film", "count": 4 }, { "id": "grindless:rrr_niobium_sheet", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:pickup_array", "count": 1 }, { "id": "grindless:niobium_powder", "count": 1, "chance": 3000 }], "fluidsOut": [] }
       ]
     },
     "single_crystal_casting": {
