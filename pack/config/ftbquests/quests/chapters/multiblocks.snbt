@@ -3147,17 +3147,6 @@
 			y: 61.0d
 		}
 		{
-			icon: "gcyr:space_elevator"
-			id: "21C9AE373B316924"
-			rewards: [{ id: "175FFE0917354DB6", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "UHV, Gregicality Rocketry"
-			tasks: [{ id: "5E3C65EDFCDC7AF1", item: "gcyr:space_elevator", type: "item" }]
-			x: 20.0d
-			y: 61.0d
-		}
-		{
 			icon: "gtca:space_elevator"
 			id: "2D96120A08AB30B0"
 			rewards: [{ id: "1E6069985CA25C06", type: "xp", xp: 10 }]
@@ -3165,7 +3154,7 @@
 			size: 1.25d
 			subtitle: "UHV, GT Community Additions"
 			tasks: [{ id: "32E7E88DD3BF5190", item: "gtca:space_elevator", type: "item" }]
-			x: 22.0d
+			x: 20.0d
 			y: 61.0d
 		}
 		{
@@ -3176,7 +3165,7 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech"
 			tasks: [{ id: "701EE34E9C35A985", item: "gtceu:uv_fusion_reactor", type: "item" }]
-			x: 24.0d
+			x: 22.0d
 			y: 61.0d
 		}
 		{
@@ -3187,8 +3176,8 @@
 			size: 1.25d
 			subtitle: "UHV, GregTech Modern Utilities"
 			tasks: [{ id: "54EE82F8F5DFDC78", item: "gtmutils:web_hub", type: "item" }]
-			x: 2.0d
-			y: 63.0d
+			x: 24.0d
+			y: 61.0d
 		}
 		{
 			icon: "gtceu:uev_machine_hull"
@@ -3199,7 +3188,7 @@
 			tasks: [{ id: "44D8F66EB1A35992", type: "checkmark" }]
 			title: "UEV"
 			x: 0.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:barnard_core_drill"
@@ -3210,7 +3199,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "216758595826D390", item: "gtceu:barnard_core_drill", type: "item" }]
 			x: 2.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:calutron"
@@ -3221,7 +3210,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "2551C29EDB9A4863", item: "gtceu:calutron", type: "item" }]
 			x: 4.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:carbonyl_refinery"
@@ -3232,7 +3221,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "78196DB6E80EC37F", item: "gtceu:carbonyl_refinery", type: "item" }]
 			x: 6.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:containment_works"
@@ -3243,7 +3232,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "5DAE23ED9F3ED648", item: "gtceu:containment_works", type: "item" }]
 			x: 8.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:cvi_furnace"
@@ -3254,7 +3243,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "71CA47AD905E3A7B", item: "gtceu:cvi_furnace", type: "item" }]
 			x: 10.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:degenerate_harvester"
@@ -3265,7 +3254,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "7732AE3E85D5CB9C", item: "gtceu:degenerate_harvester", type: "item" }]
 			x: 12.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:electron_beam_furnace"
@@ -3276,7 +3265,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "53CB0D8A357CC797", item: "gtceu:electron_beam_furnace", type: "item" }]
 			x: 14.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:entanglement_station"
@@ -3287,7 +3276,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "505A1347A7BD011A", item: "gtceu:entanglement_station", type: "item" }]
 			x: 16.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:heavy_ion_cyclotron"
@@ -3298,7 +3287,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "5631459FDCA9DA54", item: "gtceu:heavy_ion_cyclotron", type: "item" }]
 			x: 18.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:helium3_polariser"
@@ -3309,7 +3298,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "4F48C84D4368B599", item: "gtceu:helium3_polariser", type: "item" }]
 			x: 20.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:interstellar_dust_lab"
@@ -3320,7 +3309,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "2351747AFC9AA376", item: "gtceu:interstellar_dust_lab", type: "item" }]
 			x: 22.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:megabar_press"
@@ -3331,7 +3320,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "6136643781C0A739", item: "gtceu:megabar_press", type: "item" }]
 			x: 24.0d
-			y: 66.0d
+			y: 64.0d
 		}
 		{
 			icon: "gtceu:nebula_collector"
@@ -3342,7 +3331,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "170FA2B0CCAE369B", item: "gtceu:nebula_collector", type: "item" }]
 			x: 2.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:nitride_magnet_works"
@@ -3353,7 +3342,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "156EE7475AEE23C6", item: "gtceu:nitride_magnet_works", type: "item" }]
 			x: 4.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:photonic_integration_hall"
@@ -3364,7 +3353,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "61DDBD3D847F2C16", item: "gtceu:photonic_integration_hall", type: "item" }]
 			x: 6.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:pulsar_timing_station"
@@ -3375,7 +3364,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "49841830FD453667", item: "gtceu:pulsar_timing_station", type: "item" }]
 			x: 8.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:quantum_gas_lab"
@@ -3386,7 +3375,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "2C6D9F7424BADAA4", item: "gtceu:quantum_gas_lab", type: "item" }]
 			x: 10.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:recoil_separator"
@@ -3397,7 +3386,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "7E17012800BE7EAD", item: "gtceu:recoil_separator", type: "item" }]
 			x: 12.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:sic_fibre_plant"
@@ -3408,7 +3397,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "25620CEB48039CDD", item: "gtceu:sic_fibre_plant", type: "item" }]
 			x: 14.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:single_crystal_foundry"
@@ -3419,7 +3408,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "130E42987299B812", item: "gtceu:single_crystal_foundry", type: "item" }]
 			x: 16.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:snspd_foundry"
@@ -3430,7 +3419,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "455545D50D2C2EB5", item: "gtceu:snspd_foundry", type: "item" }]
 			x: 18.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:stellar_forge"
@@ -3441,7 +3430,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "1B44BF85591305E0", item: "gtceu:stellar_forge", type: "item" }]
 			x: 20.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:superheavy_chemistry_lab"
@@ -3452,7 +3441,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "183F537BCC5DF383", item: "gtceu:superheavy_chemistry_lab", type: "item" }]
 			x: 22.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:uev_fusion_reactor"
@@ -3463,7 +3452,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "37C3574666B137F4", item: "gtceu:uev_fusion_reactor", type: "item" }]
 			x: 24.0d
-			y: 68.0d
+			y: 66.0d
 		}
 		{
 			icon: "gtceu:vdw_stacker"
@@ -3474,7 +3463,7 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "6296AFE4825844EB", item: "gtceu:vdw_stacker", type: "item" }]
 			x: 2.0d
-			y: 70.0d
+			y: 68.0d
 		}
 		{
 			icon: "gtceu:white_dwarf_spectrograph"
@@ -3485,7 +3474,18 @@
 			subtitle: "UEV, Grindless"
 			tasks: [{ id: "4D30A547C6E82998", item: "gtceu:white_dwarf_spectrograph", type: "item" }]
 			x: 4.0d
-			y: 70.0d
+			y: 68.0d
+		}
+		{
+			icon: "gcyr:space_elevator"
+			id: "21C9AE373B316924"
+			rewards: [{ id: "175FFE0917354DB6", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.25d
+			subtitle: "UEV, Gregicality Rocketry"
+			tasks: [{ id: "5E3C65EDFCDC7AF1", item: "gcyr:space_elevator", type: "item" }]
+			x: 6.0d
+			y: 68.0d
 		}
 		{
 			icon: "gtceu:uiv_machine_hull"
@@ -3496,7 +3496,7 @@
 			tasks: [{ id: "55ED727F4D968169", type: "checkmark" }]
 			title: "UIV"
 			x: 0.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:beuv_scanner"
@@ -3507,7 +3507,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "5D273E9B85DCB6CF", item: "gtceu:beuv_scanner", type: "item" }]
 			x: 2.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:crust_lift"
@@ -3518,7 +3518,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "45DB19AF94A52494", item: "gtceu:crust_lift", type: "item" }]
 			x: 4.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:decay_heat_vault"
@@ -3529,7 +3529,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "6EDF7953C81FE9A8", item: "gtceu:decay_heat_vault", type: "item" }]
 			x: 6.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:droplet_radiator_works"
@@ -3540,7 +3540,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "49A817987444FE29", item: "gtceu:droplet_radiator_works", type: "item" }]
 			x: 8.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:ergosphere_probe_bay"
@@ -3551,7 +3551,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "56A2E6F488D88AF0", item: "gtceu:ergosphere_probe_bay", type: "item" }]
 			x: 10.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:femtosecond_writer"
@@ -3562,7 +3562,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "218527C66F26587E", item: "gtceu:femtosecond_writer", type: "item" }]
 			x: 12.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:levitation_melter"
@@ -3573,7 +3573,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "44BAC498444F6E5F", item: "gtceu:levitation_melter", type: "item" }]
 			x: 14.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:matrioshka_computer"
@@ -3584,7 +3584,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "7DC7AEB95553A9E8", item: "gtceu:matrioshka_computer", type: "item" }]
 			x: 16.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:millikelvin_cryostat_works"
@@ -3595,7 +3595,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "22AB06643BDA2F69", item: "gtceu:millikelvin_cryostat_works", type: "item" }]
 			x: 18.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:neutron_drip_separator"
@@ -3606,7 +3606,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "137D6D06AFA8AA25", item: "gtceu:neutron_drip_separator", type: "item" }]
 			x: 20.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:neutronium_cage"
@@ -3617,7 +3617,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "6CDFFA81301B3D71", item: "gtceu:neutronium_cage", type: "item" }]
 			x: 22.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:neutronium_compression_hall"
@@ -3628,7 +3628,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "7E0C89EF21B2BD4C", item: "gtceu:neutronium_compression_hall", type: "item" }]
 			x: 24.0d
-			y: 73.0d
+			y: 71.0d
 		}
 		{
 			icon: "gtceu:penrose_engine"
@@ -3639,7 +3639,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "20DA3CC8D6BE40F6", item: "gtceu:penrose_engine", type: "item" }]
 			x: 2.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:polarised_proton_source"
@@ -3650,7 +3650,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "56807A64AE20012C", item: "gtceu:polarised_proton_source", type: "item" }]
 			x: 4.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:positronium_condensate_lab"
@@ -3661,7 +3661,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "4F57978989D532DD", item: "gtceu:positronium_condensate_lab", type: "item" }]
 			x: 6.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:pulsar_wind_trap"
@@ -3672,7 +3672,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "36F10CF651963F45", item: "gtceu:pulsar_wind_trap", type: "item" }]
 			x: 8.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:r_process_decompressor"
@@ -3683,7 +3683,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "6E80318EE3750225", item: "gtceu:r_process_decompressor", type: "item" }]
 			x: 10.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:ramp_compression_pulser"
@@ -3694,7 +3694,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "28372C68C837902F", item: "gtceu:ramp_compression_pulser", type: "item" }]
 			x: 12.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:spectral_hole_burner"
@@ -3705,7 +3705,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "45BB596332FFD584", item: "gtceu:spectral_hole_burner", type: "item" }]
 			x: 14.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:stm_lithography_cell"
@@ -3716,7 +3716,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "55EBE92D39F835C2", item: "gtceu:stm_lithography_cell", type: "item" }]
 			x: 16.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:tfln_fab"
@@ -3727,7 +3727,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "12A8D25073787598", item: "gtceu:tfln_fab", type: "item" }]
 			x: 18.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:uiv_fusion_reactor"
@@ -3738,7 +3738,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "45DB41EDFA6BFFBF", item: "gtceu:uiv_fusion_reactor", type: "item" }]
 			x: 20.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtceu:xray_pulse_profiler"
@@ -3749,7 +3749,7 @@
 			subtitle: "UIV, Grindless"
 			tasks: [{ id: "7AE78A4AFB501923", item: "gtceu:xray_pulse_profiler", type: "item" }]
 			x: 22.0d
-			y: 75.0d
+			y: 73.0d
 		}
 		{
 			icon: "gtnn:neutron_activator"
@@ -3760,7 +3760,260 @@
 			subtitle: "UIV, GT--"
 			tasks: [{ id: "7E933A4932485653", item: "gtnn:neutron_activator", type: "item" }]
 			x: 24.0d
-			y: 75.0d
+			y: 73.0d
+		}
+		{
+			icon: "gtceu:uxv_machine_hull"
+			id: "303257B615D51E10"
+			shape: "rsquare"
+			size: 1.5d
+			subtitle: "UXV multiblocks"
+			tasks: [{ id: "77F71CEB11EEDC72", type: "checkmark" }]
+			title: "UXV"
+			x: 0.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:accretion_disk_skimmer"
+			id: "51850CAC4FC9CA44"
+			rewards: [{ id: "38E45F12D7563527", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "5B04C4445B868634", item: "gtceu:accretion_disk_skimmer", type: "item" }]
+			x: 2.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:annihilation_laser_works"
+			id: "45660FE53DF209BF"
+			rewards: [{ id: "6FD43BD7E7746FEA", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "64389FEBA19F4273", item: "gtceu:annihilation_laser_works", type: "item" }]
+			x: 4.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:bz_dynamo"
+			id: "4B5D93E40E45A0DC"
+			rewards: [{ id: "220DFE7EDFBE082B", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "1828951AA628C891", item: "gtceu:bz_dynamo", type: "item" }]
+			x: 6.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:ejecta_knot_sweeper"
+			id: "2E9DD3F0857B13B5"
+			rewards: [{ id: "2B24D89833920498", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "29AA42D8A4E13562", item: "gtceu:ejecta_knot_sweeper", type: "item" }]
+			x: 8.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:frc_former"
+			id: "6DB41708051D480A"
+			rewards: [{ id: "1E783C7F2040E929", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "66F42CF0D0CBF599", item: "gtceu:frc_former", type: "item" }]
+			x: 10.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:mnt_collider"
+			id: "491F5078D65464AB"
+			rewards: [{ id: "76D543C3C3D28CFF", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "5BBB3B7993CBCB1C", item: "gtceu:mnt_collider", type: "item" }]
+			x: 12.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:mtj_sputter_cluster"
+			id: "7D82566C8E2B298F"
+			rewards: [{ id: "5735CBC962DBE327", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "48279C5D0AED596E", item: "gtceu:mtj_sputter_cluster", type: "item" }]
+			x: 14.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:oxide_pld_chamber"
+			id: "5E3D7E3265445DAB"
+			rewards: [{ id: "18C4B2450DE2954A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "3258710F436B8916", item: "gtceu:oxide_pld_chamber", type: "item" }]
+			x: 16.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:pasta_draw_bench"
+			id: "7CA73F47EADF20A0"
+			rewards: [{ id: "4A3A815033B2749A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "534D16B8EA508B39", item: "gtceu:pasta_draw_bench", type: "item" }]
+			x: 18.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:pasta_extractor"
+			id: "65657F05D269AAE9"
+			rewards: [{ id: "43BADCD2662F1FD3", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "795133DBE57C1C1C", item: "gtceu:pasta_extractor", type: "item" }]
+			x: 20.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:pasta_laminator"
+			id: "5D5C9EC314DD774D"
+			rewards: [{ id: "37579C82E575E2E0", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "6F8C12C3E293A080", item: "gtceu:pasta_laminator", type: "item" }]
+			x: 22.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:pasta_phase_sorter"
+			id: "4E99ABC4AAC8112E"
+			rewards: [{ id: "29D479D70E999FC6", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "1730CB25C516C731", item: "gtceu:pasta_phase_sorter", type: "item" }]
+			x: 24.0d
+			y: 76.0d
+		}
+		{
+			icon: "gtceu:plasma_mass_filter"
+			id: "295DAA159CAFC56B"
+			rewards: [{ id: "4F48D2F0B6F01CBE", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "36C722F20B5C2821", item: "gtceu:plasma_mass_filter", type: "item" }]
+			x: 2.0d
+			y: 78.0d
+		}
+		{
+			icon: "gtceu:polar_cap_tap"
+			id: "3F46A54C5F1F465B"
+			rewards: [{ id: "266B95F98C0E59CF", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "14B163814BBD85B3", item: "gtceu:polar_cap_tap", type: "item" }]
+			x: 4.0d
+			y: 78.0d
+		}
+		{
+			icon: "gtceu:racetrack_fab"
+			id: "38AEFBDE6F23EC73"
+			rewards: [{ id: "1780FEBC4F33519A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "7F644D7931297BB0", item: "gtceu:racetrack_fab", type: "item" }]
+			x: 6.0d
+			y: 78.0d
+		}
+		{
+			icon: "gtceu:shequid_works"
+			id: "174819B57805AD9A"
+			rewards: [{ id: "2339C86731E35208", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "55CC1FC720B655C2", item: "gtceu:shequid_works", type: "item" }]
+			x: 8.0d
+			y: 78.0d
+		}
+		{
+			icon: "gtceu:stellar_condensation_tower"
+			id: "762CE69408C36228"
+			rewards: [{ id: "231BF6CE5BF340D7", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "3943803C7E3875FB", item: "gtceu:stellar_condensation_tower", type: "item" }]
+			x: 10.0d
+			y: 78.0d
+		}
+		{
+			icon: "gtceu:stellar_elevator"
+			id: "19140D1EDC915704"
+			rewards: [{ id: "74EA9C4E87B8D433", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "347A7AEDF2194C3F", item: "gtceu:stellar_elevator", type: "item" }]
+			x: 12.0d
+			y: 78.0d
+		}
+		{
+			icon: "gtceu:stellar_fractionation_hall"
+			id: "3F90C96F6C4A40F5"
+			rewards: [{ id: "4866F98D9F91F6AA", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "416709EC8DEE3F5A", item: "gtceu:stellar_fractionation_hall", type: "item" }]
+			x: 14.0d
+			y: 78.0d
+		}
+		{
+			icon: "gtceu:uxv_fusion_reactor"
+			id: "48DC59F9B505F946"
+			rewards: [{ id: "3BE0BEDE3C6AE5D9", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "3B43AC505C6BB573", item: "gtceu:uxv_fusion_reactor", type: "item" }]
+			x: 16.0d
+			y: 78.0d
+		}
+		{
+			icon: "gtceu:vdw_stacking_cell"
+			id: "1CDB652444015860"
+			rewards: [{ id: "6A3922EEB6DE2794", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "2DD3EE0E5DDB3169", item: "gtceu:vdw_stacking_cell", type: "item" }]
+			x: 18.0d
+			y: 78.0d
+		}
+		{
+			icon: "gtceu:yig_lpe_furnace"
+			id: "7B2D96714599E94A"
+			rewards: [{ id: "386CD00E21C71710", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "UXV, Grindless"
+			tasks: [{ id: "247F210CEC3F06F3", item: "gtceu:yig_lpe_furnace", type: "item" }]
+			x: 20.0d
+			y: 78.0d
 		}
 	]
 	subtitle: ["Every multiblock controller you can build, tier by tier"]

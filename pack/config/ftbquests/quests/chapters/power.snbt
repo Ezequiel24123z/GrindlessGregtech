@@ -431,6 +431,27 @@
 			y: 79.5d
 		}
 		{
+			id: "531ED6BEF1A7D7E9"
+			linked_quest: "5CE1C18D40A0B8E2"
+			shape: "rsquare"
+			x: 19.25d
+			y: 76.5d
+		}
+		{
+			id: "57D26C11DC958E6F"
+			linked_quest: "3611A4EAC7D055C3"
+			shape: "rsquare"
+			x: 19.25d
+			y: 78.0d
+		}
+		{
+			id: "7D296DA1B0697C3C"
+			linked_quest: "50C6BE5A52F4F9A0"
+			shape: "rsquare"
+			x: 19.25d
+			y: 79.5d
+		}
+		{
 			id: "37EA5C37FB08041B"
 			linked_quest: "39A5A5CC76591697"
 			shape: "rsquare"
@@ -492,6 +513,13 @@
 			shape: "rsquare"
 			x: 0.5d
 			y: 101.75d
+		}
+		{
+			id: "7276522F9A51563A"
+			linked_quest: "3F5ABDEF2254EC50"
+			shape: "rsquare"
+			x: 0.5d
+			y: 103.75d
 		}
 	]
 	quests: [
@@ -1845,6 +1873,51 @@
 			y: 79.5d
 		}
 		{
+			dependencies: ["5CE1C18D40A0B8E2"]
+			description: ["Hot CNO, helium, carbon and oxygen: the ash of each burn is quenched into the fuel of the next."]
+			icon: "gtceu:uxv_fusion_reactor"
+			id: "112D9300F47A6192"
+			size: 1.0d
+			subtitle: "UXV. A star's burning stages, one after another, and a direct converter takes the power off each ash"
+			tasks: [
+				{ id: "58C27843A85E4F66", item: "gtceu:uxv_fusion_reactor", optional_task: true, type: "item" }
+				{ id: "118DC37F1949AE2F", type: "checkmark" }
+			]
+			title: "Mk6 Fusion Ring"
+			x: 21.5d
+			y: 76.5d
+		}
+		{
+			dependencies: ["3611A4EAC7D055C3"]
+			description: ["It runs at Cygnus X-1 only, and the FRC former loads its plasma."]
+			icon: "gtceu:bz_dynamo"
+			id: "7CFA28C1DA255AD4"
+			size: 1.0d
+			subtitle: "UXV. Flux-loaded plasma spins power out of the black hole"
+			tasks: [
+				{ id: "5EB50D7F4FF1AA7B", item: "gtceu:bz_dynamo", optional_task: true, type: "item" }
+				{ id: "17E41940245AE707", type: "checkmark" }
+			]
+			title: "BZ Dynamo"
+			x: 21.5d
+			y: 78.0d
+		}
+		{
+			dependencies: ["50C6BE5A52F4F9A0"]
+			description: ["It runs at Vela only; the pasta laminator makes the electrodes."]
+			icon: "gtceu:polar_cap_tap"
+			id: "5D468BB3782E0503"
+			size: 1.0d
+			subtitle: "UXV. A lasagna electrode in the pulsar's polar current, burned through"
+			tasks: [
+				{ id: "1F50A9888562C8B5", item: "gtceu:polar_cap_tap", optional_task: true, type: "item" }
+				{ id: "5B874F1CAF920646", type: "checkmark" }
+			]
+			title: "Polar Cap Tap"
+			x: 21.5d
+			y: 79.5d
+		}
+		{
 			icon: "gtceu:lv_machine_hull"
 			id: "3F30A6656E0CFBCC"
 			shape: "rsquare"
@@ -2125,10 +2198,28 @@
 			y: 101.75d
 		}
 		{
+			dependencies: ["3F5ABDEF2254EC50"]
+			description: [
+				"The network jumps to UXV only when every formed tower holds these."
+				"Holds: UXV SMES 4,026,531,840,000 EU."
+			]
+			icon: "grindless:uxv_smes_cell"
+			id: "5F5D04A4376577A9"
+			size: 1.0d
+			subtitle: "Fifteen hundred and thirty-six UV batteries' worth, wound with pasta strand"
+			tasks: [
+				{ id: "73B33D3EE4624A48", item: "grindless:uxv_smes_cell", optional_task: true, type: "item" }
+				{ id: "53DEB25C4C85D68A", type: "checkmark" }
+			]
+			title: "UXV SMES Cell"
+			x: 2.75d
+			y: 103.75d
+		}
+		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Energy goes in at any voltage; the cells only limit what comes out."
-				"Comes in 2, 4, 16 and 64 A, LV to UIV."
+				"Comes in 2, 4, 16 and 64 A, LV to UXV."
 			]
 			icon: "gtceu:lv_wireless_dynamo_hatch"
 			id: "128CD52291A76880"
@@ -2144,7 +2235,7 @@
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
-			description: ["2 A of its tier, LV to UIV."]
+			description: ["2 A of its tier, LV to UXV."]
 			icon: "grindless:lv_wireless_dynamo_cover"
 			id: "54D4653CC016835A"
 			size: 1.0d
@@ -2161,7 +2252,7 @@
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
-				"Comes in 2, 4, 16 and 64 A, LV to UIV."
+				"Comes in 2, 4, 16 and 64 A, LV to UXV."
 			]
 			icon: "gtceu:lv_wireless_energy_hatch"
 			id: "5062E82EF67AFF89"
@@ -2179,7 +2270,7 @@
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout."
-				"2 A of its tier, LV to UIV."
+				"2 A of its tier, LV to UXV."
 			]
 			icon: "grindless:lv_wireless_energy_cover"
 			id: "7713822C036911A8"
