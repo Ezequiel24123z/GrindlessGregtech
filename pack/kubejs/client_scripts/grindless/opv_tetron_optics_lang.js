@@ -32,6 +32,24 @@
             'Circuit 2: four tested tetrons and a HEMT amplifier in a superfluid He-3 bath (kept); 10 % of runs reject a failed die.',
             'Circuito 2: cuatro tetrones probados y un amplificador HEMT en un baño de He-3 superfluido (se conserva); el 10 % de las tandas rechaza un troquel fallido.'],
 
+        ['block.gtceu.gamma_optics_works', 'Gamma Optics Works', 'Taller de óptica gamma'],
+        ['gtceu.gamma_optics', 'Gamma Optics', 'Óptica gamma'],
+        ['grindless.machine.gamma_optics_works.tooltip.0',
+            '\u00a77Builds Laue lenses and multilayer mirrors that focus MeV gamma rays.',
+            '\u00a77Construye lentes de Laue y espejos multicapa que enfocan rayos gamma de MeV.'],
+        ['emi.grindless.info.gamma_optics_works.0',
+            'A Laue lens focuses gammas by Bragg diffraction in transmission through hundreds of bent Ge and GaAs tiles aligned to arcseconds; a WC/SiC multilayer mirror reflects them at grazing incidence. The tiles come from the UEV megabar (circuit 8) and the UHV crystal growth furnace (circuit 24), the frame and the mirror\'s reflectivity record from the UV synchrotron (circuits 11 and 10).',
+            'Una lente de Laue enfoca rayos gamma por difracción de Bragg en transmisión a través de cientos de teselas curvadas de Ge y GaAs alineadas al segundo de arco; un espejo multicapa de WC/SiC los refleja con incidencia rasante. Las teselas vienen de la prensa megabar UEV (circuito 8) y del horno de crecimiento de cristales UHV (circuito 24), el marco y el registro de reflectividad del espejo del sincrotrón UV (circuitos 11 y 10).'],
+        ['emi.grindless.info.gamma_optics_works.1',
+            'Nothing is voided: a tile that drifts out of alignment goes back to the megabar to be re-bent (circuit 9, 3 of 4 back); a mirror whose figure is off goes to the UEV CVI furnace to be stripped and re-coated (circuit 11). It needs two UXV energy hatches.',
+            'Nada se desecha: una tesela que se desalinea vuelve a la megabar para curvarse de nuevo (circuito 9, vuelven 3 de 4); un espejo con la figura desviada va al horno CVI UEV para decaparlo y recubrirlo (circuito 11). Necesita dos escotillas de energía UXV.'],
+        ['gtceu.recipe.grindless_gamma_optics.laue_lens',
+            'Circuit 1: 32 bent Ge and 32 GaAs tiles bonded into the aligned frame; 25 % of runs pull four tiles to be re-bent.',
+            'Circuito 1: 32 teselas de Ge curvado y 32 de GaAs pegadas en el marco alineado; el 25 % de las tandas retira cuatro teselas para curvarlas de nuevo.'],
+        ['gtceu.recipe.grindless_gamma_optics.gamma_multilayer_mirror',
+            'Circuit 2: the WC/SiC multilayer on the superpolished blank, figured to its reflectivity record; 10 % of runs reject a mirror.',
+            'Circuito 2: la multicapa de WC/SiC sobre el bloque superpulido, ajustada a su registro de reflectividad; el 10 % de las tandas rechaza un espejo.'],
+
         ['gtceu.recipe.grindless_mtj_sputtering.tetron_bumps',
             'Circuit 9: indium bumps are sputtered onto four tetron dies in argon; most of the argon is recovered.',
             'Circuito 9: se depositan protuberancias de indio sobre cuatro troqueles de tetrón en argón; se recupera casi todo el argón.'],
@@ -48,7 +66,16 @@
         ['bumped_tetron_die', 'Bumped Tetron Die', 'Troquel de tetrón con protuberancias', 'A tetron die with sputtered indium bumps.', 'Un troquel de tetrón con protuberancias de indio pulverizado.', 'Flip-chip bonded in the TFLN fab (ion slicing, circuit 8).', 'Se une en flip-chip en la fábrica TFLN (corte iónico, circuito 8).'],
         ['bonded_tetron_die', 'Bonded Tetron Die', 'Troquel de tetrón unido', 'A tetron die flip-chip bonded to a niobium TSV interposer.', 'Un troquel de tetrón unido en flip-chip a un intercalador TSV de niobio.', 'Parity-tested in the millikelvin works (circuit 6).', 'Se prueba su paridad en el taller de milikelvin (circuito 6).'],
         ['tested_tetron_die', 'Tested Tetron Die', 'Troquel de tetrón probado', 'A tetron that passed the interferometric parity test.', 'Un tetrón que superó la prueba interferométrica de paridad.', 'Four make a tetron array in the tetron fab (circuit 2).', 'Cuatro forman una matriz de tetrones en la fábrica de tetrones (circuito 2).'],
-        ['failed_tetron_die', 'Failed Tetron Die', 'Troquel de tetrón fallido', 'A tetron that failed the array\'s parity calibration.', 'Un tetrón que falló la calibración de paridad de la matriz.', 'The EV extraction cascade recovers its In, Al and Au (circuit 25).', 'La cascada de extracción EV recupera su In, Al y Au (circuito 25).']
+        ['failed_tetron_die', 'Failed Tetron Die', 'Troquel de tetrón fallido', 'A tetron that failed the array\'s parity calibration.', 'Un tetrón que falló la calibración de paridad de la matriz.', 'The EV extraction cascade recovers its In, Al and Au (circuit 25).', 'La cascada de extracción EV recupera su In, Al y Au (circuito 25).'],
+        ['bent_ge_tile', 'Bent Ge Tile', 'Tesela de Ge curvada', 'A germanium crystal tile bent under pressure, so it diffracts a wider gamma band.', 'Una tesela de cristal de germanio curvada a presión, para que difracte una banda gamma más ancha.', 'Made in the UEV megabar (circuit 8).', 'Se hace en la prensa megabar UEV (circuito 8).'],
+        ['gaas_laue_tile', 'GaAs Laue Tile', 'Tesela de Laue de GaAs', 'A gallium arsenide crystal tile cut for Bragg diffraction.', 'Una tesela de cristal de arseniuro de galio cortada para difracción de Bragg.', 'Grown in the UHV crystal growth furnace (circuit 24).', 'Se crece en el horno de crecimiento de cristales UHV (circuito 24).'],
+        ['aligned_laue_frame', 'Aligned Laue Frame', 'Marco de Laue alineado', 'A tungsten-steel ring frame whose tile seats are set by X-ray diffraction.', 'Un marco de anillos de acero de wolframio cuyos asientos se ajustan por difracción de rayos X.', 'Aligned in the UV synchrotron (circuit 11).', 'Se alinea en el sincrotrón UV (circuito 11).'],
+        ['rejected_laue_tile', 'Rejected Laue Tile', 'Tesela de Laue rechazada', 'A tile that drifted out of its Bragg angle.', 'Una tesela que se salió de su ángulo de Bragg.', 'The UEV megabar re-bends it (circuit 9, 3 of 4 back).', 'La megabar UEV la curva de nuevo (circuito 9, vuelven 3 de 4).'],
+        ['superpolished_sic_blank', 'Superpolished SiC Blank', 'Bloque de SiC superpulido', 'A CVD silicon carbide mirror blank polished to a fraction of a nanometre.', 'Un bloque de espejo de carburo de silicio CVD pulido a una fracción de nanómetro.', 'Made in the UEV CVI furnace (circuit 10).', 'Se hace en el horno CVI UEV (circuito 10).'],
+        ['wc_sic_multilayer', 'WC/SiC Multilayer', 'Multicapa de WC/SiC', 'Hundreds of alternating tungsten carbide and silicon carbide layers.', 'Cientos de capas alternas de carburo de wolframio y carburo de silicio.', 'Sputtered in the UXV MTJ cluster (circuit 10).', 'Se pulveriza en el clúster MTJ UXV (circuito 10).'],
+        ['mirror_metrology_record', 'Mirror Metrology Record', 'Registro de metrología del espejo', 'The X-ray reflectivity curve of one multilayer.', 'La curva de reflectividad de rayos X de una multicapa.', 'Measured in the UV synchrotron (circuit 10).', 'Se mide en el sincrotrón UV (circuito 10).'],
+        ['wc_sputter_target', 'WC Sputter Target', 'Blanco de pulverización de WC', 'A dense tungsten carbide target.', 'Un blanco denso de carburo de wolframio.', 'Sintered in the UHV spark plasma sinterer (circuit 14).', 'Se sinteriza en el sinterizador por plasma de chispa UHV (circuito 14).'],
+        ['rejected_gamma_mirror', 'Rejected Gamma Mirror', 'Espejo gamma rechazado', 'A multilayer mirror whose figure is off.', 'Un espejo multicapa con la figura desviada.', 'The UEV CVI furnace strips and re-coats it (circuit 11).', 'El horno CVI UEV lo decapa y lo recubre (circuito 11).']
     ]
 
     ITEMS.forEach(function (i) {

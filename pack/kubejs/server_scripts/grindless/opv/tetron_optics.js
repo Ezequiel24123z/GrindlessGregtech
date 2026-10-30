@@ -1,15 +1,18 @@
 // -----------------------------------------------------------------------------------------------
-// Recipes of OpV's tetron fab (machine and recipe type: startup_scripts/grindless/opv/tetron_optics.js; docs/eras/opv.md, machine 1,
-// process line 19; package OpV-B1), generated at every server load from data/grindless/tables/tetron_optics.json, plus the controllers'
-// recipes.
+// Recipes of OpV's tetron fab and gamma optics works (machines and recipe types: startup_scripts/grindless/opv/tetron_optics.js;
+// docs/eras/opv.md, machines 1 and 2, process lines 19, 34 and 35; package OpV-B1), generated at every server load from
+// data/grindless/tables/tetron_optics.json, plus the controllers' recipes.
 //
 //   gtceu:tetron_assembly   tetron fab, circuit 1 tetron dies, 2 tetron array (the superfluid He-3 bath is a charge, not consumed).
+//   gtceu:gamma_optics      gamma optics works, circuit 1 Laue lens, 2 gamma multilayer mirror.
 //   assembly_line           the controllers (OpV hull + OpV components + OpV circuits + 3 domain items, superfluid He-3, behind
 //                           station research), grindless:assembly_line/<name>.
 //
 // Line 19's middle steps are rows of older machines, in their own files: UXV MTJ sputtering c9 (tables/spin_deposition.json), UIV ion
 // slicing c8 (tables/tfln_femtosecond.json), UIV nuclear demagnetisation c6 (tables/memories_cryostat.json) and the EV extraction
-// cascade c25 (ev/extraction_cascade.js).
+// cascade c25 (ev/extraction_cascade.js). Lines 34 and 35's: UHV spark plasma sintering c14 (uhv/propulsion.js), UXV MTJ sputtering
+// c10, UEV CVI c10-11 (tables/composites.json), UEV megabar c8-9 (tables/megabar.json), UHV crystal growth c24 (tables/crystals.json)
+// and UV synchrotron c10-11 (tables/accelerators.json).
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.tetronOptics.recipes, .skipped, .clashes, .controllerRecipes.
@@ -165,7 +168,10 @@
     var defs = [
       { name: 'tetron_fab', research: 'grindless:inas_al_wafer',
         parts: ['4x gtceu:opv_robot_arm', '4x gtceu:opv_sensor', '2x gtceu:opv_field_generator'],
-        domain: ['2x grindless:cryo_cmos_die', '2x grindless:nb_tsv_interposer', '2x grindless:chain_field_coil'] }
+        domain: ['2x grindless:cryo_cmos_die', '2x grindless:nb_tsv_interposer', '2x grindless:chain_field_coil'] },
+      { name: 'gamma_optics_works', research: 'grindless:hpge_compton_crystal',
+        parts: ['4x gtceu:opv_emitter', '4x gtceu:opv_sensor', '2x gtceu:opv_robot_arm'],
+        domain: ['2x grindless:field_frozen_plate', '2x grindless:th229_lasing_crystal', '2x grindless:opv_harmonic_drive'] }
     ]
     TO.controllerRecipes = []
     defs.forEach(function (d) {

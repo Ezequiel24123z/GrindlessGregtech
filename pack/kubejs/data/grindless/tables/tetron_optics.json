@@ -21,6 +21,27 @@
           "fluidsOut": []
         }
       ]
+    },
+    "gamma_optics": {
+      "dataKey": "grindless_gamma_optics",
+      "recipes": [
+        {
+          "_why": "line 35, last step: bent Ge and GaAs tiles are bonded into the rings of the aligned frame and set by Bragg angle; a tile that drifts out of alignment is pulled (25 %) and goes back to the UEV megabar to be re-bent (c9)",
+          "name": "laue_lens", "circuit": 1, "eut": 268435456, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:bent_ge_tile", "count": 32 }, { "id": "grindless:gaas_laue_tile", "count": 32 }, { "id": "grindless:aligned_laue_frame", "count": 1 }],
+          "kept": [], "charge": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }],
+          "itemsOut": [{ "id": "grindless:laue_lens", "count": 1 }, { "id": "grindless:rejected_laue_tile", "count": 4, "chance": 2500 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 34, last step: the WC/SiC multilayer is mounted on the superpolished SiC blank and figured to the synchrotron's reflectivity record; a mirror whose figure is off (10 %) goes to the UEV CVI furnace to be stripped and re-coated (c11)",
+          "name": "gamma_multilayer_mirror", "circuit": 2, "eut": 268435456, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:superpolished_sic_blank", "count": 1 }, { "id": "grindless:wc_sic_multilayer", "count": 1 }, { "id": "grindless:mirror_metrology_record", "count": 1 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:gamma_multilayer_mirror", "count": 1 }, { "id": "grindless:rejected_gamma_mirror", "count": 1, "chance": 1000 }],
+          "fluidsOut": []
+        }
+      ]
     }
   }
 }

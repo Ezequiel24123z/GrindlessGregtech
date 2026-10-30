@@ -5,6 +5,7 @@
 //     lookup     every table row, the older rows of lines 19, 34 and 35 and the controllers' assembly lines are in the recipe manager
 //     formed     each multiblock forms with two UXV energy hatches
 //     tetron     c1 (gated 2DEG wafer + cryo-CMOS die, circuit 1): starts at 268,435,456 EU/t and delivers tetron dies
+//     gamma      c2 (SiC blank + WC/SiC multilayer + metrology record, circuit 2): starts at 268,435,456 EU/t and delivers a mirror
 (function () {
   var S = null
   var C = null
@@ -22,13 +23,21 @@
   var IDS = [
     'tetron_assembly/tetron_die', 'tetron_assembly/tetron_array', 'assembly_line/tetron_fab',
     'mtj_sputtering/tetron_bumps', 'ion_slicing/bonded_tetron_die', 'nuclear_demagnetisation/tested_tetron_die',
-    'solvent_extraction/ev/tetron_die_recovery'
+    'solvent_extraction/ev/tetron_die_recovery',
+    'gamma_optics/laue_lens', 'gamma_optics/gamma_multilayer_mirror', 'assembly_line/gamma_optics_works'
   ]
 
+  // a unit's structure runs from its z (the controller's slice) to z + depth - 1: tetron 14-24, gamma 30-44
   var UNITS = [
     {
       name: 'tetron', id: 'gtceu:tetron_fab', z: 14, circuit: 1, eut: 268435456, out: 'grindless:tetron_die',
       inputs: [['grindless:gated_2deg_wafer', 1], ['grindless:cryo_cmos_die', 1]],
+      fluid: null, outFluid: null,
+      parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']
+    },
+    {
+      name: 'gamma', id: 'gtceu:gamma_optics_works', z: 30, circuit: 2, eut: 268435456, out: 'grindless:gamma_multilayer_mirror',
+      inputs: [['grindless:superpolished_sic_blank', 1], ['grindless:wc_sic_multilayer', 1], ['grindless:mirror_metrology_record', 1]],
       fluid: null, outFluid: null,
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']
     }
