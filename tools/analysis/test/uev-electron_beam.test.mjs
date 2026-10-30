@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
 import { runPackScripts } from '../lib/kubejs_static.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -57,11 +58,12 @@ function serverScripts(dir = path.join(kube, 'server_scripts')) {
   });
 }
 
-test('every recipe has a unique name, a positive EU/t and duration; circuits are unique inside a type', () => {
+test('every recipe has a unique name, a positive EU/t and duration; a circuit repeats inside a type only with other item inputs', () => {
   for (const [type, t] of Object.entries(T.types)) {
     assert.equal(new Set(t.recipes.map((r) => r.name)).size, t.recipes.length, type);
-    const circuits = t.recipes.map((r) => r.circuit).filter((c) => c > 0);
-    assert.equal(new Set(circuits).size, circuits.length, type);
+    // OpV-F3: the loader refuses a repeat whose item ids (consumed and kept) are the same set
+    const paths = t.recipes.filter((r) => r.circuit > 0).map((r) => `${r.circuit}|${[...new Set(ids(r.itemsIn).concat(ids(r.kept)))].sort().join(',')}`);
+    assert.equal(new Set(paths).size, paths.length, type);
     for (const r of t.recipes) {
       assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
       assert.ok(GTM.has(type) ? r.circuit >= 0 && r.circuit <= 32 : r.circuit >= 1 && r.circuit <= 32, `${type}/${r.name}: circuit`);
@@ -80,6 +82,106 @@ test('one recipe per lookup path: no recipe\'s ingredients are a subset of anoth
       }
     }
   }
+});
+
+// OpV-F3: the server script itself in a sandbox, on the shipped table or a probe table, with the startup script's slots and UV's
+// cryomodule works; every id exists and every GT builder call is recorded. Arrays made in the sandbox are copied out before deepEqual.
+const SERVER = path.join(kube, 'server_scripts', 'grindless', 'uev', 'electron_beam.js');
+function machinesOf() {
+  const out = {};
+  const re = /(\w+): \{\s*name: '(\w+)',\s*machine: '([^']+)',\s*type: '(\w+)'[\s\S]*?maxIO: \{ itemsIn: (\d+), itemsOut: (\d+), fluidsIn: (\d+), fluidsOut: (\d+) \}/g;
+  for (const m of startup.matchAll(re)) out[m[1]] = { name: m[2], machine: m[3], type: m[4], maxIO: { itemsIn: +m[5], itemsOut: +m[6], fluidsIn: +m[7], fluidsOut: +m[8] } };
+  assert.deepEqual(Object.keys(out), ['furnace', 'foundry']);
+  return out;
+}
+function worksIO() {
+  const m = read(path.join(kube, 'startup_scripts', 'grindless', 'uv', 'cold.js')).match(/C\.worksIO = \{ itemsIn: (\d+), itemsOut: (\d+), fluidsIn: (\d+), fluidsOut: (\d+) \}/);
+  assert.ok(m, 'uv/cold.js: worksIO');
+  return { itemsIn: +m[1], itemsOut: +m[2], fluidsIn: +m[3], fluidsOut: +m[4] };
+}
+function runLoader(table) {
+  const errors = [];
+  const built = [];
+  let handler = null;
+  const builder = (type, id) => {
+    const rec = { type, id, calls: [] };
+    built.push(rec);
+    const b = new Proxy({}, { get: (_, k) => (...args) => { rec.calls.push([String(k), ...args]); return b; } });
+    return b;
+  };
+  const EB = { machines: machinesOf() };
+  const ctx = {
+    global: { grindless: { electronBeam: EB, cold: { worksIO: worksIO() }, readJsonTable: () => JSON.parse(JSON.stringify(table)) } },
+    ServerEvents: { recipes: (fn) => { handler = fn; } },
+    Item: { exists: () => true },
+    Fluid: { exists: () => true, of: (id, amount) => ({ id, amount }) },
+    console: { info: () => {}, error: (s) => errors.push(String(s)) }
+  };
+  vm.createContext(ctx);
+  vm.runInContext(read(SERVER), ctx, { filename: SERVER });
+  assert.equal(typeof handler, 'function', 'ServerEvents.recipes handler');
+  handler({ recipes: { gtceu: new Proxy({}, { get: (_, type) => (id) => builder(String(type), id) }) } });
+  return { EB, errors, built, names: Array.from(EB.recipes || [], (r) => r.name), clashes: Array.from(EB.clashes || []) };
+}
+const circuitOf = (b) => (b.calls.find((c) => c[0] === 'circuit') || [])[1];
+const probe = (circuit, name, items, out, extra = {}) => ({
+  name, circuit, eut: 30, duration: 40, itemsIn: items.map((id) => ({ id, count: 1 })), kept: [], fluidsIn: [], charge: [],
+  itemsOut: [{ id: out, count: 1 }], fluidsOut: [], ...extra
+});
+const probeTable = (rows) => ({ types: { electron_beam_refining: { dataKey: 'grindless_electron_beam', recipes: rows } } });
+
+test('the loader builds every shipped row unchanged: no problem, no skip, no clash, each on its own circuit', () => {
+  const run = runLoader(T);
+  assert.deepEqual(run.errors, []);
+  const rows = Object.entries(T.types).flatMap(([type, t]) => t.recipes.map((r) => [type, r]));
+  assert.equal(run.names.length, rows.length);
+  assert.equal(run.EB.skipped.length, 0);
+  assert.deepEqual(run.clashes, []);
+  for (const [type, r] of rows) {
+    const b = run.built.filter((x) => x.type === type && x.id === `grindless:${r.name}`);
+    assert.equal(b.length, 1, `${type}/${r.name}: built once`);
+    assert.equal(circuitOf(b[0]), r.circuit > 0 ? r.circuit : undefined, `${type}/${r.name}: circuit`);
+  }
+  assert.equal(run.EB.controllerRecipes.length, 2);
+});
+
+test('OpV-F3: two rows of a type may share a circuit when their item inputs differ', () => {
+  const run = runLoader(probeTable([
+    probe(21, 'probe_a', ['minecraft:clay_ball', 'minecraft:flint'], 'minecraft:poppy'),
+    probe(21, 'probe_b', ['minecraft:clay_ball', 'minecraft:snowball'], 'minecraft:allium')
+  ]));
+  assert.deepEqual(run.errors, []);
+  assert.deepEqual(run.names, ['probe_a', 'probe_b']);
+  assert.deepEqual(run.clashes, []);
+  for (const n of ['probe_a', 'probe_b']) assert.equal(circuitOf(run.built.find((x) => x.id === `grindless:${n}`)), 21, n);
+});
+
+test('OpV-F3: a repeat with identical item inputs (ids, consumed or kept) is still refused; the circuit stays 1..32', () => {
+  const run = runLoader(probeTable([
+    probe(21, 'probe_a', ['minecraft:clay_ball', 'minecraft:flint'], 'minecraft:poppy'),
+    probe(21, 'probe_same', [], 'minecraft:allium', { itemsIn: [{ id: 'minecraft:flint', count: 2 }, { id: 'minecraft:clay_ball', count: 1 }] }),
+    probe(21, 'probe_kept', ['minecraft:clay_ball'], 'minecraft:allium', { kept: [{ id: 'minecraft:flint', count: 1 }] }),
+    probe(33, 'probe_33', ['minecraft:stick'], 'minecraft:poppy'),
+    probe(0, 'probe_0', ['minecraft:bone'], 'minecraft:poppy')
+  ]));
+  assert.deepEqual(run.names, ['probe_a']);
+  assert.equal(run.errors.length, 1);
+  assert.match(run.errors[0], /electron_beam_refining\/probe_same: circuit 21 repeats probe_a with the same item inputs/);
+  assert.match(run.errors[0], /electron_beam_refining\/probe_kept: circuit 21 repeats probe_a with the same item inputs/);
+  assert.match(run.errors[0], /electron_beam_refining\/probe_33: name, circuit 33/);
+  assert.match(run.errors[0], /electron_beam_refining\/probe_0: name, circuit 0/);
+});
+
+test('OpV-F3: a same-circuit pair whose item inputs are a subset is reported in clashes', () => {
+  const run = runLoader(probeTable([
+    probe(21, 'probe_a', ['minecraft:clay_ball'], 'minecraft:poppy'),
+    probe(21, 'probe_b', ['minecraft:clay_ball', 'minecraft:snowball'], 'minecraft:allium'),
+    probe(22, 'probe_c', ['minecraft:clay_ball'], 'minecraft:poppy')
+  ]));
+  assert.deepEqual(run.names, ['probe_a', 'probe_b', 'probe_c']);
+  assert.deepEqual(run.clashes, ['electron_beam_refining/probe_a / probe_b']);
+  assert.equal(run.errors.length, 1);
+  assert.match(run.errors[0], /subset of another's: electron_beam_refining\/probe_a \/ probe_b$/);
 });
 
 test('every recipe of the two types fits the slots registered in the startup script', () => {
