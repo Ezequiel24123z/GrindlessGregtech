@@ -34,12 +34,6 @@
       "dataKey": "grindless_droplet_radiator_assembly",
       "recipes": [
         {
-          "name": "radiator_module", "circuit": 1, "eut": 31457280, "duration": 1200, "site": true,
-          "_why": "UIV-A10: the droplet generator (orifice plate) sprays four distilled tin onto a collector; the tin overflow goes back to stock.",
-          "itemsIn": [ { "id": "grindless:orifice_plate", "count": 1 }, { "id": "grindless:eb_distilled_tin", "count": 4 }, { "id": "grindless:droplet_collector", "count": 1 } ],
-          "itemsOut": [ { "id": "grindless:droplet_radiator_module", "count": 1 }, { "id": "gtceu:tin_ingot", "count": 1 } ]
-        },
-        {
           "name": "tpv_tile", "circuit": 2, "eut": 31457280, "duration": 900, "site": true,
           "_why": "UIV-A10: four TPV cells and a selective emitter make a TPV tile in vacuum.",
           "itemsIn": [ { "id": "grindless:ingaasb_tpv_cell", "count": 4 }, { "id": "grindless:selective_emitter", "count": 1 } ],
@@ -193,6 +187,13 @@
     "assembly_line": {
       "recipes": [
         {
+          "name": "radiator_module", "circuit": 0, "eut": 31457280, "duration": 1200, "site": true, "station": "grindless:droplet_collector",
+          "_why": "UIV-A10: the droplet generator (orifice plate) sprays distilled tin onto a collector. TP-R-uiv: it no longer fits the works' 4 slots with UIV pumps and a UIV circuit, so it is an assembly line (the line holds one output: the 1 tin ingot overflow is gone and the tin input drops from 4 to 3). This also ends the bootstrap cycle: the works is built from these modules.",
+          "itemsIn": [ { "id": "grindless:orifice_plate", "count": 1 }, { "id": "grindless:eb_distilled_tin", "count": 3 }, { "id": "grindless:droplet_collector", "count": 1 }, { "id": "gtceu:uiv_electric_pump", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
+          "fluidsIn": [ ],
+          "itemsOut": [ { "id": "grindless:droplet_radiator_module", "count": 1 } ]
+        },
+        {
           "name": "rad_hard_controller", "circuit": 0, "eut": 1966080, "duration": 1200, "research": "rad_hard_controller",
           "_why": "UIV-A10 line 43: the radiation-hardened controller of the Matrioshka; its research is written only by the Matrioshka computer (circuit 1).",
           "itemsIn": [ { "id": "grindless:diamond_schottky_die", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 4 }, { "id": "gtnn:optical_mainframe", "count": 1 } ],
@@ -200,30 +201,30 @@
           "itemsOut": [ { "id": "grindless:rad_hard_controller", "count": 1 } ]
         },
         {
-          "name": "matrioshka_node", "circuit": 0, "eut": 1966080, "duration": 800, "station": "grindless:c12_metallised_plate",
-          "_why": "UIV-A10 line 21: metallised C-12 plates and tungsten plate are assembled into a computing node block, behind station research.",
-          "itemsIn": [ { "id": "grindless:c12_metallised_plate", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 } ],
+          "name": "matrioshka_node", "circuit": 0, "eut": 31457280, "duration": 800, "station": "grindless:c12_metallised_plate",
+          "_why": "UIV-A10 line 21: metallised C-12 plates and tungsten plate are assembled into a computing node block, behind station research; TP-R-uiv: with UIV field generators and a UIV circuit.",
+          "itemsIn": [ { "id": "grindless:c12_metallised_plate", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:uiv_field_generator", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
           "fluidsIn": [ ],
           "itemsOut": [ { "id": "grindless:matrioshka_node", "count": 1 } ]
         },
         {
-          "name": "matrioshka_tpv_shell", "circuit": 0, "eut": 1966080, "duration": 800, "station": "grindless:tpv_segment",
-          "_why": "UIV-A10 line 37: TPV segments and tungsten plates are assembled into a TPV shell block, behind station research.",
-          "itemsIn": [ { "id": "grindless:tpv_segment", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 } ],
+          "name": "matrioshka_tpv_shell", "circuit": 0, "eut": 31457280, "duration": 800, "station": "grindless:tpv_segment",
+          "_why": "UIV-A10 line 37: TPV segments and tungsten plates are assembled into a TPV shell block, behind station research; TP-R-uiv: with UIV emitters and a UIV circuit.",
+          "itemsIn": [ { "id": "grindless:tpv_segment", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:uiv_emitter", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
           "fluidsIn": [ ],
           "itemsOut": [ { "id": "grindless:matrioshka_tpv_shell", "count": 1 } ]
         },
         {
-          "name": "logic_tile_block", "circuit": 0, "eut": 1966080, "duration": 800, "station": "grindless:aqfp_module",
-          "_why": "UIV-A10 line 41: AQFP modules and niobium are assembled into a logic tile block, behind station research.",
-          "itemsIn": [ { "id": "grindless:aqfp_module", "count": 4 }, { "id": "gtceu:niobium_ingot", "count": 2 } ],
+          "name": "logic_tile_block", "circuit": 0, "eut": 31457280, "duration": 800, "station": "grindless:aqfp_module",
+          "_why": "UIV-A10 line 41: AQFP modules and niobium are assembled into a logic tile block, behind station research; TP-R-uiv: with UIV sensors and a UIV circuit.",
+          "itemsIn": [ { "id": "grindless:aqfp_module", "count": 4 }, { "id": "gtceu:niobium_ingot", "count": 2 }, { "id": "gtceu:uiv_sensor", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
           "fluidsIn": [ ],
           "itemsOut": [ { "id": "grindless:matrioshka_logic_tile", "count": 1 } ]
         },
         {
-          "name": "emitter_shell", "circuit": 0, "eut": 1966080, "duration": 800, "station": "grindless:selective_emitter",
-          "_why": "UIV-A10 line 46: selective emitters and titanium plates are assembled into an emitter shell block, behind station research.",
-          "itemsIn": [ { "id": "grindless:selective_emitter", "count": 4 }, { "id": "gtceu:titanium_plate", "count": 2 } ],
+          "name": "emitter_shell", "circuit": 0, "eut": 31457280, "duration": 800, "station": "grindless:selective_emitter",
+          "_why": "UIV-A10 line 46: selective emitters and titanium plates are assembled into an emitter shell block, behind station research; TP-R-uiv: with UIV emitters and a UIV circuit.",
+          "itemsIn": [ { "id": "grindless:selective_emitter", "count": 4 }, { "id": "gtceu:titanium_plate", "count": 2 }, { "id": "gtceu:uiv_emitter", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
           "fluidsIn": [ ],
           "itemsOut": [ { "id": "grindless:matrioshka_emitter_shell", "count": 1 } ]
         }

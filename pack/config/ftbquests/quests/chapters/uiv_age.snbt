@@ -423,7 +423,7 @@
 		}
 		{
 			dependencies: ["7E2EF99503F9DB02"]
-			description: ["Heat has nowhere to go in space but out. A sheet of liquid tin droplets falling in free fall carries it away, which only works in orbit. The &6Droplet Radiator Works&r makes the modules and the TPV tiles."]
+			description: ["Heat has nowhere to go in space but out. A sheet of liquid tin droplets falling in free fall carries it away, which only works in orbit. The &6Droplet Radiator Works&r is built from the modules, assembled in Mercury orbit, and makes the TPV tiles."]
 			icon: "gtceu:droplet_radiator_works"
 			id: "582C5EF34B1CF2D0"
 			rewards: [{ id: "1DCB16BA2FB047FA", type: "xp", xp: 200 }]

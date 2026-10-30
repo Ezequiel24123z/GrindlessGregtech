@@ -134,7 +134,7 @@ export const QUESTS = [
     'A computer built in shells, in nine times Earth\'s sunlight, running logic that barely makes heat. The &6Matrioshka Computer&r is where UIV research is written, and its logic tiles are among the longest things to build here.',
   ], [it('gtceu:matrioshka_computer'), it('grindless:matrioshka_logic_tile')], 250),
   M('RAD', 'Droplet Radiators', 'gtceu:droplet_radiator_works', ['MATR'], 15.5, 0, [
-    'Heat has nowhere to go in space but out. A sheet of liquid tin droplets falling in free fall carries it away, which only works in orbit. The &6Droplet Radiator Works&r makes the modules and the TPV tiles.',
+    'Heat has nowhere to go in space but out. A sheet of liquid tin droplets falling in free fall carries it away, which only works in orbit. The &6Droplet Radiator Works&r is built from the modules, assembled in Mercury orbit, and makes the TPV tiles.',
   ], [it('gtceu:droplet_radiator_works'), it('grindless:droplet_radiator_module')], 200),
   P('TPV', 'Thermophotovoltaic Shell', 'grindless:matrioshka_tpv_shell', ['RAD'], 18, 0, [
     'A tile of indium gallium arsenide antimonide turns hot glow into power. Enough of them wrapped round a computer make the &6Matrioshka TPV Shell&r.',

@@ -10,7 +10,7 @@
 //   gtceu:r_process_decompression     r-process decompressor. Only at grindless:rx_j1856_orbit.
 //   gtceu:decay_heat                  decay heat vault, a generator (EUt written negative). Only at grindless:rx_j1856_orbit.
 //   assembler, chemical_reactor, ...  the line steps GTM can run (ids grindless:<name>).
-//   assembly_line               the controllers: UIV hull + 2 UIV parts + 2 optical mainframes + UIV circuits + 3 line items, with
+//   assembly_line               the controllers: UIV hull + 3 each of 3 UIV component families + 2 optical mainframes + UIV circuits + 3 line items, with
 //                               soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/<machine>.
 //
 // Row keys: "site" true puts recipe.dimension(rx_j1856_orbit) on it; "wear" are chanced inputs (a tool that wears); "kept" are not consumed.
@@ -178,16 +178,16 @@
     var MAINFRAME = 'gtnn:optical_mainframe'
     // es254_target is not a controller input here: einsteinium only comes from the separator and the decompressor
     var defs = [
-      { name: 'crust_lift', part: 'gtceu:uiv_electric_piston', research: 'grindless:crust_lift_tether', domain: ['2x grindless:polar_cap_electrode', '2x grindless:braided_mh_tether', '2x grindless:mh_laminated_yarn'] },
-      { name: 'neutron_drip_separator', part: 'gtceu:uiv_electric_pump', research: 'grindless:neutron_supermirror', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
-      { name: 'neutronium_cage', part: 'gtceu:uiv_robot_arm', research: 'grindless:cage_part', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
-      { name: 'r_process_decompressor', part: 'gtceu:uiv_conveyor_module', research: 'grindless:sealed_capsule', domain: ['2x grindless:sealed_capsule', '2x grindless:neutron_guide', '2x grindless:target_wheel_blank'] },
-      { name: 'decay_heat_vault', part: 'gtceu:uiv_electric_motor', research: 'grindless:mh_laminated_yarn', domain: ['2x grindless:braided_mh_tether', '2x grindless:polar_cap_electrode', '2x grindless:crust_lift_tether'] }
+      { name: 'crust_lift', parts: ['gtceu:uiv_electric_piston', 'gtceu:uiv_electric_motor', 'gtceu:uiv_conveyor_module'], research: 'grindless:crust_lift_tether', domain: ['2x grindless:polar_cap_electrode', '2x grindless:braided_mh_tether', '2x grindless:mh_laminated_yarn'] },
+      { name: 'neutron_drip_separator', parts: ['gtceu:uiv_electric_pump', 'gtceu:uiv_fluid_regulator', 'gtceu:uiv_conveyor_module'], research: 'grindless:neutron_supermirror', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
+      { name: 'neutronium_cage', parts: ['gtceu:uiv_robot_arm', 'gtceu:uiv_electric_motor', 'gtceu:uiv_electric_piston'], research: 'grindless:cage_part', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
+      { name: 'r_process_decompressor', parts: ['gtceu:uiv_conveyor_module', 'gtceu:uiv_electric_piston', 'gtceu:uiv_electric_pump'], research: 'grindless:sealed_capsule', domain: ['2x grindless:sealed_capsule', '2x grindless:neutron_guide', '2x grindless:target_wheel_blank'] },
+      { name: 'decay_heat_vault', parts: ['gtceu:uiv_electric_motor', 'gtceu:uiv_electric_pump', 'gtceu:uiv_fluid_regulator'], research: 'grindless:mh_laminated_yarn', domain: ['2x grindless:braided_mh_tether', '2x grindless:polar_cap_electrode', '2x grindless:crust_lift_tether'] }
     ]
     RX.controllerRecipes = []
     defs.forEach(function (d) {
       var machine = 'gtceu:' + d.name
-      var ids = [HULL, d.part, MAINFRAME, machine, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var ids = [HULL, MAINFRAME, machine, d.research].concat(d.parts).concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
       var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
@@ -195,14 +195,14 @@
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
       b.itemInputs(HULL)
-      b.itemInputs('2x ' + d.part)
+      d.parts.forEach(function (p) { b.itemInputs('3x ' + p) })
       b.itemInputs('2x ' + MAINFRAME)
       b.itemInputs('4x #gtceu:circuits/uiv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
       b.itemOutputs(machine)
       b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
-      b.EUt(7864320).duration(1500)
+      b.EUt(31457280).duration(1500)
       RX.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
