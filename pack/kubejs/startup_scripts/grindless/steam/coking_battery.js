@@ -83,9 +83,8 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.coking_battery.tooltip.0'),
-        Text.translate('grindless.machine.coking_battery.tooltip.1'),
-        Text.translate('grindless.machine.coking_battery.tooltip.2'),
-        Text.translate('grindless.machine.coking_battery.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.coking')),
+        Text.translate('grindless.tooltip.steam', '32')
       ])
       .workableCasingModel(COKE_BRICK_TEXTURE, 'grindless:block/multiblock/coking_battery')
   })

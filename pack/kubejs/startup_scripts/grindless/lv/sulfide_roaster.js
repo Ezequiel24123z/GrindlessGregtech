@@ -100,9 +100,8 @@
       .allowExtendedFacing(false)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.sulfide_roaster.tooltip.0'),
-        Text.translate('grindless.machine.sulfide_roaster.tooltip.1'),
-        Text.translate('grindless.machine.sulfide_roaster.tooltip.2'),
-        Text.translate('grindless.machine.sulfide_roaster.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.sulfide_roasting')),
+        Text.translate('grindless.machine.sulfide_roaster.tooltip.1')
       ])
       .workableCasingModel(HEAT_CASING_TEXTURE, 'grindless:block/multiblock/sulfide_roaster')
   })

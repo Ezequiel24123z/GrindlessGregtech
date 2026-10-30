@@ -194,7 +194,7 @@ test('the lang file names the machine and its tooltips in en_us and es_es', () =
   });
   for (const code of ['en_us', 'es_es']) {
     assert.ok(store[code], code);
-    for (const key of ['block.gtceu.coil_chemical_plant', 'grindless.machine.coil_chemical_plant.tooltip.0', 'grindless.machine.coil_chemical_plant.tooltip.1', 'grindless.machine.coil_chemical_plant.tooltip.2']) {
+    for (const key of ['block.gtceu.coil_chemical_plant', 'grindless.machine.coil_chemical_plant.tooltip.0', 'grindless.machine.coil_chemical_plant.tooltip.1']) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
     }
   }

@@ -127,9 +127,8 @@
       .pattern(function (def) { return Pat.build(def, DRILL_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.mv_vein_drill.tooltip.0'),
-        Text.translate('grindless.machine.mv_vein_drill.tooltip.1'),
-        Text.translate('grindless.machine.mv_vein_drill.tooltip.2'),
-        Text.translate('grindless.machine.mv_vein_drill.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.vein_drilling')),
+        Text.translate('grindless.machine.mv_vein_drill.tooltip.1')
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/mv_vein_drill')
 
@@ -142,9 +141,7 @@
       .pattern(function (def) { return Pat.build(def, GREENHOUSE_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.mv_greenhouse.tooltip.0'),
-        Text.translate('grindless.machine.mv_greenhouse.tooltip.1'),
-        Text.translate('grindless.machine.mv_greenhouse.tooltip.2'),
-        Text.translate('grindless.machine.mv_greenhouse.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.greenhouse'))
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/mv_greenhouse')
   })

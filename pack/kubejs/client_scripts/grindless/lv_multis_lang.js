@@ -17,20 +17,12 @@ ClientEvents.lang('en_us', event => {
     add('block.gtceu.submerged_arc_furnace', 'Submerged Arc Furnace')
     add('gtceu.arc_smelting', 'Arc Smelting')
 
-    add('grindless.machine.lv_vein_drill.tooltip.0', 'Drills the vein marked by the vein sample, over and over. It runs every Steam Vein Drill recipe and adds more.')
-    add('grindless.machine.lv_vein_drill.tooltip.1', 'Runs as many bores at once as its energy hatches allow (voltage / 8 EU/t, up to 8): 4 with one LV hatch, 8 with two.')
-    add('grindless.machine.lv_vein_drill.tooltip.2', 'Drilling fluid in the fluid hatch: +50% ore and half the drill bit wear. Nether veins only drill with it.')
-    add('grindless.machine.lv_vein_drill.tooltip.3', 'Needs 1 or 2 energy hatches, 1 input bus, 2 output buses and 1 input hatch.')
+    add('grindless.machine.lv_vein_drill.tooltip.0', '§7Drills the vein marked by the vein sample, up to 8 bores at once.')
 
-    add('grindless.machine.lv_greenhouse.tooltip.0', 'Grows trees, rubber trees, crops, mushrooms, berries, vines and flowers with a plant that is never used up.')
-    add('grindless.machine.lv_greenhouse.tooltip.1', 'Runs as many crops at once as its energy hatches allow (voltage / 4 EU/t, up to 8). Water in the fluid hatch unlocks the extra plants.')
-    add('grindless.machine.lv_greenhouse.tooltip.2', 'Programmed circuit 2 + fertilizer in the input bus (and water): double output in half the time. Circuit 1 or none: base recipes.')
-    add('grindless.machine.lv_greenhouse.tooltip.3', 'Needs 1 or 2 energy hatches, 1 input bus, 1 or 2 output buses and 1 input hatch.')
+    add('grindless.machine.lv_greenhouse.tooltip.0', '§7Grows trees, crops, mushrooms and flowers, up to 8 at once.')
 
-    add('grindless.machine.submerged_arc_furnace.tooltip.0', 'Reduces and melts in an electric arc: silicon and sky dust for AE2, and obsidian from cobblestone and water. No small machine can.')
-    add('grindless.machine.submerged_arc_furnace.tooltip.1', 'Draws 2 A at LV (64 EU/t) from its two energy hatches and needs a graphite electrode in the input bus (it wears out by chance, about 3% of the runs).')
-    add('grindless.machine.submerged_arc_furnace.tooltip.2', 'The muffler hatch needs free space in front of it. Carbon dioxide comes out of the fluid output hatch: set the controller to void fluids to vent it. The water for the obsidian goes in the input hatch.')
-    add('grindless.machine.submerged_arc_furnace.tooltip.3', 'Needs 2 energy hatches, 1 input bus, 1 input hatch, 1 output bus, 1 output hatch and 1 muffler hatch.')
+    add('grindless.machine.submerged_arc_furnace.tooltip.0', '§7Reduces and melts in an electric arc: silicon, sky dust, obsidian.')
+    add('grindless.machine.submerged_arc_furnace.tooltip.1', 'Needs a graphite electrode in the input bus.')
 
     add('item.grindless.graphite_electrode', 'Graphite Electrode')
     add('tooltip.grindless.graphite_electrode', 'Wears out by chance in the Submerged Arc Furnace (about 3% of the runs). Press it from graphite dust and a steel rod.')
@@ -65,20 +57,12 @@ ClientEvents.lang('es_es', event => {
     add('block.gtceu.submerged_arc_furnace', 'Horno de arco sumergido')
     add('gtceu.arc_smelting', 'Fundición por arco')
 
-    add('grindless.machine.lv_vein_drill.tooltip.0', 'Perfora la veta que marca la muestra, una y otra vez. Hace todas las recetas de la perforadora de vapor y añade más.')
-    add('grindless.machine.lv_vein_drill.tooltip.1', 'Hace tantos ciclos a la vez como permitan sus escotillas de energía (voltaje / 8 EU/t, hasta 8): 4 con una escotilla LV, 8 con dos.')
-    add('grindless.machine.lv_vein_drill.tooltip.2', 'Con lodo de perforación en la escotilla de fluidos: +50 % de mineral y la mitad de desgaste de la broca. Las vetas del Nether solo se perforan con él.')
-    add('grindless.machine.lv_vein_drill.tooltip.3', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada, 2 buses de salida y 1 escotilla de entrada.')
+    add('grindless.machine.lv_vein_drill.tooltip.0', '§7Perfora la veta que marca la muestra, hasta 8 perforaciones a la vez.')
 
-    add('grindless.machine.lv_greenhouse.tooltip.0', 'Cultiva árboles, árboles de caucho, cosechas, setas, bayas, enredaderas y flores con una planta que no se gasta.')
-    add('grindless.machine.lv_greenhouse.tooltip.1', 'Hace tantos cultivos a la vez como permitan sus escotillas de energía (voltaje / 4 EU/t, hasta 8). Con agua en la escotilla de fluidos se abren las plantas extra.')
-    add('grindless.machine.lv_greenhouse.tooltip.2', 'Circuito programado 2 + fertilizante en el bus de entrada (y agua): doble de producción en la mitad de tiempo. Circuito 1 o ninguno: recetas base.')
-    add('grindless.machine.lv_greenhouse.tooltip.3', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada, 1 o 2 buses de salida y 1 escotilla de entrada.')
+    add('grindless.machine.lv_greenhouse.tooltip.0', '§7Cultiva árboles, cosechas, setas y flores, hasta 8 a la vez.')
 
-    add('grindless.machine.submerged_arc_furnace.tooltip.0', 'Reduce y funde con un arco eléctrico: silicio y polvo del cielo para AE2, y obsidiana a partir de adoquín y agua. Ninguna máquina pequeña puede.')
-    add('grindless.machine.submerged_arc_furnace.tooltip.1', 'Consume 2 A a LV (64 EU/t) de sus dos escotillas de energía y necesita un electrodo de grafito en el bus de entrada (se desgasta por probabilidad, en torno al 3 % de los ciclos).')
-    add('grindless.machine.submerged_arc_furnace.tooltip.2', 'La escotilla silenciadora necesita espacio libre delante. El dióxido de carbono sale por la escotilla de fluidos de salida: pon el controlador en vaciar fluidos para ventearlo. El agua de la obsidiana entra por la escotilla de entrada.')
-    add('grindless.machine.submerged_arc_furnace.tooltip.3', 'Necesita 2 escotillas de energía, 1 bus de entrada, 1 escotilla de entrada, 1 bus de salida, 1 escotilla de salida y 1 escotilla silenciadora.')
+    add('grindless.machine.submerged_arc_furnace.tooltip.0', '§7Reduce y funde con arco eléctrico: silicio, polvo celeste, obsidiana.')
+    add('grindless.machine.submerged_arc_furnace.tooltip.1', 'Pide un electrodo de grafito en el bus de entrada.')
 
     add('item.grindless.graphite_electrode', 'Electrodo de grafito')
     add('tooltip.grindless.graphite_electrode', 'Se desgasta por probabilidad en el horno de arco sumergido (en torno al 3 % de los ciclos). Se prensa con polvo de grafito y una varilla de acero.')

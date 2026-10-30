@@ -180,9 +180,7 @@
       .pattern(function (def) { return Pat.build(def, PLANT_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.ore_plant.tooltip.0'),
-        Text.translate('grindless.machine.ore_plant.tooltip.1'),
-        Text.translate('grindless.machine.ore_plant.tooltip.2'),
-        Text.translate('grindless.machine.ore_plant.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.ore_processing'))
       ])
       .workableCasingModel(STEEL_CASING_TEXTURE, 'grindless:block/multiblock/ore_plant')
   })
