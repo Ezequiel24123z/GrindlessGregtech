@@ -1,3 +1,4 @@
+// priority: -9792
 // TEST ONLY, UXV-B2 (gtceu:stellar_elevator, gtceu:plasma_mass_filter, gtceu:stellar_condensation_tower). Command: kubejs custom_command gg_test_uxv_cygnus_lift
 // Band ONLY: X 36800-36863, Z 0-63, Y 98-115, built in grindless:cygnus_x1_orbit (the dimension their recipes are locked to).
 //   T1 (named uncertainty: the elevator's c1 row (1,000 mB liquid helium -> 1,000 mB stellar plasma + 900 mB helium, 134,217,728 EU/t) carries

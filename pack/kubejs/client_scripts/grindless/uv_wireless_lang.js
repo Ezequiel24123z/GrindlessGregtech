@@ -1,4 +1,4 @@
-// priority: 1600
+// priority: 1667
 // Gregtech Grindless - names of the UV wireless tier (package UV-A9; the UV row of kubejs/data/grindless/tables/wireless_energy.json,
 // registered by startup_scripts/grindless/lv/wireless_energy.js) and the EMI line of the naquadria magnet works' circuit 4:
 //

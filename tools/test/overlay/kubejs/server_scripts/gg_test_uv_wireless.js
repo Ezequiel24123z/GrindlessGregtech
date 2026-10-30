@@ -1,4 +1,4 @@
-// priority: -9824
+// priority: -9758
 // Gregtech Grindless - smoke test of UV's wireless tier (package UV-A9; TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): the UV row of tables/wireless_energy.json (registered by lv/wireless_energy.js) and the naquadria magnet works'
 // circuit 4 (tables/magnet_works.json), which makes the UV cell.

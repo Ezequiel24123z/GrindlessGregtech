@@ -232,8 +232,8 @@
       { planet: 'rx_j1856', seed: 'grindless:relay_seed', name: 'rx_j1856_entangled_singularity' },
       { planet: 'psr_j0437', seed: 'grindless:launched_relay_seed', name: 'psr_j0437_entangled_singularity' },
       { planet: 'cygnus_x1', seed: 'grindless:neutronium_pellet', name: 'cygnus_x1_entangled_singularity' },
-      // UXV-B1 (integrator): the Vela and Cas A platforms; each seed is the bridge item into its place
-      { planet: 'vela_pulsar', seed: 'grindless:cage_part', name: 'vela_pulsar_entangled_singularity' },
+      // UXV-B1 (integrator): the Vela and Cas A platforms; each seed is one of B1's own items (cage_part stays table-only, uiv-isotopes)
+      { planet: 'vela_pulsar', seed: 'grindless:cnt_bumper_weave', name: 'vela_pulsar_entangled_singularity' },
       { planet: 'cas_a', seed: 'grindless:cnt_whipple_shield', name: 'cas_a_entangled_singularity' }
     ]
     uev.forEach(function (p) {

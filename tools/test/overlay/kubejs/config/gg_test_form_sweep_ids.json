@@ -260,8 +260,11 @@
    "gtceu:mnt_collider",
    "gtceu:mtj_sputter_cluster",
    "gtceu:oxide_pld_chamber",
+   "gtceu:plasma_mass_filter",
    "gtceu:racetrack_fab",
    "gtceu:shequid_works",
+   "gtceu:stellar_condensation_tower",
+   "gtceu:stellar_elevator",
    "gtceu:uxv_fusion_reactor",
    "gtceu:vdw_stacking_cell",
    "gtceu:yig_lpe_furnace"
