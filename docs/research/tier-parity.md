@@ -62,8 +62,9 @@ GTM 7.5.3 with `highTierContent: true` (source, tag v7.5.3-1.20.1):
    - Line 0, gray (`§7`): one sentence, at most 80 characters, of what it does.
    - Then only feature lines, one fact each, at most 60 characters, from GTM's keys as GCYM uses them: the recipe types it runs
      (`gtceu.machine.available_recipe_map_N.tooltip`, N 1-4, with `Text.translate('gtceu.<type>')` arguments; more types share one argument
-     joined with `, `), `gtceu.multiblock.parallelizable.tooltip`, `gtceu.universal.tooltip.parallel` (base parallel),
-     `gtceu.machine.perfect_oc`; or the shared `grindless.tooltip.laser`, `.wireless`, `.site` (with the place's name) and `.steam` (with the EU/t cap).
+     joined with `, `), `gtceu.multiblock.parallelizable.tooltip`, `gtceu.machine.perfect_oc`; or the shared `grindless.tooltip.laser`,
+     `.wireless`, `.site` (with the place's name) and `.steam` (with the EU/t cap). Not `gtceu.universal.tooltip.parallel`: its `%d` does not
+     format in a translatable component, so a fixed base parallel is a machine-specific line.
      `client_scripts/grindless/tooltip_lang.js` holds them and the es_es text of those GTM keys (GTM 7.5.3 ships no es_es). A package that
      needs another shared fact proposes the key in its handoff; the integrator adds it.
    - No numbers tables, part lists, circuits, lore or prose. Everything else moves to the controller's EMI info page

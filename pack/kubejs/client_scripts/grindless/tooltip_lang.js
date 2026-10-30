@@ -17,8 +17,7 @@
         ['gtceu', 'gtceu.machine.available_recipe_map_3.tooltip', 'Available Recipe Types: %s, %s, %s', 'Tipos de receta: %s, %s, %s'],
         ['gtceu', 'gtceu.machine.available_recipe_map_4.tooltip', 'Available Recipe Types: %s, %s, %s, %s', 'Tipos de receta: %s, %s, %s, %s'],
         ['gtceu', 'gtceu.multiblock.parallelizable.tooltip', 'Can parallelize with Parallel Control Hatches.', 'Admite escotillas de control de paralelos.'],
-        ['gtceu', 'gtceu.machine.perfect_oc', 'Does not lose energy efficiency when overclocked.', 'No pierde eficiencia energética al hacer overclock.'],
-        ['gtceu', 'gtceu.universal.tooltip.parallel', '§dMax Parallel: §f%d', '§dParalelo máximo: §f%d']
+        ['gtceu', 'gtceu.machine.perfect_oc', 'Does not lose energy efficiency when overclocked.', 'No pierde eficiencia energética al hacer overclock.']
     ]
 
     ;['en_us', 'es_es'].forEach(function (lang, li) {
