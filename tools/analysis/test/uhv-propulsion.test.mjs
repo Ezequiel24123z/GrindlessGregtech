@@ -174,13 +174,13 @@ test('the thruster works: the ICAN motor consumes the GEO-assembled stage, the p
   assert.deepEqual(makers, ['grindless:thruster_assembly/ican_rocket_motor']);
 });
 
-test('the controller is an assembly line: UHV hull, UV pistons, UHV circuits, tritanium and station research', () => {
+test('the controller is an assembly line: UHV hull, UHV pistons, UHV circuits, tritanium and station research', () => {
   const ctrl = byId(P.crafting.sinterer);
   assert.ok(ctrl, P.crafting.sinterer);
   assert.equal(ctrl.t, 'gtceu:assembly_line');
   assert.match(outputsOf(ctrl), /gtceu:spark_plasma_sinterer/);
   const j = JSON.stringify(ctrl.j);
-  for (const id of ['gtceu:uhv_machine_hull', 'gtceu:uv_electric_piston', 'gtceu:circuits/uhv', 'gtceu:tritanium', '"research"']) assert.ok(j.includes(id), id);
+  for (const id of ['gtceu:uhv_machine_hull', 'gtceu:uhv_electric_piston', 'gtceu:circuits/uhv', 'gtceu:tritanium', '"research"']) assert.ok(j.includes(id), id);
 });
 
 test('names: en_us and es_es for the machine, its type, the items, the motor and the materials', () => {
