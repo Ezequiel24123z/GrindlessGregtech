@@ -86,6 +86,7 @@ ClientEvents.lang('en_us', event => {
 
     add('planet.grindless.venus', 'Venus')
     add('planet.grindless.mercury', 'Mercury')
+    add('dimension.grindless.mercury_orbit', 'Mercury Orbit')
 
     add('material.gtceu.heavy_water', 'Heavy Water')
     add('material.gtceu.heavy_water_concentrate', 'Heavy Water Concentrate')
@@ -174,6 +175,7 @@ ClientEvents.lang('es_es', event => {
 
     add('planet.grindless.venus', 'Venus')
     add('planet.grindless.mercury', 'Mercurio')
+    add('dimension.grindless.mercury_orbit', 'Órbita de Mercurio')
 
     add('material.gtceu.heavy_water', 'Agua pesada')
     add('material.gtceu.heavy_water_concentrate', 'Concentrado de agua pesada')

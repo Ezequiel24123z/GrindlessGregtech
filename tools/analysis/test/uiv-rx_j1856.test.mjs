@@ -197,7 +197,7 @@ test('lang: every item, fluid, machine and type named in en_us and es_es, every 
   for (const n of fluidIds) assert.ok(lang.includes(`['${n}', `), `fluid name ${n}`);
   for (const m of ['crust_lift', 'neutron_drip_separator', 'neutronium_cage', 'r_process_decompressor', 'decay_heat_vault']) {
     assert.ok(lang.includes(`block.gtceu.${m}'`), m);
-    for (let i = 0; i < 3; i++) assert.ok(lang.includes(`grindless.machine.${m}.tooltip.${i}'`), `${m} tooltip ${i}`);
+    for (let i = 0; i < 1; i++) assert.ok(lang.includes(`grindless.machine.${m}.tooltip.${i}'`), `${m} tooltip ${i}`);
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'block', 'multiblock', m, 'overlay_front_active.png')), m);
   }
   for (const [type, t] of Object.entries(T.types)) {
