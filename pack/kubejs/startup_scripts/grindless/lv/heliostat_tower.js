@@ -187,9 +187,8 @@
       .allowExtendedFacing(false)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.heliostat_tower.tooltip.0'),
-        Text.translate('grindless.machine.heliostat_tower.tooltip.1'),
-        Text.translate('grindless.machine.heliostat_tower.tooltip.2'),
-        Text.translate('grindless.machine.heliostat_tower.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.solar_steam')),
+        Text.translate('grindless.machine.heliostat_tower.tooltip.1')
       ])
       .workableCasingModel(STEEL_CASING_TEXTURE, 'grindless:block/multiblock/heliostat_tower')
   })

@@ -20,20 +20,14 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.astrophotography', 'Astrophotography')
     add('gtceu.radio_astronomy', 'Radio Astronomy')
 
-    add('grindless.machine.steam_observatory.tooltip.0', 'A bronze telescope on a clockwork mount, out in the open. Steam winds the drive that keeps the Moon in the eyepiece while you draw.')
-    add('grindless.machine.steam_observatory.tooltip.1', 'Works only at night under a clear sky, with the controller at Y 100 or higher: above the haze and the smoke of your own coke ovens.')
-    add('grindless.machine.steam_observatory.tooltip.2', 'The only source of the Lunar Chart (Draft). If dawn or rain comes mid-sketch, it waits and keeps its progress.')
-    add('grindless.machine.steam_observatory.tooltip.3', 'Needs 1 steam hatch, 1 steam input bus and 1 steam output bus in the platform. One draft at a time.')
+    add('grindless.machine.steam_observatory.tooltip.0', '§7A bronze telescope on a clockwork mount: the Lunar Chart (Draft).')
+    add('grindless.machine.steam_observatory.tooltip.1', 'Works at night, clear sky, controller at Y 100 or higher.')
 
-    add('grindless.machine.optical_observatory.tooltip.0', 'A steel dome with an open shutter slit and a refractor on a motor drive. Photographic plates catch what the eye missed.')
-    add('grindless.machine.optical_observatory.tooltip.1', 'Works only at night under a clear sky. Long exposures beat the haze, so any height will do.')
-    add('grindless.machine.optical_observatory.tooltip.2', 'The only source of the Photographic Lunar Map and the Lunar Ephemeris. Your draft guides the telescope and is never used up.')
-    add('grindless.machine.optical_observatory.tooltip.3', 'Needs 1 or 2 energy hatches, 1 input bus and 1 output bus in the floor ring. Keep the two cells of the slit open.')
+    add('grindless.machine.optical_observatory.tooltip.0', '§7A steel dome with a refractor: the Photographic Lunar Map and Ephemeris.')
+    add('grindless.machine.optical_observatory.tooltip.1', 'Works only at night under a clear sky.')
 
-    add('grindless.machine.radio_telescope.tooltip.0', 'Three aluminium dishes and a control hut. It bounces radar off the Moon and listens for the echo.')
-    add('grindless.machine.radio_telescope.tooltip.1', 'Radio goes through cloud and rain: it only needs the Moon up (night) and no thunderstorm, whose lightning drowns the echo.')
-    add('grindless.machine.radio_telescope.tooltip.2', 'The only source of the Lunar Landing-Site Chart. The map and the ephemeris point the dishes and are never used up.')
-    add('grindless.machine.radio_telescope.tooltip.3', 'Needs 1 or 2 energy hatches (MV), 1 input bus and 1 output bus in the hut.')
+    add('grindless.machine.radio_telescope.tooltip.0', '§7Three dishes bounce radar off the Moon: the Landing-Site Chart.')
+    add('grindless.machine.radio_telescope.tooltip.1', 'Works at night, but not in a thunderstorm.')
 
     add('gtceu.recipe.grindless_sky.steam', 'Sky: clear night, controller at Y 100+')
     add('gtceu.recipe.grindless_sky.optical', 'Sky: clear night, any height')
@@ -65,20 +59,14 @@ ClientEvents.lang('es_es', event => {
     add('gtceu.astrophotography', 'Astrofotografía')
     add('gtceu.radio_astronomy', 'Radioastronomía')
 
-    add('grindless.machine.steam_observatory.tooltip.0', 'Un telescopio de bronce sobre una montura de relojería, al aire libre. El vapor da cuerda al mecanismo que mantiene la Luna en el ocular mientras dibujas.')
-    add('grindless.machine.steam_observatory.tooltip.1', 'Solo funciona de noche y con el cielo despejado, con el controlador en Y 100 o más: por encima de la bruma y del humo de tus hornos de coque.')
-    add('grindless.machine.steam_observatory.tooltip.2', 'Es lo único que hace la carta lunar (borrador). Si amanece o llueve a medio dibujo, espera y no pierde lo hecho.')
-    add('grindless.machine.steam_observatory.tooltip.3', 'Necesita 1 escotilla de vapor, 1 bus de entrada de vapor y 1 bus de salida de vapor en la plataforma. Un borrador cada vez.')
+    add('grindless.machine.steam_observatory.tooltip.0', '§7Un telescopio de bronce de relojería: la carta lunar (borrador).')
+    add('grindless.machine.steam_observatory.tooltip.1', 'Solo de noche, cielo despejado y controlador a Y 100 o más.')
 
-    add('grindless.machine.optical_observatory.tooltip.0', 'Una cúpula de acero con la rendija abierta y un refractor con motor de seguimiento. Las placas fotográficas captan lo que el ojo no vio.')
-    add('grindless.machine.optical_observatory.tooltip.1', 'Solo funciona de noche y con el cielo despejado. Las exposiciones largas vencen a la bruma, así que vale cualquier altura.')
-    add('grindless.machine.optical_observatory.tooltip.2', 'Es lo único que hace el mapa fotográfico de la Luna y las efemérides lunares. Tu borrador guía el telescopio y no se gasta.')
-    add('grindless.machine.optical_observatory.tooltip.3', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada y 1 bus de salida en el anillo del suelo. Las dos casillas de la rendija quedan abiertas.')
+    add('grindless.machine.optical_observatory.tooltip.0', '§7Una cúpula de acero con refractor: mapa fotográfico y efemérides lunares.')
+    add('grindless.machine.optical_observatory.tooltip.1', 'Solo funciona de noche y con el cielo despejado.')
 
-    add('grindless.machine.radio_telescope.tooltip.0', 'Tres antenas parabólicas de aluminio y una caseta de control. Hace rebotar el radar en la Luna y escucha el eco.')
-    add('grindless.machine.radio_telescope.tooltip.1', 'La radio atraviesa nubes y lluvia: solo necesita la Luna en el cielo (de noche) y que no haya tormenta, cuyos rayos tapan el eco.')
-    add('grindless.machine.radio_telescope.tooltip.2', 'Es lo único que hace la carta del lugar de alunizaje. El mapa y las efemérides apuntan las antenas y no se gastan.')
-    add('grindless.machine.radio_telescope.tooltip.3', 'Necesita 1 o 2 escotillas de energía (MV), 1 bus de entrada y 1 bus de salida en la caseta.')
+    add('grindless.machine.radio_telescope.tooltip.0', '§7Tres antenas rebotan radar en la Luna: la carta de sitios de alunizaje.')
+    add('grindless.machine.radio_telescope.tooltip.1', 'Funciona de noche, pero no con tormenta eléctrica.')
 
     add('gtceu.recipe.grindless_sky.steam', 'Cielo: noche despejada, controlador en Y 100 o más')
     add('gtceu.recipe.grindless_sky.optical', 'Cielo: noche despejada, a cualquier altura')

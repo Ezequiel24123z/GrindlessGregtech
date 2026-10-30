@@ -135,9 +135,8 @@
       ["partSorter(java.util.Comparator)"](function (a, b) { return a.self().getPos().getY() - b.self().getPos().getY() })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.reformer.tooltip.0'),
-        Text.translate('grindless.machine.reformer.tooltip.1'),
-        Text.translate('grindless.machine.reformer.tooltip.2'),
-        Text.translate('grindless.machine.reformer.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.reforming')),
+        Text.translate('grindless.machine.reformer.tooltip.1')
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/reformer')
   })

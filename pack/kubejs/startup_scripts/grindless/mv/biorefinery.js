@@ -110,9 +110,8 @@
       ["partSorter(java.util.Comparator)"](function (a, b) { return a.self().getPos().getY() - b.self().getPos().getY() })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.biorefinery.tooltip.0'),
-        Text.translate('grindless.machine.biorefinery.tooltip.1'),
-        Text.translate('grindless.machine.biorefinery.tooltip.2'),
-        Text.translate('grindless.machine.biorefinery.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.bio_distillation')),
+        Text.translate('grindless.machine.biorefinery.tooltip.1')
       ])
       .workableCasingModel(STEEL_CASING_TEXTURE, 'grindless:block/multiblock/biorefinery')
   })
