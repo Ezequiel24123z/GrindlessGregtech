@@ -46,7 +46,9 @@ const UEV_B3 = ['grindless:barnard_residue', 'grindless:crude_ammonium_perrhenat
 const UIV_B2 = ['grindless:r_process_ash'];
 // UXV-A2's platinum plant rows (circuits 11-14): the three 5N metals (startup_scripts/grindless/uxv/spin_feed.js) and the sludge's two metals
 const UXV_A2 = ['grindless:five_n_platinum', 'grindless:five_n_ruthenium', 'grindless:five_n_iridium', 'gtceu:platinum_group_sludge_dust', 'gtceu:iridium_dust'];
-const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4, ...UEV_B3, ...UIV_B2, ...UXV_A2]);
+// OpV-D1's platinum plant rows: the decladded iridium core and the spallation residue (startup_scripts/grindless/opv/beam_hardware.js)
+const OPV_D1 = ['grindless:decladded_ir_core', 'grindless:ir_spallation_residue'];
+const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4, ...UEV_B3, ...UIV_B2, ...UXV_A2, ...OPV_D1]);
 const FLUIDS = new Set([...IDS.fluids, 'gtceu:nitric_acid', 'gtceu:diluted_hydrochloric_acid']);
 
 function strictRun(scripts, startup, recipes, before) {
