@@ -59,7 +59,7 @@ test("one recipe per lookup path: no recipe's ingredients are a subset of anothe
 test('the three machines and their types are registered; every data-keyed recipe has its EMI line in en_us and es_es', () => {
   for (const m of ['snspd_foundry', 'vdw_stacker', 'photonic_integration_hall']) assert.ok(startup.includes(`'${m}'`), m);
   for (const k of ['snspd_fabrication', 'vdw_assembly', 'photonic_integration']) assert.ok(startup.includes(`'${k}'`), k);
-  const lines = lang + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_mainframe_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_matrioshka_lang.js')); // UIV-A7's hall rows c4-c6; UIV-A10's nb_jj_wafer
+  const lines = lang + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_mainframe_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_matrioshka_lang.js')) + read(path.join(kube, 'client_scripts', 'grindless', 'uxv_spin_logic_lang.js')); // UIV-A7's hall rows c4-c6; UIV-A10's nb_jj_wafer; UXV-A5's c7
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
     for (const r of t.recipes) assert.ok(lines.includes(`'gtceu.recipe.${t.dataKey}.${r.name}'`), `${t.dataKey}.${r.name}`);

@@ -66,8 +66,8 @@ test('assembler rows: names unique, circuit 0, figures, ids', () => {
 test('hall rows: circuits 4-6 after the three UEV rows, within the hall slots (8 items in with the circuit, 2 out, 1 fluid in)', () => {
   const rc = HALL.types.photonic_integration.recipes;
   assert.deepEqual(rc.slice(0, 3).map((r) => r.name), ['waveguide_circuit', 'quantum_photonic_chip', 'optical_computer']);
-  assert.deepEqual(rc.slice(3).map((r) => [r.name, r.circuit]), [['photonic_tensor_core', 4], ['optical_mainframe', 5], ['pulsar_timed_repeater', 6]]);
-  for (const r of rc.slice(3)) {
+  assert.deepEqual(rc.slice(3, 6).map((r) => [r.name, r.circuit]), [['photonic_tensor_core', 4], ['optical_mainframe', 5], ['pulsar_timed_repeater', 6]]);
+  for (const r of rc.slice(3, 6)) {
     assert.ok(r.itemsIn.length + 1 <= 8 && r.itemsOut.length <= 2, r.name);
     assert.match(r._why, /UIV-A7/, r.name);
   }
@@ -168,7 +168,7 @@ test('no recipe in the table is a subset of another of its type', () => {
 
 test('every contract id has a real use (temporary EMI exceptions are for these)', () => {
   const used = new Set();
-  for (const r of [...HALL.types.photonic_integration.recipes.slice(3), ...MF.types.assembler.recipes]) inputs(r).forEach((i) => used.add(i));
+  for (const r of [...HALL.types.photonic_integration.recipes.slice(3, 6), ...MF.types.assembler.recipes]) inputs(r).forEach((i) => used.add(i));
   for (const id of ['grindless:eo_transceiver', 'grindless:glass_interposer', 'grindless:eo_microcomb', 'grindless:beuv_driver_asic', 'grindless:six_hour_memory',
     'grindless:p_si_processor', 'grindless:telecom_memory', 'grindless:pumped_edfa']) assert.ok(used.has(id), id);
 });
