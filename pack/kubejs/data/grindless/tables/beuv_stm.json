@@ -92,6 +92,66 @@
             { "id": "grindless:fouled_beuv_mirror", "count": 1 }
           ],
           "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 16): the sub-50 nm T-gates of the InP HEMT",
+          "name": "hemt_gate_exposure",
+          "circuit": 6,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:inp_hemt_epi_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:hemt_gated_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 17): the gates of the GaN-on-SiC transistors",
+          "name": "gan_gate_exposure",
+          "circuit": 7,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:gan_sic_epi_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:gan_gated_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 18): the small collecting anode inside the SDD's drift rings",
+          "name": "sdd_anode_exposure",
+          "circuit": 8,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:sdd_ring_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:sdd_anode_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
         }
       ]
     },

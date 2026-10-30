@@ -87,10 +87,10 @@ test('one recipe per lookup path, with the ZPM implanter rows: unique circuits, 
     }
   }
   // UEV's implanter row (c5) is in photonics_uev.json; UIV-A5 added ZPM qubits.js c6
-  assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 10, 12, 2, 3, 4, 6, 7, 8, 9]); // lexicographic sort; UIV-A10 added ZPM qubits.js c7 (c12_boron_diamond); UXV-A3 added c8-10 (argon ion mills); OpV-A2 c12 (cryo-CMOS)
+  assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 10, 12, 13, 14, 2, 3, 4, 6, 7, 8, 9]); // lexicographic sort; UIV-A10 added ZPM qubits.js c7 (c12_boron_diamond); UXV-A3 added c8-10 (argon ion mills); OpV-A2 c12-14 (cryo-CMOS, HEMT isolation, SDD rings)
   // UEV-A6 added MBE c3 and foundry c7 (UEV rows in the same table); UIV-A1 added MBE c4; UIV-A4 added foundry c8-11;
   // UIV-A5 added MBE c5-6 and foundry c12; UIV-A7 added MBE c7 (thf4_film) and foundry c13 (pcm_crossbar)
-  assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9]); // UIV-A10 added MBE c8 (nb_trilayer); OpV-A2 c9 (InAs QW)
+  assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]); // UIV-A10 added MBE c8 (nb_trilayer); OpV-A2 c9 (InAs QW) and c10 (InP HEMT)
   assert.deepEqual(rowsOf('photonic_foundry').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]); // UIV-A10 added foundry c14-16; UXV-A3 c17-22
   // GTM's own types take no circuit here; the blast furnace rows carry a temperature
   for (const type of ['electric_blast_furnace', 'large_chemical_reactor']) for (const r of rowsOf(type)) assert.equal(r.circuit, 0, r.name);

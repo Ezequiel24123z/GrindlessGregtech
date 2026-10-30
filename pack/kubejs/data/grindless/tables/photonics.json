@@ -161,6 +161,28 @@
             { "id": "gtceu:arsenic_dust", "count": 1, "chance": 5000 }
           ],
           "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 16): the InGaAs/InAlAs HEMT channel grown on semi-insulating InP from 7N indium; the arsenic off the cryoshroud comes back",
+          "name": "inp_hemt_epi",
+          "circuit": 10,
+          "eut": 1966080,
+          "duration": 1200,
+          "itemsIn": [
+            { "id": "grindless:si_inp_wafer", "count": 1 },
+            { "id": "grindless:seven_n_indium", "count": 1 },
+            { "id": "gtceu:gallium_dust", "count": 1 },
+            { "id": "gtceu:aluminium_dust", "count": 1 },
+            { "id": "gtceu:arsenic_dust", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:inp_hemt_epi_wafer", "count": 1 },
+            { "id": "gtceu:arsenic_dust", "count": 1, "chance": 5000 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
         }
       ]
     },
@@ -496,6 +518,35 @@
           "fluidsIn": [],
           "charge": [],
           "itemsOut": [{ "id": "grindless:cryo_cmos_implanted_wafer", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 16): helium implanted between the HEMTs, whose lattice damage isolates each transistor; c13",
+          "name": "hemt_isolation",
+          "circuit": 13,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:hemt_gated_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 100 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:isolated_hemt_wafer", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 18): boron drift rings implanted into float-zone silicon for the silicon drift detector; c14",
+          "name": "sdd_rings",
+          "circuit": 14,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:fz_silicon_wafer", "count": 1 },
+            { "id": "gtceu:boron_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:sdd_ring_wafer", "count": 1 }],
           "fluidsOut": []
         }
       ]

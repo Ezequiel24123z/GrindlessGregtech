@@ -57,8 +57,9 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 
 test('BEUV scanner: beuv_lithography circuits 1-3, figures and slots', () => {
   const rc = T.types.beuv_lithography.recipes;
-  // OpV-A2 appended c4 (cryo-CMOS gates) and c5 (Nb TSV vias)
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['exposure', 1], ['driver_asic', 2], ['mirror_cleaning', 3], ['cryo_cmos_exposure', 4], ['tsv_exposure', 5]]);
+  // OpV-A2 appended c4 (cryo-CMOS gates), c5 (Nb TSV vias), c6 (HEMT T-gates), c7 (GaN gates) and c8 (the SDD anode)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['exposure', 1], ['driver_asic', 2], ['mirror_cleaning', 3], ['cryo_cmos_exposure', 4], ['tsv_exposure', 5],
+    ['hemt_gate_exposure', 6], ['gan_gate_exposure', 7], ['sdd_anode_exposure', 8]]);
   for (const r of rc) {
     assert.ok(ids(r.itemsIn).length + 1 <= 4 && ids(r.itemsOut).length <= 2, r.name);
     assert.ok(ids(r.fluidsIn).length <= 1 && ids(r.fluidsOut).length === 0, r.name);
@@ -90,8 +91,8 @@ test('STM cell: stm_lithography circuits 1-3, figures and slots', () => {
 test('the lines chain: every grindless input has a producer', () => {
   const all = Object.values(T.types).flatMap((t) => t.recipes);
   const made = new Set(all.flatMap(outputs));
-  // OpV-A2: the gate-stack wafer comes from the MOCVD reactor's script rows (uv/photonics.js OPV_ROWS)
-  const external = ['si28_soi_wafer', 'uev_emitter', 'hafnia_dust', 'silicon_28_dust', 'si28_donor_wafer', 'si28_fz_ingot', 'gate_stack_soi_wafer'].map((n) => `grindless:${n}`);
+  // OpV-A2: the gate-stack and GaN-on-SiC wafers come from the MOCVD reactor's script rows (uv/photonics.js OPV_ROWS)
+  const external = ['si28_soi_wafer', 'uev_emitter', 'hafnia_dust', 'silicon_28_dust', 'si28_donor_wafer', 'si28_fz_ingot', 'gate_stack_soi_wafer', 'gan_sic_epi_wafer'].map((n) => `grindless:${n}`);
   for (const r of all) {
     for (const id of inputs(r)) {
       if (!id.startsWith('grindless:')) continue;
@@ -105,7 +106,8 @@ test('the lines chain: every grindless input has a producer', () => {
 test('"only from" claims: no other table or script builds these outputs', () => {
   const claims = {
     'grindless:beuv_exposed_wafer': ['beuv_lithography/exposure'],
-    'grindless:fouled_beuv_mirror': ['beuv_lithography/exposure', 'beuv_lithography/cryo_cmos_exposure', 'beuv_lithography/tsv_exposure'],
+    'grindless:fouled_beuv_mirror': ['beuv_lithography/exposure', 'beuv_lithography/cryo_cmos_exposure', 'beuv_lithography/tsv_exposure',
+      'beuv_lithography/hemt_gate_exposure', 'beuv_lithography/gan_gate_exposure', 'beuv_lithography/sdd_anode_exposure'],
     'grindless:beuv_driver_asic': ['beuv_lithography/driver_asic'],
     'grindless:beuv_mirror': ['assembler/beuv_mirror', 'beuv_lithography/mirror_cleaning'],
     'grindless:tb_droplet_target': ['assembler/tb_droplet_target'],

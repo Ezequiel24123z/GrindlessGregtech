@@ -34,34 +34,51 @@ const OWN = [
 const SCRIPT_ROWS = [
   ['grindless:solvent_extraction/ev/si28_trichlorosilane', 'ev/extraction_cascade.js'],
   ['grindless:solvent_extraction/ev/inp_scrap_indium', 'ev/extraction_cascade.js'],
+  ['grindless:solvent_extraction/ev/gan_exhaust_gallium', 'ev/extraction_cascade.js'],
   ['grindless:pgm_refining/opv/gold_overspray', 'ev/platinum_plant.js'],
   ['grindless:zone_refining/si28_poly_fz', 'uv/detectors.js'],
   ['grindless:srf_cavity/srf_cavity/rrr_nb_target', 'uv/cold.js'],
   ['grindless:mocvd/si28_poly_rod', 'uv/photonics.js'],
   ['grindless:mocvd/inas_al', 'uv/photonics.js'],
-  ['grindless:mocvd/gate_stack', 'uv/photonics.js']
+  ['grindless:mocvd/gate_stack', 'uv/photonics.js'],
+  ['grindless:mocvd/gan_on_sic', 'uv/photonics.js'],
+  ['grindless:fibre_draw/fibre_draw/cryo_optical_link', 'uv/photonics.js']
 ];
 // [table, type, name, circuit, the script that loads it]: the rows appended to older machines' tables
 const TABLE_ROWS = [
   ['crystals.json', 'crystal_growth', 'si_inp_boule', 21, 'uhv/crystals.js'],
   ['photonics.json', 'molecular_beam_epitaxy', 'inas_qw', 9, 'uhv/photonics.js'],
+  ['photonics.json', 'molecular_beam_epitaxy', 'inp_hemt_epi', 10, 'uhv/photonics.js'],
   ['photonics.json', 'ion_implantation', 'cryo_cmos_implant', 12, 'uhv/photonics.js'],
+  ['photonics.json', 'ion_implantation', 'hemt_isolation', 13, 'uhv/photonics.js'],
+  ['photonics.json', 'ion_implantation', 'sdd_rings', 14, 'uhv/photonics.js'],
   ['beuv_stm.json', 'beuv_lithography', 'cryo_cmos_exposure', 4, 'uiv/beuv_stm.js'],
   ['beuv_stm.json', 'beuv_lithography', 'tsv_exposure', 5, 'uiv/beuv_stm.js'],
+  ['beuv_stm.json', 'beuv_lithography', 'hemt_gate_exposure', 6, 'uiv/beuv_stm.js'],
+  ['beuv_stm.json', 'beuv_lithography', 'gan_gate_exposure', 7, 'uiv/beuv_stm.js'],
+  ['beuv_stm.json', 'beuv_lithography', 'sdd_anode_exposure', 8, 'uiv/beuv_stm.js'],
   ['beuv_stm.json', 'stm_lithography', 'gate_2deg', 4, 'uiv/beuv_stm.js'],
   ['spin_deposition.json', 'mtj_sputtering', 'cryo_cmos_metal', 5, 'uxv/spin_deposition.js'],
   ['spin_deposition.json', 'mtj_sputtering', 'nb_tsv_fill', 6, 'uxv/spin_deposition.js'],
   ['spin_deposition.json', 'mtj_sputtering', 'nbtin_film', 7, 'uxv/spin_deposition.js'],
-  ['tfln_femtosecond.json', 'ion_slicing', 'tsv_bond', 5, 'uiv/tfln_femtosecond.js']
+  ['spin_deposition.json', 'mtj_sputtering', 'sdd_metal', 8, 'uxv/spin_deposition.js'],
+  ['tfln_femtosecond.json', 'ion_slicing', 'tsv_bond', 5, 'uiv/tfln_femtosecond.js'],
+  ['tfln_femtosecond.json', 'ion_slicing', 'ln_on_soi', 6, 'uiv/tfln_femtosecond.js'],
+  ['tfln_femtosecond.json', 'femtosecond_writing', 'ln_soi_waveguides', 6, 'uiv/tfln_femtosecond.js'],
+  ['photonics_uev.json', 'snspd_fabrication', 'snspd_link', 6, 'uev/photonics.js'],
+  ['composites.json', 'chemical_vapour_infiltration', 'hpsi_sic', 8, 'uev/composites.js'],
+  ['power_devices.json', 'silicon_carbide', 'gan_mmic', 6, 'uhv/power_devices.js']
 ];
 // the table types whose rows carry an EMI line (data key grindless_<type>)
 const DATA_KEYED = ['crystal_growth', 'molecular_beam_epitaxy', 'beuv_lithography', 'stm_lithography', 'mtj_sputtering', 'ion_slicing',
   'femtosecond_writing', 'snspd_fabrication', 'chemical_vapour_infiltration', 'silicon_carbide', 'photonic_integration'];
 const tableId = ([, type, name]) => (type === 'crystal_growth' ? `grindless:${type}/${type}/${name}` : `grindless:${type}/${name}`);
-// the items of lines 11-14: each has a producer and a consumer among the recipes
+// the items of lines 11-18: each has a producer and a consumer among the recipes (nbtin_film_wafer waits for OpV-D1: made, not yet used)
 const CHAIN = ['si28_poly_rod', 'si_inp_boule', 'si_inp_wafer', 'inp_scrap', 'inas_qw_wafer', 'hbn_capped_2deg_wafer', 'gate_stack_soi_wafer',
   'cryo_cmos_litho_wafer', 'cryo_cmos_implanted_wafer', 'cryo_cmos_metal_wafer', 'untested_cryo_cmos_die', 'gold_overspray', 'rrr_nb_target',
-  'tsv_via_wafer', 'nb_filled_tsv_wafer', 'bonded_tsv_interposer'];
+  'tsv_via_wafer', 'nb_filled_tsv_wafer', 'bonded_tsv_interposer', 'ln_on_soi_wafer', 'ln_soi_waveguide_wafer', 'snspd_link_wafer',
+  'inp_hemt_epi_wafer', 'hemt_gated_wafer', 'isolated_hemt_wafer', 'hpsi_sic_wafer', 'gan_sic_epi_wafer', 'gan_gated_wafer', 'sdd_ring_wafer',
+  'sdd_anode_wafer'];
 // F1's parts (startup_scripts/grindless/opv/foundation.js and older eras): read, never registered here
 const F1 = ['gated_2deg_wafer', 'cryo_cmos_die', 'nb_tsv_interposer', 'cryo_optical_link', 'hemt_amplifier', 'gan_mmic', 'sdd_die', 'inas_al_wafer', 'si28_soi_wafer'];
 
@@ -143,13 +160,18 @@ test('the lines chain: every intermediate is made and used, the fluids too', () 
     assert.ok(producers(id).length >= 1, `${n} has a producer`);
     assert.ok(consumers(id).length >= 1, `${n} has a consumer`);
   }
-  for (const id of ['gtceu:si28_trichlorosilane']) {
+  for (const id of ['gtceu:si28_trichlorosilane', 'gtceu:gan_mocvd_exhaust']) {
     assert.ok(producers(id).length >= 1, `${id} has a producer`);
     assert.ok(consumers(id).length >= 1, `${id} has a consumer`);
   }
-  // the finished parts of lines 13-14 come out of the 4 K test
+  assert.ok(producers('grindless:nbtin_film_wafer').some((r) => r.i === 'grindless:mtj_sputtering/nbtin_film'));
+  // the finished parts of lines 13-18 come out of their last step
   assert.ok(producers('grindless:cryo_cmos_die').some((r) => r.i === 'grindless:closed_loop_cooling/opv_cryo_cmos_die_test'));
   assert.ok(producers('grindless:nb_tsv_interposer').some((r) => r.i === 'grindless:closed_loop_cooling/opv_nb_tsv_interposer_test'));
   assert.ok(producers('grindless:gated_2deg_wafer').some((r) => r.i === 'grindless:stm_lithography/gate_2deg'));
   assert.ok(producers('grindless:inas_al_wafer').some((r) => r.i === 'grindless:mocvd/inas_al'));
+  assert.ok(producers('grindless:cryo_optical_link').some((r) => r.i === 'grindless:fibre_draw/fibre_draw/cryo_optical_link'));
+  assert.ok(producers('grindless:hemt_amplifier').some((r) => r.i === 'grindless:cutter/hemt_amplifiers'));
+  assert.ok(producers('grindless:gan_mmic').some((r) => r.i === 'grindless:silicon_carbide/gan_mmic'));
+  assert.ok(producers('grindless:sdd_die').some((r) => r.i === 'grindless:mtj_sputtering/sdd_metal'));
 });

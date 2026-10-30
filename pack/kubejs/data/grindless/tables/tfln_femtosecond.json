@@ -31,6 +31,12 @@
           "name": "tsv_bond", "circuit": 5, "eut": 31457280, "duration": 1600,
           "itemsIn": [{ "id": "grindless:nb_filled_tsv_wafer", "count": 1 }, { "id": "grindless:oxidised_wafer", "count": 1 }],
           "itemsOut": [{ "id": "grindless:bonded_tsv_interposer", "count": 1 }, { "id": "gtceu:silicon_dust", "count": 1 }]
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 15): a helium-implanted LN film split onto Si-28 on insulator; the donor comes back two times in three for another slice, as UHV's LNOI row",
+          "name": "ln_on_soi", "circuit": 6, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:implanted_ln_wafer", "count": 1 }, { "id": "grindless:si28_soi_wafer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:ln_on_soi_wafer", "count": 1 }, { "id": "grindless:lithium_niobate_wafer", "count": 1, "chance": 6667 }]
         }
       ]
     },
@@ -58,6 +64,12 @@
           "name": "crystal_blank", "circuit": 4, "eut": 7864320, "duration": 1000,
           "itemsIn": [{ "id": "grindless:silica_storage_preform", "count": 1 }],
           "itemsOut": [{ "id": "grindless:written_crystal_blank", "count": 1 }, { "id": "gtceu:glass_dust", "count": 2 }]
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 15): the link's waveguides and electro-optic modulators written into the LN film of the LN-on-SOI wafer (circuit 6; 5 is OpV-A1's)",
+          "name": "ln_soi_waveguides", "circuit": 6, "eut": 7864320, "duration": 1000,
+          "itemsIn": [{ "id": "grindless:ln_on_soi_wafer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:ln_soi_waveguide_wafer", "count": 1 }]
         }
       ]
     },
