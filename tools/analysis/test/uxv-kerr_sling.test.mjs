@@ -155,9 +155,9 @@ test('sunlight.json: two rows, factor 0, no_solar, era uxv, always', () => {
 
 test('relay_platforms.json: two UXV-B1 rows with the UIV-B1 kit, one per jump, leaving from Cygnus X-1', () => {
   const plat = table('relay_platforms.json');
-  assert.equal(plat.platforms.length, 5);
+  assert.equal(plat.platforms.length, 7, 'UXV-B1 appends two rows with a source, OpV-F1 two more');
   assert.equal(plat.ring.machine, 'gtceu:warp_gate');
-  const mine = plat.platforms.filter((p) => p.source);
+  const mine = plat.platforms.filter((p) => p.source && Object.hasOwn(PLACES, p.place));
   assert.deepEqual(mine.map((p) => [p.place, p.jump, p.dimension, p.source, p.x, p.y, p.z]), Object.entries(PLACES).map(([k, [dim, , , jump]]) =>
     [k, jump, `grindless:${dim}`, 'grindless:cygnus_x1_orbit', 64, 100, 64]));
   const rows = uxvRows();
