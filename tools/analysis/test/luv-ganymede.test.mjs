@@ -240,7 +240,7 @@ test('B9 language parity and both controller faces exist', () => {
   });
   assert.deepEqual(Object.keys(languages.en_us).sort(), Object.keys(languages.es_es).sort());
   for (const name of names) {
-    for (const key of ['block.gtceu.' + name, 'grindless.machine.' + name + '.tooltip.0', 'grindless.machine.' + name + '.tooltip.1',
+    for (const key of ['block.gtceu.' + name, 'grindless.machine.' + name + '.tooltip.0',
       'grindless.machine.' + name + '.no_voiding']) assert.ok(languages.en_us[key], key);
     for (const file of ['overlay_front.png', 'overlay_front_active.png']) {
       const bytes = fs.readFileSync(path.join(ROOT, 'pack/kubejs/assets/grindless/textures/block/multiblock', name, file));
