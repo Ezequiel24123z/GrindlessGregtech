@@ -104,6 +104,7 @@ test('real tiers (uxv): the Validator\'s leak checks are unreachable checks gate
   assert.ok(syn['wireless-uxv'].produces.includes('eu:uxv'));
   assert.deepEqual(syn['vela-jump'].produces, ['dim:grindless:vela_pulsar_orbit']);
   assert.deepEqual(syn['cas-a-jump'].produces, ['dim:grindless:cas_a_remnant']);
+  assert.ok(!Object.values(syn).some((s) => (s.produces || []).includes('research:rad_hard_controller')), 'UXV-FX: no rad-hard research bootstrap');
 });
 
 test('real tiers (uxv): the hull, hatches, Mk6 and every component but the sensor are held to uxv-vela; the emitter needs Cas A', () => {
