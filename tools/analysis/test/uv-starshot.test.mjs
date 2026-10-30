@@ -161,7 +161,7 @@ test('names: en_us and es_es for every new machine, type, item and material', ()
   for (const [m, t] of Object.entries(MACHINES)) {
     const n = m.split(':')[1];
     keys.push('block.gtceu.' + n, 'gtceu.' + t);
-    for (let i = 0; i < 4; i++) keys.push(`grindless.machine.${n}.tooltip.${i}`);
+    for (let i = 0; i < (n === 'light_sail_fab' || n === 'laser_sail_launcher' ? 2 : 1); i++) keys.push(`grindless.machine.${n}.tooltip.${i}`);
   }
   for (const id of ['epitaxial_silicon_wafer', 'nitride_coated_carrier', 'patterned_sail_carrier']) {
     keys.push('item.grindless.' + id, `tooltip.grindless.${id}.0`, `tooltip.grindless.${id}.1`);

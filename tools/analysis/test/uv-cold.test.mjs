@@ -141,5 +141,5 @@ test('names: en_us and es_es for both machines, both types, the items and the fl
     for (const n of NEW_ITEMS.concat(MATERIALS)) assert.ok(part.includes(`${n}:`), n);
   }
   for (const k of ['block.gtceu.superfluid_helium_plant', 'block.gtceu.srf_cavity_works', 'gtceu.superfluid_helium', 'gtceu.srf_cavity', 'material.gtceu.']) assert.ok(lang.includes(`'${k}`), k);
-  assert.match(lang, /i < 4/);
+  assert.match(lang, /i < 1/);
 });

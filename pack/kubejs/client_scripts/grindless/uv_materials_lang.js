@@ -12,22 +12,13 @@
             reactor: 'Boron Nitride Reactor', line: 'Powder-in-Tube Line', printer: 'Powder Bed Printer',
             reactorType: 'Boron Nitride', lineType: 'Powder in Tube', printerType: 'Powder Bed Fusion',
             reactorTips: [
-                'Hexagonal boron nitride and boron nitride nanotubes: as strong as carbon nanotubes, stable to 900 C in air. Circuit 1: 2 boron trioxide + 2,500 mB ammonia -> 2 hBN + 3,000 mB steam + 500 mB ammonia back.',
-                'Circuit 2: 1 hBN + 500 mB hydrogen -> 1 BNNT dust in the induction plasma (the hydrogen comes back). Circuit 3: 5 BNNT dust -> 1 BNNT yarn + 1 hBN (the fines go back to circuit 2).',
-                'Circuit 4: 1,000 mB boron-10 trifluoride (the hot cell\'s enrichment tails) + 1,000 mB ammonia -> 1 hBN + 3,000 mB hydrofluoric acid. The only maker of BNNT yarn.',
-                'Needs 7 x 7 x 9 UV casing (8 or more among the parts), naquadah coils, PTFE pipe casing, tungsten steel gearboxes, 1 or 2 energy hatches (UV), input and output buses and hatches.'
+                '§7Makes hBN and boron nitride nanotubes.'
             ],
             lineTips: [
-                'EnTED wire, GTM\'s UV superconductor, at four wires per ingot of powder. Circuit 1: 4 enriched naquadah + 3 trinium + 2 europium + 1 duranium dust -> 10 EnTED powder.',
-                'Circuit 2: 4 EnTED powder + 1 silver tube -> 1 PIT billet. Circuit 3: 1 billet -> 16 EnTED single wires + 1 silver dust (the sheath, back into tubes).',
-                'The only maker of EnTED wire: the wiremill, extruder and wire cutter routes are gone. Doubling, fine wire and cables still start from its single wire.',
-                'Needs a 3 x 5 x 15 line of UV casing (8 or more among the parts), steel pipe casing, tungsten steel gearboxes, assembly line units, trinium coils, 1 or 2 energy hatches (UV), input and output buses.'
+                '§7Makes EnTED wire, the UV superconductor.'
             ],
             printerTips: [
-                'UV parts in one piece with less metal. Circuit 1 atomises: 4 ingots + 1,000 mB argon -> 4 AM powder + 950 mB argon.',
-                'Printing burns a fibre laser module (2 % wear: a spent module comes out at the same chance). Circuit 2: neutronium and tritanium gears and darmstadtium rotors at 75 % of the ingots; circuits 4 to 6: the thruster chamber, the array mount and the probe frame.',
-                'Circuit 3 presses the near-net part: + 1,000 mB argon -> the part, all the argon back. The unsintered powder and the spatter go back to the bed.',
-                'Needs 7 x 7 x 7 UV casing (8 or more among the parts), naquadah coils, PTFE pipe casing, assembly line grating, tungsten steel firebox casing and frames, 1 or 2 energy hatches (UV), input and output buses and hatches.'
+                '§7Prints UV parts in one piece from atomised metal powder.'
             ],
             items: {
                 bnnt_dust: ['BNNT Dust', 'Boron nitride nanotubes, grown in an RF induction plasma.', 'Made in the Boron Nitride Reactor (circuit 2), spun into yarn there (circuit 3).'],
@@ -49,22 +40,13 @@
             reactor: 'Reactor de Nitruro de Boro', line: 'Linea de Polvo en Tubo', printer: 'Impresora de Lecho de Polvo',
             reactorType: 'Nitruro de boro', lineType: 'Polvo en tubo', printerType: 'Fusion en lecho de polvo',
             reactorTips: [
-                'Nitruro de boro hexagonal y nanotubos de nitruro de boro: tan fuertes como los de carbono, estables a 900 C en aire. Circuito 1: 2 de trioxido de boro + 2.500 mB de amoniaco -> 2 hBN + 3.000 mB de vapor + 500 mB de amoniaco de vuelta.',
-                'Circuito 2: 1 hBN + 500 mB de hidrogeno -> 1 polvo de BNNT en el plasma de induccion (el hidrogeno vuelve). Circuito 3: 5 polvos de BNNT -> 1 hilo de BNNT + 1 hBN (los finos vuelven al circuito 2).',
-                'Circuito 4: 1.000 mB de trifluoruro de boro-10 (las colas de enriquecimiento de la celda caliente) + 1.000 mB de amoniaco -> 1 hBN + 3.000 mB de acido fluorhidrico. El unico que hace hilo de BNNT.',
-                'Necesita carcasa UV de 7 x 7 x 9 (8 o mas entre las piezas), bobinas de naquadah, carcasa de tuberia de PTFE, cajas de engranajes de acero de tungsteno, 1 o 2 hatches de energia (UV), buses y hatches de entrada y salida.'
+                '§7Fabrica hBN y nanotubos de nitruro de boro.'
             ],
             lineTips: [
-                'Cable de EnTED, el superconductor UV de GTM, a cuatro cables por lingote de polvo. Circuito 1: 4 de naquadah enriquecido + 3 de trinio + 2 de europio + 1 de duranio en polvo -> 10 polvos de EnTED.',
-                'Circuito 2: 4 polvos de EnTED + 1 tubo de plata -> 1 tocho PIT. Circuito 3: 1 tocho -> 16 cables simples de EnTED + 1 polvo de plata (la funda, que vuelve a ser tubo).',
-                'El unico que hace cable de EnTED: ya no hay trefiladora, extrusora ni cortacables. Duplicar, el cable fino y los cables aislados siguen saliendo de su cable simple.',
-                'Necesita una linea de carcasa UV de 3 x 5 x 15 (8 o mas entre las piezas), carcasa de tuberia de acero, cajas de engranajes de acero de tungsteno, unidades de cadena de montaje, bobinas de trinio, 1 o 2 hatches de energia (UV), buses de entrada y salida.'
+                '§7Fabrica cable EnTED, el superconductor UV.'
             ],
             printerTips: [
-                'Piezas UV de una sola pieza con menos metal. El circuito 1 atomiza: 4 lingotes + 1.000 mB de argon -> 4 polvos AM + 950 mB de argon.',
-                'Imprimir gasta un modulo laser de fibra (2 % de desgaste: sale un modulo gastado con la misma probabilidad). Circuito 2: engranajes de neutronio y tritanio y rotores de darmstadtio al 75 % de los lingotes; circuitos 4 a 6: la camara del propulsor, el soporte del array y el bastidor de sonda.',
-                'El circuito 3 prensa la pieza casi final: + 1.000 mB de argon -> la pieza, con todo el argon de vuelta. El polvo sin sinterizar y las salpicaduras vuelven al lecho.',
-                'Necesita carcasa UV de 7 x 7 x 7 (8 o mas entre las piezas), bobinas de naquadah, carcasa de tuberia de PTFE, rejilla de cadena de montaje, carcasa de hogar de acero de tungsteno y marcos, 1 o 2 hatches de energia (UV), buses y hatches de entrada y salida.'
+                '§7Imprime piezas UV de una sola pieza con polvo metálico atomizado.'
             ],
             items: {
                 bnnt_dust: ['Polvo de BNNT', 'Nanotubos de nitruro de boro crecidos en un plasma de induccion RF.', 'Se hace en el Reactor de Nitruro de Boro (circuito 2) y alli se hila (circuito 3).'],
@@ -95,7 +77,7 @@
             add('gtceu.boron_nitride', t.reactorType)
             add('gtceu.powder_in_tube', t.lineType)
             add('gtceu.powder_bed_fusion', t.printerType)
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < 1; i++) {
                 add('grindless.machine.boron_nitride_reactor.tooltip.' + i, t.reactorTips[i])
                 add('grindless.machine.powder_in_tube_line.tooltip.' + i, t.lineTips[i])
                 add('grindless.machine.powder_bed_printer.tooltip.' + i, t.printerTips[i])

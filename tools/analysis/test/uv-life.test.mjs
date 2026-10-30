@@ -146,5 +146,5 @@ test('names: en_us and es_es for both machines, both types and the item', () => 
   for (const k of ['block.gtceu.ark_biosphere', 'block.gtceu.neural_culture_vat', 'gtceu.closed_ecosystem', 'gtceu.neural_culture',
     'item.grindless.algae_culture', 'item.grindless.algae_culture.tooltip', 'grindless.machine.ark_biosphere.tooltip.',
     'grindless.machine.neural_culture_vat.tooltip.']) assert.ok(lang.includes(`'${k}`), k);
-  assert.match(lang, /i < 4/);
+  assert.match(lang, /i < 1/);
 });

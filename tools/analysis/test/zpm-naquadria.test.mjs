@@ -49,7 +49,7 @@ test('the fuel loop: a naquadria dust returns far more energy than its refining 
 });
 
 test('every byproduct has a written destination in the machines\' tooltips', () => {
-  const lang = read('client_scripts', 'grindless', 'zpm_naquadria_lang.js');
+  const lang = read('client_scripts', 'grindless', 'zpm_naquadria_lang.js') + read('client_scripts', 'grindless', 'zpm_info_lang.js');
   for (const word of ['enriched naquadah solution', 'gallium', 'sulfuric acid', 'xenon', 'europium']) {
     assert.ok(lang.toLowerCase().includes(word), word);
   }

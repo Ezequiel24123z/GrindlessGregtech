@@ -247,9 +247,7 @@
       .pattern(function (def) { return Pat.build(def, TOWER_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.fibre_draw_tower.tooltip.0'),
-        Text.translate('grindless.machine.fibre_draw_tower.tooltip.1'),
-        Text.translate('grindless.machine.fibre_draw_tower.tooltip.2'),
-        Text.translate('grindless.machine.fibre_draw_tower.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.fibre_draw'))
       ])
       .workableCasingModel(CLEAN_TEXTURE, CLEAN_OVERLAY)
 
@@ -262,9 +260,7 @@
       .pattern(function (def) { return Pat.build(def, REACTOR_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.mocvd_reactor.tooltip.0'),
-        Text.translate('grindless.machine.mocvd_reactor.tooltip.1'),
-        Text.translate('grindless.machine.mocvd_reactor.tooltip.2'),
-        Text.translate('grindless.machine.mocvd_reactor.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.mocvd'))
       ])
       .workableCasingModel(CLEAN_TEXTURE, CLEAN_OVERLAY)
   })

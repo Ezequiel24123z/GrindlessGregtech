@@ -390,12 +390,6 @@
 
   // ---------------------------------------------------------------- machines
 
-  function tips(name, n) {
-    var out = []
-    for (var i = 0; i < n; i++) out.push(Text.translate('grindless.machine.' + name + '.tooltip.' + i))
-    return out
-  }
-
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     var s = AC.machines.synchrotron
     var cell = AC.machines.cell
@@ -415,7 +409,10 @@
       .beforeWorking(G.noVoiding.beforeWorking({ which: 'both', reason: s.noVoiding, name: 'synchrotron' }))
       .appearanceBlock(function () { return Block.getBlock(UV_CASING) })
       .pattern(function (def) { return Pat.build(def, s.spec) })
-      ["tooltips(net.minecraft.network.chat.Component[])"](tips(s.name, 3))
+      ["tooltips(net.minecraft.network.chat.Component[])"]([
+        Text.translate('grindless.machine.synchrotron.tooltip.0'),
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.synchrotron'))
+      ])
       .workableCasingModel(UV_TEXTURE, 'grindless:block/multiblock/synchrotron')
 
     Gen.configure(event.create(cell.name, 'multiblock'), GEN_OPTS)
@@ -426,7 +423,10 @@
       .recipeType(cell.type)
       .appearanceBlock(function () { return Block.getBlock(CRYOSTAT) })
       .pattern(function (def) { return Pat.build(def, cell.spec) })
-      ["tooltips(net.minecraft.network.chat.Component[])"](tips(cell.name, 3))
+      ["tooltips(net.minecraft.network.chat.Component[])"]([
+        Text.translate('grindless.machine.muon_fusion_cell.tooltip.0'),
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.muon_catalysed_fusion'))
+      ])
       .workableCasingModel(CRYOSTAT_TEXTURE, 'grindless:block/multiblock/muon_fusion_cell')
 
     event.create(trap.name, 'multiblock')
@@ -436,7 +436,11 @@
       .recipeModifier(function (machine, recipe) { return G.parallelHatch.overclock(machine, recipe) }, true)
       .appearanceBlock(function () { return Block.getBlock(TRUSS) })
       .pattern(function (def) { return Pat.build(def, trap.spec) })
-      ["tooltips(net.minecraft.network.chat.Component[])"](tips(trap.name, 3))
+      ["tooltips(net.minecraft.network.chat.Component[])"]([
+        Text.translate('grindless.machine.antimatter_trap.tooltip.0'),
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.antimatter_storage')),
+        Text.translate('grindless.machine.antimatter_trap.tooltip.1')
+      ])
       .workableCasingModel(TRUSS_TEXTURE, 'grindless:block/multiblock/antimatter_trap')
   })
 })()

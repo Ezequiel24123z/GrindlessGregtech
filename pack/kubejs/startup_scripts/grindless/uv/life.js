@@ -210,9 +210,7 @@
       .pattern(function (def) { return Pat.build(def, ARK_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.ark_biosphere.tooltip.0'),
-        Text.translate('grindless.machine.ark_biosphere.tooltip.1'),
-        Text.translate('grindless.machine.ark_biosphere.tooltip.2'),
-        Text.translate('grindless.machine.ark_biosphere.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.closed_ecosystem'))
       ])
       .workableCasingModel(UV_TEXTURE, 'grindless:block/multiblock/ark_biosphere')
 
@@ -225,9 +223,7 @@
       .pattern(function (def) { return Pat.build(def, VAT_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.neural_culture_vat.tooltip.0'),
-        Text.translate('grindless.machine.neural_culture_vat.tooltip.1'),
-        Text.translate('grindless.machine.neural_culture_vat.tooltip.2'),
-        Text.translate('grindless.machine.neural_culture_vat.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.neural_culture'))
       ])
       .workableCasingModel(PLASCRETE_TEXTURE, 'grindless:block/multiblock/neural_culture_vat')
   })

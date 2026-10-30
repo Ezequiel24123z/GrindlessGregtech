@@ -12,16 +12,10 @@
             winder: 'Cryotank Winder', works: 'Thruster Works',
             winderType: 'Cryotank Winding', worksType: 'Thruster Assembly',
             winderTips: [
-                'The tier 11 fuel tank: with elite motors it builds a level 7 rocket. Circuit 1: 1 aerogel fuel tank + 16 BNNT yarn + 16 carbon nanotube yarn + 4 hBN dust + 1,000 mB epoxy -> 1 BNNT fuel tank.',
-                'The hBN liner is the best thin barrier to hydrogen; BNNT and carbon nanotube yarn overwrap it. The Pluto-Kuiper chart is the mission specification and is not consumed.',
-                'The resin trim is inert cured epoxy and is voided. The only maker of the BNNT fuel tank.',
-                'Needs 7 x 7 x 9 UV casing (8 or more among the parts), tungsten steel frames (the mandrel), assembly line units (the winding head), cupronickel coils (the curing oven), 1 or 2 energy hatches (UV), input buses, an input hatch and an output bus.'
+                '§7Winds the BNNT fuel tank for tier 11 rockets.'
             ],
             worksTips: [
-                'Electric thrusters for the probes. Circuit 1: 2 molybdenum grids + 1 LaB6 cathode + 1 printed thruster chamber + 4,000 mB xenon -> 1 gridded ion thruster + 3,600 mB xenon.',
-                'Circuit 2: 1 BN discharge channel + 4 UV electromagnets + 1 LaB6 cathode + 4,000 mB krypton (from the Kuiper noble gas mix) -> 1 Hall thruster + 3,600 mB krypton. The firing loses a tenth of the gas.',
-                'Circuit 3: 1 gridded ion thruster + 1 Hall thruster + 1 UV circuit (the power processing unit) + 1 propellant tank -> 1 thruster pod.',
-                'Needs 7 x 7 x 9 UV casing (8 or more among the parts), laminated glass (the vacuum test cell), assembly line grating and units (the assembly bay), 1 or 2 energy hatches (UV), input and output buses and hatches.'
+                '§7Builds gridded ion thrusters for the probes.'
             ],
             items: {
                 ion_thruster: ['Gridded Ion Thruster', 'Xenon ions accelerated through two molybdenum grids: high efficiency, gentle thrust.', 'Made in the thruster works (circuit 1); goes into the thruster pod.'],
@@ -38,16 +32,10 @@
             winder: 'Bobinadora de Criotanques', works: 'Taller de Propulsores',
             winderType: 'Bobinado de Criotanques', worksType: 'Montaje de Propulsores',
             winderTips: [
-                'El tanque de combustible de nivel 11: con motores élite construye un cohete de nivel 7. Circuito 1: 1 tanque de aerogel + 16 hilos de BNNT + 16 hilos de nanotubos de carbono + 4 de polvo de hBN + 1.000 mB de epoxi -> 1 tanque de BNNT.',
-                'El revestimiento de hBN es la mejor barrera fina contra el hidrógeno; los hilos de BNNT y de nanotubos de carbono lo envuelven. La carta Plutón-Kuiper es la especificación de la misión y no se consume.',
-                'Los recortes de resina son epoxi curado inerte y se descartan. Es la única fuente del tanque de combustible de BNNT.',
-                'Necesita 7 x 7 x 9 de carcasa UV (8 o más entre las piezas), bastidores de acero de tungsteno (el mandril), unidades de línea de ensamblaje (el cabezal bobinador), bobinas de cuproníquel (el horno de curado), 1 o 2 escotillas de energía (UV), buses de entrada, una escotilla de entrada y un bus de salida.'
+                '§7Bobina el depósito de BNNT para cohetes de nivel 11.'
             ],
             worksTips: [
-                'Propulsores eléctricos para las sondas. Circuito 1: 2 rejillas de molibdeno + 1 cátodo de LaB6 + 1 cámara de propulsor impresa + 4.000 mB de xenón -> 1 propulsor iónico de rejillas + 3.600 mB de xenón.',
-                'Circuito 2: 1 canal de descarga de BN + 4 electroimanes UV + 1 cátodo de LaB6 + 4.000 mB de kriptón (de la mezcla de gases nobles de Kuiper) -> 1 propulsor Hall + 3.600 mB de kriptón. El encendido pierde una décima parte del gas.',
-                'Circuito 3: 1 propulsor iónico + 1 propulsor Hall + 1 circuito UV (la unidad de procesamiento de potencia) + 1 tanque de propelente -> 1 módulo de propulsores.',
-                'Necesita 7 x 7 x 9 de carcasa UV (8 o más entre las piezas), vidrio laminado (la celda de pruebas de vacío), rejilla y unidades de línea de ensamblaje (la bahía de montaje), 1 o 2 escotillas de energía (UV), buses y escotillas de entrada y salida.'
+                '§7Construye propulsores iónicos de rejilla para las sondas.'
             ],
             items: {
                 ion_thruster: ['Propulsor Iónico de Rejillas', 'Iones de xenón acelerados a través de dos rejillas de molibdeno: gran eficiencia, empuje suave.', 'Se hace en el taller de propulsores (circuito 1); va al módulo de propulsores.'],
@@ -71,7 +59,7 @@
             add('block.gtceu.thruster_works', t.works)
             add('gtceu.cryotank_winding', t.winderType)
             add('gtceu.thruster_assembly', t.worksType)
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < 1; i++) {
                 add('grindless.machine.cryotank_winder.tooltip.' + i, t.winderTips[i])
                 add('grindless.machine.thruster_works.tooltip.' + i, t.worksTips[i])
             }
