@@ -67,6 +67,24 @@ that needs its own product, directly or through later steps). `--explain id,id` 
 unreachable id. `ASSUMED` in the script lists ids obtained without a recipe (loot, events); it is empty. Foreign ids (GTM materials, optical circuits, circuit tags) that only
 our recipes lead to come from `recipe_bridge.json`, generated from a release obtain dump: `node tools/analysis/recipe-cycles.mjs --bridge-from <dump> --write` (regenerate once per release).
 `era-order` (`lib/era_order.mjs`, T0) fails a machine recipe that takes an item registered in a later era.
+Tier components of UHV and above (`ownedPatterns` in `recipe_quality.json`) are tracked as ours even though GTM has no recipe for them; the ones our recipes use and nothing
+makes yet are listed in `recipe_cycles.json` `pending` (`--write-pending`), a ratchet that only shrinks: a new unmade one, or a pending one that got a recipe, fails the test.
+
+## Tier parity gates (TP-G, UHV and above)
+
+Codes of the same baseline (tier t >= 9, N = the recipe's era; a tier component or hull uses its own tier). The nine tier component families are electric_motor, electric_pump, fluid_regulator,
+conveyor_module, electric_piston, robot_arm, field_generator, emitter and sensor (`gtceu:<tier>_<family>`, also `grindless:` for uev, uiv and uxv; baseline keys name them `gtceu:` either way).
+- **T-COMP**: controllers, hatches, singles and parts use no tier component below N; a tier component recipe may use N-1.
+- **T-COUNT** (item counts: pattern cells per key, content counts): controllers need 8 tier components of N+ from 3 families; hatches, singles and complex (not casing, coil, glass...) parts need 2.
+- **T-CIRC**: the highest circuit tier among the inputs is N (`#gtceu:circuits/<tier>`, or an item in `circuitTier`); controllers take at least 4 circuits of tier N. Bulk parts and tier components are not checked.
+- **T-HULL**: a `gtceu:<tier>_machine_hull` input is tier N.
+- **T-VOLT**: EU/t (machine recipes only) >= VA[N] = floor(V[N] * 15 / 16). Tier components, hulls, the tier-N 2 A energy hatches and every id or recipe pattern in `voltBootstrap` need only VA[N-1] (the multi-amp energy hatches only run once the tier-N 2 A hatch exists).
+
+## Multiblock tooltips (TP-D5)
+
+`node tools/analysis/tooltip-lint.mjs` (in `tools/Check-Fast.ps1`) takes every multiblock controller of ours from the static stand-in's registry, which records the `tooltips(...)` array: at most 4 entries;
+`grindless.machine.<id>.tooltip.0` exists in en_us and es_es, starts with `§7` and has at most 80 visible characters (formatting codes stripped); every other `tooltip.N` has at most 60; en_us and es_es have the same
+tooltip keys. Say what the machine does and what it can use, nothing more. Same ratchet as above with `tooltip_lint.json` (`--write-baseline`).
 
 ## What other packs do (research, ideas only, no code reused)
 
