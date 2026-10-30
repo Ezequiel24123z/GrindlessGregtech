@@ -4,7 +4,7 @@
   "extends": "uev",
   "inheritTargets": true,
   "dropTargets": [],
-  "note": "UIV-C1 (docs/eras/uiv.md \"Validator\", \"Gate to UXV\"): UEV's pack plus the 22 UIV machines and M2's hall, the three jumps, the UIV wireless tier and the checks of the Validator. Substages: uiv (Earth and Earth orbit, Mercury orbit), uiv-rxj1856 and uiv-j0437 (parallel siblings after the jump), uiv-cygnus (after both). TP-V (as built after TP-R, the same grouping as uxv.json:7): the Mk5 takes the UIV field generator (uiv/mk5.js:168, made from the RX J1856 neutronium pellet, tables/rx_j1856.json:168), so it is checked in uiv-rxj1856; the polarised proton source (uiv/mk5.js:167) and the Matrioshka (uiv/matrioshka.js:178) take the field generator and the J0437 emitter, and the droplet radiator works follows them, so the three are checked in uiv-cygnus; the UIV assembler rows get two-UEV-hatch UAF @uiv2; the rad-hard research cycle has the KNOWN PACK DEFECT bootstrap of uxv.json:1203.",
+  "note": "UIV-C1 (docs/eras/uiv.md \"Validator\", \"Gate to UXV\"): UEV's pack plus the 22 UIV machines and M2's hall, the three jumps, the UIV wireless tier and the checks of the Validator. Substages: uiv (Earth and Earth orbit, Mercury orbit), uiv-rxj1856 and uiv-j0437 (parallel siblings after the jump), uiv-cygnus (after both). TP-V (as built after TP-R, the same grouping as uxv.json:7): the Mk5 takes the UIV field generator (uiv/mk5.js:168, made from the RX J1856 neutronium pellet, tables/rx_j1856.json:168), so it is checked in uiv-rxj1856; the polarised proton source (uiv/mk5.js:167) takes the field generator and the J0437 emitter, so it is checked in uiv-cygnus; the UIV assembler rows get two-UEV-hatch UAF @uiv2. UXV-FX: the Matrioshka computer, the only writer of the rad-hard controller research (tables/matrioshka.json:8), is a cycle key built before the jumps: its controller takes the UIV piston, robot arm and sensor (uiv/matrioshka.js:182), its node and TPV shell UIV sensors and its emitter shell UIV pumps (tables/matrioshka.json:206, :213 and :227), so it and the droplet radiator works (whose controller takes the emitter shell, uiv/matrioshka.js:183) are checked in uiv (uiv-home) and the old rad-hard research bootstrap is gone.",
   "conditions": {
     "dimension": {
       "asKeysFor": [
@@ -1113,13 +1113,6 @@
   ],
   "synthetic": [
     {
-      "id": "bootstrap-rad-hard-research",
-      "produces": [
-        "research:rad_hard_controller"
-      ],
-      "note": "KNOWN PACK DEFECT (TP-R-uiv 1943b5f4): research rad_hard_controller is written only by the Matrioshka computer (tables/matrioshka.json:8); the computer now takes UIV field generators (uiv/matrioshka.js:178), made from the neutronium pellet (tables/rx_j1856.json:168), made only in the neutronium cage, whose neutron star site casing takes the rad-hard controller. Remove once the cycle is broken in the pack. TP-V: the same bootstrap as uxv.json:1203."
-    },
-    {
       "id": "wireless-uiv",
       "package": "W",
       "capital": [
@@ -1794,7 +1787,9 @@
         "gtceu:uiv_robot_arm",
         "grindless:uiv_fusion_casing",
         "grindless:metallic_hydrogen_coil_block",
-        "grindless:uiv_smes_cell"
+        "grindless:uiv_smes_cell",
+        "m:gtceu:matrioshka_computer",
+        "m:gtceu:droplet_radiator_works"
       ]
     },
     {
@@ -1839,9 +1834,7 @@
         "grindless:kerr_probe_data",
         "grindless:kerr_chart",
         "grindless:sled_hull",
-        "m:gtceu:polarised_proton_source",
-        "m:gtceu:matrioshka_computer",
-        "m:gtceu:droplet_radiator_works"
+        "m:gtceu:polarised_proton_source"
       ]
     },
     {

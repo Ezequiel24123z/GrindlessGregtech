@@ -4,7 +4,7 @@
   "extends": "uiv",
   "inheritTargets": true,
   "dropTargets": [],
-  "note": "UXV-C1 (docs/eras/uxv.md \"Validator\", \"Gate to OpV\", \"Bootstrap check\"): UIV's pack plus the 21 UXV machines and M2's hall, the two jumps, the UXV wireless tier and the checks of the Validator. Substages: uxv (Earth, Mercury and Cygnus X-1 orbit), uxv-vela and uxv-cas-a (parallel siblings after the Kerr sling), the gate (opv) after both. As built: the emitter takes lasagna plate and the M2 hall's stellar hydrogen cut (Vela) besides Ti-44 (Cas A), so it is checked after both; after the tier-parity retrofit (TP-R) the Mk4 needs Sirius B (gtceu:uev_field_generator takes the degenerate pellet), the Mk5 RX J1856, the droplet radiator works, the polarised proton source and the Matrioshka both UIV siblings, so the inherited groups place them there. Older machines get the UXV-era voltages of their new modes as two-hatch or higher-hatch variants.",
+  "note": "UXV-C1 (docs/eras/uxv.md \"Validator\", \"Gate to OpV\", \"Bootstrap check\"): UIV's pack plus the 21 UXV machines and M2's hall, the two jumps, the UXV wireless tier and the checks of the Validator. Substages: uxv (Earth, Mercury and Cygnus X-1 orbit), uxv-vela and uxv-cas-a (parallel siblings after the Kerr sling), the gate (opv) after both. As built: the emitter takes lasagna plate and the M2 hall's stellar hydrogen cut (Vela) besides Ti-44 (Cas A), so it is checked after both; after the tier-parity retrofit (TP-R) the Mk4 needs Sirius B (gtceu:uev_field_generator takes the degenerate pellet), the Mk5 RX J1856 and the polarised proton source both UIV siblings, so the inherited groups place them there; UXV-FX: the Matrioshka computer and the droplet radiator works are a cycle key built before the UIV jumps (uiv/matrioshka.js:182, tables/matrioshka.json:206, :213 and :227), so they sit in uiv-home with no rad-hard research bootstrap (uiv.json:7). Older machines get the UXV-era voltages of their new modes as two-hatch or higher-hatch variants.",
   "conditions": {
     "eu_to_start": {
       "field": "eu",
@@ -1196,13 +1196,6 @@
   ],
   "synthetic": [
     {
-      "id": "bootstrap-rad-hard-research",
-      "produces": [
-        "research:rad_hard_controller"
-      ],
-      "note": "KNOWN PACK DEFECT (TP-R-uiv 1943b5f4): research rad_hard_controller is written only by the Matrioshka computer (tables/matrioshka.json:8); the computer now takes UIV field generators (uiv/matrioshka.js:178), made from the neutronium pellet (tables/rx_j1856.json:168), made only in the neutronium cage, whose neutron star site casing takes the rad-hard controller. Remove once the cycle is broken in the pack."
-    },
-    {
       "id": "wireless-uxv",
       "package": "W",
       "capital": [
@@ -2209,7 +2202,9 @@
         "gtceu:uiv_robot_arm",
         "grindless:uiv_fusion_casing",
         "grindless:metallic_hydrogen_coil_block",
-        "grindless:uiv_smes_cell"
+        "grindless:uiv_smes_cell",
+        "m:gtceu:matrioshka_computer",
+        "m:gtceu:droplet_radiator_works"
       ]
     },
     {
@@ -2245,9 +2240,7 @@
         "grindless:kerr_probe_data",
         "grindless:kerr_chart",
         "grindless:sled_hull",
-        "m:gtceu:polarised_proton_source",
-        "m:gtceu:matrioshka_computer",
-        "m:gtceu:droplet_radiator_works"
+        "m:gtceu:polarised_proton_source"
       ]
     }
   ]
