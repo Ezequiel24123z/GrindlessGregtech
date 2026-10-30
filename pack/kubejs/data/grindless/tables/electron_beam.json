@@ -72,7 +72,13 @@
           "itemsOut": [{ "id": "grindless:ga2o3_gated_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
         { "_why": "UXV-A3 (uxv.md line 47; c29): the mu-metal blend melted to an ingot; the skull goes back to the melt.", "name": "mu_metal_ingot", "circuit": 29, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "grindless:mu_metal_blend", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:mu_metal_ingot", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:mu_metal_ingot", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-A3 (opv.md line 3; c22): a chain lamina stack sealed in a W-Re can, 6N rhenium and molten tungsten welded shut by the beam, for the field-frozen press.", "name": "field_can", "circuit": 22, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:chain_lamina_stack", "count": 1 }, { "id": "grindless:six_n_rhenium", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:tungsten", "amount": 288 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:field_canned_stack", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-A3 (opv.md machine 13 byproducts; c22 with other item inputs, OpV-F3): five spent cans re-melted, 80% of the W-Re back; the skull goes back to the melt.", "name": "field_can_remelt", "circuit": 22, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:spent_field_can", "count": 5 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:six_n_rhenium", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [{ "id": "gtceu:tungsten", "amount": 1152 }] }
       ]
     },
     "single_crystal_casting": {
