@@ -212,6 +212,47 @@
     return ['grindless:plasma_quench/plasma_sprayed_tile']
   }
 
+  // ---------------------------------------------------------------- UXV-A7: the Mk6 converter rows and the quench caster's ash split
+  // Rows: data/grindless/tables/fusion_mk6.json, final like the Mk4's and Mk5's. Each quench row is keyed by its programmed circuit
+  // (3-8; the caster holds one item input, so the circuit takes it).
+  function addMk6Converter(event) {
+    var mk6 = G.readJsonTable('kubejs/data/grindless/tables/fusion_mk6.json').converter
+    var made = []
+    mk6.recipes.forEach(function (r) {
+      var bad = missingFluids([r.input, r.output])
+      if (bad.length > 0) {
+        console.error(LOG + 'direct_conversion ' + r.name + ' skipped, unknown fluid(s): ' + bad.join(', '))
+        return
+      }
+      event.recipes.gtceu.direct_conversion('grindless:' + r.name)
+        .inputFluids(fluidOf(r.input, r.amountIn))
+        .outputFluids(fluidOf(r.output, r.amountOut))
+        .EUt(-r.eut)
+        .duration(r.duration)
+      made.push('grindless:direct_conversion/' + r.name)
+    })
+    return made
+  }
+
+  function addMk6Quench(event) {
+    var q = G.readJsonTable('kubejs/data/grindless/tables/fusion_mk6.json').quench
+    var made = []
+    q.rows.forEach(function (r) {
+      var bad = missingFluids(r.fluidsIn.concat(r.fluidsOut).map(function (f) { return f.id })).concat(missingItems(r.itemsOut.map(function (i) { return i.id })))
+      if (bad.length > 0) {
+        console.error(LOG + 'plasma_quench ' + r.name + ' skipped, unknown id(s): ' + bad.join(', '))
+        return
+      }
+      var b = event.recipes.gtceu.plasma_quench('grindless:' + r.name).circuit(r.circuit)
+      r.fluidsIn.forEach(function (f) { b.inputFluids(fluidOf(f.id, f.amount)) })
+      r.itemsOut.forEach(function (i) { b.itemOutputs(i.count + 'x ' + i.id) })
+      r.fluidsOut.forEach(function (f) { b.outputFluids(fluidOf(f.id, f.amount)) })
+      b.EUt(q.eut).duration(q.duration)
+      made.push('grindless:plasma_quench/' + r.name)
+    })
+    return made
+  }
+
   // ---------------------------------------------------------------- the controllers
 
   // ASSEMBLY LINE with scanner research. Caster: hull + 2 pumps + 4 circuits + a hermean heat-shield brick (the quench chamber's lining)
@@ -252,6 +293,8 @@
     try { F.mk4Converter = addMk4Converter(event) } catch (e5) { F.mk4Converter = []; report.errors.push('Mk4 converter: ' + e5) }
     try { F.mk5Converter = addMk5Converter(event) } catch (e6) { F.mk5Converter = []; report.errors.push('Mk5 converter: ' + e6) }
     try { F.mk5Quench = addMk5Quench(event) } catch (e7) { F.mk5Quench = []; report.errors.push('Mk5 quench: ' + e7) }
+    try { F.mk6Converter = addMk6Converter(event) } catch (e8) { F.mk6Converter = []; report.errors.push('Mk6 converter: ' + e8) }
+    try { F.mk6Quench = addMk6Quench(event) } catch (e9) { F.mk6Quench = []; report.errors.push('Mk6 quench: ' + e9) }
     F.audited = report.audited
     F.unaudited = report.unaudited
     F.missing = report.missing

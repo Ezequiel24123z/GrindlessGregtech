@@ -89,8 +89,6 @@
       ],
       "pendingUses": [
         { "id": "grindless:gum_metal_billet", "package": "UXV-A8", "reason": "UXV-A2 casts it; A8's hot strip mill makes gum_metal_blank from it (line 45, uxv.md:1371, :1379)" },
-        { "id": "grindless:ni_mn_ga_crystal", "package": "UXV-A8", "reason": "UXV-A3's nitride works c13 twin-trains it; A8's uxv_conveyor_module drives it (line 37)" },
-        { "id": "fluid:gtceu:carbon_burning_fuel", "package": "UXV-A7", "reason": "UXV-A3's electron beam furnace purifies it (line 28); A7's Mk6 c3 burns it" },
-        { "id": "fluid:gtceu:finemet_melt", "package": "UXV-A7", "reason": "UXV-A3's levitation melter c13 melts it; A7's quench caster c6 casts it into finemet_ribbon (line 48)" }
-      ]
+        { "id": "grindless:ni_mn_ga_crystal", "package": "UXV-A8", "reason": "UXV-A3's nitride works c13 twin-trains it; A8's uxv_conveyor_module drives it         (line 37)" }
+              ]
     }
