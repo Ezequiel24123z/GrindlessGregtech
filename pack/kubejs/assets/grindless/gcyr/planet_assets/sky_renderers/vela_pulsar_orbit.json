@@ -1,0 +1,14 @@
+{
+  "world": "grindless:vela_pulsar_orbit",
+  "stars": { "fancy_count": 14000, "fast_count": 6000, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 4, "color": 10667263, "rotation": [70, 0, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 60, "color": 2105392, "rotation": [70, 0, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 36, "color": 1579056, "rotation": [70, 90, 0] }
+  ]
+}

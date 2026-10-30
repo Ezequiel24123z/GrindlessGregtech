@@ -1,0 +1,14 @@
+{
+  "world": "grindless:cas_a_remnant",
+  "stars": { "fancy_count": 9000, "fast_count": 4000, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 90, "color": 6291456, "rotation": [60, 0, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 64, "color": 1594896, "rotation": [75, 40, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 48, "color": 1580080, "rotation": [50, 130, 0] }
+  ]
+}

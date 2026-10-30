@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.cas_a_remnant",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:cas_a",
+  "world": "grindless:cas_a_remnant",
+  "orbit_world": "grindless:cas_a_remnant",
+  "rocket_tier": 12,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 5,
+  "temperature": 30000000,
+  "solar_power": 0,
+  "has_oxygen": false,
+  "button_color": 3158064
+}
