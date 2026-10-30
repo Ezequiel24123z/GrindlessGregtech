@@ -183,7 +183,7 @@ test('the lang file names the machine, the modules and the tooltips in en_us and
     ClientEvents: { lang: (code, cb) => cb({ add: (ns, key, value) => { (store[code] = store[code] || {})[key] = value; } }) },
     console,
   });
-  const keys = ['block.gtceu.mega_factory', ...[0, 1, 2, 3].map((i) => 'grindless.machine.mega_factory.tooltip.' + i)];
+  const keys = ['block.gtceu.mega_factory', ...[0].map((i) => 'grindless.machine.mega_factory.tooltip.' + i)];
   for (const n of Object.keys(MODULES)) keys.push('block.grindless.' + n, 'tooltip.grindless.' + n + '.0');
   for (const code of ['en_us', 'es_es']) {
     for (const key of keys) assert.ok(store[code] && store[code][key], code + ' ' + key);

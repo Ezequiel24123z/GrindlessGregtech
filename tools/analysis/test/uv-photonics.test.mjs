@@ -145,5 +145,5 @@ test('names: en_us and es_es for both machines, both types, the items and the fl
     for (const n of NEW_ITEMS.concat(FLUIDS, ['ytterbium_oxide'])) assert.ok(part.includes(`${n}:`), n);
   }
   for (const k of ['block.gtceu.fibre_draw_tower', 'block.gtceu.mocvd_reactor', 'gtceu.fibre_draw', 'gtceu.mocvd', 'material.gtceu.']) assert.ok(lang.includes(`'${k}`), k);
-  assert.match(lang, /i < 4/);
+  assert.match(lang, /i < 1/);
 });

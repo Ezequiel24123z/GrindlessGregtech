@@ -109,7 +109,7 @@ test('names: en_us and es_es for the machine, the type and each item, no accents
   const [en, es] = lang.split("ClientEvents.lang('es_es'");
   for (const part of [en, es]) {
     for (const key of ['block.gtceu.heat_source_works', 'gtceu.heat_source', 'grindless.machine.heat_source_works.no_voiding']) assert.ok(part.includes(`'${key}'`), key);
-    for (let i = 0; i < 4; i++) assert.ok(part.includes(`heat_source_works.tooltip.${i}'`), 'tooltip ' + i);
+    for (let i = 0; i < 1; i++) assert.ok(part.includes(`heat_source_works.tooltip.${i}'`), 'tooltip ' + i);
     for (const n of NEW_ITEMS) for (const key of [`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`]) assert.ok(part.includes(`'${key}'`), key);
   }
 });

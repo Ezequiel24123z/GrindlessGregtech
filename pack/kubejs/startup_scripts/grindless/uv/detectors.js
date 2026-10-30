@@ -214,9 +214,7 @@
       .pattern(function (def) { return Pat.build(def, TOWER_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.zone_refining_tower.tooltip.0'),
-        Text.translate('grindless.machine.zone_refining_tower.tooltip.1'),
-        Text.translate('grindless.machine.zone_refining_tower.tooltip.2'),
-        Text.translate('grindless.machine.zone_refining_tower.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.zone_refining'))
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/zone_refining_tower')
 
@@ -229,9 +227,7 @@
       .pattern(function (def) { return Pat.build(def, STATION_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.optical_ground_station.tooltip.0'),
-        Text.translate('grindless.machine.optical_ground_station.tooltip.1'),
-        Text.translate('grindless.machine.optical_ground_station.tooltip.2'),
-        Text.translate('grindless.machine.optical_ground_station.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.optical_downlink'))
       ])
       .workableCasingModel(UV_TEXTURE, 'grindless:block/multiblock/optical_ground_station')
   })

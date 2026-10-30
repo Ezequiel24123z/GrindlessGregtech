@@ -70,7 +70,7 @@ test('antiprotons come only from the synchrotron', () => {
 test('every byproduct has a destination: activated target, hydrogen, helium, tritium, diluted acid', () => {
   const madeFrom = new Set(Object.values(T.types).flatMap((t) => t.recipes.flatMap(ins)));
   assert.ok(madeFrom.has('grindless:activated_tungsten_target'), 'the activated target is processed');
-  const lang = read('client_scripts', 'grindless', 'uv_accelerators_lang.js').toLowerCase();
+  const lang = (read('client_scripts', 'grindless', 'uv_accelerators_lang.js') + read('client_scripts', 'grindless', 'uv_info_lang.js')).toLowerCase();
   for (const word of ['chemical bath', 'hydrogen', 'superfluid helium plant', 'make-up', 'extrapolation', 'earth orbit']) assert.ok(lang.includes(word), word);
   const server = read('server_scripts', 'grindless', 'uv', 'accelerators.js').toLowerCase();
   assert.ok(server.includes('diluted sulfuric acid ->'));

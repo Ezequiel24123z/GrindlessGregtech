@@ -13,16 +13,10 @@
             tower: 'Fibre Draw Tower', reactor: 'MOCVD Reactor',
             towerType: 'Fibre Draw', reactorType: 'MOCVD',
             towerTips: [
-                'Ytterbium-doped double-clad fibre and the fibre laser module, the light source of UV\'s lasers. Programmed circuit 1: silicon tetrachloride + germanium tetrachloride + ytterbium oxide + aluminium + oxygen -> 1 Yb-doped preform (MCVD).',
-                'Circuit 2: 1 preform + 250 mB acrylate coating -> 16 ytterbium fibre spools. Circuit 3: 4 fibre spools + 4 InGaAs pump modules + 1 fibre Bragg grating -> 1 fibre laser module.',
-                'Circuit 4: 1 spent laser module + 1 fibre spool -> 1 fibre laser module (refurbished). The chlorine goes back to silicon tetrachloride, the silica soot to glass.',
-                'Needs a 5 x 15 x 5 clean room casing tower (6 or more among the floor parts), 1 or 2 energy hatches (UV), input and output buses and hatches.'
+                '§7Draws Yb-doped fibre and fibre laser modules.'
             ],
             reactorTips: [
-                'Compound semiconductors grown atom layer by atom layer. Circuit 1: gallium + indium + sodium + chloromethane -> trimethylgallium + trimethylindium + salt.',
-                'Circuit 2: 1 GaAs wafer + trimethylgallium + trimethylindium + arsine -> 1 InGaAs epi wafer + methane + unused arsine. Circuit 3: 1 epi wafer -> 8 diode bars. Circuit 5: 4 diode bars + 2 copper plates -> 1 InGaAs pump module.',
-                'Circuit 4: 1 sapphire wafer + niobium + nitrogen -> 1 NbN film wafer. Circuit 6, the arsine scrubber: 1,000 mB arsine -> 1 arsenic dust + 3,000 mB hydrogen. Arsine is never vented.',
-                'Needs 7 x 7 x 7 clean room casing with an inert gas cabinet (8 or more among the parts), 1 or 2 energy hatches (UV), input and output buses and hatches.'
+                '§7Grows compound semiconductors layer by layer.'
             ],
             items: {
                 yb_doped_preform: ['Yb-Doped Preform', 'A silica rod with an ytterbium-doped core, built up layer by layer inside a turning tube.', 'Made in the Fibre Draw Tower (circuit 1).'],
@@ -44,16 +38,10 @@
             tower: 'Torre de Estirado de Fibra', reactor: 'Reactor MOCVD',
             towerType: 'Estirado de fibra', reactorType: 'MOCVD',
             towerTips: [
-                'Fibra de doble revestimiento dopada con iterbio y el modulo laser de fibra, la fuente de luz de los laseres de UV. Circuito programado 1: tetracloruro de silicio + tetracloruro de germanio + oxido de iterbio + aluminio + oxigeno -> 1 preforma dopada con Yb (MCVD).',
-                'Circuito 2: 1 preforma + 250 mB de recubrimiento de acrilato -> 16 bobinas de fibra de iterbio. Circuito 3: 4 bobinas de fibra + 4 modulos de bombeo InGaAs + 1 red de Bragg en fibra -> 1 modulo laser de fibra.',
-                'Circuito 4: 1 modulo laser gastado + 1 bobina de fibra -> 1 modulo laser de fibra (reacondicionado). El cloro vuelve a tetracloruro de silicio y el hollin de silice a vidrio.',
-                'Necesita una torre de carcasa de sala limpia de 5 x 15 x 5 (6 o mas entre las piezas del suelo), 1 o 2 hatches de energia (UV), buses y hatches de entrada y salida.'
+                '§7Estira fibra dopada con Yb y módulos láser de fibra.'
             ],
             reactorTips: [
-                'Semiconductores compuestos crecidos capa atomica a capa atomica. Circuito 1: galio + indio + sodio + clorometano -> trimetilgalio + trimetilindio + sal.',
-                'Circuito 2: 1 oblea de GaAs + trimetilgalio + trimetilindio + arsina -> 1 oblea epitaxial de InGaAs + metano + arsina sin usar. Circuito 3: 1 oblea epitaxial -> 8 barras de diodos. Circuito 5: 4 barras de diodos + 2 placas de cobre -> 1 modulo de bombeo InGaAs.',
-                'Circuito 4: 1 oblea de zafiro + niobio + nitrogeno -> 1 oblea con pelicula de NbN. Circuito 6, el depurador de arsina: 1.000 mB de arsina -> 1 polvo de arsenico + 3.000 mB de hidrogeno. La arsina nunca se ventila.',
-                'Necesita carcasa de sala limpia de 7 x 7 x 7 con un armario de gases inerte (8 o mas entre las piezas), 1 o 2 hatches de energia (UV), buses y hatches de entrada y salida.'
+                '§7Hace crecer semiconductores compuestos capa a capa.'
             ],
             items: {
                 yb_doped_preform: ['Preforma dopada con Yb', 'Una barra de silice con nucleo dopado con iterbio, depositada capa a capa dentro de un tubo que gira.', 'Se hace en la Torre de Estirado de Fibra (circuito 1).'],
@@ -82,7 +70,7 @@
             add('block.gtceu.mocvd_reactor', t.reactor)
             add('gtceu.fibre_draw', t.towerType)
             add('gtceu.mocvd', t.reactorType)
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < 1; i++) {
                 add('grindless.machine.fibre_draw_tower.tooltip.' + i, t.towerTips[i])
                 add('grindless.machine.mocvd_reactor.tooltip.' + i, t.reactorTips[i])
             }

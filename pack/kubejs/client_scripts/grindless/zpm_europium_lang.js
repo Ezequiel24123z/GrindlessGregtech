@@ -12,10 +12,7 @@ ClientEvents.lang('en_us', event => {
     add('block.gtceu.europium_reductor', 'Europium Reductor')
     add('gtceu.valence_reduction', 'Valence Reduction')
 
-    add('grindless.machine.europium_reductor.tooltip.0', 'Europium goes divalent: a Jones column reduces Eu3+ to Eu2+ over zinc under a mercury bath, and the sulfate is fired and reduced with lanthanum. Programmed circuit 1: 2,000 mB europium chloride solution + 1 zinc dust + 3,000 mB sulfuric acid (+ 144 mB mercury, never used up) -> 2 europium sulfate + 1 zinc sulfate + 6,000 mB hydrochloric acid + 2,000 mB rare earth chloride solution.')
-    add('grindless.machine.europium_reductor.tooltip.1', 'Circuit 2: 4 europium sulfate + 1,000 mB oxygen -> 2 europium oxide + 4,000 mB sulfur trioxide. Circuit 3: 1 europium oxide + 2 lanthanum dust -> 2 europium dust + 1 lanthanum oxide.')
-    add('grindless.machine.europium_reductor.tooltip.2', 'The only way to europium dust: the froth line of GTCA stops at the chlorides. 122,880 EU/t (ZPM): 4.9 + 1.2 + 2.5 million EU for two europium. The acid comes back to the cascade\'s leach, the depleted solution into its circuit 2, sulfur trioxide and water make sulfuric acid, and an electrolyzer splits the zinc sulfate and the lanthanum oxide.')
-    add('grindless.machine.europium_reductor.tooltip.3', 'Needs, in the floor: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 output buses, 1 to 3 input hatches and 1 to 3 output hatches, and 5 or more inert casings among them. ME parts fit.')
+    add('grindless.machine.europium_reductor.tooltip.0', '§7Reduces europium to its divalent form.')
 
     add('material.gtceu.europium_chloride_solution', 'Europium Chloride Solution')
     add('material.gtceu.europium_sulfate', 'Europium Sulfate')
@@ -34,10 +31,7 @@ ClientEvents.lang('es_es', event => {
     add('block.gtceu.europium_reductor', 'Reductor de europio')
     add('gtceu.valence_reduction', 'Reducción de valencia')
 
-    add('grindless.machine.europium_reductor.tooltip.0', 'El europio se vuelve divalente: una columna de Jones reduce el Eu3+ a Eu2+ sobre zinc bajo un baño de mercurio, y el sulfato se calcina y se reduce con lantano. Circuito programado 1: 2 000 mB de solución de cloruro de europio + 1 de polvo de zinc + 3 000 mB de ácido sulfúrico (+ 144 mB de mercurio, que no se gasta) -> 2 de sulfato de europio + 1 de sulfato de zinc + 6 000 mB de ácido clorhídrico + 2 000 mB de solución de cloruros de tierras raras.')
-    add('grindless.machine.europium_reductor.tooltip.1', 'Circuito 2: 4 de sulfato de europio + 1 000 mB de oxígeno -> 2 de óxido de europio + 4 000 mB de trióxido de azufre. Circuito 3: 1 de óxido de europio + 2 de polvo de lantano -> 2 de polvo de europio + 1 de óxido de lantano.')
-    add('grindless.machine.europium_reductor.tooltip.2', 'La única vía al polvo de europio: la línea de espuma de GTCA termina en los cloruros. 122 880 EU/t (ZPM): 4,9 + 1,2 + 2,5 millones de EU por dos de europio. El ácido vuelve a la lixiviación de la cascada, la solución agotada a su circuito 2, el trióxido de azufre con agua da ácido sulfúrico y un electrolizador separa el sulfato de zinc y el óxido de lantano.')
-    add('grindless.machine.europium_reductor.tooltip.3', 'Necesita, en el suelo: 1 o 2 escotillas de energía (ZPM), 1 o 2 buses de entrada, 1 o 2 buses de salida, de 1 a 3 escotillas de entrada y de 1 a 3 de salida, y 5 o más carcasas inertes entre ellos. Valen piezas ME.')
+    add('grindless.machine.europium_reductor.tooltip.0', '§7Reduce el europio a su forma divalente.')
 
     add('material.gtceu.europium_chloride_solution', 'Solución de cloruro de europio')
     add('material.gtceu.europium_sulfate', 'Sulfato de europio')

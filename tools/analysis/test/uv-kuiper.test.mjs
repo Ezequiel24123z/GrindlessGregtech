@@ -178,7 +178,7 @@ test('names: en_us and es_es for the machines, the types and the items', () => {
   for (const k of ['block.gtceu.kuiper_interceptor_bay', 'block.gtceu.amorphous_ice_annealer', 'gtceu.kuiper_intercept', 'gtceu.ice_annealing']) {
     assert.ok(lang.includes(`'${k}`), k);
   }
-  assert.match(lang, /i < 4/);
+  assert.match(lang, /i < 1/);
 });
 
 test('every new item has an icon, and the reused controller faces exist', () => {

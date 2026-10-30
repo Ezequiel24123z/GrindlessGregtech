@@ -167,7 +167,7 @@ test('the lang file names the machine and its tooltips in en_us and es_es', () =
   });
   for (const code of ['en_us', 'es_es']) {
     assert.ok(store[code], code);
-    for (const key of ['block.gtceu.assembly_hall', ...[0, 1, 2, 3].map((i) => 'grindless.machine.assembly_hall.tooltip.' + i)]) {
+    for (const key of ['block.gtceu.assembly_hall', ...[0].map((i) => 'grindless.machine.assembly_hall.tooltip.' + i)]) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
     }
   }

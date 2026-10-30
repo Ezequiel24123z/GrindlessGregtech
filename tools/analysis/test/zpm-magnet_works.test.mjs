@@ -109,7 +109,7 @@ test('every new name and tooltip has en_us and es_es text', () => {
   const keys = ['block.gtceu.naquadria_magnet_works', 'gtceu.naquadria_magnets', 'item.grindless.hts_insert',
     'tooltip.grindless.hts_insert.0', 'tooltip.grindless.hts_insert.1', 'emi.grindless.info.hts_insert.0', 'emi.grindless.info.cryostat_casing.0',
     'grindless.machine.naquadria_magnet_works.charge.ok', 'grindless.machine.naquadria_magnet_works.charge.low'];
-  for (let i = 0; i < 3; i++) keys.push(`grindless.machine.naquadria_magnet_works.tooltip.${i}`);
+  for (let i = 0; i < 1; i++) keys.push(`grindless.machine.naquadria_magnet_works.tooltip.${i}`);
   for (const r of TABLE.recipes) keys.push('gtceu.recipe.grindless_naquadria_magnets.' + r.name);
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);

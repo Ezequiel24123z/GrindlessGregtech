@@ -135,7 +135,7 @@ test('every new name and tooltip has en_us and es_es text, translated', () => {
   const en = run.lang.en_us || {};
   const es = run.lang.es_es || {};
   const keys = [];
-  MACHINES.forEach((m, i) => { keys.push('block.gtceu.' + m, 'gtceu.' + TYPES[i]); [0, 1, 2].forEach((n) => keys.push(`grindless.machine.${m}.tooltip.${n}`)); });
+  MACHINES.forEach((m, i) => { keys.push('block.gtceu.' + m, 'gtceu.' + TYPES[i]); [0].forEach((n) => keys.push(`grindless.machine.${m}.tooltip.${n}`)); });
   ITEMS.forEach((n) => keys.push('item.grindless.' + n, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`));
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);

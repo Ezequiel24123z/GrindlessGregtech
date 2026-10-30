@@ -316,9 +316,8 @@
       .pattern(function (def) { return Pat.build(def, SAIL_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.light_sail_fab.tooltip.0'),
-        Text.translate('grindless.machine.light_sail_fab.tooltip.1'),
-        Text.translate('grindless.machine.light_sail_fab.tooltip.2'),
-        Text.translate('grindless.machine.light_sail_fab.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.light_sail')),
+        Text.translate('grindless.machine.light_sail_fab.tooltip.1')
       ])
       .workableCasingModel(TRUSS_TEXTURE, 'grindless:block/multiblock/light_sail_fab')
 
@@ -331,9 +330,7 @@
       .pattern(function (def) { return Pat.build(def, CHIP_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.starchip_fab.tooltip.0'),
-        Text.translate('grindless.machine.starchip_fab.tooltip.1'),
-        Text.translate('grindless.machine.starchip_fab.tooltip.2'),
-        Text.translate('grindless.machine.starchip_fab.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.starchip'))
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/starchip_fab')
 
@@ -346,9 +343,8 @@
       .pattern(function (def) { return Pat.build(def, LAUNCH_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.laser_sail_launcher.tooltip.0'),
-        Text.translate('grindless.machine.laser_sail_launcher.tooltip.1'),
-        Text.translate('grindless.machine.laser_sail_launcher.tooltip.2'),
-        Text.translate('grindless.machine.laser_sail_launcher.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.laser_sail_launch')),
+        Text.translate('grindless.machine.laser_sail_launcher.tooltip.1')
       ])
       .workableCasingModel(UV_TEXTURE, 'grindless:block/multiblock/laser_sail_launcher')
   })
