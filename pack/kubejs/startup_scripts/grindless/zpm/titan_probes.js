@@ -159,8 +159,11 @@
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     ZT.machines.forEach(function (m) {
       Pat.register('gtceu:' + m.name, m.spec)
-      const tips = []
-      for (let i = 0; i < m.tooltips; i++) tips.push(Text.translate('grindless.machine.' + m.name + '.tooltip.' + i))
+      const tips = [
+        Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + String(m.type).replace('gtceu:', '')))
+      ]
+      tips.push(Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.saturn_orbit')))
       event.create(m.name, 'multiblock')
         .langValue(m.title)
         .rotationState(RotationState.NON_Y_AXIS)

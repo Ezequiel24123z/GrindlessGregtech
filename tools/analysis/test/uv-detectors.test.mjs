@@ -150,5 +150,5 @@ test('names: en_us and es_es for both machines and both types', () => {
   }
   for (const k of ['block.gtceu.zone_refining_tower', 'block.gtceu.optical_ground_station', 'gtceu.zone_refining', 'gtceu.optical_downlink',
     'grindless.machine.zone_refining_tower.tooltip.', 'grindless.machine.optical_ground_station.tooltip.']) assert.ok(lang.includes(`'${k}`), k);
-  assert.match(lang, /i < 4/);
+  assert.match(lang, /i < 1/);
 });

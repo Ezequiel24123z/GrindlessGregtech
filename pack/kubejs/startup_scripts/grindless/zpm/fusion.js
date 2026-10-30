@@ -191,9 +191,8 @@
       .pattern(function (def) { return Pat.build(def, CASTER_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.plasma_quench_caster.tooltip.0'),
-        Text.translate('grindless.machine.plasma_quench_caster.tooltip.1'),
-        Text.translate('grindless.machine.plasma_quench_caster.tooltip.2'),
-        Text.translate('grindless.machine.parallel_hatch.tooltip')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.plasma_quench')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(TUNGSTENSTEEL_TEXTURE, 'grindless:block/multiblock/plasma_quench_caster')
 
@@ -207,8 +206,8 @@
       .pattern(function (def) { return Pat.build(def, CONVERTER_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.direct_energy_converter.tooltip.0'),
-        Text.translate('grindless.machine.direct_energy_converter.tooltip.1'),
-        Text.translate('grindless.machine.direct_energy_converter.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.direct_conversion')),
+        Text.translate('grindless.tooltip.wireless')
       ])
       .workableCasingModel(CRYO_TEXTURE, 'grindless:block/multiblock/direct_energy_converter')
   })

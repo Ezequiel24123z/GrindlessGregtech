@@ -161,7 +161,7 @@ test('every new name and tooltip has en_us and es_es text', () => {
   const es = run.lang.es_es || {};
   const keys = [
     'block.gtceu.europium_reductor', 'gtceu.valence_reduction',
-    ...[0, 1, 2, 3].map((i) => `grindless.machine.europium_reductor.tooltip.${i}`),
+    ...[0].map((i) => `grindless.machine.europium_reductor.tooltip.${i}`),
     'emi.grindless.info.extraction_cascade.6',
     ...['europium_chloride_solution', 'europium_sulfate', 'europium_oxide', 'zinc_sulfate', 'lanthanum_oxide'].map((m) => 'material.gtceu.' + m),
   ];

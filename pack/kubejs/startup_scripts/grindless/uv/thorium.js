@@ -366,9 +366,8 @@
       .pattern(function (def) { return Pat.build(def, cell.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.pyroprocessing_cell.tooltip.0'),
-        Text.translate('grindless.machine.pyroprocessing_cell.tooltip.1'),
-        Text.translate('grindless.machine.pyroprocessing_cell.tooltip.2'),
-        Text.translate('grindless.machine.parallel_hatch.tooltip')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.pyroprocessing')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(SHIELD_TEXTURE, 'grindless:block/multiblock/pyroprocessing_cell')
 
@@ -382,8 +381,7 @@
       .pattern(function (def) { return Pat.build(def, reactor.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.accelerator_driven_reactor.tooltip.0'),
-        Text.translate('grindless.machine.accelerator_driven_reactor.tooltip.1'),
-        Text.translate('grindless.machine.accelerator_driven_reactor.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.accelerator_driven'))
       ])
       .workableCasingModel(ROBUST_TEXTURE, 'grindless:block/multiblock/accelerator_driven_reactor')
 

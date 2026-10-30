@@ -114,7 +114,7 @@ test('every new name and tooltip has en_us and es_es text, and the reused overla
   const keys = ['gtceu.triton_plume'];
   for (const m of Object.keys(MACHINES)) {
     keys.push('block.gtceu.' + m, `grindless.machine.${m}.no_voiding`);
-    for (const i of [0, 1, 2]) keys.push(`grindless.machine.${m}.tooltip.${i}`);
+    for (const i of [0]) keys.push(`grindless.machine.${m}.tooltip.${i}`);
   }
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);

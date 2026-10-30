@@ -208,5 +208,5 @@ test('names: en_us and es_es for the machines, the types, the items and the mate
   }
   for (const k of ['block.gtceu.boron_nitride_reactor', 'block.gtceu.powder_in_tube_line', 'block.gtceu.powder_bed_printer', 'gtceu.boron_nitride',
     'gtceu.powder_in_tube', 'gtceu.powder_bed_fusion', 'material.gtceu.']) assert.ok(lang.includes(`'${k}`), k);
-  assert.match(lang, /i < 4/);
+  assert.match(lang, /i < 1/);
 });

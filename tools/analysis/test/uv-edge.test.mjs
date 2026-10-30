@@ -177,7 +177,7 @@ test('names: en_us and es_es for the machines, the types and the probe', () => {
   for (const k of ['block.gtceu.precursor_probe_bay', 'block.gtceu.event_horizon_interferometer', 'gtceu.precursor_probe', 'gtceu.event_horizon_imaging']) {
     assert.ok(lang.includes(`'${k}`), k);
   }
-  assert.match(lang, /i < 4/);
+  assert.match(lang, /i < 1/);
 });
 
 test('the probe has an icon, and the reused controller faces exist', () => {
