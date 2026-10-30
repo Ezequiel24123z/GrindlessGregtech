@@ -1,4 +1,4 @@
-// priority: -10815
+// priority: -10980
 // -----------------------------------------------------------------------------------------------
 // UXV's Vela pasta works (docs/eras/uxv.md, machines 16-20, lines 32, 33 and 48; package UXV-B4): the pasta extractor, the phase sorter, the
 // draw bench, the laminator and the polar cap tap, and their recipe types. The recipes come from data/grindless/tables/vela_pasta.json

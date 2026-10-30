@@ -1,4 +1,4 @@
-// priority: -9962
+// priority: -9979
 // Gregtech Grindless - smoke test of UXV's wireless tier (package UXV-W; TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): the UXV row of tables/wireless_energy.json (registered by lv/wireless_energy.js, withTiers case 12) and the nitride
 // magnet works' circuit 7 (tables/composites.json), which makes the UXV cell from four UIV cells.

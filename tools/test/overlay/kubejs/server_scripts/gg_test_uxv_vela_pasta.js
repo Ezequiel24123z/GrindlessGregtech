@@ -1,4 +1,4 @@
-// priority: -9791
+// priority: -9968
 // TEST ONLY, UXV-B4 (gtceu:pasta_extractor, pasta_phase_sorter, pasta_draw_bench, pasta_laminator, polar_cap_tap). Command: kubejs custom_command gg_test_uxv_vela_pasta
 // Band ONLY: X 36928-36991, Z 0-63, Y 98-115, built in grindless:vela_pulsar_orbit (the dimension their recipes are locked to).
 //   T1 (named uncertainty: the tap's c1 row (one lasagna electrode -> 536,870,912 EU/t for 720 t, a generator written final through one UIV 16 A dynamo

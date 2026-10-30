@@ -1,4 +1,4 @@
-// priority: -10973
+// priority: -10970
 // UXV travel (package UXV-B1, docs/eras/uxv.md "B1. The Kerr sling"): the two tier-12 places the warp gate reaches from Cygnus X-1's orbit.
 // No item is registered here: grindless:launched_relay_seed is UIV-B1's, cnt_whipple_shield and cnt_bumper_weave are F1's.
 // The places are data (spike S0-3): data/grindless/dimension/<id>.json, data/grindless/gcyr/planets/<id>.json and

@@ -1,4 +1,4 @@
-// priority: 1635
+// priority: 1439
 // Gregtech Grindless - names and tooltips of UXV's pasta extractor, phase sorter, draw bench, laminator and polar cap tap
 // (startup_scripts/grindless/uxv/vela_pasta.js; package UXV-B4):
 //

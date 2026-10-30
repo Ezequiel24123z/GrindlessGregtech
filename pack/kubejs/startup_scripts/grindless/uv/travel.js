@@ -1,4 +1,4 @@
-// priority: -10800
+// priority: -10733
 // -----------------------------------------------------------------------------------------------
 // UV travel (package UV-B1, docs/eras/uv.md "Places and site rules", "Bridges and first arrivals", "AE2").
 //

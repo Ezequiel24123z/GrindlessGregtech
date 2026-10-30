@@ -1,3 +1,4 @@
+// priority: -10766
 // -----------------------------------------------------------------------------------------------
 // UXV's Cygnus X-1 disk (docs/eras/uxv.md, machines 13-15, lines 30 and 31; package UXV-B3): the accretion disk skimmer, the FRC former and
 // the BZ dynamo, their recipe types and one item (the strand coil). The recipes come from data/grindless/tables/cygnus_disk.json
