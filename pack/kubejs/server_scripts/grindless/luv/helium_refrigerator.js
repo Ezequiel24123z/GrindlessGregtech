@@ -343,7 +343,7 @@
         .inputFluids(Fluid.of(cfg.makeUp.id, cfg.makeUp.amount))
         .inputFluids(Fluid.of(cfg.precoolIn.id, cfg.precoolIn.amount))
         .notConsumableFluid(Fluid.of(cfg.charge.id, cfg.charge.amount))
-        .itemOutputs('1x ' + r.output)
+        .itemOutputs(r.output)
         .outputFluids(Fluid.of(cfg.precoolOut.id, cfg.precoolOut.amount))
         .addDataString(DATA_KEY, 'grindless:closed_loop_cooling/' + r.name)
         .EUt(r.eut).duration(r.duration)
