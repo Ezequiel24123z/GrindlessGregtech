@@ -196,6 +196,22 @@
             { "id": "gtceu:titanium_dust", "count": 3 }
           ],
           "fluidsOut": []
+        },
+        {
+          "_": "OpV-B2: nickel-64 out of the thawed chain nickel (line 43); the Ni-58, Ni-60 and Ni-62 rest goes back to stock as nickel dust",
+          "name": "nickel_64",
+          "circuit": 11,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:thawed_chain_nickel_dust", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:nickel_64_dust", "count": 1 },
+            { "id": "gtceu:nickel_dust", "count": 3 }
+          ],
+          "fluidsOut": []
         }
       ]
     },
