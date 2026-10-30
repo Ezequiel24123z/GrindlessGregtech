@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:annihilation_laser_works"],
+  "text": ["emi.grindless.info.annihilation_laser_works.0", "emi.grindless.info.annihilation_laser_works.1"]
+}
