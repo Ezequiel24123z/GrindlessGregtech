@@ -45,6 +45,14 @@
           "kept": [{ "id": "grindless:x_ray_mask", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:trenched_oxide_wafer", "count": 1 }]
+        },
+        {
+          "_why": "UXV-A6 (uxv.md line 24 / MNT): the ion-source charge is accelerated to a U-238 beam charge; the liquid helium cools the injector and returns as gas",
+          "name": "u238_beam_charge", "circuit": 8, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:u238_ion_source", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:u238_beam_charge", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 100 }]
         }
       ]
     },
