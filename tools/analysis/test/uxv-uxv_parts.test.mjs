@@ -93,7 +93,7 @@ test('only from: each produced id has its one producer here or in its older tabl
     'grindless:strand_stator': 'grindless:magnet_winding/strand_stator',
     'grindless:strand_tape': 'grindless:coated_conductor/strand_tape',
   };
-  for (const p of UP.parts) only['grindless:' + p.name] = `grindless:assembly_line/${p.name}`;
+  for (const p of UP.parts) only['gtceu:' + p.name] = `grindless:assembly_line/${p.name}`;
   for (const [id, rid] of Object.entries(only)) assert.deepEqual(plain(producers(id).map((r) => r.i)), [rid], id);
 });
 
