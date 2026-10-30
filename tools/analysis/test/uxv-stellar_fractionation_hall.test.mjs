@@ -147,7 +147,7 @@ test('controller recipe: one guarded assembly line researched with the condensat
   const r = recipes[0];
   assert.equal(r.id, 'grindless:stellar_fractionation_hall');
   assert.deepEqual(plain(r.outs), ['gtceu:stellar_fractionation_hall']);
-  for (const it of ['gtceu:uxv_machine_hull', '2x gtceu:uxv_conveyor_module', '2x gtceu:uxv_robot_arm', '2x gtceu:uxv_electric_pump', 'grindless:lasagna_plate', 'grindless:pt_sheet', '4x #gtceu:circuits/uxv']) assert.ok(r.items.includes(it), it);
+  for (const it of ['gtceu:uxv_machine_hull', '3x gtceu:uxv_conveyor_module', '3x gtceu:uxv_robot_arm', '2x gtceu:uxv_electric_pump', 'grindless:lasagna_plate', 'grindless:pt_sheet', '4x #gtceu:circuits/uxv']) assert.ok(r.items.includes(it), it);
   assert.ok(r.items.length <= 16);
   assert.ok(r.fluids.includes('gtceu:stellar_helium_cut 1000'));
   assert.ok(r.fluids.includes('gtceu:soldering_alloy 2304'));
