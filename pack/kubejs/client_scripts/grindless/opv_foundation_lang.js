@@ -3,6 +3,8 @@
 //   grindless:<item> and grindless:<block>   item.grindless.<n> / block.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1)
 //   gtceu:<material> (GT material)           material.gtceu.<n>
 //   grindless:<material> (GT material)       material.grindless.<n>
+//   the two places (startup_scripts/grindless/opv/travel.js, data/grindless/gcyr/planets/{sgr1806_orbit,terzan5_core}.json):
+//     level.grindless.<planet> (GCYR's planet names), dimension.grindless.<world>, planet.grindless.<key> (quantum bridge messages)
 //
 // The gtceu:opv_* and gtceu:max_* names are GTM's own. Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts.
 // Names go in en_us and es_es.
@@ -96,6 +98,12 @@
 
     var PREFIX = { material: 'material.gtceu.', gmaterial: 'material.grindless.' }
 
+    // world, travel key, level en, level es, dimension en, dimension es, planet en, planet es
+    var PLACES = [
+        ['sgr1806_orbit', 'sgr1806', 'SGR 1806-20', 'SGR 1806-20', 'SGR 1806-20 Orbit', 'Órbita de SGR 1806-20', 'SGR 1806-20', 'SGR 1806-20'],
+        ['terzan5_core', 'terzan5', 'Terzan 5 Core', 'Núcleo de Terzan 5', 'Terzan 5 Core', 'Núcleo de Terzan 5', 'Terzan 5', 'Terzan 5']
+    ]
+
     ;['en_us', 'es_es'].forEach(function (lang, li) {
         ClientEvents.lang(lang, function (event) {
             var add = function (key, value) { event.add('grindless', key, value) }
@@ -109,6 +117,11 @@
             ITEMS.forEach(tipped('item'))
             BLOCKS.forEach(tipped('block'))
             NAMES.forEach(function (e) { add(PREFIX[e[0]] + e[1], e[2 + li]) })
+            PLACES.forEach(function (p) {
+                add('level.grindless.' + p[0], p[2 + li])
+                add('dimension.grindless.' + p[0], p[4 + li])
+                add('planet.grindless.' + p[1], p[6 + li])
+            })
         })
     })
 })()

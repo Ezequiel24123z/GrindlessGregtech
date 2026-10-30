@@ -1,0 +1,14 @@
+{
+  "world": "grindless:terzan5_core",
+  "stars": { "fancy_count": 13000, "fast_count": 6000, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 110, "color": 16756832, "rotation": [80, 0, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 36, "color": 16740416, "rotation": [60, 90, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 28, "color": 16764048, "rotation": [45, 220, 0] }
+  ]
+}

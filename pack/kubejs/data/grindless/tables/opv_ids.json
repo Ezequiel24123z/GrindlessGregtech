@@ -31,5 +31,10 @@
   "substages": {
     "_why": "names only: their hidden_until entries are F2's and their grants belong to the packages that send the player there",
     "names": ["opv", "opv-sgr", "opv-terzan5"]
+  },
+  "places": {
+    "_why": "the two tier-13 places (S0-3, S0-8; startup_scripts/grindless/opv/travel.js publishes them as global.grindless.opvTravel); the dimension ids are final",
+    "sgr1806": "grindless:sgr1806_orbit",
+    "terzan5": "grindless:terzan5_core"
   }
 }
