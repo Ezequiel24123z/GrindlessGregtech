@@ -1,0 +1,85 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/opv/antimatter.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit; 'site' true locks the recipe to grindless:cygnus_x1_orbit; 'wear' inputs are consumed by their chance (out of 10000); 'chanceOut' outputs are made by their chance; 'generator' true writes the EUt negative (a generator type). antihydrogen_synthesis and annihilation_power are package OpV-B3's machine types (data key = dataKey, the EMI line). Package OpV-B3, docs/eras/opv.md machines 3 and 5-8 and process lines 26-28 and 30-33.",
+  "types": {
+    "antihydrogen_synthesis": {
+      "dataKey": "grindless_antihydrogen_synthesis",
+      "recipes": [
+        {
+          "_why": "machine 3 c1: four cold antiproton cells and four dense positron cells meet in the octupole trap and make four trapped antihydrogen (5% lost to annihilation in the trap: gamma heat in the shield casing). The octupole magnet wears 1/64 a run; 90% of the emptied Penning traps come back",
+          "name": "trap_antihydrogen", "circuit": 1, "eut": 268435456, "duration": 1200,
+          "itemsIn": [
+            { "id": "grindless:cold_antiproton_cell", "count": 4 },
+            { "id": "grindless:dense_positron_cell", "count": 4 }
+          ],
+          "kept": [],
+          "wear": [{ "id": "grindless:octupole_trap_magnet", "count": 1, "chance": 156 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "chanceOut": [
+            { "id": "grindless:trapped_antihydrogen", "count": 4, "chance": 9500 },
+            { "id": "grindless:empty_penning_trap", "count": 4, "chance": 9000 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 3 c2: Lyman-alpha laser cooling of the trapped atoms; the laser wears 1/128 a run, 5% of the atoms are lost",
+          "name": "laser_cool", "circuit": 2, "eut": 268435456, "duration": 800,
+          "itemsIn": [{ "id": "grindless:trapped_antihydrogen", "count": 4 }],
+          "kept": [],
+          "wear": [{ "id": "grindless:lyman_alpha_laser", "count": 1, "chance": 78 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "chanceOut": [{ "id": "grindless:cooled_antihydrogen", "count": 4, "chance": 9500 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 3 c3: the cooled atoms are frozen into ice in four levitation trap cells (5% lost). The engine returns the empty cells",
+          "name": "freeze_ice", "circuit": 3, "eut": 503316480, "duration": 1600,
+          "itemsIn": [
+            { "id": "grindless:cooled_antihydrogen", "count": 4 },
+            { "id": "grindless:levitation_trap_cell", "count": 4 }
+          ],
+          "kept": [],
+          "wear": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "chanceOut": [{ "id": "grindless:antihydrogen_ice_cell", "count": 4, "chance": 9500 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "annihilation_power": {
+      "dataKey": "grindless_annihilation_power",
+      "recipes": [
+        {
+          "_why": "machine 5 c1: one antihydrogen ice cell annihilates against 1,000 mB of hydrogen: 2^29 EU/t for 1,200 t. The gamma absorber tile wears 1/16 a run and comes out activated; 95% of the emptied levitation cells come back. Half of the energy leaves as neutrinos (stated in the tooltip)",
+          "name": "burn_ice", "circuit": 1, "eut": 536870912, "duration": 1200, "generator": true,
+          "itemsIn": [{ "id": "grindless:antihydrogen_ice_cell", "count": 1 }],
+          "kept": [],
+          "wear": [{ "id": "grindless:gamma_absorber_tile", "count": 1, "chance": 625 }],
+          "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 1000 }],
+          "itemsOut": [],
+          "chanceOut": [
+            { "id": "grindless:levitation_trap_cell", "count": 1, "chance": 9500 },
+            { "id": "grindless:activated_absorber_tile", "count": 1, "chance": 625 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 5 c2: an ACMF pellet is fired and a stack of antiprotons annihilates in its fireball: 2^30 EU/t for 1,200 t. The tile wears as in c1; the spent hohlraum goes back to the actinide partitioning plant",
+          "name": "burn_pellet", "circuit": 2, "eut": 1073741824, "duration": 1200, "generator": true,
+          "itemsIn": [
+            { "id": "grindless:acmf_pellet", "count": 1 },
+            { "id": "grindless:antiproton_stack_opv", "count": 1 }
+          ],
+          "kept": [],
+          "wear": [{ "id": "grindless:gamma_absorber_tile", "count": 1, "chance": 625 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_acmf_hohlraum", "count": 1 }],
+          "chanceOut": [{ "id": "grindless:activated_absorber_tile", "count": 1, "chance": 625 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}

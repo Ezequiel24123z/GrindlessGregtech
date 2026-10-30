@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:antihydrogen_foundry"],
+  "text": ["emi.grindless.info.antihydrogen_foundry.0", "emi.grindless.info.antihydrogen_foundry.1"]
+}
