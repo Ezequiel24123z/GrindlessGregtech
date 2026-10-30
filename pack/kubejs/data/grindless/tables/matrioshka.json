@@ -21,6 +21,12 @@
           "_why": "UIV-A10: the Kerr chart from correlated Kerr data.",
           "itemsIn": [ { "id": "grindless:correlated_kerr_data", "count": 1 } ],
           "itemsOut": [ { "id": "grindless:kerr_chart", "count": 1 } ]
+        },
+        {
+          "name": "arm_chart", "circuit": 4, "eut": 31457280, "duration": 6000, "site": true,
+          "_why": "UXV-B6: the arm chart from the four records of the three places (Vela strain, Cas A Ti-44 map, Cygnus elevator log, EHT VLBI); the type's slots are widened to 5 by startup_scripts/grindless/uxv/gate.js.",
+          "itemsIn": [ { "id": "grindless:vela_glitch_record", "count": 1 }, { "id": "grindless:ti44_map", "count": 1 }, { "id": "grindless:elevator_log", "count": 1 }, { "id": "grindless:cygnus_vlbi_record", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:arm_chart", "count": 1 } ]
         }
       ]
     },

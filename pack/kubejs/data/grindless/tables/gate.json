@@ -90,6 +90,20 @@
           ],
           "kept": [],
           "itemsOut": []
+        },
+        {
+          "_why": "UXV-B6: c10 gate to OpV at Cygnus X-1, 16 A x V[UXV] = 2^31 EU/t for 60 s; the FRC cartridge burns, the six records stay in the bus, the bulge chart comes out (the casing of OpV is researched with it)",
+          "name": "hold_galactic_bulge",
+          "circuit": 10, "eut": 2147483648, "duration": 1200, "site": "cygnus_x1_orbit",
+          "itemsIn": [{ "id": "grindless:frc_cartridge", "count": 1 }],
+          "kept": [
+            { "id": "grindless:superheavy_census_iii", "count": 1 },
+            { "id": "grindless:island_chart", "count": 1 },
+            { "id": "grindless:arm_chart", "count": 1 },
+            { "id": "grindless:pasta_core_sample", "count": 1 },
+            { "id": "gtnn:spintronic_mainframe", "count": 4 }
+          ],
+          "itemsOut": [{ "id": "grindless:bulge_chart", "count": 1 }]
         }
       ]
     },
