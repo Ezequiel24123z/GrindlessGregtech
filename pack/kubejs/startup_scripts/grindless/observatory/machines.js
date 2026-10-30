@@ -216,9 +216,9 @@
       .pattern(function (def) { return Pat.build(def, STEAM_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.steam_observatory.tooltip.0'),
-        Text.translate('grindless.machine.steam_observatory.tooltip.1'),
-        Text.translate('grindless.machine.steam_observatory.tooltip.2'),
-        Text.translate('grindless.machine.steam_observatory.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.stargazing')),
+        Text.translate('grindless.tooltip.steam', '32'),
+        Text.translate('grindless.machine.steam_observatory.tooltip.1')
       ])
       .workableCasingModel(STEAM_CASING_TEXTURE, 'grindless:block/multiblock/steam_observatory')
 
@@ -231,9 +231,8 @@
       .pattern(function (def) { return Pat.build(def, OPTICAL_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.optical_observatory.tooltip.0'),
-        Text.translate('grindless.machine.optical_observatory.tooltip.1'),
-        Text.translate('grindless.machine.optical_observatory.tooltip.2'),
-        Text.translate('grindless.machine.optical_observatory.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.astrophotography')),
+        Text.translate('grindless.machine.optical_observatory.tooltip.1')
       ])
       .workableCasingModel(STEEL_CASING_TEXTURE, 'grindless:block/multiblock/optical_observatory')
 
@@ -246,9 +245,8 @@
       .pattern(function (def) { return Pat.build(def, RADIO_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.radio_telescope.tooltip.0'),
-        Text.translate('grindless.machine.radio_telescope.tooltip.1'),
-        Text.translate('grindless.machine.radio_telescope.tooltip.2'),
-        Text.translate('grindless.machine.radio_telescope.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.radio_astronomy')),
+        Text.translate('grindless.machine.radio_telescope.tooltip.1')
       ])
       .workableCasingModel(ALU_CASING_TEXTURE, 'grindless:block/multiblock/radio_telescope')
   })

@@ -205,6 +205,17 @@
     return otherMode(machine, recipe) || belowHatchVoltage(machine, recipe)
   }
 
+  // tooltip: what it does, plus the recipe types of the factories that run four or fewer (TP-D5)
+  function factoryTips(f) {
+    var out = [Text.translate('grindless.machine.' + f.id + '.tooltip.0')]
+    if (f.id === 'universal_assembly_factory') {
+      out.push(Text.translate('gtceu.machine.available_recipe_map_2.tooltip', Text.translate('gtceu.assembler'), Text.translate('gtceu.circuit_assembler')))
+    } else if (f.id === 'universal_mixing_factory') {
+      out.push(Text.translate('gtceu.machine.available_recipe_map_4.tooltip', Text.translate('gtceu.mixer'), Text.translate('gtceu.chemical_reactor'), Text.translate('gtceu.chemical_bath'), Text.translate('gtceu.ore_washer')))
+    }
+    return out
+  }
+
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     var bores = G.lv.bores
 
@@ -220,12 +231,7 @@
       b.recipeModifier(bores(f.id === 'universal_assembly_factory' ? assemblyVeto : otherMode, MAX_PARALLELS), true)
         .appearanceBlock(GTBlocks.CASING_ALUMINIUM_FROSTPROOF)
         .pattern(function (def) { return Pat.build(def, spec) })
-        ["tooltips(net.minecraft.network.chat.Component[])"]([
-          Text.translate('grindless.machine.' + f.id + '.tooltip.0'),
-          Text.translate('grindless.machine.universal_factory.tooltip.1'),
-          Text.translate('grindless.machine.' + f.id + '.tooltip.2'),
-          Text.translate('grindless.machine.' + f.id + '.tooltip.3')
-        ])
+        ["tooltips(net.minecraft.network.chat.Component[])"](factoryTips(f))
         .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/' + f.id)
     })
   })

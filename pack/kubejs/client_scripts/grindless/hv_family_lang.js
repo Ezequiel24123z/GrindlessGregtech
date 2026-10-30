@@ -14,15 +14,10 @@ ClientEvents.lang('en_us', event => {
     add('block.gtceu.hv_vein_drill', 'HV Vein Drill')
     add('block.gtceu.hv_greenhouse', 'HV Greenhouse')
 
-    add('grindless.machine.hv_vein_drill.tooltip.0', 'Drills the vein marked by the vein sample, over and over. It runs every Steam, LV and MV Vein Drill recipe (the End veins too, with drilling fluid), up to 32 at once, and the stainless steel bit.')
-    add('grindless.machine.hv_vein_drill.tooltip.1', 'Runs as many bores at once as its energy hatches allow (voltage / 8 EU/t, up to 32): one HV hatch fills all 32, a second one is a voltage tier up and halves the time.')
-    add('grindless.machine.hv_vein_drill.tooltip.2', 'The stainless steel bit only works here and in better drills: it wears out in about 0.5% of the runs (0.25% with drilling fluid). End veins drill with the vanadium steel or the stainless steel bit. Drilling fluid in the fluid hatch: +50% ore.')
-    add('grindless.machine.hv_vein_drill.tooltip.3', 'Needs 1 or 2 energy hatches, 1 input bus, 2 output buses and 1 input hatch.')
+    add('grindless.machine.hv_vein_drill.tooltip.0', '§7Drills the vein marked by the vein sample, up to 32 bores at once.')
+    add('grindless.machine.hv_vein_drill.tooltip.1', 'Takes a stainless steel drill bit.')
 
-    add('grindless.machine.hv_greenhouse.tooltip.0', 'Grows trees, rubber trees, crops, mushrooms, berries, vines and flowers with a plant that is never used up. It runs every Steam, LV and MV Greenhouse recipe.')
-    add('grindless.machine.hv_greenhouse.tooltip.1', 'Runs as many crops at once as its energy hatches allow (voltage / 4 EU/t, up to 32). Water in an input hatch unlocks the extra plants.')
-    add('grindless.machine.hv_greenhouse.tooltip.2', 'Programmed circuit 2 + fertilizer in the input bus (and water): double output in half the time. Circuit 4 + fertilizer and carbon dioxide in a second input hatch (200 mB per run) adds +50% and 100 mB of oxygen comes back out.')
-    add('grindless.machine.hv_greenhouse.tooltip.3', 'Needs 1 or 2 energy hatches, 1 input bus, 1 or 2 output buses, 1 or 2 input hatches (water, carbon dioxide) and 1 output hatch (oxygen).')
+    add('grindless.machine.hv_greenhouse.tooltip.0', '§7Grows trees, crops, mushrooms and flowers, up to 32 at once.')
 
     add('item.grindless.stainless_steel_drill_bit', 'Stainless Steel Drill Bit')
     add('tooltip.grindless.stainless_steel_drill_bit', 'Wears out by chance: about 0.5% of the runs, 0.25% with drilling fluid. Only the HV Vein Drill and better take it.')
@@ -46,15 +41,10 @@ ClientEvents.lang('es_es', event => {
     add('block.gtceu.hv_vein_drill', 'Perforadora de vetas HV')
     add('block.gtceu.hv_greenhouse', 'Invernadero HV')
 
-    add('grindless.machine.hv_vein_drill.tooltip.0', 'Perfora la veta que marca la muestra, una y otra vez. Hace todas las recetas de las perforadoras de vapor, LV y MV (también las vetas del End, con lodo de perforación), hasta 32 a la vez, y la broca de acero inoxidable.')
-    add('grindless.machine.hv_vein_drill.tooltip.1', 'Hace tantos ciclos a la vez como permitan sus escotillas de energía (voltaje / 8 EU/t, hasta 32): una escotilla HV llena los 32 y una segunda sube un escalón de voltaje y reduce el tiempo a la mitad.')
-    add('grindless.machine.hv_vein_drill.tooltip.2', 'La broca de acero inoxidable solo funciona aquí y en perforadoras mejores: se gasta en cerca del 0,5 % de los ciclos (0,25 % con lodo de perforación). Las vetas del End se perforan con la broca de acero vanádico o la de acero inoxidable. Con lodo en la escotilla de fluidos: +50 % de mineral.')
-    add('grindless.machine.hv_vein_drill.tooltip.3', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada, 2 buses de salida y 1 escotilla de entrada.')
+    add('grindless.machine.hv_vein_drill.tooltip.0', '§7Perfora la veta que marca la muestra, hasta 32 perforaciones a la vez.')
+    add('grindless.machine.hv_vein_drill.tooltip.1', 'Usa una broca de acero inoxidable.')
 
-    add('grindless.machine.hv_greenhouse.tooltip.0', 'Cultiva árboles, árboles de caucho, cosechas, setas, bayas, enredaderas y flores con una planta que no se gasta. Hace todas las recetas de los invernaderos de vapor, LV y MV.')
-    add('grindless.machine.hv_greenhouse.tooltip.1', 'Hace tantos cultivos a la vez como permitan sus escotillas de energía (voltaje / 4 EU/t, hasta 32). Con agua en una escotilla de entrada se abren las plantas extra.')
-    add('grindless.machine.hv_greenhouse.tooltip.2', 'Circuito programado 2 + fertilizante en el bus de entrada (y agua): doble de producción en la mitad de tiempo. Con el circuito 4, fertilizante y dióxido de carbono en una segunda escotilla de entrada (200 mB por ciclo) suma +50 % y vuelven 100 mB de oxígeno.')
-    add('grindless.machine.hv_greenhouse.tooltip.3', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada, 1 o 2 buses de salida, 1 o 2 escotillas de entrada (agua, dióxido de carbono) y 1 escotilla de salida (oxígeno).')
+    add('grindless.machine.hv_greenhouse.tooltip.0', '§7Cultiva árboles, cosechas, setas y flores, hasta 32 a la vez.')
 
     add('item.grindless.stainless_steel_drill_bit', 'Broca de acero inoxidable')
     add('tooltip.grindless.stainless_steel_drill_bit', 'Se desgasta por probabilidad: cerca del 0,5 % de los ciclos, 0,25 % con lodo de perforación. Solo la admiten la perforadora de vetas HV y las mejores.')

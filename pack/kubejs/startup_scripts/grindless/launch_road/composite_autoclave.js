@@ -96,9 +96,8 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.composite_autoclave.tooltip.0'),
-        Text.translate('grindless.machine.composite_autoclave.tooltip.1'),
-        Text.translate('grindless.machine.composite_autoclave.tooltip.2'),
-        Text.translate('grindless.machine.composite_autoclave.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.composite_curing')),
+        Text.translate('grindless.machine.composite_autoclave.tooltip.1')
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/composite_autoclave')
   })

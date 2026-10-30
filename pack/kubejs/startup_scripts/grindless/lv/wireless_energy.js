@@ -333,9 +333,7 @@
       .additionalDisplay(towerDisplay)
       ['tooltips(net.minecraft.network.chat.Component[])']([
         Text.translate('grindless.machine.wireless_energy_tower.tooltip.0'),
-        Text.translate('grindless.machine.wireless_energy_tower.tooltip.1'),
-        Text.translate('grindless.machine.wireless_energy_tower.tooltip.2'),
-        Text.translate('grindless.machine.wireless_energy_tower.tooltip.3')
+        Text.translate('grindless.machine.wireless_energy_tower.tooltip.1')
       ])
       .workableCasingModel(T.tower.casingTexture, 'grindless:block/multiblock/wireless_energy_tower')
   })

@@ -14,10 +14,8 @@ ClientEvents.lang('en_us', event => {
 
     add('block.gtceu.lunar_drill', 'Lunar Drill')
     add('gtceu.lunar_drilling', 'Lunar Drilling')
-    add('grindless.machine.lunar_drill.tooltip.0', 'The vein drill of the Moon: a lander on three legs standing on the regolith, with two solar wings and a short drill string. It only works on the Moon (every lunar recipe asks for it).')
-    add('grindless.machine.lunar_drill.tooltip.1', 'Lunar ilmenite vein: ilmenite (the only titanium), olivine, chromite and iron, 3.75 raw ores per run. Regolith: helium-3, only by lunar day (the wings bake it). HV drill bit, about 0.5% wear per run.')
-    add('grindless.machine.lunar_drill.tooltip.2', 'Runs as many bores at once as its energy hatches allow (voltage / 8 EU/t, up to 32). Nothing burns in vacuum: bring charged batteries from Earth, then send Earth power through the AE2 quantum bridge.')
-    add('grindless.machine.lunar_drill.tooltip.3', 'Needs 1 or 2 energy hatches, 1 input bus, 1 or 2 output buses and, for the helium-3, 1 output hatch. The three legs stand on lunar ground.')
+    add('grindless.machine.lunar_drill.tooltip.0', '§7The vein drill of the Moon: lunar ilmenite and helium-3.')
+    add('grindless.machine.lunar_drill.tooltip.1', 'Only works on the Moon.')
 
     add('item.grindless.vein_sample_ilmenite_moon', 'Lunar Ilmenite Vein Sample')
     add('item.grindless.vein_sample_regolith_moon', 'Lunar Regolith Sample')
@@ -40,10 +38,8 @@ ClientEvents.lang('es_es', event => {
 
     add('block.gtceu.lunar_drill', 'Perforadora lunar')
     add('gtceu.lunar_drilling', 'Perforación lunar')
-    add('grindless.machine.lunar_drill.tooltip.0', 'La perforadora de vetas de la Luna: un módulo de aterrizaje sobre tres patas apoyadas en el regolito, con dos alas solares y una sarta de perforación corta. Solo funciona en la Luna (todas las recetas lunares lo piden).')
-    add('grindless.machine.lunar_drill.tooltip.1', 'Veta lunar de ilmenita: ilmenita (el único titanio), olivino, cromita y hierro, 3,75 menas en bruto por ciclo. Regolito: helio-3, solo de día lunar (las alas lo hornean). Broca HV, cerca del 0,5 % de desgaste por ciclo.')
-    add('grindless.machine.lunar_drill.tooltip.2', 'Hace tantos ciclos a la vez como permitan sus escotillas de energía (voltaje / 8 EU/t, hasta 32). En el vacío nada arde: lleva baterías cargadas de la Tierra y después manda la energía de la Tierra por el puente cuántico de AE2.')
-    add('grindless.machine.lunar_drill.tooltip.3', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada, 1 o 2 buses de salida y, para el helio-3, 1 escotilla de salida. Las tres patas se apoyan en suelo lunar.')
+    add('grindless.machine.lunar_drill.tooltip.0', '§7La perforadora de vetas de la Luna: ilmenita lunar y helio-3.')
+    add('grindless.machine.lunar_drill.tooltip.1', 'Solo funciona en la Luna.')
 
     add('item.grindless.vein_sample_ilmenite_moon', 'Muestra de veta de ilmenita lunar')
     add('item.grindless.vein_sample_regolith_moon', 'Muestra de regolito lunar')

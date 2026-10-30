@@ -86,8 +86,7 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.wire_works.tooltip.0'),
-        Text.translate('grindless.machine.wire_works.tooltip.1'),
-        Text.translate('grindless.machine.wire_works.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_2.tooltip', Text.translate('gtceu.wiremill'), Text.translate('gtceu.bender'))
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/' + ID)
   })
