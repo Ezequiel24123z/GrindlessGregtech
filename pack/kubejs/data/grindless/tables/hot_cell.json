@@ -291,9 +291,9 @@
       "fluidsOut": []
     },
     {
-      "_why": "OpV-D1 (opv.md line 21): a spent Ir spallation target declad behind the shielding; the iridium core goes to the platinum plant (c15) and the activated Ta cladding and W housing are glassed as radioactive waste (circuit 17 shared with ti44_core_decay: distinct inputs)",
+      "_why": "OpV-D1 (opv.md line 21; the contract's c17 is ti44_core_decay's in the base, so the next free one, c18): a spent Ir spallation target declad behind the shielding; the iridium core goes to the platinum plant (c15) and the activated Ta cladding and W housing are glassed as radioactive waste",
       "name": "spent_ir_target_decladding",
-      "circuit": 17,
+      "circuit": 18,
       "eut": 7680,
       "duration": 1200,
       "itemsIn": [{ "id": "grindless:spent_ir_target", "count": 1 }],

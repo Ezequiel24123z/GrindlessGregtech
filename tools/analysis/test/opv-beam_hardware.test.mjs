@@ -61,14 +61,18 @@ test('every intermediate is made and used: none is a dead end', () => {
   assert.deepEqual(fluidsOut(strip), ['gtceu:tritium', 'gtceu:helium_3']);
 });
 
-test('acceptance: a spent Ir target reaches the hot cell, and its core goes back to 5N iridium', () => {
+test('acceptance: a spent Ir target reaches the hot cell, and its core goes back to iridium the platinum plant refines to 5N', () => {
   const declad = takers('grindless:spent_ir_target').filter((r) => r.t === 'gtceu:hot_cell');
   assert.equal(declad.length, 1);
   assert.deepEqual(itemsOut(declad[0]), ['grindless:decladded_ir_core', 'gtnn:radioactive_waste']);
   const refine = takers('grindless:decladded_ir_core');
   assert.equal(refine.length, 1);
   assert.equal(refine[0].t, 'gtceu:pgm_refining');
-  assert.ok(itemsOut(refine[0]).includes('grindless:five_n_iridium'));
+  assert.ok(itemsOut(refine[0]).includes('gtceu:iridium_dust'), 'the core comes back as iridium dust');
+  // circuit 13 (UXV-A2) refines that dust to 5N again: grindless:five_n_iridium keeps its single producer
+  const fiveN = makers('grindless:five_n_iridium');
+  assert.equal(fiveN.length, 1);
+  assert.ok(itemsIn(fiveN[0]).includes('gtceu:iridium_dust'));
   const residue = takers('grindless:ir_spallation_residue');
   assert.equal(residue.length, 1);
   assert.ok(itemsOut(residue[0]).includes('gtceu:iridium_dust'), 'the iridium left in the residue comes back');
@@ -116,10 +120,10 @@ test('the cryogenic parts: the helium refrigerator seals the gun and the pickup 
 test('the rows appended to older tables: the contract\'s circuits, each with an EMI line in en_us and es_es', () => {
   const tables = path.join(pack, 'kubejs', 'data', 'grindless', 'tables');
   const want = {
-    'electron_beam.json': [['be_reduction', 24], ['be_window_braze', 25], ['pickup_tank_braze', 25], ['li6h_canning', 26], ['neg_activation', 30], ['pickup_array', 31]],
+    'electron_beam.json': [['be_reduction', 24], ['be_window_braze', 25], ['li6h_canning', 26], ['neg_activation', 30], ['pickup_array', 31]],
     'crystals.json': [['ceb6_boule', 23]],
     'levitation_melter.json': [['tizrv_melt', 17], ['neg_chamber_remelt', 18]],
-    'hot_cell.json': [['spent_ir_target_decladding', 17]],
+    'hot_cell.json': [['spent_ir_target_decladding', 18]], // the contract's c17 is ti44_core_decay's
     'spin_deposition.json': [['ta_clad_ir_rod', 9], ['neg_coated_chamber', 10]],
   };
   for (const [file, rows] of Object.entries(want)) {

@@ -5,18 +5,18 @@
 //   line 20  Be window   fluorspar kiln (iv/fluorspar_kiln.js: Be and worn window scrap -> BeF2), electron beam c24 (BeF2 + Ca -> Be,
 //                        the CaF2 back to the kiln's charge) and c25 (foil brazed to a titanium flange; the trim is window scrap)
 //   line 21  Ir target   platinum plant c13 (5N Ir, UXV-A2), spark plasma sinterer c11 (rod), MTJ sputtering c9 (Ta cladding);
-//                        spent: hot cell c17 (declad) -> platinum plant c15-16 (Ir back; Os, Re and W from the residue)
+//                        spent: hot cell c18 (declad) -> platinum plant c15-16 (Ir back; Os and W from the residue)
 //   line 22  LiH shield  UEV pyro and Mk5 (li6_hydride), spark plasma sinterer c12 (tiles), electron beam c26 (canned);
 //                        spent: the blast furnace below bakes it out -> tritium removal (iv/tritium_removal.js: T and He-3)
 //   line 23  e-cooler    crystal growth c23 (CeB6 boule), He refrigerator (the gun cooled to 4 K -> electron_cooler)
-//   line 24  pickup      electron beam c31 (NbTiN on RRR Nb; the trim is niobium powder for c4) and c25 (brazed tank),
+//   line 24  pickup      electron beam c31 (NbTiN on RRR Nb; the trim is niobium powder for c4), the blast furnace below (brazed tank),
 //                        He refrigerator (the tank at 4 K -> stochastic_cooling_pickup)
 //   line 25  NEG casing  levitation melter c17 (TiZrV), spark plasma sinterer c13 (target), MTJ sputtering c10 (coated chambers),
 //                        electron beam c30 (activation bake; the chamber that does not activate goes back to the melter, c18)
 //
 // Here (every row above V[UXV] = 134,217,728 EU/t):
 //   hot_rolling              circuit 13 (1-3 generated, 4 the levitation melter, 5-12 UXV): the electron-beam Be ingot to window foil
-//   electric_blast_furnace   CeB6 from cerium and boron; the spent LiH shield baked out (LiH back to the sinterer, the steel can and the
+//   electric_blast_furnace   CeB6 from cerium and boron; the pickup tank vacuum-brazed; the spent LiH shield baked out (LiH back to the sinterer, the steel can and the
 //                            tungsten skin back as dust, the bred gas to the tritium removal facility)
 //   lathe                    the CeB6 boule cut to two cathodes; the kerf is CeB6 powder the crystal growth furnace grows again
 //   assembler                the five beam parts at VA[OpV] and grindless:neg_xhv_casing (2 OpV circuits, docs/eras/opv.md *Common*)
@@ -60,6 +60,9 @@
     // line 23: cerium hexaboride from the elements (Ce + 6 B), the feed of the crystal growth furnace's float zone (c23)
     row('opv/ceb6_powder', 'electric_blast_furnace', null, [item('gtceu:cerium_dust', 1), item('gtceu:boron_dust', 6)], [],
       [item('grindless:ceb6_powder', 7)], [], STEP, 300, 2500),
+    // line 24: the pickup array vacuum-brazed into its stainless steel tank; the He refrigerator then takes it to 4 K
+    row('opv/brazed_pickup_tank', 'electric_blast_furnace', null, [item('grindless:pickup_array', 1), item('gtceu:stainless_steel_plate', 2)], [],
+      [item('grindless:brazed_pickup_tank', 1)], [], STEP, 400, 1300),
     // the boule cut and polished to two cathodes; the kerf is CeB6 powder for the next boule
     row('opv/ceb6_cathode', 'lathe', null, [item('grindless:ceb6_boule', 1)], [],
       [item('grindless:ceb6_cathode', 2), item('grindless:ceb6_powder', 1)], [], STEP, 400),
