@@ -14,10 +14,7 @@ ClientEvents.lang('en_us', event => {
     add('block.gtceu.fluorspar_kiln', 'Fluorspar Kiln')
     add('gtceu.fluorspar_digestion', 'Fluorspar Digestion')
 
-    add('grindless.machine.fluorspar_kiln.tooltip.0', 'A long rotary kiln on roller stands, turned by a gearbox, with an HF scrubber at its hot end. Fluorspar, sulfuric acid and water go in at the cold end: hydrofluoric acid leaves the scrubber, and the calcium sulfate is quenched with the water and drops out as gypsum. The unreacted fluorite goes back to the feed.')
-    add('grindless.machine.fluorspar_kiln.tooltip.1', 'It runs many charges at once, each at the recipe\'s own power and time, with no overclock: as many as the inputs, the room and the energy hatches allow, up to 256. One IV energy hatch runs all 256.')
-    add('grindless.machine.fluorspar_kiln.tooltip.2', 'The HF feeds the naquadah plant, the hot cell\'s enrichment and PTFE; the gypsum goes to concrete. The scrubber keeps every drop of HF: the kiln refuses to void fluids. Surplus gypsum is inert and can be voided.')
-    add('grindless.machine.fluorspar_kiln.tooltip.3', 'Feed head, round the controller: 1-2 energy hatches, 1-2 input buses and 1-4 input hatches (acid and water). Scrubber, the two lower rows of its back wall and the row under the kiln: 1-2 output buses and 1-2 output hatches. ME parts fit.')
+    add('grindless.machine.fluorspar_kiln.tooltip.0', '§7A rotary kiln that digests fluorspar into hydrofluoric acid.')
 
     add('gtceu.recipe.grindless_fluorspar_kiln.hydrofluoric_acid_from_fluorite', 'One charge: the kiln runs up to 256 at once, 64 ticks each, with no overclock')
 
@@ -30,10 +27,7 @@ ClientEvents.lang('es_es', event => {
     add('block.gtceu.fluorspar_kiln', 'Horno de fluorita')
     add('gtceu.fluorspar_digestion', 'Digestión de fluorita')
 
-    add('grindless.machine.fluorspar_kiln.tooltip.0', 'Un horno rotatorio largo sobre estaciones de rodillos, movido por una caja de engranajes, con un lavador de HF en su extremo caliente. La fluorita, el ácido sulfúrico y el agua entran por el extremo frío: el ácido fluorhídrico sale del lavador, y el sulfato de calcio se apaga con el agua y cae como yeso. La fluorita que no reacciona vuelve a la alimentación.')
-    add('grindless.machine.fluorspar_kiln.tooltip.1', 'Hace muchas cargas a la vez, cada una con la potencia y el tiempo de la receta, sin overclock: tantas como permiten las entradas, el sitio libre y las escotillas de energía, hasta 256. Una escotilla de energía IV mueve las 256.')
-    add('grindless.machine.fluorspar_kiln.tooltip.2', 'El HF alimenta la planta de naquadah, el enriquecimiento de la celda caliente y el PTFE; el yeso va al hormigón. El lavador guarda hasta la última gota de HF: el horno no acepta tirar fluidos. El yeso que sobra es inerte y se puede tirar.')
-    add('grindless.machine.fluorspar_kiln.tooltip.3', 'Cabezal de alimentación, alrededor del controlador: 1-2 escotillas de energía, 1-2 buses de entrada y 1-4 escotillas de entrada (ácido y agua). Lavador, las dos filas bajas de su muro trasero y la fila bajo el horno: 1-2 buses de salida y 1-2 escotillas de salida. Valen las piezas ME.')
+    add('grindless.machine.fluorspar_kiln.tooltip.0', '§7Horno rotatorio que digiere fluorita en ácido fluorhídrico.')
 
     add('gtceu.recipe.grindless_fluorspar_kiln.hydrofluoric_acid_from_fluorite', 'Una carga: el horno hace hasta 256 a la vez, 64 ticks cada una, sin overclock')
 

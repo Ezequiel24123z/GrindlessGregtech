@@ -662,9 +662,8 @@
       .allowExtendedFacing(false)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.mercury_vein_drill.tooltip.0'),
-        Text.translate('grindless.machine.mercury_vein_drill.tooltip.1'),
-        Text.translate('grindless.machine.mercury_vein_drill.tooltip.2'),
-        Text.translate('grindless.machine.mercury_vein_drill.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.vein_drilling')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.mercury'))
       ])
       .workableCasingModel(BRICK_TEXTURE, 'grindless:block/multiblock/mercury_vein_drill')
 
@@ -715,9 +714,8 @@
       .allowExtendedFacing(false)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.mercury_solar_works.tooltip.0'),
-        Text.translate('grindless.machine.mercury_solar_works.tooltip.1'),
-        Text.translate('grindless.machine.mercury_solar_works.tooltip.2'),
-        Text.translate('grindless.machine.mercury_solar_works.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.solar_processing')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.mercury'))
       ])
       .workableCasingModel(ROBUST_TEXTURE, 'grindless:block/multiblock/mercury_solar_works')
 
@@ -756,9 +754,8 @@
       .allowExtendedFacing(false)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.mercury_solar_field.tooltip.0'),
-        Text.translate('grindless.machine.mercury_solar_field.tooltip.1'),
-        Text.translate('grindless.machine.mercury_solar_field.tooltip.2'),
-        Text.translate('grindless.machine.mercury_solar_field.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.mercury_solar')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.mercury'))
       ])
       .workableCasingModel(BRICK_TEXTURE, 'grindless:block/multiblock/mercury_solar_field')
 
@@ -775,9 +772,8 @@
       .allowExtendedFacing(false)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.interferometer.tooltip.0'),
-        Text.translate('grindless.machine.interferometer.tooltip.1'),
-        Text.translate('grindless.machine.interferometer.tooltip.2'),
-        Text.translate('grindless.machine.interferometer.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.interferometry')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.mercury'))
       ])
       .workableCasingModel(BRICK_TEXTURE, 'grindless:block/multiblock/interferometer')
   })

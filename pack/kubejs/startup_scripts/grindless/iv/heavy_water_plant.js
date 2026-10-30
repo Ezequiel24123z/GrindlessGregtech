@@ -228,10 +228,8 @@
       .additionalDisplay(display)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.heavy_water_plant.tooltip.0'),
-        Text.translate('grindless.machine.heavy_water_plant.tooltip.1'),
-        Text.translate('grindless.machine.heavy_water_plant.tooltip.2'),
-        Text.translate('grindless.machine.heavy_water_plant.tooltip.3'),
-        Text.translate('grindless.machine.parallel_hatch.tooltip')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.isotope_exchange')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/heavy_water_plant')
   })

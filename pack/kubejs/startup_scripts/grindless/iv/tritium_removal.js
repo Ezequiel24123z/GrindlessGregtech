@@ -341,9 +341,8 @@
       .additionalDisplay(display)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.tritium_removal_facility.tooltip.0'),
-        Text.translate('grindless.machine.tritium_removal_facility.tooltip.1'),
-        Text.translate('grindless.machine.tritium_removal_facility.tooltip.2'),
-        Text.translate('grindless.machine.tritium_removal_facility.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.detritiation')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.moon'))
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/tritium_removal_facility')
   })

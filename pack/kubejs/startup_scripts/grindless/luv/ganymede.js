@@ -172,10 +172,18 @@
         .beforeWorking(G.noVoiding.beforeWorking(keep(d.name)))
         .appearanceBlock(function () { return Block.getBlock(d.casing) })
         .pattern(function (def) { return Pat.build(def, spec) })
-        ['tooltips(net.minecraft.network.chat.Component[])']([
-          Text.translate('grindless.machine.' + d.name + '.tooltip.0'),
-          Text.translate('grindless.machine.' + d.name + '.tooltip.1')
-        ])
+        ['tooltips(net.minecraft.network.chat.Component[])'](({
+          gravitational_wave_detector: [
+            Text.translate('grindless.machine.gravitational_wave_detector.tooltip.0'),
+            Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.gravitational_wave_astronomy')),
+            Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.ganymede'))
+          ],
+          coilgun_launcher: [
+            Text.translate('grindless.machine.coilgun_launcher.tooltip.0'),
+            Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.probe_launch')),
+            Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.ganymede'))
+          ]
+        })[d.name])
         .workableCasingModel(d.texture, 'grindless:block/multiblock/' + d.name)
     })
   })
