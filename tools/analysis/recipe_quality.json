@@ -17,7 +17,8 @@
   "uhv": 9,
   "uev": 10,
   "uiv": 11,
-  "uxv": 12
+  "uxv": 12,
+  "opv": 13
  },
  "solder": [
   "^gtceu:soldering_alloy$"
@@ -58,15 +59,19 @@
   "9": 8,
   "10": 8.5,
   "11": 9,
-  "12": 9.5
+  "12": 9.5,
+  "13": 10
  },
  "sosoMaxDistinct": 2,
  "ownedPatterns": [
   "^gtceu:(uhv|uev|uiv|uxv|opv|max)_(electric_motor|electric_pump|fluid_regulator|conveyor_module|electric_piston|robot_arm|field_generator|emitter|sensor)$"
  ],
  "exemptRecipes": [
-  "^grindless:crafting/retired/"
+  "^grindless:crafting/retired/",
+  "^grindless:assembler/chain_strand_repeater$",
+  "^grindless:assembler/opv_smes_cell$"
  ],
+ "_exemptRecipes": "Recipes no rule applies to: retired conversions; and, pending a rework of OpV-W's two assembler rows (server_scripts/grindless/opv/wireless.js), the chain strand repeater and the OpV SMES cell, which cannot reach complexFloor 13 (10) at any depth (at most 9.5 and 8.5: three item inputs in a plain assembler); OpV-F2 turned the floor on for the era and held these two by id; the rework (more inputs, fluids, research or another form) deletes both lines.",
  "voltBootstrap": [
   "^gtceu:(uhv|uev|uiv|uxv|opv|max)_energy_(input|output)_hatch_(4|16|64)a$"
  ],
