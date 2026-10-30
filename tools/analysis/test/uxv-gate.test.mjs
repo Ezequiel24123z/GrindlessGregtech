@@ -83,7 +83,7 @@ test('the OpV casing: bulge chart research, UXV parts only, EU/t >= VA[UXV]', ()
   for (const t of ['uxv_machine_casing', 'uxv_field_generator', 'uxv_emitter', 'gtnn:spintronic_mainframe']) assert.ok(code.includes(t), t);
   assert.ok(!/\b(opv|max)_(machine_hull|input|output|energy)/.test(code), 'no OpV hull or hatch');
   assert.ok(!/console\.error/.test(code));
-  assert.ok(!/^\s*\/\/ priority:/m.test(server + startup));
+  for (const f of [server, startup]) assert.match(f, /^\/\/ priority: -?\d+\r?\n/, 'the integrator stamped the load order');
 });
 
 test('"only from": nothing else in pack/kubejs produces the bulge chart or the arm chart', () => {

@@ -1,3 +1,4 @@
+// priority: -15274
 // TP-C (docs/research/tier-parity.md): the basic machines and hatches GTM 7.5.3 leaves without a recipe above UV.
 //
 //   UHV basic machines   GTM generates a recipe for the UHV machines that need no component (hull, furnace, arc furnace, alloy smelter...) and none

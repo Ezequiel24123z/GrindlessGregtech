@@ -154,7 +154,7 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages and r
   for (const m of ['shequid_works', 'mnt_collider']) {
     keys.push(`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`, `grindless.machine.${m}.tooltip.1`, `grindless.machine.${m}.tooltip.2`, `emi.grindless.info.${m}.0`, `emi.grindless.info.${m}.1`);
   }
-  keys.push('gtceu.shequid_assembly', 'gtceu.multinucleon_transfer', 'emi.grindless.info.uxv_shequid_mnt_stock.0', 'gtceu.recipe.grindless_synchrotron.u238_beam_charge');
+  keys.push('gtceu.shequid_assembly', 'gtceu.multinucleon_transfer', 'gtceu.recipe.grindless_synchrotron.u238_beam_charge');
   for (const r of SM.recipes.filter((x) => x.dataKey)) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
   const re = /shequid|mnt_|multinucleon|weak_link|u238_beam/;

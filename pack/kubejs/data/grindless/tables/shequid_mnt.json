@@ -69,7 +69,7 @@
           ]
         },
         {
-          "_why": "machine 7 c4: sixteen island nuclides recorded on a data module make the island chart (stock for OpV)",
+          "_why": "machine 7 c4: sixteen island nuclides recorded on a data module make the island chart (kept by the warp gate's c10 row)",
           "name": "island_chart", "circuit": 4, "eut": 8388608, "duration": 600,
           "itemsIn": [
             { "id": "grindless:island_nuclide", "count": 16 },

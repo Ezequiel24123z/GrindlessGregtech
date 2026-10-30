@@ -1,3 +1,4 @@
+// priority: -9844
 // TEST ONLY, UXV-B6. Command: kubejs custom_command gg_test_uxv_gate
 // Marker: GGTEST|uxv_gate|DONE|failures=N (well within 240 seconds of game time: the hold is 1,200 ticks).
 // Band ONLY: X 37120-37183, Z 0-63, Y 98-115, in grindless:cygnus_x1_orbit. All blocks and chunk tickets are owned and removed before DONE.

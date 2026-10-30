@@ -1,3 +1,4 @@
+// priority: -26169
 // -----------------------------------------------------------------------------------------------
 // The OpV machine casing's research (docs/eras/uxv.md "Gate to OpV", package UXV-B6). The warp gate's c10 hold row lives in
 // data/grindless/tables/gate.json, read by server_scripts/grindless/uhv/gate.js; the arm chart's row lives in

@@ -1,3 +1,4 @@
+// priority: -10865
 // -----------------------------------------------------------------------------------------------
 // UXV-B6, gate to OpV (docs/eras/uxv.md "Gate to OpV"): two older recipe types get one more item slot for the rows B6 appends. No machine, item or
 // block is registered here.

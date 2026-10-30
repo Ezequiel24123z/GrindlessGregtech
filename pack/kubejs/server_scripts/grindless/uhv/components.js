@@ -1,3 +1,4 @@
+// priority: -23360
 // TP-C (docs/research/tier-parity.md): UHV's nine components and the UHV-UXV fluid regulators, generated at every server load from
 // data/grindless/tables/uhv_components.json.
 //

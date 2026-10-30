@@ -4,7 +4,6 @@
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names
 //   grindless.machine.<machine>.tooltip.N              controller tooltips
 //   emi.grindless.info.<machine>.N                     the EMI info pages of the controllers
-//   emi.grindless.info.uxv_shequid_mnt_stock.0         the info page of the island chart (stock for OpV)
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each SHeQUID, MNT and synchrotron recipe
 //   item.grindless.<n>, tooltip.grindless.<n>.0 / .1   the package's own items
 //
@@ -48,9 +47,6 @@
         ['emi.grindless.info.mnt_collider.1',
             'The spent actinide target goes to waste retrieval and the light fragments to actinide partitioning; the helium is recovered.',
             'El blanco de actínido gastado va a la recuperación de residuos y los fragmentos ligeros a la partición de actínidos; el helio se recupera.'],
-        ['emi.grindless.info.uxv_shequid_mnt_stock.0',
-            'Stock for OpV: the chart of the N=184 island nuclides has no use in UXV; the next era reads it.',
-            'Reserva para OpV: la carta de los nucleidos de la isla N=184 no tiene uso en UXV; la próxima era la lee.'],
 
         ['gtceu.recipe.grindless_shequid_assembly.weak_link_cell',
             'Circuit 1: a 70 nm aperture array is bonded into a titanium cell body as a weak link.',

@@ -1,4 +1,4 @@
-// priority: -26144
+// priority: -26125
 // -----------------------------------------------------------------------------------------------
 // Recipes of UXV's accretion disk skimmer, FRC former and BZ dynamo (machines and recipe types: startup_scripts/grindless/uxv/cygnus_disk.js;
 // docs/eras/uxv.md, machines 13-15, process lines 30 and 31; package UXV-B3), generated at every server load from

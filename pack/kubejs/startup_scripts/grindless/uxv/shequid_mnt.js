@@ -1,4 +1,4 @@
-// priority: -10866
+// priority: -10881
 // -----------------------------------------------------------------------------------------------
 // UXV's SHeQUID works and MNT collider (docs/eras/uxv.md, machines 6 and 7, lines 18, 24 and 43; package UXV-A6): the two multiblocks, their
 // recipe types and the package's own items. The recipes come from data/grindless/tables/shequid_mnt.json
