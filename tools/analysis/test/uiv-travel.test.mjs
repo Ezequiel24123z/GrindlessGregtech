@@ -96,7 +96,8 @@ test('planets.json, orbits.json: three new places, own pair tags; older ids unch
   assert.deepEqual(p.barnard.dimensions, ['grindless:barnard_b', 'grindless:barnard_b_orbit']);
   const o = table('orbits.json').dimensions;
   assert.equal(o.indexOf('grindless:sirius_b_orbit'), 17, 'older orbits keep their order');
-  assert.deepEqual(o.slice(18), Object.keys(PLACES).map(DIM));
+  // UXV-B1's Vela and Cas A orbits follow the three UIV places
+  assert.deepEqual(o.slice(18, 18 + Object.keys(PLACES).length), Object.keys(PLACES).map(DIM));
   assert.equal(new Set(o).size, o.length);
   assert.ok(!o.some((x) => /black_hole/.test(x)), 'no black_hole_orbit');
   const more = table('stations.json').more;

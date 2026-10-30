@@ -1,3 +1,4 @@
+// priority: -10816
 // -----------------------------------------------------------------------------------------------
 // UXV's Cygnus X-1 lift (docs/eras/uxv.md, machines 10-12, line 26; package UXV-B2): the stellar elevator, the plasma mass filter and the
 // stellar condensation tower, and their recipe types. The recipes come from data/grindless/tables/cygnus_lift.json

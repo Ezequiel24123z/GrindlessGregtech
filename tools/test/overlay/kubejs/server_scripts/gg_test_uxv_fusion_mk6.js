@@ -1,4 +1,4 @@
-// priority: -9843
+// priority: -9826
 // TEST ONLY, UXV-A7. Command: kubejs custom_command gg_test_uxv_fusion_mk6
 // Band ONLY: X 36672-36735, Z 0-63, Overworld Y 98-112.
 //   a7_ring_*    gtceu:uxv_fusion_reactor (15 x 7 x 17) forms with 16 UXV 16 A hatches; its internal buffer (read by reflection) is above the

@@ -1,9 +1,11 @@
+// priority: 1634
 // Gregtech Grindless - names and tooltips of UXV's stellar elevator, plasma mass filter and stellar condensation tower
 // (startup_scripts/grindless/uxv/cygnus_lift.js; package UXV-B2):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names
 //   grindless.machine.<machine>.tooltip.N              controller tooltips
 //   emi.grindless.info.<machine>.N                     the EMI info pages of the controllers
+//   emi.grindless.info.uxv_cygnus_lift_stock.0         the info page of the three solid condensates (stock for OpV)
 //   gtceu.recipe.<dataKey>.<recipe>                    the EMI line of each recipe
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
@@ -63,6 +65,9 @@
         ['emi.grindless.info.stellar_condensation_tower.1',
             'Nothing is vented: the volatile condensate (methane, ammonia and water) goes to the syngas plant, which reforms it into hydrogen, carbon dioxide and nitrogen. The three condensates are stock for the next era\'s refining, kept in AE2 storage.',
             'Nada se ventila: el condensado volátil (metano, amoníaco y agua) va a la planta de gas de síntesis, que lo reforma en hidrógeno, dióxido de carbono y nitrógeno. Los tres condensados son reserva para el refinado de la siguiente era, guardados en el almacenamiento de AE2.'],
+        ['emi.grindless.info.uxv_cygnus_lift_stock.0',
+            'Stock for OpV: the refractory, metal and silicate condensates of Cygnus X-1 have no use in UXV; the next era refines them. They are inert, so AE2 storage holds them safely.',
+            'Reserva para OpV: los condensados refractario, metálico y de silicatos de Cygnus X-1 no tienen uso en UXV; la próxima era los refina. Son inertes, así que el almacenamiento de AE2 los guarda sin riesgo.'],
 
         ['gtceu.recipe.grindless_star_lifting.stellar_lift',
             'Circuit 1: liquid helium cools the lift tube while the magnetic funnel draws plasma off the Cygnus X-1 donor; 900 mB of warm helium comes back.',
