@@ -165,8 +165,8 @@ test('the held F1 ids are free: the A5 hold rules are deleted, the pending EMI e
   const cov = fs.readFileSync(path.join(root, 'tools/analysis/emi_coverage.json'), 'utf8');
   assert.ok(!cov.includes('"package": "UXV-A5"'), 'no A5 pending use left');
   for (const id of ['lpe_dross_lead', 'vdw_edge_contacts', 'wte2_recrystallise', 'photonic_foundry/meso_logic_die']) assert.ok(!cov.includes(id), id);
-  const hatch = JSON.parse(cov).pendingRoutes.find((e) => e.id === 'grindless:assembly_line/uxv_parallel_hatch');
-  assert.ok(hatch && !('foreign' in hatch), 'the hatch entry stays without its foreign field');
+  // UXV-B5 wrote the emitter, so the hatch's pending route is deleted too
+  assert.ok(!JSON.parse(cov).pendingRoutes.some((e) => e.id === 'grindless:assembly_line/uxv_parallel_hatch'), 'the hatch entry is deleted by B5');
 });
 
 test('structures: not boring, at least two functional kinds, controller in the front slice', () => {

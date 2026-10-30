@@ -86,12 +86,6 @@
   "exceptions": [
   ],
   "pendingRoutes": [
-    { "id": "grindless:assembly_line/uxv_parallel_hatch", "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" },
-    { "id": "grindless:assembler/uxv_wireless_dynamo_hatch", "reason": "UXV-W's wireless dynamo rows came before B5: grindless:uxv_emitter is held until UXV-B5 writes it, which hides their use of B4's pasta_strand_repeater and lasagna_plate; B5 deletes this entry with its hold rule" },
-    { "id": "grindless:assembler/uxv_wireless_dynamo_hatch_4a", "reason": "UXV-W's wireless dynamo rows came before B5: the 1 A hatch is held with grindless:uxv_emitter until UXV-B5 writes it, which hides this row's use of B4's lasagna_plate; B5 deletes this entry with its hold rule" },
-    { "id": "grindless:assembler/uxv_wireless_dynamo_hatch_16a", "reason": "UXV-W's wireless dynamo rows came before B5: the 4 A hatch is held with grindless:uxv_emitter until UXV-B5 writes it, which hides this row's use of B4's lasagna_plate; B5 deletes this entry with its hold rule" },
-    { "id": "grindless:assembler/uxv_wireless_dynamo_hatch_64a", "reason": "UXV-W's wireless dynamo rows came before B5: the 16 A hatch is held with grindless:uxv_emitter until UXV-B5 writes it, which hides this row's use of B4's lasagna_plate; B5 deletes this entry with its hold rule" },
-    { "id": "grindless:assembler/uxv_wireless_dynamo_cover", "reason": "UXV-W's wireless dynamo cover came before B5: grindless:uxv_emitter is held until UXV-B5 writes it, which hides its use of B4's pasta_strand_repeater and lasagna_plate; B5 deletes this entry with its hold rule" }
       ],
       "pendingUses": [
     { "id": "grindless:elevator_log", "package": "UXV-B6", "reason": "UXV-B2's elevator log is read by B6's new Matrioshka row (four records to grindless:arm_chart); B6 deletes this entry" },

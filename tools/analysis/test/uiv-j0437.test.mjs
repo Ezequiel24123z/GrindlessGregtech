@@ -47,7 +47,7 @@ test('names unique, figures positive, circuits unique per type (0 only for GTM t
       names.push(r.name);
       assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
       assert.ok(r.circuit > 0 || GTM.has(type), `${type}/${r.name} needs a circuit`);
-      assert.match(r._why, /^UIV-B3/, r.name);
+      assert.match(r._why, /^UIV-B3|^UXV-B5/, r.name);
     }
   }
   assert.equal(new Set(names).size, names.length);
@@ -63,7 +63,8 @@ test('machines: three UIV multiblocks in the J0437 orbit, controllers shaped fro
   assert.ok(server.includes(ORBIT) && server.includes('.dimension('));
   assert.ok(/workableCasingModel/.test(startup));
   for (const t of ['pulsar_wind_trapping', 'positronium_condensation', 'xray_pulse_profiling']) {
-    for (const r of T.types[t].recipes) { assert.equal(r.eut, UIV, r.name); assert.equal(r.site, true, r.name); }
+    // UXV-B5's ti44_map row (circuit 3) maps Cassiopeia A's dust and runs anywhere
+    for (const r of T.types[t].recipes) { assert.equal(r.eut, UIV, r.name); assert.equal(r.site, r.name === 'ti44_map' ? undefined : true, r.name); }
   }
   for (const t of ['positron_accumulation', 'antimatter_storage']) for (const r of T.types[t].recipes) { assert.equal(r.site, true); assert.equal(r.circuit, 4); }
   for (const r of all.filter((x) => GTM.has(x.type))) assert.ok(!r.site, r.name);

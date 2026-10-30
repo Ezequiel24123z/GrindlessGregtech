@@ -1,0 +1,52 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uxv/cas_a.js makes one recipe per entry, id grindless:<name> (GTM prefixes the type), with its programmed circuit; 'site' true locks the recipe to grindless:cas_a_remnant; 'kept' are not consumed; 'wear' is a kept input that a chance consumes (per ten thousand); an output with a 'chance' is a chanced output (count 1). The table has the two types of package UXV-B5 only; its older-table rows (calutron c14, cascade c22, hot cell c16-17, antimatter trap c5, profiler c3) live in their own tables and files, each marked UXV-B5.",
+  "types": {
+    "ejecta_sweeping": {
+      "dataKey": "grindless_ejecta_sweeping",
+      "recipes": [
+        {
+          "_why": "machine 21 c1: the scoop sweeps Cassiopeia A's Ti-rich ejecta knots into dust. The matter is the remnant's (the row is locked to its dimension, the EMI page says so); one MH winding in fifty is worn out by the magnetic mouth. The dust is inert but for its titanium (EV extraction cascade c22); the rest is voided there.",
+          "name": "sweep_ejecta_knots", "circuit": 1, "eut": 67108864, "duration": 1200, "site": true,
+          "itemsIn": [],
+          "kept": [],
+          "wear": [{ "id": "grindless:mh_winding", "count": 1, "chance": 200 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:ejecta_knot_dust", "count": 4 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "annihilation_lasing": {
+      "dataKey": "grindless_annihilation_lasing",
+      "recipes": [
+        {
+          "_why": "machine 8 c1: a sealed Ti-44 core (worn out one run in fifty, the worn core goes to the IV hot cell, c17) feeds a solid-neon moderator cartridge; the positrons thermalise and bind as positronium, and the annihilation heat leaves in liquid helium, which warms to helium for the UEV He-3 polariser's cooling loop.",
+          "name": "moderate_positronium", "circuit": 1, "eut": 67108864, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:neon_moderator_cartridge", "count": 1 }],
+          "kept": [],
+          "wear": [{ "id": "grindless:ti44_core", "count": 1, "chance": 200 }],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:moderated_ps_cell", "count": 1 },
+            { "id": "grindless:spent_ti44_core", "count": 1, "chance": 200 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "_why": "machine 8 c2: the moderated Ps cell condenses inside the gamma laser cavity; the MTJ die times the stimulated 511 keV pulse. The module leaves at the nose.",
+          "name": "stimulate_gamma_emission", "circuit": 2, "eut": 134217728, "duration": 2400,
+          "itemsIn": [
+            { "id": "grindless:moderated_ps_cell", "count": 1 },
+            { "id": "grindless:gamma_laser_cavity", "count": 1 },
+            { "id": "grindless:mtj_die", "count": 1 }
+          ],
+          "kept": [],
+          "wear": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:gamma_laser_module", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
