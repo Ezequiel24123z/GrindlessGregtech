@@ -180,6 +180,22 @@
             { "id": "gtceu:tungsten_dust", "count": 3 }
           ],
           "fluidsOut": []
+        },
+        {
+          "_": "UXV-B5: titanium-44 from Cassiopeia A's Ti fraction (cascade c22); the other titanium goes back to stock as titanium dust",
+          "name": "titanium_44",
+          "circuit": 14,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "grindless:ejecta_ti_fraction_dust", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "gtceu:titanium_44_dust", "count": 1 },
+            { "id": "gtceu:titanium_dust", "count": 3 }
+          ],
+          "fluidsOut": []
         }
       ]
     },

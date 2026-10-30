@@ -50,6 +50,12 @@
           "_why": "UIV-B3 machine 20 c2: four timed profiles and the neutron-star EOS chart give the navigation solution.",
           "itemsIn": [ { "id": "grindless:xray_pulse_timed", "count": 4 }, { "id": "grindless:ns_eos_chart", "count": 1 } ], "kept": [], "fluidsIn": [],
           "itemsOut": [ { "id": "grindless:pulsar_navigation_solution", "count": 1 } ], "fluidsOut": []
+        },
+        {
+          "name": "ti44_map", "circuit": 3, "eut": 31457280, "duration": 3000,
+          "_why": "UXV-B5: four ejecta knot dusts and a data orb (consumed) are profiled into the Ti-44 map of the remnant (the profiler has no fluid slot).",
+          "itemsIn": [ { "id": "grindless:ejecta_knot_dust", "count": 4 }, { "id": "gtceu:data_orb", "count": 1 } ], "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:ti44_map", "count": 1 } ], "fluidsOut": []
         }
       ]
     },

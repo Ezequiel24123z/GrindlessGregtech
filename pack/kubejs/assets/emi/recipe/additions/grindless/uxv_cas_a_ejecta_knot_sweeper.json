@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:ejecta_knot_sweeper"],
+  "text": ["emi.grindless.info.ejecta_knot_sweeper.0", "emi.grindless.info.ejecta_knot_sweeper.1"]
+}
