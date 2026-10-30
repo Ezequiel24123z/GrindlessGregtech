@@ -8,11 +8,13 @@
 //   assembly_line         the controller (grindless:assembly_line/field_frozen_press): OpV parts only, no field generator and no OpV hatch
 //                         (they need its plate).
 //
-// Older rows of the package, in their own tables and files: electron beam c22 (the W-Re can and its re-melt, tables/electron_beam.json).
+// Older rows of the package, in their own tables and files: electron beam c22 (the W-Re can and its re-melt, tables/electron_beam.json);
+// line 45: nitride magnet works c16-17 (tables/composites.json), crystal growth c22 (tables/crystals.json), MOCVD c22
+// (uv/photonics.js), BEUV c9 (tables/beuv_stm.json), SiC fab c8 (tables/power_devices.json), and the AlN cutter row below.
 // Row keys: "site" true puts recipe.dimension(sgr1806_orbit) on it; "kept" are not consumed; "wear" are chanced inputs; an output with a
 // "chance" is a chanced output (count 1).
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
-// Published for the smoke test: global.grindless.fieldPress.recipes, .skipped, .clashes, .controllerRecipes.
+// Published for the smoke test: global.grindless.fieldPress.recipes, .skipped, .clashes, .controllerRecipes, .cutterRecipes.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   var LOG = '[grindless/opv] '
@@ -199,9 +201,26 @@
     if (id !== null) FP.controllerRecipes.push(id)
   }
 
+  // line 45: the AlN boule sliced on GTM's cutter; the kerf goes back to the nitride magnet works (c17) to be re-pressed
+  function addCutter(event) {
+    FP.cutterRecipes = []
+    var ids = ['grindless:aln_boule', 'grindless:aln_wafer', 'grindless:aln_kerf']
+    var missing = ids.filter(function (id) { return !Item.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'field_press aln_wafer skipped, unknown id(s): ' + missing.join(', '))
+      return
+    }
+    event.recipes.gtceu.cutter('grindless:aln_wafer')
+      .itemInputs('1x grindless:aln_boule')
+      .inputFluids(Fluid.of('gtceu:lubricant', 100))
+      .itemOutputs('8x grindless:aln_wafer', '2x grindless:aln_kerf')
+      .EUt(7680).duration(200)
+    FP.cutterRecipes.push('grindless:cutter/aln_wafer')
+  }
+
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
-    var steps = [['recipes', generate], ['controller', addController]]
+    var steps = [['recipes', generate], ['controller', addController], ['cutter', addCutter]]
     steps.forEach(function (s) {
       try {
         s[1](event)
