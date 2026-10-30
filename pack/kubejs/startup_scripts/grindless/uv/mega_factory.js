@@ -228,9 +228,7 @@
       .pattern(function (def) { return Pat.build(def, spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.mega_factory.tooltip.0'),
-        Text.translate('grindless.machine.mega_factory.tooltip.1'),
-        Text.translate('grindless.machine.mega_factory.tooltip.2'),
-        Text.translate('grindless.machine.mega_factory.tooltip.3')
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/' + ID)
   })

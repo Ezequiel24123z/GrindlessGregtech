@@ -185,8 +185,11 @@
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     OB.machines.forEach(function (m) {
       Pat.register('gtceu:' + m.name, m.spec)
-      var tips = []
-      for (var i = 0; i < m.tooltips; i++) tips.push(Text.translate('grindless.machine.' + m.name + '.tooltip.' + i))
+      var tips = [
+        Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + String(m.type).replace('gtceu:', '')))
+      ]
+      if (m.name === 'kuiper_survey_telescope') tips.push(Text.translate('grindless.machine.kuiper_survey_telescope.tooltip.1'))
       event.create(m.name, 'multiblock')
         .langValue(m.title)
         .rotationState(RotationState.NON_Y_AXIS)

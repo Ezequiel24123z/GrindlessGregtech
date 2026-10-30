@@ -109,7 +109,7 @@ test('every new name and tooltip has en_us and es_es text, and the textures exis
   const keys = [];
   for (const m of MACHINES) {
     keys.push('block.gtceu.' + m);
-    for (const i of [0, 1, 2]) keys.push(`grindless.machine.${m}.tooltip.${i}`);
+    for (const i of [0]) keys.push(`grindless.machine.${m}.tooltip.${i}`);
   }
   for (const t of TYPES) keys.push('gtceu.' + t);
   for (const k of keys) {

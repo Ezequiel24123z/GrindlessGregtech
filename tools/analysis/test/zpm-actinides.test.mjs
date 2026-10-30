@@ -123,7 +123,7 @@ test('every new name and tooltip has en_us and es_es text', () => {
   const keys = [];
   for (const m of ['waste_retrieval_plant', 'actinide_partitioning_plant']) {
     keys.push('block.gtceu.' + m, `grindless.machine.${m}.no_voiding`);
-    for (let i = 0; i < 4; i++) keys.push(`grindless.machine.${m}.tooltip.${i}`);
+    for (let i = 0; i < 1; i++) keys.push(`grindless.machine.${m}.tooltip.${i}`);
   }
   keys.push('gtceu.waste_retrieval', 'gtceu.actinide_partitioning', 'material.gtceu.minor_actinide_strip', 'material.gtceu.lanthanide_nitrate');
   for (const k of keys) {

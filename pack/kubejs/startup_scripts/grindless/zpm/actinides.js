@@ -235,9 +235,7 @@
       .pattern(function (def) { return Pat.build(def, RETRIEVAL_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.waste_retrieval_plant.tooltip.0'),
-        Text.translate('grindless.machine.waste_retrieval_plant.tooltip.1'),
-        Text.translate('grindless.machine.waste_retrieval_plant.tooltip.2'),
-        Text.translate('grindless.machine.waste_retrieval_plant.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.waste_retrieval'))
       ])
       .workableCasingModel(SHIELD_TEXTURE, OVERLAY)
 
@@ -251,9 +249,7 @@
       .pattern(function (def) { return Pat.build(def, PARTITION_SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.actinide_partitioning_plant.tooltip.0'),
-        Text.translate('grindless.machine.actinide_partitioning_plant.tooltip.1'),
-        Text.translate('grindless.machine.actinide_partitioning_plant.tooltip.2'),
-        Text.translate('grindless.machine.actinide_partitioning_plant.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.actinide_partitioning'))
       ])
       .workableCasingModel(SHIELD_TEXTURE, OVERLAY)
   })

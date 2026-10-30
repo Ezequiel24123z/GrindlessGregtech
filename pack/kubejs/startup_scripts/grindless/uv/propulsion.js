@@ -232,9 +232,7 @@
       .pattern(function (def) { return Pat.build(def, spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.' + name + '.tooltip.0'),
-        Text.translate('grindless.machine.' + name + '.tooltip.1'),
-        Text.translate('grindless.machine.' + name + '.tooltip.2'),
-        Text.translate('grindless.machine.' + name + '.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + String(type).replace('gtceu:', '')))
       ])
       .workableCasingModel(CASING_TEXTURE, overlay)
   }

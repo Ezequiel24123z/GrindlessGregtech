@@ -144,8 +144,7 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.laser_fusion_chamber.tooltip.0'),
-        Text.translate('grindless.machine.laser_fusion_chamber.tooltip.1'),
-        Text.translate('grindless.machine.laser_fusion_chamber.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.laser_fusion'))
       ])
       .workableCasingModel(CASING_TEXTURE, OVERLAY)
   })
