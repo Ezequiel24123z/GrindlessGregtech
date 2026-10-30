@@ -1,3 +1,4 @@
+// priority: -26174
 // UXV-B1, the Kerr sling (docs/eras/uxv.md "B1. The Kerr sling"). Two parts:
 //
 //   1. The Whipple shield, the jump item of c9: an assembly line row (never crafting) that fits a bumper weave and a RHEA plate on a Whipple shield

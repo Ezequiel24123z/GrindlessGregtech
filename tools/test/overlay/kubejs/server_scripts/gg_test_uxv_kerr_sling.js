@@ -1,4 +1,4 @@
-// priority: -8503
+// priority: -9862
 // UXV-B1 T1: the c8 and c9 jump rows and the two arrival platforms. Band: grindless:cygnus_x1_orbit X 36736-36799, Z 0-63, Y 98-115 (the near ring at X 36752,
 // Y 100, Z 20). The far sides are the platforms the jumps themselves place, in grindless:vela_pulsar_orbit (c8) and grindless:cas_a_remnant (c9), at 64,100,64.
 // Doubt: two tier 12 places in the shipped datapack beside UIV's three, each jump placing its own platform row. Command (one leg per bench run):

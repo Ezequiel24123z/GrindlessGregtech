@@ -27,7 +27,9 @@
     "sirius": { "dimensions": ["grindless:sirius_b_orbit"], "pairTag": "sirius", "name": { "en_us": "Sirius B", "es_es": "Sirio B" } },
     "rx_j1856": { "dimensions": ["grindless:rx_j1856_orbit"], "pairTag": "rx_j1856", "name": { "en_us": "RX J1856", "es_es": "RX J1856" } },
     "psr_j0437": { "dimensions": ["grindless:psr_j0437_orbit"], "pairTag": "psr_j0437", "name": { "en_us": "PSR J0437", "es_es": "PSR J0437" } },
-    "cygnus_x1": { "dimensions": ["grindless:cygnus_x1_orbit"], "pairTag": "cygnus_x1", "name": { "en_us": "Cygnus X-1", "es_es": "Cygnus X-1" } }
+    "cygnus_x1": { "dimensions": ["grindless:cygnus_x1_orbit"], "pairTag": "cygnus_x1", "name": { "en_us": "Cygnus X-1", "es_es": "Cygnus X-1" } },
+    "vela_pulsar": { "dimensions": ["grindless:vela_pulsar_orbit"], "pairTag": "vela_pulsar", "name": { "en_us": "Vela Pulsar", "es_es": "Púlsar de Vela" } },
+    "cas_a": { "dimensions": ["grindless:cas_a_remnant"], "pairTag": "cas_a", "name": { "en_us": "Cassiopeia A", "es_es": "Casiopea A" } }
   },
   "dryOnEarth": ["gcyr:overworld_orbit"]
 }

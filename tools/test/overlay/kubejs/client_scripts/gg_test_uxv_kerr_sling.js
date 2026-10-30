@@ -1,4 +1,4 @@
-// priority: 11601
+// priority: 11550
 // UXV-B1: client half of gg_test_uxv_kerr_sling_sky (derived from client_scripts/gg_test_uv_travel.js, trimmed to the sky). TEST-ONLY overlay: copied
 // over the instance on the test PC, never shipped with the pack. Asleep unless the server test sets 'hold' in the map it shares with this script
 // (global.ggUxvKerrSling: in the client suite both halves run in the same JVM).
