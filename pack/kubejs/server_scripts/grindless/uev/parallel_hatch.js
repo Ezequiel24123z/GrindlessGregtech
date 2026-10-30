@@ -38,8 +38,8 @@
         b.itemInputs(INPUTS)
         b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:neutronium', 288))
         b.itemOutputs(OUTPUT)
-        b.stationResearch(function (r) { return r.researchStack(Item.of(EMITTER)).CWUt(64).EUt(491520) })
-        b.EUt(491520).duration(1200)
+        b.stationResearch(function (r) { return r.researchStack(Item.of(EMITTER)).CWUt(64).EUt(7864320) })
+        b.EUt(7864320).duration(1200)
       }
     } catch (e) {
       console.error(LOG + H.recipeId + ' failed: ' + e)
