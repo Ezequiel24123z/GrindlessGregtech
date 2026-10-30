@@ -128,8 +128,8 @@ test('the strand is a 4 A cable at V[UXV] with no loss; W-184 has a wire form; n
   assert.match(src, /if \(spec\.wire\) material\.cableProperties\(/);
   assert.doesNotMatch(src, /ServerEvents|\.recipes\(|event\.recipes|GTCEuStartupEvents\.registry\('gtceu:machine'|tables\//, 'no recipe, machine or table');
   const mine = run.docs.recipes.recipes.filter((r) => /(^|[\\/])uxv[\\/]foundation\.js$/.test(String(run.recipeFiles.get(r.i))));
-  assert.deepEqual(mine, [], 'F1 adds no recipe');
-  assert.ok(!fs.existsSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'uxv', 'foundation.js')), 'the hull and hatch recipes are B4\'s');
+  // UXV-B4 added the hull and hatch recipes in its own server foundation.js; F1's startup file stays recipe-free
+  assert.ok(mine.length > 0, 'the hull and hatch recipes are B4\'s');
   assert.match(src, /^\/\/ priority:/m, 'the integrator (UXV-F2) stamped the load order');
 });
 

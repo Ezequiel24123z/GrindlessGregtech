@@ -76,7 +76,8 @@ test('the six recipes: Saturn orbit only (the decode step is Earth), one circuit
 test('the decode step takes a free circuit of A9 (4) and the probe loop closes', () => {
   const decodes = recipes.filter((r) => r.t === 'gtceu:telemetry_decoding').map((r) => circuitOf(r)[0]).sort();
   // UIV-B3 adds circuit 5 (j0437_pulse_timed)
-  assert.deepEqual(decodes, [1, 2, 3, 4, 5]);
+  // UXV-B4 adds circuit 6 (vela_glitch_timing)
+  assert.deepEqual(decodes, [1, 2, 3, 4, 5, 6]);
   const d = byId('grindless:telemetry_decoding/titan_lake_sampler');
   assert.match(JSON.stringify(d.j.inputs.item), /titan_probe_recording/);
   assert.match(JSON.stringify(d.j.outputs.item), /lake_sampler/);
