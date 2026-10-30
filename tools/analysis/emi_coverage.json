@@ -97,8 +97,6 @@
     { "id": "grindless:elevator_log", "package": "UXV-B6", "reason": "UXV-B2's elevator log is read by B6's new Matrioshka row (four records to grindless:arm_chart); B6 deletes this entry" },
     { "id": "grindless:cygnus_vlbi_record", "package": "UXV-B6", "reason": "UXV-B2's EHT record is read by B6's new Matrioshka row (four records to grindless:arm_chart); B6 deletes this entry" },
     { "id": "grindless:vela_glitch_record", "package": "UXV-B6", "reason": "UXV-B4's Vela strain record (Ganymede GW detector c3) is read by B6's new Matrioshka row (four records to grindless:arm_chart); B6 deletes this entry" },
-    { "id": "grindless:pasta_core_sample", "package": "UXV-B6", "reason": "UXV-B4's phase sorter c2 makes the inner-core sample; B6's gate c10 keeps it in one of the six slots (uhv/gate.js:90-97); B6 deletes this entry" },
-    { "id": "grindless:uxv_conveyor_module", "package": "UXV-M2", "reason": "UXV-A8's conveyor has no UXV consumer before M2: the stellar fractionation hall's controller (UXV hull + UXV parts) takes it; M2 deletes this entry" },
-    { "id": "grindless:uxv_robot_arm", "package": "UXV-M2", "reason": "UXV-A8's robot arm has no UXV consumer before M2: the stellar fractionation hall's controller (UXV hull + UXV parts) takes it; M2 deletes this entry" }
-  ]
+    { "id": "grindless:pasta_core_sample", "package": "UXV-B6", "reason": "UXV-B4's phase sorter c2 makes the inner-core sample; B6's gate c10 keeps it in one of the six slots (uhv/gate.js:90-97);     B6 deletes this entry" }
+      ]
     }
