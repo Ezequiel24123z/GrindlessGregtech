@@ -79,7 +79,12 @@
     'gtceu:multinucleon_transfer': 'loop_mnt_collider',
     'gtceu:star_lifting': 'loop_stellar_elevator',
     'gtceu:plasma_mass_filtering': 'loop_plasma_mass_filter',
-    'gtceu:stellar_condensation': 'loop_stellar_condensation_tower'
+    'gtceu:stellar_condensation': 'loop_stellar_condensation_tower',
+    'gtceu:pasta_extraction': 'loop_pasta_extractor',
+    'gtceu:pasta_sorting': 'loop_pasta_phase_sorter',
+    'gtceu:pasta_drawing': 'loop_pasta_draw_bench',
+    'gtceu:pasta_lamination': 'loop_pasta_laminator',
+    'gtceu:polar_cap_tapping': 'loop_polar_cap_tap'
   }
 
   StartupEvents.registry('sound_event', function (event) {

@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:pasta_phase_sorter"],
+  "text": ["emi.grindless.info.pasta_phase_sorter.0", "emi.grindless.info.pasta_phase_sorter.1"]
+}
