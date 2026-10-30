@@ -200,7 +200,7 @@ test('controllers read the UIV hull, 2 UIV parts and 2 optical mainframes', () =
   assert.match(srv, /d\.domain\.forEach/);
   assert.match(srv, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
   assert.match(srv, /stationResearch/);
-  assert.match(srv, /name: 'matrioshka_computer', parts: \['gtceu:uiv_field_generator', 'gtceu:uiv_emitter', 'gtceu:uiv_sensor'\], research: 'grindless:matrioshka_node'/);
+  assert.match(srv, /name: 'matrioshka_computer', parts: \['gtceu:uiv_electric_piston', 'gtceu:uiv_robot_arm', 'gtceu:uiv_sensor'\], research: 'grindless:matrioshka_node'/);
   assert.match(srv, /name: 'droplet_radiator_works', parts: \['gtceu:uiv_electric_pump', 'gtceu:uiv_fluid_regulator', 'gtceu:uiv_conveyor_module'\], research: 'grindless:droplet_collector'/);
   for (const [n, st] of [['matrioshka_node', 'grindless:c12_metallised_plate'], ['matrioshka_tpv_shell', 'grindless:tpv_segment'], ['logic_tile_block', 'grindless:aqfp_module'], ['emitter_shell', 'grindless:selective_emitter']]) {
     assert.equal(by('assembly_line', n).station, st, n);
