@@ -1,19 +1,18 @@
 # Gregtech Grindless
 
-Huge GregTech pack for Minecraft 1.20.1 (Forge) on top of GregTech Modern 7.5.3. It brings together the best of the tech packs and GregTech under one rule: **no resource is gathered by hand here**. Every basic resource that the progression asks for can be generated automatically within its era, starting from the Steam Age. Processing is still real GregTech, and difficulty rises with complexity, not with quantity or waiting.
+GregTech progression pack for Minecraft 1.20.1 (Forge) on GregTech Modern 7.5.3. Its rule is simple: **nothing needed for progression is gathered by hand**. Starting in the Steam Age, resources are produced automatically through increasingly complex GregTech processing lines and multiblocks. Difficulty comes from steps, conditions and coordinating industry—not inflated quantities or waiting.
 
-## Status
+## Current status
 
-| Era | Status |
+The latest playable release is **v0.14.0 "UIV"**. It spans the Steam Age through UIV, with the journey extending from Earth and the solar system to neutron stars, pulsars and the black hole Cygnus X-1.
+
+| Progress | Status |
 |---|---|
-| Steam Age | Playable since `v0.1.0`: coke, bronze, steam, steel, our own steam vein drill and steam greenhouse, and the gate to LV. |
-| LV | Playable since `v0.2.0`: LV vein drill and greenhouse, submerged arc furnace, creature simulator, all of AE2 in LV and 150 mods. |
-| MV | Playable since `v0.3.0`: ore plant, biorefinery, MV vein drill and greenhouse, infinite oil (also in the Flatland and the Void) and 207 mods. |
-| HV | Playable since `v0.4.0`: refinery (distills, hydrotreats and cracks in one pass), reformer, HV vein drill with the End veins and HV greenhouse. |
-| EV | Playable since `v0.6.0`: the automatic Moon base, Mars, platinum processing and the gate to IV. |
-| IV | Playable since `v0.7.0`: fission and its fuel cycle, Venus and Mercury, naquadah, iridium and osmium, and the assembly line. |
-| LuV | Playable since `v0.8.0`: space stations, the asteroid belt, Io, Europa and Ganymede, trinium, fusion, living circuits and the wireless network's LuV tier. |
-| What's next | ZPM: the space elevator and the road past Saturn, continuing the journey to the black hole at the center of the galaxy. |
+| Steam Age–UIV | Playable in `v0.14.0`; each era adds automated resource production, processing lines and multiblocks. |
+| UXV | In development for `v0.15.0`: the next stage of the interstellar journey. |
+| OpV and MAX | Planned after UXV; the journey's final project is at Sagittarius A*. |
+
+The UIV release adds three stellar destinations, new UIV industry and wireless power, and opens the gate to UXV. See the [v0.14.0 release notes](docs/releases/v0.14.0.md) for the full list and save-impact details. The [journey guide](docs/journey.md) describes the planned progression through MAX.
 
 ## How to play (Prism Launcher)
 
@@ -29,7 +28,7 @@ Before each launch, the instance updates from the `releases` branch, which only 
 
 Keep using the **same Prism instance**. Once a tested release reaches `releases`, close Minecraft and launch that instance again: packwiz updates the managed pack files, not your `saves` folder. There is no need to import another zip or start another world for each pack release.
 
-**Versioned release zips are different.** An instance imported from `Gregtech-Grindless-v0.7.0.zip`, for example, is pinned to that tag and does not automatically follow later releases. To switch it to the releases channel without moving the world, close Minecraft, open *Edit instance → Settings → Custom commands*, and change the existing pre-launch command to:
+**Versioned release zips are different.** An instance imported from `Gregtech-Grindless-v0.14.0.zip`, for example, is pinned to that tag and does not automatically follow later releases. To switch it to the releases channel without moving the world, close Minecraft, open *Edit instance → Settings → Custom commands*, and change the existing pre-launch command to:
 
 ```
 "$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/releases/pack/pack.toml
@@ -43,12 +42,12 @@ Our releases preserve registered items, blocks, fluids and dimension ids, and an
 
 ### Setting up a fixed version manually
 
-Create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17. Put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) in the instance's `minecraft` folder. Then, in *Edit instance → Settings → Custom commands*, set this as the pre-launch command:
+Create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17. Put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) in the instance's `minecraft` folder. Then, in *Edit instance → Settings → Custom commands*, set this as the pre-launch command to stay on `v0.14.0`:
 
 ```
-"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/v0.7.0/pack/pack.toml
+"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/v0.14.0/pack/pack.toml
 ```
 
 ## For developers
 
-Read [AGENTS.md](AGENTS.md) and [docs/STATUS.md](docs/STATUS.md). Scoped rules are in `.github/instructions/`. Decisions are in [DECISIONS.md](DECISIONS.md), and credits and licenses are in [CREDITS.md](CREDITS.md).
+Read [AGENTS.md](AGENTS.md) and [docs/STATUS.md](docs/STATUS.md) before contributing. Scoped rules are in `.github/instructions/`. The [testing guide](docs/testing/README.md) explains the test bench; design and integration references are in `docs/`. Decisions are in [DECISIONS.md](DECISIONS.md), and credits and licenses are in [CREDITS.md](CREDITS.md).
