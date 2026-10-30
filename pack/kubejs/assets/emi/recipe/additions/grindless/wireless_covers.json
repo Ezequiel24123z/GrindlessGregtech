@@ -24,7 +24,9 @@
     "item:grindless:uiv_wireless_energy_cover",
     "item:grindless:uiv_wireless_dynamo_cover",
     "item:grindless:uxv_wireless_energy_cover",
-    "item:grindless:uxv_wireless_dynamo_cover"
+    "item:grindless:uxv_wireless_dynamo_cover",
+    "item:grindless:opv_wireless_energy_cover",
+    "item:grindless:opv_wireless_dynamo_cover"
   ],
   "text": [
     "emi.grindless.info.wireless_covers.0",
