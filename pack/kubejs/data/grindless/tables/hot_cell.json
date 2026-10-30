@@ -267,6 +267,28 @@
       "fluidsIn": [],
       "itemsOut": [{ "id": "grindless:filled_waste_canister", "count": 1 }],
       "fluidsOut": []
+    },
+    {
+      "_why": "UXV-B5: titanium-44 sealed in a tungsten capsule, the Ti-44 core of the annihilation laser works (circuit 16: 13-15 are taken)",
+      "name": "ti44_core_capsule",
+      "circuit": 16,
+      "eut": 7680,
+      "duration": 400,
+      "itemsIn": [{ "id": "gtceu:titanium_44_dust", "count": 1 }, { "id": "gtceu:tungsten_plate", "count": 1 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:ti44_core", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "_why": "UXV-B5: a spent Ti-44 core has decayed to Ca-44 (stock calcium dust) and its tungsten shell goes back as small dust",
+      "name": "ti44_core_decay",
+      "circuit": 17,
+      "eut": 7680,
+      "duration": 400,
+      "itemsIn": [{ "id": "grindless:spent_ti44_core", "count": 1 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "gtceu:calcium_dust", "count": 1 }, { "id": "gtceu:small_tungsten_dust", "count": 2 }],
+      "fluidsOut": []
     }
   ]
 }

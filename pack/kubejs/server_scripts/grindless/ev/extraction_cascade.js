@@ -246,6 +246,15 @@
       itemsOut: [{ id: 'gtceu:lead_dust', count: 2 }, { id: 'gtceu:boron_trioxide_dust', count: 1 }],
       fluidsOut: [{ id: 'minecraft:water', amount: 2000 }],
       eut: 1920, duration: 100
+    },
+    // UXV-B5: Cassiopeia A's ejecta dust, leached in HCl under kerosene: the Ti fraction (calutron c14) and the Ca+Si and Fe+S residues
+    {
+      name: 'ejecta_knot_titanium', mode: 'uxv', circuit: 22,
+      itemsIn: [{ id: 'grindless:ejecta_knot_dust', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 3000 }, { id: 'gtceu:kerosene', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:ejecta_ti_fraction_dust', count: 1 }, { id: 'gtceu:wollastonite_dust', count: 1 }, { id: 'gtceu:pyrite_dust', count: 1 }],
+      fluidsOut: [{ id: 'gtceu:kerosene', amount: 950 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 3000 }],
+      eut: 1920, duration: 100
     }
   ]
 
