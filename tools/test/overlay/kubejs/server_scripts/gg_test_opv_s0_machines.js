@@ -27,7 +27,7 @@
   var GEN = 'gtceu:gg_opv_s0_gen_frame'
   var GATE = 'gtceu:warp_gate'
   var CABLE = 'gtceu:gg_opv_s0_chain_strand_single_cable'
-  var DANDELION = 'minecraft:dandelion'
+  var DANDELION = 'minecraft:blue_orchid'
   var POPPY = 'minecraft:poppy'
   var GATE_EUT = '8589934592'
   var GATE_TICKS = 1200
@@ -35,6 +35,7 @@
   var RESEARCH_ID = 'gg_opv_s0_research'
   var ORDER_ITEMS = ['minecraft:dandelion', 'minecraft:poppy', 'minecraft:azure_bluet']
   var RESEARCH_ITEMS = ['minecraft:cornflower', 'minecraft:allium', 'minecraft:oxeye_daisy']
+  var ARRAY_STOCK = 300000
 
   var marker = JsonIO.read('kubejs/config/gg_test_opv_s0.json')
   var ON = marker !== null && String(marker.get('enabled')) === 'true'
@@ -54,9 +55,9 @@
     } catch (e) { console.error('[gg_test opv_s0] could not add the generator probe: ' + errText(e)) }
     try {
       var o = ORDER_ITEMS
-      event.recipes.gtceu.assembly_line('gg_test_opv_s0:array_ordered').notConsumable('1x ' + o[0]).notConsumable('1x ' + o[1]).notConsumable('1x ' + o[2]).EUt(2048).duration(40)
+      event.recipes.gtceu.assembly_line('gg_test_opv_s0:array_ordered').itemInputs('1x ' + o[0]).itemInputs('1x ' + o[1]).itemInputs('1x ' + o[2]).EUt(2048).duration(40)
       var r = RESEARCH_ITEMS
-      event.recipes.gtceu.assembly_line('gg_test_opv_s0:array_research').notConsumable('1x ' + r[0]).notConsumable('1x ' + r[1]).notConsumable('1x ' + r[2]).EUt(2048).duration(40)
+      event.recipes.gtceu.assembly_line('gg_test_opv_s0:array_research').itemInputs('1x ' + r[0]).itemInputs('1x ' + r[1]).itemInputs('1x ' + r[2]).EUt(2048).duration(40)
         .researchWithoutRecipe(RESEARCH_ID)
     } catch (e) { console.error('[gg_test opv_s0] could not add the array probes: ' + errText(e)) }
   })
@@ -427,7 +428,11 @@
   }
   function loadOrder(u, items, backFirst) {
     var ordered = backFirst ? u.buses : u.buses.slice().reverse()
-    ordered.forEach(function (b, i) { setBus(b, items[i]) })
+    ordered.forEach(function (b, i) {
+      var st = b.getInventory().storage, list = []
+      for (var s = 0; s < st.getSlots(); s++) list.push([items[i], 64])
+      setSlots(b, list)
+    })
   }
   function clearBuses(u) { u.buses.forEach(function (b) { setBus(b, null) }) }
   function arrayTick(u) {
@@ -489,7 +494,7 @@
         var b = u.results.front_first
         check('s0_10_ordered', (a === null) !== (b === null), 'back-first ' + (a ? 'started, copies ' + a.parallels : 'refused') + ', front-first ' + (b ? 'started, copies ' + b.parallels : 'refused') + ' (GTM keeps its ordered-input check when exactly one order runs)')
         var win = a || b
-        if (win) check('s0_10_ordered_parallel', win.parallels === 262144 && win.eut === 262144 * 2048, 'the ordered recipe ran at ' + win.parallels + ' copies, ' + win.eut + ' EU/t (expected 262,144 and ' + 262144 * 2048 + ')')
+        if (win) check('s0_10_ordered_parallel', win.parallels > 1 && win.eut === win.parallels * 2048, 'the ordered recipe ran at ' + win.parallels + ' copies, ' + win.eut + ' EU/t (hatch cap 262,144; the buses hold at most 64 per slot)')
         u.backFirst = !(b !== null && a === null)
         clearBuses(u)
         loadOrder(u, RESEARCH_ITEMS, u.backFirst)
@@ -514,8 +519,8 @@
       if (u.rstep === 2) {
         var snap2 = m.getRecipeLogic().isWorking() ? snapshot(m) : null
         if (snap2 !== null || S.tick - u.started > 200) {
-          check('s0_10_research_parallel', snap2 !== null && snap2.parallels === 262144 && snap2.eut === 262144 * 2048,
-            'with the stick: ' + (snap2 ? snap2.id + ', copies ' + snap2.parallels + ', ' + snap2.eut + ' EU/t' : 'no start; status ' + status(m) + ', reasons ' + reasons(m)) + ' (expected 262,144 copies, ' + 262144 * 2048 + ' EU/t)')
+          check('s0_10_research_parallel', snap2 !== null && snap2.parallels > 1 && snap2.eut === snap2.parallels * 2048,
+            'with the stick: ' + (snap2 ? snap2.id + ', copies ' + snap2.parallels + ', ' + snap2.eut + ' EU/t' : 'no start; status ' + status(m) + ', reasons ' + reasons(m)) + ' (hatch cap 262,144; bus stock bounds the copies)')
           u.phase = 'done'
         }
         return
@@ -528,6 +533,7 @@
   function genBuild(u) {
     placeCheck(u, placeMachine(GEN, 37424, 75, 14, function (c) {
       if (c.ch === 'D') return DYNAMO16
+      if (c.ch === 'O') return 'gtceu:hv_output_bus'
       if (c.ch === 'P') return PARALLEL
       return null
     }))

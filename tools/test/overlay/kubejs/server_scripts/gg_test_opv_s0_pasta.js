@@ -215,7 +215,7 @@
     var missing = []
     TYPES.forEach(function (t) {
       ;['sgr_probe', 'vela_probe'].forEach(function (k) {
-        if (!rm.byKey(new RL('gg_test_opv_s0:' + t + '/' + k)).isPresent()) missing.push(t + '/' + k)
+        if (!rm.byKey(new RL('gg_test_opv_s0:' + t + '/' + t + '/' + k)).isPresent()) missing.push(t + '/' + k)
       })
     })
     check('lookup', missing.length === 0, 'throwaway recipes missing: ' + (missing.length ? missing.join(', ') : 'none'))
