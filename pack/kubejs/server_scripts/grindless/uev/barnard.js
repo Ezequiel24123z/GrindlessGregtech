@@ -179,15 +179,17 @@
     var O = 'gtnn:optical_computer'
     var PISTON = 'gtceu:uev_electric_piston'
     var PUMP = 'gtceu:uev_electric_pump'
-    var C = '4x #gtceu:circuits/uhv'
+    var SENSOR = 'gtceu:uev_sensor'
+    var REG = 'gtceu:uev_fluid_regulator'
+    var C = '4x #gtceu:circuits/uev'
     var M = BA.machines || {}
     // QR-R6: assembly line with station research, the era fluid and domain inputs; the refinery follows the drill
     // the drill opens Barnard core rock (rhenium, iron pentacarbonyl), so it takes the UHV coring head, not rhenium
     var defs = [
       { key: 'drill', research: 'grindless:ffkm_seal', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + O, '2x ' + PISTON, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust', 'grindless:cold_trap_coring_head'] },
+        ins: [HULL, '2x ' + O, '3x ' + PISTON, '3x ' + PUMP, '2x ' + SENSOR, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust', 'grindless:cold_trap_coring_head'] },
       { key: 'refinery', research: 'gtceu:barnard_core_drill', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + O, '2x ' + PUMP, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] }
+        ins: [HULL, '2x ' + O, '3x ' + PUMP, '3x ' + REG, '2x ' + PISTON, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] }
     ]
     BA.controllerRecipes = []
     defs.forEach(function (d) {
@@ -206,8 +208,8 @@
       b.itemInputs(d.ins)
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of(d.era, 576))
       b.itemOutputs(m.machine)
-      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
-      b.EUt(491520).duration(2400)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
+      b.EUt(7864320).duration(2400)
       BA.controllerRecipes.push('grindless:assembly_line/' + m.name)
     })
   }

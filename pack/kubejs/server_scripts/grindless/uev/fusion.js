@@ -66,16 +66,16 @@
     console.info(LOG + 'fusion recipes added: ' + (UF.recipes.length - UF.skipped.length))
   }
 
-  // docs/eras/uev.md "Voltages and controllers": the polariser (14) is an early machine (UHV hull, two UV parts, two UHV circuits);
+  // docs/eras/uev.md "Voltages and controllers": the polariser (14) is an early machine (UHV hull, two UV parts, two UHV circuits: it comes before the UEV hull and parts);
   // the ring (15) comes after the UEV hull (UEV hull, two UEV parts of UEV-A6, two optical computers from the photonic hall)
   function addControllers(event) {
     // QR-R6: both are assembly lines with station research, an era fluid and domain inputs of the Wf/W and SiC/SiC first-wall line
-    var C = '4x #gtceu:circuits/uhv'
+    var C = '4x #gtceu:circuits/uev'
     var defs = [
-      { machine: table.polariser.machine, name: 'helium3_polariser', research: 'grindless:laser_1083nm', era: 'gtceu:neutronium',
-        ins: ['gtceu:uhv_machine_hull', '2x gtceu:uv_emitter', C, 'grindless:laser_1083nm', '2x grindless:wf_w_tile', 'grindless:sic_sic_plate'] },
-      { machine: table.ring.machine, name: 'uev_fusion_reactor', research: table.polariser.machine, era: 'gtceu:tritanium',
-        ins: ['gtceu:uev_machine_hull', 'gtceu:uev_emitter', 'gtceu:uev_sensor', '2x gtnn:optical_computer', C, 'grindless:uev_fusion_casing', 'grindless:hftacn_coil_block', 'grindless:wf_w_tile'] }
+      { machine: table.polariser.machine, name: 'helium3_polariser', research: 'grindless:laser_1083nm', era: 'gtceu:neutronium', eut: 491520,
+        ins: ['gtceu:uhv_machine_hull', '2x gtceu:uv_emitter', '4x #gtceu:circuits/uhv', 'grindless:laser_1083nm', '2x grindless:wf_w_tile', 'grindless:sic_sic_plate'] },
+      { machine: table.ring.machine, name: 'uev_fusion_reactor', research: table.polariser.machine, era: 'gtceu:tritanium', eut: 7864320,
+        ins: ['gtceu:uev_machine_hull', '3x gtceu:uev_emitter', '3x gtceu:uev_sensor', '3x gtceu:uev_field_generator', '2x gtnn:optical_computer', C, 'grindless:uev_fusion_casing', 'grindless:hftacn_coil_block', 'grindless:wf_w_tile'] }
     ]
     defs.forEach(function (d) {
       var ids = d.ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([d.machine, d.research])
@@ -88,8 +88,8 @@
       b.itemInputs(d.ins)
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of(d.era, 576))
       b.itemOutputs(d.machine)
-      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
-      b.EUt(491520).duration(2400)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(d.eut) })
+      b.EUt(d.eut).duration(2400)
       UF.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
