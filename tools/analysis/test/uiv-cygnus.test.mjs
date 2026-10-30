@@ -92,7 +92,7 @@ test('every item has a texture, a name and two tooltips in en_us and es_es; ever
     assert.ok(lang.includes(`['${n}', '`), n);
   }
   for (const m of ['ergosphere_probe_bay', 'penrose_engine']) {
-    for (const i of [0, 1, 2]) assert.ok(lang.includes(`grindless.machine.${m}.tooltip.${i}'`), m + i);
+    assert.ok(lang.includes(`grindless.machine.${m}.tooltip.0'`), m);
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', m + '.json')), m);
     for (const f of ['overlay_front', 'overlay_front_active', 'overlay_front_active_emissive']) {
       assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'block', 'multiblock', m, f + '.png')), m + f);

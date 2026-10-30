@@ -128,7 +128,7 @@ test('the controller recipe: hull, two pistons, two mainframes, UIV circuits, 3 
 test('names, tooltips and the info page exist in both languages', () => {
   const src = fs.readFileSync(path.join(KJS, 'client_scripts', 'grindless', 'uiv_compression_hall_lang.js'), 'utf8');
   const id = 'neutronium_compression_hall';
-  for (const key of [`block.gtceu.${id}`, ...[0, 1, 2, 3].map((n) => `grindless.machine.${id}.tooltip.${n}`), `emi.grindless.info.${id}.0`]) {
+  for (const key of [`block.gtceu.${id}`, ...[0, 1].map((n) => `grindless.machine.${id}.tooltip.${n}`), `emi.grindless.info.${id}.0`]) {
     assert.equal(src.split(`'${key}'`).length - 1, 2, key);
   }
   const emi = JSON.parse(fs.readFileSync(path.join(KJS, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'uiv_compression_hall_info.json'), 'utf8'));

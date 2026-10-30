@@ -163,8 +163,9 @@
       .pattern(function (def) { return Pat.build(def, m.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
-        Text.translate('grindless.machine.' + m.name + '.tooltip.1'),
-        Text.translate('grindless.machine.' + m.name + '.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip'),
+        Text.translate('grindless.machine.polarised_proton_source.tooltip.1')
       ])
       .workableCasingModel(CRYO_TEXTURE, 'grindless:block/multiblock/' + m.name)
 
@@ -185,8 +186,8 @@
       .pattern(function (def) { return Pat.build(def, r.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.uiv_fusion_reactor.tooltip.0'),
-        Text.translate('grindless.machine.uiv_fusion_reactor.tooltip.1'),
-        Text.translate('grindless.machine.uiv_fusion_reactor.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + r.type)),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/uiv_fusion_reactor')
   })
