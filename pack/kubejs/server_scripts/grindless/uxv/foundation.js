@@ -1,4 +1,4 @@
-// priority: -26164
+// priority: -26147
 // UXV foundation recipes (package UXV-B4, docs/eras/uxv.md "Voltages and controllers"): the UXV machine hull and the four UXV energy hatches, each an
 // assembly line behind station research. gtceu:uxv_machine_casing is UIV-B5's block (its recipe is not made here). The hull is made of Vela's
 // lasagna plate and the voltage coil of line 48; the hatches carry pasta wire. All run at 31,457,280 EU/t, like the parallel hatch.

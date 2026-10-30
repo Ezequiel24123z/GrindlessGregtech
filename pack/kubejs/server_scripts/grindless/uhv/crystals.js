@@ -1,4 +1,4 @@
-// priority: -23324
+// priority: -23391
 // -----------------------------------------------------------------------------------------------
 // Recipes of UHV's nuclear clock lab and crystal growth furnace (machines and recipe types: startup_scripts/grindless/uhv/crystals.js;
 // docs/eras/uhv.md, machines 3 and 4, lines 3, 7 and 8; package UHV-A2), generated at every server load from

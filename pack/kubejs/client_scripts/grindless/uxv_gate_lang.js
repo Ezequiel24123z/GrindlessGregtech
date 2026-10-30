@@ -1,3 +1,4 @@
+// priority: 1571
 // Gregtech Grindless - names of UXV-B6, the gate to OpV (server_scripts/grindless/uxv/gate.js, data/grindless/tables/{gate,matrioshka}.json):
 //
 //   gtceu.recipe.grindless_warp_gate.hold_galactic_bulge        EMI line of the c10 warp gate row (2^31 EU/t for 60 s, the bulge chart)

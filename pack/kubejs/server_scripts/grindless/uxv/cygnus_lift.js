@@ -1,4 +1,4 @@
-// priority: -26154
+// priority: -26136
 // -----------------------------------------------------------------------------------------------
 // Recipes of UXV's stellar elevator, plasma mass filter and stellar condensation tower (machines and recipe types:
 // startup_scripts/grindless/uxv/cygnus_lift.js; docs/eras/uxv.md, machines 10-12, process line 26; package UXV-B2), generated at every
