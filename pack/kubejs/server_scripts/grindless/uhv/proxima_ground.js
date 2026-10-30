@@ -14,7 +14,7 @@
 //   gtceu:chemical_reactor / mixer / centrifuge / assembler   GTM rows (no circuit): the tailings' calcium, urea (Bosch-Meiser),
 //                          the ammonium chloride's fertiliser, the ice core's steam melt (Proxima b), the Proxima base casing and the
 //                          coring head.
-//   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, assembly lines grindless:assembly_line/<machine>.
+//   crafting               the controllers: UHV hull + 3 UHV component families (3 of each) + 2 UHV circuits, assembly lines grindless:assembly_line/<machine>.
 //                          Each is an assembly line: station research, tritanium + soldering alloy + lubricant, 3 domain items of its own line.
 //   hosted rows (older machines' types, id grindless:<type>/<idPrefix><name>; uhv/crystals.js's precedent):
 //     gtceu:pgm_refining      EV's platinum plant, circuit 6: the PGM liquor electrowon (the plant's slots and its keep flag,
@@ -215,12 +215,15 @@
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
     var C = '#gtceu:circuits/uhv'
-    var MOTOR = 'gtceu:uv_electric_motor'
-    var PUMP = 'gtceu:uv_electric_pump'
+    var MOTOR = 'gtceu:uhv_electric_motor'
+    var PUMP = 'gtceu:uhv_electric_pump'
+    var PISTON = 'gtceu:uhv_electric_piston'
+    var CONVEYOR = 'gtceu:uhv_conveyor_module'
+    var REGULATOR = 'gtceu:uhv_fluid_regulator'
     var M = PG.machines || {}
     var defs = [
-      { key: 'drill', parts: [HULL, MOTOR], research: 'grindless:cold_trap_coring_head', domain: ['2x grindless:cold_trap_coring_head', '2x grindless:mu_metal_shield', '2x grindless:thruster_pod'] },
-      { key: 'heap', parts: [HULL, PUMP], research: 'grindless:bnnt_yarn', domain: ['4x grindless:sporosarcina_culture', '2x grindless:chromobacterium_culture', '2x grindless:propellant_tank'] }
+      { key: 'drill', parts: [HULL, MOTOR, PISTON, CONVEYOR], research: 'grindless:cold_trap_coring_head', domain: ['2x grindless:cold_trap_coring_head', '2x grindless:mu_metal_shield', '2x grindless:thruster_pod'] },
+      { key: 'heap', parts: [HULL, PUMP, CONVEYOR, REGULATOR], research: 'grindless:bnnt_yarn', domain: ['4x grindless:sporosarcina_culture', '2x grindless:chromobacterium_culture', '2x grindless:propellant_tank'] }
     ]
     PG.controllerRecipes = []
     defs.forEach(function (d) {
@@ -235,7 +238,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + m.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))

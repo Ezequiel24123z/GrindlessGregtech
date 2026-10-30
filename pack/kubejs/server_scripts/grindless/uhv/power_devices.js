@@ -188,10 +188,13 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var ARM = 'gtceu:uv_robot_arm'
+    var ARM = 'gtceu:uhv_robot_arm'
+    var CONVEYOR = 'gtceu:uhv_conveyor_module'
+    var EMITTER = 'gtceu:uhv_emitter'
+    var SENSOR = 'gtceu:uhv_sensor'
     var defs = [
-      { machine: PD.machines.fab.machine, parts: [HULL, ARM], research: 'grindless:mu_metal_shield', domain: ['4x grindless:gallium_arsenide_wafer', '2x grindless:silicon_nitride_film', '2x grindless:srf_cavity'], name: 'sic_device_fab' },
-      { machine: PD.machines.arrays.machine, parts: [HULL, ARM], research: 'grindless:gallium_arsenide_wafer', domain: ['4x grindless:silicon_nitride_film', '2x grindless:fibre_bragg_grating', '2x grindless:mu_metal_shield'], name: 'solar_array_fab' }
+      { machine: PD.machines.fab.machine, parts: [HULL, ARM, CONVEYOR, EMITTER], research: 'grindless:mu_metal_shield', domain: ['4x grindless:gallium_arsenide_wafer', '2x grindless:silicon_nitride_film', '2x grindless:srf_cavity'], name: 'sic_device_fab' },
+      { machine: PD.machines.arrays.machine, parts: [HULL, ARM, CONVEYOR, SENSOR], research: 'grindless:gallium_arsenide_wafer', domain: ['4x grindless:silicon_nitride_film', '2x grindless:fibre_bragg_grating', '2x grindless:mu_metal_shield'], name: 'solar_array_fab' }
     ]
     PD.controllerRecipes = []
     defs.forEach(function (d) {
@@ -201,7 +204,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))

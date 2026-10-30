@@ -77,7 +77,7 @@
   W.skipped = []
   W.clashes = []
   W.crafting = { array: 'grindless:assembly_line/organoid_array' }
-  W.craftingParts = ['gtceu:uhv_machine_hull', 'gtceu:uv_sensor', 'grindless:srf_cavity', 'grindless:cladosporium_culture', 'grindless:chromobacterium_culture', 'grindless:silicon_nitride_film']
+  W.craftingParts = ['gtceu:uhv_machine_hull', 'gtceu:uhv_sensor', 'gtceu:uhv_electric_pump', 'gtceu:uhv_fluid_regulator', 'grindless:srf_cavity', 'grindless:cladosporium_culture', 'grindless:chromobacterium_culture', 'grindless:silicon_nitride_film']
 
   function keysOf(r) {
     var keys = {}
@@ -146,7 +146,9 @@
     }
     var b = event.recipes.gtceu.assembly_line('grindless:organoid_array')
     b.itemInputs('gtceu:uhv_machine_hull')
-    b.itemInputs('2x gtceu:uv_sensor')
+    b.itemInputs('3x gtceu:uhv_sensor')
+    b.itemInputs('3x gtceu:uhv_electric_pump')
+    b.itemInputs('3x gtceu:uhv_fluid_regulator')
     b.itemInputs('4x #gtceu:circuits/uhv')
     b.itemInputs('4x grindless:cladosporium_culture')
     b.itemInputs('2x grindless:chromobacterium_culture')

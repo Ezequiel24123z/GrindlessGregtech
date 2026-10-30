@@ -174,12 +174,14 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var ARM = 'gtceu:uv_robot_arm'
-    var PUMP = 'gtceu:uv_electric_pump'
-    var SENSOR = 'gtceu:uv_sensor'
+    var ARM = 'gtceu:uhv_robot_arm'
+    var PUMP = 'gtceu:uhv_electric_pump'
+    var SENSOR = 'gtceu:uhv_sensor'
+    var REGULATOR = 'gtceu:uhv_fluid_regulator'
+    var CONVEYOR = 'gtceu:uhv_conveyor_module'
     var defs = [
-      { machine: BV.machines.water.machine, parts: [HULL, PUMP, SENSOR], research: 'grindless:cvd_diamond_plate', domain: ['4x grindless:fused_silica_tube', '2x grindless:silica_aerogel', '2x grindless:hpge_crystal'], name: 'ultrapure_water_plant' },
-      { machine: BV.machines.fab.machine, parts: [HULL, ARM, SENSOR], research: 'grindless:sapphire_wafer', domain: ['4x grindless:gallium_arsenide_wafer', '2x grindless:silicon_nitride_film', '2x grindless:cvd_diamond_plate'], name: 'betavoltaic_fab' }
+      { machine: BV.machines.water.machine, parts: [HULL, PUMP, REGULATOR, SENSOR], research: 'grindless:cvd_diamond_plate', domain: ['4x grindless:fused_silica_tube', '2x grindless:silica_aerogel', '2x grindless:hpge_crystal'], name: 'ultrapure_water_plant' },
+      { machine: BV.machines.fab.machine, parts: [HULL, ARM, CONVEYOR, SENSOR], research: 'grindless:sapphire_wafer', domain: ['4x grindless:gallium_arsenide_wafer', '2x grindless:silicon_nitride_film', '2x grindless:cvd_diamond_plate'], name: 'betavoltaic_fab' }
     ]
     BV.controllerRecipes = []
     defs.forEach(function (d) {
@@ -189,7 +191,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))

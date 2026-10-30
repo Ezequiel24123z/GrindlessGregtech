@@ -15,7 +15,7 @@
 //                             proxima_entangled_singularity.
 //   gtceu:assembly_line       the UEV machine casing (GTM registers it without a recipe), after the station research of the chart.
 //   gtceu:assembler           the ring's gate casing (F1's block): neutronium plates and frame, MgB2 wire, circuit 6.
-//   crafting                  the two controllers: UHV hull + 2 UV parts + UHV circuits + 3 domain items, assembly lines grindless:assembly_line/<machine>.
+//   crafting                  the two controllers: UHV hull + 3 UHV component families (3 of each) + UHV circuits + 3 domain items, assembly lines grindless:assembly_line/<machine>.
 //   transit (tick)            while a gate's c2 run lasts and the other end's c2 run lasts too, a player standing inside the ring is
 //                             teleported to the other ring's centre (player.teleportTo, server side: spike S0-7). One trip per
 //                             stay: the player is not carried back until they have left the ring they arrived in.
@@ -176,12 +176,14 @@
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
     var C = '#gtceu:circuits/uhv'
-    var FIELD = 'gtceu:uv_field_generator'
-    var SENSOR = 'gtceu:uv_sensor'
+    var FIELD = 'gtceu:uhv_field_generator'
+    var SENSOR = 'gtceu:uhv_sensor'
+    var EMITTER = 'gtceu:uhv_emitter'
+    var MOTOR = 'gtceu:uhv_electric_motor'
     var M = WG.machines || {}
     var defs = [
-      { key: 'gate', parts: [HULL, FIELD], research: 'grindless:warp_gate_casing', domain: ['4x grindless:empty_antiproton_cartridge', '2x grindless:srf_cryomodule', '2x grindless:uv_electromagnet'] },
-      { key: 'astrometer', parts: [HULL, SENSOR], research: 'grindless:hpge_crystal', domain: ['4x grindless:sapphire_wafer', '2x grindless:fused_silica_tube', '2x grindless:gallium_arsenide_wafer'] }
+      { key: 'gate', parts: [HULL, FIELD, EMITTER, MOTOR], research: 'grindless:warp_gate_casing', domain: ['4x grindless:empty_antiproton_cartridge', '2x grindless:srf_cryomodule', '2x grindless:uv_electromagnet'] },
+      { key: 'astrometer', parts: [HULL, SENSOR, EMITTER, FIELD], research: 'grindless:hpge_crystal', domain: ['4x grindless:sapphire_wafer', '2x grindless:fused_silica_tube', '2x grindless:gallium_arsenide_wafer'] }
     ]
     WG.controllerRecipes = []
     defs.forEach(function (d) {
@@ -196,7 +198,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + m.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
@@ -253,8 +255,8 @@
 
   // GTM registers the UEV casing without a recipe; ours stands on the station research of the chart (UV's UHV hatch pattern)
   function addCasing(event) {
-    var inputs = ['2x gtceu:uhv_machine_casing', '2x gtceu:uv_field_generator', '4x grindless:thin_film_ln_modulator', '2x #gtceu:circuits/uhv']
-    var missing = [CASING, CHART, 'gtceu:uhv_machine_casing', 'gtceu:uv_field_generator', 'grindless:thin_film_ln_modulator']
+    var inputs = ['2x gtceu:uhv_machine_casing', '2x gtceu:uhv_field_generator', '4x grindless:thin_film_ln_modulator', '2x #gtceu:circuits/uhv']
+    var missing = [CASING, CHART, 'gtceu:uhv_machine_casing', 'gtceu:uhv_field_generator', 'grindless:thin_film_ln_modulator']
       .filter(function (x) { return !Item.exists(x) })
     if (!Fluid.exists('gtceu:soldering_alloy')) missing.push('gtceu:soldering_alloy')
     if (missing.length > 0) throw new Error('unknown: ' + missing.join(', '))
@@ -276,8 +278,8 @@
     if (missing.length > 0) throw new Error('unknown: ' + missing.join(', '))
     var b = event.recipes.gtceu.assembler('grindless:warp_gate_casing')
     inputs.forEach(function (s) { b.itemInputs(s) })
-    b.inputFluids(Fluid.of('gtceu:lubricant', 250)).circuit(6).itemOutputs('2x grindless:warp_gate_casing').EUt(VA_UV).duration(200)
-    WG.ringCasing = { id: 'grindless:assembler/warp_gate_casing', items: inputs, output: '2x grindless:warp_gate_casing', eut: VA_UV,
+    b.inputFluids(Fluid.of('gtceu:lubricant', 250)).circuit(6).itemOutputs('2x grindless:warp_gate_casing').EUt(VA_UHV).duration(200)
+    WG.ringCasing = { id: 'grindless:assembler/warp_gate_casing', items: inputs, output: '2x grindless:warp_gate_casing', eut: VA_UHV,
       duration: 200 }
   }
 
