@@ -39,6 +39,15 @@
             { "id": "gtceu:tungsten_steel_plate", "count": 2 }
           ],
           "itemsOut": [ { "id": "grindless:sled_hull", "count": 1 } ]
+        },
+        {
+          "name": "relay_seed", "circuit": 5, "eut": 7864320, "duration": 600, "site": true,
+          "_why": "UXV-B1 (docs/eras/uxv.md, the Kerr sling): a relay seed on a tungsten steel block as ballast is slung round the hole and leaves Cygnus X-1 already at speed: the launched seed the c8 and c9 jumps need from here. The Moon's laser launcher stays the way to the first three places.",
+          "itemsIn": [
+            { "id": "grindless:relay_seed", "count": 1 },
+            { "id": "gtceu:tungsten_steel_block", "count": 1 }
+          ],
+          "itemsOut": [ { "id": "grindless:launched_relay_seed", "count": 1 } ]
         }
       ]
     },

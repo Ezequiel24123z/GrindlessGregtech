@@ -68,6 +68,28 @@
             { "id": "gtnn:optical_mainframe", "count": 4 }
           ],
           "itemsOut": []
+        },
+        {
+          "_why": "UXV-B1: c8 jump to the Vela Pulsar from Cygnus X-1; the launched seed and the FRC cartridge (B3's) are both spent, 16 A x V[UIV] for 60 s",
+          "name": "hold_vela_pulsar",
+          "circuit": 8, "eut": 536870912, "duration": 1200, "site": "cygnus_x1_orbit",
+          "itemsIn": [
+            { "id": "grindless:launched_relay_seed", "count": 1 },
+            { "id": "grindless:frc_cartridge", "count": 1 }
+          ],
+          "kept": [],
+          "itemsOut": []
+        },
+        {
+          "_why": "UXV-B1: c9 jump to Cassiopeia A from Cygnus X-1; the launched seed and the Whipple shield are both spent, 16 A x V[UIV] for 60 s",
+          "name": "hold_cas_a",
+          "circuit": 9, "eut": 536870912, "duration": 1200, "site": "cygnus_x1_orbit",
+          "itemsIn": [
+            { "id": "grindless:launched_relay_seed", "count": 1 },
+            { "id": "grindless:cnt_whipple_shield", "count": 1 }
+          ],
+          "kept": [],
+          "itemsOut": []
         }
       ]
     },
