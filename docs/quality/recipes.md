@@ -157,6 +157,8 @@ Fixed, QR-R6: the uev table rows left the baseline (the rows above were still pe
 
 ### uiv
 
+TP-R-uiv (partly done): 58 of the 86 T-* findings (26 of 35 recipes) left the baseline; controllers take UIV hull + 3 UIV families x3 + 4 UIV circuits at VA[UIV]. `radiator_module` moved to `grindless:assembly_line/radiator_module` (one output: the tin overflow is gone). Kept because a UIV circuit or component would be a cycle (the mainframe needs them, or they need the hull and components): hull, beuv scanner, stm cell, femtosecond writer, tfln fab, spectral hole burner, millikelvin works (all T-*), levitation melter and ramp compression pulser (EU/t raised only).
+
 QR-R7: the 20 controllers, `uiv_parallel_hatch`, the 4 energy hatches and `uiv_machine_hull` are assembly lines (`grindless:assembly_line/<name>`) and left the baseline; the 4 matrioshka parts are assembly lines. The rows below stay in the baseline: each needs an own-line intermediate that does not exist yet. UIV own-line intermediate pending (UIV build, v0.14.0).
 
 | Output | Class | Now | Missing | File:line |

@@ -95,7 +95,7 @@ test('registration: compressor and implosion_compressor on one machine, three mo
   assert.deepEqual(errors, []);
 });
 
-test('the controller recipe: hull, two pistons, two mainframes, UIV circuits, 3 domain inputs; no pellet, no GTM neutronium', () => {
+test('the controller recipe: hull, three UIV part families x3, two mainframes, UIV circuits, 3 domain inputs; no pellet, no GTM neutronium', () => {
   const recs = [];
   const fluids = [];
   const Gs = {};
@@ -118,7 +118,7 @@ test('the controller recipe: hull, two pistons, two mainframes, UIV circuits, 3 
   assert.equal(recs.length, 1);
   assert.equal(recs[0].id, 'grindless:neutronium_compression_hall');
   assert.deepEqual(plain(recs[0].outs), ['gtceu:neutronium_compression_hall']);
-  assert.deepEqual(plain(recs[0].inputs), ['gtceu:uiv_machine_hull', '2x gtceu:uiv_electric_piston', '2x gtnn:optical_mainframe', '4x #gtceu:circuits/uiv',
+  assert.deepEqual(plain(recs[0].inputs), ['gtceu:uiv_machine_hull', '3x gtceu:uiv_electric_piston', '3x gtceu:uiv_field_generator', '3x gtceu:uiv_electric_motor', '2x gtnn:optical_mainframe', '4x #gtceu:circuits/uiv',
     '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank', '2x grindless:cage_part']);
   assert.ok(!JSON.stringify(recs[0].inputs).includes('neutronium_pellet'));
   assert.ok(!fluids.some((f) => f.startsWith('gtceu:neutronium ')));
