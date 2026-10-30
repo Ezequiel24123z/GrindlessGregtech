@@ -82,6 +82,22 @@
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:mh_winding", "count": 1 } ],
       "eut": 7864320, "duration": 400
+    },
+    {
+      "name": "tetrataenite_rotor", "circuit": 8, "charge": false,
+      "_why": "UXV-A8 (docs/eras/uxv.md, line 34): four rolled tetrataenite laminations stacked on a tungsten steel shaft and magnetised: the UXV motor's rotor (LuV tetrataenite, rare-earth free). Circuit 9 is UXV-B3's.",
+      "itemsIn": [ { "id": "grindless:tetrataenite_lamination", "count": 4 }, { "id": "gtceu:tungsten_steel_rod", "count": 1 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:tetrataenite_rotor", "count": 1 } ],
+      "eut": 1966080, "duration": 300
+    },
+    {
+      "name": "multipole_encoder_ring", "circuit": 10, "charge": false,
+      "_why": "UXV-A8 (docs/eras/uxv.md, line 49): the rolled tetrataenite ring, mounted on a non-magnetic titanium carrier and magnetised in alternating poles: the TMR encoder's scale. The type holds one item output and has no chance outputs, so the ring scrap of line 49 (10% tetrataenite small dust, uxv.md:567) is not written here; the carrier ring is the second consumed input.",
+      "itemsIn": [ { "id": "grindless:encoder_ring", "count": 1 }, { "id": "gtceu:titanium_ring", "count": 1 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:multipole_encoder_ring", "count": 1 } ],
+      "eut": 1966080, "duration": 300
     }
   ]
 }
