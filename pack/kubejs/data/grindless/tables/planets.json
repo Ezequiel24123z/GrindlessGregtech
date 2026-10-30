@@ -29,7 +29,9 @@
     "psr_j0437": { "dimensions": ["grindless:psr_j0437_orbit"], "pairTag": "psr_j0437", "name": { "en_us": "PSR J0437", "es_es": "PSR J0437" } },
     "cygnus_x1": { "dimensions": ["grindless:cygnus_x1_orbit"], "pairTag": "cygnus_x1", "name": { "en_us": "Cygnus X-1", "es_es": "Cygnus X-1" } },
     "vela_pulsar": { "dimensions": ["grindless:vela_pulsar_orbit"], "pairTag": "vela_pulsar", "name": { "en_us": "Vela Pulsar", "es_es": "Púlsar de Vela" } },
-    "cas_a": { "dimensions": ["grindless:cas_a_remnant"], "pairTag": "cas_a", "name": { "en_us": "Cassiopeia A", "es_es": "Casiopea A" } }
+    "cas_a": { "dimensions": ["grindless:cas_a_remnant"], "pairTag": "cas_a", "name": { "en_us": "Cassiopeia A", "es_es": "Casiopea A" } },
+    "sgr1806": { "dimensions": ["grindless:sgr1806_orbit"], "pairTag": "sgr1806", "name": { "en_us": "SGR 1806-20", "es_es": "SGR 1806-20" } },
+    "terzan5": { "dimensions": ["grindless:terzan5_core"], "pairTag": "terzan5", "name": { "en_us": "Terzan 5", "es_es": "Terzan 5" } }
   },
   "dryOnEarth": ["gcyr:overworld_orbit"]
 }
