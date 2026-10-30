@@ -1,3 +1,4 @@
+// priority: -10849
 // -----------------------------------------------------------------------------------------------
 // UXV's Mk6 fusion ring, the stellar burning ring (docs/eras/uxv.md, machine 9 and "Fusion"; package UXV-A7): the machine and the ash gases.
 // The recipes come from data/grindless/tables/fusion_mk6.json (server_scripts/grindless/uxv/fusion_mk6.js; the converter and quench rows

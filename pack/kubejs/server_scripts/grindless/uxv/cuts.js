@@ -1,4 +1,4 @@
-// priority: -26174
+// priority: -26144
 // UXV cuts (UXV-F2): GT--'s own recipe for the spintronic mainframe and GTM's generic makers of pasta_strand wire.
 // Removals spare our own recipes (not mod grindless), so no load-order band is needed.
 ;(function () {

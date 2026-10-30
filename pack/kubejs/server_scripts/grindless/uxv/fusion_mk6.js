@@ -1,3 +1,4 @@
+// priority: -26164
 // -----------------------------------------------------------------------------------------------
 // Recipes of UXV's Mk6 fusion ring, the stellar burning ring (machine: startup_scripts/grindless/uxv/fusion_mk6.js; docs/eras/uxv.md,
 // machine 9 and "Fusion"; package UXV-A7), generated at every server load from data/grindless/tables/fusion_mk6.json, plus the controller.

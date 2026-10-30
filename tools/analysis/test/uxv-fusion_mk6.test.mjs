@@ -146,14 +146,15 @@ test('the server scripts: the Mk5 and Mk4 rows are untouched and the Mk6 functio
   for (const m of ['gtceu:uxv_machine_hull', "'gtceu:uiv_fusion_reactor'", 'gtceu:stellar_hydrogen_cut', '#gtceu:circuits/uxv', 'stationResearch', 'grindless:uxv_electric_pump', 'grindless:uxv_field_generator', 'grindless:uxv_fusion_casing']) assert.ok(s.includes(m), m);
 });
 
-test('the startup script: tier 12, 16 hatches, the casing, the Mk5 coil, fusion glass, no priority line, no loop', () => {
+test('the startup script: tier 12, 16 hatches, the casing, the Mk5 coil, fusion glass, the priority stamp, no loop', () => {
   const s = read(STARTUP);
   assert.match(s, /registerFusionTier\(UXV/);
   assert.match(s, /var UXV = 12/);
   assert.match(s, /gtceu:uxv_fusion_reactor/);
   assert.match(s, /max: 16/);
   for (const m of ['grindless:uxv_fusion_casing', 'grindless:metallic_hydrogen_coil_block', 'gtceu:fusion_glass', 'workableCasingModel']) assert.ok(s.includes(m), m);
-  for (const f of [STARTUP, SERVER, LANG]) assert.ok(!/^\/\/ priority:/m.test(read(f)), f);
+  // the integrator stamps the priority line (script-order.mjs --write)
+  for (const f of [STARTUP, SERVER, LANG]) assert.ok(/^\/\/ priority:/m.test(read(f)), f);
   assert.ok(!/sounds\.json/.test(s));
   assert.ok(!/\bconst\b/.test(s.slice(s.indexOf('function ringCell'))), 'pattern loops use var');
 });
