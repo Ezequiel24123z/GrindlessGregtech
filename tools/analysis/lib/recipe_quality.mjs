@@ -7,8 +7,8 @@
 //                              still listed, so the ratchet only moves forward).
 // Everything after extractFacts is pure and works on JSON, so the tests run on tiny in-memory facts.
 
-export const TIER_NAMES = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv'];
-const TIER_PREFIX = new Map([['ulv', 0], ['lv', 1], ['mv', 2], ['hv', 3], ['ev', 4], ['iv', 5], ['luv', 6], ['zpm', 7], ['uv', 8], ['uhv', 9], ['uev', 10], ['uiv', 11], ['uxv', 12]]);
+export const TIER_NAMES = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+const TIER_PREFIX = new Map([['ulv', 0], ['lv', 1], ['mv', 2], ['hv', 3], ['ev', 4], ['iv', 5], ['luv', 6], ['zpm', 7], ['uv', 8], ['uhv', 9], ['uev', 10], ['uiv', 11], ['uxv', 12], ['opv', 13], ['max', 14]]);
 const FORM_RANK = { crafting: 0, machine: 1, assembler: 1, assembly_line: 2 };
 const CRAFT_TYPE = /(^|:)(crafting_)?(shaped|shapeless)(_strict)?$|crafting_shaped_strict$/;
 const HATCH = /(^|_)(hatch|input_bus|output_bus|dynamo_hatch|energy_hatch|laser_(source|target)|rotor_holder|maintenance)(_|$)|_bus$/;
@@ -47,22 +47,30 @@ function researchOf(json) {
   return null;
 }
 
+const eutOf = (j) => {
+  const list = (j.tickInputs && j.tickInputs.eu) || [];
+  const v = list.map((c) => Number(c && typeof c === 'object' && 'content' in c ? c.content : c)).filter((x) => Number.isFinite(x));
+  return v.length ? Math.max(...v) : null;
+};
+
 function recipeIO(r) {
   const j = r.json || {};
   const items = [];
+  const counts = [];
   const fluids = [];
   const outputs = [];
   let count = 1;
   if (formOf(r) === 'crafting') {
     if (j.pattern && j.key) {
-      const used = new Set(j.pattern.join('').split('').filter((c) => c !== ' '));
-      for (const c of used) if (j.key[c]) items.push(ingName(j.key[c]));
-    } else for (const i of j.ingredients || []) items.push(ingName(i));
+      const cells = j.pattern.join('').split('').filter((c) => c !== ' ');
+      const used = new Set(cells);
+      for (const c of used) if (j.key[c]) { items.push(ingName(j.key[c])); counts.push(cells.filter((x) => x === c).length); }
+    } else for (const i of j.ingredients || []) { items.push(ingName(i)); counts.push(1); }
     const res = j.result;
     outputs.push(String(res && (res.item || res.id) || ''));
     count = Number(res && res.count) || 1;
   } else {
-    for (const c of (j.inputs && j.inputs.item) || []) items.push(ingName(c.content));
+    for (const c of (j.inputs && j.inputs.item) || []) { items.push(ingName(c.content)); counts.push(Number(c.content && c.content.count) || 1); }
     for (const c of (j.inputs && j.inputs.fluid) || []) {
       const v = c.content && c.content.value;
       const f = Array.isArray(v) && v[0] ? (v[0].fluid || (v[0].tag && v[0].tag.replace(/^forge:/, 'gtceu:'))) : null;
@@ -70,7 +78,8 @@ function recipeIO(r) {
     }
     for (const c of (j.outputs && j.outputs.item) || []) outputs.push(ingName(c.content));
   }
-  return { items: items.filter(Boolean), fluids, outputs: outputs.filter(Boolean), count };
+  const keep = items.map((id, i) => [id, counts[i]]).filter(([id]) => id);
+  return { items: keep.map(([id]) => id), counts: keep.map(([, n]) => n), fluids, outputs: outputs.filter(Boolean), count, eut: formOf(r) === 'crafting' ? null : eutOf(j) };
 }
 
 /**
@@ -107,7 +116,8 @@ export function extractFacts(model) {
     const file = recipeFiles.get(r.id) || null;
     outRecipes.push({
       id: r.id, file, form, type: r.type, outputs: io.outputs, count: io.count,
-      items: io.items.map((id) => ({ id, domain: domain(id) })),
+      eut: io.eut,
+      items: io.items.map((id, i) => ({ id, domain: domain(id), n: io.counts[i] })),
       fluids: io.fluids.map((id) => ({ id, domain: domain(id) })),
       research: researchOf(r.json || {}),
     });
@@ -133,6 +143,8 @@ export function classify(id, facts) {
   const tail = id.replace(/^[a-z0-9_]+:/, '');
   if (facts.machines.includes(id)) return HATCH.test(tail) ? 'hatch' : 'single';
   if (facts.parts.includes(id)) return 'part';
+  const tc = tierComponent(id);
+  if (tc && tc.tier >= TP_FROM) return 'component';
   if (/^gtceu:/.test(id) && tierOfId(id) !== null && !/_(machine_hull|machine_casing)$/.test(tail)) return HATCH.test(tail) ? 'hatch' : 'single';
   if (HATCH.test(tail) && tierOfId(id) !== null) return 'hatch';
   return 'component';
@@ -196,6 +208,83 @@ function singleRules(rec, t) {
   const v = [];
   if (t >= 6 && rec.form !== 'assembly_line') v.push(['S-FORM', 'assembly line']);
   else if (t >= 4 && t < 6 && rec.form === 'assembler' && rec.fluids.length < 1) v.push(['S-FLUID', 'at least 1 fluid']);
+  return v;
+}
+
+// ---------------------------------------------------------------- tier parity gates (docs/research/tier-parity.md TP-D3), UHV and above
+
+export const TP_FROM = 9;
+export const FAMILIES = ['electric_motor', 'electric_pump', 'fluid_regulator', 'conveyor_module', 'electric_piston', 'robot_arm', 'field_generator', 'emitter', 'sensor'];
+const FAMILY_RE = new RegExp(`^(gtceu|grindless):([a-z]+)_(${FAMILIES.join('|')})$`);
+const HULL_RE = /^gtceu:([a-z]+)_machine_hull$/;
+const HATCH_2A_RE = /^gtceu:([a-z]+)_energy_(input|output)_hatch(_2a)?$/;
+const CIRCUIT_TAG_RE = /^#(?:gtceu|forge):circuits\/([a-z]+)$/;
+
+/** {tier, family} of a tier component, else null. grindless: ids are the retired uev/uiv/uxv ones; the findings must not change when they become gtceu:. */
+export function tierComponent(id) {
+  const m = FAMILY_RE.exec(String(id));
+  if (!m || !TIER_PREFIX.has(m[2])) return null;
+  const tier = TIER_PREFIX.get(m[2]);
+  if (m[1] === 'grindless' && (tier < 10 || tier > 12)) return null;
+  return { tier, family: m[3] };
+}
+
+/** Voltage amperage cap VA[t] = floor(V[t] * 15 / 16), V[t] = 8 * 4^t. */
+export const vaOf = (t) => Math.floor((8 * 4 ** t * 15) / 16);
+
+export function circuitTier(id, cfg) {
+  const m = CIRCUIT_TAG_RE.exec(String(id));
+  const name = m ? m[1] : (cfg.circuitTier || {})[id];
+  return name !== undefined && TIER_PREFIX.has(name) ? TIER_PREFIX.get(name) : null;
+}
+
+const matchesAny = (list, ...ids) => (list || []).some((p) => ids.some((id) => new RegExp(p).test(id)));
+
+/** The tier N the gates hold the recipe to, or null: our controllers, hatches, singles and parts take the era's tier; tier components
+ *  and hulls their own. Other intermediates are not checked. */
+function tpTier(cls, output, t) {
+  if (cls === 'controller' || cls === 'hatch' || cls === 'single' || cls === 'part') return t;
+  const comp = tierComponent(output);
+  if (comp) return comp.tier;
+  const hull = HULL_RE.exec(output);
+  return hull && TIER_PREFIX.has(hull[1]) ? TIER_PREFIX.get(hull[1]) : null;
+}
+
+function tpRules(rec, n, output, cls, cfg) {
+  const v = [];
+  const have = (i) => i.n || 1;
+  const comp = tierComponent(output);
+  const isHull = HULL_RE.test(output);
+  const own = cls === 'controller' || cls === 'hatch' || cls === 'single' || cls === 'part';
+  const complexPart = cls === 'part' && !BULK_PART.test(String(output).replace(/^[a-z0-9_]+:/, ''));
+
+  const floor = own ? n : comp ? n - 1 : null;
+  if (floor !== null) {
+    const low = rec.items.filter((i) => { const c = tierComponent(i.id); return c && c.tier < floor; });
+    if (low.length) v.push(['T-COMP', `no tier component below ${TIER_NAMES[floor]} (${low.map((i) => i.id).join(', ')})`]);
+  }
+
+  const mine = rec.items.map((i) => ({ c: tierComponent(i.id), n: have(i) })).filter((x) => x.c && x.c.tier >= n);
+  const total = mine.reduce((s, x) => s + x.n, 0);
+  if (cls === 'controller') {
+    if (total < 8 || new Set(mine.map((x) => x.c.family)).size < 3) v.push(['T-COUNT', `at least 8 tier components of ${TIER_NAMES[n]}+ from 3 families (has ${total} from ${new Set(mine.map((x) => x.c.family)).size})`]);
+  } else if ((cls === 'hatch' || cls === 'single' || complexPart) && total < 2) v.push(['T-COUNT', `at least 2 tier components of ${TIER_NAMES[n]}+ (has ${total})`]);
+
+  if (own && !(cls === 'part' && !complexPart)) {
+    const circuits = rec.items.map((i) => ({ t: circuitTier(i.id, cfg), n: have(i) })).filter((x) => x.t !== null);
+    const top = circuits.length ? Math.max(...circuits.map((x) => x.t)) : null;
+    if (top !== n) v.push(['T-CIRC', `highest circuit tier ${TIER_NAMES[n]} (has ${top === null ? 'none' : TIER_NAMES[top]})`]);
+    else if (cls === 'controller' && circuits.filter((x) => x.t === n).reduce((s, x) => s + x.n, 0) < 4) v.push(['T-CIRC', `at least 4 circuits of ${TIER_NAMES[n]}`]);
+  }
+
+  const hulls = rec.items.map((i) => HULL_RE.exec(i.id)).filter((m) => m && TIER_PREFIX.get(m[1]) !== n);
+  if (hulls.length) v.push(['T-HULL', `a ${TIER_NAMES[n]} machine hull (has ${hulls.map((m) => m[0]).join(', ')})`]);
+
+  if (rec.eut !== null && rec.eut !== undefined) {
+    const lowered = comp || isHull || HATCH_2A_RE.test(output) && TIER_PREFIX.get(HATCH_2A_RE.exec(output)[1]) === n || matchesAny(cfg.voltBootstrap, output, rec.id);
+    const bar = vaOf(lowered ? n - 1 : n);
+    if (rec.eut < bar) v.push(['T-VOLT', `EU/t >= ${bar} (VA of ${TIER_NAMES[lowered ? n - 1 : n]}), has ${rec.eut}`]);
+  }
   return v;
 }
 
@@ -263,7 +352,7 @@ export function complexity(rec, depth) {
   return d + Math.min(distinct, 8) * 0.5 + Math.min(rec.fluids.length, 2) * 0.5 + (FORM_BONUS[rec.form] || 0) + (rec.research ? 1 : 0);
 }
 
-const isOwned = (id, owned, cfg) => owned.has(id) || /^grindless:/.test(id) || (cfg.addonNamespaces || []).some((n) => id.startsWith(n + ':'));
+const isOwned = (id, owned, cfg) => owned.has(id) || /^grindless:/.test(id) || (cfg.addonNamespaces || []).some((n) => id.startsWith(n + ':')) || (cfg.ownedPatterns || []).some((p) => new RegExp(p).test(id));
 
 function componentRules(rec, t, output, cfg, ctx) {
   const v = [];
@@ -297,7 +386,9 @@ export function evaluate(rawFacts, cfg) {
   const out = [];
   const owned = new Set(facts.ours || []);
   const ctx = { owned, depth: depthMap(facts.graph || [], (id) => isOwned(id, owned, cfg)) };
+  const exempt = (cfg.exemptRecipes || []).map((p) => new RegExp(p));
   for (const rec of facts.recipes) {
+    if (exempt.some((r) => r.test(rec.id))) continue;
     for (const output of rec.outputs) {
       const cls = classify(output, facts);
       const t = tierOf(rec, output, cfg);
@@ -308,23 +399,33 @@ export function evaluate(rawFacts, cfg) {
       else if (cls === 'hatch') v = hatchRules(rec, t);
       else if (cls === 'single') v = singleRules(rec, t);
       else v = [...sosoRules(rec, t, output, cfg), ...componentRules(rec, t, output, cfg, ctx)];
-      for (const [code, target] of v) {
-        out.push({
-          code, recipe: rec.id, output, cls, tier: t, era: TIER_NAMES[t], file: rec.file, form: rec.form, target,
-          distinct: new Set([...rec.items.map((i) => i.id), ...rec.fluids.map((f) => 'f:' + f.id)]).size,
-          domain: rec.items.filter((i) => i.domain).length + rec.fluids.filter((i) => i.domain).length,
-          fluids: rec.fluids.length, research: rec.research,
-        });
-      }
+      const emit = (list, tier) => {
+        for (const [code, target] of list) {
+          out.push({
+            code, recipe: rec.id, output, cls, tier, era: TIER_NAMES[tier], file: rec.file, form: rec.form, target,
+            distinct: new Set([...rec.items.map((i) => i.id), ...rec.fluids.map((f) => 'f:' + f.id)]).size,
+            domain: rec.items.filter((i) => i.domain).length + rec.fluids.filter((i) => i.domain).length,
+            fluids: rec.fluids.length, research: rec.research,
+          });
+        }
+      };
+      emit(v, t);
+      const n = tpTier(cls, output, t);
+      if (n !== null && n >= TP_FROM) emit(tpRules(rec, n, output, cls, cfg), n);
     }
   }
   return out.sort((a, b) => a.tier - b.tier || a.output.localeCompare(b.output) || a.code.localeCompare(b.code) || a.recipe.localeCompare(b.recipe));
 }
 
-const key = (f) => `${f.recipe}|${f.output}`;
+const normOut = (id) => (tierComponent(id) ? 'gtceu:' + String(id).replace(/^[a-z0-9_]+:/, '') : id);
+const key = (f) => `${f.recipe}|${normOut(f.output)}`;
+const normKey = (k) => { const i = k.lastIndexOf('|'); return `${k.slice(0, i)}|${normOut(k.slice(i + 1))}`; };
 
-/** baseline: {"recipe|output": ["CODE", ...]}. fresh: violations not listed; stale: listed codes no longer violated. */
-export function compareBaseline(findings, baseline) {
+/** baseline: {"recipe|output": ["CODE", ...]}. fresh: violations not listed; stale: listed codes no longer violated.
+ *  A tier component's key uses gtceu: whatever namespace it has, so the retired grindless:uev_x ids do not change keys when they become gtceu:. */
+export function compareBaseline(findings, baselineRaw) {
+  const baseline = {};
+  for (const [k, v] of Object.entries(baselineRaw)) baseline[normKey(k)] = [...(baseline[normKey(k)] || []), ...v];
   const got = new Map();
   for (const f of findings) { const k = key(f); if (!got.has(k)) got.set(k, new Set()); got.get(k).add(f.code); }
   const fresh = findings.filter((f) => !((baseline[key(f)] || []).includes(f.code)));

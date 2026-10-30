@@ -1,0 +1,6 @@
+{
+ "_doc": "Tier components (recipe_quality.json ownedPatterns) our recipes use that no recipe makes yet; TP-C adds the recipes and empties this list. Written by: node tools/analysis/recipe-cycles.mjs --write-pending",
+ "pending": [
+
+ ]
+}

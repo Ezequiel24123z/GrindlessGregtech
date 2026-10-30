@@ -15,11 +15,18 @@ export const DEFAULT_PACK = path.resolve(here, '..', '..', 'pack');
 // grindless ids obtainable outside recipes (loot, drops, block events); none so far
 export const ASSUMED = [];
 export const BRIDGE_FILE = path.join(here, 'recipe_bridge.json');
+// tier-parity: gtceu tier components of UHV and above are ours (recipe_quality.json ownedPatterns); `pending` (recipe_cycles.json) lists
+// the ones our recipes use that nothing makes yet (TP-C adds the recipes; the list only shrinks, test/recipe-cycles.test.mjs).
+export const CYCLES_FILE = path.join(here, 'recipe_cycles.json');
+export const loadCyclesConfig = () => ({
+  owned: JSON.parse(fs.readFileSync(path.join(here, 'recipe_quality.json'), 'utf8')).ownedPatterns || [],
+  pending: (fs.existsSync(CYCLES_FILE) ? JSON.parse(fs.readFileSync(CYCLES_FILE, 'utf8')).pending : []) || [],
+});
 
 export const loadBridge = (file = BRIDGE_FILE) => (fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : null);
 
 export function packDeadlocks(pack = DEFAULT_PACK, dump = null) {
-  return deadlocks(dump || staticDump(pack).dump, { assumed: ASSUMED, bridge: loadBridge() });
+  return deadlocks(dump || staticDump(pack).dump, { assumed: ASSUMED, bridge: loadBridge(), ...loadCyclesConfig() });
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -39,6 +46,13 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const show = (x) => { for (const w of r.why(x)) console.log(`    ${x} <= ${w.recipe}${w.type ? ' [' + w.type + ' has no machine]' : ''}: needs ${w.missing.join(', ') || '-'}`); };
   if (opt('--explain')) { for (const x of opt('--explain').split(',')) show(x); process.exit(0); }
   console.log(`unreachable controllers: ${r.deadMachines.length}; unreachable tracked ids: ${r.dead.length}; cycles: ${r.cycles.length} (${r.cycles.filter((c) => c.root).length} root)`);
+  const newUnproduced = r.unproduced.filter((x) => !loadCyclesConfig().pending.includes(x));
+  console.log(`tier components our recipes use and nothing makes: ${r.unproduced.length} (${newUnproduced.length} not in recipe_cycles.json pending; ${r.pendingNow.length} pending now made)`);
+  if (args.includes('--write-pending')) {
+    fs.writeFileSync(CYCLES_FILE, '{\n "_doc": "Tier components (recipe_quality.json ownedPatterns) our recipes use that no recipe makes yet; TP-C adds the recipes and empties this list. Written by: node tools/analysis/recipe-cycles.mjs --write-pending",\n "pending": [\n' + r.unproduced.map((x) => '  ' + JSON.stringify(x)).join(',\n') + '\n ]\n}\n');
+    console.log('pending: ' + r.unproduced.length + ' ids -> ' + CYCLES_FILE);
+    process.exit(0);
+  }
   const limit = args.includes('--all') ? Infinity : 12;
   for (const c of r.cycles.slice(0, limit)) {
     console.log(`  ${c.root ? 'ROOT' : 'downstream'} cycle (${c.members.length}): ${c.members.length > 12 ? c.members.slice(0, 12).join(' ') + ' ...' : c.members.join(' ')}`);
@@ -46,5 +60,5 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   }
   if (r.cycles.length > limit) console.log(`  ... ${r.cycles.length - limit} more (--all)`);
   if (!args.includes('--all') && r.deadMachines.length) console.log(`  controllers: ${r.deadMachines.slice(0, 20).join(' ')}${r.deadMachines.length > 20 ? ' ...' : ''}`);
-  process.exit(r.deadMachines.length ? 1 : 0);
+  process.exit(r.deadMachines.length || newUnproduced.length || r.pendingNow.length ? 1 : 0);
 }

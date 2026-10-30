@@ -16,7 +16,7 @@ const cfg = JSON.parse(fs.readFileSync(path.join(here, '..', 'recipe_quality.jso
 const it = (id, domain = false) => ({ id, domain });
 const rec = (o) => ({ id: 'grindless:x', file: 'f', form: 'crafting', type: 'x', outputs: ['gtceu:big_machine'], items: [], fluids: [], research: null, ...o });
 const facts = (recipes, extra = {}) => ({ controllers: ['gtceu:big_machine'], parts: [], machines: [], recipes, ...extra });
-const codes = (r, extra) => evaluate(facts([r], extra), { ...cfg, eraTier: { ...cfg.eraTier, t: 0 }, extraControllers: [] }).map((f) => f.code).sort();
+const codes = (r, extra) => evaluate(facts([r], extra), { ...cfg, eraTier: { ...cfg.eraTier, t: 0 }, extraControllers: [] }).map((f) => f.code).filter((c) => !c.startsWith('T-')).sort(); // T-* gates: test/tp-gates.test.mjs
 const forTier = (era, r) => rec({ id: `grindless:${era}`, file: `pack/kubejs/server_scripts/grindless/${era}/a.js`, ...r });
 const five = [it('a'), it('b'), it('c'), it('d'), it('e')];
 
@@ -82,7 +82,7 @@ test('the pack has no recipe-quality violation outside the baseline, and the pil
   assert.deepEqual(fresh.map((f) => `${f.code} ${f.output} ${f.recipe}`), [], 'fix the recipe, never the baseline');
   assert.deepEqual(stale, [], 'fixed: run node tools/analysis/recipe-quality.mjs --write-baseline');
   const pilots = ['cryogenic_plant', 'waste_retrieval_plant', 'actinide_partitioning_plant', 'electron_beam_furnace', 'single_crystal_foundry'];
-  for (const p of pilots) assert.ok(!all.some((f) => f.output === `gtceu:${p}`), p + ' meets the ladder');
+  for (const p of pilots) assert.ok(!all.some((f) => f.output === `gtceu:${p}` && !f.code.startsWith('T-')), p + ' meets the ladder');
 });
 
 test('no script calls scannerResearch with a callback: Rhino hands the function to the ItemStack overload as an empty stack', () => {
