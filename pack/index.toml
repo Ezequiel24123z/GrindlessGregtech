@@ -11886,7 +11886,7 @@ hash = "ad5839fe0cb632251b4d67bfe7056b0205343ac9358be740a9056cacc118755d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/matrioshka.json"
-hash = "1afc06a5011a47252a498a5c4804128faaca56e8eff6dde17fcd933d62e64600"
+hash = "9127d302cf7768b00d418f4f11ea9b1177a278ae803c9336230eadd822a02fa9"
 
 [[files]]
 file = "kubejs/data/grindless/tables/mega_chemical_complex.json"
@@ -12838,7 +12838,7 @@ hash = "d8e12904ccf6c5e27ddebbd76277a0aea46be9f33605d31136cf69354a97d2f4"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uiv/matrioshka.js"
-hash = "a5b5c24d189fa4efbf93c4e05f8c5e7f9b63c6d1b25056a0c51421077cc7f9f5"
+hash = "e11638800cae198fb3fd969deba359c8b99c601c873cb3078b4f75dd7f08eb4f"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uiv/memories_cryostat.js"
