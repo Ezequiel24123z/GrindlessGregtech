@@ -21,7 +21,7 @@
   UG.skipped = []
 
   function addCasing(event) {
-    var inputs = ['2x gtceu:uiv_machine_casing', '2x grindless:uiv_field_generator', '4x grindless:uiv_emitter', '2x gtnn:optical_mainframe']
+    var inputs = ['2x gtceu:uiv_machine_casing', '2x gtceu:uiv_field_generator', '4x gtceu:uiv_emitter', '2x gtnn:optical_mainframe']
     var missing = [CASING, CHART].concat(inputs.map(function (s) { return s.substring(s.indexOf(' ') + 1) }))
       .filter(function (x) { return !Item.exists(x) })
     if (!Fluid.exists('gtceu:soldering_alloy')) missing.push('gtceu:soldering_alloy')

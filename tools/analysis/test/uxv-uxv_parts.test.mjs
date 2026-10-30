@@ -64,15 +64,15 @@ test('the five parts: assembly lines researched on the UIV part, an era fluid an
     uxv_electric_pump: ['alip_duct', 'strand_tape'],
     uxv_electric_piston: ['terfenol_d_rod', 'strand_tape'],
     uxv_conveyor_module: ['ni_mn_ga_crystal', 'strand_tape'],
-    uxv_robot_arm: ['uxv_strain_wave_gear', 'tmr_encoder', 'uxv_electric_piston'],
+    uxv_robot_arm: ['uxv_strain_wave_gear', 'tmr_encoder', 'gtceu:uxv_electric_piston'],
   };
   for (const p of UP.parts) {
     const r = find(`grindless:assembly_line/${p.name}`);
     assert.ok(r && r.t === 'gtceu:assembly_line', p.name);
     const text = JSON.stringify(r.j);
-    assert.ok(text.includes(p.research) && p.research === 'grindless:' + p.name.replace('uxv_', 'uiv_'), `${p.name} researched on its UIV part`);
+    assert.ok(text.includes(p.research) && p.research === 'gtceu:' + p.name.replace('uxv_', 'uiv_'), `${p.name} researched on its UIV part`);
     assert.ok(text.includes('gtceu:he_6n'), `${p.name} takes 6N helium`);
-    for (const d of domain[p.name]) assert.ok(text.includes(`grindless:${d}`), `${p.name} takes ${d}`);
+    for (const d of domain[p.name]) assert.ok(text.includes(d.includes(':') ? d : `grindless:${d}`), `${p.name} takes ${d}`);
     assert.ok(text.includes('circuits/uiv'));
     assert.ok(new Set(p.itemsIn.map((s) => s.replace(/^\d+x /, ''))).size >= 5, `${p.name}: at least five distinct inputs`);
   }

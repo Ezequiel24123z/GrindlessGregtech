@@ -119,8 +119,8 @@ export default {
           ['l23_3', I('grindless:strain_annealed_fe16n2_powder'), 'Strain Annealed Fe16n2 Powder'],
           ['l23_4', mach('gtceu:nitride_magnet_works'), 'Nitride Magnet Works', 'ours'],
           ['l23_5', I('grindless:bonded_fe16n2_magnet'), 'Bonded Fe16n2 Magnet'],
-          ['l23_6', I('grindless:uev_electric_motor'), 'UEV Electric Motor'],
-          ['l23_7', I('grindless:uiv_electric_motor'), 'UIV Electric Motor'],
+          ['l23_6', I('gtceu:uev_electric_motor'), 'UEV Electric Motor'],
+          ['l23_7', I('gtceu:uiv_electric_motor'), 'UIV Electric Motor'],
         ], 'the UIV motor'),
         // line 39
         ...chain(16, [
@@ -134,7 +134,7 @@ export default {
           ['l39_7', I('grindless:rhea_cased_halbach'), 'RHEA Cased Halbach'],
           ['l39_8', I('grindless:potted_mh_stator'), 'Potted MH Stator'],
           ['l39_9', I('grindless:maglev_stator'), 'Maglev Stator'],
-          ['l39_10', I('grindless:uiv_conveyor_module'), 'UIV Conveyor Module'],
+          ['l39_10', I('gtceu:uiv_conveyor_module'), 'UIV Conveyor Module'],
         ], 'the UIV conveyor'),
       ],
     },

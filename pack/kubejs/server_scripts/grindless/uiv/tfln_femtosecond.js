@@ -169,8 +169,8 @@
     var HULL = 'gtceu:uiv_machine_hull'
     var COMPUTER = 'gtnn:optical_computer'
     var defs = [
-      { name: 'tfln_fab', part: 'grindless:uev_electric_motor', research: 'grindless:pumped_edfa', domain: ['2x grindless:silica_storage_preform', '2x grindless:er_fibre', '2x grindless:ule_boule'] },
-      { name: 'femtosecond_writer', part: 'grindless:uev_emitter', research: 'grindless:ps_cooling_laser', domain: ['2x grindless:shg_486_stage', '2x grindless:ppln_waveguide', '2x grindless:silica_storage_preform'] }
+      { name: 'tfln_fab', part: 'gtceu:uev_electric_motor', research: 'grindless:pumped_edfa', domain: ['2x grindless:silica_storage_preform', '2x grindless:er_fibre', '2x grindless:ule_boule'] },
+      { name: 'femtosecond_writer', part: 'gtceu:uev_emitter', research: 'grindless:ps_cooling_laser', domain: ['2x grindless:shg_486_stage', '2x grindless:ppln_waveguide', '2x grindless:silica_storage_preform'] }
     ]
     TF.controllerRecipes = []
     defs.forEach(function (d) {

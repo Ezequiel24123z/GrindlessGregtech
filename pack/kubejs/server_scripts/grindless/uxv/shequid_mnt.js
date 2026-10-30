@@ -161,10 +161,10 @@
     var HE = 'gtceu:he_6n'
     var defs = [
       { name: 'shequid_works', mainframe: 'gtnn:optical_mainframe', research: 'grindless:nanoaperture_array',
-        parts: ['2x grindless:uiv_field_generator', '2x grindless:uiv_electric_pump'],
+        parts: ['2x gtceu:uiv_field_generator', '2x gtceu:uiv_electric_pump'],
         domain: ['2x grindless:mu_metal_foil', '2x grindless:sin_membrane', '2x grindless:mtj_die'] },
       { name: 'mnt_collider', mainframe: 'gtnn:spintronic_mainframe', research: 'grindless:cm248_target',
-        parts: ['grindless:uxv_sensor', '2x grindless:uiv_field_generator', '2x grindless:uiv_electric_pump'],
+        parts: ['gtceu:uxv_sensor', '2x gtceu:uiv_field_generator', '2x gtceu:uiv_electric_pump'],
         domain: ['2x grindless:gas_stopping_cell', '2x grindless:u238_ion_source', '2x grindless:mu_metal_foil'] }
     ]
     SM.controllerRecipes = []
@@ -194,8 +194,8 @@
 
   // line 18's last step: the gyro's SQUID readout, an NV-diamond chip, a second MTJ die and the UIV sensor, cooled by 6N helium
   function addSensor(event) {
-    var out = 'grindless:uxv_sensor'
-    var inputs = ['grindless:shequid_gyro', 'grindless:nv_diamond_chip', 'grindless:mtj_die', 'grindless:uiv_sensor', 'gtceu:iridium_plate', 'gtceu:osmium_plate']
+    var out = 'gtceu:uxv_sensor'
+    var inputs = ['grindless:shequid_gyro', 'grindless:nv_diamond_chip', 'grindless:mtj_die', 'gtceu:uiv_sensor', 'gtceu:iridium_plate', 'gtceu:osmium_plate']
     var missing = inputs.concat([out]).filter(function (id) { return !Item.exists(id) })
     if (!Fluid.exists('gtceu:he_6n')) missing.push('gtceu:he_6n')
     SM.sensorRecipe = null
@@ -207,7 +207,7 @@
     b.itemInputs('grindless:shequid_gyro')
     b.itemInputs('2x grindless:nv_diamond_chip')
     b.itemInputs('grindless:mtj_die')
-    b.itemInputs('grindless:uiv_sensor')
+    b.itemInputs('gtceu:uiv_sensor')
     b.itemInputs('4x gtceu:iridium_plate')
     b.itemInputs('4x gtceu:osmium_plate')
     b.itemInputs('2x #gtceu:circuits/uiv')

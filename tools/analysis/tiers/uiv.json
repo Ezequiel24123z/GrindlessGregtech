@@ -128,15 +128,15 @@
     "A7": {
       "label": "optical mainframe and the UIV sensor",
       "landedWhen": [
-        "grindless:uiv_sensor"
+        "gtceu:uiv_sensor"
       ]
     },
     "A8": {
       "label": "UIV motor, pump and robot arm",
       "landedWhen": [
-        "grindless:uiv_electric_motor",
-        "grindless:uiv_electric_pump",
-        "grindless:uiv_robot_arm"
+        "gtceu:uiv_electric_motor",
+        "gtceu:uiv_electric_pump",
+        "gtceu:uiv_robot_arm"
       ]
     },
     "A9": {
@@ -1761,9 +1761,9 @@
         "m:gtceu:uiv_fusion_reactor",
         "m:gtceu:matrioshka_computer",
         "m:gtceu:droplet_radiator_works",
-        "grindless:uiv_electric_motor",
-        "grindless:uiv_electric_pump",
-        "grindless:uiv_robot_arm",
+        "gtceu:uiv_electric_motor",
+        "gtceu:uiv_electric_pump",
+        "gtceu:uiv_robot_arm",
         "grindless:uiv_fusion_casing",
         "grindless:metallic_hydrogen_coil_block",
         "grindless:uiv_smes_cell"
@@ -1781,7 +1781,7 @@
         "m:gtceu:r_process_decompressor",
         "m:gtceu:decay_heat_vault",
         "grindless:neutronium_pellet",
-        "grindless:uiv_field_generator"
+        "gtceu:uiv_field_generator"
       ]
     },
     {
@@ -1796,7 +1796,7 @@
         "grindless:gamma_laser_cavity",
         "grindless:ns_eos_chart",
         "grindless:pulsar_navigation_solution",
-        "grindless:uiv_emitter"
+        "gtceu:uiv_emitter"
       ]
     },
     {

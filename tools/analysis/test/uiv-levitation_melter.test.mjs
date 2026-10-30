@@ -109,8 +109,8 @@ test('lines 2, 4 and 39: the A2 ids each get a real use', () => {
   assert.ok(inputs(w).includes('grindless:mh_winding'));
   assert.ok(inputs(by('assembler', 'potted_mh_stator')).includes('grindless:mh_winding'));
   assert.ok(inputs(by('assembler', 'rhea_cased_charge')).includes('grindless:quenched_cg_nitrogen'));
-  assert.ok(inputs(by('assembler', 'uiv_conveyor_module')).includes('grindless:uev_conveyor_module'));
-  assert.ok(outputs(by('assembler', 'uiv_conveyor_module')).includes('grindless:uiv_conveyor_module'));
+  assert.ok(inputs(by('assembler', 'uiv_conveyor_module')).includes('gtceu:uev_conveyor_module'));
+  assert.ok(outputs(by('assembler', 'uiv_conveyor_module')).includes('gtceu:uiv_conveyor_module'));
   assert.ok(outputs(by('assembler', 'sled_charge')).includes('grindless:sled_charge'));
   assert.ok(outputs(by('assembler', 'metallic_hydrogen_coil_block')).includes('grindless:metallic_hydrogen_coil_block'));
   assert.ok(inputs(by('assembler', 'metallic_hydrogen_coil_block')).includes('grindless:impregnated_mh_coil'));

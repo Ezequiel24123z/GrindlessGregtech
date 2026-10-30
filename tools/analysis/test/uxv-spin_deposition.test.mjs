@@ -86,7 +86,7 @@ test('line 41: five steps, the laser on an assembly line researched on the condi
   const laser = find(SD.laserRecipe);
   assert.ok(laser && laser.t === 'gtceu:assembly_line');
   const text = JSON.stringify(laser.j);
-  for (const id of ['grindless:krf_discharge_tube', 'grindless:pulsed_power_head', 'grindless:vuv_caf2_optic', 'grindless:uev_sensor', 'gtceu:he_6n']) assert.ok(text.includes(id), `the laser takes ${id}`);
+  for (const id of ['grindless:krf_discharge_tube', 'grindless:pulsed_power_head', 'grindless:vuv_caf2_optic', 'gtceu:uev_sensor', 'gtceu:he_6n']) assert.ok(text.includes(id), `the laser takes ${id}`);
   assert.ok(text.includes('krf_discharge_tube'), 'research stack');
   const tube = find('grindless:chemical_reactor/krf_discharge_tube');
   assert.ok(JSON.stringify(tube.j).includes('gtceu:fluorine'), 'the spent fluorine comes back');

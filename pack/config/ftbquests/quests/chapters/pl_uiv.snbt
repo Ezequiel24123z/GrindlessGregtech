@@ -887,11 +887,11 @@
 		}
 		{
 			dependencies: ["35B80BE5781AA0B6"]
-			icon: "grindless:uev_electric_motor"
+			icon: "gtceu:uev_electric_motor"
 			id: "10A72EBB6735DA8E"
 			size: 1.25d
 			tasks: [
-				{ id: "3A379A3D0DB77D08", item: "grindless:uev_electric_motor", optional_task: true, type: "item" }
+				{ id: "3A379A3D0DB77D08", item: "gtceu:uev_electric_motor", optional_task: true, type: "item" }
 				{ id: "1EAB4B0C7F0579A9", type: "checkmark" }
 			]
 			title: "UEV Electric Motor"
@@ -900,11 +900,11 @@
 		}
 		{
 			dependencies: ["10A72EBB6735DA8E"]
-			icon: "grindless:uiv_electric_motor"
+			icon: "gtceu:uiv_electric_motor"
 			id: "5A296667DF2F4617"
 			size: 1.25d
 			tasks: [
-				{ id: "78CA3E05A2073FA6", item: "grindless:uiv_electric_motor", optional_task: true, type: "item" }
+				{ id: "78CA3E05A2073FA6", item: "gtceu:uiv_electric_motor", optional_task: true, type: "item" }
 				{ id: "19047A09B0AECC81", type: "checkmark" }
 			]
 			title: "UIV Electric Motor"
@@ -1046,11 +1046,11 @@
 		}
 		{
 			dependencies: ["3F2FF510E271C9C8"]
-			icon: "grindless:uiv_conveyor_module"
+			icon: "gtceu:uiv_conveyor_module"
 			id: "5908A0445AA425F2"
 			size: 1.25d
 			tasks: [
-				{ id: "7F10801A10574AB9", item: "grindless:uiv_conveyor_module", optional_task: true, type: "item" }
+				{ id: "7F10801A10574AB9", item: "gtceu:uiv_conveyor_module", optional_task: true, type: "item" }
 				{ id: "3B02F1ED209F2382", type: "checkmark" }
 			]
 			title: "UIV Conveyor Module"

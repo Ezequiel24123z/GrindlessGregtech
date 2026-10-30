@@ -196,8 +196,8 @@ test('controllers: UIV hull, 2 UIV parts and 2 optical mainframes', () => {
   assert.match(src, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
   assert.match(src, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
   assert.match(src, /stationResearch/);
-  assert.match(src, /name: 'polarised_proton_source', part: 'grindless:uiv_electric_pump', research: 'grindless:cps_wetted_mesh'/);
-  assert.match(src, /name: 'uiv_fusion_reactor', part: 'grindless:uiv_electric_piston', research: 'grindless:divertor'/);
+  assert.match(src, /name: 'polarised_proton_source', part: 'gtceu:uiv_electric_pump', research: 'grindless:cps_wetted_mesh'/);
+  assert.match(src, /name: 'uiv_fusion_reactor', part: 'gtceu:uiv_electric_piston', research: 'grindless:divertor'/);
 });
 
 test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a texture', () => {

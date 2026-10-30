@@ -167,8 +167,8 @@
     var HULL = 'gtceu:uiv_machine_hull'
     var COMPUTER = 'gtnn:optical_computer'
     var defs = [
-      { name: 'spectral_hole_burner', part: 'grindless:uev_sensor', research: 'grindless:er_fibre_coil', domain: ['2x grindless:cold_plate', '2x grindless:pumped_edfa', '2x grindless:er_fibre'] },
-      { name: 'millikelvin_cryostat_works', part: 'grindless:uev_electric_pump', research: 'grindless:cold_plate', domain: ['2x grindless:er_fibre_coil', '2x grindless:pumped_edfa', '2x grindless:er_fibre'] }
+      { name: 'spectral_hole_burner', part: 'gtceu:uev_sensor', research: 'grindless:er_fibre_coil', domain: ['2x grindless:cold_plate', '2x grindless:pumped_edfa', '2x grindless:er_fibre'] },
+      { name: 'millikelvin_cryostat_works', part: 'gtceu:uev_electric_pump', research: 'grindless:cold_plate', domain: ['2x grindless:er_fibre_coil', '2x grindless:pumped_edfa', '2x grindless:er_fibre'] }
     ]
     MC.controllerRecipes = []
     defs.forEach(function (d) {

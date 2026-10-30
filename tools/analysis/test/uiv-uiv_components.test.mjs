@@ -75,15 +75,15 @@ test('line 23 steps: blend, oxygenation, impregnation', () => {
 
 test('the three components: UEV part + line part + a UIV circuit tag', () => {
   const pump = by('assembler', 'uiv_electric_pump');
-  assert.deepEqual(inputs(pump), ['grindless:uev_electric_pump', 'grindless:balanced_rhea_impeller', 'gtceu:rhea_plate', '#gtceu:circuits/uiv']);
-  assert.deepEqual(outputs(pump), ['grindless:uiv_electric_pump']);
+  assert.deepEqual(inputs(pump), ['gtceu:uev_electric_pump', 'grindless:balanced_rhea_impeller', 'gtceu:rhea_plate', '#gtceu:circuits/uiv']);
+  assert.deepEqual(outputs(pump), ['gtceu:uiv_electric_pump']);
   const arm = by('assembler', 'uiv_robot_arm');
-  assert.deepEqual(inputs(arm), ['grindless:uev_robot_arm', 'grindless:strain_wave_gear', 'grindless:uiv_electric_piston', '#gtceu:circuits/uiv']);
+  assert.deepEqual(inputs(arm), ['gtceu:uev_robot_arm', 'grindless:strain_wave_gear', 'gtceu:uiv_electric_piston', '#gtceu:circuits/uiv']);
   assert.equal(arm.itemsIn[1].count, 3);
-  assert.deepEqual(outputs(arm), ['grindless:uiv_robot_arm']);
+  assert.deepEqual(outputs(arm), ['gtceu:uiv_robot_arm']);
   const motor = by('assembler', 'uiv_electric_motor');
-  assert.deepEqual(inputs(motor), ['grindless:uev_electric_motor', 'grindless:field_cooled_gdbco', 'grindless:mh_winding', 'gtceu:metallic_hydrogen_single_cable', '#gtceu:circuits/uiv']);
-  assert.deepEqual(outputs(motor), ['grindless:uiv_electric_motor']);
+  assert.deepEqual(inputs(motor), ['gtceu:uev_electric_motor', 'grindless:field_cooled_gdbco', 'grindless:mh_winding', 'gtceu:metallic_hydrogen_single_cable', '#gtceu:circuits/uiv']);
+  assert.deepEqual(outputs(motor), ['gtceu:uiv_electric_motor']);
   for (const r of [pump, arm, motor]) assert.equal(r.eut, 7864320, r.name);
 });
 

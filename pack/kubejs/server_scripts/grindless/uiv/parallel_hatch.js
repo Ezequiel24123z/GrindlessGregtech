@@ -14,8 +14,8 @@
   var H = G.uivParallelHatch || (G.uivParallelHatch = {})
 
   var OUTPUT = 'gtceu:uiv_parallel_hatch'
-  var RESEARCH = 'grindless:uiv_emitter'
-  var KEY = { S: 'grindless:uiv_sensor', E: 'grindless:uiv_emitter', Z: '#gtceu:circuits/uiv', H: 'gtceu:uiv_machine_hull', C: 'gtceu:metallic_hydrogen_double_cable', P: 'gtceu:rhea_plate', F: 'grindless:ffkm_seal' }
+  var RESEARCH = 'gtceu:uiv_emitter'
+  var KEY = { S: 'gtceu:uiv_sensor', E: 'gtceu:uiv_emitter', Z: '#gtceu:circuits/uiv', H: 'gtceu:uiv_machine_hull', C: 'gtceu:metallic_hydrogen_double_cable', P: 'gtceu:rhea_plate', F: 'grindless:ffkm_seal' }
 
   H.recipeId = 'grindless:assembly_line/uiv_parallel_hatch'
   H.output = OUTPUT

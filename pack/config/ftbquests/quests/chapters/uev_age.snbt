@@ -31,13 +31,13 @@
 		{
 			dependencies: ["3622F47EE2F048E9"]
 			description: ["The &6UEV Emitter&r, &6Sensor&r and &6Field Generator&r are built from what the UHV era left in store. The motor waits for iron from another star."]
-			icon: "grindless:uev_emitter"
+			icon: "gtceu:uev_emitter"
 			id: "3E4117575EE79C34"
 			rewards: [{ id: "1BF069F34D9673A8", type: "xp", xp: 100 }]
 			tasks: [
-				{ id: "72301A9270646A1B", item: "grindless:uev_emitter", type: "item" }
-				{ id: "7DC2B6B81CFE44FA", item: "grindless:uev_sensor", type: "item" }
-				{ id: "5B5069DEFBFDF201", item: "grindless:uev_field_generator", type: "item" }
+				{ id: "56BD39D8B374624F", item: "gtceu:uev_emitter", type: "item" }
+				{ id: "3BB0D35F53680D1E", item: "gtceu:uev_sensor", type: "item" }
+				{ id: "7EBFA27F47441F06", item: "gtceu:uev_field_generator", type: "item" }
 			]
 			title: "UEV Parts"
 			x: 3.0d
@@ -556,7 +556,7 @@
 			tasks: [
 				{ id: "71E96BA168B9ABD8", item: "gtceu:nitride_magnet_works", type: "item" }
 				{ id: "1CBE13F99A27B982", item: "grindless:bonded_fe16n2_magnet", type: "item" }
-				{ id: "7FBAA222FB17BCA8", item: "grindless:uev_electric_motor", type: "item" }
+				{ id: "79D3B2DA9793195B", item: "gtceu:uev_electric_motor", type: "item" }
 			]
 			title: "A Nitride Magnet"
 			x: 21.5d

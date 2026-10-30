@@ -99,7 +99,7 @@ test('the pulser line: bearing, piston, DAC charge, laser and quench steps', () 
   assert.equal(by('assembler', 'lonsdaleite_bearing').circuit, 5);
   const piston = by('assembler', 'uiv_electric_piston');
   assert.equal(piston.circuit, 6);
-  assert.ok(inputs(piston).includes('grindless:uev_electric_piston'));
+  assert.ok(inputs(piston).includes('gtceu:uev_electric_piston'));
   assert.ok(inputs(piston).includes('grindless:lonsdaleite_bearing'));
   assert.ok(inputs(piston).includes('gtceu:metallic_hydrogen_single_cable'));
   assert.equal(by('assembler', 'dac_charge').circuit, 7);

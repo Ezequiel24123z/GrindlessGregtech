@@ -165,7 +165,7 @@
 
   function addController(event) {
     var HULL = 'gtceu:uev_machine_hull'
-    var PISTON = 'grindless:uev_electric_piston'
+    var PISTON = 'gtceu:uev_electric_piston'
     var COMPUTER = 'gtnn:optical_computer'
     var machine = MH.machine.machine
     MH.controllerRecipes = []

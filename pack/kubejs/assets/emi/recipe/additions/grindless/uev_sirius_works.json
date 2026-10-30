@@ -1,7 +1,7 @@
 {
   "type": "emi:info",
   "stacks": [
-    "item:grindless:uev_field_generator",
+    "item:gtceu:uev_field_generator",
     "item:gtceu:containment_works",
     "item:grindless:degenerate_containment_casing"
   ],

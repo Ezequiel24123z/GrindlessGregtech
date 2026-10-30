@@ -59,21 +59,21 @@
   // the five parts: assembly line behind station research on the UIV part; 6N helium, soldering alloy and lubricant (the NaK replaces the pump's lubricant)
   var CIRCUITS = '2x #gtceu:circuits/uiv'
   UP.parts = [
-    { name: 'uxv_electric_motor', research: 'grindless:uiv_electric_motor',
-      itemsIn: ['grindless:uiv_electric_motor', '2x grindless:strand_stator', '2x grindless:tetrataenite_rotor', '2x grindless:mh_winding',
+    { name: 'uxv_electric_motor', research: 'gtceu:uiv_electric_motor',
+      itemsIn: ['gtceu:uiv_electric_motor', '2x grindless:strand_stator', '2x grindless:tetrataenite_rotor', '2x grindless:mh_winding',
         '2x grindless:field_cooled_gdbco', CIRCUITS],
       fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 7864320, duration: 1200 },
-    { name: 'uxv_electric_pump', research: 'grindless:uiv_electric_pump',
-      itemsIn: ['grindless:uiv_electric_pump', '2x grindless:alip_duct', '3x grindless:strand_tape', '2x grindless:balanced_rhea_impeller', CIRCUITS],
+    { name: 'uxv_electric_pump', research: 'gtceu:uiv_electric_pump',
+      itemsIn: ['gtceu:uiv_electric_pump', '2x grindless:alip_duct', '3x grindless:strand_tape', '2x grindless:balanced_rhea_impeller', CIRCUITS],
       fluidsIn: [fluid(HE, 1000), fluid('gtceu:sodium_potassium', 1000), fluid(SOLDER, 1152)], eut: 7864320, duration: 1200 },
-    { name: 'uxv_electric_piston', research: 'grindless:uiv_electric_piston',
-      itemsIn: ['grindless:uiv_electric_piston', '2x grindless:terfenol_d_rod', '2x grindless:lasagna_plate', '2x grindless:strand_tape', CIRCUITS],
+    { name: 'uxv_electric_piston', research: 'gtceu:uiv_electric_piston',
+      itemsIn: ['gtceu:uiv_electric_piston', '2x grindless:terfenol_d_rod', '2x grindless:lasagna_plate', '2x grindless:strand_tape', CIRCUITS],
       fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 7864320, duration: 1200 },
-    { name: 'uxv_conveyor_module', research: 'grindless:uiv_conveyor_module',
-      itemsIn: ['grindless:uiv_conveyor_module', '3x grindless:ni_mn_ga_crystal', '3x grindless:strand_tape', '2x gtceu:tungsten_steel_plate', CIRCUITS],
+    { name: 'uxv_conveyor_module', research: 'gtceu:uiv_conveyor_module',
+      itemsIn: ['gtceu:uiv_conveyor_module', '3x grindless:ni_mn_ga_crystal', '3x grindless:strand_tape', '2x gtceu:tungsten_steel_plate', CIRCUITS],
       fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 7864320, duration: 1200 },
-    { name: 'uxv_robot_arm', research: 'grindless:uiv_robot_arm',
-      itemsIn: ['grindless:uiv_robot_arm', '3x grindless:uxv_strain_wave_gear', '2x grindless:tmr_encoder', 'grindless:uxv_electric_piston', CIRCUITS],
+    { name: 'uxv_robot_arm', research: 'gtceu:uiv_robot_arm',
+      itemsIn: ['gtceu:uiv_robot_arm', '3x grindless:uxv_strain_wave_gear', '2x grindless:tmr_encoder', 'gtceu:uxv_electric_piston', CIRCUITS],
       fluidsIn: [fluid(HE, 1000), fluid(SOLDER, 1152), fluid(LUBRICANT, 1000)], eut: 7864320, duration: 1500 }
   ]
 

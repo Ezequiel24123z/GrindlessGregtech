@@ -177,8 +177,8 @@
   function addControllers(event) {
     var HULL = 'gtceu:uev_machine_hull'
     var O = 'gtnn:optical_computer'
-    var PISTON = 'grindless:uev_electric_piston'
-    var PUMP = 'grindless:uev_electric_pump'
+    var PISTON = 'gtceu:uev_electric_piston'
+    var PUMP = 'gtceu:uev_electric_pump'
     var C = '4x #gtceu:circuits/uhv'
     var M = BA.machines || {}
     // QR-R6: assembly line with station research, the era fluid and domain inputs; the refinery follows the drill

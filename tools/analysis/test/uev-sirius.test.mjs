@@ -103,7 +103,7 @@ test('degenerate matter, the chart and the pellet come only from Sirius B rows',
 test('the UEV field generator: assembler, pellet + the SX pump impeller, no Alpha Centauri product, no Barnard cycle', () => {
   const r = by('assembler', 'uev_field_generator');
   assert.equal(r.circuit, 0);
-  assert.deepEqual(ids(r.itemsOut), ['grindless:uev_field_generator']);
+  assert.deepEqual(ids(r.itemsOut), ['gtceu:uev_field_generator']);
   assert.ok(ids(r.itemsIn).includes('grindless:degenerate_pellet'));
   assert.ok(ids(r.itemsIn).includes('grindless:sx_pump_impeller'));
   assert.equal(r.fluidsIn.length, 0);
@@ -112,7 +112,7 @@ test('the UEV field generator: assembler, pellet + the SX pump impeller, no Alph
   const users = [];
   for (const f of fs.readdirSync(tables).filter((n) => n.endsWith('.json') && n !== 'hidden_until.json')) {
     if (f === 'sirius.json') continue;
-    if (JSON.stringify(table(f)).includes('grindless:uev_field_generator')) users.push(f);
+    if (JSON.stringify(table(f)).includes('gtceu:uev_field_generator')) users.push(f);
   }
   assert.deepEqual(users, []);
   // nothing in the Barnard, rhenium or Alpha Centauri chains needs the field generator or the pellet

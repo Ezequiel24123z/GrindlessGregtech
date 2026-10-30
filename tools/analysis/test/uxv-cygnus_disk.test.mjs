@@ -85,7 +85,7 @@ test('the controllers and the field generator: UIV hull, mainframes, UIV circuit
     assert.ok(r && r.t === 'gtceu:assembly_line', m);
     const text = JSON.stringify(r.j);
     assert.ok(text.includes(`gtceu:${m}`), `${m} is its output`);
-    for (const need of ['gtceu:uiv_machine_hull', 'gtnn:spintronic_mainframe', 'gtceu:circuits/uiv', 'grindless:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', want[m][0]]) {
+    for (const need of ['gtceu:uiv_machine_hull', 'gtnn:spintronic_mainframe', 'gtceu:circuits/uiv', 'gtceu:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', want[m][0]]) {
       assert.ok(text.includes(need), `${m} takes ${need}`);
     }
     for (const d of want[m][1]) assert.ok(text.includes(d), `${m} takes ${d}`);
@@ -97,7 +97,7 @@ test('the controllers and the field generator: UIV hull, mainframes, UIV circuit
   const fg = find(CD.fieldGeneratorRecipe);
   assert.ok(fg && fg.t === 'gtceu:assembly_line');
   const ft = JSON.stringify(fg.j);
-  for (const need of ['grindless:strand_coil', 'grindless:uiv_field_generator', 'grindless:mh_winding', 'gtceu:rhea_plate', 'gtceu:circuits/uxv', 'gtceu:filtered_disk_plasma', 'grindless:frc_cartridge', 'grindless:uxv_field_generator']) {
+  for (const need of ['grindless:strand_coil', 'gtceu:uiv_field_generator', 'grindless:mh_winding', 'gtceu:rhea_plate', 'gtceu:circuits/uxv', 'gtceu:filtered_disk_plasma', 'grindless:frc_cartridge', 'gtceu:uxv_field_generator']) {
     assert.ok(ft.includes(need), `the field generator takes ${need}`);
   }
 });
@@ -117,7 +117,7 @@ test('older row: magnet works strand_coil, circuit 9, charged, four strand tape 
 test('"only from": nothing else in the pack makes these ids', () => {
   const only = {
     'gtceu:disk_plasma': 'disk_skimming/skim_disk', 'grindless:frc_cartridge': 'frc_forming/form_cartridge',
-    'gtceu:flux_loaded_plasma': 'frc_forming/load_flux', 'grindless:uxv_field_generator': 'assembly_line/uxv_field_generator',
+    'gtceu:flux_loaded_plasma': 'frc_forming/load_flux', 'gtceu:uxv_field_generator': 'assembly_line/uxv_field_generator',
     'grindless:strand_coil': 'naquadria_magnets/strand_coil', 'gtceu:accretion_disk_skimmer': 'assembly_line/accretion_disk_skimmer',
     'gtceu:frc_former': 'assembly_line/frc_former', 'gtceu:bz_dynamo': 'assembly_line/bz_dynamo'
   };

@@ -175,8 +175,8 @@
     var HULL = 'gtceu:uiv_machine_hull'
     var MAINFRAME = 'gtnn:optical_mainframe'
     var defs = [
-      { name: 'matrioshka_computer', part: 'grindless:uiv_electric_piston', research: 'grindless:matrioshka_node', domain: ['2x grindless:matrioshka_logic_tile', '2x grindless:diamond_schottky_die', '2x grindless:tipt_au_stack'] },
-      { name: 'droplet_radiator_works', part: 'grindless:uiv_conveyor_module', research: 'grindless:droplet_collector', domain: ['2x grindless:matrioshka_emitter_shell', '2x grindless:droplet_wick', '2x grindless:tipt_au_stack'] }
+      { name: 'matrioshka_computer', part: 'gtceu:uiv_electric_piston', research: 'grindless:matrioshka_node', domain: ['2x grindless:matrioshka_logic_tile', '2x grindless:diamond_schottky_die', '2x grindless:tipt_au_stack'] },
+      { name: 'droplet_radiator_works', part: 'gtceu:uiv_conveyor_module', research: 'grindless:droplet_collector', domain: ['2x grindless:matrioshka_emitter_shell', '2x grindless:droplet_wick', '2x grindless:tipt_au_stack'] }
     ]
     MA.controllerRecipes = []
     defs.forEach(function (d) {

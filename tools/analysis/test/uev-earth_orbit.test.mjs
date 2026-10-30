@@ -108,7 +108,7 @@ test('byproducts are routed: no recipe outputs a void marker', () => {
 
 test('the robot arm, the isolator, the lobster-eye MCP and the three material producers exist', () => {
   const made = (id) => mine.some((r) => ids(r.itemsOut).includes(id));
-  for (const id of ['grindless:uev_robot_arm', 'grindless:faraday_isolator', 'grindless:hollow_core_fibre', 'grindless:lobster_eye_mcp', 'gtceu:tgg_dust', 'gtceu:ppktp_dust', 'gtceu:ule_glass_dust']) {
+  for (const id of ['gtceu:uev_robot_arm', 'grindless:faraday_isolator', 'grindless:hollow_core_fibre', 'grindless:lobster_eye_mcp', 'gtceu:tgg_dust', 'gtceu:ppktp_dust', 'gtceu:ule_glass_dust']) {
     assert.ok(made(id), id);
   }
   assert.ok(ids(row('assembler', 'faraday_isolator').itemsIn).includes('grindless:terbium_oxide_dust') || mine.some((r) => ids(r.itemsIn).includes('grindless:terbium_oxide_dust')));

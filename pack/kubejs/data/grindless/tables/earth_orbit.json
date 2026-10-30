@@ -153,9 +153,9 @@
           "itemsIn": [{ "id": "grindless:cnt_twisted_yarn", "count": 2 }, { "id": "gtceu:polytetrafluoroethylene_foil", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 72 }], "charge": [],
           "itemsOut": [{ "id": "grindless:cnt_coiled_muscle", "count": 1 }], "fluidsOut": [] },
         { "name": "uev_robot_arm", "circuit": 0, "eut": 491520, "duration": 400,
-          "itemsIn": [{ "id": "gtceu:uv_robot_arm", "count": 1 }, { "id": "grindless:cnt_coiled_muscle", "count": 4 }, { "id": "grindless:uev_sensor", "count": 1 }, { "id": "grindless:uev_emitter", "count": 1 }],
+          "itemsIn": [{ "id": "gtceu:uv_robot_arm", "count": 1 }, { "id": "grindless:cnt_coiled_muscle", "count": 4 }, { "id": "gtceu:uev_sensor", "count": 1 }, { "id": "gtceu:uev_emitter", "count": 1 }],
           "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:uev_robot_arm", "count": 1 }], "fluidsOut": [] },
+          "itemsOut": [{ "id": "gtceu:uev_robot_arm", "count": 1 }], "fluidsOut": [] },
         { "name": "faraday_isolator", "circuit": 0, "eut": 491520, "duration": 300,
           "itemsIn": [{ "id": "grindless:tgg_polished_rod", "count": 1 }, { "id": "gtceu:magnetic_neodymium_rod", "count": 2 }, { "id": "gtceu:glass_plate", "count": 2 }],
           "kept": [], "fluidsIn": [], "charge": [],
@@ -182,7 +182,7 @@
           "itemsIn": [{ "id": "grindless:ule_mirrored_spacer", "count": 1 }, { "id": "gtceu:glass_tube", "count": 1 }, { "id": "gtceu:glass_plate", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:ule_cavity", "count": 1 }], "fluidsOut": [] },
         { "name": "atom_interferometer", "circuit": 0, "eut": 491520, "duration": 300,
-          "itemsIn": [{ "id": "grindless:uev_sensor", "count": 1 }, { "id": "grindless:li_cooling_laser", "count": 1 }, { "id": "grindless:k_cooling_laser", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "gtceu:uev_sensor", "count": 1 }, { "id": "grindless:li_cooling_laser", "count": 1 }, { "id": "grindless:k_cooling_laser", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:atom_interferometer", "count": 1 }], "fluidsOut": [] }
       ]
     }

@@ -32,7 +32,7 @@
           "fluidsIn": [{ "id": "gtceu:hydrofluoric_acid", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:demineralised_grains", "count": 2 }], "fluidsOut": [{ "id": "gtceu:silicon_tetrafluoride", "amount": 500 }] },
         { "name": "fe60_record", "circuit": 3, "eut": 7864320, "duration": 800,
-          "itemsIn": [{ "id": "grindless:demineralised_grains", "count": 2 }], "kept": [{ "id": "grindless:uev_sensor", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:demineralised_grains", "count": 2 }], "kept": [{ "id": "gtceu:uev_sensor", "count": 1 }],
           "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:fe60_record", "count": 1 }], "fluidsOut": [] },
         { "name": "silicate_residue", "circuit": 4, "eut": 1966080, "duration": 400,

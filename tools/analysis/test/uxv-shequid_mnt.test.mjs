@@ -85,7 +85,7 @@ test('line 43: the gas stopping cell and the sensor on an assembly line research
   const s = find(SM.sensorRecipe);
   assert.ok(s && s.t === 'gtceu:assembly_line');
   const st = JSON.stringify(s.j);
-  for (const id of ['grindless:shequid_gyro', 'grindless:nv_diamond_chip', 'grindless:mtj_die', 'grindless:uiv_sensor', 'gtceu:he_6n']) assert.ok(st.includes(id), `the sensor takes ${id}`);
+  for (const id of ['grindless:shequid_gyro', 'grindless:nv_diamond_chip', 'grindless:mtj_die', 'gtceu:uiv_sensor', 'gtceu:he_6n']) assert.ok(st.includes(id), `the sensor takes ${id}`);
 });
 
 test('the controllers: UIV hull, parts, mainframes, helium, at least 8 distinct ingredients', () => {
@@ -101,7 +101,7 @@ test('the controllers: UIV hull, parts, mainframes, helium, at least 8 distinct 
   }
   assert.ok(JSON.stringify(find('grindless:assembly_line/shequid_works').j).includes('optical_mainframe'));
   assert.ok(JSON.stringify(find('grindless:assembly_line/mnt_collider').j).includes('spintronic_mainframe'));
-  assert.ok(JSON.stringify(find('grindless:assembly_line/mnt_collider').j).includes('grindless:uxv_sensor'));
+  assert.ok(JSON.stringify(find('grindless:assembly_line/mnt_collider').j).includes('gtceu:uxv_sensor'));
 });
 
 test('older rows: cold he2_heat_flush, uranium u238_ion_source (circuit 11), synchrotron u238_beam_charge (circuit 8)', () => {
@@ -126,7 +126,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
     'grindless:weak_link_cell': 'shequid_assembly/weak_link_cell', 'grindless:shequid_gyro': 'shequid_assembly/shequid_gyro',
     'grindless:mnt_thermal_ions': 'multinucleon_transfer/gas_catcher', 'grindless:island_nuclide': 'multinucleon_transfer/mr_tof',
     'grindless:island_chart': 'multinucleon_transfer/island_chart', 'grindless:gas_stopping_cell': 'assembler/gas_stopping_cell',
-    'grindless:uxv_sensor': 'assembly_line/uxv_sensor', 'grindless:u238_ion_source': 'fuel_fabrication/u238_ion_source',
+    'gtceu:uxv_sensor': 'assembly_line/uxv_sensor', 'grindless:u238_ion_source': 'fuel_fabrication/u238_ion_source',
     'grindless:u238_beam_charge': 'synchrotron/u238_beam_charge', 'gtceu:shequid_works': 'assembly_line/shequid_works',
     'gtceu:mnt_collider': 'assembly_line/mnt_collider'
   };

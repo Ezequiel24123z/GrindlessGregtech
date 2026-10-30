@@ -168,8 +168,8 @@
     var MAINFRAME = 'gtnn:optical_mainframe'
     var HE = 'gtceu:he_6n'
     var defs = [
-      { name: 'mtj_sputter_cluster', part: 'grindless:uiv_sensor', research: 'grindless:cofeb_target', domain: ['2x grindless:ta_seed_target', '2x grindless:mgo_target', '2x grindless:mu_metal_foil'] },
-      { name: 'oxide_pld_chamber', part: 'grindless:uiv_emitter', research: 'grindless:srruo3_target', domain: ['2x grindless:krf_excimer_laser', '2x grindless:vuv_caf2_optic', '2x grindless:pt_sheet'] }
+      { name: 'mtj_sputter_cluster', part: 'gtceu:uiv_sensor', research: 'grindless:cofeb_target', domain: ['2x grindless:ta_seed_target', '2x grindless:mgo_target', '2x grindless:mu_metal_foil'] },
+      { name: 'oxide_pld_chamber', part: 'gtceu:uiv_emitter', research: 'grindless:srruo3_target', domain: ['2x grindless:krf_excimer_laser', '2x grindless:vuv_caf2_optic', '2x grindless:pt_sheet'] }
     ]
     SD.controllerRecipes = []
     defs.forEach(function (d) {
@@ -198,7 +198,7 @@
   // line 41 step 5: tube + pulsed power head + two windows + sensor + circuits, cooled by 6N helium
   function addLaser(event) {
     var out = 'grindless:krf_excimer_laser'
-    var inputs = ['grindless:krf_discharge_tube', 'grindless:pulsed_power_head', 'grindless:vuv_caf2_optic', 'grindless:uev_sensor']
+    var inputs = ['grindless:krf_discharge_tube', 'grindless:pulsed_power_head', 'grindless:vuv_caf2_optic', 'gtceu:uev_sensor']
     var missing = inputs.concat([out]).filter(function (id) { return !Item.exists(id) })
     if (!Fluid.exists('gtceu:he_6n')) missing.push('gtceu:he_6n')
     SD.laserRecipe = null
@@ -210,7 +210,7 @@
     b.itemInputs('grindless:krf_discharge_tube')
     b.itemInputs('grindless:pulsed_power_head')
     b.itemInputs('2x grindless:vuv_caf2_optic')
-    b.itemInputs('grindless:uev_sensor')
+    b.itemInputs('gtceu:uev_sensor')
     b.itemInputs('2x #gtceu:circuits/uhv')
     b.inputFluids(Fluid.of('gtceu:he_6n', 1000), Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000))
     b.itemOutputs(out)

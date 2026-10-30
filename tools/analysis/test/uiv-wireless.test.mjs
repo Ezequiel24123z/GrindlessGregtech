@@ -46,7 +46,7 @@ test('the UIV row: tier 11, 384 UV naquadria batteries (four UEV cells, past 2^3
   assert.equal(uiv.batteries, null);
   assert.equal(uiv.frame, null);
   assert.deepEqual([uiv.emitter, uiv.sensor, uiv.signalParts, uiv.link, uiv.plate, uiv.wire],
-    ['grindless:uiv_emitter', 'grindless:uiv_sensor', 1, LINK, 'gtceu:rhea_plate', 'metallic_hydrogen']);
+    ['gtceu:uiv_emitter', 'gtceu:uiv_sensor', 1, LINK, 'gtceu:rhea_plate', 'metallic_hydrogen']);
 });
 
 test('withTiers case 11 is spelled out and the default message says 1 to 11 tiers', () => {
@@ -103,7 +103,7 @@ test('the UIV hatches and covers: assembler recipes with the link on the 2 A hat
     assert.ok(r, id);
     assert.equal(r.eut, V_UIV, id);
   }
-  assert.deepEqual(by('gtceu:uiv_wireless_energy_hatch').inputs, ['1x grindless:uiv_sensor', '1x gtceu:uiv_energy_input_hatch', '2x #gtceu:circuits/uiv', '1x ' + LINK]);
+  assert.deepEqual(by('gtceu:uiv_wireless_energy_hatch').inputs, ['1x gtceu:uiv_sensor', '1x gtceu:uiv_energy_input_hatch', '2x #gtceu:circuits/uiv', '1x ' + LINK]);
   assert.deepEqual(by('gtceu:uiv_wireless_energy_hatch_64a').inputs, ['1x gtceu:uiv_wireless_energy_hatch_16a', '2x gtceu:metallic_hydrogen_hex_wire', '6x gtceu:rhea_plate']);
   for (const c of COVERS) assert.ok(by(c).inputs.includes('1x ' + LINK), c);
 });

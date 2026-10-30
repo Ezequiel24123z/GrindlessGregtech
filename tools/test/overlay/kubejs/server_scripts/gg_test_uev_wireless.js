@@ -250,7 +250,7 @@
       if (hasLink) {
         linked++
         var signal = 0
-        io.itemsIn.forEach(function (x) { if (        x.id === 'grindless:uev_sensor' || x.id === 'grindless:uev_emitter') signal += x.n })
+        io.itemsIn.forEach(function (x) { if (        x.id === 'gtceu:uev_sensor' || x.id === 'gtceu:uev_emitter') signal += x.n })
                 if (signal !== 1) bad.push(r.id + ' takes ' + signal + ' UEV sensors / emitters, want 1')
       }
     })

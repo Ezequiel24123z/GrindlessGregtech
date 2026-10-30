@@ -93,5 +93,5 @@ test('bridge: root 6 six controllers take #gtceu:circuits/uiv whose only obtaina
 test('the committed bridge lists the foreign ids of roots 3-7', () => {
   const b = JSON.parse(fs.readFileSync(BRIDGE_FILE, 'utf8'));
   for (const id of ['gtceu:rhenium_dust', 'gtceu:rhea_ingot', 'gtceu:einsteinium_dust', 'gtnn:optical_mainframe']) assert.ok(b.alt[id], id);
-  assert.deepEqual(b.tags['gtceu:circuits/uiv'], ['gtnn:optical_mainframe']);
+  assert.ok(b.tags['gtceu:circuits/uiv'].includes('gtnn:optical_mainframe'), 'gtceu:circuits/uiv bridges through the optical mainframe');
 });

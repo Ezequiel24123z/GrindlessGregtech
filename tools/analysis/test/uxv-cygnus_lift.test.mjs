@@ -91,7 +91,7 @@ test('the controllers as the controller table: UIV hull, uxv_sensor, mainframes,
     assert.ok(r && r.t === 'gtceu:assembly_line', m);
     const text = JSON.stringify(r.j);
     assert.ok(text.includes(`gtceu:${m}`), `${m} is its output`);
-    for (const need of ['gtceu:uiv_machine_hull', 'gtnn:spintronic_mainframe', 'gtceu:circuits/uiv', 'grindless:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', want[m][0], want[m][1]]) {
+    for (const need of ['gtceu:uiv_machine_hull', 'gtnn:spintronic_mainframe', 'gtceu:circuits/uiv', 'gtceu:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', want[m][0], want[m][1]]) {
       assert.ok(text.includes(need), `${m} takes ${need}`);
     }
     for (const d of want[m][2]) assert.ok(text.includes(d), `${m} takes ${d}`);

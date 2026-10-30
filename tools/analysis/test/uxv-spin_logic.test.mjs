@@ -103,9 +103,9 @@ test('line 42 and line 12: the crucible takes a lathe and a weld step, the magno
 test('the controllers: UIV hull, parts, mainframes, helium, domain inputs, at least 8 distinct ingredients', () => {
   assert.deepEqual(plain(SL.controllerRecipes), MACHINES.map((m) => `grindless:assembly_line/${m}`));
   const need = {
-    vdw_stacking_cell: ['grindless:uiv_robot_arm', 'grindless:wte2_crystal', 'grindless:terfenol_d_rod', 'grindless:sin_membrane', 'grindless:vuv_caf2_optic'],
-    racetrack_fab: ['grindless:uiv_electric_motor', 'grindless:saf_track_wafer', 'grindless:mtj_die', 'grindless:pt_sheet', 'grindless:ga2o3_power_die'],
-    yig_lpe_furnace: ['grindless:uiv_electric_piston', 'grindless:ggg_wafer', 'grindless:pt_lpe_crucible', 'grindless:w184_cvi_preform', 'grindless:pt_sheet']
+    vdw_stacking_cell: ['gtceu:uiv_robot_arm', 'grindless:wte2_crystal', 'grindless:terfenol_d_rod', 'grindless:sin_membrane', 'grindless:vuv_caf2_optic'],
+    racetrack_fab: ['gtceu:uiv_electric_motor', 'grindless:saf_track_wafer', 'grindless:mtj_die', 'grindless:pt_sheet', 'grindless:ga2o3_power_die'],
+    yig_lpe_furnace: ['gtceu:uiv_electric_piston', 'grindless:ggg_wafer', 'grindless:pt_lpe_crucible', 'grindless:w184_cvi_preform', 'grindless:pt_sheet']
   };
   for (const m of MACHINES) {
     const r = find(`grindless:assembly_line/${m}`);

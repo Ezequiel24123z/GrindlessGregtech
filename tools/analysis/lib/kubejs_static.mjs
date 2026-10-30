@@ -835,7 +835,8 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
   const tagsDoc = { item: {}, fluid: {} };
   for (const [t, s] of itemTags) tagsDoc.item[t] = [...s];
   for (const [t, s] of fluidTags) tagsDoc.fluid[t] = [...s];
-  const items = new Set([...registry.items.keys(), ...registry.machines.keys()]);
+  // GTM's own high-tier components exist too (TP-D2: recipes use them), but they are not ours to audit: known, not registered
+  const items = new Set([...registry.items.keys(), ...registry.machines.keys(), ...(highTier ? GTM_HIGH_TIER_COMPONENTS : [])]);
   const docs = {
     recipes: { recipes: recipes.filter((r) => !r.dropped).map((r) => ({ i: r.i, t: r.t, a: 1, j: r.j })) },
     items: { items: [...items], fluids: [...registry.fluids.keys()] },
@@ -856,6 +857,9 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
  */
 export const GTM_HIGH_TIER_IDS = ['uev', 'uiv', 'uxv'].flatMap((tier) =>
   ['machine_hull', 'energy_input_hatch', 'energy_output_hatch', 'energy_input_hatch_16a', 'energy_output_hatch_16a'].map((n) => `gtceu:${tier}_${n}`));
+export const GTM_HIGH_TIER_COMPONENTS = ['uhv', 'uev', 'uiv', 'uxv', 'opv'].flatMap((tier) =>
+  ['electric_motor', 'electric_pump', 'conveyor_module', 'electric_piston', 'robot_arm', 'field_generator', 'emitter', 'sensor', 'fluid_regulator']
+    .map((n) => `gtceu:${tier}_${n}`));
 
 /** The pack's static dump (lib/dump.mjs format) plus what the stand-in learned on the way. */
 export function staticDump(packDir, opts = {}) {

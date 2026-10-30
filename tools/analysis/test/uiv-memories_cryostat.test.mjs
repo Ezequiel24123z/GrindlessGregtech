@@ -67,7 +67,7 @@ test('lines 15 and 16 chain: boule, slab, memory', () => {
   assert.deepEqual(outputs(by('cutter', 'eu151_yso_slabs')), ['grindless:eu151_yso_slab']);
   assert.deepEqual(outputs(by('cutter', 'er_yso_slabs')), ['grindless:er_yso_slab']);
   const six = by('assembler', 'six_hour_memory');
-  assert.deepEqual(inputs(six), ['grindless:six_hour_memory_slab', 'grindless:mk_cryostat_module', 'grindless:uev_sensor']);
+  assert.deepEqual(inputs(six), ['grindless:six_hour_memory_slab', 'grindless:mk_cryostat_module', 'gtceu:uev_sensor']);
   assert.deepEqual(outputs(six), ['grindless:six_hour_memory']);
   assert.ok(six.eut <= 1966080);
 });

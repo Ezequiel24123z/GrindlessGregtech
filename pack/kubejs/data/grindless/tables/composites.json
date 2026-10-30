@@ -168,7 +168,7 @@
           "itemsOut": [{ "id": "grindless:w_fibre_preform", "count": 1 }], "fluidsOut": [] },
         { "name": "uev_electric_motor", "circuit": 0, "eut": 2097152, "duration": 300,
           "itemsIn": [{ "id": "grindless:bonded_fe16n2_magnet", "count": 2 }, { "id": "gtceu:lay_superhydride_single_cable", "count": 4 }, { "id": "grindless:sic_sic_plate", "count": 2 }, { "id": "grindless:ffkm_seal", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:uev_electric_motor", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "gtceu:uev_electric_motor", "count": 1 }], "fluidsOut": [] }
       ]
     }
   }

@@ -132,9 +132,9 @@
   // stellar_hydrogen_cut, domain inputs uxv_fusion_casing, uxv_field_generator, uxv_electric_pump
   function addController(event) {
     var HULL = 'gtceu:uxv_machine_hull'
-    var MOTOR = 'grindless:uxv_electric_motor'
-    var PUMP = 'grindless:uxv_electric_pump'
-    var FIELD = 'grindless:uxv_field_generator'
+    var MOTOR = 'gtceu:uxv_electric_motor'
+    var PUMP = 'gtceu:uxv_electric_pump'
+    var FIELD = 'gtceu:uxv_field_generator'
     var CASING = 'grindless:uxv_fusion_casing'
     var MACHINE = 'gtceu:uxv_fusion_reactor'
     var RESEARCH = 'gtceu:uiv_fusion_reactor'

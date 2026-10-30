@@ -47,7 +47,7 @@ test('the UXV row: tier 12, 1,536 UV naquadria batteries (four UIV cells, past 2
   assert.equal(uxv.batteries, null);
   assert.equal(uxv.frame, null);
   assert.deepEqual([uxv.emitter, uxv.sensor, uxv.signalParts, uxv.link, uxv.plate, uxv.wire],
-    ['grindless:uxv_emitter', 'grindless:uxv_sensor', 1, LINK, 'grindless:lasagna_plate', 'pasta_strand']);
+    ['gtceu:uxv_emitter', 'gtceu:uxv_sensor', 1, LINK, 'grindless:lasagna_plate', 'pasta_strand']);
 });
 
 test('withTiers case 12 is spelled out and the default message says 1 to 12 tiers', () => {
@@ -103,7 +103,7 @@ test('the UXV hatches and covers: assembler recipes with the link on the 2 A hat
     assert.ok(r, id);
     assert.equal(r.eut, V_UXV, id);
   }
-  assert.deepEqual(by('gtceu:uxv_wireless_energy_hatch').inputs, ['1x grindless:uxv_sensor', '1x gtceu:uxv_energy_input_hatch', '2x #gtceu:circuits/uxv', '1x ' + LINK]);
+  assert.deepEqual(by('gtceu:uxv_wireless_energy_hatch').inputs, ['1x gtceu:uxv_sensor', '1x gtceu:uxv_energy_input_hatch', '2x #gtceu:circuits/uxv', '1x ' + LINK]);
   assert.deepEqual(by('gtceu:uxv_wireless_energy_hatch_64a').inputs, ['1x gtceu:uxv_wireless_energy_hatch_16a', '2x gtceu:pasta_strand_hex_wire', '6x grindless:lasagna_plate']);
   for (const c of COVERS) assert.ok(by(c).inputs.includes('1x ' + LINK), c);
 });

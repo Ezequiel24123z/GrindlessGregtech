@@ -167,9 +167,9 @@
     var MAINFRAME = 'gtnn:optical_mainframe'
     var HE = 'gtceu:he_6n'
     var defs = [
-      { name: 'vdw_stacking_cell', part: 'grindless:uiv_robot_arm', research: 'grindless:wte2_crystal', domain: ['2x grindless:terfenol_d_rod', '2x grindless:sin_membrane', '2x grindless:vuv_caf2_optic'] },
-      { name: 'racetrack_fab', part: 'grindless:uiv_electric_motor', research: 'grindless:saf_track_wafer', domain: ['2x grindless:mtj_die', '2x grindless:pt_sheet', '2x grindless:ga2o3_power_die'] },
-      { name: 'yig_lpe_furnace', part: 'grindless:uiv_electric_piston', research: 'grindless:ggg_wafer', domain: ['2x grindless:pt_lpe_crucible', '2x grindless:w184_cvi_preform', '2x grindless:pt_sheet'] }
+      { name: 'vdw_stacking_cell', part: 'gtceu:uiv_robot_arm', research: 'grindless:wte2_crystal', domain: ['2x grindless:terfenol_d_rod', '2x grindless:sin_membrane', '2x grindless:vuv_caf2_optic'] },
+      { name: 'racetrack_fab', part: 'gtceu:uiv_electric_motor', research: 'grindless:saf_track_wafer', domain: ['2x grindless:mtj_die', '2x grindless:pt_sheet', '2x grindless:ga2o3_power_die'] },
+      { name: 'yig_lpe_furnace', part: 'gtceu:uiv_electric_piston', research: 'grindless:ggg_wafer', domain: ['2x grindless:pt_lpe_crucible', '2x grindless:w184_cvi_preform', '2x grindless:pt_sheet'] }
     ]
     SL.controllerRecipes = []
     defs.forEach(function (d) {

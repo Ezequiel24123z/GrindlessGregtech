@@ -167,10 +167,10 @@
   function addControllers(event) {
     var HULL = 'gtceu:uev_machine_hull'
     var O = 'gtnn:optical_computer'
-    var SENSOR = 'grindless:uev_sensor'
-    var EMITTER = 'grindless:uev_emitter'
-    var ARM = 'grindless:uev_robot_arm'
-    var PUMP = 'grindless:uev_electric_pump'
+    var SENSOR = 'gtceu:uev_sensor'
+    var EMITTER = 'gtceu:uev_emitter'
+    var ARM = 'gtceu:uev_robot_arm'
+    var PUMP = 'gtceu:uev_electric_pump'
     var M = SI.machines
     var C = '4x #gtceu:circuits/uhv'
     // QR-R6: assembly line with station research (a component of the line, then the previous machine), the era fluid and domain inputs

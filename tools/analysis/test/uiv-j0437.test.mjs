@@ -112,7 +112,7 @@ test('line 34: pair plasma -> cooled e+ -> Ps (19) -> BEC -> cavity -> UIV emitt
   assert.deepEqual(outputs(by('antimatter_storage', 'ps_bec')), ['grindless:ps_bec', 'gtceu:helium']);
   const e = by('assembler', 'uiv_emitter');
   assert.ok(inputs(e).includes('grindless:gamma_laser_cavity'));
-  assert.deepEqual(outputs(e), ['grindless:uiv_emitter']);
+  assert.deepEqual(outputs(e), ['gtceu:uiv_emitter']);
 });
 
 test('line 38 chain: C-12 CVD plate -> HPHT -> (004) cut -> ion mill -> Bragg mirror', () => {
@@ -151,7 +151,7 @@ test('older rows appended in outer_chemistry, observatory', () => {
 
 test('only from: no other recipe in pack/kubejs produces the B3 key items', () => {
   const own = [path.join('uiv', 'j0437.js'), 'j0437.json', path.join('zpm', 'observatory.js')];
-  const key = ['grindless:j0437_pulse_raw', 'grindless:xray_pulse_timed', 'grindless:pulsar_navigation_solution', 'grindless:uiv_emitter'];
+  const key = ['grindless:j0437_pulse_raw', 'grindless:xray_pulse_timed', 'grindless:pulsar_navigation_solution', 'gtceu:uiv_emitter'];
   const makers = new Map(key.map((k) => [k, []]));
   for (const f of scripts(path.join(kube, 'server_scripts')).concat(scripts(tables))) {
     if (own.some((o) => f.endsWith(o))) continue;

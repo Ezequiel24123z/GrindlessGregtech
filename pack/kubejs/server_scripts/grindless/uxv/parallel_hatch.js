@@ -18,7 +18,7 @@
   var RESEARCH = 'gtceu:uiv_parallel_hatch'
   // F1 registers the material key grindless:filtered_disk_plasma, but GTM makes its fluid under gtceu:
   var PLASMA = 'gtceu:filtered_disk_plasma'
-  var KEY = { H: 'gtceu:uxv_machine_hull', M: 'gtnn:spintronic_mainframe', G: 'grindless:uxv_field_generator', E: 'grindless:uxv_emitter', C: 'gtceu:metallic_hydrogen_double_cable', P: 'gtceu:rhea_plate', F: 'grindless:ffkm_seal' }
+  var KEY = { H: 'gtceu:uxv_machine_hull', M: 'gtnn:spintronic_mainframe', G: 'gtceu:uxv_field_generator', E: 'gtceu:uxv_emitter', C: 'gtceu:metallic_hydrogen_double_cable', P: 'gtceu:rhea_plate', F: 'grindless:ffkm_seal' }
 
   H.recipeId = 'grindless:assembly_line/uxv_parallel_hatch'
   H.output = OUTPUT

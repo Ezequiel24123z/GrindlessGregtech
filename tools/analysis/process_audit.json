@@ -21,12 +21,15 @@
   "hidden_with_recipes": 0,
   "self_gain": 2,
   "cycle_gain": 0,
-  "trivial_step": 13
+  "trivial_step": 16
  },
  "keys": [
   "self_gain|grindless:closed_ecosystem/culture_seed",
   "self_gain|grindless:closed_ecosystem/culture_seed",
+  "trivial_step|fluid:gtceu:carbon_burning_ash",
   "trivial_step|fluid:gtceu:he3he3_ash",
+  "trivial_step|fluid:gtceu:helium_burning_ash",
+  "trivial_step|fluid:gtceu:oxygen_burning_ash",
   "trivial_step|fluid:gtceu:pli6_ash",
   "trivial_step|fluid:gtceu:pn15_ash",
   "trivial_step|grindless:annealed_neon_cone",

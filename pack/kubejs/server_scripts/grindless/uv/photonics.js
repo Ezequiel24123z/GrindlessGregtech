@@ -153,7 +153,7 @@
     { name: 'mcp_multifibre', type: 'fibre_draw', circuit: 7, itemsIn: [item('grindless:etchable_core_tube', 4)],
       fluidsIn: [fluid('gtceu:argon', 500)], itemsOut: [item('grindless:mcp_multifibre', 1)], fluidsOut: [], eut: ZPM, duration: 600 },
     { name: 'cooling_lasers', type: 'fibre_draw', circuit: 8,
-      itemsIn: [item('grindless:uev_emitter', 1), item('gtceu:lithium_6_dust', 1), item('gtceu:potassium_40_dust', 1)], fluidsIn: [],
+      itemsIn: [item('gtceu:uev_emitter', 1), item('gtceu:lithium_6_dust', 1), item('gtceu:potassium_40_dust', 1)], fluidsIn: [],
       itemsOut: [item('grindless:li_cooling_laser', 1), item('grindless:k_cooling_laser', 1)], fluidsOut: [], eut: ZPM, duration: 400 }
   ]
 

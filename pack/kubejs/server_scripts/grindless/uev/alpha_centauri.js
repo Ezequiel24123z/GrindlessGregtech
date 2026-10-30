@@ -173,11 +173,11 @@
     var C = '4x #gtceu:circuits/uhv'
     var defs = [
       { machine: AC.machines.collector.machine, name: AC.machines.collector.name, research: 'grindless:superhydride_scoop_coil', era: 'gtceu:tritanium',
-        ins: [HULL, '2x gtceu:uv_field_generator', '2x grindless:uev_electric_pump', C, '2x grindless:superhydride_scoop_coil', '2x grindless:aerogel_tile', 'grindless:uev_sensor'] },
+        ins: [HULL, '2x gtceu:uv_field_generator', '2x gtceu:uev_electric_pump', C, '2x grindless:superhydride_scoop_coil', '2x grindless:aerogel_tile', 'gtceu:uev_sensor'] },
       { machine: AC.machines.lab.machine, name: AC.machines.lab.name, research: AC.machines.collector.machine, era: 'gtceu:tritanium',
-        ins: [HULL, '2x grindless:uev_robot_arm', '2x grindless:uev_electric_pump', C, '2x grindless:aerogel_tile', 'grindless:teos_flask', 'grindless:uev_sensor'] },
+        ins: [HULL, '2x gtceu:uev_robot_arm', '2x gtceu:uev_electric_pump', C, '2x grindless:aerogel_tile', 'grindless:teos_flask', 'gtceu:uev_sensor'] },
       { machine: AC.machines.station.machine, name: AC.machines.station.name, research: AC.machines.lab.machine, era: 'gtceu:neutronium',
-        ins: [HULL, '2x grindless:uev_emitter', '2x grindless:uev_sensor', C, 'grindless:lobster_eye_mcp', '2x grindless:sdd', 'grindless:nuclear_clock'] }
+        ins: [HULL, '2x gtceu:uev_emitter', '2x gtceu:uev_sensor', C, 'grindless:lobster_eye_mcp', '2x grindless:sdd', 'grindless:nuclear_clock'] }
     ]
     AC.controllerRecipes = []
     defs.forEach(function (d) {

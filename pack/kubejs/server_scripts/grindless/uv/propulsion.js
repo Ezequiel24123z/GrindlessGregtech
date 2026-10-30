@@ -111,10 +111,10 @@
     // so it goes into the Mk2 with the Barnard magnets (uev.md:216, :1556), not into the Mk1 that flies to Barnard.
     // The Mk2 keeps the Mk1's HfTaCN liner, so it takes no more (4 items + circuit fit worksIO.itemsIn).
     row('dfd_mk1_motor', 'thruster_assembly', 6, [item('grindless:wf_w_tile', 4), item('grindless:sic_sic_plate', 4),
-      item('gtceu:hftacn_ingot', 8), item('grindless:uev_emitter', 1)], [fluid('gtceu:dhe3_fuel_mix', 4000)],
+      item('gtceu:hftacn_ingot', 8), item('gtceu:uev_emitter', 1)], [fluid('gtceu:dhe3_fuel_mix', 4000)],
       [item(DFD_MK1, 1)], [], VA_UEV, 1000),
     row('dfd_mk2_motor', 'thruster_assembly', 7, [item(DFD_MK1, 1), item(BRAYTON_WHEEL, 1), item('grindless:bonded_fe16n2_magnet', 8),
-      item('grindless:uev_electric_motor', 1)], [], [item(DFD_MK2, 1)], [], VA_UEV, 1200)
+      item('gtceu:uev_electric_motor', 1)], [], [item(DFD_MK2, 1)], [], VA_UEV, 1200)
   ]
 
   var SIDE = [

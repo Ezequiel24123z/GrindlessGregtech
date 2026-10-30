@@ -173,8 +173,8 @@
     var MAINFRAME = 'gtnn:optical_mainframe'
     // the engine's research is the Kerr chart, whose chain needs the bay; the half-sled is never an input (it would loop)
     var defs = [
-      { name: 'ergosphere_probe_bay', part: 'grindless:uiv_emitter', research: 'grindless:ergosphere_probe', domain: ['2x grindless:ergosphere_probe', '2x grindless:data_crystal_5d', '2x grindless:sled_charge'] },
-      { name: 'penrose_engine', part: 'grindless:uiv_field_generator', research: 'grindless:kerr_chart', domain: ['2x grindless:kerr_chart', '2x grindless:sled_hull', '2x grindless:compacted_waste_canister'] }
+      { name: 'ergosphere_probe_bay', part: 'gtceu:uiv_emitter', research: 'grindless:ergosphere_probe', domain: ['2x grindless:ergosphere_probe', '2x grindless:data_crystal_5d', '2x grindless:sled_charge'] },
+      { name: 'penrose_engine', part: 'gtceu:uiv_field_generator', research: 'grindless:kerr_chart', domain: ['2x grindless:kerr_chart', '2x grindless:sled_hull', '2x grindless:compacted_waste_canister'] }
     ]
     CY.controllerRecipes = []
     defs.forEach(function (d) {

@@ -178,11 +178,11 @@
     var MAINFRAME = 'gtnn:optical_mainframe'
     // es254_target is not a controller input here: einsteinium only comes from the separator and the decompressor
     var defs = [
-      { name: 'crust_lift', part: 'grindless:uiv_electric_piston', research: 'grindless:crust_lift_tether', domain: ['2x grindless:polar_cap_electrode', '2x grindless:braided_mh_tether', '2x grindless:mh_laminated_yarn'] },
-      { name: 'neutron_drip_separator', part: 'grindless:uiv_electric_pump', research: 'grindless:neutron_supermirror', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
-      { name: 'neutronium_cage', part: 'grindless:uiv_robot_arm', research: 'grindless:cage_part', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
-      { name: 'r_process_decompressor', part: 'grindless:uiv_conveyor_module', research: 'grindless:sealed_capsule', domain: ['2x grindless:sealed_capsule', '2x grindless:neutron_guide', '2x grindless:target_wheel_blank'] },
-      { name: 'decay_heat_vault', part: 'grindless:uiv_electric_motor', research: 'grindless:mh_laminated_yarn', domain: ['2x grindless:braided_mh_tether', '2x grindless:polar_cap_electrode', '2x grindless:crust_lift_tether'] }
+      { name: 'crust_lift', part: 'gtceu:uiv_electric_piston', research: 'grindless:crust_lift_tether', domain: ['2x grindless:polar_cap_electrode', '2x grindless:braided_mh_tether', '2x grindless:mh_laminated_yarn'] },
+      { name: 'neutron_drip_separator', part: 'gtceu:uiv_electric_pump', research: 'grindless:neutron_supermirror', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
+      { name: 'neutronium_cage', part: 'gtceu:uiv_robot_arm', research: 'grindless:cage_part', domain: ['2x grindless:neutron_guide', '2x grindless:neutron_supermirror', '2x grindless:target_wheel_blank'] },
+      { name: 'r_process_decompressor', part: 'gtceu:uiv_conveyor_module', research: 'grindless:sealed_capsule', domain: ['2x grindless:sealed_capsule', '2x grindless:neutron_guide', '2x grindless:target_wheel_blank'] },
+      { name: 'decay_heat_vault', part: 'gtceu:uiv_electric_motor', research: 'grindless:mh_laminated_yarn', domain: ['2x grindless:braided_mh_tether', '2x grindless:polar_cap_electrode', '2x grindless:crust_lift_tether'] }
     ]
     RX.controllerRecipes = []
     defs.forEach(function (d) {
