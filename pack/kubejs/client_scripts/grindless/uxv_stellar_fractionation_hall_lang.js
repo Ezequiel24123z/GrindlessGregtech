@@ -1,3 +1,4 @@
+// priority: 1469
 // Gregtech Grindless - name, tooltips and info page of UXV's stellar fractionation hall (startup_scripts/grindless/uxv/stellar_fractionation_hall.js; package UXV-M2):
 //
 //   block.gtceu.stellar_fractionation_hall             machine name

@@ -1,4 +1,4 @@
-// priority: -9945
+// priority: -9942
 // TEST ONLY, UXV-A6 (gtceu:shequid_works, gtceu:mnt_collider). Command: kubejs custom_command gg_test_uxv_shequid_mnt
 // Band ONLY: X 36608-36671, Z 0-63, Overworld Y 98-112.
 //   T1 (named uncertainty: the collider's c1, 134,217,728 EU/t, four times V[UIV], is accepted by two UIV energy hatches and the

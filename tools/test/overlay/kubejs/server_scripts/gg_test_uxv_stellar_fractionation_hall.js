@@ -1,3 +1,4 @@
+// priority: -9975
 // TEST ONLY, UXV-M2 (gtceu:stellar_fractionation_hall). Command: kubejs custom_command gg_test_uxv_stellar_fractionation_hall
 // Band ONLY: X 37056-37119, Z 0-63, Overworld Y 98-115 (the hall has no site: it is built in the Overworld; zones.json carries the same Y range).
 //   T1 (named uncertainty: a distillation tower recipe with 12 fluid outputs at the x65,536 UXV hatch keeps long amounts and lands exact in 12 output hatches):

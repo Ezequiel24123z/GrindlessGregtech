@@ -1,4 +1,4 @@
-// priority: -9957
+// priority: -9964
 // TEST ONLY, UXV-A5 (gtceu:vdw_stacking_cell, gtceu:racetrack_fab, gtceu:yig_lpe_furnace). Command: kubejs custom_command gg_test_uxv_spin_logic
 // Band ONLY: X 36544-36607, Z 0-63, Overworld Y 98-112.
 //   T1 (named uncertainty: a plain gtnn:spintronic_mainframe satisfies #gtceu:circuits/uxv, and a 67,108,864 EU/t row is accepted by two UIV

@@ -1,3 +1,4 @@
+// priority: -26260
 // UXV-M2: the controller of gtceu:stellar_fractionation_hall (startup_scripts/grindless/uxv/stellar_fractionation_hall.js). The hall has no recipe of its own: it runs
 // GTM's distillation_tower and distillery recipes, so this is its one recipe, an assembly line researched with the condensation tower.
 // UXV hull + UXV parts (the conveyor module and the robot arm of A8, the electric pump) + the domain inputs of the hall (the lasagna plate of the
