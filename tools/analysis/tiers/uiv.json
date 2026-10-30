@@ -1084,14 +1084,6 @@
   ],
   "synthetic": [
     {
-      "id": "bootstrap-radiator-module",
-      "package": "A10",
-      "produces": [
-        "grindless:droplet_radiator_module"
-      ],
-      "note": "KNOWN PACK DEFECT: gtceu:droplet_radiator_works is built from grindless:droplet_radiator_module (uiv/shapes.js:365) and the module is made only by that works (tables/matrioshka.json:30). Remove once the module has a producer outside the works."
-    },
-    {
       "id": "wireless-uiv",
       "package": "W",
       "capital": [

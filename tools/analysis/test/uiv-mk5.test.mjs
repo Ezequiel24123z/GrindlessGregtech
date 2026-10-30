@@ -191,13 +191,13 @@ test('controllers: UIV hull, 2 UIV parts and 2 optical mainframes', () => {
   assert.doesNotMatch(src, /\['OPO', 'PHP'\]|gtceu\.shaped/, 'no shaped controller recipe any more');
   assert.match(src, /event\.recipes\.gtceu\.assembly_line\('grindless:' \+ d\.name\)/);
   assert.match(src, /grindless:assembly_line\/' \+ d\.name/);
-  assert.match(src, /b\.itemInputs\('2x ' \+ d\.part\)/);
+  assert.match(src, /d\.parts\.forEach\(function \(p\) \{ b\.itemInputs\('3x ' \+ p\) \}\)/);
   assert.match(src, /b\.itemInputs\('2x ' \+ MAINFRAME\)/);
   assert.match(src, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
   assert.match(src, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
   assert.match(src, /stationResearch/);
-  assert.match(src, /name: 'polarised_proton_source', part: 'gtceu:uiv_electric_pump', research: 'grindless:cps_wetted_mesh'/);
-  assert.match(src, /name: 'uiv_fusion_reactor', part: 'gtceu:uiv_electric_piston', research: 'grindless:divertor'/);
+  assert.match(src, /name: 'polarised_proton_source', parts: \['gtceu:uiv_electric_pump', 'gtceu:uiv_field_generator', 'gtceu:uiv_emitter'\], research: 'grindless:cps_wetted_mesh'/);
+  assert.match(src, /name: 'uiv_fusion_reactor', parts: \['gtceu:uiv_electric_piston', 'gtceu:uiv_field_generator', 'gtceu:uiv_electric_pump'\], research: 'grindless:divertor'/);
 });
 
 test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a texture', () => {

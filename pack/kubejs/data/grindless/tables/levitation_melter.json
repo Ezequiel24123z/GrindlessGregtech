@@ -92,7 +92,7 @@
         { "name": "impregnated_mh_coil", "circuit": 0, "eut": 122880, "duration": 300,
           "itemsIn": [{ "id": "grindless:wound_rhea_former", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 288 }], "charge": [],
           "itemsOut": [{ "id": "grindless:impregnated_mh_coil", "count": 1 }], "fluidsOut": [] },
-        { "name": "metallic_hydrogen_coil_block", "circuit": 0, "eut": 491520, "duration": 400,
+        { "name": "metallic_hydrogen_coil_block", "circuit": 0, "eut": 31457280, "duration": 400,
           "itemsIn": [{ "id": "grindless:impregnated_mh_coil", "count": 4 }, { "id": "gtceu:rhea_plate", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 288 }], "charge": [],
           "itemsOut": [{ "id": "grindless:metallic_hydrogen_coil_block", "count": 1 }], "fluidsOut": [] },
         { "name": "rhea_cased_charge", "circuit": 0, "eut": 122880, "duration": 300,

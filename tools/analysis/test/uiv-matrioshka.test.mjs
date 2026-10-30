@@ -71,13 +71,13 @@ test('Matrioshka computer: circuits 1-3, 31457280 EU/t, orbit only, research NBT
   }
 });
 
-test('droplet radiator works: circuits 1-2, orbit only, tin overflow returned, orifice plate used', () => {
+test('droplet radiator works: circuit 2 for the TPV tile, orbit only; the module is an assembly line with the orifice plate', () => {
   const rc = T.types.droplet_radiator_assembly.recipes;
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['radiator_module', 1], ['tpv_tile', 2]]);
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['tpv_tile', 2]]);
   for (const r of rc) { assert.equal(r.eut, 31457280, r.name); assert.equal(r.site, true, r.name); }
-  assert.deepEqual(inputs(by('droplet_radiator_assembly', 'radiator_module')),
-    ['grindless:orifice_plate', 'grindless:eb_distilled_tin', 'grindless:droplet_collector']);
-  assert.deepEqual(outputs(by('droplet_radiator_assembly', 'radiator_module')), ['grindless:droplet_radiator_module', 'gtceu:tin_ingot']);
+  assert.deepEqual(inputs(by('assembly_line', 'radiator_module')),
+    ['grindless:orifice_plate', 'grindless:eb_distilled_tin', 'grindless:droplet_collector', 'gtceu:uiv_electric_pump', '#gtceu:circuits/uiv']);
+  assert.deepEqual(outputs(by('assembly_line', 'radiator_module')), ['grindless:droplet_radiator_module']);
   assert.deepEqual(inputs(by('droplet_radiator_assembly', 'tpv_tile')), ['grindless:ingaasb_tpv_cell', 'grindless:selective_emitter']);
 });
 
@@ -85,10 +85,9 @@ test('the three temporary EMI exceptions have real uses: lattice_2pp, orifice_pl
   const cvi = JSON.parse(fs.readFileSync(path.join(tables, 'composites.json'), 'utf8'));
   const glassy = cvi.types.chemical_vapour_infiltration.recipes.find((r) => r.name === 'glassy_carbon_lattice');
   assert.ok(glassy && ids(glassy.itemsIn).includes('grindless:lattice_2pp'));
-  assert.ok(inputs(by('droplet_radiator_assembly', 'radiator_module')).includes('grindless:orifice_plate'));
+  assert.ok(inputs(by('assembly_line', 'radiator_module')).includes('grindless:orifice_plate'));
   assert.ok(inputs(by('matrioshka_computing', 'research_write')).includes('grindless:data_crystal_5d'));
 });
-
 test('lines 19, 21, 37, 41, 43, 46 chain: every step feeds the next', () => {
   const chain = [
     ['chemical_reactor', 'sic_coat_lattice', 'grindless:sic_coated_lattice'],
@@ -176,7 +175,7 @@ test('lang: every item, block and machine named in en_us and es_es, every older 
     for (let i = 0; i < 1; i++) assert.ok(lang.includes(`grindless.machine.${m}.tooltip.${i}'`));
   }
   const keys = ['matrioshka_computing.research_write', 'matrioshka_computing.ns_eos_chart', 'matrioshka_computing.kerr_chart',
-    'droplet_radiator_assembly.radiator_module', 'droplet_radiator_assembly.tpv_tile', 'electron_beam.tin_distill',
+    'droplet_radiator_assembly.tpv_tile', 'electron_beam.tin_distill',
     'chemical_vapour_infiltration.glassy_carbon_lattice', 'snspd_fabrication.nb_jj_wafer', 'molecular_beam_epitaxy.nb_trilayer',
     'photonic_foundry.air_bridge', 'photonic_foundry.diamond_contacts', 'photonic_foundry.w_photonic_crystal'];
   for (const k of keys) assert.ok(lang.includes(`gtceu.recipe.grindless_${k}'`), k);
@@ -195,14 +194,14 @@ test('controllers read the UIV hull, 2 UIV parts and 2 optical mainframes', () =
   assert.match(srv, /event\.recipes\.gtceu\.assembly_line\('grindless:' \+ d\.name\)/);
   assert.match(srv, /grindless:assembly_line\/' \+ d\.name/);
   assert.match(srv, /b\.itemInputs\(HULL\)/);
-  assert.match(srv, /b\.itemInputs\('2x ' \+ d\.part\)/);
+  assert.match(srv, /d\.parts\.forEach\(function \(p\) \{ b\.itemInputs\('3x ' \+ p\) \}\)/);
   assert.match(srv, /b\.itemInputs\('2x ' \+ MAINFRAME\)/);
   assert.match(srv, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
   assert.match(srv, /d\.domain\.forEach/);
   assert.match(srv, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
   assert.match(srv, /stationResearch/);
-  assert.match(srv, /name: 'matrioshka_computer', part: 'gtceu:uiv_electric_piston', research: 'grindless:matrioshka_node'/);
-  assert.match(srv, /name: 'droplet_radiator_works', part: 'gtceu:uiv_conveyor_module', research: 'grindless:droplet_collector'/);
+  assert.match(srv, /name: 'matrioshka_computer', parts: \['gtceu:uiv_field_generator', 'gtceu:uiv_emitter', 'gtceu:uiv_sensor'\], research: 'grindless:matrioshka_node'/);
+  assert.match(srv, /name: 'droplet_radiator_works', parts: \['gtceu:uiv_electric_pump', 'gtceu:uiv_fluid_regulator', 'gtceu:uiv_conveyor_module'\], research: 'grindless:droplet_collector'/);
   for (const [n, st] of [['matrioshka_node', 'grindless:c12_metallised_plate'], ['matrioshka_tpv_shell', 'grindless:tpv_segment'], ['logic_tile_block', 'grindless:aqfp_module'], ['emitter_shell', 'grindless:selective_emitter']]) {
     assert.equal(by('assembly_line', n).station, st, n);
   }

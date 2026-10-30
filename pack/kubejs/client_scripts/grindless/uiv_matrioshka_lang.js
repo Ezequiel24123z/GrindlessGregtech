@@ -11,8 +11,8 @@
     // [key, en, es]
     var ENTRIES = [
         ['emi.grindless.info.uiv_matrioshka.0',
-            'The Matrioshka computer is built from five blocks: the nodes, the logic tiles, the TPV shell and the emitter shell around the core. The droplet radiator module is the radiator works\' block. All five are made in the assembler and placed in the structure.',
-            'La computadora matrioska se construye con anillos de cinco bloques: losas lógicas, nodos, la cubierta emisora, la cubierta TPV y el módulo del radiador de gotas. El módulo viene de la fábrica de radiadores de gotas; los otros cuatro se fabrican en el ensamblador.'],
+            'The Matrioshka computer is built from five blocks: the nodes, the logic tiles, the TPV shell and the emitter shell around the core. The droplet radiator module is the radiator works\' block. All five are made on the assembly line (the module only in Mercury orbit) and placed in the structure.',
+            'La computadora matrioska se construye con anillos de cinco bloques: losas lógicas, nodos, la cubierta emisora, la cubierta TPV y el módulo del radiador de gotas. Los cinco se fabrican en la línea de ensamblaje (el módulo solo en la órbita de Mercurio).'],
         ['emi.grindless.info.uiv_matrioshka.1',
             'The radiation-hardened controller is made on the assembly line and is read by the machines built from it. The InGaAsSb epi wafer comes from the MOCVD reactor, which EMI does not show.',
             'El controlador endurecido contra la radiación se fabrica en la línea de ensamblaje y lo leen las máquinas construidas con él. La oblea epitaxial de InGaAsSb sale del reactor MOCVD, que EMI no muestra.'],
@@ -26,8 +26,8 @@
             '\u00a77Writes UIV research and makes the neutron-star and Kerr charts.',
             '\u00a77Escribe investigación UIV y fabrica las cartas de neutrones y de Kerr.'],
         ['grindless.machine.droplet_radiator_works.tooltip.0',
-            '\u00a77Makes droplet radiator modules and TPV tiles in open vacuum.',
-            '\u00a77Fabrica módulos de radiador de gotas y losetas TPV en vacío abierto.'],
+            '\u00a77Makes TPV tiles in open vacuum.',
+            '\u00a77Fabrica losetas TPV en vacío abierto.'],
 
         ['gtceu.recipe.grindless_matrioshka_computing.research_write',
             'Circuit 1: the 5D data crystal burns the radiation-hardened controller research into a blank data module.',
@@ -38,9 +38,6 @@
         ['gtceu.recipe.grindless_matrioshka_computing.kerr_chart',
             'Circuit 3: correlated Kerr data resolves into the Kerr chart.',
             'Circuito 3: los datos de Kerr correlacionados se resuelven en la carta de Kerr.'],
-        ['gtceu.recipe.grindless_droplet_radiator_assembly.radiator_module',
-            'Circuit 1: the orifice plate sprays distilled tin onto a collector; the overflow returns as an ingot.',
-            'Circuito 1: la placa de orificios rocía estaño destilado sobre un colector; el exceso vuelve como lingote.'],
         ['gtceu.recipe.grindless_droplet_radiator_assembly.tpv_tile',
             'Circuit 2: four TPV cells and a selective emitter make a TPV tile.',
             'Circuito 2: cuatro celdas TPV y un emisor selectivo forman una loseta TPV.'],
