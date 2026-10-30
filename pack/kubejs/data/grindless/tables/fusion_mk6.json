@@ -1,0 +1,62 @@
+{
+  "_source": "docs/eras/uxv.md, machine 9 'Mk6 fusion ring' and 'Fusion' (package UXV-A7).",
+  "_how_it_is_used": "types: read by server_scripts/grindless/uxv/fusion_mk6.js, one recipe per row, id grindless:<type>/<name> (GTM puts the type in front); a row with 'start' is a fusion_reactor row (fusionStartEU). converter and quench: read by server_scripts/grindless/zpm/fusion.js (addMk6Converter, addMk6Quench). Converter rows: 'amountIn' mB of plasma in, 'amountOut' mB of ash or cut out, at -eut EU/t for 'duration' ticks; the converter runs 128 parallels, so a row's total is 128 x eut, the pinned 'total'. Each row pays 2 x the EU its fusion row spends (67,108,864 EU/t x 16 t for c1) and is final: power/generators.js lists the plasma generator, not gtceu:direct_conversion, so the x2 is never applied to it. Quench rows: plasma_quench, one item output at most. tools/analysis/test/uxv-fusion_mk6.test.mjs pins every row. c4 is 134,217,728 EU/t, not the design's 268,435,456: GTM refuses a recipe whose EU/t tier is above the machine's (V[UXV] = 134,217,728).",
+  "types": {
+    "assembler": {
+      "recipes": [
+        { "name": "uxv_fusion_casing", "circuit": 0, "eut": 31457280, "duration": 600,
+          "itemsIn": [{ "id": "grindless:wf_rhea_billet", "count": 1 }, { "id": "grindless:w184_cvi_preform", "count": 1 }, { "id": "grindless:mh_winding", "count": 1 },
+            { "id": "grindless:uxv_field_generator", "count": 1 }, { "id": "gtceu:tritanium_frame", "count": 1 }], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:he_6n", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:uxv_fusion_casing", "count": 2 }], "fluidsOut": [] }
+      ]
+    },
+    "fusion_reactor": {
+      "recipes": [
+        { "name": "uxv_hot_cno", "circuit": 0, "eut": 67108864, "duration": 16, "start": 6000000000,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:stellar_hydrogen_cut", "amount": 108 }, { "id": "gtceu:stellar_cno_cut", "amount": 20 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:cno_ash_plasma", "amount": 1024 }] },
+        { "name": "uxv_triple_alpha", "circuit": 0, "eut": 100663296, "duration": 16, "start": 8000000000,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:triple_alpha_fuel", "amount": 128 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:helium_burning_ash_plasma", "amount": 1024 }] },
+        { "name": "uxv_carbon_burning", "circuit": 0, "eut": 134217728, "duration": 16, "start": 9000000000,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:carbon_burning_fuel", "amount": 128 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:carbon_burning_ash_plasma", "amount": 1024 }] },
+        { "name": "uxv_oxygen_burning", "circuit": 0, "eut": 134217728, "duration": 16, "start": 10000000000,
+          "itemsIn": [], "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen_burning_fuel", "amount": 128 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:oxygen_burning_ash_plasma", "amount": 1024 }] }
+      ]
+    }
+  },
+  "converter": {
+    "recipes": [
+      { "name": "uxv_cno_ash_plasma", "input": "gtceu:cno_ash_plasma", "amountIn": 1024, "output": "gtceu:stellar_cno_cut", "amountOut": 19, "duration": 2048, "eut": 1048576, "total": 134217728 },
+      { "name": "uxv_helium_burning_ash_plasma", "input": "gtceu:helium_burning_ash_plasma", "amountIn": 1, "output": "gtceu:helium_burning_ash", "amountOut": 1, "duration": 2, "eut": 1572864, "total": 201326592 },
+      { "name": "uxv_carbon_burning_ash_plasma", "input": "gtceu:carbon_burning_ash_plasma", "amountIn": 1, "output": "gtceu:carbon_burning_ash", "amountOut": 1, "duration": 2, "eut": 2097152, "total": 268435456 },
+      { "name": "uxv_oxygen_burning_ash_plasma", "input": "gtceu:oxygen_burning_ash_plasma", "amountIn": 1, "output": "gtceu:oxygen_burning_ash", "amountOut": 1, "duration": 2, "eut": 2097152, "total": 268435456 }
+    ]
+  },
+  "quench": {
+    "machine": "gtceu:plasma_quench_caster",
+    "eut": 7864320,
+    "duration": 400,
+    "rows": [
+      { "name": "helium_ash_split", "circuit": 3, "fluidsIn": [{ "id": "gtceu:helium_burning_ash", "amount": 1000 }, { "id": "gtceu:argon", "amount": 100 }],
+        "itemsOut": [{ "id": "gtceu:carbon_12_dust", "count": 4 }], "fluidsOut": [{ "id": "gtceu:oxygen_16", "amount": 1000 }, { "id": "gtceu:argon", "amount": 90 }] },
+      { "name": "carbon_ash_split", "circuit": 4, "fluidsIn": [{ "id": "gtceu:carbon_burning_ash", "amount": 1000 }, { "id": "gtceu:argon", "amount": 100 }],
+        "itemsOut": [{ "id": "gtceu:sodium_dust", "count": 2 }], "fluidsOut": [{ "id": "gtceu:neon", "amount": 500 }, { "id": "gtceu:magnesium", "amount": 288 }] },
+      { "name": "oxygen_ash_silicon", "circuit": 5, "fluidsIn": [{ "id": "gtceu:oxygen_burning_ash", "amount": 1000 }, { "id": "gtceu:argon", "amount": 100 }],
+        "itemsOut": [{ "id": "grindless:si28_ash", "count": 2 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
+      { "name": "finemet_ribbon_cast", "circuit": 6, "fluidsIn": [{ "id": "gtceu:finemet_melt", "amount": 576 }, { "id": "gtceu:argon", "amount": 100 }],
+        "itemsOut": [{ "id": "grindless:finemet_ribbon", "count": 4 }], "fluidsOut": [{ "id": "gtceu:finemet_melt", "amount": 72 }, { "id": "gtceu:argon", "amount": 90 }] },
+      { "name": "oxygen_ash_sulfur", "circuit": 7, "fluidsIn": [{ "id": "gtceu:oxygen_burning_ash", "amount": 1000 }, { "id": "gtceu:argon", "amount": 100 }],
+        "itemsOut": [{ "id": "gtceu:sulfur_dust", "count": 4 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
+      { "name": "oxygen_ash_phosphorus", "circuit": 8, "fluidsIn": [{ "id": "gtceu:oxygen_burning_ash", "amount": 1000 }, { "id": "gtceu:argon", "amount": 100 }],
+        "itemsOut": [{ "id": "gtceu:phosphorus_dust", "count": 2 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
+    ]
+  }
+}

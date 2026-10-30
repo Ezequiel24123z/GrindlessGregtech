@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:si28_ash"],
+  "text": ["emi.grindless.info.si28_ash.0"]
+}
