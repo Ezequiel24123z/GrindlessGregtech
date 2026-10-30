@@ -258,7 +258,9 @@
   ],
   "uxv": [
    "gtceu:accretion_disk_skimmer",
+   "gtceu:annihilation_laser_works",
    "gtceu:bz_dynamo",
+   "gtceu:ejecta_knot_sweeper",
    "gtceu:frc_former",
    "gtceu:mnt_collider",
    "gtceu:mtj_sputter_cluster",

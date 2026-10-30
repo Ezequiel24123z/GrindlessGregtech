@@ -1,4 +1,4 @@
-// priority: -9967
+// priority: -9774
 // TEST ONLY, UXV-B5 (gtceu:ejecta_knot_sweeper, gtceu:annihilation_laser_works). Command: kubejs custom_command gg_test_uxv_cas_a
 // Band ONLY: X 36992-37055, Z 0-63, Y 98-115. The sweeper is built in grindless:cas_a_remnant (its recipe is locked there), the laser works in the Overworld.
 //   T1 (named uncertainty: the sweeper's sweep_ejecta_knots row, 67,108,864 EU/t and dimension-locked, starts at Cassiopeia A on two UIV energy hatches only):

@@ -33,10 +33,11 @@
           "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
         },
         {
-          "_why": "machine 8 c2: the moderated Ps cell condenses inside the gamma laser cavity; the MTJ die times the stimulated 511 keV pulse. The module leaves at the nose.",
+          "_why": "machine 8 c2: the UV antimatter trap's positron stack (c5) loads the moderated Ps cell, which condenses inside the gamma laser cavity; the MTJ die times the stimulated 511 keV pulse. The stack is annihilated in the pulse (line 25). The module leaves at the nose.",
           "name": "stimulate_gamma_emission", "circuit": 2, "eut": 134217728, "duration": 2400,
           "itemsIn": [
             { "id": "grindless:moderated_ps_cell", "count": 1 },
+            { "id": "grindless:positron_stack", "count": 1 },
             { "id": "grindless:gamma_laser_cavity", "count": 1 },
             { "id": "grindless:mtj_die", "count": 1 }
           ],

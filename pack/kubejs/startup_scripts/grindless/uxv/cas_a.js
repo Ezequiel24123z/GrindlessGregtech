@@ -1,4 +1,4 @@
-// priority: -10970
+// priority: -10749
 // -----------------------------------------------------------------------------------------------
 // UXV's Cassiopeia A machine and the emitter's gamma source (docs/eras/uxv.md, machines 21 and 8, process line 25; package UXV-B5): the ejecta
 // knot sweeper and the annihilation laser works, and their recipe types. The recipes come from data/grindless/tables/cas_a.json
@@ -45,7 +45,7 @@
     },
     {
       name: 'annihilation_laser_works', machine: 'gtceu:annihilation_laser_works', type: 'annihilation_lasing', dataKey: 'grindless_annihilation_lasing', lang: 'Annihilation Laser Works',
-      maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 }, width: 9, height: 9, depth: 15, casing: ROBUST, texture: ROBUST_TEXTURE,
+      maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 }, width: 9, height: 9, depth: 15, casing: ROBUST, texture: ROBUST_TEXTURE,
       pal: { F: ROBUST, C: COIL, K: CRYO, L: GLASS, Q: 'tungsten_steel' },
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 1 }), Pat.part('input_hatch', { min: 1, max: 1 }), Pat.part('output_hatch', { min: 1, max: 1 }),

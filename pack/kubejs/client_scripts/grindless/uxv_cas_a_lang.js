@@ -1,4 +1,4 @@
-// priority: 1440
+// priority: 1668
 // Gregtech Grindless - names and tooltips of UXV's ejecta knot sweeper and annihilation laser works, their items and the package's older rows
 // (startup_scripts/grindless/uxv/cas_a.js; package UXV-B5):
 //
@@ -66,8 +66,8 @@
             'Circuit 1: positrons from a Ti-44 core are slowed in a neon cartridge; the heat leaves in liquid helium. The core wears out one run in fifty.',
             'Circuito 1: los positrones de un núcleo de Ti-44 se frenan en un cartucho de neón; el calor sale en helio líquido. El núcleo se gasta una ejecución de cada cincuenta.'],
         ['gtceu.recipe.grindless_annihilation_lasing.stimulate_gamma_emission',
-            'Circuit 2: the moderated Ps cell condenses in the gamma laser cavity and the MTJ die times the 511 keV pulse.',
-            'Circuito 2: la celda de Ps moderada se condensa en la cavidad láser gamma y el dado MTJ cronometra el pulso de 511 keV.'],
+            'Circuit 2: a positron stack loads the moderated Ps cell, which condenses in the gamma laser cavity; the MTJ die times the 511 keV pulse.',
+            'Circuito 2: una pila de positrones carga la celda de Ps moderada, que se condensa en la cavidad láser gamma; el dado MTJ cronometra el pulso de 511 keV.'],
         ['gtceu.recipe.grindless_antimatter_storage.positron_stack',
             'Circuit 5: four positron cartridges are held in a nitrogen buffer gas as one positron stack; the gas is only a medium.',
             'Circuito 5: cuatro cartuchos de positrones se mantienen en un gas tampón de nitrógeno como una pila de positrones; el gas es solo un medio.'],
