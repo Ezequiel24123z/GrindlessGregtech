@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { runPackScripts } from '../lib/kubejs_static.mjs';
+import { runPackScripts, GTM_HIGH_TIER_IDS } from '../lib/kubejs_static.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..', '..', '..');
@@ -92,13 +92,13 @@ test('every shared UIV id is registered once by this script, and nothing of B1 o
     const it = run.registry.items.get(id) || run.registry.machines.get(id);
     assert.ok(!it || !ours(it.file), `${id} is not F1's`);
   }
-  // the hull and hatches are the UEV builders at the second tier (S0-1): this script registers no machine
-  assert.equal([...run.registry.machines.values()].filter((m) => ours(m.file)).length, 0, 'F1 registers no machine of its own');
+  // TP-S0F: the hull and hatches are GTM's (highTierContent on): this script and the UEV one register no machine
+  assert.equal([...run.registry.machines.values()].filter((m) => !m.seeded && ours(m.file)).length, 0, 'F1 registers no machine of its own');
   for (const id of MACHINES) {
-    assert.ok(run.registry.machines.has(id), `${id} not registered by uev/foundation.js (.tiers(UEV, UIV))`);
-    assert.ok(/(^|[\\/])uev[\\/]foundation\.js$/.test(String(run.registry.machines.get(id).file)), `${id} comes from the UEV builders`);
+    assert.ok(run.registry.machines.get(id).seeded, `${id} must not be created by KubeJS: GTM registers it`);
+    assert.ok(GTM_HIGH_TIER_IDS.includes(id), `${id} is not in the seeded GTM list`);
   }
-  assert.match(uevSrc, /\.tiers\(UEV, GTValues\.UIV, GTValues\.UXV\)/);
+  assert.doesNotMatch(uevSrc, /\.tiers\(/);
   assert.doesNotMatch(src.replace(/^\s*\/\/.*$/gm, ''), /create\('(machine_hull|energy_|dynamo_)|\.tiers\(/, 'no hull or hatch builder of our own (a duplicate key crashes the boot)');
 });
 
@@ -152,7 +152,9 @@ test('the only recipes are the hull and the four hatches, assembled at UEV volta
   assert.match(cable('uiv_energy_input_hatch'), /metallic_hydrogen_single_cable/);
   assert.match(cable('uiv_energy_output_hatch_16a'), /metallic_hydrogen_quadruple_cable/);
   assert.match(serverSrc, /UEV_EUT = 8388608/);
-  assert.doesNotMatch(serverSrc, /uiv_machine_casing'\)|removeRecipe|\.remove\(/, 'the casing recipe is UEV\'s gate');
+  assert.doesNotMatch(serverSrc, /uiv_machine_casing'\)|removeRecipe/, 'the casing recipe is UEV\'s gate');
+  // GTM's duplicate hull and 16 A hatch recipes are removed by id (TP-S0F)
+  assert.match(serverSrc, /\['shaped\/uiv_machine_hull', 'assembler\/energy_hatch_16a_uiv', 'assembler\/dynamo_hatch_16a_uiv'\]/);
   assert.match(serverSrc, /Item\.exists/, 'unverified ids are guarded');
   assert.match(serverSrc, /console\.error/);
 });
@@ -181,10 +183,8 @@ test('names and both tooltip lines in en_us and es_es; materials and machines na
   }
 });
 
-test('UEV keeps its labels: the hull and hatches are named by tier inside the definition', () => {
-  assert.match(uevSrc, /GTValues\.VN\[tier\] \+ ' Machine Hull'/);
-  assert.match(uevSrc, /GTValues\.VN\[tier\] \+ ' ' \+ label/);
-  assert.doesNotMatch(uevSrc, /'UEV (Machine Hull|Energy Hatch|Dynamo Hatch|16A)/);
+test('UEV has no hull or hatch builder any more (GTM names them); our lang rows stay', () => {
+  assert.doesNotMatch(uevSrc.replace(/^\s*\/\/.*$/gm, ''), /create\('(machine_hull|energy_)|\.tiers\(|registry\('gtceu:machine'/);
   for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang]['block.gtceu.uev_machine_hull'], `${lang} keeps UEV's hull name`);
 });
 

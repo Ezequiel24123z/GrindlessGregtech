@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { runPackScripts } from '../lib/kubejs_static.mjs';
+import { runPackScripts, GTM_HIGH_TIER_IDS } from '../lib/kubejs_static.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..', '..', '..');
@@ -43,7 +43,7 @@ const RECIPE_IDS = [
   'uev_energy_output_hatch_16a',
 ];
 // the DFD motors are B1's (S0-2), the optical computers have no recipe here. The UIV hull and hatches come from these same builders
-// (UIV-F1, UXV-F1, S0-1 fallback: .tiers(UEV, UIV, UXV)), so they are checked apart
+// (GTM's with highTierContent on, TP-S0F), so they are checked apart
 const NOT_F1 = ['grindless:dfd_motor_mk1', 'grindless:dfd_motor_mk2', 'gtceu:uev_machine_casing'];
 const UIV_MACHINES = MACHINES.map((id) => id.replace('gtceu:uev_', 'gtceu:uiv_'));
 const UXV_MACHINES = MACHINES.map((id) => id.replace('gtceu:uev_', 'gtceu:uxv_'));
@@ -85,21 +85,18 @@ test('every shared UEV id is registered once by this script, and nothing of B1',
     assert.ok(mat.forms.has(form), `gtceu:${name} lacks the ${form} form`);
     if (form === 'gas' || form === 'liquid') assert.ok(run.registry.fluids.has('gtceu:' + name), `gtceu:${name} fluid not registered`);
   }
-  for (const id of MACHINES) {
-    assert.ok(run.registry.machines.has(id), `${id} not registered`);
-    assert.ok(ours(run.registry.machines.get(id).file), `${id} is registered by another script`);
+  // TP-S0F: GTM registers the hull and hatches (highTierContent on); F1 registers no machine of its own
+  for (const id of [...MACHINES, ...UIV_MACHINES, ...UXV_MACHINES]) {
+    assert.ok(run.registry.machines.get(id).seeded, `${id} must not be created by KubeJS: GTM registers it`);
+    assert.ok(GTM_HIGH_TIER_IDS.includes(id), `${id} is not in the seeded GTM list`);
   }
-  for (const id of [...UIV_MACHINES, ...UXV_MACHINES]) {
-    assert.ok(run.registry.machines.has(id), `${id} not registered (.tiers(UEV, UIV, UXV))`);
-    assert.ok(ours(run.registry.machines.get(id).file), `${id} is registered by another script`);
-  }
-  assert.equal([...run.registry.machines.values()].filter((m) => ours(m.file)).length, MACHINES.length + UIV_MACHINES.length + UXV_MACHINES.length, 'F1 registers no other machine');
+  assert.equal([...run.registry.machines.values()].filter((m) => !m.seeded && ours(m.file)).length, 0, 'F1 registers no machine');
   for (const id of NOT_F1) {
     const it = run.registry.items.get(id) || run.registry.machines.get(id);
     assert.ok(!it || !ours(it.file), `${id} is not F1's`);
   }
-  assert.doesNotMatch(src, /'(gtceu|grindless):(uiv|uxv)_|create\('u(iv|xv)_/, 'no UIV or UXV id of its own: the hull and hatches are the UEV builders at three tiers');
-  assert.match(src, /\.tiers\(UEV, GTValues\.UIV, GTValues\.UXV\)/);
+  assert.doesNotMatch(src, /'(gtceu|grindless):(uiv|uxv)_|create\('u(iv|xv)_/, 'no UIV or UXV id of its own:   the hull and hatches are GTM\'s');
+    assert.doesNotMatch(src.replace(/^\s*\/\/.*$/gm, ''), /create\('(machine_hull|energy_)|\.tiers\(|registry\('gtceu:machine'/, 'no hull or hatch builder: highTierContent is on');
   assert.ok(!src.includes("'gtceu:uev_machine_casing'") && !/create\('(machine_casing|uev_machine_casing)'/.test(src), 'gtceu:uev_machine_casing exists already');
 });
 
@@ -138,7 +135,10 @@ test('the only recipes are the casing, the hull and the four hatches, assembled 
   assert.ok(JSON.stringify(hull.j.inputs.item).includes('gtceu:lay_superhydride_single_cable'));
   assert.match(serverSrc, /UHV_EUT = 2097152/);
   // no recipe of the pack outside these files mentions the new ids' outputs as their own
-  assert.doesNotMatch(serverSrc, /gtceu:uiv_|removeRecipe|\.remove\(/);
+  assert.doesNotMatch(serverSrc, /gtceu:uiv_|removeRecipe/);
+  // GTM's duplicate hull and 16 A hatch recipes are removed by id (TP-S0F)
+  assert.match(serverSrc, /\['shaped\/uev_machine_hull', 'assembler\/energy_hatch_16a_uev', 'assembler\/dynamo_hatch_16a_uev'\]/);
+  assert.equal(serverSrc.match(/event\.remove\(/g).length, 1);
 });
 
 test('names and both tooltip lines in en_us and es_es; materials and machines named', () => {
