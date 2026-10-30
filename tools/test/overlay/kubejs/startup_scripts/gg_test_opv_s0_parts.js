@@ -97,9 +97,9 @@
     guard('gen_frame', function () {
       var CASING = Pat.block('gtceu:solid_machine_casing')
       var SPEC = {
-        slices: [['CCC', 'CCC', 'CPC'], ['CCC', 'CKC', 'CCC'], ['CCC', 'BSD', 'CCC']],
+        slices: [['CCC', 'CCC', 'CPC'], ['CCC', 'CKC', 'CCC'], ['CCC', 'BSD', 'COC']],
         symbols: {
-          S: Pat.controller(), B: Pat.part('input_bus', { exact: 1 }), D: Pat.part('energy_output', { exact: 1 }),
+          S: Pat.controller(), B: Pat.part('input_bus', { exact: 1 }), D: Pat.part('energy_output', { exact: 1 }), O: Pat.part('output_bus', { exact: 1 }),
           C: CASING, K: Pat.air(), P: Pat.oneOf(CASING, PH.part())
         }
       }
@@ -109,7 +109,21 @@
         .rotationState(RotationState.NON_Y_AXIS)
         .generator(true)
         .recipeTypes('macerator')
-        .recipeModifier(PH.modifier(function (machine, recipe) { return ModifierFunction.IDENTITY }))
+        .recipeModifier(function (machine, recipe) {
+          // like lib/generators.js: the copies are the hatch's, bounded by the bus and the room, with no EU input check (GTM's ParallelLogic
+          // would read a generation row as a consumer)
+          try {
+            var PL = Java.loadClass('com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic')
+            var CM = Java.loadClass('com.gregtechceu.gtceu.api.recipe.content.ContentModifier')
+            var cap = Number(machine.getParallelHatch().get().getCurrentParallel())
+            var runs = Number(PL.getParallelAmountWithoutEU(machine, recipe, cap))
+            if (runs < 1) return ModifierFunction.NULL
+            return ModifierFunction.builder().inputModifier(CM.multiplier(runs)).outputModifier(CM.multiplier(runs)).eutMultiplier(runs).parallels(runs).build()
+          } catch (e) {
+            console.error('[gg_test opv_s0] gen modifier failed: ' + e)
+            return ModifierFunction.NULL
+          }
+        }, true)
         .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
         .pattern(function (def) { return Pat.build(def, SPEC) })
         .workableCasingModel(TEXTURE, OVERLAY)
