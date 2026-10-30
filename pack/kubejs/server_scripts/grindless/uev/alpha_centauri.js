@@ -170,14 +170,14 @@
   // ids grindless:assembly_line/<machine>. Domain inputs are items of the Alpha Centauri line made without the controller they build.
   function addControllers(event) {
     var HULL = 'gtceu:uev_machine_hull'
-    var C = '4x #gtceu:circuits/uhv'
+    var C = '4x #gtceu:circuits/uev'
     var defs = [
       { machine: AC.machines.collector.machine, name: AC.machines.collector.name, research: 'grindless:superhydride_scoop_coil', era: 'gtceu:tritanium',
-        ins: [HULL, '2x gtceu:uv_field_generator', '2x gtceu:uev_electric_pump', C, '2x grindless:superhydride_scoop_coil', '2x grindless:aerogel_tile', 'gtceu:uev_sensor'] },
+        ins: [HULL, '3x gtceu:uev_electric_pump', '3x gtceu:uev_sensor', '2x gtceu:uev_emitter', C, '2x grindless:superhydride_scoop_coil', '2x grindless:aerogel_tile'] },
       { machine: AC.machines.lab.machine, name: AC.machines.lab.name, research: AC.machines.collector.machine, era: 'gtceu:tritanium',
-        ins: [HULL, '2x gtceu:uev_robot_arm', '2x gtceu:uev_electric_pump', C, '2x grindless:aerogel_tile', 'grindless:teos_flask', 'gtceu:uev_sensor'] },
+        ins: [HULL, '3x gtceu:uev_robot_arm', '3x gtceu:uev_electric_pump', '2x gtceu:uev_sensor', C, '2x grindless:aerogel_tile', 'grindless:teos_flask'] },
       { machine: AC.machines.station.machine, name: AC.machines.station.name, research: AC.machines.lab.machine, era: 'gtceu:neutronium',
-        ins: [HULL, '2x gtceu:uev_emitter', '2x gtceu:uev_sensor', C, 'grindless:lobster_eye_mcp', '2x grindless:sdd', 'grindless:nuclear_clock'] }
+        ins: [HULL, '3x gtceu:uev_emitter', '3x gtceu:uev_sensor', '2x gtceu:uev_robot_arm', C, 'grindless:lobster_eye_mcp', '2x grindless:sdd', 'grindless:nuclear_clock'] }
     ]
     AC.controllerRecipes = []
     defs.forEach(function (d) {
@@ -191,8 +191,8 @@
       b.itemInputs(d.ins)
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 1000), Fluid.of(d.era, 576))
       b.itemOutputs(d.machine)
-      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(491520) })
-      b.EUt(491520).duration(2400)
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
+      b.EUt(7864320).duration(2400)
       AC.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
