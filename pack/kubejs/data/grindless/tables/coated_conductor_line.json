@@ -50,6 +50,20 @@
       "itemsOut": [{ "id": "gtceu:gd_123_dust", "count": 2 }],
       "eut": 30720,
       "duration": 400
+    },
+    {
+      "name": "strand_tape",
+      "step": "tape",
+      "_why": "UXV-A8 (docs/eras/uxv.md, lines 34-37 and 39): pasta strand wire flattened and clad with copper foil as the stabiliser, the coated conductor line's UXV tape (the pump, piston and conveyor coils, the field generator, the SMES cell).",
+      "circuit": 4,
+      "itemsIn": [
+        { "id": "gtceu:pasta_strand_single_wire", "count": 2 },
+        { "id": "gtceu:copper_foil", "count": 4 }
+      ],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:strand_tape", "count": 4 }],
+      "eut": 1966080,
+      "duration": 300
     }
   ]
 }
