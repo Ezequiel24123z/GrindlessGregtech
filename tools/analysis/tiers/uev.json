@@ -4,7 +4,7 @@
   "extends": "uhv",
   "inheritTargets": true,
   "dropTargets": ["auto-titanium-without-moon-drills", "auto-tungsten-without-tripod"],
-  "note": "UEV-C1 (docs/eras/uev.md \"Validator\", \"Gate to UIV\"): UHV's pack plus the 25 UEV machines, the three trips, the UEV wireless tier and the checks of the Validator. Substages: uev (Earth and Earth orbit), uev-alpha and uev-barnard (parallel siblings after the DFD Mk1), uev-sirius (after uev-barnard).",
+  "note": "UEV-C1 (docs/eras/uev.md \"Validator\", \"Gate to UIV\"): UHV's pack plus the 25 UEV machines, the three trips, the UEV wireless tier and the checks of the Validator. Substages: uev (Earth and Earth orbit), uev-alpha and uev-barnard (parallel siblings after the DFD Mk1), uev-sirius (after uev-barnard). TP-V (as built after the tier-parity retrofit, as uxv.json:7): gtceu:uev_field_generator is made only in the Sirius works (tables/sirius.json:42), so the Mk4 (3 of them, uev/fusion.js:78) is checked in uev-sirius; the UEV assembly line rows (7,864,320 EU/t, TP-R-uev) get @uev2 and the UEV assembler rows two-UHV-hatch UAF @uev2; the warp gate site list has the two UXV ends.",
   "conditions": {
     "dimension": {
       "asKeysFor": [
@@ -1058,6 +1058,51 @@
       ],
       "package": "A6",
       "note": "GCYM large assembler on exactly one UEV hatch: the 7,864,320 EU/t assembler rows."
+    },
+    {
+      "id": "gtceu:assembly_line@uev2",
+      "machine": "gtceu:assembly_line",
+      "types": [
+        "gtceu:assembly_line"
+      ],
+      "energy": {
+        "voltage": 8388608,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uev"
+      ],
+      "package": "A2",
+      "note": "TP-V: TP-R-uev (4f74c5d6) raised the UEV controller rows to 7,864,320 EU/t (e.g. uev/alpha_centauri.js:194): two UEV hatches, as UV's @uv2; the same entry as uiv.json's @uev2."
+    },
+    {
+      "id": "gtceu:universal_assembly_factory@uev2",
+      "machine": "gtceu:universal_assembly_factory",
+      "types": [
+        "gtceu:assembler",
+        "gtceu:circuit_assembler"
+      ],
+      "energy": {
+        "voltage": 2097152,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "TP-V, as uxv.json:211: two UHV hatches give UEV voltage (GTM 7.5.3's two-hatch rule, as uhv.json's @uhv2), so the UEV assembler rows run before the first UEV hatch. After TP-INT the UEV hatch takes gtceu:uev_field_generator, made only in the Sirius works (tables/sirius.json:42), so the one-UEV-hatch large assembler alone would make the Sirius casings wait for Sirius."
     }
   ],
   "synthetic": [
@@ -1438,7 +1483,7 @@
     },
     {
       "id": "site-warp-gate",
-      "label": "Site: the warp gate only at its ends (Earth, Proxima b, Alpha Centauri AB, Sirius B and the three UIV relay orbits)",
+      "label": "Site: the warp gate only at its ends (Earth, Proxima b, Alpha Centauri AB, Sirius B, the three UIV relay orbits, Vela pulsar orbit and Cassiopeia A)",
       "kind": "site",
       "types": [
         "gtceu:warp_gate"
@@ -1450,10 +1495,12 @@
         "grindless:sirius_b_orbit",
         "grindless:rx_j1856_orbit",
         "grindless:psr_j0437_orbit",
-        "grindless:cygnus_x1_orbit"
+        "grindless:cygnus_x1_orbit",
+        "grindless:vela_pulsar_orbit",
+        "grindless:cas_a_remnant"
       ],
       "package": "B5",
-      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json). UHV's target checks that open and sustain name every end."
+      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV ends to open and sustain (uhv/gate.js:36), as uxv.json. UHV's target checks that open and sustain name every end."
     },
     {
       "id": "site-mercury-orbit",
@@ -1703,7 +1750,6 @@
         "m:gtceu:vdw_stacker",
         "m:gtceu:photonic_integration_hall",
         "m:gtceu:helium3_polariser",
-        "m:gtceu:uev_fusion_reactor",
         "m:gtceu:quantum_gas_lab",
         "m:gtceu:entanglement_station",
         "grindless:ca48_beam",
@@ -1773,7 +1819,8 @@
         "m:gtceu:containment_works",
         "grindless:degenerate_matter",
         "grindless:degenerate_pellet",
-        "grindless:mass_radius_chart"
+        "grindless:mass_radius_chart",
+        "m:gtceu:uev_fusion_reactor"
       ]
     },
     {
