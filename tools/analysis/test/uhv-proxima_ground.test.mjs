@@ -283,7 +283,7 @@ test('no UEV input, and every lang key the package needs is written in en_us and
   const keys = [];
   for (const [key, [, type]] of Object.entries(MACHINES)) {
     const n = PG.machines[key].name;
-    keys.push(`block.gtceu.${n}`, `gtceu.${type}`, ...[0, 1, 2].map((i) => `grindless.machine.${n}.tooltip.${i}`));
+    keys.push(`block.gtceu.${n}`, `gtceu.${type}`, ...[0, 1].map((i) => `grindless.machine.${n}.tooltip.${i}`));
   }
   for (const r of rows()) if (r.dataKey) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   for (const n of Object.keys(PG.items)) keys.push(`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`);

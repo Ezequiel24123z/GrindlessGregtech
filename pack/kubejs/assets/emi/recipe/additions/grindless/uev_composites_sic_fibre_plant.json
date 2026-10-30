@@ -1,5 +1,5 @@
 {
   "type": "emi:info",
   "stacks": ["item:gtceu:sic_fibre_plant"],
-  "text": ["emi.grindless.info.sic_fibre_plant.0"]
+  "text": ["emi.grindless.info.sic_fibre_plant.0", "emi.grindless.info.sic_fibre_plant.1", "emi.grindless.info.sic_fibre_plant.2"]
 }

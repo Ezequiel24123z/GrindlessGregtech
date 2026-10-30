@@ -1,5 +1,5 @@
 {
   "type": "emi:info",
   "stacks": ["item:gtceu:interstellar_dust_lab"],
-  "text": ["emi.grindless.info.interstellar_dust_lab.0"]
+  "text": ["emi.grindless.info.interstellar_dust_lab.0", "emi.grindless.info.interstellar_dust_lab.1", "emi.grindless.info.interstellar_dust_lab.2", "emi.grindless.info.interstellar_dust_lab.3"]
 }

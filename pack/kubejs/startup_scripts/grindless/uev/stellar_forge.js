@@ -321,9 +321,9 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.stellar_forge.tooltip.0'),
-        Text.translate('grindless.machine.stellar_forge.tooltip.1'),
-        Text.translate('grindless.machine.stellar_forge.tooltip.2'),
-        Text.translate('grindless.machine.stellar_forge.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.electric_blast_furnace')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip'),
+        Text.translate('gtceu.machine.perfect_oc')
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/' + ID)
   })

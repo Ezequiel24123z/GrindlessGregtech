@@ -127,8 +127,7 @@
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.organoid_array.tooltip.0'),
         Text.translate('grindless.machine.organoid_array.tooltip.1'),
-        Text.translate('grindless.machine.organoid_array.tooltip.2'),
-        Text.translate('grindless.machine.organoid_array.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.organoid_computing'))
       ])
       .workableCasingModel(PLASCRETE_TEXTURE, OVERLAY)
   })

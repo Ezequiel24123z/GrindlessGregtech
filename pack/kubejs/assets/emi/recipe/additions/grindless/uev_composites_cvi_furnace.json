@@ -1,5 +1,5 @@
 {
   "type": "emi:info",
   "stacks": ["item:gtceu:cvi_furnace"],
-  "text": ["emi.grindless.info.cvi_furnace.0"]
+  "text": ["emi.grindless.info.cvi_furnace.0", "emi.grindless.info.cvi_furnace.1", "emi.grindless.info.cvi_furnace.2"]
 }

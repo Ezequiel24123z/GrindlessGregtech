@@ -181,8 +181,7 @@
       .pattern(function (def) { return Pat.build(def, p.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.helium3_polariser.tooltip.0'),
-        Text.translate('grindless.machine.helium3_polariser.tooltip.1'),
-        Text.translate('grindless.machine.helium3_polariser.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.spin_polarisation'))
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/helium3_polariser')
 
@@ -203,8 +202,7 @@
       .pattern(function (def) { return Pat.build(def, r.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.uev_fusion_reactor.tooltip.0'),
-        Text.translate('grindless.machine.uev_fusion_reactor.tooltip.1'),
-        Text.translate('grindless.machine.uev_fusion_reactor.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.fusion_reactor'))
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/uev_fusion_reactor')
   })

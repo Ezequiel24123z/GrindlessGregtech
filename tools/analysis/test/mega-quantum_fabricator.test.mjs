@@ -182,7 +182,7 @@ test('the lang file names the machine, the casing and the tooltips in en_us and 
   for (const code of ['en_us', 'es_es']) {
     assert.ok(store[code], code);
     const keys = ['block.gtceu.quantum_fabricator', 'block.grindless.field_ring_casing', 'tooltip.grindless.field_ring_casing.0',
-      ...[0, 1, 2, 3].map((i) => 'grindless.machine.quantum_fabricator.tooltip.' + i)];
+      'grindless.machine.quantum_fabricator.tooltip.0'];
     for (const key of keys) assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
   }
   assert.equal(store.en_us['block.gtceu.quantum_fabricator'], 'Quantum Fabricator');

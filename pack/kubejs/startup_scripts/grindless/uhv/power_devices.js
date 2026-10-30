@@ -234,8 +234,8 @@
       .pattern(function (def) { return Pat.build(def, fab.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.sic_device_fab.tooltip.0'),
-        Text.translate('grindless.machine.sic_device_fab.tooltip.1'),
-        Text.translate('grindless.machine.sic_device_fab.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.silicon_carbide')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(HEATPROOF_TEXTURE, 'grindless:block/multiblock/sic_device_fab')
 
@@ -248,8 +248,8 @@
       .pattern(function (def) { return Pat.build(def, arrays.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.solar_array_fab.tooltip.0'),
-        Text.translate('grindless.machine.solar_array_fab.tooltip.1'),
-        Text.translate('grindless.machine.solar_array_fab.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.space_photovoltaics')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/solar_array_fab')
   })

@@ -10,6 +10,8 @@
         en_us: {
             tower: 'ZBLAN Draw Tower',
             towerType: 'ZBLAN Draw',
+            towerTip: '§7Draws ZBLAN fluoride glass into fibre in microgravity.',
+            towerSite: 'Works in Earth orbit only.',
             towerTips: [
                 'Fluoride glass that crystallises when drawn under gravity: Earth orbit only. Programmed circuit 1: zirconium tetrafluoride + barium + lanthanum + aluminium + sodium + quicklime + hydrogen fluoride -> 1 ZBLAN preform.',
                 'Circuit 2: 1 ZBLAN preform -> 8 ZBLAN fibre spools.',
@@ -26,6 +28,8 @@
         es_es: {
             tower: 'Torre de Estirado de ZBLAN',
             towerType: 'Estirado de ZBLAN',
+            towerTip: '§7Estira vidrio fluorado ZBLAN hasta fibra en microgravedad.',
+            towerSite: 'Solo funciona en órbita terrestre.',
             towerTips: [
                 'Vidrio de fluoruros que cristaliza si se estira con gravedad: solo en la órbita terrestre. Circuito programado 1: tetrafluoruro de circonio + bario + lantano + aluminio + sodio + cal viva + fluoruro de hidrógeno -> 1 preforma de ZBLAN.',
                 'Circuito 2: 1 preforma de ZBLAN -> 8 bobinas de fibra de ZBLAN.',
@@ -48,7 +52,9 @@
 
             add('block.gtceu.zblan_draw_tower', t.tower)
             add('gtceu.zblan_draw', t.towerType)
-            for (var i = 0; i < 4; i++) add('grindless.machine.zblan_draw_tower.tooltip.' + i, t.towerTips[i])
+            for (var i = 0; i < 4; i++) add('emi.grindless.info.zblan_draw_tower.' + (2 + i), t.towerTips[i])
+            add('grindless.machine.zblan_draw_tower.tooltip.0', t.towerTip)
+            add('grindless.machine.zblan_draw_tower.tooltip.1', t.towerSite)
             Object.keys(t.items).forEach(function (name) {
                 add('item.grindless.' + name, t.items[name][0])
                 add('tooltip.grindless.' + name + '.0', t.items[name][1])

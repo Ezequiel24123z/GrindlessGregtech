@@ -183,6 +183,6 @@ test('no UEV input, and every lang key the package needs is written in en_us and
   const keys = ['block.gtceu.ultrapure_water_plant', 'block.gtceu.betavoltaic_fab', 'gtceu.ultrapure_water', 'gtceu.betavoltaic',
     'grindless.machine.betavoltaic_fab.no_voiding', 'item.grindless.diamond_diode', 'tooltip.grindless.diamond_diode.0', 'tooltip.grindless.diamond_diode.1',
     'material.gtceu.carbon_12_monoxide', 'material.gtceu.carbon_12_methane', 'material.gtceu.nickel_63_plating_liquor', 'material.gtceu.depleted_nickel_plating_liquor'];
-  for (const m of ['ultrapure_water_plant', 'betavoltaic_fab']) for (let i = 0; i <= 2; i++) keys.push(`grindless.machine.${m}.tooltip.${i}`);
+  for (const m of ['ultrapure_water_plant', 'betavoltaic_fab']) keys.push(`grindless.machine.${m}.tooltip.0`);
   for (const k of keys) assert.ok(lang.includes(`'${k}'`), k);
 });

@@ -241,8 +241,8 @@
       .pattern(function (def) { return Pat.build(def, lab.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.nuclear_clock_lab.tooltip.0'),
-        Text.translate('grindless.machine.nuclear_clock_lab.tooltip.1'),
-        Text.translate('grindless.machine.nuclear_clock_lab.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.nuclear_clock')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/nuclear_clock_lab')
 
@@ -256,8 +256,8 @@
       .pattern(function (def) { return Pat.build(def, furnace.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.crystal_growth_furnace.tooltip.0'),
-        Text.translate('grindless.machine.crystal_growth_furnace.tooltip.1'),
-        Text.translate('grindless.machine.crystal_growth_furnace.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.crystal_growth')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(ROBUST_TEXTURE, 'grindless:block/multiblock/crystal_growth_furnace')
   })

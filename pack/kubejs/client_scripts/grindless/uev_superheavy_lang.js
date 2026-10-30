@@ -95,12 +95,20 @@
     // [key, en, es]
     var ENTRIES = []
 
+    // [en tip 0, es tip 0] of each controller: the rest of the old tooltip moved to its EMI info page
+    var TIP0 = {
+        heavy_ion_cyclotron: ['§7Fires a calcium-48 beam at actinide targets to make superheavy atoms.', '§7Dispara un haz de calcio-48 contra actínidos para crear átomos superpesados.'],
+        recoil_separator: ['§7Separates recoiling superheavy atoms from the beam with dipole magnets.', '§7Separa los átomos superpesados de retroceso del haz con imanes dipolares.'],
+        superheavy_chemistry_lab: ['§7Counts, sorts and seals a few superheavy atoms at a time.', '§7Cuenta, clasifica y sella unos pocos átomos superpesados a la vez.']
+    }
+
     MACHINES.forEach(function (m) {
         ENTRIES.push(['block.gtceu.' + m[0], m[1], m[2]])
         ENTRIES.push(['gtceu.' + m[3], m[4], m[5]])
-        ENTRIES.push(['grindless.machine.' + m[0] + '.tooltip.0', m[6], m[7]])
-        ENTRIES.push(['grindless.machine.' + m[0] + '.tooltip.1', m[8], m[9]])
-        ENTRIES.push(['grindless.machine.' + m[0] + '.tooltip.2', m[10], m[11]])
+        ENTRIES.push(['grindless.machine.' + m[0] + '.tooltip.0', TIP0[m[0]][0], TIP0[m[0]][1]])
+        ENTRIES.push(['emi.grindless.info.' + m[0] + '.2', m[6], m[7]])
+        ENTRIES.push(['emi.grindless.info.' + m[0] + '.3', m[8], m[9]])
+        ENTRIES.push(['emi.grindless.info.' + m[0] + '.4', m[10], m[11]])
         ENTRIES.push(['grindless.machine.' + m[0] + '.no_voiding', m[12], m[13]])
     })
 
