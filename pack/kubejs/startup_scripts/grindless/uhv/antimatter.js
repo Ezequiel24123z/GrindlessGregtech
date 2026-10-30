@@ -265,8 +265,8 @@
       .pattern(function (def) { return Pat.build(def, acc.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.positron_accumulator.tooltip.0'),
-        Text.translate('grindless.machine.positron_accumulator.tooltip.1'),
-        Text.translate('grindless.machine.positron_accumulator.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.positron_accumulation')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(UV_TEXTURE, 'grindless:block/multiblock/positron_accumulator')
 
@@ -280,7 +280,8 @@
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.casimir_array.tooltip.0'),
         Text.translate('grindless.machine.casimir_array.tooltip.1'),
-        Text.translate('grindless.machine.casimir_array.tooltip.2')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.casimir_cavity')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(TRUSS_TEXTURE, 'grindless:block/multiblock/casimir_array')
   })

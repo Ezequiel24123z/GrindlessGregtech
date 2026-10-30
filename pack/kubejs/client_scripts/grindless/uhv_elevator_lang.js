@@ -11,6 +11,8 @@
         en_us: {
             plant: 'PBO Plant', works: 'Tether Ribbon Works',
             plantType: 'PBO Synthesis', worksType: 'Tether Ribbon',
+            plantTip: '§7Synthesises PBO (Zylon) fibre, the tether\'s strongest polymer.',
+            worksTip: '§7Braids the space elevator\'s tether and builds its climber.',
             plantTips: [
                 'Zylon, the strongest polymer fibre: the tether\'s backbone. Programmed circuit 1: trichlorobenzene + nitration mixture -> dinitrotrichlorobenzene + diluted sulfuric acid. Circuit 2: + sodium hydroxide -> chlorodinitroresorcinol + salt.',
                 'Circuit 3: chlorodinitroresorcinol + hydrogen + hydrochloric acid, palladium kept -> diaminoresorcinol + water. Circuit 4: diaminoresorcinol + terephthalic acid + polyphosphoric acid -> PBO dope + hydrochloric acid.',
@@ -34,6 +36,8 @@
         es_es: {
             plant: 'Planta de PBO', works: 'Taller de Cinta de Amarre',
             plantType: 'Sintesis de PBO', worksType: 'Cinta de amarre',
+            plantTip: '§7Sintetiza fibra de PBO (Zylon), el polímero más resistente del cable.',
+            worksTip: '§7Trenza el cable del ascensor espacial y construye su trepador.',
             plantTips: [
                 'Zylon, la fibra polimerica mas resistente: la espina del amarre. Circuito programado 1: triclorobenceno + mezcla nitrante -> dinitrotriclorobenceno + acido sulfurico diluido. Circuito 2: + hidroxido de sodio -> clorodinitrorresorcinol + sal.',
                 'Circuito 3: clorodinitrorresorcinol + hidrogeno + acido clorhidrico, el paladio se conserva -> diaminorresorcinol + agua. Circuito 4: diaminorresorcinol + acido tereftalico + acido polifosforico -> pasta de PBO + acido clorhidrico.',
@@ -65,9 +69,12 @@
             add('block.gtceu.tether_ribbon_works', t.works)
             add('gtceu.pbo_synthesis', t.plantType)
             add('gtceu.tether_ribbon', t.worksType)
+            add('grindless.machine.pbo_plant.tooltip.0', t.plantTip)
+            add('grindless.machine.tether_ribbon_works.tooltip.0', t.worksTip)
+            // the long text moved to the EMI info pages (keys 0 and 1 are in uhv_info_lang.js)
             for (var i = 0; i < 4; i++) {
-                add('grindless.machine.pbo_plant.tooltip.' + i, t.plantTips[i])
-                add('grindless.machine.tether_ribbon_works.tooltip.' + i, t.worksTips[i])
+                add('emi.grindless.info.pbo_plant.' + (2 + i), t.plantTips[i])
+                add('emi.grindless.info.tether_ribbon_works.' + (2 + i), t.worksTips[i])
             }
             Object.keys(t.items).forEach(function (name) {
                 add('item.grindless.' + name, t.items[name][0])

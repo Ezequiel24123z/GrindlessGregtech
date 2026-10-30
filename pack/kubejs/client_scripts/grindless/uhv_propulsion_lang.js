@@ -11,6 +11,7 @@
         en_us: {
             sinterer: 'Spark Plasma Sinterer',
             sinterType: 'Spark Plasma Sintering',
+            sinterTip: '§7Sinters ceramic powder with pulsed current into UHTC parts.',
             sintererTips: [
                 'Presses ceramic powder in a graphite die and drives a pulsed current through it: dense ultra-high-temperature ceramics in minutes. Programmed circuit 1: 8 UHTC blend + 1 graphite dust -> 2 UHTC tiles + 1 carbon dust (the worn die).',
                 'Circuit 2: 2 tantalum dust + 2 carbon dust -> 1 tantalum carbide liner. Circuit 3: 4 UHTC tiles + 1 tantalum carbide liner -> 1 UHTC nozzle, the ICAN rocket motor\'s throat.',
@@ -34,6 +35,7 @@
         es_es: {
             sinterer: 'Sinterizadora por Plasma de Chispa',
             sinterType: 'Sinterizado por Plasma de Chispa',
+            sinterTip: '§7Sinteriza polvo cerámico con corriente pulsada en piezas UHTC.',
             sintererTips: [
                 'Prensa polvo ceramico en un molde de grafito y lo atraviesa con corriente pulsada: ceramicas de ultra alta temperatura densas en minutos. Circuito programado 1: 8 mezcla UHTC + 1 polvo de grafito -> 2 losetas UHTC + 1 polvo de carbono (el molde gastado).',
                 'Circuito 2: 2 polvo de tantalo + 2 polvo de carbono -> 1 revestimiento de carburo de tantalo. Circuito 3: 4 losetas UHTC + 1 revestimiento de carburo de tantalo -> 1 tobera UHTC, la garganta del motor cohete ICAN.',
@@ -63,7 +65,8 @@
 
             add('block.gtceu.spark_plasma_sinterer', t.sinterer)
             add('gtceu.spark_plasma_sintering', t.sinterType)
-            for (var i = 0; i < 4; i++) add('grindless.machine.spark_plasma_sinterer.tooltip.' + i, t.sintererTips[i])
+            add('grindless.machine.spark_plasma_sinterer.tooltip.0', t.sinterTip)
+            for (var i = 0; i < 4; i++) add('emi.grindless.info.spark_plasma_sinterer.' + (2 + i), t.sintererTips[i])
             add('block.grindless.ican_rocket_motor', t.motor)
             add('item.grindless.ican_rocket_motor', t.motor)
             Object.keys(t.items).forEach(function (name) {

@@ -161,9 +161,9 @@
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.quantum_fabricator.tooltip.0'),
-        Text.translate('grindless.machine.quantum_fabricator.tooltip.1'),
-        Text.translate('grindless.machine.quantum_fabricator.tooltip.2'),
-        Text.translate('grindless.machine.quantum_fabricator.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_4.tooltip', Text.translate('gtceu.assembler'), Text.translate('gtceu.circuit_assembler'), Text.translate('gtceu.forming_press'), Text.translate('gtceu.laser_engraver')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip'),
+        Text.translate('gtceu.machine.perfect_oc')
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/' + ID)
   })

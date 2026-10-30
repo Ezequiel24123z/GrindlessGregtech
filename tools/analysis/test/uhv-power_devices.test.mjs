@@ -206,7 +206,7 @@ test('no UEV input, and every lang key and texture the package needs', () => {
     for (const r of t.recipes) assert.ok(lang.includes(`'gtceu.recipe.${t.dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
   const keys = ['block.gtceu.sic_device_fab', 'block.gtceu.solar_array_fab', 'gtceu.silicon_carbide', 'gtceu.space_photovoltaics'];
-  for (const m of ['sic_device_fab', 'solar_array_fab']) for (let i = 0; i <= 2; i++) keys.push(`grindless.machine.${m}.tooltip.${i}`);
+  for (const m of ['sic_device_fab', 'solar_array_fab']) keys.push(`grindless.machine.${m}.tooltip.0`);
   for (const name of Object.keys(PD.items)) keys.push(`item.grindless.${name}`, `tooltip.grindless.${name}.0`, `tooltip.grindless.${name}.1`);
   for (const k of keys) assert.ok(lang.includes(`'${k}'`), k);
   assert.ok(lang.includes("'es_es'") || lang.includes('es_es'));

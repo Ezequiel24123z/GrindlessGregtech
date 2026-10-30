@@ -14,14 +14,8 @@
         ['gtceu.megabar_synthesis', 'Megabar Synthesis', 'Síntesis a megabar'],
 
         ['grindless.machine.megabar_press.tooltip.0',
-            'A multi-anvil press that squeezes matter past a million atmospheres: it makes (La,Y)H10 superhydride and nanotwinned diamond.',
-            'Una prensa multiyunque que comprime la materia por encima del millón de atmósferas: fabrica el superhidruro (La,Y)H10 y el diamante nanomaclado.'],
-        ['grindless.machine.megabar_press.tooltip.1',
-            'Circuit 1 (La,Y)H10 from La-Y foil and ammonia borane charges (the nanotwinned diamond anvil wears), 2 nanotwinned diamond from a pellet of onion carbon.',
-            'Circuito 1 (La,Y)H10 con lámina de La-Y y cargas de amoníaco borano (el yunque de diamante nanomaclado se desgasta), 2 diamante nanomaclado a partir de un pellet de carbono cebolla.'],
-        ['grindless.machine.megabar_press.tooltip.2',
-            'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses, an optional output hatch (hydrogen). Accepts a parallel hatch.',
-            'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, una escotilla de salida opcional (hidrógeno). Acepta una escotilla de paralelos.'],
+            '§7Squeezes matter past a million atmospheres: superhydride and diamond.',
+            '§7Comprime materia a más de un millón de atmósferas: superhidruro y diamante.'],
 
         ['gtceu.recipe.grindless_megabar.superhydride',
             'Fiction: real (La,Y)H10 exists only above ~100 GPa and falls apart on release; here the press quenches it so the ingot survives at one atmosphere. Anvil wear: 10 % per run. Hydrogen is voidable.',

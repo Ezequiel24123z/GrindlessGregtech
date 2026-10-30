@@ -161,8 +161,8 @@
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.zblan_draw_tower.tooltip.0'),
         Text.translate('grindless.machine.zblan_draw_tower.tooltip.1'),
-        Text.translate('grindless.machine.zblan_draw_tower.tooltip.2'),
-        Text.translate('grindless.machine.zblan_draw_tower.tooltip.3')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.zblan_draw')),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel(CLEAN_TEXTURE, CLEAN_OVERLAY)
   })

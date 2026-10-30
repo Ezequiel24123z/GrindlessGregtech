@@ -1,5 +1,5 @@
 {
   "type": "emi:info",
   "stacks": ["item:gtceu:barnard_core_drill"],
-  "text": ["emi.grindless.info.barnard_core_drill.0"]
+  "text": ["emi.grindless.info.barnard_core_drill.0", "emi.grindless.info.barnard_core_drill.1", "emi.grindless.info.barnard_core_drill.2", "emi.grindless.info.barnard_core_drill.3"]
 }
