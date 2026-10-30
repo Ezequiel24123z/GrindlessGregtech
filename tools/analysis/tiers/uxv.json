@@ -1,0 +1,2254 @@
+{
+  "tier": "uxv",
+  "title": "Reachability: UXV (Earth, Mercury and Cygnus X-1 orbit, then Vela pulsar orbit and Cassiopeia A, then the gate)",
+  "extends": "uiv",
+  "inheritTargets": true,
+  "dropTargets": [],
+  "note": "UXV-C1 (docs/eras/uxv.md \"Validator\", \"Gate to OpV\", \"Bootstrap check\"): UIV's pack plus the 21 UXV machines and M2's hall, the two jumps, the UXV wireless tier and the checks of the Validator. Substages: uxv (Earth, Mercury and Cygnus X-1 orbit), uxv-vela and uxv-cas-a (parallel siblings after the Kerr sling), the gate (opv) after both. As built: the emitter takes lasagna plate and the M2 hall's stellar hydrogen cut (Vela) besides Ti-44 (Cas A), so it is checked after both; after the tier-parity retrofit (TP-R) the Mk4 needs Sirius B (gtceu:uev_field_generator takes the degenerate pellet), the Mk5 RX J1856, the droplet radiator works, the polarised proton source and the Matrioshka both UIV siblings, so the inherited groups place them there. Older machines get the UXV-era voltages of their new modes as two-hatch or higher-hatch variants.",
+  "conditions": {
+    "eu_to_start": {
+      "field": "eu",
+      "max": 10240000000,
+      "note": "The Mk6 ring: 16 UXV hatches store 16 x 2^6 x 10,000,000 = 10,240,000,000 EU (startup uxv/fusion_mk6.js:8); the oxygen burning start needs 10,000,000,000."
+    }
+  },
+  "eraOrder": [
+    "steam",
+    "lv",
+    "mv",
+    "hv",
+    "ev",
+    "ev-mars",
+    "iv",
+    "iv-venus",
+    "iv-mercury",
+    "luv",
+    "luv-orbit",
+    "luv-belt",
+    "luv-io",
+    "luv-europa",
+    "luv-ganymede",
+    "luv-io-orbit",
+    "zpm",
+    "zpm-saturn",
+    "zpm-uranus",
+    "uv",
+    "uv-neptune",
+    "uv-pluto",
+    "uhv",
+    "uhv-mercury",
+    "uhv-proxima",
+    "uev",
+    "uev-alpha",
+    "uev-barnard",
+    "uev-sirius",
+    "uiv",
+    "uiv-rxj1856",
+    "uiv-j0437",
+    "uiv-cygnus",
+    "uxv",
+    "uxv-vela",
+    "uxv-cas-a",
+    "opv",
+    "max"
+  ],
+  "eraSiblings": [
+    [
+      "iv-venus",
+      "iv-mercury"
+    ],
+    [
+      "luv-europa",
+      "luv-ganymede"
+    ],
+    [
+      "uhv-mercury",
+      "uhv-proxima"
+    ],
+    [
+      "uev-alpha",
+      "uev-barnard"
+    ],
+    [
+      "uiv-rxj1856",
+      "uiv-j0437"
+    ],
+    [
+      "uxv-vela",
+      "uxv-cas-a"
+    ]
+  ],
+  "packages": {
+    "F1": {
+      "label": "registrations",
+      "landedWhen": [
+        "grindless:cofeb_target",
+        "grindless:uxv_fusion_casing"
+      ]
+    },
+    "W": {
+      "label": "UXV wireless tier",
+      "landedWhen": [
+        "gtceu:uxv_wireless_energy_hatch",
+        "grindless:uxv_smes_cell"
+      ]
+    },
+    "M1": {
+      "label": "UXV parallel hatch",
+      "landedWhen": [
+        "gtceu:uxv_parallel_hatch"
+      ]
+    },
+    "M2": {
+      "label": "stellar fractionation hall",
+      "landedWhen": [
+        "gtceu:stellar_fractionation_hall"
+      ]
+    },
+    "A1": {
+      "label": "superheavies III",
+      "landedWhen": [
+        "recipe:grindless:superheavy_chemistry/census_iii"
+      ]
+    },
+    "A2": {
+      "label": "spintronic feedstock",
+      "landedWhen": [
+        "recipe:grindless:powder_bed_fusion/atomise_cofeb"
+      ]
+    },
+    "A3": {
+      "label": "spintronic rows on UHV to UIV tables",
+      "landedWhen": [
+        "recipe:grindless:levitation_melting/cofeb_melt"
+      ]
+    },
+    "A4": {
+      "label": "deposition",
+      "landedWhen": [
+        "gtceu:mtj_sputter_cluster",
+        "gtceu:oxide_pld_chamber"
+      ]
+    },
+    "A5": {
+      "label": "logic and the mainframe",
+      "landedWhen": [
+        "gtceu:vdw_stacking_cell",
+        "gtceu:racetrack_fab",
+        "gtceu:yig_lpe_furnace",
+        "recipe:grindless:photonic_integration/spintronic_mainframe"
+      ]
+    },
+    "A6": {
+      "label": "sensor and MNT",
+      "landedWhen": [
+        "gtceu:shequid_works",
+        "gtceu:mnt_collider"
+      ]
+    },
+    "A7": {
+      "label": "Mk6 stellar burning ring",
+      "landedWhen": [
+        "gtceu:uxv_fusion_reactor"
+      ]
+    },
+    "A8": {
+      "label": "UXV parts",
+      "landedWhen": [
+        "recipe:grindless:assembly_line/uxv_electric_motor"
+      ]
+    },
+    "B1": {
+      "label": "the Kerr sling",
+      "landedWhen": [
+        "recipe:grindless:warp_gate/hold_vela_pulsar",
+        "recipe:grindless:warp_gate/hold_cas_a"
+      ]
+    },
+    "B2": {
+      "label": "Cygnus X-1: the lift",
+      "landedWhen": [
+        "gtceu:stellar_elevator",
+        "gtceu:plasma_mass_filter",
+        "gtceu:stellar_condensation_tower"
+      ]
+    },
+    "B3": {
+      "label": "Cygnus X-1: the disk",
+      "landedWhen": [
+        "gtceu:accretion_disk_skimmer",
+        "gtceu:frc_former",
+        "gtceu:bz_dynamo"
+      ]
+    },
+    "B4": {
+      "label": "Vela: pasta",
+      "landedWhen": [
+        "gtceu:pasta_extractor",
+        "gtceu:pasta_phase_sorter",
+        "gtceu:pasta_draw_bench",
+        "gtceu:pasta_laminator",
+        "gtceu:polar_cap_tap"
+      ]
+    },
+    "B5": {
+      "label": "Cassiopeia A and the emitter",
+      "landedWhen": [
+        "gtceu:ejecta_knot_sweeper",
+        "gtceu:annihilation_laser_works"
+      ]
+    },
+    "B6": {
+      "label": "gate to OpV",
+      "landedWhen": [
+        "recipe:grindless:warp_gate/hold_galactic_bulge",
+        "recipe:grindless:assembly_line/opv_machine_casing"
+      ]
+    }
+  },
+  "machines": [
+    {
+      "id": "gtceu:universal_assembly_factory@uev2",
+      "machine": "gtceu:universal_assembly_factory",
+      "types": [
+        "gtceu:assembler",
+        "gtceu:circuit_assembler"
+      ],
+      "energy": {
+        "voltage": 2097152,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      }
+    },
+    {
+      "id": "gtceu:universal_assembly_factory@uiv2",
+      "machine": "gtceu:universal_assembly_factory",
+      "types": [
+        "gtceu:assembler",
+        "gtceu:circuit_assembler"
+      ],
+      "energy": {
+        "voltage": 8388608,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_4a",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      }
+    },
+    {
+      "id": "gtceu:universal_assembly_factory@uxv2",
+      "machine": "gtceu:universal_assembly_factory",
+      "types": [
+        "gtceu:assembler",
+        "gtceu:circuit_assembler"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a"
+        ]
+      },
+      "note": "UXV era: the UXV assembler rows (125,829,120 EU/t) on two UIV hatches."
+    },
+    {
+      "id": "gtceu:assembly_line@uiv2",
+      "machine": "gtceu:assembly_line",
+      "types": [
+        "gtceu:assembly_line"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "note": "UXV era: the UXV assembly line rows (125,829,120 to 134,217,728 EU/t: controllers, parts, the emitter) on two UIV hatches, as @uev2."
+    },
+    {
+      "id": "gtceu:large_chemical_reactor@uev2",
+      "machine": "gtceu:large_chemical_reactor",
+      "types": [
+        "gtceu:chemical_reactor",
+        "gtceu:large_chemical_reactor"
+      ],
+      "energy": {
+        "voltage": 8388608,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uev"
+      ],
+      "note": "UXV older mode at 33,554,432 EU/t (the KrF discharge tube, line 39) on two UEV hatches, as @uhv2."
+    },
+    {
+      "id": "gtceu:large_mixer@uev2",
+      "machine": "gtceu:large_mixer",
+      "types": [
+        "gtceu:mixer"
+      ],
+      "energy": {
+        "voltage": 8388608,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uev"
+      ],
+      "note": "UXV older mode at 33,554,432 EU/t (the Kr/F2 premix, line 39) on two UEV hatches, as @uv2."
+    },
+    {
+      "id": "gtceu:coated_conductor_line@uhv",
+      "machine": "gtceu:coated_conductor_line",
+      "types": [
+        "gtceu:coated_conductor"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "note": "UXV older mode on the LuV coated conductor line at 1,966,080 EU/t (strand tape) on UHV hatches."
+    },
+    {
+      "id": "gtceu:hts_magnet_works@uhv",
+      "machine": "gtceu:hts_magnet_works",
+      "types": [
+        "gtceu:magnet_winding"
+      ],
+      "energy": {
+        "voltage": 2097152
+      },
+      "needs": [
+        "eu:uhv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uhv_energy_input_hatch",
+          "gtceu:uhv_energy_input_hatch_4a",
+          "gtceu:uhv_energy_input_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch",
+          "gtceu:uhv_wireless_energy_hatch_4a",
+          "gtceu:uhv_wireless_energy_hatch_16a",
+          "gtceu:uhv_wireless_energy_hatch_64a"
+        ]
+      },
+      "note": "UXV older mode on the LuV HTS magnet works at 1,966,080 EU/t on UHV hatches."
+    },
+    {
+      "id": "gtceu:plasma_quench_caster@uev",
+      "machine": "gtceu:plasma_quench_caster",
+      "types": [
+        "gtceu:plasma_quench"
+      ],
+      "energy": {
+        "voltage": 8388608
+      },
+      "needs": [
+        "eu:uev"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uev_energy_input_hatch",
+          "gtceu:uev_energy_input_hatch_4a",
+          "gtceu:uev_energy_input_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch",
+          "gtceu:uev_wireless_energy_hatch_4a",
+          "gtceu:uev_wireless_energy_hatch_16a",
+          "gtceu:uev_wireless_energy_hatch_64a"
+        ]
+      },
+      "note": "UXV older mode on the ZPM quench caster at 7,864,320 EU/t (FINEMET planar flow casting, line 48) on UEV hatches."
+    },
+    {
+      "id": "gtceu:hot_strip_mill@uv",
+      "machine": "gtceu:hot_strip_mill",
+      "types": [
+        "gtceu:hot_rolling"
+      ],
+      "energy": {
+        "voltage": 524288
+      },
+      "needs": [
+        "eu:uv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uv_energy_input_hatch",
+          "gtceu:uv_energy_input_hatch_4a",
+          "gtceu:uv_energy_input_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch",
+          "gtceu:uv_wireless_energy_hatch_4a",
+          "gtceu:uv_wireless_energy_hatch_16a",
+          "gtceu:uv_wireless_energy_hatch_64a"
+        ]
+      },
+      "note": "UXV older modes on the EV hot strip mill up to 491,520 EU/t (the ALIP duct, the gum metal blank) on a UV hatch."
+    },
+    {
+      "machine": "gtceu:mtj_sputter_cluster",
+      "types": [
+        "gtceu:mtj_sputtering"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A4",
+      "note": "Machine 1 (home, H): two UIV hatches give V[UXV] (docs/eras/uxv.md \"Voltages and controllers\")."
+    },
+    {
+      "machine": "gtceu:oxide_pld_chamber",
+      "types": [
+        "gtceu:pulsed_laser_deposition"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A4",
+      "note": "Machine 2 (home, H)."
+    },
+    {
+      "machine": "gtceu:vdw_stacking_cell",
+      "types": [
+        "gtceu:vdw_stacking"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Machine 3 (home, H)."
+    },
+    {
+      "machine": "gtceu:racetrack_fab",
+      "types": [
+        "gtceu:racetrack_patterning"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Machine 4 (home, H)."
+    },
+    {
+      "machine": "gtceu:yig_lpe_furnace",
+      "types": [
+        "gtceu:liquid_phase_epitaxy"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A5",
+      "note": "Machine 5 (home, H)."
+    },
+    {
+      "machine": "gtceu:shequid_works",
+      "types": [
+        "gtceu:shequid_assembly"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "Machine 6 (home, H)."
+    },
+    {
+      "machine": "gtceu:mnt_collider",
+      "types": [
+        "gtceu:multinucleon_transfer"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A6",
+      "note": "Machine 7 (home, H)."
+    },
+    {
+      "machine": "gtceu:annihilation_laser_works",
+      "types": [
+        "gtceu:annihilation_lasing"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B5",
+      "note": "Machine 8 (home, H): its rows read the Cas A Ti-44 core."
+    },
+    {
+      "machine": "gtceu:uxv_fusion_reactor",
+      "types": [
+        "gtceu:fusion_reactor"
+      ],
+      "maxEUt": 134217728,
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "A7",
+      "note": "Machine 9, the Mk6 ring (H, G-fed): UXV hatches only, so it waits for Vela (the hatches are held to uxv-vela); rows up to 134,217,728 EU/t (tables/fusion_mk6.json)."
+    },
+    {
+      "machine": "gtceu:stellar_elevator",
+      "types": [
+        "gtceu:star_lifting"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Machine 10 (Cygnus X-1 orbit, S)."
+    },
+    {
+      "machine": "gtceu:plasma_mass_filter",
+      "types": [
+        "gtceu:plasma_mass_filtering"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Machine 11 (Cygnus X-1 orbit, S c1; c2 disk_filter has no site, see site-cygnus-uxv)."
+    },
+    {
+      "machine": "gtceu:stellar_condensation_tower",
+      "types": [
+        "gtceu:stellar_condensation"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B2",
+      "note": "Machine 12 (Cygnus X-1 orbit, S)."
+    },
+    {
+      "machine": "gtceu:accretion_disk_skimmer",
+      "types": [
+        "gtceu:disk_skimming"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Machine 13 (Cygnus X-1 orbit, S)."
+    },
+    {
+      "machine": "gtceu:frc_former",
+      "types": [
+        "gtceu:frc_forming"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Machine 14 (Cygnus X-1 orbit, S c1)."
+    },
+    {
+      "machine": "gtceu:bz_dynamo",
+      "types": [
+        "gtceu:blandford_znajek"
+      ],
+      "maxEUt": 134217728,
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B3",
+      "note": "Machine 15 (Cygnus X-1 orbit, generator, 1,073,741,824 EU/t written final)."
+    },
+    {
+      "machine": "gtceu:pasta_extractor",
+      "types": [
+        "gtceu:pasta_extraction"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 16 (Vela pulsar orbit, S)."
+    },
+    {
+      "machine": "gtceu:pasta_phase_sorter",
+      "types": [
+        "gtceu:pasta_sorting"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 17 (Vela pulsar orbit, S)."
+    },
+    {
+      "machine": "gtceu:pasta_draw_bench",
+      "types": [
+        "gtceu:pasta_drawing"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 18 (Vela pulsar orbit, S)."
+    },
+    {
+      "machine": "gtceu:pasta_laminator",
+      "types": [
+        "gtceu:pasta_lamination"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 19 (Vela pulsar orbit, S)."
+    },
+    {
+      "machine": "gtceu:polar_cap_tap",
+      "types": [
+        "gtceu:polar_cap_tapping"
+      ],
+      "maxEUt": 134217728,
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B4",
+      "note": "Machine 20 (Vela pulsar orbit, generator, 536,870,912 EU/t written final)."
+    },
+    {
+      "machine": "gtceu:ejecta_knot_sweeper",
+      "types": [
+        "gtceu:ejecta_sweeping"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B5",
+      "note": "Machine 21 (Cassiopeia A, S): one recipe at 67,108,864 EU/t, under 4 A x V[UIV] (Bootstrap check)."
+    },
+    {
+      "machine": "gtceu:stellar_fractionation_hall",
+      "types": [
+        "gtceu:distillation_tower",
+        "gtceu:distillery"
+      ],
+      "energy": {
+        "voltage": 33554432,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a",
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "M2",
+      "note": "M2 (mega family, not counted): the stellar fractionation hall."
+    },
+    {
+      "id": "gtceu:warp_gate@uxv",
+      "machine": "gtceu:warp_gate",
+      "types": [
+        "gtceu:warp_gate"
+      ],
+      "maxEUt": 2147483648,
+      "needs": [
+        "eu:uxv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "B6",
+      "note": "The warp gate on two UXV 16 A hatches for the c10 row: 16 A x V[UXV] = 2,147,483,648 EU/t (2^31), read as long (S0-2); no recipe of the pack is above it."
+    }
+  ],
+  "synthetic": [
+    {
+      "id": "bootstrap-rad-hard-research",
+      "produces": [
+        "research:rad_hard_controller"
+      ],
+      "note": "KNOWN PACK DEFECT (TP-R-uiv 1943b5f4): research rad_hard_controller is written only by the Matrioshka computer (tables/matrioshka.json:8); the computer now takes UIV field generators (uiv/matrioshka.js:178), made from the neutronium pellet (tables/rx_j1856.json:168), made only in the neutronium cage, whose neutron star site casing takes the rad-hard controller. Remove once the cycle is broken in the pack."
+    },
+    {
+      "id": "wireless-uxv",
+      "package": "W",
+      "capital": [
+        "gtceu:wireless_energy_tower",
+        "grindless:uxv_smes_cell",
+        "grindless:pasta_strand_repeater"
+      ],
+      "consumes": [
+        "eu:uiv"
+      ],
+      "produces": [
+        "eu:uxv",
+        "wireless:uxv"
+      ],
+      "note": "The network's UXV tier (W, withTiers case 12): UXV cells linked by the pasta strand repeater (a Vela product)."
+    },
+    {
+      "id": "vela-jump",
+      "package": "B1",
+      "capital": [
+        "grindless:launched_relay_seed",
+        "gtceu:warp_gate",
+        "grindless:frc_cartridge"
+      ],
+      "consumes": [
+        "dim:grindless:cygnus_x1_orbit",
+        "eu:uiv"
+      ],
+      "produces": [
+        "dim:grindless:vela_pulsar_orbit"
+      ],
+      "note": "The warp gate hold row to the Vela pulsar (relay seed and FRC cartridge, c8, 536,870,912 EU/t at Cygnus X-1 orbit)."
+    },
+    {
+      "id": "cas-a-jump",
+      "package": "B1",
+      "capital": [
+        "grindless:launched_relay_seed",
+        "gtceu:warp_gate",
+        "grindless:cnt_whipple_shield"
+      ],
+      "consumes": [
+        "dim:grindless:cygnus_x1_orbit",
+        "eu:uiv"
+      ],
+      "produces": [
+        "dim:grindless:cas_a_remnant"
+      ],
+      "note": "The warp gate hold row to Cassiopeia A (relay seed and CNT Whipple shield, c9, 536,870,912 EU/t at Cygnus X-1 orbit)."
+    }
+  ],
+  "targets": [
+    {
+      "id": "aged-capsule-only-vault",
+      "label": "The aged kilonova capsule and r-process ash only from the decay heat vault, or the ash from the UXV gnocchi row",
+      "anyOf": [
+        "grindless:aged_kilonova_capsule",
+        "grindless:r_process_ash"
+      ],
+      "without": [
+        "operate:gtceu:decay_heat_vault*",
+        "grindless:r_process_decompression/gnocchi_decompression"
+      ],
+      "expect": "unreachable",
+      "package": "B2",
+      "note": "UXV line 32: the decompressor's gnocchi row is a second r-process stock by design (docs/eras/uxv.md 'Older machines, new modes'); excluded by name, so any other producer still fails."
+    },
+    {
+      "id": "mk4-plasmas-only-mk4",
+      "label": "The Mk4 plasmas only from the Mk4, Mk5 or Mk6 ring (a higher ring runs the lower recipes)",
+      "anyOf": [
+        "fluid:gtceu:uev_dhe3_plasma",
+        "fluid:gtceu:uev_pb11_plasma",
+        "fluid:gtceu:uev_polarised_plasma"
+      ],
+      "without": [
+        "operate:gtceu:uev_fusion_reactor*",
+        "operate:gtceu:uiv_fusion_reactor*",
+        "operate:gtceu:uxv_fusion_reactor*"
+      ],
+      "expect": "unreachable",
+      "package": "A7"
+    },
+    {
+      "id": "mk5-plasmas-only-mk5",
+      "label": "The Mk5 plasmas only from the Mk5 or the Mk6 ring (a higher ring runs the lower recipes)",
+      "anyOf": [
+        "fluid:gtceu:he3he3_plasma",
+        "fluid:gtceu:pli6_plasma",
+        "fluid:gtceu:pn15_plasma"
+      ],
+      "without": [
+        "operate:gtceu:uiv_fusion_reactor*",
+        "operate:gtceu:uxv_fusion_reactor*"
+      ],
+      "expect": "unreachable",
+      "package": "A9"
+    },
+    {
+      "id": "isotopes-only-calutron",
+      "label": "Calcium-48, potassium-40, lithium-6, plutonium-244, titanium-50, europium-151, titanium-44, fermium-257 and tungsten-184 only from the calutron",
+      "anyOf": [
+        "gtceu:calcium_48_dust",
+        "gtceu:potassium_40_dust",
+        "gtceu:lithium_6_dust",
+        "gtceu:plutonium_244_dust",
+        "gtceu:titanium_50_chloride_dust",
+        "gtceu:titanium_50_dust",
+        "gtceu:europium_151_dust",
+        "gtceu:titanium_44_dust",
+        "gtceu:fermium_257_dust",
+        "gtceu:tungsten_184_dust",
+        "gtceu:tungsten_184_ingot"
+      ],
+      "without": [
+        "operate:gtceu:calutron*"
+      ],
+      "expect": "unreachable",
+      "package": "A1"
+    },
+    {
+      "id": "ti44-only-cas-a",
+      "label": "Titanium-44 and the Ti-44 core only from Cassiopeia A knot dust (the sweeper)",
+      "anyOf": [
+        "gtceu:titanium_44_dust",
+        "grindless:ejecta_ti_fraction_dust",
+        "grindless:ti44_core"
+      ],
+      "without": [
+        "operate:gtceu:ejecta_knot_sweeper*"
+      ],
+      "expect": "unreachable",
+      "package": "B5"
+    },
+    {
+      "id": "es254-only-transuranium",
+      "label": "Einsteinium-254 only from the transuranium facility's HDEHP split (UIV-B2, as built)",
+      "anyOf": [
+        "gtceu:einsteinium_dust"
+      ],
+      "without": [
+        "operate:gtceu:transuranium_facility*"
+      ],
+      "expect": "unreachable",
+      "package": "A1"
+    },
+    {
+      "id": "cm248-only-hot-cell",
+      "label": "Curium-248 only from the hot cell (the Cf-252 decay store, as built)",
+      "anyOf": [
+        "gtceu:curium_248_dust"
+      ],
+      "without": [
+        "operate:gtceu:hot_cell*"
+      ],
+      "expect": "unreachable",
+      "package": "A1"
+    },
+    {
+      "id": "element-121-122-only-chain",
+      "label": "Elements 121 and 122 and census III only from the cyclotron, the recoil separator and the chemistry lab",
+      "anyOf": [
+        "fluid:gtceu:element_121_recoil_gas",
+        "fluid:gtceu:element_122_recoil_gas",
+        "grindless:element_121_atoms",
+        "grindless:element_122_atoms",
+        "grindless:element_121_recoil",
+        "grindless:element_122_recoil",
+        "grindless:superheavy_census_iii"
+      ],
+      "without": [
+        "operate:gtceu:heavy_ion_cyclotron*",
+        "operate:gtceu:recoil_separator*",
+        "operate:gtceu:superheavy_chemistry_lab*"
+      ],
+      "expect": "unreachable",
+      "package": "A1"
+    },
+    {
+      "id": "island-only-mnt",
+      "label": "The island nuclide and the island chart only from the MNT collider",
+      "anyOf": [
+        "grindless:island_nuclide",
+        "grindless:island_chart"
+      ],
+      "without": [
+        "operate:gtceu:mnt_collider*"
+      ],
+      "expect": "unreachable",
+      "package": "A6"
+    },
+    {
+      "id": "mtj-stacks-only-sputter",
+      "label": "MTJ, MRAM, SAF and STNO stacks only from the MTJ sputter cluster",
+      "anyOf": [
+        "grindless:mtj_stack_wafer",
+        "grindless:mram_stack_wafer",
+        "grindless:saf_track_wafer",
+        "grindless:stno_stack_wafer"
+      ],
+      "without": [
+        "operate:gtceu:mtj_sputter_cluster*"
+      ],
+      "expect": "unreachable",
+      "package": "A4"
+    },
+    {
+      "id": "oxide-films-only-pld",
+      "label": "The oxide films only from the oxide PLD chamber",
+      "anyOf": [
+        "grindless:srruo3_electrode_wafer",
+        "grindless:bfo_film_wafer"
+      ],
+      "without": [
+        "operate:gtceu:oxide_pld_chamber*"
+      ],
+      "expect": "unreachable",
+      "package": "A4"
+    },
+    {
+      "id": "vdw-stacks-only-cell",
+      "label": "The vdW flakes and the SOT heterostack only from the vdW stacking cell",
+      "anyOf": [
+        "grindless:wte2_flake",
+        "grindless:fgt_flake",
+        "grindless:hbn_flake",
+        "grindless:sot_heterostack"
+      ],
+      "without": [
+        "operate:gtceu:vdw_stacking_cell*"
+      ],
+      "expect": "unreachable",
+      "package": "A5"
+    },
+    {
+      "id": "tracks-only-racetrack",
+      "label": "Racetrack chips only from the racetrack fab",
+      "anyOf": [
+        "grindless:racetrack_chip"
+      ],
+      "without": [
+        "operate:gtceu:racetrack_fab*"
+      ],
+      "expect": "unreachable",
+      "package": "A5"
+    },
+    {
+      "id": "yig-only-lpe",
+      "label": "YIG films and the LPE flux only from the YIG LPE furnace",
+      "anyOf": [
+        "grindless:yig_film_wafer",
+        "fluid:gtceu:lpe_flux"
+      ],
+      "without": [
+        "operate:gtceu:yig_lpe_furnace*"
+      ],
+      "expect": "unreachable",
+      "package": "A5"
+    },
+    {
+      "id": "gyro-only-shequid",
+      "label": "Weak-link cells and SHeQUID gyros only from the SHeQUID works",
+      "anyOf": [
+        "grindless:weak_link_cell",
+        "grindless:shequid_gyro"
+      ],
+      "without": [
+        "operate:gtceu:shequid_works*"
+      ],
+      "expect": "unreachable",
+      "package": "A6"
+    },
+    {
+      "id": "spintronic-mainframe-only-hall",
+      "label": "The spintronic mainframe only from the photonic integration hall row (GT--'s own recipe stays removed, F2)",
+      "anyOf": [
+        "gtnn:spintronic_mainframe"
+      ],
+      "without": [
+        "operate:gtceu:photonic_integration_hall*"
+      ],
+      "expect": "unreachable",
+      "package": "A5"
+    },
+    {
+      "id": "mk6-plasmas-only-mk6",
+      "label": "The Mk6 plasmas only from the Mk6 ring",
+      "anyOf": [
+        "fluid:gtceu:cno_ash_plasma",
+        "fluid:gtceu:helium_burning_ash_plasma",
+        "fluid:gtceu:carbon_burning_ash_plasma",
+        "fluid:gtceu:oxygen_burning_ash_plasma"
+      ],
+      "without": [
+        "operate:gtceu:uxv_fusion_reactor*"
+      ],
+      "expect": "unreachable",
+      "package": "A7"
+    },
+    {
+      "id": "stellar-plasma-only-elevator",
+      "label": "Stellar plasma and the elevator log only from the stellar elevator",
+      "anyOf": [
+        "fluid:gtceu:stellar_plasma",
+        "grindless:elevator_log"
+      ],
+      "without": [
+        "operate:gtceu:stellar_elevator*"
+      ],
+      "expect": "unreachable",
+      "package": "B2"
+    },
+    {
+      "id": "stellar-cuts-only-filter",
+      "label": "The stellar cuts only from the plasma mass filter",
+      "anyOf": [
+        "fluid:gtceu:stellar_hydrogen_cut",
+        "fluid:gtceu:stellar_helium_cut",
+        "fluid:gtceu:stellar_cno_cut",
+        "fluid:gtceu:stellar_heavy_cut"
+      ],
+      "without": [
+        "operate:gtceu:plasma_mass_filter*"
+      ],
+      "expect": "unreachable",
+      "package": "B2"
+    },
+    {
+      "id": "condensates-only-tower",
+      "label": "The stellar condensates only from the stellar condensation tower",
+      "anyOf": [
+        "grindless:refractory_condensate",
+        "grindless:metal_condensate",
+        "grindless:silicate_condensate",
+        "fluid:gtceu:volatile_condensate"
+      ],
+      "without": [
+        "operate:gtceu:stellar_condensation_tower*"
+      ],
+      "expect": "unreachable",
+      "package": "B2"
+    },
+    {
+      "id": "disk-plasma-only-skimmer",
+      "label": "Disk plasma and what is made of it (filtered, flux-loaded, FRC cartridges) only from the accretion disk skimmer",
+      "anyOf": [
+        "fluid:gtceu:disk_plasma",
+        "fluid:gtceu:filtered_disk_plasma",
+        "fluid:gtceu:flux_loaded_plasma",
+        "grindless:frc_cartridge"
+      ],
+      "without": [
+        "operate:gtceu:accretion_disk_skimmer*"
+      ],
+      "expect": "unreachable",
+      "package": "B3"
+    },
+    {
+      "id": "frc-only-former",
+      "label": "FRC cartridges and flux-loaded plasma only from the FRC former",
+      "anyOf": [
+        "grindless:frc_cartridge",
+        "fluid:gtceu:flux_loaded_plasma"
+      ],
+      "without": [
+        "operate:gtceu:frc_former*"
+      ],
+      "expect": "unreachable",
+      "package": "B3"
+    },
+    {
+      "id": "pasta-only-vela",
+      "label": "Nuclear pasta, strand wire, lasagna plates and electrodes and the core sample only from the pasta extractor",
+      "anyOf": [
+        "grindless:raw_pasta",
+        "grindless:spaghetti_phase",
+        "grindless:lasagna_phase",
+        "grindless:gnocchi_fragment",
+        "grindless:anti_phase_residue",
+        "grindless:pasta_core_sample",
+        "grindless:lasagna_plate",
+        "grindless:lasagna_electrode",
+        "gtceu:pasta_strand_ingot",
+        "gtceu:pasta_strand_single_wire"
+      ],
+      "without": [
+        "operate:gtceu:pasta_extractor*"
+      ],
+      "expect": "unreachable",
+      "package": "B4"
+    },
+    {
+      "id": "strand-wire-only-draw-bench",
+      "label": "Pasta strand wire only from the pasta draw bench (the generic wiremill and extruder rows are cut, F2)",
+      "anyOf": [
+        "gtceu:pasta_strand_single_wire"
+      ],
+      "without": [
+        "operate:gtceu:pasta_draw_bench*"
+      ],
+      "expect": "unreachable",
+      "package": "B4"
+    },
+    {
+      "id": "lasagna-only-laminator",
+      "label": "Lasagna plates and electrodes only from the pasta laminator",
+      "anyOf": [
+        "grindless:lasagna_plate",
+        "grindless:lasagna_electrode"
+      ],
+      "without": [
+        "operate:gtceu:pasta_laminator*"
+      ],
+      "expect": "unreachable",
+      "package": "B4"
+    },
+    {
+      "id": "site-warp-gate",
+      "label": "Site: the warp gate only at its ends (Earth, Proxima b, Alpha Centauri AB, Sirius B, the three UIV relay orbits, Vela pulsar orbit and Cassiopeia A)",
+      "kind": "site",
+      "types": [
+        "gtceu:warp_gate"
+      ],
+      "dimensions": [
+        "gcyr:overworld_orbit",
+        "grindless:proxima_b_orbit",
+        "grindless:alpha_centauri_orbit",
+        "grindless:sirius_b_orbit",
+        "grindless:rx_j1856_orbit",
+        "grindless:psr_j0437_orbit",
+        "grindless:cygnus_x1_orbit",
+        "grindless:vela_pulsar_orbit",
+        "grindless:cas_a_remnant"
+      ],
+      "package": "B5",
+      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV places to open and sustain."
+    },
+    {
+      "id": "site-j0437",
+      "label": "Site: the wind trap, the condensate lab and the X-ray profiler only at PSR J0437-4715 (except UXV-B5's Ti-44 map row)",
+      "kind": "site",
+      "types": [
+        "gtceu:pulsar_wind_trapping",
+        "gtceu:positronium_condensation",
+        "gtceu:xray_pulse_profiling"
+      ],
+      "dimensions": [
+        "grindless:psr_j0437_orbit"
+      ],
+      "exceptRecipes": [
+        "grindless:xray_pulse_profiling/ti44_map"
+      ],
+      "package": "B3",
+      "note": "UXV-B5's older mode (knot dust -> ti44_map, docs/eras/uxv.md:545) carries no dimension condition, as built: the profiler's controller is carried home. Its input is Cas A knot dust, so the row is held to uxv-cas-a by the cas-a resource either way."
+    },
+    {
+      "id": "site-cygnus-uxv",
+      "label": "Site: the stellar elevator, plasma mass filter, condensation tower, disk skimmer, FRC former and BZ dynamo only at Cygnus X-1",
+      "kind": "site",
+      "types": [
+        "gtceu:star_lifting",
+        "gtceu:plasma_mass_filtering",
+        "gtceu:stellar_condensation",
+        "gtceu:disk_skimming",
+        "gtceu:frc_forming",
+        "gtceu:blandford_znajek"
+      ],
+      "dimensions": [
+        "grindless:cygnus_x1_orbit"
+      ],
+      "exceptRecipes": [
+        "grindless:frc_forming/load_flux",
+        "grindless:plasma_mass_filtering/disk_filter"
+      ],
+      "package": [
+        "B2",
+        "B3"
+      ],
+      "note": "As built: the FRC former's c2 (load_flux) is unconditioned, as the audit's \"S (c1)\" says; the filter's disk_filter (c2) is unconditioned too, while the audit says \"S (c1-c3)\" (the filter has two rows). Both read disk plasma, a Cygnus product (cygnus-uxv resource)."
+    },
+    {
+      "id": "site-vela",
+      "label": "Site: the pasta extractor, phase sorter, draw bench, laminator and polar cap tap only at Vela pulsar orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:pasta_extraction",
+        "gtceu:pasta_sorting",
+        "gtceu:pasta_drawing",
+        "gtceu:pasta_lamination",
+        "gtceu:polar_cap_tapping"
+      ],
+      "dimensions": [
+        "grindless:vela_pulsar_orbit"
+      ],
+      "package": "B4"
+    },
+    {
+      "id": "site-cas-a",
+      "label": "Site: the ejecta knot sweeper only at Cassiopeia A",
+      "kind": "site",
+      "types": [
+        "gtceu:ejecta_sweeping"
+      ],
+      "dimensions": [
+        "grindless:cas_a_remnant"
+      ],
+      "package": "B5"
+    },
+    {
+      "id": "gate-hold-vela",
+      "label": "Gate: the hold row for the Vela pulsar (c8)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": [
+        "grindless:warp_gate/hold_vela_pulsar"
+      ],
+      "package": "B1"
+    },
+    {
+      "id": "gate-hold-cas-a",
+      "label": "Gate: the hold row for Cassiopeia A (c9)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": [
+        "grindless:warp_gate/hold_cas_a"
+      ],
+      "package": "B1"
+    },
+    {
+      "id": "gate-vela-orbit",
+      "label": "Gate: the jump to the Vela pulsar",
+      "allOf": [
+        "dim:grindless:vela_pulsar_orbit"
+      ],
+      "package": "B1"
+    },
+    {
+      "id": "gate-cas-a-remnant",
+      "label": "Gate: the jump to Cassiopeia A",
+      "allOf": [
+        "dim:grindless:cas_a_remnant"
+      ],
+      "package": "B1"
+    },
+    {
+      "id": "gate-hold-bulge",
+      "label": "Gate: the warp gate's c10 (16 A UXV = 2,147,483,648 EU/t at Cygnus X-1 orbit)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": [
+        "grindless:warp_gate/hold_galactic_bulge"
+      ],
+      "package": "B6"
+    },
+    {
+      "id": "gate-arm-chart",
+      "label": "Gate: the arm chart on the Matrioshka computer",
+      "kind": "recipe",
+      "type": "gtceu:matrioshka_computing",
+      "recipe": [
+        "grindless:matrioshka_computing/arm_chart"
+      ],
+      "package": "B6"
+    },
+    {
+      "id": "gate-opv-casing",
+      "label": "Gate: the OpV casing (assembly line, researched with the bulge chart)",
+      "kind": "recipe",
+      "type": "gtceu:assembly_line",
+      "recipe": [
+        "grindless:assembly_line/opv_machine_casing"
+      ],
+      "package": "B6"
+    },
+    {
+      "id": "gate-bulge-chart",
+      "label": "Gate: the bulge chart",
+      "item": "grindless:bulge_chart",
+      "package": "B6"
+    },
+    {
+      "id": "gate-spintronic-mainframe",
+      "label": "Gate: the spintronic mainframe",
+      "item": "gtnn:spintronic_mainframe",
+      "package": "A5"
+    },
+    {
+      "id": "gate-uxv-fusion",
+      "label": "Gate: a Mk6 plasma (oxygen burning)",
+      "item": "fluid:gtceu:oxygen_burning_ash_plasma",
+      "package": "A7"
+    },
+    {
+      "id": "gate-network-uxv",
+      "label": "Gate: the network at UXV",
+      "allOf": [
+        "wireless:uxv"
+      ],
+      "package": "W"
+    },
+    {
+      "id": "gate-uxv-hull",
+      "label": "Gate: the UXV hull",
+      "item": "gtceu:uxv_machine_hull",
+      "package": "B4"
+    },
+    {
+      "id": "gate-uxv-sensor",
+      "label": "Gate: the UXV sensor",
+      "item": "gtceu:uxv_sensor",
+      "package": "A6"
+    },
+    {
+      "id": "gate-uxv-emitter",
+      "label": "Gate: the UXV emitter",
+      "item": "gtceu:uxv_emitter",
+      "package": "B5"
+    },
+    {
+      "id": "gate-uxv-parallel-hatch",
+      "label": "Gate: the UXV parallel hatch",
+      "item": "gtceu:uxv_parallel_hatch",
+      "package": "M1"
+    }
+  ],
+  "eraResources": [
+    {
+      "id": "cygnus-uxv",
+      "era": "uxv",
+      "label": "Cygnus X-1's UXV products: the lift, the filter, the condensation tower and the disk",
+      "items": [
+        "fluid:gtceu:stellar_plasma",
+        "fluid:gtceu:stellar_hydrogen_cut",
+        "fluid:gtceu:stellar_helium_cut",
+        "fluid:gtceu:stellar_cno_cut",
+        "fluid:gtceu:stellar_heavy_cut",
+        "fluid:gtceu:disk_plasma",
+        "fluid:gtceu:filtered_disk_plasma",
+        "fluid:gtceu:flux_loaded_plasma",
+        "fluid:gtceu:volatile_condensate",
+        "grindless:frc_cartridge",
+        "grindless:elevator_log",
+        "grindless:refractory_condensate",
+        "grindless:metal_condensate",
+        "grindless:silicate_condensate"
+      ]
+    },
+    {
+      "id": "vela",
+      "era": "uxv-vela",
+      "label": "The Vela pulsar and what comes home from it",
+      "dimensions": [
+        "grindless:vela_pulsar_orbit"
+      ],
+      "items": [
+        "grindless:raw_pasta",
+        "grindless:spaghetti_phase",
+        "grindless:lasagna_phase",
+        "grindless:gnocchi_fragment",
+        "grindless:anti_phase_residue",
+        "grindless:pasta_core_sample",
+        "grindless:lasagna_plate",
+        "grindless:lasagna_electrode",
+        "gtceu:*pasta_strand*"
+      ]
+    },
+    {
+      "id": "cas-a",
+      "era": "uxv-cas-a",
+      "label": "Cassiopeia A and what comes home from it",
+      "dimensions": [
+        "grindless:cas_a_remnant"
+      ],
+      "items": [
+        "grindless:ejecta_knot_dust",
+        "grindless:ejecta_ti_fraction_dust",
+        "gtceu:*titanium_44*",
+        "grindless:ti44_core",
+        "grindless:spent_ti44_core"
+      ]
+    },
+    {
+      "id": "vela-hold",
+      "era": "uxv-vela",
+      "label": "Held to uxv-vela: the UXV hull and hatches, the Mk6 and every UXV component but the sensor and the emitter",
+      "onlyFrom": [
+        "vela"
+      ],
+      "items": [
+        "gtceu:uxv_machine_hull",
+        "gtceu:uxv_energy_input_hatch*",
+        "gtceu:uxv_energy_output_hatch*",
+        "gtceu:uxv_wireless_energy_hatch*",
+        "gtceu:uxv_fusion_reactor",
+        "gtceu:uxv_electric_motor",
+        "gtceu:uxv_electric_pump",
+        "gtceu:uxv_conveyor_module",
+        "gtceu:uxv_electric_piston",
+        "gtceu:uxv_robot_arm",
+        "gtceu:uxv_field_generator",
+        "grindless:uxv_fusion_casing",
+        "grindless:uxv_voltage_coil"
+      ]
+    },
+    {
+      "id": "cas-a-hold",
+      "era": "uxv-cas-a",
+      "label": "Held to uxv-cas-a: the UXV emitter",
+      "onlyFrom": [
+        "cas-a"
+      ],
+      "items": [
+        "gtceu:uxv_emitter"
+      ]
+    },
+    {
+      "id": "opv",
+      "era": "opv",
+      "label": "OpV: nothing of it in a UXV recipe (the OpV casing is only researched and made by the gate)",
+      "items": [
+        "gtceu:opv_*",
+        "gtmutils:opv_*",
+        "gtnn:opv_*",
+        "gtnn:*_opv",
+        "extendedfeatures:opv_*",
+        "gcyr:opv_*"
+      ]
+    }
+  ],
+  "eraItems": [
+    {
+      "id": "uxv-home",
+      "era": "uxv",
+      "label": "UXV on Earth, in Earth and Mercury orbit and at Cygnus X-1: nothing of it needs Vela, Cas A or OpV",
+      "items": [
+        "m:gtceu:mtj_sputter_cluster",
+        "m:gtceu:oxide_pld_chamber",
+        "m:gtceu:vdw_stacking_cell",
+        "m:gtceu:racetrack_fab",
+        "m:gtceu:yig_lpe_furnace",
+        "m:gtceu:shequid_works",
+        "m:gtceu:mnt_collider",
+        "m:gtceu:annihilation_laser_works",
+        "m:gtceu:stellar_elevator",
+        "m:gtceu:plasma_mass_filter",
+        "m:gtceu:stellar_condensation_tower",
+        "m:gtceu:accretion_disk_skimmer",
+        "m:gtceu:frc_former",
+        "m:gtceu:bz_dynamo",
+        "gtceu:pasta_extractor",
+        "gtceu:pasta_phase_sorter",
+        "gtceu:pasta_draw_bench",
+        "gtceu:pasta_laminator",
+        "gtceu:polar_cap_tap",
+        "gtceu:ejecta_knot_sweeper",
+        "gtceu:uxv_sensor",
+        "gtnn:spintronic_mainframe",
+        "grindless:cofeb_target",
+        "grindless:mgo_target",
+        "grindless:heusler_target",
+        "grindless:saf_target_set",
+        "grindless:ta_seed_target",
+        "grindless:srruo3_target",
+        "grindless:la_bfo_target",
+        "grindless:cofeb_ingot",
+        "grindless:heusler_ingot",
+        "grindless:terfenol_d_ingot",
+        "grindless:ni_mn_ga_ingot",
+        "grindless:ta_foil",
+        "grindless:pt_sheet",
+        "grindless:dysco3_substrate",
+        "grindless:ggg_wafer",
+        "grindless:hbn_crystal",
+        "grindless:wte2_crystal",
+        "grindless:fgt_crystal",
+        "grindless:mtj_stack_wafer",
+        "grindless:mram_stack_wafer",
+        "grindless:saf_track_wafer",
+        "grindless:mtj_die",
+        "grindless:mram_wafer",
+        "grindless:srruo3_electrode_wafer",
+        "grindless:me_switch_wafer",
+        "grindless:sot_readout_stack",
+        "grindless:meso_logic_die",
+        "grindless:racetrack_chip",
+        "grindless:magnonic_bus",
+        "grindless:sin_membrane",
+        "grindless:nanoaperture_array",
+        "grindless:rf_carpet_board",
+        "grindless:kr_f2_premix",
+        "grindless:krf_excimer_laser",
+        "grindless:pt_lpe_crucible",
+        "grindless:gas_stopping_cell",
+        "grindless:shequid_gyro",
+        "grindless:stno_stack_wafer",
+        "grindless:stno_array",
+        "grindless:gum_metal_billet",
+        "grindless:gum_metal_blank",
+        "grindless:gum_metal_flexspline",
+        "grindless:uxv_strain_wave_gear",
+        "grindless:encoder_ring",
+        "grindless:multipole_encoder_ring",
+        "grindless:tmr_encoder",
+        "grindless:ga2o3_wafer",
+        "grindless:ga2o3_power_die",
+        "grindless:mu_metal_foil",
+        "grindless:shielded_interposer",
+        "grindless:finemet_ribbon",
+        "grindless:finemet_toroid",
+        "grindless:finemet_core",
+        "grindless:fm257_target",
+        "grindless:cm248_target",
+        "grindless:element_121_recoil",
+        "grindless:element_122_recoil",
+        "grindless:superheavy_census_iii",
+        "grindless:spent_actinide_target",
+        "grindless:u238_ion_source",
+        "grindless:u238_beam_charge",
+        "grindless:island_nuclide",
+        "grindless:island_chart",
+        "grindless:tetrataenite_lamination",
+        "grindless:tetrataenite_rotor",
+        "grindless:w184_cvi_preform",
+        "grindless:terfenol_d_rod",
+        "grindless:ni_mn_ga_crystal",
+        "grindless:cnt_bumper_weave",
+        "grindless:cnt_whipple_shield",
+        "grindless:frc_cartridge",
+        "grindless:positron_stack",
+        "grindless:refractory_condensate",
+        "grindless:metal_condensate",
+        "grindless:silicate_condensate",
+        "grindless:vela_glitch_timing",
+        "grindless:vela_glitch_record",
+        "grindless:cygnus_vlbi_record",
+        "grindless:elevator_log",
+        "gtceu:fermium_257_dust",
+        "gtceu:tungsten_184_ingot",
+        "gtceu:terfenol_d_ingot",
+        "gtceu:ni2mnga_ingot",
+        "gtceu:dysco3_dust",
+        "gtceu:srruo3_dust",
+        "gtceu:la_bfo_dust",
+        "gtceu:ggg_dust",
+        "gtceu:wte2_dust",
+        "gtceu:fe3gete2_dust",
+        "fluid:gtceu:stellar_plasma",
+        "fluid:gtceu:disk_plasma",
+        "fluid:gtceu:filtered_disk_plasma",
+        "fluid:gtceu:flux_loaded_plasma",
+        "fluid:gtceu:stellar_hydrogen_cut",
+        "fluid:gtceu:stellar_helium_cut",
+        "fluid:gtceu:stellar_cno_cut",
+        "fluid:gtceu:stellar_heavy_cut",
+        "fluid:gtceu:triple_alpha_fuel",
+        "fluid:gtceu:carbon_burning_fuel",
+        "fluid:gtceu:lpe_flux",
+        "fluid:gtceu:he_6n",
+        "fluid:gtceu:mnt_product_gas",
+        "fluid:gtceu:finemet_melt",
+        "fluid:gtceu:volatile_condensate"
+      ]
+    },
+    {
+      "id": "uxv-vela-outputs",
+      "era": "uxv-vela",
+      "label": "The Vela pulsar and what comes home from it",
+      "items": [
+        "m:gtceu:pasta_extractor",
+        "m:gtceu:pasta_phase_sorter",
+        "m:gtceu:pasta_draw_bench",
+        "m:gtceu:pasta_laminator",
+        "m:gtceu:polar_cap_tap",
+        "m:gtceu:uxv_fusion_reactor",
+        "m:gtceu:stellar_fractionation_hall",
+        "grindless:raw_pasta",
+        "grindless:spaghetti_phase",
+        "grindless:lasagna_phase",
+        "grindless:gnocchi_fragment",
+        "grindless:anti_phase_residue",
+        "grindless:lasagna_plate",
+        "grindless:lasagna_electrode",
+        "grindless:pasta_core_sample",
+        "grindless:strand_tape",
+        "grindless:strand_stator",
+        "grindless:uxv_voltage_coil",
+        "grindless:pasta_strand_repeater",
+        "grindless:uxv_fusion_casing",
+        "grindless:uxv_smes_cell",
+        "grindless:alip_duct",
+        "grindless:si28_ash",
+        "gtceu:pasta_strand_ingot",
+        "gtceu:pasta_strand_single_wire",
+        "gtceu:uxv_machine_hull",
+        "gtceu:uxv_energy_input_hatch",
+        "gtceu:uxv_energy_input_hatch_16a",
+        "gtceu:uxv_energy_output_hatch",
+        "gtceu:uxv_energy_output_hatch_16a",
+        "gtceu:uxv_wireless_energy_hatch_16a",
+        "gtceu:uxv_electric_motor",
+        "gtceu:uxv_electric_pump",
+        "gtceu:uxv_conveyor_module",
+        "gtceu:uxv_electric_piston",
+        "gtceu:uxv_robot_arm",
+        "gtceu:uxv_field_generator",
+        "fluid:gtceu:cno_ash_plasma",
+        "fluid:gtceu:helium_burning_ash_plasma",
+        "fluid:gtceu:carbon_burning_ash_plasma",
+        "fluid:gtceu:oxygen_burning_ash_plasma",
+        "fluid:gtceu:oxygen_16",
+        "fluid:gtceu:oxygen_burning_fuel"
+      ]
+    },
+    {
+      "id": "uxv-cas-a-outputs",
+      "era": "uxv-cas-a",
+      "label": "Cassiopeia A and what comes home from it",
+      "items": [
+        "m:gtceu:ejecta_knot_sweeper",
+        "grindless:ejecta_knot_dust",
+        "grindless:ti44_core",
+        "grindless:gamma_laser_module",
+        "grindless:ti44_map",
+        "gtceu:titanium_44_dust"
+      ]
+    },
+    {
+      "id": "uxv-gate",
+      "era": "opv",
+      "label": "After both substages: the UXV emitter (lasagna plate and stellar hydrogen cut from Vela, Ti-44 from Cas A), the arm chart, the parallel hatch and the gate's own outputs",
+      "items": [
+        "grindless:arm_chart",
+        "grindless:bulge_chart",
+        "gtceu:opv_machine_casing",
+        "gtceu:uxv_parallel_hatch",
+        "gtceu:uxv_emitter"
+      ]
+    },
+    {
+      "id": "uev-home",
+      "items": [
+        "m:gtceu:calutron",
+        "m:gtceu:heavy_ion_cyclotron",
+        "m:gtceu:recoil_separator",
+        "m:gtceu:superheavy_chemistry_lab",
+        "m:gtceu:megabar_press",
+        "m:gtceu:electron_beam_furnace",
+        "m:gtceu:single_crystal_foundry",
+        "m:gtceu:nitride_magnet_works",
+        "m:gtceu:sic_fibre_plant",
+        "m:gtceu:cvi_furnace",
+        "m:gtceu:snspd_foundry",
+        "m:gtceu:vdw_stacker",
+        "m:gtceu:photonic_integration_hall",
+        "m:gtceu:helium3_polariser",
+        "m:gtceu:quantum_gas_lab",
+        "m:gtceu:entanglement_station",
+        "grindless:ca48_beam",
+        "grindless:target_wheel",
+        "grindless:tennessine_sample",
+        "grindless:superheavy_census",
+        "grindless:sic_sic_plate",
+        "grindless:wf_w_tile",
+        "grindless:snspd",
+        "grindless:qd_source",
+        "grindless:sdd",
+        "grindless:aerogel_tile",
+        "grindless:hollow_core_fibre",
+        "grindless:faraday_isolator",
+        "grindless:degenerate_eos_model",
+        "grindless:quantum_repeater_node",
+        "gtnn:optical_computer",
+        "gtceu:lay_superhydride_ingot",
+        "grindless:uev_fusion_casing",
+        "grindless:hftacn_coil_block",
+        "grindless:photonic_casing"
+      ]
+    },
+    {
+      "id": "uev-sirius-outputs",
+      "items": [
+        "m:gtceu:white_dwarf_spectrograph",
+        "m:gtceu:degenerate_harvester",
+        "m:gtceu:containment_works",
+        "grindless:degenerate_matter",
+        "grindless:degenerate_pellet",
+        "grindless:mass_radius_chart",
+        "m:gtceu:uev_fusion_reactor"
+      ]
+    },
+    {
+      "id": "uiv-home",
+      "items": [
+        "m:gtceu:ramp_compression_pulser",
+        "m:gtceu:levitation_melter",
+        "m:gtceu:tfln_fab",
+        "m:gtceu:femtosecond_writer",
+        "m:gtceu:beuv_scanner",
+        "m:gtceu:stm_lithography_cell",
+        "m:gtceu:spectral_hole_burner",
+        "m:gtceu:millikelvin_cryostat_works",
+        "gtceu:uiv_electric_motor",
+        "gtceu:uiv_electric_pump",
+        "gtceu:uiv_robot_arm",
+        "grindless:uiv_fusion_casing",
+        "grindless:metallic_hydrogen_coil_block",
+        "grindless:uiv_smes_cell"
+      ]
+    },
+    {
+      "id": "uiv-rxj1856-outputs",
+      "items": [
+        "m:gtceu:crust_lift",
+        "m:gtceu:neutron_drip_separator",
+        "m:gtceu:neutronium_cage",
+        "m:gtceu:r_process_decompressor",
+        "m:gtceu:decay_heat_vault",
+        "grindless:neutronium_pellet",
+        "gtceu:uiv_field_generator",
+        "m:gtceu:uiv_fusion_reactor"
+      ]
+    },
+    {
+      "id": "uiv-j0437-outputs",
+      "items": [
+        "m:gtceu:pulsar_wind_trap",
+        "m:gtceu:positronium_condensate_lab",
+        "m:gtceu:xray_pulse_profiler",
+        "grindless:gamma_laser_cavity",
+        "grindless:ns_eos_chart",
+        "grindless:pulsar_navigation_solution",
+        "gtceu:uiv_emitter"
+      ]
+    },
+    {
+      "id": "uiv-cygnus-outputs",
+      "items": [
+        "m:gtceu:ergosphere_probe_bay",
+        "m:gtceu:penrose_engine",
+        "grindless:kerr_probe_data",
+        "grindless:kerr_chart",
+        "grindless:sled_hull",
+        "m:gtceu:polarised_proton_source",
+        "m:gtceu:matrioshka_computer",
+        "m:gtceu:droplet_radiator_works"
+      ]
+    }
+  ]
+}
