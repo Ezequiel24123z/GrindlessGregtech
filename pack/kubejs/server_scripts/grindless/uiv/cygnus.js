@@ -6,7 +6,7 @@
 //   gtceu:ergosphere_probing    ergosphere probe bay. Only at grindless:cygnus_x1_orbit.
 //   gtceu:penrose_extraction    Penrose engine, a generator (EUt written negative). Only at grindless:cygnus_x1_orbit.
 //   assembler                   the sled hull (id grindless:<name>).
-//   assembly_line               the controllers: UIV hull + 2 UIV parts + 2 optical mainframes + UIV circuits + 3 domain items, with
+//   assembly_line               the controllers: UIV hull + 3 each of 3 UIV component families + 2 optical mainframes + UIV circuits + 3 domain items, with
 //                               soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/<machine>.
 //
 // Row keys: "site" true puts recipe.dimension(cygnus_x1_orbit) on it; "wear" are chanced inputs; "kept" are not consumed.
@@ -173,13 +173,13 @@
     var MAINFRAME = 'gtnn:optical_mainframe'
     // the engine's research is the Kerr chart, whose chain needs the bay; the half-sled is never an input (it would loop)
     var defs = [
-      { name: 'ergosphere_probe_bay', part: 'gtceu:uiv_emitter', research: 'grindless:ergosphere_probe', domain: ['2x grindless:ergosphere_probe', '2x grindless:data_crystal_5d', '2x grindless:sled_charge'] },
-      { name: 'penrose_engine', part: 'gtceu:uiv_field_generator', research: 'grindless:kerr_chart', domain: ['2x grindless:kerr_chart', '2x grindless:sled_hull', '2x grindless:compacted_waste_canister'] }
+      { name: 'ergosphere_probe_bay', parts: ['gtceu:uiv_emitter', 'gtceu:uiv_sensor', 'gtceu:uiv_field_generator'], research: 'grindless:ergosphere_probe', domain: ['2x grindless:ergosphere_probe', '2x grindless:data_crystal_5d', '2x grindless:sled_charge'] },
+      { name: 'penrose_engine', parts: ['gtceu:uiv_field_generator', 'gtceu:uiv_electric_motor', 'gtceu:uiv_emitter'], research: 'grindless:kerr_chart', domain: ['2x grindless:kerr_chart', '2x grindless:sled_hull', '2x grindless:compacted_waste_canister'] }
     ]
     CY.controllerRecipes = []
     defs.forEach(function (d) {
       var machine = 'gtceu:' + d.name
-      var ids = [HULL, d.part, MAINFRAME, machine, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var ids = [HULL, MAINFRAME, machine, d.research].concat(d.parts).concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
       var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
@@ -187,14 +187,14 @@
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
       b.itemInputs(HULL)
-      b.itemInputs('2x ' + d.part)
+      d.parts.forEach(function (p) { b.itemInputs('3x ' + p) })
       b.itemInputs('2x ' + MAINFRAME)
       b.itemInputs('4x #gtceu:circuits/uiv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
       b.itemOutputs(machine)
       b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
-      b.EUt(7864320).duration(1500)
+      b.EUt(31457280).duration(1500)
       CY.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }

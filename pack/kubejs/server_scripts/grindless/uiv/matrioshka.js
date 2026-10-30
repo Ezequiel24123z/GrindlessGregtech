@@ -9,7 +9,7 @@
 //   gtceu:droplet_radiator_assembly   droplet radiator works, circuit 1 droplet radiator module, 2 TPV tile. Only at gcyr:mercury_orbit.
 //   assembler, lathe, mixer, ...      the line steps GTM can run (ids grindless:<name>).
 //   assembly_line                     the radiation-hardened controller, researchWithoutRecipe (the research is the Matrioshka's write).
-//   assembly_line                     the controllers: UIV hull + 2 UIV parts + 2 optical mainframes + UIV circuits + 3 line items, with
+//   assembly_line                     the controllers: UIV hull + 3 each of 3 UIV component families + 2 optical mainframes + UIV circuits + 3 line items, with
 //                                     soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/<machine>.
 //
 // A recipe whose "site" is true gets dimension gcyr:mercury_orbit; an item stack with "nbt" carries that tag.
@@ -175,13 +175,13 @@
     var HULL = 'gtceu:uiv_machine_hull'
     var MAINFRAME = 'gtnn:optical_mainframe'
     var defs = [
-      { name: 'matrioshka_computer', part: 'gtceu:uiv_electric_piston', research: 'grindless:matrioshka_node', domain: ['2x grindless:matrioshka_logic_tile', '2x grindless:diamond_schottky_die', '2x grindless:tipt_au_stack'] },
-      { name: 'droplet_radiator_works', part: 'gtceu:uiv_conveyor_module', research: 'grindless:droplet_collector', domain: ['2x grindless:matrioshka_emitter_shell', '2x grindless:droplet_wick', '2x grindless:tipt_au_stack'] }
+      { name: 'matrioshka_computer', parts: ['gtceu:uiv_field_generator', 'gtceu:uiv_emitter', 'gtceu:uiv_sensor'], research: 'grindless:matrioshka_node', domain: ['2x grindless:matrioshka_logic_tile', '2x grindless:diamond_schottky_die', '2x grindless:tipt_au_stack'] },
+      { name: 'droplet_radiator_works', parts: ['gtceu:uiv_electric_pump', 'gtceu:uiv_fluid_regulator', 'gtceu:uiv_conveyor_module'], research: 'grindless:droplet_collector', domain: ['2x grindless:matrioshka_emitter_shell', '2x grindless:droplet_wick', '2x grindless:tipt_au_stack'] }
     ]
     MA.controllerRecipes = []
     defs.forEach(function (d) {
       var machine = 'gtceu:' + d.name
-      var ids = [HULL, d.part, MAINFRAME, machine, d.research].concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
+      var ids = [HULL, MAINFRAME, machine, d.research].concat(d.parts).concat(d.domain.map(function (s) { return s.replace(/^\d+x /, '') }))
       var missing = ids.filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {
         console.error(LOG + d.name + ' controller recipe skipped, unknown item(s): ' + missing.join(', '))
@@ -189,14 +189,14 @@
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
       b.itemInputs(HULL)
-      b.itemInputs('2x ' + d.part)
+      d.parts.forEach(function (p) { b.itemInputs('3x ' + p) })
       b.itemInputs('2x ' + MAINFRAME)
       b.itemInputs('4x #gtceu:circuits/uiv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))
       b.itemOutputs(machine)
       b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(64).EUt(7864320) })
-      b.EUt(7864320).duration(1500)
+      b.EUt(31457280).duration(1500)
       MA.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
   }
