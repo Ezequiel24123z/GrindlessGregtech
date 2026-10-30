@@ -86,7 +86,14 @@
   "exceptions": [
   ],
   "pendingRoutes": [
-      ],
-      "pendingUses": [
+    { "id": "grindless:assembler/chain_strand_repeater", "reason": "OpV-W landed before Wave A: its inputs are held until A0 (gtceu:chain_strand_single_wire) and A2 (grindless:tetron_die) write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/opv_wireless_energy_hatch_4a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_energy_hatch (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/opv_wireless_energy_hatch_16a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_energy_hatch_4a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/opv_wireless_energy_hatch_64a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_energy_hatch_16a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/opv_wireless_dynamo_hatch_4a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_dynamo_hatch (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/opv_wireless_dynamo_hatch_16a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_dynamo_hatch_4a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/opv_wireless_dynamo_hatch_64a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_dynamo_hatch_16a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" }
+  ],
+  "pendingUses": [
       ]
     }
