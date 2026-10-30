@@ -219,13 +219,13 @@ test('controllers read the UIV hull, 2 UIV parts and 2 optical mainframes', () =
   assert.doesNotMatch(server, /\['OPO', 'PHP'\]|gtceu\.shaped/, 'no shaped controller recipe any more');
   assert.match(server, /event\.recipes\.gtceu\.assembly_line\('grindless:' \+ d\.name\)/);
   assert.match(server, /grindless:assembly_line\/' \+ d\.name/);
-  assert.match(server, /b\.itemInputs\('2x ' \+ d\.part\)/);
+  assert.match(server, /d\.parts\.forEach\(function \(p\) \{ b\.itemInputs\('3x ' \+ p\) \}\)/);
   assert.match(server, /b\.itemInputs\('2x ' \+ MAINFRAME\)/);
   assert.match(server, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
   assert.match(server, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
   assert.match(server, /stationResearch/);
-  for (const m of ['crust_lift\', part: \'gtceu:uiv_electric_piston\'', 'neutron_drip_separator\', part: \'gtceu:uiv_electric_pump\'',
-    'neutronium_cage\', part: \'gtceu:uiv_robot_arm\'', 'r_process_decompressor\', part: \'gtceu:uiv_conveyor_module\'', 'decay_heat_vault\', part: \'gtceu:uiv_electric_motor\'']) {
+  for (const m of ['crust_lift\', parts: [\'gtceu:uiv_electric_piston\', \'gtceu:uiv_electric_motor\'', 'neutron_drip_separator\', parts: [\'gtceu:uiv_electric_pump\', \'gtceu:uiv_fluid_regulator\', \'gtceu:uiv_conveyor_module\'',
+    'neutronium_cage\', parts: [\'gtceu:uiv_robot_arm\', \'gtceu:uiv_electric_motor\', \'gtceu:uiv_electric_piston\'', 'r_process_decompressor\', parts: [\'gtceu:uiv_conveyor_module\', \'gtceu:uiv_electric_piston\'', 'decay_heat_vault\', parts: [\'gtceu:uiv_electric_motor\', \'gtceu:uiv_electric_pump\'']) {
     assert.ok(server.includes('name: \'' + m), m);
   }
 });
