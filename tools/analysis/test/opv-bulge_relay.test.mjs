@@ -26,12 +26,13 @@ const VA_UXV = 125829120;
 const SOURCE = 'grindless:cygnus_x1_orbit';
 const gateRows = () => table('gate.json').types.warp_gate.recipes;
 
-test('the stand-in runs bulge_relay.js without errors; the seed is made and nothing is skipped', () => {
+test('the stand-in runs bulge_relay.js without errors; the seed and the hull are made and nothing is skipped', () => {
   const errs = run.errors.filter((e) => /bulge_relay|opv[\\/]/.test(String(e.file)));
   assert.deepEqual(errs, [], errs.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   const B = plain(run.global.grindless.opvBulgeRelay);
   assert.deepEqual(B.skipped, []);
-  assert.deepEqual(B.recipes, ['grindless:assembly_line/bulge_relay_seed']);
+  assert.deepEqual(B.recipes, ['grindless:assembly_line/bulge_relay_seed', 'grindless:assembly_line/opv_machine_hull']);
+  assert.deepEqual(plain(B.hull), { cable: 'gtceu:chain_strand_single_cable', helium: 'gtceu:superfluid_helium_3' });
   assert.equal(B.jump, 'hold_sgr1806');
   assert.equal(B.place, 'sgr1806');
   assert.equal(B.source, SOURCE);
@@ -109,6 +110,24 @@ test('the chain strand cable: F1 made it a GT material, 16 A at V[OpV] with no l
   const f = read('startup_scripts', 'grindless', 'opv', 'foundation.js');
   assert.match(f, /'gtceu:chain_strand': \{[^}]*cable: true/);
   assert.match(f, /material\.cableProperties\(GTValues\.V\[OPV\], 16, 0, false\)/);
+});
+
+test('the hull: an assembly line row at V[OpV]/2 of the OpV casing, 2 strand cables, 2 lamina stacks and 500 mB superfluid He-3, the one maker', () => {
+  const r = recipes.find((x) => x.i === 'grindless:assembly_line/opv_machine_hull');
+  assert.ok(r, 'recipe grindless:assembly_line/opv_machine_hull');
+  assert.equal(r.t, 'gtceu:assembly_line', 'no OpV machine yet: GTM\'s assembly line on UXV 4 A hatches (opv.md:46)');
+  assert.deepEqual(itemsOf(r, 'inputs'), [['gtceu:opv_machine_casing', 1], ['gtceu:chain_strand_single_cable', 2], ['grindless:chain_lamina_stack', 2]]);
+  assert.deepEqual(r.j.inputs.fluid.map((f) => [f.content.value[0].fluid, f.content.amount]), [['gtceu:superfluid_helium_3', 500]]);
+  assert.deepEqual(itemsOf(r, 'outputs'), [['gtceu:opv_machine_hull', 1]]);
+  assert.equal(euOf(r), 2 ** 28);
+  assert.equal(euOf(r), 268435456);
+  assert.match(read(...SCRIPT), /h\.EUt\(V_OPV \/ 2\)\.duration\(200\)/, '200 ticks (the stand-in keeps no duration)');
+  assert.ok(!r.j.recipeConditions.some((c) => c.type === 'research'), 'no research');
+  assert.ok(euOf(r) <= 4 * V_UXV, 'a UXV 4 A hatch carries it');
+  const makers = recipes.filter((x) => x.i.startsWith('grindless:') && JSON.stringify(x.j.outputs || {}).includes('"gtceu:opv_machine_hull"')).map((x) => x.i);
+  assert.deepEqual(makers, ['grindless:assembly_line/opv_machine_hull']);
+  const casing = recipes.filter((x) => JSON.stringify(x.j.outputs || {}).includes('"gtceu:opv_machine_casing"')).map((x) => x.i);
+  assert.deepEqual(casing, ['grindless:assembly_line/opv_machine_casing'], 'the casing is UXV-B6\'s (uxv/gate.js)');
 });
 
 test('A0 adds no OpV component and no OpV circuit tag (opv.md "Bootstrap check")', () => {
