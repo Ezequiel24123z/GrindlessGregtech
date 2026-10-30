@@ -206,15 +206,19 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var ARM = 'gtceu:uv_robot_arm'
-    var FIELD = 'gtceu:uv_field_generator'
-    var SENSOR = 'gtceu:uv_sensor'
+    var ARM = 'gtceu:uhv_robot_arm'
+    var FIELD = 'gtceu:uhv_field_generator'
+    var SENSOR = 'gtceu:uhv_sensor'
+    var CONVEYOR = 'gtceu:uhv_conveyor_module'
+    var PISTON = 'gtceu:uhv_electric_piston'
+    var EMITTER = 'gtceu:uhv_emitter'
+    var MOTOR = 'gtceu:uhv_electric_motor'
     var C = '#gtceu:circuits/uhv'
     var M = SW.machines || {}
     var defs = [
-      { machine: (M.foundry && M.foundry.machine) || 'gtceu:swarm_segment_foundry', name: 'swarm_segment_foundry', parts: [HULL, ARM], research: 'grindless:sodium_potassium_heat_pipe', domain: ['4x grindless:propellant_tank', '2x grindless:thruster_pod', '2x grindless:silica_aerogel'] },
-      { machine: (M.station && M.station.machine) || 'gtceu:swarm_control_station', name: 'swarm_control_station', parts: [HULL, FIELD], research: 'grindless:uv_electromagnet', domain: ['2x grindless:srf_cryomodule', '4x grindless:fibre_laser_module', '2x grindless:nbn_coated_sic_plate'] },
-      { machine: (M.bay && M.bay.machine) || 'gtceu:solar_probe_bay', name: 'solar_probe_bay', parts: [HULL, SENSOR], research: 'grindless:thruster_pod', domain: ['2x grindless:sodium_potassium_heat_pipe', '4x grindless:mu_metal_shield', '2x grindless:propellant_tank'] }
+      { machine: (M.foundry && M.foundry.machine) || 'gtceu:swarm_segment_foundry', name: 'swarm_segment_foundry', parts: [HULL, ARM, CONVEYOR, PISTON], research: 'grindless:sodium_potassium_heat_pipe', domain: ['4x grindless:propellant_tank', '2x grindless:thruster_pod', '2x grindless:silica_aerogel'] },
+      { machine: (M.station && M.station.machine) || 'gtceu:swarm_control_station', name: 'swarm_control_station', parts: [HULL, FIELD, EMITTER, SENSOR], research: 'grindless:uv_electromagnet', domain: ['2x grindless:srf_cryomodule', '4x grindless:fibre_laser_module', '2x grindless:nbn_coated_sic_plate'] },
+      { machine: (M.bay && M.bay.machine) || 'gtceu:solar_probe_bay', name: 'solar_probe_bay', parts: [HULL, SENSOR, EMITTER, MOTOR], research: 'grindless:thruster_pod', domain: ['2x grindless:sodium_potassium_heat_pipe', '4x grindless:mu_metal_shield', '2x grindless:propellant_tank'] }
     ]
     SW.crafting = []
     defs.forEach(function (d) {
@@ -224,7 +228,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))

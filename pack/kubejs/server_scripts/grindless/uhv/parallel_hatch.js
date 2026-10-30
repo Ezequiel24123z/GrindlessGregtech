@@ -14,7 +14,7 @@
   var H = G.uhvParallelHatch || (G.uhvParallelHatch = {})
 
   var OUTPUT = 'gtceu:uhv_parallel_hatch'
-  var PARTS = ['gtceu:uhv_machine_hull', 'gtceu:uv_sensor', 'gtceu:uv_emitter', 'gtceu:europium_double_cable']
+  var PARTS = ['gtceu:uhv_machine_hull', 'gtceu:uhv_sensor', 'gtceu:uhv_emitter', 'gtceu:europium_double_cable']
   var DOMAIN = ['grindless:fibre_laser_module', 'grindless:srf_cavity', 'grindless:mu_metal_shield']
   var RESEARCH = 'grindless:srf_cryomodule'
 
@@ -32,7 +32,7 @@
         console.error(LOG + H.recipeId + ' skipped, unknown item(s): ' + missing.join(', '))
       } else {
         event.recipes.gtceu.assembly_line('grindless:uhv_parallel_hatch')
-          .itemInputs('gtceu:uhv_machine_hull', 'gtceu:uv_sensor', 'gtceu:uv_emitter', '2x gtceu:europium_double_cable', '4x #gtceu:circuits/uhv')
+          .itemInputs('gtceu:uhv_machine_hull', 'gtceu:uhv_sensor', 'gtceu:uhv_emitter', '2x gtceu:europium_double_cable', '4x #gtceu:circuits/uhv')
           .itemInputs('4x grindless:fibre_laser_module', '2x grindless:srf_cavity', '2x grindless:mu_metal_shield')
           .inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
           .itemOutputs(OUTPUT)

@@ -14,7 +14,7 @@
 //                          melanin-chitosan composite and the flare shield panel; the rover; the Earth extracts' destinations;
 //                          and F1's two casings, 2 a craft: bsl4_casing (HSS-S, PTFE, a sterilising filter) and hangar_casing
 //                          (tungstensteel and naquadah alloy on a frame).
-//   crafting               the controllers: UHV hull + 2 UV parts + 2 UHV circuits, assembly lines grindless:assembly_line/<machine>.
+//   crafting               the controllers: UHV hull + 3 UHV component families (3 of each) + 2 UHV circuits, assembly lines grindless:assembly_line/<machine>.
 //                          Each is an assembly line: station research, tritanium + soldering alloy + lubricant, 3 domain items of its own line.
 //
 // The older rows of the package are read elsewhere: biofoundry.json circuits 11-16 (luv/biofoundry.js) and the algae bioreactor's
@@ -180,16 +180,21 @@
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
     var C = '#gtceu:circuits/uhv'
-    var ARM = 'gtceu:uv_robot_arm'
-    var MOTOR = 'gtceu:uv_electric_motor'
-    var PUMP = 'gtceu:uv_electric_pump'
+    var ARM = 'gtceu:uhv_robot_arm'
+    var MOTOR = 'gtceu:uhv_electric_motor'
+    var PUMP = 'gtceu:uhv_electric_pump'
+    var SENSOR = 'gtceu:uhv_sensor'
+    var CONVEYOR = 'gtceu:uhv_conveyor_module'
+    var REGULATOR = 'gtceu:uhv_fluid_regulator'
+    var PISTON = 'gtceu:uhv_electric_piston'
+    var EMITTER = 'gtceu:uhv_emitter'
     var M = PL.machines || {}
     var defs = [
-      { key: 'facility', parts: [HULL, ARM], research: 'grindless:carbon_nanotube_yarn', domain: ['4x grindless:cladosporium_culture', '2x grindless:bsl4_casing', '2x grindless:srf_cryomodule'] },
-      { key: 'rover', parts: [HULL, MOTOR], research: 'grindless:proxima_rover', domain: ['4x grindless:thruster_pod', '2x grindless:hangar_casing', '2x grindless:mu_metal_shield'] },
-      { key: 'greenhouse', parts: [HULL, PUMP], research: 'grindless:sphingomonas_culture', domain: ['4x grindless:cladosporium_culture', '2x grindless:bsl4_casing', '2x grindless:silica_aerogel'] },
-      { key: 'plant', parts: [HULL, PUMP], research: 'grindless:chromobacterium_culture', domain: ['4x grindless:sporosarcina_culture', '2x grindless:bsl4_casing', '2x grindless:mu_metal_shield'] },
-      { key: 'vat', parts: [HULL, PUMP], research: 'grindless:hangar_casing', domain: ['4x grindless:sphingomonas_culture', '2x grindless:bsl4_casing', '2x grindless:srf_cryomodule'] }
+      { key: 'facility', parts: [HULL, ARM, SENSOR, CONVEYOR], research: 'grindless:carbon_nanotube_yarn', domain: ['4x grindless:cladosporium_culture', '2x grindless:bsl4_casing', '2x grindless:srf_cryomodule'] },
+      { key: 'rover', parts: [HULL, MOTOR, CONVEYOR, SENSOR], research: 'grindless:proxima_rover', domain: ['4x grindless:thruster_pod', '2x grindless:hangar_casing', '2x grindless:mu_metal_shield'] },
+      { key: 'greenhouse', parts: [HULL, PUMP, REGULATOR, SENSOR], research: 'grindless:sphingomonas_culture', domain: ['4x grindless:cladosporium_culture', '2x grindless:bsl4_casing', '2x grindless:silica_aerogel'] },
+      { key: 'plant', parts: [HULL, PUMP, REGULATOR, PISTON], research: 'grindless:chromobacterium_culture', domain: ['4x grindless:sporosarcina_culture', '2x grindless:bsl4_casing', '2x grindless:mu_metal_shield'] },
+      { key: 'vat', parts: [HULL, PUMP, REGULATOR, EMITTER], research: 'grindless:hangar_casing', domain: ['4x grindless:sphingomonas_culture', '2x grindless:bsl4_casing', '2x grindless:srf_cryomodule'] }
     ]
     PL.controllerRecipes = []
     defs.forEach(function (d) {
@@ -204,7 +209,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + m.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
