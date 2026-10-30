@@ -8,7 +8,7 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { staticDump } from '../lib/kubejs_static.mjs';
 import { eraOrderViolations } from '../lib/era_order.mjs';
-import { BRIDGE_FILE, DEFAULT_PACK, packDeadlocks } from '../recipe-cycles.mjs';
+import { BRIDGE_FILE, DEFAULT_PACK, loadCyclesConfig, packDeadlocks } from '../recipe-cycles.mjs';
 
 const gt = (id, type, items, out, research = []) => ({ id, type, json: {
   inputs: { item: items.map((i) => ({ content: { type: 'gtceu:sized', count: 1, ingredient: { item: i } } })) },
@@ -49,6 +49,22 @@ test('every controller our recipes make is reachable from our own recipes', { ti
   const r = packDeadlocks(DEFAULT_PACK, pack().dump);
   const roots = r.cycles.filter((c) => c.root).map((c) => c.members.join(' '));
   assert.deepEqual(r.deadMachines, [], `root cycles: ${roots.join(' / ')}; run node tools/analysis/recipe-cycles.mjs`);
+  assert.deepEqual(r.unproduced.filter((x) => !loadCyclesConfig().pending.includes(x)), [], 'a tier component our recipes use has no recipe: add it, or list it in recipe_cycles.json (node tools/analysis/recipe-cycles.mjs --write-pending)');
+  assert.deepEqual(r.pendingNow, [], 'now made by a recipe: remove from recipe_cycles.json pending');
+});
+
+test('tier components of UHV and above are tracked as ours: one nothing makes blocks its users unless pending, a made one is checked', () => {
+  const owned = ['^gtceu:(uhv|uev)_electric_motor$'];
+  const d = dump([gt('a/works', 'gtceu:assembly_line', ['gtceu:uhv_electric_motor'], 'gtceu:works')]);
+  assert.deepEqual(deadlocks(d).deadMachines, [], 'foreign ids are assumed obtainable by default');
+  const r = deadlocks(d, { owned });
+  assert.deepEqual(r.unproduced, ['gtceu:uhv_electric_motor']);
+  assert.deepEqual(r.deadMachines, ['gtceu:works']);
+  assert.deepEqual(deadlocks(d, { owned, pending: ['gtceu:uhv_electric_motor'] }).deadMachines, []);
+  const made = dump([...d.recipes.values(), gt('b/motor', 'gtceu:assembler', ['minecraft:stone'], 'gtceu:uhv_electric_motor')]);
+  const r2 = deadlocks(made, { owned, pending: ['gtceu:uhv_electric_motor'] });
+  assert.deepEqual(r2.pendingNow, ['gtceu:uhv_electric_motor']);
+  assert.deepEqual(r2.deadMachines, []);
 });
 
 test('the current pack has no era inversion in machine recipes beyond the allowlist', { timeout: 900000 }, () => {

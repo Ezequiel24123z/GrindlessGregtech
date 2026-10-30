@@ -57,6 +57,13 @@ export function makeAny() {
   return self;
 }
 
+/** Text/Component: translate(key) keeps its key (`__key`), so the stand-in can record a machine's tooltips(...) array by translation key. */
+function makeText() {
+  const any = makeAny();
+  const keyed = (key) => new Proxy(any, { get: (t, p) => (p === '__key' ? key : t[p]) });
+  return new Proxy(any, { get: (t, p) => (p === 'translate' || p === 'translatable' ? (k) => keyed(String(k)) : t[p]) });
+}
+
 /** A recorder: chained calls return the recorder; `on[name](...args)` sees the calls it cares about. */
 function recorder(on, base = {}) {
   let self;
@@ -454,7 +461,7 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
   function baseContext() {
     const ctx = {
       global: global_, console: console_, JsonIO: jsonIO, Java, GTValues, Item, Ingredient, Fluid,
-      Text: any, Component: any, Utils: any, NBT: any, Platform: { isLoaded: () => true, getMods: () => any, isClientEnvironment: () => false },
+      Text: makeText(), Component: makeText(), Utils: any, NBT: any, Platform: { isLoaded: () => true, getMods: () => any, isClientEnvironment: () => false },
     };
     for (const g of EVENT_GROUPS) ctx[g] = eventGroup(g);
     return ctx;
@@ -591,13 +598,17 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
           tiers: (p, a) => { m.tiers.push(...a.flat().map(Number)); },
           recipeType: (p, a) => { m.recipeTypes.push(String(a[0])); },
           recipeTypes: (p, a) => { m.recipeTypes.push(...a.flat().map(String)); },
+          // the startup tooltips array: one translation key per entry, null for an entry that is not Text.translate(key)
+          'tooltips(net.minecraft.network.chat.Component[])': (p, a) => {
+            m.tooltips = Array.isArray(a[0]) ? a[0].map((e) => (e && typeof e.__key === 'string' ? e.__key : null)) : null;
+          },
         });
       },
     }, 'gtceu:machine registry');
     for (const m of pending) {
       const types = m.recipeTypes.map((t) => (t.includes(':') ? t : 'gtceu:' + t));
       const ids = m.tiers.length > 0 ? m.tiers.map((t) => 'gtceu:' + TIERS[t].toLowerCase() + '_' + m.name) : ['gtceu:' + m.name];
-      for (const id of ids) registry.machines.set(id, { id, kind: m.kind, recipeTypes: types, file: m.file, name: m.name });
+      for (const id of ids) registry.machines.set(id, { id, kind: m.kind, recipeTypes: types, file: m.file, name: m.name, tooltips: m.tooltips });
     }
   }
 
