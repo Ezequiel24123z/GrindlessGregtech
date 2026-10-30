@@ -109,6 +109,17 @@
     { name: 'c12_methanation', circuit: 7, c12: 1, h2: 2000, out: { ch4: 1000 }, gasify: 0, shift: 0, methanate: 1 }
   ]
 
+  // UXV-B2 (docs/eras/uxv.md, machine 12): the condensation tower's volatile condensate (1 000 mB = one mole each of CH4, NH3 and H2O) is
+  // reformed with one mole of steam: CH4 + H2O -> CO + 3 H2, CO + H2O -> CO2 + H2, NH3 -> N + 3/2 H2 (GTM's nitrogen is atoms like its
+  // hydrogen). Circuit 8: the contract's 7 is UIV-A10's. gasify and shift 1 each; the nitrogen is not in the balance check (c, h, o only).
+  const VOLATILE = 'gtceu:volatile_condensate'
+  const NITROGEN = 'gtceu:nitrogen'
+  ATOMS[VOLATILE] = { c: 1, h: 9, o: 1 }
+  ATOMS[NITROGEN] = { c: 0, h: 0, o: 0 }
+  const UXV_TABLE = [
+    { name: 'volatile_reform', circuit: 8, volatile: 1000, steam: 1000, out: { h2: 11000, co2: 1000, n: 1000 }, gasify: 1, shift: 1 }
+  ]
+
   function addAtoms(sum, atoms, moles, sign) {
     sum.c += sign * atoms.c * moles
     sum.h += sign * atoms.h * moles
@@ -120,6 +131,7 @@
     if (t.heavy) fluidsIn.push({ id: HEAVY, amount: t.heavy })
     if (t.co) fluidsIn.push({ id: CO, amount: t.co })
     if (t.co2) fluidsIn.push({ id: CO2, amount: t.co2 })
+    if (t.volatile) fluidsIn.push({ id: VOLATILE, amount: t.volatile })
     if (t.steam) fluidsIn.push({ id: STEAM, amount: t.steam })
     if (t.water) fluidsIn.push({ id: WATER, amount: t.water })
     if (t.h2) fluidsIn.push({ id: H2, amount: t.h2 })
@@ -128,6 +140,7 @@
     if (t.out.co) fluidsOut.push({ id: CO, amount: t.out.co })
     if (t.out.h2) fluidsOut.push({ id: H2, amount: t.out.h2 })
     if (t.out.co2) fluidsOut.push({ id: CO2, amount: t.out.co2 })
+    if (t.out.n) fluidsOut.push({ id: NITROGEN, amount: t.out.n })
     var atoms = { c: 0, h: 0, o: 0 }
     if (t.feed) addAtoms(atoms, FEED_ATOMS, t.feed, 1)
     if (t.c12) addAtoms(atoms, FEED_ATOMS, t.c12, 1)
@@ -164,6 +177,7 @@
   SYN.orbitRecipes = ORBIT_TABLE.map(planOf)
   SYN.uevRecipes = UEV_TABLE.map(planOf)
   SYN.uivRecipes = UIV_TABLE.map(planOf)
+  SYN.uxvRecipes = UXV_TABLE.map(planOf)
 
   const HULL = 'gtceu:hv_machine_hull'
   const REACTOR = 'gtceu:hv_chemical_reactor'
@@ -204,8 +218,10 @@
       console.error('[grindless/hv] syngas recipes skipped, unknown id(s): ' + missing.join(', '))
       return
     }
-    SYN.recipes.concat(SYN.orbitRecipes, SYN.uevRecipes, SYN.uivRecipes).forEach(function (r) {
+    SYN.recipes.concat(SYN.orbitRecipes, SYN.uevRecipes, SYN.uivRecipes, SYN.uxvRecipes).forEach(function (r) {
       if (r.c12 && !Item.exists(r.c12.id)) return console.error('[grindless/hv] syngas row ' + r.name + ' skipped, unknown ' + r.c12.id)
+      var unknown = r.fluidsIn.concat(r.fluidsOut).filter(function (f) { return !Fluid.exists(f.id) })
+      if (unknown.length > 0) return console.error('[grindless/hv] syngas row ' + r.name + ' skipped, unknown ' + unknown[0].id)
       var recipe = event.recipes.gtceu.syngas(ID_PREFIX + r.name)
       if (r.feed) recipe.itemInputs(r.feed.count + 'x #' + r.feed.tag)
       if (r.c12) recipe.itemInputs(r.c12.count + 'x ' + r.c12.id)
@@ -217,7 +233,7 @@
       if (r.dim) recipe.dimension(r.dim)
       recipe.EUt(r.eut).duration(r.duration)
     })
-    console.info('[grindless/hv] syngas recipes added: ' + (SYN.recipes.length + SYN.orbitRecipes.length + SYN.uevRecipes.length + SYN.uivRecipes.length))
+    console.info('[grindless/hv] syngas recipes added: ' + (SYN.recipes.length + SYN.orbitRecipes.length + SYN.uevRecipes.length + SYN.uivRecipes.length + SYN.uxvRecipes.length))
   }
 
   // Plant: CRAFTING TABLE, HV hull + HV chemical reactor (the shift) + HV centrifuge (the gas separation) + 2 HV electric pumps + 4 HV

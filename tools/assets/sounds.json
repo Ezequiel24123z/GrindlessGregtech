@@ -684,6 +684,39 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_stellar_elevator",
+      "recipeType": "gtceu:star_lifting",
+      "prompt": "Seamless looping sound of a giant magnetic plasma lift: a deep rising electromagnetic hum, a crackling plasma stream and slow cryogenic pump pulses, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_plasma_mass_filter",
+      "recipeType": "gtceu:plasma_mass_filtering",
+      "prompt": "Seamless looping sound of a superconducting solenoid sorting plasma by mass: a steady low coil hum, a thin rhythmic ion sweep and faint electrical crackle, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_stellar_condensation_tower",
+      "recipeType": "gtceu:stellar_condensation",
+      "prompt": "Seamless looping sound of a tall industrial condensation column: a deep resonant column drone, slow dripping of molten metal and a hissing gas draw-off, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }

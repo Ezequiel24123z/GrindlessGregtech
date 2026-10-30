@@ -96,6 +96,18 @@ test('the interferometer: catalogue kept + HPGe crystal + 4 data orbs, circuit 1
   assert.ok(JSON.stringify(rec.j.recipeConditions || []).includes(ORBIT), 'dimension condition');
 });
 
+test('UXV-B2: two HPGe stations + 4 data orbs, catalogue kept, circuit 3 (2 is UIV-B4\'s), Pluto orbit -> the Cygnus VLBI record', () => {
+  const r = row('cygnus_vlbi_record');
+  assert.equal(r.type, 'event_horizon_imaging');
+  assert.deepEqual(r.itemsIn, [{ id: 'grindless:hpge_crystal', count: 2 }, { id: 'gtceu:data_orb', count: 4 }]);
+  assert.deepEqual(r.notConsumed, ['grindless:multimessenger_catalogue']);
+  assert.deepEqual(r.itemsOut, [{ id: 'grindless:cygnus_vlbi_record', count: 1 }]);
+  const rec = byId(r.recipeId);
+  assert.ok(rec, r.recipeId);
+  assert.deepEqual(circuitOf(rec), [3]);
+  assert.equal(E.clashes.length, 0);
+});
+
 test('the heliopause data and the Sgr A* image come only from Pluto orbit; the sail launcher keeps the data', () => {
   assert.deepEqual(recipes.filter((r) => outputs(r).includes(`"${HELIOPAUSE}"`)).map((r) => r.i), [row('heliopause_data').recipeId]);
   assert.deepEqual(recipes.filter((r) => outputs(r).includes(`"${IMAGE}"`)).map((r) => r.i), [row('sgr_a_star_image').recipeId]);

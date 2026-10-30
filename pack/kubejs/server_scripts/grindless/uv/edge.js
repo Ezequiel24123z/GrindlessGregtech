@@ -50,7 +50,10 @@
       notConsumed: [CATALOGUE], itemsOut: [item(IMAGE, 1)], eut: VA_UV, amps: 1, duration: 8000 },
     // UIV-B4 (line 35): the Kerr ringdown record correlated against the event-horizon images
     { name: 'correlated_kerr_data', type: 'event_horizon_imaging', circuit: 2, itemsIn: [item('grindless:kerr_ringdown_record', 1), item(IMAGE, 1)],
-      notConsumed: [], itemsOut: [item('grindless:correlated_kerr_data', 1)], eut: VA_UV, amps: 1, duration: 8000 }
+      notConsumed: [], itemsOut: [item('grindless:correlated_kerr_data', 1)], eut: VA_UV, amps: 1, duration: 8000 },
+    // UXV-B2 (line 26): Cygnus X-1's VLBI record, from two HPGe stations for the parallax (the doc's circuit 2 is UIV-B4's: circuit 3)
+    { name: 'cygnus_vlbi_record', type: 'event_horizon_imaging', circuit: 3, itemsIn: [item(HPGE, 2), item(ORB, 4)],
+      notConsumed: [CATALOGUE], itemsOut: [item('grindless:cygnus_vlbi_record', 1)], eut: VA_UV, amps: 1, duration: 8000 }
   ]
 
   var SUPPORT = [
