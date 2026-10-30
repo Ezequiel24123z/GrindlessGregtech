@@ -186,6 +186,14 @@
     var opposite = f.getOpposite().getName()
     put(sx, hp.getY(), sz, ENERGY + '[facing=' + opposite + ']')
     u.sink = pos(sx, hp.getY(), sz)
+    // a setblock pipe has no connections: link each cable to its neighbours the way PipeBlockItem.placeBlock does
+    try {
+      u.wire.forEach(function (p) {
+        var be = S.level.getBlockEntity(p)
+        be.setConnection(f, true, false)
+        be.setConnection(f.getOpposite(), true, false)
+      })
+    } catch (e) { check('wire_build', false, errText(e)) }
     note('wire_layout', 'dynamo at ' + hp + ' facing ' + f + ', wire ' + u.wire.length + ' blocks, sink at ' + u.sink)
   }
 
@@ -234,8 +242,12 @@
       var stored = Number(sm.energyContainer.getEnergyStored())
       if (waited >= 100) {
         var alive = true
-        u.wire.forEach(function (p) { if (String(S.level.getBlockState(p).getBlock().getDescriptionId()).indexOf('pasta_strand') < 0) alive = false })
-        note('wire_measured', 'sink stored ' + stored + ' EU after ' + waited + ' ticks, max voltage ' + sm.getMaxVoltage() + ', tap stored ' + u.energy[0].energyContainer.getEnergyStored())
+        var masks = []
+        u.wire.forEach(function (p) {
+          if (String(S.level.getBlock(p.getX(), p.getY(), p.getZ()).getId()) !== WIRE) alive = false
+          try { masks.push(String(S.level.getBlockEntity(p).getConnections())) } catch (e) { masks.push('?') }
+        })
+        note('wire_measured', 'connections ' + masks.join(',') + '; sink stored ' + stored + ' EU after ' + waited + ' ticks, max voltage ' + sm.getMaxVoltage() + ', tap stored ' + u.energy[0].energyContainer.getEnergyStored())
         check('wire_flow', stored > 0 && alive, 'sink hatch stored ' + stored + ' EU; wire intact ' + alive)
         u.phase = 'done'
       }
