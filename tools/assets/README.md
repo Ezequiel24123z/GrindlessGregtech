@@ -1627,3 +1627,21 @@ Procedural, drawn by `Build-UIVJ0437Textures.ps1`; nothing is copied from anothe
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVJ0437Textures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVJ0437Textures.ps1 -Credits
 ```
+
+## OpV foundation items and casings (OpV-F1)
+
+Procedural, drawn by `Build-OpVFoundationTextures.ps1` with the shape routines of the UXV foundation script and a new palette per item; nothing is copied from another mod. It writes the 69 item icons that `startup_scripts/grindless/opv/foundation.js` registers (`item/<id>.png`) and the three casing blocks (`block/opv/field_frozen_casing`, `annihilation_shield_casing`, `neg_xhv_casing`): 72 files. The materials need no PNG (GregTech draws them from their colour).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVFoundationTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVFoundationTextures.ps1 -Credits
+```
+
+## OpV wireless tier (OpV-W)
+
+Procedural, drawn by `Build-OpVWirelessTextures.ps1` with the routines and palette of `Build-WirelessEnergyTextures.ps1`; nothing is copied from another mod. GTM's OpV colour (bold blue), deepened so it differs from IV's blue. It writes the OpV SMES cell (`block/wireless/smes_cell_opv`, the table's opv row texture), the covers on a machine's face (`block/cover/wireless_{energy,dynamo}_cover_opv`) and the cover items (`item/wireless/{energy,dynamo}_cover_opv`): 5 files.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVWirelessTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVWirelessTextures.ps1 -Credits
+```

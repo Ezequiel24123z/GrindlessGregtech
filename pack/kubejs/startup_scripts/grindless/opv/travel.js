@@ -1,3 +1,4 @@
+// priority: -6566
 // OpV travel (package OpV-F1, docs/eras/opv.md "F1. Ids, places and the id table"): the two tier-13 places the warp gate reaches from
 // Cygnus X-1's orbit, c11 (A0's launched bulge seed) to SGR 1806-20's orbit and c12 (R1's launched pathfinder) to the Terzan 5 core.
 // No item is registered here: the seeds and probes are opv/foundation.js's. No gate row, recipe or grant is written here either.

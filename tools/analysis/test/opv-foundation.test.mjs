@@ -109,25 +109,28 @@ test('every F1 id is registered once by this script; si28_soi_wafer, the paralle
   assert.equal([...run.registry.machines.values()].filter((m) => !m.seeded && ours(m.file)).length, 0, 'F1 registers no machine');
 });
 
-test('no script of ours registers a gtceu:opv_* or gtceu:max_* id (GTM\'s), except M1\'s parallel hatch', () => {
+test('no script of ours registers a gtceu:opv_* or gtceu:max_* id (GTM\'s), except M1\'s parallel hatch and W\'s wireless hatches', () => {
   const bad = [];
+  // OpV-W: lv/wireless_energy.js registers the eight gtceu:opv_wireless_* hatches (case 13), as it does every tier's
+  const w = (id, v) => /^gtceu:opv_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(id) && /(^|[\\/])lv[\\/]wireless_energy\.js$/.test(String(v.file));
   for (const reg of [run.registry.items, run.registry.machines]) {
-    for (const [id, v] of reg) if (/^gtceu:(opv|max)_/.test(id) && !v.seeded && id !== 'gtceu:opv_parallel_hatch') bad.push(`${id} (${v.file})`);
+    for (const [id, v] of reg) if (/^gtceu:(opv|max)_/.test(id) && !v.seeded && id !== 'gtceu:opv_parallel_hatch' && !w(id, v)) bad.push(`${id} (${v.file})`);
   }
   assert.deepEqual(bad, []);
   assert.doesNotMatch(code, /'(gtceu:)?(opv|max)_[a-z0-9_]+'/, 'foundation.js creates no GTM OpV or MAX id');
 });
 
-test('the strand is a 16 A cable at V[OpV] with no loss; no recipe, no machine, no server script', () => {
+test('the strand is a 16 A cable at V[OpV] with no loss; no recipe, no machine, no server script of F1', () => {
   assert.match(src, /cableProperties\(GTValues\.V\[OPV\], 16, 0, false\)/);
   assert.match(src, /const OPV = 13/);
   assert.equal(OPV_V, 536870912);
   assert.equal(16 * OPV_V, 2 ** 33, 'S0-7: 16 A x V[OpV]');
   assert.match(src, /'gtceu:chain_strand': \{ form: 'ingot'[^}]*cable: true/);
   assert.doesNotMatch(code, /ServerEvents|\.recipes\(|event\.recipes|GTCEuStartupEvents\.registry\('gtceu:(machine|recipe_type)'|tables\//, 'no recipe, machine or table');
-  const mine = run.docs.recipes.recipes.filter((r) => /(^|[\\/])opv[\\/]/.test(String(run.recipeFiles.get(r.i))));
-  assert.deepEqual(mine, [], 'no recipe from an opv/ script');
-  assert.ok(!fs.existsSync(path.join(kube, 'server_scripts', 'grindless', 'opv')), 'no OpV server script yet');
+  // the OpV server scripts are the packages' (W's wireless.js, F2's cuts.js, then A0 on): none is F1's
+  const mine = run.docs.recipes.recipes.filter((r) => /(^|[\\/])opv[\\/](foundation|travel)\.js$/.test(String(run.recipeFiles.get(r.i))));
+  assert.deepEqual(mine, [], 'no recipe from an F1 script');
+  for (const f of ['foundation.js', 'travel.js']) assert.ok(!fs.existsSync(path.join(kube, 'server_scripts', 'grindless', 'opv', f)), `no server opv/${f}`);
 });
 
 test('tables/opv_ids.json lists the 91 GTM OpV ids, the 29 MAX ids and every F1 id', () => {
@@ -219,7 +222,7 @@ test('opv/travel.js publishes the places on global.grindless.opvTravel (tier 13,
   for (const id of Object.values(T.ids)) assert.ok(ITEMS.includes(id), id);
   const travel = read('startup_scripts', 'grindless', 'opv', 'travel.js').replace(/^\s*\/\/.*$/gm, '');
   assert.doesNotMatch(travel, /ServerEvents|StartupEvents|GTCEuStartupEvents|event\.create|\.recipes/, 'data only');
-  assert.doesNotMatch(read('startup_scripts', 'grindless', 'opv', 'travel.js'), /^\/\/ priority:/m, 'the integrator stamps the priority');
+  assert.match(read('startup_scripts', 'grindless', 'opv', 'travel.js'), /^\/\/ priority: -?\d+$/m, 'the integrator stamped the priority (script-order.mjs --write)');
 });
 
 test('relay_platforms.json: two OpV-F1 rows leaving from Cygnus X-1, one per jump; seven rows in all', () => {
