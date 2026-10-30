@@ -750,6 +750,61 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_pasta_extractor",
+      "recipeType": "gtceu:pasta_extraction",
+      "prompt": "Seamless looping sound of a huge magnetic funnel catching dust in space: a low resonant hum rising and falling, a faint granular rattle of particles, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_pasta_phase_sorter",
+      "recipeType": "gtceu:pasta_sorting",
+      "prompt": "Seamless looping sound of an industrial sorting machine: a steady electromagnet hum, slow heavy gear clicks and soft clatter of pieces dropping into bins, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_pasta_draw_bench",
+      "recipeType": "gtceu:pasta_drawing",
+      "prompt": "Seamless looping sound of a long wire drawing bench: a steady whirr of capstans, a thin taut metallic singing and a low motor drone, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_pasta_laminator",
+      "recipeType": "gtceu:pasta_lamination",
+      "prompt": "Seamless looping sound of a heavy hydraulic portal press: a slow deep rhythmic thud, hydraulic hiss and a low machine drone, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_polar_cap_tap",
+      "recipeType": "gtceu:polar_cap_tapping",
+      "prompt": "Seamless looping sound of a high-voltage power tap: a deep powerful transformer hum, crackling electric arcs at a distance and a slow throbbing pulse, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }

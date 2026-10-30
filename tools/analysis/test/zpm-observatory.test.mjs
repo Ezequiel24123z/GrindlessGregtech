@@ -53,7 +53,7 @@ test('the patterns: one controller in the front slice, uniform size, a symbol fo
 });
 
 test('the seven recipes: one circuit per type slot, ZPM VA, whole numbers, Earth orbit only for the telescope and UIV-B3\'s timing row', () => {
-  assert.equal(OB.recipes.length, 7); // UIV-B3 adds j0437_pulse_timed (telemetry_decoding circuit 5)
+  assert.equal(OB.recipes.length, 8); // UIV-B3 adds j0437_pulse_timed (circuit 5), UXV-B4 vela_glitch_timing (telemetry_decoding circuit 6)
   for (const p of OB.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');

@@ -61,6 +61,14 @@
       .itemOutputs('grindless:kerr_ringdown_record')
       .EUt(30720).duration(12000)
 
+    // UXV-B4 (machine 16): the Vela glitch timing read as gravitational waves, a record for the extractor's receiver; circuit 3 (1-2 are taken)
+    onGanymede('gravitational_wave_astronomy', 'vela_glitch_record').circuit(3)
+      .itemInputs(I.dataOrb)
+      .notConsumable('grindless:vela_glitch_timing')
+      .inputFluids(Fluid.of(I.helium, 100))
+      .itemOutputs('grindless:vela_glitch_record')
+      .EUt(30720).duration(12000)
+
     onGanymede('probe_launch', 'jovian_atmosphere_survey').circuit(1)
       .itemInputs(I.jupiterProbe)
       .itemOutputs(I.survey)

@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:polar_cap_tap"],
+  "text": ["emi.grindless.info.polar_cap_tap.0", "emi.grindless.info.polar_cap_tap.1"]
+}

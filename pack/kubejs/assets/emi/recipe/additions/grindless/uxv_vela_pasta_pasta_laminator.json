@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:pasta_laminator"],
+  "text": ["emi.grindless.info.pasta_laminator.0", "emi.grindless.info.pasta_laminator.1"]
+}

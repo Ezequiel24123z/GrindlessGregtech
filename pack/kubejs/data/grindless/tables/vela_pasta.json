@@ -1,0 +1,131 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uxv/vela_pasta.js makes one recipe per entry, id grindless:<name> (GTM prefixes the type), with its programmed circuit (circuit 0 = none, only where a type lists 'noCircuit'); 'site' true locks the recipe to grindless:vela_pulsar_orbit, a string names another site; 'kept' are not consumed; 'wear' is a kept input that a chance consumes (per ten thousand). pasta_extraction, pasta_sorting, pasta_drawing and pasta_lamination are package UXV-B4's machine types, polar_cap_tapping is its generator (eut is what it makes); neutronium_caging is UIV's type (a companion row with its slots in 'maxIO'). Package UXV-B4, docs/eras/uxv.md machines 16-20 and process lines 32, 33.",
+  "types": {
+    "pasta_extraction": {
+      "dataKey": "grindless_pasta_extraction",
+      "recipes": [
+        {
+          "_why": "machine 16 c1: the funnel catches what the glitch crust sheds; the timing record (kept) points the receiver and one pellet in ten is spent as bait",
+          "name": "pasta_extraction", "circuit": 1, "eut": 134217728, "duration": 2400, "site": true,
+          "itemsIn": [],
+          "kept": [{ "id": "grindless:vela_glitch_timing", "count": 1 }],
+          "wear": [{ "id": "grindless:neutronium_pellet", "count": 1, "chance": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:raw_pasta", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "pasta_sorting": {
+      "dataKey": "grindless_pasta_sorting",
+      "recipes": [
+        {
+          "_why": "machine 17 c1: a cage part (kept) holds the raw pasta while the density arc sorts it into spaghetti, lasagna, gnocchi and an anti-phase residue",
+          "name": "phase_sorting", "circuit": 1, "eut": 67108864, "duration": 1200, "site": true,
+          "itemsIn": [{ "id": "grindless:raw_pasta", "count": 1 }],
+          "kept": [{ "id": "grindless:cage_part", "count": 1 }],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:spaghetti_phase", "count": 1 },
+            { "id": "grindless:lasagna_phase", "count": 1 },
+            { "id": "grindless:gnocchi_fragment", "count": 1 },
+            { "id": "grindless:anti_phase_residue", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 17 c2: sixteen residues sealed in a cage part (consumed) become one core sample, the residue's only use",
+          "name": "core_sample", "circuit": 2, "eut": 134217728, "duration": 2400, "site": true,
+          "itemsIn": [
+            { "id": "grindless:anti_phase_residue", "count": 16 },
+            { "id": "grindless:cage_part", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:pasta_core_sample", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "pasta_drawing": {
+      "dataKey": "grindless_pasta_drawing",
+      "recipes": [
+        {
+          "_why": "machine 18 c1: the spaghetti phase is drawn through an aerogel die into eight strands of pasta wire; a cage part (kept) holds the draw",
+          "name": "strand_drawing", "circuit": 1, "eut": 134217728, "duration": 1200, "site": true,
+          "itemsIn": [
+            { "id": "grindless:spaghetti_phase", "count": 1 },
+            { "id": "grindless:silica_aerogel", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:cage_part", "count": 1 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:pasta_strand_single_wire", "count": 8 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "pasta_lamination": {
+      "dataKey": "grindless_pasta_lamination",
+      "recipes": [
+        {
+          "_why": "machine 19 c1: the lasagna phase is pressed on a rhea billet into four plates; a cage part (kept) holds the press",
+          "name": "plate_pressing", "circuit": 1, "eut": 134217728, "duration": 1200, "site": true,
+          "itemsIn": [
+            { "id": "grindless:lasagna_phase", "count": 1 },
+            { "id": "grindless:wf_rhea_billet", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:cage_part", "count": 1 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:lasagna_plate", "count": 4 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 19 c2: a plate carries two strands of pasta wire as the lasagna electrode (UXV-B4's own fuel; UIV's polar_cap_electrode is a different item and is not spent by the tap)",
+          "name": "lasagna_electrode", "circuit": 2, "eut": 33554432, "duration": 400, "site": true,
+          "itemsIn": [
+            { "id": "grindless:lasagna_plate", "count": 1 },
+            { "id": "gtceu:pasta_strand_single_wire", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:lasagna_electrode", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "polar_cap_tapping": {
+      "dataKey": "grindless_polar_cap_tapping",
+      "generator": true,
+      "recipes": [
+        {
+          "_why": "machine 20 c1: one lasagna electrode taps the pulsar's polar cap for 720 t at 536,870,912 EU/t (386,547,056,640 EU) and is spent; the chain that makes it costs about 1.95e11 EU, so the tap returns about 1.99x (power generous, never free)",
+          "name": "polar_cap_tap", "circuit": 1, "eut": 536870912, "duration": 720, "site": true,
+          "itemsIn": [{ "id": "grindless:lasagna_electrode", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "neutronium_caging": {
+      "external": true,
+      "noCircuit": true,
+      "maxIO": { "itemsIn": 2, "itemsOut": 1, "fluidsIn": 2, "fluidsOut": 2 },
+      "recipes": [
+        {
+          "_why": "machine 16's cage part: UIV's cage machine closes a pellet in an mh winding (no circuit: its circuits 1 and 2 are taken)",
+          "name": "cage_part_pressing", "circuit": 0, "eut": 31457280, "duration": 2400, "site": "grindless:rx_j1856_orbit",
+          "itemsIn": [
+            { "id": "grindless:neutronium_pellet", "count": 1 },
+            { "id": "grindless:mh_winding", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:cage_part", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
