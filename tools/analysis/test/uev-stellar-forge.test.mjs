@@ -121,7 +121,7 @@ test('the controller recipe: N blast furnaces, coils and circuits, no new type',
   assert.equal(recs.length, 1);
   assert.equal(recs[0].id, 'grindless:stellar_forge');
   assert.deepEqual(plain(recs[0].outs), ['gtceu:stellar_forge']);
-  assert.deepEqual(plain(recs[0].inputs), ['8x gtceu:electric_blast_furnace', '16x grindless:hftacn_coil_block', '4x #gtceu:circuits/uev', '2x grindless:ule_cavity', '2x grindless:hftacn_heating_element']);
+  assert.deepEqual(plain(recs[0].inputs), ['8x gtceu:electric_blast_furnace', '16x grindless:hftacn_coil_block', '3x gtceu:uev_field_generator', '3x gtceu:uev_electric_pump', '2x gtceu:uev_sensor', '4x #gtceu:circuits/uev', '2x grindless:ule_cavity', '2x grindless:hftacn_heating_element']);
 });
 
 test('names and tooltips exist in both languages', () => {
