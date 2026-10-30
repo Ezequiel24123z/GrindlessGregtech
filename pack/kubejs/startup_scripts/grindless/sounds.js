@@ -74,7 +74,9 @@
     'gtceu:pulsed_laser_deposition': 'loop_oxide_pld_chamber',
     'gtceu:vdw_stacking': 'loop_vdw_stacking_cell',
     'gtceu:racetrack_patterning': 'loop_racetrack_fab',
-    'gtceu:liquid_phase_epitaxy': 'loop_yig_lpe_furnace'
+    'gtceu:liquid_phase_epitaxy': 'loop_yig_lpe_furnace',
+    'gtceu:shequid_assembly': 'loop_shequid_works',
+    'gtceu:multinucleon_transfer': 'loop_mnt_collider'
   }
 
   StartupEvents.registry('sound_event', function (event) {

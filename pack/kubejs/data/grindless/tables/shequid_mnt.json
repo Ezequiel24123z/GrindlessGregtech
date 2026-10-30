@@ -1,0 +1,105 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uxv/shequid_mnt.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit (0 = none, GTM's own assembler only); 'kept' items are not consumed. shequid_assembly and multinucleon_transfer are package UXV-A6's machine types (data key = dataKey, the EMI line); assembler is GTM's (line 43's last step). Package UXV-A6, docs/eras/uxv.md machines 6-7 and process lines 18, 24 and 43.",
+  "types": {
+    "shequid_assembly": {
+      "dataKey": "grindless_shequid_assembly",
+      "recipes": [
+        {
+          "_why": "line 18: the 70 nm aperture array is bonded into a titanium cell body as a weak link",
+          "name": "weak_link_cell", "circuit": 1, "eut": 16777216, "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:nanoaperture_array", "count": 1 },
+            { "id": "gtceu:titanium_plate", "count": 2 }
+          ],
+          "kept": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:weak_link_cell", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "line 18: two weak-link cells in a He-II bath with an MTJ die as readout; the warmed bath goes back to UV's cold works",
+          "name": "shequid_gyro", "circuit": 2, "eut": 33554432, "duration": 1200,
+          "itemsIn": [
+            { "id": "grindless:weak_link_cell", "count": 2 },
+            { "id": "grindless:mtj_die", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:shequid_gyro", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:superfluid_helium", "amount": 300 }]
+        }
+      ]
+    },
+    "multinucleon_transfer": {
+      "dataKey": "grindless_multinucleon_transfer",
+      "recipes": [
+        {
+          "_why": "machine 7 c1: a U-238 beam on a Cm-248 target near the Coulomb barrier; the target comes back spent, the recoils leave as gas",
+          "name": "collision", "circuit": 1, "eut": 134217728, "duration": 2400,
+          "itemsIn": [
+            { "id": "grindless:u238_beam_charge", "count": 1 },
+            { "id": "grindless:cm248_target", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:gas_stopping_cell", "count": 1 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_actinide_target", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:mnt_product_gas", "amount": 1000 }]
+        },
+        {
+          "_why": "machine 7 c2: the gas catcher thermalises the recoils in 6N helium; 10 mB of the buffer is lost",
+          "name": "gas_catcher", "circuit": 2, "eut": 33554432, "duration": 400,
+          "itemsIn": [],
+          "kept": [{ "id": "grindless:gas_stopping_cell", "count": 1 }],
+          "fluidsIn": [
+            { "id": "gtceu:mnt_product_gas", "amount": 1000 },
+            { "id": "gtceu:he_6n", "amount": 100 }
+          ],
+          "itemsOut": [{ "id": "grindless:mnt_thermal_ions", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 90 }]
+        },
+        {
+          "_why": "machine 7 c3: the multi-reflection time-of-flight spectrometer sorts the ions; the light fragments leave as gas",
+          "name": "mr_tof", "circuit": 3, "eut": 67108864, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:mnt_thermal_ions", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:island_nuclide", "count": 1 }],
+          "fluidsOut": [
+            { "id": "gtceu:mnt_product_gas", "amount": 500 },
+            { "id": "gtceu:helium", "amount": 900 }
+          ]
+        },
+        {
+          "_why": "machine 7 c4: sixteen island nuclides recorded on a data module make the island chart (stock for OpV)",
+          "name": "island_chart", "circuit": 4, "eut": 8388608, "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:island_nuclide", "count": 16 },
+            { "id": "gtceu:data_module", "count": 1 }
+          ],
+          "kept": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:island_chart", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "_why": "line 43: the RF carpet board is mounted in a cryogenic cell body with foil electrodes and filled with 6N helium",
+          "name": "gas_stopping_cell", "circuit": 0, "eut": 7864320, "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:rf_carpet_board", "count": 1 },
+            { "id": "grindless:cryostat_casing", "count": 1 },
+            { "id": "grindless:mu_metal_foil", "count": 2 },
+            { "id": "gtceu:gold_foil", "count": 4 },
+            { "id": "gtceu:titanium_plate", "count": 4 },
+            { "id": "gtceu:tungsten_steel_plate", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:he_6n", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:gas_stopping_cell", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
