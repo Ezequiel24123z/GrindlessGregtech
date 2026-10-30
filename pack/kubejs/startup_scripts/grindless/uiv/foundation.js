@@ -4,9 +4,7 @@
 // our own, no recipe type, no worldgen and no dimension. Every other UIV package uses exactly these ids; they are published in
 // global.grindless.uivFoundation. The band is provisional: the integrator stamps it in tools/analysis/script_order.json (uiv.md, File order).
 //
-//   The UIV hull and the four hatches (2 A and 16 A, input and output) are the gtceu:uiv_* ids of S0-1. They are NOT created here: a second
-//   machine_hull or energy hatch builder crashes the boot (builder key = base id), so uev/foundation.js registers them with
-//   .tiers(UEV, UIV) (S0-1 fallback). Their recipes are in server_scripts/grindless/uiv/foundation.js. gtceu:uiv_machine_casing is GTM's;
+//   The UIV hull and the four hatches (2 A and 16 A, input and output) are GTM's gtceu:uiv_* ids (highTierContent on, TP-S0F). They are NOT created here. Their recipes are in server_scripts/grindless/uiv/foundation.js. gtceu:uiv_machine_casing is GTM's;
 //   its recipe is UEV's gate (server_scripts/grindless/uev/gate.js).
 //
 //   Components (grindless:, Monifactory's Post_UV_Components.js pattern, LGPL, credited): uiv_electric_piston (A2), uiv_conveyor_module (A3),
@@ -118,7 +116,7 @@
   UIVF.blocks = Object.keys(BLOCKS).map(function (name) { return 'grindless:' + name }).concat(['grindless:' + COIL.id])
   UIVF.materials = Object.keys(MATERIALS)
   UIVF.addedDusts = ADDED_DUSTS.map(function (name) { return 'gtceu:' + name })
-  // the hull and hatches are uev/foundation.js's builders at the second tier (S0-1)
+  // the hull and hatches are GTM's (highTierContent on, TP-S0F)
   UIVF.machines = ['machine_hull', 'energy_input_hatch', 'energy_input_hatch_16a', 'energy_output_hatch', 'energy_output_hatch_16a']
     .map(function (name) { return 'gtceu:uiv_' + name })
   UIVF.coilTemperature = COIL.temperature

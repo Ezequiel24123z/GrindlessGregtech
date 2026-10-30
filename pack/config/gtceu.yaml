@@ -6,9 +6,8 @@ worldgen:
     infiniteBedrockOresFluids: true
 machines:
   enableMaintenance: false
-  # Stays off on purpose (docs/eras/uev.md, "The highTierContent decision"): KubeJS registers the UEV+ hulls and
-  # hatches under gtceu:uev_*, and GTM's own high-tier content would collide with those ids.
-  highTierContent: false
+  # On: GTM's UHV-OpV components, machines, hulls and hatches (docs/research/tier-parity.md, TP-D1).
+  highTierContent: true
   # Power boost "like GTL" (DECISIONS.md): every small boiler base output at the default's x8, and the large boiler
   # heat ceiling at x8 (steel at 12800, GTL's own exception), with a faster heat-up for the three hotter large boilers.
   # steamPerWater is not listed here on purpose: it keeps GTM's default (160), same as GTL itself (docs/research/leisure.md #2).

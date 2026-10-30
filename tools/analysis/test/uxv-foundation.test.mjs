@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { runPackScripts } from '../lib/kubejs_static.mjs';
+import { runPackScripts, GTM_HIGH_TIER_IDS } from '../lib/kubejs_static.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..', '..', '..');
@@ -98,21 +98,17 @@ test('every shared UXV id is registered once by this script, and nothing of an o
   }
   assert.ok(!src.includes('grindless:uxv_smes_cell'), 'W registers the cell');
   assert.equal(run.registry.items.has('grindless:cage_part') && ours(run.registry.items.get('grindless:cage_part').file), false);
-  // the hull and hatches are the UEV builders at the third tier (S0-1): this script registers no machine
-  assert.equal([...run.registry.machines.values()].filter((m) => ours(m.file)).length, 0, 'F1 registers no machine of its own');
+  // TP-S0F: the hull and hatches are GTM's (highTierContent on): this script registers no machine
+  assert.equal([...run.registry.machines.values()].filter((m) => !m.seeded && ours(m.file)).length, 0, 'F1 registers no machine of its own');
   for (const id of MACHINES) {
-    assert.ok(run.registry.machines.has(id), `${id} not registered by uev/foundation.js (.tiers(UEV, UIV, UXV))`);
-    assert.ok(/(^|[\\/])uev[\\/]foundation\.js$/.test(String(run.registry.machines.get(id).file)), `${id} comes from the UEV builders`);
+    assert.ok(run.registry.machines.get(id).seeded, `${id} must not be created by KubeJS: GTM registers it`);
+    assert.ok(GTM_HIGH_TIER_IDS.includes(id), `${id} is not in the seeded GTM list`);
   }
   assert.doesNotMatch(src.replace(/^\s*\/\/.*$/gm, ''), /create\('(machine_hull|energy_|dynamo_)|\.tiers\(/, 'no hull or hatch builder of our own');
 });
 
-test('the tier widening: UEV, UIV and UXV on both of UEV\'s builders, labels named by tier', () => {
-  assert.equal((uevSrc.match(/\.tiers\(UEV, GTValues\.UIV, GTValues\.UXV\)/g) || []).length, 2, 'the hatch helper and the hull');
-  assert.doesNotMatch(uevSrc, /\.tiers\(UEV(, GTValues\.UIV)?\)/);
-  assert.match(uevSrc, /GTValues\.VN\[tier\] \+ ' Machine Hull'/);
-  assert.match(uevSrc, /GTValues\.VN\[tier\] \+ ' ' \+ label/);
-  assert.doesNotMatch(uevSrc, /'UXV /);
+test('no hull or hatch builder in UEV any more; our lang rows name all three tiers', () => {
+  assert.doesNotMatch(uevSrc.replace(/^\s*\/\/.*$/gm, ''), /create\('(machine_hull|energy_)|\.tiers\(|registry\('gtceu:machine'/);
   for (const lang of ['en_us', 'es_es']) {
     for (const k of ['uev_machine_hull', 'uiv_machine_hull', 'uxv_machine_hull']) assert.ok(run.lang[lang][`block.gtceu.${k}`], `${lang} names ${k}`);
   }
