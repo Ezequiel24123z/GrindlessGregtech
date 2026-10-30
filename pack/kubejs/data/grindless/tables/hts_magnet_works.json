@@ -47,6 +47,14 @@
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:bulk_gdbco", "count": 1 } ],
       "eut": 30720, "duration": 4800
+    },
+    {
+      "name": "strand_stator", "circuit": 6, "charge": true,
+      "_why": "UXV-A8 (docs/eras/uxv.md, lines 34 and 35): pasta strand wire wound round a tetrataenite lamination stack, potted in epoxy and cold-tested in the helium charge: the UXV motor's stator.",
+      "itemsIn": [ { "id": "gtceu:pasta_strand_single_wire", "count": 4 }, { "id": "grindless:tetrataenite_lamination", "count": 2 } ],
+      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+      "itemsOut": [ { "id": "grindless:strand_stator", "count": 1 } ],
+      "eut": 1966080, "duration": 400
     }
   ]
 }
