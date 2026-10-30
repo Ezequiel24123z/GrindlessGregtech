@@ -44,8 +44,10 @@ export function parseRecipes(recipes) {
 }
 
 // dump: staticDump(...).dump (recipes, machines, recipeTypes, tags). assumed: ids obtainable outside recipes (loot, events).
-export function deadlocks(dump, { assumed = [], bridge = null } = {}) {
+export function deadlocks(dump, { assumed = [], bridge = null, owned = [], pending = [] } = {}) {
   const parsed = parseRecipes([...dump.recipes.values()]);
+  const ownedRe = owned.map((p) => new RegExp(p));
+  const ownedMatch = (x) => ownedRe.some((r) => r.test(x));
   const ourTypes = new Set([...dump.recipeTypes.keys()]);
   const machines = new Set([...dump.machines.keys()]);
   const typeMachines = new Map();
@@ -64,7 +66,15 @@ export function deadlocks(dump, { assumed = [], bridge = null } = {}) {
   const bridgeAlt = (bridge && bridge.alt) || {};
   const bridgeIds = new Set(Object.keys(bridgeAlt));
   const bridgeTags = (bridge && bridge.tags) || {};
-  const tracked = (x) => !free.has(x) && (produced.has(x) || bridgeIds.has(x)) && (x.startsWith('grindless:') || x.startsWith('f:grindless:') || machines.has(x) || bridgeIds.has(x));
+  // `owned` ids (gtceu tier components of UHV and above) are ours without a GTM recipe: tracked even when no recipe of ours makes
+  // them. Those some recipe uses and nothing makes are `unproduced`; `pending` lists the ones allowed to stay so until their recipe
+  // lands (they count as obtainable, the ratchet: a new unproduced id and a pending id that got a recipe both show up in the result).
+  const used = new Set();
+  for (const p of parsed) for (const i of p.ins) for (const o of i.one ? [i.one] : i.any) if (o.item && ownedMatch(o.item)) used.add(o.item);
+  const unproduced = [...used].filter((x) => !produced.has(x)).sort();
+  const pendingSet = new Set(pending);
+  for (const x of pendingSet) if (!produced.has(x)) free.add(x);
+  const tracked = (x) => !free.has(x) && (produced.has(x) || bridgeIds.has(x) || ownedMatch(x)) && (x.startsWith('grindless:') || x.startsWith('f:grindless:') || machines.has(x) || bridgeIds.has(x) || ownedMatch(x));
   const avail = new Set();
   const has = (x) => !tracked(x) || avail.has(x);
   const okOne = (o) => (o.item ? has(o.item) : o.tag ? (bridgeTags[o.tag] || tagMembers(o.tag) || ['#']).some((y) => y.startsWith('#') || has(y)) : true);
@@ -107,7 +117,7 @@ export function deadlocks(dump, { assumed = [], bridge = null } = {}) {
   const cycles = sccs.filter((c) => c.length > 1 || deps.get(c[0]).includes(c[0]))
     .map((c) => ({ members: c, root: c.every((x) => deps.get(x).every((y) => c.includes(y))) }))
     .sort((a, b) => b.root - a.root || a.members.length - b.members.length);
-  return { deadMachines: dead.filter((x) => machines.has(x)).sort(), dead: dead.sort(), cycles, why };
+  return { deadMachines: dead.filter((x) => machines.has(x)).sort(), dead: dead.sort(), cycles, why, unproduced, pendingNow: [...pendingSet].filter((x) => produced.has(x)).sort() };
 }
 
 // Bridge for the foreign ids (gtceu materials, other mods' items, circuit tags): what only our recipes lead to. From a release dump
