@@ -177,12 +177,16 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var MOTOR = 'gtceu:uv_electric_motor'
-    var SENSOR = 'gtceu:uv_sensor'
+    var MOTOR = 'gtceu:uhv_electric_motor'
+    var SENSOR = 'gtceu:uhv_sensor'
+    var PISTON = 'gtceu:uhv_electric_piston'
+    var CONVEYOR = 'gtceu:uhv_conveyor_module'
+    var EMITTER = 'gtceu:uhv_emitter'
+    var PUMP = 'gtceu:uhv_electric_pump'
     var M = HM.machines || {}
     var defs = [
-      { machine: (M.excavator && M.excavator.machine) || 'gtceu:regolith_excavator', name: 'regolith_excavator', parts: [HULL, MOTOR], research: 'grindless:excavator_bucket_drum', domain: ['4x grindless:iron_tube', '2x grindless:mu_metal_shield', '2x grindless:thruster_pod'] },
-      { machine: (M.furnace && M.furnace.machine) || 'gtceu:solar_vapour_furnace', name: 'solar_vapour_furnace', parts: [HULL, SENSOR], research: 'grindless:silica_aerogel', domain: ['4x grindless:nbn_coated_sic_plate', '2x grindless:fused_silica_tube', '2x grindless:thruster_pod'] }
+      { machine: (M.excavator && M.excavator.machine) || 'gtceu:regolith_excavator', name: 'regolith_excavator', parts: [HULL, MOTOR, PISTON, CONVEYOR], research: 'grindless:excavator_bucket_drum', domain: ['4x grindless:iron_tube', '2x grindless:mu_metal_shield', '2x grindless:thruster_pod'] },
+      { machine: (M.furnace && M.furnace.machine) || 'gtceu:solar_vapour_furnace', name: 'solar_vapour_furnace', parts: [HULL, SENSOR, EMITTER, PUMP], research: 'grindless:silica_aerogel', domain: ['4x grindless:nbn_coated_sic_plate', '2x grindless:fused_silica_tube', '2x grindless:thruster_pod'] }
     ]
     HM.crafting = []
     defs.forEach(function (d) {
@@ -192,7 +196,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))

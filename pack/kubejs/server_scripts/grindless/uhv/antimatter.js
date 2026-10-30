@@ -191,12 +191,14 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var PUMP = 'gtceu:uv_electric_pump'
-    var FIELD = 'gtceu:uv_field_generator'
+    var PUMP = 'gtceu:uhv_electric_pump'
+    var FIELD = 'gtceu:uhv_field_generator'
+    var SENSOR = 'gtceu:uhv_sensor'
+    var EMITTER = 'gtceu:uhv_emitter'
     var C = '#gtceu:circuits/uhv'
     var defs = [
-      { machine: AM.machines.accumulator.machine, parts: [HULL, PUMP], research: 'grindless:magnesium_target', domain: ['2x grindless:empty_penning_trap', '4x grindless:empty_antiproton_cartridge', 'grindless:lithium_breeder_blanket'], name: 'positron_accumulator' },
-      { machine: AM.machines.array.machine, parts: [HULL, FIELD], research: 'grindless:empty_penning_trap', domain: ['4x grindless:nbn_coated_sic_plate', '2x grindless:srf_cavity', '2x grindless:mu_metal_shield'], name: 'casimir_array' }
+      { machine: AM.machines.accumulator.machine, parts: [HULL, PUMP, FIELD, SENSOR], research: 'grindless:magnesium_target', domain: ['2x grindless:empty_penning_trap', '4x grindless:empty_antiproton_cartridge', 'grindless:lithium_breeder_blanket'], name: 'positron_accumulator' },
+      { machine: AM.machines.array.machine, parts: [HULL, FIELD, EMITTER, SENSOR], research: 'grindless:empty_penning_trap', domain: ['4x grindless:nbn_coated_sic_plate', '2x grindless:srf_cavity', '2x grindless:mu_metal_shield'], name: 'casimir_array' }
     ]
     AM.controllerRecipes = []
     defs.forEach(function (d) {
@@ -206,7 +208,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))

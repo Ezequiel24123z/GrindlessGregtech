@@ -191,11 +191,13 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var SENSOR = 'gtceu:uv_sensor'
-    var EMITTER = 'gtceu:uv_emitter'
+    var SENSOR = 'gtceu:uhv_sensor'
+    var EMITTER = 'gtceu:uhv_emitter'
+    var ARM = 'gtceu:uhv_robot_arm'
+    var FIELD = 'gtceu:uhv_field_generator'
     var defs = [
-      { machine: PH.machines.reactor.machine, parts: [HULL, SENSOR], research: 'grindless:fibre_laser_module', domain: ['4x grindless:gallium_arsenide_wafer', '2x grindless:sapphire_wafer', '2x grindless:fibre_bragg_grating'], name: 'mbe_reactor' },
-      { machine: PH.machines.foundry.machine, parts: [HULL, EMITTER], research: 'grindless:ytterbium_fibre', domain: ['4x grindless:silicon_nitride_film', '2x grindless:fibre_bragg_grating', '2x grindless:fused_silica_tube'], name: 'photonic_foundry' }
+      { machine: PH.machines.reactor.machine, parts: [HULL, SENSOR, EMITTER, ARM], research: 'grindless:fibre_laser_module', domain: ['4x grindless:gallium_arsenide_wafer', '2x grindless:sapphire_wafer', '2x grindless:fibre_bragg_grating'], name: 'mbe_reactor' },
+      { machine: PH.machines.foundry.machine, parts: [HULL, EMITTER, FIELD, SENSOR], research: 'grindless:ytterbium_fibre', domain: ['4x grindless:silicon_nitride_film', '2x grindless:fibre_bragg_grating', '2x grindless:fused_silica_tube'], name: 'photonic_foundry' }
     ]
     PH.controllerRecipes = []
     defs.forEach(function (d) {
@@ -205,7 +207,7 @@
         return
       }
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
-      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '2x ' + s) })
+      d.parts.forEach(function (s, i) { b.itemInputs(i === 0 ? s : '3x ' + s) })
       b.itemInputs('4x #gtceu:circuits/uhv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:tritanium', 1152))
