@@ -159,7 +159,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   for (const k of ['block.gtceu.beuv_scanner', 'block.gtceu.stm_lithography_cell', 'gtceu.beuv_lithography', 'gtceu.stm_lithography', 'material.gtceu.phosphine']) {
     assert.ok(flat.includes(k), k);
   }
-  for (const m of ['beuv_scanner', 'stm_lithography_cell']) for (let i = 0; i < 3; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
+  for (const m of ['beuv_scanner', 'stm_lithography_cell']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   for (const t of Object.values(T.types)) {
     if (!t.dataKey) continue;
     for (const r of t.recipes) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);

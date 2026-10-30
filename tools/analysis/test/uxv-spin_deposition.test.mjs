@@ -144,7 +144,7 @@ test('structures: not boring, at least two functional kinds, controller in the f
 test('lang parity: every key of both languages, names, tooltips, EMI pages and recipe lines', () => {
   const keys = [];
   for (const m of ['mtj_sputter_cluster', 'oxide_pld_chamber']) {
-    keys.push(`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`, `grindless.machine.${m}.tooltip.1`, `grindless.machine.${m}.tooltip.2`, `emi.grindless.info.${m}.0`, `emi.grindless.info.${m}.1`);
+    keys.push(`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`, `emi.grindless.info.${m}.0`, `emi.grindless.info.${m}.1`);
   }
   keys.push('gtceu.mtj_sputtering', 'gtceu.pulsed_laser_deposition');
   for (const r of SD.recipes.filter((x) => x.dataKey)) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);

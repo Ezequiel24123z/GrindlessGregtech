@@ -171,7 +171,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
     'block.gtceu.tfln_fab', 'block.gtceu.femtosecond_writer', 'gtceu.ion_slicing', 'gtceu.femtosecond_writing',
     'material.gtceu.spent_koh_etchant', 'material.gtceu.photoresin', 'material.gtceu.uncured_photoresin'
   ]) assert.ok(flat.includes(k), k);
-  for (const m of ['tfln_fab', 'femtosecond_writer']) for (let i = 0; i < 3; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
+  for (const m of ['tfln_fab', 'femtosecond_writer']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
     for (const r of t.recipes) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);

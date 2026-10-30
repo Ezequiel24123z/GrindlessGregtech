@@ -137,7 +137,7 @@ test('structures: not boring, three functional kinds, controller in the front sl
 test('lang parity: every key of both languages, names, tooltips, items, EMI pages and recipe lines; sound and EMI files', () => {
   const keys = ['gtceu.ejecta_sweeping', 'gtceu.annihilation_lasing'];
   for (const m of MACHINES) {
-    keys.push(`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`, `grindless.machine.${m}.tooltip.1`, `grindless.machine.${m}.tooltip.2`, `emi.grindless.info.${m}.0`, `emi.grindless.info.${m}.1`);
+    keys.push(`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`, `emi.grindless.info.${m}.0`, `emi.grindless.info.${m}.1`);
     assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless', `uxv_cas_a_${m}.json`)), `${m} EMI info file`);
     assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'grindless', 'textures', 'block', 'multiblock', m, 'overlay_front_active.png')), `${m} texture`);
   }

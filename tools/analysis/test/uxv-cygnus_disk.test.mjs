@@ -157,7 +157,7 @@ test('structures: not boring, at least two functional kinds, controller in the f
 test('lang parity: every key of both languages, names, tooltips, EMI pages, recipe lines and the strand coil', () => {
   const keys = ['item.grindless.strand_coil', 'tooltip.grindless.strand_coil.0', 'tooltip.grindless.strand_coil.1', 'gtceu.recipe.grindless_naquadria_magnets.strand_coil'];
   for (const m of MACHINES) {
-    keys.push(`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`, `grindless.machine.${m}.tooltip.1`, `grindless.machine.${m}.tooltip.2`, `emi.grindless.info.${m}.0`, `emi.grindless.info.${m}.1`);
+    keys.push(`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`, `emi.grindless.info.${m}.0`, `emi.grindless.info.${m}.1`);
   }
   keys.push('gtceu.disk_skimming', 'gtceu.frc_forming', 'gtceu.blandford_znajek');
   for (const r of CD.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);

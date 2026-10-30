@@ -19,14 +19,8 @@
         ['material.gtceu.liquid_para_hydrogen', 'Liquid Para-Hydrogen', 'Parahidrógeno líquido'],
 
         ['grindless.machine.ramp_compression_pulser.tooltip.0',
-            'A ring of pulsed-power coils that drives a shock ramp through a target: it makes metallic hydrogen, lonsdaleite and cubic gauche nitrogen.',
-            'Un anillo de bobinas de potencia pulsada que lanza una rampa de choque por un blanco: fabrica hidrógeno metálico, lonsdaleíta y nitrógeno cúbico gauche.'],
-        ['grindless.machine.ramp_compression_pulser.tooltip.1',
-            'Circuit 1 metallic hydrogen from a solid para-H2 target, 2 lonsdaleite from pyrolytic graphite, 3 cubic gauche nitrogen from a laser-heated N2 charge.',
-            'Circuito 1 hidrógeno metálico a partir de un blanco sólido de para-H2, 2 lonsdaleíta a partir de grafito pirolítico, 3 nitrógeno cúbico gauche a partir de una carga de N2 calentada con láser.'],
-        ['grindless.machine.ramp_compression_pulser.tooltip.2',
-            'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses, optional fluid hatches. Accepts a parallel hatch.',
-            'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, escotillas de fluidos opcionales. Acepta una escotilla de paralelos.'],
+            '\u00a77A pulsed-power ring that makes metallic hydrogen and lonsdaleite.',
+            '\u00a77Un anillo de potencia pulsada que fabrica hidrógeno metálico y lonsdaleíta.'],
 
         ['gtceu.recipe.grindless_naquadria_magnets.mh_winding',
             'Circuit 7: a metallic hydrogen winding, 16 wires round tungsten plates (UIV-A2).',
