@@ -702,6 +702,37 @@
     }
   ]
 
+  // OpV-A2 row (circuit 17; docs/eras/opv.md line 13): the gold sputtered onto the MTJ cluster's shields by the cryo-CMOS metal step,
+  // dissolved in aqua regia and reduced; half of the two foils went onto the wafer, the other half comes back here
+  var OPV_ROWS = [
+    {
+      name: 'gold_overspray', circuit: 17,
+      itemIn: 'grindless:gold_overspray', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
+      itemsOut: [['gtceu:small_gold_dust', 2]], fluidsOut: [['minecraft:water', 2000]],
+      eut: 1920, duration: 300
+    }
+  ]
+
+  function addOpvRows(event) {
+    OPV_ROWS.forEach(function (r) {
+      var missing = [r.itemIn].concat(r.itemsOut.map(function (o) { return o[0] })).filter(function (id) { return !Item.exists(id) })
+        .concat(r.fluidsIn.concat(r.fluidsOut).map(function (f) { return f[0] }).filter(function (id) { return !Fluid.exists(id) }))
+      if (missing.length > 0) {
+        console.error(LOG + 'pgm_refining row ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      var recipe = event.recipes.gtceu.pgm_refining('grindless:opv/' + r.name)
+      recipe.itemInputs('1x ' + r.itemIn)
+      recipe.chancedInput('1x ' + ELECTRODE, ELECTRODE_WEAR, 0)
+      recipe.circuit(r.circuit)
+      r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f[0], f[1])) })
+      r.itemsOut.forEach(function (o) { recipe.itemOutputs(o[1] + 'x ' + o[0]) })
+      r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
+      recipe.EUt(r.eut).duration(r.duration)
+      recipe.addDataBool(KEEP_KEY, true)
+    })
+  }
+
   function addUxvRows(event) {
     UXV_ROWS.forEach(function (r) {
       var missing = [r.itemIn].concat(r.itemsOut.map(function (o) { return o[0] })).filter(function (id) { return !Item.exists(id) })
@@ -773,6 +804,11 @@
       addUxvRows(event)
     } catch (e5) {
       console.error(LOG + 'platinum plant UXV rows failed: ' + e5)
+    }
+    try {
+      addOpvRows(event)
+    } catch (e6) {
+      console.error(LOG + 'platinum plant OpV rows failed: ' + e6)
     }
     try {
       addCrafting(event)

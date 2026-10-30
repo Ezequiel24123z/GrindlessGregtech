@@ -25,6 +25,12 @@
           "name": "eo_microcomb", "circuit": 4, "eut": 31457280, "duration": 1600,
           "itemsIn": [{ "id": "grindless:annealed_damascene_ring", "count": 1 }, { "id": "grindless:lnoi_wafer", "count": 1 }],
           "itemsOut": [{ "id": "grindless:eo_microcomb", "count": 1 }]
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 14): the Nb-filled via wafer bonded to an oxidised handle and thinned to the vias; the grind comes back as silicon dust",
+          "name": "tsv_bond", "circuit": 5, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:nb_filled_tsv_wafer", "count": 1 }, { "id": "grindless:oxidised_wafer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:bonded_tsv_interposer", "count": 1 }, { "id": "gtceu:silicon_dust", "count": 1 }]
         }
       ]
     },
