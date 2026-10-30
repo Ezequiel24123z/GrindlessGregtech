@@ -661,18 +661,19 @@ export default gate({
     uxvStars: {
       name: 'Strange stars (UXV)',
       nodes: [
-        // (the links to the uxv_age quests 5CE1C18D40A0B8E2 'Mk6 Fusion Ring', 3611A4EAC7D055C3 'Spin Down a Black Hole' and
-        // 50C6BE5A52F4F9A0 'Tap the Polar Cap' go in once that chapter is in the book: eqUxvRing, eqUxvBZ and eqUxvTap at x 0)
+        E('eqUxvRing', 0, -1.5, 'uxv_age', '5CE1C18D40A0B8E2'),
+        E('eqUxvBZ', 0, 0, 'uxv_age', '3611A4EAC7D055C3'),
+        E('eqUxvTap', 0, 1.5, 'uxv_age', '50C6BE5A52F4F9A0'),
         n('uxvRing', 2.25, -1.5, M('gtceu:uxv_fusion_reactor'), 'Mk6 Fusion Ring', {
-          kind: 'info', tier: 'uxv', sub: 'A star\'s burning stages, one after another, and a direct converter takes the power off each ash',
+          kind: 'info', tier: 'uxv', from: ['eqUxvRing'], sub: 'A star\'s burning stages, one after another, and a direct converter takes the power off each ash',
           desc: 'Hot CNO, helium, carbon and oxygen: the ash of each burn is quenched into the fuel of the next.',
         }),
         n('uxvBZ', 2.25, 0, M('gtceu:bz_dynamo'), 'BZ Dynamo', {
-          kind: 'info', tier: 'uxv', sub: 'Flux-loaded plasma spins power out of the black hole',
+          kind: 'info', tier: 'uxv', from: ['eqUxvBZ'], sub: 'Flux-loaded plasma spins power out of the black hole',
           desc: 'It runs at Cygnus X-1 only, and the FRC former loads its plasma.',
         }),
         n('uxvTap', 2.25, 1.5, M('gtceu:polar_cap_tap'), 'Polar Cap Tap', {
-          kind: 'info', tier: 'uxv', sub: 'A lasagna electrode in the pulsar\'s polar current, burned through',
+          kind: 'info', tier: 'uxv', from: ['eqUxvTap'], sub: 'A lasagna electrode in the pulsar\'s polar current, burned through',
           desc: 'It runs at Vela only; the pasta laminator makes the electrodes.',
         }),
       ],
@@ -790,9 +791,9 @@ export default gate({
           figs: [P.wcell('grindless:uiv_smes_cell', 'UIV SMES', 1006632960000)],
         }),
         // UXV's cell: four UIV cells' worth, wound with pasta strand tape in the nitride magnet works
-        // (the link to the uxv_age quest 3F5ABDEF2254EC50 'UXV SMES Cell' goes in once that chapter is in the book: eqUxvCell at 0, 12)
+        E('eqUxvCell', 0, 12, 'uxv_age', '3F5ABDEF2254EC50'),
         n('wuxv', 2.25, 12, I('grindless:uxv_smes_cell'), 'UXV SMES Cell', {
-          kind: 'info', sub: 'Fifteen hundred and thirty-six UV batteries\' worth, wound with pasta strand',
+          kind: 'info', from: ['eqUxvCell'], sub: 'Fifteen hundred and thirty-six UV batteries\' worth, wound with pasta strand',
           desc: 'The network jumps to UXV only when every formed tower holds these.',
           figs: [P.wcell('grindless:uxv_smes_cell', 'UXV SMES', 4026531840000)],
         }),
