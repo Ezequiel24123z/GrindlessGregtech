@@ -87,7 +87,5 @@
     { "id": "grindless:assembly_line/uxv_parallel_hatch", "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" }
       ],
       "pendingUses": [
-        { "id": "fluid:gtceu:carbon_burning_fuel", "package": "UXV-A7", "reason": "UXV-A3's electron beam furnace purifies it (line 28); A7's Mk6 c3 burns it" },
-        { "id": "fluid:gtceu:finemet_melt", "package": "UXV-A7", "reason": "UXV-A3's levitation melter c13 melts it; A7's quench caster c6 casts it into finemet_ribbon (line 48)" }
       ]
     }

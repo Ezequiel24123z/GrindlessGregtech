@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["fluid:gtceu:oxygen_16", "item:grindless:finemet_ribbon", "fluid:gtceu:neon", "item:gtceu:sodium_dust", "fluid:gtceu:magnesium", "item:gtceu:sulfur_dust", "item:gtceu:phosphorus_dust"],
+  "text": ["emi.grindless.info.uxv_fusion_stock.0"]
+}
