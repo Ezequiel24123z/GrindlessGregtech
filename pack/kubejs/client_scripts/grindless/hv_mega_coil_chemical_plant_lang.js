@@ -3,7 +3,8 @@
 //
 //   gtceu:coil_chemical_plant   (machine name + 3 tooltip lines, en_us and es_es)
 //
-// It runs GTM's large chemical reactor recipes, so the recipe type name (gtceu.large_chemical_reactor) is GTM's own, already translated.
+// It runs GTM's large chemical reactor recipes, so the recipe type name (gtceu.large_chemical_reactor) is GTM's own; GTM 7.5.3 ships no
+// es_es, so it shows in English in both languages, like every other GTM name.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 

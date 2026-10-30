@@ -287,7 +287,8 @@
       .additionalDisplay(fieldDisplay)
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.isr_wellfield.tooltip.0'),
-        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.in_situ_leaching'))
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.in_situ_leaching')),
+        Text.translate('grindless.tooltip.site', Text.translate('planet.grindless.end'))
       ])
       .workableCasingModel(HOUSE_TEXTURE, 'grindless:block/multiblock/isr_wellfield')
 

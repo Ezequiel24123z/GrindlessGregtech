@@ -5,6 +5,7 @@
 //   gtceu:isr_wellfield / gtceu:in_situ_leaching                   (machine name + tooltips, recipe type name)
 //   gtceu:fuel_fabrication_plant / gtceu:fuel_fabrication          (machine name + tooltips, recipe type name)
 //   grindless.machine.isr_wellfield.no_voiding / .not_end          (why a run does not start)
+//   planet.grindless.end                                           (the place name in the shared site line)
 //
 // Same approach as syngas_lang.js: Minecraft merges lang entries from every namespace/script, so ClientEvents.lang works fine
 // regardless of where it is declared.
@@ -19,6 +20,7 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.isr_wellfield.tooltip.0', '§7Dissolves the End\'s uranium in place with injection wells.')
 
     add('grindless.machine.fuel_fabrication_plant.tooltip.0', '§7Makes uranium fuel: pellets, cladding tubes and assemblies.')
+    add('planet.grindless.end', 'the End')
 
     add('grindless.machine.isr_wellfield.no_voiding', 'The field keeps its radioactive waste: it leaves through the output bus. Turn item voiding off')
     add('grindless.machine.isr_wellfield.not_end', 'Nothing to leach here: the field only works in the End, on its pitchblende vein')
@@ -35,6 +37,7 @@ ClientEvents.lang('es_es', event => {
     add('grindless.machine.isr_wellfield.tooltip.0', '§7Disuelve el uranio del End in situ con pozos de inyección.')
 
     add('grindless.machine.fuel_fabrication_plant.tooltip.0', '§7Fabrica combustible de uranio: pastillas, vainas y ensamblajes.')
+    add('planet.grindless.end', 'el End')
 
     add('grindless.machine.isr_wellfield.no_voiding', 'El campo guarda su residuo radiactivo: sale por el bus de salida. Desactiva el vaciado de objetos')
     add('grindless.machine.isr_wellfield.not_end', 'Aquí no hay nada que lixiviar: el campo solo funciona en el End, sobre su veta de pechblenda')
