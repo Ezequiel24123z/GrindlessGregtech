@@ -22,15 +22,17 @@ const rec = (type, name) => TO.recipes.find((r) => r.type === type && r.name ===
 const has = (list, id, count) => list.some((x) => x.id === id && (count === undefined || x.count === count));
 const VA_OPV = 503316480;
 
-const MACHINES = ['tetron_fab'];
-const ITEMS = ['bumped_tetron_die', 'bonded_tetron_die', 'tested_tetron_die', 'failed_tetron_die'];
+const MACHINES = ['tetron_fab', 'gamma_optics_works'];
+const ITEMS = ['bumped_tetron_die', 'bonded_tetron_die', 'tested_tetron_die', 'failed_tetron_die',
+  'bent_ge_tile', 'gaas_laue_tile', 'aligned_laue_frame', 'rejected_laue_tile', 'superpolished_sic_blank', 'wc_sic_multilayer',
+  'mirror_metrology_record', 'wc_sputter_target', 'rejected_gamma_mirror'];
 
 test('the stand-in runs the OpV-B1 scripts without errors, nothing skipped, no lookup clash', () => {
   const mine = run.errors.filter((e) => /tetron_optics|sounds/.test(String(e.file)));
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(TO.skipped), []);
   assert.deepEqual(plain(TO.clashes), []);
-  assert.equal(TO.recipes.length, 2);
+  assert.equal(TO.recipes.length, 4);
 });
 
 test('the package items are registered by the startup file, named in en_us and es_es, with a texture', () => {
@@ -62,6 +64,27 @@ test('tetron fab rows: circuits 1-2, dies diced, the array in a kept He-3 bath, 
   for (const r of rows) {
     assert.ok(r.eut > 134217728 && r.eut <= VA_OPV * 2, `${r.name}: an OpV row (${r.eut})`);
     assert.ok(find(`grindless:tetron_assembly/${r.name}`), `${r.name} is in the recipe docs`);
+  }
+});
+
+test('gamma optics rows: circuits 1-2, the Laue lens bonded in epoxy, the mirror figured to its record, chanced rejects', () => {
+  const rows = TO.recipes.filter((r) => r.type === 'gamma_optics');
+  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['laue_lens', 1], ['gamma_multilayer_mirror', 2]]);
+  const c1 = rec('gamma_optics', 'laue_lens');
+  assert.ok(has(c1.itemsIn, 'grindless:bent_ge_tile', 32) && has(c1.itemsIn, 'grindless:gaas_laue_tile', 32) && has(c1.itemsIn, 'grindless:aligned_laue_frame', 1));
+  assert.deepEqual(plain(c1.fluidsIn), [{ id: 'gtceu:epoxy', amount: 144 }]);
+  assert.ok(has(c1.itemsOut, 'grindless:laue_lens', 1));
+  const c2 = rec('gamma_optics', 'gamma_multilayer_mirror');
+  for (const n of ['superpolished_sic_blank', 'wc_sic_multilayer', 'mirror_metrology_record']) assert.ok(has(c2.itemsIn, `grindless:${n}`, 1), `c2 takes ${n}`);
+  assert.ok(has(c2.itemsOut, 'grindless:gamma_multilayer_mirror', 1));
+  for (const [r, reject] of [[c1, 'grindless:rejected_laue_tile'], [c2, 'grindless:rejected_gamma_mirror']]) {
+    const x = r.itemsOut.find((o) => o.id === reject);
+    assert.ok(x && x.chance > 0 && x.chance < 10000, `${r.name}: ${reject} is a chanced output`);
+  }
+  for (const r of rows) {
+    assert.ok(r.eut > 134217728 && r.eut <= VA_OPV * 2, `${r.name}: an OpV row (${r.eut})`);
+    assert.ok(r.itemsIn.length + 1 <= 4 && r.itemsOut.length <= 2 && r.fluidsIn.length <= 1 && r.fluidsOut.length === 0, `${r.name}: fits the hatches`);
+    assert.ok(find(`grindless:gamma_optics/${r.name}`), `${r.name} is in the recipe docs`);
   }
 });
 
@@ -102,6 +125,7 @@ test('the controllers: OpV hull, OpV parts and circuits, superfluid He-3, VA[OpV
     assert.ok(ids.size >= 9, `${id}: ${ids.size} distinct ingredients`);
   }
   assert.ok(JSON.stringify(find('grindless:assembly_line/tetron_fab').j).includes('grindless:inas_al_wafer'), 'researched on the InAs-Al wafer');
+  assert.ok(JSON.stringify(find('grindless:assembly_line/gamma_optics_works').j).includes('grindless:hpge_compton_crystal'), 'researched on the HPGe Compton crystal');
 });
 
 test('"only from": nothing else in the pack makes these ids', () => {
@@ -109,7 +133,10 @@ test('"only from": nothing else in the pack makes these ids', () => {
     'grindless:tetron_die': 'tetron_assembly/tetron_die', 'grindless:tetron_array': 'tetron_assembly/tetron_array',
     'grindless:bumped_tetron_die': 'mtj_sputtering/tetron_bumps', 'grindless:bonded_tetron_die': 'ion_slicing/bonded_tetron_die',
     'grindless:tested_tetron_die': 'nuclear_demagnetisation/tested_tetron_die', 'grindless:failed_tetron_die': 'tetron_assembly/tetron_array',
-    'gtceu:tetron_fab': 'assembly_line/tetron_fab'
+    'gtceu:tetron_fab': 'assembly_line/tetron_fab',
+    'grindless:laue_lens': 'gamma_optics/laue_lens', 'grindless:gamma_multilayer_mirror': 'gamma_optics/gamma_multilayer_mirror',
+    'grindless:rejected_laue_tile': 'gamma_optics/laue_lens', 'grindless:rejected_gamma_mirror': 'gamma_optics/gamma_multilayer_mirror',
+    'gtceu:gamma_optics_works': 'assembly_line/gamma_optics_works'
   };
   for (const [id, tail] of Object.entries(only)) {
     const ps = producers(id);

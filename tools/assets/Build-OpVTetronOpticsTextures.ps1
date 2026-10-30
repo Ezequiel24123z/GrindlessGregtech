@@ -8,11 +8,13 @@
   other mod. Output is deterministic. Same method and steel bezel as Build-UXVShequidMntTextures.ps1.
 
   Writes (under pack/kubejs/assets/grindless/textures/):
-    block/multiblock/tetron_fab/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
+    block/multiblock/<machine>/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
+      for tetron_fab and gamma_optics_works
     item/<name>.png for each item in $items below (shapes tinted by one base colour)
 
   Tetron face: two nanowires joined by a superconducting backbone (an H); working (4 frames, frametime 4) the four wire ends light in
-  turn, the parity readout going round the tetron. The *_emissive layer holds only the glow and the lamp.
+  turn, the parity readout going round the tetron. Gamma face: a Laue lens seen end on, a ring of eight Ge and GaAs tiles round the
+  focal spot; working, opposite tiles diffract in turn and the focal spot moves. The *_emissive layer holds only the glow and the lamp.
 
   Conventions: transparent background, outer 1 px ring of the face empty, every pixel fully opaque or fully transparent, none pure
   black, emissive layer a subset of the colour layer. The final check fails the run (non-zero exit) if a written file breaks one.
@@ -76,6 +78,9 @@ function New-Bezel {
 
 # the four wire ends of the tetron, in readout order (clockwise from the top left)
 $Ends = @(@(5, 5), @(10, 5), @(10, 8), @(5, 8))
+# the Laue lens: eight tiles clockwise from the top left (tile k and k + 4 face each other) and the four focal-spot pixels
+$Tiles = @(@(6, 4), @(9, 4), @(11, 6), @(11, 7), @(9, 9), @(6, 9), @(4, 7), @(4, 6))
+$Spot = @(@(7, 6), @(8, 6), @(8, 7), @(7, 7))
 
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
@@ -96,6 +101,17 @@ function New-Face {
             Set-Both $c $e (7 + ($Frame % 2)) (6 + [Math]::Floor($Frame / 2)) (Hex 'FFF0A0')
         }
     }
+    elseif ($Kind -eq 'gamma') {
+        $ge = Hex '90A0B8'; $gaas = Hex '806A98'; $spotOff = Hex '505868'
+        for ($i = 0; $i -lt $Tiles.Count; $i++) { $p = $Tiles[$i]; Set-Px $c $p[0] $p[1] $(if ($i % 2 -eq 0) { $ge } else { $gaas }) }
+        foreach ($p in $Spot) { Set-Px $c $p[0] $p[1] $spotOff }
+        if ($Active) {
+            $glow = Hex 'FFE070'
+            foreach ($k in $Frame, ($Frame + 4)) { $p = $Tiles[$k % 8]; Set-Both $c $e $p[0] $p[1] $glow }
+            $p = $Spot[$Frame % 4]
+            Set-Both $c $e $p[0] $p[1] (Hex 'F0F8FF')
+        }
+    }
     # run lamp under the window
     Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })
     Set-Px $c 8 12 $(if ($Active) { $LampOn } else { $LampOff })
@@ -105,8 +121,8 @@ function New-Face {
     return @{ C = $c; E = $e }
 }
 
-$Dirs = @('block/multiblock/tetron_fab')
-$Kinds = @('tetron')
+$Dirs = @('block/multiblock/tetron_fab', 'block/multiblock/gamma_optics_works')
+$Kinds = @('tetron', 'gamma')
 for ($m = 0; $m -lt $Dirs.Count; $m++) {
     $idle = New-Face $Kinds[$m] 0 $false
     Out-Tex $idle.C "$($Dirs[$m])/overlay_front.png"
@@ -142,10 +158,50 @@ $shapes = @{
         '...KWHHHHHHDK...', '...KWHWHHWHDK...', '...KWHHHHHHDK...', '...KWHWHHWHDK...',
         '...KWHHHHHHDK...', '...KWHWHHWHDK...', '...KWHHHHHHDK...', '...KDDDDDDDDK...',
         '...KKKKKKKKKK...', '................', '................', '................')
+    tile = @(
+        '................', '................', '................', '...KKKKKKKKKK...',
+        '...KWWWWWWWHK...', '...KWHHHHHHDK...', '...KWHWHHHHDK...', '...KWHHWHHHDK...',
+        '...KWHHHWHHDK...', '...KWHHHHWHDK...', '...KWHHHHHHDK...', '...KHDDDDDDDK...',
+        '...KKKKKKKKKK...', '................', '................', '................')
+    bent = @(
+        '................', '................', '................', '..KK........KK..',
+        '..KWK......KHK..', '..KWHKK..KKHDK..', '...KWHHKKHHDK...', '...KWWHHHHHDK...',
+        '....KWWHHHDK....', '.....KKDDDK.....', '.......KK.......', '................',
+        '................', '................', '................', '................')
+    frame = @(
+        '................', '................', '.....KKKKKK.....', '....KWWWWWHK....',
+        '...KWKKKKKKDK...', '...KWK....KDK...', '...KWK.KK.KDK...', '...KWK.KK.KDK...',
+        '...KWK....KDK...', '...KHKKKKKKDK...', '....KHDDDDDK....', '.....KKKKKK.....',
+        '................', '................', '................', '................')
+    disc = @(
+        '................', '................', '.....KKKKKK.....', '....KWWWWWHK....',
+        '...KWWHHHHHDK...', '...KWHHHHHHDK...', '...KWHHHHHHDK...', '...KWHHHHHHDK...',
+        '...KWHHHHHHDK...', '...KHHHHHHDDK...', '....KHDDDDDK....', '.....KKKKKK.....',
+        '................', '................', '................', '................')
+    stack = @(
+        '................', '................', '................', '..KKKKKKKKKKKK..',
+        '..KWWWWWWWWWHK..', '..KDDDDDDDDDDK..', '..KWHHHHHHHHDK..', '..KDDDDDDDDDDK..',
+        '..KWHHHHHHHHDK..', '..KDDDDDDDDDDK..', '..KWHHHHHHHHDK..', '..KKKKKKKKKKKK..',
+        '................', '................', '................', '................')
+    card = @(
+        '................', '................', '..KKKKKKKKKKK...', '..KWWWWWWWWHK...',
+        '..KWHHHHHHHDK...', '..KWHKHHHHHDK...', '..KWHKHHHHHDK...', '..KWHHKHHHHDK...',
+        '..KWHHHKKKKDK...', '..KWHHHHHHHDK...', '..KDDDDDDDDDK...', '..KKKKKKKKKKK...',
+        '.....K...K......', '................', '................', '................')
+    puck = @(
+        '................', '................', '................', '....KKKKKKKK....',
+        '...KWWWWWWWHK...', '..KWHHHHHHHHDK..', '..KWHHHDDHHHDK..', '..KWHHHDDHHHDK..',
+        '..KDHHHHHHHHDK..', '...KDDDDDDDDK...', '...KKKKKKKKKK...', '................',
+        '................', '................', '................', '................')
 }
 $items = @(
     @('bumped_tetron_die', 'die', 'B8A0D0'), @('bonded_tetron_die', 'chip', 'A0B0C8'),
-    @('tested_tetron_die', 'chip', '80D0B0'), @('failed_tetron_die', 'die', '8A6A5A')
+    @('tested_tetron_die', 'chip', '80D0B0'), @('failed_tetron_die', 'die', '8A6A5A'),
+    @('bent_ge_tile', 'bent', '8890A8'), @('gaas_laue_tile', 'tile', '6A5A80'),
+    @('aligned_laue_frame', 'frame', '9AA0A8'), @('rejected_laue_tile', 'tile', '8A6A5A'),
+    @('superpolished_sic_blank', 'disc', '5A6A60'), @('wc_sic_multilayer', 'stack', '7080A0'),
+    @('mirror_metrology_record', 'card', '60A0D0'), @('wc_sputter_target', 'puck', '707880'),
+    @('rejected_gamma_mirror', 'disc', '8A6A5A')
 )
 foreach ($it in $items) {
     $map = $shapes[$it[1]]
