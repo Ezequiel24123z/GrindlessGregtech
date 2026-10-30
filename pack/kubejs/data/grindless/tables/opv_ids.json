@@ -1,0 +1,40 @@
+{
+  "_why": "OpV-F1 (docs/eras/opv.md F1): every shared id the OpV packages read. gtm and max are GTM 7.5.3's (highTierContent on, TP-S0F; OpV-S0-1, the 91 gtceu:opv_* ids checked against GTM's datagen at tag v7.5.3-1.20.1): never registered by us. foundation is what startup_scripts/grindless/opv/foundation.js registers. Each machine's own intermediates are its package's and are not listed here.",
+  "gtm": {
+    "components": ["gtceu:opv_electric_motor", "gtceu:opv_electric_pump", "gtceu:opv_conveyor_module", "gtceu:opv_electric_piston", "gtceu:opv_robot_arm", "gtceu:opv_emitter", "gtceu:opv_sensor", "gtceu:opv_field_generator"],
+    "cover": ["gtceu:opv_fluid_regulator"],
+    "hull": ["gtceu:opv_machine_hull", "gtceu:opv_machine_casing"],
+    "energy_hatches": ["gtceu:opv_energy_input_hatch", "gtceu:opv_energy_input_hatch_4a", "gtceu:opv_energy_input_hatch_16a", "gtceu:opv_energy_output_hatch", "gtceu:opv_energy_output_hatch_4a", "gtceu:opv_energy_output_hatch_16a", "gtceu:opv_substation_input_hatch_64a", "gtceu:opv_substation_output_hatch_64a"],
+    "laser_hatches": ["gtceu:opv_256a_laser_source_hatch", "gtceu:opv_1024a_laser_source_hatch", "gtceu:opv_4096a_laser_source_hatch", "gtceu:opv_256a_laser_target_hatch", "gtceu:opv_1024a_laser_target_hatch", "gtceu:opv_4096a_laser_target_hatch"],
+    "electric": ["gtceu:opv_transformer_1a", "gtceu:opv_transformer_2a", "gtceu:opv_transformer_4a", "gtceu:opv_transformer_16a", "gtceu:opv_1a_energy_converter", "gtceu:opv_4a_energy_converter", "gtceu:opv_8a_energy_converter", "gtceu:opv_16a_energy_converter", "gtceu:opv_battery_buffer_4x", "gtceu:opv_battery_buffer_8x", "gtceu:opv_battery_buffer_16x", "gtceu:opv_charger_4x", "gtceu:opv_diode"],
+    "parts": ["gtceu:opv_input_bus", "gtceu:opv_output_bus", "gtceu:opv_input_hatch", "gtceu:opv_input_hatch_4x", "gtceu:opv_input_hatch_9x", "gtceu:opv_output_hatch", "gtceu:opv_output_hatch_4x", "gtceu:opv_output_hatch_9x", "gtceu:opv_dual_input_hatch", "gtceu:opv_dual_output_hatch", "gtceu:opv_muffler_hatch", "gtceu:opv_item_passthrough_hatch", "gtceu:opv_fluid_passthrough_hatch", "gtceu:opv_rotor_holder"],
+    "storage": ["gtceu:opv_quantum_chest", "gtceu:opv_quantum_tank"],
+    "machines": ["gtceu:opv_electric_furnace", "gtceu:opv_alloy_smelter", "gtceu:opv_arc_furnace", "gtceu:opv_assembler", "gtceu:opv_autoclave", "gtceu:opv_bender", "gtceu:opv_brewery", "gtceu:opv_canner", "gtceu:opv_centrifuge", "gtceu:opv_chemical_bath", "gtceu:opv_chemical_reactor", "gtceu:opv_compressor", "gtceu:opv_cutter", "gtceu:opv_distillery", "gtceu:opv_electrolyzer", "gtceu:opv_electromagnetic_separator", "gtceu:opv_extractor", "gtceu:opv_extruder", "gtceu:opv_fermenter", "gtceu:opv_fluid_heater", "gtceu:opv_fluid_solidifier", "gtceu:opv_forge_hammer", "gtceu:opv_forming_press", "gtceu:opv_lathe", "gtceu:opv_scanner", "gtceu:opv_mixer", "gtceu:opv_ore_washer", "gtceu:opv_packer", "gtceu:opv_polarizer", "gtceu:opv_laser_engraver", "gtceu:opv_sifter", "gtceu:opv_thermal_centrifuge", "gtceu:opv_wiremill", "gtceu:opv_circuit_assembler", "gtceu:opv_gas_collector", "gtceu:opv_macerator", "gtceu:opv_rock_crusher"]
+  },
+  "max": ["gtceu:max_machine_hull", "gtceu:max_machine_casing", "gtceu:max_battery", "gtceu:max_energy_input_hatch", "gtceu:max_energy_input_hatch_4a", "gtceu:max_energy_input_hatch_16a", "gtceu:max_energy_output_hatch", "gtceu:max_energy_output_hatch_4a", "gtceu:max_energy_output_hatch_16a", "gtceu:max_substation_input_hatch_64a", "gtceu:max_substation_output_hatch_64a", "gtceu:max_1a_energy_converter", "gtceu:max_4a_energy_converter", "gtceu:max_8a_energy_converter", "gtceu:max_16a_energy_converter", "gtceu:max_battery_buffer_4x", "gtceu:max_battery_buffer_8x", "gtceu:max_battery_buffer_16x", "gtceu:max_charger_4x", "gtceu:max_input_bus", "gtceu:max_output_bus", "gtceu:max_input_hatch", "gtceu:max_input_hatch_4x", "gtceu:max_input_hatch_9x", "gtceu:max_output_hatch", "gtceu:max_output_hatch_4x", "gtceu:max_output_hatch_9x", "gtceu:max_dual_input_hatch", "gtceu:max_dual_output_hatch"],
+  "ours": {
+    "_why": "OpV ids the packages read that neither GTM nor F1 registers: their owners register them",
+    "gtceu:opv_parallel_hatch": "M1, through lib/parallel_hatch.js (GTM has none at OpV, S0-1)",
+    "grindless:opv_smes_cell": "W, from its own table"
+  },
+  "existing": {
+    "_why": "named by F1 but registered by an older script: read, never created again",
+    "grindless:si28_soi_wafer": "startup_scripts/grindless/uiv/tfln_femtosecond.js"
+  },
+  "foundation": {
+    "items": ["grindless:bulge_relay_seed", "grindless:launched_bulge_seed", "grindless:chain_lamina_stack", "grindless:ni_chain_slab", "grindless:chain_field_coil", "grindless:chain_composite_rod", "grindless:chain_composite_rotor", "grindless:superfluid_he3_seal", "grindless:chain_mesh_belt", "grindless:opv_harmonic_drive", "grindless:th229_lasing_crystal", "grindless:hpge_compton_crystal", "grindless:inas_al_wafer", "grindless:gated_2deg_wafer", "grindless:tetron_die", "grindless:cryo_cmos_die", "grindless:nb_tsv_interposer", "grindless:cryo_optical_link", "grindless:hemt_amplifier", "grindless:gan_mmic", "grindless:sdd_die", "grindless:field_frozen_plate", "grindless:aln_power_die", "grindless:tetron_array", "grindless:gamma_multilayer_mirror", "grindless:laue_lens", "grindless:be_beam_window", "grindless:ir_spallation_target", "grindless:spent_ir_target", "grindless:li6_hydride_shield", "grindless:electron_cooler", "grindless:stochastic_cooling_pickup", "grindless:pb208_beam_cell", "grindless:octupole_trap_magnet", "grindless:levitation_trap_cell", "grindless:lyman_alpha_laser", "grindless:gamma_absorber_tile", "grindless:tpv_panel", "grindless:acmf_pellet", "grindless:seed_positron_plasma", "grindless:dense_positron_cell", "grindless:cold_antiproton_cell", "grindless:antiproton_stack_opv", "grindless:antihydrogen_ice_cell", "grindless:strangelet_seed", "grindless:stable_exotic_matter", "grindless:kugelblitz_core", "grindless:hawking_drive", "grindless:xnav_unit", "grindless:node_power_transmitter", "grindless:bulge_debris", "grindless:metal_feedstock", "grindless:silicate_debris_fraction", "grindless:si_alloy_powder", "grindless:cluster_sinter_casing", "grindless:collector_node", "grindless:spent_collector_node", "grindless:deployed_node_pack", "grindless:probe_seed", "grindless:vitamin_kit", "grindless:pathfinder_probe", "grindless:launched_pathfinder", "grindless:pathfinder_probe_core", "grindless:bulge_light_census", "grindless:superheavy_census_iv", "grindless:element_124_recoil", "grindless:element_126_recoil", "grindless:chain_strand_repeater", "grindless:sgr_a_chart"],
+    "blocks": ["grindless:field_frozen_casing", "grindless:annihilation_shield_casing", "grindless:neg_xhv_casing"],
+    "materials": ["gtceu:chain_strand", "grindless:superfluid_helium_3", "grindless:jet_proton_beam", "grindless:hot_pair_plasma"],
+    "chain_strand": ["gtceu:chain_strand_ingot", "gtceu:chain_strand_single_wire", "gtceu:chain_strand_single_cable"],
+    "fluids": ["gtceu:superfluid_helium_3", "gtceu:jet_proton_beam", "gtceu:hot_pair_plasma"]
+  },
+  "substages": {
+    "_why": "names only: their hidden_until entries are F2's and their grants belong to the packages that send the player there",
+    "names": ["opv", "opv-sgr", "opv-terzan5"]
+  },
+  "places": {
+    "_why": "the two tier-13 places (S0-3, S0-8; startup_scripts/grindless/opv/travel.js publishes them as global.grindless.opvTravel); the dimension ids are final",
+    "sgr1806": "grindless:sgr1806_orbit",
+    "terzan5": "grindless:terzan5_core"
+  }
+}

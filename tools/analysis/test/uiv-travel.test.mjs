@@ -169,7 +169,7 @@ test('the three jump rows, the relay pairs and the platform table', () => {
     ['rx_j1856', 'hold_rx_j1856', 'grindless:rx_j1856_orbit'],
     ['psr_j0437', 'hold_psr_j0437', 'grindless:psr_j0437_orbit'],
     ['cygnus_x1', 'hold_cygnus_x1', 'grindless:cygnus_x1_orbit']]);
-  assert.equal(plat.platforms.length, 5, 'UXV-B1 appends two rows with a source');
+  assert.equal(plat.platforms.length, 7, 'UXV-B1 appends two rows with a source, OpV-F1 two more');
   for (const p of plat.platforms.filter((x) => !x.source)) assert.ok(rows.some((r) => r.name === p.jump), p.place);
   assert.equal(plat.ring.machine, 'gtceu:warp_gate');
 });
