@@ -1,0 +1,57 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/uxv/cygnus_disk.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit; 'site' true locks the recipe to grindless:cygnus_x1_orbit; 'wear' inputs are consumed by their chance (out of 10000); 'generator' true writes the EUt negative (a generator type). disk_skimming, frc_forming and blandford_znajek are package UXV-B3's machine types (data key = dataKey, the EMI line). Package UXV-B3, docs/eras/uxv.md machines 13-15 and process lines 30-31.",
+  "types": {
+    "disk_skimming": {
+      "dataKey": "grindless_disk_skimming",
+      "recipes": [
+        {
+          "_why": "machine 13 c1: a magnetic scoop in the outer disk takes 1,000 mB of the disk's own plasma; the scoop's metallic hydrogen winding wears 5% a run",
+          "name": "skim_disk", "circuit": 1, "eut": 134217728, "duration": 1200, "site": true,
+          "itemsIn": [], "kept": [],
+          "wear": [{ "id": "grindless:mh_winding", "count": 1, "chance": 500 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:disk_plasma", "amount": 1000 }]
+        }
+      ]
+    },
+    "frc_forming": {
+      "dataKey": "grindless_frc_forming",
+      "recipes": [
+        {
+          "_why": "machine 14 c1: a theta-pinch on four MH windings traps a field-reversed plasmoid in a cartridge; the windings wear 10% a run. Filtered disk plasma is B2's, made from B3's disk plasma",
+          "name": "form_cartridge", "circuit": 1, "eut": 134217728, "duration": 1600, "site": true,
+          "itemsIn": [], "kept": [],
+          "wear": [{ "id": "grindless:mh_winding", "count": 4, "chance": 1000 }],
+          "fluidsIn": [{ "id": "gtceu:filtered_disk_plasma", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:frc_cartridge", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 14 c2: the same pinch without a cartridge loads the plasma with flux for the BZ dynamo; the plasma lost in formation recombines to hydrogen, which goes to stock",
+          "name": "load_flux", "circuit": 2, "eut": 67108864, "duration": 400, "site": false,
+          "itemsIn": [], "kept": [], "wear": [],
+          "fluidsIn": [{ "id": "gtceu:filtered_disk_plasma", "amount": 500 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:flux_loaded_plasma", "amount": 400 },
+            { "id": "gtceu:hydrogen", "amount": 100 }
+          ]
+        }
+      ]
+    },
+    "blandford_znajek": {
+      "dataKey": "grindless_blandford_znajek",
+      "recipes": [
+        {
+          "_why": "machine 15 c1: field lines threading the horizon carry the spin's power out through the jet; 400 mB of flux-loaded plasma (one FRC c2 batch, 2 mB/t) feeds 200 t at 2^30 EU/t. The chain (disk 556 mB, filter c2, FRC c2) costs about 1.3e11 EU against 2.15e11 EU back: generous, never free",
+          "name": "spin_down", "circuit": 1, "eut": 1073741824, "duration": 200, "site": true, "generator": true,
+          "itemsIn": [], "kept": [], "wear": [],
+          "fluidsIn": [{ "id": "gtceu:flux_loaded_plasma", "amount": 400 }],
+          "itemsOut": [],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
