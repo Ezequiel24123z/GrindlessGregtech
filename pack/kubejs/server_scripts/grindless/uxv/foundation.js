@@ -70,4 +70,9 @@ ServerEvents.recipes(function (event) {
   hatch('uxv_energy_output_hatch', 2, 2, 500, 'grindless:pasta_strand_repeater')
   hatch('uxv_energy_input_hatch_16a', 4, 4, 1000, 'gtceu:rhea_plate')
   hatch('uxv_energy_output_hatch_16a', 4, 4, 1000, 'grindless:silica_aerogel')
+
+  // highTierContent is on (TP-S0F): GTM's own hull and 16 A hatch recipes for gtceu:uxv_* would be a second way to make them
+  ;['shaped/uxv_machine_hull', 'assembler/energy_hatch_16a_uxv', 'assembler/dynamo_hatch_16a_uxv'].forEach(function (id) {
+    event.remove({ id: 'gtceu:' + id })
+  })
 })

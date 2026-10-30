@@ -824,6 +824,13 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
     }
   }
 
+  // GTM's own machines (only with highTierContent on), seeded so the audit still sees them (their era is UEV's foundation, as before the flip)
+  const gtceuYaml = path.join(packDir, 'config', 'gtceu.yaml');
+  const highTier = fs.existsSync(gtceuYaml) && /^\s*highTierContent:\s*true\s*(#.*)?$/m.test(fs.readFileSync(gtceuYaml, 'utf8'));
+  for (const id of highTier ? GTM_HIGH_TIER_IDS : []) {
+    if (!registry.machines.has(id)) registry.machines.set(id, { id, kind: 'custom', recipeTypes: [], file: 'kubejs/startup_scripts/grindless/uev/foundation.js', name: id.slice(6), seeded: true });
+  }
+
   // ================================================================ as a dump
   const tagsDoc = { item: {}, fluid: {} };
   for (const [t, s] of itemTags) tagsDoc.item[t] = [...s];
@@ -842,6 +849,13 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
   };
   return { docs, errors, logs, handlers, lang, registry, recipeFiles, removals, blockTags, originalsRead, global: global_ };
 }
+
+/**
+ * Ids GTM 7.5.3 registers with highTierContent on (pack/config/gtceu.yaml, TP-S0F) that the pack's own scripts rely on: the hull and
+ * the four energy hatches (2 A, 16 A, input, output) at UEV, UIV and UXV. The stand-in cannot read GTM's registry, so they are seeded.
+ */
+export const GTM_HIGH_TIER_IDS = ['uev', 'uiv', 'uxv'].flatMap((tier) =>
+  ['machine_hull', 'energy_input_hatch', 'energy_output_hatch', 'energy_input_hatch_16a', 'energy_output_hatch_16a'].map((n) => `gtceu:${tier}_${n}`));
 
 /** The pack's static dump (lib/dump.mjs format) plus what the stand-in learned on the way. */
 export function staticDump(packDir, opts = {}) {
