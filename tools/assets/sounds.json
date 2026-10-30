@@ -629,6 +629,39 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_vdw_stacking_cell",
+      "recipeType": "gtceu:vdw_stacking",
+      "prompt": "Seamless looping sound of a glovebox stacking cell: soft robotic stepper motors and vacuum tweezers ticking, a gentle argon flow hiss, a low pump hum, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_racetrack_fab",
+      "recipeType": "gtceu:racetrack_patterning",
+      "prompt": "Seamless looping sound of an electron beam lithography bay: a steady high-voltage hum with faint rhythmic beam-writing ticks, a quiet vacuum pump drone, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_yig_lpe_furnace",
+      "recipeType": "gtceu:liquid_phase_epitaxy",
+      "prompt": "Seamless looping sound of a vertical epitaxy furnace: a deep resistive heater hum, a slow motorised dip mechanism and soft bubbling of molten flux, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }
