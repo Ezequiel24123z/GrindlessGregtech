@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:pasta_extractor"],
+  "text": ["emi.grindless.info.pasta_extractor.0", "emi.grindless.info.pasta_extractor.1"]
+}

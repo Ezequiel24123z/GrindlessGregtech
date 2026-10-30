@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:pasta_draw_bench"],
+  "text": ["emi.grindless.info.pasta_draw_bench.0", "emi.grindless.info.pasta_draw_bench.1"]
+}
