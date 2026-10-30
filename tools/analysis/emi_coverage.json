@@ -86,10 +86,7 @@
     { "id": "grindless:assembly_line/uxv_parallel_hatch", "reason": "UXV-M1 landed before Wave A: its inputs are held until A5 (GT--'s spintronic mainframe, held by our A5 rule until A5 writes its recipe), B3 (field generator, filtered disk plasma), B4 (hull) and B5 (emitter) write their producers; B5 lands last and deletes this entry with its hold rule" }
       ],
       "pendingUses": [
-        { "id": "grindless:cm248_target", "package": "UXV-A6", "reason": "UXV-A2 makes it; A6's MNT collider uses it (uxv.md:1321)" },
         { "id": "grindless:gum_metal_billet", "package": "UXV-A8", "reason": "UXV-A2 casts it; A8's hot strip mill makes gum_metal_blank from it (line 45, uxv.md:1371, :1379)" },
-        { "id": "grindless:nanoaperture_array", "package": "UXV-A6", "reason": "UXV-A3 mills it; A6's SHeQUID works c1 makes weak_link_cell from it (uxv.md:304)" },
-        { "id": "grindless:rf_carpet_board", "package": "UXV-A6", "reason": "UXV-A3's foundry c19 makes it; A6's sensor chain uses it (uxv.md:1321)" },
         { "id": "grindless:ni_mn_ga_crystal", "package": "UXV-A8", "reason": "UXV-A3's nitride works c13 twin-trains it; A8's uxv_conveyor_module drives it (line 37)" },
         { "id": "fluid:gtceu:carbon_burning_fuel", "package": "UXV-A7", "reason": "UXV-A3's electron beam furnace purifies it (line 28); A7's Mk6 c3 burns it" },
         { "id": "fluid:gtceu:finemet_melt", "package": "UXV-A7", "reason": "UXV-A3's levitation melter c13 melts it; A7's quench caster c6 casts it into finemet_ribbon (line 48)" }

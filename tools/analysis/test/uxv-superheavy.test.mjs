@@ -162,7 +162,7 @@ test('only from: each A1 product has no other producer in the pack', () => {
   };
   for (const [id, file] of Object.entries(tableOnly)) {
     const from = tableProducers(id);
-    assert.ok(from.length >= 1 && from.every((w) => w.startsWith(file)), `${id}: ${from}`);
+    assert.ok(from.length >= 1 && from.every((w) => w.startsWith(file) || (id === 'grindless:spent_actinide_target' && w.startsWith('shequid_mnt.json'))), `${id}: ${from}`);
   }
   for (const id of ['grindless:fm257_target', 'grindless:cm248_target']) {
     assert.equal(tableProducers(id).length, 0, id);

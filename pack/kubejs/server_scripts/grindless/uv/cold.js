@@ -81,7 +81,11 @@
     // UIV-B3 (docs/eras/uiv.md, line 45): purified neon frozen on a cooled cone in a superfluid helium bath into the solid-neon moderator; the
     // neon boil-off goes back to the EV cryogenic plant
     { name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7, itemsIn: [], fluidsIn: [fluid('gtceu:purified_neon', 1000), fluid(SUPERFLUID, 100)],
-      itemsOut: [item('grindless:solid_neon_cone', 1)], fluidsOut: [fluid('gtceu:neon', 100)], eut: VA, duration: 400 }
+      itemsOut: [item('grindless:solid_neon_cone', 1)], fluidsOut: [fluid('gtceu:neon', 100)], eut: VA, duration: 400 },
+    // UXV-A6 (docs/eras/uxv.md, machine 6, line 18): the SHeQUID works' warmed He-II boil-off passed over the superleak again; the plant has
+    // no circuit, so this row is keyed by its input fluid alone
+    { name: 'he2_heat_flush', type: 'superfluid_helium', circuit: null, itemsIn: [], fluidsIn: [fluid(SUPERFLUID, 1000)], itemsOut: [],
+      fluidsOut: [fluid(SUPERFLUID, 990), fluid(HE3, 10)], eut: VA, duration: 200 }
   ]
 
   // side steps on GTM's own machines

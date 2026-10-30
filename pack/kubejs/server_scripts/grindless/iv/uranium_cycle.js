@@ -49,6 +49,15 @@
   var TRANSCURIUM_TABLE = 'kubejs/data/grindless/tables/transcurium_fabrication.json'
   // UEV-A1's depleted-plutonium MOX row (the same format): appended after the transcurium rows
   var ISOTOPES_TABLE = 'kubejs/data/grindless/tables/isotopes_fabrication.json'
+  // UXV-A6's ion-source row (the same format): circuits 1-3 are IV's, 4-6 UV's, 7 UHV's, 8 UEV's, 9 and 10 UIV's; 11 is the next free one
+  var UXV_FABRICATION = [
+    { name: 'u238_ion_source', circuit: 11,
+      itemsIn: [{ id: 'gtceu:tungsten_plate', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:depleted_uranium_hexafluoride', amount: 1000 }, { id: 'gtceu:oxygen', amount: 500 }],
+      fluidsKept: [], fluidsOut: [{ id: 'gtceu:fluorine', amount: 500 }],
+      itemsOut: [{ id: 'grindless:u238_ion_source', count: 1 }],
+      energy: [{ stage: 'the uranium hexafluoride charge sealed into a tungsten oven for the MNT injector: one IV assembler stage', eu: 1536000, times: 1 }] }
+  ]
 
   var FIELD = 'gtceu:isr_wellfield'
   var PLANT = 'gtceu:fuel_fabrication_plant'
@@ -131,7 +140,7 @@
     var steps = []
     var names = {}
     var circuits = {}
-    var fabrication = list(t.fabrication).concat(list(G.readJsonTable(THORIUM_TABLE).fabrication), list(G.readJsonTable(TRANSCURIUM_TABLE).fabrication), list(G.readJsonTable(ISOTOPES_TABLE).fabrication))
+    var fabrication = list(t.fabrication).concat(list(G.readJsonTable(THORIUM_TABLE).fabrication), list(G.readJsonTable(TRANSCURIUM_TABLE).fabrication), list(G.readJsonTable(ISOTOPES_TABLE).fabrication), UXV_FABRICATION)
     fabrication.forEach(function (s) {
       var name = String(s.name || '')
       var circuit = Number(s.circuit)
