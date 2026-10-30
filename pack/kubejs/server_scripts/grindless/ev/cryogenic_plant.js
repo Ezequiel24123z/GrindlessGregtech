@@ -117,6 +117,18 @@
     addLiquidParaHydrogen(event)
     addNeonSixN(event)
     addSpinFeedRows(event)
+    addLiquidHelium3(event)
+  }
+
+  // OpV-A1 (docs/eras/opv.md, line 5): the 6N helium-3 condensed to liquid helium-3, the feed of the millikelvin cryostat's superfluid row
+  // (circuit 4). The uncondensed tail comes back as 6N helium-3 and goes into the next run. The only input is 6N helium-3.
+  var LIQUID_HELIUM3 = { id: 'grindless:cryogenic_processing/liquid_helium_3', eut: 7680, duration: 400,
+    input: { id: 'gtceu:helium_3_6n', amount: 1000 },
+    outputs: [{ id: 'gtceu:liquid_helium_3', amount: 950 }, { id: 'gtceu:helium_3_6n', amount: 50 }] }
+  CRYO.liquidHelium3Row = LIQUID_HELIUM3
+
+  function addLiquidHelium3(event) {
+    addCryoRow(event, LIQUID_HELIUM3, 'liquid_helium_3', 'liquid helium-3')
   }
 
   // UXV-A2 (docs/eras/uxv.md, "Cryogenic plant"): four rows keyed by their one input. The plant has one fluid slot in, so the second inputs

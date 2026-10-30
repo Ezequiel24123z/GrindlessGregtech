@@ -109,6 +109,23 @@
           "itemsIn": [{ "id": "grindless:p_si_die", "count": 1 }],
           "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
           "itemsOut": [{ "id": "grindless:p_si_processor", "count": 1 }]
+        },
+        {
+          "_why": "OpV-A1 (opv.md line 5): liquid helium-3 from the cryogenic plant cooled below 1 mK on the module into F1's superfluid. Circuit 4.",
+          "name": "superfluid_he3", "circuit": 4, "eut": 31457280, "duration": 1200,
+          "itemsIn": [],
+          "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium_3", "amount": 1000 }],
+          "fluidsOut": [{ "id": "gtceu:superfluid_helium_3", "amount": 1000 }]
+        },
+        {
+          "_why": "OpV-A1 (opv.md line 5): a silica aerogel plug qualified on the He-3/He-4 mixture: the helium-4 superflows through and goes to the LuV helium refrigerator, the helium-3 stays in the pores as the seal's charge. Circuit 5.",
+          "name": "superleak_plug", "circuit": 5, "eut": 31457280, "duration": 800,
+          "itemsIn": [{ "id": "grindless:silica_aerogel", "count": 1 }],
+          "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:superleak_plug", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 400 }]
         }
       ]
     }

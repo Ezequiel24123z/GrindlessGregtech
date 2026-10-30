@@ -81,7 +81,10 @@
           "itemsOut": [{ "id": "grindless:glassy_carbon_lattice", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
         { "_why": "UXV-A3 (uxv.md line 38): the W-184 wire (GTM's wiremill row) infiltrated from methane into a fibre preform; the hydrogen goes back to stock. Circuit 5 (1-4 are older rows).", "name": "w184_fibre_preform", "circuit": 5, "eut": 1966080, "duration": 4800,
           "itemsIn": [{ "id": "gtceu:tungsten_184_single_wire", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:w184_cvi_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
+          "itemsOut": [{ "id": "grindless:w184_cvi_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
+        { "_why": "OpV-A1 (opv.md line 4): the chain SiC preform densified from methyltrichlorosilane, as the SiC/SiC plate; the HCl goes back to stock. Circuit 6.", "name": "chain_preform_densify", "circuit": 6, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:chain_sic_preform", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:densified_chain_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] }
       ]
     },
     "chemical_reactor": {

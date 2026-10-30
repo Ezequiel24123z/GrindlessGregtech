@@ -131,6 +131,11 @@
       itemsOut: [item('grindless:cnt_bumper_weave', 1)], fluidsOut: [], eut: UHVA, duration: 600 }
   ]
 
+  // OpV-A1 (docs/eras/opv.md, line 6): the PBO trim cut off the welded mesh belt is dissolved back into dope in the polyphosphoric acid
+  // (circuit 9; c8 is OpV-A0's); the dope goes back to the spin row
+  TABLE.push({ name: 'belt_trim_respin', type: 'pbo_synthesis', circuit: 9, itemsIn: [item('grindless:pbo_belt_trim', 4)], fluidsIn: [fluid(PPA, 500)],
+    itemsOut: [], fluidsOut: [fluid(DOPE, 500)], eut: UVA, duration: 300 })
+
   // line 24's side steps on GTM's own machines
   var SIDE = [
     { name: 'trichlorobenzene', type: 'chemical_reactor', circuit: 3, itemsIn: [],

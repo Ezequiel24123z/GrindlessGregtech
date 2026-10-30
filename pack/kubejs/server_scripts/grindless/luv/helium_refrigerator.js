@@ -317,6 +317,39 @@
       HR.skipped.map(function (s) { return s.source + ' (' + s.reason + ')' }).join(', ') : ''))
   }
 
+  // ---------------------------------------------------------------- OpV-A1 rows
+
+  // OpV-A1 (docs/eras/opv.md, lines 6 and 10): keyed rows that are not freezer recipes, on the same loop (make-up, precooling and the
+  // never-drained charge as the generated rows); one item in, one item out, so each has its own lookup path. The data key names the row.
+  //   welded_mesh_belt -> chain_mesh_belt: the PBO/chain belt accepted at 4 K (line 6)
+  var OPV_ROWS = [
+    { name: 'chain_mesh_belt', input: 'grindless:welded_mesh_belt', output: 'grindless:chain_mesh_belt', eut: 30720, duration: 400 }
+  ]
+  HR.opvRows = OPV_ROWS
+  HR.opvSkipped = []
+
+  function addOpvRows(event) {
+    var cfg = config()
+    OPV_ROWS.forEach(function (r) {
+      var missing = [r.input, r.output].filter(function (id) { return !Item.exists(id) })
+        .concat([cfg.makeUp.id, cfg.precoolIn.id, cfg.precoolOut.id, cfg.charge.id].filter(function (id) { return !Fluid.exists(id) }))
+      if (missing.length > 0) {
+        HR.opvSkipped.push({ name: r.name, reason: 'unknown id(s) ' + missing.join(', ') })
+        console.error(LOG + 'closed_loop_cooling ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      event.recipes.gtceu.closed_loop_cooling('grindless:' + r.name)
+        .itemInputs('1x ' + r.input)
+        .inputFluids(Fluid.of(cfg.makeUp.id, cfg.makeUp.amount))
+        .inputFluids(Fluid.of(cfg.precoolIn.id, cfg.precoolIn.amount))
+        .notConsumableFluid(Fluid.of(cfg.charge.id, cfg.charge.amount))
+        .itemOutputs('1x ' + r.output)
+        .outputFluids(Fluid.of(cfg.precoolOut.id, cfg.precoolOut.amount))
+        .addDataString(DATA_KEY, 'grindless:closed_loop_cooling/' + r.name)
+        .EUt(r.eut).duration(r.duration)
+    })
+  }
+
   // ---------------------------------------------------------------- crafting
 
   function addController(event) {
@@ -343,6 +376,11 @@
       addController(event)
     } catch (e2) {
       console.error(LOG + 'helium refrigerator controller recipe failed: ' + e2)
+    }
+    try {
+      addOpvRows(event)
+    } catch (e3) {
+      console.error(LOG + 'closed_loop_cooling OpV-A1 rows failed: ' + e3)
     }
   })
 })()
