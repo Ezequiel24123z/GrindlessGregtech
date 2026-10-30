@@ -120,8 +120,11 @@ test('hold rules: the A8 and tetrataenite rules are gone, and the pending EMI en
   const rules = json('tools', 'analysis', 'tiers', 'obtain.json').obtain.classes;
   assert.ok(!rules.some((r) => /UXV \(A8\)/.test(r.era || '')), 'no A8 rule');
   assert.ok(!rules.some((r) => (r.materials || []).includes('tetrataenite') && /A8/.test(r.reason || '')), 'no tetrataenite rule');
-  const emi = JSON.stringify(json('tools', 'analysis', 'emi_coverage.json'));
-  for (const s of ['nitride_magnet_synthesis/uxv_smes_cell', 'grindless:gum_metal_billet', 'grindless:ni_mn_ga_crystal']) assert.ok(!emi.includes(s), s);
+  const emi = json('tools', 'analysis', 'emi_coverage.json');
+  for (const s of ['grindless:gum_metal_billet', 'grindless:ni_mn_ga_crystal']) assert.ok(!(emi.pendingUses || []).some((p) => p.id === s), s);
+  assert.ok(!(emi.pendingUses || []).some((p) => p.package === 'UXV-A8'), 'no pending use for A8');
+  // the integrator holds W's SMES cell route for B4 (A8's strand tape waits for B4's pasta strand)
+  assert.ok(!(emi.pendingRoutes || []).some((p) => /A8 (deletes|writes)/.test(p.reason || '')), 'no route waits for A8');
 });
 
 test('text: the EMI lines of the older rows in en_us and es_es', () => {

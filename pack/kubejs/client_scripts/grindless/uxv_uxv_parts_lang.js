@@ -1,3 +1,4 @@
+// priority: 1451
 // Gregtech Grindless - EMI lines of UXV's parts and part steps (server_scripts/grindless/uxv/uxv_parts.js and the three older tables; package UXV-A8):
 //
 //   gtceu.recipe.grindless_naquadria_magnets.<name>   magnet works c8 and c10
