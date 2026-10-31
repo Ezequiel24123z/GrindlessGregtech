@@ -146,6 +146,14 @@
           "itemsIn": [{ "id": "grindless:gc_relay_probe", "count": 1 }],
           "kept": [{ "id": "grindless:sgr_a_chart", "count": 1 }],
           "itemsOut": [{ "id": "grindless:launched_gc_probe", "count": 1 }]
+        },
+        {
+          "_why": "MAX-T2 (docs/eras/max.md Bridges, S0-11): the c15 throw of the belt seed from the gate built on the Sgr A* platform (gcyr:black_hole_orbit) to the nuclear star cluster, 16 A x V[OpV] = 2^33 EU/t for 1,200 t on two OpV 16 A hatches (S0-11's proven row hold_s0_max_c15). The seed, which carries the ephemeris that aimed it, is the whole cost; nothing is kept. It leaves launched and uxv/kerr_sling.js places F1's belt platform (relay_platforms.json nsc, source Sgr A*) and the max-nsc substage follows from the arrival.",
+          "name": "hold_nsc_belt",
+          "circuit": 15, "eut": 8589934592, "duration": 1200, "site": "sgr_a_orbit",
+          "itemsIn": [{ "id": "grindless:nsc_belt_seed", "count": 1 }],
+          "kept": [],
+          "itemsOut": [{ "id": "grindless:launched_belt_seed", "count": 1 }]
         }
       ]
     },

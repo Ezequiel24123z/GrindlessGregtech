@@ -164,8 +164,14 @@
     var t = rows()
     if (!t || !G.warpGate || !G.warpGate.gates) return
     var mine = t.platforms.filter(function (r) { return !!r.source })
-    if (mine.length === 0) return
-    var source = String(mine[0].source)
+    var sources = []
+    mine.forEach(function (r) { if (sources.indexOf(String(r.source)) < 0) sources.push(String(r.source)) })
+    sources.forEach(function (src) { pollSource(server, t, mine, src) })
+  }
+
+  // MAX-T2 (S0-11): each source place resolves its own rows, so the belt row (source Sgr A*) is served like the Cygnus X-1 rows
+  function pollSource(server, t, rows0, source) {
+    var mine = rows0.filter(function (r) { return String(r.source) === source })
     var level = server.getLevel(source)
     if (!level) return
     var now = Number(level.getTime())
@@ -177,11 +183,11 @@
       var name = runName(level, rec)
       var row = null
       mine.forEach(function (r) { if (r.jump === name) row = r })
-      if (row) K.pending[pk] = { place: row.place, x: rec.x, y: rec.y, z: rec.z, until: rec.until }
+      if (row) K.pending[pk] = { place: row.place, x: rec.x, y: rec.y, z: rec.z, until: rec.until, source: source }
     })
     Object.keys(K.pending).forEach(function (pk) {
       var p = K.pending[pk]
-      if (now < p.until) return
+      if (p.source !== source || now < p.until) return
       delete K.pending[pk]
       var m = classes().Meta.getMachine(level, new (classes().Pos)(p.x, p.y, p.z))
       if (!m || !m.isFormed()) { console.info(LOG + 'jump to ' + p.place + ' ended with the gate unformed: no platform'); return }
