@@ -8,7 +8,7 @@ MAX is the last GTM tier and the last era before MAX+. The player reaches the su
 
 Places:
 
-- **Sgr A* orbit** (`gcyr:black_hole_orbit`, GCYR's own dimension, given a planet file): a hole of 4.3e6 solar masses at 8.18 kpc (GRAVITY 2019, A&A 625:L10). Its accretion flow is hot, thin and faint, about 1e29 W (Yuan and Narayan 2014, ARA&A 52:529; Genzel, Eisenhauer and Gillessen 2010, RMP 82:3121). Here stand the photon ring imager, the Geroch winch, the mass stream injector and the mirror shell. UXV's disk machines and UIV's Penrose engine take new rows here.
+- **Sgr A* orbit** (`gcyr:black_hole_orbit`, GCYR's own dimension, given a planet file): a hole of 4.3e6 solar masses at 8.18 kpc (GRAVITY 2019, A&A 625:L10). Its accretion flow is hot, thin and faint, about 1e29 W (Yuan and Narayan 2014, ARA&A 52:529; Genzel, Eisenhauer and Gillessen 2010, RMP 82:3121). Here stand the photon ring imager, the Geroch winch, the mass stream injector, the mirror shell and the four stabilisation machines (11-14). UXV's disk machines and UIV's Penrose engine take new rows here.
 - **NSC belt** (`grindless:nsc_belt`, new): a belt of metal-rich planetesimals inside the nuclear star cluster. The cluster is real: about 2.5e7 solar masses within a few parsecs, with supersolar metallicity (Schödel 2014, A&A 566:A47; Do 2015, ApJ 809:143; Feldmeier-Krause 2017, MNRAS 464:194). The belt is *named fiction*; it is placed where in-situ star formation is plausible (Zubovas, Nayakshin and Sazonov 2012, MNRAS 421:1315). The cluster-light furnace smelts here.
 - **Cygnus X-1 orbit** (UIV place, revisited a third time): gate c14 and a Kugelblitz forge mode that writes the seed wave packet.
 - **SGR 1806−20 orbit** (OpV place, revisited): the UXV draw bench draws horizon strand where OpV put it.
@@ -16,22 +16,22 @@ Places:
 
 The MAX voltage is V[MAX] = 2,147,483,648 (2^31), a `long` (GTValues.java:60-61). VA[MAX] = 2,013,265,920 and VH[MAX] = 1,073,741,824 are `int` (:66-73); `GTValues.MAX = 14` (:104). OpV's design says "V[MAX] = Integer.MAX_VALUE" (opv.md *Risks*); that is off by one, and the integrator corrects it in DECISIONS (*Decisions proposed*). MAX is the top of GTM's ladder, so nothing runs one tier up from it: two MAX hatches give V[MAX], not more (WorkableElectricMultiblockMachine.java:271-273). The era opens from OpV's gate c13 (`grindless:sgr_a_chart`, `gtceu:max_machine_casing` researched; opv.md *Gate to MAX*) and leads to MAX+ (*State*). It pre-empts no MAX+ content (DECISIONS.md:450).
 
-**State.** MAX shipped in v0.17.0 from this design (deviations are in DECISIONS.md). On 2026-10-31 (Project Reforge) the owner changed the ending: the mirror shell no longer bursts the black hole or ends the universe; its last recipe stabilises or opens Sagittarius A\*'s horizon and produces the key output MAX+ needs, and the credits, epilogue and ending text move to the end of MAX+ (journey.md *The end*). Until Reforge Phase 7 implements this, *Route* 9, machine 8, *The ending*, S0-9 and G1 describe v0.17.0 as built: the last recipe bursts the mirror, outputs `grindless:universe_seed`, sends `WIN_GAME` and gives each player `grindless:max_epilogue` once. Rules 2, 5 and 7 were revised the same day (`AGENTS.md`): the rule audit, the cost notes and *Quests* record the v0.17.0 design, and Reforge Phases 2, 3 and 5 rework them.
+**State.** MAX shipped in v0.17.0 from this design (deviations are in DECISIONS.md). On 2026-10-31 (Project Reforge) the owner changed the ending (DECISIONS.md:702): the mirror shell no longer bursts the black hole or ends the universe; its last recipe stabilises Sagittarius A\*'s horizon and produces the key output MAX+ needs, `grindless:horizon_lock`, and the credits, epilogue and ending text move to the arrival at the end of MAX+ (`docs/eras/maxplus.md`, journey.md *The end*). RF-7A (2026-11-01) rewrote *Route* 9, machine 8, *The ending* and the MAX part of the build order to match, and closed open question 1 with four machines and eleven lines (machines 11-14, L47-L57). The v0.17.0 build (c3 bursts the mirror, outputs `grindless:universe_seed`, sends `WIN_GAME`, gives `grindless:max_epilogue`; `server_scripts/grindless/max/shell.js:38-41`, `startup_scripts/grindless/max/shell.js:151-157`) stays in the repo until package MX-E1 (*Build order*) replaces it. Rules 2, 5 and 7 were revised the same day (`AGENTS.md`): the rule audit and the cost notes record the v0.17.0 design, and Reforge Phases 2 and 5 rework them.
 
-| | UXV (uxv.md:20-28) | OpV (opv.md:24-32) | MAX | Guideline (rule 7, from OpV) |
-|---|---|---|---|---|
-| Progression multiblocks (ours) | 21 | 18 | **10** | 24 (x1.35) |
-| Process lines (at least 4 steps each) | 49 (359 steps) | 45 (216 steps, average 4.80) | **46** (232 steps, average 5.04) | 68 (x1.5) |
-| Crossings with lines two or more eras back | 178 (UEV and older) | 141 (UIV and older, 49 machines) | **167** (UXV and older, 71 machines) | 212 (x1.5) |
-| Older machines with a new mode | 46 | 49 | **78** (71 crossing + Penrose engine + photonic hall + swarm segment foundry + 4 OpV) | — |
-| Places | 3 + home | 2 new + Cygnus + home | 2 new + Cygnus + SGR + home | — |
-| Components | 8 | 9 (GTM `gtceu:opv_*`) | **9** (`grindless:max_*`; GTM has none at MAX) | — |
-| Basic single-block machines | none | GTM's set at OpV | **none** (GTM registers none at MAX) | — |
-| Hull and hatches | UEV builders | GTM `gtceu:opv_*` | GTM `gtceu:max_*` (29 ids, opv_ids.json:14) | — |
+| | UXV (uxv.md:20-28) | OpV (opv.md:24-32) | MAX (v0.17.0) | MAX (RF-7A) | Guideline (rule 7, from OpV) |
+|---|---|---|---|---|---|
+| Progression multiblocks (ours) | 21 | 18 | 10 | **14** | 24 (x1.35) |
+| Process lines (at least 4 steps each) | 49 (359 steps) | 45 (216 steps, average 4.80) | 46 (232 steps) | **57** (292 steps, average 5.12) | 68 (x1.5) |
+| Crossings with lines two or more eras back | 178 (UEV and older) | 141 (UIV and older, 49 machines) | 167 | **204** (UXV and older, 71 machines) | 212 (x1.5) |
+| Older machines with a new mode | 46 | 49 | 78 | **78** (71 crossing + Penrose engine + photonic hall + swarm segment foundry + 4 OpV); the new lines add rows to machines already in the list | — |
+| Places | 3 + home | 2 new + Cygnus + home | 2 new + Cygnus + SGR + home | same | — |
+| Components | 8 | 9 (GTM `gtceu:opv_*`) | 9 | **9** (`grindless:max_*`; GTM has none at MAX) | — |
+| Basic single-block machines | none | GTM's set at OpV | none | **none** (GTM registers none at MAX) | — |
+| Hull and hatches | UEV builders | GTM `gtceu:opv_*` | GTM `gtceu:max_*` | GTM `gtceu:max_*` (29 ids, opv_ids.json:14) | — |
 
-**Why 10.** MAX has one destination and one task: reach Sgr A*, build the mirror, stabilise the horizon for MAX+. Each of the ten has a route only it gives: four home machines make the parts nothing older can (Rydberg logic, matter-wave sensing, superconducting membranes, the genome archive), five Sgr A* machines exist only at a spinning supermassive hole (imaging its photon ring, lowering mass to its horizon, holding a shell up with mass streams, burning belt slag in a thin ring down to the ISCO, and the shell itself), and one belt machine smelts under cluster light. Fourteen candidates are missing to reach 24; *Considered and dropped* names every one with its reason (second route, rule 8, data chain, assembly, or MAX+ reserve). The mirror shell is the largest multiblock of the pack and carries the era (journey.md:54, *The end*).
+**Why 14.** MAX has one destination and one task: reach Sgr A*, build the mirror and stabilise the horizon for MAX+. Each of the fourteen has a route only it gives: four home machines make the parts nothing older can (Rydberg logic, matter-wave sensing, superconducting membranes, the genome archive); five Sgr A* machines exist only at a spinning supermassive hole (imaging its photon ring, lowering mass to its horizon, holding a shell up with mass streams, burning belt slag down to the ISCO, and the shell itself); one belt machine smelts under cluster light; and four Sgr A* machines (11-14, added by RF-7A) exist because the ending changed from a burst to a stationary horizon: the horizon interferometer reads the cloud, the ergoregion synchroniser locks it to the horizon's rotation, the flux clamp holds the horizon's magnetic flux, and the segment reclamation works returns what the shell wears out. Ten candidates are still missing to reach 24; open question 1 (answered) and *Considered and dropped* give the evidence and the reason for each.
 
-**Why 46.** MAX now has more lines (46) and crossings (167) than OpV (45, 141), so the era is clearly bigger where rule 7 puts the weight, but it is short of the x1.5 guide by 22 lines and 45 crossings. *Considered and dropped* lists each of the 22 lines and the 47 crossings they would have brought (they cover the 45), one specific candidate and one reason each; none is waved through as "data" or "assembly" in general. Every counted line has at least 4 feedstock transformations besides any final assembly or cold qualification (the repair added a real intermediate step, such as stabiliser plating, electropolish, anodisation, a cure or a substrate, to the sixteen lines that lacked one: L9, L11, L14, L18, L20, L22 (two), L23, L24, L33, L38-L40, L41 (two), L43, L44, L45); the average depth is 5.04 because MAX's chains are part cores and Sgr A* feedstock, short in the real world too. Open question 1 asks the owner whether to accept the residual shortfall.
+**Why 57.** Lines (57) and crossings (204) are well above OpV (45, 141): the era is clearly bigger where rule 7 puts the weight. The remaining gap to the x1.5 guide is 11 lines and 8 crossings; *Considered and dropped* lists each candidate line with the crossings it would have brought and one reason. Every counted line has at least 4 feedstock transformations besides any final assembly or cold qualification (the 2026-10-30 repair added a real intermediate step to sixteen lines: L9, L11, L14, L18, L20, L22 (two), L23, L24, L33, L38-L40, L41 (two), L43, L44, L45; L47-L57 were written to the same rule); the average depth is 5.12 because MAX's chains are part cores and Sgr A* feedstock, short in the real world too.
 
 ## Route
 
@@ -43,7 +43,8 @@ The MAX voltage is V[MAX] = 2,147,483,648 (2^31), a `long` (GTValues.java:60-61)
 6. **At Sgr A*.** New rows on older machines start first: the UXV disk skimmer clears the hot flow, the UXV BZ dynamo and UIV Penrose engine run on its spin, and the UIV droplet radiator works builds the shell's radiators. The photon ring imager measures the spin and charts the cluster.
 7. **The belt.** Gate c15, on a warp gate built at Sgr A* orbit, throws a `nsc_belt_seed` aimed by the imager's `nsc_ephemeris`. `grindless:nsc_belt` opens as `max-nsc`. OpV's debris harvester and replication refinery take rows there; the cluster-light furnace smelts the planetesimals into segment truss and stream pellets.
 8. **Horizon work.** The Geroch winch lowers waste canisters on a horizon tether; the mass stream injector makes the stream bundles that hold a shell up without a rigid support.
-9. **The mirror.** The mirror shell (about 33 x 33 x 33 *(tune)*) forms round the hole from thousands of segments. Its vent mode is a generator. Its last recipe takes the seed wave packet, the genome archive, stream bundles and a charged case 14 network. As built in v0.17.0 it bursts the mirror, returns `grindless:universe_seed` and rolls the credits; revised, it stabilises the horizon and makes the key output MAX+ needs (*State*).
+9. **The mirror.** The mirror shell (about 33 x 33 x 33 *(tune)*) forms round the hole from thousands of segments. Its vent mode is a generator.
+10. **The stationary horizon.** The horizon interferometer (machine 11) reads the trapped wave and the cloud it feeds; the ergoregion synchroniser (12) builds the phase locks that hold the wave at the horizon's rotation; the flux clamp (13) winds the coils that keep the horizon's magnetic flux below the eruption threshold; the reclamation works (14) returns worn segments. The shell's last recipe takes seed wave packets, stream bundles, the final spin map, the cloud phase map, phase locks and clamp windings on 2^35 EU/t, stabilises the horizon and makes `grindless:horizon_lock`, the key output MAX+ needs. Its first output grants `maxplus` (*The ending*; maxplus.md *Route*). Nothing bursts and no credits roll: they move to the end of MAX+.
 
 ## Inherited, as built
 
@@ -190,6 +191,10 @@ Nothing is mined by hand. The platform's deck is not a quarry.
 | 8 | `gtceu:mirror_shell` | `sgr_a_spin_map` | 8 field generator, 8 sensor, 8 emitter, 4 robot arm | `superconducting_membrane`, `stream_bundle`, `rydberg_logic_array` |
 | 9 | `gtceu:cluster_light_furnace` | `nsc_ephemeris` | 4 pump, 4 fluid regulator, 2 field generator | `albedo_multilayer_panel`, `exotic_composite_rod`, `diamond_power_die`, `sealed_hearth_liner` |
 | 10 | `gtceu:accretion_feeder` | `slag_pellet` | 4 field generator, 4 emitter, 4 sensor | `xuv_collector_panel`, `wolter_mirror_module`, `max_field_coil` |
+| 11 | `gtceu:horizon_interferometer` | `gravitational_reference_sensor` | 8 sensor, 4 emitter, 4 field generator | `bonded_optical_bench`, `stabilised_npro_laser`, `phasemeter_board`, `feep_thruster` |
+| 12 | `gtceu:ergoregion_synchroniser` | `srf_driver_module` | 8 field generator, 4 emitter, 4 sensor | `tunable_impedance_sheet`, `phase_lock_oscillator_bank`, `rydberg_logic_array` |
+| 13 | `gtceu:horizon_flux_clamp` | `hts_flux_pump` | 8 field generator, 4 motor, 4 conveyor | `max_field_coil`, `stream_bundle`, `diamond_power_die`, `cold_fcl_module` |
+| 14 | `gtceu:segment_reclamation_works` | `mirror_shell_segment` | 4 robot arm, 4 conveyor, 4 sensor | `superconducting_membrane`, `sc_magnetic_bearing`, `max_field_coil` |
 
 Each has at least 8 tier components from at least 3 families and at least 4 tier circuits (kubejs_static.mjs rules :266-289). Machine 2 waits for no sensor, and machine 3 for no conveyor, sensor or field generator, because those components need machines 2 and 3 (*Bootstrap check*). The research item for machine 6 is `horizon_tether` (L20), made on the UHV tether ribbon works and the UXV stellar elevator (its Cygnus X-1 row); the tether wear row is on the winch itself. Machine 1 consumes `quantum_memory_node` but does not make it: L23 ends on older machines.
 
@@ -263,9 +268,9 @@ Format as in opv.md: what it gains, recipes, byproducts, structure (QR), crossin
 
 ### 4. Gene ark (home)
 
-**Gains.** DNA as long-term storage: 5.27 Mbit written in DNA (Church 2012, Science 337:1628), error-coded (Goldman 2013, Nature 494:77) and kept in silica for millennia (Grass 2015, Angew Chem 54:2552). At MAX it holds every living line of the pack (biofoundry, organoid labs, ark biosphere, xenobotany) as `genome_archive`, one of the inputs of the last recipe: the seed of what comes after carries life.
+**Gains.** DNA as long-term storage: 5.27 Mbit written in DNA (Church 2012, Science 337:1628), error-coded (Goldman 2013, Nature 494:77) and kept in silica for millennia (Grass 2015, Angew Chem 54:2552). At MAX it holds every living line of the pack (biofoundry, organoid labs, ark biosphere, xenobotany) as `genome_archive`. Since RF-7A the archive is no longer a MAX last-recipe input: it is the payload of MAX+'s Hyperstargate, the one thing that crosses the horizon with the player (maxplus.md *The Hyperstargate*).
 
-**Recipes.** c1 `genome_archive` (L12 last step): 4 `encapsulated_genome_library` (aerogel works, L12 step 5) + `rydberg_logic_array` (the index) + `vitrified_cell_capsule` (L28: a minimal cell that can boot the archive, Gibson 2010, Science 329:52) + 1,000 mB superfluid He-3; VA[MAX], 2,400 t *(tune)*. c2 copy: 1 archive + 4 `synthetic_oligo_pool` → 2 archives (DNA is copied by PCR; Church 2012); VA[MAX], 1,200 t *(tune)*.
+**Recipes.** c1 `genome_archive` (L12 last step): 4 `encapsulated_genome_library` (aerogel works, L12 step 5) + `rydberg_logic_array` (the index) + `vitrified_cell_capsule` (L28: a minimal cell that can boot the archive, Gibson 2010, Science 329:52) + 1,000 mB superfluid He-3; VA[MAX], 2,400 t *(tune)*. c2 copy: 1 archive **kept** as the template + 4 `synthetic_oligo_pool` + 1 `encapsulated_genome_library` → 1 archive (DNA is copied by PCR, Church 2012; the template is not consumed, so the row no longer returns more archives than it takes: RF-0D flagged the v0.17.0 row `genome_archiving/genome_copy`, 1 in and 2 out, as `self_gain`, docs/reforge/00_diagnosis.md:53); VA[MAX], 1,200 t *(tune)*.
 
 **Byproducts.** Spent nucleotide reagent → biofoundry row (recycled). Silica fines → glass dust.
 
@@ -329,25 +334,26 @@ Format as in opv.md: what it gains, recipes, byproducts, structure (QR), crossin
 
 ### 8. Mirror shell (Sgr A* orbit, generator and the way into MAX+)
 
-**Gains.** The black hole bomb: a reflecting shell round a spinning hole traps waves with frequency below m·Ω_H; each pass through the ergoregion amplifies them, so the energy grows until the mirror fails (Press and Teukolsky 1972, Nature 238:211; Cardoso 2004, PRD 70:044039; Zel'dovich 1971). It is the largest multiblock of the pack so far, a generator and the way into MAX+ (in v0.17.0, the ending; *State*).
+**Gains.** The black hole bomb, held short of bursting: a reflecting shell round a spinning hole traps waves with frequency below m·Ω_H, and each pass through the ergoregion amplifies them (Press and Teukolsky 1972, Nature 238:211; Cardoso 2004, PRD 70:044039; Zel'dovich 1971). Left alone the energy grows until the mirror fails (the v0.17.0 ending). With a controlled leak (the vent), a drive locked at the horizon's rotation (machine 12) and the horizon's flux held still (machine 13), the growth saturates instead: the field settles into a stationary cloud co-rotating with the horizon, ω = m·Ω_H, the end state numerical relativity finds for the superradiant instability (East and Pretorius 2017, PRL 119:041101) and the condition for a Kerr hole with synchronised hair (Herdeiro and Radu 2014, PRL 112:221101). A horizon held stationary in that way, mapped and addressable, is what MAX+'s Hyperstargate dials (*pack fiction*: no paper claims a stationary horizon can be crossed). The shell is the largest multiblock of MAX, a generator and the way into MAX+.
 
-**Physics.** Sgr A*: M = 4.3e6 solar masses; GM/c^3 = 21.2 s; r_g = 6.35e9 m. Spin a = 0.9 is *pack fiction* (EHT 2024, ApJL 964:L25-L26 favour a spinning MAD but measure no exact a). Then r_+ = 1.436 r_g, Ω_H = a c / (2 r_+) ≈ 0.0148 rad/s, f = Ω_H / 2π ≈ 2.35 mHz, a wavelength of at least 1.27e11 m. A mirror must sit well beyond the wave's own size: at about 20 r_g (1.3e11 m, 0.85 AU). Rotational energy (1 − √((1 + √(1 − a²))/2)) Mc² = 15.3% Mc² ≈ 1.2e53 J. Starlight is negligible; the flow's luminosity of about 1e29 W gives about 4.9e5 W/m² (350 suns) at the shell, so the shell needs radiators. The plasma frequency (ω_p = 5.64e4 √n_e rad/s) is far above Ω_H, so the plasma itself reflects low-frequency light (Pani and Loeb 2013, PRD 88:041301; Conlon and Herdeiro 2018, PLB 780:169). That the shell clears its interior of plasma with the skimmer and mass filter rows is *named fiction*; the superconducting mirror is.
+**Physics.** Sgr A*: M = 4.3e6 solar masses; GM/c^3 = 21.2 s; r_g = 6.35e9 m. Spin a = 0.9 is *pack fiction* (EHT 2024, ApJL 964:L25-L26 favour a spinning MAD but measure no exact a). Then r_+ = 1.436 r_g, Ω_H = a c / (2 r_+) ≈ 0.0148 rad/s, f = Ω_H / 2π ≈ 2.35 mHz, a wavelength of at least 1.27e11 m. A mirror must sit well beyond the wave's own size: at about 20 r_g (1.3e11 m, 0.85 AU). Rotational energy (1 − √((1 + √(1 − a²))/2)) Mc² = 15.3% Mc² ≈ 1.2e53 J. Starlight is negligible; the flow's luminosity of about 1e29 W gives about 4.9e5 W/m² (350 suns) at the shell, so the shell needs radiators. The plasma frequency (ω_p = 5.64e4 √n_e rad/s) is far above Ω_H, so the plasma itself reflects low-frequency light (Pani and Loeb 2013, PRD 88:041301; Conlon and Herdeiro 2018, PLB 780:169). That the shell clears its interior of plasma with the skimmer and mass filter rows is *named fiction*; the superconducting mirror is. A stationary m = 1 cloud radiates a continuous gravitational wave at twice its own frequency, about 4.7 mHz here (Arvanitaki 2015, PRD 91:084011; Brito 2017, PRL 119:131101): that is what machine 11 reads.
 
 **Recipes.**
 
-- c1 vent (generator): 1 `seed_wave_packet` (L18) → 2^30 EU/t out for 4,800 t *(tune)*; the packet's growth stops before it can burst the mirror (balance about 2.3x *(tune)*).
+- c1 vent (generator): 1 `seed_wave_packet` (L18) → 2^30 EU/t out for 4,800 t *(tune)*; the vent is the controlled leak, and each run wears a `horizon_phase_lock` with chance 1/64 *(tune)* (→ `spent_phase_lock`, machine 12 c2) and ablates one `ablated_shell_segment` with chance 1/16 *(tune)* (→ machine 14). Balance about 2.2x with the wear *(tune)*.
 - c2 `final_spin_map`: `sgr_a_spin_map` + `shell_gradient_map` → `final_spin_map`; VA[MAX], 1,200 t.
-- c3 **the last recipe** (*The ending*).
+- c3 **the last recipe, horizon stabilisation** (*The ending*): makes `grindless:horizon_lock`.
+- c4 condensate tap: a MAX+ row on this controller, with a `horizon_lock` kept as catalyst (maxplus.md *Older machines in MAX+*).
 
-**Byproducts.** Vent: `spent_wave_packet` → nothing (the wave leaves as light; inert). Ablated segments → `mirror_shell_scrap` → cluster-light furnace row (returns truss).
+**Byproducts.** Vent: `spent_wave_packet` → nothing (the wave leaves as light; inert). Ablated segments → machine 14, which returns truss (`mirror_shell_scrap` → cluster-light furnace c4), membrane, cryocooler, coupler, Sn-Li and electronics streams. c3: `spent_rydberg_array` (→ machine 1 c2) and `spent_phase_lock` (→ machine 12 c2). Nothing is voided.
 
-**Structure.** About 33 x 33 x 33 *(tune)*, a hollow shell of `grindless:mirror_shell_segment` blocks (F1) round an empty core, with `grindless:stream_bundle_block` rings and the controller at its equator. A segment is truss + membrane + albedo panel + droplet radiator + `shell_cryocooler` (L30) + `segment_controller` (L38) + `halbach_segment_coupler` (L37), assembled on the UHV swarm segment foundry (uhv/swarm.js:67) as a new mode at VA[MAX] (G1 row; an assembly, so not a crossing; segments are blocks, so no circuit is required; casing exemption as in OpV). Thousands of segments: a structure built over hours, by AE2 and robots, not one at a time. Needs P (MAX_ROWS 64) and S0-7.
+**Structure.** About 33 x 33 x 33 *(tune)*, a hollow shell of `grindless:mirror_shell_segment` blocks (F1) round an empty core, with `grindless:stream_bundle_block` rings and the controller at its equator. A segment is truss + membrane + albedo panel + droplet radiator + `shell_cryocooler` (L30) + `segment_controller` (L38) + `halbach_segment_coupler` (L37) + `tunable_impedance_sheet` (L50, added by RF-7A: the impedance layer that lets the mirror leak at a controlled rate), assembled on the UHV swarm segment foundry (uhv/swarm.js:67) as a new mode at VA[MAX] (G1 row; an assembly, so not a crossing; segments are blocks, so no circuit is required; casing exemption as in OpV). Thousands of segments: a structure built over hours, by AE2 and robots, not one at a time. As built: MAX_ROWS 64 (P) and the ring layout of DECISIONS.md:689.
 
-**Crossings.** L18 (clock lab, SRF, mK cryostat) and through its segment chain L13, L15, L30, L37, L38.
+**Crossings.** L18 (clock lab, SRF, mK cryostat) and through its segment chain L13, L15, L30, L37, L38, L50.
 
-**Risks.** Server cost of a 33-cube scan (S0-7).
+**Risks.** Server cost of a 33-cube scan (S0-7). The stationary horizon is pack fiction built on real superradiance physics; quest text marks it.
 
-**Source.** Press and Teukolsky 1972; Cardoso 2004; Brito, Cardoso and Pani 2015 LNP 906; Penrose 1969; Christodoulou 1970, PRL 25:1596.
+**Source.** Press and Teukolsky 1972; Cardoso 2004; Brito, Cardoso and Pani 2015 LNP 906; East and Pretorius 2017; Herdeiro and Radu 2014; Penrose 1969; Christodoulou 1970, PRL 25:1596.
 
 ### 9. Cluster-light furnace (NSC belt)
 
@@ -382,6 +388,70 @@ Format as in opv.md: what it gains, recipes, byproducts, structure (QR), crossin
 **Risks.** At game feed rates real matter would join the hot, radiatively inefficient flow, not a thin disk (Yuan and Narayan 2014): the cool, magnetically held ring is *named fiction*. S0-13 proves a fifth generator forms at Sgr A* and its output reaches case 14.
 
 **Source.** Bardeen 1970; Novikov and Thorne 1973; Shakura and Sunyaev 1973, A&A 24:337; Weisskopf 2000, Proc SPIE 4012:2 (Wolter optics, iridium coating).
+
+### 11. Horizon interferometer (Sgr A* orbit; RF-7A)
+
+**Gains.** A laser interferometer between free-falling test masses, the LISA design (Amaro-Seoane 2017, arXiv:1702.00786; LISA Pathfinder showed the free fall, Armano 2016, PRL 116:231101), is the only instrument that hears the 0.1-10 mHz band, where the stationary cloud's continuous gravitational wave sits (about 4.7 mHz, machine 8 *Physics*). It is the only source of `cloud_phase_map`, the measured phase of the cloud, without which no lock can be built or checked. It is the last step of the observatory family (journey.md *The families*): the photon ring imager saw the hole, this one hears what the shell does to it.
+
+**Recipes.** c1 `cloud_phase_map`: 3 `gravitational_reference_sensor` (L47) + 3 `bonded_optical_bench` (L48) + 3 `stabilised_npro_laser` (L56) + 12 `feep_thruster` (L49) + 2 `phasemeter_board` (L57) + `final_spin_map` (kept) → 1 `cloud_phase_map`; VA[MAX], 2,400 t *(tune)*; only after the shell's c1 has run (the map needs a cloud to hear). c2 calibration: 4 `phase_lock_oscillator_bank` (L55) + `cloud_phase_map` (kept) → 4 `calibrated_oscillator_bank` (→ machine 12); VA[MAX], 600 t *(tune)*. Dimension Sgr A* orbit.
+
+**Byproducts.** Each c1 wears 12 thrusters → `spent_feep_crown` → EB furnace row (porous tungsten back, L49) and the indium they spent leaves as ions (inert, lost to space). Test masses and benches are returned with chance 3/4 *(tune)* as `used_reference_sensor` / `used_optical_bench` → c1 again with one fresh sensor (the honest destination of a re-used instrument).
+
+**Structure.** 21 x 5 x 21 *(tune)*: a triangle of three `grindless:test_mass_enclosure_casing` (F1) corner stations joined by `grindless:laser_link_casing` arms. The real arms are 2.5e6 km and are not modelled.
+
+**Crossings.** L47 (platinum plant, levitation melter, MTJ, MOCVD), L48 (zone refining, MTJ, photonic foundry), L49 (extraction cascade, zone refining, EB furnace), L56 (crystal growth, MOCVD, fibre draw, photonic foundry), L57 (zone refining, implanter, BEUV).
+
+**Risks.** Its products are measurements; each is an item consumed by c3 or by machine 12, never a quest token (the photon ring imager's rule). The cloud's signal is real physics; that it is loud enough to phase-lock from the shell is *pack fiction*.
+
+**Source.** Amaro-Seoane 2017; Armano 2016; Arvanitaki 2015; Brito 2017.
+
+### 12. Ergoregion synchroniser (Sgr A* orbit; RF-7A)
+
+**Gains.** It turns the bomb into a stationary cloud: a ring of superconducting RF drivers, phase-locked to cryogenic sapphire oscillators and matched to the shell through tunable vanadium-dioxide metasurfaces, drives the trapped mode at exactly m·Ω_H and damps every other mode (the synchronisation condition, Herdeiro and Radu 2014). It is the only source of `horizon_phase_lock`, the item c3 needs sixteen of and the vent wears.
+
+**Recipes.** c1 `horizon_phase_lock`: 2 `srf_driver_module` (L51) + 2 `calibrated_oscillator_bank` (machine 11 c2) + 4 `tunable_impedance_sheet` (L50) + 1 `quantum_memory_node` (L23) + 500 mB superfluid He-3 → 1 lock; VA[MAX], 1,200 t *(tune)*. c2 relock: `spent_phase_lock` + 1 `calibrated_oscillator_bank` → `horizon_phase_lock` (the drivers survive; the oscillator drifts); VA[MAX], 600 t *(tune)*. Dimension Sgr A* orbit.
+
+**Byproducts.** Fatigued metasurfaces (VO2 cycles through its insulator-metal transition and cracks) → `fatigued_vo2_sheet` with chance 1/8 per c1 *(tune)* → extraction cascade row (vanadium pentoxide back, L50 step 1).
+
+**Structure.** 19 x 7 x 19 *(tune)*: a ring of `grindless:driver_ring_casing` (F1) round a cold core of sapphire oscillators.
+
+**Crossings.** L50 (extraction cascade, crystal growth, oxide PLD, BEUV, MTJ), L51 (single crystal foundry, SRF works, superfluid He plant), L55 (crystal growth, He refrigerator, clock lab, photonic foundry); consumes L23.
+
+**Risks.** Synchronised hair needs an ultralight boson field; here the field is the trapped light held by the mirror: *named fiction*. The drivers, oscillators and metasurfaces are real technology.
+
+**Source.** Herdeiro and Radu 2014; East and Pretorius 2017; Posen and Hall 2017, SUST 30:033004 (Nb3Sn cavities); Locke 2008, Rev Sci Instrum 79:051301 (cryogenic sapphire oscillators); Driscoll 2009, Science 325:1518 (VO2 metamaterials).
+
+### 13. Horizon flux clamp (Sgr A* orbit; RF-7A)
+
+**Gains.** Sgr A* is magnetically arrested (EHT 2024, ApJL 964:L26): magnetic flux piles on the horizon until it saturates and erupts in reconnection flares (Tchekhovskoy, Narayan and McKinney 2011, MNRAS 418:L79; Dexter 2020, MNRAS 497:4999; Ripperda 2022, ApJL 924:L32). A stationary horizon needs stationary flux. The clamp winds and charges a ring of stream-supported superconducting coils with HTS flux pumps (Coombs 2019, SUST 32:023001) that hold the horizon's flux below the eruption threshold. It is the only source of `horizon_flux_clamp` windings, eight of which c3 consumes.
+
+**Recipes.** c1 `horizon_flux_clamp`: 4 `hts_flux_pump` (L54) + 8 `max_field_coil` (L9) + 4 `stream_bundle` (machine 7) + 2,000 mB `flux_loaded_frc` (L16) → 1 winding + 1 `reconnection_plasmoid`; VA[MAX], 2,400 t *(tune)*. Dimension Sgr A* orbit.
+
+**Byproducts.** `reconnection_plasmoid` (the flares the clamp suppresses come out as captured plasma) → plasma mass filter row (UXV) → `filtered_hot_flow` (L16 step 2). The clamp makes plasmoids whether they are used or not, so this is a destination, not the second route to the FRC that *Considered and dropped* rejects.
+
+**Structure.** 23 x 7 x 23 *(tune)*: a ring of `grindless:clamp_coil_casing` (F1) on `stream_bundle_block` supports.
+
+**Crossings.** L54 (coated conductor, oxide PLD, HTS works, nitride magnet works, He refrigerator); consumes L9 and L16.
+
+**Risks.** A coil at AU scale is *named fiction*; the MAD state, its flux saturation and its flares are measured or simulated physics.
+
+**Source.** Tchekhovskoy 2011; Dexter 2020; Ripperda 2022; EHT 2024; Coombs 2019.
+
+### 14. Segment reclamation works (Sgr A* orbit; RF-7A)
+
+**Gains.** Rule 3 at rule 2 quantities: the vent ablates segments, and each segment holds eight expensive line products. The works strips them where they fail, in one structure: it cold-strips the membrane, drains the Sn-Li droplet loop, pulls the Er3Ni regenerator out of the cryocooler, demagnetises and lifts the tetrataenite coupler, cuts out the electronics and sorts the truss. Nothing older can open a cold superconducting segment; before RF-7A only the truss came back.
+
+**Recipes.** c1 1 `ablated_shell_segment` → 1 `mirror_shell_scrap` (truss) + 1 `stripped_membrane_scrap` (L52) + 1 `cryocooler_scrap` (L53) + 1 `coupler_scrap` + 1 `sn_li_dross` + 1 `segment_electronics_scrap` + 1 `fatigued_vo2_sheet`; VA[MAX], 600 t *(tune)*. Dimension Sgr A* orbit.
+
+**Byproducts.** Every output has a destination: truss → cluster-light furnace c4; membrane → L52; cryocooler → L53; coupler → GTM electromagnetic separator row → `tetrataenite_concentrate` (L37 step 3, never melted); Sn-Li → extraction cascade row → `sn_li_eutectic` (L15 step 1); electronics → GTM arc furnace → silicon and carbon (the rest inert); VO2 → machine 12's extraction row.
+
+**Structure.** 15 x 9 x 15 *(tune)*: a docking bay of `grindless:reclamation_bay_casing` (F1) with a cold strip line.
+
+**Crossings.** L52 (biofoundry, extraction cascade), L53 (extraction cascade).
+
+**Risks.** A recycling machine can look like padding. It is the only destination of seven part streams, every output feeds a real chain, and it gains several steps in one at a site where nothing else can open the part.
+
+**Source.** Reed 2016, Hydrometallurgy 166:34 (bioleaching of rare earths); the segment parts' own sources (L30, L37, L38, L50).
 
 ## Older machines in MAX
 
@@ -477,41 +547,69 @@ Rows on older machines are added to that machine's own table or script by the na
 | Extraction cascade (EV); platinum plant (EV) | L30 (H1), L32 (A2), L34 (B1), L35 (A2), L36 (R1); L42 (E1) |
 | Regolith cell (ev/regolith_cell.js:118); hot strip mill (ev/combined_cycle_and_hot_mill.js:237) | L25 (E1); L34 (B1) |
 
+**Rows added by RF-7A** (L47-L57 and the byproduct rows of machines 11-14). Format: line (Reforge package, *Build order*). All at home unless a site is named. Every machine is already in the 71; none is new to MAX.
+
+| Machine | New rows |
+|---|---|
+| MTJ (UXV) | L47 (MX-S1), L48 (MX-S1), L50 (MX-S2) |
+| Oxide PLD (UXV) | L50 (MX-S2), L54 (MX-S3) |
+| Plasma mass filter (UXV, Sgr A*) | `reconnection_plasmoid` return (MX-S3; not a line step) |
+| Levitation melter (UIV); BEUV (UIV) | L47 (MX-S1); L50 (MX-S2), L57 (MX-S1) |
+| EB furnace (UEV); single crystal foundry (UEV); nitride magnet works (UEV) | L49 and the `spent_feep_crown` return (MX-S1); L51 (MX-S2); L54 (MX-S3) |
+| Crystal growth (UHV); clock lab (UHV); photonic foundry (UHV) | L50, L55 (MX-S2), L56 (MX-S1); L55 (MX-S2); L48, L56 (MX-S1), L55 (MX-S2) |
+| MOCVD (UV); zone refining (UV); fibre draw (UV) | L47, L56 (MX-S1); L48, L49, L57 (MX-S1); L56 (MX-S1) |
+| SRF works (UV); superfluid helium plant (UV) | L51 (MX-S2); L51 (MX-S2) |
+| Ion implanter (ZPM) | L57 (MX-S1) |
+| Coated conductor (LuV); HTS works (LuV); He refrigerator (LuV); biofoundry (LuV) | L54 (MX-S3); L54 (MX-S3); L54 (MX-S3), L55 (MX-S2); L52 (MX-S4) |
+| Extraction cascade (EV); platinum plant (EV) | L49 (MX-S1), L50 and the VO2 return (MX-S2), L52, L53 and the Sn-Li return (MX-S4); L47 (MX-S1) |
+
 ## The MAX family
 
 Nine components (`grindless:max_*`), one circuit (`gtnn:supracausal_mainframe`), the hull and 29 GTM parts, one parallel hatch (`grindless:max_parallel_hatch`, M1), one cable (`gtceu:horizon_strand`), case 14 wireless (W). No basic single-block machines: GTM registers none at MAX and adding them would be padding (rule 7, convenience versions do not count).
 
 ## Reserve for MAX+
 
-MAX is the last GTM tier, so MAX+ means content after MAX, not a new voltage; since 2026-10-31 the pack ends there, beyond the Hyperstargate (*State*). Kept, unused:
+MAX is the last GTM tier, so MAX+ means content after MAX at MAX voltage, not a new voltage (GTValues.java:107-108). Since 2026-10-31 the pack ends at the end of MAX+, beyond the Hyperstargate; MAX+ is designed in `docs/eras/maxplus.md`. What MAX hands over:
 
-- `grindless:universe_seed` (the last recipe's output) and `grindless:max_epilogue` (the credits book): Reforge Phase 7 reworks or removes them when it sets MAX+'s key output and moves the credits to the end of MAX+.
-- Intergalactic travel (Andromeda, the Magellanic Clouds), the Hyperstargate (journey.md *The end*), hypervelocity stars as couriers: MAX+.
-- Sgr A*'s magnetar (SGR J1745−2900), the PeVatron, the Fermi bubbles: listed under *Considered and dropped* and free for MAX+.
+- `grindless:horizon_lock` (the last recipe's output, the key MAX+ needs): kept by gate c16, the shell's c4 and the Hyperstargate controller, consumed by the Hyperstargate's nine chevron blocks (maxplus.md).
+- The mirror shell's c4 condensate tap, a MAX+ row on a MAX controller (maxplus.md *Older machines in MAX+*).
+- `grindless:genome_archive`: the Hyperstargate's payload.
+- Sgr A* orbit as the Hyperstargate's site.
+- Removed by RF-7A (no save compatibility, DECISIONS.md:701): `grindless:universe_seed`, with its recipe, info page, lang and test references. Moved: `grindless:max_epilogue` becomes `grindless:epilogue`, given at the MAX+ arrival; the `WIN_GAME` mechanism of `startup_scripts/grindless/max/shell.js:151-157` moves with it (MX-E1, then maxplus.md package XP-Z1).
+- Intergalactic travel (the Hills slingshot, dropped machine 11 below) and the hypervelocity star idea are MAX+ (maxplus.md *Bridges*).
 - GT--'s `gtnn:component_assline_casing_max` and `gtmutils:max_64a_energy_converter`: hidden (other mods' ids).
 
 ## Considered and dropped
 
-Machines (14 short of the guideline of 24; each one named):
+**Open question 1, answered with evidence (RF-7A, 2026-11-01).** The owner rejected "accept 10 / 46 / 167, no padding". Evidence read for the answer:
 
-1. **GKP photonic state fab** (Bourassa 2021, Quantum 5:392). A second route to OpV's photonic logic (rule 3).
-2. **Squeezed-light works.** The chip is needed before any MAX machine exists (circuits), so it is line L5 on older machines.
-3. **Segment foundry.** A segment is an assembly of seven line products; the UHV swarm segment foundry takes a mode (G1). An assembly machine gains nothing.
-4. **Zel'dovich rig** (Cromb 2020, Nat Phys 16:1069). Its output is a measurement: a data chain.
-5. **Tidal mill.** The tidal gradient 2GM/r^3 is 4.5e-3 s^-2 at r_g and 5.6e-7 s^-2 at the shell's 20 r_g, below Earth's own 3.1e-6 s^-2: nothing to mill with.
-6. **Pilot black hole bomb at Cygnus X-1.** A second ending and a second route to the vent.
-7. **Redshift clock array.** Clocks near the hole measure redshift: data.
-8. **Wolf-Rayet wind scoop** (IRS 16 stars). A second route to UXV's gas products.
-9. **SGR J1745−2900 magnetar station** (Mori 2013, ApJL 770:L23). OpV already has a magnetar (SGR 1806−20); MAX+ reserve.
-10. **PeVatron proton harvester** (HESS 2016, Nature 531:476). Energy from a field with no fuel (rule 8).
-11. **Hypervelocity star courier / Hills launcher** (Hills 1988, Nature 331:687). Travel out of the galaxy: MAX+.
-12. **Dark-matter spike detector, monopole catcher, axion haloscope.** Nothing detected: unproven physics, or data only.
-13. **Circumnuclear disk, minispiral or tidal-disruption gas scoop.** A second route to hot flow and to UXV's gas.
-14. **Cluster starlight net** in the inner parsec. Energy with no fuel (rule 8); the furnace already uses that light as a process.
+1. RF-0D measured MAX at 10 own multiblocks, 46 lines and 167 crossings against a guide of about 24, 68 and 212 (docs/reforge/00_diagnosis.md:53).
+2. MAX's industrial volume sits on older machines by design: 78 older machines take MAX rows, against 46 in UXV and 49 in OpV (*State* table). A new MAX machine that took over one of those steps would delete a crossing and duplicate a route; rule 7 weighs lines and crossings above machine counts, so that trade makes the era smaller, not bigger.
+3. Each of the 14 dropped machines below was re-read under the Reforge rules (AGENTS.md:12-20). Twelve reasons still hold (second route, data, rule 8, unproven physics, no physical gradient). One changes place: the Hills launcher (11) is now MAX+ travel. One stays dropped for a new reason: the pilot bomb (6) would be a second route to the stationary cloud.
+4. Three Reforge changes create real MAX work the 2026-10-30 design could not have: the new ending (a stationary horizon needs a sensor, an actuator and a flux clamp, machines 11-13); rule 2 (the shell's segments become expensive enough that losing seven of their eight parts is a rule 3 failure, machine 14); and rule 3 at that scale (the membrane recycling chain, dropped line 20, now returns raw materials instead of remaking L2, so it becomes L52).
 
-Also considered and turned into something else, so not in the 14: a cold core mill (the asteroid processor, cryogenic plant and GTM separator do it: L37); a hot-flow diverter (a skimmer row); a microcomb foundry and a SMES works (lines L29, L27 on older machines); a BSW collider (Bañados, Silk and West 2009, PRL 103:111102: high collision energy, no product); a mass driver (logistics); a plasmoid catcher (a second route to the FRC); the Fermi bubble collector (MAX+); a MAX mega member (*Nothing one at a time*), laser hatches (GTM registers none) and a MAX fusion tier (*Fusion*).
+**Result.** 14 machines, 57 lines (292 steps), 204 crossings on 71 machines. **Remaining gap:** 10 machines, 11 lines, 8 crossings. Reason: every remaining candidate below is a second route, a data chain, energy without fuel, unproven physics or an assembly, and each further MAX machine found by moving a step off an older machine would lower crossings. The weight after MAX is carried by MAX+, which is designed as its own, larger era rather than by padding MAX.
 
-Lines (22 short of 68). Each names the crossings it would have brought; they sum to 47, which covers the 45 missing (212 − 167).
+Machines (10 short of the guideline of 24; each candidate named):
+
+1. **GKP photonic state fab** (Bourassa 2021, Quantum 5:392). A second route to OpV's photonic logic (rule 3). *Holds.*
+2. **Squeezed-light works.** The chip is needed before any MAX machine exists (circuits), so it is line L5 on older machines. *Holds.*
+3. **Segment foundry.** A segment is an assembly of eight line products; the UHV swarm segment foundry takes a mode (G1). An assembly machine gains nothing; the reclamation works (machine 14) is its honest counterpart because disassembly is real processing. *Holds.*
+4. **Zel'dovich rig** (Cromb 2020, Nat Phys 16:1069). Its output is a measurement: a data chain; machine 11 measures what the last recipe actually consumes. *Holds.*
+5. **Tidal mill.** The tidal gradient 2GM/r^3 is 4.5e-3 s^-2 at r_g and 5.6e-7 s^-2 at the shell's 20 r_g, below Earth's own 3.1e-6 s^-2: nothing to mill with. *Holds.*
+6. **Pilot black hole bomb at Cygnus X-1.** Before 2026-10-31 a second ending; now a second route to the stationary cloud. *Holds, new reason.*
+7. **Redshift clock array.** Clocks near the hole measure redshift: data. *Holds.*
+8. **Wolf-Rayet wind scoop** (IRS 16 stars). A second route to UXV's gas products. *Holds.*
+9. **SGR J1745−2900 magnetar station** (Mori 2013, ApJL 770:L23). OpV already has a magnetar (SGR 1806−20). *Holds; not used by MAX+ either.*
+10. **PeVatron proton harvester** (HESS 2016, Nature 531:476). Energy from a field with no fuel (rule 8). *Holds.*
+11. **Hypervelocity star courier / Hills launcher** (Hills 1988, Nature 331:687). *Moved:* MAX+'s Hills slingshot (maxplus.md machine 3).
+12. **Dark-matter spike detector, monopole catcher, axion haloscope.** Nothing detected: unproven physics, or data only. *Holds.*
+13. **Circumnuclear disk, minispiral or tidal-disruption gas scoop.** A second route to hot flow and to UXV's gas. *Holds.*
+14. **Cluster starlight net** in the inner parsec. Energy with no fuel (rule 8); the furnace already uses that light as a process. *Holds.*
+
+Also considered and turned into something else, so not in the list: a cold core mill (the asteroid processor, cryogenic plant and GTM separator do it: L37); a hot-flow diverter (a skimmer row); a microcomb foundry and a SMES works (lines L29, L27 on older machines); a BSW collider (Bañados, Silk and West 2009, PRL 103:111102: high collision energy, no product); a mass driver (logistics); a plasmoid catcher (a second route to the FRC; the flux clamp's plasmoids are its byproduct, not a route); the Fermi bubble collector (rule 8, not used by MAX+); a MAX mega member (*Nothing one at a time*), laser hatches (GTM registers none) and a MAX fusion tier (*Fusion*). Considered by RF-7A and dropped: a LISA-class constellation as three machines (one structure, machine 11); a spin-up injector that feeds angular momentum back (the accretion feeder already accretes at the ISCO: second route); a blueshift gamma forge on the Geroch tether (no MAX consumer; it becomes MAX+'s blueshift forge at M31*, where the tides allow it); a horizon dilation vault (it needs an item-decay mechanic GTM does not have).
+
+Lines (11 short of 68). Each names the crossings it would have brought; the 21 still dropped sum to 45, which covers the 8 missing (212 − 204).
 
 | # | Candidate | Would cross | Cr | Why not |
 |---|---|---|---|---|
@@ -534,10 +632,10 @@ Lines (22 short of 68). Each names the crossings it would have brought; they sum
 | 17 | Per-era waste canister variants | waste retrieval, decay heat vault | 2 | one canister (L17) takes all waste |
 | 18 | MAX coolant line (He-3/He-4 dilution) | superfluid He plant, He refrigerator | 2 | OpV's superfluid He-3 is enough: padding |
 | 19 | Minispiral gas line | disk skimmer, plasma mass filter | 2 | second route to hot flow (machine 13) |
-| 20 | Membrane recycling chain | EB furnace, coated conductor | 2 | a macerator row returns carbon; a chain would remake L2 |
+| 20 | ~~Membrane recycling chain~~ | EB furnace, coated conductor | (2) | *taken by RF-7A as L52*: at rule 2 cost it returns raw rare earths, barium and copper to the start of older chains instead of remaking L2; not counted in the total |
 | 21 | Horizon strand plate and foil | megabar press | 1 | no consumer |
 | 22 | Segment, probe and seed assemblies | swarm segment foundry | 1 | assemblies, not feedstock |
-| | **Total** | | **47** | |
+| | **Total (21 still dropped)** | | **45** | |
 
 ## Power
 
@@ -621,41 +719,56 @@ Each step is a real transformation (≥4 per line). Cr counts crossings with UXV
 | L44 | Photonic local oscillator (Ito 2004, IEEE JSTQE 10:709) | MOCVD → `inp_utc_epi_wafer`; BEUV → `utc_photodiode_wafer`; GTM chemical reactor (BCB planarisation and passivation) → `passivated_utc_wafer`; GTM cutter → `utc_die`; photonic foundry → `photonic_lo_module` (→ imager c1) | 5 | 3 | D2 |
 | L45 | Cryogenic IF amplifier | crystal growth (LEC Fe:InP) → `semi_insulating_inp_wafer`; MBE → `inp_hemt_epi`; BEUV → `hemt_gate_wafer`; GTM cutter → `hemt_die`; He refrigerator → `cryo_tested_lna`; GTM assembler → `cryo_lna_module` (→ imager c1) | 6 | 4 | D2 |
 | L46 | Crossed AOD pair (Bluvstein 2022, Nature 604:451) | crystal growth → `teo2_boule`; GTM cutter → `teo2_aod_blank`; TFLN → `ln_transducer_bonded_blank`; MTJ → `electroded_aod`; GTM assembler → `crossed_aod_pair` (→ Rydberg c1) | 5 | 3 | B3 |
-| | **Total** | | **232** | **167** | |
+| L47 | Gravitational reference sensor (Armano 2016) | platinum plant → `gr_platinum_sponge`; levitation melter (Au-Pt 73/27, a low-susceptibility alloy) → `au_pt_ingot`; GTM lathe → `au_pt_test_mass`; MTJ (gold coat) → `coated_test_mass`; MOCVD (AlGaN UV LEDs for charge control) → `uv_led_die`; GTM assembler → `gravitational_reference_sensor` (→ machine 11) | 6 | 4 | MX-S1 |
+| L48 | Bonded optical bench (Elliffe 2005, CQG 22:S257) | zone refining → `ultrapure_silica_plate`; GTM electric furnace (ceramisation to a zero-expansion glass-ceramic) → `zero_expansion_baseplate`; MTJ → `coated_bench_optics`; GTM chemical bath (hydroxide-catalysis bonding) → `hydroxide_bonded_bench`; photonic foundry (fibre injectors) → `bonded_optical_bench` (→ machine 11) | 5 | 3 | MX-S1 |
+| L49 | FEEP micro-thruster (indium field emission) | extraction cascade → `indium_sulfate`; zone refining → `six_n_indium`; EB furnace (from `gtceu:tungsten_dust`, not the molten loop) → `porous_tungsten_crown`; GTM chemical bath (vacuum indium wetting) → `wetted_emitter_crown`; GTM assembler → `feep_thruster` (→ machine 11) | 5 | 3 | MX-S1 |
+| L50 | Tunable impedance sheet (Driscoll 2009) | extraction cascade → `vanadium_pentoxide`; crystal growth → `sapphire_web_wafer`; oxide PLD → `vo2_on_sapphire`; BEUV → `patterned_vo2_metasurface`; MTJ → `metallised_metasurface`; GTM assembler → `tunable_impedance_sheet` (→ segment, machine 12) | 6 | 5 | MX-S2 |
+| L51 | Nb3Sn SRF driver (Posen and Hall 2017) | single crystal foundry → `large_grain_nb_disc`; SRF works → `nb_driver_cell`; GTM chemical bath (electropolish) → `polished_driver_cell`; GTM electric blast furnace (tin vapour diffusion) → `nb3sn_driver_cell`; superfluid helium plant (conduction cooling) → `conduction_cooled_cell`; GTM assembler → `srf_driver_module` (→ machine 12) | 6 | 3 | MX-S2 |
+| L52 | REBCO reclamation (Reed 2016) | reclamation works c1 → `stripped_membrane_scrap`; biofoundry (bioleaching) → `bioleached_re_liquor`; extraction cascade (solvent extraction) → `y_ba_cu_raffinate`; GTM chemical reactor (oxalate co-precipitation) → `ybco_oxalate`; GTM electric furnace (calcination) → `ybco_precursor_powder` (→ L32 step 2) | 5 | 2 | MX-S4 |
+| L53 | Erbium regenerator return | reclamation works c1 → `cryocooler_scrap`; GTM macerator (Er3Ni is brittle) → `er3ni_grit`; GTM electromagnetic separator → `er_rich_fraction`; extraction cascade (leach and solvent extraction) → `er_ho_oxide` (→ L30 step 1) | 4 | 1 | MX-S4 |
+| L54 | HTS flux pump (Coombs 2019) | coated conductor → `pump_buffered_tape`; oxide PLD → `thick_pump_tape`; HTS works → `flux_pump_stator`; nitride magnet works → `fe16n2_rotor_magnet`; He refrigerator → `cold_flux_pump`; GTM assembler → `hts_flux_pump` (→ machine 13) | 6 | 5 | MX-S3 |
+| L55 | Phase-lock oscillator bank (Locke 2008) | crystal growth (HEM sapphire) → `sapphire_resonator_disc`; GTM lathe → `polished_sapphire_disc`; He refrigerator → `cryo_sapphire_oscillator`; clock lab (steered to the clock) → `clock_steered_oscillator`; photonic foundry → `optical_phase_lock_unit`; GTM assembler → `phase_lock_oscillator_bank` (→ machine 11 c2) | 6 | 4 | MX-S2 |
+| L56 | Stabilised NPRO laser | crystal growth (Czochralski Nd:YAG) → `nd_yag_boule`; GTM cutter → `npro_crystal`; MOCVD → `gaas_808_pump_bar`; fibre draw → `yb_doped_fibre`; photonic foundry → `stabilised_npro_laser` (→ machine 11) | 5 | 4 | MX-S1 |
+| L57 | Rad-hard phasemeter | zone refining → `fz_silicon_rod`; GTM cutter → `fz_wafer`; ion implanter (SIMOX oxygen implant) → `simox_soi_wafer`; BEUV → `rad_hard_fpga_wafer`; GTM cutter → `fpga_die`; GTM assembler → `phasemeter_board` (→ machine 11) | 6 | 3 | MX-S1 |
+| | **Total** | | **292** | **204** | |
 
-**Fiction marks.** *Named fiction*: the NSC belt; horizon strand near c^4/4G; superconducting membranes at shell scale; clearing the shell's interior plasma; the cluster-light furnace's concentration; nodes as a quantum telescope; the feeder's cool, magnetically held ring; slow-cooled tetrataenite-bearing iron cores in the belt (tetrataenite is real in meteorites and disorders above about 320 °C, so L37 never melts it). *Pack fiction*: Sgr A*'s spin a = 0.9; the universe seed. Everything else cites a paper. Older-machine functions in L25-L46 are read from the machines' names and file lines; each package checks its row against the machine's real recipe type first (S0-12).
+**Fiction marks.** *Named fiction*: the NSC belt; horizon strand near c^4/4G; superconducting membranes at shell scale; clearing the shell's interior plasma; the cluster-light furnace's concentration; nodes as a quantum telescope; the feeder's cool, magnetically held ring; slow-cooled tetrataenite-bearing iron cores in the belt (tetrataenite is real in meteorites and disorders above about 320 °C, so L37 never melts it). *Pack fiction*: Sgr A*'s spin a = 0.9; the stationary, addressable horizon and its `horizon_lock`. *Named fiction* added by RF-7A: synchronised hair from trapped light (machine 12) and an AU-scale flux clamp (machine 13). Everything else cites a paper. Older-machine functions in L25-L46 are read from the machines' names and file lines; each package checks its row against the machine's real recipe type first (S0-12).
 
 ## Crossings
 
 | Era | Crossings | Machines |
 |---|---|---|
-| UXV | 25 | draw bench 1, vdW cell 1, MTJ 11, SHeQUID 3, skimmer 1, mass filter 1, FRC former 1, BZ dynamo 1, stellar elevator 1, oxide PLD 2, YIG LPE 1, racetrack fab 1 (12) |
-| UIV | 26 | TFLN 5, femto 6, BEUV 5, mK cryostat 4, levitation melter 3, droplet works 1, SHB 1, decay heat vault 1 (8) |
-| UEV | 26 | calutron 2, QGL 3, SNSPD 1, SiC fibre 2, CVI 5, EB furnace 3, carbonyl 1, megabar 2, degenerate harvester 1, nitride magnet works 3, single crystal foundry 3 (11) |
-| UHV | 32 | PBO 3, crystal growth 7, MBE 3, SiC fab 2, SPS 5, xenobotany 1, clock lab 2, tether ribbon 1, solar vapour furnace 1, betavoltaic fab 1, solar array fab 1, xenobiochem 1, radiotrophic vat 1, photonic foundry 2, high flux reactor 1 (15) |
-| UV | 15 | MOCVD 6, zone refining 3, ark biosphere 1, SRF 2, fibre draw 2, superfluid He plant 1 (6) |
-| ZPM | 12 | diamond lattice 2, implanter 3, aerogel 3, waste retrieval 1, magnet works 1, vent bioreactor 1, plasma quench caster 1 (7) |
-| LuV | 18 | coated conductor 4, HTS works 4, He refrigerator 6, biofoundry 2, organoid lab 1, asteroid processor 1 (6) |
+| UXV | 30 | draw bench 1, vdW cell 1, MTJ 14, SHeQUID 3, skimmer 1, mass filter 1, FRC former 1, BZ dynamo 1, stellar elevator 1, oxide PLD 4, YIG LPE 1, racetrack fab 1 (12) |
+| UIV | 29 | TFLN 5, femto 6, BEUV 7, mK cryostat 4, levitation melter 4, droplet works 1, SHB 1, decay heat vault 1 (8) |
+| UEV | 29 | calutron 2, QGL 3, SNSPD 1, SiC fibre 2, CVI 5, EB furnace 4, carbonyl 1, megabar 2, degenerate harvester 1, nitride magnet works 4, single crystal foundry 4 (11) |
+| UHV | 39 | PBO 3, crystal growth 10, MBE 3, SiC fab 2, SPS 5, xenobotany 1, clock lab 3, tether ribbon 1, solar vapour furnace 1, betavoltaic fab 1, solar array fab 1, xenobiochem 1, radiotrophic vat 1, photonic foundry 5, high flux reactor 1 (15) |
+| UV | 23 | MOCVD 8, zone refining 6, ark biosphere 1, SRF 3, fibre draw 3, superfluid He plant 2 (6) |
+| ZPM | 13 | diamond lattice 2, implanter 4, aerogel 3, waste retrieval 1, magnet works 1, vent bioreactor 1, plasma quench caster 1 (7) |
+| LuV | 23 | coated conductor 5, HTS works 5, He refrigerator 8, biofoundry 3, organoid lab 1, asteroid processor 1 (6) |
 | IV | 1 | hot cell (1) |
-| EV | 12 | extraction cascade 7, platinum plant 2, regolith cell 1, hot strip mill 1, cryogenic plant 1 (5) |
-| **Total** | **167** | **71 machines** |
+| EV | 17 | extraction cascade 11, platinum plant 3, regolith cell 1, hot strip mill 1, cryogenic plant 1 (5) |
+| **Total** | **204** | **71 machines** |
+
+RF-7A added 37 (L47-L57): UXV 5, UIV 3, UEV 3, UHV 7, UV 8, ZPM 1, LuV 5, EV 5; no new machine.
 
 ## Quests
 
-About 40 *(tune)* short English quests in one chapter `max` (generated by `tools/quests/`; integrator writes the chapter). Small rewards (a MAX circuit, a cell, segments), never a gate on a recipe (rule 5). Sections: way in (chart, strand, hull); circuits and components; home machines; the probe and arrival; Sgr A* machines; the belt; horizon work; the shell (one quest per 25% of segments *(tune)*); the last recipe. Quest text names the physics in one line each, with fiction marked.
+Rule 5 was revised on 2026-10-31 (DECISIONS.md, Reforge rule 5): advanced eras get longer, more numerous chapters that teach every new wafer, circuit, process and multiblock: what it is for, how it is made, what it needs, what it unlocks and how to automate it. The v0.17.0 chapter (about 40 short quests) is rebuilt by Reforge Phase 5 on the six-chapter shape of docs/research/quest-books.md section 5. Target for MAX *(tune)*: about 70 age quests (way in; circuits and components; home machines; the probe and arrival; Sgr A* machines; the belt; horizon work; the shell, one quest per 25% of segments; the stabilisation machines 11-14; the last recipe and the horizon lock), plus one tracked-item quest per line intermediate in process-line chapters (about 290 for L1-L57, the Star Technology pattern). Rewards are proportionate (a cell, segments, a phase lock) and never skip a line or gate a recipe. The last MAX quest is the horizon lock and points to MAX+; it rolls no credits. Quest text names the physics in one line each, with fiction marked.
 
 ## The ending
 
-**Revised 2026-10-31 (owner decision; Reforge Phase 7 implements it):** the last recipe no longer bursts the mirror or ends the universe. It stabilises or opens Sagittarius A\*'s horizon and produces the key output MAX+ needs; the credits, epilogue and ending text move to the arrival in MAX+'s final dimension (journey.md *The end*). The rest of this section is the v0.17.0 build. The mirror shell's c3, **the last recipe**: needs the full structure formed, and consumes:
+**The last recipe of MAX: horizon stabilisation** (owner decision, DECISIONS.md:702; designed by RF-7A, built by MX-E1). It no longer bursts the mirror or ends the universe. The mirror shell's c3 needs the full structure formed and every segment in place, and consumes *(tune; rule 2 counts, Phase 2 calibrates)*:
 
-- 1 `seed_wave_packet`, 1 `genome_archive`, 16 `stream_bundle` *(tune)*, 1 `final_spin_map`, 1 `rydberg_logic_array` (returned as `spent_rydberg_array`);
-- 2^35 EU/t (V[MAX] x 16 A) for 1,200 t *(tune)*: 41,231,686,041,600 EU, on two `gtceu:max_energy_input_hatch_16a` fed by wireless case 14 (one charged `max_smes_cell` holds it). Fallback 2^33 x 4,800 t (S0-2).
+- 4 `seed_wave_packet` (L18), 64 `stream_bundle` (machine 7), 1 `final_spin_map` (c2), 1 `cloud_phase_map` (machine 11), 16 `horizon_phase_lock` (machine 12), 8 `horizon_flux_clamp` (machine 13), 1 `rydberg_logic_array` (returned as `spent_rydberg_array`);
+- 2^35 EU/t (V[MAX] x 16 A) for 1,200 t *(tune)*: 41,231,686,041,600 EU, on two `gtceu:max_energy_input_hatch_16a` fed by wireless case 14 (one charged `max_smes_cell` holds it). This is the as-built c3 power row (`server_scripts/grindless/max/shell.js:38`, `eut: V_MAX * 16`, 1,200 t); MX-E1 keeps it and changes only inputs and outputs.
 
-Output: `grindless:universe_seed` and 64 `mirror_shell_scrap` *(tune)* (the mirror fails; the scrap returns to the furnace, rule 3). The wave escapes as light and gravitational radiation: the shell is spent, the hole spun down a little (*pack fiction*: that a "new universe" is seeded is Smolin 1992 cosmological natural selection, named and not claimed). The structure stays formed; the recipe can be run again (no lockout, no creative ending: journey.md *What other packs do*).
+Output: 1 `grindless:horizon_lock` + 1 `spent_rydberg_array` + 16 `spent_phase_lock` (→ machine 12 c2). No scrap: the mirror holds. The first output in a world grants the stage `maxplus` (the same grant mechanism as `max-sgra`); no credits, no title, no book.
 
-**Galactic scale.** Sgr A*'s rotational energy at a = 0.9, about 1.2e53 J, is some 400 million years of the whole Milky Way's light (about 1e37 W); a Kardashev type III civilisation commands about 4e37 W (Kardashev 1964, Sov Astron 8:217; Griffith 2015, ApJS 217:25). The pack does not claim the player drains it: what is measured in game is the case 14 network the last recipe drains (41,231,686,041,600 EU) and the spin-down the final spin map records. A real mirror at 2.35 mHz would need a conductor thicker than copper's skin depth there (about 1.35 m); the superconducting membrane is the shell's *named fiction*. Intergalactic travel, creative tools and the hyper stargate stay MAX+ (*Reserve*).
+**What the lock is.** The shell has pumped the trapped wave into a stationary cloud co-rotating with the horizon, the drivers hold it at m·Ω_H and the clamp holds the horizon's flux below the eruption threshold. The horizon is then still: its spin, flux and phase are fixed and measured. `horizon_lock` is that measurement sealed into a superconducting reference (*pack fiction*: physics gives a stationary hairy hole, East and Pretorius 2017, Herdeiro and Radu 2014; it does not give a crossable horizon). It is the key output MAX+ needs: gate c16 and the shell's c4 keep one as a catalyst, the Hyperstargate's controller keeps one as its dial and its nine chevron blocks consume one each (maxplus.md *The Hyperstargate*), so c3 runs at least twelve times. The recipe stays repeatable; it never removes the structure.
 
-**Credits (v0.17.0; they move to the end of MAX+).** On the first output, G1's server script sends the vanilla `WIN_GAME` game event (end-poem and credits). If S0-9 shows the client screen does not open, or the respawn after it fails (`ServerPlayer.wonGame` must be true for `PERFORM_RESPAWN` to act), the fallback is: the FTB chapter's last quest, a title, a written book `grindless:max_epilogue` and a monument block. Neither changes game mode.
+**Galactic scale.** Sgr A*'s rotational energy at a = 0.9, about 1.2e53 J, is some 400 million years of the whole Milky Way's light (about 1e37 W); a Kardashev type III civilisation commands about 4e37 W (Kardashev 1964, Sov Astron 8:217; Griffith 2015, ApJS 217:25). The pack does not claim the player drains it: what is measured in game is the case 14 network the last recipe drains and the spin the final spin map records. A real mirror at 2.35 mHz would need a conductor thicker than copper's skin depth there (about 1.35 m); the superconducting membrane is the shell's *named fiction*.
+
+**What leaves MAX.** `grindless:universe_seed` is removed with every reference (recipe, info page, lang, tests). The credits (`WIN_GAME`, proven on a client by gg_test_max_credits, bench i39, DECISIONS.md:693), the title, the epilogue book (`grindless:max_epilogue` renamed `grindless:epilogue`) and the last quest move to the arrival in MAX+'s final dimension (maxplus.md *The ending*). The `WIN_GAME` code in `startup_scripts/grindless/max/shell.js:151-157` is removed by MX-E1 and re-used by XP-Z1 (proof reuse: same packet, same client screen).
 
 ## Validator
 
@@ -688,7 +801,7 @@ GTM registers no MAX components, basic machines, parallel hatch, wireless, laser
 
 ## Save compatibility
 
-Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Two facts from it still hold:
+Dropped 2026-10-31 (Project Reforge, DECISIONS.md:701): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). RF-7A's changes follow that rule: `universe_seed` is removed and `max_epilogue` renamed with no conversion recipe or notice; the shell's c3 changes its outputs in place. Two facts from the old section still hold, as plain facts rather than save rules:
 
 - GT--'s other supracausal items and SMDs stay registered (GT-- owns them) and hidden.
 - `gtnn:supracausal_mainframe` is our circuit.
@@ -738,6 +851,29 @@ Every gate, travel and controller input with where it is first made. "Before" = 
 No home recipe takes a Sgr A* or belt product before its substage: `shell_gradient_map` (machine 2 c2) and `final_spin_map` are made after `max-sgra` and used only at Sgr A*.
 
 ## Build order
+
+### Reforge packages (RF-7A, 2026-11-01): run these, in this order
+
+The v0.17.0 packages below (S0 to C3) are shipped and kept as the record of how MAX was built. Reforge work on MAX is these ten packages, one Sonnet session each, under AGENTS.md *Work packages* (T0 before every commit; T1 only where named; at most 2 repairs). MAX route fixes come first because the cost matrix cannot price MAX today: every MAX component, hatch and controller is "unreachable" (docs/reforge/01_cost_matrix.md, *Outliers*), blocked by the tungsten / `field_can` loop and by items with no recipe (01_cost_matrix.md:317), so Phase 2 cannot calibrate MAX to its target index 178,814 (DECISIONS.md:708) until they land.
+
+| # | Id | Scope | Likely files | Depends on | Tests |
+|---|---|---|---|---|---|
+| 1 | **MX-R1** Tungsten loop | `gtceu:tungsten` fluid has no producer but the loop: `field_can` takes 288 mB and `field_can_remelt` returns 1,152 mB (`tables/electron_beam.json:97-102`). Read why GTM's own tungsten fluid route is absent from the dump, then give the can a primary route (GTM fluid extraction of tungsten ingots if it exists at the right tier, else our extractor row from `gtceu:tungsten_ingot`), keep the remelt as a return. Re-run `cost-matrix.mjs --trace` on `grindless:field_canned_stack` and one MAX component. | `tables/electron_beam.json` or the OpV field press table; one OpV server script if a row moves | — | T0; T1 none (a recipe row on a proven machine) |
+| 2 | **MX-R2** Unpriceable chains | Trace every MAX key item the matrix lists as unreachable (`max_*` components, `gtceu:max_energy_input_hatch*`, the ten controllers, `horizon_strand_single_wire`) and the OpV and UIV items in their chains (`gtceu:opv_field_generator`, `extendedfeatures:opv_universal_circuit`, `gtceu:r_process_decompressor`, rx_j1856.js:184). Fix each blocker with a real primary route, never with `excludeRecipes` for a chain that is meant to exist; list any that belong to another era's Phase 3 package and stop there. | the OpV/UIV/MAX tables the trace names | MX-R1 | T0; `--trace` output in the handoff; matrix shows a MAX core index |
+| 3 | **MX-F1** Ids | Register the RF-7A ids: controllers 11-14, `test_mass_enclosure_casing`, `laser_link_casing`, `driver_ring_casing`, `clamp_coil_casing`, `reclamation_bay_casing`, every L47-L57 intermediate, `cloud_phase_map`, `calibrated_oscillator_bank`, `horizon_phase_lock`, `spent_phase_lock`, `horizon_flux_clamp`, `reconnection_plasmoid`, `ablated_shell_segment`, the seven reclamation outputs, `horizon_lock`; names in en_us and es_es. | `startup_scripts/grindless/max/foundation.js`, `tables/max_ids.json`, `client_scripts/grindless/max_*_lang.js` | — | T0 |
+| 4 | **MX-S1** Horizon interferometer | Machine 11 (shape, c1, c2), L47, L48, L49, L56, L57, the thruster and instrument returns. | `max/horizon_interferometer.js` (new, startup and server; `max/interferometer.js` is machine 2), the named older tables | MX-F1, MX-R1 | T0; T1 `gg_test_max_interferometer`: forms at Sgr A*, c1 runs |
+| 5 | **MX-S2** Ergoregion synchroniser | Machine 12 (c1, c2), L50, L51, L55, the VO2 return; the segment recipe gains `tunable_impedance_sheet`. | `max/synchroniser.js` (new), the swarm segment foundry row (`max/shell.js` G1 segment mode), the named older tables | MX-F1 | T0; T1 `gg_test_max_synchroniser` |
+| 6 | **MX-S3** Flux clamp | Machine 13 (c1), L54, the plasmoid return on the UXV mass filter. | `max/flux_clamp.js` (new), `tables/cygnus_lift.json` (1 row), the named older tables | MX-F1 | T0; T1 `gg_test_max_flux_clamp` |
+| 7 | **MX-S4** Segment reclamation | Machine 14 (c1), L52, L53, the Sn-Li, coupler and electronics returns; the vent's `ablated_shell_segment` chance replaces the v0.17.0 scrap output. | `max/reclamation.js` (new), `max/shell.js` (vent row only), the named older tables | MX-F1 | T0; T1 `gg_test_max_reclamation` |
+| 8 | **MX-E1** Ending rework | c3 as in *The ending* (inputs, outputs, `maxplus` grant); remove `universe_seed` and its references; rename `max_epilogue` to `epilogue` and remove the `WIN_GAME`/book/title code from `startup_scripts/grindless/max/shell.js:151-157` (XP-Z1 re-adds it at the MAX+ arrival); gene ark c2 with the archive kept (the `self_gain` fix); the archive leaves c3. | `max/shell.js` (startup and server), `max/gene_ark.js`, `max/foundation.js`, lang, EMI info page, `tools/test/overlay/.../gg_test_max_shell.js`, the obtain and hidden tables' `universe_seed` rows | MX-S1, MX-S2, MX-S3, MX-S4 | T0; T1 `gg_test_max_shell`: c3 at 2^35 outputs the lock and grants `maxplus` (one named uncertainty: the stage grant) |
+| 9 | **MX-C1** Validator | `tiers/max.json` re-count 14 / 57 (292 steps) / 204 on 71 machines; c3 still the only 2^35 row besides c14 and c15; every generator 1.3-2.5x with the new wear; no MAX recipe consumes `horizon_lock` (only MAX+ does). | `tools/analysis/tiers/max.json`, `tools/analysis/test/max-validator.test.mjs` | MX-E1 | T0 |
+| 10 | **MX-C2** Quests input | The quest list of *Quests* as data for Phase 5 (no chapter writing; the integrator generates). | `tools/quests/max-chapter/` data only | MX-C1 | T0 (quest lint) |
+
+**Parallel and serial.** MX-R1 → MX-R2 is serial (one trace). MX-F1 runs beside MX-R1. MX-S1 to MX-S4 run in parallel after MX-F1 (at most two at once under the efficiency pilot; their older-table rows have one owner each, so the second to merge rebases). MX-E1 waits for all four; MX-C1 and MX-C2 follow. Phase 2's MAX cost row runs after MX-R2 and before MX-E1 so c3's counts are calibrated once.
+
+**Bootstrap for 11-14.** Controllers 11-14 take only MAX components, older-line products and `rydberg_logic_array` / `stream_bundle` / `superconducting_membrane` already made before them; machine 11 c1 needs the shell's c1 to have run (a cloud to hear), machine 12 needs machine 11 c2, machine 13 needs machine 7 and L16, machine 14 needs the vent. c3 needs all four. No controller consumes its own product.
+
+### v0.17.0 build (shipped)
 
 Workers and sessions are unlimited (owner approval): a package starts as soon as every package in its **Depends on** has merged, and *Parallel and serial* lists the earliest wave for each. Dependencies are behaviour only (a product, a place, a component the package's recipes or tests need); ids never create a dependency, because F1 registers every cross-package id and every MAX circuit offset first. Only two things stay limited: the bench (three T1 slots on the Linux VM; extra T1 runs queue, bands assigned by the integrator) and the shared libraries (M1 then P, each alone on `lib/`, integrator-run). An OpV change is a MAX package that names the OpV package it waits for.
 
@@ -1104,19 +1240,24 @@ Peak width is five (wave 2); the critical path is S0, F1, F2, A0, A2, B1, A3, B3
 - 2026-10-30 MAX fiction: the NSC belt, horizon strand, shell-scale superconducting membranes, interior plasma clearing, cluster-light concentration, the feeder's injection ring (named fiction); Sgr A* spin 0.9 and the universe seed (pack fiction).
 - QR-MAX: as QR-OpV with MAX components (≥8 from ≥3 families) and four MAX circuits; casings and segments assembler rows; each of the 10 structures passes the rubric; each new type gets its `loop_<machine>`.
 - QR-MAX gate tiers (F2, integrator): `eraTier` `max: 14`; `complexFloor` `"14": 8` *(tune)*; `max` in process_audit `ERAS`/`TIER_ERA`; `recipe_quality.mjs:228` to tiers 10-14.
+- 2026-11-01 MAX size (RF-7A, open question 1 answered): 14 multiblocks, 57 lines (292 steps), 204 crossings on 71 machines. Added: horizon interferometer, ergoregion synchroniser, horizon flux clamp, segment reclamation works (all Sgr A* orbit) and L47-L57. Remaining gap to ~24 / ~68 / ~212 is 10 / 11 / 8; every candidate is named with its reason; moving older-machine steps onto new MAX machines is rejected because it lowers crossings.
+- 2026-11-01 MAX ending (RF-7A; supersedes the 2026-10-30 MAX ending line): the shell's c3 stabilises the horizon and outputs `grindless:horizon_lock` (kept by gate c16 and shell c4, consumed by the Hyperstargate) on the as-built 2^35 x 1,200 t row; its first output grants `maxplus`; no scrap, no credits. `universe_seed` is removed; `max_epilogue` becomes `epilogue`; `WIN_GAME` moves to the MAX+ arrival; the genome archive moves from c3 to the Hyperstargate; gene ark c2 keeps its template (no `self_gain`).
+- 2026-11-01 MAX Reforge order: MX-R1 (tungsten loop), MX-R2 (unpriceable chains), MX-F1, MX-S1-S4, MX-E1, MX-C1, MX-C2; route fixes first so Phase 2 can price MAX.
 
-**CREDITS lines proposed:** GCYR (LGPL-3.0): `black_hole_orbit` dimension used as a place (and its sky settings copied in the fallback, credited). GT-- (AGPL): `gtnn:supracausal_mainframe` used in game, none of its code. GTMUtils: item hidden only. Physics sources are cited in each machine section.
+**CREDITS lines proposed:** GCYR (LGPL-3.0): `black_hole_orbit` dimension used as a place (and its sky settings copied in the fallback, credited). GT-- (AGPL): `gtnn:supracausal_mainframe` used in game, none of its code. GTMUtils: item hidden only. Physics sources are cited in each machine section. RF-7A adds no mod and copies nothing; the LISA, Nb3Sn, sapphire-oscillator, VO2 and flux-pump sources are papers.
 
 ## Open questions
 
-1. **10 / 46 / 167 against ~24 / ~68 / ~212?** **Default: accept, no padding**: lines and crossings exceed OpV; the 14 machines, 22 lines and 45 crossings still missing are each named with a reason under *Considered and dropped*. A further pass only if the owner rejects one of those reasons.
-2. **If S0-2 fails, the last recipe at 2^33 for 4,800 t?** **Default: yes**, same EU.
+1. **10 / 46 / 167 against ~24 / ~68 / ~212?** *Answered 2026-11-01 (owner rejected "accept"; RF-7A):* 14 / 57 / 204 with four machines and eleven lines from the new ending and rules 2 and 3; the rest stays a stated gap (*Considered and dropped*). New question: **accept 14 / 57 / 204?** **Default: yes.** If yes: MAX is built from MX-R1 to MX-C2 and the growth goes to MAX+. If no: the next candidates are dropped machines whose reason is weakest (3, segment foundry, as several steps in one; 6, pilot bomb at Cygnus, as a calibration rig), each adding one machine and removing no crossing, but both are near the convenience and second-route lines rule 7 excludes.
+2. **If S0-2 fails, the last recipe at 2^33 for 4,800 t?** *Settled:* the as-built row is 2^35 x 1,200 t (`server_scripts/grindless/max/shell.js:38`).
 3. **`gcyr:black_hole_orbit` or our own dimension?** **Default: GCYR's** if S0-1 passes.
-4. **A mega member for MAX?** **Default: no**; the x1,048,576 hatch serves the existing members.
+4. **A mega member for MAX?** **Default: no**; the x1,048,576 hatch serves the existing members. MAX+ gets the Hyperfactory (maxplus.md).
 5. **x1,048,576 or x262,144 for the MAX hatch?** **Default: x1,048,576** if S0-6 passes.
 6. **Shell size 33-cube or 25-cube?** **Default: 33** if S0-7 passes.
-7. **Credits on the last recipe, every run or the first?** **Default: first run per player**. *Superseded 2026-10-31: the credits move to the arrival at the end of MAX+.*
+7. **Credits on the last recipe, every run or the first?** *Superseded 2026-10-31:* the credits move to the arrival at the end of MAX+ (maxplus.md open questions).
 8. **Sgr A* spin a = 0.9?** **Default: yes**, marked pack fiction.
 9. **Generator balance band 1.3-2.5x?** **Default: yes**, C1 enforces it.
-10. **~40 quests?** **Default: yes** *(tune)*.
+10. **~40 quests?** *Superseded by Reforge rule 5:* about 70 age quests plus process-line quests (*Quests*); Phase 5 sets the number.
 11. **Hull row on GCYM's large assembler?** **Default: yes**; GTM's assembler if the large one rejects the casing.
+12. **How many horizon locks does MAX+ use?** **Default: 12** (kept: one by gate c16, one by shell c4, one by the Hyperstargate controller as its dial; consumed: one per chevron block, nine). If fewer (1): c3 runs once, the lock is a pure key, and MAX's last recipe stops being a repeated industrial load. If more (one per ring block): c3 becomes the MAX+ bottleneck at 2^35 per lock, a rule 2 cost that turns MAX+'s pace into a single machine's queue.
+13. **Is the stabilisation gated on all four new machines, or on the synchroniser alone?** **Default: all four** (sensor, actuator, flux, maintenance). If the synchroniser alone: machines 11, 13 and 14 lose their last-recipe role and the count drops back to 11 multiblocks.
