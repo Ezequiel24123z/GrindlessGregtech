@@ -117,6 +117,27 @@
     addLiquidParaHydrogen(event)
     addNeonSixN(event)
     addSpinFeedRows(event)
+    addOpvRows(event)
+  }
+
+  // OpV-B3a (lines 26 and 31): two cuts keyed by their one input. Krypton (the tripler cell's gas, and the laser's spent charge coming back)
+  // is cleaned of its argon; the tritium of the ACMF pellet's DT fill is cold-trapped and its helium-3 ingrowth taken off.
+  var OPV_ROWS = [
+    { name: 'krypton_purification', label: 'krypton purification', eut: 7680, duration: 300,
+      input: { id: 'gtceu:krypton', amount: 1000 },
+      outputs: [{ id: 'grindless:purified_krypton', amount: 950 }, { id: 'gtceu:argon', amount: 50 }] },
+    { name: 'tritium_cold_trap', label: 'tritium cold trap', eut: 7680, duration: 400,
+      input: { id: 'gtceu:tritium', amount: 1000 },
+      outputs: [{ id: 'gtceu:tritium', amount: 940 }, { id: 'gtceu:helium_3', amount: 60 }] },
+    { name: 'dt_fill_conditioning', label: 'DT fill conditioning', eut: 7680, duration: 400,
+      input: { id: 'grindless:dt_fill', amount: 1000 },
+      outputs: [{ id: 'grindless:cold_dt_fill', amount: 1000 }] }
+  ]
+  function addOpvRows(event) {
+    OPV_ROWS.forEach(function (row) {
+      addCryoRow(event, { id: 'grindless:cryogenic_processing/' + row.name, eut: row.eut, duration: row.duration, input: row.input, outputs: row.outputs },
+        row.name, row.label)
+    })
   }
 
   // UXV-A2 (docs/eras/uxv.md, "Cryogenic plant"): four rows keyed by their one input. The plant has one fluid slot in, so the second inputs

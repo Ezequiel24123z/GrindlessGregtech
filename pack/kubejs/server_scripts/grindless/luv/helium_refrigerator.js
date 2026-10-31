@@ -317,6 +317,27 @@
       HR.skipped.map(function (s) { return s.source + ' (' + s.reason + ')' }).join(', ') : ''))
   }
 
+  // OpV-B3a line 27: the potted octupole winding cooled down in the loop (a keyed row: the winding, 25 mB liquid helium make-up, 50 mB liquid
+  // nitrogen precool, the 4,000 mB charge not consumed) before its quench training in the HTS works
+  function addOctupoleRow(event) {
+    var cfg = config()
+    var ids = ['grindless:potted_octupole_winding', 'grindless:cooled_octupole_winding']
+    var missing = ids.filter(function (id) { return !Item.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'closed_loop_cooling octupole row skipped, unknown item(s): ' + missing.join(', '))
+      return
+    }
+    event.recipes.gtceu.closed_loop_cooling('grindless:octupole_winding_cooldown')
+      .itemInputs('1x grindless:potted_octupole_winding')
+      .inputFluids(Fluid.of(cfg.makeUp.id, cfg.makeUp.amount))
+      .inputFluids(Fluid.of(cfg.precoolIn.id, cfg.precoolIn.amount))
+      .notConsumableFluid(Fluid.of(cfg.charge.id, cfg.charge.amount))
+      .itemOutputs('1x grindless:cooled_octupole_winding')
+      .outputFluids(Fluid.of(cfg.precoolOut.id, cfg.precoolOut.amount))
+      .addDataString(DATA_KEY, 'octupole_winding_cooldown')
+      .EUt(7680).duration(600)
+  }
+
   // ---------------------------------------------------------------- crafting
 
   function addController(event) {
@@ -338,6 +359,11 @@
       generate(event)
     } catch (e) {
       console.error(LOG + 'closed_loop_cooling recipe generation failed: ' + e)
+    }
+    try {
+      addOctupoleRow(event)
+    } catch (e3) {
+      console.error(LOG + 'closed_loop_cooling octupole row failed: ' + e3)
     }
     try {
       addController(event)

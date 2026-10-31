@@ -81,7 +81,10 @@
           "itemsOut": [{ "id": "grindless:glassy_carbon_lattice", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
         { "_why": "UXV-A3 (uxv.md line 38): the W-184 wire (GTM's wiremill row) infiltrated from methane into a fibre preform; the hydrogen goes back to stock. Circuit 5 (1-4 are older rows).", "name": "w184_fibre_preform", "circuit": 5, "eut": 1966080, "duration": 4800,
           "itemsIn": [{ "id": "gtceu:tungsten_184_single_wire", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:w184_cvi_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
+          "itemsOut": [{ "id": "grindless:w184_cvi_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
+        { "_why": "OpV-B3a line 27: the REBCO octupole winding potted by chemical vapour infiltration (a carbon matrix from methane holds the turns against the quench forces); the hydrogen goes back to stock.", "name": "octupole_potting", "circuit": 9, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:octupole_winding", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:potted_octupole_winding", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
       ]
     },
     "chemical_reactor": {

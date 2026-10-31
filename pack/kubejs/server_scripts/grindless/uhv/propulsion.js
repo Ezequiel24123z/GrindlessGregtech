@@ -87,6 +87,10 @@
   TABLE.push(row('nb_target', 'spark_plasma_sintering', 6, [item('gtceu:niobium_dust', 4)], [], [item('grindless:nb_target', 1)], [], UHVA, 500))
   TABLE.push(row('w_target', 'spark_plasma_sintering', 7, [item('gtceu:tungsten_dust', 4)], [], [item('grindless:w_target', 1)], [], UHVA, 500))
 
+  // OpV-B3a line 32 (circuit 15; 8-14 are other lines' rows): the tungsten and the boron-10 carbide sintered into the gamma absorber tile
+  TABLE.push(row('gamma_absorber_tile', 'spark_plasma_sintering', 15,
+    [item('grindless:w_b4c_powder', 1)], [], [item('grindless:gamma_absorber_tile', 1)], [], UHVA, 600))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

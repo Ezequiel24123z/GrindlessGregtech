@@ -96,6 +96,23 @@
       fluidsIn: [{ id: 'gtceu:ethanol', amount: 500 }], notConsumedFluids: [{ id: 'gtceu:carbon_dioxide', amount: 1000 }],
       itemsOut: [{ id: 'grindless:ps_converter_aerogel', count: 2 }], fluidsOut: [{ id: 'gtceu:ethanol', amount: 500 }],
       eut: LUV_VA, duration: 800
+    },
+    // OpV-B3a line 28 (circuit 5): graphite feed for pressure alignment; the circuit occupies the pyrolyser's one item slot.
+    {
+      name: 'hopg_blank', type: 'methane_pyrolysis', circuit: 5,
+      itemsIn: [], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:methane', amount: 2000 }], notConsumedFluids: [{ id: 'gtceu:tin', amount: 1000 }, { id: 'gtceu:nickel', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:pyrolytic_graphite', count: 2 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 4000 }],
+      eut: ZPM_VA, duration: 900
+    },
+    // OpV-B3a line 28: the worn HOPG (the strained offcut of the electron beam's cleaving) re-annealed in the bath into a blank again;
+    // keyed by the offcut itself (circuit 0)
+    {
+      name: 'hopg_reanneal', type: 'methane_pyrolysis', circuit: 0,
+      itemsIn: [{ id: 'grindless:hopg_offcut', count: 1 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:methane', amount: 500 }], notConsumedFluids: [{ id: 'gtceu:tin', amount: 1000 }, { id: 'gtceu:nickel', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:hopg_blank', count: 1 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 1000 }],
+      eut: ZPM_VA, duration: 600
     }
   ]
 

@@ -72,7 +72,16 @@
           "itemsOut": [{ "id": "grindless:ga2o3_gated_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
         { "_why": "UXV-A3 (uxv.md line 47; c29): the mu-metal blend melted to an ingot; the skull goes back to the melt.", "name": "mu_metal_ingot", "circuit": 29, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "grindless:mu_metal_blend", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:mu_metal_ingot", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:mu_metal_ingot", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-B3a line 28 (c21): the HOPG blanks zone-refined and cleaved into plates; the strained edge strip is the worn HOPG, re-annealed in the pyrolyser.", "name": "hopg_plate", "circuit": 21, "eut": 1966080, "duration": 500,
+          "itemsIn": [{ "id": "grindless:hopg_blank", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:hopg_plate", "count": 3 }, { "id": "grindless:hopg_offcut", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
+        { "_why": "OpV-B3a line 31 (c22): the W-Re alloy melted round the Cm-245 fraction into the hohlraum can; the skull goes back to the melt.", "name": "hohlraum_can", "circuit": 22, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:w_re_alloy_ingot", "count": 4 }, { "id": "grindless:cm245_fraction", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:w_re_hohlraum", "count": 1 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-B3a line 33 (c32): the InGaAsSb epi wafer brazed under the beam to a copper spreader plate into the TPV panel; the argon purge is 90% recovered.", "name": "tpv_braze", "circuit": 32, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:ingaassb_epi_wafer", "count": 1 }, { "id": "gtceu:copper_plate", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:tpv_panel", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
       ]
     },
     "single_crystal_casting": {
