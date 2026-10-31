@@ -73,8 +73,9 @@ test('controller lines: OpV hull, components, circuits and a research item; VA[O
 
 test('refinery c1-c6: carbonyl cell (CO returns at 90%) and FFC salt cell; c7 is left to R3; no input returns but CO', () => {
   const rows = RP.recipes.filter((r) => r.type === 'replication_refining');
-  assert.deepEqual(plain(rows.map((r) => r.circuit)), [1, 2, 3, 4, 5, 6]);
-  for (const r of rows) assert.deepEqual([r.eut, r.site], [2 * V_UXV, SITE], r.name);
+  assert.deepEqual(plain(rows.map((r) => r.circuit)),   [1, 2, 3, 4, 5, 6, 7]);
+    assert.equal(rows[6].name, 'spent_node_recovery');
+    for (const r of rows) assert.deepEqual([r.eut, r.site], [2 * V_UXV, SITE], r.name);
   const co = (r) => r.fluidsIn.concat(r.fluidsOut).filter((f) => f.id === 'gtceu:carbon_monoxide').map((f) => f.amount);
   assert.deepEqual(plain(co(rec('metal_carbonyl_synthesis'))), [1000]);
   assert.deepEqual(plain(co(rec('carbonyl_decomposition'))), [900]);
