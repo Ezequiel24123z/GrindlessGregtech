@@ -58,8 +58,9 @@ test('electron beam furnace: six 5N grades, five pattern rows, carbon-12 vapour,
   const c12 = rows.find((r) => r.name === 'c12_vapour');
   assert.deepEqual(ids(c12.fluidsOut), ['gtceu:carbon_burning_fuel']);
   const eb = json('electron_beam.json').types.electron_beam_refining.recipes;
-  const cs = eb.map((r) => r.circuit);
-  assert.equal(new Set(cs).size, cs.length, 'unique circuits');
+  // OpV-F3: a circuit may repeat only with different item inputs (consumed or kept); A3's c22 can and re-melt share one
+  const cs = eb.map((r) => `${r.circuit}|${ids(r.itemsIn).concat(ids(r.kept)).sort().join(',')}`);
+  assert.equal(new Set(cs).size, cs.length, 'unique circuit and item inputs');
 });
 
 test('nitride magnet works c8-15 and the CVI preform c5', () => {

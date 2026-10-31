@@ -292,6 +292,9 @@
    "gtceu:radio_telescope",
    "gtceu:steam_observatory"
   ],
+  "opv": [
+   "gtceu:field_frozen_press"
+  ],
   "power": [
    "gtceu:generator_array"
   ]
