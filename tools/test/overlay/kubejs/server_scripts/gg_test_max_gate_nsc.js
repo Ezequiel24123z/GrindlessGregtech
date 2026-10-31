@@ -406,7 +406,7 @@
       if (global.ggTestMaxGateNscRequest && Date.now() - LOADED >= 10000) {
         var which = global.ggTestMaxGateNscRequest
         global.ggTestMaxGateNscRequest = 0
-        if (which === 2) phase2(event.server)
+        if (Number(which) === 2) phase2(event.server)
         else begin(event.server)
       }
       if (S === null || S.finished) return

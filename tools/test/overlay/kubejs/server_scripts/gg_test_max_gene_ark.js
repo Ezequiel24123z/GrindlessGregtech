@@ -52,7 +52,7 @@
 
   var IDS = [
     'genome_archiving/genome_archive', 'genome_archiving/genome_copy', 'assembly_line/gene_ark',
-    'sterile_culture/synthetic_oligo_pool', 'sterile_culture/syn3_genome_cassettes', 'organoid_assembly/organoid_genome_extract',
+    'sterile_culture/synthetic_oligo_pool', 'sterile_culture/syn3_genome_cassettes', 'organoid_assembly/luv/organoid_genome_extract',
     'closed_ecosystem/ark_genome_set', 'xenobotany/xeno_genome_set', 'xenobiochemistry/transplanted_minimal_cell',
     'radiotrophic/hardened_minimal_cell', 'chemosynthesis/recipient_mycoplasma_culture',
     'supercritical_drying/encapsulated_genome_library', 'supercritical_drying/vitrified_cell_capsule'
