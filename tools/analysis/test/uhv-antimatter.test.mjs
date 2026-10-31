@@ -21,7 +21,9 @@ const STARTUP = read('startup_scripts', 'grindless', 'uhv', 'antimatter.js');
 const SERVER = read('server_scripts', 'grindless', 'uhv', 'antimatter.js');
 const ACCEL = read('server_scripts', 'grindless', 'uv', 'accelerators.js');
 const CRYO = read('server_scripts', 'grindless', 'ev', 'cryogenic_plant.js');
-const LANG = read('client_scripts', 'grindless', 'uhv_antimatter_lang.js');
+// OpV-E1 adds the accumulator's seed-plasma row.
+const LANG = read('client_scripts', 'grindless', 'uhv_antimatter_lang.js')
+  + read('client_scripts', 'grindless', 'opv_pair_converter_lang.js');
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
 const inputs = (r) => ids(r.itemsIn).concat(ids(r.kept), ids(r.chancedIn), ids(r.fluidsIn), ids(r.charge));

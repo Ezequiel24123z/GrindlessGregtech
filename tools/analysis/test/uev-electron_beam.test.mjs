@@ -305,7 +305,9 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
   // UIV-A10 appends tin_distill (c8) and registers eb_distilled_tin in its own startup
   const a10 = read(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'composites.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'matrioshka.js'))
     // UXV-A3's c9-20 and c27-29 rows: their items are registered in its own startup (UXV-A2's 5N and 7N grades in spin_feed.js)
-    + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_rows.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_feed.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'foundation.js'));
+    + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_rows.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_feed.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'foundation.js'))
+    // OpV-E1 seals its own cell into F1's dense positron cell.
+    + read(path.join(kube, 'startup_scripts', 'grindless', 'opv', 'foundation.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'opv', 'pair_converter.js'));
   for (const [, r] of allRows().filter(([w]) => w.startsWith('electron_beam.json'))) {
     for (const id of outputs(r).concat(ids(r.itemsIn))) {
       if (!id.startsWith('grindless:')) continue;
@@ -317,7 +319,8 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     assert.ok(lang.includes(`'${key}'`), key);
   }
   for (const [type, dataKey] of [['electron_beam_refining', 'grindless_electron_beam'], ['single_crystal_casting', 'grindless_single_crystal_casting']]) {
-    for (const r of T.types[type].recipes) assert.ok(lang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
+    const rowLang = lang + read(path.join(kube, 'client_scripts', 'grindless', 'opv_pair_converter_lang.js'));
+    for (const r of T.types[type].recipes) assert.ok(rowLang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
 });
 
