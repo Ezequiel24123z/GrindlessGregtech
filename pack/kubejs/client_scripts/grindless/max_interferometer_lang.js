@@ -1,4 +1,4 @@
-// priority: 6605
+// priority: 6609
 // Gregtech Grindless - names and tooltips of MAX's atom interferometer works (startup_scripts/grindless/max/interferometer.js; package MAX-B2):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names

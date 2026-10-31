@@ -82,7 +82,7 @@
     {
       name: 'droplet_radiator_works', machine: 'gtceu:droplet_radiator_works', type: 'droplet_radiator_assembly', dataKey: 'grindless_droplet_radiator_assembly',
       lang: 'Droplet Radiator Works',
-      maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 },
+      maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 },
       width: 9, height: 5, depth: 13, casing: CASING, texture: CASING_TEXTURE, vacuum: true, rings: []
     }
   ]
@@ -90,11 +90,13 @@
   // Matrioshka computer: nested lattice shells round a node core; droplet radiator works: a fin array (uiv/shapes.js). Built in the machine
   // registry callback: shapes.js may load after this file. The floor row (X) takes the parts.
   function spec(m) {
-    return G.uivShapes.build(Pat, m.name, m.casing, [
+    var parts = [
       Pat.part('input_bus', { min: 1, max: 2 }),
       Pat.part('output_bus', { min: 1, max: 2 }),
       Pat.part('energy_input', { min: 1, max: 2 })
-    ])
+    ]
+    if (m.maxIO.fluidsIn > 0) parts.push(Pat.part('input_hatch', { min: 0, max: 1 }))
+    return G.uivShapes.build(Pat, m.name, m.casing, parts)
   }
 
   // one EMI line per recipe, read from its data

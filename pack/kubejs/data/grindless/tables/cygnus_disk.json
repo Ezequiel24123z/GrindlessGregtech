@@ -12,6 +12,15 @@
           "fluidsIn": [],
           "itemsOut": [],
           "fluidsOut": [{ "id": "gtceu:disk_plasma", "amount": 1000 }]
+        },
+        {
+          "_why": "MAX-D1 (max.md, L16 step 1, c3): at Sgr A* the scoop draws 1,500 mB of hot accretion flow; the winding wears 5% a run",
+          "name": "skim_hot_flow", "circuit": 3, "eut": 268435456, "duration": 2000, "site": "gcyr:black_hole_orbit",
+          "itemsIn": [], "kept": [],
+          "wear": [{ "id": "grindless:mh_winding", "count": 1, "chance": 500 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:hot_flow_plasma", "amount": 1500 }]
         }
       ]
     },
@@ -37,6 +46,18 @@
             { "id": "gtceu:flux_loaded_plasma", "amount": 400 },
             { "id": "gtceu:hydrogen", "amount": 100 }
           ]
+        },
+        {
+          "_why": "MAX-D1 (max.md, L16 step 3, c3): at Sgr A* the pinch loads 1,350 mB of filtered flow with flux into 1,000 mB of FRC for the BZ dynamo; the 350 mB lost in formation recombines to hydrogen",
+          "name": "load_flux_frc", "circuit": 3, "eut": 134217728, "duration": 1600, "site": "gcyr:black_hole_orbit",
+          "itemsIn": [], "kept": [],
+          "wear": [{ "id": "grindless:mh_winding", "count": 4, "chance": 1000 }],
+          "fluidsIn": [{ "id": "gtceu:filtered_hot_flow", "amount": 1350 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:flux_loaded_frc", "amount": 1000 },
+            { "id": "gtceu:hydrogen", "amount": 350 }
+          ]
         }
       ]
     },
@@ -50,6 +71,14 @@
           "fluidsIn": [{ "id": "gtceu:flux_loaded_plasma", "amount": 400 }],
           "itemsOut": [],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-D1 (max.md, L16 step 4, c3): at Sgr A* 1,000 mB of flux-loaded FRC feeds 1,200 t at 2^30 EU/t; the exhaust cools into 800 mB that the mass filter takes back (c4). The line (skimmer, filter, FRC former, filter return) costs 8.05e11 EU against 1.29e12 EU back: about 1.6x",
+          "name": "frc_spin_down", "circuit": 3, "eut": 1073741824, "duration": 1200, "site": "gcyr:black_hole_orbit", "generator": true,
+          "itemsIn": [], "kept": [], "wear": [],
+          "fluidsIn": [{ "id": "gtceu:flux_loaded_frc", "amount": 1000 }],
+          "itemsOut": [],
+          "fluidsOut": [{ "id": "gtceu:cooled_exhaust", "amount": 800 }]
         }
       ]
     }

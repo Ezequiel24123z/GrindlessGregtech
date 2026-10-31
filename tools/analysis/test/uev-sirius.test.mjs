@@ -39,7 +39,8 @@ test('names unique per type, EU/t and duration positive, circuits unique per typ
 test('dimension allowlist: the three own types are Sirius B orbit only, the script locks it, and B1 owns that dimension', () => {
   for (const type of ['gravitational_redshift', 'degenerate_harvesting', 'degenerate_containment']) {
     assert.equal(T.types[type].dimension, true, type);
-    assert.equal(T.types[type].recipes.length, 1, type);
+    // MAX-D1 appends one Sgr A* row (c2, string site) to the harvester
+    assert.equal(T.types[type].recipes.length, type === 'degenerate_harvesting' ? 2 : 1, type);
     assert.equal(T.types[type].recipes[0].circuit, 1, type);
   }
   const srv = read('server_scripts', 'grindless', 'uev', 'sirius.js');
@@ -76,7 +77,7 @@ test('pellet containment: degenerate matter is sealed with the Casimir array\'s 
   assert.match(JSON.stringify(table('antimatter.json')), /grindless:exotic_matter_cell/);
   // every row of this table that handles degenerate matter or the pellet is accounted for: matter only in the harvester out and the works in
   const handlers = all().filter((x) => [...ids(x.itemsIn), ...ids(x.itemsOut), ...ids(x.kept)].some((i) => /degenerate_(matter|pellet)/.test(i)));
-  assert.deepEqual(handlers.map((x) => `${x.type}/${x.name}`).sort(), ['assembler/uev_field_generator', 'degenerate_containment/degenerate_pellet', 'degenerate_harvesting/degenerate_matter']);
+  assert.deepEqual(handlers.map((x) => `${x.type}/${x.name}`).sort(), ['assembler/uev_field_generator', 'degenerate_containment/degenerate_pellet', 'degenerate_harvesting/degenerate_matter', 'degenerate_harvesting/degenerate_slug']);
 });
 
 test('degenerate matter, the chart and the pellet come only from Sirius B rows', () => {

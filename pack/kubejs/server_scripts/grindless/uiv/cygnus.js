@@ -58,7 +58,8 @@
           return { id: String(f.id), amount: Number(f.amount) }
         }
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, dataKey: def.dataKey ? String(def.dataKey) : '',
-          site: r.site === true, generator: def.generator === true, research: r.research ? String(r.research) : '',
+          site: r.site === true, siteId: typeof r.site === 'string' && /^[a-z0-9_.-]+:[a-z0-9_.\/-]+$/.test(r.site) ? r.site : '',
+          generator: def.generator === true, research: r.research ? String(r.research) : '',
           itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack), wear: list(r.wear).map(stack), fluidsIn: list(r.fluidsIn).map(fluid),
           itemsOut: list(r.itemsOut).map(stack), fluidsOut: list(r.fluidsOut).map(fluid) }
         var hasInput = rec.itemsIn.length + rec.kept.length + rec.wear.length + rec.fluidsIn.length > 0
@@ -114,6 +115,7 @@
     rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
     if (rec.site) recipe.dimension(CY.site || 'grindless:cygnus_x1_orbit')
+    else if (rec.siteId !== '') recipe.dimension(rec.siteId)
     if (rec.research !== '') recipe.researchWithoutRecipe(rec.research)
     recipe.EUt(rec.generator ? -rec.eut : rec.eut).duration(rec.duration)
   }

@@ -66,13 +66,14 @@
     {
       // written final: two UIV 16 A dynamo hatches (2^29 each) hold the dynamo's 2^30 EU/t
       name: 'bz_dynamo', machine: 'gtceu:bz_dynamo', type: 'blandford_znajek', dataKey: 'grindless_blandford_znajek',
-      lang: 'BZ Dynamo', maxIO: { itemsIn: 1, itemsOut: 0, fluidsIn: 1, fluidsOut: 0 }, casing: UXV_CASING, texture: UXV_TEXTURE,
+      lang: 'BZ Dynamo', maxIO: { itemsIn: 1, itemsOut: 0, fluidsIn: 1, fluidsOut: 1 }, casing: UXV_CASING, texture: UXV_TEXTURE,
       generator: true, width: 19, height: 7, depth: 19,
       pal: { F: UXV_CASING, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:titanium_pipe_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
           Pat.part('input_hatch', { min: 1, max: 1 }),
+          Pat.part('output_hatch', { min: 0, max: 1 }),
           Pat.part('energy_output', { min: 1, max: 2 })
         ]
       }

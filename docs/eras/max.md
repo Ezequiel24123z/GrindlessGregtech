@@ -794,7 +794,7 @@ OpV's *Common to every package* (opv.md, same heading) applies with `opv` replac
 | UEV SNSPD / photonic hall | 1-5, OpV c6 / 1-7, OpV c8 | A1 c7 / A1 c9 |
 | UEV SiC fibre / CVI (`tables/composites.json`) | table 0-15, OpV to c17 / 1-5, OpV c6-11 | A2 c18, D2 c19 / A2 c12-13, D2 c14, R1 c15, E1 c16 |
 | UEV electron beam (`tables/electron_beam.json`) | 1-32 after OpV | full: B1 (two rows), D2 and E1 repeat c30-32, each on a circuit whose existing rows take different item inputs (OpV-F3 rule; the cap is 32, decision 48) |
-| UEV carbonyl / megabar / degenerate harvester | 0-1 / 1-6, OpV c7-8 / 0-1 | R1 c2 / D1 c9, D4 c10 / D1 c2 |
+| UEV carbonyl / megabar / degenerate harvester | 0-1 / 1-6, OpV c7-8 / 0-1 | R1 c2 / D1 c11 (c9 bent_ge_rebend), D4 c10 / D1 c2 |
 | UHV PBO plant / tether ribbon (`uhv/elevator.js`) | 1-7, OpV c8-9 | A0 c10, B1 c11-12 / D3 c13 |
 | UHV crystal growth (`tables/crystals.json`) | 1-18, OpV c19-27 | A1 c28-29, B3 c30, B2 c31, B3 c32; H1 (landed, L38) c32; D2 (L45) c32 again: programmed circuits stop at 32 (decision 48), so a repeat is allowed when the item inputs differ (OpV-F3 rule) |
 | UHV clock lab / MBE / SiC fab | 1-3, OpV c4-5 / 1-8, OpV c9-11 / 1-5, OpV c6-8 | G1 c6, B3 c7 / A1 c12, B2 c13, D2 c14 / A3 c9, H1 c10 |
