@@ -521,6 +521,13 @@
 			x: 0.5d
 			y: 103.75d
 		}
+		{
+			id: "30AE33E8F0FEC611"
+			linked_quest: "500C1E02A6CC0121"
+			shape: "rsquare"
+			x: 0.5d
+			y: 105.75d
+		}
 	]
 	quests: [
 		{
@@ -2216,10 +2223,28 @@
 			y: 103.75d
 		}
 		{
+			dependencies: ["500C1E02A6CC0121"]
+			description: [
+				"The network jumps to OpV only when every formed tower holds these. Case 13 caps the buffer at the voltage times the amps times ten: 2 A holds 10,737,418,240 EU and 64 A holds 343,597,383,680 EU."
+				"Holds: OpV SMES 16,106,127,360,000 EU."
+			]
+			icon: "grindless:opv_smes_cell"
+			id: "528CC66065DC0B79"
+			size: 1.0d
+			subtitle: "Six thousand one hundred and forty-four UV batteries' worth"
+			tasks: [
+				{ id: "57CB056639731E75", item: "grindless:opv_smes_cell", optional_task: true, type: "item" }
+				{ id: "74987BB2B0B63DF5", type: "checkmark" }
+			]
+			title: "OpV SMES Cell"
+			x: 2.75d
+			y: 105.75d
+		}
+		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Energy goes in at any voltage; the cells only limit what comes out."
-				"Comes in 2, 4, 16 and 64 A, LV to UXV."
+				"Comes in 2, 4, 16 and 64 A, LV to OpV."
 			]
 			icon: "gtceu:lv_wireless_dynamo_hatch"
 			id: "128CD52291A76880"
@@ -2235,7 +2260,7 @@
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
-			description: ["2 A of its tier, LV to UXV."]
+			description: ["2 A of its tier, LV to OpV."]
 			icon: "grindless:lv_wireless_dynamo_cover"
 			id: "54D4653CC016835A"
 			size: 1.0d
@@ -2252,7 +2277,7 @@
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
-				"Comes in 2, 4, 16 and 64 A, LV to UXV."
+				"Comes in 2, 4, 16 and 64 A, LV to OpV."
 			]
 			icon: "gtceu:lv_wireless_energy_hatch"
 			id: "5062E82EF67AFF89"
@@ -2270,7 +2295,7 @@
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout."
-				"2 A of its tier, LV to UXV."
+				"2 A of its tier, LV to OpV."
 			]
 			icon: "grindless:lv_wireless_energy_cover"
 			id: "7713822C036911A8"

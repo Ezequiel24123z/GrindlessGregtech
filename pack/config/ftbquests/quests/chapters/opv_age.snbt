@@ -1,0 +1,709 @@
+{
+	autofocus_id: "7C074BF11FC1790D"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "opv_age"
+	group: "3F021F40CD26BF57"
+	icon: "gtceu:opv_machine_casing"
+	id: "120F8C9CFD67A41F"
+	order_index: 13
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["3D7C8C36A2896D4E"]
+			description: [
+				"The Superheavy chart gave you the &6OpV Machine Casing&r. The hull waits for parts nobody has made yet."
+				"The bulge is crowded and very old. Terzan 5 is a fossil of the early galaxy, and Sagittarius A* sits at its centre."
+			]
+			icon: "gtceu:opv_machine_casing"
+			id: "7C074BF11FC1790D"
+			rewards: [{ id: "326CDD931F7FD469", type: "xp", xp: 50 }]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ id: "3BDE3E7A2D979F0D", item: "gtceu:opv_machine_casing", type: "item" }]
+			title: "The Galactic Bulge"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7C074BF11FC1790D"]
+			description: ["The &6OpV Machine Hull&r is the first thing every OpV machine needs. Its cables and plates are made from a strand nobody had before."]
+			icon: "gtceu:opv_machine_hull"
+			id: "59A06A2C9ADDA9E4"
+			rewards: [{ id: "71FCD98513284F86", type: "xp", xp: 100 }]
+			tasks: [{ id: "7626DF10C6668F4D", item: "gtceu:opv_machine_hull", type: "item" }]
+			title: "OpV Hull"
+			x: 2.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["59A06A2C9ADDA9E4"]
+			description: ["Four ways lead out of the hull: chain strand and field freezing for the parts, cryogenic circuits, beams and antimatter, and the probes. Read the OpV Lines chart before you pick one."]
+			icon: "gtceu:opv_machine_casing"
+			id: "1184DDEA5D8984CC"
+			rewards: [{ id: "3DFCF46951DE4A55", type: "xp", xp: 50 }]
+			tasks: [{ id: "54400E133A600EA5", type: "checkmark" }]
+			title: "The Way In"
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1184DDEA5D8984CC"]
+			description: ["A relay seed is the first thing you send to the bulge. It arrives and starts to listen."]
+			icon: "grindless:bulge_relay_seed"
+			id: "73394B2C6D508B8A"
+			rewards: [{ id: "3D05C7C6B14F3C3D", type: "xp", xp: 100 }]
+			tasks: [{ id: "53A5A08F82D1A1BB", item: "grindless:bulge_relay_seed", type: "item" }]
+			title: "Bulge Relay"
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["73394B2C6D508B8A"]
+			description: ["The launched seed crosses the dark between the arm and the bulge. Nothing comes back, and that is the idea."]
+			icon: "grindless:launched_bulge_seed"
+			id: "1334D64ED6E948AA"
+			rewards: [{ id: "5350FDD7C3857C6B", type: "xp", xp: 100 }]
+			tasks: [{ id: "5685081BFB1C071D", item: "grindless:launched_bulge_seed", type: "item" }]
+			title: "Seed Away"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1334D64ED6E948AA"]
+			description: ["The first image from the bulge. It shows where the debris, the nodes and the old stars are."]
+			icon: "grindless:bulge_chart"
+			id: "32FA798856B28769"
+			rewards: [{ id: "13758CD8892FDE4C", type: "xp", xp: 100 }]
+			tasks: [{ id: "1D29CC0DFA9616E1", item: "grindless:bulge_chart", type: "item" }]
+			title: "Bulge Chart"
+			x: 12.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["59A06A2C9ADDA9E4"]
+			description: [
+				"A strand of chain-like matter, drawn from a slab of crust. In the real universe this is only a hypothesis; here it is a material."
+				"It is caged, sorted, drawn and made into an &6ingot&r."
+			]
+			icon: "gtceu:chain_strand_ingot"
+			id: "7C75640ED457CEA4"
+			rewards: [{ id: "759BDD63EE457C15", type: "xp", xp: 100 }]
+			tasks: [{ id: "3EAB9DDF35F8F1DE", item: "gtceu:chain_strand_ingot", type: "item" }]
+			title: "Chain Strand"
+			x: 2.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["7C75640ED457CEA4"]
+			description: ["Wire, braided in PBO and sheathed. The &6Chain Strand Cable&r carries OpV power."]
+			icon: "gtceu:chain_strand_single_cable"
+			id: "592D27E5456D4D25"
+			rewards: [{ id: "15E0DCD05FF66CEA", type: "xp", xp: 100 }]
+			tasks: [{ id: "358919E74C27DFB3", item: "gtceu:chain_strand_single_cable", type: "item" }]
+			title: "Chain Strand Cable"
+			x: 5.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["7C75640ED457CEA4"]
+			description: ["Thin sheets, laminated into a &6Chain Lamina Stack&r for the hull plates."]
+			icon: "grindless:chain_lamina_stack"
+			id: "3BF1C2F89049EA90"
+			rewards: [{ id: "5B38FBEF46417AE1", type: "xp", xp: 100 }]
+			tasks: [{ id: "7B9BCD4B6E699BFB", item: "grindless:chain_lamina_stack", type: "item" }]
+			title: "Chain Lamina"
+			x: 5.0d
+			y: -5.0d
+		}
+		{
+			dependencies: ["592D27E5456D4D25", "3BF1C2F89049EA90"]
+			description: ["The link that keeps the wireless network in step across the bulge."]
+			icon: "grindless:chain_strand_repeater"
+			id: "1E28367C22D1E0D1"
+			rewards: [{ id: "3C4DAEF46D49F00E", type: "xp", xp: 150 }]
+			tasks: [{ id: "7CE4EAC98634261F", item: "grindless:chain_strand_repeater", type: "item" }]
+			title: "Chain Strand Repeater"
+			x: 7.5d
+			y: -3.75d
+		}
+		{
+			dependencies: ["592D27E5456D4D25"]
+			description: ["OpV motors and pistons, built from composite rotors, mesh belts and harmonic drives."]
+			icon: "gtceu:opv_electric_motor"
+			id: "7108A33F33C50B78"
+			rewards: [{ id: "7889223A63898698", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "31DFAE55D48A5ABC", item: "gtceu:opv_electric_motor", type: "item" }
+				{ id: "3E4FA18F760BE350", item: "gtceu:opv_electric_piston", type: "item" }
+			]
+			title: "Motors and Pistons"
+			x: 5.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["7108A33F33C50B78"]
+			description: ["Harmonic drives let an arm place things without a wobble. Conveyors carry them off."]
+			icon: "gtceu:opv_robot_arm"
+			id: "76E6AB2EEF2078E9"
+			rewards: [{ id: "1125F38B0A58DE6F", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "52E8DC394E8D9279", item: "gtceu:opv_robot_arm", type: "item" }
+				{ id: "3AE6A4C696463B30", item: "gtceu:opv_conveyor_module", type: "item" }
+			]
+			title: "Arms and Conveyors"
+			x: 7.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["76E6AB2EEF2078E9"]
+			description: ["A thorium-229 crystal makes the emitter. A Compton crystal makes the sensor."]
+			icon: "gtceu:opv_emitter"
+			id: "5EB442942BD1C7C3"
+			rewards: [{ id: "7E2AE6926CC58599", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7C690B094B5D4F8B", item: "gtceu:opv_emitter", type: "item" }
+				{ id: "3BEBDCE8F683140C", item: "gtceu:opv_sensor", type: "item" }
+			]
+			title: "Emitters and Sensors"
+			x: 10.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["5EB442942BD1C7C3"]
+			description: ["A trained coil in a chain-strand frame."]
+			icon: "gtceu:opv_field_generator"
+			id: "546BD55211B6FC5E"
+			rewards: [{ id: "5A94E5A6D1BA4D6E", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5F75620EFE4D1859", item: "gtceu:opv_field_generator", type: "item" }]
+			title: "Field Generator"
+			x: 12.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["546BD55211B6FC5E"]
+			description: ["A superfluid seal holds against any pressure. Pumps and fluid regulators use it."]
+			icon: "gtceu:opv_electric_pump"
+			id: "1893232393B84219"
+			rewards: [{ id: "16050A7658199E5E", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "13450C1F47ABC5A3", item: "gtceu:opv_electric_pump", type: "item" }
+				{ id: "3DC9C7405F80604A", item: "gtceu:opv_fluid_regulator", type: "item" }
+			]
+			title: "Pumps and Regulators"
+			x: 15.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["3BF1C2F89049EA90"]
+			description: ["The &6Field Frozen Press&r freezes a metal in a strong magnetic field so its grains line up."]
+			icon: "gtceu:field_frozen_press"
+			id: "3EA9271449E0281E"
+			rewards: [{ id: "73870403D9A2274E", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "33F5D38604045136", item: "gtceu:field_frozen_press", type: "item" }]
+			title: "Field Frozen Press"
+			x: 7.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["3EA9271449E0281E"]
+			description: ["A casing with no weak direction. The energy hatches are built around it."]
+			icon: "grindless:field_frozen_casing"
+			id: "7F7487A3E9823C9A"
+			rewards: [{ id: "71E64E3B5D013405", type: "xp", xp: 100 }]
+			tasks: [{ id: "3063D447C88AA7F0", item: "grindless:field_frozen_casing", type: "item" }]
+			title: "Field Frozen Casing"
+			x: 10.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["7F7487A3E9823C9A"]
+			description: ["The first hatches that can carry OpV power. Build a wireless network first if you can; the cells in it are your buffer."]
+			icon: "gtceu:opv_energy_input_hatch"
+			id: "500C1E02A6CC0121"
+			rewards: [{ id: "762094F57DA03DD6", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "55AF0ADCAFCCFC64", item: "gtceu:opv_energy_input_hatch", type: "item" }
+				{ id: "3722CFF3D950ED02", item: "gtceu:opv_energy_output_hatch", type: "item" }
+				{ id: "7152BBD88E8234A3", item: "grindless:opv_smes_cell", type: "item" }
+			]
+			title: "OpV Energy Hatches"
+			x: 12.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["32FA798856B28769"]
+			description: ["Isotopically pure silicon, split off and bonded. Fewer spins, longer coherence."]
+			icon: "grindless:si28_soi_wafer"
+			id: "7D95B836E06310DB"
+			rewards: [{ id: "3475373D8FC14F2C", type: "xp", xp: 100 }]
+			tasks: [{ id: "3509AF9C7AA4FE39", item: "grindless:si28_soi_wafer", type: "item" }]
+			title: "Silicon-28 on Insulator"
+			x: 15.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7D95B836E06310DB"]
+			description: ["Logic that works at 4 K, for control electronics next to the qubits."]
+			icon: "grindless:cryo_cmos_die"
+			id: "3AD6042F25DCDFAE"
+			rewards: [{ id: "5AE9D7EA62440A09", type: "xp", xp: 100 }]
+			tasks: [{ id: "127B50DDAAB1BC1F", item: "grindless:cryo_cmos_die", type: "item" }]
+			title: "Cryo-CMOS"
+			x: 17.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["7D95B836E06310DB"]
+			description: ["Light carries the signals in, because wires carry heat."]
+			icon: "grindless:cryo_optical_link"
+			id: "328CDB4584A0E113"
+			rewards: [{ id: "57487BE14A359C27", type: "xp", xp: 100 }]
+			tasks: [{ id: "382C7906759F6863", item: "grindless:cryo_optical_link", type: "item" }]
+			title: "Cryo Optical Link"
+			x: 17.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["3AD6042F25DCDFAE", "328CDB4584A0E113"]
+			description: ["The OpV circuit. It joins tetrons, cryogenic logic and optical links in one mainframe."]
+			icon: "gtnn:cosmic_mainframe"
+			id: "74C17E229844F7DF"
+			rewards: [{ id: "7A3CDCD62A90CD5F", type: "xp", xp: 250 }]
+			tasks: [{ id: "7611412123E87135", item: "gtnn:cosmic_mainframe", type: "item" }]
+			title: "Cosmic Mainframe"
+			x: 20.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["74C17E229844F7DF"]
+			description: ["The &6Tetron Fab&r bonds a tested die to its amplifier."]
+			icon: "gtceu:tetron_fab"
+			id: "11AA3FE52CF398DB"
+			rewards: [{ id: "7C5B16C1BEF5B4E4", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "769C855660319FF4", item: "gtceu:tetron_fab", type: "item" }]
+			title: "Tetron Fab"
+			x: 22.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["11AA3FE52CF398DB"]
+			description: ["Dies are bumped, bonded and tested near absolute zero before they are put together."]
+			icon: "grindless:tetron_array"
+			id: "391E9FA027FD4A64"
+			rewards: [{ id: "3A00381FA1827FF0", type: "xp", xp: 150 }]
+			tasks: [{ id: "12A4BD4E54A4A564", item: "grindless:tetron_array", type: "item" }]
+			title: "Tetron Array"
+			x: 25.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["74C17E229844F7DF"]
+			description: ["Mirrors for gamma rays are multilayers a few atoms thick. The &6Gamma Optics Works&r makes them."]
+			icon: "gtceu:gamma_optics_works"
+			id: "1F29C7B921EC10C4"
+			rewards: [{ id: "5F3873AE089D0581", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5D500BC6C3A9ACB1", item: "gtceu:gamma_optics_works", type: "item" }
+				{ id: "793A17060B520A33", item: "grindless:gamma_multilayer_mirror", type: "item" }
+			]
+			title: "Gamma Optics Works"
+			x: 22.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["1F29C7B921EC10C4"]
+			description: ["Bent crystals focus gamma rays by diffraction."]
+			icon: "grindless:laue_lens"
+			id: "3D43FF6312199146"
+			rewards: [{ id: "728BCE70ACA5C9AB", type: "xp", xp: 150 }]
+			tasks: [{ id: "17ADB781C48AD3D3", item: "grindless:laue_lens", type: "item" }]
+			title: "Laue Lens"
+			x: 25.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["391E9FA027FD4A64"]
+			description: ["A thin beryllium foil that lets the beam out and keeps the vacuum in."]
+			icon: "grindless:be_beam_window"
+			id: "58C89E98AE7966A6"
+			rewards: [{ id: "57A77E70AAE9CAF9", type: "xp", xp: 100 }]
+			tasks: [{ id: "1B87B0D1BADDCEC1", item: "grindless:be_beam_window", type: "item" }]
+			title: "Beam Window"
+			x: 27.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["58C89E98AE7966A6"]
+			description: ["The &6Spallation Target Station&r hits an iridium target with protons and collects what comes out."]
+			icon: "gtceu:spallation_target_station"
+			id: "5CAB5711F456C75A"
+			rewards: [{ id: "5DA13D309350064C", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5A842245120572AF", item: "gtceu:spallation_target_station", type: "item" }
+				{ id: "5EED9E0D964E9406", item: "grindless:ir_spallation_target", type: "item" }
+			]
+			title: "Spallation Target"
+			x: 30.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["5CAB5711F456C75A"]
+			description: ["Stochastic cooling pickups and an electron cooler slow the antiprotons until they can be trapped."]
+			icon: "gtceu:antiproton_decelerator"
+			id: "1458D096423EA6D4"
+			rewards: [{ id: "3F362D833F72AD18", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1C2B29552AAA6417", item: "gtceu:antiproton_decelerator", type: "item" }
+				{ id: "7BA78D44EAB0C4B0", item: "grindless:electron_cooler", type: "item" }
+			]
+			title: "Antiproton Decelerator"
+			x: 32.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["1458D096423EA6D4"]
+			description: ["Cold antiprotons, held in a trap. Handle them as you would anything that destroys itself on touch."]
+			icon: "grindless:antiproton_stack_opv"
+			id: "125A9489212645EA"
+			rewards: [{ id: "36E5B787221E8C43", type: "xp", xp: 200 }]
+			tasks: [{ id: "7FA6F79EE2BF71DB", item: "grindless:antiproton_stack_opv", type: "item" }]
+			title: "Antiproton Stack"
+			x: 35.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["3D43FF6312199146"]
+			description: ["A laser that cools antihydrogen to a standstill."]
+			icon: "grindless:lyman_alpha_laser"
+			id: "576E522130567846"
+			rewards: [{ id: "590EB2C52D3B7EA5", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "56ED74A29D8D5624", item: "grindless:lyman_alpha_laser", type: "item" }
+				{ id: "3A2DA8BF3E2D647F", item: "grindless:octupole_trap_magnet", type: "item" }
+			]
+			title: "Lyman-alpha Laser"
+			x: 27.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["576E522130567846", "125A9489212645EA"]
+			description: ["The &6Antihydrogen Foundry&r joins an antiproton with a positron, and the magnetic trap keeps it off the walls."]
+			icon: "gtceu:antihydrogen_foundry"
+			id: "38F0C34A187A7746"
+			rewards: [{ id: "771FFEDD10D4EA6C", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1EB7AE2F1AA4A036", item: "gtceu:antihydrogen_foundry", type: "item" }
+				{ id: "15852100BDE07240", item: "grindless:antihydrogen_ice_cell", type: "item" }
+			]
+			title: "Antihydrogen Foundry"
+			x: 37.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["38F0C34A187A7746"]
+			description: ["Matter and antimatter turned entirely into energy. Everything that comes out is either captured or absorbed."]
+			icon: "gtceu:annihilation_engine"
+			id: "78BD114FD33A2A13"
+			rewards: [{ id: "3E0F0ABF4E1E87C4", type: "xp", xp: 300 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7C891C02DBAE17BC", item: "gtceu:annihilation_engine", type: "item" }]
+			title: "Annihilation Engine"
+			x: 40.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["78BD114FD33A2A13"]
+			description: ["Absorber tiles take the gamma flash. TPV panels turn heat into power. ACMF pellets start the burn."]
+			icon: "grindless:gamma_absorber_tile"
+			id: "58CAA53515F1A1B0"
+			rewards: [{ id: "14B342C29D39FA6E", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "1F46AE5091BB3410", item: "grindless:gamma_absorber_tile", type: "item" }
+				{ id: "7D5EB98667C39A41", item: "grindless:tpv_panel", type: "item" }
+				{ id: "3490EFD91BA1FC1F", item: "grindless:acmf_pellet", type: "item" }
+			]
+			title: "Absorbers and Panels"
+			x: 42.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["38F0C34A187A7746"]
+			description: ["Positrons collect in a Penning trap until there are enough."]
+			icon: "gtceu:positron_accumulator"
+			id: "118BD863DDF9FD59"
+			rewards: [{ id: "133AE9671BF4846C", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3691BB62C81490B7", item: "gtceu:positron_accumulator", type: "item" }]
+			title: "Positron Accumulator"
+			x: 40.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["118BD863DDF9FD59"]
+			description: ["A dense plasma of positrons, sealed in a cell."]
+			icon: "grindless:dense_positron_cell"
+			id: "7BDABCDAEB2DA9E2"
+			rewards: [{ id: "107EF7553DCC25DF", type: "xp", xp: 150 }]
+			tasks: [{ id: "765BB9862A2ABFCD", item: "grindless:dense_positron_cell", type: "item" }]
+			title: "Dense Positron Cell"
+			x: 42.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["7BDABCDAEB2DA9E2"]
+			description: ["A lead beam gives a fireball. The distiller picks out the seed of a strangelet."]
+			icon: "gtceu:strangelet_distiller"
+			id: "3E5E07D88B48C85B"
+			rewards: [{ id: "5D5EEA5D4C3CEA1C", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1BCDE67E28E7CFD9", item: "gtceu:strangelet_distiller", type: "item" }
+				{ id: "13089E00C5E39A3E", item: "grindless:strangelet_seed", type: "item" }
+			]
+			title: "Strangelet Distiller"
+			x: 45.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["3E5E07D88B48C85B"]
+			description: ["The vault grows a strangelet by feeding it neutrons. A negative strangelet is contained and annihilated."]
+			icon: "gtceu:strangelet_vault"
+			id: "3DB8108B84BC8C3C"
+			rewards: [{ id: "75B37513AF5FDE52", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5B734DA92CE3E8B2", item: "gtceu:strangelet_vault", type: "item" }
+				{ id: "372B233E92478DE2", item: "grindless:grown_strangelet", type: "item" }
+			]
+			title: "Strangelet Vault"
+			x: 47.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["3DB8108B84BC8C3C"]
+			description: ["A strangelet that stays stable is a hypothesis, not an observation. In this pack it is a fuel."]
+			icon: "grindless:stable_exotic_matter"
+			id: "51C0DDF70D599BE7"
+			rewards: [{ id: "3D7B85F62B079B78", type: "xp", xp: 250 }]
+			tasks: [{ id: "72F81A4E7795C67F", item: "grindless:stable_exotic_matter", type: "item" }]
+			title: "Stable Exotic Matter"
+			x: 50.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["51C0DDF70D599BE7"]
+			description: [
+				"Light so dense it collapses into a black hole. The forge holds the seed."
+				"Forming a Kugelblitz goes beyond Hawking evaporation, which is real physics. Here it is fiction."
+			]
+			icon: "gtceu:kugelblitz_forge"
+			id: "196E5592451BC661"
+			rewards: [{ id: "52BA5C6DB47D00E6", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "132BDCE519F709A7", item: "gtceu:kugelblitz_forge", type: "item" }
+				{ id: "7CE5DF99DF5D43CC", item: "grindless:kugelblitz_seed", type: "item" }
+			]
+			title: "Kugelblitz Forge"
+			x: 52.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["196E5592451BC661"]
+			description: ["A small black hole made of nothing but gamma rays."]
+			icon: "grindless:kugelblitz_core"
+			id: "7808A81BF8AA169E"
+			rewards: [{ id: "7B1C168616DB9197", type: "xp", xp: 250 }]
+			tasks: [{ id: "7CF1CC6E41D19701", item: "grindless:kugelblitz_core", type: "item" }]
+			title: "Kugelblitz Core"
+			x: 55.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["7808A81BF8AA169E"]
+			description: ["A black hole radiates. The collector takes the power and leaves the shell. It also makes the drive for the warp gate."]
+			icon: "gtceu:hawking_collector"
+			id: "1C5A8ECE70B119DD"
+			rewards: [{ id: "5CDAB77BE39D324F", type: "xp", xp: 300 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "368D3B119199BC74", item: "gtceu:hawking_collector", type: "item" }
+				{ id: "56A07CF3688957E6", item: "grindless:hawking_drive", type: "item" }
+			]
+			title: "Hawking Collector"
+			x: 57.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["32FA798856B28769"]
+			description: ["The bulge is full of debris. The &6Debris Harvester&r collects it for the probes."]
+			icon: "gtceu:debris_harvester"
+			id: "53687208B5A566FC"
+			rewards: [{ id: "1BF5C349DB5CFDD5", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "74681A0DC5DABD4A", item: "gtceu:debris_harvester", type: "item" }
+				{ id: "5C3768B44B5EC753", item: "grindless:bulge_debris", type: "item" }
+			]
+			title: "Debris Harvester"
+			x: 15.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["53687208B5A566FC"]
+			description: ["A probe that copies itself. Terzan 5 supplies the metal."]
+			icon: "grindless:probe_seed"
+			id: "5FCBAB1702AAE56B"
+			rewards: [{ id: "53EABB21EA6BAFF3", type: "xp", xp: 200 }]
+			tasks: [{ id: "5567C58E9D77131A", item: "grindless:probe_seed", type: "item" }]
+			title: "Probe Seed"
+			x: 17.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["5FCBAB1702AAE56B"]
+			description: ["A foundry that makes copies of its own probes. Self-replication is fiction here; a real one is far away."]
+			icon: "gtceu:von_neumann_foundry"
+			id: "10ABDF6F9EF0EBC0"
+			rewards: [{ id: "78C3F5A173F6F754", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1954CF85833052C4", item: "gtceu:von_neumann_foundry", type: "item" }]
+			title: "Von Neumann Foundry"
+			x: 20.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["10ABDF6F9EF0EBC0"]
+			description: ["The refinery sinters silicate into casings for the copies."]
+			icon: "gtceu:replication_refinery"
+			id: "5DB4AECF2C68DD7A"
+			rewards: [{ id: "580D6301AE02AE28", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "79B922F24455F76D", item: "gtceu:replication_refinery", type: "item" }
+				{ id: "3577D28E3ABC3EC3", item: "grindless:cluster_sinter_casing", type: "item" }
+			]
+			title: "Replication Refinery"
+			x: 22.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["5DB4AECF2C68DD7A"]
+			description: ["Nodes unfold in the bulge and collect the light of its stars."]
+			icon: "gtceu:collector_node_works"
+			id: "1272CCD5EF9968D8"
+			rewards: [{ id: "5F4B20CCBA5017D4", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1780C6D9A304BC5E", item: "gtceu:collector_node_works", type: "item" }
+				{ id: "1BE4042E0BBFCC71", item: "grindless:deployed_node_pack", type: "item" }
+			]
+			title: "Collector Node Works"
+			x: 25.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["1272CCD5EF9968D8"]
+			description: ["The &6Bulge Collector&r turns starlight into power. The &6Bulge Light Census&r records what it finds."]
+			icon: "gtceu:bulge_collector"
+			id: "5651A00C576D3D7E"
+			rewards: [{ id: "1678C430E0E724F7", type: "xp", xp: 300 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7475FF7CD16E435C", item: "gtceu:bulge_collector", type: "item" }
+				{ id: "1ADA94397EB56F58", item: "grindless:bulge_light_census", type: "item" }
+			]
+			title: "Bulge Collector"
+			x: 27.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["1C5A8ECE70B119DD"]
+			description: ["Californium and nickel, fired at one another, make an element beyond 124. Element 126 is fiction here: the real island of stability is not found."]
+			icon: "grindless:superheavy_census_iv"
+			id: "5D3CA36016CD74E2"
+			rewards: [{ id: "11DDEBB00A2F8095", type: "xp", xp: 300 }]
+			tasks: [{ id: "34324876E068134F", item: "grindless:superheavy_census_iv", type: "item" }]
+			title: "Superheavy Census IV"
+			x: 60.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["74C17E229844F7DF"]
+			description: ["The &6OpV Parallel Hatch&r runs a machine many times at once."]
+			icon: "gtceu:opv_parallel_hatch"
+			id: "370260C84BFE695B"
+			rewards: [{ id: "53AE47B693118C1A", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7D8BA700DE766565", item: "gtceu:opv_parallel_hatch", type: "item" }]
+			title: "Parallel Hatch"
+			x: 22.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["370260C84BFE695B"]
+			description: ["An array of assembly lines, side by side, all running together."]
+			icon: "gtceu:assembly_line_array"
+			id: "109D1562586572A1"
+			rewards: [{ id: "72574AD6B41B7213", type: "xp", xp: 300 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "352B4477F046D6A8", item: "gtceu:assembly_line_array", type: "item" }]
+			title: "Assembly Line Array"
+			x: 25.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["5D3CA36016CD74E2", "5651A00C576D3D7E", "78BD114FD33A2A13"]
+			description: ["The Sagittarius A* chart is not on any shelf yet. When you have power to spare, the warp gate waits for it. Charge your SMES bank first."]
+			icon: "gtceu:max_machine_casing"
+			id: "3E3C190F1A77EB6D"
+			rewards: [{ id: "36B8B96FA5CC20E9", type: "xp", xp: 100 }]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ id: "375203E342E9AE31", item: "gtceu:max_machine_casing", type: "item" }]
+			title: "Gate to MAX"
+			x: 62.5d
+			y: 0.0d
+		}
+	]
+	subtitle: ["Chain strand cables, cryogenic circuits, a beam of antiprotons, a Kugelblitz and a fleet of probes: the way to the heart of the Milky Way."]
+	title: "OpV - The Galactic Bulge"
+}

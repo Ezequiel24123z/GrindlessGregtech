@@ -1,0 +1,1100 @@
+{
+  "tier": "opv",
+  "title": "OpV: the 18 multiblocks, SGR 1806-20 and Terzan 5, the gate to MAX",
+  "extends": "uxv",
+  "inheritTargets": true,
+  "note": "OpV validator (OPV-C1), modelled on uxv.json. Machines, jumps and groups mirror docs/eras/opv.md; OpV rows run on two UXV hatches or a wireless OpV tier.",
+  "eraOrder": [
+    "uxv-cas-a",
+    "opv",
+    "opv-sgr",
+    "opv-terzan5",
+    "max"
+  ],
+  "packages": {
+    "G1": {
+      "label": "gate to MAX",
+      "landedWhen": [
+        "recipe:grindless:warp_gate/hold_sgr_a"
+      ]
+    },
+    "D1": {
+      "label": "beam hardware",
+      "landedWhen": [
+        "gtceu:jet_beam_line",
+        "gtceu:spallation_target_station"
+      ]
+    },
+    "D2": {
+      "label": "exotic matter",
+      "landedWhen": [
+        "gtceu:strangelet_vault"
+      ]
+    },
+    "E1": {
+      "label": "magnetic pair converter",
+      "landedWhen": [
+        "gtceu:magnetic_pair_converter"
+      ]
+    },
+    "R1": {
+      "label": "pathfinder",
+      "landedWhen": [
+        "gtceu:debris_harvester"
+      ]
+    },
+    "R2": {
+      "label": "replication",
+      "landedWhen": [
+        "gtceu:replication_refinery"
+      ]
+    },
+    "R3": {
+      "label": "collector nodes and the bulge collector",
+      "landedWhen": [
+        "gtceu:bulge_collector"
+      ]
+    }
+  },
+  "machines": [
+    {
+      "machine": "gtceu:tetron_fab",
+      "types": [
+        "gtceu:tetron_assembly"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "B1"
+    },
+    {
+      "machine": "gtceu:gamma_optics_works",
+      "types": [
+        "gtceu:gamma_optics"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "B1"
+    },
+    {
+      "machine": "gtceu:antihydrogen_foundry",
+      "types": [
+        "gtceu:antihydrogen_synthesis"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "B3"
+    },
+    {
+      "machine": "gtceu:strangelet_vault",
+      "types": [
+        "gtceu:strangelet_growth"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "D2"
+    },
+    {
+      "machine": "gtceu:annihilation_engine",
+      "types": [
+        "gtceu:annihilation_power"
+      ],
+      "maxEUt": 1073741824,
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "B3"
+    },
+    {
+      "machine": "gtceu:jet_beam_line",
+      "types": [
+        "gtceu:jet_beam_extraction"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "D1"
+    },
+    {
+      "machine": "gtceu:spallation_target_station",
+      "types": [
+        "gtceu:antiproton_production"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "D1"
+    },
+    {
+      "machine": "gtceu:antiproton_decelerator",
+      "types": [
+        "gtceu:beam_cooling"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "D1"
+    },
+    {
+      "machine": "gtceu:strangelet_distiller",
+      "types": [
+        "gtceu:strangelet_distillation"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "D2"
+    },
+    {
+      "machine": "gtceu:kugelblitz_forge",
+      "types": [
+        "gtceu:kugelblitz_forming"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "D2"
+    },
+    {
+      "machine": "gtceu:hawking_collector",
+      "types": [
+        "gtceu:hawking_power"
+      ],
+      "maxEUt": 1073741824,
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "D2"
+    },
+    {
+      "machine": "gtceu:magnetic_pair_converter",
+      "types": [
+        "gtceu:magnetic_pair_production"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "E1"
+    },
+    {
+      "machine": "gtceu:field_frozen_press",
+      "types": [
+        "gtceu:field_freezing"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "A3"
+    },
+    {
+      "machine": "gtceu:debris_harvester",
+      "types": [
+        "gtceu:debris_harvesting"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "R1"
+    },
+    {
+      "machine": "gtceu:replication_refinery",
+      "types": [
+        "gtceu:replication_refining"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "R2"
+    },
+    {
+      "machine": "gtceu:von_neumann_foundry",
+      "types": [
+        "gtceu:self_replication"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "R2"
+    },
+    {
+      "machine": "gtceu:collector_node_works",
+      "types": [
+        "gtceu:collector_node_assembly"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "R3"
+    },
+    {
+      "machine": "gtceu:bulge_collector",
+      "types": [
+        "gtceu:bulge_light_collection"
+      ],
+      "maxEUt": 1073741824,
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "R3"
+    },
+    {
+      "id": "gtceu:assembly_hall@opv2",
+      "machine": "gtceu:assembly_hall",
+      "types": [
+        "gtceu:assembler",
+        "gtceu:circuit_assembler"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "A4"
+    },
+    {
+      "id": "gtceu:assembly_line@opv",
+      "machine": "gtceu:assembly_line",
+      "types": [
+        "gtceu:assembly_line"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ]
+    },
+    {
+      "id": "gtceu:hot_strip_mill@opv",
+      "machine": "gtceu:hot_strip_mill",
+      "types": [
+        "gtceu:hot_rolling"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ]
+    },
+    {
+      "id": "gtceu:electric_blast_furnace@opv",
+      "machine": "gtceu:electric_blast_furnace",
+      "types": [
+        "gtceu:electric_blast_furnace"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ]
+    },
+    {
+      "id": "gtceu:hot_cell@opv",
+      "machine": "gtceu:hot_cell",
+      "types": [
+        "gtceu:hot_cell"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ]
+    },
+    {
+      "id": "gtceu:calutron@opv",
+      "machine": "gtceu:calutron",
+      "types": [
+        "gtceu:calutron_separation"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ]
+    },
+    {
+      "id": "gtceu:heavy_ion_cyclotron@opv",
+      "machine": "gtceu:heavy_ion_cyclotron",
+      "types": [
+        "gtceu:heavy_ion_irradiation"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ]
+    },
+    {
+      "id": "gtceu:synchrotron@opv",
+      "machine": "gtceu:synchrotron",
+      "types": [
+        "gtceu:synchrotron"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ]
+    },
+    {
+      "id": "gtceu:antimatter_trap@opv",
+      "machine": "gtceu:antimatter_trap",
+      "types": [
+        "gtceu:antimatter_storage"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ]
+    },
+    {
+      "id": "gtnn:component_assembly_line@opv",
+      "machine": "gtnn:component_assembly_line",
+      "types": [
+        "gtnn:component_assembly_line",
+        "gtceu:component_assembly_line"
+      ],
+      "maxEUt": 2147483648,
+      "needs": [
+        "eu:opv"
+      ]
+    },
+    {
+      "id": "gtceu:warp_gate@opv",
+      "machine": "gtceu:warp_gate",
+      "types": [
+        "gtceu:warp_gate"
+      ],
+      "maxEUt": 8589934592,
+      "needs": [
+        "eu:opv"
+      ],
+      "package": "G1"
+    }
+  ],
+  "machinesFromRegistry": [
+    {
+      "prefix": "gtceu:opv_",
+      "maxEUt": 536870912,
+      "needs": [
+        "eu:opv"
+      ],
+      "excludeTypes": [
+        "gtceu:dummy",
+        "gtceu:steam_turbine",
+        "gtceu:combustion_generator",
+        "gtceu:gas_turbine"
+      ]
+    }
+  ],
+  "synthetic": [
+    {
+      "id": "wireless-opv",
+      "package": "W",
+      "capital": [
+        "gtceu:wireless_energy_tower",
+        "grindless:opv_smes_cell",
+        "grindless:chain_strand_repeater"
+      ],
+      "consumes": [
+        "eu:uxv"
+      ],
+      "produces": [
+        "eu:opv",
+        "wireless:opv"
+      ]
+    },
+    {
+      "id": "sgr-jump",
+      "package": "E1",
+      "capital": [
+        "grindless:bulge_relay_seed",
+        "gtceu:warp_gate",
+        "grindless:bulge_chart"
+      ],
+      "consumes": [
+        "dim:grindless:cygnus_x1_orbit",
+        "eu:uxv"
+      ],
+      "produces": [
+        "dim:grindless:sgr1806_orbit"
+      ]
+    },
+    {
+      "id": "terzan5-jump",
+      "package": "R1",
+      "capital": [
+        "grindless:pathfinder_probe",
+        "gtceu:warp_gate"
+      ],
+      "consumes": [
+        "dim:grindless:cygnus_x1_orbit",
+        "eu:uxv"
+      ],
+      "produces": [
+        "dim:grindless:terzan5_core"
+      ]
+    }
+  ],
+  "eraResources": [
+    {
+      "id": "sgr",
+      "era": "opv-sgr",
+      "label": "SGR 1806-20 orbit and what comes home",
+      "dimensions": [
+        "grindless:sgr1806_orbit"
+      ],
+      "items": [
+        "grindless:chain_lamina_stack",
+        "grindless:ni_chain_slab",
+        "grindless:chain_field_coil",
+        "grindless:chain_composite_rod",
+        "grindless:chain_composite_rotor",
+        "grindless:superfluid_he3_seal",
+        "grindless:chain_mesh_belt",
+        "grindless:opv_harmonic_drive",
+        "grindless:tetron_die",
+        "grindless:field_frozen_plate",
+        "grindless:tetron_array",
+        "grindless:gamma_multilayer_mirror",
+        "grindless:laue_lens",
+        "grindless:spent_ir_target",
+        "grindless:electron_cooler",
+        "grindless:pb208_beam_cell",
+        "grindless:octupole_trap_magnet",
+        "grindless:levitation_trap_cell",
+        "grindless:lyman_alpha_laser",
+        "grindless:gamma_absorber_tile",
+        "grindless:tpv_panel",
+        "grindless:acmf_pellet",
+        "grindless:dense_positron_cell",
+        "grindless:cold_antiproton_cell",
+        "grindless:antiproton_stack_opv",
+        "grindless:antihydrogen_ice_cell",
+        "grindless:strangelet_seed",
+        "grindless:stable_exotic_matter",
+        "grindless:kugelblitz_core",
+        "grindless:hawking_drive",
+        "grindless:xnav_unit",
+        "grindless:node_power_transmitter",
+        "grindless:vitamin_kit",
+        "grindless:pathfinder_probe",
+        "grindless:launched_pathfinder",
+        "grindless:pathfinder_probe_core",
+        "grindless:superheavy_census_iv",
+        "grindless:element_124_recoil",
+        "grindless:element_126_recoil",
+        "grindless:chain_strand_repeater",
+        "grindless:field_frozen_casing",
+        "grindless:annihilation_shield_casing",
+        "gtceu:chain_strand_ingot",
+        "gtceu:chain_strand_single_wire",
+        "gtceu:chain_strand_single_cable",
+        "m:gtceu:tetron_fab",
+        "m:gtceu:gamma_optics_works",
+        "m:gtceu:antihydrogen_foundry",
+        "m:gtceu:strangelet_vault",
+        "m:gtceu:annihilation_engine",
+        "m:gtceu:jet_beam_line",
+        "m:gtceu:spallation_target_station",
+        "m:gtceu:antiproton_decelerator",
+        "m:gtceu:strangelet_distiller",
+        "m:gtceu:kugelblitz_forge",
+        "m:gtceu:hawking_collector",
+        "m:gtceu:magnetic_pair_converter",
+        "m:gtceu:field_frozen_press",
+        "m:gtceu:debris_harvester",
+        "gtceu:opv_electric_motor",
+        "gtceu:opv_electric_pump",
+        "gtceu:opv_conveyor_module",
+        "gtceu:opv_electric_piston",
+        "gtceu:opv_robot_arm",
+        "gtceu:opv_emitter",
+        "gtceu:opv_sensor",
+        "gtceu:opv_field_generator",
+        "gtceu:opv_machine_hull"
+      ]
+    },
+    {
+      "id": "terzan5",
+      "era": "opv-terzan5",
+      "label": "Terzan 5 core and what comes home",
+      "dimensions": [
+        "grindless:terzan5_core"
+      ],
+      "items": [
+        "grindless:bulge_debris",
+        "grindless:metal_feedstock",
+        "grindless:silicate_debris_fraction",
+        "grindless:si_alloy_powder",
+        "grindless:cluster_sinter_casing",
+        "grindless:collector_node",
+        "grindless:spent_collector_node",
+        "grindless:deployed_node_pack",
+        "grindless:probe_seed",
+        "grindless:bulge_light_census"
+      ]
+    },
+    {
+      "id": "max",
+      "era": "max",
+      "label": "The MAX tier: held until the gate",
+      "items": [
+        "gtceu:max_*"
+      ]
+    }
+  ],
+  "eraItems": [
+    {
+      "id": "opv-foundation",
+      "era": "opv",
+      "label": "OpV items reachable before the SGR jump",
+      "items": [
+        "grindless:bulge_relay_seed",
+        "grindless:launched_bulge_seed",
+        "grindless:th229_lasing_crystal",
+        "grindless:hpge_compton_crystal",
+        "grindless:inas_al_wafer",
+        "grindless:gated_2deg_wafer",
+        "grindless:cryo_cmos_die",
+        "grindless:nb_tsv_interposer",
+        "grindless:cryo_optical_link",
+        "grindless:hemt_amplifier",
+        "grindless:gan_mmic",
+        "grindless:sdd_die",
+        "grindless:aln_power_die",
+        "grindless:be_beam_window",
+        "grindless:ir_spallation_target",
+        "grindless:li6_hydride_shield",
+        "grindless:stochastic_cooling_pickup",
+        "grindless:seed_positron_plasma",
+        "grindless:neg_xhv_casing",
+        "gtceu:opv_machine_casing"
+      ]
+    },
+    {
+      "id": "opv-sgr-items",
+      "era": "opv-sgr",
+      "label": "OpV items from SGR 1806-20 and later machines",
+      "items": [
+        "grindless:chain_lamina_stack",
+        "grindless:ni_chain_slab",
+        "grindless:chain_field_coil",
+        "grindless:chain_composite_rod",
+        "grindless:chain_composite_rotor",
+        "grindless:superfluid_he3_seal",
+        "grindless:chain_mesh_belt",
+        "grindless:opv_harmonic_drive",
+        "grindless:tetron_die",
+        "grindless:field_frozen_plate",
+        "grindless:tetron_array",
+        "grindless:gamma_multilayer_mirror",
+        "grindless:laue_lens",
+        "grindless:spent_ir_target",
+        "grindless:electron_cooler",
+        "grindless:pb208_beam_cell",
+        "grindless:octupole_trap_magnet",
+        "grindless:levitation_trap_cell",
+        "grindless:lyman_alpha_laser",
+        "grindless:gamma_absorber_tile",
+        "grindless:tpv_panel",
+        "grindless:acmf_pellet",
+        "grindless:dense_positron_cell",
+        "grindless:cold_antiproton_cell",
+        "grindless:antiproton_stack_opv",
+        "grindless:antihydrogen_ice_cell",
+        "grindless:strangelet_seed",
+        "grindless:stable_exotic_matter",
+        "grindless:kugelblitz_core",
+        "grindless:hawking_drive",
+        "grindless:xnav_unit",
+        "grindless:node_power_transmitter",
+        "grindless:vitamin_kit",
+        "grindless:pathfinder_probe",
+        "grindless:launched_pathfinder",
+        "grindless:pathfinder_probe_core",
+        "grindless:superheavy_census_iv",
+        "grindless:element_124_recoil",
+        "grindless:element_126_recoil",
+        "grindless:chain_strand_repeater",
+        "grindless:field_frozen_casing",
+        "grindless:annihilation_shield_casing",
+        "gtceu:chain_strand_ingot",
+        "gtceu:chain_strand_single_wire",
+        "gtceu:chain_strand_single_cable",
+        "m:gtceu:tetron_fab",
+        "m:gtceu:gamma_optics_works",
+        "m:gtceu:antihydrogen_foundry",
+        "m:gtceu:strangelet_vault",
+        "m:gtceu:annihilation_engine",
+        "m:gtceu:jet_beam_line",
+        "m:gtceu:spallation_target_station",
+        "m:gtceu:antiproton_decelerator",
+        "m:gtceu:strangelet_distiller",
+        "m:gtceu:kugelblitz_forge",
+        "m:gtceu:hawking_collector",
+        "m:gtceu:magnetic_pair_converter",
+        "m:gtceu:field_frozen_press",
+        "m:gtceu:debris_harvester",
+        "gtceu:opv_electric_motor",
+        "gtceu:opv_electric_pump",
+        "gtceu:opv_conveyor_module",
+        "gtceu:opv_electric_piston",
+        "gtceu:opv_robot_arm",
+        "gtceu:opv_emitter",
+        "gtceu:opv_sensor",
+        "gtceu:opv_field_generator",
+        "gtceu:opv_machine_hull"
+      ]
+    },
+    {
+      "id": "opv-terzan5-items",
+      "era": "opv-terzan5",
+      "label": "Terzan 5 items and machines",
+      "items": [
+        "grindless:bulge_debris",
+        "grindless:metal_feedstock",
+        "grindless:silicate_debris_fraction",
+        "grindless:si_alloy_powder",
+        "grindless:cluster_sinter_casing",
+        "grindless:collector_node",
+        "grindless:spent_collector_node",
+        "grindless:deployed_node_pack",
+        "grindless:probe_seed",
+        "grindless:bulge_light_census",
+        "m:gtceu:replication_refinery",
+        "m:gtceu:von_neumann_foundry",
+        "m:gtceu:collector_node_works",
+        "m:gtceu:bulge_collector"
+      ]
+    },
+    {
+      "id": "max-hold",
+      "era": "max",
+      "label": "The Sgr A* chart (MAX gate c14)",
+      "items": [
+        "grindless:sgr_a_chart"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "id": "tetron_fab-products-only-tetron_fab",
+      "label": "The tetron fab products only from the tetron fab",
+      "anyOf": [
+        "grindless:tetron_die",
+        "grindless:tetron_array"
+      ],
+      "without": [
+        "operate:gtceu:tetron_fab*"
+      ],
+      "expect": "unreachable",
+      "package": "B1"
+    },
+    {
+      "id": "gamma_optics_works-products-only-gamma_optics_works",
+      "label": "The gamma optics works products only from the gamma optics works",
+      "anyOf": [
+        "grindless:laue_lens",
+        "grindless:gamma_multilayer_mirror"
+      ],
+      "without": [
+        "operate:gtceu:gamma_optics_works*"
+      ],
+      "expect": "unreachable",
+      "package": "B1"
+    },
+    {
+      "id": "antihydrogen_foundry-products-only-antihydrogen_foundry",
+      "label": "The antihydrogen foundry products only from the antihydrogen foundry",
+      "anyOf": [
+        "grindless:antihydrogen_ice_cell"
+      ],
+      "without": [
+        "operate:gtceu:antihydrogen_foundry*"
+      ],
+      "expect": "unreachable",
+      "package": "B3"
+    },
+    {
+      "id": "strangelet_vault-products-only-strangelet_vault",
+      "label": "The strangelet vault products only from the strangelet vault",
+      "anyOf": [
+        "grindless:stable_exotic_matter"
+      ],
+      "without": [
+        "operate:gtceu:strangelet_vault*"
+      ],
+      "expect": "unreachable",
+      "package": "D2"
+    },
+    {
+      "id": "spallation_target_station-products-only-spallation_target_station",
+      "label": "The spallation target station products only from the spallation target station",
+      "anyOf": [
+        "grindless:spent_ir_target"
+      ],
+      "without": [
+        "operate:gtceu:spallation_target_station*"
+      ],
+      "expect": "unreachable",
+      "package": "D1"
+    },
+    {
+      "id": "antiproton_decelerator-products-only-antiproton_decelerator",
+      "label": "The antiproton decelerator products only from the antiproton decelerator",
+      "anyOf": [
+        "grindless:cold_antiproton_cell"
+      ],
+      "without": [
+        "operate:gtceu:antiproton_decelerator*"
+      ],
+      "expect": "unreachable",
+      "package": "D1"
+    },
+    {
+      "id": "strangelet_distiller-products-only-strangelet_distiller",
+      "label": "The strangelet distiller products only from the strangelet distiller",
+      "anyOf": [
+        "grindless:strangelet_seed"
+      ],
+      "without": [
+        "operate:gtceu:strangelet_distiller*"
+      ],
+      "expect": "unreachable",
+      "package": "D2"
+    },
+    {
+      "id": "kugelblitz_forge-products-only-kugelblitz_forge",
+      "label": "The kugelblitz forge products only from the kugelblitz forge",
+      "anyOf": [
+        "grindless:kugelblitz_core",
+        "grindless:hawking_drive"
+      ],
+      "without": [
+        "operate:gtceu:kugelblitz_forge*"
+      ],
+      "expect": "unreachable",
+      "package": "D2"
+    },
+    {
+      "id": "field_frozen_press-products-only-field_frozen_press",
+      "label": "The field frozen press products only from the field frozen press",
+      "anyOf": [
+        "grindless:field_frozen_plate",
+        "grindless:field_frozen_casing"
+      ],
+      "without": [
+        "operate:gtceu:field_frozen_press*"
+      ],
+      "expect": "unreachable",
+      "package": "A3"
+    },
+    {
+      "id": "debris_harvester-products-only-debris_harvester",
+      "label": "The debris harvester products only from the debris harvester",
+      "anyOf": [
+        "grindless:bulge_debris",
+        "grindless:silicate_debris_fraction"
+      ],
+      "without": [
+        "operate:gtceu:debris_harvester*"
+      ],
+      "expect": "unreachable",
+      "package": "R1"
+    },
+    {
+      "id": "replication_refinery-products-only-replication_refinery",
+      "label": "The replication refinery products only from the replication refinery",
+      "anyOf": [
+        "grindless:metal_feedstock",
+        "grindless:si_alloy_powder",
+        "grindless:cluster_sinter_casing"
+      ],
+      "without": [
+        "operate:gtceu:replication_refinery*"
+      ],
+      "expect": "unreachable",
+      "package": "R2"
+    },
+    {
+      "id": "von_neumann_foundry-products-only-von_neumann_foundry",
+      "label": "The von neumann foundry products only from the von neumann foundry",
+      "anyOf": [
+        "grindless:probe_seed"
+      ],
+      "without": [
+        "operate:gtceu:von_neumann_foundry*"
+      ],
+      "expect": "unreachable",
+      "package": "R2"
+    },
+    {
+      "id": "collector_node_works-products-only-collector_node_works",
+      "label": "The collector node works products only from the collector node works",
+      "anyOf": [
+        "grindless:collector_node",
+        "grindless:deployed_node_pack"
+      ],
+      "without": [
+        "operate:gtceu:collector_node_works*"
+      ],
+      "expect": "unreachable",
+      "package": "R3"
+    },
+    {
+      "id": "bulge_collector-products-only-bulge_collector",
+      "label": "The bulge collector products only from the bulge collector",
+      "anyOf": [
+        "grindless:spent_collector_node",
+        "grindless:bulge_light_census"
+      ],
+      "without": [
+        "operate:gtceu:bulge_collector*"
+      ],
+      "expect": "unreachable",
+      "package": "R3"
+    },
+    {
+      "id": "cosmic-mainframe-only-hall",
+      "label": "The cosmic mainframe only from the photonic integration hall (one recipe)",
+      "anyOf": [
+        "gtnn:cosmic_mainframe"
+      ],
+      "without": [
+        "operate:gtceu:photonic_integration_hall*"
+      ],
+      "expect": "unreachable",
+      "package": "A2"
+    },
+    {
+      "id": "site-opv-overworld",
+      "label": "Site: the antihydrogen foundry and annihilation engine only on the overworld",
+      "kind": "site",
+      "types": [
+        "gtceu:antihydrogen_synthesis",
+        "gtceu:annihilation_power"
+      ],
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "package": "B3"
+    },
+    {
+      "id": "site-opv-cygnus",
+      "label": "Site: the jet beam line, target station, decelerator, distiller, kugelblitz forge and Hawking collector only at Cygnus X-1 orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:jet_beam_extraction",
+        "gtceu:antiproton_production",
+        "gtceu:beam_cooling",
+        "gtceu:strangelet_distillation",
+        "gtceu:kugelblitz_forming",
+        "gtceu:hawking_power"
+      ],
+      "dimensions": [
+        "grindless:cygnus_x1_orbit"
+      ],
+      "package": "D1"
+    },
+    {
+      "id": "site-opv-sgr",
+      "label": "Site: the pair converter and field-frozen press only at SGR 1806-20 orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:magnetic_pair_production",
+        "gtceu:field_freezing"
+      ],
+      "dimensions": [
+        "grindless:sgr1806_orbit"
+      ],
+      "package": "E1"
+    },
+    {
+      "id": "site-opv-terzan5",
+      "label": "Site: the debris harvester, refinery, foundry, node works and bulge collector only at the Terzan 5 core",
+      "kind": "site",
+      "types": [
+        "gtceu:debris_harvesting",
+        "gtceu:replication_refining",
+        "gtceu:self_replication",
+        "gtceu:collector_node_assembly",
+        "gtceu:bulge_light_collection"
+      ],
+      "dimensions": [
+        "grindless:terzan5_core"
+      ],
+      "package": "R1"
+    },
+    {
+      "id": "site-earth-orbit",
+      "label": "Site: the light sail fab and the antimatter trap only in Earth orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:light_sail",
+        "gtceu:antimatter_storage"
+      ],
+      "dimensions": [
+        "${orbit:earth}"
+      ],
+      "exceptRecipes": [
+        "grindless:antimatter_storage/ps_bec",
+        "grindless:antimatter_storage/antiproton_stack_opv"
+      ],
+      "package": [
+        "A12",
+        "A5"
+      ],
+      "note": "Overrides uv.json: antiproton_stack_opv is the OpV B3 row, run at Cygnus X-1 orbit."
+    },
+    {
+      "id": "site-antiproton-stack-opv",
+      "label": "Site: the OpV antiproton stack row only at Cygnus X-1 orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:antimatter_storage"
+      ],
+      "dimensions": [
+        "grindless:cygnus_x1_orbit"
+      ],
+      "recipe": [
+        "grindless:antimatter_storage/antiproton_stack_opv"
+      ],
+      "exact": true,
+      "package": "B3"
+    },
+    {
+      "id": "gate-hold-sgr1806",
+      "label": "Gate: the hold row for SGR 1806-20 (c11)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": [
+        "grindless:warp_gate/hold_sgr1806"
+      ],
+      "package": "E1"
+    },
+    {
+      "id": "gate-hold-terzan5",
+      "label": "Gate: the hold row for Terzan 5 (c12)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": [
+        "grindless:warp_gate/hold_terzan5"
+      ],
+      "package": "R1"
+    },
+    {
+      "id": "gate-hold-sgr-a",
+      "label": "Gate: the hold row for Sgr A* (c13)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": [
+        "grindless:warp_gate/hold_sgr_a"
+      ],
+      "package": "G1"
+    },
+    {
+      "id": "gate-sgr-orbit",
+      "label": "Gate: the jump to SGR 1806-20",
+      "allOf": [
+        "dim:grindless:sgr1806_orbit"
+      ],
+      "package": "E1"
+    },
+    {
+      "id": "gate-terzan5-core",
+      "label": "Gate: the jump to Terzan 5",
+      "allOf": [
+        "dim:grindless:terzan5_core"
+      ],
+      "package": "R1"
+    },
+    {
+      "id": "gate-sgr-a-chart",
+      "label": "Gate: the Sgr A* chart",
+      "item": "grindless:sgr_a_chart",
+      "package": "G1"
+    }
+  ]
+}
