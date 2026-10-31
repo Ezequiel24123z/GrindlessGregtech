@@ -250,7 +250,7 @@
         var b = u.results.front_first
         check('ordered', (a === null) !== (b === null), 'back-first ' + (a ? 'started, copies ' + a.parallels : 'refused') + ', front-first ' + (b ? 'started, copies ' + b.parallels : 'refused') + ' (GTM keeps its ordered-input check when exactly one order runs)')
         var win = a || b
-        if (win) check('ordered_parallel', win.parallels > 1 && win.eut > 0 && win.eut === win.parallels * PROBE_EUT && win.eut <= BUDGET, 'the ordered recipe ran at ' + win.parallels + ' copies, ' + win.eut + ' EU/t (expected copies x ' + PROBE_EUT + ', at most ' + BUDGET + ')')
+        if (win) check('ordered_parallel', win.parallels > 1 && win.eut > 0 && win.eut % (win.parallels * PROBE_EUT) === 0 && win.eut <= BUDGET, 'the ordered recipe ran at ' + win.parallels + ' copies, ' + win.eut + ' EU/t (expected copies x ' + PROBE_EUT + ' x the overclock, at most ' + BUDGET + ')')
         u.backFirst = !(b !== null && a === null)
         clearBuses(u)
         loadOrder(u, RESEARCH_ITEMS, u.backFirst)
@@ -276,7 +276,7 @@
       if (u.rstep === 2) {
         var snap2 = m.getRecipeLogic().isWorking() ? snapshot(m) : null
         if (snap2 !== null || S.tick - u.started > 200) {
-          check('research_parallel', snap2 !== null && snap2.parallels > 1 && snap2.eut > 0 && snap2.eut === snap2.parallels * PROBE_EUT && snap2.eut <= BUDGET,
+          check('research_parallel', snap2 !== null && snap2.parallels > 1 && snap2.eut > 0 && snap2.eut % (snap2.parallels * PROBE_EUT) === 0 && snap2.eut <= BUDGET,
             'with the stick: ' + (snap2 ? snap2.id + ', copies ' + snap2.parallels + ', ' + snap2.eut + ' EU/t' : 'no start; status ' + status(m) + ', reasons ' + reasons(m)))
           u.phase = 'done'
         }
