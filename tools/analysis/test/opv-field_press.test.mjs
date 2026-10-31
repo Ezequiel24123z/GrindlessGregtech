@@ -1,5 +1,6 @@
 // OpV-A3 (field_press): the field-frozen press rows (machine 13, line 3), its controller line, the electron beam c22 can and re-melt, line 45's
-// older rows (AlN power die), and the structure of startup_scripts/grindless/opv/field_press.js. T1 is gg_test_opv_field_press.
+// older rows (AlN power die), the OpV field generator and the six OpV hatches, and the structure of startup_scripts/grindless/opv/field_press.js.
+// T1 is gg_test_opv_field_press.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -147,6 +148,38 @@ test('the controller: OpV hull, 10 OpV components of three families, 4 OpV circu
   assert.ok(!/opv_field_generator|energy_input_hatch|energy_output_hatch|field_frozen_plate/.test(text), 'bootstrap: nothing that needs the press');
   assert.ok(!named(r).some((s) => /uxv|uiv|uev|uhv|circuits\/(?!opv)/.test(s)), 'no lower component or circuit');
   assert.ok(text.includes(`${VA_OPV}`), 'VA[OpV]');
+});
+
+test('the OpV field generator: the emitter between two field coils inside four field-frozen plates, made only here', () => {
+  assert.deepEqual(plain(FP.fieldGeneratorRecipes), ['grindless:assembler/opv_field_generator']);
+  const r = find('grindless:assembler/opv_field_generator');
+  assert.ok(r && r.t === 'gtceu:assembler');
+  const text = JSON.stringify(r.j);
+  for (const need of ['gtceu:opv_emitter', 'grindless:chain_field_coil', 'grindless:field_frozen_plate', 'gtceu:circuits/opv', 'gtceu:chain_strand_single_cable',
+    'gtceu:soldering_alloy']) assert.ok(text.includes(need), `takes ${need}`);
+  assert.ok(!named(r).some((s) => /uxv|uiv|uev|uhv|circuits\/(?!opv)/.test(s)), 'no lower component or circuit');
+  assert.ok(text.includes(`${2 * V_UXV}`), '2 A of UXV');
+  assert.deepEqual(producers('gtceu:opv_field_generator').map((x) => x.i), ['grindless:assembler/opv_field_generator']);
+});
+
+test('the six OpV hatches: assembly lines at VA[OpV] on the sensor or emitter, field-frozen plates and AlN power dies; 4 A and 16 A on field generators', () => {
+  const names = [];
+  for (const dir of ['input', 'output']) for (const amp of ['', '_4a', '_16a']) names.push(`opv_energy_${dir}_hatch${amp}`);
+  assert.deepEqual(plain(FP.hatchRecipes), names.map((n) => `grindless:assembly_line/${n}`));
+  // the stand-in's json carries no duration: 1200 t each, read from the script
+  assert.ok(/fluids: \[\['gtceu:soldering_alloy', 2304\], \['gtceu:superfluid_helium_3', 1000\]\], eut: VA_OPV, duration: 1200/.test(kube('server_scripts', 'grindless', 'opv', 'field_press.js')), '1200 t');
+  for (const n of names) {
+    const r = find(`grindless:assembly_line/${n}`);
+    assert.ok(r && r.t === 'gtceu:assembly_line', n);
+    const text = JSON.stringify(r.j);
+    const part = n.includes('input') ? 'gtceu:opv_sensor' : 'gtceu:opv_emitter';
+    for (const need of [`gtceu:${n}`, part, 'grindless:field_frozen_plate', 'grindless:aln_power_die', 'gtceu:circuits/opv', 'gtceu:superfluid_helium_3'])
+      assert.ok(text.includes(`"${need}"`), `${n} takes ${need}`);
+    assert.equal(text.includes('"gtceu:opv_field_generator"'), !/hatch$/.test(n), `${n}: field generator from 4 A up`);
+    assert.ok(text.includes(`${VA_OPV}`), `${n}: VA[OpV]`);
+    assert.ok(!named(r).some((s) => /uxv|uiv|uev|uhv|circuits\/(?!opv)/.test(s)), `${n}: no lower component or circuit`);
+    assert.deepEqual(producers(`gtceu:${n}`).map((x) => x.i).filter((i) => i.startsWith('grindless:')), [`grindless:assembly_line/${n}`], `${n}: one of ours`);
+  }
 });
 
 test('structure: not boring, frame and coil, controller in the front slice, 16 rows at most, dominant share <= 0.7', () => {

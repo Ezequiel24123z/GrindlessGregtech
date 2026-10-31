@@ -6,7 +6,8 @@
 //   gtceu:field_freezing  field-frozen press, c1 four W-Re canned stacks -> billet + spent cans, c2 billet -> field-frozen plates,
 //                         c3 plates + tungsten steel frame -> field-frozen casing. Only at SGR 1806-20's orbit.
 //   assembly_line         the controller (grindless:assembly_line/field_frozen_press): OpV parts only, no field generator and no OpV hatch
-//                         (they need its plate).
+//                         (they need its plate); the six OpV hatches (grindless:assembly_line/opv_energy_{input,output}_hatch[_4a|_16a]).
+//   assembler             gtceu:opv_field_generator (grindless:assembler/opv_field_generator), on four field-frozen plates.
 //
 // Older rows of the package, in their own tables and files: electron beam c22 (the W-Re can and its re-melt, tables/electron_beam.json);
 // line 45: nitride magnet works c16-17 (tables/composites.json), crystal growth c22 (tables/crystals.json), MOCVD c22
@@ -14,7 +15,8 @@
 // Row keys: "site" true puts recipe.dimension(sgr1806_orbit) on it; "kept" are not consumed; "wear" are chanced inputs; an output with a
 // "chance" is a chanced output (count 1).
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
-// Published for the smoke test: global.grindless.fieldPress.recipes, .skipped, .clashes, .controllerRecipes, .cutterRecipes.
+// Published for the smoke test: global.grindless.fieldPress.recipes, .skipped, .clashes, .controllerRecipes, .cutterRecipes,
+// .fieldGeneratorRecipes, .hatchRecipes.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   var LOG = '[grindless/opv] '
@@ -218,9 +220,58 @@
     FP.cutterRecipes.push('grindless:cutter/aln_wafer')
   }
 
+  // gtceu:opv_field_generator (docs/eras/opv.md component table): the OpV emitter between two field coils inside four field-frozen
+  // plates, so every field generator needs the press
+  function addFieldGenerator(event) {
+    FP.fieldGeneratorRecipes = []
+    var ids = ['gtceu:opv_emitter', 'grindless:chain_field_coil', 'grindless:field_frozen_plate', 'gtceu:chain_strand_single_cable', 'gtceu:opv_field_generator']
+    var missing = ids.filter(function (id) { return !Item.exists(id) })
+    if (!Fluid.exists('gtceu:soldering_alloy')) missing.push('gtceu:soldering_alloy')
+    if (missing.length > 0) {
+      console.error(LOG + 'field_press opv_field_generator skipped, unknown id(s): ' + missing.join(', '))
+      return
+    }
+    event.recipes.gtceu.assembler('grindless:opv_field_generator')
+      .itemInputs('1x gtceu:opv_emitter', '2x grindless:chain_field_coil', '4x grindless:field_frozen_plate', '2x #gtceu:circuits/opv',
+        '2x gtceu:chain_strand_single_cable')
+      .inputFluids(Fluid.of('gtceu:soldering_alloy', 1152))
+      .itemOutputs('1x gtceu:opv_field_generator')
+      .EUt(268435456).duration(600)
+    FP.fieldGeneratorRecipes.push('grindless:assembler/opv_field_generator')
+  }
+
+  // the six OpV hatches (docs/eras/opv.md, hull and hatches): each takes the sensor (energy) or the emitter (dynamo), field-frozen plates
+  // and AlN power dies, and from 4 A up field generators. Two sensors or emitters on the 2 A and 1 A hatches, and one more with two
+  // plates on the 4 A and 16 A ones, so each holds two OpV components of its own and takes the plate directly.
+  var HATCHES = (function () {
+    var out = []
+    ;[['input', 'gtceu:opv_sensor'], ['output', 'gtceu:opv_emitter']].forEach(function (d) {
+      var base = 'gtceu:opv_energy_' + d[0] + '_hatch'
+      out.push({ output: base, research: d[1], items: ['gtceu:opv_machine_hull', '2x gtceu:chain_strand_single_cable', '2x ' + d[1],
+        '2x #gtceu:circuits/opv', '2x grindless:field_frozen_plate', '1x grindless:aln_power_die'] })
+      out.push({ output: base + '_4a', research: base, items: [base, '2x grindless:aln_power_die', '2x grindless:chain_field_coil',
+        '1x gtceu:opv_field_generator', '1x ' + d[1], '2x grindless:field_frozen_plate', '2x #gtceu:circuits/opv'] })
+      out.push({ output: base + '_16a', research: base + '_4a', items: [base + '_4a', '4x grindless:aln_power_die', '2x gtceu:opv_field_generator',
+        '1x ' + d[1], '2x grindless:field_frozen_plate', '4x #gtceu:circuits/opv'] })
+    })
+    return out
+  })()
+
+  function addHatches(event) {
+    FP.hatchRecipes = []
+    HATCHES.forEach(function (h) {
+      var id = assemblyLine(event, {
+        name: h.output.split(':')[1], output: h.output, research: h.research, cwut: 64, researchEut: 125829120, items: h.items,
+        fluids: [['gtceu:soldering_alloy', 2304], ['gtceu:superfluid_helium_3', 1000]], eut: VA_OPV, duration: 1200
+      })
+      if (id !== null) FP.hatchRecipes.push(id)
+    })
+  }
+
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
-    var steps = [['recipes', generate], ['controller', addController], ['cutter', addCutter]]
+    var steps = [['recipes', generate], ['controller', addController], ['cutter', addCutter], ['field generator', addFieldGenerator],
+      ['hatches', addHatches]]
     steps.forEach(function (s) {
       try {
         s[1](event)
