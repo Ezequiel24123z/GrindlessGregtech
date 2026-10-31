@@ -141,7 +141,9 @@ test('the five older rows exist', () => {
   const eb = JSON.parse(fs.readFileSync(path.join(tables, 'electron_beam.json'), 'utf8')).types.electron_beam_refining.recipes;
   const button = eb.find((r) => r.name === 'nb_ta_button');
   assert.equal(button.circuit, 7);
-  assert.equal(new Set(eb.map((r) => r.circuit)).size, eb.length);
+  // OpV-F3: a circuit may repeat only with different item inputs (consumed or kept); A3's c22 can and re-melt share one
+  const ebKey = (r) => `${r.circuit}|${ids(r.itemsIn).concat(ids(r.kept)).sort().join(',')}`;
+  assert.equal(new Set(eb.map(ebKey)).size, eb.length);
   assert.ok(ids(button.itemsOut).includes('grindless:nb_ta_button'));
   const comp = JSON.parse(fs.readFileSync(path.join(tables, 'composites.json'), 'utf8')).types;
   const halbach = comp.nitride_magnet_synthesis.recipes;
