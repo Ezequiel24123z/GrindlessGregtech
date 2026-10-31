@@ -1,3 +1,4 @@
+// priority: 5984
 (function () {
   var names = {
     jet_beam_line: ['Jet Beam Line', 'Linea del haz del jet'],
@@ -42,7 +43,7 @@
     ClientEvents.lang(lang, function (event) {
       Object.keys(names).forEach(function (name) {
         event.add('block.gtceu.' + name, names[name][i])
-        event.add('grindless.machine.' + name + '.tooltip.0', tips[name][i])
+        event.add('grindless.machine.' + name + '.tooltip.0', '\u00a77' + tips[name][i])
         pages[name].forEach(function (p, n) { event.add('emi.grindless.info.' + name + '.' + n, p[i]) })
       })
       Object.keys(types).forEach(function (name) { event.add('gtceu.' + name, types[name][i]) })
@@ -52,6 +53,7 @@
       })
       event.add('item.grindless.spent_li6_shield', i === 0 ? 'Spent Li-6 Hydride Shield' : 'Blindaje de hidruro de Li-6 usado')
       event.add('tooltip.grindless.spent_li6_shield.0', i === 0 ? 'D1 line 22: bake out, then recover tritium in the IV tritium removal facility.' : 'Linea D1 22: hornear y recuperar tritio en la instalacion de extraccion IV.')
+      event.add('gtceu.recipe.grindless_antimatter_storage.antiproton_stack_opv', i === 0 ? 'Eight cold cells stacked; 90% empty Penning traps returned.' : 'Ocho celdas frias apiladas; devuelve el 90% de trampas de Penning vacias.')
     })
   })
 })()
