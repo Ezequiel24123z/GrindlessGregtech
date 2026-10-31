@@ -178,7 +178,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   ]) assert.ok(flat.includes(k), k);
   for (const m of ['tfln_fab', 'femtosecond_writer']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   // OpV-A2's rows (ion slicing c5-6, femtosecond c6) keep their EMI lines in its own lang file
-  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'max_components_lang.js') + read('client_scripts', 'grindless', 'max_interferometer_lang.js') + read('client_scripts', 'grindless', 'max_sgra_modes_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js');
+  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'max_components_lang.js') + read('client_scripts', 'grindless', 'max_interferometer_lang.js') + read('client_scripts', 'grindless', 'max_sgra_modes_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js') + read('client_scripts', 'grindless', 'max_imager_lang.js');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
     // OpV-B1: a row marked OpV-B1 is named in opv_tetron_optics_lang.js (checked by opv-tetron_optics.test.mjs)
