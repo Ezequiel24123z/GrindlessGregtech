@@ -92,8 +92,16 @@
     { "id": "grindless:assembler/opv_wireless_energy_hatch_64a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_energy_hatch_16a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
     { "id": "grindless:assembler/opv_wireless_dynamo_hatch_4a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_dynamo_hatch (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
     { "id": "grindless:assembler/opv_wireless_dynamo_hatch_16a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_dynamo_hatch_4a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
-    { "id": "grindless:assembler/opv_wireless_dynamo_hatch_64a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_dynamo_hatch_16a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" }
+    { "id": "grindless:assembler/opv_wireless_dynamo_hatch_64a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_dynamo_hatch_16a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:hot_cell/spent_ir_target_decladding", "reason": "OpV-D1 declads the spent Ir target; grindless:spent_ir_target is held until B3's spallation target station makes it: B3 deletes this entry with its hold rule" },
+    { "id": "grindless:assembler/opv/cooler_electron_gun", "reason": "OpV-D1 landed before A1: its input grindless:chain_field_coil is held until A1 (components) writes its producer; A1 deletes this entry with its hold rule" }
   ],
   "pendingUses": [
-      ]
+    { "id": "grindless:be_beam_window", "package": "B3", "reason": "OpV-D1 makes it; B3's antimatter beam lines use it" },
+    { "id": "grindless:ir_spallation_target", "package": "B3", "reason": "OpV-D1 makes it; B3's spallation target station uses it" },
+    { "id": "grindless:li6_hydride_shield", "package": "B3", "reason": "OpV-D1 makes it; B3's antimatter beam lines use it" },
+    { "id": "grindless:electron_cooler", "package": "B3", "reason": "OpV-D1 makes it; B3's antiproton cooling uses it" },
+    { "id": "grindless:stochastic_cooling_pickup", "package": "B3", "reason": "OpV-D1 makes it; B3's antiproton cooling uses it" },
+    { "id": "grindless:neg_xhv_casing", "package": "B3, D2", "reason": "OpV-D1 makes it; B3's and D2's multiblocks use it" }
+  ]
     }
