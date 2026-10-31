@@ -4,7 +4,8 @@
 //     recipes      the seven assembler rows of server_scripts/grindless/opv/components.js are in the recipe manager at 2^28 EU/t
 //     gtm_cut      each of the four components made here has exactly one producer, ours: GTM's own recipe for the same id is gone (F2)
 //     gcym_formed  gtceu:large_assembler, built from its own preview shape with two gtceu:uxv_energy_input_hatch_4a, forms
-//     runs         it takes the 2^28 conveyor row (2 motors + 2 chain mesh belts + 1 chain cable) and reports the recipe as running
+//     runs         it takes the 2^28 conveyor row (2 motors + 2 chain mesh belts + 1 chain cable + 2 tritanium plates + 4 tritanium rounds +
+//                  2 tritanium rings; no fluid) and reports the recipe as running
 //     output       the OpV conveyor module reaches the output bus
 (function () {
   var S = null
@@ -24,7 +25,8 @@
   var LATER = ['gtceu:opv_robot_arm', 'gtceu:opv_emitter', 'gtceu:opv_sensor', 'gtceu:opv_fluid_regulator']
   var PROBE = 'grindless:assembler/opv_conveyor_module'
   var PROBE_OUT = 'gtceu:opv_conveyor_module'
-  var PROBE_IN = [['gtceu:opv_electric_motor', 2], ['grindless:chain_mesh_belt', 2], ['gtceu:chain_strand_single_cable', 1]]
+  var PROBE_IN = [['gtceu:opv_electric_motor', 2], ['grindless:chain_mesh_belt', 2], ['gtceu:chain_strand_single_cable', 1], ['gtceu:tritanium_plate', 2],
+    ['gtceu:tritanium_round', 4], ['gtceu:tritanium_ring', 2]]
 
   function classes() {
     if (C !== null) return C
