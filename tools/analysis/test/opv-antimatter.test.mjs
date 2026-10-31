@@ -351,7 +351,7 @@ test('the native fixture fits the assigned band and exposes the grouped-run comp
     if (d.symbols[ch]?.kind === 'controller') controller = { si, ri, ci };
   })));
   assert.ok(controller);
-  for (const cx of [38216, 38236, 38256]) {
+  for (const cx of [38856, 38876, 38896]) {
     d.slices.forEach((rows, si) => rows.forEach((row, ri) => [...row].forEach((_ch, ci) => {
       const xyz = [cx - ci + controller.ci, 104 + ri - controller.ri, 8 - si + controller.si];
       for (const [axis, value] of [['x', xyz[0]], ['y', xyz[1]], ['z', xyz[2]]]) {

@@ -93,7 +93,7 @@ test('electron beam c22: the W-Re can and its re-melt (80% back), appended at th
   assert.deepEqual(ids(melt.itemsOut), [['grindless:six_n_rhenium', 4], ['grindless:eb_skull', 1]]);
   assert.deepEqual(melt.fluidsOut, [{ id: 'gtceu:tungsten', amount: 1152 }]);
   assert.equal(melt.fluidsOut[0].amount, 0.8 * 5 * can.fluidsIn[0].amount, '80% of the tungsten');
-  assert.equal(rows.filter((r) => r.circuit === 22).length, 2, 'c22 is ours alone');
+  assert.equal(rows.filter((r) => r.circuit === 22 && !/^OpV-B3a/.test(r._why || '')).length, 2, 'c22 is ours alone (OpV-B3a\'s hohlraum can shares it by item inputs)');
   for (const n of ['field_can', 'field_can_remelt']) assert.ok(find(`grindless:electron_beam_refining/${n}`), `${n} built`);
 });
 

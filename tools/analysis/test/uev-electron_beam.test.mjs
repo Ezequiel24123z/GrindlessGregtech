@@ -333,7 +333,8 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     assert.ok(lang.includes(`'${key}'`), key);
   }
   for (const [type, dataKey] of [['electron_beam_refining', 'grindless_electron_beam'], ['single_crystal_casting', 'grindless_single_crystal_casting']]) {
-    const rowLang = lang + read(path.join(kube, 'client_scripts', 'grindless', 'opv_pair_converter_lang.js'));
+    const rowLang = lang + read(path.join(kube, 'client_scripts', 'grindless', 'opv_pair_converter_lang.js'))
+      + read(path.join(kube, 'client_scripts', 'grindless', 'opv_antimatter_lang.js')); // OpV-B3a's c21, c22 and c32 row names
     for (const r of T.types[type].recipes) assert.ok(rowLang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
 });
