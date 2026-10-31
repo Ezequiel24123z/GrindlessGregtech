@@ -285,6 +285,7 @@
    "gtceu:engine_test_stand"
   ],
   "max": [
+   "gtceu:accretion_feeder",
    "gtceu:atom_interferometer_works",
    "gtceu:cluster_light_furnace",
    "gtceu:gene_ark",

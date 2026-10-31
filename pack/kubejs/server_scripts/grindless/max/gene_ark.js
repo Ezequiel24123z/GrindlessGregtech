@@ -1,4 +1,4 @@
-// priority: -19940
+// priority: -19934
 // -----------------------------------------------------------------------------------------------
 // MAX-B4 gene ark (docs/eras/max.md, machine 4, lines L12 and L28; package MAX-B4). The line steps on older machines are rows marked MAX-B4
 // in their own tables and scripts; this file holds the machine's two recipes and its controller:

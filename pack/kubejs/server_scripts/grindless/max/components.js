@@ -1,4 +1,4 @@
-// priority: -19880
+// priority: -19864
 // -----------------------------------------------------------------------------------------------
 // MAX-A2 "First six components" (docs/eras/max.md, A2; lines L9, L10, L41 and the Components table): the GTM steps of the lines that
 // feed the six components, and the six components themselves. Every other step is one row in an older machine's table.

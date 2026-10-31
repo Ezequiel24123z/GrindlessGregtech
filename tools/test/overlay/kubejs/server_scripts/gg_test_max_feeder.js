@@ -1,4 +1,4 @@
-// priority: -5490
+// priority: -5421
 // TEST ONLY, MAX-E1 (gtceu:accretion_feeder). Command: kubejs custom_command gg_test_max_feeder
 // Copied over the instance on the test bench, never shipped. NOT run by the package worker: the MAX integrator runs it.
 // Band ONLY: X 40280-40343, Z 0-63, Y 98-135, in gcyr:black_hole_orbit (the Sgr A* level; zones.json row max_feeder).
@@ -169,7 +169,7 @@
     var missing = IDS.filter(function (i) { return !rm.byKey(new (classes().RL)('grindless:' + i)).isPresent() })
     check('lookup', missing.length === 0, IDS.length + ' ids checked; missing: ' + (missing.length ? missing.join(', ') : 'none'))
     var MI = global.grindless.maxFeeder
-    var pending = MI ? MI.pendingRoutes.join(',') : 'none'
+    var pending = MI ? (MI.pendingRoutes || []).join(',') : 'none'
     check('static', !!MI && MI.skipped.length === 0 && pending === '',
       'recipes ' + (MI ? MI.recipes.length : null) + ', skipped ' + JSON.stringify(MI ? MI.skipped : null) + ', pending ' + pending)
   }
@@ -190,7 +190,7 @@
       check('formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', dynamo hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
       drain(u.energy)
-      setBus(u.bus, [[CANISTER, 1], [PANEL, 1], [CIRCUIT, 1, '{Configuration:1}']])
+      setBus(u.bus, [[CANISTER, 1], [PANEL, 1], ['grindless:wolter_mirror_module', 1], [CIRCUIT, 1, '{Configuration:1}']])
       u.last = m.getRecipeLogic().getLastRecipe()
       u.started = S.tick
       u.phase = 'run'
