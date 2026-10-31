@@ -41,6 +41,24 @@
     return '#'
   }
 
+  // 15: a clean 9 x 9 x 9 plant, a titanium-pipe carbonyl column at x = 2, vent windows on the side walls, a low divider to the salt bath
+  function refineryCell(x, y, z) {
+    var dx = x - 4
+    var dz = z - 4
+    var r = max(abs(dx), abs(dz))
+    if (y === 0) return 'X'
+    if (r === 4) {
+      if (y === 8) return 'F'
+      if ((y === 3 || y === 5) && abs(dx) === 4 && abs(dz) <= 2) return 'V'
+      if (y === 2 || y === 6) return 'P'
+      if (y === 4) return (x + z) % 2 === 0 ? 'P' : 'F'
+      return (x + z) % 2 === 0 ? 'B' : 'F'
+    }
+    if (dx === -2 && dz === 0 && y <= 7) return 'P'
+    if (dx === 1 && y <= 3 && abs(dz) <= 3) return 'F'
+    return '#'
+  }
+
   R.machines = [
     {
       name: 'debris_harvester', machine: 'gtceu:debris_harvester', type: 'debris_harvesting', dataKey: 'grindless_debris_harvesting', lang: 'Debris Harvester',
@@ -49,11 +67,20 @@
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
       }
+    },
+    {
+      name: 'replication_refinery', machine: 'gtceu:replication_refinery', type: 'replication_refining', dataKey: 'grindless_replication_refining', lang: 'Replication Refinery',
+      maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 2, fluidsOut: 2 }, width: 9, height: 9, depth: 9, casing: CLEAN, texture: CLEAN_TEXTURE,
+      pal: { F: CLEAN, P: 'gtceu:titanium_pipe_casing', V: 'gtceu:heat_vent', B: 'gtceu:steel_gearbox' }, fn: refineryCell,
+      parts: function () {
+        return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('input_hatch', { min: 1, max: 2 }),
+          Pat.part('output_hatch', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
+      }
     }
   ]
 
-  R.items = ['metal_debris_fraction']
-  R.materials = {}
+  R.items = ['metal_debris_fraction', 'carbonyl_iron_nickel', 'ffc_pellet', 'spent_graphite_anode']
+  R.materials = { 'grindless:metal_carbonyl': { colour: 0xB8C4D8, formula: 'Fe(CO)5' } }
 
   // built in the machine registry callback: uiv/shapes.js may load after this file
   function spec(m) {

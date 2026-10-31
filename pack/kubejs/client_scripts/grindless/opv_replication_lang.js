@@ -33,7 +33,38 @@
             'Circuito 1: cuatro escombros del bulbo recogidos con un cabezal sensor que no se consume.'],
         ['gtceu.recipe.grindless_debris_harvesting.debris_fractions',
             'Circuit 2: four bulge debris sorted into two metal and two silicate fractions.',
-            'Circuito 2: cuatro escombros del bulbo separados en dos fracciones metálicas y dos silicatadas.']
+            'Circuito 2: cuatro escombros del bulbo separados en dos fracciones metálicas y dos silicatadas.'],
+
+        ['block.gtceu.replication_refinery', 'Replication Refinery', 'Refinería de replicación'],
+        ['gtceu.replication_refining', 'Replication Refining', 'Refinado de replicación'],
+        ['grindless.machine.replication_refinery.tooltip.0',
+            '\u00a77Turns debris fractions into feedstock and casings: Mond carbonyl and FFC salt.',
+            '\u00a77Convierte fracciones de escombros en materia prima y carcasas: carbonilo Mond y sal FFC.'],
+        ['material.grindless.metal_carbonyl', 'Metal Carbonyl', 'Carbonilo metálico'],
+
+        ['item.grindless.carbonyl_iron_nickel', 'Carbonyl Iron-Nickel Powder', 'Polvo carbonilo de hierro y níquel'],
+        ['tooltip.grindless.carbonyl_iron_nickel.0', 'Fine powder from the decomposed metal carbonyl.', 'Polvo fino del carbonilo metálico descompuesto.'],
+        ['tooltip.grindless.carbonyl_iron_nickel.1', 'Sintered into metal feedstock for the foundry.', 'Se sinteriza en materia prima metálica para la fundición.'],
+        ['item.grindless.ffc_pellet', 'FFC Pellet', 'Pellet FFC'],
+        ['tooltip.grindless.ffc_pellet.0', 'Pressed silicate debris, ready for the molten salt bath.', 'Escombros silicatados prensados, listos para el baño de sal fundida.'],
+        ['tooltip.grindless.ffc_pellet.1', 'Reduced to silicon alloy powder at the anode.', 'Se reduce a polvo de aleación de silicio en el ánodo.'],
+        ['item.grindless.spent_graphite_anode', 'Spent Graphite Anode', 'Ánodo de grafito gastado'],
+        ['tooltip.grindless.spent_graphite_anode.0', 'A worn anode from the FFC salt bath.', 'Un ánodo desgastado del baño de sal FFC.'],
+        ['tooltip.grindless.spent_graphite_anode.1', 'The methane pyrolyser cracks it back into graphene.', 'El pirolizador de metano lo craquea de nuevo en grafeno.'],
+
+        ['emi.grindless.info.replication_refinery.0',
+            'Two cells in one plant. The carbonyl cell binds metal fractions with carbon monoxide, then decomposes the carbonyl into powder and returns 90% of the gas; the powder sinters into feedstock.',
+            'Dos celdas en una planta. La celda de carbonilo une las fracciones metálicas con monóxido de carbono y luego descompone el carbonilo en polvo devolviendo el 90% del gas; el polvo se sinteriza en materia prima.'],
+        ['emi.grindless.info.replication_refinery.1',
+            'The salt cell presses silicate pellets, turns them into silicon alloy powder at graphite anodes (oxygen is the by-product, the spent anodes go to the methane pyrolyser) and sinters cluster casings.',
+            'La celda de sal prensa pellets silicatados, los convierte en polvo de aleación de silicio en ánodos de grafito (el oxígeno es subproducto, los ánodos gastados van al pirolizador de metano) y sinteriza carcasas de cúmulo.'],
+
+        ['gtceu.recipe.grindless_replication_refining.metal_carbonyl_synthesis', 'Circuit 1: metal fraction and carbon monoxide bound into carbonyl.', 'Circuito 1: fracción metálica y monóxido de carbono unidos en carbonilo.'],
+        ['gtceu.recipe.grindless_replication_refining.carbonyl_decomposition', 'Circuit 2: carbonyl decomposed into powder; 90% of the gas returns.', 'Circuito 2: carbonilo descompuesto en polvo; vuelve el 90% del gas.'],
+        ['gtceu.recipe.grindless_replication_refining.metal_feedstock_sinter', 'Circuit 3: iron-nickel powder sintered into metal feedstock.', 'Circuito 3: polvo de hierro y níquel sinterizado en materia prima metálica.'],
+        ['gtceu.recipe.grindless_replication_refining.ffc_pellet_press', 'Circuit 4: silicate fractions pressed into FFC pellets.', 'Circuito 4: fracciones silicatadas prensadas en pellets FFC.'],
+        ['gtceu.recipe.grindless_replication_refining.ffc_salt_bath', 'Circuit 5: pellets reduced at graphite anodes into silicon alloy powder, oxygen and spent anodes.', 'Circuito 5: pellets reducidos en ánodos de grafito a polvo de aleación de silicio, oxígeno y ánodos gastados.'],
+        ['gtceu.recipe.grindless_replication_refining.cluster_casing_sinter', 'Circuit 6: silicon alloy powder sintered into cluster casings.', 'Circuito 6: polvo de aleación de silicio sinterizado en carcasas de cúmulo.']
     ]
 
     ;['en_us', 'es_es'].forEach(function (lang, li) {
