@@ -1,4 +1,4 @@
-// priority: -5454
+// priority: -5384
 // TEST ONLY, MAX-A1. Command: kubejs custom_command gg_test_max_circuits
 // Read-only; places nothing. The doubt (max.md, A1 tests): the supracausal mainframe from our join satisfies #gtceu:circuits/max in a GTM
 // assembly-line recipe, and GT--'s route is gone in game.

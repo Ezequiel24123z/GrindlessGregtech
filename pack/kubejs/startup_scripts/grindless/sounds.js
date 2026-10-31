@@ -108,7 +108,8 @@
     'gtceu:rydberg_assembly': 'loop_rydberg_array_works',
     'gtceu:photon_ring_imaging': 'loop_photon_ring_imager',
     'gtceu:geroch_power': 'loop_geroch_winch',
-    'gtceu:genome_archiving': 'loop_gene_ark'
+    'gtceu:genome_archiving': 'loop_gene_ark',
+    'gtceu:cluster_light_smelting': 'loop_cluster_light_furnace'
   }
 
   StartupEvents.registry('sound_event', function (event) {

@@ -1,4 +1,4 @@
-// priority: -5424
+// priority: -5339
 // Gregtech Grindless - smoke test of package B5b, mars-site (TEST-ONLY overlay: copied over the instance on the test PC, never shipped
 // with the pack): the Atmosphere Processor (startup_scripts/grindless/ev/mars_site.js, server_scripts/grindless/ev/mars_site.js) and the
 // site rules of power (server_scripts/grindless/power/generators.js, data/grindless/tables/site_fuels.json).

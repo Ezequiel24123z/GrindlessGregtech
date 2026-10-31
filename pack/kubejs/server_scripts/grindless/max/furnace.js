@@ -1,3 +1,4 @@
+// priority: -19910
 // -----------------------------------------------------------------------------------------------
 // MAX cluster-light furnace (docs/eras/max.md, machine 9, lines L13, L14, L25, L36, L37; package MAX-R1). This file holds the machine's five
 // recipes (gtceu:cluster_light_smelting, NSC belt only), its controller, the belt rows on OpV's debris harvester and on the asteroid

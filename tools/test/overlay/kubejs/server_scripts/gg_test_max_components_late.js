@@ -1,4 +1,4 @@
-// priority: -5474
+// priority: -5414
 // TEST ONLY, MAX-A3 last components and the power die (docs/eras/max.md, A3). Command: kubejs custom_command gg_test_max_components_late
 // Markers: GGTEST|max_components_late|<check>|PASS/FAIL|..., then GGTEST|max_components_late|DONE|failures=N.
 // Band ONLY: X 39640-39703, Z 0-63, Overworld Y 98-115 (zones.json row max_components_late).

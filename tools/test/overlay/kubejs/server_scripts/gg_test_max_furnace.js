@@ -1,3 +1,4 @@
+// priority: -5444
 // TEST ONLY, MAX-R1 (gtceu:cluster_light_furnace). Command: kubejs custom_command gg_test_max_furnace
 // Band ONLY: X 40152-40215, Z 0-63, grindless:nsc_belt Y 98-115 (zones.json row max_furnace).
 //   T1 (named uncertainty: the 13x9x13 furnace forms in the belt on two OpV 4 A hatches and runs c1 and c5 at VA[MAX] = 2,013,265,920 EU/t, dimension lock satisfied):

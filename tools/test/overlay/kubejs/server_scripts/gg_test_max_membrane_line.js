@@ -1,4 +1,4 @@
-// priority: -5544
+// priority: -5534
 // TEST ONLY, MAX-B1 membrane line (docs/eras/max.md, machine 3). Command: kubejs custom_command gg_test_max_membrane_line
 // Markers: GGTEST|max_membrane_line|<check>|PASS/FAIL|..., then GGTEST|max_membrane_line|DONE|failures=N.
 // Band ONLY: X 39512-39575, Z 0-63, Overworld Y 98-115 (zones.json row max_membrane_line).

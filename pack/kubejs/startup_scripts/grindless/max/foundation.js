@@ -1,4 +1,4 @@
-// priority: -5410
+// priority: -5346
 // -----------------------------------------------------------------------------------------------
 // MAX foundation (package MAX-F1, docs/eras/max.md "Build order", F1): the shared registrations the MAX packages build on. No machine of
 // our own, no recipe type, no worldgen and no recipe. Every other MAX package uses exactly these ids; they are published in

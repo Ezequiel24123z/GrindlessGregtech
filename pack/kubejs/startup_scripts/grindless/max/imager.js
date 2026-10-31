@@ -1,4 +1,4 @@
-// priority: -5430
+// priority: -5415
 // -----------------------------------------------------------------------------------------------
 // MAX's photon ring imager (docs/eras/max.md, machine 5, lines L21, L22, L44 and L45; package MAX-D2): the multiblock and its recipe type.
 // No item of its own: every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/imager.js.

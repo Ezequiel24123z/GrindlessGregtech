@@ -472,10 +472,10 @@ Rows on older machines are added to that machine's own table or script by the na
 | Diamond lattice fab (ZPM); implanter (ZPM); aerogel works (ZPM) | L26 (E1); L26 (E1); L28 (B4), L41 (A2) |
 | Magnet works (zpm/magnet_works.js:238); vent bioreactor (zpm/outer_chemistry.js:43); plasma quench caster (zpm/fusion.js:184) | L27 (W); L28 (B4), site kept; L30 (H1) |
 | Coated conductor (LuV); HTS works (LuV) | L27 (W), L39 (A4); L27 (W), L39 (A4) |
-| He refrigerator (LuV); biofoundry (LuV) | L27 (W), L33 (B2), L39 (A4), L43 (B3), L45 (D2); L28 (B4) |
-| Asteroid processor (LuV, luv/asteroid_belt.js:378) | L37 (R1), NSC belt string row |
+| He refrigerator (LuV); biofoundry (LuV) | L27 (W), L33 (B2), L37 (R1), L39 (A4), L43 (B3), L45 (D2); L28 (B4) |
+| Asteroid processor (LuV, luv/asteroid_belt.js) | L37 (R1), NSC belt string row |
 | Extraction cascade (EV); platinum plant (EV) | L30 (H1), L32 (A2), L34 (B1), L35 (A2), L36 (R1); L42 (E1) |
-| Regolith cell (ev/regolith_cell.js:118); hot strip mill (ev/combined_cycle_and_hot_mill.js:237); cryogenic plant (ev/cryogenic_plant.js:260) | L25 (E1); L34 (B1); L37 (R1) |
+| Regolith cell (ev/regolith_cell.js:118); hot strip mill (ev/combined_cycle_and_hot_mill.js:237) | L25 (E1); L34 (B1) |
 
 ## The MAX family
 
@@ -611,7 +611,7 @@ Each step is a real transformation (≥4 per line). Cr counts crossings with UXV
 | L34 | Cu(111) growth foil | extraction cascade (SX-EW) → `cathode_copper`; hot strip mill (EV, ev/combined_cycle_and_hot_mill.js:237) → `rolled_cu_foil`; single crystal foundry → `cu111_foil`; GTM chemical bath → `electropolished_cu111_foil` (→ L2 vdW step) | 4 | 3 | B1 |
 | L35 | Magnetostrictive stack (Engdahl 2000) | extraction cascade → `tb_dy_oxide`; levitation melter → `terfenol_ingot`; single crystal foundry → `oriented_terfenol_rod`; GTM cutter → `laminated_terfenol_stack` (→ piston) | 4 | 3 | A2 |
 | L36 | Ta-Hf-C hearth liner (Cedillos-Barraza 2016) | extraction cascade → `hafnium_tantalum_oxide`; GTM chemical reactor (carbothermal) → `ta_hf_c_powder`; SPS → `ta_hf_c_billet`; CVI → `sealed_hearth_liner` (→ furnace controller, c5) | 4 | 3 | R1 |
-| L37 | Tetrataenite coupler (Lewis 2014, J Phys Condens Matter 26:064213) | asteroid processor (LuV, luv/asteroid_belt.js:378; belt row) → `iron_core_fragment`; cryogenic plant (EV, ev/cryogenic_plant.js:260) → `cryo_milled_core`; GTM electromagnetic separator → `tetrataenite_concentrate`; GTM compressor (cold, never melted) → `cold_pressed_tetrataenite`; nitride works → `halbach_segment_coupler` (→ segment) | 5 | 3 | R1 |
+| L37 | Tetrataenite coupler (Lewis 2014, J Phys Condens Matter 26:064213) | asteroid processor c5 (max/furnace.js, at the belt) → `iron_core_fragment`; LuV helium refrigerator row (luv/helium_refrigerator.js:348, decision 114) → `cryo_milled_core`; GTM electromagnetic separator → `tetrataenite_concentrate`; GTM compressor (cold, never melted) → `cold_pressed_tetrataenite`; nitride works → `halbach_segment_coupler` (→ segment) | 5 | 3 | R1 |
 | L38 | Segment controller | crystal growth (PVT SiC) → `sic_substrate_wafer`; SiC device fab → `sic_cmos_wafer`; MTJ → `mram_stack_wafer`; racetrack fab (UXV, uxv/spin_logic.js:63) → `racetrack_memory_die`; GTM assembler → `segment_controller` (→ segment) | 5 | 4 | H1 |
 | L39 | SC fault-current limiter (Noe and Steurer 2007, SUST 20:R15) | GTM bender (high-resistivity Hastelloy C-276, the limiting shunt) → `fcl_substrate_strip`; coated conductor → `fcl_tape`; oxide PLD → `thick_film_fcl_tape`; HTS works → `fcl_coil`; He refrigerator → `cold_fcl_module` (→ substation hatches, converters) | 5 | 4 | A4 |
 | L40 | UV fibre harness (Russell 2003, Science 299:358) | GTM chemical reactor (SiCl4 flame hydrolysis) → `synthetic_silica_soot`; zone refining → `ultrapure_silica_tube`; fibre draw → `hollow_core_fibre`; femto → `endcapped_hc_fibre`; GTM assembler → `uv_fibre_harness` (→ Rydberg c1) | 5 | 3 | B3 |

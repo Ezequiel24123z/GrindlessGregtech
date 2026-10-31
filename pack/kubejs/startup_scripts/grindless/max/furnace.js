@@ -1,3 +1,4 @@
+// priority: -5369
 // -----------------------------------------------------------------------------------------------
 // MAX's cluster-light furnace (docs/eras/max.md, machine 9, lines L13, L14, L25, L36, L37; package MAX-R1): the item nsc_planetesimal.
 // F1's id list missed it (max.md:847), so R1 registers it here: the only source is the OpV debris harvester row at the NSC belt

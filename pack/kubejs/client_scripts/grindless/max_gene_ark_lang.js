@@ -1,4 +1,4 @@
-// priority: 6658
+// priority: 6665
 // Gregtech Grindless - names and tooltips of MAX's gene ark (startup_scripts/grindless/max/gene_ark.js; package MAX-B4):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each older row of the package that has a data key or a step name

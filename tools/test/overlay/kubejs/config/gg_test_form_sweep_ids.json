@@ -286,6 +286,7 @@
   ],
   "max": [
    "gtceu:atom_interferometer_works",
+   "gtceu:cluster_light_furnace",
    "gtceu:gene_ark",
    "gtceu:geroch_winch",
    "gtceu:membrane_line",
