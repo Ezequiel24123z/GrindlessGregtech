@@ -342,7 +342,7 @@ test('the native fixture fits the assigned band and exposes the grouped-run comp
   assert.match(fixture, /progress >= 1200/);
   assert.match(fixture, /engineBeforeWorking\(u\.m, real\)/);
   const zone = JSON.parse(fs.readFileSync(path.join(pack, '..', 'tools', 'test', 'zones.json'), 'utf8')).zones.find((z) => z.id === 'opv_antimatter');
-  assert.deepEqual(zone.x, [38208, 38271]);
+  assert.deepEqual(zone.x, [38848, 38911]);
   assert.deepEqual(zone.z, [0, 63]);
   assert.deepEqual(zone.y, [98, 115]);
   const d = run.global.grindless.patterns.describe('gtceu:annihilation_engine');
