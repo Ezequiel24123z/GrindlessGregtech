@@ -106,6 +106,14 @@
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:strand_coil", "count": 1 } ],
       "eut": 7864320, "duration": 400
+    },
+    {
+      "name": "braced_smes_toroid", "circuit": 11,
+      "_why": "MAX-W (docs/eras/max.md, L27 step 4): the potted winding braced in a tungsten steel former and four turns of strand tape, ready for the cold run.",
+      "itemsIn": [ { "id": "grindless:smes_toroid_winding", "count": 1 }, { "id": "grindless:strand_tape", "count": 4 }, { "id": "gtceu:tungsten_steel_rod", "count": 4 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:braced_smes_toroid", "count": 1 } ],
+      "eut": 7864320, "duration": 500
     }
   ]
 }

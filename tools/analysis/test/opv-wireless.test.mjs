@@ -58,7 +58,7 @@ test('the OpV row: tier 13, 6,144 UV naquadria batteries (four UXV cells), the c
 test('withTiers case 13 is spelled out and the default message says 1 to 13 tiers', () => {
   const src = fs.readFileSync(path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'lv', 'wireless_energy.js'), 'utf8');
   assert.match(src, /case 13:\s*return b\.tiers\(t\[0\], t\[1\], t\[2\], t\[3\], t\[4\], t\[5\], t\[6\], t\[7\], t\[8\], t\[9\], t\[10\], t\[11\], t\[12\]\)/);
-  assert.match(src, /1 to 13 tiers/);
+  assert.match(src, /1 to 14 tiers/);
 });
 
 test('registration: the cell is a block, eight hatches and two covers, all from lv/wireless_energy.js', () => {
@@ -116,8 +116,8 @@ test('the OpV hatches and covers: assembler recipes at VA[OpV] with OpV parts, t
   for (const c of COVERS) assert.ok(by(c).inputs.includes('1x ' + LINK) && by(c).inputs.includes('1x ' + PLATE), c);
 });
 
-test('tiers 1-12 are untouched', () => {
-  assert.deepEqual(WIRELESS.tiers.map((r) => r.name), ['lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv']);
+test('tiers 1-12 are untouched (MAX-W appends the fourteenth row)', () => {
+  assert.deepEqual(WIRELESS.tiers.map((r) => r.name), ['lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max']);
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uxv').capacity, 4026531840000);
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uxv').cellMadeBy, 'gtceu:nitride_magnet_works');
 });

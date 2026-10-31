@@ -233,6 +233,18 @@
             { "id": "gtceu:small_cobalt_dust", "count": 2 }
           ],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-W (docs/eras/max.md, L27 step 2): the KrF laser ablates a gadolinium barium copper oxide target onto the buffered tape in oxygen, growing the thick REBCO layer; no byproduct, the spent target is the only scrap and stays in the chamber.",
+          "name": "thick_rebco_tape", "circuit": 4, "eut": 33554432, "duration": 800,
+          "itemsIn": [
+            { "id": "grindless:smes_buffered_tape", "count": 2 },
+            { "id": "gtceu:gd_123_dust", "count": 2 }
+          ],
+          "kept": [{ "id": "grindless:krf_excimer_laser", "count": 1 }], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }],
+          "itemsOut": [{ "id": "grindless:thick_rebco_tape", "count": 2 }],
+          "fluidsOut": []
         }
       ]
     },
