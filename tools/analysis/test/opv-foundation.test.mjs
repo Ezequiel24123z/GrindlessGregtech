@@ -225,9 +225,9 @@ test('opv/travel.js publishes the places on global.grindless.opvTravel (tier 13,
   assert.match(read('startup_scripts', 'grindless', 'opv', 'travel.js'), /^\/\/ priority: -?\d+$/m, 'the integrator stamped the priority (script-order.mjs --write)');
 });
 
-test('relay_platforms.json: two OpV-F1 rows leaving from Cygnus X-1, one per jump; seven rows in all', () => {
+test('relay_platforms.json: two OpV-F1 rows leaving from Cygnus X-1, one per jump; nine rows in all', () => {
   const plat = json('data', 'grindless', 'tables', 'relay_platforms.json');
-  assert.equal(plat.platforms.length, 7);
+  assert.equal(plat.platforms.length, 9);
   const mine = plat.platforms.filter((p) => Object.hasOwn(PLACES, p.place));
   assert.deepEqual(mine.map((p) => [p.place, p.jump, p.dimension, p.source, p.x, p.y, p.z]), Object.entries(PLACES).map(([k, [dim, , , , jump]]) =>
     [k, jump, `grindless:${dim}`, CYGNUS, 64, 100, 64]));

@@ -33,6 +33,8 @@
     "grindless:cas_a_remnant": { "factor": 0.0, "when": "always", "status": "no_solar", "era": "uxv", "note": "UXV-B1: Cassiopeia A's expanding supernova shell and its neutron star; no solar machine; sky exposure only" },
     "grindless:sgr1806_orbit": { "factor": 0.0, "when": "always", "status": "no_solar", "era": "opv", "note": "OpV-F1: a magnetar's X-ray and gamma bursts behind the bulge's dust; no solar machine; sky exposure only" },
     "grindless:terzan5_core": { "factor": 0.0, "when": "always", "status": "no_solar", "era": "opv", "note": "OpV-F1: the cluster core's dense, dust-reddened starlight and its millisecond pulsars; no solar machine; sky exposure only" },
+    "gcyr:black_hole_orbit": { "factor": 0.0, "when": "always", "status": "no_solar", "era": "max", "note": "MAX-F2: an accretion disc's hard X-rays; no solar machine; sky exposure only" },
+    "grindless:nsc_belt": { "factor": 0.0, "when": "always", "status": "no_solar", "era": "max", "note": "MAX-F2: the nuclear star cluster's crowded, dust-reddened stars; no solar machine; sky exposure only" },
     "grindless:asteroid_belt": { "factor": 0.19, "when": "day", "status": "new", "era": "luv", "distanceAU": 2.7, "note": "1.4 / 2.7^2; id final after spike S0-1" },
     "grindless:io": { "factor": 0.052, "when": "day", "status": "new", "era": "luv", "distanceAU": 5.2, "note": "1.4 / 5.2^2; id final after spike S0-1" },
     "grindless:europa": { "factor": 0.052, "when": "day", "status": "new", "era": "luv", "distanceAU": 5.2, "note": "1.4 / 5.2^2; id final after spike S0-1" },
