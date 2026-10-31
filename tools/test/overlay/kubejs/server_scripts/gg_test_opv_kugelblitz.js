@@ -145,11 +145,12 @@
   }
 
   // the loaded recipe's contents: [chance, maxChance] of the input item whose JSON mentions the id
-  function chanceOf(recipe, needle) {
+  function chanceOf(recipe, needle, output) {
     var found = null
-    var caps = array(recipe.inputs.keySet())
+    var contents = output ? recipe.outputs : recipe.inputs
+    var caps = array(contents.keySet())
     caps.forEach(function (cap) {
-      array(recipe.inputs.get(cap)).forEach(function (c) {
+      array(contents.get(cap)).forEach(function (c) {
         if (String(c.content).indexOf(needle) >= 0 || String(c.content.toJson ? c.content.toJson() : '').indexOf(needle) >= 0) found = c
       })
     })
@@ -162,17 +163,19 @@
 
   function wearChecks() {
     var want = [['hawking_power/feed_exotic_matter', 'kugelblitz_core', 1, 64], ['hawking_power/feed_stellar_plasma', 'kugelblitz_core', 1, 32],
-      ['kugelblitz_forming/focus_kugelblitz_seed', 'laue_lens', 1, 64], ['kugelblitz_forming/focus_kugelblitz_seed', 'gamma_multilayer_mirror', 1, 64]]
+      ['kugelblitz_forming/focus_kugelblitz_seed', 'laue_lens', 1, 64], ['kugelblitz_forming/focus_kugelblitz_seed', 'gamma_multilayer_mirror', 1, 64],
+      ['hawking_power/feed_exotic_matter', 'activated_absorber_tile', 1250, 10000, true],
+      ['hawking_power/feed_stellar_plasma', 'activated_absorber_tile', 1250, 10000, true]]
     var bad = []
     var core = null
     want.forEach(function (w) {
       var r = loaded(w[0])
-      var c = r === null ? null : chanceOf(r, w[1])
+      var c = r === null ? null : chanceOf(r, w[1], w[4] === true)
       if (c === null) { bad.push(w[0] + ' ' + w[1] + ': content not found'); return }
       if (Number(c.chance) !== w[2] || Number(c.maxChance) !== w[3]) bad.push(w[0] + ' ' + w[1] + ': ' + c.chance + '/' + c.maxChance)
       if (w[0] === 'hawking_power/feed_exotic_matter' && w[1] === 'kugelblitz_core') core = c
     })
-    check('wear_json', bad.length === 0, bad.length ? bad.join('; ') : 'c1 core 1/64, c2 core 1/32, seed lens and mirror 1/64')
+    check('wear_json', bad.length === 0, bad.length ? bad.join('; ') : 'c1 core 1/64, c2 core 1/32, seed optics 1/64; both activated tile outputs 1250/10000')
     if (core === null) return
     try {
       var CL = Java.loadClass('com.gregtechceu.gtceu.api.recipe.chance.logic.ChanceLogic')

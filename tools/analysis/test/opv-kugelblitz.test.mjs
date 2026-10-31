@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
 import { runPackScripts } from '../lib/kubejs_static.mjs';
 import { measure, violations } from '../lib/structure_quality.mjs';
 
@@ -211,10 +212,27 @@ test('collector: generator rows at 2^30 and 2^29 EU/t, core wear 1/64 and 1/32, 
     assert.ok(d && JSON.stringify(d.j.tickOutputs || {}).includes('eu'), n);
     assert.ok(JSON.stringify(d.j.recipeConditions || []).includes(SITE), n);
     assert.ok(KB.custom.includes(`grindless:hawking_power/${n}`), n);
+    const r = rec('hawking_power', n);
+    const tile = r.itemsOut.find((x) => x.id === 'grindless:activated_absorber_tile');
+    assert.deepEqual(plain(tile.chance), [1, 8], `${n}: tile return equals tile wear`);
+    const output = d.j.outputs.item.find((x) => JSON.stringify(x.content).includes('activated_absorber_tile'));
+    assert.deepEqual([output.chance, output.maxChance], [1250, 10000], `${n}: exact GTM tile chance`);
+    const machine = KB.machines.find((x) => x.type === 'hawking_power');
+    assert.equal(machine.maxIO.itemsOut, 2);
+    assert.equal(r.itemsOut.length, machine.maxIO.itemsOut);
   }
   const core = find('grindless:hawking_power/feed_exotic_matter').j.inputs.item.find((c) => JSON.stringify(c.content).includes('kugelblitz_core'));
   assert.deepEqual([core.chance, core.maxChance], [1, 64]);
   assert.ok(2 ** 30 * c1.duration * 64 > 1.6e14);
+});
+
+test('activated tiles have an explicit B3a merge prerequisite for both collector rows', () => {
+  const table = JSON.parse(readFileSync(path.join(pack, 'kubejs', 'data', 'grindless', 'tables', 'kugelblitz.json'), 'utf8'));
+  assert.deepEqual(table.pendingRoutes, [{
+    package: 'B3a',
+    id: 'grindless:activated_absorber_tile',
+    recipes: ['grindless:hawking_power/feed_exotic_matter', 'grindless:hawking_power/feed_stellar_plasma']
+  }]);
 });
 
 test('collector balances include the fuel chain, exact catalyst wear and shell credit', (t) => {
