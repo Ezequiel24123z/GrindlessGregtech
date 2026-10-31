@@ -94,10 +94,16 @@ test('"only from": nothing else in pack/kubejs produces the bulge chart or the a
       assert.ok(!new RegExp(`(itemOutputs|\\.output)\\([^)]*${id}`).test(txt), `${path.relative(kube, f)} outputs ${id}`);
     }
   }
+  // a table may keep or consume a chart (OpV-A0's SGR extraction rows keep the bulge chart); only an output field counts as producing it
+  const outsOf = (node, acc = []) => {
+    if (Array.isArray(node)) node.forEach((x) => outsOf(x, acc));
+    else if (node && typeof node === 'object') for (const [k, v] of Object.entries(node)) { if (/out/i.test(k)) acc.push(JSON.stringify(v)); else outsOf(v, acc); }
+    return acc;
+  };
   for (const f of walk(tables)) {
     if (own.has(f) || f.endsWith('hidden_until.json')) continue;
-    const t = fs.readFileSync(f, 'utf8');
-    for (const id of ['grindless:bulge_chart', 'grindless:arm_chart']) assert.ok(!t.includes(id), `${path.basename(f)} has ${id}`);
+    const t = outsOf(JSON.parse(fs.readFileSync(f, 'utf8')));
+    for (const id of ['grindless:bulge_chart', 'grindless:arm_chart']) assert.ok(!t.some((s) => s.includes(`"${id}"`)), `${path.basename(f)} outputs ${id}`);
   }
   const outs = (tbl) => Object.values(tbl.types).flatMap((t) => t.recipes).filter((r) => (r.itemsOut || []).some((o) => o.id === 'grindless:bulge_chart'));
   assert.equal(outs(gateJson).length, 1);

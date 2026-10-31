@@ -160,6 +160,7 @@
     { "id": "opv_eb_circuits", "x": [37632, 37695], "z": [0, 15], "tests": ["opv_eb_circuits"], "note": "OpV-F3: electron beam machine and two same-circuit rows" },
     { "id": "opv_wireless", "x": [37696, 37759], "z": [0, 63], "y": [98, 112], "tests": ["opv_wireless"], "note": "OpV-W: case 13 wireless network, OpV cell and a 64 A OpV hatch" },
     { "id": "opv_parallel_hatch", "x": [37760, 37823], "z": [0, 63], "y": [98, 115], "tests": ["opv_parallel_hatch"], "note": "OpV-M1: the OpV parallel hatch (x262,144) reports its limit and forms on a mega member; an energy-bound probe stays long" },
+    { "id": "opv_bulge_relay", "x": [37824, 37887], "z": [0, 63], "y": [98, 115], "tests": ["opv_bulge_relay", "opv_chain_matter"], "note": "OpV-A0: the bulge relay seed launches from Cygnus X-1 orbit (c11 at 2^31), the hold places the SGR platform and grants opv-sgr; the four UXV pasta machines run the chain rows at SGR" },
     { "id": "opv_components", "x": [37888, 37951], "z": [0, 63], "y": [98, 115], "tests": ["opv_components"], "note": "OpV-A1: the GCYM large assembler on two UXV 4 A hatches runs an OpV component row at 2^28; GTM's own recipe for the same id is gone" },
     { "id": "opv_circuits", "x": [37952, 38015], "z": [0, 63], "y": [98, 115], "tests": ["opv_circuits"], "note": "OpV-A2: the cosmic mainframe from our join satisfies #gtceu:circuits/opv in an assembly-line recipe; GT--'s route is gone" }
       ]

@@ -29,7 +29,7 @@ test('the stand-in runs the UXV-B4 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(VP.skipped), []);
   assert.deepEqual(plain(VP.clashes), []);
-  assert.equal(VP.recipes.length, 8);
+  assert.equal(VP.recipes.length, 19, 'UXV-B4\'s 8 rows and OpV-A0\'s 11 chain matter rows at SGR 1806-20');
   assert.deepEqual(plain(UF.skipped), []);
 });
 
@@ -83,11 +83,14 @@ test('tap: a generator, one lasagna electrode -> 536,870,912 EU/t for 720 t (386
   assert.match(src, /Pat\.part\('energy_output', \{ min: 1, max: 1 \}\)/);
 });
 
-test('every row is Vela-locked and takes an input; the cage companion is circuit-less on UIV\'s type at its site', () => {
+test('every row is Vela-locked (OpV-A0\'s rows SGR-locked) and takes an input; the cage companion is circuit-less on UIV\'s type at its site', () => {
+  const sgr = new Set(['chain_crust', 'ni_chain', 'chain_lattice', 'chain_caging', 'ni_chain_caging', 'lattice_caging', 'chain_strand_drawing',
+    'chain_wire_drawing', 'chain_lamina', 'chain_lamina_stack', 'chain_mesh_weave']);
   for (const r of VP.recipes.filter((x) => x.type !== 'neutronium_caging')) {
-    assert.equal(r.site, SITE, r.name);
+    const site = (x) => (sgr.has(x.name) ? 'grindless:sgr1806_orbit' : SITE);
+    assert.equal(r.site, site(r), r.name);
     assert.ok(r.itemsIn.length + r.kept.length + r.wear.length + r.fluidsIn.length > 0, r.name);
-    assert.ok(JSON.stringify(find(`grindless:${r.type}/${r.name}`).j.recipeConditions || []).includes(SITE), `${r.name} carries the dimension lock`);
+    assert.ok(JSON.stringify(find(`grindless:${r.type}/${r.name}`).j.recipeConditions || []).includes(site(r)), `${r.name} carries the dimension lock`);
   }
   const c = rec('neutronium_caging', 'cage_part_pressing');
   assert.deepEqual([c.circuit, c.site, c.eut, c.duration], [0, 'grindless:rx_j1856_orbit', 31457280, 2400]);
