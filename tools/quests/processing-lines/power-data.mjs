@@ -98,6 +98,7 @@ export default gate({
     ['zpmNaq', 'zpmMk2'],
     ['uvThorium', 'uvLaser', 'uvMuon', 'uvMk3'],
     ['uhvSwarm', 'laterDyson', 'uivStars', 'uxvStars'],
+    ['opvAnnihilation', 'opvStars'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
     ...(WITH_WIRELESS ? [['gWireless']] : []),
   ],
@@ -797,20 +798,27 @@ export default gate({
           desc: 'The network jumps to UXV only when every formed tower holds these.',
           figs: [P.wcell('grindless:uxv_smes_cell', 'UXV SMES', 4026531840000)],
         }),
+        // OpV's cell: four UXV cells' worth
+        E('eqOpvCell', 0, 14, 'opv_age', '500C1E02A6CC0121'),
+        n('wopv', 2.25, 14, I('grindless:opv_smes_cell'), 'OpV SMES Cell', {
+          kind: 'info', from: ['eqOpvCell'], sub: 'Six thousand one hundred and forty-four UV batteries\' worth',
+          desc: 'The network jumps to OpV only when every formed tower holds these. Case 13 caps the buffer at the voltage times the amps times ten: 2 A holds 10,737,418,240 EU and 64 A holds 343,597,383,680 EU.',
+          figs: [P.wcell('grindless:opv_smes_cell', 'OpV SMES', 16106127360000)],
+        }),
         n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Generator multiblocks feed the network through it',
-          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uxv')],
+          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'opv')],
         }),
         n('wdynC', 6.75, -0.75, I('grindless:lv_wireless_dynamo_cover'), 'Wireless Dynamo Cover', {
-          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'uxv')],
+          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'opv')],
         }),
         n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
-          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'uxv')],
+          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'opv')],
         }),
         n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
           kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
-          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'uxv')],
+          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'opv')],
         }),
       ],
     } } : {}),
