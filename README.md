@@ -1,10 +1,10 @@
 # Gregtech Grindless
 
-GregTech progression pack for Minecraft 1.20.1 (Forge) on GregTech Modern 7.5.3. Its rule is simple: **nothing needed for progression is gathered by hand**. Starting in the Steam Age, resources are produced automatically through increasingly complex GregTech processing lines and multiblocks. Difficulty comes from steps, conditions and coordinating industry—not inflated quantities or waiting.
+GregTech progression pack for Minecraft 1.20.1 (Forge) on GregTech Modern 7.5.3. Its rule is simple: **nothing needed for progression is gathered by hand**. Starting in the Steam Age, resources are produced automatically through increasingly complex GregTech processing lines and multiblocks. Difficulty comes first from steps, conditions and coordinating industry, and from MV on key recipes cost a lot too; recipe times are never inflated.
 
-The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon, Mars, the inner planets, Jupiter's and Saturn's moons, the edge of the Solar System, nearby stars and, in UIV, neutron stars and a black hole.
+The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon, Mars, the inner planets, Jupiter's and Saturn's moons, the edge of the Solar System, nearby stars, neutron stars and black holes, the galactic bulge and, in MAX, Sagittarius A* at the Galactic Centre.
 
-**At a glance:** Minecraft 1.20.1 · Forge 47.4.28 · GregTech Modern 7.5.3 · 224 mods · 12 tiers playable (Steam to UIV) · 237 multiblocks of our own in v0.14.0.
+**At a glance:** Minecraft 1.20.1 · Forge 47.4.28 · GregTech Modern 7.5.3 · 224 mods · 15 tiers playable (Steam to MAX) · 288 multiblocks of our own in v0.17.0.
 
 **Contents:** [Design rules](#design-rules) · [Current status](#current-status) · [Tier by tier](#tier-by-tier) · [Our multiblocks](#our-multiblocks) · [Multiblocks from other mods](#multiblocks-from-other-mods) · [Ideas from other modpacks](#ideas-from-other-modpacks) · [Other mods](#other-mods) · [Quests](#quests) · [Known issues](#known-issues) · [How to play](#how-to-play-prism-launcher) · [For developers](#for-developers)
 
@@ -21,15 +21,15 @@ The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon
 
 ## Current status
 
-The latest playable release is **v0.14.0 "UIV"**. It spans the Steam Age through UIV, with the journey extending from Earth and the solar system to neutron stars, pulsars and the black hole Cygnus X-1.
+The latest playable release is **v0.17.0 "MAX"**. It spans the Steam Age through MAX, from Earth to the mirror shell around Sagittarius A*.
 
 | Progress | Status |
 |---|---|
-| Steam Age–UIV | Playable in `v0.14.0`; each era adds automated resource production, processing lines and multiblocks. |
-| UXV | In development for `v0.15.0`: the next stage of the interstellar journey. Its 22 multiblocks are already on `main`. |
-| OpV and MAX | Planned after UXV; the journey's final project is at Sagittarius A*. |
+| Steam Age–MAX | Playable in `v0.17.0`; each era adds automated resource production, processing lines and multiblocks. |
+| Project Reforge | In progress toward `v1.0.0`: costs that climb steeply per era from MV, an audit of every era and line, a bigger MAX, longer teaching quests, textures and sounds. Start a new world after it: old saves are not supported. |
+| MAX+ | Planned for `v1.0.0`: intergalactic travel and the Hyperstargate, the pack's final project. |
 
-The UIV release adds three stellar destinations, new UIV industry and wireless power, and opens the gate to UXV. See the [v0.14.0 release notes](docs/releases/v0.14.0.md) for the full list and save-impact details. The [journey guide](docs/journey.md) describes the planned progression through MAX.
+The MAX release adds the Galactic Centre, the NSC belt and the ending. See the [v0.17.0 release notes](docs/releases/v0.17.0.md) for the full list. The [journey guide](docs/journey.md) describes the progression.
 
 ## Tier by tier
 
@@ -49,8 +49,9 @@ Each era sends you somewhere new for a resource that only exists there, and each
 | **UHV** | Proxima Centauri b, Mercury orbit | Kardashev II: a Dyson swarm around the Sun, a warp gate to Proxima, the space elevator, a nuclear clock and photonic circuits. | Swarm segment foundry, swarm control station, warp gate, high-flux reactor, nuclear clock lab, quantum fabricator (32) |
 | **UEV** | Alpha Centauri A and B, Barnard b, Sirius B | Superheavy elements, megabar matter, single-photon optics, the optical computer and our fusion Mk4. | Calutron, heavy-ion cyclotron, megabar press, photonic integration hall, stellar forge, UEV fusion reactor (26) |
 | **UIV** | RX J1856 neutron star, PSR J0437 pulsar, Cygnus X-1 | Reached through the warp gate. Metallic hydrogen, refractory alloys, the optical mainframe, fusion Mk5 and energy from a black hole's spin. | Penrose engine, Matrioshka computer, neutronium compression hall, ramp-compression pulser, levitation melter (23) |
-| **UXV** *(in development)* | Cygnus X-1 again, Vela pulsar, Cassiopeia A | Star lifting, accretion-disk plasma, nuclear pasta, spintronics and fusion Mk6. | Stellar elevator, accretion disk skimmer, plasma mass filter, pasta extractor, Blandford–Znajek dynamo (22) |
-| **OpV, MAX** *(planned)* | Kugelblitz forge, Sagittarius A* | Kardashev III, ending with a mirror shell around the galaxy's central black hole. | — |
+| **UXV** | Cygnus X-1 again, Vela pulsar, Cassiopeia A | Star lifting, accretion-disk plasma, nuclear pasta, spintronics and fusion Mk6. | Stellar elevator, accretion disk skimmer, plasma mass filter, pasta extractor, Blandford–Znajek dynamo (22) |
+| **OpV** | Cygnus X-1 orbit, magnetar SGR 1806-20, Terzan 5 core | Antimatter for power and tools, strangelets, the Kugelblitz forge, chain matter and von Neumann replication. | Annihilation engine, antiproton decelerator, strangelet vault, Kugelblitz forge, Hawking collector, field-frozen press (19) |
+| **MAX** | Sagittarius A* orbit, the NSC belt | Kardashev III at the Galactic Centre, ending with a mirror shell around the galaxy's central black hole. | Rydberg array works, photon ring imager, Geroch winch, mass stream injector, accretion feeder, mirror shell (10) |
 
 ## Our multiblocks
 
