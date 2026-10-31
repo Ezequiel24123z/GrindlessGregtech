@@ -1,8 +1,8 @@
 // OpV-R1 T1: the c12 hold_terzan5 jump. Band: grindless:cygnus_x1_orbit X 38400-38463, Z 0-63, Y 98-115 (ring at X 38416, Y 100, Z 20).
 // The far side is the platform the jump itself places in grindless:terzan5_core at 64,100,64 (tables/relay_platforms.json, uxv/kerr_sling.js).
 // Doubt: the second-hop throw from Cygnus X-1 to Terzan 5 places its platform, remembers it (uxvPlatform_terzan5) and keeps its chunks
-// force-loaded, which is what lets the platform survive a restart (S0-9 proved a bare hold). The launched probe is stocked with /give-style
-// stacks; no other package's recipe is relied on. Command: gg_test_opv_pathfinder
+// force-loaded across @restart (S0-9 proved a bare hold). Invoke gg_test_opv_pathfinder, @restart, then the same command.
+// The probe is stocked with /give-style stacks; no other package's recipe is relied on. The launched output is opv-terzan5's model grant.
 (function () {
   var NAME = 'opv_pathfinder'
   var NEAR = 'grindless:cygnus_x1_orbit'
@@ -12,6 +12,7 @@
   var X0 = 38400
   var X1 = 38463
   var LOADED_AT = Date.now()
+  var SAVED = 'ggTestOpvPathfinderSaved'
   var S = null
   var J = null
 
@@ -53,8 +54,9 @@
     cmd(NEAR, 'forceload add ' + x + ' ' + z)
   }
   function put(p, id, facing) {
-    if (p.x < X0 || p.x > X1 || p.z < 0 || p.z > 63) throw new Error('outside the band ' + p.x + ',' + p.z)
+    if (p.x < X0 || p.x > X1 || p.y < 98 || p.y > 115 || p.z < 0 || p.z > 63) throw new Error('outside the band ' + JSON.stringify(p))
     ticket(p)
+    if (String(S.server.getLevel(NEAR).getBlock(p.x, p.y, p.z).id) !== 'minecraft:air') throw new Error('occupied test position ' + JSON.stringify(p))
     S.order.push(p)
     cmd(NEAR, 'setblock ' + p.x + ' ' + p.y + ' ' + p.z + ' ' + id + (facing ? '[facing=north]' : '') + ' replace')
   }
@@ -78,8 +80,10 @@
         }
       })
     })
-    var parts = [{ ability: 'input_bus', id: 'gtceu:uhv_input_bus', key: 'bus' }, { ability: 'output_bus', id: 'gtceu:uhv_output_bus', key: 'out' },
-      { ability: 'energy_input', id: 'gtceu:uiv_energy_input_hatch_16a', key: 'e0' }]
+    if (!ctl) throw new Error('no warp gate controller symbol')
+    var parts = [{ ability: 'input_bus', id: 'gtceu:uxv_input_bus', key: 'bus' }, { ability: 'output_bus', id: 'gtceu:uxv_output_bus', key: 'out' },
+      { ability: 'energy_input', id: 'gtceu:uxv_energy_input_hatch_16a', key: 'e0' },
+      { ability: 'energy_input', id: 'gtceu:uxv_energy_input_hatch_16a', key: 'e1' }]
     var next = 0
     var pos = {}
     var plan = []
@@ -101,14 +105,20 @@
         }
       })
     })
+    if (next !== parts.length) throw new Error('not enough gate part positions')
     plan.forEach(function (c) { put(c.p, c.id, c.facing) })
     put(O, 'gtceu:warp_gate', true)
     return pos
   }
   function release() {
-    S.order.slice().reverse().forEach(function (p) { try { cmd(NEAR, 'setblock ' + p.x + ' ' + p.y + ' ' + p.z + ' minecraft:air replace') } catch (e) { } })
-    S.tickets.forEach(function (t) { try { cmd(NEAR, 'forceload remove ' + t.x + ' ' + t.z) } catch (e) { } })
-    try { cmd(FAR, 'forceload remove ' + (FARO.x - 8) + ' ' + FARO.z + ' ' + (FARO.x + 14) + ' ' + (FARO.z + 15)) } catch (e) { }
+    S.order.slice().reverse().forEach(function (p) {
+      try { cmd(NEAR, 'setblock ' + p.x + ' ' + p.y + ' ' + p.z + ' minecraft:air replace') }
+      catch (e) { check('cleanup_block', false, String(e)) }
+    })
+    S.tickets.forEach(function (t) {
+      try { cmd(NEAR, 'forceload remove ' + t.x + ' ' + t.z) }
+      catch (e) { check('cleanup_ticket', false, String(e)) }
+    })
   }
   function finish() {
     if (S.finished) return
@@ -129,10 +139,31 @@
     check('static_pathfinder', !!P && (P.skipped || []).length === 0, 'opvPathfinder skipped ' + JSON.stringify((P && P.skipped) || null))
   }
 
+  function platformChecks(suffix) {
+    var row = String(S.server.persistentData.getString('uxvPlatform_terzan5'))
+    check('platform_row' + suffix, row === FAR + '@' + FARO.x + ',' + FARO.y + ',' + FARO.z, row)
+    var m = at(FAR, FARO)
+    check('platform_ring_formed' + suffix, !!m && m.isFormed(), m ? 'formed ' + m.isFormed() : 'missing controller')
+    check('platform_forceload' + suffix, cmd(FAR, 'forceload query 56 64') > 0 && cmd(FAR, 'forceload query 78 79') > 0, 'both arrival chunks')
+    var level = S.server.getLevel(FAR)
+    check('platform_ae2' + suffix, String(level.getBlock(76, 100, 64).id) === 'ae2:controller', 'AE2 controller')
+    check('platform_dynamo' + suffix, String(level.getBlock(73, 100, 64).id) === 'gtceu:uiv_wireless_dynamo_hatch_16a', 'wireless dynamo')
+  }
+
   function step() {
+    if (S.phase === 'restart') {
+      if (S.tick < 100) return
+      check('restart_occurred', String(S.server.persistentData.getString(SAVED)) !== String(LOADED_AT), 'script instance changed')
+      platformChecks('_after_restart')
+      S.server.persistentData.remove(SAVED)
+      finish()
+      return
+    }
     var c = at(NEAR, O)
-    var e = at(NEAR, S.pos.e0)
-    if (e) e.energyContainer.setEnergyStored(e.energyContainer.getEnergyCapacity())
+    ;['e0', 'e1'].forEach(function (k) {
+      var e = at(NEAR, S.pos[k])
+      if (e) e.energyContainer.setEnergyStored(e.energyContainer.getEnergyCapacity())
+    })
     if (S.phase === 'form') {
       if (c && c.isFormed()) { check('ring_formed', true, 'gate formed in ' + NEAR); phase('stock') }
       else if (S.tick - S.phaseAt > 400) { check('ring_formed', false, 'not formed after 400 ticks'); finish() }
@@ -160,12 +191,15 @@
     }
     if (S.phase === 'platform') {
       if (S.tick - S.phaseAt < 40) return
-      var row = String(S.server.persistentData.getString('uxvPlatform_terzan5'))
-      check('platform_row', row === FAR + '@' + FARO.x + ',' + FARO.y + ',' + FARO.z, row)
+      platformChecks('')
       check('probe_spent', contents(S.inv).indexOf('pathfinder_probe') < 0, 'bus after the jump: ' + contents(S.inv))
-      var m = at(FAR, FARO)
-      check('platform_ring_formed', !!m && m.isFormed(), 'far ring in ' + FAR + ': ' + (m ? 'formed ' + m.isFormed() : 'no controller block entity'))
-      check('platform_forceload', Number(S.server.getLevel(FAR).getForcedChunks().size()) > 0, 'forced chunks in ' + FAR + ': ' + S.server.getLevel(FAR).getForcedChunks().size())
+      var out = at(NEAR, S.pos.out).getInventory()
+      check('launched_output', contents(out).indexOf('grindless:launched_pathfinderx1') >= 0, contents(out))
+      if (S.failed === 0) {
+        S.server.persistentData.putString(SAVED, String(LOADED_AT))
+        S.server.runCommandSilent('save-all')
+        emit('restart_ready', 'NOTE', 'invoke @restart and gg_test_opv_pathfinder again; keep the arrival platform and its tickets')
+      }
       finish()
     }
   }
@@ -173,6 +207,8 @@
   function start(server) {
     S = { server: server, G: global.grindless, failed: 0, tick: 0, phaseAt: 0, phase: 'setup', order: [], chunks: {}, tickets: [], finished: false }
     statics()
+    if (server.persistentData.contains(SAVED)) { phase('restart'); return }
+    if (server.persistentData.contains('uxvPlatform_terzan5')) throw new Error('arrival platform already exists; run this test in a fresh copied world')
     S.pos = build()
     phase('form')
   }
