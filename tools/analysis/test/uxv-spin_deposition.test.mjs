@@ -25,7 +25,7 @@ test('the stand-in runs the UXV-A4 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(SD.skipped), []);
   assert.deepEqual(plain(SD.clashes), []);
-  assert.equal(SD.recipes.length, 12 + 2); // OpV-D1 appended two MTJ rows (c9 ta_clad_ir_rod, c10 neg_coated_chamber)
+  assert.equal(SD.recipes.length, 12 + 4 + 2); // OpV-A2 appended MTJ c5-8; OpV-D1 two more (c9 ta_clad_ir_rod, c10 neg_coated_chamber)
 });
 
 test('5 items registered by the startup file, named in en_us and es_es', () => {
@@ -41,10 +41,12 @@ test('5 items registered by the startup file, named in en_us and es_es', () => {
 });
 
 test('the MTJ sputter rows: circuits 1-4, figures, spent target and scrap powder back', () => {
-  const rows = SD.recipes.filter((r) => r.type === 'mtj_sputtering');
+  const all = SD.recipes.filter((r) => r.type === 'mtj_sputtering');
+  // OpV-A2 appended c5-8 (cryo-CMOS gold, Nb TSV fill, NbTiN film, SDD metal), pinned in opv-circuits.test.mjs;
   // OpV-D1 appended c9 ta_clad_ir_rod and c10 neg_coated_chamber: argon sputtering too, but not on a Si-28 wafer
   const D1 = ['ta_clad_ir_rod', 'neg_coated_chamber'];
-  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['mtj_stack', 1], ['mram_stack', 2], ['saf_track', 3], ['stno_stack', 4], ['ta_clad_ir_rod', 9], ['neg_coated_chamber', 10]]);
+  assert.deepEqual(plain(all.map((r) => [r.name, r.circuit])), [['mtj_stack', 1], ['mram_stack', 2], ['saf_track', 3], ['stno_stack', 4], ['cryo_cmos_metal', 5], ['nb_tsv_fill', 6], ['nbtin_film', 7], ['sdd_metal', 8], ['ta_clad_ir_rod', 9], ['neg_coated_chamber', 10]]);
+  const rows = all.filter((r) => r.circuit <= 4 || D1.includes(r.name));
   const out = (r) => r.itemsOut.map((x) => x.id);
   assert.ok(out(rec('mtj_sputtering', 'mtj_stack')).includes('grindless:mtj_stack_wafer'));
   assert.ok(out(rec('mtj_sputtering', 'mtj_stack')).includes('grindless:spent_cofeb_target'), 'the spent CoFeB target comes back');
@@ -129,7 +131,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('no older row written: no recipe of this package sits in another package\'s file', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_deposition\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 2 + 1 + 2, 'rows, two controllers, the laser, OpV-D1\'s two MTJ rows');
+  assert.equal(mine.length, 12 + 2 + 1 + 4 + 2, 'rows, two controllers, the laser, OpV-A2\'s MTJ c5-8, OpV-D1\'s two MTJ rows');
 });
 
 test('structures: not boring, at least two functional kinds, controller in the front slice', () => {

@@ -71,6 +71,67 @@
           "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
         },
         {
+          "_why": "OpV-A2 (opv.md line 13): the gold interconnect of the cryo-CMOS sputtered from foil; the overspray goes back to EV's platinum plant (c17)",
+          "name": "cryo_cmos_metal", "circuit": 5, "eut": 33554432, "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:cryo_cmos_implanted_wafer", "count": 1 },
+            { "id": "gtceu:gold_foil", "count": 2 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:cryo_cmos_metal_wafer", "count": 1 },
+            { "id": "grindless:gold_overspray", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 14): the vias filled with RRR niobium from the SRF line's target; the off-target niobium goes back to the SRF scrap loop",
+          "name": "nb_tsv_fill", "circuit": 6, "eut": 33554432, "duration": 800,
+          "itemsIn": [
+            { "id": "grindless:tsv_via_wafer", "count": 1 },
+            { "id": "grindless:rrr_nb_target", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:nb_filled_tsv_wafer", "count": 1 },
+            { "id": "grindless:niobium_scrap", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 14): NbTiN reactively sputtered in nitrogen on sapphire, the low-loss film of the interposer's lines",
+          "name": "nbtin_film", "circuit": 7, "eut": 33554432, "duration": 800,
+          "itemsIn": [
+            { "id": "grindless:rrr_nb_target", "count": 1 },
+            { "id": "gtceu:titanium_dust", "count": 1 },
+            { "id": "grindless:sapphire_wafer", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:nbtin_film_wafer", "count": 1 },
+            { "id": "grindless:niobium_scrap", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 800 }]
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 18): aluminium anode and ring contacts sputtered on, then the wafer diced into four silicon drift detector dies; the kerf goes back as silicon dust",
+          "name": "sdd_metal", "circuit": 8, "eut": 33554432, "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:sdd_anode_wafer", "count": 1 },
+            { "id": "gtceu:aluminium_dust", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:sdd_die", "count": 4 },
+            { "id": "gtceu:silicon_dust", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
           "_why": "OpV-D1 (opv.md line 21; circuit 9, after A2's four rows): the Ta seed target sputtered as a cladding over four Ir target rods; the target is used up",
           "name": "ta_clad_ir_rod", "circuit": 9, "eut": 33554432, "duration": 700,
           "itemsIn": [

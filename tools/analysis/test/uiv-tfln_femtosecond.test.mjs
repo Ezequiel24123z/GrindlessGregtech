@@ -47,7 +47,8 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 
 test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
   const rc = T.types.ion_slicing.recipes;
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4]]);
+  // OpV-A2 appended c5 (the Nb TSV bond) and c6 (LN on Si-28 SOI)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4], ['tsv_bond', 5], ['ln_on_soi', 6]]);
   for (const r of rc) {
     assert.equal(r.eut, 31457280, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 3 && ids(r.itemsOut).length <= 2, r.name);
@@ -63,7 +64,8 @@ test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
 
 test('femtosecond writer: femtosecond_writing circuits 1-4, figures and slots', () => {
   const rc = T.types.femtosecond_writing.recipes;
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['interposer_blank', 1], ['lattice_2pp', 2], ['orifice_plate', 3], ['crystal_blank', 4]]);
+  // OpV-A2 appended c6 (the LN-on-SOI link waveguides)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['interposer_blank', 1], ['lattice_2pp', 2], ['orifice_plate', 3], ['crystal_blank', 4], ['ln_soi_waveguides', 6]]);
   for (const r of rc) {
     assert.equal(r.eut, 7864320, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 3 && ids(r.itemsOut).length <= 2, r.name);
@@ -172,9 +174,14 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
     'material.gtceu.spent_koh_etchant', 'material.gtceu.photoresin', 'material.gtceu.uncured_photoresin'
   ]) assert.ok(flat.includes(k), k);
   for (const m of ['tfln_fab', 'femtosecond_writer']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
+  // OpV-A2's rows (ion slicing c5-6, femtosecond c6) keep their EMI lines in its own lang file
+  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
-    for (const r of t.recipes) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);
+    for (const r of t.recipes) {
+      const k = `gtceu.recipe.${t.dataKey}.${r.name}`;
+      assert.ok(keys.includes(k) || (/^OpV-/.test(r._why || '') && opvLang.includes(`['${k}', '`)), `${type}: ${k}`);
+    }
   }
   for (const n of registered) {
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);

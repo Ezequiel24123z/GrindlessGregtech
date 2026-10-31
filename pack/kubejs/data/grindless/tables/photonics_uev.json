@@ -151,7 +151,11 @@
         { "_why": "UIV-A10, line 41: Nb/AlOx/Nb trilayer patterned into Josephson junctions on the SNSPD foundry (circuit 5).", "name": "nb_jj_wafer", "circuit": 5, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:nb_trilayer", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 100 }],
-          "itemsOut": [{ "id": "grindless:nb_jj_wafer", "count": 1 }] }
+          "itemsOut": [{ "id": "grindless:nb_jj_wafer", "count": 1 }] },
+        { "_why": "OpV-A2 (opv.md line 15): NbN nanowire detectors written over the LN-on-SOI waveguides, so the link reads its own light at 4 K (circuit 6).", "name": "snspd_link", "circuit": 6, "eut": 1966080, "duration": 800,
+          "itemsIn": [{ "id": "grindless:ln_soi_waveguide_wafer", "count": 1 }, { "id": "gtceu:niobium_dust", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 100 }, { "id": "gtceu:pmma_resist", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:snspd_link_wafer", "count": 1 }] }
       ]
     },
     "vdw_assembly": {
@@ -195,7 +199,11 @@
         { "_why": "UXV-A5 (uxv.md line 17): the spintronic mainframe, the only maker of gtnn:spintronic_mainframe (GT--'s own recipe is cut in uxv/cuts.js): mesoscopic logic die, racetrack chip, MRAM wafer, magnonic bus, MTJ die and a shielded interposer", "name": "spintronic_mainframe", "circuit": 7, "eut": 1966080, "duration": 3000,
           "itemsIn": [{ "id": "grindless:meso_logic_die", "count": 1 }, { "id": "grindless:racetrack_chip", "count": 1 }, { "id": "grindless:mram_wafer", "count": 1 },
                       { "id": "grindless:magnonic_bus", "count": 1 }, { "id": "grindless:mtj_die", "count": 1 }, { "id": "grindless:shielded_interposer", "count": 1 }],
-          "itemsOut": [{ "id": "gtnn:spintronic_mainframe", "count": 1 }] }
+          "itemsOut": [{ "id": "gtnn:spintronic_mainframe", "count": 1 }] },
+        { "_why": "OpV-A2 (opv.md, A2): the cosmic mainframe, the only maker of gtnn:cosmic_mainframe (GT-- 1.3.10 ships no recipe for it; OpV-F2 cuts its cosmic SMDs): cryo-CMOS die, Nb TSV interposer, cryogenic optical link and HEMT amplifier", "name": "cosmic_mainframe", "circuit": 8, "eut": 1966080, "duration": 3000,
+          "itemsIn": [{ "id": "grindless:cryo_cmos_die", "count": 1 }, { "id": "grindless:nb_tsv_interposer", "count": 1 }, { "id": "grindless:cryo_optical_link", "count": 1 },
+                      { "id": "grindless:hemt_amplifier", "count": 1 }],
+          "itemsOut": [{ "id": "gtnn:cosmic_mainframe", "count": 1 }] }
       ]
     }
   }

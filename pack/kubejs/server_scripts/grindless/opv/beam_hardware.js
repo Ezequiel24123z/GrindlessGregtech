@@ -22,8 +22,8 @@
 //   assembler                the five beam parts at VA[OpV] and grindless:neg_xhv_casing (2 OpV circuits, docs/eras/opv.md *Common*); the e-gun
 //                            takes an activated NEG chamber (line 25) and the LiH shield the UEV lead-polymer liner
 //
-// grindless:nbtin_film (A2) and grindless:spent_li6_shield (B3) are other packages' ids: a row that takes one skips itself (logged as
-// pending, not as an error) until that package registers it.
+// grindless:spent_li6_shield (B3) is another package's id: a row that takes it skips itself (logged as pending, not as an error) until
+// B3 registers it.
 // Published in global.grindless.opvBeamHardware: .rows ([{ id, path, type, circuit, itemsIn, fluidsIn, itemsOut, fluidsOut, eut, duration,
 // temp }]), .added (recipe ids), .skipped ([{ id, reason }]).
 // Rhino: var + function inside every callback that runs more than once.
@@ -39,7 +39,7 @@
   var STEAM = 'gtceu:steam'
   var HE = 'gtceu:he_6n'
   var NITROGEN = 'gtceu:nitrogen'
-  var PENDING = { 'grindless:nbtin_film': 'A2', 'grindless:spent_li6_shield': 'B3' }
+  var PENDING = { 'grindless:spent_li6_shield': 'B3' }
 
   function item(id, count) { return { id: id, count: count } }
   function fluid(id, amount) { return { id: id, amount: amount } }

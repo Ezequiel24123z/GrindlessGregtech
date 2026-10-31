@@ -81,6 +81,10 @@
     fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:seven_n_germanium', 1), item('gtceu:small_germanium_dust', 4)],
     fluidsOut: [], eut: UVA, duration: 800 })
 
+  // OpV-A2 (opv.md line 11): the float-zone ingot from two Siemens rods (the MOCVD reactor's c17, from fusion ash), not hot-cell dust
+  TABLE.push({ name: 'si28_poly_fz', type: 'zone_refining', circuit: 11, itemsIn: [item('grindless:si28_poly_rod', 2)],
+    fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:si28_fz_ingot', 1)], fluidsOut: [], eut: UVA, duration: 800 })
+
   D.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit, itemsIn: t.itemsIn,

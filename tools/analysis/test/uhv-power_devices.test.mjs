@@ -81,7 +81,7 @@ test('the scripts load: every row made with its circuit, nothing skipped, no cla
 });
 
 test('one recipe per lookup path: unique circuits, no subset clash', () => {
-  for (const [type, want] of [['silicon_carbide', [1, 2, 3, 4, 5]], ['space_photovoltaics', [1, 2, 3]]]) {
+  for (const [type, want] of [['silicon_carbide', [1, 2, 3, 4, 5, 6]], ['space_photovoltaics', [1, 2, 3]]]) { // OpV-A2 appended SiC c6 (the GaN MMIC)
     const rs = rowsOf(type);
     assert.deepEqual(rs.map((r) => r.circuit), want, type);
     const ks = rs.map(keysOf);
@@ -201,9 +201,14 @@ test('no UEV input, and every lang key and texture the package needs', () => {
     for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   }
   const lang = fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'uhv_power_devices_lang.js'), 'utf8');
+  // OpV-A2's SiC c6 keeps its EMI line in its own lang file
+  const opvLang = fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'opv_circuits_lang.js'), 'utf8');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
-    for (const r of t.recipes) assert.ok(lang.includes(`'gtceu.recipe.${t.dataKey}.${r.name}'`), `${type}/${r.name}`);
+    for (const r of t.recipes) {
+      const k = `'gtceu.recipe.${t.dataKey}.${r.name}'`;
+      assert.ok(lang.includes(k) || (/^OpV-/.test(r._why || '') && opvLang.includes(k)), `${type}/${r.name}`);
+    }
   }
   const keys = ['block.gtceu.sic_device_fab', 'block.gtceu.solar_array_fab', 'gtceu.silicon_carbide', 'gtceu.space_photovoltaics'];
   for (const m of ['sic_device_fab', 'solar_array_fab']) keys.push(`grindless.machine.${m}.tooltip.0`);
