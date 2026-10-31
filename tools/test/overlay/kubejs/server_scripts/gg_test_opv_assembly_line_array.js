@@ -248,10 +248,10 @@
       if (u.rstep === 0) {
         var a = u.results.back_first
         var b = u.results.front_first
-        check('ordered', (a === null) !== (b === null), 'back-first ' + (a ? 'started, copies ' + a.parallels : 'refused') + ', front-first ' + (b ? 'started, copies ' + b.parallels : 'refused') + ' (GTM keeps its ordered-input check when exactly one order runs)')
-        var win = a || b
+        check('ordered', a === null && b !== null, 'back-first ' + (a ? 'started, copies ' + a.parallels : 'refused') + ', front-first ' + (b ? 'started, copies ' + b.parallels : 'refused') + ' (expected: the order from the bus nearest the controller starts and the reverse is refused, the array sorts its parts by depth from the controller)')
+        var win = b
         if (win) check('ordered_parallel', win.parallels > 1 && win.eut > 0 && win.eut % (win.parallels * PROBE_EUT) === 0 && win.eut <= BUDGET, 'the ordered recipe ran at ' + win.parallels + ' copies, ' + win.eut + ' EU/t (expected copies x ' + PROBE_EUT + ' x the overclock, at most ' + BUDGET + ')')
-        u.backFirst = !(b !== null && a === null)
+        u.backFirst = false
         clearBuses(u)
         loadOrder(u, RESEARCH_ITEMS, u.backFirst)
         u.started = S.tick

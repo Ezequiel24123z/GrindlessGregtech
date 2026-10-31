@@ -127,12 +127,25 @@
 
     var chain = G.mega.chain({ parallel: 'fixed', cap: 1, hatch: true, discount: null, oc: 'perfect', batch: true })
 
+    // GTM's ordered-input check pairs item handler i with recipe input i in the controller's part order, and the builder's default sorter keeps the
+    // pattern's HashSet order (it changes from run to run). The line runs from the controller backwards, so sort the parts by distance from the
+    // front wall (RelativeDirection.BACK follows the facing and the flip): the first input bus is the nearest to the controller, as in the
+    // vanilla assembly line. Equal depth falls back to BlockPos's natural order (y, z, x), so the order is total.
+    var sorterFor = function (controller) {
+      var RD = Java.loadClass('com.gregtechceu.gtceu.api.pattern.util.RelativeDirection')
+      var CMP = Java.loadClass('java.util.Comparator')
+      var posOf = function (p) { return p.self().getPos() }
+      var depth = RD.BACK.getSorter(controller.getFrontFacing(), controller.getUpwardsFacing(), controller.isFlipped())
+      return CMP.comparing(posOf, depth).thenComparing(CMP.comparing(posOf))
+    }
+
     var b = event.create(ID, 'multiblock')
       .langValue('Assembly Line Array')
       .rotationState(RotationState.NON_Y_AXIS)
       .machine(function (holder) { return new ALM(holder) })
       .recipeType('assembly_line')
     G.mega.install(b, chain)
+      ["partSorter(java.util.function.Function)"](sorterFor)
       .appearanceBlock(function () { return Block.getBlock(CASING) })
       .pattern(function (def) { return Pat.build(def, SPEC) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([

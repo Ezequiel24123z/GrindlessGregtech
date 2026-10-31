@@ -85,6 +85,10 @@ test('registered as a multiblock on the assembly line type, appearance OpV casin
   assert.match(src, /parallel: 'fixed', cap: 1, hatch: true/);
   assert.match(src, /AssemblyLineMachine/);
   assert.match(src, /\.recipeType\('assembly_line'\)/);
+  // ordered inputs: the part order must be total and follow the controller (GTM's default sorter keeps the pattern's HashSet order)
+  assert.match(src, /\["partSorter\(java\.util\.function\.Function\)"\]\(sorterFor\)/);
+  assert.match(src, /RD\.BACK\.getSorter\(controller\.getFrontFacing\(\), controller\.getUpwardsFacing\(\), controller\.isFlipped\(\)\)/);
+  assert.match(src, /thenComparing\(CMP\.comparing\(posOf\)\)/);
 });
 
 test('the controller recipe: researched with a tetron array, VA[OpV] for 2,400 ticks, nine distinct ingredients, none from UXV or below', () => {
