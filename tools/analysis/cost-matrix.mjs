@@ -300,7 +300,7 @@ function main() {
   fs.writeFileSync(mdPath, full);
 
   const ok = rows.filter((r) => r.status !== 'unreachable').length;
-  console.log(`cost matrix: ${ok}/${rows.length} key items priced, ${rows.length - ok} unreachable, ${model.recipesUsed} recipes, converged=${model.converged}`);
+  console.log(`cost matrix: ${ok}/${rows.length} key items priced, ${rows.length - ok} unreachable, ${model.recipesUsed} recipes, non-loop improvements left: ${model.improvementsLeft} (${model.improvements} applied, ${model.evaluations} evaluations)`);
   if (args.compare) console.log('\n' + compareReport(args.compare, rows));
 }
 
@@ -316,8 +316,8 @@ function renderMarkdown({ cfg, rows, missing, model, recipes, trivial, dump, arg
   L.push(`- **Base resources**: outputs of \`${cfg.base.drillOutputsOfTypes.join(', ')}\` (vein-drill ores and stone), raw ores (\`${cfg.base.items.join(', ')}\` except \`${(cfg.base.notBase || []).join(', ')}\`), natural fluids (every fluid no recipe makes, except ${cfg._melts || 0} molten metals that count as their ingot at ${cfg.settings.melt ? cfg.settings.melt.mbPerItem : 0} mB per item), world items no recipe makes (${cfg.base.unproducedItems.join(', ')}), and the outputs of recipes that consume nothing (gas collectors and similar sources).`);
   const allocText = { full: 'every output bears the whole recipe cost, so nothing is cheap just because it is a byproduct', units: 'inputs split over the expected output units of every output', primary: 'only the first output carries the cost' }[cfg.settings.allocation];
   L.push(`- **Multi-output recipes**: \`${cfg.settings.allocation}\` (${allocText}; outputs that are inert byproducts are never made for their own sake: ${cfg.base.noShareOutputs.join(', ')}). **Chanced outputs**: \`${cfg.settings.chance}\` (count x chance). **Catalysts**: expected consumption. **Tag inputs**: the cheapest member. **Loops**: items are priced in increasing cost and each recipe fires once, so a loop that multiplies matter (dust packing and unpacking) cannot pump a cost down.`);
-  L.push(`- **Recipe choice**: the cheapest chain by score, ties by dump order. Excluded: types \`${cfg.excludeRecipes.types.join(', ')}\`, categories \`${cfg.excludeRecipes.categories.join(', ')}\`, ids \`${cfg.excludeRecipes.ids.join(', ')}\`.`);
-  L.push(`- Solver ${model.converged ? 'converged' : '**did not converge**'} after ${model.relaxations.toLocaleString('en-US')} relaxations.`, '');
+  L.push(`- **Recipe choice**: the cheapest acyclic chain by score, ties by dump order. Items are first priced in increasing cost (Knuth), then a label-correcting pass lets a cheaper route through a dearer intermediate replace an item's choice (per-unit division, e.g. 1 plate -> 4 foil, is not monotonic), but only when the item is not already in the derivation of the candidate's inputs. Excluded: types \`${cfg.excludeRecipes.types.join(', ')}\`, categories \`${cfg.excludeRecipes.categories.join(', ')}\`, ids \`${cfg.excludeRecipes.ids.join(', ')}\`.`);
+  L.push(`- **Self-check**: non-loop improvements left: ${model.improvementsLeft} (${model.improvements.toLocaleString('en-US')} applied in ${model.evaluations.toLocaleString('en-US')} recipe evaluations; ${model.relaxations.toLocaleString('en-US')} items priced by the first pass). ${model.improvementsLeft === 0 ? 'Fixed point reached.' : '**Not a fixed point.**'}`, '');
 
   const series = seriesOf(rows, tiers);
   const names = ['hull', 'motor', 'pump', 'piston', 'conveyor', 'robot_arm', 'emitter', 'sensor', 'field_generator', 'energy_hatch', 'energy_hatch_4a', 'energy_hatch_16a', 'superconductor_wire', 'circuit (cheapest)', 'circuit (median)', 'capstone', 'controller (median)'].filter((n) => series.has(n));

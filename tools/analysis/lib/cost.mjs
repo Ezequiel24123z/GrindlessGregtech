@@ -21,8 +21,11 @@
 //   euWeight           weight of 1 EU in the score used to PICK recipes (default 0). EU is always tracked in `~eu`.
 //   excludeRecipe(rec) recipes to ignore (recycling, unpacking, ...).
 // Non-consumed inputs (cap) and programmed circuits cost nothing; catalysts cost their expected consumption (count x consume).
-// Tag inputs take the cheapest alternative. Items are finalized in increasing cost (Dijkstra / Knuth), each recipe fires once,
-// so a chain that multiplies matter in a loop cannot pump a cost to zero; the chosen recipes form a DAG (`cuts` stays empty).
+// Tag inputs take the cheapest alternative. Items are first finalized in increasing cost (Dijkstra / Knuth), each recipe fires
+// once, so a chain that multiplies matter in a loop cannot pump a cost to zero. A label-correcting pass then repairs what
+// per-unit division breaks (1 plate -> 4 foil is not monotonic): a candidate replaces an item's choice only if it is lower and
+// the item is not in the derivation of the candidate's inputs, so the chosen recipes stay a DAG (`cuts` stays empty).
+// The model reports evaluations, improvements and `improvementsLeft` (a re-scan; 0 means the result is a fixed point).
 
 export const EU_KEY = '~eu';
 const IMPROVE = 1 - 1e-9;
@@ -163,7 +166,6 @@ export function solveCosts(recipes, opts = {}) {
   };
   prepared.forEach((p, idx) => { if (!p.ins.length) fire(idx); });
   let relaxations = 0;
-  const converged = true;
   while (heapC.length) {
     const { c, k, ch } = heapPop();
     if (cost.has(k)) continue;
@@ -179,6 +181,98 @@ export function solveCosts(recipes, opts = {}) {
       if (--waiting[idx] === 0) fire(idx);
     }
   }
+
+  // Label-correcting improvement. The Knuth pass is exact only when a recipe's cost is monotonic in its inputs; dividing a
+  // recipe over many outputs (1 plate -> 4 foil) is not, so an item can be finalized before a cheaper route through a
+  // dearer intermediate exists. A candidate replaces an item's cost and choice only if it is lower AND the item is not
+  // already in the derivation of the candidate's inputs, so the picks stay a DAG and a loop cannot pump a cost down.
+  const reaches = (from, target) => {
+    if (from === target) return true;
+    const stack = [from];
+    const visited = new Set(stack);
+    while (stack.length) {
+      const x = stack.pop();
+      const ch = choice.get(x);
+      if (!ch) continue;
+      for (const q of ch.picks) {
+        if (q === target) return true;
+        if (!visited.has(q) && !baseOf(q)) { visited.add(q); stack.push(q); }
+      }
+    }
+    return false;
+  };
+  const improveRecipe = (idx, apply, changed) => {
+    const p = prepared[idx];
+    const best = [];
+    let total0 = euWeight * p.eu;
+    for (const i of p.ins) {
+      let bc = Infinity;
+      let ba = null;
+      for (const a of i.alts) {
+        const c = cost.get(a);
+        if (c !== undefined && c < bc) { bc = c; ba = a; }
+      }
+      if (ba === null) return 0;
+      best.push(ba);
+      total0 += i.amount * bc;
+    }
+    let found = 0;
+    for (const o of p.outs) {
+      if (baseOf(o.key) || noShare(o.key)) continue;
+      const cur = cost.get(o.key);
+      const bound = cur === undefined ? Infinity : cur * IMPROVE;
+      if (!((total0 / o.d) * unit(o.key) < bound)) continue;
+      let picks = best;
+      let total = total0;
+      const old = choice.get(o.key);
+      const unchanged = old && old.idx === idx && old.picks.every((q, n) => q === best[n]);
+      if (!unchanged && best.some((a) => reaches(a, o.key))) {
+        picks = [];
+        total = euWeight * p.eu;
+        for (let n = 0; n < p.ins.length; n++) {
+          let bc = Infinity;
+          let ba = null;
+          for (const a of p.ins[n].alts) {
+            const c = cost.get(a);
+            if (c !== undefined && c < bc && !reaches(a, o.key)) { bc = c; ba = a; }
+          }
+          if (ba === null) { picks = null; break; }
+          picks.push(ba);
+          total += p.ins[n].amount * bc;
+        }
+        if (!picks) continue;
+        if (!((total / o.d) * unit(o.key) < bound)) continue;
+      }
+      found++;
+      if (apply) {
+        cost.set(o.key, (total / o.d) * unit(o.key));
+        choice.set(o.key, { idx, picks: picks.slice() });
+        changed.push(o.key);
+      }
+    }
+    return found;
+  };
+  const queue = prepared.map((p, idx) => idx);
+  const queued = new Uint8Array(prepared.length).fill(1);
+  const maxEvaluations = opts.maxEvaluations || 200 * prepared.length;
+  let evaluations = 0;
+  let improvements = 0;
+  for (let head = 0; head < queue.length && evaluations < maxEvaluations; head++) {
+    const idx = queue[head];
+    queued[idx] = 0;
+    evaluations++;
+    const changed = [];
+    improvements += improveRecipe(idx, true, changed);
+    for (const k of changed) {
+      for (const ref of seen.get(k) || []) {
+        const j = ref >> 8;
+        if (!queued[j]) { queued[j] = 1; queue.push(j); }
+      }
+    }
+    if (head > 1e6) { queue.splice(0, head + 1); head = -1; }
+  }
+  let improvementsLeft = 0;
+  for (let idx = 0; idx < prepared.length; idx++) improvementsLeft += improveRecipe(idx, false, null);
 
   const memo = new Map();
   const active = new Set();
@@ -207,8 +301,11 @@ export function solveCosts(recipes, opts = {}) {
 
   return {
     vector,
-    converged,
+    converged: improvementsLeft === 0,
     relaxations,
+    evaluations,
+    improvements,
+    improvementsLeft,
     cuts,
     recipesUsed: prepared.length,
     isBase: baseOf,
