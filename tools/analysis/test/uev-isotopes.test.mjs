@@ -58,7 +58,7 @@ const ISOTOPES = ['gtceu:calcium_48_dust', 'gtceu:potassium_40_dust', 'gtceu:lit
 
 test('every calutron recipe has a unique name and circuit 1-6, a UHV-voltage EU/t and a positive duration', () => {
   assert.equal(new Set(CAL.map((r) => r.name)).size, CAL.length);
-  assert.deepEqual(CAL.map((r) => r.circuit).sort(), [1, 2, 3, 4, 5, 6]);
+  assert.deepEqual(CAL.map((r) => r.circuit).sort(), [1, 16, 17, 2, 3, 4, 5, 6]); // MAX-B2 c16-17 (Sr-88, spent Sr cartridge); lexicographic sort
   for (const r of CAL) {
     assert.ok(Number.isInteger(r.eut) && r.eut === 1966080, r.name);
     assert.ok(Number.isInteger(r.duration) && r.duration > 0, r.name);
@@ -186,7 +186,7 @@ test('no recipe of the package needs a UEV or UIV-only input', () => {
 });
 
 test('names exist in en_us and es_es for the machine, the type, the items, the materials and every calutron recipe', () => {
-  const lang = read('client_scripts', 'grindless', 'uev_isotopes_lang.js');
+  const lang = read('client_scripts', 'grindless', 'uev_isotopes_lang.js') + read('client_scripts', 'grindless', 'max_interferometer_lang.js'); // MAX-B2 c16-17 keep their EMI lines in its own file
   const need = ['block.gtceu.calutron', 'gtceu.calutron_separation', 'grindless.machine.calutron.no_voiding'];
   for (const r of CAL) need.push(`gtceu.recipe.grindless_calutron_separation.${r.name}`);
   for (const i of ['ca48_oven_charge', 'plutonium_oxide_target', 'irradiated_plutonium_target', 'plutonium_244_target']) need.push(`item.grindless.${i}`);

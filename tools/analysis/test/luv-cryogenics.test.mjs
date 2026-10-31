@@ -223,3 +223,9 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
     assert.ok(nativeItems.has(id) || nativeFluids.has(id) || registered.has(id) || fixtureIds.has(id), `fixture id: ${id}`);
   }
 });
+
+test('MAX-B2 L33 step 5: the transferred crystalline mirror is cooled into the cryo reference cavity by one closed-loop cooling row', () => {
+  const src = fs.readFileSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'luv', 'helium_refrigerator.js'), 'utf8');
+  assert.match(src, /name: 'cryo_reference_cavity', input: 'grindless:transferred_crystalline_mirror', output: 'grindless:cryo_reference_cavity', eut: 30720, duration: 600/);
+  assert.equal((src.match(/name: 'cryo_reference_cavity'/g) || []).length, 1);
+});

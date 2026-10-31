@@ -24,7 +24,7 @@ test('the stand-in runs the UXV-A6 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(SM.skipped), []);
   assert.deepEqual(plain(SM.clashes), []);
-  assert.equal(SM.recipes.length, 7 + 2); // MAX-A2 appended c5 balanced_composite_billet and c7 calibrated_superleak (lines 10 and 41)
+  assert.equal(SM.recipes.length, 7 + 2 + 1); // MAX-A2 appended c5 balanced_composite_billet and c7 calibrated_superleak (lines 10 and 41); MAX-B2 c6 shequid_rotation_ref (line 4)
 });
 
 test('2 items registered by the startup file, named in en_us and es_es', () => {
@@ -41,7 +41,7 @@ test('2 items registered by the startup file, named in en_us and es_es', () => {
 
 test('SHeQUID rows: circuits 1-2, the aperture array to a weak-link cell, the He-II bath comes back', () => {
   const rows = SM.recipes.filter((r) => r.type === 'shequid_assembly');
-  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['weak_link_cell', 1], ['shequid_gyro', 2], ['balanced_composite_billet', 5], ['calibrated_superleak', 7]]);
+  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['weak_link_cell', 1], ['shequid_gyro', 2], ['balanced_composite_billet', 5], ['calibrated_superleak', 7], ['shequid_rotation_ref', 6]]);
   const c1 = rec('shequid_assembly', 'weak_link_cell');
   const c2 = rec('shequid_assembly', 'shequid_gyro');
   assert.ok(c1.itemsIn.some((x) => x.id === 'grindless:nanoaperture_array'));
