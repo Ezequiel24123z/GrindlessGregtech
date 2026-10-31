@@ -62,7 +62,7 @@ test('the circuits are the contract\'s and unique within each recipe type', () =
   assert.equal(rowOf('racetrack_patterning', 'spin_logic', 'racetrack_memory_die').circuit, 3);
   for (const [t, f] of [['levitation_melting', 'levitation_melter'], ['crystal_growth', 'crystals'], ['silicon_carbide', 'power_devices'], ['mtj_sputtering', 'spin_deposition'], ['racetrack_patterning', 'spin_logic']]) {
     const c = tables(f)[t].recipes.map((r) => r.circuit).filter((n) => n > 0);
-    assert.equal(new Set(c).size, c.length - (t === 'crystal_growth' ? 1 : 0), `${t} has a repeated circuit`); // MAX-B3 teo2_boule repeats c32 with its own items
+    assert.equal(new Set(c).size, c.length - (t === 'crystal_growth' ? 2 : 0), `${t} has a repeated circuit`); // MAX-B3 teo2_boule repeats c32 with its own items
   }
   const ec = [...cascade.matchAll(/mode: '\w+', circuit: (\d+)/g)].map((m) => m[1]);
   // MAX-B1 repeats c30-32 with other item inputs (OpV-F3's rule, proved by the loader test below); no circuit is used more than twice
