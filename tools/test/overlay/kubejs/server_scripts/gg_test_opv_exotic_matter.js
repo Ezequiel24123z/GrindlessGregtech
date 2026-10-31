@@ -141,7 +141,7 @@
       check('formed', S.energy.length === 2 && !!S.input && !!S.output && !!S.fluid, 'Cygnus distiller, parts ' + array(m.getParts()).length)
       m.setVoidingMode(lazy().Void.VOID_ITEMS)
       bus([Item.of('gtceu:programmed_circuit', 1, '{Configuration:2}'), Item.of('grindless:pasta_core_sample', 1)])
-      S.fluid.tank.setFluidInTank(0, Fluid.of('grindless:fireball_distillate', 1000).getFluidStack())
+      S.fluid.tank.setFluidInTank(0, Fluid.of('gtceu:fireball_distillate', 1000).getFluidStack())
       S.start = S.tick
       S.phase = 'refusal'
     }

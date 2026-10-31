@@ -61,7 +61,7 @@
           "site": "grindless:cygnus_x1_orbit",
           "itemsIn": [{"id": "grindless:pb208_beam_cell", "count": 1}],
           "fluidsIn": [{"id": "gtceu:disk_plasma", "amount": 1000}],
-          "fluidsOut": [{"id": "grindless:fireball_distillate", "amount": 1000}]
+          "fluidsOut": [{"id": "gtceu:fireball_distillate", "amount": 1000}]
         }
       ]
     },

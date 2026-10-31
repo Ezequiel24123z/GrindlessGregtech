@@ -39,7 +39,7 @@ test('line 36 has append-only calutron c12, ion source, cyclotron c12 and Cygnus
   const synch = row('accelerators', 'synchrotron', 9);
   assert.deepEqual([synch.name, synch.eut, synch.duration, synch.site], ['fireball_distillate', 503316480, 1200, SITE]);
   assert.deepEqual(synch.fluidsIn, [{ id: 'gtceu:disk_plasma', amount: 1000 }]);
-  assert.deepEqual(synch.fluidsOut, [{ id: 'grindless:fireball_distillate', amount: 1000 }]);
+  assert.deepEqual(synch.fluidsOut, [{ id: 'gtceu:fireball_distillate', amount: 1000 }]);
   assert.ok(conditions(find('synchrotron/fireball_distillate')).includes(SITE));
   assert.ok(find('chemical_reactor/pb208_ion_source'));
   for (const [name, type, circuit] of [['isotopes', 'calutron_separation', 12], ['superheavy', 'heavy_ion_irradiation', 12], ['accelerators', 'synchrotron', 9]]) {
@@ -54,7 +54,7 @@ test('distiller uses only c2/c3; seed is positive, negative residue is contained
   assert.match(rows[0]._wear, /1\/32.*312\/10000/);
   assert.deepEqual(rows[0].chancedOut, [{ id: 'grindless:negative_strangelet_residue', count: 1, chance: 2000 }]);
   for (const r of rows) assert.ok(conditions(find(`strangelet_distillation/${r.name}`)).includes(SITE));
-  const producers = docs.filter((r) => JSON.stringify(r.j.outputs || {}).includes('"grindless:fireball_distillate"'));
+  const producers = docs.filter((r) => JSON.stringify(r.j.outputs || {}).includes('"gtceu:fireball_distillate"'));
   assert.deepEqual(producers.map((r) => r.i), ['grindless:synchrotron/fireball_distillate'], 'no distiller c1 bypass');
 });
 
@@ -97,9 +97,21 @@ test('controllers obey the OpV assembly-line rule and research the beam cell, ne
     assert.ok(r);
     const j = JSON.stringify(r.j);
     for (const id of ['gtceu:opv_machine_hull', 'gtceu:opv_field_generator', 'gtceu:opv_electric_pump', 'gtceu:opv_sensor',
-      'gtceu:circuits/opv', 'grindless:superfluid_helium_3', 'grindless:pb208_beam_cell']) assert.ok(j.includes(id), `${m}: ${id}`);
+      'gtceu:circuits/opv', 'gtceu:superfluid_helium_3', 'grindless:pb208_beam_cell']) assert.ok(j.includes(id), `${m}: ${id}`);
     assert.doesNotMatch(j, /gtceu:(uxv|uiv|uev|uhv)_(machine_hull|field_generator|sensor|electric_pump)/);
   }
+});
+
+test('GTM material keys stay stable while D2 recipe fluids use their runtime gtceu namespace', () => {
+  const startup = fs.readFileSync(path.join(pack, 'kubejs/startup_scripts/grindless/opv/exotic_matter.js'), 'utf8');
+  assert.match(startup, /event\.create\('grindless:fireball_distillate'\)\.liquid\(\)/);
+  for (const t of Object.values(T.types)) for (const r of t.recipes) {
+    for (const key of ['fluidsIn', 'fluidsOut', 'charge']) {
+      for (const f of r[key] || []) assert.ok(!f.id.startsWith('grindless:'), `${r.name}: ${f.id}`);
+    }
+  }
+  assert.deepEqual(T.types.strangelet_distillation.recipes[0].fluidsIn,
+    [{ id: 'gtceu:fireball_distillate', amount: 1000 }]);
 });
 
 test('shapes match 9x9x9 and 7x7x13, keep NEG liners and pass the structure rubric', () => {
