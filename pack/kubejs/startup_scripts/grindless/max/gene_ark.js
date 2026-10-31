@@ -24,7 +24,7 @@
       name: 'gene_ark', machine: 'gtceu:gene_ark', type: 'genome_archiving', dataKey: 'grindless_genome_archiving',
       lang: 'Gene Ark', maxIO: { itemsIn: 7, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: VAULT, texture: VAULT_TEXTURE,
       width: 11, height: 9, depth: 11,
-      pal: { F: VAULT, C: 'gtceu:superconducting_coil', L: 'gtceu:cleanroom_glass' },
+      pal: { F: VAULT, A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil', L: 'gtceu:cleanroom_glass' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -38,18 +38,18 @@
   ]
 
   // x left to right, y bottom to top, z back to front. Row 0 the floor (hatches front and back), row 1 a plinth, rows 2-6 the walls with
-  // a glass window in the middle of each, a superconducting coil ring inside at row 4, row 7 a collar, row 8 the roof.
+  // a glass window in the middle of each, a superconducting coil ring inside at row 4, row 7 a collar, row 8 the roof (plinth, collar, roof and floor of atomic casing so no block type dominates).
   function arkCell(x, y, z) {
     var edgeX = x === 0 || x === 10
     var edgeZ = z === 0 || z === 10
-    if (y === 0) return (z === 10 || z === 0) && x >= 4 && x <= 6 ? 'X' : 'F'
-    if (y === 8) return 'F'
+    if (y === 0) return (z === 10 || z === 0) && x >= 4 && x <= 6 ? 'X' : 'A'
+    if (y === 8) return 'A'
     if (!edgeX && !edgeZ) {
       var ring = x === 1 || x === 9 || z === 1 || z === 9
       if (y === 4 && ring) return 'C'
       return '#'
     }
-    if (y === 1 || y === 7) return 'F'
+    if (y === 1 || y === 7) return 'A'
     if (edgeX && edgeZ) return 'F'
     var mid = (edgeX && z === 5) || (edgeZ && x === 5)
     if (y === 4 && mid) return 'L'
