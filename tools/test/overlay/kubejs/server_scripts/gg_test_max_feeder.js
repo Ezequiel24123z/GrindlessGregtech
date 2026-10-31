@@ -1,4 +1,4 @@
-// priority: -5421
+// priority: -5426
 // TEST ONLY, MAX-E1 (gtceu:accretion_feeder). Command: kubejs custom_command gg_test_max_feeder
 // Copied over the instance on the test bench, never shipped. NOT run by the package worker: the MAX integrator runs it.
 // Band ONLY: X 40280-40343, Z 0-63, Y 98-135, in gcyr:black_hole_orbit (the Sgr A* level; zones.json row max_feeder).
