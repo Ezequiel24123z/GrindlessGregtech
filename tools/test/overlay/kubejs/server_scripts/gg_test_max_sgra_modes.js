@@ -1,4 +1,4 @@
-// priority: -5652
+// priority: -5634
 // TEST ONLY, MAX-D1 (docs/eras/max.md, D1 "Sgr A* modes on older machines"). Command: kubejs custom_command gg_test_max_sgra_modes
 // Copied over the instance on the test bench, never shipped. NOT run by the package worker: the MAX integrator runs it in its grouped set.
 // Band ONLY: X 39704-39767, Z 0-63, Y 98-115, in gcyr:black_hole_orbit (the Sgr A* level; zones.json row max_sgra_modes).

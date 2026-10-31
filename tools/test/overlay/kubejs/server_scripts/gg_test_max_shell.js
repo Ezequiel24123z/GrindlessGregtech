@@ -1,3 +1,4 @@
+// priority: -5644
 // TEST ONLY, MAX-G1 (gtceu:mirror_shell). Command: kubejs custom_command gg_test_max_shell
 // Band ONLY: X 40344-40407, Z 0-63, gcyr:black_hole_orbit Y 70-102 (zones.json row max_shell).
 //   T1 (named uncertainty: ONE controller carries a generator row (c1, -2^30 EU/t) and a consumer row (c3, 2^35 EU/t) of recipe type

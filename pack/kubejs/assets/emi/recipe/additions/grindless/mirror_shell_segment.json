@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:mirror_shell_segment"],
+  "text": ["emi.grindless.info.mirror_shell_segment.0"]
+}

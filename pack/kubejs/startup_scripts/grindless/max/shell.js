@@ -1,3 +1,4 @@
+// priority: -5512
 // -----------------------------------------------------------------------------------------------
 // MAX's mirror shell (docs/eras/max.md, machine 8; package MAX-G1): the multiblock, its recipe type and the credits handler. No item of its
 // own: the segment and the bundle block are F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/shell.js.

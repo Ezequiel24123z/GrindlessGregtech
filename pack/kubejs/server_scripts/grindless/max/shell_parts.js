@@ -1,4 +1,4 @@
-// priority: -20040
+// priority: -20044
 // -----------------------------------------------------------------------------------------------
 // MAX-H1 "Shell parts" (docs/eras/max.md, lines 30 and 38; the amendment S0-12 in docs/research/max-s0.md): the GTM assembler steps of the two
 // lines that make the Mirror shell's parts. Every other step is one row in an older machine's table:

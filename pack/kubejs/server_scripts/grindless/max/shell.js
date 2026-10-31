@@ -1,3 +1,4 @@
+// priority: -20034
 // MAX-G1 mirror shell (docs/eras/max.md, machine 8, lines L13 L15 L18 L30 L37 L38; package MAX-G1). The L18 steps on older machines are
 // rows marked MAX-G1 in their own tables and scripts; this file holds the shell's three recipes and its controller:
 //

@@ -26,7 +26,10 @@
       { "id": "grindless:stellar_neighbourhood_chart", "reason": "UHV-B7: the UEV machine casing's station research (grindless:assembly_line/uev_machine_casing; GTM generates the research_station recipe, which neither the dump nor the stand-in lists) and UEV's gate key (uev.md)" },
       { "id": "grindless:pulsar_navigation_chart", "reason": "UEV-B2: the UIV machine casing's station research (UEV-B5; GTM generates the research_station recipe, which neither the dump nor the stand-in lists) and the gate key to UIV (uev.md, Gate to UIV)" },
       { "id": "grindless:tennessine_sample", "reason": "UEV-A2: stored for UIV, no UEV recipe consumes tennessine (uev.md machine 4 c1 and 'What UEV leaves': a MAX+ hook)" },
-      { "id": "grindless:superheavy_census", "reason": "UEV-A2: data, the UIV hook (uev.md machine 4 c2 and 'What UEV leaves': a MAX+ hook)" }
+      { "id": "grindless:superheavy_census", "reason": "UEV-A2: data, the UIV hook (uev.md machine 4 c2 and 'What UEV leaves': a MAX+ hook)" },
+      { "id": "grindless:spent_wave_packet", "reason": "G1: the mirror shell vent's inert byproduct (c1); the wave leaves as light, nothing takes it (principle 3)" },
+      { "id": "grindless:universe_seed", "reason": "G1: the mirror shell's last recipe (c3), the end of the pack; nothing takes it" },
+      { "id": "grindless:max_epilogue", "reason": "G1: the epilogue book given once per player by the mirror shell credits handler; nothing takes it" }
     ]
   },
   "derived": [
@@ -87,22 +90,13 @@
     { "id": "gtceu:horizon_strand_dust", "role": "acquisition", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "gtceu:horizon_strand_dust", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "gtceu:horizon_strand_ingot", "role": "acquisition", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
-    { "id": "gtceu:horizon_strand_ingot", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" }
+    { "id": "gtceu:horizon_strand_ingot", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
+    { "id": "grindless:max_epilogue", "role": "acquisition", "reason": "G1: the mirror shell credits handler gives it to the player (shell.js), not a recipe" }
   ],
   "pendingRoutes": [
-    { "id": "grindless:cluster_light_smelting/segment_truss_billet", "reason": "G1: the segment alloy ingot is held until the mirror shell (G1) uses the segment truss" },
-    { "id": "grindless:cluster_light_smelting/mirror_scrap_billet", "reason": "G1: the mirror shell scrap is G1's byproduct and stays held until G1" },
-    { "id": "grindless:levitation_melting/segment_alloy_ingot", "reason": "G1: the segment alloy ingot is held until G1 and its dross and carbonyl powder wait with it" }
   ],
   "pendingUses": [
-        { "id": "grindless:shell_cryocooler", "package": "C1", "reason": "MAX-H1 makes it (L30); G1's segment foundry mode takes it and C1 checks the use is there" },
-        { "id": "grindless:segment_controller", "package": "C1", "reason": "MAX-H1 makes it (L38); G1's mirror shell controller takes it and C1 checks the use is there" },
     { "id": "grindless:launched_gc_probe", "package": "T2", "reason": "MAX-T1 returns it from gate c14; T2's belt seed chain takes it and     T2 checks the use is there" },
-        { "id": "grindless:shell_gradient_map", "package": "G1", "reason": "MAX-D2 makes it (interferometer c2 at Sgr A*); G1's mirror shell c2 takes it with sgr_a_spin_map (max.md:339)" },
-        { "id": "grindless:shell_droplet_radiator", "package": "G1", "reason": "MAX-D1 makes it; G1's segment row takes it (max.md:735)" },
-        { "id": "grindless:launched_belt_seed", "package": "C1", "reason": "MAX-T2 returns it from gate c15; the max-nsc grant (tiers/max.json) is its use and C1 checks the grant is there" },
-    { "id": "grindless:segment_truss", "package": "G1", "reason": "MAX-R1 makes it; the G1 mirror shell takes it" },
-    { "id": "grindless:halbach_segment_coupler", "package": "G1", "reason": "MAX-R1 makes it (L37); the G1 segment takes it" },
-    { "id": "grindless:stream_bundle_block", "package": "G1", "reason": "MAX-D4 makes it (stream_bundle ring block); the G1 mirror shell structure uses it as equator rings (max.md:344)" }
+        { "id": "grindless:launched_belt_seed", "package": "C1", "reason": "MAX-T2 returns it from gate c15; the max-nsc grant (tiers/max.json) is its use and C1 checks the grant is there" }
           ]
 }

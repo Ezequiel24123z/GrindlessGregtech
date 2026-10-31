@@ -1,4 +1,4 @@
-// priority: -5619
+// priority: -5614
 // TEST ONLY, MAX-S0 S0-11, leg 1. Command: kubejs custom_command gg_test_max_s0_relay_1 (needs kubejs/config/gg_test_max_s0.json {"enabled": true})
 // Needs the temp pack copy (never committed): server uhv/gate.js gets SITES.s0_max_bh_orbit = ['grindless:s0_max_bh_orbit'] (and the dimension pushed on SITES.orbits);
 // tables/gate.json gets a throwaway hold_s0_max_c15 row (circuit 15, 8,589,934,592 EU/t, 1,200 t, site s0_max_bh_orbit, one launched_relay_seed);

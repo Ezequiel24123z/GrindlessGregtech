@@ -1,4 +1,4 @@
-// priority: -5657
+// priority: -5654
 // TEST ONLY, MAX-A0 horizon strand (docs/eras/max.md line L1 and the hull). Command: kubejs custom_command gg_test_max_strand
 // Markers: GGTEST|max_strand|<check>|PASS/FAIL|..., then GGTEST|max_strand|DONE|failures=N.
 // Band ONLY: X 39256-39319, Z 0-63, Y 98-115 (zones.json row max_strand), built in grindless:sgr1806_orbit, the dimension the two draw rows are locked to.

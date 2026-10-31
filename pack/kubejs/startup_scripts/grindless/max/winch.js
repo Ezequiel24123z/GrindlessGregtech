@@ -1,4 +1,4 @@
-// priority: -5490
+// priority: -5554
 // -----------------------------------------------------------------------------------------------
 // MAX's Geroch winch (docs/eras/max.md, machine 6; package MAX-D3): the multiblock and its generator recipe type. No item of its own: the
 // canister, the tether and the worn segment are F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/winch.js.

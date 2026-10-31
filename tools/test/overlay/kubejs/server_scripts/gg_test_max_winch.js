@@ -1,4 +1,4 @@
-// priority: -5662
+// priority: -5664
 // TEST ONLY, MAX-D3 (gtceu:geroch_winch). Command: kubejs custom_command gg_test_max_winch
 // Copied over the instance on the test bench, never shipped. NOT run by the package worker: the MAX integrator runs it.
 // Band ONLY: X 39960-40023, Z 0-63, Y 98-135, in gcyr:black_hole_orbit (the Sgr A* level; zones.json row max_winch).
