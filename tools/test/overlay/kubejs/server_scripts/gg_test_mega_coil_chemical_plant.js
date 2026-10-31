@@ -1,4 +1,4 @@
-// priority: -5697
+// priority: -5704
 ﻿// TEST ONLY, MEGA-3 (gtceu:coil_chemical_plant). Command: kubejs custom_command gg_test_mega_coil_chemical_plant
 // Band ONLY: X 31232-31295, Z 0-63, Overworld Y 98-115.
 //   T1 of docs/eras/mega.md 6.4: on ONE real gtceu:large_chemical_reactor recipe (chosen from the live recipe manager: items only, no

@@ -1,4 +1,4 @@
-// priority: -5472
+// priority: -5491
 // -----------------------------------------------------------------------------------------------
 // MAX's Rydberg array works (docs/eras/max.md, machine 1, lines L19, L23, L29, L40, L43 and L46; package MAX-B3): the multiblock and its
 // recipe type. No item of its own: every item it makes or takes is F1's (max/foundation.js). The recipes are in

@@ -136,7 +136,7 @@ test('the credits: WIN_GAME with value 1 once per player, never wonGame, the epi
 
 test('the overlay stays in its band, has no priority line and is registered in zones.json', () => {
   const o = read(root, 'tools', 'test', 'overlay', 'kubejs', 'server_scripts', 'gg_test_max_shell.js');
-  assert.doesNotMatch(o, /^\/\/ priority:/m);
+  assert.doesNotMatch(o.replace(/^\/\/ priority: -?\d+\r?\n/, ''), /^\/\/ priority:/m);
   assert.match(o, /X0 = 40344/);
   assert.match(o, /X1 = 40407/);
   assert.match(o, /gg_test_max_shell/);

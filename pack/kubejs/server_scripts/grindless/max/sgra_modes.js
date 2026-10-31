@@ -1,4 +1,4 @@
-// priority: -20027
+// priority: -20024
 // -----------------------------------------------------------------------------------------------
 // MAX-D1 (docs/eras/max.md, L24 steps 3 and 5): the two GTM steps of the Penrose payload line, which have no older table of their own.
 //

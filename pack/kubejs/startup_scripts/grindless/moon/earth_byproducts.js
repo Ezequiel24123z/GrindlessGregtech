@@ -1,4 +1,4 @@
-// priority: -5500
+// priority: -5575
 // -----------------------------------------------------------------------------------------------
 // Earth ore byproducts without titanium (DECISIONS.md 2026-10-24: titanium comes only from the Moon) or uraninite (2026-10-25:
 // radioactives wait for IV). GTM's aluminium ore gave ilmenite and rutile, its bauxite gave rutile and its thorium (the Nether's

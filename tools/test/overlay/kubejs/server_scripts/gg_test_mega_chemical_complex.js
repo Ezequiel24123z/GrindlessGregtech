@@ -1,4 +1,4 @@
-// priority: -5687
+// priority: -5694
 // TEST ONLY, MEGA-6 (gtceu:mega_chemical_complex). Command: kubejs custom_command gg_test_mega_chemical_complex
 // Band ONLY: X 34048-34111, Z 0-63, Overworld Y 98-115.
 //   T1 of docs/eras/mega.md 6.4 (the named uncertainty: coil x parallel hatch together on one LCR-mode recipe):

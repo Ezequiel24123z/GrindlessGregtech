@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:stream_bundle_block"],
+  "text": ["emi.grindless.info.stream_bundle_block.0"]
+}
