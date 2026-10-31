@@ -1,4 +1,4 @@
-// priority: 6607
+// priority: 6605
 // Gregtech Grindless - EMI lines of MAX-A4's L39 rows on older machines (the fault-current-limiter line). Item and component names
 // are in max_foundation_lang.js. Names go in en_us and es_es.
 (function () {

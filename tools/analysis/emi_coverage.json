@@ -92,7 +92,6 @@
   "pendingRoutes": [
     { "id": "grindless:cluster_light_smelting/segment_truss_billet", "reason": "G1: the segment alloy ingot is held until the mirror shell (G1) uses the segment truss" },
     { "id": "grindless:cluster_light_smelting/mirror_scrap_billet", "reason": "G1: the mirror shell scrap is G1's byproduct and stays held until G1" },
-    { "id": "grindless:cluster_light_smelting/pellet_blank", "reason": "D4: pellet_blank is held until the D4 injector takes it" },
     { "id": "grindless:levitation_melting/segment_alloy_ingot", "reason": "G1: the segment alloy ingot is held until G1 and its dross and carbonyl powder wait with it" }
   ],
   "pendingUses": [
@@ -104,6 +103,7 @@
         { "id": "grindless:launched_belt_seed", "package": "C1", "reason": "MAX-T2 returns it from gate c15; the max-nsc grant (tiers/max.json) is its use and C1 checks the grant is there" },
     { "id": "grindless:silicate_slag", "package": "E1", "reason": "MAX-R1 returns it (c1, asteroid processor); E1 devolatilises it into the feeder slag pellets" },
     { "id": "grindless:segment_truss", "package": "G1", "reason": "MAX-R1 makes it; the G1 mirror shell takes it" },
-    { "id": "grindless:halbach_segment_coupler", "package": "G1", "reason": "MAX-R1 makes it (L37); the G1 segment takes it" }
+    { "id": "grindless:halbach_segment_coupler", "package": "G1", "reason": "MAX-R1 makes it (L37); the G1 segment takes it" },
+    { "id": "grindless:stream_bundle_block", "package": "G1", "reason": "MAX-D4 makes it (stream_bundle ring block); the G1 mirror shell structure uses it as equator rings (max.md:344)" }
           ]
 }

@@ -1,4 +1,4 @@
-// priority: -19975
+// priority: -19980
 // -----------------------------------------------------------------------------------------------
 // Recipes of MAX's membrane line (machine and recipe type: startup_scripts/grindless/max/membrane_line.js; docs/eras/max.md, machine 3,
 // lines L2, L3, L11; package MAX-B1), generated at every server load from data/grindless/tables/membrane_line.json, plus the

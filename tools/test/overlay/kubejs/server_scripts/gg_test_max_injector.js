@@ -1,3 +1,4 @@
+// priority: -5511
 // TEST ONLY, MAX-D4 (gtceu:mass_stream_injector). Command: kubejs custom_command gg_test_max_injector
 // Band ONLY: X 40216-40279, Z 0-63, Y 98-115 of gcyr:black_hole_orbit (Sgr A*; zones.json row max_injector).
 //   T1 (named uncertainty: the 7-high injector forms at Sgr A* and runs c1 at VA[MAX] = 2,013,265,920 EU/t on two OpV 4 A hatches):

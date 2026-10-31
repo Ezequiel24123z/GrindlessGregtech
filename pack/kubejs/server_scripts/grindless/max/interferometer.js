@@ -1,4 +1,4 @@
-// priority: -19963
+// priority: -19970
 // -----------------------------------------------------------------------------------------------
 // MAX-B2 atom interferometer works (docs/eras/max.md, machine 2, L4 last step, L33 steps 3-4; package MAX-B2). The other steps of the two
 // lines are one row each of an older machine, marked MAX-B2 in their own files:

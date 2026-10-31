@@ -1017,6 +1017,17 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_mass_stream_injector",
+      "recipeType": "gtceu:mass_stream_injection",
+      "prompt": "Seamless looping sound of a vast mass driver feeding pellets into a stream: a rhythmic electromagnetic thump, rising whine of accelerating coils and a low steady hum, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }
