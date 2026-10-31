@@ -79,6 +79,25 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:sic_mirror_blank", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 17): the gated GaN-on-SiC wafer passivated with silicon nitride, gold-plated and diced into four MMICs",
+          "name": "gan_mmic",
+          "circuit": 6,
+          "eut": 1966080,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:gan_gated_wafer", "count": 1 },
+            { "id": "gtceu:gold_foil", "count": 4 }
+          ],
+          "kept": [],
+          "fluidsIn": [
+            { "id": "gtceu:silane", "amount": 100 },
+            { "id": "gtceu:ammonia", "amount": 200 }
+          ],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:gan_mmic", "count": 4 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 600 }]
         }
       ]
     },

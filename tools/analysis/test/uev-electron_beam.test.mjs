@@ -218,6 +218,8 @@ test('6N hafnium, tantalum and niobium come only from the electron beam furnace'
       if (f.endsWith(path.join('uev', 'electron_beam.js'))) continue;
       // UEV-A5's HfTaCN billet (uhv/propulsion.js, SPS c4) consumes 6N hafnium; consumers are fine, producers are not
       if (id === 'six_n_hafnium' && f.endsWith(path.join('uhv', 'propulsion.js'))) continue;
+      // OpV-A2's MOCVD gate stack (uv/photonics.js, c19) consumes 6N hafnium
+      if (id === 'six_n_hafnium' && f.endsWith(path.join('uv', 'photonics.js'))) continue;
       // UXV-A2's hot strip mill foil and gum-metal blend (uxv/spin_feed.js) only consume 6N tantalum and niobium
       if ((id === 'six_n_tantalum' || id === 'six_n_niobium') && f.endsWith(path.join('uxv', 'spin_feed.js'))) continue;
       assert.ok(!read(f).includes(`grindless:${id}`), `${id} named in ${path.relative(kube, f)}`);
@@ -285,8 +287,9 @@ test('UV\'s circuits 1-4 on srf_cavity are untouched; the new row never duplicat
   const cold = read(path.join(kube, 'server_scripts', 'grindless', 'uv', 'cold.js'));
   // UIV-A2 adds c5 (para_h2_target, the pulser's solid target): the only circuit-5 row, and nothing above it
   // UIV-A9 adds c6 (polarised_h_ice): the only circuit-6 row, and nothing above it
-  // UIV-B3 adds c7 (solid_neon_cone): the only circuit-7 row, and nothing above it
-  assert.ok(/circuit: 4/.test(cold) && (cold.match(/circuit: 5/g) || []).length === 1 && /name: 'para_h2_target', type: 'srf_cavity', circuit: 5/.test(cold) && (cold.match(/circuit: 6/g) || []).length === 1 && /name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6/.test(cold) && (cold.match(/circuit: 7/g) || []).length === 1 && /name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7/.test(cold) && !/circuit: 8/.test(cold));
+  // UIV-B3 adds c7 (solid_neon_cone): the only circuit-7 row
+  // OpV-A2 adds c8 (rrr_nb_target, the Nb TSV sputter target): the only circuit-8 row, and nothing above it
+  assert.ok(/circuit: 4/.test(cold) && (cold.match(/circuit: 5/g) || []).length === 1 && /name: 'para_h2_target', type: 'srf_cavity', circuit: 5/.test(cold) && (cold.match(/circuit: 6/g) || []).length === 1 && /name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6/.test(cold) && (cold.match(/circuit: 7/g) || []).length === 1 && /name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7/.test(cold) && (cold.match(/circuit: 8/g) || []).length === 1 && /name: 'rrr_nb_target', type: 'srf_cavity', circuit: 8/.test(cold) && !/circuit: (9|[1-3]\d)\b/.test(cold));
   assert.ok(!startup.includes("registry('gtceu:recipe_type'") || !startup.includes("create('srf_cavity')"));
 });
 
@@ -308,7 +311,7 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
   const a10 = read(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'composites.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'matrioshka.js'))
     // UXV-A3's c9-20 and c27-29 rows: their items are registered in its own startup (UXV-A2's 5N and 7N grades in spin_feed.js)
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_rows.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_feed.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'foundation.js'))
-    // OpV-D1's c24-26 and c30-31 (opv/beam_hardware.js; nbtin_film is A2's and sits in its pending list)
+    // OpV-D1's c24-26 and c30-31 (opv/beam_hardware.js; c31 takes A2's nbtin_film_wafer, opv/circuits.js)
     // OpV-B2's c23 returns UIV's cage_part (uiv/foundation.js); OpV packages register their items under startup_scripts/grindless/opv/
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'foundation.js'))
     + fs.readdirSync(path.join(kube, 'startup_scripts', 'grindless', 'opv')).filter((f) => f.endsWith('.js')).map((f) => read(path.join(kube, 'startup_scripts', 'grindless', 'opv', f))).join('\n');

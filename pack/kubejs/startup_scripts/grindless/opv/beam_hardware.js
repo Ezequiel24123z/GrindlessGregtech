@@ -5,8 +5,8 @@
 //
 //   The six products (be_beam_window, ir_spallation_target, li6_hydride_shield, electron_cooler, stochastic_cooling_pickup and the
 //   neg_xhv_casing block) and spent_ir_target are F1's (opv/foundation.js): read, never created here.
-//   Not registered here: grindless:nbtin_film (A2's NbTiN film, line 24) and grindless:spent_li6_shield (B3's spent shield, line 22);
-//   the rows that take them skip themselves until those packages register them.
+//   Not registered here: grindless:spent_li6_shield (B3's spent shield, line 22); the rows that take it skip themselves until B3 registers
+//   it. The pickup array (EB c31) takes A2's grindless:nbtin_film_wafer (opv/circuits.js, line 24's NbTiN film).
 //   Material: grindless:bred_tritium_gas, the gas a spent shield gives off when it is baked (tritium, its helium-3 and the helium-4 of
 //     the Li-6(n,alpha) reaction); GTM registers its fluid as gtceu:bred_tritium_gas.
 //
@@ -56,7 +56,7 @@
   OPVB.materials = Object.keys(MATERIALS)
   OPVB.fluids = ['gtceu:bred_tritium_gas']
   // other packages' ids this package's rows read (the rows skip themselves while one is missing)
-  OPVB.pending = { 'grindless:nbtin_film': 'A2', 'grindless:spent_li6_shield': 'B3' }
+  OPVB.pending = { 'grindless:spent_li6_shield': 'B3' }
 
   function tooltips(item, name) {
     item.tooltip(Text.gray(Text.translate('tooltip.grindless.' + name + '.0')))

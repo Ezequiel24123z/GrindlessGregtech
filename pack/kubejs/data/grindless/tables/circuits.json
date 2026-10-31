@@ -1,0 +1,41 @@
+{
+  "_source": "OpV-A2 (docs/eras/opv.md, 'A2. Circuits', process lines 11-18): the steps of the OpV circuit lines that run on GTM's cutter and assembler and on LuV's helium refrigerator. Every other step is a row of an older machine, marked OpV-A2 in its own file (the 'older rows' of the contract).",
+  "_how_it_is_used": [
+    "Read by server_scripts/grindless/opv/circuits.js at every server load. Each entry of types.<type>.recipes becomes one gtceu:<type> recipe, id grindless:<type>/<name>.",
+    "itemsIn / itemsOut: { id, count, chance? } (a chance below 10 000 makes a chanced output); fluidsIn / fluidsOut: { id, amount } in mB. eut x duration. cutter and assembler are GTM's types: circuit 0 = none.",
+    "closed_loop_cooling (LuV's helium refrigerator) is keyed by its one item input and takes no circuit: the script adds the refrigerator's own make-up, pre-cool and charge (tables/helium_refrigerator.json) and its EMI line, as the generated rows have.",
+    "Destinations: the dies, the interposer, the optical link and the amplifier go to the UEV photonic integration hall (c8, gtnn:cosmic_mainframe); the InP scrap goes back to indium in EV's extraction cascade (c26). The cutter's water is used up (GTM's cutter rule)."
+  ],
+  "types": {
+    "cutter": {
+      "recipes": [
+        { "_why": "line 12: the Fe-doped (semi-insulating) InP boule sawn into wafers; the kerf and the ends go to the InP scrap", "name": "si_inp_wafers", "circuit": 0, "eut": 30720, "duration": 800,
+          "itemsIn": [{ "id": "grindless:si_inp_boule", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:si_inp_wafer", "count": 14 }, { "id": "grindless:inp_scrap", "count": 2 }], "fluidsOut": [] },
+        { "_why": "line 13: the metallised cryo-CMOS wafer diced into dies, still untested at 4 K", "name": "untested_cryo_cmos_dies", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:cryo_cmos_metal_wafer", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:untested_cryo_cmos_die", "count": 4 }], "fluidsOut": [] },
+        { "_why": "line 16: the isolated HEMT wafer diced into cryogenic low-noise amplifiers; the edge goes to the InP scrap", "name": "hemt_amplifiers", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:isolated_hemt_wafer", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:hemt_amplifier", "count": 4 }, { "id": "grindless:inp_scrap", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        { "_why": "line 12: the InAs/Al wafer capped with an annealed hBN film, the gate dielectric of the 2DEG", "name": "hbn_capped_2deg_wafer", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:inas_al_wafer", "count": 1 }, { "id": "grindless:annealed_hbn_film", "count": 1 }], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:hbn_capped_2deg_wafer", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "closed_loop_cooling": {
+      "recipes": [
+        { "_why": "line 13: each cryo-CMOS die tested at 4 K in the refrigerator's helium loop before it is used", "name": "opv_cryo_cmos_die_test", "circuit": 0, "eut": 30720, "duration": 400,
+          "itemsIn": [{ "id": "grindless:untested_cryo_cmos_die", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:cryo_cmos_die", "count": 1 }] },
+        { "_why": "line 14: the bonded interposer cooled below niobium's 9.2 K so every via is checked superconducting", "name": "opv_nb_tsv_interposer_test", "circuit": 0, "eut": 30720, "duration": 600,
+          "itemsIn": [{ "id": "grindless:bonded_tsv_interposer", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:nb_tsv_interposer", "count": 1 }] }
+      ]
+    }
+  }
+}

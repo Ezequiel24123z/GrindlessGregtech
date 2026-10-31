@@ -727,6 +727,8 @@
   // UXV-A2's alone); the 3 transmuted by spallation leave as a residue, whose aqua regia leach gives back the iridium left in it with
   // the osmium and tungsten it became (no rhenium: gtceu:rhenium_dust is Barnard's alone).
   // Same electrode wear and no voiding of the cargo.
+  // OpV-A2 row (circuit 17; docs/eras/opv.md line 13): the gold sputtered onto the MTJ cluster's shields by the cryo-CMOS metal step,
+  // dissolved in aqua regia and reduced; half of the two foils went onto the wafer, the other half comes back here
   var OPV_ROWS = [
     {
       name: 'ir_core_recovery', circuit: 15,
@@ -740,6 +742,12 @@
       itemsOut: [['gtceu:iridium_dust', 1], ['gtceu:osmium_dust', 1], ['gtceu:tungsten_dust', 1]],
       fluidsOut: [['minecraft:water', 2000]],
       eut: 1920, duration: 600
+    },
+    {
+      name: 'gold_overspray', circuit: 17,
+      itemIn: 'grindless:gold_overspray', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
+      itemsOut: [['gtceu:small_gold_dust', 2]], fluidsOut: [['minecraft:water', 2000]],
+      eut: 1920, duration: 300
     }
   ]
 

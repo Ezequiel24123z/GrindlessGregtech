@@ -87,10 +87,10 @@ test('one recipe per lookup path, with the ZPM implanter rows: unique circuits, 
     }
   }
   // UEV's implanter row (c5) is in photonics_uev.json; UIV-A5 added ZPM qubits.js c6
-  assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 10, 2, 3, 4, 6, 7, 8, 9]); // lexicographic sort; UIV-A10 added ZPM qubits.js c7 (c12_boron_diamond); UXV-A3 added c8-10 (argon ion mills)
+  assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 10, 12, 13, 14, 2, 3, 4, 6, 7, 8, 9]); // lexicographic sort; UIV-A10 added ZPM qubits.js c7 (c12_boron_diamond); UXV-A3 added c8-10 (argon ion mills); OpV-A2 c12-14 (cryo-CMOS, HEMT isolation, SDD rings)
   // UEV-A6 added MBE c3 and foundry c7 (UEV rows in the same table); UIV-A1 added MBE c4; UIV-A4 added foundry c8-11;
   // UIV-A5 added MBE c5-6 and foundry c12; UIV-A7 added MBE c7 (thf4_film) and foundry c13 (pcm_crossbar)
-  assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8]); // UIV-A10 added MBE c8 (nb_trilayer)
+  assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]); // UIV-A10 added MBE c8 (nb_trilayer); OpV-A2 c9 (InAs QW) and c10 (InP HEMT)
   assert.deepEqual(rowsOf('photonic_foundry').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]); // UIV-A10 added foundry c14-16; UXV-A3 c17-22
   // GTM's own types take no circuit here; the blast furnace rows carry a temperature
   for (const type of ['electric_blast_furnace', 'large_chemical_reactor']) for (const r of rowsOf(type)) assert.equal(r.circuit, 0, r.name);
@@ -186,8 +186,8 @@ test('no UEV input, and every lang key the package needs is written in en_us and
   }
   // UEV-A6's two UEV rows in these UHV types keep their keys in uev_photonics_lang.js; UIV-A1's MBE c4 in uiv_isotopes_lang.js;
   // UIV-A4's foundry c8-11 in uiv_tfln_femtosecond_lang.js; UIV-A5's MBE c5-6 and foundry c12 in uiv_beuv_stm_lang.js;
-  // UIV-A7's MBE c7 and foundry c13 in uiv_mainframe_lang.js
-  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js', 'uiv_tfln_femtosecond_lang.js', 'uiv_beuv_stm_lang.js', 'uiv_mainframe_lang.js', 'uiv_matrioshka_lang.js', 'uxv_spin_rows_lang.js']
+  // UIV-A7's MBE c7 and foundry c13 in uiv_mainframe_lang.js; OpV-A2's MBE c9-10 in opv_circuits_lang.js
+  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js', 'uiv_tfln_femtosecond_lang.js', 'uiv_beuv_stm_lang.js', 'uiv_mainframe_lang.js', 'uiv_matrioshka_lang.js', 'uxv_spin_rows_lang.js', 'opv_circuits_lang.js']
     .map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;

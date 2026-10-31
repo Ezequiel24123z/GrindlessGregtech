@@ -119,8 +119,9 @@ test('the controllers: UIV hull, parts, mainframes, helium, domain inputs, at le
 
 test('the mainframe: one photonic hall row, circuit 7, the only maker of gtnn:spintronic_mainframe', () => {
   const hall = JSON.parse(fs.readFileSync(path.join(pack, 'kubejs/data/grindless/tables/photonics_uev.json'), 'utf8')).types.photonic_integration.recipes;
-  const last = hall[hall.length - 1];
-  assert.equal(last.name, 'spintronic_mainframe');
+  // OpV-A2 appended the cosmic mainframe (c8) after it
+  const last = hall.find((r) => r.name === 'spintronic_mainframe');
+  assert.ok(last);
   assert.equal(last.circuit, 7);
   assert.match(last._why, /UXV-A5/);
   assert.deepEqual(last.itemsIn.map((x) => x.id), ['grindless:meso_logic_die', 'grindless:racetrack_chip', 'grindless:mram_wafer', 'grindless:magnonic_bus', 'grindless:mtj_die', 'grindless:shielded_interposer']);
