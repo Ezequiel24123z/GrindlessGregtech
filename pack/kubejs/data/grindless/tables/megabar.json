@@ -33,7 +33,10 @@
           "itemsOut": [{ "id": "grindless:bent_ge_tile", "count": 3 }, { "id": "gtceu:germanium_dust", "count": 1 }], "fluidsOut": [] },
         { "_why": "MAX-D1 (max.md, L24 step 2): degenerate slugs pressed under the anvil into the payload core. Circuit 11: c9 is OpV-B1's bent_ge_rebend and c10 is D4's.", "name": "payload_core_press", "circuit": 11, "eut": 7864320, "duration": 2400,
           "itemsIn": [{ "id": "grindless:degenerate_matter_slug", "count": 2 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:compressed_payload_core", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:compressed_payload_core", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-D4 (max.md, L14 step 2, c10): furnace pellet blanks pressed under the anvil into dense pellets, ready for the lathe.", "name": "pellet_press", "circuit": 10, "eut": 7864320, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:pellet_blank", "count": 8 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:dense_pellet", "count": 8 }], "fluidsOut": [] }
       ]
     },
     "electric_blast_furnace": {
