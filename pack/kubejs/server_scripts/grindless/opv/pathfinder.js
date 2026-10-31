@@ -24,15 +24,18 @@
   var CIRCUITS = '#gtceu:circuits/opv'
   var ASSEMBLER = [
     { name: 'xray_timing_head',
-      items: ['4x grindless:polycapillary_optic', '4x grindless:sdd_die', '2x ' + CIRCUITS],
+      items: ['4x grindless:polycapillary_optic', '4x grindless:sdd_die', '1x gtceu:opv_sensor',
+        '2x gtceu:borosilicate_glass_plate', '2x gtceu:titanium_foil', '2x ' + CIRCUITS],
       fluids: [['gtceu:soldering_alloy', 144]],
       out: ['3x grindless:xray_timing_head', '1x grindless:rejected_timing_head'], duration: 300 },
     { name: 'node_power_transmitter',
-      items: ['4x grindless:sealed_mmic_tile', '1x gtceu:opv_emitter', '2x ' + CIRCUITS],
+      items: ['4x grindless:sealed_mmic_tile', '1x gtceu:opv_emitter', '1x gtceu:opv_sensor',
+        '1x gtceu:opv_machine_hull', '2x grindless:chain_composite_rod', '2x ' + CIRCUITS],
       fluids: [['gtceu:soldering_alloy', 288]],
       out: ['1x grindless:node_power_transmitter'], duration: 400 },
     { name: 'vitamin_kit',
-      items: ['1x grindless:tetron_array', '1x grindless:xnav_unit', '2x gtceu:opv_robot_arm', '1x grindless:hemt_amplifier', '2x ' + CIRCUITS],
+      items: ['1x grindless:tetron_array', '1x grindless:xnav_unit', '2x gtceu:opv_robot_arm',
+        '1x grindless:hemt_amplifier', '1x grindless:cryo_optical_link', '2x ' + CIRCUITS],
       fluids: [['gtceu:soldering_alloy', 288]],
       out: ['1x grindless:vitamin_kit'], duration: 400 }
   ]
@@ -40,7 +43,7 @@
 
   var PROBE = {
     items: ['1x grindless:tetron_array', '1x grindless:xnav_unit', '1x grindless:shequid_gyro', '1x grindless:hawking_drive',
-      '2x gtceu:opv_sensor', '2x ' + CIRCUITS],
+      '2x gtceu:opv_sensor', '1x gtceu:opv_emitter', '2x ' + CIRCUITS],
     fluids: [['gtceu:soldering_alloy', 4608], ['gtceu:lubricant', 4000]],
     out: 'grindless:pathfinder_probe', cwut: 128, researchEUt: 125829120, duration: 2400
   }
