@@ -113,8 +113,8 @@
     var r = u.steps[u.step]
     inventory(u.bus, [['gtceu:programmed_circuit', 1, '{Configuration:' + r.circuit + '}']].concat(r.items))
     if (u.out) inventory(u.out, [])
-    if (u.fin) u.fin.tank.setFluidInTank(0, r.fluid ? Fluid.of(r.fluid[0], r.fluid[1]).getFluidStack() : Fluid.of('minecraft:empty', 0).getFluidStack())
-    if (u.fout) u.fout.tank.setFluidInTank(0, Fluid.of('minecraft:empty', 0).getFluidStack())
+    if (u.fin) u.fin.tank.setFluidInTank(0, r.fluid ? Fluid.of(r.fluid[0], r.fluid[1]).getFluidStack() : Fluid.of('minecraft:water', 0).getFluidStack())
+    if (u.fout) u.fout.tank.setFluidInTank(0, Fluid.of('minecraft:water', 0).getFluidStack())
     u.phase = 'running'
     u.started = S.tick
   }
