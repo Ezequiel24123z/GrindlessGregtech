@@ -125,7 +125,11 @@
         { "_why": "OpV-D1 (opv.md line 23; c23): CeB6 grown by crucible-free float zone under argon (the charge stays); the lathe's kerf comes back here as powder.", "name": "ceb6_boule", "circuit": 23, "eut": 491520, "duration": 1200,
           "itemsIn": [{ "id": "grindless:ceb6_powder", "count": 7 }],
           "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:ceb6_boule", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:ceb6_boule", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-B1 (opv.md line 35): GaAs pulled by liquid-encapsulated Czochralski under a boron oxide cap (kept, as InP c5) and diced into Laue tiles; the Ir crucible wears as in every row. Circuit 24 (19-23 are OpV-A1, A2, A3 and D1).", "name": "gaas_laue_tile", "circuit": 24, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gtceu:gallium_arsenide_dust", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [{ "id": "gtceu:boron_trioxide_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:gaas_laue_tile", "count": 8 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {

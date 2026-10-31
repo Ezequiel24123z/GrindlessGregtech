@@ -24,7 +24,13 @@
           "itemsOut": [{ "id": "grindless:raw_hbn_crystal", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 400 }] },
         { "_why": "OpV-A1 (opv.md line 7): gum metal and chain lamina pressed into the flexspline cup under the anvil (circuit 7).", "name": "flexspline_cup", "circuit": 7, "eut": 3932160, "duration": 1200,
           "itemsIn": [{ "id": "grindless:gum_metal_blank", "count": 1 }, { "id": "grindless:chain_lamina_stack", "count": 1 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:chain_flexspline_cup", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:chain_flexspline_cup", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-B1 (opv.md line 35): 7N germanium sliced into tiles and bent under the anvil at high temperature, so each tile diffracts a wider gamma band (circuit 8; 7 is OpV-A1).", "name": "bent_ge_tile", "circuit": 8, "eut": 3932160, "duration": 800,
+          "itemsIn": [{ "id": "grindless:seven_n_germanium", "count": 1 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:bent_ge_tile", "count": 4 }], "fluidsOut": [] },
+        { "_why": "OpV-B1 (opv.md line 35 byproduct): bent Ge tiles whose curvature relaxed in the gamma optics works are bent again; three of four come back, the broken one returns as germanium for zone refining (UV detectors c9). Circuit 9 is an extra OpV-B1 circuit (free in the plan).", "name": "bent_ge_rebend", "circuit": 9, "eut": 3932160, "duration": 600,
+          "itemsIn": [{ "id": "grindless:rejected_laue_tile", "count": 4 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:bent_ge_tile", "count": 3 }, { "id": "gtceu:germanium_dust", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "electric_blast_furnace": {

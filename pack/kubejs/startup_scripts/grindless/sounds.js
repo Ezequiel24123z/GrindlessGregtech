@@ -90,7 +90,9 @@
     'gtceu:polar_cap_tapping': 'loop_polar_cap_tap',
     'gtceu:ejecta_sweeping': 'loop_ejecta_knot_sweeper',
     'gtceu:annihilation_lasing': 'loop_annihilation_laser_works',
-    'gtceu:field_freezing': 'loop_field_frozen_press'
+    'gtceu:field_freezing': 'loop_field_frozen_press',
+    'gtceu:tetron_assembly': 'loop_tetron_fab',
+    'gtceu:gamma_optics': 'loop_gamma_optics_works'
   }
 
   StartupEvents.registry('sound_event', function (event) {
