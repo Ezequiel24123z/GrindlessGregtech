@@ -694,8 +694,11 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
     }
     const j = { type, inputs: { item: [], fluid: [] }, outputs: { item: [], fluid: [] }, tickInputs: { eu: [] }, tickOutputs: { eu: [] }, recipeConditions: [] };
     const rec = { i: id, t: type, a: 1, j, problems };
-    const itemIn = (x, chance = 10000) => itemArgs(x, problems).forEach((c) => j.inputs.item.push({ content: { type: 'gtceu:sized', count: c.count, ingredient: c.ingredient }, chance, maxChance: 10000, tierChanceBoost: 0 }));
-    const itemOut = (x, chance = 10000) => itemArgs(x, problems).forEach((c) => j.outputs.item.push({ content: { type: 'gtceu:sized', count: c.count, ingredient: c.ingredient }, chance, maxChance: 10000, tierChanceBoost: 0 }));
+    // the builder's chance(n)/maxChance(n) setters: they apply to the contents added until reset to 10000/10000
+    const ch = { c: 10000, m: 10000 };
+    const ovr = (chance) => (ch.c === 10000 && ch.m === 10000 ? { chance, maxChance: 10000 } : { chance: ch.c, maxChance: ch.m });
+    const itemIn = (x, chance = 10000) => itemArgs(x, problems).forEach((c) => j.inputs.item.push({ content: { type: 'gtceu:sized', count: c.count, ingredient: c.ingredient }, ...ovr(chance), tierChanceBoost: 0 }));
+    const itemOut = (x, chance = 10000) => itemArgs(x, problems).forEach((c) => j.outputs.item.push({ content: { type: 'gtceu:sized', count: c.count, ingredient: c.ingredient }, ...ovr(chance), tierChanceBoost: 0 }));
     const fluidIn = (x, chance = 10000) => fluidArgs(x, problems).forEach((c) => j.inputs.fluid.push({ content: c, chance, maxChance: 10000, tierChanceBoost: 0 }));
     const fluidOut = (x, chance = 10000) => fluidArgs(x, problems).forEach((c) => j.outputs.fluid.push({ content: c, chance, maxChance: 10000, tierChanceBoost: 0 }));
     const cond = (type2) => (p, a) => { j.recipeConditions.push({ type: type2, args: a.map((x) => (typeof x === 'object' || typeof x === 'function' ? String(x) : x)) }); };
@@ -714,6 +717,8 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
       outputFluids: (p, a) => { a.forEach((x) => fluidOut(x)); },
       fluidOutputs: (p, a) => { a.forEach((x) => fluidOut(x)); },
       chancedFluidOutput: (p, a) => { fluidOut(a[0], Number(a[1])); },
+      chance: (p, a) => { ch.c = Number(a[0]); },
+      maxChance: (p, a) => { ch.m = Number(a[0]); },
       circuit: (p, a) => { j.inputs.item.push({ content: { type: 'gtceu:circuit', configuration: Number(a[0]) }, chance: 0, maxChance: 10000, tierChanceBoost: 0 }); },
       EUt: (p, a) => {
         const v = Number(a[0]);
