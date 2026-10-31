@@ -18,6 +18,7 @@ const T = JSON.parse(read(path.join(tables, 'electron_beam.json')));
 const startup = read(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'electron_beam.js'));
 // UIV-A3 appended c7 nb_ta_button; its recipe key lives in the melter's lang file.
 const lang = read(path.join(kube, 'client_scripts', 'grindless', 'uev_electron_beam_lang.js'))
+    + read(path.join(kube, 'client_scripts', 'grindless', 'max_imager_lang.js'))
     + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_levitation_melter_lang.js'))
     + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_matrioshka_lang.js')) // UIV-A10's tin_distill
     + read(path.join(kube, 'client_scripts', 'grindless', 'uxv_spin_rows_lang.js')) // UXV-A3's c9-20 and c27-29
