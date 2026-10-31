@@ -96,7 +96,7 @@ test('the sinterer: tile, liner, nozzle on circuits 1-3, every row in the dump w
   // UEV-A5 appended the HfTaCN billet (c4), UIV-A5 the B4C sputter target (c5)
   assert.deepEqual(P.recipes.map((r) => [r.name, r.circuit]), [['uhtc_tile', 1], ['tantalum_carbide_liner', 2], ['uhtc_nozzle', 3], ['hftacn_billet', 4], ['b4c_target', 5], ['nb_target', 6], ['w_target', 7],
     ['ir_target_rod', 11], ['li6h_tile', 12], ['tizrv_target', 13], ['chain_composite_rod', 16], ['chain_composite_rotor', 17], ['opv_harmonic_drive', 10],
-    ['wc_sputter_target', 14]]); // UIV-A10 appended c6-c7; OpV-D1 c11-13 (Ir target rod, 6LiH tile, TiZrV target); OpV-A1 c16-17 (opv.md's c8-9 are UXV-A1's) and c10; OpV-B1 c14
+    ['wc_sputter_target', 14], ['gamma_absorber_tile', 15]]); // UIV-A10 appended c6-c7; OpV-D1 c11-13 (Ir target rod, 6LiH tile, TiZrV target); OpV-A1 c16-17 (opv.md's c8-9 are UXV-A1's) and c10; OpV-B1 c14; OpV-B3a c15
   const tile = row('uhtc_tile');
   assert.deepEqual(tile.itemsIn, [{ id: 'gtceu:uhtc_blend_dust', count: 8 }, { id: 'gtceu:graphite_dust', count: 1 }]);
   assert.deepEqual(tile.itemsOut, [{ id: 'grindless:uhtc_tile', count: 2 }, { id: 'gtceu:carbon_dust', count: 1 }]);

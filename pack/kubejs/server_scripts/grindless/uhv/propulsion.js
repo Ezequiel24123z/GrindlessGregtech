@@ -105,6 +105,9 @@
     [item('grindless:opv_harmonic_drive', 1)], [], UHVA, 800))
   // OpV-B1 (opv.md line 34): the tungsten carbide target of the WC/SiC gamma multilayer (circuit 14; MTJ sputtering c12)
   TABLE.push(row('wc_sputter_target', 'spark_plasma_sintering', 14, [item('gtceu:tungsten_carbide_dust', 4)], [], [item('grindless:wc_sputter_target', 1)], [], UHVA, 500))
+  // OpV-B3a line 32 (circuit 15; 8-14 are other lines' rows): the tungsten and the boron-10 carbide sintered into the gamma absorber tile
+  TABLE.push(row('gamma_absorber_tile', 'spark_plasma_sintering', 15,
+    [item('grindless:w_b4c_powder', 1)], [], [item('grindless:gamma_absorber_tile', 1)], [], UHVA, 600))
 
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],

@@ -102,7 +102,10 @@
           "itemsOut": [{ "id": "grindless:superpolished_sic_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
         { "_why": "OpV-B1 (opv.md line 34 byproduct): a rejected gamma mirror is stripped of its multilayer by fluorine (the tungsten leaves as WF6, which feeds this furnace's c2-3), then re-coated from MTS and repolished into a blank.", "name": "gamma_mirror_strip", "circuit": 11, "eut": 1966080, "duration": 2400,
           "itemsIn": [{ "id": "grindless:rejected_gamma_mirror", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:fluorine", "amount": 1000 }, { "id": "gtceu:methyltrichlorosilane", "amount": 500 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:superpolished_sic_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:tungsten_hexafluoride", "amount": 250 }, { "id": "gtceu:hydrochloric_acid", "amount": 1500 }] }
+          "itemsOut": [{ "id": "grindless:superpolished_sic_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:tungsten_hexafluoride", "amount": 250 }, { "id": "gtceu:hydrochloric_acid", "amount": 1500 }] },
+        { "_why": "OpV-B3a line 27: the REBCO octupole winding potted by chemical vapour infiltration (a carbon matrix from methane holds the turns against the quench forces); the hydrogen goes back to stock.", "name": "octupole_potting", "circuit": 9, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:octupole_winding", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:potted_octupole_winding", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
       ]
     },
     "chemical_reactor": {
