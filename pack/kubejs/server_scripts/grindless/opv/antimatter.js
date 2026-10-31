@@ -172,7 +172,7 @@
   // the controllers: an OpV hull, OpV components, OpV circuits, superfluid He-3 and three domain items, behind station research
   function addControllers(event) {
     var HULL = 'gtceu:opv_machine_hull'
-    var FLUID = 'grindless:superfluid_helium_3'
+    var FLUID = 'gtceu:superfluid_helium_3'
     var defs = [
       { name: 'antihydrogen_foundry', research: 'grindless:octupole_trap_magnet', circuits: 4,
         parts: ['4x gtceu:opv_field_generator', '4x gtceu:opv_emitter', '2x gtceu:opv_electric_pump'],
@@ -220,7 +220,7 @@
     b.itemInputs('4x gtceu:tungsten_steel_plate')
     b.itemInputs('gtceu:opv_sensor', '4x gtceu:lead_plate', '2x gtceu:boron_carbide_dust')
     b.itemInputs('2x #gtceu:circuits/opv')
-    b.inputFluids(Fluid.of('grindless:superfluid_helium_3', 250))
+    b.inputFluids(Fluid.of('gtceu:superfluid_helium_3', 250))
     b.itemOutputs('2x ' + OUT)
     b.EUt(503316480).duration(200)
     AM.casingRecipe = 'grindless:assembler/annihilation_shield_casing'

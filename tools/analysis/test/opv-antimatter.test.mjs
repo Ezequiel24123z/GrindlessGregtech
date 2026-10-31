@@ -183,7 +183,7 @@ test('the controllers: OpV hull, OpV components and circuits, superfluid He-3, t
     assert.ok(r && r.t === 'gtceu:assembly_line', m);
     const text = JSON.stringify(r.j);
     assert.ok(text.includes(`gtceu:${m}`), `${m} is its output`);
-    for (const need of ['gtceu:opv_machine_hull', 'gtceu:circuits/opv', 'gtceu:opv_field_generator', 'grindless:superfluid_helium_3', want[m][0]]) assert.ok(text.includes(need), `${m} takes ${need}`);
+    for (const need of ['gtceu:opv_machine_hull', 'gtceu:circuits/opv', 'gtceu:opv_field_generator', 'gtceu:superfluid_helium_3', want[m][0]]) assert.ok(text.includes(need), `${m} takes ${need}`);
     for (const d of want[m][1]) assert.ok(text.includes(d), `${m} takes ${d}`);
     assert.ok(!/(uxv|uiv|uev)_|circuits\/(uxv|uiv|uev|uhv)|gtceu:max_/.test(text), `${m} takes no component or circuit below OpV`);
     const ids = new Set((text.match(/"(?:id|tag|item)":"[^"]+"/g) || []));
@@ -328,11 +328,11 @@ test('home and OpV dynamo requirements are enforced again on cached recipe start
 });
 
 test('DT conditioning and krypton purification are actual required production edges', () => {
-  assert.ok(takes('grindless:dt_fill').some((r) => r.i.endsWith('cryogenic_processing/dt_fill_conditioning')));
-  assert.ok(takes('grindless:cold_dt_fill').some((r) => r.i.endsWith('fuel_fabrication/acmf_pellet')));
-  assert.ok(takes('grindless:purified_krypton').some((r) => r.i.endsWith('assembler/kr_tripler_cell')));
+  assert.ok(takes('gtceu:dt_fill').some((r) => r.i.endsWith('cryogenic_processing/dt_fill_conditioning')));
+  assert.ok(takes('gtceu:cold_dt_fill').some((r) => r.i.endsWith('fuel_fabrication/acmf_pellet')));
+  assert.ok(takes('gtceu:purified_krypton').some((r) => r.i.endsWith('assembler/kr_tripler_cell')));
   const casing = JSON.stringify(find(AM.casingRecipe).j);
-  for (const id of ['gtceu:opv_sensor', 'grindless:superfluid_helium_3']) assert.ok(casing.includes(id), id);
+  for (const id of ['gtceu:opv_sensor', 'gtceu:superfluid_helium_3']) assert.ok(casing.includes(id), id);
 });
 
 test('the native fixture fits the assigned band and exposes the grouped-run completion marker', () => {

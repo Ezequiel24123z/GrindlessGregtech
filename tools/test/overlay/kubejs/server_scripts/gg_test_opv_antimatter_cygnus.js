@@ -19,20 +19,20 @@
   var UNITS = [
     { id: 'gtceu:jet_beam_line', cx: 38788, z: 2, parts: [ENERGY, ENERGY, INPUT, FIN, FOUT],
       steps: [
-        { recipe: 'jet_beam_extraction/jet_proton_beam', circuit: 1, items: [['grindless:srf_cavity', 1], ['grindless:be_beam_window', 1]], fluidOut: ['grindless:jet_proton_beam', 1000], duration: 200 },
-        { recipe: 'jet_beam_extraction/flux_boosted_jet_beam', circuit: 2, items: [['grindless:srf_cavity', 1], ['grindless:be_beam_window', 1]], fluid: ['gtceu:flux_loaded_plasma', 100], fluidOut: ['grindless:jet_proton_beam', 2000], duration: 200 }
+        { recipe: 'jet_beam_extraction/jet_proton_beam', circuit: 1, items: [['grindless:srf_cavity', 1], ['grindless:be_beam_window', 1]], fluidOut: ['gtceu:jet_proton_beam', 1000], duration: 200 },
+        { recipe: 'jet_beam_extraction/flux_boosted_jet_beam', circuit: 2, items: [['grindless:srf_cavity', 1], ['grindless:be_beam_window', 1]], fluid: ['gtceu:flux_loaded_plasma', 100], fluidOut: ['gtceu:jet_proton_beam', 2000], duration: 200 }
       ] },
     { id: 'gtceu:spallation_target_station', cx: 38805, z: 2, parts: [ENERGY, ENERGY, INPUT, OUTPUT, FIN, FOUT],
       steps: [
         { recipe: 'antiproton_production/hot_antiproton_beam', circuit: 1, items: [['grindless:ir_spallation_target', 1], ['grindless:li6_hydride_shield', 1]],
-          fluid: ['grindless:jet_proton_beam', 4000], fluidOut: ['grindless:hot_antiproton_beam', 1000], duration: 400 }
+          fluid: ['gtceu:jet_proton_beam', 4000], fluidOut: ['gtceu:hot_antiproton_beam', 1000], duration: 400 }
       ] },
     { id: 'gtceu:antiproton_decelerator', cx: 38824, z: 2, parts: [ENERGY, ENERGY, INPUT, OUTPUT, FIN, FOUT],
       steps: [
         { recipe: 'beam_cooling/stochastic_cooling', circuit: 1, items: [['grindless:stochastic_cooling_pickup', 1]],
-          fluid: ['grindless:hot_antiproton_beam', 1000], fluidOut: ['grindless:stochastically_cooled_beam', 1000], duration: 800 },
+          fluid: ['gtceu:hot_antiproton_beam', 1000], fluidOut: ['gtceu:stochastically_cooled_beam', 1000], duration: 800 },
         { recipe: 'beam_cooling/cold_antiproton_cell', circuit: 2, items: [['grindless:electron_cooler', 1], ['grindless:empty_penning_trap', 1], ['grindless:octupole_trap_magnet', 1]],
-          fluid: ['grindless:stochastically_cooled_beam', 1000], itemOut: ['grindless:cold_antiproton_cell', 1], duration: 1200 }
+          fluid: ['gtceu:stochastically_cooled_beam', 1000], itemOut: ['grindless:cold_antiproton_cell', 1], duration: 1200 }
       ] },
     { id: 'gtceu:antimatter_trap', cx: 38840, z: 2, parts: [ENERGY, ENERGY, INPUT, OUTPUT, FIN, FOUT],
       steps: [

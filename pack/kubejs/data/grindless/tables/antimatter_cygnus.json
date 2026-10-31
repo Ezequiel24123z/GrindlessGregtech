@@ -5,34 +5,34 @@
       "type": "jet_beam_extraction", "name": "jet_proton_beam", "circuit": 1, "eut": 268435456, "duration": 200,
       "kept": ["grindless:srf_cavity"],
       "wear": [{ "id": "grindless:be_beam_window", "chance": 313 }],
-      "fluidsOut": [{ "id": "grindless:jet_proton_beam", "amount": 1000 }]
+      "fluidsOut": [{ "id": "gtceu:jet_proton_beam", "amount": 1000 }]
     },
     {
       "type": "jet_beam_extraction", "name": "flux_boosted_jet_beam", "circuit": 2, "eut": 503316480, "duration": 200,
       "kept": ["grindless:srf_cavity"],
       "wear": [{ "id": "grindless:be_beam_window", "chance": 313 }],
       "fluidsIn": [{ "id": "gtceu:flux_loaded_plasma", "amount": 100 }],
-      "fluidsOut": [{ "id": "grindless:jet_proton_beam", "amount": 2000 }]
+      "fluidsOut": [{ "id": "gtceu:jet_proton_beam", "amount": 2000 }]
     },
     {
       "type": "antiproton_production", "name": "hot_antiproton_beam", "circuit": 1, "eut": 503316480, "duration": 400,
       "wear": [{ "id": "grindless:ir_spallation_target", "chance": 625 }, { "id": "grindless:li6_hydride_shield", "chance": 313 }],
-      "fluidsIn": [{ "id": "grindless:jet_proton_beam", "amount": 4000 }],
+      "fluidsIn": [{ "id": "gtceu:jet_proton_beam", "amount": 4000 }],
       "chancedOut": [{ "id": "grindless:spent_ir_target", "count": 1, "chance": 625 }, { "id": "grindless:spent_li6_shield", "count": 1, "chance": 313 }],
-      "fluidsOut": [{ "id": "grindless:hot_antiproton_beam", "amount": 1000 }]
+      "fluidsOut": [{ "id": "gtceu:hot_antiproton_beam", "amount": 1000 }]
     },
     {
       "type": "beam_cooling", "name": "stochastic_cooling", "circuit": 1, "eut": 268435456, "duration": 800,
       "wear": [{ "id": "grindless:stochastic_cooling_pickup", "chance": 156 }],
-      "fluidsIn": [{ "id": "grindless:hot_antiproton_beam", "amount": 1000 }],
-      "fluidsOut": [{ "id": "grindless:stochastically_cooled_beam", "amount": 1000 }]
+      "fluidsIn": [{ "id": "gtceu:hot_antiproton_beam", "amount": 1000 }],
+      "fluidsOut": [{ "id": "gtceu:stochastically_cooled_beam", "amount": 1000 }]
     },
     {
       "type": "beam_cooling", "name": "cold_antiproton_cell", "circuit": 2, "eut": 503316480, "duration": 1200,
       "itemsIn": ["grindless:empty_penning_trap"],
       "kept": ["grindless:octupole_trap_magnet"],
       "wear": [{ "id": "grindless:electron_cooler", "chance": 156 }],
-      "fluidsIn": [{ "id": "grindless:stochastically_cooled_beam", "amount": 1000 }],
+      "fluidsIn": [{ "id": "gtceu:stochastically_cooled_beam", "amount": 1000 }],
       "itemsOut": ["grindless:cold_antiproton_cell"]
     }
   ],

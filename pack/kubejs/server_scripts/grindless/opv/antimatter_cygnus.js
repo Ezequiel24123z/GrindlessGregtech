@@ -52,7 +52,7 @@
         items.concat([d.research, 'gtceu:' + d.name]).forEach(requireItem)
         var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
           .itemInputs(items).itemInputs('4x #gtceu:circuits/opv')
-          .inputFluids(Fluid.of('grindless:superfluid_helium_3', 1000),
+          .inputFluids(Fluid.of('gtceu:superfluid_helium_3', 1000),
             Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000))
           .itemOutputs('gtceu:' + d.name)
           .stationResearch(function (s) { return s.researchStack(Item.of(d.research)).dataStack(Item.of('gtceu:data_module')).CWUt(128).EUt(503316480) })

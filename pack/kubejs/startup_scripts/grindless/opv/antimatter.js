@@ -126,7 +126,7 @@
         }
         outputs.push({ voltage: Number(h.getOutputVoltage()), amps: Number(h.getOutputAmperage()) })
       }
-      return !AM.engineAllowed(String(machine.getLevel().dimension().location()), outputs, G.generators.recipeEUt(recipe))
+      return !AM.engineAllowed(dimId(machine.getLevel()), outputs, G.generators.recipeEUt(recipe))
     } catch (e) {
       if (!guardFailed) {
         guardFailed = true
@@ -206,6 +206,12 @@
         return ''
       }
     }
+  }
+
+  // a ServerLevel exposes dimension as a method or as a field, depending on the wrapper
+  function dimId(level) {
+    var d = level.dimension
+    return String(typeof d === 'function' ? level.dimension().location() : d)
   }
 
   StartupEvents.registry('item', function (event) {

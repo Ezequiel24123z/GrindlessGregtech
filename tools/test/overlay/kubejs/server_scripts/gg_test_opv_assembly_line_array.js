@@ -29,7 +29,7 @@
   var BUDGET = 2 * 16 * 536870912
   var CX = 38624
   var CY = 100
-  var CZ = 40
+  var CZ = 16
   // the front wall's first row: column 4 is the controller
   var HEAD = { 1: 'gtceu:maintenance_hatch', 2: ENERGY16, 3: ENERGY16, 5: 'gtceu:data_access_hatch', 6: HATCH }
   var BUSES = 3
