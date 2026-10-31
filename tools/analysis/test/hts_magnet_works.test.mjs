@@ -43,8 +43,8 @@ const DUMP_ITEMS = [
 test('magnet works table: one circuit per recipe, the helium charge on all, decision 13\'s trinium, whole EU/t and ticks', () => {
   assert.deepEqual(TABLE.charge, { id: 'gtceu:liquid_helium', amount: 1000 });
   const names = TABLE.recipes.map((r) => r.name);
-  assert.deepEqual(names, ['hts_coil', 'luv_smes_cell', 'coilgun_coil_casing', 'magnetic_bearing', 'seeded_gdbco_growth', 'strand_stator']);
-  assert.deepEqual(TABLE.recipes.map((r) => r.circuit), [1, 2, 3, 4, 5, 6]);
+  assert.deepEqual(names, ['hts_coil', 'luv_smes_cell', 'coilgun_coil_casing', 'magnetic_bearing', 'seeded_gdbco_growth', 'strand_stator', 'octupole_winding', 'octupole_trap_magnet']);
+  assert.deepEqual(TABLE.recipes.map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 9, 10]);
   for (const r of TABLE.recipes) {
     assert.equal(r.charge, true, r.name + ' carries the cold-test charge');
     assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
@@ -55,7 +55,7 @@ test('magnet works table: one circuit per recipe, the helium charge on all, deci
   assert.equal(3456 / 144, 24, 'a twenty-fourth of GTM\'s superconducting_coil_luv');
   assert.deepEqual(coil.itemsOut, [{ id: 'gtceu:superconducting_coil', count: 1 }]);
   // the LuV ones at LuV's VA; the coilgun coil at IV's, the bearing at EV's (luv.md); UIV-A8's bulk GdBCO growth at LuV's, for hours
-  assert.deepEqual(TABLE.recipes.map((r) => [r.eut, r.duration]), [[30720, 400], [30720, 600], [7680, 200], [1920, 200], [30720, 4800], [1966080, 400]]);
+  assert.deepEqual(TABLE.recipes.map((r) => [r.eut, r.duration]), [[30720, 400], [30720, 600], [7680, 200], [1920, 200], [30720, 4800], [1966080, 400], [1966080, 600], [1966080, 1200]]);
 });
 
 test('magnet works table: the SMES cell is the wireless network\'s LuV cell, made only here', () => {
@@ -81,9 +81,11 @@ test('magnet works table: every id is GTM\'s or one LuV\'s design names', () => 
   for (const id of ours) assert.ok(LUV_DOC.includes('`' + id + '`'), id + ' is named in docs/eras/luv.md');
   // UXV-A8 appends c6 strand_stator, registered by the UXV foundation
   const uivStartup = ['uiv', 'uxv'].flatMap((d) => fs.readdirSync(path.join(KUBEJS, 'startup_scripts', 'grindless', d)).map((f) => fs.readFileSync(path.join(KUBEJS, 'startup_scripts', 'grindless', d, f), 'utf8'))).join('\n');
+  const opvStartup = ['antimatter.js', 'foundation.js'].map((f) => fs.readFileSync(path.join(KUBEJS, 'startup_scripts', 'grindless', 'opv', f), 'utf8')).join('\n');
   for (const r of TABLE.recipes.filter((x) => !LUV_NAMES.includes(x.name))) {
-    assert.match(r._why || '', /^U[IX][VX]-A\d+/, r.name + ': a later row says which package added it');
-    [...r.itemsIn, ...r.itemsOut].filter((x) => x.id.startsWith('grindless:')).forEach((x) => assert.match(uivStartup, new RegExp('\\b' + x.id.slice(10) + '\\b'), x.id + ' is registered by a UIV startup script'));
+    const b3a = ['octupole_winding', 'octupole_trap_magnet'].includes(r.name);
+    assert.match(r._why || '', b3a ? /^OpV-B3a/ : /^U[IX][VX]-A\d+/, r.name + ': a later row says which package added it');
+    [...r.itemsIn, ...r.itemsOut].filter((x) => x.id.startsWith('grindless:')).forEach((x) => assert.match(b3a ? opvStartup : uivStartup, new RegExp('\\b' + x.id.slice(10) + '\\b'), x.id + ' is registered by its era startup script'));
   }
   // A1's tetrataenite: a GT material with GENERATE_ROD (luv/foundation.js), so GTM names its rod gtceu:tetrataenite_rod
   const a1 = [...ids].filter((x) => /^gtceu:tetrataenite_/.test(x));
@@ -282,7 +284,7 @@ test('magnet works recipes: GTM recipes with the circuit, the helium not consume
 
 test('magnet works recipes: an id the game lacks skips only its recipe, loudly (A1\'s items before they merge)', () => {
   const { G, recipes, errors } = sandboxRun({ missing: ['gtceu:tetrataenite_rod'] });
-  assert.deepEqual(recipes.map((r) => r.id), ['grindless:hts_coil', 'grindless:luv_smes_cell', 'grindless:coilgun_coil_casing', 'grindless:seeded_gdbco_growth', 'grindless:strand_stator']);
+  assert.deepEqual(recipes.map((r) => r.id), ['grindless:hts_coil', 'grindless:luv_smes_cell', 'grindless:coilgun_coil_casing', 'grindless:seeded_gdbco_growth', 'grindless:strand_stator', 'grindless:octupole_winding', 'grindless:octupole_trap_magnet']);
   assert.deepEqual(plain(G.htsMagnetWorks.skipped), [{ name: 'magnetic_bearing', reason: 'unknown id(s): gtceu:tetrataenite_rod' }]);
   assert.ok(errors.some((e) => /skipped magnetic_bearing/.test(e)));
 });
@@ -295,6 +297,7 @@ test('magnet works text: the machine, the type, every recipe\'s EMI line and the
   vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'uiv_uiv_components_lang.js'), 'utf8'), sandbox, { filename: 'uiv_uiv_components_lang.js' });
     // UXV-A8: uxv_uxv_parts_lang.js
     vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'uxv_uxv_parts_lang.js'), 'utf8'), sandbox, { filename: 'uxv_uxv_parts_lang.js' });
+    vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'opv_antimatter_lang.js'), 'utf8'), sandbox, { filename: 'opv_antimatter_lang.js' });
     const keys = ['block.gtceu.hts_magnet_works', 'gtceu.magnet_winding', 'grindless.machine.hts_magnet_works.charge.ok',
     'grindless.machine.hts_magnet_works.charge.low', ...[0].map((i) => 'grindless.machine.hts_magnet_works.tooltip.' + i),
     ...TABLE.recipes.map((r) => 'gtceu.recipe.grindless_magnet_winding.' + r.name)];
