@@ -43,7 +43,13 @@
           "name": "bonded_tetron_die", "circuit": 8, "eut": 31457280, "duration": 1600,
           "itemsIn": [{ "id": "grindless:bumped_tetron_die", "count": 1 }, { "id": "grindless:nb_tsv_interposer", "count": 1 }],
           "itemsOut": [{ "id": "grindless:bonded_tetron_die", "count": 1 }]
-        }
+        },
+        { "_why": "MAX-A1 (max.md, L5): the poled boule bonded to a silicon handle and sliced by hydrogen implantation into a thin-film wafer", "name": "ppln_thin_film_wafer", "circuit": 9, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:ppln_boule", "count": 1 }, { "id": "grindless:fz_silicon_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ppln_thin_film_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
+        { "_why": "MAX-A1 (max.md, L7): the piezo layer bonded to a lithium niobate wafer and sliced into the transducer wafer", "name": "transducer_wafer", "circuit": 10, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:piezo_optomech_layer", "count": 1 }, { "id": "grindless:lithium_niobate_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:transducer_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] }
       ]
     },
     "femtosecond_writing": {
@@ -82,7 +88,10 @@
           "name": "ln_soi_waveguides", "circuit": 6, "eut": 7864320, "duration": 1000,
           "itemsIn": [{ "id": "grindless:ln_on_soi_wafer", "count": 1 }],
           "itemsOut": [{ "id": "grindless:ln_soi_waveguide_wafer", "count": 1 }]
-        }
+        },
+        { "_why": "MAX-A1 (max.md, L5): squeezer waveguide written into the thin-film wafer under a fused-silica cladding", "name": "squeezer_waveguide_die", "circuit": 7, "eut": 7864320, "duration": 1000,
+          "itemsIn": [{ "id": "grindless:ppln_thin_film_wafer", "count": 1 }, { "id": "grindless:fused_silica_tube", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:squeezer_waveguide_die", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "chemical_reactor": {

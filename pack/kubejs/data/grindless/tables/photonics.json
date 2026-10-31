@@ -183,7 +183,10 @@
             { "id": "gtceu:arsenic_dust", "count": 1, "chance": 5000 }
           ],
           "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
-        }
+        },
+        { "_why": "MAX-A1 (max.md, L7): an AlN piezo layer grown on the niobium coplanar film", "name": "piezo_optomech_layer", "circuit": 12, "eut": 1966080, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:nb_coplanar_film", "count": 1 }, { "id": "grindless:aln_powder", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:piezo_optomech_layer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] }
       ]
     },
     "photonic_foundry": {
