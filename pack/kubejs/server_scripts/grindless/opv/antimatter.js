@@ -21,6 +21,8 @@
   var AM = G.opvAntimatter || (G.opvAntimatter = {})
   var TABLE = AM.table || 'kubejs/data/grindless/tables/antimatter_opv.json'
   var SITE = AM.site || 'grindless:cygnus_x1_orbit'
+  // GTM's own types (OpV-B3a lines 26-33): the circuit is optional there (0 = none) and the slots are GTM's
+  var GTM_TYPES = { assembler: true, cutter: true, alloy_smelter: true, chemical_reactor: true, centrifuge: true, mixer: true, compressor: true }
 
   function list(x) {
     return Array.isArray(x) ? x : []
@@ -39,7 +41,7 @@
         var eut = Number(r.eut)
         var duration = Number(r.duration)
         var circuit = Number(r.circuit)
-        var circuitOk = circuit >= 1 && circuit <= 32 && circuit % 1 === 0 && !circuits[circuit]
+        var circuitOk = (GTM_TYPES[type] === true && circuit === 0) || (circuit >= 1 && circuit <= 32 && circuit % 1 === 0 && !circuits[circuit])
         if (!/^[a-z0-9_]+$/.test(n) || seen[type + '/' + n] || !circuitOk || !(eut > 0) || eut % 1 !== 0 || eut >= 2147483648 || !(duration > 0) || duration % 1 !== 0) {
           problems.push(type + '/' + n + ': name, circuit ' + r.circuit + ', eut ' + r.eut + ', duration ' + r.duration)
           return
@@ -67,7 +69,7 @@
           return
         }
         seen[type + '/' + n] = true
-        circuits[circuit] = true
+        circuits[circuit] = circuit > 0
         out.push(rec)
       })
     })
@@ -86,6 +88,8 @@
   }
 
   function sizeProblem(rec) {
+    // OpV-B3a: GTM's own types (their rows are written inside GTM's slot counts: assembler 9 in, cutter 1 in, reactors 2 in)
+    if (GTM_TYPES[rec.type] === true) return null
     var io = null
     ;(AM.machines || []).forEach(function (m) { if (m.type === rec.type) io = m.maxIO })
     if (io === null) return 'no slots known for type ' + rec.type
@@ -108,7 +112,8 @@
     rec.chanceOut.forEach(function (x) { recipe.chancedOutput(x.count + 'x ' + x.id, x.chance, 0) })
     rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
-    if (rec.site) recipe.dimension(SITE)
+    if (rec.type === 'antihydrogen_synthesis' || rec.type === 'annihilation_power') recipe.dimension('minecraft:overworld')
+    else if (rec.site) recipe.dimension(SITE)
     recipe.EUt(rec.generator ? -rec.eut : rec.eut).duration(rec.duration)
   }
 
@@ -193,7 +198,7 @@
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of(FLUID, 1000))
       b.itemOutputs(machine)
-      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(256).EUt(503316480) })
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).dataStack(Item.of('gtceu:data_module')).CWUt(256).EUt(503316480) })
       b.EUt(503316480).duration(2400)
       AM.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
@@ -202,7 +207,7 @@
   // the shield casing has no crafting-table recipe: an assembler at OpV with two OpV circuits
   function addCasing(event) {
     var OUT = 'grindless:annihilation_shield_casing'
-    var ins = ['gtceu:opv_machine_casing', 'gtceu:tungsten_steel_plate']
+    var ins = ['gtceu:opv_machine_casing', 'gtceu:tungsten_steel_plate', 'gtceu:opv_sensor', 'gtceu:lead_plate', 'gtceu:boron_carbide_dust']
     var missing = [OUT].concat(ins).filter(function (id) { return !Item.exists(id) })
     AM.casingRecipe = ''
     if (missing.length > 0) {
@@ -212,7 +217,9 @@
     var b = event.recipes.gtceu.assembler('grindless:annihilation_shield_casing')
     b.itemInputs('gtceu:opv_machine_casing')
     b.itemInputs('4x gtceu:tungsten_steel_plate')
+    b.itemInputs('gtceu:opv_sensor', '4x gtceu:lead_plate', '2x gtceu:boron_carbide_dust')
     b.itemInputs('2x #gtceu:circuits/opv')
+    b.inputFluids(Fluid.of('grindless:superfluid_helium_3', 250))
     b.itemOutputs('2x ' + OUT)
     b.EUt(503316480).duration(200)
     AM.casingRecipe = 'grindless:assembler/annihilation_shield_casing'
