@@ -82,7 +82,10 @@ test('electron beam c22: the W-Re can and its re-melt (80% back), appended at th
   const can = rows.find((r) => r.name === 'field_can');
   const melt = rows.find((r) => r.name === 'field_can_remelt');
   assert.deepEqual([can.circuit, melt.circuit], [22, 22]);
-  assert.deepEqual(rows.slice(-2).map((r) => r.name), ['field_can', 'field_can_remelt']);
+  // appended together; only later OpV rows (OpV-E1's c23 seal) follow them
+  const i = rows.indexOf(can);
+  assert.equal(rows[i + 1], melt);
+  assert.ok(rows.slice(i + 2).every((r) => /^OpV-/.test(r._why || '')), 'only later OpV rows after the can');
   assert.deepEqual(ids(can.itemsIn), [['grindless:chain_lamina_stack', 1], ['grindless:six_n_rhenium', 1]]);
   assert.deepEqual(can.fluidsIn, [{ id: 'gtceu:tungsten', amount: 288 }]);
   assert.deepEqual(ids(can.itemsOut), [['grindless:field_canned_stack', 1]]);

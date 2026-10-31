@@ -99,7 +99,10 @@
           "itemsOut": [{ "id": "grindless:field_canned_stack", "count": 1 }], "fluidsOut": [] },
         { "_why": "OpV-A3 (opv.md machine 13 byproducts; c22 with other item inputs, OpV-F3): five spent cans re-melted, 80% of the W-Re back; the skull goes back to the melt.", "name": "field_can_remelt", "circuit": 22, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:spent_field_can", "count": 5 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:six_n_rhenium", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [{ "id": "gtceu:tungsten", "amount": 1152 }] }
+          "itemsOut": [{ "id": "grindless:six_n_rhenium", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [{ "id": "gtceu:tungsten", "amount": 1152 }] },
+        { "_why": "OpV-E1 (opv.md machine 12, line 29): seals the pair converter's unsealed cell with a fresh getter; circuit 23 inputs distinct from B2's.", "name": "positron_cell_seal", "circuit": 23, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:unsealed_positron_cell", "count": 1 }, { "id": "gtceu:zirconium_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:dense_positron_cell", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "single_crystal_casting": {

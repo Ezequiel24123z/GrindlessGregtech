@@ -92,7 +92,8 @@
     'gtceu:annihilation_lasing': 'loop_annihilation_laser_works',
     'gtceu:field_freezing': 'loop_field_frozen_press',
     'gtceu:tetron_assembly': 'loop_tetron_fab',
-    'gtceu:gamma_optics': 'loop_gamma_optics_works'
+    'gtceu:gamma_optics': 'loop_gamma_optics_works',
+    'gtceu:magnetic_pair_production': 'loop_magnetic_pair_converter'
   }
 
   StartupEvents.registry('sound_event', function (event) {
