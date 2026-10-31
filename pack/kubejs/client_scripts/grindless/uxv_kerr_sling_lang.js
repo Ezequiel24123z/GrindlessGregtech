@@ -1,4 +1,4 @@
-// priority: 1556
+// priority: 1553
 // Gregtech Grindless - names of UXV-B1, the Kerr sling (server_scripts/grindless/uxv/kerr_sling.js, startup_scripts/grindless/uxv/travel.js and
 // data/grindless/gcyr/planets/{vela_pulsar_orbit,cas_a_remnant}.json):
 //

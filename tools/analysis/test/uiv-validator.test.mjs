@@ -64,6 +64,10 @@ test('real tiers (uiv): the Validator\'s leak checks are unreachable checks gate
   const syn = byId(uiv().synthetic);
   assert.ok(syn['wireless-uiv'].produces.includes('eu:uiv'));
   assert.ok(syn['research-kerr-chart'].produces.includes('research:1x_grindless_kerr_chart'));
+  // UXV-FX: the Matrioshka writes the rad-hard research before the jumps, so no synthetic makes it and the computer and works are home checks
+  assert.ok(!Object.values(syn).some((s) => (s.produces || []).includes('research:rad_hard_controller')), 'no rad-hard research bootstrap');
+  const home = byId(uiv().eraItems)['uiv-home'];
+  for (const m of ['m:gtceu:matrioshka_computer', 'm:gtceu:droplet_radiator_works']) assert.ok(home.items.includes(m) && !home.optional, m);
 });
 
 // ------------------------------------------------------------------ planted cases on a mini pack (the real targets and era data)
