@@ -1,3 +1,4 @@
+// priority: -6783
 // -----------------------------------------------------------------------------------------------
 // OpV's Kugelblitz forge and Hawking collector (docs/eras/opv.md, machines 10 and 11, process line 37; package OpV-D3): two multiblocks at
 // Cygnus X-1 orbit, their recipe types and the three intermediates that only they use. The recipes come from

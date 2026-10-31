@@ -1,4 +1,4 @@
-// priority: 5710
+// priority: 5766
 // Gregtech Grindless - names and tooltips of OpV's field-frozen press, its items and the package's older rows
 // (startup_scripts/grindless/opv/field_press.js; package OpV-A3):
 //

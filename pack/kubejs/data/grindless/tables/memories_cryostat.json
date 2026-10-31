@@ -133,7 +133,9 @@
           "name": "tested_tetron_die", "circuit": 6, "eut": 31457280, "duration": 1600,
           "itemsIn": [{ "id": "grindless:bonded_tetron_die", "count": 1 }],
           "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
-          "itemsOut": [{ "id": "grindless:tested_tetron_die", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:tested_tetron_die", "count": 1 }]
+        },
+        {
           "name": "levitation_cell", "circuit": 7, "eut": 31457280, "duration": 1600,
           "_why": "OpV-B3a line 28: the HOPG plate is cooled and tested for diamagnetic levitation in the millikelvin works; the cryostat module is not consumed and the mixture is returned",
           "itemsIn": [{ "id": "grindless:hopg_plate", "count": 1 }],

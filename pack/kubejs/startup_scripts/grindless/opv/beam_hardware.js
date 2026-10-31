@@ -1,4 +1,4 @@
-// priority: -6600
+// priority: -6675
 // -----------------------------------------------------------------------------------------------
 // OpV beam hardware (package OpV-D1, docs/eras/opv.md "D1" and process lines 20-25): the intermediates of the antiproton source's
 // beam hardware. No machine, no recipe type and no recipe here; the recipes are server_scripts/grindless/opv/beam_hardware.js and the

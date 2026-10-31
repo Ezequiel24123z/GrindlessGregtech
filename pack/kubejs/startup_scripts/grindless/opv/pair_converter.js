@@ -1,4 +1,4 @@
-// priority: -6790
+// priority: -6793
 // -----------------------------------------------------------------------------------------------
 // OpV's magnetic pair converter (docs/eras/opv.md, machine 12, line 29; package OpV-E1): the only maker of dense_positron_cell's seed.
 // Recipes come from data/grindless/tables/pair_converter.json (server_scripts/grindless/opv/pair_converter.js). One new item:

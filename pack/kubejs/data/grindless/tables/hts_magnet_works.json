@@ -70,7 +70,9 @@
       "itemsIn": [ { "id": "grindless:potted_rebco_pancake", "count": 1 } ],
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:trained_rebco_pancake", "count": 1 } ],
-      "eut": 1966080, "duration": 600,
+      "eut": 1966080, "duration": 600
+    },
+    {
       "name": "octupole_winding", "circuit": 9, "charge": true,
       "_why": "OpV-B3a line 27: slit REBCO tape wound into the octupole's racetrack coils over niobium-titanium foil shims, wetted in epoxy (the CVI furnace potts it next).",
       "itemsIn": [ { "id": "grindless:octupole_tape", "count": 6 }, { "id": "gtceu:niobium_titanium_foil", "count": 8 } ],

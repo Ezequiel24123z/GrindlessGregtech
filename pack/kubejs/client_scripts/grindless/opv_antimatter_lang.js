@@ -1,3 +1,4 @@
+// priority: 5900
 // Gregtech Grindless - names and tooltips of OpV's antimatter machines and the items of the antimatter lines
 // (startup_scripts/grindless/opv/antimatter.js; package OpV-B3):
 //

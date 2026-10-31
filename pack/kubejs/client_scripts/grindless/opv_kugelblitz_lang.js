@@ -1,3 +1,4 @@
+// priority: 5738
 // Gregtech Grindless - names and tooltips of OpV's Kugelblitz forge and Hawking collector, their three items and the EMI pages
 // (startup_scripts/grindless/opv/kugelblitz.js; package OpV-D3):
 //

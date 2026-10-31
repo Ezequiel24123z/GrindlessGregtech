@@ -1,3 +1,4 @@
+// priority: -6299
 // TEST ONLY, OpV-M2 (gtceu:assembly_line_array). Command: kubejs custom_command gg_test_opv_assembly_line_array
 // Band ONLY: X 38592-38655, Z 0-63, Overworld Y 98-115 (the array is 7 high; zones.json carries the same Y range).
 //   T1 (named uncertainty, S0-10: does a GTM AssemblyLineMachine on our pattern, with the x262,144 hatch, honour ordered inputs and research?):

@@ -1,4 +1,4 @@
-// priority: 5720
+// priority: 5794
 // Gregtech Grindless - names and tooltips of the OpV components' intermediates (startup_scripts/grindless/opv/components.js) and the EMI
 // lines of the rows OpV-A1 adds to older machines:
 //

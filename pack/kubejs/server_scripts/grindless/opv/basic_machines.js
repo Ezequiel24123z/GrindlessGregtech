@@ -1,4 +1,4 @@
-// priority: -21524
+// priority: -21599
 // Gregtech Grindless - the recipes of GTM's basic machines at OpV (package OpV-A4, docs/eras/opv.md 'A4. Basic machines'), generated at
 // every server load from data/grindless/tables/opv_basic_machines.json:
 //

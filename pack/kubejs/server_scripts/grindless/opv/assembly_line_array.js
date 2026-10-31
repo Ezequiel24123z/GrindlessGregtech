@@ -1,3 +1,4 @@
+// priority: -21574
 // Gregtech Grindless - the OpV assembly line array's controller recipe (package OpV-M2; the machine is registered in
 // startup_scripts/grindless/opv/assembly_line_array.js).
 //

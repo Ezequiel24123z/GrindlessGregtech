@@ -1,3 +1,4 @@
+// priority: 5875
 // Gregtech Grindless - names, tooltip and EMI info page of OpV's assembly line array
 // (startup_scripts/grindless/opv/assembly_line_array.js; package OpV-M2):
 //

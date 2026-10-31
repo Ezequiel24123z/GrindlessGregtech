@@ -1,4 +1,4 @@
-// priority: -6172
+// priority: -6274
 // TEST ONLY: machines 6-8 form and run line 30 at Cygnus X-1, including the UV trap's stacking row.
 // Other packages' inputs are fixture stacks; their production mechanisms are not re-tested.
 (function () {

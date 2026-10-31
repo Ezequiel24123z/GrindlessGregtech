@@ -1,3 +1,4 @@
+// priority: -21524
 // -----------------------------------------------------------------------------------------------
 // Recipes of OpV's antimatter machines (machines and recipe types: startup_scripts/grindless/opv/antimatter.js; docs/eras/opv.md, machines 3 and
 // 5-8, process lines 26-28 and 30-33; package OpV-B3), generated at every server load from data/grindless/tables/antimatter_opv.json, plus the
