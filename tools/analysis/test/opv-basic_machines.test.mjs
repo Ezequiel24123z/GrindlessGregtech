@@ -1,6 +1,7 @@
 // OpV's basic machines (package OpV-A4, docs/eras/opv.md 'A4. Basic machines'), no game needed: tables/opv_basic_machines.json holds
 // every machine GTM registers at OpV (tables/opv_ids.json gtm.machines), and opv/basic_machines.js makes each one an assembler row at
-// VA[OpV] with the OpV hull, at least 2 OpV components, 2 OpV circuits, 2 chain strand cables and a circuit no same-set row shares.
+// VA[OpV] with the OpV hull, at least 2 OpV components, 2 OpV circuits, 2 chain strand cables, a chain lamina stack, 1152 mB soldering
+// alloy and a circuit no same-set row shares.
 // The OpV assembler running a 2^28 component row on a chain strand cable runs in the game: gg_test_opv_basic_machines.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -21,6 +22,8 @@ const docs = run.docs.recipes.recipes;
 const find = (id) => docs.find((r) => r.i === id);
 const HULL = 'gtceu:opv_machine_hull';
 const CABLE = 'gtceu:chain_strand_single_cable';
+const LAMINA = 'grindless:chain_lamina_stack';
+const SOLDER = 'gtceu:soldering_alloy';
 const V_UXV = 134217728;
 // the stand-in's VA[13] is V[13]; in the game GTValues.VA[OpV] is 503,316,480 EU/t
 const VA_OPV = 536870912;
@@ -38,7 +41,8 @@ function io(rec) {
     else inputs[nameOf(e.content.ingredient)] = (inputs[nameOf(e.content.ingredient)] || 0) + e.content.count;
   }
   const outputs = j.outputs.item.map((e) => nameOf(e.content.ingredient));
-  return { inputs, circuit, outputs, eut: Math.max(...j.tickInputs.eu.map((e) => Number(e.content))), fluids: j.inputs.fluid.length };
+  return { inputs, circuit, outputs, eut: Math.max(...j.tickInputs.eu.map((e) => Number(e.content))),
+    fluids: ((j.inputs && j.inputs.fluid) || []).map((e) => [e.content.value[0].fluid, e.content.amount]) };
 }
 
 test('the stand-in runs opv/basic_machines.js without errors, skips or clashes', () => {
@@ -56,7 +60,10 @@ test('the table holds exactly the machines GTM registers at OpV', () => {
   assert.equal(TABLE.hull, HULL);
   assert.deepEqual(TABLE.circuits, { id: '#gtceu:circuits/opv', count: 2 });
   assert.deepEqual(TABLE.cable, { id: CABLE, count: 2 });
+  assert.deepEqual(TABLE.lamina, { id: LAMINA, count: 1 });
+  assert.deepEqual(TABLE.fluid, { id: SOLDER, amount: 1152 });
   assert.ok(IDS.foundation.chain_strand.includes(CABLE), 'the cable is F1\'s chain strand cable');
+  assert.ok(IDS.foundation.items.includes(LAMINA), 'the lamina stack is F1\'s');
 });
 
 test('every row: at least 2 OpV components (C1\'s threshold), a circuit 1-32, field generator rows pending A3', () => {
@@ -89,7 +96,7 @@ test('no two rows with the same circuit have one component set inside the other 
   for (const c of mixed) assert.equal(rows.filter((r) => r.circuit === c).length, 1, 'circuit ' + c);
 });
 
-test('the recipes: assembler at VA[OpV], hull + components + 2 OpV circuits + 2 chain cables, nothing below OpV', () => {
+test('the recipes: assembler at VA[OpV], hull + components + 2 OpV circuits + 2 chain cables + lamina + solder, nothing below OpV', () => {
   assert.equal(OB.recipes.length, TABLE.machines.length);
   for (const r of TABLE.machines) {
     const id = 'grindless:assembler/opv_' + r.machine;
@@ -97,14 +104,15 @@ test('the recipes: assembler at VA[OpV], hull + components + 2 OpV circuits + 2 
     assert.ok(rec, id);
     assert.equal(rec.t, 'gtceu:assembler', id);
     const x = io(rec);
-    const want = { [HULL]: 1, '#gtceu:circuits/opv': 2, [CABLE]: 2 };
+    const want = { [HULL]: 1, '#gtceu:circuits/opv': 2, [CABLE]: 2, [LAMINA]: 1 };
     for (const c of r.components) want[c.id] = (want[c.id] || 0) + c.count;
     assert.deepEqual(x.inputs, want, id);
     assert.equal(x.circuit, r.circuit, id);
     assert.deepEqual(x.outputs, ['gtceu:opv_' + r.machine], id);
     assert.equal(x.eut, VA_OPV, id);
     assert.ok(x.eut > V_UXV && x.eut < 2 ** 31, id + ': above V[UXV], an int');
-    assert.equal(x.fluids, 0, id);
+    assert.deepEqual(x.fluids, [[SOLDER, 1152]], id + ': one fluid (a single-block assembler takes one)');
+    assert.ok(Object.keys(x.inputs).length + x.fluids.length >= 6, id + ': at least 6 distinct items and fluids (OpV complexFloor 10 at the depth cap)');
     for (const k of Object.keys(x.inputs)) assert.doesNotMatch(k, LOWER, id + ': a UXV-or-lower component');
     assert.ok(rec.j.duration === undefined || rec.j.duration === TABLE.duration, id);
   }
@@ -116,4 +124,14 @@ test('each OpV machine has exactly one recipe of ours', () => {
     const making = docs.filter((r) => JSON.stringify((r.j || {}).outputs || (r.j || {}).result || {}).includes('"' + id + '"'));
     assert.deepEqual(making.map((r) => r.i), ['grindless:assembler/' + id.replace('gtceu:', '')], id);
   }
+});
+
+test('the smoke test\'s band: opv_basic_machines at X 38080, 64 wide, its overlay script present', () => {
+  const zones = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'test', 'zones.json'), 'utf8'));
+  const list = Array.isArray(zones) ? zones : zones.zones;
+  const z = list.find((x) => x.id === 'opv_basic_machines');
+  assert.ok(z, 'the row');
+  assert.deepEqual([z.x, z.z, z.y], [[38080, 38143], [0, 63], [98, 115]]);
+  assert.ok(z.tests.includes('opv_basic_machines'));
+  assert.ok(fs.existsSync(path.join(root, 'tools', 'test', 'overlay', 'kubejs', 'server_scripts', 'gg_test_opv_basic_machines.js')));
 });

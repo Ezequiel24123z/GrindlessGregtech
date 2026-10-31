@@ -158,6 +158,7 @@
     { "id": "uxv_stellar_fractionation_hall", "x": [37056, 37119], "z": [0, 63], "y": [98, 115], "tests": ["uxv_stellar_fractionation_hall"], "note": "UXV-M2: the stellar fractionation hall (13 x 13 x 25, lying on its side) forms in the Overworld (it has no site, so no other dimension is used) with a UXV energy hatch, a UXV parallel hatch and 12 output hatches; a 12-output distillation tower probe runs at the energy-bound copies (x65,536 hatch) with every output amount exact and each in its own hatch; the controller recipe is in the recipe manager" },
     { "id": "uxv_gate", "x": [37120, 37183], "z": [0, 63], "y": [98, 115], "tests": ["uxv_gate"], "note": "UXV-B6: one warp gate (15 x 15 x 3) forms in grindless:cygnus_x1_orbit with two UXV 16 A energy hatches and UXV buses; the c10 hold row runs at 2^31 EU/t for 1,200 ticks keeping five stacks (7-slot recipe), then the bulge chart reaches the output bus; the arm chart row and the OpV casing recipe are in the recipe manager" },
     { "id": "opv_eb_circuits", "x": [37632, 37695], "z": [0, 15], "tests": ["opv_eb_circuits"], "note": "OpV-F3: electron beam machine and two same-circuit rows" },
-    { "id": "opv_wireless", "x": [37696, 37759], "z": [0, 63], "y": [98, 112], "tests": ["opv_wireless"], "note": "OpV-W: case 13 wireless network, OpV cell and a 64 A OpV hatch" }
+    { "id": "opv_wireless", "x": [37696, 37759], "z": [0, 63], "y": [98, 112], "tests": ["opv_wireless"], "note": "OpV-W: case 13 wireless network, OpV cell and a 64 A OpV hatch" },
+    { "id": "opv_basic_machines", "x": [38080, 38143], "z": [0, 63], "y": [98, 115], "tests": ["opv_basic_machines"], "note": "OpV-A4: gtceu:opv_assembler placed with /setblock on a chain strand cable runs a 2^28 component row" }
       ]
 }

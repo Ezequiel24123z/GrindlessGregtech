@@ -1,11 +1,14 @@
 {
-  "_doc": "OpV-A4 (docs/eras/opv.md 'A4. Basic machines'): the recipe of every GTM basic machine at OpV (tables/opv_ids.json gtm.machines), read by server_scripts/grindless/opv/basic_machines.js. Each row is a gtceu:assembler recipe grindless:assembler/opv_<machine> at VA[OpV] for <duration> t: the OpV hull, the row's OpV components, 2 #gtceu:circuits/opv, 2 chain strand cables and a programmed circuit.",
+  "_doc": "OpV-A4 (docs/eras/opv.md 'A4. Basic machines'): the recipe of every GTM basic machine at OpV (tables/opv_ids.json gtm.machines), read by server_scripts/grindless/opv/basic_machines.js. Each row is a gtceu:assembler recipe grindless:assembler/opv_<machine> at VA[OpV] for <duration> t: the OpV hull, the row's OpV components, 2 #gtceu:circuits/opv, 2 chain strand cables, 1 chain lamina stack, <fluid> and a programmed circuit.",
+  "_extras": "The lamina stack and the soldering alloy put every row at 6 or more distinct items and fluids (the OpV integrator's bar for an assembler row at the depth cap; a single-block assembler takes one fluid). The lamina is the OpV hull's own structural part (A0), so no row needs a line the hull does not; neither comes back from any recipe of the pack.",
   "_components": "GTM's own UV recipe for the machine (the shapes in server_scripts/grindless/integration/high_tier_machines.js) at its counts, one tier up; a total below 2 takes the first component up to 2 (C1's threshold, as TP-C). GTM builds five machines with no component at all; each takes 2 of the component that does the job of its part: heating coil and arc -> emitter (electric furnace, alloy smelter, arc furnace), electrolysis electrodes and cell -> pump (electrolyzer), the polarizer's electromagnet -> field generator.",
   "_circuit": "GTM's recipe lookup keys on ingredient types, not counts: rows whose component types are the same (or a subset) would collide, so every row carries a programmed circuit. Rows of one component type share 1-9 by type; the mixed rows take 10-21, one each. No two rows with the same circuit have one set inside the other (checked at load and by tools/analysis/test/opv-basic_machines.test.mjs).",
   "_pending": "pendingRoutes: the polarizer is the one row with gtceu:opv_field_generator, which A3 makes.",
   "hull": "gtceu:opv_machine_hull",
   "circuits": { "id": "#gtceu:circuits/opv", "count": 2 },
   "cable": { "id": "gtceu:chain_strand_single_cable", "count": 2 },
+  "lamina": { "id": "grindless:chain_lamina_stack", "count": 1 },
+  "fluid": { "id": "gtceu:soldering_alloy", "amount": 1152 },
   "duration": 600,
   "machines": [
     { "machine": "assembler", "circuit": 10, "components": [{ "id": "gtceu:opv_robot_arm", "count": 2 }, { "id": "gtceu:opv_conveyor_module", "count": 2 }], "gtm": "UV: 2 robot arm, 2 conveyor" },

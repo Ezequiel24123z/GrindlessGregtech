@@ -2,7 +2,8 @@
 // every server load from data/grindless/tables/opv_basic_machines.json:
 //
 //   assembler   grindless:assembler/opv_<machine> -> gtceu:opv_<machine>, at VA[OpV]: the OpV hull, the row's OpV components (GTM's UV
-//               recipe one tier up, never fewer than 2), 2 #gtceu:circuits/opv, 2 chain strand cables and the row's programmed circuit
+//               recipe one tier up, never fewer than 2), 2 #gtceu:circuits/opv, 2 chain strand cables, 1 chain lamina stack, 1152 mB
+//               soldering alloy and the row's programmed circuit (6 or more distinct items and fluids, one fluid)
 //
 // GTM's own recipes for these ids are cut by OpV-F2. Every id is GTM's (highTierContent, tables/opv_ids.json gtm.machines).
 // Lookup safety: a row whose ingredients are a subset of another's with the same circuit can hide it; checked at load (a clash is an error).
@@ -29,10 +30,14 @@
     var hull = String(t.hull || '')
     var circuits = t.circuits || {}
     var cable = t.cable || {}
+    var lamina = t.lamina || {}
+    var fluid = t.fluid || {}
     if (!(duration > 0) || duration % 1 !== 0) problems.push('duration ' + t.duration)
     if (hull.indexOf(':') < 0) problems.push('hull ' + t.hull)
     if (String(circuits.id || '').indexOf('#') !== 0 || !(Number(circuits.count) >= 1)) problems.push('circuits')
     if (String(cable.id || '').indexOf(':') < 0 || !(Number(cable.count) >= 1)) problems.push('cable')
+    if (String(lamina.id || '').indexOf(':') < 0 || !(Number(lamina.count) >= 1)) problems.push('lamina')
+    if (String(fluid.id || '').indexOf(':') < 0 || !(Number(fluid.amount) >= 1)) problems.push('fluid')
     list(t.machines).forEach(function (r) {
       var m = String(r.machine || '')
       var circuit = Number(r.circuit)
@@ -54,7 +59,8 @@
     if (out.length === 0) problems.push('no row')
     if (problems.length > 0) console.error(LOG + TABLE + ': ' + problems.join('; '))
     return { hull: hull, circuits: { id: String(circuits.id), count: Number(circuits.count) },
-      cable: { id: String(cable.id), count: Number(cable.count) }, duration: duration, rows: out }
+      cable: { id: String(cable.id), count: Number(cable.count) }, lamina: { id: String(lamina.id), count: Number(lamina.count) },
+      fluid: { id: String(fluid.id), amount: Number(fluid.amount) }, duration: duration, rows: out }
   }
 
   function keysOf(rec) {
@@ -63,7 +69,7 @@
     return keys
   }
 
-  // every row shares the hull, circuits and cable, so two rows clash when they have the same circuit and one's components are in the other's
+  // every row shares the hull, circuits, cable, lamina and fluid, so two rows clash when they have the same circuit and one's components are in the other's
   function clashesOf(recs) {
     var out = []
     var keys = recs.map(keysOf)
@@ -90,7 +96,7 @@
       console.error(LOG + 'skipped opv_' + name + ': ' + reason)
     }
     table.rows.forEach(function (rec) {
-      var ids = [rec.out, table.hull, table.cable.id].concat(rec.components.map(function (c) { return c.id }))
+      var ids = [rec.out, table.hull, table.cable.id, table.lamina.id].concat(rec.components.map(function (c) { return c.id }))
       var missing = ids.filter(function (id, k) { return id.charAt(0) !== '#' && ids.indexOf(id) === k && !Item.exists(id) })
       if (missing.length > 0) return skip(rec.machine, 'unknown id(s): ' + missing.join(', '))
       var id = 'grindless:opv_' + rec.machine
@@ -100,6 +106,8 @@
         rec.components.forEach(function (c) { b.itemInputs(c.count + 'x ' + c.id) })
         b.itemInputs(table.circuits.count + 'x ' + table.circuits.id)
         b.itemInputs(table.cable.count + 'x ' + table.cable.id)
+        b.itemInputs(table.lamina.count + 'x ' + table.lamina.id)
+        b.inputFluids(Fluid.of(table.fluid.id, table.fluid.amount))
         b.circuit(rec.circuit)
         b.itemOutputs(rec.out)
         b.EUt(eut).duration(table.duration)
