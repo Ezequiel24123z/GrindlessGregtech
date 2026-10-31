@@ -1,5 +1,5 @@
 {
-  "_how_it_is_used": "server_scripts/grindless/uxv/vela_pasta.js makes one recipe per entry, id grindless:<name> (GTM prefixes the type), with its programmed circuit (circuit 0 = none, only where a type lists 'noCircuit'); 'site' true locks the recipe to grindless:vela_pulsar_orbit, a string names another site; 'kept' are not consumed; 'wear' is a kept input that a chance consumes (per ten thousand). pasta_extraction, pasta_sorting, pasta_drawing and pasta_lamination are package UXV-B4's machine types, polar_cap_tapping is its generator (eut is what it makes); neutronium_caging is UIV's type (a companion row with its slots in 'maxIO'). Package UXV-B4, docs/eras/uxv.md machines 16-20 and process lines 32, 33. Rows whose _why starts with OpV-A0 are the chain matter modes at grindless:sgr1806_orbit (docs/eras/opv.md process lines 1 and 2): circuits 3-5, the cage part consumed.",
+  "_how_it_is_used": "server_scripts/grindless/uxv/vela_pasta.js makes one recipe per entry, id grindless:<name> (GTM prefixes the type), with its programmed circuit (circuit 0 = none, only where a type lists 'noCircuit'); 'site' true locks the recipe to grindless:vela_pulsar_orbit, a string names another site; 'kept' are not consumed; 'wear' is a kept input that a chance consumes (per ten thousand). pasta_extraction, pasta_sorting, pasta_drawing and pasta_lamination are package UXV-B4's machine types, polar_cap_tapping is its generator (eut is what it makes); neutronium_caging is UIV's type (a companion row with its slots in 'maxIO'). Package UXV-B4, docs/eras/uxv.md machines 16-20 and process lines 32, 33. Rows whose _why starts with OpV-A0 are the chain matter modes at grindless:sgr1806_orbit (docs/eras/opv.md process lines 1 and 2): circuits 3-5, the cage part consumed. Rows whose _why starts with MAX-A0 are the horizon strand draws (docs/eras/max.md line L1): pasta_drawing c5-6 at the same site.",
   "types": {
     "pasta_extraction": {
       "dataKey": "grindless_pasta_extraction",
@@ -150,6 +150,24 @@
           "kept": [],
           "fluidsIn": [],
           "itemsOut": [{ "id": "gtceu:chain_strand_single_wire", "count": 2 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "MAX-A0 line L1, c5 at SGR 1806-20: a chain strand clad in stable exotic matter (clad_chain_strand, made at home) is drawn once at the horizon-adjacent tension into a preform; the strand has no other draw (MAX-F2 cut GTM's wire rows)",
+          "name": "horizon_strand_preform", "circuit": 5, "eut": 134217728, "duration": 900, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [{ "id": "grindless:clad_chain_strand", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:horizon_strand_preform", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "MAX-A0 line L1, c6 at SGR 1806-20: the preform is drawn on into four single wires of gtceu:horizon_strand (named fiction near c^4/4G, Gibbons 2002)",
+          "name": "horizon_wire_drawing", "circuit": 6, "eut": 134217728, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [{ "id": "grindless:horizon_strand_preform", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:horizon_strand_single_wire", "count": 4 }],
           "fluidsOut": []
         }
       ]

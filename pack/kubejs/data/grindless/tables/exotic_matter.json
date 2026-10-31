@@ -52,6 +52,13 @@
           "kept": [{"id": "gtceu:boron_dust", "count": 1}],
           "charge": [{"id": "minecraft:water", "amount": 1000}],
           "itemsOut": [{"id": "grindless:stable_exotic_matter", "count": 1}]
+        },
+        {
+          "name": "exotic_cladding_foil", "circuit": 4, "eut": 503316480, "duration": 1200,
+          "itemsIn": [{"id": "grindless:stable_exotic_matter", "count": 1}],
+          "kept": [{"id": "gtceu:boron_dust", "count": 1}],
+          "charge": [{"id": "minecraft:water", "amount": 1000}],
+          "itemsOut": [{"id": "grindless:exotic_cladding_foil", "count": 4}]
         }
       ]
     }
