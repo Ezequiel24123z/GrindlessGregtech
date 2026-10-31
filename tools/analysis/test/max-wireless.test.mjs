@@ -73,7 +73,7 @@ const L27 = [
 
 test('L27: every older row is the last of its table, on its own free circuit (at most 32), with ids made by the chain', () => {
   for (const [file, , name, circuit] of L27) {
-    const rows = table(file).recipes;
+    const rows = table(file).recipes.filter((r) => !['fcl_tape', 'fcl_coil'].includes(r.name)); // MAX-A4 appends L39 rows after
     const last = rows[rows.length - 1];
     assert.equal(last.name, name, file);
     assert.equal(last.circuit, circuit, file);
@@ -82,7 +82,8 @@ test('L27: every older row is the last of its table, on its own free circuit (at
     assert.deepEqual(plain(last.itemsOut.map((o) => o.id)), ['grindless:' + name]);
   }
   const pld = table('spin_deposition').types.pulsed_laser_deposition.recipes;
-  const row = pld[pld.length - 1];
+  const plds = pld.filter((r) => r.name !== 'thick_film_fcl_tape'); // MAX-A4 appends after
+  const row = plds[plds.length - 1];
   assert.deepEqual([row.name, row.circuit], ['thick_rebco_tape', 4]);
   assert.equal(pld.filter((r) => r.circuit === 4).length, 1);
   assert.deepEqual(plain(row.kept.map((k) => k.id)), ['grindless:krf_excimer_laser']);

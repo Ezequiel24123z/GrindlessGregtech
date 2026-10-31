@@ -337,7 +337,9 @@
     // MAX-B1 (max.md line L11): the coated belt web run cold in the loop until it holds its modulus at 4 K
     { name: 'max_cryo_conditioned_web', input: 'grindless:refractory_wear_coat', output: 'grindless:cryo_conditioned_web', eut: 30720, duration: 600 },
     // MAX-B2 L33 step 5: the bonded crystalline mirror pair on its silicon spacer cooled to the cavity's zero-expansion point and sealed in the loop
-    { name: 'cryo_reference_cavity', input: 'grindless:transferred_crystalline_mirror', output: 'grindless:cryo_reference_cavity', eut: 30720, duration: 600 }
+    { name: 'cryo_reference_cavity', input: 'grindless:transferred_crystalline_mirror', output: 'grindless:cryo_reference_cavity', eut: 30720, duration: 600 },
+    // MAX-A4 L39 step 5: the potted limiter coil run cold in the loop until it holds its critical current at 20 K
+    { name: 'cold_fcl_module', input: 'grindless:fcl_coil', output: 'grindless:cold_fcl_module', eut: 30720, duration: 600 }
   ]
   HR.opvRows = OPV_ROWS
   HR.opvSkipped = []

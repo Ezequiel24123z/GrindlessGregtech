@@ -44,8 +44,8 @@ test('magnet works table: one circuit per recipe, the helium charge on all, deci
   assert.deepEqual(TABLE.charge, { id: 'gtceu:liquid_helium', amount: 1000 });
   const names = TABLE.recipes.map((r) => r.name);
   assert.deepEqual(names, ['hts_coil', 'luv_smes_cell', 'coilgun_coil_casing', 'magnetic_bearing', 'seeded_gdbco_growth', 'strand_stator',
-    'rebco_pancake', 'rebco_training', 'octupole_winding', 'octupole_trap_magnet', 'max_coil_winding', 'pinned_rebco_web', 'smes_toroid_winding']); // MAX-B1 c12 (L2), OpV-A1 appended c7-8 (opv.md line 8), OpV-B3a c9-10, MAX-A2 c11 (L9), MAX-W c13 (max.md L27, kept last)
-  assert.deepEqual(TABLE.recipes.map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+    'rebco_pancake', 'rebco_training', 'octupole_winding', 'octupole_trap_magnet', 'max_coil_winding', 'pinned_rebco_web', 'smes_toroid_winding', 'fcl_coil']); // MAX-A4 c14 (L39), MAX-B1 c12 (L2), OpV-A1 appended c7-8 (opv.md line 8), OpV-B3a c9-10, MAX-A2 c11 (L9), MAX-W c13 (max.md L27, kept last)
+  assert.deepEqual(TABLE.recipes.map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
   for (const r of TABLE.recipes) {
     assert.equal(r.charge, true, r.name + ' carries the cold-test charge');
     assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
@@ -57,7 +57,7 @@ test('magnet works table: one circuit per recipe, the helium charge on all, deci
   assert.deepEqual(coil.itemsOut, [{ id: 'gtceu:superconducting_coil', count: 1 }]);
   // the LuV ones at LuV's VA; the coilgun coil at IV's, the bearing at EV's (luv.md); UIV-A8's bulk GdBCO growth at LuV's, for hours; OpV-A1's and B3a's at UV's
   assert.deepEqual(TABLE.recipes.map((r) => [r.eut, r.duration]), [[30720, 400], [30720, 600], [7680, 200], [1920, 200], [30720, 4800], [1966080, 400],
-    [1966080, 400], [1966080, 600], [1966080, 600], [1966080, 1200], [7864320, 600], [7864320, 600], [7864320, 600]]); // OpV-B3a's octupole rows, then MAX-W, then MAX-A2
+    [1966080, 400], [1966080, 600], [1966080, 600], [1966080, 1200], [7864320, 600], [7864320, 600], [7864320, 600], [7864320, 600]]); // OpV-B3a's octupole rows, then MAX-W, then MAX-A2, then MAX-A4's fcl_coil
 });
 
 test('magnet works table: the SMES cell is the wireless network\'s LuV cell, made only here', () => {
@@ -146,7 +146,9 @@ test('magnet works in EMI: each product is hidden exactly while an input of its 
     // MAX-A2's max_coil_winding: its inputs are hidden until the integrator regenerates hidden_until.json
     'grindless:cmc_coil_former', 'grindless:max_coil_winding', 'grindless:stabilised_rebco_tape', 'gtceu:horizon_strand_single_wire',
     // MAX-B1's pinned_rebco_web: likewise until the integrator regenerates hidden_until.json
-    'grindless:rebco_on_pbo_web', 'grindless:pinned_rebco_web']);
+    'grindless:rebco_on_pbo_web', 'grindless:pinned_rebco_web',
+    // MAX-A4's fcl_coil: its tape and coil are hidden until the integrator regenerates hidden_until.json
+    'grindless:thick_film_fcl_tape', 'grindless:fcl_coil', 'grindless:horizon_strand_single_wire']);
   for (const r of TABLE.recipes) for (const x of [...r.itemsIn, ...r.itemsOut]) if (!allowed.has(x.id)) assert.equal(hides(x.id), false, x.id);
 });
 
@@ -293,7 +295,7 @@ test('magnet works recipes: GTM recipes with the circuit, the helium not consume
 test('magnet works recipes: an id the game lacks skips only its recipe, loudly (A1\'s items before they merge)', () => {
   const { G, recipes, errors } = sandboxRun({ missing: ['gtceu:tetrataenite_rod'] });
   assert.deepEqual(recipes.map((r) => r.id), ['grindless:hts_coil', 'grindless:luv_smes_cell', 'grindless:coilgun_coil_casing', 'grindless:seeded_gdbco_growth', 'grindless:strand_stator',
-    'grindless:rebco_pancake', 'grindless:rebco_training', 'grindless:octupole_winding', 'grindless:octupole_trap_magnet', 'grindless:max_coil_winding', 'grindless:pinned_rebco_web', 'grindless:smes_toroid_winding']); // OpV-A1's c7-8, OpV-B3a's c9-10, MAX-A2's c11, MAX-W's c13
+    'grindless:rebco_pancake', 'grindless:rebco_training', 'grindless:octupole_winding', 'grindless:octupole_trap_magnet', 'grindless:max_coil_winding', 'grindless:pinned_rebco_web', 'grindless:smes_toroid_winding', 'grindless:fcl_coil']); // MAX-A4's c14, OpV-A1's c7-8, OpV-B3a's c9-10, MAX-A2's c11, MAX-W's c13
   assert.deepEqual(plain(G.htsMagnetWorks.skipped), [{ name: 'magnetic_bearing', reason: 'unknown id(s): gtceu:tetrataenite_rod' }]);
   assert.ok(errors.some((e) => /skipped magnetic_bearing/.test(e)));
 });
@@ -313,6 +315,7 @@ test('magnet works text: the machine, the type, every recipe\'s EMI line and the
     // MAX-W: max_wireless_lang.js
     vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'max_wireless_lang.js'), 'utf8'), sandbox, { filename: 'max_wireless_lang.js' });
     vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'max_components_lang.js'), 'utf8'), sandbox, { filename: 'max_components_lang.js' }); // MAX-A2
+    vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'max_parts_lang.js'), 'utf8'), sandbox, { filename: 'max_parts_lang.js' }); // MAX-A4
     const keys = ['block.gtceu.hts_magnet_works', 'gtceu.magnet_winding', 'grindless.machine.hts_magnet_works.charge.ok',
     'grindless.machine.hts_magnet_works.charge.low', ...[0].map((i) => 'grindless.machine.hts_magnet_works.tooltip.' + i),
     ...TABLE.recipes.map((r) => 'gtceu.recipe.grindless_magnet_winding.' + r.name)];
