@@ -22,8 +22,8 @@
     },
     "assembler": {
       "recipes": [
-        { "_why": "line 12: the InAs/Al wafer capped with an annealed hBN film, the gate dielectric of the 2DEG", "name": "hbn_capped_2deg_wafer", "circuit": 0, "eut": 491520, "duration": 400,
-          "itemsIn": [{ "id": "grindless:inas_al_wafer", "count": 1 }, { "id": "grindless:annealed_hbn_film", "count": 1 }], "fluidsIn": [],
+        { "_why": "line 12: the InAs/Al wafer capped with an annealed hBN film, the gate dielectric of the 2DEG, by dry transfer: a polycarbonate stamp on a PDMS (silicone rubber) block, carried on a glass slide, picks the film up and melts it down onto the wafer, then chloroform dissolves the stamp (GTM's assembler takes one fluid)", "name": "hbn_capped_2deg_wafer", "circuit": 0, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "grindless:inas_al_wafer", "count": 1 }, { "id": "grindless:annealed_hbn_film", "count": 1 }, { "id": "gtceu:polycarbonate_dust", "count": 1 }, { "id": "gtceu:silicone_rubber_foil", "count": 1 }, { "id": "gtceu:glass_plate", "count": 1 }], "fluidsIn": [{ "id": "gtceu:chloroform", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:hbn_capped_2deg_wafer", "count": 1 }], "fluidsOut": [] }
       ]
     },

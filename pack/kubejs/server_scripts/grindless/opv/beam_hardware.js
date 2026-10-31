@@ -37,7 +37,6 @@
 
   var WATER = 'minecraft:water'
   var STEAM = 'gtceu:steam'
-  var HE = 'gtceu:he_6n'
   var NITROGEN = 'gtceu:nitrogen'
   var PENDING = { 'grindless:spent_li6_shield': 'B3' }
 
@@ -69,27 +68,27 @@
     row('opv/ceb6_cathode', 'lathe', null, [item('grindless:ceb6_boule', 1)], [],
       [item('grindless:ceb6_cathode', 2), item('grindless:ceb6_powder', 1)], [], STEP, 400),
 
-    // the beam parts, assembled under dry nitrogen (the UHV vent gas) and leak-tested in 6N helium; the flanges seal on copper gaskets
-    // line 20: the brazed window on a titanium flange with its seal rings
+    // the beam parts, assembled under dry nitrogen (the UHV vent gas; GTM's assembler takes one fluid); the flanges seal on copper gaskets
+    // line 20: the brazed window on a titanium flange with its seal rings, a titanium backing foil making it a double-foil window
     row('opv/be_beam_window', 'assembler', null, [item('grindless:brazed_be_window', 1), item('gtceu:titanium_plate', 2),
-      item('gtceu:titanium_ring', 2), item('gtceu:copper_foil', 1)], [fluid(NITROGEN, 1000), fluid(HE, 250)],
+      item('gtceu:titanium_ring', 2), item('gtceu:copper_foil', 1), item('gtceu:titanium_foil', 1)], [fluid(NITROGEN, 1000)],
       [item('grindless:be_beam_window', 1)], [], OPV_VA, 400),
     // line 21: the clad rods in a tungsten case with tungstensteel coolant channels
     row('opv/ir_spallation_target', 'assembler', null, [item('grindless:ta_clad_ir_rod', 4), item('gtceu:tungsten_plate', 2),
-      item('gtceu:tungsten_steel_small_fluid_pipe', 2), item('gtceu:tungsten_steel_ring', 2)], [fluid(NITROGEN, 1000), fluid(HE, 250)],
+      item('gtceu:tungsten_steel_small_fluid_pipe', 2), item('gtceu:tungsten_steel_ring', 2), item('gtceu:copper_foil', 1)], [fluid(NITROGEN, 1000)],
       [item('grindless:ir_spallation_target', 1)], [], OPV_VA, 400),
     // line 22: the canned LiH (slow neutrons) behind tungsten (fast neutrons) and the UEV lead-polymer liner (gammas), in a steel housing
     row('opv/li6_hydride_shield', 'assembler', null, [item('grindless:canned_li6h_block', 2), item('gtceu:tungsten_plate', 2),
-      item('grindless:lead_polymer_liner', 1), item('gtceu:stainless_steel_plate', 2)], [fluid(NITROGEN, 1000), fluid(HE, 250)],
+      item('grindless:lead_polymer_liner', 1), item('gtceu:stainless_steel_plate', 2), item('gtceu:copper_foil', 1)], [fluid(NITROGEN, 1000)],
       [item('grindless:li6_hydride_shield', 1)], [], OPV_VA, 400),
     // line 23: the cathode behind tantalum heat shields in a chain field coil's solenoid, its drift section an activated NEG chamber
     // (line 25: the cooler's beam needs XHV); the He refrigerator takes the gun to 4 K (electron_cooler)
     row('opv/cooler_electron_gun', 'assembler', null, [item('grindless:ceb6_cathode', 1), item('grindless:chain_field_coil', 2),
-      item('grindless:activated_neg_chamber', 1), item('gtceu:tantalum_foil', 2)], [fluid(NITROGEN, 1000), fluid(HE, 250)],
+      item('grindless:activated_neg_chamber', 1), item('gtceu:tantalum_foil', 2), item('gtceu:copper_foil', 1)], [fluid(NITROGEN, 1000)],
       [item('grindless:cooler_electron_gun', 1)], [], OPV_VA, 400),
     // line 25: the activated chambers in a titanium frame, two OpV circuits for the pumping controls (docs/eras/opv.md *Common*)
     row('opv/neg_xhv_casing', 'assembler', null, [item('grindless:activated_neg_chamber', 4), item('gtceu:titanium_plate', 4),
-      item('gtceu:copper_foil', 2), item('#gtceu:circuits/opv', 2)], [fluid(NITROGEN, 1000), fluid(HE, 1000)],
+      item('gtceu:copper_foil', 2), item('gtceu:titanium_ring', 4), item('#gtceu:circuits/opv', 2)], [fluid(NITROGEN, 1000)],
       [item('grindless:neg_xhv_casing', 2)], [], OPV_VA, 600)
   ]
 
