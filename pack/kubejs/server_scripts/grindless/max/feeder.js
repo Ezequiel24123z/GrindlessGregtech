@@ -20,7 +20,7 @@
   MF.skipped = []
   MF.controllerRecipe = 'grindless:assembly_line/accretion_feeder'
 
-  var VA_MAX = Number(GTValues.VA[14])
+  var VA_MAX = 2013265920
   var VH_MAX = 1073741824
   var OPV_VA = 503316480
   var CIRCUIT = '#gtceu:circuits/max'
