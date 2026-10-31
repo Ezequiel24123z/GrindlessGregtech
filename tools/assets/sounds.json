@@ -827,6 +827,17 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_magnetic_pair_converter",
+      "recipeType": "gtceu:magnetic_pair_production",
+      "prompt": "Seamless looping sound of a magnetar-field plasma rig: a deep rising magnetic throb, a thin crackling laser whine and a faint pulsed electromagnetic hiss, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }
