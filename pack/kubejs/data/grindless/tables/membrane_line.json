@@ -1,0 +1,33 @@
+{
+  "types": {
+    "membrane_rolling": {
+      "dataKey": "grindless_membrane_rolling",
+      "recipes": [
+        {
+          "_why": "L2 last step: the pinned REBCO web and the graphene/hBN film are laminated between rollers and the copper stabiliser is etched back in ferric chloride under liquid nitrogen. The spent etchant goes to the extraction cascade (c32), the scrap to a macerator.",
+          "name": "superconducting_membrane", "circuit": 1, "eut": 2013265920, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:pinned_rebco_web", "count": 1 }, { "id": "grindless:graphene_hbn_film", "count": 1 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:iron_iii_chloride", "amount": 1000 }], "charge": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:superconducting_membrane", "count": 1 }, { "id": "grindless:spent_ferric_chloride", "count": 1 }, { "id": "grindless:membrane_scrap", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "L3 last step: the hafnia/silica stack and a silver foil are rolled into the albedo panel in argon.",
+          "name": "albedo_multilayer_panel", "circuit": 2, "eut": 2013265920, "duration": 900,
+          "itemsIn": [{ "id": "grindless:hfo2_sio2_stack", "count": 2 }, { "id": "gtceu:silver_foil", "count": 1 }],
+          "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:albedo_multilayer_panel", "count": 1 }, { "id": "grindless:membrane_scrap", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "L11 last step: the cryo-conditioned web is spliced with horizon strand wire and potted in epoxy into the membrane belt.",
+          "name": "membrane_belt", "circuit": 3, "eut": 2013265920, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:cryo_conditioned_web", "count": 1 }, { "id": "gtceu:horizon_strand_single_wire", "count": 2 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:membrane_belt", "count": 1 }, { "id": "grindless:membrane_scrap", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
