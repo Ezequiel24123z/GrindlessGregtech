@@ -1,3 +1,4 @@
+// priority: -21440
 (function () {
   var G = global.grindless
   var A = G.antimatterCygnus
@@ -63,5 +64,20 @@
         console.error(LOG + error)
       }
     })
+    try {
+      var r = G.readJsonTable('kubejs/data/grindless/tables/antimatter_cygnus_trap.json')
+      r.itemsIn.concat(r.kept, r.itemsOut).forEach(requireItem)
+      r.chancedOut.forEach(function (s) { requireItem(s.id) })
+      event.recipes.gtceu.antimatter_storage('grindless:' + r.name)
+        .itemInputs(r.itemsIn).notConsumable(r.kept[0]).circuit(r.circuit)
+        .itemOutputs(r.itemsOut)
+        .chancedOutput('8x grindless:empty_penning_trap', 9000, 0)
+        .addDataString('grindless_antimatter_storage', r.name)
+        .dimension(A.site).EUt(r.eut).duration(r.duration)
+      A.trap = r
+    } catch (e) {
+      A.errors.push('antiproton stack: ' + e)
+      console.error(LOG + 'antiproton stack: ' + e)
+    }
   })
 })()

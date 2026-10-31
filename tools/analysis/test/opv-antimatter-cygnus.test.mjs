@@ -82,3 +82,15 @@ test('names, short tooltips, EMI guidance and new ids have language parity', () 
     assert.ok(run.lang[lang][`emi.grindless.info.${m.name}.0`]);
   }
 });
+test('line 30 stacks eight cold cells at Cygnus on free c6; 90% traps return', () => {
+  const row = A.trap;
+  assert.deepEqual([row.circuit, row.eut, row.duration], [6, 268435456, 400]);
+  assert.deepEqual(plain(row.itemsIn), ['8x grindless:cold_antiproton_cell']);
+  assert.deepEqual(plain(row.kept), ['grindless:octupole_trap_magnet']);
+  assert.deepEqual(plain(row.chancedOut), [{ id: 'grindless:empty_penning_trap', count: 8, chance: 9000 }]);
+  const r = get('antimatter_storage', 'antiproton_stack_opv');
+  assert.ok(JSON.stringify(r.j.recipeConditions).includes(site));
+  assert.ok(get('antimatter_storage', 'positron_stack'), 'existing UXV c5 stays intact');
+  const producers = recipes.filter(r => JSON.stringify(r.j.outputs || {}).includes('"grindless:antiproton_stack_opv"'));
+  assert.deepEqual(producers.map(r => r.i), ['grindless:antimatter_storage/antiproton_stack_opv']);
+});

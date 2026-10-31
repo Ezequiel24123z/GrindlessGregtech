@@ -1,3 +1,4 @@
+// priority: -6516
 (function () {
   var G = global.grindless
   var Pat = G.patterns
