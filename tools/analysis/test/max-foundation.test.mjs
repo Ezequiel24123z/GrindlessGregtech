@@ -110,7 +110,7 @@ test('tables/max_ids.json lists the 29 MAX ids, every F1 id and the circuits blo
   assert.deepEqual(table.foundation.horizon_strand, ['gtceu:horizon_strand_ingot', 'gtceu:horizon_strand_single_wire', 'gtceu:horizon_strand_single_cable']);
   assert.deepEqual(table.foundation.fluids, Object.keys(FLUIDS).map((n) => 'gtceu:' + n));
   assert.deepEqual(table.ours.components, COMPONENTS);
-  assert.deepEqual(table.ours.parallel_hatch, ['grindless:max_parallel_hatch']);
+  assert.deepEqual(table.ours.parallel_hatch, ['gtceu:max_parallel_hatch']);
   assert.deepEqual(table.existing, EXISTING);
   assert.deepEqual(table.substages.names, ['max', 'max-sgra', 'max-nsc']);
   assert.deepEqual(table.places, { _why: table.places._why, sgra: 'gcyr:black_hole_orbit', nsc: 'grindless:nsc_belt' });

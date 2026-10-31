@@ -452,81 +452,109 @@
 			y: 79.5d
 		}
 		{
+			id: "53F650D5CA34CD9D"
+			linked_quest: "545A65919796969A"
+			shape: "rsquare"
+			x: 0.5d
+			y: 83.0d
+		}
+		{
+			id: "51E58822681F0387"
+			linked_quest: "5AF8BC627162C8C5"
+			shape: "rsquare"
+			x: 0.5d
+			y: 84.5d
+		}
+		{
+			id: "7ADA1DB77D63574C"
+			linked_quest: "3AD1F00AD8DB5003"
+			shape: "rsquare"
+			x: 0.5d
+			y: 86.0d
+		}
+		{
 			id: "37EA5C37FB08041B"
 			linked_quest: "39A5A5CC76591697"
 			shape: "rsquare"
 			x: 0.5d
-			y: 83.0d
+			y: 89.5d
 		}
 		{
 			id: "1FCCBED6CE4452ED"
 			linked_quest: "1DFC0C1A50793CB7"
 			shape: "rsquare"
 			x: 21.5d
-			y: 83.0d
+			y: 89.5d
 		}
 		{
 			id: "3D9F43AA278F3647"
 			linked_quest: "366AB48E5BF50431"
 			shape: "rsquare"
 			x: 19.25d
-			y: 84.5d
+			y: 91.0d
 		}
 		{
 			id: "354C64B97FEDF96E"
 			linked_quest: "42BF2F77456F8773"
 			shape: "rsquare"
 			x: 21.5d
-			y: 84.5d
+			y: 91.0d
 		}
 		{
 			id: "1DB9D03F61275809"
 			linked_quest: "5933ADF51C8949BD"
 			shape: "rsquare"
 			x: 0.5d
-			y: 95.75d
+			y: 102.25d
 		}
 		{
 			id: "3925C695BE99E732"
 			linked_quest: "1FFCFA949E449B45"
 			shape: "rsquare"
 			x: 0.5d
-			y: 94.0d
+			y: 100.5d
 		}
 		{
 			id: "1EAE457BFEA3FBF1"
 			linked_quest: "5E6B4DEB712EECBE"
 			shape: "rsquare"
 			x: 0.5d
-			y: 97.75d
+			y: 104.25d
 		}
 		{
 			id: "595704B6B649B8D6"
 			linked_quest: "5304F9E360A95261"
 			shape: "rsquare"
 			x: 0.5d
-			y: 99.75d
+			y: 106.25d
 		}
 		{
 			id: "787A2D5A694A6D32"
 			linked_quest: "5FB006B879741A02"
 			shape: "rsquare"
 			x: 0.5d
-			y: 101.75d
+			y: 108.25d
 		}
 		{
 			id: "7276522F9A51563A"
 			linked_quest: "3F5ABDEF2254EC50"
 			shape: "rsquare"
 			x: 0.5d
-			y: 103.75d
+			y: 110.25d
 		}
 		{
 			id: "30AE33E8F0FEC611"
 			linked_quest: "500C1E02A6CC0121"
 			shape: "rsquare"
 			x: 0.5d
-			y: 105.75d
+			y: 112.25d
+		}
+		{
+			id: "787FC3A161B80353"
+			linked_quest: "586558AD36EEC6F4"
+			shape: "rsquare"
+			x: 0.5d
+			y: 114.25d
 		}
 	]
 	quests: [
@@ -1925,6 +1953,51 @@
 			y: 79.5d
 		}
 		{
+			dependencies: ["545A65919796969A"]
+			description: ["It runs at Sgr A* only, and wears a horizon tether as it works."]
+			icon: "gtceu:geroch_winch"
+			id: "37A6F572D6014003"
+			size: 1.0d
+			subtitle: "MAX. A tether lowered into the ergosphere pulls power out of Sgr A* as the hole slows"
+			tasks: [
+				{ id: "5DEDD95DEBDBE509", item: "gtceu:geroch_winch", optional_task: true, type: "item" }
+				{ id: "19EECA78FA0B13F7", type: "checkmark" }
+			]
+			title: "Geroch Winch"
+			x: 2.75d
+			y: 83.0d
+		}
+		{
+			dependencies: ["5AF8BC627162C8C5"]
+			description: ["It runs at Sgr A* only; the panel and the module wear, and the solar array fab and the assembler rework them."]
+			icon: "gtceu:accretion_feeder"
+			id: "130AE52A0DDA917E"
+			size: 1.0d
+			subtitle: "MAX. A ring of panels and a module turn the infall of the disk into power"
+			tasks: [
+				{ id: "1972088B1CD60B96", item: "gtceu:accretion_feeder", optional_task: true, type: "item" }
+				{ id: "78147B56FA304910", type: "checkmark" }
+			]
+			title: "Accretion Feeder"
+			x: 2.75d
+			y: 84.5d
+		}
+		{
+			dependencies: ["3AD1F00AD8DB5003"]
+			description: ["The last machine of the pack; it vents 2^30 EU/t for 4,800 ticks from one seed wave packet."]
+			icon: "gtceu:mirror_shell"
+			id: "58AB9B6E3DC912C6"
+			size: 1.0d
+			subtitle: "MAX. One seed wave packet, amplified by the shell's mirrors, vents its energy into the grid"
+			tasks: [
+				{ id: "5F7B2D0AAAF93C97", item: "gtceu:mirror_shell", optional_task: true, type: "item" }
+				{ id: "715F0429CA172D67", type: "checkmark" }
+			]
+			title: "Mirror Shell"
+			x: 2.75d
+			y: 86.0d
+		}
+		{
 			icon: "gtceu:lv_machine_hull"
 			id: "3F30A6656E0CFBCC"
 			shape: "rsquare"
@@ -1935,7 +2008,7 @@
 			]
 			title: "LV Machine Hull"
 			x: 0.5d
-			y: 84.5d
+			y: 91.0d
 		}
 		{
 			dependencies: ["39A5A5CC76591697", "3F30A6656E0CFBCC"]
@@ -1949,7 +2022,7 @@
 			]
 			title: "Transformer"
 			x: 2.75d
-			y: 83.75d
+			y: 90.25d
 		}
 		{
 			dependencies: ["3F30A6656E0CFBCC"]
@@ -1963,7 +2036,7 @@
 			]
 			title: "Battery Buffer"
 			x: 2.75d
-			y: 85.25d
+			y: 91.75d
 		}
 		{
 			icon: "gtceu:lv_battery_hull"
@@ -1976,7 +2049,7 @@
 			]
 			title: "Battery Hull"
 			x: 6.75d
-			y: 83.0d
+			y: 89.5d
 		}
 		{
 			dependencies: ["1DD9B8EADA8EBAC0"]
@@ -1993,7 +2066,7 @@
 			]
 			title: "Batteries"
 			x: 9.0d
-			y: 83.0d
+			y: 89.5d
 		}
 		{
 			icon: "gtceu:tin_single_wire"
@@ -2006,7 +2079,7 @@
 			]
 			title: "Tin Wire"
 			x: 13.0d
-			y: 83.0d
+			y: 89.5d
 		}
 		{
 			dependencies: ["3B2125BC87FC669D"]
@@ -2023,7 +2096,7 @@
 			]
 			title: "Cables"
 			x: 15.25d
-			y: 83.0d
+			y: 89.5d
 		}
 		{
 			dependencies: ["1DFC0C1A50793CB7", "42BF2F77456F8773"]
@@ -2038,7 +2111,7 @@
 			]
 			title: "EU P2P Tunnel"
 			x: 23.75d
-			y: 83.75d
+			y: 90.25d
 		}
 		{
 			dependencies: ["366AB48E5BF50431"]
@@ -2052,7 +2125,7 @@
 			]
 			title: "Quantum Bridge"
 			x: 21.5d
-			y: 86.0d
+			y: 92.5d
 		}
 		{
 			icon: "gtceu:lapotron_crystal"
@@ -2065,7 +2138,7 @@
 			]
 			title: "Lapotron Crystal"
 			x: 27.75d
-			y: 83.0d
+			y: 89.5d
 		}
 		{
 			dependencies: ["56341035C7044592"]
@@ -2079,7 +2152,7 @@
 			]
 			title: "Power Substation"
 			x: 30.0d
-			y: 83.0d
+			y: 89.5d
 		}
 		{
 			icon: "gtceu:lv_lithium_battery"
@@ -2093,7 +2166,7 @@
 			]
 			title: "Batteries"
 			x: 0.5d
-			y: 91.75d
+			y: 98.25d
 		}
 		{
 			dependencies: ["1A5654A5282AA2BB"]
@@ -2111,7 +2184,7 @@
 			]
 			title: "Capacitor Cell"
 			x: 2.75d
-			y: 91.75d
+			y: 98.25d
 		}
 		{
 			dependencies: ["16ABFBB249BDC07B", "7DDF714877C2B39F"]
@@ -2130,7 +2203,7 @@
 			]
 			title: "Wireless Energy Tower"
 			x: 5.0d
-			y: 91.75d
+			y: 98.25d
 		}
 		{
 			dependencies: ["5933ADF51C8949BD", "1FFCFA949E449B45"]
@@ -2148,7 +2221,7 @@
 			]
 			title: "LuV SMES Cell"
 			x: 2.75d
-			y: 94.0d
+			y: 100.5d
 		}
 		{
 			dependencies: ["5E6B4DEB712EECBE"]
@@ -2166,7 +2239,7 @@
 			]
 			title: "UHV SMES Cell"
 			x: 2.75d
-			y: 97.75d
+			y: 104.25d
 		}
 		{
 			dependencies: ["5304F9E360A95261"]
@@ -2184,7 +2257,7 @@
 			]
 			title: "UEV SMES Cell"
 			x: 2.75d
-			y: 99.75d
+			y: 106.25d
 		}
 		{
 			dependencies: ["5FB006B879741A02"]
@@ -2202,7 +2275,7 @@
 			]
 			title: "UIV SMES Cell"
 			x: 2.75d
-			y: 101.75d
+			y: 108.25d
 		}
 		{
 			dependencies: ["3F5ABDEF2254EC50"]
@@ -2220,7 +2293,7 @@
 			]
 			title: "UXV SMES Cell"
 			x: 2.75d
-			y: 103.75d
+			y: 110.25d
 		}
 		{
 			dependencies: ["500C1E02A6CC0121"]
@@ -2238,13 +2311,31 @@
 			]
 			title: "OpV SMES Cell"
 			x: 2.75d
-			y: 105.75d
+			y: 112.25d
+		}
+		{
+			dependencies: ["586558AD36EEC6F4"]
+			description: [
+				"The network jumps to MAX only when every formed tower holds these. The mirror shell's last recipe draws from it, so charge it first."
+				"Holds: MAX SMES 64,424,509,440,000 EU."
+			]
+			icon: "grindless:max_smes_cell"
+			id: "5DF7E0C0625BC4CE"
+			size: 1.0d
+			subtitle: "Twenty-four thousand five hundred and seventy-six UV batteries' worth"
+			tasks: [
+				{ id: "18CC88F6C5BBCDE3", item: "grindless:max_smes_cell", optional_task: true, type: "item" }
+				{ id: "33261788E242EFDD", type: "checkmark" }
+			]
+			title: "MAX SMES Cell"
+			x: 2.75d
+			y: 114.25d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Energy goes in at any voltage; the cells only limit what comes out."
-				"Comes in 2, 4, 16 and 64 A, LV to OpV."
+				"Comes in 2, 4, 16 and 64 A, LV to MAX."
 			]
 			icon: "gtceu:lv_wireless_dynamo_hatch"
 			id: "128CD52291A76880"
@@ -2256,11 +2347,11 @@
 			]
 			title: "Wireless Dynamo Hatch"
 			x: 7.25d
-			y: 89.5d
+			y: 96.0d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
-			description: ["2 A of its tier, LV to OpV."]
+			description: ["2 A of its tier, LV to MAX."]
 			icon: "grindless:lv_wireless_dynamo_cover"
 			id: "54D4653CC016835A"
 			size: 1.0d
@@ -2271,13 +2362,13 @@
 			]
 			title: "Wireless Dynamo Cover"
 			x: 7.25d
-			y: 91.0d
+			y: 97.5d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
-				"Comes in 2, 4, 16 and 64 A, LV to OpV."
+				"Comes in 2, 4, 16 and 64 A, LV to MAX."
 			]
 			icon: "gtceu:lv_wireless_energy_hatch"
 			id: "5062E82EF67AFF89"
@@ -2289,13 +2380,13 @@
 			]
 			title: "Wireless Energy Hatch"
 			x: 7.25d
-			y: 92.5d
+			y: 99.0d
 		}
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
 				"GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout."
-				"2 A of its tier, LV to OpV."
+				"2 A of its tier, LV to MAX."
 			]
 			icon: "grindless:lv_wireless_energy_cover"
 			id: "7713822C036911A8"
@@ -2307,7 +2398,7 @@
 			]
 			title: "Wireless Energy Cover"
 			x: 7.25d
-			y: 94.0d
+			y: 100.5d
 		}
 	]
 	subtitle: ["Every way to make power, tier by tier, and what carries it and stores it."]

@@ -91,9 +91,10 @@
     { "id": "gtceu:horizon_strand_dust", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "gtceu:horizon_strand_ingot", "role": "acquisition", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "gtceu:horizon_strand_ingot", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
-    { "id": "grindless:max_epilogue", "role": "acquisition", "reason": "G1: the mirror shell credits handler gives it to the player (shell.js), not a recipe" }
-  ],
-  "pendingRoutes": [
+    { "id": "grindless:max_epilogue", "role": "acquisition", "reason": "G1: the mirror shell credits handler gives it to the player (shell.js),     not a recipe" },
+        { "id": "grindless:launched_belt_seed", "role": "use", "reason": "C3 audit (C1 F2): gate c15 makes it and the max-nsc grant in tiers/max.json (travel.js) takes it when the belt opens; no recipe uses it" }
+      ],
+      "pendingRoutes": [
   ],
   "pendingUses": []
 }
