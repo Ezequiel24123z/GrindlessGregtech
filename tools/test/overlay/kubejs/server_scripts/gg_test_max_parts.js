@@ -101,9 +101,14 @@
       if (!r.isPresent()) { missing.push(row.recipeId); return }
       var eut = eutOf(r.get())
       if (eut !== VA_MAX) bad.push(row.name + ' ' + eut)
-      var out = String(r.get().getResultItem(null).getItem())
-      var made = String(r.get().outputs)
-      if (out !== row.machine && made.indexOf(row.machine) < 0) wrong.push(row.name + ' -> ' + (out === 'minecraft:air' ? made.substring(0, 120) : out))
+      var made = []
+      var Cap = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability').CAP
+      var contents = r.get().getOutputContents(Cap)
+      for (var ci = 0; ci < contents.size(); ci++) {
+        var ids = Cap.of(contents.get(ci).content).getItemIds()
+        for (var si = 0; si < ids.length; si++) made.push(String(ids[si]))
+      }
+      if (made.indexOf(row.machine) < 0) wrong.push(row.name + ' -> ' + made.join('+').substring(0, 120))
     })
     check('lookup', rows.length === 27 && missing.length === 0, rows.length + ' part ids checked; missing: ' + (missing.length ? missing.join(', ') : 'none'))
     check('eut', bad.length === 0, 'parts off VA[MAX]: ' + (bad.length ? bad.join(', ') : 'none'))

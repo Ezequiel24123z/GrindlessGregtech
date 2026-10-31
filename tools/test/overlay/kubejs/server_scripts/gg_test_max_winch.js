@@ -26,7 +26,8 @@
   var DYNAMO = 'gtceu:opv_wireless_dynamo_hatch_16a'
   var CIRCUIT = 'gtceu:programmed_circuit'
   var MACHINE = 'gtceu:geroch_winch'
-  var PARTS = [DYNAMO, DYNAMO, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus']
+  // the floor has 3 hatch cells (winch.js X at z 8, x 3-5): one dynamo hatch and the bus pair
+var PARTS = [DYNAMO, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus']
   var CANISTER = 'grindless:geroch_canister'
   var WORN = 'grindless:spent_tether_segment'
 
@@ -182,7 +183,7 @@
       u.energy = partsLike(m, /energy_output_hatch|dynamo_hatch/)
       u.bus = partsLike(m, /input_bus/)[0]
       u.outBus = partsLike(m, /output_bus/)[0]
-      var ok = !!u.bus && !!u.outBus && u.energy.length === 2 && u.height === 33
+      var ok = !!u.bus && !!u.outBus && u.energy.length === 1 && u.height === 33
       check('formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', dynamo hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
       drain(u.energy)

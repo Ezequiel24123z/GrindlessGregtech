@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:geroch_drum_casing"],
+  "text": ["emi.grindless.info.geroch_drum_casing.0"]
+}
