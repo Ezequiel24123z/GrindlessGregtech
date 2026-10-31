@@ -94,8 +94,9 @@
     { "id": "grindless:assembler/opv_wireless_dynamo_hatch_16a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_dynamo_hatch_4a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
     { "id": "grindless:assembler/opv_wireless_dynamo_hatch_64a", "reason": "OpV-W landed before Wave A: its inputs are held until gtceu:opv_wireless_dynamo_hatch_16a (W, itself held until A1, A2, A3 and the link), A0 (chain strand wires) and A3 (grindless:field_frozen_plate) write their producers; the last of them deletes this entry with the W hold rule" },
     { "id": "grindless:hot_cell/spent_ir_target_decladding", "reason": "OpV-D1 declads the spent Ir target; grindless:spent_ir_target is held until B3's spallation target station makes it: B3 deletes this entry with its hold rule" },
-    { "id": "grindless:assembler/opv/cooler_electron_gun", "reason": "OpV-D1 landed before A1: its input grindless:chain_field_coil is held until A1 (components) writes its producer; A1 deletes this entry with its hold rule" }
-  ],
+    { "id": "grindless:assembler/opv/cooler_electron_gun", "reason": "OpV-D1 landed before A1: its input grindless:chain_field_coil is held until A1 (components) writes its producer;     A1 deletes this entry with its hold rule" },
+        { "id": "grindless:assembly_line/opv_parallel_hatch", "reason": "OpV-M1 landed before Wave A: its inputs are held until A0 (gtceu:opv_machine_hull), A1 (gtceu:opv_robot_arm, gtceu:opv_sensor, superfluid helium-3), A2 (#gtceu:circuits/opv), A3 (gtceu:opv_field_generator) and B1 (grindless:tetron_array) write their producers; each drops its foreign id from this entry and the last of them deletes it", "foreign": ["gtceu:opv_machine_hull", "gtceu:opv_robot_arm", "gtceu:opv_sensor", "gtceu:opv_field_generator"] }
+      ],
   "pendingUses": [
     { "id": "grindless:be_beam_window", "package": "B3", "reason": "OpV-D1 makes it; B3's antimatter beam lines use it" },
     { "id": "grindless:ir_spallation_target", "package": "B3", "reason": "OpV-D1 makes it; B3's spallation target station uses it" },

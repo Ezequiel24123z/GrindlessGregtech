@@ -3,6 +3,7 @@
  "pending": [
   "gtceu:opv_emitter",
   "gtceu:opv_field_generator",
+  "gtceu:opv_robot_arm",
   "gtceu:opv_sensor"
  ]
 }
