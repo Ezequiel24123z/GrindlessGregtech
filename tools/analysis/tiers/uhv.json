@@ -2489,7 +2489,9 @@
         "grindless:psr_j0437_orbit",
         "grindless:cygnus_x1_orbit",
         "grindless:vela_pulsar_orbit",
-        "grindless:cas_a_remnant"
+        "grindless:cas_a_remnant",
+        "grindless:sgr1806_orbit",
+        "grindless:terzan5_core"
       ],
       "exceptRecipes": [
         "grindless:warp_gate/hold*"
