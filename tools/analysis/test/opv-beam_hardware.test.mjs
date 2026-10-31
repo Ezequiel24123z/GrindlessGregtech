@@ -104,7 +104,8 @@ test('the products: OpV assembler rows above V[UXV] with only OpV circuits, ever
 
 test('the cryogenic parts: the helium refrigerator seals the gun and the pickup cold, published apart from its freezer rows', () => {
   const HR = plain(run.global.grindless.heliumRefrigerator);
-  assert.deepEqual(HR.opvRows.map((r) => [r.input, r.output]), [
+  // OpV-A1 appends its own rows (opv-components.test.mjs); this package's are the opv_ ones
+  assert.deepEqual(HR.opvRows.filter((r) => r.name.startsWith('opv_')).map((r) => [r.input, r.output]), [
     ['grindless:cooler_electron_gun', 'grindless:electron_cooler'],
     ['grindless:brazed_pickup_tank', 'grindless:stochastic_cooling_pickup'],
   ]);

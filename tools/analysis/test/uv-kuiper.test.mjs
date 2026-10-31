@@ -145,8 +145,8 @@ test('the cryogenic plant: the Kuiper row on the Moon splits the mix into argon,
   const cryo = recipes.filter((r) => r.t === 'gtceu:cryogenic_processing').map((r) => r.i.split('/').pop()).sort();
   // UHV-A6 adds the 99.999 % neon row, UHV-B3 the oganesson propellant row, UEV-A2 the nether-air xenon cut
   // UEV-A7 adds the 6N helium-3 and helium-4 ash rows, UEV-B2 the interstellar gas row, UIV-A2 para hydrogen and liquid para hydrogen
-  // UIV-B3 adds the 6N neon row; UXV-A2 adds he_6n, krypton from air, the oxygen-burning fuel and the triple-alpha fuel
-  assert.deepEqual(cryo, ['he_6n', 'helium_3_6n', 'helium_4_ash', 'high_purity_neon', 'interstellar_gas', 'krypton_from_air', 'kuiper_noble_gas', 'liquid_helium', 'liquid_nitrogen', 'liquid_oxygen', 'liquid_para_hydrogen', 'neon_6n', 'oganesson_propellant',
+  // UIV-B3 adds the 6N neon row; UXV-A2 adds he_6n, krypton from air, the oxygen-burning fuel and the triple-alpha fuel; OpV-A1 adds liquid helium-3
+  assert.deepEqual(cryo, ['he_6n', 'helium_3_6n', 'helium_4_ash', 'high_purity_neon', 'interstellar_gas', 'krypton_from_air', 'kuiper_noble_gas', 'liquid_helium', 'liquid_helium_3', 'liquid_nitrogen', 'liquid_oxygen', 'liquid_para_hydrogen', 'neon_6n', 'oganesson_propellant',
     'oxygen_burning_fuel', 'para_hydrogen', 'triple_alpha_fuel', 'triton_nitric_oxide', 'xenon_cut']);
   for (const [name, gas, liquid] of [['liquid_oxygen', 'gtceu:oxygen', 'gtceu:liquid_oxygen'], ['liquid_helium', 'gtceu:helium', 'gtceu:liquid_helium'],
     ['liquid_nitrogen', 'gtceu:nitrogen', 'gtceu:liquid_nitrogen']]) {

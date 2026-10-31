@@ -22,7 +22,8 @@ const lang = read(path.join(kube, 'client_scripts', 'grindless', 'uev_electron_b
     + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_matrioshka_lang.js')) // UIV-A10's tin_distill
     + read(path.join(kube, 'client_scripts', 'grindless', 'uxv_spin_rows_lang.js')) // UXV-A3's c9-20 and c27-29
     + read(path.join(kube, 'client_scripts', 'grindless', 'opv_beam_hardware_lang.js')) // OpV-D1's c24-26 and c30-31
-    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_census_iv_lang.js')); // OpV-B2's c23 ni_chain_thaw
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_census_iv_lang.js')) // OpV-B2's c23 ni_chain_thaw
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_components_lang.js')); // OpV-A1's c21 mesh_belt_weld
 
 const GTM = new Set(['mixer', 'assembler', 'compressor', 'bender', 'macerator', 'chemical_reactor', 'electric_blast_furnace']);
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
@@ -313,13 +314,16 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_rows.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_feed.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'foundation.js'))
     // OpV-D1's c24-26 and c30-31 (opv/beam_hardware.js; c31 takes A2's nbtin_film_wafer, opv/circuits.js)
     // OpV-B2's c23 returns UIV's cage_part (uiv/foundation.js); OpV packages register their items under startup_scripts/grindless/opv/
+    // OpV-A1's c21 (mesh_belt_weld): its belt and trim are registered in opv/components.js
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'foundation.js'))
     + fs.readdirSync(path.join(kube, 'startup_scripts', 'grindless', 'opv')).filter((f) => f.endsWith('.js')).map((f) => read(path.join(kube, 'startup_scripts', 'grindless', 'opv', f))).join('\n');
   // OpV-B2's c23 thaws OpV-A0's caged_ni_chain (opv.md A0 "Pending": caged_ni_chain -> B2); A0 registers it and merges before B2
   const pendingA0 = new Set(['grindless:caged_ni_chain']);
+  // OpV-A1: c21's input chain_mesh_weave is OpV-A0's (the laminator); until A0 merges the loader skips the row on the missing id
+  const PENDING = new Set(['grindless:chain_mesh_weave']);
   for (const [, r] of allRows().filter(([w]) => w.startsWith('electron_beam.json'))) {
     for (const id of outputs(r).concat(ids(r.itemsIn))) {
-      if (!id.startsWith('grindless:')) continue;
+      if (!id.startsWith('grindless:') || PENDING.has(id)) continue;
       const n = id.slice('grindless:'.length);
       assert.ok(registered.has(id) || f1.includes(n) || uv.includes(n) || a3.includes(n) || a10.includes(n) || pendingA0.has(id), `${id} is registered nowhere`);
     }

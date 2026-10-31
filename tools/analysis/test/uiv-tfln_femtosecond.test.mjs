@@ -64,8 +64,8 @@ test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
 
 test('femtosecond writer: femtosecond_writing circuits 1-4, figures and slots', () => {
   const rc = T.types.femtosecond_writing.recipes;
-  // OpV-A2 appended c6 (the LN-on-SOI link waveguides)
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['interposer_blank', 1], ['lattice_2pp', 2], ['orifice_plate', 3], ['crystal_blank', 4], ['ln_soi_waveguides', 6]]);
+  // OpV-A1 appended c5 (the flexspline teeth), OpV-A2 c6 (the LN-on-SOI link waveguides)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['interposer_blank', 1], ['lattice_2pp', 2], ['orifice_plate', 3], ['crystal_blank', 4], ['flexspline_teeth', 5], ['ln_soi_waveguides', 6]]);
   for (const r of rc) {
     assert.equal(r.eut, 7864320, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 3 && ids(r.itemsOut).length <= 2, r.name);
@@ -169,6 +169,9 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   assert.deepEqual(itemNames.sort(), registered.slice().sort());
   const keys = [...lang.matchAll(/^\s+\['((?:block|gtceu|material|grindless)\.[^']+)',\s*$/gm)].map((m) => m[1]);
   const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
+  // OpV-A1: the flexspline_teeth row's EMI line lives in opv_components_lang.js.
+  const opvA1 = read('client_scripts', 'grindless', 'opv_components_lang.js');
+  for (const m of opvA1.matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+', '[^']+'\]/gm)) keys.push(m[1]);
   for (const k of [
     'block.gtceu.tfln_fab', 'block.gtceu.femtosecond_writer', 'gtceu.ion_slicing', 'gtceu.femtosecond_writing',
     'material.gtceu.spent_koh_etchant', 'material.gtceu.photoresin', 'material.gtceu.uncured_photoresin'

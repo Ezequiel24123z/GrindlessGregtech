@@ -194,6 +194,7 @@
   // goes back to the cascade's c24); c18 the epitaxial aluminium of the gated 2DEG; c19 the HfO2/TiN gate stack of the cryo-CMOS;
   // c21 AlGaN/GaN on semi-insulating SiC (Ga(CH3)3 + NH3 -> GaN + 3 CH4; the excess ammonia carries the unreacted gallium out as the
   // exhaust, which the cascade's c27 strips); fibre c17 pigtails the SNSPD link chip into the cryogenic optical link
+  // OpV-A1 (docs/eras/opv.md line 9): the lasing Th:CaF2 boule's faces coated with VUV-transparent MgF2 (magnesium + HF, the hydrogen goes back)
   var OPV_ROWS = [
     { name: 'si28_poly_rod', type: 'mocvd', circuit: 17, itemsIn: [],
       fluidsIn: [fluid('gtceu:si28_trichlorosilane', 4000), fluid('gtceu:hydrogen', 4000)], itemsOut: [item('grindless:si28_poly_rod', 1)],
@@ -209,7 +210,10 @@
       fluidsIn: [fluid('gtceu:trimethylgallium', 250), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:gan_sic_epi_wafer', 1)],
       fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:gan_mocvd_exhaust', 750)], eut: 1966080, duration: 1200 },
     { name: 'cryo_optical_link', type: 'fibre_draw', circuit: 17, itemsIn: [item('grindless:snspd_link_wafer', 1), item('grindless:fused_silica_tube', 1)],
-      fluidsIn: [fluid(ACRYLATE, 250)], itemsOut: [item('grindless:cryo_optical_link', 4)], fluidsOut: [], eut: 122880, duration: 600 }
+      fluidsIn: [fluid(ACRYLATE, 250)], itemsOut: [item('grindless:cryo_optical_link', 4)], fluidsOut: [], eut: 122880, duration: 600 },
+    { name: 'th_caf2_coating', type: 'mocvd', circuit: 20, itemsIn: [item('grindless:th_caf2_lasing_boule', 1), item('gtceu:magnesium_dust', 1)],
+      fluidsIn: [fluid('gtceu:hydrofluoric_acid', 2000)], itemsOut: [item('grindless:coated_th_caf2_crystal', 1)],
+      fluidsOut: [fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 800 }
   ]
 
   // side steps on GTM's own machines
