@@ -57,7 +57,7 @@
     maintenance: function () { return PartAbility.MAINTENANCE }
   }
 
-  const MAX_ROWS = 16
+  const MAX_ROWS = 64
 
   function fail(msg) {
     throw new Error('[grindless/patterns] ' + msg)
@@ -215,7 +215,10 @@
       case 14: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9], rows[10], rows[11], rows[12], rows[13])
       case 15: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9], rows[10], rows[11], rows[12], rows[13], rows[14])
       case 16: return builder.aisle(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6], rows[7], rows[8], rows[9], rows[10], rows[11], rows[12], rows[13], rows[14], rows[15])
-      default: return fail('a slice can have 1 to ' + MAX_ROWS + ' rows (got ' + rows.length + ')')
+      default:
+        if (rows.length < 1 || rows.length > MAX_ROWS) return fail('a slice can have 1 to ' + MAX_ROWS + ' rows (got ' + rows.length + ')')
+        // more than 16 rows (MAX-P): aisle(String...) takes the rows as one array
+        return builder.aisle(rows)
     }
   }
 
