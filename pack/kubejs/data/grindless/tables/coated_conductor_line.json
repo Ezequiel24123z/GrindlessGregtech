@@ -66,6 +66,20 @@
       "duration": 300
     },
     {
+      "name": "rebco_tape_max",
+      "step": "tape",
+      "_why": "MAX-A2 line L9 (c5): ITBTC coated conductor bonded to horizon strand wire under epoxy, the REBCO tape the MAX field coil is wound from.",
+      "circuit": 5,
+      "itemsIn": [
+        { "id": "grindless:itbtc_coated_conductor", "count": 4 },
+        { "id": "gtceu:horizon_strand_single_wire", "count": 2 }
+      ],
+      "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }],
+      "itemsOut": [{ "id": "grindless:rebco_tape_max", "count": 4 }],
+      "eut": 7864320,
+      "duration": 400
+    },
+    {
       "name": "smes_buffered_tape",
       "step": "tape",
       "_why": "MAX-W (docs/eras/max.md, L27 step 1): ITBTC coated conductor laminated with strand tape under an epoxy bond, the buffered tape the SMES toroid is wound from.",
