@@ -176,6 +176,7 @@
     { "id": "opv_pathfinder", "x": [38400,38463], "z": [0,63], "y": [98,115], "tests": ["opv_pathfinder"], "note": "OpV-R1: the pathfinder throw from Cygnus X-1 orbit to Terzan 5 places its platform in grindless:terzan5_core at 64,100,64 and     force-loads it (survives @restart, grants opv-terzan5)" },
     { "id": "opv_replication", "x": [38464,38527], "z": [0,63], "y": [98,115], "tests": ["opv_replication"], "note": "OpV-R2: the three machines form at Terzan 5 core; foundry c1 returns the seed and outputs two only with all feedstock present" },
     { "id": "opv_bulge_collector", "x": [38528,38591], "z": [0,63], "y": [98,115], "tests": ["opv_bulge_collector"], "note": "OpV-R3: collector c3 writes 2^30 EU/t at Terzan 5 core into wireless case 13 for the first 1,200 t         (census proven statically)" },
-    { "id": "opv_gate", "x": [38656,38719], "z": [0,63], "y": [98,115], "tests": ["opv_gate"], "note": "OpV-G1: gate c13 holds 2^33 EU/t from real case 13 sources through two OpV 16 A hatches, consumes the core and the seed, keeps the six, returns sgr_a_chart and grants max" }
+    { "id": "opv_gate", "x": [38656,38719], "z": [0,63], "y": [98,115], "tests": ["opv_gate"], "note": "OpV-G1: gate c13 holds 2^33 EU/t from real case 13 sources through two OpV 16 A hatches, consumes the core and the seed, keeps the six, returns sgr_a_chart and grants max" },
+    { "id": "opv_c3", "x": [38912,38975], "z": [0,63], "y": [98,112], "tests": ["opv_c3"], "note": "OpV-C3: Save compatibility of opv.md: a save mark built on v0.15.0 (a UXV-cell tower, UXV hatch, UIV/UXV hulls and 16 A hatches, a chest, and a chest in each older platform dimension) read back on the candidate; gate rows c1-c13 are recipes and the two new dimensions load" }
       ]
 }
