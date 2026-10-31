@@ -76,7 +76,7 @@
           "name": "feed_exotic_matter",
           "circuit": 1,
           "eut": 1073741824,
-          "duration": 2400,
+          "duration": 14800,
           "site": true,
           "generator": true,
           "itemsIn": [{ "id": "grindless:stable_exotic_matter", "count": 1 }],
@@ -90,10 +90,10 @@
           "name": "feed_stellar_plasma",
           "circuit": 2,
           "eut": 536870912,
-          "duration": 1200,
+          "duration": 4600,
           "site": true,
           "generator": true,
-          "fluidsIn": [{ "id": "grindless:stellar_plasma", "amount": 4000 }],
+          "fluidsIn": [{ "id": "gtceu:stellar_plasma", "amount": 4000 }],
           "wear": [
             { "id": "grindless:kugelblitz_core", "count": 1, "chance": [1, 32] },
             { "id": "grindless:gamma_absorber_tile", "count": 1, "chance": [1, 8] }

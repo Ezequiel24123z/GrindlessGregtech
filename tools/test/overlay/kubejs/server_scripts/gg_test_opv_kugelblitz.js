@@ -4,10 +4,10 @@
 //   hold 1/64, so the row is plain recipe JSON with chance 1 and maxChance 64):
 //     lookup     the seven rows and the two controllers' assembly lines are in the recipe manager
 //     wear_json  the loaded c1 / c2 / seed rows hold the core and optics at chance 1, maxChance 64 (c2: 1/32)
-//     wear_roll  GTM's own chance logic, rolled 20,000 times on the loaded core content, keeps the core about 1/64 of the time (NOTE if the API drifted)
+//     wear_roll  GTM's own chance logic, rolled 20,000 times on the loaded core content, consumes the core about 1/64 of the time
 //     formed     forge and collector form in the orbit dimension with their hatches
 //     hp_eut     the collector's c1 starts and is 1,073,741,824 EU/t (a long)
-//     hp_dynamo  two OpV 1 A dynamo hatches whose voltage x amperage add up to 2^30 hold energy after the run starts
+//     hp_dynamo  two OpV 1 A dynamos write exactly 2^30 EU per productive tick for the first 1,200 ticks, then stop
 (function () {
   var S = null
   var C = null
@@ -188,7 +188,7 @@
       }
       // 1/64 of 20,000 = 312.5, sigma 17.5: accept 250..375 (3.5 sigma)
       check('wear_roll', kept >= 250 && kept <= 375, kept + ' of ' + N + ' rolls consumed the core (1/64 expects 312)')
-    } catch (e) { note('wear_roll', 'the chance logic API drifted, not sampled: ' + errText(e)) }
+    } catch (e) { check('wear_roll', false, 'the chance logic API drifted, not sampled: ' + errText(e)) }
   }
 
   function registrationChecks() {
@@ -213,6 +213,9 @@
   function startRun(u) {
     setBus(u.bus, [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:stable_exotic_matter', 1], ['grindless:kugelblitz_core', 1], ['grindless:gamma_absorber_tile', 1]])
     u.last = u.m.getRecipeLogic().getLastRecipe()
+    u.productiveTicks = 0
+    u.euWritten = 0
+    u.dyn.forEach(function (h) { h.energyContainer.setEnergyStored(0) })
     u.started = S.tick
     u.phase = 'run'
   }
@@ -238,6 +241,7 @@
         try { var io = classes().RecipeHelper.getRealEUtWithIO(rec); eut = io.isEmpty() ? 0 : Math.abs(Number(io.getTotalEU())) } catch (e) { }
         note(u.name + '_measured', 'recipe ' + String(rec.id) + ', EU/t ' + eut + ', max voltage ' + m.getMaxVoltage())
         check('hp_eut', eut === EUT, 'expected ' + EUT + ' EU/t, got ' + eut + '; reasons ' + reasons(m))
+        u.dyn.forEach(function (h) { h.energyContainer.setEnergyStored(0) })
         u.phase = 'wait'
         u.started = S.tick
       } else if (waited > 300) {
@@ -247,16 +251,31 @@
       return
     }
     if (u.phase === 'wait') {
-      if (waited < 60) return
       var cap = 0
       var stored = 0
       u.dyn.forEach(function (h) {
         var ec = h.energyContainer
         cap += Number(ec.getOutputVoltage()) * Number(ec.getOutputAmperage())
         stored += Number(ec.getEnergyStored())
+        ec.setEnergyStored(0)
       })
-      check('hp_dynamo', cap >= EUT && stored > 0, 'dynamo hatches push ' + cap + ' EU/t (needs ' + EUT + '), hold ' + stored + ' EU after 60 ticks; working ' + rlg.isWorking())
-      u.phase = 'done'
+      if (stored > 0) {
+        if (stored !== EUT) {
+          check('hp_dynamo', false, 'one productive tick wrote ' + stored + ' EU, expected ' + EUT)
+          u.phase = 'done'
+          return
+        }
+        u.productiveTicks++
+        u.euWritten += stored
+      }
+      if (u.productiveTicks === 1200) {
+        check('hp_dynamo', cap >= EUT && u.euWritten === EUT * 1200,
+          'capacity ' + cap + ' EU/t; first 1200 productive ticks wrote ' + u.euWritten + ' EU; expected ' + (EUT * 1200))
+        u.phase = 'done'
+      } else if (waited > 1500) {
+        check('hp_dynamo', false, 'only ' + u.productiveTicks + ' productive ticks in 1500 ticks; reasons ' + reasons(m))
+        u.phase = 'done'
+      }
     }
   }
 
