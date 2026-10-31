@@ -51,7 +51,6 @@
     launched_belt_seed: { stack: 1 },
     universe_seed: { stack: 1 },
     max_epilogue: { stack: 16 },
-    max_smes_cell: { stack: 16 },
     horizon_strand_repeater: { stack: 16 },
     silicate_slag: { stack: 64 },
     iron_core_fragment: { stack: 64 },
