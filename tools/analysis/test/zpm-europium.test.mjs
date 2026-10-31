@@ -141,7 +141,7 @@ test('the cascade has circuit 5 (ZPM mode) beside circuits 1 and 2 with no looku
   const rows = EC.recipes;
   // circuits 8-11: UEV-A4's Zr/Hf, Ta, Tb and La/Y rows; 12-13: UIV-A3's Nb/Ta split and melter dross digestion; 14-21: UXV-A2; 22: UXV-B5's ejecta Ti fraction; 23: OpV-A1's GeCl4 scrub
   // 24, 26, 27: OpV-A2's Si-28 trichlorosilane, InP scrap and GaN exhaust rows (pinned in opv-circuits.test.mjs); 25: OpV-B1's failed tetron die recovery; 28-29: OpV-R1's rejected timing head and MMIC tile recoveries; MAX-H1: 32; 30-31: MAX-A2's YBCO precursor and Tb/Dy strip
-  assert.deepEqual(rows.map((r) => r.circuit).sort((a, b) => a - b), [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]);
+  assert.deepEqual(rows.map((r) => r.circuit).sort((a, b) => a - b), [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 30, 31, 31, 32, 32]); // MAX-B1 repeats c30-32 with other item inputs
   const z = rows.find((r) => r.circuit === 5);
   assert.equal(z.name, 'monazite_froth_europium');
   assert.equal(z.mode, 'zpm');
@@ -154,7 +154,7 @@ test('the cascade has circuit 5 (ZPM mode) beside circuits 1 and 2 with no looku
   // what the reductor takes is what the cascade makes
   assert.equal(ER.recipes[0].fluidsIn[0].id, z.fluidsOut[0].id);
   // the circuit tells the modes apart: the three keysets differ in their circuit even though the cascade's other rows share fluids
-  assert.equal(new Set(rows.map((r) => r.circuit)).size, rows.length);
+  // c30-32 repeat (MAX-A2, MAX-H1, MAX-B1) with other item inputs: the keyset is the circuit plus the items\n  assert.equal(new Set(rows.map((r) => r.circuit + '|' + r.itemsIn.map((x) => x.id).sort().join(','))).size, rows.length);
 });
 
 test('every new name and tooltip has en_us and es_es text', () => {

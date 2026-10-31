@@ -148,6 +148,18 @@
     "chemical_bath": {
       "recipes": [
         {
+          "name": "primed_belt_web", "circuit": 0, "eut": 1966080, "duration": 300, "_why": "MAX-B1 L11: the PBO belt web primed in silane",
+          "itemsIn": [{ "id": "grindless:pbo_belt_web", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:silane", "amount": 200 }],
+          "itemsOut": [{ "id": "grindless:primed_belt_web", "count": 1 }]
+        },
+        {
+          "name": "electropolished_cu111_foil", "circuit": 0, "eut": 1966080, "duration": 300, "_why": "MAX-B1 L34: the Cu(111) foil electropolished in phosphoric acid",
+          "itemsIn": [{ "id": "grindless:cu111_foil", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:phosphoric_acid", "amount": 200 }],
+          "itemsOut": [{ "id": "grindless:electropolished_cu111_foil", "count": 1 }]
+        },
+        {
           "name": "pmma_coated_wafer", "circuit": 0, "eut": 30720, "duration": 200, "cleanroom": true,
           "itemsIn": [{ "id": "gtceu:hpic_wafer", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:pmma_resist", "amount": 144 }],

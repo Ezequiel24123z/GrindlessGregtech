@@ -29,7 +29,7 @@ test('the stand-in runs the UXV-A5 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(SL.skipped), []);
   assert.deepEqual(plain(SL.clashes), []);
-  assert.equal(SL.recipes.length, 12 + 1 + 1); // MAX-H1 appended racetrack c3 racetrack_memory_die (line 38); MAX-A2 LPE c4 bi_yig_film (line 31)
+  assert.equal(SL.recipes.length, 12 + 1 + 1 + 1); // MAX-B1 vdW c5 graphene_hbn_film (L2); MAX-H1 appended racetrack c3 racetrack_memory_die (line 38); MAX-A2 LPE c4 bi_yig_film (line 31)
 });
 
 test('5 items registered by the startup file, named in en_us and es_es', () => {
@@ -46,7 +46,7 @@ test('5 items registered by the startup file, named in en_us and es_es', () => {
 
 test('the vdW stacking rows: circuits 1-4, argon, flakes, broken flakes as GT dusts', () => {
   const rows = SL.recipes.filter((r) => r.type === 'vdw_stacking');
-  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['wte2_flake', 1], ['fgt_flake', 2], ['hbn_flake', 3], ['sot_heterostack', 4]]);
+  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['wte2_flake', 1], ['fgt_flake', 2], ['hbn_flake', 3], ['sot_heterostack', 4], ['graphene_hbn_film', 5]]);
   assert.deepEqual(plain(ids(rec('vdw_stacking', 'wte2_flake').itemsIn)), ['grindless:wte2_crystal']);
   assert.deepEqual(plain(ids(rec('vdw_stacking', 'fgt_flake').itemsIn)), ['grindless:fgt_crystal']);
   assert.deepEqual(plain(ids(rec('vdw_stacking', 'hbn_flake').itemsIn)), ['grindless:hbn_crystal']);
@@ -157,7 +157,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('older rows: only the hall row sits outside this package\'s files', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_logic\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 1 + 1 + 3, 'rows, MAX-H1\'s racetrack c3, MAX-A2\'s LPE c4 and three controllers');
+  assert.equal(mine.length, 12 + 1 + 1 + 1 + 3, 'rows, MAX-B1\'s vdW c5, MAX-H1\'s racetrack c3, MAX-A2\'s LPE c4 and three controllers');
 });
 
 test('the held F1 ids are free: the A5 hold rules are deleted, the pending EMI entries too', () => {
