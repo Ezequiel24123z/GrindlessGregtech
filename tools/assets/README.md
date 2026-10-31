@@ -1654,3 +1654,12 @@ Procedural, drawn by `Build-OpVBeamHardwareTextures.ps1` with the shape routines
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVBeamHardwareTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVBeamHardwareTextures.ps1 -Credits
 ```
+
+## OpV tetron fab and gamma optics works (OpV-B1)
+
+Procedural, drawn by `Build-OpVTetronOpticsTextures.ps1` with the method and steel bezel of `Build-UXVShequidMntTextures.ps1` and a new palette per item; nothing is copied from another mod. It writes the controller faces of `gtceu:tetron_fab` and `gtceu:gamma_optics_works` (`block/multiblock/<machine>/overlay_front`, `overlay_front_active` and `overlay_front_active_emissive`, the animated ones with their `.mcmeta`) and the 13 item icons that `startup_scripts/grindless/opv/tetron_optics.js` registers (`item/<id>.png`).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVTetronOpticsTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVTetronOpticsTextures.ps1 -Credits
+```

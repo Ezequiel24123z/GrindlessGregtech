@@ -293,7 +293,9 @@
    "gtceu:steam_observatory"
   ],
   "opv": [
-   "gtceu:field_frozen_press"
+   "gtceu:field_frozen_press",
+   "gtceu:gamma_optics_works",
+   "gtceu:tetron_fab"
   ],
   "power": [
    "gtceu:generator_array"
