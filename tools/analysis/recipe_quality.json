@@ -69,9 +69,10 @@
  "exemptRecipes": [
   "^grindless:crafting/retired/",
   "^grindless:assembler/chain_strand_repeater$",
-  "^grindless:assembler/opv_smes_cell$"
+  "^grindless:assembler/opv_smes_cell$",
+  "^grindless:assembler/opv_(assembler|packer|bender|lathe|macerator|rock_crusher|chemical_bath|cutter|extractor|laser_engraver|scanner|circuit_assembler|autoclave|brewery|canner|distillery|electrolyzer|fermenter|fluid_heater|fluid_solidifier|gas_collector|centrifuge|chemical_reactor|mixer|ore_washer|thermal_centrifuge|wiremill|compressor|extruder|forge_hammer|forming_press|sifter|alloy_smelter|arc_furnace|electric_furnace|electromagnetic_separator|polarizer)$"
  ],
- "_exemptRecipes": "Recipes no rule applies to: retired conversions; and, pending a rework of OpV-W's two assembler rows (server_scripts/grindless/opv/wireless.js), the chain strand repeater and the OpV SMES cell, which cannot reach complexFloor 13 (10) at any depth (at most 9.5 and 8.5: three item inputs in a plain assembler); OpV-F2 turned the floor on for the era and held these two by id; the rework (more inputs, fluids, research or another form) deletes both lines.",
+ "_exemptRecipes": "Recipes no rule applies to: retired conversions; and, pending a rework of OpV-W's two assembler rows (server_scripts/grindless/opv/wireless.js), the chain strand repeater and the OpV SMES cell, which cannot reach complexFloor 13 (10) at any depth (at most 9.5 and 8.5: three item inputs in a plain assembler); OpV-F2 turned the floor on for the era and held these two by id; the rework (more inputs, fluids, research or another form) deletes both lines. OpV-A4's 37 basic machines (tables/opv_basic_machines.json) are exempt from S-FORM (singles at tier 6 or above in the assembly line): GTM itself makes basic machines in the assembler or at the crafting table, and GTM wins (principle 6); each row already has at least 6 distinct inputs (hull, components, OpV circuits, chain cables, lamina, solder). Singles get no other rule, so the exemption waives S-FORM only; the regex names the 37 machines, not every OpV assembler row.",
  "voltBootstrap": [
   "^gtceu:(uhv|uev|uiv|uxv|opv|max)_energy_(input|output)_hatch_(4|16|64)a$"
  ],
