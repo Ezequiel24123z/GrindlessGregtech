@@ -104,6 +104,14 @@
             { "id": "gtnn:spintronic_mainframe", "count": 4 }
           ],
           "itemsOut": [{ "id": "grindless:bulge_chart", "count": 1 }]
+        },
+        {
+          "_why": "OpV-R1 (docs/eras/opv.md R1): the pathfinder probe is thrown from the Cygnus X-1 orbit to Terzan 5; the c12 hold places its platform (relay_platforms.json terzan5) and the tier model grants opv-terzan5. The probe is the whole cost: nothing is kept.",
+          "name": "hold_terzan5",
+          "circuit": 12, "eut": 1073741824, "duration": 2400, "site": "cygnus_x1_orbit",
+          "itemsIn": [{ "id": "grindless:pathfinder_probe", "count": 1 }],
+          "kept": [],
+          "itemsOut": [{ "id": "grindless:launched_pathfinder", "count": 1 }]
         }
       ]
     },
