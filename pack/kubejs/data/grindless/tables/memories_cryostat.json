@@ -49,8 +49,9 @@
           "itemsOut": [{ "id": "grindless:cold_plate", "count": 1 }]
         },
         {
+          "_why": "repeater fibre: the preform is drawn rod-in-tube inside a fused silica jacket, and a hermetic carbon layer goes on in-line under the acrylate so hydrogen cannot darken the erbium core",
           "name": "er_fibre", "circuit": 22, "eut": 122880, "duration": 400,
-          "itemsIn": [{ "id": "grindless:er_preform", "count": 1 }, { "id": "gtceu:glass_dust", "count": 1 }, { "id": "gtceu:silicon_dust", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:er_preform", "count": 1 }, { "id": "grindless:fused_silica_tube", "count": 1 }, { "id": "gtceu:glass_dust", "count": 1 }, { "id": "gtceu:silicon_dust", "count": 1 }, { "id": "gtceu:carbon_dust", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:acrylate_coating", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:er_fibre", "count": 8 }]
         },
