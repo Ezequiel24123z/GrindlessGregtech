@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const kube = path.resolve(here, '..', '..', '..', 'pack', 'kubejs');
@@ -101,4 +102,61 @@ test('no input of either line comes back through a loop', () => {
   assert.ok(!ids(er.itemsOut).some((x) => /er3ni_spheres|charged_pulse_tube|shell_cryocooler/.test(x)));
   assert.ok(!ids(L38[0].itemsOut).includes('gtca:silicon_carbide_dust'));
   assert.ok(!ids(L38[2].itemsOut).includes('grindless:sic_cmos_wafer'));
+});
+
+// MAX-CS: the extraction cascade's loader in a sandbox (OpV-F3's rule, as in uev-electron_beam.test.mjs): shipped rows load unchanged,
+// a circuit repeats only with other item inputs, circuits stay 1..32, subset pairs are reported in clashes
+function cascadeSandbox() {
+  const errors = [];
+  const ctx = {
+    global: {},
+    ServerEvents: { recipes: () => {} },
+    Item: { exists: () => true },
+    Fluid: { exists: () => true, of: (id, amount) => ({ id, amount }) },
+    console: { info: () => {}, error: (s) => errors.push(String(s)) }
+  };
+  vm.createContext(ctx);
+  vm.runInContext(cascade, ctx, { filename: 'extraction_cascade.js' });
+  return { EC: ctx.global.grindless.extractionCascade, errors };
+}
+const crow = (circuit, name, items, extra = {}) => ({
+  name, circuit, eut: 1920, duration: 100, itemsIn: items.map((id) => ({ id, count: 1 })), fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 1000 }],
+  itemsOut: [], fluidsOut: [], ...extra
+});
+
+test('MAX-CS: the cascade loads every shipped row unchanged (no problem, no clash, circuits 1-32 each once)', () => {
+  const { EC, errors } = cascadeSandbox();
+  assert.deepEqual(errors, []);
+  const circuits = [...EC.recipes.map((r) => r.circuit)];
+  assert.equal(EC.recipes.length, [...cascade.matchAll(/mode: '[a-z]+', circuit: \d+/g)].length);
+  assert.equal(new Set(circuits).size, circuits.length);
+  assert.ok(circuits.every((c) => c >= 1 && c <= 32));
+  assert.deepEqual(Array.from(EC.clashes), []);
+});
+
+test('MAX-CS: the cascade lets a circuit repeat with other item inputs, refuses identical ones and circuits 0 and 33', () => {
+  const { EC } = cascadeSandbox();
+  const ok = EC.loadRows([crow(21, 'a', ['minecraft:clay_ball', 'minecraft:flint']), crow(21, 'b', ['minecraft:clay_ball', 'minecraft:snowball'])]);
+  assert.deepEqual(Array.from(ok, (r) => r.name), ['a', 'b']);
+  const errors = [];
+  const { EC: EC2, errors: errs } = cascadeSandbox();
+  errs.length = 0;
+  const rows = EC2.loadRows([
+    crow(21, 'a', ['minecraft:clay_ball', 'minecraft:flint']),
+    crow(21, 'same', [], { itemsIn: [{ id: 'minecraft:flint', count: 2 }, { id: 'minecraft:clay_ball', count: 1 }] }),
+    crow(33, 'c33', ['minecraft:stick']),
+    crow(0, 'c0', ['minecraft:bone'])
+  ]);
+  assert.deepEqual(Array.from(rows, (r) => r.name), ['a']);
+  assert.equal(errs.length, 1);
+  assert.match(errs[0], /same: circuit 21 repeats a with the same item inputs/);
+  assert.match(errs[0], /c33: name, circuit 33/);
+  assert.match(errs[0], /c0: name, circuit 0/);
+  assert.deepEqual(errors, []);
+});
+
+test('MAX-CS: the cascade reports a same-circuit subset pair in clashes', () => {
+  const { EC } = cascadeSandbox();
+  const rows = EC.loadRows([crow(21, 'a', ['minecraft:clay_ball']), crow(21, 'b', ['minecraft:clay_ball', 'minecraft:snowball']), crow(22, 'c', ['minecraft:clay_ball'])]);
+  assert.deepEqual(Array.from(EC.clashesOf(rows)), ['a / b']);
 });

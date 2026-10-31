@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..', '..', '..');
@@ -54,8 +55,9 @@ const producers = (id) => allRows().filter(([, r]) => outputs(r).includes(id));
 test('every recipe has a unique name, a positive EU/t and duration; circuits are unique inside a type; the machines\' rows all carry one', () => {
   for (const [type, t] of Object.entries(T.types)) {
     assert.equal(new Set(t.recipes.map((r) => r.name)).size, t.recipes.length, type);
-    const circuits = t.recipes.map((r) => r.circuit).filter((c) => c > 0);
-    assert.equal(new Set(circuits).size, circuits.length, type);
+    // OpV-F3 rule: a circuit repeats inside a type only when the item ids (consumed and kept) differ
+    const paths = t.recipes.filter((r) => r.circuit > 0).map((r) => `${r.circuit}|${[...new Set(ids(r.itemsIn).concat(ids(r.kept)))].sort().join(',')}`);
+    assert.equal(new Set(paths).size, paths.length, type);
     for (const r of t.recipes) {
       assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
       if (t.dataKey) assert.ok(r.circuit >= 1 && r.circuit <= 32, `${type}/${r.name}: one recipe per lookup path needs a circuit`);
@@ -201,3 +203,91 @@ test('no UEV input, and every lang key is written in en_us and es_es', () => {
     assert.ok(re.test(lang), k);
   }
 });
+
+// MAX-CS: the server script itself in a sandbox on the shipped table or a probe table (the OpV-F3 tests of uev-electron_beam.test.mjs, per type)
+function runLoader(table) {
+  const errors = [];
+  const built = [];
+  let handler = null;
+  const builder = (type, id) => {
+    const rec = { type, id, calls: [] };
+    built.push(rec);
+    const b = new Proxy({}, { get: (_, k) => (...args) => { rec.calls.push([String(k), ...args]); return b; } });
+    return b;
+  };
+  const machines = { lab: { machine: 'gtceu:nuclear_clock_lab', type: 'nuclear_clock', maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 } },
+    furnace: { machine: 'gtceu:crystal_growth_furnace', type: 'crystal_growth', maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 2, fluidsOut: 0 } } };
+  const ctx = {
+    global: { grindless: { crystals: { machines }, platinumPlant: { maxIO: { itemsIn: 6, itemsOut: 6, fluidsIn: 6, fluidsOut: 6 } }, readJsonTable: () => JSON.parse(JSON.stringify(table)) } },
+    ServerEvents: { recipes: (fn) => { handler = fn; } },
+    Item: { exists: () => true },
+    Fluid: { exists: () => true, of: (id, amount) => ({ id, amount }) },
+    console: { info: () => {}, error: (s) => errors.push(String(s)) }
+  };
+  vm.createContext(ctx);
+  vm.runInContext(server, ctx, { filename: 'crystals.js' });
+  assert.equal(typeof handler, 'function');
+  handler({ recipes: { gtceu: new Proxy({}, { get: (_, type) => (id) => builder(String(type), id) }) } });
+  const CRS = ctx.global.grindless.crystals;
+  return { errors, built, names: Array.from(CRS.recipes || [], (r) => `${r.type}/${r.name}`), clashes: Array.from(CRS.clashes || []) };
+}
+const circuitOf = (b) => (b.calls.find((c) => c[0] === 'circuit') || [])[1];
+const probe = (circuit, name, items, out, extra = {}) => ({
+  name, circuit, eut: 30, duration: 40, itemsIn: items.map((id) => ({ id, count: 1 })), kept: [], fluidsIn: [], charge: [],
+  itemsOut: [{ id: out, count: 1 }], fluidsOut: [], ...extra
+});
+const probeTable = (type, rows) => ({ types: { [type]: { dataKey: 'probe_key', recipes: rows } } });
+
+test('MAX-CS: the loader builds every shipped row unchanged: no problem, no skip, no clash, each on its own circuit', () => {
+  const run = runLoader(T);
+  assert.deepEqual(run.errors, []);
+  const rows = Object.entries(T.types).flatMap(([type, t]) => t.recipes.map((r) => [type, r]));
+  assert.equal(run.names.length, rows.length);
+  assert.deepEqual(run.clashes, []);
+  for (const [type, r] of rows) {
+    const b = run.built.filter((x) => x.type === type && x.id === `grindless:${type}/${r.idPrefix || T.types[type].idPrefix || ''}${r.name}`);
+    assert.equal(b.length, 1, `${type}/${r.name}: built once`);
+    assert.equal(circuitOf(b[0]), r.circuit > 0 ? r.circuit : undefined, `${type}/${r.name}: circuit`);
+  }
+});
+
+for (const type of ['crystal_growth', 'nuclear_clock']) {
+  test(`MAX-CS: ${type}: two rows may share a circuit when their item inputs differ`, () => {
+    const run = runLoader(probeTable(type, [
+      probe(21, 'probe_a', ['minecraft:clay_ball', 'minecraft:flint'], 'minecraft:poppy'),
+      probe(21, 'probe_b', ['minecraft:clay_ball', 'minecraft:snowball'], 'minecraft:allium')
+    ]));
+    assert.deepEqual(run.errors, []);
+    assert.deepEqual(run.names, [`${type}/probe_a`, `${type}/probe_b`]);
+    assert.deepEqual(run.clashes, []);
+    for (const n of ['probe_a', 'probe_b']) assert.equal(circuitOf(run.built.find((x) => x.id === `grindless:${type}/${n}`)), 21, n);
+  });
+
+  test(`MAX-CS: ${type}: identical item inputs (ids, consumed or kept) are refused; circuits 33 and 0 are refused`, () => {
+    const run = runLoader(probeTable(type, [
+      probe(21, 'probe_a', ['minecraft:clay_ball', 'minecraft:flint'], 'minecraft:poppy'),
+      probe(21, 'probe_same', [], 'minecraft:allium', { itemsIn: [{ id: 'minecraft:flint', count: 2 }, { id: 'minecraft:clay_ball', count: 1 }] }),
+      probe(21, 'probe_kept', ['minecraft:clay_ball'], 'minecraft:allium', { kept: [{ id: 'minecraft:flint', count: 1 }] }),
+      probe(33, 'probe_33', ['minecraft:stick'], 'minecraft:poppy'),
+      probe(0, 'probe_0', ['minecraft:bone'], 'minecraft:poppy')
+    ]));
+    assert.deepEqual(run.names, [`${type}/probe_a`]);
+    assert.equal(run.errors.length, 1);
+    assert.match(run.errors[0], /probe_same: circuit 21 repeats probe_a with the same item inputs/);
+    assert.match(run.errors[0], /probe_kept: circuit 21 repeats probe_a with the same item inputs/);
+    assert.match(run.errors[0], /probe_33: name, circuit 33/);
+    assert.match(run.errors[0], /probe_0: name, circuit 0/);
+  });
+
+  test(`MAX-CS: ${type}: a same-circuit pair whose item inputs are a subset is reported in clashes`, () => {
+    const run = runLoader(probeTable(type, [
+      probe(21, 'probe_a', ['minecraft:clay_ball'], 'minecraft:poppy'),
+      probe(21, 'probe_b', ['minecraft:clay_ball', 'minecraft:snowball'], 'minecraft:allium'),
+      probe(22, 'probe_c', ['minecraft:clay_ball'], 'minecraft:poppy')
+    ]));
+    assert.deepEqual(run.names, [`${type}/probe_a`, `${type}/probe_b`, `${type}/probe_c`]);
+    assert.deepEqual(run.clashes, [`${type}/probe_a / probe_b`]);
+    assert.equal(run.errors.length, 1);
+    assert.match(run.errors[0], new RegExp(`subset of another's: ${type}/probe_a / probe_b$`));
+  });
+}
