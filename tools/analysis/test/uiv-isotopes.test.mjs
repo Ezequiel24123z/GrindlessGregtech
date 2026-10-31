@@ -176,8 +176,9 @@ test('MBE row: circuit 4, the multilayer grown on glass; the cage line from NiCl
   assert.equal(OWN.vacuum_freezer.recipes[0].circuit, 0);
   assert.deepEqual(ids(OWN.vacuum_freezer.recipes[0].itemsOut), ['gtceu:titanium_tetrachloride_ice_dust']);
   for (const id of ['grindless:cage_part', 'grindless:neutron_guide', 'grindless:neutron_supermirror', 'grindless:ni58_ti_multilayer', 'grindless:ti50_oven_charge']) {
-    // UXV-B4 adds a second cage_part source (the circuit-less cage_part_pressing companion row)
-    assert.equal(tableProducers(id).length, id === 'grindless:cage_part' ? 2 : 1, id);
+    // UXV-B4 adds a second cage_part source (the circuit-less cage_part_pressing companion row);
+    // OpV-B2's EB ni_chain_thaw row returns the cage as a third
+    assert.equal(tableProducers(id).length, id === 'grindless:cage_part' ? 3 : 1, id);
     // UXV-B4's loader names cage_part (the circuit-less cage_part_pressing companion)
     assert.deepEqual(scriptsMentioning(id).map((f) => path.basename(f)), id === 'grindless:cage_part' ? ['vela_pasta.js'] : [], id);
   }

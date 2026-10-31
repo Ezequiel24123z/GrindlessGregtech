@@ -38,3 +38,4 @@ jobs:
           path: tools/.check-fast/
           retention-days: 14
           if-no-files-found: ignore
+          include-hidden-files: true

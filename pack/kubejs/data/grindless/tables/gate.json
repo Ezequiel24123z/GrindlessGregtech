@@ -106,6 +106,14 @@
           "itemsOut": [{ "id": "grindless:bulge_chart", "count": 1 }]
         },
         {
+          "_why": "OpV-A0: c11 throw of the bulge relay seed to SGR 1806-20 from Cygnus X-1, 16 A x V[UXV] = 2^31 EU/t for 120 s on two UXV 16 A hatches; the bulge chart (c10's) stays in the bus to aim it, the seed leaves launched and UXV-B1's poller places F1's SGR platform (opv/bulge_relay.js keeps the run across a restart)",
+          "name": "hold_sgr1806",
+          "circuit": 11, "eut": 2147483648, "duration": 2400, "site": "cygnus_x1_orbit",
+          "itemsIn": [{ "id": "grindless:bulge_relay_seed", "count": 1 }],
+          "kept": [{ "id": "grindless:bulge_chart", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:launched_bulge_seed", "count": 1 }]
+        },
+        {
           "_why": "OpV-R1 (docs/eras/opv.md R1): the pathfinder probe is thrown from the Cygnus X-1 orbit to Terzan 5; the c12 hold places its platform (relay_platforms.json terzan5) and the tier model grants opv-terzan5. The probe is the whole cost: nothing is kept.",
           "name": "hold_terzan5",
           "circuit": 12, "eut": 1073741824, "duration": 2400, "site": "cygnus_x1_orbit",

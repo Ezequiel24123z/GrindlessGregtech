@@ -1,5 +1,5 @@
 {
-  "_how_it_is_used": "server_scripts/grindless/uxv/vela_pasta.js makes one recipe per entry, id grindless:<name> (GTM prefixes the type), with its programmed circuit (circuit 0 = none, only where a type lists 'noCircuit'); 'site' true locks the recipe to grindless:vela_pulsar_orbit, a string names another site; 'kept' are not consumed; 'wear' is a kept input that a chance consumes (per ten thousand). pasta_extraction, pasta_sorting, pasta_drawing and pasta_lamination are package UXV-B4's machine types, polar_cap_tapping is its generator (eut is what it makes); neutronium_caging is UIV's type (a companion row with its slots in 'maxIO'). Package UXV-B4, docs/eras/uxv.md machines 16-20 and process lines 32, 33.",
+  "_how_it_is_used": "server_scripts/grindless/uxv/vela_pasta.js makes one recipe per entry, id grindless:<name> (GTM prefixes the type), with its programmed circuit (circuit 0 = none, only where a type lists 'noCircuit'); 'site' true locks the recipe to grindless:vela_pulsar_orbit, a string names another site; 'kept' are not consumed; 'wear' is a kept input that a chance consumes (per ten thousand). pasta_extraction, pasta_sorting, pasta_drawing and pasta_lamination are package UXV-B4's machine types, polar_cap_tapping is its generator (eut is what it makes); neutronium_caging is UIV's type (a companion row with its slots in 'maxIO'). Package UXV-B4, docs/eras/uxv.md machines 16-20 and process lines 32, 33. Rows whose _why starts with OpV-A0 are the chain matter modes at grindless:sgr1806_orbit (docs/eras/opv.md process lines 1 and 2): circuits 3-5, the cage part consumed.",
   "types": {
     "pasta_extraction": {
       "dataKey": "grindless_pasta_extraction",
@@ -12,6 +12,36 @@
           "wear": [{ "id": "grindless:neutronium_pellet", "count": 1, "chance": 1000 }],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:raw_pasta", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0 line 1, c3 at SGR 1806-20: the bulge chart (kept) points the funnel at the Fe-56 chain crust; one pellet in ten is spent as bait (opv.md rate: 1 slab per 600 t)",
+          "name": "chain_crust", "circuit": 3, "eut": 134217728, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [],
+          "kept": [{ "id": "grindless:bulge_chart", "count": 1 }],
+          "wear": [{ "id": "grindless:neutronium_pellet", "count": 1, "chance": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:chain_crust_slab", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0, c4 at SGR 1806-20: the Ni-62/64 chain layer, F1's ni_chain_slab (opv.md rate: 1 slab per 1,200 t; caged by sorting c4, thawed by OpV-B2)",
+          "name": "ni_chain", "circuit": 4, "eut": 134217728, "duration": 1200, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [],
+          "kept": [{ "id": "grindless:bulge_chart", "count": 1 }],
+          "wear": [{ "id": "grindless:neutronium_pellet", "count": 1, "chance": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:ni_chain_slab", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0 line 2, c5 at SGR 1806-20: the deeper outer crust, where the chains condense into a lattice (Medin & Lai 2006; opv.md rate: 1 slab per 600 t)",
+          "name": "chain_lattice", "circuit": 5, "eut": 134217728, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [],
+          "kept": [{ "id": "grindless:bulge_chart", "count": 1 }],
+          "wear": [{ "id": "grindless:neutronium_pellet", "count": 1, "chance": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:chain_lattice_slab", "count": 1 }],
           "fluidsOut": []
         }
       ]
@@ -44,6 +74,48 @@
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:pasta_core_sample", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0 line 1, c3 at SGR 1806-20: a crust slab closed in a cage part (consumed: the cage leaves with the phase and is spent when the draw bench opens it); the iron that was never chained falls out as dust",
+          "name": "chain_caging", "circuit": 3, "eut": 67108864, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [
+            { "id": "grindless:chain_crust_slab", "count": 1 },
+            { "id": "grindless:cage_part", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:caged_chain_phase", "count": 1 },
+            { "id": "gtceu:iron_dust", "count": 2 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0, c4 at SGR 1806-20: a Ni chain slab closed in a cage part (consumed) for the trip home; OpV-B2's electron beam c23 thaws it",
+          "name": "ni_chain_caging", "circuit": 4, "eut": 67108864, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [
+            { "id": "grindless:ni_chain_slab", "count": 1 },
+            { "id": "grindless:cage_part", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:caged_ni_chain", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0 line 2, c5 at SGR 1806-20: a lattice slab closed in a cage part (consumed: spent when the laminator presses it); the unchained iron falls out as dust",
+          "name": "lattice_caging", "circuit": 5, "eut": 67108864, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [
+            { "id": "grindless:chain_lattice_slab", "count": 1 },
+            { "id": "grindless:cage_part", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:caged_chain_lattice", "count": 1 },
+            { "id": "gtceu:iron_dust", "count": 2 }
+          ],
+          "fluidsOut": []
         }
       ]
     },
@@ -60,6 +132,24 @@
           "kept": [{ "id": "grindless:cage_part", "count": 1 }],
           "fluidsIn": [],
           "itemsOut": [{ "id": "gtceu:pasta_strand_single_wire", "count": 8 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0 line 1, c3 at SGR 1806-20: the caged chain phase is drawn out of its cage (spent) into four chain strand ingots",
+          "name": "chain_strand_drawing", "circuit": 3, "eut": 134217728, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [{ "id": "grindless:caged_chain_phase", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:chain_strand_ingot", "count": 4 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0 line 1, c4 at SGR 1806-20: a chain strand ingot is drawn into two single wires (GTM's own wire ratio is cut by OpV-F2: the strand only draws here)",
+          "name": "chain_wire_drawing", "circuit": 4, "eut": 67108864, "duration": 300, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [{ "id": "gtceu:chain_strand_ingot", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:chain_strand_single_wire", "count": 2 }],
           "fluidsOut": []
         }
       ]
@@ -89,6 +179,39 @@
           "kept": [],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:lasagna_electrode", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0 line 2, c3 at SGR 1806-20: the caged lattice is pressed out of its cage (spent) into four chain laminae",
+          "name": "chain_lamina", "circuit": 3, "eut": 134217728, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [{ "id": "grindless:caged_chain_lattice", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:chain_lamina", "count": 4 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0 line 2, c4 at SGR 1806-20: two chain laminae bonded on a lasagna plate into F1's chain lamina stack (the hull's and every OpV component's part)",
+          "name": "chain_lamina_stack", "circuit": 4, "eut": 134217728, "duration": 400, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [
+            { "id": "grindless:chain_lamina", "count": 2 },
+            { "id": "grindless:lasagna_plate", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:chain_lamina_stack", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A0 for line 6, c5 at SGR 1806-20: four PBO fibres woven around two chain strand wires; OpV-A1's electron beam welds the weave into the mesh belt",
+          "name": "chain_mesh_weave", "circuit": 5, "eut": 67108864, "duration": 400, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [
+            { "id": "grindless:pbo_fibre", "count": 4 },
+            { "id": "gtceu:chain_strand_single_wire", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:chain_mesh_weave", "count": 1 }],
           "fluidsOut": []
         }
       ]

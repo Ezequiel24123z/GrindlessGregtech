@@ -128,8 +128,16 @@
       itemsOut: [item(CNT, 4)], fluidsOut: [], eut: UHVA, duration: 400 },
     // UXV-B1: the Whipple bumper, a densified yarn interleaved with aluminium foil (circuit 7; 5 and 6 stay free for the other UXV rows)
     { name: 'bumper_weave', type: 'tether_ribbon', circuit: 7, itemsIn: [item('grindless:cnt_densified_yarn', 1), item('gtceu:aluminium_foil', 2)], fluidsIn: [],
-      itemsOut: [item('grindless:cnt_bumper_weave', 1)], fluidsOut: [], eut: UHVA, duration: 600 }
+      itemsOut: [item('grindless:cnt_bumper_weave', 1)], fluidsOut: [], eut: UHVA, duration: 600 },
+    // OpV-A0 line 1: a chain strand wire braided in PBO fibre (circuit 8), the core of the chain strand cable
+    { name: 'chain_braid', type: 'pbo_synthesis', circuit: 8, itemsIn: [item('gtceu:chain_strand_single_wire', 1), item(PBO, 2)], fluidsIn: [],
+      itemsOut: [item('grindless:pbo_braided_chain_wire', 1)], fluidsOut: [], eut: UHVA, duration: 200 }
   ]
+
+  // OpV-A1 (docs/eras/opv.md, line 6): the PBO trim cut off the welded mesh belt is dissolved back into dope in the polyphosphoric acid
+  // (circuit 9; c8 is OpV-A0's); the dope goes back to the spin row
+  TABLE.push({ name: 'belt_trim_respin', type: 'pbo_synthesis', circuit: 9, itemsIn: [item('grindless:pbo_belt_trim', 4)], fluidsIn: [fluid(PPA, 500)],
+    itemsOut: [], fluidsOut: [fluid(DOPE, 500)], eut: UVA, duration: 300 })
 
   // line 24's side steps on GTM's own machines
   var SIDE = [

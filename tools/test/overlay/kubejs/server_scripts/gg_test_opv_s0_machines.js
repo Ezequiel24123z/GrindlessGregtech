@@ -1,4 +1,4 @@
-// priority: -6254
+// priority: -6879
 // TEST ONLY, OpV-S0 (bench overlay, never shipped; needs the startup overlay on: kubejs/config/gg_test_opv_s0.json {"enabled": true}).
 // Command: kubejs custom_command gg_test_opv_s0_machines. Band ONLY: X 37376-37439, Z 0-63, Overworld Y 70-100. Everything placed is cleared before DONE.
 //   s0_2_*   gtceu:warp_gate on two gtceu:opv_energy_input_hatch_16a runs a recipe at 2^33 EU/t (a long) for 1,200 ticks; per-tick draw, wrap, tier shown

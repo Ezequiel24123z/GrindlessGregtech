@@ -1,4 +1,4 @@
-// priority: -6924
+// priority: -7011
 // Gregtech Grindless - smoke test of the Sealed Dome and the wither rows (package B8, EV). TEST-ONLY overlay: copied over the
 // instance on the test PC, never shipped.
 //

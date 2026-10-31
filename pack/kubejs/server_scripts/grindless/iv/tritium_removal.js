@@ -136,6 +136,27 @@
       '); night ' + RUN.nightEut + ' EU/t = ' + RUN.nightEnergy + ' EU; only in ' + RUN.dimension)
   }
 
+  // OpV-D1 (opv.md line 22): the bred gas baked out of a spent 6LiH shield (the beam's neutrons turned 6Li into T + 4He; some T already
+  // decayed to 3He). The tritium is stripped back out for fusion, the helium-3 goes to the cryogenic plant (line 5's helium_3_6n), and the
+  // remaining 500 mB of helium-4 is inert and vented (an honest void: the facility refuses fluid voiding, so it is simply not an output).
+  function addOpvRows(event) {
+    var missing = ['gtceu:bred_tritium_gas', 'gtceu:deuterium', 'gtceu:tritium', 'gtceu:helium_3'].filter(function (id) { return !Fluid.exists(id) })
+    if (missing.length > 0) {
+      console.error(LOG + 'bred_tritium_gas skipped, unknown fluid(s): ' + missing.join(', '))
+      return
+    }
+    event.recipes.gtceu.detritiation('grindless:bred_tritium_gas')
+      .inputFluids(Fluid.of('gtceu:bred_tritium_gas', 1000))
+      .notConsumableFluid(Fluid.of('gtceu:deuterium', 100))
+      .outputFluids(Fluid.of('gtceu:tritium', 400))
+      .outputFluids(Fluid.of('gtceu:helium_3', 100))
+      .dimension(RUN.dimension)
+      .addDataNumber(TRF.nightKey || 'grindless_night_eut', 3840)
+      .EUt(7680)
+      .duration(400)
+    TRF.recipes.push('grindless:detritiation/bred_tritium_gas')
+  }
+
   function addController(event) {
     var missing = CONTROLLER_PARTS.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
@@ -156,6 +177,11 @@
       addRun(event)
     } catch (e) {
       console.error(LOG + 'tritium removal facility recipe failed: ' + e)
+    }
+    try {
+      addOpvRows(event)
+    } catch (e3) {
+      console.error(LOG + 'tritium removal facility OpV row failed: ' + e3)
     }
     try {
       addController(event)

@@ -1,4 +1,4 @@
-// priority: -6234
+// priority: -6868
 // TEST ONLY, OpV-S0. Command: kubejs custom_command gg_test_opv_s0_dump
 // Disposable read-only spikes, never shipped. Places nothing.
 //   s0_3_*, s0_8_*  the two throwaway datapack places as GCYR loads them: tier 13, gravity, atmosphere, dimensions, orbit lookup

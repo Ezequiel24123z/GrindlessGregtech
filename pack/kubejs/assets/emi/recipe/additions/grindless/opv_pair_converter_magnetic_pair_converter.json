@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:magnetic_pair_converter"],
+  "text": ["emi.grindless.info.magnetic_pair_converter.0", "emi.grindless.info.magnetic_pair_converter.2", "emi.grindless.info.magnetic_pair_converter.1"]
+}

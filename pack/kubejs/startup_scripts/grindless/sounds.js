@@ -1,4 +1,4 @@
-// priority: -6650
+// priority: -6850
 // -----------------------------------------------------------------------------------------------
 // Working-sound loops of our special multiblocks (QR-E0, docs/quality/sounds.md).
 //
@@ -89,7 +89,11 @@
     'gtceu:pasta_lamination': 'loop_pasta_laminator',
     'gtceu:polar_cap_tapping': 'loop_polar_cap_tap',
     'gtceu:ejecta_sweeping': 'loop_ejecta_knot_sweeper',
-    'gtceu:annihilation_lasing': 'loop_annihilation_laser_works'
+    'gtceu:annihilation_lasing': 'loop_annihilation_laser_works',
+    'gtceu:field_freezing': 'loop_field_frozen_press',
+    'gtceu:tetron_assembly': 'loop_tetron_fab',
+    'gtceu:gamma_optics': 'loop_gamma_optics_works',
+    'gtceu:magnetic_pair_production': 'loop_magnetic_pair_converter'
   }
 
   StartupEvents.registry('sound_event', function (event) {

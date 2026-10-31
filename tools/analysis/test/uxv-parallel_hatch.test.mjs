@@ -31,7 +31,7 @@ function load() {
   return { G, registry };
 }
 
-test('the one create covers tiers 9 to 12; tier 12 is named, titled and modelled as the UXV hatch', () => {
+test('the one create covers tiers 9 to 13 (OpV-M1 added 13); tier 12 is named, titled and modelled as the UXV hatch', () => {
   const { registry } = load();
   const machine = registry.find(([t]) => t === 'gtceu:machine');
   const calls = [];
@@ -40,7 +40,7 @@ test('the one create covers tiers 9 to 12; tier 12 is named, titled and modelled
   const b = new Proxy({}, { get: (_, m) => (...a) => { calls.push([m, ...a]); if (m === 'definition') defs.push(a[0]); return b; } });
   machine[1]({ create: () => { creates++; return b; } });
   assert.equal(creates, 1);
-  assert.deepEqual(calls.find((c) => c[0] === 'tiers').slice(1), [9, 10, 11, 12]);
+  assert.deepEqual(calls.find((c) => c[0] === 'tiers').slice(1), [9, 10, 11, 12, 13]);
   const run = (tier) => {
     const rec = [];
     const builder = new Proxy({}, { get: (_, m) => (...a) => { rec.push([m, ...a]); return builder; }, set: () => true });
@@ -60,11 +60,11 @@ test('the one create covers tiers 9 to 12; tier 12 is named, titled and modelled
   assert.deepEqual(plain(run(9).find((c) => c[0].startsWith('tooltips'))[1])[0], 'grindless.machine.uhv_parallel_hatch.tooltip');
 });
 
-test('x65536 is 4^(tier - EV) at tier 12; the list ends UV, UHV, UEV, UIV, UXV', () => {
+test('x65536 is 4^(tier - EV) at tier 12; UV, UHV, UEV, UIV, UXV come in order (OpV after them)', () => {
   assert.equal(4 ** (12 - 4), 65536);
   const { G } = load();
   const list = G.parallelHatch.hatches;
-  assert.deepEqual(plain(list.slice(-5)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch']);
+  assert.deepEqual(plain(list.slice(-6, -1)),  ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch']);
   assert.equal(new Set(list).size, list.length);
 });
 

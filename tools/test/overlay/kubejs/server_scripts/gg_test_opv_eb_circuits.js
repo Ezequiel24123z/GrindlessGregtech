@@ -1,3 +1,4 @@
+// priority: -6824
 // TEST ONLY, OpV-F3 (electron beam circuit space). Command: kubejs custom_command gg_test_opv_eb_circuits
 // Band ONLY: X 37632-37695, Z 0-15, Overworld Y 98-112.
 //   T1 (named uncertainty: GTM's lookup picks the right row when two electron beam recipes share a circuit and differ in one item;

@@ -1,4 +1,4 @@
-// priority: -6424
+// priority: -6956
 // Gregtech Grindless - test of the Hologram Projector (TEST-ONLY overlay: copied over the instance on the test PC, never shipped).
 //
 // SERVER suite, through the published API (global.grindless.projector) with a test inventory (a JS object with a vanilla

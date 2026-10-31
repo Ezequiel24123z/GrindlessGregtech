@@ -292,6 +292,12 @@
    "gtceu:radio_telescope",
    "gtceu:steam_observatory"
   ],
+  "opv": [
+   "gtceu:field_frozen_press",
+   "gtceu:gamma_optics_works",
+   "gtceu:magnetic_pair_converter",
+   "gtceu:tetron_fab"
+  ],
   "power": [
    "gtceu:generator_array"
   ]

@@ -190,10 +190,41 @@
       fluidsIn: [fluid('gtceu:oxygen', 500)], itemsOut: [item('grindless:ga2o3_epi_wafer', 1)], fluidsOut: [], eut: 1966080, duration: 1200 }
   ]
 
-  // OpV-R1 (docs/eras/opv.md, line 41): the polycapillary optic bundled from hollow capillaries (contract c18)
+  // OpV-A2 (docs/eras/opv.md, lines 11-17): the cosmic mainframe's dies. c17 is the Siemens rod (SiHCl3 + H2 -> Si + 3 HCl, the acid
+  // goes back to the cascade's c24); c18 the epitaxial aluminium of the gated 2DEG; c19 the HfO2/TiN gate stack of the cryo-CMOS;
+  // c21 AlGaN/GaN on semi-insulating SiC (Ga(CH3)3 + NH3 -> GaN + 3 CH4; the excess ammonia carries the unreacted gallium out as the
+  // exhaust, which the cascade's c27 strips); fibre c17 pigtails the SNSPD link chip into the cryogenic optical link
+  // OpV-A1 (docs/eras/opv.md line 9): the lasing Th:CaF2 boule's faces coated with VUV-transparent MgF2 (magnesium + HF, the hydrogen goes back)
   var OPV_ROWS = [
+    { name: 'si28_poly_rod', type: 'mocvd', circuit: 17, itemsIn: [],
+      fluidsIn: [fluid('gtceu:si28_trichlorosilane', 4000), fluid('gtceu:hydrogen', 4000)], itemsOut: [item('grindless:si28_poly_rod', 1)],
+      fluidsOut: [fluid('gtceu:hydrochloric_acid', 12000)], eut: 1966080, duration: 1200 },
+    { name: 'inas_al', type: 'mocvd', circuit: 18, itemsIn: [item('grindless:inas_qw_wafer', 1), item('gtceu:aluminium_dust', 1)],
+      fluidsIn: [fluid('gtceu:liquid_nitrogen', 500)], itemsOut: [item('grindless:inas_al_wafer', 1)],
+      fluidsOut: [fluid('gtceu:nitrogen', 500)], eut: 1966080, duration: 800 },
+    { name: 'gate_stack', type: 'mocvd', circuit: 19,
+      itemsIn: [item('grindless:si28_soi_wafer', 1), item('grindless:six_n_hafnium', 1), item('gtceu:titanium_dust', 1)],
+      fluidsIn: [fluid('gtceu:oxygen', 2000), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:gate_stack_soi_wafer', 1)],
+      fluidsOut: [fluid('gtceu:hydrogen', 3000)], eut: 1966080, duration: 1200 },
+    { name: 'gan_on_sic', type: 'mocvd', circuit: 21, itemsIn: [item('grindless:hpsi_sic_wafer', 1), item('gtceu:aluminium_dust', 1)],
+      fluidsIn: [fluid('gtceu:trimethylgallium', 250), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:gan_sic_epi_wafer', 1)],
+      fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:gan_mocvd_exhaust', 750)], eut: 1966080, duration: 1200 },
+    { name: 'cryo_optical_link', type: 'fibre_draw', circuit: 17, itemsIn: [item('grindless:snspd_link_wafer', 1), item('grindless:fused_silica_tube', 1)],
+      fluidsIn: [fluid(ACRYLATE, 250)], itemsOut: [item('grindless:cryo_optical_link', 4)], fluidsOut: [], eut: 122880, duration: 600 },
+    { name: 'th_caf2_coating', type: 'mocvd', circuit: 20, itemsIn: [item('grindless:th_caf2_lasing_boule', 1), item('gtceu:magnesium_dust', 1)],
+      fluidsIn: [fluid('gtceu:hydrofluoric_acid', 2000)], itemsOut: [item('grindless:coated_th_caf2_crystal', 1)],
+      fluidsOut: [fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 800 },
+    // OpV-R1 (docs/eras/opv.md, line 41): the polycapillary optic bundled from hollow capillaries (contract c18)
     { name: 'polycapillary_optic', type: 'fibre_draw', circuit: 18, itemsIn: [item('grindless:hollow_capillaries', 4)],
       fluidsIn: [fluid('gtceu:argon', 500)], itemsOut: [item('grindless:polycapillary_optic', 1)], fluidsOut: [], eut: 1966080, duration: 400 }
+  ]
+
+  // OpV-A3 (docs/eras/opv.md, line 45): AlGaN grown on the AlN wafer from trimethylgallium and ammonia; the methyls leave as methane, the
+  // spare ammonia hydrogen goes back
+  var OPV_A3_ROWS = [
+    { name: 'algan_epi', type: 'mocvd', circuit: 22, itemsIn: [item('grindless:aln_wafer', 1)],
+      fluidsIn: [fluid(TMGA, 250), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:algan_epi_wafer', 1)],
+      fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 1200 }
   ]
 
   // side steps on GTM's own machines
@@ -235,7 +266,8 @@
   P.a8Rows = A8_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.uivRows = UIV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.uxvRows = UXV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
-  P.opvRows = OPV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
+  P.opvRows = OPV_ROWS.map(function (t) { return publish(t, t.type === 'mocvd' ? 'grindless:' + t.name : 'grindless:' + t.type + '/' + t.name) })
+  P.opvA3Rows = OPV_A3_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.skipped = []
   P.clashes = []
   P.crafting = {
@@ -299,10 +331,10 @@
   }
 
   function addMachines(event) {
-    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows))
+    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows))
     if (P.clashes.length > 0) console.error(LOG + 'photonics recipes clash in the lookup: ' + P.clashes.join(', '))
-    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows).forEach(function (r) { addRecipe(event, r) })
-    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length + P.uxvRows.length + P.opvRows.length - P.skipped.length))
+    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows).forEach(function (r) { addRecipe(event, r) })
+    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length + P.uxvRows.length + P.opvRows.length + P.opvA3Rows.length - P.skipped.length))
   }
 
   function addSide(event) {

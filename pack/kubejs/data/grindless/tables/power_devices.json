@@ -81,6 +81,42 @@
           "fluidsOut": []
         },
         {
+          "_why": "OpV-A2 (opv.md line 17): the gated GaN-on-SiC wafer passivated with silicon nitride, gold-plated and diced into four MMICs",
+          "name": "gan_mmic",
+          "circuit": 6,
+          "eut": 1966080,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:gan_gated_wafer", "count": 1 },
+            { "id": "gtceu:gold_foil", "count": 4 }
+          ],
+          "kept": [],
+          "fluidsIn": [
+            { "id": "gtceu:silane", "amount": 100 },
+            { "id": "gtceu:ammonia", "amount": 200 }
+          ],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:gan_mmic", "count": 4 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 600 }]
+        },
+        {
+          "_why": "OpV-A3 (opv.md line 45): the gated AlGaN-on-AlN wafer diced and bonded into power dies on copper with silver sinter, as c4 does for SiC",
+          "name": "aln_power_die",
+          "circuit": 8,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:algan_patterned_wafer", "count": 1 },
+            { "id": "gtceu:copper_foil", "count": 4 },
+            { "id": "gtceu:silver_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:aln_power_die", "count": 4 }],
+          "fluidsOut": []
+        },
+        {
           "_why": "OpV-R1 line 42 (contract c7): four GaN MMICs are bonded onto a silicon carbide substrate tile.",
           "name": "gan_mmic_tile",
           "circuit": 7,

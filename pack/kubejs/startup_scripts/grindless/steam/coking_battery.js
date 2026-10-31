@@ -1,4 +1,4 @@
-// priority: -6800
+// priority: -6880
 // -----------------------------------------------------------------------------------------------
 // By-product Coke Battery (gtceu:coking_battery) and its recipe type gtceu:coking.
 //

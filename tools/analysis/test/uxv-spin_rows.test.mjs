@@ -58,8 +58,9 @@ test('electron beam furnace: six 5N grades, five pattern rows, carbon-12 vapour,
   const c12 = rows.find((r) => r.name === 'c12_vapour');
   assert.deepEqual(ids(c12.fluidsOut), ['gtceu:carbon_burning_fuel']);
   const eb = json('electron_beam.json').types.electron_beam_refining.recipes;
-  const cs = eb.map((r) => r.circuit);
-  assert.equal(new Set(cs).size, cs.length, 'unique circuits');
+  // OpV-F3: a circuit may repeat only with different item inputs (consumed or kept); A3's c22 can and re-melt share one
+  const cs = eb.map((r) => `${r.circuit}|${ids(r.itemsIn).concat(ids(r.kept)).sort().join(',')}`);
+  assert.equal(new Set(cs).size, cs.length, 'unique circuit and item inputs');
 });
 
 test('nitride magnet works c8-15 and the CVI preform c5', () => {
@@ -139,7 +140,8 @@ test('photonic foundry c17-22 rinse with ultrapure water; MOCVD c13-16; implante
   const mocvd = recipes.filter((r) => r.t === 'gtceu:mocvd').map((r) => (r.j.inputs.item.find((x) => x.content.type === 'gtceu:circuit') || { content: {} }).content.configuration);
   assert.equal(new Set(mocvd).size, mocvd.length, `unique mocvd circuits ${mocvd}`);
   const q = run.global.grindless.qubits.recipes.filter((r) => r.type === 'ion_implantation');
-  assert.deepEqual(plain(q.slice(-3).map((r) => [r.name, r.circuit])), [['mtj_ion_etch', 8], ['mram_ion_etch', 9], ['stno_ion_mill', 10]]);
+  // OpV-A1 appended hpge_contacts (c15) after UXV-A3's three
+  assert.deepEqual(plain(q.filter((r) => r.name !== 'hpge_contacts').slice(-3).map((r) => [r.name, r.circuit])), [['mtj_ion_etch', 8], ['mram_ion_etch', 9], ['stno_ion_mill', 10]]);
   const imp = recipes.filter((r) => r.t === 'gtceu:ion_implantation').map((r) => (r.j.inputs.item.find((x) => x.content.type === 'gtceu:circuit') || { content: {} }).content.configuration);
   assert.equal(new Set(imp).size, imp.length, `unique implanter circuits ${imp}`);
 });

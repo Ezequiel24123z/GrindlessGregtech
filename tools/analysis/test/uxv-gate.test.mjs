@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
@@ -73,6 +74,51 @@ test('arm chart: four records plus the circuit (c4) fit the widened Matrioshka t
   assert.equal(new Set(circuits).size, circuits.length);
 });
 
+// GTM builds the recipe types only after the gtceu:recipe_type event: the widening must land on the built type in the gtceu:machine event
+// (the 0f08570a client EMI audit showed the arm chart's fourth record missing while the resize sat in the recipe_type event).
+test('the widening reaches the built warp gate and Matrioshka types, in either script order, never narrowing', () => {
+  for (const gateFirst of [false, true]) {
+    const callbacks = [];
+    const built = new Map();
+    const G = {};
+    const publish = () => {
+      G.warpGate = { machines: { gate: { maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 } } } };
+      G.matrioshka = { machines: [
+        { type: 'matrioshka_computing', maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 } },
+        { type: 'droplet_radiator_assembly', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 } }
+      ] };
+      callbacks.push(['gtceu:recipe_type', () => {
+        built.set('warp_gate', { in: G.warpGate.machines.gate.maxIO.itemsIn, out: 2, fin: 0, fout: 3 });
+        built.set('matrioshka_computing', { in: G.matrioshka.machines[0].maxIO.itemsIn, out: 1, fin: 0, fout: 0 });
+      }]);
+    };
+    const errors = [];
+    const context = vm.createContext({
+      global: { grindless: G }, console: { error: (m) => errors.push(m), info() {}, warn() {}, log() {} },
+      GTCEuStartupEvents: { registry: (kind, cb) => callbacks.push([kind, cb]) },
+      Java: { loadClass: (id) => ({ CAP: /Fluid/.test(id) ? 'fluid' : 'item' }) },
+      GTRecipeTypes: { get: (name) => {
+        const t = built.get(name);
+        if (!t) return null;
+        return {
+          getMaxInputs: (cap) => (cap === 'item' ? t.in : t.fin),
+          getMaxOutputs: (cap) => (cap === 'item' ? t.out : t.fout),
+          setMaxIOSize: (a, b, c, d) => Object.assign(t, { in: a, out: b, fin: c, fout: d })
+        };
+      } }
+    });
+    if (!gateFirst) publish();
+    vm.runInContext(startup, context);
+    if (gateFirst) publish();
+    for (const kind of ['gtceu:recipe_type', 'gtceu:machine']) for (const [k, cb] of callbacks) if (k === kind) cb({});
+    assert.deepEqual(errors, [], `no error (gate script ${gateFirst ? 'first' : 'last'})`);
+    assert.deepEqual(built.get('warp_gate'), { in: 7, out: 2, fin: 0, fout: 3 }, 'warp gate: 7 items in, the built fluid output kept');
+    assert.deepEqual(built.get('matrioshka_computing'), { in: 5, out: 1, fin: 0, fout: 0 }, 'Matrioshka: 5 items in');
+    assert.equal(G.matrioshka.machines[0].maxIO.itemsIn, 5, 'the published figure the server slot check reads');
+    assert.equal(G.matrioshka.machines[1].maxIO.itemsIn, 4, 'the droplet radiator is untouched');
+  }
+});
+
 test('the OpV casing: bulge chart research, UXV parts only, EU/t >= VA[UXV]', () => {
   assert.match(code, /assembly_line\('grindless:opv_machine_casing'\)/);
   assert.match(code, /var CHART = 'grindless:bulge_chart'/);
@@ -94,10 +140,16 @@ test('"only from": nothing else in pack/kubejs produces the bulge chart or the a
       assert.ok(!new RegExp(`(itemOutputs|\\.output)\\([^)]*${id}`).test(txt), `${path.relative(kube, f)} outputs ${id}`);
     }
   }
+  // a table may keep or consume a chart (OpV-A0's SGR extraction rows keep the bulge chart); only an output field counts as producing it
+  const outsOf = (node, acc = []) => {
+    if (Array.isArray(node)) node.forEach((x) => outsOf(x, acc));
+    else if (node && typeof node === 'object') for (const [k, v] of Object.entries(node)) { if (/out/i.test(k)) acc.push(JSON.stringify(v)); else outsOf(v, acc); }
+    return acc;
+  };
   for (const f of walk(tables)) {
     if (own.has(f) || f.endsWith('hidden_until.json')) continue;
-    const t = fs.readFileSync(f, 'utf8');
-    for (const id of ['grindless:bulge_chart', 'grindless:arm_chart']) assert.ok(!t.includes(id), `${path.basename(f)} has ${id}`);
+    const t = outsOf(JSON.parse(fs.readFileSync(f, 'utf8')));
+    for (const id of ['grindless:bulge_chart', 'grindless:arm_chart']) assert.ok(!t.some((s) => s.includes(`"${id}"`)), `${path.basename(f)} outputs ${id}`);
   }
   const outs = (tbl) => Object.values(tbl.types).flatMap((t) => t.recipes).filter((r) => (r.itemsOut || []).some((o) => o.id === 'grindless:bulge_chart'));
   assert.equal(outs(gateJson).length, 1);

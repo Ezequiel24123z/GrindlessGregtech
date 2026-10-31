@@ -827,6 +827,50 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_field_frozen_press",
+      "recipeType": "gtceu:field_freezing",
+      "prompt": "Seamless looping sound of a heavy hydraulic press inside a strong magnetic field: a deep slow hydraulic thrum, a steady electric transformer hum, a cold cryogenic hiss and a faint metallic creak under load, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.7,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_tetron_fab",
+      "recipeType": "gtceu:tetron_assembly",
+      "prompt": "Seamless looping sound of a cleanroom chip fab: a steady soft laminar air hiss, the slow pulse of a dilution refrigerator pump and small precise robotic clicks of a wafer handler, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_gamma_optics_works",
+      "recipeType": "gtceu:gamma_optics",
+      "prompt": "Seamless looping sound of an optical bench in a long vacuum tube: a deep steady turbomolecular pump hum, fine stepper motor ticks of a goniometer and a faint electronic counter chirp, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_magnetic_pair_converter",
+      "recipeType": "gtceu:magnetic_pair_production",
+      "prompt": "Seamless looping sound of a magnetar-field plasma rig: a deep rising magnetic throb, a thin crackling laser whine and a faint pulsed electromagnetic hiss, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }

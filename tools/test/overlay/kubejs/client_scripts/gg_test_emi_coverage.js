@@ -174,8 +174,10 @@
     // EMI catches plugin exceptions and still declares itself loaded: loaded alone is not a verdict.
     var warnings = jlist(Java.loadClass('dev.emi.emi.runtime.EmiReloadLog').warnings)
     var pluginErrors = []
+    var reloadWarnings = []
     for (var w = 0; w < warnings.size(); w++) {
       var warning = String(warnings.get(w))
+      if (reloadWarnings.length < 40) reloadWarnings.push(warning.substring(0, 300))
       if (/exception|critical error|recipe loss|illegally self-mutated/i.test(warning)) pluginErrors.push(warning)
     }
     // The harness checks raw log exceptions too: JEMI's per-recipe catches do not enter this warning list.
@@ -364,7 +366,7 @@
 
     try {
       var doc = { format: 'gg-emi-coverage-report-2', expectations: exp.format, recipes: allRecipes.size(), pages: ours, items: report,
-        pluginErrors: pluginErrors, categories: categories, machines: machineReport, processes: processReport,
+        pluginErrors: pluginErrors, reloadWarnings: reloadWarnings, categories: categories, machines: machineReport, processes: processReport,
         workstationMissing: workstationMissing, previewsMissing: previewsMissing, previewsOff: previewsOff, processesMissing: processesMissing, machineInfoMissing: machineInfoMissing,
         knownOpen: knownOpen, knownFixed: knownFixed,
         noMade: noMade, noUse: noUse, routeMissing: routeMissing, previewMissing: previewMissing, unaudited: unaudited, unknown: unknown,

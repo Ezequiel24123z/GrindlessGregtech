@@ -52,6 +52,126 @@
             { "id": "gtceu:terbium_dust", "count": 1 }
           ],
           "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 13): the cryo-CMOS gates patterned on the HfO2/TiN stack; the mirror comes out fouled (c3 cleans it)",
+          "name": "cryo_cmos_exposure",
+          "circuit": 4,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:gate_stack_soi_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:cryo_cmos_litho_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 14): the through-silicon vias of the Nb interposer patterned on float-zone silicon",
+          "name": "tsv_exposure",
+          "circuit": 5,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:fz_silicon_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:tsv_via_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 16): the sub-50 nm T-gates of the InP HEMT",
+          "name": "hemt_gate_exposure",
+          "circuit": 6,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:inp_hemt_epi_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:hemt_gated_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 17): the gates of the GaN-on-SiC transistors",
+          "name": "gan_gate_exposure",
+          "circuit": 7,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:gan_sic_epi_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:gan_gated_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 18): the small collecting anode inside the SDD's drift rings",
+          "name": "sdd_anode_exposure",
+          "circuit": 8,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:sdd_ring_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:sdd_anode_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-A3 (opv.md line 45): the AlGaN epi patterned with the HEMT gates at 6.7 nm; the mirror comes out fouled as in c1 (c3 cleans it)",
+          "name": "algan_gates",
+          "circuit": 9,
+          "eut": 31457280,
+          "duration": 1600,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:algan_epi_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:algan_patterned_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
         }
       ]
     },
@@ -96,6 +216,19 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:ph3_dosed_wafer", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:phosphine", "amount": 800 }]
+        },
+        {
+          "_why": "OpV-A2 (opv.md line 12): the tip writes the gate electrodes through the hBN cap onto the InAs/Al 2DEG; liquid helium cools the stage as in c2",
+          "name": "gate_2deg",
+          "circuit": 4,
+          "eut": 31457280,
+          "duration": 4000,
+          "itemsIn": [{ "id": "grindless:hbn_capped_2deg_wafer", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 100 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:gated_2deg_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 100 }]
         }
       ]
     },
