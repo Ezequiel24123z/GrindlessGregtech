@@ -207,7 +207,7 @@
           "itemsIn": [{ "id": "grindless:cryo_cmos_die", "count": 1 }, { "id": "grindless:nb_tsv_interposer", "count": 1 }, { "id": "grindless:cryo_optical_link", "count": 1 },
                       { "id": "grindless:hemt_amplifier", "count": 1 }],
           "itemsOut": [{ "id": "gtnn:cosmic_mainframe", "count": 1 }] },
-        { "_why": "MAX-A1 (max.md, Circuits): the supracausal mainframe, the only maker of gtnn:supracausal_mainframe (#gtceu:circuits/max): two squeezed-light chips, two tweezer array dies, the cryo photonic interposer, four OpV circuits and a tetron array under superfluid helium-3 (GT--'s own route is cut by MAX-F2)", "name": "supracausal_mainframe", "circuit": 9, "eut": 2147483647, "duration": 4800,
+        { "_why": "MAX-A1 (max.md, Circuits): the supracausal mainframe, the only maker of gtnn:supracausal_mainframe (#gtceu:circuits/max): two squeezed-light chips, two tweezer array dies, the cryo photonic interposer, four OpV circuits and a tetron array under superfluid helium-3 (GT--'s own route is cut by MAX-F2)", "name": "supracausal_mainframe", "circuit": 9, "eut": 2013265920, "duration": 4800,
           "itemsIn": [{ "id": "grindless:squeezed_light_chip", "count": 2 }, { "id": "grindless:tweezer_array_die", "count": 2 }, { "id": "grindless:cryo_photonic_interposer", "count": 1 }, { "id": "#gtceu:circuits/opv", "count": 4 }, { "id": "grindless:tetron_array", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:superfluid_helium_3", "amount": 2000 }], "charge": [],
           "itemsOut": [{ "id": "gtnn:supracausal_mainframe", "count": 1 }], "fluidsOut": [] }
       ]
