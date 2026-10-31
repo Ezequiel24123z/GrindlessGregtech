@@ -33,7 +33,12 @@
           "_why": "OpV-R1 line 41: an X-ray timing head is locked to the nuclear clock (the clock is not consumed), the reference its pulse times are read against.",
           "itemsIn": [{ "id": "grindless:xray_timing_head", "count": 1 }],
           "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 100 }],
-          "itemsOut": [{ "id": "grindless:clock_locked_head", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:clock_locked_head", "count": 1 }], "fluidsOut": [] },
+        { "name": "lock_microcomb", "circuit": 7, "eut": 1966080, "duration": 600,
+          "_why": "MAX-B3 (max.md, L29 step 5): the packaged microcomb is locked to the nuclear clock (the clock is not consumed), the reference its teeth are counted against.",
+          "itemsIn": [{ "id": "grindless:packaged_microcomb", "count": 1 }],
+          "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:clock_locked_microcomb", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "crystal_growth": {
@@ -159,7 +164,13 @@
           "itemsOut": [{ "id": "grindless:quartz_crystal_wafer", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
         { "_why": "MAX-B2 (max.md, L33 step 1, c31): a float-zone silicon rod grown in the Ir crucible and ground to the cavity spacer; the crucible wears as in every row", "name": "silicon_cavity_spacer", "circuit": 31, "eut": 491520, "duration": 1000,
           "itemsIn": [{ "id": "gtceu:silicon_dust", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:silicon_cavity_spacer", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:silicon_cavity_spacer", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "MAX-B3 (max.md, L23 step 1, c30): europium-doped yttrium orthosilicate pulled from the melt; the Ir crucible wears as in every row", "name": "eu_yso_boule", "circuit": 30, "eut": 491520, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:yttrium_dust", "count": 2 }, { "id": "gtceu:silicon_dioxide_dust", "count": 1 }, { "id": "gtceu:europium_oxide_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 500 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:eu_yso_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "MAX-B3 (max.md, L46 step 1, c32): paratellurite pulled from the TeO2 melt under oxygen, for the acousto-optic deflector; the Ir crucible wears as in every row", "name": "teo2_boule", "circuit": 32, "eut": 491520, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:tellurium_dust", "count": 2 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:teo2_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {

@@ -93,6 +93,12 @@
   // MAX-B1 (max.md L3, Circuits by type: B1 c12): quartz sand zone-refined under argon into the ultrapure silica sputtering target
   TABLE.push({ name: 'ultrapure_silica_target', type: 'zone_refining', circuit: 12, itemsIn: [item('gtceu:silicon_dioxide_dust', 4)],
     fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:ultrapure_silica_target', 1)], fluidsOut: [], eut: UVA, duration: 800 })
+  // MAX-B3 L40 (c13): silica soot fused and zone-refined under argon into the ultrapure tube the hollow-core fibre is drawn from
+  TABLE.push({ name: 'ultrapure_silica_tube', type: 'zone_refining', circuit: 13, itemsIn: [item('grindless:synthetic_silica_soot', 4)],
+    fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:ultrapure_silica_tube', 1)], fluidsOut: [], eut: UVA, duration: 1000 })
+  // MAX-B3 L43 (c14): a plate of quartz zone-refined under argon until its OH content is below the cell's absorption budget
+  TABLE.push({ name: 'ultrapure_silica_plate', type: 'zone_refining', circuit: 14, itemsIn: [item('gtceu:silicon_dioxide_dust', 8)],
+    fluidsIn: [fluid('gtceu:argon', 2000)], itemsOut: [item('grindless:ultrapure_silica_plate', 1)], fluidsOut: [], eut: UVA, duration: 1000 })
 
   D.recipes = TABLE.map(function (t) {
     return {
