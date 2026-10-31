@@ -1,4 +1,3 @@
-// priority: -9861
 // OpV-R1 T1: the c12 hold_terzan5 jump. Band: grindless:cygnus_x1_orbit X 38400-38463, Z 0-63, Y 98-115 (ring at X 38416, Y 100, Z 20).
 // The far side is the platform the jump itself places in grindless:terzan5_core at 64,100,64 (tables/relay_platforms.json, uxv/kerr_sling.js).
 // Doubt: the second-hop throw from Cygnus X-1 to Terzan 5 places its platform, remembers it (uxvPlatform_terzan5) and keeps its chunks
