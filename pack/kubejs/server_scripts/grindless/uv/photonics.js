@@ -234,7 +234,11 @@
       fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 1200 },
     { name: 'aln_on_si_wafer', type: 'mocvd', circuit: 24, itemsIn: [item('grindless:aln_wafer', 1), item('gtceu:silicon_wafer', 1)],
       fluidsIn: [fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:aln_on_si_wafer', 1)],
-      fluidsOut: [fluid('gtceu:hydrogen', 1500)], eut: 1966080, duration: 1200 }
+      fluidsOut: [fluid('gtceu:hydrogen', 1500)], eut: 1966080, duration: 1200 },
+    // MAX-B1 (docs/eras/max.md, line 2): a ceria buffer grown on the PBO carrier web in oxygen (c25)
+    { name: 'buffered_pbo_web', type: 'mocvd', circuit: 25, itemsIn: [item('grindless:pbo_carrier_web', 1), item('gtceu:cerium_dust', 1)],
+      fluidsIn: [fluid('gtceu:oxygen', 1000)], itemsOut: [item('grindless:buffered_pbo_web', 1)],
+      fluidsOut: [], eut: 1966080, duration: 1200 }
   ]
 
   // side steps on GTM's own machines
