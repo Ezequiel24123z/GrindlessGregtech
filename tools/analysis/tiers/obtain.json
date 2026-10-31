@@ -95,6 +95,7 @@
       { "class": "C", "fallback": true, "materials": ["gtca:*"], "reason": "GTCA: part or material with no recipe or vein that the pack doesn't use" },
       { "class": "C", "fallback": true, "materials": ["gtnn:*"], "reason": "GT--: end-game circuits and parts whose chain starts from something with no recipe" },
       { "class": "C", "fallback": true, "materials": ["gcyr:*"], "reason": "GCYR: part or material with no recipe that the pack doesn't use" },
+      { "class": "C", "materials": ["extendedfeatures:configurable_cleaning_maintenance_hatch"], "keepRecipes": true, "reason": "Extended Features: part with no recipe (the addon doesn't bring one); it is a maintenance candidate, and GTM's multiblock previews can pick it first (hash-ordered PartAbility set), so it is only dropped from the index (disabling it in EMI dropped about 50 multiblock previews)" },
       { "class": "C", "fallback": true, "materials": ["extendedfeatures:*"], "reason": "Extended Features: part with no recipe (the addon doesn't bring one)" },
       { "class": "C", "fallback": true, "partial": true, "forms": "ore", "reason": "the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out" },
       { "class": "C", "fallback": true, "partial": true, "reason": "loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)" }
