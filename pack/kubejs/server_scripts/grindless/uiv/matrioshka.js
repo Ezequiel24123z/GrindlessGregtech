@@ -61,7 +61,8 @@
           return { id: String(f.id), amount: Number(f.amount) }
         }
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, dataKey: def.dataKey ? String(def.dataKey) : '',
-          site: r.site === true, research: r.research ? String(r.research) : '', station: r.station ? String(r.station) : '',
+          site: r.site === true, siteId: typeof r.site === 'string' && /^[a-z0-9_.-]+:[a-z0-9_.\/-]+$/.test(r.site) ? r.site : '',
+          research: r.research ? String(r.research) : '', station: r.station ? String(r.station) : '',
           itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack), fluidsIn: list(r.fluidsIn).map(fluid),
           itemsOut: list(r.itemsOut).map(stack), fluidsOut: list(r.fluidsOut).map(fluid) }
         if (bad || (rec.itemsOut.length === 0 && rec.fluidsOut.length === 0) || (rec.itemsIn.length === 0 && rec.fluidsIn.length === 0)) {
@@ -116,6 +117,7 @@
     rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
     if (rec.site) recipe.dimension(MA.site || 'gcyr:mercury_orbit')
+    else if (rec.siteId !== '') recipe.dimension(rec.siteId)
     if (rec.research !== '') recipe.researchWithoutRecipe(rec.research)
     if (rec.station !== '') recipe.stationResearch(function (r) { return r.researchStack(Item.of(rec.station)).CWUt(64).EUt(rec.eut) })
     recipe.EUt(rec.eut).duration(rec.duration)

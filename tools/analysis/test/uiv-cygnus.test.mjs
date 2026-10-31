@@ -28,8 +28,8 @@ test('every row says UIV-B4, circuits are unique per type, and every row is a fa
     const circuits = t.recipes.map((r) => r.circuit);
     assert.equal(new Set(circuits).size, circuits.length, type);
     for (const r of t.recipes) {
-      assert.match(r._why, /^(UIV-B4|UXV-B1)/, r.name); // UXV-B1 appends the bay's c5 row
-      assert.equal(r.site, true, `${type}/${r.name}`);
+      assert.match(r._why, /^(UIV-B4|UXV-B1|MAX-D1)/, r.name); // UXV-B1 appends the bay's c5 row; MAX-D1 the Sgr A* c6 row (string site)
+      assert.ok(r.site === true || (/^MAX-D1/.test(r._why) && r.site === 'gcyr:black_hole_orbit'), `${type}/${r.name}`);
       assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
     }
   }
@@ -102,7 +102,7 @@ test('every item has a texture, a name and two tooltips in en_us and es_es; ever
 
 test('every row has an EMI line (own types and the two older EMI tables)', () => {
   for (const [type, t] of Object.entries(T.types)) {
-    for (const r of t.recipes.filter((x) => !/^UXV-B1/.test(x._why))) assert.ok(lang.includes(`gtceu.recipe.${t.dataKey}.${r.name}'`), `${type}/${r.name}`);
+    for (const r of t.recipes.filter((x) => !/^(UXV-B1|MAX-D1)/.test(x._why))) assert.ok(lang.includes(`gtceu.recipe.${t.dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
   assert.ok(lang.includes("gtceu.recipe.grindless_hot_cell.waste_canister_fill'"));
   assert.ok(lang.includes("gtceu.recipe.grindless_megabar.canister_compaction'"));

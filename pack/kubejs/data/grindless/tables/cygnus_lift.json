@@ -52,6 +52,28 @@
             { "id": "gtceu:filtered_disk_plasma", "amount": 900 },
             { "id": "gtceu:stellar_heavy_cut", "amount": 100 }
           ]
+        },
+        {
+          "_why": "MAX-D1 (max.md, L16 step 2, c3): at Sgr A* the solenoid sorts the hot flow; 1,350 mB go on to the FRC former, the heavy tenth comes out as the heavy cut",
+          "name": "hot_flow_filter", "circuit": 3, "eut": 67108864, "duration": 400, "site": "gcyr:black_hole_orbit",
+          "itemsIn": [], "kept": [],
+          "fluidsIn": [{ "id": "gtceu:hot_flow_plasma", "amount": 1500 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:filtered_hot_flow", "amount": 1350 },
+            { "id": "gtceu:stellar_heavy_cut", "amount": 150 }
+          ]
+        },
+        {
+          "_why": "MAX-D1 (max.md, L16 step 4 return, c4): the BZ dynamo's cooled exhaust is sorted again; it is consumed here, never returned to the line, and comes out as hydrogen and the heavy cut",
+          "name": "cooled_exhaust_return", "circuit": 4, "eut": 67108864, "duration": 400, "site": "gcyr:black_hole_orbit",
+          "itemsIn": [], "kept": [],
+          "fluidsIn": [{ "id": "gtceu:cooled_exhaust", "amount": 800 }],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:hydrogen", "amount": 700 },
+            { "id": "gtceu:stellar_heavy_cut", "amount": 100 }
+          ]
         }
       ]
     },

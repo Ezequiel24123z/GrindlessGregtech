@@ -20,7 +20,13 @@
           "itemsIn": [{ "id": "grindless:degenerate_eos_model", "count": 1 }],
           "kept": [{ "id": "grindless:mass_radius_chart", "count": 1 }],
           "fluidsIn": [], "charge": [{ "id": "gtceu:liquid_helium", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:degenerate_matter", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:degenerate_matter", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-D1 (max.md, L24 step 1, c2): at Sgr A* the harvester draws a slug of degenerate matter from the accretion flow; the chart stays, helium is the coolant",
+          "name": "degenerate_slug", "circuit": 2, "eut": 7864320, "duration": 4800, "site": "gcyr:black_hole_orbit",
+          "itemsIn": [{ "id": "grindless:degenerate_eos_model", "count": 1 }],
+          "kept": [{ "id": "grindless:mass_radius_chart", "count": 1 }],
+          "fluidsIn": [], "charge": [{ "id": "gtceu:liquid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:degenerate_matter_slug", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "degenerate_containment": {

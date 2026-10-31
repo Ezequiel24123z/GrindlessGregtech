@@ -378,6 +378,15 @@
       itemsOut: [{ id: 'gtceu:copper_dust', count: 2 }, { id: 'gtceu:iron_dust', count: 1 }],
       fluidsOut: [{ id: DILUTED_HCL, amount: 1000 }],
       eut: 1920, duration: 100
+    },
+    // MAX-D1 (max.md, L15 step 1, c32; repeat by item inputs): lithium dissolved into molten tin in kerosene, the Sn-Li eutectic of the droplet radiator
+    {
+      name: 'sn_li_eutectic', mode: 'max', circuit: 32,
+      itemsIn: [{ id: 'gtceu:lithium_dust', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:tin', amount: 576 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [],
+      fluidsOut: [{ id: 'gtceu:sn_li_eutectic', amount: 1000 }, { id: KEROSENE, amount: 950 }],
+      eut: 1920, duration: 100
     }
   ]
 

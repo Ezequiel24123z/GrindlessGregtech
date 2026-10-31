@@ -60,7 +60,8 @@
           return { id: String(f.id), amount: Number(f.amount) }
         }
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, dataKey: def.dataKey ? String(def.dataKey) : '',
-          site: r.site === true, generator: r.generator === true, itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack),
+          site: r.site === true, siteId: typeof r.site === 'string' && /^[a-z0-9_.-]+:[a-z0-9_.\/-]+$/.test(r.site) ? r.site : '',
+          generator: r.generator === true, itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack),
           wear: list(r.wear).map(worn), fluidsIn: list(r.fluidsIn).map(fluid), itemsOut: list(r.itemsOut).map(stack),
           fluidsOut: list(r.fluidsOut).map(fluid) }
         if (bad || (rec.itemsOut.length === 0 && rec.fluidsOut.length === 0 && !rec.generator) ||
@@ -110,6 +111,7 @@
     rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
     if (rec.site) recipe.dimension(SITE)
+    else if (rec.siteId !== '') recipe.dimension(rec.siteId)
     recipe.EUt(rec.generator ? -rec.eut : rec.eut).duration(rec.duration)
   }
 
