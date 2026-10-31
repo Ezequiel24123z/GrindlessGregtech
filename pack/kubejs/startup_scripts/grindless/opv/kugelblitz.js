@@ -51,7 +51,7 @@
     {
       // written final: two OpV 1 A dynamo hatches (2^29 each) hold c1's 2^30 EU/t; one 4 A hatch holds it alone
       name: 'hawking_collector', machine: 'gtceu:hawking_collector', type: 'hawking_power', dataKey: 'grindless_hawking_power',
-      lang: 'Hawking Collector', maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 }, casing: SHIELD, texture: SHIELD_TEXTURE,
+      lang: 'Hawking Collector', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: SHIELD, texture: SHIELD_TEXTURE,
       generator: true, size: 11,
       pal: { F: SHIELD, K: FIELD_FROZEN, V: 'gtceu:heat_vent', L: 'gtceu:fusion_glass', C: 'gtceu:superconducting_coil' },
       parts: function () {

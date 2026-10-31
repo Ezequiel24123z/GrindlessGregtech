@@ -9,6 +9,7 @@
 //   gtceu:hawking_power        collector, a generator: c1 1 stable exotic matter -> 2^30 EU/t for 14,800 t, core worn 1/64; c2 4,000 mB stellar
 //                              plasma -> 2^29 EU/t for 4,600 t, core worn 1/32. Each run wears 1/8 absorber tile; the spent core comes back as
 //                              an evaporated_core_shell with the same chance.
+//                              Activated tiles return at 1/8 and decay in B3a's IV hot cell c22; B3a must merge before D3.
 //   assembly_line              the two controllers (OpV hull + OpV parts + OpV circuits + the era fluid + domain items, behind station research).
 //
 // Exact wear: GTM's builder counts chances in ten-thousandths, which holds 1/8 but not 1/64 (156.25) or 1/32 (312.5). A row with such a fraction is
@@ -130,7 +131,13 @@
     rec.wear.forEach(function (x) { inItems.push(content(item(x), x.chance[0], x.chance[1])) })
     if (rec.circuit > 0) inItems.push(content({ type: 'gtceu:circuit', configuration: rec.circuit }, 0, 10000))
     var outItems = []
-    rec.itemsOut.forEach(function (x) { outItems.push(x.chance === null ? content(item(x), 10000, 10000) : content(item(x), x.chance[0], x.chance[1])) })
+    rec.itemsOut.forEach(function (x) {
+      if (x.chance === null) outItems.push(content(item(x), 10000, 10000))
+      else {
+        var chance = inTenThousandths(x.chance)
+        outItems.push(chance >= 0 ? content(item(x), chance, 10000) : content(item(x), x.chance[0], x.chance[1]))
+      }
+    })
     var inputs = { item: inItems }
     if (rec.fluidsIn.length > 0) {
       inputs.fluid = rec.fluidsIn.map(function (f) { return content({ amount: f.amount, value: [{ fluid: f.id }] }, 10000, 10000) })
