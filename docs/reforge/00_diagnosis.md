@@ -41,21 +41,21 @@ What the table says: items and fluids grow steeply from UV (about 100 to 260 per
 | MV | 12 multiblocks, 209 recipes, median 2 items and 50 mB per recipe: very cheap. Quest chapter uses 4 HV-era vein samples (`grindless:vein_sample_*`, `data/00_quest_refs.csv`), 2 layout warnings. |
 | HV | Smallest age chapter (33 quests); 6 multiblocks. Same flat cost profile as MV. |
 | EV | 12 multiblocks (design target 11). The first era with real fluid cost (median 300 mB). Ore refinery skips 17 materials because their items are missing (`ev/mega_ore_refinery.js:153`). |
-| IV | 16 multiblocks (target 15). Costs begin to rise (median 788 mB). 3 dropped-ingredient warnings. |
+| IV | 16 multiblocks (target 15). Costs begin to rise (median 788 mB). 3 over-limit recipes. |
 | LuV | 21 multiblocks (target 20), 194 line quests. Median 6 items: the only mid-era with visibly higher quantity. |
 | ZPM | 28 multiblocks (target 27). Costs fall back (median 3 items). Fusion audit entry missing from the recipe manager (`zpm/fusion.js:305`). |
-| UV | 32 multiblocks, 102 items, 29 fluids. One `self_gain` recipe. Missing fusion recipe (`uv/fusion.js:67`). 11 dropped-ingredient warnings. |
-| UHV | 32 multiblocks, 121 items. Worst for dropped ingredients (14). Median 5 items. |
+| UV | 32 multiblocks, 102 items, 29 fluids. One `self_gain` recipe. Missing fusion recipe (`uv/fusion.js:67`). 11 over-limit recipes. |
+| UHV | 32 multiblocks, 121 items. 14 over-limit recipes (second only to UXV). Median 5 items. |
 | UEV | 237 items, 405 recipes. `atom_interferometer` is a 3-input x1 assembler recipe (C-COMPLEX), 16 under-voltage components (T-*). 15 retired items kept hidden. Costs fall again (median 3 items). |
 | UIV | 241 items, 326 line quests but only 23 multiblocks. 13 `trivial_step` recipes, 53 C-COMPLEX findings, median fluid cost 0 mB. |
-| UXV | 22 multiblocks. 20 each of T-CIRC/T-COMP/T-COUNT/T-HULL/T-VOLT (the new tier components are priced like earlier tiers). 16 dropped-ingredient warnings (worst), 44 items without texture. |
+| UXV | 22 multiblocks. 20 each of T-CIRC/T-COMP/T-COUNT/T-HULL/T-VOLT (the new tier components are priced like earlier tiers). 16 over-limit recipes (the most), 44 items without texture. |
 | OpV | 19 multiblocks. 2 `no_use` items (`gtceu:chain_strand_foil`, `gtceu:double_chain_strand_plate`), 8 `trivial_step`, 5 quest layout warnings (crossing, through-node, vertical-long). 19 multiblocks without a loop sound. |
 | MAX | Under-built against rule 7: 10 own multiblocks against a guide of 24, 46 lines against 68, 167 crossings against 212 (`docs/eras/max.md:24`). Highest item cost (median 10 items) but mean fluid only 733 mB. One `self_gain` (`grindless:genome_archiving/genome_copy`), 7 `trivial_step`. 7 items without texture. Most never-obtained unclassified groups (56) belong to MAX/OpV. Never viewed formed: see 6. |
 
 ## 3. Broken or suspicious content
 
-### 3.1 Recipes that silently lose inputs or outputs (high)
-`kubejs-errors.txt` has 67 warnings "Trying to add more inputs/outputs than RecipeType can support": the surplus ingredient is dropped, so those recipes are cheaper than written and may be wrong. By era: uxv 16, uhv 14, uv 11, uiv 7, zpm 5, iv 3, opv 3, uev 3, ev 2, luv 1, max 1, unmapped 1 (`data/00_dropped_inputs.csv`). Typical causes: assembler fluid input limit 1, chemical reactor item input limit 2, cutter 1, assembler output limit 1 (five `mh_cable_*` in uiv, `xray_timing_head`), and `grindless:assembler/cofe_target` with 9 item inputs. This is a real defect for the new cost goal (Phase 2): fix by routing the recipe to a type with enough slots or splitting it, never by dropping the input.
+### 3.1 Recipes over their recipe type's slot limits (high)
+`kubejs-errors.txt` has 67 warnings (66 recipes; `grindless:assembler/cofe_target` twice) "Trying to add more inputs/outputs than RecipeType can support". GTM 7.5.3 only warns and keeps every ingredient (integrator check on the v0.17.0 native dump: `grindless:assembler/gtca/mega_lcr` loads with 2 fluid inputs, `grindless:assembler/platinum_plant` with 10 item inputs). The capacity lint (`tools/analysis/capacity-lint.mjs`, RF-1A) is the fuller list: 87 errors, 50 of them among these warnings plus 37 GTM never warned about (35 over the type's fluid limits, 1 over its item limit, 1 tank too small); EMI shows only the type's slots, so it hides the surplus. The other 16 warnings exceed the limit only by the programmed circuit, which machines keep in their own slot (whether GTM 7.5.3's EMI page shows that circuit is unverified). By era: uxv 16, uhv 14, uv 11, uiv 7, zpm 5, iv 3, opv 3, uev 3, ev 2, luv 1, max 1, unmapped 1 (`data/00_dropped_inputs.csv`). Typical causes: assembler fluid input limit 1, chemical reactor item input limit 2, cutter 1, assembler output limit 1 (five `mh_cable_*` in uiv, `xray_timing_head`), and `grindless:assembler/cofe_target` with 9 item inputs. This is a real defect (Phase 2): fix by routing the recipe to a type with enough slots or splitting it, never by removing the input.
 
 ### 3.2 Reachability, obtain and cycles
 - Obtain pass verdict FAIL: 1,161 never-obtained items in 525 groups (B 15: GTM OpV hatches and converters, correctly hidden; C "will never arrive" 454; unclassified 56). The 56 unclassified groups are mostly MAX/OpV `nsc_belt`/`black_hole_orbit` chain items (e.g. `cooled_exhaust`, needing `flux_loaded_frc` in `gcyr:black_hole_orbit`), because `IMPLEMENTED_ERA` is `uxv` (`integration/hidden.js:36`) and `tools/analysis/tiers/obtain.json` has no OpV/MAX places. The reachability run itself passes, so this is stale tool config (Phase 3). The dump lacks `lookup_unreachable.json`, so the GTM recipe lookup was not checked (`data/00_obtain_never.csv`).
@@ -103,7 +103,7 @@ No workstation or machine-info gaps.
 | # | Principle | Violation (evidence) | Phase |
 |---|---|---|---|
 | P1 | Costs go up | Median recipe cost is flat and low: items 2 to 6 per recipe from MV to ZPM and UEV to UIV, only OpV and MAX reach 9 to 10; fluid medians 0 to 1,000 mB with no steady rise; mean fluid falls from 1,810 (IV) to 733 (MAX). Recipe times and EU are the scaling axis instead of quantity (`data/00_recipe_cost_by_era.csv`). | 2 |
-| P2 | Costs go up | 67 recipes silently drop ingredients (3.1) and 284 under-priced or under-voltage findings (3.3). | 2 |
+| P2 | Costs go up | 67 slot-limit warnings and 87 capacity-lint errors, recipes EMI shows incompletely (3.1), and 284 under-priced or under-voltage findings (3.3). | 2 |
 | P3 | Quantity and complexity both | MV and HV have median 2 items per scripted recipe; tier components are priced like the previous tier (UXV T-* 20 each). | 2 |
 | P4 | Every input automatable | Not verified here for MV to MAX; obtain pass shows 56 unclassified groups, so automation routes for the MAX/OpV nsc_belt and black_hole_orbit items are unproven by the tool. | 3 |
 | P5 | Honest byproducts, no silly recipes | 31 `trivial_step` (uiv 13, opv 8, max 7, uxv 3), 3 `self_gain` (uv, zpm, max), 2 `no_use` items (opv). | 3 |
@@ -124,7 +124,7 @@ No workstation or machine-info gaps.
 
 | # | Fix | Phase |
 |---|---|---|
-| 1 | Stop silently dropping ingredients: reroute or split the 67 over-limit recipes (uxv, uhv, uv first). | 2 |
+| 1 | Fix the 87 capacity-lint errors (3.1) by rerouting or splitting (uxv, uhv, uv first; `capacity_known.json` must shrink to empty), and check whether EMI shows the circuit of the 16 circuit-only overflows. | 2 |
 | 2 | Define a cost model with steeply rising item and fluid quantity per era (MV to MAX) and rebalance against `00_recipe_cost_by_era.csv`. | 2 |
 | 3 | Reprice tier components and the 284 recipe-quality findings (UXV first, then UEV, UIV); extend recipe-quality beyond UEV to UXV. | 2 |
 | 4 | LV review only: remove absurdly cheap or incoherent recipes; drop the 30 unused LV capacitor and wireless items or give them a use. | 2, 8 |
