@@ -45,6 +45,12 @@
       .inputFluids(Fluid.of('gtceu:sterilized_growth_medium', 250))
       .itemOutputs('gtceu:neuro_processing_unit')
       .cleanroom(CleanroomType.CLEANROOM).EUt(30720).duration(1563)
+    // MAX-B4 (max.md, L12 step 2, circuit 3): a synthetic oligo pool written into a neural organoid's cells and read back out as the extract
+    orbital('organoid_assembly', 'organoid_genome_extract').circuit(4)
+      .itemInputs('grindless:neural_organoid', 'grindless:synthetic_oligo_pool')
+      .inputFluids(Fluid.of('gtceu:sterilized_growth_medium', 250))
+      .itemOutputs('grindless:organoid_genome_extract')
+      .cleanroom(CleanroomType.CLEANROOM).EUt(30720).duration(1200)
     ;[
       ['zero_g_crystal_grower', ['gtceu:luv_electric_pump', 'gtceu:luv_sensor'], ['2x grindless:platinum_gauze', '2x grindless:contact_catalyst']],
       ['hydroponic_ring', ['2x gtceu:luv_electric_motor'], ['2x grindless:ion_exchange_resin', '2x grindless:platinum_gauze']],
