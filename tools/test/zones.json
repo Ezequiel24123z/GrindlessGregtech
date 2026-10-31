@@ -164,6 +164,7 @@
     { "id": "opv_components", "x": [37888, 37951], "z": [0, 63], "y": [98, 115], "tests": ["opv_components"], "note": "OpV-A1: the GCYM large assembler on two UXV 4 A hatches runs an OpV component row at 2^28; GTM's own recipe for the same id is gone" },
     { "id": "opv_circuits", "x": [37952, 38015], "z": [0, 63], "y": [98, 115], "tests": ["opv_circuits"], "note": "OpV-A2: the cosmic mainframe from our join satisfies #gtceu:circuits/opv in an assembly-line recipe; GT--'s route is gone" },
     { "id": "opv_field_press", "x": [38016, 38079], "z": [0, 63], "y": [98, 115], "tests": ["opv_field_press"], "note": "OpV-A3: machine 13 (field-frozen press) forms at SGR on two UXV 4 A hatches; an OpV 16 A energy hatch it made feeds a 2^30 row as long" },
-    { "id": "opv_basic_machines", "x": [38080, 38143], "z": [0, 63], "y": [98, 115], "tests": ["opv_basic_machines"], "note": "OpV-A4: gtceu:opv_assembler placed with /setblock on a chain strand cable runs a 2^28 component row" }
+    { "id": "opv_basic_machines", "x": [38080, 38143], "z": [0, 63], "y": [98, 115], "tests": ["opv_basic_machines"], "note": "OpV-A4: gtceu:opv_assembler placed with /setblock on a chain strand cable runs a 2^28 component row" },
+    { "id": "opv_tetron_optics", "x": [38144, 38207], "z": [0, 63], "y": [98, 112], "tests": ["opv_tetron_optics"], "note": "OpV-B1: the tetron fab (c1 tetron dies) and the gamma optics works (c2 multilayer mirror) form in the Overworld with two UXV energy hatches and each starts its row at 268,435,456 EU/t; every row, the older rows of lines 19, 34 and 35 and the controllers are in the recipe manager" }
       ]
 }

@@ -127,6 +127,13 @@
           "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:superleak_plug", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:helium", "amount": 400 }]
+        },
+        {
+          "_why": "OpV line 19 (package OpV-B1): the bonded tetron die is cooled on the millikelvin module (kept) and its parity readout tested before it goes into an array; named in client_scripts/grindless/opv_tetron_optics_lang.js",
+          "name": "tested_tetron_die", "circuit": 6, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:bonded_tetron_die", "count": 1 }],
+          "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:tested_tetron_die", "count": 1 }]
         }
       ]
     }

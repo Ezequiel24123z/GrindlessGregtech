@@ -47,8 +47,8 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 
 test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
   const rc = T.types.ion_slicing.recipes;
-  // OpV-A2 appended c5 (the Nb TSV bond) and c6 (LN on Si-28 SOI)
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4], ['tsv_bond', 5], ['ln_on_soi', 6]]);
+  // OpV-A2 appended c5 (the Nb TSV bond) and c6 (LN on Si-28 SOI); OpV-B1 c8 bonded_tetron_die (OpV line 19, the flip-chip bond)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4], ['tsv_bond', 5], ['ln_on_soi', 6], ['bonded_tetron_die', 8]]);
   for (const r of rc) {
     assert.equal(r.eut, 31457280, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 3 && ids(r.itemsOut).length <= 2, r.name);
@@ -181,7 +181,9 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
+    // OpV-B1: a row marked OpV-B1 is named in opv_tetron_optics_lang.js (checked by opv-tetron_optics.test.mjs)
     for (const r of t.recipes) {
+      if (/OpV-B1/.test(r._why || '')) continue;
       const k = `gtceu.recipe.${t.dataKey}.${r.name}`;
       assert.ok(keys.includes(k) || (/^OpV-/.test(r._why || '') && opvLang.includes(`['${k}', '`)), `${type}: ${k}`);
     }

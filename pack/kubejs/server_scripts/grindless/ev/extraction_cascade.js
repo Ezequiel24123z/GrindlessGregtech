@@ -294,6 +294,15 @@
       itemsOut: [{ id: 'gtceu:small_gallium_dust', count: 1 }],
       fluidsOut: [{ id: 'gtceu:ammonia', amount: 2250 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 1000 }],
       eut: 1920, duration: 100
+    },
+    // OpV-B1: a tetron die that fails the array calibration (tetron fab c2) is leached in HCl / Cl2: its InAs, Al gates and Au pads
+    {
+      name: 'tetron_die_recovery', mode: 'opv', circuit: 25,
+      itemsIn: [{ id: 'grindless:failed_tetron_die', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 2000 }, { id: 'gtceu:chlorine', amount: 500 }],
+      itemsOut: [{ id: 'gtceu:indium_dust', count: 1 }, { id: 'gtceu:small_aluminium_dust', count: 1 }, { id: 'gtceu:small_gold_dust', count: 1 }],
+      fluidsOut: [{ id: 'gtceu:diluted_hydrochloric_acid', amount: 2000 }],
+      eut: 1920, duration: 100
     }
   ]
 
