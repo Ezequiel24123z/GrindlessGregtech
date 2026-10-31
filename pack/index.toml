@@ -1353,6 +1353,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/uxv_kerr_sling_vela.json"
 hash = "bf8e194da1461823e7ed2e9744273d54b5dc07111a8ea29aa82b42642595a506"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/uxv_machine_hull.json"
+hash = "dfa02507dc1787ce7ce92bab35ea9acd50d8b6daa1a7cb03d1521d95178249bd"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/uxv_parallel_hatch.json"
 hash = "2bc8342a9086316a913fe1608cbc26ecc7b479b78889c4aceb3394d586b83bb6"
 
@@ -11370,11 +11374,15 @@ hash = "da1044ab6889766b90e8081f1d54dc448841481065e36394a99c5fe049885734"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uxv_gate_lang.js"
-hash = "d103c8601255483c127781370145075ac9a0a2ce4e03b35a5863837612b56209"
+hash = "c3fa3a5af29a690bafe31538b42a377deb34e99b10c8d4728447a31dbb57f720"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/uxv_info_lang.js"
+hash = "5de17746a93ac305b66f370c44a9d42d90cffd2f31dc43a97378e4ce44a20ed2"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uxv_kerr_sling_lang.js"
-hash = "4d986af1b89ddd8b08deff532be7fb99bd91591967587b6d96fa46c83d31bf23"
+hash = "10799a56078ca2c781962647ce371587bb1335ad14c9fd2c2ae071a9bbc878b3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/uxv_parallel_hatch_lang.js"
@@ -11834,7 +11842,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "2e25c4b3559e15eef7c1e358d8818f98dc057eb619afcda6b6412ecc1c33b7d0"
+hash = "588c4d3cd091ff30fed5141c169b2182a41f255f6e85dd6af61e8c8a0efa7b53"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -13738,7 +13746,7 @@ hash = "3caef2190190b11ad17b7bd9233f6c5035796c8a4bdfcffea33327de9e9c8330"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uxv/gate.js"
-hash = "7258d1f020509e796d9d1d37cbce6a867e6f78c7355181a95ae3d3c1b255ac6c"
+hash = "07e3a1f53eb31ecced4326f4aaca6988202d95d3dbbbc8bb0b8356a7ce987b3f"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uxv/shequid_mnt.js"
