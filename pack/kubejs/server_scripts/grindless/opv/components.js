@@ -20,7 +20,7 @@
 //   assembler  opv_robot_arm         2 motors + piston + 2 harmonic drives + 2 cables + 1 OpV circuit, lubricant
 //   assembler  opv_emitter           Th-229 lasing crystal + 2 lamina stacks + cryogenic optical link + 2 cables + 2 OpV circuits, solder
 //   assembler  opv_sensor            HPGe Compton crystal + 2 lamina stacks + cryogenic optical link + 2 cables + 2 OpV circuits, solder
-//   assembler  opv_fluid_regulator   pump + harmonic drive + 2 OpV circuits + superfluid seal + 2 tritanium small gears, solder
+//   assembler  opv_fluid_regulator   pump + harmonic drive + 2 OpV circuits + superfluid seal + 1 tritanium gear (tritanium has no small gear), solder
 // The process fluids and tritanium hardware lift every row to the OpV complexFloor (one fluid each: GTM's assembler takes one).
 // The last four take OpV-A2's circuits (the emitter and sensor also its cryo_optical_link); the integrator wrote them when A2 landed.
 // Every row runs at 2^28 EU/t (two UXV amps of a 4 A hatch pair: the OpV assembler or the GCYM large assembler). An unknown id skips its
@@ -48,7 +48,7 @@
   var TRI_PLATE = 'gtceu:tritanium_plate'
   var TRI_FOIL = 'gtceu:tritanium_foil'
   var TRI_ROUND = 'gtceu:tritanium_round'
-  var TRI_SMALL_GEAR = 'gtceu:tritanium_small_gear'
+  var TRI_GEAR = 'gtceu:tritanium_gear'
   var NITROGEN = 'gtceu:nitrogen'
   var EPOXY = 'gtceu:epoxy'
   var LUBRICANT = 'gtceu:lubricant'
@@ -105,7 +105,7 @@
       item(CIRCUIT, 2)], [fluid(SOLDER, 288)], [item('gtceu:opv_sensor', 1)], [], OPV_EUT, COMPONENT_TICKS),
     // fluid regulator: the pump behind a valve on a superfluid seal seat, driven through tritanium small gears; the circuits soldered on
     row('opv_fluid_regulator', 'assembler', null, [item('gtceu:opv_electric_pump', 1), item(DRIVE, 1), item(CIRCUIT, 2),
-      item('grindless:superfluid_he3_seal', 1), item(TRI_SMALL_GEAR, 2)], [fluid(SOLDER, 288)], [item('gtceu:opv_fluid_regulator', 1)], [],
+      item('grindless:superfluid_he3_seal', 1), item(TRI_GEAR, 1)], [fluid(SOLDER, 288)], [item('gtceu:opv_fluid_regulator', 1)], [],
       OPV_EUT, COMPONENT_TICKS)
   ]
   OPVC.components = ['gtceu:opv_electric_motor', 'gtceu:opv_electric_pump', 'gtceu:opv_conveyor_module', 'gtceu:opv_electric_piston']

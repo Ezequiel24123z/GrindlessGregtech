@@ -171,7 +171,7 @@ OpV recipes run up to 1 A x V[OpV] = 536,870,912 EU/t on two UXV energy hatches,
 - the 2^30 rows;
 - the gate's 2^33 hold.
 
-Until A4's `gtceu:opv_assembler` exists, assembler rows at OpV voltage run in GCYM's `gtceu:large_assembler` on two UXV 4 A hatches. All EU/t and ticks below are *(tune)*. Every OpV row runs at more than V[UXV] = 134,217,728 EU/t (C1 checks).
+Until A4's `gtceu:opv_assembler` exists, assembler rows at OpV voltage run in the assembly hall (`gtceu:assembly_hall`, ZPM; or the UHV `gtceu:quantum_fabricator`) on two UXV 4 A hatches: GTM 7.5.3's GCyM `gtceu:large_assembler` takes exactly one energy hatch, so it never reaches V[OpV]. All EU/t and ticks below are *(tune)*. Every OpV row runs at more than V[UXV] = 134,217,728 EU/t (C1 checks).
 
 **OpV component and circuit rule (owner, 2026-10-29).** Every recipe for an OpV machine, hatch, basic machine or controller takes:
 

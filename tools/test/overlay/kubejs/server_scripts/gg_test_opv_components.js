@@ -4,7 +4,8 @@
 //   T1 (named uncertainty, docs/eras/opv.md "A1. Components": S0-1 read ids, not recipes):
 //     recipes      the seven assembler rows of server_scripts/grindless/opv/components.js are in the recipe manager at 2^28 EU/t
 //     gtm_cut      each of the four components made here has exactly one producer, ours: GTM's own recipe for the same id is gone (F2)
-//     gcym_formed  gtceu:large_assembler, built from its own preview shape with two gtceu:uxv_energy_input_hatch_4a, forms
+//     gcym_formed  gtceu:assembly_hall (the ZPM mega: 1 to 4 energy hatches; GTM 7.5.3's GCyM large_assembler takes exactly one, so two
+//                  UXV hatches cannot lift it to OpV), built from its own preview shape with two gtceu:uxv_energy_input_hatch_4a, forms
 //     runs         it takes the 2^28 conveyor row (2 motors + 2 chain mesh belts + 1 chain cable + 2 tritanium plates + 4 tritanium rounds +
 //                  2 tritanium rings; no fluid) and reports the recipe as running
 //     output       the OpV conveyor module reaches the output bus
@@ -17,7 +18,7 @@
   var Y0 = 98
   var Y1 = 115
   var NAME = 'opv_components'
-  var GCYM = 'gtceu:large_assembler'
+  var GCYM = 'gtceu:assembly_hall'
   var HATCH = 'gtceu:uxv_energy_input_hatch_4a'
   var OPV_EUT = 268435456
   var ROWS = ['chain_sic_preform', 'superfluid_he3_seal', 'chain_field_coil', 'opv_electric_motor', 'opv_electric_pump', 'opv_conveyor_module',
