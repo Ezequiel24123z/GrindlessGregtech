@@ -1,3 +1,4 @@
+// priority: -19960
 // -----------------------------------------------------------------------------------------------
 // MAX mass stream injector (docs/eras/max.md, machine 7 and line L14; package MAX-D4). The line steps on older machines are rows marked MAX-D4
 // in their own tables; this file holds the machine's two recipes, its controller and the GTM rows of the line:

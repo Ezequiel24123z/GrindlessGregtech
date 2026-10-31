@@ -1,3 +1,4 @@
+// priority: -19858
 // -----------------------------------------------------------------------------------------------
 // MAX casing pass (QR-MAX, docs/eras/max.md:1105): the assembler rows of the F1 casings that no machine package owns. Each casing is made at home
 // from OpV parts, so its first machine can be built before anything of MAX runs: optical table (machines 1, 2 and 9, R1's furnace), membrane

@@ -1,4 +1,4 @@
-// priority: -19988
+// priority: -19990
 // Gregtech Grindless - the MAX parallel hatch's recipe (package MAX-M1; the hatch is registered in startup_scripts/grindless/lib/parallel_hatch.js).
 //
 //   gtceu:max_parallel_hatch (Maximum Parallel Control Hatch, up to 1048576 copies of a recipe) -> grindless:assembly_line/max_parallel_hatch

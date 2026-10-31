@@ -109,7 +109,8 @@
     'gtceu:photon_ring_imaging': 'loop_photon_ring_imager',
     'gtceu:geroch_power': 'loop_geroch_winch',
     'gtceu:genome_archiving': 'loop_gene_ark',
-    'gtceu:cluster_light_smelting': 'loop_cluster_light_furnace'
+    'gtceu:cluster_light_smelting': 'loop_cluster_light_furnace',
+    'gtceu:mass_stream_injection': 'loop_mass_stream_injector'
   }
 
   StartupEvents.registry('sound_event', function (event) {

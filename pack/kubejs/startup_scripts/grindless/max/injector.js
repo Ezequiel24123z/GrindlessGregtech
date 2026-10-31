@@ -1,3 +1,4 @@
+// priority: -5428
 // -----------------------------------------------------------------------------------------------
 // MAX's mass stream injector (docs/eras/max.md, machine 7 and line L14; package MAX-D4): the multiblock and its recipe type. No item of its
 // own: every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/injector.js.
