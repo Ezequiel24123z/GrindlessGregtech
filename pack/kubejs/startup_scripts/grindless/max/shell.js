@@ -9,7 +9,7 @@
 //
 // One controller carries both kinds of row. It is NOT configured as a generator (G.generators.configure would call .generator(true), and
 // GTM then reads the output voltage of a machine that has input hatches: 0). Instead the recipe modifier hands generator rows to
-// G.generators.modifier and returns NULL for consumer rows (no overclock, no parallels). Names: client_scripts/grindless/max_shell_lang.js.
+// G.generators.modifier and returns IDENTITY for consumer rows (no overclock, no parallels; NULL would reject the recipe). Names: client_scripts/grindless/max_shell_lang.js.
 // Textures: tools/assets/Build-MaxShellTextures.ps1. Published for the recipe script: global.grindless.maxShell.
 //
 // Credits: when a run of the last recipe ends, every player within 64 blocks of the controller gets the title and, once, the epilogue
@@ -36,19 +36,20 @@
     }
   ]
 
-  // x left to right, y bottom to top, z back to front. Every face is tiled 8 x 8: bundle block grid lines, a cleanroom glass window ringed by\n  // superconducting coil, segment between; the core is empty.
+  // x left to right, y bottom to top, z back to front. Two stream bundle block rings run round the four side faces (y 8 and 24); every face
+  // is otherwise tiled 8 x 8: a cleanroom glass window ringed by superconducting coil, segment between; the core is empty.
   // The hatch cells are on the front face, two rows of seven round the controller at the equator.
   function shellCell(x, y, z) {
     var edge = x === 0 || x === N - 1 || y === 0 || y === N - 1 || z === 0 || z === N - 1
     if (!edge) return '#'
     if (z === N - 1 && x >= 13 && x <= 19 && (y === 14 || y === 18)) return 'X'
+    if ((y === 8 || y === 24) && y !== 0 && y !== N - 1) return 'A'
     var zFace = z === 0 || z === N - 1
     var xFace = x === 0 || x === N - 1
     var u = zFace ? x : xFace ? y : x
     var v = zFace ? y : z
     var a = u % 8
     var b = v % 8
-    if (a === 0 || b === 0) return 'A'
     if (a >= 3 && a <= 5 && b >= 3 && b <= 5) return 'L'
     if (a >= 2 && a <= 6 && b >= 2 && b <= 6) return 'C'
     return 'F'
@@ -113,7 +114,7 @@
     var gen = G.generators.modifier({ maxParallels: 1, name: 'mirror_shell' })
     return function (machine, recipe) {
       if (G.generators.recipeEUt(recipe) > 0) return gen(machine, recipe)
-      return ModifierFunction.NULL
+      return ModifierFunction.IDENTITY
     }
   }
 
