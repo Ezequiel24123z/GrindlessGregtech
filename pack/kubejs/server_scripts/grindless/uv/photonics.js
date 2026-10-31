@@ -252,7 +252,11 @@
       fluidsIn: [fluid(ACRYLATE, 250)], itemsOut: [item('grindless:memory_fibre_pigtail', 1)], fluidsOut: [], eut: 1966080, duration: 400 },
     // MAX-B3 L40 (fibre draw c20): the hollow-core fibre drawn from the ultrapure silica tube under argon
     { name: 'hollow_core_fibre', type: 'fibre_draw', circuit: 20, itemsIn: [item('grindless:ultrapure_silica_tube', 1)],
-      fluidsIn: [fluid('gtceu:argon', 500), fluid(ACRYLATE, 250)], itemsOut: [item('grindless:hollow_core_fibre', 4)], fluidsOut: [], eut: 1966080, duration: 600 }
+      fluidsIn: [fluid('gtceu:argon', 500), fluid(ACRYLATE, 250)], itemsOut: [item('grindless:hollow_core_fibre', 4)], fluidsOut: [], eut: 1966080, duration: 600 },
+    // MAX-D2 L44 step 1 (c28): the InP/InGaAs UTC photodiode stack grown on an InP wafer; the methyls leave as methane, most of the phosphine is recovered
+    { name: 'inp_utc_epi_wafer', type: 'mocvd', circuit: 28, itemsIn: [item('grindless:semi_insulating_inp_wafer', 1), item('gtceu:indium_dust', 1), item('gtceu:gallium_dust', 1)],
+      fluidsIn: [fluid(TMGA, 250), fluid('gtceu:phosphine', 1000)], itemsOut: [item('grindless:inp_utc_epi_wafer', 1)],
+      fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:phosphine', 500)], eut: 1966080, duration: 1200 }
   ]
 
   // side steps on GTM's own machines

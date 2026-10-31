@@ -217,7 +217,13 @@
           "itemsOut": [{ "id": "grindless:ar_coated_glass_cell", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
         { "_why": "MAX-B3 (max.md, L46 step 4, c23): titanium and gold sputtered onto the bonded transducer as its electrodes; most of the argon is recovered", "name": "electroded_aod", "circuit": 23, "eut": 33554432, "duration": 900,
           "itemsIn": [{ "id": "grindless:ln_transducer_bonded_blank", "count": 1 }, { "id": "gtceu:titanium_dust", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:electroded_aod", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] }
+          "itemsOut": [{ "id": "grindless:electroded_aod", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
+        { "_why": "MAX-D2 (max.md, L21 step 4, c17): gold sputtered onto the figured SiC dish blank as its reflective coat; most of the argon is recovered", "name": "gold_coated_dish", "circuit": 17, "eut": 33554432, "duration": 900,
+          "itemsIn": [{ "id": "grindless:figured_dish_blank", "count": 1 }, { "id": "gtceu:gold_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:gold_coated_dish", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
+        { "_why": "MAX-D2 (max.md, L22 step 1, c18): niobium, aluminium and niobium sputtered in turn into the Nb/AlOx/Nb trilayer; most of the argon is recovered", "name": "nb_alox_nb_trilayer", "circuit": 18, "eut": 33554432, "duration": 900,
+          "itemsIn": [{ "id": "gtceu:niobium_dust", "count": 2 }, { "id": "gtceu:aluminium_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:nb_alox_nb_trilayer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] }
       ]
     },
     "pulsed_laser_deposition": {

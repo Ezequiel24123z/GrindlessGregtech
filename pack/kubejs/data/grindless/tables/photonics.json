@@ -207,7 +207,10 @@
           "itemsOut": [{ "id": "grindless:piezo_optomech_layer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] },
         { "_why": "MAX-B2 (max.md, L33 step 2, c13): the AlGaAs/GaAs Bragg stack grown on the gallium arsenide substrate", "name": "algaas_bragg_stack", "circuit": 13, "eut": 1966080, "duration": 1600,
           "itemsIn": [{ "id": "grindless:gallium_arsenide_wafer", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }, { "id": "gtceu:gallium_arsenide_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:algaas_bragg_stack", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] }
+          "itemsOut": [{ "id": "grindless:algaas_bragg_stack", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] },
+        { "_why": "MAX-D2 (max.md, L45 step 2, c14): the InGaAs/InAlAs HEMT stack grown on the semi-insulating InP wafer", "name": "hemt_stack_epi", "circuit": 14, "eut": 1966080, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:semi_insulating_inp_wafer", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }, { "id": "gtceu:indium_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:inp_hemt_epi", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] }
       ]
     },
     "photonic_foundry": {
@@ -503,6 +506,13 @@
           "itemsIn": [{ "id": "grindless:trimmed_microring", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 }],
           "kept": [], "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }, { "id": "gtceu:soldering_alloy", "amount": 36 }], "charge": [],
           "itemsOut": [{ "id": "grindless:packaged_microcomb", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "MAX-D2 (max.md, L44 step 5, c24): two UTC dies soldered onto a glass interposer and packaged with the optical feed into the photonic LO module",
+          "name": "photonic_lo_module", "circuit": 24, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "grindless:utc_die", "count": 2 }, { "id": "grindless:glass_interposer", "count": 1 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }, { "id": "gtceu:soldering_alloy", "amount": 36 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:photonic_lo_module", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
       ]
     },
