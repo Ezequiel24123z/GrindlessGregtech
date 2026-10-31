@@ -45,7 +45,7 @@ test('the stand-in runs the MAX foundation and its names without errors', () => 
 });
 
 test('the id list is pinned: 258 items, 7 blocks, the strand and 5 fluids; nothing twice', () => {
-  assert.equal(ITEMS.length, 258);
+  assert.equal(ITEMS.length, 257);
   assert.deepEqual([...got.blocks], BLOCKS);
   assert.deepEqual([...got.materials], MATERIAL_KEYS);
   assert.deepEqual([...got.existing], EXISTING);

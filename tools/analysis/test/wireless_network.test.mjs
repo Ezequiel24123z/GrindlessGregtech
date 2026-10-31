@@ -1330,20 +1330,17 @@ test('LuV wireless names and textures: en_us and es_es for every LuV block and i
   assert.equal(lang.en_us['block.grindless.luv_smes_cell'], 'LuV SMES Cell');
   assert.equal(lang.en_us['block.gtceu.luv_wireless_energy_hatch_64a'], '\u00a7dLuV 64A Wireless Energy Hatch');
   const tex = path.join(PACK, 'kubejs', 'assets', 'grindless', 'textures');
-  // MAX-W's covers have no textures or EMI page entries yet (assets are not MAX-W's files): the integrator adds them and drops this set
-  const NO_ASSETS_YET = new Set(['max']);
   for (const r of TABLE.tiers) {
     const cell = r.texture ? String(r.texture).replace(/^grindless:/, '') : 'block/wireless/capacitor_cell_' + r.name;
     assert.ok(fs.existsSync(path.join(tex, cell + '.png')), r.name + ': ' + cell);
-    if (NO_ASSETS_YET.has(r.name)) continue;
     for (const kind of ['energy', 'dynamo']) {
       assert.ok(fs.existsSync(path.join(tex, 'item', 'wireless', `${kind}_cover_${r.name}.png`)), r.name + ' ' + kind + ' cover item');
       assert.ok(fs.existsSync(path.join(tex, 'block', 'cover', `wireless_${kind}_cover_${r.name}.png`)), r.name + ' ' + kind + ' cover face');
     }
   }
   const page = (f) => JSON.parse(fs.readFileSync(path.join(PACK, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless', f), 'utf8'));
-  for (const r of TABLE.tiers.filter((x) => !NO_ASSETS_YET.has(x.name))) assert.ok(page('capacitor_cells.json').stacks.includes('item:' + r.cell), r.cell + ' on the cells\' EMI page');
-  for (const c of TABLE.tiers.filter((x) => !NO_ASSETS_YET.has(x.name)).flatMap((r) => ['energy', 'dynamo'].map((k) => `item:grindless:${r.name}_wireless_${k}_cover`))) {
+  for (const r of TABLE.tiers) assert.ok(page('capacitor_cells.json').stacks.includes('item:' + r.cell), r.cell + ' on the cells\' EMI page');
+  for (const c of TABLE.tiers.flatMap((r) => ['energy', 'dynamo'].map((k) => `item:grindless:${r.name}_wireless_${k}_cover`))) {
     assert.ok(page('wireless_covers.json').stacks.includes(c), c + ' on the covers\' EMI page');
   }
 });
