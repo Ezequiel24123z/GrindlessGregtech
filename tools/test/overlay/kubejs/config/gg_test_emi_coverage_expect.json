@@ -2014,7 +2014,7 @@
     "workstations": [],
     "previews": ["extendedfeatures:expanded_assembly_line","extendedfeatures:matrix_data_relay","gcyr:dyson_system_controller","gcyr:space_elevator","gtca:tegmark_forge","gtceu:assembly_line","gtceu:assembly_line_array","gtceu:central_monitor","gtceu:cleanroom","gtceu:data_bank"],
     "noUse": [],
-    "routes": [],
+    "routes": ["grindless:rejected_timing_head made in gtceu:assembler"],
     "machineInfo": []
   }
 }
