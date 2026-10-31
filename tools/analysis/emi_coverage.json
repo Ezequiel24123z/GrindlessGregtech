@@ -90,11 +90,13 @@
     { "id": "gtceu:horizon_strand_ingot", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" }
   ],
   "pendingRoutes": [
-    { "id": "grindless:rydberg_assembly/rydberg_array_refurbish", "reason": "MAX-B3: its input grindless:spent_rydberg_array comes back from the mirror shell c3 (max.md:651, the ending), which is G1; held until max. Owner G1" }
   ],
   "pendingUses": [
         { "id": "grindless:shell_cryocooler", "package": "C1", "reason": "MAX-H1 makes it (L30); G1's segment foundry mode takes it and C1 checks the use is there" },
         { "id": "grindless:segment_controller", "package": "C1", "reason": "MAX-H1 makes it (L38); G1's mirror shell controller takes it and C1 checks the use is there" },
-    { "id": "grindless:launched_gc_probe", "package": "T2", "reason": "MAX-T1 returns it from gate c14; T2's belt seed chain takes it and T2 checks the use is there" }
-      ]
+    { "id": "grindless:launched_gc_probe", "package": "T2", "reason": "MAX-T1 returns it from gate c14; T2's belt seed chain takes it and     T2 checks the use is there" },
+        { "id": "grindless:shell_gradient_map", "package": "G1", "reason": "MAX-D2 makes it (interferometer c2 at Sgr A*); G1's mirror shell c2 takes it with sgr_a_spin_map (max.md:339)" },
+        { "id": "grindless:shell_droplet_radiator", "package": "G1", "reason": "MAX-D1 makes it; G1's segment row takes it (max.md:735)" },
+        { "id": "grindless:launched_belt_seed", "package": "C1", "reason": "MAX-T2 returns it from gate c15; the max-nsc grant (tiers/max.json) is its use and C1 checks the grant is there" }
+          ]
 }
