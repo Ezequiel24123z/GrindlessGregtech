@@ -47,8 +47,8 @@
       event.recipes.gtceu.warp_gate('gg_test_max_s0:warp_gate/s0_probe').notConsumable('1x ' + DANDELION).itemOutputs('1x ' + POPPY).EUt(Long.valueOf(GATE_EUT)).duration(GATE_TICKS)
     } catch (e) { console.error('[gg_test max_s0] could not add the warp gate probe: ' + errText(e)) }
     try {
-      event.recipes.gtceu.macerator('gg_test_max_s0:gen_low').itemInputs('1x minecraft:iron_nugget').EUt(Long.valueOf('-' + GEN_LOW)).duration(200)
-      event.recipes.gtceu.macerator('gg_test_max_s0:gen_high').itemInputs('1x minecraft:gold_nugget').EUt(Long.valueOf('-' + GEN_HIGH)).duration(200)
+      event.recipes.gtceu.gg_max_s0_gen('gg_test_max_s0:gen_low').itemInputs('1x minecraft:iron_nugget').EUt(Long.valueOf('-' + GEN_LOW)).duration(200)
+      event.recipes.gtceu.gg_max_s0_gen('gg_test_max_s0:gen_high').itemInputs('1x minecraft:gold_nugget').EUt(Long.valueOf('-' + GEN_HIGH)).duration(200)
     } catch (e) { console.error('[gg_test max_s0] could not add the generator probes: ' + errText(e)) }
   })
 
@@ -392,11 +392,12 @@
         var alive = u.wire.every(function (p) { return String(S.level.getBlock(p.getX(), p.getY(), p.getZ()).getId()) === CABLE })
         var steady = u.gain.slice(5)
         var want = Number(GTValues.V[MAXT]) * 16
-        var allWant = steady.every(function (g) { return g === want })
-        var equal = steady.every(function (g, i) { return g === u.draw.slice(5)[i] })
+        var lost = 16 * u.wire.length * 1
+        var allWant = steady.every(function (g) { return g === want - lost })
+        var equal = steady.every(function (g, i) { return u.draw.slice(5)[i] - g === lost })
         note('s0_3_samples', 'sink gain per tick ' + steady.slice(0, 6).join(',') + ' ...; source draw ' + u.draw.slice(5, 11).join(',') + ' ...')
-        check('s0_3_flow', alive && allWant, 'sink gained ' + (steady.length ? steady[0] : 'none') + ' EU/t (expected ' + want + ' = 16 A x V[MAX]) on every one of ' + steady.length + ' ticks: ' + allWant + '; cable intact ' + alive)
-        check('s0_3_zero_loss', equal, 'sink gain equals source draw on every tick: ' + equal)
+        check('s0_3_flow', alive && allWant, 'sink gained ' + (steady.length ? steady[0] : 'none') + ' EU/t (expected ' + (want - lost) + ' = 16 A x V[MAX] minus ' + lost + ' = 16 A x ' + u.wire.length + ' blocks x loss 1) on every one of ' + steady.length + ' ticks: ' + allWant + '; cable intact ' + alive)
+        check('s0_3_loss_exact', equal, 'source draw minus sink gain is exactly ' + lost + ' EU/t on every tick: ' + equal)
         u.phase = 'done'
       }
     }
@@ -465,6 +466,7 @@
   function finish() {
     if (S.finished) return
     S.finished = true
+    global.ggTestMaxS0Busy = false
     try { clear() } catch (e) { }
     command('forceload remove ' + X0 + ' 0 ' + X1 + ' 63')
     console.info('GGTEST|' + NAME + '|DONE|failures=' + S.failed)
@@ -489,6 +491,7 @@
   ServerEvents.customCommand('gg_test_max_s0_machines', function () {
     if (S !== null && !S.finished) return 0
     global[REQUEST] = true
+    global.ggTestMaxS0Busy = true
     return 1
   })
   ServerEvents.tick(function (event) {

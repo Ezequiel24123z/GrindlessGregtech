@@ -63,9 +63,9 @@
     var waited = S.tick - u.started
     if (!m) { if (waited > 100) { check(u.name + '_formed', false, 'no controller block entity'); u.done = true } return }
     if (!m.isFormed() && waited >= 20 && waited % 20 === 0) {
-      var t0 = System.nanoTime()
+      var t0 = Date.now()
       var ok = m.checkPatternWithLock()
-      u.firstMs = (System.nanoTime() - t0) / 1e6
+      u.firstMs = (Date.now() - t0)
       if (ok) { m.setFlipped(m.getMultiblockState().isNeededFlip()); m.onStructureFormed() }
       if (!ok && waited >= 100) { check(u.name + '_formed', false, 'pattern check false after ' + waited + ' ticks: ' + why(m) + '; first check ' + u.firstMs.toFixed(2) + ' ms'); u.done = true; return }
     }
@@ -74,10 +74,10 @@
       return
     }
     var runs = 20
-    var t1 = System.nanoTime()
+    var t1 = Date.now()
     var allOk = true
     for (var i = 0; i < runs; i++) if (!m.checkPatternWithLock()) allOk = false
-    var per = (System.nanoTime() - t1) / 1e6 / runs
+    var per = (Date.now() - t1) / runs
     var parts = 0
     try { parts = Number(m.getMultiblockState().getMatchContext().size()) } catch (e) { }
     check(u.name + '_formed', allOk, 'formed ' + u.blocks + ' casing blocks, ' + u.n + '^3; first check ' + (u.firstMs !== undefined ? u.firstMs.toFixed(2) : 'n/a') + ' ms')
@@ -89,6 +89,9 @@
     S = { server: server, tick: 0, failed: 0, finished: false, units: [] }
     S.level = server.getLevel('minecraft:overworld')
     command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
+    note('s0_7_forceload', 'chunks requested, building after 80 ticks')
+  }
+  function first() {
     clear()
     var a = build(33, 38752, 5)
     S.units.push({ name: 's0_7_cube33', n: 33, pos: a.pos, blocks: a.blocks, started: 0, done: false })
@@ -115,12 +118,14 @@
   })
   ServerEvents.tick(function (event) {
     try {
-      if (global[REQUEST] === true && Date.now() - LOADED >= 10000) {
+      if (global[REQUEST] === true && Date.now() - LOADED >= 10000 && global.ggTestMaxS0Busy !== true) {
         global[REQUEST] = false
         begin(event.server)
       }
       if (S === null || S.finished) return
       S.tick++
+      if (S.tick < 80) return
+      if (S.units.length === 0) { first(); return }
       var u = S.units[S.units.length - 1]
       if (!u.done) { formed(u); return }
       if (S.units.length === 1) { second(); return }
