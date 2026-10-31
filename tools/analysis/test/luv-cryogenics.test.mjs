@@ -182,6 +182,8 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
   const hrSrc = fs.readFileSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'luv', 'helium_refrigerator.js'), 'utf8');
   const opvBlock = (hrSrc.match(/var OPV_ROWS = \[([\s\S]*?)\n {2}\]/) || [])[1] || '';
   for (const m of opvBlock.matchAll(/name: '([a-z0-9_]+)'/g)) laterIds.add('grindless:closed_loop_cooling/' + m[1]);
+  // OpV-B3a's octupole winding cooldown (below the OPV_ROWS loop): opv-antimatter.test.mjs proves its ids
+  laterIds.add('grindless:closed_loop_cooling/octupole_winding_cooldown');
   for (const r of ours.filter((x) => !laterIds.has(x.i))) {
     const walk = (o, key) => {
       if (Array.isArray(o)) return o.forEach((x) => walk(x, key));

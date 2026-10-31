@@ -29,6 +29,7 @@
                   "server_scripts/gg_dump.js":  -100000,
                   "server_scripts/gg_test_addon_gates_ef.js":  100,
                   "server_scripts/gg_test_addon_gates_misc.js":  100,
+                  "server_scripts/gg_test_opv_antimatter.js":  -50000,
                   "server_scripts/gg_test_recipe_lookup.js":  -100000
               }
 }

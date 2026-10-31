@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:hawking_collector"],
+  "text": ["emi.grindless.info.hawking_collector.0", "emi.grindless.info.hawking_collector.1"]
+}

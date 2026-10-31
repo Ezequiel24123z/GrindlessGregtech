@@ -311,6 +311,24 @@
       "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 4000 }],
       "itemsOut": [{ "id": "grindless:thorium_229_nitrate", "count": 1 }],
       "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }]
+    },
+    {
+      "_why": "OpV-B3a line 32: a neutron-activated gamma absorber tile in the hot cell: the boron-10 has captured neutrons into lithium-7 and helium-4 (alpha); the helium is recovered as gas, the tungsten and the boron carbide go back to their own stock",
+      "name": "activated_absorber_decay",
+      "circuit": 22,
+      "eut": 7680,
+      "duration": 600,
+      "itemsIn": [{ "id": "grindless:activated_absorber_tile", "count": 1 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "gtceu:tungsten_dust", "count": 4 }, { "id": "gtceu:boron_carbide_dust", "count": 1 }, { "id": "gtceu:lithium_dust", "count": 1 }],
+      "fluidsOut": [{ "id": "gtceu:helium", "amount": 500 }]
+    },
+    {
+      "_why": "OpV-D2: beta-active strangelet tailings decay in shielded storage; inert lead returns to stock",
+      "name": "strangelet_tailings_decay", "circuit": 19, "eut": 268435456, "duration": 1200,
+      "itemsIn": [{"id": "grindless:strangelet_tailings", "count": 1}],
+      "itemsOut": [{"id": "gtceu:lead_dust", "count": 1}],
+      "fluidsIn": [], "fluidsOut": []
     }
   ]
 }

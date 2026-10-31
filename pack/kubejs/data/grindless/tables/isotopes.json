@@ -212,6 +212,28 @@
             { "id": "gtceu:nickel_dust", "count": 3 }
           ],
           "fluidsOut": []
+        },
+        {
+          "_": "OpV-B3a line 32: boron-10 (the neutron absorber of the gamma absorber tile); B-11 goes back to stock as boron dust",
+          "name": "boron_10",
+          "circuit": 15,
+          "eut": 1966080,
+          "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:boron_dust", "count": 4 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [
+            { "id": "grindless:boron_10_dust", "count": 1 },
+            { "id": "gtceu:boron_dust", "count": 3 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_": "OpV-D2: Pb-208 collector pocket; other lead returns to stock",
+          "name": "lead_208", "circuit": 12, "eut": 268435456, "duration": 400,
+          "itemsIn": [{"id": "gtceu:lead_dust", "count": 4}],
+          "itemsOut": [{"id": "grindless:lead_208_dust", "count": 1}, {"id": "gtceu:lead_dust", "count": 3}]
         }
       ]
     },

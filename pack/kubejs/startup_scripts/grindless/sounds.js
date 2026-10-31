@@ -93,7 +93,16 @@
     'gtceu:field_freezing': 'loop_field_frozen_press',
     'gtceu:tetron_assembly': 'loop_tetron_fab',
     'gtceu:gamma_optics': 'loop_gamma_optics_works',
-    'gtceu:magnetic_pair_production': 'loop_magnetic_pair_converter'
+    'gtceu:magnetic_pair_production': 'loop_magnetic_pair_converter',
+    'gtceu:antihydrogen_synthesis': 'loop_antihydrogen_foundry',
+    'gtceu:annihilation_power': 'loop_annihilation_engine',
+    'gtceu:jet_beam_extraction': 'loop_jet_beam_line',
+    'gtceu:antiproton_production': 'loop_spallation_target_station',
+    'gtceu:beam_cooling': 'loop_antiproton_decelerator',
+    'gtceu:strangelet_growth': 'loop_strangelet_vault',
+    'gtceu:strangelet_distillation': 'loop_strangelet_distiller',
+    'gtceu:kugelblitz_forming': 'loop_kugelblitz_forge',
+    'gtceu:hawking_power': 'loop_hawking_collector'
   }
 
   StartupEvents.registry('sound_event', function (event) {

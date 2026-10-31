@@ -89,6 +89,8 @@
         }
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, dataKey: t.types[type].dataKey ? String(t.types[type].dataKey) : '',
           orbit: r.orbit === true, cleanroom: r.cleanroom === true,
+          site: r.site ? String(r.site) : '',
+          builderId: r.builderId ? String(r.builderId) : '',
           itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack), chancedIn: list(r.chancedIn).map(chanced),
           fluidsIn: list(r.fluidsIn).map(fluid), charge: list(r.charge).map(fluid),
           itemsOut: list(r.itemsOut).map(stack), chancedOut: list(r.chancedOut).map(chanced), fluidsOut: list(r.fluidsOut).map(fluid) }
@@ -144,6 +146,8 @@
     rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
     if (rec.orbit) recipe.dimension(ORBIT)
+    // OpV-D2's older crossing processes Cygnus plasma at its source.
+    if (rec.site) recipe.dimension(rec.site)
     if (rec.cleanroom) recipe.cleanroom(CleanroomType.CLEANROOM)
     recipe.EUt(rec.type === GENERATOR ? -rec.eut : rec.eut).duration(rec.duration)
   }

@@ -117,7 +117,7 @@ test('millikelvin cryostat works: circuits 1-3, 31457280 EU/t, module is a catal
   const rc = T.types.nuclear_demagnetisation.recipes;
   // OpV-A1 appends c4 superfluid_he3 and c5 superleak_plug (opv.md line 5), both on the kept module; OpV-B1 c6 tested_tetron_die
   // (OpV line 19, the parity test on the kept module)
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['nuclear_stage', 1], ['mk_module', 2], ['p_si_processor', 3], ['superfluid_he3', 4], ['superleak_plug', 5], ['tested_tetron_die', 6]]);
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['nuclear_stage', 1], ['mk_module', 2], ['p_si_processor', 3], ['superfluid_he3', 4], ['superleak_plug', 5], ['tested_tetron_die', 6], ['levitation_cell', 7]]);
   for (const r of rc.slice(3)) assert.deepEqual(ids(r.kept), ['grindless:mk_cryostat_module'], r.name);
   for (const r of rc) assert.equal(r.eut, 31457280, r.name);
   assert.equal(rc[0].duration, 1600);
@@ -185,6 +185,8 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   // OpV-A1's c4-5 keys live in its own lang file, one flat line each
   const opvA1 = read('client_scripts', 'grindless', 'opv_components_lang.js');
   for (const m of opvA1.matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+', '[^']+'\]/gm)) keys.push(m[1]);
+  const opvLang = read('client_scripts', 'grindless', 'opv_antimatter_lang.js');
+  keys.push(...[...opvLang.matchAll(/\['(gtceu\.recipe\.[^']+)'/g)].map((m) => m[1]));
   const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
   for (const k of ['block.gtceu.spectral_hole_burner', 'gtceu.spectral_hole_burning', 'block.gtceu.millikelvin_cryostat_works', 'gtceu.nuclear_demagnetisation', 'material.gtceu.he3_he4_mixture', 'material.gtceu.erbium_chloride_solution']) assert.ok(flat.includes(k), k);
   for (const n of ['eu151_yso', 'er_yso']) assert.ok(keys.includes(`gtceu.recipe.grindless_crystal_growth.${n}`), n);

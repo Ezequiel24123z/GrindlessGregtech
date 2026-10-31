@@ -183,6 +183,24 @@
             { "id": "gtceu:arsenic_dust", "count": 1, "chance": 5000 }
           ],
           "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
+        },
+        {
+          "_why": "OpV-B3a line 33 (c11): the InGaAsSb absorber grown lattice-matched on a GaSb wafer from the In, Ga, As and Sb sources (circuit 11)",
+          "name": "ingaassb_epi",
+          "circuit": 11,
+          "eut": 1966080,
+          "duration": 1200,
+          "itemsIn": [
+            { "id": "grindless:gasb_wafer", "count": 1 },
+            { "id": "gtceu:indium_dust", "count": 1 },
+            { "id": "gtceu:arsenic_dust", "count": 1 },
+            { "id": "gtceu:antimony_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:ingaassb_epi_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }]
         }
       ]
     },

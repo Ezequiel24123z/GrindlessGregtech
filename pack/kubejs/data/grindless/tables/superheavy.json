@@ -191,6 +191,16 @@
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:activated_target_wheel", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:element_126_recoil_gas", "amount": 1000 }]
+        },
+        {
+          "_why": "OpV-D2: accelerate the sealed Pb-208 ion source; chlorine and glass are returned",
+          "name": "pb208_beam_cell", "circuit": 12, "eut": 268435456, "duration": 800,
+          "itemsIn": [{"id": "grindless:pb208_ion_source", "count": 1}],
+          "kept": [{"id": "grindless:nb3sn_srf_cavity", "count": 1}],
+          "charge": [{"id": "gtceu:helium", "amount": 1000}],
+          "fluidsIn": [{"id": "gtceu:liquid_helium", "amount": 100}],
+          "itemsOut": [{"id": "grindless:pb208_beam_cell", "count": 1}, {"id": "gtceu:glass_tube", "count": 1}],
+          "fluidsOut": [{"id": "gtceu:helium", "amount": 100}, {"id": "gtceu:chlorine", "amount": 2000}]
         }
       ]
     },

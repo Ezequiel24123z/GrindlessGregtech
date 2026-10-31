@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:annihilation_shield_casing"],
+  "text": ["emi.grindless.info.annihilation_shield_casing.0"]
+}
