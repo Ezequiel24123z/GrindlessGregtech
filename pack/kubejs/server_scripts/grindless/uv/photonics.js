@@ -238,7 +238,21 @@
     // MAX-B1 (docs/eras/max.md, line 2): a ceria buffer grown on the PBO carrier web in oxygen (c25)
     { name: 'buffered_pbo_web', type: 'mocvd', circuit: 25, itemsIn: [item('grindless:pbo_carrier_web', 1), item('gtceu:cerium_dust', 1)],
       fluidsIn: [fluid('gtceu:oxygen', 1000)], itemsOut: [item('grindless:buffered_pbo_web', 1)],
-      fluidsOut: [], eut: 1966080, duration: 1200 }
+      fluidsOut: [], eut: 1966080, duration: 1200 },
+    // MAX-B3 L19 (c26): the Rydberg laser die, an AlGaInAs stack grown on the GaAs wafer; the methyls leave as methane, most of the arsine is recovered
+    { name: 'rydberg_laser_die', type: 'mocvd', circuit: 26, itemsIn: [item(GAAS_WAFER, 1), item('gtceu:indium_dust', 1), item('gtceu:aluminium_dust', 1)],
+      fluidsIn: [fluid(TMGA, 250), fluid(ARSINE, 1000)], itemsOut: [item('grindless:rydberg_laser_die', 1)],
+      fluidsOut: [fluid('gtceu:methane', 750), fluid(ARSINE, 500)], eut: 1966080, duration: 1200 },
+    // MAX-B3 L29 (c27): the silicon nitride film of the microring comb, deposited from silane and ammonia on an oxidised wafer; the hydrogen goes back
+    { name: 'nitride_film_wafer', type: 'mocvd', circuit: 27, itemsIn: [item('gtceu:silicon_wafer', 1), item('gtceu:silicon_dioxide_dust', 1)],
+      fluidsIn: [fluid('gtceu:silane', 750), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:nitride_film_wafer', 1)],
+      fluidsOut: [fluid('gtceu:hydrogen', 3000)], eut: 1966080, duration: 1000 },
+    // MAX-B3 L23 (fibre draw c19): the burned Eu:YSO crystal spliced to ytterbium fibre as the memory node's pigtail
+    { name: 'memory_fibre_pigtail', type: 'fibre_draw', circuit: 19, itemsIn: [item('grindless:burned_memory_crystal', 1), item(FIBRE, 2)],
+      fluidsIn: [fluid(ACRYLATE, 250)], itemsOut: [item('grindless:memory_fibre_pigtail', 1)], fluidsOut: [], eut: 1966080, duration: 400 },
+    // MAX-B3 L40 (fibre draw c20): the hollow-core fibre drawn from the ultrapure silica tube under argon
+    { name: 'hollow_core_fibre', type: 'fibre_draw', circuit: 20, itemsIn: [item('grindless:ultrapure_silica_tube', 1)],
+      fluidsIn: [fluid('gtceu:argon', 500), fluid(ACRYLATE, 250)], itemsOut: [item('grindless:hollow_core_fibre', 4)], fluidsOut: [], eut: 1966080, duration: 600 }
   ]
 
   // side steps on GTM's own machines

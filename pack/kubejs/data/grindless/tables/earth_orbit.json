@@ -28,7 +28,10 @@
           "itemsOut": [{ "id": "grindless:tweezer_calibrated_lens", "count": 1 }], "fluidsOut": [] },
         { "_why": "MAX-B2 (max.md, L4 step 2, c5): strontium-88 cooled below degeneracy under the cooling lasers and the ULE cavity, loaded into a cartridge", "name": "degenerate_sr_cartridge", "circuit": 5, "eut": 1966080, "duration": 1200,
           "itemsIn": [{ "id": "grindless:sr88_isotope", "count": 1 }], "kept": [{ "id": "grindless:li_cooling_laser", "count": 1 }, { "id": "grindless:ule_cavity", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:degenerate_sr_cartridge", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:degenerate_sr_cartridge", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-B3 (max.md, L19 step 3, c6): rubidium-87 cooled under the cooling laser and the ULE cavity, loaded into the atom cartridge", "name": "atom_cartridge_rb87", "circuit": 6, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:rb87_isotope", "count": 1 }], "kept": [{ "id": "grindless:li_cooling_laser", "count": 1 }, { "id": "grindless:ule_cavity", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:atom_cartridge_rb87", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "entanglement_distribution": {

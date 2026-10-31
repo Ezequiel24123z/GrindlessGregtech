@@ -496,6 +496,13 @@
           "itemsIn": [{ "id": "grindless:mu_metal_shield_can", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 }],
           "kept": [], "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 36 }, { "id": "gtceu:ultrapure_water", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:shielded_interposer", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "MAX-B3 (max.md, L29 step 4, c23): the trimmed microring soldered onto a glass interposer and packaged with its pump coupling",
+          "name": "packaged_microcomb", "circuit": 23, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "grindless:trimmed_microring", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }, { "id": "gtceu:soldering_alloy", "amount": 36 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:packaged_microcomb", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
       ]
     },
