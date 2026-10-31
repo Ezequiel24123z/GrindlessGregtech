@@ -76,7 +76,7 @@ test('each machine: unique circuits, whole numbers, every row in the dump with i
     }
   }
   assert.deepEqual(E.recipes.filter((r) => r.type === 'pbo_synthesis').map((r) => r.name), ['nitrate', 'hydrolyse', 'reduce', 'polymerise', 'spin', 'chain_braid', 'belt_trim_respin', 'horizon_braid', 'pbo_carrier_web', 'pbo_belt_web']); // OpV-A0 appended c8, OpV-A1 c9, MAX-A0 c10, MAX-B1 c11-12
-  assert.deepEqual(E.recipes.filter((r) => r.type === 'tether_ribbon').map((r) => r.name), ['ribbon', 'climber', 'mh_tether', 'worn_tether_scrap', 'bumper_weave']); // UIV-B2 appended two, UXV-B1 one
+  assert.deepEqual(E.recipes.filter((r) => r.type === 'tether_ribbon').map((r) => r.name), ['ribbon', 'climber', 'mh_tether', 'worn_tether_scrap', 'bumper_weave', 'strand_ribbon']); // UIV-B2 appended two, UXV-B1 one, MAX-D3 one
 });
 
 test('line 24: trichlorobenzene to PBO fibre, every intermediate made before it is used', () => {

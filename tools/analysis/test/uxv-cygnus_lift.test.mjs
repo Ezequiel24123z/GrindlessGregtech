@@ -25,11 +25,11 @@ test('the stand-in runs the UXV-B2 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(CL.skipped), []);
   assert.deepEqual(plain(CL.clashes), []);
-  assert.equal(CL.recipes.length, 7); // + MAX-D1 hot_flow_filter, cooled_exhaust_return
+  assert.equal(CL.recipes.length, 8); // + MAX-D1 hot_flow_filter, cooled_exhaust_return; MAX-D3 proof_load_ribbon
 });
 
 test('elevator: circuit 1 lift (liquid helium -> stellar plasma + 900 mB warm helium), circuit 2 log (data module + 100 mB plasma); both at Cygnus X-1', () => {
-  assert.deepEqual(plain(CL.recipes.filter((r) => r.type === 'star_lifting').map((r) => [r.name, r.circuit])), [['stellar_lift', 1], ['elevator_log', 2]]);
+  assert.deepEqual(plain(CL.recipes.filter((r) => r.type === 'star_lifting').map((r) => [r.name, r.circuit])), [['stellar_lift', 1], ['elevator_log', 2], ['proof_load_ribbon', 3]]);
   const lift = rec('star_lifting', 'stellar_lift');
   assert.deepEqual([lift.eut, lift.duration, lift.site], [134217728, 1200, true]);
   assert.equal(fl(lift, 'fluidsIn', 'gtceu:liquid_helium').amount, 1000);

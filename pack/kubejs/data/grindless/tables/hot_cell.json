@@ -340,6 +340,14 @@
       "fluidsIn": [],
       "itemsOut": [{ "id": "grindless:tested_mmic_tile", "count": 3 }, { "id": "grindless:rejected_mmic_tile", "count": 1 }, { "id": "grindless:pube_neutron_source", "count": 1 }],
       "fluidsOut": []
+    },
+    {
+      "_why": "MAX-D3 line L17 step 3 (max.md): the cooled waste mix is cast into a glass log behind the shield (circuit 23: 21 and 22 are OpV's, 16-20 are taken; the lowest free number)",
+      "name": "vitrified_waste_log", "circuit": 23, "eut": 7680, "duration": 1200,
+      "itemsIn": [{ "id": "grindless:cooled_waste_mix", "count": 1 }, { "id": "gtceu:glass_dust", "count": 4 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:vitrified_waste_log", "count": 1 }],
+      "fluidsOut": []
     }
   ]
 }

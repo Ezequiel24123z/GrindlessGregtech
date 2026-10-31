@@ -97,6 +97,15 @@
       itemsOut: [{ id: SYNROC, count: 1 }], chancedOut: [],
       fluidsOut: [{ id: RAFFINATE, amount: 1000 }, { id: 'gtceu:nitrogen_dioxide', amount: 500 }],
       eut: 30720, duration: 600
+    },
+    // MAX-D3 (line L17 step 1): a batch of waste is leached into the mix the decay heat vault cools; circuit 10 (1-4 and 6 are taken)
+    {
+      name: 'retrieved_waste_mix', circuit: 10,
+      itemsIn: [{ id: WASTE, count: 16 }], chancedIn: [], notConsumed: [],
+      fluidsIn: [{ id: 'gtceu:nitric_acid', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:retrieved_waste_mix', count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: 'gtceu:nitrogen_dioxide', amount: 500 }],
+      eut: ZPM_VA, duration: 600
     }
   ]
 

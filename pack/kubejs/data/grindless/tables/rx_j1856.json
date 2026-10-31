@@ -108,6 +108,12 @@
           "itemsIn": [ { "id": "grindless:outer_crust_ions", "count": 2 } ],
           "itemsOut": [ { "id": "gtceu:iron_dust", "count": 2 } ],
           "fluidsOut": [ { "id": "gtceu:helium_4_ash", "amount": 250 } ]
+        },
+        {
+          "name": "waste_cooling", "circuit": 5, "eut": 32, "duration": 2400, "site": true,
+          "_why": "MAX-D3 line L17 step 2 (max.md): the retrieved waste mix sits in the vault until its short-lived heat has decayed (the vault's trivial draw, 0 in the L17 balance); it goes on to the hot cell",
+          "itemsIn": [ { "id": "grindless:retrieved_waste_mix", "count": 1 } ],
+          "itemsOut": [ { "id": "grindless:cooled_waste_mix", "count": 1 } ]
         }
       ]
     },
