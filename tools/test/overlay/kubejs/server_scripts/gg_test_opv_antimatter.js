@@ -16,10 +16,10 @@
   var C = null
   var LOADED = Date.now()
   var UNITS = [
-    { name: 'engine', dim: HOME, cx: 38216, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'run' },
-    { name: 'wear', dim: HOME, cx: 38236, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'wear' },
-    { name: 'lower_hatch', dim: HOME, cx: 38256, dynamo: 'gtceu:uxv_energy_output_hatch_16a', mode: 'refuse' },
-    { name: 'away', dim: AWAY, cx: 38216, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'refuse' }
+    { name: 'engine', dim: HOME, cx: 38856, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'run' },
+    { name: 'wear', dim: HOME, cx: 38876, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'wear' },
+    { name: 'lower_hatch', dim: HOME, cx: 38896, dynamo: 'gtceu:uxv_energy_output_hatch_16a', mode: 'refuse' },
+    { name: 'away', dim: AWAY, cx: 38856, dynamo: 'gtceu:opv_energy_output_hatch_4a', mode: 'refuse' }
   ]
   function classes() {
     if (C === null) C = {

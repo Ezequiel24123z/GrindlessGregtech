@@ -174,10 +174,10 @@
     "assembler": {
       "recipes": [
         {
-          "_why": "line 26: the krypton tripler cell: an MgF2 window, an LBO crystal and a krypton fill",
+          "_why": "line 26: the krypton tripler cell: an MgF2 window, an LBO crystal in a tungsten-steel body, a krypton fill under a helium purge",
           "name": "kr_tripler_cell", "circuit": 1, "eut": 503316480, "duration": 400,
-          "itemsIn": [{ "id": "grindless:magnesium_fluoride_dust", "count": 2 }, { "id": "grindless:lbo_boule", "count": 1 }],
-          "fluidsIn": [{ "id": "grindless:purified_krypton", "amount": 1000 }],
+          "itemsIn": [{ "id": "grindless:magnesium_fluoride_dust", "count": 2 }, { "id": "grindless:lbo_boule", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 2 }, { "id": "gtceu:fine_platinum_wire", "count": 4 }, { "id": "gtceu:sapphire_lens", "count": 1 }, { "id": "gtceu:opv_sensor", "count": 1 }],
+          "fluidsIn": [{ "id": "grindless:purified_krypton", "amount": 1000 }, { "id": "gtceu:helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:kr_tripler_cell", "count": 1 }]
         }
       ]
