@@ -931,7 +931,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
   `gtceu:uiv_machine_casing` already exists; UEV's gate researches it and F1 gives it its recipe.
 - **UIV-S0-1** registers these in a second `machine_hull` create, dumps the registry delta and checks for a builder-name clash with UEV's create. If the second create clashes, the fallback widens UEV's call to `.tiers(GTValues.UEV, GTValues.UIV)` in `uev/foundation.js` (a named one-line extra in F1). The 16 A UIV hatch buffers about 4 × UEV's 2,147,483,648 EU: never an int.
-- **Save risk:** if the config were turned on later, GTM would register the same `gtceu:uiv_*` ids. The shipped `gtceu.yaml` keeps it off (*Save compatibility*).
+- **Id collision:** if the config were turned on later, GTM would register the same `gtceu:uiv_*` ids. The shipped `gtceu.yaml` keeps it off (*Save compatibility*).
 
 **Startup:** `uiv/foundation.js` (F1), one file per package, `lv/wireless_energy.js` (W), `lib/parallel_hatch.js` (M1), `lib/mega.js` (read unchanged by M2), the relay seed, the launched relay seed and the ergosphere probe in `uiv/travel.js` (B1).
 **Server:** `server_scripts/grindless/uiv/*.js`; older-era rows in their own files (*Older machines*).
@@ -939,13 +939,13 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
 ## Save compatibility
 
-- Nothing registered is removed. New ids only.
-- The new dimension ids (`grindless:rx_j1856_orbit`, `grindless:psr_j0437_orbit`, `grindless:cygnus_x1_orbit`) never change once shipped.
-- `highTierContent` stays off in the shipped `gtceu.yaml`. The release note lists the `gtceu:uiv_*` ids that would collide if it were turned on (UIV-S0-1).
-- **Older-file rows** add recipes only. The swarm station's dimension list and the warp gate's rows are widened, never narrowed.
-- **The Mk5's pattern is new.** GTM's rings and the Mk4 are untouched.
-- **Arrival platforms** are placed once per world; a placed platform is never moved or rebuilt by a later version.
-- **C3 reopens a v0.13.0 save** (the quality-review release, which already carries the hidden UIV packages A1 to B3) and checks that UEV machines, stations 9 and 10, the relays and the network are intact.
+Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Technical facts from it that still hold:
+
+- **New dimension ids:** `grindless:rx_j1856_orbit`, `grindless:psr_j0437_orbit`, `grindless:cygnus_x1_orbit`.
+- `highTierContent` stays off in the shipped `gtceu.yaml`: turning it on would make GTM register the same `gtceu:uiv_*` ids as ours (UIV-S0-1).
+- **Older-file rows** add recipes; the swarm station's dimension list and the warp gate's rows widen.
+- **The Mk5 has its own pattern.** GTM's rings and the Mk4 are untouched.
+- **Arrival platforms** are placed once per world.
 
 ## Risks
 

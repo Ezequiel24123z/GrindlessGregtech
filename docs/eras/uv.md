@@ -1119,15 +1119,15 @@ No new mods.
 
 ## Save compatibility
 
-- **Additive only:** new items, blocks, fluids, machines, two planets and four dimension ids. Nothing registered is removed or renamed.
+Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Design facts from it that still hold:
+
+- **New content:** two planets and four dimension ids (*Route*).
 - **Proxima Centauri b stays tier 8.** No planet moves.
-- **Stations:** the four slots keep their ids, plots and positions; slots five and six only append (F2).
-- **Older machines' new rows** use unused circuits or unique inputs; no existing recipe changes.
-- **The naquadria rule widens** (the Mk3 route). Nothing a player built changes.
-- **GTM recipes re-registered** (the UHV energy hatch's research) keep their ids, so data modules already written stay valid.
-- **Machine shapes:** all new; no older multiblock changes shape.
-- **The wireless table:** one row added. The ZPM row's link changes from "the tier's" to "the tier below's" only in the docs; the quantum star stays the ZPM link.
-- **GTCA's space elevator:** stays hidden; its `until` moves from `uv` to `uhv` (integrator, `hidden_until.json`), so it does not appear without a recipe.
+- **Stations:** slots five and six append to the four existing ones (F2).
+- **Older machines' new rows** use unused circuits or unique inputs, so no recipe conflicts.
+- **The naquadria rule widens** (the Mk3 route).
+- **The wireless table** gains one row; the ZPM row's link changes from "the tier's" to "the tier below's" only in the docs (the quantum star stays the ZPM link).
+- **GTCA's space elevator** stays hidden until UHV (`hidden_until.json`), so it never appears without a recipe.
 
 ## Risks
 

@@ -980,15 +980,15 @@ No new mods.
 
 ## Save compatibility
 
-- **Additive only:** new items, blocks, fluids, machines, one dimension id (`grindless:proxima_b_orbit`). Nothing registered is removed or renamed.
-- **No dimension id changes:** `gcyr:proxima_centauri_b` keeps its id and tier 8; the override adds an orbit and changes nothing on the surface. Mercury's ids stay IV's.
-- **Stations:** the six slots keep their ids, plots and positions; slots seven and eight only append (B1).
-- **Older machines' new rows** use unused circuits or unique inputs; no existing recipe changes. Dimension lists only widen.
-- **GTM recipes re-registered** (the UEV casing's research) keep their ids.
-- **Machine shapes:** all new; no older multiblock changes shape.
-- **The wireless table:** one row added. The UV row's link becomes "the tier below's" only in the docs; the gravi star stays UV's link.
-- **GCYR's swarm items** stay registered and hidden; nothing a player owns disappears.
-- **GTCA's elevator:** its `until: uhv` rows (UV's F2) unhide; the miner and pump modules move to `until: uev` (F2), so they never appear without a recipe.
+Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Design facts from it that still hold:
+
+- **Proxima Centauri b** (`gcyr:proxima_centauri_b`) is tier 8; the override adds an orbit (`grindless:proxima_b_orbit`) and changes nothing on the surface.
+- **Stations:** slots seven and eight append to the six existing ones (B1).
+- **Older machines' new rows** use unused circuits or unique inputs, so no recipe conflicts; dimension lists only widen.
+- **GTM recipes re-registered** (the UEV casing's research) keep GTM's ids.
+- **The wireless table** gains one row; the UV row's link becomes "the tier below's" only in the docs (the gravi star stays UV's link).
+- **GCYR's own swarm items** stay hidden in EMI (GCYR registers them).
+- **GTCA's elevator** unhides at UHV; its miner and pump modules stay hidden until UEV, so they never appear without a recipe.
 
 ## Risks
 

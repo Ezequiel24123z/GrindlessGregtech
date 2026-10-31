@@ -865,7 +865,7 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
   `gtceu:uev_machine_casing` already exists with no recipe (UHV S0); F1 gives it one.
 - **S0-1** registers these with the config off, dumps the registry delta and checks for no clash with GTM's own names. If KubeJS cannot make a tiered energy hatch, the fallback is ON with mass hiding; S0-1 records the id count it adds, and the orchestrator decides.
-- **Save risk:** if the config were turned on later, GTM would register the same `gtceu:uev_*` ids. The pack locks the config (*Save compatibility*).
+- **Id collision:** if the config were turned on later, GTM would register the same `gtceu:uev_*` ids. The pack locks the config (*Save compatibility*).
 
 **Startup:** `uev/foundation.js` (F1), one file per package, `lv/wireless_energy.js` (W), `lib/mega.js` (M), DFD motors in `uev/travel.js` (B1); their thruster works rows in `server_scripts/grindless/uv/propulsion.js`.
 **Server:** `server_scripts/grindless/uev/*.js`; older-era rows in their own files (*Older machines*).
@@ -873,12 +873,12 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
 ## Save compatibility
 
-- Nothing registered is removed. New ids only.
-- The new dimension ids (`grindless:alpha_centauri_orbit`, `grindless:barnard_b`, `grindless:sirius_b_orbit`) never change once shipped.
-- `highTierContent` stays off and is written into the shipped `gtceu.yaml`. A note in the release says why: turning it on later would collide with our `gtceu:uev_*` ids (S0-1 records the exact list).
-- **Older-file rows** add recipes only. The swarm station's dimension list is widened, never narrowed.
-- **The Mk4's pattern is new.** GTM's three rings are untouched.
-- **C3 reopens a v0.11.0 save** and checks that UHV machines, stations 7–8 and the network are intact.
+Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Technical facts from it that still hold:
+
+- **New dimension ids:** `grindless:alpha_centauri_orbit`, `grindless:barnard_b`, `grindless:sirius_b_orbit`.
+- `highTierContent` stays off and is written into the shipped `gtceu.yaml`: turning it on would make GTM register the same `gtceu:uev_*` ids as ours (S0-1 records the exact list).
+- **Older-file rows** add recipes; the swarm station's dimension list widens.
+- **The Mk4 has its own pattern.** GTM's three fusion rings are untouched.
 
 ## Risks
 

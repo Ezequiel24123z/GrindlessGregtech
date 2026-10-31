@@ -1,6 +1,6 @@
 # Complexity audit per tier — Gregtech Grindless (v0.5.0)
 
-Date: 2026-10-24. Sources: `AGENTS.md`, `DECISIONS.md`, `docs/journey.md`, `docs/eras/*.md`, `pack/kubejs/startup_scripts/grindless/**`, `pack/kubejs/server_scripts/grindless/**`, `pack/config/ftbquests/quests/chapters/*_age.snbt`, validator reports (`scratch/release/val-0.5.0/*.{txt,json}`), `docs/research/space/gtm-tiers.md`.
+Date: 2026-10-24. Sources: `AGENTS.md`, `DECISIONS.md`, `docs/journey.md`, `docs/eras/*.md`, `pack/kubejs/startup_scripts/grindless/**`, `pack/kubejs/server_scripts/grindless/**`, `pack/config/ftbquests/quests/chapters/*_age.snbt`, validator reports (`scratch/release/val-0.5.0/*.{txt,json}`), `docs/research/space/gtm-tiers.md`. **Partly superseded 2026-10-31 (Project Reforge, `AGENTS.md`):** rule 2 now adds high, expensive quantity after complexity (up to LV, costs are only reviewed) and rule 7 lets any era, Steam included, be reworked, so §4's limits (additive only, same shapes, no higher quantities) no longer bind; recipe times are still never inflated, and §5's growth guide still holds.
 
 Steam–HV are **built** (real KubeJS code, tested in-game). EV–IV are **designed** (`docs/eras/ev.md`, `iv.md`), without their own code or validator yet (there is no `ev.json`/`iv.json` in `tools/analysis/tiers/`, nor complete `ev_age`/`iv_age` in the quest book). That distinction is kept in all tables.
 

@@ -992,16 +992,16 @@ S0-1 records the full OpV and MAX id list.
 
 ## Save compatibility
 
-- Nothing is removed. Every UXV id that OpV reads is only consumed or kept.
-- HT is the retrofit's own save step: the `grindless:uxv_*` components are hidden, with a 1:1 conversion. OpV adds no further conversion.
-- Dimension ids `grindless:sgr1806_orbit` and `grindless:terzan5_core` are new. No older id changes.
-- New rows on older machines only add recipes, so existing machines keep their recipes.
-- Gate c11, c12 and c13 are new circuits, and c1-c10 are untouched.
-- The x262,144 hatch adds a tier to the one create. Existing hatches keep their ids (S0-5).
-- The wireless case 13 row is new. Existing networks keep their caps.
-- The release notes of v0.16.0 list every new multiblock shape. None changes an existing shape.
-- Arrival platforms place blocks only in new dimensions.
-- A v0.15.0 save is reopened in C3 (T3).
+Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Design facts from it that still hold, and one cleanup candidate:
+
+- **New dimension ids:** `grindless:sgr1806_orbit` and `grindless:terzan5_core`.
+- **New rows on older machines** only add recipes.
+- **Gate c11, c12 and c13** are new circuits; c1-c10 are untouched.
+- **The x262,144 hatch** adds a tier to the one create; existing hatch ids are unchanged (S0-5).
+- **The wireless case 13 row** is new; existing networks keep their caps.
+- **Machine shapes:** every OpV multiblock is new; none changes an existing shape.
+- **Arrival platforms** place blocks only in new dimensions.
+- **Cleanup candidate:** the HT retrofit's hidden `grindless:uxv_*` components and their 1:1 conversions exist only for old saves.
 
 ## Risks
 

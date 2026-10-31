@@ -962,13 +962,13 @@ No new mods.
 
 ## Save compatibility
 
-- **Additive only:** new items, blocks, fluids, machines, two planets and four dimension ids. Nothing registered is removed or renamed.
-- **Proxima Centauri b moves from tier 5 to tier 8.** Its dimension id stays; a player already there keeps the world (no LuV rocket reached tier 5 in practice before level 5 existed, and nothing generated changes). Recorded in the release notes.
-- **Stations:** the two proven slots keep their ids, plots and positions (F2). New slots only append.
-- **Hot cell c5, extraction cascade c5, composite autoclave c5, naquadah plant c4:** new rows on unused circuits; no existing recipe changes.
-- **GTM and GT-- recipes re-registered** (the UV energy hatch; the large naquadah reactor) keep their ids and research keys, so data modules already written stay valid.
+Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Design facts from it that still hold:
+
+- **Proxima Centauri b is tier 8.** It moved from tier 5 in ZPM.
+- **Stations:** the two proven slots keep their plots and positions (F2); new slots append.
+- **Hot cell c5, extraction cascade c5, composite autoclave c5, naquadah plant c4:** new rows on unused circuits, so no recipe conflicts.
+- **GTM and GT-- recipes re-registered** (the UV energy hatch; the large naquadah reactor) keep GTM's ids and research keys.
 - **Machine shapes:** all new; no older multiblock changes shape.
-- **The wireless table:** one row added; the network's stored EU is untouched (S0-7 if the storage type changes to long, the migration is a widening read, never a reset).
 
 ## Risks and open questions
 

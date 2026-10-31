@@ -886,14 +886,14 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
 ## Save compatibility
 
-- Nothing registered is removed. New ids only.
-- The new dimension ids (`grindless:vela_pulsar_orbit`, `grindless:cas_a_remnant`) never change once shipped; `grindless:cygnus_x1_orbit` is UIV's and unchanged.
-- `highTierContent` stays off in the shipped `gtceu.yaml`. The release note lists the `gtceu:uxv_*` ids that would collide if it were turned on (S0-1).
-- **Widening UEV's builders** adds a tier; the UEV and UIV hulls and hatches keep their ids, labels and recipes (S0-1 reopens a v0.14.0 save).
-- **Older-file rows** add recipes only. The warp gate's rows and the swarm station's dimension list are widened, never narrowed.
-- **The Mk6's pattern is new.** GTM's rings, the Mk4 and the Mk5 are untouched.
-- **Arrival platforms** are placed once per world and never moved or rebuilt by a later version.
-- **C3 reopens a v0.14.0 save** and checks UIV machines, the Cygnus platform, the relays and the network.
+Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Technical facts from it that still hold:
+
+- **New dimension ids:** `grindless:vela_pulsar_orbit`, `grindless:cas_a_remnant`; `grindless:cygnus_x1_orbit` is UIV's.
+- `highTierContent` stays off in the shipped `gtceu.yaml`: turning it on would make GTM register the same `gtceu:uxv_*` ids as ours (S0-1).
+- **Widening UEV's builders** adds a tier; the UEV and UIV hulls and hatches keep their ids, labels and recipes (S0-1).
+- **Older-file rows** add recipes; the warp gate's rows and the swarm station's dimension list widen.
+- **The Mk6 has its own pattern.** GTM's rings, the Mk4 and the Mk5 are untouched.
+- **Arrival platforms** are placed once per world.
 
 ## Risks
 
