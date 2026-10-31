@@ -25,7 +25,7 @@ test('the stand-in runs the UXV-A4 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(SD.skipped), []);
   assert.deepEqual(plain(SD.clashes), []);
-  assert.equal(SD.recipes.length, 12 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1); // MAX-A4 one PLD row (c5 thick_film_fcl_tape); MAX-B3 appended MTJ c22-23 (ar_coated_glass_cell, electroded_aod); MAX-A3 appended MTJ c16 (metallised_diamond); MAX-W one PLD row (c4 thick_rebco_tape); MAX-A1 appended MTJ c13-14 (coated_metalens, nb_coplanar_film); MAX-H1 appended MTJ c20 mram_stack_sic (line 38); OpV-A2 appended MTJ c5-8; OpV-D1 two more (c9 ta_clad_ir_rod, c10 neg_coated_chamber); OpV-B1 two more (c11 tetron_bumps, c12 wc_sic_multilayer)
+  assert.equal(SD.recipes.length, 12 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1 + 2); // MAX-D2 appended MTJ c17-18 (gold_coated_dish, nb_alox_nb_trilayer); MAX-A4 one PLD row (c5 thick_film_fcl_tape); MAX-B3 appended MTJ c22-23 (ar_coated_glass_cell, electroded_aod); MAX-A3 appended MTJ c16 (metallised_diamond); MAX-W one PLD row (c4 thick_rebco_tape); MAX-A1 appended MTJ c13-14 (coated_metalens, nb_coplanar_film); MAX-H1 appended MTJ c20 mram_stack_sic (line 38); OpV-A2 appended MTJ c5-8; OpV-D1 two more (c9 ta_clad_ir_rod, c10 neg_coated_chamber); OpV-B1 two more (c11 tetron_bumps, c12 wc_sic_multilayer)
 });
 
 test('5 items registered by the startup file, named in en_us and es_es', () => {
@@ -46,7 +46,7 @@ test('the MTJ sputter rows: circuits 1-4, figures, spent target and scrap powder
   // OpV-D1 appended c9 ta_clad_ir_rod and c10 neg_coated_chamber: argon sputtering too, but not on a Si-28 wafer;
   // OpV-B1 appended c11 tetron_bumps (OpV line 19, the In bumps on the tetron dies) and c12 wc_sic_multilayer (line 34), on OpV parts
   const OFF_WAFER = ['ta_clad_ir_rod', 'neg_coated_chamber', 'tetron_bumps', 'wc_sic_multilayer', 'mram_stack_sic', 'coated_metalens', 'nb_coplanar_film', 'hfo2_sio2_stack', 'metallised_diamond', 'ar_coated_glass_cell', 'electroded_aod']; // MAX-A3 c16 metallises the boron delta diamond c13-14 on line-6 parts; MAX-H1 c20: the c2 stack on a SiC CMOS wafer
-  assert.deepEqual(plain(all.map((r) => [r.name, r.circuit])), [['mtj_stack', 1], ['mram_stack', 2], ['saf_track', 3], ['stno_stack', 4], ['cryo_cmos_metal', 5], ['nb_tsv_fill', 6], ['nbtin_film', 7], ['sdd_metal', 8], ['ta_clad_ir_rod', 9], ['neg_coated_chamber', 10], ['tetron_bumps', 11], ['wc_sic_multilayer', 12], ['mram_stack_sic', 20], ['coated_metalens', 13], ['nb_coplanar_film', 14], ['hfo2_sio2_stack', 15], ['metallised_diamond', 16], ['ar_coated_glass_cell', 22], ['electroded_aod', 23]]);
+  assert.deepEqual(plain(all.map((r) => [r.name, r.circuit])), [['mtj_stack', 1], ['mram_stack', 2], ['saf_track', 3], ['stno_stack', 4], ['cryo_cmos_metal', 5], ['nb_tsv_fill', 6], ['nbtin_film', 7], ['sdd_metal', 8], ['ta_clad_ir_rod', 9], ['neg_coated_chamber', 10], ['tetron_bumps', 11], ['wc_sic_multilayer', 12], ['mram_stack_sic', 20], ['coated_metalens', 13], ['nb_coplanar_film', 14], ['hfo2_sio2_stack', 15], ['metallised_diamond', 16], ['ar_coated_glass_cell', 22], ['electroded_aod', 23], ['gold_coated_dish', 17], ['nb_alox_nb_trilayer', 18]]);
   const rows = all.filter((r) => r.circuit <= 4 || OFF_WAFER.includes(r.name));
   const out = (r) => r.itemsOut.map((x) => x.id);
   assert.ok(out(rec('mtj_sputtering', 'mtj_stack')).includes('grindless:mtj_stack_wafer'));
@@ -132,7 +132,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('no older row written: no recipe of this package sits in another package\'s file', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_deposition\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 2 + 1 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1, 'rows, MAX-A4\'s PLD row c5, MAX-B3\'s MTJ c22-23, MAX-A3\'s MTJ c16, MAX-B1\'s MTJ c15, two controllers, the laser, OpV-A2\'s MTJ c5-8, OpV-D1\'s two MTJ rows, OpV-B1\'s two MTJ rows, MAX-H1\'s MTJ c20, MAX-A1\'s MTJ c13-14, MAX-W\'s PLD row');
+  assert.equal(mine.length, 12 + 2 + 1 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1 + 2, 'rows, MAX-D2\'s MTJ c17-18, MAX-A4\'s PLD row c5, MAX-B3\'s MTJ c22-23, MAX-A3\'s MTJ c16, MAX-B1\'s MTJ c15, two controllers, the laser, OpV-A2\'s MTJ c5-8, OpV-D1\'s two MTJ rows, OpV-B1\'s two MTJ rows, MAX-H1\'s MTJ c20, MAX-A1\'s MTJ c13-14, MAX-W\'s PLD row');
 });
 
 test('structures: not boring, at least two functional kinds, controller in the front slice', () => {
