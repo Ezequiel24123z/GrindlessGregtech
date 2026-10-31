@@ -70,7 +70,7 @@
       overlay: 'grindless:block/multiblock/swarm_segment_foundry',
       generator: false,
       // items in: c1's seven parts and the circuit; out: the segment and the stripped film's aluminium (c2)
-      maxIO: { itemsIn: 8, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 },
+      maxIO: { itemsIn: 11, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 },
       parts: { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 4 }, output_bus: { min: 1, max: 2 } },
       width: 9, height: 7, depth: 9, minTruss: 20
     },
