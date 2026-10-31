@@ -75,3 +75,20 @@ test('the startup script registers both machines and the run-recording hook', ()
   assert.match(startup, /grindless_warp_gate/);
   assert.match(startup, /grindless_baseline_astrometry/);
 });
+
+test('MAX-T1: c14 hold_sgr_a_probe is 16 A x V[OpV] = 2^33 for 1,200 t at Cygnus X-1, burns the probe, keeps the chart, fits the type', () => {
+  const r = by('warp_gate', 'hold_sgr_a_probe');
+  assert.equal(r.circuit, 14);
+  assert.equal(r.eut, 16 * 536870912);
+  assert.equal(r.eut, 2 ** 33);
+  assert.equal(r.duration, 1200);
+  assert.equal(r.site, 'cygnus_x1_orbit');
+  assert.deepEqual(r.itemsIn, [{ id: 'grindless:gc_relay_probe', count: 1 }]);
+  assert.deepEqual(r.kept, [{ id: 'grindless:sgr_a_chart', count: 1 }]);
+  assert.deepEqual(r.itemsOut, [{ id: 'grindless:launched_gc_probe', count: 1 }]);
+  assert.ok(r.itemsIn.length + r.kept.length + 1 <= 9);
+  const big = G.types.warp_gate.recipes.filter((x) => x.eut >= 2 ** 31).map((x) => x.circuit).sort((a, b) => a - b);
+  assert.deepEqual(big, [10, 11, 13, 14]);
+  const circuits = G.types.warp_gate.recipes.map((x) => x.circuit);
+  assert.equal(new Set(circuits).size, circuits.length);
+});
