@@ -1,0 +1,56 @@
+{
+  "_source": "OpV-B3b, opv.md:331-375 and line 30. All beams are processed at Cygnus X-1 orbit. Wear chances use GTM's 1/10000 resolution; spent target and shield output chances match input wear. D1 recovers both; coolers are serviced by D1.",
+  "recipes": [
+    {
+      "type": "jet_beam_extraction", "name": "jet_proton_beam", "circuit": 1, "eut": 268435456, "duration": 200,
+      "kept": ["grindless:srf_cavity"],
+      "wear": [{ "id": "grindless:be_beam_window", "chance": 313 }],
+      "fluidsOut": [{ "id": "grindless:jet_proton_beam", "amount": 1000 }]
+    },
+    {
+      "type": "jet_beam_extraction", "name": "flux_boosted_jet_beam", "circuit": 2, "eut": 503316480, "duration": 200,
+      "kept": ["grindless:srf_cavity"],
+      "wear": [{ "id": "grindless:be_beam_window", "chance": 313 }],
+      "fluidsIn": [{ "id": "gtceu:flux_loaded_plasma", "amount": 100 }],
+      "fluidsOut": [{ "id": "grindless:jet_proton_beam", "amount": 2000 }]
+    },
+    {
+      "type": "antiproton_production", "name": "hot_antiproton_beam", "circuit": 1, "eut": 503316480, "duration": 400,
+      "wear": [{ "id": "grindless:ir_spallation_target", "chance": 625 }, { "id": "grindless:li6_hydride_shield", "chance": 313 }],
+      "fluidsIn": [{ "id": "grindless:jet_proton_beam", "amount": 4000 }],
+      "chancedOut": [{ "id": "grindless:spent_ir_target", "count": 1, "chance": 625 }, { "id": "grindless:spent_li6_shield", "count": 1, "chance": 313 }],
+      "fluidsOut": [{ "id": "grindless:hot_antiproton_beam", "amount": 1000 }]
+    },
+    {
+      "type": "beam_cooling", "name": "stochastic_cooling", "circuit": 1, "eut": 268435456, "duration": 800,
+      "wear": [{ "id": "grindless:stochastic_cooling_pickup", "chance": 156 }],
+      "fluidsIn": [{ "id": "grindless:hot_antiproton_beam", "amount": 1000 }],
+      "fluidsOut": [{ "id": "grindless:stochastically_cooled_beam", "amount": 1000 }]
+    },
+    {
+      "type": "beam_cooling", "name": "cold_antiproton_cell", "circuit": 2, "eut": 503316480, "duration": 1200,
+      "itemsIn": ["grindless:empty_penning_trap"],
+      "kept": ["grindless:octupole_trap_magnet"],
+      "wear": [{ "id": "grindless:electron_cooler", "chance": 156 }],
+      "fluidsIn": [{ "id": "grindless:stochastically_cooled_beam", "amount": 1000 }],
+      "itemsOut": ["grindless:cold_antiproton_cell"]
+    }
+  ],
+  "controllers": [
+    {
+      "name": "jet_beam_line", "research": "grindless:be_beam_window",
+      "parts": ["4x gtceu:opv_field_generator", "4x gtceu:opv_emitter", "2x gtceu:opv_electric_pump"],
+      "domain": ["grindless:chain_field_coil", "grindless:frc_cartridge", "grindless:field_frozen_plate"]
+    },
+    {
+      "name": "spallation_target_station", "research": "grindless:ir_spallation_target",
+      "parts": ["4x gtceu:opv_field_generator", "4x gtceu:opv_sensor", "2x gtceu:opv_electric_pump"],
+      "domain": ["grindless:li6_hydride_shield", "grindless:be_beam_window", "grindless:srf_cavity"]
+    },
+    {
+      "name": "antiproton_decelerator", "research": "grindless:electron_cooler",
+      "parts": ["4x gtceu:opv_field_generator", "4x gtceu:opv_sensor", "2x gtceu:opv_emitter"],
+      "domain": ["grindless:stochastic_cooling_pickup", "grindless:srf_cavity", "grindless:chain_field_coil"]
+    }
+  ]
+}
