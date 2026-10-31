@@ -1,4 +1,4 @@
-// priority: -5521
+// priority: -5524
 // TEST ONLY, MAX-D2 (gtceu:photon_ring_imager). Command: kubejs custom_command gg_test_max_imager
 // Band ONLY: X 39896-39959, Z 0-63, Y 98-115 of gcyr:black_hole_orbit (Sgr A*; zones.json row max_imager).
 //   T1 (named uncertainty: the 9-high imager forms at Sgr A* and runs c1 at VA[MAX] = 2,013,265,920 EU/t on two OpV 4 A hatches):

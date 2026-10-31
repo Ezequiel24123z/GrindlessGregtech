@@ -995,6 +995,17 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_gene_ark",
+      "recipeType": "gtceu:genome_archiving",
+      "prompt": "Seamless looping sound of a cold sealed genetic archive: a low refrigeration hum, soft robotic pipetting ticks and a faint airy ventilation hiss, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }

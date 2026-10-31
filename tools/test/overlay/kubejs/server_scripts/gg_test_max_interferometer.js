@@ -1,4 +1,4 @@
-// priority: -5532
+// priority: -5534
 // TEST ONLY, MAX-B2 (gtceu:atom_interferometer_works). Command: kubejs custom_command gg_test_max_interferometer
 // Band ONLY: X 39576-39639, Z 0-63, Overworld Y 98-115 (zones.json row max_interferometer).
 //   T1 (named uncertainty: the 15-high shape of the atom interferometer forms and runs c1 at VA[MAX] = 2,013,265,920 EU/t on two OpV 4 A hatches):

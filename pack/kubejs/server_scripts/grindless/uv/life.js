@@ -66,7 +66,11 @@
       fluidsIn: [fluid(RAW_MEDIUM, 1000)], itemsOut: [item(STEM, 64)], fluidsOut: [fluid(BIOMASS, 250)], eut: UVA, duration: 1200 },
     { name: 'neuro_processor_batch', type: 'neural_culture', circuit: 2,
       itemsIn: [item(STEM, 8), item('gtceu:wetware_printed_circuit_board', 1)], fluidsIn: [fluid(STERILE_MEDIUM, 1000)],
-      itemsOut: [item('gtceu:neuro_processing_unit', 4)], fluidsOut: [fluid(BIOMASS, 250)], eut: UVA, duration: 1200 }
+      itemsOut: [item('gtceu:neuro_processing_unit', 4)], fluidsOut: [fluid(BIOMASS, 250)], eut: UVA, duration: 1200 },
+    // MAX-B4 (max.md, L12 step 3, circuit 4): the organoid extract grown out in the closed ecosystem under the algae (not consumed) into the ark's genome set
+    { name: 'ark_genome_set', type: 'closed_ecosystem', circuit: 4, notConsumable: [ALGAE], itemsIn: [item('grindless:organoid_genome_extract', 1)],
+      fluidsIn: [fluid(RAW_MEDIUM, 500), fluid('minecraft:water', 1000)], itemsOut: [item('grindless:ark_genome_set', 1)],
+      fluidsOut: [fluid(BIOMASS, 250)], eut: ZPM, duration: 1200 }
   ]
 
   L.recipes = TABLE.map(function (t) {

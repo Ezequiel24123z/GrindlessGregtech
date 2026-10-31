@@ -108,6 +108,19 @@
           "fluidsIn": [],
           "itemsOut": [],
           "fluidsOut": [{ "id": "gtceu:far_red_pigment", "amount": 1000 }, { "id": "gtceu:biomass", "amount": 500 }]
+        },
+        {
+          "_why": "MAX-B4 (max.md, L12 step 4, c5): the ark's genome set re-grown under the strain in Proxima b's light, and read out as the xeno genome set",
+          "name": "xeno_genome_set",
+          "circuit": 5,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 800,
+          "itemsIn": [{ "id": "grindless:ark_genome_set", "count": 1 }],
+          "kept": [{ "id": "grindless:characterised_xeno_strain", "count": 1 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 500 }, { "id": "gtceu:carbon_dioxide", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:xeno_genome_set", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },
@@ -161,6 +174,19 @@
           "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
           "itemsOut": [],
           "fluidsOut": [{ "id": "gtceu:clarified_xeno_lysate", "amount": 1000 }, { "id": "gtceu:biomass", "amount": 500 }]
+        },
+        {
+          "_why": "MAX-B4 (max.md, L28 step 3, c5): the recipient culture takes up the synthetic genome in sterile medium and becomes the transplanted minimal cell (Lartigue 2007)",
+          "name": "transplanted_minimal_cell",
+          "circuit": 5,
+          "site": "proxima_b",
+          "eut": 491520,
+          "duration": 600,
+          "itemsIn": [{ "id": "grindless:recipient_mycoplasma_culture", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:sterilized_growth_medium", "amount": 250 }, { "id": "gtceu:ultrapure_water", "amount": 250 }],
+          "itemsOut": [{ "id": "grindless:transplanted_minimal_cell", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },
@@ -178,6 +204,19 @@
           "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:melanised_biomass", "count": 8 }],
           "fluidsOut": [{ "id": "gtceu:biomass", "amount": 500 }]
+        },
+        {
+          "_why": "MAX-B4 (max.md, L28 step 4, c2): the transplanted cell hardened under the Cladosporium culture's melanin shield, so it survives vitrification",
+          "name": "hardened_minimal_cell",
+          "circuit": 2,
+          "site": "proxima_b",
+          "eut": 122880,
+          "duration": 800,
+          "itemsIn": [{ "id": "grindless:transplanted_minimal_cell", "count": 1 }],
+          "kept": [{ "id": "grindless:cladosporium_culture", "count": 1 }],
+          "fluidsIn": [{ "id": "minecraft:water", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:hardened_minimal_cell", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:biomass", "amount": 250 }]
         }
       ]
     },
