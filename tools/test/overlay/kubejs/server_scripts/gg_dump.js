@@ -191,28 +191,95 @@
     return { format: 'gg-tags-2', item: itemTags, fluid: fluidTags };
   }
 
+  // Item slots and fluid tanks of one machine, read from a real instance (tools/analysis/capacity-lint.mjs reads them).
+  // A non-multiblock definition builds its block entity without a level (GTM 7.5.3 MetaMachineBlockEntity ctor creates the
+  // MetaMachine); its NotifiableItemStackHandler / NotifiableFluidTank traits give [kind, io, count, capacity]:
+  // kind "i" = item handler (count = slots), "f" = fluid tank group (count = tanks, capacity = mB per tank). Returns null on failure.
+  var capCtx = null;
+  function capacityOf(md) {
+    if (capCtx === null) {
+      capCtx = {
+        pos: Java.loadClass('net.minecraft.core.BlockPos').ZERO,
+        fluidTank: Java.loadClass('com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank'),
+        itemHandler: Java.loadClass('com.gregtechceu.gtceu.api.machine.trait.NotifiableItemStackHandler')
+      };
+    }
+    var be = md.getBlockEntityType().create(capCtx.pos, md.defaultBlockState());
+    var mm = be.getMetaMachine();
+    var out = [];
+    each(mm.getTraits(), function (t) {
+      if (t instanceof capCtx.fluidTank) {
+        var n = num(t.getTanks());
+        out.push(['f', str(t.getHandlerIO()), n, n > 0 ? num(t.getTankCapacity(0)) : 0]);
+      } else if (t instanceof capCtx.itemHandler) {
+        out.push(['i', str(t.getHandlerIO()), num(t.getSlots()), 0]);
+      }
+    });
+    return out;
+  }
+
   // GT machine definitions (which machine runs which recipe types) and the GT recipe types.
+  // Capacity additions (format stays gg-machines-1, consumers ignore unknown fields): machine.cap (see capacityOf), recipeType.io =
+  // [item inputs, item outputs, fluid inputs, fluid outputs] (GTRecipeType.getMaxInputs/getMaxOutputs), and `capacity` with the
+  // GTM static tank functions and hatch formulas evaluated by the game, as a cross-check and fallback.
   function dumpMachines() {
     var GTR = Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries');
     var MBD = null;
     try { MBD = Java.loadClass('com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition'); } catch (e) { /* optional */ }
+    var cap = { failed: 0, ok: 0, errors: [] };
     var machines = [];
     each(GTR.MACHINES.values(), function (md) {
       var rec = { id: str(md.getId()), tier: num(md.getTier()), types: [] };
       var rts = md.getRecipeTypes();
       for (var k = 0; k < rts.length; k++) rec.types.push(str(rts[k].registryName));
       if (MBD !== null && md instanceof MBD) rec.mb = 1;
+      else {
+        try {
+          var c = capacityOf(md);
+          if (c.length > 0) rec.cap = c;
+          cap.ok++;
+        } catch (e) {
+          cap.failed++;
+          if (cap.errors.length < 3) cap.errors.push(rec.id + ': ' + str(e).slice(0, 160));
+        }
+      }
       machines.push(rec);
     });
     machines.sort(function (a, b) { return a.id < b.id ? -1 : (a.id > b.id ? 1 : 0); });
+    var ItemCap = null, FluidCap = null;
+    try {
+      ItemCap = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability').CAP;
+      FluidCap = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability').CAP;
+    } catch (e) { cap.errors.push('recipe capability classes: ' + str(e).slice(0, 120)); }
     var recipeTypes = [];
     each(GTR.RECIPE_TYPES.values(), function (rt) {
       var rec = { id: str(rt.registryName), group: str(rt.group), proxies: [] };
       try { each(rt.getProxyRecipes().keySet(), function (p) { rec.proxies.push(str(p)); }); } catch (e) { /* optional */ }
+      if (ItemCap !== null) {
+        try {
+          rec.io = [num(rt.getMaxInputs(ItemCap)), num(rt.getMaxOutputs(ItemCap)), num(rt.getMaxInputs(FluidCap)), num(rt.getMaxOutputs(FluidCap))];
+        } catch (e2) { /* optional */ }
+      }
       recipeTypes.push(rec);
     });
     recipeTypes.sort(function (a, b) { return a.id < b.id ? -1 : (a.id > b.id ? 1 : 0); });
-    return { format: 'gg-machines-1', machines: machines, recipeTypes: recipeTypes };
+    var statics = { tankFns: {}, fluidHatch: {}, itemBus: [] };
+    try {
+      var U = Java.loadClass('com.gregtechceu.gtceu.common.data.machines.GTMachineUtils');
+      var FH = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachine');
+      ['defaultTankSizeFunction', 'hvCappedTankSizeFunction', 'largeTankSizeFunction'].forEach(function (name) {
+        var row = [];
+        for (var t = 0; t <= 14; t++) row.push(num(U[name].applyAsInt(t)));
+        statics.tankFns[name] = row;
+      });
+      [['x1', FH.INITIAL_TANK_CAPACITY_1X], ['x4', FH.INITIAL_TANK_CAPACITY_4X], ['x9', FH.INITIAL_TANK_CAPACITY_9X]].forEach(function (e) {
+        var row = [];
+        for (var t = 0; t <= 14; t++) row.push(num(FH.getTankCapacity(e[1], t)));
+        statics.fluidHatch[e[0]] = row;
+      });
+    } catch (e3) { cap.errors.push('statics: ' + str(e3).slice(0, 160)); }
+    return { format: 'gg-machines-1', machines: machines, recipeTypes: recipeTypes,
+      capacity: { format: 'gg-capacity-1', stats: { instantiated: cap.ok, failed: cap.failed, errors: cap.errors }, statics: statics } };
   }
 
   // EU hardware, for the Power tab's checker (tools/quests/processing-lines/pl-check.mjs): every material with a wire property
