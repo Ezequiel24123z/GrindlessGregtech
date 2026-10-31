@@ -341,7 +341,9 @@
     // MAX-B3 L43 step 5: the anti-reflection coated glass cell cooled in the loop until it holds its vacuum seal at 4 K
     { name: 'cold_qualified_cell', input: 'grindless:ar_coated_glass_cell', output: 'grindless:cold_qualified_cell', eut: 30720, duration: 600 },
     // MAX-A4 L39 step 5: the potted limiter coil run cold in the loop until it holds its critical current at 20 K
-    { name: 'cold_fcl_module', input: 'grindless:fcl_coil', output: 'grindless:cold_fcl_module', eut: 30720, duration: 600 }
+    { name: 'cold_fcl_module', input: 'grindless:fcl_coil', output: 'grindless:cold_fcl_module', eut: 30720, duration: 600 },
+    // MAX-D2 L45 step 5: the HEMT die cooled in the loop and noise-tested at 4 K before it goes into a LNA module
+    { name: 'cryo_tested_lna', input: 'grindless:hemt_die', output: 'grindless:cryo_tested_lna', eut: 30720, duration: 600 }
   ]
   HR.opvRows = OPV_ROWS
   HR.opvSkipped = []

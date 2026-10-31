@@ -170,7 +170,10 @@
           "itemsOut": [{ "id": "grindless:eu_yso_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
         { "_why": "MAX-B3 (max.md, L46 step 1, c32): paratellurite pulled from the TeO2 melt under oxygen, for the acousto-optic deflector; the Ir crucible wears as in every row", "name": "teo2_boule", "circuit": 32, "eut": 491520, "duration": 1200,
           "itemsIn": [{ "id": "gtceu:tellurium_dust", "count": 2 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:teo2_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:teo2_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "MAX-D2 (max.md, L45 step 1, c32, a third repeat on this type with its own inputs): semi-insulating InP pulled from indium, phosphorus and an iron dopant, sliced to a wafer; the Ir crucible wears as in every row", "name": "semi_insulating_inp_wafer", "circuit": 32, "eut": 491520, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:indium_dust", "count": 1 }, { "id": "gtceu:phosphorus_dust", "count": 1 }, { "id": "gtceu:iron_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:semi_insulating_inp_wafer", "count": 2 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {
