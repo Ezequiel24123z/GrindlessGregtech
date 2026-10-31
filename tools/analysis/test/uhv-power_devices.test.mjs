@@ -81,7 +81,7 @@ test('the scripts load: every row made with its circuit, nothing skipped, no cla
 });
 
 test('one recipe per lookup path: unique circuits, no subset clash', () => {
-  for (const [type, want] of [['silicon_carbide', [1, 2, 3, 4, 5, 6, 8, 10]], ['space_photovoltaics', [1, 2, 3]]]) { // OpV-A2 appended SiC c6 (the GaN MMIC); OpV-A3 SiC c8 (aln_power_die)
+  for (const [type, want] of [['silicon_carbide', [1, 2, 3, 4, 5, 6, 8, 10, 7]], ['space_photovoltaics', [1, 2, 3]]]) { // OpV-A2 appended SiC c6 (the GaN MMIC); OpV-A3 SiC c8 (aln_power_die); OpV-R1 SiC c7 (gan_mmic_tile)
     const rs = rowsOf(type);
     assert.deepEqual(rs.map((r) => r.circuit), want, type);
     const ks = rs.map(keysOf);
@@ -203,7 +203,8 @@ test('no UEV input, and every lang key and texture the package needs', () => {
   // OpV-A3's SiC c8 keeps its line in opv_field_press_lang.js; MAX-H1's c10 in max_shell_parts_lang.js
   const lang = fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'uhv_power_devices_lang.js'), 'utf8')
     + fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'opv_field_press_lang.js'), 'utf8')
-    + fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'max_shell_parts_lang.js'), 'utf8');
+    + fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'max_shell_parts_lang.js'), 'utf8')
+    + fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'opv_pathfinder_lang.js'), 'utf8');
   // OpV-A2's SiC c6 keeps its EMI line in its own lang file
   const opvLang = fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'opv_circuits_lang.js'), 'utf8');
   for (const [type, t] of Object.entries(T.types)) {

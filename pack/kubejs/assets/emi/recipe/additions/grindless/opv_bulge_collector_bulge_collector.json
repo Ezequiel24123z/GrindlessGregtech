@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:bulge_collector"],
+  "text": ["emi.grindless.info.bulge_collector.0", "emi.grindless.info.bulge_collector.1"]
+}

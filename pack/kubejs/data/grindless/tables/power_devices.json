@@ -136,6 +136,22 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:sic_cmos_wafer", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1800 }]
+        },
+        {
+          "_why": "OpV-R1 line 42 (contract c7): four GaN MMICs are bonded onto a silicon carbide substrate tile.",
+          "name": "gan_mmic_tile",
+          "circuit": 7,
+          "eut": 491520,
+          "duration": 300,
+          "itemsIn": [
+            { "id": "grindless:gan_mmic", "count": 4 },
+            { "id": "gtca:silicon_carbide_dust", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:gan_mmic_tile", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },

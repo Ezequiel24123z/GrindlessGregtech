@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:debris_harvester"],
+  "text": ["emi.grindless.info.debris_harvester.0", "emi.grindless.info.debris_harvester.1"]
+}

@@ -43,8 +43,8 @@ test('registration: three recipe types and machines, one controller each', () =>
 test('the six recipes exist with their circuits; the aerogel run has none', () => {
   // cnt_sock: UEV-A8's floating-catalyst CNT row (docs/eras/uev.md, A8); pyrolytic_graphite: UIV-A2's pulser feed (docs/eras/uiv.md, line 3)
   // ps_converter_aerogel: UIV-B3's Ps-converter aerogel (docs/eras/uiv.md, line 34)
-  const want = { graphene: 1, nanotube_yarn: 2, cnt_sock: 3, archaeal_culture: 1, growth_medium_broth: 2, silica_aerogel: 0, pyrolytic_graphite: 4,   ps_converter_aerogel: 0, hopg_blank: 5, hopg_reanneal: 0 };
-    assert.equal(OC.recipes.length, 10); // OpV-B3a appended hopg_blank (c5) and hopg_reanneal (keyed by the offcut)
+  const want = { graphene: 1, nanotube_yarn: 2, cnt_sock: 3, archaeal_culture: 1, growth_medium_broth: 2, silica_aerogel: 0, pyrolytic_graphite: 4,   ps_converter_aerogel: 0, hopg_blank: 5, hopg_reanneal: 0, spent_anode_graphene: 6 };
+    assert.equal(OC.recipes.length, 11); // OpV-B3a appended hopg_blank (c5) and hopg_reanneal (keyed by the offcut)
   for (const p of OC.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');

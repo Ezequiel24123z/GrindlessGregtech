@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:collector_node_works"],
+  "text": ["emi.grindless.info.collector_node_works.0", "emi.grindless.info.collector_node_works.1"]
+}

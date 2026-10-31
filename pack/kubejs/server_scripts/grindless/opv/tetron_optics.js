@@ -1,4 +1,4 @@
-// priority: -21746
+// priority: -21859
 // -----------------------------------------------------------------------------------------------
 // Recipes of OpV's tetron fab and gamma optics works (machines and recipe types: startup_scripts/grindless/opv/tetron_optics.js;
 // docs/eras/opv.md, machines 1 and 2, process lines 19, 34 and 35; package OpV-B1), generated at every server load from

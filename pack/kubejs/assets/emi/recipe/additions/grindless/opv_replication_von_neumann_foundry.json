@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:von_neumann_foundry"],
+  "text": ["emi.grindless.info.von_neumann_foundry.0", "emi.grindless.info.von_neumann_foundry.1"]
+}

@@ -13,6 +13,8 @@
     "gtceu:data_bank"
   ],
   "noUse": [],
-  "routes": [],
+  "routes": [
+    "grindless:rejected_timing_head made in gtceu:assembler"
+  ],
   "machineInfo": []
 }
