@@ -39,7 +39,7 @@
         ['gtceu.replication_refining', 'Replication Refining', 'Refinado de replicación'],
         ['grindless.machine.replication_refinery.tooltip.0',
             '\u00a77Turns debris fractions into feedstock and casings: Mond carbonyl and FFC salt.',
-            '\u00a77Convierte fracciones de escombros en materia prima y carcasas: carbonilo Mond y sal FFC.'],
+            '\u00a77Escombros a materia prima y carcasas: carbonilo Mond y sal FFC.'],
         ['material.grindless.metal_carbonyl', 'Metal Carbonyl', 'Carbonilo metálico'],
 
         ['item.grindless.carbonyl_iron_nickel', 'Carbonyl Iron-Nickel Powder', 'Polvo carbonilo de hierro y níquel'],
@@ -64,7 +64,21 @@
         ['gtceu.recipe.grindless_replication_refining.metal_feedstock_sinter', 'Circuit 3: iron-nickel powder sintered into metal feedstock.', 'Circuito 3: polvo de hierro y níquel sinterizado en materia prima metálica.'],
         ['gtceu.recipe.grindless_replication_refining.ffc_pellet_press', 'Circuit 4: silicate fractions pressed into FFC pellets.', 'Circuito 4: fracciones silicatadas prensadas en pellets FFC.'],
         ['gtceu.recipe.grindless_replication_refining.ffc_salt_bath', 'Circuit 5: pellets reduced at graphite anodes into silicon alloy powder, oxygen and spent anodes.', 'Circuito 5: pellets reducidos en ánodos de grafito a polvo de aleación de silicio, oxígeno y ánodos gastados.'],
-        ['gtceu.recipe.grindless_replication_refining.cluster_casing_sinter', 'Circuit 6: silicon alloy powder sintered into cluster casings.', 'Circuito 6: polvo de aleación de silicio sinterizado en carcasas de cúmulo.']
+        ['gtceu.recipe.grindless_replication_refining.cluster_casing_sinter', 'Circuit 6: silicon alloy powder sintered into cluster casings.',         'Circuito 6: polvo de aleación de silicio sinterizado en carcasas de cúmulo.'],
+
+        ['block.gtceu.von_neumann_foundry', 'Von Neumann Foundry', 'Fundición de von Neumann'],
+        ['gtceu.self_replication', 'Self-Replication', 'Autorreplicación'],
+        ['grindless.machine.von_neumann_foundry.tooltip.0',
+        '\u00a77Builds probe seeds from Terzan 5 feedstock; the seed itself is never used up.',
+        '\u00a77Crea semillas de sonda con materia prima; la semilla no se gasta.'],
+        ['emi.grindless.info.von_neumann_foundry.0',
+        'A probe copies itself only with real material: 16 metal feedstock, 8 cluster casings and a vitamin kit from home. The seed is kept in circuit 1 and two seeds come out; nothing is copied from nothing.',
+        'Una sonda solo se copia con material real: 16 de materia prima metálica, 8 carcasas de cúmulo y un kit de vitaminas del origen. La semilla se conserva en el circuito 1 y salen dos semillas; nada se copia de la nada.'],
+        ['emi.grindless.info.von_neumann_foundry.1',
+        'Circuit 2 turns a pathfinder probe core and the same feedstock into one seed.',
+        'El circuito 2 convierte un núcleo de sonda exploradora y la misma materia prima en una semilla.'],
+        ['gtceu.recipe.grindless_self_replication.probe_self_copy', 'Circuit 1: the seed is kept; feedstock, casings and a vitamin kit make a second seed.', 'Circuito 1: la semilla se conserva; materia prima, carcasas y un kit de vitaminas hacen una segunda semilla.'],
+        ['gtceu.recipe.grindless_self_replication.probe_core_seed', 'Circuit 2: a pathfinder probe core and the same feedstock make one seed.', 'Circuito 2: un núcleo de sonda exploradora y la misma materia prima hacen una semilla.']
     ]
 
     ;['en_us', 'es_es'].forEach(function (lang, li) {

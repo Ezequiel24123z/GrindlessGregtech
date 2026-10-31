@@ -59,6 +59,23 @@
     return '#'
   }
 
+  // 16: an 11 x 11 x 11 gantry hall: frame posts at the corners and at (+-2, +-2), a grating ring beam at y = 8, grating windows in the walls
+  function foundryCell(x, y, z) {
+    var dx = x - 5
+    var dz = z - 5
+    var r = max(abs(dx), abs(dz))
+    if (y === 0) return 'X'
+    if (r === 5) {
+      if (abs(dx) === 5 && abs(dz) === 5) return 'Q'
+      if (y === 10) return (x + z) % 2 === 0 ? 'G' : 'F'
+      if (y <= 2) return 'F'
+      return (x + z) % 2 === 0 ? 'G' : 'F'
+    }
+    if (abs(dx) === 2 && abs(dz) === 2 && y <= 7) return 'Q'
+    if (y === 8 && r === 2) return 'G'
+    return '#'
+  }
+
   R.machines = [
     {
       name: 'debris_harvester', machine: 'gtceu:debris_harvester', type: 'debris_harvesting', dataKey: 'grindless_debris_harvesting', lang: 'Debris Harvester',
@@ -75,6 +92,15 @@
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('input_hatch', { min: 1, max: 2 }),
           Pat.part('output_hatch', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
+      }
+    },
+    {
+      name: 'von_neumann_foundry', machine: 'gtceu:von_neumann_foundry', type: 'self_replication', dataKey: 'grindless_self_replication', lang: 'Von Neumann Foundry',
+      maxIO: { itemsIn: 5, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, width: 11, height: 11, depth: 11, casing: ROBUST, texture: ROBUST_TEXTURE,
+      pal: { F: ROBUST, Q: 'tungsten_steel', G: 'gtceu:assembly_line_grating' }, fn: foundryCell,
+      parts: function () {
+        return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 }),
+          G.parallelHatch.part()]
       }
     }
   ]

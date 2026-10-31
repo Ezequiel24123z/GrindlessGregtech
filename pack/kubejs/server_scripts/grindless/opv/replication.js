@@ -195,7 +195,10 @@
         '2x grindless:chain_composite_rod', '2x grindless:field_frozen_plate', '2x grindless:xnav_unit'] },
     { name: 'replication_refinery', research: 'grindless:bulge_debris',
       items: ['gtceu:opv_machine_hull', '4x gtceu:opv_electric_pump', '4x gtceu:opv_fluid_regulator', '2x gtceu:opv_sensor', '4x #gtceu:circuits/opv',
-        '2x grindless:chain_field_coil', '2x grindless:neg_xhv_casing', '2x grindless:field_frozen_plate'] }
+        '2x grindless:chain_field_coil', '2x grindless:neg_xhv_casing', '2x grindless:field_frozen_plate'] },
+    { name: 'von_neumann_foundry', research: 'grindless:metal_feedstock',
+      items: ['gtceu:opv_machine_hull', '4x gtceu:opv_robot_arm', '4x gtceu:opv_conveyor_module', '4x gtceu:opv_field_generator', '8x #gtceu:circuits/opv',
+        '2x grindless:tetron_array', '2x grindless:xnav_unit', '4x grindless:cluster_sinter_casing'] }
   ]
 
   function addControllers(event) {

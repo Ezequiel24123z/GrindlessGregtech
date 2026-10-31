@@ -38,6 +38,19 @@
           "itemsIn": [{ "id": "grindless:si_alloy_powder", "count": 4 }], "kept": [], "wear": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:cluster_sinter_casing", "count": 2 }], "fluidsOut": [] }
       ]
+    },
+    "self_replication": {
+      "dataKey": "grindless_self_replication",
+      "recipes": [
+        { "name": "probe_self_copy", "circuit": 1, "eut": 503316480, "duration": 2400, "site": true,
+          "itemsIn": [{ "id": "grindless:metal_feedstock", "count": 16 }, { "id": "grindless:cluster_sinter_casing", "count": 8 }, { "id": "grindless:vitamin_kit", "count": 1 }],
+          "kept": [{ "id": "grindless:probe_seed", "count": 1 }], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:probe_seed", "count": 2 }], "fluidsOut": [] },
+        { "name": "probe_core_seed", "circuit": 2, "eut": 503316480, "duration": 2400, "site": true,
+          "itemsIn": [{ "id": "grindless:pathfinder_probe_core", "count": 1 }, { "id": "grindless:metal_feedstock", "count": 16 }, { "id": "grindless:cluster_sinter_casing", "count": 8 }, { "id": "grindless:vitamin_kit", "count": 1 }],
+          "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:probe_seed", "count": 1 }], "fluidsOut": [] }
+      ]
     }
   }
 }
