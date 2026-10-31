@@ -74,7 +74,7 @@
       })
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
       parts.forEach(function (s) { b.itemInputs(s) })
-      b.inputFluids(Fluid.of('grindless:superfluid_helium_3', 1000),
+      b.inputFluids(Fluid.of('gtceu:superfluid_helium_3', 1000),
         Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000))
         .itemOutputs('gtceu:' + d.name)
         .stationResearch(function (r) { return r.researchStack(Item.of('grindless:pb208_beam_cell')).CWUt(128).EUt(503316480) })
