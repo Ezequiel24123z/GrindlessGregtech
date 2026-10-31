@@ -6,8 +6,8 @@
 //   gtceu:kugelblitz_forming   forge: c1 charge (2 dense positron cells + a gamma laser module worn 1/8 -> gamma pump charge), c2 seed (4 charges
 //                              + FRC cartridge, Laue lens and multilayer mirror worn 1/64 -> kugelblitz_seed, 5% of the runs fail and the seed is
 //                              thrown into Cygnus X-1), c3 core, c4 hawking_drive, c5 core from a spent shell (half the absorber tiles).
-//   gtceu:hawking_power        collector, a generator: c1 1 stable exotic matter -> 2^30 EU/t for 2,400 t, core worn 1/64; c2 4,000 mB stellar
-//                              plasma -> 2^29 EU/t for 1,200 t, core worn 1/32. Each run wears 1/8 absorber tile; the spent core comes back as
+//   gtceu:hawking_power        collector, a generator: c1 1 stable exotic matter -> 2^30 EU/t for 14,800 t, core worn 1/64; c2 4,000 mB stellar
+//                              plasma -> 2^29 EU/t for 4,600 t, core worn 1/32. Each run wears 1/8 absorber tile; the spent core comes back as
 //                              an evaporated_core_shell with the same chance.
 //   assembly_line              the two controllers (OpV hull + OpV parts + OpV circuits + the era fluid + domain items, behind station research).
 //
@@ -228,7 +228,7 @@
   // VA[OpV] for 2,400 t, behind station research
   function addControllers(event) {
     var HULL = 'gtceu:opv_machine_hull'
-    var FLUID = 'grindless:superfluid_helium_3'
+    var FLUID = 'gtceu:superfluid_helium_3'
     var defs = [
       { name: 'kugelblitz_forge', research: 'grindless:laue_lens',
         parts: ['8x gtceu:opv_emitter', '4x gtceu:opv_field_generator', '4x gtceu:opv_sensor'],
@@ -255,7 +255,7 @@
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of(FLUID, 1000))
       b.itemOutputs(machine)
-      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).CWUt(128).EUt(31457280) })
+      b.stationResearch(function (r) { return r.researchStack(Item.of(d.research)).dataStack(Item.of('gtceu:data_module')).CWUt(128).EUt(503316480) })
       b.EUt(503316480).duration(2400)
       KB.controllerRecipes.push('grindless:assembly_line/' + d.name)
     })
