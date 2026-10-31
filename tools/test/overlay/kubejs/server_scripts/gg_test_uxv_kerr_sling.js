@@ -264,7 +264,10 @@
     if (!SK || SK.finished) SK = { tick: 0, phase: 'wait_dim', at: 0, finished: false, server: event.server, delay: 0 }
   })
   // client suite (it sends no commands): armed once when the player joins, if the instance carries SKY_MARKER = {"enabled": true}, as
-  // gg_test_uv_travel.js does. The hold is set first, so mc-runtime-test cannot quit before the leg reports; the leg starts 200 ticks later.
+  // gg_test_uv_travel.js does. The hold is set first, so mc-runtime-test cannot quit before the leg reports. The leg then waits for the client
+  // half to report EMI loaded ('emiReady') and starts 100 ticks later: a dimension change during EMI's reload cost the EMI audit 50 GTM
+  // multiblock previews in the same run (client 2026-10-31, cac207db).
+  var EMI_WAIT_MAX = 6000
   var SKY_MARKER = 'kubejs/config/gg_test_uxv_kerr_sling_sky.json'
   function skyEnabledByMarker() {
     try {
@@ -278,8 +281,8 @@
     if (SK || !skyEnabledByMarker()) return
     try {
       shared().put('hold', true)
-      SK = { tick: 0, phase: 'wait_dim', at: 0, finished: false, server: event.server, delay: 200 }
-      emit('sky_armed', 'NOTE', 'player ' + event.player.getProfile().getName() + ' joined and ' + SKY_MARKER + ' is present: the sky leg starts in 200 ticks')
+      SK = { tick: 0, phase: 'wait_dim', at: 0, finished: false, server: event.server, delay: 200, emiWait: 0 }
+      emit('sky_armed', 'NOTE', 'player ' + event.player.getProfile().getName() + ' joined and ' + SKY_MARKER + ' is present: the sky leg starts 100 ticks after the client reports EMI loaded')
     } catch (e) {
       emit('sky_armed', 'FAIL', 'could not arm the sky leg: ' + e)
       shared().put('hold', false)
@@ -290,6 +293,14 @@
   ServerEvents.tick(function (event) {
     if (!SK || SK.finished || Date.now() - LOADED_AT < 10000) return
     if (SK.delay > 0) { SK.delay--; return }
+    if (SK.emiWait !== undefined && SK.emiWait >= 0) {
+      var ready = sval('emiReady') === 'true'
+      if (!ready && SK.emiWait++ < EMI_WAIT_MAX) return
+      emit('sky_emi', 'NOTE', ready ? 'client reports EMI loaded: the leg starts in 100 ticks' : 'no EMI loaded report after ' + EMI_WAIT_MAX + ' ticks: starting anyway')
+      SK.emiWait = -1
+      SK.delay = 100
+      return
+    }
     try {
       skyStep()
     } catch (e) {
