@@ -178,7 +178,16 @@
           "itemsOut": [{ "id": "grindless:metalens_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] },
         { "_why": "MAX-B3 (max.md, L29 step 2, c12): the nitride film exposed with the microring pattern; the fouled mirror goes to c3 as in every exposure", "name": "microring_wafer", "circuit": 12, "eut": 31457280, "duration": 2000,
           "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 1 }, { "id": "grindless:nitride_film_wafer", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:microring_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:microring_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-D2 (max.md, L22 step 2, c11): the trilayer exposed with the SIS junction pattern; the fouled mirror goes to c3 as in every exposure", "name": "sis_junction_wafer", "circuit": 11, "eut": 31457280, "duration": 2000,
+          "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 1 }, { "id": "grindless:nb_alox_nb_trilayer", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:sis_junction_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-D2 (max.md, L44 step 2, c13): the UTC epitaxial wafer exposed with the photodiode pattern; the fouled mirror goes to c3 as in every exposure", "name": "utc_photodiode_wafer", "circuit": 13, "eut": 31457280, "duration": 2000,
+          "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 1 }, { "id": "grindless:inp_utc_epi_wafer", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:utc_photodiode_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-D2 (max.md, L45 step 3, c14): the HEMT epitaxy exposed with the gate pattern; the fouled mirror goes to c3 as in every exposure", "name": "hemt_gate_wafer", "circuit": 14, "eut": 31457280, "duration": 2000,
+          "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 1 }, { "id": "grindless:inp_hemt_epi", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:hemt_gate_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "stm_lithography": {

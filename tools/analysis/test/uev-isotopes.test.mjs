@@ -186,7 +186,7 @@ test('no recipe of the package needs a UEV or UIV-only input', () => {
 });
 
 test('names exist in en_us and es_es for the machine, the type, the items, the materials and every calutron recipe', () => {
-  const lang = read('client_scripts', 'grindless', 'uev_isotopes_lang.js') + read('client_scripts', 'grindless', 'max_interferometer_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js'); // MAX-B2 c16-17 keep their EMI lines in its own file
+  const lang = read('client_scripts', 'grindless', 'uev_isotopes_lang.js') + read('client_scripts', 'grindless', 'max_interferometer_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js') + read('client_scripts', 'grindless', 'max_imager_lang.js'); // MAX-B2 c16-17 keep their EMI lines in its own file
   const need = ['block.gtceu.calutron', 'gtceu.calutron_separation', 'grindless.machine.calutron.no_voiding'];
   for (const r of CAL) need.push(`gtceu.recipe.grindless_calutron_separation.${r.name}`);
   for (const i of ['ca48_oven_charge', 'plutonium_oxide_target', 'irradiated_plutonium_target', 'plutonium_244_target']) need.push(`item.grindless.${i}`);
