@@ -303,6 +303,16 @@
       itemsOut: [{ id: 'gtceu:indium_dust', count: 1 }, { id: 'gtceu:small_aluminium_dust', count: 1 }, { id: 'gtceu:small_gold_dust', count: 1 }],
       fluidsOut: [{ id: 'gtceu:diluted_hydrochloric_acid', amount: 2000 }],
       eut: 1920, duration: 100
+    },
+    // MAX-H1 (max.md line 30, c32): the Er/Ho cut of the mixed chlorides for the cryocooler's Er3Ni regenerator; the Nd raffinate goes to the
+    // chloride electrolyser (decomposition above), the strip acid comes back as HCl
+    {
+      name: 'er_ho_strip', mode: 'max', circuit: 32,
+      itemsIn: [{ id: MIX_CL, count: 32 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:er_ho_oxide', count: 5 }, { id: ND_CL, count: 16 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
+      eut: 1920, duration: 100
     }
   ]
 
