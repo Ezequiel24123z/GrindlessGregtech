@@ -1,4 +1,4 @@
-// priority: 6543
+// priority: 6532
 // Gregtech Grindless - names of the MAX wireless tier (package MAX-W; the MAX row of kubejs/data/grindless/tables/wireless_energy.json,
 // registered by startup_scripts/grindless/lv/wireless_energy.js):
 //

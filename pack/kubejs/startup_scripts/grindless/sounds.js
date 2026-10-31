@@ -104,7 +104,8 @@
     'gtceu:kugelblitz_forming': 'loop_kugelblitz_forge',
     'gtceu:hawking_power': 'loop_hawking_collector',
     'gtceu:atom_interferometry': 'loop_atom_interferometer_works',
-    'gtceu:membrane_rolling': 'loop_membrane_line'
+    'gtceu:membrane_rolling': 'loop_membrane_line',
+    'gtceu:rydberg_assembly': 'loop_rydberg_array_works'
   }
 
   StartupEvents.registry('sound_event', function (event) {

@@ -1,9 +1,10 @@
+// priority: -20001
 // Gregtech Grindless - the recipes of GTM's parts at MAX (package MAX-A4, docs/eras/max.md 'Hatches' and A4), generated at every server
 // load from data/grindless/tables/max_parts.json, plus the bender step of line L39:
 //
 //   assembly line   grindless:max_<part> -> gtceu:max_<part>, at VA[MAX] (the validator's H-FORM/S-FORM want the line at MAX): the MAX hull (not the battery), the row's MAX components
 //               (never fewer than 2), 2 #gtceu:circuits/max, 2 horizon strand cables, 1 chain lamina stack, 1,152 mB soldering alloy and the
-//               row's programmed circuit (6 or more distinct items, one fluid). It runs in gtceu:assembly_hall on two OpV 4 A hatches (decision 68).
+//               (6 or more distinct items, one fluid; no programmed circuit, the row's circuit number only keeps the rows distinct). It runs in gtceu:assembly_line, no research.
 //   bender      grindless:bender/fcl_substrate_strip: L39 step 1, high-resistivity Hastelloy C-276 plate bent to the limiter's substrate strip
 //
 // GTM's own recipes of these ids are cut by opv/cuts.js (every MAX part but gtceu:max_battery, which keeps GTM's UHV row).

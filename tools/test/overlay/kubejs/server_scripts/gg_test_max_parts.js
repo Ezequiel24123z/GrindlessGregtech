@@ -1,4 +1,4 @@
-// priority: -5567
+// priority: -5564
 // TEST ONLY, MAX-A4 MAX parts (docs/eras/max.md, A4). Command: kubejs custom_command gg_test_max_parts
 // Markers: GGTEST|max_parts|<check>|PASS/FAIL|..., then GGTEST|max_parts|DONE|failures=N.
 // Band ONLY: X 39832-39895, Z 0-63, Overworld Y 98-115 (zones.json row max_parts).

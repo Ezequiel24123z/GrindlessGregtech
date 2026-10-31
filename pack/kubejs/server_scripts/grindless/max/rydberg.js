@@ -1,3 +1,4 @@
+// priority: -20014
 // -----------------------------------------------------------------------------------------------
 // MAX-B3 Rydberg array works (docs/eras/max.md, machine 1, lines L19, L23, L29, L40, L43, L46; package MAX-B3). The line steps on older
 // machines are rows marked MAX-B3 in their own tables and scripts; this file holds the machine's two recipes, its controller and the GTM
@@ -54,7 +55,7 @@
       outs: ['2x grindless:teo2_aod_blank'], eut: LOW, duration: 600 },
     { type: 'chemical_reactor', name: 'synthetic_silica_soot', items: ['4x gtca:silicon_tetrachloride_dust'],
       fluids: [['gtceu:oxygen', 2000], ['minecraft:water', 2000]], outs: ['4x grindless:synthetic_silica_soot'], eut: LOW, duration: 400 },
-    { type: 'electric_furnace', name: 'annealed_glass_cell', items: ['1x grindless:laser_welded_glass_cell'], fluids: [],
+    { type: 'chemical_reactor', name: 'annealed_glass_cell', items: ['1x grindless:laser_welded_glass_cell'], fluids: [['gtceu:nitrogen', 1000]],
       outs: ['1x grindless:annealed_glass_cell'], eut: 30720, duration: 800 },
     { type: 'assembler', name: 'quantum_memory_node', eut: null, duration: 600,
       items: ['1x grindless:burned_memory_crystal', '2x grindless:memory_fibre_pigtail', '1x ' + CIRCUIT, '2x gtceu:tritanium_plate',

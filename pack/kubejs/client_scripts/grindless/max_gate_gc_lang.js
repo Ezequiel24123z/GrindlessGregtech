@@ -1,4 +1,4 @@
-// priority: 6620
+// priority: 6622
 // Gregtech Grindless - names of MAX-T1, gate c14 (server_scripts/grindless/max/gate_gc.js, data/grindless/tables/gate.json):
 //
 //   gtceu.recipe.grindless_warp_gate.hold_sgr_a_probe   EMI line of the c14 warp gate row (2^33 EU/t for 60 s, the galactic-centre probe)

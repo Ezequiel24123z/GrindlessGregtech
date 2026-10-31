@@ -90,14 +90,7 @@
     { "id": "gtceu:horizon_strand_ingot", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" }
   ],
   "pendingRoutes": [
-    { "id": "grindless:assembler/max_wireless_dynamo_hatch", "foreign": ["gtceu:max_energy_output_hatch"], "reason": "MAX-W landed before the components: its inputs gtceu:max_energy_output_hatch (A3) and grindless:horizon_strand_repeater are held until A3 writes their producers; the last of them deletes this entry with the W hold rule" },
-    { "id": "grindless:assembler/max_wireless_energy_hatch", "foreign": ["gtceu:max_energy_input_hatch"], "reason": "MAX-W: its input gtceu:max_energy_input_hatch is GTM's MAX content, held by the blanket gtceu:max_* rule until the MAX release gate (T2); the entry goes with that rule" },
-    { "id": "grindless:assembler/max_wireless_energy_hatch_4a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_energy_hatch (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
-    { "id": "grindless:assembler/max_wireless_energy_hatch_16a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_energy_hatch_4a (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
-    { "id": "grindless:assembler/max_wireless_energy_hatch_64a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_energy_hatch_16a (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
-    { "id": "grindless:assembler/max_wireless_dynamo_hatch_4a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_dynamo_hatch (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
-    { "id": "grindless:assembler/max_wireless_dynamo_hatch_16a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_dynamo_hatch_4a (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
-    { "id": "grindless:assembler/max_wireless_dynamo_hatch_64a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_dynamo_hatch_16a (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:rydberg_assembly/rydberg_array_refurbish", "reason": "MAX-B3: its input grindless:spent_rydberg_array comes back from the mirror shell c3 (max.md:651, the ending), which is G1; held until max. Owner G1" },
     { "id": "grindless:atom_interferometry/shell_gradient_map", "reason":"MAX-B2 landed before D2: its input grindless:sgr_a_spin_map is held until D2 (photon ring imager c1) writes it; D2 deletes this entry with the hold rule" },
     { "id": "grindless:assembler/max_penrose_payload", "reason": "MAX-D1: runs only at Sgr A*, whose chain (hot_flow ... max_penrose_payload, shell_droplet_radiator) is held until the MAX release gate (T2); the entry goes with the hold rule" },
     { "id": "grindless:megabar_synthesis/payload_core_press", "reason": "MAX-D1: runs only at Sgr A*, whose chain (hot_flow ... max_penrose_payload, shell_droplet_radiator) is held until the MAX release gate (T2); the entry goes with the hold rule" },
@@ -110,11 +103,10 @@
     { "id": "grindless:plasma_mass_filtering/cooled_exhaust_return", "reason": "MAX-D1: runs only at Sgr A*, whose chain (hot_flow ... max_penrose_payload, shell_droplet_radiator) is held until the MAX release gate (T2); the entry goes with the hold rule" }
   ],
   "pendingUses": [
+    { "id": "grindless:rydberg_logic_array", "package": "G1", "reason": "MAX-B3 makes it (rydberg_array_works c1); the mirror shell c3 consumes it and returns spent_rydberg_array (max.md:651), which is G1" },
         { "id": "grindless:shell_cryocooler", "package": "C1", "reason": "MAX-H1 makes it (L30); G1's segment foundry mode takes it and C1 checks the use is there" },
         { "id": "grindless:segment_controller", "package": "C1", "reason": "MAX-H1 makes it (L38); G1's mirror shell controller takes it and C1 checks the use is there" },
     { "id": "grindless:launched_gc_probe", "package": "T2", "reason": "MAX-T1 returns it from gate c14; T2's belt seed chain takes it and T2 checks the use is there" },
-    { "id": "grindless:diamond_power_die", "package": "D3", "reason": "MAX-A3 makes it (L8); D3's geroch winch takes it (max.md:188), as do D4's injector and R1's furnace; D3 checks the use is there" },
-    { "id": "grindless:max_conveyor_module", "package": "A4", "reason": "MAX-A3 makes it (L11); A4's bus table takes it (max.md:170) and A4 checks the use is there" },
         { "id": "grindless:albedo_multilayer_panel", "package":"D3", "reason": "use written by D3 - MAX-B1 makes it (L3); D3's geroch winch takes it and D3 checks the use is there" }
       ]
 }
