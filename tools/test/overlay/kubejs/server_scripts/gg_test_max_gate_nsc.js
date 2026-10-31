@@ -1,4 +1,4 @@
-// priority: -5515
+// priority: -5504
 // TEST ONLY, MAX-T2 (gate c15). Commands: kubejs custom_command gg_test_max_gate_nsc, then @restart, then kubejs custom_command gg_test_max_gate_nsc_2
 // (copied over the instance on the test PC, never shipped).
 // Band ONLY: X 40024-40087, Z 0-63, Y 98-115, in the Overworld (the wireless tower) and gcyr:black_hole_orbit (the warp gate: the Sgr A* ring the

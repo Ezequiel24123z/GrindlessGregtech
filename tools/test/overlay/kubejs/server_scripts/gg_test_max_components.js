@@ -1,4 +1,4 @@
-// priority: -5474
+// priority: -5464
 // TEST ONLY, MAX-A2 first six components (docs/eras/max.md, A2). Command: kubejs custom_command gg_test_max_components
 // Markers: GGTEST|max_components|<check>|PASS/FAIL|..., then GGTEST|max_components|DONE|failures=N.
 // Band ONLY: X 39448-39511, Z 0-63, Overworld Y 98-115 (zones.json row max_components).

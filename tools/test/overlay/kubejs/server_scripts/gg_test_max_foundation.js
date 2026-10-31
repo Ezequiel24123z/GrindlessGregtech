@@ -1,4 +1,4 @@
-// priority: -5494
+// priority: -5484
 // TEST ONLY, MAX-F1 (bench overlay, never shipped). Command: kubejs custom_command gg_test_max_foundation
 // (needs kubejs/config/gg_test_max_foundation.json {"enabled": true}). Band: Overworld X 0-15, Z 0-15 of BAND_X0/BAND_Z0 below, Y 80 (the integrator assigns
 // the real band in tools/test/zones.json and edits BAND_X0 here). Everything placed is cleared before DONE.
