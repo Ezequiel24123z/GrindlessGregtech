@@ -1,4 +1,4 @@
-// priority: -6294
+// priority: -6901
 // TEST ONLY, OpV-S0 S0-9, leg 1. Command: kubejs custom_command gg_test_opv_s0_relay_1
 // Needs the temp pack copy E3 (a throwaway hold_s0_terzan5 row, circuit 12, in tables/gate.json at grindless:cygnus_x1_orbit, and a relay_platforms.json row
 // { place s0_terzan5, jump hold_s0_terzan5, dimension grindless:s0_terzan5_core, source grindless:cygnus_x1_orbit, x 64, y 100, z 64 }). Never committed.

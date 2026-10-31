@@ -1,3 +1,4 @@
+// priority: -21624
 // -----------------------------------------------------------------------------------------------
 // OpV beam hardware (package OpV-D1, docs/eras/opv.md "D1"): the GTM-type steps of process lines 20-25 and the NEG casing. The older
 // machines' own rows are in their tables and scripts:

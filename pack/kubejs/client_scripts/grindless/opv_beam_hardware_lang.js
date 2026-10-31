@@ -1,3 +1,4 @@
+// priority: 5850
 // Gregtech Grindless - names and tooltips of the OpV beam hardware (startup_scripts/grindless/opv/beam_hardware.js, package OpV-D1):
 //
 //   grindless:<item>                    item.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1)

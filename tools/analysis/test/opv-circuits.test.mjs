@@ -110,14 +110,14 @@ test('28 items and 2 fluids registered by the startup file, named in both langua
   }
 });
 
-test('F1\'s parts are read, never registered here; no priority line in the new files', () => {
+test('F1\'s parts are read, never registered here; the integrator stamped the new files', () => {
   for (const n of F1) {
     const it = run.registry.items.get(`grindless:${n}`);
     assert.ok(it, `${n} is registered`);
     assert.ok(!/opv[\\/]circuits\.js$/.test(String(it.file)), `${n} not registered by opv/circuits.js`);
   }
   for (const f of [['startup_scripts', 'grindless', 'opv', 'circuits.js'], ['server_scripts', 'grindless', 'opv', 'circuits.js'], ['client_scripts', 'grindless', 'opv_circuits_lang.js']]) {
-    assert.ok(!/^\s*\/\/\s*priority:/m.test(fs.readFileSync(path.join(kube, ...f), 'utf8')), f.join('/'));
+    assert.ok(/^\/\/ priority: -?\d+$/m.test(fs.readFileSync(path.join(kube, ...f), 'utf8')), f.join('/') + ': stamped by script-order.mjs --write');
   }
 });
 

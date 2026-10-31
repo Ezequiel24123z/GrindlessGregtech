@@ -206,7 +206,7 @@ test('the four materials are census_iv.js\'s (two dusts, two radioactive gases);
   }
   const code = STARTUP.replace(/^\s*\/\/.*$/gm, '');
   for (const n of ['caged_ni_chain', 'element_124_recoil\'', 'superheavy_census_iv', 'StartupEvents.registry(\'item\'']) assert.ok(!code.includes(n), n);
-  assert.doesNotMatch(STARTUP, /^\/\/ priority:/m, 'the integrator stamps the load order');
+  assert.match(STARTUP, /^\/\/ priority: -?\d+$/m, 'the integrator stamped the load order (script-order.mjs --write)');
 });
 
 test('lang parity: every new material and row has its name in en_us and es_es; F1 names the three items', () => {

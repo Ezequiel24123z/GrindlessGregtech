@@ -1,3 +1,4 @@
+// priority: -6715
 // -----------------------------------------------------------------------------------------------
 // OpV chain matter (package OpV-A0, docs/eras/opv.md "A0. Bulge relay, chain matter and the hull", process lines 1 and 2): the intermediates
 // mined from SGR 1806-20's outer crust and caged. No machine of our own and no recipe type: every step runs on UXV's four pasta machines at

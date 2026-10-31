@@ -1,3 +1,4 @@
+// priority: -6700
 // -----------------------------------------------------------------------------------------------
 // OpV's census IV (docs/eras/opv.md, process lines 43 and 44; package OpV-B2). No new machine: the rows go to older machines
 // (tables electron_beam.json c23, isotopes.json calutron c11, superheavy.json cyclotron c11 and c13, recoil separator c10 and c11,

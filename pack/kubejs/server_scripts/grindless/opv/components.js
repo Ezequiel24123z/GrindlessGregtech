@@ -1,3 +1,4 @@
+// priority: -21669
 // -----------------------------------------------------------------------------------------------
 // OpV components (package OpV-A1, docs/eras/opv.md "A1. Components", lines 4-10): the steps of the component lines that run on GTM's own
 // assembler, and four of GTM's OpV components (highTierContent ids; F2 cuts GTM's own recipes for them). The steps on older custom machines

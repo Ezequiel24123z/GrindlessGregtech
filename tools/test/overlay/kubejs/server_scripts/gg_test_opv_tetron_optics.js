@@ -1,3 +1,4 @@
+// priority: -6923
 // TEST ONLY, OpV-B1 (gtceu:tetron_fab, gtceu:gamma_optics_works). Command: kubejs custom_command gg_test_opv_tetron_optics
 // Band ONLY: X 38144-38207, Z 0-63, Overworld Y 98-112.
 //   T1 (named uncertainty: a 268,435,456 EU/t row, twice V[UXV], is accepted by two UXV energy hatches and the multiblock modifier leaves

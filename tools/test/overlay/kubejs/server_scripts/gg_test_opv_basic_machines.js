@@ -1,3 +1,4 @@
+// priority: -6324
 // TEST ONLY, OpV-A4 (basic machines). Command: kubejs custom_command gg_test_opv_basic_machines
 // Band ONLY: X 38080-38143, Z 0-63, Overworld Y 98-115. Everything placed is cleared before DONE.
 //   T1 (named uncertainty: gtceu:opv_assembler, placed with /setblock and fed through a chain strand cable connected with setConnection,

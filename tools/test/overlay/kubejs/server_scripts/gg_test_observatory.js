@@ -1,4 +1,4 @@
-// priority: -6156
+// priority: -6224
 // Gregtech Grindless - smoke test of the observatory family, Steam to MV. TEST-ONLY overlay: copied over the instance on the test PC,
 // never shipped.
 //

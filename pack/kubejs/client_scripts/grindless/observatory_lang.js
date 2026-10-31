@@ -1,4 +1,4 @@
-// priority: 6000
+// priority: 5950
 // Gregtech Grindless - names and tooltips of the observatory family (Steam to MV):
 //
 //   gtceu:steam_observatory, gtceu:optical_observatory, gtceu:radio_telescope        (machine names + tooltips)

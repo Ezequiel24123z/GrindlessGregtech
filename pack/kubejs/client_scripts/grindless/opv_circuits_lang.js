@@ -1,3 +1,4 @@
+// priority: 5730
 // Gregtech Grindless - names and tooltips of the OpV circuit lines (startup_scripts/grindless/opv/circuits.js, package OpV-A2):
 //
 //   grindless:<item>          item.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1)

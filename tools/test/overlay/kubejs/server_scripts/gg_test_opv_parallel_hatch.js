@@ -1,3 +1,4 @@
+// priority: -6857
 // TEST ONLY, OpV-M1 (gtceu:opv_parallel_hatch). Command: kubejs custom_command gg_test_opv_parallel_hatch
 // Band ONLY: X 37760-37823, Z 0-63, Overworld Y 98-115 (the forge is 16 high; zones.json carries the same Y range).
 //   T1 (named uncertainty: at x262,144 on a GTM recipe the EU/t x parallel product stays long and the energy bound picks the parallel, not an overflow):

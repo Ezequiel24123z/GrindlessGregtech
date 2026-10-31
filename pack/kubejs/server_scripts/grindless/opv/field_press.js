@@ -1,3 +1,4 @@
+// priority: -21699
 // -----------------------------------------------------------------------------------------------
 // Recipes of OpV's field-frozen press (machine and recipe type: startup_scripts/grindless/opv/field_press.js; docs/eras/opv.md, machine 13,
 // lines 3 and 45; package OpV-A3), generated at every server load from data/grindless/tables/field_press.json, plus the controller's

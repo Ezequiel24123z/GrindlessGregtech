@@ -1,4 +1,4 @@
-// priority: -6724
+// priority: -6989
 // Gregtech Grindless - test overlay (not shipped with the pack)
 //
 // REAL-CLIENT test of the quest book (welcome + steam_age) and of the Neutronium Toolbox rewards, with a real player:
