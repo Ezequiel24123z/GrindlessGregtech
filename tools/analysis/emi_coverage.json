@@ -86,11 +86,24 @@
   "exceptions": [
   ],
   "pendingRoutes": [
+    { "id": "grindless:assembler/horizon_strand_repeater", "reason": "MAX-W landed before the components: its input grindless:max_sensor is held until A3 (A2 reworks the row); the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/max_smes_cell", "reason": "MAX-W landed before the components: its input grindless:max_field_generator is held until A3 (A2 reworks the row); the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/max_wireless_energy_hatch_4a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_energy_hatch (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/max_wireless_energy_hatch_16a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_energy_hatch_4a (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/max_wireless_energy_hatch_64a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_energy_hatch_16a (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/max_wireless_dynamo_hatch_4a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_dynamo_hatch (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/max_wireless_dynamo_hatch_16a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_dynamo_hatch_4a (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/max_wireless_dynamo_hatch_64a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_dynamo_hatch_16a (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/max_wireless_energy_cover", "reason": "MAX-W landed before the components: its inputs grindless:max_sensor (A3) and grindless:horizon_strand_repeater are held until A2 and A3 write their producers; the last of them deletes this entry with the W hold rule" },
+    { "id": "grindless:assembler/max_wireless_dynamo_cover", "reason": "MAX-W landed before the components: its inputs grindless:max_emitter (A2) and grindless:horizon_strand_repeater are held until A2 write their producers; the last of them deletes this entry with the W hold rule" }
   ],
   "pendingUses": [
     { "id": "grindless:superheavy_census_iv", "package": "G1", "reason": "OpV-B2 makes it; G1's MAX gate (warp gate c13) keeps it (opv.md line 50)" },
     { "id": "grindless:gan_mmic", "package": "R1", "reason": "OpV-A2 makes it; R1's node power transmitter takes it (opv.md line 42)" },
     { "id": "grindless:sdd_die", "package": "R1", "reason": "OpV-A2 makes it; R1's XNAV timing head takes it (opv.md line 41)" },
-    { "id": "grindless:launched_bulge_seed", "package": "G1", "reason": "OpV-A0 makes it (c11 throw to SGR 1806-20, opv.md line 93); G1's gate c13 to Sgr A* takes one per throw: the relay already in the bulge forwards the MAX throw (coordinator decision, OpV-I1)" }
-  ]
+    { "id": "grindless:launched_bulge_seed", "package": "G1", "reason": "OpV-A0 makes it (c11 throw to SGR 1806-20, opv.md line 93); G1's gate c13 to Sgr A* takes one per throw:     the relay already in the bulge forwards the MAX throw (coordinator decision, OpV-I1)" },
+
+        { "id": "grindless:shell_cryocooler", "package": "C1", "reason": "MAX-H1 makes it (L30); G1's segment foundry mode takes it and C1 checks the use is there" },
+        { "id": "grindless:segment_controller", "package": "C1", "reason": "MAX-H1 makes it (L38); G1's mirror shell controller takes it and C1 checks the use is there" }
+      ]
 }

@@ -357,7 +357,7 @@
     "nsc": "grindless:nsc_belt"
   },
   "circuits": {
-    "_why": "the first free programmed circuit of each type MAX first uses in the repair, computed in MAX-F1 from the F1 base (ec79bb0c, OpV batch 1) plus the OpV rows assigned elsewhere (D1 c18, D2 c19, R1 c20, A1 c21, B3a c22, EB c23-24, R1 SiC c7, profiler c4, clock c5, fibre c18, extraction c28-29, B3b trap c6, D3 forge c1-4 and shell c5, collector c1-2, gates c10-13). The MAX integrator re-checks it once OpV batches 2-3 and G1 land; types marked unsure are listed in the F1 handoff.",
+    "_why": "decision 48: programmed circuits are 0..32, never above; crystal growth, extraction cascade and electron beam reach the cap and take repeats by differing item inputs (OpV-F3 rule), see docs/eras/max.md Circuits by type. The first free programmed circuit of each type MAX first uses in the repair, computed in MAX-F1 from the F1 base (ec79bb0c, OpV batch 1) plus the OpV rows assigned elsewhere (D1 c18, D2 c19, R1 c20, A1 c21, B3a c22, EB c23-24, R1 SiC c7, profiler c4, clock c5, fibre c18, extraction c28-29, B3b trap c6, D3 forge c1-4 and shell c5, collector c1-2, gates c10-13). The MAX integrator re-checks it once OpV batches 2-3 and G1 land; types marked unsure are listed in the F1 handoff.",
     "uxv_oxide_pld": {
       "first_free": 4,
       "note": "tables/spin_deposition.json uses 1-3"

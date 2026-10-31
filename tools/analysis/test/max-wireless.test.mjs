@@ -58,7 +58,7 @@ test('the caps are V[MAX] x amps x the window as longs: past 2^31 and exact, 64 
 
 test('max/wireless.js: the repeater and the cell are assembler rows at VA[MAX] and pendingRoutes until A2', () => {
   const src = read('server_scripts', 'grindless', 'max', 'wireless.js');
-  assert.doesNotMatch(src, /^\/\/ priority:/m, 'no priority line');
+  assert.ok(!/^\/\/ priority:/m.test(src.replace(/^\/\/ priority: -?\d+\r?\n/, '')), 'no hand-written priority line (the integrator stamps the first line)');
   assert.deepEqual(plain(MW.rows.map((r) => r.out)), ['grindless:horizon_strand_repeater', CELL]);
   assert.match(src, /GTValues\.VA\[MAXT\]/);
   assert.deepEqual(plain(MW.rows[1].items), ['16x gtceu:horizon_strand_single_wire', '4x grindless:cold_smes_toroid', '2x grindless:max_field_generator']);
