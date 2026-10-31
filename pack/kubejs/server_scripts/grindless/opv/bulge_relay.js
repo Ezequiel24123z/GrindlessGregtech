@@ -1,4 +1,4 @@
-// OpV-A0, the bulge relay (docs/eras/opv.md "A0. Bulge relay, chain matter and the hull"). Three parts:
+// OpV-A0, the bulge relay (docs/eras/opv.md "A0. Bulge relay, chain matter and the hull"). Four parts:
 //
 //   1. grindless:bulge_relay_seed: an assembly line row at VA[UXV] of UXV parts only (a 32-strand pasta magsail, lasagna plates, a SHeQUID gyro,
 //      two UXV sensors and an FRC cartridge). It is a travel item made before any OpV part exists, the one OpV-stage recipe outside the component
@@ -13,6 +13,9 @@
 //      stacks and 500 mB superfluid He-3 at V[OpV]/2 = 2^28 EU/t. No OpV machine exists yet, so it runs on GTM's assembly line with UXV 4 A hatches
 //      (4 x V[UXV] = V[OpV], opv.md "Bridges and first arrivals"). GTM's own hull recipe is removed by opv/cuts.js (OpV-F2), which spares mod
 //      grindless, so this is the only way. No research: like the seed it is a part.
+//   4. gtceu:chain_strand_single_cable (line 1's last step): GTM's single-cable covering at tiers above IV (WireRecipeHandler), on F1's braided
+//      wire instead of the bare one: the PBO plant's c8 braid (uhv/elevator.js), one polyphenylene sulfide foil, one polyvinyl chloride foil and
+//      72 mB of silicone rubber, 7 EU/t for 100 t, no circuit. GTM's own chain cable rows are removed by opv/cuts.js (OpV-F2).
 // Published in global.grindless.opvBulgeRelay: .recipes (the ids made), .skipped, .hold (the kept c11 run, or null), .restored (the run given back
 // this boot, or null), .jump, .place, .source.
 // Rhino: var + function inside every callback that runs more than once.
@@ -47,6 +50,7 @@
   var HULL_PARTS = ['gtceu:opv_machine_casing', 'grindless:chain_lamina_stack', 'gtceu:opv_machine_hull']
   var CABLES = ['gtceu:chain_strand_single_cable', 'grindless:chain_strand_single_cable']
   var HELIUM_3 = ['gtceu:superfluid_helium_3', 'grindless:superfluid_helium_3']
+  var COVER_PARTS = ['grindless:pbo_braided_chain_wire', 'gtceu:polyphenylene_sulfide_foil', 'gtceu:polyvinyl_chloride_foil', 'gtceu:chain_strand_single_cable']
 
   function firstExisting(ids, exists) {
     for (var i = 0; i < ids.length; i++) if (exists(ids[i])) return ids[i]
@@ -104,6 +108,23 @@
     } catch (e) {
       B.skipped.push({ name: 'opv_machine_hull', reason: String(e) })
       console.error(LOG + 'OpV machine hull recipe failed: ' + e)
+    }
+    try {
+      var bare = COVER_PARTS.filter(function (id) { return !Item.exists(id) })
+      if (!Fluid.exists('gtceu:silicone_rubber')) bare.push('gtceu:silicone_rubber')
+      if (bare.length > 0) {
+        skip('chain_strand_single_cable', bare)
+      } else {
+        var c = event.recipes.gtceu.assembler('grindless:chain_strand_single_cable')
+        c.itemInputs('grindless:pbo_braided_chain_wire', 'gtceu:polyphenylene_sulfide_foil', 'gtceu:polyvinyl_chloride_foil')
+        c.inputFluids(Fluid.of('gtceu:silicone_rubber', 72))
+        c.itemOutputs('gtceu:chain_strand_single_cable')
+        c.EUt(7).duration(100)
+        B.recipes.push('grindless:assembler/chain_strand_single_cable')
+      }
+    } catch (e) {
+      B.skipped.push({ name: 'chain_strand_single_cable', reason: String(e) })
+      console.error(LOG + 'chain strand cable recipe failed: ' + e)
     }
   })
 
