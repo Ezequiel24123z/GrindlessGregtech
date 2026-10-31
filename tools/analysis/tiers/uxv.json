@@ -1614,7 +1614,7 @@
     },
     {
       "id": "site-warp-gate",
-      "label": "Site: the warp gate only at its ends (Earth, Proxima b, Alpha Centauri AB, Sirius B, the three UIV relay orbits, Vela pulsar orbit and Cassiopeia A)",
+      "label": "Site: the warp gate only at its ends (Earth, Proxima b, Alpha Centauri AB, Sirius B, the three UIV relay orbits, Vela pulsar orbit, Cassiopeia A, SGR 1806-20 orbit and Terzan 5 core)",
       "kind": "site",
       "types": [
         "gtceu:warp_gate"
@@ -1628,10 +1628,12 @@
         "grindless:psr_j0437_orbit",
         "grindless:cygnus_x1_orbit",
         "grindless:vela_pulsar_orbit",
-        "grindless:cas_a_remnant"
+        "grindless:cas_a_remnant",
+        "grindless:sgr1806_orbit",
+        "grindless:terzan5_core"
       ],
       "package": "B5",
-      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV places to open and sustain."
+      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV places to open and sustain; the OpV integrator adds SGR 1806-20 orbit and Terzan 5 core (DECISIONS.md 2026-10-30 \"join the warp gate's ride-home orbits\", uhv/gate.js SITES)."
     },
     {
       "id": "site-j0437",
@@ -1690,7 +1692,51 @@
       "dimensions": [
         "grindless:vela_pulsar_orbit"
       ],
-      "package": "B4"
+      "exceptRecipes": [
+        "grindless:pasta_extraction/chain_crust",
+        "grindless:pasta_extraction/ni_chain",
+        "grindless:pasta_extraction/chain_lattice",
+        "grindless:pasta_sorting/chain_caging",
+        "grindless:pasta_sorting/ni_chain_caging",
+        "grindless:pasta_sorting/lattice_caging",
+        "grindless:pasta_drawing/chain_strand_drawing",
+        "grindless:pasta_drawing/chain_wire_drawing",
+        "grindless:pasta_lamination/chain_lamina",
+        "grindless:pasta_lamination/chain_lamina_stack",
+        "grindless:pasta_lamination/chain_mesh_weave"
+      ],
+      "package": "B4",
+      "note": "OpV-A0's chain matter modes (c3-c5) of the four pasta machines run at SGR 1806-20 orbit instead (docs/eras/opv.md:70, :83): site-sgr-chain-matter holds them there."
+    },
+    {
+      "id": "site-sgr-chain-matter",
+      "label": "Site: the pasta machines' chain matter modes (OpV-A0) only at SGR 1806-20 orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:pasta_extraction",
+        "gtceu:pasta_sorting",
+        "gtceu:pasta_drawing",
+        "gtceu:pasta_lamination"
+      ],
+      "recipe": [
+        "grindless:pasta_extraction/chain_crust",
+        "grindless:pasta_extraction/ni_chain",
+        "grindless:pasta_extraction/chain_lattice",
+        "grindless:pasta_sorting/chain_caging",
+        "grindless:pasta_sorting/ni_chain_caging",
+        "grindless:pasta_sorting/lattice_caging",
+        "grindless:pasta_drawing/chain_strand_drawing",
+        "grindless:pasta_drawing/chain_wire_drawing",
+        "grindless:pasta_lamination/chain_lamina",
+        "grindless:pasta_lamination/chain_lamina_stack",
+        "grindless:pasta_lamination/chain_mesh_weave"
+      ],
+      "dimensions": [
+        "grindless:sgr1806_orbit"
+      ],
+      "exact": true,
+      "package": "B4",
+      "note": "OpV-A0 rows in B4's file (uxv/vela_pasta.js, older rows under the DECISIONS.md placement rule, opv.md:70); recipe.dimension(sgr1806_orbit) only."
     },
     {
       "id": "site-cas-a",
