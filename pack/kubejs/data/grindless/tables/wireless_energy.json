@@ -52,6 +52,9 @@
       "emitter": "gtceu:uxv_emitter", "sensor": "gtceu:uxv_sensor", "signalParts": 1, "link": "grindless:pasta_strand_repeater", "plate": "grindless:lasagna_plate", "frame": null, "wire": "pasta_strand" },
     { "tier": 13, "name": "opv", "cell": "grindless:opv_smes_cell", "capacity": 16106127360000, "referenceBattery": "gtceu:uv_naquadria_battery", "referenceCount": 6144, "batteries": null,
       "cellMadeBy": "gtceu:opv_assembler", "texture": "grindless:block/wireless/smes_cell_opv",
-      "emitter": "gtceu:opv_emitter", "sensor": "gtceu:opv_sensor", "signalParts": 1, "link": "grindless:chain_strand_repeater", "plate": "grindless:field_frozen_plate", "frame": null, "wire": "chain_strand" }
+      "emitter": "gtceu:opv_emitter", "sensor": "gtceu:opv_sensor", "signalParts": 1, "link": "grindless:chain_strand_repeater", "plate": "grindless:field_frozen_plate", "frame": null, "wire": "chain_strand" },
+    { "tier": 14, "name": "max", "cell": "grindless:max_smes_cell", "capacity": 64424509440000, "referenceBattery": "gtceu:uv_naquadria_battery", "referenceCount": 24576, "batteries": null,
+      "cellMadeBy": "gtceu:max_assembler", "texture": "grindless:block/wireless/smes_cell_opv",
+      "emitter": "grindless:max_emitter", "sensor": "grindless:max_sensor", "signalParts": 1, "link": "grindless:horizon_strand_repeater", "plate": "grindless:field_frozen_plate", "frame": null, "wire": "horizon_strand" }
   ]
 }

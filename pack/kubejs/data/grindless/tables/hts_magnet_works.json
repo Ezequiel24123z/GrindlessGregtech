@@ -71,6 +71,14 @@
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:trained_rebco_pancake", "count": 1 } ],
       "eut": 1966080, "duration": 600
+    },
+    {
+      "name": "smes_toroid_winding", "circuit": 13, "charge": true,
+      "_why": "MAX-W (docs/eras/max.md, L27 step 3): eight turns of thick REBCO tape wound round a chain strand former and potted in epoxy, ramped in the cold-test helium.",
+      "itemsIn": [ { "id": "grindless:thick_rebco_tape", "count": 8 }, { "id": "gtceu:chain_strand_single_wire", "count": 2 } ],
+      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+      "itemsOut": [ { "id": "grindless:smes_toroid_winding", "count": 1 } ],
+      "eut": 7864320, "duration": 600
     }
   ]
 }

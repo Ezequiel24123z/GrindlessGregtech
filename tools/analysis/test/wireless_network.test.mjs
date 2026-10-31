@@ -1170,7 +1170,7 @@ let staticRun = null;
 const packRun = () => staticRun || (staticRun = runPackScripts(PACK));
 
 test('LuV wireless table: six rows LV to LuV, each cell six of its tier\'s reference battery; the LuV cell is made in the HTS magnet works', () => {
-  assert.deepEqual(TABLE.tiers.map((r) => [r.tier, r.name]), [[1, 'lv'], [2, 'mv'], [3, 'hv'], [4, 'ev'], [5, 'iv'], [6, 'luv'], [7, 'zpm'], [8, 'uv'], [9, 'uhv'], [10, 'uev'], [11, 'uiv'], [12, 'uxv'], [13, 'opv']]);
+  assert.deepEqual(TABLE.tiers.map((r) => [r.tier, r.name]), [[1, 'lv'], [2, 'mv'], [3, 'hv'], [4, 'ev'], [5, 'iv'], [6, 'luv'], [7, 'zpm'], [8, 'uv'], [9, 'uhv'], [10, 'uev'], [11, 'uiv'], [12, 'uxv'], [13, 'opv'], [14, 'max']]);
   for (const r of TABLE.tiers) {
     assert.equal(r.capacity, (r.referenceCount || 6) * BATTERY_EU[r.referenceBattery], r.name + ': ' + (r.referenceCount || 6) + ' x ' + r.referenceBattery);
     if (r.cellMadeBy) continue;
@@ -1185,7 +1185,7 @@ test('LuV wireless table: six rows LV to LuV, each cell six of its tier\'s refer
   assert.equal(luv.texture, 'grindless:block/wireless/smes_cell_luv');
   assert.deepEqual([luv.emitter, luv.sensor, luv.signalParts, luv.link, luv.plate, luv.wire],
     ['gtceu:luv_emitter', 'gtceu:luv_sensor', 1, 'gtceu:quantum_star', 'gtceu:rhodium_plated_palladium_plate', 'niobium_titanium']);
-  assert.equal(TABLE.tiers.filter((r) => r.cellMadeBy).length, 8, 'only the LuV, ZPM, UV, UHV, UEV, UIV, UXV and OpV cells are made elsewhere');
+  assert.equal(TABLE.tiers.filter((r) => r.cellMadeBy).length, 9, 'only the LuV, ZPM, UV, UHV, UEV, UIV, UXV, OpV and MAX cells are made elsewhere');
   assert.ok(TABLE._how_it_is_used.some((l) => /cellMadeBy/.test(l)), 'the table documents cellMadeBy');
   // the HTS magnet works' circuit 2 makes exactly this cell
   const smes = HTS.recipes.find((r) => r.name === 'luv_smes_cell');
@@ -1309,7 +1309,7 @@ test('LuV wireless ids: every id of the table\'s rows, the LuV row first, is GTM
   const items = new Set(doc.items.map((x) => (typeof x === 'string' ? x : x.id)));
   const fluids = new Set((doc.fluids || []).map((x) => (typeof x === 'string' ? x : x.id)));
   for (const r of TABLE.tiers) {
-    for (const id of rowIds(r).gtm.filter((x) => !/lay_superhydride|metallic_hydrogen|rhea|pasta_strand|chain_strand|^gtceu:(uev|uiv|uxv|opv)_/.test(x))) {
+    for (const id of rowIds(r).gtm.filter((x) => !/lay_superhydride|metallic_hydrogen|rhea|pasta_strand|chain_strand|horizon_strand|^gtceu:(uev|uiv|uxv|opv|max)_/.test(x))) {
       assert.ok(items.has(id), r.name + ': ' + id + ' is not an item of GTM 7.5.3\'s registry (exact id)');
       assert.ok(!fluids.has(id), r.name + ': ' + id + ' is a fluid, not an item');
     }
@@ -1330,17 +1330,20 @@ test('LuV wireless names and textures: en_us and es_es for every LuV block and i
   assert.equal(lang.en_us['block.grindless.luv_smes_cell'], 'LuV SMES Cell');
   assert.equal(lang.en_us['block.gtceu.luv_wireless_energy_hatch_64a'], '\u00a7dLuV 64A Wireless Energy Hatch');
   const tex = path.join(PACK, 'kubejs', 'assets', 'grindless', 'textures');
+  // MAX-W's covers have no textures or EMI page entries yet (assets are not MAX-W's files): the integrator adds them and drops this set
+  const NO_ASSETS_YET = new Set(['max']);
   for (const r of TABLE.tiers) {
     const cell = r.texture ? String(r.texture).replace(/^grindless:/, '') : 'block/wireless/capacitor_cell_' + r.name;
     assert.ok(fs.existsSync(path.join(tex, cell + '.png')), r.name + ': ' + cell);
+    if (NO_ASSETS_YET.has(r.name)) continue;
     for (const kind of ['energy', 'dynamo']) {
       assert.ok(fs.existsSync(path.join(tex, 'item', 'wireless', `${kind}_cover_${r.name}.png`)), r.name + ' ' + kind + ' cover item');
       assert.ok(fs.existsSync(path.join(tex, 'block', 'cover', `wireless_${kind}_cover_${r.name}.png`)), r.name + ' ' + kind + ' cover face');
     }
   }
   const page = (f) => JSON.parse(fs.readFileSync(path.join(PACK, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless', f), 'utf8'));
-  for (const r of TABLE.tiers) assert.ok(page('capacitor_cells.json').stacks.includes('item:' + r.cell), r.cell + ' on the cells\' EMI page');
-  for (const c of TABLE.tiers.flatMap((r) => ['energy', 'dynamo'].map((k) => `item:grindless:${r.name}_wireless_${k}_cover`))) {
+  for (const r of TABLE.tiers.filter((x) => !NO_ASSETS_YET.has(x.name))) assert.ok(page('capacitor_cells.json').stacks.includes('item:' + r.cell), r.cell + ' on the cells\' EMI page');
+  for (const c of TABLE.tiers.filter((x) => !NO_ASSETS_YET.has(x.name)).flatMap((r) => ['energy', 'dynamo'].map((k) => `item:grindless:${r.name}_wireless_${k}_cover`))) {
     assert.ok(page('wireless_covers.json').stacks.includes(c), c + ' on the covers\' EMI page');
   }
 });
