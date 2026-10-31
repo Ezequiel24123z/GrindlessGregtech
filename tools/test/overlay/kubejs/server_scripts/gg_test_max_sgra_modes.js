@@ -299,6 +299,7 @@
     }
     if (w.phase === 'augment') { augmentStep(w, m); return }
     if (!u.gen) topUp(u.energy)
+    else u.energy.forEach(function (p) { p.energyContainer.setEnergyStored(0) })
     var logic = u.ctl.getRecipeLogic()
     if (w.phase === 'run') {
       var last = logic.getLastRecipe()
