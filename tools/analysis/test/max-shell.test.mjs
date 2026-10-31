@@ -106,6 +106,9 @@ test('the shape, textures and EMI page exist; one controller carries both kinds 
   assert.match(s, /black_hole_bomb/);
   assert.doesNotMatch(s.replace(/\/\/.*$/gm, ''), /\.generator\(true\)|generators\.configure/);
   assert.match(s, /energy_input', \{ min: 2, max: 2 \}/);
+  const code = s.replace(/\/\/.*$/gm, '');
+  assert.match(code, /if \(G\.generators\.recipeEUt\(recipe\) > 0\) return gen\(machine, recipe\)\s*return ModifierFunction\.IDENTITY/);
+  assert.doesNotMatch(code, /ModifierFunction\.NULL/);
   assert.doesNotMatch(s, /wonGame/.test(s) ? /^$/ : /wonGame\s*=/);
   const m = run.registry.machines.get('gtceu:mirror_shell');
   assert.ok(m, 'registered');
