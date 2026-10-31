@@ -50,7 +50,9 @@ const UXV_A2 = ['grindless:five_n_platinum', 'grindless:five_n_ruthenium', 'grin
 const OPV_D1 = ['grindless:decladded_ir_core', 'grindless:ir_spallation_residue'];
 // OpV-A2's platinum plant row (circuit 17): the cryo-CMOS gold overspray (startup_scripts/grindless/opv/circuits.js) and GTM's small gold dust
 const OPV_A2 = ['grindless:gold_overspray', 'gtceu:small_gold_dust'];
-const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4, ...UEV_B3, ...UIV_B2, ...UXV_A2, ...OPV_D1, ...OPV_A2]);
+// MAX-R1's platinum plant row (circuit 18): the furnace's PGM residue (startup_scripts/grindless/max/foundation.js)
+const MAX_R1 = ['grindless:pgm_residue'];
+const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4, ...UEV_B3, ...UIV_B2, ...UXV_A2, ...OPV_D1, ...OPV_A2, ...MAX_R1]);
 const FLUIDS = new Set([...IDS.fluids, 'gtceu:nitric_acid', 'gtceu:diluted_hydrochloric_acid']);
 
 function strictRun(scripts, startup, recipes, before) {

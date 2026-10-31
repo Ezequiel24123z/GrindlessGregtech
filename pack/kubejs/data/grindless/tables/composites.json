@@ -59,7 +59,10 @@
           "itemsOut": [{ "id": "grindless:fe16n2_ring_magnet", "count": 1 }], "fluidsOut": [] },
         { "_why": "MAX-A2 line L32 (c19): the irradiated YBCO bulk sintered onto a Fe16N2 ring magnet in argon, the bearing's rotor ring.", "name": "bearing_rotor_ring", "circuit": 19, "eut": 1966080, "duration": 1200,
           "itemsIn": [{ "id": "grindless:irradiated_ybco_bulk", "count": 1 }, { "id": "grindless:fe16n2_ring_magnet", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 500 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:bearing_rotor_ring", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:bearing_rotor_ring", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-R1 (max.md, L37 step 5, c20): the cold-pressed tetrataenite bonded with a Fe16N2 ring magnet in a nitrogen stream, below the 320 C ordering limit, into the shell segment's Halbach coupler.", "name": "halbach_segment_coupler", "circuit": 20, "eut": 1966080, "duration": 900,
+          "itemsIn": [{ "id": "grindless:cold_pressed_tetrataenite", "count": 2 }, { "id": "grindless:fe16n2_ring_magnet", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:halbach_segment_coupler", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "sic_fibre_spinning": {
@@ -126,7 +129,10 @@
           "itemsOut": [{ "id": "grindless:sic_sic_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
         { "_why": "MAX-D2 (max.md, L21 step 2, c14): the mirror tow woven and densified from methyltrichlorosilane into the SiC dish blank; the HCl goes back to stock.", "name": "sic_dish_blank", "circuit": 14, "eut": 1966080, "duration": 4800,
           "itemsIn": [{ "id": "grindless:sic_mirror_tow", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:sic_dish_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] }
+          "itemsOut": [{ "id": "grindless:sic_dish_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
+        { "_why": "MAX-R1 (max.md, L36 step 4, c15): the Ta-Hf-C billet sealed against the bloom's volatiles by a pyrolytic carbon layer from methane, the furnace's hearth liner; the hydrogen goes back to stock.", "name": "sealed_hearth_liner", "circuit": 15, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:ta_hf_c_billet", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:sealed_hearth_liner", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
       ]
     },
     "chemical_reactor": {
