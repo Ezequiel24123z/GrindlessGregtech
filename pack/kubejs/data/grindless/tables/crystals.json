@@ -141,7 +141,17 @@
         { "_why": "OpV-B3a line 33 (c27): the GaSb boule pulled from gallium and antimony; the kerf of the wafering comes back here as the same two dusts.", "name": "gasb", "circuit": 27, "eut": 491520, "duration": 800,
           "itemsIn": [{ "id": "gtceu:gallium_dust", "count": 1 }, { "id": "gtceu:antimony_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
           "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:gasb_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:gasb_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "MAX-H1 (max.md line 38, c32): physical vapour transport grows SiC on a kept seed wafer under argon, sliced into substrate wafers; the graphite lining leaves as residue",
+          "name": "sic_substrate_wafer", "circuit": 32, "eut": 491520, "duration": 1200,
+          "itemsIn": [{ "id": "gtca:silicon_carbide_dust", "count": 16 }], "kept": [{ "id": "grindless:sic_wafer", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sic_substrate_wafer", "count": 4 }, { "id": "gtceu:graphite_dust", "count": 1, "chance": 5000 }], "fluidsOut": [] },
+        { "_why": "MAX-A1 (max.md, L5): periodically poled lithium niobate pulled from the LiNbO3 melt with a magnesia dopant; the Ir crucible wears as in every row", "name": "ppln_boule", "circuit": 28, "eut": 491520, "duration": 1000,
+          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 2 }, { "id": "gtceu:niobium_oxide_dust", "count": 1 }, { "id": "grindless:five_n_magnesia_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 500 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:ppln_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "MAX-A1 (max.md, L6): quartz grown from silica with a hydroxide mineraliser in distilled water and cut to a wafer; the Ir crucible wears as in every row", "name": "quartz_crystal_wafer", "circuit": 29, "eut": 491520, "duration": 1000,
+          "itemsIn": [{ "id": "gtceu:silicon_dioxide_dust", "count": 4 }, { "id": "gtceu:sodium_hydroxide_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [{ "id": "gtceu:distilled_water", "amount": 1000 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:quartz_crystal_wafer", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {

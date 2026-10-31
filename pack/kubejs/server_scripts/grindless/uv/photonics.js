@@ -224,6 +224,16 @@
       fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 1200 }
   ]
 
+  // MAX-A1 (docs/eras/max.md, lines 5 and 7): the pump laser bonded to the squeezer waveguide die (c23) and AlN grown on a silicon wafer (c24)
+  var MAX_A1_ROWS = [
+    { name: 'pump_laser_bonded_die', type: 'mocvd', circuit: 23, itemsIn: [item('grindless:squeezer_waveguide_die', 1), item(PUMP, 1), item('gtceu:indium_dust', 1)],
+      fluidsIn: [fluid(TMGA, 250), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:pump_laser_bonded_die', 1)],
+      fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 1200 },
+    { name: 'aln_on_si_wafer', type: 'mocvd', circuit: 24, itemsIn: [item('grindless:aln_wafer', 1), item('gtceu:silicon_wafer', 1)],
+      fluidsIn: [fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:aln_on_si_wafer', 1)],
+      fluidsOut: [fluid('gtceu:hydrogen', 1500)], eut: 1966080, duration: 1200 }
+  ]
+
   // side steps on GTM's own machines
   var SIDE = [
     { name: 'arsine', type: 'chemical_reactor', circuit: null,
@@ -265,6 +275,7 @@
   P.uxvRows = UXV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.opvRows = OPV_ROWS.map(function (t) { return publish(t, t.type === 'mocvd' ? 'grindless:' + t.name : 'grindless:' + t.type + '/' + t.name) })
   P.opvA3Rows = OPV_A3_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
+  P.maxA1Rows = MAX_A1_ROWS.map(function (t) { return publish(t, 'grindless:' + t.name) })
   P.skipped = []
   P.clashes = []
   P.crafting = {
@@ -328,10 +339,10 @@
   }
 
   function addMachines(event) {
-    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows))
+    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows, P.maxA1Rows))
     if (P.clashes.length > 0) console.error(LOG + 'photonics recipes clash in the lookup: ' + P.clashes.join(', '))
-    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows).forEach(function (r) { addRecipe(event, r) })
-    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length + P.uxvRows.length + P.opvRows.length + P.opvA3Rows.length - P.skipped.length))
+    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows, P.maxA1Rows).forEach(function (r) { addRecipe(event, r) })
+    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length + P.uxvRows.length + P.opvRows.length + P.opvA3Rows.length + P.maxA1Rows.length - P.skipped.length))
   }
 
   function addSide(event) {

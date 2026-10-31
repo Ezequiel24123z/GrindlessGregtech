@@ -64,6 +64,8 @@
 // Published in global.grindless.extractionCascade for the smoke test:
 //   .recipes  [{ id (what the builder got), recipeId (the final id), name, mode, circuit, itemsIn: [{ id, count }], fluidsIn: [{ id, amount }],
 //                itemsOut: [{ id, count }], fluidsOut: [{ id, amount }], eut, duration, energy }]
+//   .clashes  the rows whose ingredients are a subset of another's (an error at load); a circuit may repeat only with other item inputs,
+//             a repeat with the same item inputs or a circuit outside 1..32 is refused at load; .loadRows(rows) and .clashesOf(rows) run both checks
 //   .decomposition  [{ id, input: { id, count }, outputs: { item: { id, count }, fluid: { id, amount } } }] what GTM must generate for
 //                   the three chlorides
 //   .craftingRecipe, .craftingParts
@@ -303,10 +305,81 @@
       itemsOut: [{ id: 'gtceu:indium_dust', count: 1 }, { id: 'gtceu:small_aluminium_dust', count: 1 }, { id: 'gtceu:small_gold_dust', count: 1 }],
       fluidsOut: [{ id: 'gtceu:diluted_hydrochloric_acid', amount: 2000 }],
       eut: 1920, duration: 100
+    },
+    // MAX-H1 (max.md line 30, c32): the Er/Ho cut of the mixed chlorides for the cryocooler's Er3Ni regenerator; the Nd raffinate goes to the
+    // chloride electrolyser (decomposition above), the strip acid comes back as HCl
+    {
+      name: 'er_ho_strip', mode: 'max', circuit: 32,
+      itemsIn: [{ id: MIX_CL, count: 32 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:er_ho_oxide', count: 5 }, { id: ND_CL, count: 16 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
+      eut: 1920, duration: 100
     }
   ]
 
-  EC.recipes = TABLE.map(function (t) {
+  // the item ids the lookup sees, sorted: two rows with the same string have identical item inputs
+  function itemSet(row) {
+    var ids = []
+    row.itemsIn.forEach(function (x) { if (ids.indexOf(x.id) < 0) ids.push(x.id) })
+    return ids.sort().join(',')
+  }
+
+  // circuit 1..32; a circuit may repeat only when the item inputs differ (OpV-F3's rule); a refused row is logged and left out
+  function loadRows(rows) {
+    var problems = []
+    var names = {}
+    var circuits = {}
+    var out = rows.filter(function (t) {
+      var n = String(t.name || '')
+      var circuitOk = t.circuit >= 1 && t.circuit <= 32 && t.circuit % 1 === 0
+      if (!/^[a-z0-9_]+$/.test(n) || names[n] || !circuitOk || !(t.eut > 0) || t.eut % 1 !== 0 || !(t.duration > 0) || t.duration % 1 !== 0) {
+        problems.push(n + ': name, circuit ' + t.circuit + ', eut ' + t.eut + ', duration ' + t.duration)
+        return false
+      }
+      var items = itemSet(t)
+      var same = circuits[t.circuit] || []
+      for (var k = 0; k < same.length; k++) {
+        if (same[k].items === items) {
+          problems.push(n + ': circuit ' + t.circuit + ' repeats ' + same[k].name + ' with the same item inputs')
+          return false
+        }
+      }
+      names[n] = true
+      circuits[t.circuit] = same.concat([{ name: n, items: items }])
+      return true
+    })
+    if (problems.length > 0) console.error(LOG + 'extraction cascade: ' + problems.join('; '))
+    return out
+  }
+
+  function keysOf(t) {
+    var keys = {}
+    t.itemsIn.forEach(function (x) { keys['i:' + x.id] = true })
+    t.fluidsIn.forEach(function (x) { keys['f:' + x.id] = true })
+    keys['circuit:' + t.circuit] = true
+    return keys
+  }
+
+  // a recipe whose ingredients are a subset of another's can hide it
+  function clashesOf(rows) {
+    var out = []
+    var keys = rows.map(keysOf)
+    function subset(a, b) {
+      return Object.keys(a).every(function (k) { return b[k] === true })
+    }
+    for (var i = 0; i < rows.length; i++) {
+      for (var j = i + 1; j < rows.length; j++) {
+        if (subset(keys[i], keys[j]) || subset(keys[j], keys[i])) out.push(rows[i].name + ' / ' + rows[j].name)
+      }
+    }
+    return out
+  }
+
+  EC.loadRows = loadRows
+  EC.clashesOf = clashesOf
+
+  EC.recipes = loadRows(TABLE).map(function (t) {
     return {
       id: ID_PREFIX + t.name,
       recipeId: 'grindless:' + TYPE_NAME + '/ev/' + t.name,
@@ -322,6 +395,9 @@
       energy: t.eut * t.duration
     }
   })
+
+  EC.clashes = clashesOf(EC.recipes)
+  if (EC.clashes.length > 0) console.error(LOG + 'extraction cascade: recipes whose ingredients are a subset of another\'s: ' + EC.clashes.join('; '))
 
   // GTM's DecompositionRecipeHandler, for MCl3 dust (2 components, so 30 EU/t; duration = average protons x 4 x 2)
   EC.decomposition = [
