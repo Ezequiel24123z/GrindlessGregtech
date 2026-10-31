@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:assembly_line_array"],
+  "text": ["emi.grindless.info.assembly_line_array.0", "emi.grindless.info.assembly_line_array.1"]
+}
