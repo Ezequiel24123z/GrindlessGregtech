@@ -15,6 +15,13 @@
           "itemsIn": [{ "id": "grindless:er_yso_slab", "count": 1 }],
           "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:telecom_memory_slab", "count": 1 }]
+        },
+        {
+          "_why": "MAX-B3 (max.md, L23 step 3, c26): the oriented Eu:YSO slab burned into a narrow spectral hole comb at millikelvin helium",
+          "name": "burned_memory_crystal", "circuit": 26, "eut": 31457280, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:eu_yso_slab", "count": 1 }],
+          "charge": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:burned_memory_crystal", "count": 1 }]
         }
       ]
     },
