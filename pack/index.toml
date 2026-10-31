@@ -733,6 +733,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/opv_antimatter_annihilation
 hash = "33a5730e5100b10f8f3568b24290475519827cebaa51dd20f3aa46f3c903aabc"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/opv_antimatter_annihilation_shield_casing.json"
+hash = "dbf4b41eed83597053fd30efcbdedc1e07bdde67ba71e52495a044dd1b22c45b"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/opv_antimatter_antihydrogen_foundry.json"
 hash = "18031388398a4fceb9e89e5f9a1dc160c774f51198f2ad19a45fc5d6b0868790"
 
@@ -12226,7 +12230,7 @@ hash = "75abf3f0d22a1d072c7a5cc1b48be5548158b8fa7347e227158de2a507bde789"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/opv_antimatter_lang.js"
-hash = "7983b974a70a73cb637501097071b064ac36f10838db6fecec88b5862fb173f0"
+hash = "2e906c1af6204bcbf8c310111cc6c0cf71e46a37109e272a18ebd337832d6995"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/opv_assembly_line_array_lang.js"

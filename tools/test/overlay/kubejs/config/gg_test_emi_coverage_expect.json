@@ -1975,7 +1975,7 @@
   "disabledTags": ["grindless:hidden_with_recipes"],
   "known": {
     "workstations": [],
-    "previews": ["extendedfeatures:expanded_assembly_line","extendedfeatures:matrix_data_relay","gcyr:dyson_system_controller","gcyr:space_elevator","gtca:tegmark_forge","gtceu:assembly_line","gtceu:central_monitor","gtceu:cleanroom","gtceu:data_bank"],
+    "previews": ["extendedfeatures:expanded_assembly_line","extendedfeatures:matrix_data_relay","gcyr:dyson_system_controller","gcyr:space_elevator","gtca:tegmark_forge","gtceu:assembly_line","gtceu:assembly_line_array","gtceu:central_monitor","gtceu:cleanroom","gtceu:data_bank"],
     "noUse": [],
     "routes": [],
     "machineInfo": []
