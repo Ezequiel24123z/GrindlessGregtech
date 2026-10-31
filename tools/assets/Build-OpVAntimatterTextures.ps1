@@ -129,7 +129,28 @@ $Items = @(
     @{ Name = 'trapped_antihydrogen'; A = 'E060FF'; B = '8030B0'; Pat = 'ring' },
     @{ Name = 'cooled_antihydrogen'; A = '60E0FF'; B = '3080B0'; Pat = 'ring' },
     @{ Name = 'activated_absorber_tile'; A = 'B0B8C0'; B = '58E070'; Pat = 'tile' },
-    @{ Name = 'spent_acmf_hohlraum'; A = 'A08060'; B = '504030'; Pat = 'can' }
+    @{ Name = 'spent_acmf_hohlraum'; A = 'A08060'; B = '504030'; Pat = 'can' },
+    @{ Name = 'magnesium_fluoride_dust'; A = 'E8ECF0'; B = 'A8B8D0'; Pat = 'tile' },
+    @{ Name = 'ti_sapphire_boule'; A = '5078E0'; B = 'E05040'; Pat = 'can' },
+    @{ Name = 'lbo_boule'; A = 'C8F0E0'; B = '78B8A0'; Pat = 'can' },
+    @{ Name = 'kr_tripler_cell'; A = 'D0D8E8'; B = '90A0F0'; Pat = 'ring' },
+    @{ Name = 'octupole_tape'; A = 'C8A060'; B = '706040'; Pat = 'tile' },
+    @{ Name = 'octupole_winding'; A = 'D0A858'; B = '60A8D8'; Pat = 'ring' },
+    @{ Name = 'potted_octupole_winding'; A = '484850'; B = 'D0A858'; Pat = 'ring' },
+    @{ Name = 'cooled_octupole_winding'; A = '70C8F0'; B = '484850'; Pat = 'ring' },
+    @{ Name = 'hopg_blank'; A = '505860'; B = '8890A0'; Pat = 'tile' },
+    @{ Name = 'hopg_plate'; A = '687078'; B = 'A8B0C0'; Pat = 'tile' },
+    @{ Name = 'hopg_offcut'; A = '404850'; B = '706860'; Pat = 'can' },
+    @{ Name = 'w_re_alloy_ingot'; A = '9098A8'; B = '505868'; Pat = 'tile' },
+    @{ Name = 'cm245_fraction'; A = '90E070'; B = '408030'; Pat = 'ring' },
+    @{ Name = 'w_re_hohlraum'; A = 'B0B8C8'; B = '60E080'; Pat = 'can' },
+    @{ Name = 'boron_10_dust'; A = '605850'; B = '98E0A0'; Pat = 'ring' },
+    @{ Name = 'b4c_10_dust'; A = '383840'; B = '88C8A0'; Pat = 'tile' },
+    @{ Name = 'w_b4c_powder'; A = '889098'; B = '405848'; Pat = 'tile' },
+    @{ Name = 'gasb_boule'; A = '8898B0'; B = '485870'; Pat = 'can' },
+    @{ Name = 'gasb_wafer'; A = 'A8B8D0'; B = '687890'; Pat = 'ring' },
+    @{ Name = 'gasb_kerf_dust'; A = '788090'; B = '404858'; Pat = 'tile' },
+    @{ Name = 'ingaassb_epi_wafer'; A = 'C07080'; B = '703848'; Pat = 'ring' }
 )
 function New-ItemTexture {
     param($Spec)
