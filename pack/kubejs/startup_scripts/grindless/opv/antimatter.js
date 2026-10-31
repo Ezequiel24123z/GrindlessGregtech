@@ -216,11 +216,12 @@
       item.tooltip(Text.gray(Text.translate('tooltip.grindless.' + name + '.0')))
       item.tooltip(Text.darkGray(Text.translate('tooltip.grindless.' + name + '.1')))
     })
-    GTCEuStartupEvents.registry('gtceu:material', function (event) {
-      Object.keys(AM.fluids).forEach(function (name) {
-        event.create('grindless:' + name).gas().color(0xB0C8E8).formula(AM.fluids[name])
-          .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
-      })
+  })
+
+  GTCEuStartupEvents.registry('gtceu:material', function (event) {
+    Object.keys(AM.fluids).forEach(function (name) {
+      event.create('grindless:' + name).gas().color(0xB0C8E8).formula(AM.fluids[name])
+        .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
     })
   })
 
