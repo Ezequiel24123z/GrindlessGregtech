@@ -1,12 +1,13 @@
 // -----------------------------------------------------------------------------------------------
 // MAX-E1 accretion feeder (docs/eras/max.md, machine 10, lines L25, L26 and L42; package MAX-E1). The line steps on older machines are
-// rows marked MAX-E1 in their own tables and scripts; this file holds the machine's two recipes, its controller, the casing and the GTM
+// rows marked MAX-E1 in their own tables and scripts; this file holds the machine's one recipe (c1), its controller, the casing and the GTM
 // rows of the lines:
 //
 //   L25 furnace c1 (R1) -> solar vapour furnace c8 -> regolith cell c5 -> compressor (here) slag_compact -> SPS c19 -> slag_pellet -> c1
-//   L26 diamond lattice c10 -> implanter c17 -> betavoltaic c4 -> MTJ c19 -> solar array c4 xuv_collector_panel (worn in c1, reworked in c2)
+//   L26 diamond lattice c10 -> implanter c17 -> betavoltaic c4 -> MTJ c19 -> solar array c4 xuv_collector_panel (worn in c1, reworked by the solar array fab c5)
 //   L42 platinum c19 -> EB c30 -> CVI c16 -> MTJ c21 -> assembler (here) wolter_mirror_module (worn in c1; platinum c20 returns the iridium)
 //
+// c1 is the only generator row (a generator cannot run a consumer row: the panel rework is solar array fab c5).
 // c1 is a generator: one pellet -> 2^30 EU/t (VH[MAX]) for 2,400 t. The collector panel is worn with chance 1/64 and the Wolter module with
 // 1/128: each is a chanced input AND a chanced output of the same ratio, so a worn part is lost and its spent twin appears on average
 // together. Balance: a pellet costs about 1.3e12 EU along L25 plus the wear; c1 gives 2^30 x 2,400 = 2.58e12 EU: about 2.0x. Both
@@ -35,20 +36,17 @@
   var FEEDER = [
     { name: 'slag_pellet_burn', circuit: 1, duration: 2400,
       items: [['1x grindless:slag_pellet', 0, 0], ['1x ' + PANEL, 1, 64], ['1x ' + MODULE, 1, 128]],
-      outs: [['1x grindless:spent_collector_panel', 1, 64], ['1x grindless:spent_wolter_module', 1, 128]] },
-    { name: 'panel_rework', circuit: 2, duration: 600,
-      items: [['1x grindless:spent_collector_panel', 0, 0], ['2x grindless:pin_diamond_plate', 0, 0]],
-      outs: [['1x ' + PANEL, 0, 0]] }
+      outs: [['1x grindless:spent_collector_panel', 1, 64], ['1x grindless:spent_wolter_module', 1, 128]] }
   ]
 
   var GTM = [
     { type: 'compressor', name: 'slag_compact', items: ['4x grindless:ca_al_oxide_residue'], fluids: [],
       outs: ['1x grindless:slag_compact'], eut: OPV_VA, duration: 400 },
-    { type: 'assembly_hall', name: 'wolter_mirror_module', eut: null, duration: 600,
+    { type: 'assembler', name: 'wolter_mirror_module', eut: null, duration: 600,
       items: ['4x grindless:iridium_coated_shell', '2x gtceu:tritanium_plate', '4x gtceu:tritanium_foil', '2x gtceu:tritanium_round',
         '1x ' + CIRCUIT, '1x gtceu:fine_gold_wire'],
       fluids: [['gtceu:soldering_alloy', 288]], outs: ['1x ' + MODULE] },
-    { type: 'assembly_hall', name: 'feeder_coil_casing', eut: null, duration: 200,
+    { type: 'assembler', name: 'feeder_coil_casing', eut: null, duration: 200,
       items: ['4x gtceu:tungsten_steel_plate', '2x grindless:sic_sic_plate', '2x gtceu:tungsten_steel_rod', '1x gtceu:superconducting_coil', '2x gtceu:fine_gold_wire', '1x ' + CIRCUIT],
       fluids: [['gtceu:soldering_alloy', 144]], outs: ['4x grindless:feeder_coil_casing'] }
   ]
@@ -96,7 +94,7 @@
         r.outs.forEach(function (o) { chanced(b, function (id) { b.itemOutputs(id) }, o) })
         b.dimension(SITE)
         b.addDataString('grindless_accretion_power', r.name)
-        b.EUt(r.circuit === 1 ? -VH_MAX : -VA_MAX).duration(r.duration)
+        b.EUt(-VH_MAX).duration(r.duration)
         MF.recipes.push('grindless:accretion_power/' + r.name)
       } catch (e) {
         console.error(LOG + 'feeder ' + r.name + ' failed: ' + e)

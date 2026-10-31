@@ -33,8 +33,8 @@
   var PANEL = 'grindless:xuv_collector_panel'
 
   var IDS = [
-    'accretion_power/slag_pellet_burn', 'accretion_power/panel_rework', 'assembly_line/accretion_feeder', 'compressor/slag_compact',
-    'assembly_hall/wolter_mirror_module', 'assembly_hall/feeder_coil_casing', 'pgm_refining/opv/iridium_sponge', 'pgm_refining/opv/wolter_iridium_recovery',
+    'accretion_power/slag_pellet_burn', 'space_photovoltaics/panel_rework', 'assembly_line/accretion_feeder', 'compressor/slag_compact',
+    'assembler/wolter_mirror_module', 'assembler/feeder_coil_casing', 'pgm_refining/opv/iridium_sponge', 'pgm_refining/opv/wolter_iridium_recovery',
     'electron_beam_refining/iridium_target', 'chemical_vapour_infiltration/sic_grazing_shell', 'mtj_sputtering/iridium_coated_shell',
     'mtj_sputtering/metallised_photocell', 'betavoltaic/diamond_photocell', 'space_photovoltaics/xuv_collector_panel',
     'regolith_processing/ev/slag_reduction', 'spark_plasma_sintering/slag_pellet', 'solar_vaporisation/devolatilised_slag', 'diamond_cvd/collector_diamond_plate', 'ion_implantation/pin_diamond_plate'

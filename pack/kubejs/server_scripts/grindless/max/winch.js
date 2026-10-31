@@ -6,7 +6,7 @@
 //   L17 waste retrieval c10 -> decay heat vault c5 -> hot cell c23 -> canner (here) sealed_waste_log -> assembler (here) geroch_canister -> c1
 //   L20 tether ribbon c13 -> star lifting c3 -> chemical reactor (here) -> autoclave (here) -> assembler (here) horizon_tether -> c2
 //
-// c1 is a generator: one canister -> 2^30 EU/t (VH[MAX]) for 2,400 t, a worn tether segment with chance 1/128. L17 balance: the canister
+// c1 is the only generator row (a generator cannot run a consumer row: the tether rework is an assembler row). c1 is a generator: one canister -> 2^30 EU/t (VH[MAX]) for 2,400 t, a worn tether segment with chance 1/128. L17 balance: the canister
 // costs about 1.31e12 EU along the line, c1 gives 2^30 x 2,400 = 2.58e12 EU: about 1.97x. Both recipes run in gcyr:black_hole_orbit.
 // The assemblers run at VA[MAX] in gtceu:assembly_hall (decision 68). The L20 coating step is a chemical reactor, not a chemical bath: the
 // bath takes one item and one fluid, the step has two items. Published for the tests: global.grindless.maxWinch.recipes, .skipped,
@@ -31,9 +31,7 @@
 
   var WINCH = [
     { name: 'geroch_canister_lowering', circuit: 1, duration: 2400, items: ['1x grindless:geroch_canister'],
-      outs: [['1x grindless:spent_tether_segment', 1, 128]] },
-    { name: 'tether_rework', circuit: 2, duration: 600, items: ['1x grindless:spent_tether_segment', '1x grindless:horizon_tether'],
-      outs: [['1x grindless:horizon_tether', 0, 0]] }
+      outs: [['1x grindless:spent_tether_segment', 1, 128]] }
   ]
 
   var GTM = [
@@ -47,6 +45,10 @@
       fluids: [['gtceu:nitrogen', 1000]], outs: ['1x grindless:exotic_coated_ribbon'], eut: OPV_VA, duration: 800 },
     { type: 'autoclave', name: 'cured_exotic_ribbon', items: ['1x grindless:exotic_coated_ribbon'],
       fluids: [['gtceu:oxygen', 1000]], outs: ['1x grindless:cured_exotic_ribbon'], eut: OPV_VA, duration: 1200 },
+    { type: 'assembler', name: 'tether_rework', eut: null, duration: 400,
+      items: ['1x grindless:spent_tether_segment', '2x gtceu:horizon_strand_single_cable', '2x gtceu:horizon_strand_single_wire', '2x gtceu:tritanium_plate',
+        '4x gtceu:tritanium_foil', '1x ' + CIRCUIT],
+      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['1x grindless:horizon_tether'] },
     { type: 'assembler', name: 'horizon_tether', eut: null, duration: 600,
       items: ['1x grindless:cured_exotic_ribbon', '2x gtceu:horizon_strand_single_cable', '2x gtceu:horizon_strand_single_wire',
         '1x grindless:chain_lamina_stack', '2x gtceu:tritanium_plate', '4x gtceu:tritanium_foil', '1x ' + CIRCUIT],
@@ -92,7 +94,7 @@
         })
         b.dimension(SITE)
         b.addDataString('grindless_geroch_power', r.name)
-        b.EUt(r.circuit === 1 ? -VH_MAX : -VA_MAX).duration(r.duration)
+        b.EUt(-VH_MAX).duration(r.duration)
         MW.recipes.push('grindless:geroch_power/' + r.name)
       } catch (e) {
         console.error(LOG + 'winch ' + r.name + ' failed: ' + e)

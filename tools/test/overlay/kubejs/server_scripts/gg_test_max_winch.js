@@ -32,7 +32,7 @@ var PARTS = [DYNAMO, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus']
   var WORN = 'grindless:spent_tether_segment'
 
   var IDS = [
-    'geroch_power/geroch_canister_lowering', 'geroch_power/tether_rework', 'assembly_line/geroch_winch', 'canner/sealed_waste_log',
+    'geroch_power/geroch_canister_lowering', 'assembler/tether_rework', 'assembly_line/geroch_winch', 'canner/sealed_waste_log',
     'assembler/geroch_canister', 'chemical_reactor/exotic_coated_ribbon', 'autoclave/cured_exotic_ribbon', 'assembler/horizon_tether',
     'decay_heat/waste_cooling', 'hot_cell/vitrified_waste_log', 'star_lifting/proof_load_ribbon'
   ]
