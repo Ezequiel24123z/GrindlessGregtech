@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:hawking_drive"],
+  "text": ["emi.grindless.info.hawking_drive.0", "emi.grindless.info.hawking_drive.1"]
+}

@@ -293,9 +293,19 @@
    "gtceu:steam_observatory"
   ],
   "opv": [
+   "gtceu:annihilation_engine",
+   "gtceu:antihydrogen_foundry",
+   "gtceu:antiproton_decelerator",
+   "gtceu:assembly_line_array",
    "gtceu:field_frozen_press",
    "gtceu:gamma_optics_works",
+   "gtceu:hawking_collector",
+   "gtceu:jet_beam_line",
+   "gtceu:kugelblitz_forge",
    "gtceu:magnetic_pair_converter",
+   "gtceu:spallation_target_station",
+   "gtceu:strangelet_distiller",
+   "gtceu:strangelet_vault",
    "gtceu:tetron_fab"
   ],
   "power": [

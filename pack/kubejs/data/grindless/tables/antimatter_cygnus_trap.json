@@ -1,0 +1,12 @@
+{
+  "_source": "OpV-B3b line 30, opv.md:586. c5 already belongs to UXV positron stacking, so c6 is the next free circuit. The design specifies 8 cells per stack but no voltage/duration for this older row: use 268435456 EU/t for 400 ticks. Return 90% of the empty traps.",
+  "type": "antimatter_storage",
+  "name": "antiproton_stack_opv",
+  "circuit": 6,
+  "eut": 268435456,
+  "duration": 400,
+  "itemsIn": ["8x grindless:cold_antiproton_cell"],
+  "kept": ["grindless:octupole_trap_magnet"],
+  "itemsOut": ["grindless:antiproton_stack_opv"],
+  "chancedOut": [{ "id": "grindless:empty_penning_trap", "count": 8, "chance": 9000 }]
+}

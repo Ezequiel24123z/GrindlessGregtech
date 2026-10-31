@@ -171,6 +171,13 @@
       itemIn: { id: 'grindless:thorium_229_nitrate', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 4000 },
       itemOut: { id: 'grindless:laser_grade_thf4', count: 1 }, fluidOut: { id: 'gtceu:nitric_acid', amount: 4000 },
       eut: 30, duration: 64
+    },
+    // OpV-B3a line 26: magnesium fluoride (the Lyman-alpha window and tripler cell), keyed by the magnesium dust
+    {
+      name: 'magnesium_fluoride',
+      itemIn: { id: 'gtceu:magnesium_dust', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 2000 },
+      itemOut: { id: 'grindless:magnesium_fluoride_dust', count: 1 }, fluidOut: { id: 'gtceu:hydrogen', amount: 1000 },
+      eut: 30, duration: 64
     }
   ]
 

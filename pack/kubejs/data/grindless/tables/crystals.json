@@ -129,7 +129,19 @@
         { "_why": "OpV-B1 (opv.md line 35): GaAs pulled by liquid-encapsulated Czochralski under a boron oxide cap (kept, as InP c5) and diced into Laue tiles; the Ir crucible wears as in every row. Circuit 24 (19-23 are OpV-A1, A2, A3 and D1).", "name": "gaas_laue_tile", "circuit": 24, "eut": 491520, "duration": 800,
           "itemsIn": [{ "id": "gtceu:gallium_arsenide_dust", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
           "kept": [{ "id": "gtceu:boron_trioxide_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:gaas_laue_tile", "count": 8 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:gaas_laue_tile", "count": 8 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "OpV-B3a line 26 (c25): the Ti:sapphire boule pulled from an iridium crucible (Ti2O3 doped Al2O3 melt, here as sapphire and titanium dust).", "name": "ti_sapphire", "circuit": 25, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gtceu:sapphire_dust", "count": 2 }, { "id": "gtceu:titanium_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:ti_sapphire_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "OpV-B3a line 26 (c26): the LBO (LiB3O5) boule, the frequency tripler's crystal, from lithium and boron oxide.", "name": "lbo", "circuit": 26, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gtceu:lithium_dust", "count": 1 }, { "id": "gtceu:boron_trioxide_dust", "count": 3 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:lbo_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "OpV-B3a line 33 (c27): the GaSb boule pulled from gallium and antimony; the kerf of the wafering comes back here as the same two dusts.", "name": "gasb", "circuit": 27, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gtceu:gallium_dust", "count": 1 }, { "id": "gtceu:antimony_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:gasb_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {

@@ -1,0 +1,119 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/opv/kugelblitz.js makes one recipe per entry, id grindless:<type>/<name> (GTM prefixes the type), with its programmed circuit; 'site' true locks the recipe to grindless:cygnus_x1_orbit; 'wear' inputs are consumed by their chance, an exact fraction [numerator, denominator] (a chance with a denominator that does not divide 10,000, as 1/64, is written into the recipe with its own maxChance); an itemsOut entry with a 'chance' [numerator, denominator] is a chanced output; 'generator' true writes the EUt negative (a generator type). kugelblitz_forming and hawking_power are package OpV-D3's machine types (data key = dataKey, the EMI line). Package OpV-D3, docs/eras/opv.md machines 10 and 11, process line 37. The forge's circuits: 1 charge, 2 seed, 3 core, 4 drive, 5 core from a spent shell. The collector's: 1 exotic matter, 2 stellar plasma.",
+  "pendingRoutes": [
+    {
+      "package": "B3a",
+      "id": "grindless:activated_absorber_tile",
+      "recipes": ["grindless:hawking_power/feed_exotic_matter", "grindless:hawking_power/feed_stellar_plasma"]
+    }
+  ],
+  "types": {
+    "kugelblitz_forming": {
+      "dataKey": "grindless_kugelblitz_forming",
+      "recipes": [
+        {
+          "name": "charge_gamma_pump",
+          "circuit": 1,
+          "eut": 503316480,
+          "duration": 800,
+          "site": true,
+          "itemsIn": [{ "id": "grindless:dense_positron_cell", "count": 2 }],
+          "wear": [{ "id": "grindless:gamma_laser_module", "count": 1, "chance": [1, 8] }],
+          "itemsOut": [{ "id": "grindless:gamma_pump_charge", "count": 1 }]
+        },
+        {
+          "name": "focus_kugelblitz_seed",
+          "circuit": 2,
+          "eut": 503316480,
+          "duration": 2400,
+          "site": true,
+          "itemsIn": [{ "id": "grindless:gamma_pump_charge", "count": 4 }, { "id": "grindless:frc_cartridge", "count": 1 }],
+          "wear": [
+            { "id": "grindless:laue_lens", "count": 1, "chance": [1, 64] },
+            { "id": "grindless:gamma_multilayer_mirror", "count": 1, "chance": [1, 64] }
+          ],
+          "itemsOut": [{ "id": "grindless:kugelblitz_seed", "count": 1, "chance": [95, 100] }]
+        },
+        {
+          "name": "condense_kugelblitz_core",
+          "circuit": 3,
+          "eut": 503316480,
+          "duration": 2400,
+          "site": true,
+          "itemsIn": [
+            { "id": "grindless:kugelblitz_seed", "count": 1 },
+            { "id": "grindless:positron_cartridge", "count": 4 },
+            { "id": "grindless:gamma_absorber_tile", "count": 8 }
+          ],
+          "itemsOut": [{ "id": "grindless:kugelblitz_core", "count": 1 }]
+        },
+        {
+          "name": "forge_hawking_drive",
+          "circuit": 4,
+          "eut": 268435456,
+          "duration": 1200,
+          "site": true,
+          "itemsIn": [
+            { "id": "grindless:kugelblitz_core", "count": 1 },
+            { "id": "grindless:gamma_multilayer_mirror", "count": 1 },
+            { "id": "grindless:field_frozen_plate", "count": 1 }
+          ],
+          "itemsOut": [{ "id": "grindless:hawking_drive", "count": 1 }]
+        },
+        {
+          "name": "recondense_core_from_shell",
+          "circuit": 5,
+          "eut": 503316480,
+          "duration": 2400,
+          "site": true,
+          "itemsIn": [
+            { "id": "grindless:kugelblitz_seed", "count": 1 },
+            { "id": "grindless:positron_cartridge", "count": 4 },
+            { "id": "grindless:evaporated_core_shell", "count": 1 },
+            { "id": "grindless:gamma_absorber_tile", "count": 4 }
+          ],
+          "itemsOut": [{ "id": "grindless:kugelblitz_core", "count": 1 }]
+        }
+      ]
+    },
+    "hawking_power": {
+      "dataKey": "grindless_hawking_power",
+      "recipes": [
+        {
+          "name": "feed_exotic_matter",
+          "circuit": 1,
+          "eut": 1073741824,
+          "duration": 14800,
+          "site": true,
+          "generator": true,
+          "itemsIn": [{ "id": "grindless:stable_exotic_matter", "count": 1 }],
+          "wear": [
+            { "id": "grindless:kugelblitz_core", "count": 1, "chance": [1, 64] },
+            { "id": "grindless:gamma_absorber_tile", "count": 1, "chance": [1, 8] }
+          ],
+          "itemsOut": [
+            { "id": "grindless:evaporated_core_shell", "count": 1, "chance": [1, 64] },
+            { "id": "grindless:activated_absorber_tile", "count": 1, "chance": [1, 8] }
+          ]
+        },
+        {
+          "name": "feed_stellar_plasma",
+          "circuit": 2,
+          "eut": 536870912,
+          "duration": 4600,
+          "site": true,
+          "generator": true,
+          "fluidsIn": [{ "id": "gtceu:stellar_plasma", "amount": 4000 }],
+          "wear": [
+            { "id": "grindless:kugelblitz_core", "count": 1, "chance": [1, 32] },
+            { "id": "grindless:gamma_absorber_tile", "count": 1, "chance": [1, 8] }
+          ],
+          "itemsOut": [
+            { "id": "grindless:evaporated_core_shell", "count": 1, "chance": [1, 32] },
+            { "id": "grindless:activated_absorber_tile", "count": 1, "chance": [1, 8] }
+          ]
+        }
+      ]
+    }
+  }
+}

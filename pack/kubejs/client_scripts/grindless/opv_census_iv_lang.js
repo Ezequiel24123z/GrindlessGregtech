@@ -1,4 +1,4 @@
-// priority: 5750
+// priority: 5836
 // Gregtech Grindless - names of OpV's census IV (startup_scripts/grindless/opv/census_iv.js; package OpV-B2):
 //   material.gtceu.<n>                                           the two dusts and the two recoil gases
 //   gtceu.recipe.grindless_<type>.<recipe>                       the EMI line of each older row the package adds

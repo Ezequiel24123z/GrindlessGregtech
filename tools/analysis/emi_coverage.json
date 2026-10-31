@@ -86,24 +86,11 @@
   "exceptions": [
   ],
   "pendingRoutes": [
-    { "id": "grindless:hot_cell/spent_ir_target_decladding", "reason": "OpV-D1 declads the spent Ir target; grindless:spent_ir_target is held until B3's spallation target station makes it: B3 deletes this entry with its hold rule" },
-    { "id": "grindless:pgm_refining/opv/ir_core_recovery", "reason": "OpV-D1 recovers iridium from grindless:decladded_ir_core, held (with grindless:ir_spallation_residue) until B3 makes grindless:spent_ir_target for the hot cell c18: B3 deletes this entry with D1's hold rule" },
-    { "id": "grindless:pgm_refining/opv/ir_spallation_residue", "reason": "OpV-D1 refines grindless:ir_spallation_residue, held until B3 makes grindless:spent_ir_target for the hot cell c18: B3 deletes this entry with D1's hold rule" },
-    { "id": "grindless:electric_blast_furnace/opv/spent_li6_shield_bakeout", "reason": "OpV-D1 bakes out grindless:spent_li6_shield (B3) into li6_hydride and bred_tritium_gas, held until B3 makes the spent shield: B3 deletes this entry with D1's hold rule" }
-      ],
+  ],
   "pendingUses": [
-    { "id": "grindless:be_beam_window", "package": "B3", "reason": "OpV-D1 makes it; B3's antimatter beam lines use it" },
-    { "id": "grindless:ir_spallation_target", "package": "B3", "reason": "OpV-D1 makes it; B3's spallation target station uses it" },
-    { "id": "grindless:li6_hydride_shield", "package": "B3", "reason": "OpV-D1 makes it; B3's antimatter beam lines use it" },
-    { "id": "grindless:electron_cooler", "package": "B3", "reason": "OpV-D1 makes it; B3's antiproton cooling uses it" },
-    { "id": "grindless:stochastic_cooling_pickup", "package": "B3", "reason": "OpV-D1 makes it; B3's antiproton cooling uses it" },
-    { "id": "grindless:neg_xhv_casing", "package": "B3, D2", "reason": "OpV-D1 makes it; B3's and D2's multiblocks use it" },
     { "id": "grindless:superheavy_census_iv", "package": "G1", "reason": "OpV-B2 makes it; G1's MAX gate (warp gate c13) keeps it (opv.md line 50)" },
     { "id": "grindless:gan_mmic", "package": "R1", "reason": "OpV-A2 makes it; R1's node power transmitter takes it (opv.md line 42)" },
     { "id": "grindless:sdd_die", "package": "R1", "reason": "OpV-A2 makes it; R1's XNAV timing head takes it (opv.md line 41)" },
-    { "id": "grindless:launched_bulge_seed", "package": "G1", "reason": "OpV-A0 makes it (c11 throw to SGR 1806-20, opv.md line 93); G1's gate c13 to Sgr A* takes one per throw: the relay already in the bulge forwards the MAX throw (coordinator decision, OpV-I1)" },
-    { "id": "grindless:dense_positron_cell", "package": "B3, D3", "reason": "OpV-E1 makes it (electron beam c23 seals the pair converter's cell); B3's antihydrogen foundry and D3's multiblocks use it" },
-    { "id": "grindless:laue_lens", "package": "D3", "reason": "OpV-B1 makes it (gamma optics works c1, opv.md line 35); D3's multiblocks use it" },
-    { "id": "grindless:gamma_multilayer_mirror", "package": "D3", "reason": "OpV-B1 makes it (gamma optics works c2, opv.md line 34); D3's multiblocks use it" }
+    { "id": "grindless:launched_bulge_seed", "package": "G1", "reason": "OpV-A0 makes it (c11 throw to SGR 1806-20, opv.md line 93); G1's gate c13 to Sgr A* takes one per throw: the relay already in the bulge forwards the MAX throw (coordinator decision, OpV-I1)" }
   ]
-    }
+}
