@@ -241,7 +241,7 @@
   }
   function begin(server) {
     S = { server: server, tick: 0, failed: 0, finished: false, unit: null }
-    S.level = server.getLevel('minecraft:overworld')
+    S.level = server.getLevel(DIM)
     command('forceload add ' + X0 + ' 0 ' + X1 + ' 63')
     clear()
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
