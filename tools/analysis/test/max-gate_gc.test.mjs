@@ -47,7 +47,7 @@ test('c14 is 2^33 = V[OpV] x 16 A for 1,200 t at Cygnus X-1, burns the probe, ke
   assert.deepEqual(c14.itemsIn, [{ id: 'grindless:gc_relay_probe', count: 1 }]);
   assert.deepEqual(c14.kept, [{ id: 'grindless:sgr_a_chart', count: 1 }]);
   assert.deepEqual(c14.itemsOut, [{ id: 'grindless:launched_gc_probe', count: 1 }]);
-  assert.equal(gate[gate.length - 1], c14, 'the row is appended last');
+  assert.equal(gate[gate.length - 2], c14, 'the row follows c13; the c15 row of MAX-T2 is appended after it');
   assert.equal(gate.filter((r) => r.name === 'hold_sgr_a').length, 1, 'c13 keeps its own name');
 });
 
@@ -59,7 +59,7 @@ test('hand-off: the Sgr A* platform row is matched by the c14 name only, from th
   assert.equal(row.dimension, 'gcyr:black_hole_orbit');
   assert.ok(!relay.platforms.some((p) => p.jump === 'hold_sgr_a'), 'no platform row waits for c13');
   assert.match(travel, /sgra: \{ dimension: 'gcyr:black_hole_orbit', circuit: 14, jump: 'hold_sgr_a_probe'/);
-  // kerr_sling's poll() reads only mine[0].source: every row of a Cygnus source works, the nsc row (source Sgr A*) does not (T2's)
+  // kerr_sling's poll() reads only mine[0].source: every row of a Cygnus source works, the nsc row (source Sgr A*) is served by its own source poll (MAX-T2, max-gate_nsc.test.mjs)
   const mine = relay.platforms.filter((p) => p.source);
   assert.equal(mine[0].source, row.source);
 });

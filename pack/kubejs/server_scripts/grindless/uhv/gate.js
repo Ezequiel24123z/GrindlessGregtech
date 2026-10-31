@@ -36,6 +36,9 @@
   ;['grindless:vela_pulsar_orbit', 'grindless:cas_a_remnant'].forEach(function (d) { SITES.orbits.push(d) })
   // OpV (integrator): the SGR 1806-20 and Terzan 5 rings run the c2 sustain (the ride home) and c1 open like the UXV far rings
   ;['grindless:sgr1806_orbit', 'grindless:terzan5_core'].forEach(function (d) { SITES.orbits.push(d) })
+  // MAX-T2: the Sgr A* ring (gcyr:black_hole_orbit, F1's relay platform) runs c1 open, c2 sustain and the c15 throw to the NSC belt
+  SITES.orbits.push('gcyr:black_hole_orbit')
+  SITES.sgr_a_orbit = ['gcyr:black_hole_orbit']
   // UEV-B5, c3 "hold" (docs/eras/uev.md "Gate to UIV"): 16 A x V[UEV] = 134,217,728 EU/t for 60 s at Sirius B's orbit. The stored items are
   // held (catalysts, never consumed: no UEV recipe uses up the stored items). Nothing comes out.
   var UEV_HOLD = { name: 'hold', circuit: 3, eut: 134217728, duration: 1200, site: 'sirius_b_orbit',
