@@ -316,6 +316,7 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     // OpV-D1's c24-26 and c30-31 (opv/beam_hardware.js; c31 takes A2's nbtin_film_wafer, opv/circuits.js)
     // OpV-B2's c23 returns UIV's cage_part (uiv/foundation.js); OpV packages register their items under startup_scripts/grindless/opv/
     // OpV-A1's c21 (mesh_belt_weld): its belt and trim are registered in opv/components.js
+    // OpV-E1's c23 (positron_cell_seal) seals its own cell (opv/pair_converter.js) into F1's dense positron cell (opv/foundation.js)
     // OpV-A3's c22 rows (W-Re can and re-melt): the can items in opv/field_press.js, the chain lamina stack in opv/foundation.js
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'foundation.js'))
     + fs.readdirSync(path.join(kube, 'startup_scripts', 'grindless', 'opv')).filter((f) => f.endsWith('.js')).map((f) => read(path.join(kube, 'startup_scripts', 'grindless', 'opv', f))).join('\n');
@@ -331,7 +332,8 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     assert.ok(lang.includes(`'${key}'`), key);
   }
   for (const [type, dataKey] of [['electron_beam_refining', 'grindless_electron_beam'], ['single_crystal_casting', 'grindless_single_crystal_casting']]) {
-    for (const r of T.types[type].recipes) assert.ok(lang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
+    const rowLang = lang + read(path.join(kube, 'client_scripts', 'grindless', 'opv_pair_converter_lang.js'));
+    for (const r of T.types[type].recipes) assert.ok(rowLang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
 });
 

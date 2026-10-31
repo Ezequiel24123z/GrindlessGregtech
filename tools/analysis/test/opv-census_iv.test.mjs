@@ -103,7 +103,9 @@ test('the rows sit on the contract\'s circuits, unique inside the type, and name
     const r = by(rs, name);
     assert.equal(r.circuit, circuit, `${type}/${name}`);
     assert.match(String(r._why || r._ || ''), /^OpV-B2\b/, `${type}/${name}: _why names the package`);
-    assert.equal(rs.filter((x) => x.circuit === circuit).length, 1, `${type}: circuit ${circuit} once`);
+    // OpV-F3: a circuit repeats only with disjoint item inputs (OpV-E1's positron_cell_seal shares EB c23 with the thaw)
+    const its = (x) => x.itemsIn.concat(x.kept || []).map((i) => i.id);
+    for (const o of rs.filter((x) => x !== r && x.circuit === circuit)) assert.ok(!its(o).some((id) => its(r).includes(id)), `${type}: circuit ${circuit} shared with ${o.name} only on disjoint item inputs`);
   }
 });
 

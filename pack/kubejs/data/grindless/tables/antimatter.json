@@ -46,6 +46,21 @@
           "charge": [],
           "itemsOut": [{ "id": "gtnn:radioactive_waste", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:neon", "amount": 1000 }]
+        },
+        { "_why": "OpV-E1 (opv.md line 1392, line 29): rotating-wall compression of the cartridge into the pair converter's seed; the trap is sealed shut around it (returned, worn, by the converter's c1 at 90%).",
+          "name": "seed_plasma",
+          "circuit": 5,
+          "eut": 7864320,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:positron_cartridge", "count": 1 },
+            { "id": "grindless:empty_penning_trap", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:seed_positron_plasma", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },
