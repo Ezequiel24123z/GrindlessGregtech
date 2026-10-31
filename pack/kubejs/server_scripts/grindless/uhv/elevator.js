@@ -150,6 +150,11 @@
   TABLE.push({ name: 'pbo_belt_web', type: 'pbo_synthesis', circuit: 12, itemsIn: [item(PBO, 6), item('gtceu:titanium_foil', 2)], fluidsIn: [],
     itemsOut: [item('grindless:pbo_belt_web', 1)], fluidsOut: [], eut: UHVA, duration: 400 })
 
+  // MAX-D3 line L20 step 1 (docs/eras/max.md): the tether ribbon works weaves a horizon strand wire and PBO fibre around a ribbon segment (circuit 13)
+  TABLE.push({ name: 'strand_ribbon', type: 'tether_ribbon', circuit: 13,
+    itemsIn: [item(SEGMENT, 1), item('gtceu:horizon_strand_single_wire', 4), item(PBO, 2)], fluidsIn: [],
+    itemsOut: [item('grindless:strand_ribbon', 1)], fluidsOut: [], eut: UHVA, duration: 800 })
+
   // line 24's side steps on GTM's own machines
   var SIDE = [
     { name: 'trichlorobenzene', type: 'chemical_reactor', circuit: 3, itemsIn: [],

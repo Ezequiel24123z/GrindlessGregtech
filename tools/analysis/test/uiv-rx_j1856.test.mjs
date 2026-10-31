@@ -52,7 +52,7 @@ test('names unique, EU/t and duration positive, circuits unique per type (0 only
       names.push(r.name);
       assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
       assert.ok(r.circuit > 0 || GTM.has(type), `${type}/${r.name} needs a circuit`);
-      assert.match(r._why, /^UIV-B2|^UXV-B4/, r.name); // UXV-B4 appended gnocchi_decompression (circuit 3)
+      assert.match(r._why, /^UIV-B2|^UXV-B4|^MAX-D3/, r.name); // UXV-B4 appended gnocchi_decompression (circuit 3); MAX-D3 waste_cooling (circuit 5)
     }
   }
   assert.equal(new Set(names).size, names.length);
@@ -203,7 +203,7 @@ test('lang: every item, fluid, machine and type named in en_us and es_es, every 
   for (const [type, t] of Object.entries(T.types)) {
     if (GTM.has(type)) continue;
     assert.ok(lang.includes(`'gtceu.${type}'`), type);
-    for (const r of t.recipes) if (!/^UXV-B4/.test(r._why)) assert.ok(lang.includes(`gtceu.recipe.${t.dataKey}.${r.name}'`), `${type}/${r.name}`);
+    for (const r of t.recipes) if (!/^UXV-B4|^MAX-D3/.test(r._why)) assert.ok(lang.includes(`gtceu.recipe.${t.dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
   // en_us and es_es: the loop writes both columns; every entry has three columns
   const entries = [...lang.matchAll(/^\s{8}\['([^']+)',\s*(?:\n\s*)?'/gm)];

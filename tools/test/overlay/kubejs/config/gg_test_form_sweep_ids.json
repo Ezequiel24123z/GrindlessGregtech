@@ -286,6 +286,7 @@
   ],
   "max": [
    "gtceu:atom_interferometer_works",
+   "gtceu:geroch_winch",
    "gtceu:membrane_line",
    "gtceu:photon_ring_imager",
    "gtceu:rydberg_array_works"

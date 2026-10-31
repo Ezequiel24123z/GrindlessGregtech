@@ -107,7 +107,6 @@
   "pendingUses": [
         { "id": "grindless:shell_cryocooler", "package": "C1", "reason": "MAX-H1 makes it (L30); G1's segment foundry mode takes it and C1 checks the use is there" },
         { "id": "grindless:segment_controller", "package": "C1", "reason": "MAX-H1 makes it (L38); G1's mirror shell controller takes it and C1 checks the use is there" },
-    { "id": "grindless:launched_gc_probe", "package": "T2", "reason": "MAX-T1 returns it from gate c14; T2's belt seed chain takes it and T2 checks the use is there" },
-        { "id": "grindless:albedo_multilayer_panel", "package":"D3", "reason": "use written by D3 - MAX-B1 makes it (L3); D3's geroch winch takes it and D3 checks the use is there" }
+    { "id": "grindless:launched_gc_probe", "package": "T2", "reason": "MAX-T1 returns it from gate c14; T2's belt seed chain takes it and T2 checks the use is there" }
       ]
 }

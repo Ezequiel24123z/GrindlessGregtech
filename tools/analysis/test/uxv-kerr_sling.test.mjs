@@ -69,7 +69,7 @@ test('the gate keeps Cygnus X-1 as a site; no sustain row, no recipe type and no
 test('tether works c7: densified yarn and two foil sheets -> bumper weave; circuits 1-4 stay', () => {
   const E = plain(run.global.grindless.elevator);
   const rows = E.recipes.filter((r) => r.type === 'tether_ribbon');
-  assert.deepEqual(rows.map((r) => r.circuit), [1, 2, 3, 4, 7]);
+  assert.deepEqual(rows.map((r) => r.circuit), [1, 2, 3, 4, 7, 13]);
   const r = rows.find((x) => x.name === 'bumper_weave');
   assert.deepEqual(r.itemsIn, [{ id: 'grindless:cnt_densified_yarn', count: 1 }, { id: 'gtceu:aluminium_foil', count: 2 }]);
   assert.deepEqual(r.itemsOut, [{ id: 'grindless:cnt_bumper_weave', count: 1 }]);
