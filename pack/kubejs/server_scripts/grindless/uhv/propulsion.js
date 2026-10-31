@@ -117,6 +117,10 @@
   TABLE.push(row('radiator_collector_shell', 'spark_plasma_sintering', 18,
     [item('grindless:sic_sic_plate', 4), item('grindless:tantalum_carbide_liner', 1)], [], [item('grindless:radiator_collector_shell', 1)], [], UHVA, 600))
 
+  // MAX-D1 (max.md, L24 step 4, c22): the payload casing, sintered; the Penrose engine returns one casing per burnt payload
+  TABLE.push(row('payload_casing', 'spark_plasma_sintering', 22,
+    [item('grindless:sic_sic_plate', 4), item('gtceu:tungsten_steel_plate', 2)], [], [item('grindless:payload_casing', 1)], [], UHVA, 600))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),
