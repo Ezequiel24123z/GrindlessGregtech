@@ -293,8 +293,9 @@ test('UV\'s circuits 1-4 on srf_cavity are untouched; the new row never duplicat
   // UIV-A2 adds c5 (para_h2_target, the pulser's solid target): the only circuit-5 row, and nothing above it
   // UIV-A9 adds c6 (polarised_h_ice): the only circuit-6 row, and nothing above it
   // UIV-B3 adds c7 (solid_neon_cone): the only circuit-7 row
-  // OpV-A2 adds c8 (rrr_nb_target, the Nb TSV sputter target): the only circuit-8 row, and nothing above it
-  assert.ok(/circuit: 4/.test(cold) && (cold.match(/circuit: 5/g) || []).length === 1 && /name: 'para_h2_target', type: 'srf_cavity', circuit: 5/.test(cold) && (cold.match(/circuit: 6/g) || []).length === 1 && /name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6/.test(cold) && (cold.match(/circuit: 7/g) || []).length === 1 && /name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7/.test(cold) && (cold.match(/circuit: 8/g) || []).length === 1 && /name: 'rrr_nb_target', type: 'srf_cavity', circuit: 8/.test(cold) && !/circuit: (9|[1-3]\d)\b/.test(cold));
+  // OpV-A2 adds c8 (rrr_nb_target, the Nb TSV sputter target): the only circuit-8 row
+  // MAX-D4 adds c9 (pellet_jacket; c7 was taken): the only circuit-9 row, and nothing above it
+  assert.ok(/circuit: 4/.test(cold) && (cold.match(/circuit: 5/g) || []).length === 1 && /name: 'para_h2_target', type: 'srf_cavity', circuit: 5/.test(cold) && (cold.match(/circuit: 6/g) || []).length === 1 && /name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6/.test(cold) && (cold.match(/circuit: 7/g) || []).length === 1 && /name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7/.test(cold) && (cold.match(/circuit: 8/g) || []).length === 1 && /name: 'rrr_nb_target', type: 'srf_cavity', circuit: 8/.test(cold) && (cold.match(/circuit: 9/g) || []).length === 1 && /name: 'pellet_jacket', type: 'srf_cavity', circuit: 9/.test(cold) && !/circuit: ([1-3]\d)\b/.test(cold));
   assert.ok(!startup.includes("registry('gtceu:recipe_type'") || !startup.includes("create('srf_cavity')"));
 });
 
