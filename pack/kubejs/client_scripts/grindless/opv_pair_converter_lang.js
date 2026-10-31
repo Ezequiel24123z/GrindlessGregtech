@@ -38,6 +38,10 @@
             'The electron beam furnace seals the unsealed cell with a fresh zirconium getter (circuit 23). Dense positron cells feed the antihydrogen foundry (B3) and replication forge lines (D3); their consumers return traps at 90%.',
             'El horno de haz de electrones sella la celda con un captador nuevo de circonio (circuito 23). Las celdas densas alimentan la fundición de antihidrógeno (B3) y las líneas de la forja de replicación (D3); sus consumidores devuelven las trampas al 90%.'],
 
+        ['emi.grindless.info.field_frozen_casing.0',
+            'The Magnetic Pair Converter\'s structure block: field-frozen plate on a tungstensteel frame. Two come from the field-frozen press (circuit 3, OpV-A3) at SGR 1806-20 orbit. The converter is its only user for now; the kugelblitz forge (D3) will use it too.',
+            'El bloque de estructura del Convertidor de Pares Magnético: placa congelada en campo sobre un armazón de acero de wolframio. Salen dos de la prensa de congelación en campo (circuito 3, OpV-A3) en la órbita de SGR 1806-20. Por ahora solo lo usa el convertidor; la forja kugelblitz (D3) también lo usará.'],
+
         ['gtceu.recipe.grindless_positron_accumulation.seed_plasma',
             'Circuit 5: a positron cartridge and an empty Penning trap are packed into a seed positron plasma for the magnetic pair converter.',
             'Circuito 5: un cartucho de positrones y una trampa de Penning vacía se empaquetan en un plasma de positrones semilla para el convertidor de pares magnético.'],

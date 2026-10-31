@@ -1663,3 +1663,12 @@ Procedural, drawn by `Build-OpVTetronOpticsTextures.ps1` with the method and ste
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVTetronOpticsTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVTetronOpticsTextures.ps1 -Credits
 ```
+
+## OpV magnetic pair converter (OpV-E1)
+
+Procedural, drawn by `Build-OpVPairConverterTextures.ps1` with the method and steel bezel of `Build-UXVCasATextures.ps1`; nothing is copied from another mod. It writes the controller face of `gtceu:magnetic_pair_converter` (`block/multiblock/magnetic_pair_converter/overlay_front`, `overlay_front_active` and `overlay_front_active_emissive`, the animated ones with their `.mcmeta`) and the icon of `grindless:unsealed_positron_cell` (`item/unsealed_positron_cell.png`). The converter's appearance block, `field_frozen_casing`, is OpV-A3's.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVPairConverterTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVPairConverterTextures.ps1 -Credits
+```

@@ -49,7 +49,7 @@ test('the stand-in runs the OpV-A3 scripts without errors, nothing skipped, no l
   assert.equal(FP.recipes.length, 3);
 });
 
-test('press c1-c3: canned stacks -> billet + spent cans -> plates -> casing; 268,435,456 EU/t (2 A of UXV); only at SGR 1806-20', () => {
+test('press c1-c3: canned stacks -> billet + spent cans -> plates -> casing; c1-c2 268,435,456 EU/t (2 A of UXV), the casing at VA[OpV] (an OpV structure part, T-VOLT); only at SGR 1806-20', () => {
   const c1 = rec('field_frozen_billet');
   assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, 2 * V_UXV, 1200, SITE]);
   assert.deepEqual(ids(c1.itemsIn), [['grindless:field_canned_stack', 4]]);
@@ -58,7 +58,7 @@ test('press c1-c3: canned stacks -> billet + spent cans -> plates -> casing; 268
   assert.deepEqual([c2.circuit, c2.eut, c2.duration, c2.site], [2, 2 * V_UXV, 800, SITE]);
   assert.deepEqual(ids(c2.itemsOut), [['grindless:field_frozen_plate', 4]]);
   const c3 = rec('field_frozen_casing');
-  assert.deepEqual([c3.circuit, c3.eut, c3.duration, c3.site], [3, 2 * V_UXV, 400, SITE]);
+  assert.deepEqual([c3.circuit, c3.eut, c3.duration, c3.site], [3, 503316480, 400, SITE]);
   assert.deepEqual(ids(c3.itemsIn), [['grindless:field_frozen_plate', 4], ['gtceu:tungsten_steel_frame', 1]]);
   assert.deepEqual(ids(c3.itemsOut), [['grindless:field_frozen_casing', 2]]);
   for (const r of FP.recipes) {
