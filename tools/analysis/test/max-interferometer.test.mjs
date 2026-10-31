@@ -74,8 +74,16 @@ test('the older rows exist, are marked MAX-B2, sit on the contract circuits, and
   }
 });
 
-test('the GTM bath, GTM engraver and cryogenic rows exist', () => {
-  for (const id of ['grindless:chemical_bath/released_algaas_film', 'grindless:laser_engraver/transferred_crystalline_mirror', 'grindless:closed_loop_cooling/cryo_reference_cavity']) {
+test('the GTM reactor (2 item inputs, hydrogen peroxide), GTM engraver and cryogenic rows exist', () => {
+  const rx = find('grindless:chemical_reactor/released_algaas_film');
+  assert.ok(rx, 'reactor row');
+  assert.equal(rx.t, 'gtceu:chemical_reactor');
+  const s = JSON.stringify(rx.j);
+  assert.match(s, /algaas_bragg_stack/);
+  assert.match(s, /silicon_cavity_spacer/);
+  assert.match(s, /hydrogen_peroxide/);
+  assert.equal(find('grindless:chemical_bath/released_algaas_film'), undefined);
+  for (const id of ['grindless:laser_engraver/transferred_crystalline_mirror', 'grindless:closed_loop_cooling/cryo_reference_cavity']) {
     assert.ok(find(id), id);
   }
 });

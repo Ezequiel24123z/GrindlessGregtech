@@ -5,7 +5,7 @@
 //
 //   L4  Sr-88 isotope (calutron c16) -> degenerate Sr cartridge (QGL c5) -> [+ squeezed-light chip, SHeQUID rotation ref (SHeQUID c6),
 //       atom-optics modulator (TFLN ion slicing c11), cryo reference cavity] -> matter-wave gradiometer (here, c1)
-//   L33 Si cavity spacer (crystal growth c31) -> AlGaAs Bragg stack (MBE c13) -> GTM chemical bath (here) -> GTM laser engraver (here)
+//   L33 Si cavity spacer (crystal growth c31) -> AlGaAs Bragg stack (MBE c13) -> GTM chemical reactor (here: 2 item slots) -> GTM laser engraver (here)
 //       -> He refrigerator (cryo_reference_cavity)
 //
 // c2 (shell gradient map) needs grindless:sgr_a_spin_map, whose route is D2's: it is a pending route and c2 runs only after max-sgra.
@@ -82,12 +82,12 @@
       if (mb.length > 0) {
         skip(BATH.name, mb)
       } else {
-        var cb = event.recipes.gtceu.chemical_bath('grindless:' + BATH.name)
+        var cb = event.recipes.gtceu.chemical_reactor('grindless:' + BATH.name)
         cb.itemInputs('1x ' + BATH.input, '1x ' + BATH.spacer)
         cb.inputFluids(Fluid.of(BATH.fluid, BATH.amount))
         cb.itemOutputs('1x ' + BATH.out)
         cb.EUt(BATH.eut).duration(BATH.duration)
-        MI.recipes.push('grindless:chemical_bath/' + BATH.name)
+        MI.recipes.push('grindless:chemical_reactor/' + BATH.name)
       }
     } catch (e) {
       console.error(LOG + 'interferometer ' + BATH.name + ' failed: ' + e)

@@ -12,7 +12,9 @@
     "gtceu:cleanroom",
     "gtceu:data_bank"
   ],
-  "noUse": [],
+  "noUse": [
+    "grindless:launched_belt_seed"
+  ],
   "routes": [
     "grindless:rejected_timing_head made in gtceu:assembler"
   ],

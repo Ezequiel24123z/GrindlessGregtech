@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:max_epilogue"],
+  "text": ["emi.grindless.info.max_epilogue.0"]
+}
