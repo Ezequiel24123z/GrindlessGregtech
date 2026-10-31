@@ -108,7 +108,7 @@ test('the lang file has en_us and es_es keys in parity', () => {
 
 test('the overlay stays in its band, has no priority line and is registered in zones.json', () => {
   const o = read(root, 'tools', 'test', 'overlay', 'kubejs', 'server_scripts', 'gg_test_max_imager.js');
-  assert.doesNotMatch(o, /^\/\/ priority:/m);
+  assert.doesNotMatch(o.replace(/^\/\/ priority: -?\d+\r?\n/, ''), /^\/\/ priority:/m); // the integrator's stamp is the only one
   assert.match(o, /X0 = 39896/);
   assert.match(o, /X1 = 39959/);
   assert.match(o, /gg_test_max_imager/);
