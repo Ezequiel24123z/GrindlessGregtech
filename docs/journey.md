@@ -1,6 +1,6 @@
 # Gregtech Grindless: the journey to the black hole
 
-The user approved this table on 2026-10-24, with the changes in the last section. It is the pack's guide. Each era is designed in detail when we reach it, in `docs/eras/`.
+The user approved this table on 2026-10-24, with the changes in the last section. It is the pack's guide. Each era is designed in detail when we reach it, in `docs/eras/`. **Revised 2026-10-31 (Project Reforge, owner decision):** the mirror shell no longer bursts the black hole; it stabilises Sagittarius A\*'s horizon and opens MAX+, which ends beyond the Hyperstargate (the MAX row and *The end*).
 
 The supporting research is in `docs/research/space/`:
 - the `grindless-earlygame` campaign (`grindless-campaign.md`);
@@ -11,7 +11,7 @@ The supporting research is in `docs/research/space/`:
 
 ## How Grindless and GregTech fit together
 
-- **Energy.** Grindless climbs with `8 × 4ⁿ`, which is exactly GT's voltage ladder: T0 = steam/ULV … T14 = MAX. Its T15 (8,590 million per tick) does not exist in GT. The endgame is the MAX project with several amps (4 A of MAX = T15); no fake voltage is invented.
+- **Energy.** Grindless climbs with `8 × 4ⁿ`, which is exactly GT's voltage ladder: T0 = steam/ULV … T14 = MAX. Its T15 (8,590 million per tick) does not exist in GT. The endgame (MAX, then MAX+) runs on several amps of MAX (4 A of MAX = T15); no fake voltage is invented.
 - **Industry.** Grindless's T0–T9 topics map 1:1 onto Steam Age–UHV, and they are exactly what GT provides there:
 
   | Grindless topic | GT era |
@@ -51,7 +51,7 @@ The supporting research is in `docs/research/space/`:
 | **UIV** (T11) | neutron stars, pulsars and the first black hole, Cygnus X-1 | neutronium, r-process metals | Penrose engine (test with a black hole), Matrioshka computer | UXV |
 | **UXV** (T12) | the galactic arm: many systems at once | stellar plasma, accretion disk plasma | stellar elevator, accretion disk skimmer | OpV |
 | **OpV** (T13) | the galactic bulge | industrial antimatter, stable exotic matter | Kugelblitz forge (micro black holes made of light), probes that replicate on their own. **Kardashev III** | MAX |
-| **MAX** (T14–T15) | **Sagittarius A\***, the center of the galaxy | — | **the mirror shell**: the largest multiblock in the pack. It surrounds the black hole, amplifies a wave until it bursts, and the universe bursts with it | the end |
+| **MAX** (T14–T15) | **Sagittarius A\***, the center of the galaxy | — | **the mirror shell**: the largest multiblock before MAX+. It surrounds the black hole and uses a spin-amplified wave to stabilise its horizon | **MAX+** (2026-10-31): intergalactic travel, extraordinary materials, creative items crafted at enormous cost and the Hyperstargate, the only way through that horizon. Beyond it lies the final dimension, where the credits roll (*The end*) |
 
 The exact materials for each row are set when each era is designed. What is approved here is the general shape.
 
@@ -107,21 +107,21 @@ Today HV opens the End and, with the Moon, it would open two places. Proposal: *
 2. **Connected automatic bases:** EV–LuV.
 3. **Orbital stations that exploit without landing:** LuV–UV.
 4. **Industry the size of a star or a system:** UHV–OpV (Dyson, stellar forge, stellar elevator; Kardashev II and III).
-5. **The black hole project:** MAX.
+5. **The black hole project:** MAX stabilises the horizon; MAX+ travels between galaxies and builds the Hyperstargate to cross it.
 
 ## The end
 
-It is a single project in four stages, and each one is a multiblock that delivers something:
+It is a single project in five stages (the fifth added 2026-10-31), and each one is a multiblock that delivers something:
 
 | Era | Stage | What it does |
 |---|---|---|
 | UIV | Penrose engine | Test on a stellar black hole: extracts energy from its spin. |
 | UXV | Disk skimmer | Turns accretion disk plasma into exotic matter. |
 | OpV | Kugelblitz forge | Makes micro black holes from light, which must be contained. |
-| MAX | Mirror shell | Surrounds Sagittarius A\* and amplifies a wave until the hole bursts. It is the largest multiblock in the pack. |
+| MAX | Mirror shell | Surrounds Sagittarius A\* and uses a spin-amplified wave to stabilise the hole's horizon. It is the largest multiblock before MAX+. |
+| MAX+ | Hyperstargate | The final multiblock and the only feasible way through the stabilised horizon: the GTNH Stargate process at about 10× scale, on huge MAX amperage, with creative items crafted at enormous cost among its ingredients. |
 
-- **The final recipe** asks for the stored energy, the seed wave from the forge and every segment in place.
-- **On detonation** the universe bursts: credits and a seed for a new universe, for anyone who wants to start over.
+- **The final recipes.** MAX's last recipe asks for the stored energy, the seed wave from the forge and every segment in place; it stabilises the horizon instead of bursting the hole and makes the key output MAX+ needs. Crossing the Hyperstargate leads to a final dimension of ruined futuristic cities, with monumental architecture, a striking skyline and a mysterious atmosphere, and no mechanics, research or blueprints inside. Arriving rolls the credits, with the epilogue and the ending text, and ends the pack.
 - **Where:** GCYR ships the `black_hole_orbit` dimension with a black hole sky and nothing that leads to it. It is the perfect place.
 - **What has to be prepared first:** the pattern helper (16 rows today) has to accept much larger structures.
 
@@ -164,7 +164,7 @@ In English, one chapter per era. Each chapter tells the step that brings you clo
   - **Space elevator (UHV):** modules that mine planets without landing (moved from UV: the UV design does not use it, `docs/eras/uv.md`).
   - **Final megastructures:** the Eye of Harmony and the Forge of the Gods.
   - **The "pseudo-stable" black hole:** it is seeded and decays if it is not tended. It is the best precedent for our ending.
-  - **The real ending:** the Stellar Gate.
+  - **The real ending:** the Stargate. MAX+'s Hyperstargate follows its process at about 10× scale (2026-10-31).
   - **What wears you out:** rockets and blueprints from dungeons, landings by hand, 111-hour recipes, mandatory luck and inputs that are lost if power fails. License LGPL/GPL/no license: ideas only.
 - **GregTech Leisure:**
   - **Planets:** 8 rockets, each planet with its own fluid.
@@ -193,7 +193,7 @@ In English, one chapter per era. Each chapter tells the step that brings you clo
 **What wears you out.**
 - Inflated timers and luck.
 - Going back and forth by hand.
-- Walls of quantity.
+- Quantity with no automatable, scalable route (a hand grind). High, expensive quantity on automated lines is intended (rule 2, revised 2026-10-31).
 - Penalties that throw away your work.
 - "Creative" endings that cancel out the logistics.
 - Promising what isn't done yet.

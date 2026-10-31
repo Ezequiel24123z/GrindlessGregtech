@@ -1,10 +1,10 @@
 # MAX (T14): Sagittarius A*
 
-MAX is the last era and the end of the game. The player reaches the supermassive black hole at the centre of the Milky Way, builds a mirror round it and makes the hole's spin amplify a wave until the mirror bursts. That is the "black hole bomb" (Press and Teukolsky 1972, Nature 238:211). The era makes three things the pack has never had:
+MAX is the last GTM tier and the last era before MAX+. The player reaches the supermassive black hole at the centre of the Milky Way, builds a mirror round it and makes the hole's spin amplify a wave: the "black hole bomb" (Press and Teukolsky 1972, Nature 238:211). Since 2026-10-31 the mirror no longer bursts and MAX no longer ends the pack: the last recipe stabilises the hole's horizon and makes the key output MAX+ needs (*State*). The era makes three things the pack has never had:
 
 - **horizon work**: mass lowered on a tether almost to the horizon, the final destination of every waste canister (Geroch's engine; Bekenstein 1973, PRD 7:2333; Unruh and Wald 1982, PRD 25:942);
 - **superradiance**: a wave below the horizon frequency that grows on each bounce and takes rotational energy from the hole (Zel'dovich 1971; Brito, Cardoso and Pani 2015, LNP 906);
-- **the ending**: the mirror shell, the largest multiblock of the pack, and a last recipe that leaves a seed for whatever comes after (MAX+).
+- **the way into MAX+**: the mirror shell, the largest multiblock of the pack so far, and a last recipe that stabilises the horizon MAX+'s Hyperstargate crosses.
 
 Places:
 
@@ -14,9 +14,9 @@ Places:
 - **SGR 1806−20 orbit** (OpV place, revisited): the UXV draw bench draws horizon strand where OpV put it.
 - **Home**: the Rydberg array works, the atom interferometer works, the membrane line, the gene ark, the components and the supracausal mainframe.
 
-The MAX voltage is V[MAX] = 2,147,483,648 (2^31), a `long` (GTValues.java:60-61). VA[MAX] = 2,013,265,920 and VH[MAX] = 1,073,741,824 are `int` (:66-73); `GTValues.MAX = 14` (:104). OpV's design says "V[MAX] = Integer.MAX_VALUE" (opv.md *Risks*); that is off by one, and the integrator corrects it in DECISIONS (*Decisions proposed*). MAX is the top of GTM's ladder, so nothing runs one tier up from it: two MAX hatches give V[MAX], not more (WorkableElectricMultiblockMachine.java:271-273). The era opens from OpV's gate c13 (`grindless:sgr_a_chart`, `gtceu:max_machine_casing` researched; opv.md *Gate to MAX*) and ends the pack. It pre-empts no MAX+ content (DECISIONS.md:450).
+The MAX voltage is V[MAX] = 2,147,483,648 (2^31), a `long` (GTValues.java:60-61). VA[MAX] = 2,013,265,920 and VH[MAX] = 1,073,741,824 are `int` (:66-73); `GTValues.MAX = 14` (:104). OpV's design says "V[MAX] = Integer.MAX_VALUE" (opv.md *Risks*); that is off by one, and the integrator corrects it in DECISIONS (*Decisions proposed*). MAX is the top of GTM's ladder, so nothing runs one tier up from it: two MAX hatches give V[MAX], not more (WorkableElectricMultiblockMachine.java:271-273). The era opens from OpV's gate c13 (`grindless:sgr_a_chart`, `gtceu:max_machine_casing` researched; opv.md *Gate to MAX*) and leads to MAX+ (*State*). It pre-empts no MAX+ content (DECISIONS.md:450).
 
-**State.** UXV is complete (a9f01511, v0.15.0). On `opv-integ`, OpV-F1, F3 and W are merged and the rest of OpV is running. `docs/STATUS.md` predates this and is stale; the integrator updates it. MAX is designed against OpV as designed (opv.md) and each package names the OpV package it waits for.
+**State.** MAX shipped in v0.17.0 from this design (deviations are in DECISIONS.md). On 2026-10-31 (Project Reforge) the owner changed the ending: the mirror shell no longer bursts the black hole or ends the universe; its last recipe stabilises or opens Sagittarius A\*'s horizon and produces the key output MAX+ needs, and the credits, epilogue and ending text move to the end of MAX+ (journey.md *The end*). Until Reforge Phase 7 implements this, *Route* 9, machine 8, *The ending*, S0-9 and G1 describe v0.17.0 as built: the last recipe bursts the mirror, outputs `grindless:universe_seed`, sends `WIN_GAME` and gives each player `grindless:max_epilogue` once. Rules 2, 5 and 7 were revised the same day (`AGENTS.md`): the rule audit, the cost notes and *Quests* record the v0.17.0 design, and Reforge Phases 2, 3 and 5 rework them.
 
 | | UXV (uxv.md:20-28) | OpV (opv.md:24-32) | MAX | Guideline (rule 7, from OpV) |
 |---|---|---|---|---|
@@ -29,7 +29,7 @@ The MAX voltage is V[MAX] = 2,147,483,648 (2^31), a `long` (GTValues.java:60-61)
 | Basic single-block machines | none | GTM's set at OpV | **none** (GTM registers none at MAX) | — |
 | Hull and hatches | UEV builders | GTM `gtceu:opv_*` | GTM `gtceu:max_*` (29 ids, opv_ids.json:14) | — |
 
-**Why 10.** MAX has one destination and one task: reach Sgr A*, build the mirror, end the game. Each of the ten has a route only it gives: four home machines make the parts nothing older can (Rydberg logic, matter-wave sensing, superconducting membranes, the genome archive), five Sgr A* machines exist only at a spinning supermassive hole (imaging its photon ring, lowering mass to its horizon, holding a shell up with mass streams, burning belt slag in a thin ring down to the ISCO, and the shell itself), and one belt machine smelts under cluster light. Fourteen candidates are missing to reach 24; *Considered and dropped* names every one with its reason (second route, rule 8, data chain, assembly, or MAX+ reserve). The mirror shell is the largest multiblock of the pack and carries the era (journey.md:54, :127).
+**Why 10.** MAX has one destination and one task: reach Sgr A*, build the mirror, stabilise the horizon for MAX+. Each of the ten has a route only it gives: four home machines make the parts nothing older can (Rydberg logic, matter-wave sensing, superconducting membranes, the genome archive), five Sgr A* machines exist only at a spinning supermassive hole (imaging its photon ring, lowering mass to its horizon, holding a shell up with mass streams, burning belt slag in a thin ring down to the ISCO, and the shell itself), and one belt machine smelts under cluster light. Fourteen candidates are missing to reach 24; *Considered and dropped* names every one with its reason (second route, rule 8, data chain, assembly, or MAX+ reserve). The mirror shell is the largest multiblock of the pack and carries the era (journey.md:54, *The end*).
 
 **Why 46.** MAX now has more lines (46) and crossings (167) than OpV (45, 141), so the era is clearly bigger where rule 7 puts the weight, but it is short of the x1.5 guide by 22 lines and 45 crossings. *Considered and dropped* lists each of the 22 lines and the 47 crossings they would have brought (they cover the 45), one specific candidate and one reason each; none is waved through as "data" or "assembly" in general. Every counted line has at least 4 feedstock transformations besides any final assembly or cold qualification (the repair added a real intermediate step, such as stabiliser plating, electropolish, anodisation, a cure or a substrate, to the sixteen lines that lacked one: L9, L11, L14, L18, L20, L22 (two), L23, L24, L33, L38-L40, L41 (two), L43, L44, L45); the average depth is 5.04 because MAX's chains are part cores and Sgr A* feedstock, short in the real world too. Open question 1 asks the owner whether to accept the residual shortfall.
 
@@ -43,7 +43,7 @@ The MAX voltage is V[MAX] = 2,147,483,648 (2^31), a `long` (GTValues.java:60-61)
 6. **At Sgr A*.** New rows on older machines start first: the UXV disk skimmer clears the hot flow, the UXV BZ dynamo and UIV Penrose engine run on its spin, and the UIV droplet radiator works builds the shell's radiators. The photon ring imager measures the spin and charts the cluster.
 7. **The belt.** Gate c15, on a warp gate built at Sgr A* orbit, throws a `nsc_belt_seed` aimed by the imager's `nsc_ephemeris`. `grindless:nsc_belt` opens as `max-nsc`. OpV's debris harvester and replication refinery take rows there; the cluster-light furnace smelts the planetesimals into segment truss and stream pellets.
 8. **Horizon work.** The Geroch winch lowers waste canisters on a horizon tether; the mass stream injector makes the stream bundles that hold a shell up without a rigid support.
-9. **The mirror.** The mirror shell (about 33 x 33 x 33 *(tune)*) forms round the hole from thousands of segments. Its vent mode is a generator. Its last recipe takes the seed wave packet, the genome archive, stream bundles and a charged case 14 network, bursts the mirror and returns `grindless:universe_seed`. The credits roll.
+9. **The mirror.** The mirror shell (about 33 x 33 x 33 *(tune)*) forms round the hole from thousands of segments. Its vent mode is a generator. Its last recipe takes the seed wave packet, the genome archive, stream bundles and a charged case 14 network. As built in v0.17.0 it bursts the mirror, returns `grindless:universe_seed` and rolls the credits; revised, it stabilises the horizon and makes the key output MAX+ needs (*State*).
 
 ## Inherited, as built
 
@@ -327,9 +327,9 @@ Format as in opv.md: what it gains, recipes, byproducts, structure (QR), crossin
 
 **Source.** Birch 1982; Lofstrom 1985 (launch loop) for the principle.
 
-### 8. Mirror shell (Sgr A* orbit, generator and ending)
+### 8. Mirror shell (Sgr A* orbit, generator and the way into MAX+)
 
-**Gains.** The black hole bomb: a reflecting shell round a spinning hole traps waves with frequency below m·Ω_H; each pass through the ergoregion amplifies them, so the energy grows until the mirror fails (Press and Teukolsky 1972, Nature 238:211; Cardoso 2004, PRD 70:044039; Zel'dovich 1971). It is the largest multiblock of the pack, the ending and a generator.
+**Gains.** The black hole bomb: a reflecting shell round a spinning hole traps waves with frequency below m·Ω_H; each pass through the ergoregion amplifies them, so the energy grows until the mirror fails (Press and Teukolsky 1972, Nature 238:211; Cardoso 2004, PRD 70:044039; Zel'dovich 1971). It is the largest multiblock of the pack so far, a generator and the way into MAX+ (in v0.17.0, the ending; *State*).
 
 **Physics.** Sgr A*: M = 4.3e6 solar masses; GM/c^3 = 21.2 s; r_g = 6.35e9 m. Spin a = 0.9 is *pack fiction* (EHT 2024, ApJL 964:L25-L26 favour a spinning MAD but measure no exact a). Then r_+ = 1.436 r_g, Ω_H = a c / (2 r_+) ≈ 0.0148 rad/s, f = Ω_H / 2π ≈ 2.35 mHz, a wavelength of at least 1.27e11 m. A mirror must sit well beyond the wave's own size: at about 20 r_g (1.3e11 m, 0.85 AU). Rotational energy (1 − √((1 + √(1 − a²))/2)) Mc² = 15.3% Mc² ≈ 1.2e53 J. Starlight is negligible; the flow's luminosity of about 1e29 W gives about 4.9e5 W/m² (350 suns) at the shell, so the shell needs radiators. The plasma frequency (ω_p = 5.64e4 √n_e rad/s) is far above Ω_H, so the plasma itself reflects low-frequency light (Pani and Loeb 2013, PRD 88:041301; Conlon and Herdeiro 2018, PLB 780:169). That the shell clears its interior of plasma with the skimmer and mass filter rows is *named fiction*; the superconducting mirror is.
 
@@ -345,7 +345,7 @@ Format as in opv.md: what it gains, recipes, byproducts, structure (QR), crossin
 
 **Crossings.** L18 (clock lab, SRF, mK cryostat) and through its segment chain L13, L15, L30, L37, L38.
 
-**Risks.** Server cost of a 33-cube scan (S0-7); a shape change after release goes in release notes.
+**Risks.** Server cost of a 33-cube scan (S0-7).
 
 **Source.** Press and Teukolsky 1972; Cardoso 2004; Brito, Cardoso and Pani 2015 LNP 906; Penrose 1969; Christodoulou 1970, PRL 25:1596.
 
@@ -483,12 +483,12 @@ Nine components (`grindless:max_*`), one circuit (`gtnn:supracausal_mainframe`),
 
 ## Reserve for MAX+
 
-MAX is the last GTM tier, so MAX+ means content after the ending, not a new voltage. Kept, unused:
+MAX is the last GTM tier, so MAX+ means content after MAX, not a new voltage; since 2026-10-31 the pack ends there, beyond the Hyperstargate (*State*). Kept, unused:
 
-- `grindless:universe_seed` (the last recipe's output): a hook for a MAX+ chapter or pack.
-- Intergalactic travel (Andromeda, the Magellanic Clouds), the hyper stargate (journey.md:139), hypervelocity stars as couriers: MAX+.
+- `grindless:universe_seed` (the last recipe's output) and `grindless:max_epilogue` (the credits book): Reforge Phase 7 reworks or removes them when it sets MAX+'s key output and moves the credits to the end of MAX+.
+- Intergalactic travel (Andromeda, the Magellanic Clouds), the Hyperstargate (journey.md *The end*), hypervelocity stars as couriers: MAX+.
 - Sgr A*'s magnetar (SGR J1745−2900), the PeVatron, the Fermi bubbles: listed under *Considered and dropped* and free for MAX+.
-- GT--'s `gtnn:component_assline_casing_max` and `gtmutils:max_64a_energy_converter`: hidden, not removed (save rule).
+- GT--'s `gtnn:component_assline_casing_max` and `gtmutils:max_64a_energy_converter`: hidden (other mods' ids).
 
 ## Considered and dropped
 
@@ -646,16 +646,16 @@ About 40 *(tune)* short English quests in one chapter `max` (generated by `tools
 
 ## The ending
 
-The mirror shell's c3, **the last recipe**: needs the full structure formed, and consumes:
+**Revised 2026-10-31 (owner decision; Reforge Phase 7 implements it):** the last recipe no longer bursts the mirror or ends the universe. It stabilises or opens Sagittarius A\*'s horizon and produces the key output MAX+ needs; the credits, epilogue and ending text move to the arrival in MAX+'s final dimension (journey.md *The end*). The rest of this section is the v0.17.0 build. The mirror shell's c3, **the last recipe**: needs the full structure formed, and consumes:
 
 - 1 `seed_wave_packet`, 1 `genome_archive`, 16 `stream_bundle` *(tune)*, 1 `final_spin_map`, 1 `rydberg_logic_array` (returned as `spent_rydberg_array`);
 - 2^35 EU/t (V[MAX] x 16 A) for 1,200 t *(tune)*: 41,231,686,041,600 EU, on two `gtceu:max_energy_input_hatch_16a` fed by wireless case 14 (one charged `max_smes_cell` holds it). Fallback 2^33 x 4,800 t (S0-2).
 
-Output: `grindless:universe_seed` and 64 `mirror_shell_scrap` *(tune)* (the mirror fails; the scrap returns to the furnace, rule 3). The wave escapes as light and gravitational radiation: the shell is spent, the hole spun down a little (*pack fiction*: that a "new universe" is seeded is Smolin 1992 cosmological natural selection, named and not claimed). The structure stays formed; the recipe can be run again (no lockout, no creative ending: journey.md:173).
+Output: `grindless:universe_seed` and 64 `mirror_shell_scrap` *(tune)* (the mirror fails; the scrap returns to the furnace, rule 3). The wave escapes as light and gravitational radiation: the shell is spent, the hole spun down a little (*pack fiction*: that a "new universe" is seeded is Smolin 1992 cosmological natural selection, named and not claimed). The structure stays formed; the recipe can be run again (no lockout, no creative ending: journey.md *What other packs do*).
 
 **Galactic scale.** Sgr A*'s rotational energy at a = 0.9, about 1.2e53 J, is some 400 million years of the whole Milky Way's light (about 1e37 W); a Kardashev type III civilisation commands about 4e37 W (Kardashev 1964, Sov Astron 8:217; Griffith 2015, ApJS 217:25). The pack does not claim the player drains it: what is measured in game is the case 14 network the last recipe drains (41,231,686,041,600 EU) and the spin-down the final spin map records. A real mirror at 2.35 mHz would need a conductor thicker than copper's skin depth there (about 1.35 m); the superconducting membrane is the shell's *named fiction*. Intergalactic travel, creative tools and the hyper stargate stay MAX+ (*Reserve*).
 
-**Credits.** On the first output, G1's server script sends the vanilla `WIN_GAME` game event (end-poem and credits). If S0-9 shows the client screen does not open, or the respawn after it fails (`ServerPlayer.wonGame` must be true for `PERFORM_RESPAWN` to act), the fallback is: the FTB chapter's last quest, a title, a written book `grindless:max_epilogue` and a monument block. Neither changes game mode.
+**Credits (v0.17.0; they move to the end of MAX+).** On the first output, G1's server script sends the vanilla `WIN_GAME` game event (end-poem and credits). If S0-9 shows the client screen does not open, or the respawn after it fails (`ServerPlayer.wonGame` must be true for `PERFORM_RESPAWN` to act), the fallback is: the FTB chapter's last quest, a title, a written book `grindless:max_epilogue` and a monument block. Neither changes game mode.
 
 ## Validator
 
@@ -688,10 +688,10 @@ GTM registers no MAX components, basic machines, parallel hatch, wireless, laser
 
 ## Save compatibility
 
-- No registered id is removed. GT--'s other supracausal items and SMDs stay registered (GT-- owns them) and are only hidden; F2 confirms they were hidden before `max` in v0.16.0 (S0-8), so no conversion is needed; if one was obtainable, it keeps working as an item and EMI hides only its recipe. `gtnn:supracausal_mainframe` stays our circuit.
-- `gcyr:black_hole_orbit` (or `grindless:sgr_a_orbit`) and `grindless:nsc_belt` are new dimension ids; fixed after S0-1.
-- The mirror shell's shape goes in the release notes if it changes after v0.17.0.
-- C3 reopens a v0.16.0 (OpV) save.
+Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Two facts from it still hold:
+
+- GT--'s other supracausal items and SMDs stay registered (GT-- owns them) and hidden.
+- `gtnn:supracausal_mainframe` is our circuit.
 
 ## Risks
 
@@ -1100,7 +1100,7 @@ Peak width is five (wave 2); the critical path is S0, F1, F2, A0, A2, B1, A3, B3
 - 2026-10-30 MAX 2^31 plan: machine rows ≤ VA[MAX]; long rows only c14, c15 (2^33) and the shell's last recipe (2^35 on two MAX 16 A, fallback 2^33 x 4,800 t); written as V x amps.
 - 2026-10-30 MAX power: no fusion tier 14; Geroch winch, BZ and Penrose rows at Sgr A*, the accretion feeder (machine 10, belt slag pellets from L25, ~2.0x), shell vent, each on a stated fuel at 1.3-2.5x; wireless case 14 caps V[MAX] x A x 10 as long.
 - 2026-10-30 MAX scale: `grindless:max_parallel_hatch` x1,048,576 (lib, serial); MAX_ROWS 64 (lib, serial); no mega member.
-- 2026-10-30 MAX ending: the mirror shell's last recipe outputs `universe_seed` (MAX+ hook) and rolls credits (fallback book and quest); no creative ending; repeatable.
+- 2026-10-30 MAX ending: the mirror shell's last recipe outputs `universe_seed` (MAX+ hook) and rolls credits (fallback book and quest); no creative ending; repeatable. *Superseded 2026-10-31: the last recipe stabilises the horizon and makes MAX+'s key output; the credits move to the end of MAX+.*
 - 2026-10-30 MAX fiction: the NSC belt, horizon strand, shell-scale superconducting membranes, interior plasma clearing, cluster-light concentration, the feeder's injection ring (named fiction); Sgr A* spin 0.9 and the universe seed (pack fiction).
 - QR-MAX: as QR-OpV with MAX components (≥8 from ≥3 families) and four MAX circuits; casings and segments assembler rows; each of the 10 structures passes the rubric; each new type gets its `loop_<machine>`.
 - QR-MAX gate tiers (F2, integrator): `eraTier` `max: 14`; `complexFloor` `"14": 8` *(tune)*; `max` in process_audit `ERAS`/`TIER_ERA`; `recipe_quality.mjs:228` to tiers 10-14.
@@ -1115,7 +1115,7 @@ Peak width is five (wave 2); the critical path is S0, F1, F2, A0, A2, B1, A3, B3
 4. **A mega member for MAX?** **Default: no**; the x1,048,576 hatch serves the existing members.
 5. **x1,048,576 or x262,144 for the MAX hatch?** **Default: x1,048,576** if S0-6 passes.
 6. **Shell size 33-cube or 25-cube?** **Default: 33** if S0-7 passes.
-7. **Credits on the last recipe, every run or the first?** **Default: first run per player**.
+7. **Credits on the last recipe, every run or the first?** **Default: first run per player**. *Superseded 2026-10-31: the credits move to the arrival at the end of MAX+.*
 8. **Sgr A* spin a = 0.9?** **Default: yes**, marked pack fiction.
 9. **Generator balance band 1.3-2.5x?** **Default: yes**, C1 enforces it.
 10. **~40 quests?** **Default: yes** *(tune)*.
