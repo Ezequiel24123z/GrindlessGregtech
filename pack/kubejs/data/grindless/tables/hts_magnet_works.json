@@ -70,7 +70,21 @@
       "itemsIn": [ { "id": "grindless:potted_rebco_pancake", "count": 1 } ],
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:trained_rebco_pancake", "count": 1 } ],
+      "eut": 1966080, "duration": 600,
+      "name": "octupole_winding", "circuit": 9, "charge": true,
+      "_why": "OpV-B3a line 27: slit REBCO tape wound into the octupole's racetrack coils over niobium-titanium foil shims, wetted in epoxy (the CVI furnace potts it next).",
+      "itemsIn": [ { "id": "grindless:octupole_tape", "count": 6 }, { "id": "gtceu:niobium_titanium_foil", "count": 8 } ],
+      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+      "itemsOut": [ { "id": "grindless:octupole_winding", "count": 1 } ],
       "eut": 1966080, "duration": 600
+    },
+    {
+      "name": "octupole_trap_magnet", "circuit": 10, "charge": true,
+      "_why": "OpV-B3a line 27: the potted and helium-cooled winding is quench-trained in the cold-test helium inside a tungsten steel former: the F1 octupole_trap_magnet.",
+      "itemsIn": [ { "id": "grindless:cooled_octupole_winding", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 4 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:octupole_trap_magnet", "count": 1 } ],
+      "eut": 1966080, "duration": 1200
     }
   ]
 }

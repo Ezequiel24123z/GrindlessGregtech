@@ -153,7 +153,7 @@ test('the five older rows exist', () => {
   assert.equal(halbach[h - 1].name, 'uiv_smes_cell');
   assert.equal(halbach[h].circuit, 5);
   const cvi = comp.chemical_vapour_infiltration.recipes;
-  assert.deepEqual(cvi.map((r) => [r.name, r.circuit]), [['sic_sic_plate', 1], ['wf_w_tile', 2], ['w_preform_densify', 3], ['glassy_carbon_lattice', 4], ['w184_fibre_preform', 5], ['chain_preform_densify', 6], ['rebco_potting', 7], ['hpsi_sic', 8], ['superpolished_sic_blank', 10], ['gamma_mirror_strip', 11]]); // UIV-A10 appended c4; UXV-A3 c5; OpV-A2 c8 (6-7 are OpV-A1's); OpV-B1 c10-11
+  assert.deepEqual(cvi.map((r) => [r.name, r.circuit]), [['sic_sic_plate', 1], ['wf_w_tile', 2], ['w_preform_densify', 3], ['glassy_carbon_lattice', 4], ['w184_fibre_preform', 5], ['chain_preform_densify', 6], ['rebco_potting', 7], ['hpsi_sic', 8], ['superpolished_sic_blank', 10], ['gamma_mirror_strip', 11], ['octupole_potting', 9]]); // UIV-A10 appended c4; UXV-A3 c5; OpV-A2 c8 (6-7 are OpV-A1's); OpV-B1 c10-11; OpV-B3a c9
   assert.ok(ids(cvi[2].itemsOut).includes('grindless:densified_w_preform'));
 });
 

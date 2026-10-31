@@ -93,7 +93,9 @@
     'gtceu:field_freezing': 'loop_field_frozen_press',
     'gtceu:tetron_assembly': 'loop_tetron_fab',
     'gtceu:gamma_optics': 'loop_gamma_optics_works',
-    'gtceu:magnetic_pair_production': 'loop_magnetic_pair_converter'
+    'gtceu:magnetic_pair_production': 'loop_magnetic_pair_converter',
+    'gtceu:antihydrogen_synthesis': 'loop_antihydrogen_foundry',
+    'gtceu:annihilation_power': 'loop_annihilation_engine'
   }
 
   StartupEvents.registry('sound_event', function (event) {

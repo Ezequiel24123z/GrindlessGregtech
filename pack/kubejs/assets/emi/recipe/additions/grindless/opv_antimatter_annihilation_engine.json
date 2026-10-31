@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:annihilation_engine"],
+  "text": ["emi.grindless.info.annihilation_engine.0", "emi.grindless.info.annihilation_engine.1"]
+}

@@ -1,0 +1,186 @@
+{
+  "_how_it_is_used": "server_scripts/grindless/opv/antimatter.js makes one recipe per entry, id grindless:<type>/<name>, with its programmed circuit; 'site' true locks the recipe to grindless:cygnus_x1_orbit; 'wear' inputs are consumed by their chance (out of 10000); 'chanceOut' outputs are made by their chance; 'generator' true writes the EUt negative (a generator type). antihydrogen_synthesis and annihilation_power are package OpV-B3's machine types (data key = dataKey, the EMI line). Package OpV-B3, docs/eras/opv.md machines 3 and 5-8 and process lines 26-28 and 30-33.",
+  "types": {
+    "antihydrogen_synthesis": {
+      "dataKey": "grindless_antihydrogen_synthesis",
+      "recipes": [
+        {
+          "_why": "machine 3 c1: one cold antiproton cell and one dense positron cell meet in the octupole trap (5% lost to shield-wall heat). The magnet wears 1/64; both emptied Penning traps return at 90%",
+          "name": "trap_antihydrogen", "circuit": 1, "eut": 268435456, "duration": 1200,
+          "itemsIn": [
+            { "id": "grindless:cold_antiproton_cell", "count": 1 },
+            { "id": "grindless:dense_positron_cell", "count": 1 }
+          ],
+          "kept": [],
+          "wear": [{ "id": "grindless:octupole_trap_magnet", "count": 1, "chance": 156 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "chanceOut": [
+            { "id": "grindless:trapped_antihydrogen", "count": 1, "chance": 9500 },
+            { "id": "grindless:empty_penning_trap", "count": 2, "chance": 9000 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 3 c2: Lyman-alpha laser cooling of the trapped atoms; the laser wears 1/128 a run, 5% of the atoms are lost",
+          "name": "laser_cool", "circuit": 2, "eut": 268435456, "duration": 800,
+          "itemsIn": [{ "id": "grindless:trapped_antihydrogen", "count": 1 }],
+          "kept": [],
+          "wear": [{ "id": "grindless:lyman_alpha_laser", "count": 1, "chance": 78 }],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "chanceOut": [{ "id": "grindless:cooled_antihydrogen", "count": 1, "chance": 9500 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 3 c3: cooled atoms freeze into ice in one levitation trap cell (5% lost). The engine returns 95% of emptied cells",
+          "name": "freeze_ice", "circuit": 3, "eut": 503316480, "duration": 1600,
+          "itemsIn": [
+            { "id": "grindless:cooled_antihydrogen", "count": 1 },
+            { "id": "grindless:levitation_trap_cell", "count": 1 }
+          ],
+          "kept": [],
+          "wear": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "chanceOut": [{ "id": "grindless:antihydrogen_ice_cell", "count": 1, "chance": 9500 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "annihilation_power": {
+      "dataKey": "grindless_annihilation_power",
+      "recipes": [
+        {
+          "_why": "machine 5 c1: fullCost = 4,195,656,183,241.116 EU (beam + positrons + loss-weighted foundry + magnet/laser wear + tile/16 - 95% returned cell). Duration = ceil(1.7 * fullCost / 536870912 / 100) * 100 = 13300 t. EU out = 7,140,383,129,600, ratio 1.70185x. Named upstream steps and coordinator-approved F1-F3 assumptions are in opv-antimatter.test.mjs. Neutrinos leave; traps/cells and activated tiles are contained",
+          "name": "burn_ice", "circuit": 1, "eut": 536870912, "duration": 13300, "generator": true,
+          "itemsIn": [{ "id": "grindless:antihydrogen_ice_cell", "count": 1 }],
+          "kept": [],
+          "wear": [{ "id": "grindless:gamma_absorber_tile", "count": 1, "chance": 625 }],
+          "fluidsIn": [{ "id": "gtceu:hydrogen", "amount": 1000 }],
+          "itemsOut": [],
+          "chanceOut": [
+            { "id": "grindless:levitation_trap_cell", "count": 1, "chance": 9500 },
+            { "id": "grindless:activated_absorber_tile", "count": 1, "chance": 625 }
+          ],
+          "fluidsOut": []
+        },
+        {
+          "_why": "machine 5 c2: fullCost = 11,511,026,372,166.219 EU (8 cold cells + stacking - 90% returned Penning traps + complete pellet line + tile/16). Duration = ceil(1.8 * fullCost / 1073741824 / 100) * 100 = 19300 t. EU out = 20,723,217,203,200, ratio about 1.80029x. Named costs and F1-F3 assumptions are in opv-antimatter.test.mjs; bulk W/Re returns grant no EU credit. Spent hohlraum goes to actinide recovery",
+          "name": "burn_pellet", "circuit": 2, "eut": 1073741824, "duration": 19300, "generator": true,
+          "itemsIn": [
+            { "id": "grindless:acmf_pellet", "count": 1 },
+            { "id": "grindless:antiproton_stack_opv", "count": 1 }
+          ],
+          "kept": [],
+          "wear": [{ "id": "grindless:gamma_absorber_tile", "count": 1, "chance": 625 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_acmf_hohlraum", "count": 1 }],
+          "chanceOut": [{ "id": "grindless:activated_absorber_tile", "count": 1, "chance": 625 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "alloy_smelter": {
+      "recipes": [
+        {
+          "_why": "line 31: tungsten and rhenium smelted into the W-Re hohlraum alloy (3 W : 1 Re)",
+          "name": "w_re_alloy", "circuit": 0, "eut": 503316480, "duration": 200,
+          "itemsIn": [{ "id": "gtceu:tungsten_ingot", "count": 3 }, { "id": "gtceu:rhenium_ingot", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:w_re_alloy_ingot", "count": 4 }]
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "_why": "line 27: REBCO conductor slit into the octupole's tape; the edge trim is the substrate tape and goes back to the coated conductor line",
+          "name": "octupole_tape", "circuit": 0, "eut": 503316480, "duration": 300,
+          "itemsIn": [{ "id": "grindless:itbtc_coated_conductor", "count": 8 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:octupole_tape", "count": 6 }, { "id": "grindless:nickel_tungsten_tape", "count": 2 }]
+        },
+        {
+          "_why": "line 33: the GaSb boule wafered; the kerf is GaSb powder and goes back through the centrifuge to crystal growth",
+          "name": "gasb_wafers", "circuit": 0, "eut": 503316480, "duration": 400,
+          "itemsIn": [{ "id": "grindless:gasb_boule", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:gasb_wafer", "count": 4 }, { "id": "grindless:gasb_kerf_dust", "count": 1 }]
+        }
+      ]
+    },
+    "chemical_reactor": {
+      "recipes": [
+        {
+          "_why": "line 32: boron-10 and carbon reacted into B4C-10, the absorber's neutron-capture phase",
+          "name": "b4c_10", "circuit": 0, "eut": 503316480, "duration": 300,
+          "itemsIn": [{ "id": "grindless:boron_10_dust", "count": 4 }, { "id": "gtceu:carbon_dust", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:b4c_10_dust", "count": 2 }]
+        },
+        {
+          "_why": "line 26: the Lyman-alpha laser filled with krypton and closed round its tripler cell and Ti:sapphire crystal; the spent krypton comes back (to the cryogenic plant's krypton purification)",
+          "name": "lyman_alpha_laser", "circuit": 0, "eut": 503316480, "duration": 600,
+          "itemsIn": [{ "id": "grindless:ti_sapphire_boule", "count": 1 }, { "id": "grindless:kr_tripler_cell", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:krypton", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:lyman_alpha_laser", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:krypton", "amount": 900 }]
+        },
+        {
+          "_why": "line 31: the spent hohlraum dissolved in nitric acid: its curium goes to the actinide partitioner (circuit 9) as nitrate, the W-Re shell back as dusts",
+          "name": "spent_hohlraum_dissolution", "circuit": 0, "eut": 503316480, "duration": 400,
+          "itemsIn": [{ "id": "grindless:spent_acmf_hohlraum", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 2000 }],
+          "itemsOut": [{ "id": "gtceu:tungsten_dust", "count": 3 }, { "id": "gtceu:rhenium_dust", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:curium_nitrate", "amount": 400 }]
+        }
+      ]
+    },
+    "centrifuge": {
+      "recipes": [
+        {
+          "_why": "line 33: the GaSb kerf separated back into gallium and antimony dust, the feed of crystal growth circuit 27",
+          "name": "gasb_kerf", "circuit": 0, "eut": 503316480, "duration": 300,
+          "itemsIn": [{ "id": "grindless:gasb_kerf_dust", "count": 4 }],
+          "itemsOut": [{ "id": "gtceu:gallium_dust", "count": 2 }, { "id": "gtceu:antimony_dust", "count": 2 }]
+        }
+      ]
+    },
+    "mixer": {
+      "recipes": [
+        {
+          "_why": "line 32: blend the neutron-capture B4C-10 phase into tungsten heat-spreader powder before SPS densification",
+          "name": "w_b4c_powder", "circuit": 0, "eut": 503316480, "duration": 300,
+          "itemsIn": [{ "id": "grindless:b4c_10_dust", "count": 2 }, { "id": "gtceu:tungsten_dust", "count": 4 }],
+          "itemsOut": [{ "id": "grindless:w_b4c_powder", "count": 1 }]
+        },
+        {
+          "_why": "line 31: blend equal deuterium and tritium charges before the cryogenic plant conditions the DT fill",
+          "name": "dt_fill", "circuit": 0, "eut": 503316480, "duration": 200,
+          "fluidsIn": [{ "id": "gtceu:deuterium", "amount": 500 }, { "id": "gtceu:tritium", "amount": 500 }],
+          "fluidsOut": [{ "id": "grindless:dt_fill", "amount": 1000 }]
+        }
+      ]
+    },
+    "compressor": {
+      "recipes": [
+        {
+          "_why": "line 28: pressure-anneal the pyrolyser's graphite to align its crystallites before electron-beam cleavage",
+          "name": "hopg_ordering", "circuit": 0, "eut": 503316480, "duration": 400,
+          "itemsIn": [{ "id": "grindless:pyrolytic_graphite", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:hopg_blank", "count": 1 }]
+        }
+      ]
+    },
+    "assembler": {
+      "recipes": [
+        {
+          "_why": "line 26: the krypton tripler cell: an MgF2 window, an LBO crystal and a krypton fill",
+          "name": "kr_tripler_cell", "circuit": 1, "eut": 503316480, "duration": 400,
+          "itemsIn": [{ "id": "grindless:magnesium_fluoride_dust", "count": 2 }, { "id": "grindless:lbo_boule", "count": 1 }],
+          "fluidsIn": [{ "id": "grindless:purified_krypton", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:kr_tripler_cell", "count": 1 }]
+        }
+      ]
+    }
+  }
+}
