@@ -77,9 +77,11 @@ test('L9, L10 and L41: each GTM step takes what the older machines make and give
     ['stabilised_rebco_tape', 'grindless:rebco_tape_max'], ['silica_alcogel', 'gtceu:silicon_dioxide_dust'], ['silylated_alcogel', 'grindless:silica_alcogel'],
     ['exotic_infiltrated_preform', 'grindless:sic_sic_preform'], ['potted_superleak', 'grindless:aerogel_superleak_plug'], ['exotic_composite_rod', 'grindless:balanced_composite_billet'],
     ['exotic_composite_rotor', 'grindless:balanced_composite_billet'], ['laminated_terfenol_stack', 'grindless:oriented_terfenol_rod'], ['max_field_coil', 'grindless:max_coil_winding'],
-    ['max_optical_isolator', 'grindless:isolator_waveguide_die'], ['sc_magnetic_bearing', 'grindless:bearing_rotor_ring'], ['superfluid_valve', 'grindless:potted_superleak']
+    ['max_optical_isolator', 'grindless:isolator_waveguide_die'], ['sc_magnetic_bearing', 'grindless:bearing_rotor_ring'],     ['superfluid_valve', 'grindless:cold_tested_superleak']
   ];
   chain.forEach(([row, input]) => assert.ok(inputIds(rowOf(row)).includes(input), row + ' takes ' + input));
+      // MAX-A3 fix (decision 76, max.md L41): the valve takes the mK cryostat's cold-tested superleak, not the potted one two steps upstream
+      assert.ok(!inputIds(rowOf('superfluid_valve')).includes('grindless:potted_superleak'), 'the valve does not take the potted superleak');
   assert.ok(inputIds(rowOf('stabilised_rebco_tape')).length >= 1);
   assert.ok(inputIds(rowOf('max_field_coil')).includes('grindless:max_coil_winding'));
   // the HTS winding takes the tape this file makes, and the CVI preform the SiC fibre makes

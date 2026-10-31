@@ -152,6 +152,26 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:gan_mmic_tile", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-A3 (max.md, L8 step 4, c9): the metallised diamond bonded onto a SiC substrate wafer with an aluminium contact layer; the hydrogen of the bonding anneal is recovered",
+          "name": "diamond_power_wafer",
+          "circuit": 9,
+          "eut": 1966080,
+          "duration": 600,
+          "itemsIn": [
+            { "id": "grindless:metallised_diamond", "count": 1 },
+            { "id": "grindless:sic_substrate_wafer", "count": 1 },
+            { "id": "gtceu:aluminium_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [
+            { "id": "gtceu:silane", "amount": 100 },
+            { "id": "gtceu:hydrogen", "amount": 2000 }
+          ],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:diamond_power_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1800 }]
         }
       ]
     },

@@ -1,4 +1,4 @@
-// UHV-A4 (docs/eras/uhv.md, "A4. Photonics"): the MBE reactor's, the photonic foundry's and the older machines' rows (the ZPM ion
+﻿// UHV-A4 (docs/eras/uhv.md, "A4. Photonics"): the MBE reactor's, the photonic foundry's and the older machines' rows (the ZPM ion
 // implanter's circuits 3-4, the electric blast furnace's GST target, the large chemical reactor's tellurium) of photonics.json, checked
 // without Minecraft by static recipe lookup, with the pack's scripts run in the stand-in (lib/kubejs_static.mjs) so the ZPM implanter rows
 // are in the lookup too. T1: none (UV-A1's table-driven machines, proof reuse).
@@ -87,7 +87,7 @@ test('one recipe per lookup path, with the ZPM implanter rows: unique circuits, 
     }
   }
   // UEV's implanter row (c5) is in photonics_uev.json; UIV-A5 added ZPM qubits.js c6
-  assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 10, 12, 13, 14, 15, 2, 3, 4, 6, 7, 8, 9]); // MAX-A1 adds none here; // lexicographic sort; UIV-A10 added ZPM qubits.js c7 (c12_boron_diamond); UXV-A3 added c8-10 (argon ion mills); OpV-A2 c12-14 (cryo-CMOS, HEMT isolation, SDD rings); OpV-A1 c15 (hpge_contacts; opv.md c9-13 moved past UXV-A3)
+  assert.deepEqual(all.filter((r) => r.type === 'ion_implantation').map((r) => r.circuit).sort(), [1, 10, 11, 12, 13, 14, 15, 2, 3, 4, 6, 7, 8, 9]); // MAX-A3 c11 (boron_delta_diamond); MAX-A1 adds none here; // lexicographic sort; UIV-A10 added ZPM qubits.js c7 (c12_boron_diamond); UXV-A3 added c8-10 (argon ion mills); OpV-A2 c12-14 (cryo-CMOS, HEMT isolation, SDD rings); OpV-A1 c15 (hpge_contacts; opv.md c9-13 moved past UXV-A3)
   // UEV-A6 added MBE c3 and foundry c7 (UEV rows in the same table); UIV-A1 added MBE c4; UIV-A4 added foundry c8-11;
   // UIV-A5 added MBE c5-6 and foundry c12; UIV-A7 added MBE c7 (thf4_film) and foundry c13 (pcm_crossbar)
   assert.deepEqual(rowsOf('molecular_beam_epitaxy').map((r) => r.circuit), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]); // MAX-B2 c13 (algaas_bragg_stack); MAX-A1 c12 (piezo_optomech_layer); UIV-A10 added MBE c8 (nb_trilayer); OpV-A2 c9 (InAs QW) and c10 (InP HEMT); OpV-B3a c11 (ingaassb_epi)
@@ -158,7 +158,7 @@ test('the ion implanter\'s rows: helium smart-cut of lithium niobate (3), alumin
   // the wafers and boules come from UHV-A2's crystal growth furnace
   for (const id of ['grindless:lithium_niobate_wafer', 'grindless:eu_yso_boule', 'grindless:inp_wafer']) assert.ok(producers(id).some(([w]) => w.startsWith('crystals.json')), id);
   // ZPM's implanter rows keep circuits 1-2 and their inputs; the A3 change to the diamond lattice fab stays; UIV-A5 appended c6
-  assert.deepEqual(Q.recipes.filter((r) => r.type === 'ion_implantation').map((r) => [r.name, r.circuit]), [['nv_diamond_chips', 1], ['donor_qubit_wafer', 2], ['h_si28_wafer', 6], ['c12_boron_diamond', 7], ['mtj_ion_etch', 8], ['mram_ion_etch', 9], ['stno_ion_mill', 10], ['hpge_contacts', 15]]); // UIV-A10 appended c7; UXV-A3 c8-10; OpV-A1 c15 (OpV-A2's SDD rings hold c14)
+  assert.deepEqual(Q.recipes.filter((r) => r.type === 'ion_implantation').map((r) => [r.name, r.circuit]), [['nv_diamond_chips', 1], ['donor_qubit_wafer', 2], ['h_si28_wafer', 6], ['c12_boron_diamond', 7], ['mtj_ion_etch', 8], ['mram_ion_etch', 9], ['stno_ion_mill', 10], ['hpge_contacts', 15], ['boron_delta_diamond', 11]]); // MAX-A3 c11 appended after c15; UIV-A10 appended c7; UXV-A3 c8-10; OpV-A1 c15 (OpV-A2's SDD rings hold c14)
 });
 
 test('the byproducts have destinations: arsenic and the LN donor go back, fluorite to the kiln, the spent target to the furnace; tellurium from sludge', () => {
