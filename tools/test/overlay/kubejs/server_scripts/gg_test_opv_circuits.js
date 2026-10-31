@@ -4,7 +4,8 @@
 //   join      grindless:photonic_integration/cosmic_mainframe is loaded: photonic hall type, c8, the four parts in, the mainframe out
 //   parts     each of the four parts has a producer in the recipe manager (the older-machine rows loaded)
 //   tag       plain gtnn:cosmic_mainframe matches #gtceu:circuits/opv
-//   assembly  at least one gtceu:assembly_line recipe takes #gtceu:circuits/opv as an item input
+//   consumer  every GT recipe ingredient for #gtceu:circuits/opv that can be tested accepts the plain mainframe (at least one)
+//   assembly  the same for gtceu:assembly_line recipes; a note while none takes the tag (GTM 7.5.3 has none in this pack)
 //   only_join no recipe other than our join makes gtnn:cosmic_mainframe (GT-- 1.3.10 ships none; OpV-F2 cuts any)
 //   loader    global.grindless.opvCircuits reports no skipped row
 (function () {
@@ -71,15 +72,23 @@
     var want = {}
     want[MF] = []
     PARTS.forEach(function (p) { want[p] = [] })
-    var assembly = []
+    var consumers = []
     var unreadable = 0
+    var cap = classes().ITEM
+    var stack = Item.of(MF)
     array(S.server.getRecipeManager().getRecipes()).forEach(function (r) {
       try {
         outputIds(r).forEach(function (id) { if (want[id] && want[id].indexOf(String(r.getId())) < 0) want[id].push(String(r.getId())) })
-        if (isGT(r) && typeOf(r) === 'gtceu:assembly_line' && itemJson(r, 'in').some(function (j) { return j.indexOf('"tag":"' + TAG + '"') >= 0 })) assembly.push(String(r.getId()))
+        if (!isGT(r)) return
+        array(r.getInputContents(cap)).forEach(function (c) {
+          if (String(cap.serializer.toJson(cap.of(c.content))).replace(/\s+/g, '').indexOf('"tag":"' + TAG + '"') < 0) return
+          var accepts = null
+          try { accepts = Boolean(c.content.test(stack)) } catch (e) { }
+          consumers.push({ id: String(r.getId()), type: typeOf(r), accepts: accepts })
+        })
       } catch (e) { unreadable++ }
     })
-    return { producers: want, assembly: assembly, unreadable: unreadable }
+    return { producers: want, consumers: consumers, unreadable: unreadable }
   }
 
   function run() {
@@ -108,7 +117,19 @@
     if (s.unreadable > 0) note('unreadable_recipes', s.unreadable + ' recipes could not be read')
     var noMaker = PARTS.filter(function (p) { return s.producers[p].length === 0 })
     check('parts', noMaker.length === 0, PARTS.map(function (p) { return p + ' <- ' + (s.producers[p].join(', ') || 'NONE') }).join('; '))
-    check('assembly', tagOk && s.assembly.length > 0, s.assembly.length + ' gtceu:assembly_line recipes take #' + TAG + ' (mainframe in the tag: ' + tagOk + '): ' + s.assembly.slice(0, 12).join(', ') + (s.assembly.length > 12 ? ' ...' : ''))
+    var byType = {}
+    s.consumers.forEach(function (c) { byType[c.type] = (byType[c.type] || 0) + 1 })
+    note('consumers', s.consumers.length + ' GT recipe inputs take #' + TAG + ': ' + Object.keys(byType).map(function (t) { return t + ' ' + byType[t] }).join(', '))
+    var rejected = s.consumers.filter(function (c) { return c.accepts === false })
+    var tested = s.consumers.filter(function (c) { return c.accepts !== null })
+    check('consumer', tagOk && tested.length > 0 && rejected.length === 0, tested.length + ' of ' + s.consumers.length + ' GT ingredients for #' + TAG +
+      ' tested with the plain mainframe, rejected by ' + rejected.length + (rejected.length ? ': ' + rejected.slice(0, 8).map(function (c) { return c.id }).join(', ') : '') +
+      '; e.g. ' + tested.slice(0, 6).map(function (c) { return c.id + ' (' + c.type + ')' }).join(', '))
+    var lines = s.consumers.filter(function (c) { return c.type === 'gtceu:assembly_line' })
+    // GTM 7.5.3's only OpV-circuit recipes (UXV circuit assembler and scanner, crafting) are remade by integration/high_tier_machines.js,
+    // so an assembly line taking the tag only exists once a later OpV package adds one: strict then, a note before
+    if (lines.length === 0) note('assembly', 'no gtceu:assembly_line recipe takes #' + TAG + ' in this pack yet; the tag is proven through the consumers above')
+    else check('assembly', lines.every(function (c) { return c.accepts === true }), lines.length + ' assembly-line ingredients take #' + TAG + ', all accept the plain mainframe: ' + lines.slice(0, 10).map(function (c) { return c.id + ' ' + c.accepts }).join(', '))
     var makers = s.producers[MF]
     check('only_join', makers.length === 1 && makers[0] === JOIN, 'makers of ' + MF + ': ' + (makers.join(', ') || 'none'))
 
