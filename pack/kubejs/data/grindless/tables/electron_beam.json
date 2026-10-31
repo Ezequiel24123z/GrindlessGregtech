@@ -90,7 +90,10 @@
           "itemsOut": [{ "id": "grindless:pickup_array", "count": 1 }, { "id": "grindless:niobium_powder", "count": 1, "chance": 3000 }], "fluidsOut": [] },
         { "_why": "OpV-B2 (opv.md line 43; c23): the caged Ni chain is thawed in the beam's vacuum; the nickel falls out as dust and the cage part returns.", "name": "ni_chain_thaw", "circuit": 23, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:caged_ni_chain", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "gtceu:thawed_chain_nickel_dust", "count": 4 }, { "id": "grindless:cage_part", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "gtceu:thawed_chain_nickel_dust", "count": 4 }, { "id": "grindless:cage_part", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-A1 (opv.md line 6; c21): the chain mesh weave (OpV-A0, laminator c5) edge-welded into the belt; the PBO selvedge is trimmed off and re-spun in the UHV PBO plant (c9); the argon purge is 90% recovered.", "name": "mesh_belt_weld", "circuit": 21, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:chain_mesh_weave", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:welded_mesh_belt", "count": 1 }, { "id": "grindless:pbo_belt_trim", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
       ]
     },
     "single_crystal_casting": {

@@ -67,7 +67,7 @@ test('each machine: unique circuits, whole numbers, every row in the dump with i
     const rows = E.recipes.filter((r) => r.type === type);
     const circuits = rows.map((r) => r.circuit);
     assert.equal(new Set(circuits).size, circuits.length, type);
-    for (const r of rows.filter((x) => x.name !== 'bumper_weave')) { // UXV-B1's c7 row is newer than the dump
+    for (const r of rows.filter((x) => x.name !== 'bumper_weave' && x.name !== 'belt_trim_respin')) { // UXV-B1's c7 and OpV-A1's c9 rows are newer than the dump
       assert.ok(Number.isInteger(r.duration) && r.duration > 0 && Number.isInteger(r.eut) && r.eut > 0 && r.eut <= VA_UHV, r.name);
       const rec = recipes.find((x) => x.i === r.recipeId);
       assert.ok(rec, r.recipeId);
@@ -75,7 +75,7 @@ test('each machine: unique circuits, whole numbers, every row in the dump with i
       assert.deepEqual(circuitOf(rec), [r.circuit], r.name);
     }
   }
-  assert.deepEqual(E.recipes.filter((r) => r.type === 'pbo_synthesis').map((r) => r.name), ['nitrate', 'hydrolyse', 'reduce', 'polymerise', 'spin']);
+  assert.deepEqual(E.recipes.filter((r) => r.type === 'pbo_synthesis').map((r) => r.name), ['nitrate', 'hydrolyse', 'reduce', 'polymerise', 'spin', 'belt_trim_respin']); // OpV-A1 appended c9
   assert.deepEqual(E.recipes.filter((r) => r.type === 'tether_ribbon').map((r) => r.name), ['ribbon', 'climber', 'mh_tether', 'worn_tether_scrap', 'bumper_weave']); // UIV-B2 appended two, UXV-B1 one
 });
 

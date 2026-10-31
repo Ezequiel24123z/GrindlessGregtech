@@ -91,6 +91,18 @@
   TABLE.push(row('ir_target_rod', 'spark_plasma_sintering', 11, [item('grindless:five_n_iridium', 4)], [], [item('grindless:ir_target_rod', 1)], [], UHVA, 600))
   TABLE.push(row('li6h_tile', 'spark_plasma_sintering', 12, [item('grindless:li6_hydride', 2)], [], [item('grindless:li6h_tile', 1)], [], UHVA, 400))
   TABLE.push(row('tizrv_target', 'spark_plasma_sintering', 13, [item('grindless:tizrv_ingot', 4)], [], [item('grindless:tizrv_target', 1)], [], UHVA, 500))
+  // OpV-A1 (opv.md line 4): the densified chain preform sintered into two composite rods, the offcuts ground to SiC dust for the
+  // UHTC blend; four rods and a lamina stack sintered into the composite rotor. opv.md's c8-9 are UXV-A1's targets (uxv/superheavy.js)
+  // and c11-15 are OpV-A2's to A4's, so these are c16 and c17.
+  TABLE.push(row('chain_composite_rod', 'spark_plasma_sintering', 16, [item('grindless:densified_chain_preform', 1)], [],
+    [item('grindless:chain_composite_rod', 2), item(SIC, 1)], [], UHVA, 600))
+  TABLE.push(row('chain_composite_rotor', 'spark_plasma_sintering', 17,
+    [item('grindless:chain_composite_rod', 4), item('grindless:chain_lamina_stack', 1)], [], [item('grindless:chain_composite_rotor', 1)], [], UHVA, 800))
+  // OpV-A1 (opv.md line 7): the toothed flexspline sintered with a composite rod (wave generator) and a lamina stack (circular spline)
+  // into the harmonic drive (circuit 10).
+  TABLE.push(row('opv_harmonic_drive', 'spark_plasma_sintering', 10,
+    [item('grindless:toothed_flexspline_cup', 1), item('grindless:chain_composite_rod', 1), item('grindless:chain_lamina_stack', 1)], [],
+    [item('grindless:opv_harmonic_drive', 1)], [], UHVA, 800))
 
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
