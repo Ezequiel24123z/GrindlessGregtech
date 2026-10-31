@@ -111,10 +111,13 @@
   }
   function start(u) {
     var r = u.steps[u.step]
+    // a finished run re-arms itself from the inputs left in the bus: drop any such run before loading the next step
+    u.m.getRecipeLogic().resetRecipeLogic()
     inventory(u.bus, [['gtceu:programmed_circuit', 1, '{Configuration:' + r.circuit + '}']].concat(r.items))
     if (u.out) inventory(u.out, [])
     if (u.fin) u.fin.tank.setFluidInTank(0, r.fluid ? Fluid.of(r.fluid[0], r.fluid[1]).getFluidStack() : Fluid.of('minecraft:water', 0).getFluidStack())
     if (u.fout) u.fout.tank.setFluidInTank(0, Fluid.of('minecraft:water', 0).getFluidStack())
+    u.m.getRecipeLogic().updateTickSubscription()
     u.phase = 'running'
     u.started = S.tick
   }
@@ -160,12 +163,20 @@
     if (output(u, r)) {
       var rec = m.getRecipeLogic().getLastRecipe()
       check(r.recipe, !!rec && String(rec.id) === 'grindless:' + r.recipe, 'exact output obtained at Cygnus, recipe ' + (rec ? String(rec.id) : 'none'))
+      m.getRecipeLogic().resetRecipeLogic()
       inventory(u.bus, [])
       u.step++
       if (u.step === u.steps.length) u.phase = 'done'
       else { u.phase = 'settling'; u.started = S.tick }
     } else if (waited > r.duration + 300) {
-      check(r.recipe, false, 'missing output: ' + String(m.getRecipeLogic().getFailureReasons()))
+      var lg = m.getRecipeLogic()
+      var lr = lg.getLastRecipe()
+      var fi = u.fin ? u.fin.tank.getFluidInTank(0) : null
+      var fo = u.fout ? u.fout.tank.getFluidInTank(0) : null
+      check(r.recipe, false, 'missing output: ' + String(lg.getFailureReasons()) + '; status ' + lg.getStatus() + '; last ' + (lr ? String(lr.id) : 'none') +
+        '; progress ' + lg.getProgress() + '; fluid in ' + (fi && !fi.isEmpty() ? String(classes().Registries.FLUIDS.getKey(fi.getFluid())) + ' ' + fi.getAmount() : 'empty') +
+        ' cap ' + (u.fin ? u.fin.tank.getTankCapacity(0) : '-') + '; fluid out ' + (fo && !fo.isEmpty() ? String(classes().Registries.FLUIDS.getKey(fo.getFluid())) + ' ' + fo.getAmount() : 'empty') +
+        ' cap ' + (u.fout ? u.fout.tank.getTankCapacity(0) : '-'))
       u.phase = 'done'
     }
   }

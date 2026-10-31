@@ -151,15 +151,28 @@
       check('seed_refuses_voiding', !m.getRecipeLogic().isWorking() && count(S.input, 'grindless:pasta_core_sample') === 1 &&
         Number(S.fluid.tank.getFluidInTank(0).getAmount()) === 1000, 'c2 preserves catalyst and fireball while item voiding is enabled')
       S.fluid.tank.setFluidInTank(0, Fluid.of('minecraft:water', 0).getFluidStack())
+      m.getRecipeLogic().resetRecipeLogic()
       bus([Item.of('gtceu:programmed_circuit', 1, '{Configuration:3}'), Item.of('grindless:negative_strangelet_residue', 1)])
+      m.getRecipeLogic().updateTickSubscription()
       S.start = S.tick
       S.phase = 'disposal'
     }
+    if (S.phase === 'disposal') {
+      // GTM clears getLastRecipe() a tick after a run ends with nothing left to repeat, so the run is recorded while it happens
+      var lr = m.getRecipeLogic().getLastRecipe()
+      if (lr !== null && String(lr.id) === global.grindless.exoticMatter.disposalId) {
+        if (S.seenAt === undefined) S.seenAt = S.tick
+        S.progress = Math.max(S.progress || 0, Number(m.getRecipeLogic().getProgress()))
+        S.maxDur = Math.max(S.maxDur || 0, Number(m.getRecipeLogic().getMaxProgress()))
+      }
+    }
     if (S.phase === 'disposal' && S.tick - S.start >= 500) {
-      var last = m.getRecipeLogic().getLastRecipe()
-      check('negative_residue_disposed', last !== null && String(last.id) === global.grindless.exoticMatter.disposalId &&
-        count(S.input, 'grindless:negative_strangelet_residue') === 0,
-        'c3 consumes negative residue with voiding enabled; last ' + (last === null ? 'none' : String(last.id)))
+      var logic = m.getRecipeLogic()
+      var left = count(S.input, 'grindless:negative_strangelet_residue')
+      check('negative_residue_disposed', S.seenAt !== undefined && S.maxDur > 0 && S.progress >= S.maxDur - 1 && left === 0 && String(logic.getStatus()) !== 'WORKING',
+        'c3 ' + (S.seenAt === undefined ? 'never started' : 'started at +' + (S.seenAt - S.start) + ', progress reached ' + S.progress + ' of ' + S.maxDur) +
+        '; residue left ' + left + '; status ' + logic.getStatus() + '; reasons ' + array(logic.getFailureReasons()).join(' / ') +
+        '; voiding ' + m.getVoidingMode())
       check('no_material_output', count(S.output, 'grindless:strangelet_seed') === 0 &&
         count(S.output, 'grindless:negative_strangelet_residue') === 0, 'no seeds or residue discarded by other rows')
       finish()

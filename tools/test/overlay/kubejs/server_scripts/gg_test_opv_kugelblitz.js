@@ -176,18 +176,23 @@
       if (Number(c.chance) !== w[2] || Number(c.maxChance) !== w[3]) bad.push(w[0] + ' ' + w[1] + ': ' + c.chance + '/' + c.maxChance)
       if (w[0] === 'hawking_power/feed_exotic_matter' && w[1] === 'kugelblitz_core') core = c
     })
-    check('wear_json', bad.length === 0, bad.length ? bad.join('; ') : 'c1 core 1/64, c2 core 1/32, seed optics 1/64; both activated tile outputs 1250/10000')
+    check('wear_json', bad.length === 0, bad.length ? bad.join('; ') : 'builder-built rows hold c1 core 1/64, c2 core 1/32, seed optics 1/64 natively; both activated tile outputs 1250/10000')
+    var twins = ['gtceu:kugelblitz_forming/kugelblitz_seed', 'gtceu:hawking_power/evaporated_core_shell', 'gtceu:hawking_power/evaporated_core_shell_2'].filter(function (id) {
+      return S.server.getRecipeManager().byKey(new (classes().RL)(id)).isPresent()
+    })
+    check('no_auto_id_twins', twins.length === 0, twins.length ? 'GTM auto-id duplicates present: ' + twins.join(', ') : 'the fractional rows exist only under their grindless: ids')
     if (core === null) return
     try {
       var CL = Java.loadClass('com.gregtechceu.gtceu.api.recipe.chance.logic.ChanceLogic')
       var CB = Java.loadClass('com.gregtechceu.gtceu.api.recipe.chance.boost.ChanceBoostFunction')
+      var CAP = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability').CAP
       var one = new (classes().ArrayList)()
       one.add(core)
       var kept = 0
       var N = 20000
       for (var i = 0; i < N; i++) {
-        var got = null
-        try { got = CL.OR.roll(one, CB.OVERCLOCK, 0, 0, 0) } catch (e1) { got = CL.OR.roll(one, CB.OVERCLOCK, 0, 0) }
+        // GTM 7.5.3 signature: roll(cap, List<Content>, boostFunction, recipeTier, chanceTier, times)
+        var got = CL.OR.roll(CAP, one, CB.OVERCLOCK, 0, 0, 1)
         if (got !== null && got.size() > 0) kept++
       }
       // 1/64 of 20,000 = 312.5, sigma 17.5: accept 250..375 (3.5 sigma)
