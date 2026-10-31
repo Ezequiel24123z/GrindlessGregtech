@@ -23,7 +23,8 @@ const lang = read(path.join(kube, 'client_scripts', 'grindless', 'uev_electron_b
     + read(path.join(kube, 'client_scripts', 'grindless', 'uxv_spin_rows_lang.js')) // UXV-A3's c9-20 and c27-29
     + read(path.join(kube, 'client_scripts', 'grindless', 'opv_beam_hardware_lang.js')) // OpV-D1's c24-26 and c30-31
     + read(path.join(kube, 'client_scripts', 'grindless', 'opv_census_iv_lang.js')) // OpV-B2's c23 ni_chain_thaw
-    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_components_lang.js')); // OpV-A1's c21 mesh_belt_weld
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_components_lang.js')) // OpV-A1's c21 mesh_belt_weld
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_field_press_lang.js')); // OpV-A3's c22 W-Re can and its re-melt
 
 const GTM = new Set(['mixer', 'assembler', 'compressor', 'bender', 'macerator', 'chemical_reactor', 'electric_blast_furnace']);
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
@@ -315,6 +316,7 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     // OpV-D1's c24-26 and c30-31 (opv/beam_hardware.js; c31 takes A2's nbtin_film_wafer, opv/circuits.js)
     // OpV-B2's c23 returns UIV's cage_part (uiv/foundation.js); OpV packages register their items under startup_scripts/grindless/opv/
     // OpV-A1's c21 (mesh_belt_weld): its belt and trim are registered in opv/components.js
+    // OpV-A3's c22 rows (W-Re can and re-melt): the can items in opv/field_press.js, the chain lamina stack in opv/foundation.js
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'foundation.js'))
     + fs.readdirSync(path.join(kube, 'startup_scripts', 'grindless', 'opv')).filter((f) => f.endsWith('.js')).map((f) => read(path.join(kube, 'startup_scripts', 'grindless', 'opv', f))).join('\n');
   // OpV-B2's c23 thaws OpV-A0's caged_ni_chain and OpV-A1's c21 takes A0's chain_mesh_weave: both registered in opv/chain_matter.js

@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:field_frozen_press"],
+  "text": ["emi.grindless.info.field_frozen_press.0", "emi.grindless.info.field_frozen_press.1"]
+}
