@@ -25,7 +25,7 @@ test('the stand-in runs the UXV-A4 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(SD.skipped), []);
   assert.deepEqual(plain(SD.clashes), []);
-  assert.equal(SD.recipes.length, 12 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2); // MAX-B3 appended MTJ c22-23 (ar_coated_glass_cell, electroded_aod); MAX-A3 appended MTJ c16 (metallised_diamond); MAX-W one PLD row (c4 thick_rebco_tape); MAX-A1 appended MTJ c13-14 (coated_metalens, nb_coplanar_film); MAX-H1 appended MTJ c20 mram_stack_sic (line 38); OpV-A2 appended MTJ c5-8; OpV-D1 two more (c9 ta_clad_ir_rod, c10 neg_coated_chamber); OpV-B1 two more (c11 tetron_bumps, c12 wc_sic_multilayer)
+  assert.equal(SD.recipes.length, 12 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1); // MAX-A4 one PLD row (c5 thick_film_fcl_tape); MAX-B3 appended MTJ c22-23 (ar_coated_glass_cell, electroded_aod); MAX-A3 appended MTJ c16 (metallised_diamond); MAX-W one PLD row (c4 thick_rebco_tape); MAX-A1 appended MTJ c13-14 (coated_metalens, nb_coplanar_film); MAX-H1 appended MTJ c20 mram_stack_sic (line 38); OpV-A2 appended MTJ c5-8; OpV-D1 two more (c9 ta_clad_ir_rod, c10 neg_coated_chamber); OpV-B1 two more (c11 tetron_bumps, c12 wc_sic_multilayer)
 });
 
 test('5 items registered by the startup file, named in en_us and es_es', () => {
@@ -68,7 +68,7 @@ test('the MTJ sputter rows: circuits 1-4, figures, spent target and scrap powder
 });
 
 test('the oxide PLD rows: circuits 1-3, the laser kept, RuO4 and BFO fume as byproducts', () => {
-  const rows = SD.recipes.filter((r) => r.type === 'pulsed_laser_deposition' && r.name !== 'thick_rebco_tape'); // MAX-W's c4 row is proved by max-wireless.test.mjs
+  const rows = SD.recipes.filter((r) => r.type === 'pulsed_laser_deposition' && r.name !== 'thick_rebco_tape' && r.name !== 'thick_film_fcl_tape'); // MAX-W's c4 row is proved by max-wireless.test.mjs, MAX-A4's c5 row by max-parts.test.mjs
   assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['srruo3_electrode', 1], ['bfo_film', 2], ['me_switch', 3]]);
   for (const r of rows) {
     assert.deepEqual(plain(r.kept.map((x) => x.id)), ['grindless:krf_excimer_laser'], `${r.name}: the laser is not consumed`);
@@ -132,7 +132,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('no older row written: no recipe of this package sits in another package\'s file', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_deposition\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 2 + 1 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2, 'rows, MAX-B3\'s MTJ c22-23, MAX-A3\'s MTJ c16, MAX-B1\'s MTJ c15, two controllers, the laser, OpV-A2\'s MTJ c5-8, OpV-D1\'s two MTJ rows, OpV-B1\'s two MTJ rows, MAX-H1\'s MTJ c20, MAX-A1\'s MTJ c13-14, MAX-W\'s PLD row');
+  assert.equal(mine.length, 12 + 2 + 1 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1, 'rows, MAX-A4's PLD row c5, MAX-B3\'s MTJ c22-23, MAX-A3\'s MTJ c16, MAX-B1\'s MTJ c15, two controllers, the laser, OpV-A2\'s MTJ c5-8, OpV-D1\'s two MTJ rows, OpV-B1\'s two MTJ rows, MAX-H1\'s MTJ c20, MAX-A1\'s MTJ c13-14, MAX-W\'s PLD row');
 });
 
 test('structures: not boring, at least two functional kinds, controller in the front slice', () => {
