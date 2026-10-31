@@ -4,8 +4,8 @@
 // canister, the tether and the worn segment are F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/winch.js.
 //
 //   gtceu:geroch_winch   9 x 33 x 9 tower of geroch drum casing over a tether well, a GENERATOR (G.generators.configure) on one or two OpV
-//                        dynamo hatches. Recipe type gtceu:geroch_power: circuit 1 lowers a canister (2^30 EU/t out, 2,400 t, a worn tether
-//                        segment now and then), circuit 2 reworks a worn segment into the tether.
+//                        dynamo hatches. Recipe type gtceu:geroch_power: circuit 1 lowers a canister (2^30 EU/t out, 2,400 t, the horizon tether worn 1/128 in and a spent
+//                        segment 1/128 out), a worn segment is rebuilt into the tether in an assembler (a generator cannot run a consumer row).
 //
 // Textures: tools/assets/Build-MaxWinchTextures.ps1. Names: client_scripts/grindless/max_winch_lang.js.
 // Published for the recipe script: global.grindless.maxWinch.

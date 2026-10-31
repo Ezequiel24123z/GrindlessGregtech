@@ -132,7 +132,10 @@
           "itemsOut": [{ "id": "grindless:sic_dish_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
         { "_why": "MAX-R1 (max.md, L36 step 4, c15): the Ta-Hf-C billet sealed against the bloom's volatiles by a pyrolytic carbon layer from methane, the furnace's hearth liner; the hydrogen goes back to stock.", "name": "sealed_hearth_liner", "circuit": 15, "eut": 1966080, "duration": 4800,
           "itemsIn": [{ "id": "grindless:ta_hf_c_billet", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:sealed_hearth_liner", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
+          "itemsOut": [{ "id": "grindless:sealed_hearth_liner", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
+        { "_why": "MAX-E1 (max.md, L42 step 3, c16): a SiC mirror tow densified with pyrolytic SiC into the grazing-incidence shell of a Wolter mirror; the hydrogen goes back to stock.", "name": "sic_grazing_shell", "circuit": 16, "eut": 1966080, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:sic_mirror_tow", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_grazing_shell", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
       ]
     },
     "chemical_reactor": {

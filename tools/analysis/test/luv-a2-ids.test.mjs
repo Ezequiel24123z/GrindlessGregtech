@@ -52,7 +52,9 @@ const OPV_D1 = ['grindless:decladded_ir_core', 'grindless:ir_spallation_residue'
 const OPV_A2 = ['grindless:gold_overspray', 'gtceu:small_gold_dust'];
 // MAX-R1's platinum plant row (circuit 18): the furnace's PGM residue (startup_scripts/grindless/max/foundation.js)
 const MAX_R1 = ['grindless:pgm_residue'];
-const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4, ...UEV_B3, ...UIV_B2, ...UXV_A2, ...OPV_D1, ...OPV_A2, ...MAX_R1]);
+// MAX-E1's platinum plant rows (circuits 19-20, L42): the iridium sponge and the spent Wolter module (startup_scripts/grindless/max/foundation.js)
+const MAX_E1 = ['grindless:iridium_sponge', 'grindless:spent_wolter_module'];
+const ITEMS = new Set([...IDS.items, ...A1, ...ZPM_A2, ...UEV_A4, ...UEV_B3, ...UIV_B2, ...UXV_A2, ...OPV_D1, ...OPV_A2, ...MAX_R1, ...MAX_E1]);
 const FLUIDS = new Set([...IDS.fluids, 'gtceu:nitric_acid', 'gtceu:diluted_hydrochloric_acid']);
 
 function strictRun(scripts, startup, recipes, before) {
