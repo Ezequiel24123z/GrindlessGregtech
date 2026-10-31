@@ -56,12 +56,12 @@ test('the pattern: one controller in the front slice, 7 x 7 x 5, GTM part limits
 
 test('six recipes: one circuit each, the ZPM ones ZPM VA bound, the UV cell UV VA bound, the UHV cell UHV VA bound and the UEV cell UEV VA bound, each cell is its row\'s cell, the charge is not consumed', () => {
   // UIV-A2 appends c7, the metallic hydrogen winding (UEV VA, in the cells' helium charge); UXV-B3 appends c9, the strand coil
-  assert.deepEqual(MW.recipes.map((r) => [r.name, r.circuit]), [['zpm_smes_cell', 1], ['urhnq2_wire', 2], ['hts_insert', 3], ['uv_smes_cell', 4], ['uhv_smes_cell', 5], ['uev_smes_cell', 6], ['mh_winding', 7], ['tetrataenite_rotor', 8], ['multipole_encoder_ring', 10], ['strand_coil', 9]]);
+  assert.deepEqual(MW.recipes.map((r) => [r.name, r.circuit]), [['zpm_smes_cell', 1], ['urhnq2_wire', 2], ['hts_insert', 3], ['uv_smes_cell', 4], ['uhv_smes_cell', 5], ['uev_smes_cell', 6], ['mh_winding', 7], ['tetrataenite_rotor', 8], ['multipole_encoder_ring', 10], ['strand_coil', 9], ['braced_smes_toroid', 11]]);
   for (const p of MW.recipes) {
     const r = byId(p.recipeId);
     assert.ok(r, p.recipeId + ' added');
     assert.equal(r.t, 'gtceu:naquadria_magnets');
-    assert.ok(Number.isInteger(p.duration) && p.duration > 0 && p.eut <= (p.name === 'uev_smes_cell' || p.name === 'mh_winding' || p.name === 'tetrataenite_rotor' || p.name === 'multipole_encoder_ring' || p.name === 'strand_coil' ? 64 * ZPM_VA : p.name === 'uhv_smes_cell' ? 16 * ZPM_VA : p.name === 'uv_smes_cell' ? 4 * ZPM_VA : ZPM_VA), p.name);
+    assert.ok(Number.isInteger(p.duration) && p.duration > 0 && p.eut <= (p.name === 'uev_smes_cell' || p.name === 'mh_winding' || p.name === 'tetrataenite_rotor' || p.name === 'multipole_encoder_ring' || p.name === 'strand_coil' || p.name === 'braced_smes_toroid' ? 64 * ZPM_VA : p.name === 'uhv_smes_cell' ? 16 * ZPM_VA : p.name === 'uv_smes_cell' ? 4 * ZPM_VA : ZPM_VA), p.name);
     const text = JSON.stringify(r.j);
     if (p.charge) assert.match(text, /liquid_helium/, p.name + ' carries the charge');
     else assert.doesNotMatch(text, /liquid_helium/, p.name + ' needs no charge');

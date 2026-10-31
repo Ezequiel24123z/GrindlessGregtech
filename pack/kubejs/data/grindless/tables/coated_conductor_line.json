@@ -64,6 +64,20 @@
       "itemsOut": [{ "id": "grindless:strand_tape", "count": 4 }],
       "eut": 1966080,
       "duration": 300
+    },
+    {
+      "name": "smes_buffered_tape",
+      "step": "tape",
+      "_why": "MAX-W (docs/eras/max.md, L27 step 1): ITBTC coated conductor laminated with strand tape under an epoxy bond, the buffered tape the SMES toroid is wound from.",
+      "circuit": 7,
+      "itemsIn": [
+        { "id": "grindless:itbtc_coated_conductor", "count": 4 },
+        { "id": "grindless:strand_tape", "count": 4 }
+      ],
+      "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }],
+      "itemsOut": [{ "id": "grindless:smes_buffered_tape", "count": 4 }],
+      "eut": 7864320,
+      "duration": 400
     }
   ]
 }
