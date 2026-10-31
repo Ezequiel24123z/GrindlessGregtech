@@ -159,6 +159,19 @@
       if (!/energy_input_hatch/.test(c.id)) return
       if (energy < want) { c.id = HATCH; energy++ } else { c.id = casing; c.props = '' }
     })
+    // the preview shape shows one energy cell (min 1, max 2): a second hatch goes on a casing cell beside it, on the same floor row
+    var firstE = parsed.filter(function (c) { return c.id === HATCH })[0]
+    while (firstE && energy < want) {
+      var spare = parsed.filter(function (c) { return c.id === casing && c.y === firstE.y && Math.abs(c.x - firstE.x) + Math.abs(c.z - firstE.z) === 1 })[0]
+      if (!spare) break
+      spare.id = HATCH
+      spare.props = firstE.props
+      energy++
+    }
+    // the first row takes two fluids (ferric chloride and the liquid nitrogen charge): a second fluid input hatch on the casing cell beside the first
+    var firstH = parsed.filter(function (c) { return /^gtceu:[a-z0-9]+_input_hatch$/.test(c.id) })[0]
+    var spareH = firstH && parsed.filter(function (c) { return c.id === casing && c.y === firstH.y && Math.abs(c.x - firstH.x) + Math.abs(c.z - firstH.z) === 1 })[0]
+    if (spareH) { spareH.id = firstH.id; spareH.props = firstH.props }
     parsed.forEach(function (c) {
       if (/input_bus/.test(c.id)) c.id = 'gtceu:hv_input_bus'
       else if (/output_bus/.test(c.id)) c.id = 'gtceu:hv_output_bus'
