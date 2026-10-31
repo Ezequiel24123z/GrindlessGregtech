@@ -1,3 +1,4 @@
+// priority: -5663
 // Gregtech Grindless - smoke test of MAX's wireless tier (package MAX-W; TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): the MAX row of tables/wireless_energy.json (registered by lv/wireless_energy.js, withTiers case 14), max/wireless.js
 // and line L27's rows on the older machines.

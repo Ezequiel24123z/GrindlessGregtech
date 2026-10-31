@@ -1,3 +1,4 @@
+// priority: -5466
 // MAX travel (package MAX-F1, docs/eras/max.md "Places and site rules" and "Bridges"): the two tier-14 places the warp gate reaches,
 // c14 (the launched GC relay probe) to Sgr A*'s orbit and c15 (the launched belt seed) to the nuclear star cluster's belt.
 // No item is registered here: the probe and seed are max/foundation.js's. No gate row, recipe or grant is written here either.

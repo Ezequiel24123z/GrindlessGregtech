@@ -225,7 +225,7 @@ export function tierComponent(id) {
   const m = FAMILY_RE.exec(String(id));
   if (!m || !TIER_PREFIX.has(m[2])) return null;
   const tier = TIER_PREFIX.get(m[2]);
-  if (m[1] === 'grindless' && (tier < 10 || tier > 12)) return null;
+  if (m[1] === 'grindless' && (tier < 10 || tier > 14)) return null;
   return { tier, family: m[3] };
 }
 

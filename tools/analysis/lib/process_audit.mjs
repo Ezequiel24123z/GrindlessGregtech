@@ -29,8 +29,8 @@ export const KINDS = [
   'cycle_gain',
   'trivial_step',
 ];
-const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv'];
-const TIER_ERA = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv'];
+const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+const TIER_ERA = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
 const OURS_NS = ['grindless'];
 // GT forms that are used by placing or wearing them, not by a recipe: no use is expected.
 const PLACED_OR_WORN = /(_casing|_block|_glass|_coil_block|_frame|_fuel_tank|_cell|_vault|_radiator|_pipe|_wire|_cable|_hatch|_bus|_sword|_pickaxe|_axe|_shovel|_hoe|_helmet|_chestplate|_leggings|_boots|_key|_pump|_turbine_rotor|_drill|_antenna)$/;
