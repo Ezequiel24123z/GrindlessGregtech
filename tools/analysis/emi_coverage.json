@@ -86,7 +86,10 @@
   "exceptions": [
   ],
   "pendingRoutes": [
-    { "id": "grindless:hot_cell/spent_ir_target_decladding", "reason": "OpV-D1 declads the spent Ir target; grindless:spent_ir_target is held until B3's spallation target station makes it: B3 deletes this entry with its hold rule" }
+    { "id": "grindless:hot_cell/spent_ir_target_decladding", "reason": "OpV-D1 declads the spent Ir target; grindless:spent_ir_target is held until B3's spallation target station makes it: B3 deletes this entry with its hold rule" },
+    { "id": "grindless:pgm_refining/opv/ir_core_recovery", "reason": "OpV-D1 recovers iridium from grindless:decladded_ir_core, held (with grindless:ir_spallation_residue) until B3 makes grindless:spent_ir_target for the hot cell c18: B3 deletes this entry with D1's hold rule" },
+    { "id": "grindless:pgm_refining/opv/ir_spallation_residue", "reason": "OpV-D1 refines grindless:ir_spallation_residue, held until B3 makes grindless:spent_ir_target for the hot cell c18: B3 deletes this entry with D1's hold rule" },
+    { "id": "grindless:electric_blast_furnace/opv/spent_li6_shield_bakeout", "reason": "OpV-D1 bakes out grindless:spent_li6_shield (B3) into li6_hydride and bred_tritium_gas, held until B3 makes the spent shield: B3 deletes this entry with D1's hold rule" }
       ],
   "pendingUses": [
     { "id": "grindless:be_beam_window", "package": "B3", "reason": "OpV-D1 makes it; B3's antimatter beam lines use it" },

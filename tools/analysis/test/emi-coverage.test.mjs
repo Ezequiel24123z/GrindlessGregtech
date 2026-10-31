@@ -371,8 +371,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // 61 since UIV-B3: the Moon cryogenic plant's 6N neon row; 62 since UXV-A2: the same plant's 6N helium-6 row (cryogenic_processing/he_6n);
   // 64 since UXV-B2: the same plant's triple-alpha and oxygen burning fuel rows (their feed was held until B2 wrote the stellar cuts);
   // 65 since OpV-D1: the Moon tritium removal plant's bred tritium gas row (the baked-out Li-6 shield's gas); 66 since OpV-A1: the Moon
-  // cryogenic plant's liquid helium-3 row (the superfluid seal's feed)
-  assert.equal(markerDropped.length, 66, markerDropped.map((d) => d.id).join('\n'));
+  // cryogenic plant's liquid helium-3 row (the superfluid seal's feed); 65 since OpV-I1: OpV-D1's bred tritium gas is held until B3
+  // (its spent Li-6 shield), so the tritium removal plant's bred tritium gas row carries only hidden stacks until B3 drops the hold (66 again)
+  assert.equal(markerDropped.length, 65, markerDropped.map((d) => d.id).join('\n'));
   assert.ok(markerDropped.every((d) => d.disabledBy.every((b) => b.startsWith('dimension marker '))));
   const now = new Map(fixtureExpectations(packRun.res).items.map((e) => [e.id, e]));
   const lost = [];
@@ -396,8 +397,9 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // + 1 since UXV-A2: the same plant's 6N helium-6 row (6N helium-6 made); + 5 since UXV-B2: the same plant's triple-alpha and oxygen
   // burning fuel rows (stellar helium cut and oxygen-16 used; triple-alpha fuel, oxygen-16 and oxygen burning fuel made); + 1 since OpV-D1:
   // the Moon tritium removal plant's bred tritium gas row (bred tritium gas used; its tritium and helium-3 roles there were already counted);
-  // + 2 since OpV-A1: the Moon cryogenic plant's liquid helium-3 row (6N helium-3 used, liquid helium-3 made)
-  assert.equal(lost.length, 104, lost.join('\n'));
+  // + 2 since OpV-A1: the Moon cryogenic plant's liquid helium-3 row (6N helium-3 used, liquid helium-3 made); - 1 since OpV-I1: bred tritium
+  // gas is held until B3, so its use there is not audited until B3 drops the hold (104 again)
+  assert.equal(lost.length, 103, lost.join('\n'));
   for (const route of ['grindless:mars_chart made in gtceu:deep_space_tracking', 'grindless:vein_sample_ice_mars used in gtceu:vein_drilling',
     'gtceu:liquid_nitrogen made in gtceu:cryogenic_processing', 'gtceu:heavy_water made in gtceu:detritiation',
     'grindless:titanium_drill_bit used in gtceu:vein_drilling', 'grindless:martian_quantum_seed made in gtceu:chemical_reactor']) {
