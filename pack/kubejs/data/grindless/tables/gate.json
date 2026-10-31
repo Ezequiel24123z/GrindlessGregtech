@@ -120,6 +120,24 @@
           "itemsIn": [{ "id": "grindless:pathfinder_probe", "count": 1 }],
           "kept": [],
           "itemsOut": [{ "id": "grindless:launched_pathfinder", "count": 1 }]
+        },
+        {
+          "_why": "OpV-G1: the gate to MAX (docs/eras/opv.md \"Gate to MAX\"). The SGR relay forwards the MAX throw: the hold burns a Kugelblitz core and the launched bulge seed, keeps the census, exotic matter, tetron array, census IV, bulge chart and four cosmic mainframes, and writes the Sgr A* chart that researches gtceu:max_machine_casing. 2^33 EU/t is the whole case 13 network through two OpV 16 A hatches (tune the duration).",
+          "name": "hold_sgr_a",
+          "circuit": 13, "eut": 8589934592, "duration": 1200, "site": "cygnus_x1_orbit",
+          "itemsIn": [
+            { "id": "grindless:kugelblitz_core", "count": 1 },
+            { "id": "grindless:launched_bulge_seed", "count": 1 }
+          ],
+          "kept": [
+            { "id": "grindless:bulge_light_census", "count": 1 },
+            { "id": "grindless:stable_exotic_matter", "count": 1 },
+            { "id": "grindless:tetron_array", "count": 1 },
+            { "id": "grindless:superheavy_census_iv", "count": 1 },
+            { "id": "grindless:bulge_chart", "count": 1 },
+            { "id": "gtnn:cosmic_mainframe", "count": 4 }
+          ],
+          "itemsOut": [{ "id": "grindless:sgr_a_chart", "count": 1 }]
         }
       ]
     },
