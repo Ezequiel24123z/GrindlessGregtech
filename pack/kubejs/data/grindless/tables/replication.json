@@ -1,0 +1,16 @@
+{
+  "_": "OpV-R2 (docs/eras/opv.md, machines 14-16, lines 38-39): the replication chain at Terzan 5 core. Read by server_scripts/grindless/opv/replication.js. Amounts per run; \"site\" true locks the row to Terzan 5 core; \"kept\" is not consumed.",
+  "types": {
+    "debris_harvesting": {
+      "dataKey": "grindless_debris_harvesting",
+      "recipes": [
+        { "name": "bulge_debris_harvest", "circuit": 1, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [], "kept": [{ "id": "gtceu:opv_sensor", "count": 1 }], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:bulge_debris", "count": 4 }], "fluidsOut": [] },
+        { "name": "debris_fractions", "circuit": 2, "eut": 268435456, "duration": 200, "site": true,
+          "itemsIn": [{ "id": "grindless:bulge_debris", "count": 4 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:metal_debris_fraction", "count": 2 }, { "id": "grindless:silicate_debris_fraction", "count": 2 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}
