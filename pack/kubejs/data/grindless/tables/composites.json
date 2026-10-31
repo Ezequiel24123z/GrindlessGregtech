@@ -76,7 +76,10 @@
           "itemsOut": [{ "id": "grindless:sic_fibre", "count": 1 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 500 }, { "id": "gtceu:hydrogen", "amount": 1000 }] },
         { "_why": "MAX-A2 line L10 (c18): four SiC fibres drawn together under argon into the tow the rod and rotor are woven from.", "name": "sic_tow", "circuit": 18, "eut": 1966080, "duration": 500,
           "itemsIn": [{ "id": "grindless:sic_fibre", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:sic_tow", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:sic_tow", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-D2 (max.md, L21 step 1, c19): six SiC fibres drawn together under argon into the heavy tow a mirror blank is woven from.", "name": "sic_mirror_tow", "circuit": 19, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:sic_fibre", "count": 6 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_mirror_tow", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "chemical_vapour_infiltration": {
@@ -120,7 +123,10 @@
           "itemsOut": [{ "id": "grindless:cmc_coil_former", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
         { "_why": "MAX-A2 line L10 (c13): the SiC tow woven and densified from methyltrichlorosilane into the SiC/SiC preform; the HCl goes back to stock.", "name": "sic_sic_preform", "circuit": 13, "eut": 1966080, "duration": 4800,
           "itemsIn": [{ "id": "grindless:sic_tow", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:sic_sic_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] }
+          "itemsOut": [{ "id": "grindless:sic_sic_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
+        { "_why": "MAX-D2 (max.md, L21 step 2, c14): the mirror tow woven and densified from methyltrichlorosilane into the SiC dish blank; the HCl goes back to stock.", "name": "sic_dish_blank", "circuit": 14, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:sic_mirror_tow", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_dish_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] }
       ]
     },
     "chemical_reactor": {

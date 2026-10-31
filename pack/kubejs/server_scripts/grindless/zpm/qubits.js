@@ -186,6 +186,14 @@
     itemsOut: [{ id: 'grindless:boron_delta_diamond', count: 1 }], fluidsOut: [],
     eut: 491520, duration: 800
   })
+  // MAX-D2 (max.md, L21 step 3): the SiC dish blank ion-figured to its mirror surface (ion_implantation circuit 16; c11 is the delta layer above)
+  TABLE.push({
+    name: 'figured_dish_blank', type: 'ion_implantation', circuit: 16,
+    itemsIn: [{ id: 'grindless:sic_dish_blank', count: 1 }], notConsumedItems: [],
+    fluidsIn: [{ id: 'gtceu:argon', amount: 100 }],
+    itemsOut: [{ id: 'grindless:figured_dish_blank', count: 1 }], fluidsOut: [],
+    eut: 491520, duration: 1200
+  })
 
   Q.recipes = TABLE.map(function (t) {
     return {
