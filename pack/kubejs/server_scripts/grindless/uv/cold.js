@@ -93,7 +93,11 @@
     // MAX-D4 (docs/eras/max.md, line 14 step 4): turned pellet cores jacketed in RRR niobium on a copper backing under nitrogen (c9: 1-8 are
     // taken, the contract's c7 is solid_neon_cone); the trim goes to the scrap loop
     { name: 'pellet_jacket', type: 'srf_cavity', circuit: 9, itemsIn: [item('grindless:turned_pellet_core', 8), item(SHEET, 2), item('gtceu:copper_plate', 1)],
-      fluidsIn: [fluid('gtceu:nitrogen', 500)], itemsOut: [item('grindless:sc_jacketed_pellet', 8), item(SCRAP, 1)], fluidsOut: [], eut: VA, duration: 400 }
+      fluidsIn: [fluid('gtceu:nitrogen', 500)], itemsOut: [item('grindless:sc_jacketed_pellet', 8), item(SCRAP, 1)], fluidsOut: [], eut: VA, duration: 400 },
+    // MAX-G1 (docs/eras/max.md, line 18 step 2): the clock reference sets the target frequency of a niobium cavity pressed from RRR sheet on
+    // an SRF cavity blank under nitrogen (c10: 1-9 are taken); the trim goes to the scrap loop
+    { name: 'max_srf_cavity', type: 'srf_cavity', circuit: 10, itemsIn: [item('grindless:thorium_clock_reference', 1), item(CAVITY, 1), item(SHEET, 2)],
+      fluidsIn: [fluid('gtceu:nitrogen', 100)], itemsOut: [item('grindless:max_srf_cavity', 1), item(SCRAP, 1)], fluidsOut: [], eut: VA, duration: 600 }
   ]
 
   // side steps on GTM's own machines
@@ -112,7 +116,12 @@
     { name: 'srf_cryomodule_block', type: 'assembler', circuit: null,
       itemsIn: [item(CRYOMODULE, 1), item('gtceu:tritanium_plate', 4), item(SHIELD, 1)],
       fluidsIn: [fluid('gtceu:soldering_alloy', 144), fluid(LIQUID_HELIUM, 1000)],
-      itemsOut: [item(CRYOMODULE_BLOCK, 1)], fluidsOut: [], eut: VA, duration: 300 }
+      itemsOut: [item(CRYOMODULE_BLOCK, 1)], fluidsOut: [], eut: VA, duration: 300 },
+    // MAX-G1 (docs/eras/max.md, line 18 step 3): a MAX SRF cavity electropolished in the acid bath, as real niobium cavities are; the spent
+    // acid goes to the electrolyzer row above
+    { name: 'polished_srf_cavity', type: 'chemical_bath', circuit: null,
+      itemsIn: [item('grindless:max_srf_cavity', 1)], fluidsIn: [fluid(ACID, 500)],
+      itemsOut: [item('grindless:polished_srf_cavity', 1)], fluidsOut: [fluid(SPENT, 500)], eut: VA, duration: 400 }
   ]
 
   C.recipes = TABLE.map(function (t) {

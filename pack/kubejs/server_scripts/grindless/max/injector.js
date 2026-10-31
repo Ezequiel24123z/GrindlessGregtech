@@ -61,7 +61,7 @@
     // G1's shell rings: four bundles held in a frame
     { type: 'assembler', name: 'stream_bundle_block', circuit: 13,
       items: ['4x grindless:stream_bundle', 'gtceu:tungsten_steel_frame'],
-      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['grindless:stream_bundle_block'], eut: OPV_VA, duration: 200 }
+      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['grindless:stream_bundle_block'], eut: VA_MAX, duration: 200 }
   ]
 
   function missingOf(items, fluids) {
