@@ -26,12 +26,12 @@ const VA_UXV = 125829120;
 const SOURCE = 'grindless:cygnus_x1_orbit';
 const gateRows = () => table('gate.json').types.warp_gate.recipes;
 
-test('the stand-in runs bulge_relay.js without errors; the seed and the hull are made and nothing is skipped', () => {
+test('the stand-in runs bulge_relay.js without errors; the seed, the hull and the strand cable are made and nothing is skipped', () => {
   const errs = run.errors.filter((e) => /bulge_relay|opv[\\/]/.test(String(e.file)));
   assert.deepEqual(errs, [], errs.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   const B = plain(run.global.grindless.opvBulgeRelay);
   assert.deepEqual(B.skipped, []);
-  assert.deepEqual(B.recipes, ['grindless:assembly_line/bulge_relay_seed', 'grindless:assembly_line/opv_machine_hull']);
+  assert.deepEqual(B.recipes, ['grindless:assembly_line/bulge_relay_seed', 'grindless:assembly_line/opv_machine_hull', 'grindless:assembler/chain_strand_single_cable']);
   assert.deepEqual(plain(B.hull), { cable: 'gtceu:chain_strand_single_cable', helium: 'gtceu:superfluid_helium_3' });
   assert.equal(B.jump, 'hold_sgr1806');
   assert.equal(B.place, 'sgr1806');
@@ -146,7 +146,7 @@ test('the zone row: band X 37824-37887, Z 0-63, Y 98-115, its test, inside no ot
   assert.deepEqual(zone.x, [37824, 37887]);
   assert.deepEqual(zone.z, [0, 63]);
   assert.deepEqual(zone.y, [98, 115]);
-  assert.deepEqual(zone.tests, ['opv_bulge_relay']);
+  assert.deepEqual(zone.tests, ['opv_bulge_relay', 'opv_chain_matter']);
   assert.match(zone.note, /^OpV-A0:/);
   for (const o of rows) {
     if (o === zone || !Array.isArray(o.x)) continue

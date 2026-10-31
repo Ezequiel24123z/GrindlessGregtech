@@ -11,7 +11,7 @@
 //          kept      bulge_relay.js keeps the run (opvBulgeHold); 1,500 ticks into the 2,400 there is no platform yet; PHASE1
 //   leg 2  the gate still holds the c11 recipe after the restart, bulge_relay.js gave the run back, the platform is placed and its far ring formed,
 //          the hold is released, the launched seed reaches the output bus and the bulge chart stays in the input bus.
-// Not covered: the four UXV pasta machines running the chain rows at SGR (the chain matter commit is blocked: its ids are not registered).
+// Not covered here: the four UXV pasta machines running the chain rows at SGR (gg_test_opv_chain_matter, same band, in grindless:sgr1806_orbit).
 (function () {
   var REQUEST = 'ggTestOpvBulgeRelayRequest'
   var STATE = 'ggTestOpvBulgeRelay'
