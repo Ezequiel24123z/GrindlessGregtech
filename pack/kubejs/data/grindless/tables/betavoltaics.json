@@ -57,6 +57,19 @@
           "fluidsIn": [{ "id": "gtceu:depleted_nickel_plating_liquor", "amount": 1000 }],
           "itemsOut": [{ "id": "gtceu:nickel_dust", "count": 2 }],
           "fluidsOut": [{ "id": "gtceu:nitric_acid", "amount": 1000 }]
+        },
+        {
+          "_why": "MAX-E1 (max.md, L26 step 3, c4): a pin diamond plate is plated with nickel-63 as the XUV panel's diode; the liquor comes back depleted for the strip bath (c3)",
+          "name": "diamond_photocell",
+          "circuit": 4,
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:pin_diamond_plate", "count": 2 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:nickel_63_plating_liquor", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:diamond_photocell", "count": 2 }],
+          "fluidsOut": [{ "id": "gtceu:depleted_nickel_plating_liquor", "amount": 1000 }]
         }
       ]
     },

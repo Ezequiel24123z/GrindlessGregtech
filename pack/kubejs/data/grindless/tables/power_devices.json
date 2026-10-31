@@ -226,6 +226,23 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:red_tuned_solar_array", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-E1 (max.md, L26 step 5, c4): metallised diamond photocells, cerium coverglass and a SiC power module laminated into the XUV collector panel",
+          "name": "xuv_collector_panel",
+          "circuit": 4,
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:metallised_photocell", "count": 4 },
+            { "id": "grindless:cerium_coverglass", "count": 2 },
+            { "id": "grindless:sic_power_module", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:silicone_rubber", "amount": 144 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:xuv_collector_panel", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },

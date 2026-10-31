@@ -80,7 +80,10 @@
     row('excavator_bucket_drum', 'assembler', null,
       [item('gtceu:tungsten_steel_plate', 6), item('gtceu:naquadah_alloy_plate', 2), item('gtceu:tungsten_steel_frame', 1), item('grindless:nbn_coated_sic_plate', 1), item('grindless:mu_metal_shield', 1)],
       [fluid('gtceu:soldering_alloy', 144), fluid('gtceu:lubricant', 250)],
-      [item(DRUM, 1)], [], 30720, 400)
+      [item(DRUM, 1)], [], 30720, 400),
+    // MAX-E1 (max.md, L25 step 2, c8): the belt's silicate slag baked in sunlight until its volatiles leave; the sulfur is collected
+    row('devolatilised_slag', VAPOUR, 8, [item('grindless:silicate_slag', 8)], [],
+      [item('grindless:devolatilised_slag', 4), item('gtceu:sulfur_dust', 1)], [], 30720, 400, { site: SITE, daylight: true })
   ]
 
   function missingIds(r) {
