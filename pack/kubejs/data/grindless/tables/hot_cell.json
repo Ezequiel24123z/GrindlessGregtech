@@ -289,6 +289,17 @@
       "fluidsIn": [],
       "itemsOut": [{ "id": "gtceu:calcium_dust", "count": 1 }, { "id": "gtceu:small_tungsten_dust", "count": 2 }],
       "fluidsOut": []
+    },
+    {
+      "_why": "OpV-R1 line 42 (contract c20): four GaN MMIC tiles take a neutron burst from a Pu-Be source (returned); three pass the rad-hard test, one is rejected.",
+      "name": "rad_hard_test",
+      "circuit": 20,
+      "eut": 7680,
+      "duration": 600,
+      "itemsIn": [{ "id": "grindless:gan_mmic_tile", "count": 4 }, { "id": "grindless:pube_neutron_source", "count": 1 }],
+      "fluidsIn": [],
+      "itemsOut": [{ "id": "grindless:tested_mmic_tile", "count": 3 }, { "id": "grindless:rejected_mmic_tile", "count": 1 }, { "id": "grindless:pube_neutron_source", "count": 1 }],
+      "fluidsOut": []
     }
   ]
 }

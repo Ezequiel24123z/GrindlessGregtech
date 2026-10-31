@@ -255,6 +255,24 @@
       itemsOut: [{ id: 'grindless:ejecta_ti_fraction_dust', count: 1 }, { id: 'gtceu:wollastonite_dust', count: 1 }, { id: 'gtceu:pyrite_dust', count: 1 }],
       fluidsOut: [{ id: 'gtceu:kerosene', amount: 950 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 3000 }],
       eut: 1920, duration: 100
+    },
+    // OpV-R1 (line 41, c28): timing heads that failed burn-in are leached back to silicon and copper
+    {
+      name: 'rejected_timing_head_recovery', mode: 'opv', circuit: 28,
+      itemsIn: [{ id: 'grindless:rejected_timing_head', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 3000 }, { id: 'gtceu:kerosene', amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:silicon_dust', count: 2 }, { id: 'gtceu:copper_dust', count: 1 }],
+      fluidsOut: [{ id: 'gtceu:kerosene', amount: 950 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 3000 }],
+      eut: 1920, duration: 100
+    },
+    // OpV-R1 (line 42, c29): rejected MMIC tiles give their gallium back
+    {
+      name: 'rejected_mmic_tile_gallium', mode: 'opv', circuit: 29,
+      itemsIn: [{ id: 'grindless:rejected_mmic_tile', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 3000 }, { id: 'gtceu:kerosene', amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:gallium_dust', count: 2 }, { id: 'gtca:silicon_carbide_dust', count: 1 }],
+      fluidsOut: [{ id: 'gtceu:kerosene', amount: 950 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 3000 }],
+      eut: 1920, duration: 100
     }
   ]
 

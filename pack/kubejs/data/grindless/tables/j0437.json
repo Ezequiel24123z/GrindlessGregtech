@@ -56,6 +56,12 @@
           "_why": "UXV-B5: four ejecta knot dusts and a data orb (consumed) are profiled into the Ti-44 map of the remnant (the profiler has no fluid slot).",
           "itemsIn": [ { "id": "grindless:ejecta_knot_dust", "count": 4 }, { "id": "gtceu:data_orb", "count": 1 } ], "kept": [], "fluidsIn": [],
           "itemsOut": [ { "id": "grindless:ti44_map", "count": 1 } ], "fluidsOut": []
+        },
+        {
+          "name": "xnav_unit", "circuit": 4, "eut": 31457280, "duration": 3000, "site": true,
+          "_why": "OpV-R1 line 41: a clock-locked timing head is pointed at J0437 (raw profile consumed) and calibrated into the XNAV unit (contract said c3, taken by ti44_map).",
+          "itemsIn": [ { "id": "grindless:clock_locked_head", "count": 1 }, { "id": "grindless:j0437_pulse_raw", "count": 1 } ], "kept": [], "fluidsIn": [],
+          "itemsOut": [ { "id": "grindless:xnav_unit", "count": 1 } ], "fluidsOut": []
         }
       ]
     },
