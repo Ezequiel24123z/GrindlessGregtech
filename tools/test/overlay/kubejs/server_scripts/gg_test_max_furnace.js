@@ -28,7 +28,7 @@
   var MACHINE = 'gtceu:cluster_light_furnace'
   var PARTS = [HATCH, HATCH, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus']
   var JOBS = [
-    { name: 'c1', inputs: [['grindless:nsc_planetesimal', 16]], circuit: 1, out: 'grindless:metal_rich_bloom' },
+    { name: 'c1', inputs: [['grindless:nsc_planetesimal', 16], ['grindless:sealed_hearth_liner', 1]], circuit: 1, out: 'grindless:metal_rich_bloom' },
     { name: 'c5', inputs: [['grindless:sealed_hearth_liner', 1]], circuit: 5, out: 'gtceu:tantalum_dust' }
   ]
   var IDS = [
