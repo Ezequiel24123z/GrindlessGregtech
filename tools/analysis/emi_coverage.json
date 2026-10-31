@@ -103,6 +103,7 @@
     { "id": "grindless:li6_hydride_shield", "package": "B3", "reason": "OpV-D1 makes it; B3's antimatter beam lines use it" },
     { "id": "grindless:electron_cooler", "package": "B3", "reason": "OpV-D1 makes it; B3's antiproton cooling uses it" },
     { "id": "grindless:stochastic_cooling_pickup", "package": "B3", "reason": "OpV-D1 makes it; B3's antiproton cooling uses it" },
-    { "id": "grindless:neg_xhv_casing", "package": "B3, D2", "reason": "OpV-D1 makes it; B3's and D2's multiblocks use it" }
+    { "id": "grindless:neg_xhv_casing", "package": "B3, D2", "reason": "OpV-D1 makes it; B3's and D2's multiblocks use it" },
+    { "id": "grindless:superheavy_census_iv", "package": "G1", "reason": "OpV-B2 makes it; G1's MAX gate (warp gate c13) keeps it (opv.md line 50)" }
   ]
     }
