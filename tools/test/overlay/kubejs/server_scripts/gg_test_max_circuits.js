@@ -27,6 +27,7 @@
       ArrayList: Java.loadClass('java.util.ArrayList'),
       BI: Java.loadClass('net.minecraft.core.registries.BuiltInRegistries'),
       GTRecipe: Java.loadClass('com.gregtechceu.gtceu.api.recipe.GTRecipe'),
+      EU: Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability').CAP,
       ITEM: Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability').CAP
     }
     return C
@@ -104,6 +105,11 @@
       var c9 = /"configuration":9\b/.test(text)
       var outs = outputIds(r)
       var ok = typeOf(r) === HALL && missing.length === 0 && c9 && outs.length === 1 && outs[0] === MF
+      var eut = 0
+      try { eut = Number(r.tickInputs.get(classes().EU).get(0).content) } catch (e) { eut = -1 }
+      // 2013265920 = VA[MAX]; the hall is powered with the contract's two OpV 4 A hatches
+      note('join_power', 'join EU/t ' + eut + ' = VA[MAX] 2013265920 expected; power the hall with the contract\'s two OpV 4 A energy hatches')
+      ok = ok && eut === 2013265920
       check('join', ok, JOIN + ': type ' + typeOf(r) + ', missing parts [' + missing.join(', ') + '], circuit 9 ' + c9 + ', out [' + outs.join(', ') + '], in ' + text)
     }
 

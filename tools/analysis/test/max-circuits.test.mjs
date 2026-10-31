@@ -120,6 +120,18 @@ test('the join: one photonic hall row, circuit 9, the only maker of gtnn:supraca
   for (const p of r.itemsIn) assert.ok(producers(p.id).length >= 1 || /^gtceu:|^#/.test(p.id) || p.id === 'grindless:tetron_array', `${p.id} has a producer`);
 });
 
+test('every MAX-A1 row is at most VA[MAX] = 2013265920 EU/t (max.md:160)', () => {
+  for (const [f, type, name] of TABLE_ROWS) {
+    const r = table(f).types[type].recipes.find((x) => x.name === name);
+    assert.ok(r.eut <= 2013265920, `${type}/${name} eut ${r.eut}`);
+  }
+  assert.equal(table('photonics_uev.json').types.photonic_integration.recipes.find((x) => x.name === 'supracausal_mainframe').eut, 2013265920);
+  for (const id of [JOIN, 'grindless:laser_engraver/tweezer_array_die', ...MOCVD.map(([n]) => `grindless:mocvd/${n}`)]) {
+    const e = find(id).j.tickInputs.eu[0].content;
+    assert.ok(e <= 2013265920, `${id} ${e}`);
+  }
+});
+
 test('every data-keyed row has its EMI line in both languages', () => {
   for (const [, type, name] of TABLE_ROWS) {
     const k = `gtceu.recipe.grindless_${type}.${name}`;
