@@ -13,7 +13,7 @@
 
   // key -> the place: dimension id (world and orbit are the same), warp gate circuit, the jump row's name and the place's temperature (K)
   T.places = {
-    sgra: { dimension: 'gcyr:black_hole_orbit', circuit: 14, jump: 'hold_sgr_a', temperature: 100 },
+    sgra: { dimension: 'gcyr:black_hole_orbit', circuit: 14, jump: 'hold_sgr_a_probe', temperature: 100 },
     nsc: { dimension: 'grindless:nsc_belt', circuit: 15, jump: 'hold_nsc_belt', temperature: 100 }
   }
   T.tier = 14
