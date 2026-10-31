@@ -1,0 +1,14 @@
+{
+  "world": "grindless:nsc_belt",
+  "stars": { "fancy_count": 9000, "fast_count": 4000, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 30, "color": 16770480, "rotation": [60, 0, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 60, "color": 16762960, "rotation": [30, 90, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 140, "color": 6314000, "rotation": [10, 200, 0] }
+  ]
+}

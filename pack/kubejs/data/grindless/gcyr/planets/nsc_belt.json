@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.nsc_belt",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:nsc",
+  "world": "grindless:nsc_belt",
+  "orbit_world": "grindless:nsc_belt",
+  "rocket_tier": 14,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 5,
+  "temperature": 100,
+  "solar_power": 0,
+  "has_oxygen": false,
+  "button_color": 3158064
+}
