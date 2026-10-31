@@ -81,6 +81,13 @@
     fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:seven_n_germanium', 1), item('gtceu:small_germanium_dust', 4)],
     fluidsOut: [], eut: UVA, duration: 800 })
 
+  // OpV-A1 (opv.md line 10): the extraction cascade's scrubbed GeCl4 reduced and zone-passed to 13N germanium for the HPGe Compton crystal
+  // (circuit 10; 1-9 are taken); the head and tail come back as small dust, the HCl and water go back to stock
+  TABLE.push({ name: 'thirteen_n_germanium', type: 'zone_refining', circuit: 10, itemsIn: [],
+    fluidsIn: [fluid('gtceu:pure_germanium_tetrachloride', 1000), fluid('minecraft:water', 2000), fluid('gtceu:hydrogen', 4000)],
+    itemsOut: [item('grindless:thirteen_n_germanium', 1), item('gtceu:small_germanium_dust', 2)],
+    fluidsOut: [fluid('gtceu:hydrochloric_acid', 4000), fluid('minecraft:water', 2000)], eut: UVA, duration: 2400 })
+
   D.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit, itemsIn: t.itemsIn,

@@ -149,6 +149,17 @@
     }
   ]
 
+  // OpV-A1 row (docs/eras/opv.md line 9): the hot cell's thorium-229 nitrate fluorinated to laser-grade ThF4 for the lasing CaF2 boule;
+  // the nitric acid goes back to the hot cell.
+  var OPV_ROWS = [
+    {
+      name: 'laser_grade_thf4',
+      itemIn: { id: 'grindless:thorium_229_nitrate', count: 1 }, fluidIn: { id: 'gtceu:hydrofluoric_acid', amount: 4000 },
+      itemOut: { id: 'grindless:laser_grade_thf4', count: 1 }, fluidOut: { id: 'gtceu:nitric_acid', amount: 4000 },
+      eut: 30, duration: 64
+    }
+  ]
+
   function addUevRows(event, rows) {
     ;(rows || UEV_ROWS).forEach(function (r) {
       var missing = []
@@ -208,6 +219,11 @@
       addUevRows(event, UXV_ROWS)
     } catch (e5) {
       console.error(LOG + 'fluorspar kiln UXV rows failed: ' + e5)
+    }
+    try {
+      addUevRows(event, OPV_ROWS)
+    } catch (e6) {
+      console.error(LOG + 'fluorspar kiln OpV rows failed: ' + e6)
     }
     try {
       addController(event)

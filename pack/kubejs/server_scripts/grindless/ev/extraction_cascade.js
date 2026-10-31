@@ -255,6 +255,15 @@
       itemsOut: [{ id: 'grindless:ejecta_ti_fraction_dust', count: 1 }, { id: 'gtceu:wollastonite_dust', count: 1 }, { id: 'gtceu:pyrite_dust', count: 1 }],
       fluidsOut: [{ id: 'gtceu:kerosene', amount: 950 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 3000 }],
       eut: 1920, duration: 100
+    },
+    // OpV-A1 (opv.md line 10): GeCl4 scrubbed of AsCl3 by a chlorinated HCl wash (the arsenic stays in the spent acid) for the 13N germanium
+    {
+      name: 'germanium_tetrachloride_scrub', mode: 'opv', circuit: 23,
+      itemsIn: [],
+      fluidsIn: [{ id: 'gtceu:germanium_tetrachloride', amount: 1000 }, { id: 'gtceu:hydrochloric_acid', amount: 1000 }, { id: 'gtceu:chlorine', amount: 100 }],
+      itemsOut: [],
+      fluidsOut: [{ id: 'gtceu:pure_germanium_tetrachloride', amount: 1000 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 1000 }],
+      eut: 1920, duration: 100
     }
   ]
 

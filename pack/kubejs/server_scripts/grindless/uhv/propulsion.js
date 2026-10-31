@@ -94,6 +94,11 @@
     [item('grindless:chain_composite_rod', 2), item(SIC, 1)], [], UHVA, 600))
   TABLE.push(row('chain_composite_rotor', 'spark_plasma_sintering', 17,
     [item('grindless:chain_composite_rod', 4), item('grindless:chain_lamina_stack', 1)], [], [item('grindless:chain_composite_rotor', 1)], [], UHVA, 800))
+  // OpV-A1 (opv.md line 7): the toothed flexspline sintered with a composite rod (wave generator) and a lamina stack (circular spline)
+  // into the harmonic drive (circuit 10).
+  TABLE.push(row('opv_harmonic_drive', 'spark_plasma_sintering', 10,
+    [item('grindless:toothed_flexspline_cup', 1), item('grindless:chain_composite_rod', 1), item('grindless:chain_lamina_stack', 1)], [],
+    [item('grindless:opv_harmonic_drive', 1)], [], UHVA, 800))
 
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],

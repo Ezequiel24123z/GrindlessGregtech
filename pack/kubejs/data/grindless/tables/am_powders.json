@@ -22,7 +22,8 @@
     { "name": "mgo", "ingot": "grindless:five_n_magnesia_dust", "powder": "grindless:mgo_am_powder" },
     { "name": "ruthenium", "ingot": "grindless:five_n_ruthenium", "powder": "grindless:ruthenium_am_powder" },
     { "name": "srruo3", "ingot": "gtceu:srruo3_dust", "powder": "grindless:srruo3_am_powder" },
-    { "name": "la_bfo", "ingot": "gtceu:la_bfo_dust", "powder": "grindless:la_bfo_am_powder" }
+    { "name": "la_bfo", "ingot": "gtceu:la_bfo_dust", "powder": "grindless:la_bfo_am_powder" },
+    { "name": "gum_metal", "_why": "OpV-A1 (opv.md line 7): the femtosecond writer's swarf atomised back to gum metal blend (atomise, circuit 1; opv.md's c16 is spin_feed's sinter).", "ingot": "grindless:gum_metal_swarf", "powder": "grindless:gum_metal_blend" }
   ],
   "parts": [
     { "name": "neutronium_gear", "metal": "neutronium", "circuit": 2, "powderIn": 4, "powderBack": 1,

@@ -55,6 +55,19 @@ $Items = [ordered]@{
     superleak_plug            = @('orb', 'B8C4D0', 'E8F8FF')
     welded_mesh_belt          = @('sail', '6A6048', 'C0B080')
     pbo_belt_trim             = @('heap', '8A6A30', 'D8B060')
+    chain_flexspline_cup      = @('cup', '6C7480', 'B0C0D8')
+    toothed_flexspline_cup    = @('cup', '58606C', 'E0C890')
+    gum_metal_swarf           = @('heap', '7A8088', 'C8D0D8')
+    rebco_pancake             = @('spool', '8A5A30', 'D0A060')
+    potted_rebco_pancake      = @('spool', '5A4A38', 'C8B070')
+    trained_rebco_pancake     = @('spool', '3A5070', '90C0F0')
+    thorium_229_nitrate       = @('vial', 'A0B070', 'E0F0A0')
+    laser_grade_thf4          = @('heap', 'D8DCC8', 'F8FFF0')
+    th_caf2_lasing_boule      = @('capsule', 'A8C8B0', 'E0FFE8')
+    coated_th_caf2_crystal    = @('crystal', '90B8C8', 'D8F0FF')
+    thirteen_n_germanium      = @('card', '8C9098', 'D0D8E0')
+    hpge_compton_boule        = @('capsule', '6C7078', 'B8C0C8')
+    contacted_hpge_crystal    = @('crystal', '5C6068', 'D0A848')
 }
 
 function Get-Tone {

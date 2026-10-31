@@ -160,6 +160,16 @@
     })
   })
 
+  // OpV-A1 (opv.md line 10): boron contacts implanted into the HPGe boule, the Compton crystal's p+ contact. opv.md's c9 is UXV-A3's
+  // MRAM etch and c10-13 are OpV-A2's, so this is circuit 14.
+  TABLE.push({
+    name: 'hpge_contacts', type: 'ion_implantation', circuit: 14,
+    itemsIn: [{ id: 'grindless:hpge_compton_boule', count: 1 }, { id: 'gtceu:boron_dust', count: 1 }], notConsumedItems: [],
+    fluidsIn: [],
+    itemsOut: [{ id: 'grindless:contacted_hpge_crystal', count: 1 }], fluidsOut: [],
+    eut: 491520, duration: 600
+  })
+
   Q.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit,

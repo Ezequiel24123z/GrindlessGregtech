@@ -322,8 +322,10 @@
   // OpV-A1 (docs/eras/opv.md, lines 6 and 10): keyed rows that are not freezer recipes, on the same loop (make-up, precooling and the
   // never-drained charge as the generated rows); one item in, one item out, so each has its own lookup path. The data key names the row.
   //   welded_mesh_belt -> chain_mesh_belt: the PBO/chain belt accepted at 4 K (line 6)
+  //   contacted_hpge_crystal -> hpge_compton_crystal: the HPGe detector's leakage and resolution test at 77 K (line 10)
   var OPV_ROWS = [
-    { name: 'chain_mesh_belt', input: 'grindless:welded_mesh_belt', output: 'grindless:chain_mesh_belt', eut: 30720, duration: 400 }
+    { name: 'chain_mesh_belt', input: 'grindless:welded_mesh_belt', output: 'grindless:chain_mesh_belt', eut: 30720, duration: 400 },
+    { name: 'hpge_compton_crystal', input: 'grindless:contacted_hpge_crystal', output: 'grindless:hpge_compton_crystal', eut: 30720, duration: 400 }
   ]
   HR.opvRows = OPV_ROWS
   HR.opvSkipped = []

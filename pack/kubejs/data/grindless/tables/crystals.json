@@ -23,7 +23,12 @@
           "_why": "UIV-A7 (uiv.md line 22): the comb interrogates a capped ThF4 film into a chip-scale nuclear clock; the comb is not consumed",
           "itemsIn": [{ "id": "grindless:capped_thf4_film", "count": 1 }, { "id": "#gtceu:circuits/uhv", "count": 1 }],
           "kept": [{ "id": "grindless:vuv_frequency_comb", "count": 1 }], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:chip_nuclear_clock", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:chip_nuclear_clock", "count": 1 }], "fluidsOut": [] },
+        { "name": "lasing_check", "circuit": 4, "eut": 1966080, "duration": 600,
+          "_why": "OpV-A1 (opv.md line 9): the comb pumps the coated Th:CaF2 crystal until the 8.4 eV nuclear line lases, the OpV emitter's lasing crystal; the comb is not consumed",
+          "itemsIn": [{ "id": "grindless:coated_th_caf2_crystal", "count": 1 }],
+          "kept": [{ "id": "grindless:vuv_frequency_comb", "count": 1 }], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:th229_lasing_crystal", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "crystal_growth": {
@@ -100,7 +105,15 @@
         { "_why": "UXV-A5 integration (uxv.md line 15): the Fe3GeTe2 dust broken off by the vdW stacking cell recrystallised by vapour transport, as c17 does for WTe2, so the leftover is not lost.", "name": "fgt_recrystallise", "circuit": 18, "eut": 491520, "duration": 800,
           "itemsIn": [{ "id": "gtceu:fe3gete2_dust", "count": 4 }, { "id": "gtceu:iodine_dust", "count": 1, "chance": 1000 }],
           "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:fgt_raw_crystal", "count": 1 }, { "id": "gtceu:iodine_dust", "count": 1, "chance": 9000 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:fgt_raw_crystal", "count": 1 }, { "id": "gtceu:iodine_dust", "count": 1, "chance": 9000 }], "fluidsOut": [] },
+        { "_why": "OpV-A1 (opv.md line 9): the lasing boule grown as c3's Th:CaF2 but doped with the kiln's laser-grade ThF4, so no oxygen quenches the isomer (circuit 19).", "name": "th_caf2_lasing", "circuit": 19, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gcyr:fluorite_dust", "count": 3 }, { "id": "grindless:laser_grade_thf4", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [{ "id": "gtceu:lead_fluoride_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:th_caf2_lasing_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "OpV-A1 (opv.md line 10): 13N germanium Czochralski-pulled into a high-purity boule under argon (circuit 20).", "name": "hpge_compton", "circuit": 20, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "grindless:thirteen_n_germanium", "count": 2 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:hpge_compton_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {
