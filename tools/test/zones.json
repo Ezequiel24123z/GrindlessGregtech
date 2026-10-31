@@ -171,5 +171,6 @@
     { "id": "opv_antimatter", "x": [38208, 38271], "z": [0, 63], "y": [98, 115], "tests": ["opv_antimatter"], "note": "OpV-B3a: observe the real engine c2 at 2^30 EU/t for its first 1200 ticks through a 4 A OpV dynamo; native 1/16 tile wear probe, lower-hatch and away-from-home refusal" },
     { "id": "opv_antimatter_cygnus", "x": [38784, 38847], "z": [0, 63], "y": [98, 115], "tests": ["opv_antimatter_cygnus"], "note": "OpV-B3b: jet beam line, spallation target station and antiproton decelerator form in grindless:cygnus_x1_orbit and line 30 runs to antiproton_stack_opv" },
     { "id": "opv_exotic_matter", "x": [38272, 38335], "z": [0, 63], "y": [98, 115], "tests": ["opv_exotic_matter"], "note": "OpV-D2: distiller c3 voids its negative strangelets with the exemption and no other row voids; machine 9 forms at Cygnus X-1 orbit" }
+        { "id": "opv_kugelblitz", "x": [38336, 38399], "z": [0, 63], "y": [98, 115], "tests": ["opv_kugelblitz"], "note": "OpV-D3: the Kugelblitz forge and the Hawking collector form in grindless:cygnus_x1_orbit (both are built there, not in the Overworld); the collector's c1 (2^30 EU/t as a long, dimension-locked) starts through two OpV 1 A dynamo hatches while the core wears exactly 1/64 per run (recipe content chance 1, maxChance 64, sampled); every row and both controllers are in the recipe manager" }      ],
       ]
 }
