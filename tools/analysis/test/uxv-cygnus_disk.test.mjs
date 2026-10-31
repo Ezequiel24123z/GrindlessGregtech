@@ -27,7 +27,7 @@ test('the stand-in runs the UXV-B3 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(CD.skipped), []);
   assert.deepEqual(plain(CD.clashes), []);
-  assert.equal(CD.recipes.length, 4);
+  assert.equal(CD.recipes.length, 7); // + MAX-D1 skim_hot_flow, load_flux_frc, frc_spin_down
 });
 
 test('skimmer: circuit 1 skim, a wearing MH winding (5%) -> 1,000 mB disk plasma, 134,217,728 EU/t for 1,200 t, at Cygnus X-1', () => {
