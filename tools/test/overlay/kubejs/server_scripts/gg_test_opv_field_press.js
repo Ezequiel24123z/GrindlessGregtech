@@ -7,8 +7,9 @@
 //     a_formed        a press forms with two UXV 4 A energy hatches
 //     c1_eut          its c1 billet row starts there at 268,435,456 EU/t (above V[UXV]: two hatches of the top tier lift the voltage one tier)
 //     b_formed        a second press forms with one OpV 16 A energy hatch
-//     probe_eut_long  a test row at 2^30 EU/t (V[OpV] x 2 A: GTM tiers a recipe by its voltage, and one hatch gives V[OpV]) starts on it
-//                     and reads 1,073,741,824 EU/t
+//     probe_eut_long  a test row at 2^30 EU/t (V[OpV] x 2 A: GTM tiers a recipe by its voltage, and one hatch gives V[OpV]) starts on it;
+//                     the 16 A hatch's overclock voltage is 2^33, so GTM's non-perfect overclock lifts it once and it reads 4,294,967,296 EU/t
+//                     (a long above 2^31)
 (function () {
   var S = null
   var C = null
@@ -41,7 +42,7 @@
     { name: 'a', cx: 38030, z: 16, energy: /uxv_energy_input_hatch_4a/, hatches: 2, parts: [UXV_4A, UXV_4A, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus'],
       bus: [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:field_canned_stack', 4]], recipe: 'field_frozen_billet', expect: 268435456, eutCheck: 'c1_eut' },
     { name: 'b', cx: 38060, z: 40, energy: /opv_energy_input_hatch_16a/, hatches: 1, parts: [OPV_16A, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus'],
-      bus: [[CIRCUIT, 1, '{Configuration:32}'], ['minecraft:dandelion', 1]], recipe: 'probe', expect: 1073741824, eutCheck: 'probe_eut_long' }
+      bus: [[CIRCUIT, 1, '{Configuration:32}'], ['minecraft:dandelion', 1]], recipe: 'probe', expect: 4294967296, eutCheck: 'probe_eut_long' }
   ]
 
   // the probe: a 2^30 EU/t row on the press's own type, V[OpV] x 2 A (lv/arc_furnace.js's form; a plain 2^30 would tier as MAX), the

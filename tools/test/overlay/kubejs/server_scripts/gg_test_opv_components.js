@@ -180,12 +180,17 @@
       parsed.push({ x: c.x, y: c.y, z: c.z, id: m[1], props: m[2] || '' })
       census[m[1]] = (census[m[1]] || 0) + 1
     })
+    var byCount = Object.keys(census).sort(function (a, b) { return census[b] - census[a] })
+    var casing = byCount.filter(function (id) { return /casing/.test(id) })[0] || byCount[0]
     var energy = 0
-    parsed.forEach(function (c) { if (/energy_input_hatch/.test(c.id)) { c.id = HATCH; energy++ } })
+    // exactly two UXV 4 A hatches: the hall's preview shows all 4 of its energy cells, the rest go back to casing (parts sit in casing cells)
+    parsed.forEach(function (c) {
+      if (!/energy_input_hatch/.test(c.id)) return
+      if (energy < 2) { c.id = HATCH; energy++ } else { c.id = casing; c.props = '' }
+    })
     parsed.forEach(function (c) { if (energy < 2 && /parallel_hatch/.test(c.id)) { c.id = HATCH; energy++ } })
     if (energy < 2) {
-      // no second ability cell in the preview: the most common block (the casing) on the side face at the controller's height takes it
-      var casing = Object.keys(census).sort(function (a, b) { return census[b] - census[a] })[0]
+      // no second ability cell in the preview: the casing on the side face at the controller's height takes it
       var minX = Math.min.apply(null, parsed.map(function (c) { return c.x }))
       var side = parsed.filter(function (c) { return c.id === casing && c.x === minX && c.y === ctl.y })
       if (side.length > 0) { side[0].id = HATCH; side[0].props = ''; energy++ }
