@@ -21,7 +21,7 @@
       name: 'cluster_light_furnace', machine: 'gtceu:cluster_light_furnace', type: 'cluster_light_smelting', dataKey: 'grindless_cluster_light_smelting',
       lang: 'Cluster-Light Furnace', maxIO: { itemsIn: 3, itemsOut: 3, fluidsIn: 0, fluidsOut: 0 }, casing: SHELL, texture: SHELL_TEXTURE,
       width: 13, height: 9, depth: 13,
-      pal: { F: SHELL, H: 'grindless:mirror_shell_segment', M: 'grindless:annihilation_shield_casing', C: 'gtceu:superconducting_coil', Q: 'stainless_steel' },
+      pal: { F: SHELL, H: 'grindless:max_optical_table_casing', M: 'grindless:annihilation_shield_casing', C: 'gtceu:superconducting_coil', Q: 'stainless_steel' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
