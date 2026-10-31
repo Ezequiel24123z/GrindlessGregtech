@@ -1,6 +1,6 @@
 # MAX-S0 spikes (results)
 
-Status: Phase A (static work and S0-12) done; native spikes pending the bench slot. Contract: `docs/eras/max.md` "## S0 spikes". Pattern: `docs/research/opv-s0.md`.
+Status: done. Native runs on Azure (`-Backend azure -NoFallback`, temp pack copy, no `-Slots`; run dirs in the session `files\run`, not committed): `runA` (dump, first machines/cube), `runB` (machines; harness fixes), `runC` (a `@restart` sent without its markers: invalid), `runD` (machines complete, relay leg 1 wrongly failed on the poller, cube failed on `System`), `runE` (cube, relay both legs: PASS). No KubeJS error from our scripts in any run. Harness repairs: cube (forceload wait, busy flag, `System` blocked by the class filter, `Date.now()`), machines (S0-3 expectation; S0-4/S0-13 use a custom generator recipe type with `lib/generators.js`, not `macerator`), relay (temp-table row order). Contract: `docs/eras/max.md` "## S0 spikes". Pattern: `docs/research/opv-s0.md`.
 
 ## Harness
 
@@ -19,19 +19,19 @@ Temp pack-copy edits (never committed): a `hold_s0_max_c15` row in `gate.json`, 
 
 | Spike | Result | Evidence |
 |---|---|---|
-| S0-1 | pending (jar finding below) | GCYR 0.2.9 ships dimension `gcyr:black_hole_orbit` but no `gcyr/planets/black_hole_orbit.json`; its planets are earth, luna, mars, mercury, proxima_centauri_b, venus. So it has no tier unless our datapack adds a row (`s0_max_bh_real` tests that) |
-| S0-2 | pending | gate unit in `max_s0_machines` |
-| S0-3 | pending | cable unit in `max_s0_machines` |
-| S0-4 | pending | `s0_4_gen` |
-| S0-5 | pending | dump (long maths) plus case 14 temp edit |
-| S0-6 | pending; expected FAIL on the lib side | `lib/parallel_hatch.js` registers `.tiers(9..13)` only, so tier 14 is not covered as built; M1 owns the change |
-| S0-7 | pending | `max_s0_cube` |
-| S0-8 | jar finding | gtnn 1.20.1-1.3.10 registers supracausal items and recipes in Kotlin at runtime (GTNNRecipes, CircuitAssemblyLineMachineRecipeHandler, ComponentAssemblyLineRecipeHandler, WrapItemRecipeHandler), no `data/recipes` JSON, so `event.remove` by id finds none (as OpV S0-4). Tag `gtceu/tags/items/circuits/max.json` = `gtnn:supracausal_mainframe`. Runtime confirmation pending in dump |
-| S0-9 | pending (needs a player; client half) | |
-| S0-10 | pending | UXV disk machines, Penrose engine (`uiv/cygnus.js`), site rows via `recipe.dimension` (`cygnus_disk.js:112`) |
-| S0-11 | pending | `max_s0_relay_1`, `@restart`, `max_s0_relay_2` |
+| S0-1 | **PASS** (runA) | `grindless:s0_max_bh_orbit` and `grindless:s0_max_nsc_belt` load and read back as tier 14 planets; `gcyr:black_hole_orbit` loads as a level. GCYR 0.2.9 ships that dimension but no planet row (its planets: earth, luna, mars, mercury, proxima_centauri_b, venus), so F1 must add the tier-14 row itself, as for the other orbits |
+| S0-2 | **PASS** (runD) | Recipe 2^35 = 34,359,738,368 EU/t read as a long, 1,200 t, two `gtceu:max_energy_input_hatch_16a` (list 34,359,738,368 V x 2 A). Draw per tick avg = min = max = 34,359,738,368 over 1,239 ticks, no negative sample (42,571,715,837,952 EU); the output arrived after 1,240 t. Tier read-outs: `getTierByVoltage` 14, `getRecipeEUtTier` 14, `getFloorTierByVoltage` 16 (not 14: do not use it for tier checks), `formatNumbers` "34,359,738,368". EMI display not read (no client) |
+| S0-3 | **PASS**, loss not zero (runD) | Throwaway cable (V[MAX] = 2^31, 16 A, loss 1) carries 16 A x V[MAX]: the sink gains 34,359,738,320 EU/t on all 35 ticks, exactly the draw minus 48 = 16 A x 3 blocks x loss 1. The loss is 1 EU per amp per block, so F1 must state that, not "lossless" |
+| S0-4 | **PASS** (runD) | A generator multiblock (`lib/generators.js`, custom `.setEUIO('out')` recipe type) with one `gtceu:max_energy_output_hatch_16a` starts a recipe at -2^31 EU/t (`gen_low`) and at -2^34 (`gen_high`); the read EU/t is exact and negative-sign handled as a long. Needs a real generator recipe type: `macerator` rows never start (as OpV S0-11), so R3/D1-style plants must use a custom generator type |
+| S0-5 | **PASS** (math) / wireless leg not run (runA) | 64 A x V[MAX] x 10 = 1,374,389,534,720 as a long; 2 A x V[MAX] = 2^32 wraps to 0 as an int. The temp wireless `case 14` and table row boot without a startup error, but no tier-14 hatch was placed. W still needs its own native check (the helper's error text still says "1 to 13") |
+| S0-6 | **PASS for the mechanism, FAIL for the lib as built** (runD) | An overlay tier-14 `PHPM` hatch (`gtceu:max_gg_max_s0_parallel_hatch`) reports 1,048,576 copies (4^10). Probe 2,048 EU/t x 1,048,576 = 2,147,483,648 (the int boundary) and 16,384 x 1,048,576 = 17,179,869,184 EU/t both read exactly, positive, no wrap. `lib/parallel_hatch.js` registers `.tiers(9..13)` only: MAX-M1 owns extending it to tier 14 |
+| S0-7 | **PASS** (runE) | 33 x 33 x 33 hollow shell (6,146 casings, MAX_ROWS 64) forms; `checkPatternWithLock` 17.45 ms per call (a 50 ms tick budget), still formed; the 25-cube 5.4 ms. Needs Y 70-102 in the zone. Cost is per structure check, not per tick when formed |
+| S0-8 | **PASS (hide-only)** (runA) | 0 gtnn supracausal recipes in the recipe manager (gtnn registers them in Kotlin at runtime; no `data/recipes` JSON), so `event.remove` by id finds none; `gtnn:supracausal_mainframe` is registered and the tag `gtceu/tags/items/circuits/max.json` holds it. Fallback: hide the items in EMI and remove by output; hiding before MAX was not tested. Changes A1/F2 (hide, not remove) |
+| S0-9 | **not run (needs a player)** | client half; fallback of the table (book, title or quest ending) stays open for G1/D3 |
+| S0-10 | **weak PASS (not exercised)** | Only the cygnus disk table loaded (dump). UXV disk machines, the Penrose engine and the droplet works were not run at the string site; the static read says site rows use `recipe.dimension` (`cygnus_disk.js:112`). Treat as unproven; check in the first MAX line package |
+| S0-11 | **PASS** (runE) | Gate ring in `s0_max_bh_orbit`, circuit 15 row `hold_s0_max_c15` at 8,589,934,592 EU/t ran; the platform (ring, wireless pair, AE2 controller + drive) was placed in `s0_max_nsc_belt`, 2 forced chunks. After `@restart`: row `uxvPlatform_s0_max_c15`, the chunks, the formed ring and the AE2 controller all survived. Finding: `uxv/kerr_sling.js` `poll()` reads `mine[0].source` only, so it serves ONE source place; with the SGR/Terzan rows first, a row with another source is silently ignored (runD failed that way). T2 must loop over sources or share the BH-orbit source |
 | S0-12 | done, below | |
-| S0-13 | pending | `big_gen` in `max_s0_machines`; the string-site leg and wireless case 14 leg are not exercised there |
+| S0-13 | **PASS** (runD) | 15 x 9 x 15 generator (842 blocks) forms with one MAX 16 A dynamo hatch and runs `gen_low` at -2^31 EU/t. The string-site and wireless-case-14 legs were not exercised |
 
 ## S0-12 (read from the scripts)
 
@@ -72,4 +72,10 @@ Scope: only the 22 first-used machines plus the swarm foundry were read. The mac
 
 ## Proposed contract changes from the native spikes
 
-Pending Phase B. Each FAIL will name the fallback from the S0 table and the packages it changes.
+- S0-6 (lib FAIL): MAX-M1 extends `lib/parallel_hatch.js` `.tiers(...)` to 14 and the x1,048,576 multiplier; the mechanism itself is proven.
+- S0-8 (hide-only): A1/F2 hide `gtnn:supracausal_mainframe` and its tag entry instead of removing recipes by id; hiding before MAX is untested.
+- S0-3: F1/A0 state the cable loss (1 EU per amp per block), not "lossless".
+- S0-4/S0-13: D1/D3 generators use a custom generator recipe type with `lib/generators.js`; `macerator` rows do not start.
+- S0-11: T2 (or the poller owner) must handle more than one `source`; `kerr_sling.js` serves the first row's only.
+- S0-5, S0-9, S0-10: unproven (wireless case 14 hatches, player ending, string-site machines); W, G1/D3 and the first line package keep their own check.
+- S0-12 FAILs: see above (H1, R1).

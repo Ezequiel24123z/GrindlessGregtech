@@ -34,8 +34,18 @@
     })
   })
 
+  GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
+    guard('gen_type', function () {
+      event.create('gg_max_s0_gen')
+        .category('generator')
+        .setEUIO('out')
+        .setMaxIOSize(1, 1, 0, 0)
+    })
+  })
+
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     var Pat = global.grindless.patterns
+    var Gen = global.grindless.generators
     var PH = global.grindless.parallelHatch
     var EHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.EnergyHatchPartMachine')
     var PHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.ParallelHatchPartMachine')
@@ -102,11 +112,10 @@
         }
       }
       Pat.register('gtceu:gg_max_s0_gen_frame', SPEC)
-      event.create('gg_max_s0_gen_frame', 'multiblock')
+      Gen.configure(event.create('gg_max_s0_gen_frame', 'multiblock'), { maxParallels: 1, name: 'gg_max_s0_gen_frame' })
         .langValue('MAX S0 generator frame')
         .rotationState(RotationState.NON_Y_AXIS)
-        .generator(true)
-        .recipeTypes('macerator')
+        .recipeTypes('gg_max_s0_gen')
         .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
         .pattern(function (def) { return Pat.build(def, SPEC) })
         .workableCasingModel(TEXTURE, OVERLAY)
@@ -143,11 +152,10 @@
         }
       }
       Pat.register('gtceu:gg_max_s0_big_gen', SPEC)
-      event.create('gg_max_s0_big_gen', 'multiblock')
+      Gen.configure(event.create('gg_max_s0_big_gen', 'multiblock'), { maxParallels: 1, name: 'gg_max_s0_big_gen' })
         .langValue('MAX S0 big generator')
         .rotationState(RotationState.NON_Y_AXIS)
-        .generator(true)
-        .recipeTypes('macerator')
+        .recipeTypes('gg_max_s0_gen')
         .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
         .pattern(function (def) { return Pat.build(def, SPEC) })
         .workableCasingModel(TEXTURE, OVERLAY)
@@ -177,7 +185,7 @@
           .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
           .pattern(function (def) {
             var b = FactoryBlockPattern.start()
-            slices.forEach(function (rows) { b = b.aisle(Java.to(rows, 'java.lang.String[]')) })
+            slices.forEach(function (rows) { b = b.aisle(rows) })
             b = b.where('S', Predicates.controller(Predicates.blocks(def.get())))
             b = b.where('C', Predicates.blocks(GTBlocks.CASING_STEEL_SOLID.get()))
             b = b.where('K', Predicates.air())
