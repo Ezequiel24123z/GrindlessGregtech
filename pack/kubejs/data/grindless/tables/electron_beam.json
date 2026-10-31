@@ -123,7 +123,10 @@
           "itemsOut": [{ "id": "grindless:refractory_wear_coat", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
         { "_why": "MAX-D2 (max.md, machine 5 byproduct, c32, repeated by its items): the spent SIS scrap (niobium film on silicon) melted under the beam and cast back to niobium, so the junction line's scrap returns as metal; argon purge 90% recovered.", "name": "sis_scrap_niobium", "circuit": 32, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:sis_scrap", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
-          "itemsOut": [{ "id": "gtceu:niobium_dust", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
+          "itemsOut": [{ "id": "gtceu:niobium_dust", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
+        { "_why": "MAX-E1 (max.md, L42 step 2, c30 repeated by its items): the iridium sponge melted and cast into a sputter target under the beam, argon purge 90% recovered.", "name": "iridium_target", "circuit": 30, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:iridium_sponge", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:iridium_target", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
       ]
     },
     "single_crystal_casting": {
