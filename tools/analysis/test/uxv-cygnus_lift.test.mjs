@@ -25,7 +25,7 @@ test('the stand-in runs the UXV-B2 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(CL.skipped), []);
   assert.deepEqual(plain(CL.clashes), []);
-  assert.equal(CL.recipes.length, 5);
+  assert.equal(CL.recipes.length, 7); // + MAX-D1 hot_flow_filter, cooled_exhaust_return
 });
 
 test('elevator: circuit 1 lift (liquid helium -> stellar plasma + 900 mB warm helium), circuit 2 log (data module + 100 mB plasma); both at Cygnus X-1', () => {
@@ -137,7 +137,8 @@ test('"only from": nothing else in the pack makes these ids', () => {
     assert.ok(ps.every((r) => r.i.endsWith(tail) || /fusion|quench|mk6|direct_conversion/.test(r.i)), `${id} only from ${tail}: ${ps.map((r) => r.i)}`);
   }
   const heavy = producers('gtceu:stellar_heavy_cut').map((r) => r.i).filter((i) => !/fusion|quench|mk6|direct_conversion/.test(i)).sort();
-  assert.deepEqual(heavy, ['grindless:plasma_mass_filtering/disk_filter', 'grindless:plasma_mass_filtering/stellar_cuts']);
+  // MAX-D1 adds the two Sgr A* filter rows
+  assert.deepEqual(heavy, ['grindless:plasma_mass_filtering/cooled_exhaust_return', 'grindless:plasma_mass_filtering/disk_filter', 'grindless:plasma_mass_filtering/hot_flow_filter', 'grindless:plasma_mass_filtering/stellar_cuts']);
 });
 
 test('structures: not boring, at least two functional kinds, controller in the front slice, lying on their side (16 rows at most)', () => {
