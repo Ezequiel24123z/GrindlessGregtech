@@ -121,6 +121,10 @@
   TABLE.push(row('payload_casing', 'spark_plasma_sintering', 22,
     [item('grindless:sic_sic_plate', 4), item('gtceu:tungsten_steel_plate', 2)], [], [item('grindless:payload_casing', 1)], [], UHVA, 600))
 
+  // MAX-R1 (max.md, L36 step 3, c20): the Ta-Hf-C powder sintered, never melted, into the hearth liner's billet
+  TABLE.push(row('ta_hf_c_billet', 'spark_plasma_sintering', 20,
+    [item('grindless:ta_hf_c_powder', 4)], [], [item('grindless:ta_hf_c_billet', 1)], [], UHVA, 900))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

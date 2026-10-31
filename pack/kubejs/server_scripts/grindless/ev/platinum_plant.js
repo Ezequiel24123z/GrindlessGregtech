@@ -748,6 +748,13 @@
       itemIn: 'grindless:gold_overspray', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
       itemsOut: [['gtceu:small_gold_dust', 2]], fluidsOut: [['minecraft:water', 2000]],
       eut: 1920, duration: 300
+    },
+    // MAX-R1 row (circuit 18; max.md L13 and L42): the bloom's PGM residue dissolved in aqua regia and reduced to platinum and iridium dust
+    {
+      name: 'bloom_pgm_residue', circuit: 18,
+      itemIn: 'grindless:pgm_residue', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
+      itemsOut: [['gtceu:platinum_dust', 2], ['gtceu:iridium_dust', 1]], fluidsOut: [['minecraft:water', 2000]],
+      eut: 1920, duration: 300
     }
   ]
 

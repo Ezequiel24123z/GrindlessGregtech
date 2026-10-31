@@ -51,7 +51,7 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 
 test('the five melts: circuits 1 to 5, helium, the 5 / 3 item and 1 / 1 fluid slots', () => {
   const lm = T.types.levitation_melting.recipes;
-  assert.deepEqual(lm.map((r) => [r.name, r.circuit]), [['rhea_melt', 1], ['wf_rhea_melt', 2], ['ti50_melt', 3], ['bmg_melt', 4], ['prni5_melt', 5], ['terfenol_ingot', 21]]); // MAX-A2 c21 (line 35)
+  assert.deepEqual(lm.map((r) => [r.name, r.circuit]), [['rhea_melt', 1], ['wf_rhea_melt', 2], ['ti50_melt', 3], ['bmg_melt', 4], ['prni5_melt', 5], ['terfenol_ingot', 21], ['segment_alloy_ingot', 19]]); // MAX-A2 c21 (line 35); MAX-R1 c19 (L36)
   for (const r of lm) {
     assert.equal(r.eut, 7864320, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 5 && ids(r.itemsOut).length <= 3, r.name);
@@ -153,7 +153,7 @@ test('the five older rows exist', () => {
   assert.equal(halbach[h - 1].name, 'uiv_smes_cell');
   assert.equal(halbach[h].circuit, 5);
   const cvi = comp.chemical_vapour_infiltration.recipes;
-  assert.deepEqual(cvi.map((r) => [r.name, r.circuit]), [['sic_sic_plate', 1], ['wf_w_tile', 2], ['w_preform_densify', 3], ['glassy_carbon_lattice', 4], ['w184_fibre_preform', 5], ['chain_preform_densify', 6], ['rebco_potting', 7], ['hpsi_sic', 8], ['superpolished_sic_blank', 10], ['gamma_mirror_strip', 11], ['octupole_potting', 9], ['cmc_coil_former', 12], ['sic_sic_preform', 13], ['sic_dish_blank', 14]]); // MAX-D2 c14 (line 21); MAX-A2 c12-13 (lines 9 and 10); UIV-A10 appended c4; UXV-A3 c5; OpV-A2 c8 (6-7 are OpV-A1's); OpV-B1 c10-11; OpV-B3a c9
+  assert.deepEqual(cvi.map((r) => [r.name, r.circuit]), [['sic_sic_plate', 1], ['wf_w_tile', 2], ['w_preform_densify', 3], ['glassy_carbon_lattice', 4], ['w184_fibre_preform', 5], ['chain_preform_densify', 6], ['rebco_potting', 7], ['hpsi_sic', 8], ['superpolished_sic_blank', 10], ['gamma_mirror_strip', 11], ['octupole_potting', 9], ['cmc_coil_former', 12], ['sic_sic_preform', 13], ['sic_dish_blank', 14], ['sealed_hearth_liner', 15]]); // MAX-R1 c15 (L36); MAX-D2 c14 (line 21); MAX-A2 c12-13 (lines 9 and 10); UIV-A10 appended c4; UXV-A3 c5; OpV-A2 c8 (6-7 are OpV-A1's); OpV-B1 c10-11; OpV-B3a c9
   assert.ok(ids(cvi[2].itemsOut).includes('grindless:densified_w_preform'));
 });
 
@@ -173,7 +173,8 @@ test('every new item has a texture, a name and two tooltips in en_us and es_es',
   for (const m of entries.matchAll(/\['([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*'((?:[^'\\]|\\.)*)'\]/g)) assert.ok(m[2] && m[3], m[1]);
   for (const t of ['block.gtceu.levitation_melter', 'gtceu.levitation_melting', 'grindless.machine.levitation_melter.tooltip.1']) assert.ok(lang.includes(`'${t}'`), t);
   const maxLang = read('client_scripts', 'grindless', 'max_components_lang.js'); // MAX-A2's row names its own EMI line
-  for (const r of T.types.levitation_melting.recipes) assert.ok(lang.includes(`grindless_levitation_melting.${r.name}'`) || maxLang.includes(`grindless_levitation_melting.${r.name}'`), r.name);
+  const furnaceLang = read('client_scripts', 'grindless', 'max_furnace_lang.js');
+  for (const r of T.types.levitation_melting.recipes) assert.ok(lang.includes(`grindless_levitation_melting.${r.name}'`) || maxLang.includes(`grindless_levitation_melting.${r.name}'`) || furnaceLang.includes(`grindless_levitation_melting.${r.name}'`), r.name);
   for (const k of ['grindless_electron_beam.nb_ta_button', 'grindless_nitride_magnet_synthesis.halbach_array', 'grindless_chemical_vapour_infiltration.w_preform_densify']) {
     assert.ok(lang.includes(k), k);
   }

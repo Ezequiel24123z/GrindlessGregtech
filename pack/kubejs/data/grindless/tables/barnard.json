@@ -59,6 +59,19 @@
             { "id": "grindless:barnard_residue", "count": 1 }
           ],
           "fluidsOut": [{ "id": "gtceu:iron_pentacarbonyl", "amount": 1000 }]
+        },
+        {
+          "_why": "MAX-R1 (max.md, L13 step 2, c2): the belt bloom carbonylated in CO; the Fe and Ni carbonyls are formed and cracked inside the vessel, so the CO returns whole (contained, nets to zero).",
+          "name": "bloom_carbonyl",
+          "circuit": 2,
+          "site": "barnard_b",
+          "eut": 1966080,
+          "duration": 400,
+          "itemsIn": [{ "id": "grindless:metal_rich_bloom", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:carbon_monoxide", "amount": 5000 }],
+          "itemsOut": [{ "id": "grindless:carbonyl_fe_ni_powder", "count": 2 }],
+          "fluidsOut": [{ "id": "gtceu:carbon_monoxide", "amount": 5000 }]
         }
       ]
     },
