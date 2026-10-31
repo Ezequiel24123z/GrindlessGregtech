@@ -38,7 +38,12 @@
           "_why": "MAX-B3 (max.md, L29 step 5): the packaged microcomb is locked to the nuclear clock (the clock is not consumed), the reference its teeth are counted against.",
           "itemsIn": [{ "id": "grindless:packaged_microcomb", "count": 1 }],
           "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 100 }],
-          "itemsOut": [{ "id": "grindless:clock_locked_microcomb", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:clock_locked_microcomb", "count": 1 }], "fluidsOut": [] },
+        { "name": "thorium_clock_reference", "circuit": 6, "eut": 1966080, "duration": 600,
+          "_why": "MAX-G1 (max.md, L18 step 1, c6): a thorium-229 sample and a VUV optic read against the running clock (not consumed) into the frequency reference the seed cavity is tuned to.",
+          "itemsIn": [{ "id": "grindless:thorium_229", "count": 1 }, { "id": "grindless:vuv_caf2_optic", "count": 1 }],
+          "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:thorium_clock_reference", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "crystal_growth": {

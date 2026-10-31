@@ -158,11 +158,11 @@ test('the stand-in runs the OpV-D3 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(KB.skipped), []);
   assert.deepEqual(plain(KB.clashes), []);
-  assert.equal(KB.recipes.length, 7);
+  assert.equal(KB.recipes.length, 8); // MAX-G1 adds write_seed_wave_packet (c6)
 });
 
 test('forge circuits 1-5 with their EU/t and ticks, all locked to Cygnus X-1', () => {
-  const want = { charge_gamma_pump: [1, 503316480, 800], focus_kugelblitz_seed: [2, 503316480, 2400], condense_kugelblitz_core: [3, 503316480, 2400], forge_hawking_drive: [4, 268435456, 1200], recondense_core_from_shell: [5, 503316480, 2400] };
+  const want = { charge_gamma_pump: [1, 503316480, 800], focus_kugelblitz_seed: [2, 503316480, 2400], condense_kugelblitz_core: [3, 503316480, 2400], forge_hawking_drive: [4, 268435456, 1200], recondense_core_from_shell: [5, 503316480, 2400], write_seed_wave_packet: [6, 503316480, 2400] };
   for (const [n, v] of Object.entries(want)) {
     const r = rec('kugelblitz_forming', n);
     assert.deepEqual([r.circuit, r.eut, r.duration, r.site, r.generator], [...v, true, false], n);

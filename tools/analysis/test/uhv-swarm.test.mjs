@@ -56,7 +56,8 @@ test('the stand-in runs the swarm scripts without errors, nothing clashing or sk
   assert.deepEqual(SW.skipped, []);
   // UEV-B2 adds the Alpha Centauri rows alpha_full_swarm and alpha_corona
   // UIV-A10 adds the Mercury row matrioshka_feed
-  assert.equal(SW.recipes.length, 11);
+  // MAX-G1 adds the Sgr A* row mirror_shell_segment (circuit 5, VA[MAX])
+  assert.equal(SW.recipes.length, 12);
 });
 
 test('registration: three types, three machines, two items with textures; F1\'s ids are not registered again', () => {
@@ -108,13 +109,13 @@ test('recipe lookup: every row is in the manager with its circuit, Mercury (or A
     assert.ok(rec, r.recipeId);
     assert.equal(rec.t, 'gtceu:' + r.type, r.name);
     assert.deepEqual(circuitOf(rec), r.circuit == null ? [] : [r.circuit], r.name);
-    assert.deepEqual(dimsOf(rec), r.type === 'assembler' ? [] : [r.name.startsWith('alpha_') ? ALPHA : ORBIT], r.name);
+    assert.deepEqual(dimsOf(rec), r.type === 'assembler' ? [] : [r.name.startsWith('alpha_') ? ALPHA : r.name === 'mirror_shell_segment' ? 'gcyr:black_hole_orbit' : ORBIT], r.name);
     assert.ok(Number.isInteger(r.duration) && r.duration > 0, r.name);
   }
   for (const [m, t] of Object.entries(MACHINES)) {
     assert.ok(SW.recipes.some((r) => r.type === t), m + ' has recipes');
   }
-  for (const r of SW.recipes.filter((x) => !x.generator)) {
+  for (const r of SW.recipes.filter((x) => !x.generator && x.name !== 'mirror_shell_segment')) {
     const rec = dump(r.recipeId);
     assert.ok(rec.j.tickInputs.eu[0].content <= VA_UHV, r.name + ' within UHV');
   }
