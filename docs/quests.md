@@ -13,6 +13,7 @@ Verbatim, from their messages:
 - The first hour has to go step by step, with real dependencies: wood and stone → GT tools (what each one is for) → copper and tin (veins, surface rocks) → dusts with the mortar, and mixing → bronze → coke oven → boilers and steam machines → our drill (and why) → steel → gate to LV.
 - An early quest gives the full set of unbreakable neutronium tools, to remove the tool grind.
 - Take inspiration from the quest books of other packs, and copy from those whose license allows it.
+- **2026-10-31, Project Reforge (owner decision; it supersedes "short" and "a small reward" in the first quote):** "Quests may be longer and more numerous in advanced eras, in the style of Star Technology and GTNH. Each era must teach its new wafers, circuit generations, processes and multiblocks." Each era gets six chapters: What's new, Materials processing, Wafers and circuits, Machines and multiblocks, Integration, and Capstone project. Every new mechanic explains what it's for, how it's made, what it needs, what it unlocks and how to automate it. Phase 5 of the Reforge rebuilds the book around this; until then, the sections below describe the current book.
 
 ## 2. Sources
 
@@ -115,15 +116,15 @@ The grid is FTB Quests' grid: one square = one unit of `x`/`y`.
 
 ## 7. Rewards
 
-- **Small and useful for the next step:** coal when making iron, clay when finishing bronze, glass when learning glass, drill bits when making the vein drill. XP for the reading ones.
-- Nothing that skips a step of the age. The exception is the neutronium toolbox, which the user asked for.
+- **Proportionate and useful for the next step:** coal when making iron, clay when finishing bronze, glass when learning glass, drill bits when making the vein drill. XP for the reading ones. A big capstone may earn a bigger reward.
+- Nothing that skips a step of the age or a production line. The exception is the neutronium toolbox, which the user asked for.
 - Six rewards per quest at most (Arrival and the toolbox are on the linter's exceptions list).
 
-### Starter equipment and existing saves
+### Starter equipment
 
-Arrival gives a diamond pickaxe, axe, shovel and hoe with Efficiency V, a Field Prospector (HV), a stack of bread and the original torches. These are ordinary FTB item rewards, not login grants. The neutronium toolbox stays where it was, with its existing ids and rewards.
+Arrival gives a diamond pickaxe, axe, shovel and hoe with Efficiency V, a Field Prospector (HV), a stack of bread and the original torches. These are ordinary FTB item rewards, not login grants. The neutronium toolbox stays where it was.
 
-The original 8-bread reward (`21A6FB493B3D6DA8`) is retained unchanged. A separate 56-bread reward brings the total to 64, so a player who already claimed Arrival can claim the additions without resetting any quest or receiving the original bread and torches twice. Each new tool has its own new reward id. Arrival is an explicit exception to the reward-count limit for this save-compatible starter kit.
+The bread comes as two rewards (8 under `21A6FB493B3D6DA8`, then 56), left over from keeping old worlds claimable. There are no saves to protect, so Phase 5 may merge them. Arrival is an explicit exception to the reward-count limit.
 
 The gifted `gtceu:prospector.hv` carries `grindless_starter_prospector: 1b`. Its right-click queries GTM 7.5.3's saved vein cache and calls its public `prospectByDepositName` once per matching deposit type; GTM sends its native ore-discovery packets to the installed map integrations. This avoids KubeJS's blocked network classes without bypassing the class filter. Open the map and enable **Ore Veins**. The query includes vein centres within **256 blocks in both X and Z**, inclusive, relative to the player's block position: a square with a real 16-chunk reach in every cardinal direction, not a 16-chunk-wide display. Results are delivered immediately, with a half-second cooldown between uses. No EU is spent, even with zero charge; no infinite-charge flag or electric capability is changed. Native HV tools cannot export charge, and crafted prospectors remain unchanged.
 
@@ -140,7 +141,7 @@ Why not enlarge the native scanner window: GTM 7.5.3's `ProspectorScannerBehavio
 
 ## 8. Writing
 
-Written in English. One to three short sentences, seventy words at most.
+Written in English. One to three short sentences, seventy words at most (`maxWords` in `tools/quests/lint-config.json`). Phase 5 raises the limit for advanced-era quests that teach a new mechanic (section 1).
 
 **The voice** (the user, 2026-10-25, translated from Spanish: "more human, a bit more humorous, not too much, less 'an AI made this'"): a friendly engineer who has done this run before and talks to you across the workbench. Plain words, a little dry, sometimes amused. It tells you what the thing does in this pack, the catch worth knowing about, and now and then a small joke.
 
@@ -157,7 +158,7 @@ Written in English. One to three short sentences, seventy words at most.
 
 ### What does not need a quest
 
-A quest earns its place by teaching something about **this** pack. Cut the ones that only teach what any GregTech or AE2 player already knows and that the pack doesn't change: transformers (LV and MV already explain them), cables and voltage tiers, "AE2 can link dimensions", a machine that works exactly as in GregTech. If the pack adds a twist, it goes in one sentence of the quest it belongs to ("the seed for the lunar bridge has to be made on the Moon"). Keep the id of every quest that stays (players keep their progress); when one goes, its children depend on its parents.
+A quest earns its place by teaching something the player needs in **this** pack. Every new wafer, circuit generation, process and multiblock of the era gets one, even when GTM makes it as usual (section 1). Cut the ones that only teach what any GregTech or AE2 player already knows and that the era does not lean on: transformers (LV and MV already explain them), cables and voltage tiers, "AE2 can link dimensions". If the pack adds a twist, it goes in one sentence of the quest it belongs to ("the seed for the lunar bridge has to be made on the Moon"). When a quest goes, its children depend on its parents.
 
 ### Banned phrases
 
@@ -181,17 +182,15 @@ Also, things the linter does not catch: rhetorical triplets ("wood, rubber wood 
 - Each chapter ends in an **exit milestone** (diamond shape) that names the next place: Steam ends at the LV Steam Turbine and announces the Nether; HV ends on the Moon and EV starts at the lunar base.
 - Never promise a multiblock or a place that does not exist yet.
 
-## 10. Saved games and ids
+## 10. Ids
 
-The user has a world. FTB Quests saves progress by the id of the chapter, quest, task and reward.
+FTB Quests saves progress by the id of the chapter, quest, task and reward. Nobody has played the pack yet (Project Reforge, 2026-10-31), so there is no progress to protect; the format rules still matter, because a bad id breaks the book.
 
 - **Every id runs from `0000000000000001` to `7FFFFFFFFFFFFFFF`:** 16 uppercase hexadecimal digits, with the first between 0 and 7. FTB Quests 2001.4 reads ids with `Long.parseLong(hex, 16)` (`BaseQuestFile#readID`, `QuestObjectBase#parseCodeString`). An id starting with 8–F fails silently: the object gets a random id on every load (its progress is lost and its reward can be claimed again), and every dependency pointing to it disappears. Half the book was like that until v0.4.1, which is where the floating quests in the user's screenshots came from. The FTB Quests editor never creates those ids; our generators did.
 - **Fix:** `node tools/quests/fix-ids.mjs --write` clears the high bit (8 → 0, 9 → 1 … F → 7). It is deterministic and idempotent: it can run chapter by chapter (`--chapter lv_age`) and the links between chapters still match up. The linter flags it as an error (`id-range`), and `gg_test_quests` counts the dependencies that FTB Quests loads in each chapter.
-- If a quest still means the same thing, **keep its id** (the already fixed one), even if it changes chapter, place, text or tasks. Moving a quest to another file does not lose progress: *Bronze* and *Sticky Resin* moved from Steam to Welcome; the Ender Eye, the End Key and the End Veins from HV to MV; titanium and the EV parts from HV to EV.
-- What cannot be saved: the progress of quests with id 8–F in worlds from v0.4.1 or earlier, because their id was random there. Since the fix, progress stays fixed.
-- Tasks that still mean the same thing keep their id; new ones get a new id. Changing a task's count breaks nothing.
+- Keeping the id of a quest that still means the same thing is optional: it keeps diffs small and cross-chapter dependencies intact. Quests may be removed, merged or renumbered.
+- New tasks get a new id. Changing a task's count breaks nothing.
 - New ids: never repeated anywhere in the book (the linter checks this), and with a first digit of 1–7. In Node: `const b = crypto.randomBytes(8); b[0] = (b[0] & 0x7f) | 0x10; b.toString('hex').toUpperCase()`.
-- A quest is only removed if it has no equivalent.
 
 ## 11. Tools
 
@@ -391,7 +390,7 @@ A chunk is one chapter, written by one person. The contract is this guide and th
 
 1. Read `AGENTS.md`, the sections of this guide that `.github/instructions/quests.instructions.md` lists for your task, and the two reference chapters (`welcome.snbt`, `steam_age.snbt`).
 2. Touch only your chapter file (or its data file, if the chapter is generated) and its line in `GG_QUESTS_EXPECTED` in `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js`. If you adapt anything from another pack, propose the `CREDITS.md` line in the handoff.
-3. Keep the ids of every quest that still means the same thing, and the blocks marked as fixed in section 14. New ids follow section 10.
+3. Keep the blocks marked as fixed in section 14. Keeping the ids of quests that still mean the same thing is optional (section 10); new ids follow section 10.
 4. Check every fact against the recipe dump (`files/test-runs/hidden-moon-dump1/results/server/kubejs-exported/`), not from memory.
 5. No quests or text about the incoming machines in section 14.
 6. Done = linter with 0 errors and 0 warnings in your chapter (or warnings explained in `lint-config.json`), preview from left to right with no crossings, and `gg_test_quests` on the test bench with a copy of `pack/`.

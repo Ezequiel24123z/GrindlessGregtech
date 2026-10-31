@@ -11,11 +11,12 @@ The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon
 ## Design rules
 
 - **No hand gathering.** Hand mining only starts the game. The Horizon Collector you start with slowly makes the basics; from the Steam Age on, vein drills, greenhouses, simulators and harvesters supply everything.
-- **Complexity, not quantity.** Eras get harder through more steps, conditions, multiblocks and lines that cross each other—never through inflated amounts or recipe times.
+- **Complexity first, and real cost.** Eras get harder through more steps, conditions, multiblocks and lines that cross each other. From MV on, amounts climb steeply too: key recipes and final items cost a lot of items and fluids. Every input stays automatable, and recipe times are never inflated in place of cost.
 - **Honest byproducts.** Every byproduct goes somewhere: inert ones can be voided, dangerous ones must be contained, and future uses are stated.
 - **Multiblocks that pay off.** Every era has multiblocks of ours that gain something: speed, throughput, a recipe impossible at small scale, or several steps in one.
 - **Generous power, never free.** Boilers make ×8 steam and generators ×2 EU per fuel (GregTech Leisure style). Later eras keep that with better fuels and more complex plants; nothing makes energy from nothing.
-- **Short quests.** Quests are in English, give small rewards and never block recipes.
+- **Quests that teach.** Quests are in English and never block recipes. Advanced eras get longer chapters that teach every new wafer, circuit generation, process and multiblock. Rewards are proportionate and never skip a production line.
+- **Huge and deeply industrial.** Pointless complexity goes; meaningful complexity stays.
 - **GregTech Modern wins** whenever these rules conflict with it.
 
 ## Current status
@@ -129,7 +130,7 @@ FTB Quests guides the whole journey: Welcome and Workshop chapters, one chapter 
 
 ## How to play (Prism Launcher)
 
-**Releases channel (recommended).** It updates by itself and keeps your world.
+**Releases channel (recommended).** It updates by itself.
 
 1. Download `Gregtech-Grindless-releases.zip` from the [releases channel release](https://github.com/Ezequiel24123z/GrindlessGregtech/releases/tag/releases-channel).
 2. In Prism: *Add instance → Import → choose the zip*.
@@ -137,9 +138,11 @@ FTB Quests guides the whole journey: Welcome and Workshop chapters, one chapter 
 
 Before each launch, the instance updates from the `releases` branch, which only moves to tested versions. FTB Backups 2 makes copies of the world in the instance's `backups` folder.
 
-### Updating without starting a new world
+### Updating
 
-Keep using the **same Prism instance**. Once a tested release reaches `releases`, close Minecraft and launch that instance again: packwiz updates the managed pack files, not your `saves` folder. There is no need to import another zip or start another world for each pack release.
+Keep using the **same Prism instance**. Once a tested release reaches `releases`, close Minecraft and launch that instance again: packwiz updates the managed pack files, not your `saves` folder. There is no need to import another zip for each pack release.
+
+**Until v1.0.0, start a new world after updating.** Releases before 1.0 may remove, rename or reshape items, blocks, fluids, dimensions, multiblocks and quests, so a world from an older release can break.
 
 **Versioned release zips are different.** An instance imported from `Gregtech-Grindless-v0.14.0.zip`, for example, is pinned to that tag and does not automatically follow later releases. To switch it to the releases channel without moving the world, close Minecraft, open *Edit instance → Settings → Custom commands*, and change the existing pre-launch command to:
 
@@ -151,7 +154,7 @@ This is a one-time change; the release zips already include the bootstrap jar. T
 
 Before updating a world you care about, make a fresh backup of its folder under `saves`, with Minecraft closed. FTB Backups 2's periodic copies are useful, but the updater does not itself guarantee a fresh pre-update backup. Do not downgrade an updated world; restore a matching world backup and pack version instead.
 
-Our releases preserve registered items, blocks, fluids and dimension ids, and announce any multiblock rebuilds. New world generation affects new chunks, not terrain already explored. These are **pack updates on Minecraft 1.20.1**, not Minecraft-version migrations: do not independently change Minecraft or Forge in Prism's version settings.
+These are **pack updates on Minecraft 1.20.1**, not Minecraft-version migrations: do not independently change Minecraft or Forge in Prism's version settings.
 
 ### Setting up a fixed version manually
 
