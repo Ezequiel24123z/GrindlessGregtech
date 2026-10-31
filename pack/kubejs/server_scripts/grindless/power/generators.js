@@ -1,4 +1,4 @@
-// priority: -21774
+// priority: -21879
 // -----------------------------------------------------------------------------------------------
 // Power pass (DECISIONS.md): to read a little more permissive than base GregTech, closer to GTL (research/gtl/
 // leisure-port.md #2), every generator recipe gives twice the EU per unit of fuel: burning the same fuel now makes

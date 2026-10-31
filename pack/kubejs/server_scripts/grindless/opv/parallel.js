@@ -1,4 +1,4 @@
-// priority: -21735
+// priority: -21829
 // Gregtech Grindless - the OpV parallel hatch's recipe (package OpV-M1; the hatch is registered in startup_scripts/grindless/lib/parallel_hatch.js).
 //
 //   gtceu:opv_parallel_hatch (Overpowered Parallel Control Hatch, up to 262144 copies of a recipe) -> grindless:assembly_line/opv_parallel_hatch

@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:node_power_transmitter", "item:grindless:rejected_timing_head", "item:grindless:rejected_mmic_tile"],
+  "text": ["emi.grindless.info.opv_pathfinder_transmitter.0"]
+}

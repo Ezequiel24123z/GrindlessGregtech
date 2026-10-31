@@ -1,4 +1,4 @@
-// priority: 5724
+// priority: 5726
 // Gregtech Grindless - names and tooltips of OpV's magnetic pair converter, its item and the package's older rows
 // (startup_scripts/grindless/opv/pair_converter.js; package OpV-E1):
 //

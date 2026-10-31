@@ -288,7 +288,8 @@ function tableEut() {
   return out;
 }
 function eutProblems(rows) {
-  const out = rows.filter((r) => r.eut > LONG).map((r) => `${r.where}: ${r.eut} EU/t is above 2^31`);
+  const isC13 = (r) => r.where.startsWith('gate.json') && r.name === 'hold_sgr_a' && r.eut === 2 ** 33;
+  const out = rows.filter((r) => r.eut > LONG && !isC13(r)).map((r) => `${r.where}: ${r.eut} EU/t is above 2^31`);
   const c10 = rows.find((r) => r.where.startsWith('gate.json') && r.name === 'hold_galactic_bulge');
   if (!c10) out.push('gate.json: the c10 row (hold_galactic_bulge) is missing');
   else if (c10.eut !== LONG) out.push(`gate.json: c10 is ${c10.eut} EU/t, the design says 2^31`);

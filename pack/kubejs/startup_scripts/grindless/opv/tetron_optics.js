@@ -1,4 +1,4 @@
-// priority: -6805
+// priority: -6831
 // -----------------------------------------------------------------------------------------------
 // OpV's tetron fab and gamma optics works (docs/eras/opv.md, machines 1 and 2, lines 19, 34 and 35; package OpV-B1): the multiblocks,
 // their recipe types and the package's own items. The recipes come from data/grindless/tables/tetron_optics.json

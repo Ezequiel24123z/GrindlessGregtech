@@ -1,0 +1,37 @@
+{
+  "_": "OpV-R3 (docs/eras/opv.md, machines 17 and 18, line 40): the collector node works and the bulge collector at Terzan 5 core. Read by server_scripts/grindless/opv/bulge_collector.js. Amounts per run; \"site\" true locks the row to Terzan 5 core; \"kept\" is not consumed; \"generator\" true writes the EUt negative. The three collector rows share one duration: ceil(1.5 x fullCost(pack) / 2^26 / 100) x 100 (tools/analysis/test/opv-bulge_collector.test.mjs derives it from the rows and the named assumptions and fails when this number is stale). The doc's kerf-to-c1 recycle of the works is dropped: no input may return through a recycle loop.",
+  "types": {
+    "collector_node_assembly": {
+      "dataKey": "grindless_collector_node_assembly",
+      "recipes": [
+        { "name": "node_si_ribbon", "circuit": 1, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:si_alloy_powder", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:si_ribbon", "count": 2 }], "fluidsOut": [] },
+        { "name": "node_pv_film", "circuit": 2, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:si_ribbon", "count": 2 }, { "id": "grindless:silicate_debris_fraction", "count": 1 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:pv_collector_film", "count": 1 }], "fluidsOut": [] },
+        { "name": "collector_node_assembly", "circuit": 3, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:pv_collector_film", "count": 2 }, { "id": "grindless:node_power_transmitter", "count": 1 }, { "id": "grindless:cluster_sinter_casing", "count": 1 }],
+          "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:collector_node", "count": 1 }], "fluidsOut": [] },
+        { "name": "node_pack_deploy", "circuit": 4, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:collector_node", "count": 4 }, { "id": "grindless:probe_seed", "count": 1 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:deployed_node_pack", "count": 1 }], "fluidsOut": [] }
+      ]
+    },
+    "bulge_light_collection": {
+      "dataKey": "grindless_bulge_light_collection",
+      "recipes": [
+        { "name": "bulge_light_1", "circuit": 1, "eut": 67108864, "duration": 376200, "site": true, "generator": true,
+          "itemsIn": [{ "id": "grindless:deployed_node_pack", "count": 1 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_collector_node", "count": 4 }], "fluidsOut": [] },
+        { "name": "bulge_light_4", "circuit": 2, "eut": 268435456, "duration": 376200, "site": true, "generator": true,
+          "itemsIn": [{ "id": "grindless:deployed_node_pack", "count": 4 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_collector_node", "count": 16 }], "fluidsOut": [] },
+        { "name": "bulge_light_16", "circuit": 3, "eut": 1073741824, "duration": 376200, "site": true, "generator": true,
+          "itemsIn": [{ "id": "grindless:deployed_node_pack", "count": 16 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_collector_node", "count": 64 }, { "id": "grindless:bulge_light_census", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}

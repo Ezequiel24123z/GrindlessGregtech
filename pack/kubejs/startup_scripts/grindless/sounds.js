@@ -1,4 +1,4 @@
-// priority: -6850
+// priority: -6861
 // -----------------------------------------------------------------------------------------------
 // Working-sound loops of our special multiblocks (QR-E0, docs/quality/sounds.md).
 //

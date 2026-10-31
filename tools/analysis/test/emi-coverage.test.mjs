@@ -330,7 +330,7 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   const gtRecipe = (list) => list.some((m) => m.source === 'recipe' && m.category.startsWith('gtceu:'));
   const charts = res.results.filter((x) => /_chart$|chart_draft$|lunar_map$|lunar_ephemeris$|vlbi_recording$/.test(x.key));
   const samples = res.results.filter((x) => x.key.startsWith('grindless:vein_sample_'));
-  assert.equal(charts.length, 19); // 19 since UXV-B6 and IMPLEMENTED_ERA uxv: the arm chart (Matrioshka c4) and the bulge chart (warp gate c10)
+  assert.equal(charts.length, 20); // 20 since OpV-G1: the Sgr A* chart (warp gate c13) joins the arm chart (Matrioshka c4) and the bulge chart (warp gate c10)
   assert.ok(samples.length > 40);
   // LuV B9: the Saturn Transfer Chart is made by the coilgun (a GT recipe) and is the ZPM trip: until ZPM its use is its copy and a page
   const nextEra = new Set(['grindless:saturn_transfer_chart']);
@@ -339,7 +339,8 @@ test('EMI shows how every item, block, fluid and machine of the pack is obtained
   // UEV-B2's pulsar navigation chart likewise researches the UIV casing (UEV-B5). UEV-B4's mass-radius chart is a kept GT catalyst
   // UXV-A6's island chart is kept by the gate's c10 row (UXV-B6), a GT recipe, so it needs no entry. UXV-B6's bulge chart researches the
   // OpV casing (GTM generates that research_station recipe), so its use shows through its page uxv_gate_stock
-  const pending = new Set(['grindless:stellar_neighbourhood_chart', 'grindless:pulsar_navigation_chart', 'grindless:bulge_chart']);
+  // OpV-G1's Sgr A* chart is the gate's c13 product; its use is the MAX package (C1), until then a page
+  const pending = new Set(['grindless:stellar_neighbourhood_chart', 'grindless:pulsar_navigation_chart', 'grindless:bulge_chart', 'grindless:sgr_a_chart']);
   for (const r of charts.filter((x) => !pending.has(x.key))) {
     // an info page lists its stack as both made and used, so the chart's page shows on both sides
     assert.ok(gtRecipe(r.made) && (nextEra.has(r.key) || !r.made.some((m) => m.source === 'page')), r.key);

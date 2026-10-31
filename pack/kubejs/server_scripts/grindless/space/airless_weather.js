@@ -1,4 +1,4 @@
-// priority: -21824
+// priority: -21909
 // -----------------------------------------------------------------------------------------------
 // Earth's weather stays on Earth (DECISIONS.md 2026-10-25).
 // In vanilla 1.20.1 every dimension but the Overworld reads the Overworld's rain and thunder flags (DerivedLevelData), and a dimension

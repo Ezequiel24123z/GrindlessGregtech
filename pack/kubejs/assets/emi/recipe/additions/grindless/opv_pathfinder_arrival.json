@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:pathfinder_probe", "item:grindless:launched_pathfinder", "item:grindless:pathfinder_probe_core", "item:grindless:vitamin_kit"],
+  "text": ["emi.grindless.info.opv_pathfinder_arrival.0", "emi.grindless.info.opv_pathfinder_arrival.1"]
+}
