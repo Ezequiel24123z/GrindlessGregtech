@@ -913,6 +913,28 @@
       "id": "loop_strangelet_distiller", "recipeType": "gtceu:strangelet_distillation",
       "prompt": "Seamless looping magnetic plasma distiller, deep vacuum pump drone and soft cyclic trap pulses, no voices, no music",
       "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0
+    },
+    {
+      "id": "loop_kugelblitz_forge",
+      "recipeType": "gtceu:kugelblitz_forming",
+      "prompt": "Seamless looping sound of a huge gamma-ray focusing chamber: a deep sub-bass drone, converging high-pitched whines tightening in a slow rhythm and faint electrostatic crackle, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_hawking_collector",
+      "recipeType": "gtceu:hawking_power",
+      "prompt": "Seamless looping sound of a heavy power collector: a steady deep transformer hum, a soft radiant shimmer and slow ticks of heat vents, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }

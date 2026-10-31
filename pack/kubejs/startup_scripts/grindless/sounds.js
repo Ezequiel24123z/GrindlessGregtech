@@ -100,7 +100,9 @@
     'gtceu:antiproton_production': 'loop_spallation_target_station',
     'gtceu:beam_cooling': 'loop_antiproton_decelerator',
     'gtceu:strangelet_growth': 'loop_strangelet_vault',
-    'gtceu:strangelet_distillation': 'loop_strangelet_distiller'
+    'gtceu:strangelet_distillation': 'loop_strangelet_distiller',
+    'gtceu:kugelblitz_forming': 'loop_kugelblitz_forge',
+    'gtceu:hawking_power': 'loop_hawking_collector'
   }
 
   StartupEvents.registry('sound_event', function (event) {
