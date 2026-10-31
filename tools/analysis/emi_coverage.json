@@ -99,7 +99,7 @@
     { "id": "grindless:gan_mmic", "package": "R1", "reason": "OpV-A2 makes it; R1's node power transmitter takes it (opv.md line 42)" },
     { "id": "grindless:sdd_die", "package": "R1", "reason": "OpV-A2 makes it; R1's XNAV timing head takes it (opv.md line 41)" },
     { "id": "grindless:launched_bulge_seed", "package": "G1", "reason": "OpV-A0 makes it (c11 throw to SGR 1806-20, opv.md line 93); G1's gate c13 to Sgr A* takes one per throw: the relay already in the bulge forwards the MAX throw (coordinator decision, OpV-I1)" },
-    { "id": "grindless:field_frozen_casing", "package": "E1, D3", "reason": "OpV-A3 makes it; E1's and D3's multiblocks use it" },
+    { "id": "grindless:dense_positron_cell", "package": "B3, D3", "reason": "OpV-E1 makes it (electron beam c23 seals the pair converter's cell); B3's antihydrogen foundry and D3's multiblocks use it" },
     { "id": "grindless:laue_lens", "package": "D3", "reason": "OpV-B1 makes it (gamma optics works c1, opv.md line 35); D3's multiblocks use it" },
     { "id": "grindless:gamma_multilayer_mirror", "package": "D3", "reason": "OpV-B1 makes it (gamma optics works c2, opv.md line 34); D3's multiblocks use it" }
   ]
