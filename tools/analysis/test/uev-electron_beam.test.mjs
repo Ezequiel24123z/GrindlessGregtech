@@ -24,7 +24,8 @@ const lang = read(path.join(kube, 'client_scripts', 'grindless', 'uev_electron_b
     + read(path.join(kube, 'client_scripts', 'grindless', 'opv_beam_hardware_lang.js')) // OpV-D1's c24-26 and c30-31
     + read(path.join(kube, 'client_scripts', 'grindless', 'opv_census_iv_lang.js')) // OpV-B2's c23 ni_chain_thaw
     + read(path.join(kube, 'client_scripts', 'grindless', 'opv_components_lang.js')) // OpV-A1's c21 mesh_belt_weld
-    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_field_press_lang.js')); // OpV-A3's c22 W-Re can and its re-melt
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_field_press_lang.js')) // OpV-A3's c22 W-Re can and its re-melt
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_pathfinder_lang.js')); // OpV-R1 EB c24
 
 const GTM = new Set(['mixer', 'assembler', 'compressor', 'bender', 'macerator', 'chemical_reactor', 'electric_blast_furnace']);
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);

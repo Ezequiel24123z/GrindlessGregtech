@@ -213,7 +213,10 @@
       fluidsIn: [fluid(ACRYLATE, 250)], itemsOut: [item('grindless:cryo_optical_link', 4)], fluidsOut: [], eut: 122880, duration: 600 },
     { name: 'th_caf2_coating', type: 'mocvd', circuit: 20, itemsIn: [item('grindless:th_caf2_lasing_boule', 1), item('gtceu:magnesium_dust', 1)],
       fluidsIn: [fluid('gtceu:hydrofluoric_acid', 2000)], itemsOut: [item('grindless:coated_th_caf2_crystal', 1)],
-      fluidsOut: [fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 800 }
+      fluidsOut: [fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 800 },
+    // OpV-R1 (docs/eras/opv.md, line 41): the polycapillary optic bundled from hollow capillaries (contract c18)
+    { name: 'polycapillary_optic', type: 'fibre_draw', circuit: 18, itemsIn: [item('grindless:hollow_capillaries', 4)],
+      fluidsIn: [fluid('gtceu:argon', 500)], itemsOut: [item('grindless:polycapillary_optic', 1)], fluidsOut: [], eut: 1966080, duration: 400 }
   ]
 
   // OpV-A3 (docs/eras/opv.md, line 45): AlGaN grown on the AlN wafer from trimethylgallium and ammonia; the methyls leave as methane, the

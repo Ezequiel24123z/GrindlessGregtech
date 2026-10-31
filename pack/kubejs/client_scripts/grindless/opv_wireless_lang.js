@@ -1,4 +1,4 @@
-// priority: 5682
+// priority: 5676
 // Gregtech Grindless - names of the OpV wireless tier (package OpV-W; the OpV row of kubejs/data/grindless/tables/wireless_energy.json,
 // registered by startup_scripts/grindless/lv/wireless_energy.js):
 //

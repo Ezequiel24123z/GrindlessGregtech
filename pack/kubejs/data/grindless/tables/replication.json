@@ -1,0 +1,59 @@
+{
+  "_": "OpV-R2 (docs/eras/opv.md, machines 14-16, lines 38-39): the replication chain at Terzan 5 core. Read by server_scripts/grindless/opv/replication.js. Amounts per run; \"site\" true locks the row to Terzan 5 core; \"kept\" is not consumed.",
+  "types": {
+    "debris_harvesting": {
+      "dataKey": "grindless_debris_harvesting",
+      "recipes": [
+        { "name": "bulge_debris_harvest", "circuit": 1, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [], "kept": [{ "id": "gtceu:opv_sensor", "count": 1 }], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:bulge_debris", "count": 4 }], "fluidsOut": [] },
+        { "name": "debris_fractions", "circuit": 2, "eut": 268435456, "duration": 200, "site": true,
+          "itemsIn": [{ "id": "grindless:bulge_debris", "count": 4 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:metal_debris_fraction", "count": 2 }, { "id": "grindless:silicate_debris_fraction", "count": 2 }], "fluidsOut": [] }
+      ]
+    },
+    "replication_refining": {
+      "dataKey": "grindless_replication_refining",
+      "_r3": "OpV-R3 EXTENDS THIS LIST BY ONE ROW at the end of recipes: c7 'spent_node_recovery', spent nodes -> grindless:si_alloy_powder (circuit 7, 268435456 EU/t, site true). Circuits 1-6 are taken.",
+      "recipes": [
+        { "name": "metal_carbonyl_synthesis", "circuit": 1, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:metal_debris_fraction", "count": 2 }], "kept": [], "wear": [],
+          "fluidsIn": [{ "id": "gtceu:carbon_monoxide", "amount": 1000 }],
+          "itemsOut": [], "fluidsOut": [{ "id": "gtceu:metal_carbonyl", "amount": 1000 }] },
+        { "name": "carbonyl_decomposition", "circuit": 2, "eut": 268435456, "duration": 300, "site": true,
+          "itemsIn": [], "kept": [], "wear": [],
+          "fluidsIn": [{ "id": "gtceu:metal_carbonyl", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:carbonyl_iron_nickel", "count": 2 }], "fluidsOut": [{ "id": "gtceu:carbon_monoxide", "amount": 900 }] },
+        { "name": "metal_feedstock_sinter", "circuit": 3, "eut": 268435456, "duration": 300, "site": true,
+          "itemsIn": [{ "id": "grindless:carbonyl_iron_nickel", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:metal_feedstock", "count": 4 }], "fluidsOut": [] },
+        { "name": "ffc_pellet_press", "circuit": 4, "eut": 268435456, "duration": 200, "site": true,
+          "itemsIn": [{ "id": "grindless:silicate_debris_fraction", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:ffc_pellet", "count": 2 }], "fluidsOut": [] },
+        { "name": "ffc_salt_bath", "circuit": 5, "eut": 268435456, "duration": 600, "site": true,
+          "itemsIn": [{ "id": "grindless:ffc_pellet", "count": 4 }, { "id": "gtceu:graphite_plate", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:si_alloy_powder", "count": 2 }, { "id": "grindless:spent_graphite_anode", "count": 2 }],
+          "fluidsOut": [{ "id": "gtceu:oxygen", "amount": 500 }] },
+        { "name": "cluster_casing_sinter", "circuit": 6, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:si_alloy_powder", "count": 4 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:cluster_sinter_casing", "count": 2 }], "fluidsOut": [] },
+        { "name": "spent_node_recovery", "circuit": 7, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:spent_collector_node", "count": 4 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:si_alloy_powder", "count": 8 }], "fluidsOut": [] }
+      ]
+    },
+    "self_replication": {
+      "dataKey": "grindless_self_replication",
+      "recipes": [
+        { "name": "probe_self_copy", "circuit": 1, "eut": 503316480, "duration": 2400, "site": true,
+          "itemsIn": [{ "id": "grindless:metal_feedstock", "count": 16 }, { "id": "grindless:cluster_sinter_casing", "count": 8 }, { "id": "grindless:vitamin_kit", "count": 1 }],
+          "kept": [{ "id": "grindless:probe_seed", "count": 1 }], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:probe_seed", "count": 2 }], "fluidsOut": [] },
+        { "name": "probe_core_seed", "circuit": 2, "eut": 503316480, "duration": 2400, "site": true,
+          "itemsIn": [{ "id": "grindless:pathfinder_probe_core", "count": 1 }, { "id": "grindless:metal_feedstock", "count": 16 }, { "id": "grindless:cluster_sinter_casing", "count": 8 }, { "id": "grindless:vitamin_kit", "count": 1 }],
+          "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:probe_seed", "count": 1 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}
