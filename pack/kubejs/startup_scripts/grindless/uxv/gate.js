@@ -8,8 +8,9 @@
 //   gtceu:matrioshka_computing 3 -> 5 item inputs: the arm chart row (c4) takes four records and the circuit.
 //
 // The recipe types are registered by uhv/gate.js and uiv/matrioshka.js in the gtceu:recipe_type event, from the maxIO they publish in
-// global.grindless (warpGate.machines.gate, matrioshka.machines). This handler raises that figure so the server scripts' slot check and the
-// type agree; it works in either script order: before those handlers it moves the figure they read, after them it resizes the registered type.
+// global.grindless (warpGate.machines.gate, matrioshka.machines). GTM builds the types only after that event (GTRecipeTypes.get is null inside
+// it, so a resize there never reached EMI's slot layout), so they are resized in the gtceu:machine event, as luv/europa.js widens vein_drilling:
+// any script order works and a type is never narrowed. The published figure is raised too, so the server scripts' slot check and the type agree.
 (function () {
   var LOG = '[grindless/uxv] '
   var G = global.grindless || (global.grindless = {})
@@ -25,15 +26,18 @@
     return list[0].maxIO
   }
 
-  GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
+  GTCEuStartupEvents.registry('gtceu:machine', function (event) {
+    var ItemCap = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability').CAP
+    var FluidCap = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability').CAP
     WIDEN.forEach(function (w) {
       try {
         var io = ioOf(w[0])
-        io.itemsIn = w[1]
-        if (typeof GTRecipeTypes !== 'undefined') {
-          var type = GTRecipeTypes.get(w[0])
-          if (type != null) type.setMaxIOSize(w[1], io.itemsOut, io.fluidsIn, io.fluidsOut)
-        }
+        io.itemsIn = Math.max(Number(io.itemsIn) || 0, w[1])
+        var type = GTRecipeTypes.get(w[0])
+        if (type == null) throw new Error('recipe type gtceu:' + w[0] + ' is not registered')
+        var now = [type.getMaxInputs(ItemCap), type.getMaxOutputs(ItemCap), type.getMaxInputs(FluidCap), type.getMaxOutputs(FluidCap)]
+        var sizes = [io.itemsIn, io.itemsOut, io.fluidsIn, io.fluidsOut].map(function (n, i) { return Math.max(Number(n) || 0, Number(now[i]) || 0) })
+        type.setMaxIOSize(sizes[0], sizes[1], sizes[2], sizes[3])
       } catch (e) {
         console.error(LOG + 'gate slots not widened: ' + e)
       }

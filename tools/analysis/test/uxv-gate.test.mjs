@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
@@ -71,6 +72,51 @@ test('arm chart: four records plus the circuit (c4) fit the widened Matrioshka t
   assert.match(startup, /matrioshka_computing/);
   const circuits = matJson.types.matrioshka_computing.recipes.map((r) => r.circuit).filter((c) => c > 0);
   assert.equal(new Set(circuits).size, circuits.length);
+});
+
+// GTM builds the recipe types only after the gtceu:recipe_type event: the widening must land on the built type in the gtceu:machine event
+// (the 0f08570a client EMI audit showed the arm chart's fourth record missing while the resize sat in the recipe_type event).
+test('the widening reaches the built warp gate and Matrioshka types, in either script order, never narrowing', () => {
+  for (const gateFirst of [false, true]) {
+    const callbacks = [];
+    const built = new Map();
+    const G = {};
+    const publish = () => {
+      G.warpGate = { machines: { gate: { maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 } } } };
+      G.matrioshka = { machines: [
+        { type: 'matrioshka_computing', maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 } },
+        { type: 'droplet_radiator_assembly', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 } }
+      ] };
+      callbacks.push(['gtceu:recipe_type', () => {
+        built.set('warp_gate', { in: G.warpGate.machines.gate.maxIO.itemsIn, out: 2, fin: 0, fout: 3 });
+        built.set('matrioshka_computing', { in: G.matrioshka.machines[0].maxIO.itemsIn, out: 1, fin: 0, fout: 0 });
+      }]);
+    };
+    const errors = [];
+    const context = vm.createContext({
+      global: { grindless: G }, console: { error: (m) => errors.push(m), info() {}, warn() {}, log() {} },
+      GTCEuStartupEvents: { registry: (kind, cb) => callbacks.push([kind, cb]) },
+      Java: { loadClass: (id) => ({ CAP: /Fluid/.test(id) ? 'fluid' : 'item' }) },
+      GTRecipeTypes: { get: (name) => {
+        const t = built.get(name);
+        if (!t) return null;
+        return {
+          getMaxInputs: (cap) => (cap === 'item' ? t.in : t.fin),
+          getMaxOutputs: (cap) => (cap === 'item' ? t.out : t.fout),
+          setMaxIOSize: (a, b, c, d) => Object.assign(t, { in: a, out: b, fin: c, fout: d })
+        };
+      } }
+    });
+    if (!gateFirst) publish();
+    vm.runInContext(startup, context);
+    if (gateFirst) publish();
+    for (const kind of ['gtceu:recipe_type', 'gtceu:machine']) for (const [k, cb] of callbacks) if (k === kind) cb({});
+    assert.deepEqual(errors, [], `no error (gate script ${gateFirst ? 'first' : 'last'})`);
+    assert.deepEqual(built.get('warp_gate'), { in: 7, out: 2, fin: 0, fout: 3 }, 'warp gate: 7 items in, the built fluid output kept');
+    assert.deepEqual(built.get('matrioshka_computing'), { in: 5, out: 1, fin: 0, fout: 0 }, 'Matrioshka: 5 items in');
+    assert.equal(G.matrioshka.machines[0].maxIO.itemsIn, 5, 'the published figure the server slot check reads');
+    assert.equal(G.matrioshka.machines[1].maxIO.itemsIn, 4, 'the droplet radiator is untouched');
+  }
 });
 
 test('the OpV casing: bulge chart research, UXV parts only, EU/t >= VA[UXV]', () => {
