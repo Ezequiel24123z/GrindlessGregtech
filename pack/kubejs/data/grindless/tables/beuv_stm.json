@@ -172,7 +172,10 @@
             { "id": "grindless:fouled_beuv_mirror", "count": 1 }
           ],
           "fluidsOut": []
-        }
+        },
+        { "_why": "MAX-A1 (max.md, L6): the quartz wafer exposed with the metalens pattern; the fouled mirror goes to c3 as in every exposure", "name": "metalens_wafer", "circuit": 10, "eut": 31457280, "duration": 2000,
+          "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 1 }, { "id": "grindless:quartz_crystal_wafer", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:metalens_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "stm_lithography": {

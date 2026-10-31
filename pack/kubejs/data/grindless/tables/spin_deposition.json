@@ -199,7 +199,13 @@
             { "id": "grindless:heusler_am_powder", "count": 1 }
           ],
           "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
-        }
+        },
+        { "_why": "MAX-A1 (max.md, L6): the metalens wafer coated with gold under argon; the overspray is the same gold reclaimed by c5", "name": "coated_metalens", "circuit": 13, "eut": 33554432, "duration": 700,
+          "itemsIn": [{ "id": "grindless:metalens_wafer", "count": 1 }, { "id": "gtceu:gold_foil", "count": 2 }, { "id": "grindless:ta_seed_target", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:coated_metalens", "count": 1 }, { "id": "grindless:gold_overspray", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
+        { "_why": "MAX-A1 (max.md, L7): niobium sputtered on the AlN-on-silicon wafer into the coplanar resonator film", "name": "nb_coplanar_film", "circuit": 14, "eut": 33554432, "duration": 800,
+          "itemsIn": [{ "id": "grindless:aln_on_si_wafer", "count": 1 }, { "id": "grindless:rrr_nb_target", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:nb_coplanar_film", "count": 1 }, { "id": "grindless:niobium_scrap", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] }
       ]
     },
     "pulsed_laser_deposition": {
