@@ -204,7 +204,10 @@
         },
         { "_why": "MAX-A1 (max.md, L7): an AlN piezo layer grown on the niobium coplanar film", "name": "piezo_optomech_layer", "circuit": 12, "eut": 1966080, "duration": 1600,
           "itemsIn": [{ "id": "grindless:nb_coplanar_film", "count": 1 }, { "id": "grindless:aln_powder", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:piezo_optomech_layer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] }
+          "itemsOut": [{ "id": "grindless:piezo_optomech_layer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] },
+        { "_why": "MAX-B2 (max.md, L33 step 2, c13): the AlGaAs/GaAs Bragg stack grown on the gallium arsenide substrate", "name": "algaas_bragg_stack", "circuit": 13, "eut": 1966080, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:gallium_arsenide_wafer", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }, { "id": "gtceu:gallium_arsenide_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:algaas_bragg_stack", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] }
       ]
     },
     "photonic_foundry": {

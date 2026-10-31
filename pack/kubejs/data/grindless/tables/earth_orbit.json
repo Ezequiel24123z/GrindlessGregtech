@@ -25,7 +25,10 @@
           "itemsOut": [{ "id": "grindless:calibrated_gravimeter", "count": 1 }], "fluidsOut": [] },
         { "_why": "MAX-A1 (max.md, L6): the coated metalens calibrated against a degenerate gas under the cooling lasers and the ULE cavity", "name": "tweezer_calibrated_lens", "circuit": 4, "eut": 1966080, "duration": 1200,
           "itemsIn": [{ "id": "grindless:coated_metalens", "count": 1 }, { "id": "gtceu:potassium_40_dust", "count": 2 }], "kept": [{ "id": "grindless:li_cooling_laser", "count": 1 }, { "id": "grindless:ule_cavity", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:tweezer_calibrated_lens", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:tweezer_calibrated_lens", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-B2 (max.md, L4 step 2, c5): strontium-88 cooled below degeneracy under the cooling lasers and the ULE cavity, loaded into a cartridge", "name": "degenerate_sr_cartridge", "circuit": 5, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:sr88_isotope", "count": 1 }], "kept": [{ "id": "grindless:li_cooling_laser", "count": 1 }, { "id": "grindless:ule_cavity", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:degenerate_sr_cartridge", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "entanglement_distribution": {
