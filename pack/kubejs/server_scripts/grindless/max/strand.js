@@ -4,18 +4,18 @@
 //   c5, c6 draw bench at SGR 1806-20 (tables/vela_pasta.json, pasta_drawing): clad chain strand -> preform -> 4 horizon strand wires
 //   c10 PBO plant (uhv/elevator.js): a wire braided in PBO fibre -> pbo_braid_sleeve
 // This script makes:
-//   1. grindless:clad_chain_strand: a chain strand ingot clad in 2 exotic cladding foil, a chain lamina and 2 PBO fibre under argon (home, assembly line, no research: a part).
+//   1. grindless:clad_chain_strand: a chain strand ingot clad in 2 exotic cladding foil, a chain lamina and 2 PBO fibre under argon (home, assembly line, no research: a part; EUt VH[MAX]/8 = 2^27 = V[UXV]). It is an assembly line, not the L1 GTM assembler, because the assembler form scores below recipe-quality's tier-14 complexity floor of 10 (C-COMPLEX).
 //   2. gtceu:horizon_strand_single_cable: the covering of GTM's single cable above IV, on the braided sleeve: one polyphenylene sulfide foil, one
 //      polyvinyl chloride foil and 72 mB of silicone rubber, 7 EU/t for 100 t (the OpV chain_strand_single_cable shape, opv/bulge_relay.js).
 //   3. gtceu:max_machine_hull: an assembly line row of the MAX casing, 2 horizon strand cables, 2 chain lamina stacks and 500 mB superfluid
-//      He-3 at V[MAX] = 2^30 EU/t, no research (a part, like the OpV hull). GTM's own hull recipe is removed by opv/cuts.js.
+//      He-3 at VH[MAX] = 2^30 EU/t (V[MAX] is 2^31), no research (a part, like the OpV hull). GTM's own hull recipe is removed by opv/cuts.js.
 // No input is a MAX product that returns through a loop. Published: global.grindless.maxStrand.recipes, .skipped.
 // Rhino: var + function inside every callback.
 (function () {
   var LOG = '[grindless/max] '
   var G = global.grindless || (global.grindless = {})
   var S = G.maxStrand || (G.maxStrand = {})
-  var V_MAX = 1073741824
+  var VH_MAX = 1073741824 // VH[MAX] = 2^30, not V[MAX]
 
   function skip(name, missing) {
     S.skipped.push({ name: name, reason: 'unknown id(s) ' + missing.join(', ') })
@@ -35,7 +35,7 @@
         a.itemInputs('gtceu:chain_strand_ingot', '2x grindless:exotic_cladding_foil', 'grindless:chain_lamina', '2x grindless:pbo_fibre')
         a.inputFluids(Fluid.of('gtceu:argon', 1000))
         a.itemOutputs('grindless:clad_chain_strand')
-        a.EUt(V_MAX / 8).duration(300)
+        a.EUt(VH_MAX / 8).duration(300)
         S.recipes.push('grindless:assembly_line/clad_chain_strand')
       }
     } catch (e) {
@@ -73,7 +73,7 @@
         h.itemInputs('2x grindless:chain_lamina_stack')
         h.inputFluids(Fluid.of('gtceu:superfluid_helium_3', 500))
         h.itemOutputs('gtceu:max_machine_hull')
-        h.EUt(V_MAX).duration(200)
+        h.EUt(VH_MAX).duration(200)
         S.recipes.push('grindless:assembly_line/max_machine_hull')
       }
     } catch (e) {

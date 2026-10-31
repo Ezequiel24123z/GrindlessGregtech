@@ -49,7 +49,7 @@ test('line L1: stable matter -> 4 foil (vault c4) -> clad strand -> preform (c5)
   assert.ok(ins('grindless:assembly_line/max_machine_hull').includes('gtceu:horizon_strand_single_cable'));
 });
 
-test('circuits do not repeat in a type, every row is within VA[MAX], and the hull is V[MAX] for 200 t at home (no site)', () => {
+test('circuits do not repeat in a type, every row is within VA[MAX], and the hull is VH[MAX] for 200 t at home (no site)', () => {
   for (const rows of [draw, vault]) {
     const cs = rows.map((r) => r.circuit);
     assert.equal(new Set(cs).size, cs.length);
@@ -57,7 +57,7 @@ test('circuits do not repeat in a type, every row is within VA[MAX], and the hul
   }
   const hull = run.docs.recipes.recipes.find((r) => r.i === 'grindless:assembly_line/max_machine_hull');
   assert.ok(hull, 'hull recipe');
-  assert.match(fs.readFileSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'max', 'strand.js'), 'utf8'), /h\.EUt\(V_MAX\)\.duration\(200\)/);
+  assert.match(fs.readFileSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'max', 'strand.js'), 'utf8'), /h\.EUt\(VH_MAX\)\.duration\(200\)/);
   assert.equal(hull.j.tickInputs.eu[0].content, 1073741824);
   assert.ok(1073741824 <= VA_MAX);
 });
