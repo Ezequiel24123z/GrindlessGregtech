@@ -80,6 +80,20 @@
       "duration": 400
     },
     {
+      "name": "rebco_on_pbo_web",
+      "step": "tape",
+      "_why": "MAX-B1 line L2 (c6): ITBTC coated conductor laid on the buffered PBO web under an epoxy bond, the REBCO-on-polymer web the membrane is made from.",
+      "circuit": 6,
+      "itemsIn": [
+        { "id": "grindless:buffered_pbo_web", "count": 1 },
+        { "id": "grindless:itbtc_coated_conductor", "count": 2 }
+      ],
+      "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }],
+      "itemsOut": [{ "id": "grindless:rebco_on_pbo_web", "count": 1 }],
+      "eut": 7864320,
+      "duration": 400
+    },
+    {
       "name": "smes_buffered_tape",
       "step": "tape",
       "_why": "MAX-W (docs/eras/max.md, L27 step 1): ITBTC coated conductor laminated with strand tape under an epoxy bond, the buffered tape the SMES toroid is wound from.",

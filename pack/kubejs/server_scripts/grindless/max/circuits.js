@@ -1,4 +1,4 @@
-// priority: -19934
+// priority: -19870
 // -----------------------------------------------------------------------------------------------
 // MAX-A1 "Circuits" (docs/eras/max.md, A1; lines 5-7 and the Circuits paragraph): the GTM step of line 6 and the join. Every other step of
 // the three lines is one row of an older machine, marked MAX-A1 in its own file:

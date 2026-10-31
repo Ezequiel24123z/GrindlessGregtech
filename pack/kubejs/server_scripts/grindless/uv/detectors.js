@@ -90,6 +90,9 @@
   // OpV-A2 (opv.md line 11): the float-zone ingot from two Siemens rods (the MOCVD reactor's c17, from fusion ash), not hot-cell dust
   TABLE.push({ name: 'si28_poly_fz', type: 'zone_refining', circuit: 11, itemsIn: [item('grindless:si28_poly_rod', 2)],
     fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:si28_fz_ingot', 1)], fluidsOut: [], eut: UVA, duration: 800 })
+  // MAX-B1 (max.md L3, Circuits by type: B1 c12): quartz sand zone-refined under argon into the ultrapure silica sputtering target
+  TABLE.push({ name: 'ultrapure_silica_target', type: 'zone_refining', circuit: 12, itemsIn: [item('gtceu:silicon_dioxide_dust', 4)],
+    fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:ultrapure_silica_target', 1)], fluidsOut: [], eut: UVA, duration: 800 })
 
   D.recipes = TABLE.map(function (t) {
     return {

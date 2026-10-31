@@ -90,6 +90,12 @@
     { name: 'rods', circuit: 2, sources: ['extruder/extrude_%_to_rod'] },
     { name: 'foil', circuit: 3, sources: ['bender/bend_%_ingot_to_foil', 'extruder/extrude_%_ingot_to_foil'] }
   ]
+  // MAX-B1 (docs/eras/max.md, L34): the cathode copper is hot rolled into the growth foil blank; circuit 14 is the first free of the mill (OpV's be_window_foil holds 13)
+  const MAX_B1_ROWS = [
+    { name: 'cathode_copper_foil', input: 'grindless:cathode_copper', output: 'grindless:rolled_cu_foil', count: 4, circuit: 14, water: 4,
+      eut: 1966080, duration: 400 }
+  ]
+  HM.extraRows = []
   const FREEZER_PATH = /^vacuum_freezer\/cool_hot_(.+)_ingot$/
   const SHAPING_PATH = /^(bender\/bend_.+_(to_plate|ingot_to_foil)|extruder\/extrude_.+_(to_plate|to_rod|ingot_to_foil))$/
 
@@ -469,6 +475,22 @@
       b.outputFluids(Fluid.of(STEAM, p.steam))
       b.EUt(p.eut).duration(p.duration)
       added.push(p)
+    })
+    // MAX-B1 (docs/eras/max.md, L34): rows that are not derived from a GTM shaping recipe; circuit 14 is the first free of the mill (OpV's be_window_foil holds 13)
+    MAX_B1_ROWS.forEach(function (row) {
+      var rowMissing = [row.input, row.output].filter(function (id) { return !Item.exists(id) })
+      if (rowMissing.length > 0) {
+        skipped.push({ material: row.name, reason: 'unknown item ' + rowMissing.join(', ') })
+        return
+      }
+      var rb = event.recipes.gtceu.hot_rolling(ID_PREFIX + row.name)
+      rb.itemInputs(row.count + 'x ' + row.input)
+      rb.circuit(row.circuit)
+      rb.inputFluids(Fluid.of(WATER, row.water))
+      rb.itemOutputs(row.count + 'x ' + row.output)
+      rb.outputFluids(Fluid.of(STEAM, row.water * STEAM_PER_WATER))
+      rb.EUt(row.eut).duration(row.duration)
+      HM.extraRows.push(row)
     })
     HM.recipes = added
     HM.skipped = skipped

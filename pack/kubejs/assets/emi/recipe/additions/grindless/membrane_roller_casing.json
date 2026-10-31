@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:membrane_roller_casing"],
+  "text": ["emi.grindless.info.membrane_roller_casing.0"]
+}
