@@ -1,4 +1,4 @@
-// The Power tab (power.snbt, in the Quality of Life group): every way to make power in the pack today, by tier, Steam to LuV, and
+﻿// The Power tab (power.snbt, in the Quality of Life group): every way to make power in the pack today, by tier, Steam to LuV, and
 // what carries and stores it. Positions are relative to each cluster (pl-model.mjs places the clusters). Every number in a node's
 // text is a figure (pl-lib.mjs#P) that pl-check.mjs recomputes from the dump, the pack's config or a script.
 import { I, F, M, n, L, E, P, engineFluid, boilerWater, build, structure, network } from './pl-lib.mjs';
@@ -99,6 +99,7 @@ export default gate({
     ['uvThorium', 'uvLaser', 'uvMuon', 'uvMk3'],
     ['uhvSwarm', 'laterDyson', 'uivStars', 'uxvStars'],
     ['opvAnnihilation', 'opvStars'],
+    ['maxStars'],
     ['gHull', 'gBat', 'gCable', 'gFar', 'gBig'],
     ...(WITH_WIRELESS ? [['gWireless']] : []),
   ],
@@ -679,6 +680,28 @@ export default gate({
         }),
       ],
     },
+    // ---------------------------------------------------------------- MAX
+    // figures wait for a bench measurement (as UIV's row): the winch, feeder and vent are in docs/eras/max.md, "Power"
+    maxStars: {
+      name: 'The Galactic Centre (MAX)',
+      nodes: [
+        E('eqMaxWinch', 0, -1.5, 'max_age', '545A65919796969A'),
+        E('eqMaxFeeder', 0, 0, 'max_age', '5AF8BC627162C8C5'),
+        E('eqMaxShell', 0, 1.5, 'max_age', '3AD1F00AD8DB5003'),
+        n('maxWinch', 2.25, -1.5, M('gtceu:geroch_winch'), 'Geroch Winch', {
+          kind: 'info', tier: 'max', from: ['eqMaxWinch'], sub: 'A tether lowered into the ergosphere pulls power out of Sgr A* as the hole slows',
+          desc: 'It runs at Sgr A* only, and wears a horizon tether as it works.',
+        }),
+        n('maxFeeder', 2.25, 0, M('gtceu:accretion_feeder'), 'Accretion Feeder', {
+          kind: 'info', tier: 'max', from: ['eqMaxFeeder'], sub: 'A ring of panels and a module turn the infall of the disk into power',
+          desc: 'It runs at Sgr A* only; the panel and the module wear, and the solar array fab and the assembler rework them.',
+        }),
+        n('maxShell', 2.25, 1.5, M('gtceu:mirror_shell'), 'Mirror Shell', {
+          kind: 'info', tier: 'max', from: ['eqMaxShell'], sub: 'One seed wave packet, amplified by the shell\'s mirrors, vents its energy into the grid',
+          desc: 'The last machine of the pack; it vents 2^30 EU/t for 4,800 ticks from one seed wave packet.',
+        }),
+      ],
+    },
     // ---------------------------------------------------------------- later
     laterDyson: {
       name: 'Dyson sphere',
@@ -805,20 +828,27 @@ export default gate({
           desc: 'The network jumps to OpV only when every formed tower holds these. Case 13 caps the buffer at the voltage times the amps times ten: 2 A holds 10,737,418,240 EU and 64 A holds 343,597,383,680 EU.',
           figs: [P.wcell('grindless:opv_smes_cell', 'OpV SMES', 16106127360000)],
         }),
+        // MAX's cell: four OpV cells' worth
+        E('eqMaxCell', 0, 16, 'max_age', '586558AD36EEC6F4'),
+        n('wmax', 2.25, 16, I('grindless:max_smes_cell'), 'MAX SMES Cell', {
+          kind: 'info', from: ['eqMaxCell'], sub: 'Twenty-four thousand five hundred and seventy-six UV batteries\' worth',
+          desc: 'The network jumps to MAX only when every formed tower holds these. The mirror shell\'s last recipe draws from it, so charge it first.',
+          figs: [P.wcell('grindless:max_smes_cell', 'MAX SMES', 64424509440000)],
+        }),
         n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Generator multiblocks feed the network through it',
-          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'opv')],
+          desc: 'Energy goes in at any voltage; the cells only limit what comes out.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'max')],
         }),
         n('wdynC', 6.75, -0.75, I('grindless:lv_wireless_dynamo_cover'), 'Wireless Dynamo Cover', {
-          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'opv')],
+          kind: 'info', from: [network('wtower')], sub: 'On a generator or a battery buffer, it feeds the network', figs: [P.wcover(2, 'lv', 'max')],
         }),
         n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
-          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'opv')],
+          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'max')],
         }),
         n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
           kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
-          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'opv')],
+          desc: 'GTM machines, chargers and battery buffers, not converters or multiblock controllers; shift-right-click with an empty hand for the readout.', figs: [P.wcover(2, 'lv', 'max')],
         }),
       ],
     } } : {}),
