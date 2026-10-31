@@ -6,8 +6,9 @@
 //     reports       a placed OpV hatch reports 262,144; older_hatches: the UHV, UEV, UIV and UXV ones beside it still 1,024, 4,096, 16,384 and 65,536
 //     forge_formed  gtceu:stellar_forge (a mega member) with two OpV 16 A energy hatches and the OpV hatch forms and sees it
 //     hatch_energy  a 64 EU/t EBF probe at 9000 K (pink tulip, not consumed): ceiling 256 x 262,144 = 67,108,864, whose EU/t (2^32) would wrap an int;
-//                   two OpV hatches give V[min(13 + 1, MAX)] = 2,147,483,647, so copies = floor(volt / 64) = 33,554,431 < ceiling (energy-bound)
-//     no_wrap       the running recipe's EU/t is positive, at most the voltage and copies x 64, at least the forge's discount floor (0.80) of it
+//                   two OpV hatches give V[min(13 + 1, MAX)] = V[14] = 2^31 = 2,147,483,648 (GTM 7.5.3), so copies = floor(volt / 64) = 33,554,432 < ceiling (energy-bound)
+//     no_wrap       the running recipe's EU/t is positive and at most the hatches' combined input (2 x 16 A x V[OpV] = 2^34); the forge may overclock it
+//                   against that input (x4 each), so with those x4 steps removed it lies between the discount floor (0.80) of copies x 64 and copies x 64
 //     gcym_formed   gtceu:large_assembler (a GCyM machine that takes GTM's parallel hatch) built from its own preview shape, the hatch swapped for the OpV one, forms and reports 262,144
 (function () {
   var S = null
@@ -28,6 +29,8 @@
   var PROBE_EUT = 64
   var DISCOUNT_FLOOR = 0.80
   var CEILING = 256 * 262144
+  var VMAX = 2147483648
+  var BUDGET = 2 * 16 * 536870912
   var CX = 37792
   var CY = 100
   // the forge's front parts row: column 4 is the controller, so the second energy hatch takes column 3
@@ -265,10 +268,14 @@
         var cap = Math.floor(volt / PROBE_EUT)
         var want = Math.min(CEILING, cap)
         note('hatch_measured', 'recipe ' + (snap ? snap.id : 'none') + ', copies ' + (snap ? snap.parallels : 'none') + ', EU/t ' + (snap ? snap.eut : 'none') + '; ceiling ' + CEILING + ' (x ' + PROBE_EUT + ' EU/t = ' + (CEILING * PROBE_EUT) + ', above 2^31-1), energy cap floor(' + volt + ' V / ' + PROBE_EUT + ') = ' + cap + '; reasons ' + String(m.getRecipeLogic().getFailureReasons()))
-        check('hatch_energy', snap !== null && snap.parallels === want && want < CEILING && volt === 2147483647, 'two OpV 16 A hatches: voltage ' + volt + ' (expected 2147483647); expected min(' + CEILING + ', cap ' + cap + ') = ' + want + ' (energy-bound: ' + (want < CEILING) + '), got ' + (snap ? snap.parallels : 'none'))
+        check('hatch_energy', snap !== null && snap.parallels === want && want < CEILING && volt === VMAX, 'two OpV 16 A hatches: voltage ' + volt + ' (expected ' + VMAX + '); expected min(' + CEILING + ', cap ' + cap + ') = ' + want + ' (energy-bound: ' + (want < CEILING) + '), got ' + (snap ? snap.parallels : 'none'))
         var full = snap ? snap.parallels * PROBE_EUT : NaN
-        var ok = snap !== null && snap.eut > 0 && snap.eut <= volt && snap.eut <= full && snap.eut >= Math.floor(full * DISCOUNT_FLOOR)
-        check('no_wrap', ok, 'recipe EU/t ' + (snap ? snap.eut : 'none') + ': positive, at most voltage ' + volt + ' and copies x ' + PROBE_EUT + ' = ' + full + ', at least the discount floor ' + Math.floor(full * DISCOUNT_FLOOR))
+        var low = Math.floor(full * DISCOUNT_FLOOR)
+        var base = snap ? snap.eut : NaN
+        var ocs = 0
+        while (base > full && base % 4 === 0) { base = base / 4; ocs++ }
+        var ok = snap !== null && snap.eut > 0 && snap.eut <= BUDGET && base <= full && base >= low
+        check('no_wrap', ok, 'recipe EU/t ' + (snap ? snap.eut : 'none') + ': positive, at most the hatches\' input ' + BUDGET + '; ' + ocs + ' overclock(s) of x4 removed gives ' + base + ', between the discount floor ' + low + ' and copies x ' + PROBE_EUT + ' = ' + full)
         u.phase = 'done'
       }
     }
