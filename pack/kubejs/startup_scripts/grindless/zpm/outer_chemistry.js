@@ -51,7 +51,7 @@
       casing: STABLE, texture: STABLE_TEXTURE, minCasings: 12,
       width: 5, depth: 5, height: 5,
       // items in: nanograins; out: aerogel; fluids in: ethanol and the CO2 charge; out: the ethanol
-      maxIO: { itemsIn: 1, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 }
+      maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 }
     }
   }
 

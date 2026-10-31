@@ -91,7 +91,8 @@ test('each machine: unique circuits, whole numbers, UV VA at most, every row in 
   }
   assert.deepEqual(L.recipes.map((r) => [r.type, r.name, r.circuit]), [
     ['closed_ecosystem', 'closed_cycle', 1], ['closed_ecosystem', 'culture_seed', 2], ['closed_ecosystem', 'algae_inoculation', 3],
-    ['neural_culture', 'stem_cell_batch', 1], ['neural_culture', 'neuro_processor_batch', 2]]);
+    ['neural_culture', 'stem_cell_batch', 1], ['neural_culture', 'neuro_processor_batch', 2],
+    ['closed_ecosystem', 'ark_genome_set', 4]]); // MAX-B4 (L12 step 3) appended
   for (const id of [L.crafting.ark, L.crafting.vat]) assert.ok(recipes.find((x) => x.i === id), id);
 });
 

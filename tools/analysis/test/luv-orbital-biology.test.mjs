@@ -161,8 +161,13 @@ test('B4 older family tier vetoes already reject LuV without changing existing g
 
 test('B4 NPU preserves GTM materials and 48 M EU at LuV; all controllers have exact components', () => {
   const { recipes } = harness();
-  const lab = recipes.filter((r) => r.type === 'organoid_assembly');
-  assert.equal(lab.length, 2);
+  const labAll = recipes.filter((r) => r.type === 'organoid_assembly');
+  assert.equal(labAll.length, 3); // MAX-B4 appended organoid_genome_extract (c4; c3 is UHV wetware's)
+  const lab = labAll.slice(0, 2);
+  assert.equal(only(labAll[2], 'circuit'), 4);
+  assert.deepEqual(call(labAll[2], 'itemInputs')[0], ['grindless:neural_organoid', 'grindless:synthetic_oligo_pool']);
+  assert.equal(only(labAll[2], 'itemOutputs'), 'grindless:organoid_genome_extract');
+  assert.equal(only(labAll[2], 'EUt'), 30720);
   assert.deepEqual(call(lab[0], 'itemInputs')[0], ['16x gtceu:stem_cells', 'grindless:neurotrophic_factor']);
   assert.deepEqual(call(lab[1], 'itemInputs')[0], ['gtceu:wetware_printed_circuit_board', 'grindless:neural_organoid',
     '8x gtceu:polybenzimidazole_small_fluid_pipe', '8x gtceu:electrum_plate',

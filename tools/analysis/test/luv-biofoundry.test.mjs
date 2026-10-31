@@ -95,8 +95,8 @@ test('one circuit per step, the seeds as the table writes them, and the controll
   assert.deepEqual(all.map((r) => r.circuit).sort((a, b) => a - b), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   assert.deepEqual(table.steps.filter((s) => s.circuit <= 10).map((s) => s.name), all.slice().sort((a, b) => a.circuit - b.circuit).map((r) => r.name));
   const recipes = run.docs.recipes.recipes;
-  const xeno = table.recipes.filter((r) => r.circuit > 10).map((r) => `grindless:sterile_culture/${r.name}`);
-  const ours = recipes.filter((r) => r.t === 'gtceu:sterile_culture' && !xeno.includes(r.i)).map((r) => r.i).sort();
+  const xeno = table.recipes.filter((r) => r.circuit > 10 && r.circuit <= 16).map((r) => `grindless:sterile_culture/${r.name}`);
+  const ours = recipes.filter((r) => r.t === 'gtceu:sterile_culture' && !xeno.includes(r.i) && !/\/(synthetic_oligo_pool|syn3_genome_cassettes)$/.test(r.i)).map((r) => r.i).sort();
   // the composed steps need GTM's live recipes (event.originalRecipes is empty here): only the seeds come out
   assert.deepEqual(ours, ['grindless:sterile_culture/engineered_barley_seed', 'grindless:sterile_culture/engineered_tobacco_seed']);
   const ctrl = recipes.find((r) => r.i === 'grindless:assembly_line/biofoundry');
