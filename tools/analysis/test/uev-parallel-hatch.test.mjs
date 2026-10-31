@@ -40,7 +40,7 @@ test('the hatch registration covers tiers 9 and 10, one definition per tier', ()
   const b = new Proxy({}, { get: (_, m) => (...a) => { calls.push([m, ...a]); if (m === 'definition') defs.push(a[0]); return b; } });
   machine[1]({ create: () => b });
   const tiers = calls.find((c) => c[0] === 'tiers');
-  assert.deepEqual(tiers.slice(1), [9, 10, 11, 12, 13]); // UXV-M1 added 12, OpV-M1 added 13
+  assert.deepEqual(tiers.slice(1), [9, 10, 11, 12, 13, 14]); // UXV-M1 added 12, OpV-M1 added 13, MAX-M1 added 14
   const out = {};
   for (const tier of [9, 10, 11]) {
     const rec = [];
@@ -60,7 +60,7 @@ test('x4096 is 4^(tier - EV) at tier 10; the list ends UV, UHV, UEV', () => {
   assert.equal(4 ** (9 - 4), 1024);
   const { G } = load();
   const list = G.parallelHatch.hatches;
-  assert.deepEqual(plain(list.slice(-6, -3)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch']);
+  assert.deepEqual(plain(list.slice(-7, -4)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch']);
   assert.equal(new Set(list).size, list.length);
 });
 

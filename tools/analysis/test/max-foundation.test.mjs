@@ -79,8 +79,10 @@ test('no script of ours registers a gtceu:max_* id (GTM\'s), except M1\'s parall
   const bad = [];
   // MAX-W: lv/wireless_energy.js registers the eight gtceu:max_wireless_* hatches (case 14), as it does every tier's
   const w = (id, v) => /^gtceu:max_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(id) && /(^|[\\/])lv[\\/]wireless_energy\.js$/.test(String(v.file));
+  // MAX-M1: lib/parallel_hatch.js registers gtceu:max_parallel_hatch (tier 14) with the older tiers
+  const ph = (id, v) => id === 'gtceu:max_parallel_hatch' && /(^|[\\/])lib[\\/]parallel_hatch\.js$/.test(String(v.file));
   for (const reg of [run.registry.items, run.registry.machines]) {
-    for (const [id, v] of reg) if (/^gtceu:max_/.test(id) && !v.seeded && !w(id, v)) bad.push(`${id} (${v.file})`);
+    for (const [id, v] of reg) if (/^gtceu:max_/.test(id) && !v.seeded && !w(id, v) && !ph(id, v)) bad.push(`${id} (${v.file})`);
   }
   assert.deepEqual(bad, []);
   assert.doesNotMatch(code, /'(gtceu:)?max_[a-z0-9_]+'/, 'foundation.js creates no GTM MAX id');

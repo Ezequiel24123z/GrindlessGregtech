@@ -1,4 +1,4 @@
-// priority: 6580
+// priority: 6625
 // Gregtech Grindless - names and tooltips of the MAX foundation (startup_scripts/grindless/max/foundation.js):
 //
 //   grindless:<item> and grindless:<block>   item.grindless.<n> / block.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1)
