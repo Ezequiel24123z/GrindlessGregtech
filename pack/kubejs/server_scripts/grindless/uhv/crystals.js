@@ -20,6 +20,7 @@
 //                          Each is an assembly line: station research, tritanium + soldering alloy + lubricant, 3 domain items of its own line.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
+// A row that repeats a circuit of its type with the same item inputs (ids, consumed or kept) is refused at load.
 // Published for the smoke test: global.grindless.crystals.recipes [{ type, name, recipeId, ... }], .skipped, .clashes, .controllerRecipes.
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
@@ -32,6 +33,13 @@
 
   function list(x) {
     return Array.isArray(x) ? x : []
+  }
+
+  // the item ids the lookup sees (consumed and kept), sorted: two rows with the same string have identical item inputs
+  function itemSet(rec) {
+    var ids = []
+    rec.itemsIn.concat(rec.kept).forEach(function (x) { if (ids.indexOf(x.id) < 0) ids.push(x.id) })
+    return ids.sort().join(',')
   }
 
   function loadTable() {
@@ -48,7 +56,7 @@
         var eut = Number(r.eut)
         var duration = Number(r.duration)
         var circuit = Number(r.circuit)
-        var circuitOk = (optional && circuit === 0) || (circuit >= 1 && circuit <= 32 && circuit % 1 === 0 && !circuits[circuit])
+        var circuitOk = (optional && circuit === 0) || (circuit >= 1 && circuit <= 32 && circuit % 1 === 0)
         if (!/^[a-z0-9_]+$/.test(n) || names[n] || !circuitOk || !(eut > 0) || eut % 1 !== 0 || !(duration > 0) || duration % 1 !== 0) {
           problems.push(type + '/' + n + ': name, circuit ' + r.circuit + ', eut ' + r.eut + ', duration ' + r.duration)
           return
@@ -71,8 +79,16 @@
           problems.push(type + '/' + n + ': contents')
           return
         }
+        var items = itemSet(rec)
+        var same = circuit > 0 ? list(circuits[circuit]) : []
+        for (var k = 0; k < same.length; k++) {
+          if (same[k].items === items) {
+            problems.push(type + '/' + n + ': circuit ' + circuit + ' repeats ' + same[k].name + ' with the same item inputs')
+            return
+          }
+        }
         names[n] = true
-        if (circuit > 0) circuits[circuit] = true
+        if (circuit > 0) circuits[circuit] = same.concat([{ name: n, items: items }])
         out.push(rec)
       })
     })
