@@ -73,6 +73,21 @@
             { "id": "grindless:gamma_absorber_tile", "count": 4 }
           ],
           "itemsOut": [{ "id": "grindless:kugelblitz_core", "count": 1 }]
+        },
+        {
+          "_why": "MAX-G1 (max.md, L18 step 5, c6): at Cygnus X-1 a Kugelblitz seed pumps the cooled cavity mode, with positron cartridges and absorber tiles taking the gamma flash, into the seed wave packet.",
+          "name": "write_seed_wave_packet",
+          "circuit": 6,
+          "eut": 503316480,
+          "duration": 2400,
+          "site": true,
+          "itemsIn": [
+            { "id": "grindless:cooled_cavity_mode", "count": 1 },
+            { "id": "grindless:kugelblitz_seed", "count": 1 },
+            { "id": "grindless:positron_cartridge", "count": 2 },
+            { "id": "grindless:gamma_absorber_tile", "count": 2 }
+          ],
+          "itemsOut": [{ "id": "grindless:seed_wave_packet", "count": 1 }]
         }
       ]
     },
