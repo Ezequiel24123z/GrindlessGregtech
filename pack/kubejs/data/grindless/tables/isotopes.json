@@ -250,6 +250,22 @@
           "kept": [], "charge": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:sr88_isotope", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-B3 (max.md, L19 step 1, c18): Rb-87 from the rubidium in lepidolite; the lithium it comes with returns to stock",
+          "name": "rubidium_87", "circuit": 18, "eut": 1966080, "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:lepidolite_dust", "count": 16 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:rb87_isotope", "count": 1 }, { "id": "gtceu:lithium_dust", "count": 8 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "MAX-B3 (max.md, machine 1 byproducts, c19): the getter scrap of the spent atom cartridges returns its Rb-87",
+          "name": "rb_getter_scrap", "circuit": 19, "eut": 1966080, "duration": 2000,
+          "itemsIn": [{ "id": "grindless:rb_getter_scrap", "count": 1 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:rb87_isotope", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },

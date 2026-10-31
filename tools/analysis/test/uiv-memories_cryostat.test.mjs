@@ -47,7 +47,7 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 
 test('spectral hole burner: circuits 1-2, figures, slots, no byproduct', () => {
   const rc = T.types.spectral_hole_burning.recipes;
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['six_hour_slab', 1], ['telecom_slab', 2]]);
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['six_hour_slab', 1], ['telecom_slab', 2], ['burned_memory_crystal', 26]]); // MAX-B3 c26 (line 23)
   for (const r of rc) {
     assert.equal(r.eut, 31457280, r.name);
     assert.equal(r.duration, 1200, r.name);
@@ -187,7 +187,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   for (const m of opvA1.matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+', '[^']+'\]/gm)) keys.push(m[1]);
   const opvLang = read('client_scripts', 'grindless', 'opv_antimatter_lang.js');
   keys.push(...[...opvLang.matchAll(/\['(gtceu\.recipe\.[^']+)'/g)].map((m) => m[1]));
-  for (const m of (read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'max_components_lang.js')).matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+', '[^']+'\]/gm)) keys.push(m[1]);
+  for (const m of (read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'max_components_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js')).matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+', '[^']+'\]/gm)) keys.push(m[1]);
   const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
   for (const k of ['block.gtceu.spectral_hole_burner', 'gtceu.spectral_hole_burning', 'block.gtceu.millikelvin_cryostat_works', 'gtceu.nuclear_demagnetisation', 'material.gtceu.he3_he4_mixture', 'material.gtceu.erbium_chloride_solution']) assert.ok(flat.includes(k), k);
   for (const n of ['eu151_yso', 'er_yso']) assert.ok(keys.includes(`gtceu.recipe.grindless_crystal_growth.${n}`), n);
