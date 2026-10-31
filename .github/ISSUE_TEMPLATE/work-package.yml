@@ -59,7 +59,7 @@ body:
     id: invariants
     attributes:
       label: Invariants
-      description: What must stay true (no lookup collision, no later-era input, save compatibility, ...).
+      description: What must stay true (no lookup collision, no later-era input, every input automatable, ...).
     validations:
       required: true
   - type: textarea

@@ -20,8 +20,7 @@ applyTo: "pack/pack.toml,pack/index.toml,pack/mods/**,pack/.gitattributes,tools/
 - Before tagging `vX.Y.Z`, bump `version` in `pack/pack.toml` and run `tools/Update-PackIndex.ps1`. Only what has passed the tier's tests gets tagged.
 
 ## Releases channel
-- The user plays while development goes on. `releases` only advances to a tested `vX.Y.Z` tag: `git push origin vX.Y.Z^{commit}:refs/heads/releases`. During the transition, move `playable` to the same commit too (`...:refs/heads/playable`); retire it once old instances have moved. `jugable` is deleted.
+- Players install the `releases` channel. It only advances to a tested `vX.Y.Z` tag: `git push origin vX.Y.Z^{commit}:refs/heads/releases`. During the transition, move `playable` to the same commit too (`...:refs/heads/playable`); retire it once old instances have moved. `jugable` is deleted.
 - When moving it, send the user a short summary of what is new and what changes in their game.
 - Every `vX.Y.Z` tag becomes a GitHub release with short English notes (new, and what changes in the game) and the Prism zip pinned to that version (`tools/prism/Build-PrismInstance.ps1 -Channel vX.Y.Z`). The `releases-channel` release note is updated too.
 - The Prism instance (`tools/prism/Build-PrismInstance.ps1`, release `releases-channel`, `Gregtech-Grindless-releases.zip`) updates itself through packwiz-installer-bootstrap; rebuild it only if the channel URL or the bootstrap changes. The old `playable-channel` release stays, marked as moved.
-- Release notes must say when a multiblock's shape changed (the player has to rebuild it).

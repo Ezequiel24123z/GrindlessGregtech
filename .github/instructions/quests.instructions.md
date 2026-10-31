@@ -3,7 +3,7 @@ applyTo: "pack/config/ftbquests/**,tools/quests/**,docs/quests.md"
 ---
 # Quest rules
 
-- Quests are short, in English, give a small reward, and never block recipes. Before writing a chapter, look at how other packs solve it; copy and adapt only from packs whose licence allows it (`CREDITS.md`, "Quests"), always with attribution (proposed in the handoff).
+- Quests are in English and never block recipes. Advanced eras get longer, more numerous chapters that teach every new wafer, circuit generation, process and multiblock (`AGENTS.md` rule 5); rewards are proportionate and never skip a production line. Before writing a chapter, look at how other packs solve it; copy and adapt only from packs whose licence allows it (`CREDITS.md`, "Quests"), always with attribution (proposed in the handoff).
 - Guide: `docs/quests.md`. Read only the section you need: layout §4, dependencies §5, tasks §6, rewards §7, writing and banned phrases §8, ids §10, tools §11, the era's chapter plan §14, Processing Lines §17, Power §18, Multiblocks §19.
 
 ## Generated chapters (never edit the SNBT by hand)
@@ -16,9 +16,9 @@ applyTo: "pack/config/ftbquests/**,tools/quests/**,docs/quests.md"
 
 - A quest package edits only the data file. It may run the generator to lint the result, but restores the chapter before committing (`git restore <chapter>`). The integrator regenerates generated chapters, `lint-config.json` and `chapter_groups.snbt` once per batch.
 
-## Ids and saves
+## Ids
 - Ids are 16 uppercase hex digits from `0000000000000001` to `7FFFFFFFFFFFFFFF` (first digit 0-7; 8-F fails silently in FTB Quests 2001.4). New ids: first digit 1-7, never repeated in the book.
-- A quest or task that still means the same thing keeps its id, even when it moves chapter, place, text or tasks. A quest is removed only if it has no equivalent.
+- There are no saves to protect: quests may be removed, merged or renumbered. Keeping the id of a quest that still means the same thing is optional; it only keeps diffs small.
 - `node tools/quests/fix-ids.mjs --write` clears the high bit; run it only when the linter reports `id-range`.
 
 ## Checks
