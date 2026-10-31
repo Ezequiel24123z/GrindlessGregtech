@@ -95,7 +95,10 @@
     'gtceu:gamma_optics': 'loop_gamma_optics_works',
     'gtceu:magnetic_pair_production': 'loop_magnetic_pair_converter',
     'gtceu:antihydrogen_synthesis': 'loop_antihydrogen_foundry',
-    'gtceu:annihilation_power': 'loop_annihilation_engine'
+    'gtceu:annihilation_power': 'loop_annihilation_engine',
+    'gtceu:jet_beam_extraction': 'loop_jet_beam_line',
+    'gtceu:antiproton_production': 'loop_spallation_target_station',
+    'gtceu:beam_cooling': 'loop_antiproton_decelerator'
   }
 
   StartupEvents.registry('sound_event', function (event) {
