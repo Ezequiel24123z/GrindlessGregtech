@@ -98,7 +98,7 @@ test('older rows: foundry c13 crossbar, MBE c7 ThF4 film, clock lab c3, pulsar t
   assert.deepEqual(inputs(y), ['gtceu:silicon_wafer', 'grindless:thf4', 'gtceu:liquid_nitrogen']);
   assert.deepEqual(outputs(y), ['grindless:thf4_film', 'gtceu:nitrogen']);
   const c = CR.types.nuclear_clock.recipes;
-  assert.deepEqual(c.map((r) => [r.name, r.circuit]), [['comb', 1], ['clock', 2], ['chip_clock', 3]]);
+  assert.deepEqual(c.map((r) => [r.name, r.circuit]), [['comb', 1], ['clock', 2], ['chip_clock', 3], ['lasing_check', 4]]); // OpV-A1 appended c4
   const k = c[2];
   assert.match(k._why, /UIV-A7/);
   assert.deepEqual(ids(k.itemsIn), ['grindless:capped_thf4_film', '#gtceu:circuits/uhv']);

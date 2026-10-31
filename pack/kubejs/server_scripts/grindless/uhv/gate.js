@@ -34,6 +34,8 @@
   SITES.cygnus_x1_orbit = ['grindless:cygnus_x1_orbit']
   // UXV-B1 (integrator): the Vela and Cas A rings run the c2 sustain (the ride home) and c1 open like the UIV far rings
   ;['grindless:vela_pulsar_orbit', 'grindless:cas_a_remnant'].forEach(function (d) { SITES.orbits.push(d) })
+  // OpV (integrator): the SGR 1806-20 and Terzan 5 rings run the c2 sustain (the ride home) and c1 open like the UXV far rings
+  ;['grindless:sgr1806_orbit', 'grindless:terzan5_core'].forEach(function (d) { SITES.orbits.push(d) })
   // UEV-B5, c3 "hold" (docs/eras/uev.md "Gate to UIV"): 16 A x V[UEV] = 134,217,728 EU/t for 60 s at Sirius B's orbit. The stored items are
   // held (catalysts, never consumed: no UEV recipe uses up the stored items). Nothing comes out.
   var UEV_HOLD = { name: 'hold', circuit: 3, eut: 134217728, duration: 1200, site: 'sirius_b_orbit',
@@ -236,7 +238,10 @@
       { planet: 'cygnus_x1', seed: 'grindless:neutronium_pellet', name: 'cygnus_x1_entangled_singularity' },
       // UXV-B1 (integrator): the Vela and Cas A platforms; each seed is one of B1's own items (cage_part stays table-only, uiv-isotopes)
       { planet: 'vela_pulsar', seed: 'grindless:cnt_bumper_weave', name: 'vela_pulsar_entangled_singularity' },
-      { planet: 'cas_a', seed: 'grindless:cnt_whipple_shield', name: 'cas_a_entangled_singularity' }
+      { planet: 'cas_a', seed: 'grindless:cnt_whipple_shield', name: 'cas_a_entangled_singularity' },
+      // OpV (integrator): the SGR and Terzan 5 platforms; each seed is a product made only at that place (opv.md "Places and site rules")
+      { planet: 'sgr1806', seed: 'grindless:field_frozen_plate', name: 'sgr1806_entangled_singularity' },
+      { planet: 'terzan5', seed: 'grindless:cluster_sinter_casing', name: 'terzan5_entangled_singularity' }
     ]
     uev.forEach(function (p) {
       var d = table.planets[p.planet]

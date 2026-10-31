@@ -53,6 +53,23 @@
           "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:u238_beam_charge", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:helium", "amount": 100 }]
+        },
+        {
+          "_why": "OpV-B1 (opv.md line 34): the X-ray reflectivity curve of a WC/SiC multilayer (kept, it goes on to the gamma optics works) is measured on a beamline and written to a data stick; the liquid helium cools the injector and returns as gas. Circuit 10 (9 is OpV-D2).",
+          "name": "mirror_metrology", "circuit": 10, "eut": 491520, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:data_stick", "count": 1 }],
+          "kept": [{ "id": "grindless:wc_sic_multilayer", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:mirror_metrology_record", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 100 }]
+        },
+        {
+          "_why": "OpV-B1 (opv.md line 35): the tile seats of a tungsten-steel ring frame are set to arcseconds by X-ray diffraction on a beamline, as Laue lenses are aligned at ESRF; the liquid helium cools the injector and returns as gas",
+          "name": "laue_frame_alignment", "circuit": 11, "eut": 491520, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:tungsten_steel_frame", "count": 4 }, { "id": "gtceu:tungsten_steel_rod", "count": 8 }],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:aligned_laue_frame", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 100 }]
         }
       ]
     },

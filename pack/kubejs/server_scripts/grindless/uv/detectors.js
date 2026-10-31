@@ -81,6 +81,16 @@
     fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:seven_n_germanium', 1), item('gtceu:small_germanium_dust', 4)],
     fluidsOut: [], eut: UVA, duration: 800 })
 
+  // OpV-A1 (opv.md line 10): the extraction cascade's scrubbed GeCl4 reduced and zone-passed to 13N germanium for the HPGe Compton crystal
+  // (circuit 10; 1-9 are taken); the head and tail come back as small dust, the HCl and water go back to stock
+  TABLE.push({ name: 'thirteen_n_germanium', type: 'zone_refining', circuit: 10, itemsIn: [],
+    fluidsIn: [fluid('gtceu:pure_germanium_tetrachloride', 1000), fluid('minecraft:water', 2000), fluid('gtceu:hydrogen', 4000)],
+    itemsOut: [item('grindless:thirteen_n_germanium', 1), item('gtceu:small_germanium_dust', 2)],
+    fluidsOut: [fluid('gtceu:hydrochloric_acid', 4000), fluid('minecraft:water', 2000)], eut: UVA, duration: 2400 })
+  // OpV-A2 (opv.md line 11): the float-zone ingot from two Siemens rods (the MOCVD reactor's c17, from fusion ash), not hot-cell dust
+  TABLE.push({ name: 'si28_poly_fz', type: 'zone_refining', circuit: 11, itemsIn: [item('grindless:si28_poly_rod', 2)],
+    fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:si28_fz_ingot', 1)], fluidsOut: [], eut: UVA, duration: 800 })
+
   D.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit, itemsIn: t.itemsIn,

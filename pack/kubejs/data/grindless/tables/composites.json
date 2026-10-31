@@ -47,7 +47,13 @@
           "itemsOut": [{ "id": "grindless:annealed_mu_foil", "count": 2 }], "fluidsOut": [{ "id": "gtceu:steam", "amount": 100 }] },
         { "_why": "UXV-A3 (uxv.md line 48): the wound Finemet toroid nanocrystallised in a field.", "name": "finemet_field_anneal", "circuit": 15, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:finemet_toroid", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:finemet_core", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:finemet_core", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-A3 (opv.md line 45): aluminium nitrided in a nitrogen stream into AlN powder (one Al and one N per AlN unit, GT's atom count).", "name": "aln_powder", "circuit": 16, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "gtceu:aluminium_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:aln_powder", "count": 2 }], "fluidsOut": [] },
+        { "_why": "OpV-A3 (opv.md line 45): the AlN kerf from slicing the boule re-pressed into powder; a quarter is lost as fines.", "name": "aln_kerf_repress", "circuit": 17, "eut": 1966080, "duration": 300,
+          "itemsIn": [{ "id": "grindless:aln_kerf", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:aln_powder", "count": 3 }], "fluidsOut": [] }
       ]
     },
     "sic_fibre_spinning": {
@@ -81,7 +87,22 @@
           "itemsOut": [{ "id": "grindless:glassy_carbon_lattice", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
         { "_why": "UXV-A3 (uxv.md line 38): the W-184 wire (GTM's wiremill row) infiltrated from methane into a fibre preform; the hydrogen goes back to stock. Circuit 5 (1-4 are older rows).", "name": "w184_fibre_preform", "circuit": 5, "eut": 1966080, "duration": 4800,
           "itemsIn": [{ "id": "gtceu:tungsten_184_single_wire", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:w184_cvi_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
+          "itemsOut": [{ "id": "grindless:w184_cvi_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
+        { "_why": "OpV-A1 (opv.md line 4): the chain SiC preform densified from methyltrichlorosilane, as the SiC/SiC plate; the HCl goes back to stock. Circuit 6.", "name": "chain_preform_densify", "circuit": 6, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:chain_sic_preform", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:densified_chain_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
+        { "_why": "OpV-A1 (opv.md line 8): the REBCO pancake vacuum-impregnated with epoxy in the infiltration furnace. Circuit 7.", "name": "rebco_potting", "circuit": 7, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:rebco_pancake", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:potted_rebco_pancake", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-A2 (opv.md line 17): a thick high-purity semi-insulating SiC layer grown on a SiC wafer from methyltrichlorosilane in hydrogen (CH3SiCl3 -> SiC + 3 HCl); the hydrogen goes back. Circuit 8 (6-7 are OpV-A1's).", "name": "hpsi_sic", "circuit": 8, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:sic_wafer", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 500 }, { "id": "gtceu:hydrogen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:hpsi_sic_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 1500 }, { "id": "gtceu:hydrogen", "amount": 1000 }] },
+        { "_why": "OpV-B1 (opv.md line 34): a pressed SiC compact densified from methyltrichlorosilane into a CVD-SiC mirror blank, then superpolished; the HCl goes back to stock. Circuit 10 (6-9 are OpV-A1, A2 and B3).", "name": "superpolished_sic_blank", "circuit": 10, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "gtca:silicon_carbide_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:superpolished_sic_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
+        { "_why": "OpV-B1 (opv.md line 34 byproduct): a rejected gamma mirror is stripped of its multilayer by fluorine (the tungsten leaves as WF6, which feeds this furnace's c2-3), then re-coated from MTS and repolished into a blank.", "name": "gamma_mirror_strip", "circuit": 11, "eut": 1966080, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:rejected_gamma_mirror", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:fluorine", "amount": 1000 }, { "id": "gtceu:methyltrichlorosilane", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:superpolished_sic_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:tungsten_hexafluoride", "amount": 250 }, { "id": "gtceu:hydrochloric_acid", "amount": 1500 }] }
       ]
     },
     "chemical_reactor": {

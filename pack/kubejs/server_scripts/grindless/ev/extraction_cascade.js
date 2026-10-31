@@ -256,6 +256,54 @@
       fluidsOut: [{ id: 'gtceu:kerosene', amount: 950 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 3000 }],
       eut: 1920, duration: 100
     },
+    // OpV-A1 (opv.md line 10): GeCl4 scrubbed of AsCl3 by a chlorinated HCl wash (the arsenic stays in the spent acid) for the 13N germanium
+    {
+      name: 'germanium_tetrachloride_scrub', mode: 'opv', circuit: 23,
+      itemsIn: [],
+      fluidsIn: [{ id: 'gtceu:germanium_tetrachloride', amount: 1000 }, { id: 'gtceu:hydrochloric_acid', amount: 1000 }, { id: 'gtceu:chlorine', amount: 100 }],
+      itemsOut: [],
+      fluidsOut: [{ id: 'gtceu:pure_germanium_tetrachloride', amount: 1000 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 1000 }],
+      eut: 1920, duration: 100
+    },
+    // OpV-A2 (opv.md line 11): the Si-28 fusion ash hydrochlorinated to Si-28 trichlorosilane (Si + 3 HCl -> SiHCl3 + H2) for the
+    // MOCVD reactor's Siemens rod (c17), whose HCl comes back
+    {
+      name: 'si28_trichlorosilane', mode: 'opv', circuit: 24,
+      itemsIn: [{ id: 'grindless:si28_ash', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 12000 }],
+      itemsOut: [],
+      fluidsOut: [{ id: 'gtceu:si28_trichlorosilane', amount: 4000 }, { id: 'gtceu:hydrogen', amount: 4000 }],
+      eut: 1920, duration: 100
+    },
+    // OpV-A2 (opv.md line 12): the InP scrap of the boule, wafer and HEMT cuts leached in HCl; indium is won back, the phosphine goes to
+    // the STM cell or its scrubber and the chlorine to stock
+    {
+      name: 'inp_scrap_indium', mode: 'opv', circuit: 26,
+      itemsIn: [{ id: 'grindless:inp_scrap', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 6000 }],
+      itemsOut: [{ id: 'gtceu:indium_dust', count: 2 }],
+      fluidsOut: [{ id: 'gtceu:phosphine', amount: 2000 }, { id: 'gtceu:chlorine', amount: 6000 }],
+      eut: 1920, duration: 100
+    },
+    // OpV-A2 (opv.md line 17): the GaN MOCVD exhaust (excess ammonia carrying unreacted gallium) scrubbed in HCl: the gallium is won
+    // back, the ammonia stripped off for the reactor or stock, the spent acid leaves diluted
+    {
+      name: 'gan_exhaust_gallium', mode: 'opv', circuit: 27,
+      itemsIn: [],
+      fluidsIn: [{ id: 'gtceu:gan_mocvd_exhaust', amount: 3000 }, { id: 'gtceu:hydrochloric_acid', amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:small_gallium_dust', count: 1 }],
+      fluidsOut: [{ id: 'gtceu:ammonia', amount: 2250 }, { id: 'gtceu:diluted_hydrochloric_acid', amount: 1000 }],
+      eut: 1920, duration: 100
+    },
+    // OpV-B1: a tetron die that fails the array calibration (tetron fab c2) is leached in HCl / Cl2: its InAs, Al gates and Au pads
+    {
+      name: 'tetron_die_recovery', mode: 'opv', circuit: 25,
+      itemsIn: [{ id: 'grindless:failed_tetron_die', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:hydrochloric_acid', amount: 2000 }, { id: 'gtceu:chlorine', amount: 500 }],
+      itemsOut: [{ id: 'gtceu:indium_dust', count: 1 }, { id: 'gtceu:small_aluminium_dust', count: 1 }, { id: 'gtceu:small_gold_dust', count: 1 }],
+      fluidsOut: [{ id: 'gtceu:diluted_hydrochloric_acid', amount: 2000 }],
+      eut: 1920, duration: 100
+    },
     // OpV-R1 (line 41, c28): timing heads that failed burn-in are leached back to silicon and copper
     {
       name: 'rejected_timing_head_recovery', mode: 'opv', circuit: 28,

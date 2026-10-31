@@ -202,15 +202,15 @@
         },
         {
           "name": "matrioshka_node", "circuit": 0, "eut": 31457280, "duration": 800, "station": "grindless:c12_metallised_plate",
-          "_why": "UIV-A10 line 21: metallised C-12 plates and tungsten plate are assembled into a computing node block, behind station research; TP-R-uiv: with UIV field generators and a UIV circuit.",
-          "itemsIn": [ { "id": "grindless:c12_metallised_plate", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:uiv_field_generator", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
+          "_why": "UIV-A10 line 21: metallised C-12 plates and tungsten plate are assembled into a computing node block, behind station research; TP-R-uiv: with UIV components and a UIV circuit. UXV-FX cycle key: the node is the computer's research item and a structure block, built before the jumps, so it takes UIV sensors (their chip nuclear clock times the node; tables/mainframe.json:19) instead of the field generator, made from the RX J1856 pellet behind the rad-hard controller (tables/rx_j1856.json:168).",
+          "itemsIn": [ { "id": "grindless:c12_metallised_plate", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:uiv_sensor", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
           "fluidsIn": [ ],
           "itemsOut": [ { "id": "grindless:matrioshka_node", "count": 1 } ]
         },
         {
           "name": "matrioshka_tpv_shell", "circuit": 0, "eut": 31457280, "duration": 800, "station": "grindless:tpv_segment",
-          "_why": "UIV-A10 line 37: TPV segments and tungsten plates are assembled into a TPV shell block, behind station research; TP-R-uiv: with UIV emitters and a UIV circuit.",
-          "itemsIn": [ { "id": "grindless:tpv_segment", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:uiv_emitter", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
+          "_why": "UIV-A10 line 37: TPV segments and tungsten plates are assembled into a TPV shell block, behind station research; TP-R-uiv: with UIV components and a UIV circuit. UXV-FX cycle key: a structure block of the computer, built before the jumps, so it takes UIV sensors (the TPV cells are infrared photodiodes; tables/mainframe.json:19) instead of the UIV emitter, made at J0437 from the pulsar wind trap's pair plasma (tables/j0437.json:11 and :119), whose controller takes the field generator (uiv/j0437.js:181).",
+          "itemsIn": [ { "id": "grindless:tpv_segment", "count": 4 }, { "id": "gtceu:tungsten_plate", "count": 2 }, { "id": "gtceu:uiv_sensor", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
           "fluidsIn": [ ],
           "itemsOut": [ { "id": "grindless:matrioshka_tpv_shell", "count": 1 } ]
         },
@@ -223,8 +223,8 @@
         },
         {
           "name": "emitter_shell", "circuit": 0, "eut": 31457280, "duration": 800, "station": "grindless:selective_emitter",
-          "_why": "UIV-A10 line 46: selective emitters and titanium plates are assembled into an emitter shell block, behind station research; TP-R-uiv: with UIV emitters and a UIV circuit.",
-          "itemsIn": [ { "id": "grindless:selective_emitter", "count": 4 }, { "id": "gtceu:titanium_plate", "count": 2 }, { "id": "gtceu:uiv_emitter", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
+          "_why": "UIV-A10 line 46: selective emitters and titanium plates are assembled into an emitter shell block, behind station research; TP-R-uiv: with UIV components and a UIV circuit. UXV-FX cycle key: a structure block of the computer and part of the droplet radiator works' controller, built before the jumps, so it takes UIV pumps (they drive the hot working fluid through the emitters; tables/uiv_components.json:64) instead of the UIV emitter, made at J0437 behind the field generator (tables/j0437.json:119, uiv/j0437.js:181).",
+          "itemsIn": [ { "id": "grindless:selective_emitter", "count": 4 }, { "id": "gtceu:titanium_plate", "count": 2 }, { "id": "gtceu:uiv_electric_pump", "count": 2 }, { "id": "#gtceu:circuits/uiv", "count": 1 } ],
           "fluidsIn": [ ],
           "itemsOut": [ { "id": "grindless:matrioshka_emitter_shell", "count": 1 } ]
         }

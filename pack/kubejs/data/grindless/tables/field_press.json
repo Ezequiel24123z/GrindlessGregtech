@@ -1,0 +1,19 @@
+{
+  "_": "OpV-A3 (docs/eras/opv.md, machine 13, line 3): the field-frozen press at SGR 1806-20's orbit. Read by server_scripts/grindless/opv/field_press.js. Amounts per run; \"site\" true locks the row to the magnetar's orbit.",
+  "types": {
+    "field_freezing": {
+      "dataKey": "grindless_field_freezing",
+      "recipes": [
+        { "name": "field_frozen_billet", "circuit": 1, "eut": 268435456, "duration": 1200, "site": true,
+          "itemsIn": [{ "id": "grindless:field_canned_stack", "count": 4 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:field_frozen_billet", "count": 1 }, { "id": "grindless:spent_field_can", "count": 4 }], "fluidsOut": [] },
+        { "name": "field_frozen_plate", "circuit": 2, "eut": 268435456, "duration": 800, "site": true,
+          "itemsIn": [{ "id": "grindless:field_frozen_billet", "count": 1 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:field_frozen_plate", "count": 4 }], "fluidsOut": [] },
+        { "name": "field_frozen_casing", "circuit": 3, "eut": 503316480, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:field_frozen_plate", "count": 4 }, { "id": "gtceu:tungsten_steel_frame", "count": 1 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:field_frozen_casing", "count": 2 }], "fluidsOut": [] }
+      ]
+    }
+  }
+}

@@ -1,3 +1,4 @@
+// priority: -21759
 // Gregtech Grindless - the OpV wireless tier's own recipes (package OpV-W, docs/eras/opv.md 'W. Wireless case 13'). The OpV row of
 // tables/wireless_energy.json gives server_scripts/grindless/lv/wireless_energy.js the hatches and covers; its cell has a cellMadeBy,
 // so that script makes no cell, and this one makes the cell and the row's link:

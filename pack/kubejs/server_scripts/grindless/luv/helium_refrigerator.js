@@ -40,7 +40,8 @@
 //
 // Published for the smoke test: global.grindless.heliumRefrigerator.recipes [{ id, recipeId, name, source, kind: 'hot' | 'molten',
 // hot: { tag | item }, molten: { tag | id, amount }, mold, output: { id, count }, coolant, circulating, sourceEnergy, reliquefaction,
-// energy, eut, duration }], .skipped [{ source, reason }], .rate { euPerMb, from }, .craftingRecipe, .craftingParts.
+// energy, eut, duration }], .skipped [{ source, reason }], .rate { euPerMb, from }, .craftingRecipe, .craftingParts, .opvRows [{ id, name,
+// input, output, eut, duration }] (OpV-D1's two cryogenic beam parts).
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
   var LOG = '[grindless/luv] '
@@ -317,6 +318,47 @@
       HR.skipped.map(function (s) { return s.source + ' (' + s.reason + ')' }).join(', ') : ''))
   }
 
+  // ---------------------------------------------------------------- OpV rows
+
+  // Keyed rows that are not freezer recipes, on the same loop (make-up, precooling and the never-drained charge as the generated
+  // rows); one item in, one item out, so each has its own lookup path. Published apart from HR.recipes (whose rows are hot ingots or
+  // molten metals made from vacuum freezer recipes) as HR.opvRows. The data key names the row.
+  //   OpV-D1 (docs/eras/opv.md lines 23 and 24): the electron gun's CeB6 cathode and the stochastic pickup's brazed NbTiN array are
+  //   run cold in the loop and sealed there, so each leaves as the cryogenic part B3's storage ring takes
+  //   OpV-A1 (lines 6 and 10): welded_mesh_belt -> chain_mesh_belt, the PBO/chain belt accepted at 4 K; contacted_hpge_crystal ->
+  //   hpge_compton_crystal, the HPGe detector's leakage and resolution test at 77 K
+  var OPV_ROWS = [
+    { name: 'opv_electron_cooler', input: 'grindless:cooler_electron_gun', output: 'grindless:electron_cooler', eut: 30720, duration: 600 },
+    { name: 'opv_stochastic_cooling_pickup', input: 'grindless:brazed_pickup_tank', output: 'grindless:stochastic_cooling_pickup',
+      eut: 30720, duration: 600 },
+    { name: 'chain_mesh_belt', input: 'grindless:welded_mesh_belt', output: 'grindless:chain_mesh_belt', eut: 30720, duration: 400 },
+    { name: 'hpge_compton_crystal', input: 'grindless:contacted_hpge_crystal', output: 'grindless:hpge_compton_crystal', eut: 30720, duration: 400 }
+  ]
+  HR.opvRows = OPV_ROWS
+  HR.opvSkipped = []
+
+  function addOpvRows(event) {
+    var cfg = config()
+    OPV_ROWS.forEach(function (loop) {
+      var missing = [loop.input, loop.output].filter(function (id) { return !Item.exists(id) })
+        .concat([cfg.makeUp.id, cfg.precoolIn.id, cfg.precoolOut.id, cfg.charge.id].filter(function (id) { return !Fluid.exists(id) }))
+      if (missing.length > 0) {
+        HR.opvSkipped.push({ name: loop.name, reason: 'unknown id(s) ' + missing.join(', ') })
+        console.error(LOG + 'closed_loop_cooling ' + loop.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        return
+      }
+      event.recipes.gtceu.closed_loop_cooling('grindless:' + loop.name)
+        .itemInputs('1x ' + loop.input)
+        .inputFluids(Fluid.of(cfg.makeUp.id, cfg.makeUp.amount))
+        .inputFluids(Fluid.of(cfg.precoolIn.id, cfg.precoolIn.amount))
+        .notConsumableFluid(Fluid.of(cfg.charge.id, cfg.charge.amount))
+        .itemOutputs('1x ' + loop.output)
+        .outputFluids(Fluid.of(cfg.precoolOut.id, cfg.precoolOut.amount))
+        .addDataString(DATA_KEY, 'grindless:closed_loop_cooling/' + loop.name)
+        .EUt(loop.eut).duration(loop.duration)
+    })
+  }
+
   // ---------------------------------------------------------------- crafting
 
   function addController(event) {
@@ -338,6 +380,11 @@
       generate(event)
     } catch (e) {
       console.error(LOG + 'closed_loop_cooling recipe generation failed: ' + e)
+    }
+    try {
+      addOpvRows(event)
+    } catch (e3) {
+      console.error(LOG + 'closed_loop_cooling OpV rows failed: ' + e3)
     }
     try {
       addController(event)

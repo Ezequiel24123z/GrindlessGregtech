@@ -174,8 +174,12 @@
   function addControllers(event) {
     var HULL = 'gtceu:uiv_machine_hull'
     var MAINFRAME = 'gtnn:optical_mainframe'
+    // UXV-FX cycle key: the computer is the only writer of the rad-hard controller research (tables/matrioshka.json:8) and is built
+    // before the three jumps, so it takes only UIV families made at home (piston: tables/metallic_hydrogen.json:74, robot arm:
+    // tables/uiv_components.json:67, sensor: tables/mainframe.json:19); the field generator and the emitter need RX J1856 and J0437,
+    // whose sites need that controller.
     var defs = [
-      { name: 'matrioshka_computer', parts: ['gtceu:uiv_field_generator', 'gtceu:uiv_emitter', 'gtceu:uiv_sensor'], research: 'grindless:matrioshka_node', domain: ['2x grindless:matrioshka_logic_tile', '2x grindless:diamond_schottky_die', '2x grindless:tipt_au_stack'] },
+      { name: 'matrioshka_computer', parts: ['gtceu:uiv_electric_piston', 'gtceu:uiv_robot_arm', 'gtceu:uiv_sensor'], research: 'grindless:matrioshka_node', domain: ['2x grindless:matrioshka_logic_tile', '2x grindless:diamond_schottky_die', '2x grindless:tipt_au_stack'] },
       { name: 'droplet_radiator_works', parts: ['gtceu:uiv_electric_pump', 'gtceu:uiv_fluid_regulator', 'gtceu:uiv_conveyor_module'], research: 'grindless:droplet_collector', domain: ['2x grindless:matrioshka_emitter_shell', '2x grindless:droplet_wick', '2x grindless:tipt_au_stack'] }
     ]
     MA.controllerRecipes = []

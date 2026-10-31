@@ -4,7 +4,7 @@
   "extends": "uiv",
   "inheritTargets": true,
   "dropTargets": [],
-  "note": "UXV-C1 (docs/eras/uxv.md \"Validator\", \"Gate to OpV\", \"Bootstrap check\"): UIV's pack plus the 21 UXV machines and M2's hall, the two jumps, the UXV wireless tier and the checks of the Validator. Substages: uxv (Earth, Mercury and Cygnus X-1 orbit), uxv-vela and uxv-cas-a (parallel siblings after the Kerr sling), the gate (opv) after both. As built: the emitter takes lasagna plate and the M2 hall's stellar hydrogen cut (Vela) besides Ti-44 (Cas A), so it is checked after both; after the tier-parity retrofit (TP-R) the Mk4 needs Sirius B (gtceu:uev_field_generator takes the degenerate pellet), the Mk5 RX J1856, the droplet radiator works, the polarised proton source and the Matrioshka both UIV siblings, so the inherited groups place them there. Older machines get the UXV-era voltages of their new modes as two-hatch or higher-hatch variants.",
+  "note": "UXV-C1 (docs/eras/uxv.md \"Validator\", \"Gate to OpV\", \"Bootstrap check\"): UIV's pack plus the 21 UXV machines and M2's hall, the two jumps, the UXV wireless tier and the checks of the Validator. Substages: uxv (Earth, Mercury and Cygnus X-1 orbit), uxv-vela and uxv-cas-a (parallel siblings after the Kerr sling), the gate (opv) after both. As built: the emitter takes lasagna plate and the M2 hall's stellar hydrogen cut (Vela) besides Ti-44 (Cas A), so it is checked after both; after the tier-parity retrofit (TP-R) the Mk4 needs Sirius B (gtceu:uev_field_generator takes the degenerate pellet), the Mk5 RX J1856 and the polarised proton source both UIV siblings, so the inherited groups place them there; UXV-FX: the Matrioshka computer and the droplet radiator works are a cycle key built before the UIV jumps (uiv/matrioshka.js:182, tables/matrioshka.json:206, :213 and :227), so they sit in uiv-home with no rad-hard research bootstrap (uiv.json:7). Older machines get the UXV-era voltages of their new modes as two-hatch or higher-hatch variants.",
   "conditions": {
     "eu_to_start": {
       "field": "eu",
@@ -1196,13 +1196,6 @@
   ],
   "synthetic": [
     {
-      "id": "bootstrap-rad-hard-research",
-      "produces": [
-        "research:rad_hard_controller"
-      ],
-      "note": "KNOWN PACK DEFECT (TP-R-uiv 1943b5f4): research rad_hard_controller is written only by the Matrioshka computer (tables/matrioshka.json:8); the computer now takes UIV field generators (uiv/matrioshka.js:178), made from the neutronium pellet (tables/rx_j1856.json:168), made only in the neutronium cage, whose neutron star site casing takes the rad-hard controller. Remove once the cycle is broken in the pack."
-    },
-    {
       "id": "wireless-uxv",
       "package": "W",
       "capital": [
@@ -1621,7 +1614,7 @@
     },
     {
       "id": "site-warp-gate",
-      "label": "Site: the warp gate only at its ends (Earth, Proxima b, Alpha Centauri AB, Sirius B, the three UIV relay orbits, Vela pulsar orbit and Cassiopeia A)",
+      "label": "Site: the warp gate only at its ends (Earth, Proxima b, Alpha Centauri AB, Sirius B, the three UIV relay orbits, Vela pulsar orbit, Cassiopeia A, SGR 1806-20 orbit and Terzan 5 core)",
       "kind": "site",
       "types": [
         "gtceu:warp_gate"
@@ -1635,10 +1628,12 @@
         "grindless:psr_j0437_orbit",
         "grindless:cygnus_x1_orbit",
         "grindless:vela_pulsar_orbit",
-        "grindless:cas_a_remnant"
+        "grindless:cas_a_remnant",
+        "grindless:sgr1806_orbit",
+        "grindless:terzan5_core"
       ],
       "package": "B5",
-      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV places to open and sustain."
+      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV places to open and sustain; the OpV integrator adds SGR 1806-20 orbit and Terzan 5 core (DECISIONS.md 2026-10-30 \"join the warp gate's ride-home orbits\", uhv/gate.js SITES)."
     },
     {
       "id": "site-j0437",
@@ -1697,7 +1692,51 @@
       "dimensions": [
         "grindless:vela_pulsar_orbit"
       ],
-      "package": "B4"
+      "exceptRecipes": [
+        "grindless:pasta_extraction/chain_crust",
+        "grindless:pasta_extraction/ni_chain",
+        "grindless:pasta_extraction/chain_lattice",
+        "grindless:pasta_sorting/chain_caging",
+        "grindless:pasta_sorting/ni_chain_caging",
+        "grindless:pasta_sorting/lattice_caging",
+        "grindless:pasta_drawing/chain_strand_drawing",
+        "grindless:pasta_drawing/chain_wire_drawing",
+        "grindless:pasta_lamination/chain_lamina",
+        "grindless:pasta_lamination/chain_lamina_stack",
+        "grindless:pasta_lamination/chain_mesh_weave"
+      ],
+      "package": "B4",
+      "note": "OpV-A0's chain matter modes (c3-c5) of the four pasta machines run at SGR 1806-20 orbit instead (docs/eras/opv.md:70, :83): site-sgr-chain-matter holds them there."
+    },
+    {
+      "id": "site-sgr-chain-matter",
+      "label": "Site: the pasta machines' chain matter modes (OpV-A0) only at SGR 1806-20 orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:pasta_extraction",
+        "gtceu:pasta_sorting",
+        "gtceu:pasta_drawing",
+        "gtceu:pasta_lamination"
+      ],
+      "recipe": [
+        "grindless:pasta_extraction/chain_crust",
+        "grindless:pasta_extraction/ni_chain",
+        "grindless:pasta_extraction/chain_lattice",
+        "grindless:pasta_sorting/chain_caging",
+        "grindless:pasta_sorting/ni_chain_caging",
+        "grindless:pasta_sorting/lattice_caging",
+        "grindless:pasta_drawing/chain_strand_drawing",
+        "grindless:pasta_drawing/chain_wire_drawing",
+        "grindless:pasta_lamination/chain_lamina",
+        "grindless:pasta_lamination/chain_lamina_stack",
+        "grindless:pasta_lamination/chain_mesh_weave"
+      ],
+      "dimensions": [
+        "grindless:sgr1806_orbit"
+      ],
+      "exact": true,
+      "package": "B4",
+      "note": "OpV-A0 rows in B4's file (uxv/vela_pasta.js, older rows under the DECISIONS.md placement rule, opv.md:70); recipe.dimension(sgr1806_orbit) only."
     },
     {
       "id": "site-cas-a",
@@ -2209,7 +2248,9 @@
         "gtceu:uiv_robot_arm",
         "grindless:uiv_fusion_casing",
         "grindless:metallic_hydrogen_coil_block",
-        "grindless:uiv_smes_cell"
+        "grindless:uiv_smes_cell",
+        "m:gtceu:matrioshka_computer",
+        "m:gtceu:droplet_radiator_works"
       ]
     },
     {
@@ -2245,9 +2286,7 @@
         "grindless:kerr_probe_data",
         "grindless:kerr_chart",
         "grindless:sled_hull",
-        "m:gtceu:polarised_proton_source",
-        "m:gtceu:matrioshka_computer",
-        "m:gtceu:droplet_radiator_works"
+        "m:gtceu:polarised_proton_source"
       ]
     }
   ]

@@ -1,3 +1,4 @@
+// priority: -6775
 // -----------------------------------------------------------------------------------------------
 // OpV foundation (package OpV-F1, docs/eras/opv.md "Build order", F1): the shared registrations the OpV packages build on. No machine of
 // our own, no recipe type, no worldgen, no dimension and no recipe. Every other OpV package uses exactly these ids; they are published in

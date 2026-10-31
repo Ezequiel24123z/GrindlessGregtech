@@ -1,4 +1,4 @@
-// priority: 5700
+// priority: 5620
 ClientEvents.lang('en_us', function (event) {
   event.add('grindless', 'item.grindless.field_prospector', 'Field Prospector (HV)')
   event.add('grindless', 'tooltip.grindless.field_prospector.range', 'Right-click: mark ore veins up to 16 chunks (256 blocks) away in X and Z.')

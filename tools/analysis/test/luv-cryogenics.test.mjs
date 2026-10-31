@@ -176,6 +176,12 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
   const later = (r) => /^U[IX][VX]-/.test((r && r._why) || '');
   const laterIds = new Set(JSON.parse(fs.readFileSync(path.join(pack, 'kubejs', 'data', 'grindless', 'tables', 'coated_conductor_line.json'), 'utf8'))
     .recipes.filter(later).map((r) => 'grindless:coated_conductor/' + r.name));
+  // OpV-A2's 4 K tests on the refrigerator (server_scripts/grindless/opv/circuits.js): opv-circuits.test.mjs proves their ids
+  for (const id of plain(G.opvCircuits?.fridgeRecipes || [])) laterIds.add(id);
+  // OPV_ROWS appended to helium_refrigerator.js (OpV-D1's opv_* rows, OpV-A1's): opv-beam_hardware and opv-components tests prove their ids
+  const hrSrc = fs.readFileSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'luv', 'helium_refrigerator.js'), 'utf8');
+  const opvBlock = (hrSrc.match(/var OPV_ROWS = \[([\s\S]*?)\n {2}\]/) || [])[1] || '';
+  for (const m of opvBlock.matchAll(/name: '([a-z0-9_]+)'/g)) laterIds.add('grindless:closed_loop_cooling/' + m[1]);
   for (const r of ours.filter((x) => !laterIds.has(x.i))) {
     const walk = (o, key) => {
       if (Array.isArray(o)) return o.forEach((x) => walk(x, key));

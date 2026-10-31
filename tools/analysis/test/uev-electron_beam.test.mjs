@@ -21,6 +21,10 @@ const lang = read(path.join(kube, 'client_scripts', 'grindless', 'uev_electron_b
     + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_levitation_melter_lang.js'))
     + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_matrioshka_lang.js')) // UIV-A10's tin_distill
     + read(path.join(kube, 'client_scripts', 'grindless', 'uxv_spin_rows_lang.js')) // UXV-A3's c9-20 and c27-29
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_beam_hardware_lang.js')) // OpV-D1's c24-26 and c30-31
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_census_iv_lang.js')) // OpV-B2's c23 ni_chain_thaw
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_components_lang.js')) // OpV-A1's c21 mesh_belt_weld
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_field_press_lang.js')) // OpV-A3's c22 W-Re can and its re-melt
     + read(path.join(kube, 'client_scripts', 'grindless', 'opv_pathfinder_lang.js')); // OpV-R1 EB c24
 
 const GTM = new Set(['mixer', 'assembler', 'compressor', 'bender', 'macerator', 'chemical_reactor', 'electric_blast_furnace']);
@@ -217,6 +221,8 @@ test('6N hafnium, tantalum and niobium come only from the electron beam furnace'
       if (f.endsWith(path.join('uev', 'electron_beam.js'))) continue;
       // UEV-A5's HfTaCN billet (uhv/propulsion.js, SPS c4) consumes 6N hafnium; consumers are fine, producers are not
       if (id === 'six_n_hafnium' && f.endsWith(path.join('uhv', 'propulsion.js'))) continue;
+      // OpV-A2's MOCVD gate stack (uv/photonics.js, c19) consumes 6N hafnium
+      if (id === 'six_n_hafnium' && f.endsWith(path.join('uv', 'photonics.js'))) continue;
       // UXV-A2's hot strip mill foil and gum-metal blend (uxv/spin_feed.js) only consume 6N tantalum and niobium
       if ((id === 'six_n_tantalum' || id === 'six_n_niobium') && f.endsWith(path.join('uxv', 'spin_feed.js'))) continue;
       assert.ok(!read(f).includes(`grindless:${id}`), `${id} named in ${path.relative(kube, f)}`);
@@ -284,8 +290,9 @@ test('UV\'s circuits 1-4 on srf_cavity are untouched; the new row never duplicat
   const cold = read(path.join(kube, 'server_scripts', 'grindless', 'uv', 'cold.js'));
   // UIV-A2 adds c5 (para_h2_target, the pulser's solid target): the only circuit-5 row, and nothing above it
   // UIV-A9 adds c6 (polarised_h_ice): the only circuit-6 row, and nothing above it
-  // UIV-B3 adds c7 (solid_neon_cone): the only circuit-7 row, and nothing above it
-  assert.ok(/circuit: 4/.test(cold) && (cold.match(/circuit: 5/g) || []).length === 1 && /name: 'para_h2_target', type: 'srf_cavity', circuit: 5/.test(cold) && (cold.match(/circuit: 6/g) || []).length === 1 && /name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6/.test(cold) && (cold.match(/circuit: 7/g) || []).length === 1 && /name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7/.test(cold) && !/circuit: 8/.test(cold));
+  // UIV-B3 adds c7 (solid_neon_cone): the only circuit-7 row
+  // OpV-A2 adds c8 (rrr_nb_target, the Nb TSV sputter target): the only circuit-8 row, and nothing above it
+  assert.ok(/circuit: 4/.test(cold) && (cold.match(/circuit: 5/g) || []).length === 1 && /name: 'para_h2_target', type: 'srf_cavity', circuit: 5/.test(cold) && (cold.match(/circuit: 6/g) || []).length === 1 && /name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6/.test(cold) && (cold.match(/circuit: 7/g) || []).length === 1 && /name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7/.test(cold) && (cold.match(/circuit: 8/g) || []).length === 1 && /name: 'rrr_nb_target', type: 'srf_cavity', circuit: 8/.test(cold) && !/circuit: (9|[1-3]\d)\b/.test(cold));
   assert.ok(!startup.includes("registry('gtceu:recipe_type'") || !startup.includes("create('srf_cavity')"));
 });
 
@@ -307,7 +314,14 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
   const a10 = read(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'composites.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'matrioshka.js'))
     // UXV-A3's c9-20 and c27-29 rows: their items are registered in its own startup (UXV-A2's 5N and 7N grades in spin_feed.js)
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_rows.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_feed.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'foundation.js'))
-    + read(path.join(kube, 'startup_scripts', 'grindless', 'opv', 'pathfinder.js')); // OpV-R1 EB c24
+    // OpV-D1's c24-26 and c30-31 (opv/beam_hardware.js; c31 takes A2's nbtin_film_wafer, opv/circuits.js)
+    // OpV-B2's c23 returns UIV's cage_part (uiv/foundation.js); OpV packages register their items under startup_scripts/grindless/opv/
+    // OpV-A1's c21 (mesh_belt_weld): its belt and trim are registered in opv/components.js
+    // OpV-E1's c23 (positron_cell_seal) seals its own cell (opv/pair_converter.js) into F1's dense positron cell (opv/foundation.js)
+    // OpV-A3's c22 rows (W-Re can and re-melt): the can items in opv/field_press.js, the chain lamina stack in opv/foundation.js
+    + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'foundation.js'))
+    + fs.readdirSync(path.join(kube, 'startup_scripts', 'grindless', 'opv')).filter((f) => f.endsWith('.js')).map((f) => read(path.join(kube, 'startup_scripts', 'grindless', 'opv', f))).join('\n');
+  // OpV-B2's c23 thaws OpV-A0's caged_ni_chain and OpV-A1's c21 takes A0's chain_mesh_weave: both registered in opv/chain_matter.js
   for (const [, r] of allRows().filter(([w]) => w.startsWith('electron_beam.json'))) {
     for (const id of outputs(r).concat(ids(r.itemsIn))) {
       if (!id.startsWith('grindless:')) continue;
@@ -319,7 +333,8 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     assert.ok(lang.includes(`'${key}'`), key);
   }
   for (const [type, dataKey] of [['electron_beam_refining', 'grindless_electron_beam'], ['single_crystal_casting', 'grindless_single_crystal_casting']]) {
-    for (const r of T.types[type].recipes) assert.ok(lang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
+    const rowLang = lang + read(path.join(kube, 'client_scripts', 'grindless', 'opv_pair_converter_lang.js'));
+    for (const r of T.types[type].recipes) assert.ok(rowLang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
 });
 

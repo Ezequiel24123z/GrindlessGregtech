@@ -536,8 +536,9 @@ export function fixtureExpectations(res) {
     items: res.results.map((r) => ({
       id: r.key.startsWith(FLUID) ? r.key.slice(FLUID.length) : r.key,
       kind: r.key.startsWith(FLUID) ? 'fluid' : 'item',
-      needUse: !r.end,
-      needMade: true,
+      // a role the static audit holds pending (pendingUses, pendingRoutes) waits for a later package of the era, as in the static gate
+      needUse: !r.end && !r.pending.some((p) => p.role === 'use'),
+      needMade: !r.pending.some((p) => p.role === 'acquisition'),
       made: cats(r.made, declared(r, 'acquisition')),
       used: cats(r.used, declared(r, 'use')),
     })).sort((a, b) => (a.kind + a.id < b.kind + b.id ? -1 : 1)),
