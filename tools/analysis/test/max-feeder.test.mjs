@@ -26,7 +26,7 @@ const OLDER = [
   'diamond_cvd/collector_diamond_plate', 'ion_implantation/pin_diamond_plate', 'betavoltaic/diamond_photocell',
   'mtj_sputtering/metallised_photocell', 'space_photovoltaics/xuv_collector_panel', 'pgm_refining/opv/iridium_sponge',
   'pgm_refining/opv/wolter_iridium_recovery', 'electron_beam_refining/iridium_target', 'chemical_vapour_infiltration/sic_grazing_shell',
-  'mtj_sputtering/iridium_coated_shell'
+  'mtj_sputtering/iridium_coated_shell', 'space_photovoltaics/panel_rework'
 ];
 
 test('the stand-in runs the script without errors, skips nothing and the controller line exists', () => {
@@ -37,11 +37,10 @@ test('the stand-in runs the script without errors, skips nothing and the control
   assert.ok(find('grindless:assembly_line/accretion_feeder'));
 });
 
-test('c1 and c2 are generator rows at most VA[MAX] in the Sgr A* orbit; c1 gives 2^30 EU/t for 2,400 ticks', () => {
+test('c1 is the only generator row, at most VA[MAX] in the Sgr A* orbit, and gives 2^30 EU/t for 2,400 ticks', () => {
   const c1 = find('grindless:accretion_power/slag_pellet_burn');
-  const c2 = find('grindless:accretion_power/panel_rework');
-  assert.ok(c1 && c2);
-  for (const r of [c1, c2]) {
+  assert.ok(c1);
+  for (const r of [c1]) {
     const s = JSON.stringify(r.j);
     const m = s.match(/"tickOutputs":\{"eu":\[\{"content":(\d+)/);
     assert.ok(m && !/"tickInputs":\{"eu":\[\{/.test(s), `${r.i} is a generator row`);
@@ -56,17 +55,24 @@ test('c1 and c2 are generator rows at most VA[MAX] in the Sgr A* orbit; c1 gives
   assert.match(s1, /spent_collector_panel/);
   assert.match(s1, /spent_wolter_module/);
   assert.match(s1, /"configuration":1\b/);
-  assert.match(JSON.stringify(c2.j), /pin_diamond_plate/);
+  assert.equal(find('grindless:accretion_power/panel_rework'), undefined, 'the rework is no generator row');
+  const rw = find('grindless:space_photovoltaics/panel_rework');
+  assert.ok(rw, 'panel_rework on the solar array fab');
+  const sr = JSON.stringify(rw.j);
+  assert.match(sr, /spent_collector_panel/);
+  assert.match(sr, /pin_diamond_plate/);
+  assert.match(sr, /\"configuration\":5\b/);
+  assert.match(sr, /xuv_collector_panel/);
 });
 
 test('the GTM rows (compressor, Wolter module, casing) exist, are at most VA[MAX] and the casing uses no feeder output', () => {
-  for (const id of ['compressor/slag_compact', 'assembly_hall/wolter_mirror_module', 'assembly_hall/feeder_coil_casing']) {
+  for (const id of ['compressor/slag_compact', 'assembler/wolter_mirror_module', 'assembler/feeder_coil_casing']) {
     const r = find(`grindless:${id}`);
     assert.ok(r, id);
     const eut = JSON.stringify(r.j).match(/"EUt":\s*(\d+)/);
     assert.ok(!eut || Number(eut[1]) <= VA_MAX, `${id} EUt`);
   }
-  const casing = JSON.stringify(find('grindless:assembly_hall/feeder_coil_casing').j);
+  const casing = JSON.stringify(find('grindless:assembler/feeder_coil_casing').j);
   assert.match(casing, /feeder_coil_casing/);
   for (const out of ['slag_pellet', 'xuv_collector_panel', 'wolter_mirror_module', 'spent_collector_panel', 'spent_wolter_module', 'slag_compact']) {
     assert.doesNotMatch(casing, new RegExp(out), `the casing needs no ${out}`);
@@ -110,7 +116,7 @@ test('the lang file has en_us and es_es keys in parity, for the machine, the EMI
   assert.ok(/en_us/.test(s) && /es_es/.test(s));
   for (const k of ['block.gtceu.accretion_feeder', 'gtceu.accretion_power', 'grindless.machine.accretion_feeder.tooltip.0',
     'emi.grindless.info.accretion_feeder.0', 'emi.grindless.info.accretion_feeder.1', 'emi.grindless.info.feeder_coil_casing.0',
-    'gtceu.recipe.grindless_accretion_power.slag_pellet_burn', 'gtceu.recipe.grindless_accretion_power.panel_rework']) {
+    'gtceu.recipe.grindless_accretion_power.slag_pellet_burn', 'gtceu.recipe.grindless_space_photovoltaics.panel_rework']) {
     assert.ok(s.includes(`'${k}'`), k);
   }
   const keys = [...s.matchAll(/^\s+\['([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*'((?:[^'\\]|\\.)*)'\]/gm)];

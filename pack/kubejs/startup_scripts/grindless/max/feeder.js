@@ -4,7 +4,7 @@
 //
 //   gtceu:accretion_feeder   15 x 9 x 15 ring of feeder coil casing round an open well, a GENERATOR (G.generators.configure) on one or two
 //                            OpV dynamo hatches. Recipe type gtceu:accretion_power: circuit 1 burns a slag pellet (2^30 EU/t out, 2,400 t,
-//                            collector panel and Wolter module worn now and then), circuit 2 reworks a spent collector panel.
+//                            collector panel and Wolter module worn now and then), a spent collector panel is rebuilt on the solar array fab (c5).
 //
 // Textures: tools/assets/Build-MaxFeederTextures.ps1. Names: client_scripts/grindless/max_feeder_lang.js.
 // Published for the recipe script: global.grindless.maxFeeder.

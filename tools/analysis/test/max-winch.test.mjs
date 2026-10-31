@@ -40,8 +40,8 @@ test('the stand-in runs the script without errors, skips nothing and leaves no p
   assert.ok(MW.controllerRecipe);
 });
 
-test('c1 and c2 exist, are generator rows at most VA[MAX] and run in the Sgr A* orbit', () => {
-  for (const [id, eut] of [['grindless:geroch_power/geroch_canister_lowering', 1073741824], ['grindless:geroch_power/tether_rework', null]]) {
+test('c1 exists, is a generator row at most VA[MAX] and run in the Sgr A* orbit', () => {
+  for (const [id, eut] of [['grindless:geroch_power/geroch_canister_lowering', 1073741824]]) {
     const r = find(id);
     assert.ok(r, id);
     const s = JSON.stringify(r.j);
@@ -52,6 +52,10 @@ test('c1 and c2 exist, are generator rows at most VA[MAX] and run in the Sgr A* 
     assert.match(s, /black_hole_orbit/);
   }
   assert.match(JSON.stringify(find('grindless:geroch_power/geroch_canister_lowering').j), /spent_tether_segment/);
+  assert.equal(find('grindless:geroch_power/tether_rework'), undefined, 'the rework is no generator row');
+  const rw = JSON.stringify(find('grindless:assembler/tether_rework').j);
+  assert.match(rw, /spent_tether_segment/);
+  assert.match(rw, /grindless:horizon_tether/);
 });
 
 test('the GTM rows of L17 and L20 exist and are at most VA[MAX]', () => {
