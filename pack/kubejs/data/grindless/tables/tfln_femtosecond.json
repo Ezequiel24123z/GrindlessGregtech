@@ -52,7 +52,10 @@
           "itemsOut": [{ "id": "grindless:transducer_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
         { "_why": "MAX-A2 line L31 (c12): the Bi:YIG film bonded to a lithium niobate on insulator wafer and sliced into the isolator wafer.", "name": "yig_on_ln_wafer", "circuit": 12, "eut": 31457280, "duration": 1600,
           "itemsIn": [{ "id": "grindless:bi_yig_film", "count": 1 }, { "id": "grindless:lnoi_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:yig_on_ln_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] }
+          "itemsOut": [{ "id": "grindless:yig_on_ln_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
+        { "_why": "MAX-B2 (max.md, L4 step 3, c11): the lithium niobate wafer bonded to a silicon handle and sliced by hydrogen implantation into the atom-optics electro-optic modulator", "name": "atom_optics_modulator", "circuit": 11, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:lithium_niobate_wafer", "count": 1 }, { "id": "grindless:fz_silicon_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:atom_optics_modulator", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] }
       ]
     },
     "femtosecond_writing": {

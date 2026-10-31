@@ -44,6 +44,15 @@
           "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:calibrated_superleak", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-B2 line L4 (c6): a SQUID-read rotation reference, the potted loop's flux calibrated in the He-II bath against the weak-link cell (kept as the gauge); the bath is consumed.",
+          "name": "shequid_rotation_ref", "circuit": 6, "eut": 16777216, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:cryo_cmos_die", "count": 1 }, { "id": "grindless:nb_coplanar_film", "count": 1 }],
+          "kept": [{ "id": "grindless:weak_link_cell", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:shequid_rotation_ref", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },

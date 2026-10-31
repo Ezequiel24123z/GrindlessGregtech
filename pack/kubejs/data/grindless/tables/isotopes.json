@@ -234,6 +234,22 @@
           "name": "lead_208", "circuit": 12, "eut": 268435456, "duration": 400,
           "itemsIn": [{"id": "gtceu:lead_dust", "count": 4}],
           "itemsOut": [{"id": "grindless:lead_208_dust", "count": 1}, {"id": "gtceu:lead_dust", "count": 3}]
+        },
+        {
+          "_why": "MAX-B2 (max.md, L4 step 1, c16): Sr-88 from the strontium carbonate the extraction cascade gives; the unseparated strontium returns to stock",
+          "name": "strontium_88", "circuit": 16, "eut": 1966080, "duration": 4000,
+          "itemsIn": [{ "id": "grindless:strontium_carbonate_dust", "count": 16 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:sr88_isotope", "count": 1 }, { "id": "grindless:strontium_carbonate_dust", "count": 15 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "MAX-B2 (max.md, machine 2 byproducts, c17): the spent cartridge of the atom interferometer returns its Sr-88",
+          "name": "spent_sr_cartridge", "circuit": 17, "eut": 1966080, "duration": 2000,
+          "itemsIn": [{ "id": "grindless:spent_sr_cartridge", "count": 1 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:sr88_isotope", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },

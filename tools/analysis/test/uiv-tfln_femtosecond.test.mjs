@@ -48,7 +48,7 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
   const rc = T.types.ion_slicing.recipes;
   // OpV-A2 appended c5 (the Nb TSV bond) and c6 (LN on Si-28 SOI); OpV-B1 c8 bonded_tetron_die (OpV line 19, the flip-chip bond)
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4], ['tsv_bond', 5], ['ln_on_soi', 6], ['bonded_tetron_die', 8], ['ppln_thin_film_wafer', 9], ['transducer_wafer', 10], ['yig_on_ln_wafer', 12]]); // MAX-A2 c12 (line 31) // MAX-A1 c9-10 (lines 5 and 7)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4], ['tsv_bond', 5], ['ln_on_soi', 6], ['bonded_tetron_die', 8], ['ppln_thin_film_wafer', 9], ['transducer_wafer', 10], ['yig_on_ln_wafer', 12], ['atom_optics_modulator', 11]]); // MAX-B2 c11 (line 4) // MAX-A2 c12 (line 31) // MAX-A1 c9-10 (lines 5 and 7)
   for (const r of rc) {
     assert.equal(r.eut, 31457280, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 3 && ids(r.itemsOut).length <= 2, r.name);
@@ -178,7 +178,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   ]) assert.ok(flat.includes(k), k);
   for (const m of ['tfln_fab', 'femtosecond_writer']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   // OpV-A2's rows (ion slicing c5-6, femtosecond c6) keep their EMI lines in its own lang file
-  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless',   'max_circuits_lang.js') + read('client_scripts', 'grindless', 'max_components_lang.js');
+  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless',   'max_circuits_lang.js') + read('client_scripts', 'grindless', 'max_components_lang.js') + read('client_scripts', 'grindless', 'max_interferometer_lang.js');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
     // OpV-B1: a row marked OpV-B1 is named in opv_tetron_optics_lang.js (checked by opv-tetron_optics.test.mjs)
