@@ -629,7 +629,7 @@ MAX is the postgame era (DECISIONS.md:450). It is Sagittarius A*, the mirror she
 | Sagittarius A* | `grindless:sgr_a_chart` (gate c13 output). GCYR `black_hole_orbit` is not used by OpV. |
 | The mirror shell (a wave amplified around Sgr A*) | `stable_exotic_matter` and `gamma_multilayer_mirror` are stocked. OpV's Kugelblitz cores are charged, non-rotating holes. No OpV recipe amplifies a wave off a rotating hole: no superradiance and no black hole bomb. |
 | The largest multiblock | OpV's largest is the assembly line array (M2). MAX's must be larger: the design records M2's footprint. |
-| MAX hull and hatches | `gtceu:max_machine_casing` is researched by c13. `GTValues.V[MAX]` is `Integer.MAX_VALUE` in GTM (S0-2 reads it), so MAX's design owns that edge. |
+| MAX hull and hatches | `gtceu:max_machine_casing` is researched by c13. `GTValues.V[MAX]` is 2^31 (a long) in GTM, VA[MAX] 2013265920 (S0-2 reads it), so MAX's design owns that edge. |
 | MAX parallel hatch | `lib/parallel_hatch.js` tier 14 (x1,048,576 = 4^10, fits an int). Not built in OpV. |
 | Wireless case 14 | not added; MAX decides. |
 | Kardashev III proof → beyond | `bulge_light_census` (64 nodes) and `superheavy_census_iv` are kept by c13, and MAX's first gate may read them again. |
@@ -1010,7 +1010,7 @@ S0-1 records the full OpV and MAX id list.
 | Below the guideline (18 / 45 / 141 against 28 / 74 / 267) | the owner may want more | every missing item has a reason under *Considered and dropped*; open question 1 offers a second design pass instead of padding |
 | HT retrofit late, or its S0 fails | no `gtceu:opv_*` components, hull, hatches or basic machines | F1 publishes the ids in `tables/opv_ids.json` and every package reads them from there. The one-line fallback: F1 registers `grindless:opv_*` components on the `uiv/uiv_components.js` pattern, and `uev/foundation.js:181, :194` gain OpV (`.tiers(UEV, UIV, UXV, OpV)`); only that table changes |
 | 2^33 EU/t (16 A x V[OpV]) | no int holds it; GTM's EnergyStack, hatch or recipe paths may cap or wrap | S0-2 tests c13 as voltage V[OpV] x 16 A from two OpV 16 A hatches. Fallback: 2^31 x 4,800 t (the same EU) on the same hatches, or split over four 4 A hatches |
-| V[MAX] = Integer.MAX_VALUE in GTValues | a tier lookup on a long above 2^31 may return MAX and pre-empt it | c13 is written as V[OpV] with an amperage, never as a raw long EU/t; S0-2 reads the recipe's tier in EMI |
+| V[MAX] = 2^31 (a long) in GTValues | a tier lookup on a long above 2^31 may return MAX and pre-empt it | c13 is written as V[OpV] with an amperage, never as a raw long EU/t; S0-2 reads the recipe's tier in EMI |
 | Electron beam circuit space | 14 OpV rows against 9 free circuits | F3 lets a circuit repeat when item inputs differ; the subset-clash check stays |
 | Far-place machines never formed at their site (UIV-A10) | a structure that cannot form at SGR or Terzan 5 ships | every far contract's T1 forms its machine at its site (named in each) |
 | Self-replication becomes matter from nothing (rules 1, 8) | seeds multiply without feedstock | every foundry row consumes 16 `metal_feedstock`, 8 `cluster_sinter_casing` and 1 `vitamin_kit` per new seed; C1's obtain check fails any row whose seeds out exceed seeds in + vitamin kits |

@@ -52,7 +52,7 @@
       var PD = Java.loadClass('argent_matter.gcyr.data.loader.PlanetData')
       var rows = PD.planets()
       var tiers = {}
-      rows.forEach(function (key, p) { tiers[String(p.orbitWorld ? p.orbitWorld() : '') + '|' + String(key)] = Number(p.rocketTier()) })
+      rows.forEach(function (key, p) { tiers[String(p.level().location()) + '|' + String(key)] = Number(p.rocketTier()) })
       var found = { 'gcyr:black_hole_orbit': -1, 'grindless:nsc_belt': -1 }
       Object.keys(tiers).forEach(function (k) {
         var w = k.split('|')[0]
@@ -65,7 +65,7 @@
     check('f1_travel_global', !!plat && !!plat.places && plat.places.sgra.dimension === 'gcyr:black_hole_orbit' && plat.places.nsc.dimension === 'grindless:nsc_belt',
       'global.grindless.maxTravel ' + (plat ? 'loaded' : 'missing'))
     var ids = global.grindless && global.grindless.maxFoundation
-    check('f1_foundation_global', !!ids && ids.items.length === 258 && ids.blocks.length === 7, 'maxFoundation ' + (ids ? ids.items.length + ' items, ' + ids.blocks.length + ' blocks' : 'missing'))
+    check('f1_foundation_global', !!ids && ids.items.length === 257 && ids.blocks.length === 7, 'maxFoundation ' + (ids ? ids.items.length + ' items, ' + ids.blocks.length + ' blocks' : 'missing'))
     ;['grindless:eu_yso_boule', 'grindless:mram_stack_wafer', 'grindless:hollow_core_fibre'].forEach(function (id) {
       check('f1_existing_' + id, Item.exists(id), id + ' ' + (Item.exists(id) ? 'registered' : 'missing'))
     })

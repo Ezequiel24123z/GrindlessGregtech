@@ -107,7 +107,11 @@
       var outs = outputIds(r)
       var ok = typeOf(r) === HALL && missing.length === 0 && c9 && outs.length === 1 && outs[0] === MF
       var eut = 0
-      try { eut = Number(r.tickInputs.get(classes().EU).get(0).content) } catch (e) { eut = -1 }
+      try {
+        var raw = String(r.tickInputs.get(classes().EU).get(0).content)
+        var vm = /voltage=(\d+), amperage=(\d+)/.exec(raw)
+        eut = vm ? Number(vm[1]) * Number(vm[2]) : Number(raw)
+      } catch (e) { eut = -1 }
       // 2013265920 = VA[MAX]; the hall is powered with the contract's two OpV 4 A hatches
       note('join_power', 'join EU/t ' + eut + ' = VA[MAX] 2013265920 expected; power the hall with the contract\'s two OpV 4 A energy hatches')
       ok = ok && eut === 2013265920

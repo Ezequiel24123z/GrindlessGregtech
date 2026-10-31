@@ -793,10 +793,10 @@ OpV's *Common to every package* (opv.md, same heading) applies with `opv` replac
 | UEV quantum gas lab (`tables/earth_orbit.json`) | 0-3 | A1 c4, B2 c5, B3 c6 |
 | UEV SNSPD / photonic hall | 1-5, OpV c6 / 1-7, OpV c8 | A1 c7 / A1 c9 |
 | UEV SiC fibre / CVI (`tables/composites.json`) | table 0-15, OpV to c17 / 1-5, OpV c6-11 | A2 c18, D2 c19 / A2 c12-13, D2 c14, R1 c15, E1 c16 |
-| UEV electron beam (`tables/electron_beam.json`) | 1-32 after OpV | B1 c33-34, D2 c35, E1 c36 |
+| UEV electron beam (`tables/electron_beam.json`) | 1-32 after OpV | full: B1 (two rows), D2 and E1 repeat c30-32, each on a circuit whose existing rows take different item inputs (OpV-F3 rule; the cap is 32, decision 48) |
 | UEV carbonyl / megabar / degenerate harvester | 0-1 / 1-6, OpV c7-8 / 0-1 | R1 c2 / D1 c9, D4 c10 / D1 c2 |
 | UHV PBO plant / tether ribbon (`uhv/elevator.js`) | 1-7, OpV c8-9 | A0 c10, B1 c11-12 / D3 c13 |
-| UHV crystal growth (`tables/crystals.json`) | 1-18, OpV c19-27 | A1 c28-29, B3 c30, B2 c31, B3 c32, H1 c33, D2 c34 |
+| UHV crystal growth (`tables/crystals.json`) | 1-18, OpV c19-27 | A1 c28-29, B3 c30, B2 c31, B3 c32; H1 (landed, L38) c32; D2 (L45) c32 again: programmed circuits stop at 32 (decision 48), so a repeat is allowed when the item inputs differ (OpV-F3 rule) |
 | UHV clock lab / MBE / SiC fab | 1-3, OpV c4-5 / 1-8, OpV c9-11 / 1-5, OpV c6-8 | G1 c6, B3 c7 / A1 c12, B2 c13, D2 c14 / A3 c9, H1 c10 |
 | UHV SPS / xenobotany | 1-7, OpV c8-15 / 0-4 | A2 c16, D1 c17-18, E1 c19, R1 c20 / B4 c5 |
 | UV MOCVD / fibre draw (`uv/photonics.js`) | 1-16, OpV c17-22 / 1-16, OpV c17-18 | A1 c23-24, B1 c25, B3 c26-27, D2 c28 / B3 c19-20 |
@@ -806,7 +806,7 @@ OpV's *Common to every package* (opv.md, same heading) applies with `opv` replac
 | LuV coated conductor / HTS | 1-4 / 1-6, OpV c7-10 | A2 c5, B1 c6, W c7, A4 c8 / A2 c11, B1 c12, W c13, A4 c14 |
 | LuV He refrigerator / biofoundry / organoid lab | keyed by input / 1-16 / 1, 2, 6 | B1, W, B2, A4, B3, D2 (one input each) / B4 c17-18 / B4 c3 |
 | IV hot cell (`tables/hot_cell.json`) | 1-15, OpV c16-20 | D3 c21 |
-| EV extraction cascade / platinum plant | 1-22, OpV c23-29 / 1-14, OpV c15-17 | B1 c30-31, D1 c32, H1 c33, A2 c34, B1 c35, A2 c36, R1 c37 / R1 c18, E1 c19-20 (c20 the spent Wolter return) |
+| EV extraction cascade / platinum plant | 1-22, OpV c23-29 / 1-14, OpV c15-17 | B1 c30-31, D1 c32; H1 (landed, L30) c32; A2 (L32, L35), B1 (L34) and R1 (L36) repeat c30-32 by item inputs (OpV-F3 rule; cap 32, decision 48) / R1 c18, E1 c19-20 (c20 the spent Wolter return) |
 | First used by MAX in the repair (F1 records `f` per type) | — | UXV oxide PLD W f, A4 f+1; YIG LPE A2 f; racetrack H1 f · UIV decay heat vault D3 f · UEV nitride magnet works A2 f-f+1, R1 f+2; single crystal foundry A2 f, B1 f+1, A2 f+2 · UHV solar vapour, betavoltaic, solar array E1 f each; xenobiochem, radiotrophic B4 f each; photonic foundry B3 f, D2 f+1; high flux A2 f; swarm segment foundry G1 f · UV superfluid He plant H1 f · ZPM magnet works W f; vent bioreactor B4 f; plasma quench H1 f · LuV asteroid processor R1 f (belt) · EV regolith E1 f; hot strip B1 f; cryogenic plant R1 f |
 | UHV warp gate (`tables/gate.json`) | 1-2, 4-10, OpV c11-13 | T1 c14, T2 c15 |
 | OpV vault / forge / harvester / refinery | OpV rows not merged | one MAX writer each (A0 / G1 / R1 / R1): first free after OpV's last row |
