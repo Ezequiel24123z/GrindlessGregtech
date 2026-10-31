@@ -60,7 +60,7 @@
     // OpV-B3a line 31 (circuit 12): the DT fuel is filled into the W-Re hohlraum and sealed as the ACMF pellet
     { name: 'acmf_pellet', circuit: 12,
       itemsIn: [{ id: 'grindless:w_re_hohlraum', count: 1 }],
-      fluidsIn: [{ id: 'grindless:cold_dt_fill', amount: 1000 }],
+      fluidsIn: [{ id: 'gtceu:cold_dt_fill', amount: 1000 }],
       fluidsKept: [], fluidsOut: [],
       itemsOut: [{ id: 'grindless:acmf_pellet', count: 1 }],
       energy: [{ stage: 'the hohlraum filled with cryogenic DT and laser-sealed: one IV assembler stage', eu: 1536000, times: 1 }] }

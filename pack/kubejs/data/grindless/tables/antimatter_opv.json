@@ -157,7 +157,7 @@
           "_why": "line 31: blend equal deuterium and tritium charges before the cryogenic plant conditions the DT fill",
           "name": "dt_fill", "circuit": 0, "eut": 503316480, "duration": 200,
           "fluidsIn": [{ "id": "gtceu:deuterium", "amount": 500 }, { "id": "gtceu:tritium", "amount": 500 }],
-          "fluidsOut": [{ "id": "grindless:dt_fill", "amount": 1000 }]
+          "fluidsOut": [{ "id": "gtceu:dt_fill", "amount": 1000 }]
         }
       ]
     },
@@ -177,7 +177,7 @@
           "_why": "line 26: the krypton tripler cell: an MgF2 window, an LBO crystal in a tungsten-steel body, a krypton fill under a helium purge",
           "name": "kr_tripler_cell", "circuit": 1, "eut": 503316480, "duration": 400,
           "itemsIn": [{ "id": "grindless:magnesium_fluoride_dust", "count": 2 }, { "id": "grindless:lbo_boule", "count": 1 }, { "id": "gtceu:tungsten_steel_plate", "count": 2 }, { "id": "gtceu:fine_platinum_wire", "count": 4 }, { "id": "gtceu:sapphire_lens", "count": 1 }, { "id": "gtceu:opv_sensor", "count": 1 }],
-          "fluidsIn": [{ "id": "grindless:purified_krypton", "amount": 1000 }, { "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [{ "id": "gtceu:purified_krypton", "amount": 1000 }, { "id": "gtceu:helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:kr_tripler_cell", "count": 1 }]
         }
       ]

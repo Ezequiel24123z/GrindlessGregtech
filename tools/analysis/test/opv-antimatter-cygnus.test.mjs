@@ -30,13 +30,13 @@ test('exact design beam yields, EU/t and durations; all steps stay at Cygnus', (
   for (const [type, name, circuit, eut, duration, fluid, amount] of expected) {
     const row = A.recipes.find(r => r.type === type && r.name === name);
     assert.deepEqual([row.circuit, row.eut, row.duration], [circuit, eut, duration]);
-    if (fluid) assert.deepEqual(plain(row.fluidsOut), [{ id: `grindless:${fluid}`, amount }]);
+    if (fluid) assert.deepEqual(plain(row.fluidsOut), [{ id: `gtceu:${fluid}`, amount }]);
     assert.ok(JSON.stringify(get(type, name).j.recipeConditions).includes(site), name);
   }
   assert.deepEqual(plain(A.recipes[1].fluidsIn), [{ id: 'gtceu:flux_loaded_plasma', amount: 100 }]);
-  assert.deepEqual(plain(A.recipes[2].fluidsIn), [{ id: 'grindless:jet_proton_beam', amount: 4000 }]);
-  assert.deepEqual(plain(A.recipes[3].fluidsIn), [{ id: 'grindless:hot_antiproton_beam', amount: 1000 }]);
-  assert.deepEqual(plain(A.recipes[4].fluidsIn), [{ id: 'grindless:stochastically_cooled_beam', amount: 1000 }]);
+  assert.deepEqual(plain(A.recipes[2].fluidsIn), [{ id: 'gtceu:jet_proton_beam', amount: 4000 }]);
+  assert.deepEqual(plain(A.recipes[3].fluidsIn), [{ id: 'gtceu:hot_antiproton_beam', amount: 1000 }]);
+  assert.deepEqual(plain(A.recipes[4].fluidsIn), [{ id: 'gtceu:stochastically_cooled_beam', amount: 1000 }]);
 });
 test('wear, spent shield/target destinations and Penning containment', () => {
   assert.deepEqual(plain(A.recipes[0].wear), [{ id: 'grindless:be_beam_window', chance: 313 }]);
@@ -55,7 +55,7 @@ test('three controllers meet the OpV component, research and domain-input contra
     const r = get('assembly_line', m.name);
     assert.ok(r, m.name);
     const text = JSON.stringify(r.j);
-    for (const id of ['gtceu:opv_machine_hull', 'gtceu:circuits/opv', 'grindless:superfluid_helium_3', 'gtceu:data_module'])
+    for (const id of ['gtceu:opv_machine_hull', 'gtceu:circuits/opv', 'gtceu:superfluid_helium_3', 'gtceu:data_module'])
       assert.ok(text.includes(id), `${m.name}: ${id}`);
     assert.ok(!/gtceu:(?:uxv|uiv|uev|uhv|uv|zpm|luv|iv|ev|hv|mv|lv)_(?:electric|field_generator|sensor|emitter)|circuits\/uxv/.test(text));
   }

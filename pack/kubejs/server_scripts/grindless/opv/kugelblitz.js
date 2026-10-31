@@ -172,7 +172,10 @@
   function add(event, rec) {
     if (needsJson(rec)) {
       // GTM prefixes the type itself on the builder path: the same id here
-      event.custom(jsonOf(rec)).id('grindless:' + rec.type + '/' + rec.name)
+      var built = event.custom(jsonOf(rec))
+      var rl = 'grindless:' + rec.type + '/' + rec.name
+      // on a GT type the builder exposes id as a field, not a method
+      try { built.id(rl) } catch (e) { built.id = new (Java.loadClass('net.minecraft.resources.ResourceLocation'))(rl) }
       rec.custom = true
     } else {
       addBuilt(event, rec)
