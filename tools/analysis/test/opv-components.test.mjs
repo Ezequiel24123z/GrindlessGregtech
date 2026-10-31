@@ -107,7 +107,7 @@ test('the robot arm, emitter, sensor and fluid regulator follow the component ta
   assert.deepEqual(items(row('opv_emitter')), [['grindless:th229_lasing_crystal', 1], [STACK, 2], [LINK, 1], [CABLE, 2], [CIRCUIT, 2]]);
   assert.deepEqual(items(row('opv_sensor')), [['grindless:hpge_compton_crystal', 1], [STACK, 2], [LINK, 1], [CABLE, 2], [CIRCUIT, 2]]);
   assert.deepEqual(items(row('opv_fluid_regulator')), [['gtceu:opv_electric_pump', 1], [DRIVE, 1], [CIRCUIT, 2], ['grindless:superfluid_he3_seal', 1],
-    ['gtceu:tritanium_small_gear', 2]]);
+    ['gtceu:tritanium_gear', 1]]);
   assert.deepEqual(plain(row('opv_robot_arm').fluidsIn), [{ id: 'gtceu:lubricant', amount: 250 }]);
   for (const p of ['opv_emitter', 'opv_sensor', 'opv_fluid_regulator']) assert.deepEqual(plain(row(p).fluidsIn), [{ id: 'gtceu:soldering_alloy', amount: 288 }], p);
   for (const id of OPVC.circuitComponents) {

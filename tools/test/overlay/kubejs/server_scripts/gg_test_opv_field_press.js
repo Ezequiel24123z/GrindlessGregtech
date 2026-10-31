@@ -7,7 +7,8 @@
 //     a_formed        a press forms with two UXV 4 A energy hatches
 //     c1_eut          its c1 billet row starts there at 268,435,456 EU/t (above V[UXV]: two hatches of the top tier lift the voltage one tier)
 //     b_formed        a second press forms with one OpV 16 A energy hatch
-//     probe_eut_long  a test row at 2^30 EU/t (above V[OpV], within 16 A) starts on it and reads 1,073,741,824 EU/t
+//     probe_eut_long  a test row at 2^30 EU/t (V[OpV] x 2 A: GTM tiers a recipe by its voltage, and one hatch gives V[OpV]) starts on it
+//                     and reads 1,073,741,824 EU/t
 (function () {
   var S = null
   var C = null
@@ -19,7 +20,8 @@
   var NAME = 'opv_field_press'
   var SGR = 'grindless:sgr1806_orbit'
   var CY = 106
-  var PROBE_EUT = '1073741824'
+  var PROBE_VOLTAGE = '536870912'
+  var PROBE_AMPS = 2
   var UXV_4A = 'gtceu:uxv_energy_input_hatch_4a'
   var OPV_16A = 'gtceu:opv_energy_input_hatch_16a'
   var CIRCUIT = 'gtceu:programmed_circuit'
@@ -42,12 +44,13 @@
       bus: [[CIRCUIT, 1, '{Configuration:32}'], ['minecraft:dandelion', 1]], recipe: 'probe', expect: 1073741824, eutCheck: 'probe_eut_long' }
   ]
 
-  // the probe: a 2^30 EU/t row on the press's own type, passed as a long; circuit 32 and a dandelion keep it apart from the real rows
+  // the probe: a 2^30 EU/t row on the press's own type, V[OpV] x 2 A (lv/arc_furnace.js's form; a plain 2^30 would tier as MAX), the
+  // voltage passed as a long; circuit 32 and a dandelion keep it apart from the real rows
   ServerEvents.recipes(function (event) {
     try {
       var Long = Java.loadClass('java.lang.Long')
       event.recipes.gtceu.field_freezing('gg_test_opv_field_press:probe').notConsumable('1x minecraft:dandelion').circuit(32)
-        .itemOutputs('1x minecraft:poppy').dimension(SGR).EUt(Long.valueOf(PROBE_EUT)).duration(200)
+        .itemOutputs('1x minecraft:poppy').dimension(SGR).EUt(Long.valueOf(PROBE_VOLTAGE), PROBE_AMPS).duration(200)
     } catch (e) { console.error('[gg_test opv_field_press] could not add the probe: ' + errText(e)) }
   })
 

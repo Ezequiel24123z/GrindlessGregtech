@@ -334,7 +334,7 @@
       var amount = 0
       for (var i = 0; i < tank.getTanks(); i++) {
         var fluid = tank.getFluidInTank(i)
-        if (!fluid.isEmpty() && String(classes().Registries.FLUIDS.getKey(fluid.getFluid())) === 'gtceu:hot_pair_plasma') amount += Number(fluid.getAmount())
+        if (!fluid.isEmpty() && String(classes().Registries.FLUID.getKey(fluid.getFluid())) === 'gtceu:hot_pair_plasma') amount += Number(fluid.getAmount())
       }
       if (amount > 0) {
         check('c1_complete', amount === 1000, 'wireless-powered c1 delivered ' + amount + ' mB hot pair plasma; trap return is independently chanced at 90%')

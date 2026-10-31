@@ -13546,7 +13546,7 @@ hash = "2287823f983ce9cbaff8803c4f18567d7142e2e4aee4d340e25838abce515043"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/opv/components.js"
-hash = "cddb13b9eb6bf0c23015558c2e373cbca423dddd6cec577e0e62d92a2f1d7a7c"
+hash = "c7c8eef47b6daed24d116892f3d9d6ef8a9d6b454d5b0d727d21ed33a6277eee"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/opv/cuts.js"
