@@ -205,8 +205,9 @@ function tableEut() {
 function eutProblems(rows) {
   const gateRow = (r, n) => r.where.startsWith('gate.json') && r.name === n;
   const isC13 = (r) => gateRow(r, 'hold_sgr_a') && r.eut === 2 ** 33;
+  const isMaxC14 = (r) => gateRow(r, 'hold_sgr_a_probe') && r.eut === 2 ** 33; // MAX-T1 gate c14
   const atTwo31 = (r) => (gateRow(r, 'hold_galactic_bulge') || gateRow(r, 'hold_sgr1806')) && r.eut === LONG;
-  const out = rows.filter((r) => r.eut >= LONG && !isC13(r) && !atTwo31(r)).map((r) => `${r.where}: ${r.eut} EU/t is at or above 2^31`);
+  const out = rows.filter((r) => r.eut >= LONG && !isC13(r) && !isMaxC14(r) && !atTwo31(r)).map((r) => `${r.where}: ${r.eut} EU/t is at or above 2^31`);
   for (const n of ['hold_galactic_bulge', 'hold_sgr1806']) {
     const row = rows.find((r) => gateRow(r, n));
     if (!row) out.push(`gate.json: the ${n} row is missing`);
