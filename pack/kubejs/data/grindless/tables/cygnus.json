@@ -61,6 +61,13 @@
           "itemsIn": [ { "id": "grindless:split_charge_sled", "count": 1 } ],
           "kept": [ { "id": "grindless:kerr_chart", "count": 1 } ],
           "itemsOut": [ { "id": "grindless:recovered_half_sled", "count": 1 } ]
+        },
+        {
+          "name": "payload_penrose", "circuit": 6, "eut": 536870912, "duration": 2400, "site": "gcyr:black_hole_orbit",
+          "_why": "MAX-D1 (max.md, L24 step 6, c6): at Sgr A* the payload is dropped into the ergosphere; one half falls in, the casing returns with more energy than it left with: 2^29 EU/t for 2,400 ticks. The casing goes back to the GTM assembler step.",
+          "itemsIn": [ { "id": "grindless:max_penrose_payload", "count": 1 } ],
+          "kept": [],
+          "itemsOut": [ { "id": "grindless:payload_casing", "count": 1 } ]
         }
       ]
     }

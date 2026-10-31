@@ -56,7 +56,8 @@
           return { id: String(f.id), amount: Number(f.amount) }
         }
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, dataKey: def.dataKey ? String(def.dataKey) : '',
-          dimension: def.dimension === true,
+          siteId: typeof r.site === 'string' && /^[a-z0-9_.-]+:[a-z0-9_.\/-]+$/.test(r.site) ? r.site : '',
+          dimension: def.dimension === true && typeof r.site !== 'string',
           itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack), fluidsIn: list(r.fluidsIn).map(fluid), charge: list(r.charge).map(fluid),
           itemsOut: list(r.itemsOut).map(stack), fluidsOut: list(r.fluidsOut).map(fluid) }
         if (bad || (rec.itemsOut.length === 0 && rec.fluidsOut.length === 0) || (rec.itemsIn.length === 0 && rec.fluidsIn.length === 0)) {
@@ -110,6 +111,7 @@
     rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
     if (rec.dimension) recipe.dimension(ORBIT)
+    else if (rec.siteId !== '') recipe.dimension(rec.siteId)
     recipe.EUt(rec.eut).duration(rec.duration)
   }
 
