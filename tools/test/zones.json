@@ -177,6 +177,7 @@
     { "id": "max_circuits", "x": [39192, 39255], "z": [0, 63], "y": [98, 115], "tests": ["max_circuits"], "note": "MAX-A1: the supracausal mainframe from our join satisfies #gtceu:circuits/max in an assembly-line recipe; GT--'s route is gone only after MAX-F2; read-only,     places nothing" },
     { "id": "max_strand", "x": [39256, 39319], "z": [0, 63], "y": [98, 115], "tests": ["max_strand"], "note": "MAX-A0: the UXV draw bench at SGR 1806-20 runs the horizon strand c5 and c6 rows; the vault, PBO, assembler, cable and hull recipe ids are looked up" },
     { "id": "max_wireless", "x": [39128, 39191], "z": [0, 63], "y": [98, 112], "tests": ["max_wireless"], "note": "MAX-W: case 14 wireless network, a MAX cell tower and a 64 A MAX hatch drawing 2^37 EU in one tick as a long; the L27 recipes and the pending cell recipe are read from the recipe manager" },
+    { "id": "max_components", "x": [39448, 39511], "z": [0, 63], "y": [98, 115], "tests": ["max_components"], "note": "MAX-A2: the six component and twelve intermediate recipe ids are read from the recipe manager, the components at VA[MAX]; read-only, places nothing" },
     { "id": "max_foundation", "x": [39000, 39063], "z": [0, 63], "y": [78, 84], "tests": ["max_foundation"], "note": "MAX-F1: one strand cable at 16 A x V[MAX] read back, both tier-14 places loaded; the 16x16 band starts at X 39000, Y 80, then cleared" }
   ]
 }
