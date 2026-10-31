@@ -87,7 +87,10 @@
           "itemsOut": [{ "id": "grindless:activated_neg_chamber", "count": 7 }, { "id": "grindless:spent_neg_chamber", "count": 1 }], "fluidsOut": [] },
         { "_why": "OpV-D1 (opv.md line 24; c31): A2's NbTiN film welded onto RRR niobium as the pickup electrodes; the trim is niobium powder for c4.", "name": "pickup_array", "circuit": 31, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:nbtin_film", "count": 4 }, { "id": "grindless:rrr_niobium_sheet", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:pickup_array", "count": 1 }, { "id": "grindless:niobium_powder", "count": 1, "chance": 3000 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:pickup_array", "count": 1 }, { "id": "grindless:niobium_powder", "count": 1, "chance": 3000 }], "fluidsOut": [] },
+        { "_why": "OpV-B2 (opv.md line 43; c23): the caged Ni chain is thawed in the beam's vacuum; the nickel falls out as dust and the cage part returns.", "name": "ni_chain_thaw", "circuit": 23, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:caged_ni_chain", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "gtceu:thawed_chain_nickel_dust", "count": 4 }, { "id": "grindless:cage_part", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "single_crystal_casting": {

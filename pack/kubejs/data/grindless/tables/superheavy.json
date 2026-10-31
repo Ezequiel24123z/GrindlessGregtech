@@ -159,6 +159,38 @@
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:spent_actinide_target", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:element_122_recoil_gas", "amount": 1000 }]
+        },
+        {
+          "_why": "OpV-B2 line 43: element 124, a nickel-64 beam on the curium-248 target; the spent target goes to waste retrieval",
+          "name": "element_124",
+          "circuit": 11,
+          "eut": 7864320,
+          "duration": 48000,
+          "itemsIn": [
+            { "id": "grindless:cm248_target", "count": 1 },
+            { "id": "gtceu:nickel_64_dust", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:spent_actinide_target", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:element_124_recoil_gas", "amount": 1000 }]
+        },
+        {
+          "_why": "OpV-B2 line 44: element 126, a nickel-64 beam on a californium-249 wheel (consumed); the activated wheel goes back to the hot cell, which re-presses the californium",
+          "name": "element_126",
+          "circuit": 13,
+          "eut": 7864320,
+          "duration": 48000,
+          "itemsIn": [
+            { "id": "grindless:cf249_target_wheel", "count": 1 },
+            { "id": "gtceu:nickel_64_dust", "count": 1 }
+          ],
+          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:activated_target_wheel", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:element_126_recoil_gas", "amount": 1000 }]
         }
       ]
     },
@@ -276,6 +308,32 @@
           "fluidsIn": [{ "id": "gtceu:element_122_recoil_gas", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:element_122_atoms", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "_why": "OpV-B2 line 43: element 124 caught from its recoil gas (curium-248 struck by nickel-64); the spent beam gas goes back as helium",
+          "name": "element_124_recoil",
+          "circuit": 10,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [{ "id": "grindless:etched_membrane", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:element_124_recoil_gas", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:element_124_recoil", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
+        },
+        {
+          "_why": "OpV-B2 line 44: element 126 caught from its recoil gas (californium-249 struck by nickel-64); the spent beam gas goes back as helium",
+          "name": "element_126_recoil",
+          "circuit": 11,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [{ "id": "grindless:etched_membrane", "count": 1 }],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:element_126_recoil_gas", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:element_126_recoil", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 1000 }]
         }
       ]
     },
@@ -379,6 +437,24 @@
           "charge": [],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:superheavy_census_iii", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "OpV-B2 line 44: elements 124 and 126 and the island nuclide counted together in a sealed capsule (census IV)",
+          "name": "census_iv",
+          "circuit": 11,
+          "eut": 3932160,
+          "duration": 2400,
+          "itemsIn": [
+            { "id": "grindless:element_124_recoil", "count": 1 },
+            { "id": "grindless:element_126_recoil", "count": 1 },
+            { "id": "grindless:island_nuclide", "count": 1 },
+            { "id": "grindless:sealed_capsule", "count": 1 }
+          ],
+          "kept": [],
+          "charge": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:superheavy_census_iv", "count": 1 }],
           "fluidsOut": []
         }
       ]
