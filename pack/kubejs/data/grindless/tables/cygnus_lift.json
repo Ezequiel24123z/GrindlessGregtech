@@ -23,6 +23,15 @@
           "fluidsIn": [{ "id": "gtceu:stellar_plasma", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:elevator_log", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-D3 line L20 step 3 (max.md, c3): the strand ribbon is hung in the plasma column to be proof-loaded; 100 mB of the plasma is consumed",
+          "name": "proof_load_ribbon", "circuit": 3, "eut": 8388608, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:strand_ribbon", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:stellar_plasma", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:proof_loaded_ribbon", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },
