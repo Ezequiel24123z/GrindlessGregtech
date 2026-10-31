@@ -59,7 +59,7 @@ test('BEUV scanner: beuv_lithography circuits 1-3, figures and slots', () => {
   const rc = T.types.beuv_lithography.recipes;
   // OpV-A2 appended c4 (cryo-CMOS gates), c5 (Nb TSV vias), c6 (HEMT T-gates), c7 (GaN gates) and c8 (the SDD anode); OpV-A3 appends algan_gates (c9), pinned in opv-field_press.test.mjs
   assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['exposure', 1], ['driver_asic', 2], ['mirror_cleaning', 3], ['cryo_cmos_exposure', 4], ['tsv_exposure', 5],
-    ['hemt_gate_exposure', 6], ['gan_gate_exposure', 7], ['sdd_anode_exposure', 8], ['algan_gates', 9]]);
+    ['hemt_gate_exposure', 6], ['gan_gate_exposure', 7], ['sdd_anode_exposure', 8], ['algan_gates', 9], ['metalens_wafer', 10]]); // MAX-A1 c10 (metalens_wafer, line 6)
   for (const r of rc) {
     assert.ok(ids(r.itemsIn).length + 1 <= 4 && ids(r.itemsOut).length <= 2, r.name);
     assert.ok(ids(r.fluidsIn).length <= 1 && ids(r.fluidsOut).length === 0, r.name);
@@ -107,7 +107,7 @@ test('"only from" claims: no other table or script builds these outputs', () => 
   const claims = {
     'grindless:beuv_exposed_wafer': ['beuv_lithography/exposure'],
     'grindless:fouled_beuv_mirror': ['beuv_lithography/exposure', 'beuv_lithography/cryo_cmos_exposure', 'beuv_lithography/tsv_exposure',
-      'beuv_lithography/hemt_gate_exposure', 'beuv_lithography/gan_gate_exposure', 'beuv_lithography/sdd_anode_exposure', 'beuv_lithography/algan_gates'], // OpV-A3's c9 fouls the mirror too
+      'beuv_lithography/hemt_gate_exposure', 'beuv_lithography/gan_gate_exposure', 'beuv_lithography/sdd_anode_exposure', 'beuv_lithography/algan_gates', 'beuv_lithography/metalens_wafer'], // MAX-A1's c10 fouls the mirror too; OpV-A3's c9 fouls the mirror too
     'grindless:beuv_driver_asic': ['beuv_lithography/driver_asic'],
     'grindless:beuv_mirror': ['assembler/beuv_mirror', 'beuv_lithography/mirror_cleaning'],
     'grindless:tb_droplet_target': ['assembler/tb_droplet_target'],
@@ -166,12 +166,12 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   }
   for (const m of ['beuv_scanner', 'stm_lithography_cell']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   // OpV-A2's rows (BEUV c4-8, STM c4) and OpV-A3's c9 keep their EMI lines in their own lang files
-  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless', 'opv_field_press_lang.js');
+  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless', 'opv_field_press_lang.js') + read('client_scripts', 'grindless', 'max_circuits_lang.js');
   for (const t of Object.values(T.types)) {
     if (!t.dataKey) continue;
     for (const r of t.recipes) {
       const k = `gtceu.recipe.${t.dataKey}.${r.name}`;
-      assert.ok(keys.includes(k) || (/^OpV-/.test(r._why || '') && opvLang.includes(`['${k}',`)), k);
+      assert.ok(keys.includes(k) || (/^(OpV|MAX)-/.test(r._why || '') && opvLang.includes(`['${k}',`)), k);
     }
   }
   for (const n of registered) assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
