@@ -31,7 +31,7 @@
           "itemsIn": [{ "id": "grindless:silicate_debris_fraction", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:ffc_pellet", "count": 2 }], "fluidsOut": [] },
         { "name": "ffc_salt_bath", "circuit": 5, "eut": 268435456, "duration": 600, "site": true,
-          "itemsIn": [{ "id": "grindless:ffc_pellet", "count": 4 }, { "id": "gtceu:graphite_plate", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsIn": [{ "id": "grindless:ffc_pellet", "count": 4 }, { "id": "gtceu:graphite_dust", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:si_alloy_powder", "count": 2 }, { "id": "grindless:spent_graphite_anode", "count": 2 }],
           "fluidsOut": [{ "id": "gtceu:oxygen", "amount": 500 }] },
         { "name": "cluster_casing_sinter", "circuit": 6, "eut": 268435456, "duration": 400, "site": true,
