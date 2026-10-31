@@ -112,7 +112,7 @@ test('every F1 id is registered once by this script; si28_soi_wafer, the paralle
 test('no script of ours registers a gtceu:opv_* or gtceu:max_* id (GTM\'s), except M1\'s parallel hatch and W\'s wireless hatches', () => {
   const bad = [];
   // OpV-W: lv/wireless_energy.js registers the eight gtceu:opv_wireless_* hatches (case 13), as it does every tier's
-  const w = (id, v) => /^gtceu:opv_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(id) && /(^|[\\/])lv[\\/]wireless_energy\.js$/.test(String(v.file));
+  const w = (id, v) => /^gtceu:(opv|max)_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(id) && /(^|[\\/])lv[\\/]wireless_energy\.js$/.test(String(v.file));
   for (const reg of [run.registry.items, run.registry.machines]) {
     for (const [id, v] of reg) if (/^gtceu:(opv|max)_/.test(id) && !v.seeded && id !== 'gtceu:opv_parallel_hatch' && !w(id, v)) bad.push(`${id} (${v.file})`);
   }
