@@ -111,7 +111,10 @@
           "itemsOut": [{ "id": "grindless:w_re_hohlraum", "count": 1 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
         { "_why": "OpV-B3a line 33 (c32): the InGaAsSb epi wafer brazed under the beam to a copper spreader plate into the TPV panel; the argon purge is 90% recovered.", "name": "tpv_braze", "circuit": 32, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:ingaassb_epi_wafer", "count": 1 }, { "id": "gtceu:copper_plate", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:tpv_panel", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
+          "itemsOut": [{ "id": "grindless:tpv_panel", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
+        { "_why": "OpV-R1 line 42 (contract EB 24): a tested MMIC tile is sealed under a titanium lid by the beam; the argon purge is 90% recovered.", "name": "seal_node_tile", "circuit": 24, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:tested_mmic_tile", "count": 1 }, { "id": "gtceu:titanium_plate", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:sealed_mmic_tile", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
       ]
     },
     "single_crystal_casting": {

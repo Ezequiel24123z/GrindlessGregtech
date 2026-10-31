@@ -1,4 +1,4 @@
-// priority: -21713
+// priority: -21809
 // -----------------------------------------------------------------------------------------------
 // Recipes of OpV's Kugelblitz forge and Hawking collector (machines and recipe types: startup_scripts/grindless/opv/kugelblitz.js;
 // docs/eras/opv.md, machines 10 and 11, process line 37; package OpV-D3), generated at every server load from

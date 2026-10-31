@@ -1,4 +1,4 @@
-// priority: -21804
+// priority: -21899
 // Gregtech Grindless - quest book bootstrap.
 //
 // Two independent things live here:

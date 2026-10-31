@@ -47,7 +47,7 @@ test('names unique, figures positive, circuits unique per type (0 only for GTM t
       names.push(r.name);
       assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
       assert.ok(r.circuit > 0 || GTM.has(type), `${type}/${r.name} needs a circuit`);
-      assert.match(r._why, /^UIV-B3|^UXV-B5/, r.name);
+      assert.match(r._why, /^UIV-B3|^UXV-B5|^OpV-R1/, r.name);
     }
   }
   assert.equal(new Set(names).size, names.length);

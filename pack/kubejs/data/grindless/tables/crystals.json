@@ -28,7 +28,12 @@
           "_why": "OpV-A1 (opv.md line 9): the comb pumps the coated Th:CaF2 crystal until the 8.4 eV nuclear line lases, the OpV emitter's lasing crystal; the comb is not consumed",
           "itemsIn": [{ "id": "grindless:coated_th_caf2_crystal", "count": 1 }],
           "kept": [{ "id": "grindless:vuv_frequency_comb", "count": 1 }], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:th229_lasing_crystal", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:th229_lasing_crystal", "count": 1 }], "fluidsOut": [] },
+        { "name": "lock_timing_head", "circuit": 5, "eut": 1966080, "duration": 600,
+          "_why": "OpV-R1 line 41: an X-ray timing head is locked to the nuclear clock (the clock is not consumed), the reference its pulse times are read against.",
+          "itemsIn": [{ "id": "grindless:xray_timing_head", "count": 1 }],
+          "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:clock_locked_head", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "crystal_growth": {
