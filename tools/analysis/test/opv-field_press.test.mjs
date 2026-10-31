@@ -85,7 +85,7 @@ test('electron beam c22: the W-Re can and its re-melt (80% back), appended at th
   // appended together; only later OpV rows (OpV-E1's c23 seal) follow them
   const i = rows.indexOf(can);
   assert.equal(rows[i + 1], melt);
-  assert.ok(rows.slice(i + 2).every((r) => /^(OpV-|MAX-B1|MAX-D2)/.test(r._why || '')), 'only later OpV rows (and MAX-B1\'s) after the can');
+  assert.ok(rows.slice(i + 2).every((r) => /^(OpV-|MAX-B1|MAX-D2|MAX-E1)/.test(r._why || '')), 'only later OpV rows (and MAX-B1\'s, MAX-E1\'s) after the can');
   assert.deepEqual(ids(can.itemsIn), [['grindless:chain_lamina_stack', 1], ['grindless:six_n_rhenium', 1]]);
   assert.deepEqual(can.fluidsIn, [{ id: 'gtceu:tungsten', amount: 288 }]);
   assert.deepEqual(ids(can.itemsOut), [['grindless:field_canned_stack', 1]]);
