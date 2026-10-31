@@ -1,0 +1,455 @@
+id,era,problem
+grindless:night_sky_radiator,ev,no item or block texture
+grindless:solar_wing_panel,ev,no item or block texture
+grindless:hermean_thin_film_panel,iv,no item or block texture
+grindless:station_truss_casing,luv,no item or block texture
+grindless:radiation_vault_casing,luv,no item or block texture
+grindless:whipple_shield_casing,luv,no item or block texture
+grindless:asteroid_regolith_casing,luv,no item or block texture
+grindless:sulfur_concrete_casing,luv,no item or block texture
+grindless:orbital_solar_panel,luv,no item or block texture
+grindless:magnetic_bearing,luv,no item or block texture
+grindless:coilgun_coil_casing,luv,no item or block texture
+grindless:sapphire_test_mass,luv,no item or block texture
+grindless:cryogenic_fuel_tank,luv,no item or block texture
+grindless:heliostat_mirror,lv,no item or block texture
+grindless:lv_capacitor_cell,lv,no item or block texture
+grindless:mv_capacitor_cell,lv,no item or block texture
+grindless:hv_capacitor_cell,lv,no item or block texture
+grindless:ev_capacitor_cell,lv,no item or block texture
+grindless:iv_capacitor_cell,lv,no item or block texture
+grindless:luv_smes_cell,lv,no item or block texture
+grindless:zpm_smes_cell,lv,no item or block texture
+grindless:uv_smes_cell,lv,no item or block texture
+grindless:uhv_smes_cell,lv,no item or block texture
+grindless:uev_smes_cell,lv,no item or block texture
+grindless:uiv_smes_cell,lv,no item or block texture
+grindless:uxv_smes_cell,lv,no item or block texture
+grindless:opv_smes_cell,lv,no item or block texture
+grindless:max_optical_table_casing,max,no item or block texture
+grindless:membrane_roller_casing,max,no item or block texture
+grindless:geroch_drum_casing,max,no item or block texture
+grindless:stream_turn_casing,max,no item or block texture
+grindless:mirror_shell_segment,max,no item or block texture
+grindless:stream_bundle_block,max,no item or block texture
+grindless:feeder_coil_casing,max,no item or block texture
+grindless:field_frozen_casing,opv,no item or block texture
+grindless:annihilation_shield_casing,opv,no item or block texture
+grindless:neg_xhv_casing,opv,no item or block texture
+grindless:uev_fusion_casing,uev,no item or block texture
+grindless:degenerate_containment_casing,uev,no item or block texture
+grindless:photonic_casing,uev,no item or block texture
+grindless:hftacn_coil_block,uev,no item or block texture
+grindless:bsl4_casing,uhv,no item or block texture
+grindless:warp_gate_casing,uhv,no item or block texture
+grindless:hangar_casing,uhv,no item or block texture
+grindless:field_ring_casing,uhv,no item or block texture
+grindless:biocemented_regolith,uhv,no item or block texture
+grindless:proxima_base_casing,uhv,no item or block texture
+grindless:uiv_fusion_casing,uiv,no item or block texture
+grindless:neutron_star_site_casing,uiv,no item or block texture
+grindless:metallic_hydrogen_coil_block,uiv,no item or block texture
+grindless:matrioshka_logic_tile,uiv,no item or block texture
+grindless:matrioshka_node,uiv,no item or block texture
+grindless:matrioshka_emitter_shell,uiv,no item or block texture
+grindless:matrioshka_tpv_shell,uiv,no item or block texture
+grindless:droplet_radiator_module,uiv,no item or block texture
+grindless:laser_module_block,uv,no item or block texture
+grindless:srf_cryomodule_block,uv,no item or block texture
+grindless:bnnt_fuel_tank,uv,no item or block texture
+grindless:separation_module,uv,no item or block texture
+grindless:forming_module,uv,no item or block texture
+grindless:cutting_module,uv,no item or block texture
+grindless:mixing_module,uv,no item or block texture
+grindless:heat_module,uv,no item or block texture
+grindless:uxv_fusion_casing,uxv,no item or block texture
+grindless:naquadria_containment_casing,zpm,no item or block texture
+grindless:pressure_hull_casing,zpm,no item or block texture
+grindless:photomultiplier_casing,zpm,no item or block texture
+grindless:cryostat_casing,zpm,no item or block texture
+grindless:probe_bay_casing,zpm,no item or block texture
+grindless:synroc_block,zpm,no item or block texture
+grindless:naquadah_fuel_tank,zpm,no item or block texture
+grindless:aerogel_fuel_tank,zpm,no item or block texture
+grindless:vein_sample_bauxite_end,hv,no item or block texture
+grindless:vein_sample_magnetite_end,hv,no item or block texture
+grindless:vein_sample_sheldonite,hv,no item or block texture
+grindless:vein_sample_zirconium,hv,no item or block texture
+grindless:vein_sample_scheelite,hv,no item or block texture
+grindless:vein_sample_naquadah_venus,iv,no item or block texture
+grindless:vein_sample_iridosmine_mercury,iv,no item or block texture
+grindless:vein_sample_pitchblende_end,iv,no item or block texture
+grindless:creature_model_skeleton,lv,no item or block texture
+grindless:creature_model_spider,lv,no item or block texture
+grindless:creature_model_slime,lv,no item or block texture
+grindless:creature_model_sheep,lv,no item or block texture
+grindless:creature_model_cow,lv,no item or block texture
+grindless:creature_model_chicken,lv,no item or block texture
+grindless:creature_model_enderman,lv,no item or block texture
+grindless:creature_model_creeper,lv,no item or block texture
+grindless:creature_model_blaze,lv,no item or block texture
+grindless:creature_model_wither_skeleton,lv,no item or block texture
+grindless:creature_model_wither,lv,no item or block texture
+grindless:vein_sample_banded_iron,lv,no item or block texture
+grindless:vein_sample_beryllium,lv,no item or block texture
+grindless:vein_sample_certus_quartz,lv,no item or block texture
+grindless:vein_sample_germanite,lv,no item or block texture
+grindless:vein_sample_manganese,lv,no item or block texture
+grindless:vein_sample_molybdenum,lv,no item or block texture
+grindless:vein_sample_monazite,lv,no item or block texture
+grindless:vein_sample_nether_quartz,lv,no item or block texture
+grindless:vein_sample_redstone,lv,no item or block texture
+grindless:vein_sample_saltpeter,lv,no item or block texture
+grindless:vein_sample_sulfur,lv,no item or block texture
+grindless:vein_sample_tetrahedrite,lv,no item or block texture
+grindless:vein_sample_topaz,lv,no item or block texture
+grindless:vein_sample_kaolinite,lv,no item or block texture
+grindless:vein_sample_wollastonite,lv,no item or block texture
+grindless:vein_sample_fluorite,lv,no item or block texture
+grindless:lv_wireless_energy_cover,lv,no item or block texture
+grindless:mv_wireless_energy_cover,lv,no item or block texture
+grindless:hv_wireless_energy_cover,lv,no item or block texture
+grindless:ev_wireless_energy_cover,lv,no item or block texture
+grindless:iv_wireless_energy_cover,lv,no item or block texture
+grindless:luv_wireless_energy_cover,lv,no item or block texture
+grindless:zpm_wireless_energy_cover,lv,no item or block texture
+grindless:uv_wireless_energy_cover,lv,no item or block texture
+grindless:uhv_wireless_energy_cover,lv,no item or block texture
+grindless:uev_wireless_energy_cover,lv,no item or block texture
+grindless:uiv_wireless_energy_cover,lv,no item or block texture
+grindless:uxv_wireless_energy_cover,lv,no item or block texture
+grindless:opv_wireless_energy_cover,lv,no item or block texture
+grindless:max_wireless_energy_cover,lv,no item or block texture
+grindless:lv_wireless_dynamo_cover,lv,no item or block texture
+grindless:mv_wireless_dynamo_cover,lv,no item or block texture
+grindless:hv_wireless_dynamo_cover,lv,no item or block texture
+grindless:ev_wireless_dynamo_cover,lv,no item or block texture
+grindless:iv_wireless_dynamo_cover,lv,no item or block texture
+grindless:luv_wireless_dynamo_cover,lv,no item or block texture
+grindless:zpm_wireless_dynamo_cover,lv,no item or block texture
+grindless:uv_wireless_dynamo_cover,lv,no item or block texture
+grindless:uhv_wireless_dynamo_cover,lv,no item or block texture
+grindless:uev_wireless_dynamo_cover,lv,no item or block texture
+grindless:uiv_wireless_dynamo_cover,lv,no item or block texture
+grindless:uxv_wireless_dynamo_cover,lv,no item or block texture
+grindless:opv_wireless_dynamo_cover,lv,no item or block texture
+grindless:max_wireless_dynamo_cover,lv,no item or block texture
+grindless:vein_sample_scheelite_mars,mars,no item or block texture
+grindless:vein_sample_merrillite_mars,mars,no item or block texture
+grindless:vein_sample_ice_mars,mars,no item or block texture
+grindless:vein_sample_ilmenite_moon,moon,no item or block texture
+grindless:vein_sample_regolith_moon,moon,no item or block texture
+grindless:vein_sample_apatite,steam,no item or block texture
+grindless:vein_sample_cassiterite,steam,no item or block texture
+grindless:vein_sample_coal,steam,no item or block texture
+grindless:vein_sample_copper_tin,steam,no item or block texture
+grindless:vein_sample_galena,steam,no item or block texture
+grindless:vein_sample_garnet_tin,steam,no item or block texture
+grindless:vein_sample_garnet,steam,no item or block texture
+grindless:vein_sample_iron,steam,no item or block texture
+grindless:vein_sample_lubricant,steam,no item or block texture
+grindless:vein_sample_magnetite_ow,steam,no item or block texture
+grindless:vein_sample_mineral_sand,steam,no item or block texture
+grindless:vein_sample_nickel,steam,no item or block texture
+grindless:vein_sample_salts,steam,no item or block texture
+grindless:vein_sample_oilsands,steam,no item or block texture
+grindless:vein_sample_copper,steam,no item or block texture
+grindless:vein_sample_diamond,steam,no item or block texture
+grindless:vein_sample_lapis,steam,no item or block texture
+grindless:vein_sample_manganese_ow,steam,no item or block texture
+grindless:vein_sample_mica,steam,no item or block texture
+grindless:vein_sample_olivine,steam,no item or block texture
+grindless:vein_sample_redstone_ow,steam,no item or block texture
+grindless:vein_sample_sapphire,steam,no item or block texture
+grindless:dfd_mk1_motor,uev,no item or block texture
+grindless:dfd_mk2_motor,uev,no item or block texture
+grindless:ican_rocket_motor,uhv,no item or block texture
+grindless:five_n_cobalt,uxv,no item or block texture
+grindless:five_n_iron,uxv,no item or block texture
+grindless:five_n_manganese,uxv,no item or block texture
+grindless:five_n_silicon,uxv,no item or block texture
+grindless:five_n_nickel,uxv,no item or block texture
+grindless:five_n_gallium,uxv,no item or block texture
+grindless:mu_metal_blend,uxv,no item or block texture
+grindless:mu_metal_ingot,uxv,no item or block texture
+grindless:mu_metal_hot_band,uxv,no item or block texture
+grindless:annealed_mu_foil,uxv,no item or block texture
+grindless:mu_metal_shield_can,uxv,no item or block texture
+grindless:finemet_charge_dust,uxv,no item or block texture
+grindless:heusler_cast_ingot,uxv,no item or block texture
+grindless:ni_mn_ga_raw_crystal,uxv,no item or block texture
+grindless:raw_hbn_crystal,uxv,no item or block texture
+grindless:wte2_raw_crystal,uxv,no item or block texture
+grindless:fgt_raw_crystal,uxv,no item or block texture
+grindless:dysco3_boule,uxv,no item or block texture
+grindless:ggg_boule,uxv,no item or block texture
+grindless:ga2o3_efg_plate,uxv,no item or block texture
+grindless:dysco3_slice,uxv,no item or block texture
+grindless:dysco3_polished_slice,uxv,no item or block texture
+grindless:ggg_slice,uxv,no item or block texture
+grindless:ggg_polished_slice,uxv,no item or block texture
+grindless:ga2o3_slice,uxv,no item or block texture
+grindless:annealed_mtj_wafer,uxv,no item or block texture
+grindless:etched_mtj_wafer,uxv,no item or block texture
+grindless:annealed_mram_wafer,uxv,no item or block texture
+grindless:etched_mram_wafer,uxv,no item or block texture
+grindless:annealed_saf_wafer,uxv,no item or block texture
+grindless:written_track_wafer,uxv,no item or block texture
+grindless:sot_heterostack,uxv,no item or block texture
+grindless:contacted_sot_stack,uxv,no item or block texture
+grindless:cofe_me_wafer,uxv,no item or block texture
+grindless:yig_film_wafer,uxv,no item or block texture
+grindless:yig_waveguide_wafer,uxv,no item or block texture
+grindless:stno_defined_wafer,uxv,no item or block texture
+grindless:stno_milled_wafer,uxv,no item or block texture
+grindless:stno_clean_wafer,uxv,no item or block texture
+grindless:stno_planarised_wafer,uxv,no item or block texture
+grindless:stno_redeposit_dust,uxv,no item or block texture
+grindless:ga2o3_epi_wafer,uxv,no item or block texture
+grindless:ga2o3_gated_wafer,uxv,no item or block texture
+grindless:vein_sample_m_type_belt,luv,no item or block texture
+grindless:vein_sample_s_type_belt,luv,no item or block texture
+grindless:vein_sample_c_type_belt,luv,no item or block texture
+gtceu:combined_cycle_plant,ev,no loop sound
+gtceu:lunar_solar_array,ev,no loop sound
+gtceu:atmosphere_processor,ev,no loop sound
+gtceu:ore_refinery,ev,no loop sound
+gtceu:regolith_cell,ev,no loop sound
+gtceu:sealed_dome,ev,no loop sound
+gtceu:ev_vein_drill,ev,no loop sound
+gtceu:hv_vein_drill,hv,no loop sound
+gtceu:hv_greenhouse,hv,no loop sound
+gtceu:coil_chemical_plant,hv,no loop sound
+gtceu:smelting_complex,iv,no loop sound
+gtceu:mercury_vein_drill,iv,no loop sound
+gtceu:mercury_solar_works,iv,no loop sound
+gtceu:mercury_solar_field,iv,no loop sound
+gtceu:interferometer,iv,no loop sound
+gtceu:tritium_removal_facility,iv,no loop sound
+gtceu:isr_wellfield,iv,no loop sound
+gtceu:fuel_fabrication_plant,iv,no loop sound
+gtceu:composite_autoclave,launch_road,no loop sound
+gtceu:engine_test_stand,launch_road,no loop sound
+gtceu:coated_conductor_line,luv,no loop sound
+gtceu:flux_tube_tether,luv,no loop sound
+gtceu:fumarole_condenser,luv,no loop sound
+gtceu:volcanic_intake,luv,no loop sound
+gtceu:microgravity_smelter,luv,no loop sound
+gtceu:wake_shield_facility,luv,no loop sound
+gtceu:orbital_solar_station,luv,no loop sound
+gtceu:wire_works,lv,no loop sound
+gtceu:lv_vein_drill,lv,no loop sound
+gtceu:lv_greenhouse,lv,no loop sound
+gtceu:submerged_arc_furnace,lv,no loop sound
+gtceu:wireless_energy_tower,lv,no loop sound
+gtceu:accretion_feeder,max,no loop sound
+gtceu:cluster_light_furnace,max,no loop sound
+gtceu:gene_ark,max,no loop sound
+gtceu:photon_ring_imager,max,no loop sound
+gtceu:mass_stream_injector,max,no loop sound
+gtceu:atom_interferometer_works,max,no loop sound
+gtceu:membrane_line,max,no loop sound
+gtceu:rydberg_array_works,max,no loop sound
+gtceu:mirror_shell,max,no loop sound
+gtceu:geroch_winch,max,no loop sound
+gtceu:lunar_drill,moon,no loop sound
+gtceu:mv_vein_drill,mv,no loop sound
+gtceu:mv_greenhouse,mv,no loop sound
+gtceu:universal_processing_factory,mv,no loop sound
+gtceu:universal_assembly_factory,mv,no loop sound
+gtceu:universal_separation_factory,mv,no loop sound
+gtceu:universal_mixing_factory,mv,no loop sound
+gtceu:advanced_multi_smelter,mv,no loop sound
+gtceu:lava_furnace,mv,no loop sound
+gtceu:weather_controller,mv,no loop sound
+gtceu:steam_observatory,observatory,no loop sound
+gtceu:optical_observatory,observatory,no loop sound
+gtceu:radio_telescope,observatory,no loop sound
+gtceu:antihydrogen_foundry,opv,no loop sound
+gtceu:annihilation_engine,opv,no loop sound
+gtceu:jet_beam_line,opv,no loop sound
+gtceu:spallation_target_station,opv,no loop sound
+gtceu:antiproton_decelerator,opv,no loop sound
+gtceu:assembly_line_array,opv,no loop sound
+gtceu:collector_node_works,opv,no loop sound
+gtceu:bulge_collector,opv,no loop sound
+gtceu:strangelet_vault,opv,no loop sound
+gtceu:strangelet_distiller,opv,no loop sound
+gtceu:field_frozen_press,opv,no loop sound
+gtceu:kugelblitz_forge,opv,no loop sound
+gtceu:hawking_collector,opv,no loop sound
+gtceu:magnetic_pair_converter,opv,no loop sound
+gtceu:debris_harvester,opv,no loop sound
+gtceu:replication_refinery,opv,no loop sound
+gtceu:von_neumann_foundry,opv,no loop sound
+gtceu:tetron_fab,opv,no loop sound
+gtceu:gamma_optics_works,opv,no loop sound
+gtceu:generator_array,power,no loop sound
+gtceu:large_steam_macerator,steam,no loop sound
+gtceu:large_steam_thermal_centrifuge,steam,no loop sound
+gtceu:large_steam_ore_washer,steam,no loop sound
+gtceu:large_steam_chemical_bath,steam,no loop sound
+gtceu:large_steam_centrifuge,steam,no loop sound
+gtceu:steam_vein_drill,steam,no loop sound
+gtceu:steam_greenhouse,steam,no loop sound
+gtceu:steam_forge_hammer,steam,no loop sound
+gtceu:steam_compressor,steam,no loop sound
+gtceu:steam_alloy_smelter,steam,no loop sound
+gtceu:steam_mixer,steam,no loop sound
+gtceu:steam_chemical_bath,steam,no loop sound
+gtceu:steam_ore_washer,steam,no loop sound
+gtceu:nebula_collector,uev,no loop sound
+gtceu:interstellar_dust_lab,uev,no loop sound
+gtceu:pulsar_timing_station,uev,no loop sound
+gtceu:barnard_core_drill,uev,no loop sound
+gtceu:carbonyl_refinery,uev,no loop sound
+gtceu:nitride_magnet_works,uev,no loop sound
+gtceu:sic_fibre_plant,uev,no loop sound
+gtceu:quantum_gas_lab,uev,no loop sound
+gtceu:entanglement_station,uev,no loop sound
+gtceu:single_crystal_foundry,uev,no loop sound
+gtceu:helium3_polariser,uev,no loop sound
+gtceu:uev_fusion_reactor,uev,no loop sound
+gtceu:calutron,uev,no loop sound
+gtceu:snspd_foundry,uev,no loop sound
+gtceu:vdw_stacker,uev,no loop sound
+gtceu:photonic_integration_hall,uev,no loop sound
+gtceu:white_dwarf_spectrograph,uev,no loop sound
+gtceu:degenerate_harvester,uev,no loop sound
+gtceu:containment_works,uev,no loop sound
+gtceu:stellar_forge,uev,no loop sound
+gtceu:heavy_ion_cyclotron,uev,no loop sound
+gtceu:recoil_separator,uev,no loop sound
+gtceu:superheavy_chemistry_lab,uev,no loop sound
+gtceu:positron_accumulator,uhv,no loop sound
+gtceu:casimir_array,uhv,no loop sound
+gtceu:ultrapure_water_plant,uhv,no loop sound
+gtceu:betavoltaic_fab,uhv,no loop sound
+gtceu:nuclear_clock_lab,uhv,no loop sound
+gtceu:crystal_growth_furnace,uhv,no loop sound
+gtceu:pbo_plant,uhv,no loop sound
+gtceu:tether_ribbon_works,uhv,no loop sound
+gtceu:baseline_astrometer,uhv,no loop sound
+gtceu:quantum_fabricator,uhv,no loop sound
+gtceu:regolith_excavator,uhv,no loop sound
+gtceu:solar_vapour_furnace,uhv,no loop sound
+gtceu:mbe_reactor,uhv,no loop sound
+gtceu:photonic_foundry,uhv,no loop sound
+gtceu:sic_device_fab,uhv,no loop sound
+gtceu:solar_array_fab,uhv,no loop sound
+gtceu:spark_plasma_sinterer,uhv,no loop sound
+gtceu:cold_trap_drill,uhv,no loop sound
+gtceu:biomining_heap,uhv,no loop sound
+gtceu:xenoflora_rover_bay,uhv,no loop sound
+gtceu:sample_receiving_facility,uhv,no loop sound
+gtceu:xenobotany_greenhouse,uhv,no loop sound
+gtceu:xenobiochem_plant,uhv,no loop sound
+gtceu:radiotrophic_vat,uhv,no loop sound
+gtceu:swarm_segment_foundry,uhv,no loop sound
+gtceu:swarm_control_station,uhv,no loop sound
+gtceu:solar_probe_bay,uhv,no loop sound
+gtceu:high_flux_reactor,uhv,no loop sound
+gtceu:transuranium_facility,uhv,no loop sound
+gtceu:organoid_array,uhv,no loop sound
+gtceu:zblan_draw_tower,uhv,no loop sound
+gtceu:beuv_scanner,uiv,no loop sound
+gtceu:stm_lithography_cell,uiv,no loop sound
+gtceu:neutronium_compression_hall,uiv,no loop sound
+gtceu:ergosphere_probe_bay,uiv,no loop sound
+gtceu:penrose_engine,uiv,no loop sound
+gtceu:pulsar_wind_trap,uiv,no loop sound
+gtceu:positronium_condensate_lab,uiv,no loop sound
+gtceu:xray_pulse_profiler,uiv,no loop sound
+gtceu:levitation_melter,uiv,no loop sound
+gtceu:matrioshka_computer,uiv,no loop sound
+gtceu:droplet_radiator_works,uiv,no loop sound
+gtceu:spectral_hole_burner,uiv,no loop sound
+gtceu:millikelvin_cryostat_works,uiv,no loop sound
+gtceu:ramp_compression_pulser,uiv,no loop sound
+gtceu:polarised_proton_source,uiv,no loop sound
+gtceu:uiv_fusion_reactor,uiv,no loop sound
+gtceu:crust_lift,uiv,no loop sound
+gtceu:neutron_drip_separator,uiv,no loop sound
+gtceu:neutronium_cage,uiv,no loop sound
+gtceu:r_process_decompressor,uiv,no loop sound
+gtceu:decay_heat_vault,uiv,no loop sound
+gtceu:tfln_fab,uiv,no loop sound
+gtceu:femtosecond_writer,uiv,no loop sound
+gtceu:muon_fusion_cell,uv,no loop sound
+gtceu:antimatter_trap,uv,no loop sound
+gtceu:superfluid_helium_plant,uv,no loop sound
+gtceu:srf_cavity_works,uv,no loop sound
+gtceu:zone_refining_tower,uv,no loop sound
+gtceu:optical_ground_station,uv,no loop sound
+gtceu:precursor_probe_bay,uv,no loop sound
+gtceu:event_horizon_interferometer,uv,no loop sound
+gtceu:heat_source_works,uv,no loop sound
+gtceu:kuiper_interceptor_bay,uv,no loop sound
+gtceu:amorphous_ice_annealer,uv,no loop sound
+gtceu:ark_biosphere,uv,no loop sound
+gtceu:neural_culture_vat,uv,no loop sound
+gtceu:boron_nitride_reactor,uv,no loop sound
+gtceu:powder_in_tube_line,uv,no loop sound
+gtceu:powder_bed_printer,uv,no loop sound
+gtceu:mega_factory,uv,no loop sound
+gtceu:neptune_deep_siphon,uv,no loop sound
+gtceu:triton_geyser_sampler,uv,no loop sound
+gtceu:mocvd_reactor,uv,no loop sound
+gtceu:penetrator_probe_bay,uv,no loop sound
+gtceu:volatile_ice_fractionator,uv,no loop sound
+gtceu:cryotank_winder,uv,no loop sound
+gtceu:thruster_works,uv,no loop sound
+gtceu:light_sail_fab,uv,no loop sound
+gtceu:starchip_fab,uv,no loop sound
+gtceu:laser_sail_launcher,uv,no loop sound
+gtceu:pyroprocessing_cell,uv,no loop sound
+gtceu:accelerator_driven_reactor,uv,no loop sound
+gtceu:ejecta_knot_sweeper,uxv,no loop sound
+gtceu:annihilation_laser_works,uxv,no loop sound
+gtceu:accretion_disk_skimmer,uxv,no loop sound
+gtceu:frc_former,uxv,no loop sound
+gtceu:bz_dynamo,uxv,no loop sound
+gtceu:stellar_elevator,uxv,no loop sound
+gtceu:plasma_mass_filter,uxv,no loop sound
+gtceu:stellar_condensation_tower,uxv,no loop sound
+gtceu:uxv_fusion_reactor,uxv,no loop sound
+gtceu:stellar_fractionation_hall,uxv,no loop sound
+gtceu:pasta_extractor,uxv,no loop sound
+gtceu:pasta_phase_sorter,uxv,no loop sound
+gtceu:pasta_draw_bench,uxv,no loop sound
+gtceu:pasta_laminator,uxv,no loop sound
+gtceu:polar_cap_tap,uxv,no loop sound
+gtceu:waste_retrieval_plant,zpm,no loop sound
+gtceu:actinide_partitioning_plant,zpm,no loop sound
+gtceu:europium_reductor,zpm,no loop sound
+gtceu:direct_energy_converter,zpm,no loop sound
+gtceu:assembly_hall,zpm,no loop sound
+gtceu:naquadah_fuel_works,zpm,no loop sound
+gtceu:neutrino_observatory,zpm,no loop sound
+gtceu:deep_space_network,zpm,no loop sound
+gtceu:kuiper_survey_telescope,zpm,no loop sound
+gtceu:methane_pyrolyser,zpm,no loop sound
+gtceu:vent_bioreactor,zpm,no loop sound
+gtceu:aerogel_works,zpm,no loop sound
+gtceu:diamond_lattice_fab,zpm,no loop sound
+gtceu:ion_implanter,zpm,no loop sound
+gtceu:plume_sampler,zpm,no loop sound
+gtceu:ring_seismometer,zpm,no loop sound
+gtceu:isotope_column,zpm,no loop sound
+gtceu:ring_harvester,zpm,no loop sound
+gtceu:entry_probe_bay,zpm,no loop sound
+gtceu:tholin_reformer,zpm,no loop sound
+gtceu:ice_giant_siphon,zpm,no loop sound
+gtceu:slurry_separator,zpm,no loop sound
+gtceu:flyby_probe_bay,zpm,no loop sound
+gtceu:pressurized_vein_drill,iv,no loop sound
+gtceu:venus_heat_engine,iv,no loop sound
+gtceu:venus_acid_works,iv,no loop sound
+gtceu:harpoon_anchor_drill,luv,no loop sound
+gtceu:cryobot,luv,no loop sound
+gtceu:algae_bioreactor,luv,no loop sound
+gtceu:gravitational_wave_detector,luv,no loop sound
+gtceu:coilgun_launcher,luv,no loop sound
+gtceu:zero_g_crystal_grower,luv,no loop sound
+gtceu:hydroponic_ring,luv,no loop sound
+gtceu:organoid_lab,luv,no loop sound

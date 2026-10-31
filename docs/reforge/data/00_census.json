@@ -1,0 +1,216 @@
+{
+ "eras": [
+  {
+   "era": "steam",
+   "items": 27,
+   "multiblocks": 15,
+   "otherMachines": 1,
+   "recipes": 125,
+   "lineQuests": 63,
+   "ageQuests": 44
+  },
+  {
+   "era": "lv",
+   "blockItems": 15,
+   "items": 58,
+   "otherMachines": 116,
+   "multiblocks": 7,
+   "recipes": 409,
+   "ageQuests": 52,
+   "lineQuests": 102
+  },
+  {
+   "era": "mv",
+   "items": 1,
+   "multiblocks": 12,
+   "recipes": 209,
+   "ageQuests": 50,
+   "lineQuests": 96
+  },
+  {
+   "era": "hv",
+   "items": 10,
+   "multiblocks": 6,
+   "recipes": 101,
+   "ageQuests": 33,
+   "lineQuests": 78
+  },
+  {
+   "era": "ev",
+   "blockItems": 3,
+   "items": 12,
+   "fluids": 3,
+   "multiblocks": 12,
+   "recipes": 206,
+   "ageQuests": 56,
+   "lineQuests": 108
+  },
+  {
+   "era": "iv",
+   "blockItems": 2,
+   "items": 26,
+   "fluids": 3,
+   "multiblocks": 16,
+   "otherMachines": 1,
+   "recipes": 126,
+   "ageQuests": 54,
+   "lineQuests": 118
+  },
+  {
+   "era": "luv",
+   "blockItems": 10,
+   "items": 38,
+   "fluids": 1,
+   "multiblocks": 21,
+   "recipes": 143,
+   "ageQuests": 48,
+   "lineQuests": 194
+  },
+  {
+   "era": "zpm",
+   "blockItems": 8,
+   "items": 44,
+   "fluids": 10,
+   "multiblocks": 28,
+   "recipes": 191,
+   "lineQuests": 49,
+   "ageQuests": 45
+  },
+  {
+   "era": "uv",
+   "blockItems": 8,
+   "items": 102,
+   "fluids": 29,
+   "multiblocks": 32,
+   "recipes": 283,
+   "lineQuests": 91,
+   "ageQuests": 50
+  },
+  {
+   "era": "uhv",
+   "blockItems": 6,
+   "items": 121,
+   "fluids": 25,
+   "multiblocks": 32,
+   "recipes": 340,
+   "lineQuests": 150,
+   "ageQuests": 58
+  },
+  {
+   "era": "uev",
+   "blockItems": 4,
+   "items": 237,
+   "fluids": 31,
+   "multiblocks": 26,
+   "otherMachines": 15,
+   "recipes": 405,
+   "lineQuests": 71,
+   "ageQuests": 44
+  },
+  {
+   "era": "uiv",
+   "blockItems": 8,
+   "items": 241,
+   "fluids": 34,
+   "multiblocks": 23,
+   "recipes": 282,
+   "lineQuests": 326,
+   "ageQuests": 54
+  },
+  {
+   "era": "uxv",
+   "blockItems": 1,
+   "items": 229,
+   "fluids": 26,
+   "multiblocks": 22,
+   "recipes": 187,
+   "lineQuests": 351,
+   "ageQuests": 49
+  },
+  {
+   "era": "opv",
+   "blockItems": 3,
+   "items": 221,
+   "fluids": 17,
+   "multiblocks": 19,
+   "recipes": 168,
+   "ageQuests": 52,
+   "lineQuests": 304
+  },
+  {
+   "era": "max",
+   "blockItems": 7,
+   "items": 260,
+   "fluids": 5,
+   "multiblocks": 10,
+   "recipes": 138,
+   "ageQuests": 53,
+   "lineQuests": 467
+  },
+  {
+   "era": "base",
+   "recipes": 75995
+  },
+  {
+   "era": "dimensions",
+   "items": 3,
+   "recipes": 3
+  },
+  {
+   "era": "integration",
+   "recipes": 130
+  },
+  {
+   "era": "launch_road",
+   "items": 4,
+   "multiblocks": 2,
+   "recipes": 6
+  },
+  {
+   "era": "lib",
+   "otherMachines": 6
+  },
+  {
+   "era": "mars",
+   "items": 5,
+   "recipes": 3
+  },
+  {
+   "era": "moon",
+   "items": 3,
+   "multiblocks": 1,
+   "recipes": 7
+  },
+  {
+   "era": "observatory",
+   "items": 5,
+   "multiblocks": 3,
+   "recipes": 11
+  },
+  {
+   "era": "other",
+   "otherQuests": 659
+  },
+  {
+   "era": "power",
+   "multiblocks": 1,
+   "recipes": 2
+  },
+  {
+   "era": "quest_book",
+   "recipes": 1
+  },
+  {
+   "era": "unmapped",
+   "recipes": 976
+  }
+ ],
+ "totals": {
+  "unusedItems": 48,
+  "langGaps": 192,
+  "assetGaps": 454,
+  "questRefProblems": 4,
+  "duplicateRecipeGroups": 0,
+  "droppedInputWarnings": 67
+ }
+}

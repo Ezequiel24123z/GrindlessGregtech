@@ -1,0 +1,526 @@
+group,class,era,by,items,reason
+gtceu:opv_16a_energy_converter,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_1a_energy_converter,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_4a_energy_converter,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_8a_energy_converter,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_charger_4x,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_fluid_passthrough_hatch,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_input_hatch_4x,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_input_hatch_9x,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_item_passthrough_hatch,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_output_hatch_4x,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_output_hatch_9x,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_quantum_chest,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_quantum_tank,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtceu:opv_rotor_holder,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+gtmutils:opv_64a_energy_converter,B,OpV,config,1,"GTM's OpV content, registered by highTierContent (TP-S0F, docs/research/tier-parity.md TP-D4): components, basic machines, hull, hatches, transformers and conve"
+antimony,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+arcane_crystal,C,,config,14,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+arsenic,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+barium,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+barium_sulfide,C,,config,3,"leftovers from GTM's naquadah separation, which GT-- empties out (enableHarderNaquadahLine): nothing produces them"
+bismuth,C,,config,9,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+bismuth_bronze,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+calcium_carbonate,C,,config,3,"material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)"
+chain_strand,C,,config,7,"OpV-F1 registered the chain strand as an ingot cable material (startup_scripts/grindless/opv/foundation.js), and OpV-F2's cuts (server_scripts/grindless/opv/cut"
+chromium,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+co2mnsi,C,,config,6,"UXV-F1 registered CoFeB, Co2MnSi and hBN as GT materials (uxv.md:1102), but the line makes them only as grindless:cofeb_ingot and grindless:heusler_ingot (UXV-A"
+cobalt,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+cofeb,C,,config,6,"UXV-F1 registered CoFeB, Co2MnSi and hBN as GT materials (uxv.md:1102), but the line makes them only as grindless:cofeb_ingot and grindless:heusler_ingot (UXV-A"
+damascus_steel,C,,config,57,Damascus steel: GTM tool material that no recipe makes
+enriched_naquadah,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+enriched_naquadah_waste,C,,config,2,"leftovers from GTM's naquadah separation, which GT-- empties out (enableHarderNaquadahLine): nothing produces them"
+erbium,C,,config,3,"UIV-F1 added a dust form to GTM's erbium, but UIV-A1's reductor c8 makes erbium oxide, which lines 16 and 44 use as is (Er:YSO boule, ErCl3 doping), and nothing"
+extendedfeatures:advanced_conservatory,C,,config,1,Extended Features: controller removed by the pack (integration/extendedfeatures.js)
+extendedfeatures:configurable_cleaning_maintenance_hatch,C,,config,1,"Extended Features: part with no recipe (the addon doesn't bring one); it is a maintenance candidate, and GTM's multiblock previews can pick it first (hash-order"
+extendedfeatures:industrial_greenhouse,C,,config,1,Extended Features: controller removed by the pack (integration/extendedfeatures.js)
+extendedfeatures:large_cracking_machine,C,,config,1,GCYM-style parallel machine from Extended Features with no recipe (integration/extendedfeatures.js): the IV wave left them out (docs/eras/iv.md: GCYM at IV; the
+extendedfeatures:large_pyrolysis_oven,C,,config,1,GCYM-style parallel machine from Extended Features with no recipe (integration/extendedfeatures.js): the IV wave left them out (docs/eras/iv.md: GCYM at IV; the
+extendedfeatures:opv_universal_circuit,C,,config,1,Extended Features: part with no recipe (the addon doesn't bring one)
+extendedfeatures:power_transformer,C,,config,1,Extended Features: part with no recipe (the addon doesn't bring one)
+extendedfeatures:robust_alloy_materializer,C,,config,1,Extended Features: controller removed by the pack (integration/extendedfeatures.js)
+extendedfeatures:rock_processing_plant,C,,config,1,Extended Features: controller removed by the pack (integration/extendedfeatures.js)
+extendedfeatures:synthesis_vessel,C,,config,1,Extended Features: controller removed by the pack (integration/extendedfeatures.js)
+extendedfeatures:uhv_data_access_hatch,C,,config,1,Extended Features: part with no recipe (the addon doesn't bring one)
+extendedfeatures:universal_disassembly_machine,C,,config,1,Extended Features: controller removed by the pack (integration/extendedfeatures.js)
+extendedfeatures:uv_data_access_hatch,C,,config,1,Extended Features: part with no recipe (the addon doesn't bring one)
+extendedfeatures:uv_wireless_data_receptor,C,,config,1,Extended Features: part with no recipe (the addon doesn't bring one)
+extendedfeatures:uv_wireless_data_transmissor,C,,config,1,Extended Features: part with no recipe (the addon doesn't bring one)
+extendedfeatures:zpm_data_access_hatch,C,,config,1,Extended Features: part with no recipe (the addon doesn't bring one)
+extendedfeatures:zpm_wireless_data_receptor,C,,config,1,Extended Features: part with no recipe (the addon doesn't bring one)
+extendedfeatures:zpm_wireless_data_transmissor,C,,config,1,Extended Features: part with no recipe (the addon doesn't bring one)
+gadolinium,C,,config,6,"GTCA's samarium-terbium branch: since EV samarium is Martian, and flsamaric_to_ho no longer gives the samarium-terbium mixture (offworld_only.json), so the bran"
+gallium,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+gallium_arsenide,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+gcyr:aerospace_aluminium_casing,C,,config,1,GCYR: part or material with no recipe that the pack doesn't use
+gcyr:airlock_door,C,,config,1,"GCYR 0.2.9's satellites, GPS tracker, beam receiver and airlock door: no recipe and no deploy (docs/eras/luv.md, Considered and dropped: the satellites, the rec"
+gcyr:beam_receiver,C,,config,1,"GCYR 0.2.9's satellites, GPS tracker, beam receiver and airlock door: no recipe and no deploy (docs/eras/luv.md, Considered and dropped: the satellites, the rec"
+gcyr:bisalloy_400,C,,config,1,GCYR: part or material with no recipe that the pack doesn't use
+gcyr:chromic_acid,C,,config,2,"material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)"
+gcyr:drone_hangar,C,,config,1,"GCYR's Dyson swarm parts stay hidden for good (docs/eras/uhv.md, Dyson swarm): our swarm is our own machines (UHV-B3), so GCYR's satellite, drone hangar and Dys"
+gcyr:dyson_swarm_satellite,C,,config,1,"GCYR's Dyson swarm parts stay hidden for good (docs/eras/uhv.md, Dyson swarm): our swarm is our own machines (UHV-B3), so GCYR's satellite, drone hangar and Dys"
+gcyr:empty_satellite,C,,config,1,"GCYR 0.2.9's satellites, GPS tracker, beam receiver and airlock door: no recipe and no deploy (docs/eras/luv.md, Considered and dropped: the satellites, the rec"
+gcyr:gps_satellite,C,,config,1,"GCYR 0.2.9's satellites, GPS tracker, beam receiver and airlock door: no recipe and no deploy (docs/eras/luv.md, Considered and dropped: the satellites, the rec"
+gcyr:gps_tracker,C,,config,1,"GCYR 0.2.9's satellites, GPS tracker, beam receiver and airlock door: no recipe and no deploy (docs/eras/luv.md, Considered and dropped: the satellites, the rec"
+gcyr:iron_oxide,C,,config,3,"material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)"
+gcyr:laser_satellite,C,,config,1,"GCYR 0.2.9's satellites, GPS tracker, beam receiver and airlock door: no recipe and no deploy (docs/eras/luv.md, Considered and dropped: the satellites, the rec"
+gcyr:luna_marker,C,,config,1,"technical block (dimension marker), not for the player; GTM shows it in every recipe with a dimension condition, so it is only dropped from the index (disabling"
+gcyr:mars_marker,C,,config,1,"technical block (dimension marker), not for the player; GTM shows it in every recipe with a dimension condition, so it is only dropped from the index (disabling"
+gcyr:martian_rock_dust,C,,config,3,"GCYR Martian rock dust: only the stone byproduct of milling Martian ore blocks (the tripod gives raw ores, and nothing mills the rock itself), with no use of it"
+gcyr:mercury_marker,C,,config,1,"technical block (dimension marker), not for the player; GTM shows it in every recipe with a dimension condition, so it is only dropped from the index (disabling"
+gcyr:opv_oxygen_spreader,C,,config,1,GCYR: part or material with no recipe that the pack doesn't use
+gcyr:ore_finder_satellite,C,,config,1,"GCYR 0.2.9's satellites, GPS tracker, beam receiver and airlock door: no recipe and no deploy (docs/eras/luv.md, Considered and dropped: the satellites, the rec"
+gcyr:potassium_chloride,C,,config,3,"material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)"
+gcyr:pyrometillic_dianhydride,C,,config,3,GCYR: part or material with no recipe that the pack doesn't use
+gcyr:space_elevator_support,C,,config,1,GCYR: part or material with no recipe that the pack doesn't use
+gcyr:stainless_evaporation_casing,C,,config,1,GCYR: part or material with no recipe that the pack doesn't use
+gcyr:uhv_oxygen_spreader,C,,config,1,GCYR: part or material with no recipe that the pack doesn't use
+gcyr:venus_marker,C,,config,1,"technical block (dimension marker), not for the player; GTM shows it in every recipe with a dimension condition, so it is only dropped from the index (disabling"
+grindless:uev_conveyor_module,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uev_electric_motor,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uev_electric_piston,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uev_electric_pump,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uev_emitter,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uev_field_generator,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uev_robot_arm,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uev_sensor,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uiv_conveyor_module,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uiv_electric_motor,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uiv_electric_piston,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uiv_electric_pump,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uiv_emitter,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uiv_field_generator,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uiv_robot_arm,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uiv_sensor,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uxv_conveyor_module,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uxv_electric_motor,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uxv_electric_piston,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uxv_electric_pump,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uxv_emitter,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uxv_field_generator,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uxv_robot_arm,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:uxv_sensor,C,,config,1,"tier parity TP-D2 (docs/research/tier-parity.md): our UEV-UXV components, retired for GTM's gtceu:<tier>_<family> once highTierContent is on; every recipe makes"
+grindless:vein_sample_scheelite,C,,config,1,hidden in EMI: only exists for old saves and converts into the new thing (empty vein probe); its conversion recipe stays
+gtca:accurate_optical_ram,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:adamantium,C,,config,7,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:bedrockium,C,,config,20,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+gtca:borsilicate_yttrium_thorium_glass,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:calcium_fluoride,C,,config,3,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:carbon_filter,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:celestial_tungsten_plasma,C,,config,2,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:certain_crystal,C,,config,8,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:clarifier_purification_unit,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:cosmic_neutronium,C,,config,40,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+gtca:cosmic_plutonium,C,,config,26,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+gtca:dristnya,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:dymethyl_ether,C,,config,2,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:e_85_fuel,C,,config,2,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:electrical_steel,C,,config,4,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:electron_cell_battery,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:electron_cell_empty,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:end_steel,C,,config,4,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:ender_fluid,C,,config,2,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:endium,C,,config,26,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+gtca:europium_doped_monocrystalyne_silicon_boule,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:europium_waffle,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:ev_chemical_generator,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:ev_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:ev_matter_amplificator,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:ev_recycler,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:exposed_optical_chip,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:extreme_heat_exchanger,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:extreme_temperature_purification_unit,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:flocculation_purification_unit,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:graviton,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:graviton_anomaly_battery,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:graviton_anomaly_empty,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:green_house,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:hastealloy_276,C,,config,13,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:heat_resistant_trinium_plated_casing,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:high_energy_laser_purification_unit,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:high_energy_ultraviolet_emitter_casing,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:high_pressure_steam,C,,config,2,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:hv_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:hv_recycler,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:industrial_coke_oven,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:inert_filtration_casing,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:inert_neutralization_inert_casing,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:iv_chemical_generator,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:iv_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:iv_matter_amplificator,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:iv_recycler,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:luv_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:luv_matter_amplificator,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:luv_recycler,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:lv_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:lv_recycler,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:mar_ce_m_200,C,,config,4,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:melodic_alloy,C,,config,4,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:mv_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:mv_recycler,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:mytryl,C,,config,20,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+gtca:nano_power_ic,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:nanotube_spool,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:naquadria_renforced_waterplant_casing,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:neonite,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:neutronium_fused_glass,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:neutronium_plated_reinforced_stone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:nitrogenated_samarium_terbium_mixture,C,,config,3,"GTCA's samarium-terbium branch: since EV samarium is Martian, and flsamaric_to_ho no longer gives the samarium-terbium mixture (offworld_only.json), so the bran"
+gtca:npic_wafer,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:ohriharukon,C,,config,7,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:omni_purpose_infinity_fused_glass,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_assembly,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_circuit_board,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_cpu_containment_housing,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_mainframe,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_processor,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_smd_capacitor,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_smd_diode,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_smd_inductor,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_smd_resistor,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_smd_transistor,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optical_supercomputer,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:optically_perfect_cpu,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:opticaly_enriched_monocrystalyne_silicon_boule,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:orundum,C,,config,7,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:ozonation_purification_unit,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:pahoehoe_lava,C,,config,2,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:ph_neutralization_purification_unit,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:photonically_prepared_wafer,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:piko_wafer_ic,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:polymerizer,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:ppic_wafer,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:proton_cell_battery,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:purified_water_grade_1,C,,config,2,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:purified_water_grade_2,C,,config,2,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:purified_water_grade_3,C,,config,2,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:purified_water_grade_4,C,,config,2,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:purified_water_grade_5,C,,config,2,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:purified_water_grade_6,C,,config,2,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:purified_water_grade_7,C,,config,2,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:purified_water_grade_8,C,,config,2,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:quark_entanglement_battery,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:quark_entanglement_empty,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:reinforced_sterile_water_plant_casing,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:residual_decontamiant_degasser_purification_unit,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:samarium_residue,C,,config,3,"GTCA's samarium-terbium branch: since EV samarium is Martian, and flsamaric_to_ho no longer gives the samarium-terbium mixture (offworld_only.json), so the bran"
+gtca:samarium_terbium_mixture,C,,config,3,"GTCA's samarium-terbium branch: since EV samarium is Martian, and flsamaric_to_ho no longer gives the samarium-terbium mixture (offworld_only.json), so the bran"
+gtca:sc_steam,C,,config,2,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:scrap,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:scrapbox,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:sh_steam,C,,config,2,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:shd_turbine,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:space_assembler_mki,C,,config,1,"GTCA 2.2.0's elevator modules stay hidden for good: their previews have no bus or hatch (UHV-S0-8, UEV-S0-8 FAIL, docs/research/uev-s0.md), so any UEV module is"
+gtca:space_assembler_mkii,C,,config,1,"GTCA 2.2.0's elevator modules stay hidden for good: their previews have no bus or hatch (UHV-S0-8, UEV-S0-8 FAIL, docs/research/uev-s0.md), so any UEV module is"
+gtca:space_assembler_mkiii,C,,config,1,"GTCA 2.2.0's elevator modules stay hidden for good: their previews have no bus or hatch (UHV-S0-8, UEV-S0-8 FAIL, docs/research/uev-s0.md), so any UEV module is"
+gtca:space_elevator_motor_mk_2,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:space_elevator_motor_mk_3,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:space_elevator_motor_mk_4,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:space_elevator_motor_mk_5,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:space_miner_mki,C,,config,1,"GTCA 2.2.0's elevator modules stay hidden for good: their previews have no bus or hatch (UHV-S0-8, UEV-S0-8 FAIL, docs/research/uev-s0.md), so any UEV module is"
+gtca:space_miner_mkii,C,,config,1,"GTCA 2.2.0's elevator modules stay hidden for good: their previews have no bus or hatch (UHV-S0-8, UEV-S0-8 FAIL, docs/research/uev-s0.md), so any UEV module is"
+gtca:space_miner_mkiii,C,,config,1,"GTCA 2.2.0's elevator modules stay hidden for good: their previews have no bus or hatch (UHV-S0-8, UEV-S0-8 FAIL, docs/research/uev-s0.md), so any UEV module is"
+gtca:space_pump_mki,C,,config,1,"GTCA 2.2.0's elevator modules stay hidden for good: their previews have no bus or hatch (UHV-S0-8, UEV-S0-8 FAIL, docs/research/uev-s0.md), so any UEV module is"
+gtca:space_pump_mkii,C,,config,1,"GTCA 2.2.0's elevator modules stay hidden for good: their previews have no bus or hatch (UHV-S0-8, UEV-S0-8 FAIL, docs/research/uev-s0.md), so any UEV module is"
+gtca:space_pump_mkiii,C,,config,1,"GTCA 2.2.0's elevator modules stay hidden for good: their previews have no bus or hatch (UHV-S0-8, UEV-S0-8 FAIL, docs/research/uev-s0.md), so any UEV module is"
+gtca:stabilized_water_plant_casing,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:steam_pressurizer,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:stellar_alloy,C,,config,4,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:sterile_waterplant_casing,C,,config,1,"GTCA: water purification plant with no controller recipe (integration/gtca.js), and the alloy only its casing asks for"
+gtca:strange_crystal,C,,config,12,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:terbium_nitrate,C,,config,3,"GTCA's samarium-terbium branch: since EV samarium is Martian, and flsamaric_to_ho no longer gives the samarium-terbium mixture (offworld_only.json), so the bran"
+gtca:thaumium,C,,config,20,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+gtca:uev_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:uhv_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:uhv_matter_amplificator,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:uhv_matter_fabricator,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:uhv_recycler,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:unknown_crystal,C,,config,6,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:uu_matter_amplifier,C,,config,2,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:uv_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:uv_matter_amplificator,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:uv_recycler,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:vinteum,C,,config,20,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+gtca:zpm_drone,C,,config,1,GTCA: part or material with no recipe or vein that the pack doesn't use
+gtca:zpm_matter_amplificator,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtca:zpm_recycler,C,,config,1,"GTCA: removed by the pack (integration/gtca.js): machines that cheapen a line or pull energy out of nothing, and whatever only they made or burned"
+gtceu:compressed_clay,C,,config,1,"joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon"
+gtceu:creative_chest,C,,creative,1,creative mode only
+gtceu:creative_computation_provider,C,,creative,1,creative mode only
+gtceu:creative_data_access_hatch,C,,creative,1,creative mode only
+gtceu:creative_energy,C,,creative,1,creative mode only
+gtceu:creative_tank,C,,creative,1,creative mode only
+gtceu:ev_bedrock_ore_miner,C,,config,1,bedrock ore miner: GTM 7.5.3 gives it no recipe (there are no bedrock ores)
+gtceu:ev_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:ev_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:ev_solar_panel,C,,config,1,solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)
+gtceu:foam,C,,config,1,"construction foam blocks: GTM 7.5.3 has no sprayer, nothing places them"
+gtceu:hv_bedrock_ore_miner,C,,config,1,bedrock ore miner: GTM 7.5.3 gives it no recipe (there are no bedrock ores)
+gtceu:hv_solar_panel,C,,config,1,solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)
+gtceu:industrial_steam_casing,C,,config,1,"joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon"
+gtceu:iv_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:iv_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:iv_solar_panel,C,,config,1,solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)
+gtceu:luv_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:luv_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:luv_solar_panel,C,,config,1,solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)
+gtceu:lv_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:lv_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:mv_bedrock_ore_miner,C,,config,1,bedrock ore miner: GTM 7.5.3 gives it no recipe (there are no bedrock ores)
+gtceu:mv_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:mv_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:mv_solar_panel,C,,config,1,solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)
+gtceu:overworld_marker,C,,config,1,"technical block (dimension marker), not for the player; GTM shows it in every recipe with a dimension condition, so it is only dropped from the index (disabling"
+gtceu:petrified_foam,C,,config,1,"construction foam blocks: GTM 7.5.3 has no sprayer, nothing places them"
+gtceu:portable_debug_scanner,C,,creative,1,creative mode only
+gtceu:purple_drink,C,,config,1,"joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon"
+gtceu:reinforced_foam,C,,config,1,"construction foam blocks: GTM 7.5.3 has no sprayer, nothing places them"
+gtceu:reinforced_stone,C,,config,1,"construction foam blocks: GTM 7.5.3 has no sprayer, nothing places them"
+gtceu:sus_record,C,,config,1,"joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon"
+gtceu:the_end_marker,C,,config,1,"technical block (dimension marker), not for the player; GTM shows it in every recipe with a dimension condition, so it is only dropped from the index (disabling"
+gtceu:the_nether_marker,C,,config,1,"technical block (dimension marker), not for the player; GTM shows it in every recipe with a dimension condition, so it is only dropped from the index (disabling"
+gtceu:treated_wood_hanging_sign,C,,config,1,"joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon"
+gtceu:uev_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uev_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uev_rotor_holder,C,,config,1,"rotor holder above UV: GTM 7.5.3 registers it with highTierContent (TP-S0F) but gives a recipe only up to UV (MetaTileEntityLoader), and no turbine of ours need"
+gtceu:uhv_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uhv_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uhv_rotor_holder,C,,config,1,"rotor holder above UV: GTM 7.5.3 registers it with highTierContent (TP-S0F) but gives a recipe only up to UV (MetaTileEntityLoader), and no turbine of ours need"
+gtceu:uiv_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uiv_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uiv_rotor_holder,C,,config,1,"rotor holder above UV: GTM 7.5.3 registers it with highTierContent (TP-S0F) but gives a recipe only up to UV (MetaTileEntityLoader), and no turbine of ours need"
+gtceu:uv_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uv_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uv_solar_panel,C,,config,1,solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)
+gtceu:uxv_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uxv_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:uxv_rotor_holder,C,,config,1,"rotor holder above UV: GTM 7.5.3 registers it with highTierContent (TP-S0F) but gives a recipe only up to UV (MetaTileEntityLoader), and no turbine of ours need"
+gtceu:zero_point_module,C,,config,1,"joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon"
+gtceu:zpm_fluid_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:zpm_item_passthrough_hatch,C,,config,1,passthrough hatch: GTM 7.5.3 only gives a recipe to the HV one
+gtceu:zpm_solar_panel,C,,config,1,solar panel: GTM 7.5.3 only gives a recipe to the ULV and LV ones (the LV one arrives with naquadah)
+gtceuterminal:energy_analyzer,C,,config,1,"joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon"
+gtnn:bohrium_strontium_carbonate_boule,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:bohrium_strontium_carbonate_wafer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:component_assembly_line,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_ev,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_hv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_iv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_luv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_lv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_max,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_mv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_opv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_uev,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_uhv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_uiv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_uv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_uxv,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:component_assline_casing_zpm,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:cosmic_assembly,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:cosmic_computer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:cosmic_processor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:cosmic_smd_capacitor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:cosmic_smd_diode,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:cosmic_smd_inductor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:cosmic_smd_resistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:cosmic_smd_transistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:crystal_interface_wafer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:debug_structure_writer,C,,creative,1,creative mode only
+gtnn:diamond_chip,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:diamond_modulator,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:dubnium_boule,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:dubnium_wafer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:ender_fluid_link_cover,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:etched_wetware_processor_mainframe,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:etched_wetware_processor_mainframe_base,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:etched_wetware_processor_mainframe_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:europium_cubic_zirconia_boule,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:europium_cubic_zirconia_wafer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:gooware_assembly,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:gooware_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:gooware_computer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:gooware_mainframe,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:gooware_printed_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:gooware_processor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:gooware_wrap_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:gooware_wrap_printed_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:heavy_ingot_t1,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:heavy_ingot_t2,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:heavy_ingot_t3,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:heavy_ingot_t4,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:heavy_plate_t1,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:heavy_plate_t2,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:heavy_plate_t3,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:heavy_plate_t4,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:homemade_bedrock_ore_machine,C,,config,1,GT--: no recipe on purpose (integration/gtnn.js)
+gtnn:intravital_soc,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:manifold_oscillatory_power_cell,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:max_wrap_circuit,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:nano_pic_chip,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:nano_pic_wafer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_imc_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_printed_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_smd_capacitor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_smd_diode,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_smd_inductor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_smd_resistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_smd_transistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_wrap_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:optical_wrap_printed_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:opv_wrap_circuit,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:photoelectron_soc,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:pico_pic_chip,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:pico_pic_wafer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:ruby_chip,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:ruby_modulator,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:sapphire_chip,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:sapphire_modulator,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_assembly,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_computer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_printed_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_processor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_smd_capacitor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_smd_diode,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_smd_inductor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_smd_resistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_smd_transistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_wrap_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:spintronic_wrap_printed_circuit_board,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:strontium_carbonate_wafer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:supracausal_assembly,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:supracausal_computer,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:supracausal_processor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:supracausal_smd_capacitor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:supracausal_smd_diode,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:supracausal_smd_inductor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:supracausal_smd_resistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:supracausal_smd_transistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:t1_chip,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:t2_chip,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:t3_chip,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:t4_chip,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_cosmic_smd_capacitor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_cosmic_smd_diode,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_cosmic_smd_inductor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_cosmic_smd_resistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_cosmic_smd_transistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_optical_smd_capacitor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_optical_smd_diode,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_optical_smd_inductor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_optical_smd_resistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_optical_smd_transistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_spintronic_smd_capacitor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_spintronic_smd_diode,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_spintronic_smd_inductor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_spintronic_smd_resistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+gtnn:wrap_spintronic_smd_transistor,C,,config,1,GT--: end-game circuits and parts whose chain starts from something with no recipe
+hbn,C,,config,3,"UXV-F1 registered CoFeB, Co2MnSi and hBN as GT materials (uxv.md:1102), but the line makes them only as grindless:cofeb_ingot and grindless:heusler_ingot (UXV-A"
+hsla_steel,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+hydrogen,C,,config,2,"hydrogen plasma: GCYR accepts it as fuel, but nothing produces it"
+infinity,C,,config,28,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+infinity_catalyst,C,,config,10,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+iridium,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+lutetium,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+magnesium,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+manganese,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+manganese_phosphide,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+mc_guffium_239,C,,config,2,"joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon"
+naquadah,C,,config,3,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+naquadria,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+naquadria_oxide_mixture,C,,config,3,"GT--'s naquadria oxide mixture: only processing naquadria ore gives it, and no vein does (Venus's vein is naquadah and plutonium, IV-A1); naquadria itself comes"
+nether_star,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+neutronium,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+neutronium_mixture,C,,config,3,"plutonium fuel for the GT-- naquadah reactor: needs neutronium mixture, which comes from a neutronium ore that no vein gives; our neutronium is the RX J1856 pel"
+orange_metal,C,,config,3,"material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)"
+osmium,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+osmium_tetroxide,C,,config,3,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+palladium_on_carbon,C,,config,3,"material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)"
+phosphate,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+plutonium_241,C,,config,9,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+plutonium_based_liquid_fuel,C,,config,2,"plutonium fuel for the GT-- naquadah reactor: needs neutronium mixture, which comes from a neutronium ore that no vein gives; our neutronium is the RX J1856 pel"
+plutonium_based_liquid_fuel_depleted,C,,config,2,"plutonium fuel for the GT-- naquadah reactor: needs neutronium mixture, which comes from a neutronium ore that no vein gives; our neutronium is the RX J1856 pel"
+plutonium_based_liquid_fuel_excited,C,,config,2,"plutonium fuel for the GT-- naquadah reactor: needs neutronium mixture, which comes from a neutronium ore that no vein gives; our neutronium is the RX J1856 pel"
+potassium_sulfate,C,,config,3,"material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)"
+potion,C,,config,1,"joke item, technical item, or one with no recipe in GTM 7.5.3 / its addon"
+radiation_protection,C,,config,1,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+radon,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+rose_gold,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+rutile,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+sic_sic,C,,config,3,"UEV-F1 registered SiC/SiC as a dust material, but UEV-A5 makes the composite only as grindless:sic_sic_plate in the CVI furnace (fibre preform densified in plac"
+space_neutronium,C,,config,16,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+stainless_steel,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+sterling_silver,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+tantalum,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+technetium,C,,config,7,"material with no source whose recipes only give things that already come another way (calcium, potassium, sulfur, iron, chromium...)"
+tellurium,C,,config,11,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+terbium,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+thorium_nitride,C,,config,3,"UV-F1 registered thorium nitride as a material, but UV-A1 makes the nitride fuel assembly straight from thorium dust, carbon and nitrogen-15 (tables/thorium_fab"
+thulium,C,,config,13,addon material with ore blocks in every stone type but no vein in any dimension: nothing gives it
+tuff,C,,config,3,"tuff dust: only comes from milling ore blocks in tuff (the drill gives raw ores), and has no use of its own"
+udmh,C,,config,2,"UDMH: rocket engine fuel with no recipe; GT-- engines burn hydrazine and RP-1, which are made"
+udmh_rocket_fuel,C,,config,2,"UDMH: rocket engine fuel with no recipe; GT-- engines burn hydrazine and RP-1, which are made"
+uranium,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+uranium_235,C,,config,7,"the material comes from chemistry, but has no vein: its ore forms (raw, crushed, washed, impure...) never come out"
+vanadium_steel,C,,config,2,"loose forms of a material that is otherwise obtainable: nothing makes them (molten forms, plasmas, dusts of something that's fluid-only)"
+wf_rhea,C,,config,6,"UIV-F1 registered Wf/RHEA as a material, but UIV-A3 makes the composite only as grindless:wf_rhea_billet (W fibre preform infiltrated with RHEA melt in the levi"
+yig,C,,config,3,"UXV-F1 registered YIG as a dust material (uxv.md:1102), but UXV-A5's LPE furnace c2 grows the garnet only as a film on the GGG wafer (grindless:yig_film_wafer, "
+ytterbium,C,,config,6,"UV-F1 registered ytterbium metal (S0-8), but UV-A6 dopes the fibre preform with ytterbium oxide from the EV cascade's Yb strip and nothing reduces the oxide: th"
+cooled_exhaust,?,,unclassified,2,"its recipes need flux_loaded_frc, in gcyr:black_hole_orbit, machine for gtceu:mass_stream_injection"
+filtered_hot_flow,?,,unclassified,2,"its recipes need hot_flow, in gcyr:black_hole_orbit"
+flux_loaded_frc,?,,unclassified,2,"its recipes need filtered_hot_flow, in gcyr:black_hole_orbit"
+grindless:ca_al_oxide_residue,?,,unclassified,1,its recipes need grindless:devolatilised_slag
+grindless:carbonyl_fe_ni_powder,?,,unclassified,1,its recipes need grindless:metal_rich_bloom
+grindless:cold_pressed_tetrataenite,?,,unclassified,1,its recipes need grindless:tetrataenite_concentrate
+grindless:compressed_payload_core,?,,unclassified,1,its recipes need grindless:degenerate_matter_slug
+grindless:cryo_milled_core,?,,unclassified,1,its recipes need grindless:iron_core_fragment
+grindless:degenerate_matter_slug,?,,unclassified,1,its recipes need in gcyr:black_hole_orbit
+grindless:dense_pellet,?,,unclassified,1,its recipes need grindless:pellet_blank
+grindless:devolatilised_slag,?,,unclassified,1,its recipes need grindless:silicate_slag
+grindless:final_spin_map,?,,unclassified,1,"its recipes need grindless:sgr_a_spin_map, grindless:shell_gradient_map, in gcyr:black_hole_orbit"
+grindless:halbach_segment_coupler,?,,unclassified,1,its recipes need grindless:cold_pressed_tetrataenite
+grindless:iridium_coated_shell,?,,unclassified,1,its recipes need grindless:iridium_target
+grindless:iridium_sponge,?,,unclassified,1,"its recipes need grindless:pgm_residue, in grindless:nsc_belt"
+grindless:iridium_target,?,,unclassified,1,its recipes need grindless:iridium_sponge
+grindless:iron_core_fragment,?,,unclassified,1,"its recipes need grindless:nsc_planetesimal, in grindless:nsc_belt"
+grindless:launched_belt_seed,?,,unclassified,1,"its recipes need grindless:nsc_belt_seed, in gcyr:black_hole_orbit"
+grindless:max_epilogue,?,,unclassified,1,no recipes: it's only in the registry
+grindless:max_penrose_payload,?,,unclassified,1,its recipes need grindless:turned_payload_core
+grindless:metal_rich_bloom,?,,unclassified,1,"its recipes need grindless:nsc_planetesimal, in grindless:nsc_belt"
+grindless:mirror_shell_scrap,?,,unclassified,1,"its recipes need grindless:stream_bundle, grindless:final_spin_map, in gcyr:black_hole_orbit"
+grindless:mirror_shell_segment,?,,unclassified,1,"its recipes need grindless:segment_truss, grindless:shell_droplet_radiator, grindless:halbach_segment_coupler"
+grindless:nsc_belt_seed,?,,unclassified,1,its recipes need grindless:nsc_ephemeris
+grindless:nsc_ephemeris,?,,unclassified,1,"its recipes need grindless:sgr_a_spin_map, in gcyr:black_hole_orbit"
+grindless:nsc_planetesimal,?,,unclassified,1,its recipes need in grindless:nsc_belt
+grindless:pellet_blank,?,,unclassified,1,"its recipes need grindless:metal_rich_bloom, in grindless:nsc_belt"
+grindless:pgm_residue,?,,unclassified,1,"its recipes need grindless:nsc_planetesimal, in grindless:nsc_belt"
+grindless:sc_jacketed_pellet,?,,unclassified,1,its recipes need grindless:turned_pellet_core
+grindless:segment_alloy,?,,unclassified,1,its recipes need grindless:carbonyl_fe_ni_powder
+grindless:segment_truss,?,,unclassified,1,its recipes need grindless:segment_truss_billet
+grindless:segment_truss_billet,?,,unclassified,1,"its recipes need in grindless:nsc_belt, grindless:segment_alloy, grindless:mirror_shell_scrap"
+grindless:sgr_a_spin_map,?,,unclassified,1,its recipes need in gcyr:black_hole_orbit
+grindless:shell_droplet_radiator,?,,unclassified,1,its recipes need in gcyr:black_hole_orbit
+grindless:shell_gradient_map,?,,unclassified,1,its recipes need grindless:sgr_a_spin_map
+grindless:silicate_slag,?,,unclassified,1,"its recipes need grindless:nsc_planetesimal, in grindless:nsc_belt"
+grindless:sis_scrap,?,,unclassified,1,"its recipes need in gcyr:black_hole_orbit, grindless:sgr_a_spin_map"
+grindless:slag_compact,?,,unclassified,1,its recipes need grindless:ca_al_oxide_residue
+grindless:slag_pellet,?,,unclassified,1,its recipes need grindless:slag_compact
+grindless:spent_collector_panel,?,,unclassified,1,"its recipes need machine for gtceu:accretion_power, grindless:slag_pellet, grindless:wolter_mirror_module"
+grindless:spent_rydberg_array,?,,unclassified,1,"its recipes need in gcyr:black_hole_orbit, grindless:stream_bundle, grindless:final_spin_map"
+grindless:spent_stream_pellet,?,,unclassified,1,"its recipes need machine for gtceu:mass_stream_injection, flux_loaded_frc, in gcyr:black_hole_orbit"
+grindless:spent_tether_segment,?,,unclassified,1,its recipes need in gcyr:black_hole_orbit
+grindless:spent_wave_packet,?,,unclassified,1,its recipes need in gcyr:black_hole_orbit
+grindless:spent_wolter_module,?,,unclassified,1,"its recipes need machine for gtceu:accretion_power, grindless:slag_pellet, grindless:wolter_mirror_module"
+grindless:stream_bundle,?,,unclassified,1,"its recipes need machine for gtceu:mass_stream_injection, grindless:stream_pellet, flux_loaded_frc"
+grindless:stream_bundle_block,?,,unclassified,1,its recipes need grindless:stream_bundle
+grindless:stream_pellet,?,,unclassified,1,"its recipes need machine for gtceu:mass_stream_injection, in gcyr:black_hole_orbit, grindless:sc_jacketed_pellet"
+grindless:tetrataenite_concentrate,?,,unclassified,1,its recipes need grindless:cryo_milled_core
+grindless:turned_payload_core,?,,unclassified,1,its recipes need grindless:compressed_payload_core
+grindless:turned_pellet_core,?,,unclassified,1,its recipes need grindless:dense_pellet
+grindless:universe_seed,?,,unclassified,1,"its recipes need grindless:stream_bundle, grindless:final_spin_map, in gcyr:black_hole_orbit"
+grindless:wolter_mirror_module,?,,unclassified,1,its recipes need grindless:iridium_coated_shell
+gtceu:accretion_feeder,?,,unclassified,1,its recipes need grindless:wolter_mirror_module
+gtceu:mass_stream_injector,?,,unclassified,1,its recipes need grindless:stream_pellet
+hot_flow,?,,unclassified,2,its recipes need in gcyr:black_hole_orbit
