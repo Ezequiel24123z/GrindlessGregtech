@@ -1,3 +1,4 @@
+// priority: -5334
 // -----------------------------------------------------------------------------------------------
 // MAX's accretion feeder (docs/eras/max.md, machine 10; package MAX-E1): the multiblock and its generator recipe type. The items are F1's
 // (max/foundation.js) and the older lines'. The recipes are in server_scripts/grindless/max/feeder.js.

@@ -1,3 +1,4 @@
+// priority: -19894
 // -----------------------------------------------------------------------------------------------
 // MAX-E1 accretion feeder (docs/eras/max.md, machine 10, lines L25, L26 and L42; package MAX-E1). The line steps on older machines are
 // rows marked MAX-E1 in their own tables and scripts; this file holds the machine's one recipe (c1), its controller, the casing and the GTM

@@ -1,4 +1,4 @@
-// priority: 6675
+// priority: 6680
 // Gregtech Grindless - names of MAX-T2, gate c15 (server_scripts/grindless/max/gate_nsc.js, data/grindless/tables/gate.json):
 //
 //   gtceu.recipe.grindless_warp_gate.hold_nsc_belt   EMI line of the c15 warp gate row (2^33 EU/t for 1,200 t, the belt seed)

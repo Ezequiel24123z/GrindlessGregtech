@@ -1,4 +1,4 @@
-// priority: 6775
+// priority: 6790
 // Gregtech Grindless - EMI information pages of the LV era multiblocks (kubejs/assets/emi/recipe/additions/grindless/<id>.json, type emi:info).
 // One page per controller: what it does, what it is for, what it needs. Their recipes show in EMI under the controller itself.
 // Tooltips live in lv_multis_lang.js, lv_mega_wire_works_lang.js and wireless_energy_lang.js; every key is in en_us and es_es.

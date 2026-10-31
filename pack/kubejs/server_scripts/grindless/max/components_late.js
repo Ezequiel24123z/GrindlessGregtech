@@ -1,4 +1,4 @@
-// priority: -19890
+// priority: -19874
 // -----------------------------------------------------------------------------------------------
 // MAX-A3 "Last components and the power die" (docs/eras/max.md, A3; line L8 and the Components table): the GTM cutter step of L8
 // (the other four steps are rows in older machines: diamond_cvd c9, ion_implantation c11, mtj_sputtering c16, silicon_carbide c9) and

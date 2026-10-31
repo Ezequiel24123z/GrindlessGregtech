@@ -101,7 +101,6 @@
         { "id": "grindless:shell_gradient_map", "package": "G1", "reason": "MAX-D2 makes it (interferometer c2 at Sgr A*); G1's mirror shell c2 takes it with sgr_a_spin_map (max.md:339)" },
         { "id": "grindless:shell_droplet_radiator", "package": "G1", "reason": "MAX-D1 makes it; G1's segment row takes it (max.md:735)" },
         { "id": "grindless:launched_belt_seed", "package": "C1", "reason": "MAX-T2 returns it from gate c15; the max-nsc grant (tiers/max.json) is its use and C1 checks the grant is there" },
-    { "id": "grindless:silicate_slag", "package": "E1", "reason": "MAX-R1 returns it (c1, asteroid processor); E1 devolatilises it into the feeder slag pellets" },
     { "id": "grindless:segment_truss", "package": "G1", "reason": "MAX-R1 makes it; the G1 mirror shell takes it" },
     { "id": "grindless:halbach_segment_coupler", "package": "G1", "reason": "MAX-R1 makes it (L37); the G1 segment takes it" },
     { "id": "grindless:stream_bundle_block", "package": "G1", "reason": "MAX-D4 makes it (stream_bundle ring block); the G1 mirror shell structure uses it as equator rings (max.md:344)" }
