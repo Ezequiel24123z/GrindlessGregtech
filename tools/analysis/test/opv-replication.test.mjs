@@ -21,9 +21,9 @@ const kube = (...p) => fs.readFileSync(path.join(pack, 'kubejs', ...p), 'utf8');
 const SITE = 'grindless:terzan5_core';
 const V_UXV = 2 ** 27;
 const VA_OPV = 503316480;
-const MACHINES = ['debris_harvester', 'replication_refinery'];
-const TYPES = ['debris_harvesting', 'replication_refining'];
-const DIMS = [[11, 5, 11], [9, 9, 9]];
+const MACHINES = ['debris_harvester', 'replication_refinery', 'von_neumann_foundry'];
+const TYPES = ['debris_harvesting', 'replication_refining', 'self_replication'];
+const DIMS = [[11, 5, 11], [9, 9, 9], [11, 11, 11]];
 
 test('the stand-in runs the OpV-R2 scripts without errors, nothing skipped, no lookup clash', () => {
   const mine = run.errors.filter((e) => /replication/.test(String(e.file)));
@@ -85,6 +85,17 @@ test('refinery c1-c6: carbonyl cell (CO returns at 90%) and FFC salt cell; c7 is
   assert.match(kube('data', 'grindless', 'tables', 'replication.json'), /"_r3"/);
 });
 
+test('foundry c1-c2: the seed is kept (never consumed) and two seeds come out; c2 core + feedstock -> one seed; real feedstock in both', () => {
+  const c1 = rec('probe_self_copy');
+  assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, VA_OPV, 2400, SITE]);
+  assert.deepEqual(ids(c1.kept), [['grindless:probe_seed', 1]]);
+  assert.deepEqual(ids(c1.itemsIn), [['grindless:metal_feedstock', 16], ['grindless:cluster_sinter_casing', 8], ['grindless:vitamin_kit', 1]]);
+  assert.deepEqual(ids(c1.itemsOut), [['grindless:probe_seed', 2]]);
+  const c2 = rec('probe_core_seed');
+  assert.deepEqual([c2.circuit, c2.eut], [2, VA_OPV]);
+  assert.deepEqual(ids(c2.itemsIn), [['grindless:pathfinder_probe_core', 1], ['grindless:metal_feedstock', 16], ['grindless:cluster_sinter_casing', 8], ['grindless:vitamin_kit', 1]]);
+  assert.deepEqual(ids(c2.itemsOut), [['grindless:probe_seed', 1]]);
+});
 test('older row: the methane pyrolyser takes the spent anodes on circuit 6', () => {
   const r = run.global.grindless.outerChemistry.recipes.find((x) => x.name === 'spent_anode_graphene');
   assert.equal(r.circuit, 6);
