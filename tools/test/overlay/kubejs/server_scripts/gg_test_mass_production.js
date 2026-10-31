@@ -1,4 +1,4 @@
-// priority: -5624
+// priority: -5545
 // Gregtech Grindless - smoke test of package IV-B6, mass-production (TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): IV's mass-production kit, startup_scripts/grindless/lib/parallel_hatch.js (GTM's parallel hatch in our IV
 // plants) and server_scripts/grindless/iv/mass_production.js (recipes), and GTM's assembly line fed from an ME system.

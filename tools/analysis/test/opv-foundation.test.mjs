@@ -231,8 +231,8 @@ test('relay_platforms.json: two OpV-F1 rows leaving from Cygnus X-1, one per jum
   const mine = plat.platforms.filter((p) => Object.hasOwn(PLACES, p.place));
   assert.deepEqual(mine.map((p) => [p.place, p.jump, p.dimension, p.source, p.x, p.y, p.z]), Object.entries(PLACES).map(([k, [dim, , , , jump]]) =>
     [k, jump, `grindless:${dim}`, CYGNUS, 64, 100, 64]));
-  assert.deepEqual(plat.platforms.slice(-2), mine, 'appended after the UXV rows');
-  assert.equal(new Set(plat.platforms.map((p) => p.jump)).size, 7, 'every jump once');
+  assert.deepEqual(plat.platforms.slice(5, 7), mine, 'appended after the UXV rows (MAX-F1 appends two more)');
+  assert.equal(new Set(plat.platforms.map((p) => p.jump)).size, 9, 'every jump once');
 });
 
 test('sunlight.json: two rows, factor 0, no_solar, era opv, always', () => {

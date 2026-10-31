@@ -1,4 +1,4 @@
-// priority: -5699
+// priority: -5707
 // TEST ONLY, MEGA-8 (gtceu:mega_factory). Command: kubejs custom_command gg_test_mega_factory
 // Band ONLY: X 34304-34367, Z 0-63, Overworld Y 98-115.
 //   T1 of docs/eras/mega.md 6.4 (named uncertainty: the upkeep modifier adds a fluid input that the machine must still check and drain):

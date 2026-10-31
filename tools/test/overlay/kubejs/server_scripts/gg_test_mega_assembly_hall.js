@@ -1,4 +1,4 @@
-// priority: -5649
+// priority: -5674
 // TEST ONLY, MEGA-7 (gtceu:assembly_hall). Command: kubejs custom_command gg_test_mega_assembly_hall
 // Band ONLY: X 31488-31551, Z 0-63, Overworld Y 98-115.
 //   Option (b) of the contract: a real GTM cleanroom (15 x 15 x 11: plascrete shell, filter casing ceiling, EV energy hatch, maintenance
