@@ -87,6 +87,9 @@
   TABLE.push(row('nb_target', 'spark_plasma_sintering', 6, [item('gtceu:niobium_dust', 4)], [], [item('grindless:nb_target', 1)], [], UHVA, 500))
   TABLE.push(row('w_target', 'spark_plasma_sintering', 7, [item('gtceu:tungsten_dust', 4)], [], [item('grindless:w_target', 1)], [], UHVA, 500))
 
+  // OpV-B1 (opv.md line 34): the tungsten carbide target of the WC/SiC gamma multilayer (circuit 14; MTJ sputtering c10)
+  TABLE.push(row('wc_sputter_target', 'spark_plasma_sintering', 14, [item('gtceu:tungsten_carbide_dust', 4)], [], [item('grindless:wc_sputter_target', 1)], [], UHVA, 500))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

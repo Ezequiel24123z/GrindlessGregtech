@@ -26,7 +26,7 @@
       "dataKey": "grindless_gamma_optics",
       "recipes": [
         {
-          "_why": "line 35, last step: bent Ge and GaAs tiles are bonded into the rings of the aligned frame and set by Bragg angle; a tile that drifts out of alignment is pulled (25 %) and goes back to the UEV megabar to be re-bent (c9)",
+          "_why": "line 35, last step: bent Ge and GaAs tiles are bonded into the rings of the aligned frame and set by Bragg angle; bent Ge tiles whose curvature relaxes are pulled (25 %) and goes back to the UEV megabar to be re-bent (c9)",
           "name": "laue_lens", "circuit": 1, "eut": 268435456, "duration": 1600,
           "itemsIn": [{ "id": "grindless:bent_ge_tile", "count": 32 }, { "id": "grindless:gaas_laue_tile", "count": 32 }, { "id": "grindless:aligned_laue_frame", "count": 1 }],
           "kept": [], "charge": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }],

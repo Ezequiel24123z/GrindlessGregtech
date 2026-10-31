@@ -112,6 +112,35 @@ test('line 19 middle steps: MTJ c9 In bumps, ion slicing c8 flip-chip, millikelv
   assert.ok(leach.includes('gtceu:small_gold_dust') && leach.includes('gtceu:diluted_hydrochloric_acid'));
 });
 
+test('lines 34 and 35 older steps: SPS c14, MTJ c10, synchrotron c10-11, CVI c10-11, megabar c8-9, crystal growth c24', () => {
+  const steps = [
+    ['grindless:spark_plasma_sintering/wc_sputter_target', 14, 'gtceu:tungsten_carbide_dust', 'grindless:wc_sputter_target'],
+    ['grindless:mtj_sputtering/wc_sic_multilayer', 10, 'grindless:wc_sputter_target', 'grindless:wc_sic_multilayer'],
+    ['grindless:synchrotron/synchrotron/mirror_metrology', 10, 'grindless:wc_sic_multilayer', 'grindless:mirror_metrology_record'],
+    ['grindless:synchrotron/synchrotron/laue_frame_alignment', 11, 'gtceu:tungsten_steel_frame', 'grindless:aligned_laue_frame'],
+    ['grindless:chemical_vapour_infiltration/superpolished_sic_blank', 10, 'gtceu:methyltrichlorosilane', 'grindless:superpolished_sic_blank'],
+    ['grindless:chemical_vapour_infiltration/gamma_mirror_strip', 11, 'grindless:rejected_gamma_mirror', 'grindless:superpolished_sic_blank'],
+    ['grindless:megabar_synthesis/bent_ge_tile', 8, 'grindless:seven_n_germanium', 'grindless:bent_ge_tile'],
+    ['grindless:megabar_synthesis/bent_ge_rebend', 9, 'grindless:rejected_laue_tile', 'grindless:bent_ge_tile'],
+    ['grindless:crystal_growth/crystal_growth/gaas_laue_tile', 24, 'gtceu:gallium_arsenide_dust', 'grindless:gaas_laue_tile']
+  ];
+  for (const [id, circuit, input, output] of steps) {
+    const r = find(id);
+    assert.ok(r, id);
+    const ins = JSON.stringify(r.j.inputs);
+    assert.ok(ins.includes(`"configuration":${circuit}`), `${id}: circuit ${circuit}`);
+    assert.ok(ins.includes(`"${input}"`), `${id} takes ${input}`);
+    assert.ok(JSON.stringify(r.j.outputs).includes(`"${output}"`), `${id} makes ${output}`);
+  }
+  const metrology = find('grindless:synchrotron/synchrotron/mirror_metrology').j.inputs.item;
+  assert.ok(metrology.some((x) => x.chance === 0 && JSON.stringify(x).includes('grindless:wc_sic_multilayer')), 'the multilayer is only measured');
+  const strip = JSON.stringify(find('grindless:chemical_vapour_infiltration/gamma_mirror_strip').j.outputs);
+  assert.ok(strip.includes('gtceu:tungsten_hexafluoride') && strip.includes('gtceu:hydrochloric_acid'), 'the stripped tungsten leaves as WF6');
+  const rebend = JSON.stringify(find('grindless:megabar_synthesis/bent_ge_rebend').j.outputs);
+  assert.ok(rebend.includes('gtceu:germanium_dust'), 'the broken tile returns as germanium');
+  assert.ok(JSON.stringify(find('grindless:mtj_sputtering/wc_sic_multilayer').j.outputs).includes('gtceu:small_tungsten_carbide_dust'), 'the worn target returns');
+});
+
 test('the controllers: OpV hull, OpV parts and circuits, superfluid He-3, VA[OpV], at least 9 distinct ingredients', () => {
   assert.deepEqual(plain(TO.controllerRecipes), MACHINES.map((m) => `grindless:assembly_line/${m}`));
   for (const id of TO.controllerRecipes) {
@@ -136,12 +165,18 @@ test('"only from": nothing else in the pack makes these ids', () => {
     'gtceu:tetron_fab': 'assembly_line/tetron_fab',
     'grindless:laue_lens': 'gamma_optics/laue_lens', 'grindless:gamma_multilayer_mirror': 'gamma_optics/gamma_multilayer_mirror',
     'grindless:rejected_laue_tile': 'gamma_optics/laue_lens', 'grindless:rejected_gamma_mirror': 'gamma_optics/gamma_multilayer_mirror',
-    'gtceu:gamma_optics_works': 'assembly_line/gamma_optics_works'
+    'gtceu:gamma_optics_works': 'assembly_line/gamma_optics_works',
+    'grindless:wc_sputter_target': 'spark_plasma_sintering/wc_sputter_target', 'grindless:wc_sic_multilayer': 'mtj_sputtering/wc_sic_multilayer',
+    'grindless:mirror_metrology_record': 'synchrotron/mirror_metrology', 'grindless:aligned_laue_frame': 'synchrotron/laue_frame_alignment',
+    'grindless:superpolished_sic_blank': ['chemical_vapour_infiltration/superpolished_sic_blank', 'chemical_vapour_infiltration/gamma_mirror_strip'],
+    'grindless:bent_ge_tile': ['megabar_synthesis/bent_ge_tile', 'megabar_synthesis/bent_ge_rebend'],
+    'grindless:gaas_laue_tile': 'crystal_growth/gaas_laue_tile'
   };
-  for (const [id, tail] of Object.entries(only)) {
+  for (const [id, tails] of Object.entries(only)) {
     const ps = producers(id);
+    const allowed = [].concat(tails);
     assert.ok(ps.length >= 1, `${id} has a producer`);
-    assert.ok(ps.every((r) => r.i.endsWith(tail)), `${id} only from ${tail}: ${ps.map((r) => r.i)}`);
+    assert.ok(ps.every((r) => allowed.some((t) => r.i.endsWith(t))), `${id} only from ${allowed}: ${ps.map((r) => r.i)}`);
   }
 });
 
@@ -176,7 +211,10 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages and r
   }
   for (const r of TO.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   keys.push('gtceu.recipe.grindless_mtj_sputtering.tetron_bumps', 'gtceu.recipe.grindless_ion_slicing.bonded_tetron_die',
-    'gtceu.recipe.grindless_nuclear_demagnetisation.tested_tetron_die');
+    'gtceu.recipe.grindless_nuclear_demagnetisation.tested_tetron_die', 'gtceu.recipe.grindless_mtj_sputtering.wc_sic_multilayer',
+    'gtceu.recipe.grindless_chemical_vapour_infiltration.superpolished_sic_blank', 'gtceu.recipe.grindless_chemical_vapour_infiltration.gamma_mirror_strip',
+    'gtceu.recipe.grindless_megabar.bent_ge_tile', 'gtceu.recipe.grindless_megabar.bent_ge_rebend', 'gtceu.recipe.grindless_crystal_growth.gaas_laue_tile',
+    'gtceu.recipe.grindless_synchrotron.mirror_metrology', 'gtceu.recipe.grindless_synchrotron.laue_frame_alignment');
   for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
   const re = /tetron|gamma_optics|laue|gamma_mirror|gamma_multilayer|sic_blank|wc_sic|metrology_record|wc_sputter|bent_ge|gaas_laue/;
   assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());

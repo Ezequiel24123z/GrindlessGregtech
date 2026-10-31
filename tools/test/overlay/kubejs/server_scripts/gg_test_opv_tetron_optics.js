@@ -24,7 +24,10 @@
     'tetron_assembly/tetron_die', 'tetron_assembly/tetron_array', 'assembly_line/tetron_fab',
     'mtj_sputtering/tetron_bumps', 'ion_slicing/bonded_tetron_die', 'nuclear_demagnetisation/tested_tetron_die',
     'solvent_extraction/ev/tetron_die_recovery',
-    'gamma_optics/laue_lens', 'gamma_optics/gamma_multilayer_mirror', 'assembly_line/gamma_optics_works'
+    'gamma_optics/laue_lens', 'gamma_optics/gamma_multilayer_mirror', 'assembly_line/gamma_optics_works',
+    'spark_plasma_sintering/wc_sputter_target', 'mtj_sputtering/wc_sic_multilayer', 'synchrotron/synchrotron/mirror_metrology',
+    'synchrotron/synchrotron/laue_frame_alignment', 'chemical_vapour_infiltration/superpolished_sic_blank', 'chemical_vapour_infiltration/gamma_mirror_strip',
+    'megabar_synthesis/bent_ge_tile', 'megabar_synthesis/bent_ge_rebend', 'crystal_growth/crystal_growth/gaas_laue_tile'
   ]
 
   // a unit's structure runs from its z (the controller's slice) to z + depth - 1: tetron 14-24, gamma 30-44

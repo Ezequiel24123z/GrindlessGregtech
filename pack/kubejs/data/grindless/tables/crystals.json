@@ -100,7 +100,11 @@
         { "_why": "UXV-A5 integration (uxv.md line 15): the Fe3GeTe2 dust broken off by the vdW stacking cell recrystallised by vapour transport, as c17 does for WTe2, so the leftover is not lost.", "name": "fgt_recrystallise", "circuit": 18, "eut": 491520, "duration": 800,
           "itemsIn": [{ "id": "gtceu:fe3gete2_dust", "count": 4 }, { "id": "gtceu:iodine_dust", "count": 1, "chance": 1000 }],
           "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:fgt_raw_crystal", "count": 1 }, { "id": "gtceu:iodine_dust", "count": 1, "chance": 9000 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:fgt_raw_crystal", "count": 1 }, { "id": "gtceu:iodine_dust", "count": 1, "chance": 9000 }], "fluidsOut": [] },
+        { "_why": "OpV-B1 (opv.md line 35): GaAs pulled by liquid-encapsulated Czochralski under a boron oxide cap (kept, as InP c5) and diced into Laue tiles; the Ir crucible wears as in every row. Circuit 24 (19-23 are OpV-A1, A2, A3 and D1).", "name": "gaas_laue_tile", "circuit": 24, "eut": 491520, "duration": 800,
+          "itemsIn": [{ "id": "gtceu:gallium_arsenide_dust", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
+          "kept": [{ "id": "gtceu:boron_trioxide_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:gaas_laue_tile", "count": 8 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {
