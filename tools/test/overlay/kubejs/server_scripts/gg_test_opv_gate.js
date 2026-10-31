@@ -148,6 +148,7 @@
     })
     xs.sort(function (a, b) { return a.z - b.z || a.x - b.x })
     var parts = [DYNAMO, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus']
+    if (u.machine !== 'bulge_collector') parts.push('gtceu:hv_input_hatch')
     var chosen = {}
     var n = xs.length
     parts.forEach(function (id, i) { chosen[Math.floor(i * (n - 1) / (parts.length - 1))] = id })

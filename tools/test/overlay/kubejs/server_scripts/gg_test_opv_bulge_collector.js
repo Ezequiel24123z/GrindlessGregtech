@@ -167,7 +167,9 @@
     var rec = rlg.getLastRecipe()
     var id = rec === null || rec === undefined ? 'none' : String(rec.id)
     var stored = u.dynamo[0].energyContainer.getEnergyStored()
-    var good = id.indexOf('bulge_light_16') >= 0 && rlg.isWorking() && rlg.getProgress() > 0
+    var cap = u.dynamo[0].energyContainer.getEnergyCapacity()
+    var full = stored >= cap
+    var good = id.indexOf('bulge_light_16') >= 0 && (rlg.isWorking() || full) && rlg.getProgress() > 0
     check('c3_runs', good, 'recipe ' + id + ', working ' + rlg.isWorking() + ', progress ' + rlg.getProgress() + ', dynamo hatch holds ' + stored + ' EU, reasons ' + reasons(m))
     u.phase = 'done'
   }

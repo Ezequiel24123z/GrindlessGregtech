@@ -26,7 +26,7 @@
   var ASSEMBLER = [
     { name: 'xray_timing_head',
       items: ['4x grindless:polycapillary_optic', '4x grindless:sdd_die', '1x gtceu:opv_sensor',
-        '2x gtceu:borosilicate_glass_plate', '2x gtceu:titanium_foil', '2x ' + CIRCUITS],
+        '2x gtceu:borosilicate_glass_ingot', '2x gtceu:titanium_foil', '2x ' + CIRCUITS],
       fluids: [['gtceu:soldering_alloy', 144]],
       out: ['3x grindless:xray_timing_head', '1x grindless:rejected_timing_head'], duration: 300 },
     { name: 'node_power_transmitter',
