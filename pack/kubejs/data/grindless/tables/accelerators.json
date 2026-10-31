@@ -69,7 +69,9 @@
           "itemsIn": [{ "id": "gtceu:tungsten_steel_frame", "count": 4 }, { "id": "gtceu:tungsten_steel_rod", "count": 8 }],
           "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:aligned_laue_frame", "count": 1 }],
-          "fluidsOut": [{ "id": "gtceu:helium", "amount": 100 }],
+          "fluidsOut": [{ "id": "gtceu:helium", "amount": 100 }]
+        },
+        {
           "_why": "OpV-D2: line 36 wins over distiller c1; Pb-208 impacts Cygnus disk plasma to give the fireball",
           "name": "fireball_distillate", "circuit": 9, "eut": 503316480, "duration": 1200,
           "builderId": "grindless:fireball_distillate",

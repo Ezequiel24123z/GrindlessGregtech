@@ -1,4 +1,4 @@
-// priority: 5680
+// priority: 5710
 // Gregtech Grindless - text of the OpV parallel hatch (package OpV-M1; startup_scripts/grindless/lib/parallel_hatch.js and
 // server_scripts/grindless/opv/parallel.js).
 //

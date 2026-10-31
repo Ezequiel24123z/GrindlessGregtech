@@ -1,4 +1,4 @@
-// priority: -6846
+// priority: -6819
 // TEST ONLY, OpV-E1 (gtceu:magnetic_pair_converter). Command: kubejs custom_command gg_test_opv_pair_converter
 // Band ONLY: X 38208-38271, Z 0-63, Y 98-115, grindless:sgr1806_orbit (tools/test/zones.json: opv_pair_converter). It takes its turn
 // on the wireless network with the other wireless fixtures (the queue ggTestWirelessQueue in global): a one-cell OpV SMES tower feeds

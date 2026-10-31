@@ -1,3 +1,4 @@
+// priority: -6650
 // -----------------------------------------------------------------------------------------------
 // OpV Assembly Line Array, gtceu:assembly_line_array (package OpV-M2, docs/eras/opv.md #### M2.): the mega member of the assembly line. It runs
 // GTM's gtceu:assembly_line recipes (no recipe type of its own, no recipe of its own to run) with ordered inputs and research honoured by GTM's own

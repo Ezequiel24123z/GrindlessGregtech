@@ -1,3 +1,4 @@
+// priority: -6800
 // TEST ONLY, OpV-D3 (gtceu:kugelblitz_forge, gtceu:hawking_collector). Command: kubejs custom_command gg_test_opv_kugelblitz
 // Band ONLY: X 38336-38399, Z 0-63, Y 98-115, built in grindless:cygnus_x1_orbit (the dimension their recipes are locked to).
 //   T1 (named uncertainty: the collector's c1 row is a generator at 2^30 EU/t, a long, with a core wearing exactly 1/64; GTM's builder cannot
