@@ -156,7 +156,10 @@
           "itemsOut": [{ "id": "grindless:ppln_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
         { "_why": "MAX-A1 (max.md, L6): quartz grown from silica with a hydroxide mineraliser in distilled water and cut to a wafer; the Ir crucible wears as in every row", "name": "quartz_crystal_wafer", "circuit": 29, "eut": 491520, "duration": 1000,
           "itemsIn": [{ "id": "gtceu:silicon_dioxide_dust", "count": 4 }, { "id": "gtceu:sodium_hydroxide_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [{ "id": "gtceu:distilled_water", "amount": 1000 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:quartz_crystal_wafer", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:quartz_crystal_wafer", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "MAX-B2 (max.md, L33 step 1, c31): a float-zone silicon rod grown in the Ir crucible and ground to the cavity spacer; the crucible wears as in every row", "name": "silicon_cavity_spacer", "circuit": 31, "eut": 491520, "duration": 1000,
+          "itemsIn": [{ "id": "gtceu:silicon_dust", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:silicon_cavity_spacer", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {
