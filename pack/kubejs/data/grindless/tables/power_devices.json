@@ -115,6 +115,27 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:aln_power_die", "count": 4 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-H1 (max.md line 38, c10): a substrate wafer gets a SiC epitaxial layer (as c2) and aluminium-contacted CMOS wells in one pass",
+          "name": "sic_cmos_wafer",
+          "circuit": 10,
+          "eut": 1966080,
+          "duration": 500,
+          "itemsIn": [
+            { "id": "grindless:sic_substrate_wafer", "count": 1 },
+            { "id": "gtceu:aluminium_dust", "count": 1 },
+            { "id": "gtceu:copper_foil", "count": 2 }
+          ],
+          "kept": [],
+          "fluidsIn": [
+            { "id": "gtceu:silane", "amount": 100 },
+            { "id": "gtceu:propane", "amount": 50 },
+            { "id": "gtceu:hydrogen", "amount": 2000 }
+          ],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_cmos_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1800 }]
         }
       ]
     },

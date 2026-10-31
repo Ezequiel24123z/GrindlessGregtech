@@ -12,14 +12,14 @@ const kube = path.join(root, 'pack', 'kubejs');
 const tables = path.join(kube, 'data', 'grindless', 'tables');
 const T = JSON.parse(fs.readFileSync(path.join(tables, 'crystals.json'), 'utf8'));
 const CLOCK = T.types.nuclear_clock.recipes;
-const GROW = T.types.crystal_growth.recipes.filter((r) => !/^(UXV|OpV)-/.test(r._why || '')); // UXV rows are pinned in uxv-spin_rows.test.mjs (A3) and uxv-spin_logic.test.mjs (c18); OpV rows in opv-*.test.mjs (A2: opv-circuits; D1's c23 ceb6_boule: opv-beam_hardware); OpV-A1's c19-20 in opv-components.test.mjs; OpV-A3's c22 in opv-field_press.test.mjs; OpV-B1's c24 in opv-tetron_optics.test.mjs
+const GROW = T.types.crystal_growth.recipes.filter((r) => !/^(UXV|OpV|MAX)-/.test(r._why || '')); // UXV rows are pinned in uxv-spin_rows.test.mjs (A3) and uxv-spin_logic.test.mjs (c18); OpV rows in opv-*.test.mjs (A2: opv-circuits; D1's c23 ceb6_boule: opv-beam_hardware); OpV-A1's c19-20 in opv-components.test.mjs; OpV-A3's c22 in opv-field_press.test.mjs; OpV-B1's c24 in opv-tetron_optics.test.mjs
 const CUT = T.types.cutter.recipes;
 const ASM = T.types.assembler.recipes;
 const PGM = T.types.pgm_refining.recipes;
 const startup = fs.readFileSync(path.join(kube, 'startup_scripts', 'grindless', 'uhv', 'crystals.js'), 'utf8');
 const server = fs.readFileSync(path.join(kube, 'server_scripts', 'grindless', 'uhv', 'crystals.js'), 'utf8');
 // UEV-A8's TGG and KTP rows keep their lang keys in the UEV file; UIV-A6's Eu-151 and Er:YSO rows in the UIV file; OpV-D1's ceb6_boule and OpV-A2's c21 in their own; OpV-A1's in opv_components_lang.js; OpV-A3's AlN boule in opv_field_press_lang.js; OpV-B1's c24 in opv_tetron_optics_lang.js
-const lang = ['uhv_crystals_lang.js', 'uev_earth_orbit_lang.js', 'uiv_memories_cryostat_lang.js', 'uiv_mainframe_lang.js', 'uxv_spin_rows_lang.js', 'opv_beam_hardware_lang.js', 'opv_circuits_lang.js', 'opv_components_lang.js', 'opv_field_press_lang.js', 'opv_tetron_optics_lang.js'].map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
+const lang = ['uhv_crystals_lang.js', 'uev_earth_orbit_lang.js', 'uiv_memories_cryostat_lang.js', 'uiv_mainframe_lang.js', 'uxv_spin_rows_lang.js', 'opv_beam_hardware_lang.js', 'opv_circuits_lang.js', 'opv_components_lang.js', 'opv_field_press_lang.js', 'opv_tetron_optics_lang.js', 'max_shell_parts_lang.js'].map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
 
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
 const inputs = (r) => ids(r.itemsIn).concat(ids(r.kept), ids(r.fluidsIn), ids(r.charge));

@@ -48,7 +48,11 @@
           "itemsOut": [{ "id": "grindless:tizrv_ingot", "count": 3 }], "fluidsOut": [] },
         { "_why": "OpV-D1 (opv.md line 25; c18): chambers that did not activate re-melted; the getter film floats off as TiZrV and the stainless steel comes back as ingots; the surface oxide leaves as dross.", "name": "neg_chamber_remelt", "circuit": 18, "eut": 7864320, "duration": 1200,
           "itemsIn": [{ "id": "grindless:spent_neg_chamber", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }], "charge": [],
-          "itemsOut": [{ "id": "gtceu:stainless_steel_ingot", "count": 2 }, { "id": "grindless:tizrv_ingot", "count": 1 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "gtceu:stainless_steel_ingot", "count": 2 }, { "id": "grindless:tizrv_ingot", "count": 1 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] },
+        { "_why": "MAX-H1 (max.md line 30, c20): Er/Ho oxide reduced with calcium over nickel into the Er3Ni regenerator alloy under helium; the lime goes to the kiln and the oxide skin leaves as dross",
+          "name": "er3ni_ingot", "circuit": 20, "eut": 7864320, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:er_ho_oxide", "count": 3 }, { "id": "gtceu:nickel_dust", "count": 2 }, { "id": "gtceu:calcium_dust", "count": 3 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:er3ni_ingot", "count": 4 }, { "id": "gtceu:quicklime_dust", "count": 3 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] }
       ]
     },
     "mixer": {

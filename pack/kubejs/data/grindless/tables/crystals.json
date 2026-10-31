@@ -129,7 +129,11 @@
         { "_why": "OpV-B1 (opv.md line 35): GaAs pulled by liquid-encapsulated Czochralski under a boron oxide cap (kept, as InP c5) and diced into Laue tiles; the Ir crucible wears as in every row. Circuit 24 (19-23 are OpV-A1, A2, A3 and D1).", "name": "gaas_laue_tile", "circuit": 24, "eut": 491520, "duration": 800,
           "itemsIn": [{ "id": "gtceu:gallium_arsenide_dust", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }],
           "kept": [{ "id": "gtceu:boron_trioxide_dust", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:gaas_laue_tile", "count": 8 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:gaas_laue_tile", "count": 8 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "MAX-H1 (max.md line 38, c32): physical vapour transport grows SiC on a kept seed wafer under argon, sliced into substrate wafers; the graphite lining leaves as residue",
+          "name": "sic_substrate_wafer", "circuit": 32, "eut": 491520, "duration": 1200,
+          "itemsIn": [{ "id": "gtca:silicon_carbide_dust", "count": 16 }], "kept": [{ "id": "grindless:sic_wafer", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sic_substrate_wafer", "count": 4 }, { "id": "gtceu:graphite_dust", "count": 1, "chance": 5000 }], "fluidsOut": [] }
       ]
     },
     "cutter": {

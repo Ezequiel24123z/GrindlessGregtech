@@ -62,6 +62,15 @@
           "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:racetrack_chip", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-H1 (max.md line 38, c3): the MRAM stack wafer is patterned on the track wafer into the racetrack memory die",
+          "name": "racetrack_memory_die", "circuit": 3, "eut": 67108864, "duration": 900,
+          "itemsIn": [{ "id": "grindless:patterned_track_wafer", "count": 1 }, { "id": "grindless:mram_stack_wafer", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:racetrack_memory_die", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },

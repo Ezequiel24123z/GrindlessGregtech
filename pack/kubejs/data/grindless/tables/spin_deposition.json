@@ -183,6 +183,22 @@
             { "id": "gtceu:small_tungsten_carbide_dust", "count": 2 }
           ],
           "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
+        },
+        {
+          "_why": "MAX-H1 (max.md line 38, c20): the MRAM stack of c2 sputtered on a SiC CMOS wafer instead of a Si-28 one; the Heusler overspray returns as powder as in c2",
+          "name": "mram_stack_sic", "circuit": 20, "eut": 67108864, "duration": 900,
+          "itemsIn": [
+            { "id": "grindless:heusler_target", "count": 1 },
+            { "id": "grindless:mgo_target", "count": 1 },
+            { "id": "grindless:sic_cmos_wafer", "count": 1 }
+          ],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [
+            { "id": "grindless:mram_stack_wafer", "count": 1 },
+            { "id": "grindless:heusler_am_powder", "count": 1 }
+          ],
+          "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }]
         }
       ]
     },
