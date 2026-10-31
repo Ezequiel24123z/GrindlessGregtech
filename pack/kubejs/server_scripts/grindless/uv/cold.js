@@ -89,7 +89,11 @@
     // OpV-A2 (docs/eras/opv.md, line 14): two RRR sheets bonded to a copper backing plate as the sputter target of the Nb TSV fill and
     // the NbTiN film (c8: 1-7 are taken); the trim goes to the scrap loop
     { name: 'rrr_nb_target', type: 'srf_cavity', circuit: 8, itemsIn: [item(SHEET, 2), item('gtceu:copper_plate', 1)], fluidsIn: [],
-      itemsOut: [item('grindless:rrr_nb_target', 1), item(SCRAP, 1)], fluidsOut: [], eut: VA / 4, duration: 300 }
+      itemsOut: [item('grindless:rrr_nb_target', 1), item(SCRAP, 1)], fluidsOut: [], eut: VA / 4, duration: 300 },
+    // MAX-D4 (docs/eras/max.md, line 14 step 4): turned pellet cores jacketed in RRR niobium on a copper backing under nitrogen (c9: 1-8 are
+    // taken, the contract's c7 is solid_neon_cone); the trim goes to the scrap loop
+    { name: 'pellet_jacket', type: 'srf_cavity', circuit: 9, itemsIn: [item('grindless:turned_pellet_core', 8), item(SHEET, 2), item('gtceu:copper_plate', 1)],
+      fluidsIn: [fluid('gtceu:nitrogen', 500)], itemsOut: [item('grindless:sc_jacketed_pellet', 8), item(SCRAP, 1)], fluidsOut: [], eut: VA, duration: 400 }
   ]
 
   // side steps on GTM's own machines
