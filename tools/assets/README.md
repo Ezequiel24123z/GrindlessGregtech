@@ -1672,3 +1672,21 @@ Procedural, drawn by `Build-OpVPairConverterTextures.ps1` with the method and st
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVPairConverterTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-OpVPairConverterTextures.ps1 -Credits
 ```
+
+## MAX foundation items and casings (MAX-F1)
+
+Procedural, drawn by `Build-MaxFoundationTextures.ps1` with the shape routines of the OpV foundation script; nothing is copied from another mod. It writes `item/<id>.png` for every item that `startup_scripts/grindless/max/foundation.js` registers (the ITEMS block is read from the script, so a new item needs no table here) and the seven block textures `block/max/<name>.png`. The materials need no PNG (GregTech draws them from their colour).
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxFoundationTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxFoundationTextures.ps1 -Credits
+```
+
+## MAX wireless tier (MAX-W)
+
+Procedural, drawn by `Build-MaxWirelessTextures.ps1` with the routines and palette of `Build-WirelessEnergyTextures.ps1`; nothing is copied from another mod. It writes the MAX SMES cell (`block/wireless/smes_cell_max`, the table's max row texture), the covers on a machine's face (`block/cover/wireless_{energy,dynamo}_cover_max`) and the cover items (`item/wireless/{energy,dynamo}_cover_max`): 5 files.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxWirelessTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxWirelessTextures.ps1 -Credits
+```

@@ -84,7 +84,7 @@ test('magnet works table: every id is GTM\'s or one LuV\'s design names', () => 
   // UXV-A8 appends c6 strand_stator, registered by the UXV foundation; OpV-A1 appends c7-8, registered by opv/components.js
   const uivStartup = ['uiv', 'uxv', 'opv', 'max'].flatMap((d) => fs.readdirSync(path.join(KUBEJS, 'startup_scripts', 'grindless', d)).map((f) => fs.readFileSync(path.join(KUBEJS, 'startup_scripts', 'grindless', d, f), 'utf8'))).join('\n');
   for (const r of TABLE.recipes.filter((x) => !LUV_NAMES.includes(x.name))) {
-    assert.match(r._why || '', /^(U[IX][VX]|OpV|MAX)-(A\d+|W)/, r.name + ': a later row says which package added it');
+    assert.match(r._why || '', /^(U[IX][VX]|OpV|MAX)-([AB]\d+|W)/, r.name + ': a later row says which package added it');
     [...r.itemsIn, ...r.itemsOut].filter((x) => x.id.startsWith('grindless:')).forEach((x) => assert.match(uivStartup, new RegExp('\\b' + x.id.slice(10) + '\\b'), x.id + ' is registered by a UIV startup script'));
   }
   // A1's tetrataenite: a GT material with GENERATE_ROD (luv/foundation.js), so GTM names its rod gtceu:tetrataenite_rod
