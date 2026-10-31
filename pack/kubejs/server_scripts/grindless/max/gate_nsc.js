@@ -1,3 +1,4 @@
+// priority: -19933
 // Gregtech Grindless - MAX-T2 "Gate c15 to the belt" (docs/eras/max.md, Bridges). The warp gate's c15 row (hold_nsc_belt) is in
 // data/grindless/tables/gate.json, read by server_scripts/grindless/uhv/gate.js (site sgr_a_orbit = gcyr:black_hole_orbit); the platform it
 // places is the nsc row of tables/relay_platforms.json, placed by uxv/kerr_sling.js (one poll per source place, so the Sgr A* source serves

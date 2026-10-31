@@ -1,4 +1,4 @@
-// priority: 6706
+// priority: 6708
 // Gregtech Grindless - EMI lines of MAX-A2's rows on older machines (the six components' feeder lines L9, L10, L31, L32, L35 and L41):
 //
 //   gtceu.recipe.<dataKey>.<recipe>                    the EMI line of each recipe

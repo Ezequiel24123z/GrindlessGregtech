@@ -1,4 +1,4 @@
-// priority: -19949
+// priority: -19953
 // -----------------------------------------------------------------------------------------------
 // MAX photon ring imager (docs/eras/max.md, machine 5, lines L21, L22, L44 and L45; package MAX-D2). The line steps on older machines are
 // rows marked MAX-D2 in their own tables and scripts; this file holds the machine's two recipes, its controller and the GTM rows of the
