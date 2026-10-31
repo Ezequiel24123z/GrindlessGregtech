@@ -17,7 +17,7 @@
     { "place": "cas_a", "jump": "hold_cas_a", "dimension": "grindless:cas_a_remnant", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
     { "_why": "OpV-F1: the c11 and c12 jumps leave from Cygnus X-1's orbit too (server_scripts/grindless/uxv/kerr_sling.js places every row with a source); their gate rows are OpV-A0's and OpV-R1's", "place": "sgr1806", "jump": "hold_sgr1806", "dimension": "grindless:sgr1806_orbit", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
     { "place": "terzan5", "jump": "hold_terzan5", "dimension": "grindless:terzan5_core", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
-    { "_why": "MAX-F1: the c14 jump leaves from Cygnus X-1's orbit to Sgr A* (gcyr:black_hole_orbit); the c15 jump to the NSC belt leaves from Sgr A*'s orbit. Their gate rows are MAX-G1's", "place": "sgra", "jump": "hold_sgr_a", "dimension": "gcyr:black_hole_orbit", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
+    { "_why": "MAX-F1: the c14 jump leaves from Cygnus X-1's orbit to Sgr A* (gcyr:black_hole_orbit); the c15 jump to the NSC belt leaves from Sgr A*'s orbit. Their gate rows are MAX-G1's", "place": "sgra", "jump": "hold_sgr_a_probe", "dimension": "gcyr:black_hole_orbit", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
     { "place": "nsc", "jump": "hold_nsc_belt", "dimension": "grindless:nsc_belt", "source": "gcyr:black_hole_orbit", "x": 64, "y": 100, "z": 64 }
   ]
 }

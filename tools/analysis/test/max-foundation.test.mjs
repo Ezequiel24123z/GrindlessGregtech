@@ -32,7 +32,7 @@ const BLOCKS = ['max_optical_table_casing', 'membrane_roller_casing', 'geroch_dr
   'stream_bundle_block', 'feeder_coil_casing'].map((n) => 'grindless:' + n);
 const FLUIDS = { hot_flow_plasma: 'gas', filtered_hot_flow: 'gas', flux_loaded_frc: 'gas', cooled_exhaust: 'gas', sn_li_eutectic: 'liquid' };
 const MAX_V = 2 ** 31 * 16 / 16; // V[MAX] = 2^31; the cable carries 16 A of it
-const PLACES = { sgra: ['gcyr:black_hole_orbit', 'sgr_a_orbit', 14, 'hold_sgr_a', 'grindless:cygnus_x1_orbit'], nsc: ['grindless:nsc_belt', 'nsc_belt', 15, 'hold_nsc_belt', 'gcyr:black_hole_orbit'] };
+const PLACES = { sgra: ['gcyr:black_hole_orbit', 'sgr_a_orbit', 14, 'hold_sgr_a_probe', 'grindless:cygnus_x1_orbit'], nsc: ['grindless:nsc_belt', 'nsc_belt', 15, 'hold_nsc_belt', 'gcyr:black_hole_orbit'] };
 
 const ITEMS = got.items;
 const MATERIAL_KEYS = ['gtceu:horizon_strand', ...Object.keys(FLUIDS).map((n) => 'grindless:' + n)];
