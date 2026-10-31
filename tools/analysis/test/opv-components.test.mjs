@@ -27,14 +27,17 @@ const CABLE = 'gtceu:chain_strand_single_cable';
 const STACK = 'grindless:chain_lamina_stack';
 const ROD = 'grindless:chain_composite_rod';
 const MOTOR = 'gtceu:opv_electric_motor';
+const TRI_RING = 'gtceu:tritanium_ring';
+const TRI_PLATE = 'gtceu:tritanium_plate';
 
 test('the stand-in runs the OpV components scripts without errors, nothing skipped', () => {
   const mine = run.errors.filter((e) => /opv[\\/]components|opv_components/.test(String(e.file)));
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(OPVC.skipped), []);
   assert.deepEqual(plain(OPVC.rows.map((r) => r.path)), ['chain_sic_preform', 'superfluid_he3_seal', 'chain_field_coil', 'opv_electric_motor',
-    'opv_electric_pump', 'opv_conveyor_module', 'opv_electric_piston']);
+    'opv_electric_pump', 'opv_conveyor_module', 'opv_electric_piston', 'opv_robot_arm', 'opv_emitter', 'opv_sensor', 'opv_fluid_regulator']);
   assert.deepEqual(plain(OPVC.components), [MOTOR, 'gtceu:opv_electric_pump', 'gtceu:opv_conveyor_module', 'gtceu:opv_electric_piston']);
+  assert.deepEqual(plain(OPVC.circuitComponents), ['gtceu:opv_robot_arm', 'gtceu:opv_emitter', 'gtceu:opv_sensor', 'gtceu:opv_fluid_regulator']);
 });
 
 test('every row is a GTM assembler row at 2^28 EU/t: above V[UXV], below 2^31, in the recipe docs', () => {
@@ -50,12 +53,16 @@ test('every row is a GTM assembler row at 2^28 EU/t: above V[UXV], below 2^31, i
 });
 
 test('the four components follow the component table: GT-like counts, no circuit, no UXV-or-lower component', () => {
-  assert.deepEqual(items(row('opv_electric_motor')), [['grindless:chain_field_coil', 1], [ROD, 2], [WIRE, 4], [CABLE, 2]]);
+  assert.deepEqual(items(row('opv_electric_motor')), [['grindless:chain_field_coil', 1], [ROD, 2], [WIRE, 4], [CABLE, 2], [TRI_RING, 2]]);
   assert.deepEqual(plain(row('opv_electric_motor').fluidsIn), [{ id: 'gtceu:superfluid_helium_3', amount: 250 }]);
   assert.deepEqual(items(row('opv_electric_pump')), [[MOTOR, 1], ['grindless:chain_composite_rotor', 1], ['grindless:superfluid_he3_seal', 2],
-    [STACK, 2], [CABLE, 1]]);
-  assert.deepEqual(items(row('opv_conveyor_module')), [[MOTOR, 2], ['grindless:chain_mesh_belt', 2], [CABLE, 1]]);
+    [STACK, 2], [CABLE, 1], [TRI_PLATE, 2]]);
+  assert.deepEqual(plain(row('opv_electric_pump').fluidsIn), []);
+  assert.deepEqual(items(row('opv_conveyor_module')), [[MOTOR, 2], ['grindless:chain_mesh_belt', 2], [CABLE, 1], [TRI_PLATE, 2],
+    ['gtceu:tritanium_round', 4], [TRI_RING, 2]]);
+  assert.deepEqual(plain(row('opv_conveyor_module').fluidsIn), [], 'the native probe row takes no fluid');
   assert.deepEqual(items(row('opv_electric_piston')), [[MOTOR, 1], ['grindless:opv_harmonic_drive', 1], [ROD, 2], [STACK, 2], [CABLE, 2]]);
+  assert.deepEqual(plain(row('opv_electric_piston').fluidsIn), [{ id: 'gtceu:lubricant', amount: 250 }]);
   for (const id of OPVC.components) {
     const r = OPVC.rows.find((x) => x.itemsOut[0].id === id);
     assert.ok(r, id);
@@ -81,7 +88,7 @@ test('only from: every line part and component has its one producer, and every i
     'gtceu:liquid_helium_3': 'grindless:cryogenic_processing/liquid_helium_3',
     'gtceu:pure_germanium_tetrachloride': 'grindless:solvent_extraction/ev/germanium_tetrachloride_scrub',
   };
-  for (const id of OPVC.components) only[id] = `grindless:assembler/${id.replace('gtceu:', '')}`;
+  for (const id of [...OPVC.components, ...OPVC.circuitComponents]) only[id] = `grindless:assembler/${id.replace('gtceu:', '')}`;
   for (const [id, rid] of Object.entries(only)) assert.deepEqual(plain(producers(id)), [rid], id);
   // every intermediate registered here: one producer, at least one use (the whole line is wired)
   for (const id of [...OPVC.items, 'gtceu:pure_germanium_tetrachloride']) {
@@ -92,10 +99,22 @@ test('only from: every line part and component has its one producer, and every i
     'grindless:opv_harmonic_drive', 'grindless:chain_field_coil', MOTOR]) assert.ok(consumers(id).length >= 1, `${id} is used`);
 });
 
-test('A2 makes the robot arm, emitter, sensor and fluid regulator (they take OpV circuits): no producer here', () => {
-  for (const id of ['gtceu:opv_robot_arm', 'gtceu:opv_emitter', 'gtceu:opv_sensor', 'gtceu:opv_fluid_regulator']) {
-    assert.ok(!OPVC.components.includes(id), id);
-    assert.ok(!producers(id).some((r) => r.startsWith('grindless:assembler/opv_')), id);
+test('the robot arm, emitter, sensor and fluid regulator follow the component table with A2\'s OpV circuits (written at A2\'s landing)', () => {
+  const CIRCUIT = '#gtceu:circuits/opv';
+  const DRIVE = 'grindless:opv_harmonic_drive';
+  const LINK = 'grindless:cryo_optical_link';
+  assert.deepEqual(items(row('opv_robot_arm')), [[MOTOR, 2], ['gtceu:opv_electric_piston', 1], [DRIVE, 2], [CABLE, 2], [CIRCUIT, 1]]);
+  assert.deepEqual(items(row('opv_emitter')), [['grindless:th229_lasing_crystal', 1], [STACK, 2], [LINK, 1], [CABLE, 2], [CIRCUIT, 2]]);
+  assert.deepEqual(items(row('opv_sensor')), [['grindless:hpge_compton_crystal', 1], [STACK, 2], [LINK, 1], [CABLE, 2], [CIRCUIT, 2]]);
+  assert.deepEqual(items(row('opv_fluid_regulator')), [['gtceu:opv_electric_pump', 1], [DRIVE, 1], [CIRCUIT, 2], ['grindless:superfluid_he3_seal', 1],
+    ['gtceu:tritanium_small_gear', 2]]);
+  assert.deepEqual(plain(row('opv_robot_arm').fluidsIn), [{ id: 'gtceu:lubricant', amount: 250 }]);
+  for (const p of ['opv_emitter', 'opv_sensor', 'opv_fluid_regulator']) assert.deepEqual(plain(row(p).fluidsIn), [{ id: 'gtceu:soldering_alloy', amount: 288 }], p);
+  for (const id of OPVC.circuitComponents) {
+    const r = OPVC.rows.find((x) => x.itemsOut[0].id === id);
+    assert.ok(r && r.circuit === null && r.fluidsIn.length === 1, id);
+    assert.deepEqual(plain(r.itemsOut), [{ id, count: 1 }]);
+    assert.doesNotMatch(JSON.stringify(r.itemsIn), /gtceu:(ulv|lv|mv|hv|ev|iv|luv|zpm|uv|uhv|uev|uiv|uxv)_/, `${id}: no UXV-or-lower component`);
   }
 });
 

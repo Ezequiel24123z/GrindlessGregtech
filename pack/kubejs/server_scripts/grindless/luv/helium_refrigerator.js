@@ -339,23 +339,23 @@
 
   function addOpvRows(event) {
     var cfg = config()
-    OPV_ROWS.forEach(function (r) {
-      var missing = [r.input, r.output].filter(function (id) { return !Item.exists(id) })
+    OPV_ROWS.forEach(function (loop) {
+      var missing = [loop.input, loop.output].filter(function (id) { return !Item.exists(id) })
         .concat([cfg.makeUp.id, cfg.precoolIn.id, cfg.precoolOut.id, cfg.charge.id].filter(function (id) { return !Fluid.exists(id) }))
       if (missing.length > 0) {
-        HR.opvSkipped.push({ name: r.name, reason: 'unknown id(s) ' + missing.join(', ') })
-        console.error(LOG + 'closed_loop_cooling ' + r.name + ' skipped, unknown id(s): ' + missing.join(', '))
+        HR.opvSkipped.push({ name: loop.name, reason: 'unknown id(s) ' + missing.join(', ') })
+        console.error(LOG + 'closed_loop_cooling ' + loop.name + ' skipped, unknown id(s): ' + missing.join(', '))
         return
       }
-      event.recipes.gtceu.closed_loop_cooling('grindless:' + r.name)
-        .itemInputs('1x ' + r.input)
+      event.recipes.gtceu.closed_loop_cooling('grindless:' + loop.name)
+        .itemInputs('1x ' + loop.input)
         .inputFluids(Fluid.of(cfg.makeUp.id, cfg.makeUp.amount))
         .inputFluids(Fluid.of(cfg.precoolIn.id, cfg.precoolIn.amount))
         .notConsumableFluid(Fluid.of(cfg.charge.id, cfg.charge.amount))
-        .itemOutputs('1x ' + r.output)
+        .itemOutputs('1x ' + loop.output)
         .outputFluids(Fluid.of(cfg.precoolOut.id, cfg.precoolOut.amount))
-        .addDataString(DATA_KEY, 'grindless:closed_loop_cooling/' + r.name)
-        .EUt(r.eut).duration(r.duration)
+        .addDataString(DATA_KEY, 'grindless:closed_loop_cooling/' + loop.name)
+        .EUt(loop.eut).duration(loop.duration)
     })
   }
 

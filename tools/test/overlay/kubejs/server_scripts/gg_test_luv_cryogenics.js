@@ -576,7 +576,12 @@
         }
       })
       if (bad.length > 0) problems.push(bad.length + ' recipes differ: ' + bad.slice(0, 5).join(' ; '))
+      // OpV keys its own rows into the same loop (HR.opvRows, opvCircuits.fridgeRecipes): not generated from freezer recipes, so not counted here
+      var keyed = {}
+      ;(H.opvRows || []).forEach(function (r) { keyed['grindless:' + r.name] = true })
+      ;((global.grindless.opvCircuits || {}).fridgeRecipes || []).forEach(function (id) { keyed[String(id)] = true })
       var liveOwn = liveOfType(HR_TYPE)
+      if (liveOwn !== null) liveOwn = liveOwn.filter(function (r) { return !keyed[String(r.getId())] })
       var liveCount = liveOwn === null ? -1 : liveOwn.length
       if (liveCount !== recipes.length) problems.push(liveCount + ' live ' + HR_TYPE + ' recipes for ' + recipes.length + ' published')
       check('hr_recipes', problems.length === 0, recipes.length + ' recipes (' + kinds.hot + ' hot ingots, ' + kinds.molten + ' molten metals) for ' +

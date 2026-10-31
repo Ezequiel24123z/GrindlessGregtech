@@ -8,18 +8,24 @@
 // c20, zpm/qubits.js implanter c15, uv/detectors.js zone refining c10, ev/extraction_cascade.js c23). Items:
 // startup_scripts/grindless/opv/components.js and opv/foundation.js (F1).
 //
-//   assembler  chain_sic_preform     4 SiC fibre + 2 chain strand wire -> 1 chain SiC preform (line 4)
-//   assembler  superfluid_he3_seal   superleak plug + 2 chain lamina stacks + 100 mB superfluid He-3 -> 1 seal (line 5)
-//   assembler  chain_field_coil      trained REBCO pancake + 4 chain strand wire + 1 lamina stack -> 1 field coil (line 8)
-//   assembler  opv_electric_motor    field coil + 2 composite rods + 4 chain wire + 2 chain cable + 250 mB superfluid He-3 (no circuit)
-//   assembler  opv_electric_pump     motor + composite rotor + 2 superfluid seals + 2 lamina stacks + 1 cable (no circuit)
-//   assembler  opv_conveyor_module   2 motors + 2 chain mesh belts + 1 cable (no circuit)
-//   assembler  opv_electric_piston   motor + harmonic drive + 2 composite rods + 2 lamina stacks + 2 cables (no circuit)
+//   assembler  chain_sic_preform     4 SiC fibre + 2 chain strand wire + tritanium foil + pyrolytic graphite + 2 tritanium rings, dry N2 (line 4)
+//   assembler  superfluid_he3_seal   superleak plug + 2 lamina stacks + 2 tritanium rings + PTFE foil + tritanium plate + 100 mB superfluid He-3
+//   assembler  chain_field_coil      trained REBCO pancake + 4 chain wire + lamina stack + 2 tritanium foil + 2 tritanium plates, epoxy (line 8)
+//   assembler  opv_electric_motor    field coil + 2 composite rods + 4 chain wire + 2 chain cable + 2 tritanium rings + 250 mB superfluid He-3
+//   assembler  opv_electric_pump     motor + composite rotor + 2 superfluid seals + 2 lamina stacks + 1 cable + 2 tritanium plates
+//   assembler  opv_conveyor_module   2 motors + 2 chain mesh belts + 1 cable + 2 tritanium plates + 4 tritanium rounds + 2 tritanium rings
+//   assembler  opv_electric_piston   motor + harmonic drive + 2 composite rods + 2 lamina stacks + 2 cables, lubricant
 //
-// The robot arm, emitter, sensor and fluid regulator take OpV circuits (and the emitter and sensor cryo_optical_link): OpV-A2 adds them.
+//   assembler  opv_robot_arm         2 motors + piston + 2 harmonic drives + 2 cables + 1 OpV circuit, lubricant
+//   assembler  opv_emitter           Th-229 lasing crystal + 2 lamina stacks + cryogenic optical link + 2 cables + 2 OpV circuits, solder
+//   assembler  opv_sensor            HPGe Compton crystal + 2 lamina stacks + cryogenic optical link + 2 cables + 2 OpV circuits, solder
+//   assembler  opv_fluid_regulator   pump + harmonic drive + 2 OpV circuits + superfluid seal + 2 tritanium small gears, solder
+// The process fluids and tritanium hardware lift every row to the OpV complexFloor (one fluid each: GTM's assembler takes one).
+// The last four take OpV-A2's circuits (the emitter and sensor also its cryo_optical_link); the integrator wrote them when A2 landed.
 // Every row runs at 2^28 EU/t (two UXV amps of a 4 A hatch pair: the OpV assembler or the GCYM large assembler). An unknown id skips its
 // row with a console error. Published in global.grindless.opvComponents: .rows ([{ id, path, type, circuit, itemsIn, fluidsIn, itemsOut,
-// fluidsOut, eut, duration }]), .skipped ([{ id, reason }]), .components (the gtceu:opv_* ids made here).
+// fluidsOut, eut, duration }]), .skipped ([{ id, reason }]), .components (the four no-circuit gtceu:opv_* ids), .circuitComponents (the
+// four that take OpV circuits).
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   var LOG = '[grindless/opv] '
@@ -34,6 +40,18 @@
   var ROD = 'grindless:chain_composite_rod'
   var SUPERFLUID = 'gtceu:superfluid_helium_3'
   var MOTOR = 'gtceu:opv_electric_motor'
+  var DRIVE = 'grindless:opv_harmonic_drive'
+  var LINK = 'grindless:cryo_optical_link'
+  var CIRCUIT = '#gtceu:circuits/opv'
+  var TRI_RING = 'gtceu:tritanium_ring'
+  var TRI_PLATE = 'gtceu:tritanium_plate'
+  var TRI_FOIL = 'gtceu:tritanium_foil'
+  var TRI_ROUND = 'gtceu:tritanium_round'
+  var TRI_SMALL_GEAR = 'gtceu:tritanium_small_gear'
+  var NITROGEN = 'gtceu:nitrogen'
+  var EPOXY = 'gtceu:epoxy'
+  var LUBRICANT = 'gtceu:lubricant'
+  var SOLDER = 'gtceu:soldering_alloy'
   var COMPONENT_TICKS = 600
 
   function item(id, count) { return { id: id, count: count } }
@@ -43,28 +61,54 @@
       fluidsOut: fluidsOut, eut: eut, duration: duration }
   }
 
+  // every row reaches the OpV complexFloor (tools/analysis/recipe_quality.json, 10) with real hardware and one process fluid (GTM's assembler
+  // takes one): tritanium rings, rounds, gears, plates and foil (its GTM flags), the UEV hBN film, the ZPM pyrolytic graphite
   OPVC.rows = [
-    // line 4: SiC fibre wound on chain strand wire, before the CVI furnace densifies it (c6)
-    row('chain_sic_preform', 'assembler', null, [item('grindless:sic_fibre', 4), item(WIRE, 2)], [],
+    // line 4: SiC fibre laid over a pyrolytic graphite interphase on a tritanium foil mandrel, wound on chain strand wire between
+    // tritanium end rings (the rod and rotor fittings), under dry nitrogen to keep the interphase clean, before the CVI furnace
+    // densifies it (c6)
+    row('chain_sic_preform', 'assembler', null, [item('grindless:sic_fibre', 4), item(WIRE, 2), item(TRI_FOIL, 1),
+      item('grindless:pyrolytic_graphite', 1), item(TRI_RING, 2)], [fluid(NITROGEN, 1000)],
       [item('grindless:chain_sic_preform', 1)], [], OPV_EUT, 200),
-    // line 5: the superleak plug sealed between two lamina stacks and charged with superfluid helium-3
-    row('superfluid_he3_seal', 'assembler', null, [item('grindless:superleak_plug', 1), item(STACK, 2)], [fluid(SUPERFLUID, 100)],
+    // line 5: the superleak plug sealed between two lamina stacks on PTFE-jacketed tritanium seal rings and a tritanium gland plate, charged
+    // with superfluid helium-3
+    row('superfluid_he3_seal', 'assembler', null, [item('grindless:superleak_plug', 1), item(STACK, 2), item(TRI_RING, 2),
+      item('gtceu:polytetrafluoroethylene_foil', 1), item(TRI_PLATE, 1)], [fluid(SUPERFLUID, 100)],
       [item('grindless:superfluid_he3_seal', 1)], [], OPV_EUT, 400),
-    // line 8: the trained pancake wound into the coil former with chain strand leads and a lamina flux return
-    row('chain_field_coil', 'assembler', null, [item('grindless:trained_rebco_pancake', 1), item(WIRE, 4), item(STACK, 1)], [],
-      [item('grindless:chain_field_coil', 1)], [], OPV_EUT, 400),
+    // line 8: the trained pancake wound into a tritanium-flanged former with chain strand leads, tritanium co-wind foil (metal-insulated
+    // coil) and a lamina flux return, bonded to the former in epoxy
+    row('chain_field_coil', 'assembler', null, [item('grindless:trained_rebco_pancake', 1), item(WIRE, 4), item(STACK, 1), item(TRI_FOIL, 2),
+      item(TRI_PLATE, 2)], [fluid(EPOXY, 250)], [item('grindless:chain_field_coil', 1)], [], OPV_EUT, 400),
     // the components (docs/eras/opv.md "Voltages and controllers", component table): no circuit, as GTM's motor, pump, conveyor and piston
-    row('opv_electric_motor', 'assembler', null, [item('grindless:chain_field_coil', 1), item(ROD, 2), item(WIRE, 4), item(CABLE, 2)],
-      [fluid(SUPERFLUID, 250)], [item(MOTOR, 1)], [], OPV_EUT, COMPONENT_TICKS),
+    // motor: the shaft runs on tritanium bearing rings
+    row('opv_electric_motor', 'assembler', null, [item('grindless:chain_field_coil', 1), item(ROD, 2), item(WIRE, 4), item(CABLE, 2),
+      item(TRI_RING, 2)], [fluid(SUPERFLUID, 250)], [item(MOTOR, 1)], [], OPV_EUT, COMPONENT_TICKS),
+    // pump: the rotor sits in a tritanium casing; the superfluid seals need no lubricant
     row('opv_electric_pump', 'assembler', null, [item(MOTOR, 1), item('grindless:chain_composite_rotor', 1),
-      item('grindless:superfluid_he3_seal', 2), item(STACK, 2), item(CABLE, 1)], [], [item('gtceu:opv_electric_pump', 1)], [], OPV_EUT,
-      COMPONENT_TICKS),
-    row('opv_conveyor_module', 'assembler', null, [item(MOTOR, 2), item('grindless:chain_mesh_belt', 2), item(CABLE, 1)], [],
-      [item('gtceu:opv_conveyor_module', 1)], [], OPV_EUT, COMPONENT_TICKS),
+      item('grindless:superfluid_he3_seal', 2), item(STACK, 2), item(CABLE, 1), item(TRI_PLATE, 2)], [], [item('gtceu:opv_electric_pump', 1)],
+      [], OPV_EUT, COMPONENT_TICKS),
+    // conveyor: the mesh belt over tritanium idler rounds in a tritanium frame, tensioned on tritanium rings (no fluid: the native probe row)
+    row('opv_conveyor_module', 'assembler', null, [item(MOTOR, 2), item('grindless:chain_mesh_belt', 2), item(CABLE, 1), item(TRI_PLATE, 2),
+      item(TRI_ROUND, 4), item(TRI_RING, 2)], [], [item('gtceu:opv_conveyor_module', 1)], [], OPV_EUT, COMPONENT_TICKS),
+    // piston: the harmonic drive's bearings lubricated
     row('opv_electric_piston', 'assembler', null, [item(MOTOR, 1), item('grindless:opv_harmonic_drive', 1), item(ROD, 2), item(STACK, 2),
-      item(CABLE, 2)], [], [item('gtceu:opv_electric_piston', 1)], [], OPV_EUT, COMPONENT_TICKS)
+      item(CABLE, 2)], [fluid(LUBRICANT, 250)], [item('gtceu:opv_electric_piston', 1)], [], OPV_EUT, COMPONENT_TICKS),
+    // the four that take OpV circuits (A2): the circuit is an ingredient, as in GTM's own; no programmed circuit
+    // robot arm: the joints lubricated
+    row('opv_robot_arm', 'assembler', null, [item(MOTOR, 2), item('gtceu:opv_electric_piston', 1), item(DRIVE, 2), item(CABLE, 2),
+      item(CIRCUIT, 1)], [fluid(LUBRICANT, 250)], [item('gtceu:opv_robot_arm', 1)], [], OPV_EUT, COMPONENT_TICKS),
+    // emitter and sensor: the circuits and the optical link's driver soldered on
+    row('opv_emitter', 'assembler', null, [item('grindless:th229_lasing_crystal', 1), item(STACK, 2), item(LINK, 1), item(CABLE, 2),
+      item(CIRCUIT, 2)], [fluid(SOLDER, 288)], [item('gtceu:opv_emitter', 1)], [], OPV_EUT, COMPONENT_TICKS),
+    row('opv_sensor', 'assembler', null, [item('grindless:hpge_compton_crystal', 1), item(STACK, 2), item(LINK, 1), item(CABLE, 2),
+      item(CIRCUIT, 2)], [fluid(SOLDER, 288)], [item('gtceu:opv_sensor', 1)], [], OPV_EUT, COMPONENT_TICKS),
+    // fluid regulator: the pump behind a valve on a superfluid seal seat, driven through tritanium small gears; the circuits soldered on
+    row('opv_fluid_regulator', 'assembler', null, [item('gtceu:opv_electric_pump', 1), item(DRIVE, 1), item(CIRCUIT, 2),
+      item('grindless:superfluid_he3_seal', 1), item(TRI_SMALL_GEAR, 2)], [fluid(SOLDER, 288)], [item('gtceu:opv_fluid_regulator', 1)], [],
+      OPV_EUT, COMPONENT_TICKS)
   ]
   OPVC.components = ['gtceu:opv_electric_motor', 'gtceu:opv_electric_pump', 'gtceu:opv_conveyor_module', 'gtceu:opv_electric_piston']
+  OPVC.circuitComponents = ['gtceu:opv_robot_arm', 'gtceu:opv_emitter', 'gtceu:opv_sensor', 'gtceu:opv_fluid_regulator']
   OPVC.skipped = []
 
   function missingIds(r) {
