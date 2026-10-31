@@ -125,7 +125,7 @@ test('a missing input or fluid skips the recipe and is reported, never throws', 
   assert.equal(b.G.maxParallelHatch.done, true);
 });
 
-test('names, tooltip and info page in both languages; the EMI route is held; the test zone and overlay exist', () => {
+test('names, tooltip and info page in both languages; the EMI route is shown (A3 closed the hold); the test zone and overlay exist', () => {
   const src = read('client_scripts', 'grindless/max_parallel_hatch_lang.js');
   for (const key of ['block.gtceu.max_parallel_hatch', 'grindless.machine.max_parallel_hatch.tooltip', 'emi.grindless.info.max_parallel_hatch.0']) {
     assert.equal(src.split(`'${key}'`).length - 1, 2, key);
@@ -134,7 +134,7 @@ test('names, tooltip and info page in both languages; the EMI route is held; the
   const info = JSON.parse(read('assets', 'emi/recipe/additions/grindless/max_parallel_hatch.json'));
   assert.deepEqual(info.stacks, ['item:gtceu:max_parallel_hatch']);
   const emi = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/analysis/emi_coverage.json'), 'utf8'));
-  assert.ok(emi.pendingRoutes.some((r) => r.id === 'grindless:assembly_line/max_parallel_hatch'));
+  assert.ok(!emi.pendingRoutes.some((r) => r.id === 'grindless:assembly_line/max_parallel_hatch'), 'A3 wrote the inputs: the route is no longer held');
   const zones = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools/test/zones.json'), 'utf8'));
   const z = (zones.zones || zones).find((x) => x.id === 'max_parallel');
   assert.deepEqual(z.x, [39320, 39383]);

@@ -801,7 +801,7 @@ OpV's *Common to every package* (opv.md, same heading) applies with `opv` replac
 | UHV SPS / xenobotany | 1-7, OpV c8-15 / 0-4 | A2 c21 (OpV chain_composite_rod/rotor hold c16-17), D1 c18 and c22, E1 c19, R1 c20 / B4 c5 |
 | UV MOCVD / fibre draw (`uv/photonics.js`) | 1-16, OpV c17-22 / 1-16, OpV c17-18 | A1 c23-24, B1 c25, B3 c26-27, D2 c28 / B3 c19-20 |
 | UV zone refining / SRF / ark | 1-9, OpV c10-11 / 1-5, OpV c6 / 1-3 | B1 c12, B3 c13-14 / D4 c7, G1 c8 / B4 c4 |
-| ZPM diamond lattice / implanter | file 1-4, 6-8 / 1-8, OpV c9-13 | A3 c9, E1 c10 / A3 c14, D2 c15, E1 c16 |
+| ZPM diamond lattice / implanter | file 1-4, 6-8 / 1-8, OpV c9-13 | A3 c9, E1 c10 / A3 c11, D2 c16, E1 c17 (c14 sdd_rings, c15 hpge_contacts) |
 | ZPM aerogel / waste retrieval | 0-4 / 1-7, OpV-B3 c8-9 | B4 c5-6, A2 c7 / D3 c10 |
 | LuV coated conductor / HTS | 1-4 / 1-6, OpV c7-10 | A2 c5, B1 c6, W c7, A4 c8 / A2 c11, B1 c12, W c13, A4 c14 |
 | LuV He refrigerator / biofoundry / organoid lab | keyed by input / 1-16 / 1, 2, 6 | B1, W, B2, A4, B3, D2 (one input each) / B4 c17-18 / B4 c3 |

@@ -59,7 +59,7 @@
         '2x gtceu:horizon_strand_single_wire', '1x gtceu:tritanium_ring', '4x gtceu:tritanium_foil'],
       fluids: [['gtceu:lubricant', 200]], out: ['1x grindless:sc_magnetic_bearing'] },
     { name: 'superfluid_valve', type: 'assembler', eut: LOW, duration: 600,
-      items: ['1x grindless:potted_superleak', '1x grindless:superfluid_he3_seal', '2x gtceu:tritanium_plate', '4x gtceu:tritanium_round',
+      items: ['1x grindless:cold_tested_superleak', '1x grindless:superfluid_he3_seal', '2x gtceu:tritanium_plate', '4x gtceu:tritanium_round',
         '2x gtceu:horizon_strand_single_wire', '1x gtceu:tritanium_gear', '4x gtceu:tritanium_foil'],
       fluids: [['gtceu:superfluid_helium_3', 100]], out: ['1x grindless:superfluid_valve'] },
 
@@ -89,7 +89,6 @@
       fluids: [['gtceu:soldering_alloy', 288]], out: ['1x grindless:max_fluid_regulator'] }
   ]
   MC.rows = ROWS
-  MC.pendingRoutes = ['grindless:max_conveyor_module', 'grindless:max_sensor', 'grindless:max_field_generator']
 
   ServerEvents.recipes(function (event) {
     var vaMax = Number(GTValues.VA[MAXT])

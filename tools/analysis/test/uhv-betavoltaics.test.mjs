@@ -1,4 +1,4 @@
-// UHV-A3 (docs/eras/uhv.md, "A3. Water and betavoltaics"): the ultrapure water plant's, the betavoltaic fab's and the older rows'
+﻿// UHV-A3 (docs/eras/uhv.md, "A3. Water and betavoltaics"): the ultrapure water plant's, the betavoltaic fab's and the older rows'
 // table (line 4, 11 and 22: the diamond lattice fab's circuits 5-6, the isotope column's circuit 3, the methanation), checked without
 // Minecraft by static recipe lookup, with the pack's scripts run in the stand-in (lib/kubejs_static.mjs) so the ZPM rows of the same
 // recipe types are in the lookup too. T1: none (UV-A1's table-driven machines, proof reuse).
@@ -168,7 +168,7 @@ test('line 22: CO -> C-12 monoxide (Saturn orbit) -> methanation -> C-12 methane
   assert.deepEqual(col.map((r) => [r.name, r.circuit, ids(r.fluidsIn)]), [['helium_three', 1, ['gtceu:saturn_helium']], ['deuterium', 2, ['gtceu:hydrogen']],
     ['boron_11_trifluoride', 20, ['gtceu:boron_trifluoride']]]);
   // UEV-A3 adds the nanodiamond row at circuit 7
-  assert.deepEqual(Q.recipes.filter((r) => r.type === 'diamond_cvd').map((r) => r.circuit), [1, 2, 3, 4, 7, 8]); // UIV-A10 adds c8 (c12_cvd_plate)
+  assert.deepEqual(Q.recipes.filter((r) => r.type === 'diamond_cvd').map((r) => r.circuit), [1, 2, 3, 4, 7, 8, 9]); // UIV-A10 adds c8 (c12_cvd_plate); MAX-A3 c9 (power_diamond_plate)
 });
 
 test('no UEV input, and every lang key the package needs is written in en_us and es_es', () => {
