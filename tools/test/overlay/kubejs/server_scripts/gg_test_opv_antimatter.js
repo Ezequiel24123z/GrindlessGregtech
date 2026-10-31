@@ -1,4 +1,4 @@
-// priority: -6249
+// priority: -27824
 // TEST ONLY, OpV-B3a. Command: kubejs custom_command gg_test_opv_antimatter.
 // Band: X 38848-38911, Z 0-63, Y 98-115, Overworld and Nether.
 // Observe the first 1200 ticks of the real pellet row, not its full priced duration.
