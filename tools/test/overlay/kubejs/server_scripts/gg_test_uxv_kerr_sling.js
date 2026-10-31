@@ -3,7 +3,8 @@
 // Y 100, Z 20). The far sides are the platforms the jumps themselves place, in grindless:vela_pulsar_orbit (c8) and grindless:cas_a_remnant (c9), at 64,100,64.
 // Doubt: two tier 12 places in the shipped datapack beside UIV's three, each jump placing its own platform row. Command (one leg per bench run):
 //   gg_test_uxv_kerr_sling   statics, the c8 jump and its platform, then the c9 jump and its platform on the same ring (stand-in items)
-//   gg_test_uxv_kerr_sling_sky   client suite: the test player in grindless:vela_pulsar_orbit, the client's dimension, sky resource and one screenshot
+//   gg_test_uxv_kerr_sling_sky   client suite: the test player in grindless:vela_pulsar_orbit, the client's dimension, sky resource and one screenshot;
+//                                the client sends no commands, so a scratch overlay arms it with kubejs/config/gg_test_uxv_kerr_sling_sky.json {"enabled": true}
 (function () {
   var NAME = 'uxv_kerr_sling'
   var NEAR = 'grindless:cygnus_x1_orbit'
@@ -260,10 +261,35 @@
     }
   }
   ServerEvents.customCommand('gg_test_uxv_kerr_sling_sky', function (event) {
-    if (!SK || SK.finished) SK = { tick: 0, phase: 'wait_dim', at: 0, finished: false, server: event.server }
+    if (!SK || SK.finished) SK = { tick: 0, phase: 'wait_dim', at: 0, finished: false, server: event.server, delay: 0 }
+  })
+  // client suite (it sends no commands): armed once when the player joins, if the instance carries SKY_MARKER = {"enabled": true}, as
+  // gg_test_uv_travel.js does. The hold is set first, so mc-runtime-test cannot quit before the leg reports; the leg starts 200 ticks later.
+  var SKY_MARKER = 'kubejs/config/gg_test_uxv_kerr_sling_sky.json'
+  function skyEnabledByMarker() {
+    try {
+      var m = JsonIO.read(SKY_MARKER)
+      return m !== null && m !== undefined && String(m.get('enabled')) === 'true'
+    } catch (e) {
+      return false
+    }
+  }
+  PlayerEvents.loggedIn(function (event) {
+    if (SK || !skyEnabledByMarker()) return
+    try {
+      shared().put('hold', true)
+      SK = { tick: 0, phase: 'wait_dim', at: 0, finished: false, server: event.server, delay: 200 }
+      emit('sky_armed', 'NOTE', 'player ' + event.player.getProfile().getName() + ' joined and ' + SKY_MARKER + ' is present: the sky leg starts in 200 ticks')
+    } catch (e) {
+      emit('sky_armed', 'FAIL', 'could not arm the sky leg: ' + e)
+      shared().put('hold', false)
+      console.info('GGTEST|' + NAME + '|DONE|failures=1')
+      SK = { finished: true }
+    }
   })
   ServerEvents.tick(function (event) {
     if (!SK || SK.finished || Date.now() - LOADED_AT < 10000) return
+    if (SK.delay > 0) { SK.delay--; return }
     try {
       skyStep()
     } catch (e) {
