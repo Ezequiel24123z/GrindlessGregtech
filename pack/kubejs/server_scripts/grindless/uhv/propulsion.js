@@ -109,6 +109,10 @@
   TABLE.push(row('gamma_absorber_tile', 'spark_plasma_sintering', 15,
     [item('grindless:w_b4c_powder', 1)], [], [item('grindless:gamma_absorber_tile', 1)], [], UHVA, 600))
 
+  // MAX-A2 line L10 (circuit 21: max.md gave A2 c16, but OpV-A1 and A3 already hold c16-17 here, and c17-20 are other MAX packages' numbers)
+  TABLE.push(row('exotic_composite_billet', 'spark_plasma_sintering', 21,
+    [item('grindless:exotic_infiltrated_preform', 1)], [], [item('grindless:exotic_composite_billet', 1)], [], UHVA, 1200))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

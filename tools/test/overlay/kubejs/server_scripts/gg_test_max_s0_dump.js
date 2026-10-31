@@ -1,4 +1,4 @@
-// priority: -5619
+// priority: -5617
 // TEST ONLY, MAX-S0 dump: S0-1 (planet rows and levels), S0-5 (long maths of case 14), S0-8 (gtnn supracausal recipes), S0-10 (site rows).
 // Command: kubejs custom_command gg_test_max_s0_dump (needs kubejs/config/gg_test_max_s0.json {"enabled": true})
 (function () {

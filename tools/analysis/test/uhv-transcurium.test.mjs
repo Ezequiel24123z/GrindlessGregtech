@@ -174,7 +174,8 @@ test('no UEV input, and every lang key the recipes need is written in en_us and 
   // UIV-B2's rows (es254_extraction) carry their EMI line in uiv_rx_j1856_lang.js
   const lang = fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'uhv_transcurium_lang.js'), 'utf8')
     + fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'uiv_rx_j1856_lang.js'), 'utf8')
-    + fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'uxv_superheavy_lang.js'), 'utf8'); // UXV-A1's plating rows
+    + fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'uxv_superheavy_lang.js'), 'utf8') // UXV-A1's plating rows
+    + fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', 'max_components_lang.js'), 'utf8'); // MAX-A2's irradiated_ybco_bulk
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;
     for (const r of t.recipes) assert.ok(lang.includes(`'gtceu.recipe.${t.dataKey}.${r.name}'`), `${type}/${r.name}`);

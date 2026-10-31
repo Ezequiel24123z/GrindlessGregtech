@@ -1,4 +1,4 @@
-// priority: -5608
+// priority: -5607
 // TEST ONLY, MAX-S0 S0-7 (bench overlay, never shipped; needs kubejs/config/gg_test_max_s0.json {"enabled": true}). Command: kubejs custom_command gg_test_max_s0_cube
 // Band ONLY: X 38720-38783, Z 0-63, Overworld Y 70-102. Forms gtceu:gg_max_s0_cube33 (33 x 33 x 33, hollow, MAX_ROWS 64) and the fallback gg_max_s0_cube25, and
 // times checkPatternWithLock per call against the 50 ms tick budget. Everything is cleared before DONE.

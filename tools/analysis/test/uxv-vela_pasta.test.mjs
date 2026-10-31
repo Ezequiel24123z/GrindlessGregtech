@@ -29,7 +29,7 @@ test('the stand-in runs the UXV-B4 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(VP.skipped), []);
   assert.deepEqual(plain(VP.clashes), []);
-  assert.equal(VP.recipes.length, 19, 'UXV-B4\'s 8 rows and OpV-A0\'s 11 chain matter rows at SGR 1806-20');
+  assert.equal(VP.recipes.length, 21, 'UXV-B4\'s 8 rows, OpV-A0\'s 11 chain matter rows and MAX-A0\'s 2 horizon strand draws at SGR 1806-20');
   assert.deepEqual(plain(UF.skipped), []);
 });
 
@@ -83,9 +83,9 @@ test('tap: a generator, one lasagna electrode -> 536,870,912 EU/t for 720 t (386
   assert.match(src, /Pat\.part\('energy_output', \{ min: 1, max: 1 \}\)/);
 });
 
-test('every row is Vela-locked (OpV-A0\'s rows SGR-locked) and takes an input; the cage companion is circuit-less on UIV\'s type at its site', () => {
+test('every row is Vela-locked (OpV-A0\'s and MAX-A0\'s rows SGR-locked) and takes an input; the cage companion is circuit-less on UIV\'s type at its site', () => {
   const sgr = new Set(['chain_crust', 'ni_chain', 'chain_lattice', 'chain_caging', 'ni_chain_caging', 'lattice_caging', 'chain_strand_drawing',
-    'chain_wire_drawing', 'chain_lamina', 'chain_lamina_stack', 'chain_mesh_weave']);
+    'chain_wire_drawing', 'chain_lamina', 'chain_lamina_stack', 'chain_mesh_weave', 'horizon_strand_preform', 'horizon_wire_drawing']);
   for (const r of VP.recipes.filter((x) => x.type !== 'neutronium_caging')) {
     const site = (x) => (sgr.has(x.name) ? 'grindless:sgr1806_orbit' : SITE);
     assert.equal(r.site, site(r), r.name);

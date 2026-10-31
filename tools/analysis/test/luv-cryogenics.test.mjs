@@ -128,7 +128,7 @@ test('the coated conductor line: c1 substrate and c2 tape, from the table', () =
   assert.deepEqual(c1.j.inputs.item.filter(isCircuit).length, 1, 'c1 has its programmed circuit');
   assert.deepEqual(c2.j.inputs.item.filter(isCircuit).length, 1, 'c2 has its programmed circuit');
   // UIV-A8 appends c3 gd_123_precursor (line 23), whose ids its own test proves; UXV-A8 appends c4 strand_tape
-  assert.deepEqual(plain(CCL.recipes.map((r) => [r.circuit, r.eut, r.duration])), [[1, 7680, 400], [2, 30720, 300], [3, 30720, 400], [4, 1966080, 300], [7, 7864320, 400]]);
+  assert.deepEqual(plain(CCL.recipes.map((r) => [r.circuit, r.eut, r.duration])), [[1, 7680, 400], [2, 30720, 300], [3, 30720, 400], [4, 1966080, 300], [5, 7864320, 400], [7, 7864320, 400]]);
   assert.deepEqual(solids(c1).map((x) => [x.id, x.count]), [['gtceu:nickel_dust', 19], ['gtceu:tungsten_dust', 1]]);
   assert.deepEqual(c1.j.outputs.item.map(itemOf).map((x) => [x.id, x.count]), [['grindless:nickel_tungsten_tape', 20]]);
   assert.equal(euOf(c1), 7680);

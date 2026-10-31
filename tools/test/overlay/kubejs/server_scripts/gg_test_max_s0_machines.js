@@ -1,4 +1,4 @@
-// priority: -5630
+// priority: -5627
 // TEST ONLY, MAX-S0 (bench overlay, never shipped; needs the startup overlay on: kubejs/config/gg_test_max_s0.json {"enabled": true}).
 // Command: kubejs custom_command gg_test_max_s0_machines. Band ONLY: X 38720-38783, Z 0-63, Overworld Y 70-102. Everything placed is cleared before DONE.
 //   s0_2_*   gtceu:warp_gate on two gtceu:max_energy_input_hatch_16a runs a recipe at 2^35 EU/t (a long) for 1,200 ticks: per-tick draw, wrap, completion, tier readout
