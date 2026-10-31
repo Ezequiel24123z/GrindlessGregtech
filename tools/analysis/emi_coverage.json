@@ -90,9 +90,11 @@
     { "id": "gtceu:horizon_strand_ingot", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" }
   ],
   "pendingRoutes": [
+    { "id": "grindless:photon_ring_imaging/sgr_a_spin_map", "reason": "MAX-D2: runs only at Sgr A* (gcyr:black_hole_orbit), held until the MAX release gate (T2); the entry goes with the hold rule" },
+    { "id": "grindless:photon_ring_imaging/nsc_ephemeris", "reason": "MAX-D2: runs only at Sgr A* (gcyr:black_hole_orbit), held until the MAX release gate (T2); the entry goes with the hold rule" },
+    { "id": "grindless:atom_interferometry/shell_gradient_map", "reason": "MAX-D2: runs only at Sgr A* (gcyr:black_hole_orbit), held until the MAX release gate (T2); the entry goes with the hold rule" },
     { "id": "grindless:rydberg_assembly/rydberg_array_refurbish", "reason": "MAX-B3: its input grindless:spent_rydberg_array comes back from the mirror shell c3 (max.md:651, the ending), which is G1; held until max. Owner G1" },
-    { "id": "grindless:atom_interferometry/shell_gradient_map", "reason":"MAX-B2 landed before D2: its input grindless:sgr_a_spin_map is held until D2 (photon ring imager c1) writes it; D2 deletes this entry with the hold rule" },
-    { "id": "grindless:assembler/max_penrose_payload", "reason": "MAX-D1: runs only at Sgr A*, whose chain (hot_flow ... max_penrose_payload, shell_droplet_radiator) is held until the MAX release gate (T2); the entry goes with the hold rule" },
+{ "id": "grindless:assembler/max_penrose_payload", "reason": "MAX-D1: runs only at Sgr A*, whose chain (hot_flow ... max_penrose_payload, shell_droplet_radiator) is held until the MAX release gate (T2); the entry goes with the hold rule" },
     { "id": "grindless:megabar_synthesis/payload_core_press", "reason": "MAX-D1: runs only at Sgr A*, whose chain (hot_flow ... max_penrose_payload, shell_droplet_radiator) is held until the MAX release gate (T2); the entry goes with the hold rule" },
     { "id": "grindless:degenerate_harvesting/degenerate_slug", "reason": "MAX-D1: runs only at Sgr A*, whose chain (hot_flow ... max_penrose_payload, shell_droplet_radiator) is held until the MAX release gate (T2); the entry goes with the hold rule" },
     { "id": "grindless:penrose_extraction/payload_penrose", "reason": "MAX-D1: runs only at Sgr A*, whose chain (hot_flow ... max_penrose_payload, shell_droplet_radiator) is held until the MAX release gate (T2); the entry goes with the hold rule" },
@@ -103,7 +105,6 @@
     { "id": "grindless:plasma_mass_filtering/cooled_exhaust_return", "reason": "MAX-D1: runs only at Sgr A*, whose chain (hot_flow ... max_penrose_payload, shell_droplet_radiator) is held until the MAX release gate (T2); the entry goes with the hold rule" }
   ],
   "pendingUses": [
-    { "id": "grindless:rydberg_logic_array", "package": "G1", "reason": "MAX-B3 makes it (rydberg_array_works c1); the mirror shell c3 consumes it and returns spent_rydberg_array (max.md:651), which is G1" },
         { "id": "grindless:shell_cryocooler", "package": "C1", "reason": "MAX-H1 makes it (L30); G1's segment foundry mode takes it and C1 checks the use is there" },
         { "id": "grindless:segment_controller", "package": "C1", "reason": "MAX-H1 makes it (L38); G1's mirror shell controller takes it and C1 checks the use is there" },
     { "id": "grindless:launched_gc_probe", "package": "T2", "reason": "MAX-T1 returns it from gate c14; T2's belt seed chain takes it and T2 checks the use is there" },

@@ -105,7 +105,8 @@
     'gtceu:hawking_power': 'loop_hawking_collector',
     'gtceu:atom_interferometry': 'loop_atom_interferometer_works',
     'gtceu:membrane_rolling': 'loop_membrane_line',
-    'gtceu:rydberg_assembly': 'loop_rydberg_array_works'
+    'gtceu:rydberg_assembly': 'loop_rydberg_array_works',
+    'gtceu:photon_ring_imaging': 'loop_photon_ring_imager'
   }
 
   StartupEvents.registry('sound_event', function (event) {

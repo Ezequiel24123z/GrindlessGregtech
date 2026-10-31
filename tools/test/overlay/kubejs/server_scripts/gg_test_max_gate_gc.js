@@ -1,4 +1,4 @@
-// priority: -5514
+// priority: -5510
 // TEST ONLY, MAX-T1 (gate c14). Command: kubejs custom_command gg_test_max_gate_gc  (copied over the instance on the test PC, never shipped)
 // Band ONLY: X 39384-39447, Z 0-63, Y 98-115, in the Overworld (the wireless tower) and grindless:cygnus_x1_orbit (the warp gate). The only place
 // outside the band is the arrival platform the pack's own poller places at X 64 Z 64 of the Sgr A* level; the test reads it and never writes there.

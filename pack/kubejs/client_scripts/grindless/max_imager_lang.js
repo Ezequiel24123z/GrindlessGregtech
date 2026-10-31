@@ -1,3 +1,4 @@
+// priority: 6630
 // Gregtech Grindless - names and tooltips of MAX's photon ring imager (startup_scripts/grindless/max/imager.js; package MAX-D2):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each older row of the package
