@@ -130,6 +130,30 @@
       fluidsIn: [{ id: 'gtceu:ethanol', amount: 500 }], notConsumedFluids: [{ id: 'gtceu:carbon_dioxide', amount: 1000 }],
       itemsOut: [{ id: 'grindless:aerogel_superleak_plug', count: 2 }], fluidsOut: [{ id: 'gtceu:ethanol', amount: 500 }],
       eut: LUV_VA, duration: 1200
+    },
+    // MAX-B4 (max.md, L28 step 2, circuit 3): the cassettes boot a recipient Mycoplasma culture grown on sterile medium and a little bacteria
+    {
+      name: 'recipient_mycoplasma_culture', type: 'chemosynthesis', circuit: 3,
+      itemsIn: [{ id: 'grindless:syn3_genome_cassettes', count: 1 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:bacteria', amount: 250 }, { id: 'gtceu:sterilized_growth_medium', amount: 250 }], notConsumedFluids: [],
+      itemsOut: [{ id: 'grindless:recipient_mycoplasma_culture', count: 2 }], fluidsOut: [],
+      eut: LUV_VA, duration: 600
+    },
+    // MAX-B4 (max.md, L12 step 5, circuit 5): the genome library encapsulated in silica aerogel (Grass 2015); the ethanol and CO2 charge are kept as in every row
+    {
+      name: 'encapsulated_genome_library', type: 'supercritical_drying', circuit: 5,
+      itemsIn: [{ id: 'grindless:xeno_genome_set', count: 1 }, { id: AEROGEL, count: 2 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:ethanol', amount: 500 }], notConsumedFluids: [{ id: 'gtceu:carbon_dioxide', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:encapsulated_genome_library', count: 1 }], fluidsOut: [{ id: 'gtceu:ethanol', amount: 500 }],
+      eut: LUV_VA, duration: 1200
+    },
+    // MAX-B4 (max.md, L28 step 5, circuit 6): the hardened cell dried supercritically in aerogel, vitrified without ice crystals
+    {
+      name: 'vitrified_cell_capsule', type: 'supercritical_drying', circuit: 6,
+      itemsIn: [{ id: 'grindless:hardened_minimal_cell', count: 1 }, { id: AEROGEL, count: 2 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:ethanol', amount: 500 }], notConsumedFluids: [{ id: 'gtceu:carbon_dioxide', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:vitrified_cell_capsule', count: 1 }], fluidsOut: [{ id: 'gtceu:ethanol', amount: 500 }],
+      eut: LUV_VA, duration: 1200
     }
   ]
 

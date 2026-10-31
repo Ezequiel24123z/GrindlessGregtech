@@ -190,11 +190,11 @@ test('controllers: assembly lines with station research, UHV hull and circuits, 
 
 test('older rows: the biofoundry\'s xeno steps 11-16 and the algae bioreactor\'s far-red row, Proxima b only', () => {
   const BFT = JSON.parse(read('data/grindless/tables/biofoundry.json'));
-  const xeno = BFT.recipes.filter((r) => r.circuit > 10);
+  const xeno = BFT.recipes.filter((r) => r.circuit > 10 && r.circuit <= 16); // 17-18 are MAX-B4's (checked by max-gene-ark.test.mjs)
   const NAMES = ['far_red_gene_cassette', 'engineered_far_red_algae', 'cladosporium_culture', 'chromobacterium_culture', 'sphingomonas_culture',
     'sporosarcina_culture'];
   assert.deepEqual(xeno.map((r) => [r.circuit, r.name]), NAMES.map((n, i) => [11 + i, n]));
-  assert.deepEqual(BFT.steps.filter((s) => s.circuit > 10).map((s) => [s.circuit, s.name]), NAMES.map((n, i) => [11 + i, n]));
+  assert.deepEqual(BFT.steps.filter((s) => s.circuit > 10 && s.circuit <= 16).map((s) => [s.circuit, s.name]), NAMES.map((n, i) => [11 + i, n]));
   const bf = plain(run.global.grindless.biofoundry);
   assert.deepEqual(bf.clashes, []);
   for (const r of xeno) {

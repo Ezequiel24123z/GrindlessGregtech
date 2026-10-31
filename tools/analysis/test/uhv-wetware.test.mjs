@@ -173,7 +173,7 @@ test('the array grows organoids on Earth and makes 4 wetware mainframes per run 
 test('the organoid lab\'s UHV row turns sterilized medium and a xeno radioprotectant into sterilised medium, in orbit, clean', () => {
   const { W, recipes } = harness();
   const lab = recipes.filter((r) => r.type === 'organoid_assembly');
-  assert.equal(lab.length, 3, 'LuV\'s two rows + this one');
+  assert.equal(lab.length, 4, 'LuV\'s two rows + this one + MAX-B4\'s organoid_genome_extract');
   const row = lab.find((r) => r.args[0] === 'grindless:uhv/sterilised_growth_medium');
   assert.ok(row);
   assert.equal(only(row.calls, 'circuit'), 3);

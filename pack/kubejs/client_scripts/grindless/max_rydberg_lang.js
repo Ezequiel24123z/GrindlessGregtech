@@ -1,4 +1,4 @@
-// priority: 6580
+// priority: 6596
 // Gregtech Grindless - names and tooltips of MAX's Rydberg array works (startup_scripts/grindless/max/rydberg.js; package MAX-B3):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each older row of the package

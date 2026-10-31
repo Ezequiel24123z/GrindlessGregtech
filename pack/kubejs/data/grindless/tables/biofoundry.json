@@ -24,7 +24,9 @@
     { "circuit": 13, "name": "cladosporium_culture" },
     { "circuit": 14, "name": "chromobacterium_culture" },
     { "circuit": 15, "name": "sphingomonas_culture" },
-    { "circuit": 16, "name": "sporosarcina_culture" }
+    { "circuit": 16, "name": "sporosarcina_culture" },
+    { "circuit": 17, "name": "synthetic_oligo_pool" },
+    { "circuit": 18, "name": "syn3_genome_cassettes" }
   ],
   "composed": [
     {
@@ -163,6 +165,28 @@
       "itemsIn": [],
       "fluidsIn": [{ "id": "gtceu:bacteria", "amount": 250 }, { "id": "gtceu:sterilized_growth_medium", "amount": 250 }],
       "itemsOut": [{ "id": "grindless:sporosarcina_culture", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "_why": "MAX-B4 (max.md, L12 step 1, c17): a pool of synthetic oligonucleotides, built on a phosphorus backbone from sterile medium and ammonia (Church 2012)",
+      "name": "synthetic_oligo_pool",
+      "circuit": 17,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [{ "id": "gtceu:phosphorus_dust", "count": 2 }],
+      "fluidsIn": [{ "id": "gtceu:sterilized_growth_medium", "amount": 500 }, { "id": "gtceu:ammonia", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:synthetic_oligo_pool", "count": 1 }],
+      "fluidsOut": []
+    },
+    {
+      "_why": "MAX-B4 (max.md, L28 step 1, c18): four oligo pools assembled on agar into the cassettes of a minimal genome (Gibson 2010; Hutchison 2016)",
+      "name": "syn3_genome_cassettes",
+      "circuit": 18,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [{ "id": "grindless:synthetic_oligo_pool", "count": 4 }, { "id": "gtceu:agar_dust", "count": 2 }],
+      "fluidsIn": [{ "id": "gtceu:sterilized_growth_medium", "amount": 250 }, { "id": "gtceu:bacteria", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:syn3_genome_cassettes", "count": 1 }],
       "fluidsOut": []
     }
   ]

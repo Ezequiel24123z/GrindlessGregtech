@@ -107,7 +107,8 @@
     'gtceu:membrane_rolling': 'loop_membrane_line',
     'gtceu:rydberg_assembly': 'loop_rydberg_array_works',
     'gtceu:photon_ring_imaging': 'loop_photon_ring_imager',
-    'gtceu:geroch_power': 'loop_geroch_winch'
+    'gtceu:geroch_power': 'loop_geroch_winch',
+    'gtceu:genome_archiving': 'loop_gene_ark'
   }
 
   StartupEvents.registry('sound_event', function (event) {

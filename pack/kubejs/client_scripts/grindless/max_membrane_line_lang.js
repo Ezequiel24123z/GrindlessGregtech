@@ -1,4 +1,4 @@
-// priority: 6610
+// priority: 6629
 // Gregtech Grindless - names and EMI lines of MAX-B1 (the membrane line, machine 3, and its feeder rows on older machines, lines L2, L3, L11 and L34):
 //
 //   block.gtceu.membrane_line                         the controller's name
