@@ -5,6 +5,7 @@
 //
 //   gtceu:methane_pyrolysis     circuit 1  1,000 mB methane + the bath (1,000 mB tin + 1,000 mB nickel, not consumed) -> 2,000 mB hydrogen + 2 graphene dust
 //                               circuit 2  the same -> 2,000 mB hydrogen + 1 carbon nanotube yarn, slower
+//                               circuit 6  OpV-R2: 4 spent graphite anodes + the same charge -> 2,000 mB hydrogen + 4 graphene dust
 //   gtceu:chemosynthesis        circuit 1  250 mB bacteria (Europa's) + 1,000 mB Enceladus brine + 500 mB hydrogen + 250 mB CO2
 //                                          -> 4 archaeal cultures + 250 mB methane
 //                               circuit 2  1 tholin + the culture (not consumed) + 1,000 mB brine + 1,000 mB mutagen
@@ -87,6 +88,14 @@
       fluidsIn: [{ id: 'gtceu:methane', amount: 1000 }], notConsumedFluids: [{ id: 'gtceu:tin', amount: 1000 }, { id: 'gtceu:nickel', amount: 1000 }],
       itemsOut: [{ id: 'grindless:pyrolytic_graphite', count: 1 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 2000 }],
       eut: ZPM_VA, duration: 600
+    },
+    // OpV-R2 (docs/eras/opv.md, line 38): the refinery's spent graphite anodes are cracked back into graphene (circuit 6; circuit 5 is left free)
+    {
+      name: 'spent_anode_graphene', type: 'methane_pyrolysis', circuit: 6,
+      itemsIn: [{ id: 'grindless:spent_graphite_anode', count: 4 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:methane', amount: 1000 }], notConsumedFluids: [{ id: 'gtceu:tin', amount: 1000 }, { id: 'gtceu:nickel', amount: 1000 }],
+      itemsOut: [{ id: GRAPHENE, count: 4 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 2000 }],
+      eut: ZPM_VA, duration: 400
     },
     // UIV-B3 (docs/eras/uiv.md, line 34): Ps-converter mesoporous silica, the aerogel re-dried from ethanol with its pores tuned to stop positronium
     // (circuit 1: the silica_aerogel row above has none); the lab at PSR J0437 takes it

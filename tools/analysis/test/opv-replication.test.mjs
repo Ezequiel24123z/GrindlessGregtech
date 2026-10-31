@@ -21,9 +21,9 @@ const kube = (...p) => fs.readFileSync(path.join(pack, 'kubejs', ...p), 'utf8');
 const SITE = 'grindless:terzan5_core';
 const V_UXV = 2 ** 27;
 const VA_OPV = 503316480;
-const MACHINES = ['debris_harvester'];
-const TYPES = ['debris_harvesting'];
-const DIMS = [[11, 5, 11]];
+const MACHINES = ['debris_harvester', 'replication_refinery'];
+const TYPES = ['debris_harvesting', 'replication_refining'];
+const DIMS = [[11, 5, 11], [9, 9, 9]];
 
 test('the stand-in runs the OpV-R2 scripts without errors, nothing skipped, no lookup clash', () => {
   const mine = run.errors.filter((e) => /replication/.test(String(e.file)));
@@ -71,6 +71,26 @@ test('controller lines: OpV hull, components, circuits and a research item; VA[O
   }
 });
 
+test('refinery c1-c6: carbonyl cell (CO returns at 90%) and FFC salt cell; c7 is left to R3; no input returns but CO', () => {
+  const rows = RP.recipes.filter((r) => r.type === 'replication_refining');
+  assert.deepEqual(plain(rows.map((r) => r.circuit)), [1, 2, 3, 4, 5, 6]);
+  for (const r of rows) assert.deepEqual([r.eut, r.site], [2 * V_UXV, SITE], r.name);
+  const co = (r) => r.fluidsIn.concat(r.fluidsOut).filter((f) => f.id === 'gtceu:carbon_monoxide').map((f) => f.amount);
+  assert.deepEqual(plain(co(rec('metal_carbonyl_synthesis'))), [1000]);
+  assert.deepEqual(plain(co(rec('carbonyl_decomposition'))), [900]);
+  assert.deepEqual(ids(rec('metal_feedstock_sinter').itemsOut), [['grindless:metal_feedstock', 4]]);
+  assert.deepEqual(ids(rec('ffc_pellet_press').itemsOut), [['grindless:ffc_pellet', 2]]);
+  assert.deepEqual(ids(rec('ffc_salt_bath').itemsOut), [['grindless:si_alloy_powder', 2], ['grindless:spent_graphite_anode', 2]]);
+  assert.deepEqual(ids(rec('cluster_casing_sinter').itemsOut), [['grindless:cluster_sinter_casing', 2]]);
+  assert.match(kube('data', 'grindless', 'tables', 'replication.json'), /"_r3"/);
+});
+
+test('older row: the methane pyrolyser takes the spent anodes on circuit 6', () => {
+  const r = run.global.grindless.outerChemistry.recipes.find((x) => x.name === 'spent_anode_graphene');
+  assert.equal(r.circuit, 6);
+  assert.deepEqual(ids(r.itemsIn), [['grindless:spent_graphite_anode', 4]]);
+  assert.deepEqual(ids(r.itemsOut), [['gtceu:graphene_dust', 4]]);
+});
 test('en_us and es_es names exist and differ', () => {
   for (const m of MACHINES) {
     const k = 'block.gtceu.' + m;
