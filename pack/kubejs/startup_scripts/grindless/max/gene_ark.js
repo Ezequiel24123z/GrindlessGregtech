@@ -1,4 +1,4 @@
-// priority: -5420
+// priority: -5392
 // -----------------------------------------------------------------------------------------------
 // MAX's gene ark (docs/eras/max.md, machine 4, lines L12 and L28; package MAX-B4): the multiblock and its recipe type. No item of its own:
 // every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/gene_ark.js.

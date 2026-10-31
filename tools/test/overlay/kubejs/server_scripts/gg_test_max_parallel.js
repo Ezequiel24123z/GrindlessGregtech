@@ -1,4 +1,4 @@
-// priority: -5554
+// priority: -5549
 // TEST ONLY, MAX-M1 (gtceu:max_parallel_hatch). Command: kubejs custom_command gg_test_max_parallel
 // Band ONLY: X 39320-39383, Z 0-63, Overworld Y 98-115 (the forge is 16 high; zones.json carries the same Y range).
 //   T1 (named uncertainty: at x1,048,576 on a GTM recipe the EU/t x parallel product stays long and the energy bound picks the parallel, not an overflow):

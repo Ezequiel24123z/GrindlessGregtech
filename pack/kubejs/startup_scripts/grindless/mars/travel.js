@@ -1,4 +1,4 @@
-// priority: -5400
+// priority: -5323
 // -----------------------------------------------------------------------------------------------
 // Mars, end of EV (docs/eras/ev.md, "Mars, end of EV"): what Mars brings that must exist at startup.
 //

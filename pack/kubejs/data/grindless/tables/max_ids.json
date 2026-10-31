@@ -46,6 +46,9 @@
     "parallel_hatch": [
       "grindless:max_parallel_hatch"
     ],
+    "furnace": [
+      "grindless:nsc_planetesimal"
+    ],
     "note": "the components are registered by foundation.js; grindless:max_parallel_hatch is M1's (lib/parallel_hatch.js), listed here and not registered"
   },
   "existing": [
