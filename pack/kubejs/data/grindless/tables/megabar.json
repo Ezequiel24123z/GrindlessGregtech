@@ -21,7 +21,10 @@
           "itemsOut": [{ "id": "grindless:compacted_waste_canister", "count": 1 }], "fluidsOut": [] },
         { "_why": "UXV-A3 (uxv.md line 12): hBN grown from Ba-BN under HPHT; the barium is leached out in server_scripts/grindless/uxv/spin_rows.js.", "name": "hbn_crystal", "circuit": 6, "eut": 3932160, "duration": 1600,
           "itemsIn": [{ "id": "grindless:hbn_dust", "count": 4 }, { "id": "gtceu:barium_dust", "count": 1 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 500 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:raw_hbn_crystal", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 400 }] }
+          "itemsOut": [{ "id": "grindless:raw_hbn_crystal", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 400 }] },
+        { "_why": "OpV-A1 (opv.md line 7): gum metal and chain lamina pressed into the flexspline cup under the anvil (circuit 7).", "name": "flexspline_cup", "circuit": 7, "eut": 3932160, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:gum_metal_blank", "count": 1 }, { "id": "grindless:chain_lamina_stack", "count": 1 }, { "id": "grindless:nanotwinned_diamond_anvil", "count": 1, "chance": 1000 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:chain_flexspline_cup", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "electric_blast_furnace": {

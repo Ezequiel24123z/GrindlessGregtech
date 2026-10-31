@@ -55,6 +55,22 @@
       "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
       "itemsOut": [ { "id": "grindless:strand_stator", "count": 1 } ],
       "eut": 1966080, "duration": 400
+    },
+    {
+      "name": "rebco_pancake", "circuit": 7, "charge": true,
+      "_why": "OpV-A1 (docs/eras/opv.md line 8): REBCO coated conductor wound into a no-insulation double pancake (the SPARC TFMC's winding) with chain strand wire terminals, the epoxy as the turn-to-turn bond.",
+      "itemsIn": [ { "id": "grindless:itbtc_coated_conductor", "count": 8 }, { "id": "gtceu:chain_strand_single_wire", "count": 2 } ],
+      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+      "itemsOut": [ { "id": "grindless:rebco_pancake", "count": 1 } ],
+      "eut": 1966080, "duration": 400
+    },
+    {
+      "name": "rebco_training", "circuit": 8, "charge": true,
+      "_why": "OpV-A1 (docs/eras/opv.md line 8): the potted pancake ramped in the cold-test helium through its training quenches until it holds full current.",
+      "itemsIn": [ { "id": "grindless:potted_rebco_pancake", "count": 1 } ],
+      "fluidsIn": [],
+      "itemsOut": [ { "id": "grindless:trained_rebco_pancake", "count": 1 } ],
+      "eut": 1966080, "duration": 600
     }
   ]
 }

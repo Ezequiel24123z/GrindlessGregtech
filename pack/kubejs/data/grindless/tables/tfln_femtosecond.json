@@ -52,6 +52,12 @@
           "name": "crystal_blank", "circuit": 4, "eut": 7864320, "duration": 1000,
           "itemsIn": [{ "id": "grindless:silica_storage_preform", "count": 1 }],
           "itemsOut": [{ "id": "grindless:written_crystal_blank", "count": 1 }, { "id": "gtceu:glass_dust", "count": 2 }]
+        },
+        {
+          "_why": "OpV-A1 (opv.md line 7): the flexspline teeth written into the cup; the swarf is atomised back to gum metal blend (am_powders.json).",
+          "name": "flexspline_teeth", "circuit": 5, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "grindless:chain_flexspline_cup", "count": 1 }],
+          "itemsOut": [{ "id": "grindless:toothed_flexspline_cup", "count": 1 }, { "id": "grindless:gum_metal_swarf", "count": 1 }]
         }
       ]
     },

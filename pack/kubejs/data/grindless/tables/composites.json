@@ -84,7 +84,10 @@
           "itemsOut": [{ "id": "grindless:w184_cvi_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
         { "_why": "OpV-A1 (opv.md line 4): the chain SiC preform densified from methyltrichlorosilane, as the SiC/SiC plate; the HCl goes back to stock. Circuit 6.", "name": "chain_preform_densify", "circuit": 6, "eut": 1966080, "duration": 4800,
           "itemsIn": [{ "id": "grindless:chain_sic_preform", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:densified_chain_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] }
+          "itemsOut": [{ "id": "grindless:densified_chain_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
+        { "_why": "OpV-A1 (opv.md line 8): the REBCO pancake vacuum-impregnated with epoxy in the infiltration furnace. Circuit 7.", "name": "rebco_potting", "circuit": 7, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:rebco_pancake", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:potted_rebco_pancake", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "chemical_reactor": {

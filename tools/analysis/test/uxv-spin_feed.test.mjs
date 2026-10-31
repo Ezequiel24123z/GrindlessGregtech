@@ -88,7 +88,8 @@ test('older rows written by UXV-A2: counts and circuits', () => {
   const zr = recipes.filter((r) => /zone_refining\/seven_n_(tellurium|germanium)$/.test(r.i));
   assert.deepEqual(zr.map(circ).sort((a, b) => a - b), [8, 9]);
   const am = json('am_powders.json');
-  assert.deepEqual(am.metals.slice(-6).map((m) => m.name), ['cofeb', 'heusler', 'mgo', 'ruthenium', 'srruo3', 'la_bfo']);
+  // OpV-A1 appended the gum metal swarf row (marked OpV-); UXV-A1's six are the last before it.
+  assert.deepEqual(am.metals.filter((m) => !(m._why || '').startsWith('OpV-')).slice(-6).map((m) => m.name), ['cofeb', 'heusler', 'mgo', 'ruthenium', 'srruo3', 'la_bfo']);
   assert.deepEqual(am.parts.slice(-6).map((p) => p.circuit), [9, 10, 11, 12, 13, 14]);
   for (const p of am.parts.slice(-6)) assert.ok(p.powderBack < p.powderIn && p.gtm === false);
 });

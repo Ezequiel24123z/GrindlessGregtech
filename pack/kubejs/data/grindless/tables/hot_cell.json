@@ -289,6 +289,17 @@
       "fluidsIn": [],
       "itemsOut": [{ "id": "gtceu:calcium_dust", "count": 1 }, { "id": "gtceu:small_tungsten_dust", "count": 2 }],
       "fluidsOut": []
+    },
+    {
+      "_why": "OpV-A1 (opv.md line 9): thorium-229 dissolved in nitric acid behind the glass, the nitrate the fluorspar kiln fluorinates to laser-grade ThF4; the hydrogen goes back to stock (circuit 21: 16-17 are UXV-B5's, 18-20 B3/D2/R1's)",
+      "name": "thorium_229_nitrate",
+      "circuit": 21,
+      "eut": 7680,
+      "duration": 600,
+      "itemsIn": [{ "id": "grindless:thorium_229", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:nitric_acid", "amount": 4000 }],
+      "itemsOut": [{ "id": "grindless:thorium_229_nitrate", "count": 1 }],
+      "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }]
     }
   ]
 }
