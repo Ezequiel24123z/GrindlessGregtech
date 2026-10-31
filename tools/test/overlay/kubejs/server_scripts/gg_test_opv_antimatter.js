@@ -2,7 +2,7 @@
 // TEST ONLY, OpV-B3a. Command: kubejs custom_command gg_test_opv_antimatter.
 // Band: X 38848-38911, Z 0-63, Y 98-115, Overworld and Nether.
 // Observe the first 1200 ticks of the real pellet row, not its full priced duration.
-// A separate one-tick copy tests native 1/16 tile wear over 16 starts without
+// A separate one-tick copy tests native 1/16 tile wear over 256 starts (a count band, the chance is random) without
 // changing the shipped fuel row. The integrator runs this in the grouped OpV set.
 (function () {
   var NAME = 'opv_antimatter'
@@ -12,6 +12,10 @@
   var AWAY = 'minecraft:the_nether'
   var EUT = 1073741824
   var REAL = 'grindless:annihilation_power/burn_pellet'
+  var WEAR_STACKS = 4
+  var WEAR_TILES = 64
+  var WEAR_LOW = 2
+  var WEAR_HIGH = 40
   var S = null
   var C = null
   var LOADED = Date.now()
@@ -67,8 +71,8 @@
     for (var i = 0; i < inv.getSlots(); i++) inv.setStackInSlot(i, Item.of('minecraft:air'))
     u.bus.getCircuitInventory().setStackInSlot(0, classes().Circuit.stack(u.mode === 'wear' ? 32 : 2))
     if (u.mode === 'wear') {
-      inv.setStackInSlot(0, Item.of('minecraft:paper', 16))
-      inv.setStackInSlot(1, Item.of('grindless:gamma_absorber_tile', 2))
+      for (var p = 0; p < WEAR_STACKS; p++) inv.setStackInSlot(p, Item.of('minecraft:paper', 64))
+      inv.setStackInSlot(WEAR_STACKS, Item.of('grindless:gamma_absorber_tile', 64))
     } else {
       inv.setStackInSlot(0, Item.of('grindless:acmf_pellet'))
       inv.setStackInSlot(1, Item.of('grindless:antiproton_stack_opv'))
@@ -176,11 +180,16 @@
     }
     if (u.mode === 'wear') {
       if (count(u.bus, 'minecraft:paper') === 0 && String(logic.getStatus()) !== 'WORKING') {
-        check('wear_16_starts', count(u.bus, 'grindless:gamma_absorber_tile') === 1 &&
-          count(u.out, 'grindless:activated_absorber_tile') === 1,
-          'one tile consumed and one activated over 16 native one-tick copies of the real wear entries')
+        // 1/16 per start is random: exactly one of 16 starts happens only 38% of the time. Over 256 starts the count is Binomial(256, 1/16),
+        // mean 16, sd 3.9; the band 2..40 fails about 6 times in a million, while no wear (0) or a tile lost every start (64) both fail it.
+        // The exact native chance is pinned by real_wear.
+        var consumed = WEAR_TILES - count(u.bus, 'grindless:gamma_absorber_tile')
+        var activated = count(u.out, 'grindless:activated_absorber_tile')
+        check('wear_16_starts', consumed >= WEAR_LOW && consumed <= WEAR_HIGH && activated >= WEAR_LOW && activated <= WEAR_HIGH,
+          WEAR_STACKS * 64 + ' native one-tick starts at 1/16: ' + consumed + ' tiles consumed and ' + activated + ' activated (expect 16 each, band ' +
+          WEAR_LOW + '..' + WEAR_HIGH + ')')
         u.phase = 'done'
-      } else if (S.tick - u.started > 400) throw new Error('wear probe did not finish 16 starts')
+      } else if (S.tick - u.started > 1100) throw new Error('wear probe did not finish its starts')
       return
     }
     if (String(logic.getStatus()) === 'WORKING') {

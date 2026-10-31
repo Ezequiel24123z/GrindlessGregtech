@@ -13,9 +13,10 @@
 //                              Activated tiles return at 1/8 and decay in B3a's IV hot cell c22; B3a must merge before D3.
 //   assembly_line              the two controllers (OpV hull + OpV parts + OpV circuits + the era fluid + domain items, behind station research).
 //
-// Exact wear: GTM's builder counts chances in ten-thousandths, which holds 1/8 but not 1/64 (156.25) or 1/32 (312.5). A row with such a fraction is
-// written as a plain recipe JSON (event.custom) whose content carries chance 1 and maxChance 64 (the recipe JSON of GTM keeps chance and maxChance
-// per content); the others use the builder. The row keys are documented in the table's _how_it_is_used.
+// Exact wear: GTM's builder counts chances in ten-thousandths, which holds 1/8 but not 1/64 (156.25) or 1/32 (312.5). A row with such a fraction
+// sets the builder's chance(1).maxChance(64) around that one content and resets it to 10000/10000 (every row, ours included, keeps its own
+// grindless: id; event.custom would give a GT recipe an auto id that duplicates it). .custom lists these fractional rows. The row keys are
+// documented in the table's _how_it_is_used.
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.kugelblitz.recipes, .skipped, .clashes, .custom, .controllerRecipes.
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
@@ -114,55 +115,37 @@
     return (f[0] * 10000) % f[1] === 0 ? f[0] * 10000 / f[1] : -1
   }
 
-  function needsJson(rec) {
+  // a row whose wear or output chance is not a whole number of ten-thousandths (1/64, 1/32)
+  function fractional(rec) {
     var exact = true
     rec.wear.concat(rec.itemsOut).forEach(function (x) { if (x.chance !== null && inTenThousandths(x.chance) < 0) exact = false })
     return !exact
   }
 
-  function content(c, chance, max) {
-    return { content: c, chance: chance, maxChance: max, tierChanceBoost: 0 }
-  }
-
-  // the recipe as GTM's recipe JSON: inputs, outputs, tick EU, data and the site condition
-  function jsonOf(rec) {
-    var item = function (x) { return { type: 'gtceu:sized', count: x.count, ingredient: { item: x.id } } }
-    var inItems = []
-    rec.itemsIn.forEach(function (x) { inItems.push(content(item(x), 10000, 10000)) })
-    rec.wear.forEach(function (x) { inItems.push(content(item(x), x.chance[0], x.chance[1])) })
-    if (rec.circuit > 0) inItems.push(content({ type: 'gtceu:circuit', configuration: rec.circuit }, 0, 10000))
-    var outItems = []
-    rec.itemsOut.forEach(function (x) {
-      if (x.chance === null) outItems.push(content(item(x), 10000, 10000))
-      else {
-        var chance = inTenThousandths(x.chance)
-        outItems.push(chance >= 0 ? content(item(x), chance, 10000) : content(item(x), x.chance[0], x.chance[1]))
-      }
-    })
-    var inputs = { item: inItems }
-    if (rec.fluidsIn.length > 0) {
-      inputs.fluid = rec.fluidsIn.map(function (f) { return content({ amount: f.amount, value: [{ fluid: f.id }] }, 10000, 10000) })
-    }
-    var data = {}
-    if (rec.dataKey !== '') data[rec.dataKey] = rec.name
-    var eu = [content(rec.eut, 10000, 10000)]
-    var json = { type: 'gtceu:' + rec.type, duration: rec.duration, inputs: inputs, data: data }
-    if (outItems.length > 0) json.outputs = { item: outItems }
-    if (rec.generator) json.tickOutputs = { eu: eu }
-    else json.tickInputs = { eu: eu }
-    if (rec.site) json.recipeConditions = [{ type: 'dimension', dimension: SITE, reverse: false }]
-    return json
-  }
-
   function addBuilt(event, rec) {
+    // GTM prefixes the type itself on the builder path: the id is grindless:<type>/<name>
     var recipe = event.recipes.gtceu[rec.type]('grindless:' + rec.name)
+    // a fraction GTM cannot count in ten-thousandths goes in through the builder's chance and maxChance, reset right after
+    var exactly = function (x, add) {
+      recipe.chance(x.chance[0]).maxChance(x.chance[1])
+      add()
+      recipe.chance(10000).maxChance(10000)
+    }
     rec.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
-    rec.wear.forEach(function (x) { recipe.chancedInput(x.count + 'x ' + x.id, inTenThousandths(x.chance), 0) })
+    rec.wear.forEach(function (x) {
+      var t = inTenThousandths(x.chance)
+      if (t >= 0) recipe.chancedInput(x.count + 'x ' + x.id, t, 0)
+      else exactly(x, function () { recipe.itemInputs(x.count + 'x ' + x.id) })
+    })
     if (rec.circuit > 0) recipe.circuit(rec.circuit)
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
     rec.itemsOut.forEach(function (x) {
       if (x.chance === null) recipe.itemOutputs(x.count + 'x ' + x.id)
-      else recipe.chancedOutput(x.count + 'x ' + x.id, inTenThousandths(x.chance), 0)
+      else {
+        var t = inTenThousandths(x.chance)
+        if (t >= 0) recipe.chancedOutput(x.count + 'x ' + x.id, t, 0)
+        else exactly(x, function () { recipe.itemOutputs(x.count + 'x ' + x.id) })
+      }
     })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
     if (rec.site) recipe.dimension(SITE)
@@ -170,17 +153,8 @@
   }
 
   function add(event, rec) {
-    if (needsJson(rec)) {
-      // GTM prefixes the type itself on the builder path: the same id here
-      var built = event.custom(jsonOf(rec))
-      var rl = 'grindless:' + rec.type + '/' + rec.name
-      // on a GT type the builder exposes id as a field, not a method
-      try { built.id(rl) } catch (e) { built.id = new (Java.loadClass('net.minecraft.resources.ResourceLocation'))(rl) }
-      rec.custom = true
-    } else {
-      addBuilt(event, rec)
-      rec.custom = false
-    }
+    addBuilt(event, rec)
+    rec.custom = fractional(rec)
   }
 
   function keysOf(rec) {
