@@ -1,10 +1,10 @@
 // TEST ONLY, MAX-A2 first six components (docs/eras/max.md, A2). Command: kubejs custom_command gg_test_max_components
 // Markers: GGTEST|max_components|<check>|PASS/FAIL|..., then GGTEST|max_components|DONE|failures=N.
 // Band ONLY: X 39448-39511, Z 0-63, Overworld Y 98-115 (zones.json row max_components).
-// Doubt (max.md L166): the six component rows ask VA[MAX] (2013265920 EU/t); gtceu:large_assembler on two gtceu:opv_energy_input_hatch_4a runs them.
+// Doubt (max.md L166): the six component rows ask VA[MAX] (2013265920 EU/t); gtceu:assembly_hall on two gtceu:opv_energy_input_hatch_4a runs them.
 //   lookup        every recipe id A2 writes is in the recipe manager; static: nothing skipped, pendingRoutes name the three A3 parts
 //   eut           each component recipe asks 2013265920 EU/t
-//   gcym_formed   large_assembler from its own preview shape with two OpV 4 A hatches forms
+//   gcym_formed   assembly_hall (the ZPM mega: 1 to 4 energy hatches) from its own preview shape with two OpV 4 A hatches forms
 //   run_<c>       the recipe lookup finds grindless:assembler/<c> and it starts
 //   out_<c>       the component reaches the output bus (inputs from the rows themselves, fluid in the input hatch)
 //   neg_formed / neg_blocked   the same machine with ONE OpV 4 A hatch forms but the motor row never starts (nothing in the output bus)
@@ -18,7 +18,7 @@
   var Y1 = 115
   var NAME = 'max_components'
   var VA_MAX = 2013265920
-  var GCYM = 'gtceu:large_assembler'
+  var GCYM = 'gtceu:assembly_hall'
   var HATCH = 'gtceu:opv_energy_input_hatch_4a'
   var COMPONENTS = ['max_electric_motor', 'max_electric_pump', 'max_electric_piston', 'max_robot_arm', 'max_emitter', 'max_fluid_regulator']
   var IDS = [
