@@ -4,7 +4,8 @@
 // (global.ggUxvKerrSling: in the client suite both halves run in the same JVM).
 //
 // While the test runs it keeps mc-runtime-test in the world (it quits on the first client tick with the player loaded and tickCount >= 100: the
-// player's tick counter is wound back until the server test prints DONE, or 30 minutes pass), reports the dimension the client sees, whether the
+// player's tick counter is wound back until the server test prints DONE, or 30 minutes pass), reports when EMI has loaded ('emiReady': the server
+// leg waits for it, so the dimension change never lands inside EMI's reload), the dimension the client sees, whether the
 // sky renderer's resource exists, and takes a screenshot into kubejs/exported/ when the server test asks for it ('shot').
 // KubeJS renames Entity.tickCount to age for scripts, so the field is read by the KubeJS name first, then the Mojang and SRG names.
 // var + function: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
@@ -111,6 +112,18 @@
     }
   }
 
+  function emi() {
+    if (val('emiReady') === 'true') return
+    var loaded = true
+    try {
+      loaded = String(Java.loadClass('dev.emi.emi.runtime.EmiReloadManager').isLoaded()) === 'true'
+    } catch (e) { /* no EMI: nothing to wait for */ }
+    if (loaded) {
+      S.put('emiReady', 'true')
+      log('client_emi', 'NOTE', 'EMI loaded: the server leg may move the player now')
+    }
+  }
+
   function tick() {
     var p = Client.player
     if (p === null || p === undefined) return
@@ -131,7 +144,7 @@
       log('client_hold', 'NOTE', 'gave up holding after 30 min')
       return
     }
-    var parts = [hold, observe, screenshot]
+    var parts = [hold, emi, observe, screenshot]
     for (var i = 0; i < parts.length; i++) {
       try {
         parts[i](p)
