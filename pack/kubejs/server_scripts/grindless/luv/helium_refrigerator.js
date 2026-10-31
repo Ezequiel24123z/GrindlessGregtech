@@ -343,7 +343,9 @@
     // MAX-A4 L39 step 5: the potted limiter coil run cold in the loop until it holds its critical current at 20 K
     { name: 'cold_fcl_module', input: 'grindless:fcl_coil', output: 'grindless:cold_fcl_module', eut: 30720, duration: 600 },
     // MAX-D2 L45 step 5: the HEMT die cooled in the loop and noise-tested at 4 K before it goes into a LNA module
-    { name: 'cryo_tested_lna', input: 'grindless:hemt_die', output: 'grindless:cryo_tested_lna', eut: 30720, duration: 600 }
+    { name: 'cryo_tested_lna', input: 'grindless:hemt_die', output: 'grindless:cryo_tested_lna', eut: 30720, duration: 600 },
+    // MAX-R1 L37 step 2: the iron core fragment chilled in the loop to the brittle range and milled cold (the EV cryogenic plant has no item slots)
+    { name: 'cryo_milled_core', input: 'grindless:iron_core_fragment', output: 'grindless:cryo_milled_core', eut: 2013265920, duration: 600 }
   ]
   HR.opvRows = OPV_ROWS
   HR.opvSkipped = []

@@ -55,7 +55,10 @@
           "itemsOut": [{ "id": "grindless:er3ni_ingot", "count": 4 }, { "id": "gtceu:quicklime_dust", "count": 3 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] },
         { "_why": "MAX-A2 line L35 (c21): Tb/Dy oxide reduced with calcium into the Terfenol-D ingot under helium, over iron; the lime goes to the kiln and the oxide skin leaves as dross.", "name": "terfenol_ingot", "circuit": 21, "eut": 7864320, "duration": 1200,
           "itemsIn": [{ "id": "grindless:tb_dy_oxide", "count": 3 }, { "id": "gtceu:iron_dust", "count": 2 }, { "id": "gtceu:calcium_dust", "count": 3 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:terfenol_ingot", "count": 4 }, { "id": "gtceu:quicklime_dust", "count": 3 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:terfenol_ingot", "count": 4 }, { "id": "gtceu:quicklime_dust", "count": 3 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] },
+        { "_why": "MAX-R1 (max.md, L13 step 3, c19): the carbonyl Fe-Ni powder melted with cobalt under helium into the segment alloy ingot; the oxide skin leaves as dross.", "name": "segment_alloy_ingot", "circuit": 19, "eut": 7864320, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:carbonyl_fe_ni_powder", "count": 4 }, { "id": "gtceu:cobalt_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:segment_alloy_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] }
       ]
     },
     "mixer": {

@@ -387,6 +387,15 @@
       itemsOut: [],
       fluidsOut: [{ id: 'gtceu:sn_li_eutectic', amount: 1000 }, { id: KEROSENE, amount: 950 }],
       eut: 1920, duration: 100
+    },
+    // MAX-R1 (max.md, L36 step 1, c30; repeat by item inputs): the Ta and Hf cuts precipitated together with ammonia and calcined to the mixed oxide of the hearth liner
+    {
+      name: 'hafnium_tantalum_oxide', mode: 'max', circuit: 30,
+      itemsIn: [{ id: 'grindless:k2taf7_dust', count: 2 }, { id: 'grindless:hafnium_chloride_dust', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:ammonia', amount: 3000 }],
+      itemsOut: [{ id: 'grindless:hafnium_tantalum_oxide', count: 4 }, { id: 'gtceu:ammonium_chloride_dust', count: 2 }],
+      fluidsOut: [],
+      eut: 1920, duration: 100
     }
   ]
 
