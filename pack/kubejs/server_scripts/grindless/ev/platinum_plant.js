@@ -755,6 +755,18 @@
       itemIn: 'grindless:pgm_residue', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
       itemsOut: [['gtceu:platinum_dust', 2], ['gtceu:iridium_dust', 1]], fluidsOut: [['minecraft:water', 2000]],
       eut: 1920, duration: 300
+    },
+    {
+      name: 'iridium_sponge', circuit: 19, site: 'grindless:nsc_belt',
+      itemIn: 'grindless:pgm_residue', fluidsIn: [['gtceu:hydrochloric_acid', 2000], ['gtceu:hydrogen', 1000]],
+      itemsOut: [['grindless:iridium_sponge', 1]], fluidsOut: [['minecraft:water', 1000]],
+      eut: 1920, duration: 300
+    },
+    {
+      name: 'wolter_iridium_recovery', circuit: 20,
+      itemIn: 'grindless:spent_wolter_module', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
+      itemsOut: [['gtceu:iridium_dust', 2]], fluidsOut: [['minecraft:water', 2000]],
+      eut: 1920, duration: 300
     }
   ]
 
@@ -774,6 +786,7 @@
       r.itemsOut.forEach(function (o) { recipe.itemOutputs(o[1] + 'x ' + o[0]) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
       recipe.EUt(r.eut).duration(r.duration)
+      if (r.site) recipe.dimension(r.site)
       recipe.addDataBool(KEEP_KEY, true)
     })
   }

@@ -125,6 +125,10 @@
   TABLE.push(row('ta_hf_c_billet', 'spark_plasma_sintering', 20,
     [item('grindless:ta_hf_c_powder', 4)], [], [item('grindless:ta_hf_c_billet', 1)], [], UHVA, 900))
 
+  // MAX-E1 (max.md, L25 step 5, c19): the slag compact sintered, never melted, into the feeder's slag pellet
+  TABLE.push(row('slag_pellet', 'spark_plasma_sintering', 19,
+    [item('grindless:slag_compact', 4)], [], [item('grindless:slag_pellet', 1)], [], UHVA, 600))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

@@ -123,6 +123,11 @@
     {
       name: 'sintering', mode: 'sintering', circuit: 3, feed: [REGOLITH, 16],
       out: [[BRICK, 4]], fluids: [], vented: '', energy: 4 * FURNACE_BRICK_ENERGY
+    },
+    // MAX-E1 (max.md, L25 step 3, c5): the devolatilised belt slag electrolysed; oxygen and silicon (the ferrosilicon's share) are the way back
+    {
+      name: 'slag_reduction', mode: 'electrolysis', circuit: 5, feed: ['grindless:devolatilised_slag', 4], electrode: true,
+      out: [['grindless:ca_al_oxide_residue', 2], [SI, 1]], fluids: [[O2, 3000]], vented: '', energy: 384000
     }
   ]
 

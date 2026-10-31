@@ -90,7 +90,7 @@ test('furnace pattern: 9 x 9 x 5, ten heliostats, condenser plates, firebox rece
 
 test('recipe lookup: every row in the dump, each furnace step with its own circuit, figures within UHV', () => {
   const furnace = HM.recipes.filter((r) => r.type === 'solar_vaporisation');
-  assert.deepEqual(furnace.map((r) => [r.name, r.circuit]), [['low_fraction', 1], ['high_fraction', 2], ['sinter_lining', 3]]);
+  assert.deepEqual(furnace.map((r) => [r.name, r.circuit]), [['low_fraction', 1], ['high_fraction', 2], ['sinter_lining', 3], ['devolatilised_slag', 8]]); // MAX-E1 c8 (L25)
   for (const r of HM.recipes) {
     assert.ok(Number.isInteger(r.duration) && r.duration > 0 && Number.isInteger(r.eut) && r.eut > 0 && r.eut <= VA_UHV, r.name);
     const rec = dump(r.recipeId);
@@ -99,7 +99,7 @@ test('recipe lookup: every row in the dump, each furnace step with its own circu
     assert.deepEqual(circuitOf(rec), r.circuit === null ? [] : [r.circuit], r.name);
     for (const x of r.itemsIn.concat(r.itemsOut)) assert.ok(x.count >= 1 && x.count <= 64, `${r.name} ${x.id}`);
   }
-  assert.equal(recipes.filter((r) => r.t === 'gtceu:solar_vaporisation').length, 3);
+  assert.equal(recipes.filter((r) => r.t === 'gtceu:solar_vaporisation').length, 4);
   assert.equal(recipes.filter((r) => r.t === 'gtceu:regolith_excavation').length, 1);
 });
 

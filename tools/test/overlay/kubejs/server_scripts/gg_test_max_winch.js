@@ -7,7 +7,7 @@
 //     static   nothing skipped; no pending route
 //     formed   the winch forms with two OpV 16 A dynamo hatches, a bus pair, 33 blocks high
 //     eut      c1 starts and its output is at least 2^30 EU/t
-//     output   the canister leaves the input bus and c1 keeps working (the worn segment has chance 1/128, so it is only noted)
+//     output   the canister leaves the input bus and c1 keeps working (the tether wear and the worn segment have chance 1/128, so they are only noted)
 // The dynamo hatches are emptied every tick so the generator never stops on a full buffer.
 (function () {
   var S = null
@@ -32,7 +32,7 @@ var PARTS = [DYNAMO, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus']
   var WORN = 'grindless:spent_tether_segment'
 
   var IDS = [
-    'geroch_power/geroch_canister_lowering', 'geroch_power/tether_rework', 'assembly_line/geroch_winch', 'canner/sealed_waste_log',
+    'geroch_power/geroch_canister_lowering', 'assembler/tether_rework', 'assembly_line/geroch_winch', 'canner/sealed_waste_log',
     'assembler/geroch_canister', 'chemical_reactor/exotic_coated_ribbon', 'autoclave/cured_exotic_ribbon', 'assembler/horizon_tether',
     'decay_heat/waste_cooling', 'hot_cell/vitrified_waste_log', 'star_lifting/proof_load_ribbon'
   ]
@@ -187,7 +187,7 @@ var PARTS = [DYNAMO, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus']
       check('formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', dynamo hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
       drain(u.energy)
-      setBus(u.bus, [[CANISTER, 1], [CIRCUIT, 1, '{Configuration:1}']])
+      setBus(u.bus, [[CANISTER, 1], ['grindless:horizon_tether', 1], [CIRCUIT, 1, '{Configuration:1}']])
       u.last = m.getRecipeLogic().getLastRecipe()
       u.started = S.tick
       u.phase = 'run'

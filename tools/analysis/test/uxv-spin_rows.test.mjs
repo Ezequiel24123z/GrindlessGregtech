@@ -141,7 +141,7 @@ test('photonic foundry c17-22 rinse with ultrapure water; MOCVD c13-16; implante
   assert.equal(new Set(mocvd).size, mocvd.length, `unique mocvd circuits ${mocvd}`);
   const q = run.global.grindless.qubits.recipes.filter((r) => r.type === 'ion_implantation');
   // OpV-A1 appended hpge_contacts (c15) after UXV-A3's three
-  assert.deepEqual(plain(q.filter((r) => r.name !== 'hpge_contacts' && r.name !== 'boron_delta_diamond' && r.name !== 'figured_dish_blank').slice(-3).map((r) => [r.name, r.circuit])), [['mtj_ion_etch', 8], ['mram_ion_etch', 9], ['stno_ion_mill', 10]]);
+  assert.deepEqual(plain(q.filter((r) => r.name !== 'hpge_contacts' && r.name !== 'boron_delta_diamond' && r.name !== 'figured_dish_blank' && r.name !== 'pin_diamond_plate').slice(-3).map((r) => [r.name, r.circuit])), [['mtj_ion_etch', 8], ['mram_ion_etch', 9], ['stno_ion_mill', 10]]);
   const imp = recipes.filter((r) => r.t === 'gtceu:ion_implantation').map((r) => (r.j.inputs.item.find((x) => x.content.type === 'gtceu:circuit') || { content: {} }).content.configuration);
   assert.equal(new Set(imp).size, imp.length, `unique implanter circuits ${imp}`);
 });

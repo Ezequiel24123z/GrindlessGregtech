@@ -195,6 +195,23 @@
     eut: 491520, duration: 1200
   })
 
+  // MAX-E1 (max.md, L26 steps 1-2): a diamond grown for the collector panel (diamond_cvd circuit 10), then its p-i-n junction implanted
+  // (ion_implantation circuit 17; c16 is the figured dish blank)
+  TABLE.push({
+    name: 'collector_diamond_plate', type: 'diamond_cvd', circuit: 10,
+    itemsIn: [{ id: PLATE, count: 1 }], notConsumedItems: [SEED],
+    fluidsIn: [{ id: 'gtceu:methane', amount: 2000 }, { id: 'gtceu:hydrogen', amount: 10000 }],
+    itemsOut: [{ id: 'grindless:collector_diamond_plate', count: 1 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 9500 }],
+    eut: 491520, duration: 1600
+  })
+  TABLE.push({
+    name: 'pin_diamond_plate', type: 'ion_implantation', circuit: 17,
+    itemsIn: [{ id: 'grindless:collector_diamond_plate', count: 1 }, { id: PHOSPHORUS, count: 1 }], notConsumedItems: [],
+    fluidsIn: [{ id: 'gtceu:argon', amount: 100 }],
+    itemsOut: [{ id: 'grindless:pin_diamond_plate', count: 1 }], fluidsOut: [],
+    eut: 491520, duration: 800
+  })
+
   Q.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit,
