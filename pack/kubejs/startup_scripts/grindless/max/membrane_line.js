@@ -1,4 +1,4 @@
-// priority: -5455
+// priority: -5458
 // -----------------------------------------------------------------------------------------------
 // MAX's membrane line (docs/eras/max.md, machine 3, lines L2, L3 and L11; package MAX-B1): the multiblock and its recipe type. The
 // recipes come from data/grindless/tables/membrane_line.json (server_scripts/grindless/max/membrane_line.js).

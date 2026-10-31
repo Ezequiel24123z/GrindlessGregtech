@@ -1,4 +1,4 @@
-// priority: 6554
+// priority: 6542
 // Gregtech Grindless - the EMI lines of MAX-A0's two draw rows (tables/vela_pasta.json, pasta_drawing c5 and c6, run at SGR 1806-20). The items and
 // the horizon strand material are named by F1. Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts.
 (function () {

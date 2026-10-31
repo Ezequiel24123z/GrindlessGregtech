@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:max_optical_table_casing"],
+  "text": ["emi.grindless.info.max_optical_table_casing.0"]
+}

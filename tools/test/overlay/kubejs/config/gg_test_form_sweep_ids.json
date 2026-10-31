@@ -286,7 +286,8 @@
   ],
   "max": [
    "gtceu:atom_interferometer_works",
-   "gtceu:membrane_line"
+   "gtceu:membrane_line",
+   "gtceu:rydberg_array_works"
   ],
   "moon": [
    "gtceu:lunar_drill"
