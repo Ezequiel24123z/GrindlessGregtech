@@ -113,6 +113,10 @@
   TABLE.push(row('exotic_composite_billet', 'spark_plasma_sintering', 21,
     [item('grindless:exotic_infiltrated_preform', 1)], [], [item('grindless:exotic_composite_billet', 1)], [], UHVA, 1200))
 
+  // MAX-D1 (max.md, L15 step 3, c18)
+  TABLE.push(row('radiator_collector_shell', 'spark_plasma_sintering', 18,
+    [item('grindless:sic_sic_plate', 4), item('grindless:tantalum_carbide_liner', 1)], [], [item('grindless:radiator_collector_shell', 1)], [], UHVA, 600))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

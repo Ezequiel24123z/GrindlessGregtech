@@ -100,7 +100,10 @@
           "itemsOut": [{ "id": "grindless:squeezer_waveguide_die", "count": 1 }], "fluidsOut": [] },
         { "_why": "MAX-A2 line L31 (c10): the isolator waveguide written into the YIG-on-LN wafer under a fused-silica cladding.", "name": "isolator_waveguide_die", "circuit": 10, "eut": 7864320, "duration": 1000,
           "itemsIn": [{ "id": "grindless:yig_on_ln_wafer", "count": 1 }, { "id": "grindless:fused_silica_tube", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:isolator_waveguide_die", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:isolator_waveguide_die", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-D1 (max.md, L15 step 2, c8): an orifice array of the droplet radiator's nozzle written into a tungsten plate and fitted to its UHTC nozzle.", "name": "droplet_nozzle_plate", "circuit": 8, "eut": 7864320, "duration": 1000,
+          "itemsIn": [{ "id": "gtceu:tungsten_plate", "count": 1 }, { "id": "grindless:uhtc_nozzle", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:droplet_nozzle_plate", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "chemical_reactor": {
