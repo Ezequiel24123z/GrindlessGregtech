@@ -227,7 +227,11 @@
             { "id": "grindless:boron_10_dust", "count": 1 },
             { "id": "gtceu:boron_dust", "count": 3 }
           ],
-          "fluidsOut": []
+          "fluidsOut": [],
+          "_": "OpV-D2: Pb-208 collector pocket; other lead returns to stock",
+          "name": "lead_208", "circuit": 12, "eut": 268435456, "duration": 400,
+          "itemsIn": [{"id": "gtceu:lead_dust", "count": 4}],
+          "itemsOut": [{"id": "grindless:lead_208_dust", "count": 1}, {"id": "gtceu:lead_dust", "count": 3}]
         }
       ]
     },
