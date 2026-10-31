@@ -6,7 +6,7 @@ Checks, tier by tier and **with no commands**, three things about the pack as it
 2. **Auto** (step 2): base resources are resupplied by machines (vein drill, greenhouse, pump, fluid rig, rock crusher...), not by hand. Only what's gathered by hand once to bootstrap counts.
 3. **Eras** (step 3, decision of 2026-10-24): nothing from an era can need a resource that comes from a later era. Every era's item has to be buildable with **every** later-era resource removed from every source (veins, byproducts, bees, addon recipes, other dimensions).
 
-Separately, a step that doesn't belong to any tier: the **obtain audit** (`--pass obtain`, see [below](#obtain-audit---pass-obtain)) lists what is never obtained anywhere in the pack and classifies it. And a check of what the player *sees*: the **EMI coverage audit** (`emi-coverage.mjs`, see [below](#emi-coverage-audit-emi-coveragemjs)) asks that EMI shows how every item of ours is obtained and used.
+Separately, a step that doesn't belong to any tier: the **obtain audit** (`--pass obtain`, see [below](#obtain-audit---pass-obtain)) lists what is never obtained anywhere in the pack and classifies it. And a check of what the player *sees*: the **EMI coverage audit** (`emi-coverage.mjs`, see [below](#emi-coverage-audit-emi-coveragemjs)) asks that EMI shows how every item of ours is obtained and used. Three Reforge tools measure the pack rather than its progression: the **capacity lint** ([below](#capacity-lint-capacity-lintmjs), part of T0), the **census** ([below](#census-censusmjs)) and the **cost matrix** ([below](#cost-matrix-cost-matrixmjs)).
 
 ## How to run it
 
@@ -116,6 +116,45 @@ node tools\analysis\emi-coverage.mjs --expect        # rewrites tools/test/overl
 - **Info pages** are EMI's own data recipes, `pack/kubejs/assets/emi/recipe/additions/grindless/<page>.json` (`"type": "emi:info"`, `stacks`, `text` = translation keys; EMI only reads them in the `emi` namespace), with their text in `client_scripts/grindless/emi_info_lang.js` (en_us and es_es). EMI shows a page under both the recipes and the uses of every stack on it. They cover what has no recipe: right-click actions, structure blocks, a route of a type EMI never shows, what an item is kept for; what a recipe already shows gets no page. An item made by a recipe EMI never shows, or whose only use is a place in a structure, must have one (`requirePages`).
 - **Also checked**: no recipe of ours is dropped by EMI for a disabled stack (a hidden output, or an input or catalyst whose every stack is hidden: EMI drops the whole recipe, and with it a route even of a covered item); every recipe type of ours shows at least one recipe; page stacks exist and tags have members; every page key has its en_us and es_es text; old items kept for saves (hidden from the index) are listed with their conversion.
 - **The native fixture** (`tools/test/overlay/kubejs/client_scripts/gg_test_emi_coverage.js`, see `tools/test/README.md`) asks the real EMI for every audited stack against `--expect`'s file; `test/emi-coverage.test.mjs` fails when that file is stale.
+
+## Capacity lint (`capacity-lint.mjs`)
+
+Every GTM recipe our scripts define must fit its machine's item slots and fluid tanks at the recipe's tier. It runs in T0 (`tools\Check-Fast.ps1`, check `capacity`, about 10 s) with no Minecraft:
+
+```powershell
+node tools\analysis\capacity-lint.mjs                                # exit 0 clean, 1 new or stale entries, 2 tool failure
+node tools\analysis\capacity-lint.mjs --write-snapshot <dump dir>    # rebuilds capacity_snapshot.json from a bench dump's machines.json
+node tools\analysis\capacity-lint.mjs --write-known                  # rewrites capacity_known.json (only after fixing recipes)
+```
+
+- **Rules** (`lib/capacity.mjs`, with the GTM 7.5.3 sources in its header): a recipe's tier is the lowest tier whose voltage covers its EU/t. It fits if a singleblock of its type at that tier (or the next tier that exists) holds it, each fluid in one tank; the programmed circuit has its own slot. A recipe that fits only a multiblock's hatches one tier up is a warning (multiblock item slots are unbounded); one that fits nothing is an error. The type's max IO is always enforced: GTM 7.5.3 only logs "Trying to add more inputs/outputs than RecipeType can support" and keeps the ingredients, but EMI shows only the type's slots and no singleblock runs the recipe.
+- **Ratchet**: `capacity_known.json` lists today's errors (recipe id and reason; 87 at Reforge Phase 1). T0 fails on a new error and on a fixed one still listed, so the list only shrinks.
+- **Snapshot**: `capacity_snapshot.json` comes from a bench dump (`gg_dump.js` writes each machine's item handlers and tanks and each recipe type's max IO). Refresh it after a GTM or machine-set change: `Invoke-Reachability.ps1 -Tier max -PackDir <copy of pack> -OutDir <out>`, then `--write-snapshot <out>\dump`.
+- **Limits**: hatches one tier up is an assumption; one fluid per tank is stricter than GTM, which spreads a fluid over several hatches; only types starting with `gtceu:` or present in the snapshot are checked; recipes a script derives from the mods' own recipes and GTM's generated recipes are not seen (the static stand-in's limits, see the EMI coverage audit).
+
+## Census (`census.mjs`)
+
+What each era registers, how many recipes and quests it has, and the suspicious content found on the way (Reforge Phase 0, `docs/reforge/00_diagnosis.md`). About 6 minutes, because it runs the pack's scripts in the static stand-in:
+
+```powershell
+node tools\analysis\census.mjs --dump <dump dir> [--errors <kubejs-errors.txt>] [--out <dir>]   # default out: docs/reforge/data
+```
+
+- **Counting rules**: registered things take the era of their startup script folder; recipes take the era of the server script folder that adds them (recipes no script adds are "base"; table-generated recipes are not attributed to an era); quests take the era of their chapter file (`<era>_age`, `pl_<era>`).
+- **Outputs**: `00_census.json` (counts), `00_recipe_cost_by_era.csv`, `00_unused_items.csv`, `00_lang_gaps.csv`, `00_asset_gaps.csv` (checked by file name, so false positives are possible), `00_quest_refs.csv`, `00_duplicate_recipes.csv` and `00_dropped_inputs.csv`. The last one keeps its name but lists GTM's slot-limit warnings, and GTM keeps those ingredients; the capacity lint is the authoritative list.
+
+## Cost matrix (`cost-matrix.mjs`)
+
+The cumulative base cost of the key items per era (core components, hulls, energy hatches, circuits, controllers, era capstones), from a native dump. It sets and checks the cost curve of Reforge Phase 2. A few seconds, no Minecraft:
+
+```powershell
+node tools\analysis\cost-matrix.mjs --dump <dump dir> --out <dir>                     # writes 01_cost_matrix.csv and .md
+node tools\analysis\cost-matrix.mjs --dump <dump dir> --out <dir> --compare <old.csv>  # also prints new/old ratios per group and era
+```
+
+- **Method** (`lib/cost.mjs`, header): for every item and fluid, the cheapest recipe chain down to base resources (vein-drill outputs, natural fluids, free world blocks, source recipes such as gas collectors), expanded into base amounts and scored as base items plus fluid litres. A loop that multiplies matter cannot pump a cost down. Every setting that changes a number (multi-output allocation, chances, catalysts, free resources, excluded recipes such as recycling and unpacking, molten metal priced as its ingot) is in `cost_matrix.json` and printed in the document.
+- **Outputs**: `docs/reforge/01_cost_matrix.csv` and `.md`; a re-run refreshes only the generated part between the `<!-- cost-matrix:begin/end -->` markers. Debug aids that write nothing: `--why <ids>` (what blocks an unreachable item) and `--trace <ids>` (the chosen chain with per-unit costs).
+- **Limits**: era-to-era ratios are more dependable than absolute scores (in-pack arbitrage moves them); an item with no route to base resources is listed as unreachable, not priced.
 
 ## Limits
 
