@@ -265,7 +265,8 @@ test('rhenium is GTM\'s bare element: it gets its ingot in materialModification,
 });
 
 test('gates are remelted and the dross has a destination; the foundry refuses to void', () => {
-  for (const r of T.types.single_crystal_casting.recipes) {
+  // MAX-A2's two rows make a bulk and a rod, not a cast with a gate
+  for (const r of T.types.single_crystal_casting.recipes.filter((x) => !/^MAX-A2/.test(x._why || ''))) {
     assert.ok(outputs(r).some((o) => o === 'grindless:sx_gate' || o === 'grindless:sx_dross'), r.name);
   }
   assert.deepEqual(outputs(by('macerator', 'sx_gate_remelt')), ['grindless:sx_master_alloy_dust']);
@@ -321,6 +322,7 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     // OpV-B3a's c21, c22 and c32 rows are registered in opv/antimatter.js (read with the opv directory below)
     // OpV-A3's c22 rows (W-Re can and re-melt): the can items in opv/field_press.js, the chain lamina stack in opv/foundation.js
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'foundation.js'))
+    + read(path.join(kube, 'startup_scripts', 'grindless', 'max', 'foundation.js')) // MAX-A2's c25 bulk and c27 rod, registered by MAX-F
     + fs.readdirSync(path.join(kube, 'startup_scripts', 'grindless', 'opv')).filter((f) => f.endsWith('.js')).map((f) => read(path.join(kube, 'startup_scripts', 'grindless', 'opv', f))).join('\n');
   // OpV-B2's c23 thaws OpV-A0's caged_ni_chain and OpV-A1's c21 takes A0's chain_mesh_weave: both registered in opv/chain_matter.js
   for (const [, r] of allRows().filter(([w]) => w.startsWith('electron_beam.json'))) {
@@ -335,7 +337,8 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
   }
   for (const [type, dataKey] of [['electron_beam_refining', 'grindless_electron_beam'], ['single_crystal_casting', 'grindless_single_crystal_casting']]) {
     const rowLang = lang + read(path.join(kube, 'client_scripts', 'grindless', 'opv_pair_converter_lang.js'))
-      + read(path.join(kube, 'client_scripts', 'grindless', 'opv_antimatter_lang.js')); // OpV-B3a's c21, c22 and c32 row names
+      + read(path.join(kube, 'client_scripts', 'grindless', 'opv_antimatter_lang.js')) // OpV-B3a's c21, c22 and c32 row names
+      + read(path.join(kube, 'client_scripts', 'grindless', 'max_components_lang.js')); // MAX-A2's c25 and c27
     for (const r of T.types[type].recipes) assert.ok(rowLang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
 });

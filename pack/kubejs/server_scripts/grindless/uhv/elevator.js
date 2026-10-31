@@ -139,6 +139,10 @@
   TABLE.push({ name: 'belt_trim_respin', type: 'pbo_synthesis', circuit: 9, itemsIn: [item('grindless:pbo_belt_trim', 4)], fluidsIn: [fluid(PPA, 500)],
     itemsOut: [], fluidsOut: [fluid(DOPE, 500)], eut: UVA, duration: 300 })
 
+  // MAX-A0 line L1 (docs/eras/max.md): a horizon strand wire braided in PBO fibre (circuit 10), the core of the horizon strand cable
+  TABLE.push({ name: 'horizon_braid', type: 'pbo_synthesis', circuit: 10, itemsIn: [item('gtceu:horizon_strand_single_wire', 1), item(PBO, 2)], fluidsIn: [],
+    itemsOut: [item('grindless:pbo_braid_sleeve', 1)], fluidsOut: [], eut: UHVA, duration: 200 })
+
   // line 24's side steps on GTM's own machines
   var SIDE = [
     { name: 'trichlorobenzene', type: 'chemical_reactor', circuit: 3, itemsIn: [],

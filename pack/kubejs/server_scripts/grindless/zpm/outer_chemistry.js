@@ -122,6 +122,14 @@
       fluidsIn: [{ id: 'gtceu:methane', amount: 500 }], notConsumedFluids: [{ id: 'gtceu:tin', amount: 1000 }, { id: 'gtceu:nickel', amount: 1000 }],
       itemsOut: [{ id: 'grindless:hopg_blank', count: 1 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 1000 }],
       eut: ZPM_VA, duration: 600
+    },
+    // MAX-A2 line 41: the silylated alcogel dried supercritically into the superleak plug (circuit 0, keyed by the alcogel itself)
+    {
+      name: 'aerogel_superleak_plug', type: 'supercritical_drying', circuit: 0,
+      itemsIn: [{ id: 'grindless:silylated_alcogel', count: 2 }], notConsumedItems: [],
+      fluidsIn: [{ id: 'gtceu:ethanol', amount: 500 }], notConsumedFluids: [{ id: 'gtceu:carbon_dioxide', amount: 1000 }],
+      itemsOut: [{ id: 'grindless:aerogel_superleak_plug', count: 2 }], fluidsOut: [{ id: 'gtceu:ethanol', amount: 500 }],
+      eut: LUV_VA, duration: 1200
     }
   ]
 

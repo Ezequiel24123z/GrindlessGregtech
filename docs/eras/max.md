@@ -798,7 +798,7 @@ OpV's *Common to every package* (opv.md, same heading) applies with `opv` replac
 | UHV PBO plant / tether ribbon (`uhv/elevator.js`) | 1-7, OpV c8-9 | A0 c10, B1 c11-12 / D3 c13 |
 | UHV crystal growth (`tables/crystals.json`) | 1-18, OpV c19-27 | A1 c28-29, B3 c30, B2 c31, B3 c32; H1 (landed, L38) c32; D2 (L45) c32 again: programmed circuits stop at 32 (decision 48), so a repeat is allowed when the item inputs differ (OpV-F3 rule) |
 | UHV clock lab / MBE / SiC fab | 1-3, OpV c4-5 / 1-8, OpV c9-11 / 1-5, OpV c6-8 | G1 c6, B3 c7 / A1 c12, B2 c13, D2 c14 / A3 c9, H1 c10 |
-| UHV SPS / xenobotany | 1-7, OpV c8-15 / 0-4 | A2 c16, D1 c17-18, E1 c19, R1 c20 / B4 c5 |
+| UHV SPS / xenobotany | 1-7, OpV c8-15 / 0-4 | A2 c21 (OpV chain_composite_rod/rotor hold c16-17), D1 c18 and c22, E1 c19, R1 c20 / B4 c5 |
 | UV MOCVD / fibre draw (`uv/photonics.js`) | 1-16, OpV c17-22 / 1-16, OpV c17-18 | A1 c23-24, B1 c25, B3 c26-27, D2 c28 / B3 c19-20 |
 | UV zone refining / SRF / ark | 1-9, OpV c10-11 / 1-5, OpV c6 / 1-3 | B1 c12, B3 c13-14 / D4 c7, G1 c8 / B4 c4 |
 | ZPM diamond lattice / implanter | file 1-4, 6-8 / 1-8, OpV c9-13 | A3 c9, E1 c10 / A3 c14, D2 c15, E1 c16 |
@@ -913,10 +913,11 @@ Order: S0-1, S0-2, S0-3 first (they gate F1, A0, G1), then the rest; S0-12 is on
 
 #### A2. First six components
 
-- **Objective:** L9, L10 (CC c5, CVI c12-13, HTS c11, SiC fibre, SPS c16, SHeQUID c5, GTM rows); L31 (nitride works f, YIG LPE f, TFLN c12, femto c10), L32 (extraction c34, single crystal foundry f, high flux f, nitride works f+1), L35 (extraction c36, levitation c21, single crystal foundry f+2), L41 (GTM bath and reactor rows, aerogel c7, SHeQUID c7, mK c11); motor, pump, piston, robot arm, emitter, fluid regulator (*Components*).
+- **Objective:** L9, L10 (CC c5, CVI c12-13, HTS c11, SiC fibre, SPS c21, SHeQUID c5, GTM rows); L31 (nitride works f, YIG LPE f, TFLN c12, femto c10), L32 (extraction c34, single crystal foundry f, high flux f, nitride works f+1), L35 (extraction c36, levitation c21, single crystal foundry f+2), L41 (GTM bath and reactor rows, aerogel works, keyed by silylated_alcogel (c0), SHeQUID c7, mK c11); motor, pump, piston, robot arm, emitter, fluid regulator (*Components*).
 - **`<name>`:** `components`. **Allowed (extra):** the named older tables.
 - **Depends on:** A0, A1; OpV-A1 (`superfluid_he3_seal`), OpV-A2 (`opv_harmonic_drive`, `cryo_optical_link`).
 - **Pending:** conveyor, sensor and field generator: pendingRoutes naming A3.
+- **Machine (integrator, bench-run):** MAX components run in gtceu:assembly_hall on two OpV 4 A hatches (GCyM large_assembler takes one energy hatch; gtceu:max_assembler does not exist).
 - **Acceptance:** six components obtainable with MAX parts only.
 - **Tests:** T0. T1: `gg_test_max_components`, band by integrator. Doubt: a component recipe at VA[MAX] on the assembler with two OpV 4 A hatches. **Commits:** 2.
 
@@ -966,7 +967,7 @@ Order: S0-1, S0-2, S0-3 first (they gate F1, A0, G1), then the rest; S0-12 is on
 
 #### D1. Sgr A* modes on older machines
 
-- **Objective:** L15, L16, L24 rows (skimmer, mass filter, FRC former, BZ dynamo generator, droplet works, Penrose engine generator at Sgr A*; extraction c32, femto c8, SPS c17-18, megabar c9, degenerate harvester c2); the two generator balances.
+- **Objective:** L15, L16, L24 rows (skimmer, mass filter, FRC former, BZ dynamo generator, droplet works, Penrose engine generator at Sgr A*; extraction c32, femto c8, SPS c18 and c22, megabar c9, degenerate harvester c2); the two generator balances.
 - **`<name>`:** `sgra_modes`. **Allowed (extra):** `uxv/cygnus_disk.js`, `uxv/cygnus_lift.js`, `uiv/cygnus.js`, `uiv/matrioshka.js` tables and the named older tables.
 - **Depends on:** T1, B1, A2; S0-10.
 - **Acceptance:** hot flow to flux-loaded FRC at Sgr A*; generators at their balance.

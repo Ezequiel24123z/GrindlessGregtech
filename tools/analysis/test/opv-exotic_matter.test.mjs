@@ -22,7 +22,7 @@ const conditions = (r) => JSON.stringify(r.j.recipeConditions || []);
 
 test('D2 scripts register every local row and both controllers without errors', () => {
   assert.deepEqual(run.errors.filter((e) => /opv[\\/]exotic_matter/.test(e.file)), []);
-  assert.equal(EM.recipes.length, 6);
+  assert.equal(EM.recipes.length, 7); // MAX-A0 appended c4
   assert.equal(EM.controllerRecipes.length, 2);
   for (const id of [...EM.recipes, ...EM.controllerRecipes]) assert.ok(docs.some((r) => r.i === id), id);
 });
@@ -75,7 +75,7 @@ test('exact c3 is the sole D2 output-free row, and it consumes only negative res
 
 test('vault c1 feeds, c2 returns beta-active tailings, c3 stabilises; hot cell c19 returns inert lead', () => {
   const rows = T.types.strangelet_growth.recipes;
-  assert.deepEqual(rows.map((r) => [r.circuit, r.eut, r.duration]), [[1, 268435456, 1600], [2, 503316480, 2400], [3, 503316480, 2400]]);
+  assert.deepEqual(rows.map((r) => [r.circuit, r.eut, r.duration]), [[1, 268435456, 1600], [2, 503316480, 2400], [3, 503316480, 2400], [4, 503316480, 1200]]); // MAX-A0 appended c4
   assert.deepEqual(rows[0].itemsIn, [{ id: 'grindless:strangelet_seed', count: 1 }, { id: 'grindless:neutronium_pellet', count: 4 }]);
   assert.ok(ids(rows[1], 'itemsOut').includes('grindless:strangelet_tailings'));
   assert.ok(ids(rows[2], 'itemsIn').includes('grindless:field_frozen_plate'));

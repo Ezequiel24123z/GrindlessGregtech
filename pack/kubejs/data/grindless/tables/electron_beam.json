@@ -128,7 +128,13 @@
           "itemsOut": [{ "id": "grindless:sx_pump_impeller", "count": 1 }, { "id": "grindless:sx_dross", "count": 1 }], "fluidsOut": [] },
         { "name": "turbine_wheel", "circuit": 3, "eut": 3932160, "duration": 1200,
           "itemsIn": [{ "id": "grindless:coated_sx_blade", "count": 8 }, { "id": "grindless:sx_master_alloy_dust", "count": 2 }, { "id": "grindless:ceramic_shell_mould", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:brayton_turbine_wheel", "count": 1 }, { "id": "grindless:sx_gate", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:brayton_turbine_wheel", "count": 1 }, { "id": "grindless:sx_gate", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-A2 line L32 (c25, first free of the type): the YBCO precursor powder melt-textured under the beam from a seed in a ceramic mould into the bearing bulk.", "name": "tsmg_ybco_bulk", "circuit": 25, "eut": 1966080, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:ybco_precursor_powder", "count": 4 }, { "id": "grindless:ceramic_shell_mould", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:oxygen", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:tsmg_ybco_bulk", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-A2 line L35 (c27, f+2; c26 is B1's): the Terfenol-D ingot re-melted and drawn under argon in a ceramic mould into the <112>-oriented rod.", "name": "oriented_terfenol_rod", "circuit": 27, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:terfenol_ingot", "count": 4 }, { "id": "grindless:ceramic_shell_mould", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:oriented_terfenol_rod", "count": 2 }], "fluidsOut": [] }
       ]
     },
     "mixer": {

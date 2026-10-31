@@ -53,7 +53,13 @@
           "itemsOut": [{ "id": "grindless:aln_powder", "count": 2 }], "fluidsOut": [] },
         { "_why": "OpV-A3 (opv.md line 45): the AlN kerf from slicing the boule re-pressed into powder; a quarter is lost as fines.", "name": "aln_kerf_repress", "circuit": 17, "eut": 1966080, "duration": 300,
           "itemsIn": [{ "id": "grindless:aln_kerf", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:aln_powder", "count": 3 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:aln_powder", "count": 3 }], "fluidsOut": [] },
+        { "_why": "MAX-A2 line L31 (c18): Fe16N2 powder sintered in a nitrogen stream into the isolator's ring magnet.", "name": "fe16n2_ring_magnet", "circuit": 18, "eut": 1966080, "duration": 900,
+          "itemsIn": [{ "id": "gtceu:fe16n2_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:fe16n2_ring_magnet", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MAX-A2 line L32 (c19): the irradiated YBCO bulk sintered onto a Fe16N2 ring magnet in argon, the bearing's rotor ring.", "name": "bearing_rotor_ring", "circuit": 19, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:irradiated_ybco_bulk", "count": 1 }, { "id": "grindless:fe16n2_ring_magnet", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:bearing_rotor_ring", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "sic_fibre_spinning": {
@@ -67,7 +73,10 @@
           "itemsOut": [{ "id": "grindless:cured_sic_fibre", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 200 }] },
         { "name": "sic_fibre", "circuit": 3, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "grindless:cured_sic_fibre", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:sic_fibre", "count": 1 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 500 }, { "id": "gtceu:hydrogen", "amount": 1000 }] }
+          "itemsOut": [{ "id": "grindless:sic_fibre", "count": 1 }], "fluidsOut": [{ "id": "gtceu:methane", "amount": 500 }, { "id": "gtceu:hydrogen", "amount": 1000 }] },
+        { "_why": "MAX-A2 line L10 (c18): four SiC fibres drawn together under argon into the tow the rod and rotor are woven from.", "name": "sic_tow", "circuit": 18, "eut": 1966080, "duration": 500,
+          "itemsIn": [{ "id": "grindless:sic_fibre", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_tow", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "chemical_vapour_infiltration": {
@@ -105,7 +114,13 @@
           "itemsOut": [{ "id": "grindless:superpolished_sic_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:tungsten_hexafluoride", "amount": 250 }, { "id": "gtceu:hydrochloric_acid", "amount": 1500 }] },
         { "_why": "OpV-B3a line 27: the REBCO octupole winding potted by chemical vapour infiltration (a carbon matrix from methane holds the turns against the quench forces); the hydrogen goes back to stock.", "name": "octupole_potting", "circuit": 9, "eut": 1966080, "duration": 4800,
           "itemsIn": [{ "id": "grindless:octupole_winding", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methane", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:potted_octupole_winding", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] }
+          "itemsOut": [{ "id": "grindless:potted_octupole_winding", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 2000 }] },
+        { "_why": "MAX-A2 line L9 (c12): the stabilised REBCO tape coated in a SiC matrix from methyltrichlorosilane into the coil former; the HCl goes back to stock.", "name": "cmc_coil_former", "circuit": 12, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:stabilised_rebco_tape", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:cmc_coil_former", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] },
+        { "_why": "MAX-A2 line L10 (c13): the SiC tow woven and densified from methyltrichlorosilane into the SiC/SiC preform; the HCl goes back to stock.", "name": "sic_sic_preform", "circuit": 13, "eut": 1966080, "duration": 4800,
+          "itemsIn": [{ "id": "grindless:sic_tow", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:methyltrichlorosilane", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:sic_sic_preform", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 3000 }] }
       ]
     },
     "chemical_reactor": {

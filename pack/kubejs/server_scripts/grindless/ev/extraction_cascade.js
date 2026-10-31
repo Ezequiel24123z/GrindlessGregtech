@@ -333,6 +333,24 @@
       itemsOut: [{ id: 'grindless:er_ho_oxide', count: 5 }, { id: ND_CL, count: 16 }],
       fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 6000 }],
       eut: 1920, duration: 100
+    },
+    // MAX-A2 (max.md line 32, c30; repeat by item inputs, cap 32): yttrium oxide dissolved in nitric acid and precipitated as the YBCO precursor
+    {
+      name: 'ybco_precursor_powder', mode: 'max', circuit: 30,
+      itemsIn: [{ id: 'grindless:yttrium_oxide_dust', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:nitric_acid', amount: 1000 }, { id: 'minecraft:water', amount: 2000 }],
+      itemsOut: [{ id: 'grindless:ybco_precursor_powder', count: 4 }],
+      fluidsOut: [],
+      eut: 1920, duration: 100
+    },
+    // MAX-A2 (max.md line 35, c31; repeat by item inputs): the Tb/Dy cut of the mixed chlorides; the Nd raffinate goes to the chloride electrolyser, the strip acid returns as HCl
+    {
+      name: 'tb_dy_strip', mode: 'max', circuit: 31,
+      itemsIn: [{ id: MIX_CL, count: 16 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:tb_dy_oxide', count: 4 }, { id: ND_CL, count: 8 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 3000 }],
+      eut: 1920, duration: 100
     }
   ]
 
