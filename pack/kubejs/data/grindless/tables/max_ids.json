@@ -44,7 +44,7 @@
       "grindless:max_field_generator"
     ],
     "parallel_hatch": [
-      "grindless:max_parallel_hatch"
+      "gtceu:max_parallel_hatch"
     ],
     "furnace": [
       "grindless:nsc_planetesimal"

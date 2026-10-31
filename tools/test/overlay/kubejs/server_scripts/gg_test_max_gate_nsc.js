@@ -32,6 +32,7 @@
   var GATE_HATCH = 'gtceu:opv_wireless_energy_hatch_16a'
   var CELL = 'grindless:opv_smes_cell'
   var SEED = 'grindless:nsc_belt_seed'
+  var PROBE = 'grindless:launched_gc_probe'
   var LAUNCHED = 'grindless:launched_belt_seed'
   var MARK = 'uxvPlatform_nsc'
   var GATE_ORIGIN = { x: 40056, y: 100, z: 8 }
@@ -232,7 +233,7 @@
     check('static_published', !!WG && !!WG.recipes && !!MN, 'global.grindless.warpGate and maxGateNsc')
     var row = WG.recipes.filter(function (r) { return r.name === 'hold_nsc_belt' })[0]
     check('static_c15_row', !!row && row.circuit === 15 && row.eut === EUT && row.duration === DURATION && row.site === 'sgr_a_orbit' &&
-      row.itemsIn.length === 1 && row.itemsIn[0].id === SEED && row.kept.length === 0 &&
+      row.itemsIn.length === 2 && row.itemsIn[0].id === SEED && row.itemsIn[1].id === PROBE && row.kept.length === 0 &&
       row.itemsOut.length === 1 && row.itemsOut[0].id === LAUNCHED, JSON.stringify(row || null))
     var hold = recipe(HOLD)
     var seed = recipe('grindless:assembly_line/nsc_belt_seed')
@@ -274,7 +275,7 @@
     if (!ok) { finish(); return false }
     W().track(S.server.getLevel(SGR), pos(S.gatePos.e0.x, S.gatePos.e0.y, S.gatePos.e0.z))
     W().track(S.server.getLevel(SGR), pos(S.gatePos.e1.x, S.gatePos.e1.y, S.gatePos.e1.z))
-    setBus(bus, [[CIRCUIT, 1, '{Configuration:15}'], [SEED, 1]])
+    setBus(bus, [[CIRCUIT, 1, '{Configuration:15}'], [SEED, 1], [PROBE, 1]])
     S.gateBus = bus
     S.gateOut = at(SGR, S.gatePos.out)
     S.server.persistentData.remove(MARK)
@@ -339,7 +340,7 @@
         var inBus = contents(S.gateBus.getInventory())
         check('hold_long', true, 'WORKING through the whole run; network stored ' + S.storedAtStart + ' at the start, ' + stored() + ' at the end')
         check('launched_out', out.indexOf(LAUNCHED + 'x1') >= 0, 'output bus ' + out)
-        check('seed_consumed', inBus.indexOf('nsc_belt_seed') < 0, 'input bus ' + inBus)
+        check('seed_consumed', inBus.indexOf('nsc_belt_seed') < 0 && inBus.indexOf('launched_gc_probe') < 0, 'input bus ' + inBus)
         S.phase = 'platform'
         S.platformAt = S.tick
       }

@@ -44,7 +44,7 @@ test('c15 is 2^33 = V[OpV] x 16 A for 1,200 t at the Sgr A* ring, burns the seed
   assert.equal(c15.eut, 2 ** 33);
   assert.equal(c15.duration, 1200);
   assert.equal(c15.site, 'sgr_a_orbit');
-  assert.deepEqual(c15.itemsIn, [{ id: 'grindless:nsc_belt_seed', count: 1 }]);
+  assert.deepEqual(c15.itemsIn, [{ id: 'grindless:nsc_belt_seed', count: 1 }, { id: 'grindless:launched_gc_probe', count: 1 }]);
   assert.deepEqual(c15.kept, []);
   assert.deepEqual(c15.itemsOut, [{ id: 'grindless:launched_belt_seed', count: 1 }]);
   assert.equal(gate[gate.length - 1], c15, 'the row is appended last');

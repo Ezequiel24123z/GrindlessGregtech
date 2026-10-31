@@ -95,8 +95,5 @@
   ],
   "pendingRoutes": [
   ],
-  "pendingUses": [
-    { "id": "grindless:launched_gc_probe", "package": "T2", "reason": "MAX-T1 returns it from gate c14; T2's belt seed chain takes it and     T2 checks the use is there" },
-        { "id": "grindless:launched_belt_seed", "package": "C1", "reason": "MAX-T2 returns it from gate c15; the max-nsc grant (tiers/max.json) is its use and C1 checks the grant is there" }
-          ]
+  "pendingUses": []
 }
