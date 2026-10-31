@@ -29,7 +29,7 @@ test('the stand-in runs the UXV-A5 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(SL.skipped), []);
   assert.deepEqual(plain(SL.clashes), []);
-  assert.equal(SL.recipes.length, 12 + 1); // MAX-H1 appended racetrack c3 racetrack_memory_die (line 38)
+  assert.equal(SL.recipes.length, 12 + 1 + 1); // MAX-H1 appended racetrack c3 racetrack_memory_die (line 38); MAX-A2 LPE c4 bi_yig_film (line 31)
 });
 
 test('5 items registered by the startup file, named in en_us and es_es', () => {
@@ -77,7 +77,7 @@ test('the racetrack rows: circuits 1-2, patterned wafer then chip, platinum-grou
 
 test('the LPE rows: flux, the YIG film with the crucible kept, the skim that gives lpe_dross', () => {
   const rows = SL.recipes.filter((r) => r.type === 'liquid_phase_epitaxy');
-  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['lpe_flux', 1], ['yig_film', 2], ['flux_skim', 3]]);
+  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit])), [['lpe_flux', 1], ['yig_film', 2], ['flux_skim', 3], ['bi_yig_film', 4]]);
   assert.deepEqual(plain(rows[0].fluidsOut), [{ id: 'gtceu:lpe_flux', amount: 4000 }]);
   const film = rows[1];
   assert.deepEqual(plain(ids(film.kept)), ['grindless:pt_lpe_crucible'], 'the crucible is not consumed');
@@ -157,7 +157,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('older rows: only the hall row sits outside this package\'s files', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_logic\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 1 + 3, 'rows, MAX-H1\'s racetrack c3 and three controllers');
+  assert.equal(mine.length, 12 + 1 + 1 + 3, 'rows, MAX-H1\'s racetrack c3, MAX-A2\'s LPE c4 and three controllers');
 });
 
 test('the held F1 ids are free: the A5 hold rules are deleted, the pending EMI entries too', () => {

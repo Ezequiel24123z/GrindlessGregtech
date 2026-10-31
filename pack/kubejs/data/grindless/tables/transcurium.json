@@ -63,6 +63,19 @@
           "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:californium_252_source", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-A2 line L32 (c5): fast-neutron fission tracks written into the YBCO bulk, the pinning centres of the bearing.",
+          "name": "irradiated_ybco_bulk",
+          "circuit": 5,
+          "eut": 491520,
+          "duration": 1200,
+          "itemsIn": [{ "id": "grindless:tsmg_ybco_bulk", "count": 1 }],
+          "kept": [{ "id": "grindless:californium_252_source", "count": 1 }],
+          "charge": [],
+          "fluidsIn": [{ "id": "gtceu:helium", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:irradiated_ybco_bulk", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },

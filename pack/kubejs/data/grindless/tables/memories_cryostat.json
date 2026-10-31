@@ -146,7 +146,10 @@
         },
         { "_why": "MAX-A1 (max.md, L7): the transducer wafer cooled and mounted in the mK module into the cryo photonic interposer", "name": "cryo_photonic_interposer", "circuit": 8, "eut": 31457280, "duration": 1600,
           "itemsIn": [{ "id": "grindless:transducer_wafer", "count": 1 }], "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }], "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:cryo_photonic_interposer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] }
+          "itemsOut": [{ "id": "grindless:cryo_photonic_interposer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] },
+        { "_why": "MAX-A2 line L41 (c11): the calibrated superleak cooled to the demagnetisation stage in the mK module and cold-tested; the mixture is returned.", "name": "cold_tested_superleak", "circuit": 11, "eut": 31457280, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:calibrated_superleak", "count": 1 }], "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }], "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:cold_tested_superleak", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] }
       ]
     }
   }

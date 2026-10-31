@@ -103,6 +103,15 @@
           "fluidsIn": [{ "id": "gtceu:lpe_flux", "amount": 2000 }],
           "itemsOut": [{ "id": "gtceu:massicot_dust", "count": 1, "chance": 9000 }, { "id": "gtceu:boron_trioxide_dust", "count": 1, "chance": 9000 }, { "id": "grindless:lpe_dross", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-A2 line L31 (c4): the YIG film re-dipped with bismuth oxide in the flux, Bi substituted on the garnet's dodecahedral sites (the large Faraday rotation of Bi:YIG); the flux used is consumed.",
+          "name": "bi_yig_film", "circuit": 4, "eut": 33554432, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:yig_film_wafer", "count": 1 }, { "id": "gtceu:bismuth_dust", "count": 2 }],
+          "kept": [{ "id": "grindless:pt_lpe_crucible", "count": 1 }], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:lpe_flux", "amount": 300 }],
+          "itemsOut": [{ "id": "grindless:bi_yig_film", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },

@@ -26,6 +26,24 @@
           "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:shequid_gyro", "count": 1 }],
           "fluidsOut": [{ "id": "gtceu:superfluid_helium", "amount": 300 }]
+        },
+        {
+          "_why": "MAX-A2 line L10 (c5): the exotic SPS billet's spin balanced in the He-II bath against the weak-link cell (kept as the gauge); the bath is consumed.",
+          "name": "balanced_composite_billet", "circuit": 5, "eut": 16777216, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:exotic_composite_billet", "count": 1 }],
+          "kept": [{ "id": "grindless:weak_link_cell", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:balanced_composite_billet", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "MAX-A2 line L41 (c7): the potted superleak's aperture flow calibrated in the He-II bath against the weak-link cell (kept as the gauge); the bath is consumed.",
+          "name": "calibrated_superleak", "circuit": 7, "eut": 16777216, "duration": 800,
+          "itemsIn": [{ "id": "grindless:potted_superleak", "count": 1 }],
+          "kept": [{ "id": "grindless:weak_link_cell", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:calibrated_superleak", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },
