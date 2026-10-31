@@ -20,7 +20,8 @@ const startup = read(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'ele
 const lang = read(path.join(kube, 'client_scripts', 'grindless', 'uev_electron_beam_lang.js'))
     + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_levitation_melter_lang.js'))
     + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_matrioshka_lang.js')) // UIV-A10's tin_distill
-    + read(path.join(kube, 'client_scripts', 'grindless', 'uxv_spin_rows_lang.js')); // UXV-A3's c9-20 and c27-29
+    + read(path.join(kube, 'client_scripts', 'grindless', 'uxv_spin_rows_lang.js')) // UXV-A3's c9-20 and c27-29
+    + read(path.join(kube, 'client_scripts', 'grindless', 'opv_antimatter_lang.js'));
 
 const GTM = new Set(['mixer', 'assembler', 'compressor', 'bender', 'macerator', 'chemical_reactor', 'electric_blast_furnace']);
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
@@ -305,7 +306,10 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
   // UIV-A10 appends tin_distill (c8) and registers eb_distilled_tin in its own startup
   const a10 = read(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'composites.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'matrioshka.js'))
     // UXV-A3's c9-20 and c27-29 rows: their items are registered in its own startup (UXV-A2's 5N and 7N grades in spin_feed.js)
-    + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_rows.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_feed.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'foundation.js'));
+    + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_rows.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'spin_feed.js')) + read(path.join(kube, 'startup_scripts', 'grindless', 'uxv', 'foundation.js'))
+    // OpV-B3a's c21, c22 and c32 rows: their items are registered in the antimatter startup
+    + read(path.join(kube, 'startup_scripts', 'grindless', 'opv', 'antimatter.js'))
+    + read(path.join(kube, 'startup_scripts', 'grindless', 'opv', 'foundation.js'));
   for (const [, r] of allRows().filter(([w]) => w.startsWith('electron_beam.json'))) {
     for (const id of outputs(r).concat(ids(r.itemsIn))) {
       if (!id.startsWith('grindless:')) continue;

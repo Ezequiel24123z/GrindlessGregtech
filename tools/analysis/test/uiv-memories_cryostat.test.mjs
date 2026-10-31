@@ -115,7 +115,7 @@ test('the older rows exist, each marked UIV-A6', () => {
 
 test('millikelvin cryostat works: circuits 1-3, 31457280 EU/t, module is a catalyst in c3, mixture returned', () => {
   const rc = T.types.nuclear_demagnetisation.recipes;
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['nuclear_stage', 1], ['mk_module', 2], ['p_si_processor', 3]]);
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['nuclear_stage', 1], ['mk_module', 2], ['p_si_processor', 3], ['levitation_cell', 7]]);
   for (const r of rc) assert.equal(r.eut, 31457280, r.name);
   assert.equal(rc[0].duration, 1600);
   assert.deepEqual(inputs(rc[0]), ['gtceu:prni5_dust', 'gtceu:copper_plate']);
@@ -179,6 +179,8 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   assert.equal(registered.length, 14);
   assert.deepEqual(itemNames.sort(), registered.slice().sort());
   const keys = [...lang.matchAll(/^\s+\['((?:block|gtceu|material|grindless)\.[^']+)',\s*$/gm)].map((m) => m[1]);
+  const opvLang = read('client_scripts', 'grindless', 'opv_antimatter_lang.js');
+  keys.push(...[...opvLang.matchAll(/\['(gtceu\.recipe\.[^']+)'/g)].map((m) => m[1]));
   const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
   for (const k of ['block.gtceu.spectral_hole_burner', 'gtceu.spectral_hole_burning', 'block.gtceu.millikelvin_cryostat_works', 'gtceu.nuclear_demagnetisation', 'material.gtceu.he3_he4_mixture', 'material.gtceu.erbium_chloride_solution']) assert.ok(flat.includes(k), k);
   for (const n of ['eu151_yso', 'er_yso']) assert.ok(keys.includes(`gtceu.recipe.grindless_crystal_growth.${n}`), n);

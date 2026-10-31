@@ -158,6 +158,25 @@
       itemsOut: [{ id: LEAD, count: 2 }, { id: 'gtceu:platinum_dust', count: 1 }], chancedOut: [],
       fluidsOut: [{ id: 'gtceu:mercury', amount: 500 }],
       eut: 30720, duration: 300
+    },
+    // OpV-B3a line 31 (circuit 8): the Cm-245 fraction cut from the curium nitrate liquor; the rest of the curium goes back as nitrate
+    {
+      name: 'cm245_cut', circuit: 8,
+      itemsIn: [], chancedIn: [],
+      fluidsIn: [{ id: CM_NITRATE, amount: 1000 }], notConsumed: [{ id: 'gtceu:hdehp_solvent', amount: 100 }],
+      itemsOut: [{ id: 'grindless:cm245_fraction', count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: CM_NITRATE, amount: 600 }],
+      eut: 30720, duration: 200
+    },
+    // OpV-B3a line 31 (circuit 9): the spent hohlraum's curium, dissolved to nitrate by the antimatter table's reactor row, is precipitated as
+    // oxide (the partitioner has no item input: the dissolution is a chemical reactor row); the nitric acid comes back
+    {
+      name: 'curium_recovery', circuit: 9,
+      itemsIn: [], chancedIn: [],
+      fluidsIn: [{ id: CM_NITRATE, amount: 1000 }], notConsumed: [{ id: KEROSENE, amount: 100 }],
+      itemsOut: [{ id: CURIUM, count: 1 }], chancedOut: [],
+      fluidsOut: [{ id: 'gtceu:nitric_acid', amount: 1000 }],
+      eut: 30720, duration: 200
     }
   ]
 
