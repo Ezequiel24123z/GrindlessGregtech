@@ -20,6 +20,7 @@
 
   var VA_MAX = Number(GTValues.VA[14])
   var OPV_VA = 503316480
+  var MAX_VA = 2013265920
   var LOW = 7864320
   var SITE = (G.maxTravel && G.maxTravel.places && G.maxTravel.places.sgra ? G.maxTravel.places.sgra.dimension : 'gcyr:black_hole_orbit')
   var CIRCUIT = '#gtceu:circuits/max'
@@ -51,7 +52,15 @@
     { type: 'lathe', name: 'turned_pellet_core', items: ['8x grindless:dense_pellet'], fluids: [],
       outs: ['8x grindless:turned_pellet_core'], eut: 1966080, duration: 600 },
     { type: 'canner', name: 'stream_pellet', items: ['8x grindless:sc_jacketed_pellet', '4x gtceu:tritanium_foil'],
-      fluids: [['gtceu:liquid_helium', 500]], outs: ['8x grindless:stream_pellet'], eut: OPV_VA, duration: 600 }
+      fluids: [['gtceu:liquid_helium', 500]], outs: ['8x grindless:stream_pellet'], eut: OPV_VA, duration: 600 },
+    // the turn casing: made at home from OpV parts, so the injector can be built (no input comes from the injector's line)
+    { type: 'assembler', name: 'stream_turn_casing', circuit: 12,
+      items: ['gtceu:opv_machine_casing', '4x gtceu:tungsten_steel_plate', '2x grindless:chain_field_coil', '2x #gtceu:circuits/max'],
+      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['2x grindless:stream_turn_casing'], eut: MAX_VA, duration: 200 },
+    // G1's shell rings: four bundles held in a frame
+    { type: 'assembler', name: 'stream_bundle_block', circuit: 13,
+      items: ['4x grindless:stream_bundle', 'gtceu:tungsten_steel_frame'],
+      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['grindless:stream_bundle_block'], eut: OPV_VA, duration: 200 }
   ]
 
   function missingOf(items, fluids) {
@@ -111,6 +120,7 @@
           return
         }
         var b = event.recipes.gtceu[r.type]('grindless:' + r.name)
+        if (r.circuit) b.circuit(r.circuit)
         r.items.forEach(function (s) { b.itemInputs(s) })
         r.fluids.forEach(function (f) { b.inputFluids(Fluid.of(f[0], f[1])) })
         r.outs.forEach(function (s) { b.itemOutputs(s) })

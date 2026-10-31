@@ -43,7 +43,7 @@ test('c1 and c2: recipes exist, run at Sgr A* and are at most VA[MAX]; c1 takes 
 });
 
 test('the GTM rows of the line exist and none exceeds VA[MAX]', () => {
-  for (const n of ['turned_pellet_core', 'stream_pellet']) {
+  for (const n of ['turned_pellet_core', 'stream_pellet', 'stream_turn_casing', 'stream_bundle_block']) {
     assert.ok(MD.recipes.some((r) => r.endsWith('/' + n)), n);
   }
   for (const r of MD.recipes) {
