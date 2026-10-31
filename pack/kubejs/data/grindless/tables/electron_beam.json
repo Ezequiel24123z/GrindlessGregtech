@@ -72,7 +72,10 @@
           "itemsOut": [{ "id": "grindless:ga2o3_gated_wafer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
         { "_why": "UXV-A3 (uxv.md line 47; c29): the mu-metal blend melted to an ingot; the skull goes back to the melt.", "name": "mu_metal_ingot", "circuit": 29, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "grindless:mu_metal_blend", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:mu_metal_ingot", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:mu_metal_ingot", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-E1 (opv.md machine 12, line 29): seals the pair converter's unsealed cell with a fresh getter; circuit 23 inputs distinct from B2's.", "name": "positron_cell_seal", "circuit": 23, "eut": 1966080, "duration": 400,
+          "itemsIn": [{ "id": "grindless:unsealed_positron_cell", "count": 1 }, { "id": "gtceu:zirconium_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:dense_positron_cell", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "single_crystal_casting": {

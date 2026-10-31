@@ -1,0 +1,31 @@
+{
+  "_source": "docs/eras/opv.md: machine 12 (magnetic pair converter), line 29; package OpV-E1. Real: a magnetar's field (SGR 1806-20, 10^11 T) twists virtual pairs real (Breit-Wheeler, vacuum birefringence); a Penning trap (as UHV-A6's accumulator) then holds what the field made. Fiction: holding enough of it, long enough, to seed a cell the UEV electron beam furnace can later seal (line 29 c23).",
+  "_how_it_is_used": "server_scripts/grindless/opv/pair_converter.js makes one recipe per entry, id grindless:<name> (GTM prefixes the type), with its programmed circuit; 'site' true locks the recipe to grindless:sgr1806_orbit; 'kept' are not consumed; 'wear' is a kept input that a chance consumes (per ten thousand); an output with a 'chance' is a chanced output (count 1). The table has magnetic_pair_production only; the package's two older rows (positron accumulator c5, EB c23) live in tables/antimatter.json and tables/electron_beam.json, each marked OpV-E1.",
+  "types": {
+    "magnetic_pair_production": {
+      "dataKey": "grindless_magnetic_pair_production",
+      "recipes": [
+        {
+          "_why": "machine 12 c1: the magnetar's field pulls real pairs out of the vacuum around a seed plasma (UHV-A6's accumulator, c5); the gamma laser module times the field's pulse (worn one run in sixteen, as it is everywhere else it pulses a capture). What the trap doesn't hold condenses back into an empty Penning trap nine times in ten.",
+          "name": "boil_seed_plasma", "circuit": 1, "eut": 503316480, "duration": 1200, "site": true,
+          "itemsIn": [{ "id": "grindless:seed_positron_plasma", "count": 1 }],
+          "kept": [],
+          "wear": [{ "id": "grindless:gamma_laser_module", "count": 1, "chance": 625 }],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:empty_penning_trap", "count": 1, "chance": 9000 }],
+          "fluidsOut": [{ "id": "gtceu:hot_pair_plasma", "amount": 1000 }]
+        },
+        {
+          "_why": "machine 12 c2: the hot pair plasma is loaded back into an empty trap and let cool; what comes out is the unsealed cell the UEV electron beam furnace later seals with a fresh getter (tables/electron_beam.json c23).",
+          "name": "seal_positron_cell", "circuit": 2, "eut": 268435456, "duration": 800, "site": true,
+          "itemsIn": [{ "id": "grindless:empty_penning_trap", "count": 1 }],
+          "kept": [],
+          "wear": [],
+          "fluidsIn": [{ "id": "gtceu:hot_pair_plasma", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:unsealed_positron_cell", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    }
+  }
+}
