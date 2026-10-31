@@ -39,6 +39,15 @@
           "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:sot_heterostack", "count": 1 }, { "id": "gtceu:wte2_dust", "count": 1, "chance": 2500 }, { "id": "gtceu:fe3gete2_dust", "count": 1, "chance": 2500 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-B1, line L2: methane is cracked over the electropolished Cu(111) foil into a single-crystal graphene layer, then an hBN flake pair is stamped on (CVD graphene on Cu(111), the real epitaxial route)",
+          "name": "graphene_hbn_film", "circuit": 5, "eut": 33554432, "duration": 600,
+          "itemsIn": [{ "id": "grindless:electropolished_cu111_foil", "count": 1 }, { "id": "grindless:hbn_flake", "count": 2 }, { "id": "gtceu:carbon_dust", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:graphene_hbn_film", "count": 1 }, { "id": "gtceu:copper_dust", "count": 1, "chance": 5000 }],
+          "fluidsOut": []
         }
       ]
     },

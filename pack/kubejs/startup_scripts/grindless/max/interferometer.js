@@ -1,3 +1,4 @@
+// priority: -5444
 // -----------------------------------------------------------------------------------------------
 // MAX's atom interferometer works (docs/eras/max.md, machine 2, lines L4 and L33; package MAX-B2): the multiblock and its recipe type. No
 // item of its own: every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/interferometer.js.

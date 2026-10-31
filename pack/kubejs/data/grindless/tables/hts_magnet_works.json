@@ -97,6 +97,14 @@
       "eut": 7864320, "duration": 600
     },
     {
+      "name": "pinned_rebco_web", "circuit": 12, "charge": true,
+      "_why": "MAX-B1 line L2 (c12): the REBCO-on-PBO web ramped in the cold-test helium while a lattice of flux-pinning columns is grown through it, potted in epoxy.",
+      "itemsIn": [ { "id": "grindless:rebco_on_pbo_web", "count": 1 }, { "id": "gtceu:horizon_strand_single_wire", "count": 2 } ],
+      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+      "itemsOut": [ { "id": "grindless:pinned_rebco_web", "count": 1 } ],
+      "eut": 7864320, "duration": 600
+    },
+    {
       "name": "smes_toroid_winding", "circuit": 13, "charge": true,
       "_why": "MAX-W (docs/eras/max.md, L27 step 3): eight turns of thick REBCO tape wound round a chain strand former and potted in epoxy, ramped in the cold-test helium.",
       "itemsIn": [ { "id": "grindless:thick_rebco_tape", "count": 8 }, { "id": "gtceu:chain_strand_single_wire", "count": 2 } ],

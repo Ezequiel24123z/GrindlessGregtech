@@ -1,3 +1,4 @@
+// priority: -19962
 // -----------------------------------------------------------------------------------------------
 // MAX-B2 atom interferometer works (docs/eras/max.md, machine 2, L4 last step, L33 steps 3-4; package MAX-B2). The other steps of the two
 // lines are one row each of an older machine, marked MAX-B2 in their own files:
@@ -40,8 +41,8 @@
     }
   ]
 
-  // GTM rows of L33: a selective etch frees the film from its substrate, a laser engraver bonds it on the silicon spacer
-  var BATH = { name: 'released_algaas_film', input: 'grindless:algaas_bragg_stack', fluid: 'gtceu:hydrogen_peroxide', amount: 1000, out: 'grindless:released_algaas_film', eut: 7864320, duration: 600 }
+  // GTM rows of L33: a selective etch frees the film from its substrate onto the silicon spacer that carries it, a laser engraver bonds it
+  var BATH = { name: 'released_algaas_film', input: 'grindless:algaas_bragg_stack', spacer: 'grindless:silicon_cavity_spacer', fluid: 'gtceu:hydrogen_peroxide', amount: 1000, out: 'grindless:released_algaas_film', eut: 7864320, duration: 600 }
   var ENGRAVE = { name: 'transferred_crystalline_mirror', input: 'grindless:released_algaas_film', lens: 'gtceu:purple_glass_lens', out: 'grindless:transferred_crystalline_mirror', eut: 31457280, duration: 800 }
 
   function missingOf(ids, fluids) {
@@ -77,12 +78,12 @@
     })
 
     try {
-      var mb = missingOf([BATH.input, BATH.out], [BATH.fluid])
+      var mb = missingOf([BATH.input, BATH.spacer, BATH.out], [BATH.fluid])
       if (mb.length > 0) {
         skip(BATH.name, mb)
       } else {
         var cb = event.recipes.gtceu.chemical_bath('grindless:' + BATH.name)
-        cb.itemInputs('1x ' + BATH.input)
+        cb.itemInputs('1x ' + BATH.input, '1x ' + BATH.spacer)
         cb.inputFluids(Fluid.of(BATH.fluid, BATH.amount))
         cb.itemOutputs('1x ' + BATH.out)
         cb.EUt(BATH.eut).duration(BATH.duration)

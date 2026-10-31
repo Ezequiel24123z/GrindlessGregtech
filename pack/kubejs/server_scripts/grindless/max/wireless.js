@@ -1,4 +1,4 @@
-// priority: -20004
+// priority: -20077
 // Gregtech Grindless - the MAX wireless tier's own recipes (package MAX-W, docs/eras/max.md 'W. Wireless case 14'). The MAX row of
 // tables/wireless_energy.json gives lv/wireless_energy.js (and its startup twin, withTiers case 14) the hatches and covers; its cell has a
 // cellMadeBy, so that script makes no cell, and this one makes the cell and the row's link, both assembler rows at VA[MAX]:

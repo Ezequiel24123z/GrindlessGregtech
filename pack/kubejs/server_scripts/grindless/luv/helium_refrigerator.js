@@ -334,6 +334,8 @@
     { name: 'chain_mesh_belt', input: 'grindless:welded_mesh_belt', output: 'grindless:chain_mesh_belt', eut: 30720, duration: 400 },
     { name: 'hpge_compton_crystal', input: 'grindless:contacted_hpge_crystal', output: 'grindless:hpge_compton_crystal', eut: 30720, duration: 400 },
     { name: 'cold_smes_toroid', input: 'grindless:braced_smes_toroid', output: 'grindless:cold_smes_toroid', eut: 30720, duration: 600 },
+    // MAX-B1 (max.md line L11): the coated belt web run cold in the loop until it holds its modulus at 4 K
+    { name: 'max_cryo_conditioned_web', input: 'grindless:refractory_wear_coat', output: 'grindless:cryo_conditioned_web', eut: 30720, duration: 600 },
     // MAX-B2 L33 step 5: the bonded crystalline mirror pair on its silicon spacer cooled to the cavity's zero-expansion point and sealed in the loop
     { name: 'cryo_reference_cavity', input: 'grindless:transferred_crystalline_mirror', output: 'grindless:cryo_reference_cavity', eut: 30720, duration: 600 }
   ]

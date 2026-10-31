@@ -284,6 +284,10 @@
    "gtceu:composite_autoclave",
    "gtceu:engine_test_stand"
   ],
+  "max": [
+   "gtceu:atom_interferometer_works",
+   "gtceu:membrane_line"
+  ],
   "moon": [
    "gtceu:lunar_drill"
   ],

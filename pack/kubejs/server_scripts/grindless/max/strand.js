@@ -1,4 +1,4 @@
-// priority: -19994
+// priority: -20054
 // MAX-A0 "Horizon strand and hull" (docs/eras/max.md line L1 and the hull): the three assembler-side rows of the chain. The rest of the line
 // lives in the tables of the machines that run it:
 //   c4 vault (tables/exotic_matter.json, strangelet_growth): 1 stable exotic matter -> 4 exotic cladding foil

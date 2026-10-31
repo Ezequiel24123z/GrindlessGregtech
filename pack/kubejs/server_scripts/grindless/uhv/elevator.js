@@ -143,6 +143,13 @@
   TABLE.push({ name: 'horizon_braid', type: 'pbo_synthesis', circuit: 10, itemsIn: [item('gtceu:horizon_strand_single_wire', 1), item(PBO, 2)], fluidsIn: [],
     itemsOut: [item('grindless:pbo_braid_sleeve', 1)], fluidsOut: [], eut: UHVA, duration: 200 })
 
+  // MAX-B1 lines L2 and L11 (docs/eras/max.md): PBO fibre woven into the carrier web of the superconducting membrane (circuit 11) and into
+  // the belt web of the membrane belt (circuit 12)
+  TABLE.push({ name: 'pbo_carrier_web', type: 'pbo_synthesis', circuit: 11, itemsIn: [item(PBO, 4), item('gtceu:aluminium_foil', 2)], fluidsIn: [],
+    itemsOut: [item('grindless:pbo_carrier_web', 1)], fluidsOut: [], eut: UHVA, duration: 400 })
+  TABLE.push({ name: 'pbo_belt_web', type: 'pbo_synthesis', circuit: 12, itemsIn: [item(PBO, 6), item('gtceu:titanium_foil', 2)], fluidsIn: [],
+    itemsOut: [item('grindless:pbo_belt_web', 1)], fluidsOut: [], eut: UHVA, duration: 400 })
+
   // line 24's side steps on GTM's own machines
   var SIDE = [
     { name: 'trichlorobenzene', type: 'chemical_reactor', circuit: 3, itemsIn: [],

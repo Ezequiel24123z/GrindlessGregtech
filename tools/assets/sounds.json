@@ -940,6 +940,28 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0
+    },
+    {
+      "id": "loop_atom_interferometer_works",
+      "recipeType": "gtceu:atom_interferometry",
+      "prompt": "Seamless looping sound of a tall vacuum drop tower: a low steady pump drone, soft laser-cooling hiss and a slow rhythmic pulse of a cold atom cloud launch, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
+    },
+    {
+      "id": "loop_membrane_line",
+      "recipeType": "gtceu:membrane_rolling",
+      "prompt": "Seamless looping sound of a long cold rolling line: slow heavy roller rumble, a thin steady film feed whisper and faint cryogenic vapour hiss, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0
     }
   ]
 }

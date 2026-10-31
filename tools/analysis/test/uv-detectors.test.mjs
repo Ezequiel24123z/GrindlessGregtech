@@ -87,8 +87,8 @@ test('each machine: unique circuits, whole numbers, UV VA at most, every row in 
   }
   // UIV-A5 appended the Si-28 float-zone ingot (c6) and the donor regrow (c7); circuits 4-5 are UEV's rows in uev/photonics.js
   assert.deepEqual(D.recipes.filter((r) => r.type === 'zone_refining').map((r) => [r.name, r.circuit]),
-  // UXV-A2 appended the 7N tellurium (c8) and germanium (c9) rows; OpV-A1 the 13N germanium (c10); OpV-A2 the Siemens-rod float zone (c11)
-    [['germanium_tetrachloride', 1], ['germanium_reduction', 2], ['hpge_crystal', 3], ['si28_fz_ingot', 6], ['si28_donor_regrow', 7], ['seven_n_tellurium', 8], ['seven_n_germanium', 9], ['thirteen_n_germanium', 10], ['si28_poly_fz', 11]]);
+  // UXV-A2 appended the 7N tellurium (c8) and germanium (c9) rows; OpV-A1 the 13N germanium (c10); OpV-A2 the Siemens-rod float zone (c11); MAX-B1 the ultrapure silica target (c12)
+    [['germanium_tetrachloride', 1], ['germanium_reduction', 2], ['hpge_crystal', 3], ['si28_fz_ingot', 6], ['si28_donor_regrow', 7], ['seven_n_tellurium', 8], ['seven_n_germanium', 9], ['thirteen_n_germanium', 10], ['si28_poly_fz', 11], ['ultrapure_silica_target', 12]]);
   for (const id of [D.crafting.tower, D.crafting.station]) assert.ok(recipes.find((x) => x.i === id), id);
 });
 

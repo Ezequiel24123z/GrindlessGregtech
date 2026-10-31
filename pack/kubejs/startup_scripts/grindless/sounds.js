@@ -102,7 +102,9 @@
     'gtceu:strangelet_growth': 'loop_strangelet_vault',
     'gtceu:strangelet_distillation': 'loop_strangelet_distiller',
     'gtceu:kugelblitz_forming': 'loop_kugelblitz_forge',
-    'gtceu:hawking_power': 'loop_hawking_collector'
+    'gtceu:hawking_power': 'loop_hawking_collector',
+    'gtceu:atom_interferometry': 'loop_atom_interferometer_works',
+    'gtceu:membrane_rolling': 'loop_membrane_line'
   }
 
   StartupEvents.registry('sound_event', function (event) {

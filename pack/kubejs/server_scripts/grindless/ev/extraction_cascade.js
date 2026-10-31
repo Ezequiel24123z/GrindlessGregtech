@@ -351,6 +351,33 @@
       itemsOut: [{ id: 'grindless:tb_dy_oxide', count: 4 }, { id: ND_CL, count: 8 }],
       fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: HCL, amount: 3000 }],
       eut: 1920, duration: 100
+    },
+    // MAX-B1 (max.md line 3, c30; repeat by item inputs): hafnium chloride hydrolysed in water to hafnia powder, the HCl comes off as acid
+    {
+      name: 'hafnia_powder', mode: 'max', circuit: 30,
+      itemsIn: [{ id: 'grindless:hafnium_chloride_dust', count: 4 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 2000 }],
+      itemsOut: [{ id: 'grindless:hafnia_powder', count: 4 }],
+      fluidsOut: [{ id: DILUTED_HCL, amount: 2000 }],
+      eut: 1920, duration: 100
+    },
+    // MAX-B1 (max.md line 34, c31; repeat by item inputs): SX-EW, malachite leached in sulfuric acid and the copper electrowon as cathode copper; the acid returns diluted
+    {
+      name: 'cathode_copper', mode: 'max', circuit: 31,
+      itemsIn: [{ id: 'gtceu:malachite_dust', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:sulfuric_acid', amount: 1000 }, { id: 'minecraft:water', amount: 2000 }],
+      itemsOut: [{ id: 'grindless:cathode_copper', count: 3 }],
+      fluidsOut: [{ id: 'gtceu:diluted_sulfuric_acid', amount: 1000 }],
+      eut: 1920, duration: 100
+    },
+    // MAX-B1 (max.md line 2, c32; repeat by item inputs): the spent ferric chloride of the membrane line stripped in acid back to copper and iron
+    {
+      name: 'spent_ferric_chloride', mode: 'max', circuit: 32,
+      itemsIn: [{ id: 'grindless:spent_ferric_chloride', count: 4 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 2000 }, { id: HCL, amount: 1000 }],
+      itemsOut: [{ id: 'gtceu:copper_dust', count: 2 }, { id: 'gtceu:iron_dust', count: 1 }],
+      fluidsOut: [{ id: DILUTED_HCL, amount: 1000 }],
+      eut: 1920, duration: 100
     }
   ]
 

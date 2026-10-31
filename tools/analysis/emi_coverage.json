@@ -101,13 +101,17 @@
     { "id": "grindless:assembler/max_wireless_dynamo_hatch_64a", "reason": "MAX-W landed before the components: its inputs gtceu:max_wireless_dynamo_hatch_16a (W, held until A3's sensor and field generator) and the horizon strand wire are held until A0, A3 write their producers; the last of them deletes this entry with the W hold rule" },
     { "id": "grindless:assembler/max_wireless_energy_cover", "reason": "MAX-W landed before the components: its inputs grindless:max_sensor (A3) and grindless:horizon_strand_repeater are held until A2 and A3 write their producers; the last of them deletes this entry with the W hold rule" },
     { "id": "grindless:assembler/max_wireless_dynamo_cover", "reason": "MAX-W landed before the components: its inputs grindless:max_emitter (A2) and grindless:horizon_strand_repeater are held until A2 write their producers; the last of them deletes this entry with the W hold rule" },
-    { "id": "grindless:assembly_line/max_parallel_hatch", "reason": "MAX-M1 landed before the components: its inputs grindless:max_field_generator and grindless:max_robot_arm are held until A3 writes their producers; the last of them deletes this entry with the hold rule" }
+    { "id": "grindless:assembly_line/max_parallel_hatch", "reason": "MAX-M1 landed before the components: its inputs grindless:max_field_generator and grindless:max_robot_arm are held until A3 writes their producers; the last of them deletes this entry with the hold rule" },
+    { "id": "grindless:atom_interferometry/shell_gradient_map", "reason":"MAX-B2 landed before D2: its input grindless:sgr_a_spin_map is held until D2 (photon ring imager c1) writes it; D2 deletes this entry with the hold rule" }
   ],
   "pendingUses": [
         { "id": "grindless:shell_cryocooler", "package": "C1", "reason": "MAX-H1 makes it (L30); G1's segment foundry mode takes it and C1 checks the use is there" },
         { "id": "grindless:segment_controller", "package": "C1", "reason": "MAX-H1 makes it (L38); G1's mirror shell controller takes it and C1 checks the use is there" },
     { "id": "grindless:max_fluid_regulator", "package": "A3", "reason": "MAX-A2 makes it; A3's conveyor and field generator take it and A3 checks the use is there" },
     { "id": "grindless:launched_gc_probe", "package": "T2", "reason": "MAX-T1 returns it from gate c14; T2's belt seed chain takes it and T2 checks the use is there" },
-    { "id": "grindless:cold_tested_superleak", "package": "A3", "reason": "MAX-A2 makes it (L41); the superfluid valve row takes the potted superleak today, so A3 or the A2 fix wires the cold-tested one in and checks the use" }
+    { "id": "grindless:cold_tested_superleak", "package": "A3", "reason": "MAX-A2 makes it (L41); the superfluid valve row takes the potted superleak today, so A3 or the A2 fix wires the cold-tested one in and checks the use" },
+        { "id": "grindless:membrane_belt", "package":"A3", "reason": "use written by A3 - MAX-B1 makes it (L11); A3's max_conveyor_module takes it and A3 checks the use is there" },
+        { "id": "grindless:superconducting_membrane", "package":"A3", "reason": "use written by A3 - MAX-B1 makes it (L2); A3's max_field_generator takes it and A3 checks the use is there" },
+        { "id": "grindless:albedo_multilayer_panel", "package":"D3", "reason": "use written by D3 - MAX-B1 makes it (L3); D3's geroch winch takes it and D3 checks the use is there" }
       ]
 }

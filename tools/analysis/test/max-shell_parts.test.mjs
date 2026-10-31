@@ -65,7 +65,8 @@ test('the circuits are the contract\'s and unique within each recipe type', () =
     assert.equal(new Set(c).size, c.length, `${t} has a repeated circuit`);
   }
   const ec = [...cascade.matchAll(/mode: '\w+', circuit: (\d+)/g)].map((m) => m[1]);
-  assert.equal(new Set(ec).size, ec.length, 'the extraction cascade repeats a circuit');
+  // MAX-B1 repeats c30-32 with other item inputs (OpV-F3's rule, proved by the loader test below); no circuit is used more than twice
+  assert.ok(ec.every((c) => ec.filter((d) => d === c).length <= 2), 'the extraction cascade repeats a circuit more than once');
 });
 
 test('every older row fits its machine: items, fluids and outputs', () => {
@@ -129,7 +130,7 @@ test('MAX-CS: the cascade loads every shipped row unchanged (no problem, no clas
   assert.deepEqual(errors, []);
   const circuits = [...EC.recipes.map((r) => r.circuit)];
   assert.equal(EC.recipes.length, [...cascade.matchAll(/mode: '[a-z]+', circuit: \d+/g)].length);
-  assert.equal(new Set(circuits).size, circuits.length);
+  assert.ok(circuits.every((c) => circuits.filter((d) => d === c).length <= 2)); // MAX-B1's c30-32 repeat with other item inputs
   assert.ok(circuits.every((c) => c >= 1 && c <= 32));
   assert.deepEqual(Array.from(EC.clashes), []);
 });
