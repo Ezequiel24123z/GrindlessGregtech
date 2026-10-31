@@ -38,6 +38,13 @@
           "_why": "UIV-A10: four TPV cells and a selective emitter make a TPV tile in vacuum.",
           "itemsIn": [ { "id": "grindless:ingaasb_tpv_cell", "count": 4 }, { "id": "grindless:selective_emitter", "count": 1 } ],
           "itemsOut": [ { "id": "grindless:tpv_tile", "count": 1 } ]
+        },
+        {
+          "name": "shell_droplet_radiator", "circuit": 5, "eut": 31457280, "duration": 1200, "site": "gcyr:black_hole_orbit",
+          "_why": "MAX-D1 (max.md, L15 step 4, c5): at Sgr A* the nozzle plate sprays the Sn-Li eutectic from the fluid input hatch into droplets that the collector shell catches; the shell droplet radiator rejects the BZ plant's heat.",
+          "itemsIn": [ { "id": "grindless:droplet_nozzle_plate", "count": 1 }, { "id": "grindless:radiator_collector_shell", "count": 1 } ],
+          "fluidsIn": [ { "id": "gtceu:sn_li_eutectic", "amount": 1000 } ],
+          "itemsOut": [ { "id": "grindless:shell_droplet_radiator", "count": 1 } ]
         }
       ]
     },
