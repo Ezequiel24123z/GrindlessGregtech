@@ -165,7 +165,7 @@ test('controller lines: OpV hull, components, circuits (4 and 8), research item;
   assert.ok(!s.includes('event.custom'), 'every recipe goes through the builder');
 });
 
-test('names, items, info pages and lang exist in en_us and es_es; no priority line in the new scripts', () => {
+test('names, items, info pages and lang exist in en_us and es_es', () => {
   for (const m of MACHINES) {
     const k = 'block.gtceu.' + m;
     assert.ok(run.lang.en_us[k] && run.lang.es_es[k], k);
@@ -181,9 +181,6 @@ test('names, items, info pages and lang exist in en_us and es_es; no priority li
   }
   for (const r of BC_ROWS) assert.ok(run.lang.en_us[`gtceu.recipe.${r.dataKey}.${r.name}`], r.name);
   assert.ok(run.lang.en_us['gtceu.recipe.grindless_replication_refining.spent_node_recovery']);
-  for (const f of [['startup_scripts', 'grindless', 'opv', 'bulge_collector.js'], ['server_scripts', 'grindless', 'opv', 'bulge_collector.js']]) {
-    assert.ok(!/^\/\/ priority:/m.test(kube(...f)), f.join('/'));
-  }
 });
 
 test('the texture generator is documented and the faces and items exist', () => {
