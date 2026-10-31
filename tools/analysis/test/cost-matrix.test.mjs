@@ -107,3 +107,33 @@ test('source recipes make base resources, EU is tracked and free resources stay 
   near(s.freeFluidL, 2);
   assert.equal(s.top[0].key, 'ore');
 });
+
+test('per-unit division is not monotonic: a cheaper route through a dearer intermediate still wins', () => {
+  const m = solveCosts(
+    [
+      rec('t-from-x', [item('x')], [out('t')]),
+      rec('c-from-e', [item('e')], [out('c', 9)]),
+      rec('t-from-c', [item('c', 2)], [out('t')]),
+    ],
+    { isBase: base(['x', 'e']), weight: (k) => (k === 'x' ? 10 : 15) },
+  );
+  near(m.metric('t'), 10 / 3);
+  near(m.vector('t').get('e'), 2 / 9);
+  assert.equal(m.improvementsLeft, 0);
+  assert.ok(m.improvements > 0);
+});
+
+test('the improvement pass cannot pump a loop that multiplies matter', () => {
+  const m = solveCosts(
+    [
+      rec('split', [item('dust')], [out('small', 5)]),
+      rec('pack', [item('small', 4)], [out('dust')]),
+      rec('dust-from-ore', [item('ore')], [out('dust')]),
+    ],
+    { isBase: base(['ore']) },
+  );
+  near(m.vector('dust').get('ore'), 1);
+  near(m.vector('small').get('ore'), 0.2);
+  assert.equal(m.cuts.size, 0);
+  assert.equal(m.improvementsLeft, 0);
+});
