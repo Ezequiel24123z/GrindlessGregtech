@@ -1,4 +1,4 @@
-// priority: -6314
+// priority: -6934
 // Gregtech Grindless - smoke test of OpV's wireless tier (package OpV-W; TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): the OpV row of tables/wireless_energy.json (registered by lv/wireless_energy.js, withTiers case 13) and
 // opv/wireless.js, which makes the OpV cell and the chain strand repeater in the assembler.

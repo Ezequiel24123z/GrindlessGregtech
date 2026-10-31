@@ -1,4 +1,4 @@
-// priority: 5800
+// priority: 5630
 // Gregtech Grindless - text of the space scripts (server_scripts/grindless/space/).
 // ClientEvents.lang adds the entries wherever the script lives, as in dimensions_lang.js.
 ClientEvents.lang('en_us', event => {

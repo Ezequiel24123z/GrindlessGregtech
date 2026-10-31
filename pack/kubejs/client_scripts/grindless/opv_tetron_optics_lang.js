@@ -1,3 +1,4 @@
+// priority: 5670
 // Gregtech Grindless - names and tooltips of OpV's tetron fab and gamma optics works (startup_scripts/grindless/opv/tetron_optics.js;
 // package OpV-B1):
 //

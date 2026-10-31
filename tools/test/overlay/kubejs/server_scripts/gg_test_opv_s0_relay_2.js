@@ -1,4 +1,4 @@
-// priority: -6304
+// priority: -6912
 // TEST ONLY, OpV-S0 S0-9, leg 2 (after @restart). Command: kubejs custom_command gg_test_opv_s0_relay_2
 // Checks that what leg 1 built survived the restart: the persistent-data row, the far platform ring (still formed, its input bus still stocked) and the
 // force-loaded chunks of the throwaway place. Then clears the platform blocks and tickets.

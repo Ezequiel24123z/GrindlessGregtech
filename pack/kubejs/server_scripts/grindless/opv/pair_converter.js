@@ -1,3 +1,4 @@
+// priority: -21714
 // -----------------------------------------------------------------------------------------------
 // Recipes of OpV's magnetic pair converter (machine and recipe type: startup_scripts/grindless/opv/pair_converter.js; docs/eras/opv.md,
 // machine 12, line 29; package OpV-E1), generated at every server load from data/grindless/tables/pair_converter.json, plus the

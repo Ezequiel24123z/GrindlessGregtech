@@ -1,4 +1,4 @@
-// priority: -21457
+// priority: -21684
 // OpV cuts (OpV-F2, docs/eras/opv.md "Only from there and cuts"): GTM's recipes for the OpV components, hull, energy and dynamo
 // hatches, parallel hatch and basic machines; every MAX recipe but the battery's; the chain strand's generic wiremill, extruder, bender,
 // cable assembler, macerator and arc furnace rows; and GT--'s cosmic mainframe and SMDs (S0-4: GT-- registers no recipe for them,

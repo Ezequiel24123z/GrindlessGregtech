@@ -1,3 +1,4 @@
+// priority: -6724
 // TEST ONLY, OpV-A1 (components). Command: kubejs custom_command gg_test_opv_components
 // Band ONLY: X 37888-37951, Z 0-63, Overworld Y 98-115 (zones.json "opv_components").
 //   T1 (named uncertainty, docs/eras/opv.md "A1. Components": S0-1 read ids, not recipes):

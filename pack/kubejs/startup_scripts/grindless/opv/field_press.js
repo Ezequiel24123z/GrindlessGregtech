@@ -1,3 +1,4 @@
+// priority: -6760
 // -----------------------------------------------------------------------------------------------
 // OpV's field-frozen press (docs/eras/opv.md, machine 13, process lines 3 and 45; package OpV-A3) and its recipe type. The recipes come
 // from data/grindless/tables/field_press.json (server_scripts/grindless/opv/field_press.js). The package's own items: the W-Re canned

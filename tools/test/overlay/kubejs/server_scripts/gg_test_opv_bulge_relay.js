@@ -1,3 +1,4 @@
+// priority: -6424
 // TEST ONLY, OpV-A0. Command: kubejs custom_command gg_test_opv_bulge_relay, sent twice: before and after one @restart.
 // Markers: GGTEST|opv_bulge_relay|PHASE1|DONE (leg 1 is done: restart now), then GGTEST|opv_bulge_relay|DONE|failures=N (leg 2).
 // Band ONLY: X 37824-37887, Z 0-63, Y 98-115, in grindless:cygnus_x1_orbit. The far platform is kerr_sling.js's (grindless:sgr1806_orbit at

@@ -1,3 +1,4 @@
+// priority: -6745
 // -----------------------------------------------------------------------------------------------
 // OpV components (package OpV-A1, docs/eras/opv.md "A1. Components", lines 4-10): the intermediates of the seven component lines. The final
 // parts (chain_field_coil, chain_composite_rod, chain_composite_rotor, superfluid_he3_seal, chain_mesh_belt, opv_harmonic_drive,

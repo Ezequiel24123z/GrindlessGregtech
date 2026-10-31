@@ -1,4 +1,4 @@
-// priority: -6274
+// priority: -6890
 // TEST ONLY, OpV-S0 S0-12. Command: kubejs custom_command gg_test_opv_s0_pasta
 // UXV's four pasta machines (gtceu:pasta_extractor, pasta_phase_sorter, pasta_draw_bench, pasta_laminator) built in the throwaway place
 // grindless:s0_sgr1806_orbit, band X 37376-37439, Z 0-63, Y 70-100. Named uncertainty: do they form away from Vela's orbit, and does a recipe with a

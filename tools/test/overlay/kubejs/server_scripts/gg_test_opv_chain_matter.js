@@ -1,3 +1,4 @@
+// priority: -6524
 // TEST ONLY, OpV-A0 chain matter (process lines 1 and 2). Command: kubejs custom_command gg_test_opv_chain_matter
 // Markers: GGTEST|opv_chain_matter|<check>|PASS/FAIL|..., then GGTEST|opv_chain_matter|DONE|failures=N.
 // Band ONLY: X 37824-37887, Z 0-63, Y 98-115 (zones.json row opv_bulge_relay), built in grindless:sgr1806_orbit, the dimension the OpV-A0 rows of

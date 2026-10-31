@@ -1,3 +1,4 @@
+// priority: -21639
 // OpV-A0, the bulge relay (docs/eras/opv.md "A0. Bulge relay, chain matter and the hull"). Four parts:
 //
 //   1. grindless:bulge_relay_seed: an assembly line row at VA[UXV] of UXV parts only (a 32-strand pasta magsail, lasagna plates, a SHeQUID gyro,

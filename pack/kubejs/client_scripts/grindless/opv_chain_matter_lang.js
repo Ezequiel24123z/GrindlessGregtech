@@ -1,3 +1,4 @@
+// priority: 5740
 // Gregtech Grindless - names and tooltips of the OpV chain matter (startup_scripts/grindless/opv/chain_matter.js, package OpV-A0):
 //
 //   grindless:<item>  item.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1)

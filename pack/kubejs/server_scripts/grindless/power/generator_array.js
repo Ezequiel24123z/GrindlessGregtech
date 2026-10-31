@@ -1,4 +1,4 @@
-// priority: -21624
+// priority: -21789
 // -----------------------------------------------------------------------------------------------
 // Controller recipe of the LV Generator Array (startup_scripts/grindless/power/generator_array.js).
 //
