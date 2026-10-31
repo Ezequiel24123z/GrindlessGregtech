@@ -114,7 +114,7 @@ test('no script of ours registers a gtceu:opv_* or gtceu:max_* id (GTM\'s), exce
   // OpV-W: lv/wireless_energy.js registers the eight gtceu:opv_wireless_* hatches (case 13), as it does every tier's
   const w = (id, v) => /^gtceu:(opv|max)_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(id) && /(^|[\\/])lv[\\/]wireless_energy\.js$/.test(String(v.file));
   for (const reg of [run.registry.items, run.registry.machines]) {
-    for (const [id, v] of reg) if (/^gtceu:(opv|max)_/.test(id) && !v.seeded && id !== 'gtceu:opv_parallel_hatch' && !w(id, v)) bad.push(`${id} (${v.file})`);
+    for (const [id, v] of reg) if (/^gtceu:(opv|max)_/.test(id) && !v.seeded && id !== 'gtceu:opv_parallel_hatch' && id !== 'gtceu:max_parallel_hatch' && !w(id, v)) bad.push(`${id} (${v.file})`);
   }
   assert.deepEqual(bad, []);
   assert.doesNotMatch(code, /'(gtceu:)?(opv|max)_[a-z0-9_]+'/, 'foundation.js creates no GTM OpV or MAX id');

@@ -1,4 +1,4 @@
-// priority: 6590
+// priority: 6650
 // Gregtech Grindless - EMI lines of MAX-A1's rows on older machines (lines 5, 6 and 7 and the mainframe join, package MAX-A1):
 //
 //   gtceu.recipe.<dataKey>.<recipe>                    the EMI line of each recipe

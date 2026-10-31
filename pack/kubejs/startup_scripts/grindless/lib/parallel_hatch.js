@@ -78,13 +78,13 @@
     var PHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.ParallelHatchPartMachine')
     var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
     event.create('parallel_hatch', 'custom')
-      .tiers(9, 10, 11, 12, 13)
+      .tiers(9, 10, 11, 12, 13, 14)
       .machine(function (holder, tier, tankScaling) { return new PHPM(holder, tier) })
       .definition(function (tier, builder) {
-        // UEV (x4096, UEV-M), UIV (x16384, UIV-M1), UXV (x65536, UXV-M1) and OpV (x262144, OpV-M1): the same registration one tier up; a second event.create of the same name would clash
-        var name = tier === 13 ? 'opv_parallel_hatch' : tier === 12 ? 'uxv_parallel_hatch' : tier === 11 ? 'uiv_parallel_hatch' : tier === 10 ? 'uev_parallel_hatch' : 'uhv_parallel_hatch'
+        // UEV (x4096, UEV-M), UIV (x16384, UIV-M1), UXV (x65536, UXV-M1) OpV (x262144, OpV-M1) and MAX (x1048576, MAX-M1): the same registration one tier up; a second event.create of the same name would clash
+        var name = tier === 14 ? 'max_parallel_hatch' : tier === 13 ? 'opv_parallel_hatch' : tier === 12 ? 'uxv_parallel_hatch' : tier === 11 ? 'uiv_parallel_hatch' : tier === 10 ? 'uev_parallel_hatch' : 'uhv_parallel_hatch'
         builder
-          .langValue(tier === 13 ? 'Overpowered Parallel Control Hatch' : tier === 12 ? 'Extreme Parallel Control Hatch' : tier === 11 ? 'Insane Parallel Control Hatch' : tier === 10 ? 'Ultimate Parallel Control Hatch' : 'Hyper Parallel Control Hatch')
+          .langValue(tier === 14 ? 'Maximum Parallel Control Hatch' : tier === 13 ? 'Overpowered Parallel Control Hatch' : tier === 12 ? 'Extreme Parallel Control Hatch' : tier === 11 ? 'Insane Parallel Control Hatch' : tier === 10 ? 'Ultimate Parallel Control Hatch' : 'Hyper Parallel Control Hatch')
           .rotationState(RotationState.ALL)
           .abilities(PartAbility.PARALLEL_HATCH)
         builder.modelPropertyBool(GTModelProperties.IS_FORMED, false)
@@ -100,7 +100,7 @@
     ability: ABILITY,
     limits: LIMITS,
     // the IV hatch (x4, IV-B6's recipe); GTM's LuV, ZPM and UV ones (x16, x64, x256) fit the same cell; ours at UHV (x1024, MEGA-0b)
-    hatches: ['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch', 'gtceu:zpm_parallel_hatch', 'gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch', 'gtceu:opv_parallel_hatch'],
+    hatches: ['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch', 'gtceu:zpm_parallel_hatch', 'gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch', 'gtceu:opv_parallel_hatch', 'gtceu:max_parallel_hatch'],
     part: part,
     hasHatch: hasHatch,
     modifier: modifier,

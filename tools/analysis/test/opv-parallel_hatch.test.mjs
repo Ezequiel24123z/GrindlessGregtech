@@ -40,7 +40,7 @@ test('the one create covers tiers 9 to 13; tier 13 is named, titled and modelled
   const b = new Proxy({}, { get: (_, m) => (...a) => { calls.push([m, ...a]); if (m === 'definition') defs.push(a[0]); return b; } });
   machine[1]({ create: () => { creates++; return b; } });
   assert.equal(creates, 1);
-  assert.deepEqual(calls.find((c) => c[0] === 'tiers').slice(1), [9, 10, 11, 12, 13]);
+  assert.deepEqual(calls.find((c) => c[0] === 'tiers').slice(1), [9, 10, 11, 12, 13, 14]);
   const run = (tier) => {
     const rec = [];
     const builder = new Proxy({}, { get: (_, m) => (...a) => { rec.push([m, ...a]); return builder; }, set: () => true });
@@ -69,7 +69,7 @@ test('x262144 is 4^(tier - EV) at tier 13 and fits an int; the list ends UV, UHV
   assert.ok(4 ** (13 - 4) <= 2147483647);
   const { G } = load();
   const list = G.parallelHatch.hatches;
-  assert.deepEqual(plain(list.slice(-6)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch', 'gtceu:opv_parallel_hatch']);
+  assert.deepEqual(plain(list.slice(-7)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch', 'gtceu:opv_parallel_hatch', 'gtceu:max_parallel_hatch']);
   assert.equal(list.filter((id) => id === 'gtceu:opv_parallel_hatch').length, 1);
   assert.equal(new Set(list).size, list.length);
 });
