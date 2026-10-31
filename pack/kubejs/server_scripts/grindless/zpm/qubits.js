@@ -170,6 +170,23 @@
     eut: 491520, duration: 600
   })
 
+  // MAX-A3 (max.md, L8 steps 1-2): a thick low-defect diamond grown on a CVD plate (diamond_cvd circuit 9), then its boron delta layer
+  // (ion_implantation circuit 11; c14 is OpV's sdd_rings, c15 hpge_contacts)
+  TABLE.push({
+    name: 'power_diamond_plate', type: 'diamond_cvd', circuit: 9,
+    itemsIn: [{ id: PLATE, count: 1 }], notConsumedItems: [SEED],
+    fluidsIn: [{ id: 'gtceu:methane', amount: 2000 }, { id: 'gtceu:hydrogen', amount: 10000 }],
+    itemsOut: [{ id: 'grindless:power_diamond_plate', count: 1 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 9500 }],
+    eut: 491520, duration: 1600
+  })
+  TABLE.push({
+    name: 'boron_delta_diamond', type: 'ion_implantation', circuit: 11,
+    itemsIn: [{ id: 'grindless:power_diamond_plate', count: 1 }, { id: 'gtceu:boron_dust', count: 1 }], notConsumedItems: [],
+    fluidsIn: [{ id: 'gtceu:argon', amount: 100 }],
+    itemsOut: [{ id: 'grindless:boron_delta_diamond', count: 1 }], fluidsOut: [],
+    eut: 491520, duration: 800
+  })
+
   Q.recipes = TABLE.map(function (t) {
     return {
       name: t.name, type: t.type, recipeId: 'grindless:' + t.type + '/' + t.name, circuit: t.circuit,
