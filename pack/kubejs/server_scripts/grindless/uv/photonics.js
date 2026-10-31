@@ -216,6 +216,14 @@
       fluidsOut: [fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 800 }
   ]
 
+  // OpV-A3 (docs/eras/opv.md, line 45): AlGaN grown on the AlN wafer from trimethylgallium and ammonia; the methyls leave as methane, the
+  // spare ammonia hydrogen goes back
+  var OPV_A3_ROWS = [
+    { name: 'algan_epi', type: 'mocvd', circuit: 22, itemsIn: [item('grindless:aln_wafer', 1)],
+      fluidsIn: [fluid(TMGA, 250), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:algan_epi_wafer', 1)],
+      fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 1200 }
+  ]
+
   // side steps on GTM's own machines
   var SIDE = [
     { name: 'arsine', type: 'chemical_reactor', circuit: null,
@@ -256,6 +264,7 @@
   P.uivRows = UIV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.uxvRows = UXV_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.opvRows = OPV_ROWS.map(function (t) { return publish(t, t.type === 'mocvd' ? 'grindless:' + t.name : 'grindless:' + t.type + '/' + t.name) })
+  P.opvA3Rows = OPV_A3_ROWS.map(function (t) { return publish(t, 'grindless:' + t.type + '/' + t.name) })
   P.skipped = []
   P.clashes = []
   P.crafting = {
@@ -319,10 +328,10 @@
   }
 
   function addMachines(event) {
-    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows))
+    P.clashes = clashesOf(P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows))
     if (P.clashes.length > 0) console.error(LOG + 'photonics recipes clash in the lookup: ' + P.clashes.join(', '))
-    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows).forEach(function (r) { addRecipe(event, r) })
-    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length + P.uxvRows.length + P.opvRows.length - P.skipped.length))
+    P.recipes.concat(P.uhvRows, P.uevRows, P.a8Rows, P.uivRows, P.uxvRows, P.opvRows, P.opvA3Rows).forEach(function (r) { addRecipe(event, r) })
+    console.info(LOG + 'photonics recipes added: ' + (P.recipes.length + P.uhvRows.length + P.uevRows.length + P.a8Rows.length + P.uivRows.length + P.uxvRows.length + P.opvRows.length + P.opvA3Rows.length - P.skipped.length))
   }
 
   function addSide(event) {

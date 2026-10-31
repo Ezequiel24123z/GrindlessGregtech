@@ -98,6 +98,23 @@
           "charge": [],
           "itemsOut": [{ "id": "grindless:gan_mmic", "count": 4 }],
           "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 600 }]
+        },
+        {
+          "_why": "OpV-A3 (opv.md line 45): the gated AlGaN-on-AlN wafer diced and bonded into power dies on copper with silver sinter, as c4 does for SiC",
+          "name": "aln_power_die",
+          "circuit": 8,
+          "eut": 491520,
+          "duration": 400,
+          "itemsIn": [
+            { "id": "grindless:algan_patterned_wafer", "count": 1 },
+            { "id": "gtceu:copper_foil", "count": 4 },
+            { "id": "gtceu:silver_dust", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:aln_power_die", "count": 4 }],
+          "fluidsOut": []
         }
       ]
     },

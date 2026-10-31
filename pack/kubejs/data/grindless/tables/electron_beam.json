@@ -93,7 +93,13 @@
           "itemsOut": [{ "id": "gtceu:thawed_chain_nickel_dust", "count": 4 }, { "id": "grindless:cage_part", "count": 1 }], "fluidsOut": [] },
         { "_why": "OpV-A1 (opv.md line 6; c21): the chain mesh weave (OpV-A0, laminator c5) edge-welded into the belt; the PBO selvedge is trimmed off and re-spun in the UHV PBO plant (c9); the argon purge is 90% recovered.", "name": "mesh_belt_weld", "circuit": 21, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:chain_mesh_weave", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:welded_mesh_belt", "count": 1 }, { "id": "grindless:pbo_belt_trim", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
+          "itemsOut": [{ "id": "grindless:welded_mesh_belt", "count": 1 }, { "id": "grindless:pbo_belt_trim", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
+        { "_why": "OpV-A3 (opv.md line 3; c22): a chain lamina stack sealed in a W-Re can, 6N rhenium and molten tungsten welded shut by the beam, for the field-frozen press.", "name": "field_can", "circuit": 22, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:chain_lamina_stack", "count": 1 }, { "id": "grindless:six_n_rhenium", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:tungsten", "amount": 288 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:field_canned_stack", "count": 1 }], "fluidsOut": [] },
+        { "_why": "OpV-A3 (opv.md machine 13 byproducts; c22 with other item inputs, OpV-F3): five spent cans re-melted, 80% of the W-Re back; the skull goes back to the melt.", "name": "field_can_remelt", "circuit": 22, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:spent_field_can", "count": 5 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:six_n_rhenium", "count": 4 }, { "id": "grindless:eb_skull", "count": 1 }], "fluidsOut": [{ "id": "gtceu:tungsten", "amount": 1152 }] }
       ]
     },
     "single_crystal_casting": {
