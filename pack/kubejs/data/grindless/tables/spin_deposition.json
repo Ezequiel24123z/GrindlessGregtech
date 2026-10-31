@@ -273,6 +273,18 @@
           "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }],
           "itemsOut": [{ "id": "grindless:thick_rebco_tape", "count": 2 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MAX-A4 line L39 (c5): the KrF laser ablates gadolinium barium copper oxide onto the limiter tape in oxygen, growing the thick film the shunt-backed tape carries; the spent target stays in the chamber.",
+          "name": "thick_film_fcl_tape", "circuit": 5, "eut": 33554432, "duration": 800,
+          "itemsIn": [
+            { "id": "grindless:fcl_tape", "count": 2 },
+            { "id": "gtceu:gd_123_dust", "count": 2 }
+          ],
+          "kept": [{ "id": "grindless:krf_excimer_laser", "count": 1 }], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }],
+          "itemsOut": [{ "id": "grindless:thick_film_fcl_tape", "count": 2 }],
+          "fluidsOut": []
         }
       ]
     },

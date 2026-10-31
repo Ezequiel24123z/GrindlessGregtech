@@ -111,6 +111,14 @@
       "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
       "itemsOut": [ { "id": "grindless:smes_toroid_winding", "count": 1 } ],
       "eut": 7864320, "duration": 600
+    },
+    {
+      "name": "fcl_coil", "circuit": 14, "charge": true,
+      "_why": "MAX-A4 line L39 (c14): eight turns of thick-film limiter tape wound with horizon strand wire and potted in epoxy, ramped in the cold-test helium.",
+      "itemsIn": [ { "id": "grindless:thick_film_fcl_tape", "count": 8 }, { "id": "gtceu:horizon_strand_single_wire", "count": 2 } ],
+      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+      "itemsOut": [ { "id": "grindless:fcl_coil", "count": 1 } ],
+      "eut": 7864320, "duration": 600
     }
   ]
 }
