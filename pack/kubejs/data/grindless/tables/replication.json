@@ -36,7 +36,10 @@
           "fluidsOut": [{ "id": "gtceu:oxygen", "amount": 500 }] },
         { "name": "cluster_casing_sinter", "circuit": 6, "eut": 268435456, "duration": 400, "site": true,
           "itemsIn": [{ "id": "grindless:si_alloy_powder", "count": 4 }], "kept": [], "wear": [], "fluidsIn": [],
-          "itemsOut": [{ "id": "grindless:cluster_sinter_casing", "count": 2 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:cluster_sinter_casing", "count": 2 }], "fluidsOut": [] },
+        { "name": "spent_node_recovery", "circuit": 7, "eut": 268435456, "duration": 400, "site": true,
+          "itemsIn": [{ "id": "grindless:spent_collector_node", "count": 4 }], "kept": [], "wear": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:si_alloy_powder", "count": 8 }], "fluidsOut": [] }
       ]
     },
     "self_replication": {
