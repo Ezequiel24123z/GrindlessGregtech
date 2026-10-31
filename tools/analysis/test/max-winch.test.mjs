@@ -51,7 +51,9 @@ test('c1 exists, is a generator row at most VA[MAX] and run in the Sgr A* orbit'
     if (eut !== null && m) assert.equal(-Number(m[1]), eut);
     assert.match(s, /black_hole_orbit/);
   }
-  assert.match(JSON.stringify(find('grindless:geroch_power/geroch_canister_lowering').j), /spent_tether_segment/);
+  const c1s = JSON.stringify(find('grindless:geroch_power/geroch_canister_lowering').j);
+  assert.match(c1s, /spent_tether_segment/);
+  assert.match(c1s, /horizon_tether.{0,80}"chance":1,"maxChance":128/);
   assert.equal(find('grindless:geroch_power/tether_rework'), undefined, 'the rework is no generator row');
   const rw = JSON.stringify(find('grindless:assembler/tether_rework').j);
   assert.match(rw, /spent_tether_segment/);

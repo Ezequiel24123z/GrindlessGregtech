@@ -6,7 +6,7 @@
 //   L17 waste retrieval c10 -> decay heat vault c5 -> hot cell c23 -> canner (here) sealed_waste_log -> assembler (here) geroch_canister -> c1
 //   L20 tether ribbon c13 -> star lifting c3 -> chemical reactor (here) -> autoclave (here) -> assembler (here) horizon_tether -> c2
 //
-// c1 is the only generator row (a generator cannot run a consumer row: the tether rework is an assembler row). c1 is a generator: one canister -> 2^30 EU/t (VH[MAX]) for 2,400 t, a worn tether segment with chance 1/128. L17 balance: the canister
+// c1 is the only generator row (a generator cannot run a consumer row: the tether rework is an assembler row). c1 wears the horizon tether (1/128 in, the spent segment 1/128 out). c1 is a generator: one canister -> 2^30 EU/t (VH[MAX]) for 2,400 t, a worn tether segment with chance 1/128. L17 balance: the canister
 // costs about 1.31e12 EU along the line, c1 gives 2^30 x 2,400 = 2.58e12 EU: about 1.97x. Both recipes run in gcyr:black_hole_orbit.
 // The assemblers run at VA[MAX] in gtceu:assembly_hall (decision 68). The L20 coating step is a chemical reactor, not a chemical bath: the
 // bath takes one item and one fluid, the step has two items. Published for the tests: global.grindless.maxWinch.recipes, .skipped,
@@ -30,7 +30,7 @@
   var SITE = 'gcyr:black_hole_orbit'
 
   var WINCH = [
-    { name: 'geroch_canister_lowering', circuit: 1, duration: 2400, items: ['1x grindless:geroch_canister'],
+    { name: 'geroch_canister_lowering', circuit: 1, duration: 2400, items: [['1x grindless:geroch_canister', 0, 0], ['1x grindless:horizon_tether', 1, 128]],
       outs: [['1x grindless:spent_tether_segment', 1, 128]] }
   ]
 
@@ -66,6 +66,17 @@
     return m
   }
 
+  // 1/128 is not a whole number of ten-thousandths: the builder's chance and maxChance, reset right after
+  function chanced(b, add, spec) {
+    if (spec[1] > 0) {
+      b.chance(spec[1]).maxChance(spec[2])
+      add(spec[0])
+      b.chance(10000).maxChance(10000)
+    } else {
+      add(spec[0])
+    }
+  }
+
   function skip(name, missing) {
     MW.skipped.push(name)
     console.error(LOG + 'winch ' + name + ' skipped, unknown id(s): ' + missing.join(', '))
@@ -74,14 +85,14 @@
   ServerEvents.recipes(function (event) {
     WINCH.forEach(function (r) {
       try {
-        var missing = missingOf(r.items.concat(r.outs.map(function (o) { return o[0] })), [])
+        var missing = missingOf(r.items.concat(r.outs).map(function (o) { return o[0] }), [])
         if (missing.length > 0) {
           skip(r.name, missing)
           return
         }
         var b = event.recipes.gtceu.geroch_power('grindless:' + r.name)
         b.circuit(r.circuit)
-        r.items.forEach(function (s) { b.itemInputs(s) })
+        r.items.forEach(function (s) { chanced(b, function (id) { b.itemInputs(id) }, s) })
         r.outs.forEach(function (o) {
           // 1/128 is not a whole number of ten-thousandths: the builder's chance and maxChance, reset right after
           if (o[1] > 0) {
