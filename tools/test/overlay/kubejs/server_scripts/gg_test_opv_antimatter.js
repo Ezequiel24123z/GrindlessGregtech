@@ -1,12 +1,12 @@
 // TEST ONLY, OpV-B3a. Command: kubejs custom_command gg_test_opv_antimatter.
-// Band: X 38208-38271, Z 0-63, Y 98-115, Overworld and Nether.
+// Band: X 38848-38911, Z 0-63, Y 98-115, Overworld and Nether.
 // Observe the first 1200 ticks of the real pellet row, not its full priced duration.
 // A separate one-tick copy tests native 1/16 tile wear over 16 starts without
 // changing the shipped fuel row. The integrator runs this in the grouped OpV set.
 (function () {
   var NAME = 'opv_antimatter'
-  var X0 = 38208
-  var X1 = 38271
+  var X0 = 38848
+  var X1 = 38911
   var HOME = 'minecraft:overworld'
   var AWAY = 'minecraft:the_nether'
   var EUT = 1073741824
