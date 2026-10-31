@@ -253,7 +253,7 @@ export function analyzeAll(structures, packDir) {
   return out;
 }
 
-export const ERA_ORDER = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'mega', 'power', 'unknown'];
+export const ERA_ORDER = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'mega', 'power', 'unknown'];
 
 /** Compact baseline entry: what the gate compares. */
 export function baselineEntry(a) {

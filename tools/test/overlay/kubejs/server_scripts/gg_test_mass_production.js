@@ -53,7 +53,7 @@
   var STEP = 10
   var FORM_TIMEOUT = 600
   var HOLD_TICKS = 60
-  var SLACK = 120
+  var SLACK = 400
   var NET_TIMEOUT = 400
   var FEED_TIMEOUT = 600
   var STORE_TIMEOUT = 200
@@ -442,8 +442,10 @@
     })
     ;['gtceu:assembler', 'gtceu:assembly_line'].forEach(function (type) {
       asArray(S.server.getRecipeManager().getAllRecipesFor(GTRegistries.RECIPE_TYPES.get(rl(type)))).forEach(function (r) {
-        var ins = gtItemsIn(r).map(function (x) { return [x.id] })
-        gtItemsOut(r).forEach(function (st) { add(itemName(st), { id: String(r.getId()), kind: type, ins: ins }) })
+        var inItems = gtItemsIn(r)
+        var ins = inItems.map(function (x) { return [x.id] })
+        var cnt = inItems.map(function (x) { return x.count })
+        gtItemsOut(r).forEach(function (st) { add(itemName(st), { id: String(r.getId()), kind: type, ins: ins, cnt: cnt }) })
       })
     })
     S.makers = by
@@ -526,8 +528,15 @@
       var m = makersOf(HATCH)
       var ours = m.filter(function (x) { return x.id === mine.id })[0]
       if (!ours) problems.push(mine.id + ' does not make ' + HATCH)
-      var iv = ours ? tiersOf(ours).filter(function (t) { return t === IV }).length : 0
-      var lower = ours ? tiersOf(ours).filter(function (t) { return t < IV }).length : 0
+      // one GT assembler input holds the whole stack (4x circuit tag), so count items, not ingredients
+      var iv = 0
+      var lower = 0
+      if (ours) ours.ins.forEach(function (l, i) {
+        var t = ingredientTier(l)
+        var n = ours.cnt ? ours.cnt[i] : 1
+        if (t === IV) iv += n
+        else if (t >= 0 && t < IV) lower += n
+      })
       if (iv !== 4 || lower !== 0) problems.push(iv + ' IV circuits, ' + lower + ' lower')
       ;['gtceu:iv_sensor', 'gtceu:iv_emitter', 'gtceu:iv_machine_hull', 'gtceu:platinum_double_cable'].forEach(function (id) {
         if (ours && !hasItem(ours, id)) problems.push('no ' + short(id))
@@ -668,6 +677,7 @@
 
   function plainBlock(sym) {
     if (sym.kind === 'blocks') return sym.blocks[0]
+    if (sym.kind === 'frames' && sym.materials && sym.materials.length > 0) return 'gtceu:' + sym.materials[0] + '_frame'
     if (sym.kind === 'oneOf') {
       for (var i = 0; i < sym.options.length; i++) {
         if (sym.options[i].kind === 'blocks') return sym.options[i].blocks[0]

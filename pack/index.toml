@@ -41,6 +41,10 @@ file = "config/ftbquests/quests/chapters/mv_age.snbt"
 hash = "569976697675d7db44ba22e958f016fd15a4a8a2e4d329430734247b6a758513"
 
 [[files]]
+file = "config/ftbquests/quests/chapters/opv_age.snbt"
+hash = "98ea8500c9581fed686902c6aa0eaba43987afa93ea08ed63a9bd15722072073"
+
+[[files]]
 file = "config/ftbquests/quests/chapters/pl_ev.snbt"
 hash = "c84515297a1a374354eaa8d4e1637a25470d69fec305f2e12e9818876879eaeb"
 
@@ -63,6 +67,10 @@ hash = "f0441a117e307e8b24a6de24b4aedc9254555b026913e44a7dd6b00ae52aa9d0"
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_mv.snbt"
 hash = "f9b8c50e1df0dcc730d7a61341bca2c85dbbd2f7885f748ee475601bd99d8e9b"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/pl_opv.snbt"
+hash = "f7f1d7ec23de00598696fec0c64eb0c44ddf7807afd3b6cb3c5c5be6707912d2"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_steam.snbt"
@@ -94,7 +102,7 @@ hash = "085581c14090bcf12bf1837b4bbb142422b3b2525703f9f61a3393ed76be803b"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
-hash = "15b767ae850f85e392a48d2f1b2ebbb4325387ec120c53042f328c695dd3a5a7"
+hash = "84f4c5af4cdbfb95678528c02219fc3a232396e021b990c1621dae5f6eefffa9"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
@@ -13390,7 +13398,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "bfe6967ea57d09bb717bbb5a2a708ba4a326228ba0060c0efc3d9a4f9bda43fa"
+hash = "c7b1edbbc5769ded0e13e4f62c1cd38e5a82f8c94aa574cce7a217df90a6d713"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
