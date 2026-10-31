@@ -1,0 +1,369 @@
+{
+  "tier": "max",
+  "title": "MAX: the 10 multiblocks, Sgr A* orbit and the nuclear star cluster belt, the ending",
+  "extends": "opv",
+  "inheritTargets": true,
+  "note": "MAX validator (MAX-C1), modelled on opv.json. Substages: max (home), max-sgra (after gate c14, gcyr:black_hole_orbit) and max-nsc (after gate c15, grindless:nsc_belt). MAX rows run on two MAX hatches or a wireless MAX tier. Exemptions (C1 lists them here; the component rule itself is enforced by recipe_quality.json exemptRecipes, which C1 does not edit): grindless:gc_relay_probe (an OpV-stage travel item: OpV parts, no MAX component); grindless:mirror_shell_segment and the casing blocks max_optical_table_casing, membrane_roller_casing, geroch_drum_casing, stream_turn_casing, stream_bundle_block and feeder_coil_casing (casing exemption, as OpV); gtceu:max_machine_hull (no circuit, as GTM's hulls); gtceu:max_machine_casing (a casing: three OpV parts, as opv_machine_casing takes opv_sensor).",
+  "eraOrder": [
+    "uxv-cas-a",
+    "opv",
+    "opv-sgr",
+    "opv-terzan5",
+    "max",
+    "max-sgra",
+    "max-nsc"
+  ],
+  "packages": {
+    "MAX-F1": { "label": "ids and places", "landedWhen": ["grindless:max_electric_motor", "grindless:max_sensor"] },
+    "MAX-A0": { "label": "horizon strand and hull", "landedWhen": ["grindless:horizon_strand_preform"] },
+    "MAX-D1": { "label": "Sgr A* modes on older machines", "landedWhen": ["grindless:shell_droplet_radiator"] },
+    "MAX-H1": { "label": "shell parts", "landedWhen": ["grindless:mirror_shell_segment"] },
+    "MAX-T1": { "label": "gate c14 to Sgr A*", "landedWhen": ["recipe:grindless:warp_gate/hold_sgr_a_probe"] },
+    "MAX-T2": { "label": "gate c15 to the belt", "landedWhen": ["recipe:grindless:warp_gate/hold_nsc_belt"] },
+    "MAX-B3": { "label": "Rydberg array works", "landedWhen": ["gtceu:rydberg_array_works"] },
+    "MAX-B2": { "label": "atom interferometer works", "landedWhen": ["gtceu:atom_interferometer_works"] },
+    "MAX-B1": { "label": "membrane line", "landedWhen": ["gtceu:membrane_line"] },
+    "MAX-B4": { "label": "gene ark", "landedWhen": ["gtceu:gene_ark"] },
+    "MAX-D2": { "label": "photon ring imager", "landedWhen": ["gtceu:photon_ring_imager"] },
+    "MAX-D3": { "label": "Geroch winch", "landedWhen": ["gtceu:geroch_winch"] },
+    "MAX-D4": { "label": "mass stream injector", "landedWhen": ["gtceu:mass_stream_injector"] },
+    "MAX-G1": { "label": "mirror shell and the ending", "landedWhen": ["gtceu:mirror_shell"] },
+    "MAX-R1": { "label": "cluster-light furnace", "landedWhen": ["gtceu:cluster_light_furnace"] },
+    "MAX-E1": { "label": "accretion feeder", "landedWhen": ["gtceu:accretion_feeder"] }
+  },
+  "conditions": {
+    "dimension": {
+      "asKeysFor": ["gcyr:luna", "gcyr:mars", "gcyr:venus", "gcyr:mercury", "minecraft:the_end", "minecraft:the_nether", "${orbits}", "${places}", "gcyr:black_hole_orbit", "grindless:nsc_belt"],
+      "note": "Sgr A* orbit (gate c14) and the belt (gate c15) are not in tables/orbits.json or places.json: a recipe valid there needs the dim: key of the jumps (synthetics sgra-jump and nsc-jump)."
+    }
+  },
+  "machines": [
+    { "machine": "gtceu:rydberg_array_works", "types": ["gtceu:rydberg_assembly"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B3" },
+    { "machine": "gtceu:atom_interferometer_works", "types": ["gtceu:atom_interferometry"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B2" },
+    { "machine": "gtceu:membrane_line", "types": ["gtceu:membrane_rolling"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B1" },
+    { "machine": "gtceu:gene_ark", "types": ["gtceu:genome_archiving"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B4" },
+    { "machine": "gtceu:photon_ring_imager", "types": ["gtceu:photon_ring_imaging"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-D2" },
+    { "machine": "gtceu:geroch_winch", "types": ["gtceu:geroch_power"], "maxEUt": 8589934592, "needs": ["eu:opv"], "package": "MAX-D3" },
+    { "machine": "gtceu:mass_stream_injector", "types": ["gtceu:mass_stream_injection"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-D4" },
+    { "machine": "gtceu:mirror_shell", "types": ["gtceu:black_hole_bomb"], "maxEUt": 34359738368, "needs": ["eu:opv"], "package": "MAX-G1" },
+    { "machine": "gtceu:cluster_light_furnace", "types": ["gtceu:cluster_light_smelting"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-R1" },
+    { "machine": "gtceu:accretion_feeder", "types": ["gtceu:accretion_power"], "maxEUt": 8589934592, "needs": ["eu:opv"], "package": "MAX-E1" },
+    { "id": "gtceu:warp_gate@max", "machine": "gtceu:warp_gate", "types": ["gtceu:warp_gate"], "maxEUt": 8589934592,     "needs": ["eu:opv"], "package": "MAX-T1" },
+        { "id": "gtceu:assembly_line@max", "machine": "gtceu:assembly_line", "types": ["gtceu:assembly_line"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1", "note": "MAX components run on the OpV hatch pair the same way OpV rows ran on UXV." },
+        { "id": "gtceu:assembly_hall@max", "machine": "gtceu:assembly_hall", "types": ["gtceu:assembler", "gtceu:circuit_assembler"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
+        { "id": "gtceu:photonic_integration_hall@max", "machine": "gtceu:photonic_integration_hall", "types": ["gtceu:photonic_integration"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
+        { "id": "gtceu:swarm_segment_foundry@max", "machine": "gtceu:swarm_segment_foundry", "types": ["gtceu:swarm_segment"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-H1", "note": "Makes mirror_shell_segment at Sgr A* orbit (T-VOLT exemption in recipe_quality.json)." },
+    { "id": "gtceu:helium_refrigerator@max", "machine": "gtceu:helium_refrigerator", "types": ["gtceu:closed_loop_cooling"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
+    { "id": "gtceu:asteroid_processor@max", "machine": "gtceu:asteroid_processor", "types": ["gtceu:asteroid_processing"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
+    { "id": "gtceu:accretion_disk_skimmer@max", "machine": "gtceu:accretion_disk_skimmer", "types": ["gtceu:disk_skimming"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" }
+      ],
+  "machinesFromRegistry": [
+    {
+      "prefix": "gtceu:max_",
+      "maxEUt": 2147483648,
+      "needs": ["eu:max"],
+      "excludeTypes": ["gtceu:dummy", "gtceu:steam_turbine", "gtceu:combustion_generator", "gtceu:gas_turbine"]
+    }
+  ],
+  "synthetic": [
+    {
+      "id": "wireless-max",
+      "package": "MAX-F1",
+      "capital": ["gtceu:wireless_energy_tower", "grindless:max_smes_cell", "grindless:horizon_strand_repeater"],
+      "consumes": ["eu:opv"],
+      "produces": ["eu:max", "wireless:max"],
+      "note": "Wireless case 14 (MAX-W)."
+    },
+    {
+      "id": "sgra-jump",
+      "package": "MAX-T1",
+      "capital": ["grindless:gc_relay_probe", "gtceu:warp_gate", "grindless:sgr_a_chart"],
+      "consumes": ["dim:grindless:cygnus_x1_orbit", "eu:opv"],
+      "produces": ["dim:gcyr:black_hole_orbit"],
+      "note": "Gate c14 (hold_sgr_a_probe, 2^33 EU/t at Cygnus X-1 orbit): the substage max-sgra."
+    },
+    {
+      "id": "nsc-jump",
+      "package": "MAX-T2",
+      "capital": ["grindless:nsc_belt_seed", "gtceu:warp_gate"],
+      "consumes": ["dim:gcyr:black_hole_orbit", "eu:opv"],
+      "produces": ["dim:grindless:nsc_belt"],
+      "note": "Gate c15 (hold_nsc_belt, 2^33 EU/t at Sgr A* orbit): the substage max-nsc."
+    }
+  ],
+  "eraResources": [
+    {
+      "id": "sgra",
+      "era": "max-sgra",
+      "label": "Sgr A* orbit and what comes home",
+      "dimensions": ["gcyr:black_hole_orbit"],
+      "items": [
+        "grindless:sgr_a_spin_map",
+        "grindless:nsc_ephemeris",
+        "grindless:shell_gradient_map",
+        "grindless:final_spin_map",
+        "grindless:nsc_belt_seed",
+        "grindless:launched_gc_probe",
+        "fluid:gtceu:hot_flow_plasma",
+        "fluid:gtceu:filtered_hot_flow",
+        "fluid:gtceu:flux_loaded_frc",
+        "fluid:gtceu:cooled_exhaust"
+      ]
+    },
+    {
+      "id": "nsc",
+      "era": "max-nsc",
+      "label": "The NSC belt and what comes home",
+      "dimensions": ["grindless:nsc_belt"],
+      "items": ["grindless:nsc_planetesimal", "grindless:launched_belt_seed"]
+    }
+  ],
+  "eraItems": [
+    {
+      "id": "max-home",
+      "era": "max",
+      "label": "MAX at home: the 29 gtceu:max_* ids, the 9 components, the parallel hatch, the 4 home machines and what they make before Sgr A*",
+      "items": [
+        "gtceu:max_*",
+        "grindless:max_electric_motor", "grindless:max_electric_pump", "grindless:max_electric_piston", "grindless:max_robot_arm", "grindless:max_emitter", "grindless:max_fluid_regulator", "grindless:max_conveyor_module", "grindless:max_sensor", "grindless:max_field_generator",
+        "m:gtceu:rydberg_array_works", "m:gtceu:atom_interferometer_works", "m:gtceu:membrane_line", "m:gtceu:gene_ark", "m:gtceu:photon_ring_imager",
+        "grindless:eu_yso_boule", "grindless:mram_stack_wafer", "grindless:hollow_core_fibre",
+        "grindless:horizon_strand_repeater", "grindless:exotic_cladding_foil", "grindless:clad_chain_strand", "grindless:horizon_strand_preform", "grindless:pbo_braid_sleeve",
+        "grindless:superconducting_membrane", "grindless:matter_wave_gradiometer", "grindless:rydberg_logic_array", "grindless:genome_archive", "grindless:gc_relay_probe",
+        "grindless:max_optical_table_casing", "grindless:membrane_roller_casing"
+      ]
+    },
+    {
+      "id": "max-sgra-items",
+      "era": "max-sgra",
+      "label": "Sgr A* orbit (gate c14): the charts, the shell parts and the belt seed",
+      "items": [
+        "grindless:sgr_a_spin_map", "grindless:nsc_ephemeris", "grindless:shell_gradient_map", "grindless:final_spin_map", "grindless:launched_gc_probe", "grindless:nsc_belt_seed",
+        "m:gtceu:geroch_winch", "grindless:geroch_drum_casing", "grindless:geroch_canister", "grindless:horizon_tether"
+      ]
+    },
+    {
+      "id": "max-nsc-items",
+      "era": "max-nsc",
+      "label": "The belt (gate c15) and the ending",
+      "items": [
+        "grindless:launched_belt_seed", "grindless:nsc_planetesimal",         "grindless:universe_seed",
+        "m:gtceu:mass_stream_injector", "m:gtceu:mirror_shell", "m:gtceu:accretion_feeder", "m:gtceu:cluster_light_furnace",
+        "grindless:stream_bundle", "grindless:stream_pellet", "grindless:stream_bundle_block", "grindless:stream_turn_casing", "grindless:mirror_shell_segment", "grindless:feeder_coil_casing"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "id": "site-mercury-orbit",
+      "label": "Site: the swarm machines and the solar probe only in Mercury orbit or at Alpha Centauri AB",
+      "kind": "site",
+      "types": ["gtceu:swarm_segment", "gtceu:dyson_swarm", "gtceu:solar_probe"],
+      "dimensions": ["gcyr:mercury_orbit", "grindless:alpha_centauri_orbit"],
+      "exceptRecipes": ["grindless:swarm_segment/mirror_shell_segment"],
+      "package": "B2",
+      "note": "UHV's target plus the Alpha Centauri rows; MAX-H1's mirror_shell_segment is made on the swarm foundry at Sgr A* orbit (site-max-sgra-older-rows holds it there)."
+    },
+    {
+      "id": "site-sirius-orbit",
+      "label": "Site: the spectrograph, the harvester and the containment works only at Sirius B's orbit",
+      "kind": "site",
+      "types": ["gtceu:gravitational_redshift", "gtceu:degenerate_harvesting", "gtceu:degenerate_containment"],
+      "dimensions": ["grindless:sirius_b_orbit"],
+      "exceptRecipes": ["grindless:degenerate_harvesting/degenerate_slug"],
+      "package": "B4",
+      "note": "degenerate_slug is MAX's older-machine row at Sgr A* orbit."
+    },
+    {
+      "id": "site-mercury-matrioshka",
+      "label": "Site: the Matrioshka computer and the droplet radiator works only in Mercury orbit",
+      "kind": "site",
+      "types": ["gtceu:matrioshka_computing", "gtceu:droplet_radiator_assembly"],
+      "dimensions": ["gcyr:mercury_orbit"],
+      "exceptRecipes": ["grindless:droplet_radiator_assembly/shell_droplet_radiator"],
+      "package": "A10",
+      "note": "shell_droplet_radiator is MAX's older-machine row at Sgr A* orbit."
+    },
+    {
+      "id": "site-cygnus",
+      "label": "Site: the probe bay and the Penrose engine only at Cygnus X-1",
+      "kind": "site",
+      "types": ["gtceu:ergosphere_probing", "gtceu:penrose_extraction"],
+      "dimensions": ["grindless:cygnus_x1_orbit"],
+      "exceptRecipes": ["grindless:penrose_extraction/payload_penrose"],
+      "package": "B4",
+      "note": "payload_penrose is MAX's older-machine row at Sgr A* orbit."
+    },
+    {
+      "id": "site-warp-gate",
+      "label": "Site: the warp gate only at its ends (Earth, Proxima b, Alpha Centauri AB, Sirius B, the three UIV relay orbits, Vela pulsar orbit, Cassiopeia A, SGR 1806-20 orbit, Terzan 5 core and Sgr A* orbit)",
+      "kind": "site",
+      "types": ["gtceu:warp_gate"],
+      "dimensions": [
+        "gcyr:overworld_orbit",
+        "grindless:proxima_b_orbit",
+        "grindless:alpha_centauri_orbit",
+        "grindless:sirius_b_orbit",
+        "grindless:rx_j1856_orbit",
+        "grindless:psr_j0437_orbit",
+        "grindless:cygnus_x1_orbit",
+        "grindless:vela_pulsar_orbit",
+        "grindless:cas_a_remnant",
+        "grindless:sgr1806_orbit",
+        "grindless:terzan5_core",
+        "gcyr:black_hole_orbit"
+      ],
+      "exceptRecipes": ["gg_test_uxv_s0:*"],
+      "package": "B5",
+      "note": "Every warp gate row, hold rows included. MAX adds Sgr A* orbit: open, sustain and gate c15 (hold_nsc_belt) run there. gg_test_uxv_s0:warp_gate/warp_gate/hold_probe is a test-overlay recipe in the dump (no dimension condition), not a pack recipe."
+    },
+    {
+      "id": "site-cygnus-uxv",
+      "label": "Site: the stellar elevator, plasma mass filter, condensation tower, disk skimmer, FRC former and BZ dynamo only at Cygnus X-1",
+      "kind": "site",
+      "types": ["gtceu:star_lifting", "gtceu:plasma_mass_filtering", "gtceu:stellar_condensation", "gtceu:disk_skimming", "gtceu:frc_forming", "gtceu:blandford_znajek"],
+      "dimensions": ["grindless:cygnus_x1_orbit"],
+      "exceptRecipes": [
+        "grindless:frc_forming/load_flux",
+        "grindless:plasma_mass_filtering/disk_filter",
+        "grindless:disk_skimming/skim_hot_flow",
+        "grindless:frc_forming/load_flux_frc",
+        "grindless:blandford_znajek/frc_spin_down",
+        "grindless:plasma_mass_filtering/hot_flow_filter",
+        "grindless:plasma_mass_filtering/cooled_exhaust_return"
+      ],
+      "package": ["B2", "B3"],
+      "note": "As built (see uxv.json). The five MAX rows (hot flow skim, flux-loaded FRC, spin-down, hot-flow filter, cooled exhaust return) are MAX's older-machine rows at Sgr A* orbit (site-max-sgra-older-rows)."
+    },
+    {
+      "id": "site-vela",
+      "label": "Site: the pasta extractor, phase sorter, draw bench, laminator and polar cap tap only at Vela pulsar orbit",
+      "kind": "site",
+      "types": ["gtceu:pasta_extraction", "gtceu:pasta_sorting", "gtceu:pasta_drawing", "gtceu:pasta_lamination", "gtceu:polar_cap_tapping"],
+      "dimensions": ["grindless:vela_pulsar_orbit"],
+      "exceptRecipes": [
+        "grindless:pasta_extraction/chain_crust",
+        "grindless:pasta_extraction/ni_chain",
+        "grindless:pasta_extraction/chain_lattice",
+        "grindless:pasta_sorting/chain_caging",
+        "grindless:pasta_sorting/ni_chain_caging",
+        "grindless:pasta_sorting/lattice_caging",
+        "grindless:pasta_drawing/chain_strand_drawing",
+        "grindless:pasta_drawing/chain_wire_drawing",
+        "grindless:pasta_lamination/chain_lamina",
+        "grindless:pasta_lamination/chain_lamina_stack",
+        "grindless:pasta_lamination/chain_mesh_weave",
+        "grindless:pasta_drawing/horizon_strand_preform",
+        "grindless:pasta_drawing/horizon_wire_drawing"
+      ],
+      "package": "B4",
+      "note": "OpV-A0's chain matter modes run at SGR 1806-20 orbit (site-sgr-chain-matter); MAX-A0's horizon strand preform and wire drawing run there too (site-max-horizon-strand)."
+    },
+    {
+      "id": "site-opv-terzan5",
+      "label": "Site: the debris harvester, refinery, foundry, node works and bulge collector only at the Terzan 5 core",
+      "kind": "site",
+      "types": ["gtceu:debris_harvesting", "gtceu:replication_refining", "gtceu:self_replication", "gtceu:collector_node_assembly", "gtceu:bulge_light_collection"],
+      "dimensions": ["grindless:terzan5_core"],
+      "exceptRecipes": ["grindless:debris_harvesting/nsc_planetesimal_harvest"],
+      "package": "R1",
+      "note": "nsc_planetesimal_harvest is MAX's debris harvester row at the NSC belt (site-max-nsc-harvest)."
+    },
+    {
+      "id": "site-max-sgra",
+      "label": "Site: the imager, winch, injector, mirror shell and accretion feeder only at Sgr A* orbit",
+      "kind": "site",
+      "types": ["gtceu:photon_ring_imaging", "gtceu:geroch_power", "gtceu:mass_stream_injection", "gtceu:black_hole_bomb", "gtceu:accretion_power"],
+      "dimensions": ["gcyr:black_hole_orbit"],
+      "package": ["MAX-D2", "MAX-D3", "MAX-D4", "MAX-G1", "MAX-E1"]
+    },
+    {
+      "id": "site-max-nsc",
+      "label": "Site: the cluster-light furnace only at the NSC belt",
+      "kind": "site",
+      "types": ["gtceu:cluster_light_smelting"],
+      "dimensions": ["grindless:nsc_belt"],
+      "package": "MAX-R1"
+    },
+    {
+      "id": "site-max-sgra-older-rows",
+      "label": "Site: MAX's rows on older machines that need Sgr A* only at Sgr A* orbit",
+      "kind": "site",
+      "types": ["gtceu:swarm_segment", "gtceu:degenerate_harvesting", "gtceu:droplet_radiator_assembly", "gtceu:penrose_extraction", "gtceu:disk_skimming", "gtceu:frc_forming", "gtceu:blandford_znajek", "gtceu:plasma_mass_filtering"],
+      "recipe": [
+        "grindless:swarm_segment/mirror_shell_segment",
+        "grindless:degenerate_harvesting/degenerate_slug",
+        "grindless:droplet_radiator_assembly/shell_droplet_radiator",
+        "grindless:penrose_extraction/payload_penrose",
+        "grindless:disk_skimming/skim_hot_flow",
+        "grindless:frc_forming/load_flux_frc",
+        "grindless:blandford_znajek/frc_spin_down",
+        "grindless:plasma_mass_filtering/hot_flow_filter",
+        "grindless:plasma_mass_filtering/cooled_exhaust_return"
+      ],
+      "dimensions": ["gcyr:black_hole_orbit"],
+      "exact": true,
+      "package": ["MAX-D1", "MAX-H1"]
+    },
+    {
+      "id": "site-max-horizon-strand",
+      "label": "Site: the horizon strand preform and wire drawing only at SGR 1806-20 orbit (the SGR draw bench)",
+      "kind": "site",
+      "types": ["gtceu:pasta_drawing"],
+      "recipe": ["grindless:pasta_drawing/horizon_strand_preform", "grindless:pasta_drawing/horizon_wire_drawing"],
+      "dimensions": ["grindless:sgr1806_orbit"],
+      "exact": true,
+      "package": "MAX-A0"
+    },
+    {
+      "id": "site-max-nsc-harvest",
+      "label": "Site: the debris harvester's planetesimal row only at the NSC belt",
+      "kind": "site",
+      "types": ["gtceu:debris_harvesting"],
+      "recipe": ["grindless:debris_harvesting/nsc_planetesimal_harvest"],
+      "dimensions": ["grindless:nsc_belt"],
+      "exact": true,
+      "package": "MAX-R1"
+    },
+    {
+      "id": "gate-hold-sgr-a-probe",
+      "label": "Gate: the hold row for Sgr A* orbit (c14)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": ["grindless:warp_gate/hold_sgr_a_probe"],
+      "package": "MAX-T1"
+    },
+    {
+      "id": "gate-hold-nsc-belt",
+      "label": "Gate: the hold row for the NSC belt (c15)",
+      "kind": "recipe",
+      "type": "gtceu:warp_gate",
+      "recipe": ["grindless:warp_gate/hold_nsc_belt"],
+      "package": "MAX-T2"
+    },
+    {
+      "id": "gate-sgra-orbit",
+      "label": "Gate: the jump to Sgr A* orbit",
+      "allOf": ["dim:gcyr:black_hole_orbit"],
+      "package": "MAX-T1"
+    },
+    {
+      "id": "gate-nsc-belt",
+      "label": "Gate: the jump to the NSC belt",
+      "allOf": ["dim:grindless:nsc_belt"],
+      "package": "MAX-T2"
+    },
+    {
+      "id": "gate-gc-relay-probe",
+      "label": "Gate: the galactic centre relay probe",
+      "item": "grindless:gc_relay_probe",
+      "package": "MAX-T1"
+    },
+    {
+      "id": "gate-nsc-belt-seed",
+      "label": "Gate: the belt seed",
+      "item": "grindless:nsc_belt_seed",
+      "package": "MAX-T2"
+    }
+  ]
+}
