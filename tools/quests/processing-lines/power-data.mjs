@@ -822,7 +822,7 @@ export default gate({
           figs: [P.wcell('grindless:uxv_smes_cell', 'UXV SMES', 4026531840000)],
         }),
         // OpV's cell: four UXV cells' worth
-        E('eqOpvCell', 0, 14, 'opv_age', '500C1E02A6CC0121'),
+        E('eqOpvCell', 0, 14, 'opv_integration', '1D5A8A7451FF4E70'),
         n('wopv', 2.25, 14, I('grindless:opv_smes_cell'), 'OpV SMES Cell', {
           kind: 'info', from: ['eqOpvCell'], sub: 'Six thousand one hundred and forty-four UV batteries\' worth',
           desc: 'The network jumps to OpV only when every formed tower holds these. Case 13 caps the buffer at the voltage times the amps times ten: 2 A holds 10,737,418,240 EU and 64 A holds 343,597,383,680 EU.',

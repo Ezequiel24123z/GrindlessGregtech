@@ -103,7 +103,10 @@ var GG_QUESTS_EXPECTED = {
   uxv_circuits: [16, 23],
   uxv_machines: [24, 25],
   uxv_integration: [19, 19],
-  opv_age: [52, 57],
+  opv_age: [29, 34],
+  opv_circuits: [10, 11],
+  opv_machines: [23, 23],
+  opv_integration: [18, 21],
   max_age: [52, 52]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)

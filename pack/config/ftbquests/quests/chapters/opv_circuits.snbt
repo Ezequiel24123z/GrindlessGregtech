@@ -1,0 +1,175 @@
+{
+	autofocus_id: "7D95B836E06310DB"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "opv_circuits"
+	group: "41398BEC88C216FF"
+	icon: "gtnn:cosmic_mainframe"
+	id: "322993FDE4B52217"
+	order_index: 1
+	quest_links: [
+		{
+			id: "3A3FCB26288E2EA2"
+			linked_quest: "7C074BF11FC1790D"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "7E8FBDDD38252CF0"
+			linked_quest: "7C074BF11FC1790D"
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			id: "7C39E263C6D7454C"
+			linked_quest: "59A06A2C9ADDA9E4"
+			x: 0.0d
+			y: 6.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["7C074BF11FC1790D"]
+			description: ["Natural silicon carries a few percent of silicon-29, whose nuclear spin disturbs a cold qubit. Purified silicon-28 on an insulating layer gives the &6Silicon-28 SOI Wafer&r that every cold chip is cut from. Silicon-28 from the centrifuge cascade, an oxide layer and the wafer bonder you already run. The cryo-CMOS wafer and the tetron chain. Keep a chest of wafers behind the bonder, since every later chip row draws from it."]
+			icon: "grindless:si28_soi_wafer"
+			id: "7D95B836E06310DB"
+			rewards: [{ id: "3475373D8FC14F2C", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3509AF9C7AA4FE39", item: "grindless:si28_soi_wafer", type: "item" }]
+			title: "Silicon-28 SOI Wafer"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7D95B836E06310DB"]
+			description: ["Ordinary transistors stop working well near absolute zero, so the doping and the metal are tuned for the cold. The &6Cryo-CMOS Wafer&r is exposed, implanted and metallised in that order, and cut into dies. The lithography and implant lines of the age, and a silicon-28 wafer. The cryo-CMOS die, the logic of the cosmic mainframe. Stage by stage in one line, with the cut dies sent straight to the mainframe row."]
+			icon: "grindless:cryo_cmos_metal_wafer"
+			id: "3AD6042F25DCDFAE"
+			rewards: [{ id: "5AE9D7EA62440A09", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "3ACAF742691409BA", item: "grindless:cryo_cmos_metal_wafer", type: "item" }
+				{ id: "32946CDE111E80EB", item: "grindless:cryo_cmos_die", type: "item" }
+			]
+			title: "Cryo-CMOS Wafer"
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3AD6042F25DCDFAE"]
+			description: ["A niobium interposer carries the signals through the die, a HEMT amplifier lifts them out of the noise, and an optical link takes them out of the cold without carrying heat in. The &6Niobium TSV Interposer&r, the &6HEMT Amplifier&r and the &6Cryo Optical Link&r are all ordinary assembler work once the dies exist."]
+			icon: "grindless:cryo_optical_link"
+			id: "328CDB4584A0E113"
+			rewards: [{ id: "57487BE14A359C27", type: "xp", xp: 120 }]
+			tasks: [
+				{ id: "3F4452F8C40138FF", item: "grindless:nb_tsv_interposer", type: "item" }
+				{ id: "589FD06B4D89DAEC", item: "grindless:hemt_amplifier", type: "item" }
+				{ id: "712C8D7A0D318AB9", item: "grindless:cryo_optical_link", type: "item" }
+			]
+			title: "Cryogenic Links"
+			x: 7.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["328CDB4584A0E113"]
+			description: ["A cryo-CMOS die, a niobium interposer, an amplifier and an optical link, all joined in one cold package. The &6Cosmic Mainframe&r is the OpV circuit. The cryo-CMOS die and the three parts of the row before it, on the assembly line. The OpV sensor and the controller of every machine past the hull. One of each part per mainframe, so keep a dedicated chest and never a big stock."]
+			icon: "gtnn:cosmic_mainframe"
+			id: "74C17E229844F7DF"
+			rewards: [{ id: "7A3CDCD62A90CD5F", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7611412123E87135", item: "gtnn:cosmic_mainframe", type: "item" }]
+			title: "Cosmic Mainframe"
+			x: 9.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7C074BF11FC1790D"]
+			description: ["A flexible steel cup that deforms against a ring of teeth turns with no backlash at all. The &6OpV Harmonic Drive&r is the gear of the OpV robot arm and holds position to a fraction of an arc second."]
+			icon: "grindless:opv_harmonic_drive"
+			id: "7FD656811E00D002"
+			rewards: [{ id: "1B562FCD3792D51F", type: "xp", xp: 100 }]
+			tasks: [{ id: "7E805A218F31BAC8", item: "grindless:opv_harmonic_drive", type: "item" }]
+			title: "Harmonic Drive"
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["74C17E229844F7DF"]
+			description: ["The &6OpV Sensor&r measures what the detectors of the age need to see: single photons, charge and spin. The emitter, the field generator and many controllers use one. A cosmic mainframe, the OpV hull and the assembly line. The OpV emitter and the controllers that watch a beam. Mainframes by ME in matched counts; keep sensors in a small stock."]
+			icon: "gtceu:opv_sensor"
+			id: "3BA080B24583F060"
+			rewards: [{ id: "3EEEFF1E6AB60D86", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "562FAE7CE1E2707A", item: "gtceu:opv_sensor", type: "item" }]
+			title: "OpV Sensor"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["59A06A2C9ADDA9E4", "7FD656811E00D002"]
+			description: ["The &6OpV Electric Motor&r runs on a superconducting winding in a cooled housing, and the &6OpV Electric Pump&r moves fluid with a travelling field. The piston and conveyor run on composite rods and lamina stacks, the robot arm turns on the harmonic drive, and the emitter, sensor and field generator close the set with the fluid regulator."]
+			icon: "gtceu:opv_electric_motor"
+			id: "51B76517CEFC0F97"
+			rewards: [{ id: "73B2A86758A64E86", type: "xp", xp: 200 }]
+			tasks: [
+				{ id: "1B3266F01B6A11B3", item: "gtceu:opv_electric_motor", type: "item" }
+				{ id: "1D088B0E0CC5978E", item: "gtceu:opv_electric_pump", type: "item" }
+				{ id: "179EFC776530C279", item: "gtceu:opv_electric_piston", type: "item" }
+				{ id: "119266EE4FCF6357", item: "gtceu:opv_conveyor_module", type: "item" }
+				{ id: "33E26360D3A29FB7", item: "gtceu:opv_robot_arm", type: "item" }
+				{ id: "7CB4896ABAA11E6B", item: "gtceu:opv_emitter", type: "item" }
+				{ id: "39558120E4867B3E", item: "gtceu:opv_field_generator", type: "item" }
+				{ id: "11B606E21F7B69CE", item: "gtceu:opv_fluid_regulator", type: "item" }
+			]
+			title: "OpV Components"
+			x: 4.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["51B76517CEFC0F97"]
+			description: ["The &6OpV Energy Hatch&r takes power in or gives it back, as a single, four or sixteen amp hatch. The beam lines and the engines of the age are wired to them."]
+			icon: "gtceu:opv_energy_input_hatch"
+			id: "500C1E02A6CC0121"
+			rewards: [{ id: "762094F57DA03DD6", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "55AF0ADCAFCCFC64", item: "gtceu:opv_energy_input_hatch", type: "item" }
+				{ id: "3722CFF3D950ED02", item: "gtceu:opv_energy_output_hatch", type: "item" }
+			]
+			title: "OpV Energy Hatches"
+			x: 7.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["500C1E02A6CC0121"]
+			description: ["The &6OpV Assembler&r is the single-block assembler at the voltage of the age, for every part that does not need a line. An OpV hull, the OpV components and the machine casing of the age. Faster part rows at OpV voltage. Parts by ME in and out; one assembler per product keeps the recipes from interleaving."]
+			icon: "gtceu:opv_assembler"
+			id: "5B22AF4BC1D6F0C9"
+			rewards: [{ id: "3B54CD6BD3EE291C", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3371D5550DAE8267", item: "gtceu:opv_assembler", type: "item" }]
+			title: "OpV Assembler"
+			x: 9.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["5B22AF4BC1D6F0C9"]
+			description: ["The &6OpV Circuit Assembler&r works at the voltage of the cosmic mainframe, for everything below it that still wants a board. An OpV hull, the OpV components and the cleanroom you already run. Faster circuit rows at OpV voltage; the mainframe itself still comes from the cold line. Boards and chips by ME; keep a small stock of what it returns."]
+			icon: "gtceu:opv_circuit_assembler"
+			id: "5CB5C38F24E89ABD"
+			rewards: [{ id: "117CD95FF7FD401F", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7B57AF1F533091BA", item: "gtceu:opv_circuit_assembler", type: "item" }]
+			title: "OpV Circuit Assembler"
+			x: 12.0d
+			y: 6.0d
+		}
+	]
+	subtitle: ["Logic that runs at the temperature of space, and the sensor, drive, parts and assembler that put it to work."]
+	title: "OpV: Circuits"
+}

@@ -544,7 +544,7 @@
 		}
 		{
 			id: "30AE33E8F0FEC611"
-			linked_quest: "500C1E02A6CC0121"
+			linked_quest: "1D5A8A7451FF4E70"
 			shape: "rsquare"
 			x: 0.5d
 			y: 112.25d
@@ -2296,7 +2296,7 @@
 			y: 110.25d
 		}
 		{
-			dependencies: ["500C1E02A6CC0121"]
+			dependencies: ["1D5A8A7451FF4E70"]
 			description: [
 				"The network jumps to OpV only when every formed tower holds these. Case 13 caps the buffer at the voltage times the amps times ten: 2 A holds 10,737,418,240 EU and 64 A holds 343,597,383,680 EU."
 				"Holds: OpV SMES 16,106,127,360,000 EU."
