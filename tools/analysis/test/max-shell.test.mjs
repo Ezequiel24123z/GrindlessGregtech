@@ -29,7 +29,7 @@ test('the stand-in runs the script without errors, skips nothing', () => {
   assert.deepEqual(plain(MS.skipped), []);
   assert.deepEqual(plain(MS.pendingRoutes), []);
   assert.ok(MS.controllerRecipe);
-  assert.equal(MS.recipes.length, 3);
+  assert.equal(MS.recipes.length, 4);
 });
 
 test('c1 is a generator of 2^30 EU/t for 4,800 t at about 2.3x the cost of the packet along L18', () => {

@@ -61,7 +61,10 @@
           "itemsOut": [{ "id": "grindless:segment_alloy_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] },
         { "_why": "MX-S1 (max.md, L47 step 2, c22): gold melted with the platinum sponge under helium into the Au-Pt ingot of the test masses; the oxide skin leaves as dross.", "name": "au_pt_ingot", "circuit": 22, "eut": 7864320, "duration": 2400,
           "itemsIn": [{ "id": "gtceu:gold_dust", "count": 11 }, { "id": "grindless:gr_platinum_sponge", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:au_pt_ingot", "count": 15 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:au_pt_ingot", "count": 15 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] },
+        { "_why": "XP-A1 (maxplus.md, line P3 step 2, c23): fed strangelets melted with tungsten under helium into strange alloy charges, the refinery's c3 feed; the oxide skin leaves as dross. Circuit 23: the file's highest was 22.", "name": "strange_alloy_charge", "circuit": 23, "eut": 7864320, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:fed_strangelet", "count": 4 }, { "id": "gtceu:tungsten_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:strange_alloy_charge", "count": 4 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] }
       ]
     },
     "mixer": {

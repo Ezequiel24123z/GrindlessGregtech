@@ -51,7 +51,7 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 
 test('the five melts: circuits 1 to 5, helium, the 5 / 3 item and 1 / 1 fluid slots', () => {
   const lm = T.types.levitation_melting.recipes;
-  assert.deepEqual(lm.map((r) => [r.name, r.circuit]), [['rhea_melt', 1], ['wf_rhea_melt', 2], ['ti50_melt', 3], ['bmg_melt', 4], ['prni5_melt', 5], ['terfenol_ingot', 21], ['segment_alloy_ingot', 19], ['au_pt_ingot', 22]]); // MX-S1 c22 (au_pt_ingot); MAX-A2 c21 (line 35); MAX-R1 c19 (L36)
+  assert.deepEqual(lm.map((r) => [r.name, r.circuit]), [['rhea_melt', 1], ['wf_rhea_melt', 2], ['ti50_melt', 3], ['bmg_melt', 4], ['prni5_melt', 5], ['terfenol_ingot', 21], ['segment_alloy_ingot', 19], ['au_pt_ingot', 22], ['strange_alloy_charge', 23]]); // XP-A1 c23 (strange_alloy_charge); // MX-S1 c22 (au_pt_ingot); MAX-A2 c21 (line 35); MAX-R1 c19 (L36)
   for (const r of lm) {
     assert.equal(r.eut, 7864320, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 5 && ids(r.itemsOut).length <= 3, r.name);
@@ -173,7 +173,7 @@ test('every new item has a texture, a name and two tooltips in en_us and es_es',
   for (const m of entries.matchAll(/\['([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*'((?:[^'\\]|\\.)*)'\]/g)) assert.ok(m[2] && m[3], m[1]);
   for (const t of ['block.gtceu.levitation_melter', 'gtceu.levitation_melting', 'grindless.machine.levitation_melter.tooltip.1']) assert.ok(lang.includes(`'${t}'`), t);
   const maxLang = read('client_scripts', 'grindless', 'max_components_lang.js'); // MAX-A2's row names its own EMI line
-  const furnaceLang = read('client_scripts', 'grindless', 'max_furnace_lang.js') + read('client_scripts', 'grindless', 'max_horizon_interferometer_lang.js'); // MX-S1's c22 row
+  const furnaceLang = read('client_scripts', 'grindless', 'max_furnace_lang.js') + read('client_scripts', 'grindless', 'max_horizon_interferometer_lang.js') + read('client_scripts', 'grindless', 'maxplus_condensate_lang.js'); // MX-S1's c22 row, XP-A1's c23 row
   for (const r of T.types.levitation_melting.recipes) assert.ok(lang.includes(`grindless_levitation_melting.${r.name}'`) || maxLang.includes(`grindless_levitation_melting.${r.name}'`) || furnaceLang.includes(`grindless_levitation_melting.${r.name}'`), r.name);
   for (const k of ['grindless_electron_beam.nb_ta_button', 'grindless_nitride_magnet_synthesis.halbach_array', 'grindless_chemical_vapour_infiltration.w_preform_densify']) {
     assert.ok(lang.includes(k), k);
