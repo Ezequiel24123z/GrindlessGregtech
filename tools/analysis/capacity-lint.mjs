@@ -1,6 +1,9 @@
 // Capacity linter (Reforge RF-1A): every GTM recipe our scripts define must fit its machine's item slots and fluid tanks at the recipe's tier.
 //
 //   node tools/analysis/capacity-lint.mjs [--pack pack] [--quiet]        T0 check (also run by tools\Check-Fast.ps1)
+//   node tools/analysis/capacity-lint.mjs --dump <dir> [--table <dir>] [--factors <solved.json>] [--top N]
+//                                                                        lint every recipe of a bench dump (GTM originals included) before and after
+//                                                                        the cost-curve pass: new overflows per era with the top offenders (RF-2A)
 //   node tools/analysis/capacity-lint.mjs --write-snapshot <dump dir>    rebuild capacity_snapshot.json from a bench dump's machines.json
 //   node tools/analysis/capacity-lint.mjs --write-known                  rewrite capacity_known.json (only after fixing recipes; it may only shrink)
 //
@@ -18,6 +21,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { staticDump } from './lib/kubejs_static.mjs';
 import { buildSnapshot, checkRecipe } from './lib/capacity.mjs';
+import { loadDump } from './lib/dump.mjs';
+import { loadTables, withFactors, applyToDump, TABLE_DIR } from './lib/cost_curve.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_PACK = path.resolve(here, '..', '..', 'pack');
@@ -47,8 +52,62 @@ export function diffKnown(errors, known) {
   return { fresh: Object.keys(errors).filter((id) => !(id in k)).sort(), stale: Object.keys(k).filter((id) => !(id in errors)).sort() };
 }
 
+/** The largest consumed item count or fluid amount of a recipe json (what decides whether it overflows a slot or tank). */
+function biggestInput(json) {
+  let m = 0;
+  const inputs = (json && json.inputs) || {};
+  for (const e of inputs.item || []) { const c = e && e.content; m = Math.max(m, c && typeof c.count === 'number' ? c.count : 1); }
+  for (const e of inputs.fluid || []) { const c = e && e.content; m = Math.max(m, c && typeof c.amount === 'number' ? c.amount : 0); }
+  return m;
+}
+
+/**
+ * What the cost curve does to capacity: lints a whole dump (GTM originals and ours) before and after the pass. A recipe the pass
+ * scaled that errors afterwards but not before is an overflow, filed under the era of its key item.
+ * Returns {total, before: {errors, warns}, after: {errors, warns}, byEra: {era: {selected, changed, overflows, newWarns, top: [{id, reason, biggest}]}}}.
+ */
+export function lintCurve(dump, tables, snap, { top = 10 } = {}) {
+  const res = applyToDump(dump, tables);
+  const before = lintRecipes([...dump.recipes.values()], snap);
+  const after = lintRecipes([...res.recipes.values()], snap);
+  const byEra = {};
+  for (const [era, v] of Object.entries(res.byEra)) byEra[era] = { selected: v.selected, changed: v.changed, overflows: 0, newWarns: 0, top: [] };
+  const eraOf = new Map(res.selected.map((s) => [s.id, s.era]));
+  for (const id of res.changed.keys()) {
+    const e = byEra[eraOf.get(id)];
+    if (!e) continue;
+    if (id in after.errors && !(id in before.errors)) {
+      e.overflows++;
+      e.top.push({ id, reason: after.errors[id], biggest: biggestInput(res.recipes.get(id).json) });
+    } else if (id in after.warns && !(id in before.warns)) e.newWarns++;
+  }
+  for (const e of Object.values(byEra)) e.top = e.top.sort((a, b) => b.biggest - a.biggest || (a.id < b.id ? -1 : 1)).slice(0, top);
+  return { total: after.total, before, after, byEra };
+}
+
+function dumpMain(argv, arg) {
+  const factors = arg('--factors');
+  const { tables, problems } = loadTables(path.resolve(arg('--table') || TABLE_DIR));
+  if (problems.length) { console.log('FAIL capacity: cost-curve tables:\n  ' + problems.join('\n  ')); return 2; }
+  let use = tables;
+  if (factors) {
+    const j = readJson(path.resolve(factors));
+    if (!j.factors || typeof j.factors !== 'object') { console.log(`FAIL capacity: ${factors}: no "factors" object`); return 2; }
+    use = withFactors(tables, j.factors);
+  }
+  const dump = loadDump(path.resolve(arg('--dump')), { log: null });
+  const r = lintCurve(dump, use, readJson(SNAPSHOT_FILE), { top: Number(arg('--top')) || 10 });
+  console.log(`capacity (cost curve): ${r.total} recipes linted; errors ${Object.keys(r.before.errors).length} before, ${Object.keys(r.after.errors).length} after; warnings ${Object.keys(r.before.warns).length} before, ${Object.keys(r.after.warns).length} after`);
+  for (const [era, e] of Object.entries(r.byEra)) {
+    console.log(`  ${era}: ${e.changed} scaled recipes, ${e.overflows} new overflows, ${e.newWarns} new multiblock-only`);
+    for (const t of e.top) console.log(`    ${t.id} (largest input ${t.biggest}): ${t.reason}`);
+  }
+  return 0;
+}
+
 function main(argv) {
   const arg = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : undefined; };
+  if (arg('--dump')) return dumpMain(argv, arg);
   const pack = path.resolve(arg('--pack') || DEFAULT_PACK);
   if (arg('--write-snapshot')) {
     const machines = readJson(path.join(path.resolve(arg('--write-snapshot')), 'machines.json'));
