@@ -9,7 +9,7 @@ applyTo: "pack/config/ftbquests/**,tools/quests/**,docs/quests.md"
 ## Generated chapters (never edit the SNBT by hand)
 | Chapter | Source to edit | Regenerate |
 |---|---|---|
-| `chapters/<era>_age.snbt` (ev, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max) | `tools/quests/<era>-chapter/quests-data.mjs` (plus `*-data.mjs` beside it) | `node tools/quests/gen-chapters.mjs [--era <era>]` |
+| `chapters/<era>_age.snbt` (steam, lv, mv, hv, iv, ev, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max) | `tools/quests/<era>-chapter/quests-data.mjs` (plus `*-data.mjs` beside it) | `node tools/quests/gen-chapters.mjs [--era <era>]` |
 | `chapters/pl_*.snbt`, `chapters/power.snbt`, the Processing Lines group in `chapter_groups.snbt`, their entries in `tools/quests/lint-config.json` | `tools/quests/processing-lines/pl-data-*.mjs`, `power-data.mjs` | `tools/quests/processing-lines/run.ps1 -Dump <kubejs-exported> -Write` |
 | `chapters/multiblocks.snbt`, its entries in `tools/quests/lint-config.json` | `tools/quests/multiblocks/mb-data.mjs` | `node tools/quests/multiblocks/gen.mjs --dump <kubejs-exported> --write` (after the Processing Lines run) |
 

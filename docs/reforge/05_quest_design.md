@@ -260,7 +260,7 @@ export const QUESTS = [
 
 ### 4.3 Running it
 
-- Package: edit data only. On the VM: `node tools/quests/gen-chapters.mjs --era <era> --out /tmp/q && node tools/quests/lint.mjs --book /tmp/q --items <dump items.json>` (the exact flags are RF-5L1's). Commit no `.snbt`.
+- Package: edit data only. On the VM: `node tools/quests/gen-chapters.mjs --era <era> --out /tmp/q && node tools/quests/lint.mjs --book /tmp/q --items <dump items.json>` (`--out <dir>` writes the chapters there, `--out -` prints them). Commit no `.snbt`. Steam to IV were imported from their hand-written SNBT by `lib/import-snbt.mjs` (RF-5L2); a task the writer does not model (a tag filter) is carried as its own SNBT in the task's `snbt` field.
 - Integrator, once per batch, in this order: `gen-chapters.mjs` (all), `processing-lines/run.ps1 -Dump <dump> -Write` (charts and Power: Power links to era quests), `multiblocks/gen.mjs --dump <dump> --write`, `lint.mjs`, then `GG_QUESTS_EXPECTED`, `chapter_groups.snbt` and `lint-config.json` from what the generators print.
 
 ## 5. Phase 5 packages
