@@ -23,7 +23,7 @@ export const LINKS = [
 export const QUESTS = [
   {
     key: "IVCA", kind: "machine", title: "IV Circuit Assembler", icon: "gtceu:iv_circuit_assembler",
-    deps: ["C_L_IV_ASSEMBLY_LINE"], x: 2, y: 0,
+    deps: ["IV_ASSEMBLY_LINE"], x: 2, y: 0,
     teach: {
       for: "The &6IV Circuit Assembler&r builds the quantum circuits, which the EV assembler cannot.",
       needs: "Nanoprocessor Supercomputers, the EV line's last circuit, and the machine itself.",
@@ -62,7 +62,7 @@ export const QUESTS = [
   },
   {
     key: "IVNB", kind: "process", title: "Naquadah Boule", icon: "gtceu:naquadah_boule",
-    deps: ["C_L_IV_NAQUADAH_INGOT"], x: 2, y: 1.5,
+    deps: ["IV_NAQUADAH_INGOT"], x: 2, y: 1.5,
     teach: {
       for: "Naquadah grows into a boule in the blast furnace, and the cutter slices it into &6Naquadah Wafers&r.",
       needs: "Naquadah from Venus and a blast furnace that reaches the temperature.",
