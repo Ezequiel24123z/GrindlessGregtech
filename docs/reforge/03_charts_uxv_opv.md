@@ -44,3 +44,25 @@ Proposed fix for all: add a real earlier machine step (or a branch crossing anot
 | OpV | L35 | 3 steps after prefix | Add a doping step |
 
 Proposed DECISIONS line: "RF-3N: UXV and OpV charts completed; remaining short lines (UXV 5, OpV 8) are content problems, not chart gaps."
+
+
+## UXV and OpV fixes (RF-3U)
+
+Baseline audit: UXV 5 fix (L21, L23, L24, L43, L41), OpV 8 fix (L6, L20, L22, L26, L31, L32, L34, L35). After: 0 fix in both eras; every line is keep.
+No recipe changed: each upstream stage already existed, so the charts were completed with it.
+
+- L6: diaminoresorcinol, PBO plant (dope), PBO plant (fibre) before the existing chain.
+- L20: fluorspar kiln (BeF2), then electron beam reduction.
+- L22: calutron (Li-6), pyroprocessing cell, hydride reactor.
+- L26: ore refinery lithium before the LBO crystal.
+- L31: actinide partitioning (curium cut) before the nitrate.
+- L32: calutron (B-10), then B4C-10 reactor.
+- L34: SiC mixer, sputtered WC/SiC multilayer, synchrotron metrology, gamma optics mirror (the CVI blank branch is no longer drawn).
+- L35: fumarole condenser (germanium) before zone refining.
+- L21: Ti-50 chain (calutron, pyroprocessing, levitation melt, oven charge) and the etched-membrane chain feed the cyclotron.
+- L23: transcurium liquor, transuranium facility, spark plasma sinter.
+- L24: U-238 ion source and synchrotron charge feed the collider.
+- L43: He-6n and RF carpet board (photonic foundry) assemble the gas stopping cell.
+- L41: krypton from air, KrF premix, discharge tube, assembly line laser.
+
+Chart machine ids must be tiered (`gtceu:ev_chemical_reactor`, `ev_mixer`, `ev_assembler`); the untiered or large ids have no matching recipe types.
