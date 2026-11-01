@@ -2,7 +2,7 @@
 // Every UEV package has landed, so nothing is gated. Arrows are checked against a recipe dump by pl-check.mjs (integrator).
 // Each row is one line of docs/eras/uev.md ("New process lines"): its feedstock, its machines and its product.
 // Rows are laid out by chain(), 2.5 columns per step.
-import { I, F, M, n } from './pl-lib.mjs';
+import { I, F, M, L, n } from './pl-lib.mjs';
 
 // a step is [key, resource, title, kind?, options?]: the first step is raw, machines are 'ours', the rest products
 function chain(y, steps, end, x0 = 0) {
@@ -34,7 +34,7 @@ export default {
           ['cacl', I('gtceu:calcium_chloride_dust'), 'Calcium Chloride', 'raw'],
           ['cal', mach('gtceu:calutron'), 'Calutron', 'ours', { desc: 'Bends an ion beam in a magnet; each isotope lands in its own cup.' }],
           ['enrd', I('gtceu:calcium_48_enriched_dust'), 'Enriched Calcium'],
-          ['enr', I('gtceu:calcium_48_enriched_chloride_dust'), 'Enriched Chloride', 'product', { from: [], sub: 'Chlorinated again' }],
+          ['enr', I('gtceu:calcium_48_enriched_chloride_dust'), 'Enriched Chloride', 'product', { sub: 'Chlorinated again' }],
           ['cal2', mach('gtceu:calutron'), 'Calutron, second pass', 'ours'],
           ['ca48', I('gtceu:calcium_48_dust'), 'Calcium-48'],
         ], 'the beam of the cyclotron'),
@@ -70,12 +70,13 @@ export default {
         ], 'the scoop coil'),
         // SX turbine wheel
         ...chain(2, [
-          ['bc', I('grindless:bond_coated_sx_blade'), 'Bond-Coated Blade', 'raw'],
+          ['bc', I('grindless:bond_coated_sx_blade'), 'Bond-Coated Blade', 'raw', { from: ['xp_pt'] }],
           ['ebf', mach('gtceu:electron_beam_furnace'), 'Electron Beam Furnace', 'ours', { desc: 'Coats the blade in vacuum with a ceramic that resists heat.' }],
           ['cb', I('grindless:coated_sx_blade'), 'Coated SX Blade'],
           ['scf', mach('gtceu:single_crystal_foundry'), 'Single-Crystal Foundry', 'ours', { desc: 'Casts the wheel as one crystal.' }],
           ['bw', I('grindless:brayton_turbine_wheel'), 'Brayton Turbine Wheel'],
         ], 'the DFD Mk2'),
+        L('xp_pt', -2.5, 2, 'pl_ev:pt'),
         // silicon carbide fibre
         ...chain(4, [
           ['pcs', I('grindless:polycarbosilane_dust'), 'Polycarbosilane', 'raw'],
@@ -85,16 +86,16 @@ export default {
           ['cf', I('grindless:cured_sic_fibre'), 'Cured Fibre'],
           ['sfp3', mach('gtceu:sic_fibre_plant'), 'SiC Fibre Plant', 'ours', { desc: 'Fires the fibre; the methane and hydrogen are caught.' }],
           ['sf', I('grindless:sic_fibre'), 'SiC Fibre'],
-        ], 'the preform'),
-        ...chain(6, [
-          ['pre', I('grindless:sic_fibre_preform'), 'Fibre Preform', 'raw', { sub: 'Woven from the fibre above' }],
+          ['bn', I('grindless:bn_coated_sic_fibre'), 'BN-Coated Fibre', 'product', { from: ['sf'] }],
+          ['pre', I('grindless:sic_fibre_preform'), 'Fibre Preform', 'product', { sub: 'Woven from the fibre above' }],
           ['cvi', mach('gtceu:cvi_furnace'), 'CVI Furnace', 'ours', { desc: 'Grows silicon carbide into the preform.' }],
           ['plate', I('grindless:sic_sic_plate'), 'SiC/SiC Plate'],
         ], 'the hull and the Mk4 casing'),
-        n('hcl', 5, 7.5, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { kind: 'by', from: ['cvi'], end: 'the chlorine loop' }),
+        n('hcl', 22.5, 6, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { kind: 'by', from: ['cvi'], end: 'the chlorine loop' }),
+        L('xp_h2', -2.5, 9.5, 'pl_hv:shifted'),
         // nitride magnet
         ...chain(9.5, [
-          ['rip', I('grindless:reduced_iron_powder'), 'Reduced Iron Powder', 'raw', { sub: 'From carbonyl iron' }],
+          ['rip', I('grindless:reduced_iron_powder'), 'Reduced Iron Powder', 'raw', { from: ['xp_h2'], sub: 'From carbonyl iron' }],
           ['nmw', mach('gtceu:nitride_magnet_works'), 'Nitride Magnet Works', 'ours', { desc: 'Nitrides the iron with ammonia.' }],
           ['fe', I('gtceu:fe16n2_dust'), 'Fe16N2 Powder'],
           ['nmw2', mach('gtceu:nitride_magnet_works'), 'Nitride Magnet Works', 'ours', { desc: 'Anneals the powder under strain.' }],
@@ -125,11 +126,12 @@ export default {
         ], 'the next computers'),
         // polarised helium-3
         ...chain(4, [
-          ['he3', F('gtceu:helium_3_6n'), 'Helium-3, 6N', 'raw'],
+          ['he3', F('gtceu:helium_3_6n'), 'Helium-3, 6N', 'raw', { from: ['xl_he'] }],
           ['pol', mach('gtceu:helium3_polariser'), 'Helium-3 Polariser', 'ours', { desc: 'Lines up the nuclear spins with a 1083 nm laser.' }],
           ['phe', F('gtceu:polarised_helium_3'), 'Polarised Helium-3'],
           ['dhe', F('gtceu:polarised_dhe3_fuel'), 'Polarised D-He-3 Fuel'],
         ], 'the Mk4 Fusion Reactor'),
+        L('xl_he', -2.5, 4, 'pl_ev:he3'),
       ],
     },
     stars: {
