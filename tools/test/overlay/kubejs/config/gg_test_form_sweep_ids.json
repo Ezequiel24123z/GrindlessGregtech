@@ -306,7 +306,10 @@
    "gtceu:condensate_refinery",
    "gtceu:hills_slingshot",
    "gtceu:hyperfactory",
-   "gtceu:meta_material_loom"
+   "gtceu:meta_material_loom",
+   "gtceu:nickel_56_burner",
+   "gtceu:pair_instability_crucible",
+   "gtceu:tarantula_stellar_lift"
   ],
   "moon": [
    "gtceu:lunar_drill"
