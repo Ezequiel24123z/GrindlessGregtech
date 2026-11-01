@@ -38,9 +38,9 @@
     // T4
     { type: 'solvent_extraction', name: 'gadolinium_oxide', circuit: 32, eut: va(3), duration: 600,
       items: [['gtceu:gadolinium_oxide_dust', 4]], fluids: [['gtceu:hdehp_solvent', 2000]],
-      outs: [['grindless:gadolinium_oxide', 4]], fluidOuts: [['gtceu:spent_hdehp_solvent', 2000]] },
+      outs: [['gtceu:gadolinium_dust', 4]], fluidOuts: [['gtceu:spent_hdehp_solvent', 2000]] },
     { type: 'spark_plasma_sintering', name: 'gd_hfb2_cermet', circuit: 27, eut: va(9), duration: 900,
-      items: [['grindless:gadolinium_oxide', 2], ['grindless:hafnium_sponge', 4], ['gtceu:boron_carbide_dust', 4]],
+      items: [['gtceu:gadolinium_dust', 2], ['grindless:hafnium_sponge', 4], ['gtceu:boron_carbide_dust', 4]],
       outs: [['grindless:gd_hfb2_cermet', 2]] },
     // T5
     { type: 'chemical_vapour_infiltration', name: 'sic_waveguide_tube', circuit: 20, eut: va(10), duration: 1200, key: 'grindless_chemical_vapour_infiltration',
