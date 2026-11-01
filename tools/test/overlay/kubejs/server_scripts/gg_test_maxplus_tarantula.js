@@ -24,7 +24,7 @@
   var DYNAMO = 'gtceu:max_energy_output_hatch_16a'
   var SGR = 'gcyr:black_hole_orbit'
   var LMC = 'grindless:tarantula_orbit'
-  var GATE_ORIGIN = { x: 46624, y: 100, z: 56 }
+  var GATE_ORIGIN = { x: 46624, y: 100, z: 44 }
   var BURNER_X = 46624
   var HOLD = 'grindless:warp_gate/hold_tarantula'
   var HOLD_EUT = 137438953472
