@@ -4,7 +4,7 @@
 import { blockCosts, groundedSustain, lfp } from './engine.mjs';
 import { makeRootCost } from './explain.mjs';
 import { asArray, makeGlobMatcher } from './util.mjs';
-import { dimensionIdEra, eraIdx, loadEraContext } from './era.mjs';
+import { dimensionIdEra, eraIdx, loadEraContext, recipeEra } from './era.mjs';
 
 export const STATUS = {
   SUSTAINED: 'sustained', // regenerates on its own
@@ -166,6 +166,7 @@ function evalSite(model, t) {
     if (rule.kind !== 'recipe' || (types.size > 0 && !types.has(rule.type)) || (nameMatch && !nameMatch(rule.name))) continue;
     if (except(rule.name)) continue;
     const dims = rule.meta.dims || [];
+    if (eraCtx !== null && recipeEra({ type: rule.type, eut: rule.meta.eut, conditions: dims.map((d) => ({ dimension: d })) }, eraCtx) > tierEra) continue;
     if (t.exact && dims.length > 0 && (rule.meta.notDims || []).length === 0 && dims.every(isLater)) continue;
     defined.push(rule.id);
     const notDims = rule.meta.notDims || [];

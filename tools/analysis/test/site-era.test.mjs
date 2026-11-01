@@ -57,3 +57,13 @@ test('site era: with exact, a row naming only later-era dimensions is skipped an
   assert.ok(/t:swarm\/base: doesn't run in gcyr:mercury/.test(text), text);
   assert.ok(/t:swarm\/both: doesn't run in gcyr:mercury/.test(text), 'a mixed row is not only later-era');
 });
+
+test('site era: a row of a later voltage at a wrong site is skipped; the same site at a same-era voltage is an offender', () => {
+  const extra = [
+    gt('t:swarm/big', 't:swarm', { ins: [gi('t:dust')], eut: 2000000000, conditions: [dim(MERCURY)] }),
+    gt('t:swarm/small', 't:swarm', { ins: [gi('t:dust')], eut: 8192, conditions: [dim(MERCURY)] }),
+  ];
+  const text = pack('iv', [site('s')], extra).out.gate.find((x) => x.target.id === 's').lines.join('\n');
+  assert.ok(!/t:swarm\/big/.test(text), text);
+  assert.ok(/t:swarm\/small: also runs in gcyr:mercury/.test(text), text);
+});
