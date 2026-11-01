@@ -41,18 +41,18 @@
     row('uxv/encoder_ring', 'hot_rolling', 12, [item('gtceu:tetrataenite_ingot', 1)], [fluid(WATER, 50)],
       [item('grindless:encoder_ring', 2)], [fluid(STEAM, 8000)], 7680, 200),
 
-    // cold swage to a cup (90%), hob the teeth, shot-peen: one lathe row, the swarf is the blend the powder bed sinters again
-    row('uxv/gum_metal_flexspline', 'lathe', null, [item('grindless:gum_metal_blank', 1)], [fluid(LUBRICANT, 100)],
+    // cold swage to a cup (90%), hob the teeth, shot-peen: one lathe row (the lathe takes no fluid, so it runs dry), the swarf is the blend the powder bed sinters again
+    row('uxv/gum_metal_flexspline', 'lathe', null, [item('grindless:gum_metal_blank', 1)], [],
       [item('grindless:gum_metal_flexspline', 1), item('grindless:gum_metal_blend', 1)], [], 491520, 400),
 
     // the strain-wave gear: flexspline in a circular spline of RHEA plate on a wave generator (tantalum foil races, tungsten steel rings)
     row('uxv_strain_wave_gear', 'assembler', null, [item('grindless:gum_metal_flexspline', 1), item('gtceu:rhea_plate', 2), item('grindless:ta_foil', 2),
-      item('gtceu:tungsten_steel_ring', 2), item('gtceu:tungsten_foil', 2)], [fluid(LUBRICANT, 250), fluid(HE, 500)],
+      item('gtceu:tungsten_steel_ring', 2), item('gtceu:tungsten_foil', 2)], [fluid(HE, 500)],
       [item('grindless:uxv_strain_wave_gear', 1)], [], 7864320, 400),
 
     // the TMR encoder: the multipole ring over a tunnel-magnetoresistance bridge of two MTJ dice, shielded, wired in gold, in a titanium housing
     row('tmr_encoder', 'assembler', null, [item('grindless:multipole_encoder_ring', 1), item('grindless:mtj_die', 2), item('grindless:mu_metal_foil', 2),
-      item('gtceu:gold_foil', 4), item('gtceu:titanium_plate', 1)], [fluid(SOLDER, 144), fluid(HE, 500)],
+      item('gtceu:gold_foil', 4), item('gtceu:titanium_plate', 1), item('gtceu:soldering_alloy_ingot', 1)], [fluid(HE, 500)],
       [item('grindless:tmr_encoder', 1)], [], 7864320, 300)
   ]
 

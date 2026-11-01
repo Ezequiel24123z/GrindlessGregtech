@@ -364,10 +364,11 @@
             { "id": "gtceu:tungsten_steel_plate", "count": 1 },
             { "id": "gtceu:gold_foil", "count": 4 },
             { "id": "gtceu:nichrome_plate", "count": 1 },
-            { "id": "gtceu:stainless_steel_rod", "count": 2 }
+            { "id": "gtceu:stainless_steel_rod", "count": 2 },
+            { "id": "gtceu:soldering_alloy_ingot", "count": 1 }
           ],
           "kept": [], "charge": [],
-          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 250 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:krf_discharge_tube_blank", "count": 1 }],
           "fluidsOut": []
         },
@@ -381,10 +382,11 @@
             { "id": "gtceu:uev_emitter", "count": 1 },
             { "id": "gtceu:platinum_foil", "count": 8 },
             { "id": "gtceu:nichrome_plate", "count": 2 },
-            { "id": "gtceu:tungsten_steel_ring", "count": 4 }
+            { "id": "gtceu:tungsten_steel_ring", "count": 4 },
+            { "id": "gtceu:soldering_alloy_ingot", "count": 2 }
           ],
           "kept": [], "charge": [],
-          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 288 }, { "id": "gtceu:lubricant", "amount": 500 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:pulsed_power_head", "count": 1 }],
           "fluidsOut": []
         },
@@ -398,13 +400,12 @@
             { "id": "gtceu:indium_dust", "count": 1 },
             { "id": "gtceu:nickel_plate", "count": 1 },
             { "id": "gtceu:titanium_plate", "count": 1 },
-            { "id": "gtceu:copper_foil", "count": 4 },
             { "id": "gtceu:ruthenium_plate", "count": 1 },
             { "id": "grindless:mu_metal_foil", "count": 2 },
             { "id": "gtceu:uiv_sensor", "count": 1 }
           ],
           "kept": [], "charge": [],
-          "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 250 }],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 250 }],
           "itemsOut": [{ "id": "grindless:cofe_target", "count": 1 }],
           "fluidsOut": []
         }

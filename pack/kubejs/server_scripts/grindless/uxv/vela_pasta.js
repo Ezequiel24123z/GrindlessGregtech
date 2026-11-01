@@ -166,12 +166,12 @@
   function addLine48(event) {
     VP.line48 = []
     var rows = [
-      { name: 'finemet_toroid', items: ['6x grindless:finemet_ribbon', '1x gtceu:tungsten_steel_ring', '2x gtceu:copper_foil', '1x gtceu:rhea_plate'],       fluids: [['gtceu:epoxy', 144], ['gtceu:he_6n', 250]],
+      { name: 'finemet_toroid', items: ['6x grindless:finemet_ribbon', '1x gtceu:tungsten_steel_ring', '2x gtceu:copper_foil', '1x gtceu:rhea_plate', '1x gtceu:epoxy_ingot'],       fluids: [['gtceu:he_6n', 250]],
         out: 'grindless:finemet_toroid', eut: 7864320, duration: 300 },
-      { name: 'uxv_voltage_coil', items: ['1x grindless:finemet_core', '8x gtceu:pasta_strand_single_wire', '2x gtceu:rhea_plate', '1x grindless:ffkm_seal'],
-        fluids: [['gtceu:epoxy', 144], ['gtceu:he_6n', 500]], out: 'grindless:uxv_voltage_coil', eut: 7864320, duration: 400 },
-      { name: 'pasta_strand_repeater', items: ['2x gtceu:pasta_strand_single_wire', '1x grindless:pulsar_timed_repeater', '1x grindless:mtj_die'],
-        fluids: [['gtceu:soldering_alloy', 144], ['gtceu:lubricant', 100]], out: 'grindless:pasta_strand_repeater', eut: 7864320, duration: 300 }
+      { name: 'uxv_voltage_coil', items: ['1x grindless:finemet_core', '8x gtceu:pasta_strand_single_wire', '2x gtceu:rhea_plate', '1x grindless:ffkm_seal', '1x gtceu:epoxy_ingot'],
+        fluids: [['gtceu:he_6n', 500]], out: 'grindless:uxv_voltage_coil', eut: 7864320, duration: 400 },
+      { name: 'pasta_strand_repeater', items: ['2x gtceu:pasta_strand_single_wire', '1x grindless:pulsar_timed_repeater', '1x grindless:mtj_die', '1x gtceu:soldering_alloy_ingot'],
+        fluids: [['gtceu:lubricant', 100]], out: 'grindless:pasta_strand_repeater', eut: 7864320, duration: 300 }
     ]
     rows.forEach(function (r) {
       var ids = r.items.map(function (s) { return s.replace(/^\d+x /, '') }).concat([r.out])
