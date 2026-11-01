@@ -252,117 +252,16 @@ Why this order, checked against the recipe dump of v0.4.0:
 
 The SNBT files are the source: they are edited by hand, following this guide. Exceptions generated from data in `tools/quests/` are `ev_age.snbt`, `luv_age.snbt` and `zpm_age.snbt` (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
 
-## 14. Plan for Steam, LV, MV, HV, EV and IV: the Moon through each instrument
+## 14. Era chapter plan: the Phase 5 design
 
-### The journey's spine
+Phase 5 of Project Reforge rebuilds the progression chapters to rule 5. The plan is `docs/reforge/05_quest_design.md` (RF-5A): read its section 2 row for your era, its section 3 for the rules it adds, and its section 5 row for your package.
 
-Each age looks at the Moon through a better instrument, and what it sees is what the next age needs. In each chapter this is the **sky row**: its own row above all the others, from left to right, ending above the chapter's exit.
+- **Shape.** Six roles per era (what's new, materials processing, wafers and circuits, machines and multiblocks, integration, capstone), mapped onto chapters by size: one chapter each for Steam to HV; three for EV to LuV (`<era>_age`, `<era>_circuits`, `<era>_machines`); four for ZPM to OpV (adding `<era>_integration`); five for MAX (adding `max_horizon`); nine for MAX+. Materials processing stays the era's Processing Lines chart (section 17).
+- **Nothing taught twice.** Each thing is taught in one progression chapter; any other chapter shows it as a quest link. Role chapters start each row at a link to the age-chapter quest that opens it. The charts own line intermediates, the Multiblocks index owns where, Power owns figures and the AE2 tab owns the mod (design, section 2.6).
+- **Generated.** Every progression chapter from Steam to MAX+ comes from data in `tools/quests/<era>-chapter/` through one shared writer (packages RF-5L1 and RF-5L2); Welcome and the Quality of Life tabs stay hand-written. Until RF-5L1 lands, the per-era generators work as described in the design's Appendix A.
+- **Still in force from the v0.17.0 plan** (moved unchanged to the design's Appendix A): the sky row and its rules, MV's fixed End row, HV's fixed rocket block, LuV's package gate and stations switch, and the regeneration order that Power needs.
 
-| Age | Instrument (id) | What the player sees | Chart (id) | Used by |
-|---|---|---|---|---|
-| Steam | Clockwork Observatory (`gtceu:steam_observatory`, *Stargazing* recipes) | Through the eyepiece, at night: dark seas, bright highlands, the big craters and their rays. Clear sky, and the controller at Y 100 or higher, above the haze and the smoke of the coke ovens. | Lunar Chart (Draft) (`grindless:lunar_chart_draft`) | The optical observatory, without using it up |
-| LV | Optical Observatory (`gtceu:optical_observatory`, *Astrophotography*) | On photographic plates (`grindless:photographic_plate`): cracks, chains of craters, long shadows on the terminator; flat and rugged ground told apart. And the tables of where the Moon will be each night. | Photographic Lunar Map (`grindless:lunar_map`) and Lunar Ephemeris (`grindless:lunar_ephemeris`) | The radio telescope, without using them up |
-| MV | Radio Telescope (`gtceu:radio_telescope`, *Radio Astronomy*) | Radar echoes over the map: smooth seas, fields of rocks, crater walls, and an ellipse on a flat sea marked in red. It works through clouds and rain; a storm drowns out the echo. | Lunar Landing-Site Chart (`grindless:lunar_landing_chart`) | The rocket chip (HV) |
-| HV | The rocket | The landing site on the chart | — | *Liftoff* → *The Moon* |
-| EV | The lunar base | The Moon up close: regolith, ilmenite, lunar day and night | — | — |
-
-Rules:
-
-- **Never promise a machine that has not passed its test.** Until the coordinator says a machine has passed, no quest or text names it. Meanwhile the sky row stays empty; the text at the start of each chapter can mention the Moon in the sky, without machines.
-- When an instrument comes in: a gear at 1.25 in the sky row, with the controller as a task; to its right, the chart (task: the chart). An age's chart is a dependency of the next instrument. Lines are not drawn between chapters, so the text says so ("the draft from the steam age guides it").
-- The text says what is seen, in one sentence, plus the sky rule (night, clouds, height). The table is source material, not text to copy.
-- In HV, when the launch route changes the chip recipe, *Liftoff* gains a dependency on the landing-site chart and its text changes ("the chip is written from the landing-site chart"). Its id does not change.
-
-### Incoming machines
-
-They come in once their test passes and the coordinator says so; each agent leaves its list in `files/scratch/quest-needs/<agent>.md`. All five are in the book now.
-
-| Agent | Machines | Where they go | How they hook in |
-|---|---|---|---|
-| steam-content | Steam blast furnace, coke battery | Steam | The battery in the coke row, after *Coke Oven*; the steam blast furnace after *Primitive Blast Furnace*, as a second route to steel |
-| lv-content | Sulfide roaster, heliostat tower | LV | The roaster in the chemistry row, after the contact catalyst; the tower in the power row |
-| observatory | The three observatories and their charts | Steam, LV, MV | Sky row (top) |
-| launch-road | Engine test stand, RP-1, qualified thrusters (MV); composite autoclave, ablative tiles, wrapped tanks, untested engine and static fire (HV) | MV and HV | In HV they go in front of the rocket parts: *Rocket Motors* comes to depend on the static fire, and *Fuel Tanks* on the wrapped tanks. Their ids and tasks do not change |
-| syngas | Syngas plant | HV | Chemistry row, after the refinery: hydrogen and CO for methanol and ammonia |
-
-### Steam — "Steam Age: Escape Velocity" (`steam_age.snbt`, 44 quests, 50 dependencies; done, with the sky row and the new steam machines; voice rewrite 2026-10-25)
-
-The sky row and the steam-content machines are in. Section 13 describes the chapter.
-
-### LV — "LV: The First Spark" (`lv_age.snbt`, 51 quests, 52 dependencies; done in v0.5.1, voice rewrite 2026-10-25)
-
-- **Start:** *LV Factory* (current id), depends on *LV Steam Turbine*. Journey line: first electricity; the Nether goes from a round trip to a place you work in.
-- **Spine:** *LV Factory* → *LV Components* (motor, piston, pump, belt, arm) → *LV Assembler* → cupronickel coils → *Electric Blast Furnace* (gear 1.5) → *Aluminium* → *MV Machine Hull* → *LV to MV Transformer* (exit, diamond).
-- **Branches:**
-  - at the very top, the sky row: photographic plates → *Optical Observatory* (gear 1.5) → lunar map → ephemeris;
-  - top, ore: macerator → washer → thermal centrifuge → centrifuge (with the warning that the LV and MV macerators give no byproducts);
-  - above the spine, power: the generator array (*Sixteen Turbines, One Hall*), and mirror field → *Heliostat Tower* → steam for the night;
-  - below the spine, the *LV Vein Drill* (gear 1.5) → drilling fluid → *Nether Veins*;
-  - bottom, chemistry: gas collector → electrolyzer → chemical reactor → mixer → contact catalyst → *Sulfide Roaster* → silver from galena;
-  - bottom, green: *LV Greenhouse* (gear 1.5) → fertilizer → creature simulator → first pearl → models → the creeper and blaze models (for MV);
-  - bottom, circuits: good board (off the chemical reactor) → diodes → *MV Circuit* → circuit assembler;
-  - bottom right: forming press → graphite electrode → *Submerged Arc Furnace* (gear 1.5) and the AE2 branch, up to *ME Network Access*.
-- **Cut on 2026-10-25** (section 8): *LV Grid*. The two-hatch trick is in *Electric Blast Furnace*.
-- **AE2:** the AE2 steps that live in LV today stay in LV as their branch (the user wants all of AE2 in LV). The AE2 tab starts by depending on the last of them and does not repeat them.
-- **Sources:** GTCP Modern `lv__low_voltage` (*Progressing Through LV*, *Electricity Generation*, *But what are Amps?*, *Battery Buffer*, *Machine Auto-Output Behaviour*, *Cover Behaviour*, *Programmed Circuits*, *What is this Mess?: Part Two*, *Cupronickel Coils*, *Gallium Arsenide*, *First MV Circuit!*); Monifactory `genesis` (*A Primer on Power*, *Battery Buffers*, *Charging Items*); Star Technology `industrial_revolution` for tone.
-
-### MV — "MV: The Far End" (`mv_age.snbt`, 49 quests, 60 dependencies; done in v0.5.1, voice rewrite 2026-10-25)
-
-- **Start:** *MV Factory*, depends on *LV to MV Transformer*. Journey line: the End, beyond the world.
-- **Spine:** *MV Factory* → *MV Components* → chromium and aluminium → *Kanthal* → *Silicon Ingot* → *Silicon Boule* → *Silicon Wafers* → ILC and RAM → *Integrated Circuits* → *Advanced Integrated Circuit* → *Cleanroom* (exit, also after *HV Machine Hull* and *HV Motor and Pump*).
-- **Fixed End row** (v0.5.0): *Blaze* (`3C356A1439744E15`) → *Ender Eye* (`3DDBE9267C197FEE`) → *End Key* (`756117B334515EA3`) → *End Veins* (`004525B795119B1B`, also depends on *Vanadium Steel Drill Bit*). Ids and tasks stay; the row can be moved as a whole.
-- **Branches:**
-  - at the very top, the sky row: *Radio Telescope* (gear 1.5) → landing-site chart, and the weather controller;
-  - top, ore: *Ore Plant* (gear 1.75, the age's multiblock) → stone dust separation, and *MV Vein Drill* with the vanadium steel drill bit; the End row runs up from *Blaze* to *End Veins*;
-  - above the spine: vanadium steel → *MV Cutter and Laser Engraver*, which the wafers need; *AE2 Grows Up* (optional) off the integrated circuits;
-  - below the spine: *Stainless Steel* off *Kanthal*; *MV Fluid Drilling Rig* → diesel → kerosene → RP-1 → *Engine Test Stand* → qualified power thrusters (the MV launch route), and brine and chlorine;
-  - bottom, carbon: *MV Greenhouse* → pyrolysis → methanol → *Biorefinery* (gear 1.5, the age's second multiblock) → ethylene and PE → transistors, PVC → hazmat suit, and *HV Machine Hull* → *HV Motor and Pump*;
-  - bottom left: the four universal factories → advanced multi smelter → lava furnace.
-- **Layout fixes:** done in v0.5.1 (the lines of 14 to 27 squares from *MV Grid*, *MV Components* and *Biorefinery* crossed the whole chapter and the End row).
-- **Cut on 2026-10-25** (section 8): *Copper Cable*, *MV Grid*, *MV Ore Machines*, *MV Steam Turbine* and *MV to HV Transformer*.
-- **Sources:** GTCP Modern `mv__medium_voltage` (*Transformers*, *Kanthal Coils*, *Stainless Steel*, *Silicon Lottery*, *Moore's Law*, *Polyethylene*, *The Church of Diesel*, *Desulfurization*, *Distillery*, *Pyrolyse Oven*, *Greenhouse*, *Sulfuric Acid*, *Hydrochloric Acid*); Monifactory `groundwork` (silicon, Kanthal) for structure.
-
-### HV — "HV: Moonshot" (`hv_age.snbt`, 32 quests, 40 dependencies; done in v0.5.1, voice rewrite 2026-10-25)
-
-- **Start:** *HV Factory*, depends on *Cleanroom* (the MV exit). Journey line: the Moon, the first place off Earth.
-- **Spine:** *HV Factory* → *HV Components* → *Refinery* (gear 1.5) → hydrotreating catalyst → cracking and olefins → PTFE → *Gasoline* (the large chemical reactor) → rocket fuel → *Static Fire* (gear 1.25) → rocket motors → *First Rocket* → *Liftoff* → *The Moon* (exit).
-- **Fixed rocket block** (v0.5.0): *Rocket Fuel* (`76D281E9D9C6FD20`), *Rocket Motors* (`5C1D3FB96A9FB74A`), *Fuel Tanks* (`4A6E81ABD8026025`), *Launch Pad* (`7B21622AADB1E1D1`), *Space Suit* (`5615E54AF782990A`), *First Rocket* (`5151DE8D3623EDCF`, scanner and seat), *Liftoff* (`4A672DF7CF424623`, chip), *The Moon* (`2897E3EB8159710C`, dimension task `gcyr:luna`). They go piece by piece so the launch route can change recipes without breaking them. The fuel and the pad hang off *Gasoline*, the motors off the static fire and the tanks off the overwrapped tanks. The suit hangs off *Fuel Tanks*, because its fabric is the same para-aramid and Kapton. *Liftoff* also needs MV's landing-site chart, and *The Moon* needs the suit. They can be moved; ids and tasks stay.
-- **No longer in HV:** Ender Eye, End Key and End Veins (MV); titanium, EV Machine Hull, HV→EV transformer, EV Motor and Pump, and Distillation Tower (all EV; since the 2026-10-25 voice pass the transformer and the tower are gone, and the motor and pump quest is *EV Components*). *Nichrome* stays in HV as a branch: EV's *Regolith Cell* depends on it, because its crucible is ringed with nichrome coils.
-- **Branches:**
-  - top left, ore and green: *HV Greenhouse* (gear 1.5) and *HV Vein Drill* → stainless steel drill bit;
-  - top, the optional *Catalytic Reformer* (gear 1.5) → reforming catalyst, off the hydrotreating catalyst;
-  - top right, the launch road: *Composite Autoclave* (gear 1.5, off cracking) → heat-shield tiles → *Untested Rocket Motor* → *Static Fire* on the spine, which also depends on MV's engine test stand; GT drums (off MV's stainless steel) and the autoclave → overwrapped tanks → *Fuel Tanks* → *Space Suit*;
-  - bottom: *Cleanroom in a Hatch* off *HV Components*, and *Syngas Plant* → water-gas shift off the refinery;
-  - bottom, circuits: *EV Workstation* (CPU wafer, microprocessor assembly and workstation in one quest) → *Vacuum Freezer* → *Nichrome*.
-- **Cut on 2026-10-25** (section 8): *HV Grid*, *Large Steel Boiler and Turbine*, *Black Steel and Red Steel*, *HV Cutter and Laser Engraver*, *Natural Gas and Refinery Gas*, *Hydrofluoric Acid*, *Epoxy and SBR*, *Super Chest and Tank* and *AE2 at HV*. *CPU Wafer* and *Microprocessor Assembly* went into *EV Workstation*.
-- **Sources:** GTCP Modern `hv__high_voltage` (*High Voltage Machines*, *The Cleanroom*, *Large Chemical Reactor*, *Ice Cold*, *Nichrome Coils*, *Polytetrafluoroethylene*, *HV Circuit Assembler*, *The End of an Era*).
-
-### EV — "EV: Lunar Base" (`ev_age.snbt`, 55 quests, 63 dependencies; done in v0.6.0, voice rewrite 2026-10-25)
-
-Spine: the journey from *Lunar Base* to *Red Horizon* and the *IV Machine Hull*. Above it the Moon and Mars, below it Earth's power, platinum and nano circuits (see `docs/eras/ev.md`, "Quests"). Far requirements are named in the text, not drawn as long lines (section 5).
-
-The chapter is generated: its source is `tools/quests/ev-chapter/quests-data.mjs` (every quest, task and reward id spelled out). Edit the data and run `node tools/quests/ev-chapter/gen.mjs`, which rewrites `ev_age.snbt` in the book's format.
-
-### IV — "IV: Inner Planets" (`iv_age.snbt`, 53 quests, 74 dependencies; done in v0.7.0)
-
-Spine: the route from the hot cell and the reactor, through the Moon's tritium and the chart, to Mercury, iridium and the assembly line, ending at *Gate to LuV*. Above it uranium, fuel and Venus; below it heavy water, Mercury's solar field and the parallel hatch (see `docs/eras/iv.md`, "Quests"). Machine quests carry the machine's name; the two landings (*Under the Clouds*, *Day of Fire*) are the milestones.
-
-### LuV — "LuV: The Outer System" (`luv_age.snbt`; written while LuV is built, package LuV-C2)
-
-- **Start:** *The Outer System*, after *Gate to LuV*. Journey line: superconductors at home, a station in orbit, then the belt and Jupiter's moons.
-- **Spine:** *LuV Components* → *Osmiridium* → *Tape* (coated conductor line) → *Winding* (HTS magnet works, gear 1.5) → *The Network Goes LuV* (SMES cells) → *Packed and Launched* → *First Station* (Earth orbit) → *Level Four* → *Behind the Vault* (Io) → *Fumarole* → *Patera* → *Riding the Torus* or *Iodine Loop* → *Fusion* → *Europium* → *First Data Orb* → *Gate to ZPM* (exit).
-- **Above:** the trinium line (*Naquadah Coil*, *Full Recovery*, *Trinium*, *Reactor III*, *Sixteen at Once*); the station's machines (*Endless Day*, *Fibre from Nothing*, *In the Wake*); the belt (*The Belt*, *Harpoon*, *Mond*, *Star Metal*, *Sunlight on a Boulder*, *Molecular Farm*).
-- **Below:** *Closed Loop*, *Biofoundry*, *Engineered Seeds*, *Perfect Crystal*; Europa (*Under the Ice*, *Cryobot*, *Something Alive*, *Stem Cells*, *Organoid*, *Living Circuits*) and Ganymede (*Quiet Moon*, *Chirp*, *Coilgun*, *Into the Clouds*, *Slingshot*).
-- **Generated:** `tools/quests/luv-chapter/quests-data.mjs` → `gen.mjs`. Ids are hashes of the quest keys. Each quest names the LuV packages it needs; only quests whose packages are all in `LANDED` reach the book, a dependency on a left-out quest goes to its parents, and `fallback` places fusion and research at home until Io lands. `S03` stands for spike S0-3 (`tables/stations.json` `enabled`): the station, Earth orbit's machines and what needs their products (the ring, the organoid lab, living circuits, the detector and the gate) wait for it. When a package merges: add it to `LANDED`, check its ids, run `gen.mjs --pending` (what is still waiting), `gen.mjs`, the linter, and update `GG_QUESTS_EXPECTED.luv_age`. `gen.mjs --all --out <file>` draws the finished chapter (it lints clean too). `tools/analysis/test/luv-quests.test.mjs` fails if the book names an id nothing registers or is stale.
-- **The stations switch:** `S03`, `B7T` (the flux-tube tether) and `B7S` (the sulfur-iodine plant) are not listed by hand. `tools/quests/luv-stations.mjs` derives them from `tables/stations.json` with the rule of `lib/stations.js` (`enabled` gives `S03`; `second` null gives `B7S`, else `enabled` gives `B7T`, else neither), and the `LANDED` sets of `quests-data.mjs`, `pl-data-luv.mjs` and `power-data.mjs` add them, so no chapter names the machine the pack leaves out. After the table flips, regenerate in this order (Power links to `luv_age`): `node tools\quests\luv-chapter\gen.mjs`, then `powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]` (`pl_luv` and `power`; it lints the charts and the book), then `node tools\quests\lint.mjs`, and update `GG_QUESTS_EXPECTED` for `luv_age`, `pl_luv` and `power` with the counts the generators print. `tools/analysis/test/luv-stations-quests.test.mjs` draws all three modes from an injected table (`GG_STATIONS_TABLE`).
-- **No low gravity in the text:** GCYR's gravity isn't applied in game.
-
-### ZPM — "ZPM: The Ringed and Ice Giants" (`zpm_age.snbt`; package ZPM-C2)
-
-- **Start:** *Saturn and Beyond*, after *Gate to ZPM*. **Exit:** *Gate to UV* (the UV hull and energy hatch, the Pluto–Kuiper chart and the solar-core survey).
-- **Parts:** home (*Naquadria* → *Fuel* → *Excited* → *The Big Reactor*, europium, the stored waste and americium, URhNq₂ wire, *The Network Goes ZPM*, the Mk2, the quench caster, the ZPM parallel hatch); carbon and qubits (*Graphene* … *Qubits Instead of Circuits*); life and cold (*Vent Life*, *Aerogel*, *Neutrinos*); Saturn (*Level Five*, *Third Station*, ring ice, the siphon, helium-3, Titan, the plume, the seismometer); Uranus (*Level Six*, *Fourth Station*, the ice-giant siphon, diamond slurry, the flyby); exit (*Listening*, *Kuiper Targets*, tritanium, darmstadtium, D + He-3, the direct energy converter, the gate).
-- **Generated:** `tools/quests/zpm-chapter/quests-data.mjs` → `gen.mjs` (every package has landed, so there is no `LANDED` gate). `pl_zpm` comes from `processing-lines/pl-data-zpm.mjs` and Power's ZPM clusters from `power-data.mjs` (no EU/t figures until a bench run measures them). Regenerate in this order (Power links to `zpm_age`): `gen.mjs`, `processing-lines/run.ps1 -Write`, `lint.mjs`, then update `GG_QUESTS_EXPECTED` for `zpm_age`, `pl_zpm` and `power`.
-- **Adapted ideas:** Star Technology (MIT) and Monifactory (LGPL), with attribution in `CREDITS.md`; GTNH and GT Leisure ideas only.
+**Phase 5 note (2026-11-01).** The other sections describe the book as of v0.17.0 and the rules Phase 5 keeps. Where the design adds a rule (the five teaching questions, longer text in teaching chapters, the reward rule, English only), its section 3 applies until the integrator folds it into this guide.
 
 ## 15. Quality of life tabs: what to fix
 
