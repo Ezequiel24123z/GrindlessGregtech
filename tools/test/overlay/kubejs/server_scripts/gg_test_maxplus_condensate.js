@@ -1,6 +1,6 @@
 // priority: -5299
 // TEST ONLY, XP-A1 (gtceu:condensate_refinery, gtceu:bound_matter_press). Command: kubejs custom_command gg_test_maxplus_condensate
-// Band ONLY: X 46080-46143, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_condensate).
+// Band ONLY: X 46144-46207, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_condensate).
 //   T1 (named uncertainty: the two new multiblocks form at Sgr A* on one 1,024 A MAX+ hatch and run a row above VA[MAX]):
 //     lookup   every recipe id of the package (machines, GTM rows, controller lines, older P1 to P5 rows, shell c4) is in the recipe manager
 //     static   nothing skipped
@@ -12,8 +12,8 @@
   var S = null
   var C = null
   var LOADED = Date.now()
-  var X0 = 46080
-  var X1 = 46143
+  var X0 = 46144
+  var X1 = 46207
   var Y0 = 98
   var Y1 = 125
   var NAME = 'maxplus_condensate'
@@ -25,9 +25,9 @@
   var PARTS = [HATCH, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
 
   var UNITS = [
-    { id: 'refinery', machine: 'gtceu:condensate_refinery', cx: 46100, minEut: Number(GTValues.VA[14]),
+    { id: 'refinery', machine: 'gtceu:condensate_refinery', cx: 46164, minEut: Number(GTValues.VA[14]),
       items: [], fluid: ['gtceu:kerr_condensate', 16000], circuit: 1, out: 'grindless:condensate_boil_off', outMin: 4 },
-    { id: 'press', machine: 'gtceu:bound_matter_press', cx: 46130, minEut: Number(GTValues.V[14]) * 16,
+    { id: 'press', machine: 'gtceu:bound_matter_press', cx: 46194, minEut: Number(GTValues.V[14]) * 16,
       items: [['grindless:bound_neutronium_ingot', 8]], fluid: null, circuit: 1, out: 'grindless:horizon_compressed_plate', outMin: 4 }
   ]
 

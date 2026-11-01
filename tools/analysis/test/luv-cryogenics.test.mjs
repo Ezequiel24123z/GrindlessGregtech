@@ -184,6 +184,9 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
   for (const m of opvBlock.matchAll(/name: '([a-z0-9_]+)'/g)) laterIds.add('grindless:closed_loop_cooling/' + m[1]);
   // OpV-B3a's octupole winding cooldown (below the OPV_ROWS loop): opv-antimatter.test.mjs proves its ids
   laterIds.add('grindless:closed_loop_cooling/octupole_winding_cooldown');
+  // XP-W's line P18 on both tables (server_scripts/grindless/maxplus/power.js): maxplus-power.test.mjs and the batch dump prove their ids
+  laterIds.add('grindless:coated_conductor/kerr_fcl_buffer_tape');
+  laterIds.add('grindless:closed_loop_cooling/cold_kerr_fcl');
   for (const r of ours.filter((x) => !laterIds.has(x.i))) {
     const walk = (o, key) => {
       if (Array.isArray(o)) return o.forEach((x) => walk(x, key));

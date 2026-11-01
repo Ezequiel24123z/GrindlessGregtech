@@ -15502,7 +15502,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "0ce0de45d28c8907eba21c594901db0b2f5306d8293b1d3495fba2b5a1f2dfce"
+hash = "b9380815e1d9e15244fbf3d3a4606028b85f42906d49d76ee71d46e166cd12f8"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -15694,7 +15694,7 @@ hash = "229e0fdba455888292da0eb59628876cca82add03fea653ed4d4fb105ed8ed46"
 
 [[files]]
 file = "kubejs/data/grindless/tables/spin_deposition.json"
-hash = "e9c14a6f0e33e5764c732d483ac1c802584918c0539cc527b474063cfb32e199"
+hash = "7de6a5d199279ab6a21f510f842075886ccfa7ecf8358c23545985cf3bfeaecc"
 
 [[files]]
 file = "kubejs/data/grindless/tables/spin_logic.json"

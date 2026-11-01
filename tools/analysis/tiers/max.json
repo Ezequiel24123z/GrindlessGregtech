@@ -265,7 +265,8 @@
         "grindless:pasta_lamination/chain_mesh_weave",
         "grindless:pasta_drawing/horizon_strand_preform",
         "grindless:pasta_drawing/horizon_wire_drawing",
-        "grindless:pasta_drawing/horizon_ingot_drawing"
+        "grindless:pasta_drawing/horizon_ingot_drawing",
+        "grindless:pasta_drawing/kerr_strand_drawing"
       ],
       "package": "B4",
       "note": "OpV-A0's chain matter modes run at SGR 1806-20 orbit (site-sgr-chain-matter); MAX-A0's horizon strand preform and wire drawing run there too (site-max-horizon-strand)."

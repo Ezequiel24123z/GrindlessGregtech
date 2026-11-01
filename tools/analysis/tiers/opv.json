@@ -1009,7 +1009,8 @@
         "grindless:pasta_lamination/chain_lamina",
         "grindless:pasta_lamination/chain_lamina_stack",
         "grindless:pasta_lamination/chain_mesh_weave",
-        "grindless:pasta_drawing/horizon_*"
+        "grindless:pasta_drawing/horizon_*",
+        "grindless:pasta_drawing/kerr_strand_drawing"
       ],
       "package": "B4",
       "note": "Replaces uxv.json's check: the OpV-A0 chain matter rows run at SGR 1806-20 orbit (site-sgr-chain-matter), and MX-R's horizon strand rows (preform, wire and ingot drawing, UXV voltage) run there too (site-opv-horizon-strand)."
