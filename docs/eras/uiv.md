@@ -690,27 +690,27 @@ Steps are the items between arrows, counted as UEV's. Every line ends in a UIV p
 |---|---|---|---|
 | 1 | Metallic hydrogen cable: protium (IV heavy water plant) → o/p-converted H₂ (EV cryogenic plant) → liquid para-H₂ → solid H₂ target (UV superfluid He) → ramp-compressed MH (1) → quenched MH rod → MH wire → FFKM-insulated MH cable | 8 | H₂ shards → EV cryo; FFKM offcuts → stock |
 | 2 | MH coil: MH rod (line 1) → MH wire → MH winding (ZPM magnet works) → RHEA former (2) → wound former → impregnated coil → `grindless:metallic_hydrogen_coil_block` (14,400 K *(tune)*) | 7 | resin → stock |
-| 3 | Lonsdaleite: methane → pyrolytic graphite (ZPM methane pyrolyser) → shocked lonsdaleite (1 c2) → acid-leached → laser-cut race → bearing → UIV piston | 7 | unconverted graphite → stock |
-| 4 | Polymeric nitrogen: N₂ (EV cryogenic plant) → DAC charge → laser-heated N₂ (1 c3) → cg-N → quenched cg-N (named fiction) → RHEA-cased charge (2) → sled charge | 7 | N₂ → EV cryo |
+| 3 | Lonsdaleite: methane → pyrolytic graphite (ZPM methane pyrolyser) → shocked lonsdaleite (1 c2) → acid-leached → laser-cut race → bearing (races + tungsten plate + lubricant + 1 LuV magnetic bearing housing) → UIV piston | 7 | unconverted graphite → stock |
+| 4 | Polymeric nitrogen: N₂ (EV cryogenic plant) → DAC charge → laser-heated N₂ (1 c3) → cg-N → quenched cg-N (named fiction) → RHEA-cased charge (2, + 4 UHV PBO fibre overwrap) → sled charge | 7 | N₂ → EV cryo |
 | 5 | RHEA plate: columbite → Nb/Ta fluoride split (EV extraction cascade) → Nb₂O₅ + Ta₂O₅ → reduced Nb/Ta → EB-refined (UEV) → levitation RHEA (2) → homogenised ingot → hot-forged slab (EV hot strip mill) → RHEA plate | 9 | HF liquor → IV kiln; dross → cascade |
 | 6 | UIV pump: RHEA ingot → EIGA powder → printed impeller (UV powder bed) → HIP (UEV megabar) → machined → balanced → UIV pump | 7 | oversize powder, swarf → remelt (2) |
 | 7 | First wall: W wire → W fibre preform (UEV CVI) → Wf/RHEA billet (2 c2) → plasma-sprayed tile (ZPM plasma quench caster) → first-wall tile → Li–Sn armoured tile → `grindless:uiv_fusion_casing` | 7 | overspray → remelt |
 | 8 | BMG gear: Zr sponge (IV fuel fabrication) → master alloy → undercooled melt (2 c4) → suction-cast BMG → flexspline → strain-wave gear → UIV robot arm (Hofmann 2016) | 7 | gates → remelt; Be fume → BeO, contained |
-| 9 | Element 120: TiCl₄ → Ti-50 chloride (UEV calutron) → Ti-50 sponge (UV pyroprocessing) → melted Ti-50 (2 c3) → oven charge → beam on Cf-249 (UEV cyclotron; Cf-249 from the IV hot cell's Bk-249 decay store) → element 120 recoil (UEV separator) → census II entry | 8 | depleted Ti → stock; activated target → hot cell |
+| 9 | Element 120: TiCl₄ → Ti-50 chloride (UEV calutron) → Ti-50 sponge (UV pyroprocessing) → melted Ti-50 (2 c3) → oven charge → beam on Cf-249 (UEV cyclotron; Cf-249 from the IV hot cell's Bk-249 decay store) → element 120 recoil (UEV separator, on the shared etched membrane: track-etched with a kept UHV Cf-252 fission source that counts the tracks) → census II entry | 8 | depleted Ti → stock; activated target → hot cell |
 | 10 | EO transceiver: Li + Nb₂O₅ (EV cascade) → LN boule (UHV crystal growth, as built) → He-implanted wafer (ZPM ion implanter, UHV row as built) → LNOI (UHV foundry c1, as built) → LN-on-Si₃N₄ (3 c1) → handle thinned → electrodes (UHV foundry) → heterogeneous EO transceiver (Churaev 2023) → the pulsar-timed repeater's electro-optic interface (A7 row) | 8 | donor LN → as-built return; Si grind → stock |
 | 11 | P:Si processor: SiF₄ → Si-28 (IV hot cell, as built) → FZ ingot (UV zone refining) → H-implanted wafer (ZPM ion implanter) → SOI (3 c2) → H-terminated (7) → STM-patterned → PH₃-dosed → overgrown (UHV MBE) → mK-characterised P:Si (8 c3) | 10 | hot cell tails as built; PH₃ → scrubbed, H₃PO₄ → stock |
 | 12 | Glass interposer: SiCl₄ + TiCl₄ → ULE soot → ULE glass → fs-written (4) → KOH-etched → metallised vias (UHV foundry) → interposer | 7 | HCl → cascade; KOH → neutralised, voided |
-| 13 | BEUV driver ASIC: Tb₄O₇ (ZPM Eu reductor) → Tb metal → droplet target (5) → 6.7 nm light → HfO₂ resist film (UHV foundry) → exposed (5) → developed → driver ASIC | 8 | Tb debris → 5 c3 → Tb |
-| 14 | BEUV mirror: boron → B₄C (UHV `boron_carbide`) → target (UHV SPS) → La/B₄C multilayer (UHV MBE) → LaN-barrier → capped → BEUV mirror | 7 | target offcuts → stock |
+| 13 | BEUV driver ASIC: Tb₄O₇ (ZPM Eu reductor) → Tb metal → droplet target (5) → 6.7 nm light → HfO₂ resist film (UHV foundry) → exposed (5) → developed (kept UHV VUV frequency comb checks the overlay) → driver ASIC | 8 | Tb debris → 5 c3 → Tb |
+| 14 | BEUV mirror: boron → B₄C (UHV `boron_carbide`) → target (UHV SPS) → La/B₄C multilayer (UHV MBE) → LaN-barrier → capped → BEUV mirror (the `assembler/beuv_mirror` cap is this line's last step, not a bypass; it cannot move into the BEUV scanner type without making the scanner's own research item circular; the fouled-mirror loop is line 13's cleaning recipe) | 7 | target offcuts → stock |
 | 15 | Six-hour memory: Eu₂O₃ (ZPM Eu reductor) → Eu-151 (UEV calutron) → ¹⁵¹Eu:YSO boule (UHV crystal growth, new row) → slab → hole-burned at the ZEFOZ field (6) → cryostat module (UV superfluid He) → six-hour memory (Zhong 2015) | 7 | depleted Eu → stock |
 | 16 | Telecom memory: Er₂O₃ (ZPM Eu reductor) → Er:YSO boule (UHV crystal growth) → slab → hole-burned (6 c2) → pigtailed (UV fibre draw) → telecom memory → pulsar-timed repeater | 7 | Y₂O₃ → stock |
 | 17 | Optical mainframe: Ge/Sb/Te → GST target (UHV, as built) → PCM die (UHV foundry c2, as built) → 64 × 64 PCM crossbar (UHV foundry) → on the glass interposer (line 12) → photonic tensor core fed by line 18's comb (UEV hall) → `gtnn:optical_mainframe` (UEV hall) (Feldmann 2021) | 7 | spent GST target → as-built remelt |
 | 18 | Microcomb: Si wafer → oxide preform → trenches by X-ray lithography (UV synchrotron c7) → Si₃N₄ fill from SiH₄ + NH₃ (UEV `sin_lpcvd` pattern) → CMP and anneal (UHV foundry) → EO-tunable soliton comb (3 c4, with LNOI) → UIV sensor (Pfeiffer 2016; Snigirev 2023) | 7 | H₂ → stock; CMP silica → stock |
 | 19 | Glassy-carbon wick: resin → 2PP lattice (4) → glassy carbon (UEV CVI) → SiC-coated → wick → collector → radiator module | 7 | pyrolysis gas → stock |
-| 20 | Droplet sheet: Sn → EB-distilled (UEV) → orifice plate (4 c3) → droplet generator (12 c1) → droplet sheet → radiator module → Matrioshka shell | 7 | Sn → stock |
+| 20 | Droplet sheet (merged into line 19 by RF-3Q: the orifice plate, EB-distilled Sn and droplet collector are side inputs of the radiator module recipe, drawn as `l19_7` to `l19_10`; no separate droplet generator is built): Sn → EB-distilled (UEV) → orifice plate (4 c3) → radiator module → Matrioshka shell | 7 | Sn → stock |
 | 21 | C-12 heat spreader: p–N-15 burn (10 c3) → C-12 ash → C-12 methane (HV syngas plant, `hv/syngas_plant.js:82`) → CVD C-12 diamond (ZPM diamond lattice) → polished spreader → metallised → Matrioshka node | 7 | He-4, H₂ → stock |
 | 22 | Chip nuclear clock: Th-229 → ThF₄ (IV fluorspar kiln) → thin film (UHV MBE) → capped → comb-interrogated (UHV nuclear clock lab) → chip nuclear clock → UIV sensor (Zhang 2024) | 7 | HF → kiln; Th → stock |
-| 23 | GdBCO motor: Gd₂O₃ (ZPM Eu reductor) + Ba + Cu → Gd-123 (LuV coated conductor line) → seeded melt-grown bulk (LuV HTS magnet works) → oxygenated → impregnated → field-cooled (UEV nitride magnet works) → UIV motor | 7 | Ba, Cu → stock |
+| 23 | GdBCO motor: Gd₂O₃ (ZPM Eu reductor) + Ba + Cu → Gd-123 (LuV coated conductor line) → seeded melt-grown bulk (LuV HTS magnet works) → oxygenated → impregnated → field-cooled (UEV nitride magnet works) → UIV motor (+ 2 LuV superconducting coils, the pre-wound field coils) | 7 | Ba, Cu → stock |
 | 24 | Neutron supermirror: NiCl₂ → Ni-58 (UEV calutron) → metal (UV pyroprocessing) → Ni-58/Ti multilayer (UHV MBE) → supermirror → neutron guide → cage part | 7 | depleted Ni → stock |
 | 25 | Polarised protium: depleted protium (IV HWP) → detritiated (IV tritium removal) → RF-dissociated (9 c1) → sextupole-selected H↑ → storage-cell H₂ → polarised ice (UV superfluid He) → pellet | 7 | D, T → IV; depolarised H → back |
 | 26 | p–Li-6 power: LiCl → Li-6 (UEV calutron) → metal (UV pyroprocessing) → Li-6H → polarised (9 c2) → pellet → Mk5 c2 (10, ZPM DEC) → He-3 + He-4 ash | 8 | Li-7 → stock; He-3 → line 27 |
@@ -719,17 +719,17 @@ Steps are the items between arrows, counted as UEV's. Every line ends in a UIV p
 | 29 | Divertor: Li + Sn → eutectic (UV pyroprocessing) → W mesh (UV powder bed) → CPS-wetted mesh → cassette → divertor → `grindless:uiv_fusion_casing` | 7 | spent cassette → line 35 canister |
 | 30 | Neutronium: crust lift run (13) → NS crust → inner-crust matter (14) → drip neutrons → neutron superfluid (15, UV superfluid He cooling) → caged → contained neutronium pellet → UIV field generator | 8 | decayed neutrons → protium |
 | 31 | Kilonova fuel: crust nuclei (14) → decompressed (16) → hot r-process mix → sealed capsule (17) → aged capsule → opened ash → cuts (EV platinum plant, ZPM Eu reductor, IV hot cell) | 7 | He-4 → stock; fragments → vault |
-| 32 | Element 119: U-238 target (IV fuel fabrication) → neutron flash (16 c2; Ivy Mike, Ghiorso 1955) → Es/Fm debris (IV hot cell) → actinide cut (ZPM actinide partitioning) → Es-254 (UHV transuranium HDEHP) → target → Ca-48 beam (UEV cyclotron) → element 119 recoil → census II entry | 9 | Fm → stock (UXV hook); fission products → hot cell |
+| 32 | Element 119: U-238 target (IV fuel fabrication) → neutron flash (16 c2; Ivy Mike, Ghiorso 1955) → Es/Fm debris (IV hot cell) → actinide cut (ZPM actinide partitioning) → Es-254 (UHV transuranium HDEHP) → target → Ca-48 beam (UEV cyclotron) → element 119 recoil (on the same Cf-252-calibrated etched membrane as line 9) → census II entry | 9 | Fm → stock (UXV hook); fission products → hot cell |
 | 33 | Crust lift tether: CNT yarn (UHV tether works) → BN-coated (UV BN reactor) → MH-laminated → braided → tether (UHV tether mode) → polar-cap electrode → crust lift tether | 7 | worn tether → tether works scrap row |
 | 34 | Gamma laser cavity: pair plasma (18) → cooled e⁺ (UHV positron accumulator) → Ps in aerogel (ZPM aerogel works) → laser-cooled Ps (19) → Ps BEC → gamma laser cavity → UIV emitter | 7 | annihilation γ → heat, voidable |
 | 35 | Penrose sled: synroc (ZPM waste retrieval) + `gtnn:radioactive_waste` → canister (IV hot cell) → compacted (UEV megabar) → split-charge sled (21 c2, with line 4's charge) → Penrose drop (22) → recovered half-sled → refit | 7 | ballast → into the hole, gone for good |
 | 36 | Ps cooling laser: LNOI (UHV, as built) → poled (3 c3) → PPLN waveguide (UHV foundry) → 486 nm SHG → 243 nm SHG → Ps cooling laser | 6 | none |
 | 37 | TPV shell: In/Ga/As/Sb → InGaAsSb epi (UV MOCVD) → air-bridge reflector (UHV foundry) → diced cell → TPV tile (12 c2) → wired segment → outer shell (LaPotin 2022) | 7 | AsH₃, SbH₃ → scrubbed, contained |
-| 38 | Gamma mirror: C-12 methane → CVD diamond (ZPM diamond lattice) → HPHT (UEV megabar) → (004) cut → ion-milled → gamma Bragg mirror → Ps cavity | 7 | graphite → stock |
-| 39 | Maglev conveyor: Fe₁₆N₂ (UEV) → bonded Halbach → RHEA-cased (2) → MH winding (ZPM magnet works) → potted → maglev stator + 1 `gtceu:uev_conveyor_module` (the belt frame it rebuilds; its only use) → UIV conveyor | 7 | offcuts → remelt |
+| 38 | Gamma mirror: C-12 methane → CVD diamond (ZPM diamond lattice) → HPHT (UEV megabar) → (004) cut → ion-milled → gamma Bragg mirror (stacked on 1 LuV sapphire test mass, the super-polished substrate) → Ps cavity | 7 | graphite → stock |
+| 39 | Maglev conveyor: Fe₁₆N₂ (UEV) → bonded Halbach → RHEA-cased (2) → MH winding (ZPM magnet works) → potted → maglev stator + 1 `gtceu:uev_conveyor_module` (the belt frame it rebuilds; its only use) + 4 LuV ITBTC coated-conductor tape (the levitation guideway) → UIV conveyor | 7 | offcuts → remelt |
 | 40 | 5D data crystal: SiCl₄ → soot → preform (UV fibre draw) → fs voxels (4 c4) → read-verified → annealed → 5D data crystal (Zhang, Kazansky 2016) | 7 | HCl → cascade |
 | 41 | AQFP logic: Nb (EV extraction cascade) → Nb target (UHV SPS) → Nb/Al-AlOx/Nb trilayer (UHV MBE) → JJ wafer (UEV SNSPD foundry mode) → AQFP die (Takeuchi 2013) → bonded on interposer → Matrioshka logic tile | 7 | Al → stock |
-| 42 | mK cryostat: Pr₆O₁₁ (ZPM Eu reductor) → Pr metal → PrNi₅ (2 c5) → nuclear stage (8 c1) → dilution unit with He-3/He-4 (UV superfluid He) → mK cryostat module (8 c2) → used by P:Si and the memories | 7 | Ni → stock; mixture → returned |
+| 42 | mK cryostat: Pr₆O₁₁ (ZPM Eu reductor) → Pr metal (EBF, 1 H₂ stage, c4) → PrNi₅ (2 c5) → nuclear stage (8 c1) → dilution unit with He-3/He-4 (UV superfluid He) → mK cryostat module (8 c2) → used by P:Si and the memories | 7 | Ni → stock; mixture → returned |
 | 43 | Rad-hard controller: C-12 methane → CVD diamond (ZPM diamond lattice) → B-doped p⁺ (ZPM ion implanter) → Ti/Pt/Au contacts (UHV foundry) → Schottky die → rad-hard controller → neutron-star site casing | 7 | Au → recycled |
 | 44 | EDFA repeater: Er₂O₃ (ZPM Eu reductor) → ErCl₃ solution doping → MCVD preform (UV fibre draw) → Er fibre → spliced → pumped EDFA → repeater (classical heralding channel) | 7 | Cl₂ → cascade |
 | 45 | Neon moderator: Ne (EV cryogenic plant) → purified → solid Ne on a cone (UV superfluid He) → annealed → moderator cartridge → Ps lab (19) (Mills & Gullikson 1986) | 6 | Ne boil-off → EV cryo |
@@ -848,8 +848,18 @@ Steps are the items between arrows, counted as UEV's. Every line ends in a UIV p
 | 98 | the jump (*Bridges*) | laser sail launcher | UV |
 | 99 | the jump (*Bridges*) | warp gate c4–c6 | UHV |
 | 100 | positronium condensate lab (19) | antimatter trap | UV |
+| 101 | line 3 | LuV magnetic bearing (housing) | LuV |
+| 102 | line 4 | UHV PBO fibre (overwrap) | UHV |
+| 103 | line 9 | UHV californium-252 source (membrane track count) | UHV |
+| 104 | line 13 | UHV VUV frequency comb (overlay check) | UHV |
+| 105 | line 14 | spark plasma sinterer | UHV |
+| 106 | line 14 | MBE reactor | UHV |
+| 107 | line 23 | LuV superconducting coils (field coils) | LuV |
+| 108 | line 32 | UHV californium-252 source (membrane track count) | UHV |
+| 109 | line 38 | LuV sapphire test mass (substrate) | LuV |
+| 110 | line 39 | LuV ITBTC coated conductor (guideway) | LuV |
 
-**100 crossings**: EV 9, HV 1, IV 11, LuV 4, ZPM 24, UV 24, UHV 27. 91 come from lines and 9 from machines. Lines 19 and 20 cross nothing older than UEV; each is still a real chain.
+**110 crossings**: EV 9, HV 1, IV 11, LuV 8, ZPM 24, UV 24, UHV 33. 99 come from lines and 11 from machines. Rows 101 to 110 were added by RF-3Q for the isolated lines. Line 20 is merged into line 19 and line 19 crosses nothing older than UEV; it is still a real chain.
 
 ## Quests
 
