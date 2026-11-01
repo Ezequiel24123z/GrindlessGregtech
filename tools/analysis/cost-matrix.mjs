@@ -559,6 +559,8 @@ export function solveFactors(args, cfg, dump) {
     }
     let pick = best ? best.f : 1;
     let shown = best ? best.idx : null;
+    // a step in the index can look like a plateau: a candidate already inside the band is the answer, not the highest index
+    if (plateau && best && Math.abs(Math.exp(best.g) - 1) <= curve.tolerance) plateau = false;
     if (plateau) {
       // the smallest factor that already gives (nearly) the best index: more only raises costs the index never sees
       const top = Math.max(...tried.map((x) => x.idx));
