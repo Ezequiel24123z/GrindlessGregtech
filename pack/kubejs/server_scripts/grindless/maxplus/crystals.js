@@ -94,9 +94,9 @@
   var COMPS = ['2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor']
   var CONTROLLERS = [
     { name: 'multi_plasma_blender', machine: 'gtceu:multi_plasma_blender', research: 'grindless:condensate_doped_dust', casing: 'grindless:horizon_machine_casing',
-      comps: COMPS, plates: ['4x grindless:horizon_compressed_plate', '2x grindless:kerr_strange_plate', '2x grindless:kerr_strange_ingot'] },
+      comps: COMPS, plates: ['4x grindless:horizon_compressed_plate', '4x grindless:kerr_strange_ingot'] },
     { name: 'horizon_crystal_furnace', machine: 'gtceu:horizon_crystal_furnace', research: 'grindless:sapphire_seed_plate', casing: 'grindless:horizon_machine_casing',
-      comps: COMPS, plates: ['4x grindless:horizon_compressed_plate', '4x grindless:kerr_strange_plate', '2x gtceu:sapphire_plate'] }
+      comps: COMPS, plates: ['4x gtceu:sapphire_plate', '4x grindless:kerr_strange_plate'] }
   ]
   MC.controllers = CONTROLLERS
 
