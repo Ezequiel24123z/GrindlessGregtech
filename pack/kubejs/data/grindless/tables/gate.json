@@ -154,6 +154,14 @@
           "itemsIn": [{ "id": "grindless:nsc_belt_seed", "count": 1 }, { "id": "grindless:launched_gc_probe", "count": 1 }],
           "kept": [],
           "itemsOut": [{ "id": "grindless:launched_belt_seed", "count": 1 }]
+        },
+        {
+          "_why": "XP-T1 (docs/eras/maxplus.md, gate c16): the c16 throw of the launched intergalactic probe from the gate on the Sgr A* platform (gcyr:black_hole_orbit) to 30 Doradus in the Large Magellanic Cloud, V[MAX] x 64 A = 2^37 EU/t for 1,200 t on a 1,024 A MAX+ hatch (the warp gate's pattern takes INPUT_ENERGY). The slingshot's launched probe is the cost; the horizon lock stays in the bus to aim it. It leaves launched and uxv/kerr_sling.js places the tarantula platform (relay_platforms.json tarantula, source gcyr:black_hole_orbit); the maxplus-lmc grant follows from the arrival.",
+          "name": "hold_tarantula",
+          "circuit": 16, "eut": 137438953472, "duration": 1200, "site": "sgr_a_orbit",
+          "itemsIn": [{ "id": "grindless:launched_ig_probe", "count": 1 }],
+          "kept": [{ "id": "grindless:horizon_lock", "count": 1 }],
+          "itemsOut": []
         }
       ]
     },
