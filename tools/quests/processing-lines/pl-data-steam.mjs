@@ -8,7 +8,7 @@ export default {
   subtitle: 'Coal turns into coke and steel, and ore and wood start arriving without a pickaxe.',
   icon: 'gtceu:coke_oven',
   focus: 'coal',
-  bands: [['coke', 'steel', 'sky'], ['drill', 'rubber'], ['glass'], ['ore']],
+  bands: [['coke', 'steel', 'sky'], ['drill', 'rubber'], ['glass', 'collector'], ['ore']],
   clusters: {
     coke: {
       name: 'Coke and coal gas',
@@ -119,6 +119,17 @@ export default {
         n('cfire', 6, 3, I('gtceu:compressed_fireclay'), 'Compressed Fireclay', { from: ['fireclay'], sub: 'Steam compressor', by: ['gtceu:compressor'] }),
         n('firebrick', 8, 3, I('gtceu:firebrick'), 'Firebrick', { from: ['cfire'], sub: 'Any furnace' }),
         n('firebricks', 10, 3, I('gtceu:firebricks'), 'Firebricks', { kind: 'product', from: ['firebrick'], sub: 'The blast furnaces are built from these' }),
+      ],
+    },
+    collector: {
+      name: 'Logs from the Horizon Collector',
+      nodes: [
+        n('shard', 0, 0, I('grindless:horizon_shard'), 'Horizon Shard', { kind: 'raw', sub: 'Never used up', desc: 'The Welcome quest gives it once. The machine keeps it.' }),
+        n('hc', 2, 0, M('gtceu:lv_horizon_collector', 'gtceu:horizon_collection'), 'Horizon Collector', {
+          kind: 'ours', from: ['shard'],
+          desc: 'Circuit 1 and the shard: 128 logs every 8 s (960 a minute), out of nowhere. It is the steam age\'s automatic log source; the greenhouse grows trees where the collector\'s other rows feed other lines.',
+        }),
+        n('clogs', 4, 0, I('minecraft:oak_log'), 'Oak Logs', { kind: 'product', from: ['hc'], sub: 'Charcoal, planks, and the first rubber' }),
       ],
     },
     ore: {
