@@ -3,7 +3,7 @@
 // Each row is one line of docs/eras/uiv.md ("New process lines"): its feedstock, its machines and its product, as the recipes run today.
 // Rows are laid out by chain(), 2.5 columns per step. Lines without a chain of four steps in the recipes (the cable seal, the
 // polarised ices, the C-12 spreader seed, the neon cone) are not drawn.
-import { I, M, n } from './pl-lib.mjs';
+import { I, L, M, n } from './pl-lib.mjs';
 
 // a step is [key, resource, title, kind?, options?]: the first step is raw, machines are 'ours', the rest products
 function chain(y, steps, end, x0 = 0) {
@@ -122,6 +122,14 @@ export default {
           ['l23_6', I('gtceu:uev_electric_motor'), 'UEV Electric Motor'],
           ['l23_7', I('gtceu:uiv_electric_motor'), 'UIV Electric Motor'],
         ], 'the UIV motor'),
+        // line 23, the GdBCO motor
+        ...chain(18, [
+          ['l23g_0', I('gtceu:gd_123_dust'), 'Gd-123', 'raw'],
+          ['l23g_1', I('grindless:bulk_gdbco'), 'Bulk GdBCO'],
+          ['l23g_2', I('grindless:oxygenated_gdbco'), 'Oxygenated GdBCO'],
+          ['l23g_3', I('grindless:impregnated_gdbco'), 'Impregnated GdBCO'],
+          ['l23g_4', I('grindless:field_cooled_gdbco'), 'Field-Cooled GdBCO'],
+        ], 'the UIV motor'),
         // line 39
         ...chain(16, [
           ['l39_0', I('grindless:reduced_iron_powder'), 'Reduced Iron Powder', 'raw'],
@@ -146,17 +154,18 @@ export default {
           ['l9_0', I('gtceu:polytetrafluoroethylene_foil'), 'Polytetrafluoroethylene Foil', 'raw'],
           ['l9_1', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil'],
           ['l9_2', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
-          ['l9_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil'],
+          ['l9_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l9_2', 'x9_cav'] }],
           ['l9_4', I('grindless:etched_membrane'), 'Etched Membrane'],
           ['l9_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
           ['l9_6', I('grindless:element_120_recoil'), 'Element 120 Recoil'],
         ], 'the superheavy census'),
+        L('x9_cav', 7.5, 1, 'pl_uev:nsc'),
         // line 32
         ...chain(2, [
           ['l32_0', I('gtceu:polytetrafluoroethylene_foil'), 'Polytetrafluoroethylene Foil', 'raw'],
           ['l32_1', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil'],
           ['l32_2', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
-          ['l32_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil'],
+          ['l32_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l32_2', 'x9_cav'] }],
           ['l32_4', I('grindless:etched_membrane'), 'Etched Membrane'],
           ['l32_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
           ['l32_6', I('grindless:element_119_recoil'), 'Element 119 Recoil'],
@@ -241,9 +250,10 @@ export default {
           ['l12_7', mach('gtceu:photonic_foundry'), 'Photonic Foundry', 'ours'],
           ['l12_8', I('grindless:glass_interposer'), 'Glass Interposer'],
         ], 'the optical mainframe'),
+        L('x13_hfo', -2.5, 4, 'pl_uev:hfo'),
         // line 13
         ...chain(4, [
-          ['l13_0', I('grindless:hfo2_resist_wafer'), 'Hfo2 Resist Wafer', 'raw'],
+          ['l13_0', I('grindless:hfo2_resist_wafer'), 'Hfo2 Resist Wafer', 'product', { from: ['x13_hfo'] }],
           ['l13_1', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
           ['l13_2', I('grindless:fouled_beuv_mirror'), 'Fouled BEUV Mirror'],
           ['l13_3', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
@@ -474,6 +484,20 @@ export default {
           ['l46_6', I('grindless:hfo2_passivated_crystal'), 'Hfo2 Passivated Crystal'],
           ['l46_7', I('grindless:selective_emitter'), 'Selective Emitter'],
         ], 'the TPV shell'),
+        // lines 19 and 20, the droplet radiator module
+        ...chain(16, [
+          ['l19_0', I('gtceu:glass_plate'), 'Glass Plate', 'raw'],
+          ['l19_1', I('grindless:lattice_2pp'), '2PP Lattice'],
+          ['l19_2', I('grindless:glassy_carbon_lattice'), 'Glassy-Carbon Lattice'],
+          ['l19_3', I('grindless:sic_coated_lattice'), 'SiC-Coated Lattice'],
+          ['l19_4', I('grindless:droplet_wick'), 'Droplet Wick'],
+          ['l19_5', I('grindless:droplet_collector'), 'Droplet Collector'],
+          ['l19_6', I('grindless:droplet_radiator_module'), 'Droplet Radiator Module', 'product', { from: ['l19_5', 'l20_1', 'l20_3'] }],
+        ], 'the Matrioshka shell'),
+        n('l20_0', 7.5, 17.5, I('gtceu:tin_ingot'), 'Tin Ingot', { kind: 'raw' }),
+        n('l20_1', 10, 17.5, I('grindless:eb_distilled_tin'), 'EB-Distilled Tin', { kind: 'product', from: ['l20_0'] }),
+        n('l20_2', 7.5, 19, I('gtceu:rhea_plate'), 'RHEA Plate', { kind: 'raw' }),
+        n('l20_3', 10, 19, I('grindless:orifice_plate'), 'Orifice Plate', { kind: 'product', from: ['l20_2'] }),
         // line 22
         ...chain(14, [
           ['l22_0', I('gtceu:uranium_233_ingot'), 'Uranium 233 Ingot', 'raw'],
