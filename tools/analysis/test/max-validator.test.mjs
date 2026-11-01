@@ -52,7 +52,7 @@ test('real tiers (max): substages in order after OpV, with the Sgr A* and belt r
   assert.equal(maxFile().world, undefined, 'MAX adds no hand-gathered source');
 });
 
-test('real tiers (max): the 10 multiblocks are machines with a declared package, each checked at its era (winch and imager-side at Sgr A*, the rest by the belt)', () => {
+test('real tiers (max): the 14 multiblocks are machines with a declared package, each checked at its era (winch and imager-side at Sgr A*, the rest by the belt)', () => {
   const raw = max();
   const ids = Object.keys(raw.packages);
   const ms = maxFile().machines.filter((m) => !m.id);
@@ -97,6 +97,9 @@ test('real tiers (max): the gate rows, the jumps, the Sgr A* and belt sites and 
 test('real tiers (max): exemptions are listed with a reason in max.json', () => {
   const note = maxFile().note;
   for (const x of ['gc_relay_probe', 'mirror_shell_segment', 'max_optical_table_casing', 'membrane_roller_casing', 'geroch_drum_casing', 'stream_turn_casing', 'max_machine_hull']) assert.ok(note.includes(x), `exemption ${x}`);
+  // ids RF-7A removed or renamed (universe_seed, max_epilogue) keep no exemption or era entry
+  const text = fs.readFileSync(path.join(TIERS, 'max.json'), 'utf8');
+  for (const gone of ['universe_seed', 'max_epilogue']) assert.ok(!text.includes(gone), `${gone} is gone from max.json`);
 });
 
 // ------------------------------------------------------------------ F1's ids at their substage
@@ -114,10 +117,12 @@ test('F1: every item and block of the id table is checked in a MAX group (glob-a
   const covered = (n) => where[n] || globs.some((g) => n.startsWith(g)) || made.has(n);
   const missing = names.filter((n) => !covered(n));
   t.diagnostic(`F1: ${ids.foundation.items.length} items, ${ids.foundation.blocks.length} blocks; unchecked: ${missing.join(', ') || 'none'}`);
-  // Ids with no era group are covered by a recipe that makes them. epilogue has no recipe or source; max_ids.json lists grindless:max_parallel_hatch where the real id is gtceu:max_parallel_hatch (covered by the glob).
-  // The 72 RF-7A items and 5 casings (MX-F1) get their recipes and era groups in later packages.
-  const rf7a = new Set([...ids.foundation.items.slice(-72), ...ids.foundation.blocks.slice(-5)].map((n) => (n.includes(':') ? n : `grindless:${n}`)));
-  assert.deepEqual(missing.filter((n) => !rf7a.has(n)).sort(), ['grindless:epilogue']);
+  // Ids with no era group are covered by a recipe that makes them. epilogue has no recipe or source (MX-E1: it is only granted by the ending's book at MAX+);
+  // max_ids.json lists grindless:max_parallel_hatch where the real id is gtceu:max_parallel_hatch (covered by the glob).
+  // Every RF-7A item and casing (MX-F1) now has a recipe or an era group, epilogue excepted by name.
+  const rf7a = [...ids.foundation.items.slice(-72), ...ids.foundation.blocks.slice(-5)].map((n) => (n.includes(':') ? n : `grindless:${n}`));
+  assert.deepEqual(rf7a.filter((n) => !covered(n) && n !== 'grindless:epilogue'), [], 'RF-7A ids with no recipe and no era group');
+  assert.deepEqual(missing.sort(), ['grindless:epilogue']);
   const at = (id) => where[id]?.[0];
   assert.equal(at('grindless:nsc_planetesimal'), 'max-nsc-items');
   assert.equal(at('grindless:sgr_a_spin_map'), 'max-sgra-items');
@@ -383,6 +388,10 @@ test('chanced wear: each chanced generator input has a spent output at the same 
     const reworks = pack().recs.filter((x) => ins(x).includes(spent));
     assert.ok(reworks.length >= 1, `${spent} has a rework row`);
   }
+  // MX-S4: the vent's chanced ablated segment (1/16) is consumed by the segment reclamation works
+  const vent = rec('grindless:black_hole_bomb/vent_wave_packet');
+  assert.equal(chance(vent, 'outputs', 'grindless:ablated_shell_segment'), 625, 'vent ablates a segment at 625/10000');
+  assert.ok(recsOfType('segment_reclamation').some((x) => ins(x).includes('grindless:ablated_shell_segment')), 'the reclamation works consumes ablated segments');
 });
 
 // ------------------------------------------------------------------ the 7 F1 blocks
@@ -426,7 +435,7 @@ test('no MAX controller, hatch or MAX component recipe takes an OpV-or-lower com
   assert.ok(ins(probe).includes('gtceu:opv_sensor'), 'the probe is the exempt OpV-stage travel item');
 });
 
-test('component thresholds: each of the 10 controllers has at least 4 MAX circuits; the 7 with MAX components have 8 or more from 3 kinds', (t) => {
+test('component thresholds: each of the 14 controllers has at least 4 MAX circuits and 4 MAX components', (t) => {
   const COMP = /^grindless:max_(electric_motor|electric_pump|electric_piston|robot_arm|emitter|fluid_regulator|conveyor_module|sensor|field_generator)$/;
   const report = [];
   for (const m of Object.keys(MULTIBLOCKS)) {
@@ -444,10 +453,21 @@ test('component thresholds: each of the 10 controllers has at least 4 MAX circui
   t.diagnostic(report.join('; '));
 });
 
-test('no MAX recipe consumes a MAX+ hook (horizon_lock, GT-- max casing and converter)', () => {
+test('no MAX recipe consumes a MAX+ hook (horizon_lock, GT-- max casing and converter): c3 only makes the lock; the gene ark and the shell take none', () => {
   for (const hook of ['grindless:horizon_lock', 'gtnn:component_assline_casing_max', 'gtmutils:max_64a_energy_converter']) {
     assert.deepEqual(pack().recs.filter((r) => ins(r).includes(hook)).map((r) => r.i), [], hook);
   }
+  assert.deepEqual(makers(pack().recs, 'grindless:horizon_lock').map((r) => r.i), ['grindless:black_hole_bomb/horizon_lock']);
+});
+
+test('the maxplus stage grant: the shell sets the world flag grindless_stage_maxplus once, after a run of c3 (startup max/shell.js)', () => {
+  const s = STARTUP_SRC()['shell.js'];
+  assert.match(s, /STAGE = 'maxplus'/);
+  assert.match(s, /STAGE_KEY = 'grindless_stage_maxplus'/);
+  assert.match(s, /ENDING = 'horizon_lock'/);
+  assert.match(s, /if \(!data\.getBoolean\(STAGE_KEY\)\)/);
+  assert.match(s, /data\.putBoolean\(STAGE_KEY, true\)/);
+  assert.match(s, /\.afterWorking\(grantStage\)/);
 });
 
 test('partSorter: no MAX multiblock takes ordered inputs, so none needs one (vacuously total)', () => {
@@ -502,31 +522,34 @@ const section = (md, head) => {
   const end = md.indexOf('\n## ', start + 5);
   return md.slice(start, end < 0 ? md.length : end);
 };
-const cells = (l) => l.split('|').map((s) => s.trim());
+const cells = (l) => l.split('|').map((s) => s.replace(/\*/g, '').trim());
 function recount() {
   const md = fs.readFileSync(path.join(ROOT, 'docs', 'eras', 'max.md'), 'utf8');
-  const rows = md.split('\n').filter((l) => /^\| L\d+ \|/.test(l)).map(cells);
+  // built lines: the table and the RF-7A table (L47-L57, rows written **L47**)
+  const rows = md.split('\n').filter((l) => /^\| (\*\*)?L\d+(\*\*)? \|/.test(l)).map(cells);
   const stated = rows.map((r) => Number(r[4]));
   const cr = rows.map((r) => Number(r[5]));
   const cx = section(md, '## Crossings').split('\n').filter((l) => l.startsWith('|') && !l.startsWith('|---') && !l.startsWith('| Era')).map(cells);
-  const total = cx.find((r) => r[1].startsWith('**'));
+  const total = cx.find((r) => r[1] === 'Total');
   const eraRows = cx.filter((r) => r !== total);
   return {
     lines: rows.length, numbered: rows.every((r, i) => r[1] === `L${i + 1}`), stated, steps: stated.reduce((a, b) => a + b, 0), crSum: cr.reduce((a, b) => a + b, 0),
     eraSum: eraRows.reduce((s, r) => s + Number(r[2]), 0),
     machines: eraRows.reduce((n, r) => n + Number(r[3].match(/\((\d+)\)\s*$/)[1]), 0),
-    total: Number(total[2].replace(/\*/g, '')), totalMachines: Number(total[3].replace(/\D/g, '')),
+    total: Number(total[2]), totalMachines: Number(total[3].replace(/\D/g, '')),
   };
 }
 
-test('re-count: 46 lines (232 steps), 167 crossings on 71 older machines (reported as found, never padded)', (t) => {
+test('re-count: 57 lines (292 steps), 204 crossings on 71 older machines (as built; a gap is reported, never padded)', (t) => {
   const c = recount();
   t.diagnostic(`lines ${c.lines}, steps ${c.steps}, min ${Math.min(...c.stated)}; crossings: Cr column ${c.crSum}, era rows ${c.eraSum}, total row ${c.total}; machines ${c.machines} (stated ${c.totalMachines})`);
   assert.ok(c.numbered, 'lines numbered L1..Ln');
   assert.ok(c.stated.every((s) => s >= 4), 'no line under 4 steps');
-  assert.ok(Math.abs(c.lines - 46) <= 3, `46 lines stated, ${c.lines} found`);
-  assert.ok(Math.abs(c.steps - 232) <= 3, `232 steps stated, ${c.steps} found`);
-  assert.ok(Math.abs(c.crSum - 167) <= 3, `167 crossings stated, ${c.crSum} in the Cr column`);
+  assert.equal(c.lines, 57, `57 lines stated, ${c.lines} found`);
+  assert.equal(c.steps, 292, `292 steps stated, ${c.steps} found`);
+  assert.equal(c.crSum, 204, `204 crossings stated, ${c.crSum} in the Cr column`);
   assert.equal(c.total, c.eraSum, 'the Crossings total is the sum of its rows');
-  assert.ok(Math.abs(c.machines - 71) <= 3, `71 machines stated, ${c.machines} named`);
+  assert.equal(c.total, 204);
+  assert.equal(c.machines, 71, `71 machines stated, ${c.machines} named`);
+  assert.equal(c.totalMachines, 71);
 });
