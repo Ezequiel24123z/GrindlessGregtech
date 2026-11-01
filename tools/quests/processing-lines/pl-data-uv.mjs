@@ -48,7 +48,8 @@ const chapter = {
       ],
     },
     beams: {
-      name: 'Muon-catalysed fusion',
+      name: 'Muon-catalysed fusion', role: 'power',
+      keepShort: 'a generator fed by one freezer and the blanket it also wears; the tritium it makes is bred back, so the loop is the whole line',
       nodes: [
         L('trit', 0, 0, 'pl_iv:tritium'),
         n('dt', 2.5, 0, F('gtceu:liquid_deuterium_tritium'), 'Liquid D-T', { kind: 'product', from: ['trit'], sub: 'Frozen with deuterium in the vacuum freezer' }),
@@ -122,8 +123,12 @@ const chapter = {
     pluto: {
       name: 'Pluto\'s ices and closed life',
       nodes: [
+        n('pfr', -5, -0.75, I('grindless:printed_probe_frame'), 'Printed Probe Frame', { kind: 'raw', sub: 'Four go into the bay too' }),
+        n('pgph', -5, 0.75, I('grindless:gphs_module'), 'GPHS Module', { kind: 'raw', sub: 'From the Starshot heat sources' }),
+        n('ppr', -2.5, 0, I('grindless:penetrator_probe'), 'Penetrator Probe', { kind: 'product', from: ['pfr', 'pgph'], sub: 'With an HPGe crystal, a melt head and a sensor' }),
+        n('tic', -2.5, -2, I('grindless:triton_ice_core'), 'Triton Ice Core', { kind: 'raw', sub: 'Dug on Triton' }),
         n('bay', 0, 0, M('gtceu:penetrator_probe_bay'), 'Penetrator Probe Bay', {
-          kind: 'ours', desc: 'Drops a probe that melts into the ice and sends a core up.',
+          kind: 'ours', from: ['ppr', 'tic'], desc: 'Drops a probe that melts into the ice and sends a core up.',
         }),
         n('sput', 2.5, -1.5, I('grindless:sputnik_ice_core'), 'Sputnik Ice Core', { kind: 'product', from: ['bay'] }),
         n('charon', 2.5, 1.5, I('grindless:charon_core'), 'Charon Core', { kind: 'product', from: ['bay'] }),
@@ -221,8 +226,9 @@ const chapter = {
         n('hbn', 5, 12, I('grindless:hbn_dust'), 'Hexagonal Boron Nitride', { kind: 'product', from: ['bnr'], sub: 'The sail film takes some too' }),
         n('bnntd', 7.5, 12, I('grindless:bnnt_dust'), 'Nanotube Dust', { kind: 'product', from: ['hbn'], sub: 'Grown in hydrogen' }),
         n('yarn', 10, 12, I('grindless:bnnt_yarn'), 'BNNT Yarn', { kind: 'product', from: ['bnntd'], sub: 'Spun five to one; the boron nitride comes back' }),
-        n('winder', 12.5, 12, M('gtceu:cryotank_winder'), 'Cryotank Winder', { kind: 'ours', from: ['yarn'], desc: 'Winds the yarn round an aerogel tank with carbon nanotube yarn and epoxy.' }),
-        n('tank', 15, 12, I('grindless:bnnt_fuel_tank'), 'BNNT Fuel Tank', { kind: 'product', role: 'travel', from: ['winder'], end: 'built into the Pluto rocket' }),
+        n('winder', 12.5, 12, M('gtceu:cryotank_winder'), 'Cryotank Winder', { kind: 'ours', from: ['yarn', via('laer', 'grindless:aerogel_fuel_tank')], desc: 'Winds the yarn round an aerogel tank with carbon nanotube yarn and epoxy.' }),
+        n('tank', 15, 12, I('grindless:bnnt_fuel_tank'), 'BNNT Fuel Tank', { kind: 'product', from: ['winder'], end: 'built into the Pluto rocket' }),
+        L('laer', 10, 13.5, 'pl_zpm:aer'),
         // the light sail
         L('lsw', 0, 15, 'pl_mv:wafer'),
         n('wsf', 2.5, 15, M('gtceu:wake_shield_facility'), 'Wake Shield Facility', {

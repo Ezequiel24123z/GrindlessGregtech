@@ -234,7 +234,7 @@ const data = {
           ['mel', I('grindless:melanin_extract'), 'Melanin Extract'],
           ['comp', I('grindless:melanin_chitosan_composite'), 'Melanin-Chitosan Composite'],
           ['panel', I('grindless:flare_shield_panel'), 'Flare Shield Panel'],
-          ['pbc', I('grindless:proxima_base_casing'), 'Proxima Base Casing', 'product', { role: 'infrastructure' }],
+          ['pbc', I('grindless:proxima_base_casing'), 'Proxima Base Casing', 'product'],
         ], 'the base on Proxima b', 9.5),
         // 17 biocement
         n('tail2', 14.5, -7, I('grindless:leached_tailings'), 'Leached Tailings', { kind: 'raw', sub: 'From the biomining heap' }),
@@ -296,7 +296,7 @@ const data = {
           ['mg', I('gtceu:magnesium_dust'), 'Magnesium', 'raw', { sub: 'With boron' }],
           ['mgb2', I('gtceu:magnesium_diboride_dust'), 'MgB2 Powder'],
           ['pit', mach('gtceu:powder_in_tube_line'), 'Powder-in-Tube Line', 'ours', { desc: 'Packs the powder in an iron tube and draws it to wire.' }],
-          ['wire', I('gtceu:magnesium_diboride_single_wire'), 'MgB2 Wire', 'product', { role: 'infrastructure' }],
+          ['wire', I('gtceu:magnesium_diboride_single_wire'), 'MgB2 Wire', 'product'],
         ], 'cables and the field generators'),
       ],
     },
@@ -305,10 +305,14 @@ const data = {
       nodes: [
         // 24 PBO fibre
         ...chain(0, [
-          ['bz', I('gtceu:diaminoresorcinol_dust'), 'Diaminoresorcinol', 'raw', { sub: 'With terephthalic acid' }],
+          ['bnz', F('gtceu:benzene'), 'Benzene', 'raw', { sub: 'The HV reformer\'s; chlorinated in a chemical reactor' }],
+          ['tcb', F('gtceu:trichlorobenzene'), 'Trichlorobenzene'],
+          ['dnt', F('gtceu:dinitrotrichlorobenzene'), 'Dinitrotrichlorobenzene'],
+          ['cdr', I('gtceu:chlorodinitroresorcinol_dust'), 'Chlorodinitroresorcinol'],
+          ['bz', I('gtceu:diaminoresorcinol_dust'), 'Diaminoresorcinol', 'product', { sub: 'With terephthalic acid' }],
           ['dope', F('gtceu:pbo_dope'), 'PBO Dope'],
           ['pbop', mach('gtceu:pbo_plant'), 'PBO Plant', 'ours', { desc: 'Spins the dope in polyphosphoric acid, which is recycled.' }],
-          ['fib', I('grindless:pbo_fibre'), 'PBO Fibre', 'product', { role: 'infrastructure' }],
+          ['fib', I('grindless:pbo_fibre'), 'PBO Fibre', 'product'],
         ], 'the tether ribbon'),
         // 25 HDEHP extractant
         ...chain(2, [
@@ -320,13 +324,16 @@ const data = {
         n('spsol', 7.5, 3.5, F('gtceu:spent_hdehp_solvent'), 'Spent Solvent', { kind: 'by', from: ['sol'], end: 'incinerated; the phosphoric acid comes back' }),
         // 26 UHTC
         ...chain(5, [
-          ['zrb2', I('gtceu:uhtc_blend_dust'), 'UHTC Blend', 'raw', { sub: 'Zirconium diboride and carbon' }],
+          ['rz', I('gtca:red_zircon_dust'), 'Red Zircon', 'raw', { sub: 'The End\'s zircon' }],
+          ['zro', I('gtceu:zirconia_dust'), 'Zirconia'],
+          ['zrdb', I('gtceu:zirconium_diboride_dust'), 'Zirconium Diboride'],
+          ['zrb2', I('gtceu:uhtc_blend_dust'), 'UHTC Blend', 'product', { sub: 'With silicon carbide' }],
           ['sps', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours', { desc: 'Presses the blend to a tile in seconds.' }],
           ['tile', I('grindless:uhtc_tile'), 'UHTC Tile'],
           ['sps2', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours', { desc: 'Sinters four tiles and a tantalum carbide liner into a nozzle.' }],
           ['noz', I('grindless:uhtc_nozzle'), 'UHTC Nozzle'],
           ['thk', mach('gtceu:thruster_works'), 'Thruster Works', 'ours', { desc: 'Mounts the nozzle with an antimatter pellet, power modules and a lifted stage.' }],
-          ['ican', I('grindless:ican_rocket_motor'), 'ICAN Rocket Motor', 'product', { role: 'travel' }],
+          ['ican', I('grindless:ican_rocket_motor'), 'ICAN Rocket Motor'],
         ], 'the probe stages'),
         n('pellet', 10, 9, I('grindless:ican_pellet'), 'ICAN Pellet', { kind: 'raw', sub: 'From the antimatter store' }),
         n('sicm', 10, 7.5, I('grindless:sic_power_module'), 'SiC Power Module', { kind: 'raw', sub: 'Two; from the silicon carbide line' }),
