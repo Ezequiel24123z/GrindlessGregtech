@@ -30,7 +30,8 @@
     "MAX-G1": { "label": "mirror shell and the ending", "landedWhen": ["gtceu:mirror_shell"] },
     "MAX-R1": { "label": "cluster-light furnace", "landedWhen": ["gtceu:cluster_light_furnace"] },
     "MAX-E1": { "label": "accretion feeder", "landedWhen": ["gtceu:accretion_feeder"] },
-    "MX-S3": { "label": "horizon flux clamp", "landedWhen": ["gtceu:horizon_flux_clamp"] }
+    "MX-S3": { "label": "horizon flux clamp", "landedWhen": ["gtceu:horizon_flux_clamp"] },
+    "MX-S4": { "label": "segment reclamation works", "landedWhen": ["gtceu:segment_reclamation_works"] }
   },
   "conditions": {
     "dimension": {
@@ -48,6 +49,7 @@
     { "machine": "gtceu:mass_stream_injector", "types": ["gtceu:mass_stream_injection"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-D4" },
     { "machine": "gtceu:mirror_shell", "types": ["gtceu:black_hole_bomb"], "maxEUt": 34359738368, "needs": ["eu:opv"], "package": "MAX-G1" },
     { "machine": "gtceu:cluster_light_furnace", "types": ["gtceu:cluster_light_smelting"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-R1" },
+    { "machine": "gtceu:segment_reclamation_works", "types": ["gtceu:segment_reclamation"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S4" },
     { "machine": "gtceu:accretion_feeder", "types": ["gtceu:accretion_power"], "maxEUt": 8589934592, "needs": ["eu:opv"], "package": "MAX-E1" },
     { "machine": "gtceu:horizon_flux_clamp", "types": ["gtceu:horizon_flux_clamp"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S3" },
     { "id": "gtceu:warp_gate@max", "machine": "gtceu:warp_gate", "types": ["gtceu:warp_gate"], "maxEUt": 8589934592,     "needs": ["eu:opv"], "package": "MAX-T1" },
@@ -150,7 +152,7 @@
       "label": "The belt (gate c15) and the ending",
       "items": [
         "grindless:launched_belt_seed", "grindless:nsc_planetesimal",         "grindless:universe_seed",
-        "m:gtceu:mass_stream_injector", "m:gtceu:mirror_shell", "m:gtceu:accretion_feeder", "m:gtceu:cluster_light_furnace", "m:gtceu:horizon_flux_clamp",
+        "m:gtceu:mass_stream_injector", "m:gtceu:mirror_shell", "m:gtceu:accretion_feeder", "m:gtceu:cluster_light_furnace", "m:gtceu:horizon_flux_clamp", "m:gtceu:segment_reclamation_works",
         "grindless:stream_bundle", "grindless:stream_pellet", "grindless:stream_bundle_block", "grindless:stream_turn_casing", "grindless:mirror_shell_segment", "grindless:feeder_coil_casing"
       ]
     }
@@ -328,6 +330,14 @@
       "dimensions": ["grindless:nsc_belt"],
       "exact": true,
       "package": "MAX-R1"
+    },
+    {
+      "id": "site-max-reclamation",
+      "label": "Site: the segment reclamation works only at Sgr A* orbit (the ablated segment is a shell part)",
+      "kind": "site",
+      "types": ["gtceu:segment_reclamation"],
+      "dimensions": ["gcyr:black_hole_orbit"],
+      "package": "MX-S4"
     },
     {
       "id": "gate-hold-sgr-a-probe",

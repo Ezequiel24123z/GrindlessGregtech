@@ -188,6 +188,17 @@
       "fluidsIn": [{ "id": "gtceu:sterilized_growth_medium", "amount": 250 }, { "id": "gtceu:bacteria", "amount": 250 }],
       "itemsOut": [{ "id": "grindless:syn3_genome_cassettes", "count": 1 }],
       "fluidsOut": []
+    },
+    {
+      "_why": "MX-S4 (max.md, L52 step 2, c20): a culture of metal-leaching bacteria takes the rare earths out of stripped membrane scrap (biomining, Rawlings 2002)",
+      "name": "bioleached_re_liquor",
+      "circuit": 20,
+      "eut": 7680,
+      "duration": 1200,
+      "itemsIn": [{ "id": "grindless:stripped_membrane_scrap", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:bacteria", "amount": 250 }, { "id": "gtceu:sterilized_growth_medium", "amount": 250 }],
+      "itemsOut": [{ "id": "grindless:bioleached_re_liquor", "count": 1 }],
+      "fluidsOut": []
     }
   ]
 }

@@ -1,4 +1,4 @@
-// priority: 6615
+// priority: 6624
 // Gregtech Grindless - text of the MAX parallel hatch (package MAX-M1; startup_scripts/grindless/lib/parallel_hatch.js and
 // server_scripts/grindless/max/parallel.js).
 //

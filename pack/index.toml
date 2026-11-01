@@ -2845,6 +2845,10 @@ file = "kubejs/assets/grindless/textures/block/max/mirror_shell_segment.png"
 hash = "f5768ef5c946e9e339e4ce73a28200ae778fc03935f047d648d16005babe9993"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/max/reclamation_bay_casing.png"
+hash = "c122fe56224ae8ef40689ad44a1b6ccb2bd17884a5d2ff5b6d07ca7fd2645489"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/max/stream_bundle_block.png"
 hash = "8f2555c350fb37b47d778c8e26878197f072ddc3f042333ae1bc2106449b28ff"
 
@@ -6446,6 +6450,26 @@ hash = "014849da60d4e340d813c9e9d6f95a632aa7e143274b2b56cb155e8793b7d131"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/multiblock/sealed_dome/overlay_front_active_emissive.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/segment_reclamation_works/overlay_front.png"
+hash = "691e0288e727f03ce9ba7dfeddd828caafe061c6706629224e4332b19a6a805b"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/segment_reclamation_works/overlay_front_active.png"
+hash = "59496e932f553152e6474bcb3cf4a94c75db2fbc9fc01eee88bf7d9b66e387b4"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/segment_reclamation_works/overlay_front_active.png.mcmeta"
+hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/segment_reclamation_works/overlay_front_active_emissive.png"
+hash = "8560dbd6c1007401376096c7cea1922befd57a40ee86a640632374a88e934401"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/multiblock/segment_reclamation_works/overlay_front_active_emissive.png.mcmeta"
 hash = "491ea51d46bc1f0c0ff11ed9293461cc67de293c7672abbc45f67563f8fe1f1a"
 
 [[files]]
@@ -14234,19 +14258,23 @@ hash = "9768e95a142ba614247e7df48209059757be7d2dbc71ee06db1d049b9639f267"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_parallel_hatch_lang.js"
-hash = "35e4316f4ee680c34e2407954e5dd7f0ca6c6c1bebcc479aa81db58c59aad168"
+hash = "2720747ff78d2e787e81b45d083455bb3db777b88605b88caea2e1b79f44f8c4"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_parts_lang.js"
-hash = "5a5ddbab08cb64051e565da706ba31c6296e9721c4db85bdf4cbebb3edfa498e"
+hash = "493f7335013b89e42ad96c7538caf0c462c7db1d026553ea846dde190f9bcbd3"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/max_reclamation_lang.js"
+hash = "95d84f12a94a86c8822672796a923c2298c7cdc17363d4d50293176f75ff8ab9"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_rydberg_lang.js"
-hash = "b82d0eb3b15a0e78a76036618544c5998780d042010b7f514398736d7aa0c822"
+hash = "6be1876784cd7c8d43fa085b35355de7db7edf2cbd66928ce20dbab5809659f5"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_sgra_modes_lang.js"
-hash = "12827b49ded67a199d7f90d95ac8c6916a0e131ed3b31fcf260462e74701382d"
+hash = "b67fa56c67f15cc7713822ee508eb757d1b9a9e47bba54439f7dee2d0f7880f4"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_shell_lang.js"
@@ -15198,7 +15226,7 @@ hash = "cb62d1ac4b12567728643aedae9b4b9da34a5b5870947d6370f512069fd790ce"
 
 [[files]]
 file = "kubejs/data/grindless/tables/biofoundry.json"
-hash = "bbb7cc28f407c84ad7f8497012211717e1348339fa8a13a4bbafea2d8dfd10ef"
+hash = "3e41170e46ef30646c7a48742e07dc8cd4e5f7a31b621ebaf988b15306123c92"
 
 [[files]]
 file = "kubejs/data/grindless/tables/bulge_collector.json"
@@ -15722,7 +15750,7 @@ hash = "1161a333fc6991de19fb486aebf1422c47cc6ddd28d77c4ee7e6a2bdf961cf53"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/extraction_cascade.js"
-hash = "773942876cd90e985f7a17e952f508a0b2232e73639223c50997e6e72b54cd62"
+hash = "80d6b20ac5fdc32c7a77f6f842f493a0f579e12fcf0fbaad4437c4d4f2ee48b4"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/foundation.js"
@@ -16142,23 +16170,27 @@ hash = "9a891e48f8872183c40d4c9b734446e0105efebb7ca99bcebebc26c8cb1311a2"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/max/parallel.js"
-hash = "1b3fffc4d592eca7991ccbb84812ad454fdb05bdcfdc1e0a1d4baa4c8c5ea2f3"
+hash = "93682c1e7a118c286aa7de2c5caa2ef3a6c69501ea0af0286bc3e9aa59b886bc"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/max/parts.js"
-hash = "fd3836902b776321f37475e32717ac3cd63f592dd3ba22f8f60b2199ee3467a1"
+hash = "847e20e02efe2c28cdbe01712eb531f231fdc290a81eb578e4994df34308491a"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/max/reclamation.js"
+hash = "0686c4ad4754e9c91a0b43cc8a78234c37952576eee82977ee1b2e96386a2c12"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/max/rydberg.js"
-hash = "7c0e2bfdbd9c2fb99691ddbd6e70c1a21987a886e520c30fe1f0b5daa93b0f0f"
+hash = "891d71469a76b149649c1373cfd13ce60a5828e6380d015f2aba92ca2678c873"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/max/sgra_modes.js"
-hash = "534433be5209db864b54bb4321f2e9d7eb108e00dd4c127e0c983a79bf308e9b"
+hash = "121fda376132c9786e87b7ac28df78d76c1919a5ee8c946711f746725c1a5f3e"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/max/shell.js"
-hash = "0daae58d48266555849543c637578f02e7ba42cb4712d0b01fea4e7c72fb648e"
+hash = "ccce8beed23658e7384e23d32249900886bf5485916589ad45f81e34e95dc34a"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/max/shell_parts.js"
@@ -17119,6 +17151,10 @@ hash = "36c52ee196ab96dd027c6d69dd3947e9c297492b207d7dd4b9570bf93a3578fa"
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/membrane_line.js"
 hash = "07573e0045b0dc9cc13fee2197408945bb1ea7918061c167643f2cddaee036c9"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/max/reclamation.js"
+hash = "47d9cefca4a7807165824aebec484a514ac2fe8ef69442cb2de2429c0e8885c4"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/rydberg.js"

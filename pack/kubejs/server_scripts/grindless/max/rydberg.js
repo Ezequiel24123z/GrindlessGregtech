@@ -1,4 +1,4 @@
-// priority: -20014
+// priority: -20010
 // -----------------------------------------------------------------------------------------------
 // MAX-B3 Rydberg array works (docs/eras/max.md, machine 1, lines L19, L23, L29, L40, L43, L46; package MAX-B3). The line steps on older
 // machines are rows marked MAX-B3 in their own tables and scripts; this file holds the machine's two recipes, its controller and the GTM
