@@ -124,11 +124,11 @@ export default {
         ], 'the UIV motor'),
         // line 23, the GdBCO motor
         ...chain(18, [
-          ['l23g_0', I('gtceu:gd_123_dust'), 'Gd-123', 'raw'],
-          ['l23g_1', I('grindless:bulk_gdbco'), 'Bulk GdBCO'],
-          ['l23g_2', I('grindless:oxygenated_gdbco'), 'Oxygenated GdBCO'],
-          ['l23g_3', I('grindless:impregnated_gdbco'), 'Impregnated GdBCO'],
-          ['l23g_4', I('grindless:field_cooled_gdbco'), 'Field-Cooled GdBCO'],
+          ['l123_0', I('gtceu:gd_123_dust'), 'Gd-123', 'raw'],
+          ['l123_1', I('grindless:bulk_gdbco'), 'Bulk GdBCO'],
+          ['l123_2', I('grindless:oxygenated_gdbco'), 'Oxygenated GdBCO'],
+          ['l123_3', I('grindless:impregnated_gdbco'), 'Impregnated GdBCO'],
+          ['l123_4', I('grindless:field_cooled_gdbco'), 'Field-Cooled GdBCO'],
         ], 'the UIV motor'),
         // line 39
         ...chain(16, [
@@ -492,12 +492,12 @@ export default {
           ['l19_3', I('grindless:sic_coated_lattice'), 'SiC-Coated Lattice'],
           ['l19_4', I('grindless:droplet_wick'), 'Droplet Wick'],
           ['l19_5', I('grindless:droplet_collector'), 'Droplet Collector'],
-          ['l19_6', I('grindless:droplet_radiator_module'), 'Droplet Radiator Module', 'product', { from: ['l19_5', 'l20_1', 'l20_3'] }],
+          ['l19_6', I('grindless:droplet_radiator_module'), 'Droplet Radiator Module', 'product', { from: ['l19_5', 'l19_8', 'l19_10'] }],
         ], 'the Matrioshka shell'),
-        n('l20_0', 7.5, 17.5, I('gtceu:tin_ingot'), 'Tin Ingot', { kind: 'raw' }),
-        n('l20_1', 10, 17.5, I('grindless:eb_distilled_tin'), 'EB-Distilled Tin', { kind: 'product', from: ['l20_0'] }),
-        n('l20_2', 7.5, 19, I('gtceu:rhea_plate'), 'RHEA Plate', { kind: 'raw' }),
-        n('l20_3', 10, 19, I('grindless:orifice_plate'), 'Orifice Plate', { kind: 'product', from: ['l20_2'] }),
+        n('l19_7', 7.5, 17.5, I('gtceu:tin_ingot'), 'Tin Ingot', { kind: 'raw' }),
+        n('l19_8', 10, 17.5, I('grindless:eb_distilled_tin'), 'EB-Distilled Tin', { kind: 'product', from: ['l19_7'] }),
+        n('l19_9', 7.5, 19, I('gtceu:rhea_plate'), 'RHEA Plate', { kind: 'raw' }),
+        n('l19_10', 10, 19, I('grindless:orifice_plate'), 'Orifice Plate', { kind: 'product', from: ['l19_9'] }),
         // line 22
         ...chain(14, [
           ['l22_0', I('gtceu:uranium_233_ingot'), 'Uranium 233 Ingot', 'raw'],
