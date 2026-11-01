@@ -1,4 +1,3 @@
-// priority: 12250
 // TEST ONLY, XP-Z1b ending. Client half; partner of server_scripts/gg_test_maxplus_ending.js (asleep unless it sets 'hold' in global.ggMaxplusEnding).
 // Keeps mc-runtime-test in the world, closes the first WinScreen like a player pressing Escape, flags a second one, and on the server's request
 // right-clicks the epilogue with the real gameMode.useItem path and reports whether a BookViewScreen opened.
