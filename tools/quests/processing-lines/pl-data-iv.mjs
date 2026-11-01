@@ -12,6 +12,7 @@ export default {
   clusters: {
     uranium: {
       name: 'Uranium and fluorine',
+      line: 'fuelcycle',
       nodes: [
         n('fluorite', 0, -2.25, I('gcyr:raw_fluorite'), 'Raw Fluorite', { kind: 'raw', sub: 'The fluorite vein: any Earth drill, from steam on' }),
         n('fdust', 2, -2.25, I('gcyr:fluorite_dust'), 'Fluorite Dust', {
@@ -142,7 +143,7 @@ export default {
           kind: 'ours', from: ['acidv', 'gauze'],
           desc: 'The planet\'s own heat cracks the acid into water and oxygen, so the base stops shipping water from home.',
         }),
-        n('dwv', 6, 0, F('gtceu:distilled_water'), 'Distilled Water', { from: ['works'], sub: 'The drill and the heat engine drink it' }),
+        n('dwv', 6, 0, F('gtceu:distilled_water'), 'Distilled Water', { kind: 'product', from: ['works'], sub: 'The drill and the heat engine drink it' }),
         n('o2v', 6, 1.5, F('gtceu:oxygen'), 'Oxygen', { kind: 'by', from: ['works'], end: 'suits, spreader', sub: 'Suits and the oxygen spreader' }),
         n('so2', 6, 2.5, F('gtceu:sulfur_dioxide'), 'Sulfur Dioxide', { kind: 'by', from: ['works'], end: 'acid at home', sub: 'Circuit 1 vents it; circuit 2 keeps it for acid at home' }),
         n('engine', 8, 0, M('gtceu:venus_heat_engine'), 'Venus Heat Engine', {
