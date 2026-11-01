@@ -29,10 +29,7 @@
     "gtceu:syngas_plant"
   ],
   "include": [],
-  "exclude": [
-    "gtnn:component_assembly_line/*_hv",
-    "gtnn:component_assembly_line/*_hv_*"
-  ],
+  "exclude": [],
   "remove": [
     "gtceu:shaped/conveyor_module_hv_rubber",
     "gtceu:shaped/conveyor_module_hv_silicone_rubber",

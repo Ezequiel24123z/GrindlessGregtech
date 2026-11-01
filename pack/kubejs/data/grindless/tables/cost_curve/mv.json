@@ -35,10 +35,7 @@
     "gtceu:weather_controller"
   ],
   "include": [],
-  "exclude": [
-    "gtnn:component_assembly_line/*_mv",
-    "gtnn:component_assembly_line/*_mv_*"
-  ],
+  "exclude": [],
   "remove": [
     "gtceu:shaped/conveyor_module_mv_rubber",
     "gtceu:shaped/conveyor_module_mv_silicone_rubber",

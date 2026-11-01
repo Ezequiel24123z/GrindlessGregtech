@@ -52,10 +52,7 @@
     "gtnn:gooware_processor"
   ],
   "include": [],
-  "exclude": [
-    "gtnn:component_assembly_line/*_zpm",
-    "gtnn:component_assembly_line/*_zpm_*"
-  ],
+  "exclude": [],
   "remove": [
     "gtceu:shaped/zpm_machine_hull"
   ],

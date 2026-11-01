@@ -238,7 +238,7 @@ Capacity of the scaled recipes (`capacity-lint --dump` of the T1 dump): EV 53 an
 
 - `remove`: 13 shaped EV and 11 shaped IV core-component recipes (motor, pump, piston, conveyor, robot arm, emitter, sensor, field generator, hull and so on).
 - **The EV and IV hulls (`gtceu:shaped/ev_machine_hull`, `gtceu:shaped/iv_machine_hull`) are removed with no bootstrap kept.** They were the cost floor: with them the IV index plateaued at 164 whatever the factor. The hulls come from `gtceu:assembler/hull_ev` and `hull_iv`. Unlike MV and HV (band A) there is no cycle: T1 with both removed is PASS. The MV and HV exceptions stay.
-- `exclude` (both tables): `gtnn:component_assembly_line/*_ev(_*)` and `*_iv(_*)` (dead GT-- content, same reason as band A; Phase 8 removes it).
+- `exclude` (both tables): empty; the dead GT-- component assembly line recipes are removed in `integration/gtnn.js`.
 - Benign survivors: the EV and IV `superconductor_wire` shapeless splitting recipes (growth 1.0) and the scaled assembler routes of the same parts (`electric_motor_iv`, `energy_hatch_iv`).
 
 ### Capacity: 22 `capacity_known.json` entries emptied
@@ -274,7 +274,7 @@ Single-producer inputs (SMD wraps, crystal chips, kanthal coils, catalyst mixes,
 ### Notes and risks
 
 - The venus heat engine now runs 100 mB water and 16,000 mB steam per cycle; any doc, quest or data text with the old 200 mB and 32,000 mB figures is stale (not checked here: those files are outside this package).
-- Phase 8 dead rows kept in `capacity_known.json`: `gtca/*`, `gtnn/*`, `vein_sample/*_type_belt`, `luv/radiation_vault_casing`, `assembler/iridium_crucible`, `mu_metal_shield` and every UV and later row (other bands).
+- `capacity_known.json` is empty; the former dead rows are gone.
 
 ## Band C (LuV, ZPM, UV) (P2-C)
 
@@ -295,7 +295,7 @@ Predicted later eras (T1 dump; each is re-solved by its own band, P2-Z last): UH
 ### Removed bypasses and kept exceptions
 
 - `remove`: `gtceu:shaped/{luv,zpm,uv}_machine_hull`. **No bootstrap kept:** the hulls come from the assembler recipes (`hull_luv`, `hull_zpm`, `hull_uv`); with the shaped hulls the index plateaued at UV whatever the factor, and T1 reachability (gate, auto and eras) passes without them.
-- `exclude`: `gtnn:component_assembly_line/*_<era>(_*)` for the three eras (dead GT-- content; Phase 8 removes it).
+- `exclude`: empty; the dead GT-- component assembly line recipes are removed in `integration/gtnn.js`.
 
 ### Capacity: 17 `capacity_known.json` entries emptied
 

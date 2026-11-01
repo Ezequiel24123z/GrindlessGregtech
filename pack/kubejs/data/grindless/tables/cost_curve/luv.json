@@ -45,10 +45,7 @@
     "gtceu:zero_g_crystal_grower"
   ],
   "include": [],
-  "exclude": [
-    "gtnn:component_assembly_line/*_luv",
-    "gtnn:component_assembly_line/*_luv_*"
-  ],
+  "exclude": [],
   "remove": [
     "gtceu:shaped/luv_machine_hull"
   ],
