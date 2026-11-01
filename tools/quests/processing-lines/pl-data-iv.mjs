@@ -8,7 +8,7 @@ export default {
   subtitle: 'Uranium goes round the fuel cycle, heavy water goes to the Moon and back, and Venus and Mercury give naquadah, iridium and osmium.',
   icon: 'gtceu:fission_reactor',
   focus: 'fluorite',
-  bands: [['uranium', 'fuel'], ['plutonium', 'heavy'], ['radon', 'venus'], ['naquadah'], ['iridium', 'mercury', 'far']],
+  bands: [['uranium', 'fuel'], ['plutonium', 'heavy'], ['radon', 'venus'], ['naquadah'], ['iridium', 'mercury', 'far'], ['supercon']],
   clusters: {
     uranium: {
       name: 'Uranium and fluorine',
@@ -218,6 +218,7 @@ export default {
           desc: 'Eight mirrors and a furnace at the focus. A run that starts in full sun costs far less power.',
         }),
         n('brick', 6, 0, I('grindless:hermean_heat_shield_brick'), 'Heat-Shield Brick', { kind: 'product', from: ['works2'], sub: 'Mercury\'s structures are built from it' }),
+        n('probe', 8, 0, I('grindless:jupiter_entry_probe'), 'Jupiter Entry Probe', { kind: 'product', from: ['brick'], by: ['gtceu:assembly_line'], sub: 'LuV: the heat shield is the brick' }),
         n('panel', 6, 1.5, I('grindless:hermean_thin_film_panel'), 'Thin-Film Panel', { kind: 'product', from: ['works2'], sub: 'The solar field is made of them' }),
       ],
     },
@@ -235,6 +236,16 @@ export default {
           kind: 'product', from: ['outer'], by: ['gtceu:interferometry'],
           desc: 'A steady hiss from the centre of the galaxy. That\'s where all of this is going.',
         }),
+      ],
+    },
+    supercon: {
+      name: 'Niobium-titanium wire',
+      nodes: [
+        n('nb', 0, -0.75, I('gtceu:niobium_dust'), 'Niobium', { kind: 'raw' }),
+        n('tid', 0, 0.75, I('gtceu:titanium_dust'), 'Titanium Dust', { kind: 'raw' }),
+        n('nbtid', 2, 0, I('gtceu:niobium_titanium_dust'), 'Niobium-Titanium Dust', { from: ['nb', 'tid'], by: ['gtceu:mixer'], sub: 'Mixer' }),
+        n('nbtiebf', 4, 0, M('gtceu:smelting_complex'), 'Smelting Complex', { from: ['nbtid'], sub: 'Straight to the ingot' }),
+        n('nbti', 6, 0, I('gtceu:niobium_titanium_ingot'), 'Niobium-Titanium', { kind: 'product', from: ['nbtiebf'], sub: 'The first superconductor' }),
       ],
     },
   },
