@@ -116,8 +116,13 @@ test('the hull: an assembly line row at V[OpV]/2 of the OpV casing, 2 strand cab
   const r = recipes.find((x) => x.i === 'grindless:assembly_line/opv_machine_hull');
   assert.ok(r, 'recipe grindless:assembly_line/opv_machine_hull');
   assert.equal(r.t, 'gtceu:assembly_line', 'no OpV machine yet: GTM\'s assembly line on UXV 4 A hatches (opv.md:46)');
-  assert.deepEqual(itemsOf(r, 'inputs'), [['gtceu:opv_machine_casing', 1], ['gtceu:chain_strand_single_cable', 2], ['grindless:chain_lamina_stack', 2]]);
-  assert.deepEqual(r.j.inputs.fluid.map((f) => [f.content.value[0].fluid, f.content.amount]), [['gtceu:superfluid_helium_3', 500]]);
+  // the cost curve (opv.json) raises the counts above these bases, so the ids are pinned and the counts are floors
+  const hullIn = itemsOf(r, 'inputs');
+  assert.deepEqual(hullIn.map((x) => x[0]), ['gtceu:opv_machine_casing', 'gtceu:chain_strand_single_cable', 'grindless:chain_lamina_stack']);
+  assert.ok(hullIn.every((x, k) => x[1] >= [1, 2, 2][k]), 'casing 1, cables 2, lamina stacks 2 at least');
+  assert.equal(r.j.inputs.fluid.length, 1);
+  assert.equal(r.j.inputs.fluid[0].content.value[0].fluid, 'gtceu:superfluid_helium_3');
+  assert.ok(r.j.inputs.fluid[0].content.amount >= 500, '500 mB superfluid He-3 at least');
   assert.deepEqual(itemsOf(r, 'outputs'), [['gtceu:opv_machine_hull', 1]]);
   assert.equal(euOf(r), 2 ** 28);
   assert.equal(euOf(r), 268435456);
