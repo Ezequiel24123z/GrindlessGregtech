@@ -10,6 +10,9 @@
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
+    add('emi.grindless.info.alkali_sulfate_dust.0', 'Inert sodium and potassium sulfate: the fluorspar kiln\'s leftover when it digests fluorspar with sulfuric acid into hydrofluoric acid. It is harmless and no recipe uses it.')
+    add('emi.grindless.info.alkali_sulfate_dust.1', 'Void it: it is the byproduct the pack deliberately lets go (an inert one may be voided), so it needs no storage line and nothing waits for it.')
+
     add('emi.grindless.info.travel_keys.0', 'Right-click a travel key to visit its building dimension: the Void Key leads to an empty void, the Flat Key to a flat world, and the End Key to a safe platform in the End, far from the dragon\'s island.')
     add('emi.grindless.info.travel_keys.1', 'Right-click it again there to go back to where you were. From one of these dimensions you can hop straight to another. A key is never used up.')
 
