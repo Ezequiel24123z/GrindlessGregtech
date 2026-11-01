@@ -15166,7 +15166,7 @@ hash = "842efe6593167fe6d5612d73840d445b1515af336be07099e04f0cbe47b2bf1b"
 
 [[files]]
 file = "kubejs/data/grindless/tables/beuv_stm.json"
-hash = "195f20c0d4dd76b98f135d95d7a2d387a36e9ab0609a3b30523acd3a6d994301"
+hash = "cb62d1ac4b12567728643aedae9b4b9da34a5b5870947d6370f512069fd790ce"
 
 [[files]]
 file = "kubejs/data/grindless/tables/biofoundry.json"
@@ -15322,7 +15322,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "2875dc3c5b81f6fb9b214eeb9d12aec90781348a9daf0d83b4692aeb1ba70980"
+hash = "dbe3701211e20d24664616de41b052100ad05a3008f269a1754e839131c96ea6"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -15354,7 +15354,7 @@ hash = "37d4469c3a4e256e3f5161394a07ec66630491d4c9f9885c16cc1da8f6e4a9f5"
 
 [[files]]
 file = "kubejs/data/grindless/tables/j0437.json"
-hash = "3eef379a4564dd9085136a4e8903b50c68d74b98809375eb0e33720516c97317"
+hash = "9b0b54afed1d34f805d00f0672e6eecf614d5d38a450dba7de7cf8445332be0b"
 
 [[files]]
 file = "kubejs/data/grindless/tables/kugelblitz.json"
@@ -15362,7 +15362,7 @@ hash = "f64036e4018d673789307d1ecb7fa15dc71dda4a43488e3c9c3fe3fc54cfce72"
 
 [[files]]
 file = "kubejs/data/grindless/tables/levitation_melter.json"
-hash = "f3944b54dd16f7f65abb3235cfaa7f3823afbce9729b127530e4144810058901"
+hash = "2e044ab272fc2c0f936497c4094225572563a1b7677cdd193449e94d26831626"
 
 [[files]]
 file = "kubejs/data/grindless/tables/lookup_collisions.json"
@@ -15418,7 +15418,7 @@ hash = "26d31c761cebef08666bb4657a00c576efacdede2f3a953903dec06d95f0351b"
 
 [[files]]
 file = "kubejs/data/grindless/tables/metallic_hydrogen.json"
-hash = "e35fac05b4bdbd7a41deb0b94026f6dd5d9ee436e9155b1f771c20a63f994a0c"
+hash = "ac2e52945fbe3e85024b521067cd0003b953295ca3b4fb3f973304e81dfce41b"
 
 [[files]]
 file = "kubejs/data/grindless/tables/mk5.json"
@@ -15530,7 +15530,7 @@ hash = "9e72961984aac839207d9492e30fe6a694fab465a408744eed97f9fef830dfda"
 
 [[files]]
 file = "kubejs/data/grindless/tables/superheavy.json"
-hash = "9bfe64229506435c64769866ac4709ebbb0c6f3350f8448a12e79b7e3d98d29e"
+hash = "6d6d5e9be5b169106f09d054503855d875a052368ce5809a635845e870b6b95e"
 
 [[files]]
 file = "kubejs/data/grindless/tables/tetron_optics.json"
@@ -15566,7 +15566,7 @@ hash = "00047a37804eb6a6c8b38701ca6e1949fde394a98794f7755912d1d2e32374ec"
 
 [[files]]
 file = "kubejs/data/grindless/tables/uiv_components.json"
-hash = "4a4e0f51c1e00d3ec45da263761fdbaa1e7c82332fc4c5a92937b2ca97ec208e"
+hash = "1b60d69be0296e8f8fb2e4ba7a0f1c09f2b02b613b1d3905ad0aa816ec9fecc6"
 
 [[files]]
 file = "kubejs/data/grindless/tables/uranium_cycle.json"
