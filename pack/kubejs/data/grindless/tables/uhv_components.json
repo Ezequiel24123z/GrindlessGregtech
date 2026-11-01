@@ -43,12 +43,12 @@
       "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }],
       "itemsOut": [{ "id": "gtceu:uev_fluid_regulator", "count": 1 }] },
     { "name": "uiv_fluid_regulator", "circuit": 1, "eut": 7864320, "duration": 100,
-      "itemsIn": [{ "id": "gtceu:uiv_electric_pump", "count": 1 }, { "id": "#gtceu:circuits/uiv", "count": 2 }, { "id": "grindless:balanced_rhea_impeller", "count": 1 }],
-      "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 250 }],
+      "itemsIn": [{ "id": "gtceu:uiv_electric_pump", "count": 1 }, { "id": "#gtceu:circuits/uiv", "count": 2 }, { "id": "grindless:balanced_rhea_impeller", "count": 1 }, { "id": "gtceu:soldering_alloy_ingot", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 250 }],
       "itemsOut": [{ "id": "gtceu:uiv_fluid_regulator", "count": 1 }] },
     { "name": "uxv_fluid_regulator", "circuit": 1, "eut": 31457280, "duration": 100,
-      "itemsIn": [{ "id": "gtceu:uxv_electric_pump", "count": 1 }, { "id": "#gtceu:circuits/uxv", "count": 2 }, { "id": "grindless:alip_duct", "count": 1 }, { "id": "grindless:strand_tape", "count": 1 }],
-      "fluidsIn": [{ "id": "gtceu:soldering_alloy", "amount": 144 }, { "id": "gtceu:lubricant", "amount": 250 }],
+      "itemsIn": [{ "id": "gtceu:uxv_electric_pump", "count": 1 }, { "id": "#gtceu:circuits/uxv", "count": 2 }, { "id": "grindless:alip_duct", "count": 1 }, { "id": "grindless:strand_tape", "count": 1 }, { "id": "gtceu:soldering_alloy_ingot", "count": 1 }],
+      "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 250 }],
       "itemsOut": [{ "id": "gtceu:uxv_fluid_regulator", "count": 1 }] }
   ]
 }
