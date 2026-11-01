@@ -97,6 +97,8 @@ test('no literal at or above 2^31 and no EMI data key (the text lives in lang fi
 });
 
 test('every output that is not the product is an inert gas, a working fluid or an acid returned to its line', () => {
-  const allowed = /'(gtceu:(argon|helium|superfluid_helium|hydrogen|hydrochloric_acid|spent_electropolish_acid))'/;
-  for (const m of rowSrc.matchAll(/fluidOuts: \[\[([^\]]+)\]/g)) assert.match(`'${m[1].split("'")[1]}'`, allowed);
+  const allowed = /^(ARGON|HELIUM|SHE|'gtceu:(hydrogen|hydrochloric_acid|spent_electropolish_acid)')$/;
+  const outs = [...rowSrc.matchAll(/fluidOuts: \[\[([^,]+),/g)].map((m) => m[1]);
+  assert.ok(outs.length > 10);
+  for (const o of outs) assert.match(o, allowed);
 });
