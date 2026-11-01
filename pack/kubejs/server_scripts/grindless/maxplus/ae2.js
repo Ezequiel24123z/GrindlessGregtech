@@ -1,5 +1,5 @@
-// priority: -20129
 // MAX+ lines A1 to A3, the AE2 lines, on the older machines (docs/eras/maxplus.md 'Lines' and 'AE2'; package XP-AE).
+// (no priority header: the integrator stamps it with tools/analysis/script-order.mjs --write)
 //
 //   A1 horizon storage die      MTJ c32 -> mram_stack_plus; BEUV c22 -> patterned_mram; racetrack fab c7 -> racetrack_3d_stack; GTM cutter -> horizon_storage_die
 //   A2 photonic coprocessor     MOCVD c32 -> laser_array_wafer; TFLN ion slicing c20 -> ln_modulator_array; photonic foundry c32 -> optical_matrix_die;
@@ -55,8 +55,8 @@
       items: [['grindless:holographic_slab', 2], ['grindless:laser_array_wafer', 1]], fluids: [['gtceu:argon', 1000]],
       outs: [['grindless:addressed_holo_slab', 2]], fluidOuts: [['gtceu:argon', 800]] },
     { type: 'spectral_hole_burning', name: 'burned_pattern_crystal', circuit: 27, eut: va(13), duration: 1800, key: 'grindless_spectral_hole_burning',
-      items: [['grindless:addressed_holo_slab', 1]], fluids: [['gtceu:liquid_helium', 1000]],
-      outs: [['grindless:burned_pattern_crystal', 1]], fluidOuts: [['gtceu:helium', 1000]] },
+      items: [['grindless:addressed_holo_slab', 1]], fluids: [['gtceu:helium', 1000]],
+      outs: [['grindless:burned_pattern_crystal', 1]] },
     { type: 'fibre_draw', name: 'pattern_memory_unit', circuit: 23, eut: va(13), duration: 1200,
       items: [['grindless:burned_pattern_crystal', 1], ['grindless:hollow_core_fibre', 4], ['grindless:memory_fibre_pigtail', 4]], fluids: [['gtceu:polyethylene', 144]],
       outs: [['grindless:pattern_memory_unit', 2]] }
