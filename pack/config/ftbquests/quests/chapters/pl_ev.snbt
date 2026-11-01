@@ -22,7 +22,7 @@
 			linked_quest: "7D28AEC912902688"
 			shape: "rsquare"
 			x: 0.5d
-			y: 32.25d
+			y: 32.5d
 		}
 	]
 	quests: [
@@ -307,6 +307,34 @@
 			y: 4.75d
 		}
 		{
+			dependencies: ["7A2E1E77C6E8D110"]
+			icon: "gtceu:titanium_plate"
+			id: "17823F4151F69039"
+			size: 1.25d
+			subtitle: "Bender; pistons and frames"
+			tasks: [
+				{ id: "15029D2FF926E6B7", item: "gtceu:titanium_plate", optional_task: true, type: "item" }
+				{ id: "5BB46ACC6DC370E5", type: "checkmark" }
+			]
+			title: "Titanium Plate"
+			x: 13.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["539C9725CCAEB1D4"]
+			icon: "gtceu:fluorspar_kiln"
+			id: "5ADC9B6C6FD91E79"
+			size: 1.25d
+			subtitle: "Assembler; every lunar build stands on the brick"
+			tasks: [
+				{ id: "108C115AD75610CD", item: "gtceu:fluorspar_kiln", optional_task: true, type: "item" }
+				{ id: "3DF5BAA1E9CC2889", type: "checkmark" }
+			]
+			title: "Fluorspar Kiln"
+			x: 13.0d
+			y: 7.5d
+		}
+		{
 			dependencies: ["5642C3DCC05983B2"]
 			icon: "gtceu:ev_vein_drill"
 			id: "368ECF695588E8AC"
@@ -544,17 +572,31 @@
 			y: 14.25d
 		}
 		{
-			icon: "gtceu:purified_pentlandite_ore"
-			id: "3D068C37D802CF2A"
+			icon: "gtceu:crushed_pentlandite_ore"
+			id: "57DA0CEA1231FC40"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Or purified chalcopyrite"
+			subtitle: "Or crushed chalcopyrite"
+			tasks: [
+				{ id: "1F7665EC34DF6A21", item: "gtceu:crushed_pentlandite_ore", optional_task: true, type: "item" }
+				{ id: "5DAB985E712683A0", type: "checkmark" }
+			]
+			title: "Crushed Pentlandite"
+			x: 16.75d
+			y: 14.25d
+		}
+		{
+			dependencies: ["57DA0CEA1231FC40"]
+			icon: "gtceu:purified_pentlandite_ore"
+			id: "3D068C37D802CF2A"
+			size: 1.0d
+			subtitle: "Ore washer"
 			tasks: [
 				{ id: "77008076C376876E", item: "gtceu:purified_pentlandite_ore", optional_task: true, type: "item" }
 				{ id: "1052AE873BF03774", type: "checkmark" }
 			]
 			title: "Purified Pentlandite"
-			x: 16.75d
+			x: 18.75d
 			y: 14.25d
 		}
 		{
@@ -568,7 +610,7 @@
 				{ id: "14867AE6F4909D5A", type: "checkmark" }
 			]
 			title: "Platinum Electrode"
-			x: 16.75d
+			x: 18.75d
 			y: 15.75d
 		}
 		{
@@ -586,7 +628,7 @@
 				{ id: "7BE24A97907BCDA9", type: "checkmark" }
 			]
 			title: "Platinum Plant"
-			x: 18.75d
+			x: 20.75d
 			y: 15.0d
 		}
 		{
@@ -600,7 +642,7 @@
 				{ id: "501032D66B5E7952", type: "checkmark" }
 			]
 			title: "Nickel"
-			x: 20.75d
+			x: 22.75d
 			y: 12.75d
 		}
 		{
@@ -613,7 +655,7 @@
 				{ id: "7CE1366D79C082CE", type: "checkmark" }
 			]
 			title: "Platinum Group Sludge"
-			x: 20.75d
+			x: 22.75d
 			y: 14.25d
 		}
 		{
@@ -627,7 +669,7 @@
 				{ id: "11375B966070DE9E", type: "checkmark" }
 			]
 			title: "Sulfuric Acid"
-			x: 20.75d
+			x: 22.75d
 			y: 15.75d
 		}
 		{
@@ -640,7 +682,7 @@
 				{ id: "1524A3FE83227D05", type: "checkmark" }
 			]
 			title: "Platinum"
-			x: 23.25d
+			x: 25.25d
 			y: 11.0d
 		}
 		{
@@ -654,7 +696,7 @@
 				{ id: "757C871A07C5524F", type: "checkmark" }
 			]
 			title: "Palladium"
-			x: 23.25d
+			x: 25.25d
 			y: 12.25d
 		}
 		{
@@ -668,7 +710,7 @@
 				{ id: "1B8C9376813373AF", type: "checkmark" }
 			]
 			title: "Rhodium"
-			x: 23.25d
+			x: 25.25d
 			y: 13.5d
 		}
 		{
@@ -682,7 +724,7 @@
 				{ id: "5C6E7377E50C2F07", type: "checkmark" }
 			]
 			title: "Ruthenium"
-			x: 23.25d
+			x: 25.25d
 			y: 14.75d
 		}
 		{
@@ -696,7 +738,7 @@
 				{ id: "7F2794E1E5FAAE8C", type: "checkmark" }
 			]
 			title: "Nitrogen Dioxide"
-			x: 23.25d
+			x: 25.25d
 			y: 16.0d
 		}
 		{
@@ -710,8 +752,62 @@
 				{ id: "7D5F2C4EEE641CFD", type: "checkmark" }
 			]
 			title: "Calcium Chloride"
-			x: 23.25d
+			x: 25.25d
 			y: 17.25d
+		}
+		{
+			dependencies: ["56280033A496EDB1", "5DC3250C7363995F", "3757C105262ED912"]
+			icon: "gtceu:smelting_complex"
+			id: "70EA84BEF20FEFC7"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Heats the dusts to ingots"
+			tasks: [
+				{ id: "33F032DE3FC3A00A", item: "gtceu:smelting_complex", optional_task: true, type: "item" }
+				{ id: "5116AAB48D6EB763", type: "checkmark" }
+			]
+			title: "Smelting Complex"
+			x: 29.25d
+			y: 13.5d
+		}
+		{
+			dependencies: ["70EA84BEF20FEFC7"]
+			icon: "gtceu:palladium_ingot"
+			id: "1F820A2BC7510027"
+			size: 1.0d
+			tasks: [
+				{ id: "31A244C7E6D421D8", item: "gtceu:palladium_ingot", optional_task: true, type: "item" }
+				{ id: "10D30A7AB8C00FAE", type: "checkmark" }
+			]
+			title: "Palladium Ingot"
+			x: 31.25d
+			y: 12.25d
+		}
+		{
+			dependencies: ["70EA84BEF20FEFC7"]
+			icon: "gtceu:rhodium_ingot"
+			id: "7918CD4C63C54898"
+			size: 1.0d
+			tasks: [
+				{ id: "363530C1CEA59E14", item: "gtceu:rhodium_ingot", optional_task: true, type: "item" }
+				{ id: "3C09E719C1FA70F3", type: "checkmark" }
+			]
+			title: "Rhodium Ingot"
+			x: 31.25d
+			y: 13.5d
+		}
+		{
+			dependencies: ["70EA84BEF20FEFC7"]
+			icon: "gtceu:ruthenium_ingot"
+			id: "70F4B4CC18CFE268"
+			size: 1.0d
+			tasks: [
+				{ id: "75DDA8D8CCD82FED", item: "gtceu:ruthenium_ingot", optional_task: true, type: "item" }
+				{ id: "32046F72E21110C7", type: "checkmark" }
+			]
+			title: "Ruthenium Ingot"
+			x: 31.25d
+			y: 14.75d
 		}
 		{
 			dependencies: ["5AF85FE2C9DA1793"]
@@ -725,7 +821,7 @@
 				{ id: "718241BC2F9090CC", type: "checkmark" }
 			]
 			title: "Electrodes, Back"
-			x: 25.25d
+			x: 27.25d
 			y: 11.0d
 		}
 		{
@@ -739,7 +835,7 @@
 				{ id: "781F546B7079966B", type: "checkmark" }
 			]
 			title: "Ruthenium Catalyst"
-			x: 25.25d
+			x: 27.25d
 			y: 14.75d
 		}
 		{
@@ -1076,6 +1172,21 @@
 			y: 22.25d
 		}
 		{
+			dependencies: ["7D9B7EAC07F4A088"]
+			icon: "gtceu:hot_cell"
+			id: "78269F2D4BFC7CB5"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Reprocesses spent fuel"
+			tasks: [
+				{ id: "3D3D3B4DAC47D9C6", item: "gtceu:hot_cell", optional_task: true, type: "item" }
+				{ id: "51EF178D2F5745D3", type: "checkmark" }
+			]
+			title: "Hot Cell"
+			x: 37.0d
+			y: 22.25d
+		}
+		{
 			icon: "gtceu:nitrogen_dioxide_bucket"
 			id: "1442666CE12D4753"
 			shape: "rsquare"
@@ -1094,7 +1205,7 @@
 			description: ["One reactor where GregTech used to want a whole tower. The platinum plant's fumes come back as more acid."]
 			icon: "gtceu:nitric_acid_bucket"
 			id: "7D9B7EAC07F4A088"
-			size: 1.25d
+			size: 1.0d
 			tasks: [
 				{ id: "14FE06A05AB5155E", item: "gtceu:nitric_acid_bucket", optional_task: true, type: "item" }
 				{ id: "1C709147A0D0FA56", type: "checkmark" }
@@ -1115,7 +1226,7 @@
 			]
 			title: "Merrillite Dust"
 			x: 0.5d
-			y: 29.25d
+			y: 29.5d
 		}
 		{
 			icon: "gtceu:hydrochloric_acid_bucket"
@@ -1128,7 +1239,7 @@
 			]
 			title: "Hydrochloric Acid"
 			x: 0.5d
-			y: 30.75d
+			y: 31.0d
 		}
 		{
 			dependencies: ["5651F3F990FB6AF8", "1D3B173CCE489EDE", "7D28AEC912902688"]
@@ -1146,7 +1257,7 @@
 			]
 			title: "Extraction Cascade"
 			x: 3.0d
-			y: 30.75d
+			y: 31.0d
 		}
 		{
 			dependencies: ["7ABCC0FFFDAD3AEF"]
@@ -1159,7 +1270,7 @@
 			]
 			title: "Samarium Chloride"
 			x: 5.5d
-			y: 27.5d
+			y: 27.75d
 		}
 		{
 			dependencies: ["7ABCC0FFFDAD3AEF"]
@@ -1172,7 +1283,7 @@
 			]
 			title: "Neodymium Chloride"
 			x: 5.5d
-			y: 28.75d
+			y: 29.0d
 		}
 		{
 			dependencies: ["7ABCC0FFFDAD3AEF"]
@@ -1185,7 +1296,7 @@
 			]
 			title: "Mixed Rare Earth Chloride"
 			x: 5.5d
-			y: 30.0d
+			y: 30.25d
 		}
 		{
 			dependencies: ["7ABCC0FFFDAD3AEF"]
@@ -1198,7 +1309,7 @@
 			]
 			title: "Diluted Hydrochloric Acid"
 			x: 5.5d
-			y: 31.25d
+			y: 31.5d
 		}
 		{
 			dependencies: ["7ABCC0FFFDAD3AEF"]
@@ -1213,7 +1324,7 @@
 			]
 			title: "Kerosene, Back"
 			x: 5.5d
-			y: 32.5d
+			y: 32.75d
 		}
 		{
 			dependencies: ["7ABCC0FFFDAD3AEF"]
@@ -1227,7 +1338,7 @@
 			]
 			title: "Phosphoric Acid"
 			x: 5.5d
-			y: 33.75d
+			y: 34.0d
 		}
 		{
 			dependencies: ["7ABCC0FFFDAD3AEF"]
@@ -1241,7 +1352,36 @@
 			]
 			title: "Tricalcium Phosphate"
 			x: 5.5d
-			y: 35.0d
+			y: 35.25d
+		}
+		{
+			dependencies: ["5928A959696AF7B5"]
+			icon: "gtceu:smelting_complex"
+			id: "7DE0559C83E85EF0"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Liquid helium keeps it from oxidising"
+			tasks: [
+				{ id: "315102026B9AB6AF", item: "gtceu:smelting_complex", optional_task: true, type: "item" }
+				{ id: "7AF41698E90580F6", type: "checkmark" }
+			]
+			title: "Smelting Complex"
+			x: 9.5d
+			y: 27.75d
+		}
+		{
+			dependencies: ["7DE0559C83E85EF0"]
+			icon: "gtceu:samarium_ingot"
+			id: "3A0DBD1A4AB597AE"
+			size: 1.25d
+			subtitle: "LuV magnets"
+			tasks: [
+				{ id: "1AE8DB4DB6FDE7DE", item: "gtceu:samarium_ingot", optional_task: true, type: "item" }
+				{ id: "5A1F69F21838CA99", type: "checkmark" }
+			]
+			title: "Samarium Ingot"
+			x: 11.5d
+			y: 27.75d
 		}
 		{
 			dependencies: ["14D36681D9DED7C8"]
@@ -1255,7 +1395,7 @@
 			]
 			title: "Samarium"
 			x: 7.5d
-			y: 27.5d
+			y: 27.75d
 		}
 		{
 			dependencies: ["18E892324F7A1EF6"]
@@ -1269,7 +1409,7 @@
 			]
 			title: "Neodymium"
 			x: 7.5d
-			y: 28.75d
+			y: 29.0d
 		}
 		{
 			dependencies: ["750868DEA72A6634"]
@@ -1283,7 +1423,7 @@
 			]
 			title: "Rare Earth"
 			x: 7.5d
-			y: 30.0d
+			y: 30.25d
 		}
 		{
 			dependencies: ["730CC3D97B80FA9E"]
@@ -1298,7 +1438,7 @@
 			]
 			title: "Hydrochloric Acid, Back"
 			x: 7.5d
-			y: 31.25d
+			y: 31.5d
 		}
 		{
 			icon: "gtceu:methane_bucket"
@@ -1311,7 +1451,7 @@
 				{ id: "73DE27E223ECB597", type: "checkmark" }
 			]
 			title: "Methane"
-			x: 11.5d
+			x: 15.75d
 			y: 27.5d
 		}
 		{
@@ -1324,7 +1464,7 @@
 				{ id: "5E69F0517BAF3203", type: "checkmark" }
 			]
 			title: "Distilled Water"
-			x: 11.5d
+			x: 15.75d
 			y: 29.0d
 		}
 		{
@@ -1339,7 +1479,7 @@
 				{ id: "5A9569899123CEC4", type: "checkmark" }
 			]
 			title: "Combined-Cycle Plant"
-			x: 13.5d
+			x: 17.75d
 			y: 28.25d
 		}
 		{
@@ -1352,7 +1492,7 @@
 				{ id: "7C1A6DC6D762E165", type: "checkmark" }
 			]
 			title: "Steam"
-			x: 15.5d
+			x: 19.75d
 			y: 28.25d
 		}
 		{
@@ -1366,7 +1506,7 @@
 				{ id: "3D6300F9AEBD2F4F", type: "checkmark" }
 			]
 			title: "Large Steam Turbine"
-			x: 17.5d
+			x: 21.75d
 			y: 28.25d
 		}
 		{
@@ -1381,7 +1521,7 @@
 				{ id: "7348CE0E6A260A3E", type: "checkmark" }
 			]
 			title: "Distilled Water, Back"
-			x: 19.5d
+			x: 23.75d
 			y: 28.25d
 		}
 		{
@@ -1395,7 +1535,7 @@
 				{ id: "37EBFA27A56E6512", type: "checkmark" }
 			]
 			title: "Seeds"
-			x: 23.5d
+			x: 27.75d
 			y: 27.5d
 		}
 		{
@@ -1409,7 +1549,7 @@
 				{ id: "54E51E24456D56CD", type: "checkmark" }
 			]
 			title: "Carbon Dioxide"
-			x: 23.5d
+			x: 27.75d
 			y: 29.0d
 		}
 		{
@@ -1424,7 +1564,7 @@
 				{ id: "76E4C1B90A987F83", type: "checkmark" }
 			]
 			title: "Sealed Dome"
-			x: 25.5d
+			x: 29.75d
 			y: 28.25d
 		}
 		{
@@ -1437,7 +1577,7 @@
 				{ id: "12FF535FF8DBDFF6", type: "checkmark" }
 			]
 			title: "Crops"
-			x: 27.5d
+			x: 31.75d
 			y: 27.5d
 		}
 		{
@@ -1451,7 +1591,7 @@
 				{ id: "149A205F270E29A4", type: "checkmark" }
 			]
 			title: "Oxygen"
-			x: 27.5d
+			x: 31.75d
 			y: 29.0d
 		}
 		{
@@ -1465,7 +1605,7 @@
 				{ id: "73CB3F573A25BD12", type: "checkmark" }
 			]
 			title: "Biomass"
-			x: 29.5d
+			x: 33.75d
 			y: 27.5d
 		}
 		{
@@ -1479,7 +1619,7 @@
 				{ id: "7F14DDE43B6D8FB3", type: "checkmark" }
 			]
 			title: "Wither Model"
-			x: 29.5d
+			x: 33.75d
 			y: 29.0d
 		}
 		{
@@ -1494,7 +1634,7 @@
 				{ id: "369614E42D402B51", type: "checkmark" }
 			]
 			title: "Creature Simulator"
-			x: 31.5d
+			x: 35.75d
 			y: 28.25d
 		}
 		{
@@ -1508,7 +1648,7 @@
 				{ id: "7B36DF0195024CFC", type: "checkmark" }
 			]
 			title: "Nether Star"
-			x: 33.5d
+			x: 37.75d
 			y: 28.25d
 		}
 	]

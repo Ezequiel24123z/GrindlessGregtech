@@ -17,6 +17,13 @@
 			x: 0.5d
 			y: 0.75d
 		}
+		{
+			id: "572403E6798442F5"
+			linked_quest: "13A716AD46F66C22"
+			shape: "rsquare"
+			x: 14.5d
+			y: 27.0d
+		}
 	]
 	quests: [
 		{
@@ -684,6 +691,159 @@
 			title: "Ice Giant Diamond Seed"
 			x: 22.5d
 			y: 18.75d
+		}
+		{
+			icon: "gtceu:deuterium_bucket"
+			id: "3F3DDCCFA3E7C4F6"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the Saturn column"
+			tasks: [
+				{ id: "1D86329A60332FB0", item: "gtceu:deuterium_bucket", optional_task: true, type: "item" }
+				{ id: "52A77E5B356F2A3E", type: "checkmark" }
+			]
+			title: "Deuterium"
+			x: 0.5d
+			y: 25.5d
+		}
+		{
+			icon: "gtceu:helium_3_bucket"
+			id: "3CF52C460FB4D36E"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the Saturn column"
+			tasks: [
+				{ id: "560380C8A3E1C228", item: "gtceu:helium_3_bucket", optional_task: true, type: "item" }
+				{ id: "19E380A515963DD3", type: "checkmark" }
+			]
+			title: "Helium-3"
+			x: 0.5d
+			y: 27.0d
+		}
+		{
+			dependencies: ["3F3DDCCFA3E7C4F6", "3CF52C460FB4D36E"]
+			icon: "gtceu:zpm_fusion_reactor"
+			id: "3B1FBED52F242407"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "573D50C646FA1DA6", item: "gtceu:zpm_fusion_reactor", optional_task: true, type: "item" }
+				{ id: "10B872D0DF4FD032", type: "checkmark" }
+			]
+			title: "Fusion Reactor Mk2"
+			x: 3.0d
+			y: 26.25d
+		}
+		{
+			dependencies: ["3B1FBED52F242407"]
+			icon: "gtceu:helium_plasma_bucket"
+			id: "59C1C49451F90533"
+			size: 1.25d
+			tasks: [
+				{ id: "53E70BBFD24195C8", item: "gtceu:helium_plasma_bucket", optional_task: true, type: "item" }
+				{ id: "5333CF600ECC8F68", type: "checkmark" }
+			]
+			title: "Helium Plasma"
+			x: 5.5d
+			y: 26.25d
+		}
+		{
+			dependencies: ["59C1C49451F90533"]
+			description: ["Plasma straight to current, with no turbine between."]
+			icon: "gtceu:direct_energy_converter"
+			id: "36F35666F3D22819"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "55F2A919E076E3EC", item: "gtceu:direct_energy_converter", optional_task: true, type: "item" }
+				{ id: "7EA00AB49585CA83", type: "checkmark" }
+			]
+			title: "Direct Energy Converter"
+			x: 8.0d
+			y: 26.25d
+		}
+		{
+			dependencies: ["36F35666F3D22819"]
+			icon: "gtceu:helium_bucket"
+			id: "7A0BAA41A787C9B0"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Back to the Saturn column"
+			tasks: [
+				{ id: "5C292BAA641E3493", item: "gtceu:helium_bucket", optional_task: true, type: "item" }
+				{ id: "5FC33DC8E58560C6", type: "checkmark" }
+			]
+			title: "Helium"
+			x: 10.5d
+			y: 26.25d
+		}
+		{
+			icon: "gtceu:gallium_bucket"
+			id: "71295D505B29961A"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the gallium arsenide line"
+			tasks: [
+				{ id: "59DE88D8764AFEDD", item: "gtceu:gallium_bucket", optional_task: true, type: "item" }
+				{ id: "3EEEBC4C34379EFD", type: "checkmark" }
+			]
+			title: "Gallium"
+			x: 14.5d
+			y: 25.5d
+		}
+		{
+			dependencies: ["71295D505B29961A", "13A716AD46F66C22"]
+			icon: "gtceu:zpm_fusion_reactor"
+			id: "54E2AE4B062592B6"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7466E43E875905F0", item: "gtceu:zpm_fusion_reactor", optional_task: true, type: "item" }
+				{ id: "3D79E8EA721989F9", type: "checkmark" }
+			]
+			title: "Fusion Reactor Mk2"
+			x: 17.0d
+			y: 26.25d
+		}
+		{
+			dependencies: ["54E2AE4B062592B6"]
+			icon: "gtceu:duranium_bucket"
+			id: "7ECB04AF7F7D51DE"
+			size: 1.25d
+			tasks: [
+				{ id: "7629FE854AFFE8AF", item: "gtceu:duranium_bucket", optional_task: true, type: "item" }
+				{ id: "779F4B32BE10EC50", type: "checkmark" }
+			]
+			title: "Duranium Plasma"
+			x: 19.5d
+			y: 26.25d
+		}
+		{
+			icon: "gtceu:argon_bucket"
+			id: "356E8F9A6534088C"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the Mars processor"
+			tasks: [
+				{ id: "5A61FE5A3413AA49", item: "gtceu:argon_bucket", optional_task: true, type: "item" }
+				{ id: "5A9D76CF2B306F21", type: "checkmark" }
+			]
+			title: "Argon"
+			x: 19.5d
+			y: 27.75d
+		}
+		{
+			dependencies: ["7ECB04AF7F7D51DE", "356E8F9A6534088C"]
+			icon: "gtceu:duranium_plate"
+			id: "16AC00D1EBD2DCB5"
+			size: 1.25d
+			tasks: [
+				{ id: "7CCF377A23BE8485", item: "gtceu:duranium_plate", optional_task: true, type: "item" }
+				{ id: "3E68979C4B08DF39", type: "checkmark" }
+			]
+			title: "Duranium Plate"
+			x: 22.0d
+			y: 26.25d
 		}
 	]
 	subtitle: ["Naquadria and its fuel, actinides, europium, carbon and qubits, and the gas giants."]

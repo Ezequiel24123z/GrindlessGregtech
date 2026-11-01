@@ -1547,6 +1547,20 @@
 			y: 35.25d
 		}
 		{
+			dependencies: ["34C7729330FA93D3"]
+			icon: "grindless:jupiter_entry_probe"
+			id: "3C956144AD26D46F"
+			size: 1.25d
+			subtitle: "LuV: the heat shield is the brick"
+			tasks: [
+				{ id: "7162846F28292F29", item: "grindless:jupiter_entry_probe", optional_task: true, type: "item" }
+				{ id: "72D867A2A18C385F", type: "checkmark" }
+			]
+			title: "Jupiter Entry Probe"
+			x: 24.75d
+			y: 35.25d
+		}
+		{
 			dependencies: ["1DA2C8E10F5FB26C"]
 			icon: "grindless:hermean_thin_film_panel"
 			id: "7B12E3AC75BB566B"
@@ -1571,7 +1585,7 @@
 				{ id: "1F578D4A0A86C78A", type: "checkmark" }
 			]
 			title: "Inner Planets Chart"
-			x: 27.0d
+			x: 29.0d
 			y: 34.5d
 		}
 		{
@@ -1585,7 +1599,7 @@
 				{ id: "54314FABC12DADEE", type: "checkmark" }
 			]
 			title: "Lunar VLBI Recording"
-			x: 27.0d
+			x: 29.0d
 			y: 36.0d
 		}
 		{
@@ -1600,7 +1614,7 @@
 				{ id: "7E8D67676DEB213E", type: "checkmark" }
 			]
 			title: "Interferometer"
-			x: 29.0d
+			x: 31.0d
 			y: 35.25d
 		}
 		{
@@ -1614,7 +1628,7 @@
 				{ id: "7E657BEF9D4F7654", type: "checkmark" }
 			]
 			title: "Outer System Chart"
-			x: 31.0d
+			x: 33.0d
 			y: 34.5d
 		}
 		{
@@ -1628,8 +1642,77 @@
 				{ id: "7A1BF7604E6492BE", type: "checkmark" }
 			]
 			title: "Sagittarius A* Signal"
-			x: 33.0d
+			x: 35.0d
 			y: 35.25d
+		}
+		{
+			icon: "gtceu:niobium_dust"
+			id: "1EB1F061061828AC"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1FD9BA799F1B8D8E", item: "gtceu:niobium_dust", optional_task: true, type: "item" }
+				{ id: "5BB17D8B6261D6A4", type: "checkmark" }
+			]
+			title: "Niobium"
+			x: 0.5d
+			y: 42.0d
+		}
+		{
+			icon: "gtceu:titanium_dust"
+			id: "52BC9E5CD20F3F92"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "77905B230BFE05E3", item: "gtceu:titanium_dust", optional_task: true, type: "item" }
+				{ id: "784A66987B60365B", type: "checkmark" }
+			]
+			title: "Titanium Dust"
+			x: 0.5d
+			y: 43.5d
+		}
+		{
+			dependencies: ["1EB1F061061828AC", "52BC9E5CD20F3F92"]
+			icon: "gtceu:niobium_titanium_dust"
+			id: "5452481858308F76"
+			size: 1.0d
+			subtitle: "Mixer"
+			tasks: [
+				{ id: "7FBAEE3824619F06", item: "gtceu:niobium_titanium_dust", optional_task: true, type: "item" }
+				{ id: "3D7E56F726FDC82B", type: "checkmark" }
+			]
+			title: "Niobium-Titanium Dust"
+			x: 2.5d
+			y: 42.75d
+		}
+		{
+			dependencies: ["5452481858308F76"]
+			icon: "gtceu:smelting_complex"
+			id: "129A33075018D67F"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Straight to the ingot"
+			tasks: [
+				{ id: "3E7B378EB9082DDF", item: "gtceu:smelting_complex", optional_task: true, type: "item" }
+				{ id: "11A7195CE6B14748", type: "checkmark" }
+			]
+			title: "Smelting Complex"
+			x: 4.5d
+			y: 42.75d
+		}
+		{
+			dependencies: ["129A33075018D67F"]
+			icon: "gtceu:niobium_titanium_ingot"
+			id: "78C2DF858F89AF90"
+			size: 1.25d
+			subtitle: "The first superconductor"
+			tasks: [
+				{ id: "1A60BE1048C8D091", item: "gtceu:niobium_titanium_ingot", optional_task: true, type: "item" }
+				{ id: "377B58863DA7B8B4", type: "checkmark" }
+			]
+			title: "Niobium-Titanium"
+			x: 6.5d
+			y: 42.75d
 		}
 	]
 	subtitle: ["Uranium goes round the fuel cycle, heavy water goes to the Moon and back, and Venus and Mercury give naquadah, iridium and osmium."]
