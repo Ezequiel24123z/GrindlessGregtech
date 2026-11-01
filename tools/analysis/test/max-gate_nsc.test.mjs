@@ -47,7 +47,7 @@ test('c15 is 2^33 = V[OpV] x 16 A for 1,200 t at the Sgr A* ring, burns the seed
   assert.deepEqual(c15.itemsIn, [{ id: 'grindless:nsc_belt_seed', count: 1 }, { id: 'grindless:launched_gc_probe', count: 1 }]);
   assert.deepEqual(c15.kept, []);
   assert.deepEqual(c15.itemsOut, [{ id: 'grindless:launched_belt_seed', count: 1 }]);
-  assert.equal(gate[gate.length - 1], c15, 'the row is appended last');
+  assert.equal(gate[gate.findIndex((r) => r.name === 'hold_sgr_a_probe') + 1], c15, 'the row follows c14 (MAX+ gate rows come after it)');
   assert.equal(new Set(gate.map((r) => r.circuit)).size, gate.length, 'no circuit repeats');
 });
 

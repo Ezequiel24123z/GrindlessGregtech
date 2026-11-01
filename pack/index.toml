@@ -154,7 +154,19 @@ hash = "0ee7b8c399b8327c36dce2359cccec2ddf82c7a4a52058049d618c4e9cbe19dc"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uev_age.snbt"
-hash = "2a9f1c23842e63ae46d8671ade445cc6db73ed3f06c47c58e8d815972c6acbfb"
+hash = "e6250c2ebb7f62851a683afc79ab3f7a1c4bf5ef37f585a31a6b12d72b23014a"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/uev_circuits.snbt"
+hash = "3d73663c4f0c1ee7a05c88499040817285932c51fef6ceb97b6d9de09059d195"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/uev_integration.snbt"
+hash = "3f515b42af0342ad9df3b92ef25c1f5758eae52a02c1bd6a2c6e417a74a3da80"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/uev_machines.snbt"
+hash = "a516364aea1f6297eac7cd7efed3bc7e717c5b1a8b05776c25ee602a1e9907ec"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uhv_age.snbt"
@@ -14306,7 +14318,7 @@ hash = "94c9eef4990d63f125dfe25d40544f5d669ee0ac3372fb362208f9eba0fe1d39"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_circuits_lang.js"
-hash = "463beac4c00d8a2ec014b019df46e6c284eb353b2d26c8cab2e144e380d2f016"
+hash = "7031a106c4a5dc1909cc54c46ec9e229025da674a0d07e19724b266353fa7479"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_components_lang.js"
@@ -14438,7 +14450,11 @@ hash = "5973af0d4e956cdeb2e8bd503a44dda7560ed1c49a6abcfa6f83c1b76ed02403"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_power_lang.js"
-hash = "8e4cb3db473c8cf6fdc484ab5b9ab52766aa8dfed488fa4a80e5335e2c0664cb"
+hash = "8f7982cae0c06d862b47b0795ddb3404167ebce890520e1f2665c4168a3edc9a"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/maxplus_slingshot_lang.js"
+hash = "bb8d043bc148f06454abacf7d43a7d75b51efc44a9fcf31b2bc63a8b4fe6009a"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/moon_info_lang.js"
@@ -15542,7 +15558,7 @@ hash = "3c7fac3c9ea9a9f633a036cd65293b33e7ed3870604bd92a5e209e531d8bacde"
 
 [[files]]
 file = "kubejs/data/grindless/tables/gate.json"
-hash = "ffc0dbec1f319dbb7d161ca986c41387b5a84f0914ba419629caaece8a97a703"
+hash = "e48140abb7f07bc462e60f4214e574140b112e2b4767bd3aac1ade5e76541c7a"
 
 [[files]]
 file = "kubejs/data/grindless/tables/heavy_water_plant.json"
@@ -15554,7 +15570,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "f37e66b96606617769a9de41afa40f99768eb06ddca711daff61877566151d26"
+hash = "4f2cdf5edf2d4233951827d63fbc0777b52a6b99c764456abe4ded192935f275"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -16402,7 +16418,7 @@ hash = "ec60234c78a6cae37e89d45bb4522c7ccd92bafc1ee56916b88d9a39b8a1cd34"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/assembler.js"
-hash = "d502f7aafeb3f65beec4d9ffea3c2563eb84ebd07e9ff906b3c5d7ceb88f02f6"
+hash = "a4b2a4f6386abf894962f30e45f8019de62392596c02b6b06679157234659349"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/circuits.js"
@@ -16422,11 +16438,15 @@ hash = "34852acf3ef8a6b00d4d27eabdf76d0b93ced3e1695d27bbcd8b73c7f93b4248"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/power.js"
-hash = "fdd38a1c3b1a0b5dcb9cf9bb401a4a273993f3ac303b427c2d5247d35ec2e79f"
+hash = "d69b17ee5ab557ec363219fa561e8d935f9017690891adbf025c2c47d6372bb3"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/maxplus/slingshot.js"
+hash = "5427ba02f654a0fc64ec25205b030d08d2591d31a25d1ad4afd382218cb027de"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/moon/crafting.js"
-hash = "93938b9740951a945075ec40a7e3c5c6116a9f08351e251458c09c1fc2831cbc"
+hash = "7544b95e8b54ff76799dd87f8a3f5d5daddae0d940d502194845a329acb837e2"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/moon/lunar_drilling.js"
@@ -17411,6 +17431,10 @@ hash = "c1cb9322a1b7bf3d33fd98185ca968e539ef0a3015364e6753a61f967bb97b87"
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/loom.js"
 hash = "de406174fe1ef7616c510f2233c37b2288f0c64517920de56caa28f4f81f8296"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/maxplus/slingshot.js"
+hash = "d87ef528e7cb5f5ecb8516e901202d3c4285a4afaeaccea52d8e2407c9b0dd06"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/travel.js"

@@ -1,4 +1,4 @@
-// priority: -5299
+// priority: -5336
 // TEST ONLY, XP-T1 (gtceu:hills_slingshot). Command: kubejs custom_command gg_test_maxplus_slingshot
 // Band ONLY: X 46528-46591, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_slingshot).
 //   T1 (named uncertainty: the slingshot forms on one 1,024 A MAX+ hatch and runs c2 at V[MAX] x 16 = 2^35 EU/t):

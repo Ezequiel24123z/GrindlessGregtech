@@ -47,7 +47,7 @@ test('c14 is 2^33 = V[OpV] x 16 A for 1,200 t at Cygnus X-1, burns the probe, ke
   assert.deepEqual(c14.itemsIn, [{ id: 'grindless:gc_relay_probe', count: 1 }]);
   assert.deepEqual(c14.kept, [{ id: 'grindless:sgr_a_chart', count: 1 }]);
   assert.deepEqual(c14.itemsOut, [{ id: 'grindless:launched_gc_probe', count: 1 }]);
-  assert.equal(gate[gate.length - 2], c14, 'the row follows c13; the c15 row of MAX-T2 is appended after it');
+  assert.equal(gate[gate.findIndex((r) => r.name === 'hold_nsc_belt') - 1], c14, 'the row follows c13; the c15 row of MAX-T2 comes after it');
   assert.equal(gate.filter((r) => r.name === 'hold_sgr_a').length, 1, 'c13 keeps its own name');
 });
 

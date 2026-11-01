@@ -304,6 +304,7 @@
    "gtceu:bound_matter_press",
    "gtceu:condensate_assembler",
    "gtceu:condensate_refinery",
+   "gtceu:hills_slingshot",
    "gtceu:meta_material_loom"
   ],
   "moon": [

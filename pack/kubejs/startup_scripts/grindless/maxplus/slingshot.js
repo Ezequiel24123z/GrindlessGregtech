@@ -1,4 +1,4 @@
-// priority: -5565
+// priority: -5624
 // -----------------------------------------------------------------------------------------------
 // MAX+ machine 3, the Hills slingshot (docs/eras/maxplus.md "Machines" 3; package XP-T1): the multiblock and its recipe type. The casing and every
 // item it uses are XP-F1's (maxplus/foundation.js). The recipes, with lines P15 and P16's older-machine rows, are in
