@@ -6,7 +6,7 @@
 //
 // Every recipe only asks for AE2 parts, so the pacing is a GT circuit:
 //   HV circuit    expanded crafting unit (base of every coprocessor), pattern providers and their upgrades, IO port, energy cell
-//   EV circuit    giga pattern provider, x1k coprocessor
+//   EV circuit    x1k coprocessor (the giga pattern provider is MAX+: photonic coprocessor + pattern memory units, see below)
 //   IV circuit    x32k coprocessor
 //   LuV circuit   x1M coprocessor
 // A coprocessor is two of the previous one (x2 = unit + engineering processor), so the steps in between carry the cost of
@@ -31,7 +31,6 @@
     'expandedae:crafting/exp_pattern_provider_upgrade': HV,
     'expandedae:crafting/ext_pattern_provider_upgrade': HV,
     'expandedae:crafting/mega_pattern_provider_upgrade': HV,
-    'expandedae:crafting/giga_pattern_provider': EV,
     'expandedae:crafting/exp_crafting_accelerator_1k': EV,
     'expandedae:crafting/exp_crafting_accelerator_32k': IV,
     'expandedae:crafting/exp_crafting_accelerator_1m': LUV
@@ -140,5 +139,26 @@
       result: { item: 'expandedae:exp_crafting_unit' }
     }).id('grindless:expandedae/exp_crafting_unit_ae')
     console.info(LOG + 'circuit added to ' + gated + ' of ' + Object.keys(GATES).length + ' listed recipes; AE2-based expanded crafting unit (HV) added')
+
+    // MAX+ (docs/eras/maxplus.md 'AE2', package XP-AE): the giga pattern provider, the top of the provider line, moves from an EV circuit
+    // to lines A2 and A3: a photonic coprocessor at the centre and pattern memory units in the corners. The expanded provider (HV), the
+    // upgrades and the x1k to x1M coprocessors are used by the HV to LuV quests and keep the gates above.
+    if (Item.exists('grindless:photonic_coprocessor') && Item.exists('grindless:pattern_memory_unit')) {
+      event.remove({ id: 'expandedae:crafting/giga_pattern_provider' })
+      event.custom({
+        type: 'minecraft:crafting_shaped',
+        category: 'misc',
+        pattern: ['MPM', 'PCP', 'MPM'],
+        key: {
+          M: { item: 'grindless:pattern_memory_unit' },
+          P: { item: 'expandedae:exp_pattern_provider' },
+          C: { item: 'grindless:photonic_coprocessor' }
+        },
+        result: { item: 'expandedae:giga_pattern_provider' }
+      }).id('expandedae:crafting/giga_pattern_provider')
+      console.info(LOG + 'MAX+: giga pattern provider re-gated with the photonic coprocessor and pattern memory units')
+    } else {
+      console.warn(LOG + 'line A2/A3 products do not exist; the giga pattern provider keeps its recipe')
+    }
   })
 })()
