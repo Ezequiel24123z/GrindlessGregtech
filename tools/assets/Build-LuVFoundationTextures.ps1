@@ -1362,6 +1362,21 @@ function New-OrbitalSolarFrame {
     return $c
 }
 
+# block/luv/orbital_solar_panel: the block's own texture id (what its model path resolves to): the slab seen in perspective, its
+# top and edges sampled from the cells and frame textures, on a darkened frame backdrop (opaque).
+function New-PanelBlockIcon {
+    param($Cells, $Frame)
+    $c = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) { Set-Px $c $x $y (Shade (Get-Px $Frame $x $y) 0.5) } }
+    for ($r = 0; $r -le 6; $r++) {
+        $s = 6 - $r
+        for ($x = 1 + $s; $x -le 9 + $s; $x++) { Set-Px $c $x (3 + $r) (Get-Px $Cells ([int][Math]::Floor(($x - 1 - $s) * 15 / 8)) ([int][Math]::Floor($r * 15 / 6))) }
+    }
+    for ($x = 1; $x -le 9; $x++) { for ($y = 10; $y -le 12; $y++) { Set-Px $c $x $y (Get-Px $Frame ($x + 2) (6 + $y - 10)) } }
+    for ($x = 10; $x -le 15; $x++) { for ($y = 19 - $x; $y -le 21 - $x; $y++) { Set-Px $c $x $y (Shade (Get-Px $Frame $x (6 + $y - (19 - $x))) 0.7) } }
+    return $c
+}
+
 # ============================================================================================
 #  BUILD
 # ============================================================================================
@@ -1402,6 +1417,7 @@ Add-Output 'coilgun_coil_casing' 'casings' 'block/luv/coilgun_coil_casing.png' {
 Add-Output 'sapphire_test_mass' 'casings' 'block/luv/sapphire_test_mass.png' { New-SapphireTestMass }
 Add-Output 'orbital_solar_cells' 'panel' 'block/luv/orbital_solar_cells.png' { New-OrbitalSolarCells }
 Add-Output 'orbital_solar_frame' 'panel' 'block/luv/orbital_solar_frame.png' { New-OrbitalSolarFrame }
+Add-Output 'orbital_solar_panel' 'panel' 'block/luv/orbital_solar_panel.png' { New-PanelBlockIcon (New-OrbitalSolarCells) (New-OrbitalSolarFrame) }
 
 $Known = @($Outputs.Keys) + @('items', 'seeds', 'casings', 'panel')
 foreach ($id in $Only) { if ($Known -notcontains $id) { throw "Unknown -Only value '$id' (expected an output name or one of: items, seeds, casings, panel)" } }
