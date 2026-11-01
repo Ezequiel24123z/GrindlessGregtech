@@ -3,7 +3,6 @@
  "_comment": "Findings of tools/analysis/process-audit.mjs known when QR-D0 ran; the audit fails only on keys not listed here. Remove a key when its finding is fixed. options.ignore: globs of ids the audit skips.",
  "options": {
   "ignore": [
-   "grindless:vein_sample_scheelite",
    "gtceu:*_indicator"
   ]
  },

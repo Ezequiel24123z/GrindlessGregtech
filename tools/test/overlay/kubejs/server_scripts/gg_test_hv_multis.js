@@ -240,7 +240,7 @@
     check(SCOPE, 'crafting', missingRecipes.length === 0,
       'count=' + ids.length + (missingRecipes.length > 0 ? ' missing=' + missingRecipes.join(',') : ''))
 
-    // the titanium bit (the old HV one, kept for old worlds) is the EV Tripod Drill's bit again (server_scripts/grindless/ev/tripod.js):
+    // the titanium bit (the old HV one) is the EV Tripod Drill's bit again (server_scripts/grindless/ev/tripod.js):
     // registered, a drill bit, every drilling recipe that takes it lives under vein_drilling/ev/ (the HV drill skips that folder) and
     // its HV-era conversion into the stainless steel bit is gone. Whether EMI shows it is the hiding table's business.
     var bits = asArray(Ingredient.of('#grindless:drill_bits').getItemIds()).map(String)
@@ -252,21 +252,6 @@
       'registered=' + Item.exists(LEGACY_BIT) + ' in grindless:drill_bits=' + (bits.indexOf(LEGACY_BIT) >= 0) + ' drilling recipes with a titanium bit=' +
       titaniumDrilling.length + ' (outside vein_drilling/ev/: ' + (outsideEv.length > 0 ? outsideEv.join(',') : 'none') + ') old conversion=' + conversion +
       ' hidden in EMI=' + (hidden.indexOf(LEGACY_BIT) >= 0))
-
-    // the old scheelite sample (the vein left the End table in v0.4.1, saves keep their items): registered, hidden, not a vein sample,
-    // no drilling recipe takes it and it crafts back into an empty vein probe
-    var samples = asArray(Ingredient.of('#grindless:vein_samples').getItemIds()).map(String)
-    var legacySamples = (HV.legacySamples || []).slice()
-    var badSamples = legacySamples.filter(function (id) {
-      var path = id.substring(id.indexOf(':') + 1)
-      // a drilling recipe of this vein is <...>/<vein>_<bit>...; the Mars scheelite vein (scheelite_mars_<bit>) is another sample's
-      var ofVein = new RegExp('/' + path.replace('vein_sample_', '') + '_(bronze|steel|vanadium_steel|stainless_steel|titanium)(_|$)')
-      var drills = drillRecipes.filter(function (r) { return ofVein.test(String(r.id)) }).length
-      return !Item.exists(id) || hidden.indexOf(id) < 0 || samples.indexOf(id) >= 0 || drills > 0 ||
-        !rm.byKey(rl('grindless:crafting/empty_vein_probe_from_' + path)).isPresent()
-    })
-    check(SCOPE, 'legacy_samples', legacySamples.indexOf('grindless:vein_sample_scheelite') >= 0 && badSamples.length === 0,
-      'legacy=' + legacySamples.join(',') + (badSamples.length > 0 ? ' not registered / not hidden / still a sample / still drilled / no conversion: ' + badSamples.join(',') : ''))
 
     // the wear of the bits as GTM sees it: chance of being consumed out of 10000
     try {
@@ -897,7 +882,7 @@
   var BIT_STEEL = 'grindless:steel_drill_bit'
   var BIT_VANADIUM = 'grindless:vanadium_steel_drill_bit'
   var BIT_STAINLESS = 'grindless:stainless_steel_drill_bit'
-  // the old HV bit: HV has no titanium (DECISIONS.md, 2026-10-24); registered for old worlds, hidden, no recipe takes it
+  // the old HV bit: HV has no titanium (DECISIONS.md, 2026-10-24); registered, hidden, no recipe takes it
   var LEGACY_BIT = 'grindless:titanium_drill_bit'
 
   // a bit stack is 16: the 32 bits of 32 runs at once are two stacks in two slots of the bus

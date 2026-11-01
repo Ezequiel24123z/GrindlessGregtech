@@ -980,7 +980,7 @@ Order:
 - **`<name>`:** `foundation`.
 - **What:**
   - the UEV tier: `gtceu:uev_machine_hull` and the UEV energy input and output hatches (S0-1); recipes for the hull, the hatches and `gtceu:uev_machine_casing` (superhydride cable, Mk4 helium plasma);
-  - components `grindless:uev_electric_motor`, `uev_electric_pump`, `uev_conveyor_module`, `uev_electric_piston`, `uev_robot_arm`, `uev_sensor`, `uev_emitter` and `uev_field_generator`, in Monifactory's `Post_UV_Components.js` pattern (LGPL, credited). Their recipes are in the packages that make their parts: the motor in A5, the arm in A8, the field generator in B4, and the rest in A6;
+  - components `gtceu:uev_electric_motor`, `uev_electric_pump`, `uev_conveyor_module`, `uev_electric_piston`, `uev_robot_arm`, `uev_sensor`, `uev_emitter` and `uev_field_generator`, in Monifactory's `Post_UV_Components.js` pattern (LGPL, credited). Their recipes are in the packages that make their parts: the motor in A5, the arm in A8, the field generator in B4, and the rest in A6;
   - the HfTaCN coil block (12,600 K *(tune)*, S0-7), `grindless:uev_fusion_casing`, the containment casing (24, 25) and the cleanroom-grade photonic casing (11–13);
   - materials and fluids missing from S0-1's dump: calcium-48, potassium-40, lithium-6, plutonium-244, curium-248, californium-249, tennessine, (La,Y)H₁₀ (S0-9), ammonia borane, Fe₁₆N₂, Fe(CO)₅, HfTaCN, SiC/SiC, WSi, TGG, PPKTP, FFKM, polycarbonate, ULE glass, the interstellar gas fractions;
   - the premixed fuels: `grindless:dhe3_fuel_mix`, `pb11_fuel`, `polarised_dhe3_fuel`;

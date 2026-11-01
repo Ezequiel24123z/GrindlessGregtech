@@ -32,12 +32,12 @@ Everything is built against uiv.md as designed; where a UIV package is not merge
 ## Route
 
 1. **Spintronics (home, substage `uxv`).** MTJ sputter cluster, oxide PLD chamber, vdW stacking cell, racetrack fab and YIG LPE furnace; their dies are joined into `gtnn:spintronic_mainframe` on the UEV photonic integration hall (new row). The mainframe is the UXV circuit (`#gtceu:circuits/uxv`, S0-5). Before UXV hatches exist, UXV recipes run on two UIV hatches (WorkableElectricMultiblockMachine.java:250-273, as uiv.md cites).
-2. **The sensor.** The SHeQUID works makes the superfluid gyroscope; with the MTJ die and the existing `grindless:nv_diamond_chip` (`zpm/qubits.js:28`) it becomes `grindless:uxv_sensor`, the only UXV component made before Vela.
+2. **The sensor.** The SHeQUID works makes the superfluid gyroscope; with the MTJ die and the existing `grindless:nv_diamond_chip` (`zpm/qubits.js:28`) it becomes `gtceu:uxv_sensor`, the only UXV component made before Vela.
 3. **Superheavies III.** UIV line 32's Es/Fm debris is split by the UHV transuranium HDEHP rows (as built, UIV-B2); the UEV calutron takes Fm-257 out, and Fm-257, Es-254 and Cm-248 (the IV hot cell's Cf-252 decay store, as built) are plated as targets; the UEV cyclotron makes elements 121 and 122 with UIV's Ti-50 (`grindless:superheavy_census_iii`); the MNT collider reaches the N=184 island (`grindless:island_chart`).
 4. **Back to Cygnus X-1.** The stellar elevator lifts HDE 226868's envelope at L1; the plasma mass filter splits it into H, He-4, CNO and heavy cuts; the condensation tower is the heavy cut's destination (rule 3). The accretion disk skimmer takes disk plasma, the FRC former traps it as `grindless:frc_cartridge`, and the BZ dynamo draws power from the black hole's spin.
 5. **The Kerr sling.** UIV's ergosphere probe bay slings a relay seed (new mode); the Cygnus warp gate throws the player to Vela (consumes an FRC cartridge, the M2P2 shield) or to Cas A (consumes a CNT Whipple shield). Substages `uxv-vela` and `uxv-cas-a` run in parallel.
 6. **Vela.** The pasta extractor works the crust at glitch time; the phase sorter (each phase leaves in a `grindless:cage_part` made by a new mode of UIV's neutronium cage at RX J1856) splits spaghetti, lasagna, gnocchi and the anti-phases; the draw bench makes the UXV strand cable, the laminator the hull plate. `gtceu:uxv_machine_hull` and UXV hatches follow. The polar cap tap gives power.
-7. **Cassiopeia A.** The ejecta knot sweeper gathers Ti-rich dust; the EV extraction cascade, UEV calutron and IV hot cell make a sealed Ti-44/Sc-44 core; the annihilation laser works turns it into a gamma laser module and `grindless:uxv_emitter`.
+7. **Cassiopeia A.** The ejecta knot sweeper gathers Ti-rich dust; the EV extraction cascade, UEV calutron and IV hot cell make a sealed Ti-44/Sc-44 core; the annihilation laser works turns it into a gamma laser module and `gtceu:uxv_emitter`.
 8. **Parts, power and scale.** The UXV motor, pump, conveyor, piston, arm and field generator; the Mk6 stellar burning ring; wireless case 12 and the UXV SMES cell; the x65,536 parallel hatch; the stellar fractionation hall (mega).
 9. **Gate to OpV.** The UIV Matrioshka computes the arm chart (Vela glitch record, Cas A Ti-44 map, Cygnus elevator log, EHT VLBI record); the Cygnus warp gate holds 16 A x V[UXV] = 2^31 EU/t and returns `grindless:bulge_chart`, which researches `gtceu:opv_machine_casing`.
 
@@ -174,7 +174,7 @@ UXV recipes run up to 1 A x V[UXV] = 134,217,728 EU/t on two UIV energy hatches,
 **Controllers (QR ladder, `docs/quality/recipes.md`; DECISIONS.md:551-567).** Every controller is a GTM `assembly_line` recipe with station research (`data_module`). The research item is a product of the machine's own line or the machine before it, never a GTM component GTM already researches. Each recipe keeps the draft base:
 
 - machines 1-6: `gtceu:uiv_machine_hull` + 2 `gtnn:optical_mainframe` + UIV components;
-- machines 7, 8 and 10-21: `gtceu:uiv_machine_hull` + 2 `gtnn:spintronic_mainframe` + `grindless:uxv_sensor` + UIV components;
+- machines 7, 8 and 10-21: `gtceu:uiv_machine_hull` + 2 `gtnn:spintronic_mainframe` + `gtceu:uxv_sensor` + UIV components;
 - the Mk6 and the M2 hall: `gtceu:uxv_machine_hull` + UXV components.
 
 To the base it adds one era fluid (1,000 mB *(tune)*) and three domain inputs: ids only this pack makes, tied to the process, never the machine's own product. Every controller has 8 or more distinct ingredients (the gate asks for 5). Earth controllers 1-8 take `grindless:he_6n` (F1 fluid, A2's cryogenic row): the Cygnus fluids do not exist before B2. Controllers 10-21 and M2 take a Cygnus fluid once B2 or B3 has made it (`filtered_disk_plasma` also matches the gate's `plasma$`). No controller of 1-8 or 10-21 uses a Vela or Cas A product (bootstrap, Risks).
@@ -815,12 +815,12 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 | Part | Quests | Ends with |
 |---|---|---|
 | 1. Spintronics | 7 | a CoFeB target, an MTJ die, an MRAM wafer, a DyScO₃ substrate, a MESO logic die, a racetrack chip, `gtnn:spintronic_mainframe` |
-| 2. The sensor | 4 | a nanoaperture array, a weak link cell, the SHeQUID gyro, `grindless:uxv_sensor` |
+| 2. The sensor | 4 | a nanoaperture array, a weak link cell, the SHeQUID gyro, `gtceu:uxv_sensor` |
 | 3. Superheavy III | 5 | an Fm-257 target, an Es-254 target, element 121, element 122 and census III, an island nuclide and the island chart |
 | 4. Cygnus X-1 | 6 | the stellar elevator, the filter cuts, the condensation tower, disk plasma, an FRC cartridge, a BZ run |
 | 5. The Kerr sling | 3 | a launched relay seed, the Whipple shield, the first jump |
 | 6. Vela | 6 | raw pasta at glitch time, a caged phase, strand wire, a lasagna plate, `gtceu:uxv_machine_hull`, a polar cap run |
-| 7. Cassiopeia A | 4 | knot dust, a Ti-44 core, a gamma laser module, `grindless:uxv_emitter` |
+| 7. Cassiopeia A | 4 | knot dust, a Ti-44 core, a gamma laser module, `gtceu:uxv_emitter` |
 | 8. Parts and power | 6 | the UXV motor, pump, conveyor and piston, the field generator, the Mk6 ring through c4, a UXV SMES cell |
 | 9. Scale | 2 | the UXV parallel hatch, the stellar fractionation hall |
 | 10. Gate | 3 | the arm chart, the 2^31 hold, OpV casing research |
@@ -1097,7 +1097,7 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
 - **`<name>`:** `foundation`.
 - **What:**
   - the UXV tier: `gtceu:uxv_machine_hull`, `gtceu:uxv_energy_input_hatch`, `gtceu:uxv_energy_output_hatch`, `gtceu:uxv_energy_input_hatch_16a`, `gtceu:uxv_energy_output_hatch_16a` (S0-1). Their recipes are B4's (lasagna plate, strand cable);
-  - components `grindless:uxv_electric_motor`, `uxv_electric_pump`, `uxv_conveyor_module`, `uxv_electric_piston`, `uxv_robot_arm`, `uxv_sensor`, `uxv_emitter`, `uxv_field_generator` (Monifactory `Post_UV_Components.js` pattern, LGPL, credited). Each recipe goes in its maker's own server file, so no table is shared: sensor A6; motor, pump, piston, conveyor, arm A8; field generator B3; emitter B5;
+  - components `gtceu:uxv_electric_motor`, `uxv_electric_pump`, `uxv_conveyor_module`, `uxv_electric_piston`, `uxv_robot_arm`, `uxv_sensor`, `uxv_emitter`, `uxv_field_generator` (Monifactory `Post_UV_Components.js` pattern, LGPL, credited). Each recipe goes in its maker's own server file, so no table is shared: sensor A6; motor, pump, piston, conveyor, arm A8; field generator B3; emitter B5;
   - blocks: `grindless:uxv_fusion_casing` (S0-4);
   - materials (`gtceu:`): `pasta_strand` with cable properties (S0-8); `titanium_44`, `fermium_257`, `einsteinium_254`, `curium_248`, `tungsten_184` (with a wire form), `oxygen_16` (fluid; `gtceu:carbon_12` is UIV's, `uiv/foundation.js:97`); CoFeB, Co₂MnSi, Terfenol-D, Ni₂MnGa, DyScO₃, SrRuO₃, La-BFO, GGG, YIG, hBN, WTe₂, Fe₃GeTe₂; and every material S0-1's dump shows missing;
   - fluids (`grindless:`): `stellar_plasma`, `disk_plasma`, `filtered_disk_plasma`, `flux_loaded_plasma`, the four cuts (`stellar_hydrogen_cut`, `stellar_helium_cut`, `stellar_cno_cut`, `stellar_heavy_cut`), `triple_alpha_fuel`, `carbon_burning_fuel`, `oxygen_burning_fuel`, the four ash plasmas (`cno_ash_plasma`, `helium_burning_ash_plasma`, `carbon_burning_ash_plasma`, `oxygen_burning_ash_plasma`), `lpe_flux`, `he_6n`, `mnt_product_gas`, `finemet_melt`. They are here because older files (`zpm/fusion.js`, `ev/cryogenic_plant.js`) read them;
@@ -1308,7 +1308,7 @@ Two at a time, in the pairs of *Parallel and serial*. A row whose input is made 
 #### A6. Sensor and MNT (machines 6, 7; lines 18, 24, 43)
 
 - **Objective:**
-  - the SHeQUID works (c1 `weak_link_cell`, c2 `shequid_gyro`) and the `grindless:uxv_sensor` recipe (own file: gyro, `nv_diamond_chip`, `mtj_die`, UIV sensor *(tune)*);
+  - the SHeQUID works (c1 `weak_link_cell`, c2 `shequid_gyro`) and the `gtceu:uxv_sensor` recipe (own file: gyro, `nv_diamond_chip`, `mtj_die`, UIV sensor *(tune)*);
   - the MNT collider (c1-c3, `gas_stopping_cell` as catalyst; c1 also returns `spent_actinide_target`);
   - line 43's stopping cell (own file).
 - **`<name>`:** `shequid_mnt`.

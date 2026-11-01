@@ -6,8 +6,7 @@
 //
 //   The UXV hull and the four hatches (2 A and 16 A, input and output) are GTM's gtceu:uxv_* ids (highTierContent on, TP-S0F). They are NOT created here. Their recipes are B4's (server_scripts/grindless/uxv/foundation.js). gtceu:uxv_machine_casing is GTM's.
 //
-//   Components (grindless:, Monifactory's Post_UV_Components.js pattern, LGPL, credited): uxv_sensor (A6), uxv_electric_motor,
-//     uxv_electric_pump, uxv_electric_piston, uxv_conveyor_module, uxv_robot_arm (A8), uxv_field_generator (B3), uxv_emitter (B5).
+//   Components: GTM's own gtceu:uxv_* (highTierContent on); the grindless: copies were removed in Reforge.
 //   Items made by one package and used by another (docs/eras/uxv.md F1): spintronics, lines 44-49, superheavy, parts, far products, data.
 //   Blocks (grindless:): uxv_fusion_casing (S0-4, the Mk6 ring).
 //   Materials: the gtceu: ones are GT materials (S0-1: every element they need exists; S0-8: pasta_strand is a 4 A cable at V[UXV]); the
@@ -25,14 +24,6 @@
 
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
   const ITEMS = {
-    uxv_electric_motor: { stack: 64 },
-    uxv_electric_pump: { stack: 64 },
-    uxv_conveyor_module: { stack: 64 },
-    uxv_electric_piston: { stack: 64 },
-    uxv_robot_arm: { stack: 64 },
-    uxv_sensor: { stack: 64 },
-    uxv_emitter: { stack: 64 },
-    uxv_field_generator: { stack: 64 },
     cofeb_target: { stack: 16 },
     mgo_target: { stack: 16 },
     heusler_target: { stack: 16 },

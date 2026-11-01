@@ -1001,7 +1001,7 @@ Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing her
 - **The wireless case 13 row** is new; existing networks keep their caps.
 - **Machine shapes:** every OpV multiblock is new; none changes an existing shape.
 - **Arrival platforms** place blocks only in new dimensions.
-- **Cleanup candidate:** the HT retrofit's hidden `grindless:uxv_*` components and their 1:1 conversions exist only for old saves.
+- **Cleanup:** the HT retrofit's `grindless:uxv_*` components are removed; the recipes make `gtceu:` components.
 
 ## Risks
 

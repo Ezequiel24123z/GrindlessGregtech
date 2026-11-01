@@ -13,8 +13,6 @@ const root = path.resolve(here, '..', '..', '..');
 const pack = path.join(root, 'pack');
 const assets = path.join(pack, 'kubejs', 'assets', 'grindless');
 
-const COMPONENTS = ['uxv_electric_motor', 'uxv_electric_pump', 'uxv_conveyor_module', 'uxv_electric_piston', 'uxv_robot_arm', 'uxv_sensor',
-  'uxv_emitter', 'uxv_field_generator'];
 const SPINTRONICS = ['cofeb_target', 'mgo_target', 'heusler_target', 'saf_target_set', 'ta_seed_target', 'srruo3_target', 'la_bfo_target',
   'cofeb_ingot', 'heusler_ingot', 'terfenol_d_ingot', 'ni_mn_ga_ingot', 'ta_foil', 'pt_sheet', 'dysco3_substrate', 'ggg_wafer', 'hbn_crystal',
   'wte2_crystal', 'fgt_crystal', 'mtj_stack_wafer', 'mram_stack_wafer', 'saf_track_wafer', 'mtj_die', 'mram_wafer', 'srruo3_electrode_wafer',
@@ -31,7 +29,7 @@ const FAR = ['raw_pasta', 'spaghetti_phase', 'lasagna_phase', 'gnocchi_fragment'
   'ejecta_knot_dust', 'refractory_condensate', 'metal_condensate', 'silicate_condensate'];
 const DATA = ['vela_glitch_timing', 'vela_glitch_record', 'cygnus_vlbi_record', 'elevator_log', 'ti44_map', 'arm_chart', 'bulge_chart',
   'pasta_strand_repeater'];
-const ITEMS = [...COMPONENTS, ...SPINTRONICS, ...LINES_44_49, ...SUPERHEAVY, ...PARTS, ...FAR, ...DATA].map((n) => 'grindless:' + n);
+const ITEMS = [...SPINTRONICS, ...LINES_44_49, ...SUPERHEAVY, ...PARTS, ...FAR, ...DATA].map((n) => 'grindless:' + n);
 const BLOCKS = ['grindless:uxv_fusion_casing'];
 const MATERIALS = {
   'gtceu:pasta_strand': 'ingot', 'gtceu:titanium_44': 'dust', 'gtceu:fermium_257': 'dust',
@@ -69,7 +67,7 @@ test('the stand-in runs the UXV foundation without errors', () => {
 });
 
 test('the id list is pinned: count and every id', () => {
-  assert.equal(ITEMS.length, 106);
+  assert.equal(ITEMS.length, 98);
   assert.equal(Object.keys(MATERIALS).length, 37);
   assert.equal(Object.values(MATERIALS).filter((f, i) => Object.keys(MATERIALS)[i].startsWith('grindless:')).length, 20, '20 fluids');
   const got = run.global.grindless.uxvFoundation;

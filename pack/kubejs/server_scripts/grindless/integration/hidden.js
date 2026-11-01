@@ -11,9 +11,10 @@
 //                 table.
 //   until never   class C: junk (unused GTM and addon materials, leftovers of the addon machines the pack removed). Hidden for good, and
 //                 its removeRecipes (recipes that only exist for it: an ingredient that only takes junk, or junk as every output) are
-//                 removed. Nothing is unregistered: old saves keep every id.
+//                 removed. Nothing is unregistered.
 // When an era lands, bump IMPLEMENTED_ERA: its content shows again (and add its places to tools/analysis/tiers/obtain.json, then rerun
-// the audit with --table: what is still out moves to a later era).
+// the audit with --table: what is still out moves to a later era). All eras are implemented now (IMPLEMENTED_ERA = max); what stays
+// hidden is class C, or class B until a later stage (MAX+).
 // A group with `unless` names a switch of global.grindless.stations.switches (startup_scripts/grindless/lib/stations.js, from
 // tables/stations.json): while that switch is on the group shows (the tether spool in the tether mode). An unknown switch keeps it hidden.
 //
@@ -33,7 +34,7 @@
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
   const G = global.grindless || (global.grindless = {})
-  const IMPLEMENTED_ERA = 'uxv'
+  const IMPLEMENTED_ERA = 'max'
   const TABLE = 'kubejs/data/grindless/tables/hidden_until.json'
   const TAG = 'c:hidden_from_recipe_viewers'
   const RECIPES_TAG = 'grindless:hidden_with_recipes'

@@ -419,7 +419,7 @@ test('tiers/obtain.json: inherits from steam, audits GT, and all its rules have 
   for (const c of raw.obtain.classes) {
     assert.ok(['A', 'B', 'C'].includes(c.class), JSON.stringify(c));
     assert.ok(c.reason && c.reason.length > 5, JSON.stringify(c));
-    if (c.class === 'B') assert.ok(ERA_IDS.includes(c.until), `B with no valid era in until: ${JSON.stringify(c.materials)}`);
+    if (c.class === 'B') assert.ok(ERA_IDS.includes(c.until) || (c.until === 'never' && c.unless), `B with no valid era in until: ${JSON.stringify(c.materials)}`);
   }
   for (const l of raw.obtain.later) assert.ok(ERA_IDS.includes(l.until), `later stage with no valid era in until: ${l.id}`);
   assert.ok(!raw.obtain.classes.some((c) => (c.materials || []).includes('perlite')), 'perlite already comes from the LV sieve (lv/perlite.js)');
@@ -446,6 +446,8 @@ test('CLI: --pass obtain with --config writes text, JSON and Markdown and exits 
   fs.mkdirSync(path.join(work, 'dump'), { recursive: true });
   try {
     const { recipes, cfg } = pack();
+    // a B/never/unless row has no removeRecipes: --table must still print its summary
+    cfg.obtain.classes.push({ class: 'B', until: 'never', unless: 'tether', reason: 'held until the switch', materials: ['t:unused_switched'] });
     const d = pack().dump;
     const w = (name, doc) => fs.writeFileSync(path.join(work, 'dump', name), JSON.stringify(doc), 'utf8');
     w('recipes.json', { recipes: recipes.map((r) => JSON.stringify({ i: r.id, t: r.type, j: r.json })) });
@@ -464,6 +466,7 @@ test('CLI: --pass obtain with --config writes text, JSON and Markdown and exits 
     assert.equal(JSON.parse(fs.readFileSync(path.join(work, 'o.json'), 'utf8')).pass, 'obtain');
     const hidden = JSON.parse(fs.readFileSync(path.join(work, 'h.json'), 'utf8'));
     assert.ok(hidden.groups.some((x) => x.material === 'beta' && x.until === 'never' && x.removeRecipes.includes('t:mac_beta')));
+    assert.ok(hidden.groups.some((x) => x.material === 't:unused_switched' && x.until === 'never' && x.unless === 'tether'));
     assert.match(r.stdout, /Hidden table: .*h\.json \(\d+ groups; \d+ recipes to remove\)/);
     const bad = spawnSync(process.execPath, [cli, '--pass', 'nada', '--dump', path.join(work, 'dump')], { encoding: 'utf8' });
     assert.equal(bad.status, 2);

@@ -64,7 +64,7 @@ test('an info page is both a recipe and a use of every stack on it (EmiInfoRecip
   assert.deepEqual(res.problems, ['keys.json: no es_es text for emi.t.keys.0']);
 });
 
-test('a disabled stack (assets/emi/index/stacks) drops every recipe it is in; an index-hidden old item is listed with its conversion', () => {
+test('a disabled stack (assets/emi/index/stacks) drops every recipe it is in; an index-hidden item is listed as hidden', () => {
   const dump = mkDump({
     recipes: [
       gt('t:mixer/cat', 'gtceu:mixer', { ins: [gi('t:dust')], outs: [gi('t:catalyst'), gi('t:junk')] }),
@@ -76,7 +76,7 @@ test('a disabled stack (assets/emi/index/stacks) drops every recipe it is in; an
   const res = audit({ dump, registry: reg({ items: ['t:catalyst', 't:old'] }), emi });
   assert.deepEqual(gapsOf(res), { 't:catalyst': ['acquisition', 'use'] });
   assert.equal(res.results.find((r) => r.key === 't:catalyst').invisibleMade[0].dropped, true);
-  assert.deepEqual(res.legacy, [{ key: 't:old', conversions: ['t:crafting/old_to_new'] }]);
+  assert.deepEqual(res.hiddenOurs.map((h) => h.key), ['t:old']);
   assert.deepEqual(res.droppedRoutes, [{ id: 't:mixer/cat', type: 'gtceu:mixer', disabledBy: ['output t:junk'], ours: ['t:catalyst'] }]);
 });
 
@@ -490,7 +490,6 @@ function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = 
     if (e.id !== dropUsesOf) for (const cat of e.used) if (!(dropRoute && dropRoute.id === e.id && dropRoute.cat === cat)) rec('sim:r' + n++, cat, [e.id], []);
   }
   for (const p of exp.pages) if (p !== dropPage) rec(p, 'emi:info', [], []);
-  for (const l of exp.legacy) for (const c of l.conversions) rec(c, 'minecraft:crafting', [l.id], []);
   if (!missingPreview) rec('gtceu:test_multiblock', 'gtceu:multiblock_info', [], ['gtceu:test_multiblock']);
   if (renderPreview) rec('gtceu:mega_factory', 'gtceu:multiblock_info', [], ['gtceu:mega_factory']);
   if (!missingProcess) rec('sim:process', 'gtceu:test_process', [], []);
@@ -505,7 +504,7 @@ function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = 
     'getRecipes(dev.emi.emi.api.recipe.EmiRecipeCategory)': (cat) => recipes.filter((r) => r.cat === cat.getId()).map(wrap),
     getWorkstations: () => missingWorkstation ? [] : [{ getEmiStacks: () => [{ getId: () => 'gtceu:test_multiblock' }] }],
   };
-  const items = new Set(exp.items.filter((e) => e.kind === 'item').map((e) => e.id).concat(exp.legacy.map((l) => l.id)));
+  const items = new Set(exp.items.filter((e) => e.kind === 'item').map((e) => e.id));
   if (extraItem) items.add(extraItem);
   const fluids = new Set(exp.items.filter((e) => e.kind === 'fluid').map((e) => e.id));
   class RL { constructor(s) { this.s = String(s); } toString() { return this.s; } }
@@ -526,7 +525,7 @@ function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = 
     'dev.emi.emi.api.stack.ItemEmiStack': class { constructor(st) { this.id = st.id; } },
     'dev.emi.emi.api.stack.FluidEmiStack': class { constructor(fl) { this.id = fl; } },
     'dev.emi.emi.api.EmiApi': { getRecipeManager: () => rm, displayRecipe: () => { ctx.Client.screen = 'dev.emi.emi.screen.RecipeScreen'; } },
-    'dev.emi.emi.registry.EmiStackList': { stacks: [...items].filter((i) => !exp.legacy.some((l) => l.id === i)).map((i) => ({ getId: () => i })) },
+    'dev.emi.emi.registry.EmiStackList': { stacks: [...items].map((i) => ({ getId: () => i })) },
     'dev.emi.emi.runtime.EmiReloadManager': { isLoaded: () => loaded },
     'dev.emi.emi.runtime.EmiReloadLog': { warnings },
     'com.gregtechceu.gtceu.api.registry.GTRegistries': {
@@ -575,7 +574,7 @@ test('the fixture\'s checks, against a stand-in EMI: all PASS when every expecte
   assert.deepEqual(sim.status, {
     client_hold: 'NOTE', emi_loaded: 'PASS', expectations: 'NOTE', registry: 'PASS', acquisition: 'PASS', use: 'PASS', routes: 'PASS',
     plugins: 'PASS', workstations: 'PASS', processes: 'PASS', previews: 'PASS',
-    preview_routes: 'NOTE', pages: 'PASS', machine_info: 'PASS', known: 'NOTE', legacy: 'PASS', all: 'PASS',
+    preview_routes: 'NOTE', pages: 'PASS', machine_info: 'PASS', known: 'NOTE', all: 'PASS',
   }, sim.logs.join('\n'));
   assert.equal(sim.logs.at(-1), 'GGTEST|emi_coverage|DONE');
   assert.equal(sim.player.age, 20, 'standalone, it keeps mc-runtime-test in the world');

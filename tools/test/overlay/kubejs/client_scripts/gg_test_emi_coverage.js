@@ -16,8 +16,8 @@
 //
 // GGTEST|emi_coverage|<check>|PASS|FAIL|NOTE:
 //   emi_loaded     EMI finished loading
-//   expectations   NOTE: the expectation file (items, pages, legacy items)
-//   registry       every grindless: item of the game is audited (or a legacy item), and every audited id exists
+//   expectations   NOTE: the expectation file (items, pages)
+//   registry       every grindless: item of the game is audited, and every audited id exists
 //   acquisition    every audited item, block and fluid has at least one EMI recipe or page that makes it
 //   use            every one that is not an end product (machines, tools) has at least one EMI recipe or page that uses it
 //   routes         every route the audit expects shows in its EMI category (GT categories, crafting, EMI info)
@@ -31,7 +31,6 @@
 //   known          NOTE: workstations, previews, use, routes and machine_info gaps listed in exp.known
 //                  (tools/analysis/emi_runtime_known.json) do not fail; this line counts them and lists the fixed ones (a ratchet:
 //                  only new gaps fail, and the list only shrinks)
-//   legacy         the old items kept for saves are out of EMI's index and keep their conversion recipe
 //   all            the verdict; then DONE
 // The details go to kubejs/exported/gg_emi_coverage_report.json (per item: the EMI categories that make and use it).
 // var + function: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
@@ -132,7 +131,7 @@
       return fresh
     }
     var machineOf = function (w) { return String(w).split(':').slice(0, 2).join(':').trim() }
-    log('expectations', 'NOTE', exp.items.length + ' audited, ' + exp.pages.length + ' pages, ' + exp.legacy.length + ' legacy, ' + hidden.length +
+    log('expectations', 'NOTE', exp.items.length + ' audited, ' + exp.pages.length + ' pages, ' + hidden.length +
       ' disabled until their era (' + exp.format + ')')
 
     var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
@@ -150,7 +149,6 @@
     // 1) registry
     var audited = {}
     exp.items.forEach(function (e) { audited[e.kind + ':' + e.id] = true })
-    exp.legacy.forEach(function (l) { audited['item:' + l.id] = true })
     hidden.forEach(function (id) { audited[(id.indexOf('fluid:') === 0 ? '' : 'item:') + id] = true })
     var unaudited = []
     var keys = jlist(BI.ITEM.keySet())
@@ -352,25 +350,13 @@
     log('known', 'NOTE', knownOpen.length + ' known gaps still open' + (knownFixed.length
       ? '; ' + knownFixed.length + ' fixed, shrink tools/analysis/emi_runtime_known.json (emi-coverage.mjs --known-from <this report>): ' + listed(knownFixed) : ''))
 
-    // 4) legacy items: out of the index, conversion in view
-    var index = {}
-    var stacks = jlist(EmiStackList.stacks)
-    for (var s = 0; s < stacks.size(); s++) index[String(stacks.get(s).getId())] = true
-    var legacyBad = []
-    exp.legacy.forEach(function (l) {
-      if (index[l.id] === true) legacyBad.push(l.id + ' is in the index')
-      l.conversions.forEach(function (id) { if (rm.getRecipe(new RL(id)) === null) legacyBad.push(l.id + ': conversion ' + id + ' not in EMI') })
-    })
-    ok = ok && legacyBad.length === 0
-    log('legacy', legacyBad.length === 0 ? 'PASS' : 'FAIL', exp.legacy.map(function (l) { return l.id }).join(', ') + (legacyBad.length ? '; ' + legacyBad.join('; ') : ''))
-
     try {
       var doc = { format: 'gg-emi-coverage-report-2', expectations: exp.format, recipes: allRecipes.size(), pages: ours, items: report,
         pluginErrors: pluginErrors, reloadWarnings: reloadWarnings, categories: categories, machines: machineReport, processes: processReport,
         workstationMissing: workstationMissing, previewsMissing: previewsMissing, previewsOff: previewsOff, processesMissing: processesMissing, machineInfoMissing: machineInfoMissing,
         knownOpen: knownOpen, knownFixed: knownFixed,
         noMade: noMade, noUse: noUse, routeMissing: routeMissing, previewMissing: previewMissing, unaudited: unaudited, unknown: unknown,
-        pagesMissing: pagesMissing, legacy: legacyBad }
+        pagesMissing: pagesMissing }
       c.report = doc
       // a fresh instance has no kubejs/exported yet (native run 20261026-024353-client-44b); same call as gg_test_recipe_lookup.js
       Java.loadClass('net.minecraft.FileUtil').createDirectoriesSafe('kubejs/exported')

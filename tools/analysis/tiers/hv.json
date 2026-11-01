@@ -313,7 +313,6 @@
     { "id": "belt-hv", "label": "HV conveyor belt", "item": "gtceu:hv_conveyor_module" },
 
     { "id": "dust-blaze-reactor", "label": "HV chemical reactor: carbon + sulfur -> blaze dust (the other path, from HV on; 480 EU/t)", "kind": "recipe", "type": "gtceu:chemical_reactor", "output": "minecraft:blaze_powder" },
-    { "id": "sample-scheelite-not-made", "label": "The scheelite vein left the End's table (veins_excluded.json): its sample is no longer made (any left over converts into an empty probe)", "item": "grindless:vein_sample_scheelite", "expect": "unreachable" },
 
     { "id": "clean-room", "label": "Clean room (controller: HV hull, HV circuit, filters, rotors, HV motors)", "item": "gtceu:cleanroom" },
     { "id": "clean-room-formed", "label": "Clean room formed and powered (the recipe condition)", "item": "run:gtceu:cleanroom" },

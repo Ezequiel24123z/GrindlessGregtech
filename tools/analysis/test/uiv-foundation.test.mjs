@@ -15,8 +15,7 @@ const pack = path.join(root, 'pack');
 const assets = path.join(pack, 'kubejs', 'assets', 'grindless');
 
 const ITEMS = [
-  'uiv_electric_motor', 'uiv_electric_pump', 'uiv_conveyor_module', 'uiv_electric_piston', 'uiv_robot_arm', 'uiv_sensor', 'uiv_emitter',
-  'uiv_field_generator', 'ti50_oven_charge', 'element_119_recoil', 'element_120_recoil', 'superheavy_census_ii', 'u238_flash_target',
+  'ti50_oven_charge', 'element_119_recoil', 'element_120_recoil', 'superheavy_census_ii', 'u238_flash_target',
   'mh_winding', 'h_si28_wafer', 'p_si_die', 'eo_microcomb', 'telecom_memory', 'mk_cryostat_module', 'data_crystal_5d', 'wf_rhea_billet',
   'ps_cooling_laser', 'cage_part', 'sled_charge', 'neutronium_pellet', 'j0437_pulse_raw', 'xray_pulse_timed', 'pulsar_navigation_solution',
   'kerr_probe_data', 'correlated_kerr_data', 'recovered_half_sled', 'ns_eos_chart', 'kerr_chart', 'pulsar_timed_repeater',
@@ -64,7 +63,7 @@ test('the stand-in runs the UIV foundation without errors', () => {
 });
 
 test('the id list is pinned: count and every id', () => {
-  assert.equal(ITEMS.length, 34);
+  assert.equal(ITEMS.length, 26);
   assert.equal(PLAIN_BLOCKS.length + 1, 3);
   assert.equal(Object.keys(MATERIALS).length, 27);
   const got = run.global.grindless.uivFoundation;

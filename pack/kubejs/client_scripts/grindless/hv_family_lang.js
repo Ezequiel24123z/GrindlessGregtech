@@ -3,8 +3,8 @@
 //
 //   gtceu:hv_vein_drill, gtceu:hv_greenhouse   (machine names + tooltips)
 //   grindless:stainless_steel_drill_bit        (drill bit; HV has no titanium)
-//   grindless:titanium_drill_bit               (the old HV bit; since EV the EV Tripod Drill's bit again, ev/tripod.js)
-//   grindless:vein_sample_<end vein>           (4 End vein samples, and the old scheelite one that saves keep)
+//   grindless:titanium_drill_bit               (the EV Tripod Drill's bit, ev/tripod.js)
+//   grindless:vein_sample_<end vein>           (the 4 End vein samples)
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* (owned by another agent), like lv_multis_lang.js and mv_family_lang.js:
 // Minecraft merges lang entries from every namespace/script, so ClientEvents.lang works fine wherever it is declared.
@@ -30,8 +30,6 @@ ClientEvents.lang('en_us', event => {
     add('item.grindless.vein_sample_bauxite_end', 'End Bauxite Vein Sample')
     add('item.grindless.vein_sample_magnetite_end', 'End Magnetite Vein Sample')
     add('item.grindless.vein_sample_sheldonite', 'End Sheldonite Vein Sample')
-    add('item.grindless.vein_sample_scheelite', 'End Scheelite Vein Sample (old)')
-    add('tooltip.grindless.vein_sample.legacy', 'Old sample: its vein left the End (scheelite comes back on Mars). Craft it back into an empty vein probe.')
     add('item.grindless.vein_sample_zirconium', 'End Zirconium Vein Sample')
 })
 
@@ -57,7 +55,5 @@ ClientEvents.lang('es_es', event => {
     add('item.grindless.vein_sample_bauxite_end', 'Muestra de veta de bauxita del End')
     add('item.grindless.vein_sample_magnetite_end', 'Muestra de veta de magnetita del End')
     add('item.grindless.vein_sample_sheldonite', 'Muestra de veta de sheldonita del End')
-    add('item.grindless.vein_sample_scheelite', 'Muestra de veta de scheelita del End (antigua)')
-    add('tooltip.grindless.vein_sample.legacy', 'Muestra antigua: su veta ya no está en el End (la scheelita vuelve en Marte). Fabrica con ella una sonda de vetas vacía.')
     add('item.grindless.vein_sample_zirconium', 'Muestra de veta de circonio del End')
 })

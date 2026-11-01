@@ -115,7 +115,7 @@ function mainObtain(o, loaded) {
     const run = parts.indexOf('test-runs') >= 0 ? parts[parts.indexOf('test-runs') + 1] : parts[parts.length - 1];
     const table = hiddenTable(res, { previous, dump: run, date: new Date().toISOString().slice(0, 10) });
     fs.writeFileSync(file, renderHiddenTable(table), 'utf8');
-    process.stdout.write(`Hidden table: ${file} (${table.groups.length} groups; ${table.groups.filter((x) => x.until === 'never').reduce((n, x) => n + x.removeRecipes.length, 0)} recipes to remove)\n`);
+    process.stdout.write(`Hidden table: ${file} (${table.groups.length} groups; ${table.groups.filter((x) => x.until === 'never').reduce((n, x) => n + (x.removeRecipes || []).length, 0)} recipes to remove)\n`);
   }
   process.exit(res.verdict === 'PASS' ? 0 : 1);
 }

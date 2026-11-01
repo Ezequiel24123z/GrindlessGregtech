@@ -7,8 +7,7 @@
 // tennessine, so none of those is re-registered (S0-1 dump; tennessine is in GTM's lang, contract F1 lists it by mistake). The hull and
 // the four energy hatches are not created here any more: with highTierContent on (TP-S0F) GTM registers them for UEV, UIV and UXV.
 //
-//   Components (grindless:, Monifactory's Post_UV_Components.js pattern, LGPL, credited): uev_electric_motor (A5), uev_robot_arm (A8),
-//     uev_field_generator (B4), uev_electric_pump, uev_conveyor_module, uev_electric_piston, uev_sensor, uev_emitter (A6).
+//   Components: GTM's own gtceu:uev_* (highTierContent on); the grindless: copies were removed in Reforge.
 //   Not here: grindless:srf_cavity (UV's cold foundation registers it; the UEV packages reuse it).
 //   Items made by one package and used by another (ids not spelled in uev.md are chosen here and canonical, DECISIONS UHV-F1):
 //     ca48_beam, target_wheel, tennessine_sample, superheavy_census      superheavy facility
@@ -32,14 +31,6 @@
 
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
   const ITEMS = {
-    uev_electric_motor: { stack: 64 },
-    uev_electric_pump: { stack: 64 },
-    uev_conveyor_module: { stack: 64 },
-    uev_electric_piston: { stack: 64 },
-    uev_robot_arm: { stack: 64 },
-    uev_sensor: { stack: 64 },
-    uev_emitter: { stack: 64 },
-    uev_field_generator: { stack: 64 },
     ca48_beam: { stack: 16 },
     target_wheel: { stack: 16 },
     tennessine_sample: { stack: 16 },

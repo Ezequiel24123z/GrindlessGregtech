@@ -6,13 +6,12 @@
 // Once the player is in the world it keeps mc-runtime-test there (it quits when the player's tickCount reaches 100 with no screen open: the
 // counter, `age` for scripts, is wound back) until EMI has finished loading, then checks what the player would see:
 //   client_tag      the server's tags reached the client: a later-era and a junk item are in #c:hidden_from_recipe_viewers and
-//                   #grindless:hidden_with_recipes; the old scheelite vein sample only in the first
-//   client_index    EMI's index (EmiStackList.stacks) has no hidden item or fluid (nor the old sample), and has perlite dust, obsidian dust,
+//                   #grindless:hidden_with_recipes
+//   client_index    EMI's index (EmiStackList.stacks) has no hidden item or fluid, and has perlite dust, obsidian dust,
 //                   the LV sifter, the Moon's titanium dust, moon sand and helium-3, Mars' rock and the titanium drill bit (EV), and IV's
 //                   naquadah, Venus rock, iridosmine, U-235 and deuterium, and LuV's circuit assembly line, molten cerrobase 140, chondritic extract,
 //                   germanium and bacteria (LuV is implemented since v0.8.0's switch, ZPM since v0.9.0's, 2026-10-27)
-//   client_recipes  EMI shows no recipe that makes or uses a hidden item; it shows the LV sifter's perlite, perlite's electrolysis and the
-//                   old sample's conversion into an empty vein probe
+//   client_recipes  EMI shows no recipe that makes or uses a hidden item; it shows the LV sifter's perlite and perlite's electrolysis
 //   client_jei      JEI runs under EMI: its ingredient list and recipe screen are EMI's (JEMI), so JEI shows nothing of its own
 //   client_chipped  a mod that only ships a JEI plugin reaches EMI: Chipped's workbench categories hold recipes and stone is used by one
 //                   (with JEI 15.56 every one of them failed: EMI 1.1.22's JEMI slot builder lacks a method that JEI made abstract)
@@ -23,8 +22,6 @@
   var T = 'GGTEST|hidden|'
   var TAG = 'c:hidden_from_recipe_viewers'
   var RECIPES_TAG = 'grindless:hidden_with_recipes'
-  var LEGACY = 'grindless:vein_sample_scheelite'
-  var CONVERSION = 'grindless:crafting/empty_vein_probe_from_vein_sample_scheelite'
   var HOLD_MAX_MS = 12 * 60 * 1000
   var c = { enabled: null, since: 0, done: false, errors: 0, ageField: null, waitedLog: 0 }
 
@@ -83,10 +80,8 @@
 
     // 1) the tags reached the client
     var tagged = hiddenItems.filter(function (id) { return Item.of(id).hasTag(TAG) && Item.of(id).hasTag(RECIPES_TAG) })
-    var legacyOk = Item.of(LEGACY).hasTag(TAG) && !Item.of(LEGACY).hasTag(RECIPES_TAG)
-    log('client_tag', tagged.length === hiddenItems.length && legacyOk ? 'PASS' : 'FAIL', 'in #' + TAG + ' and #' + RECIPES_TAG + ' on the client: ' +
-      tagged.join(', ') + (tagged.length === hiddenItems.length ? '' : ' (missing: ' + hiddenItems.filter(function (id) { return tagged.indexOf(id) < 0 }).join(', ') + ')') +
-      '; old scheelite sample only in #' + TAG + ': ' + legacyOk)
+    log('client_tag', tagged.length === hiddenItems.length ? 'PASS' : 'FAIL', 'in #' + TAG + ' and #' + RECIPES_TAG + ' on the client: ' +
+      tagged.join(', ') + (tagged.length === hiddenItems.length ? '' : ' (missing: ' + hiddenItems.filter(function (id) { return tagged.indexOf(id) < 0 }).join(', ') + ')'))
 
     // 2) EMI's index
     var index = {}
@@ -96,7 +91,7 @@
       var kind = String(s.getClass().getSimpleName()).indexOf('Fluid') >= 0 ? 'fluid:' : ''
       index[kind + String(s.getId())] = true
     }
-    var leaked = hiddenItems.concat([LEGACY]).filter(function (id) { return index[id] === true })
+    var leaked = hiddenItems.filter(function (id) { return index[id] === true })
       .concat(hiddenFluids.filter(function (id) { return index['fluid:' + id] === true }))
     var lost = shownItems.filter(function (id) { return index[id] !== true })
       .concat(shownFluids.filter(function (id) { return index['fluid:' + id] !== true }))
@@ -137,12 +132,9 @@
     var electro = usesPerlite.some(function (id) { return id.indexOf('decomposition_electrolyzing_perlite') >= 0 })
     if (!sifter) problems.push('no recipe makes perlite dust (' + makesPerlite.join(', ') + ')')
     if (!electro) problems.push('perlite electrolysis not shown (' + usesPerlite.slice(0, 8).join(', ') + ')')
-    var usesLegacy = idsOf(rm.getRecipesByInput(stackOf(LEGACY)))
-    var conversion = usesLegacy.indexOf(CONVERSION) >= 0
-    if (!conversion) problems.push('the old sample conversion is not shown (uses of ' + LEGACY + ': ' + (usesLegacy.join(', ') || 'none') + ')')
     log('client_recipes', problems.length === 0 ? 'PASS' : 'FAIL', problems.length === 0
       ? 'EMI shows ' + count(rm.getRecipes()) + ' recipes; none makes or uses a hidden stack; perlite: ' + makesPerlite.join(', ') + ' -> ' +
-        usesPerlite.filter(function (id) { return id.indexOf('electrolyzing') >= 0 }).join(', ') + '; old sample: ' + CONVERSION
+        usesPerlite.filter(function (id) { return id.indexOf('electrolyzing') >= 0 }).join(', ')
       : problems.join('; '))
 
     // 4) JEI
