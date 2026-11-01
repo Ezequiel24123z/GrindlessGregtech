@@ -21,9 +21,6 @@
     "ids": ["grindless:bottomless_store_core", "grindless:bottomless_tank_core", "grindless:horizon_cloud_core", "grindless:horizon_computation_core"]
   },
   "probes": ["grindless:ig_relay_probe", "grindless:launched_ig_probe", "grindless:bound_probe_pair"],
-  "materials": {
-    "gtceu:kerr_strand": "ingot forms only, no cable property (S0-3 inconclusive); the strand wire is grindless:kerr_strand_wire"
-  },
   "existing": [
     "grindless:chain_lamina_stack", "grindless:cmc_coil_former", "grindless:degenerate_matter_slug", "grindless:fcl_substrate_strip", "grindless:fed_strangelet",
     "gtceu:gadolinium_oxide_dust", "grindless:hawking_drive", "grindless:metal_rich_bloom", "grindless:neutronium_pellet", "grindless:nsc_planetesimal", "grindless:probe_seed",

@@ -20,7 +20,7 @@ import { tierOfEut } from './lib/capacity.mjs';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(here, '..', '..');
 
-export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 // AGENTS.md:18: progression multiblocks x1.35 per era from EV, and about x1.5 lines per era from UV (guide, not quota)
 export const GUIDE = { ev: 11, iv: 15, luv: 20, zpm: 27, uv: 36 };
 export const REAL_STEPS = 4;

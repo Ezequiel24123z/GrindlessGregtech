@@ -3,7 +3,7 @@
 //
 //   T4 horizon shielding   (the existing valence-reduction line's gadolinium oxide) SPS c27 -> gd_hfb2_cermet; press c4 (maxplus/condensate.js) ->
 //                          graded_horizon_laminate; loom c1 -> horizon_shielding
-//   T5 horizon waveguide   CVI c20 -> sic_waveguide_tube; chemical bath c2 (electropolish) -> polished_waveguide_tube; MTJ c32 ->
+//   T5 horizon waveguide   CVI c20 -> sic_waveguide_tube; chemical bath c3 (electropolish) -> polished_waveguide_tube; MTJ c32 ->
 //                          nb_lined_tube; loom c2 -> horizon_waveguide; mK cryostat c27 -> cold_horizon_waveguide
 //   T6 horizon conduit     coated conductor c12 -> conduit_tape; oxide PLD c9 -> thick_conduit_tape; HTS works c19 -> cabled_conductor;
 //                          loom c3 -> horizon_conduit; helium refrigerator (keyed) -> cold_horizon_conduit
@@ -45,7 +45,7 @@
     { type: 'chemical_vapour_infiltration', name: 'sic_waveguide_tube', circuit: 20, eut: va(10), duration: 1200, key: 'grindless_chemical_vapour_infiltration',
       items: [['grindless:sic_tow', 8]], fluids: [['gtceu:methyltrichlorosilane', 1000], ['gtceu:hydrogen', 2000]],
       outs: [['grindless:sic_waveguide_tube', 2]], fluidOuts: [['gtceu:hydrochloric_acid', 3000]] },
-    { type: 'chemical_bath', name: 'polished_waveguide_tube', circuit: 2, eut: va(8), duration: 400,
+    { type: 'chemical_bath', name: 'polished_waveguide_tube', circuit: 3, eut: va(8), duration: 400,
       items: [['grindless:sic_waveguide_tube', 2]], fluids: [['gtceu:electropolish_acid', 1000]],
       outs: [['grindless:polished_waveguide_tube', 2]], fluidOuts: [['gtceu:spent_electropolish_acid', 1000]] },
     { type: 'mtj_sputtering', name: 'nb_lined_tube', circuit: 32, eut: va(12), duration: 900, key: 'grindless_mtj_sputtering',

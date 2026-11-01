@@ -103,7 +103,7 @@ test('names in en_us for every id and place', () => {
     for (const id of got.items) if (!L['item.grindless.' + short(id)]) problems.push(`${lang} item ${id}`);
     for (const id of got.blocks) if (!L['block.grindless.' + short(id)]) problems.push(`${lang} block ${id}`);
     for (const id of got.fluids) if (!L['material.grindless.' + short(id)]) problems.push(`${lang} fluid ${id}`);
-    for (const k of ['material.gtceu.kerr_strand', 'block.gtceu.max_maxplus_energy_hatch_1024a']) if (!L[k]) problems.push(`${lang} ${k}`);
+    for (const k of ['block.gtceu.max_maxplus_energy_hatch_1024a']) if (!L[k]) problems.push(`${lang} ${k}`);
     for (const [, [dim]] of Object.entries(PLACES)) for (const k of ['level', 'dimension']) if (!L[`${k}.grindless.${short(dim)}`]) problems.push(`${lang} ${k} ${dim}`);
   }
   assert.deepEqual(problems, []);

@@ -87,7 +87,7 @@ function makeResolver(dump, normList, warnings) {
 const V = [8, 32, 128, 512, 2048, 8192, 32768, 131072, 524288, 2097152, 8388608, 33554432, 134217728, 536870912, 2147483647];
 
 /** GTM's voltage tiers, lowest first: the folders of the pack's family recipes (`TIERS` in startup_scripts/grindless/lv/multis.js). */
-export const TIER_NAMES = ['ulv', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+export const TIER_NAMES = ['ulv', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 
 /**
  * The tier a family recipe is filed under: the highest tier named by a folder of its id path ('' = none), as `rules.recipeTier`

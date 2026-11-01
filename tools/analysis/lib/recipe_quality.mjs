@@ -277,13 +277,16 @@ function tpRules(rec, n, output, cls, cfg) {
     else if (cls === 'controller' && circuits.filter((x) => x.t === n).reduce((s, x) => s + x.n, 0) < 4) v.push(['T-CIRC', `at least 4 circuits of ${TIER_NAMES[n]}`]);
   }
 
-  const hulls = rec.items.map((i) => HULL_RE.exec(i.id)).filter((m) => m && TIER_PREFIX.get(m[1]) !== n);
-  if (hulls.length) v.push(['T-HULL', `a ${TIER_NAMES[n]} machine hull (has ${hulls.map((m) => m[0]).join(', ')})`]);
+  // MAX is the last hull and the last voltage: tier 15 (MAX+) is held to the MAX hull and VA[MAX] (docs/eras/maxplus.md, Voltages)
+  const hullN = Math.min(n, 14);
+  const hulls = rec.items.map((i) => HULL_RE.exec(i.id)).filter((m) => m && TIER_PREFIX.get(m[1]) !== hullN);
+  if (hulls.length) v.push(['T-HULL', `a ${TIER_NAMES[hullN]} machine hull (has ${hulls.map((m) => m[0]).join(', ')})`]);
 
   if (rec.eut !== null && rec.eut !== undefined) {
     const lowered = comp || isHull || HATCH_2A_RE.test(output) && TIER_PREFIX.get(HATCH_2A_RE.exec(output)[1]) === n || matchesAny(cfg.voltBootstrap, output, rec.id);
-    const bar = vaOf(lowered ? n - 1 : n);
-    if (rec.eut < bar) v.push(['T-VOLT', `EU/t >= ${bar} (VA of ${TIER_NAMES[lowered ? n - 1 : n]}), has ${rec.eut}`]);
+    const barTier = Math.min(lowered ? n - 1 : n, 14);
+    const bar = vaOf(barTier);
+    if (rec.eut < bar) v.push(['T-VOLT', `EU/t >= ${bar} (VA of ${TIER_NAMES[barTier]}), has ${rec.eut}`]);
   }
   return v;
 }

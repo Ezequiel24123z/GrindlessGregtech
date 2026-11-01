@@ -1,5 +1,5 @@
 {
- "_doc": "Rules and baseline of tools/analysis/recipe-quality.mjs; the ladder is docs/quality/recipes.md. baseline = today's violations (recipe|output -> codes); T0 fails on new ones and on stale ones. Regenerate with --write-baseline only after fixing.",
+ "_doc": "Rules and baseline of tools/analysis/recipe-quality.mjs; the ladder is docs/quality/recipes.md. baseline = today's violations (recipe|output -> codes); T0 fails on new ones and on stale ones. Regenerate with --write-baseline only after fixing. Kept on purpose (XP-C1): the Hyperstargate base (T-CIRC, T-COUNT) and locked chevron (T-CIRC) are structure blocks assembled from tier-15 sub-blocks (ring, upgrade, chevron, MAX+ hatches) with only a programmed circuit: no MAX+ processor or tier component sits in the row itself. Fixing means adding one to those two rows in startup_scripts/grindless/maxplus/grid.js (XP-H4a's file, outside XP-C1); the integrator decides, and deletes both baseline lines then.",
  "eraTier": {
   "steam": 0,
   "lv": 1,
@@ -86,7 +86,8 @@
   "gtceu:wetware_processor_mainframe": "uhv",
   "gtnn:optical_computer": "uev",
   "gtnn:optical_mainframe": "uiv",
-  "gtnn:spintronic_mainframe": "uxv"
+  "gtnn:spintronic_mainframe": "uxv",
+  "grindless:horizon_processor": "maxplus"
  },
  "sosoIgnore": [
   "storage",
@@ -156,7 +157,6 @@
   "grindless:assembly_line/accretion_disk_skimmer|gtceu:accretion_disk_skimmer": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/annihilation_laser_works|gtceu:annihilation_laser_works": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/beuv_scanner|gtceu:beuv_scanner": ["T-CIRC","T-COMP","T-COUNT"],
-  "grindless:assembly_line/blueshift_forge|gtceu:blueshift_forge": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/bz_dynamo|gtceu:bz_dynamo": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/calutron|gtceu:calutron": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/cvi_furnace|gtceu:cvi_furnace": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
@@ -165,23 +165,10 @@
   "grindless:assembly_line/entanglement_station|gtceu:entanglement_station": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/femtosecond_writer|gtceu:femtosecond_writer": ["T-CIRC","T-COMP","T-COUNT"],
   "grindless:assembly_line/frc_former|gtceu:frc_former": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/condensate_assembler|gtceu:condensate_assembler": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:assembly_line/horizon_capacitor_bank|gtceu:horizon_capacitor_bank": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/heavy_ion_cyclotron|gtceu:heavy_ion_cyclotron": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/helium3_polariser|gtceu:helium3_polariser": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/hills_slingshot|gtceu:hills_slingshot": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:assembly_line/hyperfactory|gtceu:hyperfactory": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:assembly_line/hyper_assembly_array|gtceu:hyper_assembly_array": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:hyper_assembly_array/hyperstargate_base|grindless:hyperstargate_base": ["T-CIRC","T-COUNT"],
-  "grindless:hyper_assembly_array/hyperstargate_locked_chevron|grindless:hyperstargate_locked_chevron": ["T-CIRC"],
-  "grindless:assembly_line/horizon_crystal_furnace|gtceu:horizon_crystal_furnace": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:assembly_line/multi_plasma_blender|gtceu:multi_plasma_blender": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:assembly_line/nickel_56_burner|gtceu:nickel_56_burner": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:assembly_line/pair_instability_crucible|gtceu:pair_instability_crucible": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:assembly_line/tarantula_stellar_lift|gtceu:tarantula_stellar_lift": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/levitation_melter|gtceu:levitation_melter": ["T-CIRC","T-COMP","T-COUNT","T-HULL"],
   "grindless:assembly_line/megabar_press|gtceu:megabar_press": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/meta_material_loom|gtceu:meta_material_loom": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/millikelvin_cryostat_works|gtceu:millikelvin_cryostat_works": ["T-CIRC","T-COMP","T-COUNT"],
   "grindless:assembly_line/mnt_collider|gtceu:mnt_collider": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/mtj_sputter_cluster|gtceu:mtj_sputter_cluster": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
@@ -194,8 +181,6 @@
   "grindless:assembly_line/photonic_integration_hall|gtceu:photonic_integration_hall": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/plasma_mass_filter|gtceu:plasma_mass_filter": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/polar_cap_tap|gtceu:polar_cap_tap": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/primordial_fusion_torus|gtceu:primordial_fusion_torus": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:assembly_line/pristine_gas_works|gtceu:pristine_gas_works": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/quantum_gas_lab|gtceu:quantum_gas_lab": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/racetrack_fab|gtceu:racetrack_fab": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/ramp_compression_pulser|gtceu:ramp_compression_pulser": ["T-CIRC","T-COMP","T-COUNT","T-HULL"],
@@ -213,7 +198,8 @@
   "grindless:assembly_line/uiv_machine_hull|gtceu:uiv_machine_hull": ["T-CIRC","T-COUNT"],
   "grindless:assembly_line/vdw_stacker|gtceu:vdw_stacker": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/vdw_stacking_cell|gtceu:vdw_stacking_cell": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/void_crystal_fab|gtceu:void_crystal_fab": ["T-CIRC","T-HULL","T-VOLT"],
-  "grindless:assembly_line/yig_lpe_furnace|gtceu:yig_lpe_furnace": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"]
+  "grindless:assembly_line/yig_lpe_furnace|gtceu:yig_lpe_furnace": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
+  "grindless:hyper_assembly_array/hyperstargate_base|grindless:hyperstargate_base": ["T-CIRC","T-COUNT"],
+  "grindless:hyper_assembly_array/hyperstargate_locked_chevron|grindless:hyperstargate_locked_chevron": ["T-CIRC"]
  }
 }

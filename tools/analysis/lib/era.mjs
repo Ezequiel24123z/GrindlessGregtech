@@ -14,7 +14,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tierOfEut } from './capacity.mjs';
 
-export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 
 /** Index of an era name; ULV is the lowest voltage tier and prices with the Steam era (index 0, same as tierOfEut(8)). */
 export const eraIdx = (e) => (e === 'ulv' ? 0 : ERAS.indexOf(e));
