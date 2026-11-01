@@ -94,7 +94,7 @@ MAX ids are consumed, never redefined. A MAX+ change to a MAX file is a MAX+ pac
 
 - `ig_relay_probe` (P16; GTM `assembly_line` at VA[MAX], MAX parts): 1 `probe_seed` (OpV), 1 `hawking_drive` (OpV), 1 `optical_nav_core` (P16), 4 `maxplus_sensor`, 2 `maxplus_robot_arm`, 32 `metal_feedstock` *(tune)*.
 - Hills slingshot c1: probe + `canned_counterweight` (P15) → `bound_probe_pair`; c2 at V[MAX] x 16 A for 1,200 t → `launched_ig_probe`. The counterweight is captured by the hole (an honest destination).
-- Gate c16 in `tables/gate.json`: `launched_ig_probe` → 2^37 EU/t (V[MAX] x 64 A) for 1,200 t *(tune)* on one MAX 64 A substation hatch at Sgr A\* orbit, keeping a `horizon_lock` (the probe's departure is timed against the still horizon). The relay row places the platform at 30 Doradus and grants `maxplus-lmc`. Real flight time at 3,000 km/s would be 16 million years: the warp-gate catch is the pack's fiction since UHV.
+- Gate c16 in `tables/gate.json`: `launched_ig_probe` → 2^37 EU/t (V[MAX] x 64 A) for 1,200 t *(tune)* on one 1,024 A MAX+ hatch (`gtceu:max_maxplus_energy_hatch_1024a`; XP-B1's T1 ran it) at Sgr A\* orbit, keeping a `horizon_lock` (the probe's departure is timed against the still horizon). The relay row places the platform at 30 Doradus and grants `maxplus-lmc`. Real flight time at 3,000 km/s would be 16 million years: the warp-gate catch is the pack's fiction since UHV.
 - **c17, c18, c19** are warp gates built at the place they start from (controller carried), each throwing a probe of the same recipe with its own navigation core: c17 30 Doradus → Magellanic Stream (`maxplus-stream`), c18 30 Doradus → M31 nucleus (`maxplus-m31`, 765 kpc), c19 M31 → Local Group filament (`maxplus-void`). Each is a second hop from a relay-reached place (MAX-S0-11 path; proof reused).
 
 **First arrival** at each place: the platform holds an ME far ring, a 9 x 9 deck, one wireless anchor and a chest with the substage book. Nothing else is given. People come back by Waystones or FTB home (journey.md, user decision 6).
@@ -117,8 +117,7 @@ Nothing is mined by hand; no platform deck is a quarry.
 | Only from | Products |
 |---|---|
 | Sgr A\* orbit | `kerr_condensate` and everything bound in it (P1-P5); `launched_ig_probe`; the crystal slurry, core and controller crystals; condensate-assembled parts; the Hyperstargate |
-| 30 Doradus | `raw_vms_plasma`, `vms_core_plasma`, 
-i56_slug`, `ime_ash` |
+| 30 Doradus | `raw_vms_plasma`, `vms_core_plasma`, `ni56_slug`, `ime_ash` |
 | Magellanic Stream | `pristine_gas`, `primordial_deuterium`, `pristine_helium_3` |
 | M31 nucleus | `photonuclear_mix`, `p_process_plasma` |
 | Local Group filament | `void_grown_diamond`, `void_holographic_block` |
@@ -146,16 +145,18 @@ i56_slug`, `ime_ash` |
 
 | Row kind | EU/t | How it is fed |
 |---|---|---|
-| Machine rows (lines, components) | ≤ VA[MAX] | two MAX 4 A hatches (as MAX) |
-| Stage I big rows (refinery, slingshot, gate c16) | V[MAX] x 16-64 A (2^35-2^37) | one 1,024 A MAX+ hatch (`gtceu:max_maxplus_energy_hatch_1024a`, XP-F1) in our multiblocks; a gate row takes what the warp gate's pattern accepts |
-| Stage II-III rows (condensate assembler, blender, crystal furnace, creative items) | V[MAX] x 256 A (2^39) | one 1,024 A MAX+ hatch |
-| Hyperstargate dial | V[MAX] x 4,096 A (2^43 = 8,796,093,022,208 EU/t) for 1,200 t = 1.06e16 EU | four 1,024 A hatches, fed by wireless case 14 and the horizon capacitor bank (the mechanism is XP-W2's and XP-G1's) |
+| Machine rows (lines, components) | ≤ VA[MAX] | two MAX 4 A hatches (as MAX; the wireless ones draw on the network) |
+| Stage I big rows (refinery, slingshot, gate c16) | V[MAX] x 16-64 A (2^35-2^37) | one 1,024 A hatch in our multiblocks: the wireless MAX+ one (`gtceu:max_wireless_energy_hatch_1024a`, XP-W2) from the network, or XP-F1's `gtceu:max_maxplus_energy_hatch_1024a` on a cable; a gate row takes what the warp gate's pattern accepts |
+| Stage II-III rows (condensate assembler, blender, crystal furnace, creative items) | V[MAX] x 256 A (2^39) | one 1,024 A hatch, as above |
+| Hyperstargate dial | V[MAX] x 4,096 A (2^43 = 8,796,093,022,208 EU/t) for 1,200 t = 10,555,311,626,649,600 EU (1.06e16) | one 4,096 A wireless MAX+ hatch (`gtceu:max_wireless_energy_hatch_4096a`, XP-W2) in the base's one energy cell, drawing on the network's store, which the horizon capacitor bank holds (machine 15; S0-11) |
 
-**As built (batch 7):** GTM's 64 A substation hatches carry `SUBSTATION_INPUT_ENERGY`, which a multiblock's `energy_input` slot (`INPUT_ENERGY`) does not take: they serve GTM's power substation only. MAX+ machines therefore run on the 1,024 A hatch (S0-2), and the substation rows below describe the spike, not the build.
+**One feeding path (XP-D1).** Every MAX+ row takes its EU through an `energy_input` cell (`INPUT_ENERGY`). GTM's 64 A substation hatches carry `SUBSTATION_INPUT_ENERGY`, which that cell does not take (batch 7): they serve GTM's power substation only and stay ingredients. The MAX+ feed is the pack's wireless network (case 14): XP-W2 registers wireless MAX+ energy hatches at 1,024 and 4,096 A, tier 14 only, from the `maxplusCaps` rows of `tables/wireless_energy.json` (no MAX+ row needs the 2,048 A row), with the wireless hatch builder of `lv/wireless_energy.js` (GTM's `EnergyHatchPartMachine`, `INPUT_ENERGY`). Every MAX+ multiblock's energy cell takes them, and the settlement fills them like any MAX wireless hatch, while the network's tier is 14 (its weakest cell a MAX one).
 
-A 64 A substation hatch buffers V x 16 x 64 = 2^41 EU, a long (EnergyHatchPartMachine.java:54-60). The multiblock's total input is the sum of its hatches; whether GTM's recipe check accepts EU/t far above V[MAX] on 64 hatches is S0-1 (MAX's c3 at 2^35 on two 16 A hatches is the as-built precedent, `server_scripts/grindless/max/shell.js:38`). **Fallback:** the dial at 2^39 on four hatches for 19,200 t, the same energy; open question 6 asks whether that time is acceptable, since rule 2 forbids inflating time in place of cost (here time grows only because power cannot).
+**The dial's hatch.** One 4,096 A wireless hatch buffers V x 16 x 4,096 = 2^47 EU, 16 ticks of the dial. Every settlement (10 ticks) tops it up by at most V x 4,096 x 10 = 87,960,930,222,080 EU (the 4,096 A `maxplusCaps` row), exactly what the dial draws in 10 ticks, so a full hatch swings between 16 and 6 ticks of charge for as long as the store lasts. Four 1,024 A hatches carry the same 2^43, but GTM draws a row's EU/t from its hatches in order and each refills by at most its own cap, so in steady state they keep 1.5 ticks in hand against the single hatch's 6, in four cells instead of one. S0-11 (`docs/research/maxplus-s0.md`) proved the path on the pack's own settlement: one 4,096 A wireless hatch, registered as XP-W2 will, in an `energy_input` cell ran a 2^43 EU/t row for all 60 of its ticks at exactly 2^43 a tick; the steady settlements handed out exactly the cap, the hatch never read below 6 ticks (52,776,558,133,248 EU), and store, hatch, draws and settlements balanced to the EU as exact longs.
 
-**Custom high-amp hatches** (256 A, 1,024 A) would need a KubeJS part-machine builder for `EnergyHatchPartMachine` with a new amperage; S0-2 tests it. If it works, XP-F1 registers `grindless:maxplus_energy_hatch_1024a` and the dial needs four, not 64.
+**The store.** When the dial starts, the network must hold its 1,200 ticks: 10,555,311,626,649,600 EU, more than 2^53 = 9,007,199,254,740,992, the largest whole number a JS double holds exactly. The settlement keeps its store as a double (`server_scripts/grindless/lv/wireless_energy.js:208-214`, `:406-457`) and the block list checks its long fields against 2^53 - 1 (`server_scripts/grindless/lib/wireless_registry.js:33`, `:52`), so XP-W2 makes both exact: the store becomes a `java.math.BigInteger` (GTNH's wireless network keeps its store that way, `WirelessNetworkManager`; GTM's power substation totals its bank with one), written back with `putLong(big.longValue())`, which S0-11 showed keeps 2^53 + 1 exact where `Number(getLong(...))` rounds it to 2^53. Amounts per block stay doubles: the largest, a 4,096 A hatch's buffer, is 2^47. The horizon capacitor bank (machine 15) holds the dial's charge, and the dial starts only on a full one (*The Hyperstargate*, the dial row).
+
+**No fallback.** The 2^39 x 19,200 t fallback of open question 6 is retired: power, not cost, limits the dial, and it limits only how often the gate can dial (the bank's recharge, *Power*), never the dial's 1,200 ticks.
 
 **Hull.** MAX+ machines use GTM's `gtceu:max_machine_hull` with a MAX+ casing (`grindless:horizon_machine_casing`: MAX casing + 4 `horizon_compressed_plate` + 2 `gtceu:kerr_strand_single_cable`). There is no MAX+ hull id: GTM's builder key is the base id and a second hull at the same tier crashes the boot (DECISIONS.md:526).
 
@@ -203,9 +204,7 @@ Format as in max.md, shortened: gains, recipes, byproducts, structure, crossings
 
 ### 5. Pair-instability crucible (30 Doradus)
 
-**Gains.** Stars above about 140 solar masses end in pair-instability explosions that make up to tens of solar masses of nickel-56 (Heger and Woosley 2002, ApJ 567:532; SN 2007bi, Gal-Yam 2009, Nature 462:624). The crucible forces that burning on lifted core plasma in a magnetic pinch (*named fiction*): the only source of 
-i56_slug`. **Recipes.** c1 `confined_vms_plasma` → 
-i56_slug` + `ime_ash`; V[MAX] x 16 A, 1,200 t; liner (P21) worn 1/16. **Byproducts.** `ime_ash` → P8 (silicon, sulfur, calcium, argon back). **Structure.** 15 x 15 x 15 sphere of `grindless:crucible_liner_casing`. **Crossings.** P6, P8, P21. **Source.** Heger and Woosley 2002; Gal-Yam 2009.
+**Gains.** Stars above about 140 solar masses end in pair-instability explosions that make up to tens of solar masses of nickel-56 (Heger and Woosley 2002, ApJ 567:532; SN 2007bi, Gal-Yam 2009, Nature 462:624). The crucible forces that burning on lifted core plasma in a magnetic pinch (*named fiction*): the only source of `ni56_slug`. **Recipes.** c1 `confined_vms_plasma` → `ni56_slug` + `ime_ash`; V[MAX] x 16 A, 1,200 t; liner (P21) worn 1/16. **Byproducts.** `ime_ash` → P8 (silicon, sulfur, calcium, argon back). **Structure.** 15 x 15 x 15 sphere of `grindless:crucible_liner_casing`. **Crossings.** P6, P8, P21. **Source.** Heger and Woosley 2002; Gal-Yam 2009.
 
 ### 6. Nickel-56 burner (30 Doradus, generator)
 
@@ -245,7 +244,7 @@ i56_slug` + `ime_ash`; V[MAX] x 16 A, 1,200 t; liner (P21) worn 1/16. **Byproduc
 
 ### 15. Horizon capacitor bank (Sgr A\* orbit)
 
-**Gains.** The dial needs 1.06e16 EU in 1,200 ticks; case 14 holds caps of V x A x 10 (max.md *Power*), far below that. The bank is a superconducting magnetic storage ring of `horizon_capacitor` (T14) blocks, discharged into the dial through the base's 64 hatches. Storage only: it makes no energy (rule 8). **Structure.** 25 x 5 x 25 ring of 40 capacitors. **Crossings.** T14.
+**Gains.** The dial draws 10,555,311,626,649,600 EU (1,200 ticks at 2^43) through one wireless hatch, and the network must hold all of it when the dial starts: the bank holds it. It is a superconducting magnetic storage ring of `grindless:horizon_capacitor` (T14) blocks, each 2^48 = 281,474,976,710,656 EU *(tune)*: 32 ticks of the dial, about 4.4 MAX SMES cells in one slot. Like the Wireless Energy Tower it is a network store, not a machine with hatches: formed at Sgr A\* orbit (it counts nowhere else: the gate's site), its capacitors add their capacity to the network at tier 14 (MAX voltage, so it never lowers the network's tier); EU comes in from the network's generators, 5% lost on the way in, and leaves through wireless hatches. Horizon capacitors fit no tower, and towers do not count for the dial: the dial starts only when the formed banks have at least one dial of capacity and the store holds the dial's charge (*The Hyperstargate*, the dial row). Storage only: it makes no energy (rule 8; *Power* says what charges it and how fast). **Structure.** 25 x 5 x 25 ring of 40 capacitor slots *(tune)*, each a capacitor or the casing (an empty slot, as in the tower). **Capacity.** 40 x 2^48 = 11,258,999,068,426,240 EU = 1,280 ticks of the dial: one dial and 80 ticks (6.7%) for the rest of the base while it runs. **Crossings.** T14 (the toroids) and P18 (the fault-current limiters), through the capacitor's grid craft.
 
 ### 16. Hyper assembly array (home)
 
@@ -282,7 +281,7 @@ Rows are added to each machine's own table by the named package, at a circuit re
 
 ## Power
 
-Generous, never free (rule 8). MAX+ needs a sustained supply in the 2^37-2^39 EU/t range and one 1.06e16 EU discharge.
+Generous, never free (rule 8). MAX+ needs a sustained supply in the 2^37-2^39 EU/t range and, for each dial, one 1.06e16 EU discharge held in the horizon capacitor bank.
 
 | Generator | Place | Fuel | Output | Balance |
 |---|---|---|---|---|
@@ -290,7 +289,13 @@ Generous, never free (rule 8). MAX+ needs a sustained supply in the 2^37-2^39 EU
 | Primordial fusion torus | Magellanic Stream | primordial D + pristine He-3 (P9, P10) | 2^34 EU/t x 2,400 t | ~2.0x *(tune)* |
 | MAX's Sgr A\* generators (winch, feeder, BZ, Penrose, shell vent) | Sgr A\* | as max.md *Power* | 2^29-2^30 each, in parallel | as MAX |
 
-Output above 2^30 per generator is S0-4 (MAX kept every generator at 2^30 through OpV dynamos). Fallback: several generators at 2^30 each. Everything reaches the gate through wireless case 14 and the capacitor bank. `gtceu:creative_energy` is never a source: it is an ingredient and cannot be placed (*Creative items*).
+**Output.** A generator multiblock emits above 2^30, up to its dynamo hatch's V x A (S0-4): the burner and the torus at 2^34 each take one MAX 16 A dynamo hatch (V x A = 2^35), and the wireless one (`gtceu:max_wireless_dynamo_hatch_16a`, case 14) puts that straight into the network.
+
+**One path, generator to gate.** Generators → MAX wireless dynamo hatches → the network's store, 5% lost on the way in (`tables/wireless_energy.json` `loss`, 19/20) → held by the horizon capacitor bank (machine 15) → one 4,096 A wireless MAX+ hatch → the dial (*Voltages, hull, hatches and controllers*). Storage makes nothing: every EU the dial spends was generated first, and a twentieth more was lost on the way in.
+
+**One dial's charge.** 10,555,311,626,649,600 EU in the store takes 10,555,311,626,649,600 x 20/19 ≈ 1.111e16 EU generated: about 90 nickel-56 casks through the burner (c1 then c2, 1.237e14 EU each) or 270 torus runs (4.123e13 EU each; 270,000 mB each of primordial deuterium and pristine helium-3) *(tune with the balance)*. Filling an empty bank takes about 1.185e16 EU generated.
+
+**Recharge time.** Power, not cost, sets how often the gate can dial. The dial spends in 1,200 ticks what a 2^39 EU/t plant (32 primordial fusion tori) makes in 19,200 ticks; with the loss, that plant refills the bank for one dial in about 20,211 ticks (16.8 minutes), a 2^40 plant in about 10,105 ticks (8.4 minutes), one burner alone (1.5 x 2^33 EU/t on average) in about 12 hours. The dial's own 1,200 ticks never stretch, and no recipe time is inflated. MAX's Sgr A\* generators add to the same store. `gtceu:creative_energy` is never a source: it is an ingredient and cannot be placed (*Creative items*).
 
 ## AE2
 
@@ -310,13 +315,11 @@ Each step is a real transformation; a line counts with at least 4 transformation
 | # | Line | Steps (machine → product) | Steps | Cr | Package |
 |---|---|---|---|---|---|
 | P1 | Kerr condensate | Kugelblitz forge (OpV, Cygnus) → `seed_wave_packet`; mirror shell c4 (MAX) → `kerr_condensate`; condensate refinery c1 → `settled_condensate`; superfluid He plant → `jacketed_condensate_cell` (the travel form) | 4 | 2 | XP-A1 |
-| P2 | Horizon-bound neutronium | neutron drip separator (UIV) → 
-eutronium_pellet`; megabar → `compressed_neutronium_core`; refinery c2 → `bound_neutronium_ingot`; bound-matter press c1 → `horizon_compressed_plate` | 4 | 2 | XP-A1 |
+| P2 | Horizon-bound neutronium | neutron drip separator (UIV) → `neutronium_pellet`; megabar → `compressed_neutronium_core`; refinery c2 → `bound_neutronium_ingot`; bound-matter press c1 → `horizon_compressed_plate` | 4 | 2 | XP-A1 |
 | P3 | Kerr strange alloy | strangelet vault (OpV) → `fed_strangelet`; levitation melter → `strange_alloy_charge`; refinery c3 → `kerr_strange_ingot`; press c2 → `kerr_strange_plate` | 4 | 2 | XP-A1 |
 | P4 | Kerr strand (MAX+ cable) | refinery c4 (on MAX horizon strand wire) → `kerr_clad_strand`; pasta draw bench (UXV, SGR) → `kerr_strand_wire`; MTJ (oxide interlayer) → `insulated_kerr_wire`; PBO plant → `kerr_braid_sleeve`; GTM assembler → `gtceu:kerr_strand_single_cable` | 5 | 3 | XP-A1 |
 | P5 | Bound degenerate billet | degenerate harvester (UEV, Sirius B) → `degenerate_matter_slug`; megabar → `degenerate_compact`; refinery c5 → `bound_degenerate_powder`; SPS → `bound_degenerate_billet` | 4 | 3 | XP-A1 |
-| P6 | Very-massive-star plasma | stellar lift c1 → `raw_vms_plasma`; plasma mass filter (30 Dor row) → `vms_core_plasma`; FRC former (30 Dor row) → `confined_vms_plasma`; crucible c1 → 
-i56_slug` + `ime_ash` | 4 | 2 | XP-B1 |
+| P6 | Very-massive-star plasma | stellar lift c1 → `raw_vms_plasma`; plasma mass filter (30 Dor row) → `vms_core_plasma`; FRC former (30 Dor row) → `confined_vms_plasma`; crucible c1 → `ni56_slug` + `ime_ash` | 4 | 2 | XP-B1 |
 | P7 | Nickel-56 cask | GTM canner (+ `chain_lamina_stack`) → `canned_ni56`; hot cell → `shielded_ni56_cask`; burner c1 → EU + `co56_cask`; burner c2 → EU + `spent_fe56_cask` | 4 | 1 | XP-B1 |
 | P8 | Ime ash return | crucible c1 → `ime_ash`; extraction cascade → `ime_leach_fractions`; GTM electric blast furnace → `recovered_silicon`; zone refining → `electronic_grade_silicon` (into older lines) | 4 | 2 | XP-B1 |
 | P9 | Primordial deuterium (Cooke 2018) | gas works c1 → `pristine_gas`; cryogenic plant → `liquid_pristine_hydrogen`; GTM distillation tower → `hd_fraction`; calutron → `primordial_deuterium` | 4 | 2 | XP-B2 |
@@ -324,21 +327,15 @@ i56_slug` + `ime_ash` | 4 | 2 | XP-B1 |
 | P11 | Direct converter (Moir and Barr 1973) | extraction cascade → `molybdenum_oxide`; GTM electric blast furnace (hydrogen reduction) → `mo_powder`; SPS → `mo_grid_billet`; EB furnace → `refined_mo_grid`; GTM assembler → `direct_converter_stack` | 5 | 3 | XP-B2 |
 | P12 | p-process plasma (Arnould and Goriely 2003) | calutron → `enriched_mo_target`; blueshift forge c1 → `photonuclear_mix`; extraction cascade → `p_nuclide_concentrate`; stellar forge → `p_process_plasma` | 4 | 3 | XP-B3 |
 | P13 | Deep horizon tether | tether ribbon works (on P4 wire) → `kerr_ribbon`; stellar elevator (UXV, Cygnus) → `proof_loaded_kerr_ribbon`; GTM chemical bath (+ condensate) → `bound_coated_ribbon`; GTM autoclave → `cured_bound_ribbon`; GTM assembler → `deep_horizon_tether` | 5 | 2 | XP-B3 |
-| P14 | Void-grown diamond | diamond lattice fab → `c12_seed_plate`; void crystal fab c1 → `void_grown_diamond`; ion implanter → 
-v_engineered_diamond`; femto writer → `void_crystal_lattice` | 4 | 3 | XP-B4 |
-| P15 | Slingshot counterweight | debris harvester (OpV, NSC belt) → 
-sc_planetesimal`; cluster-light furnace (MAX) → `metal_rich_bloom`; megabar → `dense_counterweight_core`; GTM canner → `canned_counterweight` | 4 | 2 | XP-T1 |
+| P14 | Void-grown diamond | diamond lattice fab → `c12_seed_plate`; void crystal fab c1 → `void_grown_diamond`; ion implanter → `nv_engineered_diamond`; femto writer → `void_crystal_lattice` | 4 | 3 | XP-B4 |
+| P15 | Slingshot counterweight | debris harvester (OpV, NSC belt) → `nsc_planetesimal`; cluster-light furnace (MAX) → `metal_rich_bloom`; megabar → `dense_counterweight_core`; GTM canner → `canned_counterweight` | 4 | 2 | XP-T1 |
 | P16 | Intergalactic relay probe | replication refinery (OpV) → `probe_seed`; Kugelblitz forge (OpV) → `hawking_drive`; clock lab → `thorium_nav_clock`; photonic foundry → `optical_nav_core`; GTM assembly line → `ig_relay_probe` | 5 | 4 | XP-T1 |
 | P17 | sCO2 turbine module | single crystal foundry → `sx_turbine_blade`; EB furnace → `tbc_coated_blade`; SPS → `turbine_disc`; hot strip mill → `pche_recuperator_foil`; GTM assembler → `sco2_turbine_module` | 5 | 4 | XP-B1 |
 | P18 | Kerr fault-current limiter | GTM bender → `fcl_substrate_strip`; coated conductor → `kerr_fcl_buffer_tape`; oxide PLD → `thick_kerr_fcl_tape`; HTS works → `kerr_fcl_coil`; He refrigerator → `cold_kerr_fcl` (→ the 1,024 A hatch row, capacitor bank; the MAX 64 A substation hatches keep MAX's rows) | 5 | 4 | XP-W |
-| P19 | Kerr gyroscope (Everitt 2011, PRL 106:221101) | zone refining → `fused_quartz_sphere_blank`; GTM lathe (lapped to Gravity Probe B sphericity) → `lapped_quartz_sphere`; MTJ → 
-b_coated_sphere`; SHeQUID → `calibrated_gyro`; superfluid He plant → `cold_kerr_gyro` (→ chevron upgrade) | 5 | 4 | XP-H4 |
-| P20 | Lift nozzle coil | CVI → `sic_nozzle_former`; coated conductor → 
-ozzle_tape`; HTS works → 
-ozzle_winding`; GTM chemical reactor (impregnation) → `impregnated_nozzle`; He refrigerator → `vms_lift_nozzle` | 5 | 4 | XP-B1 |
+| P19 | Kerr gyroscope (Everitt 2011, PRL 106:221101) | zone refining → `fused_quartz_sphere_blank`; GTM lathe (lapped to Gravity Probe B sphericity) → `lapped_quartz_sphere`; MTJ → `nb_coated_sphere`; SHeQUID → `calibrated_gyro`; superfluid He plant → `cold_kerr_gyro` (→ chevron upgrade) | 5 | 4 | XP-H4 |
+| P20 | Lift nozzle coil | CVI → `sic_nozzle_former`; coated conductor → `nozzle_tape`; HTS works → `nozzle_winding`; GTM chemical reactor (impregnation) → `impregnated_nozzle`; He refrigerator → `vms_lift_nozzle` | 5 | 4 | XP-B1 |
 | P21 | Crucible liner | CVI (on P5 billet) → `infiltrated_liner`; EB furnace → `sealed_liner`; megabar → `densified_liner`; GTM lathe → `crucible_liner` | 4 | 3 | XP-B1 |
-| P22 | Neutral beam injector | extraction cascade → `caesium_chloride`; zone refining → `six_n_caesium`; SRF works → `rfq_cavity`; jet beam line (OpV) → `beam_neutraliser`; GTM assembler → 
-eutral_beam_injector` | 5 | 4 | XP-B2 |
+| P22 | Neutral beam injector | extraction cascade → `caesium_chloride`; zone refining → `six_n_caesium`; SRF works → `rfq_cavity`; jet beam line (OpV) → `beam_neutraliser`; GTM assembler → `neutral_beam_injector` | 5 | 4 | XP-B2 |
 | P23 | Magnetic scoop | PBO plant (chain strand braid) → `scoop_web`; field press (OpV, SGR) → `field_frozen_hoop`; MTJ → `insulated_hoop`; HTS works → `scoop_coil`; He refrigerator → `cold_scoop_coil`; GTM assembler → `magnetic_scoop_module` | 6 | 5 | XP-B2 |
 | P24 | Beryllium gamma window | extraction cascade → `beryllium_hydroxide`; GTM electric blast furnace → `be_pebbles`; levitation melter → `be_ingot`; hot strip mill → `be_foil`; MTJ → `coated_be_window` | 5 | 4 | XP-B3 |
 | P25 | Helium-4 supply | plasma mass filter (30 Dor) → `he_rich_fraction`; cryogenic plant → `liquid_helium_4`; superfluid He plant → `superfluid_helium_4`; GTM canner → `he4_dewar` (→ condensate assembler) | 4 | 3 | XP-H3 |
@@ -346,16 +343,14 @@ eutral_beam_injector` | 5 | 4 | XP-B2 |
 | T2 | Chevron core | BEUV → `zone_plate_wafer`; MTJ → `multilayer_xray_mirror`; gamma optics works (OpV) → `gamma_focus_element`; condensate assembler c2 → `chevron_core` | 4 | 3 | XP-H3 |
 | T3 | Horizon mesh | PBO plant (P4 wire) → `kerr_mesh_preform`; CVI → `infiltrated_mesh`; EB furnace → `coated_mesh`; condensate assembler c3 → `horizon_mesh` | 4 | 3 | XP-H3 |
 | T4 | Horizon shielding | ZPM's europium line (c7) → `gtceu:gadolinium_oxide_dust`; SPS → `gd_hfb2_cermet`; press c4 → `graded_horizon_laminate`; loom c1 → `horizon_shielding` | 4 | 2 | XP-H1 |
-| T5 | Horizon waveguide | CVI → `sic_waveguide_tube`; GTM chemical bath (electropolish) → `polished_waveguide_tube`; MTJ → 
-b_lined_tube`; loom c2 (+ kerr strand) → `horizon_waveguide`; mK cryostat → `cold_horizon_waveguide` | 5 | 3 | XP-H1 |
+| T5 | Horizon waveguide | CVI → `sic_waveguide_tube`; GTM chemical bath (electropolish) → `polished_waveguide_tube`; MTJ → `nb_lined_tube`; loom c2 (+ kerr strand) → `horizon_waveguide`; mK cryostat → `cold_horizon_waveguide` | 5 | 3 | XP-H1 |
 | T6 | Horizon conduit | coated conductor → `conduit_tape`; oxide PLD → `thick_conduit_tape`; HTS works → `cabled_conductor`; loom c3 → `horizon_conduit`; He refrigerator → `cold_horizon_conduit` | 5 | 4 | XP-H1 |
 | T7 | Horizon valve | GTM chemical reactor (TEOS sol-gel) → `condensate_alcogel`; aerogel works → `condensate_superleak_plug`; SHeQUID → `calibrated_condensate_leak`; loom c4 → `horizon_valve_body`; SHeQUID c12 (the superfluid He plant has no item slots) → `horizon_valve` | 5 | 3 | XP-H1 |
 | T8 | Horizon crystal slurry | stellar forge → `stellar_plasma`; stellar elevator (Cygnus) → `lifted_stellar_plasma`; plasma mass filter → `filtered_stellar_plasma`; blender c1 (+ P6, P12, jet plasma, hot flow, condensate) → `horizon_crystal_slurry` | 4 | 3 | XP-H2 |
 | T9 | Horizon core crystal | crystal growth → `sapphire_seed_plate`; refinery c6 → `condensate_doped_dust`; crystal furnace c1 (+ slurry) → `core_crystal_boule`; femto writer → `inscribed_core_crystal`; mK cryostat → `horizon_core_crystal` | 5 | 3 | XP-H2 |
 | T10 | Controller crystal | levitation melter (P3 ingot) → `molten_kerr_strange`; crystal growth → `controller_seed`; crystal furnace c2 → `controller_crystal_boule`; BEUV → `horizon_controller_crystal` | 4 | 3 | XP-H2 |
 | T11 | Iris blade | single crystal foundry (P3 plate) → `oriented_blade_blank`; megabar → `densified_blade`; GTM lathe → `edged_blade`; EB furnace → `coated_iris_blade`; hyper assembly array → `iris_blade` | 5 | 3 | XP-H4 |
-| T12 | Alignment matrix | clock lab → 
-uclear_clock_reference`; photonic foundry → `optical_frequency_divider`; TFLN → `phase_modulator_chip`; femto writer (on P14 lattice) → `inscribed_reference_crystal`; mK cryostat → `cold_reference_assembly`; hyper assembly array → `horizon_alignment_matrix` | 6 | 5 | XP-H4 |
+| T12 | Alignment matrix | clock lab → `nuclear_clock_reference`; photonic foundry → `optical_frequency_divider`; TFLN → `phase_modulator_chip`; femto writer (on P14 lattice) → `inscribed_reference_crystal`; mK cryostat → `cold_reference_assembly`; hyper assembly array → `horizon_alignment_matrix` | 6 | 5 | XP-H4 |
 | T13 | Resonance chamber | CVI → `sic_chamber_flange`; SRF works → `large_resonance_cell`; GTM chemical bath → `polished_resonance_cell`; MTJ → `coated_resonance_cell`; mK cryostat → `resonance_chamber` (→ power units) | 5 | 4 | XP-H4 |
 | T14 | Kerr SMES toroid | oxide PLD (on P4 strand) → `kerr_coated_tape`; HTS works → `kerr_smes_winding`; GTM chemical reactor (vacuum impregnation) → `impregnated_kerr_winding`; magnet works → `braced_kerr_toroid`; He refrigerator → `cold_kerr_toroid` (→ `horizon_capacitor`) | 5 | 4 | XP-H3 |
 | T15 | Flux absorber casing | nitride magnet works → `fe16n2_absorber_ring`; hot strip mill → `laminated_absorber_sheet`; GTM chemical bath (insulating coat) → `coated_absorber_sheet`; HTS works → `shielded_absorber`; He refrigerator → `flux_absorber_casing` | 5 | 4 | XP-H3 |
@@ -365,8 +360,7 @@ uclear_clock_reference`; photonic foundry → `optical_frequency_divider`; TFLN 
 | C2 | Bound-matter rotor (motor, pump) | SHeQUID (on P5 billet) → `balanced_bound_billet`; GTM lathe → `bound_rotor_blank`; MTJ → `wear_coated_rotor`; GTM forming press → `bound_matter_rotor` | 4 | 2 | XP-A2 |
 | C3 | Photonic engine (emitter) | diamond lattice fab → `c12_photonic_plate`; TFLN → `ln_on_diamond`; MOCVD → `gan_laser_array`; BEUV → `patterned_engine_wafer`; photonic foundry → `horizon_photonic_engine` | 5 | 5 | XP-A2 |
 | C4 | Phase sensor core (sensor) | SNSPD foundry → `snspd_array_die`; BEUV → `readout_wafer`; GTM cutter → `readout_die`; mK cryostat → `cold_snspd_module`; photonic foundry → `horizon_phase_sensor_core` | 5 | 4 | XP-A2 |
-| C5 | Condensate field cell (field generator) | SRF works → `confinement_cavity`; MTJ → 
-b_coated_cavity`; refinery c7 → `condensate_loaded_cavity`; GTM canner (seal) → `sealed_field_cavity`; mK cryostat → `condensate_field_cell` | 5 | 3 | XP-A2 |
+| C5 | Condensate field cell (field generator) | SRF works → `confinement_cavity`; MTJ → `nb_coated_cavity`; refinery c7 → `condensate_loaded_cavity`; GTM canner (seal) → `sealed_field_cavity`; mK cryostat → `condensate_field_cell` | 5 | 3 | XP-A2 |
 | C6 | Horizon belt (conveyor) | PBO plant (P4 wire) → `kerr_braided_web`; GTM chemical bath (primer) → `primed_kerr_web`; EB furnace → `refractory_coated_web`; membrane line (MAX) → `horizon_belt` | 4 | 2 | XP-A2 |
 | C7 | PMN-PT actuator (piston) | extraction cascade → `pmn_precursor_oxides`; crystal growth → `pmn_pt_boule`; GTM cutter → `pmn_pt_plate`; MTJ → `electroded_pmn_stack`; GTM assembler → `horizon_actuator_stack` | 5 | 3 | XP-A2 |
 | Q1 | Horizon logic die | calutron → `si28_feed`; crystal growth → `si28_boule`; BEUV → `horizon_logic_wafer`; MTJ → `spin_interconnect_wafer`; racetrack fab → `stacked_logic_wafer`; GTM cutter → `horizon_logic_die` | 6 | 5 | XP-A3 |
@@ -421,7 +415,7 @@ Recomputed from the *Lines* table by machine name (RF-7A; the integrator re-sums
 
 **Model.** The GTNH Stargate process (docs/research/gtnh-stargate.md sections 2-5; ideas and numbers only, section 8) at about 10x in crafts, parts and recipe types (section 7.1; DECISIONS.md:704), never in recipe time, on MAX amperage only. GTNH gives the shape: grid crafts fed by a condensate assembler, a plasma mixer and a crystal furnace, on top of superdense plates and exotic matter. Every step here is a GTM recipe on one of our multiblocks, fed by AE2: automatable and scalable.
 
-**Structure** (Sgr A\* orbit, about 45 x 45 x 9 *(tune)*, needs MAX_ROWS 64 as the shell; S0-8): a vertical ring of 160 `hyperstargate_ring_block` and 9 `hyperstargate_chevron_block`; the base below it with the 64 substation hatches, 4 `hyperstargate_power_unit` and the `horizon_iris`; the controller at the base holds one `horizon_lock` as its dial. The horizon capacitor bank (machine 15) stands beside it.
+**Structure** (Sgr A\* orbit, about 45 x 45 x 9 *(tune)*, needs MAX_ROWS 64 as the shell; S0-8): a vertical ring of 160 `hyperstargate_ring_block` and 9 `hyperstargate_chevron_block`; the base below it with one energy cell (`energy_input`, exactly one) for the 4,096 A wireless MAX+ hatch, 4 `hyperstargate_power_unit` and the `horizon_iris`; the controller at the base holds one `horizon_lock` as its dial. The horizon capacitor bank (machine 15) stands beside it at Sgr A\* orbit and holds the dial's charge on the network.
 
 **The grid layer** (hyper assembly array; counts from the structure and recipe multipliers *(tune)*):
 
@@ -434,7 +428,7 @@ Recomputed from the *Lines* table by machine name (RF-7A; the integrator re-sums
 | Horizon iris | 1 | — | 1 | 240 blades, 12 shielding, 12 condensate field cell |
 | Horizon capacitor | 40 (bank) | — | 40 | 4 `cold_kerr_toroid` (T14), 4 field generator, 2 `cold_kerr_fcl` (P18), 1 `ae2:creative_energy_cell` |
 | Power unit | 4 | — | 4 | 16 ring block, 8 resonance chamber (T13), 10 conduit x 64, 1 `gtceu:creative_energy` |
-| Base | 1 | — | 1 | 27 chevron blocks, 144 ring blocks, 36 upgrades, 4 alignment matrix (T12), 1 `gtceu:creative_chest`, 1 `gtceu:creative_tank`, 1 MEGA 256M item cell, 1 MEGA 256M fluid cell, 64 MAX 64 A substation hatches |
+| Base | 1 | — | 1 | 27 chevron blocks, 144 ring blocks, 36 upgrades, 4 alignment matrix (T12), 1 `gtceu:creative_chest`, 1 `gtceu:creative_tank`, 1 MEGA 256M item cell, 1 MEGA 256M fluid cell, 4 `gtceu:max_maxplus_energy_hatch_1024a` (the power units' couplers: the 4,096 A the 64 substation hatches carried, at MAX+ cost) |
 | Controller | 1 | — | 1 | 8 ring block, 1 `horizon_controller_crystal`, 1 `gtceu:creative_computation_provider`, 16 `horizon_processor`, 1 interface |
 | Interface | — | controller 1 | 1 | 8 ring block, 1 `gtceu:creative_data_access_hatch`, 4 `horizon_comm_terminal` (T17), 64 `pattern_memory_unit` |
 | **Total** | | | **1,212** | GTNH: about 140 (section 5); x8.7 |
@@ -458,9 +452,11 @@ Recomputed from the *Lines* table by machine name (RF-7A; the integrator re-sums
 
 **Infrastructure** (GTNH section 4 mapping, section 7.3): AE2 extreme crafting → the hyper assembly array; BEC assembler → condensate assembler (no nanite or slowdown system); transcendent plasma mixer → multi-plasma blender; crystal blast furnace → horizon crystal furnace (no two-week runs); BHC superdense plates → bound-matter press; Eye of Harmony and Godforge matter → condensate refinery and the MAX+ places; creative capacitor bank → *Creative items*.
 
-**Power and time.** Building rows run at 2^35-2^39 EU/t for 600-2,400 t. The dial row: V[MAX] x 4,096 A (2^43) for 1,200 t = 1.06e16 EU, about 256 times MAX's last recipe, from the capacitor bank and case 14. Time is never the cost: with parallels on the Hyperfactory and several condensate assemblers, the critical path is set by condensate output and AE2 throughput, not by tick counts.
+**Power and time.** Building rows run at 2^35-2^39 EU/t for 600-2,400 t. The dial row: V[MAX] x 4,096 A (2^43) for 1,200 t = 10,555,311,626,649,600 EU (1.06e16), about 256 times MAX's last recipe, through one 4,096 A wireless hatch from the network's store, which the horizon capacitor bank holds; a 2^39 EU/t plant recharges it for the next dial in about 20,211 ticks (*Power*). Time is never the cost: with parallels on the Hyperfactory and several condensate assemblers, the critical path is set by condensate output and AE2 throughput, not by tick counts.
 
 **The dial row.** Controller c1: 1 `genome_archive` (MAX gene ark: the one thing that crosses with the player) + 1 `cloud_phase_map` (MAX machine 11) + 16 `horizon_phase_lock` + 64 `jacketed_condensate_cell` + the kept `horizon_lock` → the gate opens for 1,200 ticks and outputs `spent_dial_charge` (→ refinery recharge row). Repeatable: each opening needs a new archive and charge, so a second player or a second crossing pays again.
+
+**The dial's power (XP-G1).** The row runs at `GTValues.V[GTValues.MAX] * 4096` EU/t (a long) on the 4,096 A wireless hatch, as written: no overclock, no parallels (IDENTITY). A run-start check (the `ev/cryogenic_plant.js` pattern with `lib/fresh_run.js`) lets it start only when the formed horizon capacitor banks on the network have at least 1,200 x 2^43 EU of capacity and the store holds 1,200 x 2^43 EU less what the hatch already holds, so a dial never starts on a charge it cannot finish. Other draws on the network during its 1,200 ticks come out of the same store; the bank's 80 spare ticks are their margin.
 
 ## Quests
 
@@ -500,7 +496,7 @@ XP-C1 adds `tools/analysis/tiers/maxplus.json` and `-Tier maxplus` as a pseudo-t
 
 ## Risks
 
-- **Huge amperage (S0-1, S0-2).** Whether a recipe far above V[MAX] runs on 64 substation hatches is unproven. Fallback: the dial at 2^39 for 19,200 t, the same energy (open question 6).
+- **Huge amperage (S0-1, S0-2, S0-11).** Settled for the dial (XP-D1): one 4,096 A wireless MAX+ hatch carries 2^43 from the capacitor bank's store, and big rows run on 1,024 A MAX+ hatches. Open until XP-W2's T1: a 1,200 t dial with the store above 2^53 (the store becomes a BigInteger), and other draws sharing the store during a dial (80-tick margin).
 - **Generators above 2^30 (S0-4).** Fallback: more generators at 2^30.
 - **Server cost.** The Hyperstargate (about 45 x 45 x 9) and the 33-cube shell in one dimension; the hyper assembly array's 81 buses. S0-8 measures structure checks; AE2 crafting plans of 1e9 items need the CPU sizes of *AE2*.
 - **Creative items as blocks.** A missed placement path would let one run as a source. S0-7 covers block placement and AE2 drives; XP-C1 checks no recipe outputs them except the six rows.
@@ -593,15 +589,18 @@ Serial: `lib/` (XP-M1), `tables/gate.json` (XP-T1 then XP-T2), the integrator fi
 | S0-8 | Does a 45 x 45 x 9 structure with 64 hatches form and re-check within the tick budget beside the shell? | smaller ring, same craft counts |
 | S0-9 | Does a player tick check plus teleport into a datapack dimension work on a dedicated server? | a right-click key item at the open gate |
 | S0-10 | How large can the city's jigsaw structures be before generation stalls? | fewer, smaller districts |
+| S0-11 | Does one 4,096 A wireless MAX+ hatch in an `energy_input` cell carry 2^43 EU/t from the network store, exact as longs? | four 1,024 A wireless hatches |
 
 **Result (XP-S0a, `docs/research/maxplus-s0.md`).** S0-1 yes: 2^37, 2^39 and 2^43 EU/t run as longs on 1, 4 and 64 substation hatches, but 2^43 sits exactly on the 64 x V x A cap. S0-2 yes: a 1,024 A hatch (buffer 2^45) carries 2^41. S0-3 inconclusive: the cable properties are accepted, but no cable flowed in the overlay, controls included (fixture); keep the fallback. S0-4 yes: generators emit 2^33 to 2^41, capped by the dynamo hatch's V x A (2^35 on 16 A, 2^37 on 64 A, 2^41 on 1,024 A). S0-5 yes by reflection (`Java.extend` is unavailable); 4,194,304 copies run, capped at `floor(supply voltage / EU/t)`.
 
 **Result (XP-S0b, `docs/research/maxplus-s0-world.md`).** S0-6 yes: every id named here exists; GTM's widest MAX hatch is the 64 A substation hatch (S0-2's custom 1,024 A hatch is ours), and three more creative cells exist (`creative_item_cell`, `creative_fluid_cell`, AppFlux's `fe_creative_cell`), which XP-F2 hides. S0-7 no: a formation plane and a dispenser place every creative block without `BlockEvents.placed`, and AE2 drives refuse only the creative energy cell, so the fallback stands: the creative items are `grindless:` stand-ins that cannot be placed. S0-8 yes: the 45 x 45 x 9 ring with 64 hatches forms cold in 155 ms and re-checks in 74-85 ms; a raw block change does not re-check it, so the gate calls `checkPatternWithLock` itself. S0-9 yes on a dedicated server (106 ms, then about 6 ms a trip). S0-10 yes: plots up to 48 x 12 x 48, radius at most 128; no smaller fallback needed.
 
+**Result (XP-D1, `docs/research/maxplus-s0.md`).** S0-11 yes (run vm-20261101-165330-3c0627e7): a 4,096 A wireless MAX+ hatch registered with the wireless builder (tier 14, `INPUT_ENERGY`) forms in `energy_input`, buffers 2^47 and ran a 2^43 EU/t row for all 60 of its ticks at exactly 2^43 from a 1.0555e15 store; steady settlements hand out exactly the `maxplusCaps` cap and every value balances as an exact long. Still unproven until XP-W2's T1: a full 1,200 t run with the store above 2^53.
+
 ## Decisions proposed
 
 - 2026-11-01 MAX+ design (RF-7A): one era in three stages (out of the Galaxy; the Local Group; the Hyperstargate) with substages `maxplus`, `-lmc`, `-stream`, `-m31`, `-void`, `-gate`; four new GCYR places at tier 14 (30 Doradus, Magellanic Stream, M31 nucleus, Local Group filament); 17 multiblocks, 58 lines (265 steps), 185 crossings with OpV-and-older lines on 56 machines; the gap to the x1.5 line guide is stated, not padded.
-- 2026-11-01 MAX+ voltage: no tier above MAX (GTValues.java:60-61, :107-108; GTUtil.java:234-236); MAX+ rows are V[MAX] x amps: machine rows ≤ VA[MAX], big rows 2^35-2^39 on 64 A substation hatches, the dial 2^43 on 64 hatches (fallback 2^39 x 19,200 t).
+- 2026-11-01 MAX+ voltage: no tier above MAX (GTValues.java:60-61, :107-108; GTUtil.java:234-236); MAX+ rows are V[MAX] x amps: machine rows ≤ VA[MAX], big rows 2^35-2^39 on 1,024 A MAX+ hatches, the dial 2^43 on one 4,096 A wireless MAX+ hatch fed from the horizon capacitor bank (XP-D1, S0-11; the 64-hatch path and the 2^39 x 19,200 t fallback are retired).
 - 2026-11-01 MAX+ cost: x5 per stage on DECISIONS.md:708's row (894,070; 4,470,350; 22,351,750); each GTM creative block at least 1,000 stage III core indexes.
 - 2026-11-01 MAX+ travel: the Hills slingshot at Sgr A\* throws the first intergalactic probe (gate c16); warp gates c17-c19 hop from there.
 - 2026-11-01 MAX+ creative items: six kinds, 48 crafts, ingredients of the Hyperstargate only, never placeable outside creative mode; supersedes DECISIONS.md:102's "creative ending left out" for these items only; no game-mode change anywhere.
@@ -617,7 +616,7 @@ Serial: `lib/` (XP-M1), `tables/gate.json` (XP-T1 then XP-T2), the integrator fi
 3. **Cost per stage x5, or x5 for the whole era?** **Default: x5 per stage** (22,351,750 at stage III). If per era: stage III costs 894,070, only x5 of MAX, which the brief's "far beyond MAX" rules out.
 4. **Creative items placeable after the arrival?** **Default: never placeable outside creative mode.** If placeable after arrival: harmless to progression (the pack has ended) but a player could carry one home and run free energy, which rule 8 forbids while the world continues.
 5. **Can the player return through the gate, and does the dial repeat?** **Default: one-way; the dial repeats** with a new archive. If two-way: the final dimension becomes a place with a route home, which invites "using" it. If the dial runs once: a second player in the same world can never arrive.
-6. **If S0-1 fails, the dial at 2^39 for 19,200 t?** **Default: yes** (same energy; the time grows because power cannot, not in place of cost). If no: the dial needs custom hatches (S0-2) or wireless-only feeding, both untested.
+6. **If S0-1 fails, the dial at 2^39 for 19,200 t?** **Closed (XP-D1, S0-11): no fallback.** The dial draws 2^43 for 1,200 t through one 4,096 A wireless MAX+ hatch from the network store the horizon capacitor bank holds; power limits how often the gate dials, never the dial's time (*Voltages, hull, hatches and controllers*, *No fallback*).
 7. **The final dimension's name and title?** **Default: `grindless:horizon_city`, "Beyond the Horizon".** Any other is a rename before XP-F1 only.
 8. **Does MAX's genome archive cross with the player?** **Default: yes** (the dial consumes it; the epilogue names it). If no: the gene ark keeps no role after MAX (max.md machine 4) and needs one, or goes.
 9. **The ending text as written?** **Default: yes, owner edits welcome.** It states no fact about who built the cities.
