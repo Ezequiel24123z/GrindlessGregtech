@@ -181,6 +181,39 @@ test('skip route drops: a parallel source of an earlier production line', () => 
   assert.equal(skipRoute(l, 'gtceu:plate', facts, null, { earlier }), null);
 });
 
+test('skip route drops: an ore block of a material with no vein, a circular route, a parallel source at any node', () => {
+  // the ore block is not listed in the never group, only the material is
+  const ore = buildFacts([rec('b', 'gtceu:other', ['gtceu:tuff_nether_star_ore'], 'gtceu:plate')]);
+  const l = mkLine('ev', { steps: 4 });
+  assert.ok(skipRoute(l, 'gtceu:plate', ore));
+  assert.equal(skipRoute(l, 'gtceu:plate', ore, null, { never: new Set(['material:nether_star']) }), null);
+  assert.ok(skipRoute(l, 'gtceu:plate', ore, null, { never: new Set(['material:iron']) }));
+  // circular: a decolour route takes a stained variant that is made from the key itself
+  const loop = buildFacts([
+    rec('own', 'gtceu:mine', ['gtceu:ore'], 'gtceu:plate'),
+    rec('stain', 'minecraft:crafting_shaped', ['gtceu:sand', 'gtceu:plate'], 'gtceu:stained', { added: false }),
+    rec('clear', 'minecraft:crafting_shaped', ['gtceu:stained'], 'gtceu:plate', { added: false }),
+  ]);
+  assert.equal(skipRoute(l, 'gtceu:plate', loop), null);
+  const open = buildFacts([
+    rec('own', 'gtceu:mine', ['gtceu:ore'], 'gtceu:plate'),
+    rec('clear', 'minecraft:crafting_shaped', ['gtceu:stained'], 'gtceu:plate', { added: false }),
+  ]);
+  assert.ok(skipRoute(l, 'gtceu:plate', open));
+  // glass: the clear-glass tweak takes a shard that only breaking glass gives
+  const shard = buildFacts([
+    rec('own', 'gtceu:mine', ['gtceu:ore'], 'minecraft:glass'),
+    rec('clear', 'minecraft:crafting_shaped', ['quark:clear_shard'], 'minecraft:glass', { added: false }),
+  ]);
+  assert.equal(skipRoute(mkLine('steam', { steps: 4, products: [{ res: 'minecraft:glass' }] }), 'minecraft:glass', shard), null);
+  // parallel source: the earlier line makes the key at an inner node, not as its end product
+  const par = buildFacts([rec('b', 'gtceu:other', ['gtceu:sand'], 'gtceu:plate')]);
+  const earlier = [{ products: [{ res: 'gtceu:ingot' }], inner: new Set(['gtceu:plate']), machines: new Set(['gtceu:other']), raws: new Set(), ours: [], inners: new Set() }];
+  assert.ok(skipRoute(l, 'gtceu:plate', par));
+  assert.equal(skipRoute(l, 'gtceu:plate', par, null, { earlier }), null);
+  assert.ok(skipRoute(l, 'gtceu:plate', par, null, { earlier: [{ ...earlier[0], machines: new Set(['gtceu:else']) }] }));
+});
+
 test('tagProblems reports bad role, line, extends and keepShort', () => {
   const m = { chapters: [{ file: 'pl_ev', clusters: { a: { role: 'bogus', extends: 'pl_ev:zz' }, b: { line: 'L1', keepShort: ' ' } }, nodes: [n('x', 'item', 'k', [], { role: 'power', extends: 'pl_ev:a' })] }] };
   const p = tagProblems(m);
