@@ -18,11 +18,11 @@ hash = "973e6d6ed51916167e1c2248e14c8c8132629c4675204c3306d576debbaa435c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/hv_age.snbt"
-hash = "c52b68a161e82a366714a1afebccc0241dee0da5a325ffd6d05e86476f493819"
+hash = "1b99b383b2f3b6249be9e31f447498148a0a9e378cadab4dfc9830c8831f3311"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/iv_age.snbt"
-hash = "9ff4af6df46c5b44952cf9603ab25d118ec4dc7c74ef27691bc916df3ddb6f31"
+hash = "3b699f8ab0418da33aef31d2c607e65a7fb2f538379195518a39da2900ed5d89"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/luv_age.snbt"
@@ -30,7 +30,7 @@ hash = "e2945863796c13797edbf847dd7dff1b074cc8a12114ca0b7f3e218fd519c11a"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/lv_age.snbt"
-hash = "4316279bd5d50156936d2635bbbe2063e65b4b8f58b754ed918ad2de046320e5"
+hash = "d5d440d682594328af9cd67587a1c344a35a6b985527239ea12d6bacd7ef5550"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/max_age.snbt"
@@ -42,7 +42,7 @@ hash = "1def5720762625aaa718c62b8e902cb7af736e8bb6a55948b0cbe9476850bae4"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
-hash = "569976697675d7db44ba22e958f016fd15a4a8a2e4d329430734247b6a758513"
+hash = "261dd004740718059866e40c777d0237b7d17b07721f9471a8f506bc0415a162"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/opv_age.snbt"
@@ -118,7 +118,7 @@ hash = "5e53204937962d11d4ece09bff190ff8ceae53118a9f296bcefb4bf9173fbac3"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/steam_age.snbt"
-hash = "6a833ba723344916c935c4c31a72c14d64088a840d93ef7f08e4c4aab278cb9d"
+hash = "2867a4a3000d4b33404fbebea667106bf9f1c720a5afa1395071fecf3384e86e"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/storage.snbt"
