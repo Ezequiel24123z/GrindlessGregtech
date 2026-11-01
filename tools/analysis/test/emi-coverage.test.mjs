@@ -479,18 +479,21 @@ test('the fixture\'s integration hook arms the client half and acknowledges the 
 // one intermediate loses its uses, one route and one page go missing, and an unaudited item appears.
 function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = null, extraItem = null,
   warnings = [], missingWorkstation = false, missingPreview = false, missingProcess = false, reportError = false,
-  renderPreview = false, screenshotError = false, loaded = true, holdTimeoutSec, waitSeconds = 0, disabledTag = null, xeiPreview } = {}) {
+  renderPreview = false, screenshotError = false, loaded = true, holdTimeoutSec, waitSeconds = 0, disabledTag = null, xeiPreview, indexGap = null, previewIdClash = false } = {}) {
   const recipes = [];
   const rec = (id, cat, ins, outs) => recipes.push({ id, cat, ins: new Set(ins), outs: new Set(outs) });
   let n = 0;
   for (const e of exp.items) {
     if (e.needMade && e.made.length === 0) rec('sim:r' + n++, 'sim:acquisition', [], [e.id]);
     if (e.needUse && e.used.length === 0 && e.id !== dropUsesOf) rec('sim:r' + n++, 'sim:use', [e.id], []);
-    for (const cat of e.made) if (!(dropRoute && dropRoute.id === e.id && dropRoute.cat === cat)) rec('sim:r' + n++, cat, [], [e.id]);
+    for (const cat of e.made) if (!(dropRoute && dropRoute.id === e.id && dropRoute.cat === cat) && !(indexGap && indexGap.id === e.id && indexGap.cat === cat)) rec('sim:r' + n++, cat, [], [e.id]);
     if (e.id !== dropUsesOf) for (const cat of e.used) if (!(dropRoute && dropRoute.id === e.id && dropRoute.cat === cat)) rec('sim:r' + n++, cat, [e.id], []);
   }
   for (const p of exp.pages) if (p !== dropPage) rec(p, 'emi:info', [], []);
   if (!missingPreview) rec('gtceu:test_multiblock', 'gtceu:multiblock_info', [], ['gtceu:test_multiblock']);
+  // the controller's crafting recipe owns the bare machine id, like on the bench: only a lookup by category finds the preview
+  if (!missingPreview && previewIdClash) recipes.unshift({ id: 'gtceu:test_multiblock', cat: 'minecraft:crafting', ins: new Set(), outs: new Set() });
+  if (indexGap) rec('gtceu:native_second_output', 'gtceu:test_process', [], []);
   if (renderPreview) rec('gtceu:mega_factory', 'gtceu:multiblock_info', [], ['gtceu:mega_factory']);
   if (!missingProcess) rec('sim:process', 'gtceu:test_process', [], []);
   const wrap = (r) => ({ getId: () => (r.id.startsWith('sim:') ? null : { toString: () => r.id }), getCategory: () => ({ getId: () => ({ toString: () => r.cat }) }) });
@@ -508,8 +511,10 @@ function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = 
   if (extraItem) items.add(extraItem);
   const fluids = new Set(exp.items.filter((e) => e.kind === 'fluid').map((e) => e.id));
   class RL { constructor(s) { this.s = String(s); } toString() { return this.s; } }
+  const nativeRec = (id) => ({ getId: () => id, getOutputContents: (cap) => (indexGap && indexGap.native && cap.kind === 'item' && id === 'gtceu:native_second_output'
+    ? [{ content: { getItems: () => [{ getItem: () => indexGap.id }] } }] : []) });
   const nativeCategory = { registryKey: 'gtceu:test_process', isXEIVisible: () => true, shouldRegisterDisplays: () => true,
-    getRecipeType: () => ({ registryName: 'gtceu:test_process', getRecipesInCategory: () => [{}] }) };
+    getRecipeType: () => ({ registryName: 'gtceu:test_process', getRecipesInCategory: () => (indexGap ? [nativeRec('sim:none'), nativeRec('gtceu:native_second_output')] : [nativeRec('sim:none')]) }) };
   class Multiblock {
     getId() { return 'gtceu:test_multiblock'; }
     getTier() { return 1; }
@@ -519,9 +524,11 @@ function simulateFixture(exp, { dropUsesOf = null, dropRoute = null, dropPage = 
   const classes = {
     'net.minecraft.resources.ResourceLocation': RL,
     'net.minecraft.core.registries.BuiltInRegistries': {
-      ITEM: { keySet: () => [...items].map((i) => new RL(i)), containsKey: (rl) => items.has(String(rl)) },
-      FLUID: { keySet: () => [...fluids].map((i) => new RL(i)), containsKey: (rl) => fluids.has(String(rl)), get: (rl) => String(rl) },
+      ITEM: { keySet: () => [...items].map((i) => new RL(i)), containsKey: (rl) => items.has(String(rl)), getKey: (item) => new RL(item) },
+      FLUID: { keySet: () => [...fluids].map((i) => new RL(i)), containsKey: (rl) => fluids.has(String(rl)), get: (rl) => String(rl), getKey: (fl) => new RL(fl) },
     },
+    'com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability': { CAP: { kind: 'item' } },
+    'com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability': { CAP: { kind: 'fluid' } },
     'dev.emi.emi.api.stack.ItemEmiStack': class { constructor(st) { this.id = st.id; } },
     'dev.emi.emi.api.stack.FluidEmiStack': class { constructor(fl) { this.id = fl; } },
     'dev.emi.emi.api.EmiApi': { getRecipeManager: () => rm, displayRecipe: () => { ctx.Client.screen = 'dev.emi.emi.screen.RecipeScreen'; } },
@@ -591,6 +598,23 @@ test('the fixture\'s checks, against a stand-in EMI: all PASS when every expecte
   assert.equal(sim.status.all, 'FAIL');
   assert.ok(sim.logs.some((l) => l.includes('grindless:mars_chart made in gtceu:deep_space_tracking')), sim.logs.join('\n'));
   assert.ok(sim.logs.some((l) => l.includes('none for: ' + sample.id)));
+});
+
+test('the route check reads every output of a displayed recipe, the preview is found by category, and a real missing route still fails', () => {
+  const base = JSON.parse(fs.readFileSync(DEFAULT_EXPECT, 'utf8'));
+  const item = { id: 'grindless:second_output', kind: 'item', needUse: false, needMade: true, made: ['gtceu:test_process', 'emi:info'], used: [] };
+  const exp = { ...base, items: [...base.items, item], known: { ...base.known, previews: [] } };
+  // EMI's index lacks the second output (the widget draws one slot) but the displayed GT recipe really makes it: PASS
+  let sim = simulateFixture(exp, { indexGap: { id: item.id, cat: 'gtceu:test_process', native: true }, previewIdClash: true });
+  assert.equal(sim.status.routes, 'PASS', sim.logs.join('\n'));
+  assert.equal(sim.status.previews, 'PASS', sim.logs.join('\n'));
+  // no displayed recipe of that category makes it at all: still a missing route
+  sim = simulateFixture(exp, { indexGap: { id: item.id, cat: 'gtceu:test_process', native: false } });
+  assert.equal(sim.status.routes, 'FAIL', sim.logs.join('\n'));
+  assert.ok(sim.logs.some((l) => l.includes(item.id + ' made in gtceu:test_process')), sim.logs.join('\n'));
+  // a truly missing preview is still a failure
+  sim = simulateFixture(exp, { missingPreview: true, previewIdClash: true });
+  assert.equal(sim.status.previews, 'FAIL', sim.logs.join('\n'));
 });
 
 test('static temporary content waivers cannot suppress native acquisition/use failures', () => {

@@ -196,6 +196,18 @@
         for (var ai = 0; ai < alternatives.size(); ai++) stations[categoryId][String(alternatives.get(ai).getId())] = true
       }
     }
+    // GTM's previews live in the gtceu:multiblock_info category, one MultiblockInfoEmiRecipe per definition whose renderXEIPreview is on,
+    // with the definition id as recipe id (GTM 7.5.3 integration/emi/multipage/MultiblockInfoEmiCategory.java:22-28, MultiblockInfoEmiRecipe.java:46-48).
+    // rm.getRecipe(<machine id>) is not reliable: another recipe with the same bare id (the controller's crafting recipe) can own it.
+    var previewOf = {}
+    for (var pci = 0; pci < liveCategories.size(); pci++) {
+      if (String(liveCategories.get(pci).getId()) !== 'gtceu:multiblock_info') continue
+      var previews = jlist(rm['getRecipes(dev.emi.emi.api.recipe.EmiRecipeCategory)'](liveCategories.get(pci)))
+      for (var pri = 0; pri < previews.size(); pri++) {
+        var previewId = previews.get(pri).getId()
+        if (previewId !== null) previewOf[String(previewId)] = true
+      }
+    }
     var GTR = Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries')
     var MBD = Java.loadClass('com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition')
     // every machine in a tag EMI disables (grindless:hidden_with_recipes: ours and the addons' we hide) drops its workstations and
@@ -239,8 +251,7 @@
         }
       }
       var multiblock = definition instanceof MBD
-      var preview = !multiblock ? null : rm.getRecipe(new RL(machineId))
-      var hasPreview = preview !== null && String(preview.getCategory().getId()) === 'gtceu:multiblock_info'
+      var hasPreview = multiblock && previewOf[machineId] === true
       // GTM's EMI preview category skips a definition whose renderXEIPreview is off (MultiblockInfoEmiCategory#registerDisplays)
       var xeiPreview = null
       if (multiblock) {
@@ -285,6 +296,55 @@
       return out
     }
     var noMade = []
+    // EMI's byOutput index only holds what the GT recipe widget draws (one entry per output slot, LDLib ModularEmiRecipe constructor), so a
+    // recipe with more outputs than its machine shows slots hides the rest. A route is real when a displayed recipe of that category lists
+    // the stack among ANY of its native outputs: read those from the GTRecipe itself, never looser than a displayed recipe of the category.
+    var displayed = {}
+    Object.keys(categories).forEach(function (cid) { displayed[cid] = {} })
+    for (var dci = 0; dci < liveCategories.size(); dci++) {
+      var dcat = liveCategories.get(dci)
+      var dcid = String(dcat.getId())
+      var dlist = jlist(rm['getRecipes(dev.emi.emi.api.recipe.EmiRecipeCategory)'](dcat))
+      for (var dri = 0; dri < dlist.size(); dri++) {
+        var drid = dlist.get(dri).getId()
+        if (drid !== null) displayed[dcid][String(drid)] = true
+      }
+    }
+    var nativeMade = {}
+    var nativeErrors = 0
+    var ItemCap = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability').CAP
+    var FluidCap = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability').CAP
+    var contentOf = function (c) { return c.content !== undefined && typeof c.content !== 'function' ? c.content : (c.getContent ? c.getContent() : c.content()) }
+    var markNative = function (kind, id, cid) {
+      var k = kind + ':' + id
+      if (!nativeMade[k]) nativeMade[k] = {}
+      nativeMade[k][cid] = true
+    }
+    for (var nmi = 0; nmi < nativeCategories.size(); nmi++) {
+      var nmc = nativeCategories.get(nmi)
+      var nmid = String(nmc.registryKey)
+      if (!displayed[nmid]) continue
+      var nmRecipes = jlist(nmc.getRecipeType().getRecipesInCategory(nmc))
+      for (var nri = 0; nri < nmRecipes.size(); nri++) {
+        var nrec = nmRecipes.get(nri)
+        if (displayed[nmid][String(nrec.getId())] !== true) continue
+        try {
+          var outItems = jlist(nrec.getOutputContents(ItemCap))
+          for (var oi = 0; oi < outItems.size(); oi++) {
+            var stacks = contentOf(outItems.get(oi)).getItems()
+            for (var si = 0; si < stacks.length; si++) markNative('item', String(BI.ITEM.getKey(stacks[si].getItem())), nmid)
+          }
+          var outFluids = jlist(nrec.getOutputContents(FluidCap))
+          for (var ofi = 0; ofi < outFluids.size(); ofi++) {
+            var fstacks = contentOf(outFluids.get(ofi)).getStacks()
+            for (var fsi = 0; fsi < fstacks.length; fsi++) markNative('fluid', String(BI.FLUID.getKey(fstacks[fsi].getFluid())), nmid)
+          }
+        } catch (e) {
+          nativeErrors++
+        }
+      }
+    }
+    if (nativeErrors > 0) log('native_outputs', 'NOTE', nativeErrors + ' recipes whose native outputs could not be read: their extra outputs are judged by EMI\'s index only')
     var noUse = []
     var routeMissing = []
     var previewMissing = []
@@ -304,7 +364,9 @@
       var usedIn = categoriesOf(used)
       if (e.needMade && made.size() === 0) noMade.push(e.id)
       if (e.needUse && used.size() === 0) noUse.push(e.id)
-      e.made.filter(checkable).forEach(function (cat) { if (madeIn.indexOf(cat) < 0) miss(e.id, 'made', cat) })
+      e.made.filter(checkable).forEach(function (cat) {
+        if (madeIn.indexOf(cat) < 0 && !(nativeMade[e.kind + ':' + e.id] && nativeMade[e.kind + ':' + e.id][cat])) miss(e.id, 'made', cat)
+      })
       e.used.filter(checkable).forEach(function (cat) { if (usedIn.indexOf(cat) < 0) miss(e.id, 'used', cat) })
       report.push({ id: e.id, kind: e.kind, made: made.size(), used: used.size(), madeIn: madeIn, usedIn: usedIn, expectedMade: e.made, expectedUsed: e.used })
     })
