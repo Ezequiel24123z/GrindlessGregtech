@@ -28,8 +28,8 @@
   var SITE = (G.maxTravel && G.maxTravel.places && G.maxTravel.places.sgra ? G.maxTravel.places.sgra.dimension : 'gcyr:black_hole_orbit')
   var CIRCUIT = '#gtceu:circuits/max'
   var HULL = 'gtceu:max_machine_hull'
-  var KERR = 'grindless:kerr_condensate'
-  var SETTLED = 'grindless:settled_condensate'
+  var KERR = 'gtceu:kerr_condensate'
+  var SETTLED = 'gtceu:settled_condensate'
 
   // type, key, name, circuit, inputs, fluids in, outputs, fluids out, EU/t, ticks
   var ROWS = [

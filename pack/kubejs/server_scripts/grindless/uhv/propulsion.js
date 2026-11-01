@@ -129,6 +129,10 @@
   TABLE.push(row('slag_pellet', 'spark_plasma_sintering', 19,
     [item('grindless:slag_compact', 4)], [], [item('grindless:slag_pellet', 1)], [], UHVA, 600))
 
+  // XP-A1 (maxplus.md, line P5 step 4, c23): the bound degenerate powder sintered, never melted, into the billet; circuit 23: the file's highest was 22
+  TABLE.push(row('bound_degenerate_billet', 'spark_plasma_sintering', 23,
+    [item('grindless:bound_degenerate_powder', 4)], [], [item('grindless:bound_degenerate_billet', 1)], [], UHVA, 900))
+
   var SIDE = [
     row('zirconia', 'electric_blast_furnace', null, [item(ZIRCON, 4)], [],
       [item(ZIRCONIA, 3), item('gtceu:silicon_dioxide_dust', 1)], [], IV, 400, 2100),

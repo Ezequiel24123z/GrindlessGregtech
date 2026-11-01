@@ -178,6 +178,15 @@
           "fluidsIn": [],
           "itemsOut": [{ "id": "gtceu:horizon_strand_ingot", "count": 2 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "XP-A1 (maxplus.md, line P4 step 2, c8): the Kerr clad strand drawn at SGR 1806-20 into Kerr strand wire. Circuit 8: the type's highest was 7.",
+          "name": "kerr_strand_drawing", "circuit": 8, "eut": 134217728, "duration": 900, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [{ "id": "grindless:kerr_clad_strand", "count": 4 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:kerr_strand_wire", "count": 4 }],
+          "fluidsOut": []
         }
       ]
     },

@@ -155,6 +155,10 @@
     itemsIn: [item(SEGMENT, 1), item('gtceu:horizon_strand_single_wire', 4), item(PBO, 2)], fluidsIn: [],
     itemsOut: [item('grindless:strand_ribbon', 1)], fluidsOut: [], eut: UHVA, duration: 800 })
 
+  // XP-A1 (maxplus.md, line P4 step 4, c14): the insulated Kerr wire braided in PBO fibre into the Kerr braid sleeve; circuit 14: the type's highest was 13
+  TABLE.push({ name: 'kerr_braid', type: 'pbo_synthesis', circuit: 14, itemsIn: [item('grindless:insulated_kerr_wire', 1), item(PBO, 2)], fluidsIn: [],
+    itemsOut: [item('grindless:kerr_braid_sleeve', 1)], fluidsOut: [], eut: UHVA, duration: 200 })
+
   // line 24's side steps on GTM's own machines
   var SIDE = [
     { name: 'trichlorobenzene', type: 'chemical_reactor', circuit: 3, itemsIn: [],

@@ -47,7 +47,7 @@
     { name: 'condensate_tap', circuit: 4, eut: V_MAX * 16, duration: 1200,
       items: ['1x grindless:seed_wave_packet'], kept: ['1x grindless:horizon_lock'],
       chancedIn: [{ id: 'grindless:horizon_phase_lock', chance: 312 }],
-      outs: [], fluidOuts: [['grindless:kerr_condensate', 16000]] }
+      outs: [], fluidOuts: [['gtceu:kerr_condensate', 16000]] }
   ]
 
   function missingOf(items, fluids) {

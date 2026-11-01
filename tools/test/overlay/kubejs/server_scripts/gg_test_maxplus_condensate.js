@@ -26,7 +26,7 @@
 
   var UNITS = [
     { id: 'refinery', machine: 'gtceu:condensate_refinery', cx: 46100, minEut: Number(GTValues.VA[14]),
-      items: [], fluid: ['grindless:kerr_condensate', 16000], circuit: 1, out: 'grindless:condensate_boil_off', outMin: 4 },
+      items: [], fluid: ['gtceu:kerr_condensate', 16000], circuit: 1, out: 'grindless:condensate_boil_off', outMin: 4 },
     { id: 'press', machine: 'gtceu:bound_matter_press', cx: 46130, minEut: Number(GTValues.V[14]) * 16,
       items: [['grindless:bound_neutronium_ingot', 8]], fluid: null, circuit: 1, out: 'grindless:horizon_compressed_plate', outMin: 4 }
   ]
