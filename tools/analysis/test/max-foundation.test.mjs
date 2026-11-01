@@ -1,4 +1,4 @@
-// MAX foundation (package MAX-F1, startup_scripts/grindless/max/foundation.js): every shared MAX id of docs/eras/max.md F1 is registered once
+﻿// MAX foundation (package MAX-F1, startup_scripts/grindless/max/foundation.js): every shared MAX id of docs/eras/max.md F1 is registered once
 // with en_us and es_es names and there is no recipe. GTM registers every gtceu:max_* id (highTierContent on): tables/max_ids.json lists them and
 // nothing of ours creates them. The horizon_strand cable is 16 A at V[MAX] with loss 1 (S0-3, never "lossless"). The two tier-14 places are
 // data files published by max/travel.js with two relay_platforms rows; every item and block has its texture.
@@ -45,8 +45,8 @@ test('the stand-in runs the MAX foundation and its names without errors', () => 
   assert.deepEqual(run.errors.filter(mine), [], 'no console.error');
 });
 
-test('the id list is pinned: 329 items, 12 blocks, the strand and 5 fluids; nothing twice', () => {
-  assert.equal(ITEMS.length, 329);
+test('the id list is pinned: 328 items, 12 blocks, the strand and 5 fluids; nothing twice', () => {
+  assert.equal(ITEMS.length, 328);
   assert.deepEqual([...got.controllers], table.ours.controllers);
   assert.deepEqual(table.ours.controllers, ['gtceu:horizon_interferometer', 'gtceu:ergoregion_synchroniser', 'gtceu:horizon_flux_clamp', 'gtceu:segment_reclamation_works']);
   assert.deepEqual([...got.blocks], BLOCKS);
