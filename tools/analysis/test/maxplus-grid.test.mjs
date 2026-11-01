@@ -103,12 +103,13 @@ test('the controller is an assembly-line recipe', () => {
   assert.ok(r.j.recipeConditions.some((x) => x.type === 'research'), 'station research kept');
 });
 
-test('lang: machine names and every row have an entry, es_es copies English, ASCII only', () => {
+test('lang: machine names and every row have an entry, English only (EN-1), ASCII only', () => {
   for (const r of rows) assert.ok(lang.includes(`grindless_hyper_assembly_array.${r.name}'`), `no lang key for ${r.name}`);
   for (const k of ['block.gtceu.hyper_assembly_array', 'gtceu.hyper_assembly_array', 'grindless.machine.hyper_assembly_array.tooltip.0']) assert.ok(lang.includes(`'${k}'`), k);
   for (const b of Object.keys(plain(GRID.blocks))) assert.ok(lang.includes(`'block.grindless.${b}'`), b);
   for (const i of [...Object.keys(plain(GRID.items)), ...Object.keys(plain(GRID.creativeItems))]) assert.ok(lang.includes(`'item.grindless.${i}'`), i);
-  assert.ok(lang.includes("['en_us', 'es_es']"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
+  assert.ok(!lang.includes('es_es'));
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });
 

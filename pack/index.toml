@@ -15818,7 +15818,7 @@ hash = "13a7cdf69618b8d20ed8f22c486da1d32f71d60bb158facb5c02ebedc6b75b74"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_grid_lang.js"
-hash = "28220c24cf8cd8ec71de6a28f386b9d8f859abe3b22a7a19dcaf5b3f7b8c5a63"
+hash = "375b5b1e7a03cd2b56be68149be99dbd4b78a146706cd1ff7d9bd7bc5ba92282"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_hyperfactory_lang.js"
