@@ -1,0 +1,252 @@
+{
+	autofocus_id: "3D9C39B3E0770704"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "maxplus_age_2"
+	group: "7921472BE13FC86D"
+	icon: "grindless:optical_nav_core"
+	id: "3A32657A34C44410"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["36E166925A329E17"]
+			description: ["The Stream and the Tarantula are running. Andromeda is next, then the dark between the galaxies. Both gates start from places you already own."]
+			icon: "grindless:optical_nav_core"
+			id: "3D9C39B3E0770704"
+			rewards: [{ id: "1BC2D0B0FA4DBD4D", type: "xp", xp: 100 }]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ id: "32F3E88F45280686", item: "grindless:optical_nav_core", type: "item" }]
+			title: "Stage II Begins"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3D9C39B3E0770704"]
+			description: ["The gate to Andromeda is built at 30 Doradus. Its probe gets a navigation core cut for a nucleus that is coming toward us, and so for a different sky."]
+			icon: "grindless:optical_nav_core"
+			id: "78F1746F58E646ED"
+			rewards: [{ id: "1EFE82DB5524E01B", type: "xp", xp: 200 }]
+			tasks: [{ id: "736D1883B0CF6BEE", item: "grindless:optical_nav_core", type: "item" }]
+			title: "A Course for Andromeda"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["78F1746F58E646ED"]
+			description: ["The same relay probe as before, launched from a different gate. It is a long way, so check the lock is in the shell."]
+			icon: "grindless:launched_ig_probe"
+			id: "5776AE7283BF8ABB"
+			rewards: [{ id: "7E18C17F7D8CAD50", type: "xp", xp: 200 }]
+			tasks: [
+				{ id: "15E78D6D8D0353AC", item: "grindless:ig_relay_probe", type: "item" }
+				{ id: "17F4AE687845A0F3", item: "grindless:launched_ig_probe", type: "item" }
+			]
+			title: "Probe for M31"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5776AE7283BF8ABB"]
+			description: ["The gate opens on the nucleus of Andromeda, bathed in gamma light. Nothing is rewarded for the gate itself."]
+			icon: "grindless:launched_ig_probe"
+			id: "7C245280AB59052C"
+			rewards: [{ id: "1DFA149BBFCA1B69", type: "xp", xp: 250 }]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ dimension: "grindless:m31_nucleus_orbit", id: "37E3C80219806DCD", type: "dimension" }]
+			title: "The Nucleus of M31"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7C245280AB59052C"]
+			description: ["The horizon here is gentle enough to hang a factory from, and the light is hot enough to split nuclei. Bring a tether, and bring targets."]
+			icon: "gtceu:blueshift_forge"
+			id: "7A63B9D1F4FD1511"
+			rewards: [{ id: "304C59F575BAE0E2", type: "xp", xp: 25 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "32429ADD4C428406", type: "checkmark" }]
+			title: "The Platform at M31"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7A63B9D1F4FD1511"]
+			description: ["The &6Deep Horizon Tether&r holds the blueshift forge at the right depth in the nucleus's pull. Too shallow and it burns; too deep and it never comes back. Kerr ribbon from the strand line, condensate for the coating, and a stellar elevator for the proof load. The blueshift forge's photonuclear recipes. Build the tether once per forge."]
+			icon: "grindless:deep_horizon_tether"
+			id: "5851F26D0448CBBB"
+			rewards: [{ id: "3EBA40F0D8B8F391", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7228158C847401EC", item: "grindless:proof_loaded_kerr_ribbon", type: "item" }
+				{ id: "1741DC5014CD5C97", item: "grindless:bound_coated_ribbon", type: "item" }
+				{ id: "333D7DCB9DE0C8C9", item: "grindless:cured_bound_ribbon", type: "item" }
+				{ id: "5DF65F8F5273B1E6", item: "grindless:deep_horizon_tether", type: "item" }
+			]
+			title: "A Deep Horizon Tether"
+			x: 10.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7A63B9D1F4FD1511"]
+			description: ["In the nucleus's photon bath a target is cracked into a mix of rare isotopes; the stellar forge then burns the mix into p-process plasma. The forge on its tether, and a calutron's enriched targets from home. Plasmas for stage III's tree. Targets in, isotopes out, and the light is free."]
+			icon: "gtceu:photonuclear_mix_bucket"
+			id: "52A22A1D6EAEA20C"
+			rewards: [{ id: "710F6FF37DE95BC8", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "57F843A6AC61EC97", item: "gtceu:photonuclear_mix_bucket", type: "item" }
+				{ id: "3CA11B91B0DB08FC", item: "gtceu:p_process_plasma_bucket", type: "item" }
+			]
+			title: "Photonuclear Isotopes"
+			x: 10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7A63B9D1F4FD1511"]
+			description: ["The last gate leaves from M31 and aims at the thin web of gas between the galaxies. Its navigation core is cut for a sky with almost nothing in it."]
+			icon: "grindless:optical_nav_core"
+			id: "70FAD8F0790EC6B6"
+			rewards: [{ id: "5BB080FFA348470E", type: "xp", xp: 250 }]
+			tasks: [{ id: "12B31DE953570F28", item: "grindless:optical_nav_core", type: "item" }]
+			title: "A Course for the Filament"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["70FAD8F0790EC6B6"]
+			description: ["One more probe, launched from Andromeda this time. The platform here builds the gate; you carry the controller."]
+			icon: "grindless:launched_ig_probe"
+			id: "3D0D4171312BB02F"
+			rewards: [{ id: "10D81AE532743683", type: "xp", xp: 250 }]
+			tasks: [
+				{ id: "11D7B7D786622B85", item: "grindless:ig_relay_probe", type: "item" }
+				{ id: "1FCCB419E1889116", item: "grindless:launched_ig_probe", type: "item" }
+			]
+			title: "Probe for the Filament"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3D0D4171312BB02F"]
+			description: ["Almost nothing here: cold, clean and dark. Nothing is rewarded for the gate itself."]
+			icon: "grindless:void_grown_diamond"
+			id: "3DB85D84F44BA706"
+			rewards: [{ id: "7C1BE050F3C06428", type: "xp", xp: 250 }]
+			shape: "rsquare"
+			size: 1.5d
+			tasks: [{ dimension: "grindless:local_group_filament", id: "55CFC4D2A74D3E75", type: "dimension" }]
+			title: "The Local Group Filament"
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3DB85D84F44BA706"]
+			description: ["No dust, no warmth, no light worth the name. Crystals grow slowly and without a flaw, which is why you came this far."]
+			icon: "gtceu:void_crystal_fab"
+			id: "1840CCD84935F2C6"
+			rewards: [{ id: "3109EC1BD6878DE1", type: "xp", xp: 25 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "356EA6A1994D05CF", type: "checkmark" }]
+			title: "The Platform in the Dark"
+			x: 16.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1840CCD84935F2C6"]
+			description: ["A diamond grown in the dark has no flaws to speak of. The fab grows it on a seed plate cut at home from older stock. The lattice fab at home for the plate, and the void crystal fab here. The engineered lattice, and with it the end of the stage. Seed plates travel by chest; the fab does the rest."]
+			icon: "grindless:void_grown_diamond"
+			id: "7336AF21D84C52EB"
+			rewards: [{ id: "3A9BC137352953ED", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1EE81D1ABAFAA298", item: "grindless:c12_seed_plate", type: "item" }
+				{ id: "197467A88C35A99F", item: "grindless:void_grown_diamond", type: "item" }
+			]
+			title: "Void-Grown Diamond"
+			x: 18.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7336AF21D84C52EB"]
+			description: ["An implanter dopes the diamond and a femtosecond writer cuts the lattice. Home work again; the diamond only had to come from the dark."]
+			icon: "grindless:void_crystal_lattice"
+			id: "326E327B82B1BC04"
+			rewards: [{ id: "5D6C8CA6CDE9405A", type: "xp", xp: 300 }]
+			tasks: [
+				{ id: "31786F37AD77FEDB", item: "grindless:nv_engineered_diamond", type: "item" }
+				{ id: "1D1BE8954603D4FD", item: "grindless:void_crystal_lattice", type: "item" }
+			]
+			title: "Void Crystal Lattice"
+			x: 20.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["1840CCD84935F2C6"]
+			description: ["The stage after this one wants millions of parts, and no one builds millions by hand. A bigger factory, a wider hatch and a grid that can hold the plan are coming. The tabs for machines and integration have them."]
+			icon: "gtceu:hyperfactory"
+			id: "57131618A8A6EBF3"
+			rewards: [{ id: "7B018EB4F8BA2D81", type: "xp", xp: 50 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "306780D2FC49CE0D", type: "checkmark" }]
+			title: "Scale"
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["57131618A8A6EBF3"]
+			description: ["The meta-material loom weaves &6Horizon Shielding&r from a graded laminate, and a waveguide that the mK cryostat then chills. Gadolinium cermet from the ZPM line, and kerr strand for the waveguide. The tree's heat-proof parts. Keep the laminate and the tube on separate belts."]
+			icon: "grindless:horizon_shielding"
+			id: "7037D9D7C652396D"
+			rewards: [{ id: "19C863360E7E61FF", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "3D352F090CCCFDB2", item: "grindless:horizon_shielding", type: "item" }
+				{ id: "528D6C573D15AF2F", item: "grindless:cold_horizon_waveguide", type: "item" }
+			]
+			title: "Meta-Materials: Shield and Guide"
+			x: 20.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["57131618A8A6EBF3"]
+			description: ["The loom's other two weaves: a conduit for current and a valve that lets only helium through. Coated tape from the HTS line, and the aerogel works for the superleak plug. The tree's plumbing and wiring. The valve wants a cryostat of its own."]
+			icon: "grindless:horizon_valve"
+			id: "509174F635683E4B"
+			rewards: [{ id: "34A6AF01847EF4EE", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "31F64AF5A5CD032F", item: "grindless:cold_horizon_conduit", type: "item" }
+				{ id: "5AB609F5AC26BC6C", item: "grindless:horizon_valve", type: "item" }
+			]
+			title: "Meta-Materials: Conduit and Valve"
+			x: 20.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["326E327B82B1BC04", "7037D9D7C652396D", "509174F635683E4B"]
+			description: ["You have crystals from the dark and meta-materials from the loom. The last stage turns them into a gate, and into a great many creative parts."]
+			icon: "grindless:void_crystal_lattice"
+			id: "31A6078C3AB1A5B2"
+			rewards: [{ id: "39AC9B700DFD59D7", type: "xp", xp: 300 }]
+			shape: "diamond"
+			size: 1.75d
+			tasks: [{ id: "1892E61DBC7CFE0A", type: "checkmark" }]
+			title: "The Local Group Is Yours"
+			x: 24.0d
+			y: 0.0d
+		}
+	]
+	subtitle: ["A probe to Andromeda, another to the dark between the galaxies and the first meta-materials of the loom."]
+	title: "MAX+: The Local Group"
+}

@@ -1148,7 +1148,7 @@ export default {
   title: 'MAX+ Lines',
   subtitle: 'Condensate and bound matter, stars and streams, cryo parts, the gate tree crafts, components, circuits and the creative cores',
   icon: 'gtceu:hyper_assembly_array',
-  focus: 'p1_0',
+  focus: 'p1_4',
   bands: [['cond', 'tara'], ['stream', 'sling'], ['cryo', 'tg1'], ['tg2', 'tg3'], ['tg4', 'comp'], ['qa', 'creative'], ['hg1', 'hg2'], ['hg3']],
   clusters: {
     cond: cluster('Condensate, bound matter and the cable', ['P1', 'P2', 'P3', 'P4', 'P5']),
