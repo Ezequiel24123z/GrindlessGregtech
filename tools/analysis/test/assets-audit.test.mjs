@@ -106,6 +106,21 @@ test('auditTextures finds a missing, an orphan, an animated strip without mcmeta
   assert.equal(by['grindless:item/red_thing'].era, 'lv');
 });
 
+test('a texture named by full path in a JSON file (sky renderer) is referenced', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'aa-pack-'));
+  const base = path.join(root, 'pack', 'kubejs', 'assets', 'grindless');
+  fs.mkdirSync(path.join(base, 'textures', 'sky'), { recursive: true });
+  fs.mkdirSync(path.join(base, 'gcyr', 'planet_assets', 'sky_renderers'), { recursive: true });
+  fs.mkdirSync(path.join(root, 'pack', 'kubejs', 'startup_scripts', 'grindless', 'lv'), { recursive: true });
+  fs.writeFileSync(path.join(base, 'textures', 'sky', 'moon.png'), png(16, 16, blob([200, 60, 60])));
+  fs.writeFileSync(path.join(base, 'textures', 'sky', 'lost.png'), png(16, 16, (x, y) => [x * 10, y * 10, 100, 255]));
+  fs.writeFileSync(path.join(base, 'gcyr', 'planet_assets', 'sky_renderers', 'w.json'), '{ "sky_objects": [ { "texture": "grindless:textures/sky/moon.png" } ] }');
+  const { rows } = auditTextures({ root, packDir: 'pack' });
+  const by = Object.fromEntries(rows.map((r) => [r.path, r]));
+  assert.ok(!by['grindless:sky/moon'].categories.includes('orphan'));
+  assert.ok(by['grindless:sky/lost'].categories.includes('orphan'));
+});
+
 test('evaluateStartup records the calls on builders and the GTM sound entry', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'aa-pack-'));
   const dir = path.join(root, 'pack', 'kubejs', 'startup_scripts', 'grindless', 'steam');

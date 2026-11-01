@@ -80,9 +80,12 @@ async function main(argv) {
   const { res } = runAudit({ dumpDir: opt.dump, registryFile: opt.registry });
   const baseline = fs.existsSync(DEFAULT_BASELINE) ? readJson(DEFAULT_BASELINE) : { keys: [] };
   if (opt.write) {
-    const doc = { format: 'gg-process-audit-1', _comment: 'Findings of tools/analysis/process-audit.mjs known when QR-D0 ran; the audit fails only on keys not listed here. Remove a key when its finding is fixed. options.ignore: globs of ids the audit skips.', options: baseline.options || { ignore: [] }, counts: res.counts, keys: res.findings.map((f) => f.key) };
+    // MAX+ findings new against the old baseline are in flight (XP-G1, XP-Z1b): listed as `pending` for P8-H, not as baseline
+    const old = new Set(baseline.keys || []);
+    const pend = (f) => f.era === 'maxplus' && !old.has(f.key);
+    const doc = { format: 'gg-process-audit-1', _comment: 'Findings of tools/analysis/process-audit.mjs known when P8-A refreshed it; the audit fails only on keys listed in neither list. Remove a key when its finding is fixed. pending: MAX+ findings of packages still in flight, to be fixed or baselined by P8-H. options.ignore: globs of ids the audit skips.', options: baseline.options || { ignore: [] }, counts: res.counts, keys: res.findings.filter((f) => !pend(f)).map((f) => f.key), pending: res.findings.filter(pend).map((f) => f.key) };
     fs.writeFileSync(DEFAULT_BASELINE, JSON.stringify(doc, null, 1) + '\n');
-    process.stdout.write(`baseline written: ${doc.keys.length} keys\n`);
+    process.stdout.write(`baseline written: ${doc.keys.length} keys, ${doc.pending.length} pending\n`);
     return 0;
   }
   const fresh = newFindings(res, baseline);
