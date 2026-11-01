@@ -27,7 +27,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 | P2-A | #46 | Cost band A: LV review, MV and HV switched on, hand-recipe bypasses removed | 2 |
 | MX-R | #45 | MAX routes: the matrix's molten-metal rule, a `horizon_strand_ingot` route, dead `gtnn` circuits out of the key set | 2, 3 |
 
-- **Next:** two implementation workers.
+- **Next:** up to 10 nested sessions at once (owner, 2026-11-01; AGENTS.md:42), on disjoint files; the bench limits still apply.
   - **Worker 1, cost bands (serial):**
     - P2-B: EV and IV;
     - P2-C: LuV to UV;
@@ -52,7 +52,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **MAX** (`max.md` open questions 1, 12, 13): accept 14 / 57 / 204, 12 horizon locks, and c3 gated on all four new machines? Default: yes.
 - **MAX+** (`maxplus.md` open questions 1-9): one era in three stages; 58 lines plus a second pass after stage I; x5 per stage; creative items never placeable; one-way gate with a repeatable dial; the 2^39 x 19,200 t fallback; `horizon_city`; the archive crosses with the player; the ending text. Defaults as written.
 - **Save compatibility after v1.0.0?** Default: yes, from v1.0.0 on.
-- **A third implementation worker?** Batches 1 and 2 merged with no conflicts. Default: stay at two.
+- **Parallelism:** answered (owner, 2026-11-01): up to 10 nested sessions at once.
 
 ## Open blockers and known issues
 - **Capacity:** 87 known violations (`tools/analysis/capacity_known.json`); the Phase 2 bands empty the list. 67 recipes also lose inputs or outputs past their recipe type's slots (`docs/reforge/data/00_dropped_inputs.csv`; none from LV to HV).
