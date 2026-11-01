@@ -54,7 +54,7 @@ export default {
           ['rec', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours', { from: ['gas', 'mem'], desc: 'Sends the gas through an etched membrane; the helium returns.' }],
           ['fl', I('grindless:flerovium_atoms'), 'Flerovium Atoms', 'product', { role: 'research' }],
         ], 'the superheavy census', 2.5),
-        L('x_fsc', 12.5, 0.5, 'pl_zpm:duplate'),
+        L('x_fsc', 10, 3.5, 'pl_zpm:duplate'),
         // californium-249 wheel
         ...chain(8, [
           ['tcl', F('gtceu:transcurium_liquor'), 'Transcurium Liquor', 'raw'],
@@ -92,7 +92,7 @@ export default {
           ['pc', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil', 'raw'],
           ['itf', I('grindless:ion_tracked_foil'), 'Ion-Tracked Foil'],
           ['mem', I('grindless:etched_membrane'), 'Etched Membrane'],
-        ], null, 7.5),
+        ], null, 12.5),
       ],
     },
     pressure: {
@@ -133,7 +133,7 @@ export default {
           ['yo', I('grindless:yttrium_oxide_dust'), 'Yttrium Oxide', 'raw'],
           ['ysp', I('grindless:ysz_powder'), 'YSZ Powder'],
           ['ysi', I('grindless:ysz_ingot'), 'YSZ Ingot'],
-        ], null, 7.5),
+        ], null, 12.5),
         // silicon carbide fibre
         ...chain(10, [
           ['pcs', I('grindless:polycarbosilane_dust'), 'Polycarbosilane', 'raw'],
