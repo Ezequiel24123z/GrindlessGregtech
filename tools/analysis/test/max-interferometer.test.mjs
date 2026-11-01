@@ -65,7 +65,7 @@ test('the older rows exist, are marked MAX-B2, sit on the contract circuits, and
     assert.ok(r, `${row[0]} ${row[1]}/${row[2]}`);
     assert.match(r._why || '', /^MAX-B2/);
     assert.equal(r.circuit, row[3]);
-    assert.equal(table(row[0]).types[row[1]].recipes.filter((x) => x.circuit === row[3]).length, 1, `c${row[3]} used once`);
+    assert.equal(table(row[0]).types[row[1]].recipes.filter((x) => x.circuit === row[3]).length, row[3] === 31 ? 2 : 1, `c${row[3]} used once`); // MX-S2 repeats crystal_growth c31 with its own items
   }
   for (const f of new Set(OLDER.map((r) => r[0]))) {
     const t = table(f);
