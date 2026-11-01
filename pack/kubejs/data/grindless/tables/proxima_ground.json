@@ -223,7 +223,7 @@
       "recipes": [
         {
           "name": "proxima_organics_hydrolysis",
-          "circuit": 4,
+          "circuit": 0,
           "site": "saturn_orbit",
           "eut": 122880,
           "duration": 200,

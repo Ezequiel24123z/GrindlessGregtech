@@ -554,7 +554,7 @@
       "recipes": [
         {
           "name": "capsule_liner",
-          "circuit": 28,
+          "circuit": 0,
           "eut": 131072,
           "duration": 200,
           "itemsIn": [
@@ -671,7 +671,7 @@
         },
         {
           "name": "etched_membrane",
-          "circuit": 25,
+          "circuit": 0,
           "eut": 131072,
           "duration": 300,
           "itemsIn": [

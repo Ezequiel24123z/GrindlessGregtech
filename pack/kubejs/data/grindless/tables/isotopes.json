@@ -273,7 +273,7 @@
       "recipes": [
         {
           "name": "pu244_plating_ampoule",
-          "circuit": 27,
+          "circuit": 0,
           "eut": 1920,
           "duration": 200,
           "itemsIn": [
