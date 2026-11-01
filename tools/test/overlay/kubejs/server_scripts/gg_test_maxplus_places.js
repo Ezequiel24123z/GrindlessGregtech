@@ -1,4 +1,4 @@
-// priority: -5443
+// priority: -5364
 // TEST ONLY, XP-F1 (bench overlay, never shipped). Command: kubejs custom_command gg_test_maxplus_places
 // (needs kubejs/config/gg_test_maxplus_places.json {"enabled": true}). Band: Overworld X 45056-45119, Z 0-63, Y 80 (tools/test/zones.json maxplus_places).
 // Doubts it settles: (1) the four MAX+ places load as levels with a GCYR planet row at rocket tier 14 and a relay_platforms row each; (2) the 1,024 A
