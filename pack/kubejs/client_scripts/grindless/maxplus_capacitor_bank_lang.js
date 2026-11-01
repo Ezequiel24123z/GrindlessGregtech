@@ -14,4 +14,6 @@ ClientEvents.lang('en_us', function (event) {
     add('grindless.machine.horizon_capacitor_bank.no_capacitors', 'No horizon capacitors in the ring')
     add('grindless.machine.horizon_capacitor_bank.capacitors', 'Capacitors: %s (%s EU)')
     add('grindless.machine.horizon_capacitor_bank.network', 'Network: %s bank(s), %s EU of capacity, %s EU stored')
+    add('emi.grindless.info.horizon_capacitor.0', 'A structure block: the cell of the Horizon Capacitor Bank. Each holds 2^48 EU (281,474,976,710,656), and a bank formed in Sgr A* orbit adds the capacity of its 40 slots to the wireless energy network at tier 14: one Hyperstargate dial and 80 ticks to spare.')
+    add('emi.grindless.info.horizon_capacitor.1', 'It fits no Wireless Energy Tower, and a bank counts nowhere but Sgr A* orbit, the Hyperstargate\'s site. Made in the hyper assembly array.')
 })

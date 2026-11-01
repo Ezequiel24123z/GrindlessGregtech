@@ -641,6 +641,10 @@ file = "kubejs/assets/emi/recipe/additions/grindless/hologram_projector.json"
 hash = "bea7e2389a77cc3b92464944198882be16111a1ddfeaf9125a31b5f0585c6624"
 
 [[files]]
+file = "kubejs/assets/emi/recipe/additions/grindless/horizon_capacitor.json"
+hash = "24985ebca1d299a84a2eb8ca2a1867106e06b500080caf9191eb7a5c37ecd392"
+
+[[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/hot_cell.json"
 hash = "37df753b8b3168337a70fa4384bfa007fe4da447b80da9e544bf742bfea1adcc"
 
@@ -15786,7 +15790,7 @@ hash = "981388f00834745ed24cc1d8cade2bff9feaa484dc3dafcf51adef01ae018aed"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_capacitor_bank_lang.js"
-hash = "9bdecc51f9ffed951990c57de6c574dc33b4fead64cf3ac5a24f7e094e9cb8dc"
+hash = "199ec5421128087bc3836928d98288f4661d8b0ae2cd721e4fbbf6ae70dff35d"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_circuits_lang.js"
