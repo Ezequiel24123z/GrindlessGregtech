@@ -35,6 +35,7 @@ const EXPECT = {
   hyperstargate_power_unit: { [RING]: 16, resonance_chamber: 8, horizon_conduit: 640, creative_energy: 1 },
   hyperstargate_base: { [CHEVRON]: 27, [RING]: 144, [UPGRADE]: 36, horizon_alignment_matrix: 4, creative_chest: 1, creative_tank: 1, 'megacells:item_cell_256m': 1, 'megacells:fluid_cell_256m': 1, 'gtceu:max_maxplus_energy_hatch_1024a': 4 },
   hyperstargate_interface: { [RING]: 8, creative_data_access_hatch: 1, horizon_comm_terminal: 4, pattern_memory_unit: 64 },
+  horizon_alignment_matrix: { cold_reference_assembly: 4, horizon_compressed_plate: 8, kerr_strange_plate: 4, maxplus_sensor: 2, horizon_waveguide: 4 },
   creative_energy: { horizon_cloud_core: 1, maxplus_field_generator: 64, kerr_field_coil: 64, cold_kerr_toroid: 16, horizon_processor: 256, horizon_containment_plate: 64, horizon_conduit: 64, 'gtceu:max_substation_input_hatch_64a': 64 },
   creative_chest: { bottomless_store_core: 1 },
   creative_tank: { bottomless_tank_core: 1 },

@@ -164,7 +164,10 @@
 
   // x left to right, y bottom to top, z back to front
   function arrayCell(x, y, z) {
-    if (y === 0 || y === 10) return 'F'
+    if (y === 0 || y === 10) {
+      var m5 = (x + z) % 5
+      return m5 < 2 ? 'A' : m5 === 3 && z % 2 === 0 ? 'C' : 'F'
+    }
     if (z === 26) return y >= 1 && y <= 5 && x >= 1 && x <= 25 ? 'X' : 'F'
     if (x === 0 || x === 26 || z === 0) {
       var along = x === 0 || x === 26 ? z : x
