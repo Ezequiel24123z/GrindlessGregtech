@@ -1,8 +1,6 @@
 {
   "workstations": [],
   "previews": [
-    "extendedfeatures:expanded_assembly_line",
-    "extendedfeatures:matrix_data_relay",
     "gcyr:dyson_system_controller",
     "gcyr:space_elevator",
     "gtca:tegmark_forge",
