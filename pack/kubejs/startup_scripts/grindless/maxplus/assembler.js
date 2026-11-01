@@ -37,7 +37,7 @@
   MA.machine = {
     name: 'condensate_assembler', machine: 'gtceu:condensate_assembler', type: 'condensate_assembler', dataKey: 'grindless_condensate_assembler',
     lang: 'Condensate Assembler', maxIO: { itemsIn: 9, itemsOut: 2, fluidsIn: 2, fluidsOut: 1 }, casing: CASING, texture: 'grindless:block/max/mirror_shell_segment',
-    overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+    overlay: 'grindless:block/multiblock/condensate_assembler',
     width: 19, height: 13, depth: 19,
     pal: { F: CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
     parts: parts

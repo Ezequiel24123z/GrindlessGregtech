@@ -27,7 +27,7 @@
   },
   "_maxplusCells": "XP-H5 (docs/eras/maxplus.md 'Machines' 15): the MAX+ cell, grindless:horizon_capacitor, 2^48 EU (281,474,976,710,656) at tier 14. It is registered by startup_scripts/grindless/maxplus/capacitor_bank.js and is NOT a tiers[] row: no tower takes it (the tower's cell slots are the tiers[] cells) and no tiers[] cell fits the bank. maxplusBank: the horizon capacitor bank (a store, not a machine with hatches, built like the tower): a ring of slots, each a capacitor or the bank's casing (an empty slot). It counts only when formed in `site`; the network's tier ignores it (it holds tier 14, the network's never goes below the towers'). dialMultiplier x 2^dialExponent: what the Hyperstargate's dial needs the network to hold (W.dialCharge, XP-G1).",
   "maxplusCells": [
-    { "tier": 14, "name": "horizon", "cell": "grindless:horizon_capacitor", "capacity": 281474976710656, "texture": "grindless:item/horizon_capacitor" }
+    { "tier": 14, "name": "horizon", "cell": "grindless:horizon_capacitor", "capacity": 281474976710656, "texture": "grindless:block/maxplus/horizon_capacitor" }
   ],
   "maxplusBank": {
     "id": "gtceu:horizon_capacitor_bank",

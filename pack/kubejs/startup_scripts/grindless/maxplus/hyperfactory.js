@@ -25,7 +25,7 @@
   const ID = 'hyperfactory'
   const CASING = 'grindless:horizon_machine_casing'
   const TEXTURE = 'grindless:block/max/mirror_shell_segment'
-  const OVERLAY = 'grindless:block/multiblock/positronium_condensate_lab'
+  const OVERLAY = 'grindless:block/multiblock/hyperfactory'
   const TYPES = ['assembler', 'circuit_assembler', 'assembly_line', 'forming_press', 'laser_engraver']
   const CAP = 4096
   const W = 15

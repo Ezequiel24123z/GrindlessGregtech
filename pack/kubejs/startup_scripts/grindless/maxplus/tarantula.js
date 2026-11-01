@@ -25,7 +25,7 @@
   MT.lift = {
     name: 'tarantula_stellar_lift', machine: 'gtceu:tarantula_stellar_lift', type: 'tarantula_stellar_lift', dataKey: 'grindless_tarantula_stellar_lift',
     lang: 'Tarantula Stellar Lift', maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 1 }, casing: LIFT_CASING,
-    texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+    texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/tarantula_stellar_lift',
     width: 21, height: 15, depth: 21, generator: false,
     pal: { F: LIFT_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
     parts: function () {
@@ -35,7 +35,7 @@
   MT.crucible = {
     name: 'pair_instability_crucible', machine: 'gtceu:pair_instability_crucible', type: 'pair_instability_crucible', dataKey: 'grindless_pair_instability_crucible',
     lang: 'Pair-Instability Crucible', maxIO: { itemsIn: 2, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: LINER_CASING,
-    texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+    texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/pair_instability_crucible',
     width: 15, height: 15, depth: 15, generator: false,
     pal: { F: LINER_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
     parts: function () {
@@ -46,7 +46,7 @@
   MT.burner = {
     name: 'nickel_56_burner', machine: 'gtceu:nickel_56_burner', type: 'nickel_56_burner', dataKey: 'grindless_nickel_56_burner',
     lang: 'Nickel-56 Burner', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, casing: BURNER_CASING,
-    texture: 'gtceu:block/casings/solid/machine_casing_atomic', overlay: 'grindless:block/multiblock/fission_reactor',
+    texture: 'gtceu:block/casings/solid/machine_casing_atomic', overlay: 'grindless:block/multiblock/nickel_56_burner',
     width: 15, height: 9, depth: 15, generator: true,
     pal: { F: BURNER_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil' },
     parts: function () {

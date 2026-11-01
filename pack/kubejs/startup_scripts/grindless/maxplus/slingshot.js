@@ -30,7 +30,7 @@
   MS.machine = {
     name: 'hills_slingshot', machine: 'gtceu:hills_slingshot', type: 'hills_slingshot', dataKey: 'grindless_hills_slingshot',
     lang: 'Hills Slingshot', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, casing: CASING, texture: 'grindless:block/max/mirror_shell_segment',
-    overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+    overlay: 'grindless:block/multiblock/hills_slingshot',
     width: 17, height: 9, depth: 17,
     pal: { F: CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
     parts: parts
