@@ -207,9 +207,12 @@ test('removed ids: gtceu:kerr_strand and gtceu:condensate_boil_off_gas are gone 
 test('hyperstargate: machine 17 with its dial type and its recharge row, once XP-G1 has landed', (t) => {
   if (!hasG1()) return t.skip('XP-G1 has not landed');
   assert.equal(IDS().controllers.ids.filter((n) => n.includes('hyperstargate')).length, 1);
-  const rows = pack().mp.filter((x) => typeOf(x) === 'hyperstargate');
-  assert.ok(rows.length >= 1, 'the dial row');
-  assert.ok(pack().mp.some((x) => outs(x).includes('grindless:spent_dial_charge') || ins(x).includes('grindless:spent_dial_charge')), 'the spent dial charge has a row');
+  const ids = pack().mp.map((x) => x.i);
+  assert.ok(ids.some((i) => /hyper_assembly_array\/hyperstargate$/.test(i)), 'the controller row');
+  assert.ok(ids.some((i) => /condensate_refinery\/recharge_dial_charge$/.test(i)), 'the recharge row');
+  const dial = pack().mp.filter((x) => typeOf(x) === 'hyperstargate_dial');
+  assert.equal(dial.length, 1, 'one dial row');
+  assert.ok(/\/dial$/.test(dial[0].i), 'the dial row is named dial');
 });
 
 // ------------------------------------------------------------------ re-count of docs/eras/maxplus.md
