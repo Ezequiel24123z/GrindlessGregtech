@@ -301,6 +301,7 @@
    "gtceu:segment_reclamation_works"
   ],
   "maxplus": [
+   "gtceu:blueshift_forge",
    "gtceu:bound_matter_press",
    "gtceu:condensate_assembler",
    "gtceu:condensate_refinery",
@@ -309,7 +310,8 @@
    "gtceu:meta_material_loom",
    "gtceu:nickel_56_burner",
    "gtceu:pair_instability_crucible",
-   "gtceu:tarantula_stellar_lift"
+   "gtceu:tarantula_stellar_lift",
+   "gtceu:void_crystal_fab"
   ],
   "moon": [
    "gtceu:lunar_drill"

@@ -1,4 +1,4 @@
-// priority: -20180
+// priority: -20179
 // MAX+ machines 4 to 6 at 30 Doradus and lines P6, P7, P8, P17, P20 and P21 (docs/eras/maxplus.md, machines 4-6 and 'Lines'; package XP-B1).
 //
 //   P6  VMS plasma     lift (c1) -> raw_vms_plasma; mass filter c6 -> vms_core_plasma; FRC forming c4 -> confined_vms_plasma

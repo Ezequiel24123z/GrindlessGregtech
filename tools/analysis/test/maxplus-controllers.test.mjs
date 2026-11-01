@@ -13,9 +13,9 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const pack = path.resolve(here, '..', '..', '..', 'pack');
 const run = runPackScripts(pack);
 
-const BASE = ['meta_material_loom', 'condensate_assembler', 'hills_slingshot', 'hyperfactory', 'tarantula_stellar_lift', 'pair_instability_crucible', 'nickel_56_burner'];
+const BASE = ['meta_material_loom', 'condensate_assembler', 'hills_slingshot', 'hyperfactory', 'tarantula_stellar_lift', 'pair_instability_crucible', 'nickel_56_burner', 'blueshift_forge', 'void_crystal_fab'];
 const BOOTSTRAP = ['condensate_refinery', 'bound_matter_press'];
-const FILE = { meta_material_loom: 'loom.js', condensate_assembler: 'assembler.js', hills_slingshot: 'slingshot.js', hyperfactory: 'hyperfactory.js', tarantula_stellar_lift: 'tarantula.js', pair_instability_crucible: 'tarantula.js', nickel_56_burner: 'tarantula.js' };
+const FILE = { meta_material_loom: 'loom.js', condensate_assembler: 'assembler.js', hills_slingshot: 'slingshot.js', hyperfactory: 'hyperfactory.js', tarantula_stellar_lift: 'tarantula.js', pair_instability_crucible: 'tarantula.js', nickel_56_burner: 'tarantula.js', blueshift_forge: 'blueshift.js', void_crystal_fab: 'void_fab.js' };
 const DURATION = {
   meta_material_loom: /EUt\(VA_MAX\)\.duration\(4800\)/,
   condensate_assembler: /EUt\(VA_MAX\)\.duration\(4800\)/,
@@ -24,6 +24,8 @@ const DURATION = {
   tarantula_stellar_lift: /c\.machine, c\.research, 64, 4800\)/,
   pair_instability_crucible: /c\.machine, c\.research, 64, 4800\)/,
   nickel_56_burner: /c\.machine, c\.research, 64, 4800\)/,
+  blueshift_forge: /c\.machine, c\.research, 64, 4800\)/,
+  void_crystal_fab: /c\.machine, c\.research, 64, 4800\)/,
 };
 
 const nameOf = (ing) => {
