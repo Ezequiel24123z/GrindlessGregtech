@@ -143,13 +143,13 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
   {
-    key: 'J_LAUNCH', kind: 'step', title: 'Seed Away', icon: 'grindless:launched_belt_seed',
+    key: 'J_LAUNCH', kind: 'reading', title: 'Seed Away', icon: 'grindless:nsc_belt_seed',
     deps: ['NSCSEED'], x: 26, y: 0,
     desc: [
-      'The seed is slung toward the cluster. When it arrives, the gate can follow it.',
+      'The gate slings the seed toward the cluster and keeps nothing: what was thrown does not come back. When it arrives, the gate can follow it.',
     ],
-    tasks: [it('grindless:launched_belt_seed')],
-    rewards: [xp(100)],
+    tasks: [ck()],
+    rewards: [xp(25)],
   },
 
   // ------------------------------------------------------------------ the belt

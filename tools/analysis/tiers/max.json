@@ -123,7 +123,7 @@
       "era": "max-nsc",
       "label": "The NSC belt and what comes home",
       "dimensions": ["grindless:nsc_belt"],
-      "items": ["grindless:nsc_planetesimal", "grindless:launched_belt_seed"]
+      "items": ["grindless:nsc_planetesimal"]
     }
   ],
   "eraItems": [
@@ -156,7 +156,7 @@
       "era": "max-nsc",
       "label": "The belt (gate c15) and the ending",
       "items": [
-        "grindless:launched_belt_seed", "grindless:nsc_planetesimal",         "grindless:horizon_lock",
+        "grindless:nsc_planetesimal", "grindless:horizon_lock",
         "m:gtceu:mass_stream_injector", "m:gtceu:mirror_shell", "m:gtceu:accretion_feeder", "m:gtceu:cluster_light_furnace", "m:gtceu:horizon_flux_clamp", "m:gtceu:segment_reclamation_works",
         "grindless:stream_bundle", "grindless:stream_pellet", "grindless:stream_bundle_block", "grindless:stream_turn_casing", "grindless:mirror_shell_segment", "grindless:feeder_coil_casing"
       ]

@@ -165,11 +165,13 @@
 		}
 		{
 			dependencies: ["7C7742F4DAA892DC"]
-			description: ["The seed is slung toward the cluster. When it arrives, the gate can follow it."]
-			icon: "grindless:launched_belt_seed"
+			description: ["The gate slings the seed toward the cluster and keeps nothing: what was thrown does not come back. When it arrives, the gate can follow it."]
+			icon: "grindless:nsc_belt_seed"
 			id: "3CF361CADD9C095D"
-			rewards: [{ id: "1A4BB59D6A783D95", type: "xp", xp: 100 }]
-			tasks: [{ id: "387902B3416C603E", item: "grindless:launched_belt_seed", type: "item" }]
+			rewards: [{ id: "1A4BB59D6A783D95", type: "xp", xp: 25 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "56C4F8C6FCFCE11D", type: "checkmark" }]
 			title: "Seed Away"
 			x: 26.0d
 			y: 0.0d

@@ -10,9 +10,7 @@
     "gtceu:cleanroom",
     "gtceu:data_bank"
   ],
-  "noUse": [
-    "grindless:launched_belt_seed"
-  ],
+  "noUse": [],
   "routes": [],
   "machineInfo": []
 }

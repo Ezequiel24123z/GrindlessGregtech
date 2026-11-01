@@ -92,7 +92,6 @@
     { "id": "gtceu:horizon_strand_ingot", "role": "acquisition", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "gtceu:horizon_strand_ingot", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "grindless:epilogue", "role": "acquisition", "reason": "MX-E1: the epilogue book is given at the MAX+ arrival, not by a recipe" },
-        { "id": "grindless:launched_belt_seed", "role": "use", "reason": "C3 audit (C1 F2): gate c15 makes it and the max-nsc grant in tiers/max.json (travel.js) takes it when the belt opens;         no recipe uses it" },
             { "id": "grindless:cold_horizon_conduit", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H3 (the condensate assembler's frame part, c4); delete the row then" },
             { "id": "grindless:cold_horizon_waveguide", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H3 (the condensate assembler's frame part, c4); delete the row then" },
             { "id": "grindless:horizon_frame_part", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-G1 (the frame of the Hyperstargate); delete the row then" },

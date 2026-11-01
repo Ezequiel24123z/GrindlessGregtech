@@ -21,7 +21,6 @@
   T.ids = {
     gcRelayProbe: 'grindless:gc_relay_probe',
     launchedGcProbe: 'grindless:launched_gc_probe',
-    nscBeltSeed: 'grindless:nsc_belt_seed',
-    launchedBeltSeed: 'grindless:launched_belt_seed'
+    nscBeltSeed: 'grindless:nsc_belt_seed'
   }
 })()

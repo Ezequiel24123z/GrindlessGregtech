@@ -91,7 +91,6 @@
       "grindless:gc_relay_probe",
       "grindless:launched_gc_probe",
       "grindless:nsc_belt_seed",
-      "grindless:launched_belt_seed",
       "grindless:epilogue",
       "grindless:horizon_strand_repeater",
       "grindless:silicate_slag",

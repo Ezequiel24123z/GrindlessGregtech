@@ -46,7 +46,7 @@ test('c15 is 2^33 = V[OpV] x 16 A for 1,200 t at the Sgr A* ring, burns the seed
   assert.equal(c15.site, 'sgr_a_orbit');
   assert.deepEqual(c15.itemsIn, [{ id: 'grindless:nsc_belt_seed', count: 1 }, { id: 'grindless:launched_gc_probe', count: 1 }]);
   assert.deepEqual(c15.kept, []);
-  assert.deepEqual(c15.itemsOut, [{ id: 'grindless:launched_belt_seed', count: 1 }]);
+  assert.deepEqual(c15.itemsOut, [], 'no launched receipt: nothing would consume it');
   assert.equal(gate[gate.findIndex((r) => r.name === 'hold_sgr_a_probe') + 1], c15, 'the row follows c14 (MAX+ gate rows come after it)');
   assert.equal(new Set(gate.map((r) => r.circuit)).size, gate.length, 'no circuit repeats');
 });
@@ -76,7 +76,7 @@ test('kerr_sling polls every source place with its own rows and keeps each pendi
 
 test('every id is registered (F1 or earlier) and max-nsc is a tier-model substage', () => {
   const text = JSON.stringify(JSON.parse(fs.readFileSync(path.join(tables, 'max_ids.json'), 'utf8')));
-  for (const id of ['grindless:nsc_belt_seed', 'grindless:launched_belt_seed', 'grindless:nsc_ephemeris', 'grindless:rydberg_logic_array',
+  for (const id of ['grindless:nsc_belt_seed', 'grindless:nsc_ephemeris', 'grindless:rydberg_logic_array',
     'grindless:max_robot_arm', 'grindless:max_sensor', 'max-nsc']) assert.ok(text.includes(`"${id}"`), id);
 });
 

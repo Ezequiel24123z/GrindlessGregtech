@@ -148,12 +148,12 @@
           "itemsOut": [{ "id": "grindless:launched_gc_probe", "count": 1 }]
         },
         {
-          "_why": "MAX-T2 (docs/eras/max.md Bridges, S0-11): the c15 throw of the belt seed from the gate built on the Sgr A* platform (gcyr:black_hole_orbit) to the nuclear star cluster, 16 A x V[OpV] = 2^33 EU/t for 1,200 t on two OpV 16 A hatches (S0-11's proven row hold_s0_max_c15). The seed, which carries the ephemeris that aimed it, is the cost; the Sgr A* relay forwards the belt throw and burns the launched GC probe (as c13 burns the launched bulge seed); nothing is kept. It leaves launched and uxv/kerr_sling.js places F1's belt platform (relay_platforms.json nsc, source Sgr A*) and the max-nsc substage follows from the arrival.",
+          "_why": "MAX-T2 (docs/eras/max.md Bridges, S0-11): the c15 throw of the belt seed from the gate built on the Sgr A* platform (gcyr:black_hole_orbit) to the nuclear star cluster, 16 A x V[OpV] = 2^33 EU/t for 1,200 t on two OpV 16 A hatches (S0-11's proven row hold_s0_max_c15). The seed, which carries the ephemeris that aimed it, is the cost; the Sgr A* relay forwards the belt throw and burns the launched GC probe (as c13 burns the launched bulge seed); nothing is kept and nothing comes back: no launched receipt, because no throw leaves from the belt to burn it (c16 to c19 leave none either). uxv/kerr_sling.js places F1's belt platform (relay_platforms.json nsc, source Sgr A*) and the max-nsc substage follows from the arrival.",
           "name": "hold_nsc_belt",
           "circuit": 15, "eut": 8589934592, "duration": 1200, "site": "sgr_a_orbit",
           "itemsIn": [{ "id": "grindless:nsc_belt_seed", "count": 1 }, { "id": "grindless:launched_gc_probe", "count": 1 }],
           "kept": [],
-          "itemsOut": [{ "id": "grindless:launched_belt_seed", "count": 1 }]
+          "itemsOut": []
         },
         {
           "_why": "XP-T1 (docs/eras/maxplus.md, gate c16): the c16 throw of the launched intergalactic probe from the gate on the Sgr A* platform (gcyr:black_hole_orbit) to 30 Doradus in the Large Magellanic Cloud, V[MAX] x 64 A = 2^37 EU/t for 1,200 t on a 1,024 A MAX+ hatch (the warp gate's pattern takes INPUT_ENERGY). The slingshot's launched probe is the cost; the horizon lock stays in the bus to aim it. It leaves launched and uxv/kerr_sling.js places the tarantula platform (relay_platforms.json tarantula, source gcyr:black_hole_orbit); the maxplus-lmc grant follows from the arrival.",

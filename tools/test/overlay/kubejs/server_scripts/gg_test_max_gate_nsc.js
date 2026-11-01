@@ -234,7 +234,7 @@
     var row = WG.recipes.filter(function (r) { return r.name === 'hold_nsc_belt' })[0]
     check('static_c15_row', !!row && row.circuit === 15 && row.eut === EUT && row.duration === DURATION && row.site === 'sgr_a_orbit' &&
       row.itemsIn.length === 2 && row.itemsIn[0].id === SEED && row.itemsIn[1].id === PROBE && row.kept.length === 0 &&
-      row.itemsOut.length === 1 && row.itemsOut[0].id === LAUNCHED, JSON.stringify(row || null))
+      row.itemsOut.length === 0, JSON.stringify(row || null))
     var hold = recipe(HOLD)
     var seed = recipe('grindless:assembly_line/nsc_belt_seed')
     check('static_recipes', !!hold && !!seed && MN.skipped.length === 0 && (WG.skipped || []).length === 0 && (WG.clashes || []).length === 0,
@@ -339,7 +339,7 @@
         var out = contents(S.gateOut.getInventory())
         var inBus = contents(S.gateBus.getInventory())
         check('hold_long', true, 'WORKING through the whole run; network stored ' + S.storedAtStart + ' at the start, ' + stored() + ' at the end')
-        check('launched_out', out.indexOf(LAUNCHED + 'x1') >= 0, 'output bus ' + out)
+        check('nothing_out', out.indexOf(LAUNCHED) < 0, 'output bus ' + out + ' (c15 returns no launched receipt)')
         check('seed_consumed', inBus.indexOf('nsc_belt_seed') < 0 && inBus.indexOf('launched_gc_probe') < 0, 'input bus ' + inBus)
         S.phase = 'platform'
         S.platformAt = S.tick

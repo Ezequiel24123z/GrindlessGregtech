@@ -39,7 +39,6 @@
         ['gc_relay_probe', 'GC Relay Probe', 'A probe that sets a relay at the galactic centre.', 'Sent through the gate to Sgr A*.'],
         ['launched_gc_probe', 'Launched GC Probe', 'A relay probe on its way.', 'Lands at Sgr A*.'],
         ['nsc_belt_seed', 'NSC Belt Seed', 'A seed that starts a belt in the nuclear star cluster.', 'Sent through the gate to the NSC belt.'],
-        ['launched_belt_seed', 'Launched Belt Seed', 'A belt seed on its way.', 'Lands in the NSC belt.'],
         ['epilogue', 'Epilogue', 'The record of everything made on the road to the end.', 'Given at the MAX+ arrival.'],
         ['horizon_strand_repeater', 'Horizon Strand Repeater', 'Horizon strand wire and a chain strand repeater.', 'Links the Sgr A* relay to its loop.'],
         ['silicate_slag', 'Silicate Slag', 'Slag from smelting silicate debris.', 'Reduced to silicon.'],

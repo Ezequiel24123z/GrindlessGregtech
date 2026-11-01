@@ -96,7 +96,7 @@ OpV ids are only consumed or kept, never redefined. The OpV changes MAX needs ar
 **c15, Sgr A* to the belt.** A warp gate is built at Sgr A* orbit (its controller carried) and fed by wireless:
 
 - `nsc_belt_seed` (T2; assembly line at VA[MAX], MAX parts): 1 `probe_seed`, 1 `nsc_ephemeris` (imager c2), 1 `rydberg_logic_array`, 2 `grindless:max_robot_arm`, 2 `grindless:max_sensor`, 8 `metal_feedstock`, 4 `cluster_sinter_casing`, 2 `#gtceu:circuits/max`.
-- Gate c15: seed → `launched_belt_seed`, 2^33 EU/t for 1,200 t on two OpV 16 A hatches at Sgr A* orbit; `uhv/gate.js:30-34` gains the Sgr A* site.
+- Gate c15: seed (+ the launched GC probe, burned) → nothing, 2^33 EU/t for 1,200 t on two OpV 16 A hatches at Sgr A* orbit; `uhv/gate.js:30-34` gains the Sgr A* site. *As built (integrator, 2026-11-01):* the `launched_belt_seed` receipt was removed: no throw leaves from the belt to burn it, and c16 to c19 return none either.
 - The second hop restarts from a place that was itself reached by a relay (S0-11; OpV-S0-9 passed for Cygnus → Terzan 5).
 
 **First arrival at each place:** the platform holds a ME far ring, a 9x9 deck, one wireless tower anchor and a chest with the substage book. Nothing else is given.

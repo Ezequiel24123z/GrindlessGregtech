@@ -58,7 +58,7 @@ hash = "96474c0fb88f5b2a78589626554f6970cd76e411eb47711f175e953d87df9dd6"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/max_age.snbt"
-hash = "074116aa80df61209b944e60e4110b4a2d433d47986f4ecf3bce04cd12e10988"
+hash = "38c74da4a7e1190799ab11903289939dc7bfade99f2b7c00a1991dc73c031c15"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/max_circuits.snbt"
@@ -11553,10 +11553,6 @@ file = "kubejs/assets/grindless/textures/item/laue_lens.png"
 hash = "59de4449392c42f641e0f7b6c9fb219f01241a12a1d0dc928c76dfa707dd4ade"
 
 [[files]]
-file = "kubejs/assets/grindless/textures/item/launched_belt_seed.png"
-hash = "d49e996b065c85a7005b4ee168feb7dbaf991adb779dacbee9d780b7abd0b6e9"
-
-[[files]]
 file = "kubejs/assets/grindless/textures/item/launched_bulge_seed.png"
 hash = "e16c61a53520330f4a02f01f4d01284ecea6615b007d0773e354c7655073f51a"
 
@@ -15694,7 +15690,7 @@ hash = "a3bd9e95cb1b66f87b1f6d9c15acd1f7ebc0b7e2b5d99b4836a44d94cb8a9976"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_foundation_lang.js"
-hash = "0b5852fe10e51c01de883f9827ccbaacfe816d85a79d5bed6593cea6ea192910"
+hash = "0557d30271986916c3bec28e6d25ead5c0eef87062643070e29152cbda6b60c2"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_furnace_lang.js"
@@ -17030,7 +17026,7 @@ hash = "3c7fac3c9ea9a9f633a036cd65293b33e7ed3870604bd92a5e209e531d8bacde"
 
 [[files]]
 file = "kubejs/data/grindless/tables/gate.json"
-hash = "693f6e982134a253aa65df339784826b165c70c1055b78505d1d890db70870ed"
+hash = "81fd6469d82beefe3fe3ea97ab0015c2514ab9e29d497071de8017c8df7a967a"
 
 [[files]]
 file = "kubejs/data/grindless/tables/heavy_water_plant.json"
@@ -17106,7 +17102,7 @@ hash = "4bafe516563255d4954db0a9d829b44d3c4e36a541e6c70a8337b01003ca02f9"
 
 [[files]]
 file = "kubejs/data/grindless/tables/max_ids.json"
-hash = "0ce281fb87781855491dfd8ce1bfd756e095528534c64eb4a9ce21f03992fa4e"
+hash = "d02c93d85afdd31db12315f287e0c9295e7d6e07bd196efd0da765947bae2160"
 
 [[files]]
 file = "kubejs/data/grindless/tables/max_parts.json"
@@ -18906,7 +18902,7 @@ hash = "d08270bf8d973b1575db4cd55d888369a841d5ebe35f1a654141cfe042a897fe"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/foundation.js"
-hash = "626d661be09fb33c63a3c55660d58e6da01e183c49543e9fef591c6533d78eee"
+hash = "fec80e811a45b7e700c7e3bcc159f7cdb23d1ed2fdfd0469d7c408c39b6c06a6"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/furnace.js"
@@ -18954,7 +18950,7 @@ hash = "41956407eca900168a360ffaab7c3db4fe32784a057b5c39ec23d7dd92851005"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/travel.js"
-hash = "dc72f7660df223600e9ed725bcf450f308d11a5aa90f3b3bcfc31f1d84c3350e"
+hash = "5230a5883ce67bd9c2ebf0780a0afac6da7de534229b93e7d345ad20f7fe6888"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/winch.js"

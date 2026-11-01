@@ -49,7 +49,6 @@
     gc_relay_probe: { stack: 1 },
     launched_gc_probe: { stack: 1 },
     nsc_belt_seed: { stack: 1 },
-    launched_belt_seed: { stack: 1 },
     epilogue: { stack: 16 },
     horizon_strand_repeater: { stack: 16 },
     silicate_slag: { stack: 64 },
