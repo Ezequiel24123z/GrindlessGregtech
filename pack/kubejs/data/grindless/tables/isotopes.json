@@ -448,7 +448,8 @@
           "duration": 200,
           "itemsIn": [
             { "id": "grindless:pu244_plating_ampoule", "count": 1 },
-            { "id": "gtceu:aluminium_foil", "count": 2 }
+            { "id": "gtceu:aluminium_foil", "count": 2 },
+            { "id": "gtceu:duranium_plate", "count": 1 }
           ],
           "kept": [],
           "charge": [],

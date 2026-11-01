@@ -48,13 +48,13 @@ export default {
           ['pfd', I('gtceu:plutonium_244_dust'), 'Plutonium-244', 'raw'],
           ['po4', I('gtceu:plutonium_244_oxide_dust'), 'Plutonium-244 Oxide'],
           ['pam', I('grindless:pu244_plating_ampoule'), 'Plating Ampoule'],
-          ['pt2', I('grindless:plutonium_244_target'), 'Plutonium-244 Target'],
-          ['hic', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours', { from: ['pt2', 'x_fsc'], desc: 'A calcium-48 beam on an actinide target; the atoms fly out as recoil gas.' }],
+          ['pt2', I('grindless:plutonium_244_target'), 'Plutonium-244 Target', 'product', { from: ['pam', 'x_fsc'] }],
+          ['hic', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours', { desc: 'A calcium-48 beam on an actinide target; the atoms fly out as recoil gas.' }],
           ['gas', F('gtceu:flerovium_recoil_gas'), 'Flerovium Recoil Gas'],
           ['rec', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours', { from: ['gas', 'mem'], desc: 'Sends the gas through an etched membrane; the helium returns.' }],
           ['fl', I('grindless:flerovium_atoms'), 'Flerovium Atoms', 'product', { role: 'research' }],
-        ], 'the superheavy census', 2.5),
-        L('x_fsc', 10, 3.5, 'pl_zpm:duplate'),
+        ], 'the superheavy census'),
+        L('x_fsc', 5, 3.5, 'pl_zpm:duplate'),
         // californium-249 wheel
         ...chain(8, [
           ['tcl', F('gtceu:transcurium_liquor'), 'Transcurium Liquor', 'raw'],
@@ -92,7 +92,7 @@ export default {
           ['pc', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil', 'raw'],
           ['itf', I('grindless:ion_tracked_foil'), 'Ion-Tracked Foil'],
           ['mem', I('grindless:etched_membrane'), 'Etched Membrane'],
-        ], null, 12.5),
+        ], null, 7.5),
       ],
     },
     pressure: {
