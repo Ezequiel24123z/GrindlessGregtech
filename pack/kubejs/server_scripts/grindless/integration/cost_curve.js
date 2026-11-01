@@ -40,11 +40,15 @@
     return Object.prototype.hasOwnProperty.call(o, k)
   }
 
-  // A fixed threshold in (0, 1] per key (plain double arithmetic only, so the pack's Rhino and Node give the same bits)
+  // A fixed threshold in (0, 1] per key (plain double arithmetic only, so the pack's Rhino and Node give the same bits).
+  // No charCodeAt: the pack's Rhino returns a character from it, not a number, and the hash was NaN (so no input ever rounded
+  // up). The code of a printable ASCII character is its position in this table plus 32, which is what charCodeAt gave in Node.
+  var ASCII = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+
   function unitOf(key) {
     var h = 7
     var s = String(key)
-    for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 2147483647
+    for (var i = 0; i < s.length; i++) h = (h * 31 + ASCII.indexOf(s.charAt(i)) + 32) % 2147483647
     for (var k = 0; k < 3; k++) h = (h * 48271) % 2147483647
     return (h + 1) / 2147483648
   }

@@ -62,6 +62,13 @@ test('scaledCount dithers by key: exact at whole products, never below n, monoto
   assert.ok(Math.abs(mean(1, 1.001) - 1.001) < 0.01, 'a count of 1 at 1.001 hardly moves (ceil made it 2)');
 });
 
+test('the threshold hash uses no charCodeAt (the pack Rhino returns a character from it, so the hash was NaN and nothing rounded up)', () => {
+  const src = fs.readFileSync(PASS_FILE, 'utf8').replace(/\/\/.*$/gm, '');
+  assert.ok(!/charCodeAt|codePointAt/.test(src));
+  assert.equal(rule.scaledCount(1, 1.77, 'gtceu:hv_motor'), 2);
+  assert.equal(rule.scaledCount(1, 1.77, '#forge:plates/steel'), 1);
+});
+
 test('tierOfEut gives the lowest tier whose voltage covers the EU/t', () => {
   assert.equal(rule.tierOfEut(8), 'ulv');
   assert.equal(rule.tierOfEut(32), 'lv');
