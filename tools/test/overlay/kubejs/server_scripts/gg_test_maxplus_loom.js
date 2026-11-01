@@ -1,11 +1,11 @@
-// priority: -5299
+// priority: -5301
 // TEST ONLY, XP-H1 (gtceu:meta_material_loom). Command: kubejs custom_command gg_test_maxplus_loom
 // Band ONLY: X 46400-46463, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_loom).
-//   T1 (named uncertainty: the loom forms at Sgr A* on one 1,024 A MAX+ hatch and runs c1 at V[MAX] x 4):
+//   T1 (named uncertainty: the loom forms at Sgr A* on one 1,024 A MAX+ hatch and runs c1 at V[MAX]):
 //     lookup   every recipe id of the package (loom rows, press c4, older T4 to T7 rows, cooling row, controller line) is in the recipe manager
 //     static   nothing skipped
 //     formed   the loom forms with the hatch, a bus pair and a fluid hatch pair
-//     eut      c1 (horizon_shielding) starts at V[MAX] x 4 or more
+//     eut      c1 (horizon_shielding) starts at V[MAX] or more
 //     output   horizon shielding in the output bus
 // The older rows change only their data on mechanisms proven by their own packages, so they are looked up, not run.
 (function () {
@@ -25,7 +25,7 @@
   var PARTS = [HATCH, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
 
   var UNITS = [
-    { id: 'loom', machine: 'gtceu:meta_material_loom', cx: 46432, minEut: Number(GTValues.V[14]) * 4,
+    { id: 'loom', machine: 'gtceu:meta_material_loom', cx: 46432, minEut: Number(GTValues.V[14]),
       items: [['grindless:graded_horizon_laminate', 8], ['grindless:horizon_compressed_plate', 4]], fluid: ['gtceu:kerr_condensate', 4000], circuit: 1, out: 'grindless:horizon_shielding', outMin: 1 }
   ]
 
@@ -36,7 +36,7 @@
     'chemical_bath/polished_waveguide_tube', 'mtj_sputtering/nb_lined_tube', 'nuclear_demagnetisation/cold_horizon_waveguide',
     'coated_conductor/conduit_tape', 'pulsed_laser_deposition/thick_conduit_tape', 'magnet_winding/cabled_conductor',
     'chemical_reactor/condensate_alcogel', 'supercritical_drying/condensate_superleak_plug', 'shequid_assembly/calibrated_condensate_leak',
-    'superfluid_helium/horizon_valve'
+    'shequid_assembly/horizon_valve'
   ]
 
   function classes() {

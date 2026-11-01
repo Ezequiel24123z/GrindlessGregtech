@@ -7,9 +7,10 @@
 //   T6 horizon conduit     coated conductor c12 -> conduit_tape; oxide PLD c9 -> thick_conduit_tape; HTS works c19 -> cabled_conductor;
 //                          loom c3 -> horizon_conduit; helium refrigerator (keyed) -> cold_horizon_conduit
 //   T7 horizon valve       chemical reactor c29 (TEOS sol-gel) -> condensate_alcogel; aerogel works c7 -> condensate_superleak_plug;
-//                          SHeQUID c9 -> calibrated_condensate_leak; loom c4 -> horizon_valve_body; superfluid helium plant c4 -> horizon_valve
+//                          SHeQUID c9 -> calibrated_condensate_leak; loom c4 -> horizon_valve_body; SHeQUID c10 -> horizon_valve
+//                          (the superfluid helium plant has no item slots, so the final valve step runs on the SHeQUID line)
 //
-// The loom runs at home at V[MAX] x 4 A for 600 ticks per row; the older rows run at their own machine's VA. Older-machine rows are written here,
+// The loom runs at home at V[MAX] (the 2^31 EU/t cap of the static run) for 600 ticks per row; the older rows run at their own machine's VA. Older-machine rows are written here,
 // as XP-W's maxplus/power.js writes P18's: the circuits are the first free ones of each older machine type counted in line-id order (P1..P25,
 // T1..T17, ...), built or not (maxplus.md 'Older machines'); extraction and MTJ sit at 32, where rows differ by item inputs. Lookup: each row has
 // a circuit or an item no other row of its type holds. Published for the tests: global.grindless.maxPlusLoom { rows, loom, skipped, controller }.
@@ -24,7 +25,7 @@
   function va(t) { return Number(GTValues.VA[t]) }
   var VA_MAX = va(14)
   var V_MAX = Number(GTValues.V[14])
-  var LOOM_EUT = V_MAX * 4
+  var LOOM_EUT = V_MAX
   var KERR = 'gtceu:kerr_condensate'
   var BOIL = 'grindless:condensate_boil_off'
   var CIRCUIT = '#gtceu:circuits/max'
@@ -74,8 +75,8 @@
     { type: 'shequid_assembly', name: 'calibrated_condensate_leak', circuit: 9, eut: va(12), duration: 900, key: 'grindless_shequid_assembly',
       items: [['grindless:condensate_superleak_plug', 1], ['grindless:nb_jj_wafer', 2]], kept: [['grindless:shequid_rotation_ref', 1]],
       fluids: [[LHE, 500]], outs: [['grindless:calibrated_condensate_leak', 1]], fluidOuts: [['gtceu:helium', 500]] },
-    { type: 'superfluid_helium', name: 'horizon_valve', circuit: 4, eut: va(8), duration: 800,
-      items: [['grindless:horizon_valve_body', 1]], fluids: [[LHE, 2000]],
+    { type: 'shequid_assembly', name: 'horizon_valve', circuit: 10, eut: va(12), duration: 800, key: 'grindless_shequid_assembly',
+      items: [['grindless:horizon_valve_body', 1]], kept: [['grindless:shequid_rotation_ref', 1]], fluids: [[LHE, 2000]],
       outs: [['grindless:horizon_valve', 1]], fluidOuts: [['gtceu:helium', 1000]] }
   ]
 

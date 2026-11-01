@@ -21,10 +21,10 @@ test('the stand-in runs the script without errors, skips nothing', () => {
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(ML.skipped), []);
   assert.equal(ML.loom.length, 4);
-  assert.equal(ML.rows.length, 14);
+  assert.equal(ML.rows.length, 13);
 });
 
-test('loom rows: circuits 1 to 4, one fluid in, boil-off byproduct, V[MAX] x 4', () => {
+test('loom rows: circuits 1 to 4, one fluid in, boil-off byproduct', () => {
   const rows = plain(ML.loom);
   assert.deepEqual(rows.map((r) => r.circuit), [1, 2, 3, 4]);
   for (const r of rows) {
