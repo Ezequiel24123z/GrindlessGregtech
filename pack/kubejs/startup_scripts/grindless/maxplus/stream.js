@@ -23,7 +23,7 @@
   MS.works = {
     name: 'pristine_gas_works', machine: 'gtceu:pristine_gas_works', type: 'pristine_gas_works', dataKey: 'grindless_pristine_gas_works',
     lang: 'Pristine Gas Works', maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 1 }, casing: WORKS_CASING,
-    texture: 'gtceu:block/casings/solid/machine_casing_atomic', overlay: 'grindless:block/multiblock/pristine_gas_works',
+    texture: 'gtceu:block/casings/gcym/atomic_casing', overlay: 'grindless:block/multiblock/pristine_gas_works',
     width: 25, height: 7, depth: 25, generator: false,
     pal: { F: WORKS_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil' },
     parts: function () {
@@ -33,7 +33,7 @@
   MS.torus = {
     name: 'primordial_fusion_torus', machine: 'gtceu:primordial_fusion_torus', type: 'primordial_fusion_torus', dataKey: 'grindless_primordial_fusion_torus',
     lang: 'Primordial Fusion Torus', maxIO: { itemsIn: 3, itemsOut: 0, fluidsIn: 2, fluidsOut: 2 }, casing: TORUS_CASING,
-    texture: 'gtceu:block/casings/solid/machine_casing_atomic', overlay: 'grindless:block/multiblock/primordial_fusion_torus',
+    texture: 'gtceu:block/casings/gcym/atomic_casing', overlay: 'grindless:block/multiblock/primordial_fusion_torus',
     width: 23, height: 9, depth: 23, generator: true,
     pal: { F: TORUS_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil' },
     parts: function () {

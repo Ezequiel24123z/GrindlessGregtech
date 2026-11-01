@@ -147,7 +147,7 @@
           .rotationState(RotationState.ALL)
           .abilities(PartAbility.PARALLEL_HATCH)
         builder.modelPropertyBool(GTModelProperties.IS_FORMED, false)
-        builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('gtceu', 'block/machines/parallel_hatch_mk4'))
+        builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('grindless', 'block/machines/uhv_parallel_hatch'))
       })
   })
 })()
