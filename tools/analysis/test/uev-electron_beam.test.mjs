@@ -295,7 +295,7 @@ test('UV\'s circuits 1-4 on srf_cavity are untouched; the new row never duplicat
   // UIV-B3 adds c7 (solid_neon_cone): the only circuit-7 row
   // OpV-A2 adds c8 (rrr_nb_target, the Nb TSV sputter target): the only circuit-8 row
   // MAX-D4 adds c9 (pellet_jacket; c7 was taken): the only circuit-9 row, and nothing above it
-  assert.ok(/circuit: 4/.test(cold) && (cold.match(/circuit: 5/g) || []).length === 1 && /name: 'para_h2_target', type: 'srf_cavity', circuit: 5/.test(cold) && (cold.match(/circuit: 6/g) || []).length === 1 && /name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6/.test(cold) && (cold.match(/circuit: 7/g) || []).length === 1 && /name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7/.test(cold) && (cold.match(/circuit: 8/g) || []).length === 1 && /name: 'rrr_nb_target', type: 'srf_cavity', circuit: 8/.test(cold) && (cold.match(/circuit: 9/g) || []).length === 1 && /name: 'pellet_jacket', type: 'srf_cavity', circuit: 9/.test(cold) && (cold.match(/circuit: 10\b/g) || []).length === 1 && /name: 'max_srf_cavity', type: 'srf_cavity', circuit: 10/.test(cold) && !/circuit: (1[1-9]|[23]\d)\b/.test(cold));
+  assert.ok(/circuit: 4/.test(cold) && (cold.match(/circuit: 5/g) || []).length === 1 && /name: 'para_h2_target', type: 'srf_cavity', circuit: 5/.test(cold) && (cold.match(/circuit: 6/g) || []).length === 1 && /name: 'polarised_h_ice', type: 'srf_cavity', circuit: 6/.test(cold) && (cold.match(/circuit: 7/g) || []).length === 1 && /name: 'solid_neon_cone', type: 'srf_cavity', circuit: 7/.test(cold) && (cold.match(/circuit: 8/g) || []).length === 1 && /name: 'rrr_nb_target', type: 'srf_cavity', circuit: 8/.test(cold) && (cold.match(/circuit: 9/g) || []).length === 1 && /name: 'pellet_jacket', type: 'srf_cavity', circuit: 9/.test(cold) && (cold.match(/circuit: 10\b/g) || []).length === 1 && /name: 'max_srf_cavity', type: 'srf_cavity', circuit: 10/.test(cold) && (cold.match(/circuit: 11\b/g) || []).length === 1 && /name: 'nb_driver_cell', type: 'srf_cavity', circuit: 11/.test(cold) && !/circuit: (1[2-9]|[23]\d)\b/.test(cold));
   assert.ok(!startup.includes("registry('gtceu:recipe_type'") || !startup.includes("create('srf_cavity')"));
 });
 
@@ -343,7 +343,8 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
       + read(path.join(kube, 'client_scripts', 'grindless', 'max_components_lang.js'))
       + read(path.join(kube, 'client_scripts', 'grindless', 'max_membrane_line_lang.js'))
 + read(path.join(kube, 'client_scripts', 'grindless', 'max_feeder_lang.js')) // MAX-A2's c25 and c27, MAX-B1's c26, c30, c31
-      + read(path.join(kube, 'client_scripts', 'grindless', 'max_horizon_interferometer_lang.js')); // MX-S1's c31-32
+      + read(path.join(kube, 'client_scripts', 'grindless', 'max_horizon_interferometer_lang.js'))
++ read(path.join(kube, 'client_scripts', 'grindless', 'max_synchroniser_lang.js')); // MX-S1's c31-32; MX-S2's c28
     for (const r of T.types[type].recipes) assert.ok(rowLang.includes(`'gtceu.recipe.${dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
 });

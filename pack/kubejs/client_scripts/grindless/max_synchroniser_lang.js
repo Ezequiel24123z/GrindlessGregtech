@@ -14,7 +14,7 @@
 
         ['grindless.machine.ergoregion_synchroniser.tooltip.0',
             '\u00a77Locks a shell to the spin of Sgr A*: phase locks. Runs only in its orbit.',
-            '\u00a77Fija una envoltura al giro de Sgr A*: bloqueos de fase. Solo funciona en su órbita.'],
+            '\u00a77Fija una envoltura al giro de Sgr A*: bloqueos de fase. Solo en su órbita.'],
 
         ['emi.grindless.info.ergoregion_synchroniser.0',
             'Two SRF driver modules, a pair of calibrated oscillator banks and four tunable impedance sheets are tuned against a quantum memory node in a superfluid He-3 bath until the whole assembly follows the frame dragging of the black hole: a horizon phase lock. Every shell of the mirror swarm needs one. A fatigued VO2 sheet comes out one time in eight; the extraction cascade (circuit 32) turns it back into vanadium pentoxide and sapphire dust.',
@@ -34,6 +34,18 @@
             'Circuit 2: a spent phase lock is retuned with one new oscillator bank.',
             'Circuito 2: un bloqueo de fase gastado se reajusta con un banco de osciladores nuevo.']
     ]
+
+    // [key, en, es] of the line recipes
+    ;[
+        ['gtceu.recipe.grindless_nuclear_clock.clock_steer_oscillator', 'Circuit 8: a clock-steering oscillator', 'Circuito 8: un oscilador de gu\u00eda de reloj'],
+        ['gtceu.recipe.grindless_crystal_growth.sapphire_web_wafer', 'Circuit 30: a c-plane sapphire web wafer pulled from the alumina melt', 'Circuito 30: una oblea de zafiro en plano c extra\u00edda del fundido de alúmina'],
+        ['gtceu.recipe.grindless_crystal_growth.sapphire_resonator_disc', 'Circuit 31: a sapphire boule for the whispering-gallery resonator disc', 'Circuito 31: un lingote de zafiro para el disco resonador de galer\u00eda susurrante'],
+        ['gtceu.recipe.grindless_beuv_lithography.patterned_vo2_metasurface', 'Circuit 16: the VO2 film exposed with the metasurface pattern', 'Circuito 16: la pel\u00edcula de VO2 expuesta con el patr\u00f3n de la metasuperficie'],
+        ['gtceu.recipe.grindless_mtj_sputtering.metallised_metasurface', 'Circuit 26: titanium and gold sputtered over the patterned VO2 film', 'Circuito 26: titanio y oro pulverizados sobre la pel\u00edcula de VO2 modelada'],
+        ['gtceu.recipe.grindless_pulsed_laser_deposition.vo2_on_sapphire', 'Circuit 6: VO2 grown on the sapphire web wafer by pulsed laser deposition', 'Circuito 6: VO2 crecido sobre la oblea de zafiro por deposici\u00f3n l\u00e1ser pulsada'],
+        ['gtceu.recipe.grindless_photonic_foundry.optical_phase_lock_unit', 'Circuit 27: an optical phase-lock unit', 'Circuito 27: una unidad de bloqueo de fase \u00f3ptico'],
+        ['gtceu.recipe.grindless_single_crystal_casting.large_grain_nb_disc', 'Circuit 28: four niobium ingots drawn into one large-grain disc', 'Circuito 28: cuatro lingotes de niobio estirados en un disco de grano grande']
+    ].forEach(function (e) { ENTRIES.push(e) })
 
     ;['en_us', 'es_es'].forEach(function (lang, li) {
         ClientEvents.lang(lang, function (event) {
