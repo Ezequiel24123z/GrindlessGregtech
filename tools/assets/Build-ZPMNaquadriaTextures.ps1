@@ -62,62 +62,63 @@ function Set-Both {
 $Lit = Hex 'B0B0B0'; $Mid = Hex '707070'; $Dark = Hex '404040'; $Deep = Hex '222222'; $Pit = Hex '161616'
 $LampOn = Hex '62FF86'; $LampOff = Hex '0C6B2E'
 
-# The steel bezel: x1..14, y1..14, bevelled from the top left, with a dark panel inside and a lamp under the window.
-function New-Bezel {
-    $c = New-Canvas
-    Set-Rect $c 1 1 14 14 $Dark
-    for ($i = 1; $i -le 14; $i++) {
-        Set-Px $c $i 1 $Lit; Set-Px $c 1 $i $Lit
-        Set-Px $c $i 14 $Deep; Set-Px $c 14 $i $Deep
-    }
-    Set-Rect $c 2 2 12 12 $Mid
-    Set-Rect $c 3 3 10 8 $Deep
-    Set-Rect $c 3 11 10 3 $Dark
-    return $c
+# Own controller faces (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
+}
+
+$Own = @{
+    # the refinery: a tray column and a violet solution drum, joined by a lilac pipe
+    refinery = @{ Mode = 'chase'; Pal = @{}
+        Ramp = @((Hex '3A2A5A'), (Hex 'B8A0F0'), (Hex 'D0C0FF'), (Hex 'E8DCFF'), (Hex 'FFFFFF'))
+        Ramp2 = @((Hex '2A1A3A'), (Hex '6A2C9E'), (Hex '8E3FD0'), (Hex 'B565F0'), (Hex 'E3B8FF'))
+        Map = @('.MMMMMM.....', '.DPPPPD.MMMM', '.DaaaaD.DbbD', '.DPPPPD.DbbD', '.DccccD.DbbD', '.DPPPPD.DbbD', '.DddddD.DbbD', '.DPPPPD.MMMM', '.MMMMMM0123.', '............', '............', '.....ll.....') }
+    # the fuel works: two canisters filling with amber fuel, over a conveyor
+    fuel_works = @{ Mode = 'fill'; Pal = @{ k = (Hex 'B06A38'); q = (Hex '8A4E28') }
+        Ramp = @((Hex '4A2A0A'), (Hex 'C96A0A'), (Hex 'FF9E1F'), (Hex 'FFD15A'), (Hex 'FFF0B0')); Ramp2 = @()
+        Map = @('.MMMM..MMMM.', '.D77D..D66D.', '.D66D..D55D.', '.D55D..D44D.', '.D44D..D33D.', '.D33D..D22D.', '.D22D..D11D.', '.D11D..D00D.', '.D00D..D00D.', '.MMMM..MMMM.', 'kqkqkqkqkqkq', '.....ll.....') }
 }
 
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
-    $c = New-Bezel
-    $e = New-Canvas
-    if ($Kind -eq 'refinery') {
-        # the drum window x4..11, y4..9 (a rounded vessel); violet solution while working
-        for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-        if ($Active) {
-            $violet = @((Hex '6A2C9E'), (Hex '8E3FD0'), (Hex 'B565F0'), (Hex 'E3B8FF'))
-            for ($y = 4; $y -le 9; $y++) {
-                for ($x = 5; $x -le 10; $x++) {
-                    $band = (($y - 4) + $Frame) % 4
-                    $k = if ((($x + $y + $Frame) % 5) -eq 0) { 3 } else { [Math]::Min(2, $band) }
-                    Set-Both $c $e $x $y $violet[$k]
-                }
-            }
-        }
-        else { for ($y = 5; $y -le 8; $y++) { for ($x = 5; $x -le 10; $x++) { Set-Px $c $x $y (Hex '2A1A3A') } } }
-    }
-    else {
-        # the tank window x6..9, y4..9: the amber level rises with the frame
-        for ($y = 4; $y -le 9; $y++) { for ($x = 6; $x -le 9; $x++) { Set-Px $c $x $y $Pit } }
-        Set-Rect $c 4 4 1 6 $Dark; Set-Rect $c 11 4 1 6 $Dark
-        if ($Active) {
-            $amber = @((Hex 'FFD15A'), (Hex 'FF9E1F'), (Hex 'C96A0A'))
-            $level = 2 + $Frame
-            for ($i = 0; $i -lt $level; $i++) {
-                $y = 9 - $i
-                for ($x = 6; $x -le 9; $x++) {
-                    $k = if ($i -eq $level - 1) { 0 } elseif ($x -eq 6) { 2 } else { 1 }
-                    Set-Both $c $e $x $y $amber[$k]
-                }
-            }
-        }
-    }
-    # run lamp under the window
-    Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })
-    Set-Px $c 8 12 $(if ($Active) { $LampOn } else { $LampOff })
-    if ($Active) { Set-Px $e 7 12 $LampOn; Set-Px $e 8 12 $LampOn }
-    # nothing may sit on the outer ring
-    for ($i = 0; $i -lt 16; $i++) { foreach ($p in @(@($i, 0), @($i, 15), @(0, $i), @(15, $i))) { Set-Px $c $p[0] $p[1] 0; Set-Px $e $p[0] $p[1] 0 } }
-    return @{ C = $c; E = $e }
+    return New-OwnFace $Own[$Kind] $Frame $Active
 }
 
 $kinds = @(@{ Kind = 'refinery'; Dir = 'block/multiblock/naquadria_refinery' }, @{ Kind = 'fuel_works'; Dir = 'block/multiblock/naquadah_fuel_works' })
