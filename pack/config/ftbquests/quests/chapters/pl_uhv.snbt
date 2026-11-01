@@ -1725,7 +1725,7 @@
 			dependencies: ["5826E280D74895CE"]
 			icon: "gtceu:biomass_bucket"
 			id: "1A9E0E2088FF38D6"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "3A6B50053A3AA5E1", item: "gtceu:biomass_bucket", optional_task: true, type: "item" }
 				{ id: "5861E17A6943BF86", type: "checkmark" }

@@ -127,7 +127,7 @@ export default {
         n('shard', 0, 0, I('grindless:horizon_shard'), 'Horizon Shard', { kind: 'raw', sub: 'Never used up', desc: 'The Welcome quest gives it once. The machine keeps it.' }),
         n('hc', 2, 0, M('gtceu:lv_horizon_collector', 'gtceu:horizon_collection'), 'Horizon Collector', {
           kind: 'ours', from: ['shard'],
-          desc: 'Circuit 1 and the shard: 128 logs every 8 s (960 a minute), out of nowhere. It is the steam age\'s automatic log source; the greenhouse grows trees where the collector\'s other rows feed other lines.',
+          desc: 'Circuit 1 and the shard: a stack of logs every few seconds, out of nowhere. It is the steam age\'s automatic log source; the greenhouse grows trees where the collector\'s other rows feed other lines.',
         }),
         n('clogs', 4, 0, I('minecraft:oak_log'), 'Oak Logs', { kind: 'product', from: ['hc'], sub: 'Charcoal, planks, and the first rubber' }),
       ],

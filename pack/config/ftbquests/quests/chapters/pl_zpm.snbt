@@ -36,20 +36,20 @@
 			linked_quest: "591BFBC2305382F2"
 			shape: "rsquare"
 			x: 0.5d
-			y: 6.75d
+			y: 9.5d
 		}
 		{
 			id: "11196A111D23714C"
 			linked_quest: "7D9B7EAC07F4A088"
 			shape: "rsquare"
 			x: 0.5d
-			y: 8.25d
+			y: 11.0d
 		}
 		{
 			id: "572403E6798442F5"
 			linked_quest: "13A716AD46F66C22"
 			shape: "rsquare"
-			x: 17.25d
+			x: 19.75d
 			y: 8.75d
 		}
 		{
@@ -57,98 +57,98 @@
 			linked_quest: "7ABCC0FFFDAD3AEF"
 			shape: "rsquare"
 			x: 8.0d
-			y: 16.0d
+			y: 19.0d
 		}
 		{
 			id: "13A17D461127AC81"
 			linked_quest: "113AE7FAC7133599"
 			shape: "rsquare"
 			x: 15.5d
-			y: 14.5d
+			y: 17.5d
 		}
 		{
 			id: "7E9076DEEA40EF8C"
 			linked_quest: "1DD00667E82E75AE"
 			shape: "rsquare"
 			x: 5.5d
-			y: 25.75d
+			y: 28.5d
 		}
 		{
 			id: "3021EE3E4ABD9359"
 			linked_quest: "7C00BCD35855B841"
 			shape: "rsquare"
 			x: 24.75d
-			y: 28.0d
+			y: 31.0d
 		}
 		{
 			id: "313E678FA5780781"
 			linked_quest: "1592930738780420"
 			shape: "rsquare"
 			x: 0.5d
-			y: 33.75d
+			y: 40.0d
 		}
 		{
 			id: "5ACF684DA681A6C6"
 			linked_quest: "3C956144AD26D46F"
 			shape: "rsquare"
 			x: 0.5d
-			y: 35.25d
+			y: 41.5d
 		}
 		{
 			id: "19ECD6AB1E80BA29"
 			linked_quest: "5CB069B8ABB07042"
 			shape: "rsquare"
 			x: 0.5d
-			y: 36.75d
+			y: 43.0d
 		}
 		{
 			id: "11C659F809C238F8"
 			linked_quest: "79841FC0203AF089"
 			shape: "rsquare"
 			x: 13.0d
-			y: 33.0d
+			y: 37.75d
 		}
 		{
 			id: "5EDC0732E7370F49"
 			linked_quest: "5987C5957696843D"
 			shape: "rsquare"
 			x: 5.5d
-			y: 40.5d
+			y: 46.5d
 		}
 		{
 			id: "5E6F01D26DC39706"
 			linked_quest: "18F537A953D4B78D"
 			shape: "rsquare"
 			x: 8.0d
-			y: 40.5d
+			y: 46.5d
 		}
 		{
 			id: "34899FACC9F95597"
 			linked_quest: "1C51F11F885E4373"
 			shape: "rsquare"
 			x: 10.5d
-			y: 40.5d
+			y: 46.5d
 		}
 		{
 			id: "38F8A0EABB2C8702"
 			linked_quest: "3B4CA27555ED52FF"
 			shape: "rsquare"
 			x: 22.25d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			id: "76DF384BCCC0E8B4"
 			linked_quest: "5A5AFC686B2574CF"
 			shape: "rsquare"
 			x: 22.25d
-			y: 43.5d
+			y: 49.5d
 		}
 		{
 			id: "1B79079E79D2865F"
 			linked_quest: "17260FE287B08ADA"
 			shape: "rsquare"
 			x: 12.25d
-			y: 68.5d
+			y: 74.5d
 		}
 	]
 	quests: [
@@ -267,10 +267,53 @@
 			]
 			title: "Waste Retrieval Plant"
 			x: 3.0d
-			y: 7.5d
+			y: 10.25d
 		}
 		{
 			dependencies: ["7377EBA6D8DFAC14"]
+			icon: "gtceu:radium_dust"
+			id: "5A5439B53D3AFC63"
+			size: 1.25d
+			subtitle: "Circuit 1: one dust from four waste"
+			tasks: [
+				{ id: "7884E450814A92A5", item: "gtceu:radium_dust", optional_task: true, type: "item" }
+				{ id: "760A1B11417EC79B", type: "checkmark" }
+			]
+			title: "Radium"
+			x: 5.5d
+			y: 7.25d
+		}
+		{
+			icon: "gtceu:platinum_foil"
+			id: "342FCF6E2F324B30"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The capsule's skin"
+			tasks: [
+				{ id: "1AA9BA8E8A85D154", item: "gtceu:platinum_foil", optional_task: true, type: "item" }
+				{ id: "5E8B2A2922681EBA", type: "checkmark" }
+			]
+			title: "Platinum Foil"
+			x: 8.0d
+			y: 5.75d
+		}
+		{
+			dependencies: ["5A5439B53D3AFC63", "342FCF6E2F324B30"]
+			description: ["Circuit 3: four radium dust sealed in platinum foil."]
+			icon: "gtceu:waste_retrieval_plant"
+			id: "797562C04A9AE476"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7C5A1D856A9823DB", item: "gtceu:waste_retrieval_plant", optional_task: true, type: "item" }
+				{ id: "5EE8801B2E6DB6F5", type: "checkmark" }
+			]
+			title: "Waste Retrieval Plant, Capsule"
+			x: 8.0d
+			y: 7.25d
+		}
+		{
+			dependencies: ["797562C04A9AE476"]
 			icon: "grindless:radium_capsule"
 			id: "5851B1AEB93F027B"
 			size: 1.25d
@@ -280,11 +323,26 @@
 				{ id: "1912606164F91956", type: "checkmark" }
 			]
 			title: "Radium Capsule"
-			x: 5.5d
-			y: 6.0d
+			x: 10.5d
+			y: 7.25d
 		}
 		{
-			dependencies: ["7377EBA6D8DFAC14"]
+			dependencies: ["5851B1AEB93F027B"]
+			description: ["Circuit 2: the capsule is kept, 1% worn a run, and gives radon on demand."]
+			icon: "gtceu:waste_retrieval_plant"
+			id: "55CFAB143CA4FEF4"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1A206FE6AFF30B8A", item: "gtceu:waste_retrieval_plant", optional_task: true, type: "item" }
+				{ id: "5DD955D9F221E8B5", type: "checkmark" }
+			]
+			title: "Waste Retrieval Plant, Emanation"
+			x: 13.0d
+			y: 7.25d
+		}
+		{
+			dependencies: ["55CFAB143CA4FEF4"]
 			icon: "gtceu:radon_bucket"
 			id: "7B88FC90CAE8777B"
 			size: 1.25d
@@ -293,8 +351,8 @@
 				{ id: "7F96B9568B911960", type: "checkmark" }
 			]
 			title: "Radon"
-			x: 5.5d
-			y: 7.5d
+			x: 15.5d
+			y: 7.25d
 		}
 		{
 			dependencies: ["7377EBA6D8DFAC14"]
@@ -308,22 +366,22 @@
 			]
 			title: "Actinide Raffinate"
 			x: 5.5d
-			y: 9.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["5254208F95537CA9"]
+			description: ["Circuit 1: strips the actinides out of the raffinate."]
 			icon: "gtceu:actinide_partitioning_plant"
 			id: "197673DD11471D5A"
 			shape: "gear"
 			size: 1.5d
-			subtitle: "Strips the actinides out of the raffinate"
 			tasks: [
 				{ id: "305B6E88AF647596", item: "gtceu:actinide_partitioning_plant", optional_task: true, type: "item" }
 				{ id: "5BBC9A59C2D603C4", type: "checkmark" }
 			]
 			title: "Actinide Partitioning Plant"
 			x: 8.0d
-			y: 9.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["197673DD11471D5A"]
@@ -337,10 +395,25 @@
 			]
 			title: "Minor Actinide Strip"
 			x: 10.5d
-			y: 9.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["79914276E8B137EA"]
+			description: ["Circuit 2: americium, curium and synroc."]
+			icon: "gtceu:actinide_partitioning_plant"
+			id: "394FABEC7ABE0C6C"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7EA511182ADDD108", item: "gtceu:actinide_partitioning_plant", optional_task: true, type: "item" }
+				{ id: "3C9B6BC93B8B6099", type: "checkmark" }
+			]
+			title: "Actinide Partitioning Plant, Split"
+			x: 13.0d
+			y: 12.5d
+		}
+		{
+			dependencies: ["394FABEC7ABE0C6C"]
 			icon: "gtceu:americium_dust"
 			id: "1BD444892D1D43B2"
 			size: 1.25d
@@ -349,11 +422,11 @@
 				{ id: "31A43B6603E517FD", type: "checkmark" }
 			]
 			title: "Americium"
-			x: 13.0d
-			y: 8.25d
+			x: 15.5d
+			y: 11.0d
 		}
 		{
-			dependencies: ["79914276E8B137EA"]
+			dependencies: ["394FABEC7ABE0C6C"]
 			icon: "grindless:curium_oxide"
 			id: "36CF1F534231A122"
 			size: 1.25d
@@ -362,11 +435,11 @@
 				{ id: "1B9DC2BD36B15D01", type: "checkmark" }
 			]
 			title: "Curium Oxide"
-			x: 13.0d
-			y: 9.75d
+			x: 15.5d
+			y: 12.5d
 		}
 		{
-			dependencies: ["79914276E8B137EA"]
+			dependencies: ["394FABEC7ABE0C6C"]
 			icon: "grindless:synroc_block"
 			id: "7ECE9EB75721B2DC"
 			size: 0.75d
@@ -375,8 +448,8 @@
 				{ id: "759D2AFBAE1748E7", type: "checkmark" }
 			]
 			title: "Synroc"
-			x: 13.0d
-			y: 11.25d
+			x: 15.5d
+			y: 14.0d
 		}
 		{
 			icon: "gtceu:gallium_bucket"
@@ -389,7 +462,7 @@
 				{ id: "3EEEBC4C34379EFD", type: "checkmark" }
 			]
 			title: "Gallium"
-			x: 17.25d
+			x: 19.75d
 			y: 5.75d
 		}
 		{
@@ -403,7 +476,7 @@
 				{ id: "5A991F9E80DD2DCF", type: "checkmark" }
 			]
 			title: "Radon"
-			x: 17.25d
+			x: 19.75d
 			y: 7.25d
 		}
 		{
@@ -417,7 +490,7 @@
 				{ id: "3D79E8EA721989F9", type: "checkmark" }
 			]
 			title: "Fusion Reactor Mk2"
-			x: 19.75d
+			x: 22.25d
 			y: 6.5d
 		}
 		{
@@ -430,7 +503,7 @@
 				{ id: "779F4B32BE10EC50", type: "checkmark" }
 			]
 			title: "Duranium Plasma"
-			x: 22.25d
+			x: 24.75d
 			y: 6.5d
 		}
 		{
@@ -444,7 +517,7 @@
 				{ id: "5A9D76CF2B306F21", type: "checkmark" }
 			]
 			title: "Argon"
-			x: 22.25d
+			x: 24.75d
 			y: 8.0d
 		}
 		{
@@ -457,7 +530,7 @@
 				{ id: "3E68979C4B08DF39", type: "checkmark" }
 			]
 			title: "Duranium Plate"
-			x: 24.75d
+			x: 27.25d
 			y: 6.5d
 		}
 		{
@@ -472,7 +545,7 @@
 			]
 			title: "Milled Monazite"
 			x: 0.5d
-			y: 16.75d
+			y: 19.75d
 		}
 		{
 			icon: "gtca:potassium_ethyl_xanthate_dust"
@@ -486,7 +559,7 @@
 			]
 			title: "Potassium Ethyl Xanthate"
 			x: 0.5d
-			y: 18.25d
+			y: 21.25d
 		}
 		{
 			dependencies: ["386745C7D54A6E4E", "7F5B3DACE0ACA362"]
@@ -501,7 +574,7 @@
 			]
 			title: "Flotation Cell"
 			x: 3.0d
-			y: 17.5d
+			y: 20.5d
 		}
 		{
 			dependencies: ["16B49C7B7A5F2E38"]
@@ -515,7 +588,7 @@
 			]
 			title: "Monazite Froth"
 			x: 5.5d
-			y: 17.5d
+			y: 20.5d
 		}
 		{
 			dependencies: ["7B96CD20F6103ED1"]
@@ -530,7 +603,7 @@
 			]
 			title: "Extraction Cascade"
 			x: 8.0d
-			y: 17.5d
+			y: 20.5d
 		}
 		{
 			dependencies: ["793D643476646A4A"]
@@ -544,7 +617,7 @@
 			]
 			title: "Europium Chloride"
 			x: 10.5d
-			y: 17.5d
+			y: 20.5d
 		}
 		{
 			icon: "gtceu:zinc_dust"
@@ -558,7 +631,7 @@
 			]
 			title: "Zinc"
 			x: 10.5d
-			y: 19.0d
+			y: 22.0d
 		}
 		{
 			dependencies: ["79B2FE58941D5DA2", "3546F271E9F00014"]
@@ -573,7 +646,7 @@
 			]
 			title: "Europium Reductor"
 			x: 13.0d
-			y: 17.5d
+			y: 20.5d
 		}
 		{
 			dependencies: ["1E556D306521C54E"]
@@ -587,7 +660,7 @@
 			]
 			title: "Europium Sulfate"
 			x: 15.5d
-			y: 16.0d
+			y: 19.0d
 		}
 		{
 			dependencies: ["1FF8B9022E4E9B3A"]
@@ -601,7 +674,7 @@
 			]
 			title: "Europium Oxide"
 			x: 18.0d
-			y: 16.0d
+			y: 19.0d
 		}
 		{
 			dependencies: ["182ACCDE185FC7E6", "1320644F97D05497"]
@@ -614,7 +687,7 @@
 			]
 			title: "Europium"
 			x: 20.5d
-			y: 16.0d
+			y: 19.0d
 		}
 		{
 			icon: "gtceu:lanthanum_dust"
@@ -628,7 +701,7 @@
 			]
 			title: "Lanthanum"
 			x: 18.0d
-			y: 14.5d
+			y: 17.5d
 		}
 		{
 			dependencies: ["1E556D306521C54E"]
@@ -641,7 +714,7 @@
 			]
 			title: "Rare Earth Chloride"
 			x: 15.5d
-			y: 17.5d
+			y: 20.5d
 		}
 		{
 			icon: "grindless:saturn_interior_model"
@@ -655,7 +728,7 @@
 			]
 			title: "Saturn Interior Model"
 			x: 0.5d
-			y: 22.75d
+			y: 25.5d
 		}
 		{
 			icon: "grindless:scoop_head"
@@ -669,7 +742,7 @@
 			]
 			title: "Scoop Head"
 			x: 0.5d
-			y: 24.25d
+			y: 27.0d
 		}
 		{
 			dependencies: ["76A59FF269A12C3E", "1B0C6BBE6614F65F"]
@@ -684,20 +757,20 @@
 			]
 			title: "Ice Giant Siphon"
 			x: 3.0d
-			y: 23.5d
+			y: 26.25d
 		}
 		{
 			dependencies: ["5DDEF91736D3712A"]
 			icon: "gtceu:uranus_hydrogen_bucket"
 			id: "3CC37585936DEA61"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "7FD2923E5E2A524D", item: "gtceu:uranus_hydrogen_bucket", optional_task: true, type: "item" }
 				{ id: "1F8E53F98498BDDB", type: "checkmark" }
 			]
 			title: "Uranus Hydrogen"
 			x: 5.5d
-			y: 22.75d
+			y: 25.5d
 		}
 		{
 			dependencies: ["5DDEF91736D3712A"]
@@ -710,7 +783,7 @@
 			]
 			title: "Diamond Slurry"
 			x: 5.5d
-			y: 24.25d
+			y: 27.0d
 		}
 		{
 			dependencies: ["55496C9B11B1741A", "1DD00667E82E75AE"]
@@ -724,7 +797,7 @@
 			]
 			title: "Slurry Separator"
 			x: 8.0d
-			y: 24.25d
+			y: 27.0d
 		}
 		{
 			dependencies: ["3308C66EDB5CD1F0"]
@@ -737,7 +810,7 @@
 			]
 			title: "Ice Giant Diamond Seed"
 			x: 10.5d
-			y: 24.25d
+			y: 27.0d
 		}
 		{
 			icon: "gtceu:methane_bucket"
@@ -750,7 +823,7 @@
 			]
 			title: "Methane"
 			x: 14.75d
-			y: 24.25d
+			y: 27.25d
 		}
 		{
 			icon: "grindless:ice_giant_diamond_seed"
@@ -764,7 +837,7 @@
 			]
 			title: "Ice Giant Diamond Seed"
 			x: 14.75d
-			y: 27.25d
+			y: 30.25d
 		}
 		{
 			dependencies: ["71589491A5213B7C"]
@@ -779,7 +852,7 @@
 			]
 			title: "Methane Pyrolyser"
 			x: 17.25d
-			y: 22.75d
+			y: 25.75d
 		}
 		{
 			dependencies: ["54AAA19892B3E354"]
@@ -792,7 +865,7 @@
 			]
 			title: "Graphene"
 			x: 19.75d
-			y: 22.75d
+			y: 25.75d
 		}
 		{
 			dependencies: ["71589491A5213B7C", "7145A5EB71523C36"]
@@ -807,7 +880,7 @@
 			]
 			title: "Diamond Lattice Fab"
 			x: 17.25d
-			y: 25.75d
+			y: 28.75d
 		}
 		{
 			dependencies: ["73DADB6BD8E4EFEC"]
@@ -820,7 +893,7 @@
 			]
 			title: "CVD Diamond Plate"
 			x: 19.75d
-			y: 25.0d
+			y: 28.0d
 		}
 		{
 			dependencies: ["73DADB6BD8E4EFEC"]
@@ -834,7 +907,7 @@
 			]
 			title: "Nitrogen-Doped Plate"
 			x: 19.75d
-			y: 26.5d
+			y: 29.5d
 		}
 		{
 			dependencies: ["5CF2821F580BEBF2"]
@@ -849,7 +922,7 @@
 			]
 			title: "Ion Implanter"
 			x: 22.25d
-			y: 26.5d
+			y: 29.5d
 		}
 		{
 			dependencies: ["1CCC7D919D844610"]
@@ -863,11 +936,11 @@
 			]
 			title: "NV Diamond Chip"
 			x: 24.75d
-			y: 26.5d
+			y: 29.5d
 		}
 		{
-			dependencies: ["375DAC77DDF55988", "7C00BCD35855B841"]
-			description: ["Builds qubit arrays inside a cryostat."]
+			dependencies: ["375DAC77DDF55988", "3A9864A526CEC66A", "7C00BCD35855B841"]
+			description: ["Builds qubit arrays inside a cryostat, from NV chips or from donor wafers."]
 			icon: "gtceu:qubit_fab"
 			id: "72F6ED01E3639891"
 			shape: "gear"
@@ -878,7 +951,92 @@
 			]
 			title: "Qubit Fab"
 			x: 27.25d
-			y: 26.5d
+			y: 29.5d
+		}
+		{
+			icon: "grindless:silicon_28_dust"
+			id: "1A8DB6184EFAED01"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Isotope-pure silicon"
+			tasks: [
+				{ id: "182E3F4F98FE950B", item: "grindless:silicon_28_dust", optional_task: true, type: "item" }
+				{ id: "7AB7485363ADAE15", type: "checkmark" }
+			]
+			title: "Silicon-28"
+			x: 14.75d
+			y: 32.5d
+		}
+		{
+			dependencies: ["1A8DB6184EFAED01"]
+			icon: "grindless:silicon_28_boule"
+			id: "77BE3254171AE232"
+			size: 1.25d
+			subtitle: "Blast furnace, in argon"
+			tasks: [
+				{ id: "30461FC531FC4878", item: "grindless:silicon_28_boule", optional_task: true, type: "item" }
+				{ id: "3984D5FE2AE91EEA", type: "checkmark" }
+			]
+			title: "Silicon-28 Boule"
+			x: 17.25d
+			y: 32.5d
+		}
+		{
+			dependencies: ["77BE3254171AE232"]
+			icon: "grindless:silicon_28_wafer"
+			id: "7D83E3049241FC16"
+			size: 1.25d
+			subtitle: "Cutter: eight wafers a boule"
+			tasks: [
+				{ id: "3042846DBA6F4E9D", item: "grindless:silicon_28_wafer", optional_task: true, type: "item" }
+				{ id: "716E995FF94CC478", type: "checkmark" }
+			]
+			title: "Silicon-28 Wafer"
+			x: 19.75d
+			y: 32.5d
+		}
+		{
+			icon: "gtceu:phosphorus_dust"
+			id: "75DADFCF0B844AB9"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The donor atom"
+			tasks: [
+				{ id: "50461F264F37EB9F", item: "gtceu:phosphorus_dust", optional_task: true, type: "item" }
+				{ id: "5237DF7730C02ED8", type: "checkmark" }
+			]
+			title: "Phosphorus"
+			x: 19.75d
+			y: 34.0d
+		}
+		{
+			dependencies: ["7D83E3049241FC16", "75DADFCF0B844AB9"]
+			description: ["Circuit 2: one phosphorus atom in each silicon-28 cell."]
+			icon: "gtceu:ion_implanter"
+			id: "1C10D094D25CC61C"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5D7FA0C601476393", item: "gtceu:ion_implanter", optional_task: true, type: "item" }
+				{ id: "7EB9C20046A03720", type: "checkmark" }
+			]
+			title: "Ion Implanter, Donors"
+			x: 22.25d
+			y: 32.5d
+		}
+		{
+			dependencies: ["1C10D094D25CC61C"]
+			icon: "grindless:donor_qubit_wafer"
+			id: "3A9864A526CEC66A"
+			size: 1.25d
+			subtitle: "Four make a qubit array"
+			tasks: [
+				{ id: "34DB2596F2B2E198", item: "grindless:donor_qubit_wafer", optional_task: true, type: "item" }
+				{ id: "7FDE46A1CF27166A", type: "checkmark" }
+			]
+			title: "Donor Qubit Wafer"
+			x: 24.75d
+			y: 32.5d
 		}
 		{
 			dependencies: ["72F6ED01E3639891"]
@@ -891,7 +1049,7 @@
 			]
 			title: "Qubit Array"
 			x: 29.75d
-			y: 26.5d
+			y: 29.5d
 		}
 		{
 			icon: "grindless:pica_heat_shield"
@@ -905,7 +1063,7 @@
 			]
 			title: "PICA Heat Shield"
 			x: 0.5d
-			y: 32.25d
+			y: 38.5d
 		}
 		{
 			dependencies: ["53832D585229B399", "1592930738780420", "3C956144AD26D46F", "5CB069B8ABB07042"]
@@ -919,7 +1077,7 @@
 			]
 			title: "Titan Entry Probe"
 			x: 3.0d
-			y: 34.5d
+			y: 40.75d
 		}
 		{
 			icon: "gtceu:nitrogen_bucket"
@@ -933,7 +1091,7 @@
 			]
 			title: "Nitrogen"
 			x: 3.0d
-			y: 33.0d
+			y: 39.25d
 		}
 		{
 			dependencies: ["7F663A35A198857C", "79C812BAA2DBC43E"]
@@ -948,7 +1106,7 @@
 			]
 			title: "Entry Probe Bay"
 			x: 5.5d
-			y: 34.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["3BC8B6B7FD729185"]
@@ -962,7 +1120,7 @@
 			]
 			title: "Tholin"
 			x: 8.0d
-			y: 34.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["3BC8B6B7FD729185"]
@@ -976,7 +1134,7 @@
 			]
 			title: "Methane"
 			x: 8.0d
-			y: 36.0d
+			y: 42.25d
 		}
 		{
 			dependencies: ["59BBC7A0610DFA95"]
@@ -991,7 +1149,7 @@
 			]
 			title: "Tholin Reformer"
 			x: 10.5d
-			y: 34.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["3E0ED61EAF5140AA"]
@@ -1004,7 +1162,7 @@
 			]
 			title: "Titan Nitriles"
 			x: 13.0d
-			y: 34.5d
+			y: 40.75d
 		}
 		{
 			icon: "gtceu:zinc_dust"
@@ -1017,11 +1175,54 @@
 				{ id: "55C32E798F9C6B39", type: "checkmark" }
 			]
 			title: "Zinc"
-			x: 13.0d
-			y: 31.5d
+			x: 15.5d
+			y: 37.75d
 		}
 		{
-			dependencies: ["3295EFEAE8063A2F", "317B50F3E2543FEC", "79841FC0203AF089"]
+			icon: "gtceu:ring_ice_bucket"
+			id: "3E34BD03805ECEE0"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the Saturn ring harvester"
+			tasks: [
+				{ id: "10C6B21E1234DFC1", item: "gtceu:ring_ice_bucket", optional_task: true, type: "item" }
+				{ id: "3B2E8519445AB6D1", type: "checkmark" }
+			]
+			title: "Ring Ice"
+			x: 8.0d
+			y: 37.75d
+		}
+		{
+			dependencies: ["3E34BD03805ECEE0"]
+			description: ["Melts the ring ice into water and ammonia."]
+			icon: "gtceu:lv_distillery"
+			id: "3006EED826B60D50"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "564D745FA9FEF92A", item: "gtceu:lv_distillery", optional_task: true, type: "item" }
+				{ id: "766D29BAEEF8E96A", type: "checkmark" }
+			]
+			title: "Distillery"
+			x: 10.5d
+			y: 37.75d
+		}
+		{
+			dependencies: ["3006EED826B60D50"]
+			icon: "gtceu:ammonia_bucket"
+			id: "52F0F302E3D714F7"
+			size: 1.25d
+			subtitle: "From the rings: the LV plant is the other source"
+			tasks: [
+				{ id: "714252A8271C6A13", item: "gtceu:ammonia_bucket", optional_task: true, type: "item" }
+				{ id: "768391E8593B0DD2", type: "checkmark" }
+			]
+			title: "Ammonia"
+			x: 13.0d
+			y: 39.25d
+		}
+		{
+			dependencies: ["3295EFEAE8063A2F", "317B50F3E2543FEC", "79841FC0203AF089", "52F0F302E3D714F7"]
 			icon: "gtceu:diaminobenzidine_bucket"
 			id: "142964D00B81E6FB"
 			size: 1.25d
@@ -1031,7 +1232,7 @@
 			]
 			title: "Diaminobenzidine"
 			x: 15.5d
-			y: 34.5d
+			y: 40.75d
 		}
 		{
 			dependencies: ["3295EFEAE8063A2F"]
@@ -1044,7 +1245,7 @@
 			]
 			title: "Carbon Fibres"
 			x: 15.5d
-			y: 36.75d
+			y: 43.0d
 		}
 		{
 			icon: "gtceu:diphenyl_isophthalate_bucket"
@@ -1056,8 +1257,8 @@
 				{ id: "74E8EB46B2300C6F", type: "checkmark" }
 			]
 			title: "Diphenyl Isophthalate"
-			x: 15.5d
-			y: 33.0d
+			x: 18.0d
+			y: 39.25d
 		}
 		{
 			dependencies: ["142964D00B81E6FB", "7C5C4CE48729670C"]
@@ -1070,7 +1271,7 @@
 			]
 			title: "Polybenzimidazole"
 			x: 18.0d
-			y: 34.5d
+			y: 40.75d
 		}
 		{
 			icon: "grindless:aerogel_cartridge"
@@ -1084,7 +1285,7 @@
 			]
 			title: "Aerogel Cartridge"
 			x: 0.5d
-			y: 42.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["71069873E529F522"]
@@ -1099,7 +1300,7 @@
 			]
 			title: "Plume Sampler"
 			x: 3.0d
-			y: 42.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["7CA6ABC15B2D3BB8"]
@@ -1112,7 +1313,7 @@
 			]
 			title: "Enceladus Brine"
 			x: 5.5d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			dependencies: ["7CA6ABC15B2D3BB8"]
@@ -1125,7 +1326,7 @@
 			]
 			title: "Silica Nanograins"
 			x: 5.5d
-			y: 43.5d
+			y: 49.5d
 		}
 		{
 			dependencies: ["35BD8FFA84749A4B", "5987C5957696843D", "18F537A953D4B78D"]
@@ -1140,7 +1341,7 @@
 			]
 			title: "Vent Bioreactor"
 			x: 8.0d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			dependencies: ["3201B14B63C8A394"]
@@ -1154,7 +1355,7 @@
 			]
 			title: "Archaeal Culture"
 			x: 10.5d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			icon: "grindless:tholin"
@@ -1168,7 +1369,7 @@
 			]
 			title: "Tholin"
 			x: 10.5d
-			y: 43.5d
+			y: 49.5d
 		}
 		{
 			dependencies: ["783CDFFEBD80EEDD", "199ED49089BF851C", "1C51F11F885E4373"]
@@ -1182,7 +1383,7 @@
 			]
 			title: "Raw Growth Medium"
 			x: 13.0d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			dependencies: ["7599BF30E442ED56"]
@@ -1196,7 +1397,7 @@
 			]
 			title: "Sterilized Growth Medium"
 			x: 15.5d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			dependencies: ["1EE67B4E824AC7F0"]
@@ -1209,7 +1410,7 @@
 			]
 			title: "Stem Cells"
 			x: 18.0d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			icon: "grindless:silica_nanograins"
@@ -1223,7 +1424,7 @@
 			]
 			title: "Silica Nanograins"
 			x: 22.25d
-			y: 40.5d
+			y: 46.5d
 		}
 		{
 			dependencies: ["1E92FEF9F88B8706", "3B4CA27555ED52FF", "5A5AFC686B2574CF"]
@@ -1238,7 +1439,7 @@
 			]
 			title: "Aerogel Works"
 			x: 24.75d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			dependencies: ["1C9CF2ACF7930101"]
@@ -1252,7 +1453,7 @@
 			]
 			title: "Silica Aerogel"
 			x: 27.25d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			dependencies: ["1C3ABC190214A62A"]
@@ -1265,7 +1466,7 @@
 			]
 			title: "Aerogel Cartridge"
 			x: 29.75d
-			y: 42.0d
+			y: 48.0d
 		}
 		{
 			icon: "grindless:scoop_head"
@@ -1279,7 +1480,7 @@
 			]
 			title: "Scoop Head"
 			x: 0.5d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["7956A8EF745D7CDC"]
@@ -1294,7 +1495,7 @@
 			]
 			title: "Gas Giant Siphon"
 			x: 3.0d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["5D9A96B3F6E9A881"]
@@ -1307,7 +1508,7 @@
 			]
 			title: "Saturn Helium"
 			x: 5.5d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["5D9A96B3F6E9A881"]
@@ -1320,7 +1521,7 @@
 			]
 			title: "Saturn Hydrogen"
 			x: 5.5d
-			y: 50.25d
+			y: 56.25d
 		}
 		{
 			dependencies: ["594B50550C05B34C", "55C27B1A7D12A51F"]
@@ -1334,7 +1535,7 @@
 			]
 			title: "Isotope Column"
 			x: 8.0d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["1FBE5B82BD953882"]
@@ -1347,7 +1548,7 @@
 			]
 			title: "Helium-3"
 			x: 10.5d
-			y: 47.25d
+			y: 53.25d
 		}
 		{
 			dependencies: ["1FBE5B82BD953882"]
@@ -1361,7 +1562,7 @@
 			]
 			title: "Deuterium"
 			x: 10.5d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["1FBE5B82BD953882"]
@@ -1374,7 +1575,7 @@
 			]
 			title: "Helium-4"
 			x: 10.5d
-			y: 50.25d
+			y: 56.25d
 		}
 		{
 			icon: "grindless:ring_sail_net"
@@ -1388,7 +1589,7 @@
 			]
 			title: "Ring Sail Net"
 			x: 0.5d
-			y: 51.75d
+			y: 57.75d
 		}
 		{
 			dependencies: ["5583F08FC8EC8A24"]
@@ -1403,7 +1604,7 @@
 			]
 			title: "Ring Harvester"
 			x: 3.0d
-			y: 51.75d
+			y: 57.75d
 		}
 		{
 			dependencies: ["568471EE39A4D062"]
@@ -1416,7 +1617,7 @@
 			]
 			title: "Ring Ice"
 			x: 5.5d
-			y: 51.75d
+			y: 57.75d
 		}
 		{
 			icon: "gtceu:deuterium_bucket"
@@ -1430,7 +1631,7 @@
 			]
 			title: "Deuterium"
 			x: 14.5d
-			y: 47.25d
+			y: 53.25d
 		}
 		{
 			icon: "gtceu:helium_3_bucket"
@@ -1444,7 +1645,7 @@
 			]
 			title: "Helium-3"
 			x: 14.5d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["3F3DDCCFA3E7C4F6", "3CF52C460FB4D36E"]
@@ -1458,7 +1659,7 @@
 			]
 			title: "Fusion Reactor Mk2"
 			x: 17.0d
-			y: 48.0d
+			y: 54.0d
 		}
 		{
 			dependencies: ["3B1FBED52F242407"]
@@ -1471,7 +1672,7 @@
 			]
 			title: "Helium Plasma"
 			x: 19.5d
-			y: 48.0d
+			y: 54.0d
 		}
 		{
 			dependencies: ["59C1C49451F90533"]
@@ -1486,7 +1687,7 @@
 			]
 			title: "Direct Energy Converter"
 			x: 22.0d
-			y: 48.0d
+			y: 54.0d
 		}
 		{
 			dependencies: ["36F35666F3D22819"]
@@ -1501,7 +1702,7 @@
 			]
 			title: "Helium"
 			x: 24.5d
-			y: 48.0d
+			y: 54.0d
 		}
 		{
 			icon: "gtceu:uranium_dust"
@@ -1514,7 +1715,7 @@
 			]
 			title: "Uranium"
 			x: 0.5d
-			y: 55.5d
+			y: 61.5d
 		}
 		{
 			icon: "gtceu:rhodium_dust"
@@ -1527,7 +1728,7 @@
 			]
 			title: "Rhodium"
 			x: 0.5d
-			y: 57.0d
+			y: 63.0d
 		}
 		{
 			icon: "gtceu:naquadah_dust"
@@ -1540,7 +1741,7 @@
 			]
 			title: "Naquadah"
 			x: 0.5d
-			y: 58.5d
+			y: 64.5d
 		}
 		{
 			icon: "gtceu:silver_foil"
@@ -1553,7 +1754,7 @@
 			]
 			title: "Silver Foil"
 			x: 0.5d
-			y: 60.0d
+			y: 66.0d
 		}
 		{
 			dependencies: ["1BE53E22F90D5988", "36E68B4BF5C896C6", "563D52ADBD56DD27", "7F5746FF21A85DF3"]
@@ -1568,7 +1769,7 @@
 			]
 			title: "Naquadria Magnet Works"
 			x: 3.0d
-			y: 57.75d
+			y: 63.75d
 		}
 		{
 			dependencies: ["3F75E25F64B2415E"]
@@ -1581,7 +1782,7 @@
 			]
 			title: "URhNq₂ Wire"
 			x: 5.5d
-			y: 57.75d
+			y: 63.75d
 		}
 		{
 			dependencies: ["30CD1346E21DBC04"]
@@ -1594,7 +1795,7 @@
 			]
 			title: "ZPM SMES Cell"
 			x: 8.0d
-			y: 57.75d
+			y: 63.75d
 		}
 		{
 			icon: "grindless:saturn_transfer_chart"
@@ -1607,7 +1808,7 @@
 			]
 			title: "Saturn Transfer Chart"
 			x: 12.25d
-			y: 56.5d
+			y: 62.5d
 		}
 		{
 			dependencies: ["73993D811E9489A8"]
@@ -1622,7 +1823,7 @@
 			]
 			title: "Ring Seismometer"
 			x: 14.75d
-			y: 56.5d
+			y: 62.5d
 		}
 		{
 			dependencies: ["5F25DF2C48F1F232"]
@@ -1635,7 +1836,7 @@
 			]
 			title: "Saturn Interior Model"
 			x: 17.25d
-			y: 55.75d
+			y: 61.75d
 		}
 		{
 			dependencies: ["1EB00F059AF3BFB9"]
@@ -1648,7 +1849,7 @@
 			]
 			title: "Uranus Transfer Chart"
 			x: 19.75d
-			y: 57.25d
+			y: 63.25d
 		}
 		{
 			icon: "grindless:neptune_flyby_probe"
@@ -1661,7 +1862,7 @@
 			]
 			title: "Neptune Flyby Probe"
 			x: 12.25d
-			y: 60.25d
+			y: 66.25d
 		}
 		{
 			dependencies: ["5F1629C1E07FD8DB"]
@@ -1676,7 +1877,7 @@
 			]
 			title: "Flyby Probe Bay"
 			x: 14.75d
-			y: 60.25d
+			y: 66.25d
 		}
 		{
 			dependencies: ["37724B487438DA56"]
@@ -1689,7 +1890,7 @@
 			]
 			title: "Neptune Probe Recording"
 			x: 17.25d
-			y: 59.5d
+			y: 65.5d
 		}
 		{
 			dependencies: ["37724B487438DA56"]
@@ -1702,7 +1903,7 @@
 			]
 			title: "Neptune Sample"
 			x: 17.25d
-			y: 61.0d
+			y: 67.0d
 		}
 		{
 			description: ["Decodes the recordings into charts."]
@@ -1716,7 +1917,7 @@
 			]
 			title: "Deep Space Network"
 			x: 14.75d
-			y: 63.5d
+			y: 69.5d
 		}
 		{
 			dependencies: ["341A5AAF23DA4457"]
@@ -1729,7 +1930,7 @@
 			]
 			title: "Pluto-Kuiper Chart"
 			x: 17.25d
-			y: 63.5d
+			y: 69.5d
 		}
 		{
 			icon: "grindless:cvd_diamond_plate"
@@ -1742,7 +1943,7 @@
 			]
 			title: "CVD Diamond Plate"
 			x: 12.25d
-			y: 66.0d
+			y: 72.0d
 		}
 		{
 			dependencies: ["5DB5265C30EA6831"]
@@ -1757,7 +1958,7 @@
 			]
 			title: "Kuiper Survey Telescope"
 			x: 14.75d
-			y: 66.0d
+			y: 72.0d
 		}
 		{
 			dependencies: ["32212D5A710EC817"]
@@ -1770,7 +1971,7 @@
 			]
 			title: "Kuiper Target List"
 			x: 17.25d
-			y: 66.0d
+			y: 72.0d
 		}
 		{
 			dependencies: ["17260FE287B08ADA"]
@@ -1785,7 +1986,7 @@
 			]
 			title: "Neutrino Observatory"
 			x: 14.75d
-			y: 68.5d
+			y: 74.5d
 		}
 		{
 			dependencies: ["18C130E99DDE227C"]
@@ -1798,7 +1999,7 @@
 			]
 			title: "Solar Core Survey"
 			x: 17.25d
-			y: 67.75d
+			y: 73.75d
 		}
 		{
 			dependencies: ["18C130E99DDE227C"]
@@ -1811,7 +2012,7 @@
 			]
 			title: "Multimessenger Catalogue"
 			x: 17.25d
-			y: 69.25d
+			y: 75.25d
 		}
 	]
 	subtitle: ["Naquadria and its fuel, waste and duranium, europium, Titan and Enceladus, qubits, and the gas giants."]

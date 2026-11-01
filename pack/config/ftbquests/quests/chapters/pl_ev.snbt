@@ -1528,10 +1528,25 @@
 				{ id: "37EBFA27A56E6512", type: "checkmark" }
 			]
 			title: "Seeds"
-			x: 39.5d
-			y: 27.25d
+			x: 41.75d
+			y: 27.5d
 		}
 		{
+			icon: "gtceu:ev_machine_hull"
+			id: "52C8C2EF7120B8CA"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "The processor is crafted around it"
+			tasks: [
+				{ id: "1CEAA90EE9922DBD", item: "gtceu:ev_machine_hull", optional_task: true, type: "item" }
+				{ id: "15C6884F75C2521E", type: "checkmark" }
+			]
+			title: "EV Hull"
+			x: 36.75d
+			y: 29.0d
+		}
+		{
+			dependencies: ["52C8C2EF7120B8CA"]
 			description: ["Circuit 2 only breathes: Martian air in, its carbon dioxide out, with no water and no catalyst."]
 			icon: "gtceu:atmosphere_processor"
 			id: "3B076FB13014D0B9"
@@ -1543,8 +1558,8 @@
 				{ id: "7F1620D98E11E170", type: "checkmark" }
 			]
 			title: "Atmosphere Processor"
-			x: 37.0d
-			y: 28.75d
+			x: 39.25d
+			y: 29.0d
 		}
 		{
 			dependencies: ["3B076FB13014D0B9"]
@@ -1557,8 +1572,8 @@
 				{ id: "54E51E24456D56CD", type: "checkmark" }
 			]
 			title: "Carbon Dioxide"
-			x: 39.5d
-			y: 28.75d
+			x: 41.75d
+			y: 29.0d
 		}
 		{
 			dependencies: ["18655420F89C6107", "18F537A953D4B78D"]
@@ -1572,8 +1587,8 @@
 				{ id: "76E4C1B90A987F83", type: "checkmark" }
 			]
 			title: "Sealed Dome"
-			x: 41.5d
-			y: 28.0d
+			x: 43.75d
+			y: 28.25d
 		}
 		{
 			dependencies: ["3BFF58EC797C6C39"]
@@ -1585,8 +1600,8 @@
 				{ id: "12FF535FF8DBDFF6", type: "checkmark" }
 			]
 			title: "Crops"
-			x: 43.5d
-			y: 27.25d
+			x: 45.75d
+			y: 27.5d
 		}
 		{
 			dependencies: ["3BFF58EC797C6C39"]
@@ -1599,22 +1614,36 @@
 				{ id: "149A205F270E29A4", type: "checkmark" }
 			]
 			title: "Oxygen"
-			x: 43.5d
-			y: 28.75d
+			x: 45.75d
+			y: 29.0d
 		}
 		{
 			dependencies: ["31E8630B6040471B"]
+			icon: "gtceu:lv_brewery"
+			id: "72A680F319F341D9"
+			shape: "gear"
+			size: 1.25d
+			subtitle: "Beetroot and water: any crop works"
+			tasks: [
+				{ id: "531D427A56A8F1EF", item: "gtceu:lv_brewery", optional_task: true, type: "item" }
+				{ id: "5B9ED055835CA193", type: "checkmark" }
+			]
+			title: "Brewery"
+			x: 47.75d
+			y: 27.5d
+		}
+		{
+			dependencies: ["72A680F319F341D9"]
 			icon: "gtceu:biomass_bucket"
 			id: "3CB3C55B530FB074"
 			size: 1.0d
-			subtitle: "Brewery"
 			tasks: [
 				{ id: "527964E89FAEFA40", item: "gtceu:biomass_bucket", optional_task: true, type: "item" }
 				{ id: "73CB3F573A25BD12", type: "checkmark" }
 			]
 			title: "Biomass"
-			x: 45.5d
-			y: 27.25d
+			x: 49.75d
+			y: 27.5d
 		}
 		{
 			icon: "grindless:creature_model_wither"
@@ -1627,8 +1656,8 @@
 				{ id: "7F14DDE43B6D8FB3", type: "checkmark" }
 			]
 			title: "Wither Model"
-			x: 45.5d
-			y: 28.75d
+			x: 49.75d
+			y: 29.0d
 		}
 		{
 			dependencies: ["3CB3C55B530FB074", "71488A45FB65BD6A"]
@@ -1642,8 +1671,8 @@
 				{ id: "369614E42D402B51", type: "checkmark" }
 			]
 			title: "Creature Simulator"
-			x: 47.5d
-			y: 28.0d
+			x: 51.75d
+			y: 28.25d
 		}
 		{
 			dependencies: ["5A0B517EDB8BDFBE"]
@@ -1656,8 +1685,8 @@
 				{ id: "7B36DF0195024CFC", type: "checkmark" }
 			]
 			title: "Nether Star"
-			x: 49.5d
-			y: 28.0d
+			x: 53.75d
+			y: 28.25d
 		}
 		{
 			icon: "gtceu:silicon_dust"

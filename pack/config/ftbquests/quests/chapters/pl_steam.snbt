@@ -727,6 +727,50 @@
 			y: 19.5d
 		}
 		{
+			description: ["The Welcome quest gives it once. The machine keeps it."]
+			icon: "grindless:horizon_shard"
+			id: "780971A499DDA99A"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Never used up"
+			tasks: [
+				{ id: "5D110F1FF673B3A0", item: "grindless:horizon_shard", optional_task: true, type: "item" }
+				{ id: "1E126BA4901F5C6C", type: "checkmark" }
+			]
+			title: "Horizon Shard"
+			x: 14.75d
+			y: 15.25d
+		}
+		{
+			dependencies: ["780971A499DDA99A"]
+			description: ["Circuit 1 and the shard: a stack of logs every few seconds, out of nowhere. It is the steam age's automatic log source; the greenhouse grows trees where the collector's other rows feed other lines."]
+			icon: "gtceu:lv_horizon_collector"
+			id: "5C562BD093CBA553"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "123B0E23B9ED2AEF", item: "gtceu:lv_horizon_collector", optional_task: true, type: "item" }
+				{ id: "5E1863C4E69B8C50", type: "checkmark" }
+			]
+			title: "Horizon Collector"
+			x: 16.75d
+			y: 15.25d
+		}
+		{
+			dependencies: ["5C562BD093CBA553"]
+			icon: "minecraft:oak_log"
+			id: "3E1EEB5B79AEA64B"
+			size: 1.25d
+			subtitle: "Charcoal, planks, and the first rubber"
+			tasks: [
+				{ id: "18442F38C9A956A5", item: "minecraft:oak_log", optional_task: true, type: "item" }
+				{ id: "5750C2B1B223EBE3", type: "checkmark" }
+			]
+			title: "Oak Logs"
+			x: 18.75d
+			y: 15.25d
+		}
+		{
 			icon: "minecraft:raw_copper"
 			id: "3BF35BF7A1D6642C"
 			shape: "rsquare"

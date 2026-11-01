@@ -22,7 +22,7 @@
 			linked_quest: "5B7917A2F756FF8C"
 			shape: "rsquare"
 			x: 23.25d
-			y: 18.25d
+			y: 18.0d
 		}
 		{
 			id: "3843CBD513C776D5"
@@ -43,49 +43,49 @@
 			linked_quest: "7C00BCD35855B841"
 			shape: "rsquare"
 			x: 5.25d
-			y: 39.0d
+			y: 38.75d
 		}
 		{
 			id: "100BBBE325194401"
 			linked_quest: "556DE618DC0980FF"
 			shape: "rsquare"
 			x: 12.0d
-			y: 35.75d
+			y: 35.5d
 		}
 		{
 			id: "1CF5140D46147D27"
 			linked_quest: "73C9096FE61142F2"
 			shape: "rsquare"
 			x: 12.0d
-			y: 38.75d
+			y: 38.5d
 		}
 		{
 			id: "5CC78C34CD162103"
 			linked_quest: "132326AF4E432EEB"
 			shape: "rsquare"
 			x: 57.0d
-			y: 52.5d
+			y: 52.25d
 		}
 		{
 			id: "73AB08E0E588FA8B"
 			linked_quest: "1C3ABC190214A62A"
 			shape: "rsquare"
 			x: 37.5d
-			y: 39.0d
+			y: 38.75d
 		}
 		{
 			id: "17122ED0F46AB8D9"
 			linked_quest: "10D7DA8F16132672"
 			shape: "rsquare"
 			x: 38.75d
-			y: 42.5d
+			y: 42.25d
 		}
 		{
 			id: "7C4D24990F51D7F7"
 			linked_quest: "305F916B3530ABAD"
 			shape: "rsquare"
 			x: 20.25d
-			y: 31.0d
+			y: 30.75d
 		}
 	]
 	quests: [
@@ -451,7 +451,7 @@
 			]
 			title: "Near-Net Probe Frame"
 			x: 0.75d
-			y: 12.5d
+			y: 12.25d
 		}
 		{
 			dependencies: ["17C9BE08A1CE7B15"]
@@ -466,7 +466,7 @@
 			]
 			title: "Powder Bed Printer"
 			x: 0.75d
-			y: 14.0d
+			y: 13.75d
 		}
 		{
 			dependencies: ["103F73A467107300"]
@@ -480,7 +480,7 @@
 			]
 			title: "Printed Probe Frame"
 			x: 3.25d
-			y: 12.5d
+			y: 12.25d
 		}
 		{
 			icon: "grindless:gphs_module"
@@ -494,7 +494,7 @@
 			]
 			title: "GPHS Module"
 			x: 3.25d
-			y: 14.0d
+			y: 13.75d
 		}
 		{
 			dependencies: ["380FC29259361C3E", "3A49FEC6555DDB8A"]
@@ -508,7 +508,7 @@
 			]
 			title: "Penetrator Probe"
 			x: 5.75d
-			y: 13.25d
+			y: 13.0d
 		}
 		{
 			icon: "grindless:triton_ice_core"
@@ -522,7 +522,7 @@
 			]
 			title: "Triton Ice Core"
 			x: 5.75d
-			y: 11.25d
+			y: 11.0d
 		}
 		{
 			dependencies: ["10F152F38703742F", "3C08EE7429DCB78E"]
@@ -537,7 +537,7 @@
 			]
 			title: "Penetrator Probe Bay"
 			x: 8.25d
-			y: 13.25d
+			y: 13.0d
 		}
 		{
 			dependencies: ["7BDEC16CD15C21F0"]
@@ -550,7 +550,7 @@
 			]
 			title: "Sputnik Ice Core"
 			x: 10.75d
-			y: 11.75d
+			y: 11.5d
 		}
 		{
 			dependencies: ["7BDEC16CD15C21F0"]
@@ -563,7 +563,7 @@
 			]
 			title: "Charon Core"
 			x: 10.75d
-			y: 14.75d
+			y: 14.5d
 		}
 		{
 			dependencies: ["5D36643AF54C0D85", "593B1B284B366B9F"]
@@ -578,46 +578,46 @@
 			]
 			title: "Volatile Ice Fractionator"
 			x: 13.25d
-			y: 13.25d
+			y: 13.0d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
 			icon: "gtceu:nitrogen_bucket"
 			id: "352B970575CE99A7"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "35CF6DC44B950131", item: "gtceu:nitrogen_bucket", optional_task: true, type: "item" }
 				{ id: "3BD2F90D598115BD", type: "checkmark" }
 			]
 			title: "Nitrogen"
 			x: 15.75d
-			y: 10.25d
+			y: 10.0d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
 			icon: "gtceu:carbon_monoxide_bucket"
 			id: "582B2CF6414AA7D1"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "789900DB7C923057", item: "gtceu:carbon_monoxide_bucket", optional_task: true, type: "item" }
 				{ id: "16E4276542D400BB", type: "checkmark" }
 			]
 			title: "Carbon Monoxide"
 			x: 15.75d
-			y: 11.75d
+			y: 11.5d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
 			icon: "gtceu:methane_bucket"
 			id: "7C36DCFF02CF9338"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "7CEB0439B6BD59F2", item: "gtceu:methane_bucket", optional_task: true, type: "item" }
 				{ id: "5146991378053D24", type: "checkmark" }
 			]
 			title: "Methane"
 			x: 15.75d
-			y: 13.25d
+			y: 13.0d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
@@ -631,7 +631,7 @@
 			]
 			title: "Water"
 			x: 15.75d
-			y: 14.75d
+			y: 14.5d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
@@ -645,7 +645,7 @@
 			]
 			title: "Ammonia"
 			x: 15.75d
-			y: 16.25d
+			y: 16.0d
 		}
 		{
 			icon: "gtceu:agar_dust"
@@ -659,7 +659,7 @@
 			]
 			title: "Agar"
 			x: 15.75d
-			y: 18.25d
+			y: 18.0d
 		}
 		{
 			dependencies: ["5DD47A1F6A593889", "3AC40D3B370A980F", "5F381A218F2A1AC5"]
@@ -674,7 +674,7 @@
 			]
 			title: "Ark Biosphere"
 			x: 18.25d
-			y: 16.25d
+			y: 16.0d
 		}
 		{
 			dependencies: ["76A06914A4AD473B"]
@@ -687,7 +687,7 @@
 			]
 			title: "Oxygen"
 			x: 20.75d
-			y: 14.75d
+			y: 14.5d
 		}
 		{
 			dependencies: ["76A06914A4AD473B"]
@@ -700,7 +700,7 @@
 			]
 			title: "Biomass"
 			x: 20.75d
-			y: 17.75d
+			y: 17.5d
 		}
 		{
 			dependencies: ["76A06914A4AD473B"]
@@ -713,7 +713,7 @@
 			]
 			title: "Raw Growth Medium"
 			x: 20.75d
-			y: 16.25d
+			y: 16.0d
 		}
 		{
 			dependencies: ["5C496D701F2F2BF4", "5B7917A2F756FF8C"]
@@ -728,7 +728,7 @@
 			]
 			title: "Neural Culture Vat"
 			x: 23.25d
-			y: 16.25d
+			y: 16.0d
 		}
 		{
 			dependencies: ["3E25D24AE9CC0494"]
@@ -742,7 +742,7 @@
 			]
 			title: "Stem Cells"
 			x: 25.75d
-			y: 16.25d
+			y: 16.0d
 		}
 		{
 			dependencies: ["5FD8849631976219"]
@@ -755,7 +755,7 @@
 			]
 			title: "Neuro Processing Unit"
 			x: 28.25d
-			y: 16.25d
+			y: 16.0d
 		}
 		{
 			dependencies: ["5079D5197787258F"]
@@ -875,7 +875,7 @@
 			]
 			title: "Niobium"
 			x: 0.5d
-			y: 34.5d
+			y: 34.25d
 		}
 		{
 			dependencies: ["737B55A72A285CE9"]
@@ -889,7 +889,7 @@
 			]
 			title: "RRR Niobium Sheet"
 			x: 1.0d
-			y: 36.25d
+			y: 36.0d
 		}
 		{
 			dependencies: ["7D5C7B885E7FAC98"]
@@ -903,7 +903,7 @@
 			]
 			title: "Bare Cavity"
 			x: 2.5d
-			y: 36.25d
+			y: 36.0d
 		}
 		{
 			dependencies: ["18B6D37CFE5F3F58"]
@@ -918,7 +918,7 @@
 			]
 			title: "SRF Cavity Works"
 			x: 4.5d
-			y: 36.25d
+			y: 36.0d
 		}
 		{
 			dependencies: ["53E29708237834AC"]
@@ -931,7 +931,7 @@
 			]
 			title: "Spent Acid"
 			x: 5.0d
-			y: 34.75d
+			y: 34.5d
 		}
 		{
 			dependencies: ["53E29708237834AC"]
@@ -944,7 +944,7 @@
 			]
 			title: "SRF Cavity"
 			x: 6.25d
-			y: 35.5d
+			y: 35.25d
 		}
 		{
 			dependencies: ["39C7F4E0414EFD2A"]
@@ -957,7 +957,7 @@
 			]
 			title: "Neptune Helium"
 			x: 6.25d
-			y: 40.5d
+			y: 40.25d
 		}
 		{
 			description: ["Drops a scoop through Neptune's methane deck."]
@@ -971,7 +971,7 @@
 			]
 			title: "Neptune Deep Siphon"
 			x: 5.75d
-			y: 42.25d
+			y: 42.0d
 		}
 		{
 			dependencies: ["39C7F4E0414EFD2A"]
@@ -985,7 +985,7 @@
 			]
 			title: "Neptune Hydrogen"
 			x: 7.75d
-			y: 41.25d
+			y: 41.0d
 		}
 		{
 			dependencies: ["5B566E50A9782407"]
@@ -999,7 +999,7 @@
 			]
 			title: "Deuterium"
 			x: 10.0d
-			y: 40.0d
+			y: 39.75d
 		}
 		{
 			dependencies: ["7C00BCD35855B841", "560DDDF52F5EA14D"]
@@ -1014,7 +1014,7 @@
 			]
 			title: "Superfluid Helium Plant"
 			x: 6.75d
-			y: 38.75d
+			y: 38.5d
 		}
 		{
 			dependencies: ["5A10EE47550729A5"]
@@ -1028,7 +1028,7 @@
 			]
 			title: "Superfluid Helium"
 			x: 7.25d
-			y: 37.0d
+			y: 36.75d
 		}
 		{
 			dependencies: ["5A10EE47550729A5"]
@@ -1042,7 +1042,7 @@
 			]
 			title: "Helium-3 Concentrate"
 			x: 8.75d
-			y: 38.0d
+			y: 37.75d
 		}
 		{
 			dependencies: ["7A0B641AFC216EF1"]
@@ -1056,7 +1056,7 @@
 			]
 			title: "Helium-3"
 			x: 10.25d
-			y: 37.5d
+			y: 37.25d
 		}
 		{
 			dependencies: ["16186DF8EF2485AD", "7B0AB0696106579D"]
@@ -1070,7 +1070,7 @@
 			]
 			title: "SRF Cryomodule"
 			x: 7.75d
-			y: 35.5d
+			y: 35.25d
 		}
 		{
 			icon: "gtceu:boron_dust"
@@ -1083,7 +1083,7 @@
 			]
 			title: "Boron"
 			x: 7.75d
-			y: 33.75d
+			y: 33.5d
 		}
 		{
 			dependencies: ["51F8622E93604454"]
@@ -1097,7 +1097,7 @@
 			]
 			title: "Boron-11 Trifluoride"
 			x: 9.25d
-			y: 34.5d
+			y: 34.25d
 		}
 		{
 			dependencies: ["51F8622E93604454"]
@@ -1110,7 +1110,7 @@
 			]
 			title: "Boron-10 Trifluoride"
 			x: 9.25d
-			y: 33.25d
+			y: 33.0d
 		}
 		{
 			dependencies: ["7A305ADC6A2F5A8B"]
@@ -1124,7 +1124,7 @@
 			]
 			title: "Decaborane"
 			x: 11.5d
-			y: 33.75d
+			y: 33.5d
 		}
 		{
 			dependencies: ["7A305ADC6A2F5A8B"]
@@ -1137,7 +1137,7 @@
 			]
 			title: "Hydrofluoric Acid"
 			x: 10.0d
-			y: 35.75d
+			y: 35.5d
 		}
 		{
 			dependencies: ["7680E8161597F21E", "556DE618DC0980FF"]
@@ -1150,7 +1150,7 @@
 			]
 			title: "Boron Capsule"
 			x: 13.0d
-			y: 34.25d
+			y: 34.0d
 		}
 		{
 			dependencies: ["556DE618DC0980FF", "73C9096FE61142F2", "57729769773E4E58", "37034F8171F97435"]
@@ -1163,7 +1163,7 @@
 			]
 			title: "D-He3 Capsule"
 			x: 12.5d
-			y: 37.25d
+			y: 37.0d
 		}
 		{
 			dependencies: ["1BD6C43944F7BFC3", "126AEEE884FD4F6B", "1EC3359768A784AB"]
@@ -1178,7 +1178,7 @@
 			]
 			title: "Laser Fusion Chamber"
 			x: 14.75d
-			y: 33.75d
+			y: 33.5d
 		}
 		{
 			dependencies: ["705C2604CD4594D7"]
@@ -1191,7 +1191,7 @@
 			]
 			title: "Helium"
 			x: 16.25d
-			y: 35.75d
+			y: 35.5d
 		}
 		{
 			dependencies: ["705C2604CD4594D7"]
@@ -1206,7 +1206,7 @@
 			]
 			title: "Spent Laser Module"
 			x: 15.25d
-			y: 35.25d
+			y: 35.0d
 		}
 		{
 			icon: "grindless:yb_doped_preform"
@@ -1220,7 +1220,7 @@
 			]
 			title: "Doped Preform"
 			x: 10.0d
-			y: 31.5d
+			y: 31.25d
 		}
 		{
 			dependencies: ["72BF1E6751A8C854"]
@@ -1235,7 +1235,7 @@
 			]
 			title: "Fibre Draw Tower"
 			x: 11.5d
-			y: 31.75d
+			y: 31.5d
 		}
 		{
 			dependencies: ["1913638BF996E35B"]
@@ -1248,7 +1248,7 @@
 			]
 			title: "Ytterbium Fibre"
 			x: 12.0d
-			y: 30.0d
+			y: 29.75d
 		}
 		{
 			icon: "grindless:gallium_arsenide_wafer"
@@ -1262,7 +1262,7 @@
 			]
 			title: "GaAs Wafer"
 			x: 8.25d
-			y: 23.25d
+			y: 23.0d
 		}
 		{
 			dependencies: ["5D61CB9C4E38A555"]
@@ -1277,7 +1277,7 @@
 			]
 			title: "MOCVD Reactor"
 			x: 9.75d
-			y: 23.25d
+			y: 23.0d
 		}
 		{
 			dependencies: ["105048B8DD3BFB2F"]
@@ -1290,7 +1290,7 @@
 			]
 			title: "Arsine"
 			x: 10.25d
-			y: 21.75d
+			y: 21.5d
 		}
 		{
 			dependencies: ["105048B8DD3BFB2F"]
@@ -1303,7 +1303,7 @@
 			]
 			title: "InGaAs Epi Wafer"
 			x: 11.5d
-			y: 23.5d
+			y: 23.25d
 		}
 		{
 			dependencies: ["15A03CCA93401FCE"]
@@ -1317,7 +1317,7 @@
 			]
 			title: "Pump Module"
 			x: 12.75d
-			y: 25.25d
+			y: 25.0d
 		}
 		{
 			dependencies: ["56FC94895700579E", "30F0C9D2FA169DBA"]
@@ -1331,7 +1331,7 @@
 			]
 			title: "Fibre Laser Module"
 			x: 14.25d
-			y: 29.0d
+			y: 28.75d
 		}
 		{
 			icon: "grindless:curium_oxide"
@@ -1345,7 +1345,7 @@
 			]
 			title: "Curium Oxide"
 			x: 36.5d
-			y: 26.25d
+			y: 26.0d
 		}
 		{
 			icon: "gtceu:americium_dust"
@@ -1359,7 +1359,7 @@
 			]
 			title: "Americium"
 			x: 36.75d
-			y: 29.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["7D837D5FBC46B83E", "16315CD2FE92BF69"]
@@ -1374,7 +1374,7 @@
 			]
 			title: "Heat Source Works"
 			x: 38.5d
-			y: 29.5d
+			y: 29.25d
 		}
 		{
 			dependencies: ["1CFB6029BDD0B187"]
@@ -1388,7 +1388,7 @@
 			]
 			title: "Curium-244 Pellet"
 			x: 42.25d
-			y: 29.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["3641A825E4A4364E"]
@@ -1402,7 +1402,7 @@
 			]
 			title: "GPHS Module"
 			x: 45.25d
-			y: 29.75d
+			y: 29.5d
 		}
 		{
 			dependencies: ["366B215654E5F72E"]
@@ -1416,7 +1416,7 @@
 			]
 			title: "Probe RTG"
 			x: 47.75d
-			y: 33.5d
+			y: 33.25d
 		}
 		{
 			dependencies: ["1CFB6029BDD0B187"]
@@ -1430,7 +1430,7 @@
 			]
 			title: "Americium Micro-Source"
 			x: 40.75d
-			y: 27.75d
+			y: 27.5d
 		}
 		{
 			icon: "gtceu:tritanium_ingot"
@@ -1443,7 +1443,7 @@
 			]
 			title: "Tritanium"
 			x: 40.5d
-			y: 25.0d
+			y: 24.75d
 		}
 		{
 			dependencies: ["3E03D99EBC4197FF", "3B3EF30C00C0A27A"]
@@ -1458,7 +1458,7 @@
 			]
 			title: "Powder Bed Printer"
 			x: 42.25d
-			y: 24.5d
+			y: 24.25d
 		}
 		{
 			dependencies: ["1B677ACC858CD860"]
@@ -1471,7 +1471,7 @@
 			]
 			title: "Tritanium Powder"
 			x: 44.5d
-			y: 23.5d
+			y: 23.25d
 		}
 		{
 			dependencies: ["5ADB873F80CCF712", "3B3EF30C00C0A27A"]
@@ -1485,7 +1485,7 @@
 			]
 			title: "Near-Net Chamber"
 			x: 45.0d
-			y: 22.0d
+			y: 21.75d
 		}
 		{
 			dependencies: ["7EA7315ADF00D872"]
@@ -1499,7 +1499,7 @@
 			]
 			title: "Printed Chamber"
 			x: 48.0d
-			y: 22.0d
+			y: 21.75d
 		}
 		{
 			dependencies: ["1401BB7BF5F40599"]
@@ -1514,7 +1514,7 @@
 			]
 			title: "Thruster Works"
 			x: 49.0d
-			y: 25.25d
+			y: 25.0d
 		}
 		{
 			dependencies: ["1A0C266EEBA41CE6"]
@@ -1528,7 +1528,7 @@
 			]
 			title: "Ion Thruster"
 			x: 49.5d
-			y: 29.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["1D2BC3DBDD8B9BDD"]
@@ -1542,7 +1542,7 @@
 			]
 			title: "Thruster Pod"
 			x: 49.5d
-			y: 31.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["7DB3610484C93363", "5AA458C49D0C17C1"]
@@ -1556,7 +1556,7 @@
 			]
 			title: "Kuiper Interceptor"
 			x: 52.25d
-			y: 33.25d
+			y: 33.0d
 		}
 		{
 			dependencies: ["73C4A08EDFACCFA9"]
@@ -1571,7 +1571,7 @@
 			]
 			title: "Kuiper Interceptor Bay"
 			x: 55.75d
-			y: 32.75d
+			y: 32.5d
 		}
 		{
 			dependencies: ["376DC558BBCD7C55"]
@@ -1584,7 +1584,7 @@
 			]
 			title: "Planetesimal Sample"
 			x: 57.0d
-			y: 31.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["5407A130F1940E57"]
@@ -1599,7 +1599,7 @@
 			]
 			title: "Amorphous Ice Annealer"
 			x: 58.25d
-			y: 33.75d
+			y: 33.5d
 		}
 		{
 			dependencies: ["170B6DA637F53BAB"]
@@ -1612,7 +1612,7 @@
 			]
 			title: "Water"
 			x: 62.25d
-			y: 33.5d
+			y: 33.25d
 		}
 		{
 			dependencies: ["170B6DA637F53BAB"]
@@ -1626,7 +1626,7 @@
 			]
 			title: "Kuiper Noble Gas"
 			x: 59.0d
-			y: 38.5d
+			y: 38.25d
 		}
 		{
 			dependencies: ["170B6DA637F53BAB"]
@@ -1639,33 +1639,33 @@
 			]
 			title: "Carbon Monoxide"
 			x: 60.0d
-			y: 31.25d
+			y: 31.0d
 		}
 		{
 			dependencies: ["35C5A56457C63A73"]
 			icon: "gtceu:krypton_bucket"
 			id: "1E9B103B6E3931DD"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "1EDC4269000178A4", item: "gtceu:krypton_bucket", optional_task: true, type: "item" }
 				{ id: "77FE22F88A758372", type: "checkmark" }
 			]
 			title: "Krypton"
 			x: 61.5d
-			y: 37.25d
+			y: 37.0d
 		}
 		{
 			dependencies: ["35C5A56457C63A73"]
 			icon: "gtceu:xenon_bucket"
 			id: "54A1D91C6C7B5DA0"
-			size: 1.25d
+			size: 0.75d
 			tasks: [
 				{ id: "103F955B37FB198A", item: "gtceu:xenon_bucket", optional_task: true, type: "item" }
 				{ id: "7CA4162BB2C33623", type: "checkmark" }
 			]
 			title: "Xenon"
 			x: 63.0d
-			y: 39.0d
+			y: 38.75d
 		}
 		{
 			dependencies: ["132326AF4E432EEB"]
@@ -1680,7 +1680,7 @@
 			]
 			title: "Zone Refining Tower"
 			x: 60.25d
-			y: 51.5d
+			y: 51.25d
 		}
 		{
 			dependencies: ["15075EB2695D9C02"]
@@ -1694,7 +1694,7 @@
 			]
 			title: "Germanium Tetrachloride"
 			x: 64.0d
-			y: 52.25d
+			y: 52.0d
 		}
 		{
 			dependencies: ["51CC496F68BA497B"]
@@ -1707,7 +1707,7 @@
 			]
 			title: "Germanium Ingot"
 			x: 67.5d
-			y: 53.75d
+			y: 53.5d
 		}
 		{
 			dependencies: ["5ACE93F5A9B4E11A"]
@@ -1721,7 +1721,7 @@
 			]
 			title: "HPGe Crystal"
 			x: 71.5d
-			y: 55.5d
+			y: 55.25d
 		}
 		{
 			icon: "gtceu:boron_trioxide_dust"
@@ -1734,7 +1734,7 @@
 			]
 			title: "Boron Trioxide"
 			x: 24.25d
-			y: 34.25d
+			y: 34.0d
 		}
 		{
 			dependencies: ["345EDE5C2A8BCBE6"]
@@ -1749,7 +1749,7 @@
 			]
 			title: "Boron Nitride Reactor"
 			x: 27.75d
-			y: 33.0d
+			y: 32.75d
 		}
 		{
 			dependencies: ["18B01D29BF90C6D3"]
@@ -1763,7 +1763,7 @@
 			]
 			title: "Hexagonal Boron Nitride"
 			x: 32.5d
-			y: 31.75d
+			y: 31.5d
 		}
 		{
 			dependencies: ["5BC20C8BF9F98631"]
@@ -1777,7 +1777,7 @@
 			]
 			title: "Nanotube Dust"
 			x: 35.25d
-			y: 34.25d
+			y: 34.0d
 		}
 		{
 			dependencies: ["730984219181AC70"]
@@ -1791,7 +1791,7 @@
 			]
 			title: "BNNT Yarn"
 			x: 37.0d
-			y: 35.75d
+			y: 35.5d
 		}
 		{
 			dependencies: ["55BABADA1B051F3D", "1E95CAD2B8E5700C"]
@@ -1806,7 +1806,7 @@
 			]
 			title: "Cryotank Winder"
 			x: 41.5d
-			y: 37.5d
+			y: 37.25d
 		}
 		{
 			dependencies: ["1826D2D1863BE1A8"]
@@ -1819,7 +1819,7 @@
 			]
 			title: "BNNT Fuel Tank"
 			x: 44.0d
-			y: 36.75d
+			y: 36.5d
 		}
 		{
 			dependencies: ["10D7DA8F16132672", "1C3ABC190214A62A"]
@@ -1833,7 +1833,7 @@
 			]
 			title: "Aerogel Fuel Tank"
 			x: 40.0d
-			y: 40.5d
+			y: 40.25d
 		}
 		{
 			dependencies: ["305F916B3530ABAD"]
@@ -1848,7 +1848,7 @@
 			]
 			title: "Wake Shield Facility"
 			x: 22.5d
-			y: 29.75d
+			y: 29.5d
 		}
 		{
 			dependencies: ["14729250D9B51518"]
@@ -1861,7 +1861,7 @@
 			]
 			title: "Epitaxial Silicon Wafer"
 			x: 25.0d
-			y: 29.5d
+			y: 29.25d
 		}
 		{
 			dependencies: ["3FAE95B73A334D7D"]
@@ -1876,7 +1876,7 @@
 			]
 			title: "Light Sail Fab"
 			x: 28.5d
-			y: 30.0d
+			y: 29.75d
 		}
 		{
 			dependencies: ["17A1320885A6A2F6"]
@@ -1890,7 +1890,7 @@
 			]
 			title: "Nitride-Coated Carrier"
 			x: 31.5d
-			y: 28.25d
+			y: 28.0d
 		}
 		{
 			dependencies: ["71E595C0B00CF12E", "5BC20C8BF9F98631"]
@@ -1904,7 +1904,7 @@
 			]
 			title: "Patterned Sail Carrier"
 			x: 34.25d
-			y: 28.5d
+			y: 28.25d
 		}
 		{
 			dependencies: ["1AC968C7C9D290C2"]
@@ -1918,7 +1918,7 @@
 			]
 			title: "Light Sail"
 			x: 35.5d
-			y: 30.75d
+			y: 30.5d
 		}
 		{
 			icon: "grindless:fibre_laser_module"
@@ -1932,7 +1932,7 @@
 			]
 			title: "Fibre Laser Module"
 			x: 41.75d
-			y: 22.5d
+			y: 22.25d
 		}
 		{
 			icon: "gtceu:sapphire_block"
@@ -1945,7 +1945,7 @@
 			]
 			title: "Sapphire Block"
 			x: 83.5d
-			y: 21.75d
+			y: 21.5d
 		}
 		{
 			dependencies: ["1A6510A89F15B4D8"]
@@ -1960,7 +1960,7 @@
 			]
 			title: "Electric Blast Furnace"
 			x: 88.0d
-			y: 23.75d
+			y: 23.5d
 		}
 		{
 			dependencies: ["136DAEFE4CADCEE6"]
@@ -1973,7 +1973,7 @@
 			]
 			title: "Sapphire Boule"
 			x: 91.5d
-			y: 26.5d
+			y: 26.25d
 		}
 		{
 			dependencies: ["186A1E8F4753F492"]
@@ -1987,7 +1987,7 @@
 			]
 			title: "Sapphire Wafer"
 			x: 94.25d
-			y: 28.5d
+			y: 28.25d
 		}
 		{
 			dependencies: ["3BFBB4038ABB0B5C"]
@@ -2001,7 +2001,7 @@
 			]
 			title: "Niobium Nitride Film Wafer"
 			x: 95.0d
-			y: 33.25d
+			y: 33.0d
 		}
 		{
 			dependencies: ["1E1FED2FA9F54CD4"]
@@ -2015,7 +2015,7 @@
 			]
 			title: "SNSPD Array"
 			x: 95.75d
-			y: 31.25d
+			y: 31.0d
 		}
 		{
 			icon: "grindless:pmma_coated_wafer"
@@ -2029,7 +2029,7 @@
 			]
 			title: "PMMA Wafer"
 			x: 75.75d
-			y: 33.0d
+			y: 32.75d
 		}
 		{
 			icon: "gtca:proton"
@@ -2043,7 +2043,7 @@
 			]
 			title: "Protons"
 			x: 76.5d
-			y: 34.25d
+			y: 34.0d
 		}
 		{
 			dependencies: ["1E76B321FEFC8307", "3B49BD228435262C"]
@@ -2058,7 +2058,7 @@
 			]
 			title: "Synchrotron"
 			x: 78.25d
-			y: 31.5d
+			y: 31.25d
 		}
 		{
 			dependencies: ["3F493BFC69CE398E"]
@@ -2072,7 +2072,7 @@
 			]
 			title: "Exposed Wafer"
 			x: 78.75d
-			y: 29.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["3F12FE591EEA56EE"]
@@ -2085,7 +2085,7 @@
 			]
 			title: "Photonic Chip"
 			x: 80.75d
-			y: 28.25d
+			y: 28.0d
 		}
 		{
 			dependencies: ["3F493BFC69CE398E"]
@@ -2098,7 +2098,7 @@
 			]
 			title: "Antiproton Cartridge"
 			x: 80.75d
-			y: 35.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["73BC62AD5BA0017B"]
@@ -2113,7 +2113,7 @@
 			]
 			title: "Antimatter Trap"
 			x: 83.25d
-			y: 34.5d
+			y: 34.25d
 		}
 		{
 			dependencies: ["50BABCF9072CBE65"]
@@ -2126,7 +2126,7 @@
 			]
 			title: "Antiproton Trap"
 			x: 87.0d
-			y: 35.5d
+			y: 35.25d
 		}
 		{
 			dependencies: ["5B93BC6143D6D2DF"]
@@ -2140,7 +2140,7 @@
 			]
 			title: "ICAN Pellet"
 			x: 89.25d
-			y: 39.0d
+			y: 38.75d
 		}
 		{
 			icon: "grindless:nv_diamond_chip"
@@ -2154,7 +2154,7 @@
 			]
 			title: "NV Diamond Chip"
 			x: 83.25d
-			y: 27.25d
+			y: 27.0d
 		}
 		{
 			icon: "gtceu:neutronium_wafer"
@@ -2167,7 +2167,7 @@
 			]
 			title: "Neutronium Wafer"
 			x: 81.25d
-			y: 29.75d
+			y: 29.5d
 		}
 		{
 			dependencies: ["78647DFC80A8F762", "75B27C986019D15C", "1A554317A11FB074", "318F2CDAB746FE88"]
@@ -2182,7 +2182,7 @@
 			]
 			title: "Starchip Fab"
 			x: 85.25d
-			y: 28.0d
+			y: 27.75d
 		}
 		{
 			dependencies: ["7B284661BA05367D"]
@@ -2195,7 +2195,7 @@
 			]
 			title: "Starchip"
 			x: 89.75d
-			y: 29.75d
+			y: 29.5d
 		}
 		{
 			dependencies: ["5E62AB00D97F5F31"]
@@ -2208,7 +2208,7 @@
 			]
 			title: "Relay Seed"
 			x: 92.5d
-			y: 30.5d
+			y: 30.25d
 		}
 		{
 			dependencies: ["5E62AB00D97F5F31", "75DF7E9F37652BC6"]
@@ -2221,7 +2221,7 @@
 			]
 			title: "Sailcraft"
 			x: 91.5d
-			y: 33.5d
+			y: 33.25d
 		}
 		{
 			dependencies: ["56DD2E47CDE2F080", "1888818E1D8EEBCF", "7D31CF07942D4D25"]
@@ -2235,7 +2235,7 @@
 			]
 			title: "Precursor Probe"
 			x: 90.0d
-			y: 40.5d
+			y: 40.25d
 		}
 		{
 			dependencies: ["77742379B377D9B8", "3EFF726F9BCF1AD6"]
@@ -2249,7 +2249,7 @@
 			]
 			title: "Heliopause Data"
 			x: 91.0d
-			y: 39.0d
+			y: 38.75d
 		}
 		{
 			dependencies: ["1AA902DA00F9AFB4", "37565FD4507A4CAD", "37F5978B0FE9F68C"]
@@ -2263,7 +2263,7 @@
 			]
 			title: "Starshot Probe"
 			x: 94.75d
-			y: 36.25d
+			y: 36.0d
 		}
 		{
 			dependencies: ["1AA902DA00F9AFB4"]
@@ -2278,7 +2278,7 @@
 			]
 			title: "Spent Laser Module"
 			x: 93.75d
-			y: 30.5d
+			y: 30.25d
 		}
 		{
 			dependencies: ["54563CBB8AE25F24", "308DBAD22E60AB39"]
@@ -2291,7 +2291,7 @@
 			]
 			title: "Proxima Approach Data"
 			x: 97.75d
-			y: 32.25d
+			y: 32.0d
 		}
 		{
 			icon: "grindless:fibre_laser_module"
@@ -2305,7 +2305,7 @@
 			]
 			title: "Fibre Laser Module"
 			x: 90.0d
-			y: 37.25d
+			y: 37.0d
 		}
 		{
 			icon: "grindless:americium_micro_source"
@@ -2319,7 +2319,7 @@
 			]
 			title: "Americium Micro-Source"
 			x: 82.5d
-			y: 31.0d
+			y: 30.75d
 		}
 		{
 			icon: "grindless:probe_rtg"
@@ -2333,7 +2333,7 @@
 			]
 			title: "Probe RTG"
 			x: 86.0d
-			y: 37.75d
+			y: 37.5d
 		}
 		{
 			icon: "grindless:thruster_pod"
@@ -2347,7 +2347,7 @@
 			]
 			title: "Thruster Pod"
 			x: 86.25d
-			y: 40.0d
+			y: 39.75d
 		}
 		{
 			icon: "grindless:hpge_crystal"
@@ -2361,7 +2361,7 @@
 			]
 			title: "HPGe Crystal"
 			x: 88.25d
-			y: 42.0d
+			y: 41.75d
 		}
 		{
 			icon: "grindless:light_sail"
@@ -2375,7 +2375,7 @@
 			]
 			title: "Light Sail"
 			x: 88.5d
-			y: 31.25d
+			y: 31.0d
 		}
 	]
 	subtitle: ["Thorium and nitrogen-15, superfluid helium, laser fusion fuel and fibre lasers, the ices of Pluto and closed life, EnTED wire, and the Starshot programme with the Kuiper belt."]
