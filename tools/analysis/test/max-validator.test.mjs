@@ -30,7 +30,7 @@ const STARTUP_SRC = () => readDir(STARTUP);
 const MULTIBLOCKS = {
   rydberg_array_works: 'rydberg_assembly', atom_interferometer_works: 'atom_interferometry', membrane_line: 'membrane_rolling', gene_ark: 'genome_archiving',
   photon_ring_imager: 'photon_ring_imaging', geroch_winch: 'geroch_power', mass_stream_injector: 'mass_stream_injection', mirror_shell: 'black_hole_bomb',
-  cluster_light_furnace: 'cluster_light_smelting', accretion_feeder: 'accretion_power',
+  cluster_light_furnace: 'cluster_light_smelting', accretion_feeder: 'accretion_power', segment_reclamation_works: 'segment_reclamation',
 };
 
 // ------------------------------------------------------------------ the real config

@@ -6,9 +6,9 @@
 //                                     ablated mirror-shell segment into its seven part streams (truss, membrane, cryocooler, coupler,
 //                                     Sn-Li dross, electronics, VO2 sheet). It runs at Sgr A* orbit only: nothing else can open the part.
 //
-// Shape: a docking bay of reclamation bay casing (a walled hall, a glass strip window on each side, frame posts at the corners) around an
-// open floor. A cold strip line runs down the middle of the bay: a bed of field-frozen casing on the floor and a superconducting coil rail
-// under the roof. The hatches sit in the front row of the floor. Textures: reclamation bay casing is F1's.
+// Shape: a docking bay of reclamation bay casing (a walled hall, a glass strip window on each side, frame posts at the corners) around a
+// floor of field-frozen casing. A cold strip line runs down the middle of the bay: a bed of field-frozen casing and a superconducting coil
+// rail under the roof, whose ribs are steel. The hatches sit in the front row of the floor. Textures: reclamation bay casing is F1's.
 // Names: client_scripts/grindless/max_reclamation_lang.js. Published for the recipe script: global.grindless.maxReclamation.
 (function () {
   const G = global.grindless
@@ -43,8 +43,11 @@
   function bayCell(x, y, z) {
     var edgeX = x === 0 || x === 14
     var edgeZ = z === 0 || z === 14
-    if (y === 0) return z === 14 && x >= 1 && x <= 13 ? 'X' : 'F'
-    if (y === 8) return 'F'
+    if (y === 0) {
+      if (z === 14 && x >= 1 && x <= 13) return 'X'
+      return !edgeX && !edgeZ ? 'D' : 'F'
+    }
+    if (y === 8) return !edgeX && !edgeZ && x % 2 === 0 ? 'Q' : 'F'
     if (!edgeX && !edgeZ) {
       var onLine = x >= 6 && x <= 8 && z >= 2 && z <= 12
       if (y === 1 && onLine) return 'D'
