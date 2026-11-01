@@ -28,6 +28,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'max'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 
 if (-not $OutRoot) { $OutRoot = Join-Path $PSScriptRoot '..\..\pack\kubejs\assets\grindless\textures' }
 $OutRoot = [System.IO.Path]::GetFullPath($OutRoot)
