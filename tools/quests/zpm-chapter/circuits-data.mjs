@@ -19,14 +19,13 @@ export const CHAPTER = {
 export const LINKS = [
   { key: 'C_L_ST', ref: 'START', x: 0, y: 0 },
   { key: 'C_L_SI', ref: 'START', x: 0, y: 1.5 },
-  { key: 'C_L_WA', ref: 'luv:WASM', x: 0, y: 4.5 },
 ];
 
 export const QUESTS = [
   // ------------------------------------------------------------------ the assembler and the ladder
   {
     key: 'ZC_ASM', kind: 'machine', title: 'ZPM Circuit Assembler', icon: 'gtceu:zpm_circuit_assembler',
-    deps: ['C_L_ST'], x: 2, y: 0,
+    deps: ['START'], x: 2, y: 0,
     teach: {
       for: 'The &6ZPM Circuit Assembler&r is the first assembler that can build the circuits ZPM machines are made of.',
       needs: 'ZPM components for its hull, a cleanroom you already run, and the LuV circuits that feed it.',
@@ -52,7 +51,7 @@ export const QUESTS = [
   },
   {
     key: 'ZC_QWAF', kind: 'wafer', title: 'Quantum Wafer', icon: 'gtceu:qbit_cpu_wafer',
-    deps: ['C_L_ST'], x: 2, y: 3,
+    deps: ['START'], x: 2, y: 3,
     teach: {
       for: 'A &6Qubit CPU Wafer&r is a wafer treated with radon so that its structure can hold a quantum state.',
       needs: 'Radon from the waste retrieval plant, which is why home comes first in this era.',
@@ -93,7 +92,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ silicon-28, donors and the cold
   {
     key: 'SI28', kind: 'wafer', title: 'Silicon-28', icon: 'grindless:silicon_28_wafer',
-    deps: ['C_L_SI'], x: 2, y: 1.5,
+    deps: ['START'], x: 2, y: 1.5,
     teach: {
       for: 'Isotopically pure silicon is grown as a &6Silicon-28 Boule&r and cut into wafers. Ordinary silicon has too much magnetic noise for what comes next.',
       needs: 'Silicon-28 from the hot cell, an EBF for the boule and a cutter. The boule is the slow part.',
@@ -119,7 +118,7 @@ export const QUESTS = [
   },
   {
     key: 'ZC_NV', kind: 'wafer', title: 'NV Diamond', icon: 'grindless:nv_diamond_chip',
-    deps: ['C_L_SI'], x: 2, y: 4.5,
+    deps: ['START'], x: 2, y: 4.5,
     teach: {
       for: 'A nitrogen atom next to a gap in diamond is a qubit that works warm. The &6NV Diamond Chip&r is a doped diamond plate with them placed in it.',
       needs: 'Nitrogen-doped plates from the diamond lattice fab, then the ion implanter.',

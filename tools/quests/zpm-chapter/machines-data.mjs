@@ -41,7 +41,7 @@ const prod = (key, title, icon, deps, x, y, text, tasks, xpN = 80) => ({
 
 export const QUESTS = [
   // ------------------------------------------------------------------ naquadria at home
-  gear('NAQD', 'naquadria_refinery', 'Naquadria', ['M_L_HOME'], 2, 0, {
+  gear('NAQD', 'naquadria_refinery', 'Naquadria', ['START'], 2, 0, {
     for: 'The &6Naquadria Refinery&r pushes naquadah past the point it was stable. What comes out is denser, hotter and far more dangerous.',
     needs: 'Its controller, and the &6Naquadria Containment Casing&r that keeps the dust from escaping.',
     unlocks: 'Naquadria for the fuel works and the magnet works.',
@@ -55,7 +55,7 @@ export const QUESTS = [
   }, [it('grindless:naquadria_containment_casing')]),
 
   // ------------------------------------------------------------------ waste, americium and synroc
-  gear('EURO', 'europium_reductor', 'Europium', ['M_L_EURO'], 2, 1.5, {
+  gear('EURO', 'europium_reductor', 'Europium', ['START'], 2, 1.5, {
     for: 'The &6Europium Reductor&r pulls europium out of rare-earth ore with a reducing bath that nothing smaller can run.',
     needs: 'Its controller and heat-proof coils; europium dust is the product.',
     unlocks: 'Europium for the ZPM wire and the hulls.',
@@ -78,7 +78,7 @@ export const QUESTS = [
   }, [it('gtceu:americium_dust'), it('grindless:curium_oxide')]),
 
   // ------------------------------------------------------------------ wire and plasma
-  gear('WIRE', 'naquadria_magnet_works', 'Magnet Works', ['M_L_WIRE'], 2, 3, {
+  gear('WIRE', 'naquadria_magnet_works', 'Magnet Works', ['START'], 2, 3, {
     for: 'The &6Naquadria Magnet Works&r winds the superconducting wire and insert the fusion hall and the large coils need.',
     needs: 'Its controller, naquadria and the cryostat casing from the circuits chapter.',
     unlocks: 'Uranium rhodium dinaquadide wire, and the insert for the next hall.',
@@ -95,7 +95,7 @@ export const QUESTS = [
     [it('grindless:hts_insert')]),
 
   // ------------------------------------------------------------------ diamond and qubits
-  gear('GRAPH', 'methane_pyrolyser', 'Pyrolysis', ['M_L_GRAPH'], 2, 4.5, {
+  gear('GRAPH', 'methane_pyrolyser', 'Pyrolysis', ['START'], 2, 4.5, {
     for: 'The &6Methane Pyrolyser&r cracks methane into graphene and hydrogen, with the carbon coming out as a sheet.',
     needs: 'Its controller and methane from the gas network.',
     unlocks: 'Graphene for the diamond lattice and for the circuits chapter.',
@@ -121,7 +121,7 @@ export const QUESTS = [
   }, [it('grindless:cryostat_casing')], 150),
 
   // ------------------------------------------------------------------ vents, aerogel and neutrinos
-  gear('VENT', 'vent_bioreactor', 'Vent Life', ['M_L_VENT'], 2, 6, {
+  gear('VENT', 'vent_bioreactor', 'Vent Life', ['START'], 2, 6, {
     for: 'The &6Vent Bioreactor&r grows microbes that live by deep-sea heat and feed on what the vents give off.',
     needs: 'Its controller and the heat-resistant culture it grows.',
     unlocks: 'Archaeal culture for aerogel, and the organics for later lines.',
@@ -147,7 +147,7 @@ export const QUESTS = [
     [it('grindless:solar_core_survey')], 120),
 
   // ------------------------------------------------------------------ Saturn
-  gear('RICE', 'ring_harvester', 'Ring Ice', ['M_L_RICE'], 2, 9, {
+  gear('RICE', 'ring_harvester', 'Ring Ice', ['STN3'], 2, 9, {
     for: 'The &6Ring Harvester&r sails through Saturn\'s rings and nets the ice, which is not the same as the ice at home.',
     needs: 'Its controller, the &6Station Truss Casing&r you already know, and a net for the sail.',
     unlocks: 'Ring ice samples for the plume sampler and the seismometer.',
@@ -169,7 +169,7 @@ export const QUESTS = [
     automate: 'It listens for a long time. Leave it be.',
   }, [it('grindless:saturn_interior_model'), it('grindless:uranus_transfer_chart')], 150),
 
-  gear('SCOOP', 'gas_giant_siphon', 'Siphon', ['M_L_SCOOP'], 2, 10.5, {
+  gear('SCOOP', 'gas_giant_siphon', 'Siphon', ['STN3'], 2, 10.5, {
     for: 'The &6Gas Giant Siphon&r lowers a scoop into the clouds and brings up gas from a planet that has no ground.',
     needs: 'Its controller and a &6Scoop Head&r for the clouds.',
     unlocks: 'Helium-3 for the clean fusion route, and hydrogen in bulk.',
@@ -198,7 +198,7 @@ export const QUESTS = [
   }, [it('grindless:tholin')]),
 
   // ------------------------------------------------------------------ Uranus
-  gear('DEEP', 'ice_giant_siphon', 'Deep Gas', ['M_L_DEEP'], 2, 13.5, {
+  gear('DEEP', 'ice_giant_siphon', 'Deep Gas', ['STN4'], 2, 13.5, {
     for: 'The &6Ice Giant Siphon&r reaches deeper than the Saturn one, under a hull rated for the pressure.',
     needs: 'Its controller, the &6Pressure Hull Casing&r and the atmosphere sample it brings up.',
     unlocks: 'Ice giant gases, and the diamond seed in the next quest.',
@@ -221,7 +221,7 @@ export const QUESTS = [
   }, [it('grindless:probe_bay_casing'), it('grindless:neptune_flyby_probe')], 150),
 
   // ------------------------------------------------------------------ listening and exit
-  gear('LIST', 'deep_space_network', 'Listening', ['M_L_LIST'], 2, 15, {
+  gear('LIST', 'deep_space_network', 'Listening', ['START'], 2, 15, {
     for: 'The &6Deep Space Network&r decodes what the probes send home.',
     needs: 'Its controller, the recordings and the &6Multimessenger Catalogue&r it makes.',
     unlocks: 'Flyby data, and the target list the Kuiper telescope uses.',
@@ -234,7 +234,7 @@ export const QUESTS = [
     automate: 'It surveys all by itself; collect the chart when it is done.',
   }, [it('grindless:kuiper_target_list'), it('grindless:pluto_kuiper_chart')], 150),
 
-  prod('TRIT', 'Tritanium', 'gtceu:tritanium_ingot', ['M_L_TRIT'], 2, 16.5,
+  prod('TRIT', 'Tritanium', 'gtceu:tritanium_ingot', ['START'], 2, 16.5,
     'Titanium and duranium fuse into &6Tritanium&r in the Mk2. It is a UV metal, made here first.',
     [it('gtceu:tritanium_ingot')], 100),
   prod('DARM', 'Darmstadtium', 'gtceu:darmstadtium_ingot', ['TRIT'], 4, 16.5,
