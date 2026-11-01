@@ -1024,6 +1024,7 @@ const ENDS = {
 };
 const grp = (ids, text) => ids.forEach((id) => { ENDS[id] = text; });
 grp(['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17'], 'The Hyperstargate grid crafts');
+grp(['T5', 'T6'], "The condensate assembler's horizon frame part");
 grp(['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'], 'The MAX+ machine components');
 grp(['Q1', 'Q2', 'A1', 'A2', 'A3'], 'The AE2 parts and the MAX+ circuits');
 grp(['K1', 'K2', 'K3', 'K4'], 'The creative items');

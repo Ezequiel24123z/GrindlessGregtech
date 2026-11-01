@@ -142,8 +142,8 @@
       items: [['grindless:coated_mesh', 24], ['grindless:kerr_strange_plate', 16], ['grindless:kerr_clad_strand', 16]], fluids: [[KERR, 500000]],
       outs: [['grindless:horizon_mesh', 1], ['grindless:condensate_boil_off', 6]] },
     { type: 'condensate_assembler', name: 'horizon_frame_part', circuit: 4, eut: ASM_EUT, duration: 2400, key: ASM_KEY, optional: true,
-      items: [['grindless:horizon_shielding', 4], ['grindless:horizon_waveguide', 4], ['grindless:horizon_conduit', 4], ['grindless:horizon_valve', 4],
-        ['grindless:horizon_mesh', 4], ['grindless:horizon_containment_plate', 4]], fluids: [[KERR, 1000000]],
+      items: [['grindless:horizon_shielding', 4], ['grindless:cold_horizon_waveguide', 4], ['grindless:cold_horizon_conduit', 4], ['grindless:horizon_valve', 4],
+        ['grindless:horizon_mesh', 4], ['grindless:horizon_containment_plate', 4], ['grindless:he4_dewar', 4]], fluids: [[KERR, 1000000]],
       outs: [['grindless:horizon_frame_part', 1], ['grindless:condensate_boil_off', 8]] }
   ]
   MA.assembler = ASM
