@@ -268,7 +268,80 @@
         ['teo2_aod_blank', 'TeO2 AOD Blank', 'Pieza en bruto de AOD de TeO2', 'Step 2 of 5 in line L46.', 'Paso 2 de 5 de la línea L46.', 'Goes on to LN Transducer Bonded Blank.', 'Sigue como Pieza en bruto de transductor de LN unida.'],
         ['ln_transducer_bonded_blank', 'LN Transducer Bonded Blank', 'Pieza en bruto de transductor de LN unida', 'Step 3 of 5 in line L46.', 'Paso 3 de 5 de la línea L46.', 'Goes on to Electroded AOD.', 'Sigue como AOD con electrodos.'],
         ['electroded_aod', 'Electroded AOD', 'AOD con electrodos', 'Step 4 of 5 in line L46.', 'Paso 4 de 5 de la línea L46.', 'Goes on to Crossed AOD Pair.', 'Sigue como Par de AOD cruzado.'],
-        ['crossed_aod_pair', 'Crossed AOD Pair', 'Par de AOD cruzado', 'Step 5 of 5 in line L46.', 'Paso 5 de 5 de la línea L46.', 'The finished product of its line.', 'El producto terminado de su línea.']
+        ['crossed_aod_pair', 'Crossed AOD Pair', 'Par de AOD cruzado', 'Step 5 of 5 in line L46.', 'Paso 5 de 5 de la línea L46.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        // RF-7A: lines L47-L57 and the items of machines 11-14
+        ['gr_platinum_sponge', 'GR Platinum Sponge', 'Esponja de platino para sensor gravitacional', 'Step 1 of 6 in line L47.', 'Paso 1 de 6 de la línea L47.', 'Goes on to Au-Pt Ingot.', 'Sigue como Lingote de Au-Pt.'],
+        ['au_pt_ingot', 'Au-Pt Ingot', 'Lingote de Au-Pt', 'Step 2 of 6 in line L47.', 'Paso 2 de 6 de la línea L47.', 'Goes on to Au-Pt Test Mass.', 'Sigue como Masa de prueba de Au-Pt.'],
+        ['au_pt_test_mass', 'Au-Pt Test Mass', 'Masa de prueba de Au-Pt', 'Step 3 of 6 in line L47.', 'Paso 3 de 6 de la línea L47.', 'Goes on to Coated Test Mass.', 'Sigue como Masa de prueba recubierta.'],
+        ['coated_test_mass', 'Coated Test Mass', 'Masa de prueba recubierta', 'Step 4 of 6 in line L47.', 'Paso 4 de 6 de la línea L47.', 'Goes on to UV LED Die.', 'Sigue como Chip de LED UV.'],
+        ['uv_led_die', 'UV LED Die', 'Chip de LED UV', 'Step 5 of 6 in line L47.', 'Paso 5 de 6 de la línea L47.', 'Goes on to Gravitational Reference Sensor.', 'Sigue como Sensor de referencia gravitacional.'],
+        ['gravitational_reference_sensor', 'Gravitational Reference Sensor', 'Sensor de referencia gravitacional', 'Step 6 of 6 in line L47.', 'Paso 6 de 6 de la línea L47.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        ['zero_expansion_baseplate', 'Zero Expansion Baseplate', 'Placa base de expansión nula', 'Step 2 of 5 in line L48.', 'Paso 2 de 5 de la línea L48.', 'Goes on to Coated Bench Optics.', 'Sigue como Óptica de banco recubierta.'],
+        ['coated_bench_optics', 'Coated Bench Optics', 'Óptica de banco recubierta', 'Step 3 of 5 in line L48.', 'Paso 3 de 5 de la línea L48.', 'Goes on to Hydroxide Bonded Bench.', 'Sigue como Banco unido por hidróxido.'],
+        ['hydroxide_bonded_bench', 'Hydroxide Bonded Bench', 'Banco unido por hidróxido', 'Step 4 of 5 in line L48.', 'Paso 4 de 5 de la línea L48.', 'Goes on to Bonded Optical Bench.', 'Sigue como Banco óptico unido.'],
+        ['bonded_optical_bench', 'Bonded Optical Bench', 'Banco óptico unido', 'Step 5 of 5 in line L48.', 'Paso 5 de 5 de la línea L48.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        ['indium_sulfate', 'Indium Sulfate', 'Sulfato de indio', 'Step 1 of 5 in line L49.', 'Paso 1 de 5 de la línea L49.', 'Goes on to 6N Indium.', 'Sigue como Indio 6N.'],
+        ['six_n_indium', '6N Indium', 'Indio 6N', 'Step 2 of 5 in line L49.', 'Paso 2 de 5 de la línea L49.', 'Goes on to Porous Tungsten Crown.', 'Sigue como Corona de wolframio porosa.'],
+        ['porous_tungsten_crown', 'Porous Tungsten Crown', 'Corona de wolframio porosa', 'Step 3 of 5 in line L49.', 'Paso 3 de 5 de la línea L49.', 'Goes on to Wetted Emitter Crown.', 'Sigue como Corona emisora humectada.'],
+        ['wetted_emitter_crown', 'Wetted Emitter Crown', 'Corona emisora humectada', 'Step 4 of 5 in line L49.', 'Paso 4 de 5 de la línea L49.', 'Goes on to FEEP Thruster.', 'Sigue como Propulsor FEEP.'],
+        ['feep_thruster', 'FEEP Thruster', 'Propulsor FEEP', 'Step 5 of 5 in line L49.', 'Paso 5 de 5 de la línea L49.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        ['vanadium_pentoxide', 'Vanadium Pentoxide', 'Pentóxido de vanadio', 'Step 1 of 6 in line L50.', 'Paso 1 de 6 de la línea L50.', 'Goes on to Sapphire Web Wafer.', 'Sigue como Oblea de zafiro en banda.'],
+        ['sapphire_web_wafer', 'Sapphire Web Wafer', 'Oblea de zafiro en banda', 'Step 2 of 6 in line L50.', 'Paso 2 de 6 de la línea L50.', 'Goes on to VO2 on Sapphire.', 'Sigue como VO2 sobre zafiro.'],
+        ['vo2_on_sapphire', 'VO2 on Sapphire', 'VO2 sobre zafiro', 'Step 3 of 6 in line L50.', 'Paso 3 de 6 de la línea L50.', 'Goes on to Patterned VO2 Metasurface.', 'Sigue como Metasuperficie de VO2 grabada.'],
+        ['patterned_vo2_metasurface', 'Patterned VO2 Metasurface', 'Metasuperficie de VO2 grabada', 'Step 4 of 6 in line L50.', 'Paso 4 de 6 de la línea L50.', 'Goes on to Metallised Metasurface.', 'Sigue como Metasuperficie metalizada.'],
+        ['metallised_metasurface', 'Metallised Metasurface', 'Metasuperficie metalizada', 'Step 5 of 6 in line L50.', 'Paso 5 de 6 de la línea L50.', 'Goes on to Tunable Impedance Sheet.', 'Sigue como Lámina de impedancia sintonizable.'],
+        ['tunable_impedance_sheet', 'Tunable Impedance Sheet', 'Lámina de impedancia sintonizable', 'Step 6 of 6 in line L50.', 'Paso 6 de 6 de la línea L50.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        ['large_grain_nb_disc', 'Large Grain Nb Disc', 'Disco de Nb de grano grande', 'Step 1 of 6 in line L51.', 'Paso 1 de 6 de la línea L51.', 'Goes on to Nb Driver Cell.', 'Sigue como Celda de impulsor de Nb.'],
+        ['nb_driver_cell', 'Nb Driver Cell', 'Celda de impulsor de Nb', 'Step 2 of 6 in line L51.', 'Paso 2 de 6 de la línea L51.', 'Goes on to Polished Driver Cell.', 'Sigue como Celda de impulsor pulida.'],
+        ['polished_driver_cell', 'Polished Driver Cell', 'Celda de impulsor pulida', 'Step 3 of 6 in line L51.', 'Paso 3 de 6 de la línea L51.', 'Goes on to Nb3Sn Driver Cell.', 'Sigue como Celda de impulsor de Nb3Sn.'],
+        ['nb3sn_driver_cell', 'Nb3Sn Driver Cell', 'Celda de impulsor de Nb3Sn', 'Step 4 of 6 in line L51.', 'Paso 4 de 6 de la línea L51.', 'Goes on to Conduction Cooled Cell.', 'Sigue como Celda enfriada por conducción.'],
+        ['conduction_cooled_cell', 'Conduction Cooled Cell', 'Celda enfriada por conducción', 'Step 5 of 6 in line L51.', 'Paso 5 de 6 de la línea L51.', 'Goes on to SRF Driver Module.', 'Sigue como Módulo de impulsor SRF.'],
+        ['srf_driver_module', 'SRF Driver Module', 'Módulo de impulsor SRF', 'Step 6 of 6 in line L51.', 'Paso 6 de 6 de la línea L51.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        ['stripped_membrane_scrap', 'Stripped Membrane Scrap', 'Chatarra de membrana desmontada', 'Step 1 of 5 in line L52.', 'Paso 1 de 5 de la línea L52.', 'Goes on to Bioleached RE Liquor.', 'Sigue como Licor de RE biolixiviado.'],
+        ['bioleached_re_liquor', 'Bioleached RE Liquor', 'Licor de RE biolixiviado', 'Step 2 of 5 in line L52.', 'Paso 2 de 5 de la línea L52.', 'Goes on to Y-Ba-Cu Raffinate.', 'Sigue como Refinado de Y-Ba-Cu.'],
+        ['y_ba_cu_raffinate', 'Y-Ba-Cu Raffinate', 'Refinado de Y-Ba-Cu', 'Step 3 of 5 in line L52.', 'Paso 3 de 5 de la línea L52.', 'Goes on to YBCO Oxalate.', 'Sigue como Oxalato de YBCO.'],
+        ['ybco_oxalate', 'YBCO Oxalate', 'Oxalato de YBCO', 'Step 4 of 5 in line L52.', 'Paso 4 de 5 de la línea L52.', 'Goes on to YBCO Precursor Powder.', 'Sigue como Polvo precursor de YBCO.'],
+        ['cryocooler_scrap', 'Cryocooler Scrap', 'Chatarra de criorrefrigerador', 'Step 1 of 4 in line L53.', 'Paso 1 de 4 de la línea L53.', 'Goes on to Er3Ni Grit.', 'Sigue como Granalla de Er3Ni.'],
+        ['er3ni_grit', 'Er3Ni Grit', 'Granalla de Er3Ni', 'Step 2 of 4 in line L53.', 'Paso 2 de 4 de la línea L53.', 'Goes on to Er-Rich Fraction.', 'Sigue como Fracción rica en Er.'],
+        ['er_rich_fraction', 'Er-Rich Fraction', 'Fracción rica en Er', 'Step 3 of 4 in line L53.', 'Paso 3 de 4 de la línea L53.', 'Goes on to Er-Ho Oxide.', 'Sigue como Óxido de Er-Ho.'],
+        ['pump_buffered_tape', 'Pump Buffered Tape', 'Cinta con búfer para bomba', 'Step 1 of 6 in line L54.', 'Paso 1 de 6 de la línea L54.', 'Goes on to Thick Pump Tape.', 'Sigue como Cinta de bomba gruesa.'],
+        ['thick_pump_tape', 'Thick Pump Tape', 'Cinta de bomba gruesa', 'Step 2 of 6 in line L54.', 'Paso 2 de 6 de la línea L54.', 'Goes on to Flux Pump Stator.', 'Sigue como Estátor de bomba de flujo.'],
+        ['flux_pump_stator', 'Flux Pump Stator', 'Estátor de bomba de flujo', 'Step 3 of 6 in line L54.', 'Paso 3 de 6 de la línea L54.', 'Goes on to Fe16N2 Rotor Magnet.', 'Sigue como Imán de rotor de Fe16N2.'],
+        ['fe16n2_rotor_magnet', 'Fe16N2 Rotor Magnet', 'Imán de rotor de Fe16N2', 'Step 4 of 6 in line L54.', 'Paso 4 de 6 de la línea L54.', 'Goes on to Cold Flux Pump.', 'Sigue como Bomba de flujo fría.'],
+        ['cold_flux_pump', 'Cold Flux Pump', 'Bomba de flujo fría', 'Step 5 of 6 in line L54.', 'Paso 5 de 6 de la línea L54.', 'Goes on to HTS Flux Pump.', 'Sigue como Bomba de flujo HTS.'],
+        ['hts_flux_pump', 'HTS Flux Pump', 'Bomba de flujo HTS', 'Step 6 of 6 in line L54.', 'Paso 6 de 6 de la línea L54.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        ['sapphire_resonator_disc', 'Sapphire Resonator Disc', 'Disco resonador de zafiro', 'Step 1 of 6 in line L55.', 'Paso 1 de 6 de la línea L55.', 'Goes on to Polished Sapphire Disc.', 'Sigue como Disco de zafiro pulido.'],
+        ['polished_sapphire_disc', 'Polished Sapphire Disc', 'Disco de zafiro pulido', 'Step 2 of 6 in line L55.', 'Paso 2 de 6 de la línea L55.', 'Goes on to Cryo Sapphire Oscillator.', 'Sigue como Oscilador de zafiro criogénico.'],
+        ['cryo_sapphire_oscillator', 'Cryo Sapphire Oscillator', 'Oscilador de zafiro criogénico', 'Step 3 of 6 in line L55.', 'Paso 3 de 6 de la línea L55.', 'Goes on to Clock Steered Oscillator.', 'Sigue como Oscilador guiado por reloj.'],
+        ['clock_steered_oscillator', 'Clock Steered Oscillator', 'Oscilador guiado por reloj', 'Step 4 of 6 in line L55.', 'Paso 4 de 6 de la línea L55.', 'Goes on to Optical Phase Lock Unit.', 'Sigue como Unidad de bloqueo de fase óptico.'],
+        ['optical_phase_lock_unit', 'Optical Phase Lock Unit', 'Unidad de bloqueo de fase óptico', 'Step 5 of 6 in line L55.', 'Paso 5 de 6 de la línea L55.', 'Goes on to Phase Lock Oscillator Bank.', 'Sigue como Banco de osciladores de bloqueo de fase.'],
+        ['phase_lock_oscillator_bank', 'Phase Lock Oscillator Bank', 'Banco de osciladores de bloqueo de fase', 'Step 6 of 6 in line L55.', 'Paso 6 de 6 de la línea L55.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        ['nd_yag_boule', 'Nd:YAG Boule', 'Boule de Nd:YAG', 'Step 1 of 5 in line L56.', 'Paso 1 de 5 de la línea L56.', 'Goes on to NPRO Crystal.', 'Sigue como Cristal NPRO.'],
+        ['npro_crystal', 'NPRO Crystal', 'Cristal NPRO', 'Step 2 of 5 in line L56.', 'Paso 2 de 5 de la línea L56.', 'Goes on to GaAs 808 Pump Bar.', 'Sigue como Barra de bombeo GaAs 808.'],
+        ['gaas_808_pump_bar', 'GaAs 808 Pump Bar', 'Barra de bombeo GaAs 808', 'Step 3 of 5 in line L56.', 'Paso 3 de 5 de la línea L56.', 'Goes on to Yb Doped Fibre.', 'Sigue como Fibra dopada con Yb.'],
+        ['yb_doped_fibre', 'Yb Doped Fibre', 'Fibra dopada con Yb', 'Step 4 of 5 in line L56.', 'Paso 4 de 5 de la línea L56.', 'Goes on to Stabilised NPRO Laser.', 'Sigue como Láser NPRO estabilizado.'],
+        ['stabilised_npro_laser', 'Stabilised NPRO Laser', 'Láser NPRO estabilizado', 'Step 5 of 5 in line L56.', 'Paso 5 de 5 de la línea L56.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        ['fz_silicon_rod', 'FZ Silicon Rod', 'Barra de silicio FZ', 'Step 1 of 6 in line L57.', 'Paso 1 de 6 de la línea L57.', 'Goes on to FZ Wafer.', 'Sigue como Oblea FZ.'],
+        ['fz_wafer', 'FZ Wafer', 'Oblea FZ', 'Step 2 of 6 in line L57.', 'Paso 2 de 6 de la línea L57.', 'Goes on to SIMOX SOI Wafer.', 'Sigue como Oblea SOI SIMOX.'],
+        ['simox_soi_wafer', 'SIMOX SOI Wafer', 'Oblea SOI SIMOX', 'Step 3 of 6 in line L57.', 'Paso 3 de 6 de la línea L57.', 'Goes on to Rad-Hard FPGA Wafer.', 'Sigue como Oblea FPGA resistente a radiación.'],
+        ['rad_hard_fpga_wafer', 'Rad-Hard FPGA Wafer', 'Oblea FPGA resistente a radiación', 'Step 4 of 6 in line L57.', 'Paso 4 de 6 de la línea L57.', 'Goes on to FPGA Die.', 'Sigue como Chip FPGA.'],
+        ['fpga_die', 'FPGA Die', 'Chip FPGA', 'Step 5 of 6 in line L57.', 'Paso 5 de 6 de la línea L57.', 'Goes on to Phasemeter Board.', 'Sigue como Placa de fasímetro.'],
+        ['phasemeter_board', 'Phasemeter Board', 'Placa de fasímetro', 'Step 6 of 6 in line L57.', 'Paso 6 de 6 de la línea L57.', 'The finished product of its line.', 'El producto terminado de su línea.'],
+        ['cloud_phase_map', 'Cloud Phase Map', 'Mapa de fase de la nube', 'The measured phase of the stationary cloud.', 'La fase medida de la nube estacionaria.', 'Made by the Horizon Interferometer.', 'Lo fabrica el Interferómetro de horizonte.'],
+        ['calibrated_oscillator_bank', 'Calibrated Oscillator Bank', 'Banco de osciladores calibrado', 'An oscillator bank tuned to the cloud phase.', 'Un banco de osciladores ajustado a la fase de la nube.', 'Goes to the Ergoregion Synchroniser.', 'Va al Sincronizador de ergorregión.'],
+        ['horizon_phase_lock', 'Horizon Phase Lock', 'Bloqueo de fase del horizonte', 'Holds the trapped wave at the horizon rotation.', 'Mantiene la onda atrapada a la rotación del horizonte.', 'Made by the Ergoregion Synchroniser.', 'Lo fabrica el Sincronizador de ergorregión.'],
+        ['spent_phase_lock', 'Spent Phase Lock', 'Bloqueo de fase gastado', 'A phase lock whose oscillator has drifted.', 'Un bloqueo de fase cuyo oscilador se ha desviado.', 'Can be relocked.', 'Se puede volver a bloquear.'],
+        ['horizon_flux_clamp', 'Horizon Flux Clamp', 'Abrazadera de flujo del horizonte', 'A coil winding that holds the horizon flux down.', 'Un devanado que mantiene bajo el flujo del horizonte.', 'Made by the Horizon Flux Clamp.', 'Lo fabrica la Abrazadera de flujo del horizonte.'],
+        ['reconnection_plasmoid', 'Reconnection Plasmoid', 'Plasmoide de reconexión', 'Plasma captured from a suppressed flare.', 'Plasma capturado de una erupción suprimida.', 'Goes to the plasma mass filter.', 'Va al filtro de masa de plasma.'],
+        ['ablated_shell_segment', 'Ablated Shell Segment', 'Segmento de envoltura ablacionado', 'A mirror shell segment worn out by the vent.', 'Un segmento de envoltura de espejos desgastado por el venteo.', 'Goes to Segment Reclamation Works.', 'Va a los Talleres de reciclaje de segmentos.'],
+        ['coupler_scrap', 'Coupler Scrap', 'Chatarra de acoplador', 'A demagnetised tetrataenite coupler.', 'Un acoplador de tetrataenita desmagnetizado.', 'Goes to the electromagnetic separator.', 'Va al separador electromagnético.'],
+        ['sn_li_dross', 'Sn-Li Dross', 'Escoria de Sn-Li', 'Drained from a droplet radiator loop.', 'Drenada de un circuito de radiador de gotas.', 'Goes to the extraction cascade.', 'Va a la cascada de extracción.'],
+        ['segment_electronics_scrap', 'Segment Electronics Scrap', 'Chatarra de electrónica de segmento', 'Cut out of a worn shell segment.', 'Extraída de un segmento de envoltura desgastado.', 'Goes to the arc furnace.', 'Va al horno de arco.'],
+        ['fatigued_vo2_sheet', 'Fatigued VO2 Sheet', 'Lámina de VO2 fatigada', 'Cracked by many insulator-metal cycles.', 'Agrietada por muchos ciclos aislante-metal.', 'Goes to the extraction cascade.', 'Va a la cascada de extracción.'],
+        ['spent_feep_crown', 'Spent FEEP Crown', 'Corona FEEP gastada', 'A thruster crown with its indium used up.', 'Una corona de propulsor con el indio agotado.', 'Goes to the electron beam furnace.', 'Va al horno de haz de electrones.'],
+        ['used_reference_sensor', 'Used Reference Sensor', 'Sensor de referencia usado', 'A sensor that has already flown once.', 'Un sensor que ya ha volado una vez.', 'Reused by the Horizon Interferometer.', 'Lo reutiliza el Interferómetro de horizonte.'],
+        ['used_optical_bench', 'Used Optical Bench', 'Banco óptico usado', 'A bench that has already flown once.', 'Un banco que ya ha volado una vez.', 'Reused by the Horizon Interferometer.', 'Lo reutiliza el Interferómetro de horizonte.'],
+        ['horizon_lock', 'Horizon Lock', 'Cerrojo del horizonte', 'The measured, stationary horizon sealed in a reference.', 'El horizonte estacionario y medido, sellado en una referencia.', 'The key output MAX+ needs.', 'La salida clave que necesita MAX+.']
     ]
 
     var BLOCKS = [
@@ -278,7 +351,20 @@
         ['stream_turn_casing', 'Stream Turn Casing', 'Carcasa de giro de corriente', 'A casing that bends a laminar stream.', 'Una carcasa que curva una corriente laminar.', 'For MAX multiblocks.', 'Para multibloques MAX.'],
         ['mirror_shell_segment', 'Mirror Shell Segment', 'Segmento de envoltura de espejos', 'One segment of a mirror shell.', 'Un segmento de una envoltura de espejos.', 'For MAX multiblocks.', 'Para multibloques MAX.'],
         ['stream_bundle_block', 'Stream Bundle Block', 'Bloque de haz de corrientes', 'A block that holds a stream bundle in line.', 'Un bloque que mantiene alineado un haz de corrientes.', 'For MAX multiblocks.', 'Para multibloques MAX.'],
-        ['feeder_coil_casing', 'Feeder Coil Casing', 'Carcasa de bobina alimentadora', 'A casing wound with feeder coils.', 'Una carcasa devanada con bobinas alimentadoras.', 'For MAX multiblocks.', 'Para multibloques MAX.']
+        ['feeder_coil_casing', 'Feeder Coil Casing', 'Carcasa de bobina alimentadora', 'A casing wound with feeder coils.', 'Una carcasa devanada con bobinas alimentadoras.', 'For MAX multiblocks.', 'Para multibloques MAX.'],
+        ['test_mass_enclosure_casing', 'Test Mass Enclosure Casing', 'Carcasa de recinto de masa de prueba', 'A shielded housing for a free-falling test mass.', 'Un alojamiento blindado para una masa de prueba en caída libre.', 'For MAX multiblocks.', 'Para multibloques MAX.'],
+        ['laser_link_casing', 'Laser Link Casing', 'Carcasa de enlace láser', 'A casing that carries a laser arm between stations.', 'Una carcasa que lleva un brazo láser entre estaciones.', 'For MAX multiblocks.', 'Para multibloques MAX.'],
+        ['driver_ring_casing', 'Driver Ring Casing', 'Carcasa de anillo impulsor', 'A casing for a ring of RF drivers.', 'Una carcasa para un anillo de impulsores de RF.', 'For MAX multiblocks.', 'Para multibloques MAX.'],
+        ['clamp_coil_casing', 'Clamp Coil Casing', 'Carcasa de bobina de abrazadera', 'A casing that holds a superconducting clamp coil.', 'Una carcasa que sostiene una bobina superconductora de abrazadera.', 'For MAX multiblocks.', 'Para multibloques MAX.'],
+        ['reclamation_bay_casing', 'Reclamation Bay Casing', 'Carcasa de bahía de reciclaje', 'A cold casing for stripping worn segments.', 'Una carcasa fría para desmontar segmentos desgastados.', 'For MAX multiblocks.', 'Para multibloques MAX.']
+    ]
+
+    // RF-7A controllers (machines 11-14), registered by MX-S1 to MX-S4; block.gtceu.<machine>
+    var CONTROLLERS = [
+        ['horizon_interferometer', 'Horizon Interferometer', 'Interferómetro de horizonte'],
+        ['ergoregion_synchroniser', 'Ergoregion Synchroniser', 'Sincronizador de ergorregión'],
+        ['horizon_flux_clamp', 'Horizon Flux Clamp', 'Abrazadera de flujo del horizonte'],
+        ['segment_reclamation_works', 'Segment Reclamation Works', 'Talleres de reciclaje de segmentos']
     ]
 
     // kind, id, en, es
@@ -311,6 +397,7 @@
             }
             ITEMS.forEach(tipped('item'))
             BLOCKS.forEach(tipped('block'))
+            CONTROLLERS.forEach(function (e) { add('block.gtceu.' + e[0], e[1 + li]) })
             NAMES.forEach(function (e) { add(PREFIX[e[0]] + e[1], e[2 + li]) })
             PLACES.forEach(function (p) {
                 add('level.grindless.' + p[0], p[2 + li])

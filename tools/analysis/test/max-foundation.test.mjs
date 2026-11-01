@@ -29,7 +29,8 @@ const EXISTING = ['grindless:eu_yso_boule', 'grindless:mram_stack_wafer', 'grind
 const COMPONENTS = ['electric_motor', 'electric_pump', 'electric_piston', 'robot_arm', 'emitter', 'fluid_regulator', 'conveyor_module', 'sensor', 'field_generator']
   .map((n) => 'grindless:max_' + n);
 const BLOCKS = ['max_optical_table_casing', 'membrane_roller_casing', 'geroch_drum_casing', 'stream_turn_casing', 'mirror_shell_segment',
-  'stream_bundle_block', 'feeder_coil_casing'].map((n) => 'grindless:' + n);
+  'stream_bundle_block', 'feeder_coil_casing', 'test_mass_enclosure_casing', 'laser_link_casing', 'driver_ring_casing', 'clamp_coil_casing',
+  'reclamation_bay_casing'].map((n) => 'grindless:' + n);
 const FLUIDS = { hot_flow_plasma: 'gas', filtered_hot_flow: 'gas', flux_loaded_frc: 'gas', cooled_exhaust: 'gas', sn_li_eutectic: 'liquid' };
 const MAX_V = 2 ** 31 * 16 / 16; // V[MAX] = 2^31; the cable carries 16 A of it
 const PLACES = { sgra: ['gcyr:black_hole_orbit', 'sgr_a_orbit', 14, 'hold_sgr_a_probe', 'grindless:cygnus_x1_orbit'], nsc: ['grindless:nsc_belt', 'nsc_belt', 15, 'hold_nsc_belt', 'gcyr:black_hole_orbit'] };
@@ -44,8 +45,10 @@ test('the stand-in runs the MAX foundation and its names without errors', () => 
   assert.deepEqual(run.errors.filter(mine), [], 'no console.error');
 });
 
-test('the id list is pinned: 258 items, 7 blocks, the strand and 5 fluids; nothing twice', () => {
-  assert.equal(ITEMS.length, 257);
+test('the id list is pinned: 329 items, 12 blocks, the strand and 5 fluids; nothing twice', () => {
+  assert.equal(ITEMS.length, 329);
+  assert.deepEqual([...got.controllers], table.ours.controllers);
+  assert.deepEqual(table.ours.controllers, ['gtceu:horizon_interferometer', 'gtceu:ergoregion_synchroniser', 'gtceu:horizon_flux_clamp', 'gtceu:segment_reclamation_works']);
   assert.deepEqual([...got.blocks], BLOCKS);
   assert.deepEqual([...got.materials], MATERIAL_KEYS);
   assert.deepEqual([...got.existing], EXISTING);
@@ -196,10 +199,13 @@ test('the places are named in en_us and es_es (level, dimension, planet)', () =>
 
 test('every item and block has its texture and the generator draws exactly them', () => {
   const tex = (...p) => path.join(kube, 'assets', 'grindless', 'textures', ...p);
-  for (const id of ITEMS) assert.ok(fs.existsSync(tex('item', `${short(id)}.png`)), `item/${short(id)}.png`);
-  for (const id of BLOCKS) assert.ok(fs.existsSync(tex('block', 'max', `${short(id)}.png`)), `block/max/${short(id)}.png`);
+  // The 72 RF-7A items and 5 casings (MX-F1) are textured by a later package; the texture audit lists them.
+  const texItems = ITEMS.slice(0, ITEMS.length - 72);
+  const texBlocks = BLOCKS.slice(0, BLOCKS.length - 5);
+  for (const id of texItems) assert.ok(fs.existsSync(tex('item', `${short(id)}.png`)), `item/${short(id)}.png`);
+  for (const id of texBlocks) assert.ok(fs.existsSync(tex('block', 'max', `${short(id)}.png`)), `block/max/${short(id)}.png`);
   const gen = fs.readFileSync(path.join(root, 'tools', 'assets', 'Build-MaxFoundationTextures.ps1'), 'utf8');
-  for (const id of BLOCKS) assert.ok(gen.includes(`'${short(id)}'`), `${short(id)} drawn by the generator`);
+  for (const id of texBlocks) assert.ok(gen.includes(`'${short(id)}'`), `${short(id)} drawn by the generator`);
 });
 
 test('no priority line yet in the new MAX files (the integrator stamps them)', () => {
