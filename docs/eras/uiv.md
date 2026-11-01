@@ -696,7 +696,7 @@ Steps are the items between arrows, counted as UEV's. Every line ends in a UIV p
 | 6 | UIV pump: RHEA ingot → EIGA powder → printed impeller (UV powder bed) → HIP (UEV megabar) → machined → balanced → UIV pump | 7 | oversize powder, swarf → remelt (2) |
 | 7 | First wall: W wire → W fibre preform (UEV CVI) → Wf/RHEA billet (2 c2) → plasma-sprayed tile (ZPM plasma quench caster) → first-wall tile → Li–Sn armoured tile → `grindless:uiv_fusion_casing` | 7 | overspray → remelt |
 | 8 | BMG gear: Zr sponge (IV fuel fabrication) → master alloy → undercooled melt (2 c4) → suction-cast BMG → flexspline → strain-wave gear → UIV robot arm (Hofmann 2016) | 7 | gates → remelt; Be fume → BeO, contained |
-| 9 | Element 120: TiCl₄ → Ti-50 chloride (UEV calutron) → Ti-50 sponge (UV pyroprocessing) → melted Ti-50 (2 c3) → oven charge → beam on Cf-249 (UEV cyclotron; Cf-249 from the IV hot cell's Bk-249 decay store) → element 120 recoil (UEV separator, on the shared etched membrane: track-etched with a kept UHV Cf-252 fission source that counts the tracks) → census II entry | 8 | depleted Ti → stock; activated target → hot cell |
+| 9 | Element 120: TiCl₄ → Ti-50 chloride (UEV calutron) → Ti-50 sponge (UV pyroprocessing) → melted Ti-50 (2 c3) → oven charge → beam on Cf-249 (UEV cyclotron; Cf-249 from the IV hot cell's Bk-249 decay store) → element 120 recoil (UEV separator, on the shared ion-tracked foil: the heavy-ion step keeps a UHV Cf-252 fission source that cross-checks the beam fluence by counting fission-fragment tracks) → census II entry | 8 | depleted Ti → stock; activated target → hot cell |
 | 10 | EO transceiver: Li + Nb₂O₅ (EV cascade) → LN boule (UHV crystal growth, as built) → He-implanted wafer (ZPM ion implanter, UHV row as built) → LNOI (UHV foundry c1, as built) → LN-on-Si₃N₄ (3 c1) → handle thinned → electrodes (UHV foundry) → heterogeneous EO transceiver (Churaev 2023) → the pulsar-timed repeater's electro-optic interface (A7 row) | 8 | donor LN → as-built return; Si grind → stock |
 | 11 | P:Si processor: SiF₄ → Si-28 (IV hot cell, as built) → FZ ingot (UV zone refining) → H-implanted wafer (ZPM ion implanter) → SOI (3 c2) → H-terminated (7) → STM-patterned → PH₃-dosed → overgrown (UHV MBE) → mK-characterised P:Si (8 c3) | 10 | hot cell tails as built; PH₃ → scrubbed, H₃PO₄ → stock |
 | 12 | Glass interposer: SiCl₄ + TiCl₄ → ULE soot → ULE glass → fs-written (4) → KOH-etched → metallised vias (UHV foundry) → interposer | 7 | HCl → cascade; KOH → neutralised, voided |
@@ -719,7 +719,7 @@ Steps are the items between arrows, counted as UEV's. Every line ends in a UIV p
 | 29 | Divertor: Li + Sn → eutectic (UV pyroprocessing) → W mesh (UV powder bed) → CPS-wetted mesh → cassette → divertor → `grindless:uiv_fusion_casing` | 7 | spent cassette → line 35 canister |
 | 30 | Neutronium: crust lift run (13) → NS crust → inner-crust matter (14) → drip neutrons → neutron superfluid (15, UV superfluid He cooling) → caged → contained neutronium pellet → UIV field generator | 8 | decayed neutrons → protium |
 | 31 | Kilonova fuel: crust nuclei (14) → decompressed (16) → hot r-process mix → sealed capsule (17) → aged capsule → opened ash → cuts (EV platinum plant, ZPM Eu reductor, IV hot cell) | 7 | He-4 → stock; fragments → vault |
-| 32 | Element 119: U-238 target (IV fuel fabrication) → neutron flash (16 c2; Ivy Mike, Ghiorso 1955) → Es/Fm debris (IV hot cell) → actinide cut (ZPM actinide partitioning) → Es-254 (UHV transuranium HDEHP) → target → Ca-48 beam (UEV cyclotron) → element 119 recoil (on the same Cf-252-calibrated etched membrane as line 9) → census II entry | 9 | Fm → stock (UXV hook); fission products → hot cell |
+| 32 | Element 119: U-238 target (IV fuel fabrication) → neutron flash (16 c2; Ivy Mike, Ghiorso 1955) → Es/Fm debris (IV hot cell) → actinide cut (ZPM actinide partitioning) → Es-254 (UHV transuranium HDEHP) → target → Ca-48 beam (UEV cyclotron) → element 119 recoil (on the same Cf-252-checked ion-tracked foil as line 9) → census II entry | 9 | Fm → stock (UXV hook); fission products → hot cell |
 | 33 | Crust lift tether: CNT yarn (UHV tether works) → BN-coated (UV BN reactor) → MH-laminated → braided → tether (UHV tether mode) → polar-cap electrode → crust lift tether | 7 | worn tether → tether works scrap row |
 | 34 | Gamma laser cavity: pair plasma (18) → cooled e⁺ (UHV positron accumulator) → Ps in aerogel (ZPM aerogel works) → laser-cooled Ps (19) → Ps BEC → gamma laser cavity → UIV emitter | 7 | annihilation γ → heat, voidable |
 | 35 | Penrose sled: synroc (ZPM waste retrieval) + `gtnn:radioactive_waste` → canister (IV hot cell) → compacted (UEV megabar) → split-charge sled (21 c2, with line 4's charge) → Penrose drop (22) → recovered half-sled → refit | 7 | ballast → into the hole, gone for good |
@@ -850,12 +850,12 @@ Steps are the items between arrows, counted as UEV's. Every line ends in a UIV p
 | 100 | positronium condensate lab (19) | antimatter trap | UV |
 | 101 | line 3 | LuV magnetic bearing (housing) | LuV |
 | 102 | line 4 | UHV PBO fibre (overwrap) | UHV |
-| 103 | line 9 | UHV californium-252 source (membrane track count) | UHV |
+| 103 | line 9 | UHV californium-252 source (ion-track fluence check) | UHV |
 | 104 | line 13 | UHV VUV frequency comb (overlay check) | UHV |
 | 105 | line 14 | spark plasma sinterer | UHV |
 | 106 | line 14 | MBE reactor | UHV |
 | 107 | line 23 | LuV superconducting coils (field coils) | LuV |
-| 108 | line 32 | UHV californium-252 source (membrane track count) | UHV |
+| 108 | line 32 | UHV californium-252 source (ion-track fluence check) | UHV |
 | 109 | line 38 | LuV sapphire test mass (substrate) | LuV |
 | 110 | line 39 | LuV ITBTC coated conductor (guideway) | LuV |
 

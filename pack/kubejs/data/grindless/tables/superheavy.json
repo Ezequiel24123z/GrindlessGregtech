@@ -85,12 +85,16 @@
           "fluidsOut": [{ "id": "gtceu:moscovium_recoil_gas", "amount": 1000 }]
         },
         {
+          "_why": "RF-3Q lines 9 and 32: a californium-252 fission source (UHV isotope line, not consumed) cross-checks the xenon beam fluence by counting fission-fragment tracks on the foil.",
           "name": "ion_track",
           "circuit": 6,
           "eut": 1966080,
           "duration": 1200,
           "itemsIn": [{ "id": "grindless:polycarbonate_foil", "count": 4 }],
-          "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
+          "kept": [
+            { "id": "grindless:nb3sn_srf_cavity", "count": 1 },
+            { "id": "grindless:californium_252", "count": 1 }
+          ],
           "charge": [],
           "fluidsIn": [{ "id": "gtceu:xenon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:ion_tracked_foil", "count": 4 }],
@@ -665,7 +669,6 @@
           "fluidsOut": [{ "id": "minecraft:water", "amount": 2000 }]
         },
         {
-          "_why": "RF-3Q lines 9 and 32: a californium-252 fission source (UHV isotope line, not consumed) counts the fragment tracks to calibrate the etch.",
           "name": "etched_membrane",
           "circuit": 25,
           "eut": 131072,
@@ -674,7 +677,7 @@
             { "id": "grindless:ion_tracked_foil", "count": 1 },
             { "id": "gtceu:sodium_hydroxide_dust", "count": 1 }
           ],
-          "kept": [{ "id": "grindless:californium_252", "count": 1 }],
+          "kept": [],
           "charge": [],
           "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 100 }],
           "itemsOut": [
