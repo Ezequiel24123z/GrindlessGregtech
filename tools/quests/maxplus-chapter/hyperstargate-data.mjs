@@ -29,7 +29,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the tree's machines
   {
     key: 'TR_BLEND', kind: 'machine', title: 'Multi-Plasma Blender', icon: 'gtceu:multi_plasma_blender',
-    deps: ['S3_TREE'], x: 2, y: -6,
+    deps: ['S3_TREE'], x: 2, y: -4,
     teach: {
       for: 'The &6Multi-Plasma Blender&r mixes one plasma from each place the pack has worked into the slurry that grows the gate\'s crystals. It is the only source of that slurry.',
       needs: 'Plasmas from the forge, elevator, filter, very massive star, p-process and jet lines, plus hot flow and condensate.',
@@ -42,7 +42,7 @@ export const QUESTS = [
   },
   {
     key: 'TR_FURN', kind: 'machine', title: 'Horizon Crystal Furnace', icon: 'gtceu:horizon_crystal_furnace',
-    deps: ['S3_TREE'], x: 2, y: -3,
+    deps: ['S3_TREE'], x: 2, y: -2,
     teach: {
       for: 'The &6Horizon Crystal Furnace&r grows core and controller crystals from slurry. Other packs wait weeks for this; here the cost is slurry and many parallel runs.',
       needs: 'Slurry by the hundred million millibuckets, and condensate for heat.',
@@ -68,7 +68,7 @@ export const QUESTS = [
   },
   {
     key: 'TR_BANK', kind: 'machine', title: 'Horizon Capacitor Bank', icon: 'gtceu:horizon_capacitor_bank',
-    deps: ['S3_TREE'], x: 2, y: 3,
+    deps: ['S3_TREE'], x: 2, y: 2,
     teach: {
       for: 'The &6Horizon Capacitor Bank&r is a ring of capacitors that adds its capacity to your network. It stores; it never makes energy. The dial only starts when the formed banks hold at least one dial of charge.',
       needs: 'Capacitors in a ring, at Sgr A* orbit only. The network\'s generators fill it, and some charge is lost on the way in.',
@@ -81,7 +81,7 @@ export const QUESTS = [
   },
   {
     key: 'TR_ARRAY', kind: 'machine', title: 'Hyper Assembly Array', icon: 'gtceu:hyper_assembly_array',
-    deps: ['S3_TREE'], x: 2, y: 6,
+    deps: ['S3_TREE'], x: 2, y: 4,
     teach: {
       for: 'The &6Hyper Assembly Array&r crafts what no single machine can take: dozens of different inputs in one recipe. Every part of the gate and every creative item is made here.',
       needs: 'A wide room and a great many input buses, all fed by AE2.',
@@ -96,7 +96,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate's parts
   {
     key: 'HG_IRIS', kind: 'step', title: 'Horizon Iris', icon: 'grindless:horizon_iris',
-    deps: ['TR_ARRAY'], x: 8, y: -3,
+    deps: ['HG_IFACE'], x: 8, y: -3,
     desc: [
       'A shutter of hundreds of blades that closes the ring between crossings. Each blade is a craft of its own, so queue them early.',
     ],
