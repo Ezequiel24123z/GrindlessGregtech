@@ -15430,55 +15430,55 @@ hash = "06e0ffc591a815cb73848317b5f486ef365b0fcda7e9188fadd4f056328ba4b1"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/ev.json"
-hash = "69eb03a558fc76d11d4b5bb014b42b8d1f9e3f334204a0b818894fd7446eb7a8"
+hash = "bd07381943dac4aed3a2bb53af4e81d29f899df320bcbe26feb89da14dd1e818"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/hv.json"
-hash = "b1114e9d8db5fff8cef1fae71e4931cbb573aeea8b80c3a85f6bdc21a11b9c8c"
+hash = "d9290052a13e5b93e665ab42a5dcb5a0c656e28e424e9a3a715c1d4ff745aeee"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/iv.json"
-hash = "046a84d31b45ead3a293755de6da44ceeb3b101086496559aa872c4c7ea412d9"
+hash = "1bf5d56f7db2629db57919e6b9b79e18bcf72e032ec5187da17f17264cd4378f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/luv.json"
-hash = "15d6d9e4ca0cc2452a253111dadcbb65ab5d5039c11ed73716b4d9b5a51ab42b"
+hash = "314dc395bcfe800f30f154d77959a8455c8070b5eaca091e82e5a22d19cfe952"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/max.json"
-hash = "6d1f3233efd4a997036ed7895dae70230b29928618370500ce2ed3b7f5954d0d"
+hash = "90387b5e62eb36f954501710845128e60ec37ed7bc63cb3e5fe2b45822f9c55c"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/mv.json"
-hash = "1ef9aedd09a49a4cee6dc122bb1346a1f70cb2678669b242076c30f4e8748edf"
+hash = "93248d3c74268a6256e810e275eeda8dfe8c6de978c53045040244bee97e1d28"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/opv.json"
-hash = "3d7f1a3bf80d0fdf983723a007a34de2fd4d9e09114d3ec38229245a5886b78f"
+hash = "c8e377f05297761cd9c64254429d89312eac7154c4dbedc01cca68eb81af0590"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/uev.json"
-hash = "7b6293515e47982fa2537a351d4da44e446573b6edbb11c935632f67b42fa251"
+hash = "c40b67c1066a0c017df87e78fd80a816c60c4bad84bc099c149de44ee50a1b82"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/uhv.json"
-hash = "df1983d7b402642c405747ed187b081e412700551927d79c17f16d66643d5f3e"
+hash = "16266638f277d1c58a2803e92c12b509b5330f8c1d8ba1d71d3eda32097a23dd"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/uiv.json"
-hash = "151ea5268dc322046ac0f965c2b2cf8c7ec978dd47f20433888d974d45c8f0d9"
+hash = "db6dd8dec3fe2ab9adab6299a1c123c1a88cbe43611dda56670f403e3df54099"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/uv.json"
-hash = "fd6762d37b4d9b51f5e15437260bd29c709a416a33488425c106bdb45d1adf4d"
+hash = "693f75b26649bda42fb8f862a35d348220ace6da2a4d25ba3fbf341b467b702a"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/uxv.json"
-hash = "c68c4a660a96c93b143fde03cb48d5b5cb56b448d213faee72fcda23877f3529"
+hash = "eb8e1c5d95bd0459d371b0bb3c66da28e49cb4c4ae6bd9378e2b765194408153"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/zpm.json"
-hash = "cdfe8a3de1764658a8f975fc1006832c22ebcf2e613b184dd059c18d61299fc1"
+hash = "b2a077f5357f762fdee7ac8aadbb5edecfaf1fb0ef671bd3e1873412e0cb7375"
 
 [[files]]
 file = "kubejs/data/grindless/tables/crystals.json"
@@ -16018,7 +16018,7 @@ hash = "90b8af53f918e0f04a454c92a2072f45c539c86f965f0002d30079f26003a661"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/cost_curve.js"
-hash = "e2aa1ba781c70e58ca95f92b8bf1d6067dc63381fe440b579005a5cc5e139524"
+hash = "04a7c105ed551bf9f57e3d684cb73bc00f43f42580edd4e6569c994e9e24f516"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/enderchests.js"
