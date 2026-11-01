@@ -162,6 +162,30 @@
           "itemsIn": [{ "id": "grindless:launched_ig_probe", "count": 1 }],
           "kept": [{ "id": "grindless:horizon_lock", "count": 1 }],
           "itemsOut": []
+        },
+        {
+          "_why": "XP-T2 (docs/eras/maxplus.md, build order 11): the c17 throw of an intergalactic relay probe from the gate on the 30 Doradus platform (grindless:tarantula_orbit) to the Magellanic Stream, V[MAX] x 64 A = 2^37 EU/t for 1,200 t on a 1,024 A MAX+ hatch. The probe (the same ig_relay_probe recipe, each carries its own navigation core) is the whole cost; nothing is kept, so no new item is needed. It leaves launched and uxv/kerr_sling.js places the stream platform (relay_platforms.json magellanic_stream, source grindless:tarantula_orbit); the maxplus-stream grant follows from the arrival.",
+          "name": "hold_magellanic_stream",
+          "circuit": 17, "eut": 137438953472, "duration": 1200, "site": "tarantula_orbit",
+          "itemsIn": [{ "id": "grindless:ig_relay_probe", "count": 1 }],
+          "kept": [],
+          "itemsOut": []
+        },
+        {
+          "_why": "XP-T2 (docs/eras/maxplus.md, build order 11): the c18 throw of an intergalactic relay probe from the 30 Doradus platform to the M31 nucleus, V[MAX] x 64 A = 2^37 EU/t for 1,200 t on a 1,024 A MAX+ hatch. Same probe recipe and nothing kept, as c17. uxv/kerr_sling.js places the M31 platform (relay_platforms.json m31, source grindless:tarantula_orbit); the maxplus-m31 grant follows from the arrival.",
+          "name": "hold_m31_nucleus",
+          "circuit": 18, "eut": 137438953472, "duration": 1200, "site": "tarantula_orbit",
+          "itemsIn": [{ "id": "grindless:ig_relay_probe", "count": 1 }],
+          "kept": [],
+          "itemsOut": []
+        },
+        {
+          "_why": "XP-T2 (docs/eras/maxplus.md, build order 11): the c19 throw of an intergalactic relay probe from the gate on the M31 nucleus platform (grindless:m31_nucleus_orbit) to the Local Group filament, V[MAX] x 64 A = 2^37 EU/t for 1,200 t on a 1,024 A MAX+ hatch. Same probe recipe and nothing kept, as c17. uxv/kerr_sling.js places the filament platform (relay_platforms.json local_group_filament, source grindless:m31_nucleus_orbit); the maxplus-void grant follows from the arrival.",
+          "name": "hold_local_group_filament",
+          "circuit": 19, "eut": 137438953472, "duration": 1200, "site": "m31_nucleus_orbit",
+          "itemsIn": [{ "id": "grindless:ig_relay_probe", "count": 1 }],
+          "kept": [],
+          "itemsOut": []
         }
       ]
     },

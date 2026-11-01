@@ -205,7 +205,7 @@ function tableEut() {
 function eutProblems(rows) {
   const gateRow = (r, n) => r.where.startsWith('gate.json') && r.name === n;
   const isC13 = (r) => gateRow(r, 'hold_sgr_a') && r.eut === 2 ** 33;
-  const isMaxC14 = (r) => ((gateRow(r, 'hold_sgr_a_probe') || gateRow(r, 'hold_nsc_belt')) && r.eut === 2 ** 33) || (gateRow(r, 'hold_tarantula') && r.eut === 2 ** 37); // MAX-T1 c14, MAX-T2 c15, MAX+ XP-T1 c16
+  const isMaxC14 = (r) => ((gateRow(r, 'hold_sgr_a_probe') || gateRow(r, 'hold_nsc_belt')) && r.eut === 2 ** 33) || (/^hold_(tarantula|magellanic_stream|m31_nucleus|local_group_filament)$/.test(r.name || '') && r.where.startsWith('gate.json') && r.eut === 2 ** 37); // MAX-T1 c14, MAX-T2 c15, MAX+ XP-T1 c16
   const atTwo31 = (r) => (gateRow(r, 'hold_galactic_bulge') || gateRow(r, 'hold_sgr1806')) && r.eut === LONG;
   const out = rows.filter((r) => r.eut >= LONG && !isC13(r) && !isMaxC14(r) && !atTwo31(r)).map((r) => `${r.where}: ${r.eut} EU/t is at or above 2^31`);
   for (const n of ['hold_galactic_bulge', 'hold_sgr1806']) {
