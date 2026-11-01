@@ -888,6 +888,31 @@ const ROWS = {
     ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3, 4]],
     ["i", "grindless:creative_energy_cell", [5]],
   ],
+  H17: [
+    ["i", "grindless:hyperstargate_ring_block", []],
+    ["i", "grindless:horizon_controller_crystal", []],
+    ["i", "grindless:creative_computation_provider", []],
+    ["i", "grindless:horizon_processor", []],
+    ["i", "grindless:hyperstargate_interface", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3, 4]],
+    ["i", "gtceu:hyperstargate", [5]],
+  ],
+  H18: [
+    ["i", "grindless:genome_archive", []],
+    ["i", "grindless:cloud_phase_map", []],
+    ["i", "grindless:horizon_phase_lock", []],
+    ["i", "grindless:jacketed_condensate_cell", []],
+    ["i", "grindless:horizon_lock", []],
+    ["m", "gtceu:hyperstargate", [0, 1, 2, 3, 4]],
+    ["i", "grindless:spent_dial_charge", [5]],
+  ],
+  H19: [
+    ["i", "grindless:spent_dial_charge", []],
+    ["f", "fluid:gtceu:settled_condensate", []],
+    ["f", "fluid:gtceu:superfluid_helium_3", []],
+    ["m", "gtceu:condensate_refinery", [0, 1, 2]],
+    ["i", "grindless:jacketed_condensate_cell", [3]],
+  ],
 };
 
 const NAMES = {
@@ -965,6 +990,9 @@ const NAMES = {
   H14: "Creative computation provider",
   H15: "Creative data access hatch",
   H16: "Creative energy cell",
+  H17: "Hyperstargate controller",
+  H18: "The dial",
+  H19: "Dial charge recharge",
 };
 
 const ENDS = {
@@ -1002,21 +1030,24 @@ grp(['K1', 'K2', 'K3', 'K4'], 'The creative items');
 
 const ENDS_TREE = {
   H1: 'Ring blocks and chevron upgrades',
-  H2: 'Chevron blocks, the power unit, the base and the interface',
+  H2: 'The gate ring, chevron blocks, the power unit, the base, the interface and the controller',
   H3: 'Chevron blocks and the base',
   H4: 'The gate base',
-  H5: 'The gate dial row (XP-G1)',
-  H6: 'The gate controller (machine 17, XP-G1)',
-  H7: 'The gate controller (machine 17, XP-G1)',
-  H8: 'The gate controller (machine 17, XP-G1)',
-  H9: 'The gate controller (machine 17, XP-G1)',
-  H10: 'The gate controller (machine 17, XP-G1)',
+  H5: 'Set into the gate ring: nine locked chevrons',
+  H6: 'The gate: the iris under the ring',
+  H7: 'The horizon capacitor bank (machine 15)',
+  H8: 'The gate: four power units in the base row',
+  H9: 'The gate: the base beside the iris',
+  H10: 'The Hyperstargate controller',
   H11: 'The power unit and the creative energy hatches',
   H12: 'The gate base',
   H13: 'The gate base',
   H14: 'The creative computation hatches',
   H15: 'The gate interface',
   H16: 'The horizon capacitor',
+  H17: 'The gate at Sgr A* orbit, built round its controller',
+  H18: 'Recharged in the condensate refinery',
+  H19: 'Back into the next dial',
 };
 Object.assign(ENDS, ENDS_TREE);
 const BYEND = {
@@ -1062,7 +1093,7 @@ const BYEND = {
 const title = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '').split('_').map((w) => (w.length <= 3 && /^(sic|pbo|tfln|mtj|snspd|beuv|frc|bz|fcl|smes|yig|hbn|ybco|rebco|aod|lna|utc|inp|hemt|sis|uv|cvi|ppln|eu|yso|teo2|sn|li|cu111|mram|srf|he|gr|npro|nd|yag|simox|soi|fpga|feep|gaas|nb3sn|yb|led|vo2|pmn|pt|fe|ni|sr|co2|sco2|bec|nsc|ime|pgm|hts|gd)$/.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
 const shortId = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '');
 const BY_Y = [1.5, -1.5, 2.75, -2.75];
-const TREE = new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16']);
+const TREE = new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19']);
 
 // one line at row y: main nodes at 2.5 columns per step, by-products beside their source
 function line(num, y) {
@@ -1118,7 +1149,7 @@ export default {
   subtitle: 'Condensate and bound matter, stars and streams, cryo parts, the gate tree crafts, components, circuits and the creative cores',
   icon: 'gtceu:hyper_assembly_array',
   focus: 'p1_0',
-  bands: [['cond', 'tara'], ['stream', 'sling'], ['cryo', 'tg1'], ['tg2', 'tg3'], ['tg4', 'comp'], ['qa', 'creative'], ['hg1', 'hg2']],
+  bands: [['cond', 'tara'], ['stream', 'sling'], ['cryo', 'tg1'], ['tg2', 'tg3'], ['tg4', 'comp'], ['qa', 'creative'], ['hg1', 'hg2'], ['hg3']],
   clusters: {
     cond: cluster('Condensate, bound matter and the cable', ['P1', 'P2', 'P3', 'P4', 'P5']),
     tara: cluster('Stars, casks and ash', ['P6', 'P7', 'P8', 'P17']),
@@ -1134,6 +1165,7 @@ export default {
     creative: cluster('Creative cores', ['K1', 'K2', 'K3', 'K4']),
     hg1: cluster('Hyperstargate parts', ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10']),
     hg2: cluster('Creative items', ['H11', 'H12', 'H13', 'H14', 'H15', 'H16']),
+    hg3: cluster('The Hyperstargate', ['H17', 'H18', 'H19']),
   },
 };
 
