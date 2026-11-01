@@ -474,7 +474,7 @@ const siteOnly = (r) => r.inputs.every((i) => i.cap || i.circuit || i.alts.every
 const IGNORED_TYPE = /recycl|pack|decompos|macerat|arc_furnace|extractor/;
 const INFRA_PART = /^(gtceu|gcyr|gtca|grindless):[a-z0-9_]*(casing|coil|hatch|hull|controller|panel|cell|insert|floor|support|heat_pipe|crucible|suit|rocket|station|shield|spool|net)(_[a-z0-9]+)?$/;
 const RESEARCH_TYPE = /research|data_bank|telemetry|observatory/;
-const RESEARCH_ITEM = /data|orb|chart|catalogue|catalog|survey|signal|model|record|image|map|research|flyby|computation|observat|telescope/;
+const RESEARCH_ITEM = /data|orb|chart|catalogue|catalog|survey|signal|model|record|image|map|list|research|flyby|computation|observat|telescope/;
 const TRAVEL_TYPE = /rocket|station|landing|seed/;
 const TRAVEL_ITEM = /rocket|station|landing|seed|tank|chart|model|singularity|probe|capsule|lander|_key$/;
 
@@ -509,9 +509,10 @@ export function checkRole(l, facts, rc = {}) {
         if (rc.infra?.has(p.res)) continue;
         const cs = cons(p.res).filter(useful);
         if (!cs.length) return fail(`${p.res} has no consumer`);
-        // a consumer counts when its output, or the output of a recipe that consumes that output, is infrastructure
-        const hit = cs.filter((r) => r.outputs.some((o) => isInfra(o.key) || cons(o.key).some((r2) => useful(r2) && r2.outputs.some((o2) => isInfra(o2.key))))).length;
-        if (hit * 2 < cs.length) return fail(`${p.res} mostly feeds recipes that lead to no machine, structure, casing or suit within 2 hops`);
+        // a consumer counts when an output of it, or of recipes up to three hops on, is infrastructure
+        const reach = (keys, d) => keys.some((k) => isInfra(k)) || (d > 0 && keys.some((k) => cons(k).slice(0, 12).some((r2) => useful(r2) && reach(r2.outputs.map((o) => o.key), d - 1))));
+        const hit = cs.filter((r) => reach(r.outputs.map((o) => o.key), 2)).length;
+        if (hit * 2 < cs.length) return fail(`${p.res} mostly feeds recipes that lead to no machine, structure, casing or suit within 3 hops`);
       }
       return ok;
     }
