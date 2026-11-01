@@ -21,7 +21,7 @@ test('the stand-in runs the script without errors, skips nothing', () => {
   const mine = run.errors.filter((e) => /maxplus[\\/]condensate/.test(String(e.file)));
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(MC.skipped), []);
-  assert.equal(MC.recipes.length, 11);
+  assert.equal(MC.recipes.length, 12);
   assert.equal(MC.controllerRecipes.length, 2);
 });
 

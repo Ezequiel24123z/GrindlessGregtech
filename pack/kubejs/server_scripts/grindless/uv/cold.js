@@ -101,11 +101,7 @@
     // MX-S2 (docs/eras/max.md, L51 step 2): a large-grain niobium disc pressed with RRR sheet into the driver cell on an SRF cavity blank under
     // nitrogen (c11: 1-10 are taken); the trim goes to the scrap loop
     { name: 'nb_driver_cell', type: 'srf_cavity', circuit: 11, itemsIn: [item('grindless:large_grain_nb_disc', 1), item(SHEET, 2)],
-      fluidsIn: [fluid('gtceu:nitrogen', 500)], itemsOut: [item('grindless:nb_driver_cell', 1), item(SCRAP, 1)], fluidsOut: [], eut: VA, duration: 600 },
-    // XP-A1 (docs/eras/maxplus.md, line P1 step 3): an empty condensate cell filled with settled condensate under a superfluid helium jacket;
-    // the plant has no circuit, so the settled condensate in is the key
-    { name: 'jacketed_condensate_cell', type: 'superfluid_helium', circuit: null, itemsIn: [item('grindless:condensate_cell', 1)],
-      fluidsIn: [fluid('gtceu:settled_condensate', 1000), fluid(SUPERFLUID, 1000)], itemsOut: [item('grindless:jacketed_condensate_cell', 1)], fluidsOut: [], eut: VA, duration: 400 }
+      fluidsIn: [fluid('gtceu:nitrogen', 500)], itemsOut: [item('grindless:nb_driver_cell', 1), item(SCRAP, 1)], fluidsOut: [], eut: VA, duration: 600 }
   ]
 
   // side steps on GTM's own machines

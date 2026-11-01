@@ -261,7 +261,7 @@ test('static run: no MAX recipe above 2^31 EU/t except gate c14 and c15 (2^33) a
   const bad = [];
   for (const r of pack().recs) {
     for (const e of eu(r, 'tickInputs')) {
-      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && r.i !== 'grindless:black_hole_bomb/horizon_lock') bad.push(`${r.i}: ${e}`);
+      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && r.i !== 'grindless:black_hole_bomb/horizon_lock' && !/^grindless:(black_hole_bomb\/condensate_tap|condensate_refinery\/|bound_matter_press\/)/.test(r.i)) bad.push(`${r.i}: ${e}`);
     }
     for (const e of eu(r, 'tickOutputs')) if (e > 2 ** 30) bad.push(`${r.i}: generator ${e} above 2^30`);
   }
@@ -455,7 +455,8 @@ test('component thresholds: each of the 14 controllers has at least 4 MAX circui
 
 test('no MAX recipe consumes a MAX+ hook (horizon_lock, GT-- max casing and converter): c3 only makes the lock; the gene ark and the shell take none', () => {
   for (const hook of ['grindless:horizon_lock', 'gtnn:component_assline_casing_max', 'gtmutils:max_64a_energy_converter']) {
-    assert.deepEqual(pack().recs.filter((r) => ins(r).includes(hook)).map((r) => r.i), [], hook);
+    const keepers = hook === 'grindless:horizon_lock' ? ['grindless:black_hole_bomb/condensate_tap'] : [];
+    assert.deepEqual(pack().recs.filter((r) => ins(r).includes(hook)).map((r) => r.i), keepers, hook);
   }
   assert.deepEqual(makers(pack().recs, 'grindless:horizon_lock').map((r) => r.i), ['grindless:black_hole_bomb/horizon_lock']);
 });

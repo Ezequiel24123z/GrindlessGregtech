@@ -10,8 +10,8 @@
     var ENTRIES = [
         ['gtceu.condensate_refinery', 'Condensate Refinery', 'Refiner\u00eda de condensado'],
         ['gtceu.bound_matter_press', 'Bound-Matter Press', 'Prensa de materia ligada'],
-        ['grindless.machine.condensate_refinery.tooltip.0', '\u00a77Settles the shell\'s Kerr condensate and binds older exotic matter into it. Runs only at Sgr A*.', '\u00a77Asienta el condensado de Kerr de la c\u00e1scara y le liga materia ex\u00f3tica m\u00e1s antigua. Solo funciona en Sgr A*.'],
-        ['grindless.machine.bound_matter_press.tooltip.0', '\u00a77Presses condensate-bound ingots into plates under the shell\'s field. Runs only at Sgr A*.', '\u00a77Prensa lingotes ligados por condensado en placas bajo el campo de la c\u00e1scara. Solo funciona en Sgr A*.'],
+        ['grindless.machine.condensate_refinery.tooltip.0', '\u00a77Settles Kerr condensate and binds exotic matter into it.', '\u00a77Asienta condensado de Kerr y le liga materia ex\u00f3tica.'],
+        ['grindless.machine.bound_matter_press.tooltip.0', '\u00a77Presses condensate-bound ingots into plates.', '\u00a77Prensa lingotes ligados por condensado en placas.'],
         ['gtceu.recipe.grindless_condensate_refinery.settle', 'Circuit 1: the tapped Kerr condensate settles into a stable liquid; the boil-off it sheds is kept (line P1).', 'Circuito 1: el condensado de Kerr extra\u00eddo se asienta en un l\u00edquido estable; la evaporaci\u00f3n que desprende se conserva (l\u00ednea P1).'],
         ['gtceu.recipe.grindless_condensate_refinery.recompress_boil_off', 'Circuit 10: the boil-off of the other rows is recompressed into Kerr condensate and goes back to circuit 1; nothing is vented.', 'Circuito 10: la evaporaci\u00f3n de las dem\u00e1s filas se recomprime en condensado de Kerr y vuelve al circuito 1; nada se ventila.'],
         ['gtceu.recipe.grindless_condensate_refinery.neutronium_bind', 'Circuit 2: compressed neutronium cores are bound into the settled condensate as bound neutronium ingots (line P2).', 'Circuito 2: los n\u00facleos de neutronio comprimido se ligan al condensado asentado como lingotes de neutronio ligado (l\u00ednea P2).'],

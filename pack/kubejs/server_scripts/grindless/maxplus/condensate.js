@@ -60,12 +60,15 @@
     { type: 'assembler', name: 'condensate_cell', circuit: 21,
       items: ['2x gtceu:tungsten_steel_plate', '2x gtceu:tungsten_steel_ring', '#gtceu:circuits/max'],
       fluids: [['gtceu:epoxy', 144]], outs: ['4x grindless:condensate_cell'], eut: LOW, duration: 300 },
+    { type: 'chemical_reactor', name: 'jacketed_condensate_cell', circuit: 24,
+      items: ['grindless:condensate_cell'],
+      fluids: [[SETTLED, 1000], ['gtceu:superfluid_helium_3', 1000]], outs: ['grindless:jacketed_condensate_cell'], eut: LOW, duration: 400 },
     { type: 'assembler', name: 'condensate_vessel_casing', circuit: 22,
       items: ['gtceu:opv_machine_casing', '4x gtceu:tungsten_steel_rod', '2x grindless:max_field_coil', '2x #gtceu:circuits/max'],
-      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['2x grindless:condensate_vessel_casing'], eut: LOW, duration: 200 },
+      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['2x grindless:condensate_vessel_casing'], eut: VA_MAX, duration: 200 },
     { type: 'assembler', name: 'bound_press_casing', circuit: 23,
       items: ['gtceu:opv_machine_casing', '4x gtceu:tungsten_steel_rod', '2x grindless:diamond_power_die', '2x #gtceu:circuits/max'],
-      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['2x grindless:bound_press_casing'], eut: LOW, duration: 200 }
+      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['2x grindless:bound_press_casing'], eut: VA_MAX, duration: 200 }
   ]
 
   var CONTROLLERS = [
