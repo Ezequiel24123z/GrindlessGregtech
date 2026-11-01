@@ -71,9 +71,10 @@
     { name: 'tunable_impedance_sheet', type: 'assembler', eut: 7864320, duration: 400,
       items: ['2x grindless:metallised_metasurface', '4x gtceu:gold_foil', '2x gtceu:niobium_titanium_foil', '1x gtceu:uxv_sensor', '#gtceu:circuits/opv'],
       fluids: [['gtceu:soldering_alloy', 288]], outs: ['1x grindless:tunable_impedance_sheet'], fluidOuts: [] },
-    // L51 step 6: four conduction-cooled cells in a cryostat, the driver module
+    // L51 step 6: four conduction-cooled cells in a cryostat, the driver module. Motors, not pumps: the OpV pump now descends from the
+    // UHV pump (darmstadtium rotor), and a pump here would close the recipe-quality depth loop through the sheet returns.
     { name: 'srf_driver_module', type: 'assembler', eut: 31457280, duration: 800,
-      items: ['4x grindless:conduction_cooled_cell', '2x gtceu:opv_electric_pump', '1x gtceu:opv_sensor', '2x gtceu:tungsten_steel_plate',
+      items: ['4x grindless:conduction_cooled_cell', '2x gtceu:opv_electric_motor', '1x gtceu:opv_sensor', '2x gtceu:tungsten_steel_plate',
         '4x gtceu:niobium_titanium_foil', '#gtceu:circuits/opv'],
       fluids: [['gtceu:helium', 2000]], outs: ['1x grindless:srf_driver_module'], fluidOuts: [] },
     // the ring casing: made at home from OpV parts, so the synchroniser can be built (no input comes from its own lines)

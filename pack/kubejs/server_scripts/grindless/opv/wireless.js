@@ -17,8 +17,8 @@
   global.grindless = global.grindless || {}
   const OW = global.grindless.opvWireless = { recipes: [] }
   const ROWS = [
-    { name: 'chain_strand_repeater', items: ['2x gtceu:chain_strand_single_wire', '1x grindless:pasta_strand_repeater', '1x grindless:tetron_die'],
-      fluids: [['gtceu:soldering_alloy', 144], ['gtceu:lubricant', 100]], out: 'grindless:chain_strand_repeater', duration: 300 },
+    { name: 'chain_strand_repeater', items: ['2x gtceu:chain_strand_single_wire', '1x grindless:pasta_strand_repeater', '1x grindless:tetron_die', '1x gtceu:soldering_alloy_ingot'],
+      fluids: [['gtceu:lubricant', 100]], out: 'grindless:chain_strand_repeater', duration: 300 },
     { name: 'opv_smes_cell', items: ['16x gtceu:chain_strand_single_wire', '4x grindless:chain_lamina_stack', '2x gtceu:opv_field_generator'],
       fluids: [], out: 'grindless:opv_smes_cell', duration: 600 }
   ]

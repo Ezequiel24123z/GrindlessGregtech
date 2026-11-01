@@ -18,7 +18,7 @@
   }
 
   var PLATE = 'gtceu:copper_plate'
-  var SOLDER = 'gtceu:soldering_alloy'
+  var SOLDER = 'gtceu:soldering_alloy_ingot'
   var ARGON = 'gtceu:argon'
 
   // hot strip mill (type hot_rolling): circuits 1-3 are the generated rows, 4 the levitation melter
@@ -48,7 +48,7 @@
     ['saf_target_set', 'saf_hip_blank', 1], ['srruo3_target', 'srruo3_hip_blank', 1], ['la_bfo_target', 'la_bfo_hip_blank', 1],
     ['ta_seed_target', 'ta_foil', 2]]
   SF.targets = TARGETS.map(function (t) {
-    return row('uxv/' + t[0], 'assembler', null, [item('grindless:' + t[1], t[2]), item(PLATE, 1), item('gtceu:indium_dust', 1)], [fluid(SOLDER, 144), fluid(ARGON, 1000)],
+    return row('uxv/' + t[0], 'assembler', null, [item('grindless:' + t[1], t[2]), item(PLATE, 1), item('gtceu:indium_dust', 1), item(SOLDER, 1)], [fluid(ARGON, 1000)],
       [item('grindless:' + t[0], 1)], [], 1920, 200)
   })
 

@@ -225,7 +225,8 @@
   // plates, so every field generator needs the press
   function addFieldGenerator(event) {
     FP.fieldGeneratorRecipes = []
-    var ids = ['gtceu:opv_emitter', 'grindless:chain_field_coil', 'grindless:field_frozen_plate', 'gtceu:chain_strand_single_cable', 'gtceu:opv_field_generator']
+    var ids = ['gtceu:opv_emitter', 'grindless:chain_field_coil', 'grindless:field_frozen_plate', 'gtceu:chain_strand_single_cable', 'gtceu:uxv_field_generator',
+      'gtceu:opv_field_generator']
     var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (!Fluid.exists('gtceu:soldering_alloy')) missing.push('gtceu:soldering_alloy')
     if (missing.length > 0) {
@@ -234,7 +235,7 @@
     }
     event.recipes.gtceu.assembler('grindless:opv_field_generator')
       .itemInputs('1x gtceu:opv_emitter', '2x grindless:chain_field_coil', '4x grindless:field_frozen_plate', '2x #gtceu:circuits/opv',
-        '2x gtceu:chain_strand_single_cable')
+        '2x gtceu:chain_strand_single_cable', '1x gtceu:uxv_field_generator')
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 1152))
       .itemOutputs('1x gtceu:opv_field_generator')
       .EUt(268435456).duration(600)

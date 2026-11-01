@@ -1317,7 +1317,7 @@
     {"id":"grindless:rejected_gamma_mirror","kind":"item","needUse":true,"needMade":true,"made":["gtceu:gamma_optics"],"used":["gtceu:chemical_vapour_infiltration"]},
     {"id":"grindless:rejected_laue_tile","kind":"item","needUse":true,"needMade":true,"made":["gtceu:gamma_optics"],"used":["gtceu:megabar_synthesis"]},
     {"id":"grindless:rejected_mmic_tile","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:hot_cell"],"used":["emi:info","gtceu:solvent_extraction"]},
-    {"id":"grindless:rejected_timing_head","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:solvent_extraction"]},
+    {"id":"grindless:rejected_timing_head","kind":"item","needUse":true,"needMade":true,"made":["emi:info"],"used":["emi:info","gtceu:solvent_extraction"]},
     {"id":"grindless:relay_seed","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:starchip"],"used":["ae2:item_transformation","emi:info","gtceu:ergosphere_probing","gtceu:laser_sail_launch"]},
     {"id":"grindless:released_algaas_film","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor"],"used":["gtceu:laser_engraver"]},
     {"id":"grindless:retrieved_waste_mix","kind":"item","needUse":true,"needMade":true,"made":["gtceu:waste_retrieval"],"used":["gtceu:decay_heat"]},

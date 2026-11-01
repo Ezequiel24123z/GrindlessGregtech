@@ -28,15 +28,15 @@
 
     { name: 'max_conveyor_module', type: 'assembler', eut: null, duration: 400,
       items: ['2x grindless:max_electric_motor', '1x grindless:membrane_belt', CIRCUIT, '1x grindless:max_fluid_regulator', '2x gtceu:tritanium_plate',
-              '4x gtceu:tritanium_round', '2x gtceu:horizon_strand_single_cable'],
+              '4x gtceu:tritanium_round', '2x gtceu:horizon_strand_single_cable', '1x gtceu:opv_conveyor_module'],
       fluids: [['gtceu:lubricant', 250]], out: ['1x grindless:max_conveyor_module'] },
     { name: 'max_sensor', type: 'assembler', eut: null, duration: 600,
       items: ['1x grindless:matter_wave_gradiometer', '2x ' + CIRCUIT, '1x grindless:cryo_optical_link', '2x gtceu:tritanium_plate',
-        '4x gtceu:tritanium_foil', '2x gtceu:horizon_strand_single_wire', '2x gtceu:tritanium_round'],
+        '4x gtceu:tritanium_foil', '2x gtceu:horizon_strand_single_wire', '2x gtceu:tritanium_round', '1x gtceu:opv_sensor'],
       fluids: [['gtceu:soldering_alloy', 288]], out: ['1x grindless:max_sensor'] },
     { name: 'max_field_generator', type: 'assembler', eut: null, duration: 800,
       items: ['1x grindless:max_emitter', '2x grindless:max_field_coil', '1x grindless:superconducting_membrane', '1x grindless:stable_exotic_matter',
-        CIRCUIT, '1x grindless:max_fluid_regulator', '2x gtceu:tritanium_plate', '4x gtceu:horizon_strand_single_wire'],
+        CIRCUIT, '1x grindless:max_fluid_regulator', '2x gtceu:tritanium_plate', '4x gtceu:horizon_strand_single_wire', '1x gtceu:opv_field_generator'],
       fluids: [['gtceu:soldering_alloy', 288]], out: ['1x grindless:max_field_generator'] }
   ]
   ML.rows = ROWS

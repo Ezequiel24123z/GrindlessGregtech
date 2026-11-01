@@ -17,8 +17,8 @@
   global.grindless = global.grindless || {}
   const MW = global.grindless.maxWireless = { recipes: [], pendingRoutes: [] }
   const ROWS = [
-    { name: 'horizon_strand_repeater', items: ['2x gtceu:horizon_strand_single_wire', '1x grindless:chain_strand_repeater', '1x grindless:max_sensor'],
-      fluids: [['gtceu:soldering_alloy', 144], ['gtceu:lubricant', 100]], out: 'grindless:horizon_strand_repeater', duration: 300 },
+    { name: 'horizon_strand_repeater', items: ['2x gtceu:horizon_strand_single_wire', '1x grindless:chain_strand_repeater', '1x grindless:max_sensor', '1x gtceu:soldering_alloy_ingot'],
+      fluids: [['gtceu:lubricant', 100]], out: 'grindless:horizon_strand_repeater', duration: 300 },
     { name: 'max_smes_cell', items: ['16x gtceu:horizon_strand_single_wire', '4x grindless:cold_smes_toroid', '2x grindless:max_field_generator'],
       fluids: [], out: 'grindless:max_smes_cell', duration: 600 }
   ]

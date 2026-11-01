@@ -1,6 +1,6 @@
 {
   "era": "max",
-  "enabled": false,
+  "enabled": true,
   "item": 1,
   "fluid": 1,
   "keys": [

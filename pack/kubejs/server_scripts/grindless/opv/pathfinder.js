@@ -6,7 +6,7 @@
 //   grindless:pathfinder_probe        assembly line at VA[OpV], researched with the Hawking drive: the thrown probe. Every input is a
 //                                     product of the other OpV packages (tetron array, XNAV unit, shequid gyro, Hawking drive).
 //   grindless:pathfinder_probe_core   crafting-table unpack of the launched probe (the gate's output); R2's input
-//   grindless:xray_timing_head        line 41: polycapillary optics + SDD dies; burn-in rejects 1 in 4 (extraction c28)
+//   grindless:xray_timing_head        line 41: polycapillary optics + SDD dies; the assembler has one output slot, so the batch yields the 3 heads that pass burn-in (the rejected quarter is not a product)
 //   grindless:node_power_transmitter  line 42: four sealed GaN MMIC tiles + an OpV emitter
 //   grindless:vitamin_kit             the kit R2 and R3 send: an XNAV unit, a tetron array, two OpV robot arms and an HEMT amplifier
 //
@@ -28,7 +28,7 @@
       items: ['4x grindless:polycapillary_optic', '4x grindless:sdd_die', '1x gtceu:opv_sensor',
         '2x gtceu:borosilicate_glass_ingot', '2x gtceu:titanium_foil', '2x ' + CIRCUITS],
       fluids: [['gtceu:soldering_alloy', 144]],
-      out: ['3x grindless:xray_timing_head', '1x grindless:rejected_timing_head'], duration: 300 },
+      out: ['3x grindless:xray_timing_head'], duration: 300 },
     { name: 'node_power_transmitter',
       items: ['4x grindless:sealed_mmic_tile', '1x gtceu:opv_emitter', '1x gtceu:opv_sensor',
         '1x gtceu:opv_machine_hull', '2x grindless:chain_composite_rod', '2x ' + CIRCUITS],
