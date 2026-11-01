@@ -2157,6 +2157,30 @@ file = "kubejs/assets/grindless/models/block/luv/orbital_solar_panel.json"
 hash = "43a686441d4077a398db0ce0041d987a7bd1e7748ad2079de9a0e137c7f58342"
 
 [[files]]
+file = "kubejs/assets/grindless/models/block/machines/max_parallel_hatch.json"
+hash = "2d5b2acc6d6800483de225f174f2d25e753f4aaa2126c0ebb7ae8f285acf0952"
+
+[[files]]
+file = "kubejs/assets/grindless/models/block/machines/opv_parallel_hatch.json"
+hash = "23b59a635f43bafd6219f7f8450c40314b44ef8687f9a78d63fe13c18bdf6a58"
+
+[[files]]
+file = "kubejs/assets/grindless/models/block/machines/uev_parallel_hatch.json"
+hash = "9a52feafcb5a195acd51641e47b7ab1374bb90d67537f78266a59cb13dfec739"
+
+[[files]]
+file = "kubejs/assets/grindless/models/block/machines/uhv_parallel_hatch.json"
+hash = "361c84ca33fb53be03c6033f1b0b68a339eb235bdfb9edb5866aa2efa93908c7"
+
+[[files]]
+file = "kubejs/assets/grindless/models/block/machines/uiv_parallel_hatch.json"
+hash = "519fe84f101e7d23b3ba8396307c60cf3e3d8e0050d2f5f7a60abd753fe77b0d"
+
+[[files]]
+file = "kubejs/assets/grindless/models/block/machines/uxv_parallel_hatch.json"
+hash = "f19c76ef5febd15303889317ea94aab7e91efaeeb1f5175a8ba98f64eb68215d"
+
+[[files]]
 file = "kubejs/assets/grindless/models/block/machines/wireless/dynamo_16a.json"
 hash = "2961e6a28b7d389fd9643e0c0dcf3d70a82f06e821f4269697cceb0acdb544b0"
 
@@ -15878,7 +15902,7 @@ hash = "3ec42f8460c6c5d6f8c36a5857b34ebc026044aa011b205fed3c0ddc2665a8ce"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/sky/horizon_ring.png"
-hash = "76b44ff567fca6602b364ef647c060d39155a121814ed9769c18d0f607b9fb01"
+hash = "b3395e9282a4246f34b8fe5d86d51a4315e98aac8403d11334ae00d15cea554f"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/sky/pluto.png"
