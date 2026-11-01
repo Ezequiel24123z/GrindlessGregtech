@@ -150,7 +150,7 @@
 
   // research item, then the machine itself on the assembly line (Research Station)
   var CONTROLLER = { machine: 'gtceu:condensate_assembler', research: 'grindless:horizon_alignment_matrix', casing: 'grindless:horizon_machine_casing',
-    comps: ['2x grindless:max_conveyor_module', '2x grindless:max_robot_arm', '2x grindless:max_field_generator', '2x grindless:max_sensor'],
+    comps: ['2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor'],
     plates: ['4x grindless:horizon_compressed_plate', '4x grindless:kerr_strange_plate'] }
 
   function missingIds(ids, fluids) {

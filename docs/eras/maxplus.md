@@ -179,7 +179,7 @@ Each takes its MAX counterpart where one exists, so MAX's lines stay loaded.
 
 **Circuit.** `grindless:horizon_processor` (tag `#grindless:circuits/maxplus`; GTM has no circuit tag above MAX): joined on UEV's photonic integration hall at VA[MAX] from 2 `horizon_logic_die` (Q1) + 1 `horizon_interposer` (Q2) + 1 `quantum_memory_node` (MAX L23) + 1 `rydberg_logic_array` (MAX) + 2 `gtnn:supracausal_mainframe` + 1,000 mB `kerr_condensate`.
 
-**Controllers.** Assembly line at VA[MAX], 4,800 t *(tune)*; base: MAX hull, 2 `horizon_machine_casing`, 8 `horizon_processor` (16 for the Hyperstargate), 2,000 mB `kerr_condensate`, at least 8 MAX+ components from at least 3 families, plus the domain inputs named in each machine section.
+**Controllers.** Assembly line at VA[MAX], 4,800 t *(tune)*; base: MAX hull, 2 `horizon_machine_casing`, 8 `horizon_processor` (16 for the Hyperstargate), 2,000 mB `kerr_condensate`, at least 8 MAX+ components from at least 3 families, plus the domain inputs named in each machine section. *As built:* the loom, the condensate assembler and the Hills slingshot take this base (the loom without `maxplus_electric_pump` and `maxplus_fluid_regulator`, which take its own `horizon_valve`); the condensate refinery and the bound-matter press are the bootstrap exceptions (MAX parts plus 4 `stream_bundle`, see *Bootstrap check*), because the MAX+ components need their bound matter and condensate cells (`tools/analysis/test/maxplus-controllers.test.mjs`).
 
 ## Machines
 

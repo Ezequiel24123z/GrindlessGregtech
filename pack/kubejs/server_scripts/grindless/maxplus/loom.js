@@ -103,7 +103,7 @@
   }
 
   var CONTROLLER = { machine: 'gtceu:meta_material_loom', research: 'grindless:horizon_phase_sensor_core', casing: 'grindless:horizon_machine_casing',
-    extra: ['2x grindless:max_conveyor_module', '2x grindless:max_robot_arm'] }
+    comps: ['2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor'] }
 
   ML.rows = ROWS
   ML.loom = LOOM
@@ -156,16 +156,16 @@
 
   function addController(event) {
     var c = CONTROLLER
-    var ins = [HULL, c.research, c.casing, 'grindless:max_field_generator', 'grindless:max_electric_motor'].concat(c.extra.map(function (s) { return s.replace(/^\d+x /, '') }))
-    var missing = missingIds(ins.concat([c.machine]), ['gtceu:superfluid_helium_3'])
+    var ins = [HULL, c.research, c.casing, 'grindless:horizon_processor'].concat(c.comps.map(function (s) { return s.replace(/^\d+x /, '') }))
+    var missing = missingIds(ins.concat([c.machine]), [KERR])
     if (missing.length > 0) return skip('meta_material_loom controller', 'unknown id(s): ' + missing.join(', '))
     var a = event.recipes.gtceu.assembly_line('grindless:meta_material_loom')
-    a.itemInputs(HULL, '4x ' + CIRCUIT, '8x ' + c.casing, '4x grindless:max_field_generator', '2x grindless:max_electric_motor')
-    c.extra.forEach(function (s) { a.itemInputs(s) })
-    a.inputFluids(Fluid.of('gtceu:superfluid_helium_3', 1000))
+    a.itemInputs(HULL, '2x ' + c.casing, '8x grindless:horizon_processor', '4x ' + CIRCUIT)
+    c.comps.forEach(function (s) { a.itemInputs(s) })
+    a.inputFluids(Fluid.of(KERR, 2000))
     a.itemOutputs(c.machine)
     a.stationResearch(function (r) { return r.researchStack(Item.of(c.research)).CWUt(64).EUt(VA_MAX) })
-    a.EUt(VA_MAX).duration(2400)
+    a.EUt(VA_MAX).duration(4800)
   }
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one

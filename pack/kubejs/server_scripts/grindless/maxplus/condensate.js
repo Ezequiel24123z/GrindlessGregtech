@@ -79,9 +79,9 @@
 
   var CONTROLLERS = [
     { name: 'condensate_refinery', machine: 'gtceu:condensate_refinery', research: 'grindless:horizon_phase_lock', casing: 'grindless:condensate_vessel_casing',
-      extra: ['2x grindless:max_electric_pump', '2x grindless:max_fluid_regulator'] },
+      extra: ['2x grindless:max_electric_pump', '2x grindless:max_fluid_regulator', '4x grindless:stream_bundle'] },
     { name: 'bound_matter_press', machine: 'gtceu:bound_matter_press', research: 'grindless:horizon_flux_clamp', casing: 'grindless:bound_press_casing',
-      extra: ['2x grindless:max_electric_piston', '2x grindless:max_robot_arm'] }
+      extra: ['2x grindless:max_electric_piston', '2x grindless:max_robot_arm', '4x grindless:stream_bundle'] }
   ]
 
   function missingOf(items, fluids) {
