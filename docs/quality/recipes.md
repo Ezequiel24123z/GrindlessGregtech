@@ -7,7 +7,7 @@ must climb a ladder of crafting forms that gets harder with the tier. `node tool
 ## The ladder
 
 Tier numbers: steam 0, LV 1, MV 2, HV 3, EV 4, IV 5, LuV 6, ZPM 7, UV 8, UHV 9, UEV 10, UIV 11, UXV 12. The tier of a recipe is its era directory (`eraTier`
-in `tools/analysis/recipe_quality.json`), else the tier prefix of the output, else the highest tier among its inputs.
+in `tools/analysis/recipe_quality.json`), else the tier prefix of the output, else the highest tier among its inputs. OpV is 13, MAX 14, and the `grindless:maxplus_<family>` components are tier 15 (by prefix only: `maxplus` is not in `eraTier`, so MAX+ rows rate 15 only through their components).
 
 | Class | Tier | Required form | Code |
 |---|---|---|---|

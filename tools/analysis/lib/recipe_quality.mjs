@@ -7,8 +7,8 @@
 //                              still listed, so the ratchet only moves forward).
 // Everything after extractFacts is pure and works on JSON, so the tests run on tiny in-memory facts.
 
-export const TIER_NAMES = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
-const TIER_PREFIX = new Map([['ulv', 0], ['lv', 1], ['mv', 2], ['hv', 3], ['ev', 4], ['iv', 5], ['luv', 6], ['zpm', 7], ['uv', 8], ['uhv', 9], ['uev', 10], ['uiv', 11], ['uxv', 12], ['opv', 13], ['max', 14]]);
+export const TIER_NAMES = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
+const TIER_PREFIX = new Map([['ulv', 0], ['lv', 1], ['mv', 2], ['hv', 3], ['ev', 4], ['iv', 5], ['luv', 6], ['zpm', 7], ['uv', 8], ['uhv', 9], ['uev', 10], ['uiv', 11], ['uxv', 12], ['opv', 13], ['max', 14], ['maxplus', 15]]);
 const FORM_RANK = { crafting: 0, machine: 1, assembler: 1, assembly_line: 2 };
 const CRAFT_TYPE = /(^|:)(crafting_)?(shaped|shapeless)(_strict)?$|crafting_shaped_strict$/;
 const HATCH = /(^|_)(hatch|input_bus|output_bus|dynamo_hatch|energy_hatch|laser_(source|target)|rotor_holder|maintenance)(_|$)|_bus$/;
@@ -225,7 +225,7 @@ export function tierComponent(id) {
   const m = FAMILY_RE.exec(String(id));
   if (!m || !TIER_PREFIX.has(m[2])) return null;
   const tier = TIER_PREFIX.get(m[2]);
-  if (m[1] === 'grindless' && (tier < 10 || tier > 14)) return null;
+  if (m[1] === 'grindless' && (tier < 10 || tier > 15)) return null;
   return { tier, family: m[3] };
 }
 
