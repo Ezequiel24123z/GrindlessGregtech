@@ -165,13 +165,7 @@
           "itemsOut": [{ "id": "grindless:cooled_cavity_mode", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] },
         { "_why": "XP-A3 (maxplus.md, Q2 step 5, c32, a repeat on this type with its own inputs): the interposer die cooled in the mK module and its piezo transducers tuned; the mixture is returned.", "name": "horizon_interposer", "circuit": 32, "eut": 536870912, "duration": 2400,
           "itemsIn": [{ "id": "grindless:interposer_die", "count": 1 }], "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }], "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:horizon_interposer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] },
-        { "_why": "XP-A2 (maxplus.md, line C4 step 4, c31): the readout-bonded SNSPD module cooled in the mK module to its detection threshold; the mixture is returned.", "name": "cold_snspd_module", "circuit": 31, "eut": 536870912, "duration": 2400,
-          "itemsIn": [{ "id": "grindless:readout_die", "count": 1 }, { "id": "grindless:snspd_array_die", "count": 1 }], "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }], "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:cold_snspd_module", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] },
-        { "_why": "XP-A2 (maxplus.md, line C5 step 5, c30): the condensate-loaded sealed cavity cooled in the mK module until the condensate locks into its mode; the mixture is returned.", "name": "condensate_field_cell", "circuit": 30, "eut": 536870912, "duration": 2400,
-          "itemsIn": [{ "id": "grindless:sealed_field_cavity", "count": 1 }], "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }], "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:condensate_field_cell", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] }
+          "itemsOut": [{ "id": "grindless:horizon_interposer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] }
       ]
     }
   }

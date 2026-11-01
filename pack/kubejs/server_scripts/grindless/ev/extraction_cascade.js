@@ -441,15 +441,6 @@
       itemsOut: [{ id: 'grindless:indium_sulfate', count: 2 }],
       fluidsOut: [{ id: 'gtceu:hydrogen', amount: 3000 }],
       eut: 1920, duration: 100
-    },
-    // XP-A2 (maxplus.md, line C7 step 1, c32; repeat by item inputs): lead, magnesium, niobium and titanium dust leached in nitric acid to the PMN-PT precursor oxides; the hydrogen is the metals' reduction product
-    {
-      name: 'pmn_precursor_oxides', mode: 'max', circuit: 32,
-      itemsIn: [{ id: 'gtceu:lead_dust', count: 3 }, { id: 'gtceu:niobium_dust', count: 2 }],
-      fluidsIn: [{ id: 'gtceu:nitric_acid', amount: 4000 }, { id: 'gtceu:magnesium', amount: 144 }, { id: 'gtceu:titanium_tetrachloride', amount: 1000 }],
-      itemsOut: [{ id: 'grindless:pmn_precursor_oxides', count: 4 }],
-      fluidsOut: [{ id: 'gtceu:hydrogen', amount: 4000 }],
-      eut: 1920, duration: 200
     }
   ]
 

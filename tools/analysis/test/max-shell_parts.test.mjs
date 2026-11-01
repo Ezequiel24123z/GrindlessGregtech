@@ -62,11 +62,11 @@ test('the circuits are the contract\'s and unique within each recipe type', () =
   assert.equal(rowOf('racetrack_patterning', 'spin_logic', 'racetrack_memory_die').circuit, 3);
   for (const [t, f] of [['levitation_melting', 'levitation_melter'], ['crystal_growth', 'crystals'], ['silicon_carbide', 'power_devices'], ['mtj_sputtering', 'spin_deposition'], ['racetrack_patterning', 'spin_logic']]) {
     const c = tables(f)[t].recipes.map((r) => r.circuit).filter((n) => n > 0);
-    assert.equal(new Set(c).size, c.length - (t === 'crystal_growth' ? 7 : 0), `${t} has a repeated circuit`); // XP-A3 si28_boule repeats c32 too; MAX-B3 teo2_boule and MX-S1 nd_yag_boule repeat c32, and MX-S2's two boules repeat c30 and c31, each with its own items
+    assert.equal(new Set(c).size, c.length - (t === 'crystal_growth' ? 6 : 0), `${t} has a repeated circuit`); // XP-A3 si28_boule repeats c32 too; MAX-B3 teo2_boule and MX-S1 nd_yag_boule repeat c32, and MX-S2's two boules repeat c30 and c31, each with its own items
   }
   const ec = [...cascade.matchAll(/mode: '\w+', circuit: (\d+)/g)].map((m) => m[1]);
   // MAX-B1 repeats c30-32 with other item inputs (OpV-F3's rule, proved by the loader test below); no circuit is used more than twice
-  assert.ok(ec.every((c) => ec.filter((d) => d === c).length <= (c === '32' ? 4 : c === '31' || c === '30' || c === '3' ? 3 : 2)), 'the extraction cascade repeats a circuit more than once'); // MAX-D1 adds the third c32; MX-S1 the third c31 (indium_sulfate); MX-S4 and MX-S2 make c3 three rows (vanadium_pentoxide) with their own items
+  assert.ok(ec.every((c) => ec.filter((d) => d === c).length <= (c === '32' || c === '31' || c === '30' || c === '3' ? 3 : 2)), 'the extraction cascade repeats a circuit more than once'); // MAX-D1 adds the third c32; MX-S1 the third c31 (indium_sulfate); MX-S4 and MX-S2 make c3 three rows (vanadium_pentoxide) with their own items
 });
 
 test('every older row fits its machine: items, fluids and outputs', () => {
@@ -130,7 +130,7 @@ test('MAX-CS: the cascade loads every shipped row unchanged (no problem, no clas
   assert.deepEqual(errors, []);
   const circuits = [...EC.recipes.map((r) => r.circuit)];
   assert.equal(EC.recipes.length, [...cascade.matchAll(/mode: '[a-z]+', circuit: \d+/g)].length);
-  assert.ok(circuits.every((c) => circuits.filter((d) => d === c).length <= (c === 32 ? 4 : c === 31 || c === 30 || c === 3 ? 3 : 2))); // MAX-R1 adds a third c30 (hafnium_tantalum_oxide); MAX-B1's c30-32 repeat with other item inputs; MAX-D1 adds a third c32; MX-S1 a third c31
+  assert.ok(circuits.every((c) => circuits.filter((d) => d === c).length <= (c === 32 || c === 31 || c === 30 || c === 3 ? 3 : 2))); // MAX-R1 adds a third c30 (hafnium_tantalum_oxide); MAX-B1's c30-32 repeat with other item inputs; MAX-D1 adds a third c32; MX-S1 a third c31
   assert.ok(circuits.every((c) => c >= 1 && c <= 32));
   assert.deepEqual(Array.from(EC.clashes), []);
 });

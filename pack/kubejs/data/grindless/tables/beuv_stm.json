@@ -197,13 +197,7 @@
           "itemsOut": [{ "id": "grindless:patterned_vo2_metasurface", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] },
         { "_why": "XP-A3 (maxplus.md, Q1 step 3, c21): the Si-28 boule exposed with the horizon logic pattern, four droplet targets a wafer; the fouled mirror goes to c3 as in every exposure", "name": "horizon_logic_wafer", "circuit": 21, "eut": 536870912, "duration": 2400,
           "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 4 }, { "id": "grindless:si28_boule", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:horizon_logic_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] },
-        { "_why": "XP-A2 (maxplus.md, line C3 step 4, c19): the GaN laser array and the LN-on-diamond plate exposed together with the engine pattern, two droplet targets; the fouled mirror goes to c3 as in every exposure", "name": "patterned_engine_wafer", "circuit": 19, "eut": 536870912, "duration": 2400,
-          "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 2 }, { "id": "grindless:gan_laser_array", "count": 1 }, { "id": "grindless:ln_on_diamond", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:patterned_engine_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] },
-        { "_why": "XP-A2 (maxplus.md, line C4 step 2, c20): the SNSPD array die exposed with the readout pattern, one droplet target; the fouled mirror goes to c3 as in every exposure", "name": "readout_wafer", "circuit": 20, "eut": 536870912, "duration": 2000,
-          "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 1 }, { "id": "grindless:snspd_array_die", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:readout_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:horizon_logic_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] }
         ]
     },
     "stm_lithography": {

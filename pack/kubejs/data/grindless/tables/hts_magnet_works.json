@@ -127,14 +127,6 @@
       "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
       "itemsOut": [ { "id": "grindless:flux_pump_stator", "count": 1 } ],
       "eut": 7864320, "duration": 600
-    },
-    {
-      "name": "kerr_coil_winding", "circuit": 22, "charge": true,
-      "_why": "XP-A2 (maxplus.md, line C1 step 3, c22): four turns of stabilised Kerr wire wound on the CMC coil former and potted in epoxy, ramped in the cold-test helium. Circuit 22: the six MAX+ rows the design puts on this works (P18, P20, P23, T6, T14, T15) come first.",
-      "itemsIn": [ { "id": "grindless:cmc_coil_former", "count": 1 }, { "id": "grindless:stabilised_kerr_wire", "count": 4 } ],
-      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
-      "itemsOut": [ { "id": "grindless:kerr_coil_winding", "count": 1 } ],
-      "eut": 536870912, "duration": 1200
     }
   ]
 }

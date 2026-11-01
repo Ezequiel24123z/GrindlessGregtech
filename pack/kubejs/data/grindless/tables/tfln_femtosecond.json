@@ -61,10 +61,7 @@
           "itemsOut": [{ "id": "grindless:ln_transducer_bonded_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
         { "_why": "XP-A3 (maxplus.md, Q2 step 1, c19): two poled lithium niobate wafers bonded to the Si-28 SOI handle and sliced by hydrogen implantation into the enhanced LN-on-insulator", "name": "ln_on_insulator_plus", "circuit": 19, "eut": 536870912, "duration": 2400,
           "itemsIn": [{ "id": "grindless:poled_lnoi_wafer", "count": 2 }, { "id": "grindless:si28_soi_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:ln_on_insulator_plus", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
-        { "_why": "XP-A2 (maxplus.md, line C3 step 2, c18): a lithium niobate wafer bonded to the C-12 photonic diamond plate and sliced by hydrogen implantation into LN on diamond", "name": "ln_on_diamond", "circuit": 18, "eut": 536870912, "duration": 2000,
-          "itemsIn": [{ "id": "grindless:c12_photonic_plate", "count": 1 }, { "id": "grindless:lithium_niobate_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:ln_on_diamond", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] }
+          "itemsOut": [{ "id": "grindless:ln_on_insulator_plus", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] }
       ]
     },
     "femtosecond_writing": {

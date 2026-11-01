@@ -538,20 +538,6 @@
           "itemsIn": [{ "id": "grindless:clock_steered_oscillator", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 }],
           "kept": [], "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }, { "id": "gtceu:soldering_alloy", "amount": 36 }], "charge": [],
           "itemsOut": [{ "id": "grindless:optical_phase_lock_unit", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
-        },
-        {
-          "_why": "XP-A2 (maxplus.md, line C3 step 5, c28): the patterned engine wafer packaged and soldered into the horizon photonic engine; the ultrapure water is returned as water",
-          "name": "horizon_photonic_engine", "circuit": 28, "eut": 536870912, "duration": 1800,
-          "itemsIn": [{ "id": "grindless:patterned_engine_wafer", "count": 1 }, { "id": "grindless:glass_interposer", "count": 1 }],
-          "kept": [], "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }, { "id": "gtceu:soldering_alloy", "amount": 144 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:horizon_photonic_engine", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
-        },
-        {
-          "_why": "XP-A2 (maxplus.md, line C4 step 5, c29): the cold SNSPD module packaged and soldered with its readout die into the horizon phase sensor core; the ultrapure water is returned as water",
-          "name": "horizon_phase_sensor_core", "circuit": 29, "eut": 536870912, "duration": 1800,
-          "itemsIn": [{ "id": "grindless:cold_snspd_module", "count": 1 }, { "id": "grindless:readout_die", "count": 1 }],
-          "kept": [], "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }, { "id": "gtceu:soldering_alloy", "amount": 144 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:horizon_phase_sensor_core", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
         ]
     },

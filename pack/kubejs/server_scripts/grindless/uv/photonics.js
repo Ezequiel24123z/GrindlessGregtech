@@ -265,10 +265,6 @@
     { name: 'gaas_808_pump_bar', type: 'mocvd', circuit: 30, itemsIn: [item(GAAS_WAFER, 1), item('gtceu:aluminium_dust', 1), item('gtceu:gallium_dust', 1)],
       fluidsIn: [fluid(TMGA, 250), fluid(ARSINE, 1000)], itemsOut: [item('grindless:gaas_808_pump_bar', 1)],
       fluidsOut: [fluid('gtceu:methane', 750), fluid(ARSINE, 500)], eut: 1966080, duration: 1200 },
-    // XP-A2 (maxplus.md, line C3 step 3, mocvd c32, a repeat on this type with its own inputs): the GaN/InGaN laser array grown on an SiC wafer for the photonic engine; the methyls leave as methane and the ammonia cracks to hydrogen
-    { name: 'gan_laser_array', type: 'mocvd', circuit: 32, itemsIn: [item('grindless:hpsi_sic_wafer', 1), item('gtceu:gallium_dust', 2), item('gtceu:indium_dust', 1)],
-      fluidsIn: [fluid(TMGA, 500), fluid('gtceu:ammonia', 2000)], itemsOut: [item('grindless:gan_laser_array', 1)],
-      fluidsOut: [fluid('gtceu:methane', 1500), fluid('gtceu:hydrogen', 2000)], eut: 1966080, duration: 1600 },
     // MX-S1 L56 (max.md, fibre draw c21): ytterbium-doped fibre drawn from the ultrapure silica tube
     { name: 'yb_doped_fibre', type: 'fibre_draw', circuit: 21, itemsIn: [item('grindless:ultrapure_silica_tube', 1), item('gtceu:ytterbium_oxide_dust', 1)],
       fluidsIn: [fluid('gtceu:argon', 500), fluid(ACRYLATE, 250)], itemsOut: [item('grindless:yb_doped_fibre', 4)], fluidsOut: [], eut: 1966080, duration: 600 }

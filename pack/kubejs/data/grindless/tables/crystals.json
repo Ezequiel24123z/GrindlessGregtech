@@ -195,10 +195,7 @@
           "itemsOut": [{ "id": "grindless:nd_yag_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
         { "_why": "XP-A3 (maxplus.md, Q1 step 2, c32, a repeat on this type with its own inputs): the Si-28 feed pulled into a single-isotope boule; the Ir crucible wears as in every row", "name": "si28_boule", "circuit": 32, "eut": 536870912, "duration": 2400,
           "itemsIn": [{ "id": "grindless:si28_feed", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:si28_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
-        { "_why": "XP-A2 (maxplus.md, line C7 step 2, c32, a repeat on this type with its own inputs): the PMN-PT precursor oxides pulled into a relaxor boule under oxygen; the Ir crucible wears as in every row", "name": "pmn_pt_boule", "circuit": 32, "eut": 536870912, "duration": 2400,
-          "itemsIn": [{ "id": "grindless:pmn_precursor_oxides", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:pmn_pt_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:si28_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {

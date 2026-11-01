@@ -145,15 +145,6 @@
     eut: 491520, duration: 600
   })
 
-  // XP-A2 (maxplus.md, line C3 step 1): a thick C-12 diamond grown on the C-12 CVD plate for the photonic engine (diamond_cvd circuit 12; 1-10 are taken and P14 takes 11)
-  TABLE.push({
-    name: 'c12_photonic_plate', type: 'diamond_cvd', circuit: 12,
-    itemsIn: [{ id: 'grindless:c12_cvd_plate', count: 1 }], notConsumedItems: [SEED],
-    fluidsIn: [{ id: 'gtceu:carbon_12_methane', amount: 2000 }, { id: 'gtceu:hydrogen', amount: 10000 }],
-    itemsOut: [{ id: 'grindless:c12_photonic_plate', count: 1 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 9500 }],
-    eut: 491520, duration: 1600
-  })
-
   // UXV-A3 (uxv.md lines 6, 7, 44): the ion mill of the MTJ, MRAM and STNO stacks, an argon-beam etch (circuits 8-10; 1-2, 6-7 here, 3-5 in the photonics tables)
   ;[
     ['mtj_ion_etch', 8, 'annealed_mtj_wafer', 'etched_mtj_wafer'],

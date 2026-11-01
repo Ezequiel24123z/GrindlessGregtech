@@ -159,10 +159,6 @@
   TABLE.push({ name: 'kerr_braid', type: 'pbo_synthesis', circuit: 14, itemsIn: [item('grindless:insulated_kerr_wire', 1), item(PBO, 2)], fluidsIn: [],
     itemsOut: [item('grindless:kerr_braid_sleeve', 1)], fluidsOut: [], eut: UHVA, duration: 200 })
 
-  // XP-A2 (maxplus.md, line C6 step 1, c17): the insulated Kerr wire braided in PBO fibre into the Kerr braided web; circuit 17: P23 and T3 take 15 and 16
-  TABLE.push({ name: 'kerr_braided_web', type: 'pbo_synthesis', circuit: 17, itemsIn: [item('grindless:insulated_kerr_wire', 2), item(PBO, 4)], fluidsIn: [],
-    itemsOut: [item('grindless:kerr_braided_web', 1)], fluidsOut: [], eut: UHVA, duration: 400 })
-
   // line 24's side steps on GTM's own machines
   var SIDE = [
     { name: 'trichlorobenzene', type: 'chemical_reactor', circuit: 3, itemsIn: [],
