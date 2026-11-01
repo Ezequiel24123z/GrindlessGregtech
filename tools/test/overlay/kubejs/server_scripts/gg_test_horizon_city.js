@@ -37,8 +37,7 @@
   }
 
   function step1() {
-    var level = null
-    S.server.getAllLevels().forEach(function (l) { if (String(l.dimension.location()) === DIM) level = l })
+    var level = S.server.getLevel(DIM)
     check('dimension_loaded', level !== null, DIM)
     if (level === null) return done()
     S.level = level

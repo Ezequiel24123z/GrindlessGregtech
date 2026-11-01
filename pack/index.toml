@@ -15806,7 +15806,7 @@ hash = "e7c74c6be3bf716085b8f62136f8a78be9bbfe951f1a382dcb7496ff868f299a"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_crystals_lang.js"
-hash = "f39a9f8a1a498d6059991188a2600f0ac5615d9bd95dab518be1cc24157d69d4"
+hash = "1ab535c0fefa5ea1ef11552c6d26b5bba772e35799697980f024b736fb9586dd"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_foundation_lang.js"
@@ -17042,7 +17042,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "006399d344fb331d52e79ba91605b0296d91d92df98fddfbd052f28dae528966"
+hash = "a4083d8a5f04ef8c1ce7ae933329255f1de62160e9f3cae8a88c3bda9918ab5a"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_city.json"
@@ -17950,7 +17950,7 @@ hash = "c14a8f2e7995b839d9381e0078c32543366d05fe2fb76d2d181569f838b349ca"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/crystals.js"
-hash = "01bae0e66985feaa72932bf06141c2f52b884a12995e9c27cfea171afdd9dddd"
+hash = "8c60a1724c7ccad42b318c4f105d91a326535626064da4ed86ee6c2c161df7cb"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/hyperfactory.js"
@@ -18970,7 +18970,7 @@ hash = "27e7aaf265ce1a4e5725198c744a42996d7a64a78088dceeaf5b3a6079809b24"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/crystals.js"
-hash = "17a0677190e0db8e504708154309b601771811ff57824715f9fee2b51fe8c94d"
+hash = "478bb47f1ffd44b38fd509de65c2d8e9fe4a9a515851489fc30274c1436f6ed9"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/foundation.js"
