@@ -204,7 +204,7 @@ export default {
         n('nit', 15, 0, F('gtceu:titan_nitriles'), 'Titan Nitriles', { kind: 'product', from: ['ref'] }),
         n('zn2', 17.5, -3, I('gtceu:zinc_dust'), 'Zinc', { kind: 'raw', sub: 'A catalyst: it stays' }),
         n('rice2', 10, -3, F('gtceu:ring_ice'), 'Ring Ice', { kind: 'raw', sub: 'From the Saturn ring harvester' }),
-        n('rdist', 12.5, -3, M('gtceu:lv_distillery'), 'Distillery', { kind: 'machine', from: ['rice2'], desc: 'Melts the ring ice into water and ammonia.' }),
+        n('rdist', 12.5, -3, M('gtceu:distillation_tower'), 'Distillation Tower', { kind: 'machine', from: ['rice2'], desc: 'Melts the ring ice into water and ammonia (grindless:distillation_tower/ring_ice_melt).' }),
         n('amm', 15, -1.5, F('gtceu:ammonia'), 'Ammonia', { kind: 'product', from: ['rdist'], sub: 'From the rings: the LV plant is the other source' }),
         L('nh3', 15, -3, 'pl_lv:ammonia'),
         n('dab', 17.5, 0, F('gtceu:diaminobenzidine'), 'Diaminobenzidine', { kind: 'product', from: ['nit', 'zn2', 'nh3', 'amm'], by: ['gtceu:tholin_reforming'] }),

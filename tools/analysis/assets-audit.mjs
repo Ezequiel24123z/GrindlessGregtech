@@ -302,18 +302,51 @@ export function evaluateStartup(root, packDirName = 'pack') {
     if (!owner) return;
     owner.calls.push({ method, args });
     if (method !== 'definition') return;
+    const tiers = owner.calls.filter((c) => c.method === 'tiers').flatMap((c) => c.args).filter((n) => typeof n === 'number');
     for (const fn of args) {
       if (typeof fn !== 'function') continue;
-      try { fn(1, owner.proxy); } catch (e) { errors.push(`${owner.file} (${owner.id} definition): ${e && e.message}`); }
+      for (const t of tiers.length ? tiers : [1]) {
+        try { fn(t, owner.proxy); } catch (e) { errors.push(`${owner.file} (${owner.id} definition): ${e && e.message}`); }
+      }
     }
   };
   const { standIn, builder } = makeStandIns(onCall);
   const shared = {};
+  const classRefs = [];
+  const genericEvents = [];
+  // Java.loadClass: a ResourceLocation keeps its text, so the strings scripts build reach the builder calls; the arguments of every
+  // renderer constructor are recorded (covers, models) and CoverDefinition's supplier is run once so its renderer is built.
+  const javaClass = (name) => {
+    const base = standIn(null);
+    const isRL = /\.ResourceLocation$/.test(name);
+    return new Proxy(function () {}, {
+      get(_t, p) { return typeof p === 'symbol' || hidden.has(p) ? undefined : base[p]; },
+      apply() { return standIn(null); },
+      construct(_t, args) {
+        if (isRL) {
+          const text = args.length > 1 ? `${args[0]}:${args[1]}` : String(args[0]);
+          return { __rl: text, toString: () => text };
+        }
+        if (/Renderer$/.test(name)) classRefs.push({ cls: name, file: currentFile, args: args.map(textOf).filter((s) => typeof s === 'string') });
+        if (/\.CoverDefinition$/.test(name)) {
+          const fns = args.filter((a) => typeof a === 'function');
+          const last = fns[fns.length - 1];
+          if (last) { try { last(); } catch (e) { errors.push(`${currentFile} (CoverDefinition renderer): ${e && e.message}`); } }
+        }
+        return standIn(null);
+      },
+    });
+  };
+  const hidden = new Set(['then', 'toJSON', 'constructor', 'prototype', '__proto__']);
+  const textOf = (a) => (a && typeof a === 'object' && typeof a.__rl === 'string' ? a.__rl : a);
+
   const context = vm.createContext({ console: { log() {}, info() {}, warn() {}, error() {}, debug() {} } });
   const realGlobals = vm.runInContext('globalThis', context);
   const gameFile = (p) => path.join(root, packDirName, ...String(p).split(/[\\/]/));
   const bindings = {
     global: shared,
+    Java: new Proxy({ loadClass: (name) => javaClass(String(name)) }, { get: (t, p) => (p in t ? t[p] : standIn(null)[p]) }),
+    ForgeModEvents: { onGenericEvent(_a, _b, fn) { if (typeof fn === 'function') genericEvents.push({ fn, file: currentFile }); }, onEvent() {} },
     GTSoundEntries: new Proxy({}, { get: (_t, n) => (typeof n === 'string' ? { __gtSound: n } : undefined) }),
     JsonIO: {
       readJson(p) { const f = gameFile(p); return fs.existsSync(f) ? { text: fs.readFileSync(f, 'utf8') } : null; },
@@ -365,17 +398,23 @@ export function evaluateStartup(root, packDirName = 'pack') {
       : standIn(null);
     try { r.cb(event); } catch (e) { errors.push(`${r.file} (${r.type} registry): ${e && e.message}`); }
   }
-  return { ...reg, errors };
+  for (const ev of genericEvents) {
+    currentFile = ev.file;
+    try { ev.fn(standIn(null)); } catch (e) { errors.push(`${ev.file} (generic event): ${e && e.message}`); }
+  }
+  return { ...reg, classRefs: classRefs.map((c) => ({ ...c, era: eraOfPath(c.file) })), errors };
 }
 
 // ------------------------------------------------------------------ texture references
 
 const nsPath = (rl, def = 'grindless') => { const i = rl.indexOf(':'); return i < 0 ? [def, rl] : [rl.slice(0, i), rl.slice(i + 1)]; };
-const strings = (args) => args.filter((a) => typeof a === 'string');
+const textOfArg = (a) => (a && typeof a === 'object' && typeof a.__rl === 'string' ? a.__rl : a);
+const strings = (args) => args.map(textOfArg).filter((a) => typeof a === 'string');
+const baseMethod = (m) => String(m).replace(/\(.*$/, '');
 const looksTexture = (s) => /^[a-z0-9_.-]+:[a-z0-9_./-]+$/.test(s) && /\/(item|block|fluid|entity|gui)\/|^[a-z]+:(item|block|fluid)\//.test(s);
 
 // One list of { ref, owner, kind, era, file } for the assets the registrations point at.
-export function collectReferences(startup, assetsDir) {
+export function collectReferences(startup, assetsDir, { root = ROOT, startupDir = null } = {}) {
   const refs = [];
   const modelTextures = (modelRl) => {
     const [ns, p] = nsPath(modelRl);
@@ -411,11 +450,27 @@ export function collectReferences(startup, assetsDir) {
   }
   for (const b of startup.machine) {
     for (const c of b.calls) {
-      if (!/(Model|Renderer)$/.test(c.method)) continue;
+      if (!/(Model|Renderer)$/.test(baseMethod(c.method))) continue;
       const ss = strings(c.args);
       if (!ss.length) continue;
       ss.slice(0, -1).forEach((s) => add(b, 'machine_base', s));
       add(b, b.type === 'multiblock' ? 'overlay_multiblock' : 'overlay_machine', ss[ss.length - 1]);
+    }
+  }
+  // renderers built outside a registration (covers): the textures their constructors name
+  for (const c of startup.classRefs || []) {
+    for (const s of c.args.filter(looksTexture)) refs.push({ ref: s, owner: c.cls.split('.').pop(), kind: 'renderer', era: c.era, file: c.file });
+  }
+  // a model call's literal texture paths in branches the sandbox does not take (the plant or the tether in Io orbit)
+  const seen = new Set(refs.map((r) => r.ref));
+  for (const f of startupDir ? walk(startupDir, '.js') : []) {
+    const text = fs.readFileSync(f, 'utf8');
+    for (const m of text.matchAll(/\.\w*Model\(\s*'([a-z0-9_.-]+:[a-z0-9_./-]+)'\s*(?:,\s*'([a-z0-9_.-]+:[a-z0-9_./-]+)')?\s*\)/g)) {
+      const ref = m[2] || m[1];
+      if (seen.has(ref) || !looksTexture(ref)) continue;
+      seen.add(ref);
+      const file = rel(root, f);
+      refs.push({ ref, owner: 'literal', kind: 'overlay_multiblock', era: eraOfPath(file), file });
     }
   }
   return refs;
@@ -426,7 +481,7 @@ export function collectReferences(startup, assetsDir) {
 export function auditTextures({ root = ROOT, packDir = 'pack', gtmJar = null, startup = null } = {}) {
   const assetsDir = path.join(root, packDir, 'kubejs', 'assets');
   startup = startup || evaluateStartup(root, packDir);
-  const refs = collectReferences(startup, assetsDir);
+  const refs = collectReferences(startup, assetsDir, { root, startupDir: path.join(root, packDir, 'kubejs', 'startup_scripts', 'grindless') });
   const zip = gtmJar ? openZip(gtmJar) : null;
   const files = walk(assetsDir, '.png').filter((f) => /[\\/]textures[\\/]/.test(f));
   const rlOf = (f) => {
