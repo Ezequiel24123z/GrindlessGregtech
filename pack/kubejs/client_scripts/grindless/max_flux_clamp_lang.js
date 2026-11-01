@@ -1,4 +1,4 @@
-// priority: 6750
+// priority: 6762
 // Gregtech Grindless - names and tooltips of MAX's horizon flux clamp (startup_scripts/grindless/max/flux_clamp.js; package MX-S3):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each row of the package that has one (the machine's own, the L54

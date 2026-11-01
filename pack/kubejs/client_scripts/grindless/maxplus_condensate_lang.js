@@ -1,4 +1,4 @@
-// priority: 6830
+// priority: 6874
 // Gregtech Grindless - names and tooltips of MAX+'s condensate machines (startup_scripts/grindless/maxplus/condensate.js; package XP-A1):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each row of the package that has one (the two machines' own rows and the
