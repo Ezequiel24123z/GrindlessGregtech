@@ -380,7 +380,7 @@ take('photonics', 'pf', 'lnoi');
 take('life', 'oa', 'chs');
 take('life', 'comp', 'chs');
 take('life', 'pbc', 'bcr');
-take('life', 'panel', via('lnqa', 'gtceu:naquadah_alloy_plate', 'grindless:flare_shield_panel'));
+take('life', 'panel', via('lnqa', 'gtceu:naquadah_alloy_plate'));
 take('antimatter', 'gate', 'ah', 'clk', 'opg');
 take('ground', 'nmw', 'uvc');
 take('power', 'thw', 'tank');

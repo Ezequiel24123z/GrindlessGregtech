@@ -233,7 +233,7 @@ const chapter = {
         L('laer', 10, 13.5, 'pl_zpm:aer'),
         L('lct', 15, 13.5, 'pl_luv:cryotank'),
         n('agt', 12.5, 13.5, I('grindless:aerogel_fuel_tank'), 'Aerogel Fuel Tank', {
-          kind: 'product', from: [via('lct', 'grindless:naquadah_fuel_tank', 'grindless:aerogel_fuel_tank'), via('laer', 'grindless:aerogel_fuel_tank')],
+          kind: 'product', from: [via('lct', 'grindless:naquadah_fuel_tank'), via('laer')],
           sub: 'The assembler builds it round a Naquadah tank and the aerogel',
         }),
         // the light sail
