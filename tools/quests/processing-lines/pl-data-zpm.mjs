@@ -55,10 +55,10 @@ export default {
         n('retr', 0, 0, M('gtceu:waste_retrieval_plant'), 'Waste Retrieval Plant', {
           kind: 'ours', desc: 'Takes the old reactor waste back out of storage and gives it a use.',
         }),
-        n('rad', 2.5, -3, I('gtceu:radium_dust'), 'Radium', { kind: 'product', from: ['retr'], sub: 'Circuit 1: one dust from four waste' }),
+        n('radm', 2.5, -3, I('gtceu:radium_dust'), 'Radium', { kind: 'product', from: ['retr'], sub: 'Circuit 1: one dust from four waste' }),
         n('pt', 5, -4.5, I('gtceu:platinum_foil'), 'Platinum Foil', { kind: 'raw', sub: 'The capsule\'s skin' }),
         n('retr3', 5, -3, M('gtceu:waste_retrieval_plant'), 'Waste Retrieval Plant, Capsule', {
-          kind: 'ours', from: ['rad', 'pt'], desc: 'Circuit 3: four radium dust sealed in platinum foil.',
+          kind: 'ours', from: ['radm', 'pt'], desc: 'Circuit 3: four radium dust sealed in platinum foil.',
         }),
         n('capsule', 7.5, -3, I('grindless:radium_capsule'), 'Radium Capsule', { kind: 'product', from: ['retr3'], sub: 'Radon for the Mk2, with no uranium spent' }),
         n('retr2', 10, -3, M('gtceu:waste_retrieval_plant'), 'Waste Retrieval Plant, Emanation', {
@@ -73,8 +73,8 @@ export default {
         n('part2', 10, 2.25, M('gtceu:actinide_partitioning_plant'), 'Actinide Partitioning Plant, Split', {
           kind: 'ours', from: ['strip'], desc: 'Circuit 2: americium, curium and synroc.',
         }),
-        n('am', 12.5, 0.75, I('gtceu:americium_dust'), 'Americium', { kind: 'product', from: ['part2'], extends: 'pl_iv:waste', end: 'ZPM parts' }),
-        n('cm', 12.5, 2.25, I('grindless:curium_oxide'), 'Curium Oxide', { kind: 'product', from: ['part2'], extends: 'pl_iv:waste', end: 'ZPM parts' }),
+        n('am', 12.5, 0.75, I('gtceu:americium_dust'), 'Americium', { kind: 'product', from: ['part2'], extends: 'pl_iv:uranium', end: 'ZPM parts' }),
+        n('cm', 12.5, 2.25, I('grindless:curium_oxide'), 'Curium Oxide', { kind: 'product', from: ['part2'], extends: 'pl_iv:uranium', end: 'ZPM parts' }),
         n('syn', 12.5, 3.75, I('grindless:synroc_block'), 'Synroc', { kind: 'by', from: ['part2'], end: 'contained: the waste stays locked in' }),
       ],
     },
