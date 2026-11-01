@@ -21,7 +21,7 @@ export const LINKS = [
   { key: 'C_L_LIGHT', ref: 'START', x: 0, y: 1.5 },
   { key: 'C_L_INP', ref: 'START', x: 0, y: 3 },
   { key: 'C_L_MEM', ref: 'START', x: 0, y: 4.5 },
-  { key: 'C_L_LIFE', ref: 'START', x: 0, y: 6 },
+  { key: 'C_L_LIFE', ref: 'START', x: 6, y: 6 },
 ];
 
 // A row's first quest depends on the era quest its link points at.
@@ -42,11 +42,11 @@ export const QUESTS = [
   }, [it('gtceu:uhv_circuit_assembler')], 150),
   q('UCH_PARTS', 'process', 'UV Parts for UHV Controllers', 'gtceu:uv_robot_arm', ['UCH_ASM'], 4, 0, {
     for: 'GTM adds a UHV hull and UHV hatches but no UHV arm, sensor or emitter, so every UHV controller is built from UV parts and UHV circuits.',
-    needs: 'The UV robot arms, sensors and emitters you already make, and the UHV circuits from this chapter.',
+    needs: 'The UV robot arms, sensors and emitters you already make, and the UHV circuits made here.',
     unlocks: 'The controllers of the machines chapter, in the order it lists them.',
     automate: 'Stock each UV part by ME; the assembler draws two of the kind a controller asks for.',
   }, [it('gtceu:uv_robot_arm'), it('gtceu:uv_sensor'), it('gtceu:uv_emitter')], 100),
-  q('UCH_HULL', 'step', 'The UHV Hull', 'gtceu:uhv_machine_hull', ['UCH_PARTS', 'UCH_MAIN'], 16, 6, {}, [it('gtceu:uhv_machine_hull')], 120),
+  q('UCH_HULL', 'step', 'The UHV Hull', 'gtceu:uhv_machine_hull', ['UCH_MAIN'], 14, 4.5, {}, [it('gtceu:uhv_machine_hull')], 120),
 
   // ------------------------------------------------------------------ light: wafer, die, processor, assembly
   q('UCH_LN', 'wafer', 'Lithium Niobate Wafer', 'grindless:lithium_niobate_wafer', ['C_L_LIGHT'], 2, 1.5, {
@@ -73,7 +73,7 @@ export const QUESTS = [
     unlocks: 'The optical assembly and, through it, the mainframes of the organoid array.',
     automate: 'Foundry inputs by ME; processors go into their own chest, one stack per assembly.',
   }, [it('gtnn:optical_processor')], 180),
-  q('UCH_OASM', 'circuit', 'Optical Assembly', 'gtnn:optical_assembly', ['UCH_OPT', 'UCH_ASM'], 12, 1.5, {
+  q('UCH_OASM', 'circuit', 'Optical Assembly', 'gtnn:optical_assembly', ['UCH_OPT'], 12, 1.5, {
     for: 'Optical processors on an optical board with capacitors and diodes make the &6Optical Assembly&r, the largest circuit this era builds.',
     needs: 'Optical processors, the UHV circuit assembler and optical SMD parts.',
     unlocks: 'The wetware mainframe, whose recipe in the organoid array asks for one.',
@@ -108,13 +108,13 @@ export const QUESTS = [
   }, [it('grindless:quantum_memory_chip')], 120),
 
   // ------------------------------------------------------------------ life: the UHV circuit
-  q('UCH_ORG', 'circuit', 'Organoid Processor', 'grindless:organoid_processor', ['C_L_LIFE'], 2, 6, {
+  q('UCH_ORG', 'circuit', 'Organoid Processor', 'grindless:organoid_processor', ['C_L_LIFE'], 8, 6, {
     for: 'Neurons grown on a chitosan scaffold in ultrapure water make an &6Organoid Processor&r, tissue that learns on a board.',
     needs: 'The organoid array, stem cells from UV\'s vat, a scaffold, ultrapure water and sterile growth medium.',
     unlocks: 'The wetware mainframe, four organoids at a time.',
     automate: 'Medium and water by pipe; a tissue line fed by ME runs without a hand.',
   }, [it('grindless:organoid_processor')], 120),
-  q('UCH_MAIN', 'circuit', 'Four Mainframes', 'gtceu:wetware_processor_mainframe', ['UCH_ORG', 'UCH_OASM'], 14, 6, {
+  q('UCH_MAIN', 'circuit', 'Four Mainframes', 'gtceu:wetware_processor_mainframe', ['UCH_ORG', 'UCH_OASM'], 12, 4.5, {
     for: 'The &6Wetware Processor Mainframe&r is the UHV circuit. The organoid array makes four at once from organoid processors, neurons and an optical assembly.',
     needs: 'Four organoid processors, neuro processing units, an SiC power module and an optical assembly for each batch.',
     unlocks: 'Every UHV controller, and the hull of this era.',

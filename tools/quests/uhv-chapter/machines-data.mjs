@@ -161,7 +161,7 @@ export const QUESTS = [
   gear('ORG', 'organoid_array', 'Organoids', ['M_L_LIFE'], 2, 7.5, {
     for: 'The &6Organoid Array&r grows neural tissue on a scaffold under sterile flow.',
     needs: 'Its controller, filter casing, PTFE pipe casing and computer casing.',
-    unlocks: 'Neural organoids, the heart of the wetware mainframe.',
+    unlocks: 'Neural organoids, the core of the wetware mainframe.',
     automate: 'Scaffolds and nutrient by ME and pipe; discard cultures on a schedule.',
   }, [it(HULL), it(FILTER), it(PTFE), it(COMP)]),
   prod('P_ORG', 'A Living Processor', 'grindless:neural_organoid', ['ORG'], 4, 7.5,
@@ -198,19 +198,19 @@ export const QUESTS = [
     unlocks: 'Positron cartridges and, from them, antihydrogen.',
     automate: 'Cartridges leave by ME; never let a full trap sit unwatched.',
   }, [it(HULL), it(UVC)]),
-  gear('CAS', 'casimir_array', 'Casimir', ['POS'], 4, 12, {
+  gear('CAS', 'casimir_array', 'Casimir', ['ANTIH'], 6, 12, {
     for: 'The &6Casimir Array&r holds plates a few nanometres apart and squeezes energy from the vacuum between them.',
     needs: 'Its controller, station truss casing and cryostat casing.',
     unlocks: 'Casimir cavity stacks for the warp gate.',
     automate: 'Plates by ME; the stacks leave by ME to the gate.',
   }, [it(TRUSS), it(CRYOSTAT)]),
-  gear('M_GATE', 'warp_gate', 'The Gate Opens', ['CAS'], 6, 12, {
+  gear('M_GATE', 'warp_gate', 'The Gate Opens', ['CAS'], 8, 12, {
     for: 'The &6Warp Gate&r is the first door to another star.',
     needs: 'Its controller, warp gate casing and field ring casing.',
     unlocks: 'The gate seed and the trip to Proxima b.',
     automate: 'Power and cavity stacks by ME; only the seed leaves.',
   }, [it(WARP), it(FIELD)], 160),
-  prod('ANTIH', 'Antihydrogen', 'grindless:antihydrogen_cartridge', ['POS'], 8, 12,
+  prod('ANTIH', 'Antihydrogen', 'grindless:antihydrogen_cartridge', ['POS'], 4, 12,
     'A positron and an antiproton, held together long enough to make an atom. The &6Antihydrogen Cartridge&r holds a handful, and a small leak is expected: keep the cartridges sealed.',
     [it('grindless:antihydrogen_cartridge'), it('grindless:exotic_matter_cell')], 150),
   gear('ZBLAN', 'zblan_draw_tower', 'Glass from Orbit', ['M_L_ZB'], 2, 13.5, {
@@ -267,7 +267,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ proxima b
   gear('SAMPLE', 'sample_receiving_facility', 'Sample Receiving', ['M_L_SAMP'], 2, 15, {
     for: 'The &6Sample Receiving Facility&r opens canisters from another world in a sealed, level-four lab.',
-    needs: 'Its controller and the &6BSL-4 Casing&r.',
+    needs: 'Its controller and the sealed-lab &6Level-4 Casing&r.',
     unlocks: 'Safe handling of every alien sample.',
     automate: 'Canisters by ME; nothing leaves unsterilised.',
   }, [it(BSL4)]),
