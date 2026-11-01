@@ -30,24 +30,3 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.cryostat_casing.0', 'The Naquadria Magnet Works\' shell: a frostproof casing lined with gold and annealed copper plate, made in the assembler. It is the whole casing of that multiblock.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.naquadria_magnet_works', 'Fábrica de imanes de naquadria')
-    add('gtceu.naquadria_magnets', 'Imanes de naquadria')
-
-    add('grindless.machine.naquadria_magnet_works.tooltip.0', '§7Fabrica celdas SMES, cable URhNq2 e insertos HTS.')
-
-    add('gtceu.recipe.grindless_naquadria_magnets.zpm_smes_cell', 'Circuito 1: la celda ZPM de la red inalámbrica, una bobina SMES probada en frío en la carga de helio')
-    add('gtceu.recipe.grindless_naquadria_magnets.urhnq2_wire', 'Circuito 2: cables simples de URhNq2, polvo en tubo')
-    add('gtceu.recipe.grindless_naquadria_magnets.hts_insert', 'Circuito 3: un inserto HTS, una bobina HTS LuV anidada en bobinado de URhNq2')
-
-    add('grindless.machine.naquadria_magnet_works.charge.ok', 'Carga de helio líquido: %s mB (necesita %s mB, nunca se gasta)')
-    add('grindless.machine.naquadria_magnet_works.charge.low', 'Carga de helio líquido: %s de %s mB. Ninguna celda arranca sin la carga completa en una escotilla de entrada')
-
-    add('item.grindless.hts_insert', 'Inserto HTS')
-    add('tooltip.grindless.hts_insert.0', 'Una bobina HTS LuV anidada en bobinado de URhNq2.')
-    add('tooltip.grindless.hts_insert.1', 'La fuente de campo del imán del implantador de iones y de la fábrica de cúbits.')
-    add('emi.grindless.info.hts_insert.0', 'Se bobina en la fábrica de imanes de naquadria (circuito 3) con una bobina HTS LuV y cables simples de URhNq2. Las máquinas ZPM que necesitan un campo fuerte y estable la toman como imán.')
-    add('emi.grindless.info.cryostat_casing.0', 'La carcasa de la fábrica de imanes de naquadria: una carcasa a prueba de escarcha forrada de placas de oro y de cobre recocido, hecha en el ensamblador. Es toda la carcasa de esa multibloque.')
-})

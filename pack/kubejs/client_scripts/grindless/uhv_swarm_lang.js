@@ -49,69 +49,25 @@
                 sodium_potassium_heat_pipe: ['Sodium-Potassium Heat Pipe', 'A tungsten steel pipe with a molybdenum wick and NaK inside: it carries a segment\'s waste heat to its radiators.', 'Made in the assembler; used by the Swarm Segment Foundry.'],
                 solar_probe: ['Solar Probe', 'A heat-shielded magnetometer probe that dives through the Sun\'s corona.', 'Made in the Solar Probe Bay (circuit 2); flown by it (circuit 1).']
             }
-        },
-        es_es: {
-            site: 'Solo funciona en órbita de Mercurio.',
-            machines: {
-                swarm_segment_foundry: {
-                    name: 'Fundición de Segmentos de Enjambre',
-                    type: 'Ensamblaje de Segmentos de Enjambre',
-                    tip: '§7Construye los segmentos colectores solares del enjambre Dyson.',
-                    tips: [
-                        'Un pórtico de ensamblaje sobre una cubierta de celosía de estación que construye los colectores solares del enjambre de Dyson. Solo en la órbita de Mercurio.',
-                        'Circuito 1: 4 película reflectora de aluminio + 2 paneles solares IMM + un módulo de láser de fibra + un difusor de diamante C-12 + un módulo de potencia de SiC + 2 células betavoltaicas + un tubo de calor de sodio-potasio -> 1 segmento de enjambre.',
-                        'Circuito 2: un segmento de enjambre desgastado + 1 película reflectora + 1 panel solar IMM -> 1 segmento de enjambre + polvo pequeño de aluminio (la película retirada).',
-                        'Necesita una cubierta de celosía de estación de 9 x 7 x 9 bajo postes de marco de acero de tungsteno, un puente de rejilla de cadena de montaje y un cabezal de unidad de cadena de montaje, 1 o 2 escotillas de energía, buses de entrada y buses de salida.'
-                    ]
-                },
-                swarm_control_station: {
-                    name: 'Estación de Control del Enjambre',
-                    type: 'Enjambre de Dyson',
-                    tip: '§7Dirige los segmentos del enjambre solar y recibe su energía por láser.',
-                    tips: [
-                        'Guía los segmentos del enjambre alrededor del Sol y recoge su energía por láser: un generador. Solo en la órbita de Mercurio. Una ejecución a la vez; las escotillas paralelas no hacen nada.',
-                        'Circuito 1: 16 segmentos de enjambre + 1 cápsula de propelente de oganesón (o 1.000 mB de kriptón, media ejecución) -> 2.097.152 EU/t; 1 segmento se desgasta y el tanque vacío vuelve.',
-                        'Circuito 2: 64 segmentos de enjambre + un mapa del campo coronal (no se gasta) + 4 cápsulas -> 8.388.608 EU/t; 4 segmentos se desgastan. Los desgastados vuelven a la Fundición de Segmentos de Enjambre.',
-                        'Necesita una cubierta de celosía de estación de 11 x 5 x 11 con postes de marco de acero de tungsteno, una columna de carcasa de ordenador y una matriz de receptores láser de zafiro encima, de 1 a 4 escotillas dinamo (una dinamo UHV de 4 A sostiene el circuito 2), buses de entrada, una escotilla de entrada y buses de salida.'
-                    ]
-                },
-                solar_probe_bay: {
-                    name: 'Hangar de Sondas Solares',
-                    type: 'Sonda Solar',
-                    tip: '§7Construye sondas con escudo térmico y las lanza a la corona solar.',
-                    tips: [
-                        'Construye sondas con escudo térmico y las lanza a la corona del Sol. Solo en la órbita de Mercurio.',
-                        'Circuito 2: un aerocasco de carbono-carbono + 4 losetas UHTC + un módulo de potencia de SiC + 2 células betavoltaicas + un cristal de HPGe + un sensor UV -> 1 sonda solar.',
-                        'Circuito 1: 1 sonda solar + los datos de la heliopausa (no se gastan) -> 1 mapa del campo coronal. La sonda se quema: no vuelve nada.',
-                        'Necesita una cubierta de celosía de estación de 7 x 5 x 7 con postes de marco de acero de tungsteno, un raíl de lanzamiento de carcasas de tubería de acero de tungsteno, un anillo superior de celosía, 1 o 2 escotillas de energía, buses de entrada y un bus de salida.'
-                    ]
-                }
-            },
-            items: {
-                sodium_potassium_heat_pipe: ['Tubo de Calor de Sodio-Potasio', 'Un tubo de acero de tungsteno con una mecha de molibdeno y NaK dentro: lleva el calor sobrante de un segmento a sus radiadores.', 'Se fabrica en el ensamblador; lo usa la Fundición de Segmentos de Enjambre.'],
-                solar_probe: ['Sonda Solar', 'Una sonda magnetométrica con escudo térmico que atraviesa la corona del Sol.', 'Se fabrica en el Hangar de Sondas Solares (circuito 2); la lanza el mismo hangar (circuito 1).']
-            }
         }
     }
 
-    Object.keys(TEXT).forEach(function (lang) {
-        ClientEvents.lang(lang, function (event) {
-            var t = TEXT[lang]
-            var add = function (key, value) { event.add('grindless', key, value) }
+    ClientEvents.lang('en_us', function (event) {
+        var t = TEXT.en_us
+        var add = function (key, value) { event.add('grindless', key, value) }
 
-            Object.keys(t.machines).forEach(function (name) {
-                var m = t.machines[name]
-                add('block.gtceu.' + name, m.name)
-                for (var i = 0; i < 4; i++) add('emi.grindless.info.' + name + '.' + (2 + i), m.tips[i])
-                add('grindless.machine.' + name + '.tooltip.0', m.tip)
-                add('grindless.machine.' + name + '.tooltip.1', t.site)
-                add('gtceu.' + TYPES[name], m.type)
-            })
-            Object.keys(t.items).forEach(function (name) {
-                add('item.grindless.' + name, t.items[name][0])
-                add('tooltip.grindless.' + name + '.0', t.items[name][1])
-                add('tooltip.grindless.' + name + '.1', t.items[name][2])
-            })
+        Object.keys(t.machines).forEach(function (name) {
+            var m = t.machines[name]
+            add('block.gtceu.' + name, m.name)
+            for (var i = 0; i < 4; i++) add('emi.grindless.info.' + name + '.' + (2 + i), m.tips[i])
+            add('grindless.machine.' + name + '.tooltip.0', m.tip)
+            add('grindless.machine.' + name + '.tooltip.1', t.site)
+            add('gtceu.' + TYPES[name], m.type)
+        })
+        Object.keys(t.items).forEach(function (name) {
+            add('item.grindless.' + name, t.items[name][0])
+            add('tooltip.grindless.' + name + '.0', t.items[name][1])
+            add('tooltip.grindless.' + name + '.1', t.items[name][2])
         })
     })
 })()

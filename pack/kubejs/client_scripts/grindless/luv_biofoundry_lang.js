@@ -30,24 +30,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.biofoundry.no_voiding', 'The biofoundry keeps all it makes: the sludge, the acid and the phosphorus go back into the chain. Turn voiding off')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.biofoundry', 'Biofundición')
-    add('gtceu.sterile_culture', 'Cultivo estéril')
-
-    add('grindless.machine.biofoundry.tooltip.0', '§7Hace la cadena biológica estéril de GregTech sin sala limpia.')
-
-    add('gtceu.recipe.grindless_biofoundry.collagen_from_bone', 'Paso 1: colágeno de hueso y carne en ácido sulfúrico; el ácido diluido vuelve a ácido sulfúrico')
-    add('gtceu.recipe.grindless_biofoundry.collagen_from_bone_meal', 'Paso 2: colágeno de harina de hueso y carne; el ácido diluido vuelve a ácido sulfúrico')
-    add('gtceu.recipe.grindless_biofoundry.gelatin', 'Paso 3: la mezcla de gelatina y su centrífuga en una pasada; el fósforo vuelve a ácido fosfórico')
-    add('gtceu.recipe.grindless_biofoundry.agar', 'Paso 4: agar de gelatina en la bahía de autoclaves')
-    add('gtceu.recipe.grindless_biofoundry.bacterial_sludge', 'Paso 5: bacterias cultivadas en biomasa hasta lodo bacteriano')
-    add('gtceu.recipe.grindless_biofoundry.mutagen', 'Paso 6: el lodo enriquecido con U-235 y destilado en una pasada')
-    add('gtceu.recipe.grindless_biofoundry.sterile_growth_medium', 'Paso 7: el medio de cultivo crudo mezclado y esterilizado en una pasada')
-    add('gtceu.recipe.grindless_biofoundry.stem_cells', 'Paso 8: células madre sobre osmiridio; su lodo vuelve a mutágeno')
-    add('gtceu.recipe.grindless_biofoundry.engineered_barley_seed', 'Paso 9: las bacterias llevan el gen a la semilla. Para el anillo hidropónico giratorio')
-    add('gtceu.recipe.grindless_biofoundry.engineered_tobacco_seed', 'Paso 10: las bacterias llevan el gen a la semilla. Para el anillo hidropónico giratorio')
-
-    add('grindless.machine.biofoundry.no_voiding', 'La biofundición guarda todo lo que hace: el lodo, el ácido y el fósforo vuelven a la cadena. Desactiva el vaciado')
-})

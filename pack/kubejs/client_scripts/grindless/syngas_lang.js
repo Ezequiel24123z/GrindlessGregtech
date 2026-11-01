@@ -23,17 +23,3 @@ ClientEvents.lang('en_us', event => {
     add('tag.item.grindless.gasifier_feed', 'Gasifier Feed')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.syngas_plant', 'Planta de gas de síntesis')
-    add('gtceu.syngas', 'Gas de síntesis y desplazamiento')
-
-    add('grindless.machine.syngas_plant.tooltip.0', '§7Gasificador, reactores de desplazamiento y absorbedor de CO2 en uno.')
-    add('grindless.machine.syngas_plant.tooltip.1', 'Los modos 2 a 4 piden un catalizador de desplazamiento.')
-
-    add('item.grindless.shift_catalyst', 'Catalizador de desplazamiento')
-    add('tooltip.grindless.shift_catalyst', 'Óxido de hierro y cromo (magnetita y cromo). Va en el bus de entrada de la planta de gas de síntesis; se gasta en cerca del 0,05 % de los ciclos que desplazan.')
-
-    add('tag.item.grindless.gasifier_feed', 'Carga del gasificador')
-})

@@ -11,9 +11,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.uiv_parallel_hatch.tooltip', 'Allows up to §f16384§7 recipes to be processed at once. Each copy costs the recipe\'s own EU/t.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.uiv_parallel_hatch', 'Escotilla de control paralelo demencial')
-    add('grindless.machine.uiv_parallel_hatch.tooltip', 'Permite procesar hasta §f16384§7 recetas a la vez. Cada copia cuesta el EU/t de la receta.')
-})

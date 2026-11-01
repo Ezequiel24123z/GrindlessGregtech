@@ -30,24 +30,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.hot_cell.no_voiding', 'The hot cell keeps all it makes: the waste, the radon and the fluorine leave through their bus and hatches. Turn voiding off')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.hot_cell', 'Celda caliente')
-    add('gtceu.hot_cell', 'Celda caliente')
-
-    add('grindless.machine.hot_cell.tooltip.0', '§7Manipula material radiactivo tras un blindaje.')
-
-    add('gtceu.recipe.grindless_hot_cell.enrichment', 'Modo 1: la línea de UF6 de GregTech en una pasada; el ciclo del flúor se cierra dentro')
-    add('gtceu.recipe.grindless_hot_cell.radon', 'Modo 4: el radón del U-238 de GregTech; su catalizador de plutonio se queda dentro')
-    add('gtceu.recipe.grindless_hot_cell.mox_fuel_assembly', 'Modo 2: combustible de óxidos mixtos. Pide 2 de plutonio; su elemento gastado devuelve 1')
-    add('gtceu.recipe.grindless_hot_cell.breeder_fuel_assembly', 'Modo 2: un núcleo de plutonio en un manto de U-238. Pide 1 de plutonio; su elemento gastado devuelve 2')
-    add('gtceu.recipe.grindless_hot_cell.rtg_pellet', 'Modo 2: óxido de plutonio en una cápsula de platino y rodio')
-    add('gtceu.recipe.grindless_hot_cell.pube_neutron_source', 'Modo 2: PuBe13 en una cápsula doble de acero inoxidable')
-    add('gtceu.recipe.grindless_hot_cell.reprocess_spent_fuel', 'Modo 3: PUREX. Un elemento de LEU o de MOX devuelve 1 de plutonio y 8 de U-238')
-    add('gtceu.recipe.grindless_hot_cell.reprocess_spent_breeder', 'Modo 3: PUREX. Un elemento reproductor devuelve 2 de plutonio y 7 de U-238')
-    add('gtceu.recipe.grindless_hot_cell.silicon_28_enrichment', 'Modo 5: silicio-28 por centrifugado del fluoruro; el HF vuelve entero')
-    add('gtceu.recipe.grindless_hot_cell.boron_11_enrichment', 'Modo 6: el trifluoruro de boro se separa en boro-11 y boro-10 por destilación de intercambio')
-
-    add('grindless.machine.hot_cell.no_voiding', 'La celda caliente guarda todo lo que hace: el residuo, el radón y el flúor salen por su bus y sus escotillas. Desactiva el vaciado')
-})

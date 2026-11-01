@@ -30,21 +30,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.tritium_removal_facility.not_moon', 'This facility only works on the Moon: its recipe does not start here')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.tritium_removal_facility', 'Planta de extracción de tritio')
-    add('gtceu.detritiation', 'Destritiación')
-
-    add('grindless.machine.tritium_removal_facility.tooltip.0', '§7Extrae el tritio del moderador agotado de fisión.')
-
-    add('grindless.machine.tritium_removal_facility.sky.night', 'Noche lunar, radiadores abiertos al cielo: el próximo ciclo cuesta la mitad')
-    add('grindless.machine.tritium_removal_facility.sky.day', 'El sol está arriba: el próximo ciclo cuesta el precio completo')
-    add('grindless.machine.tritium_removal_facility.sky.covered', 'Es de noche, pero %s radiadores no ven el cielo: el próximo ciclo cuesta el precio completo')
-
-    add('grindless.machine.tritium_removal_facility.carrier.ok', 'Portador de deuterio: %s mB (necesita %s mB, nunca se gasta)')
-    add('grindless.machine.tritium_removal_facility.carrier.low', 'Portador de deuterio: %s de %s mB. No arranca nada sin la carga completa en una escotilla de entrada')
-
-    add('grindless.machine.tritium_removal_facility.no_voiding', 'La planta guarda todo lo que hace: el tritio y el agua pesada salen por sus escotillas. Desactiva el vaciado de fluidos')
-    add('grindless.machine.tritium_removal_facility.not_moon', 'Esta planta solo funciona en la Luna: aquí su receta no arranca')
-})

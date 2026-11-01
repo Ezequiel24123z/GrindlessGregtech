@@ -7,7 +7,7 @@
 //   grindless:lunar_chart_draft, photographic_plate, lunar_map, lunar_ephemeris, lunar_landing_chart   (items)
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts: Minecraft merges lang entries from every
-// namespace/script, so ClientEvents.lang works wherever it is declared. Quests are English only; names go in en_us and es_es.
+// namespace/script, so ClientEvents.lang works wherever it is declared. Quests are English only; names go in en_us.
 // GTM's own condition lines (night, rain level, thunder level, Y range) keep GTM's text; the sky line above says in words what a
 // reversed rain or thunder condition means.
 ClientEvents.lang('en_us', event => {
@@ -49,41 +49,3 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.lunar_landing_chart.1', 'From the Radio Telescope: the landing site of the first trip to the Moon. Copy: chart + paper + coal dust.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.steam_observatory', 'Observatorio de relojería')
-    add('block.gtceu.optical_observatory', 'Observatorio óptico')
-    add('block.gtceu.radio_telescope', 'Radiotelescopio')
-    add('gtceu.stargazing', 'Observación al ocular')
-    add('gtceu.astrophotography', 'Astrofotografía')
-    add('gtceu.radio_astronomy', 'Radioastronomía')
-
-    add('grindless.machine.steam_observatory.tooltip.0', '§7Un telescopio de bronce de relojería: la carta lunar (borrador).')
-    add('grindless.machine.steam_observatory.tooltip.1', 'Solo de noche, cielo despejado y controlador a Y 100 o más.')
-
-    add('grindless.machine.optical_observatory.tooltip.0', '§7Una cúpula de acero con refractor: mapa fotográfico y efemérides lunares.')
-    add('grindless.machine.optical_observatory.tooltip.1', 'Solo funciona de noche y con el cielo despejado.')
-
-    add('grindless.machine.radio_telescope.tooltip.0', '§7Tres antenas rebotan radar en la Luna: la carta de sitios de alunizaje.')
-    add('grindless.machine.radio_telescope.tooltip.1', 'Funciona de noche, pero no con tormenta eléctrica.')
-
-    add('gtceu.recipe.grindless_sky.steam', 'Cielo: noche despejada, controlador en Y 100 o más')
-    add('gtceu.recipe.grindless_sky.optical', 'Cielo: noche despejada, a cualquier altura')
-    add('gtceu.recipe.grindless_sky.radio', 'Cielo: de noche; con lluvia sí, con tormenta no')
-
-    add('item.grindless.lunar_chart_draft', 'Carta lunar (borrador)')
-    add('tooltip.grindless.lunar_chart_draft.0', 'Dibujada en el ocular a la luz de un farol: mares oscuros, tierras altas claras, los grandes cráteres y sus rayos.')
-    add('tooltip.grindless.lunar_chart_draft.1', 'Del observatorio de relojería. El observatorio óptico la lee sin gastarla. Copia: borrador + papel + polvo de carbón.')
-    add('item.grindless.photographic_plate', 'Placa fotográfica')
-    add('tooltip.grindless.photographic_plate.0', 'Vidrio con una emulsión de plata. El observatorio óptico la expone a la Luna; sobre un mapa lunar, imprime una copia.')
-    add('item.grindless.lunar_map', 'Mapa fotográfico de la Luna')
-    add('tooltip.grindless.lunar_map.0', 'Placas unidas en un solo mapa: grietas, cadenas de cráteres, sombras largas en el terminador. Ya se distingue el suelo llano del abrupto.')
-    add('tooltip.grindless.lunar_map.1', 'Del observatorio óptico. El radiotelescopio lo lee sin gastarlo. Copia: mapa + placa fotográfica.')
-    add('item.grindless.lunar_ephemeris', 'Efemérides lunares')
-    add('tooltip.grindless.lunar_ephemeris.0', 'Tablas de dónde estará la Luna noche tras noche. Con ellas una antena encuentra la Luna sin verla.')
-    add('tooltip.grindless.lunar_ephemeris.1', 'Del observatorio óptico, junto con el mapa. El radiotelescopio las lee sin gastarlas. Copia: efemérides + papel + polvo de carbón.')
-    add('item.grindless.lunar_landing_chart', 'Carta del lugar de alunizaje')
-    add('tooltip.grindless.lunar_landing_chart.0', 'Ecos de radar sobre el mapa fotográfico: mares lisos, campos de rocas, paredes de cráter empinadas. Una elipse sobre un mar llano, marcada en rojo.')
-    add('tooltip.grindless.lunar_landing_chart.1', 'Del radiotelescopio: el lugar de alunizaje del primer viaje a la Luna. Copia: carta + papel + polvo de carbón.')
-})

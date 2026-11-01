@@ -177,7 +177,7 @@
         }
       }
       if (!/^#[0-9A-Fa-f]{6}$/.test(String(mob.color))) problems.push(where + 'color must be #RRGGBB')
-      if (!mob.name || !mob.name.en_us || !mob.name.es_es) problems.push(where + 'name needs en_us and es_es')
+      if (!mob.name || !mob.name.en_us) problems.push(where + 'name needs en_us')
       if (!Item.exists(mob.model)) problems.push(where + 'model item ' + mob.model + ' is not registered (startup table out of sync?)')
 
       if (mob.mineral) {

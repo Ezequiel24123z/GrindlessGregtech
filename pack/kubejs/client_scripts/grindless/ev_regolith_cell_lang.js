@@ -18,17 +18,6 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.platinum_electrode.regolith_cell', 'Also the anode of the Regolith Cell\'s electrolysis, on the Moon.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.regolith_cell', 'Celda de regolito')
-    add('gtceu.regolith_processing', 'Procesado de regolito')
-
-    add('grindless.machine.regolith_cell.tooltip.0', '§7Procesa regolito lunar en sus gases y minerales.')
-
-    add('tooltip.grindless.platinum_electrode.regolith_cell', 'También es el ánodo de la electrólisis de la celda de regolito, en la Luna.')
-})
-
 ItemEvents.tooltip(event => {
     event.add('grindless:platinum_electrode', Text.translate('tooltip.grindless.platinum_electrode.regolith_cell').darkGray())
 })

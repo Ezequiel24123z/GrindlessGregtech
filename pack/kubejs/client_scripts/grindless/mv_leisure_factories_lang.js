@@ -24,20 +24,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.universal_mixing_factory.tooltip.0', '§7Mixer, chemical reactor, chemical bath and ore washer in one.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.universal_processing_factory', 'Fábrica universal de procesado')
-    add('block.gtceu.universal_assembly_factory', 'Fábrica universal de ensamblaje')
-    add('block.gtceu.universal_separation_factory', 'Fábrica universal de separación')
-    add('block.gtceu.universal_mixing_factory', 'Fábrica universal de mezcla')
-
-
-    add('grindless.machine.universal_processing_factory.tooltip.0', '§7Once máquinas en una, a elegir en la pestaña de modo de máquina.')
-
-    add('grindless.machine.universal_assembly_factory.tooltip.0', '§7Ensambladora y ensambladora de circuitos en una, a elegir en la pestaña de modo.')
-
-    add('grindless.machine.universal_separation_factory.tooltip.0', '§7Siete máquinas en una, a elegir en la pestaña de modo de máquina.')
-
-    add('grindless.machine.universal_mixing_factory.tooltip.0', '§7Mezcladora, reactor químico, baño químico y lavadora de mena en una.')
-})

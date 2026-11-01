@@ -5,7 +5,7 @@
 //   tooltip.grindless.entangled_planet.mars          (the extra line on the Earth-Mars pairs; moon_lang.js adds it to every marked pair)
 //   planet.grindless.mars                            (the planet's name in the messages of moon/quantum_bridge.js)
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Quests are English only; names go in en_us and es_es.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Quests are English only; names go in en_us.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
@@ -17,13 +17,3 @@ ClientEvents.lang('en_us', event => {
     add('planet.grindless.mars', 'Mars')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('item.grindless.martian_quantum_seed', 'Semilla cuántica marciana')
-    add('tooltip.grindless.martian_quantum_seed.0', 'La mitad marciana de un par cuántico Tierra-Marte. Solo se hace en Marte: reactor químico, polvo de merrillita + perla de ender + helio-3.')
-    add('tooltip.grindless.martian_quantum_seed.1', 'Échala a una explosión con una singularidad de AE2 (la mitad de la Tierra): salen dos singularidades entrelazadas que también unen la Tierra y Marte.')
-    add('tooltip.grindless.entangled_planet.mars', 'Par Tierra-Marte: un extremo puede estar en Marte.')
-
-    add('planet.grindless.mars', 'Marte')
-})

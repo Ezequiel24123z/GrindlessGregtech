@@ -15,12 +15,3 @@ ClientEvents.lang('en_us', event => {
     event.add('grindless', 'message.grindless.travel_key.failed', 'The key fails: the trip did not happen (details in logs/kubejs/server.log).')
 })
 
-ClientEvents.lang('es_es', event => {
-    event.add('grindless', 'item.grindless.void_key', 'Llave del Vacío')
-    event.add('grindless', 'item.grindless.void_key.tooltip', 'Teletransporta a la dimensión Vacío. Úsala otra vez para volver.')
-    event.add('grindless', 'item.grindless.flat_key', 'Llave del Llano')
-    event.add('grindless', 'item.grindless.flat_key.tooltip', 'Teletransporta a la dimensión Llano. Úsala otra vez para volver.')
-    event.add('grindless', 'item.grindless.end_key', 'Llave del End')
-    event.add('grindless', 'item.grindless.end_key.tooltip', 'Teletransporta a una plataforma segura en el End, lejos de la isla central. Úsala otra vez para volver.')
-    event.add('grindless', 'message.grindless.travel_key.failed', 'La llave falla: el viaje no se ha hecho (detalles en logs/kubejs/server.log).')
-})

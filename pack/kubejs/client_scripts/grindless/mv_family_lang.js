@@ -21,17 +21,3 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.vanadium_steel_drill_bit', 'Wears out by chance: about 1% of the runs, 0.5% with drilling fluid. Only the MV Vein Drill takes it.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.mv_vein_drill', 'Perforadora de vetas MV')
-    add('block.gtceu.mv_greenhouse', 'Invernadero MV')
-
-    add('grindless.machine.mv_vein_drill.tooltip.0', '§7Perfora la veta que marca la muestra, hasta 16 perforaciones a la vez.')
-    add('grindless.machine.mv_vein_drill.tooltip.1', 'Usa una broca de acero vanádico.')
-
-    add('grindless.machine.mv_greenhouse.tooltip.0', '§7Cultiva árboles, cosechas, setas y flores, hasta 16 a la vez.')
-
-    add('item.grindless.vanadium_steel_drill_bit', 'Broca de acero vanádico')
-    add('tooltip.grindless.vanadium_steel_drill_bit', 'Se desgasta por probabilidad: cerca del 1 % de los ciclos, 0,5 % con lodo de perforación. Solo la admite la perforadora de vetas MV.')
-})

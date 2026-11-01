@@ -33,53 +33,26 @@
                 germanium_tetrachloride: 'Germanium Tetrachloride', trimethylgallium: 'Trimethylgallium', trimethylindium: 'Trimethylindium',
                 acrylate_coating: 'Acrylate Coating', ytterbium_oxide: 'Ytterbium Oxide'
             }
-        },
-        es_es: {
-            tower: 'Torre de Estirado de Fibra', reactor: 'Reactor MOCVD',
-            towerType: 'Estirado de fibra', reactorType: 'MOCVD',
-            towerTips: [
-                '§7Estira fibra dopada con Yb y módulos láser de fibra.'
-            ],
-            reactorTips: [
-                '§7Hace crecer semiconductores compuestos capa a capa.'
-            ],
-            items: {
-                yb_doped_preform: ['Preforma dopada con Yb', 'Una barra de silice con nucleo dopado con iterbio, depositada capa a capa dentro de un tubo que gira.', 'Se hace en la Torre de Estirado de Fibra (circuito 1).'],
-                fibre_bragg_grating: ['Red de Bragg en fibra', 'Un espejo escrito con laser en el nucleo de la fibra: cierra la cavidad del laser.', 'Se hace en un grabador laser con una bobina de fibra (lente morada).'],
-                gallium_arsenide_boule: ['Lingote de arseniuro de galio', 'Un monocristal de arseniuro de galio crecido bajo argon.', 'Se hace en un alto horno electrico (circuito 6).'],
-                gallium_arsenide_wafer: ['Oblea de arseniuro de galio', 'El sustrato sobre el que crecen las capas de InGaAs.', 'Se corta de un lingote de arseniuro de galio.'],
-                sapphire_boule: ['Lingote de zafiro', 'Un monocristal de zafiro crecido desde el fundido bajo argon.', 'Se hace en un alto horno electrico con un bloque de zafiro.'],
-                sapphire_wafer: ['Oblea de zafiro', 'El sustrato de la pelicula de nitruro de niobio.', 'Se corta de un lingote de zafiro.'],
-                ingaas_epi_wafer: ['Oblea epitaxial de InGaAs', 'Pozos cuanticos de arseniuro de indio y galio crecidos sobre arseniuro de galio.', 'Se hace en el Reactor MOCVD (circuito 2).'],
-                ingaas_diode_bar: ['Barra de diodos InGaAs', 'Una barra cortada de diodos laser que bombean la fibra de iterbio a 976 nm.', 'Se hace en el Reactor MOCVD (circuito 3).'],
-                nbn_film_wafer: ['Oblea con pelicula de NbN', 'Unos nanometros de nitruro de niobio sobre zafiro, el material de los detectores de fotones individuales.', 'Se hace en el Reactor MOCVD (circuito 4).']
-            },
-            materials: {
-                germanium_tetrachloride: 'Tetracloruro de germanio', trimethylgallium: 'Trimetilgalio', trimethylindium: 'Trimetilindio',
-                acrylate_coating: 'Recubrimiento de acrilato', ytterbium_oxide: 'Oxido de iterbio'
-            }
         }
     }
 
-    Object.keys(TEXT).forEach(function (lang) {
-        ClientEvents.lang(lang, function (event) {
-            var t = TEXT[lang]
-            var add = function (key, value) { event.add('grindless', key, value) }
+    ClientEvents.lang('en_us', function (event) {
+        var t = TEXT.en_us
+        var add = function (key, value) { event.add('grindless', key, value) }
 
-            add('block.gtceu.fibre_draw_tower', t.tower)
-            add('block.gtceu.mocvd_reactor', t.reactor)
-            add('gtceu.fibre_draw', t.towerType)
-            add('gtceu.mocvd', t.reactorType)
-            for (var i = 0; i < 1; i++) {
-                add('grindless.machine.fibre_draw_tower.tooltip.' + i, t.towerTips[i])
-                add('grindless.machine.mocvd_reactor.tooltip.' + i, t.reactorTips[i])
-            }
-            Object.keys(t.items).forEach(function (name) {
-                add('item.grindless.' + name, t.items[name][0])
-                add('tooltip.grindless.' + name + '.0', t.items[name][1])
-                add('tooltip.grindless.' + name + '.1', t.items[name][2])
-            })
-            Object.keys(t.materials).forEach(function (name) { add('material.gtceu.' + name, t.materials[name]) })
+        add('block.gtceu.fibre_draw_tower', t.tower)
+        add('block.gtceu.mocvd_reactor', t.reactor)
+        add('gtceu.fibre_draw', t.towerType)
+        add('gtceu.mocvd', t.reactorType)
+        for (var i = 0; i < 1; i++) {
+            add('grindless.machine.fibre_draw_tower.tooltip.' + i, t.towerTips[i])
+            add('grindless.machine.mocvd_reactor.tooltip.' + i, t.reactorTips[i])
+        }
+        Object.keys(t.items).forEach(function (name) {
+            add('item.grindless.' + name, t.items[name][0])
+            add('tooltip.grindless.' + name + '.0', t.items[name][1])
+            add('tooltip.grindless.' + name + '.1', t.items[name][2])
         })
+        Object.keys(t.materials).forEach(function (name) { add('material.gtceu.' + name, t.materials[name]) })
     })
 })()

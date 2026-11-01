@@ -27,28 +27,3 @@ ClientEvents.lang('en_us', function (event) {
   Object.keys(entries).forEach(function (key) { event.add('grindless', key, entries[key]) })
 })
 
-ClientEvents.lang('es_es', function (event) {
-  var entries = {
-    'block.gtceu.harpoon_anchor_drill': 'Perforadora anclada con arpones',
-    'block.gtceu.asteroid_processor': 'Procesador de asteroides',
-    'block.gtceu.optical_miner': 'Minero óptico',
-    'gtceu.asteroid_processing': 'Procesado de asteroides',
-    'gtceu.optical_mining': 'Minería óptica',
-    'grindless.machine.harpoon_anchor_drill.tooltip.0': '§7Perfora vetas de asteroides, anclado a la roca con arpones.',
-    'grindless.machine.asteroid_processor.tooltip.0': '§7Separa el metal de asteroide en hierro, níquel y cobalto (proceso Mond).',
-    'grindless.machine.asteroid_processor.no_voiding': 'El procesador de asteroides conserva su concentrado de MGP. Desactiva la destrucción de objetos.',
-    'grindless.machine.optical_miner.tooltip.0': '§7Fragmenta rocas de asteroide con luz solar concentrada.',
-    'grindless.machine.optical_miner.no_voiding': 'El minero óptico conserva su agua, sus gases y su extracto. Desactiva la destrucción de objetos y fluidos.',
-    'grindless.machine.optical_miner.no_sun': 'La minería óptica necesita el sol en el receptor y todos los espejos bajo el cielo abierto',
-    'grindless.machine.optical_miner.sun.sun': 'A pleno sol: la minería óptica puede empezar',
-    'grindless.machine.optical_miner.sun.night': 'Noche: la minería óptica espera al sol',
-    'grindless.machine.optical_miner.sun.shaded': 'A la sombra: %s entre el receptor y los 8 espejos no ven el cielo',
-    'gtceu.recipe.grindless_optical_sun.boulder': 'Solo empieza a pleno sol en el receptor y los 8 espejos',
-    'tooltip.grindless.vein_sample.drill_harpoon': 'Ponla en el bus de entrada de la perforadora anclada con arpones. No se gasta.',
-    'tooltip.grindless.vein_sample.asteroid_belt': 'El cinturón de asteroides: se hace con una sonda de vetas vacía y dos menas en bruto de la veta traídas a mano en la primera visita.',
-    'item.grindless.vein_sample_m_type_belt': 'Muestra de veta de asteroide de tipo M',
-    'item.grindless.vein_sample_s_type_belt': 'Muestra de veta de asteroide de tipo S',
-    'item.grindless.vein_sample_c_type_belt': 'Muestra de veta de asteroide de tipo C'
-  }
-  Object.keys(entries).forEach(function (key) { event.add('grindless', key, entries[key]) })
-})

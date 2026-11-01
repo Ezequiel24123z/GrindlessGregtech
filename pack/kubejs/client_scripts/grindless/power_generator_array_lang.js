@@ -18,14 +18,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.generators.dynamo_too_small', 'The dynamo hatches cannot carry even one run of this fuel')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.generator_array', 'Matriz de generadores')
-
-    add('grindless.machine.generator_array.tooltip.0', '§7Hasta 16 turbinas de vapor, generadores de combustión o de gas en una nave.')
-
-    add('grindless.generators.capacity', 'Las escotillas dinamo llevan hasta %s EU/t')
-    add('grindless.generators.output', 'Produciendo %s EU/t: %s ciclos en paralelo (hasta %s)')
-    add('grindless.generators.dynamo_too_small', 'Las escotillas dinamo no pueden llevar ni un ciclo de este combustible')
-})

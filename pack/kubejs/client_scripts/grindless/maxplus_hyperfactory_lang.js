@@ -2,9 +2,9 @@
 // Gregtech Grindless - names and tooltips of MAX+'s Hyperfactory and parallel hatch (startup_scripts/grindless/maxplus/hyperfactory.js and
 // lib/parallel_hatch.js; package XP-M1). The EMI info keys are here: the shared emi_info_lang.js and the additions json are the integrator's.
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. The es_es keys (still required by T0) copy the English text.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {
-    // [key, text]; the pack is English only, so es_es gets the same text
+    // [key, text]
     var ENTRIES = [
         ['gtceu.hyperfactory', 'Hyperfactory'],
         ['block.gtceu.hyperfactory', 'Hyperfactory'],
@@ -16,11 +16,9 @@
         ['emi.grindless.info.max_maxplus_parallel_hatch.0', 'Up to 4,194,304 parallel copies (4^11). The Hyperfactory takes it as its parallel hatch.']
     ]
 
-    ;['en_us', 'es_es'].forEach(function (lang, li) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()

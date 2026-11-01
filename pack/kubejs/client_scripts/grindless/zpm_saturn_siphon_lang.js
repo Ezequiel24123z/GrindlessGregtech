@@ -18,19 +18,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.ring_harvester.tooltip.0', '§7Harvests ring ice with net booms and a melt tank.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.gas_giant_siphon', 'Sifón de gigante gaseoso')
-    add('block.gtceu.isotope_column', 'Columna de isótopos')
-    add('block.gtceu.ring_harvester', 'Cosechadora de anillos')
-    add('gtceu.gas_giant_siphon', 'Sifón de gigante gaseoso')
-    add('gtceu.cryogenic_isotope_separation', 'Separación criogénica de isótopos')
-    add('gtceu.ring_harvesting', 'Cosecha de anillos')
-
-    add('grindless.machine.gas_giant_siphon.tooltip.0', '§7Sumerge una sonda con cable en las nubes de Saturno.')
-
-    add('grindless.machine.isotope_column.tooltip.0', '§7Una columna criogénica que separa helio-3.')
-
-    add('grindless.machine.ring_harvester.tooltip.0', '§7Recoge hielo de los anillos con redes y un tanque de fusión.')
-})

@@ -14,16 +14,3 @@ ClientEvents.lang('en_us', function (event) {
   Object.keys(entries).forEach(function (key) { event.add('grindless', key, entries[key]) })
 })
 
-ClientEvents.lang('es_es', function (event) {
-  var entries = {
-    'block.gtceu.cryobot': 'Criobot',
-    'block.gtceu.algae_bioreactor': 'Biorreactor de algas',
-    'gtceu.bioreactor': 'Biorreactor',
-    'material.gtceu.magnesium_sulfate': 'Sulfato de magnesio',
-    'grindless.machine.cryobot.tooltip.0': '§7Atraviesa el hielo de Europa y perfora su océano.',
-    'grindless.machine.cryobot.no_voiding': 'El criobot conserva la muestra del océano y la salmuera. Desactiva el descarte de objetos y fluidos.',
-    'grindless.machine.algae_bioreactor.tooltip.0': '§7Cultiva algas y bacterias bajo lámparas LED.',
-    'grindless.machine.algae_bioreactor.no_voiding': 'El biorreactor conserva la única materia viva del pack. Desactiva el descarte de objetos y fluidos.'
-  }
-  Object.keys(entries).forEach(function (key) { event.add('grindless', key, entries[key]) })
-})

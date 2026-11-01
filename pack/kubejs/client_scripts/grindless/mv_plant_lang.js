@@ -21,17 +21,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.biorefinery.tooltip.1', 'Every layer needs exactly one output hatch.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.ore_plant', 'Planta de mineral')
-    add('gtceu.ore_processing', 'Procesado de menas')
-
-    add('grindless.machine.ore_plant.tooltip.0', '§7Toda la cadena de menas de una pasada: macerar, lavar, centrifugar, macerar.')
-
-    add('block.gtceu.biorefinery', 'Biorrefinería')
-    add('gtceu.bio_distillation', 'Biodestilación')
-
-    add('grindless.machine.biorefinery.tooltip.0', '§7Columna de destilación de fluidos orgánicos: todas las fracciones juntas.')
-    add('grindless.machine.biorefinery.tooltip.1', 'Cada capa lleva exactamente una escotilla de salida.')
-})

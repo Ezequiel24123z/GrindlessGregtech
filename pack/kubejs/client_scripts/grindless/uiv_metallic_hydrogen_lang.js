@@ -7,59 +7,52 @@
 //   material.gtceu.<fluid>                                        protium, para-hydrogen and liquid para-hydrogen
 //   item.grindless.<n>, tooltip.grindless.<n>.0 / .1              the package's own items
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {
-    // [key, en, es]
+    // [key, en]
     var ENTRIES = [
-        ['block.gtceu.ramp_compression_pulser', 'Ramp-Compression Pulser', 'Pulsador de compresión en rampa'],
-        ['gtceu.ramp_compression', 'Ramp Compression', 'Compresión en rampa'],
+        ['block.gtceu.ramp_compression_pulser', 'Ramp-Compression Pulser'],
+        ['gtceu.ramp_compression', 'Ramp Compression'],
 
-        ['material.gtceu.protium', 'Protium', 'Protio'],
-        ['material.gtceu.para_hydrogen', 'Para-Hydrogen', 'Parahidrógeno'],
-        ['material.gtceu.liquid_para_hydrogen', 'Liquid Para-Hydrogen', 'Parahidrógeno líquido'],
+        ['material.gtceu.protium', 'Protium'],
+        ['material.gtceu.para_hydrogen', 'Para-Hydrogen'],
+        ['material.gtceu.liquid_para_hydrogen', 'Liquid Para-Hydrogen'],
 
         ['grindless.machine.ramp_compression_pulser.tooltip.0',
-            '\u00a77A pulsed-power ring that makes metallic hydrogen and lonsdaleite.',
-            '\u00a77Un anillo de potencia pulsada que fabrica hidrógeno metálico y lonsdaleíta.'],
+            '\u00a77A pulsed-power ring that makes metallic hydrogen and lonsdaleite.'],
 
         ['gtceu.recipe.grindless_naquadria_magnets.mh_winding',
-            'Circuit 7: a metallic hydrogen winding, 16 wires round tungsten plates (UIV-A2).',
-            'Circuito 7: un bobinado de hidrógeno metálico, 16 hilos sobre placas de wolframio (UIV-A2).'],
+            'Circuit 7: a metallic hydrogen winding, 16 wires round tungsten plates (UIV-A2).'],
 
         ['gtceu.recipe.grindless_ramp_compression.mh_quench',
-            'Fiction: real metallic hydrogen needs about 400 GPa and reverts on release; here the pulser quenches it so the rod survives at one atmosphere. The hydrogen shards go back to the cryogenic plant.',
-            'Ficción: el hidrógeno metálico real necesita unos 400 GPa y revierte al liberar la presión; aquí el pulsador lo templa y la barra sobrevive a una atmósfera. Los restos de hidrógeno vuelven a la planta criogénica.'],
+            'Fiction: real metallic hydrogen needs about 400 GPa and reverts on release; here the pulser quenches it so the rod survives at one atmosphere. The hydrogen shards go back to the cryogenic plant.'],
         ['gtceu.recipe.grindless_ramp_compression.lonsdaleite_shock',
-            'Shock-compressed pyrolytic graphite turns into hexagonal diamond; the unconverted graphite goes back to stock.',
-            'El grafito pirolítico comprimido por choque se convierte en diamante hexagonal; el grafito sin convertir vuelve al almacén.'],
+            'Shock-compressed pyrolytic graphite turns into hexagonal diamond; the unconverted graphite goes back to stock.'],
         ['gtceu.recipe.grindless_ramp_compression.cg_nitrogen_shock',
-            'Fiction: real cubic gauche nitrogen needs about 110 GPa and decomposes on release; here the pulser quenches it. The spare N2 goes back to the cryogenic plant.',
-            'Ficción: el nitrógeno cúbico gauche real necesita unos 110 GPa y se descompone al liberar la presión; aquí el pulsador lo templa. El N2 sobrante vuelve a la planta criogénica.']
+            'Fiction: real cubic gauche nitrogen needs about 110 GPa and decomposes on release; here the pulser quenches it. The spare N2 goes back to the cryogenic plant.']
     ]
 
-    // [name, en, es, tooltip 0 en, tooltip 0 es, tooltip 1 en, tooltip 1 es]
+    // [name, en, tooltip 0, tooltip 1]
     var ITEMS = [
-        ['solid_para_h2_target', 'Solid Para-H2 Target', 'Blanco sólido de para-H2', 'Liquid para-hydrogen frozen in a superfluid helium bath.', 'Parahidrógeno líquido congelado en un baño de helio superfluido.', 'Compressed to metallic hydrogen in the pulser (circuit 1).', 'Se comprime a hidrógeno metálico en el pulsador (circuito 1).'],
-        ['pyrolytic_graphite', 'Pyrolytic Graphite', 'Grafito pirolítico', 'Graphite laid down layer by layer from hot methane.', 'Grafito depositado capa a capa a partir de metano caliente.', 'Shocked into lonsdaleite in the pulser (circuit 2).', 'Se convierte en lonsdaleíta por choque en el pulsador (circuito 2).'],
-        ['leached_lonsdaleite', 'Leached Lonsdaleite', 'Lonsdaleíta lixiviada', 'Shocked lonsdaleite with its graphite skin etched off.', 'Lonsdaleíta de choque con la piel de grafito disuelta.', 'Cut into a race in a laser engraver.', 'Se corta en una pista en un grabador láser.'],
-        ['lonsdaleite_race', 'Lonsdaleite Race', 'Pista de lonsdaleíta', 'A bearing race cut from hexagonal diamond.', 'Una pista de rodamiento tallada en diamante hexagonal.', 'Two races and a tungsten plate make a bearing.', 'Dos pistas y una placa de wolframio forman un rodamiento.'],
-        ['lonsdaleite_bearing', 'Lonsdaleite Bearing', 'Rodamiento de lonsdaleíta', 'Harder than diamond, and it runs in lubricant.', 'Más duro que el diamante, y trabaja en lubricante.', 'Goes into the UIV electric piston.', 'Va en el pistón eléctrico UIV.'],
-        ['dac_charge', 'DAC Charge', 'Carga de DAC', 'Nitrogen sealed in a diamond anvil cell.', 'Nitrógeno sellado en una celda de yunque de diamante.', 'Heated with a laser before the pulser.', 'Se calienta con un láser antes del pulsador.'],
-        ['laser_heated_n2_charge', 'Laser-Heated N2 Charge', 'Carga de N2 calentada con láser', 'Nitrogen heated past 2000 K inside its cell.', 'Nitrógeno calentado por encima de 2000 K dentro de su celda.', 'Shocked into cubic gauche nitrogen in the pulser (circuit 3).', 'Se convierte en nitrógeno cúbico gauche por choque en el pulsador (circuito 3).'],
-        ['quenched_cg_nitrogen', 'Quenched cg-N', 'cg-N templado', 'Cubic gauche nitrogen that survives at one atmosphere (fiction).', 'Nitrógeno cúbico gauche que sobrevive a una atmósfera (ficción).', 'The polymeric nitrogen the fuel lines will use.', 'El nitrógeno polimérico que usarán las líneas de combustible.']
+        ['solid_para_h2_target', 'Solid Para-H2 Target', 'Liquid para-hydrogen frozen in a superfluid helium bath.', 'Compressed to metallic hydrogen in the pulser (circuit 1).'],
+        ['pyrolytic_graphite', 'Pyrolytic Graphite', 'Graphite laid down layer by layer from hot methane.', 'Shocked into lonsdaleite in the pulser (circuit 2).'],
+        ['leached_lonsdaleite', 'Leached Lonsdaleite', 'Shocked lonsdaleite with its graphite skin etched off.', 'Cut into a race in a laser engraver.'],
+        ['lonsdaleite_race', 'Lonsdaleite Race', 'A bearing race cut from hexagonal diamond.', 'Two races and a tungsten plate make a bearing.'],
+        ['lonsdaleite_bearing', 'Lonsdaleite Bearing', 'Harder than diamond, and it runs in lubricant.', 'Goes into the UIV electric piston.'],
+        ['dac_charge', 'DAC Charge', 'Nitrogen sealed in a diamond anvil cell.', 'Heated with a laser before the pulser.'],
+        ['laser_heated_n2_charge', 'Laser-Heated N2 Charge', 'Nitrogen heated past 2000 K inside its cell.', 'Shocked into cubic gauche nitrogen in the pulser (circuit 3).'],
+        ['quenched_cg_nitrogen', 'Quenched cg-N', 'Cubic gauche nitrogen that survives at one atmosphere (fiction).', 'The polymeric nitrogen the fuel lines will use.']
     ]
 
     ITEMS.forEach(function (i) {
-        ENTRIES.push(['item.grindless.' + i[0], i[1], i[2]])
-        ENTRIES.push(['tooltip.grindless.' + i[0] + '.0', i[3], i[4]])
-        ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[5], i[6]])
+        ENTRIES.push(['item.grindless.' + i[0], i[1]])
+        ENTRIES.push(['tooltip.grindless.' + i[0] + '.0', i[2]])
+        ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[3]])
     })
 
-    ;['en_us', 'es_es'].forEach(function (lang, li) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1 + li])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()

@@ -29,22 +29,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.large_steam_ore_washer.tooltip.0', '§7Runs ore washer recipes on steam, up to 64 in parallel.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = (key, value) => event.add('grindless', key, value)
-
-    add('block.gtceu.large_steam_macerator', 'Macerador de vapor grande')
-    add('block.gtceu.large_steam_centrifuge', 'Centrífuga de vapor grande')
-    add('block.gtceu.large_steam_thermal_centrifuge', 'Centrífuga térmica de vapor grande')
-    add('block.gtceu.large_steam_chemical_bath', 'Baño químico de vapor grande')
-    add('block.gtceu.large_steam_ore_washer', 'Lavadora de mena de vapor grande')
-
-    add('grindless.machine.large_steam_macerator.tooltip.0', '§7Corre recetas de macerador con vapor, hasta 64 a la vez.')
-
-    add('grindless.machine.large_steam_centrifuge.tooltip.0', '§7Corre recetas de centrífuga con vapor, hasta 64 a la vez.')
-
-    add('grindless.machine.large_steam_thermal_centrifuge.tooltip.0', '§7Corre recetas de centrífuga térmica con vapor, hasta 64 a la vez.')
-
-    add('grindless.machine.large_steam_chemical_bath.tooltip.0', '§7Corre recetas de baño químico con vapor, hasta 64 a la vez.')
-
-    add('grindless.machine.large_steam_ore_washer.tooltip.0', '§7Corre recetas de lavadora de mena con vapor, hasta 64 a la vez.')
-})

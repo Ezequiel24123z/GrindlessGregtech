@@ -8,7 +8,7 @@
 //   gtceu.recipe.grindless_naquadria_magnets.uv_smes_cell                                 the EMI line of circuit 4
 //
 // Same format as wireless_energy_lang.js (whose tooltips and messages are shared by every tier), coloured like GTM's UV energy hatches
-// (§3, dark aqua). Names go in en_us and es_es.
+// (§3, dark aqua). Names go in en_us.
 (function () {
   const SECTION = '\u00a7'
   const T = { id: 'uv', name: 'UV', colour: '3' }
@@ -28,16 +28,4 @@
     add('gtceu.recipe.grindless_naquadria_magnets.uv_smes_cell', 'Circuit 4: the wireless network\'s UV cell, EnTED windings cold-tested in the helium charge')
   })
 
-  ClientEvents.lang('es_es', function (event) {
-    var add = function (key, value) { event.add('grindless', key, value) }
-    AMPS.forEach(function (a) {
-      var amps = a === 2 ? '' : ' de ' + a + ' A'
-      event.add('gtceu', 'block.gtceu.' + T.id + '_wireless_energy_hatch' + suffix(a), SECTION + T.colour + 'Escotilla de energía inalámbrica ' + T.name + amps)
-      event.add('gtceu', 'block.gtceu.' + T.id + '_wireless_dynamo_hatch' + suffix(a), SECTION + T.colour + 'Escotilla dinamo inalámbrica ' + T.name + amps)
-    })
-    add('block.grindless.uv_smes_cell', 'Celda SMES UV')
-    add('item.grindless.uv_wireless_energy_cover', SECTION + T.colour + 'Cubierta de energía inalámbrica ' + T.name)
-    add('item.grindless.uv_wireless_dynamo_cover', SECTION + T.colour + 'Cubierta dinamo inalámbrica ' + T.name)
-    add('gtceu.recipe.grindless_naquadria_magnets.uv_smes_cell', 'Circuito 4: la celda UV de la red inalámbrica, bobinados de EnTED probados en frío en la carga de helio')
-  })
 })()

@@ -5,6 +5,3 @@ ClientEvents.lang('en_us', function (event) {
   event.add('grindless', 'tag.item.grindless.ae2.certus_quartz', 'Certus Quartz Crystal (not charged)')
 })
 
-ClientEvents.lang('es_es', function (event) {
-  event.add('grindless', 'tag.item.grindless.ae2.certus_quartz', 'Cristal de cuarzo certus (sin cargar)')
-})

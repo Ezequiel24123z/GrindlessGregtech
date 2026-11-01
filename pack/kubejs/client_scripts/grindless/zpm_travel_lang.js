@@ -7,7 +7,7 @@
 //   block.grindless.<tank>, tooltip...         the level 5 and level 6 rocket tanks
 //   item.grindless.<seed>                      the two orbit quantum seeds
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Quests are English only; names go in en_us and es_es.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Quests are English only; names go in en_us.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
@@ -33,27 +33,3 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.uranian_quantum_seed', 'Made in Uranus\'s orbit. Entangle it with a singularity for a Uranus pair.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('level.grindless.saturn', 'Saturno')
-    add('level.grindless.uranus', 'Urano')
-    add('dimension.grindless.saturn', 'Saturno')
-    add('dimension.grindless.saturn_orbit', 'Órbita de Saturno')
-    add('dimension.grindless.uranus', 'Urano')
-    add('dimension.grindless.uranus_orbit', 'Órbita de Urano')
-    add('planet.grindless.saturn', 'Saturno')
-    add('planet.grindless.uranus', 'Urano')
-
-    add('block.grindless.naquadah_fuel_tank', 'Tanque de combustible de naquadah')
-    add('tooltip.grindless.naquadah_fuel_tank.0', 'Un tanque de cohete de nivel 7 con paredes de naquadah: 64.000 mB.')
-    add('tooltip.grindless.naquadah_fuel_tank.1', 'Motores de élite y solo estos tanques hacen un cohete de nivel 5: Saturno.')
-    add('block.grindless.aerogel_fuel_tank', 'Tanque de combustible de aerogel')
-    add('tooltip.grindless.aerogel_fuel_tank.0', 'Un tanque de cohete de nivel 9 aislado con aerogel de sílice: 256.000 mB.')
-    add('tooltip.grindless.aerogel_fuel_tank.1', 'Motores de élite y solo estos tanques hacen un cohete de nivel 6: Urano.')
-
-    add('item.grindless.saturnian_quantum_seed', 'Semilla cuántica saturniana')
-    add('tooltip.grindless.saturnian_quantum_seed', 'Hecha en la órbita de Saturno. Entrelázala con una singularidad para un par de Saturno.')
-    add('item.grindless.uranian_quantum_seed', 'Semilla cuántica uraniana')
-    add('tooltip.grindless.uranian_quantum_seed', 'Hecha en la órbita de Urano. Entrelázala con una singularidad para un par de Urano.')
-})

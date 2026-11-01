@@ -30,34 +30,6 @@ ClientEvents.lang('en_us', event => {
     add('message.grindless.projector.more', 'and %s more')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('item.grindless.hologram_projector', 'Proyector de hologramas')
-    add('tooltip.grindless.hologram_projector.0', 'Clic derecho en el controlador de un multibloque: muestra un holograma de la estructura durante 30 s. Otro clic lo oculta.')
-    add('tooltip.grindless.hologram_projector.1', 'Agachado + clic derecho: construye la estructura con los bloques de tu inventario. Solo pone los bloques base (carcasas, bobinas, vidrio, marcos, tuberías...): nunca escotillas, buses ni otras piezas, y nunca rompe un bloque.')
-    add('tooltip.grindless.hologram_projector.2', 'En creativo lo pone todo sin gastar objetos.')
-    add('tooltip.grindless.terminal_projector', 'En este pack funciona como el proyector de hologramas: nunca pone escotillas.')
-
-    add('message.grindless.projector.hologram_on', 'Holograma de %s durante %s s. Otro clic lo oculta.')
-    add('message.grindless.projector.hologram_off', 'Holograma oculto.')
-    add('message.grindless.projector.no_hologram', '%s no tiene holograma.')
-    add('message.grindless.projector.formed', '%s ya está formado.')
-    add('message.grindless.projector.unreadable', 'El proyector no puede leer %s.')
-    add('message.grindless.projector.header', 'Proyector de hologramas: %s')
-    add('message.grindless.projector.placed', 'Colocado: %2$s')
-    add('message.grindless.projector.missing', 'Falta: %2$s')
-    add('message.grindless.projector.parts', 'Aquí van piezas (%s): %s')
-    add('message.grindless.projector.needs', 'Para formarse también necesita: %s')
-    add('message.grindless.projector.blocked', 'Se dejan como están (%s): %s')
-    add('message.grindless.projector.complete', 'Todos los bloques base están en su sitio.')
-    add('message.grindless.projector.summary', 'Colocados: %s · faltan: %s · huecos para piezas: %s · sin tocar: %s')
-    add('message.grindless.projector.count', '%s × %s')
-    add('message.grindless.projector.or_similar', '%s o similar')
-    add('message.grindless.projector.at', '%s en %s')
-    add('message.grindless.projector.more', 'y %s más')
-})
-
 // GTM's Terminal: a line that says what it does here
 ItemEvents.tooltip(event => {
     event.add('gtceu:terminal', Text.translate('tooltip.grindless.terminal_projector').gray())

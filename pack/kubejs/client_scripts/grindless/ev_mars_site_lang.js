@@ -15,11 +15,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.atmosphere_processor.tooltip.0', '§7Turns Martian air and water into oxygen and methane.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.atmosphere_processor', 'Procesador atmosférico')
-    add('gtceu.atmosphere_processing', 'Procesado atmosférico')
-
-    add('grindless.machine.atmosphere_processor.tooltip.0', '§7Convierte el aire y el agua de Marte en oxígeno y metano.')
-})

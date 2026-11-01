@@ -42,65 +42,26 @@
                 alumina_calcia_residue: ['Alumina-Calcia Residue', 'CaAl2O4, what the sunlight could not boil off.', 'The electrolyser takes aluminium and calcium from it; the furnace sinters it into crucible linings.'],
                 iron_tube: ['Iron Tube', 'A seamless iron sheath for magnesium diboride powder.', 'Extruded from iron; used by the Powder-in-Tube Line (circuit 5).']
             }
-        },
-        es_es: {
-            machines: {
-                regolith_excavator: {
-                    name: 'Excavadora de Regolito',
-                    type: 'Excavación de Regolito',
-                    tip: '§7Excava regolito de Mercurio con tambores de cangilones contrarrotantes.',
-                    site: 'Solo funciona en Mercurio.',
-                    tips: [
-                        'Dos tambores de cangilones que giran en sentidos opuestos excavan sin fuerza de reacción neta, así la baja gravedad de Mercurio no levanta la máquina. Solo en Mercurio.',
-                        '1 tambor de cangilones (se desgasta 1 vez de cada 32 aprox.) + una muestra de veta de iridosmina de Mercurio (no se gasta) -> 64 regolito de Mercurio.',
-                        'La única fuente de regolito de Mercurio, para el Horno Solar de Vaporización.',
-                        'Necesita un chasis de 9 x 5 x 3 de ladrillo de escudo térmico hermeano con tambores de cangilones (cajas de engranajes de acero de tungsteno) sobre brazos de marco de acero de tungsteno a cada lado, 1 o 2 escotillas de energía, un bus de entrada y un bus de salida.'
-                    ]
-                },
-                solar_vapour_furnace: {
-                    name: 'Horno Solar de Vaporización',
-                    type: 'Vaporización Solar',
-                    tip: '§7Evapora los óxidos del regolito de Mercurio con luz solar concentrada.',
-                    site: 'Solo funciona en la cara diurna de Mercurio.',
-                    tips: [
-                        'Los helióstatos concentran la luz solar de Mercurio en una cámara de vacío y evaporan los óxidos del regolito por orden. Solo en la cara diurna de Mercurio: las recetas esperan a la luz del día.',
-                        'Circuito 1 (1.400 K): 16 regolito de Mercurio -> sodio-potasio + azufre + 12 regolito despojado. Circuito 2 (2.300 K): 12 regolito despojado -> magnesio + monóxido de silicio + hierro + 4 residuo de alúmina-cal + grafito.',
-                        'Ambos desgastan el revestimiento de crisol de regolito (1 vez de cada 16 aprox.). Circuito 3: 4 residuo de alúmina-cal -> 1 revestimiento. El primero sale del alto horno (zafiro + cal viva).',
-                        'Necesita 10 espejos de helióstato sobre marcos de acero de tungsteno, una cámara de 5 x 5 x 5 de ladrillo de escudo térmico hermeano bajo un receptor de carcasa de hogar de acero de tungsteno con un crisol a prueba de calor dentro, placas condensadoras de radiador de cielo nocturno en sus flancos, 1 o 2 escotillas de energía, buses de entrada y salida y 1 escotilla de salida.'
-                    ]
-                }
-            },
-            items: {
-                mercury_regolith: ['Regolito de Mercurio', 'Roca suelta de la superficie de Mercurio: óxidos de silicio, magnesio, aluminio, calcio y hierro, con azufre y grafito.', 'Lo excava la Excavadora de Regolito en Mercurio.'],
-                stripped_mercury_regolith: ['Regolito de Mercurio Despojado', 'Regolito al que se le han evaporado el sodio, el potasio y el azufre.', 'Se fabrica en el Horno Solar de Vaporización (circuito 1); vuelve a entrar para el circuito 2.'],
-                excavator_bucket_drum: ['Tambor de Cangilones', 'Un tambor de acero de tungsteno rodeado de palas; se desgasta al excavar.', 'Se fabrica en el ensamblador; lo usa la Excavadora de Regolito.'],
-                regolith_crucible_lining: ['Revestimiento de Crisol de Regolito', 'Una cerámica de aluminato de calcio que contiene el regolito fundido a 2.300 K.', 'Se sinteriza en el Horno Solar de Vaporización (circuito 3) o, el primero, en el alto horno.'],
-                silicon_monoxide_dust: ['Polvo de Monóxido de Silicio', 'SiO, condensado en las placas frías del Horno Solar de Vaporización.', 'El alto horno lo separa en silicio y dióxido de silicio.'],
-                alumina_calcia_residue: ['Residuo de Alúmina-Cal', 'CaAl2O4, lo que la luz solar no pudo evaporar.', 'El electrolizador extrae de él aluminio y calcio; el horno lo sinteriza en revestimientos de crisol.'],
-                iron_tube: ['Tubo de Hierro', 'Una vaina de hierro sin costura para polvo de diboruro de magnesio.', 'Se extruye a partir de hierro; lo usa la Línea de Polvo en Tubo (circuito 5).']
-            }
         }
     }
 
-    Object.keys(TEXT).forEach(function (lang) {
-        ClientEvents.lang(lang, function (event) {
-            var t = TEXT[lang]
-            var add = function (key, value) { event.add('grindless', key, value) }
+    ClientEvents.lang('en_us', function (event) {
+        var t = TEXT.en_us
+        var add = function (key, value) { event.add('grindless', key, value) }
 
-            Object.keys(t.machines).forEach(function (name) {
-                var m = t.machines[name]
-                add('block.gtceu.' + name, m.name)
-                add('grindless.machine.' + name + '.tooltip.0', m.tip)
-                add('grindless.machine.' + name + '.tooltip.1', m.site)
-                for (var i = 0; i < 4; i++) add('emi.grindless.info.' + name + '.' + (2 + i), m.tips[i])
-            })
-            add('gtceu.regolith_excavation', t.machines.regolith_excavator.type)
-            add('gtceu.solar_vaporisation', t.machines.solar_vapour_furnace.type)
-            Object.keys(t.items).forEach(function (name) {
-                add('item.grindless.' + name, t.items[name][0])
-                add('tooltip.grindless.' + name + '.0', t.items[name][1])
-                add('tooltip.grindless.' + name + '.1', t.items[name][2])
-            })
+        Object.keys(t.machines).forEach(function (name) {
+            var m = t.machines[name]
+            add('block.gtceu.' + name, m.name)
+            add('grindless.machine.' + name + '.tooltip.0', m.tip)
+            add('grindless.machine.' + name + '.tooltip.1', m.site)
+            for (var i = 0; i < 4; i++) add('emi.grindless.info.' + name + '.' + (2 + i), m.tips[i])
+        })
+        add('gtceu.regolith_excavation', t.machines.regolith_excavator.type)
+        add('gtceu.solar_vaporisation', t.machines.solar_vapour_furnace.type)
+        Object.keys(t.items).forEach(function (name) {
+            add('item.grindless.' + name, t.items[name][0])
+            add('tooltip.grindless.' + name + '.0', t.items[name][1])
+            add('tooltip.grindless.' + name + '.1', t.items[name][2])
         })
     })
 })()

@@ -3,9 +3,9 @@
 //
 //   gtceu.recipe.grindless_<type>.<recipe>   the EMI line of each keyed row of the package: the fab's row and the P14 step on the femto writer
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. English only: es_es copies en_us.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. English only.
 (function () {
-    // [key, en]
+    // [key, text]
     var ENTRIES = [
         ['gtceu.void_crystal_fab', 'Void Crystal Fab'],
         ['block.gtceu.void_crystal_fab', 'Void Crystal Fab'],
@@ -14,11 +14,9 @@
         ['gtceu.recipe.grindless_femtosecond_writing.void_crystal_lattice', 'Circuit 13: NV-engineered diamond written into a void crystal lattice under helium (line P14).']
     ]
 
-    ;['en_us', 'es_es'].forEach(function (lang) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()

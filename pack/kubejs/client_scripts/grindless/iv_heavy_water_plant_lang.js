@@ -27,24 +27,6 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.heavy_water_concentrate', 'The Girdler sulfide exchange\'s product, about 20% heavy water. The heavy-water plant\'s vacuum column (circuit 2) finishes it into heavy water.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.heavy_water_plant', 'Planta de agua pesada')
-    add('gtceu.isotope_exchange', 'Intercambio isotópico')
-
-    add('grindless.machine.heavy_water_plant.tooltip.0', '§7Planta de sulfuro Girdler que enriquece agua pesada.')
-
-    add('gtceu.recipe.grindless_isotope_exchange.martian_ice_exchange', 'Modo 1: intercambio de sulfuro de Girdler. La carga de H2S se queda en su escotilla')
-    add('gtceu.recipe.grindless_isotope_exchange.concentrate_finishing', 'Modo 2: la columna de vacío convierte el concentrado en agua pesada')
-    add('gtceu.recipe.grindless_isotope_exchange.proxima_water_exchange', 'Modo 3: el agua de Próxima b, ya fundida, con cuatro veces el deuterio del hielo marciano')
-
-    add('grindless.machine.heavy_water_plant.charge.ok', 'Carga de H2S: %s mB (necesita %s mB, nunca se gasta)')
-    add('grindless.machine.heavy_water_plant.charge.low', 'Carga de H2S: %s de %s mB. El intercambio (circuito 1) no arranca sin la carga completa en una escotilla de entrada')
-
-    add('tooltip.grindless.heavy_water_concentrate', 'El producto del intercambio de sulfuro de Girdler, con un 20 % de agua pesada. La columna de vacío de la planta de agua pesada (circuito 2) lo convierte en agua pesada.')
-})
-
 // what the concentrate is for (GTM already shows the formula; IV-A1's lang names the material)
 ItemEvents.tooltip(event => {
     event.add('gtceu:heavy_water_concentrate_bucket', Text.translate('tooltip.grindless.heavy_water_concentrate').gray())

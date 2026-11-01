@@ -9,7 +9,7 @@
 //
 // The bricks, the panels, the Mercury vein sample and the Hermean regolith keep their keys in iv_foundation_lang.js. The lines
 // grindless.generators.* (dynamo capacity, output) come from power_generator_array_lang.js. Quests are English only; names go in
-// en_us and es_es.
+// en_us.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
@@ -61,53 +61,3 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.recipe.grindless_mercury_shift.night', 'Mercury\'s night: dry, the bit wears twice as fast')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.mercury_vein_drill', 'Perforadora de vetas de Mercurio')
-    add('block.gtceu.mercury_solar_works', 'Planta solar de Mercurio')
-    add('block.gtceu.mercury_solar_field', 'Campo solar de Mercurio')
-    add('block.gtceu.interferometer', 'Interferómetro')
-    add('gtceu.solar_processing', 'Procesado solar')
-    add('gtceu.mercury_solar', 'Energía solar de Mercurio')
-    add('gtceu.interferometry', 'Interferometría')
-
-    add('grindless.machine.mercury_vein_drill.tooltip.0', '§7Perfora las vetas de mineral de Mercurio.')
-    add('grindless.machine.mercury_vein_drill.needs_nitrogen', 'Día en Mercurio: la perforadora solo funciona con nitrógeno líquido en su escotilla de entrada (10 mB por ciclo)')
-    add('grindless.machine.mercury_vein_drill.keeps_nitrogen', 'Noche en Mercurio: la perforadora perfora en seco y guarda el nitrógeno líquido para el día')
-    add('grindless.machine.mercury_vein_drill.shift.day', 'Día en Mercurio: perforando con nitrógeno líquido (%s mB en la escotilla, 10 mB por ciclo)')
-    add('grindless.machine.mercury_vein_drill.shift.night', 'Noche en Mercurio: perforando en seco, la broca se gasta el doble de rápido (%s mB de nitrógeno líquido guardados)')
-
-    add('grindless.machine.mercury_solar_works.tooltip.0', '§7Taller de helióstatos que procesa materiales con calor solar.')
-    add('grindless.machine.mercury_solar_works.no_voiding', 'La planta solar guarda el tetróxido de osmio y el vapor: salen por sus escotillas de salida. Desactiva el vaciado de fluidos')
-    add('grindless.machine.mercury_solar_works.sun.sun', 'Sol en el receptor: el próximo ciclo paga una cuarta parte de su EU/t')
-    add('grindless.machine.mercury_solar_works.sun.night', 'Noche: el próximo ciclo paga su EU/t entero')
-    add('grindless.machine.mercury_solar_works.sun.shaded', 'A la sombra (%s entre el receptor y los 8 espejos sin cielo abierto): el próximo ciclo paga su EU/t entero')
-
-    add('grindless.machine.mercury_solar_field.tooltip.0', '§7Paneles de película fina de Mercurio: luz solar a EU.')
-    add('grindless.machine.mercury_solar_field.no_sky', 'Ningún panel ve el cielo abierto')
-    add('grindless.machine.mercury_solar_field.panels', 'Paneles bajo el cielo abierto: %s de %s')
-    add('grindless.machine.mercury_solar_field.hint', 'Circuito programado 1 en el bus de entrada. Solo funciona de día, en Mercurio.')
-
-    add('grindless.machine.interferometer.tooltip.0', '§7Interferómetro de radio en Mercurio, activo de noche.')
-
-    add('item.grindless.tungsten_steel_drill_bit', 'Broca de acero de tungsteno')
-    add('tooltip.grindless.tungsten_steel_drill_bit.0', 'La broca de las perforadoras de vetas IV, torneada en un torno IV a partir de una varilla larga de acero de tungsteno.')
-    add('tooltip.grindless.tungsten_steel_drill_bit.1', 'Una por ciclo, y se gasta por probabilidad. En la perforadora de vetas de Mercurio: cerca del 0,25 % de los ciclos de día (con nitrógeno líquido), 0,5 % de noche (en seco).')
-    add('item.grindless.lunar_vlbi_recording', 'Grabación VLBI lunar')
-    add('tooltip.grindless.lunar_vlbi_recording.0', 'Un orbe de datos con la mitad lunar de una observación de muy larga base: el cielo de radio, cronometrado al nanosegundo.')
-    add('tooltip.grindless.lunar_vlbi_recording.1', 'La escribe la antena de espacio profundo de noche en la Luna, apuntada por la carta de los planetas interiores. El interferómetro de Mercurio añade su mitad.')
-    add('item.grindless.outer_system_chart', 'Carta del sistema exterior')
-    add('tooltip.grindless.outer_system_chart.0', 'Un orbe de datos con el cinturón de asteroides y las lunas de Júpiter, fijados por un interferómetro cuya línea de base va de la Luna a Mercurio.')
-    add('tooltip.grindless.outer_system_chart.1', 'La carta del viaje más allá de los planetas interiores. La hace el interferómetro; se copia con un orbe de datos.')
-    add('item.grindless.sagittarius_a_star_signal', 'Señal de Sagitario A*')
-    add('tooltip.grindless.sagittarius_a_star_signal.0', 'La primera señal de radio de Sagitario A*, el agujero negro del centro de la galaxia, grabada por el interferómetro.')
-    add('tooltip.grindless.sagittarius_a_star_signal.1', 'Los radioastrónomos la encontraron así por primera vez en 1974. Aquí marca hacia dónde apunta el viaje.')
-
-    add('gtceu.recipe.grindless_sun_eut', 'Con el sol en el receptor: %s EU/t (una cuarta parte)')
-    add('gtceu.recipe.grindless_sky.hermean_day', 'Día en Mercurio, paneles bajo el cielo abierto (luz solar x6,7): %s EU/t por panel, %s paneles = %s EU/t')
-    add('gtceu.recipe.grindless_sky.interferometer', 'Cielo: noche en Mercurio. La otra mitad: la antena de espacio profundo, de noche en la Luna')
-    add('gtceu.recipe.grindless_sky.vlbi_moon', 'Cielo: noche lunar, en la Luna. El interferómetro añade la mitad de Mercurio')
-    add('gtceu.recipe.grindless_mercury_shift.day', 'Día en Mercurio: el nitrógeno líquido mantiene viva la broca')
-    add('gtceu.recipe.grindless_mercury_shift.night', 'Noche en Mercurio: en seco, la broca se gasta el doble de rápido')
-})

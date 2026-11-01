@@ -27,23 +27,3 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.heliostat_mirror', 'The mirror field of the Heliostat Tower: 28 of them, in four rows of seven behind the tower.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.sulfide_roaster', 'Tostador de sulfuros')
-    add('block.gtceu.heliostat_tower', 'Torre solar de heliostatos')
-    add('gtceu.sulfide_roasting', 'Tostación de sulfuros')
-    add('gtceu.solar_steam', 'Vapor solar')
-
-    add('grindless.machine.sulfide_roaster.tooltip.0', '§7Tuesta menas de sulfuro con aire y hace ácido sulfúrico en el mismo ciclo.')
-    add('grindless.machine.sulfide_roaster.tooltip.1', 'Pide un catalizador de contacto de vanadio en el bus.')
-
-    add('grindless.machine.heliostat_tower.tooltip.0', '§7Hierve agua con luz solar y sin combustible: 800 mB de vapor por tick.')
-    add('grindless.machine.heliostat_tower.tooltip.1', 'Solo funciona de día, con cielo abierto y sin lluvia.')
-    add('grindless.machine.heliostat_tower.no_sun', 'No llega el sol al receptor: hace falta que sea de día, cielo abierto sobre la torre y los espejos, y que no llueva.')
-
-    add('item.grindless.contact_catalyst', 'Catalizador de contacto de vanadio')
-    add('tooltip.grindless.contact_catalyst', 'Convierte el dióxido de azufre en ácido sulfúrico en el tostador de sulfuros. Se desgasta por probabilidad (en torno al 2 % de los ciclos). Se mezcla con vanadio y diatomita.')
-    add('block.grindless.heliostat_mirror', 'Espejo de heliostato')
-    add('tooltip.grindless.heliostat_mirror', 'El campo de espejos de la torre solar de heliostatos: 28, en cuatro filas de siete detrás de la torre.')
-})

@@ -31,23 +31,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.venus_acid_works.no_voiding', 'Circuit 2 keeps the sulfur dioxide: turn fluid voiding off, or use circuit 1, which returns it to Venus\'s air')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.pressurized_vein_drill', 'Perforadora de vetas presurizada')
-    add('block.gtceu.venus_heat_engine', 'Motor térmico de Venus')
-    add('gtceu.venus_heat', 'Calor de Venus')
-    add('block.gtceu.venus_acid_works', 'Planta de ácido de Venus')
-    add('gtceu.acid_cracking', 'Craqueo de ácido')
-
-    add('grindless.machine.pressurized_vein_drill.tooltip.0', '§7Perfora vetas en Venus y Marte bajo alta presión.')
-
-    add('grindless.machine.venus_heat_engine.tooltip.0', '§7Motor térmico alimentado por el suelo caliente de Venus.')
-
-    add('grindless.machine.venus_acid_works.tooltip.0', '§7Descompone el ácido sulfúrico venusiano en agua y oxígeno.')
-
-    add('grindless.machine.pressurized_vein_drill.off_site', 'Aquí no hay veta que perforar: la perforadora funciona en Venus y en Marte')
-    add('grindless.machine.venus_heat_engine.not_venus', 'Aquí no hay calor: el motor solo funciona en Venus')
-    add('grindless.machine.venus_acid_works.not_venus', 'Aquí no hay nubes: la planta de ácido solo funciona en Venus')
-    add('grindless.machine.venus_acid_works.no_voiding', 'El circuito 2 guarda el dióxido de azufre: desactiva el vaciado de fluidos, o usa el circuito 1, que lo devuelve al aire de Venus')
-})

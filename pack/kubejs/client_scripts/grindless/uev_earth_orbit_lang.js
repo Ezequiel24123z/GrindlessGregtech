@@ -6,87 +6,83 @@
 //   gtceu.recipe.grindless_<type>.<recipe>                        the EMI line of each recipe
 //   item.grindless.<n>, tooltip.grindless.<n>.0 / .1              the package's own items
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {
-    // [key, en, es]
+    // [key, en]
     var ENTRIES = [
-        ['block.gtceu.quantum_gas_lab', 'Quantum Gas Lab', 'Laboratorio de gases cuánticos'],
-        ['gtceu.quantum_degenerate_gas', 'Quantum Degenerate Gas', 'Gas cuántico degenerado'],
-        ['block.gtceu.entanglement_station', 'Entanglement Station', 'Estación de entrelazamiento'],
-        ['gtceu.entanglement_distribution', 'Entanglement Distribution', 'Distribución de entrelazamiento'],
+        ['block.gtceu.quantum_gas_lab', 'Quantum Gas Lab'],
+        ['gtceu.quantum_degenerate_gas', 'Quantum Degenerate Gas'],
+        ['block.gtceu.entanglement_station', 'Entanglement Station'],
+        ['gtceu.entanglement_distribution', 'Entanglement Distribution'],
 
         ['grindless.machine.quantum_gas_lab.tooltip.0',
-            '§7Cools Li-6 and K-40 into a Fermi gas and runs atom interferometry.',
-            '§7Enfría Li-6 y K-40 hasta un gas de Fermi y hace interferometría atómica.'],
-        ['grindless.machine.quantum_gas_lab.tooltip.1', 'Works in Earth orbit only.', 'Solo funciona en órbita terrestre.'],
+            '§7Cools Li-6 and K-40 into a Fermi gas and runs atom interferometry.'],
+        ['grindless.machine.quantum_gas_lab.tooltip.1', 'Works in Earth orbit only.'],
 
         ['grindless.machine.entanglement_station.tooltip.0',
-            '§7Entangles photons with a memory to make quantum repeater nodes.',
-            '§7Entrelaza fotones con una memoria para fabricar nodos repetidores cuánticos.'],
-        ['grindless.machine.entanglement_station.tooltip.1', 'Works in Earth orbit only.', 'Solo funciona en órbita terrestre.'],
+            '§7Entangles photons with a memory to make quantum repeater nodes.'],
+        ['grindless.machine.entanglement_station.tooltip.1', 'Works in Earth orbit only.'],
 
-        ['gtceu.recipe.grindless_quantum_degenerate_gas.degenerate_eos_model', 'Circuit 1: a Li-6 and K-40 Fermi mixture cooled by the two lasers: the EOS model', 'Circuito 1: una mezcla de Fermi de Li-6 y K-40 enfriada por los dos láseres: el modelo de ecuación de estado'],
-        ['gtceu.recipe.grindless_quantum_degenerate_gas.barnard_gravity_survey', 'Circuit 2: the calibrated gravimeter measures Barnard core rock', 'Circuito 2: el gravímetro calibrado mide roca del núcleo de Barnard'],
-        ['gtceu.recipe.grindless_quantum_degenerate_gas.calibrate_gravimeter', 'Circuit 3: the atom interferometer is referenced to the ULE cavity, which is not consumed', 'Circuito 3: el interferómetro atómico se refiere a la cavidad ULE, que no se consume'],
-        ['gtceu.recipe.grindless_entanglement_distribution.quantum_repeater_node', 'Circuit 1: source, memory, QD source, detectors and hollow-core fibre in one node', 'Circuito 1: fuente, memoria, fuente QD, detectores y fibra de núcleo hueco en un nodo'],
-        ['gtceu.recipe.grindless_crystal_growth.tgg', 'Circuit 6: terbium gallium garnet pulled from the melt in an iridium crucible', 'Circuito 6: granate de terbio y galio extraído del fundido en un crisol de iridio'],
-        ['gtceu.recipe.grindless_crystal_growth.ktp', 'Circuit 7: KTP grown from a flux in an iridium crucible', 'Circuito 7: KTP crecido desde un fundente en un crisol de iridio']
+        ['gtceu.recipe.grindless_quantum_degenerate_gas.degenerate_eos_model', 'Circuit 1: a Li-6 and K-40 Fermi mixture cooled by the two lasers: the EOS model'],
+        ['gtceu.recipe.grindless_quantum_degenerate_gas.barnard_gravity_survey', 'Circuit 2: the calibrated gravimeter measures Barnard core rock'],
+        ['gtceu.recipe.grindless_quantum_degenerate_gas.calibrate_gravimeter', 'Circuit 3: the atom interferometer is referenced to the ULE cavity, which is not consumed'],
+        ['gtceu.recipe.grindless_entanglement_distribution.quantum_repeater_node', 'Circuit 1: source, memory, QD source, detectors and hollow-core fibre in one node'],
+        ['gtceu.recipe.grindless_crystal_growth.tgg', 'Circuit 6: terbium gallium garnet pulled from the melt in an iridium crucible'],
+        ['gtceu.recipe.grindless_crystal_growth.ktp', 'Circuit 7: KTP grown from a flux in an iridium crucible']
     ]
 
-    // [name, en, es, tooltip 0 en, es, tooltip 1 en, es]
+    // [name, en, tooltip 0, tooltip 1]
     var ITEMS = [
-        ['cnt_sock', 'CNT Sock', 'Calcetín de CNT', 'A sleeve of carbon nanotubes grown on floating iron.', 'Una manga de nanotubos de carbono crecida sobre hierro flotante.', 'Made in the methane pyrolyser, circuit 3.', 'Se hace en el pirolizador de metano, circuito 3.'],
-        ['cnt_ribbon', 'CNT Ribbon', 'Cinta de CNT', 'The sock slit and drawn flat into two aligned ribbons.', 'El calcetín cortado y estirado en dos cintas alineadas.', 'Drawn in the lathe; the spare carbon comes out as dust. Densified in a chemical reactor.', 'Se estira en el torno; el carbono sobrante sale como polvo. Se densifica en un reactor químico.'],
-        ['cnt_densified_yarn', 'Densified CNT Yarn', 'Hilo de CNT densificado', 'The ribbon drawn through ethanol into a dense yarn.', 'La cinta pasada por etanol hasta un hilo denso.', 'The iron catalyst comes back as dust. Annealed in the blast furnace.', 'El catalizador de hierro vuelve como polvo. Se recuece en el horno alto.'],
-        ['cnt_annealed_yarn', 'Annealed CNT Yarn', 'Hilo de CNT recocido', 'Yarn healed of defects under argon.', 'Hilo sin defectos tras recocerse bajo argón.', 'Sized with epoxy in a chemical reactor.', 'Se ensima con epoxi en un reactor químico.'],
-        ['cnt_sized_yarn', 'Sized CNT Yarn', 'Hilo de CNT ensimado', 'Yarn coated in epoxy so it holds a twist.', 'Hilo recubierto de epoxi para que conserve la torsión.', 'Four of them are twisted in the assembler.', 'Cuatro se trenzan en el ensamblador.'],
-        ['cnt_twisted_yarn', 'Twisted CNT Yarn', 'Hilo de CNT trenzado', 'Four yarns twisted into one.', 'Cuatro hilos trenzados en uno.', 'Made in the assembler.', 'Se hace en el ensamblador.'],
-        ['cnt_coiled_muscle', 'Coiled CNT Muscle', 'Músculo de CNT enrollado', 'A coiled yarn that contracts when heated.', 'Un hilo enrollado que se contrae al calentarse.', 'Four of them move a UEV robot arm.', 'Cuatro mueven un brazo robótico UEV.'],
-        ['gallium_oxide_dust', 'Gallium Oxide Dust', 'Polvo de óxido de galio', 'Gallium burned in oxygen.', 'Galio quemado en oxígeno.', 'Part of the TGG line.', 'Parte de la línea del TGG.'],
-        ['tgg_hydroxide_cake', 'TGG Hydroxide Cake', 'Torta de hidróxido de TGG', 'Terbium and gallium coprecipitated with ammonia.', 'Terbio y galio coprecipitados con amoniaco.', 'Calcined into TGG powder.', 'Se calcina hasta polvo de TGG.'],
-        ['tgg_boule', 'TGG Boule', 'Boule de TGG', 'A terbium gallium garnet crystal.', 'Un cristal de granate de terbio y galio.', 'Cut into rods.', 'Se corta en varillas.'],
-        ['tgg_rod', 'TGG Rod', 'Varilla de TGG', 'A rough rod of garnet.', 'Una varilla de granate en bruto.', 'Polished on a lathe.', 'Se pule en el torno.'],
-        ['tgg_polished_rod', 'Polished TGG Rod', 'Varilla de TGG pulida', 'Optical grade, ready for a magnet.', 'De grado óptico, lista para un imán.', 'The heart of a Faraday isolator.', 'El corazón de un aislador de Faraday.'],
-        ['fused_silica_tube', 'Fused Silica Tube', 'Tubo de sílice fundida', 'Silica melted into a tube.', 'Sílice fundida en un tubo.', 'Capillaries and preforms start here.', 'De aquí salen capilares y preformas.'],
-        ['hollow_capillaries', 'Hollow Capillaries', 'Capilares huecos', 'Thin silica tubes from the fibre draw tower.', 'Tubos finos de sílice de la torre de estirado.', 'Stacked around a larger tube.', 'Se apilan alrededor de un tubo mayor.'],
-        ['stacked_preform', 'Stacked Preform', 'Preforma apilada', 'Capillaries packed around a tube.', 'Capilares empaquetados alrededor de un tubo.', 'Fused into a cane.', 'Se funde en una caña.'],
-        ['caned_preform', 'Caned Preform', 'Preforma en caña', 'The stack fused under helium.', 'La pila fundida bajo helio.', 'Drawn into fibre.', 'Se estira en fibra.'],
-        ['drawn_hollow_fibre', 'Drawn Hollow Fibre', 'Fibra hueca estirada', 'Hair-thin fibre with an air core.', 'Fibra fina como un pelo con núcleo de aire.', 'Coated with epoxy.', 'Se recubre con epoxi.'],
-        ['mcp_lead_glass', 'MCP Lead Glass', 'Vidrio de plomo para MCP', 'Glass melted with lead.', 'Vidrio fundido con plomo.', 'Cladding of the channel plate.', 'Revestimiento de la placa de canales.'],
-        ['etchable_core_tube', 'Etchable Core Tube', 'Tubo con núcleo atacable', 'A glass core inside lead-glass cladding.', 'Un núcleo de vidrio dentro de un revestimiento de vidrio de plomo.', 'Drawn into a multi-fibre.', 'Se estira en una multifibra.'],
-        ['mcp_multifibre', 'MCP Multi-fibre', 'Multifibra de MCP', 'A bundle of core tubes drawn together.', 'Un haz de tubos con núcleo estirados juntos.', 'Fused into a boule.', 'Se funde en un boule.'],
-        ['mcp_boule', 'MCP Boule', 'Boule de MCP', 'A fused block of channel fibres.', 'Un bloque fundido de fibras de canal.', 'Sliced into plates.', 'Se corta en placas.'],
-        ['mcp_plate', 'MCP Plate', 'Placa de MCP', 'A slice across the fibres.', 'Un corte transversal a las fibras.', 'The core is etched out with acid.', 'El núcleo se ataca con ácido.'],
-        ['mcp_etched_plate', 'Etched MCP Plate', 'Placa de MCP atacada', 'A plate of empty channels.', 'Una placa de canales vacíos.', 'Reduced in hydrogen.', 'Se reduce en hidrógeno.'],
-        ['mcp_reduced_plate', 'Reduced MCP Plate', 'Placa de MCP reducida', 'Channel walls that now emit electrons.', 'Paredes de canal que ahora emiten electrones.', 'Electrodes make it a lobster-eye MCP.', 'Los electrodos la convierten en un MCP ojo de langosta.'],
-        ['kh2po4_dust', 'KH2PO4 Dust', 'Polvo de KH2PO4', 'Potassium dihydrogen phosphate.', 'Fosfato diácido de potasio.', 'The flux of the KTP line.', 'El fundente de la línea del KTP.'],
-        ['ktp_flux', 'KTP Flux', 'Fundente de KTP', 'Phosphate and rutile ready to melt.', 'Fosfato y rutilo listos para fundir.', 'Grown in the crystal furnace, circuit 7.', 'Se crece en el horno de cristales, circuito 7.'],
-        ['ktp_boule', 'KTP Boule', 'Boule de KTP', 'A potassium titanyl phosphate crystal.', 'Un cristal de fosfato titanílico de potasio.', 'Sliced into wafers.', 'Se corta en obleas.'],
-        ['ktp_wafer', 'KTP Wafer', 'Oblea de KTP', 'A thin slice of KTP.', 'Una rebanada fina de KTP.', 'Gets gold electrodes.', 'Recibe electrodos de oro.'],
-        ['ktp_electroded_wafer', 'Electroded KTP Wafer', 'Oblea de KTP con electrodos', 'Ready for periodic poling.', 'Lista para el poling periódico.', 'Poled in the polarizer.', 'Se polariza en el polarizador.'],
-        ['spdc_source', 'SPDC Source', 'Fuente SPDC', 'A PPKTP crystal pumped by an emitter.', 'Un cristal de PPKTP bombeado por un emisor.', 'Makes entangled photon pairs.', 'Produce pares de fotones entrelazados.'],
-        ['ule_soot', 'ULE Soot', 'Hollín ULE', 'Silica and titania from flame hydrolysis.', 'Sílice y titania de la hidrólisis a la llama.', 'The chlorine goes to the chlorine users.', 'El cloro va a quienes lo usan.'],
-        ['ule_boule', 'ULE Boule', 'Boule ULE', 'Ultra-low expansion glass.', 'Vidrio de expansión ultrabaja.', 'Turned into a spacer.', 'Se tornea hasta un espaciador.'],
-        ['ule_spacer', 'ULE Spacer', 'Espaciador ULE', 'A rod that barely changes length.', 'Una varilla que casi no cambia de longitud.', 'Mirrors go on both ends.', 'Los espejos van en ambos extremos.'],
-        ['ule_mirrored_spacer', 'Mirrored ULE Spacer', 'Espaciador ULE con espejos', 'Tantalum oxide mirror coats on both ends.', 'Espejos de óxido de tantalio en ambos extremos.', 'Housed in vacuum.', 'Se aloja en vacío.'],
-        ['ule_cavity', 'ULE Cavity', 'Cavidad ULE', 'A frequency reference. It is never used up.', 'Una referencia de frecuencia. Nunca se gasta.', 'Kept in the quantum gas lab.', 'Se queda en el laboratorio de gases cuánticos.'],
-        ['li_cooling_laser', 'Lithium Cooling Laser', 'Láser de enfriamiento de litio', 'Locked to the lithium transition.', 'Fijado a la transición del litio.', 'Kept in the quantum gas lab.', 'Se queda en el laboratorio de gases cuánticos.'],
-        ['k_cooling_laser', 'Potassium Cooling Laser', 'Láser de enfriamiento de potasio', 'Locked to the potassium transition.', 'Fijado a la transición del potasio.', 'Kept in the quantum gas lab.', 'Se queda en el laboratorio de gases cuánticos.'],
-        ['atom_interferometer', 'Atom Interferometer', 'Interferómetro atómico', 'A sensor and two cooling lasers.', 'Un sensor y dos láseres de enfriamiento.', 'Needs calibration against the ULE cavity.', 'Necesita calibrarse con la cavidad ULE.'],
-        ['calibrated_gravimeter', 'Calibrated Gravimeter', 'Gravímetro calibrado', 'An interferometer tied to the ULE cavity.', 'Un interferómetro atado a la cavidad ULE.', 'Measures Barnard core rock.', 'Mide roca del núcleo de Barnard.']
+        ['cnt_sock', 'CNT Sock', 'A sleeve of carbon nanotubes grown on floating iron.', 'Made in the methane pyrolyser, circuit 3.'],
+        ['cnt_ribbon', 'CNT Ribbon', 'The sock slit and drawn flat into two aligned ribbons.', 'Drawn in the lathe; the spare carbon comes out as dust. Densified in a chemical reactor.'],
+        ['cnt_densified_yarn', 'Densified CNT Yarn', 'The ribbon drawn through ethanol into a dense yarn.', 'The iron catalyst comes back as dust. Annealed in the blast furnace.'],
+        ['cnt_annealed_yarn', 'Annealed CNT Yarn', 'Yarn healed of defects under argon.', 'Sized with epoxy in a chemical reactor.'],
+        ['cnt_sized_yarn', 'Sized CNT Yarn', 'Yarn coated in epoxy so it holds a twist.', 'Four of them are twisted in the assembler.'],
+        ['cnt_twisted_yarn', 'Twisted CNT Yarn', 'Four yarns twisted into one.', 'Made in the assembler.'],
+        ['cnt_coiled_muscle', 'Coiled CNT Muscle', 'A coiled yarn that contracts when heated.', 'Four of them move a UEV robot arm.'],
+        ['gallium_oxide_dust', 'Gallium Oxide Dust', 'Gallium burned in oxygen.', 'Part of the TGG line.'],
+        ['tgg_hydroxide_cake', 'TGG Hydroxide Cake', 'Terbium and gallium coprecipitated with ammonia.', 'Calcined into TGG powder.'],
+        ['tgg_boule', 'TGG Boule', 'A terbium gallium garnet crystal.', 'Cut into rods.'],
+        ['tgg_rod', 'TGG Rod', 'A rough rod of garnet.', 'Polished on a lathe.'],
+        ['tgg_polished_rod', 'Polished TGG Rod', 'Optical grade, ready for a magnet.', 'The heart of a Faraday isolator.'],
+        ['fused_silica_tube', 'Fused Silica Tube', 'Silica melted into a tube.', 'Capillaries and preforms start here.'],
+        ['hollow_capillaries', 'Hollow Capillaries', 'Thin silica tubes from the fibre draw tower.', 'Stacked around a larger tube.'],
+        ['stacked_preform', 'Stacked Preform', 'Capillaries packed around a tube.', 'Fused into a cane.'],
+        ['caned_preform', 'Caned Preform', 'The stack fused under helium.', 'Drawn into fibre.'],
+        ['drawn_hollow_fibre', 'Drawn Hollow Fibre', 'Hair-thin fibre with an air core.', 'Coated with epoxy.'],
+        ['mcp_lead_glass', 'MCP Lead Glass', 'Glass melted with lead.', 'Cladding of the channel plate.'],
+        ['etchable_core_tube', 'Etchable Core Tube', 'A glass core inside lead-glass cladding.', 'Drawn into a multi-fibre.'],
+        ['mcp_multifibre', 'MCP Multi-fibre', 'A bundle of core tubes drawn together.', 'Fused into a boule.'],
+        ['mcp_boule', 'MCP Boule', 'A fused block of channel fibres.', 'Sliced into plates.'],
+        ['mcp_plate', 'MCP Plate', 'A slice across the fibres.', 'The core is etched out with acid.'],
+        ['mcp_etched_plate', 'Etched MCP Plate', 'A plate of empty channels.', 'Reduced in hydrogen.'],
+        ['mcp_reduced_plate', 'Reduced MCP Plate', 'Channel walls that now emit electrons.', 'Electrodes make it a lobster-eye MCP.'],
+        ['kh2po4_dust', 'KH2PO4 Dust', 'Potassium dihydrogen phosphate.', 'The flux of the KTP line.'],
+        ['ktp_flux', 'KTP Flux', 'Phosphate and rutile ready to melt.', 'Grown in the crystal furnace, circuit 7.'],
+        ['ktp_boule', 'KTP Boule', 'A potassium titanyl phosphate crystal.', 'Sliced into wafers.'],
+        ['ktp_wafer', 'KTP Wafer', 'A thin slice of KTP.', 'Gets gold electrodes.'],
+        ['ktp_electroded_wafer', 'Electroded KTP Wafer', 'Ready for periodic poling.', 'Poled in the polarizer.'],
+        ['spdc_source', 'SPDC Source', 'A PPKTP crystal pumped by an emitter.', 'Makes entangled photon pairs.'],
+        ['ule_soot', 'ULE Soot', 'Silica and titania from flame hydrolysis.', 'The chlorine goes to the chlorine users.'],
+        ['ule_boule', 'ULE Boule', 'Ultra-low expansion glass.', 'Turned into a spacer.'],
+        ['ule_spacer', 'ULE Spacer', 'A rod that barely changes length.', 'Mirrors go on both ends.'],
+        ['ule_mirrored_spacer', 'Mirrored ULE Spacer', 'Tantalum oxide mirror coats on both ends.', 'Housed in vacuum.'],
+        ['ule_cavity', 'ULE Cavity', 'A frequency reference. It is never used up.', 'Kept in the quantum gas lab.'],
+        ['li_cooling_laser', 'Lithium Cooling Laser', 'Locked to the lithium transition.', 'Kept in the quantum gas lab.'],
+        ['k_cooling_laser', 'Potassium Cooling Laser', 'Locked to the potassium transition.', 'Kept in the quantum gas lab.'],
+        ['atom_interferometer', 'Atom Interferometer', 'A sensor and two cooling lasers.', 'Needs calibration against the ULE cavity.'],
+        ['calibrated_gravimeter', 'Calibrated Gravimeter', 'An interferometer tied to the ULE cavity.', 'Measures Barnard core rock.']
     ]
 
     ITEMS.forEach(function (i) {
-        ENTRIES.push(['item.grindless.' + i[0], i[1], i[2]])
-        ENTRIES.push(['tooltip.grindless.' + i[0] + '.0', i[3], i[4]])
-        ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[5], i[6]])
+        ENTRIES.push(['item.grindless.' + i[0], i[1]])
+        ENTRIES.push(['tooltip.grindless.' + i[0] + '.0', i[2]])
+        ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[3]])
     })
 
-    ;['en_us', 'es_es'].forEach(function (lang, li) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1 + li])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()
