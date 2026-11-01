@@ -1,8 +1,8 @@
 {
   "era": "opv",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 1.001,
+  "fluid": 1.001,
   "keys": [
     "extendedfeatures:opv_universal_circuit",
     "gtceu:annihilation_engine",
