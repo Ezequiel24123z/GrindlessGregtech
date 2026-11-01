@@ -187,7 +187,7 @@ test('skip route drops: an ore block of a material with no vein, a circular rout
   const l = mkLine('ev', { steps: 4 });
   assert.ok(skipRoute(l, 'gtceu:plate', ore));
   assert.equal(skipRoute(l, 'gtceu:plate', ore, null, { never: new Set(['material:nether_star']) }), null);
-  assert.ok(skipRoute(l, 'gtceu:plate', ore, null, { never: new Set(['material:star']) }));
+  assert.ok(skipRoute(l, 'gtceu:plate', ore, null, { never: new Set(['material:iron']) }));
   // circular: a decolour route takes a stained variant that is made from the key itself
   const loop = buildFacts([
     rec('own', 'gtceu:mine', ['gtceu:ore'], 'gtceu:plate'),
