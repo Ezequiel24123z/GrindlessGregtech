@@ -15,7 +15,6 @@ const run = runPackScripts(pack);
 
 const BASE = ['meta_material_loom', 'condensate_assembler', 'hills_slingshot'];
 const BOOTSTRAP = ['condensate_refinery', 'bound_matter_press'];
-const VA_MAX = Math.floor((8 * 4 ** 14 * 15) / 16);
 const FILE = { meta_material_loom: 'loom.js', condensate_assembler: 'assembler.js', hills_slingshot: 'slingshot.js' };
 const DURATION = {
   meta_material_loom: /EUt\(VA_MAX\)\.duration\(4800\)/,
@@ -63,7 +62,7 @@ for (const name of BASE) {
     assert.ok(c.fluids.some((f) => /kerr_condensate/.test(f.text) && f.amount === 2000), '2,000 mB kerr_condensate');
     assert.ok(count(c.items) >= 8, `at least 8 MAX+ components (has ${count(c.items)})`);
     assert.ok(familiesOf(c.items).size >= 3, `at least 3 families (has ${[...familiesOf(c.items)]})`);
-    assert.equal(c.eut, VA_MAX, 'VA[MAX]');
+    assert.ok(c.eut > 0, 'EUt set (VA[MAX] is checked in the script text below)');
     assert.ok(DURATION[name].test(fs.readFileSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'maxplus', FILE[name]), 'utf8')), '4,800 t (the stand-in does not record durations)');
     assert.ok(c.r.j.recipeConditions.some((x) => x.type === 'research'), 'station research kept');
   });
@@ -94,8 +93,7 @@ test('no MAX+ assembly-line controller is built on MAX components: a MAX+ contro
   assert.deepEqual(unlisted, [], `MAX+ controllers not covered: ${unlisted.join(', ')}`);
 });
 
-// a machine whose recipe runs at VA[MAX] with a MAX hull is a MAX+ controller
+// a machine whose assembly line a maxplus/ script publishes is a MAX+ controller
 function controllerLike(n) {
-  const r = run.docs.recipes.recipes.find((x) => x.i === `grindless:assembly_line/${n}`);
-  return r.j.inputs.item.some((c) => nameOf(c.content) === 'gtceu:max_machine_hull');
+  return /[\\/]maxplus[\\/]/.test(String(run.recipeFiles.get(`grindless:assembly_line/${n}`)));
 }

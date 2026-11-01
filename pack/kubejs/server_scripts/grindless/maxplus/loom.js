@@ -103,7 +103,7 @@
   }
 
   var CONTROLLER = { machine: 'gtceu:meta_material_loom', research: 'grindless:horizon_phase_sensor_core', casing: 'grindless:horizon_machine_casing',
-    comps: ['2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor'] }
+    comps: ['2x grindless:maxplus_electric_motor', '2x grindless:maxplus_electric_piston', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_conveyor_module'] }
 
   ML.rows = ROWS
   ML.loom = LOOM
