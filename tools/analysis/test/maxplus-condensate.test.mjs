@@ -22,13 +22,13 @@ test('the stand-in runs the script without errors, skips nothing', () => {
   const mine = run.errors.filter((e) => /maxplus[\\/]condensate/.test(String(e.file)));
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(MC.skipped), []);
-  assert.equal(MC.recipes.length, 13);
+  assert.equal(MC.recipes.length, 14);
   assert.equal(MC.controllerRecipes.length, 2);
 });
 
 test('machine rows: unique circuits per type, run at Sgr A*, never above V[MAX] x 16', () => {
   const rows = [...server.matchAll(/type: '(condensate_refinery|bound_matter_press)'[^\n]*name: '([a-z_0-9]+)', circuit: (\d+), eut: ([^,]+),/g)];
-  assert.equal(rows.length, 9);
+  assert.equal(rows.length, 10);
   const seen = new Set();
   for (const [, type, name, circuit, eut] of rows) {
     const k = `${type}:${circuit}`;

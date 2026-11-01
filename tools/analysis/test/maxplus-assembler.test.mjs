@@ -19,7 +19,7 @@ const lang = read(kube, 'client_scripts', 'grindless', 'maxplus_assembler_lang.j
 test('the stand-in runs the script without errors; only the unregistered frame-part row may be skipped', () => {
   const mine = run.errors.filter((e) => /maxplus[\\/]assembler/.test(String(e.file)));
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
-  assert.deepEqual(plain(MA.skipped).filter((s) => !/horizon_frame_part/.test(s.name)), []);
+  assert.deepEqual(plain(MA.skipped), []);
   assert.equal(MA.assembler.length, 4);
   assert.equal(MA.rows.length, 23);
   assert.equal(MA.coolRows.length, 2);

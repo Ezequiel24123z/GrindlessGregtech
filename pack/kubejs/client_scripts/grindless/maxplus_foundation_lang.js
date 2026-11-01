@@ -55,7 +55,7 @@
         motor: ['Motor', 'Motor'], multilayer: ['Multilayer', 'Multicapa'], nav: ['Nav', 'Navegación'], neutral: ['Neutral', 'Neutro'], neutraliser: ['Neutraliser', 'Neutralizador'],
         neutronium: ['Neutronium', 'Neutronio'], nozzle: ['Nozzle', 'Tobera'], nuclear: ['Nuclear', 'Nuclear'], nuclide: ['Nuclide', 'Núclido'], on: ['on', 'sobre'],
         optic: ['Optic', 'Óptica'], optical: ['Optical', 'Óptico'], oriented: ['Oriented', 'Orientado'], oxide: ['Oxide', 'Óxido'], oxides: ['Oxides', 'Óxidos'],
-        pair: ['Pair', 'Par'], pattern: ['Pattern', 'Patrón'], patterned: ['Patterned', 'Con patrón'], pebbles: ['Pebbles', 'Guijarros'], phase: ['Phase', 'Fase'],
+        pair: ['Pair', 'Par'], part: ['Part', 'Pieza'], pattern: ['Pattern', 'Patrón'], patterned: ['Patterned', 'Con patrón'], pebbles: ['Pebbles', 'Guijarros'], phase: ['Phase', 'Fase'],
         photonic: ['Photonic', 'Fotónico'], photonuclear: ['Photonuclear', 'Fotonuclear'], piezo: ['Piezo', 'Piezo'], piston: ['Piston', 'Pistón'], plasma: ['Plasma', 'Plasma'],
         plate: ['Plate', 'Placa'], plug: ['Plug', 'Tapón'], plus: ['Plus', 'Plus'], polished: ['Polished', 'Pulido'], powder: ['Powder', 'Polvo'],
         precursor: ['Precursor', 'Precursor'], preform: ['Preform', 'Preforma'], press: ['Press', 'Prensa'], primed: ['Primed', 'Imprimado'], primordial: ['Primordial', 'Primordial'],

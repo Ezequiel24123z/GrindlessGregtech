@@ -36,7 +36,7 @@
     'electroded_pmn_stack electronic_grade_silicon enriched_mo_target er_amplifier_fibre fe_ln_boule fe16n2_absorber_ring field_frozen_hoop flux_absorber_casing ' +
     'fused_quartz_sphere_blank gamma_focus_element gan_laser_array gd_absorber_tile gd_hfb2_cermet graded_horizon_laminate graded_z_billet he4_dewar holographic_slab ' +
     'horizon_actuator_stack horizon_alignment_matrix horizon_belt horizon_capacitor horizon_comm_terminal horizon_compressed_plate horizon_conduit horizon_containment_plate ' +
-    'horizon_controller_crystal horizon_core_crystal horizon_frame_truss horizon_interposer horizon_logic_die horizon_logic_wafer horizon_mesh horizon_phase_sensor_core ' +
+    'horizon_controller_crystal horizon_core_crystal horizon_frame_part horizon_frame_truss horizon_interposer horizon_logic_die horizon_logic_wafer horizon_mesh horizon_phase_sensor_core ' +
     'horizon_photonic_engine horizon_shielding horizon_storage_die horizon_valve horizon_valve_body horizon_waveguide ime_ash impregnated_kerr_coil impregnated_kerr_winding ' +
     'impregnated_nozzle infiltrated_liner infiltrated_mesh inp_1550_laser_die inscribed_core_crystal inscribed_reference_crystal insulated_hoop insulated_kerr_wire interposer_die ' +
     'interposer_waveguides iris_blade jacketed_condensate_cell kerr_braid_sleeve kerr_braided_web kerr_clad_strand kerr_coated_tape kerr_coil_winding kerr_fcl_buffer_tape ' +

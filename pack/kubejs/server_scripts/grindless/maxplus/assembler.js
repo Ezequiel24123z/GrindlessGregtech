@@ -128,7 +128,7 @@
   MA.coolRows = COOLS
 
   // the assembler's own rows at Sgr A*: plates, mesh and condensate bath assembled into the four frame-part precursors; the boil-off goes back to the
-  // refinery's c10. Row c4 needs grindless:horizon_frame_part, which XP-F1 has not registered: it is skipped silently until the id exists.
+  // refinery's c10. Row c4 makes grindless:horizon_frame_part (registered by the integrator in maxplus/foundation.js; XP-F1 had missed it).
   var ASM_EUT = V_MAX * 256
   var ASM_KEY = 'grindless_condensate_assembler'
   var ASM = [
