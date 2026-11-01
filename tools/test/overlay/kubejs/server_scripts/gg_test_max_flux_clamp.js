@@ -1,3 +1,4 @@
+// priority: -5436
 // TEST ONLY, MX-S3 (gtceu:horizon_flux_clamp). Command: kubejs custom_command gg_test_max_flux_clamp
 // Band ONLY: X 41216-41279, Z 0-63, Y 98-115 of gcyr:black_hole_orbit (Sgr A*; zones.json row max_flux_clamp).
 //   T1 (named uncertainty: the 7-high flux clamp forms at Sgr A* and runs c1 at VA[MAX] = 2,013,265,920 EU/t on two OpV 4 A hatches):
@@ -31,7 +32,7 @@
   var IDS = [
     'horizon_flux_clamp/horizon_flux_clamp', 'assembly_line/horizon_flux_clamp', 'assembler/hts_flux_pump', 'assembler/clamp_coil_casing',
     'plasma_mass_filtering/reconnection_plasmoid_return', 'nitride_magnet_synthesis/fe16n2_rotor_magnet', 'closed_loop_cooling/cold_flux_pump',
-    'pulsed_laser_deposition/thick_pump_tape', 'coated_conductor/coated_conductor/pump_buffered_tape', 'magnet_winding/magnet_winding/flux_pump_stator'
+    'pulsed_laser_deposition/thick_pump_tape', 'coated_conductor/pump_buffered_tape', 'magnet_winding/flux_pump_stator'
   ]
 
   function classes() {

@@ -1,3 +1,4 @@
+// priority: -5345
 // -----------------------------------------------------------------------------------------------
 // MAX's horizon flux clamp (docs/eras/max.md, machine 13 and line L54; package MX-S3): the multiblock and its recipe type. Every item it makes
 // or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/flux_clamp.js.

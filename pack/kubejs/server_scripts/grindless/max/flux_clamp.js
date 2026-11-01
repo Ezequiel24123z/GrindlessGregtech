@@ -1,3 +1,4 @@
+// priority: -19850
 // -----------------------------------------------------------------------------------------------
 // MAX horizon flux clamp (docs/eras/max.md, machine 13 and line L54; package MX-S3). The line steps on older machines are rows marked MX-S3
 // in their own tables; this file holds the machine's recipe, its controller and the GTM rows of the line:
