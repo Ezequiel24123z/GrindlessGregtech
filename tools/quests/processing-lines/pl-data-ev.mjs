@@ -168,7 +168,7 @@ export default {
         n('smi', 11, -2.5, I('gtceu:samarium_ingot'), 'Samarium Ingot', { kind: 'product', from: ['sc2'], sub: 'LuV magnets' }),
         n('sm', 7, -2.5, I('gtceu:samarium_dust'), 'Samarium', { end: 'LuV magnets', from: ['smcl'], by: ['gtceu:electrolyzer'], sub: 'Kept for LuV\'s magnets' }),
         n('nd', 7, -1.25, I('gtceu:neodymium_dust'), 'Neodymium', { from: ['ndcl'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer' }),
-        n('mnd', 9, -1.25, I('gtceu:magnetic_neodymium_dust'), 'Magnetic Neodymium', { kind: 'product', from: ['nd'], by: ['gtceu:polarizer'], end: 'motor magnets', sub: 'Polarizer; the motors\' magnets' }),
+        n('mnd', 10.5, -1, I('gtceu:magnetic_neodymium_dust'), 'Magnetic Neodymium', { kind: 'product', from: ['nd'], by: ['gtceu:polarizer'], end: 'motor magnets', sub: 'Polarizer; the motors\' magnets' }),
         n('re', 7, 0, I('gtceu:rare_earth_dust'), 'Rare Earth', { kind: 'by', from: ['mixed'], by: ['gtceu:electrolyzer'], end: 'GTM centrifuge', sub: 'GregTech\'s centrifuge takes it from here' }),
         n('hclback', 7, 1.25, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid, Back', { kind: 'ret', from: ['dilute'], by: ['gtceu:distillation_tower'], sub: 'Distillation tower, then the leach again' }),
       ],
