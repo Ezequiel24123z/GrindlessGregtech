@@ -2,7 +2,7 @@
 // Every UHV package has landed, so nothing is gated. Arrows are checked against a recipe dump by pl-check.mjs (integrator).
 // Each row is one line of docs/eras/uhv.md ("New process lines", numbers in the comments): its feedstock, its machines and
 // its product, with the keys steps that carry the chain. Rows are laid out by chain(), 2.5 columns per step.
-import { I, F, M, n } from './pl-lib.mjs';
+import { I, F, M, n, L, via } from './pl-lib.mjs';
 
 // a step is [key, resource, title, kind?, options?]: the first step is raw, machines are 'ours', the rest products
 function chain(y, steps, end, x0 = 0) {
@@ -146,7 +146,7 @@ const data = {
           ['tw1', mach('gtceu:zblan_draw_tower'), 'ZBLAN Draw Tower', 'ours', { desc: 'Melts the fluoride batch into a preform in orbit.' }],
           ['pre', I('grindless:zblan_preform'), 'ZBLAN Preform'],
           ['draw', mach('gtceu:zblan_draw_tower'), 'ZBLAN Draw Tower', 'ours', { desc: 'Pulls fibre in microgravity, where the glass does not crystallise.' }],
-          ['zbf', I('grindless:zblan_fibre'), 'ZBLAN Fibre'],
+          ['zbf', I('grindless:zblan_fibre'), 'ZBLAN Fibre', 'product', { keepShort: 'the zirconium fluoride is bought pure from the orbital furnace; a purification stage would be padding' }],
         ], 'the stellar neighbourhood chart; fibre lasers and the cable of the next tier'),
       ],
     },
@@ -225,7 +225,7 @@ const data = {
         n('algc', 10, 7, I('grindless:algae_culture'), 'Algae Culture', { kind: 'raw', sub: 'With agar, from the closed ecosystem' }),
         n('alg', 10, 5, I('grindless:engineered_far_red_algae'), 'Engineered Algae', { kind: 'product', from: ['cass', 'algc'] }),
         n('abr', 12.5, 5, mach('gtceu:algae_bioreactor'), 'Algae Bioreactor', { kind: 'ours', from: ['alg'], desc: 'Feeds the algae carbon dioxide and water in the red light.' }),
-        n('biom', 15, 5, F('gtceu:biomass'), 'Biomass', { kind: 'product', from: ['abr'], end: 'biorefinery fuel, and oxygen for the base\'s air' }),
+        n('biom', 15, 5, F('gtceu:biomass'), 'Biomass', { kind: 'product', role: 'resource', from: ['abr'], end: 'biorefinery fuel, and oxygen for the base\'s air' }),
         // 15 melanin flare shielding
         ...chain(-4.5, [
           ['clado', I('grindless:cladosporium_culture'), 'Cladosporium Culture', 'raw'],
@@ -234,7 +234,7 @@ const data = {
           ['mel', I('grindless:melanin_extract'), 'Melanin Extract'],
           ['comp', I('grindless:melanin_chitosan_composite'), 'Melanin-Chitosan Composite'],
           ['panel', I('grindless:flare_shield_panel'), 'Flare Shield Panel'],
-          ['pbc', I('grindless:proxima_base_casing'), 'Proxima Base Casing'],
+          ['pbc', I('grindless:proxima_base_casing'), 'Proxima Base Casing', 'product'],
         ], 'the base on Proxima b', 9.5),
         // 17 biocement
         n('tail2', 14.5, -7, I('grindless:leached_tailings'), 'Leached Tailings', { kind: 'raw', sub: 'From the biomining heap' }),
@@ -243,6 +243,7 @@ const data = {
         n('sp', 19.5, -9, I('grindless:sporosarcina_culture'), 'Sporosarcina Culture', { kind: 'raw', sub: 'With urea' }),
         n('heap2', 19.5, -7, mach('gtceu:biomining_heap'), 'Biomining Heap', { kind: 'ours', from: ['cacl', 'cold2', 'sp'], desc: 'Bacteria cement the regolith with calcium carbonate.' }),
         n('bcr', 22, -7, I('grindless:biocemented_regolith'), 'Biocemented Regolith', { kind: 'product', from: ['heap2'] }),
+        L('lnqa', 22, -2.25, 'pl_luv:nqa'),
       ],
     },
     ground: {
@@ -272,7 +273,7 @@ const data = {
           ['hwp1', mach('gtceu:heavy_water_plant'), 'Heavy Water Plant', 'ours', { desc: 'Exchanges deuterium with hydrogen sulfide.' }],
           ['hwc', F('gtceu:heavy_water_concentrate'), 'Heavy Water Concentrate'],
           ['hwp2', mach('gtceu:heavy_water_plant'), 'Heavy Water Plant', 'ours', { desc: 'Finishes the concentrate.' }],
-          ['hw', F('gtceu:heavy_water'), 'Heavy Water'],
+          ['hw', F('gtceu:heavy_water'), 'Heavy Water', 'product', { role: 'resource' }],
         ], 'the fusion fuel line'),
       ],
     },
@@ -296,7 +297,7 @@ const data = {
           ['mg', I('gtceu:magnesium_dust'), 'Magnesium', 'raw', { sub: 'With boron' }],
           ['mgb2', I('gtceu:magnesium_diboride_dust'), 'MgB2 Powder'],
           ['pit', mach('gtceu:powder_in_tube_line'), 'Powder-in-Tube Line', 'ours', { desc: 'Packs the powder in an iron tube and draws it to wire.' }],
-          ['wire', I('gtceu:magnesium_diboride_single_wire'), 'MgB2 Wire'],
+          ['wire', I('gtceu:magnesium_diboride_single_wire'), 'MgB2 Wire', 'product', { role: 'infrastructure' }],
         ], 'cables and the field generators'),
       ],
     },
@@ -305,10 +306,14 @@ const data = {
       nodes: [
         // 24 PBO fibre
         ...chain(0, [
-          ['bz', I('gtceu:diaminoresorcinol_dust'), 'Diaminoresorcinol', 'raw', { sub: 'With terephthalic acid' }],
+          ['bnz', F('gtceu:benzene'), 'Benzene', 'raw', { sub: 'The HV reformer\'s; chlorinated in a chemical reactor' }],
+          ['tcb', F('gtceu:trichlorobenzene'), 'Trichlorobenzene'],
+          ['dnt', F('gtceu:dinitrotrichlorobenzene'), 'Dinitrotrichlorobenzene'],
+          ['cdr', I('gtceu:chlorodinitroresorcinol_dust'), 'Chlorodinitroresorcinol'],
+          ['bz', I('gtceu:diaminoresorcinol_dust'), 'Diaminoresorcinol', 'product', { sub: 'With terephthalic acid' }],
           ['dope', F('gtceu:pbo_dope'), 'PBO Dope'],
           ['pbop', mach('gtceu:pbo_plant'), 'PBO Plant', 'ours', { desc: 'Spins the dope in polyphosphoric acid, which is recycled.' }],
-          ['fib', I('grindless:pbo_fibre'), 'PBO Fibre'],
+          ['fib', I('grindless:pbo_fibre'), 'PBO Fibre', 'product'],
         ], 'the tether ribbon'),
         // 25 HDEHP extractant
         ...chain(2, [
@@ -320,14 +325,17 @@ const data = {
         n('spsol', 7.5, 3.5, F('gtceu:spent_hdehp_solvent'), 'Spent Solvent', { kind: 'by', from: ['sol'], end: 'incinerated; the phosphoric acid comes back' }),
         // 26 UHTC
         ...chain(5, [
-          ['zrb2', I('gtceu:uhtc_blend_dust'), 'UHTC Blend', 'raw', { sub: 'Zirconium diboride and carbon' }],
+          ['rz', I('gtca:red_zircon_dust'), 'Red Zircon', 'raw', { sub: 'The End\'s zircon' }],
+          ['zro', I('gtceu:zirconia_dust'), 'Zirconia'],
+          ['zrdb', I('gtceu:zirconium_diboride_dust'), 'Zirconium Diboride'],
+          ['zrb2', I('gtceu:uhtc_blend_dust'), 'UHTC Blend', 'product', { sub: 'With silicon carbide' }],
           ['sps', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours', { desc: 'Presses the blend to a tile in seconds.' }],
           ['tile', I('grindless:uhtc_tile'), 'UHTC Tile'],
           ['sps2', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours', { desc: 'Sinters four tiles and a tantalum carbide liner into a nozzle.' }],
           ['noz', I('grindless:uhtc_nozzle'), 'UHTC Nozzle'],
           ['thk', mach('gtceu:thruster_works'), 'Thruster Works', 'ours', { desc: 'Mounts the nozzle with an antimatter pellet, power modules and a lifted stage.' }],
           ['ican', I('grindless:ican_rocket_motor'), 'ICAN Rocket Motor'],
-        ], 'the probe stages'),
+        ], 'the probe stages', -7.5),
         n('pellet', 10, 9, I('grindless:ican_pellet'), 'ICAN Pellet', { kind: 'raw', sub: 'From the antimatter store' }),
         n('sicm', 10, 7.5, I('grindless:sic_power_module'), 'SiC Power Module', { kind: 'raw', sub: 'Two; from the silicon carbide line' }),
         n('geo', 12.5, 7, I('grindless:geo_assembled_stage'), 'Geo-Assembled Stage', { kind: 'raw', sub: 'Lifted by the space elevator' }),
@@ -372,6 +380,7 @@ take('photonics', 'pf', 'lnoi');
 take('life', 'oa', 'chs');
 take('life', 'comp', 'chs');
 take('life', 'pbc', 'bcr');
+take('life', 'panel', via('lnqa', 'gtceu:naquadah_alloy_plate'));
 take('antimatter', 'gate', 'ah', 'clk', 'opg');
 take('ground', 'nmw', 'uvc');
 take('power', 'thw', 'tank');

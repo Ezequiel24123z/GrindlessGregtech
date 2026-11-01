@@ -55,3 +55,13 @@ Real problems (7, content package, not fixed):
 | ICAN rocket motor (3 steps) | no UHTC blend, no consumer | ZrB2 blend recipe and a consumer | uhv uhtc and ican scripts |
 
 Layout lint (`tools/quests/lint.mjs`) was run on the regenerated chapters; generated files were restored and are left to the integrator.
+
+## UV and UHV fixes (RF-3V, issue #87)
+
+Audit after: UV keep 8 / fix 5 (was 5 / 8); UHV keep 15 / fix 1 (was 9 / 7). Charts only; no recipe, item or table changed.
+
+- Muon-catalysed fusion: kept short (a generator fed by one freezer and the blanket; the loop is the line).
+- Pluto ices: the chart now draws the printed probe frame (near-net frame, powder bed printer), the penetrator probe, the bay and the fractionator. Still fix: every end product has a shorter bypass (escalated).
+- BNNT fuel tank: crossings with ZPM silica aerogel and the LuV cryogenic tank, through the aerogel fuel tank.
+- Relay seed, MgB2 wire, heavy water, PBO fibre chain, proxima casing, UHTC chain, ICAN motor, ZBLAN: resolved by role, keepShort, or drawn upstream stages and crossings (PBO from benzene, UHTC from red zircon, casing with LuV naquadah alloy).
+- Escalated, not touchable here: krypton and xenon (air cuts pinned by UEV/UXV tests), Pluto N2/CO/CH4 bypasses, biomass (the LuV algae bioreactor bypass is pinned by tests).
