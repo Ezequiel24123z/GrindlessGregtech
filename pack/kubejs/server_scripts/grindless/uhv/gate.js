@@ -39,6 +39,10 @@
   // MAX-T2: the Sgr A* ring (gcyr:black_hole_orbit, F1's relay platform) runs c1 open, c2 sustain and the c15 throw to the NSC belt
   SITES.orbits.push('gcyr:black_hole_orbit')
   SITES.sgr_a_orbit = ['gcyr:black_hole_orbit']
+  // XP-T2: the four MAX+ rings run c1 open and c2 sustain; 30 Doradus and the M31 nucleus are the sites of c17-c19
+  ;['grindless:tarantula_orbit', 'grindless:magellanic_stream', 'grindless:m31_nucleus_orbit', 'grindless:local_group_filament'].forEach(function (d) { SITES.orbits.push(d) })
+  SITES.tarantula_orbit = ['grindless:tarantula_orbit']
+  SITES.m31_nucleus_orbit = ['grindless:m31_nucleus_orbit']
   // UEV-B5, c3 "hold" (docs/eras/uev.md "Gate to UIV"): 16 A x V[UEV] = 134,217,728 EU/t for 60 s at Sirius B's orbit. The stored items are
   // held (catalysts, never consumed: no UEV recipe uses up the stored items). Nothing comes out.
   var UEV_HOLD = { name: 'hold', circuit: 3, eut: 134217728, duration: 1200, site: 'sirius_b_orbit',

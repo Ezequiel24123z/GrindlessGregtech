@@ -286,7 +286,7 @@ function tableEut() {
   return out;
 }
 function eutProblems(rows) {
-  const isC13 = (r) => r.where.startsWith('gate.json') && (((r.name === 'hold_sgr_a' || r.name === 'hold_sgr_a_probe' || r.name === 'hold_nsc_belt') && r.eut === 2 ** 33) || (r.name === 'hold_tarantula' && r.eut === 2 ** 37));
+  const isC13 = (r) => r.where.startsWith('gate.json') && (((r.name === 'hold_sgr_a' || r.name === 'hold_sgr_a_probe' || r.name === 'hold_nsc_belt') && r.eut === 2 ** 33) || (/^hold_(tarantula|magellanic_stream|m31_nucleus|local_group_filament)$/.test(r.name) && r.eut === 2 ** 37));
   const out = rows.filter((r) => r.eut > LONG && !isC13(r)).map((r) => `${r.where}: ${r.eut} EU/t is above 2^31`);
   const c10 = rows.find((r) => r.where.startsWith('gate.json') && r.name === 'hold_galactic_bulge');
   if (!c10) out.push('gate.json: the c10 row (hold_galactic_bulge) is missing');

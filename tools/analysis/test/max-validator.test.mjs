@@ -197,7 +197,7 @@ function tableEut() {
 function eutProblems(rows) {
   const gateRow = (r, n) => r.where.startsWith('gate.json') && r.name === n;
   const isOld = (r) => (gateRow(r, 'hold_sgr_a') && r.eut === 2 ** 33) || ((gateRow(r, 'hold_galactic_bulge') || gateRow(r, 'hold_sgr1806')) && r.eut === LONG);
-  const isMax = (r) => ((gateRow(r, 'hold_sgr_a_probe') || gateRow(r, 'hold_nsc_belt')) && r.eut === 2 ** 33) || (gateRow(r, 'hold_tarantula') && r.eut === 2 ** 37);
+  const isMax = (r) => ((gateRow(r, 'hold_sgr_a_probe') || gateRow(r, 'hold_nsc_belt')) && r.eut === 2 ** 33) || (/^hold_(tarantula|magellanic_stream|m31_nucleus|local_group_filament)$/.test(r.name || '') && r.where.startsWith('gate.json') && r.eut === 2 ** 37);
   const out = rows.filter((r) => r.eut >= LONG && !isOld(r) && !isMax(r)).map((r) => `${r.where}: ${r.eut} EU/t is at or above 2^31`);
   for (const n of ['hold_sgr_a_probe', 'hold_nsc_belt']) {
     const row = rows.find((r) => gateRow(r, n));
@@ -261,7 +261,7 @@ test('static run: no MAX recipe above 2^31 EU/t except gate c14 and c15 (2^33) a
   const bad = [];
   for (const r of pack().recs) {
     for (const e of eu(r, 'tickInputs')) {
-      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && r.i !== 'grindless:warp_gate/hold_tarantula' && r.i !== 'grindless:black_hole_bomb/horizon_lock' && !/^grindless:(black_hole_bomb\/condensate_tap|condensate_refinery\/|bound_matter_press\/|meta_material_loom\/|condensate_assembler\/|hills_slingshot\/)/.test(r.i)) bad.push(`${r.i}: ${e}`);
+      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && !/^grindless:warp_gate\/hold_(tarantula|magellanic_stream|m31_nucleus|local_group_filament)$/.test(r.i) && r.i !== 'grindless:black_hole_bomb/horizon_lock' && !/^grindless:(black_hole_bomb\/condensate_tap|condensate_refinery\/|bound_matter_press\/|meta_material_loom\/|condensate_assembler\/|hills_slingshot\/)/.test(r.i)) bad.push(`${r.i}: ${e}`);
     }
     for (const e of eu(r, 'tickOutputs')) if (e > 2 ** 30) bad.push(`${r.i}: generator ${e} above 2^30`);
   }
