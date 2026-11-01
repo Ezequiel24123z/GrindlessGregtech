@@ -1,9 +1,9 @@
-// Quest data for opv_machines: the 15 OpV multiblocks of ours that are not generators, plus the assembly line array, in the order a player meets them
-// (docs/eras/opv.md, "Our multiblocks"; docs/reforge/05_quest_design.md, sections 2 and 3.2). The three generators, the parallel hatch and the older-machine
+// Quest data for opv_machines: the 15 OpV multiblocks of ours that are not generators, in the order a player meets them
+// (docs/eras/opv.md, "Our multiblocks"; docs/reforge/05_quest_design.md, sections 2 and 3.2). The three generators, the assembly line array, the parallel hatch and the older-machine
 // controllers are in opv_integration. Each machine quest asks for the controller and the casing or parts new in the age; the hull, components and hatches
 // belong to opv_circuits, and the products the age keeps (tetron array, antihydrogen cell, strangelet seed, hawking drive, bulge debris, sinter casing,
 // node pack) are steps in opv_age, so none is asked for twice. Rows start at a link to an opv_age quest: START for home, and the place quests for the rest.
-// Moved here from opv_age with their keys: TFAB, GOPT, LAUE, SPALL, COOLER, LYMAN, VAULT, KFORGE, PRESS, FROZEN, FOUNDRY, ARRAY. The machine halves of ANTIH,
+// Moved here from opv_age with their keys: TFAB, GOPT, LAUE, SPALL, COOLER, LYMAN, VAULT, KFORGE, PRESS, FROZEN, FOUNDRY. The machine halves of ANTIH,
 // DISTIL, DEBRIS, SINTER and NODE are AHF, SDIST, HARV, REFINE and NODEW. New: GATED, SHLD, NEGC, SRF, HE3, JET and MPC. PACC and the PARHATCH, REPEAT
 // quests are not here: the positron accumulator is part of the antihydrogen foundry, the parallel hatch is in opv_integration, and REPEAT is a journey step.
 const it = (item, count) => ({ type: 'item', item, count });
@@ -17,7 +17,7 @@ export const CHAPTER = {
   icon: 'gtceu:kugelblitz_forge',
   autofocus: 'TFAB',
   title: 'OpV: Machines',
-  subtitle: ['Qubits and antimatter at home, a black hole made of light at Cygnus X-1, a magnetar press and a self-copying probe: sixteen machines.'],
+  subtitle: ['Qubits and antimatter at home, a black hole made of light at Cygnus X-1, a magnetar press and a self-copying probe: fifteen machines.'],
 };
 
 export const LINKS = [
@@ -171,10 +171,4 @@ export const QUESTS = [
     unlocks: 'The self-copying probe and the mega-family of the age.',
     automate: 'Every input comes from the cluster by belt, so build it last and wire it to the rest.',
   }, [ROBUST, GRATING], 250),
-  gear('ARRAY', 'assembly_line_array', 'Assembly Line Array', ['FOUNDRY'], 4.5, 24, {
-    for: 'The &6Assembly Line Array&r runs many assembly lines in one machine, the mega-family member of the age. Many lines at once, with no recipe cost cut.',
-    needs: 'An OpV hull, the OpV components and the assembly line grating, with the foundry beside it.',
-    unlocks: 'Production of every line item at the scale of the age.',
-    automate: 'Feed it by buses sized for the whole line, and check the output before the next era.',
-  }, [GRATING], 250),
 ];
