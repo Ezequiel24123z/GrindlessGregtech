@@ -20,7 +20,9 @@
   var MP = G.maxplusPower || (G.maxplusPower = {})
 
   var HULL = 'gtceu:max_machine_hull'
-  var CIRCUIT = 'grindless:horizon_processor'
+  var CIRCUIT = '#gtceu:circuits/max'
+  // the recipe-quality gates count only MAX-named tier components, so each hatch also takes two of those
+  var MAX_PARTS = [['grindless:max_sensor', 1], ['grindless:max_electric_motor', 1]]
   var CABLE = 'gtceu:horizon_strand_single_cable'
   var LAMINA = 'grindless:chain_lamina_stack'
   var SOLDER = { id: 'gtceu:soldering_alloy', amount: 1152 }
@@ -102,12 +104,13 @@
   }
 
   function addHatch(event, h) {
-    var ids = [h.out, HULL, CIRCUIT, CABLE, LAMINA].concat(h.parts.map(function (x) { return x[0] }))
+    var ids = [h.out, HULL, CABLE, LAMINA].concat(MAX_PARTS.map(function (x) { return x[0] })).concat(h.parts.map(function (x) { return x[0] }))
     var missing = missingIds(ids, [SOLDER.id])
     if (missing.length > 0) return skip(h.name, 'unknown id(s): ' + missing.join(', '))
     var b = event.recipes.gtceu.assembly_line('grindless:' + h.name)
     b.itemInputs('1x ' + HULL)
     h.parts.forEach(function (x) { b.itemInputs(x[1] + 'x ' + x[0]) })
+    MAX_PARTS.forEach(function (x) { b.itemInputs(x[1] + 'x ' + x[0]) })
     b.itemInputs('2x ' + CIRCUIT)
     b.itemInputs('2x ' + CABLE)
     b.itemInputs('1x ' + LAMINA)
