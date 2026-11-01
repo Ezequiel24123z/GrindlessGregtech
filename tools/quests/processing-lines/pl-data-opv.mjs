@@ -2,7 +2,7 @@
 // Each row is one line of docs/eras/opv.md ("New process lines"), keyed by its number, as the recipes run today. Rows start at the
 // first OpV-era product (or the older product it takes) and are laid out by chain(), 2.5 columns per step.
 // Arrows are checked against a recipe dump by pl-check.mjs (integrator).
-import { I, F, M, n } from './pl-lib.mjs';
+import { I, F, M, n, L } from './pl-lib.mjs';
 
 // a step is [key, resource, title, kind?, options?]: the first step is raw, machines are 'ours', the rest products
 function chain(y, steps, end, x0 = 0) {
@@ -73,6 +73,8 @@ export default {
           ['m', 'gtceu:field_frozen_press', 'Field Frozen Press'],
           ['i', 'grindless:field_frozen_casing', 'Field Frozen Casing'],
         ], 'the OpV energy hatches'),
+        L('xs0', 0, 6, 'pl_uhv:fib'),
+        L('xs1', 2.5, 6, 'pl_uiv:l30_5'),
       ],
     },
     parts: {
@@ -315,6 +317,13 @@ export default {
           ['m', 'gtceu:antimatter_trap', 'Antimatter Trap'],
           ['i', 'grindless:antiproton_stack_opv', 'Antiproton Stack'],
         ], 'the antihydrogen foundry'),
+        L('xb0', 0, 14, 'pl_uv:trap'),
+        L('xb1', 2.5, 14, 'pl_uhv:sps'),
+        L('xb2', 5, 14, 'pl_uev:ebf'),
+        L('xb3', 7.5, 14, 'pl_uhv:cgf'),
+        L('xb4', 10, 14, 'pl_uv:sheet'),
+        L('xb5', 12.5, 14, 'pl_uiv:l31_1'),
+        L('xb6', 15, 14, 'pl_ev:plate'),
       ],
     },
     antimatter: {
@@ -372,6 +381,12 @@ export default {
           ['i', 'grindless:ingaassb_epi_wafer', 'InGaAsSb Epi Wafer'],
           ['i', 'grindless:tpv_panel', 'TPV Panel'],
         ], 'the annihilation engine'),
+        L('xa0', 0, 14, 'pl_uhv:acc'),
+        L('xa1', 2.5, 14, 'pl_uhv:pos'),
+        L('xa2', 5, 14, 'pl_iv:leu'),
+        L('xa3', 7.5, 14, 'pl_uhv:mbe'),
+        L('xa4', 10, 14, 'pl_uiv:l42_6'),
+        L('xa5', 12.5, 14, 'pl_luv:indium'),
       ],
     },
     exotic: {
@@ -444,6 +459,8 @@ export default {
           ['i', 'grindless:sealed_mmic_tile', 'Sealed MMIC Tile'],
           ['i', 'grindless:node_power_transmitter', 'Node Power Transmitter'],
         ], 'the bulge collector'),
+        L('xu0', 0, 10, 'pl_iv:hotcell'),
+        L('xu1', 2.5, 10, 'pl_uhv:clock'),
       ],
     },
     census: {
