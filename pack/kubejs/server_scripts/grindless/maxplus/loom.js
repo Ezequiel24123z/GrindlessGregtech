@@ -52,7 +52,7 @@
       items: [['grindless:polished_waveguide_tube', 2], ['grindless:nb_target', 1]], fluids: [['gtceu:argon', 1000]],
       outs: [['grindless:nb_lined_tube', 2]], fluidOuts: [['gtceu:argon', 800]] },
     { type: 'nuclear_demagnetisation', name: 'cold_horizon_waveguide', circuit: 27, eut: va(11), duration: 1200, key: 'grindless_nuclear_demagnetisation',
-      items: [['grindless:horizon_waveguide', 1]], keptFluids: [['gtceu:superfluid_helium', 1000]],
+      items: [['grindless:horizon_waveguide', 1], ['grindless:nb_target', 1]], keptFluids: [['gtceu:superfluid_helium', 1000]],
       outs: [['grindless:cold_horizon_waveguide', 1]] },
     // T6
     { type: 'coated_conductor', name: 'conduit_tape', circuit: 12, eut: va(6), duration: 500, key: 'grindless_coated_conductor',
