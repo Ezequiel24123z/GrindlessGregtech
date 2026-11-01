@@ -473,9 +473,23 @@
   // an addon controller cannot be read: it has started when it has taken the inputs
   function working(m) { return m.opaque ? (m.loaded > 0 && totalItems(m) < m.loaded) : statusOf(m.ctrl) === 'WORKING' }
   function lastOf(m) { return m.opaque ? (working(m) ? m.runId : 'none') : lastId(m.ctrl) }
-  function stateOf(m) { return m.opaque ? 'items in buses ' + totalItems(m) + ' of ' + m.loaded : state(m.ctrl) }
-  function reasonsOf(m) { return m.opaque ? 'unreadable (addon controller)' : reasons(m.ctrl) }
-  function wakeOf(m) { if (!m.opaque) wake(m.ctrl) }
+  // the addon controller is a GTM AssemblyLineMachine: its recipe logic is a GTM class, so it is read inside try/catch
+  function stateOf(m) { return m.opaque ? 'items in buses ' + totalItems(m) + ' of ' + m.loaded + ' ' + (m.ctrl ? state(m.ctrl) : '') : state(m.ctrl) }
+  function reasonsOf(m) { return m.opaque ? (m.ctrl ? reasons(m.ctrl) : 'no controller') : reasons(m.ctrl) }
+  function wakeOf(m) { if (m.ctrl) wake(m.ctrl) }
+  function tankSummary(m) {
+    var out = []
+    for (var f = 0; f < 2; f++) {
+      try {
+        var st = m.P['fluid' + f].tank.getFluidInTank(0)
+        out.push('fluid' + f + '=' + (st.isEmpty() ? 'empty' : fluidName(st) + ' x' + st.getAmount()))
+      } catch (e) { out.push('fluid' + f + ' unreadable') }
+    }
+    return out.join(' ')
+  }
+  function energySummary(m) {
+    try { return m.P.energy.energyContainer.getEnergyStored() + '/' + m.P.energy.energyContainer.getEnergyCapacity() + ' in tier ' + m.P.energy.tier } catch (e) { return 'unreadable' }
+  }
 
   function ctlStep(m, age) {
     if (m.phase === 'formed') {
@@ -539,11 +553,36 @@
       check('eal_PARTS', missing.length === 0, '[' + m.P.ids.join(' ') + ']' + (missing.length > 0 ? ' missing: ' + missing.join(', ') : ''))
       if (missing.length > 0) { m.phase = 'done'; return }
       topUp(m)
-      startRun(m, DYNAMO, reversed(5))
-      m.phase = 'wrong'
+      startRun(m, DYNAMO, inOrder(5))
+      m.phase = 'ordered'
       return
     }
     topUp(m)
+    // extendedfeatures ExpandedAssemblyLineMachine (LGPL-3.0): no bus order, items and fluids are matched from any bus or hatch
+    if (m.phase === 'ordered') {
+      if (working(m)) {
+        check('eal_RUNS_start', lastOf(m) === DYNAMO, 'started ' + lastOf(m) + ' ' + age + ' ticks after the inputs went into recipe order | ' + busSummary(m))
+        m.phase = 'orderedRun'
+        m.t1 = S.t
+      } else if (age >= START_TIMEOUT) {
+        check('eal_RUNS_start', false, 'did not start in ' + age + ' ticks | ' + stateOf(m) + ' | reasons=[' + reasonsOf(m) + '] | ' + busSummary(m) + ' | ' + tankSummary(m) + ' | energy ' + energySummary(m))
+        m.phase = 'done'
+      }
+      return
+    }
+    if (m.phase === 'orderedRun') {
+      var made = outputCount(m, DYNAMO_OUT)
+      if (made >= 1) {
+        check('eal_RUNS', true, made + ' ' + short(DYNAMO_OUT) + ' in the output bus ' + (S.t - m.t1) + ' ticks after the start (recipe ' + m.rec.eut + ' EU/t x ' + m.rec.duration + ' t)')
+        emptyBus(m.P.out)
+        m.phase = 'wrong'
+        startRun(m, DYNAMO, reversed(5))
+      } else if (S.t - m.t1 >= m.rec.duration + RUN_SLACK) {
+        check('eal_RUNS', false, 'no output after ' + (S.t - m.t1) + ' ticks | ' + stateOf(m))
+        m.phase = 'done'
+      }
+      return
+    }
     if (m.phase === 'wrong') {
       if (working(m)) {
         var ran = lastOf(m)
@@ -683,10 +722,20 @@
     note('AREA', 'band X ' + BAND.x0 + '-' + BAND.x1 + ' Z 0-47 loaded and cleared, roof at Y ' + ROOF_Y)
   }
 
+  // the client half of gg_test_formed_shots keeps mc-runtime-test in the world while its shared map says hold
+  function holdClient(on) {
+    try {
+      if (!global.ggFormedShots) global.ggFormedShots = new (Java.loadClass('java.util.concurrent.ConcurrentHashMap'))()
+      global.ggFormedShots.put('hold', on)
+    } catch (e) { note('hold', 'could not set the client hold: ' + e) }
+  }
+  function releaseHold() { if (global[REQUEST + 'Armed'] === true) holdClient(false) }
+
   function finish() {
     if (S === null || S.finished) return
     S.finished = true
     global[REQUEST + 'Finished'] = true
+    releaseHold()
     console.info(TAG + SCOPE + '|DONE')
   }
 
@@ -744,6 +793,7 @@
     if (!on) return
     global[REQUEST + 'Armed'] = true
     global[REQUEST] = true
+    holdClient(true)
     note('run', 'armed by the client suite (gg_test_formed_shots.json eal)')
   })
 
