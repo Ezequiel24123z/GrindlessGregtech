@@ -486,7 +486,7 @@ const ROWS = {
     ["i", "grindless:horizon_alignment_matrix", [11]],
   ],
   T13: [
-    ["l", "pl_max:l10_2", []],
+    ["i", "grindless:sic_tow", []],
     ["m", "gtceu:cvi_furnace", [0]],
     ["i", "grindless:sic_chamber_flange", [1]],
     ["f", "fluid:gtceu:hydrochloric_acid", [1], 1],
