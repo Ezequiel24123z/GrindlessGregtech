@@ -434,14 +434,6 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "1232F0B14764A6C8", xp: 30 }],
   },
   {
-    key: "MV_END_VEINS", id: "004525B795119B1B", title: "End Veins", icon: "grindless:vein_sample_sheldonite", deps: ["MV_END_KEY","MV_VANADIUM_STEEL_DRILL_BIT"], x: 10, y: -4.5,
-    desc: [
-      "Bring back raw ore from each End vein and make the samples at home, same as ever. The MV drill runs them with a vanadium steel bit and drilling fluid in the tank, and platinum, palladium and zirconium come up with the rest.",
-    ],
-    tasks: [{ type: "item", id: "1AF75215B6DC9170", item: "grindless:vein_sample_bauxite_end" }, { type: "item", id: "6EAC9D6932581F0E", item: "grindless:vein_sample_magnetite_end" }, { type: "item", id: "456E0BD2E8DB3874", item: "grindless:vein_sample_sheldonite" }, { type: "item", id: "1DA53D76EFA29AB0", item: "grindless:vein_sample_zirconium" }],
-    rewards: [{ type: "xp", id: "6BC885CD026BAD65", xp: 40 }],
-  },
-  {
     key: "MV_UNIVERSAL_PROCESSING_FACTORY", id: "627E186404378CB4", title: "Universal Processing Factory", icon: "gtceu:universal_processing_factory", deps: ["MV_MV_COMPONENTS"], x: 2, y: 3,
     desc: [
       "Eleven shaping machines share one controller, from the bender and wiremill to the lathe and cutter, and its mode tab picks which one it is. It runs a few recipes at once, each at full price: less floor space, same power bill.",

@@ -231,4 +231,12 @@
       ])
       .workableCasingModel(SHELL_TEXTURE, 'grindless:block/multiblock/fluorspar_kiln')
   })
+
+  // The kiln's inert surplus (the sodium and potassium sulfate of the alkali fluoride row): no use, so it is voided (rule 3).
+  StartupEvents.registry('item', function (event) {
+    var item = event.create('grindless:alkali_sulfate_dust')
+      .texture('grindless:item/alkali_sulfate_dust')
+    item.tooltip(Text.gray(Text.translate('tooltip.grindless.alkali_sulfate_dust.0')))
+    item.tooltip(Text.darkGray(Text.translate('tooltip.grindless.alkali_sulfate_dust.1')))
+  })
 })()

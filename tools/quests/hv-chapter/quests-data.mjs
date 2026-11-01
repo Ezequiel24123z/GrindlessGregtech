@@ -48,6 +48,14 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "396C938D1616ED8E", xp: 25 }],
   },
   {
+    key: "HV_END_VEINS", id: "004525B795119B1B", title: "End Veins", icon: "grindless:vein_sample_sheldonite", deps: ["mv:MV_END_KEY","HV_STAINLESS_STEEL_DRILL_BIT"], x: 8, y: -4.5,
+    desc: [
+      "Bring back raw ore from each End vein and make the samples at home, same as ever. The HV drill runs them with a stainless steel bit and drilling fluid in the tank, and platinum, palladium and zirconium come up with the rest.",
+    ],
+    tasks: [{ type: "item", id: "1AF75215B6DC9170", item: "grindless:vein_sample_bauxite_end" }, { type: "item", id: "6EAC9D6932581F0E", item: "grindless:vein_sample_magnetite_end" }, { type: "item", id: "456E0BD2E8DB3874", item: "grindless:vein_sample_sheldonite" }, { type: "item", id: "1DA53D76EFA29AB0", item: "grindless:vein_sample_zirconium" }],
+    rewards: [{ type: "xp", id: "6BC885CD026BAD65", xp: 40 }],
+  },
+  {
     key: "HV_HV_GREENHOUSE", id: "3C06724477E3E0BB", title: "HV Greenhouse",     icon: "gtceu:hv_greenhouse", kind: "machine", deps: ["HV_HV_COMPONENTS"], x: 2, y: -1.5,
         teach: {
           for: "The greenhouse at HV size: more bores per run.",

@@ -54,7 +54,6 @@
         ['tantalum_powder', 'Tantalum Powder', 'Sodium-reduced tantalum.', 'Refined to 6N in the electron beam furnace (circuit 3).'],
         ['niobium_powder', 'Niobium Powder', 'Sodium-reduced niobium.', 'Refined to RRR grade in the electron beam furnace (circuit 4).'],
         ['alkali_fluoride_dust', 'Alkali Fluoride Dust', 'NaF and KF left by the sodium reductions.', 'Returns to the fluorspar kiln as hydrofluoric acid.'],
-        ['alkali_sulfate_dust', 'Alkali Sulfate Dust', 'Inert sodium and potassium sulfate.', 'The kiln\'s harmless leftover; safe to void.'],
         ['yttrium_oxide_dust', 'Yttrium Oxide Dust', 'Yttria from the rare-earth cascade.', 'Stabilises zirconia for the YSZ coating.'],
         ['terbium_oxide_dust', 'Terbium Oxide Dust', 'Terbia from the rare-earth cascade.', 'Stripped in the extraction cascade (circuit 10).'],
         ['ysz_powder', 'YSZ Powder', 'Yttria-stabilised zirconia.', 'Pressed to an ingot in a compressor.'],

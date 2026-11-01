@@ -52,7 +52,6 @@
     tantalum_powder: { stack: 64 },
     niobium_powder: { stack: 64 },
     alkali_fluoride_dust: { stack: 64 },
-    alkali_sulfate_dust: { stack: 64 },
     yttrium_oxide_dust: { stack: 64 },
     terbium_oxide_dust: { stack: 64 },
     ysz_powder: { stack: 64 },
