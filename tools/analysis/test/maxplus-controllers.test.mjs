@@ -13,13 +13,15 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const pack = path.resolve(here, '..', '..', '..', 'pack');
 const run = runPackScripts(pack);
 
-const BASE = ['meta_material_loom', 'condensate_assembler', 'hills_slingshot'];
+const BASE = ['meta_material_loom', 'condensate_assembler', 'hills_slingshot', 'blueshift_forge', 'void_crystal_fab'];
 const BOOTSTRAP = ['condensate_refinery', 'bound_matter_press'];
-const FILE = { meta_material_loom: 'loom.js', condensate_assembler: 'assembler.js', hills_slingshot: 'slingshot.js' };
+const FILE = { meta_material_loom: 'loom.js', condensate_assembler: 'assembler.js', hills_slingshot: 'slingshot.js', blueshift_forge: 'blueshift.js', void_crystal_fab: 'void_fab.js' };
 const DURATION = {
   meta_material_loom: /EUt\(VA_MAX\)\.duration\(4800\)/,
   condensate_assembler: /EUt\(VA_MAX\)\.duration\(4800\)/,
   hills_slingshot: /c\.machine, c\.research, 64, 4800\)/,
+  blueshift_forge: /c\.machine, c\.research, 64, 4800\)/,
+  void_crystal_fab: /c\.machine, c\.research, 64, 4800\)/,
 };
 
 const nameOf = (ing) => {

@@ -156,6 +156,7 @@
   "grindless:assembly_line/accretion_disk_skimmer|gtceu:accretion_disk_skimmer": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/annihilation_laser_works|gtceu:annihilation_laser_works": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/beuv_scanner|gtceu:beuv_scanner": ["T-CIRC","T-COMP","T-COUNT"],
+  "grindless:assembly_line/blueshift_forge|gtceu:blueshift_forge": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/bz_dynamo|gtceu:bz_dynamo": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/calutron|gtceu:calutron": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/cvi_furnace|gtceu:cvi_furnace": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
@@ -200,6 +201,7 @@
   "grindless:assembly_line/uiv_machine_hull|gtceu:uiv_machine_hull": ["T-CIRC","T-COUNT"],
   "grindless:assembly_line/vdw_stacker|gtceu:vdw_stacker": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/vdw_stacking_cell|gtceu:vdw_stacking_cell": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
+  "grindless:assembly_line/void_crystal_fab|gtceu:void_crystal_fab": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/yig_lpe_furnace|gtceu:yig_lpe_furnace": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"]
  }
 }
