@@ -14497,6 +14497,10 @@ file = "kubejs/client_scripts/grindless/maxplus_foundation_lang.js"
 hash = "4953051bdf2eafc4dff7ef9b14431126acfcbffdfdf8b851e791e8089dee0760"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/maxplus_gates_lang.js"
+hash = "be5860f74ba4d2f60b42955cb53ec5a764c4549b946ffcba94958653a4a47660"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/maxplus_loom_lang.js"
 hash = "5973af0d4e956cdeb2e8bd503a44dda7560ed1c49a6abcfa6f83c1b76ed02403"
 
@@ -15610,7 +15614,7 @@ hash = "3c7fac3c9ea9a9f633a036cd65293b33e7ed3870604bd92a5e209e531d8bacde"
 
 [[files]]
 file = "kubejs/data/grindless/tables/gate.json"
-hash = "e48140abb7f07bc462e60f4214e574140b112e2b4767bd3aac1ade5e76541c7a"
+hash = "693f6e982134a253aa65df339784826b165c70c1055b78505d1d890db70870ed"
 
 [[files]]
 file = "kubejs/data/grindless/tables/heavy_water_plant.json"
@@ -16798,7 +16802,7 @@ hash = "f3ee8c735a0755a7fee585952a130e6e0aa9ee3e8971845335f485f9255eb4d6"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uhv/gate.js"
-hash = "e92113d43d84bf6ccaa3d03b4725b5d18fb9d511522b3632bdbdf589c8c0a1f8"
+hash = "d18dc16ecbb535b88c6eb80457a5b510a7d5ac8d86541d4578b6c58605de7d43"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/uhv/mega_quantum_fabricator.js"

@@ -887,7 +887,7 @@
     {"id":"grindless:ican_rocket_motor","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:thruster_assembly"],"used":["emi:info"]},
     {"id":"grindless:ice_giant_atmosphere_sample","kind":"item","needUse":true,"needMade":true,"made":["gtceu:ice_giant_siphon"],"used":["gtceu:chemical_reactor"]},
     {"id":"grindless:ice_giant_diamond_seed","kind":"item","needUse":true,"needMade":true,"made":["gtceu:slurry_separation"],"used":["gtceu:diamond_cvd"]},
-    {"id":"grindless:ig_relay_probe","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembly_line"],"used":["gtceu:hills_slingshot"]},
+    {"id":"grindless:ig_relay_probe","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembly_line"],"used":["gtceu:hills_slingshot","gtceu:warp_gate"]},
     {"id":"grindless:imager_dish_panel","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembly_line","gtceu:photon_ring_imaging"]},
     {"id":"grindless:imm_epi_wafer","kind":"item","needUse":true,"needMade":true,"made":["gtceu:mocvd"],"used":["gtceu:space_photovoltaics"]},
     {"id":"grindless:imm_film","kind":"item","needUse":true,"needMade":true,"made":["gtceu:space_photovoltaics"],"used":["gtceu:space_photovoltaics"]},
