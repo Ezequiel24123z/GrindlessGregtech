@@ -95,6 +95,7 @@
         { "id": "grindless:launched_belt_seed", "role": "use", "reason": "C3 audit (C1 F2): gate c15 makes it and the max-nsc grant in tiers/max.json (travel.js) takes it when the belt opens;         no recipe uses it" },
             { "id": "grindless:cold_horizon_conduit", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H3 (the condensate assembler's frame part, c4); delete the row then" },
             { "id": "grindless:cold_horizon_waveguide", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H3 (the condensate assembler's frame part, c4); delete the row then" },
+            { "id": "grindless:horizon_frame_part", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-G1 (the frame of the Hyperstargate); delete the row then" },
             { "id": "grindless:horizon_machine_casing", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-A1; delete the row then" },
     { "id": "grindless:horizon_machine_casing", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-A1; delete the row then" },
     { "id": "grindless:horizon_shielding", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H3 (the condensate assembler's frame part, c4); delete the row then" },

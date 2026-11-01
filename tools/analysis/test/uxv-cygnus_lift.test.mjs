@@ -25,7 +25,7 @@ test('the stand-in runs the UXV-B2 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(CL.skipped), []);
   assert.deepEqual(plain(CL.clashes), []);
-  assert.equal(CL.recipes.length, 10); // + MX-S3 reconnection_plasmoid_return; MAX-D1 hot_flow_filter, cooled_exhaust_return; MAX-D3 proof_load_ribbon; XP-H3 he_rich_fraction (P25)
+  assert.equal(CL.recipes.length, 9); // + MX-S3 reconnection_plasmoid_return; MAX-D1 hot_flow_filter, cooled_exhaust_return; MAX-D3 proof_load_ribbon (XP-H3's he_rich_fraction is registered from maxplus/assembler.js, not listed here)
 });
 
 test('elevator: circuit 1 lift (liquid helium -> stellar plasma + 900 mB warm helium), circuit 2 log (data module + 100 mB plasma); both at Cygnus X-1', () => {
