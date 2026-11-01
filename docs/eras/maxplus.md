@@ -569,7 +569,7 @@ One Sonnet session per package, AGENTS.md *Work packages*; at most two implement
 | 20 | **XP-K** Creative items | K1-K4, the six rows, the placement guard test. | `maxplus/creative.js` | XP-B4, XP-AE, XP-H3 | T0; T1 placement refused |
 | 21 | **XP-H4** Grid layer | Machine 16, T11-T13, T17, P19, the twelve grid rows. | `maxplus/grid.js` | XP-H2, XP-H3 | T0 |
 | 22 | **XP-G1** Hyperstargate | Machine 17, structure, dial row. | `maxplus/hyperstargate.js` | XP-H4, XP-K, XP-W | T0; T1 forms and dials (S0-1, S0-8) |
-| 23 | **XP-Z1** Final dimension and ending | `grindless:horizon_city` datapack, crossing teleport, `WIN_GAME`, title, `epilogue` book; structures from the assets package. | `data/grindless/dimension*`, `worldgen/`, `maxplus/ending.js` | XP-G1, MX-E1; assets package | T0; T1 arrival rolls credits (proof reuse of i39 for the packet) |
+| 23 | **XP-Z1** Final dimension and ending | `grindless:horizon_city` datapack, crossing teleport, `WIN_GAME`, title, `epilogue` book; structures from the assets package. Split by the integrator: **XP-Z1a** (the dimension, its generated city and sky, the arrival plaza template; no dependency) and **XP-Z1b** (the crossing and the arrival, after XP-G1). | `data/grindless/dimension*`, `worldgen/`, `structures/horizon_city/` (XP-Z1a); `maxplus/ending.js` (XP-Z1b) | XP-Z1a: none; XP-Z1b: XP-G1, MX-E1, XP-Z1a | T0; T1 the city generates (XP-Z1a); T1 arrival rolls credits (XP-Z1b, proof reuse of i39 for the packet) |
 | 24 | **XP-C1** Validator | *Validator*. | `tools/analysis/tiers/maxplus.json`, test | all | T0 |
 | 25 | **XP-C2** Quests data | *Quests* as data for Phase 5. | `tools/quests/maxplus-chapter/` | XP-C1 | T0 |
 

@@ -60,16 +60,17 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 | XP-W2 | #145 | Wireless MAX+ hatches (1,024 A and 4,096 A) and an exact network store above 2^53; serial on `lib/**` | 7 |
 | EN-1 | #146 | English only: every `es_es` text and check removed, and a guard that keeps Spanish out | 8 |
 | XP-V1b | #147 | The horizon interferometer's two missing MAX casing textures and the MAX foundation generator's self-check | 6 |
+| XP-Z1a | #148 | The final dimension `grindless:horizon_city`: its generated ruined city, its sky and the arrival plaza (XP-Z1b, the crossing and the arrival, follows XP-G1) | 7 |
 
 - **Next** (queue; serial where packages share files):
   - Phase 7, `maxplus.md` *Build order*:
     - XP-H4 (the grid layer, the hyper assembly array and the six creative-item rows; after XP-H2 and XP-K);
     - the horizon capacitor bank (machine 15; after XP-W2 and XP-H4);
-    - XP-G1 (the Hyperstargate and its dial; after the bank);
-    - XP-Z1, XP-C1 (the `maxplus` era in the era lists, its validator tier, and tier 15's circuits, hull and voltage on the quality ladder), XP-PL, XP-C2a and XP-C2b.
+    - XP-G1 (the Hyperstargate and its dial; after the bank), then XP-Z1b (the crossing and the arrival);
+    - XP-C1 (the `maxplus` era in the era lists, its validator tier, and tier 15's circuits, hull and voltage on the quality ladder), XP-PL, XP-C2a and XP-C2b.
 
     Each merge takes its ids out of the class C row.
-  - Phase 6: XP-V2, the MAX+ controller faces, once the last MAX+ machine has landed; XP-Z1's city structures.
+  - Phase 6: XP-V2, the MAX+ controller faces, once the last MAX+ machine has landed.
   - Then Phase 8 and Phase 9.
 - **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
