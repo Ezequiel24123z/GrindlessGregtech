@@ -2,9 +2,11 @@
 
 GregTech progression pack for Minecraft 1.20.1 (Forge) on GregTech Modern 7.5.3. Its rule is simple: **nothing needed for progression is gathered by hand**. Starting in the Steam Age, resources are produced automatically through increasingly complex GregTech processing lines and multiblocks. Difficulty comes first from steps, conditions and coordinating industry, and from MV on key recipes cost a lot too; recipe times are never inflated.
 
-The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon, Mars, the inner planets, Jupiter's and Saturn's moons, the edge of the Solar System, nearby stars, neutron stars and black holes, the galactic bulge and, in MAX, Sagittarius A* at the Galactic Centre.
+The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon, Mars, the inner planets, Jupiter's and Saturn's moons, the edge of the Solar System, nearby stars, neutron stars and black holes, the galactic bulge, in MAX Sagittarius A* at the Galactic Centre and, in MAX+, other galaxies and the Hyperstargate, which ends the pack.
 
-**At a glance:** Minecraft 1.20.1 · Forge 47.4.28 · GregTech Modern 7.5.3 · 224 mods · 15 tiers playable (Steam to MAX) · 288 multiblocks of our own in v0.17.0.
+**v1.0.0 needs a new world.** There is no save compatibility: worlds from v0.17.0 or older do not work.
+
+**At a glance:** Minecraft 1.20.1 · Forge 47.4.28 · GregTech Modern 7.5.3 · 224 mods · 16 eras playable (Steam to MAX+) · English only.
 
 **Contents:** [Design rules](#design-rules) · [Current status](#current-status) · [Tier by tier](#tier-by-tier) · [Our multiblocks](#our-multiblocks) · [Multiblocks from other mods](#multiblocks-from-other-mods) · [Ideas from other modpacks](#ideas-from-other-modpacks) · [Other mods](#other-mods) · [Quests](#quests) · [Known issues](#known-issues) · [How to play](#how-to-play-prism-launcher) · [For developers](#for-developers)
 
@@ -21,15 +23,14 @@ The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon
 
 ## Current status
 
-The latest playable release is **v0.17.0 "MAX"**. It spans the Steam Age through MAX, from Earth to the mirror shell around Sagittarius A*.
+The current version is **v1.0.0**, the result of Project Reforge. It spans the Steam Age through MAX+, from Earth to the Hyperstargate. The last tagged release before it is v0.17.0.
 
 | Progress | Status |
 |---|---|
-| Steam Age–MAX | Playable in `v0.17.0`; each era adds automated resource production, processing lines and multiblocks. |
-| Project Reforge | In progress toward `v1.0.0`: costs that climb steeply per era from MV, an audit of every era and line, a bigger MAX, longer teaching quests, textures and sounds. Start a new world after it: old saves are not supported. |
-| MAX+ | Planned for `v1.0.0`: intergalactic travel and the Hyperstargate, the pack's final project. |
+| Steam Age–MAX | Reworked in `v1.0.0`: costs that climb steeply per era from MV, an audited set of process lines, a bigger MAX, a rebuilt quest book, textures and sounds. |
+| MAX+ | New in `v1.0.0`: three stages out of the Galaxy and the Local Group, four new places, 17 multiblocks, 58 lines, and the Hyperstargate. The ending moved here from MAX. |
 
-The MAX release adds the Galactic Centre, the NSC belt and the ending. See the [v0.17.0 release notes](docs/releases/v0.17.0.md) for the full list. The [journey guide](docs/journey.md) describes the progression.
+See the [v1.0.0 release notes](docs/releases/v1.0.0.md) for the full list and the [v0.17.0 notes](docs/releases/v0.17.0.md) for the previous release. The [journey guide](docs/journey.md) describes the progression.
 
 ## Tier by tier
 
@@ -51,7 +52,8 @@ Each era sends you somewhere new for a resource that only exists there, and each
 | **UIV** | RX J1856 neutron star, PSR J0437 pulsar, Cygnus X-1 | Reached through the warp gate. Metallic hydrogen, refractory alloys, the optical mainframe, fusion Mk5 and energy from a black hole's spin. | Penrose engine, Matrioshka computer, neutronium compression hall, ramp-compression pulser, levitation melter (23) |
 | **UXV** | Cygnus X-1 again, Vela pulsar, Cassiopeia A | Star lifting, accretion-disk plasma, nuclear pasta, spintronics and fusion Mk6. | Stellar elevator, accretion disk skimmer, plasma mass filter, pasta extractor, Blandford–Znajek dynamo (22) |
 | **OpV** | Cygnus X-1 orbit, magnetar SGR 1806-20, Terzan 5 core | Antimatter for power and tools, strangelets, the Kugelblitz forge, chain matter and von Neumann replication. | Annihilation engine, antiproton decelerator, strangelet vault, Kugelblitz forge, Hawking collector, field-frozen press (19) |
-| **MAX** | Sagittarius A* orbit, the NSC belt | Kardashev III at the Galactic Centre, ending with a mirror shell around the galaxy's central black hole. | Rydberg array works, photon ring imager, Geroch winch, mass stream injector, accretion feeder, mirror shell (10) |
+| **MAX** | Sagittarius A* orbit, the NSC belt | Kardashev III at the Galactic Centre, ending with a mirror shell that stabilises the central black hole's horizon. | Rydberg array works, photon ring imager, Geroch winch, mass stream injector, accretion feeder, horizon interferometer, mirror shell (14) |
+| **MAX+** | 30 Doradus, the Magellanic Stream, M31's nucleus, the Local Group filament | Out of the Galaxy by slingshot and warp gate, scale beyond MAX, and the Hyperstargate, the pack's final project. | Hills slingshot, pair-instability crucible, blueshift forge, void crystal fab, Hyperfactory, Hyperstargate (17) |
 
 ## Our multiblocks
 
@@ -119,11 +121,11 @@ The pack has 224 mods ([`pack/mods/`](pack/mods/)). Besides the GregTech addons 
 
 ## Quests
 
-FTB Quests guides the whole journey: Welcome and Workshop chapters, one chapter per era (Steam Age to UIV Age), a Processing Lines flowchart for each era, and chapters for Multiblocks, Power, Storage, Applied Energistics, Productive Bees and Travel and Teams. Quest design is described in [`docs/quests.md`](docs/quests.md).
+FTB Quests guides the whole journey: Welcome and Workshop chapters, one to nine chapters per era (Steam Age to MAX+, grouped by era, each with six roles from what's new to a capstone), a Processing Lines flowchart for each era, and chapters for Multiblocks, Power, Storage, Applied Energistics, Productive Bees and Travel and Teams. Quest design is described in [`docs/quests.md`](docs/quests.md).
 
 ## Known issues
 
-- The Expanded Assembly Line and the Matrix Data Relay (Extended Features add-on) cannot form on a dedicated server: the add-on loads a client-only class. They work in single player, and nothing in progression needs them. The Expanded Assembly Line forms, but it has not yet been seen completing a recipe in tests.
+- The Expanded Assembly Line and the Matrix Data Relay (Extended Features add-on) are hidden: the Expanded Assembly Line formed but never started a recipe in tests, and neither forms on a dedicated server. Nothing in progression needs them.
 - GCYR's configured low gravity is not applied in game.
 
 ## How to play (Prism Launcher)
@@ -140,7 +142,7 @@ Before each launch, the instance updates from the `releases` branch, which only 
 
 Keep using the **same Prism instance**. Once a tested release reaches `releases`, close Minecraft and launch that instance again: packwiz updates the managed pack files, not your `saves` folder. There is no need to import another zip for each pack release.
 
-**Until v1.0.0, start a new world after updating.** Releases before 1.0 may remove, rename or reshape items, blocks, fluids, dimensions, multiblocks and quests, so a world from an older release can break.
+**Start a new world for v1.0.0.** It removes, renames and reshapes items, blocks, fluids, dimensions, multiblocks and quests, so a world from v0.17.0 or older breaks. Do not update an old world.
 
 **Versioned release zips are different.** An instance imported from `Gregtech-Grindless-v0.14.0.zip`, for example, is pinned to that tag and does not automatically follow later releases. To switch it to the releases channel without moving the world, close Minecraft, open *Edit instance → Settings → Custom commands*, and change the existing pre-launch command to:
 
