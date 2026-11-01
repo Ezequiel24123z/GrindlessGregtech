@@ -57,6 +57,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
     - XP-Z1, XP-C1 (the `maxplus` era in the era lists, its validator tier, and tier 15's circuits, hull and voltage on the quality ladder), XP-PL, XP-C2a and XP-C2b.
 
     Each merge takes its ids out of the class C row.
+  - EN-1, English only (owner, 2026-11-01): remove every `es_es` block and `lang/es_es.json`, and the checks and tests that require Spanish, in one serial package once XP-B1, XP-T2 and XP-M1 land.
   - Phase 6: the MAX+ assets package (textures for the MAX+ items, casings and controllers; XP-Z1's city structures), once the machine packages have landed.
   - Then Phase 8 and Phase 9.
 - **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
@@ -84,7 +85,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - 8 previews, likely an audit false positive that the fixed fixture removes on the next 8 GB EMI run;
   - `launched_belt_seed` without a consumer (a MAX package).
 - **The `maxplus` stage** is a world persistentData flag (`grindless_stage_maxplus`, MX-E1): the pack has no stage mod, and MAX+ packages read the flag.
-- **MAX+ until XP-C1:** the ids with no recipe yet are one class C row in `tools/analysis/tiers/obtain.json` (hidden) and carry EMI exception rows; the `maxplus` era is not yet in the era lists; the es_es names of XP-F1 are word-by-word (Phase 8 review). Each MAX+ controller carries three baselined quality findings (T-CIRC, T-HULL, T-VOLT at tier 15) until XP-C1 decides tier 15's circuits, hull and voltage.
+- **MAX+ until XP-C1:** the ids with no recipe yet are one class C row in `tools/analysis/tiers/obtain.json` (hidden) and carry EMI exception rows; the `maxplus` era is not yet in the era lists. Each MAX+ controller carries three baselined quality findings (T-CIRC, T-HULL, T-VOLT at tier 15) until XP-C1 decides tier 15's circuits, hull and voltage.
 - **Assets:**
   - MAX+ has no textures yet: XP-F1's items and six casings point at files that do not exist, and the MAX+ machines (refinery, press, loom, condensate assembler, slingshot) wear MAX art until the MAX+ assets package;
   - the UEV, UIV and UXV foundation scripts still draw items that `foundation.js` no longer registers, so their self-check fails (Phase 8);

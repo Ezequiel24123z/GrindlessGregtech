@@ -9,7 +9,7 @@ applyTo: "pack/kubejs/**,tools/test/overlay/kubejs/**,tools/analysis/lib/kubejs_
 - Shared helpers (`startup_scripts/grindless/lib/*.js`, `server_scripts/grindless/lib/*.js`) belong to the integrator; a change there is its own package.
 - Tables (veins, crops...) live in data files (`pack/kubejs/data/grindless/tables/`) and recipes are generated from them. Repetitive recipes are not written by hand.
 - Recipes from other mods that break progression are redone so they go through GregTech machines.
-- Every name or tooltip gets `en_us` and `es_es` (in the machine's `*_lang.js`). Quests are English only.
+- Every name or tooltip gets `en_us` (in the machine's `*_lang.js`). The pack is English only (owner, 2026-11-01): write no Spanish. Until EN-1 removes `es_es` and its checks, T0 still wants an `es_es` key for each `en_us` key: copy the English text there. Quests are English only.
 
 ## EMI
 - Every item, block, fluid and machine we register shows in EMI how it is obtained and, unless it is an end product, what it is used for (`node tools/analysis/emi-coverage.mjs`, part of the Node suite).
