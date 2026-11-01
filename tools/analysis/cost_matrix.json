@@ -27,7 +27,7 @@
   "excludeRecipes": {
     "types": ["gtceu:vein_drilling"],
     "categories": ["*recycling*", "*decomposition*"],
-    "ids": ["*/uncraft*", "*_recycling*", "*/unpack*", "*decompress*"]
+    "ids": ["*/uncraft*", "*_recycling*", "*/unpack*", "*decompress*", "gtnn:component_assembly_line/*"]
   },
 
   "base": {

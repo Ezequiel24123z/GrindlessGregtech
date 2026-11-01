@@ -1,8 +1,8 @@
 {
   "era": "mv",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 1.25,
+  "fluid": 1.25,
   "keys": [
     "extendedfeatures:mv_universal_circuit",
     "gtceu:advanced_multi_smelter",
@@ -35,7 +35,24 @@
     "gtceu:weather_controller"
   ],
   "include": [],
-  "exclude": [],
-  "remove": [],
+  "exclude": [
+    "gtnn:component_assembly_line/*_mv",
+    "gtnn:component_assembly_line/*_mv_*"
+  ],
+  "remove": [
+    "gtceu:shaped/conveyor_module_mv_rubber",
+    "gtceu:shaped/conveyor_module_mv_silicone_rubber",
+    "gtceu:shaped/conveyor_module_mv_styrene_butadiene_rubber",
+    "gtceu:shaped/electric_motor_mv",
+    "gtceu:shaped/electric_piston_mv",
+    "gtceu:shaped/electric_pump_mv_rubber",
+    "gtceu:shaped/electric_pump_mv_silicone_rubber",
+    "gtceu:shaped/electric_pump_mv_styrene_butadiene_rubber",
+    "gtceu:shaped/emitter_mv",
+    "gtceu:shaped/field_generator_mv",
+    "gtceu:shaped/mv_machine_hull",
+    "gtceu:shaped/robot_arm_mv",
+    "gtceu:shaped/sensor_mv"
+  ],
   "override": {}
 }
