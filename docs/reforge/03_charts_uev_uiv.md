@@ -78,3 +78,7 @@ Nine recipe rows gain one input from UV or earlier (reach 2+); link nodes `x_*` 
 - Link nodes added to UIV rows are a chart annotation only; row-mode lines (`lN_M` keys) ignore consumed links in the audit.
 - Row-mode lines 19/20 share one sink, so the audit reports the orifice plate as that line's end product.
 - Shared audit outputs and generated chapters were not committed; the integrator regenerates them.
+
+## UIV line 13 (RF-3W, issue #92, 2026-11-01)
+
+The BEUV driver ASIC line moved to its own cluster `beuv` (the audit reads links only for non-row clusters), draws the UEV HfO2 and UHV comb links, and ends in the photonic tensor core. Audit: UIV 0 fix rows.

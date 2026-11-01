@@ -65,3 +65,13 @@ Audit after: UV keep 8 / fix 5 (was 5 / 8); UHV keep 15 / fix 1 (was 9 / 7). Cha
 - BNNT fuel tank: crossings with ZPM silica aerogel and the LuV cryogenic tank, through the aerogel fuel tank.
 - Relay seed, MgB2 wire, heavy water, PBO fibre chain, proxima casing, UHTC chain, ICAN motor, ZBLAN: resolved by role, keepShort, or drawn upstream stages and crossings (PBO from benzene, UHTC from red zircon, casing with LuV naquadah alloy).
 - Escalated, not touchable here: krypton and xenon (air cuts pinned by UEV/UXV tests), Pluto N2/CO/CH4 bypasses, biomass (the LuV algae bioreactor bypass is pinned by tests).
+
+## UV, UHV and UIV last rows (RF-3W, issue #92, 2026-11-01)
+
+Audit after: UV, UHV and UIV have 0 fix rows. Charts only, except one recipe-type slot.
+
+- Pluto N2, CO and CH4: drawn as by-products (kind `by`) with their destinations (nitrogen network, syngas Pluto shift, methane pyrolyser); the line ends in the neuro processing unit.
+- Krypton and xenon: by-products of the noble-gas cut, ending in the Hall and ion thrusters. The EV cryogenic plant is untouched.
+- UHV biomass: a by-product of the algae bioreactor (biorefinery fuel and oxygen); the role `resource` is dropped.
+- UIV line 13 (BEUV driver ASIC): own chart cluster `beuv` so its links count as crossings (UEV HfO2, UHV comb); it now ends in the photonic tensor core, which feeds the optical mainframe.
+- `culture_seed`: the closed-ecosystem recipe type takes a fourth item slot (`startup_scripts/grindless/uv/life.js`), so its circuit 2 is no longer dropped.

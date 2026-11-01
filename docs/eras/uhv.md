@@ -1379,3 +1379,5 @@ All eleven were accepted as proposed, with the architect's recommended answers t
 - Fluid regulators UHV-UXV: assembler, the tier's pump plus its circuits, at VA of the tier below.
 - UEV-UXV components are raised to VA of the tier below and take the tier below's same part.
 - UHV basic machines, laser hatches and muffler hatch, the UEV-UXV 4x/9x hatches, quantum chests and tanks, and the UXV circuit assembler and scanner (`#gtceu:circuits/uxv`): assembly lines in `integration/high_tier_machines.js`, researched on the tier below's same machine. The rotor holders stay held.
+
+- 2026-11-01 (RF-3W): UHV biomass is drawn as a by-product of the algae bioreactor (biorefinery fuel and oxygen), not a resource role.

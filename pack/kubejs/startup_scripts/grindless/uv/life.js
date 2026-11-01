@@ -49,9 +49,9 @@
   L.vatType = 'gtceu:' + VAT_TYPE
   L.algaeCulture = 'grindless:algae_culture'
   L.items = [L.algaeCulture]
-  // ark: items in 3 (two cultures + circuit), out 2 (the copied cultures); fluids in 3 (CO2, ammonia, water), out 3 (O2, medium, biomass)
+  // ark: items in 4 (two cultures + agar for the seed, + circuit), out 2 (the copied cultures); fluids in 3 (CO2, ammonia, water), out 3 (O2, medium, biomass)
   // vat: items in 3 (gelatin + organoid or stem cells + board, + circuit), out 1; fluids in 1 (medium), out 1 (biomass)
-  L.arkIO = { itemsIn: 3, itemsOut: 2, fluidsIn: 3, fluidsOut: 3 }
+  L.arkIO = { itemsIn: 4, itemsOut: 2, fluidsIn: 3, fluidsOut: 3 }
   L.vatIO = { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }
   L.arkParts = {
     energy_input: { min: 1, max: 2 },

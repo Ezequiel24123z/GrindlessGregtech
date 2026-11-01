@@ -1522,3 +1522,5 @@ The design above follows these. None is in `DECISIONS.md` yet; the orchestrator 
 7. `- 2026-10-27 · UV keeps GTCA's space elevator hidden: its until moves from uv to uhv (no recipe from GTCA).`
 8. `- 2026-10-27 · UV Starshot: the probe launches in UV and its approach data gate UHV; the arrival at Proxima is UHV.`
 9. `- 2026-10-27 · UV extrapolations named in the doc and quests: net-power muon-catalysed fusion and Pluto–Earth VLBI.`
+
+- 2026-11-01 (RF-3W): Pluto N2, CO and CH4, krypton and xenon are drawn as by-products with their destinations; the closed-ecosystem type takes a fourth item slot so `culture_seed` keeps circuit 2.
