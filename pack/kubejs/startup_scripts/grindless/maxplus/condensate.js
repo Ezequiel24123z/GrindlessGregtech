@@ -44,7 +44,7 @@
     },
     {
       name: 'bound_matter_press', machine: 'gtceu:bound_matter_press', type: 'bound_matter_press', dataKey: 'grindless_bound_matter_press',
-      lang: 'Bound-Matter Press', maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 1 }, casing: PRESS, texture: 'grindless:block/max/clamp_coil_casing',
+      lang: 'Bound-Matter Press', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 0, fluidsOut: 1 }, casing: PRESS, texture: 'grindless:block/max/clamp_coil_casing',
       overlay: 'grindless:block/multiblock/bound_matter_press',
       width: 13, height: 13, depth: 13,
       pal: { F: PRESS, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing' },

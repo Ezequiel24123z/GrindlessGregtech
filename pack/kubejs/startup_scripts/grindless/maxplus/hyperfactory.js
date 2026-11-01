@@ -133,6 +133,8 @@
     var b = event.create(ID, 'multiblock')
       .langValue('Hyperfactory')
       .rotationState(RotationState.NON_Y_AXIS)
+      // EMI draws no preview for patterns with an exact-limit data access hatch (GTM's own assembly line has the same gap)
+      .renderMultiblockXEIPreview(false)
     TYPES.forEach(function (t) { b = b.recipeType(t) })
     G.mega.install(b, chain)
       .appearanceBlock(function () { return Block.getBlock(CASING) })
