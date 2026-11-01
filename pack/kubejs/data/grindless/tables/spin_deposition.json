@@ -230,16 +230,17 @@
         { "_why": "MAX-E1 (max.md, L42 step 4, c21): iridium sputtered from the target onto the SiC grazing shell, the Wolter mirror coat; most of the argon is recovered", "name": "iridium_coated_shell", "circuit": 21, "eut": 33554432, "duration": 800,
           "itemsIn": [{ "id": "grindless:sic_grazing_shell", "count": 1 }, { "id": "grindless:iridium_target", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:iridium_coated_shell", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
-        { "_why": "MX-S2 (max.md, L50 step 5, c26): titanium and gold sputtered over the patterned VO2 film as its contact metals; most of the argon is recovered", "name": "metallised_metasurface", "circuit": 26, "eut": 33554432, "duration": 900,
-          "itemsIn": [{ "id": "grindless:patterned_vo2_metasurface", "count": 1 }, { "id": "gtceu:titanium_dust", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:metallised_metasurface", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
+        
         { "_why": "MX-S1 (max.md, L47 step 4, c24): gold sputtered onto the lathe-turned Au-Pt test mass, its low-loss coat; most of the argon is recovered", "name": "coated_test_mass", "circuit": 24, "eut": 33554432, "duration": 800,
           "itemsIn": [{ "id": "grindless:au_pt_test_mass", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:coated_test_mass", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
         { "_why": "MX-S1 (max.md, L48 step 3, c25): gold sputtered onto the zero-expansion baseplate, the coated bench optics; most of the argon is recovered", "name": "coated_bench_optics", "circuit": 25, "eut": 33554432, "duration": 600,
           "itemsIn": [{ "id": "grindless:zero_expansion_baseplate", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:coated_bench_optics", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] }
-      ]
+          "itemsOut": [{ "id": "grindless:coated_bench_optics", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
+        { "_why": "MX-S2 (max.md, L50 step 5, c26): titanium and gold sputtered over the patterned VO2 film as its contact metals; most of the argon is recovered", "name": "metallised_metasurface", "circuit": 26, "eut": 33554432, "duration": 900,
+          "itemsIn": [{ "id": "grindless:patterned_vo2_metasurface", "count": 1 }, { "id": "gtceu:titanium_dust", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:metallised_metasurface", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] }
+        ]
     },
     "pulsed_laser_deposition": {
       "dataKey": "grindless_pulsed_laser_deposition",
