@@ -316,7 +316,8 @@ const probe = chapter.clusters.starshot.nodes.filter((nd) => !PARTS.has(nd.key))
 // it to the sibling cluster's product node (LD-T1), so the chain and its steps are unchanged.
 const copy = (src, key, sub) => {
   const o = [...fusion, ...parts, ...probe].find((nd) => nd.key === src);
-  return n(key, 0, 0, o.res, o.title, { kind: 'raw', sub });
+  const { key: _k, x: _x, y: _y, from: _f, title, kind: _kind, sub: _s, desc: _d, ...res } = o;
+  return n(key, 0, 0, res, title, { kind: 'raw', sub });
 };
 const feed = (list, key, was, now) => {
   const nd = list.find((x) => x.key === key);
