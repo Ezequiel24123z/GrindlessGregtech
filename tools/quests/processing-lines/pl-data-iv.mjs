@@ -199,12 +199,12 @@ export default {
         n('graphite', 4, 1.25, I('gtceu:raw_graphite'), 'Raw Graphite', { kind: 'by', from: ['mdrill'], end: 'graphite', sub: 'Electrodes and graphene' }),
         n('rsulfur', 4, 2.25, I('gtceu:raw_sulfur'), 'Raw Sulfur', { kind: 'by', from: ['mdrill'], end: 'sulfur', sub: 'Sulfuric acid at home' }),
         n('irdust', 6, 0, I('gtceu:iridosmine_dust'), 'Iridosmine Dust', { from: ['rawir'], by: ['gtceu:ore_processing'], sub: 'Ore plant' }),
-        n('pplant', 8, 0, M('gtceu:platinum_plant', 'gtceu:pgm_refining'), 'Platinum Plant, Mode 3', {
+        n('pplant', 8, 0, M('gtceu:platinum_plant'), 'Platinum Plant, Mode 3', {
           kind: 'ours', from: ['irdust'],
           desc: 'The EV plant learns one more trick. The osmium tetroxide and the chlorine never leave it.',
         }),
-        n('ir', 10, -1.5, I('gtceu:iridium_dust'), 'Iridium', { kind: 'product', from: ['pplant'] }),
-        n('os', 10, 0, I('gtceu:osmium_dust'), 'Osmium', { kind: 'product', from: ['pplant'] }),
+        n('ir', 10, -1.5, I('gtceu:iridium_dust'), 'Iridium', { from: ['pplant'] }),
+        n('os', 10, 0, I('gtceu:osmium_dust'), 'Osmium', { from: ['pplant'] }),
         n('residue', 10, 1.25, I('gtceu:platinum_sludge_residue_dust'), 'Platinum Sludge Residue', { kind: 'by', from: ['pplant'], end: 'gold, silica', sub: 'Centrifuge: gold and silica' }),
         n('cacl2', 10, 2.25, I('gtceu:calcium_chloride_dust'), 'Calcium Chloride', { kind: 'by', from: ['pplant'], end: 'electrolysis', sub: 'Electrolysis gives the calcium and chlorine back' }),
         n('iringot', 12, -1.5, I('gtceu:iridium_ingot'), 'Iridium Ingot', { kind: 'product', from: [via('ir', 'gtceu:hot_iridium_ingot')], sub: 'EBF at 4,500 K, then the freezer' }),
