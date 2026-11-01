@@ -758,6 +758,136 @@ const ROWS = {
     ["m", "gtceu:millikelvin_cryostat_works", [6]],
     ["i", "grindless:horizon_computation_core", [7], 0, 1],
   ],
+  H1: [
+    ["i", "grindless:horizon_shielding", []],
+    ["i", "grindless:horizon_waveguide", []],
+    ["i", "grindless:horizon_conduit", []],
+    ["i", "grindless:horizon_mesh", []],
+    ["m", "gtceu:condensate_assembler", [0, 1, 2, 3]],
+    ["i", "grindless:horizon_frame_part", [4]],
+  ],
+  H2: [
+    ["i", "grindless:horizon_frame_part", []],
+    ["i", "grindless:flux_absorber_casing", []],
+    ["i", "grindless:maxplus_field_generator", []],
+    ["i", "grindless:kerr_strange_plate", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:hyperstargate_ring_block", [4]],
+  ],
+  H3: [
+    ["i", "grindless:horizon_frame_part", []],
+    ["i", "grindless:chevron_core", []],
+    ["i", "grindless:maxplus_electric_piston", []],
+    ["i", "grindless:cold_kerr_gyro", [], 0, 1],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:hyperstargate_chevron_upgrade", [4]],
+  ],
+  H4: [
+    ["i", "grindless:hyperstargate_ring_block", []],
+    ["i", "grindless:hyperstargate_chevron_upgrade", []],
+    ["i", "grindless:horizon_containment_plate", []],
+    ["i", "grindless:horizon_shielding", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:hyperstargate_chevron_block", [4]],
+  ],
+  H5: [
+    ["i", "grindless:hyperstargate_ring_block", []],
+    ["i", "grindless:hyperstargate_chevron_upgrade", []],
+    ["i", "grindless:horizon_lock", []],
+    ["i", "grindless:horizon_containment_plate", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:hyperstargate_locked_chevron", [4]],
+  ],
+  H6: [
+    ["i", "grindless:iris_blade", [], 0, 1],
+    ["i", "grindless:horizon_shielding", []],
+    ["i", "grindless:condensate_field_cell", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2]],
+    ["i", "grindless:horizon_iris", [3]],
+  ],
+  H7: [
+    ["i", "grindless:cold_kerr_toroid", []],
+    ["i", "grindless:maxplus_field_generator", []],
+    ["i", "grindless:cold_kerr_fcl", []],
+    ["i", "grindless:creative_energy_cell", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:horizon_capacitor", [4], 0, 1],
+  ],
+  H8: [
+    ["i", "grindless:hyperstargate_ring_block", []],
+    ["i", "grindless:resonance_chamber", [], 0, 1],
+    ["i", "grindless:horizon_conduit", []],
+    ["i", "grindless:creative_energy", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:hyperstargate_power_unit", [4]],
+  ],
+  H9: [
+    ["i", "grindless:hyperstargate_chevron_block", []],
+    ["i", "grindless:hyperstargate_ring_block", []],
+    ["i", "grindless:horizon_alignment_matrix", [], 0, 1],
+    ["i", "grindless:creative_chest", []],
+    ["i", "grindless:creative_tank", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3, 4]],
+    ["i", "grindless:hyperstargate_base", [5]],
+  ],
+  H10: [
+    ["i", "grindless:hyperstargate_ring_block", []],
+    ["i", "grindless:creative_data_access_hatch", []],
+    ["i", "grindless:horizon_comm_terminal", [], 0, 1],
+    ["i", "grindless:pattern_memory_unit", [], 0, 1],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:hyperstargate_interface", [4]],
+  ],
+  H11: [
+    ["i", "grindless:horizon_cloud_core", []],
+    ["i", "grindless:maxplus_field_generator", []],
+    ["i", "grindless:kerr_field_coil", []],
+    ["i", "grindless:cold_kerr_toroid", []],
+    ["i", "grindless:horizon_processor", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3, 4]],
+    ["i", "grindless:creative_energy", [5]],
+  ],
+  H12: [
+    ["i", "grindless:bottomless_store_core", [], 0, 1],
+    ["i", "grindless:horizon_processor", []],
+    ["i", "grindless:horizon_containment_plate", []],
+    ["i", "grindless:maxplus_field_generator", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:creative_chest", [4]],
+  ],
+  H13: [
+    ["i", "grindless:bottomless_tank_core", []],
+    ["i", "grindless:horizon_processor", []],
+    ["i", "grindless:horizon_containment_plate", []],
+    ["i", "grindless:maxplus_field_generator", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:creative_tank", [4]],
+  ],
+  H14: [
+    ["i", "grindless:horizon_computation_core", [], 0, 1],
+    ["i", "grindless:horizon_processor", []],
+    ["i", "grindless:horizon_comm_terminal", [], 0, 1],
+    ["i", "grindless:maxplus_field_generator", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:creative_computation_provider", [4]],
+  ],
+  H15: [
+    ["i", "grindless:horizon_computation_core", [], 0, 1],
+    ["i", "grindless:pattern_memory_unit", [], 0, 1],
+    ["i", "grindless:horizon_processor", []],
+    ["i", "grindless:maxplus_field_generator", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3]],
+    ["i", "grindless:creative_data_access_hatch", [4]],
+  ],
+  H16: [
+    ["i", "grindless:horizon_cloud_core", []],
+    ["i", "grindless:maxplus_field_generator", []],
+    ["i", "grindless:kerr_field_coil", []],
+    ["i", "grindless:cold_kerr_toroid", []],
+    ["i", "grindless:horizon_containment_plate", []],
+    ["m", "gtceu:hyper_assembly_array", [0, 1, 2, 3, 4]],
+    ["i", "grindless:creative_energy_cell", [5]],
+  ],
 };
 
 const NAMES = {
@@ -819,6 +949,22 @@ const NAMES = {
   K2: "Store core (creative chest)",
   K3: "Tank core (creative tank)",
   K4: "Computation core (creative computation provider, data access hatch)",
+  H1: "Horizon frame part",
+  H2: "Ring block",
+  H3: "Chevron upgrade",
+  H4: "Chevron block",
+  H5: "Locked chevron",
+  H6: "Horizon iris",
+  H7: "Horizon capacitor",
+  H8: "Power unit",
+  H9: "Gate base",
+  H10: "Gate interface",
+  H11: "Creative energy",
+  H12: "Creative chest",
+  H13: "Creative tank",
+  H14: "Creative computation provider",
+  H15: "Creative data access hatch",
+  H16: "Creative energy cell",
 };
 
 const ENDS = {
@@ -854,6 +1000,25 @@ grp(['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'], 'The MAX+ machine components');
 grp(['Q1', 'Q2', 'A1', 'A2', 'A3'], 'The AE2 parts and the MAX+ circuits');
 grp(['K1', 'K2', 'K3', 'K4'], 'The creative items');
 
+const ENDS_TREE = {
+  H1: 'Ring blocks and chevron upgrades',
+  H2: 'Chevron blocks, the power unit, the base and the interface',
+  H3: 'Chevron blocks and the base',
+  H4: 'The gate base',
+  H5: 'The gate dial row (XP-G1)',
+  H6: 'The gate controller (machine 17, XP-G1)',
+  H7: 'The gate controller (machine 17, XP-G1)',
+  H8: 'The gate controller (machine 17, XP-G1)',
+  H9: 'The gate controller (machine 17, XP-G1)',
+  H10: 'The gate controller (machine 17, XP-G1)',
+  H11: 'The power unit and the creative energy hatches',
+  H12: 'The gate base',
+  H13: 'The gate base',
+  H14: 'The creative computation hatches',
+  H15: 'The gate interface',
+  H16: 'The horizon capacitor',
+};
+Object.assign(ENDS, ENDS_TREE);
 const BYEND = {
   condensate_boil_off: 'Back to the condensate refinery (c1)',
   protium: 'To the GTM hydrogen line',
@@ -897,6 +1062,7 @@ const BYEND = {
 const title = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '').split('_').map((w) => (w.length <= 3 && /^(sic|pbo|tfln|mtj|snspd|beuv|frc|bz|fcl|smes|yig|hbn|ybco|rebco|aod|lna|utc|inp|hemt|sis|uv|cvi|ppln|eu|yso|teo2|sn|li|cu111|mram|srf|he|gr|npro|nd|yag|simox|soi|fpga|feep|gaas|nb3sn|yb|led|vo2|pmn|pt|fe|ni|sr|co2|sco2|bec|nsc|ime|pgm|hts|gd)$/.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
 const shortId = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '');
 const BY_Y = [1.5, -1.5, 2.75, -2.75];
+const TREE = new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16']);
 
 // one line at row y: main nodes at 2.5 columns per step, by-products beside their source
 function line(num, y) {
@@ -928,7 +1094,22 @@ function line(num, y) {
     return n(key(i), px, py, res, title(id), opt);
   });
 }
-const cluster = (name, nums) => ({ name, nodes: nums.flatMap((num, i) => line(num, 6 * i)) });
+
+// a tree row: the recipe's inputs stacked at x 0, the machine at 2.5 and the product at 5
+function tree(num, y) {
+  const nodes = ROWS[num];
+  const k = nodes.length - 2;
+  const key = (i) => `${num.toLowerCase()}_${i}`;
+  return nodes.map(([t, id, from, , peek], i) => {
+    const res = t === 'm' ? M(id) : t === 'f' ? F(id.replace(/^fluid:/, '')) : I(id);
+    const px = i < k ? 0 : 2.5 * (i - k + 1);
+    const py = i < k ? y + (i - (k - 1) / 2) * 1.5 : y;
+    const opt = { kind: t === 'm' ? 'ours' : peek ? 'peek' : i < k ? 'raw' : 'product' };
+    if (from.length) opt.from = from.map(key);
+    if (i === nodes.length - 1) opt.end = ENDS[num];
+    return n(key(i), px, py, res, title(id), opt);
+  });
+}const cluster = (name, nums) => ({ name, nodes: nums.flatMap((num, i) => (TREE.has(num) ? tree(num, 7.5 * i) : line(num, 6 * i))) });
 
 export default {
   file: 'pl_maxplus',
@@ -937,7 +1118,7 @@ export default {
   subtitle: 'Condensate and bound matter, stars and streams, cryo parts, the gate tree crafts, components, circuits and the creative cores',
   icon: 'gtceu:hyper_assembly_array',
   focus: 'p1_0',
-  bands: [['cond', 'tara'], ['stream', 'sling'], ['cryo', 'tg1'], ['tg2', 'tg3'], ['tg4', 'comp'], ['qa', 'creative']],
+  bands: [['cond', 'tara'], ['stream', 'sling'], ['cryo', 'tg1'], ['tg2', 'tg3'], ['tg4', 'comp'], ['qa', 'creative'], ['hg1', 'hg2']],
   clusters: {
     cond: cluster('Condensate, bound matter and the cable', ['P1', 'P2', 'P3', 'P4', 'P5']),
     tara: cluster('Stars, casks and ash', ['P6', 'P7', 'P8', 'P17']),
@@ -951,6 +1132,8 @@ export default {
     comp: cluster('Machine components', ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7']),
     qa: cluster('Circuits and AE2 parts', ['Q1', 'Q2', 'A1', 'A2', 'A3']),
     creative: cluster('Creative cores', ['K1', 'K2', 'K3', 'K4']),
+    hg1: cluster('Hyperstargate parts', ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10']),
+    hg2: cluster('Creative items', ['H11', 'H12', 'H13', 'H14', 'H15', 'H16']),
   },
 };
 
