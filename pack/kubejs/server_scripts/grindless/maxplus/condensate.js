@@ -52,7 +52,10 @@
     { type: 'bound_matter_press', key: 'grindless_bound_matter_press', name: 'bound_neutronium_plate', circuit: 1, eut: V_MAX * 16, duration: 1200,
       items: ['8x grindless:bound_neutronium_ingot'], fluids: [], outs: ['4x grindless:horizon_compressed_plate'], fluidOuts: [[KERR, 2000]] },
     { type: 'bound_matter_press', key: 'grindless_bound_matter_press', name: 'strange_plate', circuit: 2, eut: V_MAX * 16, duration: 1200,
-      items: ['8x grindless:kerr_strange_ingot'], fluids: [], outs: ['4x grindless:kerr_strange_plate'], fluidOuts: [[KERR, 2000]] }
+      items: ['8x grindless:kerr_strange_ingot'], fluids: [], outs: ['4x grindless:kerr_strange_plate'], fluidOuts: [[KERR, 2000]] },
+    // XP-H1 (line T4 step 3, c4): horizon plate and Gd-HfB2 cermet pressed into the graded laminate the loom's c1 weaves
+    { type: 'bound_matter_press', key: 'grindless_bound_matter_press', name: 'graded_horizon_laminate', circuit: 4, eut: V_MAX * 16, duration: 1200,
+      items: ['4x grindless:horizon_compressed_plate', '4x grindless:gd_hfb2_cermet'], fluids: [], outs: ['2x grindless:graded_horizon_laminate'], fluidOuts: [[KERR, 2000]] }
   ]
 
   // GTM rows at home: the empty cell shell and the two casings (no input comes from the machines' own lines)
