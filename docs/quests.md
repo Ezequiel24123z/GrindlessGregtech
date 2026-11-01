@@ -447,3 +447,15 @@ The `multiblocks` chapter ("Multiblocks") sits in Quality of Life after Power. I
   - Other mods' controllers go in the higher of two tiers: the first gate that reaches the controller (`tools/analysis/tiers/<tier>.json`), and the tier of its own recipe (its hull, else its highest circuit).
   - Controllers hidden by `hidden_until.json` and controllers that no gate reaches are left out; `gen.mjs --list` prints them and the shifted ones.
 - **Source:** `tools/quests/multiblocks/mb-data.mjs` (tiers, label icons, overrides) and `gen.mjs`. Ids are hashes of the controller id, so they survive regeneration. Run `node tools/quests/multiblocks/gen.mjs --dump <kubejs-exported> --write` after the Processing Lines generator (it rewrites `lint-config.json`), once per batch, and update `GG_QUESTS_EXPECTED.multiblocks`.
+
+
+## Rendering the book
+
+`tools/quests/render-book.mjs` draws every chapter as the questbook lays it out (quests at x/y with shape and size, dependency arrows, titles or icon ids, chapter images). Offline, no npm dependencies, read-only on the book.
+
+```
+node tools/quests/render-book.mjs --out <dir>                       # svg/, csv/, chapters.csv, index.html, book.json
+node tools/quests/render-book.mjs --compare <before> <after> [--out <dir>]   # one before | after page per chapter
+```
+
+Capture the book before a rewrite into a folder outside the repo (never commit the images), render again afterwards, then compare. Tests: `node --test tools/quests/test/render-book.test.mjs`.
