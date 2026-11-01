@@ -5,15 +5,16 @@
 // A line is a cluster of a chart (tools/quests/processing-lines/pl-data-<era>.mjs). Per line it measures:
 //   steps       the longest chain of processing steps in the chart (a machine, or an item-to-item step; a machine's own
 //               output is not another step)
-//   crossings   links to nodes of earlier chapters, with the era each one reaches
-//   ends        end products, who uses them (other lines of the charts, recipes of the dump, key items of the cost matrix)
+//   crossings   chart: links to nodes of earlier chapters, with the era each one reaches. content: from the dump's recipes, the\n//               pack's own multiblocks (era of their startup script folder) and end products of earlier lines that the line's\n//               recipes use, two or more eras back; verdicts read content when the chart has none\n//   ends        end products, who uses them (other lines of the charts, recipes of the dump, key items of the cost matrix)
 //   skip        a recipe of the dump that makes every end product without touching the line's intermediates, and in no more
-//               steps from base resources than the line itself
+//               steps from base resources than the line itself, and usable at or below the line's era (voltage tier, dimension,
+//               multiblock era)
 //   duplicate   another line sharing most of its intermediates
 // Output: <out>/03_lines.csv and a per-era summary on stdout. Read-only: nothing in the pack changes. MAX is data only.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { tierOfEut } from './lib/capacity.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(here, '..', '..');
@@ -170,7 +171,67 @@ export function buildFacts(recipes) {
   const unobtainable = (k) => k.startsWith('fluid:') && !producers.has(k) && (consumers.get(k) || []).some((r) => r.type === 'gtceu:fluid_solidifier');
   const typeCount = new Map();
   for (const r of usable) typeCount.set(r.type, (typeCount.get(r.type) || 0) + 1);
-  return { producers, consumers, depth, dOf, recDepth, unobtainable, typeCount };
+  const byId = new Map(usable.map((r) => [r.id, r]));
+  // types the pack registers: every recipe of the type comes from our scripts (stock GT types also hold stock recipes)
+  const stock = new Set(recipes.filter((r) => r.added === false).map((r) => r.type));
+  const ourTypes = new Set(recipes.filter((r) => !stock.has(r.type)).map((r) => r.type));
+  return { producers, consumers, depth, dOf, recDepth, unobtainable, typeCount, byId, ourTypes };
+}
+
+// Era context of the pack: first era folder of pack/kubejs/startup_scripts/grindless/<era>/ naming an id (a machine, a
+// recipe type, an item, a dimension) is the era that introduces it. `types` maps a recipe type to its multiblocks.
+const ID_TOKEN = /\b(?:gtceu|grindless|gcyr|minecraft|gtca|extendedfeatures):[a-z0-9_]+/g;
+export function scanStartupEras(dir) {
+  const first = new Map();
+  for (const era of ERAS) {
+    const d = path.join(dir, era);
+    if (!fs.existsSync(d)) continue;
+    for (const f of fs.readdirSync(d).filter((x) => x.endsWith('.js')).sort()) {
+      for (const id of fs.readFileSync(path.join(d, f), 'utf8').match(ID_TOKEN) || []) if (!first.has(id)) first.set(id, eraIdx(era));
+    }
+  }
+  return first;
+}
+
+export function buildEraContext({ startup = new Map(), machines = [], lines = [] } = {}) {
+  const mbOfType = new Map();
+  for (const m of machines) if (m.mb) for (const t of m.types || []) { if (!mbOfType.has(t)) mbOfType.set(t, []); mbOfType.get(t).push(m.id); }
+  const productEra = new Map();
+  const put = (k, e) => { if (e >= 0 && (!productEra.has(k) || e < productEra.get(k))) productEra.set(k, e); };
+  for (const l of lines) for (const p of l.products) put(p.res, eraIdx(l.era));
+  return { startup, mbOfType, productEra };
+}
+
+// Era of a type: the earliest era naming one of its multiblocks; undefined when none is known.
+const typeEra = (type, eraCtx) => {
+  let best;
+  for (const id of eraCtx.mbOfType.get(type) || []) { const e = eraCtx.startup.get(id); if (e !== undefined && (best === undefined || e < best)) best = e; }
+  return best;
+};
+
+// Era a player needs to run a recipe: its voltage tier, the era that reaches its dimension, the era of its multiblock.
+export function recipeEra(r, eraCtx) {
+  let e = r.eut ? tierOfEut(r.eut) : 0;
+  for (const c of r.conditions || []) if (c.dimension) e = Math.max(e, eraCtx.startup.get(c.dimension) ?? 0);
+  return Math.max(e, typeEra(r.type, eraCtx) ?? 0);
+}
+
+// Content crossings: multiblocks the pack registers and end products of earlier chart lines (two or more eras back) that the
+// line's recipes really use. Stock GT machines and commodity fluids are not crossings.
+export function contentCrossings(line, facts, eraCtx) {
+  const li = eraIdx(line.era);
+  const found = new Map();
+  const add = (kind, id, e) => { if (li - e >= 2 && !found.has(`${kind}:${id}`)) found.set(`${kind}:${id}`, { kind, id, era: ERAS[e], back: li - e }); };
+  const own = ownedTypes(line, facts);
+  const keys = new Set([...line.inner, ...line.raws]);
+  for (const rid of own.ids.keys()) {
+    const r = facts.byId.get(rid);
+    if (!r) continue;
+    const te = typeEra(r.type, eraCtx);
+    if (te !== undefined && facts.ourTypes.has(r.type)) add('machine', r.type, te);
+    for (const i of r.inputs) for (const a of i.alts) { const e = eraCtx.productEra.get(a); if (e !== undefined && !keys.has(a) && !/^(fluid:|minecraft:)/.test(a)) add('item', a, e); }
+  }
+  return [...found.values()].sort((a, b) => a.kind.localeCompare(b.kind) || a.id.localeCompare(b.id));
 }
 
 const MATERIAL_FORM = /_(dust|ingot|nugget|plate|block|gem|rod|foil|cell|wire|gear|bolt|screw|ring|raw|crushed|purified|impure|pure)(_(small|tiny|long|fine|double|dense))?$/;
@@ -189,13 +250,15 @@ export function ownedTypes(line, facts) {
 }
 
 // A recipe of the dump that makes `key` without any of the line's intermediates, in fewer steps than the line takes.
-export function skipRoute(line, key, facts) {
+export function skipRoute(line, key, facts, eraCtx = null) {
   const lineBase = Math.max(0, ...[...line.raws].map((k) => facts.dOf(k) ?? 0));
   const budget = lineBase + line.steps;
   const own = ownedTypes(line, facts);
   let best = null;
   for (const r of facts.producers.get(key) || []) {
     if (line.machines.has(r.type) || own.ids.has(r.id)) continue;
+    // a recipe of a later era is not a way round the line for a player of the line's era
+    if (eraCtx && recipeEra(r, eraCtx) > eraIdx(line.era)) continue;
     // a type the line itself runs (a custom machine's own recipes are the line, not a way round it)
     const total = (facts.typeCount.get(r.type) || 1);
     if ((own.recipeTypes.get(r.type) || 0) / total >= 0.5) continue;
@@ -234,13 +297,15 @@ const eraIdx = (e) => ERAS.indexOf(e);
 
 export function judge(l, { used, dup, skipped, endInfo }) {
   const real = l.steps >= REAL_STEPS;
-  const reach = Math.max(0, ...l.crossings.map((c) => c.back));
+  // chart link nodes first; the dump's recipes (older multiblocks and end products really used) fill an incomplete chart
+  const cross = [...l.crossings, ...(l.content || [])];
+  const reach = Math.max(0, ...cross.map((c) => c.back));
   // Travel keys and similar are consumed by use, not by recipes.
   const dead = l.products.filter((p) => !p.end && !TRAVEL_KEY.test(p.res) && endInfo.get(p.res)?.n === 0 && !used.size);
   const allSkip = l.products.length > 0 && skipped.length === l.products.length;
   const noEnd = l.products.length === 0;
   let verdict = 'keep';
-  let reason = `${l.steps} steps, ${l.crossings.length} crossings (reach ${reach}), used by ${used.size} lines`;
+  let reason = `${l.steps} steps, ${l.crossings.length} chart + ${(l.content || []).length} content crossings (reach ${reach}), used by ${used.size} lines`;
   if (l.era === 'max') return { verdict: 'data-only', reason: 'MAX: RF-7A decides', real, reach };
   // Skippability is only a lower-bound depth heuristic, so it never removes a line on its own.
   if (dead.length && dead.length === l.products.length) {
@@ -253,9 +318,9 @@ export function judge(l, { used, dup, skipped, endInfo }) {
     verdict = 'fix'; reason = `every end product has a shorter bypass recipe; make the line the better route`;
   } else if (dead.length) {
     verdict = 'fix'; reason = `${dead.length} end product(s) lead nowhere: ${dead.map((p) => p.res.replace(/^gtceu:/, '')).slice(0, 3).join(' ')}`;
-  } else if (eraIdx(l.era) >= eraIdx('ev') && !l.crossings.length && !used.size) {
+  } else if (eraIdx(l.era) >= eraIdx('ev') && !cross.length && !used.size) {
     verdict = 'fix'; reason = `no crossing and no other line uses it: isolated`;
-  } else if (eraIdx(l.era) >= eraIdx('luv') && l.crossings.length && reach < 2) {
+  } else if (eraIdx(l.era) >= eraIdx('luv') && cross.length && reach < 2) {
     verdict = 'fix'; reason = `crosses only ${reach <= 1 ? 'the previous era' : ''}: reach back two or more eras`;
   } else if (noEnd) {
     verdict = 'fix'; reason = 'no end product marked';
@@ -263,8 +328,9 @@ export function judge(l, { used, dup, skipped, endInfo }) {
   return { verdict, reason, real, reach };
 }
 
-export function auditAll(model, facts, keyItems) {
+export function auditAll(model, facts, keyItems, { startup = new Map(), machines = [] } = {}) {
   const lines = collectLines(model);
+  const eraCtx = facts ? buildEraContext({ startup, machines, lines }) : null;
   const used = usedBy(lines);
   const dups = findDuplicates(lines);
   const rows = [];
@@ -274,8 +340,9 @@ export function auditAll(model, facts, keyItems) {
     const skipText = [];
     for (const p of l.products) {
       endInfo.set(p.res, facts ? consumerSummary(p.res, facts, keyItems) : { n: -1, reached: [] });
-      if (facts) { const s = skipRoute(l, p.res, facts); if (s) { skipped.push(p); skipText.push(`${p.res.replace(/^gtceu:/, '')} via ${s.id} (${s.type}, ${s.depth} < ${s.budget})`); } }
+      if (facts) { const s = skipRoute(l, p.res, facts, eraCtx); if (s) { skipped.push(p); skipText.push(`${p.res.replace(/^gtceu:/, '')} via ${s.id} (${s.type}, ${s.depth} < ${s.budget})`); } }
     }
+    if (facts) l.content = contentCrossings(l, facts, eraCtx);
     const u = used.get(l.id);
     const j = judge(l, { used: u, dup: dups.get(l.id), skipped, endInfo });
     rows.push({ line: l, used: u, dup: dups.get(l.id), skipText, endInfo, ...j });
@@ -285,13 +352,13 @@ export function auditAll(model, facts, keyItems) {
 
 const q = (s) => `"${String(s ?? '').replace(/"/g, '""')}"`;
 export function toCsv(rows) {
-  const head = ['era', 'line', 'name', 'steps', 'real', 'multiblocks', 'ours', 'crossings', 'crossing_eras', 'reach_back', 'used_by_lines', 'end_products', 'end_consumers', 'skip_route', 'duplicate_of', 'verdict', 'reason'];
+  const head = ['era', 'line', 'name', 'steps', 'real', 'multiblocks', 'ours', 'crossings', 'crossing_eras', 'content_crossings', 'content_eras', 'reach_back', 'used_by_lines', 'end_products', 'end_consumers', 'skip_route', 'duplicate_of', 'verdict', 'reason'];
   const out = [head.join(',')];
   for (const r of rows) {
     const l = r.line;
     out.push([
       l.era, l.cluster, q(l.name), l.steps, r.real ? 1 : 0, l.mbs.length, l.ours.length, l.crossings.length,
-      q([...new Set(l.crossings.map((c) => c.era))].join(' ')), r.reach, q([...r.used].join(' ')),
+      q([...new Set(l.crossings.map((c) => c.era))].join(' ')), (l.content || []).length, q([...new Set((l.content || []).map((c) => c.era))].join(' ')), r.reach, q([...r.used].join(' ')),
       q(l.products.map((p) => p.res.replace(/^gtceu:/, '')).join(' ')),
       q(l.products.map((p) => { const e = r.endInfo.get(p.res); return `${p.res.replace(/^gtceu:/, '')}=${e.n}${e.reached.length ? '>' + e.reached.slice(0, 3).join('|') : ''}`; }).join('; ')),
       q(r.skipText.join('; ')), r.dup ? r.dup.of : '', r.verdict, q(r.reason),
@@ -301,10 +368,10 @@ export function toCsv(rows) {
 }
 
 export function eraSummary(rows) {
-  const per = new Map(ERAS.map((e) => [e, { lines: 0, real: 0, crossings: 0, keep: 0, fix: 0, merge: 0, remove: 0 }]));
+  const per = new Map(ERAS.map((e) => [e, { lines: 0, real: 0, crossings: 0, content: 0, keep: 0, fix: 0, merge: 0, remove: 0 }]));
   for (const r of rows) {
     const s = per.get(r.line.era);
-    s.lines++; if (r.real) s.real++; s.crossings += r.line.crossings.length;
+    s.lines++; if (r.real) s.real++; s.crossings += r.line.crossings.length; s.content += (r.line.content || []).length;
     if (s[r.verdict] !== undefined) s[r.verdict]++;
   }
   return per;
@@ -321,12 +388,13 @@ async function main(argv) {
   const facts = buildFacts([...idx.recipes.values()]);
   const csvPath = path.join(REPO, 'docs', 'reforge', '01_cost_matrix.csv');
   const keyItems = fs.existsSync(csvPath) ? loadKeyItems(fs.readFileSync(csvPath, 'utf8')) : new Map();
-  const rows = auditAll(model, facts, keyItems);
+  const startup = scanStartupEras(path.join(REPO, 'pack', 'kubejs', 'startup_scripts', 'grindless'));
+  const rows = auditAll(model, facts, keyItems, { startup, machines: [...idx.machines.values()] });
   fs.mkdirSync(opt.out, { recursive: true });
   fs.writeFileSync(path.join(opt.out, '03_lines.csv'), toCsv(rows));
   const per = eraSummary(rows);
-  console.log('era    lines real cross  keep fix merge remove   guide');
-  for (const [e, s] of per) if (s.lines) console.log(`${e.padEnd(6)} ${String(s.lines).padStart(5)} ${String(s.real).padStart(4)} ${String(s.crossings).padStart(5)}  ${String(s.keep).padStart(4)} ${String(s.fix).padStart(3)} ${String(s.merge).padStart(5)} ${String(s.remove).padStart(6)}   ${GUIDE[e] ?? ''}`);
+  console.log('era    lines real cross content  keep fix merge remove   guide');
+  for (const [e, s] of per) if (s.lines) console.log(`${e.padEnd(6)} ${String(s.lines).padStart(5)} ${String(s.real).padStart(4)} ${String(s.crossings).padStart(5)} ${String(s.content).padStart(7)}  ${String(s.keep).padStart(4)} ${String(s.fix).padStart(3)} ${String(s.merge).padStart(5)} ${String(s.remove).padStart(6)}   ${GUIDE[e] ?? ''}`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await main(process.argv.slice(2));

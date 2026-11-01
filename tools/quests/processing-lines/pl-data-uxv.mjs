@@ -3,7 +3,7 @@
 // Each row is one line of docs/eras/uxv.md ("New process lines"), keyed by its number, as the recipes run today; long older prefixes
 // start at the first UXV-era product. Line 20 (Es-254 target) and line 23 (Cm-248 target) are short of four steps on their own, so
 // they are drawn as the heads of lines 20/21 and 24. Rows are laid out by chain(), 2.5 columns per step.
-import { I, F, M, n } from './pl-lib.mjs';
+import { I, F, M, n, L } from './pl-lib.mjs';
 
 // a step is [key, resource, title, kind?, options?]: the first step is raw, machines are 'ours', the rest products
 function chain(y, steps, end, x0 = 0) {
@@ -412,7 +412,7 @@ export default {
           ['l32_7', I('gtceu:pasta_strand_single_cable'), 'Pasta Strand Cable'],
         ], 'UXV cables'),
         // line 33
-        ...chain(2, [
+        ...chain(3, [
           ['l33_0', I('grindless:raw_pasta'), 'Raw Pasta', 'raw'],
           ['l33_1', mach('gtceu:pasta_phase_sorter'), 'Pasta Phase Sorter', 'ours'],
           ['l33_2', I('grindless:lasagna_phase'), 'Lasagna Phase'],
@@ -421,7 +421,9 @@ export default {
           ['l33_5', I('gtceu:uxv_machine_hull'), 'UXV Machine Hull'],
         ]),
         // line 39
-        ...chain(4, [
+        L('x39_ccl', 7.5, 4.5, 'pl_luv:ccl'),
+        L('x39_nmw', 12.5, 4.5, 'pl_uev:nmw'),
+        ...chain(6, [
           ['l39_0', I('grindless:spaghetti_phase'), 'Spaghetti Phase', 'raw'],
           ['l39_1', mach('gtceu:pasta_draw_bench'), 'Pasta Draw Bench', 'ours'],
           ['l39_2', I('gtceu:pasta_strand_single_wire'), 'Pasta Strand Wire'],
@@ -431,7 +433,8 @@ export default {
           ['l39_6', I('grindless:uxv_smes_cell'), 'UXV SMES Cell'],
         ], 'the wireless towers'),
         // line 35
-        ...chain(6, [
+        L('x35_mill', 7.5, 7.5, 'pl_ev:mill'),
+        ...chain(9, [
           ['l35_0', I('grindless:lasagna_phase'), 'Lasagna Phase', 'raw'],
           ['l35_1', mach('gtceu:pasta_laminator'), 'Pasta Laminator', 'ours'],
           ['l35_2', I('grindless:lasagna_plate'), 'Lasagna Plate'],
@@ -557,6 +560,11 @@ export default {
           ['l42_3', I('grindless:pt_crucible_shell'), 'Pt Crucible Shell'],
           ['l42_4', I('grindless:pt_lpe_crucible'), 'Pt LPE Crucible'],
         ], 'the YIG LPE furnace'),
+        L('x0', 0, 10, 'pl_uhv:cgf'),
+        L('x1', 2.5, 10, 'pl_uev:ebf'),
+        L('x2', 5, 10, 'pl_uv:mocvd'),
+        L('x3', 7.5, 10, 'pl_uhv:pf'),
+        L('x4', 10, 10, 'pl_uhv:vo'),
       ],
     },
   },

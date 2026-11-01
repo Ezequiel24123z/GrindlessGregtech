@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, loadKeyItems } from '../line-audit.mjs';
+import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings } from '../line-audit.mjs';
 
 const n = (key, kind, res, from = [], extra = {}) => ({ key, kind, res, from, cluster: 'a', ...extra });
 const chain = () => [
@@ -85,4 +85,56 @@ test('toCsv and eraSummary agree on rows', () => {
 test('loadKeyItems keeps the first era per item', () => {
   const m = loadKeyItems('era,group,item\nlv,g,a\nmv,g,a\n');
   assert.equal(m.get('a'), 'lv');
+});
+
+const io = (alts, count = 1) => ({ alts, count, cap: false });
+const rec = (id, type, ins, out, extra = {}) => ({ id, type, category: type, inputs: ins.map((a) => io([a])), outputs: [{ key: out, chance: 1 }], added: true, ...extra });
+const mkLine = (era, extra = {}) => ({
+  era, steps: 3, raws: new Set(['gtceu:ore']), inner: new Set(['gtceu:dust', 'gtceu:plate']), products: [{ res: 'gtceu:plate' }], machines: new Set(['gtceu:mine']), ...extra,
+});
+
+test('a bypass counts only when usable at or below the line era', () => {
+  // EV line (tier 4, 2048 EU/t); the bypass is a one-step recipe from base resources
+  const mk = (eut, extra = {}) => buildFacts([rec('b', 'gtceu:other', ['gtceu:sand'], 'gtceu:plate', { eut, ...extra })]);
+  const ctxOf = (facts, startup = new Map()) => buildEraContext({ startup, machines: [], lines: [] });
+  const line = mkLine('ev', { steps: 4 });
+  const later = mk(524288); // UV
+  const same = mk(2048); // EV
+  assert.equal(recipeEra(later.byId.get('b'), ctxOf(later)) > 4, true);
+  assert.equal(skipRoute(line, 'gtceu:plate', later, ctxOf(later)), null);
+  assert.ok(skipRoute(line, 'gtceu:plate', same, ctxOf(same)));
+  // without an era context the old behaviour holds
+  assert.ok(skipRoute(line, 'gtceu:plate', later));
+  // a dimension reached only by a later era is a later-era bypass too
+  const dim = mk(32, { conditions: [{ type: 'dimension', dimension: 'grindless:far' }] });
+  assert.equal(skipRoute(line, 'gtceu:plate', dim, ctxOf(dim, new Map([['grindless:far', 8]]))), null);
+  assert.ok(skipRoute(line, 'gtceu:plate', dim, ctxOf(dim, new Map([['grindless:far', 3]]))));
+});
+
+test('a content crossing is found from the recipes without a chart link', () => {
+  const recipes = [
+    rec('mk', 'gtceu:uxv_press', ['gtceu:dust', 'grindless:old_product', 'gtceu:steel_ingot'], 'gtceu:plate'),
+    rec('old', 'gtceu:old_type', ['gtceu:sand'], 'grindless:old_product'),
+    rec('stock', 'gtceu:assembler', ['gtceu:sand'], 'gtceu:steel_ingot', { added: false }),
+    rec('stock2', 'gtceu:assembler', ['gtceu:sand'], 'gtceu:gear', { added: true }),
+    rec('mk2', 'gtceu:assembler', ['gtceu:dust'], 'gtceu:plate'),
+  ];
+  const facts = buildFacts(recipes);
+  const line = mkLine('uxv', { steps: 5, products: [{ res: 'gtceu:plate' }] });
+  const startup = new Map([['gtceu:old_multi', 4], ['gtceu:assembler_multi', 1]]);
+  const machines = [{ id: 'gtceu:old_multi', mb: 1, types: ['gtceu:uxv_press'] }, { id: 'gtceu:assembler_multi', mb: 1, types: ['gtceu:assembler'] }];
+  const older = { era: 'ev', products: [{ res: 'grindless:old_product' }] };
+  const eraCtx = buildEraContext({ startup, machines, lines: [older] });
+  const found = contentCrossings(line, facts, eraCtx);
+  assert.deepEqual(found.map((c) => `${c.kind}:${c.id}:${c.era}`).sort(), ['item:grindless:old_product:ev', 'machine:gtceu:uxv_press:ev']);
+  assert.equal(found.every((c) => c.back >= 2), true);
+  // stock machines (the assembler also holds stock recipes) and other-era-near items are not crossings
+  assert.equal(found.some((c) => c.id === 'gtceu:assembler'), false);
+  // the verdict reads content crossings when the chart has none
+  const l = { ...line, crossings: [], content: found };
+  const ok = judge(l, { used: new Set(), dup: null, skipped: [], endInfo: new Map([['gtceu:plate', { n: 2, reached: [] }]]) });
+  assert.equal(ok.reach >= 2, true);
+  assert.notEqual(ok.reason.startsWith('no crossing'), true);
+  const bare = judge({ ...l, content: [] }, { used: new Set(), dup: null, skipped: [], endInfo: new Map([['gtceu:plate', { n: 2, reached: [] }]]) });
+  assert.match(bare.reason, /isolated/);
 });
