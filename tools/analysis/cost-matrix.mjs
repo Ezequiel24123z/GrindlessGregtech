@@ -115,7 +115,7 @@ function normalizeAll(dump, excl, settings = {}) {
 }
 
 /** Every key slot of the config, with the candidates that exist in the dump: [{era, group, candidates, present}] and the slots with none. */
-function keyCandidates(cfg, dump) {
+export function keyCandidates(cfg, dump) {
   const slots = [];
   const missing = [];
   const tiers = cfg.tiers;
@@ -130,7 +130,8 @@ function keyCandidates(cfg, dump) {
     for (const [g, cand] of Object.entries(cfg.groups)) if (g !== 'note') add(t, g, cand.map((c) => expand(c, t)));
     const mat = cfg.superconductorWire[t];
     if (mat) add(t, 'superconductor_wire', [`gtceu:${mat}_single_wire`]);
-    const circuits = dump.tags.items(cfg.circuits.tagPrefix + t) || [];
+    const skipCircuit = globMatcher(cfg.circuits.skip || []);
+    const circuits = (dump.tags.items(cfg.circuits.tagPrefix + t) || []).filter((c) => !skipCircuit(c));
     for (const c of [...circuits].sort()) add(t, 'circuit', [c]);
     if (cfg.capstones[t]) add(t, 'capstone', [`gtceu:${cfg.capstones[t]}`]);
     for (const c of cfg.controllers[t] || []) add(t, 'controller', [`gtceu:${c}`]);
@@ -241,6 +242,8 @@ export function priceDump(dump, cfg) {
 
   // Molten metals have no producing recipe in the dump (the melting is the machine's job); without this they would be
   // natural base resources and every alloy casing would look free. One item of the metal makes `mbPerItem` mB of it.
+  // `always` also melts a metal some other recipe makes (a remelt return is not a primary route; GTM's own melt is a
+  // recycling-category recipe the matrix excludes).
   let melts = 0;
   const meltCfg = cfg.settings.melt;
   if (meltCfg) {
@@ -248,7 +251,7 @@ export function priceDump(dump, cfg) {
     for (const n of recipes) for (const o of n.outputs) made.add(o.key);
     for (const f of [...dump.fluids].sort()) {
       const fk = `fluid:${f}`;
-      if (made.has(fk)) continue;
+      if (made.has(fk) && !meltCfg.always) continue;
       const item = meltCfg.itemSuffixes.map((s) => f + s).find((k) => dump.items.has(k));
       if (!item) continue;
       recipes.push({

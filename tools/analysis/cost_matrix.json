@@ -5,7 +5,7 @@
   "settings": {
     "fluidUnitMb": 1000,
     "allocation": "full",
-    "melt": { "mbPerItem": 144, "itemSuffixes": ["_ingot"] },
+    "melt": { "mbPerItem": 144, "itemSuffixes": ["_ingot"], "always": true },
     "chance": "expected",
     "sourceAsBase": true,
     "euWeight": 0,
@@ -27,7 +27,7 @@
   "excludeRecipes": {
     "types": ["gtceu:vein_drilling"],
     "categories": ["*recycling*", "*decomposition*"],
-    "ids": ["*/uncraft*", "*_recycling*", "*/unpack*", "*decompress*"]
+    "ids": ["*/uncraft*", "*_recycling*", "*/unpack*", "gtceu:forge_hammer/decompress_*", "quark:*_decompress", "megacells:*decompress*", "grindless:r_process_decompression/*", "grindless:slurry_separation/slurry_decompression"]
   },
 
   "base": {
@@ -63,7 +63,9 @@
 
   "circuits": {
     "note": "Every member of the dump's tag gtceu:circuits/<tier> is a key item of that tier.",
-    "tagPrefix": "gtceu:circuits/"
+    "tagPrefix": "gtceu:circuits/",
+    "skipNote": "Dead or hidden GT-- families (Phase 8 removes them): cosmic, gooware, spintronic and supracausal assembly/computer/processor/mainframe (gtnn:*, ZPM-OpV) and extendedfeatures:opv_universal_circuit (no recipe; consumers use the gtnn alternative).",
+    "skip": ["gtnn:*", "extendedfeatures:opv_universal_circuit"]
   },
 
   "superconductorWire": {
