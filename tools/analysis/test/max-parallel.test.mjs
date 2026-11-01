@@ -37,7 +37,7 @@ test('the one create covers tiers 9 to 14; tier 14 is named, titled and modelled
   let creates = 0;
   const b = new Proxy({}, { get: (_, m) => (...a) => { calls.push([m, ...a]); if (m === 'definition') defs.push(a[0]); return b; } });
   machine[1]({ create: () => { creates++; return b; } });
-  assert.equal(creates, 1);
+  assert.equal(creates, 2); // the MAX hatch registration, then the MAX+ one (XP-M1)
   assert.deepEqual(calls.find((c) => c[0] === 'tiers').slice(1), [9, 10, 11, 12, 13, 14]);
   const run = (tier) => {
     const rec = [];
@@ -62,8 +62,9 @@ test('x1048576 is 4^(tier - EV) at tier 14 and fits an int; the list ends with t
   assert.equal(4 ** (14 - 4), 1048576);
   assert.ok(4 ** (14 - 4) <= 2147483647);
   const list = load().G.parallelHatch.hatches;
-  assert.equal(list[list.length - 1], 'gtceu:max_parallel_hatch');
-  assert.equal(list[list.length - 2], 'gtceu:opv_parallel_hatch');
+  assert.equal(list[list.length - 1], 'gtceu:max_maxplus_parallel_hatch');
+  assert.equal(list[list.length - 2], 'gtceu:max_parallel_hatch');
+  assert.equal(list[list.length - 3], 'gtceu:opv_parallel_hatch');
   assert.equal(list.filter((id) => id === 'gtceu:max_parallel_hatch').length, 1);
   assert.equal(new Set(list).size, list.length);
 });

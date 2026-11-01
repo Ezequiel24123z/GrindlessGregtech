@@ -48,6 +48,7 @@ test('parallels = min(coil, inputs, energy); no copy fits gives 0', () => {
   assert.equal(F.parallels(4, 273, null), 4);
   assert.equal(F.parallels(4, 0, 64), 0);
   assert.equal(F.parallels(4, 5, 0), 0);
+  assert.equal(F.parallels(2 ** 34, 2 ** 42, null), 2147483647);
 });
 
 test('discountMultiplier: 0.95 per coil step above Cupronickel, floor 0.80', () => {

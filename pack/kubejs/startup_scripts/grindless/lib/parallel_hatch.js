@@ -96,11 +96,46 @@
       })
   })
 
+  // XP-M1: the MAX+ hatch (x4194304 = 4^11), the S0-5 proof (docs/research/maxplus-s0.md): GTM's tier-14 hatch with its private
+  // currentParallel set by reflection at construction. A second event.create (tier 14 alone) because the first one's name is taken;
+  // the id is gtceu:max_maxplus_parallel_hatch and it wears the MAX hatch art. The clamp in lib/mega.js keeps copies x EU/t inside an int.
+  GTCEuStartupEvents.registry('gtceu:machine', function (event) {
+    var PHPM = Java.loadClass('com.gregtechceu.gtceu.common.machine.multiblock.part.ParallelHatchPartMachine')
+    var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
+    event.create('maxplus_parallel_hatch', 'custom')
+      .tiers(14)
+      .machine(function (holder, tier, tankScaling) {
+        var hatch = new PHPM(holder, tier)
+        for (var k = hatch.getClass(); k !== null; k = k.getSuperclass()) {
+          var f = null
+          try { f = k.getDeclaredField('currentParallel') } catch (e) { f = null }
+          if (f !== null) {
+            f.setAccessible(true)
+            f.setInt(hatch, 4194304)
+            break
+          }
+        }
+        return hatch
+      })
+      .definition(function (tier, builder) {
+        builder
+          .langValue('MAX+ Parallel Control Hatch')
+          .rotationState(RotationState.ALL)
+          .abilities(PartAbility.PARALLEL_HATCH)
+        builder.modelPropertyBool(GTModelProperties.IS_FORMED, false)
+        builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('grindless', 'block/machines/max_parallel_hatch'))
+        builder['tooltips(net.minecraft.network.chat.Component[])']([
+          Text.translate('grindless.machine.maxplus_parallel_hatch.tooltip'),
+          Text.translate('gtceu.part_sharing.disabled')
+        ])
+      })
+  })
+
   G.parallelHatch = {
     ability: ABILITY,
     limits: LIMITS,
     // the IV hatch (x4, IV-B6's recipe); GTM's LuV, ZPM and UV ones (x16, x64, x256) fit the same cell; ours at UHV (x1024, MEGA-0b)
-    hatches: ['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch', 'gtceu:zpm_parallel_hatch', 'gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch', 'gtceu:opv_parallel_hatch', 'gtceu:max_parallel_hatch'],
+    hatches: ['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch', 'gtceu:zpm_parallel_hatch', 'gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch', 'gtceu:opv_parallel_hatch', 'gtceu:max_parallel_hatch', 'gtceu:max_maxplus_parallel_hatch'],
     part: part,
     hasHatch: hasHatch,
     modifier: modifier,

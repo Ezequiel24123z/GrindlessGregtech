@@ -40,7 +40,7 @@ test('the hatch registration covers tiers 9, 10 and 11, one create and one defin
   const defs = [];
   const b = new Proxy({}, { get: (_, m) => (...a) => { calls.push([m, ...a]); if (m === 'definition') defs.push(a[0]); return b; } });
   machine[1]({ create: () => { creates++; return b; } });
-  assert.equal(creates, 1);
+  assert.equal(creates, 2); // the MAX hatch registration, then the MAX+ one (XP-M1)
   const tiers = calls.find((c) => c[0] === 'tiers');
   assert.deepEqual(tiers.slice(1), [9, 10, 11, 12, 13, 14]); // UXV-M1 added 12, OpV-M1 added 13, MAX-M1 added 14
   const out = {};
@@ -69,7 +69,7 @@ test('x16384 is 4^(tier - EV) at tier 11; the list ends UV, UHV, UEV, UIV', () =
   assert.equal(4 ** (9 - 4), 1024);
   const { G } = load();
   const list = G.parallelHatch.hatches;
-  assert.deepEqual(plain(list.slice(-7, -3)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch']);
+  assert.deepEqual(plain(list.slice(-8, -4)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch']);
   assert.equal(new Set(list).size, list.length);
 });
 
