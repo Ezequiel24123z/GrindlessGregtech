@@ -68,9 +68,6 @@
         { "name": "kh2po4", "circuit": 0, "eut": 122880, "duration": 200,
           "itemsIn": [{ "id": "gtceu:potassium_hydroxide_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:phosphoric_acid", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:kh2po4_dust", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }] },
-        { "name": "ktp_flux", "circuit": 0, "eut": 122880, "duration": 200,
-          "itemsIn": [{ "id": "grindless:kh2po4_dust", "count": 1 }, { "id": "gtceu:rutile_dust", "count": 1 }, { "id": "grindless:cvd_diamond_plate", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:ktp_flux", "count": 2 }], "fluidsOut": [] },
         { "name": "ule_soot", "circuit": 0, "eut": 122880, "duration": 300,
           "itemsIn": [{ "id": "gtca:silicon_tetrachloride_dust", "count": 4 }], "kept": [],
           "fluidsIn": [{ "id": "gtceu:titanium_tetrachloride", "amount": 250 }, { "id": "gtceu:oxygen", "amount": 2000 }], "charge": [],
@@ -136,7 +133,10 @@
       "recipes": [
         { "name": "mcp_lead_glass", "circuit": 0, "eut": 122880, "duration": 200,
           "itemsIn": [{ "id": "gtceu:glass_dust", "count": 4 }, { "id": "gtceu:lead_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:mcp_lead_glass", "count": 4 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:mcp_lead_glass", "count": 4 }], "fluidsOut": [] },
+        { "name": "ktp_flux", "circuit": 0, "eut": 122880, "duration": 200,
+          "itemsIn": [{ "id": "grindless:kh2po4_dust", "count": 1 }, { "id": "gtceu:rutile_dust", "count": 1 }, { "id": "grindless:cvd_diamond_plate", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ktp_flux", "count": 2 }], "fluidsOut": [] }
       ]
     },
     "wiremill": {
