@@ -325,6 +325,22 @@ function New-MirrorFrame {
     return $c
 }
 
+# block/heliostat/mirror: the block's own texture id (what its model path resolves to): the mirror panel in perspective on its post,
+# its top and edges sampled from mirror_top and mirror_frame, on a darkened frame backdrop (opaque).
+function New-MirrorBlockIcon {
+    param($Top, $Frame)
+    $c = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) { Set-Px $c $x $y (Shade (Get-Px $Frame $x $y) 0.5) } }
+    for ($r = 0; $r -le 6; $r++) {
+        $s = 6 - $r
+        for ($x = 1 + $s; $x -le 9 + $s; $x++) { Set-Px $c $x (3 + $r) (Get-Px $Top ([int][Math]::Floor(($x - 1 - $s) * 15 / 8)) ([int][Math]::Floor($r * 15 / 6))) }
+    }
+    for ($x = 1; $x -le 9; $x++) { for ($y = 10; $y -le 12; $y++) { Set-Px $c $x $y (Get-Px $Frame ($x + 2) (3 + $y - 10)) } }
+    for ($x = 10; $x -le 15; $x++) { for ($y = 19 - $x; $y -le 21 - $x; $y++) { Set-Px $c $x $y (Shade (Get-Px $Frame $x (3 + $y - (19 - $x))) 0.7) } }
+    for ($y = 13; $y -le 15; $y++) { foreach ($x in 4..5) { Set-Px $c $x $y (Get-Px $Frame $x $y) } }
+    return $c
+}
+
 # ============================================================================================
 #  ITEMS
 # ============================================================================================
@@ -387,6 +403,7 @@ if (Test-Want 'heliostat') { Out-Overlay 'block/multiblock/heliostat_tower' ${fu
 if (Test-Want 'mirror') {
     Out-Tex (New-MirrorTop) 'block/heliostat/mirror_top.png'
     Out-Tex (New-MirrorFrame) 'block/heliostat/mirror_frame.png'
+    Out-Tex (New-MirrorBlockIcon (New-MirrorTop) (New-MirrorFrame)) 'block/heliostat/mirror.png'
 }
 if (Test-Want 'catalyst') { Out-Tex (New-ContactCatalyst) 'item/contact_catalyst.png' }
 

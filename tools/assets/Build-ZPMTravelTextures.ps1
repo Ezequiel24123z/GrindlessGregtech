@@ -43,9 +43,27 @@ $endMap = @(
     'DMMMMMMMMMMMMMMD',
     'KDDDDDDDDDDDDDDK'
 )
+$iconMap = @(
+    'ZZZZZZKKKKZZZZZZ',
+    'ZZZZKKLLLLKKZZZZ',
+    'ZZZKLWWFWWWLKZZZ',
+    'ZZZKLWWFWWWMKZZZ',
+    'ZZZKBBBBBBBBKZZZ',
+    'ZZZKCCCCCCCCKZZZ',
+    'ZZZKLWWFWWYMKZZZ',
+    'ZZZKLWWFWWWMKZZZ',
+    'ZZZKLWWFWWWMKZZZ',
+    'ZZZKCCCCCCCCKZZZ',
+    'ZZZKBBBBBBBBKZZZ',
+    'ZZZKLWWFWWWMKZZZ',
+    'ZZZKMWWFWWWDKZZZ',
+    'ZZZZKDMMMMDKZZZZ',
+    'ZZZZZKKDDKKZZZZZ',
+    'ZZZZZZZZZZZZZZZZ'
+)
 $tanks = @(
-    @{ Name = 'naquadah_fuel_tank'; Pal = 'W=3C4A3E L=2E3A31 M=26302A D=1A221D K=0C110E B=2FBF5B C=8CFFB0 F=57705E Y=E8FF7A' },
-    @{ Name = 'aerogel_fuel_tank'; Pal = 'W=DCE6F5 L=BCCBE3 M=96A8C9 D=5A6A8C K=26304A B=8B5CF0 C=D2B8FF F=F4F8FF Y=FFE27A' }
+    @{ Name = 'naquadah_fuel_tank'; Pal = 'W=3C4A3E L=2E3A31 M=26302A D=1A221D K=0C110E B=2FBF5B C=8CFFB0 F=57705E Y=E8FF7A Z=141A16' },
+    @{ Name = 'aerogel_fuel_tank'; Pal = 'W=DCE6F5 L=BCCBE3 M=96A8C9 D=5A6A8C K=26304A B=8B5CF0 C=D2B8FF F=F4F8FF Y=FFE27A Z=3A4466' }
 )
 foreach ($t in $tanks) {
     $pal = New-Palette $t.Pal
@@ -55,6 +73,9 @@ foreach ($t in $tanks) {
     $end = New-Canvas
     Write-Map $end 0 0 $endMap $pal
     Save-Png $end (Join-Path $blockDir ($t.Name + '_end.png'))
+    $icon = New-Canvas
+    Write-Map $icon 0 0 $iconMap $pal
+    Save-Png $icon (Join-Path $blockDir ($t.Name + '.png'))
 }
 
 # the seed ampoule: a glass vial with a cap of the place's matter (Saturn: banded gold; Uranus: pale cyan)
