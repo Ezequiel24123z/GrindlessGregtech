@@ -45,7 +45,7 @@
       "promptInfluence": 0.5,
       "volume": 0.6,
       "attenuation": 20,
-      "quality": 0
+      "quality": 0, "lowpass": 6000
     },
     {
       "id": "loop_coking_battery",
@@ -177,7 +177,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 4500
     },
     {
       "id": "loop_combined_cycle",
@@ -210,7 +210,7 @@
       "promptInfluence": 0.5,
       "volume": 0.6,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 4500
     },
     {
       "id": "loop_lunar_power",
@@ -320,7 +320,7 @@
       "promptInfluence": 0.5,
       "volume": 0.6,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 6000
     },
     {
       "id": "loop_hts_magnet_works",
@@ -331,7 +331,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 3500
     },
     {
       "id": "loop_helium_refrigerator",
@@ -353,7 +353,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 28,
-      "quality": 0
+      "quality": 0, "lowpass": 3500
     },
     {
       "id": "loop_io_hydrogen_plant",
@@ -386,7 +386,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 28,
-      "quality": 0
+      "quality": 0, "lowpass": 4500
     },
     {
       "id": "loop_biofoundry",
@@ -430,7 +430,7 @@
       "promptInfluence": 0.5,
       "volume": 0.55,
       "attenuation": 20,
-      "quality": 0
+      "quality": 0, "lowpass": 3500
     },
     {
       "id": "loop_naquadria_refinery",
@@ -474,7 +474,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 6000
     },
     {
       "id": "loop_synchrotron",
@@ -496,7 +496,7 @@
       "promptInfluence": 0.5,
       "volume": 0.6,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 3500
     },
     {
       "id": "loop_fibre_draw_tower",
@@ -518,7 +518,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 32,
-      "quality": 0
+      "quality": 0, "lowpass": 3500
     },
     {
       "id": "loop_antimatter_accumulator",
@@ -529,7 +529,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 32,
-      "quality": 0
+      "quality": 0, "lowpass": 4500
     },
     {
       "id": "loop_warp_gate",
@@ -617,7 +617,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_oxide_pld_chamber",
@@ -637,7 +637,7 @@
       "duration": 6,
       "loop": true,
       "promptInfluence": 0.5,
-      "volume": 0.65,
+      "volume": 1,
       "attenuation": 24,
       "quality": 0
     },
@@ -694,7 +694,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_plasma_mass_filter",
@@ -705,7 +705,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_stellar_condensation_tower",
@@ -716,7 +716,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_accretion_disk_skimmer",
@@ -727,7 +727,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_frc_former",
@@ -738,7 +738,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_bz_dynamo",
@@ -749,7 +749,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_pasta_extractor",
@@ -760,7 +760,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_pasta_phase_sorter",
@@ -771,7 +771,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_pasta_draw_bench",
@@ -782,7 +782,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_pasta_laminator",
@@ -793,7 +793,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_polar_cap_tap",
@@ -804,7 +804,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_ejecta_knot_sweeper",
@@ -815,7 +815,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_annihilation_laser_works",
@@ -826,7 +826,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_field_frozen_press",
@@ -837,7 +837,7 @@
       "promptInfluence": 0.5,
       "volume": 0.7,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_tetron_fab",
@@ -848,7 +848,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_gamma_optics_works",
@@ -859,7 +859,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_magnetic_pair_converter",
@@ -870,7 +870,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_antihydrogen_foundry",
@@ -881,7 +881,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_annihilation_engine",
@@ -892,32 +892,32 @@
       "promptInfluence": 0.5,
       "volume": 0.7,
       "attenuation": 28,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_jet_beam_line", "recipeType": "gtceu:jet_beam_extraction",
       "prompt": "Seamless looping SRF beam line: steady cryogenic pump drone, magnetic hum and soft bunching pulses, no music or voices",
-      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0
+      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_spallation_target_station", "recipeType": "gtceu:antiproton_production",
       "prompt": "Seamless looping shielded target station: low coolant rush, heavy target wheel motor and distant beam pulses, no music or voices",
-      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0
+      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_antiproton_decelerator", "recipeType": "gtceu:beam_cooling",
       "prompt": "Seamless looping antiproton cooling ring: quiet vacuum pumps, electronic feedback whine and a low superconducting magnet hum, no music or voices",
-      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0
+      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_strangelet_vault", "recipeType": "gtceu:strangelet_growth",
       "prompt": "Seamless looping shielded neutron vault, low magnetic hum, quiet coolant pumps and restrained detector clicks, no voices, no music",
-      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0
+      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_strangelet_distiller", "recipeType": "gtceu:strangelet_distillation",
       "prompt": "Seamless looping magnetic plasma distiller, deep vacuum pump drone and soft cyclic trap pulses, no voices, no music",
-      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0
+      "duration": 6, "loop": true, "promptInfluence": 0.5, "volume": 0.65, "attenuation": 24, "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_kugelblitz_forge",
@@ -928,7 +928,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_hawking_collector",
@@ -939,7 +939,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_atom_interferometer_works",
@@ -950,7 +950,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_membrane_line",
@@ -961,7 +961,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_rydberg_array_works",
@@ -972,7 +972,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_photon_ring_imager",
@@ -983,7 +983,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_geroch_winch",
@@ -994,7 +994,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_gene_ark",
@@ -1005,7 +1005,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_cluster_light_furnace",
@@ -1016,7 +1016,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_mass_stream_injector",
@@ -1027,7 +1027,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_accretion_feeder",
@@ -1038,7 +1038,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     },
     {
       "id": "loop_mirror_shell",
@@ -1049,7 +1049,7 @@
       "promptInfluence": 0.5,
       "volume": 0.65,
       "attenuation": 24,
-      "quality": 0
+      "quality": 0, "lowpass": 9000
     }
   ]
 }

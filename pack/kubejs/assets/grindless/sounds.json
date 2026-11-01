@@ -58,7 +58,7 @@
   "loop_thorium_pyro": { "sounds": [ { "name": "grindless:loop_thorium_pyro", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
   "loop_tritium_removal": { "sounds": [ { "name": "grindless:loop_tritium_removal", "volume": 0.6, "attenuation_distance": 24, "stream": false } ] },
   "loop_uranium_leaching": { "sounds": [ { "name": "grindless:loop_uranium_leaching", "volume": 0.6, "attenuation_distance": 24, "stream": false } ] },
-  "loop_vdw_stacking_cell": { "sounds": [ { "name": "grindless:loop_vdw_stacking_cell", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] },
+  "loop_vdw_stacking_cell": { "sounds": [ { "name": "grindless:loop_vdw_stacking_cell", "volume": 1, "attenuation_distance": 24, "stream": false } ] },
   "loop_warp_gate": { "sounds": [ { "name": "grindless:loop_warp_gate", "volume": 0.7, "attenuation_distance": 32, "stream": false } ] },
   "loop_yig_lpe_furnace": { "sounds": [ { "name": "grindless:loop_yig_lpe_furnace", "volume": 0.65, "attenuation_distance": 24, "stream": false } ] }
 }
