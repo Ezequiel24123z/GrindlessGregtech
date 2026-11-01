@@ -183,6 +183,8 @@
   "grindless:assembly_line/photonic_integration_hall|gtceu:photonic_integration_hall": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/plasma_mass_filter|gtceu:plasma_mass_filter": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/polar_cap_tap|gtceu:polar_cap_tap": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
+  "grindless:assembly_line/primordial_fusion_torus|gtceu:primordial_fusion_torus": ["T-CIRC","T-HULL","T-VOLT"],
+  "grindless:assembly_line/pristine_gas_works|gtceu:pristine_gas_works": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/quantum_gas_lab|gtceu:quantum_gas_lab": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/racetrack_fab|gtceu:racetrack_fab": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/ramp_compression_pulser|gtceu:ramp_compression_pulser": ["T-CIRC","T-COMP","T-COUNT","T-HULL"],

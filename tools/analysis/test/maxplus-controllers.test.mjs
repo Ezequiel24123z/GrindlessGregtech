@@ -13,9 +13,9 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const pack = path.resolve(here, '..', '..', '..', 'pack');
 const run = runPackScripts(pack);
 
-const BASE = ['meta_material_loom', 'condensate_assembler', 'hills_slingshot'];
+const BASE = ['meta_material_loom', 'condensate_assembler', 'hills_slingshot', 'pristine_gas_works', 'primordial_fusion_torus'];
 const BOOTSTRAP = ['condensate_refinery', 'bound_matter_press'];
-const FILE = { meta_material_loom: 'loom.js', condensate_assembler: 'assembler.js', hills_slingshot: 'slingshot.js' };
+const FILE = { meta_material_loom: 'loom.js', condensate_assembler: 'assembler.js', hills_slingshot: 'slingshot.js', pristine_gas_works: 'stream.js', primordial_fusion_torus: 'stream.js' };
 const DURATION = {
   meta_material_loom: /EUt\(VA_MAX\)\.duration\(4800\)/,
   condensate_assembler: /EUt\(VA_MAX\)\.duration\(4800\)/,
