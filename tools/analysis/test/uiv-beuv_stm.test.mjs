@@ -171,7 +171,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
     if (!t.dataKey) continue;
     for (const r of t.recipes) {
       const k = `gtceu.recipe.${t.dataKey}.${r.name}`;
-      assert.ok(keys.includes(k) || (/^(OpV|MAX|MX)-/.test(r._why || '') && opvLang.includes(`['${k}',`)), k);
+      assert.ok(keys.includes(k) || (/^(OpV|MAX|MX|XP)-/.test(r._why || '') && opvLang.includes(`['${k}',`)), k);
     }
   }
   for (const n of registered) assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);

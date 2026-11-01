@@ -185,7 +185,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
     for (const r of t.recipes) {
       if (/OpV-B1/.test(r._why || '')) continue;
       const k = `gtceu.recipe.${t.dataKey}.${r.name}`;
-      assert.ok(keys.includes(k) || (/^(OpV|MAX)-/.test(r._why || '') && opvLang.includes(`['${k}', '`)), `${type}: ${k}`);
+      assert.ok(keys.includes(k) || (/^(OpV|MAX|XP)-/.test(r._why || '') && opvLang.includes(`['${k}', '`)), `${type}: ${k}`);
     }
   }
   for (const n of registered) {
