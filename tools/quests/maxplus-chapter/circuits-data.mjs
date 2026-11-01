@@ -23,7 +23,7 @@ export const LINKS = [
   { key: 'CI_L_CLAD', ref: 'MA_CLAD', x: 0, y: 1.5 },
   { key: 'CI_L_BN', ref: 'BN', x: 0, y: 3 },
   { key: 'CI_L_BDEG', ref: 'BDEG', x: 0, y: 4.5 },
-  { key: 'CI_L_META', ref: 'META_B', x: 0, y: 6 },
+  { key: 'CI_L_META', ref: 'META_B', x: 0, y: 6.5 },
   { key: 'CI_L_TAP', ref: 'TAP', x: 0, y: 12 },
 ];
 
@@ -40,20 +40,20 @@ export const QUESTS = [
   q('CI_WIRE', 'step', 'Kerr Strand Wire', 'grindless:kerr_strand_wire', ['CI_L_CLAD'], 2.5, 1.5, null, [
     'The refinery clads the strand; a pasta draw bench then pulls it into &6Kerr Strand Wire&r. This wire is the MAX+ cable, and it carries the coils and the casing. The line stops at the wire: later steps coat it, braid it and wind it.',
   ], [it('grindless:kerr_strand_wire')], 120),
-  q('CI_HULL', 'step', 'The MAX+ Hull', 'grindless:horizon_machine_casing', ['CI_WIRE', 'CI_L_BN'], 5, 1.5, null, [
+  q('CI_HULL', 'step', 'The MAX+ Hull', 'grindless:horizon_machine_casing', ['CI_WIRE', 'CI_L_BN'], 4.5, 2.25, null, [
     'There is no MAX+ hull block. Machines use the MAX &6Machine Hull&r with the &6Horizon Machine Casing&r, which is MAX casing, four compressed plates and strand cable. Every MAX+ controller asks for two casings.',
   ], [it('gtceu:max_machine_hull'), it('grindless:horizon_machine_casing')], 150),
-  q('CI_MOTOR', 'step', 'Motor and Its Cores', 'grindless:maxplus_electric_motor', ['CI_WIRE', 'CI_L_BDEG'], 5, 4.5, null, [
+  q('CI_MOTOR', 'step', 'Motor and Its Cores', 'grindless:maxplus_electric_motor', ['CI_WIRE', 'CI_L_BDEG'], 4.5, 4.5, null, [
     'The &6MAX+ Electric Motor&r joins two &6Kerr Field Coils&r, a &6Bound-Matter Rotor&r and a MAX motor, on the assembly line at the top voltage. The coil is a five-step line on strand wire; the rotor is a four-step line on the degenerate billet.',
     'The two cores come first, each ending in a single part. The motor then uses its MAX counterpart, so the older line stays running.',
   ], [it('grindless:kerr_field_coil'), it('grindless:bound_matter_rotor'), it('grindless:maxplus_electric_motor')], 200),
-  q('CI_PISTON', 'step', 'Piston and Actuator', 'grindless:maxplus_electric_piston', ['CI_MOTOR'], 7.5, 4.5, null, [
+  q('CI_PISTON', 'step', 'Piston and Actuator', 'grindless:maxplus_electric_piston', ['CI_MOTOR'], 7, 3, null, [
     'A motor with a stack of shape-changing crystal, grown, cut, electroded and stacked. The &6Horizon Actuator Stack&r is the core and the &6MAX+ Electric Piston&r the part.',
   ], [it('grindless:horizon_actuator_stack'), it('grindless:maxplus_electric_piston')], 150),
-  q('CI_PUMP', 'step', 'Pump and Regulator', 'grindless:maxplus_electric_pump', ['CI_MOTOR', 'CI_L_META'], 7.5, 6, null, [
+  q('CI_PUMP', 'step', 'Pump and Regulator', 'grindless:maxplus_electric_pump', ['CI_MOTOR', 'CI_L_META'], 4.5, 6.5, null, [
     'Pump and regulator both take the &6Horizon Valve&r that the loom makes, so they wait for the meta-materials. The pump is a motor and a rotor; the &6Fluid Regulator&r adds a second valve and two processors.',
   ], [it('grindless:maxplus_electric_pump'), it('grindless:maxplus_fluid_regulator')], 150),
-  q('CI_BELT', 'step', 'Conveyor Module', 'grindless:maxplus_conveyor_module', ['CI_MOTOR'], 7.5, 7.5, null, [
+  q('CI_BELT', 'step', 'Conveyor Module', 'grindless:maxplus_conveyor_module', ['CI_MOTOR'], 7, 6, null, [
     'The &6Horizon Belt&r is a braided web of strand wire, primed, coated and finished on the membrane line. Two motors carry it as the &6MAX+ Conveyor Module&r.',
   ], [it('grindless:horizon_belt'), it('grindless:maxplus_conveyor_module')], 150),
 
@@ -76,25 +76,25 @@ export const QUESTS = [
     unlocks: 'Every MAX+ component and controller. A controller asks for eight; the Hyperstargate asks for sixteen.',
     automate: 'Six inputs on six chests; a missing one stalls the hall, so alarm on the stock.',
   }, [], [it('grindless:horizon_processor')], 400),
-  q('CI_CTRL', 'step', 'The Controller Recipe', 'gtceu:max_machine_hull', ['CI_PROC', 'CI_HULL'], 7.5, 9.75, null, [
-    'Every MAX+ controller is built on the assembly line: one MAX hull, two Horizon Machine Casings, eight processors, 2,000 mB of kerr condensate, at least eight components from three families, and the inputs of its own domain.',
-    'Components are listed in this chapter; the domain inputs are in the machine\'s own quest.',
+  q('CI_CTRL', 'step', 'The Controller Recipe', 'gtceu:max_machine_hull', ['CI_PROC'], 7.5, 9.75, null, [
+    'Every MAX+ controller is built on the assembly line: one MAX hull from the hull quest, two Horizon Machine Casings, eight processors, kerr condensate, at least eight components from three families, and the inputs of its own domain.',
+    'The components are listed here; the domain inputs are in the machine\'s own quest.',
   ], [ck()], 100),
 
   // ------------------------------------------------------------------ components that need a processor
-  q('CI_EMIT', 'step', 'Emitter and Photonic Engine', 'grindless:maxplus_emitter', ['CI_PROC'], 10, 9, null, [
+  q('CI_EMIT', 'step', 'Emitter and Photonic Engine', 'grindless:maxplus_emitter', ['CI_PROC'], 7.5, 8.25, null, [
     'A photonic engine, a MAX emitter and two processors. The &6Horizon Photonic Engine&r is a five-step line from diamond plate to foundry; the &6MAX+ Emitter&r is the part it feeds.',
   ], [it('grindless:horizon_photonic_engine'), it('grindless:maxplus_emitter')], 200),
-  q('CI_SENS', 'step', 'Sensor and Phase Core', 'grindless:maxplus_sensor', ['CI_PROC'], 10, 10.5, null, [
+  q('CI_SENS', 'step', 'Sensor and Phase Core', 'grindless:maxplus_sensor', ['CI_PROC'], 7.5, 11.25, null, [
     'Single-photon detectors on a wafer, read out, cut and chilled make the &6Horizon Phase Sensor Core&r. With a MAX sensor and two processors it becomes the &6MAX+ Sensor&r.',
   ], [it('grindless:horizon_phase_sensor_core'), it('grindless:maxplus_sensor')], 200),
-  q('CI_ARM', 'step', 'Robot Arm', 'grindless:maxplus_robot_arm', ['CI_PROC', 'CI_PISTON'], 10, 12, null, [
+  q('CI_ARM', 'step', 'Robot Arm', 'grindless:maxplus_robot_arm', ['CI_PROC'], 7.5, 12.75, null, [
     'Two motors, a piston and two processors make the &6MAX+ Robot Arm&r. It has no core line of its own, so it is the first part that needs the motor, the piston and the processor together.',
   ], [it('grindless:maxplus_robot_arm')], 150),
-  q('CI_FIELD', 'step', 'Field Generator', 'grindless:maxplus_field_generator', ['CI_EMIT', 'CI_MOTOR'], 12.5, 9, null, [
+  q('CI_FIELD', 'step', 'Field Generator', 'grindless:maxplus_field_generator', ['CI_EMIT', 'CI_PISTON'], 9.5, 5.5, null, [
     'The last component: an emitter, two Kerr Field Coils and a &6Condensate Field Cell&r. The cell is a five-step line that loads a niobium cavity with condensate in the refinery and seals it cold. The &6MAX+ Field Generator&r is what the big machines ask for most.',
   ], [it('grindless:condensate_field_cell'), it('grindless:maxplus_field_generator')], 250),
-  q('CI_HATCH', 'step', 'MAX Hatches in Bulk', 'gtceu:max_energy_input_hatch_16a', ['CI_HULL'], 12.5, 10.5, null, [
+  q('CI_HATCH', 'step', 'MAX Hatches in Bulk', 'gtceu:max_energy_input_hatch_16a', ['CI_HULL'], 7, 2.25, null, [
     'MAX+ has no hatches of its own. Rows take GTM\'s &6MAX Energy Input Hatches&r, buses and fluid hatches, two of them at the top voltage, in bulk. The wireless versions draw on the network instead, as the integration chapter shows.',
   ], [it('gtceu:max_energy_input_hatch_16a'), it('gtceu:max_input_bus'), it('gtceu:max_output_bus'), it('gtceu:max_input_hatch_9x')], 150),
 ];
