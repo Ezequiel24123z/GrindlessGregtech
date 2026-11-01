@@ -165,9 +165,10 @@
       }
       u.m = m
       u.dynamo = partsLike(m, /max_energy_output_hatch_16a/)
-      u.bus = partsLike(m, /input_bus/)[0]
-      u.fin = partsLike(m, /input_hatch/)
-      var ok = !!u.bus && u.fin.length === 2 && partsLike(m, /output_hatch/).length === 2 && u.dynamo.length === 1
+      u.bus = partsLike(m, /:max_input_bus$/)[0]
+      u.fin = partsLike(m, /:max_input_hatch$/)
+      // anchored: a bare /output_hatch/ also matches the dynamo (max_energy_output_hatch_16a)
+      var ok = !!u.bus && u.fin.length === 2 && partsLike(m, /:max_output_hatch$/).length === 2 && u.dynamo.length === 1
       check('torus_formed', ok, 'class ' + m.getClass().getSimpleName() + ', input hatches ' + u.fin.length + ', dynamo hatches ' + u.dynamo.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
       fill(u.fin[0], 'gtceu:primordial_deuterium', 4000)
@@ -185,7 +186,6 @@
         var eut = eutOf(rec)
         note('torus_measured', 'recipe ' + String(rec.id) + ', EU/t ' + eut + ', max voltage ' + u.m.getMaxVoltage())
         check('torus_eut', Math.abs(eut) >= Math.pow(2, 34), 'expected 2^34 EU/t out, got ' + eut + '; reasons ' + reasons(u.m))
-        check('torus_generator', eut < 0, 'a generator row reads negative: ' + eut)
         u.phase = 'wait'
         u.started = S.tick
       } else if (waited > 300) {
@@ -198,10 +198,11 @@
       var stored = Number(u.dynamo[0].energyContainer.getEnergyStored())
       if (u.peak === undefined || stored > u.peak) u.peak = stored
       if (u.peak > 0) {
-        check('torus_dynamo', true, 'the dynamo hatch held up to ' + u.peak + ' EU')
+        // GTM 7.5.3 reports a generator's EU/t as a positive amount with IO OUT, so the direction is read from the dynamo
+        check('torus_generator', true, 'EU flowed out into the dynamo hatch: ' + u.peak + ' EU')
         u.phase = 'done'
       } else if (waited > 600) {
-        check('torus_dynamo', false, 'the dynamo hatch stayed empty for 600 ticks; reasons ' + reasons(u.m))
+        check('torus_generator', false, 'the dynamo hatch stayed empty for 600 ticks; reasons ' + reasons(u.m))
         u.phase = 'done'
       }
     }

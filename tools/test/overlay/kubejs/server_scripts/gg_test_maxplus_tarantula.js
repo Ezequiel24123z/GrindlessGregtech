@@ -259,7 +259,6 @@
         var eut = eutOf(rec)
         note('burner_measured', 'recipe ' + String(rec.id) + ', EU/t ' + eut + ', max voltage ' + u.m.getMaxVoltage())
         check('burner_eut', Math.abs(eut) >= Math.pow(2, 34), 'expected 2^34 EU/t out, got ' + eut + '; reasons ' + reasons(u.m))
-        check('burner_generator', eut < 0, 'a generator row reads negative: ' + eut)
         u.phase = 'wait'
         u.started = S.tick
       } else if (waited > 300) {
@@ -276,7 +275,8 @@
       }
       var got = count(u.outBus, 'grindless:co56_cask')
       if (got >= 1) {
-        check('burner_dynamo', u.peak > 0, 'the dynamo hatch held up to ' + u.peak + ' EU')
+        // GTM 7.5.3 reports a generator's EU/t as a positive amount with IO OUT, so the direction is read from the drained dynamo instead
+        check('burner_generator', u.peak >= Math.pow(2, 34), 'EU flowed out into the dynamo hatch: up to ' + u.peak + ' EU in one tick (drained every tick)')
         check('burner_output', true, 'grindless:co56_cask x' + got)
         u.phase = 'done'
       } else if (waited > 1200) {
