@@ -2,8 +2,8 @@
 # gg-vm-exec.sh <ref> [command...] - runs a Node or PowerShell tool of a PUSHED commit on this VM, so workstations stay
 # light: T0, the analysis suite, cost solves and every dump-based tool run here or in Actions (docs/testing/usage.md).
 # Fetches into gg-vm-run.sh's mirror, checks the commit out into a scratch workspace (exec/<runId>, objects shared with
-# the mirror, removed afterwards unless GG_EXEC_KEEP=1), puts the bench's Node first on PATH, exports GG_DUMP (the
-# newest batch dump, dumps/latest) and GG_SHA, and runs the command from the repository root under nice, at most
+# the mirror, removed afterwards unless GG_EXEC_KEEP=1), puts the bench's Node first on PATH (and in GG_NODE), exports
+# GG_DUMP (the newest batch dump, dumps/latest) and GG_SHA, and runs the command from the repository root under nice, at most
 # GG_EXEC_SLOTS (2) at once. Without a command after <ref>, the command is read from stdin (run by bash), which avoids
 # Windows quoting. <ref>: a SHA, branch, tag or pull/<n>/head.
 #
@@ -69,6 +69,9 @@ git clone -q --shared --no-checkout "$mirror" "$scratch" && git -C "$scratch" -c
     || finish 2 "checkout of $sha failed"
 node_bin=$(find /opt/grindless/runtime -maxdepth 2 -type d -name bin -path '*node-*' 2>/dev/null | sort | tail -n 1)
 if [ -n "$node_bin" ]; then export PATH="$node_bin:$PATH"; fi
+# the Windows-minded runners (run.ps1, Invoke-Reachability.ps1) look for node.exe unless GG_NODE names it
+GG_NODE="${GG_NODE:-$(command -v node || true)}"
+export GG_NODE
 if [ -z "${GG_DUMP:-}" ] && [ -e "$ROOT/dumps/latest" ]; then GG_DUMP=$(readlink -f "$ROOT/dumps/latest"); fi
 export GG_DUMP="${GG_DUMP:-}" GG_SHA="$sha"
 cd "$scratch" || finish 2 "cd $scratch failed"
