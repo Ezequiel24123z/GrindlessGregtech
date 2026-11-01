@@ -108,7 +108,7 @@ export const QUESTS = [
   },
   {
     key: 'HULL', kind: 'step', title: 'OpV Hull', icon: 'gtceu:opv_machine_hull',
-    deps: ['CABLE', 'LAMINA'], x: 14, y: -3,
+    deps: ['CABLE', 'LAMINA'], x: 14, y: -4,
     desc: [
       'The &6OpV Machine Hull&r joins the casing, the cable and the lamina stack. Every OpV machine starts from one.',
     ],
@@ -117,7 +117,7 @@ export const QUESTS = [
   },
   {
     key: 'POS', kind: 'step', title: 'Dense Positron Cell', icon: 'grindless:dense_positron_cell',
-    deps: ['J_SGR'], x: 10, y: -4,
+    deps: ['CABLE'], x: 14, y: -2,
     desc: [
       'A magnetar\'s field is strong enough to turn gamma rays into pairs of electrons and positrons. A magnetic converter here seals the positrons into a &6Dense Positron Cell&r, and the antihydrogen line needs it.',
     ],
@@ -175,7 +175,7 @@ export const QUESTS = [
   },
   {
     key: 'DISTIL', kind: 'step', title: 'Strangelet Seed', icon: 'grindless:strangelet_seed',
-    deps: ['J_CYG'], x: 12, y: 2,
+    deps: ['J_CYG', 'TETRON'], x: 12, y: 2,
     desc: [
       'A lead beam fired into a target gives a fireball, and the distiller picks the seed of a strangelet out of it. A strangelet is a hypothesis. The seed is fiction.',
     ],
@@ -211,7 +211,7 @@ export const QUESTS = [
   },
   {
     key: 'CENSUS4', kind: 'step', title: 'Superheavy Census IV', icon: 'grindless:superheavy_census_iv',
-    deps: ['CABLE', 'J_CYG'], x: 16, y: 2,
+    deps: ['HAWK'], x: 22, y: 2,
     desc: [
       'Nickel-64 from the magnetar and californium make elements 124 and 126, and the superheavy lab records them. Element 126 is fiction here: the real island of stability has not been found.',
     ],
@@ -222,7 +222,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Terzan 5
   {
     key: 'PATH', kind: 'step', title: 'The Pathfinder', icon: 'grindless:launched_pathfinder',
-    deps: ['HAWK', 'TETRON'], x: 22, y: 0,
+    deps: ['HAWK', 'CENSUS4'], x: 22, y: 0,
     desc: [
       'A probe with a tetron array, an XNAV unit and a Hawking drive brakes into the cluster by itself. The gate throws it, and it opens a ring at the other end.',
     ],
@@ -287,7 +287,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate
   {
     key: 'MAX', kind: 'exit', title: 'Gate to MAX', icon: 'gtceu:max_machine_casing',
-    deps: ['CENSUS4', 'CENSUS3', 'KCORE', 'TETRON'], x: 36, y: 0,
+    deps: ['CENSUS3'], x: 36, y: 0,
     desc: [
       'The Sagittarius A* chart is not on any shelf yet. When your power is ready, the warp gate waits for the Kugelblitz core, the light census, the stable exotic matter, a tetron array, census IV, the bulge chart and cosmic mainframes.',
       'It writes the chart and researches the &6MAX Machine Casing&r. Charge your SMES bank first.',

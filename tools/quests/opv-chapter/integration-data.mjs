@@ -66,7 +66,7 @@ export const QUESTS = [
   },
   {
     key: 'I_HAWK', kind: 'plant', title: 'Hawking Collector', icon: 'gtceu:hawking_collector',
-    deps: ['KCORE'], x: 2, y: 3,
+    deps: ['KCORE', 'I_ENGINE'], x: 2, y: 3,
     teach: {
       for: 'A black hole radiates as it shrinks. The &6Hawking Collector&r takes the power and leaves the shell, burning stable exotic matter or stellar plasma and wearing the core a little each run.',
       needs: 'A Kugelblitz core and a place at Cygnus X-1, with OpV dynamo hatches. It works nowhere else.',
@@ -81,7 +81,7 @@ export const QUESTS = [
   },
   {
     key: 'I_BULGE', kind: 'plant', title: 'Bulge Collector', icon: 'gtceu:bulge_collector',
-    deps: ['NODE'], x: 2, y: 5,
+    deps: ['NODE', 'I_HAWK'], x: 2, y: 5,
     teach: {
       for: 'The &6Bulge Collector&r turns the light gathered by the deployed node packs into current, at Terzan 5 only. One, four or sixteen packs set its output.',
       needs: 'Node packs from the probe line and OpV dynamo hatches. Packs degrade as they work, so they are consumed.',
@@ -157,7 +157,7 @@ export const QUESTS = [
   },
   {
     key: 'I_GATELOAD', kind: 'milestone', title: 'Eight Sources', icon: 'gtceu:opv_wireless_energy_hatch',
-    deps: ['I_NET', 'I_ENGINE', 'I_HAWK'], x: 6, y: 10,
+    deps: ['I_NET', 'I_K3'], x: 6, y: 7.5,
     desc: [
       'The gate to MAX holds the largest load yet for sixty seconds. Eight of the big sources on the wireless network cover it, for example two engines, two collectors and a pair of bulge collectors beside the older dynamos and taps. Check each source on the Power tab, then tick this box.',
     ],
@@ -191,7 +191,7 @@ export const QUESTS = [
     desc: [],
     tasks: [
       it('gtceu:hot_cell'), it('gtceu:fluorspar_kiln'), it('gtceu:fuel_fabrication_plant'),
-      it('gtceu:tritium_removal'), it('gtceu:actinide_partitioning_plant'), it('gtceu:methane_pyrolyser'),
+      it('gtceu:tritium_removal_facility'), it('gtceu:actinide_partitioning_plant'), it('gtceu:methane_pyrolyser'),
     ],
     rewards: [xp(120)],
   },
@@ -244,7 +244,7 @@ export const QUESTS = [
     rewards: [xp(120)],
   },
   {
-    key: 'I_OM_CHIP', kind: 'process', title: 'Cryostat and Bonding', icon: 'gtceu:millikelvin_cryostat',
+    key: 'I_OM_CHIP', kind: 'process', title: 'Cryostat and Bonding', icon: 'gtceu:millikelvin_cryostat_works',
     deps: ['TETRON'], x: 2, y: 23,
     teach: {
       for: 'The &6Millikelvin Cryostat&r, &6Femtosecond Writer&r, &6TFLN Fab&r, &6BEUV Scanner&r, &6STM Lithography Cell&r, &6SNSPD Foundry&r, &6Levitation Melter&r and &6Photonic Integration Hall&r take rows for superfluid helium-3, tetron tests, smart cuts, six masks and the cosmic mainframe join.',
@@ -254,7 +254,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [
-      it('gtceu:millikelvin_cryostat'), it('gtceu:femtosecond_writer'), it('gtceu:tfln_fab'),
+      it('gtceu:millikelvin_cryostat_works'), it('gtceu:femtosecond_writer'), it('gtceu:tfln_fab'),
       it('gtceu:beuv_scanner'), it('gtceu:stm_lithography_cell'), it('gtceu:snspd_foundry'),
       it('gtceu:levitation_melter'), it('gtceu:photonic_integration_hall'),
     ],
@@ -287,8 +287,8 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [
-      it('gtceu:pasta_extractor'), it('gtceu:pasta_phase_sorter'), it('gtceu:draw_bench'),
-      it('gtceu:laminator'), it('gtceu:mtj_sputter_cluster'),
+      it('gtceu:pasta_extractor'), it('gtceu:pasta_phase_sorter'), it('gtceu:pasta_draw_bench'),
+      it('gtceu:pasta_laminator'), it('gtceu:mtj_sputter_cluster'),
     ],
     rewards: [xp(150)],
   },
