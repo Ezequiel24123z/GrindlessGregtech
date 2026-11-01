@@ -58,8 +58,8 @@ test('c13 burns the core and the seed, keeps the six, writes the Sgr A* chart; 9
   assert.equal(new Set(circuits).size, circuits.length);
 });
 
-test('only c10, c11, c13, c14 and c15 are at or above 2^31 EU/t; c12 stays at 2^30', () => {
-  const big = gate.filter((r) => r.eut >= 2 ** 31).map((r) => r.circuit).sort((a, b) => a - b);
+test('only c10, c11, c13, c14 and c15 are at or above 2^31 EU/t below the MAX+ gates; c12 stays at 2^30', () => {
+  const big = gate.filter((r) => r.eut >= 2 ** 31 && r.circuit < 16).map((r) => r.circuit).sort((a, b) => a - b);
   assert.deepEqual(big, [10, 11, 13, 14, 15]);
   assert.equal(gate.find((r) => r.circuit === 12).eut, 2 ** 30);
 });

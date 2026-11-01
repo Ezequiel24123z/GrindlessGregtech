@@ -16442,7 +16442,7 @@ hash = "d69b17ee5ab557ec363219fa561e8d935f9017690891adbf025c2c47d6372bb3"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/slingshot.js"
-hash = "5427ba02f654a0fc64ec25205b030d08d2591d31a25d1ad4afd382218cb027de"
+hash = "6f2206a6beba9811016c7d53257b8555040d73a3fac8910eedec5a47199ecaef"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/moon/crafting.js"

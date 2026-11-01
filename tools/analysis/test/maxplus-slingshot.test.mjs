@@ -40,6 +40,7 @@ test('older rows: P15 at megabar c14, P16 at photonic foundry c28 and clock lab 
   assert.deepEqual(at('megabar_synthesis', 14).outs, [['grindless:dense_counterweight_core', 1]]);
   assert.deepEqual(at('nuclear_clock', 9).outs, [['grindless:thorium_nav_clock', 1]]);
   assert.deepEqual(at('photonic_foundry', 28).outs, [['grindless:optical_nav_core', 1]]);
+  assert.ok(at('photonic_foundry', 28).items.some(([id]) => id === 'grindless:thorium_nav_clock'), 'P16 is one chain: the clock goes into the nav core');
   assert.deepEqual(rows.find((r) => r.type === 'canner').outs, [['grindless:canned_counterweight', 1]]);
   const seen = new Set();
   for (const r of rows) {

@@ -44,7 +44,7 @@
       items: [['grindless:nuclear_clock', 2], ['gtceu:thorium_plate', 8]], fluids: [['gtceu:argon', 2000]],
       outs: [['grindless:thorium_nav_clock', 1]] },
     { type: 'photonic_foundry', name: 'optical_nav_core', circuit: 28, eut: va(12), duration: 1200, key: 'grindless_photonic_foundry',
-      items: [['gtceu:sapphire_plate', 8], ['gtceu:gold_plate', 8]], fluids: [['gtceu:argon', 2000]],
+      items: [['grindless:thorium_nav_clock', 1], ['gtceu:sapphire_plate', 8], ['gtceu:gold_plate', 8]], fluids: [['gtceu:argon', 2000]],
       outs: [['grindless:optical_nav_core', 1]] }
   ]
   MS.rows = ROWS
