@@ -21,7 +21,7 @@ test('the stand-in runs the script without errors, skips nothing', () => {
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(ML.skipped), []);
   assert.equal(ML.loom.length, 4);
-  assert.equal(ML.rows.length, 13);
+  assert.equal(ML.rows.length, 12);
 });
 
 test('loom rows: circuits 1 to 4, one fluid in, boil-off byproduct', () => {

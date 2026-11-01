@@ -1,16 +1,17 @@
 // MAX+ machine 11, the meta-material loom, and the older steps of lines T4 to T7 (docs/eras/maxplus.md, machine 11 and 'Lines'; package XP-H1).
 //
-//   T4 horizon shielding   extraction cascade c32 -> gadolinium_oxide; SPS c27 -> gd_hfb2_cermet; press c4 (maxplus/condensate.js) ->
+//   T4 horizon shielding   (the existing valence-reduction line's gadolinium oxide) SPS c27 -> gd_hfb2_cermet; press c4 (maxplus/condensate.js) ->
 //                          graded_horizon_laminate; loom c1 -> horizon_shielding
 //   T5 horizon waveguide   CVI c20 -> sic_waveguide_tube; chemical bath c2 (electropolish) -> polished_waveguide_tube; MTJ c32 ->
 //                          nb_lined_tube; loom c2 -> horizon_waveguide; mK cryostat c27 -> cold_horizon_waveguide
 //   T6 horizon conduit     coated conductor c12 -> conduit_tape; oxide PLD c9 -> thick_conduit_tape; HTS works c19 -> cabled_conductor;
 //                          loom c3 -> horizon_conduit; helium refrigerator (keyed) -> cold_horizon_conduit
 //   T7 horizon valve       chemical reactor c29 (TEOS sol-gel) -> condensate_alcogel; aerogel works c7 -> condensate_superleak_plug;
-//                          SHeQUID c9 -> calibrated_condensate_leak; loom c4 -> horizon_valve_body; SHeQUID c10 -> horizon_valve
-//                          (the superfluid helium plant has no item slots, so the final valve step runs on the SHeQUID line)
+//                          SHeQUID c9 -> calibrated_condensate_leak; loom c4 -> horizon_valve_body; SHeQUID c12 -> horizon_valve
+//                          (the superfluid helium plant has no item slots, so the final valve step runs on the SHeQUID line, after its
+//                          designed MAX+ rows P19 c8, T7 c9, C2 c10 and K3 c11)
 //
-// The loom runs at home at V[MAX] (the 2^31 EU/t cap of the static run) for 600 ticks per row; the older rows run at their own machine's VA. Older-machine rows are written here,
+// The loom runs at home at V[MAX] x 4 A (2^33 EU/t, the design's machine 11) for 600 ticks per row; the older rows run at their own machine's VA. Older-machine rows are written here,
 // as XP-W's maxplus/power.js writes P18's: the circuits are the first free ones of each older machine type counted in line-id order (P1..P25,
 // T1..T17, ...), built or not (maxplus.md 'Older machines'); extraction and MTJ sit at 32, where rows differ by item inputs. Lookup: each row has
 // a circuit or an item no other row of its type holds. Published for the tests: global.grindless.maxPlusLoom { rows, loom, skipped, controller }.
@@ -25,7 +26,7 @@
   function va(t) { return Number(GTValues.VA[t]) }
   var VA_MAX = va(14)
   var V_MAX = Number(GTValues.V[14])
-  var LOOM_EUT = V_MAX
+  var LOOM_EUT = V_MAX * 4
   var KERR = 'gtceu:kerr_condensate'
   var BOIL = 'grindless:condensate_boil_off'
   var CIRCUIT = '#gtceu:circuits/max'
@@ -36,11 +37,8 @@
   // type, name, circuit, items in, kept items, fluids in, kept fluids, items out, fluids out, EU/t, ticks, data key (types with one)
   var ROWS = [
     // T4
-    { type: 'solvent_extraction', name: 'gadolinium_oxide', circuit: 32, eut: va(3), duration: 600,
-      items: [['gtceu:gadolinium_oxide_dust', 4]], fluids: [['gtceu:hdehp_solvent', 2000]],
-      outs: [['gtceu:gadolinium_dust', 4]], fluidOuts: [['gtceu:spent_hdehp_solvent', 2000]] },
     { type: 'spark_plasma_sintering', name: 'gd_hfb2_cermet', circuit: 27, eut: va(9), duration: 900,
-      items: [['gtceu:gadolinium_dust', 2], ['grindless:hafnium_sponge', 4], ['gtceu:boron_carbide_dust', 4]],
+      items: [['gtceu:gadolinium_oxide_dust', 2], ['grindless:hafnium_sponge', 4], ['gtceu:boron_carbide_dust', 4]],
       outs: [['grindless:gd_hfb2_cermet', 2]] },
     // T5
     { type: 'chemical_vapour_infiltration', name: 'sic_waveguide_tube', circuit: 20, eut: va(10), duration: 1200, key: 'grindless_chemical_vapour_infiltration',
@@ -75,7 +73,7 @@
     { type: 'shequid_assembly', name: 'calibrated_condensate_leak', circuit: 9, eut: va(12), duration: 900, key: 'grindless_shequid_assembly',
       items: [['grindless:condensate_superleak_plug', 1], ['grindless:nb_jj_wafer', 2]], kept: [['grindless:shequid_rotation_ref', 1]],
       fluids: [[LHE, 500]], outs: [['grindless:calibrated_condensate_leak', 1]], fluidOuts: [['gtceu:helium', 500]] },
-    { type: 'shequid_assembly', name: 'horizon_valve', circuit: 10, eut: va(12), duration: 800, key: 'grindless_shequid_assembly',
+    { type: 'shequid_assembly', name: 'horizon_valve', circuit: 12, eut: va(12), duration: 800, key: 'grindless_shequid_assembly',
       items: [['grindless:horizon_valve_body', 1]], kept: [['grindless:shequid_rotation_ref', 1]], fluids: [[LHE, 2000]],
       outs: [['grindless:horizon_valve', 1]], fluidOuts: [['gtceu:helium', 1000]] }
   ]

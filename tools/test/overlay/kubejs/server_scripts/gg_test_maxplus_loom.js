@@ -1,11 +1,11 @@
 // priority: -5301
 // TEST ONLY, XP-H1 (gtceu:meta_material_loom). Command: kubejs custom_command gg_test_maxplus_loom
 // Band ONLY: X 46400-46463, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_loom).
-//   T1 (named uncertainty: the loom forms at Sgr A* on one 1,024 A MAX+ hatch and runs c1 at V[MAX]):
+//   T1 (named uncertainty: the loom forms at Sgr A* on one 1,024 A MAX+ hatch and runs c1 at V[MAX] x 4 A):
 //     lookup   every recipe id of the package (loom rows, press c4, older T4 to T7 rows, cooling row, controller line) is in the recipe manager
 //     static   nothing skipped
 //     formed   the loom forms with the hatch, a bus pair and a fluid hatch pair
-//     eut      c1 (horizon_shielding) starts at V[MAX] or more
+//     eut      c1 (horizon_shielding) starts at V[MAX] or more (it runs at V[MAX] x 4 A)
 //     output   horizon shielding in the output bus
 // The older rows change only their data on mechanisms proven by their own packages, so they are looked up, not run.
 (function () {
@@ -32,7 +32,7 @@
   var IDS = [
     'meta_material_loom/horizon_shielding', 'meta_material_loom/horizon_waveguide', 'meta_material_loom/horizon_conduit', 'meta_material_loom/horizon_valve_body',
     'bound_matter_press/graded_horizon_laminate', 'assembly_line/meta_material_loom', 'closed_loop_cooling/cold_horizon_conduit',
-    'solvent_extraction/gadolinium_oxide', 'spark_plasma_sintering/gd_hfb2_cermet', 'chemical_vapour_infiltration/sic_waveguide_tube',
+    'spark_plasma_sintering/gd_hfb2_cermet', 'chemical_vapour_infiltration/sic_waveguide_tube',
     'chemical_bath/polished_waveguide_tube', 'mtj_sputtering/nb_lined_tube', 'nuclear_demagnetisation/cold_horizon_waveguide',
     'coated_conductor/conduit_tape', 'pulsed_laser_deposition/thick_conduit_tape', 'magnet_winding/cabled_conductor',
     'chemical_reactor/condensate_alcogel', 'supercritical_drying/condensate_superleak_plug', 'shequid_assembly/calibrated_condensate_leak',

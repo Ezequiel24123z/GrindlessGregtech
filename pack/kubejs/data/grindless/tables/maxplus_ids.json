@@ -26,7 +26,7 @@
   },
   "existing": [
     "grindless:chain_lamina_stack", "grindless:cmc_coil_former", "grindless:degenerate_matter_slug", "grindless:fcl_substrate_strip", "grindless:fed_strangelet",
-    "grindless:gadolinium_oxide", "grindless:hawking_drive", "grindless:metal_rich_bloom", "grindless:neutronium_pellet", "grindless:nsc_planetesimal", "grindless:probe_seed",
+    "gtceu:gadolinium_oxide_dust", "grindless:hawking_drive", "grindless:metal_rich_bloom", "grindless:neutronium_pellet", "grindless:nsc_planetesimal", "grindless:probe_seed",
     "grindless:seed_wave_packet", "grindless:segment_truss_billet", "grindless:stellar_plasma"
   ],
   "controllers": {

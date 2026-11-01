@@ -261,7 +261,7 @@ test('static run: no MAX recipe above 2^31 EU/t except gate c14 and c15 (2^33) a
   const bad = [];
   for (const r of pack().recs) {
     for (const e of eu(r, 'tickInputs')) {
-      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && r.i !== 'grindless:black_hole_bomb/horizon_lock' && !/^grindless:(black_hole_bomb\/condensate_tap|condensate_refinery\/|bound_matter_press\/)/.test(r.i)) bad.push(`${r.i}: ${e}`);
+      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && r.i !== 'grindless:black_hole_bomb/horizon_lock' && !/^grindless:(black_hole_bomb\/condensate_tap|condensate_refinery\/|bound_matter_press\/|meta_material_loom\/)/.test(r.i)) bad.push(`${r.i}: ${e}`);
     }
     for (const e of eu(r, 'tickOutputs')) if (e > 2 ** 30) bad.push(`${r.i}: generator ${e} above 2^30`);
   }

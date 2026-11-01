@@ -343,11 +343,11 @@ eutral_beam_injector` | 5 | 4 | XP-B2 |
 | T1 | Containment plate core | hot cell → `gd_absorber_tile`; SPS → `graded_z_billet`; press c3 (+ P2 plate) → `laminated_containment_core`; condensate assembler c1 → `horizon_containment_plate` | 4 | 2 | XP-H3 |
 | T2 | Chevron core | BEUV → `zone_plate_wafer`; MTJ → `multilayer_xray_mirror`; gamma optics works (OpV) → `gamma_focus_element`; condensate assembler c2 → `chevron_core` | 4 | 3 | XP-H3 |
 | T3 | Horizon mesh | PBO plant (P4 wire) → `kerr_mesh_preform`; CVI → `infiltrated_mesh`; EB furnace → `coated_mesh`; condensate assembler c3 → `horizon_mesh` | 4 | 3 | XP-H3 |
-| T4 | Horizon shielding | extraction cascade → `gadolinium_oxide`; SPS → `gd_hfb2_cermet`; press c4 → `graded_horizon_laminate`; loom c1 → `horizon_shielding` | 4 | 2 | XP-H1 |
+| T4 | Horizon shielding | ZPM's europium line (c7) → `gtceu:gadolinium_oxide_dust`; SPS → `gd_hfb2_cermet`; press c4 → `graded_horizon_laminate`; loom c1 → `horizon_shielding` | 4 | 2 | XP-H1 |
 | T5 | Horizon waveguide | CVI → `sic_waveguide_tube`; GTM chemical bath (electropolish) → `polished_waveguide_tube`; MTJ → 
 b_lined_tube`; loom c2 (+ kerr strand) → `horizon_waveguide`; mK cryostat → `cold_horizon_waveguide` | 5 | 3 | XP-H1 |
 | T6 | Horizon conduit | coated conductor → `conduit_tape`; oxide PLD → `thick_conduit_tape`; HTS works → `cabled_conductor`; loom c3 → `horizon_conduit`; He refrigerator → `cold_horizon_conduit` | 5 | 4 | XP-H1 |
-| T7 | Horizon valve | GTM chemical reactor (TEOS sol-gel) → `condensate_alcogel`; aerogel works → `condensate_superleak_plug`; SHeQUID → `calibrated_condensate_leak`; loom c4 → `horizon_valve_body`; superfluid He plant → `horizon_valve` | 5 | 3 | XP-H1 |
+| T7 | Horizon valve | GTM chemical reactor (TEOS sol-gel) → `condensate_alcogel`; aerogel works → `condensate_superleak_plug`; SHeQUID → `calibrated_condensate_leak`; loom c4 → `horizon_valve_body`; SHeQUID c12 (the superfluid He plant has no item slots) → `horizon_valve` | 5 | 3 | XP-H1 |
 | T8 | Horizon crystal slurry | stellar forge → `stellar_plasma`; stellar elevator (Cygnus) → `lifted_stellar_plasma`; plasma mass filter → `filtered_stellar_plasma`; blender c1 (+ P6, P12, jet plasma, hot flow, condensate) → `horizon_crystal_slurry` | 4 | 3 | XP-H2 |
 | T9 | Horizon core crystal | crystal growth → `sapphire_seed_plate`; refinery c6 → `condensate_doped_dust`; crystal furnace c1 (+ slurry) → `core_crystal_boule`; femto writer → `inscribed_core_crystal`; mK cryostat → `horizon_core_crystal` | 5 | 3 | XP-H2 |
 | T10 | Controller crystal | levitation melter (P3 ingot) → `molten_kerr_strange`; crystal growth → `controller_seed`; crystal furnace c2 → `controller_crystal_boule`; BEUV → `horizon_controller_crystal` | 4 | 3 | XP-H2 |
