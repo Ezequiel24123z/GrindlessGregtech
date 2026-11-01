@@ -3,7 +3,7 @@
 // Band ONLY: X 46592-46655, Z 0-63, Y 98-125, in grindless:tarantula_orbit (the burner) and gcyr:black_hole_orbit (the gate); zones.json row maxplus_tarantula.
 //   T1 (named uncertainties):
 //     burner  forms at 30 Doradus on a MAX 16 A dynamo hatch (a generator: no energy input) and runs c1 (4,800 t) with a 2^34 EU/t output;
-//             a co56 cask in the output bus; the dynamo is drained every tick so the run never stalls on a full hatch
+//             a co56 cask in the output bus; the dynamo is drained every tick, and the run skips to its end once output is seen
 //     gate    c16 (hold_tarantula) runs at Sgr A* on one 1,024 A hatch at 2^37 EU/t for 1,200 t with the horizon lock kept; the probe is consumed;
 //             the 30 Doradus platform appears (mark uxvPlatform_tarantula, warp gate controller at 64,100,64 of grindless:tarantula_orbit)
 //     lookup  every recipe id of the package is in the recipe manager; static: nothing skipped
@@ -269,13 +269,18 @@
       return
     }
     if (u.phase === 'wait') {
+      // the 4,800 t run would outlast the bench's 180 s wait: once output is seen, skip to the end (the established setProgress pattern)
+      if (!u.skipped && u.peak > 0 && rlg.isWorking() && rlg.getDuration() - rlg.getProgress() > 40) {
+        rlg.setProgress(rlg.getDuration() - 20)
+        u.skipped = true
+      }
       var got = count(u.outBus, 'grindless:co56_cask')
       if (got >= 1) {
         check('burner_dynamo', u.peak > 0, 'the dynamo hatch held up to ' + u.peak + ' EU')
         check('burner_output', true, 'grindless:co56_cask x' + got)
         u.phase = 'done'
-      } else if (waited > 6000) {
-        check('burner_output', false, 'no co56 cask in 6000 ticks; reasons ' + reasons(u.m))
+      } else if (waited > 1200) {
+        check('burner_output', false, 'no co56 cask in 1200 ticks; skipped ' + !!u.skipped + '; reasons ' + reasons(u.m))
         u.phase = 'done'
       }
     }
