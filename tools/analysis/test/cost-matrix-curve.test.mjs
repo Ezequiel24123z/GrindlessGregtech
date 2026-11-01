@@ -1,11 +1,11 @@
-// cost-matrix.mjs --table / --solve on a one-recipe-per-era fixture (RF-2A): the solver finds the factor that puts the core index
+﻿// cost-matrix.mjs --table / --solve on a one-recipe-per-era fixture (RF-2A): the solver finds the factor that puts the core index
 // on the curve, and the predicted index is what the rule gives. T0: local, deterministic.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { solveFactors, pricedRows, coreIndex, curved, fixShapedCounts } from '../cost-matrix.mjs';
+import { solveFactors, pricedRows, coreIndex, curved, fixShapedCounts, priceDump, keyCandidates } from '../cost-matrix.mjs';
 import { loadTables, withFactors, TABLE_DIR } from '../lib/cost_curve.mjs';
 import { mkDump } from './helpers.mjs';
 
@@ -87,4 +87,21 @@ test('shaped recipes count every pattern cell, and an unmatched symbol table is 
   const shapeless = { shape: 'shapeless', inputs: [{ count: 1 }] };
   fixShapedCounts(shapeless, { pattern: ['AA'], key: { A: {} } });
   assert.equal(shapeless.inputs[0].count, 1);
+});
+
+test('melt.always: a metal another recipe makes still gets the synthetic melt from its ingot; off, it does not', () => {
+  const d = () => mkDump({
+    recipes: [source, { ...hull('mv', 2, 0, 30), id: 'x:remelt', json: { ...hull('mv', 2, 0, 30).json, outputs: { item: [], fluid: [{ content: { amount: 144, value: [{ fluid: 'x:metal' }] }, chance: 10000, maxChance: 10000, tierChanceBoost: 0 }] } } }],
+    items: ['x:metal_ingot', 'gtceu:mv_machine_hull'], fluids: ['x:metal'],
+  });
+  const has = (always) => priceDump(d(), { ...cfg, settings: { ...cfg.settings, melt: { mbPerItem: 144, itemSuffixes: ['_ingot'], always } } })
+    .recipes.some((r) => r.id === 'synthetic/melt/x:metal');
+  assert.equal(has(true), true);
+  assert.equal(has(false), false);
+});
+
+test('circuits.skip drops matching tag members from the key items', () => {
+  const d = mkDump({ items: ['gtnn:a', 'gtceu:b'], tagsItem: { 'forge:circuits/mv': ['gtnn:a', 'gtceu:b'] } });
+  const c = { ...cfg, tiers: ['mv'], groups: {}, circuits: { tagPrefix: 'forge:circuits/', skip: ['gtnn:*'] } };
+  assert.deepEqual(keyCandidates(c, d).slots.map((s) => s.present[0]), ['gtceu:b']);
 });
