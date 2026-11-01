@@ -80,7 +80,7 @@ export default {
         n('ebf', 8, -0.75, M('gtceu:electric_blast_furnace'), 'Electric Blast Furnace', { from: ['aldust'], sub: 'Cupronickel coils are hot enough' }),
         n('alingot', 10, -0.75, I('gtceu:aluminium_ingot'), 'Aluminium', { from: ['ebf'] }),
         n('alplate', 12, -0.75, I('gtceu:aluminium_plate'), 'Aluminium Plate', { from: ['alingot'], sub: 'Forge hammer or bender' }),
-        n('mvcasing', 14, -0.75, I('gtceu:mv_machine_casing'), 'MV Machine Casing', { from: ['alplate'], sub: 'Assembler' }),
+        n('mvcasing', 14, -2.25, I('gtceu:mv_machine_casing'), 'MV Machine Casing', { from: ['alplate'], sub: 'Assembler' }),
         n('mvhull', 16, -0.75, I('gtceu:mv_machine_hull'), 'MV Machine Hull', {
           kind: 'product', from: ['alplate', 'mvcasing'],
           desc: 'The whole point of the sapphire. Every MV machine starts here.',
