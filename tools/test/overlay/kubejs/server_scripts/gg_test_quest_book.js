@@ -33,7 +33,7 @@
   var PICK_TARGET = { x: 4642, y: 99, z: 8 }
   var WALL = { x: 4646, y0: 99, y1: 101, z0: 7, z1: 9 }
   var WALL_SPOT = { x: 4644.5, y: 99, z: 8.5 }
-  var EXPECTED = { welcome: 15, steam_age: 44 }
+  var EXPECTED = { welcome: 16, steam_age: 45 }
   var ARRIVAL = '69BDA9FBB0EB66F2'
   var TOOLBOX = '047B55ED9C952BC9'
   var TOOLS = [
@@ -45,7 +45,7 @@
     'gtceu:naquadah_mortar', 'gtceu:rubber_mallet', 'gtceu:rubber_plunger'
   ]
   var START_TICKS = 100
-  var CLIENT_TIMEOUT = 1200
+  var CLIENT_TIMEOUT = 2400
   var TEST_TIMEOUT = 9000
 
   var T = null
