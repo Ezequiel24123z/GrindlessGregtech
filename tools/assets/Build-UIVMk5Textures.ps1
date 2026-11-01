@@ -31,6 +31,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'uiv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 
 $RepoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 if (-not $OutRoot) { $OutRoot = Join-Path $RepoRoot 'pack\kubejs\assets\grindless\textures' }
@@ -176,7 +177,8 @@ foreach ($it in $items) {
     foreach ($row in $map) { if ($row.Length -ne 16) { throw "$($it[0]): a map row is $($row.Length) wide" } }
     if ($map.Count -ne 16) { throw "$($it[0]): the map is $($map.Count) rows" }
     $c = New-Canvas
-    Write-Map $c 0 0 $map (New-Tint $it[2])
+    $era = New-EraLegacyItem $EraName $it[0] $it[1] $it[2]
+    if ($era -and $it.Count -le 3) { $c = $era } else { Write-Map $c 0 0 $map (New-Tint $it[2]) }
     Out-Tex $c "item/$($it[0]).png"
 }
 

@@ -30,6 +30,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'uhv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 
 if (-not $OutRoot) { $OutRoot = Join-Path $PSScriptRoot '..\..\pack\kubejs\assets\grindless\textures' }
 $OutRoot = [System.IO.Path]::GetFullPath($OutRoot)
@@ -92,7 +93,7 @@ Out-Tex (New-CoverItem (New-SmallMast) 'z' $Tier) "item/wireless/dynamo_cover_$T
 # ============================================================================================
 $problems = 0
 $seen = @{}
-$ramp = @(Get-TierRamp $Tier)
+$ramp = @(Get-TierRamp $Tier | ForEach-Object { $t = New-Canvas 1 1; Set-Px $t 0 0 $_; (Convert-EraTexture $t $EraName 'overlay.png').P[0] -bor 0xFF000000 })
 foreach ($rel in $written) {
     $path = Join-Path $OutRoot ($rel -replace '/', '\')
     $img = Read-Png $path
