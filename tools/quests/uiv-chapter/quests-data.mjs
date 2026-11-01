@@ -183,7 +183,7 @@ export const QUESTS = [
   },
   {
     key: 'GAMMA', kind: 'step', title: 'Gamma Laser Cavity', icon: 'grindless:gamma_laser_cavity',
-    deps: ['JUMP2'], x: 22.5, y: 2,
+    deps: ['P_TIMED'], x: 26.25, y: 2,
     desc: [
       'Let a positronium condensate annihilate all at once and you get a gamma-ray laser. It is fiction: nobody has built one. The &6Gamma Laser Cavity&r is the core of the UIV emitter.',
     ],
