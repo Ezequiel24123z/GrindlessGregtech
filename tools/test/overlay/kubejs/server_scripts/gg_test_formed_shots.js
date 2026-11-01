@@ -36,6 +36,7 @@
   var Y1 = 163
   var ORIGIN = { x: X0 + 8, y: Y0 + 2, z: Z0 + 8 }
   var EYE = 1.62
+  var PI = 3.141592653589793 // Math.PI is undefined in this Rhino
   var START_TICKS = 40
   var AIM_TICKS = 6
   var SHOT_TIMEOUT = 700
@@ -230,18 +231,18 @@
     var hx = f.x
     var hz = f.z
     if (hx === 0 && hz === 0) hz = -1
-    var a = 35 * Math.PI / 180
+    var a = 35 * PI / 180
     var dx = hx * Math.cos(a) - hz * Math.sin(a)
     var dz = hx * Math.sin(a) + hz * Math.cos(a)
-    var el = 20 * Math.PI / 180
+    var el = 20 * PI / 180
     var camX = cx + dx * Math.cos(el) * dist
     var camY = cy + Math.sin(el) * dist
     var camZ = cz + dz * Math.cos(el) * dist
     var lx = cx - camX
     var ly = cy - camY
     var lz = cz - camZ
-    var yaw = Math.atan2(-lx, lz) * 180 / Math.PI
-    var pitch = -Math.atan2(ly, Math.sqrt(lx * lx + lz * lz)) * 180 / Math.PI
+    var yaw = Math.atan2(-lx, lz) * 180 / PI
+    var pitch = -Math.atan2(ly, Math.sqrt(lx * lx + lz * lz)) * 180 / PI
     return { x: camX, y: camY - EYE, z: camZ, yaw: yaw, pitch: pitch, dist: Math.round(dist) }
   }
 
@@ -319,7 +320,11 @@
     cur.note = note
     var cam = camera(shape, m ? facing(m) : { x: 0, z: -1 })
     cur.cam = cam
-    p.teleportTo('minecraft:overworld', cam.x, cam.y, cam.z, cam.yaw, cam.pitch)
+    try {
+      p.teleportTo('minecraft:overworld', cam.x, cam.y, cam.z, cam.yaw, cam.pitch)
+    } catch (et) {
+      throw new Error('teleport ' + JSON.stringify(cam) + ' size ' + cur.size + ' front ' + JSON.stringify(facing(m)) + ': ' + errText(et))
+    }
     T.phase = 'aim'
     T.since = T.t
   }
@@ -334,14 +339,40 @@
     T.since = T.t
   }
 
+  function layoutOf(shape) {
+    var legend = {}
+    var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    var n = 0
+    var grid = {}
+    shape.cells.forEach(function (c) {
+      if (legend[c.id] === undefined) { legend[c.id] = letters.charAt(n % letters.length); n++ }
+      grid[c.x + ',' + c.y + ',' + c.z] = legend[c.id]
+    })
+    var layers = []
+    for (var y = 0; y < shape.h; y++) {
+      var rows = []
+      for (var x = 0; x < shape.w; x++) {
+        var s = ''
+        for (var z = 0; z < shape.d; z++) s += grid[x + ',' + y + ',' + z] || ' '
+        rows.push(s)
+      }
+      layers.push(rows)
+    }
+    var inv = {}
+    Object.keys(legend).forEach(function (k) { inv[legend[k]] = k })
+    return { axes: 'layers[y][x] is a string over z', legend: inv, layers: layers }
+  }
+
   function closeCurrent(result) {
     var cur = T.cur
     var ok = result.indexOf('PASS') === 0
     var detail = cur.size + (cur.formed ? ' formed' + (cur.forced ? ', forced' : '') : ' NOT formed') + ' xei=' + cur.shape.xei + ' shapes=' + cur.shape.shapes
     if (ok) {
       T.shots++
-      row(cur.id, 'shot', { shot: fileOf(cur.id) + '.png', formed: cur.formed, forced: cur.forced, xei: cur.shape.xei, shapes: cur.shape.shapes,
-        size: cur.size, note: cur.note, camDist: cur.cam.dist, client: result.substring(0, 300) })
+      var extra = { shot: fileOf(cur.id) + '.png', formed: cur.formed, forced: cur.forced, xei: cur.shape.xei, shapes: cur.shape.shapes,
+        size: cur.size, note: cur.note, camDist: cur.cam.dist, client: result.substring(0, 300) }
+      if (/extendedfeatures:(expanded_assembly_line|matrix_data_relay)$/.test(cur.id)) extra.layout = layoutOf(cur.shape)
+      row(cur.id, 'shot', extra)
       emit(cur.id, 'PASS', fileOf(cur.id) + '.png ' + detail + (cur.note ? '; ' + cur.note : ''))
     } else {
       T.failed++
@@ -402,7 +433,8 @@
       return
     }
     if (T.phase === 'next') {
-      if (T.queue.length === 0) { finish(server); return }
+      var ealWait = String(T.cfg.eal) === 'true' && global.ggTestExpandedAssemblyLineRequestFinished !== true && T.t < 6000
+      if (T.queue.length === 0) { if (!ealWait) finish(server); return }
       if (T.started > 0 && Date.now() - T.started > Number(T.cfg.budgetSec || 900) * 1000) { finish(server); return }
       placeCurrent(server, p)
       return

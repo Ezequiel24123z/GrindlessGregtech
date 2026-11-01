@@ -8,7 +8,7 @@
     magenta   >= 2 % of the pixels are missing-texture magenta/black checker colours (255,0,255)
     black     the frame is almost all black (mean luma < 6)
     uniform   the frame is almost one colour (luma stddev < 5): nothing but sky or void
-    sparse    the structure is barely visible: < 3 % of the pixels differ from the frame's most common colour
+    sparse    the structure is barely visible: < 10 % of the pixels differ from the frame's most common colour
     duplicate the frame is byte-identical to another machine's frame (same SHA-256)
   Manifest rows (gg_formed_shots_manifest*.json) with no shot (noshape, toolarge, shotfail, error) are added as flags too.
   Nothing here needs Minecraft, npm or the network (System.Drawing only).
@@ -20,7 +20,8 @@ param(
   [string]$OutDir = '',
   [int]$Columns = 5,
   [int]$Rows = 4,
-  [int]$ThumbWidth = 384
+  [int]$ThumbWidth = 384,
+  [double]$SparseAt = 0.90
 )
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
@@ -70,7 +71,7 @@ foreach ($f in $files) {
     if ($st.Magenta -ge 0.02) { $flags += 'magenta' }
     if ($st.Mean -lt 6) { $flags += 'black' }
     if ($st.Std -lt 5) { $flags += 'uniform' }
-    if ($st.Dominant -gt 0.97) { $flags += 'sparse' }
+    if ($st.Dominant -gt $SparseAt) { $flags += 'sparse' }
   } catch {
     $flags += 'unreadable'
     $st = [pscustomobject]@{ Mean = 0; Std = 0; Magenta = 0; Dominant = 0 }

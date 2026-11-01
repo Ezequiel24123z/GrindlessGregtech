@@ -61,6 +61,7 @@
     ctl: 'gtceu:assembly_line',
     eal: 'extendedfeatures:expanded_assembly_line',
     recv: 'extendedfeatures:luv_wireless_data_receptor',
+    maint: 'gtceu:configurable_maintenance_hatch',
     tx: 'extendedfeatures:luv_wireless_data_transmissor',
     mdr: 'extendedfeatures:matrix_data_relay',
     cc: 'gtceu:computer_casing',
@@ -250,9 +251,10 @@
           if (first) bottom = cell(x, EAL.y0, z, B.eal, '[facing=north]', 'controller')
           else if (last) bottom = cell(x, EAL.y0, z, B.outBus, '[facing=down]', 'out')
           else bottom = cell(x, EAL.y0, z, B.bus, '[facing=down]', 'bus' + (a - 1))
-        } else if (a === 1 && dx === -1) bottom = cell(x, EAL.y0, z, B.fluid, '[facing=down]', 'fluid0')
+        } else if (a === 0 && dx === -1) bottom = cell(x, EAL.y0, z, B.maint)
+        else if (a === 1 && dx === -1) bottom = cell(x, EAL.y0, z, B.fluid, '[facing=down]', 'fluid0')
         else if (a === 2 && dx === -1) bottom = cell(x, EAL.y0, z, B.fluid, '[facing=down]', 'fluid1')
-        else if (a === 1 && dx === 1) bottom = cell(x, EAL.y0, z, B.recv, '[facing=down]', 'recv')
+        else if (a === 0 && dx === 1) bottom = cell(x, EAL.y0, z, B.recv, '[facing=down]', 'recv')
         else bottom = cell(x, EAL.y0, z, B.casing)
         cells.push(bottom)
         var mid = Math.abs(dx) === 2 ? B.glass : (dx === 0 ? B.unit : B.control)
@@ -679,6 +681,7 @@
   function finish() {
     if (S === null || S.finished) return
     S.finished = true
+    global[REQUEST + 'Finished'] = true
     console.info(TAG + SCOPE + '|DONE')
   }
 
