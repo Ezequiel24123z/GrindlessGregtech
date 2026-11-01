@@ -1,4 +1,3 @@
-// priority: -5800
 // TEST ONLY, XP-S0b spike S0-7 (docs/eras/maxplus.md S0 table). Command: kubejs custom_command gg_test_xp_s0_world_guard
 // Band ONLY: X 44032-44095, Z 0-63, gg_test:s0_flat Y 0-12 (zones.json row xp_s0_world_guard). Never shipped.
 //   Question: does a BlockEvents.placed cancel stop every creative block outside creative mode, and do AE2 drives refuse the creative energy cell?

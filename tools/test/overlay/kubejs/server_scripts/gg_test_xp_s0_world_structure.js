@@ -1,4 +1,3 @@
-// priority: -5820
 // TEST ONLY, XP-S0b spike S0-8 (docs/eras/maxplus.md S0 table). Command: kubejs custom_command gg_test_xp_s0_world_structure
 // Band ONLY: X 44288-44351, Z 0-63, gg_test:s0_flat Y 0-48 (zones.json row xp_s0_world_structure). Never shipped.
 //   Question: does a 45 x 45 x 9 multiblock with 64 substation hatches (gtceu:gg_s0_world_box, 18,225 pattern cells) form, and what does it cost the server?
