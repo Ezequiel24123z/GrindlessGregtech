@@ -81,7 +81,7 @@ export default {
           kind: 'ours', from: ['sample', 'bit'],
           desc: 'It drills the vein the sample names, forever, wherever you build it. The bit wears out; the sample never does.',
         }),
-        n('goethite2', 6, 0, I('gtceu:raw_goethite'), 'Raw Goethite, Forever', { kind: 'ret', from: ['drill'], sub: 'With the vein\'s other ores' }),
+        n('goethite2', 6, 0, I('gtceu:raw_goethite'), 'Raw Goethite, Forever', { kind: 'product', from: ['drill'], sub: 'With the vein\'s other ores' }),
         n('cobble', 6, 1.5, I('minecraft:cobblestone'), 'Cobblestone', { kind: 'by', from: ['drill'], end: 'inert', sub: 'Inert: void it, or crush it later' }),
       ],
     },

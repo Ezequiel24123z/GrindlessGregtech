@@ -80,7 +80,7 @@ export default {
         }),
         n('rawgas', 5, 0, F('gtceu:raw_gasoline'), 'Raw Gasoline', { from: ['lcr'] }),
         n('toluene2', 5, 1.5, F('gtceu:toluene'), 'Toluene', { kind: 'raw', sub: 'From the reformer' }),
-        n('gasoline', 7, 0.75, F('gtceu:gasoline'), 'Gasoline', { from: ['rawgas', 'toluene2'], sub: 'Chemical reactor' }),
+        n('gasoline', 7, 0.75, F('gtceu:gasoline'), 'Gasoline', { kind: 'product', from: ['rawgas', 'toluene2'], sub: 'Chemical reactor' }),
         n('gen', 9, 0.75, M('gtceu:hv_combustion'), 'Combustion Generator', { from: ['gasoline'], sub: 'Five times the energy of naphtha' }),
       ],
     },
