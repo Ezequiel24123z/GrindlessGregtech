@@ -141,8 +141,8 @@
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 144))
       .circuit(1).itemOutputs('1x ' + SCOOP).EUt(ZPM_VA).duration(200)
     event.recipes.gtceu.assembler('grindless:ring_sail_net')
-      .itemInputs('8x gcyr:para_aramid_foil', '4x gtceu:titanium_plate', '1x grindless:anchor_harpoon', '1x grindless:whipple_shield_casing', '1x grindless:night_sky_radiator')
-      .inputFluids(Fluid.of('gtceu:polyethylene', 144), Fluid.of('gtceu:lubricant', 100))
+      .itemInputs('8x gcyr:para_aramid_foil', '4x gtceu:titanium_plate', '1x grindless:anchor_harpoon', '1x grindless:whipple_shield_casing', '1x grindless:night_sky_radiator', '1x gtceu:polyethylene_plate')
+      .inputFluids(Fluid.of('gtceu:lubricant', 100))
       .circuit(2).itemOutputs('1x ' + NET).EUt(ZPM_VA).duration(200)
   }
 

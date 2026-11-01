@@ -389,8 +389,8 @@
     if (Item.exists(FIBRE_MODULE) && Item.exists(MODULE_BLOCK) && Item.exists('grindless:silicon_nitride_film')) {
       // the structure block is built, not folded: modules in a tritanium frame with nitride film shielding, soldered and cooled
       event.recipes.gtceu.assembler('grindless:laser_module_block')
-        .itemInputs(FIBRE_MODULE, '4x gtceu:tritanium_plate', 'grindless:silicon_nitride_film', '2x gtceu:tungsten_steel_plate')
-        .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 100))
+        .itemInputs(FIBRE_MODULE, '4x gtceu:tritanium_plate', 'grindless:silicon_nitride_film', '2x gtceu:tungsten_steel_plate', 'gtceu:soldering_alloy_ingot')
+        .inputFluids(Fluid.of('gtceu:lubricant', 100))
         .itemOutputs(MODULE_BLOCK)
         .EUt(ZPM).duration(300)
     } else {
