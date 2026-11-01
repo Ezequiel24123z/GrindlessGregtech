@@ -78,7 +78,7 @@ test('capacity --dump: the cost-curve pass pushes a LuV recipe over its tank, an
   const mixer = (id, item, mb) => ({ id, type: 'gtceu:mixer', json: { type: 'gtceu:mixer', duration: 100, inputs: { fluid: [{ content: { amount: mb, value: [{ fluid: 'a:f' }] }, chance: 10000, maxChance: 10000 }] }, outputs: out(item), tickInputs: { eu: [{ content: 30720, chance: 10000, maxChance: 10000 }] } } });
   const dump = mkDump({ recipes: [mixer('gtceu:mixer/key', 'gtceu:luv_electric_motor', 40000), mixer('gtceu:mixer/other', 'a:unrelated', 40000)] });
   const { tables } = loadTables(TABLE_DIR);
-  const off = lintCurve(dump, tables, snap);
+  const off = lintCurve(dump, withFactors(tables, {}), snap);
   assert.deepEqual(Object.keys(off.after.errors), []);
   const on = lintCurve(dump, withFactors(tables, { luv: { item: 2, fluid: 2 } }), snap);
   assert.deepEqual(Object.keys(on.after.errors), ['gtceu:mixer/key']);
