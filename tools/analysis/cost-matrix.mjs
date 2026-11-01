@@ -534,9 +534,11 @@ export function solveFactors(args, cfg, dump) {
     // the table holds the factor to 3 decimals and the index jumps at some factors: measure the number that will be written
     const r3 = (x) => Math.max(1.001, Math.round(x * 1e3) / 1e3);
     let f = r3(target / i0);
-    let best = null;
+    // factor 1 is a candidate too: the index can jump at the first factor above 1 (ceil of every count), so the nearest two are 1 and the first step
+    let best = { f: 1, g: pts[0].g, idx: i0 };
     let plateau = false;
     for (let k = 0; k < curve.maxIterations; k++) {
+      if (tried.some((x) => x.f === f)) break;
       const idx = tryF(f);
       if (idx === null) break;
       const g = Math.log(idx / target);
@@ -565,7 +567,7 @@ export function solveFactors(args, cfg, dump) {
       shown = t0.idx;
       plateaus.push({ era, factor: pick, index: shown, target });
     }
-    setFactor(era, r3(pick));
+    setFactor(era, pick <= 1 ? 1 : r3(pick));
     predicted[era] = shown;
     log.push(`${era}: item factor ${factors[era].item}, fluid ${factors[era].fluid}, index ${shown === null ? '-' : fmt(shown)} (target ${fmt(target)})${plateau ? ' PLATEAU: more factor does not raise the index, fix the routes' : ''}`);
     console.log(log[log.length - 1]);
