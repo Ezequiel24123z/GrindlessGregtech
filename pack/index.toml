@@ -1918,255 +1918,431 @@ hash = "5a99f18eb9cbc334f8f0225c4852b8b58785e0546d9d926fdc6d75c03e371c9d"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds.json"
-hash = "864f5a04828e37afe881a06daeb94723a91cad209debdbc006a9346f4843fca1"
+hash = "f862bd395b12d62a2475a8c3efd6ae4bc65d8b8950f45d4f9a5f53d65eaa668d"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_accretion_disk_skimmer.ogg"
+hash = "7bc71c5fbcc6bcef0e625db288eb46d3bc9012ae9b72163670a03c0b2a2381da"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_accretion_feeder.ogg"
+hash = "58eb3c14e611a08a0a0d5015db728a027365e94403bafab455d9c7d5f096d3b6"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_annihilation_engine.ogg"
+hash = "5d669052d9d24d0f787add6cd99af216a71ee61359fd6e9f4e97c142f2d1783b"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_annihilation_laser_works.ogg"
+hash = "bef2199c1f93fe135816016b772905ee1c6ced433a3da277e3d5422e9e9e0bad"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_antihydrogen_foundry.ogg"
+hash = "3213cc048dc36ddb60c1cf643aeafa4d7dfe31e603b47c30abd0d618e97d3a29"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_antimatter_accumulator.ogg"
-hash = "490e5e587c343f4f2df2c9476904cf78a018e8b78c9b1106c6760c2248508d2e"
+hash = "ad1632c6a128540fc0a9b5dbcf37150d38c18e8e54c1524b2f21397aad1aac04"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_antiproton_decelerator.ogg"
+hash = "277e5615b23087bb046740f639772aca9f80024be22eb12237454bd1d4d4ea21"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_asteroid_processor.ogg"
-hash = "8ede0b299320e9f50530b9336f8e4b3591bd2052f0c2054cc4a00fdae8b3addc"
+hash = "4cfe087b098ce250e3edc3f26927feabefb31c987e4f12bf396166d7ac646809"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_atom_interferometer_works.ogg"
+hash = "a047afd87622f074320804e4abd5cb089b60b5ce05379b5859ad98eee6f1a061"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_biofoundry.ogg"
-hash = "82c0a892585fd9bdcc5cb5a956a9339222a8db6d1e9bcc118ab3769e24e4f963"
+hash = "51359ab2e41d8505dd0c1c2c8dfa9b3d7da59e2cb635f646f229e84ab27ca2d1"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_biorefinery.ogg"
-hash = "52782679d1cef963d477b93f90a2e5cf5db615fc1c618d0a32a406d11f12e69d"
+hash = "e56af3bd04543ae1cfb694f9651ab9136d5eccf1742d9b40fa9b91f390879933"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_bz_dynamo.ogg"
+hash = "f4ff74fa0a02277edc6afdfba52dd9b242fc5aedfdf5ceb7f364a49e477ed0a4"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_cluster_light_furnace.ogg"
+hash = "c4514eaf1b505425f37daf3483a1a1bc7dd7e340e5b146845073716027aa0cac"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_coilgun_launcher.ogg"
+hash = "4b2571317ffaae60ee9a8c86c281e8a5979ae62dbc6ca0658ad6f9cbb777f37f"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_coking_battery.ogg"
-hash = "a904be508a0ea82ba91c1c2e90ac8f779183ddef26271a6ed2714b4b5cbdc5c8"
+hash = "3141b92b73949ac7f08dbafdbc8d9fc7d5433b7359ca834f7da6a4acd44fbd00"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_combined_cycle.ogg"
-hash = "7d267aec9a0bf01dfcbb1f80a1013422a8965a3e438b4de15ea3f06227d503d1"
+hash = "e8cc903c66f386695477084d9e97edc8594c605a5884bc893122506d42329e80"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_cryogenic_plant.ogg"
-hash = "64a38d9972963821ac4d359ee565ea76fbfb3f8bdb1673c8732e69235f98b05f"
+hash = "c43dde59b9e61135d9ec45282951366da7186d34b99cd73caa684ee4d358e362"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_cvi_furnace.ogg"
-hash = "3cca87da8b2477195b0713f8ca5693d283a42414aa557101314836fbaac8c327"
+hash = "eea5a889d264cb08ef1969e6a4d3ad2db53f43e4d75bcdf177e92d5e12d30651"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_deep_space_antenna.ogg"
-hash = "db0dda922f384c97b78329418937944199eddc55e9cfa6398a0ba06de3b57148"
+hash = "ca2d0e285e9db4a5185bafe58cb971badda165fb42e3386e32ff2a45870327a7"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_dyson_swarm.ogg"
-hash = "c394fc1fafa85120f25936687e560770eb4543a58eab3163b76736985f7dc4de"
+hash = "798eb722c17d0387dc61f555c76be990c8310d622abfc18b892ccc0e4d9dd458"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_earth_orbit_lab.ogg"
-hash = "47ef2f980d1fa81269e09ba77d6fcbae07215be30eec5e5a0862e8801a4302d6"
+hash = "648191819b803473ffad3079c5c96e7be02acacd8a2f81d206a713e1e5cc92db"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_ejecta_knot_sweeper.ogg"
+hash = "7030bc375dfff79da694c76f137ce7112a2887e47c41dfcd235849277b529238"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_electron_beam_furnace.ogg"
-hash = "70e45cd4a7221450bd1dd6616cf8cde514a12f93fc259d2a255e02c82abe3202"
+hash = "b62fa7cc20132652287717110223173e56dcf9a055de17d10f7fb25e50535e92"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_extraction_cascade.ogg"
-hash = "62f3ee7bc4418ae327dd47a9489826bbdafa2f1dcdf11a65645bd69ac5ecfc86"
+hash = "9de3b57c5728e3b466cd71797deef72f93e4269dcb61894493393db12c6dd751"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_fibre_draw_tower.ogg"
-hash = "3394fe8082f8436f2581ecdc3b7614063b857538fa79b9c956da91583d8237bc"
+hash = "2063fc1773a0500106a3caed80444d18587c8943c555dbbfdeda325d6de55b3c"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_field_frozen_press.ogg"
+hash = "07fbae4af39e6523bd809d9b4f770d6a000149d191615a64cd782301cf04ec54"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_fission_reactor.ogg"
-hash = "195911916a4133b03f142fb5dc7ffc25c884dea7c4dda7ff2387c1cf4478b2c3"
+hash = "a47489692c32cafd8a61ebe3f76c625ffb7c2624e5c59986662cbcbb21f4049a"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_fluorspar_kiln.ogg"
-hash = "0020b83b79caf8e96f6aa36608805b63fe7af76b1a2685a87e43d5aaf12c1ed2"
+hash = "d83d1ff55588c66c1a60999c90ee09f3c4a6b911c7ad89c47d48b1d214a5f735"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_frc_former.ogg"
+hash = "6608187006b28cf86f469a975cc2d5dfd9e5ea0fd3096b9a334f9d04662d43bf"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_fuel_fabrication.ogg"
-hash = "6afb7c0b7c76b556c7736ed2c9745e2330aed02a1fb3feabd9d5ab321e322dd8"
+hash = "93462ec26ce120d6fbdebf6a4ad23618906905f08ec29c27b59d789eea9169c0"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_gamma_optics_works.ogg"
+hash = "21832eb709acc320447542319d5153856a1d93a27a726204debd8fba63393ac1"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_gas_giant_siphon.ogg"
-hash = "66b9fa73e2eaa5fcc4d4c2061c419a97840963be79e1091131d10a0f20e6fa9e"
+hash = "44b873180c60b52efa8ec1656c1a8a94ed140a865d057cb6c99689d6266aaa56"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_gene_ark.ogg"
+hash = "ec9cd402526c1c781e0d0c69ab82b17d478874c1b0a0d3233fb489b99b10aad1"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_geroch_winch.ogg"
+hash = "2f2da1cc6eb09167a1eb3d6c0f32d73855bdac6168158d158912de2dbfad33d5"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_gravitational_wave_detector.ogg"
+hash = "715852d7dec3e3b6226c113c3db4b944ffe6e0a6034e2e4002602bd23412fcdb"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_hawking_collector.ogg"
+hash = "8518d60ab759a516b113fa1a925c67ce0ff488df14a1520ea9fa4c4ce3209017"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_heavy_water_plant.ogg"
-hash = "6a56e9cab603b8b2f0bf4cdbd40cf88233a9675508464cccbf51f637e818d493"
+hash = "738dea1cb2448992f18f1517b0f256734ec2a5ff81779bbe0aa4af9ec9df05be"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_heliostat_tower.ogg"
-hash = "7d5b9474057f91c2550b7673ca9ebf8c1b1b0f8369bc2ce43deb3124f78853a2"
+hash = "8d908a128d6a84f6dd2b0a363baa1b0bf265d467d213c2876a0308f94852c2df"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_helium_refrigerator.ogg"
-hash = "8591fb68657487648b9f46fb1404565a94fb0de6bce3fcdcdfd33acd13d2da10"
+hash = "f3a21cc04b927f3a00b3a061481a247e387d34be3e156785d4bbc8704510084b"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_horizon_collector.ogg"
-hash = "ccc32ec45e01064d2f12f233076fae2760f425f48ccb198a725883950e5d1e14"
+hash = "5d4f94616b925960f2560032e85faa34ea5b89499369172c2800b2aab8a40a6f"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_hot_cell.ogg"
-hash = "5eef4b823ab3b0ce457a279b5fadc37cc7f8e0f023967ddff778c6eff2c179de"
+hash = "6a9a1b61e913bc9bda6100b289f8835ee59f09fdddcd316336dea2b6f526624c"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_hot_strip_mill.ogg"
-hash = "f7f13771c9c92815291411aaa001b976578c9be0466c420d1e0e672377a5546f"
+hash = "8e4a2d599557b07f3e5a9e6234d33d902831f43cddb0bc4793b337d25b4e2cf4"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_hts_magnet_works.ogg"
-hash = "da6cecfe31acec5a9898e37f397d89038e835f5105dea31e627dd79442deda00"
+hash = "15a986bafa4378194281c5096bb6de6b0502d8d99c6ce492f5cf18b52ab22710"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_io_hydrogen_plant.ogg"
-hash = "9291d7d438e04c7a95deee928c3f5962cb4da84782aef260034fa05356b89639"
+hash = "a110fdda3bccb4c4833a131ecb42499560b1f6c399dc168c7f5df9f0cece46ab"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_io_tether.ogg"
-hash = "2de8da979b15c37fc038abf3d9bc869f34049ce36756a3594c5613e40aa16d39"
+hash = "e7c5c9c0f9063e811cf989668b3a5765aaad9f555f2ee991a870ad666deb2b86"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_jet_beam_line.ogg"
+hash = "0cbe29e1f91b4f6ee107a68a09ff3b55379242086e182ac335ac1a95787591e9"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_kugelblitz_forge.ogg"
+hash = "89f2cd004009a46c9acdb7159ab49c936bda43f4ffc488acf1c0e8d73f55e87f"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_laser_fusion_chamber.ogg"
-hash = "fabc33f44c3326a8825cb20231de9b3ce1bd0e7c706620e986fd7b084ec20933"
+hash = "bd828553fa621c35f87ce1fec284058ae2b4b6e5277c1aaf510af3739b522749"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_light_sail_works.ogg"
-hash = "439dfcb5c13f2a0959015592fdf8ad0a5713f2b4947a2164c52585213537605f"
+hash = "9bba8709eb3d80be2331b9bb543db355d06cc765c8111496522a7fcf78b4b850"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_lunar_power.ogg"
-hash = "aa58caafa1d919226d0402a90ec90637e0503603ea444e749d330b3d62f6bf57"
+hash = "9cba3617fdc3d2418901f3756239d38bd78d5cd19711f69a2e2af9a946d83083"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_magnetic_pair_converter.ogg"
+hash = "a3f1cc1d0e6a671171b2091e8e14edb9e3071617220b7b1c5968e1dff2347794"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_mass_stream_injector.ogg"
+hash = "61819b393c9c88e02e945eb7a5d40b97d64b35a16f4ed9e4e85990c2218d15aa"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_mega_chemical_complex.ogg"
-hash = "93fc87710652e49d79853d6df9fd8652026c15aa779617c17a0f00f983c8e868"
+hash = "a9ffabc1945b1358f3ae6338c50b5cc7bda0c28ecdd9b76153af317d51058a13"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_megabar_press.ogg"
-hash = "1f1e2143d750c1db9f8c6798208474626f27b4de276b21ba892ca98e337769df"
+hash = "62dc8a77a896397d0ecd3a64264f1a988364781375fc8e8bf9a33de32c511c26"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_membrane_line.ogg"
+hash = "8807e945037950879a6d8d7451cc88781b492cde2db3fae0d00af75aeda2be5f"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_mercury_solar_field.ogg"
+hash = "6d5ea2d2be878b280a85f04a1393dbc5b1f3faea29a13c51c8255acb52f612cf"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_microgravity_smelter.ogg"
+hash = "ef53cb38a63d7ac5dd452f1c176108d59990b3425e4af63eb6d22154bb2f7211"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_mirror_shell.ogg"
+hash = "15e3d86e006d8e6e3784b589442c7f245cf793944f6a3a603a478657aa33b0bb"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_mnt_collider.ogg"
-hash = "2b69c956dcd8d06ca4832be16236f9343f41162a937ee7b160f7a793f53ab9bb"
+hash = "4d6a88e815dd0d07811a627bef102978f6ede3bdfa88a2bb48a912d43270dcf1"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_mtj_sputter_cluster.ogg"
-hash = "4f11754b0f973207f0694a35086144f641a3bb898f2bd8a3b27de4f8d9a01a1c"
+hash = "e98f75b57d9f85641c04286dd2b0bbafa18bab7fad3183754529be1ae6ec37f2"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_naquadah_plant.ogg"
-hash = "bfa62d7ce8babf2071f4a95b13d25c3dda0fb4d97449a1b6e20bb2458ef6316a"
+hash = "4017601530eac2211ba448b899afde28634a992ceecce4fed0f7ffbce3d38ed7"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_naquadria_magnet_works.ogg"
-hash = "a24b1befb7a90a7a6f485f5bb773384831af71c2be9131b04c7640374ffa41e6"
+hash = "0e3c786103b22ab79c95fd2e13b274bf0b1c58400cfb3f55d881d3d3e12274ff"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_naquadria_refinery.ogg"
-hash = "481cc59fbda4d7de56991ee43c8c498a01bf417d94807f618032445f40f362c5"
+hash = "1562e4a2d8a34302ef6474902680445afb99bb7fdad724a5bbd65d8ba31ca42c"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_observatory.ogg"
-hash = "8683ba290c25534ad1f2a898549596172e6380f802bf134ad9ba1e6681b787f3"
+hash = "052aba292ed81e05b256306b526e02c80895fc276505291944c55b6f89f8c17b"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_optical_miner.ogg"
-hash = "fc6b50483f5d5ec847c97c9b7be2d40f82d443fe795d891e012d043ed5d5fcf1"
+hash = "0961160684cc8e850b4ffc0a744089419a1e098b0a4f4649b137419b103141bf"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_orbital_solar_station.ogg"
+hash = "684f7e84eac17a18e61767a0bf257dde5b103847b605ac430f8b41e943ef8d62"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_ore_plant.ogg"
-hash = "4417f9b8dc4f319e544acc6b1a7d47c6dc618a0e0359edbb666045a8a13994f0"
+hash = "4abf5cdbdb55707f2228600991c6e389046ed15b0ec4e33bb338a25a3d0a78da"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_organoid_lab.ogg"
+hash = "7b41b657b3118bc75e0b0781b40ce4d49893d734baa252bea2510a82a1b62498"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_oxide_pld_chamber.ogg"
-hash = "bf9533822f7ba56f9fae9beefccfa990d56c5c616b0e8de5be40ababbafcc17a"
+hash = "638e90f92c92501d15ad1e7bf2d074f8360e7a2dc137e50a6387f525f91d32e2"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_pasta_draw_bench.ogg"
+hash = "0b67c58d32cb9d96c7d72ec6b236b7cbc78b56dc4c48146f7ac9267bb184f4d5"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_pasta_extractor.ogg"
+hash = "a945d90fce1c188321d90909fe590a2d6f09266741e806cf2d378f9707680df8"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_pasta_laminator.ogg"
+hash = "7c576a30a6584f32527f426eb75899657537939deeb6370de8a4ce3e15f56bf2"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_pasta_phase_sorter.ogg"
+hash = "43b322920af79ab20f0382b459aff03598dbf22702da50775eac91cbb86a17f5"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_photon_ring_imager.ogg"
+hash = "fa754b690e7cc69d7b44870c50b8f324c39840fbdd82b4ff633533f725ea11f5"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_plasma_mass_filter.ogg"
+hash = "0af1918dd7dfd6406092853a579a127db480003e2c4ce1994190902f78cbde29"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_plasma_quench_caster.ogg"
-hash = "04bac8d0bca4bae5fe38e28b4051d9d3613102c3d60c1415fcb194cfe657e189"
+hash = "bf01d1ff136c69f047fec2686a759c033137b2808fe9be96e820be4a62dd56a8"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_platinum_plant.ogg"
-hash = "ee55841bdc8d2872aad01c669d26ea8250ac4a7bb66853dea7f3afea8943cbb5"
+hash = "f29e131897a7310c0576fc56279f9a9cb6e3f115f8da214b5c42e08a9cdbaf32"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_polar_cap_tap.ogg"
+hash = "7be0ba7800f1835c83325f3d25c5295667c021c3b0bdb31f719fbf2acd976ff1"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_polymer_works.ogg"
-hash = "5999d293b217cd1abb798eaeac2111a0364ade1fa1a7b84678a708893b704c74"
+hash = "15deaa9b77a9c9b370e7e255427d811e2190b72397218bd8edcf593a203635a1"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_power_devices_fab.ogg"
-hash = "3fcff1ac98af55e0c4c286375d61e5981424cc8981f5c64085065a7743e8bc1b"
+hash = "8d319bd7f38283b88fb03dcd72274ff833fe8f77d3c1548edb24c8500fdcd1e1"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_qubit_fab.ogg"
-hash = "e4555f45b1d567d79bb4115b0e2a4646090f92f22136cd4d35474449b0c1e18f"
+hash = "b34b9dfa08241d337f42e8aa4a13e79006e4a987f36aab9cc47f423734a0e863"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_racetrack_fab.ogg"
-hash = "1365afc2bcc8d279eb5b15e51e85106a95c6ca8f70290ff3efa85ddb94dd0acd"
+hash = "5d4ad2a278f3ddd9591e0d18dc0ab6d44ea1b84cada2b3bb5691bdc82c9dee0b"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_refinery.ogg"
-hash = "11b6256fcb498818065b43ba7a02f13f2c64e5e339de4b3af246b05317d0cc83"
+hash = "e7f9c1ea3d80337cfbc82c0bc35989e9140efdff988ebc19a87bcf6d822eac7d"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_reformer.ogg"
-hash = "ed522687af437bed4d58766730e07b6dcf85e28d143dfd8bc16ee5a40526a6d4"
+hash = "660bdfd2d276139dfb1d5ce9c6471db1593e254d3b73bd384753daac2cb4ab84"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_rydberg_array_works.ogg"
+hash = "9f8b9599a0bb624d5995992f26ab867bdad8753446ac63c576289ab91cf7d175"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_shequid_works.ogg"
-hash = "82feea33df3c0693af95ce4b8c4589f98375199f7c5bef23963d46224dff78b1"
+hash = "5df6aa2cbfb581b33de10cfa6a2198ab031aab2aacf7af5f6cee4683cf66cac6"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_space_elevator.ogg"
-hash = "3d4d067d54436873dec669b5a189a8d94e846e6f898e8a45bd51e1e914cfcc6b"
+hash = "c9f9ccbaada0e6bd756d9eec715b3fcfe0e73d966ecb3b887b9c1025e275b4ec"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_spallation_target_station.ogg"
+hash = "182e1e44bd75a3d8963bb4c333b8b3c1748283310570200de43287e7d1f81790"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_steam_blast_furnace.ogg"
-hash = "7c5ef1a0f507e1fc62f5210863bb0d2bc64e73629d37ceb179a68791d836eec0"
+hash = "c65f63b2f5a0baa515b272ec678d698933bfefc1c2d4f70c682fa1d7043d8688"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_stellar_condensation_tower.ogg"
+hash = "c8fac795e2f1047f272f7695dc709f5f59470bddd8619f004cef4c52fc7216de"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_stellar_elevator.ogg"
+hash = "c7d5d504b9c1828b4c8d6b19b607934b2c3add9b1a2177b28827a1895ccbed2e"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_strangelet_distiller.ogg"
+hash = "01b3b85e4c392a8ec4b24b03eef9304634ec76a26fc157129700295015c0a1ca"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_strangelet_vault.ogg"
+hash = "bdf4d67488b34875a812ebea705c6bb23391958ab82a201a5bd757fcf783b25f"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_sulfide_roaster.ogg"
-hash = "0754091298d21a96ef1f57c530ecfbd985536e33c62367c920b1ae31fc04b7f5"
+hash = "56fe1fb8ed2ec9c7e9cd7723cdb98f62abb4765be2abffc5e36a60b3f129b199"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_superfluid_helium.ogg"
-hash = "4a4d75137d43e4d8607055a627f6b5acebeb229107d78394ac1fb561a817a603"
+hash = "a3889c1604f10bce8276533d3488ebde5f007b7efadf39f63a695be8291555bd"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_synchrotron.ogg"
-hash = "76bc3fdef0dec606401beff08e00fe9321b800caf90db437f429567fecdd4fb9"
+hash = "b35b3b215fd3ac4266ccf279e08c0894b27b80f388569ff14d218ee816259296"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_syngas_plant.ogg"
-hash = "1860f2ebb81333e5589a60d8e4cc42ec29bdc37472b29d89bfa27b6c41c47d42"
+hash = "18c8f39f70ffe4d46727dc018af052024dc4edc5e07d0863835f35bc386be138"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_tetron_fab.ogg"
+hash = "7cb21b3d044eb518c30381ebdab684f0eccdd853459f77ce23db03ffaa59fa4d"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_thorium_pyro.ogg"
-hash = "86c09f8f6df45994f144783ef43e2637e39ef78e10f78d701190e7c531b89c20"
+hash = "a61cb5e5cceb7e7e790d4b32e420fe187f0d006e8cdd06d4c79fa867133f8e06"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_tritium_removal.ogg"
-hash = "eaf08edfa500c0910df82b0b36cf2a0c13ab7ce4496e79bb638e4d7981c2d3e1"
+hash = "a2248059e73a8af9b9bb26fe9ff4205ff66f94dd4a0c279afbeb97db9e312ce8"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_uranium_leaching.ogg"
-hash = "3a6756bece81a28a57f311a2167522de96312620c944bd20f9f7532ae5e5533e"
+hash = "a4dd126f924aa4454325586077ab811c8afb7973740bb300acf813f692bbc6cf"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_vdw_stacking_cell.ogg"
-hash = "295de746c6269426abb0f7aebf8f1f0642291fda1efaae19b81449edaeeb939c"
+hash = "90fb965aded0d5a0db781ebb5c2b4d174b158c728624a4265716fe711c8ca8d6"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_wake_shield_facility.ogg"
+hash = "e0fb3139f2e596ad85fb7bb0a9027d0add36b84b3fbd658e403d4606e7ecf722"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_warp_gate.ogg"
-hash = "65a2c6c0ee0eb018d71ea7f593ec14f549442fc9e38939ecf697580c287dc26c"
+hash = "626ee01a5e91f1ed2812d47c928187156fb596a5b2d229e3908ad73dfed07b7a"
 
 [[files]]
 file = "kubejs/assets/grindless/sounds/loop_yig_lpe_furnace.ogg"
-hash = "311585596f2f23a162daebe44bd870ee06160a945320148865df494cb6c6c0f0"
+hash = "cc8cadaa780ba8c15c6b08ac9e1f1af338d6e49cb9fdd1f17ebaf741697646c0"
+
+[[files]]
+file = "kubejs/assets/grindless/sounds/loop_zero_g_crystal_grower.ogg"
+hash = "d258a13fb9e0f20670ef12bd622093beee4408b88984daf6f04f398c4f0f641d"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/cover/wireless_dynamo_cover_emissive.png"
@@ -15022,7 +15198,7 @@ hash = "a2fafeeaf35acdc86efeadaa1dfb331b58a59f81c05a538b10298e7830c2e1d3"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/ev.json"
-hash = "7c1925589d51d0201283f6af44760c4d5cdb7a2fb84db4c5b85fcb11a412ffc3"
+hash = "69eb03a558fc76d11d4b5bb014b42b8d1f9e3f334204a0b818894fd7446eb7a8"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/hv.json"
@@ -15030,7 +15206,7 @@ hash = "b1114e9d8db5fff8cef1fae71e4931cbb573aeea8b80c3a85f6bdc21a11b9c8c"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/iv.json"
-hash = "cbaf11c5a55d9a6f3cdb87f596b117b0e3f45a43d8fe4e20917f3d5e5cb5a8a2"
+hash = "046a84d31b45ead3a293755de6da44ceeb3b101086496559aa872c4c7ea412d9"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/luv.json"
@@ -15518,7 +15694,7 @@ hash = "1161a333fc6991de19fb486aebf1422c47cc6ddd28d77c4ee7e6a2bdf961cf53"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/extraction_cascade.js"
-hash = "4902804dea7a5ae1d627f1516209611a1f80f60a50a04b07aee288ec6221c524"
+hash = "773942876cd90e985f7a17e952f508a0b2232e73639223c50997e6e72b54cd62"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/foundation.js"
@@ -15538,7 +15714,7 @@ hash = "0f2d67d5d283147930ee84d4a9bea26230478c7a9c8e39cfd6aaf1489aa26f86"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/platinum_plant.js"
-hash = "3a7b0267fa2f33ce14b43585b9ac18650edcff767e3c2cdfed8d22eb5949f2c3"
+hash = "15ed13c61cac0f0189762d0977cee957a67a2b7fa62f6ee3795a7c2c1e4fe270"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/quantum_eye_gate.js"
@@ -15694,39 +15870,39 @@ hash = "d548e2a557f93d119c6945212553c70d99b9439d5f985f66dc7eccae5722f23b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/fission_reactor.js"
-hash = "614b45268ac5b325869a1942e1d49ab3abcbeb4fa9cdaa253338b082dd60f1a6"
+hash = "ec993bd445d1c7a6ec44d4b50512ad9ac24cb7426f8a6ec01efa486fe7a35393"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/fluorspar_kiln.js"
-hash = "b1a98396b175407ecbf1a6ae1b56caa716d84634668d8652e86bba95a61f6384"
+hash = "55b4b3b9355797fe3f21a381bba5e9055e0f3b4c25ba50fedec51dc636b5354d"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/foundation.js"
-hash = "2adf1e3781a436681992ec2649978bbf962190b4782c96088cdc25b4a92ea22f"
+hash = "382b6e5fc7dcfb0e2fe2e6d99ab42cfcccc311318b2909471cb8540e88b1e487"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/heavy_water_plant.js"
-hash = "75b818c539e0673b7258d8e109aa5693d235ca5ff5353bf3d8a8d4694c6d3d94"
+hash = "17733489eb3b4c43aeb9d34e300404e094b59840a606e787e9f157d76cbec86b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/hot_cell.js"
-hash = "cc4ab0b51a363997fd14a139f50fe2d8ce2e4c52cdfa62621c34b74785ea81a8"
+hash = "2609d12be4fee4ab3d701b10cf0987d9f5085a3f005be1450db0f087225e430c"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/mass_production.js"
-hash = "5958a9bd373209bdc3b07fb9840e08cc8bf0d43ef4cd8e92abff0a90f2916513"
+hash = "220c7e54958ca31758cc6a8380bae5d94a39e138e5301ad71a0cfd40e4d5d50e"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/mega_smelting_complex.js"
-hash = "874131f94e72ccf331eac030d7e7c0acb495b6a03bb512202660aaa58a0ae63d"
+hash = "26b13c298dff368f00ec88e77d701b528e3d8d8ee934eb87aabc0bccbf67e62f"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/mercury.js"
-hash = "e4df32ed25a80832daa518f1644225a3b03e4b9f6ad16d07f20d94f45e57d69f"
+hash = "4cbad07a1bf9b07589040647d9e4ea59bc18bb5eb2819d902c2f94cc18bfa8f3"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/naquadah_plant.js"
-hash = "40af5cad33fca3ec54943a2ea969abb0dc541dc9c381a8ebe3d9de6faf7629cc"
+hash = "03b700974ee7d583f686b0cfd75aae6e88d42866ed33fd7324464fa31982db38"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/travel_network.js"
@@ -15734,15 +15910,15 @@ hash = "074c406d4d4654f855f9cdcad167e23044827a92e65b52cbf7c659db6c6ebfe7"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/tritium_removal.js"
-hash = "93a2cfb677c98316372a41a6fe265df1d1e5a79fb7937af08d5bad46a5f41022"
+hash = "fd6891628d4cc3e65d477d3f406b1b25eb038a159a876cc783b5d848e694a7f4"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/uranium_cycle.js"
-hash = "b2c7df694af0ea9b27f97cbaba9eb95cf78b577422bda0bd34e3afa5c5c31913"
+hash = "ee7ef04306ae189b4c89935368cd1b42cfff9480d2a22fc50cd0f222582f2367"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/iv/venus.js"
-hash = "e0fa118ebfca2289f3941973c40b6256da196e2930e9126536c2a855655f542f"
+hash = "db50d322ffcf06e01a962460d162c0615296ca069f4a54f06e616b340a93ca22"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/launch_road/recipes.js"
@@ -17058,7 +17234,7 @@ hash = "1027d31e456b6ed8bf478b2bed79a35ce4fafbf6e03e36ed4b5d09e38e341725"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/sounds.js"
-hash = "13aaac0b6da9d7ab1dbfde8293873bda196aa1b33d0d028c16b9052540a48c6f"
+hash = "d7d8e4013a7ebf5e3bd304c8ef8ddf6c02d6c8ddc27cee32fbe442052d09f37d"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/steam/blast_furnace.js"
