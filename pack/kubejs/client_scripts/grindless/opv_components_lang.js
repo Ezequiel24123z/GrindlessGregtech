@@ -48,13 +48,13 @@
         ['gtceu.recipe.grindless_megabar.flexspline_cup', 'Circuit 7: gum metal and chain lamina pressed into the flexspline cup; the anvil sometimes cracks'],
         ['gtceu.recipe.grindless_femtosecond_writing.flexspline_teeth', 'Circuit 5: the flexspline teeth written by femtosecond pulses; the swarf is atomised back to gum metal blend'],
         ['gtceu.recipe.grindless_magnet_winding.rebco_pancake', 'Circuit 7: REBCO coated conductor wound into a double pancake with chain wire terminals'],
-        ['gtceu.recipe.grindless_magnet_winding.rebco_training', 'Circuit 8: the potted pancake trained through its quenches to full current'],
+        ['gtceu.recipe.grindless_magnet_winding.rebco_training', 'Circuit 8: the potted pancake trained through its quenches to full current, with 4 niobium-titanium foil'],
         ['gtceu.recipe.grindless_chemical_vapour_infiltration.rebco_potting', 'Circuit 7: the REBCO pancake vacuum-impregnated with epoxy'],
         ['gtceu.recipe.grindless_hot_cell.thorium_229_nitrate', 'Circuit 21: thorium-229 dissolved in nitric acid; the hydrogen goes back to stock'],
         ['gtceu.recipe.grindless_fluorspar_kiln.laser_grade_thf4', 'Thorium-229 nitrate fluorinated to laser-grade ThF4; the nitric acid goes back to the hot cell'],
         ['gtceu.recipe.grindless_crystal_growth.th_caf2_lasing', 'Circuit 19: a CaF2 boule grown with laser-grade ThF4 under argon; the lead fluoride scavenger stays'],
         ['gtceu.recipe.grindless_crystal_growth.hpge_compton', 'Circuit 20: 13N germanium pulled into a high-purity boule under argon'],
-        ['gtceu.recipe.grindless_nuclear_clock.lasing_check', 'Circuit 4: the coated Th:CaF2 crystal pumped by the VUV comb until the nuclear line lases']
+        ['gtceu.recipe.grindless_nuclear_clock.lasing_check', 'Circuit 4: the coated Th:CaF2 crystal pumped by the VUV comb until the nuclear line lases in 1,000 mB xenon']
     ]
 
     ClientEvents.lang('en_us', function (event) {

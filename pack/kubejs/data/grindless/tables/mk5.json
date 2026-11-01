@@ -12,7 +12,7 @@
           "fluidsOut": [{ "id": "gtceu:polarised_h_gas", "amount": 800 }, { "id": "gtceu:hydrogen", "amount": 200 }] },
         { "name": "li6h_polarisation", "circuit": 2, "eut": 31457280, "duration": 800,
           "itemsIn": [{ "id": "grindless:li6_hydride", "count": 1 }], "kept": [], "charge": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:liquid_helium", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:polarised_li6h", "count": 1 }],
           "fluidsOut": [] },
         { "name": "nh3_polarisation", "circuit": 3, "eut": 31457280, "duration": 800,

@@ -12,7 +12,7 @@
   }
 
   var KEYS = [
-    ['gtceu.recipe.grindless_nuclear_clock.lock_timing_head', 'Lock the timing head'],
+    ['gtceu.recipe.grindless_nuclear_clock.lock_timing_head', 'Lock the timing head, with a UHV circuit'],
     ['gtceu.recipe.grindless_silicon_carbide.gan_mmic_tile', 'Mount GaN MMICs on SiC'],
     ['gtceu.recipe.grindless_electron_beam.seal_node_tile', 'Seal the tested MMIC tile'],
     ['gtceu.recipe.grindless_xray_pulse_profiling.xnav_unit', 'Calibrate XNAV at J0437'],

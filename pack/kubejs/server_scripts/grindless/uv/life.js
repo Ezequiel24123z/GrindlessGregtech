@@ -57,9 +57,9 @@
     { name: 'closed_cycle', type: 'closed_ecosystem', circuit: 1, notConsumable: [ALGAE, ARCHAEA], itemsIn: [],
       fluidsIn: [fluid('gtceu:carbon_dioxide', 1000), fluid('gtceu:ammonia', 250), fluid('minecraft:water', 1000)],
       itemsOut: [], fluidsOut: [fluid('gtceu:oxygen', 500), fluid(RAW_MEDIUM, 500), fluid(BIOMASS, 250)], eut: ZPM, duration: 1200 },
-    // replication paid for by the nutrients it consumes: 1,000 mB biomass + 2 agar dust (the plate the new colonies grow on)
-    { name: 'culture_seed', type: 'closed_ecosystem', circuit: 2, itemsIn: [item(ALGAE, 1), item(ARCHAEA, 1), item('gtceu:agar_dust', 2)],
-      fluidsIn: [fluid(BIOMASS, 1000)], itemsOut: [item(ALGAE, 2), item(ARCHAEA, 2)], fluidsOut: [], eut: ZPM, duration: 600 },
+    // no culture multiplies itself: the seed is grown from the nutrients it consumes, 2,000 mB biomass + 4 agar dust + 2 gelatin dust
+    { name: 'culture_seed', type: 'closed_ecosystem', circuit: 2, itemsIn: [item('gtceu:agar_dust', 4), item('gtceu:gelatin_dust', 2)],
+      fluidsIn: [fluid(BIOMASS, 2000)], itemsOut: [item(ALGAE, 2), item(ARCHAEA, 2)], fluidsOut: [], eut: ZPM, duration: 600 },
     { name: 'algae_inoculation', type: 'closed_ecosystem', circuit: 3, itemsIn: [item('gtceu:agar_dust', 1)],
       fluidsIn: [fluid(BIOMASS, 1000), fluid('minecraft:water', 1000)], itemsOut: [item(ALGAE, 1)], fluidsOut: [], eut: ZPM, duration: 600 },
     { name: 'stem_cell_batch', type: 'neural_culture', circuit: 1, notConsumable: [ORGANOID], itemsIn: [item('gtceu:gelatin_dust', 4)],

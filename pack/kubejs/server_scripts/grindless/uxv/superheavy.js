@@ -3,10 +3,10 @@
 // UXV's superheavies III (docs/eras/uxv.md, process lines 19-23; package UXV-A1). Every row of the package is an older machine's row:
 // tables/isotopes.json (calutron), tables/superheavy.json (cyclotron, recoil separator, chem lab), tables/transcurium.json (plating),
 // zpm/actinides.js (waste retrieval, partitioning). This file holds the only rows in a GTM type: the spark plasma sinterer
-// (gtceu:spark_plasma_sintering; circuits 1-7 are uhv/propulsion.js's), which sinters each plated blank into its target (the type takes no fluid, so no argon blanket).
+// (gtceu:spark_plasma_sintering; circuits 1-7 are uhv/propulsion.js's), which sinters each plated blank onto a tungsten dust backing into its target (the type takes no fluid, so no argon blanket).
 // VA[UHV] = 1,966,080 EU/t. Ids not registered skip their row with a console error.
-//   8  fm257_target   Fm-257 plated blank -> 1 fermium-257 target     1,966,080 x 600 t
-//   9  cm248_target   Cm-248 plated blank -> 1 curium-248 target      1,966,080 x 600 t
+//   8  fm257_target   Fm-257 plated blank + 1 tungsten dust -> 1 fermium-257 target 1,966,080 x 600 t
+//   9  cm248_target   Cm-248 plated blank + 1 tungsten dust -> 1 curium-248 target 1,966,080 x 600 t
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   var LOG = '[grindless/uxv] '
@@ -30,7 +30,7 @@
         return
       }
       var b = event.recipes.gtceu.spark_plasma_sintering('grindless:spark_plasma_sintering/' + r.name)
-      b.itemInputs('1x ' + r.input)
+      b.itemInputs('1x ' + r.input, '1x gtceu:tungsten_dust')
       b.circuit(r.circuit)
       b.itemOutputs('1x ' + r.output)
       b.EUt(r.eut).duration(r.duration)

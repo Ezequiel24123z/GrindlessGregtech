@@ -67,7 +67,7 @@
     {
       "name": "rebco_training", "circuit": 8, "charge": true,
       "_why": "OpV-A1 (docs/eras/opv.md line 8): the potted pancake ramped in the cold-test helium through its training quenches until it holds full current.",
-      "itemsIn": [ { "id": "grindless:potted_rebco_pancake", "count": 1 } ],
+      "itemsIn": [ { "id": "grindless:potted_rebco_pancake", "count": 1 }, { "id": "gtceu:niobium_titanium_foil", "count": 4 } ],
       "fluidsIn": [],
       "itemsOut": [ { "id": "grindless:trained_rebco_pancake", "count": 1 } ],
       "eut": 1966080, "duration": 600

@@ -57,7 +57,7 @@ test('polarised proton source: circuits 1-3, 31457280 EU/t, 800 t, slots', () =>
   }
   assert.deepEqual(inputs(rc[0]), ['gtceu:detritiated_protium']);
   assert.deepEqual(outputs(rc[0]), ['gtceu:polarised_h_gas', 'gtceu:hydrogen']);
-  assert.deepEqual(inputs(rc[1]), ['grindless:li6_hydride']);
+  assert.deepEqual(inputs(rc[1]), ['grindless:li6_hydride', 'gtceu:liquid_helium']);
   assert.deepEqual(outputs(rc[1]), ['grindless:polarised_li6h']);
   assert.deepEqual(inputs(rc[2]), ['gtceu:nitrogen_15_ammonia']);
   assert.deepEqual(outputs(rc[2]), ['grindless:polarised_15nh3_ice']);

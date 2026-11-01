@@ -107,11 +107,11 @@
   TABLE.push(row('wc_sputter_target', 'spark_plasma_sintering', 14, [item('gtceu:tungsten_carbide_dust', 4)], [], [item('grindless:wc_sputter_target', 1)], [], UHVA, 500))
   // OpV-B3a line 32 (circuit 15; 8-14 are other lines' rows): the tungsten and the boron-10 carbide sintered into the gamma absorber tile
   TABLE.push(row('gamma_absorber_tile', 'spark_plasma_sintering', 15,
-    [item('grindless:w_b4c_powder', 1)], [], [item('grindless:gamma_absorber_tile', 1)], [], UHVA, 600))
+    [item('grindless:w_b4c_powder', 1), item('gtceu:tungsten_dust', 2)], [], [item('grindless:gamma_absorber_tile', 1)], [], UHVA, 600))
 
   // MAX-A2 line L10 (circuit 21: max.md gave A2 c16, but OpV-A1 and A3 already hold c16-17 here, and c17-20 are other MAX packages' numbers)
   TABLE.push(row('exotic_composite_billet', 'spark_plasma_sintering', 21,
-    [item('grindless:exotic_infiltrated_preform', 1)], [], [item('grindless:exotic_composite_billet', 1)], [], UHVA, 1200))
+    [item('grindless:exotic_infiltrated_preform', 1), item('gtceu:graphite_dust', 2)], [], [item('grindless:exotic_composite_billet', 1)], [], UHVA, 1200))
 
   // MAX-D1 (max.md, L15 step 3, c18)
   TABLE.push(row('radiator_collector_shell', 'spark_plasma_sintering', 18,

@@ -102,7 +102,7 @@
         {
           "name": "c12_ion_mill", "circuit": 0, "eut": 1966080, "duration": 400,
           "_why": "UIV-B3 line 38: the (004) blank is ion-milled to a flat, strain-free surface through a tungsten foil mask.",
-          "itemsIn": [ { "id": "grindless:c12_004_plate", "count": 1 } ], "kept": [], "fluidsIn": [],
+          "itemsIn": [ { "id": "grindless:c12_004_plate", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 } ], "kept": [], "fluidsIn": [],
           "itemsOut": [ { "id": "grindless:c12_ion_milled_plate", "count": 1 } ], "fluidsOut": []
         }
       ]
@@ -144,8 +144,8 @@
         {
           "name": "anneal_neon_cone", "circuit": 0, "eut": 491520, "duration": 200,
           "_why": "UIV-B3 line 45: the solid-neon cone is annealed just below its melting point in the freezer.",
-          "itemsIn": [ { "id": "grindless:solid_neon_cone", "count": 1 } ], "kept": [], "fluidsIn": [ ],
-          "itemsOut": [ { "id": "grindless:annealed_neon_cone", "count": 1 } ], "fluidsOut": []
+          "itemsIn": [ { "id": "grindless:solid_neon_cone", "count": 1 } ], "kept": [], "fluidsIn": [ { "id": "gtceu:liquid_helium", "amount": 500 } ],
+          "itemsOut": [ { "id": "grindless:annealed_neon_cone", "count": 1 } ], "fluidsOut": [ { "id": "gtceu:helium", "amount": 500 } ]
         }
       ]
     }

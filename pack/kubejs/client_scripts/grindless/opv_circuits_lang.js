@@ -65,7 +65,7 @@
         ['gtceu.recipe.grindless_mtj_sputtering.sdd_metal', 'Circuit 8: aluminium contacts, then the wafer is diced into four SDD dies'],
         ['gtceu.recipe.grindless_ion_slicing.tsv_bond', 'Circuit 5: the via wafer bonded to an oxidised handle and thinned'],
         ['gtceu.recipe.grindless_ion_slicing.ln_on_soi', 'Circuit 6: a lithium niobate film sliced onto Si-28 SOI; the donor is often reused'],
-        ['gtceu.recipe.grindless_femtosecond_writing.ln_soi_waveguides', 'Circuit 6: waveguides and modulators written in the LN film'],
+        ['gtceu.recipe.grindless_femtosecond_writing.ln_soi_waveguides', 'Circuit 6: waveguides and modulators written in the LN film under 2 glass dust'],
         ['gtceu.recipe.grindless_snspd_fabrication.snspd_link', 'Circuit 6: NbN nanowire detectors on the LN-on-SOI link chip'],
         ['gtceu.recipe.grindless_chemical_vapour_infiltration.hpsi_sic', 'Circuit 8: a high-purity SiC layer grown from methyltrichlorosilane'],
         ['gtceu.recipe.grindless_silicon_carbide.gan_mmic', 'Circuit 6: the gated GaN wafer passivated, plated and diced into four MMICs'],

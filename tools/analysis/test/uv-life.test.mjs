@@ -108,7 +108,8 @@ test('the ark closes its air: CO2 in, O2 back, cultures kept; growth medium and 
   assert.equal(c1.eut, 122880);
   const seed = row('culture_seed');
   for (const id of ['grindless:algae_culture', 'grindless:archaeal_culture']) {
-    assert.equal(seed.itemsOut.find((x) => x.id === id).count, 2 * seed.itemsIn.find((x) => x.id === id).count, id + ' doubled');
+    assert.equal(seed.itemsOut.find((x) => x.id === id).count, 2, id + ' x2');
+    assert.equal(seed.itemsIn.find((x) => x.id === id), undefined, id + ' is grown from nutrients, not from itself');
   }
   const ino = row('algae_inoculation');
   assert.deepEqual(ino.itemsIn, [{ id: 'gtceu:agar_dust', count: 1 }]);
