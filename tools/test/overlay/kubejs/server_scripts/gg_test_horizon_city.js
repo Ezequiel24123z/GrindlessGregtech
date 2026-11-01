@@ -1,4 +1,4 @@
-// priority: -10383
+// priority: -2449
 // TEST ONLY, XP-Z1a. Command: kubejs custom_command gg_test_horizon_city
 // Band ONLY: X 46720-46783, Z 0-63, Y 0-130 (zones.json row horizon_city), in the shipped DIMENSION grindless:horizon_city (nothing else is built there).
 //   Checks the dimension (fixed time, biome), generates the jigsaw city start on the band with Structure.generate (piece count, size, wall time are NOTEs),

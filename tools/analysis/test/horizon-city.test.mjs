@@ -104,13 +104,20 @@ test('templates only use allowed blocks and fit the dimension', () => {
   }
 });
 
+// The deflate bytes depend on the zlib build, so compare what they decode to.
+function idat(png) {
+  const parts = [];
+  for (let o = 8; o < png.length;) { const n = png.readUInt32BE(o); if (png.toString('latin1', o + 4, o + 8) === 'IDAT') parts.push(png.subarray(o + 8, o + 8 + n)); o += 12 + n; }
+  return zlib.inflateSync(Buffer.concat(parts));
+}
+
 test('the generator is deterministic and matches the committed files', () => {
   for (const t of buildTemplates()) {
-    const disk = fs.readFileSync(path.join(DIRS.structures, t.name + '.nbt'));
-    assert.ok(encodeTemplate(t).equals(disk), t.name);
+    const disk = zlib.gunzipSync(fs.readFileSync(path.join(DIRS.structures, t.name + '.nbt')));
+    assert.ok(zlib.gunzipSync(encodeTemplate(t)).equals(disk), t.name);
     assert.ok(encodeTemplate(t).equals(encodeTemplate(t)), t.name + ' twice');
   }
-  assert.ok(encodePng(512, 512, ringPixels(512)).equals(fs.readFileSync(DIRS.ring)));
+  assert.ok(idat(encodePng(512, 512, ringPixels(512))).equals(idat(fs.readFileSync(DIRS.ring))));
   assert.deepEqual(readJson(DIRS.structure), STRUCTURE);
   assert.deepEqual(readJson(DIRS.structureSet), STRUCTURE_SET);
   assert.deepEqual(readJson(DIRS.table), TABLE);
