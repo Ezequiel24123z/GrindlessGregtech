@@ -204,7 +204,7 @@
     {
       "name": "tritium_store",
       "circuit": 10,
-      "eut": 7680,
+      "eut": 7864320,
       "duration": 2400,
       "itemsIn": [],
       "fluidsIn": [{ "id": "gtceu:tritium", "amount": 1000 }],
