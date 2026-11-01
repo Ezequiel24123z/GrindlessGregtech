@@ -1,0 +1,11 @@
+{
+  "structures": [
+    { "structure": "gg_test:city_s", "weight": 1 }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 4,
+    "separation": 0,
+    "salt": 20261101
+  }
+}
