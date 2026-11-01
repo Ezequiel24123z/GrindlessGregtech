@@ -1,4 +1,4 @@
-// priority: 6968
+// priority: 6972
 // Gregtech Grindless - the EMI lines of the MAX+ component steps that run on a custom machine
 // (server_scripts/grindless/maxplus/components.js; package XP-A2). The other steps run on GTM machines and need no key.
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
