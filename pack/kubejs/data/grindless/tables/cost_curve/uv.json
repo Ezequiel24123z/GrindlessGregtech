@@ -56,7 +56,12 @@
     "gtnn:optical_processor"
   ],
   "include": [],
-  "exclude": [],
-  "remove": [],
+  "exclude": [
+    "gtnn:component_assembly_line/*_uv",
+    "gtnn:component_assembly_line/*_uv_*"
+  ],
+  "remove": [
+    "gtceu:shaped/uv_machine_hull"
+  ],
   "override": {}
 }
