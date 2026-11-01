@@ -71,7 +71,7 @@
     dataKey: 'grindless_calutron_separation',
     lang: 'Calutron',
     // items in: the feed and the circuit; items out: the isotope, the depleted stream, a second tail
-    maxIO: { itemsIn: 2, itemsOut: 3, fluidsIn: 0, fluidsOut: 0 },
+    maxIO: { itemsIn: 2, itemsOut: 3, fluidsIn: 1, fluidsOut: 1 },
     width: 11, depth: 17, height: 7
   }
 
@@ -86,6 +86,8 @@
       parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 3 }),
+        Pat.part('input_hatch', { min: 0, max: 1 }),
+        Pat.part('output_hatch', { min: 0, max: 1 }),
         Pat.part('energy_input', { min: 1, max: 2 })
       ],
       fn: G.uevShapes.ring({

@@ -9,7 +9,7 @@
   var HPC = 'gtceu:high_power_casing'
   var SHIELD = 'grindless:annihilation_shield_casing'
   A.machines = [
-    { name: 'jet_beam_line', type: 'jet_beam_extraction', w: 5, h: 5, d: 21, io: [3, 0, 1, 1],
+    { name: 'jet_beam_line', type: 'jet_beam_extraction', w: 5, h: 5, d: 21, io: [3, 1, 1, 1],
       casing: HPC, texture: 'gtceu:block/casings/hpca/high_power_casing',
       pal: { F: HPC, C: 'gtceu:superconducting_coil', K: 'grindless:srf_cryomodule_block', L: 'gtceu:fusion_glass' } },
     { name: 'spallation_target_station', type: 'antiproton_production', w: 9, h: 7, d: 13, io: [3, 2, 1, 1],
@@ -69,7 +69,7 @@
       Pat.part('input_hatch', { min: m.io[2] ? 1 : 0, max: 1 }),
       Pat.part('output_hatch', { min: 1, max: 1 }),
       Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
-    if (m.io[1]) parts.push(Pat.part('output_bus', { min: 1, max: 1 }))
+    if (m.io[1]) parts.push(Pat.part('output_bus', { min: m.name === 'jet_beam_line' ? 0 : 1, max: 1 }))
     return G.uivShapes.spec(Pat, { w: m.w, h: m.h, d: m.d, pal: m.pal, parts: parts,
       fn: m.name === 'jet_beam_line' ? jet : m.name === 'spallation_target_station' ? target : decelerator })
   }

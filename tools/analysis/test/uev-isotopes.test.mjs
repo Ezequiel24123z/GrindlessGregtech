@@ -67,7 +67,7 @@ test('every calutron recipe has a unique name and circuit 1-6, a UHV-voltage EU/
 
 test('the calutron recipes fit the type\'s slots (startup maxIO; the circuit takes an item slot) and none uses a fluid', () => {
   const startup = read('startup_scripts', 'grindless', 'uev', 'isotopes.js');
-  assert.match(startup, /maxIO: \{ itemsIn: 2, itemsOut: 3, fluidsIn: 0, fluidsOut: 0 \}/);
+  assert.match(startup, /maxIO: \{ itemsIn: 2, itemsOut: 3, fluidsIn: 1, fluidsOut: 1 \}/);
   for (const r of CAL) {
     assert.ok(r.itemsIn.length + (r.kept || []).length + 1 <= 2, r.name);
     assert.ok(r.itemsOut.length <= 3, r.name);

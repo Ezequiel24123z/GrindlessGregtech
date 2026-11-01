@@ -1,4 +1,4 @@
-// priority: -5404
+// priority: -5414
 // TEST ONLY, MAX-C3 credits leg (S0-9; docs/eras/max.md "The ending"). Server half; partner of client_scripts/gg_test_max_credits.js.
 // Runs in the client suite (integrated server) and only with kubejs/config/gg_test_max_credits.json {"enabled": true}.
 // Sends the packet the mirror shell's credits handler sends (startup max/shell.js: ClientboundGameEventPacket.WIN_GAME, 1.0) to the

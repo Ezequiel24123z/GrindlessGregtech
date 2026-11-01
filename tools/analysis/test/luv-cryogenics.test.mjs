@@ -198,6 +198,8 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
   // XP-B1's line P20 on both tables (server_scripts/grindless/maxplus/tarantula.js): maxplus-tarantula.test.mjs and the batch dump prove their ids
   laterIds.add('grindless:coated_conductor/nozzle_tape');
   laterIds.add('grindless:closed_loop_cooling/vms_lift_nozzle');
+  // XP-B2's line P23 cooling (server_scripts/grindless/maxplus/stream.js): maxplus-stream.test.mjs and the batch dump prove its ids
+  laterIds.add('grindless:closed_loop_cooling/cold_scoop_coil');
   for (const r of ours.filter((x) => !laterIds.has(x.i))) {
     const walk = (o, key) => {
       if (Array.isArray(o)) return o.forEach((x) => walk(x, key));

@@ -1,4 +1,4 @@
-// priority: 6662
+// priority: 6656
 // Gregtech Grindless - names and tooltips of MAX's mass stream injector (startup_scripts/grindless/max/injector.js; package MAX-D4):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each row of the package that has one

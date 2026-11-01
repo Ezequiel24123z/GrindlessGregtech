@@ -1,4 +1,4 @@
-// priority: 6804
+// priority: 6796
 // Gregtech Grindless - names, tooltips and EMI lines of MAX+'s three 30 Doradus machines (startup_scripts/grindless/maxplus/tarantula.js; package XP-B1):
 //
 //   gtceu.<type>, block.gtceu.<machine>, grindless.machine.<machine>.tooltip.0   the recipe types and the controllers

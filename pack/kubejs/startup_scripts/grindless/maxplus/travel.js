@@ -1,4 +1,4 @@
-// priority: -5634
+// priority: -5644
 // MAX+ travel (package XP-F1, docs/eras/maxplus.md "Places"): the four tier-14 places beyond the MAX ones, reached by the warp gate.
 // c16 (30 Doradus) leaves from Sgr A*'s orbit, c17 (the Magellanic Stream) and c18 (the M31 nucleus) from 30 Doradus, c19 (the
 // Local Group filament) from the M31 nucleus. No item, gate row, recipe or grant is written here. The places are data: their

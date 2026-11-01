@@ -1,4 +1,4 @@
-// priority: -5364
+// priority: -5374
 // Gregtech Grindless - native fixture of package MAX-C3 (TEST-ONLY overlay, never shipped): the "Save compatibility" list of docs/eras/max.md
 // (OpV ids kept, GT-- supracausal items still registered, the two new dimensions, gate c1-c13 untouched, existing hatches and wireless caps)
 // and a save mark built on v0.16.0 (main d05ea26a) and read back on the candidate. Pattern of gg_test_opv_c3.js.

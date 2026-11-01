@@ -1,4 +1,4 @@
-// priority: 6899
+// priority: 6906
 // Gregtech Grindless - names and tooltips of MAX+'s blueshift forge (startup_scripts/grindless/maxplus/blueshift.js; package XP-B3):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>   the EMI line of each keyed row of the package: the forge's row and the P12, P13 and P24 steps on
