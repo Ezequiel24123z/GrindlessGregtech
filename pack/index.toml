@@ -30,11 +30,27 @@ hash = "013d0e86b326403faa4470230e45c7d5a2ea9a7353885b2f623a8fc14a398208"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/iv_age.snbt"
-hash = "3715a54f61165856ef790180f3e23aaf85292fc1f4ef0f88f544aebd9e513ff0"
+hash = "2a0da910e77c7e8fc8fa06aa51bc4d48321bbad08a623a5c43cb5e760391a9e3"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/iv_circuits.snbt"
+hash = "5be9dcd46cfc246cd10305a489d59e55bcf4f4f8e4d610f8dc5c0d53752841b9"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/iv_machines.snbt"
+hash = "46a20c9f263ddbdc7a2ed2aba90eb3b61081cee024d09d4d2a44ba67e98c7a50"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/luv_age.snbt"
-hash = "1d2046eeec0d4fcebc1721488a3b847bb4b3f5cc81d7254fe3c2fa03aef2c705"
+hash = "14c9b1b5d8a62bc1923788da8ddfe2c75a3387515f3baeac812f3b3a62b2f331"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/luv_circuits.snbt"
+hash = "b2de7a84268e49e41ce3b91eb636ab80975446615759e919a3c02dcb7940bda9"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/luv_machines.snbt"
+hash = "1f955129301858f56ce160383a6aa134ebf65cb2f83671ce987bb4c6fd8a9446"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/lv_age.snbt"
@@ -15478,7 +15494,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "ff798a9970379904f84e28a8dec17ca5eec19a7d044460999010ba0b5a904026"
+hash = "0ce0de45d28c8907eba21c594901db0b2f5306d8293b1d3495fba2b5a1f2dfce"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
