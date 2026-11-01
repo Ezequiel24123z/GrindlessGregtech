@@ -72,7 +72,7 @@ export default {
         n('woodgas', 8.5, 3, F('gtceu:wood_gas'), 'Wood Gas', { kind: 'by', from: ['bioref'], end: 'gas turbine', sub: 'Gas turbine, or split again' }),
         n('benzene', 10.5, -1.5, F('gtceu:benzene'), 'Benzene', { kind: 'product', from: ['tar'], by: ['gtceu:bio_distillation'], end: 'tank for HV', sub: 'Tank it: HV makes styrene and epoxy' }),
         n('phenol', 10.5, 0.5, F('gtceu:phenol'), 'Phenol', { kind: 'product', from: ['tar'], by: ['gtceu:bio_distillation'], end: 'HV epoxy', sub: 'HV\'s epoxy wants it' }),
-        n('methanol', 10.5, 2.25, F('gtceu:methanol'), 'Methanol', { from: ['vinegar'], by: ['gtceu:bio_distillation'], end: 'biodiesel, HV gasoline', sub: 'Biodiesel now, gasoline at HV' }),
+        n('methanol', 10.5, 2.25, F('gtceu:methanol'), 'Methanol', { kind: 'by', from: ['vinegar'], by: ['gtceu:bio_distillation'], end: 'biodiesel, HV gasoline', sub: 'Biodiesel now, gasoline at HV' }),
         n('acetone', 10.5, 4, F('gtceu:acetone'), 'Acetone', { kind: 'product', from: ['vinegar'], by: ['gtceu:bio_distillation'], end: 'glue, HV gasoline', sub: 'Glue now, gasoline at HV' }),
       ],
     },

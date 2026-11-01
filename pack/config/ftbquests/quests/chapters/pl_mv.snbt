@@ -569,7 +569,7 @@
 			dependencies: ["19BBA732E02D5FEE"]
 			icon: "gtceu:methanol_bucket"
 			id: "193E72A27638CE3B"
-			size: 1.0d
+			size: 0.75d
 			subtitle: "Biodiesel now, gasoline at HV"
 			tasks: [
 				{ id: "59139873818D2897", item: "gtceu:methanol_bucket", optional_task: true, type: "item" }
