@@ -133,7 +133,7 @@ export default {
           ['yo', I('grindless:yttrium_oxide_dust'), 'Yttrium Oxide', 'raw'],
           ['ysp', I('grindless:ysz_powder'), 'YSZ Powder'],
           ['ysi', I('grindless:ysz_ingot'), 'YSZ Ingot'],
-        ], null, 12.5),
+        ], null, 7.5),
         // silicon carbide fibre
         ...chain(10, [
           ['pcs', I('grindless:polycarbosilane_dust'), 'Polycarbosilane', 'raw'],
