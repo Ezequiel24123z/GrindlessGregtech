@@ -195,6 +195,8 @@ test('every id A3 names is in the pinned native registry, not a naming guess the
   // XP-H3's lines T14 and T15 (server_scripts/grindless/maxplus/assembler.js): maxplus-assembler.test.mjs and the batch dump prove their ids
   laterIds.add('grindless:closed_loop_cooling/cold_kerr_toroid');
   laterIds.add('grindless:closed_loop_cooling/flux_absorber_casing');
+  // XP-B2's line P23 cooling (server_scripts/grindless/maxplus/stream.js): maxplus-stream.test.mjs and the batch dump prove its ids
+  laterIds.add('grindless:closed_loop_cooling/cold_scoop_coil');
   for (const r of ours.filter((x) => !laterIds.has(x.i))) {
     const walk = (o, key) => {
       if (Array.isArray(o)) return o.forEach((x) => walk(x, key));

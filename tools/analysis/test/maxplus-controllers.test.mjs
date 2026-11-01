@@ -20,6 +20,8 @@ const DURATION = {
   meta_material_loom: /EUt\(VA_MAX\)\.duration\(4800\)/,
   condensate_assembler: /EUt\(VA_MAX\)\.duration\(4800\)/,
   hills_slingshot: /c\.machine, c\.research, 64, 4800\)/,
+  pristine_gas_works: /c\.machine, c\.research, 64, 4800\)/,
+  primordial_fusion_torus: /c\.machine, c\.research, 64, 4800\)/,
 };
 
 const nameOf = (ing) => {
