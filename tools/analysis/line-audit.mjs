@@ -414,12 +414,13 @@ export function ownedTypes(line, facts) {
 
 // An item of a material that has no vein (`until: never`): its listed forms, or any ore block of it (`material:<id>` entries; the
 // groups list the crushed and purified forms, not the stone-variant ore blocks).
+const STONES = '(?:tuff|deepslate|netherrack|end_stone|endstone|blackstone|basalt|granite|red_granite|diorite|andesite|marble|dripstone|sand|red_sand|gravel|stone)';
 export function isNoVein(k, never) {
   if (never.has(k)) return true;
   for (const e of never) {
     if (!e.startsWith('material:')) continue;
     const m = e.slice(9);
-    if (k.endsWith(`${m}_ore`) && /^[a-z0-9_]+:([a-z0-9]+_)*$/.test(k.slice(0, k.length - m.length - 3))) return true;
+    if (k.endsWith(`${m}_ore`) && new RegExp(`^[a-z0-9_]+:(${STONES}_)?$`).test(k.slice(0, k.length - m.length - 4))) return true;
   }
   return false;
 }
