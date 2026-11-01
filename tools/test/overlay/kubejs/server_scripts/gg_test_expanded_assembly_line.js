@@ -61,6 +61,7 @@
     ctl: 'gtceu:assembly_line',
     eal: 'extendedfeatures:expanded_assembly_line',
     recv: 'extendedfeatures:luv_wireless_data_receptor',
+    maint: 'gtceu:configurable_maintenance_hatch',
     tx: 'extendedfeatures:luv_wireless_data_transmissor',
     mdr: 'extendedfeatures:matrix_data_relay',
     cc: 'gtceu:computer_casing',
@@ -250,9 +251,10 @@
           if (first) bottom = cell(x, EAL.y0, z, B.eal, '[facing=north]', 'controller')
           else if (last) bottom = cell(x, EAL.y0, z, B.outBus, '[facing=down]', 'out')
           else bottom = cell(x, EAL.y0, z, B.bus, '[facing=down]', 'bus' + (a - 1))
-        } else if (a === 1 && dx === -1) bottom = cell(x, EAL.y0, z, B.fluid, '[facing=down]', 'fluid0')
+        } else if (a === 0 && dx === -1) bottom = cell(x, EAL.y0, z, B.maint)
+        else if (a === 1 && dx === -1) bottom = cell(x, EAL.y0, z, B.fluid, '[facing=down]', 'fluid0')
         else if (a === 2 && dx === -1) bottom = cell(x, EAL.y0, z, B.fluid, '[facing=down]', 'fluid1')
-        else if (a === 1 && dx === 1) bottom = cell(x, EAL.y0, z, B.recv, '[facing=down]', 'recv')
+        else if (a === 0 && dx === 1) bottom = cell(x, EAL.y0, z, B.recv, '[facing=down]', 'recv')
         else bottom = cell(x, EAL.y0, z, B.casing)
         cells.push(bottom)
         var mid = Math.abs(dx) === 2 ? B.glass : (dx === 0 ? B.unit : B.control)
@@ -614,6 +616,21 @@
     }
   }
 
+  // the first Java frames of an exception (and of its causes), to name the class a failure comes from
+  function frames(e) {
+    var out = []
+    try {
+      var t = e.javaException !== undefined ? e.javaException : e
+      for (var depth = 0; t !== null && t !== undefined && depth < 4; depth++) {
+        var st = t.getStackTrace()
+        for (var i = 0; i < st.length && i < 6; i++) out.push(String(st[i]))
+        t = t.getCause()
+        out.push('<-')
+      }
+    } catch (x) { out.push('no stack: ' + x) }
+    return out.join(' ')
+  }
+
   function step(m) {
     if (m.phase === 'forming') {
       if (S.t % STEP !== 0) return
@@ -664,6 +681,7 @@
   function finish() {
     if (S === null || S.finished) return
     S.finished = true
+    global[REQUEST + 'Finished'] = true
     console.info(TAG + SCOPE + '|DONE')
   }
 
@@ -675,7 +693,7 @@
       try {
         step(m)
       } catch (e) {
-        check(m.key + '_STEP', false, 'exception in ' + m.phase + ': ' + e)
+        check(m.key + '_STEP', false, 'exception in ' + m.phase + ': ' + e + ' | ' + frames(e))
         m.phase = 'done'
       }
     })
@@ -710,6 +728,18 @@
       try { run(event.server) } catch (e) { check('run', false, 'exception: ' + e); finish() }
     }
     onTick(event.server)
+  })
+
+  // the dedicated-server bench cannot form the Expanded line (its wireless hatch class refers to the client's Screen), so the client
+  // suite arms the same test on login when gg_test_formed_shots.json carries "eal": true
+  PlayerEvents.loggedIn(function (event) {
+    if (global[REQUEST + 'Armed'] === true) return
+    var on = false
+    try { on = String(JSON.parse(String(JsonIO.toPrettyString(JsonIO.readJson('kubejs/config/gg_test_formed_shots.json')))).eal) === 'true' } catch (e) { on = false }
+    if (!on) return
+    global[REQUEST + 'Armed'] = true
+    global[REQUEST] = true
+    note('run', 'armed by the client suite (gg_test_formed_shots.json eal)')
   })
 
   ServerEvents.customCommand('gg_test_expanded_assembly_line', function (event) {
