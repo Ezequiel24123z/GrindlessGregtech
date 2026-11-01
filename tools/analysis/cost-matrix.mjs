@@ -31,6 +31,12 @@
 // fluids, free world blocks, source recipes such as gas collectors) and expands it into a vector of base amounts. Settings
 // that change numbers (allocation of multi-output recipes, chances, catalysts, cycles, free resources, excluded recipes)
 // are in cost_matrix.json and printed in the document. Deterministic: the same dump and config give the same files.
+//
+// Era-aware pricing (Project Reforge, P2-T; lib/era.mjs): the cost of an era's key item is built only from recipes a player of
+// that era can run (tier from EU/t, dimension, our multiblock's era), so a later route no longer prices an earlier item. A key
+// unreachable at its own era is priced by the first later era that reaches it (`late`). Items nothing ever gives the player
+// (hidden_until.json groups with until "never") are not key items. settings.eraAware=false gives the old single-model numbers;
+// --trace/--why take --era <name> to look at one era's model.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -40,8 +46,10 @@ import { prepareConfig } from './lib/model.mjs';
 import { normalizeRecipe } from './lib/normalize.mjs';
 import { solveCosts, summarize, globMatcher, EU_KEY } from './lib/cost.mjs';
 import { loadRule, loadTables, withFactors, applyToDump, TABLE_DIR } from './lib/cost_curve.mjs';
+import { ERAS, eraIdx as eraIndex, loadEraContext, recipeEra } from './lib/era.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
+const REPO = path.join(here, '..', '..');
 const BEGIN = '<!-- cost-matrix:begin -->';
 const END = '<!-- cost-matrix:end -->';
 const USAGE = 'usage: node tools/analysis/cost-matrix.mjs --dump <dir> --out <dir> [--compare <old.csv>] [--config <file>]\n       node tools/analysis/cost-matrix.mjs --dump <dir> (--table <dir> [--factors <solved.json>] | --solve [--table <dir>] [--era <list>] | --write-tables <dir>) [--out <dir>] [--compare <old.csv>]';
@@ -91,7 +99,29 @@ export function fixShapedCounts(n, json) {
   syms.forEach((s, i) => { n.inputs[i].count *= cells.get(s); });
 }
 
+const normCache = new WeakMap();
 function normalizeAll(dump, excl, settings = {}) {
+  const key = JSON.stringify([excl, Boolean(settings.shapedCells)]);
+  let per = normCache.get(dump);
+  if (!per) normCache.set(dump, (per = new Map()));
+  if (!per.has(key)) per.set(key, normalizeAllUncached(dump, excl, settings));
+  return per.get(key);
+}
+
+/** Items no route ever gives the player (class C: hidden_until.json groups with until "never"); they are not key items. */
+const neverCache = new Map();
+export function neverItems(cfg) {
+  const f = cfg.settings && cfg.settings.neverFile;
+  if (!f) return new Set();
+  const file = path.resolve(REPO, f);
+  if (!neverCache.has(file)) {
+    const j = JSON.parse(fs.readFileSync(file, 'utf8'));
+    neverCache.set(file, new Set((j.groups || []).filter((g) => g.until === 'never').flatMap((g) => g.items || [])));
+  }
+  return neverCache.get(file);
+}
+
+function normalizeAllUncached(dump, excl, settings = {}) {
   const { raw } = loadTierConfig({ tier: 'obtain' }, path.join(here, 'tiers'));
   const cfg = prepareConfig(raw);
   const ctx = { tags: dump.tags, st: { unresolved: new Set() }, cfg, gtTypes: new Set(dump.recipeTypes.keys()) };
@@ -119,7 +149,8 @@ export function keyCandidates(cfg, dump) {
   const slots = [];
   const missing = [];
   const tiers = cfg.tiers;
-  const exists = (k) => dump.items.has(k);
+  const never = neverItems(cfg);
+  const exists = (k) => dump.items.has(k) && !never.has(k);
   const expand = (s, t) => s.replaceAll('${t}', t);
   const add = (era, group, candidates) => {
     const present = candidates.filter(exists);
@@ -139,15 +170,23 @@ export function keyCandidates(cfg, dump) {
   return { slots, missing };
 }
 
-function resolveKeys(cfg, dump, model) {
+/**
+ * The key rows. `pick(era, present)` returns {item, model} for a slot: the first candidate the model of that era reaches.
+ * `late` on a row names the era whose recipes had to be used because the item is unreachable at its own era.
+ */
+function resolveKeys(cfg, dump, pick) {
   const { slots, missing } = keyCandidates(cfg, dump);
+  const never = neverItems(cfg);
   const rows = slots.map(({ era, group, present }) => {
-    const pick = present.find((k) => model.reachable(k)) || present[0];
-    return { era, group, item: pick, alt: present.length > 1 && pick !== present[0] ? present[0] : '' };
+    const p = pick(era, present);
+    return { era, group, item: p.item, alt: present.length > 1 && p.item !== present[0] ? present[0] : '', ...(p.late ? { late: p.late } : {}) };
   });
   const have = new Set(rows.map((r) => r.item));
-  const lv = [...dump.items].filter((k) => k.startsWith('gtceu:lv_') && !have.has(k)).sort();
-  for (const k of lv) rows.push({ era: 'lv', group: 'lv_item', item: k, alt: '' });
+  const lv = [...dump.items].filter((k) => k.startsWith('gtceu:lv_') && !have.has(k) && !never.has(k)).sort();
+  for (const k of lv) {
+    const p = pick('lv', [k]);
+    rows.push({ era: 'lv', group: 'lv_item', item: k, alt: '', ...(p.late ? { late: p.late } : {}) });
+  }
   return { rows, missing };
 }
 
@@ -236,9 +275,19 @@ function whyUnreachable(key, recipes, model) {
   return out;
 }
 
-/** Normalizes and prices a dump: {recipes, model, summ, weight, trivial}. The pricing is the same for the baseline and for a dump the cost curve rewrote. */
-export function priceDump(dump, cfg) {
-  const { recipes, drill } = normalizeAll(dump, cfg.excludeRecipes, cfg.settings);
+/**
+ * Normalizes and prices a dump: {recipes, model, summ, weight, trivial}. The pricing is the same for the baseline and for a dump the cost curve rewrote.
+ * `opts.limit` (era index) keeps only the recipes a player of that era can run (lib/era.mjs); without it every recipe prices.
+ */
+export function priceDump(dump, cfg, opts = {}) {
+  const all = normalizeAll(dump, cfg.excludeRecipes, cfg.settings);
+  let recipes = [...all.recipes];
+  let drill = all.drill;
+  if (opts.limit !== undefined) {
+    const ctx = opts.ctx || loadEraContext(dump);
+    recipes = recipes.filter((n) => recipeEra(n, ctx) <= opts.limit);
+    drill = drill.filter((n) => recipeEra(n, ctx) <= opts.limit);
+  }
 
   // Molten metals have no producing recipe in the dump (the melting is the machine's job); without this they would be
   // natural base resources and every alloy casing would look free. One item of the metal makes `mbPerItem` mB of it.
@@ -308,11 +357,51 @@ export function coreIndex(rows, tiers) {
   return out;
 }
 
-export function pricedRows(dump, cfg) {
-  const priced = priceDump(dump, cfg);
-  const { rows: keys, missing } = resolveKeys(cfg, dump, priced.model);
-  const rows = keys.map((r) => costRow(r, priced.model, priced.summ));
-  return { ...priced, rows, missing };
+const rowModels = new WeakMap();
+/** The era model that priced a row of pricedRows (its choices and vectors). */
+export const modelOf = (row) => rowModels.get(row);
+
+/**
+ * Key rows priced per era. Era-aware (settings.eraAware, default on): each era's rows come from a model built only with the recipes
+ * of that era and below, and a key unreachable at its own era is priced by the next era that reaches it (`late`).
+ * `opts.eras` limits the eras priced (solver speed); `opts.eraAware === false` is the old single model with every recipe.
+ */
+export function pricedRows(dump, cfg, opts = {}) {
+  const aware = cfg.settings.eraAware !== false && opts.eraAware !== false;
+  const models = new Map();
+  const ctx = aware ? (opts.eraCtx || loadEraContext(dump)) : null;
+  const at = (lim) => {
+    if (!models.has(lim)) models.set(lim, priceDump(dump, cfg, aware ? { limit: lim, ctx } : {}));
+    return models.get(lim);
+  };
+  const only = opts.eras ? new Set(opts.eras) : null;
+  const pick = (era, present) => {
+    if (only && !only.has(era)) return { item: present[0], model: null };
+    const e = eraIndex(era);
+    const last = aware ? ERAS.length - 1 : e;
+    for (let lim = e; lim <= last; lim++) {
+      const m = at(lim);
+      const item = present.find((k) => m.model.reachable(k));
+      if (item) return { item, model: m, late: lim > e ? ERAS[lim] : undefined };
+    }
+    return { item: present[0], model: at(e) };
+  };
+  const picked = new Map();
+  const { rows: keys, missing } = resolveKeys(cfg, dump, (era, present) => {
+    const p = pick(era, present);
+    picked.set(`${era}|${p.item}`, p.model);
+    return p;
+  });
+  const rows = [];
+  for (const r of keys) {
+    if (only && !only.has(r.era)) continue;
+    const m = picked.get(`${r.era}|${r.item}`) || (r.group === 'lv_item' ? at(eraIndex('lv')) : at(eraIndex(r.era)));
+    const row = costRow(r, m.model, m.summ);
+    rowModels.set(row, m);
+    rows.push(row);
+  }
+  const top = only ? ([...models.values()].pop() || at(0)) : at(aware ? ERAS.length - 1 : 0);
+  return { ...top, rows, missing, eraAware: aware, models };
 }
 
 /** The factors of a solved.json, or null. */
@@ -355,7 +444,7 @@ function bypassReport(before, after, res, curve) {
   const out = [];
   for (const a of after.rows) {
     if (!growth.has(a.item)) continue;
-    const ch = after.model.choiceOf(a.item);
+    const ch = modelOf(a).model.choiceOf(a.item);
     const g = growth.get(a.item);
     const med = median(byEra.get(a.era));
     const direct = ch && !changed.has(ch.id);
@@ -408,9 +497,9 @@ export function solveFactors(args, cfg, dump) {
   const factors = {};
   for (const e of rule.eras) factors[e] = fixed[e] ? { ...fixed[e] } : { item: 1, fluid: 1 };
   const tables = tablesFor(args, null);
-  const run = (fs_) => {
+  const run = (fs_, eras_) => {
     const { dump: d2, res } = curved(dump, withFactors(tables, fs_));
-    return { ...pricedRows(d2, cfg), res, dump: d2 };
+    return { ...pricedRows(d2, cfg, eras_ ? { eras: eras_ } : {}), res, dump: d2 };
   };
   const ratio = curve.fluidFactorRatio;
   const setFactor = (era, f) => { factors[era] = { item: f, fluid: Math.max(1, Math.round(f * ratio * 1e4) / 1e4) }; };
@@ -424,7 +513,7 @@ export function solveFactors(args, cfg, dump) {
       setFactor(era, f);
       const only = {};
       for (const e of rule.eras) if (factors[e].item !== 1 || factors[e].fluid !== 1 || e === era) only[e] = factors[e];
-      const r = run(only);
+      const r = run(only, [era]);
       solves++;
       const idx = coreIndex(r.rows, cfg.tiers).get(era);
       return idx ? idx.index : null;
@@ -479,7 +568,7 @@ export function solveFactors(args, cfg, dump) {
   for (const p of plateaus) {
     const groups = after.rows
       .filter((a) => a.era === p.era && CORE_GROUPS.includes(a.group) && a.status !== 'unreachable')
-      .map((a) => { const b = base.rows.find((x) => x.item === a.item && x.era === a.era); return { g: a.group, grow: b && b.score > 0 ? a.score / b.score : null, via: after.model.choiceOf(a.item)?.id }; })
+      .map((a) => { const b = base.rows.find((x) => x.item === a.item && x.era === a.era); return { g: a.group, grow: b && b.score > 0 ? a.score / b.score : null, via: modelOf(a).model.choiceOf(a.item)?.id }; })
       .filter((x) => x.grow !== null)
       .sort((x, y) => x.grow - y.grow)
       .slice(0, 3);
@@ -541,32 +630,32 @@ function main() {
   const cfg = JSON.parse(fs.readFileSync(args.config, 'utf8'));
   const dump = loadDump(args.dump, { log: null });
   if (args.curveMode) { curveMain(args, cfg, dump); return; }
-  const { recipes, model, summ, weight, trivial } = priceDump(dump, cfg);
-
-  if (args.trace) {
-    const show = (key, factor, depth, seen) => {
-      const ch = model.choiceOf(key);
-      const pad = '  '.repeat(depth);
-      const m = model.metric(key);
-      if (model.isBase(key)) { console.log(`${pad}${key}  x${factor.toPrecision(3)}  BASE metric=${m}`); return; }
-      if (!ch) { console.log(`${pad}${key}  x${factor.toPrecision(3)}  (none)`); return; }
-      console.log(`${pad}${key}  x${factor.toPrecision(3)}  unit=${m?.toPrecision(3)}  via ${ch.id}  denom=${ch.denom.toPrecision(3)} outs=${ch.outs.map((o) => `${o.key}:${o.n}`).join(',')}`);
-      if (depth >= 5 || seen.has(key)) return;
-      const next = new Set(seen).add(key);
-      for (const i of ch.inputs) show(i.key, (factor * i.amount) / ch.denom, depth + 1, next);
-    };
-    for (const key of args.trace.split(',')) show(key, 1, 0, new Set());
-    return;
-  }
-  if (args.why) {
+  if (args.trace || args.why) {
+    const limit = args.era ? eraIndex(args.era) : undefined;
+    const { recipes, model } = priceDump(dump, cfg, limit === undefined ? {} : { limit });
+    if (args.trace) {
+      const show = (key, factor, depth, seen) => {
+        const ch = model.choiceOf(key);
+        const pad = '  '.repeat(depth);
+        const m = model.metric(key);
+        if (model.isBase(key)) { console.log(`${pad}${key}  x${factor.toPrecision(3)}  BASE metric=${m}`); return; }
+        if (!ch) { console.log(`${pad}${key}  x${factor.toPrecision(3)}  (none)`); return; }
+        console.log(`${pad}${key}  x${factor.toPrecision(3)}  unit=${m?.toPrecision(3)}  via ${ch.id}  denom=${ch.denom.toPrecision(3)} outs=${ch.outs.map((o) => `${o.key}:${o.n}`).join(',')}`);
+        if (depth >= 5 || seen.has(key)) return;
+        const next = new Set(seen).add(key);
+        for (const i of ch.inputs) show(i.key, (factor * i.amount) / ch.denom, depth + 1, next);
+      };
+      for (const key of args.trace.split(',')) show(key, 1, 0, new Set());
+      return;
+    }
     for (const key of args.why.split(',')) {
       const roots = whyUnreachable(key, recipes, model);
       console.log(`${key}: ${model.reachable(key) ? 'reachable' : 'unreachable'}; ${roots.length} blockers:\n` + roots.slice(0, 14).map((x) => '  ' + x.slice(0, 420)).join('\n'));
     }
     return;
   }
-  const { rows: keys, missing } = resolveKeys(cfg, dump, model);
-  const rows = keys.map((r) => costRow(r, model, summ));
+  const { recipes, model, weight, trivial, rows: keyRows, missing } = pricedRows(dump, cfg);
+  const rows = keyRows;
   const eraIdx = new Map(cfg.tiers.map((t, i) => [t, i]));
   const groupOrder = ['hull', 'motor', 'pump', 'piston', 'conveyor', 'robot_arm', 'emitter', 'sensor', 'field_generator', 'energy_hatch', 'energy_hatch_4a', 'energy_hatch_16a', 'superconductor_wire', 'circuit', 'capstone', 'controller', 'lv_item'];
   rows.sort((a, b) => eraIdx.get(a.era) - eraIdx.get(b.era) || groupOrder.indexOf(a.group) - groupOrder.indexOf(b.group) || (a.item < b.item ? -1 : 1));
@@ -695,7 +784,7 @@ function renderMarkdown({ cfg, rows, missing, model, recipes, trivial, dump, arg
   const contrib = new Map();
   for (const r of rows) {
     if (r.status === 'unreachable' || r.group === 'lv_item') continue;
-    const v = model.vector(r.item);
+    const v = modelOf(r).model.vector(r.item);
     for (const [k, a] of v) {
       if (k === EU_KEY) continue;
       const w = weight(k);

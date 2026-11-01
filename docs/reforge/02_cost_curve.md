@@ -193,3 +193,24 @@ No route was missing in the data, so none was added for these. The matrix prices
 - `cost_curve.js` scales with `ceil(n x f)`, so even f = 1.0001 adds 1 to every count. The solver's MV "factor 1.000" was a rounding artefact; the real factor-1 index is 1.77. MV sweep (core index): 1.1 gives 3.26, 1.25 gives 3.27 (before the hull exception), 1.4 gives 3.61, 1.7 gives 4.37, 1.9 gives 4.70. The index is not continuous, so tolerances of 3% are luck at small counts.
 - `// priority:` headers of `lv/cost_review.js` (-19074) and `mv/netherite_template.js` (-21099) were stamped by the integrator at merge (`script-order.mjs --write`).
 - Not done here, for P2-B: the EV and IV shaped bypasses remain.
+
+## Era-aware pricing (P2-T)
+
+The matrix now prices each era only with recipes and sources a player has at that era (`tools/analysis/lib/era.mjs`): a recipe belongs to the highest of its voltage tier (EU/t), the era that first reaches its dimension (startup folder), and the era of the multiblock that exclusively runs its type (GTM's own multiblocks and singleblocks keep a type voltage-limited). Class C (`until: never` in `hidden_until.json`) items are out of the key set; `grindless:lv_horizon_collector` is an unproduced source. A key unreachable at its own era is priced by the first later era that reaches it and flagged `late`.
+
+Core index, before (one model for all eras) to after, on the Band A dump (factors MV 1.25, HV 2.6):
+
+| era | before | after | | era | before | after |
+|---|---|---|---|---|---|---|
+| ulv | 0.474 | 4.53 | | uv | 147.0 | 150.3 |
+| lv | 0.603 | 3.72 | | uhv | 417.5 | 427.5 |
+| mv | 3.08 | 2.96 | | uev | 906.2 | 923.7 |
+| hv | 7.50 | 10.08 | | uiv | 1618 | 1620 |
+| ev | 2.63 | 3.10 | | uxv | 4713 | 4713 |
+| iv | 2.33 | 5.20 | | opv | 255.8 | 255.8 |
+| luv | 21.8 | 30.9 | | max | 2062 | 2062 |
+| zpm | 100.9 | 122.8 | | | | |
+
+Routes that stopped setting early prices: LV steel was 0.0329 via `electrolyzer` oxygen from `offworld_only/distill_liquid_ender_air` and `centrifuge/ash_separation` fed by the HV `syngas/gasify_carbon` loop; at LV it is now 0.350 (`primitive_blast_furnace/steel_from_coal_dust`). Iron and oxygen are priced the same way.
+
+Band A re-check (target MV 3.0, HV 7.5, tolerance 10%): MV 2.96, inside, factor kept at 1.25. HV 10.08 left the tolerance, so its factor was re-solved on the band-less dump (`rf3a/out4`, `--solve --era mv,hv`): 2.6 to 2.092, index 7.91 there. Only `hv.json` item and fluid factors changed.

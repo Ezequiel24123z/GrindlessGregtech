@@ -1,8 +1,8 @@
 {
   "era": "hv",
   "enabled": true,
-  "item": 2.6,
-  "fluid": 2.6,
+  "item": 2.092,
+  "fluid": 2.092,
   "keys": [
     "extendedfeatures:hv_universal_circuit",
     "gtceu:advanced_integrated_circuit",
