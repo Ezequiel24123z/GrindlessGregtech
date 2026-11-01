@@ -54,7 +54,7 @@ export default {
           ['rec', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours', { from: ['gas', 'mem'], desc: 'Sends the gas through an etched membrane; the helium returns.' }],
           ['fl', I('grindless:flerovium_atoms'), 'Flerovium Atoms', 'product', { role: 'research' }],
         ], 'the superheavy census', 2.5),
-        L('x_fsc', 12.5, 0.5, 'pl_luv:coil'),
+        L('x_fsc', 12.5, 0.5, 'pl_zpm:duplate'),
         // californium-249 wheel
         ...chain(8, [
           ['tcl', F('gtceu:transcurium_liquor'), 'Transcurium Liquor', 'raw'],
