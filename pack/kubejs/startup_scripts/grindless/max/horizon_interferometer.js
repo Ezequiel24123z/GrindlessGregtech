@@ -26,7 +26,7 @@
     {
       name: 'horizon_interferometer', machine: 'gtceu:horizon_interferometer', type: 'horizon_interferometry', dataKey: 'grindless_horizon_interferometry',
       lang: 'Horizon Interferometer', maxIO: { itemsIn: 9, itemsOut: 4, fluidsIn: 0, fluidsOut: 0 }, casing: ENCLOSURE,
-      texture: 'grindless:block/max/max_optical_table_casing', // borrowed until RF-6D ships block/max/test_mass_enclosure_casing.png
+      texture: 'grindless:block/max/test_mass_enclosure_casing',
       width: 21, height: 5, depth: 21,
       pal: { F: ENCLOSURE, A: LINK, C: 'gtceu:superconducting_coil', G: 'gtceu:cleanroom_glass' },
       parts: function () {
