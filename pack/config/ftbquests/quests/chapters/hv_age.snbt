@@ -3,7 +3,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "hv_age"
-	group: "3F021F40CD26BF57"
+	group: "4FEA27882E3DB25B"
 	icon: "gtceu:refinery"
 	id: "7CD2454BDDCF0DD6"
 	order_index: 3
@@ -44,15 +44,12 @@
 		}
 		{
 			dependencies: ["5B595A919C80BFC0"]
-			description: ["The drill family grows again: one HV hatch now runs more bores at once. It knows every vein the smaller drills do, Earth and End alike, and your pickaxe stays retired."]
+			description: ["More bores per run than the MV drill, on every vein it knows. An HV hatch, stainless bits, drilling fluid. Earth and End ore, with the pickaxe retired. Bits and fluid by bus and pipe."]
 			icon: "gtceu:hv_vein_drill"
 			id: "721FA9268C278B3F"
-			rewards: [
-				{ id: "291D4CDF7933776F", type: "xp", xp: 60 }
-				{ count: 16, id: "3270F51E23F41A5D", item: "minecraft:torch", type: "item" }
-			]
+			rewards: [{ id: "291D4CDF7933776F", type: "xp", xp: 60 }]
 			shape: "gear"
-			size: 1.0d
+			size: 1.25d
 			tasks: [{ id: "3FA479D4D0FB6DE4", item: "gtceu:hv_vein_drill", type: "item" }]
 			title: "HV Vein Drill"
 			x: 4.0d
@@ -71,15 +68,15 @@
 		}
 		{
 			dependencies: ["5B595A919C80BFC0"]
-			description: ["The greenhouse's HV size: same crops, more bores per run. HV doesn't need more wood than MV did, because the new carbon comes up out of the ground as crude oil."]
+			description: [
+				"The greenhouse at HV size: more bores per run. Fertilizer and carbon dioxide. Plant stock for the chemistry ahead. Seeds in, harvest out, both by bus."
+				"HV needs no more wood than MV: its carbon comes up as crude oil."
+			]
 			icon: "gtceu:hv_greenhouse"
 			id: "3C06724477E3E0BB"
-			rewards: [
-				{ id: "35502C2CA21A059D", type: "xp", xp: 55 }
-				{ count: 4, id: "7689DD0946DD2CEE", item: "minecraft:wheat_seeds", type: "item" }
-			]
+			rewards: [{ id: "35502C2CA21A059D", type: "xp", xp: 55 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "5DB8D7813E63F2DC", item: "gtceu:hv_greenhouse", type: "item" }]
 			title: "HV Greenhouse"
 			x: 2.0d
@@ -87,18 +84,12 @@
 		}
 		{
 			dependencies: ["5B595A919C80BFC0"]
-			description: [
-				"The &6Refinery&r takes crude oil and hydrogen and hands back every fraction in one pass, sulfur already removed. GregTech alone would want a distillery pass per fraction and a reactor to clean each one."
-				"A programmed circuit picks the job: refining, hydrocracking or steam cracking."
-			]
+			description: ["Every crude oil fraction in one pass, sulfur already removed. Crude oil, hydrogen, a programmed circuit for the job. Refining, hydrocracking and steam cracking. Crude in by pipe, a pipe out per fraction."]
 			icon: "gtceu:refinery"
 			id: "5C5D6FB9ECB7BC51"
-			rewards: [
-				{ id: "012A2C94D6BE9D69", type: "xp", xp: 90 }
-				{ count: 16, id: "74C549950BA61877", item: "minecraft:torch", type: "item" }
-			]
+			rewards: [{ id: "012A2C94D6BE9D69", type: "xp", xp: 90 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "659FBFC6A4539F6D", item: "gtceu:refinery", type: "item" }]
 			title: "Refinery"
 			x: 4.0d
@@ -107,14 +98,14 @@
 		{
 			dependencies: ["5C5D6FB9ECB7BC51"]
 			description: [
-				"The &6Syngas Plant&r blasts powdered coal or heavy fuel with steam and gives back carbon monoxide and hydrogen, each in its own hatch. That's the easy hydrogen for the ammonia in rocket fuel."
-				"The carbon monoxide is toxic, so shift it or turn it into methanol."
+				"Carbon monoxide and hydrogen from coal or heavy fuel and steam. Powdered coal or heavy fuel, steam. Easy hydrogen for the ammonia in rocket fuel. Each gas leaves by its own hatch."
+				"The carbon monoxide is toxic: shift it or make methanol."
 			]
 			icon: "gtceu:syngas_plant"
 			id: "4C18E0B7D5A92F61"
 			rewards: [{ id: "47E2104B9F6D3A58", type: "xp", xp: 50 }]
 			shape: "gear"
-			size: 1.0d
+			size: 1.25d
 			tasks: [{ id: "0E5A7C2D98B14F36", item: "gtceu:syngas_plant", type: "item" }]
 			title: "Syngas Plant"
 			x: 4.0d
@@ -162,15 +153,15 @@
 		{
 			dependencies: ["64F01001238ACD74"]
 			description: [
-				"GregTech never reforms naphtha, so the &6Catalytic Reformer&r does: benzene, toluene, and hydrogen to send straight back to the refinery."
-				"It's optional. Without it the electrolyzer covers the hydrogen, with less to spare."
+				"Reforms naphtha into benzene, toluene and spare hydrogen. Naphtha and a reforming catalyst. More hydrogen for the refinery. Hydrogen pipes straight back to the refinery."
+				"Optional: the electrolyzer covers hydrogen without it, with less to spare."
 			]
 			icon: "gtceu:reformer"
 			id: "52781D6F5A69C4BE"
 			optional: true
 			rewards: [{ id: "46D2EE333DEFD840", type: "xp", xp: 40 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "3D77A53BF29A83F5", item: "gtceu:reformer", type: "item" }]
 			title: "Catalytic Reformer"
 			x: 6.0d
@@ -217,15 +208,12 @@
 		}
 		{
 			dependencies: ["1051C4B8835DB4A3"]
-			description: [
-				"The &6Composite Autoclave&r cures fiber in epoxy under nitrogen pressure, which no single machine can do."
-				"Build it as a vessel lying on two saddles with the door facing you, and leave the inside empty: everything comes in through the hatches."
-			]
+			description: ["Cures fiber in epoxy under nitrogen pressure. Fiber, epoxy and nitrogen through the hatches. Heat-shield tiles and overwrapped tanks. Everything arrives by hatch; leave the inside empty."]
 			icon: "gtceu:composite_autoclave"
 			id: "3B7E2C9A41D06F85"
 			rewards: [{ id: "2A3D5F1E07C4B926", type: "xp", xp: 60 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "5A0C81E7D2B94F16", item: "gtceu:composite_autoclave", type: "item" }]
 			title: "Composite Autoclave"
 			x: 8.0d
@@ -392,10 +380,7 @@
 			]
 			icon: "gcyr:moon_stone"
 			id: "2897E3EB8159710C"
-			rewards: [
-				{ id: "178ADCEDFB41DCA4", type: "xp", xp: 150 }
-				{ count: 2, id: "5C2C8109CD06A63F", item: "grindless:empty_vein_probe", type: "item" }
-			]
+			rewards: [{ id: "178ADCEDFB41DCA4", type: "xp", xp: 150 }]
 			shape: "diamond"
 			size: 1.75d
 			tasks: [{ dimension: "gcyr:luna", id: "2717156C3769D52D", type: "dimension" }]
@@ -405,35 +390,134 @@
 		}
 		{
 			dependencies: ["5B595A919C80BFC0"]
-			description: [
-				"From CPU wafer to &6Workstation&r, the whole micro line runs on MV power, and only the last step needs the cleanroom."
-				"The vacuum freezer wants these, and so does nearly everything in EV, so get the line running early."
-			]
-			icon: "gtceu:micro_processor_computer"
+			description: ["The central processor, the first chip of the micro line. Silicon wafers, the laser engraver, the cutter. Microprocessors and everything built on them. Engrave then cut on one bus line; keep wafers stocked."]
+			icon: "gtceu:cpu_chip"
 			id: "51DD45CBEDEE31D9"
-			rewards: [{ id: "3701FB44C4351347", type: "xp", xp: 80 }]
+			rewards: [{ id: "3701FB44C4351347", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
 			tasks: [
 				{ count: 4L, id: "28566FCC6FBBF1B3", item: "gtceu:cpu_wafer", type: "item" }
-				{ count: 2L, id: "75AE43FDB54724F1", item: "gtceu:micro_processor_assembly", type: "item" }
-				{ id: "68F1C9AFFB461C1A", item: "gtceu:micro_processor_computer", type: "item" }
+				{ count: 8L, id: "3786F46DDA7ACC64", item: "gtceu:cpu_chip", type: "item" }
 			]
-			title: "EV Workstation"
+			title: "CPU Wafer and Chip"
 			x: 4.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["51DD45CBEDEE31D9"]
-			description: [
-				"The &6Vacuum Freezer&r is built with EV circuits, so it waits for the workstation. It cools the hottest ingots out of the blast furnace and turns air into liquid air."
-				"Lunar titanium will need it the day you bring ilmenite home."
+			description: ["The first circuit built round a CPU. CPU chips, resistors, capacitors, transistors. The microprocessor assembly. Circuit assembler with all four inputs on buses."]
+			icon: "gtceu:micro_processor"
+			id: "3C0E5F545E2E3229"
+			rewards: [{ id: "3A763105D849BEA1", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 8L, id: "5011CB7618CA2435", item: "gtceu:micro_processor", type: "item" }]
+			title: "Microprocessor"
+			x: 6.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3C0E5F545E2E3229"]
+			description: ["Several microprocessors on one board. Microprocessors, capacitors, more RAM. The workstation. Same circuit assembler, a second recipe on the circuit."]
+			icon: "gtceu:micro_processor_assembly"
+			id: "7F1A2ED8C015C0F2"
+			rewards: [{ id: "1999C901D8937D34", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "331AC6CB46D3FE03", item: "gtceu:micro_processor_assembly", type: "item" }]
+			title: "Microprocessor Assembly"
+			x: 8.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["7F1A2ED8C015C0F2"]
+			description: ["The EV circuit, and the end of the micro line. Assemblies, plus a cleanroom for the last step. The vacuum freezer and nearly all of EV. Run the line early: the assemblies buffer on a bus."]
+			icon: "gtceu:micro_processor_computer"
+			id: "159BBC0EFA6F2B15"
+			rewards: [{ id: "7D516DC1093B58DA", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 2L, id: "3DCFCF201BDAD425", item: "gtceu:micro_processor_computer", type: "item" }]
+			title: "Workstation"
+			x: 10.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["51DD45CBEDEE31D9"]
+			description: ["The low-power IC, a leaner chip than the ULPIC. Wafers, the laser engraver, the cutter. The simple SoC. Another engrave and cut line, another lens."]
+			icon: "gtceu:lpic_chip"
+			id: "74D1F5783E41DBC3"
+			rewards: [{ id: "15F4F9E265E47C64", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ count: 2L, id: "77CF93F7DF4B355A", item: "gtceu:lpic_wafer", type: "item" }
+				{ count: 8L, id: "5C523FDD540B9A89", item: "gtceu:lpic_chip", type: "item" }
 			]
+			title: "LPIC Wafer and Chip"
+			x: 4.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["74D1F5783E41DBC3"]
+			description: ["A whole small computer on one die. Wafers, the laser engraver, the cutter, a cleanroom. Compact circuits in later eras. Cleanroom line; keep wafers stocked."]
+			icon: "gtceu:simple_soc"
+			id: "54C7896425B58FA8"
+			rewards: [{ id: "57BDC972EDAAC593", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ count: 2L, id: "75FDBC1C11233129", item: "gtceu:simple_soc_wafer", type: "item" }
+				{ count: 8L, id: "10ABCAADFB7F635C", item: "gtceu:simple_soc", type: "item" }
+			]
+			title: "Simple SoC"
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["51DD45CBEDEE31D9"]
+			description: ["Dense storage for the circuits that remember. Wafers, the laser engraver, the cutter. NOR memory and the data circuits. Engrave then cut, same as every chip."]
+			icon: "gtceu:nand_memory_chip"
+			id: "197EB1E0E23130CF"
+			rewards: [{ id: "7278399F2086723A", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ count: 2L, id: "5C320AEA60D8DCAD", item: "gtceu:nand_memory_wafer", type: "item" }
+				{ count: 8L, id: "1980668C5A23F5E8", item: "gtceu:nand_memory_chip", type: "item" }
+			]
+			title: "NAND Memory"
+			x: 6.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["197EB1E0E23130CF"]
+			description: ["Fast memory that runs code in place. Wafers and phosphorus, on HV power. The faster circuits of EV. A phosphorus feed on the engraver line."]
+			icon: "gtceu:nor_memory_chip"
+			id: "55D49D2EE35BB819"
+			rewards: [{ id: "1BB0F0B593B9187D", type: "xp", xp: 45 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ count: 2L, id: "11086F9605702653", item: "gtceu:nor_memory_wafer", type: "item" }
+				{ count: 8L, id: "15232A6547AB6FEE", item: "gtceu:nor_memory_chip", type: "item" }
+			]
+			title: "NOR Memory"
+			x: 8.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["159BBC0EFA6F2B15"]
+			description: ["Cools the hottest ingots and turns air into liquid air. EV circuits, so it waits for the workstation. Nichrome now, lunar titanium later. Ingots in by bus, cooled ingots out by bus."]
 			icon: "gtceu:vacuum_freezer"
 			id: "53D1CE971F63D842"
 			rewards: [{ id: "312C422590E22590", type: "xp", xp: 60 }]
+			shape: "gear"
 			size: 1.25d
 			tasks: [{ id: "0AEBA5F4B70C1D3E", item: "gtceu:vacuum_freezer", type: "item" }]
 			title: "Vacuum Freezer"
-			x: 6.0d
+			x: 12.0d
 			y: 3.0d
 		}
 		{
@@ -447,7 +531,7 @@
 			rewards: [{ id: "5B177DB0EA38B7DC", type: "xp", xp: 40 }]
 			tasks: [{ count: 4L, id: "7FEDE320D91D5B65", item: "gtceu:nichrome_ingot", type: "item" }]
 			title: "Nichrome"
-			x: 8.0d
+			x: 14.0d
 			y: 3.0d
 		}
 		{
@@ -477,13 +561,10 @@
 		}
 		{
 			dependencies: ["35719B747A75F7B6"]
-			description: ["The &6Coil Chemical Plant&r is a large chemical reactor that heats with coils. The better the coil, the more recipes it runs at once, and a good coil also trims the energy bill."]
+			description: ["A large chemical reactor heated by coils. Coils: better ones run more recipes at once. Chemistry at scale, with a trimmed energy bill. Hatches in and out, like the reactor it grew from."]
 			icon: "gtceu:coil_chemical_plant"
 			id: "5731FF20BC9CBDD9"
-			rewards: [
-				{ id: "5ADAE012D2D4306D", type: "xp", xp: 60 }
-				{ count: 8, id: "5DD443E3F7E1A431", item: "gtceu:polytetrafluoroethylene_plate", type: "item" }
-			]
+			rewards: [{ id: "5ADAE012D2D4306D", type: "xp", xp: 60 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [{ id: "332A714483469ADA", item: "gtceu:coil_chemical_plant", type: "item" }]

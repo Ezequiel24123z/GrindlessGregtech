@@ -3,10 +3,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "luv_age"
-	group: "3F021F40CD26BF57"
+	group: "1B68BDF66B6D5658"
 	icon: "grindless:outer_system_chart"
 	id: "5A0C83C3DAF32776"
-	order_index: 6
+	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{

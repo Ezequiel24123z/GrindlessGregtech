@@ -3,10 +3,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "uiv_age"
-	group: "3F021F40CD26BF57"
+	group: "26251651D4D8EF21"
 	icon: "gtceu:uiv_machine_casing"
 	id: "19D3A63D234D284C"
-	order_index: 11
+	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{

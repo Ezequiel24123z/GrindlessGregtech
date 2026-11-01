@@ -3,11 +3,18 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "steam_age"
-	group: "3F021F40CD26BF57"
+	group: "4FEA27882E3DB25B"
 	icon: "gtceu:bronze_gear"
 	id: "47DE4F5800320CB8"
 	order_index: 0
-	quest_links: [ ]
+	quest_links: [
+		{
+			id: "142F1307A323F2DA"
+			linked_quest: "5C562BD093CBA553"
+			x: 0.0d
+			y: -1.5d
+		}
+	]
 	quests: [
 		{
 			dependencies: ["3207813527EE1FBD"]
@@ -65,8 +72,6 @@
 				{ id: "2F8316F0B18FE31A", type: "xp", xp: 30 }
 				{ count: 8, id: "4CEF32FF034FD548", item: "minecraft:coal", type: "item" }
 			]
-			shape: "gear"
-			size: 1.25d
 			tasks: [
 				{ id: "74AB3375CC84D045", item: "gtceu:coke_oven", type: "item" }
 				{ count: 8L, id: "160AC0E4D073488B", item: "gtceu:coke_gem", type: "item" }
@@ -78,8 +83,8 @@
 		{
 			dependencies: ["20A9578F6F706702"]
 			description: [
-				"The &6Coke Battery&r cokes like a row of coke ovens and also keeps the coal gas they let escape. Tank the gas; LV has plans for it."
-				"No steam part can pull fluid out of a multiblock. Here you can hand-craft the ULV output hatch instead, and a screwdriver turns it into the input version."
+				"It cokes like a row of ovens and keeps the coal gas they let escape. Bricks, steel and a ULV output hatch, hand-crafted. Coke by the stack, and gas for LV chemistry. Feed coal by conveyor and tank the gas."
+				"No steam part can pull fluid out of a multiblock. A screwdriver turns the ULV output hatch into the input version."
 			]
 			icon: "gtceu:coking_battery"
 			id: "3A7C5E1D9B2F6048"
@@ -100,8 +105,6 @@
 			icon: "gtceu:primitive_pump"
 			id: "0E2E13522BA2A323"
 			rewards: [{ id: "413042DF78D6A4F5", type: "xp", xp: 20 }]
-			shape: "gear"
-			size: 1.25d
 			tasks: [{ id: "4AAD651868C2E72F", item: "gtceu:primitive_pump", type: "item" }]
 			title: "Primitive Pump"
 			x: 6.0d
@@ -277,8 +280,6 @@
 			icon: "gtceu:primitive_blast_furnace"
 			id: "376295DE4FA3B31E"
 			rewards: [{ id: "2C462FC0FC9B6EA1", type: "xp", xp: 35 }]
-			shape: "gear"
-			size: 1.25d
 			tasks: [{ id: "74759AA68CA79F1D", item: "gtceu:primitive_blast_furnace", type: "item" }]
 			title: "Primitive Blast Furnace"
 			x: 12.0d
@@ -286,7 +287,10 @@
 		}
 		{
 			dependencies: ["376295DE4FA3B31E"]
-			description: ["A second road to steel that takes iron ore straight from the drill, with coke and some calcite from the lapis vein. One of these out-produces half a dozen primitive furnaces, and it drinks steam to do it."]
+			description: [
+				"A second road to steel that takes iron ore straight from the drill. Bricks, steel, coke, and calcite from the lapis vein. Steel at a pace the primitive furnaces cannot match. Ore, coke and calcite by conveyor, steam from the boiler hall."
+				"One of these out-produces half a dozen primitive furnaces, and it drinks steam to do it."
+			]
 			icon: "gtceu:steam_blast_furnace"
 			id: "4B8E2D6A1F9C3057"
 			rewards: [{ id: "5D9B3F7A1C2E6048", type: "xp", xp: 40 }]
@@ -299,7 +303,10 @@
 		}
 		{
 			dependencies: ["376295DE4FA3B31E"]
-			description: ["Through the eyepiece the Moon shows dark seas, bright highlands and big craters with long rays. The &6Clockwork Observatory&r only works at night under a clear sky, with the controller at Y 100 or higher, above the haze and the smoke from your coke ovens."]
+			description: [
+				"It charts the Moon, one night at a time. Bronze, glass and a clear sky, the controller at Y 100 or higher. The lunar chart the optical observatory reads in LV. Steam by pipe; it runs itself every clear night."
+				"Through the eyepiece the Moon shows dark seas and bright highlands. Above the haze of your coke ovens is the place to stand."
+			]
 			icon: "gtceu:steam_observatory"
 			id: "1253203E620BE055"
 			rewards: [{ id: "1F6D3B9E4A2C8075", type: "xp", xp: 45 }]
@@ -450,37 +457,53 @@
 		}
 		{
 			dependencies: ["4A21D67EFA0E04C5"]
-			description: ["Both lean on sticky resin. It pays to have a rubber sapling in the greenhouse by now. The board starts as a wood plate from the compressor."]
-			icon: "gtceu:resin_printed_circuit_board"
+			description: ["Small parts that lean on sticky resin. It pays to have a rubber sapling in the greenhouse by now."]
+			icon: "gtceu:resistor"
 			id: "1861D320C9F055D2"
 			rewards: [{ id: "0D7381C6AD892F5B", type: "xp", xp: 25 }]
-			tasks: [
-				{ count: 2L, id: "2A14C6530C6DF63B", item: "gtceu:resistor", type: "item" }
-				{ id: "5702CAC6CB88D573", item: "gtceu:resin_printed_circuit_board", type: "item" }
-			]
-			title: "Resistors and Boards"
+			tasks: [{ count: 2L, id: "2A14C6530C6DF63B", item: "gtceu:resistor", type: "item" }]
+			title: "Resistors"
 			x: 20.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["1861D320C9F055D2"]
+			description: [
+				"The board every first circuit is soldered onto. A wood plate from the compressor, sticky resin and copper foil. The basic electronic circuit. Greenhouse resin and compressor plates, one assembler line later."
+				"A slab of pressed wood with ambitions."
+			]
+			icon: "gtceu:resin_printed_circuit_board"
+			id: "3C5A7E1B9D204F68"
+			rewards: [{ id: "4E1B8D3A6C927F05", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5702CAC6CB88D573", item: "gtceu:resin_printed_circuit_board", type: "item" }]
+			title: "Resin Board"
+			x: 22.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3C5A7E1B9D204F68"]
 			description: ["Copper and redstone melt together into red alloy in the alloy smelter. Hammer it into a plate, cut that into wire and wrap it like tin cable. The first circuits are wired with it."]
 			icon: "gtceu:red_alloy_ingot"
 			id: "30D4DD1212DB31E0"
 			rewards: [{ id: "56375B9B39F19228", type: "xp", xp: 25 }]
 			tasks: [{ id: "16CD5C26281202E7", item: "gtceu:red_alloy_ingot", type: "item" }]
 			title: "Red Alloy"
-			x: 22.0d
+			x: 24.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["30D4DD1212DB31E0", "61E429627580A285"]
-			description: ["All those small parts meet in the &6Basic Electronic Circuit&r, the first LV circuit. The turbine needs one, and so do most LV machines after it."]
+			description: [
+				"The first LV circuit, in nearly every LV machine and in the turbine. A resin board, vacuum tubes, resistors and red alloy cable. LV machines, and the circuit ladder above them. Hand-assembled here; the LV circuit assembler takes it over."
+				"All those small parts meet in the &6Basic Electronic Circuit&r."
+			]
 			icon: "gtceu:basic_electronic_circuit"
 			id: "59DE11D9BE2E0E47"
 			rewards: [{ id: "7E788BEAF5DACB6D", type: "xp", xp: 40 }]
-			shape: "gear"
-			size: 1.25d
+			shape: "hexagon"
+			size: 1.0d
 			tasks: [{ count: 2L, id: "52E895BDF72B86AC", item: "gtceu:basic_electronic_circuit", type: "item" }]
 			title: "LV Circuit"
 			x: 26.0d
@@ -493,11 +516,10 @@
 			id: "36B68B4C2B1E0DBA"
 			optional: true
 			rewards: [{ id: "47536037A0E7A152", type: "xp", xp: 35 }]
-			size: 0.75d
 			tasks: [{ id: "1128EA2A780C9E3B", item: "gtceu:bronze_large_boiler", type: "item" }]
 			title: "Large Bronze Boiler"
 			x: 28.0d
-			y: 4.5d
+			y: 6.0d
 		}
 		{
 			dependencies: ["6862838CB35D8296", "2AEFA5A96D5BA55D", "59DE11D9BE2E0E47"]
@@ -507,12 +529,9 @@
 			]
 			icon: "gtceu:lv_steam_turbine"
 			id: "4996827E4BFC339E"
-			rewards: [
-				{ id: "7B0D5D25018EB656", type: "xp", xp: 100 }
-				{ count: 4, id: "2D54E246836CF089", item: "gtceu:tin_single_cable", type: "item" }
-			]
+			rewards: [{ id: "7B0D5D25018EB656", type: "xp", xp: 100 }]
 			shape: "diamond"
-			size: 2.0d
+			size: 1.75d
 			tasks: [{ id: "1D440BC33682A584", item: "gtceu:lv_steam_turbine", type: "item" }]
 			title: "LV Steam Turbine"
 			x: 28.0d
@@ -521,15 +540,12 @@
 		{
 			dependencies: ["64A0425E87F233F6"]
 			description: [
-				"A glass house on a dirt floor that farms while you're busy elsewhere. The sapling or seed in its input bus is never used up, and logs, sticky resin or crops come out every cycle."
+				"It farms logs, sticky resin and crops while you are busy elsewhere. Glass, bronze casing and a sapling or seed in the input bus. Wood and resin without a forest trip. Output bus to a chest or conveyor; the sapling is never used up."
 				"One with a rubber sapling in it ends your resin worries."
 			]
 			icon: "gtceu:steam_greenhouse"
 			id: "1AFD1F4557C5DA80"
-			rewards: [
-				{ id: "21456737917678C3", type: "xp", xp: 50 }
-				{ count: 4, id: "3DF56AFED50E9079", item: "minecraft:wheat_seeds", type: "item" }
-			]
+			rewards: [{ id: "21456737917678C3", type: "xp", xp: 50 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [{ id: "681EBC183F437749", item: "gtceu:steam_greenhouse", type: "item" }]
@@ -585,8 +601,8 @@
 		{
 			dependencies: ["4B2FCEC042219588", "54FC9D8B7F999601"]
 			description: [
-				"This is the deal the pack runs on. Put a sample and some bits in the bus and steam in the hatch, and that vein keeps sending up raw ore for as long as the steam lasts."
-				"Build one drill per vein you need. Your steam miner is inside it."
+				"It keeps one vein sending up raw ore for as long as steam lasts. A vein sample, bronze drill bits and steam; your steam miner sits inside it. Every ore in the pack, with no pickaxe. Bits and steam fed by hatch, ore taken out by bus. One drill per vein."
+				"This is the deal the pack runs on."
 			]
 			icon: "gtceu:steam_vein_drill"
 			id: "103C07A78792B593"
@@ -633,17 +649,15 @@
 		{
 			dependencies: ["4F0049B2E382BA8E"]
 			description: [
-				"Small steam multiblocks that work on several recipes at once from one steam hatch. The forge hammer, compressor and alloy smelter replace machines you already own, while the mixer, chemical bath and ore washer have no steam version at all."
-				"The bath and washer need the hand-made ULV input hatch. The mixer's bronze recipe wants a programmed circuit, and an LV circuit makes one."
+				"Small steam multiblocks that run several recipes at once from one steam hatch. Bronze and steel casings, a steam hatch, and hand-made ULV hatches for the bath and washer. Mixing, chemical bathing and ore washing before any electricity. Steam by pipe, inputs and outputs by bus."
+				"The mixer, bath and washer have no steam version at all, which makes them the point."
 			]
 			icon: "gtceu:steam_mixer"
 			id: "325185F9C76235D6"
 			optional: true
-			rewards: [
-				{ id: "6BCC7552C07375CE", type: "xp", xp: 40 }
-				{ count: 4, id: "78A7B8CCA9A9DF90", item: "gtceu:bronze_plate", type: "item" }
-			]
-			size: 0.75d
+			rewards: [{ id: "6BCC7552C07375CE", type: "xp", xp: 40 }]
+			shape: "gear"
+			size: 1.25d
 			tasks: [
 				{ id: "7FDE1B5742620E3D", item: "gtceu:steam_mixer", optional_task: true, type: "item" }
 				{ id: "76592CF23910A086", item: "gtceu:steam_compressor", optional_task: true, type: "item" }
@@ -659,17 +673,15 @@
 		{
 			dependencies: ["33AF6A368B3587E0"]
 			description: [
-				"Big steel halls that run ore by the stack on steam, and unlike the small macerator they keep every byproduct. That's GregTech's full ore line before you've seen a volt."
-				"The macerator is built around a steam grinder and the washer around a primitive pump. The bath, centrifuge and washer need ULV fluid hatches, and the centrifuge insists on them even for dry recipes."
+				"Big steel halls that run ore by the stack on steam and keep every byproduct. Steel casings, a steam grinder or primitive pump inside, and ULV fluid hatches. GregTech's full ore line before you have seen a volt. Ore in by bus, steam by pipe, products onward by conveyor."
+				"The centrifuge insists on its fluid hatches even for dry recipes."
 			]
 			icon: "gtceu:large_steam_macerator"
 			id: "52D6BD0494A56791"
 			optional: true
-			rewards: [
-				{ id: "58E1F78F6D22AA8D", type: "xp", xp: 60 }
-				{ count: 2, id: "48DE865F7476DA59", item: "gtceu:steel_plate", type: "item" }
-			]
-			size: 0.75d
+			rewards: [{ id: "58E1F78F6D22AA8D", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
 			tasks: [
 				{ id: "62538627EA89C8A4", item: "gtceu:large_steam_macerator", optional_task: true, type: "item" }
 				{ id: "5920D0DDED303CFA", item: "gtceu:large_steam_centrifuge", optional_task: true, type: "item" }
@@ -679,7 +691,7 @@
 			]
 			title: "Large Steam Plants"
 			x: 16.0d
-			y: 1.5d
+			y: 4.5d
 		}
 	]
 	subtitle: ["Still no electricity: coal, steam and bronze, until ore and wood start turning up on their own."]

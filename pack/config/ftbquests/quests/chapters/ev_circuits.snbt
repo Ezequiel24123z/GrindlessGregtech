@@ -1,0 +1,178 @@
+{
+	autofocus_id: "3C5EB45848DA6797"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "ev_circuits"
+	group: "56FB7B66CDAC1140"
+	icon: "gtceu:nano_processor"
+	id: "57809DD439A3CDD8"
+	order_index: 1
+	quest_links: [
+		{
+			id: "18EF8A3009ACD2DC"
+			linked_quest: "164F0808EF9DF557"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "3415B221CED5468F"
+			linked_quest: "14DF849D657D6AEF"
+			x: 0.0d
+			y: 1.5d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["164F0808EF9DF557"]
+			description: ["The &6EV Circuit Assembler&r builds the nano circuits, which the HV assembler cannot. It asks for Microprocessor Mainframes, the micro line's last circuit, and an HV emitter, since the EV one waits for IV. Every nano circuit from here to the supercomputer. Feed circuit boards and chips from the cleanroom lines by ME, and keep a stock of mainframes."]
+			icon: "gtceu:ev_circuit_assembler"
+			id: "3C5EB45848DA6797"
+			rewards: [{ id: "5BA2C540CC3F5FC0", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ count: 2L, id: "57A2C4C8EBDA842C", item: "gtceu:micro_processor_mainframe", type: "item" }
+				{ id: "3304D08BC6374CB2", item: "gtceu:ev_circuit_assembler", type: "item" }
+			]
+			title: "EV Circuit Assembler"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3C5EB45848DA6797"]
+			description: ["A CPU wafer treated in an EV chemical reactor becomes a &6Nano CPU Wafer&r, and the laser engraver cuts it into chips. A working cleanroom, carbon fibers and the HV wafer line behind you. The nanoprocessor, and with it the whole nano ladder. Cleanroom hatches take wafers from the ME network and return chips to it."]
+			icon: "gtceu:nano_cpu_wafer"
+			id: "7ECBC918EE387EB6"
+			rewards: [{ id: "396BB82FD12CBA44", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1C69DAC0AF87A3AD", item: "gtceu:nano_cpu_wafer", type: "item" }
+				{ id: "74379C90DCF6D334", item: "gtceu:nano_cpu_chip", type: "item" }
+			]
+			title: "Nano CPU Wafer"
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["14DF849D657D6AEF"]
+			description: ["A phosphorus boule grows slowly in the blast furnace and is sliced into wafers. Patience: the boule takes its time, so start one before you need the chips. MPIC and NOR memory chips, and through them EV hatches and the supercomputer. Keep a boule always growing and let the cutter feed the wafer line."]
+			icon: "gtceu:phosphorus_boule"
+			id: "5AB977D135E31355"
+			rewards: [{ id: "347E9F4BF5FA1ECB", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "75CAEB237023B4DA", item: "gtceu:phosphorus_boule", type: "item" }
+				{ id: "5052EA3CD266243C", item: "gtceu:phosphorus_wafer", type: "item" }
+			]
+			title: "Phosphorus Boule"
+			x: 2.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["5AB977D135E31355"]
+			description: ["The phosphorus wafer becomes an &6MPIC Wafer&r and the engraver cuts the &6MPIC Chips&r out of it. A laser engraver and the right lens. Real EV energy and dynamo hatches. A wafer in, chips out. Let ME feed the engraver and store the chips."]
+			icon: "gtceu:mpic_chip"
+			id: "75CF49B21980A604"
+			rewards: [{ id: "3070107D3B5F2047", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5046C130B8EBB086", item: "gtceu:mpic_wafer", type: "item" }
+				{ id: "32D3EEAF7698F208", item: "gtceu:mpic_chip", type: "item" }
+			]
+			title: "MPIC Chips"
+			x: 4.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["75CF49B21980A604"]
+			description: ["&6NOR Memory&r is the same boule engraved with a pink lens, which is a different chip from the same slice of rock. The pink glass lens and a free engraver. The Nanoprocessor Supercomputer. Keep a second engraver for this lens so the MPIC line never waits for a lens swap."]
+			icon: "gtceu:nor_memory_chip"
+			id: "7B21E54E59758551"
+			rewards: [{ id: "7DC2C3D36E7FDE31", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "78003EF351D63B6A", item: "gtceu:nor_memory_wafer", type: "item" }
+				{ id: "1A3C6DC3E65149A1", item: "gtceu:nor_memory_chip", type: "item" }
+				{ id: "765572EF458E828B", item: "gtceu:pink_glass_lens", type: "item" }
+			]
+			title: "NOR Memory"
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["7B21E54E59758551"]
+			description: [
+				"The &6SMD Diode&r wants fine platinum wire, so the platinum plant comes before it. Past that it is another cleanroom assembler recipe."
+				"The supercomputer wants plenty. Put it on a repeating pattern."
+			]
+			icon: "gtceu:smd_diode"
+			id: "568EBF6639C3A93E"
+			rewards: [{ id: "1D281B6BC830F2F8", type: "xp", xp: 40 }]
+			tasks: [{ id: "1032E54258E1BA5A", item: "gtceu:smd_diode", type: "item" }]
+			title: "SMD Diodes"
+			x: 8.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["3C5EB45848DA6797", "7ECBC918EE387EB6"]
+			description: ["The &6Nanoprocessor&r is the nano line's HV circuit, and only the EV circuit assembler can put one together. Nano CPU chips, carbon fibers and the usual SMD parts. The assembly, and every EV machine that wants circuits. Run it from the assembler's own pattern, with the chips delivered by ME."]
+			icon: "gtceu:nano_processor"
+			id: "115A9664BF3CF352"
+			rewards: [{ id: "1D596DC95CD2B572", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "31FD831D914C3A7F", item: "gtceu:carbon_fibers", type: "item" }
+				{ id: "79EB1FDB34D5C610", item: "gtceu:nano_processor", type: "item" }
+			]
+			title: "Nanoprocessor"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["115A9664BF3CF352"]
+			description: ["The &6Nanoprocessor Assembly&r is the nano line's EV circuit, built on an epoxy board. Nanoprocessors and the epoxy line from HV, which still has work to do. The supercomputer and the EV machines that ask for assemblies. Epoxy boards and nanoprocessors come from the network; the assembler repeats."]
+			icon: "gtceu:nano_processor_assembly"
+			id: "368E5D61D5E5572B"
+			rewards: [{ id: "7624CE505F1A4895", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5EFB1E15AA8BFF6A", item: "gtceu:nano_processor_assembly", type: "item" }]
+			title: "Nanoprocessor Assembly"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["368E5D61D5E5572B", "7B21E54E59758551", "568EBF6639C3A93E"]
+			description: ["The &6Nanoprocessor Supercomputer&r is the IV circuit and the real wall of EV. Assemblies, NOR memory and SMD diodes, which means the platinum plant and the slow boule. The IV machine hull, and the mainframe after it. Stock every input in the network first. This recipe is the one that stalls."]
+			icon: "gtceu:nano_processor_computer"
+			id: "1D65975B45CF7836"
+			rewards: [{ id: "3BE3697CB13B80C4", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5B352F266F8BB3EA", item: "gtceu:nano_processor_computer", type: "item" }]
+			title: "Nanoprocessor Supercomputer"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1D65975B45CF7836"]
+			description: ["The &6Nanoprocessor Mainframe&r closes the nano ladder. Supercomputers, and the same cleanroom discipline, at a larger scale. Nothing in EV asks for it. Later eras do. A dedicated assembler line and a standing stock of supercomputers."]
+			icon: "gtceu:nano_processor_mainframe"
+			id: "37E7797A38CEA743"
+			rewards: [{ id: "7B8C4541452E1975", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "7A52ED1E3EF07D17", item: "gtceu:nano_processor_mainframe", type: "item" }]
+			title: "Nanoprocessor Mainframe"
+			x: 10.0d
+			y: 0.0d
+		}
+	]
+	subtitle: ["Phosphorus, patience and the first circuits that need a cleanroom twice."]
+	title: "EV: Circuits"
+}

@@ -3,10 +3,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "max_age"
-	group: "3F021F40CD26BF57"
+	group: "14CC251BB70F88DF"
 	icon: "gtceu:max_machine_casing"
 	id: "3B8CF180B26E4F1F"
-	order_index: 14
+	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{

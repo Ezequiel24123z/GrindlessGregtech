@@ -3,7 +3,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "mv_age"
-	group: "3F021F40CD26BF57"
+	group: "4FEA27882E3DB25B"
 	icon: "gtceu:mv_machine_hull"
 	id: "358BED21B6D9DE8C"
 	order_index: 2
@@ -54,7 +54,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["3EB82BACA3DFF6DB"]
+			dependencies: ["5DC39DF3C1563B6B"]
 			description: ["Mostly steel, with a little vanadium and chromium. The cutter's saw blade is made of it, and so is the drill bit that can reach the End veins."]
 			icon: "gtceu:vanadium_steel_ingot"
 			id: "74057E6BDC378944"
@@ -112,17 +112,14 @@
 		{
 			dependencies: ["51BBBA6F37785CD7"]
 			description: [
-				"The LV ore line, all of it, in one building: crush, wash, bake and crush again, with every byproduct delivered. It's built from the MV versions of the machines it replaces."
-				"Same ore and the same energy per ore as the loose machines, about ten fewer machines and no buses in between. A second energy hatch doubles the ores in flight."
+				"The whole LV ore line in one building: crush, wash, bake, crush again. MV versions of the machines it replaces. Every byproduct delivered, with no buses between. A second energy hatch doubles the ores in flight."
+				"Same ore, same energy per ore, about ten fewer machines."
 			]
 			icon: "gtceu:ore_plant"
 			id: "3FCAFC1E38DD934C"
-			rewards: [
-				{ id: "1B8BF1FB66892FB3", type: "xp", xp: 80 }
-				{ count: 16, id: "44804D8CAFF739EE", item: "minecraft:torch", type: "item" }
-			]
+			rewards: [{ id: "1B8BF1FB66892FB3", type: "xp", xp: 80 }]
 			shape: "gear"
-			size: 1.75d
+			size: 1.5d
 			tasks: [{ id: "637CD62AA2052170", item: "gtceu:ore_plant", type: "item" }]
 			title: "Ore Plant"
 			x: 2.0d
@@ -130,18 +127,12 @@
 		}
 		{
 			dependencies: ["51BBBA6F37785CD7"]
-			description: [
-				"Same samples as the LV drill, and many more bores: one MV hatch keeps it busier than two LV hatches ever kept the last one."
-				"Put a vanadium steel bit in the bus and drilling fluid in the tank, and it reaches the End veins too."
-			]
+			description: ["Many more bores than the LV drill, off the same samples. One MV hatch, a bit in the bus, drilling fluid in the tank. A vanadium steel bit reaches the End veins. Feed bits and fluid by bus and pipe."]
 			icon: "gtceu:mv_vein_drill"
 			id: "430CFDDFCF9174C1"
-			rewards: [
-				{ id: "0C4CC380A108D82B", type: "xp", xp: 60 }
-				{ count: 16, id: "7F949ADB2FDB784E", item: "minecraft:torch", type: "item" }
-			]
+			rewards: [{ id: "0C4CC380A108D82B", type: "xp", xp: 60 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "4672CBD07B794FDE", item: "gtceu:mv_vein_drill", type: "item" }]
 			title: "MV Vein Drill"
 			x: 6.0d
@@ -199,10 +190,12 @@
 		}
 		{
 			dependencies: ["12A688D7F923740B", "6213116B3B6723B8"]
-			description: ["The cutter slices a boule into a stack of wafers. Handle them gently; there's a long road between a wafer and a working chip."]
+			description: ["The blank slices every chip starts from. A boule and the MV cutter. ILC, RAM and ULPIC wafers. Boules in by bus, wafers out; the cutter runs unattended."]
 			icon: "gtceu:silicon_wafer"
 			id: "086C8CD2541ED490"
 			rewards: [{ id: "0B53DE86A2D8D40B", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
 			tasks: [{ count: 8L, id: "196CF5113D833357", item: "gtceu:silicon_wafer", type: "item" }]
 			title: "Silicon Wafers"
 			x: 12.0d
@@ -210,35 +203,60 @@
 		}
 		{
 			dependencies: ["086C8CD2541ED490"]
-			description: [
-				"The laser engraver prints a circuit pattern onto the wafer, and the lens colour decides which one: red for ILC, green for RAM. The cutter then dices the printed wafer into chips."
-				"Both go into every integrated circuit until HV."
-			]
+			description: ["The integrated logic chip, a staple of every circuit to HV. Silicon wafers, the laser engraver with a red lens, the cutter. Basic and good integrated circuits. Engrave, then cut: two machines on one bus line."]
 			icon: "gtceu:ilc_chip"
-			id: "4A6B8F971E17C847"
-			rewards: [{ id: "22837AE7060D658D", type: "xp", xp: 35 }]
+			id: "7055818509330B57"
+			rewards: [{ id: "3B7A10B61AB4C816", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
 			tasks: [
-				{ count: 4L, id: "2CA6F3BD5D88EE26", item: "gtceu:ilc_chip", type: "item" }
-				{ count: 4L, id: "25078E469CB4E802", item: "gtceu:ram_chip", type: "item" }
+				{ count: 2L, id: "172FD8441A82FF80", item: "gtceu:ilc_wafer", type: "item" }
+				{ count: 8L, id: "375DE09B36C10691", item: "gtceu:ilc_chip", type: "item" }
 			]
-			title: "ILC and RAM"
+			title: "ILC Wafer and Chip"
 			x: 14.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["51BBBA6F37785CD7"]
-			description: [
-				"Many more crops at once than the LV one, and it takes carbon dioxide on top of the fertilizer: the harvest grows by half, with oxygen back for the blast furnace."
-				"The logs go to pyrolysis and the crops to the brewery."
+			dependencies: ["086C8CD2541ED490"]
+			description: ["Memory for the circuits that think. Silicon wafers, the laser engraver with a green lens, the cutter. Integrated circuits and the ULPIC. Same two-machine line as the ILC, with another lens."]
+			icon: "gtceu:ram_chip"
+			id: "7FF006C5C5CB63F7"
+			rewards: [{ id: "70FC373FDF5CFBA2", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ count: 2L, id: "555FB4515CE76702", item: "gtceu:ram_wafer", type: "item" }
+				{ count: 8L, id: "568BB2C145CEFB28", item: "gtceu:ram_chip", type: "item" }
 			]
+			title: "RAM Wafer and Chip"
+			x: 14.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["7FF006C5C5CB63F7"]
+			description: ["The ultra-low-power IC, the first chip beyond ILC and RAM. Silicon wafers, the laser engraver, the cutter, MV power. The advanced integrated circuit. A third lens on the same engrave and cut line."]
+			icon: "gtceu:ulpic_chip"
+			id: "5EE807C7FA61212F"
+			rewards: [{ id: "1574FA98209E5379", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ count: 2L, id: "18F906B8302176B0", item: "gtceu:ulpic_wafer", type: "item" }
+				{ count: 8L, id: "532FDF06D928AC40", item: "gtceu:ulpic_chip", type: "item" }
+			]
+			title: "ULPIC Wafer and Chip"
+			x: 16.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["51BBBA6F37785CD7"]
+			description: ["Far more crops than the LV one. Fertilizer, plus carbon dioxide for half again the harvest. Logs for pyrolysis, crops for the brewery, oxygen for the blast furnace. Seeds in by bus, harvest out by bus."]
 			icon: "gtceu:mv_greenhouse"
 			id: "3AE74DC5E01AD916"
-			rewards: [
-				{ id: "4251E295C87B7454", type: "xp", xp: 60 }
-				{ count: 4, id: "3F99F7EF4A1613B8", item: "minecraft:wheat_seeds", type: "item" }
-			]
+			rewards: [{ id: "4251E295C87B7454", type: "xp", xp: 60 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "59AE03D63045757C", item: "gtceu:mv_greenhouse", type: "item" }]
 			title: "MV Greenhouse"
 			x: 4.0d
@@ -272,14 +290,14 @@
 		{
 			dependencies: ["48331D61E0C6B691"]
 			description: [
-				"A distillery gets one fraction out per run and the rest never comes out. The &6Biorefinery&r is a column that keeps them all, one hatch per layer."
-				"It only takes organic feedstock, wood and biomass and the like. Crude oil waits for the distillation tower."
+				"A column that keeps every fraction, one hatch per layer. Organic feedstock: wood, biomass and the like. Ethanol for ethylene, and so for plastic. Pipe feedstock in, one pipe out per layer."
+				"Crude oil waits for the distillation tower."
 			]
 			icon: "gtceu:biorefinery"
 			id: "62C555A8293900FA"
 			rewards: [{ id: "36C63C01BD92A0F6", type: "xp", xp: 40 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "6D666454092B45EE", item: "gtceu:biorefinery", type: "item" }]
 			title: "Biorefinery"
 			x: 12.0d
@@ -287,12 +305,12 @@
 		}
 		{
 			dependencies: ["51BBBA6F37785CD7"]
-			description: ["GregTech's rig pumps oil, gas or salt water from the fluid vein under it. Veins never run dry in this pack, and the Flatlands and the Void have oil and gas too, so pick a spot once and leave it there."]
+			description: ["Pumps oil, gas or salt water from the fluid vein under it. Drilling fluid and power. Diesel, brine and everything downstream. Veins never run dry: pick a spot once and pipe it out."]
 			icon: "gtceu:mv_fluid_drilling_rig"
 			id: "1A38798F23E8EA97"
 			rewards: [{ id: "58FE1CD5AD9C17E5", type: "xp", xp: 50 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "0721BC67872504EC", item: "gtceu:mv_fluid_drilling_rig", type: "item" }]
 			title: "MV Fluid Drilling Rig"
 			x: 6.0d
@@ -335,7 +353,7 @@
 			tasks: [{ id: "2DADD3DCAD01B312", type: "checkmark" }]
 			title: "Ethylene and PE"
 			x: 14.0d
-			y: 3.0d
+			y: 4.5d
 		}
 		{
 			dependencies: ["0D69D5BBC371A5B7", "498077C9A58D9578"]
@@ -346,7 +364,7 @@
 			tasks: [{ id: "3C0D1AB8A4AB4406", type: "checkmark" }]
 			title: "PVC"
 			x: 14.0d
-			y: 4.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["0D69D5BBC371A5B7"]
@@ -359,32 +377,46 @@
 				{ count: 4L, id: "1C024E6FA2BEAE4A", item: "gtceu:resistor", type: "item" }
 			]
 			title: "Transistors and Resistors"
-			x: 14.0d
+			x: 16.0d
 			y: 1.5d
 		}
 		{
-			dependencies: ["4A6B8F971E17C847", "6A521D8B1437F9E4"]
-			description: ["The first circuits with a real chip inside. The basic one counts as an LV circuit and the good one as MV, and the circuit assembler makes both."]
-			icon: "gtceu:good_integrated_circuit"
+			dependencies: ["7055818509330B57", "7FF006C5C5CB63F7", "6A521D8B1437F9E4"]
+			description: ["The first circuit with a real chip inside, counted as LV. ILC and RAM chips, transistors and resistors. The good integrated circuit. The circuit assembler, fed by bus from the chip lines."]
+			icon: "gtceu:basic_integrated_circuit"
 			id: "1617CBC90D126D2F"
-			rewards: [{ id: "6E0340634B4E4921", type: "xp", xp: 40 }]
-			tasks: [
-				{ count: 4L, id: "647511CD759A7CB8", item: "gtceu:basic_integrated_circuit", type: "item" }
-				{ count: 4L, id: "7EE54ED2F26F26DA", item: "gtceu:good_integrated_circuit", type: "item" }
-			]
-			title: "Integrated Circuits"
+			rewards: [{ id: "6E0340634B4E4921", type: "xp", xp: 35 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 8L, id: "647511CD759A7CB8", item: "gtceu:basic_integrated_circuit", type: "item" }]
+			title: "Basic Integrated Circuit"
 			x: 16.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["1617CBC90D126D2F", "6A521D8B1437F9E4"]
-			description: ["The HV circuit, made on MV power. It wants a bit of everything the chip line makes, and the cleanroom won't build without it."]
+			dependencies: ["1617CBC90D126D2F"]
+			description: ["The MV circuit, a step up from basic. Basic circuits, ILC and RAM chips, more transistors. The advanced integrated circuit and the HV hull. Same circuit assembler; keep the basics buffered."]
+			icon: "gtceu:good_integrated_circuit"
+			id: "54F8B69CF1D51701"
+			rewards: [{ id: "1BEB8D92AFD81497", type: "xp", xp: 40 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 8L, id: "14ABE91364597A44", item: "gtceu:good_integrated_circuit", type: "item" }]
+			title: "Good Integrated Circuit"
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["54F8B69CF1D51701", "5EE807C7FA61212F"]
+			description: ["The HV circuit, made on MV power. Good circuits and ULPIC chips. The cleanroom. Circuit assembler on a bus, ULPIC chips stocked."]
 			icon: "gtceu:advanced_integrated_circuit"
 			id: "49BA4B42FA5DD586"
 			rewards: [{ id: "60E0CBE6799FF623", type: "xp", xp: 50 }]
+			shape: "hexagon"
+			size: 1.0d
 			tasks: [{ count: 8L, id: "23078925A3CD9598", item: "gtceu:advanced_integrated_circuit", type: "item" }]
 			title: "Advanced Integrated Circuit"
-			x: 18.0d
+			x: 20.0d
 			y: 0.0d
 		}
 		{
@@ -404,10 +436,10 @@
 			]
 			title: "Hazmat Suit"
 			x: 14.0d
-			y: 6.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["0D69D5BBC371A5B7"]
+			dependencies: ["6A521D8B1437F9E4"]
 			description: ["Hull number three, in stainless steel with polyethylene trim. Both the furnace and the plastic line have to be running for this one."]
 			icon: "gtceu:hv_machine_hull"
 			id: "01AAEC5F1DC1C5EE"
@@ -432,7 +464,7 @@
 			y: 1.5d
 		}
 		{
-			dependencies: ["1617CBC90D126D2F"]
+			dependencies: ["7FF006C5C5CB63F7"]
 			description: ["Applied Flux, which stores FE in the network, and the wireless pattern terminals both need MV circuits in this pack. Build whichever you'll actually use."]
 			icon: "ae2:controller"
 			id: "63CD92CD1D3FC989"
@@ -440,8 +472,8 @@
 			rewards: [{ id: "231C195DB1B74F7E", type: "xp", xp: 25 }]
 			tasks: [{ id: "3B48C0F2BEC84CC3", type: "checkmark" }]
 			title: "AE2 Grows Up"
-			x: 18.0d
-			y: -1.5d
+			x: 16.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["49BA4B42FA5DD586", "01AAEC5F1DC1C5EE", "21B999C2D0EF51A9"]
@@ -451,10 +483,7 @@
 			]
 			icon: "gtceu:cleanroom"
 			id: "53336232501835EE"
-			rewards: [
-				{ id: "16A43F54CF171ADA", type: "xp", xp: 150 }
-				{ count: 16, id: "7E0A8B43D7625BFF", item: "minecraft:torch", type: "item" }
-			]
+			rewards: [{ id: "16A43F54CF171ADA", type: "xp", xp: 150 }]
 			shape: "diamond"
 			size: 1.75d
 			tasks: [{ id: "004271B08D0CFDDF", item: "gtceu:cleanroom", type: "item" }]
@@ -464,15 +493,12 @@
 		}
 		{
 			dependencies: ["51BBBA6F37785CD7", "101BAA038F0ACAA6", "1EEB24C2AB3EF4B0"]
-			description: [
-				"Radio doesn't mind clouds, so the &6Radio Telescope&r works right through the rain. A thunderstorm is another matter: the lightning drowns out the echo. It still needs the Moon in the sky, so nights only."
-				"It reads the LV map and ephemeris and never uses them up."
-			]
+			description: ["Radar echoes of the Moon, through rain but not thunderstorms. The LV map and ephemeris, never used up, and a night sky. The lunar landing-site chart. It reads the sky by itself; just keep it powered."]
 			icon: "gtceu:radio_telescope"
 			id: "1E1E4E32D9532D1A"
 			rewards: [{ id: "1B7C4D2A9E035F61", type: "xp", xp: 40 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "5A0E7C41B2D93F18", item: "gtceu:radio_telescope", type: "item" }]
 			title: "Radio Telescope"
 			x: 4.0d
@@ -527,12 +553,12 @@
 		}
 		{
 			dependencies: ["4B8E1D73A0F25C69"]
-			description: ["Fires rocket engines while they're bolted to the ground, which is the right order to do things in. Your first rocket's thrusters and its motor both get a burn here before they're allowed to fly."]
+			description: ["Fires rocket engines bolted to the ground, before they fly. RP-1 and oxygen. Qualified thrusters, and HV's rocket motor. Pipe both fuels in; thrusters go in and out by bus."]
 			icon: "gtceu:engine_test_stand"
 			id: "115744A9113F8B38"
 			rewards: [{ id: "2B6F4C9E8D0A17E3", type: "xp", xp: 60 }]
 			shape: "gear"
-			size: 1.5d
+			size: 1.25d
 			tasks: [{ id: "7D3B0E92A6C41F58", item: "gtceu:engine_test_stand", type: "item" }]
 			title: "Engine Test Stand"
 			x: 10.0d
@@ -675,13 +701,10 @@
 		}
 		{
 			dependencies: ["0D69D5BBC371A5B7"]
-			description: ["The &6Polymer Works&r turns raw inputs into polyethylene and rubber sheets in a single recipe, with no chemical reactor, mixer and solidifier chain in between. It runs several at once, up to what your hatch voltage allows."]
+			description: ["Polyethylene and rubber sheets in one recipe, with no reactor chain between. The raw inputs, and hatch voltage for the batch size. Plastic by the sheet for every later build. Raw inputs in by pipe and bus, sheets out by bus."]
 			icon: "gtceu:polymer_works"
 			id: "3B42346CE2FA1CC4"
-			rewards: [
-				{ id: "3236E3D5ABD0F3DA", type: "xp", xp: 50 }
-				{ count: 16, id: "1CC5EF3BF4664077", item: "gtceu:polyethylene_plate", type: "item" }
-			]
+			rewards: [{ id: "3236E3D5ABD0F3DA", type: "xp", xp: 50 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [{ id: "15FEC3AC6D61B5F5", item: "gtceu:polymer_works", type: "item" }]

@@ -3,10 +3,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "opv_age"
-	group: "3F021F40CD26BF57"
+	group: "41398BEC88C216FF"
 	icon: "gtceu:opv_machine_casing"
 	id: "120F8C9CFD67A41F"
-	order_index: 13
+	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{
