@@ -4,8 +4,9 @@
 //
 //   c1 vent (a generator): 1 seed wave packet -> 2^30 EU/t out for 4,800 t, a spent wave packet (inert: the wave leaves as light)
 //   c2 sgr_a_spin_map + shell_gradient_map -> final_spin_map, VA[MAX], 1,200 t
-//   c3 the last recipe (The ending): 2^35 EU/t for 1,200 t on two MAX 16 A hatches; 1 seed wave packet, 1 genome archive, 16 stream
-//      bundles, 1 final spin map and 1 Rydberg logic array -> the universe seed and 64 mirror shell scrap, the spent array back
+//   c3 horizon stabilisation (The ending): 2^35 EU/t for 1,200 t on two MAX 16 A hatches; 4 seed wave packets, 64 stream bundles, 1 final
+//      spin map, 1 cloud phase map, 16 horizon phase locks, 8 horizon flux clamps and 1 Rydberg logic array -> 1 horizon lock, the spent
+//      array and 16 spent phase locks (the mirror holds, no scrap). Its first output grants the maxplus stage (startup max/shell.js)
 //
 // c3 is the only recipe above VA[MAX] in the pack (V[MAX] x 16, never a literal). Balance of c1: the packet costs about 2.24e12 EU along L18
 // and c1 gives 2^30 x 4,800 = 5.15e12 EU: about 2.3x. All three run in gcyr:black_hole_orbit. The segment is made on the UHV swarm foundry
@@ -35,10 +36,10 @@
       outs: ['1x grindless:spent_wave_packet'], chanced: [{ id: 'grindless:ablated_shell_segment', chance: 625 }] },
     { name: 'final_spin_map', circuit: 2, eut: VA_MAX, duration: 1200,
       items: ['1x grindless:sgr_a_spin_map', '1x grindless:shell_gradient_map'], outs: ['1x grindless:final_spin_map'] },
-    { name: 'universe_seed', circuit: 3, eut: V_MAX * 16, duration: 1200,
-      items: ['1x grindless:seed_wave_packet', '1x grindless:genome_archive', '16x grindless:stream_bundle', '1x grindless:final_spin_map',
-        '1x grindless:rydberg_logic_array'],
-      outs: ['1x grindless:universe_seed', '64x grindless:mirror_shell_scrap', '1x grindless:spent_rydberg_array'] }
+    { name: 'horizon_lock', circuit: 3, eut: V_MAX * 16, duration: 1200,
+      items: ['4x grindless:seed_wave_packet', '64x grindless:stream_bundle', '1x grindless:final_spin_map', '1x grindless:cloud_phase_map',
+        '16x grindless:horizon_phase_lock', '8x grindless:horizon_flux_clamp', '1x grindless:rydberg_logic_array'],
+      outs: ['1x grindless:horizon_lock', '1x grindless:spent_rydberg_array', '16x grindless:spent_phase_lock'] }
   ]
 
   function missingOf(items, fluids) {

@@ -92,8 +92,7 @@
       "grindless:launched_gc_probe",
       "grindless:nsc_belt_seed",
       "grindless:launched_belt_seed",
-      "grindless:universe_seed",
-      "grindless:max_epilogue",
+      "grindless:epilogue",
       "grindless:horizon_strand_repeater",
       "grindless:silicate_slag",
       "grindless:iron_core_fragment",
@@ -434,8 +433,8 @@
     "names": [
       "max",
       "max-sgra",
-      "max-nsc"
-    ]
+      "max-nsc",
+      "maxplus"
   },
   "places": {
     "_why": "the two tier-14 places (S0-1; startup_scripts/grindless/max/travel.js publishes them as global.grindless.maxTravel); the dimension ids are final",

@@ -2,11 +2,11 @@
 // TEST ONLY, MAX-G1 (gtceu:mirror_shell). Command: kubejs custom_command gg_test_max_shell
 // Band ONLY: X 40344-40407, Z 0-63, gcyr:black_hole_orbit Y 70-102 (zones.json row max_shell).
 //   T1 (named uncertainty: ONE controller carries a generator row (c1, -2^30 EU/t) and a consumer row (c3, 2^35 EU/t) of recipe type
-//   gtceu:black_hole_bomb; the 33-cube forms; c3 draws 2^35 EU/t on two MAX 16 A hatches for 1,200 t and the structure survives the credits handler):
+//   gtceu:black_hole_bomb; the 33-cube forms; c3 draws 2^35 EU/t on two MAX 16 A hatches for 1,200 t, grants maxplus and the structure survives the stage handler):
 //     lookup   every recipe id of the package is in the recipe manager
 //     static   nothing skipped; no pending route
 //     formed   the 33-cube forms with two MAX 16 A input hatches, one MAX 16 A dynamo hatch and a bus pair
-//     c3       starts at 2^35 EU/t; the universe seed and the mirror shell scrap reach the output bus; the shell stays formed
+//     c3       starts at 2^35 EU/t; the horizon lock and the spent Rydberg array reach the output bus; the maxplus world flag is set; the shell stays formed
 //     c2       starts and outputs the final spin map
 //     c1       starts as a generator and pushes EU into the dynamo hatch
 // The older one-row additions (clock, SRF, mK, forge, foundry) only add data on mechanisms proven by their own packages, so they are looked up, not run.
@@ -32,10 +32,12 @@
 
   var STEPS = [
     {
-      name: 'c3', eut: EXP_C3, id: 'universe_seed',
-      items: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:seed_wave_packet', 1], ['grindless:genome_archive', 1], ['grindless:stream_bundle', 16],
-        ['grindless:final_spin_map', 1], ['grindless:rydberg_logic_array', 1]],
-      outs: ['grindless:universe_seed', 'grindless:mirror_shell_scrap']
+      name: 'c3', eut: EXP_C3, id: 'horizon_lock', stage: 'grindless_stage_maxplus',
+      items: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:seed_wave_packet', 4],
+        ['grindless:stream_bundle', 16], ['grindless:stream_bundle', 16], ['grindless:stream_bundle', 16], ['grindless:stream_bundle', 16],
+        ['grindless:final_spin_map', 1], ['grindless:cloud_phase_map', 1], ['grindless:horizon_phase_lock', 16],
+        ['grindless:horizon_flux_clamp', 8], ['grindless:rydberg_logic_array', 1]],
+      outs: ['grindless:horizon_lock', 'grindless:spent_rydberg_array']
     },
     {
       name: 'c2', eut: 2013265920, id: 'final_spin_map',
@@ -50,7 +52,7 @@
   ]
 
   var IDS = [
-    'black_hole_bomb/vent_wave_packet', 'black_hole_bomb/final_spin_map', 'black_hole_bomb/universe_seed', 'assembly_line/mirror_shell',
+    'black_hole_bomb/vent_wave_packet', 'black_hole_bomb/final_spin_map', 'black_hole_bomb/horizon_lock', 'assembly_line/mirror_shell',
     'kugelblitz_forming/write_seed_wave_packet', 'nuclear_clock/nuclear_clock/thorium_clock_reference', 'nuclear_demagnetisation/cooled_cavity_mode',
     'srf_cavity/srf_cavity/max_srf_cavity', 'chemical_bath/polished_srf_cavity', 'swarm_segment/mirror_shell_segment'
   ]
@@ -268,7 +270,8 @@
       if (got >= 1) {
         var extra = step.outs.length > 1 ? count(u.outBus, step.outs[1]) : 1
         check(tag + 'output', extra >= 1, step.outs.join(' + ') + ': ' + got + ' / ' + extra)
-        check(tag + 'still_formed', m.isFormed(), 'formed after the recipe and the credits handler: ' + m.isFormed())
+        check(tag + 'still_formed', m.isFormed(), 'formed after the recipe and the stage handler: ' + m.isFormed())
+        if (step.stage) check(tag + 'stage', S.server.persistentData.getBoolean(step.stage) === true, 'world flag ' + step.stage)
         next(u)
       } else if (waited > 1700) {
         check(tag + 'output', false, 'no ' + step.outs[0] + ' in 1700 ticks; reasons ' + reasons(m))

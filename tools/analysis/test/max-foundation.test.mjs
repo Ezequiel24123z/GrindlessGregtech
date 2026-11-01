@@ -115,7 +115,7 @@ test('tables/max_ids.json lists the 29 MAX ids, every F1 id and the circuits blo
   assert.deepEqual(table.ours.components, COMPONENTS);
   assert.deepEqual(table.ours.parallel_hatch, ['gtceu:max_parallel_hatch']);
   assert.deepEqual(table.existing, EXISTING);
-  assert.deepEqual(table.substages.names, ['max', 'max-sgra', 'max-nsc']);
+  assert.deepEqual(table.substages.names, ['max', 'max-sgra', 'max-nsc', 'maxplus']);
   assert.deepEqual(table.places, { _why: table.places._why, sgra: 'gcyr:black_hole_orbit', nsc: 'grindless:nsc_belt' });
   const circuits = Object.entries(table.circuits).filter(([k]) => k !== '_why' && k !== 'gates');
   assert.ok(circuits.length >= 20);
