@@ -2,7 +2,8 @@
 // -----------------------------------------------------------------------------------------------
 // MAX-D1 (docs/eras/max.md, L24 steps 3 and 5): the two GTM steps of the Penrose payload line, which have no older table of their own.
 //
-//   gtceu:lathe      compressed_payload_core -> turned_payload_core (turned to the capture bore).
+//   gtceu:lathe      compressed_payload_core -> turned_payload_core + 2 tungsten steel swarf (turned to the capture bore; the swarf is
+//                    remelted in the furnace).
 //   gtceu:assembler  turned_payload_core + payload_casing -> max_penrose_payload, at VA[MAX] (2,013,265,920 EU/t) for 400 t. There is no
 //                    gtceu:max_assembler: the row runs in gtceu:assembly_hall on two OpV 4 A hatches (decision 68).
 //
@@ -19,7 +20,7 @@
 
   var ROWS = [
     { type: 'lathe', name: 'turned_payload_core', eut: 1966080, duration: 600,
-      items: ['1x grindless:compressed_payload_core'], fluids: [], out: 'grindless:turned_payload_core' },
+      items: ['1x grindless:compressed_payload_core'], fluids: [], out: 'grindless:turned_payload_core', swarf: '2x gtceu:tungsten_steel_dust' },
     { type: 'assembler', name: 'max_penrose_payload', eut: 2013265920, duration: 400,
       items: ['1x grindless:turned_payload_core', '1x grindless:payload_casing', '2x grindless:mh_winding', '2x grindless:sic_sic_plate', '2x gtceu:tungsten_steel_plate'],
       fluids: [{ id: 'gtceu:liquid_helium', amount: 1000 }], out: 'grindless:max_penrose_payload' }
@@ -38,6 +39,7 @@
       r.items.forEach(function (s) { b.itemInputs(s) })
       r.fluids.forEach(function (s) { b.inputFluids(Fluid.of(s.id, s.amount)) })
       b.itemOutputs(r.out)
+      if (r.swarf) b.itemOutputs(r.swarf)
       b.EUt(r.eut).duration(r.duration)
       SM.recipes.push('grindless:' + r.type + '/' + r.name)
     })

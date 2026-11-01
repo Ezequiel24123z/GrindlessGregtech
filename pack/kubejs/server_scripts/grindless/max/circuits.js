@@ -39,7 +39,7 @@
       // GTM prefixes the type itself: grindless:<name> becomes grindless:laser_engraver/<name>
       var b = event.recipes.gtceu.laser_engraver('grindless:' + r.name)
       b.itemInputs('1x ' + r.input)
-      b.notConsumable(r.lens)
+      b.itemInputs('1x ' + r.lens)
       b.itemOutputs('1x ' + r.out)
       b.EUt(r.eut).duration(r.duration)
       MC.recipes.push('grindless:laser_engraver/' + r.name)

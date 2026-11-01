@@ -17,7 +17,7 @@
         },
         {
           "name": "poled_lnoi", "circuit": 3, "eut": 31457280, "duration": 1200,
-          "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:lnoi_wafer", "count": 1 }, { "id": "gtceu:gold_foil", "count": 1 }],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:poled_lnoi_wafer", "count": 1 }]
         },
@@ -98,7 +98,7 @@
         {
           "_why": "OpV-A2 (opv.md line 15): the link's waveguides and electro-optic modulators written into the LN film of the LN-on-SOI wafer (circuit 6; 5 is OpV-A1's)",
           "name": "ln_soi_waveguides", "circuit": 6, "eut": 7864320, "duration": 1000,
-          "itemsIn": [{ "id": "grindless:ln_on_soi_wafer", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:ln_on_soi_wafer", "count": 1 }, { "id": "gtceu:glass_dust", "count": 2 }],
           "itemsOut": [{ "id": "grindless:ln_soi_waveguide_wafer", "count": 1 }]
         },
         { "_why": "MAX-A1 (max.md, L5): squeezer waveguide written into the thin-film wafer under a fused-silica cladding", "name": "squeezer_waveguide_die", "circuit": 7, "eut": 7864320, "duration": 1000,
@@ -192,7 +192,7 @@
       "recipes": [
         {
           "name": "crystal_read_verify", "circuit": 0, "eut": 491520, "duration": 400,
-          "itemsIn": [{ "id": "grindless:written_crystal_blank", "count": 1 }],
+          "itemsIn": [{ "id": "grindless:written_crystal_blank", "count": 1 }, { "id": "#gtceu:circuits/uhv", "count": 1 }],
           "itemsOut": [{ "id": "grindless:verified_crystal", "count": 1 }]
         }
       ]

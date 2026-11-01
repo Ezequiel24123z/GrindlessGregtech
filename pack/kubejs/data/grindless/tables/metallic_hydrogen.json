@@ -108,13 +108,13 @@
       "recipes": [
         {
           "name": "lonsdaleite_race", "circuit": 0, "eut": 1966080, "duration": 200,
-          "itemsIn": [ { "id": "grindless:leached_lonsdaleite", "count": 1 } ],
+          "itemsIn": [ { "id": "grindless:leached_lonsdaleite", "count": 1 }, { "id": "gtceu:diamond_dust", "count": 1 } ],
           "kept": [],
           "itemsOut": [ { "id": "grindless:lonsdaleite_race", "count": 1 } ]
         },
         {
           "name": "laser_heated_n2", "circuit": 0, "eut": 1966080, "duration": 200,
-          "itemsIn": [ { "id": "grindless:dac_charge", "count": 1 } ],
+          "itemsIn": [ { "id": "grindless:dac_charge", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 2 } ],
           "kept": [],
           "itemsOut": [ { "id": "grindless:laser_heated_n2_charge", "count": 1 } ]
         }

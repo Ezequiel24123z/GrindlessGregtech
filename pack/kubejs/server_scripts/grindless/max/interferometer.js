@@ -100,7 +100,7 @@
       } else {
         var le = event.recipes.gtceu.laser_engraver('grindless:' + ENGRAVE.name)
         le.itemInputs('1x ' + ENGRAVE.input)
-        le.notConsumable(ENGRAVE.lens)
+        le.itemInputs('1x ' + ENGRAVE.lens)
         le.itemOutputs('1x ' + ENGRAVE.out)
         le.EUt(ENGRAVE.eut).duration(ENGRAVE.duration)
         MI.recipes.push('grindless:laser_engraver/' + ENGRAVE.name)

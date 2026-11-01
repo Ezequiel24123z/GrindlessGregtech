@@ -29,6 +29,8 @@
     'chain_strand_single_cable', 'chain_strand_double_cable', 'chain_strand_quadruple_cable', 'chain_strand_octal_cable',
     'chain_strand_hex_cable'].map(function (n) { return 'gtceu:' + n })
   var CHAIN_CABLES = CHAIN.filter(function (id) { return /_cable$/.test(id) })
+  // nothing uses the foil or the double plate (a shaped recipe makes each), so no recipe of any type keeps them
+  var CHAIN_UNUSED = ['chain_strand_foil', 'double_chain_strand_plate'].map(function (n) { return 'gtceu:' + n })
   var CHAIN_TYPES = ['wiremill', 'extruder', 'bender', 'macerator', 'arc_furnace'].map(function (t) { return 'gtceu:' + t })
 
   // an unknown id would turn into air and match far more than meant
@@ -44,6 +46,10 @@
           removals.push({ type: type, input: id, not: NOT_OURS })
           removals.push({ type: type, output: id, not: NOT_OURS })
         })
+      })
+      CHAIN_UNUSED.filter(known).forEach(function (id) {
+        removals.push({ output: id, not: NOT_OURS })
+        removals.push({ input: id, not: NOT_OURS })
       })
       CHAIN_CABLES.filter(known).forEach(function (id) { removals.push({ type: 'gtceu:assembler', output: id, not: NOT_OURS }) })
       var found = 0

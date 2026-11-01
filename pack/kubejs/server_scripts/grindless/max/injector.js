@@ -51,7 +51,7 @@
   // GTM rows of the line: type, name, inputs (with counts), fluids, outputs, EU/t and ticks
   var GTM = [
     { type: 'lathe', name: 'turned_pellet_core', items: ['8x grindless:dense_pellet'], fluids: [],
-      outs: ['8x grindless:turned_pellet_core'], eut: 1966080, duration: 600 },
+      outs: ['8x grindless:turned_pellet_core', '1x gtceu:tungsten_steel_dust'], eut: 1966080, duration: 600 },
     { type: 'canner', name: 'stream_pellet', items: ['8x grindless:sc_jacketed_pellet', '4x gtceu:tritanium_foil'],
       fluids: [['gtceu:liquid_helium', 500]], outs: ['8x grindless:stream_pellet'], eut: OPV_VA, duration: 600 },
     // the turn casing: made at home from OpV parts, so the injector can be built (no input comes from the injector's line)
