@@ -1,4 +1,4 @@
-// priority: 6927
+// priority: 6972
 // Gregtech Grindless - names and tooltips of MAX+'s hyper assembly array, the Hyperstargate's parts and the creative-item stand-ins
 // (startup_scripts/grindless/maxplus/grid.js; package XP-H4a). Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js
 // scripts. English only.

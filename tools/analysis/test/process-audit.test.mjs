@@ -75,10 +75,10 @@ test('buckets and flowing fluids are never reported as uncraftable', () => {
 });
 
 test('baseline: only keys absent from it are new', () => {
-  const res = { findings: [{ key: 'uncraftable|a', id: 'a' }, { key: 'no_use|b', id: 'b' }] };
-  const base = { format: 'gg-process-audit-1', keys: ['uncraftable|a'] };
+  const res = { findings: [{ key: 'uncraftable|a', id: 'a' }, { key: 'no_use|b', id: 'b' }, { key: 'no_use|c', id: 'c' }] };
+  const base = { format: 'gg-process-audit-1', keys: ['uncraftable|a'], pending: ['no_use|c'] };
   assert.deepEqual(newFindings(res, base).map((f) => f.id), ['b']);
-  assert.equal(newFindings(res, { keys: ['uncraftable|a', 'no_use|b'] }).length, 0);
+  assert.equal(newFindings(res, { keys: ['uncraftable|a', 'no_use|b', 'no_use|c'] }).length, 0);
 });
 
 test('a made item nothing uses is no_use, unless emi_coverage.json lists it as a pending use of a later package', () => {
@@ -116,6 +116,19 @@ test('M-INFO: a multiblock needs an info page; special ones a page of their own'
   assert.ok(run([]).has('m_info_missing'));
   assert.ok(!run([page(['gtceu:writer_chart'])]).has('m_info_missing'));
   assert.ok(run([page(['gtceu:writer_chart', 'a:1', 'a:2', 'a:3'])]).has('m_info_generic'));
+});
+
+test('a direct_conversion generator recipe is not a trivial_step, a 1:1 fluid step is', () => {
+  const run = (type) => {
+    const dump = mkDump({
+      recipes: [{ ...gt('grindless:conv/x', type, { fins: [gf('grindless:plasma', 1)], fouts: [gf('grindless:ash', 1)] }), added: true }],
+      recipeTypes: [type],
+      fluids: ['grindless:plasma', 'grindless:ash'],
+    });
+    return auditProcesses({ dump, registry: reg({ fluids: ['grindless:plasma', 'grindless:ash'] }) }).findings.map((f) => f.key);
+  };
+  assert.ok(run('gtceu:mixer').includes('trivial_step|fluid:grindless:ash'));
+  assert.ok(!run('gtceu:direct_conversion').includes('trivial_step|fluid:grindless:ash'));
 });
 
 test('KINDS lists each finding kind once', () => {

@@ -90,7 +90,8 @@ test('rows: unique circuit 1 to 32, 64 to 256 A, 1,200 to 2,400 t, a Kerr bath, 
 
 test('rows above 2^31 EU/t: V[MAX] x amps', () => {
   const rec = run.docs.recipes.recipes.filter((x) => x.i.startsWith('grindless:hyper_assembly_array/'));
-  assert.equal(rec.length, 17);
+  // 11 grid rows, 6 creative rows and the Hyperstargate's controller row (XP-G1)
+  assert.equal(rec.length, 18);
   for (const x of rec) {
     const eut = x.j.tickInputs.eu.reduce((s, e) => s + e.content, 0);
     assert.ok(eut >= V_MAX * 64, `${x.i} EU/t ${eut}`);

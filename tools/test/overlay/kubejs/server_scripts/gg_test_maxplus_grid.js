@@ -1,4 +1,4 @@
-// priority: -5226
+// priority: -5230
 // TEST ONLY, XP-H4a (gtceu:hyper_assembly_array). Command: kubejs custom_command gg_test_maxplus_grid
 // Band ONLY: X 46784-46847, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_grid).
 //   T1 (named uncertainty: a recipe with nine distinct inputs, counts above 64 and a million-mB bath runs on the array with 81 input buses and one

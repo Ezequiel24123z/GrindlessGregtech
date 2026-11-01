@@ -1,4 +1,4 @@
-// priority: 6900
+// priority: 6924
 // Gregtech Grindless - EMI lines of the MAX+ power plumbing recipes (server_scripts/grindless/maxplus/power.js): the Kerr
 // fault-current limiter line, one line per data-keyed recipe of the older machines it runs on.
 //

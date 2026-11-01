@@ -8,7 +8,7 @@
 //   'sulfur_iodine'  gtceu:sulfur_iodine_plant  type gtceu:thermochemical_hydrogen, on Io's surface: water -> hydrogen and oxygen on Io's
 //                    heat. A 5x5 hot plate on magma, a vault room, a Bunsen reactor of PTFE inert casing and an HI column above it, and
 //                    four 3x3x3 decomposer module slots (tungstensteel); one parallel per complete module. It keeps what it makes.
-//   'pending'        spike S0-3 has not concluded: neither is registered (old saves never carry a machine the other outcome drops).
+//   'pending'        spike S0-3 has not concluded: neither is registered.
 //
 // Both specs are always built and published (G.ioOrbit) for the tests and the bench fixture; only the active machine and its type are
 // registered. A1 owns the spool and the casings; magma is vanilla's. Io comes from G.places, the orbit from G.stations.second.

@@ -863,7 +863,7 @@ Steps are the items between arrows, counted as UEV's. Every line ends in a UIV p
 
 ## Quests
 
-Short, in English, each with a small reward. They never block a recipe (rule 5). C2 builds them (`tools/quests/uiv-chapter/`, `pl-data-uiv.mjs`).
+In English, each with a proportionate reward that never skips a production line. They never block a recipe (rule 5). C2 builds them (`tools/quests/uiv-chapter/`, `pl-data-uiv.mjs`).
 
 | Part | Quests | Ends with |
 |---|---|---|
@@ -941,15 +941,15 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
   `gtceu:uiv_machine_casing` already exists; UEV's gate researches it and F1 gives it its recipe.
 - **UIV-S0-1** registers these in a second `machine_hull` create, dumps the registry delta and checks for a builder-name clash with UEV's create. If the second create clashes, the fallback widens UEV's call to `.tiers(GTValues.UEV, GTValues.UIV)` in `uev/foundation.js` (a named one-line extra in F1). The 16 A UIV hatch buffers about 4 × UEV's 2,147,483,648 EU: never an int.
-- **Id collision:** if the config were turned on later, GTM would register the same `gtceu:uiv_*` ids. The shipped `gtceu.yaml` keeps it off (*Save compatibility*).
+- **Id collision:** if the config were turned on later, GTM would register the same `gtceu:uiv_*` ids. The shipped `gtceu.yaml` keeps it off (*Registration notes*).
 
 **Startup:** `uiv/foundation.js` (F1), one file per package, `lv/wireless_energy.js` (W), `lib/parallel_hatch.js` (M1), `lib/mega.js` (read unchanged by M2), the relay seed, the launched relay seed and the ergosphere probe in `uiv/travel.js` (B1).
 **Server:** `server_scripts/grindless/uiv/*.js`; older-era rows in their own files (*Older machines*).
 **Data:** `data/gcyr/gcyr/planets/` and the solar system files UIV-S0-3 names, `tables/relay_platforms.json` (new), `tables/sunlight.json`, `tables/wireless_energy.json`, `tables/hot_cell.json`, `tables/magnet_works.json`, `tables/crystals.json`, `tables/gate.json`, `tables/fusion_mk5.json` (new), and the other older tables each contract names (*Build order*).
 
-## Save compatibility
+## Registration notes
 
-Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Technical facts from it that still hold:
+No save compatibility applies (`AGENTS.md`, Invariants). Technical facts that hold:
 
 - **New dimension ids:** `grindless:rx_j1856_orbit`, `grindless:psr_j0437_orbit`, `grindless:cygnus_x1_orbit`.
 - `highTierContent` stays off in the shipped `gtceu.yaml`: turning it on would make GTM register the same `gtceu:uiv_*` ids as ours (UIV-S0-1).
@@ -1031,7 +1031,7 @@ UEV's *Common to every package* (`docs/eras/uev.md:913-946`) applies with `uev` 
     - structure blocks wrap their component 1:1.
   - **Process steps:** each step has a real second input, fluid or byproduct, and nothing comes from nothing (`docs/quality/items.md`).
   - **Structures:** pass `structure-quality.mjs --static --check` with no baseline entry (`docs/quality/structures.md`). Gravity blocks sit on the bottom layer or on a pattern block.
-  - **Info pages:** every multiblock ships an EMI info page in en_us and es_es in the package's lang file (`docs/quality/emi.md`).
+  - **Info pages:** every multiblock ships an EMI info page in en_us in the package's lang file (`docs/quality/emi.md`).
   - **Gates:** `recipe-quality.mjs --check` and `process-audit.mjs` report nothing new for the package's ids.
 - **Tests:** T0 is `powershell -NoProfile -ExecutionPolicy Bypass -File tools\Check-Fast.ps1`. T1 is the one native test the contract names, run once in its band, on the Linux VM first (`docs/testing/`), one JVM per slot, client legs one per run.
 - **Repairs and agent:** at most 2 repairs, then escalate with the triage output, the suspected `path:line` and the attempts. The implementer (Sonnet) runs each package; Opus only for a cross-system contradiction.
@@ -1100,7 +1100,7 @@ Order:
   - ids exactly as in this file (a changed id is an escalation);
   - the `gtceu:uiv_*` ids are exactly those S0-1 recorded; UEV's registrations are untouched except the named one-line fallback.
 - **Acceptance:**
-  - every cross-package id is registered once, with `en_us` and `es_es`;
+  - every cross-package id is registered once, with `en_us` names;
   - `emi-coverage.mjs` lists every id as expected-unobtained until its package;
   - the hull recipe resolves in GTM's assembler at UEV voltage.
 - **Tests:** T0; `tools/analysis/test/uiv-foundation.test.mjs`. T1: none (the hull and hatch forming is S0-1's proof).
@@ -1117,7 +1117,7 @@ Order:
   - `tools/analysis/script_order.json`: a band for `uiv/` and one for each older file in *Older machines* that gets a row reading a UIV id;
   - `lib/stations.js` changes only if S0-4 failed.
 - **Allowed:** `pack/kubejs/data/grindless/tables/hidden_until.json`, `tools/analysis/script_order.json`, and `pack/kubejs/startup_scripts/grindless/lib/stations.js` only after a failed S0-4.
-- **References:** *Only from there, and cuts*; *Save compatibility*; UEV's F2 (`docs/eras/uev.md:1016-1031`).
+- **References:** *Only from there, and cuts*; *Registration notes*; UEV's F2 (`docs/eras/uev.md:1016-1031`).
 - **Acceptance:**
   - the mainframe appears at `uiv`, and ships in the same release as A7's recipe;
   - with S0-4 passed, there is no lib change.
@@ -1740,7 +1740,7 @@ Wave B opens after every wave A package has merged, and after UEV's B1 (the Siri
   - a v0.13.0 save;
   - the release notes.
 - **Allowed:** `tools/test/overlay/kubejs/server_scripts/gg_test_uiv_c3.js`, its zones row, and the release notes file the integrator names.
-- **References:** *Save compatibility*, *Gate to UXV*, *Power* (the gate example); pattern `gg_test_uev_c3.js`.
+- **References:** *Registration notes*, *Gate to UXV*, *Power* (the gate example); pattern `gg_test_uev_c3.js`.
 - **Depends on:** C1, C2, and the integrator's regeneration: index, `hidden_until.json`, chapters, `emi-coverage --expect`, script order.
 - **Acceptance:**
   - the gate example runs: at least 565,127,276 EU/t in (the design gives 639,106,096, with 607,150,791 into the bank) and 536,870,912 out for 60 s;

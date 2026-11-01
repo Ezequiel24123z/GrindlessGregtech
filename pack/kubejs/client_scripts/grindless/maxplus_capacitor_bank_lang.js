@@ -1,4 +1,4 @@
-// priority: 6990
+// priority: 7056
 // Gregtech Grindless - names and lines of the horizon capacitor bank and its cell (startup_scripts/grindless/maxplus/capacitor_bank.js).
 ClientEvents.lang('en_us', function (event) {
     var add = function (key, value) { event.add('grindless', key, value) }

@@ -17,7 +17,7 @@ import crypto from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { eraGroupId } from './groups.mjs';
 
-export const ERAS = ['steam', 'lv', 'mv', 'hv', 'iv', 'ev', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+export const ERAS = ['steam', 'lv', 'mv', 'hv', 'iv', 'ev', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 
 // kind -> shape and size (section 4.2); an explicit shape or size on the quest wins
 export const KINDS = {

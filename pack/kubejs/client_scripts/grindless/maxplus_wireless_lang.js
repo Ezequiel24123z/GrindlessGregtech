@@ -1,4 +1,4 @@
-// priority: 6847
+// priority: 6864
 // Gregtech Grindless - names of the MAX+ wireless energy hatches (package XP-W2; registered by startup_scripts/grindless/lv/wireless_energy.js
 // from the table's maxplusHatchAmps): gtceu:max_wireless_energy_hatch_1024a and _4096a. Coloured like the MAX hatches (bold red).
 (function () {

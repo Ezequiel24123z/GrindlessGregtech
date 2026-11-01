@@ -71,7 +71,7 @@
       check('table', false, 'global.grindless.hidden is not published (hidden.js did not load)')
       return
     }
-    check('table', H.groups.length > 0 && H.hidden.groups > 0 && H.implementedEra === 'uxv',
+    check('table', H.groups.length > 0 && H.hidden.groups > 0 && H.implementedEra === H.eras[H.eras.length - 1],
       H.groups.length + ' groups in the table, ' + H.hidden.groups + ' hidden (' + H.hidden.items.length + ' items, ' + H.hidden.fluids.length +
       ' fluids), implemented up to ' + H.implementedEra)
 

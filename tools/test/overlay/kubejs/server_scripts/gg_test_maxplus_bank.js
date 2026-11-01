@@ -1,4 +1,4 @@
-// priority: -5202
+// priority: -5200
 // TEST ONLY, XP-H5 (gtceu:horizon_capacitor_bank). Command: kubejs custom_command gg_test_maxplus_bank
 // Band ONLY: X 48192-48255, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*) and, for the second run, the same band of the Overworld
 // (zones.json row maxplus_bank). No startup overlay: the bank and its cell are part of the pack.

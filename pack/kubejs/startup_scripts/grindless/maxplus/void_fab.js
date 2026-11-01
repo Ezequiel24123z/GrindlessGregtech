@@ -1,4 +1,4 @@
-// priority: -5659
+// priority: -5669
 // MAX+ machine 10, the void crystal fab (docs/eras/maxplus.md "Machines" 10; package XP-B4): the multiblock and its recipe type. Items and the casing
 // are XP-F1's (maxplus/foundation.js); the recipes, with line P14's older-machine rows, are in server_scripts/grindless/maxplus/void_fab.js.
 // Names: client_scripts/grindless/maxplus_void_fab_lang.js.

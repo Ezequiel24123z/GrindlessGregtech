@@ -264,7 +264,7 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are final
 - Recipes are LuV ones (30,720 EU/t) unless a composed GTM stage sets another figure.
 - Structures go through the pattern helper and are at most 16 high.
 - Parts are ME-ready.
-- Names go in `en_us` and `es_es`.
+- Names go in `en_us`.
 - Site rules are `.dimension(...)` allowlists, and patterns on Io, Europa and Io orbit carry radiation vault casings.
 - Machines with a run-start check close it with `lib/fresh_run.js` in `afterWorking`.
 
@@ -334,7 +334,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
 
 ### 1. Helium refrigerator: `gtceu:helium_refrigerator`, type `gtceu:closed_loop_cooling` (Earth)
 
-- **What it gains:** helium cooling in a closed loop. It turns a wall of raw quantity (rule 2) into energy.
+- **What it gains:** helium cooling in a closed loop. It turns a wall of one raw input (rule 2) into energy.
   - GTM's hot ingots take 500 mB of Liquid Helium each and give back 250 mB of helium gas, so half is lost every time.
   - At LuV, about 60 recipes do that: HSS-S, HSS-E, naquadah, enriched naquadah, trinium, naquadah alloy, ITBTC, SmFeAsO, samarium, europium and others.
   - One Mk1's trinium with GTM's coil (about 1,032 ingots) alone would lose about 258,000 mB, the helium of about 16,500 regolith dust in the Moon's oven (250 mB per 16). With the HTS coil (43 ingots) it is far less, but every LuV hot ingot still loses 250 mB.

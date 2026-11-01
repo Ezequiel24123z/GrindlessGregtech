@@ -1,4 +1,4 @@
-// priority: 6858
+// priority: 6876
 // Gregtech Grindless - names and tooltips of MAX+'s void crystal fab (startup_scripts/grindless/maxplus/void_fab.js; package XP-B4):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>   the EMI line of each keyed row of the package: the fab's row and the P14 step on the femto writer

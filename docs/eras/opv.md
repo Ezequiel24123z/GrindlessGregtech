@@ -877,7 +877,7 @@ The guideline asks for about x1.5 UXV's crossings, which is about 267 (rule 7). 
 
 ## Quests
 
-C2 builds `tools/quests/opv-chapter/` and `pl-data-opv.mjs`. The chapter follows the route and has short English quests with small rewards, and it never blocks a recipe (rule 5).
+C2 builds `tools/quests/opv-chapter/` and `pl-data-opv.mjs`. The chapter follows the route and has English quests with proportionate rewards that never skip a production line, and it never blocks a recipe (rule 5).
 
 | Part | Quests | Ends with |
 |---|---|---|
@@ -992,9 +992,9 @@ S0-1 records the full OpV and MAX id list.
 - **Server:** `server_scripts/grindless/opv/*.js`. Older rows go where DECISIONS.md:508 puts them.
 - **Data:** the two places (`data/grindless/gcyr/planets/`, `planets.json`, `orbits.json`); two rows of `relay_platforms.json`; `tables/opv_*.json`.
 
-## Save compatibility
+## Registration notes
 
-Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Design facts from it that still hold, and one cleanup candidate:
+No save compatibility applies (`AGENTS.md`, Invariants). Design facts that hold, and one cleanup candidate:
 
 - **New dimension ids:** `grindless:sgr1806_orbit` and `grindless:terzan5_core`.
 - **New rows on older machines** only add recipes.
@@ -1193,7 +1193,7 @@ Order: S0-1 and S0-2 first (they gate F1 and G1), then 3, 7, 8, then the rest. T
   - the materials and fluids: `gtceu:chain_strand` (ingot, wire, single cable; cable at V[OpV], S0-7), `grindless:superfluid_helium_3`, `jet_proton_beam`, `hot_pair_plasma`;
   - the places: `grindless:sgr1806_orbit` and `grindless:terzan5_core` (GCYR tier 13, S0-3, S0-8), their two rows in `tables/relay_platforms.json` (UXV-B1 pattern: source `grindless:cygnus_x1_orbit`), and the substages `opv-sgr` and `opv-terzan5`;
   - the casing blocks `grindless:field_frozen_casing`, `annihilation_shield_casing`, `neg_xhv_casing`;
-  - every cross-package item id, with names in en_us and es_es: `bulge_relay_seed`, `launched_bulge_seed`, `chain_lamina_stack`, `ni_chain_slab`, `chain_field_coil`, `chain_composite_rod`, `chain_composite_rotor`, `superfluid_he3_seal`, `chain_mesh_belt`, `opv_harmonic_drive`, `th229_lasing_crystal`, `hpge_compton_crystal`, `si28_soi_wafer`, `inas_al_wafer`, `gated_2deg_wafer`, `tetron_die`, `cryo_cmos_die`, `nb_tsv_interposer`, `cryo_optical_link`, `hemt_amplifier`, `gan_mmic`, `sdd_die`, `field_frozen_plate`, `aln_power_die`, `tetron_array`, `gamma_multilayer_mirror`, `laue_lens`, `be_beam_window`, `ir_spallation_target`, `spent_ir_target`, `li6_hydride_shield`, `electron_cooler`, `stochastic_cooling_pickup`, `pb208_beam_cell`, `octupole_trap_magnet`, `levitation_trap_cell`, `lyman_alpha_laser`, `gamma_absorber_tile`, `tpv_panel`, `acmf_pellet`, `seed_positron_plasma`, `dense_positron_cell`, `cold_antiproton_cell`, `antiproton_stack_opv`, `antihydrogen_ice_cell`, `strangelet_seed`, `stable_exotic_matter`, `kugelblitz_core`, `hawking_drive`, `xnav_unit`, `node_power_transmitter`, `bulge_debris`, `metal_feedstock`, `silicate_debris_fraction`, `si_alloy_powder`, `cluster_sinter_casing`, `collector_node`, `spent_collector_node`, `deployed_node_pack`, `probe_seed`, `vitamin_kit`, `pathfinder_probe`, `launched_pathfinder`, `pathfinder_probe_core`, `bulge_light_census`, `superheavy_census_iv`, `element_124_recoil`, `element_126_recoil`, `chain_strand_repeater`, `sgr_a_chart`.
+  - every cross-package item id, with names in en_us: `bulge_relay_seed`, `launched_bulge_seed`, `chain_lamina_stack`, `ni_chain_slab`, `chain_field_coil`, `chain_composite_rod`, `chain_composite_rotor`, `superfluid_he3_seal`, `chain_mesh_belt`, `opv_harmonic_drive`, `th229_lasing_crystal`, `hpge_compton_crystal`, `si28_soi_wafer`, `inas_al_wafer`, `gated_2deg_wafer`, `tetron_die`, `cryo_cmos_die`, `nb_tsv_interposer`, `cryo_optical_link`, `hemt_amplifier`, `gan_mmic`, `sdd_die`, `field_frozen_plate`, `aln_power_die`, `tetron_array`, `gamma_multilayer_mirror`, `laue_lens`, `be_beam_window`, `ir_spallation_target`, `spent_ir_target`, `li6_hydride_shield`, `electron_cooler`, `stochastic_cooling_pickup`, `pb208_beam_cell`, `octupole_trap_magnet`, `levitation_trap_cell`, `lyman_alpha_laser`, `gamma_absorber_tile`, `tpv_panel`, `acmf_pellet`, `seed_positron_plasma`, `dense_positron_cell`, `cold_antiproton_cell`, `antiproton_stack_opv`, `antihydrogen_ice_cell`, `strangelet_seed`, `stable_exotic_matter`, `kugelblitz_core`, `hawking_drive`, `xnav_unit`, `node_power_transmitter`, `bulge_debris`, `metal_feedstock`, `silicate_debris_fraction`, `si_alloy_powder`, `cluster_sinter_casing`, `collector_node`, `spent_collector_node`, `deployed_node_pack`, `probe_seed`, `vitamin_kit`, `pathfinder_probe`, `launched_pathfinder`, `pathfinder_probe_core`, `bulge_light_census`, `superheavy_census_iv`, `element_124_recoil`, `element_126_recoil`, `chain_strand_repeater`, `sgr_a_chart`.
 - **`<name>`:** `foundation`.
 - **Allowed (extra):** `tables/opv_ids.json`; `tables/relay_platforms.json` (2 rows); the GCYR planet datapack files for the two places (as UXV-F1); in the HT fallback only, `uev/foundation.js:181, :194` and `startup_scripts/grindless/opv/opv_components.js`.
 - **References:** *Places and site rules*; *Bridges*; uxv.md F1 (:1094); DECISIONS.md:498 (relay), :526 (duplicate builder key); S0-1, -3, -7, -8.
@@ -1553,7 +1553,6 @@ Every multiblock contract below shares this acceptance: the controller follows t
 #### C3. Integration and release (integrator)
 
 - **Objective:**
-  - reopen a v0.15.0 save (*Save compatibility*);
   - T2 batch, then T3 (client legs one per run);
   - `hidden_until.json` final; STATUS, DECISIONS and CREDITS lines; index; v0.16.0.
 - **Depends on:** C1, C2.
