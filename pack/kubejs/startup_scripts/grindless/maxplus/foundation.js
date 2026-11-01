@@ -157,7 +157,7 @@
           .rotationState(RotationState.ALL)
           .abilities(PartAbility.INPUT_ENERGY)
         builder.modelPropertyBool(GTModelProperties.IS_FORMED, false)
-        builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('gtceu', 'block/machines/energy_hatch.input'))
+        builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('grindless', 'block/machines/maxplus/energy_hatch_1024a'))
       })
   })
 })()

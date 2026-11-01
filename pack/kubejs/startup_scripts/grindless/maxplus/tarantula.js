@@ -46,7 +46,7 @@
   MT.burner = {
     name: 'nickel_56_burner', machine: 'gtceu:nickel_56_burner', type: 'nickel_56_burner', dataKey: 'grindless_nickel_56_burner',
     lang: 'Nickel-56 Burner', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, casing: BURNER_CASING,
-    texture: 'gtceu:block/casings/solid/machine_casing_atomic', overlay: 'grindless:block/multiblock/nickel_56_burner',
+    texture: 'gtceu:block/casings/gcym/atomic_casing', overlay: 'grindless:block/multiblock/nickel_56_burner',
     width: 15, height: 9, depth: 15, generator: true,
     pal: { F: BURNER_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil' },
     parts: function () {
