@@ -146,16 +146,18 @@ i56_slug`, `ime_ash` |
 
 | Row kind | EU/t | How it is fed |
 |---|---|---|
-| Machine rows (lines, components) | ≤ VA[MAX] | two MAX 4 A hatches (as MAX) |
-| Stage I big rows (refinery, slingshot, gate c16) | V[MAX] x 16-64 A (2^35-2^37) | one 1,024 A MAX+ hatch (`gtceu:max_maxplus_energy_hatch_1024a`, XP-F1) in our multiblocks; a gate row takes what the warp gate's pattern accepts |
-| Stage II-III rows (condensate assembler, blender, crystal furnace, creative items) | V[MAX] x 256 A (2^39) | one 1,024 A MAX+ hatch |
-| Hyperstargate dial | V[MAX] x 4,096 A (2^43 = 8,796,093,022,208 EU/t) for 1,200 t = 1.06e16 EU | four 1,024 A hatches, fed by wireless case 14 and the horizon capacitor bank (the mechanism is XP-W2's and XP-G1's) |
+| Machine rows (lines, components) | ≤ VA[MAX] | two MAX 4 A hatches (as MAX; the wireless ones draw on the network) |
+| Stage I big rows (refinery, slingshot, gate c16) | V[MAX] x 16-64 A (2^35-2^37) | one 1,024 A hatch in our multiblocks: the wireless MAX+ one (`gtceu:max_wireless_energy_hatch_1024a`, XP-W2) from the network, or XP-F1's `gtceu:max_maxplus_energy_hatch_1024a` on a cable; a gate row takes what the warp gate's pattern accepts |
+| Stage II-III rows (condensate assembler, blender, crystal furnace, creative items) | V[MAX] x 256 A (2^39) | one 1,024 A hatch, as above |
+| Hyperstargate dial | V[MAX] x 4,096 A (2^43 = 8,796,093,022,208 EU/t) for 1,200 t = 10,555,311,626,649,600 EU (1.06e16) | one 4,096 A wireless MAX+ hatch (`gtceu:max_wireless_energy_hatch_4096a`, XP-W2) in the base's one energy cell, drawing on the network's store, which the horizon capacitor bank holds (machine 15; S0-11) |
 
-**As built (batch 7):** GTM's 64 A substation hatches carry `SUBSTATION_INPUT_ENERGY`, which a multiblock's `energy_input` slot (`INPUT_ENERGY`) does not take: they serve GTM's power substation only. MAX+ machines therefore run on the 1,024 A hatch (S0-2), and the substation rows below describe the spike, not the build.
+**One feeding path (XP-D1).** Every MAX+ row takes its EU through an `energy_input` cell (`INPUT_ENERGY`). GTM's 64 A substation hatches carry `SUBSTATION_INPUT_ENERGY`, which that cell does not take (batch 7): they serve GTM's power substation only and stay ingredients. The MAX+ feed is the pack's wireless network (case 14): XP-W2 registers wireless MAX+ energy hatches at 1,024 and 4,096 A, tier 14 only, from the `maxplusCaps` rows of `tables/wireless_energy.json` (no MAX+ row needs the 2,048 A row), with the wireless hatch builder of `lv/wireless_energy.js` (GTM's `EnergyHatchPartMachine`, `INPUT_ENERGY`). Every MAX+ multiblock's energy cell takes them, and the settlement fills them like any MAX wireless hatch, while the network's tier is 14 (its weakest cell a MAX one).
 
-A 64 A substation hatch buffers V x 16 x 64 = 2^41 EU, a long (EnergyHatchPartMachine.java:54-60). The multiblock's total input is the sum of its hatches; whether GTM's recipe check accepts EU/t far above V[MAX] on 64 hatches is S0-1 (MAX's c3 at 2^35 on two 16 A hatches is the as-built precedent, `server_scripts/grindless/max/shell.js:38`). **Fallback:** the dial at 2^39 on four hatches for 19,200 t, the same energy; open question 6 asks whether that time is acceptable, since rule 2 forbids inflating time in place of cost (here time grows only because power cannot).
+**The dial's hatch.** One 4,096 A wireless hatch buffers V x 16 x 4,096 = 2^47 EU, 16 ticks of the dial. Every settlement (10 ticks) tops it up by at most V x 4,096 x 10 = 87,960,930,222,080 EU (the 4,096 A `maxplusCaps` row), exactly what the dial draws in 10 ticks, so a full hatch swings between 16 and 6 ticks of charge for as long as the store lasts. Four 1,024 A hatches carry the same 2^43, but GTM draws a row's EU/t from its hatches in order and each refills by at most its own cap, so in steady state they keep 1.5 ticks in hand against the single hatch's 6, in four cells instead of one. S0-11 (`docs/research/maxplus-s0.md`) proved the path on the pack's own settlement: one 4,096 A wireless hatch, registered as XP-W2 will, in an `energy_input` cell ran a 2^43 EU/t row for all 60 of its ticks at exactly 2^43 a tick; the steady settlements handed out exactly the cap, the hatch never read below 6 ticks (52,776,558,133,248 EU), and store, hatch, draws and settlements balanced to the EU as exact longs.
 
-**Custom high-amp hatches** (256 A, 1,024 A) would need a KubeJS part-machine builder for `EnergyHatchPartMachine` with a new amperage; S0-2 tests it. If it works, XP-F1 registers `grindless:maxplus_energy_hatch_1024a` and the dial needs four, not 64.
+**The store.** When the dial starts, the network must hold its 1,200 ticks: 10,555,311,626,649,600 EU, more than 2^53 = 9,007,199,254,740,992, the largest whole number a JS double holds exactly. The settlement keeps its store as a double (`server_scripts/grindless/lv/wireless_energy.js:208-214`, `:406-457`) and the block list checks its long fields against 2^53 - 1 (`server_scripts/grindless/lib/wireless_registry.js:33`, `:52`), so XP-W2 makes both exact: the store becomes a `java.math.BigInteger` (GTNH's wireless network keeps its store that way, `WirelessNetworkManager`; GTM's power substation totals its bank with one), written back with `putLong(big.longValue())`, which S0-11 showed keeps 2^53 + 1 exact where `Number(getLong(...))` rounds it to 2^53. Amounts per block stay doubles: the largest, a 4,096 A hatch's buffer, is 2^47. The horizon capacitor bank (machine 15) holds the dial's charge, and the dial starts only on a full one (*The Hyperstargate*, the dial row).
+
+**No fallback.** The 2^39 x 19,200 t fallback of open question 6 is retired: power, not cost, limits the dial, and it limits only how often the gate can dial (the bank's recharge, *Power*), never the dial's 1,200 ticks.
 
 **Hull.** MAX+ machines use GTM's `gtceu:max_machine_hull` with a MAX+ casing (`grindless:horizon_machine_casing`: MAX casing + 4 `horizon_compressed_plate` + 2 `gtceu:kerr_strand_single_cable`). There is no MAX+ hull id: GTM's builder key is the base id and a second hull at the same tier crashes the boot (DECISIONS.md:526).
 
@@ -245,7 +247,7 @@ i56_slug` + `ime_ash`; V[MAX] x 16 A, 1,200 t; liner (P21) worn 1/16. **Byproduc
 
 ### 15. Horizon capacitor bank (Sgr A\* orbit)
 
-**Gains.** The dial needs 1.06e16 EU in 1,200 ticks; case 14 holds caps of V x A x 10 (max.md *Power*), far below that. The bank is a superconducting magnetic storage ring of `horizon_capacitor` (T14) blocks, discharged into the dial through the base's 64 hatches. Storage only: it makes no energy (rule 8). **Structure.** 25 x 5 x 25 ring of 40 capacitors. **Crossings.** T14.
+**Gains.** The dial draws 10,555,311,626,649,600 EU (1,200 ticks at 2^43) through one wireless hatch, and the network must hold all of it when the dial starts: the bank holds it. It is a superconducting magnetic storage ring of `grindless:horizon_capacitor` (T14) blocks, each 2^48 = 281,474,976,710,656 EU *(tune)*: 32 ticks of the dial, about 4.4 MAX SMES cells in one slot. Like the Wireless Energy Tower it is a network store, not a machine with hatches: formed at Sgr A\* orbit (it counts nowhere else: the gate's site), its capacitors add their capacity to the network at tier 14 (MAX voltage, so it never lowers the network's tier); EU comes in from the network's generators, 5% lost on the way in, and leaves through wireless hatches. Horizon capacitors fit no tower, and towers do not count for the dial: the dial starts only when the formed banks have at least one dial of capacity and the store holds the dial's charge (*The Hyperstargate*, the dial row). Storage only: it makes no energy (rule 8; *Power* says what charges it and how fast). **Structure.** 25 x 5 x 25 ring of 40 capacitor slots *(tune)*, each a capacitor or the casing (an empty slot, as in the tower). **Capacity.** 40 x 2^48 = 11,258,999,068,426,240 EU = 1,280 ticks of the dial: one dial and 80 ticks (6.7%) for the rest of the base while it runs. **Crossings.** T14 (the toroids) and P18 (the fault-current limiters), through the capacitor's grid craft.
 
 ### 16. Hyper assembly array (home)
 
@@ -282,7 +284,7 @@ Rows are added to each machine's own table by the named package, at a circuit re
 
 ## Power
 
-Generous, never free (rule 8). MAX+ needs a sustained supply in the 2^37-2^39 EU/t range and one 1.06e16 EU discharge.
+Generous, never free (rule 8). MAX+ needs a sustained supply in the 2^37-2^39 EU/t range and, for each dial, one 1.06e16 EU discharge held in the horizon capacitor bank.
 
 | Generator | Place | Fuel | Output | Balance |
 |---|---|---|---|---|
@@ -290,7 +292,13 @@ Generous, never free (rule 8). MAX+ needs a sustained supply in the 2^37-2^39 EU
 | Primordial fusion torus | Magellanic Stream | primordial D + pristine He-3 (P9, P10) | 2^34 EU/t x 2,400 t | ~2.0x *(tune)* |
 | MAX's Sgr A\* generators (winch, feeder, BZ, Penrose, shell vent) | Sgr A\* | as max.md *Power* | 2^29-2^30 each, in parallel | as MAX |
 
-Output above 2^30 per generator is S0-4 (MAX kept every generator at 2^30 through OpV dynamos). Fallback: several generators at 2^30 each. Everything reaches the gate through wireless case 14 and the capacitor bank. `gtceu:creative_energy` is never a source: it is an ingredient and cannot be placed (*Creative items*).
+**Output.** A generator multiblock emits above 2^30, up to its dynamo hatch's V x A (S0-4): the burner and the torus at 2^34 each take one MAX 16 A dynamo hatch (V x A = 2^35), and the wireless one (`gtceu:max_wireless_dynamo_hatch_16a`, case 14) puts that straight into the network.
+
+**One path, generator to gate.** Generators → MAX wireless dynamo hatches → the network's store, 5% lost on the way in (`tables/wireless_energy.json` `loss`, 19/20) → held by the horizon capacitor bank (machine 15) → one 4,096 A wireless MAX+ hatch → the dial (*Voltages, hull, hatches and controllers*). Storage makes nothing: every EU the dial spends was generated first, and a twentieth more was lost on the way in.
+
+**One dial's charge.** 10,555,311,626,649,600 EU in the store takes 10,555,311,626,649,600 x 20/19 ≈ 1.111e16 EU generated: about 90 nickel-56 casks through the burner (c1 then c2, 1.237e14 EU each) or 270 torus runs (4.123e13 EU each; 270,000 mB each of primordial deuterium and pristine helium-3) *(tune with the balance)*. Filling an empty bank takes about 1.185e16 EU generated.
+
+**Recharge time.** Power, not cost, sets how often the gate can dial. The dial spends in 1,200 ticks what a 2^39 EU/t plant (32 primordial fusion tori) makes in 19,200 ticks; with the loss, that plant refills the bank for one dial in about 20,211 ticks (16.8 minutes), a 2^40 plant in about 10,105 ticks (8.4 minutes), one burner alone (1.5 x 2^33 EU/t on average) in about 12 hours. The dial's own 1,200 ticks never stretch, and no recipe time is inflated. MAX's Sgr A\* generators add to the same store. `gtceu:creative_energy` is never a source: it is an ingredient and cannot be placed (*Creative items*).
 
 ## AE2
 
@@ -421,7 +429,7 @@ Recomputed from the *Lines* table by machine name (RF-7A; the integrator re-sums
 
 **Model.** The GTNH Stargate process (docs/research/gtnh-stargate.md sections 2-5; ideas and numbers only, section 8) at about 10x in crafts, parts and recipe types (section 7.1; DECISIONS.md:704), never in recipe time, on MAX amperage only. GTNH gives the shape: grid crafts fed by a condensate assembler, a plasma mixer and a crystal furnace, on top of superdense plates and exotic matter. Every step here is a GTM recipe on one of our multiblocks, fed by AE2: automatable and scalable.
 
-**Structure** (Sgr A\* orbit, about 45 x 45 x 9 *(tune)*, needs MAX_ROWS 64 as the shell; S0-8): a vertical ring of 160 `hyperstargate_ring_block` and 9 `hyperstargate_chevron_block`; the base below it with the 64 substation hatches, 4 `hyperstargate_power_unit` and the `horizon_iris`; the controller at the base holds one `horizon_lock` as its dial. The horizon capacitor bank (machine 15) stands beside it.
+**Structure** (Sgr A\* orbit, about 45 x 45 x 9 *(tune)*, needs MAX_ROWS 64 as the shell; S0-8): a vertical ring of 160 `hyperstargate_ring_block` and 9 `hyperstargate_chevron_block`; the base below it with one energy cell (`energy_input`, exactly one) for the 4,096 A wireless MAX+ hatch, 4 `hyperstargate_power_unit` and the `horizon_iris`; the controller at the base holds one `horizon_lock` as its dial. The horizon capacitor bank (machine 15) stands beside it at Sgr A\* orbit and holds the dial's charge on the network.
 
 **The grid layer** (hyper assembly array; counts from the structure and recipe multipliers *(tune)*):
 
@@ -434,7 +442,7 @@ Recomputed from the *Lines* table by machine name (RF-7A; the integrator re-sums
 | Horizon iris | 1 | — | 1 | 240 blades, 12 shielding, 12 condensate field cell |
 | Horizon capacitor | 40 (bank) | — | 40 | 4 `cold_kerr_toroid` (T14), 4 field generator, 2 `cold_kerr_fcl` (P18), 1 `ae2:creative_energy_cell` |
 | Power unit | 4 | — | 4 | 16 ring block, 8 resonance chamber (T13), 10 conduit x 64, 1 `gtceu:creative_energy` |
-| Base | 1 | — | 1 | 27 chevron blocks, 144 ring blocks, 36 upgrades, 4 alignment matrix (T12), 1 `gtceu:creative_chest`, 1 `gtceu:creative_tank`, 1 MEGA 256M item cell, 1 MEGA 256M fluid cell, 64 MAX 64 A substation hatches |
+| Base | 1 | — | 1 | 27 chevron blocks, 144 ring blocks, 36 upgrades, 4 alignment matrix (T12), 1 `gtceu:creative_chest`, 1 `gtceu:creative_tank`, 1 MEGA 256M item cell, 1 MEGA 256M fluid cell, 4 `gtceu:max_maxplus_energy_hatch_1024a` (the power units' couplers: the 4,096 A the 64 substation hatches carried, at MAX+ cost) |
 | Controller | 1 | — | 1 | 8 ring block, 1 `horizon_controller_crystal`, 1 `gtceu:creative_computation_provider`, 16 `horizon_processor`, 1 interface |
 | Interface | — | controller 1 | 1 | 8 ring block, 1 `gtceu:creative_data_access_hatch`, 4 `horizon_comm_terminal` (T17), 64 `pattern_memory_unit` |
 | **Total** | | | **1,212** | GTNH: about 140 (section 5); x8.7 |
@@ -458,9 +466,11 @@ Recomputed from the *Lines* table by machine name (RF-7A; the integrator re-sums
 
 **Infrastructure** (GTNH section 4 mapping, section 7.3): AE2 extreme crafting → the hyper assembly array; BEC assembler → condensate assembler (no nanite or slowdown system); transcendent plasma mixer → multi-plasma blender; crystal blast furnace → horizon crystal furnace (no two-week runs); BHC superdense plates → bound-matter press; Eye of Harmony and Godforge matter → condensate refinery and the MAX+ places; creative capacitor bank → *Creative items*.
 
-**Power and time.** Building rows run at 2^35-2^39 EU/t for 600-2,400 t. The dial row: V[MAX] x 4,096 A (2^43) for 1,200 t = 1.06e16 EU, about 256 times MAX's last recipe, from the capacitor bank and case 14. Time is never the cost: with parallels on the Hyperfactory and several condensate assemblers, the critical path is set by condensate output and AE2 throughput, not by tick counts.
+**Power and time.** Building rows run at 2^35-2^39 EU/t for 600-2,400 t. The dial row: V[MAX] x 4,096 A (2^43) for 1,200 t = 10,555,311,626,649,600 EU (1.06e16), about 256 times MAX's last recipe, through one 4,096 A wireless hatch from the network's store, which the horizon capacitor bank holds; a 2^39 EU/t plant recharges it for the next dial in about 20,211 ticks (*Power*). Time is never the cost: with parallels on the Hyperfactory and several condensate assemblers, the critical path is set by condensate output and AE2 throughput, not by tick counts.
 
 **The dial row.** Controller c1: 1 `genome_archive` (MAX gene ark: the one thing that crosses with the player) + 1 `cloud_phase_map` (MAX machine 11) + 16 `horizon_phase_lock` + 64 `jacketed_condensate_cell` + the kept `horizon_lock` → the gate opens for 1,200 ticks and outputs `spent_dial_charge` (→ refinery recharge row). Repeatable: each opening needs a new archive and charge, so a second player or a second crossing pays again.
+
+**The dial's power (XP-G1).** The row runs at `GTValues.V[GTValues.MAX] * 4096` EU/t (a long) on the 4,096 A wireless hatch, as written: no overclock, no parallels (IDENTITY). A run-start check (the `ev/cryogenic_plant.js` pattern with `lib/fresh_run.js`) lets it start only when the formed horizon capacitor banks on the network have at least 1,200 x 2^43 EU of capacity and the store holds 1,200 x 2^43 EU less what the hatch already holds, so a dial never starts on a charge it cannot finish. Other draws on the network during its 1,200 ticks come out of the same store; the bank's 80 spare ticks are their margin.
 
 ## Quests
 
