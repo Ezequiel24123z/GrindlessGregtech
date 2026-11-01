@@ -328,6 +328,6 @@
         Text.translate('grindless.machine.hyperstargate.tooltip.1'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + TYPE))
       ])
-      .workableCasingModel('grindless:block/maxplus/horizon_machine_casing', 'grindless:block/multiblock/positronium_condensate_lab')
+      .workableCasingModel('grindless:block/maxplus/horizon_machine_casing', 'grindless:block/multiblock/hyperstargate')
   })
 })()

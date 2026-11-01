@@ -18,4 +18,8 @@ ClientEvents.lang('en_us', function (e) {
   L('gtceu.recipe.grindless_hyper_assembly_array.hyperstargate', 'The Hyperstargate controller.')
   L('gtceu.recipe.grindless_hyperstargate_dial.dial', 'One dial: the lock is kept, the cells are spent.')
   L('gtceu.recipe.grindless_condensate_refinery.recharge_dial_charge', 'Sixteen of the 64 cells are lost to the dial.')
+  L('emi.grindless.info.hyperstargate_locked_chevron.0', 'A structure block of the Hyperstargate. Nine locked chevrons are set into its ring of 160 cells: three on the top edge and three down each side. Made in the hyper assembly array.')
+  L('emi.grindless.info.hyperstargate_power_unit.0', 'A structure block of the Hyperstargate. Four power units stand in the base row on the ring\'s plane, two on each side of the iris. Made in the hyper assembly array.')
+  L('emi.grindless.info.horizon_iris.0', 'A structure block of the Hyperstargate. One iris sits in the base row at the foot of the ring, under the middle of its plane. Made in the hyper assembly array.')
+  L('emi.grindless.info.hyperstargate_base.0', 'A structure block of the Hyperstargate. One base block sits in the base row next to the iris, on the controller\'s side. Made in the hyper assembly array.')
 })
