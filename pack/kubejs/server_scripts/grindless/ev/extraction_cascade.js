@@ -401,7 +401,7 @@
     {
       name: 'y_ba_cu_raffinate', mode: 'max', circuit: 3,
       itemsIn: [{ id: 'grindless:bioleached_re_liquor', count: 4 }],
-      fluidsIn: [{ id: 'gtceu:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }, { id: HCL, amount: 1000 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }, { id: HCL, amount: 1000 }],
       itemsOut: [{ id: 'grindless:y_ba_cu_raffinate', count: 4 }],
       fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: DILUTED_HCL, amount: 2000 }],
       eut: 1920, duration: 100
@@ -410,7 +410,7 @@
     {
       name: 'er_ho_oxide_er_rich', mode: 'max', circuit: 4,
       itemsIn: [{ id: 'grindless:er_rich_fraction', count: 8 }],
-      fluidsIn: [{ id: HCL, amount: 3000 }, { id: 'gtceu:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      fluidsIn: [{ id: HCL, amount: 3000 }, { id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
       itemsOut: [{ id: 'grindless:er_ho_oxide', count: 4 }],
       fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: DILUTED_HCL, amount: 4000 }],
       eut: 1920, duration: 100
