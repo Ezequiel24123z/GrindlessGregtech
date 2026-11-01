@@ -250,28 +250,32 @@
       event.recipes.gtceu.assembler('grindless:mercury_vein_drill')
         .itemInputs('gtceu:iv_machine_hull', 'gtceu:ev_vein_drill', '2x gtceu:iv_electric_motor', 'gtceu:iv_electric_pump',
           '4x #gtceu:circuits/iv', '4x #forge:plates/tungsten_steel', '2x grindless:tungsten_steel_drill_bit', '2x grindless:platinum_electrode')
-        .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+        .itemInputs('2x gtceu:soldering_alloy_ingot')
+        .inputFluids(Fluid.of('gtceu:lubricant', 500))
         .itemOutputs(D.machine)
         .EUt(1920).duration(600)
 
       event.recipes.gtceu.assembler('grindless:mercury_solar_works')
         .itemInputs('gtceu:iv_machine_hull', 'gtceu:heliostat_tower', 'gtceu:iv_electric_furnace', 'gtceu:iv_assembler', '4x #gtceu:circuits/iv',
           '4x grindless:heliostat_mirror', '2x grindless:zircaloy_cladding_tube')
-        .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+        .itemInputs('2x gtceu:soldering_alloy_ingot')
+        .inputFluids(Fluid.of('gtceu:lubricant', 500))
         .itemOutputs(M.works.machine)
         .EUt(1920).duration(600)
 
       event.recipes.gtceu.assembler('grindless:mercury_solar_field')
         .itemInputs('2x ' + PANEL, 'gtceu:iv_machine_hull', '4x #gtceu:circuits/iv', 'gtceu:lunar_solar_array', '2x ' + TS_FRAME,
           'gtceu:platinum_single_cable', '2x grindless:heliostat_mirror')
-        .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+        .itemInputs('2x gtceu:soldering_alloy_ingot')
+        .inputFluids(Fluid.of('gtceu:lubricant', 500))
         .itemOutputs(M.field.machine)
         .EUt(1920).duration(600)
 
       event.recipes.gtceu.assembler('grindless:interferometer')
         .itemInputs('2x ' + TS_FRAME, 'gtceu:iv_emitter', 'gtceu:iv_sensor', 'gtceu:iv_machine_hull', '4x #gtceu:circuits/iv', 'gtceu:deep_space_antenna',
           '2x grindless:night_sky_radiator', '2x grindless:sintered_regolith')
-        .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+        .itemInputs('2x gtceu:soldering_alloy_ingot')
+        .inputFluids(Fluid.of('gtceu:lubricant', 500))
         .itemOutputs(M.interferometer.machine)
         .EUt(1920).duration(600)    } catch (e) {
       console.error(LOG + 'Mercury controller or bit recipes failed: ' + e)

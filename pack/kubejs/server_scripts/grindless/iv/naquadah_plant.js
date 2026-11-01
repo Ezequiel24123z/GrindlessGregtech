@@ -422,7 +422,8 @@
     }
     event.recipes.gtceu.assembler('grindless:naquadah_plant')
       .itemInputs(HULL, REACTOR, MIXER, CENTRIFUGE, '2x ' + PUMP, '4x #gtceu:circuits/iv', '2x grindless:ion_exchange_resin', '2x grindless:contact_catalyst')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:sulfuric_acid', 1000))
+      .itemInputs('2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:sulfuric_acid', 1000))
       .itemOutputs(CONTROLLER)
       .EUt(1920).duration(600)
   }

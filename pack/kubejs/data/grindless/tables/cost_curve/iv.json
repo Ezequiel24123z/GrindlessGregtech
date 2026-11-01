@@ -1,8 +1,8 @@
 {
   "era": "iv",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 3.191,
+  "fluid": 3.191,
   "keys": [
     "extendedfeatures:iv_universal_circuit",
     "gtceu:crystal_processor",
@@ -40,7 +40,22 @@
     "gtceu:venus_heat_engine"
   ],
   "include": [],
-  "exclude": [],
-  "remove": [],
+  "exclude": [
+    "gtnn:component_assembly_line/*_iv",
+    "gtnn:component_assembly_line/*_iv_*"
+  ],
+  "remove": [
+    "gtceu:shaped/conveyor_module_iv_silicone_rubber",
+    "gtceu:shaped/conveyor_module_iv_styrene_butadiene_rubber",
+    "gtceu:shaped/electric_motor_iv",
+    "gtceu:shaped/electric_piston_iv",
+    "gtceu:shaped/electric_pump_iv_silicone_rubber",
+    "gtceu:shaped/electric_pump_iv_styrene_butadiene_rubber",
+    "gtceu:shaped/emitter_iv",
+    "gtceu:shaped/field_generator_iv",
+    "gtceu:shaped/iv_machine_hull",
+    "gtceu:shaped/robot_arm_iv",
+    "gtceu:shaped/sensor_iv"
+  ],
   "override": {}
 }

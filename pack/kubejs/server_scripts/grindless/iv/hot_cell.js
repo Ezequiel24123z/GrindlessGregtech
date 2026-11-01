@@ -298,8 +298,8 @@
       return
     }
     event.recipes.gtceu.assembler('grindless:hot_cell')
-      .itemInputs(HULL, CENTRIFUGE, REACTOR, ELECTROLYZER, '2x ' + ARM, '4x #gtceu:circuits/iv', '2x grindless:ion_exchange_resin', '2x grindless:zircaloy_cladding_tube')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:distilled_water', 4000))
+      .itemInputs(HULL, CENTRIFUGE, REACTOR, ELECTROLYZER, '2x ' + ARM, '4x #gtceu:circuits/iv', '2x grindless:ion_exchange_resin', '2x grindless:zircaloy_cladding_tube', '2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:distilled_water', 4000))
       .itemOutputs(CONTROLLER)
       .EUt(1920).duration(600)
   }

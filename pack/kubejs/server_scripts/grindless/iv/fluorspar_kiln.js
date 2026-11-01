@@ -213,7 +213,8 @@
     event.recipes.gtceu.assembler('grindless:fluorspar_kiln')
       .itemInputs('gtceu:iv_machine_hull', 'gtceu:iv_electric_furnace', 'gtceu:iv_chemical_reactor', '2x gtceu:iv_electric_pump',
         '4x #gtceu:circuits/iv', '2x grindless:platinum_electrode', '4x grindless:sintered_regolith')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:sulfuric_acid', 1000))
+      .itemInputs('2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:sulfuric_acid', 1000))
       .itemOutputs(CONTROLLER)
       .EUt(1920).duration(600)
   }

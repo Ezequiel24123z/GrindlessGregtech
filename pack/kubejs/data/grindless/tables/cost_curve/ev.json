@@ -1,8 +1,8 @@
 {
   "era": "ev",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 3,
+  "fluid": 3,
   "keys": [
     "extendedfeatures:ev_universal_circuit",
     "gtceu:atmosphere_processor",
@@ -35,7 +35,24 @@
     "gtceu:uranium_triplatinum_single_wire"
   ],
   "include": [],
-  "exclude": [],
-  "remove": [],
+  "exclude": [
+    "gtnn:component_assembly_line/*_ev",
+    "gtnn:component_assembly_line/*_ev_*"
+  ],
+  "remove": [
+    "gtceu:shaped/conveyor_module_ev_rubber",
+    "gtceu:shaped/conveyor_module_ev_silicone_rubber",
+    "gtceu:shaped/conveyor_module_ev_styrene_butadiene_rubber",
+    "gtceu:shaped/electric_motor_ev",
+    "gtceu:shaped/electric_piston_ev",
+    "gtceu:shaped/electric_pump_ev_rubber",
+    "gtceu:shaped/electric_pump_ev_silicone_rubber",
+    "gtceu:shaped/electric_pump_ev_styrene_butadiene_rubber",
+    "gtceu:shaped/emitter_ev",
+    "gtceu:shaped/ev_machine_hull",
+    "gtceu:shaped/field_generator_ev",
+    "gtceu:shaped/robot_arm_ev",
+    "gtceu:shaped/sensor_ev"
+  ],
   "override": {}
 }

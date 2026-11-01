@@ -92,8 +92,8 @@
     // the vessel is lined with sintered regolith (shielding) and cooled by night-sky radiators; the field generator is soldered in
     event.recipes.gtceu.assembler('grindless:fission_reactor')
       .itemInputs('gtceu:iv_machine_hull', 'gtceu:iv_field_generator', '2x gtceu:iv_electric_pump', '4x #gtceu:circuits/iv',
-        '8x grindless:sintered_regolith', '2x grindless:night_sky_radiator')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('minecraft:water', 4000))
+        '8x grindless:sintered_regolith', '2x grindless:night_sky_radiator', '2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('minecraft:water', 4000))
       .itemOutputs(CONTROLLER)
       .EUt(1920).duration(600)
   }

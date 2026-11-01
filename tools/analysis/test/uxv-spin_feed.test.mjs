@@ -78,7 +78,8 @@ test('older rows written by UXV-A2: counts and circuits', () => {
   const cryo = by('ev/cryogenic_plant.js').filter((r) => /cryogenic_processing\/(triple_alpha_fuel|oxygen_burning_fuel|krypton_from_air|he_6n)$/.test(r.i));
   assert.equal(cryo.length, 4);
   const casc = by('ev/extraction_cascade.js').filter((r) => circ(r) >= 14 && circ(r) <= 21);
-  assert.deepEqual(casc.map(circ).sort((a, b) => a - b), [14, 15, 16, 17, 18, 19, 20, 21]);
+  // calcium_chloride_recycle (c16) has two solids and the type holds two item inputs, so its recipe carries no circuit (P2-B).
+  assert.deepEqual(casc.map(circ).sort((a, b) => a - b), [14, 15, 17, 18, 19, 20, 21]);
   const pt = recipes.filter((r) => r.i.includes('/uxv/') && fileOf(r).endsWith('ev/platinum_plant.js'));
   assert.deepEqual(pt.map(circ).sort((a, b) => a - b), [11, 12, 13, 14]);
   const kiln = recipes.filter((r) => fileOf(r).endsWith('iv/fluorspar_kiln.js') && /(five_n_magnesia|dysco3_calcine|srruo3_calcine|la_bfo_calcine|ggg_calcine|fluorine_from_hf)$/.test(r.i));
