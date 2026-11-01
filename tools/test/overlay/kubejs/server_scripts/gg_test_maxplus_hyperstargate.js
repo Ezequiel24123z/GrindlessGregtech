@@ -219,9 +219,13 @@
     })
     return n
   }
-  function hatchContainer(m) { return partsLike(m, /max_wireless_energy_hatch_4096a/)[0].energyContainer }
+  function hatchContainer(m) {
+    var h = partsLike(m, /max_wireless_energy_hatch_4096a/)[0]
+    return h ? h.energyContainer : null
+  }
   function topUp(m) {
     var ec = hatchContainer(m)
+    if (!ec) return
     var room = Number(ec.getEnergyCapacity()) - Number(ec.getEnergyStored())
     if (room > 0) ec.changeEnergy(room)
   }

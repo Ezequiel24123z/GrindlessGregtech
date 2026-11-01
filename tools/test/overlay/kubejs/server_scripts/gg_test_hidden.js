@@ -81,9 +81,9 @@
       'GCYR keycard (hidden exactly while the stations are off; stations ' + (stationsOn ? 'on' : 'off') + '), GT--\'s plutonium fuel (never), GCYR\'s drone hangar (never) hidden: ' + itemHidden('gcyr:keycard') +
       ' / ' + fluidHidden('gtceu:plutonium_based_liquid_fuel') + ' / ' + itemHidden('gcyr:drone_hangar'))
     check('tag_c', itemHidden('gtceu:damascus_steel_ingot') && itemHidden('gtca:scrap') && fluidHidden('gtceu:molten_stainless_steel') &&
-      itemHidden('gtceu:terbium_dust') && itemHidden('gtca:samarium_terbium_mixture_dust') && itemHidden('gtceu:raw_uranium_235'),
-      'damascus steel ingot, GTCA scrap, molten stainless steel, terbium, the samarium-terbium mixture hidden: ' + itemHidden('gtceu:damascus_steel_ingot') +
-      ' / ' + itemHidden('gtca:scrap') + ' / ' + fluidHidden('gtceu:molten_stainless_steel') + ' / ' + itemHidden('gtceu:terbium_dust') + ' / ' +
+      itemHidden('gtceu:small_terbium_dust') && itemHidden('gtca:samarium_terbium_mixture_dust') && itemHidden('gtceu:raw_uranium_235'),
+      'damascus steel ingot, GTCA scrap, molten stainless steel, small terbium dust, the samarium-terbium mixture hidden: ' + itemHidden('gtceu:damascus_steel_ingot') +
+      ' / ' + itemHidden('gtca:scrap') + ' / ' + fluidHidden('gtceu:molten_stainless_steel') + ' / ' + itemHidden('gtceu:small_terbium_dust') + ' / ' +
       itemHidden('gtca:samarium_terbium_mixture_dust') + ', raw U-235 (no vein) ' + itemHidden('gtceu:raw_uranium_235'))
     var withRecipes = ['gcyr:gps_satellite', 'gtceu:damascus_steel_ingot', 'gtca:scrap'].filter(function (id) { return itemHidden(id, RECIPES_TAG) })
     check('tag_recipes', withRecipes.length === 3 && fluidHidden('gtceu:plutonium_based_liquid_fuel', RECIPES_TAG),
