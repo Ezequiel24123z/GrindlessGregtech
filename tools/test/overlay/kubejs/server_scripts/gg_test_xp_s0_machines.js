@@ -417,6 +417,15 @@
           note(u.name + '_wire_property', 'voltage ' + nd.getVoltage() + ', amperage ' + nd.getAmperage() + ', loss per block ' + nd.getLossPerBlock() + ', block ' + CABLE)
         } catch (e) { note(u.name + '_wire_property', 'unreadable: ' + errText(e)) }
       }
+      if (S.tick - u.started === 2) {
+        // the cable registers in its energy net from a scheduled block tick; force it in case that tick never fires here
+        u.wire.forEach(function (p) {
+          try {
+            var st = S.level.getBlockState(p)
+            st.getBlock().tick(st, S.level, p, S.level.getRandom())
+          } catch (x) { note(u.name + '_force_tick', errText(x)) }
+        })
+      }
       if (S.tick - u.started >= 20) { u.phase = 'sample'; u.gain = []; u.draw = []; u.started = S.tick }
       u.warmGain = (u.warmGain || []).concat([Number(kc.getEnergyStored())])
       sc.setEnergyStored(sc.getEnergyCapacity())
@@ -438,8 +447,8 @@
         try {
           var be0 = S.level.getBlockEntity(u.wire[1])
           var pn = be0.getPipeNet()
-          netInfo = '; pipe net ' + (pn === null ? 'null' : String(pn.getAllNodes().size()) + ' nodes')
-          netInfo += ', routes from the cable ' + String(pn.getNetData(u.wire[0]).size())
+          netInfo = '; pipe net ' + (pn === null ? 'null' : 'present')
+          if (pn !== null) netInfo += ', ' + String(pn.getAllNodes().size()) + ' nodes'
         } catch (x) { netInfo = '; net unreadable: ' + errText(x) }
         note(u.name + '_samples', 'warm-up sink gain ' + (u.warmGain || []).slice(0, 12).join(',') + '; sample sink gain ' + steady.slice(0, 6).join(',') + ' ...; source draw ' + u.draw.slice(5, 11).join(',') + ' ...; cable intact ' + alive + netInfo)
         if (u.strict) {
