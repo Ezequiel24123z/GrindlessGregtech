@@ -26,4 +26,48 @@
       .duration(200)
     console.info(LOG + 'accumulation processor: AE2 inscriber recipe replaced by a GT circuit assembler recipe with an IV circuit')
   })
+
+  // MAX+ (docs/eras/maxplus.md 'AE2', package XP-AE): only the true top is re-gated, with line A1's horizon storage die. The 256M
+  // component (so every 256M cell, the 256M crafting storage and the portable 256M cells) and the bulk item cell. Everything
+  // below stays as it was: the 1M to 64M components, mega crafting units, accelerators, interfaces, pattern providers, energy
+  // cells, cards and the other portable cells keep their recipes and the accumulation-processor gate above.
+  ServerEvents.recipes(function (event) {
+    try {
+      if (!Item.exists('grindless:horizon_storage_die')) {
+        console.warn(LOG + 'grindless:horizon_storage_die does not exist; top tier not re-gated')
+        return
+      }
+      var die = { item: 'grindless:horizon_storage_die' }
+      event.remove({ id: 'megacells:cells/cell_component_256m' })
+      event.custom({
+        type: 'minecraft:crafting_shaped',
+        category: 'misc',
+        pattern: ['aba', 'cdc', 'aca'],
+        key: {
+          a: { item: 'ae2:matter_ball' },
+          b: { item: 'megacells:accumulation_processor' },
+          c: { item: 'megacells:cell_component_64m' },
+          d: die
+        },
+        result: { item: 'megacells:cell_component_256m' }
+      }).id('megacells:cells/cell_component_256m')
+      event.remove({ id: 'megacells:cells/standard/bulk_item_cell' })
+      event.custom({
+        type: 'minecraft:crafting_shaped',
+        category: 'misc',
+        pattern: ['aea', 'bcb', 'ddd'],
+        key: {
+          a: { item: 'ae2:quartz_vibrant_glass' },
+          b: { item: 'ae2:sky_dust' },
+          c: { item: 'megacells:bulk_cell_component' },
+          d: { item: 'minecraft:netherite_ingot' },
+          e: die
+        },
+        result: { item: 'megacells:bulk_item_cell' }
+      }).id('megacells:cells/standard/bulk_item_cell')
+      console.info(LOG + 'MAX+: 256M component and bulk item cell re-gated with the horizon storage die')
+    } catch (e) {
+      console.error(LOG + 'top tier failed: ' + e)
+    }
+  })
 })()
