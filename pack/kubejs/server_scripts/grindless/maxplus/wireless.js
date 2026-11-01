@@ -1,4 +1,4 @@
-// priority: -20260
+// priority: -20270
 // Gregtech Grindless - the MAX+ wireless energy hatches' recipes (package XP-W2, docs/eras/maxplus.md 'Hatches'). The hatches themselves
 // (gtceu:max_wireless_energy_hatch_1024a and _4096a) are registered by startup_scripts/grindless/lv/wireless_energy.js from the table's
 // maxplusHatchAmps. Both are assembly-line rows at VA[MAX] with station research on the MAX 64 A wireless hatch (the controller precedent of

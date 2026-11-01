@@ -13,9 +13,9 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const pack = path.resolve(here, '..', '..', '..', 'pack');
 const run = runPackScripts(pack);
 
-const BASE = ['meta_material_loom', 'condensate_assembler', 'hills_slingshot', 'hyperfactory', 'tarantula_stellar_lift', 'pair_instability_crucible', 'nickel_56_burner', 'blueshift_forge', 'void_crystal_fab', 'pristine_gas_works', 'primordial_fusion_torus', 'multi_plasma_blender', 'horizon_crystal_furnace', 'horizon_capacitor_bank'];
+const BASE = ['meta_material_loom', 'condensate_assembler', 'hills_slingshot', 'hyperfactory', 'tarantula_stellar_lift', 'pair_instability_crucible', 'nickel_56_burner', 'blueshift_forge', 'void_crystal_fab', 'pristine_gas_works', 'primordial_fusion_torus', 'multi_plasma_blender', 'horizon_crystal_furnace', 'horizon_capacitor_bank', 'hyper_assembly_array'];
 const BOOTSTRAP = ['condensate_refinery', 'bound_matter_press'];
-const FILE = { meta_material_loom: 'loom.js', condensate_assembler: 'assembler.js', hills_slingshot: 'slingshot.js', hyperfactory: 'hyperfactory.js', tarantula_stellar_lift: 'tarantula.js', pair_instability_crucible: 'tarantula.js', nickel_56_burner: 'tarantula.js', blueshift_forge: 'blueshift.js', void_crystal_fab: 'void_fab.js', pristine_gas_works: 'stream.js', primordial_fusion_torus: 'stream.js', multi_plasma_blender: 'crystals.js', horizon_crystal_furnace: 'crystals.js', horizon_capacitor_bank: 'capacitor_bank.js' };
+const FILE = { meta_material_loom: 'loom.js', condensate_assembler: 'assembler.js', hills_slingshot: 'slingshot.js', hyperfactory: 'hyperfactory.js', tarantula_stellar_lift: 'tarantula.js', pair_instability_crucible: 'tarantula.js', nickel_56_burner: 'tarantula.js', blueshift_forge: 'blueshift.js', void_crystal_fab: 'void_fab.js', pristine_gas_works: 'stream.js', primordial_fusion_torus: 'stream.js', multi_plasma_blender: 'crystals.js', horizon_crystal_furnace: 'crystals.js', horizon_capacitor_bank: 'capacitor_bank.js', hyper_assembly_array: 'grid.js' };
 const DURATION = {
   meta_material_loom: /EUt\(VA_MAX\)\.duration\(4800\)/,
   condensate_assembler: /EUt\(VA_MAX\)\.duration\(4800\)/,
@@ -31,6 +31,7 @@ const DURATION = {
   multi_plasma_blender: /a\.EUt\(VA_MAX\)\.duration\(4800\)/,
   horizon_crystal_furnace: /a\.EUt\(VA_MAX\)\.duration\(4800\)/,
   horizon_capacitor_bank: /a\.EUt\(VA_MAX\)\.duration\(4800\)/,
+  hyper_assembly_array: /a\.EUt\(VA_MAX\)\.duration\(4800\)/,
 };
 
 const nameOf = (ing) => {

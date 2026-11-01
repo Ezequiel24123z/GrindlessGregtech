@@ -1,4 +1,4 @@
-// priority: -20180
+// priority: -20190
 // MAX+ grid lines P19, T11, T12, T13 and T17 on the older machines (docs/eras/maxplus.md 'Lines' and 'Older machines'; package XP-H4b).
 // (hand-stamped between crystals.js and hyperfactory.js; the integrator re-stamps with tools/analysis/script-order.mjs --write)
 //
@@ -55,8 +55,8 @@
       outs: [['grindless:cold_kerr_gyro', 1]], fluidOuts: [[SHE, 1600]] },
     // T11
     { type: 'single_crystal_casting', name: 'oriented_blade_blank', circuit: 29, eut: va(9), duration: 1200,
-      items: [['grindless:kerr_strange_plate', 4], ['gtceu:tantalum_carbide_dust', 16], ['gtceu:rhenium_dust', 8]], fluids: [[ARGON, 1000]],
-      outs: [['grindless:oriented_blade_blank', 2]], fluidOuts: [[ARGON, 800]] },
+      items: [['grindless:kerr_strange_plate', 4], ['gtceu:tantalum_carbide_dust', 16], ['gtceu:rhenium_dust', 8]], fluids: [[ARGON, 200]],
+      outs: [['grindless:oriented_blade_blank', 2]] },
     { type: 'megabar_synthesis', name: 'densified_blade', circuit: 18, eut: va(10), duration: 900,
       items: [['grindless:oriented_blade_blank', 2], ['gtceu:tantalum_carbide_plate', 4]],
       outs: [['grindless:densified_blade', 2]] },
@@ -67,8 +67,8 @@
       outs: [['grindless:coated_iris_blade', 2]], fluidOuts: [[ARGON, 800]] },
     // T12
     { type: 'nuclear_clock', name: 'nuclear_clock_reference', circuit: 10, eut: va(11), duration: 1200,
-      items: [['grindless:chip_nuclear_clock', 2], ['gtceu:thorium_plate', 4]], fluids: [[ARGON, 2000]],
-      outs: [['grindless:nuclear_clock_reference', 1]], fluidOuts: [[ARGON, 1600]] },
+      items: [['grindless:chip_nuclear_clock', 2], ['gtceu:thorium_plate', 4]], fluids: [[ARGON, 400]],
+      outs: [['grindless:nuclear_clock_reference', 1]] },
     { type: 'photonic_foundry', name: 'optical_frequency_divider', circuit: 32, eut: va(13), duration: 1500,
       items: [['grindless:nuclear_clock_reference', 1], ['grindless:fibre_bragg_grating', 2], ['grindless:photonic_chip', 1]], fluids: [[ARGON, 1000]],
       outs: [['grindless:optical_frequency_divider', 1]], fluidOuts: [[ARGON, 800]] },
