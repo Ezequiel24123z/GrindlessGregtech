@@ -41,7 +41,7 @@
     { key: 's1c', inp: 'minecraft:cornflower', out: 'minecraft:lily_of_the_valley', eut: pow2(43) },
     { key: 's2', inp: 'minecraft:poppy', out: 'minecraft:dandelion', eut: pow2(41) },
     { key: 's5l', inp: 'minecraft:red_tulip', out: null, eut: '2048' },
-    { key: 's5h', inp: 'minecraft:orange_tulip', out: null, eut: '10000' }
+    { key: 's5h', inp: 'minecraft:orange_tulip', out: null, eut: '6144' }
   ]
   var GENS = [
     { key: 'g33', inp: 'minecraft:iron_nugget', eut: pow2(33) },
@@ -126,7 +126,8 @@
     return n
   }
   function topUp(list) { list.forEach(function (p) { var c = p.energyContainer; c.setEnergyStored(c.getEnergyCapacity()) }) }
-  function halfFill(list) { list.forEach(function (p) { var c = p.energyContainer; c.setEnergyStored(Math.floor(Number(c.getEnergyCapacity()) / 2)) }) }
+  // one tick of the hatch's own inflow (V x A): the recipe can start, but no spare buffer hides a shortfall
+  function leanFill(list, amps) { var V = Number(GTValues.V[MAXT]); list.forEach(function (p) { p.energyContainer.setEnergyStored(V * amps) }) }
   function formCheck(m, waited) {
     if (m.isFormed()) return true
     if (waited >= 100 && waited % 50 === 0) {
@@ -306,7 +307,7 @@
         check(u.name + '_reports', rep === COPIES, 'hatch ' + (hatch ? hatch.getClass().getName() : 'none') + ' reports ' + rep + ' (expected 4,194,304 = 4^11); ' + how)
       }
       setBus(u.bus, u.inp)
-      if (u.amps) halfFill(u.energy)
+      if (u.amps) leanFill(u.energy, u.amps)
       else topUp(u.energy)
       u.after = null
       u.started = S.tick
@@ -319,7 +320,14 @@
       var snap = String(logic.getStatus()) === 'WORKING' ? snapshot(m) : null
       if (snap !== null && snap.id.indexOf(u.key) >= 0) {
         var want = Number(u.eutStr) * u.copies
-        check(u.name + '_eut_long', snap.eut === want && snap.eut > 0, 'recipe EU/t ' + snap.eut + ' (expected ' + want + '; as an int it would read ' + (classes().Long.valueOf(String(want)).intValue()) + '), copies ' + snap.parallels + ', duration ' + snap.duration)
+        var factor = snap.eut / want
+        var okEut = snap.eut === want
+        if (!okEut && u.ph && snap.eut > 0 && factor === Math.floor(factor)) {
+          var r = factor
+          while (r > 1 && r % 4 === 0) r = r / 4
+          okEut = r === 1
+        }
+        check(u.name + '_eut_long', okEut, 'recipe EU/t ' + snap.eut + ' (copies x probe = ' + want + ', factor ' + factor + (u.ph ? ', a power of 4 is the overclock' : '') + '; as an int it would read ' + (classes().Long.valueOf(String(snap.eut)).intValue()) + '), copies ' + snap.parallels + ', duration ' + snap.duration)
         if (u.ph) check(u.name + '_copies', snap.parallels === u.copies, 'copies ' + snap.parallels + ' (expected ' + u.copies + ')')
         note(u.name + '_tier', tierReadout(u, snap.rec))
         u.want = want
@@ -398,6 +406,7 @@
       if (S.tick - u.started === 1) {
         var ok = Number(sc.getOutputVoltage()) === V && Number(sc.getOutputAmperage()) === u.amps && Number(kc.getInputAmperage()) === u.amps
         var detail = 'dynamo ' + sc.getOutputVoltage() + ' V x ' + sc.getOutputAmperage() + ' A, sink ' + kc.getInputVoltage() + ' V x ' + kc.getInputAmperage() + ' A, buffers ' + sc.getEnergyCapacity() + ' / ' + kc.getEnergyCapacity() + ', V[14] ' + V
+        try { detail += '; source front ' + src.getFrontFacing() + ' outputs north ' + sc.outputsEnergy(Direction.NORTH) + ', sink front ' + sink.getFrontFacing() + ' inputs south ' + kc.inputsEnergy(Direction.SOUTH) } catch (x) { detail += '; facing unreadable: ' + errText(x) }
         if (u.strict) check(u.name + '_hatches', ok, detail)
         else note(u.name + '_hatches', detail)
         try {
@@ -466,6 +475,7 @@
     var g = t ? gen(t.key) : null
     if (u.phase === 'wait') {
       var snap = m.getRecipeLogic().isWorking() ? snapshot(m) : null
+      if (snap !== null && String(snap.id).indexOf('/' + t.key) < 0) snap = null
       if (snap !== null) {
         u.snap = snap
         u.started = S.tick
@@ -483,10 +493,12 @@
       if (S.tick - u.started >= 10) {
         var snap2 = u.snap
         var held = stored(u.dyn)
-        var detail = g.inp + ': ' + snap2.id + ', ' + snap2.eut + ' EU/t (expected magnitude ' + g.eut + '), copies ' + snap2.parallels + '; dynamo stored ' + held + ' EU after 10 ticks, sign ' + (snap2.eut < 0 ? 'negative' : 'positive')
-        if (t.run) check(u.name + '_' + t.key, Math.abs(snap2.eut) === Number(g.eut) && snap2.eut < 0 && held > 0, detail)
+        var detail = g.inp + ': ' + snap2.id + ', ' + snap2.eut + ' EU/t (expected magnitude ' + g.eut + '), copies ' + snap2.parallels + '; dynamo stored ' + held + ' EU after 10 ticks (10 x EU/t = ' + (10 * Number(g.eut)) + ')'
+        var generated = held >= 9 * Number(g.eut) && held <= 11 * Number(g.eut)
+        if (t.run) check(u.name + '_' + t.key, Math.abs(snap2.eut) === Number(g.eut) && generated, detail)
         else note(u.name + '_' + t.key, 'ran although above the hatches\' V x A: ' + detail)
         setSlots(u.bus, [])
+        try { m.getRecipeLogic().resetRecipeLogic() } catch (x) { note(u.name + '_reset', errText(x)) }
         u.started = S.tick
         u.phase = 'idle'
       }
@@ -545,6 +557,7 @@
     genUnit('s0_4d_out1024', 3, OUT1024, /max_gg_xp_s0_out1024/, 1, [{ key: 'g41', run: true }])
     add({ name: 's0_3_cable256', tick: cableTick, phase: 'warm', started: 0, x: X0 + 4, srcId: OUT256, sinkId: IN256, amps: 256, strict: true }, cableBuild)
     add({ name: 's0_3_control1024', tick: cableTick, phase: 'warm', started: 0, x: X0 + 12, srcId: OUT1024, sinkId: IN1024, amps: 1024, strict: false }, cableBuild)
+    add({ name: 's0_3_stock16', tick: cableTick, phase: 'warm', started: 0, x: X0 + 20, srcId: DYNAMO16, sinkId: HATCH16, amps: 16, strict: false }, cableBuild)
   }
   ServerEvents.customCommand('gg_test_xp_s0_machines', function () {
     if (S !== null && !S.finished) return 0
