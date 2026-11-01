@@ -1,4 +1,4 @@
-// priority: 6636
+// priority: 6544
 // Gregtech Grindless - names and tooltips of MAX's ergoregion synchroniser (startup_scripts/grindless/max/synchroniser.js; package MX-S2):
 //
 //   gtceu.<type>                                       recipe type name (the controller's block name is in max_foundation_lang.js)

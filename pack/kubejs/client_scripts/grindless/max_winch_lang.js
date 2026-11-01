@@ -1,4 +1,4 @@
-// priority: 6537
+// priority: 6534
 // Gregtech Grindless - names and tooltips of MAX's Geroch winch (startup_scripts/grindless/max/winch.js; package MAX-D3):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each older row of the package

@@ -1,4 +1,4 @@
-// priority: -5521
+// priority: -5664
 // TEST ONLY, MX-S2 (gtceu:ergoregion_synchroniser). Command: kubejs custom_command gg_test_max_synchroniser
 // Band ONLY: X 40960-41023, Z 0-63, Y 98-115 of gcyr:black_hole_orbit (Sgr A*; zones.json row max_synchroniser).
 //   T1 (named uncertainty: the 7-high synchroniser forms at Sgr A* and runs c1 at VA[MAX] = 2,013,265,920 EU/t on two OpV 4 A hatches):

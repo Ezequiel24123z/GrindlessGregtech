@@ -1,4 +1,4 @@
-// priority: -5724
+// priority: -5734
 // TEST ONLY, MEGA-0 (lib/mega.js). Command: kubejs custom_command gg_test_mega_lib
 // Band ONLY: X 30208-30271, Z 0-63, Overworld Y 98-115.
 //   Throwaway machines come from startup_scripts/gg_test_mega_lib_machines.js; one recipe, 2 poppy -> 1 red dye (30 EU/t, 200 ticks) on
