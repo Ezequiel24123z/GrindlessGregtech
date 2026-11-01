@@ -83,6 +83,17 @@
             { "id": "gtceu:hydrogen", "amount": 700 },
             { "id": "gtceu:stellar_heavy_cut", "amount": 100 }
           ]
+        },
+        {
+          "_why": "MX-S3 (max.md, machine 13 byproduct, c5): the clamp's captured reconnection plasmoid is sorted here, never returned to the flux-loaded FRC line; it comes out as filtered hot flow and the heavy cut",
+          "name": "reconnection_plasmoid_return", "circuit": 5, "eut": 67108864, "duration": 400, "site": "gcyr:black_hole_orbit",
+          "itemsIn": [{ "id": "grindless:reconnection_plasmoid", "count": 1 }], "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [],
+          "fluidsOut": [
+            { "id": "gtceu:filtered_hot_flow", "amount": 675 },
+            { "id": "gtceu:stellar_heavy_cut", "amount": 75 }
+          ]
         }
       ]
     },
