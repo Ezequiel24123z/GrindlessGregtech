@@ -80,13 +80,18 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "4E54241FEC649BA9", xp: 35 }],
   },
   {
-    key: "LV_LV_VEIN_DRILL", id: "2235038DEB4D9870", title: "LV Vein Drill", icon: "gtceu:lv_vein_drill", shape: "gear", size: 1.5, deps: ["LV_LV_COMPONENTS"], x: 4, y: 1.5,
-    desc: [
-      "Same samples and bits as the steam drill, only electric and quicker, and a second energy hatch makes it quicker again. It runs every steam drill recipe as well.",
-      "It also has a fluid hatch, which matters more than it sounds.",
-    ],
-    tasks: [{ type: "item", id: "31B8E7F41955B3AC", item: "gtceu:lv_vein_drill" }],
-    rewards: [{ type: "xp", id: "7D49D8C7E78B9686", xp: 60 }, { type: "item", id: "1C05E3ECFA795ECC", item: "minecraft:torch", count: 16 }],
+    key: "LV_LV_VEIN_DRILL", id: "2235038DEB4D9870", title: "LV Vein Drill",     icon: "gtceu:lv_vein_drill", kind: "machine", deps: ["LV_LV_COMPONENTS"], x: 4, y: 1.5,
+        teach: {
+          for: "The electric vein drill: the same samples and bits as the steam one, quicker.",
+          needs: "An LV hull, a vein sample, bits, drilling fluid and an energy hatch.",
+          unlocks: "Faster ore from every vein, and every steam drill recipe.",
+          automate: "Bits and fluid by bus and hatch, ore out by bus. A second energy hatch speeds it up.",
+        },
+        desc: [
+          "It also has a fluid hatch, which matters more than it sounds.",
+        ],
+        tasks: [{ type: "item", id: "31B8E7F41955B3AC", item: "gtceu:lv_vein_drill" }],
+        rewards: [{ type: "xp", id: "7D49D8C7E78B9686", xp: 60 }],
   },
   {
     key: "LV_DRILLING_FLUID", id: "3C4B301F348411BF", title: "Drilling Fluid", icon: "grindless:empty_vein_probe", deps: ["LV_LV_VEIN_DRILL"], x: 6, y: 1.5,
@@ -107,13 +112,18 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "6D4BD4D9D3258F3A", xp: 25 }],
   },
   {
-    key: "LV_LV_GREENHOUSE", id: "73CA53E9E02D4639", title: "LV Greenhouse", icon: "gtceu:lv_greenhouse", shape: "gear", size: 1.5, deps: ["LV_LV_COMPONENTS"], x: 4, y: 4.5,
-    desc: [
-      "An electric greenhouse with a water hatch, and water lets it grow what the steam one can't: mushrooms, berries, vines, kelp and a whole bed of flowers.",
-      "It still runs everything the steam greenhouse did, only faster.",
-    ],
-    tasks: [{ type: "item", id: "517E334F5EDF0822", item: "gtceu:lv_greenhouse" }],
-    rewards: [{ type: "xp", id: "3A8B6F69F89E37B8", xp: 60 }, { type: "item", id: "6E8ED069BA128CD5", item: "minecraft:wheat_seeds", count: 4 }],
+    key: "LV_LV_GREENHOUSE", id: "73CA53E9E02D4639", title: "LV Greenhouse",     icon: "gtceu:lv_greenhouse", kind: "machine", deps: ["LV_LV_COMPONENTS"], x: 4, y: 4.5,
+        teach: {
+          for: "An electric greenhouse with a water hatch, so it grows what the steam one cannot.",
+          needs: "An LV hull, glass, water and a seed or sapling in the bus.",
+          unlocks: "Mushrooms, berries, vines, kelp and flowers, plus everything the steam greenhouse grew.",
+          automate: "Water by hatch, harvest by output bus.",
+        },
+        desc: [
+          "It still runs the old recipes, only faster.",
+        ],
+        tasks: [{ type: "item", id: "517E334F5EDF0822", item: "gtceu:lv_greenhouse" }],
+        rewards: [{ type: "xp", id: "3A8B6F69F89E37B8", xp: 60 }],
   },
   {
     key: "LV_FERTILIZER", id: "47283300070CD8C2", title: "Fertilizer", icon: "gtceu:fertilizer", deps: ["LV_LV_GREENHOUSE"], x: 6, y: 4.5,
@@ -193,18 +203,30 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "3FE8B3BDBC000C5D", xp: 30 }],
   },
   {
-    key: "LV_CIRCUIT_ASSEMBLER", id: "220C6C2F1D568194", title: "Circuit Assembler", icon: "gtceu:lv_circuit_assembler", deps: ["LV_MV_CIRCUIT"], x: 16, y: 6,
-    desc: [
-      "It makes circuits in batches and takes the soldering off your hands. Its own recipe asks for MV circuits, so it waits until you've made a few of those by hand.",
-    ],
+    key: "LV_CIRCUIT_ASSEMBLER", id: "220C6C2F1D568194", title: "Circuit Assembler",     icon: "gtceu:lv_circuit_assembler", kind: "machine", deps: ["LV_MV_CIRCUIT"], x: 16, y: 6,
+        teach: {
+          for: "It makes circuits in batches and takes the soldering off your hands.",
+          needs: "An LV hull and MV circuits made by hand first.",
+          unlocks: "Circuit lines that run without you.",
+          automate: "Boards, parts and wire by bus, circuits out by bus.",
+        },
+        desc: [
+          "Its own recipe asks for the circuits it will later make, a loop you break by hand once.",
+        ],
     tasks: [{ type: "item", id: "5899D39CB5599808", item: "gtceu:lv_circuit_assembler" }],
     rewards: [{ type: "xp", id: "32A9BD5A41455BB9", xp: 35 }],
   },
   {
-    key: "LV_GOOD_CIRCUIT_BOARD", id: "5F2D3E9A2F35D8E0", title: "Good Circuit Board", icon: "gtceu:phenolic_printed_circuit_board", deps: ["LV_CHEMICAL_REACTOR"], x: 10, y: 6,
-    desc: [
-      "A better board than the resin one. The phenolic board gets etched with silver foil in sodium persulfate or iron chloride, whichever you have more of, and both come out of the chemistry you just set up.",
-    ],
+    key: "LV_GOOD_CIRCUIT_BOARD", id: "5F2D3E9A2F35D8E0", title: "Good Circuit Board",     icon: "gtceu:phenolic_printed_circuit_board", kind: "circuit", deps: ["LV_CHEMICAL_REACTOR"], x: 10, y: 6,
+        teach: {
+          for: "A better board than the resin one, for the good circuit.",
+          needs: "Silver foil etched in sodium persulfate or iron chloride, both from your chemistry.",
+          unlocks: "The good electronic circuit and the circuit assembler.",
+          automate: "Etching baths on a fluid loop, boards out by bus.",
+        },
+        desc: [
+          "Pick whichever etchant you have more of.",
+        ],
     tasks: [{ type: "item", id: "45C73EBE75172899", item: "gtceu:phenolic_printed_circuit_board", count: 4 }],
     rewards: [{ type: "xp", id: "3CCE26DF092C48D3", xp: 30 }],
   },
@@ -218,10 +240,16 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "47C80CB0BB026BC9", xp: 30 }],
   },
   {
-    key: "LV_MV_CIRCUIT", id: "3879D8323DF4F8BB", title: "MV Circuit", icon: "gtceu:good_electronic_circuit", deps: ["LV_DIODES"], x: 14, y: 6,
-    desc: [
-      "You can make the &6Good Electronic Circuit&r by hand, no MV power needed. Good thing, too, because the circuit assembler won't build without it. Make a few.",
-    ],
+    key: "LV_MV_CIRCUIT", id: "3879D8323DF4F8BB",     title: "Good Electronic Circuit", icon: "gtceu:good_electronic_circuit", kind: "circuit", deps: ["LV_DIODES"], x: 14, y: 6,
+        teach: {
+          for: "The first circuit above basic, and the key to the circuit assembler.",
+          needs: "A phenolic board, diodes, and the usual wire and parts.",
+          unlocks: "The circuit assembler and MV machines.",
+          automate: "By hand first; the assembler takes over.",
+        },
+        desc: [
+          "No MV power is needed to make it. Make a few.",
+        ],
     tasks: [{ type: "item", id: "01134F436F85414C", item: "gtceu:good_electronic_circuit", count: 4 }],
     rewards: [{ type: "xp", id: "7A7D7E619B5877B2", xp: 45 }],
   },
@@ -242,16 +270,29 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "4BD45FED6F5C4863", xp: 30 }],
   },
   {
-    key: "LV_SUBMERGED_ARC_FURNACE", id: "62D5FBAC11D478E9", title: "Submerged Arc Furnace", icon: "gtceu:submerged_arc_furnace", shape: "gear", size: 1.5, deps: ["LV_GRAPHITE_ELECTRODE"], x: 22, y: 7.5,
-    desc: [
-      "An arc under quartz sand and coke makes AE2's silicon at LV, while GregTech's own silicon waits for an MV blast furnace. It takes exactly two energy hatches and an electrode.",
-      "It also turns cobblestone and water into obsidian and bakes sky dust, so the core of AE2 is within reach this early.",
-    ],
+    key: "LV_SUBMERGED_ARC_FURNACE", id: "62D5FBAC11D478E9", title: "Submerged Arc Furnace",     icon: "gtceu:submerged_arc_furnace", kind: "machine", deps: ["LV_GRAPHITE_ELECTRODE"], x: 22, y: 7.5,
+        teach: {
+          for: "An arc under quartz sand and coke makes AE2's silicon at LV.",
+          needs: "Two energy hatches and a graphite electrode.",
+          unlocks: "Silicon for AE2, obsidian from cobblestone and water, and sky dust.",
+          automate: "Sand and coke by bus, spare electrodes in the bus.",
+        },
+        desc: [
+          "GregTech's own silicon waits for an MV blast furnace.",
+        ],
     tasks: [{ type: "item", id: "697FE42849C59317", item: "gtceu:submerged_arc_furnace" }],
     rewards: [{ type: "xp", id: "74420A10ED35F67C", xp: 70 }],
   },
   {
-    key: "LV_CERTUS_QUARTZ_CRYSTAL", id: "3D374AE4AF789B83", title: "Certus Quartz Crystal", icon: "ae2:certus_quartz_crystal", deps: ["LV_SUBMERGED_ARC_FURNACE"], x: 22, y: 9,
+    key: "LV_AE2_BRANCH", title: "The AE2 Branch", icon: "ae2:controller", kind: "milestone", id: "4B8D2F6A1C7E9035", deps: ["LV_SUBMERGED_ARC_FURNACE"], x: 24, y: 7.5,
+    desc: [
+      "Silicon is in hand, so the storage network is within reach. The row below walks it from crystal to terminal.",
+    ],
+    tasks: [{ type: "checkmark", id: "5A3C7E1D9B2F4086" }],
+    rewards: [{ type: "xp", id: "6F2B8D4A1E7C3095", xp: 30 }],
+  },
+  {
+    key: "LV_CERTUS_QUARTZ_CRYSTAL", id: "3D374AE4AF789B83", title: "Certus Quartz Crystal", icon: "ae2:certus_quartz_crystal", deps: ["LV_AE2_BRANCH"], x: 22, y: 9,
     desc: [
       "The autoclave grows certus dust into crystals in water, and distilled water does it faster and never fails. GregTech's machines hand out AE2's crystal here, so the ore line and the network share one pile.",
     ],
@@ -333,7 +374,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "67869852D11F151B", xp: 40 }],
   },
   {
-    key: "LV_LV_TO_MV_TRANSFORMER", id: "39A5A5CC76591697", title: "LV to MV Transformer", icon: "gtceu:lv_transformer_1a", shape: "diamond", deps: ["LV_MV_MACHINE_HULL"], x: 14, y: 0,
+    key: "LV_LV_TO_MV_TRANSFORMER", id: "39A5A5CC76591697", title: "LV to MV Transformer", icon: "gtceu:lv_transformer_1a", kind: "exit", deps: ["LV_MV_MACHINE_HULL"], x: 14, y: 0,
     desc: [
       "The &6Transformer&r steps LV up to MV, which is about all there is to say about transformers.",
       "MV is next, and MV goes somewhere new: the End, for ore the Overworld won't give you.",
@@ -342,13 +383,13 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "7F84F988D7C11D2C", xp: 45 }],
   },
   {
-    key: "LV_ELECTRIC_BLAST_FURNACE", id: "78451687508D5888", title: "Electric Blast Furnace", icon: "gtceu:electric_blast_furnace", shape: "gear", size: 1.5, deps: ["LV_CUPRONICKEL_COILS"], x: 8, y: 0,
+    key: "LV_ELECTRIC_BLAST_FURNACE", id: "78451687508D5888", title: "Electric Blast Furnace", icon: "gtceu:electric_blast_furnace", deps: ["LV_CUPRONICKEL_COILS"], x: 8, y: 0,
     desc: [
       "GregTech's big furnace, the one you'll keep coming back to for the rest of the game. Cupronickel coils get it hot enough for aluminium.",
       "The catch: aluminium is an MV recipe. Two LV energy hatches count as MV, so give it two.",
     ],
     tasks: [{ type: "item", id: "4CE9780299D08B3E", item: "gtceu:electric_blast_furnace" }],
-    rewards: [{ type: "xp", id: "68887B95D69575F2", xp: 120 }, { type: "item", id: "1F2A7D3E18710CE4", item: "minecraft:torch", count: 16 }],
+    rewards: [{ type: "xp", id: "68887B95D69575F2", xp: 120 }],
   },
   {
     key: "LV_PHOTOGRAPHIC_PLATES", id: "365B9E86E3AA4894", title: "Photographic Plates", icon: "grindless:photographic_plate", deps: ["LV_LV_ASSEMBLER"], x: 6, y: -4.5,
@@ -359,11 +400,16 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5422CC6BEE374C8F", xp: 30 }],
   },
   {
-    key: "LV_OPTICAL_OBSERVATORY", id: "3D32B4FC8AEE49CE", title: "Optical Observatory", icon: "gtceu:optical_observatory", shape: "gear", size: 1.5, deps: ["LV_PHOTOGRAPHIC_PLATES","steam:STEAM_LUNAR_CHART_DRAFT"], x: 8, y: -4.5,
-    desc: [
-      "A refractor in a dome that tracks the Moon while the sky turns, so a plate can take a long exposure. It reads your steam-age draft chart and hands it back.",
-      "It still wants a clear night, but it doesn't care how high you build it.",
-    ],
+    key: "LV_OPTICAL_OBSERVATORY", id: "3D32B4FC8AEE49CE", title: "Optical Observatory",     icon: "gtceu:optical_observatory", kind: "machine", deps: ["LV_PHOTOGRAPHIC_PLATES","steam:STEAM_LUNAR_CHART_DRAFT"], x: 8, y: -4.5,
+        teach: {
+          for: "A refractor in a dome that tracks the Moon for long plate exposures.",
+          needs: "Photographic plates and your steam-age draft chart, which it reads and hands back.",
+          unlocks: "Lunar maps, and the ephemeris that later eras read.",
+          automate: "Plates by bus; it still wants a clear night, at any height.",
+        },
+        desc: [
+          "Build it anywhere you like.",
+        ],
     tasks: [{ type: "item", id: "149106CCB19946CB", item: "gtceu:optical_observatory" }],
     rewards: [{ type: "xp", id: "72DE2BE97D294BA3", xp: 60 }],
   },
@@ -393,10 +439,16 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "124DE9A929364C39", xp: 30 }],
   },
   {
-    key: "LV_SULFIDE_ROASTER", id: "5A176E45F8E64ED7", title: "Sulfide Roaster", icon: "gtceu:sulfide_roaster", deps: ["LV_CONTACT_CATALYST"], x: 14, y: 3,
-    desc: [
-      "The roaster burns sulfide ores in air, and the sulfur comes out as sulfuric acid instead of a cloud. The heat comes back as steam for your turbines.",
-    ],
+    key: "LV_SULFIDE_ROASTER", id: "5A176E45F8E64ED7", title: "Sulfide Roaster",     icon: "gtceu:sulfide_roaster", kind: "machine", deps: ["LV_CONTACT_CATALYST"], x: 14, y: 3,
+        teach: {
+          for: "It burns sulfide ores in air and turns the sulfur into sulfuric acid.",
+          needs: "Sulfide ore, air and a contact catalyst.",
+          unlocks: "Acid without a cloud, silver from galena, and steam from the waste heat.",
+          automate: "Ore by bus, acid by pipe, heat back to your turbines.",
+        },
+        desc: [
+          "The heat comes back as steam for your turbines.",
+        ],
     tasks: [{ type: "item", id: "5B51E7ED80874170", item: "gtceu:sulfide_roaster" }],
     rewards: [{ type: "xp", id: "6A1E3C0D9B2F4E58", xp: 35 }],
   },
@@ -425,29 +477,45 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "7B1F4C8E2D05A930", xp: 40 }],
   },
   {
-    key: "LV_HELIOSTAT_TOWER", id: "3A7E2C5F1B9D4061", title: "Heliostat Tower", icon: "gtceu:heliostat_tower", deps: ["LV_MIRROR_FIELD"], x: 8, y: -1.5,
-    desc: [
-      "It turns sunlight into steam without a lump of fuel anywhere. It only works by day under an open, dry sky.",
-      "At night it does nothing at all, which is what the tank is for.",
-    ],
+    key: "LV_HELIOSTAT_TOWER", id: "3A7E2C5F1B9D4061", title: "Heliostat Tower",     icon: "gtceu:heliostat_tower", kind: "plant", deps: ["LV_MIRROR_FIELD"], x: 8, y: -1.5,
+        teach: {
+          for: "It turns sunlight into steam with no fuel anywhere.",
+          needs: "A mirror field, steel casings and an open, dry sky by day.",
+          unlocks: "Free steam for turbines and the generator array.",
+          automate: "Steam by pipe into a tank, then to the turbines.",
+        },
+        desc: [
+          "At night it does nothing at all, which is what the tank is for.",
+        ],
     tasks: [{ type: "item", id: "3C0F4A2E6B17D35C", item: "gtceu:heliostat_tower" }],
     rewards: [{ type: "xp", id: "5D5B1E3A7C42F086", xp: 60 }],
   },
   {
-    key: "LV_SIXTEEN_TURBINES_ONE_HALL", id: "1CE11DDA27E5B778", title: "Sixteen Turbines, One Hall", icon: "gtceu:generator_array", deps: ["LV_LV_FACTORY"], x: 2, y: -1.5,
-    desc: [
-      "The &6Generator Array&r puts up to sixteen LV generators behind one controller, as steam turbines, combustion generators or gas turbines. Same fuel, same energy per bucket; you only save the floor space and the cable spaghetti.",
-      "The dynamo hatches set how many actually run: an LV hatch carries two, an MV hatch eight.",
-    ],
+    key: "LV_SIXTEEN_TURBINES_ONE_HALL", id: "1CE11DDA27E5B778", title: "Sixteen Turbines, One Hall",     icon: "gtceu:generator_array", kind: "plant", deps: ["LV_LV_FACTORY"], x: 2, y: -1.5,
+        teach: {
+          for: "Up to sixteen LV generators behind one controller.",
+          needs: "A steel hall, generators, and dynamo hatches that set how many run.",
+          unlocks: "Compact power from steam turbines, combustion or gas turbines.",
+          automate: "One fuel input, one power output, all by pipe and cable.",
+        },
+        desc: [
+          "Same fuel, same energy per bucket; you only save floor space and cable spaghetti.",
+        ],
     tasks: [{ type: "item", id: "4D711CBAE950FEAA", item: "gtceu:generator_array" }],
     rewards: [{ type: "xp", id: "18760F8546AE3848", xp: 40 }],
   },
   {
-    key: "LV_WIRE_WORKS", id: "70655BD4956EB088", title: "Wire Works", icon: "gtceu:wire_works", shape: "gear", size: 1.25, deps: ["LV_LV_FACTORY"], x: 0, y: 2,
-    desc: [
-      "The &6Wire Works&r puts a wiremill and a bender in one box, so wire and plate come off the same line. Several recipes run side by side, as many as your hatch voltage can feed.",
-    ],
-    tasks: [{ type: "item", id: "791A459098A43495", item: "gtceu:wire_works" }],
-    rewards: [{ type: "xp", id: "3C4547840227F1B1", xp: 40 }, { type: "item", id: "3C08ECF9B5FC68EA", item: "gtceu:steel_plate", count: 8 }],
+    key: "LV_WIRE_WORKS", id: "70655BD4956EB088", title: "Wire Works",     icon: "gtceu:wire_works", kind: "machine", deps: ["LV_LV_FACTORY"], x: 0, y: 2,
+        teach: {
+          for: "A wiremill and a bender in one box, so wire and plate come off one line.",
+          needs: "An LV hull, steel and motors.",
+          unlocks: "Several wire and plate recipes side by side, as many as your hatch voltage feeds.",
+          automate: "Ingots in by bus, wire and plate out by bus.",
+        },
+        desc: [
+          "One box doing the job of two, which is the whole idea.",
+        ],
+        tasks: [{ type: "item", id: "791A459098A43495", item: "gtceu:wire_works" }],
+        rewards: [{ type: "xp", id: "3C4547840227F1B1", xp: 40 }],
   },
 ];
