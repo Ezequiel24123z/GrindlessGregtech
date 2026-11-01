@@ -34,8 +34,8 @@ const NATIVE = new Set([
   'gtceu:polytetrafluoroethylene_ingot',
   // MEGA-track controller, registered by its own package (obtain dump 20261028-120239)
   'gtceu:mega_chemical_complex',
-  // this pack's own, registered before LuV (same dump)
-  'grindless:outer_system_chart', 'grindless:sagittarius_a_star_signal',
+  // this pack's own, registered before LuV (same dump; gtceu:ev_rtg is IV's RTG Cell, startup_scripts/grindless/iv/travel_network.js)
+  'grindless:outer_system_chart', 'grindless:sagittarius_a_star_signal', 'gtceu:ev_rtg',
 ]);
 // dimensions that exist without LuV-B1 (GCYR's own)
 const NATIVE_DIMENSIONS = new Set(['gcyr:overworld_orbit']);
