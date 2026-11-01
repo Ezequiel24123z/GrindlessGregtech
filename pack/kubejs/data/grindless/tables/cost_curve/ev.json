@@ -35,10 +35,7 @@
     "gtceu:uranium_triplatinum_single_wire"
   ],
   "include": [],
-  "exclude": [
-    "gtnn:component_assembly_line/*_ev",
-    "gtnn:component_assembly_line/*_ev_*"
-  ],
+  "exclude": [],
   "remove": [
     "gtceu:shaped/conveyor_module_ev_rubber",
     "gtceu:shaped/conveyor_module_ev_silicone_rubber",

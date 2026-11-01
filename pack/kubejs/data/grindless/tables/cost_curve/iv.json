@@ -40,10 +40,7 @@
     "gtceu:venus_heat_engine"
   ],
   "include": [],
-  "exclude": [
-    "gtnn:component_assembly_line/*_iv",
-    "gtnn:component_assembly_line/*_iv_*"
-  ],
+  "exclude": [],
   "remove": [
     "gtceu:shaped/conveyor_module_iv_silicone_rubber",
     "gtceu:shaped/conveyor_module_iv_styrene_butadiene_rubber",

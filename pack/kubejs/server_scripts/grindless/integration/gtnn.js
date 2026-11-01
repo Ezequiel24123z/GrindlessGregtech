@@ -32,7 +32,7 @@
 //                          circuit (was EV macerators, titanium plates and an EV circuit).
 // Not done here, config/gtnn.json (Server): makesEMIBetter should be false (EMI's cheat mode hands out a bucket of any fluid) and
 // banCreateFanBlasting true once Create is in the pack (Create fans would smelt ores and dusts without a GT furnace).
-// Uncraftable today and kept that way (the test guards it): Component Assembly Line, Homemade Bedrock Ore Machine (ores out of
+// Uncraftable today and kept that way (the test guards it): Component Assembly Line (its recipes are removed too, below), Homemade Bedrock Ore Machine (ores out of
 // stone). The 14 '*_tf' veins use the Twilight Forest layer and never generate (data/grindless/tables/veins_excluded.json).
 // Era: IV for the Maceration Stack; never for the pgs_from taps.
 //
@@ -83,6 +83,7 @@
       var taps = removeTaps(event)
       var stack = regateStack(event)
       MAINFRAME_ETCHING.forEach(function (id) { event.remove({ id: id }) })
+      event.remove({ type: 'gtceu:component_assembly_line' })
       console.info(LOG + 'pgs_from taps removed: ' + taps.length + '; Maceration Stack ' + (stack ? 're-gated to IV' : 'left as it is') +
         '; etched mainframe chain removed (' + MAINFRAME_ETCHING.length + ')')
     } catch (e) {
