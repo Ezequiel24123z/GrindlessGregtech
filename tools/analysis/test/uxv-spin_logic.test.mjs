@@ -67,7 +67,7 @@ test('the vdW stacking rows: circuits 1-4, argon, flakes, broken flakes as GT du
 
 test('the racetrack rows: circuits 1-2, patterned wafer then chip, platinum-group sludge', () => {
   const rows = SL.recipes.filter((r) => r.type === 'racetrack_patterning');
-  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit, r.eut, r.duration])), [['pattern_track', 1, 33554432, 600], ['racetrack_chip', 2, 67108864, 900], ['racetrack_memory_die', 3, 67108864, 900]]);
+  assert.deepEqual(plain(rows.map((r) => [r.name, r.circuit, r.eut, r.duration])), [['pattern_track', 1, 33554432, 600], ['racetrack_chip', 2, 67108864, 900], ['racetrack_memory_die', 3, 67108864, 900], ['stacked_logic_wafer', 6, 536870912, 1800]]);
   assert.deepEqual(plain(ids(rows[0].itemsIn)), ['grindless:written_track_wafer']);
   assert.deepEqual(plain(ids(rows[0].itemsOut)), ['grindless:patterned_track_wafer', 'gtceu:platinum_group_sludge_dust']);
   assert.deepEqual(plain(ids(rows[1].itemsIn)), ['grindless:patterned_track_wafer', 'grindless:mtj_die']);
@@ -157,7 +157,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('older rows: only the hall row sits outside this package\'s files', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_logic\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 1 + 1 + 1 + 3, 'rows, MAX-B1\'s vdW c5, MAX-H1\'s racetrack c3, MAX-A2\'s LPE c4 and three controllers');
+  assert.equal(mine.length, 12 + 1 + 1 + 1 + 1 + 3, 'rows, XP-A3\'s racetrack c6, MAX-B1\'s vdW c5, MAX-H1\'s racetrack c3, MAX-A2\'s LPE c4 and three controllers');
 });
 
 test('the held F1 ids are free: the A5 hold rules are deleted, the pending EMI entries too', () => {

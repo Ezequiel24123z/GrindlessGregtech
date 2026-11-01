@@ -187,7 +187,7 @@ test('no UEV input, and every lang key the package needs is written in en_us and
   // UEV-A6's two UEV rows in these UHV types keep their keys in uev_photonics_lang.js; UIV-A1's MBE c4 in uiv_isotopes_lang.js;
   // UIV-A4's foundry c8-11 in uiv_tfln_femtosecond_lang.js; UIV-A5's MBE c5-6 and foundry c12 in uiv_beuv_stm_lang.js;
   // UIV-A7's MBE c7 and foundry c13 in uiv_mainframe_lang.js; OpV-A2's MBE c9-10 in opv_circuits_lang.js
-  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js', 'uiv_tfln_femtosecond_lang.js', 'uiv_beuv_stm_lang.js', 'uiv_mainframe_lang.js', 'uiv_matrioshka_lang.js', 'uxv_spin_rows_lang.js', 'opv_circuits_lang.js', 'opv_antimatter_lang.js', 'max_circuits_lang.js', 'max_interferometer_lang.js', 'max_rydberg_lang.js', 'max_imager_lang.js', 'max_horizon_interferometer_lang.js', 'max_synchroniser_lang.js']
+  const lang = ['uhv_photonics_lang.js', 'uev_photonics_lang.js', 'uiv_isotopes_lang.js', 'uiv_tfln_femtosecond_lang.js', 'uiv_beuv_stm_lang.js', 'uiv_mainframe_lang.js', 'uiv_matrioshka_lang.js', 'uxv_spin_rows_lang.js', 'opv_circuits_lang.js', 'opv_antimatter_lang.js', 'max_circuits_lang.js', 'maxplus_circuits_lang.js', 'max_interferometer_lang.js', 'max_rydberg_lang.js', 'max_imager_lang.js', 'max_horizon_interferometer_lang.js', 'max_synchroniser_lang.js']
     .map((f) => fs.readFileSync(path.join(kube, 'client_scripts', 'grindless', f), 'utf8')).join('\n');
   for (const [type, t] of Object.entries(T.types)) {
     if (!t.dataKey) continue;

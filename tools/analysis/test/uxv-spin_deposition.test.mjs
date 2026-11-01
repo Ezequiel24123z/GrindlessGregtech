@@ -132,7 +132,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('no older row written: no recipe of this package sits in another package\'s file', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_deposition\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 2 + 1 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 2, 'rows, MX-S2\'s MTJ c26 and PLD c6, MX-S1\'s MTJ c24-25, MX-S3\'s PLD row c7, MAX-E1\'s MTJ c19 and c21, MAX-D2\'s MTJ c17-18, MAX-A4\'s PLD row c5, MAX-B3\'s MTJ c22-23, MAX-A3\'s MTJ c16, MAX-B1\'s MTJ c15, two controllers, the laser, OpV-A2\'s MTJ c5-8, OpV-D1\'s two MTJ rows, OpV-B1\'s two MTJ rows, MAX-H1\'s MTJ c20, MAX-A1\'s MTJ c13-14, MAX-W\'s PLD row');
+  assert.equal(mine.length, 12 + 2 + 1 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 2, 'rows, XP-A3\'s MTJ c32, MX-S2\'s MTJ c26 and PLD c6, MX-S1\'s MTJ c24-25, MX-S3\'s PLD row c7, MAX-E1\'s MTJ c19 and c21, MAX-D2\'s MTJ c17-18, MAX-A4\'s PLD row c5, MAX-B3\'s MTJ c22-23, MAX-A3\'s MTJ c16, MAX-B1\'s MTJ c15, two controllers, the laser, OpV-A2\'s MTJ c5-8, OpV-D1\'s two MTJ rows, OpV-B1\'s two MTJ rows, MAX-H1\'s MTJ c20, MAX-A1\'s MTJ c13-14, MAX-W\'s PLD row');
 });
 
 test('structures: not boring, at least two functional kinds, controller in the front slice', () => {

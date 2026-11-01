@@ -107,7 +107,7 @@ test('"only from" claims: no other table or script builds these outputs', () => 
   const claims = {
     'grindless:beuv_exposed_wafer': ['beuv_lithography/exposure'],
     'grindless:fouled_beuv_mirror': ['beuv_lithography/exposure', 'beuv_lithography/cryo_cmos_exposure', 'beuv_lithography/tsv_exposure',
-      'beuv_lithography/hemt_gate_exposure', 'beuv_lithography/gan_gate_exposure', 'beuv_lithography/sdd_anode_exposure', 'beuv_lithography/algan_gates', 'beuv_lithography/metalens_wafer', 'beuv_lithography/microring_wafer', 'beuv_lithography/sis_junction_wafer', 'beuv_lithography/utc_photodiode_wafer', 'beuv_lithography/hemt_gate_wafer', 'beuv_lithography/rad_hard_fpga_wafer', 'beuv_lithography/patterned_vo2_metasurface'], // MX-S1's c15 fouls the mirror too; MAX-D2's fouls the mirror too; MAX-A1's c10 fouls the mirror too; OpV-A3's c9 fouls the mirror too
+      'beuv_lithography/hemt_gate_exposure', 'beuv_lithography/gan_gate_exposure', 'beuv_lithography/sdd_anode_exposure', 'beuv_lithography/algan_gates', 'beuv_lithography/metalens_wafer', 'beuv_lithography/microring_wafer', 'beuv_lithography/sis_junction_wafer', 'beuv_lithography/utc_photodiode_wafer', 'beuv_lithography/hemt_gate_wafer', 'beuv_lithography/rad_hard_fpga_wafer', 'beuv_lithography/patterned_vo2_metasurface', 'beuv_lithography/horizon_logic_wafer'], // XP-A3's c21 fouls the mirror too; MX-S1's c15 fouls the mirror too; MAX-D2's fouls the mirror too; MAX-A1's c10 fouls the mirror too; OpV-A3's c9 fouls the mirror too
     'grindless:beuv_driver_asic': ['beuv_lithography/driver_asic'],
     'grindless:beuv_mirror': ['assembler/beuv_mirror', 'beuv_lithography/mirror_cleaning'],
     'grindless:tb_droplet_target': ['assembler/tb_droplet_target'],
@@ -166,7 +166,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   }
   for (const m of ['beuv_scanner', 'stm_lithography_cell']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   // OpV-A2's rows (BEUV c4-8, STM c4) and OpV-A3's c9 keep their EMI lines in their own lang files
-  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless', 'opv_field_press_lang.js') + read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js') + read('client_scripts', 'grindless', 'max_imager_lang.js') + read('client_scripts', 'grindless', 'max_horizon_interferometer_lang.js') + read('client_scripts', 'grindless', 'max_synchroniser_lang.js');
+  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless', 'opv_field_press_lang.js') + read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'maxplus_circuits_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js') + read('client_scripts', 'grindless', 'max_imager_lang.js') + read('client_scripts', 'grindless', 'max_horizon_interferometer_lang.js') + read('client_scripts', 'grindless', 'max_synchroniser_lang.js');
   for (const t of Object.values(T.types)) {
     if (!t.dataKey) continue;
     for (const r of t.recipes) {
