@@ -73,25 +73,60 @@ function New-Bezel {
     return $c
 }
 
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
+}
+
+# the Matrioshka computer: three nested shells around an amber star, with cyan data nodes running round the shells
+$ShellFace = @{ Mode = 'chase'; Pal = @{ x = (Hex '5C4A2C'); y = (Hex '8A6A30'); z = (Hex 'B8A060') }
+    Ramp = @((Hex '1C4C5C'), (Hex '2C8CA0'), (Hex '40C8E0'), (Hex '90F0FF'), (Hex 'E0FFFF'))
+    Ramp2 = @((Hex '6A3A10'), (Hex 'C86A14'), (Hex 'FFA030'), (Hex 'FFD870'), (Hex 'FFF8D0'))
+    Map = @('..xxxxxxxx..', '.x1yyyyyy0x.', 'x0yPzzzzPy1x', 'x2yzaabbzy3x', 'xyyzbaabzyyx', 'x1yzcbbczy2x', 'x3yPzzzzPy0x', '.x2yyyyyy3x.', '..xxxxxxxx..', '............', '............', '.....ll.....') }
+
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
+    if ($Kind -eq 'shell') { return New-OwnFace $ShellFace $Frame $Active }
     $c = New-Bezel
     $e = New-Canvas
     for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    if ($Kind -eq 'shell') {
-        # three nested rings around a core; the lit ring steps outward
-        $ring = Hex '5C4A2C'
-        foreach ($x in 4..11) { Set-Px $c $x 4 $ring; Set-Px $c $x 9 $ring }
-        foreach ($y in 4..9) { Set-Px $c 4 $y $ring; Set-Px $c 11 $y $ring }
-        foreach ($x in 6..9) { Set-Px $c $x 6 $ring; Set-Px $c $x 7 $ring }
-        if ($Active) {
-            $glow = @((Hex 'FFF0A0'), (Hex 'FFC040'), (Hex 'FF8020'), (Hex 'C0FFFF'))[$Frame % 4]
-            if ($Frame -eq 0) { foreach ($x in 7, 8) { Set-Both $c $e $x 6 $glow; Set-Both $c $e $x 7 $glow } }
-            elseif ($Frame -eq 1) { foreach ($x in 6..9) { Set-Both $c $e $x 6 $glow; Set-Both $c $e $x 7 $glow } }
-            elseif ($Frame -eq 2) { foreach ($x in 4..11) { Set-Both $c $e $x 4 $glow; Set-Both $c $e $x 9 $glow } }
-            else { foreach ($y in 4..9) { Set-Both $c $e 4 $y $glow; Set-Both $c $e 11 $y $glow } }
-        }
-    }
     if ($Kind -eq 'drops') {
         # a column of tin droplets that falls one step a frame
         $tin = Hex 'B8C0C8'

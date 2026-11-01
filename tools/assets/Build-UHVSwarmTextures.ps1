@@ -124,15 +124,57 @@ function New-Bezel {
     return $c
 }
 
-# the 12 cells round a 2x2 hub at (x, y)..(x+1, y+1), clockwise from the top left
-function Get-Rim {
-    param([int]$X, [int]$Y)
-    return @(@(($X - 1), ($Y - 1)), @($X, ($Y - 1)), @(($X + 1), ($Y - 1)), @(($X + 2), ($Y - 1)), @(($X + 2), $Y), @(($X + 2), ($Y + 1)),
-        @(($X + 2), ($Y + 2)), @(($X + 1), ($Y + 2)), @($X, ($Y + 2)), @(($X - 1), ($Y + 2)), @(($X - 1), ($Y + 1)), @(($X - 1), $Y))
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
 }
+
+# the swarm control station: a dish bottom left beams a signal up the diagonal to the swarm's satellites
+$StationFace = @{ Mode = 'chase'; Pal = @{}
+    Ramp = @((Hex '1A3A44'), (Hex '2E9CB8'), (Hex '86E8F4'), (Hex 'C8FAFF'), (Hex 'FFFFFF'))
+    Ramp2 = @((Hex '4A3A0A'), (Hex 'C8A030'), (Hex 'FFD25A'), (Hex 'FFE68A'), (Hex 'FFF8D0'))
+    Map = @('............', '.b........c.', '.........a..', '........2...', '.......3....', '......0.....', '.....1......', '.M..2.......', '.MD3........', '.MDD........', '..MMMM......', '.....ll.....') }
 
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
+    if ($Kind -eq 'station') { return New-OwnFace $StationFace $Frame $Active }
     $c = New-Bezel
     $e = New-Canvas
     for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
@@ -148,24 +190,6 @@ function New-Face {
             Set-Both $c $e ($hx + 1) 8 (Hex '7CF0FF')
         }
         else { Set-Px $c ($hx + 1) 7 (Hex '6C727A') }
-    }
-    elseif ($Kind -eq 'station') {
-        # the Sun as a 2x2 hub at x7..8, y6..7, the swarm on the 12 cells round it: three segments, one in four cells
-        $sun = if ($Active) { Hex 'FFE68A' } else { Hex '8A5A24' }
-        for ($y = 6; $y -le 7; $y++) { for ($x = 7; $x -le 8; $x++) { if ($Active) { Set-Both $c $e $x $y $sun } else { Set-Px $c $x $y $sun } } }
-        $cells = Get-Rim 7 6
-        $turn = if ($Active) { $Frame } else { 0 }
-        for ($i = 0; $i -lt 12; $i++) {
-            $p = $cells[$i]
-            $k = (($i - $turn) % 4 + 4) % 4
-            if ($k -ne 0) { continue }
-            if ($Active) { Set-Both $c $e $p[0] $p[1] (Hex 'C8E4FF') } else { Set-Px $c $p[0] $p[1] (Hex '5A6470') }
-        }
-        if ($Active) {
-            # the receiver beam: a laser line from the swarm down to the deck under the window, flickering
-            $beam = if (($Frame % 2) -eq 0) { Hex 'FF6A5A' } else { Hex 'FF9A7A' }
-            Set-Both $c $e 4 9 $beam; Set-Both $c $e 11 9 $beam
-        }
     }
     else {
         # the Sun in the top right corner (x10..11, y4..5) and the launch rail climbing to it from the bottom left

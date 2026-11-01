@@ -64,69 +64,64 @@ function Set-Both {
 $Lit = Hex 'B0B0B0'; $Mid = Hex '707070'; $Dark = Hex '404040'; $Deep = Hex '222222'; $Pit = Hex '161616'
 $LampOn = Hex '62FF86'; $LampOff = Hex '0C6B2E'
 
-# The steel bezel: x1..14, y1..14, bevelled from the top left, with a dark panel inside and a lamp under the window.
-function New-Bezel {
-    $c = New-Canvas
-    Set-Rect $c 1 1 14 14 $Dark
-    for ($i = 1; $i -le 14; $i++) {
-        Set-Px $c $i 1 $Lit; Set-Px $c 1 $i $Lit
-        Set-Px $c $i 14 $Deep; Set-Px $c 14 $i $Deep
-    }
-    Set-Rect $c 2 2 12 12 $Mid
-    Set-Rect $c 3 3 10 8 $Deep
-    Set-Rect $c 3 11 10 3 $Dark
-    return $c
+# Own controller faces (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
+}
+
+$Own = @{
+    # the cell: two electrodes dip into a molten-salt bath over heater coils; the tips and the bath glow
+    cell    = @{ Mode = 'chase'; Pal = @{ k = (Hex 'B06A38'); q = (Hex '8A4E28') }
+        Ramp = @((Hex '3A4A2A'), (Hex '8AD88A'), (Hex 'B8F5A8'), (Hex 'D8FFC8'), (Hex 'F4FFEE'))
+        Ramp2 = @((Hex '4A1A08'), (Hex 'C2480A'), (Hex 'F0771F'), (Hex 'FFB347'), (Hex 'FFE08A'))
+        Map = @('...M....M...', '...M....M...', '...M....M...', '...M....M...', '.Da0aaaa1aD.', '.DbabababaD.', '..DbababaD..', '...DDDDDD...', '..MMMMMMMM..', '..kqkqkqkq..', '............', '.....ll.....') }
+    # the reactor: a proton beam in its pipe enters a spherical subcritical core over the fuel rods
+    reactor = @{ Mode = 'chase'; Pal = @{}
+        Ramp = @((Hex '1F6F8A'), (Hex '2FB4D8'), (Hex '8AE4F5'), (Hex 'C8F4FF'), (Hex 'E8FBFF'))
+        Ramp2 = @((Hex '4A1E70'), (Hex '8E3FD0'), (Hex 'B565F0'), (Hex 'D8A0FF'), (Hex 'E3B8FF'))
+        Map = @('.....DDDDD..', '....DPaaaPD.', 'EEEDPaaaaaPD', '0123012aaaPD', 'EEEDPaaaaaPD', '....DPaaaPD.', '.....DDDDD..', '............', 'M.M.M.M.M.M.', 'M.M.M.M.M.M.', '............', '.....ll.....') }
 }
 
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
-    $c = New-Bezel
-    $e = New-Canvas
-    for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    if ($Kind -eq 'cell') {
-        if ($Active) {
-            $salt = @((Hex 'C2480A'), (Hex 'F0771F'), (Hex 'FFB347'), (Hex 'FFE08A'))
-            for ($x = 5; $x -le 10; $x++) {
-                for ($y = 7; $y -le 9; $y++) {
-                    $k = if ($y -eq 7) { (($x + $Frame) % 4) } else { 0 }
-                    Set-Both $c $e $x $y $salt[$k]
-                }
-            }
-            # the cathode rod, pale green, dipping into the bath
-            for ($y = 4; $y -le 7; $y++) { Set-Both $c $e 7 $y (Hex '9CD88A') }
-            Set-Both $c $e 8 ($(4 + ($Frame % 2))) (Hex 'D2F5C2')
-        }
-        else {
-            for ($x = 5; $x -le 10; $x++) { for ($y = 7; $y -le 9; $y++) { Set-Px $c $x $y (Hex '3A1A0C') } }
-            for ($y = 4; $y -le 6; $y++) { Set-Px $c 7 $y (Hex '4E6648') }
-        }
-    }
-    else {
-        # the beam line along y6..7 from the left, into the core x9..10
-        for ($x = 4; $x -le 11; $x++) { Set-Px $c $x 6 (Hex '1C2A33'); Set-Px $c $x 7 (Hex '1C2A33') }
-        if ($Active) {
-            $cyan = @((Hex '2FB4D8'), (Hex '8AE4F5'))
-            for ($i = 0; $i -lt 3; $i++) {
-                $x = 4 + ((($Frame * 2) + ($i * 3)) % 6)
-                Set-Both $c $e $x 6 $cyan[0]; Set-Both $c $e $x 7 $cyan[1]
-            }
-            foreach ($p in @(@(10, 5), @(11, 5), @(10, 8), @(11, 8), @(10, 6), @(11, 6), @(10, 7), @(11, 7))) {
-                $k = (($p[0] + $p[1] + $Frame) % 3)
-                $viol = @((Hex '8E3FD0'), (Hex 'B565F0'), (Hex 'E3B8FF'))
-                Set-Both $c $e $p[0] $p[1] $viol[$k]
-            }
-        }
-        else {
-            foreach ($p in @(@(10, 5), @(11, 5), @(10, 8), @(11, 8), @(10, 6), @(11, 6), @(10, 7), @(11, 7))) { Set-Px $c $p[0] $p[1] (Hex '2A1A3A') }
-        }
-    }
-    # run lamp under the window
-    Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })
-    Set-Px $c 8 12 $(if ($Active) { $LampOn } else { $LampOff })
-    if ($Active) { Set-Px $e 7 12 $LampOn; Set-Px $e 8 12 $LampOn }
-    # nothing may sit on the outer ring
-    for ($i = 0; $i -lt 16; $i++) { foreach ($p in @(@($i, 0), @($i, 15), @(0, $i), @(15, $i))) { Set-Px $c $p[0] $p[1] 0; Set-Px $e $p[0] $p[1] 0 } }
-    return @{ C = $c; E = $e }
+    return New-OwnFace $Own[$Kind] $Frame $Active
 }
 
 function New-Rod {

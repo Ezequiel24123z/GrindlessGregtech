@@ -78,48 +78,80 @@ function New-Bezel {
     return $c
 }
 
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
+}
+
+# the nuclear clock lab: a clock ring with a violet sweep running round it, tick marks, and the blue thorium crystal in the middle
+$ClockFace = @{ Mode = 'chase'; Pal = @{}
+    Ramp = @((Hex '2A1A44'), (Hex '6A3CC8'), (Hex '9A6CF0'), (Hex 'C8A0FF'), (Hex 'F0DCFF'))
+    Ramp2 = @((Hex '1A2A44'), (Hex '2E5C9C'), (Hex '4F86D0'), (Hex '86B4F0'), (Hex 'C8E0FF'))
+    Map = @('...012301...', '..3..MM..2..', '.2........3.', '.1...ab...0.', '.0M.abcd.M1.', '.3M.dcba.M2.', '.2...cd...3.', '.1........0.', '..0..MM..1..', '...321032...', '............', '.....ll.....') }
+
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
+    if ($Kind -eq 'lab') { return New-OwnFace $ClockFace $Frame $Active }
     $c = New-Bezel
     $e = New-Canvas
     for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    if ($Kind -eq 'lab') {
-        # the optical table along the bottom of the window; the crystal at x7..8, y5..7 in its mount; the beam on row 6
-        for ($x = 4; $x -le 11; $x++) { Set-Px $c $x 9 (Hex '3A3E48') }
-        Set-Px $c 7 8 (Hex '5A5E68'); Set-Px $c 8 8 (Hex '5A5E68')
-        if ($Active) {
-            $beam = Hex '6A3CC8'; $pulse = Hex 'C8A0FF'
-            foreach ($x in 4, 5, 6, 9, 10, 11) { Set-Both $c $e $x 6 $beam }
-            $px = @(4, 5, 6, 9)[$Frame % 4]
-            Set-Both $c $e $px 6 $pulse
-            for ($y = 5; $y -le 7; $y++) { Set-Both $c $e 7 $y (Hex 'F0DCFF'); Set-Both $c $e 8 $y (Hex 'C8A8F0') }
+    # induction coils at x4 and x11; the crucible on the hearth (x6..9, y8..9); the pull rod down column 8
+    $crucible = Hex 'C4C8D2'
+    Set-Px $c 6 8 $crucible; Set-Px $c 9 8 $crucible
+    for ($x = 6; $x -le 9; $x++) { Set-Px $c $x 9 $crucible }
+    if ($Active) {
+        for ($y = 4; $y -le 9; $y++) {
+            foreach ($x in 4, 11) {
+                if ((($y + $Frame) % 2) -eq 0) { Set-Both $c $e $x $y (Hex 'FF8C2A') } else { Set-Px $c $x $y (Hex '9A4A1A') }
+            }
         }
-        else {
-            for ($y = 5; $y -le 7; $y++) { Set-Px $c 7 $y (Hex '4A3A6A'); Set-Px $c 8 $y (Hex '3A2E54') }
-        }
+        Set-Both $c $e 7 8 (Hex 'FFB040'); Set-Both $c $e 8 8 (Hex 'FFB040')
+        # the boule grows from the melt: 1 to 4 pixels tall
+        $top = 7 - $Frame
+        for ($y = $top; $y -le 7; $y++) { Set-Both $c $e 7 $y (Hex 'FFE8A0'); Set-Both $c $e 8 $y (Hex 'F0C878') }
+        for ($y = 4; $y -lt $top; $y++) { Set-Px $c 8 $y (Hex 'A0A4AC') }
     }
     else {
-        # induction coils at x4 and x11; the crucible on the hearth (x6..9, y8..9); the pull rod down column 8
-        $crucible = Hex 'C4C8D2'
-        Set-Px $c 6 8 $crucible; Set-Px $c 9 8 $crucible
-        for ($x = 6; $x -le 9; $x++) { Set-Px $c $x 9 $crucible }
-        if ($Active) {
-            for ($y = 4; $y -le 9; $y++) {
-                foreach ($x in 4, 11) {
-                    if ((($y + $Frame) % 2) -eq 0) { Set-Both $c $e $x $y (Hex 'FF8C2A') } else { Set-Px $c $x $y (Hex '9A4A1A') }
-                }
-            }
-            Set-Both $c $e 7 8 (Hex 'FFB040'); Set-Both $c $e 8 8 (Hex 'FFB040')
-            # the boule grows from the melt: 1 to 4 pixels tall
-            $top = 7 - $Frame
-            for ($y = $top; $y -le 7; $y++) { Set-Both $c $e 7 $y (Hex 'FFE8A0'); Set-Both $c $e 8 $y (Hex 'F0C878') }
-            for ($y = 4; $y -lt $top; $y++) { Set-Px $c 8 $y (Hex 'A0A4AC') }
-        }
-        else {
-            for ($y = 4; $y -le 9; $y++) { Set-Px $c 4 $y (Hex '7A4A22'); Set-Px $c 11 $y (Hex '7A4A22') }
-            Set-Px $c 7 8 (Hex '5A3A2A'); Set-Px $c 8 8 (Hex '5A3A2A')
-            for ($y = 4; $y -le 7; $y++) { Set-Px $c 8 $y (Hex 'A0A4AC') }
-        }
+        for ($y = 4; $y -le 9; $y++) { Set-Px $c 4 $y (Hex '7A4A22'); Set-Px $c 11 $y (Hex '7A4A22') }
+        Set-Px $c 7 8 (Hex '5A3A2A'); Set-Px $c 8 8 (Hex '5A3A2A')
+        for ($y = 4; $y -le 7; $y++) { Set-Px $c 8 $y (Hex 'A0A4AC') }
     }
     # run lamp under the window
     Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })

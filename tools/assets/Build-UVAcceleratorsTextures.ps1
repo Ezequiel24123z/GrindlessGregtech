@@ -67,82 +67,73 @@ function Set-Both {
 $Lit = Hex 'B0B0B0'; $Mid = Hex '707070'; $Dark = Hex '404040'; $Deep = Hex '222222'; $Pit = Hex '161616'
 $LampOn = Hex '62FF86'; $LampOff = Hex '0C6B2E'
 
-function New-Bezel {
-    $c = New-Canvas
-    Set-Rect $c 1 1 14 14 $Dark
-    for ($i = 1; $i -le 14; $i++) {
-        Set-Px $c $i 1 $Lit; Set-Px $c 1 $i $Lit
-        Set-Px $c $i 14 $Deep; Set-Px $c 14 $i $Deep
-    }
-    Set-Rect $c 2 2 12 12 $Mid
-    Set-Rect $c 3 3 10 8 $Deep
-    Set-Rect $c 3 11 10 3 $Dark
-    return $c
+# Own controller faces (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
 }
 
-# the beam pipe round the window, clockwise from the top left: 24 places
-$Ring = New-Object System.Collections.Generic.List[object]
-for ($x = 4; $x -le 11; $x++) { $Ring.Add(@($x, 4)) }
-for ($y = 5; $y -le 9; $y++) { $Ring.Add(@(11, $y)) }
-for ($x = 10; $x -ge 4; $x--) { $Ring.Add(@($x, 9)) }
-for ($y = 8; $y -ge 5; $y--) { $Ring.Add(@(4, $y)) }
+$Own = @{
+    # the storage ring: a bunch circulates the racetrack past two rows of copper undulators
+    synchrotron = @{ Mode = 'chase'; Pal = @{ k = (Hex 'B06A38'); q = (Hex '8A4E28') }
+        Ramp = @((Hex '24303A'), (Hex '8AE4F5'), (Hex 'C0F0FF'), (Hex 'FFF2C0'), (Hex 'FFFFFF')); Ramp2 = @()
+        Map = @('............', '..01230123..', '..3PPPPPP0..', '..2kqkqkq1..', '..1PDDDDP2..', '..0PDDDDP3..', '..3kqkqkq0..', '..2PPPPPP1..', '..10321032..', '............', '............', '.....ll.....') }
+    # the muon cell: a tall tank, teal deuterium-tritium liquid below, violet muon sparks above
+    muon_fusion_cell = @{ Mode = 'twinkle'; Pal = @{}
+        Ramp = @((Hex '2A1A3A'), (Hex '8E3FD0'), (Hex 'B565F0'), (Hex 'C08AFF'), (Hex 'E3B8FF'))
+        Ramp2 = @((Hex '1A3A34'), (Hex '2E9C88'), (Hex '4FC8B0'), (Hex '86E8D4'), (Hex 'C8FFF2'))
+        Map = @('..MMMMMMMM..', '..D012340D..', '..D304120D..', '..DPPPPPPD..', '..DabababD..', '..DbababaD..', '..DabababD..', '..DbababaD..', '..DabababD..', '..MMMMMMMM..', '.MM......MM.', '.....ll.....') }
+    # the trap: copper solenoids above and below confine a violet antiproton cloud
+    antimatter_trap = @{ Mode = 'twinkle'; Pal = @{ k = (Hex 'B06A38'); q = (Hex '8A4E28') }
+        Ramp = @(); Ramp2 = @((Hex '2A1A3A'), (Hex '8E3FD0'), (Hex 'B565F0'), (Hex 'D8A0FF'), (Hex 'E3B8FF'))
+        Map = @('............', 'kqkqkqkqkqkq', 'qkqkqkqkqkqk', '............', '....bcdb....', '...bcdeab...', '..acdeabcd..', '..bdeabcde..', '...cdeabc...', 'kqkqkqkqkqkq', 'qkqkqkqkqkqk', '.....ll.....') }
+}
 
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
-    $c = New-Bezel
-    $e = New-Canvas
-    for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    switch ($Kind) {
-        'synchrotron' {
-            foreach ($p in $Ring) { Set-Px $c $p[0] $p[1] (Hex '1C2A33') }
-            if ($Active) {
-                for ($i = 0; $i -lt 3; $i++) {
-                    $k = (($Frame * 2) + ($i * 8)) % $Ring.Count
-                    $head = $Ring[$k]; $tail = $Ring[($k + $Ring.Count - 1) % $Ring.Count]
-                    Set-Both $c $e $head[0] $head[1] (Hex 'FFF2C0')
-                    Set-Both $c $e $tail[0] $tail[1] (Hex '8AE4F5')
-                }
-            }
-        }
-        'cell' {
-            for ($x = 4; $x -le 11; $x++) { for ($y = 7; $y -le 9; $y++) { Set-Px $c $x $y (Hex '1A3A34') } }
-            if ($Active) {
-                $dt = @((Hex '2E9C88'), (Hex '4FC8B0'), (Hex '86E8D4'))
-                for ($x = 4; $x -le 11; $x++) {
-                    for ($y = 7; $y -le 9; $y++) {
-                        $k = if ($y -eq 7) { (($x + $Frame) % 3) } else { 0 }
-                        Set-Both $c $e $x $y $dt[$k]
-                    }
-                }
-                for ($i = 0; $i -lt 3; $i++) {
-                    $x = 5 + (($i * 3) % 6)
-                    $y = 8 - (($Frame + $i) % 4)
-                    Set-Both $c $e $x $y (Hex 'C08AFF')
-                }
-            }
-        }
-        'trap' {
-            for ($y = 4; $y -le 9; $y++) { Set-Px $c 4 $y (Hex 'B06A38'); Set-Px $c 11 $y (Hex '8A4E28') }
-            for ($x = 5; $x -le 10; $x++) { Set-Px $c $x 6 (Hex '1C1C2A'); Set-Px $c $x 7 (Hex '1C1C2A') }
-            if ($Active) {
-                $viol = @((Hex '8E3FD0'), (Hex 'B565F0'), (Hex 'E3B8FF'))
-                for ($x = 6; $x -le 9; $x++) {
-                    foreach ($y in 6, 7) { Set-Both $c $e $x $y $viol[(($x + $y + $Frame) % 3)] }
-                }
-            }
-        }
-    }
-    Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })
-    Set-Px $c 8 12 $(if ($Active) { $LampOn } else { $LampOff })
-    if ($Active) { Set-Px $e 7 12 $LampOn; Set-Px $e 8 12 $LampOn }
-    for ($i = 0; $i -lt 16; $i++) { foreach ($p in @(@($i, 0), @($i, 15), @(0, $i), @(15, $i))) { Set-Px $c $p[0] $p[1] 0; Set-Px $e $p[0] $p[1] 0 } }
-    return @{ C = $c; E = $e }
+    return New-OwnFace $Own[$Kind] $Frame $Active
 }
 
 $kinds = @(
     @{ Kind = 'synchrotron'; Dir = 'block/multiblock/synchrotron' },
-    @{ Kind = 'cell'; Dir = 'block/multiblock/muon_fusion_cell' },
-    @{ Kind = 'trap'; Dir = 'block/multiblock/antimatter_trap' }
+    @{ Kind = 'muon_fusion_cell'; Dir = 'block/multiblock/muon_fusion_cell' },
+    @{ Kind = 'antimatter_trap'; Dir = 'block/multiblock/antimatter_trap' }
 )
 foreach ($k in $kinds) {
     $idle = New-Face $k.Kind 0 $false

@@ -62,69 +62,63 @@ function Set-Both {
 $Lit = Hex 'B0B0B0'; $Mid = Hex '707070'; $Dark = Hex '404040'; $Deep = Hex '222222'; $Pit = Hex '161616'
 $LampOn = Hex '62FF86'; $LampOff = Hex '0C6B2E'
 
-# The steel bezel: x1..14, y1..14, bevelled from the top left, with a dark panel inside and a lamp under the window.
-function New-Bezel {
-    $c = New-Canvas
-    Set-Rect $c 1 1 14 14 $Dark
-    for ($i = 1; $i -le 14; $i++) {
-        Set-Px $c $i 1 $Lit; Set-Px $c 1 $i $Lit
-        Set-Px $c $i 14 $Deep; Set-Px $c 14 $i $Deep
-    }
-    Set-Rect $c 2 2 12 12 $Mid
-    Set-Rect $c 3 3 10 8 $Deep
-    Set-Rect $c 3 11 10 3 $Dark
-    return $c
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
 }
+
+# the high-flux reactor: a blue Cherenkov pool around a plated core with orange glow, control-rod stubs in the pool
+$ReactorFace = @{ Mode = 'chase'; Pal = @{}
+    Ramp = @((Hex '0E2440'), (Hex '1E50B4'), (Hex '3C8CF0'), (Hex '8CC8FF'), (Hex 'E6F4FF'))
+    Ramp2 = @((Hex '5A2A10'), (Hex 'C85A14'), (Hex 'F08A2A'), (Hex 'FFC060'), (Hex 'FFF0C0'))
+    Map = @('.MDDDDDDDDM.', 'D3210123210D', 'D2PDPccPDP2D', 'D1PPcbbcPP1D', 'D0PPcbbcPP0D', 'D1PDPccPDP1D', 'D2PPPPPPPP2D', 'D3210123210D', '............', '............', '............', '.....ll.....') }
+# the transuranium facility: a hot-cell window with green glass readouts, a vial glow, two glove ports and a hazard stripe
+$FacilityFace = @{ Mode = 'chase'; Pal = @{ y = (Hex 'C8A020'); k = (Hex '5A5040') }
+    Ramp = @((Hex '123A24'), (Hex '1E8A4A'), (Hex '2ED070'), (Hex '8AF0B0'), (Hex 'D8FFE8'))
+    Ramp2 = @((Hex '1C3430'), (Hex '1E8C78'), (Hex '3CC8A8'), (Hex 'A0F0DC'), (Hex 'C8FFF0'))
+    Map = @('yEyEyEyEyEyE', 'DDDDDDDDDDDD', 'DPPPPPPPPPPD', 'DP0P1P2P3PPD', 'DPPPPPPPaPPD', 'DPkkPPPPbPPD', 'DPkPPPPPbPPD', 'DPPPPPPPcPPD', '............', '............', '............', '.....ll.....') }
 
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
-    $c = New-Bezel
-    $e = New-Canvas
-    for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    if ($Kind -eq 'reactor') {
-        # the pool fills the window; the core sits at x7..8, y6..7
-        $water = Hex '0E2440'
-        for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $water } }
-        if ($Active) {
-            $glow = @((Hex 'E6F4FF'), (Hex '8CC8FF'), (Hex '3C8CF0'), (Hex '1E50B4'))
-            for ($y = 4; $y -le 9; $y++) {
-                for ($x = 4; $x -le 11; $x++) {
-                    $d = [Math]::Max([Math]::Abs(2 * $x - 15), [Math]::Abs(2 * $y - 13))
-                    $ring = [int][Math]::Floor($d / 2)
-                    if ($ring -eq 0) { Set-Both $c $e $x $y $glow[0]; continue }
-                    # the glow pulses outward: one ring bright per frame
-                    if ($ring -le 3 -and (($ring + 4 - $Frame) % 4) -eq 1) { Set-Both $c $e $x $y $glow[[Math]::Min($ring, 3)] }
-                    elseif ($ring -eq 1) { Set-Both $c $e $x $y $glow[2] }
-                }
-            }
-        }
-        else {
-            foreach ($p in @(@(7, 6), @(8, 6), @(7, 7), @(8, 7))) { Set-Px $c $p[0] $p[1] (Hex '2A3A50') }
-        }
-    }
-    else {
-        # the glovebox window: two glove ports on the left, the ion-exchange column at x9..10
-        foreach ($g in @(@(5, 5), @(5, 8))) {
-            Set-Px $c $g[0] $g[1] (Hex '3A3428'); Set-Px $c ($g[0] + 1) $g[1] (Hex '3A3428')
-            Set-Px $c $g[0] ($g[1] - 1) (Hex '5A5040'); Set-Px $c ($g[0] + 1) ($g[1] - 1) (Hex '5A5040')
-        }
-        if ($Active) {
-            $teal = @((Hex '1E8C78'), (Hex '3CC8A8'))
-            for ($y = 4; $y -le 9; $y++) { Set-Both $c $e 9 $y $teal[0]; Set-Both $c $e 10 $y $teal[1] }
-            $by = 9 - ($Frame % 4) - 1
-            Set-Both $c $e 9 $by (Hex 'C8FFF0'); Set-Both $c $e 10 ($by + 1) (Hex 'A0F0DC')
-        }
-        else {
-            for ($y = 4; $y -le 9; $y++) { Set-Px $c 9 $y (Hex '1C3430'); Set-Px $c 10 $y (Hex '24403A') }
-        }
-    }
-    # run lamp under the window
-    Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })
-    Set-Px $c 8 12 $(if ($Active) { $LampOn } else { $LampOff })
-    if ($Active) { Set-Px $e 7 12 $LampOn; Set-Px $e 8 12 $LampOn }
-    # nothing may sit on the outer ring
-    for ($i = 0; $i -lt 16; $i++) { foreach ($p in @(@($i, 0), @($i, 15), @(0, $i), @(15, $i))) { Set-Px $c $p[0] $p[1] 0; Set-Px $e $p[0] $p[1] 0 } }
-    return @{ C = $c; E = $e }
+    if ($Kind -eq 'reactor') { return New-OwnFace $ReactorFace $Frame $Active }
+    return New-OwnFace $FacilityFace $Frame $Active
 }
 
 $kinds = @(@{ Kind = 'reactor'; Dir = 'block/multiblock/high_flux_reactor' }, @{ Kind = 'facility'; Dir = 'block/multiblock/transuranium_facility' })

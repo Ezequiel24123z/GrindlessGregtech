@@ -64,43 +64,57 @@ function Set-Both {
 $Lit = Hex 'B0B0B0'; $Mid = Hex '707070'; $Dark = Hex '404040'; $Deep = Hex '222222'; $Pit = Hex '161616'
 $LampOn = Hex '62FF86'; $LampOff = Hex '0C6B2E'
 
-function New-Bezel {
-    $c = New-Canvas
-    Set-Rect $c 1 1 14 14 $Dark
-    for ($i = 1; $i -le 14; $i++) {
-        Set-Px $c $i 1 $Lit; Set-Px $c 1 $i $Lit
-        Set-Px $c $i 14 $Deep; Set-Px $c 14 $i $Deep
-    }
-    Set-Rect $c 2 2 12 12 $Mid
-    Set-Rect $c 3 3 10 8 $Deep
-    Set-Rect $c 3 11 10 3 $Dark
-    return $c
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
 }
 
-# the racetrack arc, clockwise from the left of the window: window x4..11, y4..9
-$Arc = @(@(4, 9), @(4, 8), @(4, 7), @(4, 6), @(5, 5), @(6, 4), @(7, 4), @(8, 4), @(9, 4), @(10, 5), @(11, 6), @(11, 7), @(11, 8), @(11, 9))
+# the calutron: copper magnet coils over the D-shaped chamber; two isotope beams (amber outer, cyan inner) arc from the source to the collector
+$CalutronFace = @{ Mode = 'chase'; Pal = @{ k = (Hex 'B06A38'); q = (Hex '8A4E28') }
+    Ramp = @((Hex '4A2A0A'), (Hex 'C96A0A'), (Hex 'FF9E1F'), (Hex 'FFD15A'), (Hex 'FFF0B0'))
+    Ramp2 = @((Hex '1A3A44'), (Hex '2E9CB8'), (Hex '4FC8E0'), (Hex '86E8F4'), (Hex 'C8FAFF'))
+    Map = @('kqkqkqkqkqkq', 'qkqkqkqkqkqk', '...012301...', '..3.abcd.2..', '..2.d..a.1..', '..1.c..b.0..', '..0.b..c.3..', '..3.a..d.2..', '..2......1..', '.MMM....MMM.', '.DDD....DDD.', '.....ll.....') }
 
 function New-Face {
     param([int]$Frame, [bool]$Active)
-    $c = New-Bezel
-    $e = New-Canvas
-    for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    foreach ($p in $Arc) { Set-Px $c $p[0] $p[1] (Hex '2C2A44') }
-    # the collector pocket at the foot of the arc
-    Set-Px $c 8 9 (Hex '3A3C4C'); Set-Px $c 7 9 (Hex '3A3C4C')
-    if ($Active) {
-        $beam = @((Hex 'F0E0FF'), (Hex 'B484F0'), (Hex '6C3CC0'))
-        for ($k = 0; $k -lt 3; $k++) {
-            $p = $Arc[($Frame * 3 + $k) % $Arc.Count]
-            Set-Both $c $e $p[0] $p[1] $beam[$k]
-        }
-        Set-Both $c $e 7 9 (Hex '78E0F0'); Set-Both $c $e 8 9 (Hex '3CA8C8')
-    }
-    Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })
-    Set-Px $c 8 12 $(if ($Active) { $LampOn } else { $LampOff })
-    if ($Active) { Set-Px $e 7 12 $LampOn; Set-Px $e 8 12 $LampOn }
-    for ($i = 0; $i -lt 16; $i++) { foreach ($p in @(@($i, 0), @($i, 15), @(0, $i), @(15, $i))) { Set-Px $c $p[0] $p[1] 0; Set-Px $e $p[0] $p[1] 0 } }
-    return @{ C = $c; E = $e }
+    return New-OwnFace $CalutronFace $Frame $Active
 }
 
 function New-Item16 {

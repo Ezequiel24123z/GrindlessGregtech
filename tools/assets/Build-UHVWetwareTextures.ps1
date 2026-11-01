@@ -61,67 +61,57 @@ function Set-Both {
 $Lit = Hex 'B0B0B0'; $Mid = Hex '707070'; $Dark = Hex '404040'; $Deep = Hex '222222'
 $LampOn = Hex '62FF86'; $LampOff = Hex '0C6B2E'
 
-# The steel bezel: x1..14, y1..14, bevelled from the top left, with a dark panel inside and a lamp under the window.
-function New-Bezel {
-    $c = New-Canvas
-    Set-Rect $c 1 1 14 14 $Dark
-    for ($i = 1; $i -le 14; $i++) {
-        Set-Px $c $i 1 $Lit; Set-Px $c 1 $i $Lit
-        Set-Px $c $i 14 $Deep; Set-Px $c 14 $i $Deep
-    }
-    Set-Rect $c 2 2 12 12 $Mid
-    Set-Rect $c 3 3 10 8 $Deep
-    Set-Rect $c 3 11 10 3 $Dark
-    return $c
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
 }
 
-# the electrode columns, left to right; the outer two run down the dish's sides, the inner two only top and bottom
-$Columns = @(
-    @(@(4, 4), @(4, 6), @(4, 7), @(4, 9)),
-    @(@(6, 4), @(6, 9)),
-    @(@(9, 4), @(9, 9)),
-    @(@(11, 4), @(11, 6), @(11, 7), @(11, 9))
-)
-# the organoid: x6..9, y5..8 without its corners; the core is x7..8, y6..7
-$Organoid = @()
-for ($y = 5; $y -le 8; $y++) {
-    for ($x = 6; $x -le 9; $x++) {
-        if (($x -eq 6 -or $x -eq 9) -and ($y -eq 5 -or $y -eq 8)) { continue }
-        $Organoid += , @($x, $y)
-    }
-}
+# the organoid array: a grid of nine wells with pink organoids, green signal pulses running along the bus between the well rows
+$OrganoidFace = @{ Mode = 'chase'; Pal = @{}
+    Ramp = @((Hex '123A2A'), (Hex '1E8A5A'), (Hex '2ED08A'), (Hex '8AF0B8'), (Hex 'D0FFE0'))
+    Ramp2 = @((Hex '5A3444'), (Hex 'C0607E'), (Hex 'E888A8'), (Hex 'F4A8C0'), (Hex 'FFE0EC'))
+    Map = @('DDDDDDDDDDDD', 'PaPDPbPDPcPD', 'PbPDPcPDPaPD', 'PcPDPaPDPbPD', 'D0DDD1DDD2DD', 'PbPDPcPDPaPD', 'PcPDPaPDPbPD', 'PaPDPbPDPcPD', '............', '............', '............', '.....ll.....') }
 
 function New-Face {
     param([int]$Frame, [bool]$Active)
-    $c = New-Bezel
-    $e = New-Canvas
-    $medium = $(if ($Active) { Hex '3A2030' } else { Hex '24161E' })
-    for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $medium } }
-    $gold = $(if ($Active) { Hex 'D8B040' } else { Hex '6A5A28' })
-    foreach ($col in $Columns) { foreach ($p in $col) { Set-Px $c $p[0] $p[1] $gold } }
-    foreach ($p in $Organoid) {
-        $core = ($p[0] -eq 7 -or $p[0] -eq 8) -and ($p[1] -eq 6 -or $p[1] -eq 7)
-        if ($Active) {
-            if ($core) { Set-Both $c $e $p[0] $p[1] (Hex 'F4A8C0') } else { Set-Px $c $p[0] $p[1] (Hex 'C0607E') }
-        }
-        else {
-            Set-Px $c $p[0] $p[1] $(if ($core) { Hex '7A4A5A' } else { Hex '5A3444' })
-        }
-    }
-    if ($Active) {
-        # the spike: one electrode column bright per frame, its neighbour fading behind it
-        $now = $Columns[$Frame % 4]
-        $prev = $Columns[($Frame + 3) % 4]
-        foreach ($p in $prev) { Set-Both $c $e $p[0] $p[1] (Hex '3CB4C8') }
-        foreach ($p in $now) { Set-Both $c $e $p[0] $p[1] (Hex 'C8FFFF') }
-    }
-    # run lamp under the window
-    Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })
-    Set-Px $c 8 12 $(if ($Active) { $LampOn } else { $LampOff })
-    if ($Active) { Set-Px $e 7 12 $LampOn; Set-Px $e 8 12 $LampOn }
-    # nothing may sit on the outer ring
-    for ($i = 0; $i -lt 16; $i++) { foreach ($p in @(@($i, 0), @($i, 15), @(0, $i), @(15, $i))) { Set-Px $c $p[0] $p[1] 0; Set-Px $e $p[0] $p[1] 0 } }
-    return @{ C = $c; E = $e }
+    return New-OwnFace $OrganoidFace $Frame $Active
 }
 
 $idle = New-Face 0 $false

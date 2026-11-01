@@ -72,8 +72,56 @@ function New-Bezel {
     return $c
 }
 
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
+}
+
+# the r-process decompressor: a dark core with eight spokes of glow bursting outward
+$SwellFace = @{ Mode = 'chase'; Pal = @{ x = (Hex '5C3C3C') }; Ramp2 = @()
+    Ramp = @((Hex '3A2420'), (Hex 'A03C14'), (Hex 'F08020'), (Hex 'FFC040'), (Hex 'FFF0A0'))
+    Map = @('PP6PP66PP6PP', 'PPP7P77P7PPP', 'PPPP8888PPPP', '45678xx87654', '45678xx87654', 'PPPP8888PPPP', 'PPP7P77P7PPP', 'PP6PP66PP6PP', '............', '............', '............', '.....ll.....') }
+
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
+    if ($Kind -eq 'swell') { return New-OwnFace $SwellFace $Frame $Active }
     $c = New-Bezel
     $e = New-Canvas
     for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
@@ -98,14 +146,6 @@ function New-Face {
             if ($Active) {
                 $core = @((Hex 'FFFFFF'), (Hex 'C0E0FF'), (Hex '80C0FF'), (Hex 'C0E0FF'))[$Frame % 4]
                 foreach ($x in 7, 8) { foreach ($y in 6, 7) { Set-Both $c $e $x $y $core } }
-            }
-        }
-        'swell' {
-            $ring = Hex '5C3C3C'
-            foreach ($x in 7, 8) { foreach ($y in 6, 7) { Set-Px $c $x $y $ring } }
-            if ($Active) {
-                $r = $Frame % 4
-                foreach ($x in (7 - [Math]::Min($r, 3))..(8 + [Math]::Min($r, 3))) { foreach ($y in (6 - [Math]::Min($r, 2))..(7 + [Math]::Min($r, 2))) { Set-Both $c $e $x $y $hot } }
             }
         }
         'vault' {
