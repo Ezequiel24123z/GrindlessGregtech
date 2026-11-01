@@ -1,4 +1,4 @@
-// priority: -5294
+// priority: -5220
 // TEST ONLY, XP-T2 (gate c17). Command: kubejs custom_command gg_test_maxplus_gates
 // Band ONLY: X 47104-47167, Z 0-63, Y 98-115 of grindless:tarantula_orbit (30 Doradus; zones.json row maxplus_gates). The only place outside the band
 // is the arrival platform the pack's own poller places at X 64 Z 64 of the grindless:magellanic_stream level; the test reads it and never writes there.

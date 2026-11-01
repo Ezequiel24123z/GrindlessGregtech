@@ -1,4 +1,4 @@
-// priority: 6716
+// priority: 6770
 // Gregtech Grindless - names and tooltips of MAX's cluster-light furnace (startup_scripts/grindless/max/furnace.js; package MAX-R1):
 //
 //   block.gtceu.<machine>, gtceu.<type>                machine and recipe type names

@@ -118,6 +118,20 @@
     })
   })
 
+  // the MAX+ wireless energy hatches (XP-W2): tier 14 only, the amperages of the table's maxplusHatchAmps (each has a maxplusCaps row);
+  // the same builder below, kept out of W.hatchIds (which stays one grid of kinds x amperages x tiers) in W.maxplusHatchIds
+  W.maxplusTier = 14
+  W.maxplusHatchAmps = (T.maxplusHatchAmps || []).slice()
+  W.maxplusHatchIds = []
+  W.maxplusHatchAmps.forEach(function (amps) {
+    if (!T.maxplusCaps.some(function (c) { return c.tier === W.maxplusTier && c.amps === amps })) {
+      throw new Error('[grindless/wireless] wireless_energy.json: maxplusHatchAmps ' + amps + ' has no maxplusCaps row')
+    }
+    var id = W.hatchId('hatch', W.maxplusTier, amps)
+    W.hatches[id] = { kind: 'hatch', tier: W.maxplusTier, amps: amps }
+    W.maxplusHatchIds.push(id)
+  })
+
   // the covers: definition id -> { kind, tier, item }, item id -> the same
   W.coverKinds = {
     energy: { key: 'energy', base: 'wireless_energy_cover', role: 'withdraw', label: 'Wireless Energy Cover' },
@@ -274,8 +288,8 @@
           String(FU.formatNumbers(info.capacity))))
       }
       if (st.up) {
-        list.add(Text.translate('grindless.machine.wireless_energy_tower.network', String(FU.formatNumbers(st.stored)),
-          String(FU.formatNumbers(st.capacity)), TIER_LABELS[st.tier], String(st.towers)))
+        list.add(Text.translate('grindless.machine.wireless_energy_tower.network', typeof W.fmt === 'function' ? W.fmt(st.stored) : String(FU.formatNumbers(st.stored)),
+          typeof W.fmt === 'function' ? W.fmt(st.capacity) : String(FU.formatNumbers(st.capacity)), TIER_LABELS[st.tier], String(st.towers)))
         list.add(Text.translate('grindless.machine.wireless_energy_tower.flow', W.perTick(st.inPerSecond), W.perTick(st.outPerSecond)))
       }
     } catch (e) {
@@ -288,8 +302,8 @@
     var IO = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.IO')
     // GTM's tiers(int...), every row of the table: spelled out one argument per tier (the call the LV-IV hatches were proven with),
     // not a JS array through Rhino's varargs conversion
-    function withTiers(b) {
-      var t = TIER_LIST
+    function withTiers(b, tiers) {
+      var t = tiers || TIER_LIST
       switch (t.length) {
         case 1: return b.tiers(t[0])
         case 2: return b.tiers(t[0], t[1])
@@ -323,6 +337,20 @@
             builder['tooltips(net.minecraft.network.chat.Component[])'](hatchTooltips(kind, tier, amps))
           })
       })
+    })
+
+    W.maxplusHatchAmps.forEach(function (amps) {
+      withTiers(event.create(W.hatchName('hatch', amps), 'custom'), [W.maxplusTier])
+        .machine(function (holder, tier, tankScaling) { return new EHPM(holder, tier, IO.IN, amps) })
+        .definition(function (tier, builder) {
+          builder
+            .langValue(GTValues.VNF[tier] + ' ' + amps + 'A ' + W.hatchKinds.hatch.label)
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.INPUT_ENERGY)
+          builder.modelPropertyBool(GTModelProperties.IS_FORMED, false)
+          builder['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](modelOf('block/machines/wireless/hatch_64a'))
+          builder['tooltips(net.minecraft.network.chat.Component[])'](hatchTooltips('hatch', tier, amps))
+        })
     })
 
     Pat.register(W.towerId, TOWER_SPEC)

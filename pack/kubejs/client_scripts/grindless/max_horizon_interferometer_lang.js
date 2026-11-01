@@ -1,4 +1,4 @@
-// priority: 6676
+// priority: 6726
 // Gregtech Grindless - names and tooltips of MAX's horizon interferometer (startup_scripts/grindless/max/horizon_interferometer.js; package MX-S1):
 //
 //   gtceu.<type>                                       the recipe type name (the machine's own name is F1's, max_foundation_lang.js)

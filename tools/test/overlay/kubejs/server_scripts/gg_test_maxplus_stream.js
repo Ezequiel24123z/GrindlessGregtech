@@ -1,4 +1,4 @@
-// priority: -5354
+// priority: -5292
 // TEST ONLY, XP-B2 (gtceu:primordial_fusion_torus). Command: kubejs custom_command gg_test_maxplus_stream
 // Band ONLY: X 48128-48191, Z 0-63, Y 98-125, in grindless:magellanic_stream; zones.json row maxplus_stream.
 //   T1 (named uncertainties):

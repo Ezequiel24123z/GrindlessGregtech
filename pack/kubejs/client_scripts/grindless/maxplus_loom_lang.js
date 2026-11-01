@@ -1,4 +1,4 @@
-// priority: 6836
+// priority: 6913
 // Gregtech Grindless - names and tooltips of MAX+'s meta-material loom (startup_scripts/grindless/maxplus/loom.js; package XP-H1):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each row of the package that has one (the loom's four rows, the press's

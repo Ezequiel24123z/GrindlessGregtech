@@ -1,4 +1,4 @@
-// priority: -5304
+// priority: -5232
 // TEST ONLY, XP-M1 (gtceu:max_maxplus_parallel_hatch, gtceu:hyperfactory). Command: kubejs custom_command gg_test_maxplus_hyperfactory
 // Band ONLY: X 46848-46911, Z 0-63, Overworld Y 98-115.
 //   T1 (named uncertainty: the reflected private currentParallel of 4,194,304 survives forming, and 4,096 x 4,194,304 = 2^34 never reaches the recipe as a wrapped int):

@@ -1,4 +1,4 @@
-// priority: 6604
+// priority: 6649
 // Gregtech Grindless - names and tooltips of MAX's segment reclamation works (startup_scripts/grindless/max/reclamation.js; package MX-S4):
 //
 //   gtceu.<type>                                       recipe type name (the controller's block name is F1's, max_foundation_lang.js)

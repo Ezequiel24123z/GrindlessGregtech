@@ -1,4 +1,4 @@
-// priority: -5224
+// priority: -5136
 // Gregtech Grindless - smoke test of the LV Creature Simulator (TEST-ONLY overlay: copied over the instance on the
 // test PC, never shipped with the pack).
 //

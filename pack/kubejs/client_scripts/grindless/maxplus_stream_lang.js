@@ -1,4 +1,4 @@
-// priority: 6806
+// priority: 6880
 // Gregtech Grindless - names, tooltips and EMI lines of MAX+'s two Magellanic Stream machines (startup_scripts/grindless/maxplus/stream.js; package XP-B2):
 //
 //   gtceu.<type>, block.gtceu.<machine>, grindless.machine.<machine>.tooltip.0   the recipe types and the controllers

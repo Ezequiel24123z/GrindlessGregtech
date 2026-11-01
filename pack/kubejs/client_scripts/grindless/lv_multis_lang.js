@@ -1,4 +1,4 @@
-// priority: 6946
+// priority: 7034
 // Gregtech Grindless - names and tooltips of the LV multiblocks and their items.
 //
 //   gtceu:lv_vein_drill, gtceu:lv_greenhouse, gtceu:submerged_arc_furnace   (machine names + tooltips)

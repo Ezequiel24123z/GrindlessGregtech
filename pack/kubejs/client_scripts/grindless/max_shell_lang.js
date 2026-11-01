@@ -1,4 +1,4 @@
-// priority: 6574
+// priority: 6616
 // Gregtech Grindless - names and tooltips of MAX's mirror shell (startup_scripts/grindless/max/shell.js; package MAX-G1):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each older row of the package

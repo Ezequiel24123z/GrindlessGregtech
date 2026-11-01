@@ -1,4 +1,4 @@
-// priority: -5434
+// priority: -5400
 // TEST ONLY, MX-S3 (gtceu:horizon_flux_clamp). Command: kubejs custom_command gg_test_max_flux_clamp
 // Band ONLY: X 41216-41279, Z 0-63, Y 98-115 of gcyr:black_hole_orbit (Sgr A*; zones.json row max_flux_clamp).
 //   T1 (named uncertainty: the 7-high flux clamp forms at Sgr A* and runs c1 at VA[MAX] = 2,013,265,920 EU/t on two OpV 4 A hatches):

@@ -1,4 +1,4 @@
-// priority: 6866
+// priority: 6946
 // Gregtech Grindless - names of the MAX+ foundation (startup_scripts/grindless/maxplus/foundation.js and travel.js), en_us and es_es.
 //
 //   grindless:<item> / <block>      item.grindless.<n> / block.grindless.<n>

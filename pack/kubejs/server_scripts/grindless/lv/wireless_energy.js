@@ -205,12 +205,57 @@
 
   // ---------------------------------------------------------------- the store
 
+  // Exact whole numbers above 2^53 (XP-W2): a value is a JS Number while it is at most 2^53 - 1 (every value the network held before
+  // Project Reforge, and the same code path), and a java.math.BigInteger above that, as GTNH's WirelessNetworkManager and GTM's power
+  // substation hold theirs. Number(getLong(...)) rounds a long above 2^53 (S0-11), so the store is read from the tag's digits and
+  // written with putLong(big.longValue()). BigInteger is loaded only when a value passes 2^53.
+  const SAFE = 9007199254740991
+  var BIG = null
+  function bi() {
+    if (BIG === null) BIG = Java.loadClass('java.math.BigInteger')
+    return BIG
+  }
+  function isNum(x) { return typeof x === 'number' }
+  function toBig(x) { return isNum(x) ? new (bi())(String(x)) : x }
+  function norm(b) { return b.abs().compareTo(toBig(SAFE)) <= 0 ? Number(String(b.toString())) : b }
+  function add(a, b) {
+    if (isNum(a) && isNum(b)) {
+      var s = a + b
+      if (s <= SAFE && s >= -SAFE) return s
+    }
+    return norm(toBig(a).add(toBig(b)))
+  }
+  function sub(a, b) {
+    if (isNum(a) && isNum(b)) {
+      var s = a - b
+      if (s <= SAFE && s >= -SAFE) return s
+    }
+    return norm(toBig(a).subtract(toBig(b)))
+  }
+  function cmp(a, b) {
+    if (isNum(a) && isNum(b)) return a < b ? -1 : a > b ? 1 : 0
+    return Number(toBig(a).compareTo(toBig(b)))
+  }
+  function minOf(a, b) { return cmp(a, b) <= 0 ? a : b }
+  W.big = { add: add, sub: sub, cmp: cmp, toBig: toBig, norm: norm, SAFE: SAFE }
+
   function stored(server) {
-    return Number(server.persistentData.getLong(STORE_KEY))
+    var pd = server.persistentData
+    var n = Number(pd.getLong(STORE_KEY))
+    if (n <= SAFE) return n
+    var digits = String(pd.get(STORE_KEY).getAsString()).replace(/L$/, '')
+    return /^[0-9]+$/.test(digits) ? norm(new (bi())(digits)) : n
   }
 
   function setStored(server, eu) {
-    server.persistentData.putLong(STORE_KEY, Math.max(0, Math.floor(eu)))
+    if (isNum(eu)) {
+      server.persistentData.putLong(STORE_KEY, Math.max(0, Math.floor(eu)))
+      return
+    }
+    var big = eu.signum() < 0 ? toBig(0) : eu
+    var top = new (bi())('9223372036854775807')
+    if (big.compareTo(top) > 0) big = top
+    server.persistentData.putLong(STORE_KEY, big.longValue())
   }
 
   // ---------------------------------------------------------------- towers
@@ -392,7 +437,7 @@
     towers.forEach(function (t) {
       if (!t.f || !(t.n > 0)) return
       out.towers++
-      out.capacity += t.c
+      out.capacity = add(out.capacity, t.c)
       if (t.t < weakest) weakest = t.t
     })
     out.up = out.towers > 0
@@ -403,12 +448,14 @@
       // deposits: whole multiples of 20 EU, as far as the network has room; any tier. A move that fails its check counts what the
       // machine really gave (`measured`), or nothing when that is not a sane number: a failure can lose EU, never make it.
       deposits.forEach(function (d) {
-        var room = out.capacity - bank
-        if (room <= 0) return
+        var room = sub(out.capacity, bank)
+        if (cmp(room, 0) <= 0) return
         var gave = 0
         var take = 0
         try {
-          take = Math.min(ad.available(d.a, d.limit, ticks), Math.floor(room * W.lossDenominator / W.lossNumerator))
+          var fits = isNum(room) && room * W.lossDenominator <= SAFE ? Math.floor(room * W.lossDenominator / W.lossNumerator)
+            : norm(toBig(room).multiply(toBig(W.lossDenominator)).divide(toBig(W.lossNumerator)))
+          take = minOf(ad.available(d.a, d.limit, ticks), fits)
           take -= take % W.lossDenominator
           if (take <= 0) return
           gave = ad.drain(d.a, take, ticks)
@@ -418,10 +465,10 @@
           gave = sane(err.measured, take) ? err.measured : 0
         }
         var put = Math.floor(gave * W.lossNumerator / W.lossDenominator)
-        bank += put
-        out.drained += gave
-        out.in += put
-        out.lost += gave - put
+        bank = add(bank, put)
+        out.drained = add(out.drained, gave)
+        out.in = add(out.in, put)
+        out.lost = add(out.lost, gave - put)
         var fd = flow(d.e)
         fd.drained += gave
         fd.in += put
@@ -439,11 +486,14 @@
           out.faulted++
         }
       })
-      var total = needs.reduce(function (a, b) { return a + b }, 0)
-      if (total > 0 && bank > 0) {
-        var share = bank >= total ? 1 : bank / total
+      var total = needs.reduce(function (a, b) { return add(a, b) }, 0)
+      if (cmp(total, 0) > 0 && cmp(bank, 0) > 0) {
+        var enough = cmp(bank, total) >= 0
+        // while both are exact Numbers the share is the float it always was; above 2^53 it is exact: floor(need x bank / total)
+        var plain = isNum(bank) && isNum(total)
+        var share = enough ? 1 : plain ? bank / total : 0
         takers.forEach(function (w, i) {
-          var give = share >= 1 ? needs[i] : Math.floor(needs[i] * share)
+          var give = enough ? needs[i] : plain ? Math.floor(needs[i] * share) : norm(toBig(needs[i]).multiply(toBig(bank)).divide(toBig(total)))
           if (give <= 0) return
           var got = 0
           try {
@@ -454,18 +504,18 @@
             // what the machine really took; when that is not a sane number, all of it is charged (the network never gives more than it pays)
             got = sane(err.measured, give) ? err.measured : give
           }
-          bank -= got
-          out.out += got
+          bank = sub(bank, got)
+          out.out = add(out.out, got)
           flow(w.e).filled += got
         })
       }
     }
-    if (bank !== before) setStored(server, bank)
+    if (cmp(bank, before) !== 0) setStored(server, bank)
     out.stored = bank
-    W.totals.drained += out.drained
-    W.totals.in += out.in
-    W.totals.lost += out.lost
-    W.totals.out += out.out
+    W.totals.drained = add(W.totals.drained, out.drained)
+    W.totals.in = add(W.totals.in, out.in)
+    W.totals.lost = add(W.totals.lost, out.lost)
+    W.totals.out = add(W.totals.out, out.out)
     W.totals.settlements++
     windowIn.push(out.in)
     windowOut.push(out.out)
@@ -478,19 +528,28 @@
   // the network now: { up, tier, capacity, stored, towers, inPerSecond, outPerSecond } (EU over the last second)
   function status(server) {
     var last = W.last || { up: false, tier: 0, capacity: 0, towers: 0 }
-    var sumIn = windowIn.reduce(function (a, b) { return a + b }, 0)
-    var sumOut = windowOut.reduce(function (a, b) { return a + b }, 0)
+    var sumIn = windowIn.reduce(function (a, b) { return add(a, b) }, 0)
+    var sumOut = windowOut.reduce(function (a, b) { return add(a, b) }, 0)
     return { up: !!last.up, tier: last.tier, capacity: last.capacity, towers: last.towers, stored: stored(server), inPerSecond: sumIn, outPerSecond: sumOut }
   }
 
   // ---------------------------------------------------------------- the readout
 
   function fmt(n) {
+    if (!isNum(n)) return String(n.toString()).replace(/\B(?=([0-9]{3})+(?![0-9]))/g, ',')
     return String(lazy().FU.formatNumbers(Math.floor(n)))
   }
+  W.fmt = fmt
 
   // EU per tick from EU per second, one decimal
   function perTick(euPerSecond) {
+    if (!isNum(euPerSecond)) {
+      // exact above 2^53: tenths = round(x / 2), half up as Math.round
+      var tenths = euPerSecond.add(toBig(1)).divide(toBig(2))
+      var wholeBig = tenths.divide(toBig(10))
+      var tenthBig = Number(String(tenths.mod(toBig(10)).toString()))
+      return fmt(wholeBig) + (tenthBig > 0 ? '.' + tenthBig : '')
+    }
     var v = Math.round(euPerSecond / 20 * 10) / 10
     var whole = Math.floor(v)
     var tenth = Math.round((v - whole) * 10)
@@ -603,7 +662,7 @@
 
   // ---------------------------------------------------------------- tracking
 
-  W.hatchIds.concat([W.towerId]).forEach(function (id) {
+  W.hatchIds.concat(W.maxplusHatchIds, [W.towerId]).forEach(function (id) {
     BlockEvents.placed(id, function (event) {
       try {
         // a block placed again starts over: whatever set the old one aside is forgiven
