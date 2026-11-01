@@ -841,24 +841,24 @@ Each mode is one row in the older machine's table or script; the package that ne
 
 ## New process lines
 
-ZPM adds 14 lines (LuV added 8).
+ZPM's 14 design lines (LuV's doc listed 8). Every one is built (the rf3a dump has their recipes); RF-3M's "designed, not built" for 4, 6, 7, 10, 13 and 14 was a chart gap. Read with the line roles (*Reforge line design (RF-3S)*, below), they are **6 production lines** and 4 chains of other roles; the last column says which.
 
-| # | Line | Steps | By-products → destination |
-|---|---|---|---|
-| 1 | Naquadria | stored impure solution (LuV) → refinery (1) → naquadria dust | enriched naquadah solution → naquadah plant mode 3; gallium sulfide → the gallium line (MV) |
-| 2 | Naquadah fuel loop | naquadria + Ce + Nd → fuel works (2) → Mk2 (radon) → excited fuel → large naquadah reactor → depleted fuel → fuel works (c2) | the recovery's residue → mode 2 |
-| 3 | Europium | GTCA's monazite froth → EV extraction cascade (ZPM mode) → reductor (3; Venus acid, Mercury's mercury) → europium | the other rare earths → GTM's separation; mercury looped |
-| 4 | Gas giant volatiles | Saturn → siphon (18) → hydrogen, Saturn helium, methane, ammonia | hydrogen → network and fuel cells; methane → the pyrolyser; ammonia → nitric acid |
-| 5 | Helium-3 power | Saturn helium → isotope column (19) → He-3, D, He-4 → Mk2 → turbine or converter (8) | helium back → the isotope column; tin → the pyrolyser's bath |
-| 6 | Titan organics | entry probe bay (21; PICA shields) → tholins, nitriles → tholin reformer (22) → PAN carbon fibre, diaminobenzidine, the bioreactor's feed | nitrogen → the network |
-| 7 | Enceladus | plume sampler (23) → brine, silica nanograins → aerogel works (14), vent bioreactor (13) | salt → the network; water → the station |
-| 8 | Qubits and research | Uranus slurry → separator (26) → diamond seed → lattice fab (10) → ion implanter (11; hot cell Si-28) → qubit fab (12; He-3 fridge) → qubit arrays → HPCA components → UV data | the fridge's helium looped; only the He-3 make-up is spent |
-| 9 | Diamonds and carbon | methane (Saturn, Uranus, the bioreactor) → pyrolyser (9) → graphene, nanotubes, H₂; methane + hydrogen → lattice fab (10) → CVD diamond plates | hydrogen → the network |
-| 10 | Living chemistry | Europa's culture + Enceladus brine + tholins → vent bioreactor (13) → archaeal culture, growth medium | spent brine → salt |
-| 11 | Waste and actinides | IV hot-cell and leach-field waste → waste retrieval plant (4) → radium, radon, raffinate → partitioning plant (5) → americium, curium | synroc → the honest final form (stored, inert); NO₂ → nitric acid |
-| 12 | Duranium and the quench | gallium + radon → Mk2 → duranium plasma → quench caster (7; Mars argon) → plate | argon looped |
-| 13 | Network storage | U + Rh + Nq → magnet works (6) → URhNq₂ wire → ZPM SMES cells, research station | — |
-| 14 | Charts and data | ring seismometer (24) → Uranus chart; flyby bay (27) → DSN (16) + Kuiper telescope (17) → Pluto–Kuiper chart; neutrino observatory (15) → solar-core survey, multimessenger catalogue | — |
+| # | Line | Steps | By-products → destination | RF-3S |
+|---|---|---|---|---|
+| 1 | Naquadria | stored impure solution (LuV) → refinery (1) → naquadria dust | enriched naquadah solution → naquadah plant mode 3; gallium sulfide → the gallium line (MV) | production, `naquadria` (with 2): keep, 4 steps |
+| 2 | Naquadah fuel loop | naquadria + Ce + Nd → fuel works (2) → Mk2 (radon) → excited fuel → large naquadah reactor → depleted fuel → fuel works (c2) | the recovery's residue → mode 2 | power: the return of line 1 (reactor and fuel works c2) |
+| 3 | Europium | GTCA's monazite froth → EV extraction cascade (ZPM mode) → reductor (3; Venus acid, Mercury's mercury) → europium | the other rare earths → GTM's separation; mercury looped | production, `europium`: lengthen by chart to 6 steps |
+| 4 | Gas giant volatiles | Saturn → siphon (18) → hydrogen, Saturn helium, methane, ammonia | hydrogen → network and fuel cells; methane → the pyrolyser; ammonia → nitric acid | resource: the siphon heads lines 5, 8 and 9 |
+| 5 | Helium-3 power | Saturn helium → isotope column (19) → He-3, D, He-4 → Mk2 → turbine or converter (8) | helium back → the isotope column; tin → the pyrolyser's bath | power (the Saturn column is its resource head) |
+| 6 | Titan organics | entry probe bay (21; PICA shields) → tholins, nitriles → tholin reformer (22) → PAN carbon fibre, diaminobenzidine, the bioreactor's feed | nitrogen → the network | production, `titan`: chart it, 6 steps |
+| 7 | Enceladus | plume sampler (23) → brine, silica nanograins → aerogel works (14), vent bioreactor (13) | salt → the network; water → the station | merged into 10 as its head; the aerogel branch is infrastructure |
+| 8 | Qubits and research | Uranus slurry → separator (26) → diamond seed → lattice fab (10) → ion implanter (11; hot cell Si-28) → qubit fab (12; He-3 fridge) → qubit arrays → HPCA components → UV data | the fridge's helium looped; only the He-3 make-up is spent | production, `qubits` (with 9): 6 steps |
+| 9 | Diamonds and carbon | methane (Saturn, Uranus, the bioreactor) → pyrolyser (9) → graphene, nanotubes, H₂; methane + hydrogen → lattice fab (10) → CVD diamond plates | hydrogen → the network | merged into 8 (methane and hydrogen head) |
+| 10 | Living chemistry | Europa's culture + Enceladus brine + tholins → vent bioreactor (13) → archaeal culture, growth medium | spent brine → salt | production, `living` (with 7): 5 steps |
+| 11 | Waste and actinides | IV hot-cell and leach-field waste → waste retrieval plant (4) → radium, radon, raffinate → partitioning plant (5) → americium, curium | synroc → the honest final form (stored, inert); NO₂ → nitric acid | production, `waste` (with 12): 7 steps |
+| 12 | Duranium and the quench | gallium + radon → Mk2 → duranium plasma → quench caster (7; Mars argon) → plate | argon looped | merged into 11 (the radon branch) |
+| 13 | Network storage | U + Rh + Nq → magnet works (6) → URhNq₂ wire → ZPM SMES cells, research station | — | infrastructure (cells, wire and research structures) |
+| 14 | Charts and data | ring seismometer (24) → Uranus chart; flyby bay (27) → DSN (16) + Kuiper telescope (17) → Pluto–Kuiper chart; neutrino observatory (15) → solar-core survey, multimessenger catalogue | — | research |
 
 **Crossings with lines two or more eras back** (the target is at least 7; ZPM has 13):
 
@@ -1341,3 +1341,47 @@ The design above follows these. None is in `DECISIONS.md` yet; the orchestrator 
 11. **Two new stations** (Saturn orbit, Uranus orbit) through table-driven slots (F2); Neptune's station is UV's.
 12. **The solar-core survey is a kept input of GTM's UV energy hatch,** re-registered with its research.
 13. **The ZPM wireless row belongs to the package that makes its cell** (A5), as LuV-A4 did.
+
+## Reforge line design (RF-3S)
+
+Era-design pass (issue #69, 2026-11-01). The rule, the roles and the shared tool package LD-T1 are in `ev.md`, *Reforge line design (RF-3S)*. RF-3M read ZPM as 16 chart lines, 15 of them fix, and six design lines missing. The six are built: every machine of *New process lines* has its recipes in the rf3a dump (siphon 2, column 7, harvester 2, entry bay 2, reformer 4, plume sampler 1, vent bioreactor 3, aerogel works 5, magnet works 11, seismometer 2, flyby bay 2, DSN 6, Kuiper telescope 1, neutrino observatory 2). What was short is the chart: 8 clusters, half of them raw-fed fragments of longer lines. ZPM needs one recipe change (the tritium store) and a chart rebuild.
+
+### Classification (ZPM)
+
+| Cluster: end | Role | Steps (line) | Decision |
+|---|---|---|---|
+| naquadria: naquadria dust, fuel | production | 4 (`naquadria`) | keep: LuV mode 2's solution → refinery → fuel works → Mk2 → large naquadah reactor → fuel works c2. Crossing IV's naquadah plant; gallium sulfide → MV's gallium line |
+| europium: europium, sulfate, chloride | production | 3 → 6 (`europium`) | **lengthen by chart:** GTCA milled monazite → flotation (`flotation_cell_regulator/monazite`) → EV extraction cascade c5 (`solvent_extraction/ev/monazite_froth_europium`, drawn as the machine with a link to `pl_ev`) → reductor c1 (zinc, Venus sulfuric acid, mercury charge) → c2 roasting → c3 metallothermic reduction with lanthanum (LuV's `optics` line). Zinc (c4) and lanthanum (c5) as returns |
+| *(new)* titan: polybenzimidazole, carbon fibres | production | 6 (`titan`) | **chart it:** entry probe (assembler: 2 PICA shields from HV's autoclave, IV's Jupiter entry probe, Whipple casing) → entry bay c1 (tholin) → reformer c1 (nitriles) → reformer c3 (diaminobenzidine, with zinc and ammonia) → GTM's `polybenzimidazole` (LCR) → UV electromagnet and UHV conveyor. Branch: reformer c2 → carbon fibres (EV's nano CPU wafer takes 16). Lake sampling (c2: methane, ethane) feeds `qubits` |
+| *(new)* living: sterile growth medium, archaeal culture | production | 5 (`living`) | **chart it (lines 7 and 10):** plume sampler (resource; aerogel cartridge) → vent bioreactor c1 (Europa's bacteria, Enceladus brine, hydrogen, CO₂) → c2 (Titan's tholin, LuV's mutagen) → GTM fluid heater (`sterile_growth_medium`) → stem cells and wetware boards; the culture goes on to UV's closed ecosystem. Crossings: EV's Mars CO₂ (processor c2), IV's U-235 through the mutagen |
+| living: silica aerogel, cartridge | infrastructure | 2 | role tag: aerogel works → cartridge (the sampler's wear part, a return) and machine builds |
+| qubits + uranus: qubit array, CVD plate, graphene | production | 3 → 6 (`qubits`) | **merge:** ice-giant siphon c3 (resource) → slurry separator (with LV's H₂S) → lattice fab c2 (seed, methane, nitrogen) → implanter c1 → qubit fab c2 (EV's liquid helium, the column's Saturn helium) → assembler (HPCA component). Branches: implanter c2 on IV's Si-28 wafers → qubit fab c1; pyrolyser → graphene (GTM's ASMD resistor) and hydrogen for the fab; CVD plate → builds and capsules |
+| actinides + duranium: Am, Cm oxide, radon, duranium plate | production | 7 (`waste`) | **merge:** IV's stored waste (link) → retrieval c1 (EV nitric acid) → radium → capsule c3 (EV platinum foil) → emanation c2 → radon → Mk2 (MV gallium) → duranium plasma → quench (EV Mars argon) → plate. Branch: raffinate → partitioning c1 (MV kerosene) → c2 split → americium and curium (UV's RTAN wire and heat sources); synroc contained |
+| saturn: He-3, Saturn helium, ring ice | resource | 2 | role tag: siphon and column are the site's gas plant. Deuterium becomes a `by` node (bypass below) |
+| power: helium plasma to EU | power | 2 | role tag |
+| *(new)* network storage: URhNq₂ wire, SMES cells | infrastructure | 1 | chart it under the role (magnet works c1-c3: EV rhodium, IV uranium and naquadah); not counted |
+| *(new)* charts and data | research | 1-3 | chart it under the role (seismometer, flyby bay, DSN, Kuiper telescope, neutrino observatory on IV's heavy water); not counted |
+
+**Count.** 6 production lines against the guide's 14 (`AGENTS.md:18`). The gap of 8 is named, not padded: the guide counted every doc row, and 8 rows are other roles or halves of a merged line. Each production line crosses a line two or more eras back (the crossings table in *New process lines* stands, plus IV's heat-shield brick in the Titan probe and EV's carbon-fibre consumer).
+
+### Bypasses (ZPM)
+
+- **Helium-3 through the tritium store: gate.** `grindless:hot_cell/tritium_store` (`tables/hot_cell.json`, circuit 10: 1,000 mB tritium → 1,000 mB He-3, 7,680 EU/t) was written by the UEV superheavy package as a destination for bred tritium (`uev-superheavy.test.mjs:110`), but at IV voltage it turns IV's fission tritium straight into He-3. The Saturn column gives 20 mB of He-3 per 10,000 mB of Saturn helium, so the store is the cheaper route by far and skips the whole ZPM gas plant. Its EU/t goes to VA[UEV] (7,864,320), where it does the job it was written for; costs only go up.
+- **Deuterium through heavy-water electrolysis: keep.** `grindless:electrolyzer/heavy_water_electrolysis` is the end of IV's counted heavy-water line (`iv.md`, *Reforge line design*), a parallel source the audit no longer reports. The column's deuterium (50 mB per 16,000 mB of hydrogen) is a by-product, not the line's end; the chart says so.
+
+### Packages (ZPM), and the order of all eight
+
+Continues `luv.md`'s list. **Before P2-C (LuV to UV band):** LD-ZP2.
+
+| # | Id | Scope | Likely files | Depends on | Tests |
+|---|---|---|---|---|---|
+| 7 | **LD-ZP1** ZPM charts | The *Classification (ZPM)*: new clusters `titan`, `living`, network storage and charts; `line` tags (`qubits` on qubits and uranus, `waste` on actinides and duranium); the europium upstream; roles on saturn, power, the aerogel branch; deuterium as `by`. No recipe changes. | `tools/quests/processing-lines/pl-data-zpm.mjs` | LD-T1 | T0; `pl-check zpm` 0 issues; line audit: 6 ZPM production lines, none under 4 steps, each with reach back ≥ 2 |
+| 8 | **LD-ZP2** Tritium store gate | `tritium_store` EU/t to VA[UEV]; its static test asserts the voltage; the pinned UEV test still finds the recipe. | `pack/kubejs/data/grindless/tables/hot_cell.json` (one row), `tools/analysis/test/uev-superheavy.test.mjs` | — | T0; T1 none (a table value on a proven machine; `gg_test_uev_superheavy` only checks the recipe exists) |
+
+**Order and parallelism.** LD-T1 first (the fields and the rule); then LD-EV1, LD-IV1, LD-LV1 and LD-ZP1 in parallel (one `pl-data` file each). LD-EV2, LD-LV2 and LD-ZP2 need nothing and run any time: LD-EV2 before P2-B, LD-LV2 and LD-ZP2 before P2-C. After the four chart packages the integrator re-runs the line audit once and regenerates the chapters. T0 runs on GitHub Actions on every push; `pl-check`, the line audit and `cost-matrix` run on the VM (`gg-vm-exec.sh`), never on the workstation (owner, 2026-11-01).
+
+### Open questions (ZPM)
+
+1. **The tritium store: gate at UEV, or remove it?** Default: gate (UEV's bred tritium keeps its destination). Removing it means UEV's tritium needs another destination, a UEV package's change.
+2. **Should the ZPM gap of 8 lines be closed with new lines?** Default: no, until the owner answers `ev.md`'s open question 1. If the guide stands as a target, UV's design pass should look first at ZPM's unused by-products (Titan's ethane, the ring ice's ammonia, the column's helium-4) before adding machines.
+3. **Graphene: a branch of `qubits` or its own line?** Default: branch; the pyrolyser's graphene is one step from methane and GTM's ASMD resistor takes it, so a line of its own would be padding.

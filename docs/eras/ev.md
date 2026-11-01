@@ -537,6 +537,6 @@ One Sonnet session each, under `AGENTS.md` *Work packages* (T0 before every comm
 
 ### Open questions (EV)
 
-1. **Does `AGENTS.md:18`'s line guide count only production lines?** Default: yes, and the figures stay as written; each era names its gap instead of padding (ZPM counts 7 against 14, `zpm.md`). If the owner restates the figures from the new counts, UV and later targets drop; if roles are not adopted, power, travel and research chains need 4 steps each, which means padding.
+1. **Does `AGENTS.md:18`'s line guide count only production lines?** Default: yes, and the figures stay as written; each era names its gap instead of padding (ZPM counts 6 against 14, `zpm.md`). If the owner restates the figures from the new counts, UV and later targets drop; if roles are not adopted, power, travel and research chains need 4 steps each, which means padding.
 2. **Remove GTM's one-step LCR folds for basic reagents** (`nitric_acid_from_elements`, `nitric_acid_from_ammonia`)? Default: no (rule 6; Phase 2 already prices them). Yes would make the Ostwald chain the only route and nitric acid dearer everywhere from EV.
 3. **Metal mixture: separate or void?** Default: separate (a renewable route for five ores from cobblestone, rule 1). Void would leave stone dust's by-product honest but useless and drop LD-EV2.
