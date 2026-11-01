@@ -59,6 +59,27 @@
 			x: 16.75d
 			y: 37.5d
 		}
+		{
+			id: "5D8B4CC9CF776EE8"
+			linked_quest: "5928A959696AF7B5"
+			shape: "rsquare"
+			x: 0.5d
+			y: 45.75d
+		}
+		{
+			id: "17C49FE78BE98DA2"
+			linked_quest: "56280033A496EDB1"
+			shape: "rsquare"
+			x: 0.5d
+			y: 50.0d
+		}
+		{
+			id: "3103852D563A4D13"
+			linked_quest: "5DC3250C7363995F"
+			shape: "rsquare"
+			x: 0.5d
+			y: 51.5d
+		}
 	]
 	quests: [
 		{
@@ -931,7 +952,7 @@
 			dependencies: ["111D26C8A0B0ACB5"]
 			icon: "gtceu:distilled_water_bucket"
 			id: "50C4A414ED95DC2D"
-			size: 1.0d
+			size: 1.25d
 			subtitle: "The drill and the heat engine drink it"
 			tasks: [
 				{ id: "74C648C11512FD6F", item: "gtceu:distilled_water_bucket", optional_task: true, type: "item" }
@@ -1646,16 +1667,45 @@
 			y: 35.25d
 		}
 		{
-			icon: "gtceu:niobium_dust"
-			id: "1EB1F061061828AC"
+			icon: "gtceu:raw_pyrochlore"
+			id: "39A493528AB14953"
 			shape: "rsquare"
 			size: 1.0d
+			subtitle: "The pyrochlore vein"
+			tasks: [
+				{ id: "59EDE43DD65C09C1", item: "gtceu:raw_pyrochlore", optional_task: true, type: "item" }
+				{ id: "53CAD68AF6CFCFBC", type: "checkmark" }
+			]
+			title: "Raw Pyrochlore"
+			x: 0.5d
+			y: 42.0d
+		}
+		{
+			dependencies: ["39A493528AB14953"]
+			icon: "gtceu:pyrochlore_dust"
+			id: "3CC373991C3E79CD"
+			size: 1.0d
+			subtitle: "Ore plant"
+			tasks: [
+				{ id: "555929C85CCE1EA0", item: "gtceu:pyrochlore_dust", optional_task: true, type: "item" }
+				{ id: "12D5A5FFDEC7F2BA", type: "checkmark" }
+			]
+			title: "Pyrochlore Dust"
+			x: 2.5d
+			y: 42.0d
+		}
+		{
+			dependencies: ["3CC373991C3E79CD"]
+			icon: "gtceu:niobium_dust"
+			id: "1EB1F061061828AC"
+			size: 1.0d
+			subtitle: "Electrolyzer: 2 niobium per 11 pyrochlore"
 			tasks: [
 				{ id: "1FD9BA799F1B8D8E", item: "gtceu:niobium_dust", optional_task: true, type: "item" }
 				{ id: "5BB17D8B6261D6A4", type: "checkmark" }
 			]
 			title: "Niobium"
-			x: 0.5d
+			x: 4.5d
 			y: 42.0d
 		}
 		{
@@ -1668,7 +1718,7 @@
 				{ id: "784A66987B60365B", type: "checkmark" }
 			]
 			title: "Titanium Dust"
-			x: 0.5d
+			x: 4.5d
 			y: 43.5d
 		}
 		{
@@ -1682,7 +1732,7 @@
 				{ id: "3D7E56F726FDC82B", type: "checkmark" }
 			]
 			title: "Niobium-Titanium Dust"
-			x: 2.5d
+			x: 6.5d
 			y: 42.75d
 		}
 		{
@@ -1697,7 +1747,7 @@
 				{ id: "11A7195CE6B14748", type: "checkmark" }
 			]
 			title: "Smelting Complex"
-			x: 4.5d
+			x: 8.5d
 			y: 42.75d
 		}
 		{
@@ -1711,8 +1761,62 @@
 				{ id: "377B58863DA7B8B4", type: "checkmark" }
 			]
 			title: "Niobium-Titanium"
-			x: 6.5d
+			x: 10.5d
 			y: 42.75d
+		}
+		{
+			icon: "gtceu:iron_dust"
+			id: "73A636CA02272DBA"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "343A861470DAF644", item: "gtceu:iron_dust", optional_task: true, type: "item" }
+				{ id: "538165F00BDA309C", type: "checkmark" }
+			]
+			title: "Iron Dust"
+			x: 0.5d
+			y: 47.0d
+		}
+		{
+			icon: "gtceu:arsenic_dust"
+			id: "7F658608F589C5C6"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "37D57B43935FAC80", item: "gtceu:arsenic_dust", optional_task: true, type: "item" }
+				{ id: "70BF0CC86AC6A766", type: "checkmark" }
+			]
+			title: "Arsenic"
+			x: 0.5d
+			y: 48.25d
+		}
+		{
+			dependencies: ["5928A959696AF7B5", "73A636CA02272DBA", "7F658608F589C5C6"]
+			icon: "gtceu:samarium_iron_arsenic_oxide_dust"
+			id: "79E678C93023347B"
+			size: 1.25d
+			subtitle: "Mixer: the cascade's samarium makes the superconductor"
+			tasks: [
+				{ id: "7F84DFA403C19FA8", item: "gtceu:samarium_iron_arsenic_oxide_dust", optional_task: true, type: "item" }
+				{ id: "1B6A1180A0029505", type: "checkmark" }
+			]
+			title: "Samarium Iron Arsenic Oxide"
+			x: 3.0d
+			y: 47.0d
+		}
+		{
+			dependencies: ["56280033A496EDB1", "5DC3250C7363995F"]
+			icon: "gtceu:rhodium_plated_palladium_dust"
+			id: "3E4864D6AB751003"
+			size: 1.25d
+			subtitle: "Mixer: the platinum plant's palladium and rhodium"
+			tasks: [
+				{ id: "5C7B9E5B6567FF59", item: "gtceu:rhodium_plated_palladium_dust", optional_task: true, type: "item" }
+				{ id: "1BFDCFDFC165A2F6", type: "checkmark" }
+			]
+			title: "Rhodium-Plated Palladium"
+			x: 3.0d
+			y: 50.75d
 		}
 	]
 	subtitle: ["Uranium goes round the fuel cycle, heavy water goes to the Moon and back, and Venus and Mercury give naquadah, iridium and osmium."]

@@ -15,56 +15,56 @@
 			linked_quest: "1A2094A4648BCFBC"
 			shape: "rsquare"
 			x: 32.25d
-			y: 35.25d
+			y: 41.25d
 		}
 		{
 			id: "1A2C68C9ABDF91D8"
 			linked_quest: "7F75EE581D64854A"
 			shape: "rsquare"
 			x: 37.25d
-			y: 35.25d
+			y: 41.25d
 		}
 		{
 			id: "35D4A84E53042624"
 			linked_quest: "744843BADCF43DFB"
 			shape: "rsquare"
 			x: 32.25d
-			y: 38.25d
+			y: 44.25d
 		}
 		{
 			id: "75B71BDFD2F4FCE9"
 			linked_quest: "1B1F0CE1AA336C10"
 			shape: "rsquare"
 			x: 22.25d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			id: "510C30A53015872A"
 			linked_quest: "353D2EF1FF2B8950"
 			shape: "rsquare"
 			x: 24.75d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			id: "14AE4553512D8221"
 			linked_quest: "105048B8DD3BFB2F"
 			shape: "rsquare"
 			x: 27.25d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			id: "3A685261E21A00E6"
 			linked_quest: "145F79381CC62304"
 			shape: "rsquare"
 			x: 29.75d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			id: "1C32C411C4B1BE74"
 			linked_quest: "733B76277191ADAC"
 			shape: "rsquare"
 			x: 32.25d
-			y: 56.75d
+			y: 62.75d
 		}
 	]
 	quests: [
@@ -2336,7 +2336,7 @@
 			y: 16.75d
 		}
 		{
-			dependencies: ["326C6B131C50B2DD"]
+			dependencies: ["326C6B131C50B2DD", "1B84DB0699D64602"]
 			icon: "gtceu:heavy_ion_cyclotron"
 			id: "37CBAB2A671D92EC"
 			shape: "gear"
@@ -2377,7 +2377,7 @@
 			y: 16.75d
 		}
 		{
-			dependencies: ["1D66FAB1E06761BC"]
+			dependencies: ["1D66FAB1E06761BC", "5D236310AAECA7BA"]
 			icon: "grindless:element_121_atoms"
 			id: "1DD0DC428BBF2636"
 			size: 1.25d
@@ -2391,6 +2391,20 @@
 		}
 		{
 			dependencies: ["1DD0DC428BBF2636"]
+			icon: "gtceu:superheavy_chemistry_lab"
+			id: "13A381D71597BEC9"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "777CD387D2173B1C", item: "gtceu:superheavy_chemistry_lab", optional_task: true, type: "item" }
+				{ id: "3BCEC5E96DB8FFA7", type: "checkmark" }
+			]
+			title: "Superheavy Chemistry Lab"
+			x: 52.25d
+			y: 16.75d
+		}
+		{
+			dependencies: ["13A381D71597BEC9"]
 			icon: "grindless:element_121_recoil"
 			id: "36E9E842A9EAECBA"
 			size: 1.25d
@@ -2399,8 +2413,196 @@
 				{ id: "172A8504445057A7", type: "checkmark" }
 			]
 			title: "Element 121 Recoil"
-			x: 52.25d
+			x: 54.75d
 			y: 16.75d
+		}
+		{
+			icon: "gtceu:titanium_tetrachloride_ice_dust"
+			id: "3A50F8C8F2D006B2"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "36C42D405CAD3879", item: "gtceu:titanium_tetrachloride_ice_dust", optional_task: true, type: "item" }
+				{ id: "160CA49D7E44A7EA", type: "checkmark" }
+			]
+			title: "TiCl4 Ice"
+			x: 22.25d
+			y: 18.75d
+		}
+		{
+			dependencies: ["3A50F8C8F2D006B2"]
+			icon: "gtceu:calutron"
+			id: "16DF40345A2C1EC6"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "193B030241569E59", item: "gtceu:calutron", optional_task: true, type: "item" }
+				{ id: "1642CD0BECF4ED23", type: "checkmark" }
+			]
+			title: "Calutron"
+			x: 24.75d
+			y: 18.75d
+		}
+		{
+			dependencies: ["16DF40345A2C1EC6"]
+			icon: "gtceu:titanium_50_chloride_dust"
+			id: "1BD802E5C344C101"
+			size: 1.25d
+			tasks: [
+				{ id: "1252EE58B9040B29", item: "gtceu:titanium_50_chloride_dust", optional_task: true, type: "item" }
+				{ id: "55DF3C7C5255FA73", type: "checkmark" }
+			]
+			title: "Ti-50 Chloride"
+			x: 27.25d
+			y: 18.75d
+		}
+		{
+			dependencies: ["1BD802E5C344C101"]
+			icon: "gtceu:pyroprocessing_cell"
+			id: "1EB770730FECB05C"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "55D6324E0D654992", item: "gtceu:pyroprocessing_cell", optional_task: true, type: "item" }
+				{ id: "365C4247C085980F", type: "checkmark" }
+			]
+			title: "Pyroprocessing Cell"
+			x: 29.75d
+			y: 18.75d
+		}
+		{
+			dependencies: ["1EB770730FECB05C"]
+			icon: "gtceu:titanium_50_sponge_dust"
+			id: "3123979560989B99"
+			size: 1.25d
+			tasks: [
+				{ id: "58857E8EA2DAF23E", item: "gtceu:titanium_50_sponge_dust", optional_task: true, type: "item" }
+				{ id: "137D0307352708A1", type: "checkmark" }
+			]
+			title: "Ti-50 Sponge"
+			x: 32.25d
+			y: 18.75d
+		}
+		{
+			dependencies: ["3123979560989B99"]
+			icon: "gtceu:levitation_melter"
+			id: "152C3A0E3094A039"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "71FD57984C35C652", item: "gtceu:levitation_melter", optional_task: true, type: "item" }
+				{ id: "19C3300D00132746", type: "checkmark" }
+			]
+			title: "Levitation Melter"
+			x: 34.75d
+			y: 18.75d
+		}
+		{
+			dependencies: ["152C3A0E3094A039"]
+			icon: "gtceu:titanium_50_dust"
+			id: "7E7E475E4E537D6D"
+			size: 1.25d
+			tasks: [
+				{ id: "358BC1FC014BE850", item: "gtceu:titanium_50_dust", optional_task: true, type: "item" }
+				{ id: "32500A9447FED3A5", type: "checkmark" }
+			]
+			title: "Titanium 50"
+			x: 37.25d
+			y: 18.75d
+		}
+		{
+			dependencies: ["7E7E475E4E537D6D"]
+			icon: "gtceu:ev_assembler"
+			id: "79D34DF2E051F267"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "759FEAE8A24E648F", item: "gtceu:ev_assembler", optional_task: true, type: "item" }
+				{ id: "747B343C33D6F3A1", type: "checkmark" }
+			]
+			title: "Assembler"
+			x: 39.75d
+			y: 18.75d
+		}
+		{
+			dependencies: ["79D34DF2E051F267"]
+			icon: "grindless:ti50_oven_charge"
+			id: "1B84DB0699D64602"
+			size: 1.25d
+			tasks: [
+				{ id: "7D221ECFA6840F92", item: "grindless:ti50_oven_charge", optional_task: true, type: "item" }
+				{ id: "32B18662B79B3CE6", type: "checkmark" }
+			]
+			title: "Ti-50 Oven Charge"
+			x: 42.25d
+			y: 18.75d
+		}
+		{
+			icon: "grindless:polycarbonate_foil"
+			id: "50E7A51F73628075"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "3F85572848E2DA62", item: "grindless:polycarbonate_foil", optional_task: true, type: "item" }
+				{ id: "793351E6AACEC41A", type: "checkmark" }
+			]
+			title: "Polycarbonate Foil"
+			x: 38.5d
+			y: 20.75d
+		}
+		{
+			dependencies: ["50E7A51F73628075"]
+			icon: "gtceu:heavy_ion_cyclotron"
+			id: "1815925DD2BB9E8E"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "14839AD7B9107EAE", item: "gtceu:heavy_ion_cyclotron", optional_task: true, type: "item" }
+				{ id: "1952B3050C95CEBC", type: "checkmark" }
+			]
+			title: "Heavy Ion Cyclotron"
+			x: 41.0d
+			y: 20.75d
+		}
+		{
+			dependencies: ["1815925DD2BB9E8E"]
+			icon: "grindless:ion_tracked_foil"
+			id: "3498654BC9EA2252"
+			size: 1.25d
+			tasks: [
+				{ id: "1642032EDEFEB2A6", item: "grindless:ion_tracked_foil", optional_task: true, type: "item" }
+				{ id: "5581EE5B5DF151C2", type: "checkmark" }
+			]
+			title: "Ion-Tracked Foil"
+			x: 43.5d
+			y: 20.75d
+		}
+		{
+			dependencies: ["3498654BC9EA2252"]
+			icon: "gtceu:ev_chemical_reactor"
+			id: "12581721C571EE8D"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "72B1C3926E8C632F", item: "gtceu:ev_chemical_reactor", optional_task: true, type: "item" }
+				{ id: "12781F6ABF5CD75B", type: "checkmark" }
+			]
+			title: "Chemical Reactor"
+			x: 46.0d
+			y: 20.75d
+		}
+		{
+			dependencies: ["12581721C571EE8D"]
+			icon: "grindless:etched_membrane"
+			id: "5D236310AAECA7BA"
+			size: 1.25d
+			tasks: [
+				{ id: "79413BB715970389", item: "grindless:etched_membrane", optional_task: true, type: "item" }
+				{ id: "5669C2AAB2F535DE", type: "checkmark" }
+			]
+			title: "Etched Membrane"
+			x: 48.5d
+			y: 20.75d
 		}
 		{
 			icon: "grindless:ti50_oven_charge"
@@ -2413,7 +2615,7 @@
 			]
 			title: "Ti-50 Oven Charge"
 			x: 22.25d
-			y: 18.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["7166A812470509E2"]
@@ -2427,7 +2629,7 @@
 			]
 			title: "Heavy Ion Cyclotron"
 			x: 24.75d
-			y: 18.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["7A616248D3178EE9"]
@@ -2440,7 +2642,7 @@
 			]
 			title: "Element 122 Recoil Gas"
 			x: 27.25d
-			y: 18.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["1A721AFE8D7269CD"]
@@ -2454,7 +2656,7 @@
 			]
 			title: "Recoil Separator"
 			x: 29.75d
-			y: 18.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["5D78BCD72913F39E"]
@@ -2467,7 +2669,7 @@
 			]
 			title: "Element 122 Atoms"
 			x: 32.25d
-			y: 18.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["591439989AC2D36F"]
@@ -2481,7 +2683,7 @@
 			]
 			title: "Superheavy Chemistry Lab"
 			x: 34.75d
-			y: 18.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["1E1393423E34BAC5"]
@@ -2494,7 +2696,7 @@
 			]
 			title: "Element 122 Recoil"
 			x: 37.25d
-			y: 18.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["1D8D6082F73B1576"]
@@ -2507,20 +2709,47 @@
 			]
 			title: "Superheavy Census III"
 			x: 39.75d
-			y: 18.75d
+			y: 22.75d
 		}
 		{
-			icon: "grindless:californium_252"
-			id: "3993E337065AED7A"
+			icon: "gtceu:transcurium_liquor_bucket"
+			id: "7AB60C4BB87FECFA"
 			shape: "rsquare"
 			size: 1.0d
+			tasks: [
+				{ id: "1772479B5383A5EB", item: "gtceu:transcurium_liquor_bucket", optional_task: true, type: "item" }
+				{ id: "3DAA66A210339F9D", type: "checkmark" }
+			]
+			title: "Transcurium Liquor"
+			x: 22.25d
+			y: 24.75d
+		}
+		{
+			dependencies: ["7AB60C4BB87FECFA"]
+			icon: "gtceu:transuranium_facility"
+			id: "342FB9C84E653878"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "12E3D6F56F261F22", item: "gtceu:transuranium_facility", optional_task: true, type: "item" }
+				{ id: "7ED9CDF5D412CCE0", type: "checkmark" }
+			]
+			title: "Transuranium Facility"
+			x: 24.75d
+			y: 24.75d
+		}
+		{
+			dependencies: ["342FB9C84E653878"]
+			icon: "grindless:californium_252"
+			id: "3993E337065AED7A"
+			size: 1.25d
 			tasks: [
 				{ id: "34CC8BA23AA53539", item: "grindless:californium_252", optional_task: true, type: "item" }
 				{ id: "300FD6F08729FDF7", type: "checkmark" }
 			]
 			title: "Californium 252"
-			x: 22.25d
-			y: 20.75d
+			x: 27.25d
+			y: 24.75d
 		}
 		{
 			dependencies: ["3993E337065AED7A"]
@@ -2533,8 +2762,8 @@
 				{ id: "75B7E1C6AB175C62", type: "checkmark" }
 			]
 			title: "Hot Cell"
-			x: 24.75d
-			y: 20.75d
+			x: 29.75d
+			y: 24.75d
 		}
 		{
 			dependencies: ["1DB6535F2B8D3AE7"]
@@ -2546,8 +2775,8 @@
 				{ id: "733FC28AF4A17364", type: "checkmark" }
 			]
 			title: "Curium 248"
-			x: 27.25d
-			y: 20.75d
+			x: 32.25d
+			y: 24.75d
 		}
 		{
 			dependencies: ["772AF2167FC8327F"]
@@ -2560,8 +2789,8 @@
 				{ id: "5B7E525FC09C7E18", type: "checkmark" }
 			]
 			title: "Transuranium Facility"
-			x: 29.75d
-			y: 20.75d
+			x: 34.75d
+			y: 24.75d
 		}
 		{
 			dependencies: ["7CA87BE92B201DF3"]
@@ -2573,11 +2802,25 @@
 				{ id: "1E35F9250B48BB15", type: "checkmark" }
 			]
 			title: "Cm-248 Plated Blank"
-			x: 32.25d
-			y: 20.75d
+			x: 37.25d
+			y: 24.75d
 		}
 		{
 			dependencies: ["75605C4EE38A55FD"]
+			icon: "gtceu:spark_plasma_sinterer"
+			id: "397468D4F326E22D"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3D48B0710A6FBD05", item: "gtceu:spark_plasma_sinterer", optional_task: true, type: "item" }
+				{ id: "3F6AA0C16AEAB3C7", type: "checkmark" }
+			]
+			title: "Spark Plasma Sinterer"
+			x: 39.75d
+			y: 24.75d
+		}
+		{
+			dependencies: ["397468D4F326E22D"]
 			icon: "grindless:cm248_target"
 			id: "7FE0F95CC2657531"
 			size: 1.25d
@@ -2586,11 +2829,11 @@
 				{ id: "531A73E1B3C87CD2", type: "checkmark" }
 			]
 			title: "Cm-248 Target"
-			x: 34.75d
-			y: 20.75d
+			x: 42.25d
+			y: 24.75d
 		}
 		{
-			dependencies: ["7FE0F95CC2657531"]
+			dependencies: ["7FE0F95CC2657531", "3BD2EF4BBD4ECDA2", "577AE78F4ACA87AD"]
 			icon: "gtceu:mnt_collider"
 			id: "7A5E8B13150387DA"
 			shape: "gear"
@@ -2600,8 +2843,8 @@
 				{ id: "3FA08B71221F0D7D", type: "checkmark" }
 			]
 			title: "MNT Collider"
-			x: 37.25d
-			y: 20.75d
+			x: 44.75d
+			y: 24.75d
 		}
 		{
 			dependencies: ["7A5E8B13150387DA"]
@@ -2613,8 +2856,8 @@
 				{ id: "7696F229DF90A562", type: "checkmark" }
 			]
 			title: "MNT Product Gas"
-			x: 39.75d
-			y: 20.75d
+			x: 47.25d
+			y: 24.75d
 		}
 		{
 			dependencies: ["70544E118173765F"]
@@ -2626,8 +2869,8 @@
 				{ id: "3EB4FB0876A87A74", type: "checkmark" }
 			]
 			title: "MNT Thermal Ions"
-			x: 42.25d
-			y: 20.75d
+			x: 49.75d
+			y: 24.75d
 		}
 		{
 			dependencies: ["11D592F6D80FAE73"]
@@ -2639,8 +2882,8 @@
 				{ id: "315D288B7F499C58", type: "checkmark" }
 			]
 			title: "Island Nuclide"
-			x: 44.75d
-			y: 20.75d
+			x: 52.25d
+			y: 24.75d
 		}
 		{
 			dependencies: ["354C5993F787FC71"]
@@ -2652,8 +2895,75 @@
 				{ id: "5A1468C462DBDC16", type: "checkmark" }
 			]
 			title: "Island Chart"
-			x: 47.25d
-			y: 20.75d
+			x: 54.75d
+			y: 24.75d
+		}
+		{
+			icon: "gtceu:depleted_uranium_hexafluoride_bucket"
+			id: "106F7A84E0EC1E81"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1575AC2F20907413", item: "gtceu:depleted_uranium_hexafluoride_bucket", optional_task: true, type: "item" }
+				{ id: "3271E3D632960C6D", type: "checkmark" }
+			]
+			title: "Depleted UF6"
+			x: 32.25d
+			y: 26.75d
+		}
+		{
+			dependencies: ["106F7A84E0EC1E81"]
+			icon: "gtceu:fuel_fabrication_plant"
+			id: "3DE477C952B73F32"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "53DC415879180169", item: "gtceu:fuel_fabrication_plant", optional_task: true, type: "item" }
+				{ id: "36CC1D1362281AEB", type: "checkmark" }
+			]
+			title: "Fuel Fabrication Plant"
+			x: 34.75d
+			y: 26.75d
+		}
+		{
+			dependencies: ["3DE477C952B73F32"]
+			icon: "grindless:u238_ion_source"
+			id: "1AC35F1215D85A59"
+			size: 1.25d
+			tasks: [
+				{ id: "7428B4CD659C1312", item: "grindless:u238_ion_source", optional_task: true, type: "item" }
+				{ id: "597B89D19E17D414", type: "checkmark" }
+			]
+			title: "U-238 Ion Source"
+			x: 37.25d
+			y: 26.75d
+		}
+		{
+			dependencies: ["1AC35F1215D85A59"]
+			icon: "gtceu:synchrotron"
+			id: "16242ED6029841B8"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7F09E94DE6BD6C52", item: "gtceu:synchrotron", optional_task: true, type: "item" }
+				{ id: "1C8C53B94AD4D525", type: "checkmark" }
+			]
+			title: "Synchrotron"
+			x: 39.75d
+			y: 26.75d
+		}
+		{
+			dependencies: ["16242ED6029841B8"]
+			icon: "grindless:u238_beam_charge"
+			id: "3BD2EF4BBD4ECDA2"
+			size: 1.25d
+			tasks: [
+				{ id: "740B99B177B01E8D", item: "grindless:u238_beam_charge", optional_task: true, type: "item" }
+				{ id: "33F50A02C794E910", type: "checkmark" }
+			]
+			title: "U-238 Beam Charge"
+			x: 42.25d
+			y: 26.75d
 		}
 		{
 			icon: "gtceu:helium_bucket"
@@ -2665,8 +2975,8 @@
 				{ id: "521F050C01E839B5", type: "checkmark" }
 			]
 			title: "Helium"
-			x: 22.25d
-			y: 22.75d
+			x: 31.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["3528F69EF11F771B"]
@@ -2678,8 +2988,8 @@
 				{ id: "12C4E4AF0004006D", type: "checkmark" }
 			]
 			title: "Liquid Helium"
-			x: 24.75d
-			y: 22.75d
+			x: 33.5d
+			y: 28.75d
 		}
 		{
 			dependencies: ["746FF7CBDEC906C4"]
@@ -2692,8 +3002,8 @@
 				{ id: "51F3D7314E865490", type: "checkmark" }
 			]
 			title: "Cryogenic Plant"
-			x: 27.25d
-			y: 22.75d
+			x: 36.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["34B586E9DE6B2B92"]
@@ -2705,11 +3015,25 @@
 				{ id: "11A45AEEC2B1D03E", type: "checkmark" }
 			]
 			title: "6N Helium"
-			x: 29.75d
-			y: 22.75d
+			x: 38.5d
+			y: 28.75d
 		}
 		{
-			dependencies: ["307A34A6B5855501"]
+			dependencies: ["307A34A6B5855501", "19C8883A4C209051"]
+			icon: "gtceu:ev_assembler"
+			id: "561B9152A585C950"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7F2326C89408D58A", item: "gtceu:ev_assembler", optional_task: true, type: "item" }
+				{ id: "7E9C184D5A84C040", type: "checkmark" }
+			]
+			title: "Assembler"
+			x: 41.0d
+			y: 28.75d
+		}
+		{
+			dependencies: ["561B9152A585C950"]
 			icon: "grindless:gas_stopping_cell"
 			id: "577AE78F4ACA87AD"
 			size: 1.25d
@@ -2718,8 +3042,48 @@
 				{ id: "18D7857C1ADEFC2F", type: "checkmark" }
 			]
 			title: "Gas Stopping Cell"
-			x: 32.25d
-			y: 22.75d
+			x: 43.5d
+			y: 28.75d
+		}
+		{
+			icon: "gtceu:silicon_wafer"
+			id: "10A289788D0BB157"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "79550319C6974F55", item: "gtceu:silicon_wafer", optional_task: true, type: "item" }
+				{ id: "39B25539E82AE7BD", type: "checkmark" }
+			]
+			title: "Silicon Wafer"
+			x: 36.0d
+			y: 30.75d
+		}
+		{
+			dependencies: ["10A289788D0BB157"]
+			icon: "gtceu:photonic_foundry"
+			id: "50D11D13D538FF97"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3A36E502D277FEFD", item: "gtceu:photonic_foundry", optional_task: true, type: "item" }
+				{ id: "3391F594AE44BCFC", type: "checkmark" }
+			]
+			title: "Photonic Foundry"
+			x: 38.5d
+			y: 30.75d
+		}
+		{
+			dependencies: ["50D11D13D538FF97"]
+			icon: "grindless:rf_carpet_board"
+			id: "19C8883A4C209051"
+			size: 1.25d
+			tasks: [
+				{ id: "3707B9D7141C3882", item: "grindless:rf_carpet_board", optional_task: true, type: "item" }
+				{ id: "5AE349DC02DDD828", type: "checkmark" }
+			]
+			title: "RF Carpet Board"
+			x: 41.0d
+			y: 30.75d
 		}
 		{
 			icon: "grindless:ejecta_knot_dust"
@@ -2732,7 +3096,7 @@
 			]
 			title: "Ejecta Knot Dust"
 			x: 22.25d
-			y: 24.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["102F9613B847DC4B"]
@@ -2745,7 +3109,7 @@
 			]
 			title: "Ejecta Ti Fraction"
 			x: 24.75d
-			y: 24.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["1D08FEF1823E34BA"]
@@ -2759,7 +3123,7 @@
 			]
 			title: "Calutron"
 			x: 27.25d
-			y: 24.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["7FC62EDFCF06C25F"]
@@ -2772,7 +3136,7 @@
 			]
 			title: "Titanium 44"
 			x: 29.75d
-			y: 24.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["3A8DBE69BAA841C6"]
@@ -2785,7 +3149,7 @@
 			]
 			title: "Ti-44 Core"
 			x: 32.25d
-			y: 24.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["7C8183E6E7BCCE24"]
@@ -2799,7 +3163,7 @@
 			]
 			title: "Annihilation Laser Works"
 			x: 34.75d
-			y: 24.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["7BB78DA19FFC14C3"]
@@ -2812,7 +3176,7 @@
 			]
 			title: "Moderated Ps Cell"
 			x: 37.25d
-			y: 24.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["1F9251D604BCD541"]
@@ -2825,7 +3189,7 @@
 			]
 			title: "Gamma Laser Module"
 			x: 39.75d
-			y: 24.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["1C47DBFF4A8D1CE1"]
@@ -2838,7 +3202,7 @@
 			]
 			title: "UXV Emitter"
 			x: 42.25d
-			y: 24.75d
+			y: 32.75d
 		}
 		{
 			icon: "gtceu:liquid_helium_bucket"
@@ -2851,7 +3215,7 @@
 			]
 			title: "Liquid Helium"
 			x: 0.5d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["5188D436073C0162"]
@@ -2865,7 +3229,7 @@
 			]
 			title: "Stellar Elevator"
 			x: 3.0d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["32D3D45179CB361A"]
@@ -2878,7 +3242,7 @@
 			]
 			title: "Stellar Plasma"
 			x: 5.5d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["5D2C09C2024E1706"]
@@ -2892,7 +3256,7 @@
 			]
 			title: "Plasma Mass Filter"
 			x: 8.0d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["575C2BD66FBC40C1"]
@@ -2905,7 +3269,7 @@
 			]
 			title: "Stellar CNO Cut"
 			x: 10.5d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["3260D6F12A50E263"]
@@ -2919,7 +3283,7 @@
 			]
 			title: "Mk6 Fusion Ring"
 			x: 13.0d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["7E0698ECAA88226E"]
@@ -2932,7 +3296,7 @@
 			]
 			title: "CNO Ash Plasma"
 			x: 15.5d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["312F929B499EFCD9"]
@@ -2946,7 +3310,7 @@
 			]
 			title: "Direct Energy Converter"
 			x: 18.0d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["517D6EF008FA7B44"]
@@ -2959,7 +3323,7 @@
 			]
 			title: "Stellar CNO Cut"
 			x: 20.5d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			icon: "gtceu:stellar_helium_cut_bucket"
@@ -2972,7 +3336,7 @@
 			]
 			title: "Stellar Helium Cut"
 			x: 0.5d
-			y: 32.75d
+			y: 38.75d
 		}
 		{
 			dependencies: ["55BDF861D867D0AE"]
@@ -2986,7 +3350,7 @@
 			]
 			title: "Cryogenic Plant"
 			x: 3.0d
-			y: 32.75d
+			y: 38.75d
 		}
 		{
 			dependencies: ["1956D71268B3864F"]
@@ -2999,7 +3363,7 @@
 			]
 			title: "Triple Alpha Fuel"
 			x: 5.5d
-			y: 32.75d
+			y: 38.75d
 		}
 		{
 			dependencies: ["18437F2E5FA1EFB1"]
@@ -3013,7 +3377,7 @@
 			]
 			title: "Mk6 Fusion Ring"
 			x: 8.0d
-			y: 32.75d
+			y: 38.75d
 		}
 		{
 			dependencies: ["15C05C82CD2DB4AF"]
@@ -3026,7 +3390,7 @@
 			]
 			title: "Helium Burning Ash Plasma"
 			x: 10.5d
-			y: 32.75d
+			y: 38.75d
 		}
 		{
 			dependencies: ["56859BBA778BB6F0"]
@@ -3040,7 +3404,7 @@
 			]
 			title: "Direct Energy Converter"
 			x: 13.0d
-			y: 32.75d
+			y: 38.75d
 		}
 		{
 			dependencies: ["111100DE2E05D7CC"]
@@ -3053,7 +3417,7 @@
 			]
 			title: "Helium Burning Ash"
 			x: 15.5d
-			y: 32.75d
+			y: 38.75d
 		}
 		{
 			dependencies: ["1A2EFDBD0CA754C7"]
@@ -3067,7 +3431,7 @@
 			]
 			title: "Plasma Quench Caster"
 			x: 18.0d
-			y: 32.75d
+			y: 38.75d
 		}
 		{
 			dependencies: ["3C5F94B69C5A3299"]
@@ -3080,7 +3444,7 @@
 			]
 			title: "Carbon 12"
 			x: 20.5d
-			y: 32.75d
+			y: 38.75d
 		}
 		{
 			icon: "gtceu:helium_burning_ash_bucket"
@@ -3093,7 +3457,7 @@
 			]
 			title: "Helium Burning Ash"
 			x: 0.5d
-			y: 34.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["7B278AB24C1A6DC3"]
@@ -3107,7 +3471,7 @@
 			]
 			title: "Plasma Quench Caster"
 			x: 3.0d
-			y: 34.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["71767EC655281C77"]
@@ -3120,7 +3484,7 @@
 			]
 			title: "Carbon 12"
 			x: 5.5d
-			y: 34.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["74F4862220267796"]
@@ -3134,7 +3498,7 @@
 			]
 			title: "Electron Beam Furnace"
 			x: 8.0d
-			y: 34.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["318CB804149CF02F"]
@@ -3147,7 +3511,7 @@
 			]
 			title: "Carbon Burning Fuel"
 			x: 10.5d
-			y: 34.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["5E93C48B96EEF53C"]
@@ -3161,7 +3525,7 @@
 			]
 			title: "Mk6 Fusion Ring"
 			x: 13.0d
-			y: 34.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["32AFEE8C8445E17C"]
@@ -3174,7 +3538,7 @@
 			]
 			title: "Carbon Burning Ash Plasma"
 			x: 15.5d
-			y: 34.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["36F49B2F43E69387"]
@@ -3188,7 +3552,7 @@
 			]
 			title: "Direct Energy Converter"
 			x: 18.0d
-			y: 34.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["32DC5776BF8BFD03"]
@@ -3201,7 +3565,7 @@
 			]
 			title: "Carbon Burning Ash"
 			x: 20.5d
-			y: 34.75d
+			y: 40.75d
 		}
 		{
 			icon: "gtceu:oxygen_16_bucket"
@@ -3214,7 +3578,7 @@
 			]
 			title: "Oxygen 16"
 			x: 0.5d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["172E02B1A678324B"]
@@ -3228,7 +3592,7 @@
 			]
 			title: "Cryogenic Plant"
 			x: 3.0d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["5A87D244EECAAE26"]
@@ -3241,7 +3605,7 @@
 			]
 			title: "Oxygen Burning Fuel"
 			x: 5.5d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["10488403D0692FF4"]
@@ -3255,7 +3619,7 @@
 			]
 			title: "Mk6 Fusion Ring"
 			x: 8.0d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["524B012C3FB1CEA8"]
@@ -3268,7 +3632,7 @@
 			]
 			title: "Oxygen Burning Ash Plasma"
 			x: 10.5d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["17C2AB8967B9A68C"]
@@ -3282,7 +3646,7 @@
 			]
 			title: "Direct Energy Converter"
 			x: 13.0d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["5D818962291935C8"]
@@ -3295,7 +3659,7 @@
 			]
 			title: "Oxygen Burning Ash"
 			x: 15.5d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["74C73430629E920C"]
@@ -3309,7 +3673,7 @@
 			]
 			title: "Plasma Quench Caster"
 			x: 18.0d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["7D0501D7F645F3DD"]
@@ -3322,7 +3686,7 @@
 			]
 			title: "Si-28 Ash"
 			x: 20.5d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			icon: "grindless:mh_winding"
@@ -3335,7 +3699,7 @@
 			]
 			title: "MH Winding"
 			x: 0.5d
-			y: 38.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["7F7BCF9BA0A840A0"]
@@ -3349,7 +3713,7 @@
 			]
 			title: "Accretion Disk Skimmer"
 			x: 3.0d
-			y: 38.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["17CA73133E52E291"]
@@ -3362,7 +3726,7 @@
 			]
 			title: "Disk Plasma"
 			x: 5.5d
-			y: 38.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["3CCD74EC15716F18"]
@@ -3376,7 +3740,7 @@
 			]
 			title: "Plasma Mass Filter"
 			x: 8.0d
-			y: 38.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["36EA7A6CF001C304"]
@@ -3389,7 +3753,7 @@
 			]
 			title: "Filtered Disk Plasma"
 			x: 10.5d
-			y: 38.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["7F0A30EF2F40BEA6"]
@@ -3403,7 +3767,7 @@
 			]
 			title: "FRC Former"
 			x: 13.0d
-			y: 38.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["76A4189348C1B4AA"]
@@ -3416,7 +3780,7 @@
 			]
 			title: "FRC Cartridge"
 			x: 15.5d
-			y: 38.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["5E31DB5378E1D942"]
@@ -3429,7 +3793,7 @@
 			]
 			title: "Strand Coil"
 			x: 18.0d
-			y: 38.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["382E7312759D7B39"]
@@ -3442,7 +3806,7 @@
 			]
 			title: "UXV Field Generator"
 			x: 20.5d
-			y: 38.75d
+			y: 44.75d
 		}
 		{
 			icon: "gtceu:metallic_hydrogen_single_wire"
@@ -3455,7 +3819,7 @@
 			]
 			title: "Metallic Hydrogen Wire"
 			x: 0.5d
-			y: 40.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["530850A6FC09E1A0"]
@@ -3469,7 +3833,7 @@
 			]
 			title: "Naquadria Magnet Works"
 			x: 3.0d
-			y: 40.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["3E7E6141829A9439"]
@@ -3482,7 +3846,7 @@
 			]
 			title: "MH Winding"
 			x: 5.5d
-			y: 40.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["75F36191707F5778"]
@@ -3496,7 +3860,7 @@
 			]
 			title: "Accretion Disk Skimmer"
 			x: 8.0d
-			y: 40.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["344A15D7F8E480FF"]
@@ -3509,7 +3873,7 @@
 			]
 			title: "Disk Plasma"
 			x: 10.5d
-			y: 40.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["32E2DAD2F9962AA1"]
@@ -3522,7 +3886,7 @@
 			]
 			title: "Filtered Disk Plasma"
 			x: 13.0d
-			y: 40.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["739AF928D393C591"]
@@ -3536,7 +3900,7 @@
 			]
 			title: "FRC Former"
 			x: 15.5d
-			y: 40.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["3614C51DC480442A"]
@@ -3549,7 +3913,7 @@
 			]
 			title: "Flux Loaded Plasma"
 			x: 18.0d
-			y: 40.75d
+			y: 46.75d
 		}
 		{
 			icon: "grindless:coated_w_wire"
@@ -3562,7 +3926,7 @@
 			]
 			title: "Coated W Wire"
 			x: 0.5d
-			y: 42.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["79BE444E3BBC7436"]
@@ -3575,7 +3939,7 @@
 			]
 			title: "W Fibre Preform"
 			x: 3.0d
-			y: 42.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["5C936DEE2AF8AC88"]
@@ -3589,7 +3953,7 @@
 			]
 			title: "CVI Furnace"
 			x: 5.5d
-			y: 42.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["5FA576B3796306D1"]
@@ -3602,7 +3966,7 @@
 			]
 			title: "Densified W Preform"
 			x: 8.0d
-			y: 42.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["54404ED123692FCB"]
@@ -3616,7 +3980,7 @@
 			]
 			title: "Levitation Melter"
 			x: 10.5d
-			y: 42.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["1B8810264AF21A23"]
@@ -3629,7 +3993,7 @@
 			]
 			title: "WF-RHEA Billet"
 			x: 13.0d
-			y: 42.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["3BA9378127FF983A"]
@@ -3642,7 +4006,7 @@
 			]
 			title: "UXV Fusion Casing"
 			x: 15.5d
-			y: 42.75d
+			y: 48.75d
 		}
 		{
 			icon: "grindless:vela_glitch_timing"
@@ -3655,7 +4019,7 @@
 			]
 			title: "Vela Glitch Timing"
 			x: 24.75d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["752A584C141B993F"]
@@ -3669,7 +4033,7 @@
 			]
 			title: "Pasta Extractor"
 			x: 27.25d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["392D1AA0DBD50123"]
@@ -3682,7 +4046,7 @@
 			]
 			title: "Raw Pasta"
 			x: 29.75d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["787E1E4627DA7806"]
@@ -3696,7 +4060,7 @@
 			]
 			title: "Pasta Phase Sorter"
 			x: 32.25d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["7F43849A617330CB"]
@@ -3709,7 +4073,7 @@
 			]
 			title: "Spaghetti Phase"
 			x: 34.75d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["7B760B88892A75B6"]
@@ -3723,7 +4087,7 @@
 			]
 			title: "Pasta Draw Bench"
 			x: 37.25d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["74DB520CE10C4B95"]
@@ -3736,7 +4100,7 @@
 			]
 			title: "Pasta Strand Wire"
 			x: 39.75d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			dependencies: ["1ECE891F46FF5080"]
@@ -3749,7 +4113,7 @@
 			]
 			title: "Pasta Strand Cable"
 			x: 42.25d
-			y: 30.75d
+			y: 36.75d
 		}
 		{
 			icon: "grindless:neutronium_pellet"
@@ -3762,7 +4126,7 @@
 			]
 			title: "Neutronium Pellet"
 			x: 24.75d
-			y: 33.75d
+			y: 39.75d
 		}
 		{
 			dependencies: ["70F37E27B7F08442"]
@@ -3776,7 +4140,7 @@
 			]
 			title: "Pasta Extractor"
 			x: 27.25d
-			y: 33.75d
+			y: 39.75d
 		}
 		{
 			dependencies: ["3C05332C2B8F0102"]
@@ -3789,7 +4153,7 @@
 			]
 			title: "Raw Pasta"
 			x: 29.75d
-			y: 33.75d
+			y: 39.75d
 		}
 		{
 			dependencies: ["7A4378BC3751030F"]
@@ -3803,7 +4167,7 @@
 			]
 			title: "Pasta Phase Sorter"
 			x: 32.25d
-			y: 33.75d
+			y: 39.75d
 		}
 		{
 			dependencies: ["74B15ACB850EFA12"]
@@ -3816,7 +4180,7 @@
 			]
 			title: "Lasagna Phase"
 			x: 34.75d
-			y: 33.75d
+			y: 39.75d
 		}
 		{
 			dependencies: ["3728D086ED65904D"]
@@ -3830,7 +4194,7 @@
 			]
 			title: "Pasta Laminator"
 			x: 37.25d
-			y: 33.75d
+			y: 39.75d
 		}
 		{
 			dependencies: ["71799E0F1D51A455"]
@@ -3843,7 +4207,7 @@
 			]
 			title: "Lasagna Plate"
 			x: 39.75d
-			y: 33.75d
+			y: 39.75d
 		}
 		{
 			dependencies: ["5B48FE310916FC4F"]
@@ -3856,7 +4220,7 @@
 			]
 			title: "UXV Machine Hull"
 			x: 42.25d
-			y: 33.75d
+			y: 39.75d
 		}
 		{
 			icon: "grindless:raw_pasta"
@@ -3869,7 +4233,7 @@
 			]
 			title: "Raw Pasta"
 			x: 24.75d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["5778E4F14BA5F31E"]
@@ -3883,7 +4247,7 @@
 			]
 			title: "Pasta Phase Sorter"
 			x: 27.25d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["310A71B5AAD0891C"]
@@ -3896,7 +4260,7 @@
 			]
 			title: "Spaghetti Phase"
 			x: 29.75d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["7BCF5411A73F6A6D"]
@@ -3910,7 +4274,7 @@
 			]
 			title: "Pasta Draw Bench"
 			x: 32.25d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["53551A6EF48694E0"]
@@ -3923,7 +4287,7 @@
 			]
 			title: "Pasta Strand Wire"
 			x: 34.75d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["3C14404D26817E28"]
@@ -3937,7 +4301,7 @@
 			]
 			title: "Coated Conductor Line"
 			x: 37.25d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["33F57FC7848048A3"]
@@ -3950,7 +4314,7 @@
 			]
 			title: "Strand Tape"
 			x: 39.75d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["50BEEC0AE9F54515"]
@@ -3964,7 +4328,7 @@
 			]
 			title: "Nitride Magnet Works"
 			x: 42.25d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["52E1B77EFF758D73"]
@@ -3977,7 +4341,7 @@
 			]
 			title: "UXV SMES Cell"
 			x: 44.75d
-			y: 36.75d
+			y: 42.75d
 		}
 		{
 			icon: "grindless:raw_pasta"
@@ -3990,7 +4354,7 @@
 			]
 			title: "Raw Pasta"
 			x: 24.75d
-			y: 39.75d
+			y: 45.75d
 		}
 		{
 			dependencies: ["131F5C1AC2D05A1E"]
@@ -4004,7 +4368,7 @@
 			]
 			title: "Pasta Phase Sorter"
 			x: 27.25d
-			y: 39.75d
+			y: 45.75d
 		}
 		{
 			dependencies: ["3766E1C87931B96C"]
@@ -4017,7 +4381,7 @@
 			]
 			title: "Lasagna Phase"
 			x: 29.75d
-			y: 39.75d
+			y: 45.75d
 		}
 		{
 			dependencies: ["7E8278B075410066"]
@@ -4031,7 +4395,7 @@
 			]
 			title: "Pasta Laminator"
 			x: 32.25d
-			y: 39.75d
+			y: 45.75d
 		}
 		{
 			dependencies: ["1BFC5F26CFA067BD"]
@@ -4044,7 +4408,7 @@
 			]
 			title: "Lasagna Plate"
 			x: 34.75d
-			y: 39.75d
+			y: 45.75d
 		}
 		{
 			dependencies: ["3E0847F16B9557B5"]
@@ -4058,7 +4422,7 @@
 			]
 			title: "Hot Strip Mill"
 			x: 37.25d
-			y: 39.75d
+			y: 45.75d
 		}
 		{
 			dependencies: ["3B03CB4743F5B82E"]
@@ -4071,7 +4435,7 @@
 			]
 			title: "ALIP Duct"
 			x: 39.75d
-			y: 39.75d
+			y: 45.75d
 		}
 		{
 			dependencies: ["707E6552E6DE00DC"]
@@ -4084,7 +4448,7 @@
 			]
 			title: "UXV Electric Pump"
 			x: 42.25d
-			y: 39.75d
+			y: 45.75d
 		}
 		{
 			icon: "gtceu:tetrataenite_dust"
@@ -4097,7 +4461,7 @@
 			]
 			title: "Tetrataenite Dust"
 			x: 0.5d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["19F9BBA3C4B65054"]
@@ -4110,7 +4474,7 @@
 			]
 			title: "Tetrataenite Ingot"
 			x: 3.0d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["12DEF69DE6CC126C"]
@@ -4124,7 +4488,7 @@
 			]
 			title: "Hot Strip Mill"
 			x: 5.5d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["3C39DD97358C2304"]
@@ -4137,7 +4501,7 @@
 			]
 			title: "Tetrataenite Lamination"
 			x: 8.0d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["7D49B528A163D5E9"]
@@ -4151,7 +4515,7 @@
 			]
 			title: "HTS Magnet Works"
 			x: 10.5d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["767F40BA310129CE"]
@@ -4164,7 +4528,7 @@
 			]
 			title: "Strand Stator"
 			x: 13.0d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["3286382137EC2E45"]
@@ -4177,7 +4541,7 @@
 			]
 			title: "UXV Electric Motor"
 			x: 15.5d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			icon: "grindless:terbium_oxide_dust"
@@ -4190,7 +4554,7 @@
 			]
 			title: "Terbium Oxide"
 			x: 0.5d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["71D8667BD20AF02A"]
@@ -4204,7 +4568,7 @@
 			]
 			title: "Europium Reductor"
 			x: 3.0d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["7932B07CDCAA8C8D"]
@@ -4217,7 +4581,7 @@
 			]
 			title: "Terbium"
 			x: 5.5d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["198AABD4710B504F"]
@@ -4231,7 +4595,7 @@
 			]
 			title: "Levitation Melter"
 			x: 8.0d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["765692BEEC27659F"]
@@ -4244,7 +4608,7 @@
 			]
 			title: "Terfenol-D Ingot"
 			x: 10.5d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["3AC8423855415E53"]
@@ -4258,7 +4622,7 @@
 			]
 			title: "Crystal Growth Furnace"
 			x: 13.0d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["359253884D83590A"]
@@ -4271,7 +4635,7 @@
 			]
 			title: "Terfenol-D Rod"
 			x: 15.5d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["123451F7CB481F1F"]
@@ -4284,7 +4648,7 @@
 			]
 			title: "UXV Electric Piston"
 			x: 18.0d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			icon: "grindless:five_n_nickel"
@@ -4297,7 +4661,7 @@
 			]
 			title: "5N Nickel"
 			x: 0.5d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["17A41B79ABB17CBA"]
@@ -4311,7 +4675,7 @@
 			]
 			title: "Levitation Melter"
 			x: 3.0d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["5AC488E5E7B9428F"]
@@ -4324,7 +4688,7 @@
 			]
 			title: "Ni-Mn-Ga Ingot"
 			x: 5.5d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["393CBE51BA93D434"]
@@ -4338,7 +4702,7 @@
 			]
 			title: "Crystal Growth Furnace"
 			x: 8.0d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["7A7AC3915E42A843"]
@@ -4351,7 +4715,7 @@
 			]
 			title: "Ni-Mn-Ga Raw Crystal"
 			x: 10.5d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["52EFB9BFEAD71635"]
@@ -4364,7 +4728,7 @@
 			]
 			title: "Ni-Mn-Ga Crystal"
 			x: 13.0d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["5FE234576F62848B"]
@@ -4377,7 +4741,7 @@
 			]
 			title: "UXV Conveyor Module"
 			x: 15.5d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			icon: "grindless:niobium_powder"
@@ -4390,7 +4754,7 @@
 			]
 			title: "Niobium Powder"
 			x: 0.5d
-			y: 52.75d
+			y: 58.75d
 		}
 		{
 			dependencies: ["39F2F0964B1339A8"]
@@ -4404,7 +4768,7 @@
 			]
 			title: "Electron Beam Furnace"
 			x: 3.0d
-			y: 52.75d
+			y: 58.75d
 		}
 		{
 			dependencies: ["3D5B46FB1C3EF2E0"]
@@ -4417,7 +4781,7 @@
 			]
 			title: "6N Niobium"
 			x: 5.5d
-			y: 52.75d
+			y: 58.75d
 		}
 		{
 			dependencies: ["36E7B760A7BA1651"]
@@ -4430,7 +4794,7 @@
 			]
 			title: "Gum Metal Blend"
 			x: 8.0d
-			y: 52.75d
+			y: 58.75d
 		}
 		{
 			dependencies: ["798F26A78A4693E0"]
@@ -4443,7 +4807,7 @@
 			]
 			title: "Gum Metal Billet"
 			x: 10.5d
-			y: 52.75d
+			y: 58.75d
 		}
 		{
 			dependencies: ["153CF8DCC45DE5C3"]
@@ -4456,7 +4820,7 @@
 			]
 			title: "Gum Metal Blank"
 			x: 13.0d
-			y: 52.75d
+			y: 58.75d
 		}
 		{
 			dependencies: ["7DADB7FBA3E9CFAD"]
@@ -4469,7 +4833,7 @@
 			]
 			title: "Gum Metal Flexspline"
 			x: 15.5d
-			y: 52.75d
+			y: 58.75d
 		}
 		{
 			dependencies: ["5E389A182E08AB4A"]
@@ -4482,7 +4846,7 @@
 			]
 			title: "UXV Strain Wave Gear"
 			x: 18.0d
-			y: 52.75d
+			y: 58.75d
 		}
 		{
 			icon: "gtceu:tetrataenite_dust"
@@ -4495,7 +4859,7 @@
 			]
 			title: "Tetrataenite Dust"
 			x: 0.5d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["39B461C679CFF456"]
@@ -4508,7 +4872,7 @@
 			]
 			title: "Tetrataenite Ingot"
 			x: 3.0d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["3378B53861762B2C"]
@@ -4522,7 +4886,7 @@
 			]
 			title: "Hot Strip Mill"
 			x: 5.5d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["3D9C8ADB2778527F"]
@@ -4535,7 +4899,7 @@
 			]
 			title: "Encoder Ring"
 			x: 8.0d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["55BD58A82327A2E1"]
@@ -4548,7 +4912,7 @@
 			]
 			title: "Multipole Encoder Ring"
 			x: 10.5d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["57849EE952F59C98"]
@@ -4561,7 +4925,7 @@
 			]
 			title: "TMR Encoder"
 			x: 13.0d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			icon: "gtceu:methane_bucket"
@@ -4574,7 +4938,7 @@
 			]
 			title: "Methane"
 			x: 0.5d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["17421B47B8F6CC93"]
@@ -4588,7 +4952,7 @@
 			]
 			title: "Methane Pyrolyser"
 			x: 3.0d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["788EFC2E2C17834F"]
@@ -4601,7 +4965,7 @@
 			]
 			title: "CNT Sock"
 			x: 5.5d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["105688ABE986913C"]
@@ -4614,7 +4978,7 @@
 			]
 			title: "CNT Ribbon"
 			x: 8.0d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["55BF8DF687496C4A"]
@@ -4627,7 +4991,7 @@
 			]
 			title: "CNT Densified Yarn"
 			x: 10.5d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["37E27741E931F8AE"]
@@ -4641,7 +5005,7 @@
 			]
 			title: "Tether Ribbon Works"
 			x: 13.0d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["107CE8BD1AA38A67"]
@@ -4654,7 +5018,7 @@
 			]
 			title: "CNT Bumper Weave"
 			x: 15.5d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			dependencies: ["79A99222F66B2EE6"]
@@ -4667,7 +5031,7 @@
 			]
 			title: "CNT Whipple Shield"
 			x: 18.0d
-			y: 56.75d
+			y: 62.75d
 		}
 		{
 			icon: "grindless:gallium_oxide_dust"
@@ -4680,7 +5044,7 @@
 			]
 			title: "Gallium Oxide"
 			x: 22.25d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["587030A07C1890DF"]
@@ -4694,7 +5058,7 @@
 			]
 			title: "Crystal Growth Furnace"
 			x: 24.75d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["372880C0E047542F"]
@@ -4707,7 +5071,7 @@
 			]
 			title: "Ga2O3 EFG Plate"
 			x: 27.25d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["1E607600A99A4860"]
@@ -4720,7 +5084,7 @@
 			]
 			title: "Ga2O3 Slice"
 			x: 29.75d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["3C3EDFC1E2B979B2"]
@@ -4733,7 +5097,7 @@
 			]
 			title: "Ga2O3 Wafer"
 			x: 32.25d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["314EE7D191123393"]
@@ -4747,7 +5111,7 @@
 			]
 			title: "MOCVD Reactor"
 			x: 34.75d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["5AD87B57BDB7CAB5"]
@@ -4760,7 +5124,7 @@
 			]
 			title: "Ga2O3 Epi Wafer"
 			x: 37.25d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["19A7871D0325C10C"]
@@ -4773,7 +5137,7 @@
 			]
 			title: "Ga2O3 Gated Wafer"
 			x: 39.75d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["3E3DC3362757E3A5"]
@@ -4786,7 +5150,7 @@
 			]
 			title: "Ga2O3 Power Die"
 			x: 42.25d
-			y: 46.75d
+			y: 52.75d
 		}
 		{
 			icon: "grindless:mu_metal_blend"
@@ -4799,7 +5163,7 @@
 			]
 			title: "Mu-Metal Blend"
 			x: 22.25d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["3342D3A3A0BDC357"]
@@ -4813,7 +5177,7 @@
 			]
 			title: "Electron Beam Furnace"
 			x: 24.75d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["514B98EFBBD889FA"]
@@ -4826,7 +5190,7 @@
 			]
 			title: "Mu-Metal Ingot"
 			x: 27.25d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["5F74BE9C5564E55A"]
@@ -4840,7 +5204,7 @@
 			]
 			title: "Hot Strip Mill"
 			x: 29.75d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["529389E046858B18"]
@@ -4853,7 +5217,7 @@
 			]
 			title: "Mu-Metal Hot Band"
 			x: 32.25d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["1F8C45DE1F39E342"]
@@ -4866,7 +5230,7 @@
 			]
 			title: "Mu-Metal Foil"
 			x: 34.75d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["137D808E43E35C29"]
@@ -4879,7 +5243,7 @@
 			]
 			title: "Annealed Mu Foil"
 			x: 37.25d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["5F6F139C31E54D9B"]
@@ -4892,7 +5256,7 @@
 			]
 			title: "Mu-Metal Shield Can"
 			x: 39.75d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["33AA0FE12889A867"]
@@ -4905,7 +5269,7 @@
 			]
 			title: "Shielded Interposer"
 			x: 42.25d
-			y: 48.75d
+			y: 54.75d
 		}
 		{
 			icon: "grindless:finemet_charge_dust"
@@ -4918,7 +5282,7 @@
 			]
 			title: "Finemet Charge"
 			x: 22.25d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["1926F85C58683171"]
@@ -4932,7 +5296,7 @@
 			]
 			title: "Levitation Melter"
 			x: 24.75d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["5583B8C883D54957"]
@@ -4945,7 +5309,7 @@
 			]
 			title: "Finemet Melt"
 			x: 27.25d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["14412D0E8240E764"]
@@ -4959,7 +5323,7 @@
 			]
 			title: "Plasma Quench Caster"
 			x: 29.75d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["77291B1853795B39"]
@@ -4972,7 +5336,7 @@
 			]
 			title: "Finemet Ribbon"
 			x: 32.25d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["718093053626B5F6"]
@@ -4985,7 +5349,7 @@
 			]
 			title: "Finemet Toroid"
 			x: 34.75d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["7DE9F4FFD6566BAB"]
@@ -4998,7 +5362,7 @@
 			]
 			title: "Finemet Core"
 			x: 37.25d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
 			dependencies: ["311D71AD89E5741D"]
@@ -5011,23 +5375,64 @@
 			]
 			title: "UXV Voltage Coil"
 			x: 39.75d
-			y: 50.75d
+			y: 56.75d
 		}
 		{
-			icon: "gtceu:krypton_bucket"
-			id: "116C5E0258AFC5DF"
+			icon: "gtceu:liquid_air_bucket"
+			id: "7153E77A84364AA3"
 			shape: "rsquare"
 			size: 1.0d
+			tasks: [
+				{ id: "3B85D54346B90697", item: "gtceu:liquid_air_bucket", optional_task: true, type: "item" }
+				{ id: "13340A2AC4917969", type: "checkmark" }
+			]
+			title: "Liquid Air"
+			x: 22.25d
+			y: 58.75d
+		}
+		{
+			dependencies: ["7153E77A84364AA3"]
+			icon: "gtceu:cryogenic_plant"
+			id: "3E7C6D14F3E6D5C1"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "318C3A53A8B92799", item: "gtceu:cryogenic_plant", optional_task: true, type: "item" }
+				{ id: "5D2D50B1C5A1BEB7", type: "checkmark" }
+			]
+			title: "Cryogenic Plant"
+			x: 24.75d
+			y: 58.75d
+		}
+		{
+			dependencies: ["3E7C6D14F3E6D5C1"]
+			icon: "gtceu:krypton_bucket"
+			id: "116C5E0258AFC5DF"
+			size: 1.25d
 			tasks: [
 				{ id: "510C9F22CD3C7EE8", item: "gtceu:krypton_bucket", optional_task: true, type: "item" }
 				{ id: "77EC04B94F3C7C6C", type: "checkmark" }
 			]
 			title: "Krypton"
-			x: 22.25d
-			y: 52.75d
+			x: 27.25d
+			y: 58.75d
 		}
 		{
 			dependencies: ["116C5E0258AFC5DF"]
+			icon: "gtceu:ev_mixer"
+			id: "78891C304E644540"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1E2A6F5A9581A11D", item: "gtceu:ev_mixer", optional_task: true, type: "item" }
+				{ id: "1EB019C2946B7004", type: "checkmark" }
+			]
+			title: "Mixer"
+			x: 29.75d
+			y: 58.75d
+		}
+		{
+			dependencies: ["78891C304E644540"]
 			icon: "grindless:kr_f2_premix"
 			id: "59923266B274D667"
 			size: 1.25d
@@ -5036,11 +5441,25 @@
 				{ id: "1603B169D15F0A53", type: "checkmark" }
 			]
 			title: "Kr-F2 Premix"
-			x: 24.75d
-			y: 52.75d
+			x: 32.25d
+			y: 58.75d
 		}
 		{
 			dependencies: ["59923266B274D667"]
+			icon: "gtceu:ev_chemical_reactor"
+			id: "3900246A27E35952"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "77ABA59FFCE13A80", item: "gtceu:ev_chemical_reactor", optional_task: true, type: "item" }
+				{ id: "3457F6D3871C8A0D", type: "checkmark" }
+			]
+			title: "Chemical Reactor"
+			x: 34.75d
+			y: 58.75d
+		}
+		{
+			dependencies: ["3900246A27E35952"]
 			icon: "grindless:krf_discharge_tube"
 			id: "18E901D491FC4C1A"
 			size: 1.25d
@@ -5049,11 +5468,25 @@
 				{ id: "313FCEFB3A3FD3A4", type: "checkmark" }
 			]
 			title: "KrF Discharge Tube"
-			x: 27.25d
-			y: 52.75d
+			x: 37.25d
+			y: 58.75d
 		}
 		{
 			dependencies: ["18E901D491FC4C1A"]
+			icon: "gtceu:assembly_line"
+			id: "7E6FD8F24511A6D5"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "71E21D777EC8636B", item: "gtceu:assembly_line", optional_task: true, type: "item" }
+				{ id: "582785475A3D7AFB", type: "checkmark" }
+			]
+			title: "Assembly Line"
+			x: 39.75d
+			y: 58.75d
+		}
+		{
+			dependencies: ["7E6FD8F24511A6D5"]
 			icon: "grindless:krf_excimer_laser"
 			id: "5086CC2A1CCDD3DB"
 			size: 1.25d
@@ -5062,8 +5495,8 @@
 				{ id: "7F2147090462003B", type: "checkmark" }
 			]
 			title: "KrF Excimer Laser"
-			x: 29.75d
-			y: 52.75d
+			x: 42.25d
+			y: 58.75d
 		}
 		{
 			icon: "gtceu:platinum_dust"
@@ -5076,7 +5509,7 @@
 			]
 			title: "Platinum"
 			x: 22.25d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["13229E7B6015AF35"]
@@ -5090,7 +5523,7 @@
 			]
 			title: "Platinum Plant"
 			x: 24.75d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["76612B8DD9155DBF"]
@@ -5103,7 +5536,7 @@
 			]
 			title: "5N Platinum"
 			x: 27.25d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["30AF08C1CE7D8207"]
@@ -5117,7 +5550,7 @@
 			]
 			title: "Hot Strip Mill"
 			x: 29.75d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["1D40608221EC8C3F"]
@@ -5130,7 +5563,7 @@
 			]
 			title: "Pt Sheet"
 			x: 32.25d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["567007C1EA2F002A"]
@@ -5143,7 +5576,7 @@
 			]
 			title: "Pt Crucible Shell"
 			x: 34.75d
-			y: 54.75d
+			y: 60.75d
 		}
 		{
 			dependencies: ["325FF610FC41DCB9"]
@@ -5156,7 +5589,7 @@
 			]
 			title: "Pt LPE Crucible"
 			x: 37.25d
-			y: 54.75d
+			y: 60.75d
 		}
 	]
 	subtitle: ["Targets and wafers for spin logic, flakes, garnets and the sensor, superheavy III and Cassiopeia A, the burning stages of the Mk6, and pasta and the UXV parts."]

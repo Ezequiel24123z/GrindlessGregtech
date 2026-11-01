@@ -535,7 +535,7 @@
 			dependencies: ["33A57BF78B8EE399", "5B4EE371262EFACD"]
 			icon: "gtceu:gasoline_bucket"
 			id: "39BFC0FAB2D7CD50"
-			size: 1.0d
+			size: 1.25d
 			subtitle: "Chemical reactor"
 			tasks: [
 				{ id: "5A3668186D1F6918", item: "gtceu:gasoline_bucket", optional_task: true, type: "item" }

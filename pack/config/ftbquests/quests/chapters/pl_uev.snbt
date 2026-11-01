@@ -14,15 +14,15 @@
 			id: "119EA60DDAA2AF8E"
 			linked_quest: "5AF85FE2C9DA1793"
 			shape: "rsquare"
-			x: 27.25d
-			y: 2.75d
+			x: 42.25d
+			y: 4.75d
 		}
 		{
 			id: "1889FC74C1A4C768"
 			linked_quest: "7F158CF0E872F990"
 			shape: "rsquare"
 			x: 27.25d
-			y: 10.25d
+			y: 14.75d
 		}
 		{
 			id: "1FD34933319C8AD4"
@@ -168,75 +168,6 @@
 			y: 0.75d
 		}
 		{
-			icon: "grindless:plutonium_244_target"
-			id: "3B1D8FAFAD4889EC"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "3A5EBEE56334C968", item: "grindless:plutonium_244_target", optional_task: true, type: "item" }
-				{ id: "5AFE69BC99A62E6E", type: "checkmark" }
-			]
-			title: "Plutonium-244 Target"
-			x: 0.5d
-			y: 2.75d
-		}
-		{
-			dependencies: ["3B1D8FAFAD4889EC"]
-			description: ["A calcium-48 beam on an actinide target; the atoms fly out as recoil gas."]
-			icon: "gtceu:heavy_ion_cyclotron"
-			id: "5BEB5EB8C1FEDA05"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "722697B5A83498EA", item: "gtceu:heavy_ion_cyclotron", optional_task: true, type: "item" }
-				{ id: "318D54B85F415FD5", type: "checkmark" }
-			]
-			title: "Heavy Ion Cyclotron"
-			x: 3.0d
-			y: 2.75d
-		}
-		{
-			dependencies: ["5BEB5EB8C1FEDA05"]
-			icon: "gtceu:flerovium_recoil_gas_bucket"
-			id: "14BF30D9670EA555"
-			size: 1.25d
-			tasks: [
-				{ id: "3F11C459FE8D0B5A", item: "gtceu:flerovium_recoil_gas_bucket", optional_task: true, type: "item" }
-				{ id: "73194836FFFC4650", type: "checkmark" }
-			]
-			title: "Flerovium Recoil Gas"
-			x: 5.5d
-			y: 2.75d
-		}
-		{
-			dependencies: ["14BF30D9670EA555"]
-			description: ["Sends the gas through an etched membrane; the helium returns."]
-			icon: "gtceu:recoil_separator"
-			id: "76E459AEB0F029AC"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "39DE7DC89901A794", item: "gtceu:recoil_separator", optional_task: true, type: "item" }
-				{ id: "124923C42D8C2B6E", type: "checkmark" }
-			]
-			title: "Recoil Separator"
-			x: 8.0d
-			y: 2.75d
-		}
-		{
-			dependencies: ["76E459AEB0F029AC"]
-			icon: "grindless:flerovium_atoms"
-			id: "7CF7B495109C8E4E"
-			size: 1.25d
-			tasks: [
-				{ id: "508EA5E60327EB61", item: "grindless:flerovium_atoms", optional_task: true, type: "item" }
-				{ id: "56E4FE5D2957B9CC", type: "checkmark" }
-			]
-			title: "Flerovium Atoms"
-			x: 10.5d
-			y: 2.75d
-		}
-		{
 			icon: "gtceu:plutonium_244_dust"
 			id: "7198767915849539"
 			shape: "rsquare"
@@ -247,7 +178,7 @@
 			]
 			title: "Plutonium-244"
 			x: 0.5d
-			y: 6.75d
+			y: 2.75d
 		}
 		{
 			dependencies: ["7198767915849539"]
@@ -260,7 +191,7 @@
 			]
 			title: "Plutonium-244 Oxide"
 			x: 3.0d
-			y: 6.75d
+			y: 2.75d
 		}
 		{
 			dependencies: ["5A378ACAD71FC539"]
@@ -273,7 +204,7 @@
 			]
 			title: "Plating Ampoule"
 			x: 5.5d
-			y: 6.75d
+			y: 2.75d
 		}
 		{
 			dependencies: ["7C073671D6E84925"]
@@ -286,7 +217,63 @@
 			]
 			title: "Plutonium-244 Target"
 			x: 8.0d
-			y: 6.75d
+			y: 2.75d
+		}
+		{
+			dependencies: ["10FED93C12363B8B"]
+			description: ["A calcium-48 beam on an actinide target; the atoms fly out as recoil gas."]
+			icon: "gtceu:heavy_ion_cyclotron"
+			id: "5BEB5EB8C1FEDA05"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "722697B5A83498EA", item: "gtceu:heavy_ion_cyclotron", optional_task: true, type: "item" }
+				{ id: "318D54B85F415FD5", type: "checkmark" }
+			]
+			title: "Heavy Ion Cyclotron"
+			x: 10.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["5BEB5EB8C1FEDA05"]
+			icon: "gtceu:flerovium_recoil_gas_bucket"
+			id: "14BF30D9670EA555"
+			size: 1.25d
+			tasks: [
+				{ id: "3F11C459FE8D0B5A", item: "gtceu:flerovium_recoil_gas_bucket", optional_task: true, type: "item" }
+				{ id: "73194836FFFC4650", type: "checkmark" }
+			]
+			title: "Flerovium Recoil Gas"
+			x: 13.0d
+			y: 2.75d
+		}
+		{
+			dependencies: ["14BF30D9670EA555", "7A33F85A6D71D1CA"]
+			description: ["Sends the gas through an etched membrane; the helium returns."]
+			icon: "gtceu:recoil_separator"
+			id: "76E459AEB0F029AC"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "39DE7DC89901A794", item: "gtceu:recoil_separator", optional_task: true, type: "item" }
+				{ id: "124923C42D8C2B6E", type: "checkmark" }
+			]
+			title: "Recoil Separator"
+			x: 15.5d
+			y: 2.75d
+		}
+		{
+			dependencies: ["76E459AEB0F029AC"]
+			icon: "grindless:flerovium_atoms"
+			id: "7CF7B495109C8E4E"
+			size: 1.25d
+			tasks: [
+				{ id: "508EA5E60327EB61", item: "grindless:flerovium_atoms", optional_task: true, type: "item" }
+				{ id: "56E4FE5D2957B9CC", type: "checkmark" }
+			]
+			title: "Flerovium Atoms"
+			x: 18.0d
+			y: 2.75d
 		}
 		{
 			icon: "gtceu:transcurium_liquor_bucket"
@@ -460,19 +447,6 @@
 			y: 12.75d
 		}
 		{
-			dependencies: ["18993CA627D9805F"]
-			icon: "grindless:degenerate_eos_model"
-			id: "1E05B78545689AC2"
-			size: 1.25d
-			tasks: [
-				{ id: "51A1666A7805E09C", item: "grindless:degenerate_eos_model", optional_task: true, type: "item" }
-				{ id: "5820E5A7C25DD7FD", type: "checkmark" }
-			]
-			title: "Degenerate EOS Model"
-			x: 8.0d
-			y: 12.75d
-		}
-		{
 			icon: "gtceu:rock_salt_dust"
 			id: "3925D5EB469B1304"
 			shape: "rsquare"
@@ -513,17 +487,17 @@
 			y: 14.75d
 		}
 		{
-			dependencies: ["1ACC11FA9194B14E"]
+			dependencies: ["18993CA627D9805F", "1ACC11FA9194B14E"]
 			icon: "grindless:degenerate_eos_model"
-			id: "18146B440632799C"
+			id: "1E05B78545689AC2"
 			size: 1.25d
 			tasks: [
-				{ id: "55001E914A5225CC", item: "grindless:degenerate_eos_model", optional_task: true, type: "item" }
-				{ id: "3D156286C7EB9BF2", type: "checkmark" }
+				{ id: "51A1666A7805E09C", item: "grindless:degenerate_eos_model", optional_task: true, type: "item" }
+				{ id: "5820E5A7C25DD7FD", type: "checkmark" }
 			]
 			title: "Degenerate EOS Model"
 			x: 8.0d
-			y: 14.75d
+			y: 13.75d
 		}
 		{
 			icon: "grindless:polycarbonate_foil"
@@ -535,7 +509,7 @@
 				{ id: "7B38C4F0106F14C0", type: "checkmark" }
 			]
 			title: "Polycarbonate Foil"
-			x: 0.5d
+			x: 8.0d
 			y: 4.75d
 		}
 		{
@@ -548,7 +522,7 @@
 				{ id: "5DAA27175601889E", type: "checkmark" }
 			]
 			title: "Ion-Tracked Foil"
-			x: 3.0d
+			x: 10.5d
 			y: 4.75d
 		}
 		{
@@ -561,34 +535,7 @@
 				{ id: "1A6956DB24D576F5", type: "checkmark" }
 			]
 			title: "Etched Membrane"
-			x: 5.5d
-			y: 4.75d
-		}
-		{
-			dependencies: ["7A33F85A6D71D1CA"]
-			icon: "gtceu:recoil_separator"
-			id: "7800EE3D24217C0C"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "5078DFD94647BD1D", item: "gtceu:recoil_separator", optional_task: true, type: "item" }
-				{ id: "3C1D5402D77EAA83", type: "checkmark" }
-			]
-			title: "Recoil Separator"
-			x: 8.0d
-			y: 4.75d
-		}
-		{
-			dependencies: ["7800EE3D24217C0C"]
-			icon: "grindless:flerovium_atoms"
-			id: "55B0491E4EB31356"
-			size: 1.25d
-			tasks: [
-				{ id: "7497F30D160F6D79", item: "grindless:flerovium_atoms", optional_task: true, type: "item" }
-				{ id: "5C39426FA3816885", type: "checkmark" }
-			]
-			title: "Flerovium Atoms"
-			x: 10.5d
+			x: 13.0d
 			y: 4.75d
 		}
 		{
@@ -646,7 +593,7 @@
 			y: 0.75d
 		}
 		{
-			dependencies: ["33D5B3EC5852BEC1"]
+			dependencies: ["33D5B3EC5852BEC1", "51D6186A4F112D09"]
 			description: ["Fiction: the real hydride needs over 100 GPa."]
 			icon: "gtceu:megabar_press"
 			id: "7F3C27639CA163A1"
@@ -674,21 +621,152 @@
 			y: 0.75d
 		}
 		{
-			dependencies: ["5AF85FE2C9DA1793"]
-			icon: "grindless:bond_coated_sx_blade"
-			id: "745677096D8A395E"
+			icon: "gtceu:boric_acid_dust"
+			id: "5DFF64B4FE040A17"
 			shape: "rsquare"
 			size: 1.0d
+			tasks: [
+				{ id: "138CF23D5DE99BB7", item: "gtceu:boric_acid_dust", optional_task: true, type: "item" }
+				{ id: "5D93934C3D8376BE", type: "checkmark" }
+			]
+			title: "Boric Acid"
+			x: 29.75d
+			y: 2.75d
+		}
+		{
+			dependencies: ["5DFF64B4FE040A17"]
+			icon: "grindless:trimethyl_borate_ampoule"
+			id: "573229D3BEE2DEDF"
+			size: 1.25d
+			tasks: [
+				{ id: "14DF37DDAAB87869", item: "grindless:trimethyl_borate_ampoule", optional_task: true, type: "item" }
+				{ id: "18FBD0E8CA39B2A1", type: "checkmark" }
+			]
+			title: "Trimethyl Borate"
+			x: 32.25d
+			y: 2.75d
+		}
+		{
+			dependencies: ["573229D3BEE2DEDF"]
+			icon: "grindless:sodium_borohydride_dust"
+			id: "5245F3EEC89AD57E"
+			size: 1.25d
+			tasks: [
+				{ id: "15B981D4FBA77634", item: "grindless:sodium_borohydride_dust", optional_task: true, type: "item" }
+				{ id: "5D11BC42D49B9C1D", type: "checkmark" }
+			]
+			title: "Sodium Borohydride"
+			x: 34.75d
+			y: 2.75d
+		}
+		{
+			dependencies: ["5245F3EEC89AD57E"]
+			icon: "gtceu:ammonia_borane_dust"
+			id: "37C7F744EC014A98"
+			size: 1.25d
+			tasks: [
+				{ id: "3C80BC493C799D37", item: "gtceu:ammonia_borane_dust", optional_task: true, type: "item" }
+				{ id: "39A15DDD116A9551", type: "checkmark" }
+			]
+			title: "Ammonia Borane"
+			x: 37.25d
+			y: 2.75d
+		}
+		{
+			dependencies: ["37C7F744EC014A98"]
+			icon: "grindless:ammonia_borane_charge"
+			id: "51D6186A4F112D09"
+			size: 1.25d
+			tasks: [
+				{ id: "7A7B000E6D8ABDF3", item: "grindless:ammonia_borane_charge", optional_task: true, type: "item" }
+				{ id: "34B553477D40999B", type: "checkmark" }
+			]
+			title: "Pressed Charge"
+			x: 39.75d
+			y: 2.75d
+		}
+		{
+			icon: "gtceu:rhenium_ingot"
+			id: "55B3AFF7460EF5C0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "7A431306E8D3CAB0", item: "gtceu:rhenium_ingot", optional_task: true, type: "item" }
+				{ id: "55E31B9853EF23B6", type: "checkmark" }
+			]
+			title: "Rhenium Ingot"
+			x: 29.75d
+			y: 6.75d
+		}
+		{
+			dependencies: ["55B3AFF7460EF5C0"]
+			icon: "grindless:six_n_rhenium"
+			id: "76D904E02DBA1182"
+			size: 1.25d
+			tasks: [
+				{ id: "35E1444C4774DB8E", item: "grindless:six_n_rhenium", optional_task: true, type: "item" }
+				{ id: "5D8940F1747F2EDA", type: "checkmark" }
+			]
+			title: "6N Rhenium"
+			x: 32.25d
+			y: 6.75d
+		}
+		{
+			dependencies: ["76D904E02DBA1182"]
+			icon: "grindless:sx_master_alloy_dust"
+			id: "10DFB0A55DF76EE1"
+			size: 1.25d
+			tasks: [
+				{ id: "1807F8601ECECA05", item: "grindless:sx_master_alloy_dust", optional_task: true, type: "item" }
+				{ id: "18D22B67E8F23A04", type: "checkmark" }
+			]
+			title: "SX Master Alloy"
+			x: 34.75d
+			y: 6.75d
+		}
+		{
+			dependencies: ["10DFB0A55DF76EE1"]
+			icon: "grindless:sx_blade"
+			id: "35DC943F95938AE2"
+			size: 1.25d
+			tasks: [
+				{ id: "15B157B4ADD8FFD4", item: "grindless:sx_blade", optional_task: true, type: "item" }
+				{ id: "1163E2ADADD3A059", type: "checkmark" }
+			]
+			title: "SX Blade"
+			x: 37.25d
+			y: 6.75d
+		}
+		{
+			dependencies: ["35DC943F95938AE2"]
+			icon: "grindless:heat_treated_sx_blade"
+			id: "319121943774321E"
+			size: 1.25d
+			subtitle: "Heat-treated in the electron beam furnace"
+			tasks: [
+				{ id: "1C67168527BFDEC2", item: "grindless:heat_treated_sx_blade", optional_task: true, type: "item" }
+				{ id: "191B25481B5FD9BA", type: "checkmark" }
+			]
+			title: "Heat-Treated Blade"
+			x: 39.75d
+			y: 6.75d
+		}
+		{
+			dependencies: ["319121943774321E", "5AF85FE2C9DA1793"]
+			icon: "grindless:bond_coated_sx_blade"
+			id: "745677096D8A395E"
+			size: 1.25d
+			subtitle: "Platinum and aluminium bond coat"
 			tasks: [
 				{ id: "7D6B51D782BC98CE", item: "grindless:bond_coated_sx_blade", optional_task: true, type: "item" }
 				{ id: "324629DED5C3C4C5", type: "checkmark" }
 			]
 			title: "Bond-Coated Blade"
-			x: 29.75d
-			y: 2.75d
+			x: 42.25d
+			y: 6.75d
 		}
 		{
-			dependencies: ["745677096D8A395E"]
+			dependencies: ["745677096D8A395E", "1BE2E3FBF9F9B4E7"]
 			description: ["Coats the blade in vacuum with a ceramic that resists heat."]
 			icon: "gtceu:electron_beam_furnace"
 			id: "353D2EF1FF2B8950"
@@ -699,8 +777,8 @@
 				{ id: "51FF86BB92D90E5D", type: "checkmark" }
 			]
 			title: "Electron Beam Furnace"
-			x: 32.25d
-			y: 2.75d
+			x: 44.75d
+			y: 6.75d
 		}
 		{
 			dependencies: ["353D2EF1FF2B8950"]
@@ -712,8 +790,8 @@
 				{ id: "3B7B89E7F9657576", type: "checkmark" }
 			]
 			title: "Coated SX Blade"
-			x: 34.75d
-			y: 2.75d
+			x: 47.25d
+			y: 6.75d
 		}
 		{
 			dependencies: ["74FE2DAA691C590B"]
@@ -727,8 +805,8 @@
 				{ id: "573D1623763D9E10", type: "checkmark" }
 			]
 			title: "Single-Crystal Foundry"
-			x: 37.25d
-			y: 2.75d
+			x: 49.75d
+			y: 6.75d
 		}
 		{
 			dependencies: ["1163A063E3B93FAF"]
@@ -740,8 +818,47 @@
 				{ id: "348BD9A2FE7F7BBB", type: "checkmark" }
 			]
 			title: "Brayton Turbine Wheel"
+			x: 52.25d
+			y: 6.75d
+		}
+		{
+			icon: "grindless:yttrium_oxide_dust"
+			id: "7FCEE1B46F2FD9D1"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1691078D7A7B640F", item: "grindless:yttrium_oxide_dust", optional_task: true, type: "item" }
+				{ id: "36C21723E1944EA5", type: "checkmark" }
+			]
+			title: "Yttrium Oxide"
+			x: 37.25d
+			y: 8.75d
+		}
+		{
+			dependencies: ["7FCEE1B46F2FD9D1"]
+			icon: "grindless:ysz_powder"
+			id: "31A0EEDCAB5D9204"
+			size: 1.25d
+			tasks: [
+				{ id: "310E4EE605B37E63", item: "grindless:ysz_powder", optional_task: true, type: "item" }
+				{ id: "3C378D9669BFCFCC", type: "checkmark" }
+			]
+			title: "YSZ Powder"
 			x: 39.75d
-			y: 2.75d
+			y: 8.75d
+		}
+		{
+			dependencies: ["31A0EEDCAB5D9204"]
+			icon: "grindless:ysz_ingot"
+			id: "1BE2E3FBF9F9B4E7"
+			size: 1.25d
+			tasks: [
+				{ id: "3C93FCB55BD1ECD1", item: "grindless:ysz_ingot", optional_task: true, type: "item" }
+				{ id: "5C02B5AD79E2140B", type: "checkmark" }
+			]
+			title: "YSZ Ingot"
+			x: 42.25d
+			y: 8.75d
 		}
 		{
 			icon: "grindless:polycarbosilane_dust"
@@ -754,7 +871,7 @@
 			]
 			title: "Polycarbosilane"
 			x: 29.75d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["32BA7829718BF951"]
@@ -769,7 +886,7 @@
 			]
 			title: "SiC Fibre Plant"
 			x: 32.25d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["31DEE6CE57860953"]
@@ -782,7 +899,7 @@
 			]
 			title: "Green Fibre"
 			x: 34.75d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["3A596FB7FACB2B96"]
@@ -797,7 +914,7 @@
 			]
 			title: "SiC Fibre Plant"
 			x: 37.25d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["17DB1F174BD27582"]
@@ -810,7 +927,7 @@
 			]
 			title: "Cured Fibre"
 			x: 39.75d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["58280A816383E4AB"]
@@ -825,7 +942,7 @@
 			]
 			title: "SiC Fibre Plant"
 			x: 42.25d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["1E8F11BB78F2EF58"]
@@ -838,7 +955,7 @@
 			]
 			title: "SiC Fibre"
 			x: 44.75d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["1D985596CF0D782F"]
@@ -851,7 +968,7 @@
 			]
 			title: "BN-Coated Fibre"
 			x: 47.25d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["509204643CD3A8BE"]
@@ -865,7 +982,7 @@
 			]
 			title: "Fibre Preform"
 			x: 49.75d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["17E8860ADDE629E2"]
@@ -880,7 +997,7 @@
 			]
 			title: "CVI Furnace"
 			x: 52.25d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["1B955F70A8A2B6B9"]
@@ -893,7 +1010,7 @@
 			]
 			title: "SiC/SiC Plate"
 			x: 54.75d
-			y: 4.75d
+			y: 10.75d
 		}
 		{
 			dependencies: ["1B955F70A8A2B6B9"]
@@ -906,111 +1023,7 @@
 			]
 			title: "Hydrochloric Acid"
 			x: 52.25d
-			y: 6.75d
-		}
-		{
-			icon: "gtceu:ammonium_chloride_dust"
-			id: "51485B47ACC87725"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "1A9B5CCA7D47CC6C", item: "gtceu:ammonium_chloride_dust", optional_task: true, type: "item" }
-				{ id: "319E0378DF8F2CDB", type: "checkmark" }
-			]
-			title: "Ammonium Chloride"
-			x: 29.75d
 			y: 12.75d
-		}
-		{
-			dependencies: ["51485B47ACC87725"]
-			icon: "gtceu:ammonia_borane_dust"
-			id: "37C7F744EC014A98"
-			size: 1.25d
-			tasks: [
-				{ id: "3C80BC493C799D37", item: "gtceu:ammonia_borane_dust", optional_task: true, type: "item" }
-				{ id: "39A15DDD116A9551", type: "checkmark" }
-			]
-			title: "Ammonia Borane"
-			x: 32.25d
-			y: 12.75d
-		}
-		{
-			dependencies: ["37C7F744EC014A98"]
-			icon: "grindless:ammonia_borane_charge"
-			id: "51D6186A4F112D09"
-			size: 1.25d
-			tasks: [
-				{ id: "7A7B000E6D8ABDF3", item: "grindless:ammonia_borane_charge", optional_task: true, type: "item" }
-				{ id: "34B553477D40999B", type: "checkmark" }
-			]
-			title: "Pressed Charge"
-			x: 34.75d
-			y: 12.75d
-		}
-		{
-			dependencies: ["51D6186A4F112D09"]
-			icon: "gtceu:lay_superhydride_ingot"
-			id: "359FC4DC3CE4912D"
-			size: 1.25d
-			tasks: [
-				{ id: "3E799166DD75945B", item: "gtceu:lay_superhydride_ingot", optional_task: true, type: "item" }
-				{ id: "57C44BCA2599CE33", type: "checkmark" }
-			]
-			title: "Superhydride Ingot"
-			x: 37.25d
-			y: 12.75d
-		}
-		{
-			icon: "gtceu:rhenium_ingot"
-			id: "55B3AFF7460EF5C0"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "7A431306E8D3CAB0", item: "gtceu:rhenium_ingot", optional_task: true, type: "item" }
-				{ id: "55E31B9853EF23B6", type: "checkmark" }
-			]
-			title: "Rhenium Ingot"
-			x: 29.75d
-			y: 14.75d
-		}
-		{
-			dependencies: ["55B3AFF7460EF5C0"]
-			icon: "grindless:six_n_rhenium"
-			id: "76D904E02DBA1182"
-			size: 1.25d
-			tasks: [
-				{ id: "35E1444C4774DB8E", item: "grindless:six_n_rhenium", optional_task: true, type: "item" }
-				{ id: "5D8940F1747F2EDA", type: "checkmark" }
-			]
-			title: "6N Rhenium"
-			x: 32.25d
-			y: 14.75d
-		}
-		{
-			dependencies: ["76D904E02DBA1182"]
-			icon: "grindless:sx_master_alloy_dust"
-			id: "10DFB0A55DF76EE1"
-			size: 1.25d
-			tasks: [
-				{ id: "1807F8601ECECA05", item: "grindless:sx_master_alloy_dust", optional_task: true, type: "item" }
-				{ id: "18D22B67E8F23A04", type: "checkmark" }
-			]
-			title: "SX Master Alloy"
-			x: 34.75d
-			y: 14.75d
-		}
-		{
-			dependencies: ["10DFB0A55DF76EE1"]
-			icon: "grindless:sx_blade"
-			id: "35DC943F95938AE2"
-			size: 1.25d
-			tasks: [
-				{ id: "15B157B4ADD8FFD4", item: "grindless:sx_blade", optional_task: true, type: "item" }
-				{ id: "1163E2ADADD3A059", type: "checkmark" }
-			]
-			title: "SX Blade"
-			x: 37.25d
-			y: 14.75d
 		}
 		{
 			icon: "grindless:zr_hf_chloride_dust"
@@ -1221,16 +1234,43 @@
 			y: 20.75d
 		}
 		{
-			icon: "gtceu:tungsten_single_wire"
-			id: "5C78D262632E7875"
+			icon: "gtceu:tungsten_dust"
+			id: "1EC943923C2F443C"
 			shape: "rsquare"
 			size: 1.0d
+			tasks: [
+				{ id: "708DA0C27826136F", item: "gtceu:tungsten_dust", optional_task: true, type: "item" }
+				{ id: "77BD80F7FF2098B1", type: "checkmark" }
+			]
+			title: "Tungsten Dust"
+			x: 29.75d
+			y: 22.75d
+		}
+		{
+			dependencies: ["1EC943923C2F443C"]
+			icon: "gtceu:tungsten_ingot"
+			id: "795EADCCF5B6A62A"
+			size: 1.25d
+			subtitle: "Blast furnace"
+			tasks: [
+				{ id: "79CF1119FC7A62AE", item: "gtceu:tungsten_ingot", optional_task: true, type: "item" }
+				{ id: "191F95307E8432BC", type: "checkmark" }
+			]
+			title: "Tungsten Ingot"
+			x: 32.25d
+			y: 22.75d
+		}
+		{
+			dependencies: ["795EADCCF5B6A62A"]
+			icon: "gtceu:tungsten_single_wire"
+			id: "5C78D262632E7875"
+			size: 1.25d
 			tasks: [
 				{ id: "31CE4068587F3C6F", item: "gtceu:tungsten_single_wire", optional_task: true, type: "item" }
 				{ id: "70E5E107A1D84BE3", type: "checkmark" }
 			]
 			title: "Tungsten Wire"
-			x: 29.75d
+			x: 34.75d
 			y: 22.75d
 		}
 		{
@@ -1243,7 +1283,7 @@
 				{ id: "31E103A508811E08", type: "checkmark" }
 			]
 			title: "Coated Wire"
-			x: 32.25d
+			x: 37.25d
 			y: 22.75d
 		}
 		{
@@ -1256,7 +1296,7 @@
 				{ id: "528E7C4B5FEB672B", type: "checkmark" }
 			]
 			title: "Fibre Preform"
-			x: 34.75d
+			x: 39.75d
 			y: 22.75d
 		}
 		{
@@ -1269,7 +1309,7 @@
 				{ id: "147C8778394504F7", type: "checkmark" }
 			]
 			title: "Divertor"
-			x: 37.25d
+			x: 42.25d
 			y: 22.75d
 		}
 		{
@@ -1282,60 +1322,8 @@
 				{ id: "73F6CCE3EA2E9983", type: "checkmark" }
 			]
 			title: "Wf/W Tile"
-			x: 38.5d
+			x: 42.25d
 			y: 24.75d
-		}
-		{
-			icon: "grindless:yttrium_oxide_dust"
-			id: "7FCEE1B46F2FD9D1"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "1691078D7A7B640F", item: "grindless:yttrium_oxide_dust", optional_task: true, type: "item" }
-				{ id: "36C21723E1944EA5", type: "checkmark" }
-			]
-			title: "Yttrium Oxide"
-			x: 29.75d
-			y: 26.75d
-		}
-		{
-			dependencies: ["7FCEE1B46F2FD9D1"]
-			icon: "grindless:ysz_powder"
-			id: "31A0EEDCAB5D9204"
-			size: 1.25d
-			tasks: [
-				{ id: "310E4EE605B37E63", item: "grindless:ysz_powder", optional_task: true, type: "item" }
-				{ id: "3C378D9669BFCFCC", type: "checkmark" }
-			]
-			title: "YSZ Powder"
-			x: 32.25d
-			y: 26.75d
-		}
-		{
-			dependencies: ["31A0EEDCAB5D9204"]
-			icon: "grindless:ysz_ingot"
-			id: "1BE2E3FBF9F9B4E7"
-			size: 1.25d
-			tasks: [
-				{ id: "3C93FCB55BD1ECD1", item: "grindless:ysz_ingot", optional_task: true, type: "item" }
-				{ id: "5C02B5AD79E2140B", type: "checkmark" }
-			]
-			title: "YSZ Ingot"
-			x: 34.75d
-			y: 26.75d
-		}
-		{
-			dependencies: ["1BE2E3FBF9F9B4E7"]
-			icon: "grindless:coated_sx_blade"
-			id: "7C0CD5F369B8D210"
-			size: 1.25d
-			tasks: [
-				{ id: "382BF6FE465BD4BB", item: "grindless:coated_sx_blade", optional_task: true, type: "item" }
-				{ id: "700BDC3928606018", type: "checkmark" }
-			]
-			title: "Coated SX Blade"
-			x: 37.25d
-			y: 26.75d
 		}
 		{
 			icon: "grindless:niobium_powder"
@@ -1428,7 +1416,7 @@
 			]
 			title: "Reduced Iron Powder"
 			x: 29.75d
-			y: 10.25d
+			y: 14.75d
 		}
 		{
 			dependencies: ["721988CD83636776"]
@@ -1443,7 +1431,7 @@
 			]
 			title: "Nitride Magnet Works"
 			x: 32.25d
-			y: 10.25d
+			y: 14.75d
 		}
 		{
 			dependencies: ["7F75EE581D64854A"]
@@ -1456,7 +1444,7 @@
 			]
 			title: "Fe16N2 Powder"
 			x: 34.75d
-			y: 10.25d
+			y: 14.75d
 		}
 		{
 			dependencies: ["5660E1A1CB7929B7"]
@@ -1471,7 +1459,7 @@
 			]
 			title: "Nitride Magnet Works"
 			x: 37.25d
-			y: 10.25d
+			y: 14.75d
 		}
 		{
 			dependencies: ["3C2E9187F7323C88"]
@@ -1484,7 +1472,7 @@
 			]
 			title: "Strain-Annealed Powder"
 			x: 39.75d
-			y: 10.25d
+			y: 14.75d
 		}
 		{
 			dependencies: ["5680D944BD248B0F"]
@@ -1499,7 +1487,7 @@
 			]
 			title: "Nitride Magnet Works"
 			x: 42.25d
-			y: 10.25d
+			y: 14.75d
 		}
 		{
 			dependencies: ["53A5FBE98C1D67A6"]
@@ -1512,7 +1500,7 @@
 			]
 			title: "Bonded Magnet"
 			x: 44.75d
-			y: 10.25d
+			y: 14.75d
 		}
 		{
 			icon: "grindless:fz_silicon_wafer"
@@ -1578,73 +1566,6 @@
 			title: "SNSPD"
 			x: 13.0d
 			y: 32.75d
-		}
-		{
-			icon: "grindless:annealed_sin_chip"
-			id: "54070654215B50F1"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "77DBAC8393AC1FDD", item: "grindless:annealed_sin_chip", optional_task: true, type: "item" }
-				{ id: "576799445C23E05A", type: "checkmark" }
-			]
-			title: "Annealed SiN Chip"
-			x: 3.0d
-			y: 34.75d
-		}
-		{
-			dependencies: ["54070654215B50F1"]
-			icon: "grindless:waveguide_circuit"
-			id: "5A150CAF205FB323"
-			size: 1.25d
-			tasks: [
-				{ id: "3633942080B62FC2", item: "grindless:waveguide_circuit", optional_task: true, type: "item" }
-				{ id: "1E99447292119D53", type: "checkmark" }
-			]
-			title: "Waveguide Circuit"
-			x: 5.5d
-			y: 34.75d
-		}
-		{
-			dependencies: ["5A150CAF205FB323"]
-			icon: "grindless:quantum_photonic_chip"
-			id: "1608B86864521F8A"
-			size: 1.25d
-			tasks: [
-				{ id: "3B6F9C855FA8AA76", item: "grindless:quantum_photonic_chip", optional_task: true, type: "item" }
-				{ id: "7F82FB44D442DC48", type: "checkmark" }
-			]
-			title: "Quantum Photonic Chip"
-			x: 8.0d
-			y: 34.75d
-		}
-		{
-			dependencies: ["1608B86864521F8A"]
-			description: ["Bonds the chip to the optical assembly."]
-			icon: "gtceu:photonic_integration_hall"
-			id: "5D79DF5C73ADDE95"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "3AF02C3586054F4A", item: "gtceu:photonic_integration_hall", optional_task: true, type: "item" }
-				{ id: "72ABB9B72810308C", type: "checkmark" }
-			]
-			title: "Photonic Integration Hall"
-			x: 10.5d
-			y: 34.75d
-		}
-		{
-			dependencies: ["5D79DF5C73ADDE95"]
-			icon: "gtnn:optical_computer"
-			id: "7ECF04283A4F72E1"
-			size: 1.25d
-			tasks: [
-				{ id: "5CC675AD38C9AEB2", item: "gtnn:optical_computer", optional_task: true, type: "item" }
-				{ id: "7D719311DF75EEA6", type: "checkmark" }
-			]
-			title: "Optical Computer"
-			x: 13.0d
-			y: 34.75d
 		}
 		{
 			icon: "gtceu:ammonia_borane_dust"
@@ -1917,6 +1838,60 @@
 			]
 			title: "Annealed SiN Chip"
 			x: 18.0d
+			y: 42.75d
+		}
+		{
+			dependencies: ["7A2796558B01D3FE"]
+			icon: "grindless:waveguide_circuit"
+			id: "5A150CAF205FB323"
+			size: 1.25d
+			tasks: [
+				{ id: "3633942080B62FC2", item: "grindless:waveguide_circuit", optional_task: true, type: "item" }
+				{ id: "1E99447292119D53", type: "checkmark" }
+			]
+			title: "Waveguide Circuit"
+			x: 20.5d
+			y: 42.75d
+		}
+		{
+			dependencies: ["5A150CAF205FB323"]
+			icon: "grindless:quantum_photonic_chip"
+			id: "1608B86864521F8A"
+			size: 1.25d
+			tasks: [
+				{ id: "3B6F9C855FA8AA76", item: "grindless:quantum_photonic_chip", optional_task: true, type: "item" }
+				{ id: "7F82FB44D442DC48", type: "checkmark" }
+			]
+			title: "Quantum Photonic Chip"
+			x: 23.0d
+			y: 42.75d
+		}
+		{
+			dependencies: ["1608B86864521F8A"]
+			description: ["Bonds the chip to the optical assembly."]
+			icon: "gtceu:photonic_integration_hall"
+			id: "5D79DF5C73ADDE95"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3AF02C3586054F4A", item: "gtceu:photonic_integration_hall", optional_task: true, type: "item" }
+				{ id: "72ABB9B72810308C", type: "checkmark" }
+			]
+			title: "Photonic Integration Hall"
+			x: 25.5d
+			y: 42.75d
+		}
+		{
+			dependencies: ["5D79DF5C73ADDE95"]
+			icon: "gtnn:optical_computer"
+			id: "7ECF04283A4F72E1"
+			size: 1.25d
+			tasks: [
+				{ id: "5CC675AD38C9AEB2", item: "gtnn:optical_computer", optional_task: true, type: "item" }
+				{ id: "7D719311DF75EEA6", type: "checkmark" }
+			]
+			title: "Optical Computer"
+			x: 28.0d
 			y: 42.75d
 		}
 		{
@@ -2595,7 +2570,7 @@
 				{ id: "5CBC36FC1CBA3C7A", type: "checkmark" }
 			]
 			title: "Aerogel Tile"
-			x: 25.0d
+			x: 32.5d
 			y: 32.75d
 		}
 		{
@@ -2610,7 +2585,7 @@
 				{ id: "59493C40A08EBC18", type: "checkmark" }
 			]
 			title: "Nebula Collector"
-			x: 27.5d
+			x: 35.0d
 			y: 32.75d
 		}
 		{
@@ -2623,7 +2598,7 @@
 				{ id: "540D099A8A65CDE8", type: "checkmark" }
 			]
 			title: "Dust-Laden Aerogel"
-			x: 30.0d
+			x: 37.5d
 			y: 32.75d
 		}
 		{
@@ -2638,7 +2613,7 @@
 				{ id: "7C143E07D763F6A0", type: "checkmark" }
 			]
 			title: "Interstellar Dust Lab"
-			x: 32.5d
+			x: 40.0d
 			y: 32.75d
 		}
 		{
@@ -2651,7 +2626,7 @@
 				{ id: "70AE278C7A965C8C", type: "checkmark" }
 			]
 			title: "Extracted Grains"
-			x: 35.0d
+			x: 42.5d
 			y: 32.75d
 		}
 		{
@@ -2664,7 +2639,7 @@
 				{ id: "1A6B4AC408DCC9E9", type: "checkmark" }
 			]
 			title: "Demineralised Grains"
-			x: 37.5d
+			x: 45.0d
 			y: 32.75d
 		}
 		{
@@ -2677,7 +2652,7 @@
 				{ id: "5DE7851AFDA5233E", type: "checkmark" }
 			]
 			title: "Iron-60 Record"
-			x: 40.0d
+			x: 47.5d
 			y: 32.75d
 		}
 		{
@@ -2691,7 +2666,7 @@
 				{ id: "123AE2FFE07CAD19", type: "checkmark" }
 			]
 			title: "Barnard Core Drill"
-			x: 25.0d
+			x: 32.5d
 			y: 34.75d
 		}
 		{
@@ -2704,7 +2679,7 @@
 				{ id: "5BC3ECB86A4C708E", type: "checkmark" }
 			]
 			title: "Barnard Core Rock"
-			x: 27.5d
+			x: 35.0d
 			y: 34.75d
 		}
 		{
@@ -2719,7 +2694,7 @@
 				{ id: "14ACF050D3876C55", type: "checkmark" }
 			]
 			title: "Carbonyl Refinery"
-			x: 30.0d
+			x: 37.5d
 			y: 34.75d
 		}
 		{
@@ -2732,7 +2707,7 @@
 				{ id: "7C465A1163F9ACCE", type: "checkmark" }
 			]
 			title: "Iron Pentacarbonyl"
-			x: 32.5d
+			x: 40.0d
 			y: 34.75d
 		}
 		{
@@ -2745,7 +2720,7 @@
 				{ id: "73A32E20EB3AB9FE", type: "checkmark" }
 			]
 			title: "Barnard Residue"
-			x: 32.5d
+			x: 40.0d
 			y: 36.75d
 		}
 		{
@@ -2758,7 +2733,7 @@
 				{ id: "78B672EB5068CD6A", type: "checkmark" }
 			]
 			title: "Silicon Tetrachloride"
-			x: 25.0d
+			x: 32.5d
 			y: 38.75d
 		}
 		{
@@ -2771,7 +2746,7 @@
 				{ id: "3F0D89A296815059", type: "checkmark" }
 			]
 			title: "TEOS Flask"
-			x: 27.5d
+			x: 35.0d
 			y: 38.75d
 		}
 		{
@@ -2784,7 +2759,7 @@
 				{ id: "179E75F432DB4718", type: "checkmark" }
 			]
 			title: "Silica Sol"
-			x: 30.0d
+			x: 37.5d
 			y: 38.75d
 		}
 		{
@@ -2797,7 +2772,7 @@
 				{ id: "162BC38961B330F6", type: "checkmark" }
 			]
 			title: "Wet Gel"
-			x: 32.5d
+			x: 40.0d
 			y: 38.75d
 		}
 		{
@@ -2810,7 +2785,7 @@
 				{ id: "10D04D02F1599FF5", type: "checkmark" }
 			]
 			title: "Aged Gel"
-			x: 35.0d
+			x: 42.5d
 			y: 38.75d
 		}
 		{
@@ -2823,7 +2798,7 @@
 				{ id: "3810C6D47409F501", type: "checkmark" }
 			]
 			title: "Aerogel Tile"
-			x: 37.5d
+			x: 45.0d
 			y: 38.75d
 		}
 	]

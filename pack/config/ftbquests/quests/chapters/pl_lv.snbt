@@ -28,7 +28,7 @@
 			id: "730332780BDB43FA"
 			linked_quest: "1A3EAE1BFB47BDE8"
 			shape: "rsquare"
-			x: 23.0d
+			x: 23.25d
 			y: 26.75d
 		}
 		{
@@ -498,7 +498,7 @@
 			]
 			title: "Raw Sapphire"
 			x: 10.75d
-			y: 12.0d
+			y: 13.25d
 		}
 		{
 			dependencies: ["1E89202592F1F682"]
@@ -512,7 +512,7 @@
 			]
 			title: "Sapphire Dust"
 			x: 12.75d
-			y: 12.0d
+			y: 13.25d
 		}
 		{
 			dependencies: ["3F94AA2A1F381357"]
@@ -526,7 +526,7 @@
 			]
 			title: "Electrolyzer"
 			x: 14.75d
-			y: 12.0d
+			y: 13.25d
 		}
 		{
 			dependencies: ["7C7EA4687020CFB9"]
@@ -539,7 +539,7 @@
 			]
 			title: "Aluminium Dust"
 			x: 16.75d
-			y: 11.25d
+			y: 12.5d
 		}
 		{
 			dependencies: ["7C7EA4687020CFB9"]
@@ -553,7 +553,7 @@
 			]
 			title: "Oxygen"
 			x: 16.75d
-			y: 12.75d
+			y: 14.0d
 		}
 		{
 			dependencies: ["14F157B5E41B2D31"]
@@ -568,7 +568,7 @@
 			]
 			title: "Electric Blast Furnace"
 			x: 18.75d
-			y: 11.25d
+			y: 12.5d
 		}
 		{
 			dependencies: ["3942A5EEDEF5E274"]
@@ -581,10 +581,38 @@
 			]
 			title: "Aluminium"
 			x: 20.75d
-			y: 11.25d
+			y: 12.5d
 		}
 		{
 			dependencies: ["5F51561F02FCF315"]
+			icon: "gtceu:aluminium_plate"
+			id: "5A4B541D8CC0EE0E"
+			size: 1.0d
+			subtitle: "Forge hammer or bender"
+			tasks: [
+				{ id: "5AAF5AC6F8EC352B", item: "gtceu:aluminium_plate", optional_task: true, type: "item" }
+				{ id: "594B884613528F84", type: "checkmark" }
+			]
+			title: "Aluminium Plate"
+			x: 22.75d
+			y: 12.5d
+		}
+		{
+			dependencies: ["5A4B541D8CC0EE0E"]
+			icon: "gtceu:mv_machine_casing"
+			id: "733F1F2452A6C7D0"
+			size: 1.0d
+			subtitle: "Assembler"
+			tasks: [
+				{ id: "7609992E4AC305BB", item: "gtceu:mv_machine_casing", optional_task: true, type: "item" }
+				{ id: "7F31F9699C456BF5", type: "checkmark" }
+			]
+			title: "MV Machine Casing"
+			x: 24.75d
+			y: 11.0d
+		}
+		{
+			dependencies: ["5A4B541D8CC0EE0E", "733F1F2452A6C7D0"]
 			description: ["The whole point of the sapphire. Every MV machine starts here."]
 			icon: "gtceu:mv_machine_hull"
 			id: "3BE2880ECD538C49"
@@ -594,8 +622,8 @@
 				{ id: "1A8CDEC1D93E304C", type: "checkmark" }
 			]
 			title: "MV Machine Hull"
-			x: 22.75d
-			y: 11.25d
+			x: 26.75d
+			y: 12.5d
 		}
 		{
 			icon: "gtceu:sphalerite_dust"
@@ -607,7 +635,7 @@
 				{ id: "5197476E0B0B91B4", type: "checkmark" }
 			]
 			title: "Sphalerite Dust"
-			x: 27.0d
+			x: 31.0d
 			y: 11.0d
 		}
 		{
@@ -620,7 +648,7 @@
 				{ id: "16DEAFBFB788CC7F", type: "checkmark" }
 			]
 			title: "Realgar Dust"
-			x: 27.0d
+			x: 31.0d
 			y: 12.5d
 		}
 		{
@@ -634,7 +662,7 @@
 				{ id: "3D5E5497D3C165BE", type: "checkmark" }
 			]
 			title: "Gallium"
-			x: 29.0d
+			x: 33.0d
 			y: 11.0d
 		}
 		{
@@ -648,7 +676,7 @@
 				{ id: "3092C570EBA5C9AF", type: "checkmark" }
 			]
 			title: "Arsenic"
-			x: 29.0d
+			x: 33.0d
 			y: 12.5d
 		}
 		{
@@ -662,7 +690,7 @@
 				{ id: "1392C2C042DE4DDF", type: "checkmark" }
 			]
 			title: "Sulfur"
-			x: 29.0d
+			x: 33.0d
 			y: 14.0d
 		}
 		{
@@ -676,7 +704,7 @@
 				{ id: "119FFE25C565BC43", type: "checkmark" }
 			]
 			title: "Gallium Arsenide"
-			x: 31.0d
+			x: 35.0d
 			y: 11.75d
 		}
 		{
@@ -691,7 +719,7 @@
 				{ id: "3491D8B18A4BA9D4", type: "checkmark" }
 			]
 			title: "Diode"
-			x: 33.0d
+			x: 37.0d
 			y: 11.75d
 		}
 		{
@@ -879,7 +907,8 @@
 			dependencies: ["7C1774883E4B34E1"]
 			icon: "gtceu:steam_bucket"
 			id: "11C8A87D0BE6CDDB"
-			size: 1.0d
+			size: 1.25d
+			subtitle: "Fuel-free power"
 			tasks: [
 				{ id: "555A3C3265EEC8A7", item: "gtceu:steam_bucket", optional_task: true, type: "item" }
 				{ id: "7F1301785C42570B", type: "checkmark" }
@@ -990,7 +1019,7 @@
 			dependencies: ["751D03C3C9B1D654", "152A086C9EEAA6AC"]
 			icon: "gtceu:drilling_fluid_bucket"
 			id: "34CDD62DD8E1D773"
-			size: 1.0d
+			size: 1.25d
 			subtitle: "Mixer, with water"
 			tasks: [
 				{ id: "3AB7273C6EF6F73C", item: "gtceu:drilling_fluid_bucket", optional_task: true, type: "item" }
@@ -1046,7 +1075,9 @@
 			dependencies: ["52FBD32E666844F2"]
 			icon: "gtceu:raw_goethite"
 			id: "3F52C490CEFE6949"
-			size: 1.25d
+			shape: "circle"
+			size: 0.75d
+			subtitle: "The steam drill's ore, half again as much"
 			tasks: [
 				{ id: "134377CE7A85000B", item: "gtceu:raw_goethite", optional_task: true, type: "item" }
 				{ id: "1CD23C7785C4FA0B", type: "checkmark" }
@@ -1117,7 +1148,7 @@
 			dependencies: ["74A88EDF511766BC"]
 			icon: "gtceu:coal_tar_bucket"
 			id: "78585557B7EC2D58"
-			size: 0.75d
+			size: 1.25d
 			subtitle: "Distil it again: creosote, phenol, naphthalene"
 			tasks: [
 				{ id: "1E77A11D231FEE54", item: "gtceu:coal_tar_bucket", optional_task: true, type: "item" }
@@ -1131,7 +1162,7 @@
 			dependencies: ["74A88EDF511766BC"]
 			icon: "gtceu:ammonia_bucket"
 			id: "79841FC0203AF089"
-			size: 0.75d
+			size: 1.25d
 			subtitle: "Burnt with oxygen, it starts nitric acid"
 			tasks: [
 				{ id: "3D815D2A3A9F51ED", item: "gtceu:ammonia_bucket", optional_task: true, type: "item" }
@@ -1165,7 +1196,7 @@
 				{ id: "37D9736FA8E09D96", type: "checkmark" }
 			]
 			title: "Calcite"
-			x: 23.0d
+			x: 23.25d
 			y: 28.25d
 		}
 		{
@@ -1179,7 +1210,7 @@
 				{ id: "75B10EE6089FDE26", type: "checkmark" }
 			]
 			title: "Fertilizer"
-			x: 25.0d
+			x: 25.25d
 			y: 27.5d
 		}
 		{
@@ -1193,7 +1224,7 @@
 				{ id: "163A01A7944E09A6", type: "checkmark" }
 			]
 			title: "Sapling"
-			x: 25.0d
+			x: 25.25d
 			y: 29.0d
 		}
 		{
@@ -1208,7 +1239,7 @@
 				{ id: "5E8ED4500483450D", type: "checkmark" }
 			]
 			title: "LV Greenhouse"
-			x: 27.0d
+			x: 27.25d
 			y: 28.25d
 		}
 		{
@@ -1221,7 +1252,7 @@
 				{ id: "74B7AC5904DF7AD0", type: "checkmark" }
 			]
 			title: "Logs"
-			x: 29.0d
+			x: 29.25d
 			y: 28.25d
 		}
 		{

@@ -12,6 +12,7 @@ export default {
   clusters: {
     uranium: {
       name: 'Uranium and fluorine',
+      line: 'fuelcycle',
       nodes: [
         n('fluorite', 0, -2.25, I('gcyr:raw_fluorite'), 'Raw Fluorite', { kind: 'raw', sub: 'The fluorite vein: any Earth drill, from steam on' }),
         n('fdust', 2, -2.25, I('gcyr:fluorite_dust'), 'Fluorite Dust', {
@@ -45,6 +46,7 @@ export default {
     },
     fuel: {
       name: 'Fuel and the reactor',
+      line: 'fuelcycle',
       nodes: [
         n('u235b', 0, -0.75, I('gtceu:uranium_235_dust'), 'Uranium-235', { kind: 'raw', sub: 'Enriched in the hot cell' }),
         n('u238b', 0, 0.75, I('gtceu:uranium_dust'), 'Uranium-238', { kind: 'raw' }),
@@ -67,6 +69,7 @@ export default {
     },
     plutonium: {
       name: 'Plutonium\'s round trip',
+      line: 'fuelcycle',
       nodes: [
         n('spent2', 0, 0, I('grindless:spent_fuel_assembly'), 'Spent Fuel', { kind: 'raw', sub: 'From the reactor' }),
         L('hno3', 0, 1.5, 'pl_ev:hno3'),
@@ -116,6 +119,7 @@ export default {
     },
     radon: {
       name: 'Radon and the Quantum Star',
+      line: 'fuelcycle',
       nodes: [
         n('u238c', 0, -0.75, I('gtceu:uranium_dust'), 'Uranium-238', { kind: 'raw' }),
         n('air', 0, 0.75, F('gtceu:air'), 'Air', { kind: 'raw' }),
@@ -130,6 +134,7 @@ export default {
     },
     venus: {
       name: 'Venus: acid, water and heat',
+      role: 'resource',
       nodes: [
         n('collector', 0, 0, M('gtceu:iv_gas_collector'), 'Gas Collector', { sub: 'Up above the cloud base' }),
         n('acidv', 2, 0, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', { from: ['collector'], sub: 'Straight out of the clouds' }),
@@ -138,7 +143,7 @@ export default {
           kind: 'ours', from: ['acidv', 'gauze'],
           desc: 'The planet\'s own heat cracks the acid into water and oxygen, so the base stops shipping water from home.',
         }),
-        n('dwv', 6, 0, F('gtceu:distilled_water'), 'Distilled Water', { from: ['works'], sub: 'The drill and the heat engine drink it' }),
+        n('dwv', 6, 0, F('gtceu:distilled_water'), 'Distilled Water', { kind: 'product', from: ['works'], sub: 'The drill and the heat engine drink it' }),
         n('o2v', 6, 1.5, F('gtceu:oxygen'), 'Oxygen', { kind: 'by', from: ['works'], end: 'suits, spreader', sub: 'Suits and the oxygen spreader' }),
         n('so2', 6, 2.5, F('gtceu:sulfur_dioxide'), 'Sulfur Dioxide', { kind: 'by', from: ['works'], end: 'acid at home', sub: 'Circuit 1 vents it; circuit 2 keeps it for acid at home' }),
         n('engine', 8, 0, M('gtceu:venus_heat_engine'), 'Venus Heat Engine', {
@@ -208,6 +213,7 @@ export default {
     },
     mercury: {
       name: 'Mercury: bricks and panels',
+      role: 'infrastructure',
       nodes: [
         n('mcobble', 0, -0.75, I('gcyr:mercury_cobblestone'), 'Mercury Cobblestone', { kind: 'raw', sub: 'Every bore of the drill brings some up' }),
         n('regd', 2, -0.75, I('gtceu:hermean_regolith_dust'), 'Hermean Regolith Dust', { from: ['mcobble'], sub: 'Any macerator' }),
@@ -224,6 +230,7 @@ export default {
     },
     far: {
       name: 'The far side of the sky',
+      role: 'research',
       nodes: [
         n('chart', 0, -0.75, I('grindless:inner_planets_chart'), 'Inner Planets Chart', { kind: 'raw', sub: 'The deep space antenna writes it' }),
         n('vlbi', 0, 0.75, I('grindless:lunar_vlbi_recording'), 'Lunar VLBI Recording', { kind: 'raw', sub: 'Recorded on the Moon, sent over the bridge' }),
@@ -241,11 +248,24 @@ export default {
     supercon: {
       name: 'Niobium-titanium wire',
       nodes: [
-        n('nb', 0, -0.75, I('gtceu:niobium_dust'), 'Niobium', { kind: 'raw' }),
-        n('tid', 0, 0.75, I('gtceu:titanium_dust'), 'Titanium Dust', { kind: 'raw' }),
-        n('nbtid', 2, 0, I('gtceu:niobium_titanium_dust'), 'Niobium-Titanium Dust', { from: ['nb', 'tid'], by: ['gtceu:mixer'], sub: 'Mixer' }),
-        n('nbtiebf', 4, 0, M('gtceu:smelting_complex'), 'Smelting Complex', { from: ['nbtid'], sub: 'Straight to the ingot' }),
-        n('nbti', 6, 0, I('gtceu:niobium_titanium_ingot'), 'Niobium-Titanium', { kind: 'product', from: ['nbtiebf'], sub: 'The first superconductor' }),
+        n('pyro', 0, -1.5, I('gtceu:raw_pyrochlore'), 'Raw Pyrochlore', { kind: 'raw', sub: 'The pyrochlore vein' }),
+        n('pyrod', 2, -1.5, I('gtceu:pyrochlore_dust'), 'Pyrochlore Dust', { from: ['pyro'], by: ['gtceu:ore_processing'], sub: 'Ore plant' }),
+        n('nb', 4, -1.5, I('gtceu:niobium_dust'), 'Niobium', { from: ['pyrod'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer: 2 niobium per 11 pyrochlore' }),
+        n('tid', 4, 0, I('gtceu:titanium_dust'), 'Titanium Dust', { kind: 'raw' }),
+        n('nbtid', 6, -0.75, I('gtceu:niobium_titanium_dust'), 'Niobium-Titanium Dust', { from: ['nb', 'tid'], by: ['gtceu:mixer'], sub: 'Mixer' }),
+        n('nbtiebf', 8, -0.75, M('gtceu:smelting_complex'), 'Smelting Complex', { from: ['nbtid'], sub: 'Straight to the ingot' }),
+        n('nbti', 10, -0.75, I('gtceu:niobium_titanium_ingot'), 'Niobium-Titanium', { kind: 'product', from: ['nbtiebf'], sub: 'The first superconductor' }),
+        L('sm', 0, 2.25, 'pl_ev:sm'),
+        n('fe', 0, 3.5, I('gtceu:iron_dust'), 'Iron Dust', { kind: 'raw' }),
+        n('as', 0, 4.75, I('gtceu:arsenic_dust'), 'Arsenic', { kind: 'raw' }),
+        n('smfeaso', 2.5, 3.5, I('gtceu:samarium_iron_arsenic_oxide_dust'), 'Samarium Iron Arsenic Oxide', {
+          kind: 'product', from: ['sm', 'fe', 'as'], by: ['gtceu:mixer'], extends: 'pl_ev:cascade', sub: 'Mixer: the cascade\'s samarium makes the superconductor',
+        }),
+        L('pd', 0, 6.5, 'pl_ev:pd'),
+        L('rh', 0, 8, 'pl_ev:rh'),
+        n('rpp', 2.5, 7.25, I('gtceu:rhodium_plated_palladium_dust'), 'Rhodium-Plated Palladium', {
+          kind: 'product', from: ['pd', 'rh'], by: ['gtceu:mixer'], extends: 'pl_ev:platinum', sub: 'Mixer: the platinum plant\'s palladium and rhodium',
+        }),
       ],
     },
   },
