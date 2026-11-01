@@ -1,8 +1,8 @@
 {
   "era": "uv",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 2.7,
+  "fluid": 2.7,
   "keys": [
     "extendedfeatures:uv_universal_circuit",
     "gtceu:accelerator_driven_reactor",
@@ -56,7 +56,12 @@
     "gtnn:optical_processor"
   ],
   "include": [],
-  "exclude": [],
-  "remove": [],
+  "exclude": [
+    "gtnn:component_assembly_line/*_uv",
+    "gtnn:component_assembly_line/*_uv_*"
+  ],
+  "remove": [
+    "gtceu:shaped/uv_machine_hull"
+  ],
   "override": {}
 }

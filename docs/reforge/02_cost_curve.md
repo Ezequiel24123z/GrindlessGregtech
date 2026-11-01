@@ -275,3 +275,52 @@ Single-producer inputs (SMD wraps, crystal chips, kanthal coils, catalyst mixes,
 
 - The venus heat engine now runs 100 mB water and 16,000 mB steam per cycle; any doc, quest or data text with the old 200 mB and 32,000 mB figures is stale (not checked here: those files are outside this package).
 - Phase 8 dead rows kept in `capacity_known.json`: `gtca/*`, `gtnn/*`, `vein_sample/*_type_belt`, `luv/radiation_vault_casing`, `assembler/iridium_crucible`, `mu_metal_shield` and every UV and later row (other bands).
+
+## Band C (LuV, ZPM, UV) (P2-C)
+
+Tables `luv.json`, `zpm.json` and `uv.json` are on (bands A, B and C together). "Before" numbers come from the batch dump of 7b28eac4 (`7b28eac45ec6`: LD-LV2, LD-ZP2, MX-S1/S3/S4, RF-3Q, RF-3R; bands A and B applied). "After" numbers come from the T1 dump of a pack copy of this branch (`/var/lib/grindless/dumps/p2-c`, commit 35f8ce22), reachability tier max: gate 1063/1065 (+1 warning), auto 401/401, eras 10/10. The gate FAIL is `Site: the stellar elevator ... only at Cygnus X-1` (`grindless:plasma_mass_filtering/reconnection_plasmoid_return` also runs in `gcyr:black_hole_orbit`), a MAX recipe outside this package.
+
+### Factors and core index (item = fluid)
+
+| Era | Applied | Core index before (7b28eac4) | after (T1 dump) | Target | Next factor tried |
+|---|---|---|---|---|---|
+| LuV | **2.0** | 33.3 | **107** (-8.5%) | 117.2 | 2.03 gives 183 (+57%) |
+| ZPM | **1.5** | 124 | **278** (-5.1%) | 293.0 | 1.6 gives 322 (+9.8%) |
+| UV | **2.7** | 150 | **740** (+1.0%) | 732.4 | 2.5 gives 664 (-9.3%) |
+
+Solved on the 7b28eac4 dump with `--table` (MV to IV off, they are already in it): the prediction (107, 278, 740) equals the T1 dump exactly. The fluid factor has no effect on any index. **LuV quantization (limit, not a defect):** factors 1.8 to 2.0 give 105 to 107, and 2.03 and above jump to 183 to 192, so nothing within 10% above 107 exists; the nearer side of the target (-8.5%) is kept.
+
+Predicted later eras (T1 dump; each is re-solved by its own band, P2-Z last): UHV 1,135 (target 1,831), UEV 2,289 (4,578), UIV 3,924 (11,444), UXV 10,952 (28,610), OPV 285 (71,526), MAX 2,296 (178,814). Median new/old of the controllers: LuV 4.9, UV 12.0.
+
+### Removed bypasses and kept exceptions
+
+- `remove`: `gtceu:shaped/{luv,zpm,uv}_machine_hull`. **No bootstrap kept:** the hulls come from the assembler recipes (`hull_luv`, `hull_zpm`, `hull_uv`); with the shaped hulls the index plateaued at UV whatever the factor, and T1 reachability (gate, auto and eras) passes without them.
+- `exclude`: `gtnn:component_assembly_line/*_<era>(_*)` for the three eras (dead GT-- content; Phase 8 removes it).
+
+### Capacity: 17 `capacity_known.json` entries emptied
+
+Dump-mode lint: errors **118 before (7b28eac4) and 103 after (T1 dump)**; the cost curve adds 0 overflows (LuV 56, ZPM 60, UV 53 scaled recipes). The static ratchet lost 17 rows. The one fix is the P2-B method: `soldering_alloy` fluid becomes `gtceu:soldering_alloy_ingot` items (144 mB = 1, 576 mB = 4), so the assembler holds one fluid.
+
+| Entry | Fix |
+|---|---|
+| `x_ray_mask`, `tungsten_target`, `empty_antiproton_cartridge`, `empty_antiproton_trap`, `lithium_breeder_blanket` (`tables/accelerators.json`) | solder ingot item; pmma resist, lubricant or helium stays the one fluid |
+| `srf_cryomodule_block` (`uv/cold.js`), `sample_canister` (`uv/kuiper.js`), `laser_module_block` (`uv/photonics.js`), `uv_electromagnet`, `propellant_tank` (`uv/propulsion.js`) | solder ingot item |
+| `separation_module`, `forming_module`, `cutting_module`, `mixing_module`, `heat_module` (`uv/mega_factory.js`) | `4x soldering_alloy_ingot`, lubricant stays |
+| `ring_sail_net` (`zpm/saturn_siphon.js`) | `polyethylene_plate` item replaces 144 mB polyethylene, lubricant stays |
+| `mu_metal_shield` (`uv/cold.js`, found by the T1 log) | solder ingot item, hydrogen stays |
+
+Tests updated: `capacity-lint.test.mjs` (the "off" pass uses `withFactors(tables, {})`, since LuV is now on) and `luv-biofoundry.test.mjs` (GT--'s wetware inputs scale with the LuV factor).
+
+### Dropped inputs
+
+Fixed: the UV rows above, all of which were in `00_dropped_inputs.csv`; no ZPM id from the CSV appears any more in the T1 server log. **Not fixed, escalated:** `luv/ganymede.js` `kerr_ringdown_record` (2 items + a non-consumed signal + circuit 2 in a type with 3 item slots) and `uv/life.js` `culture_seed` (3 items + circuit 2, 3 slots). Both need a circuit redesign (the circuits are unique per type and pinned by `uv-life` and `uiv-cygnus` tests) or one more item slot on the type in `startup_scripts`, which is prohibited here.
+
+### Routes (Ir and Os belt rate check)
+
+Every raised LuV, ZPM and UV input has a producer in the T1 dump (reachability auto 401/401). The Ir/Os check of `luv.md` (RF-3S): `pgm_refining/luv/asteroid` gives 3 Ir + 3 Os per 1,106 t at 1,920 EU/t from 22 asteroid concentrate; Mercury's `pgm_refining/iv/iridosmine` gives 3 Ir + 1 Os per 1,034 t at 1,919 EU/t from 10 iridosmine dust. Iridium rate is 6.5% lower and osmium 2.8x higher on the belt, at the same power: mode 4 is not worse, so both stay as parallel sources and no route was changed.
+
+### Notes and risks
+
+- The magnetic-bearing rebaseline (about +16% after LD-LV2) is inside these numbers (the 7b28eac4 dump has LD-LV2).
+- Other-band rows kept in `capacity_known.json`: the UHV-script rows with LuV or ZPM voltage (`uhv/elevator.js`, `uhv/mercury.js`, `uhv/swarm.js` (MX-S2 restart), `tables/antimatter.json`, `tables/proxima_ground.json`) and `uxv/gum_metal_flexspline`; dead rows for Phase 8 as listed in Band B.
+- The cryomodule header comment in `uv/cold.js` still states 72 and 144 mB soldering alloy; the recipes now use ingots.

@@ -1,4 +1,4 @@
-﻿// LuV biofoundry (package LuV-A5, startup_scripts/grindless/luv/biofoundry.js, server_scripts/grindless/luv/biofoundry.js,
+// LuV biofoundry (package LuV-A5, startup_scripts/grindless/luv/biofoundry.js, server_scripts/grindless/luv/biofoundry.js,
 // data/grindless/tables/biofoundry.json): the machine, its sealed hall and its recipes as the stand-in sees them, every outside id they
 // name pinned to the list checked against the native registry (Node mocks accept any id; a wrong GT id only fails in game), the step
 // names in both languages, and the Universal Assembly Factory's guard that keeps GTM's NPU recipe off two LuV hatches (spike S0-4).
@@ -178,6 +178,8 @@ const GTNN_WETWARE = {
   },
 };
 
+const LUV_CURVE = JSON.parse(fs.readFileSync(fileURLToPath(new URL('../../../pack/kubejs/data/grindless/tables/cost_curve/luv.json', import.meta.url)), 'utf8'));
+
 test('GT--\'s wetware recipe comes back at LuV voltage with the same energy, its inputs in order and its research id', () => {
   const r = runPackScripts(pack, { originals: [GTNN_WETWARE] });
   const mine = r.errors.filter((e) => /circuit_line/.test(String(e.file)) && !/no gtceu:molten_cerrobase_140 route/.test(e.message));
@@ -188,8 +190,8 @@ test('GT--\'s wetware recipe comes back at LuV voltage with the same energy, its
   assert.equal(added.t, 'gtceu:circuit_assembly_line');
   assert.equal(added.j.tickInputs.eu[0].content, 30720);
   assert.deepEqual(added.j.inputs.item.map((x) => x.content.ingredient.item + ' x' + x.content.count),
-    GTNN_WETWARE.j.inputs.item.map((x) => x.content.ingredient.item + ' x' + x.content.count), 'the same inputs, in the same order');
-  assert.deepEqual(added.j.inputs.fluid.map((x) => x.content.value[0].fluid + ' ' + x.content.amount), ['gtceu:soldering_alloy 72']);
+    GTNN_WETWARE.j.inputs.item.map((x) => x.content.ingredient.item + ' x' + Math.ceil(x.content.count * LUV_CURVE.item)), 'the same inputs, in the same order, scaled by the LuV cost curve');
+  assert.deepEqual(added.j.inputs.fluid.map((x) => x.content.value[0].fluid + ' ' + x.content.amount), ['gtceu:soldering_alloy ' + Math.ceil(72 * LUV_CURVE.fluid)]);
   assert.deepEqual(added.j.outputs.item.map((x) => x.content.ingredient.item + ' x' + x.content.count), ['gtceu:wetware_processor x32']);
   assert.ok(JSON.stringify(added.j.recipeConditions).includes('1x_gtnn_etched_wetware_processor_base'), 'research id');
   assert.ok(r.removals.some((x) => x.filter.includes(GTNN_WETWARE.i)), 'GT--\'s original removed by id');
