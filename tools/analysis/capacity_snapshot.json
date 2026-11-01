@@ -847,6 +847,14 @@
     0
    ]
   },
+  "gtceu:ergoregion_synchronisation": {
+   "io": [
+    6,
+    2,
+    1,
+    1
+   ]
+  },
   "gtceu:ergosphere_probing": {
    "io": [
     4,
@@ -1154,6 +1162,22 @@
   "gtceu:horizon_collection": {
    "io": [
     2,
+    4,
+    0,
+    0
+   ]
+  },
+  "gtceu:horizon_flux_clamp": {
+   "io": [
+    4,
+    2,
+    1,
+    1
+   ]
+  },
+  "gtceu:horizon_interferometry": {
+   "io": [
+    9,
     4,
     0,
     0
@@ -1873,7 +1897,7 @@
   },
   "gtceu:plasma_mass_filtering": {
    "io": [
-    1,
+    2,
     1,
     1,
     4
@@ -2220,6 +2244,14 @@
     2,
     1,
     1,
+    0
+   ]
+  },
+  "gtceu:segment_reclamation": {
+   "io": [
+    2,
+    7,
+    0,
     0
    ]
   },
@@ -9752,6 +9784,7 @@
   "gtceu:electromagnetic_separator",
   "gtceu:electron_beam_refining",
   "gtceu:entanglement_distribution",
+  "gtceu:ergoregion_synchronisation",
   "gtceu:ergosphere_probing",
   "gtceu:event_horizon_imaging",
   "gtceu:extractor",
@@ -9788,6 +9821,8 @@
   "gtceu:heavy_ion_irradiation",
   "gtceu:high_energy_laser_purification_unit",
   "gtceu:high_flux_irradiation",
+  "gtceu:horizon_flux_clamp",
+  "gtceu:horizon_interferometry",
   "gtceu:hot_cell",
   "gtceu:hot_rolling",
   "gtceu:ice_annealing",
@@ -9915,6 +9950,7 @@
   "gtceu:ring_harvesting",
   "gtceu:rydberg_assembly",
   "gtceu:sample_receiving",
+  "gtceu:segment_reclamation",
   "gtceu:self_replication",
   "gtceu:shd_turbine",
   "gtceu:shequid_assembly",
