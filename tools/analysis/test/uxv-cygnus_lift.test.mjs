@@ -138,7 +138,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
   }
   const heavy = producers('gtceu:stellar_heavy_cut').map((r) => r.i).filter((i) => !/fusion|quench|mk6|direct_conversion/.test(i)).sort();
   // MAX-D1 adds the two Sgr A* filter rows; MX-S3 the plasmoid return; XP-H3 the helium-rich fraction (P25, a by-product heavy cut)
-  assert.deepEqual(heavy, ['grindless:plasma_mass_filtering/cooled_exhaust_return', 'grindless:plasma_mass_filtering/disk_filter', 'grindless:plasma_mass_filtering/he_rich_fraction', 'grindless:plasma_mass_filtering/hot_flow_filter', 'grindless:plasma_mass_filtering/reconnection_plasmoid_return', 'grindless:plasma_mass_filtering/stellar_cuts']);
+  assert.deepEqual(heavy, ['grindless:plasma_mass_filtering/cooled_exhaust_return', 'grindless:plasma_mass_filtering/disk_filter', 'grindless:plasma_mass_filtering/he_rich_fraction', 'grindless:plasma_mass_filtering/hot_flow_filter', 'grindless:plasma_mass_filtering/reconnection_plasmoid_return', 'grindless:plasma_mass_filtering/stellar_cuts', 'grindless:plasma_mass_filtering/vms_core_plasma']);
 });
 
 test('structures: not boring, at least two functional kinds, controller in the front slice, lying on their side (16 rows at most)', () => {

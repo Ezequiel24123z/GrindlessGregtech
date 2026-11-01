@@ -37,7 +37,7 @@
     lang: 'Pair-Instability Crucible', maxIO: { itemsIn: 2, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: LINER_CASING,
     texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/positronium_condensate_lab',
     width: 15, height: 15, depth: 15, generator: false,
-    pal: { F: LINER_CASING, B: 'gtceu:robust_machine_casing', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
+    pal: { F: LINER_CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
     parts: function () {
       return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('input_hatch', { min: 1, max: 2 }),
         Pat.part('energy_input', { min: 1, max: 2 })]
@@ -93,7 +93,8 @@
       !inCrucible(x, y, z - 1) || !inCrucible(x, y, z + 1)
     if (shell) {
       if (y === 0 && z === 14 && abs(x - 7) <= 3) return 'X'
-      return y === 0 ? 'B' : 'F'
+      if (y === 0 || y % 4 === 0) return 'B'
+      return y >= 3 && y <= 11 && (x + z) % 3 === 0 ? 'L' : 'F'
     }
     var dx = x - 7
     var dz = z - 7
