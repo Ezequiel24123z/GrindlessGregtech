@@ -115,7 +115,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_FRAME', kind: 'step', title: 'Frame Parts', icon: 'grindless:horizon_frame_part',
-    deps: ['S3_PLATE', 'S3_MESH'], x: 8, y: 3,
+    deps: ['S3_PLATE', 'S3_MESH', 'S3_CHEV'], x: 8, y: 3,
     desc: [
       'The loom\'s four meta-materials, a mesh and plates, assembled into the part that every ring block is made of.',
     ],
@@ -126,7 +126,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ home
   {
     key: 'S3_HOME', kind: 'reading', title: 'The Grid at Home', icon: 'gtceu:hyper_assembly_array',
-    deps: ['S3_CTRL', 'S3_CAPS', 'S3_CHEV', 'S3_FRAME'], x: 12, y: 0,
+    deps: ['S3_CTRL', 'S3_CAPS', 'S3_FRAME'], x: 10, y: 0,
     desc: [
       'Back home the hyper assembly array does the rest: a grid for every part, and a great many of those. Feed it from AE2 and let the patterns do the counting.',
     ],
@@ -135,7 +135,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_COMP', kind: 'step', title: 'Compressed Plates', icon: 'grindless:horizon_compressed_plate',
-    deps: ['S3_HOME'], x: 14, y: -2,
+    deps: ['S3_HOME'], x: 12, y: -2,
     desc: [
       'Upgrades and ring blocks use them most, and the iris blades use them too.',
     ],
@@ -144,7 +144,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_FIELD', kind: 'step', title: 'Field Generators', icon: 'grindless:maxplus_field_generator',
-    deps: ['S3_HOME'], x: 14, y: 0,
+    deps: ['S3_HOME'], x: 12, y: 0,
     desc: [
       'A field generator sits inside nearly every part of the gate. Build the line once and leave it running.',
     ],
@@ -153,7 +153,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_PROC', kind: 'step', title: 'Horizon Processors', icon: 'grindless:horizon_processor',
-    deps: ['S3_HOME'], x: 14, y: 2,
+    deps: ['S3_HOME'], x: 12, y: 2,
     desc: [
       'Frame parts and plates take them in bulk, which makes this the biggest circuit order of the pack. Plan the Hyperfactory\'s bus before you start.',
     ],
@@ -162,7 +162,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_ARCH', kind: 'step', title: 'The Archive and the Map', icon: 'grindless:genome_archive',
-    deps: ['S3_HOME'], x: 16, y: -2,
+    deps: ['S3_GATE'], x: 16, y: -2,
     desc: [
       'The &6Genome Archive&r is the one thing that crosses with you. The &6Cloud Phase Map&r from the interferometer tells the dial where to aim.',
     ],
@@ -171,7 +171,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_LOCKS', kind: 'step', title: 'Locks and Cells for the Dial', icon: 'grindless:jacketed_condensate_cell',
-    deps: ['S3_HOME'], x: 16, y: 0,
+    deps: ['S3_GATE'], x: 16, y: 2,
     desc: [
       'A crowd of phase locks and a crate of jacketed cells go into every opening. Most of the cells come back, and the locks come back from the synchroniser.',
     ],
@@ -182,7 +182,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate, the dial, the arrival
   {
     key: 'S3_GATE', kind: 'milestone', title: 'The Gate Stands', icon: 'gtceu:hyperstargate',
-    deps: ['S3_COMP', 'S3_FIELD',     'S3_PROC', 'HG_MACH'], x: 18, y: 0,
+    deps: ['S3_COMP', 'S3_FIELD',     'S3_PROC', 'HG_MACH'], x: 14, y: 0,
     desc: [
           'The ring is closed, the base is lit and the controller holds its kept lock. It looks like nothing so much as a very large door. Check it off once it has formed.',
     ],
@@ -191,7 +191,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_DIAL', kind: 'step', title: 'Run the Dial', icon: 'grindless:spent_dial_charge',
-    deps: ['S3_GATE', 'S3_ARCH', 'S3_LOCKS'], x: 20, y: 0,
+    deps: ['S3_ARCH', 'S3_LOCKS'], x: 18, y: 0,
     desc: [
       'Start the dial once. The ring opens, the banks drain and the refinery gets a spent charge to recharge for the next time.',
     ],
@@ -200,7 +200,7 @@ export const QUESTS = [
   },
   {
     key: 'ARRIVAL', kind: 'exit', title: 'Beyond the Horizon', icon: 'grindless:genome_archive',
-    deps: ['S3_DIAL'], x: 22, y: 0,
+    deps: ['S3_DIAL'], x: 20, y: 0,
     desc: [
       'Step into the ring while it is open. One player crosses per opening.',
     ],

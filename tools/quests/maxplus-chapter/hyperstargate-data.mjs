@@ -96,7 +96,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate's parts
   {
     key: 'HG_IRIS', kind: 'step', title: 'Horizon Iris', icon: 'grindless:horizon_iris',
-    deps: ['TR_ARRAY'], x: 4, y: 2,
+    deps: ['TR_ARRAY'], x: 8, y: -3,
     desc: [
       'A shutter of hundreds of blades that closes the ring between crossings. Each blade is a craft of its own, so queue them early.',
     ],
@@ -105,7 +105,7 @@ export const QUESTS = [
   },
   {
     key: 'HG_RING', kind: 'step', title: 'Ring Blocks', icon: 'grindless:hyperstargate_ring_block',
-    deps: ['TR_ARRAY'], x: 4, y: 5,
+    deps: ['TR_ARRAY'], x: 4, y: 0,
     desc: [
       'The ring is made of them, and so are the base, the power units and the controller. Make far more than the ring itself needs.',
     ],
@@ -114,7 +114,7 @@ export const QUESTS = [
   },
   {
     key: 'HG_UPG', kind: 'step', title: 'Chevron Upgrades', icon: 'grindless:hyperstargate_chevron_upgrade',
-    deps: ['TR_ARRAY'], x: 4, y: 8,
+    deps: ['TR_ARRAY'], x: 4, y: 3,
     desc: [
       'The parts that turn a plain block into a chevron. The base takes some as well.',
     ],
@@ -123,7 +123,7 @@ export const QUESTS = [
   },
   {
     key: 'HG_POWER', kind: 'step', title: 'Power Units', icon: 'grindless:hyperstargate_power_unit',
-    deps: ['HG_RING'], x: 6, y: 3,
+    deps: ['HG_RING'], x: 4, y: -3,
     desc: [
       'Four of them sit in the base row and hold the dial\'s current. Each one swallows a creative energy block.',
     ],
@@ -132,7 +132,7 @@ export const QUESTS = [
   },
   {
     key: 'HG_CHEVB', kind: 'step', title: 'Chevron Blocks', icon: 'grindless:hyperstargate_chevron_block',
-    deps: ['HG_RING', 'HG_UPG'], x: 6, y: 6,
+    deps: ['HG_RING', 'HG_UPG'], x: 6, y: 0,
     desc: [
       'A ring block, a stack of upgrades and a crowd of meta-materials. Most go into the base, nine to the ring.',
     ],
@@ -141,16 +141,16 @@ export const QUESTS = [
   },
   {
     key: 'HG_IFACE', kind: 'step', title: 'Interface', icon: 'grindless:hyperstargate_interface',
-    deps: ['HG_RING'], x: 6, y: 9,
+    deps: ['HG_POWER', 'HG_RING'], x: 6, y: -3,
     desc: [
-      'The controller\'s window to the network. It wants pattern memory and a creative data hatch.',
+          'The controller\'s window to the network, wired to the power units. It wants pattern memory and a creative data hatch.',
     ],
     tasks: [it('grindless:hyperstargate_interface')],
     rewards: [xp(500)],
   },
   {
     key: 'HG_LOCKED', kind: 'step', title: 'Locked Chevrons', icon: 'grindless:hyperstargate_locked_chevron',
-    deps: ['HG_CHEVB'], x: 8, y: 6,
+    deps: ['HG_CHEVB'], x: 8, y: 0,
     desc: [
       'A chevron block with a horizon lock sealed in. Nine of them go on the ring, and the dial recognises them by it.',
     ],
@@ -170,7 +170,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the structure and the gate
   {
     key: 'HG_STRUCT', kind: 'reading', title: 'The Structure', icon: 'grindless:hyperstargate_ring_block',
-    deps: ['HG_IRIS', 'HG_POWER', 'HG_IFACE', 'HG_LOCKED', 'HG_BASE'], x: 10, y: 5,
+    deps: ['HG_IRIS', 'HG_IFACE', 'HG_LOCKED', 'HG_BASE'], x: 10, y: 0,
     desc: [
       'The ring stands 41 by 43 by 9 at Sgr A* orbit: 151 ring blocks and 9 locked chevrons on the ring, with the iris, the base and 4 power units in the base row.',
     ],
@@ -179,7 +179,7 @@ export const QUESTS = [
   },
   {
     key: 'HG_MACH', kind: 'signature', title: 'The Hyperstargate', icon: 'gtceu:hyperstargate',
-    deps: ['HG_STRUCT'], x: 12, y: 5,
+    deps: ['HG_STRUCT'], x: 12, y: 0,
     teach: {
       for: 'The &6Hyperstargate&r is the pack\'s last multiblock. It forms round a dial at Sgr A* orbit and opens a ring into the final dimension.',
       needs: 'The ring, the iris, the base, four power units and the interface, with a horizon lock kept in the controller.',
@@ -192,7 +192,7 @@ export const QUESTS = [
   },
   {
     key: 'HG_DIAL', kind: 'process', title: 'The Dial', icon: 'grindless:horizon_lock',
-    deps: ['HG_MACH', 'TR_BANK'], x: 14, y: 3,
+    deps: ['HG_MACH'], x: 14, y: 0,
     teach: {
       for: 'The dial recipe opens the ring for 1,200 ticks. It eats the archive, the phase map, 16 phase locks and 64 jacketed cells. The &6Horizon Lock&r in the controller is kept.',
       needs: 'The full charge in the banks: 2^43 EU/t for the whole opening. The dial will not start on a charge it cannot finish.',
@@ -205,7 +205,7 @@ export const QUESTS = [
   },
   {
     key: 'HG_RECHARGE', kind: 'reading', title: 'Recharging the Dial', icon: 'grindless:spent_dial_charge',
-    deps: ['HG_DIAL'], x: 16, y: 3,
+    deps: ['HG_DIAL'], x: 16, y: -2,
     desc: [
       'The dial returns a spent charge. The condensate refinery recharges it, and 48 of the 64 cells come back for the next opening. Phase locks go back to the synchroniser as usual.',
     ],
@@ -214,7 +214,7 @@ export const QUESTS = [
   },
   {
     key: 'HG_CROSS', kind: 'reading', title: 'One at a Time', icon: 'gtceu:hyperstargate',
-    deps: ['HG_DIAL'], x: 14, y: 7,
+    deps: ['HG_DIAL'], x: 16, y: 2,
     desc: [
       'The ring is open only while the dial runs, and one player crosses per opening. A second crossing pays for its own archive and charge. Nothing else goes through.',
     ],

@@ -46,7 +46,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_ENERGY', kind: 'process', title: 'Creative Energy', icon: 'grindless:creative_energy',
-    deps: ['CR_CORES'], x: 6, y: -6,
+    deps: ['CR_CORES'], x: 6, y: -4,
     teach: {
       for: 'The &6Creative Energy&r block is a power unit\'s heart. It never runs as a source, because energy from nothing would end the pack\'s power chain.',
       needs: 'A cloud core and the hyper assembly array, plus a mountain of field coils, processors and condensate.',
@@ -59,7 +59,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_CELL', kind: 'process', title: 'Creative Energy Cell', icon: 'grindless:creative_energy_cell',
-    deps: ['CR_CORES'], x: 6, y: -3,
+    deps: ['CR_CORES'], x: 6, y: -2,
     teach: {
       for: 'The &6Creative Energy Cell&r sits inside every horizon capacitor, as one of its parts. Drives will not take it.',
       needs: 'A cloud core and the array. A tenth of the cost of a creative block, and a great deal more of them.',
@@ -85,7 +85,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_TANK', kind: 'process', title: 'Creative Tank', icon: 'grindless:creative_tank',
-    deps: ['CR_CORES'], x: 6, y: 3,
+    deps: ['CR_CORES'], x: 6, y: 2,
     teach: {
       for: 'The &6Creative Tank&r is the base\'s other half. It is a part, and it is never a fluid source.',
       needs: 'A tank core and the array.',
@@ -98,7 +98,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_COMP', kind: 'process', title: 'Creative Computation Provider', icon: 'grindless:creative_computation_provider',
-    deps: ['CR_CORES'], x: 6, y: 6,
+    deps: ['CR_CORES'], x: 6, y: 4,
     teach: {
       for: 'The &6Creative Computation Provider&r gives the controller all the thinking the dial asks for. Outside the gate it does nothing.',
       needs: 'A computation core and the array.',
@@ -111,7 +111,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_DATA', kind: 'process', title: 'Creative Data Access Hatch', icon: 'grindless:creative_data_access_hatch',
-    deps: ['CR_COMP'], x: 8, y: 6,
+    deps: ['CR_COMP'], x: 8, y: 4,
     teach: {
       for: 'The &6Creative Data Access Hatch&r is the interface\'s data store: every recipe the gate asks for, always available.',
       needs: 'A computation core, the array and a pile of pattern memory from the AE2 line.',
