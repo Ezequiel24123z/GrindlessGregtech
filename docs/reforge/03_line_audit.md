@@ -79,6 +79,39 @@ All six fix verdicts were chart gaps: the recipes already run on older multibloc
 - **opv.bulge:** chart gap. Hot cell (IV) and the nuclear clock (UHV) are linked; e-beam and titanium plate are linked once in opv.beam (a chart may link a target once).
 
 Other lines read keep once content crossings count; uev (4 fix) and the ZPM to UV fixes belong to RF-3G and RF-3F.
+
+## Design lines, not chart clusters (RF-3G)
+
+The audit now measures each design line: numbered rows where a chart has them (MAX `l<n>_<i>` keys: 46 lines, not 8 clusters), otherwise each chain to its own end product inside a cluster (`era.cluster#end`). RF-3H's era-aware skips and content crossings are unchanged. Per era it reports design lines (era doc `## New process lines`; MAX `## Lines`, L47 and up are planned), chart lines, and design lines missing from the charts, with whether the dump holds them (`03_design_lines.csv`, `03_missing_lines.csv`; the named match is a token heuristic over the doc's stage names, count difference is the firm figure).
+
+| Era | Design | Chart | Real (4+) | Missing (count) | Keep / fix / merge |
+|---|---|---|---|---|---|
+| zpm | 14 | 14 | 1 | 0 | 1 / 4 / 1 |
+| uv | 22 | 17 | 3 | 5 | 4 / 10 / 3 |
+| uhv | 32 | 27 | 9 | 5 | 0 / 10 / 6 (the rest keep) |
+| uev | 40 | 11 | 4 | 29 | 9 fix / 2 keep |
+| uiv | 46 | 37 | 36 | 9 | |
+| uxv | 49 | 49 | 30 | 0 | |
+| opv | 45 | 45 | 22 | 0 | |
+| max | 46 | 46 | 40 | 0 | data only |
+
+- **ZPM 14 vs 14:** every design line is a chain with its own end (`zpm.naquadria` and the fuel loop have no sink, so each is one line).
+- **UV 17 vs 22:** five lines of `uv.pluto` and `uv.kuiper` are one-step fractions in the chart; the doc counts them as lines. Chart completion, not a pack change.
+- **MAX 46:** reproduces the 46 built rows; L47 to L57 are planned and not counted as missing.
+- Per-line verdicts shift in eras outside RF-3G because a cluster that held several chains is now judged chain by chain; the cluster-level table above is the RF-3C/3H record.
+
+## UHV and UEV resolutions (RF-3G)
+
+Stop rule hit: UEV's chart holds 11 of its 40 design lines (29 missing) and UHV is 5 short, so chart completion exceeds about 20 lines. Done: Part A and the cheap UEV chart repairs (uev still reads 9 fix, 2 keep: the rest of the fixes need the missing lines); the rest is listed.
+
+- **uev.pressure:** chart gaps fixed in `pl-data-uev.mjs`. The fibre preform was an unconnected raw: now SiC fibre to BN-coated fibre (`boron_nitride`) to preform (`assembler`) to CVI plate, a 6-step line. The nitride magnet takes hydrogen from HV syngas (`pl_hv:shifted`, 5 eras back) and the SX blade takes platinum from the EV plant (`pl_ev:pt`). Both arrows verified by pl-check.
+- **uev.isotopes:** the Ca-48 chain was cut in two by a missing `from` (enriched chloride); closed, now 4 steps. Flerovium stays 2 and 4 steps: the Pu-244 target, Ca-48 beam and SRF cavity feeds need the doc's lines 2, 5 and the UV cavity chain (items exist; chart lines missing).
+- **uev.light:** He-3 now comes from the EV Moon cell (`pl_ev:he3`, 4 eras back). SNSPD and the photonic chip need FZ wafer and SiN litho chains (doc lines 18, 21; missing).
+- **uev.stars:** unchanged: needs the Barnard rhenium and carbonyl lines (doc 10, 15).
+- **uhv.ground and uhv.mercury:** unchanged (stop rule); doc lines for the Proxima ground and Mercury regolith chains are not in the chart as chains.
+- **Open (not fixed):** UEV 29 and UHV 5 missing design lines; UEV has 8 of its 11 chart lines still at fix. Recommended follow-up: a chart-completion package for UEV (about 29 lines) and one for UHV (5), after which the verdicts are re-read.
+
+T1 not run: no recipe changed.
 ## Proposed DECISIONS line
 
 RF-3C/3H: line audit tool and CSV added (era-aware skips, content crossings from recipes); lines judged by step count, reach back, destinations, skip route and duplicates; chart lines from ZPM sit far below the AGENTS.md:18 guide.
