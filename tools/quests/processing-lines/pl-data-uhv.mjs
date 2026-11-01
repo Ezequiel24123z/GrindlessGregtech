@@ -335,7 +335,7 @@ const data = {
           ['noz', I('grindless:uhtc_nozzle'), 'UHTC Nozzle'],
           ['thk', mach('gtceu:thruster_works'), 'Thruster Works', 'ours', { desc: 'Mounts the nozzle with an antimatter pellet, power modules and a lifted stage.' }],
           ['ican', I('grindless:ican_rocket_motor'), 'ICAN Rocket Motor'],
-        ], 'the probe stages'),
+        ], 'the probe stages', -7.5),
         n('pellet', 10, 9, I('grindless:ican_pellet'), 'ICAN Pellet', { kind: 'raw', sub: 'From the antimatter store' }),
         n('sicm', 10, 7.5, I('grindless:sic_power_module'), 'SiC Power Module', { kind: 'raw', sub: 'Two; from the silicon carbide line' }),
         n('geo', 12.5, 7, I('grindless:geo_assembled_stage'), 'Geo-Assembled Stage', { kind: 'raw', sub: 'Lifted by the space elevator' }),
