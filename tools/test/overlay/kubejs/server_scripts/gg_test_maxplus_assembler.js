@@ -1,10 +1,11 @@
 // priority: -5298
 // TEST ONLY, XP-H3 (gtceu:condensate_assembler). Command: kubejs custom_command gg_test_maxplus_assembler
 // Band ONLY: X 46464-46527, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_assembler).
-//   T1 (named uncertainty: the assembler forms at Sgr A* on four 64 A MAX substation hatches and runs c1 at 2^39 EU/t):
+//   T1 (named uncertainty: the assembler forms at Sgr A* on one 1,024 A MAX+ hatch and runs c1 at 2^39 EU/t;
+//   GTM's 64 A substation hatches carry SUBSTATION_INPUT_ENERGY, which a multiblock's energy_input slot does not take):
 //     lookup   every recipe id of the package (assembler c1-c3, older T1-T3, T14-T16 and P25 rows, cooling rows, controller line) is in the recipe manager
 //     static   nothing skipped but the frame-part row
-//     formed   the assembler forms with four substation hatches, a bus pair and a fluid hatch pair
+//     formed   the assembler forms with the 1,024 A hatch, a bus pair and a fluid hatch pair
 //     eut      c1 (horizon_containment_plate) starts at 2^39 EU/t
 //     output   a horizon containment plate in the output bus
 // The older rows change only their data on mechanisms proven by their own packages, so they are looked up, not run.
@@ -20,9 +21,9 @@
   var CY = 104
   var CZ = 32
   var CIRCUIT = 'gtceu:programmed_circuit'
-  var HATCH = 'gtceu:max_substation_input_hatch_64a'
+  var HATCH = 'gtceu:max_maxplus_energy_hatch_1024a'
   var DIM = 'gcyr:black_hole_orbit'
-  var PARTS = [HATCH, HATCH, HATCH, HATCH, 'gtceu:max_input_bus', 'gtceu:max_output_bus', 'gtceu:max_input_hatch', 'gtceu:max_output_hatch']
+  var PARTS = [HATCH, 'gtceu:max_input_bus', 'gtceu:max_output_bus', 'gtceu:max_input_hatch', 'gtceu:max_output_hatch']
 
   var UNITS = [
     { id: 'assembler', machine: 'gtceu:condensate_assembler', cx: 46496, minEut: Number(GTValues.V[14]) * 256,
@@ -176,12 +177,12 @@
         return
       }
       u.m = m
-      u.energy = partsLike(m, /max_substation_input_hatch_64a/)
+      u.energy = partsLike(m, /max_maxplus_energy_hatch_1024a/)
       u.bus = partsLike(m, /input_bus/)[0]
       u.outBus = partsLike(m, /output_bus/)[0]
       u.hatch = partsLike(m, /^gtceu:[a-z0-9]+_input_hatch$/)[0]
-      var ok = !!u.bus && !!u.outBus && !!u.hatch &&       u.energy.length === 4
-            check(tag + 'formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', 64 A hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
+      var ok = !!u.bus && !!u.outBus && !!u.hatch &&       u.energy.length === 1
+            check(tag + 'formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', 1,024 A hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
       topUp(u.energy)
       var list = u.def.items.map(function (e) { return [e[0], e[1]] })

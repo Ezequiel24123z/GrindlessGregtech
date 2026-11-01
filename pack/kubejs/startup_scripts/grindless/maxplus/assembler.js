@@ -9,7 +9,8 @@
 //                                containment plate, the chevron core, the horizon mesh and the horizon frame part from the plate and mesh
 //                                domain under a large condensate bath.
 //
-// It runs only at Sgr A* (rows carry the site dimension) at V[MAX] x 256 (2^39 EU/t): four 64 A substation hatches at MAX. Rows run as
+// It runs only at Sgr A* (rows carry the site dimension) at V[MAX] x 256 (2^39 EU/t) on one 1,024 A MAX+ hatch (GTM's 64 A substation hatches
+// carry SUBSTATION_INPUT_ENERGY, which the energy_input slot does not take). Rows run as
 // written: no overclock, no parallels, so the modifier returns IDENTITY like the condensate machines'. Names:
 // client_scripts/grindless/maxplus_assembler_lang.js.
 (function () {

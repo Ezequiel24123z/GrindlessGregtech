@@ -147,9 +147,11 @@ i56_slug`, `ime_ash` |
 | Row kind | EU/t | How it is fed |
 |---|---|---|
 | Machine rows (lines, components) | ≤ VA[MAX] | two MAX 4 A hatches (as MAX) |
-| Stage I big rows (refinery, slingshot, gate c16) | V[MAX] x 16-64 A (2^35-2^37) | one MAX 64 A substation input hatch (`gtceu:max_substation_input_hatch_64a`, opv_ids.json:14) |
-| Stage II-III rows (condensate assembler, blender, crystal furnace, creative items) | V[MAX] x 256 A (2^39) | four 64 A substation hatches |
-| Hyperstargate dial | V[MAX] x 4,096 A (2^43 = 8,796,093,022,208 EU/t) for 1,200 t = 1.06e16 EU | 64 substation hatches in the base, fed by wireless case 14 and the horizon capacitor bank |
+| Stage I big rows (refinery, slingshot, gate c16) | V[MAX] x 16-64 A (2^35-2^37) | one 1,024 A MAX+ hatch (`gtceu:max_maxplus_energy_hatch_1024a`, XP-F1) in our multiblocks; a gate row takes what the warp gate's pattern accepts |
+| Stage II-III rows (condensate assembler, blender, crystal furnace, creative items) | V[MAX] x 256 A (2^39) | one 1,024 A MAX+ hatch |
+| Hyperstargate dial | V[MAX] x 4,096 A (2^43 = 8,796,093,022,208 EU/t) for 1,200 t = 1.06e16 EU | four 1,024 A hatches, fed by wireless case 14 and the horizon capacitor bank (the mechanism is XP-W2's and XP-G1's) |
+
+**As built (batch 7):** GTM's 64 A substation hatches carry `SUBSTATION_INPUT_ENERGY`, which a multiblock's `energy_input` slot (`INPUT_ENERGY`) does not take: they serve GTM's power substation only. MAX+ machines therefore run on the 1,024 A hatch (S0-2), and the substation rows below describe the spike, not the build.
 
 A 64 A substation hatch buffers V x 16 x 64 = 2^41 EU, a long (EnergyHatchPartMachine.java:54-60). The multiblock's total input is the sum of its hatches; whether GTM's recipe check accepts EU/t far above V[MAX] on 64 hatches is S0-1 (MAX's c3 at 2^35 on two 16 A hatches is the as-built precedent, `server_scripts/grindless/max/shell.js:38`). **Fallback:** the dial at 2^39 on four hatches for 19,200 t, the same energy; open question 6 asks whether that time is acceptable, since rule 2 forbids inflating time in place of cost (here time grows only because power cannot).
 

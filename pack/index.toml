@@ -17398,7 +17398,7 @@ hash = "b23a44303d4a83277b92fc0efb597917ca45bf4124c7a7579e2a4b24af0f364e"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/assembler.js"
-hash = "a2806847a0ff6d4421bda82c891f2a97fdb50fa6ad5361372bdf24771ea65033"
+hash = "a166b469421aea67b37cbb0b799801d62332a53cf478827d4268f0bfb0ca9232"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/condensate.js"
