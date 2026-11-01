@@ -245,7 +245,7 @@ export const QUESTS = [
   },
   {
     key: 'HOLD', kind: 'milestone', title: 'Open the Bulge Gate', icon: 'gtceu:warp_gate',
-    deps: ['ARM', 'ISLAND', 'FRC'], x: 22, y: 0,
+    deps: ['ARM'], x: 22, y: 0,
     desc: [
       'Hold the warp gate open at the full UXV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Take care of your power first: the BZ dynamo with polar cap taps, or the Mk6 through the converter.',
       'The gate burns an FRC cartridge and keeps census III, the island chart, the arm chart, a pasta core sample and spintronic mainframes in its store.',
