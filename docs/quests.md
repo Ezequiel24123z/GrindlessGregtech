@@ -205,10 +205,13 @@ node tools\quests\fix-ids.mjs [--chapter lv_age] [--write] [--map]
 powershell -File tools\quests\Render-QuestPreview.ps1 -Chapter steam_age -OutDir <folder> [-Prefix after-]
 
 # Generated chapters: edit the data, then regenerate (the SNBT comes out with the same ids)
-node tools\quests\gen-chapters.mjs [--era ev,luv] [--pending] [--every-package --out <dir>]   # every era chapter (EV to MAX) from its quests-data.mjs (section 14); LuV keeps only the landed packages
+node tools\quests\gen-chapters.mjs [--era ev,luv] [--pending] [--every-package --out <dir>]   # every era chapter (Steam to MAX) from its quests-data.mjs (section 14); LuV keeps only the landed packages
 powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]   # Processing Lines and Power (sections 17 and 18)
 ```
 
+- `lib/import-snbt.mjs` (`node tools/quests/lib/import-snbt.mjs [--book <dir>] [--out <dir>|-] <era> ...`) turned the hand-written Steam, LV, MV, HV and IV chapters into their `quests-data.mjs` once (RF-5L2): every id pinned, keys from the titles (`<ERA>_<WORDS>`), anything the writer does not model carried in `raw` or, for a task with a tag filter or a title, in `snbt` (the task's own text). It stops on a field it cannot carry. It is not part of the normal flow: the data is the source now.
+- **Text limits** are per chapter role (`limits` in `lint-config.json`; `textLimits` in `lib/checks.mjs`): 70 words and 4 paragraphs by default; 120 words and 5 paragraphs in `_circuits`, `_machines`, `_integration` chapters (by file name suffix) and the chapters listed in `limits.chapterRoles` (`max_horizon` and the MAX+ capstones). They stay warnings.
+- Chart and Power era links (`E()` in `processing-lines/pl-lib.mjs`) take their chapter from the quest id: when a quest moves to another era chapter the link follows it, and the chapter in the data file is only a hint.
 - The preview draws quest links as teal dashed boxes, with the lines FTB Quests draws to them.
 - `gen-chapters.mjs` also reads, per quest, `kind` (start, step, reading, side, exit, milestone, machine, plant, signature, wafer, circuit, process: shape and size as in `docs/reforge/05_quest_design.md` §4.2), `teach` (`for`, `needs`, `unlocks`, `automate`; required for machine, plant, signature, wafer, circuit and process) and a chapter-level `LINKS` list (quest links by key). The package gate (`PACKAGES`, `LANDED`, `pkg`, `fallback`, `slot`) works in every era. An explicit `shape` or `size` always wins over `kind`.
 - `--items`/`--tags` use the `items.json` and `tags.json` files from a `gg_dump` (the most recent one, with the Moon: `files/test-runs/hidden-moon-dump1/results/server/kubejs-exported/`). The dump only includes the tags that some recipe uses, so a tag missing there is a warning; `gg_test_quests` checks all of them in-game.
@@ -249,7 +252,7 @@ Why this order, checked against the recipe dump of v0.4.0:
 
 **Tested in-game (24-10-2026, pack with the Moon):** `gg_test_quests` loads both with all their quests and dependencies; `gg_test_quest_book`, on a real client, completes *Arrival* and *The Neutronium Toolbox*, claims their 22 rewards, and checks that the 20 tools carry GTM's NBT, do not wear out, mine, pick up items with the magnet, break a 3x3 area (mining hammer), and show "Unbreakable" with no durability lines. The book screenshots read from left to right.
 
-The SNBT files are the source: they are edited by hand, following this guide. Exceptions generated from data in `tools/quests/` are `ev_age.snbt`, `luv_age.snbt` and `zpm_age.snbt` (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
+The data is the source for the Steam chapter, as for the other era chapters: `tools/quests/steam-chapter/quests-data.mjs` (imported from the hand-written SNBT by RF-5L2; edit it and run `node tools/quests/gen-chapters.mjs --era steam`). Welcome and the Quality of Life tabs stay hand-written SNBT, edited following this guide. Generated from data in `tools/quests/` are the Steam to MAX era chapters (section 14), the Processing Lines (section 17) and Power (section 18). For those, edit the data and regenerate.
 
 ## 14. Era chapter plan: the Phase 5 design
 

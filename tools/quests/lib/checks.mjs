@@ -60,6 +60,28 @@ export function readableId(id) {
   return typeof id === 'string' && /^[0-9A-Fa-f]{1,16}$/.test(id) && !(id.length === 16 && /^[89A-Fa-f]/.test(id));
 }
 
+// The chapter's role for the text limits (docs/reforge/05_quest_design.md, section 3.2): an explicit chapterRoles entry, else the
+// file name's suffix (<era>_circuits, <era>_machines, <era>_integration), else none.
+export function chapterRole(cfg, filename) {
+  const lim = cfg.limits || {};
+  if (lim.chapterRoles && lim.chapterRoles[filename]) return lim.chapterRoles[filename];
+  const m = /_(circuits|machines|integration|capstone)$/.exec(filename);
+  return m && lim.roles && lim.roles[m[1]] ? m[1] : '';
+}
+
+// { role, maxWords, maxLines } for a chapter: its role's limits, else the default (70 words, 4 paragraphs).
+export function textLimits(cfg, filename) {
+  const lim = cfg.limits || {};
+  const def = lim.default || {};
+  const role = chapterRole(cfg, filename);
+  const r = (role && lim.roles && lim.roles[role]) || {};
+  return {
+    role,
+    maxWords: r.maxWords ?? def.maxWords ?? cfg.maxWords ?? 70,
+    maxLines: r.maxLines ?? def.maxLines ?? cfg.maxLines ?? 4,
+  };
+}
+
 function allowedLongEdge(cfg, from, to) {
   return (cfg.allowLongEdges || []).some((e) => (e.from === from.id && e.to === to.id) || (Array.isArray(e) && e[0] === from.id && e[1] === to.id));
 }
@@ -217,8 +239,9 @@ export function checkBook(book, cfg, options = {}) {
       const lines = q.description.map(stripCodes).filter((s) => s.trim() !== '');
       const text = lines.join(' ');
       const words = text.split(/\s+/).filter(Boolean).length;
-      if (words > (cfg.maxWords ?? 70)) add('warn', 'text-length', ch, q, `${words} words (max ${cfg.maxWords})`);
-      if (lines.length > (cfg.maxLines ?? 4)) add('warn', 'text-lines', ch, q, `${lines.length} paragraphs (max ${cfg.maxLines})`);
+      const lim = textLimits(cfg, ch.filename);
+      if (words > lim.maxWords) add('warn', 'text-length', ch, q, `${words} words (max ${lim.maxWords}${lim.role ? ', ' + lim.role + ' chapter' : ''})`);
+      if (lines.length > lim.maxLines) add('warn', 'text-lines', ch, q, `${lines.length} paragraphs (max ${lim.maxLines}${lim.role ? ', ' + lim.role + ' chapter' : ''})`);
       const low = text.toLowerCase();
       for (const p of banned) if (low.includes(p)) add('warn', 'text-phrase', ch, q, `filler phrase "${p}"`);
       if (/[—–]/.test(text)) add('warn', 'text-dash', ch, q, 'long dash in the text: write two sentences instead');

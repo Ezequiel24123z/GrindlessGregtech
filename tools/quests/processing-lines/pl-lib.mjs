@@ -1,4 +1,7 @@
 // Helpers for the chart data files (pl-data-*.mjs, power-data.mjs).
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 //
 // A chapter: { file, order, title, subtitle, icon, focus, bands: [[clusterKey, ...], ...], clusters: { key: { name, nodes } } },
 //            and group: the title of its chapter group in chapter_groups.snbt (default: "Processing Lines").
@@ -14,7 +17,8 @@
 //            by    recipe types that make this node (for every arrow into it)
 // A link:    L(key, x, y, 'pl_lv:acid'): a quest link to a node of an earlier chapter; this chapter's nodes depend on it by key.
 // An era link: E(key, x, y, 'lv_age', '<quest id>'): a link to a quest of a hand-written chapter; an arrow out of it says "that
-//            quest introduces this", and the checker wants this node's item among that quest's tasks or its icon.
+//            quest introduces this", and the checker wants this node's item among that quest's tasks or its icon. The chapter
+//            is a hint: the link resolves to the era chapter that holds the id (eraChapterOf), and keeps the hint if none does.
 // Power tab (power-data.mjs): figs: [P.single(32), P.fuel(...), ...] are the node's numbers. The generator writes them into the
 //            subtitle and description, and the checker recomputes every one from the dump, the pack's config or a script.
 export const KINDS = {
@@ -56,8 +60,37 @@ export function L(key, x, y, ref, opts = {}) {
   return { key, x, y, link: ref, kind: 'link', from: [], ...opts };
 }
 
+// The chapter that holds a quest id. `hint` is the chapter the data file names; the era chapters of the book (or of
+// GG_QUESTS_ERA_DIR, as in pl-model.mjs) are searched, because quests move between an era's
+// chapters (docs/reforge/05_quest_design.md, section 4.2: the era seed keeps the id). Charts and Power never link a chart.
+const BOOK_CHAPTERS = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'pack', 'config', 'ftbquests', 'quests', 'chapters');
+const NOT_ERA = /^(pl_|power\.|multiblocks\.)/;
+const idCache = new Map();
+
+function chapterIndex(bookDir, overDir) {
+  const cacheKey = bookDir + '|' + (overDir || '');
+  if (idCache.has(cacheKey)) return idCache.get(cacheKey);
+  const files = new Map();
+  for (const dir of [bookDir, overDir]) {
+    if (!dir || !fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir)) if (f.endsWith('.snbt') && !NOT_ERA.test(f)) files.set(f.slice(0, -5), path.join(dir, f));
+  }
+  const holder = new Map();
+  for (const [chapter, file] of [...files].sort(([a], [b]) => (a < b ? -1 : 1))) {
+    const text = fs.readFileSync(file, 'utf8');
+    for (const m of text.matchAll(/\bid: "([0-9A-F]{16})"/g)) if (!holder.has(m[1])) holder.set(m[1], chapter);
+  }
+  idCache.set(cacheKey, holder);
+  return holder;
+}
+
+export function eraChapterOf(chapter, id, { bookDir = BOOK_CHAPTERS, overDir = process.env.GG_QUESTS_ERA_DIR } = {}) {
+  // ids are unique in the book: the chapter that holds this one is the quest's chapter, wherever the data file says it was
+  return chapterIndex(bookDir, overDir).get(id) || chapter;
+}
+
 export function E(key, x, y, chapter, id, opts = {}) {
-  return { key, x, y, link: chapter + '#' + id, era: true, kind: 'link', from: [], ...opts };
+  return { key, x, y, link: eraChapterOf(chapter, id) + '#' + id, era: true, kind: 'link', from: [], ...opts };
 }
 
 // a summary arrow: from k through the named intermediates (res keys)
