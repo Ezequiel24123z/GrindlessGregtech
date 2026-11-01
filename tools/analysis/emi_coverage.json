@@ -318,7 +318,7 @@
     { "id": "fluid:gtceu:molten_kerr_strange", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-H2; delete the row then" },
     { "id": "fluid:gtceu:molten_kerr_strange", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H2; delete the row then" },
     { "id": "fluid:gtceu:horizon_crystal_slurry", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-H2; delete the row then" },
-    { "id": "fluid:gtceu:horizon_crystal_slurry", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H2; delete the row then" },
+    { "id": "fluid:gtceu:horizon_crystal_slurry", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H2; delete the row then" }
   ],
       "pendingRoutes": [],
       "pendingUses": []
