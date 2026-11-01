@@ -1,5 +1,5 @@
 {
- "_doc": "Rules and baseline of tools/analysis/recipe-quality.mjs; the ladder is docs/quality/recipes.md. baseline = today's violations (recipe|output -> codes); T0 fails on new ones and on stale ones. Regenerate with --write-baseline only after fixing.",
+ "_doc": "Rules and baseline of tools/analysis/recipe-quality.mjs; the ladder is docs/quality/recipes.md. baseline = today's violations (recipe|output -> codes); T0 fails on new ones and on stale ones. Regenerate with --write-baseline only after fixing. Kept on purpose (XP-C1): the Hyperstargate base (T-CIRC, T-COUNT) and locked chevron (T-CIRC) are structure blocks assembled from tier-15 sub-blocks (ring, upgrade, chevron, MAX+ hatches) with only a programmed circuit: no MAX+ processor or tier component sits in the row itself. Fixing means adding one to those two rows in startup_scripts/grindless/maxplus/grid.js (XP-H4a's file, outside XP-C1); the integrator decides, and deletes both baseline lines then.",
  "eraTier": {
   "steam": 0,
   "lv": 1,
@@ -198,6 +198,8 @@
   "grindless:assembly_line/uiv_machine_hull|gtceu:uiv_machine_hull": ["T-CIRC","T-COUNT"],
   "grindless:assembly_line/vdw_stacker|gtceu:vdw_stacker": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/vdw_stacking_cell|gtceu:vdw_stacking_cell": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/yig_lpe_furnace|gtceu:yig_lpe_furnace": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"]
+  "grindless:assembly_line/yig_lpe_furnace|gtceu:yig_lpe_furnace": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
+  "grindless:hyper_assembly_array/hyperstargate_base|grindless:hyperstargate_base": ["T-CIRC","T-COUNT"],
+  "grindless:hyper_assembly_array/hyperstargate_locked_chevron|grindless:hyperstargate_locked_chevron": ["T-CIRC"]
  }
 }
