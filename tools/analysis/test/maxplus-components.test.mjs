@@ -16,17 +16,17 @@ const VA_MAX = 2013265920;
 const ROWS = [
   ['hts_magnet_works', 'kerr_coil_winding', 22, 'grindless:kerr_coil_winding'],
   ['shequid_mnt', 'balanced_bound_billet', 10, 'grindless:balanced_bound_billet'],
-  ['spin_deposition', 'wear_coated_rotor', 32, 'grindless:wear_coated_rotor'],
-  ['spin_deposition', 'nb_coated_cavity', 32, 'grindless:nb_coated_cavity'],
-  ['spin_deposition', 'electroded_pmn_stack', 32, 'grindless:electroded_pmn_stack'],
+  ['spin_deposition', 'wear_coated_rotor', 28, 'grindless:wear_coated_rotor'],
+  ['spin_deposition', 'nb_coated_cavity', 29, 'grindless:nb_coated_cavity'],
+  ['spin_deposition', 'electroded_pmn_stack', 30, 'grindless:electroded_pmn_stack'],
   ['tfln_femtosecond', 'ln_on_diamond', 18, 'grindless:ln_on_diamond'],
   ['beuv_stm', 'patterned_engine_wafer', 19, 'grindless:patterned_engine_wafer'],
   ['beuv_stm', 'readout_wafer', 20, 'grindless:readout_wafer'],
-  ['photonics', 'horizon_photonic_engine', 32, 'grindless:horizon_photonic_engine'],
-  ['photonics', 'horizon_phase_sensor_core', 32, 'grindless:horizon_phase_sensor_core'],
+  ['photonics', 'horizon_photonic_engine', 28, 'grindless:horizon_photonic_engine'],
+  ['photonics', 'horizon_phase_sensor_core', 29, 'grindless:horizon_phase_sensor_core'],
   ['photonics_uev', 'snspd_array_die', 10, 'grindless:snspd_array_die'],
   ['memories_cryostat', 'cold_snspd_module', 31, 'grindless:cold_snspd_module'],
-  ['memories_cryostat', 'condensate_field_cell', 32, 'grindless:condensate_field_cell'],
+  ['memories_cryostat', 'condensate_field_cell', 30, 'grindless:condensate_field_cell'],
   ['electron_beam', 'refractory_coated_web', 32, 'grindless:refractory_coated_web'],
   ['electron_beam', 'confinement_cavity', 14, 'grindless:confinement_cavity'],
   ['crystals', 'pmn_pt_boule', 32, 'grindless:pmn_pt_boule'],
@@ -35,7 +35,7 @@ const ROWS = [
 
 const find = (file, name) => {
   const hits = [];
-  for (const t of Object.values(table(file).types)) for (const r of t.recipes || []) if (r.name === name) hits.push(r);
+  const tb = table(file); for (const t of tb.types ? Object.values(tb.types) : [tb]) for (const r of t.recipes || []) if (r.name === name) hits.push(r);
   return hits;
 };
 
