@@ -5,7 +5,8 @@
     // key, en, es
     var RECIPES = [
         ['gtceu.recipe.grindless_pasta_drawing.horizon_strand_preform', 'Circuit 5: a clad chain strand drawn once into a horizon strand preform', 'Circuito 5: una hebra de cadena revestida estirada una vez en una preforma de hebra de horizonte'],
-        ['gtceu.recipe.grindless_pasta_drawing.horizon_wire_drawing', 'Circuit 6: a horizon strand preform drawn into four wires', 'Circuito 6: una preforma de hebra de horizonte estirada en cuatro alambres']
+        ['gtceu.recipe.grindless_pasta_drawing.horizon_wire_drawing', 'Circuit 6: a horizon strand preform drawn into four wires', 'Circuito 6: una preforma de hebra de horizonte estirada en cuatro alambres'],
+        ['gtceu.recipe.grindless_pasta_drawing.horizon_ingot_drawing', 'Circuit 7: a horizon strand preform drawn into two ingots', 'Circuito 7: una preforma de hebra de horizonte estirada en dos lingotes']
     ]
 
     ;['en_us', 'es_es'].forEach(function (lang, li) {

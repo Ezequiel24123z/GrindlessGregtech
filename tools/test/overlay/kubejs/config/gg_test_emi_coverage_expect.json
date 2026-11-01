@@ -1893,7 +1893,7 @@
     {"id":"gtceu:hftacn_ingot","kind":"item","needUse":true,"needMade":true,"made":["gtceu:spark_plasma_sintering"],"used":["gtceu:assembler","gtceu:thruster_assembly"]},
     {"id":"gtceu:high_flux_reactor","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembly_line","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:horizon_strand_dust","kind":"item","needUse":true,"needMade":true,"made":[],"used":[]},
-    {"id":"gtceu:horizon_strand_ingot","kind":"item","needUse":true,"needMade":true,"made":[],"used":["gtceu:assembly_line"]},
+    {"id":"gtceu:horizon_strand_ingot","kind":"item","needUse":true,"needMade":true,"made":["gtceu:pasta_drawing"],"used":["gtceu:assembly_line"]},
     {"id":"gtceu:hot_cell","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembler","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:hot_strip_mill","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembler","gtceu:multiblock_info"],"used":["emi:info"]},
     {"id":"gtceu:hts_magnet_works","kind":"item","needUse":false,"needMade":true,"made":["emi:info","gtceu:assembly_line","gtceu:multiblock_info"],"used":["emi:info"]},

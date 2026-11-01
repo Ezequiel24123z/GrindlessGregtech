@@ -169,6 +169,15 @@
           "fluidsIn": [],
           "itemsOut": [{ "id": "gtceu:horizon_strand_single_wire", "count": 4 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "MX-R2: the generic GTM strand rows are cut (max/cuts.js), so gtceu:horizon_strand_ingot, which the MAX 16A hatches, 9x hatches and converters need (tables/max_parts.json), had no maker; c7 at SGR 1806-20 draws the preform into two ingots",
+          "name": "horizon_ingot_drawing", "circuit": 7, "eut": 134217728, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "itemsIn": [{ "id": "grindless:horizon_strand_preform", "count": 1 }],
+          "kept": [],
+          "fluidsIn": [],
+          "itemsOut": [{ "id": "gtceu:horizon_strand_ingot", "count": 2 }],
+          "fluidsOut": []
         }
       ]
     },
