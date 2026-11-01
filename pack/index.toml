@@ -86,11 +86,11 @@ hash = "c76f0401fd94549885642511c583ccf17b56e4531b62b3835fc9e55a68636c32"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uev.snbt"
-hash = "0d54e229a097b399146314fc5354a6e47888d38f0f1ea251bc9e3363a8e092b1"
+hash = "72111182a0bbba2f6725af6358afd88a4e60f660830074c3df5741feb3e14b3b"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uhv.snbt"
-hash = "e0a0319c8cc7c56f30abed57af7d96de86e2a42181004377046a89aa399e5e89"
+hash = "7c54bfdac3658b14b044af314879b018af4ab6fb2a83b65265c430b588bd4a11"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uiv.snbt"
@@ -98,7 +98,7 @@ hash = "023391661efca90447f6e71e85d11c1c590db3f6e167e9d3b6d30936e718ddd1"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uv.snbt"
-hash = "b7482c73043befdb7472efbd7195eec46670b799e3246b99dcf481989c854053"
+hash = "1ab0353d5d623f924ddfa13f8ac15af8724938fbddde79d60148c8be1a020f63"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uxv.snbt"
@@ -15362,7 +15362,7 @@ hash = "aff017c8e25aac284938251f4b464bd21a5c814a29e8a7a2e58525a32bc46cc7"
 
 [[files]]
 file = "kubejs/data/grindless/tables/earth_orbit.json"
-hash = "89df0ec6fa704af6f0e92cc7ce385a5192ded8bb292d8ceaecd69da2761a1471"
+hash = "972380f633f90aabf8e051a38ea9de997c5c46015fc3b3805c45882a8f4291c5"
 
 [[files]]
 file = "kubejs/data/grindless/tables/electron_beam.json"
@@ -15434,7 +15434,7 @@ hash = "8b10e6e5a4d1387f277ad1c6ebbe88ff46e81016a63b11bed45b4402c359534e"
 
 [[files]]
 file = "kubejs/data/grindless/tables/isotopes.json"
-hash = "0e4794b2be745bfdc3545eccf7deeea14339b03583bc485b0534e68e71ff7963"
+hash = "956527cb8f790a989d30cd044833e116707dd203ce07bbc941453ee6af8437c3"
 
 [[files]]
 file = "kubejs/data/grindless/tables/isotopes_fabrication.json"
