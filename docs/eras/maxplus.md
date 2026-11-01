@@ -278,7 +278,7 @@ Rows are added to each machine's own table by the named package, at a circuit re
 | Diamond lattice fab, ion implanter, aerogel works, magnet works (ZPM) | P14, C3; P14; T7, K3; T14 | home |
 | Coated conductor, HTS works, He refrigerator (LuV) | P18, P20, T6; P18, P20, P23, T6, T14, T15, C1; P18, P20, P23, T6, T14, T15, C1 | home |
 | Hot cell (IV) | P7, T1 | home |
-| Extraction cascade, cryogenic plant, hot strip mill (EV) | P8, P11, P12, P22, P24, T4, C7; P9, P10, P25; P17, P24, T15 | home |
+| Extraction cascade, cryogenic plant, hot strip mill (EV) | P8, P11, P12, P22, P24, T4, C7; P9, P10, P25; P17, P24, T15 | home; the cryogenic plant's rows on the Moon (every recipe of that plant does, `tiers/ev.json` site-moon-machines) |
 
 ## Power
 

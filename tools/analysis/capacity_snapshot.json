@@ -607,6 +607,14 @@
     0
    ]
   },
+  "gtceu:condensate_assembler": {
+   "io": [
+    9,
+    2,
+    2,
+    1
+   ]
+  },
   "gtceu:condensate_refinery": {
    "io": [
     4,
@@ -9779,6 +9787,7 @@
   "gtceu:component_assembly_line",
   "gtceu:composite_curing",
   "gtceu:compressor",
+  "gtceu:condensate_assembler",
   "gtceu:condensate_refinery",
   "gtceu:cracker",
   "gtceu:crust_lifting",

@@ -12,8 +12,8 @@
 //                         HTS works c21 -> shielded_absorber; helium refrigerator (keyed) -> flux_absorber_casing
 //   T16 frame truss       cluster-light furnace c2 (maxplus/furnace rows, existing) -> segment_truss_billet; megabar c17 -> densified_truss_billet;
 //                         EB furnace -> coated_truss_billet; extruder -> horizon_frame_truss
-//   P25 helium-4          plasma mass filter c7 (30 Doradus) -> he_rich_fraction; cryogenic plant -> liquid_helium_4; superfluid helium plant -> superfluid_helium_4;
-//                         canner -> he4_dewar
+//   P25 helium-4          plasma mass filter c7 (30 Doradus) -> he_rich_fraction; cryogenic plant (the Moon, as all its rows) -> liquid_helium_4;
+//                         superfluid helium plant -> superfluid_helium_4; canner -> he4_dewar
 //
 // The assembler runs at home in Sgr A*'s orbit (gcyr:black_hole_orbit) at V[MAX] x 256 for 1200 to 2400 ticks per row; the older rows run at their own
 // machine's VA. Older-machine rows live here (the circuits are the first free ones of each older machine type counted in line-id order; extraction,
@@ -105,7 +105,7 @@
     { type: 'plasma_mass_filtering', name: 'he_rich_fraction', circuit: 7, eut: V_MAX, duration: 600, key: 'grindless_plasma_mass_filtering', dimension: TARANTULA,
       fluids: [['gtceu:raw_vms_plasma', 10000]],
       outs: [], fluidOuts: [['gtceu:he_rich_fraction', 5000], ['gtceu:stellar_heavy_cut', 1000]] },
-    { type: 'cryogenic_processing', name: 'liquid_helium_4', eut: 7680, duration: 400,
+    { type: 'cryogenic_processing', name: 'liquid_helium_4', eut: 7680, duration: 400, dimension: 'gcyr:luna',
       fluids: [['gtceu:he_rich_fraction', 2000]], fluidOuts: [['gtceu:liquid_helium_4', 1000]] },
     { type: 'superfluid_helium', name: 'superfluid_helium_4', eut: va(7), duration: 200,
       fluids: [['gtceu:liquid_helium_4', 1000]], fluidOuts: [['gtceu:superfluid_helium_4', 1000]] },
