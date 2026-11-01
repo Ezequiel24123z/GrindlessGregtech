@@ -2,7 +2,7 @@
 // Gregtech Grindless - test overlay (not shipped with the pack)
 //
 // Usage: powershell -File tools\test\Invoke-GGTest.ps1 -Suite server `
-//   -Commands 'kubejs custom_command gg_test_quests' -WaitForLog 'GGTEST\|quests\|DONE@@300'
+//   -Commands 'kubejs custom_command gg_test_quests' -WaitForLog 'GGTEST\|quests\|DONE@@180'
 //
 // Checks the quest book that FTB Quests actually loaded (ServerQuestFile.INSTANCE):
 //   - every chapter in EXPECTED is loaded, sits in a named chapter group (or is meant to be ungrouped) and has the expected
