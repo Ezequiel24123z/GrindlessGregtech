@@ -1,4 +1,4 @@
-// Quest data for max_age ("MAX - The Galactic Centre"); gen.mjs in this folder writes the chapter (docs/quests.md, sections 8 and 14;
+// Quest data for max_age ("MAX - The Galactic Centre"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
 // docs/eras/max.md, "Quests", "The ending"). Ids come from the keys: never rename a key once a quest has shipped.
 // Positions: one trunk runs right along y = 0, 2.5 columns per step, in the order of max.md "Quests": way in, circuits, components,
 // home machines, probe and arrival, Sagittarius A*, the belt, horizon work, the shell, the last recipe. A product of a machine hangs

@@ -1,4 +1,4 @@
-// Quest data for ev_age; gen.mjs in this folder writes the chapter. Texts rewritten in the quest voice on 2026-10-25 (docs/quests.md section 8);
+// Quest data for ev_age; tools/quests/gen-chapters.mjs writes the chapter. Texts rewritten in the quest voice on 2026-10-25 (docs/quests.md section 8);
 // quests that taught nothing new were cut. Every id is spelled out, so a cut never shifts another id.
 // Positions: columns every 2, rows every 1.5; upper half = off-world, lower half = Earth.
 const it = (item, count, id) => ({ type: 'item', item, count, id });

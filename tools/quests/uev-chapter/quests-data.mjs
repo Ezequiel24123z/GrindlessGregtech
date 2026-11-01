@@ -1,4 +1,4 @@
-// Quest data for uev_age ("UEV - Several Stars"); gen.mjs in this folder writes the chapter (docs/quests.md, sections 8 and 14;
+// Quest data for uev_age ("UEV - Several Stars"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
 // docs/eras/uev.md, "Quests"). Ids come from the keys: never rename a key once a quest has shipped.
 // Positions: START and a short spine (parts, hatches, the Mk1 drive) run along y = 0. Four home lanes leave START: superheavy
 // elements and pressure above, light and Mk4 fusion below. The Mk1 drive then forks to Alpha Centauri (upper) and Barnard b

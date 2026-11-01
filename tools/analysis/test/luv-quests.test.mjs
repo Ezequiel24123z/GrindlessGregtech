@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const read = (p) => fs.readFileSync(path.join(root, ...p.split('/')), 'utf8');
 const chapterPath = 'pack/config/ftbquests/quests/chapters/luv_age.snbt';
-const gen = path.join(root, 'tools', 'quests', 'luv-chapter', 'gen.mjs');
+const gen = path.join(root, 'tools', 'quests', 'gen-chapters.mjs');
 const { QUESTS, LANDED, PACKAGES } = await import('../../quests/luv-chapter/quests-data.mjs');
 
 // Ids of GTM 7.5.3, its addons and GCYR that the chapter uses, each checked against the native registry dump
@@ -85,21 +85,21 @@ function parseChapter(text) {
   return { items, icons, dims, ids };
 }
 
-test('luv_age.snbt is what gen.mjs writes from the data', () => {
-  const out = path.join(os.tmpdir(), `luv_age_${process.pid}.snbt`);
-  const r = spawnSync(process.execPath, [gen, '--out', out], { encoding: 'utf8' });
+test('luv_age.snbt is what the shared writer makes from the data', () => {
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'luv_age_'));
+  const r = spawnSync(process.execPath, [gen, '--era', 'luv', '--out', out], { encoding: 'utf8' });
   assert.equal(r.status, 0, r.stderr);
-  assert.equal(fs.readFileSync(out, 'utf8'), read(chapterPath), 'regenerate: node tools/quests/luv-chapter/gen.mjs');
-  fs.rmSync(out, { force: true });
+  assert.equal(fs.readFileSync(path.join(out, 'luv_age.snbt'), 'utf8'), read(chapterPath), 'regenerate: node tools/quests/gen-chapters.mjs --era luv');
+  fs.rmSync(out, { recursive: true, force: true });
 });
 
 test('the finished chapter (every package) also generates', () => {
-  const out = path.join(os.tmpdir(), `luv_age_all_${process.pid}.snbt`);
-  const r = spawnSync(process.execPath, [gen, '--all', '--out', out], { encoding: 'utf8' });
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'luv_age_all_'));
+  const r = spawnSync(process.execPath, [gen, '--era', 'luv', '--every-package', '--out', out], { encoding: 'utf8' });
   assert.equal(r.status, 0, r.stderr);
-  const all = parseChapter(fs.readFileSync(out, 'utf8'));
+  const all = parseChapter(fs.readFileSync(path.join(out, 'luv_age.snbt'), 'utf8'));
   assert.equal(new Set(all.ids).size, all.ids.length, 'ids are unique');
-  fs.rmSync(out, { force: true });
+  fs.rmSync(out, { recursive: true, force: true });
 });
 
 test('every item, icon and dimension in the book exists now', () => {

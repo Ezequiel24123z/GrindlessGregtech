@@ -1,12 +1,12 @@
-// Quest data for luv_age ("LuV: The Outer System"); gen.mjs in this folder writes the chapter (docs/quests.md, sections 8 and 14;
+// Quest data for luv_age ("LuV: The Outer System"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
 // docs/eras/luv.md, "Quests"). Ids come from the keys: never rename a key once a quest has shipped.
 // Positions: columns every 2, rows every 1.5. The spine (y = 0) is home, then Earth orbit, then the rocket and Io; above it the
 // trinium line, the orbit's machines and the belt; below it the cryogenics, the biofoundry, Europa and Ganymede. Fusion and research
 // close the chapter on the right; while the Jovian packages are missing they sit at home (`fallback`).
 //
 // Packages (docs/eras/luv.md, "Build order"): a quest is in the book only when every package in its `pkg` is in LANDED. When the
-// coordinator merges a package, add it to LANDED, check the quest's ids against what the package registered, run gen.mjs and the
-// linter. `adjust` marks quests already in the book that a package may change (gen.mjs --pending lists both).
+// coordinator merges a package, add it to LANDED, check the quest's ids against what the package registered, run gen-chapters.mjs and the
+// linter. `adjust` marks quests already in the book that a package may change (gen-chapters.mjs --era luv --pending lists both).
 import { STATION_PACKAGES } from '../luv-stations.mjs';
 
 const it = (item, count) => ({ type: 'item', item, count });
@@ -22,7 +22,7 @@ const ri = (item, count) => ({ type: 'item', item, count });
 export const PACKAGES = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'S03', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7T', 'B7S', 'B8', 'B9', 'B10'];
 const STATIC = ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B8', 'B9', 'B10'];
 export const LANDED = PACKAGES.filter((p) => STATIC.includes(p) || STATION_PACKAGES.includes(p));
-// what gen.mjs --all draws: everything, with the tether
+// what gen-chapters.mjs --every-package draws: everything, with the tether
 export const ALL_STATE = PACKAGES.filter((p) => p !== 'B7S');
 
 export const CHAPTER = {

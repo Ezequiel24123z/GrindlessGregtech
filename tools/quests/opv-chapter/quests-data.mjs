@@ -1,4 +1,4 @@
-// Quest data for opv_age ("OpV - The Galactic Bulge"); gen.mjs in this folder writes the chapter (docs/quests.md, sections 8 and 14;
+// Quest data for opv_age ("OpV - The Galactic Bulge"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
 // docs/eras/opv.md, "Quests", the sixteen parts). Ids come from the keys: never rename a key once a quest has shipped.
 // Positions: the trunk runs right along y = 0 from the hull to the gate. Each part is a column group; lanes above and below hold the
 // side products. Every OpV package has landed, so there is no package gating.

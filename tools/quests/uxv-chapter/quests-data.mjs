@@ -1,4 +1,4 @@
-// Quest data for uxv_age ("UXV - Spin and Strange Stars"); gen.mjs in this folder writes the chapter (docs/quests.md, sections 8 and 14;
+// Quest data for uxv_age ("UXV - Spin and Strange Stars"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
 // docs/eras/uxv.md, "Quests", the ten parts). Ids come from the keys: never rename a key once a quest has shipped.
 // Positions: three lanes leave START. Spintronics runs above (CoFeB to the mainframe, then the sensor lane further up), superheavy III
 // below, and the trunk runs right along y = 0 through Cygnus X-1, the Kerr sling, Vela, the UXV parts and the Mk6 to the gate. Cassiopeia A

@@ -1,4 +1,4 @@
-// Quest data for uv_age ("UV: Pluto and the Edge"); gen.mjs in this folder writes the chapter (docs/quests.md, sections 8 and 14;
+// Quest data for uv_age ("UV: Pluto and the Edge"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
 // docs/eras/uv.md, "Quests"). Ids come from the keys: never rename a key once a quest has shipped.
 // Positions: columns every 2. The left half is home, in lanes off START as in ZPM: life into the Mk3 and the network on the spine
 // (y = 0), the cold and the accelerators above it, the detectors on top, the lasers and their fuel below it, the superconductor wire at

@@ -1,4 +1,4 @@
-// Quest data for zpm_age ("ZPM: The Ringed and Ice Giants"); gen.mjs in this folder writes the chapter (docs/quests.md, sections 8 and 14;
+// Quest data for zpm_age ("ZPM: The Ringed and Ice Giants"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
 // docs/eras/zpm.md, "Quests"). Ids come from the keys: never rename a key once a quest has shipped.
 // Positions: columns every 2, rows every 1.5. The spine (y = 0) is home: naquadria, fuel, the big reactor, the network and the Mk2. Above
 // it the europium and waste side of home, then Saturn and Uranus further right; below it carbon, qubits, life and cold. The Mk2's
