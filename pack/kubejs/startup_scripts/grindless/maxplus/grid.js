@@ -10,30 +10,30 @@
   const Pat = G.patterns
   const GRID = G.maxPlusGrid || (G.maxPlusGrid = {})
 
-  // block id -> an existing MAX+ casing texture (no missing-texture cube before the asset phase)
+  // block id -> its block/maxplus texture (XP-V2)
   GRID.blocks = {
-    hyperstargate_ring_block: 'bound_press_casing',
-    hyperstargate_chevron_block: 'slingshot_coil_casing',
-    hyperstargate_locked_chevron: 'lift_nozzle_casing',
-    hyperstargate_power_unit: 'crucible_liner_casing',
-    horizon_iris: 'condensate_vessel_casing',
-    hyperstargate_base: 'horizon_machine_casing'
+    hyperstargate_ring_block: 'hyperstargate_ring_block',
+    hyperstargate_chevron_block: 'hyperstargate_chevron_block',
+    hyperstargate_locked_chevron: 'hyperstargate_locked_chevron',
+    hyperstargate_power_unit: 'hyperstargate_power_unit',
+    horizon_iris: 'horizon_iris',
+    hyperstargate_base: 'hyperstargate_base'
   }
 
-  // item id -> existing item art
+  // item id -> its item texture (XP-V2)
   GRID.items = {
-    hyperstargate_chevron_upgrade: 'chevron_core',
-    hyperstargate_interface: 'horizon_lock'
+    hyperstargate_chevron_upgrade: 'hyperstargate_chevron_upgrade',
+    hyperstargate_interface: 'hyperstargate_interface'
   }
 
-  // the six creative-item stand-ins the creative rows output; item art is borrowed until the asset phase
+  // the six creative-item stand-ins the creative rows output; each has its own token texture (XP-V2)
   GRID.creativeItems = {
-    creative_energy: 'horizon_capacitor',
-    creative_chest: 'chevron_core',
-    creative_tank: 'coated_iris_blade',
-    creative_computation_provider: 'horizon_lock',
-    creative_data_access_hatch: 'iris_blade',
-    creative_energy_cell: 'horizon_capacitor'
+    creative_energy: 'creative_energy',
+    creative_chest: 'creative_chest',
+    creative_tank: 'creative_tank',
+    creative_computation_provider: 'creative_computation_provider',
+    creative_data_access_hatch: 'creative_data_access_hatch',
+    creative_energy_cell: 'creative_energy_cell'
   }
 
   // ---------------------------------------------------------------- the array's rows (docs/eras/maxplus.md "Hyperstargate" grid table)
@@ -149,7 +149,7 @@
   // carries a block of part cells, five rows by 25 columns less the controller: up to 81 input buses and one 1,024 A hatch, buses and hatches.
   GRID.machine = {
     name: 'hyper_assembly_array', machine: 'gtceu:hyper_assembly_array', type: 'hyper_assembly_array', dataKey: 'grindless_hyper_assembly_array',
-    lang: 'Hyper Assembly Array', casing: CASING, texture: 'grindless:block/maxplus/horizon_machine_casing', overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+    lang: 'Hyper Assembly Array', casing: CASING, texture: 'grindless:block/maxplus/horizon_machine_casing', overlay: 'grindless:block/multiblock/hyper_assembly_array',
     width: 27, height: 11, depth: 27,
     pal: { F: CASING, L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
     parts: function () {
