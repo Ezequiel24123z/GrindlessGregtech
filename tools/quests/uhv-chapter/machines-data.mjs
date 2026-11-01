@@ -79,9 +79,18 @@ export const QUESTS = [
     unlocks: 'Berkelium-249 and the californium-252 source the clock lab and the gate ask for.',
     automate: 'Keep the targets in sealed buses; leftovers go to the partitioning plant.',
   }, [it(SHIELD), it('gtceu:tungstensteel_pipe_casing')]),
-  prod('P_BK', 'Berkelium-249', 'grindless:berkelium_249', ['BK'], 6, 0,
-    'A first gram of &6Berkelium-249&r. Everything beyond curium starts from it.',
-    [it('grindless:berkelium_249')]),
+  prod('CF', 'A Californium Source', 'grindless:californium_252_source', ['BK'], 6, 0,
+    'One more neutron capture and berkelium becomes &6Californium-252&r, a source that emits neutrons by itself. It starts the reactors that cannot start alone.',
+    [it('grindless:californium_252'), it('grindless:californium_252_source')], 120),
+  prod('TH229', 'Thorium-229', 'grindless:thorium_229', ['CF'], 8, 0,
+    'A trace of &6thorium-229&r comes out of the uranium-233 line. It is rare, and it has the lowest nuclear excited state known.',
+    [it('grindless:thorium_229')], 120),
+  prod('DRV', 'Back to the Driver', 'grindless:spent_hfir_driver_element', ['HFR'], 4, -1.5,
+    'A spent driver element is not waste: it holds &6uranium-233&r bred in the flux. Reprocess it and a fresh driver goes back in the reactor.',
+    [it('grindless:spent_hfir_driver_element')], 100),
+  prod('NI63', 'Nickel-63', 'grindless:nickel_63_target', ['DRV'], 6, -1.5,
+    'Irradiate a nickel-62 target and it turns into &6nickel-63&r, a pure beta emitter that is safe behind a thin shield and decays for a century.',
+    [it('grindless:nickel_62_target'), it('grindless:nickel_63_target')], 100),
 
   // ------------------------------------------------------------------ clock
   gear('CLOCK', 'nuclear_clock_lab', 'A Clock in a Nucleus', ['M_L_CLOCK'], 2, 1.5, {
@@ -195,15 +204,15 @@ export const QUESTS = [
     unlocks: 'Casimir cavity stacks for the warp gate.',
     automate: 'Plates by ME; the stacks leave by ME to the gate.',
   }, [it(TRUSS), it(CRYOSTAT)]),
-  gear('GATEOPEN', 'warp_gate', 'The Gate Opens', ['CAS'], 6, 12, {
+  gear('M_GATE', 'warp_gate', 'The Gate Opens', ['CAS'], 6, 12, {
     for: 'The &6Warp Gate&r is the first door to another star.',
     needs: 'Its controller, warp gate casing and field ring casing.',
     unlocks: 'The gate seed and the trip to Proxima b.',
     automate: 'Power and cavity stacks by ME; only the seed leaves.',
   }, [it(WARP), it(FIELD)], 160),
-  prod('P_POS', 'A Cartridge of Antimatter', 'grindless:positron_cartridge', ['POS'], 8, 12,
-    'A &6Positron Cartridge&r is full when the trap is.',
-    [it('grindless:positron_cartridge')]),
+  prod('ANTIH', 'Antihydrogen', 'grindless:antihydrogen_cartridge', ['POS'], 8, 12,
+    'A positron and an antiproton, held together long enough to make an atom. The &6Antihydrogen Cartridge&r holds a handful, and a small leak is expected: keep the cartridges sealed.',
+    [it('grindless:antihydrogen_cartridge'), it('grindless:exotic_matter_cell')], 150),
   gear('ZBLAN', 'zblan_draw_tower', 'Glass from Orbit', ['M_L_ZB'], 2, 13.5, {
     for: 'The &6ZBLAN Draw Tower&r pulls fluoride glass in microgravity, where it does not crystallise.',
     needs: 'Its controller and station truss casing.',
@@ -239,19 +248,19 @@ export const QUESTS = [
   prod('P_SEG', 'A Swarm Segment', 'grindless:swarm_segment', ['SEG'], 6, 19.5,
     'A &6Swarm Segment&r is one panel of thousands.',
     [it('grindless:swarm_segment')]),
-  gear('SWARM', 'swarm_control_station', 'The Swarm', ['SEG'], 8, 18, {
+  gear('M_SWARM', 'swarm_control_station', 'The Swarm', ['SEG'], 8, 18, {
     for: 'The &6Swarm Control Station&r steers the segments and collects their power.',
     needs: 'Its controller, station truss casing and a UHV hull.',
     unlocks: 'Stellar power for UHV and the coronal map.',
     automate: 'Segments by ME; the station needs a steady stream.',
   }, [it(HULL), it(TRUSS)], 160),
-  gear('CORONA', 'solar_probe_bay', 'Coronal Map', ['SWARM'], 10, 18, {
+  gear('M_PROBE', 'solar_probe_bay', 'Coronal Map', ['M_SWARM'], 10, 18, {
     for: 'The &6Solar Probe Bay&r launches probes into the corona to map its field.',
     needs: 'Its controller, heatproof casing and station truss casing.',
     unlocks: 'The coronal field map for the Kardashev goal.',
     automate: 'Probes by ME; maps leave by ME.',
   }, [it(HEATP), it(TRUSS)]),
-  prod('P_PROBE', 'A Probe in the Corona', 'grindless:solar_probe', ['CORONA'], 12, 18,
+  prod('P_PROBE', 'A Probe in the Corona', 'grindless:solar_probe', ['M_PROBE'], 12, 18,
     'A &6Solar Probe&r survives where nothing else does.',
     [it('grindless:solar_probe'), it('grindless:coronal_field_map')]),
 
@@ -289,13 +298,13 @@ export const QUESTS = [
     unlocks: 'Melanised biomass for shielding.',
     automate: 'Fungus cultures by ME; keep the radiation source inside.',
   }, [it(BASEC), it(SHIELD)]),
-  gear('BASE', 'baseline_astrometer', 'Four Light Years of Baseline', ['M_L_BASE'], 2, 24, {
+  gear('M_ASTRO', 'baseline_astrometer', 'Four Light Years of Baseline', ['M_L_BASE'], 2, 24, {
     for: 'The &6Baseline Astrometer&r measures the sky from two stars at once.',
     needs: 'Its controller, Proxima base casing and clean machine casing.',
     unlocks: 'The survey that points toward the next gate.',
     automate: 'Surveys leave by ME.',
   }, [it(BASEC), it(CLEAN)]),
-  prod('P_BASE', 'A Survey of Proxima b', 'grindless:proxima_regolith_survey', ['BASE'], 4, 24,
+  prod('P_BASE', 'A Survey of Proxima b', 'grindless:proxima_regolith_survey', ['M_ASTRO'], 4, 24,
     'The &6Regolith Survey&r tells us what lies under the red sun.',
     [it('grindless:proxima_regolith_survey')]),
   gear('ICE', 'cold_trap_drill', 'Night-Side Ice', ['M_L_ICE'], 2, 25.5, {
@@ -310,7 +319,16 @@ export const QUESTS = [
     unlocks: 'Biocemented regolith and melanin-chitosan composite.',
     automate: 'Regolith by ME; bacteria cultures stay inside.',
   }, [it(BASEC), it(PTFE)]),
-  prod('P_MEL', 'Melanin and Chitosan', 'grindless:melanin_chitosan_composite', ['BIOM'], 6, 25.5,
-    'A &6Melanin-Chitosan Composite&r is shielding grown by bacteria.',
-    [it('grindless:melanin_chitosan_composite')]),
+  prod('BRICK', 'Bricks by Bacteria', 'grindless:biocemented_regolith', ['BIOM'], 6, 25.5,
+    'Bacteria that precipitate calcite glue regolith into a hard block. &6Biocemented Regolith&r builds a base without importing a single brick.',
+    [it('grindless:biocemented_regolith'), it('grindless:melanin_chitosan_composite')], 100),
+  prod('FAR', 'Far-Red', 'grindless:engineered_far_red_algae', ['FUNGI'], 10, 22.5,
+    'Chlorophyll cannot use far-red light, but one cyanobacterium can. Its gene cassette goes into an algae that feeds on a red sun.',
+    [it('grindless:far_red_gene_cassette'), it('grindless:engineered_far_red_algae')], 150),
+  prod('RED', 'Under a Red Sun', 'grindless:proxima_flora_sample', ['ROVER'], 4, 21,
+    'Plants under a red sun are black, to take every photon they can. A &6Proxima Flora Sample&r and a &6Regolith Survey&r go to the &6Sample Receiving Facility&r.',
+    [it('grindless:proxima_flora_sample'), it('grindless:proxima_regolith_survey')], 150),
+  prod('CLIMB', 'Climber', 'grindless:tether_climber', ['RIB'], 6, 9,
+    'The &6Tether Climber&r grips the ribbon and rides it up. Its wheels wear, so refurbish them.',
+    [it('grindless:tether_climber')], 100),
 ];
