@@ -57,6 +57,8 @@
   ],
   "include": [],
   "exclude": [],
-  "remove": [],
+  "remove": [
+    "gtceu:shaped/uhv_machine_hull"
+  ],
   "override": {}
 }
