@@ -51,8 +51,8 @@
   var SUPPORT = [
     { name: 'sample_canister', type: 'assembler', circuit: 9,
       itemsIn: [item('gtceu:titanium_plate', 4), item('gtceu:polytetrafluoroethylene_plate', 2), item('gtceu:zpm_sensor', 1),
-        item('grindless:silicon_nitride_film', 1), item('gtceu:tritanium_plate', 1)],
-      notConsumed: [], fluidsIn: [fluid('gtceu:soldering_alloy', 144), fluid('gtceu:liquid_helium', 500)], itemsOut: [item(CANISTER, 1)], fluidsOut: [], eut: VA_ZPM, duration: 400 },
+        item('grindless:silicon_nitride_film', 1), item('gtceu:tritanium_plate', 1), item('gtceu:soldering_alloy_ingot', 1)],
+      notConsumed: [], fluidsIn: [fluid('gtceu:liquid_helium', 500)], itemsOut: [item(CANISTER, 1)], fluidsOut: [], eut: VA_ZPM, duration: 400 },
     { name: 'kuiper_interceptor', type: 'assembler', circuit: null,
       itemsIn: [item(POD, 1), item(RTG, 1), item(CANISTER, 1)],
       notConsumed: [], fluidsIn: [], itemsOut: [item(INTERCEPTOR, 1)], fluidsOut: [], eut: VA_UV, duration: 600 }

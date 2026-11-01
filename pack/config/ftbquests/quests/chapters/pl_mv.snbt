@@ -14,7 +14,7 @@
 			id: "78BA164EA44832CD"
 			linked_quest: "162641406869CF74"
 			shape: "rsquare"
-			x: 23.0d
+			x: 23.25d
 			y: 2.25d
 		}
 		{
@@ -22,49 +22,49 @@
 			linked_quest: "376DA31AF22E8CD8"
 			shape: "rsquare"
 			x: 0.5d
-			y: 12.0d
+			y: 13.25d
 		}
 		{
 			id: "58375C52001E87B2"
 			linked_quest: "70A91737242112D0"
 			shape: "rsquare"
-			x: 19.0d
-			y: 12.75d
+			x: 19.25d
+			y: 13.0d
 		}
 		{
 			id: "1C91EE718836F734"
 			linked_quest: "5DB10211B3E10692"
 			shape: "rsquare"
 			x: 2.5d
-			y: 16.75d
+			y: 19.25d
 		}
 		{
 			id: "711FA7BE1E3C7F89"
 			linked_quest: "78196EE68F118BA4"
 			shape: "rsquare"
 			x: 0.5d
-			y: 18.25d
+			y: 20.75d
 		}
 		{
 			id: "1ED17BAEEBAE9746"
 			linked_quest: "325AC2585F63E613"
 			shape: "rsquare"
 			x: 8.5d
-			y: 28.5d
+			y: 31.0d
 		}
 		{
 			id: "7E212844780A65CB"
 			linked_quest: "388F688236DC7298"
 			shape: "rsquare"
 			x: 29.0d
-			y: 26.25d
+			y: 28.75d
 		}
 		{
 			id: "3254E134CC050F59"
 			linked_quest: "3954D84FC7C457CA"
 			shape: "rsquare"
 			x: 29.0d
-			y: 27.75d
+			y: 30.25d
 		}
 	]
 	quests: [
@@ -80,7 +80,7 @@
 			]
 			title: "Raw Copper"
 			x: 0.5d
-			y: 2.25d
+			y: 2.0d
 		}
 		{
 			icon: "minecraft:water_bucket"
@@ -94,7 +94,7 @@
 			]
 			title: "Water"
 			x: 0.5d
-			y: 3.75d
+			y: 3.5d
 		}
 		{
 			dependencies: ["140A1C3C4979392E", "7117E4A2A9FA2934"]
@@ -112,20 +112,21 @@
 			]
 			title: "Ore Plant"
 			x: 2.5d
-			y: 3.0d
+			y: 2.75d
 		}
 		{
 			dependencies: ["5334E508185B316C"]
 			icon: "gtceu:copper_dust"
 			id: "5352A7D1281CEEA3"
-			size: 1.25d
+			size: 1.0d
+			subtitle: "The steam line's dust, in one hall"
 			tasks: [
 				{ id: "39F94C289AF95FC9", item: "gtceu:copper_dust", optional_task: true, type: "item" }
 				{ id: "5056424DD09D5A5A", type: "checkmark" }
 			]
 			title: "Copper Dust"
 			x: 5.0d
-			y: 0.75d
+			y: 0.5d
 		}
 		{
 			dependencies: ["5334E508185B316C"]
@@ -139,7 +140,7 @@
 			]
 			title: "Cobalt"
 			x: 5.0d
-			y: 2.0d
+			y: 1.75d
 		}
 		{
 			dependencies: ["5334E508185B316C"]
@@ -153,7 +154,7 @@
 			]
 			title: "Gold"
 			x: 5.0d
-			y: 3.25d
+			y: 3.0d
 		}
 		{
 			dependencies: ["5334E508185B316C"]
@@ -167,7 +168,7 @@
 			]
 			title: "Nickel"
 			x: 5.0d
-			y: 4.5d
+			y: 4.25d
 		}
 		{
 			dependencies: ["5334E508185B316C"]
@@ -181,7 +182,7 @@
 			]
 			title: "Stone Dust"
 			x: 5.0d
-			y: 5.75d
+			y: 5.5d
 		}
 		{
 			dependencies: ["3ECF4CC21E53BE78"]
@@ -196,7 +197,7 @@
 			]
 			title: "Centrifuge"
 			x: 7.0d
-			y: 5.75d
+			y: 5.5d
 		}
 		{
 			dependencies: ["37E1FD6ABC7D63BC"]
@@ -210,13 +211,13 @@
 			]
 			title: "Quartzite"
 			x: 9.0d
-			y: 5.0d
+			y: 4.75d
 		}
 		{
 			dependencies: ["37E1FD6ABC7D63BC"]
 			icon: "gtceu:metal_mixture_dust"
 			id: "76D93624226C7F19"
-			size: 0.75d
+			size: 1.25d
 			subtitle: "Kept: the EV centrifuge splits it"
 			tasks: [
 				{ id: "728278CE1FF99797", item: "gtceu:metal_mixture_dust", optional_task: true, type: "item" }
@@ -224,7 +225,7 @@
 			]
 			title: "Metal Mixture"
 			x: 9.0d
-			y: 6.5d
+			y: 6.25d
 		}
 		{
 			icon: "minecraft:sand"
@@ -236,7 +237,7 @@
 				{ id: "3AE9554367774C2B", type: "checkmark" }
 			]
 			title: "Sand"
-			x: 13.0d
+			x: 13.25d
 			y: 0.75d
 		}
 		{
@@ -250,7 +251,7 @@
 				{ id: "700B5A8A82EACCA6", type: "checkmark" }
 			]
 			title: "Silicon Dioxide"
-			x: 15.0d
+			x: 15.25d
 			y: 0.75d
 		}
 		{
@@ -264,7 +265,7 @@
 				{ id: "38180D45A94CB992", type: "checkmark" }
 			]
 			title: "Carbon Dust"
-			x: 15.0d
+			x: 15.25d
 			y: 2.25d
 		}
 		{
@@ -279,7 +280,7 @@
 				{ id: "73B9CDB284068025", type: "checkmark" }
 			]
 			title: "Electric Blast Furnace"
-			x: 17.0d
+			x: 17.25d
 			y: 1.5d
 		}
 		{
@@ -292,7 +293,7 @@
 				{ id: "71B6A52A2C7D72D4", type: "checkmark" }
 			]
 			title: "Hot Silicon Ingot"
-			x: 19.0d
+			x: 19.25d
 			y: 0.75d
 		}
 		{
@@ -306,7 +307,7 @@
 				{ id: "3A76DED8E8F1D10A", type: "checkmark" }
 			]
 			title: "Carbon Monoxide"
-			x: 19.0d
+			x: 19.25d
 			y: 2.25d
 		}
 		{
@@ -320,7 +321,7 @@
 				{ id: "74CF01AA2301A38F", type: "checkmark" }
 			]
 			title: "Silicon"
-			x: 21.0d
+			x: 21.25d
 			y: 0.75d
 		}
 		{
@@ -334,7 +335,7 @@
 				{ id: "7DD322BE6A167085", type: "checkmark" }
 			]
 			title: "Silicon Dust"
-			x: 23.0d
+			x: 23.25d
 			y: 0.75d
 		}
 		{
@@ -349,7 +350,7 @@
 				{ id: "141F366E100BE696", type: "checkmark" }
 			]
 			title: "Silicon Boule"
-			x: 25.0d
+			x: 25.25d
 			y: 1.5d
 		}
 		{
@@ -363,7 +364,7 @@
 				{ id: "3F150E2CAEC1B35B", type: "checkmark" }
 			]
 			title: "Silicon Wafer"
-			x: 27.0d
+			x: 27.25d
 			y: 1.5d
 		}
 		{
@@ -377,7 +378,7 @@
 				{ id: "5A6A9B4BDE38CA2F", type: "checkmark" }
 			]
 			title: "ILC Wafer"
-			x: 29.0d
+			x: 29.25d
 			y: 0.75d
 		}
 		{
@@ -391,7 +392,7 @@
 				{ id: "763AF937FA939E5A", type: "checkmark" }
 			]
 			title: "RAM Wafer"
-			x: 29.0d
+			x: 29.25d
 			y: 2.25d
 		}
 		{
@@ -405,7 +406,7 @@
 				{ id: "19F94169BFBCD7DF", type: "checkmark" }
 			]
 			title: "ILC Chip"
-			x: 31.0d
+			x: 31.25d
 			y: 0.75d
 		}
 		{
@@ -419,7 +420,7 @@
 				{ id: "12BB3354276E7ACC", type: "checkmark" }
 			]
 			title: "RAM Chip"
-			x: 31.0d
+			x: 31.25d
 			y: 2.25d
 		}
 		{
@@ -434,7 +435,7 @@
 			]
 			title: "Logs"
 			x: 0.5d
-			y: 10.5d
+			y: 11.75d
 		}
 		{
 			dependencies: ["17EE635E773D8A93", "376DA31AF22E8CD8"]
@@ -449,7 +450,7 @@
 			]
 			title: "Pyrolyse Oven"
 			x: 2.5d
-			y: 11.25d
+			y: 12.5d
 		}
 		{
 			dependencies: ["3448324095EB1D51"]
@@ -463,7 +464,7 @@
 			]
 			title: "Charcoal"
 			x: 5.0d
-			y: 10.0d
+			y: 11.25d
 		}
 		{
 			dependencies: ["3448324095EB1D51"]
@@ -476,7 +477,7 @@
 			]
 			title: "Charcoal Byproducts"
 			x: 5.0d
-			y: 11.5d
+			y: 12.75d
 		}
 		{
 			dependencies: ["530DB8D39474C366"]
@@ -494,7 +495,7 @@
 			]
 			title: "Biorefinery"
 			x: 7.0d
-			y: 11.5d
+			y: 12.75d
 		}
 		{
 			dependencies: ["1C6AA54777EAF1DD"]
@@ -507,7 +508,7 @@
 			]
 			title: "Wood Tar"
 			x: 9.0d
-			y: 10.5d
+			y: 11.75d
 		}
 		{
 			dependencies: ["1C6AA54777EAF1DD"]
@@ -520,7 +521,7 @@
 			]
 			title: "Wood Vinegar"
 			x: 9.0d
-			y: 12.0d
+			y: 13.25d
 		}
 		{
 			dependencies: ["1C6AA54777EAF1DD"]
@@ -534,13 +535,13 @@
 			]
 			title: "Wood Gas"
 			x: 9.0d
-			y: 13.5d
+			y: 14.75d
 		}
 		{
 			dependencies: ["19A8B02DCA6E0826"]
 			icon: "gtceu:benzene_bucket"
 			id: "753F4EB4AD967E41"
-			size: 0.75d
+			size: 1.25d
 			subtitle: "Tank it: HV makes styrene and epoxy"
 			tasks: [
 				{ id: "7B4FA3B43EC71C8E", item: "gtceu:benzene_bucket", optional_task: true, type: "item" }
@@ -548,13 +549,13 @@
 			]
 			title: "Benzene"
 			x: 11.0d
-			y: 9.75d
+			y: 10.25d
 		}
 		{
 			dependencies: ["19A8B02DCA6E0826"]
 			icon: "gtceu:phenol_bucket"
 			id: "15726B151FE16B78"
-			size: 0.75d
+			size: 1.25d
 			subtitle: "HV's epoxy wants it"
 			tasks: [
 				{ id: "5D10AF009F5A6083", item: "gtceu:phenol_bucket", optional_task: true, type: "item" }
@@ -562,7 +563,7 @@
 			]
 			title: "Phenol"
 			x: 11.0d
-			y: 11.0d
+			y: 12.25d
 		}
 		{
 			dependencies: ["19BBA732E02D5FEE"]
@@ -576,13 +577,13 @@
 			]
 			title: "Methanol"
 			x: 11.0d
-			y: 12.25d
+			y: 14.0d
 		}
 		{
 			dependencies: ["19BBA732E02D5FEE"]
 			icon: "gtceu:acetone_bucket"
 			id: "1D62F8CA7C28023C"
-			size: 0.75d
+			size: 1.25d
 			subtitle: "Glue now, gasoline at HV"
 			tasks: [
 				{ id: "5B9E7BC854A05808", item: "gtceu:acetone_bucket", optional_task: true, type: "item" }
@@ -590,7 +591,7 @@
 			]
 			title: "Acetone"
 			x: 11.0d
-			y: 13.5d
+			y: 15.75d
 		}
 		{
 			description: ["GregTech's own drilling rig, on a deposit that never runs dry."]
@@ -604,8 +605,8 @@
 				{ id: "582EC56CD3781BE2", type: "checkmark" }
 			]
 			title: "Crude Oil"
-			x: 15.0d
-			y: 10.5d
+			x: 15.25d
+			y: 10.75d
 		}
 		{
 			dependencies: ["5A7A0DCA855148BF"]
@@ -619,8 +620,8 @@
 				{ id: "33472A969ADEBD75", type: "checkmark" }
 			]
 			title: "Distillery"
-			x: 17.0d
-			y: 10.5d
+			x: 17.25d
+			y: 10.75d
 		}
 		{
 			dependencies: ["11AE48749D98C844"]
@@ -632,8 +633,8 @@
 				{ id: "502F25283AC0F4BA", type: "checkmark" }
 			]
 			title: "Sulfuric Light Fuel"
-			x: 19.0d
-			y: 9.75d
+			x: 19.25d
+			y: 10.0d
 		}
 		{
 			dependencies: ["11AE48749D98C844"]
@@ -645,8 +646,8 @@
 				{ id: "5948782ED34853AD", type: "checkmark" }
 			]
 			title: "Sulfuric Heavy Fuel"
-			x: 19.0d
-			y: 11.25d
+			x: 19.25d
+			y: 11.5d
 		}
 		{
 			dependencies: ["17F4FDC0C6AFF611", "38B9150B1A9B70FF", "70A91737242112D0"]
@@ -660,8 +661,8 @@
 				{ id: "16977A4CF28A0B10", type: "checkmark" }
 			]
 			title: "Chemical Reactor"
-			x: 21.0d
-			y: 11.25d
+			x: 21.25d
+			y: 11.5d
 		}
 		{
 			dependencies: ["788CBEF57C2426E1"]
@@ -673,8 +674,8 @@
 				{ id: "3172A336A8A2C0D8", type: "checkmark" }
 			]
 			title: "Light Fuel"
-			x: 23.0d
-			y: 9.75d
+			x: 23.25d
+			y: 10.0d
 		}
 		{
 			dependencies: ["788CBEF57C2426E1"]
@@ -686,8 +687,8 @@
 				{ id: "51C1E86C38144B60", type: "checkmark" }
 			]
 			title: "Heavy Fuel"
-			x: 23.0d
-			y: 11.25d
+			x: 23.25d
+			y: 11.5d
 		}
 		{
 			dependencies: ["788CBEF57C2426E1"]
@@ -700,8 +701,8 @@
 				{ id: "5477ECC928E41CE0", type: "checkmark" }
 			]
 			title: "Hydrogen Sulfide"
-			x: 23.0d
-			y: 12.75d
+			x: 23.25d
+			y: 13.0d
 		}
 		{
 			dependencies: ["35A04771E8252D31", "5A497DE21401B625"]
@@ -715,8 +716,8 @@
 				{ id: "169D6A40F9618A0D", type: "checkmark" }
 			]
 			title: "Diesel"
-			x: 25.0d
-			y: 10.5d
+			x: 25.25d
+			y: 10.75d
 		}
 		{
 			dependencies: ["5DB10211B3E10692"]
@@ -729,7 +730,7 @@
 			]
 			title: "Diluted Sulfuric Acid"
 			x: 4.5d
-			y: 17.5d
+			y: 20.0d
 		}
 		{
 			dependencies: ["3B175B81E822C9CA"]
@@ -744,7 +745,7 @@
 			]
 			title: "Sulfuric Acid, Back"
 			x: 6.5d
-			y: 17.5d
+			y: 20.0d
 		}
 		{
 			dependencies: ["78196EE68F118BA4"]
@@ -758,7 +759,7 @@
 			]
 			title: "Ethanol"
 			x: 2.5d
-			y: 18.25d
+			y: 20.75d
 		}
 		{
 			dependencies: ["3B4CA27555ED52FF", "5DB10211B3E10692"]
@@ -772,7 +773,7 @@
 			]
 			title: "Ethylene"
 			x: 4.5d
-			y: 19.0d
+			y: 21.5d
 		}
 		{
 			dependencies: ["3F098B86CDAAC38D"]
@@ -787,7 +788,7 @@
 			]
 			title: "Polyethylene"
 			x: 6.5d
-			y: 19.0d
+			y: 21.5d
 		}
 		{
 			icon: "gtceu:salt_water_bucket"
@@ -801,7 +802,7 @@
 			]
 			title: "Salt Water"
 			x: 2.5d
-			y: 22.0d
+			y: 24.5d
 		}
 		{
 			dependencies: ["5F664A7E3F56B341"]
@@ -815,7 +816,7 @@
 			]
 			title: "Chlorine"
 			x: 4.5d
-			y: 22.0d
+			y: 24.5d
 		}
 		{
 			dependencies: ["3F098B86CDAAC38D", "5448FA5C814B1DBD", "15043AB7481B7736"]
@@ -828,7 +829,7 @@
 			]
 			title: "Vinyl Chloride"
 			x: 6.5d
-			y: 20.5d
+			y: 23.0d
 		}
 		{
 			dependencies: ["5448FA5C814B1DBD"]
@@ -842,7 +843,7 @@
 			]
 			title: "Hydrochloric Acid"
 			x: 6.5d
-			y: 22.0d
+			y: 24.5d
 		}
 		{
 			dependencies: ["365E71F07FE451E2"]
@@ -857,7 +858,7 @@
 			]
 			title: "PVC"
 			x: 8.5d
-			y: 20.5d
+			y: 23.0d
 		}
 		{
 			icon: "gtceu:ruby_dust"
@@ -871,7 +872,7 @@
 			]
 			title: "Ruby Dust"
 			x: 12.75d
-			y: 20.5d
+			y: 23.0d
 		}
 		{
 			dependencies: ["7D872ECD77AFB603"]
@@ -885,7 +886,7 @@
 			]
 			title: "Electrolyzer"
 			x: 14.75d
-			y: 20.5d
+			y: 23.0d
 		}
 		{
 			icon: "gtceu:manganese_dust"
@@ -898,7 +899,7 @@
 			]
 			title: "Manganese"
 			x: 16.75d
-			y: 16.75d
+			y: 19.25d
 		}
 		{
 			icon: "gtceu:nickel_dust"
@@ -911,7 +912,7 @@
 			]
 			title: "Nickel"
 			x: 16.75d
-			y: 18.25d
+			y: 20.75d
 		}
 		{
 			dependencies: ["3BA74246E66C42D8"]
@@ -924,7 +925,7 @@
 			]
 			title: "Chromium"
 			x: 16.75d
-			y: 19.75d
+			y: 22.25d
 		}
 		{
 			dependencies: ["3BA74246E66C42D8"]
@@ -937,7 +938,7 @@
 			]
 			title: "Aluminium"
 			x: 16.75d
-			y: 21.25d
+			y: 23.75d
 		}
 		{
 			icon: "gtceu:iron_dust"
@@ -950,7 +951,7 @@
 			]
 			title: "Iron Dust"
 			x: 16.75d
-			y: 22.75d
+			y: 25.25d
 		}
 		{
 			dependencies: ["100239312E5967FF", "34FB06BFD72FC9B3", "7EC6299F8E7FA11A"]
@@ -964,7 +965,7 @@
 			]
 			title: "Stainless Steel Dust"
 			x: 18.75d
-			y: 18.25d
+			y: 20.75d
 		}
 		{
 			dependencies: ["7049B74B2CF8745D"]
@@ -978,7 +979,7 @@
 			]
 			title: "Stainless Steel"
 			x: 20.75d
-			y: 18.25d
+			y: 20.75d
 		}
 		{
 			dependencies: ["7EC6299F8E7FA11A", "546B5B179EB248EA", "1B03F035776D5191"]
@@ -992,7 +993,7 @@
 			]
 			title: "Kanthal Dust"
 			x: 18.75d
-			y: 22.0d
+			y: 24.5d
 		}
 		{
 			dependencies: ["55CC02521866F8F0"]
@@ -1006,7 +1007,7 @@
 			]
 			title: "Kanthal"
 			x: 20.75d
-			y: 22.0d
+			y: 24.5d
 		}
 		{
 			dependencies: ["52D26362BB0806F8"]
@@ -1021,7 +1022,7 @@
 			]
 			title: "Kanthal Coil"
 			x: 22.75d
-			y: 22.0d
+			y: 24.5d
 		}
 		{
 			icon: "gtceu:coal_dust"
@@ -1034,7 +1035,7 @@
 			]
 			title: "Coal Dust"
 			x: 0.5d
-			y: 26.25d
+			y: 28.75d
 		}
 		{
 			icon: "grindless:creature_model_blaze"
@@ -1048,7 +1049,7 @@
 			]
 			title: "Blaze Model"
 			x: 0.5d
-			y: 27.75d
+			y: 30.25d
 		}
 		{
 			dependencies: ["1753B227E8A5596E", "3DEE66C8E3E53F8C"]
@@ -1063,7 +1064,7 @@
 			]
 			title: "Creature Simulator"
 			x: 2.5d
-			y: 27.0d
+			y: 29.5d
 		}
 		{
 			dependencies: ["18323E4AB23E1BB6"]
@@ -1076,7 +1077,7 @@
 			]
 			title: "Blaze Rod"
 			x: 4.5d
-			y: 27.0d
+			y: 29.5d
 		}
 		{
 			dependencies: ["5D9DB2B68541F412"]
@@ -1089,7 +1090,7 @@
 			]
 			title: "Blaze Powder"
 			x: 6.5d
-			y: 27.0d
+			y: 29.5d
 		}
 		{
 			dependencies: ["3D81318C8D0727DF"]
@@ -1103,7 +1104,7 @@
 			]
 			title: "Liquid Blaze"
 			x: 8.5d
-			y: 27.0d
+			y: 29.5d
 		}
 		{
 			dependencies: ["5C67D07C75E8F153", "325AC2585F63E613"]
@@ -1118,7 +1119,7 @@
 			]
 			title: "Eye of Ender"
 			x: 10.5d
-			y: 27.75d
+			y: 30.25d
 		}
 		{
 			dependencies: ["7088D3561786D49F"]
@@ -1132,7 +1133,7 @@
 			]
 			title: "End Key"
 			x: 12.5d
-			y: 27.75d
+			y: 30.25d
 		}
 		{
 			icon: "gtceu:diesel_bucket"
@@ -1146,7 +1147,7 @@
 			]
 			title: "Diesel"
 			x: 16.75d
-			y: 27.75d
+			y: 30.25d
 		}
 		{
 			dependencies: ["7DD593921B25E8AE"]
@@ -1160,7 +1161,7 @@
 			]
 			title: "Kerosene"
 			x: 18.75d
-			y: 27.75d
+			y: 30.25d
 		}
 		{
 			dependencies: ["7D28AEC912902688"]
@@ -1174,7 +1175,7 @@
 			]
 			title: "RP-1"
 			x: 20.75d
-			y: 27.75d
+			y: 30.25d
 		}
 		{
 			icon: "gtceu:oxygen_bucket"
@@ -1187,7 +1188,7 @@
 			]
 			title: "Oxygen"
 			x: 20.75d
-			y: 26.25d
+			y: 28.75d
 		}
 		{
 			icon: "gtceu:power_thruster"
@@ -1201,7 +1202,7 @@
 			]
 			title: "Power Thruster"
 			x: 20.75d
-			y: 29.25d
+			y: 31.75d
 		}
 		{
 			dependencies: ["509D8E16F2FFD75B", "5CD15C7B14FD5AF8", "7F3DB4C870C461F1"]
@@ -1216,7 +1217,7 @@
 			]
 			title: "Engine Test Stand"
 			x: 22.75d
-			y: 27.75d
+			y: 30.25d
 		}
 		{
 			dependencies: ["5967D24700F210AB"]
@@ -1230,7 +1231,7 @@
 			]
 			title: "Qualified Thruster"
 			x: 24.75d
-			y: 27.0d
+			y: 29.5d
 		}
 		{
 			dependencies: ["5967D24700F210AB"]
@@ -1244,7 +1245,7 @@
 			]
 			title: "Carbon Dioxide"
 			x: 24.75d
-			y: 28.5d
+			y: 31.0d
 		}
 		{
 			dependencies: ["5967D24700F210AB"]
@@ -1258,7 +1259,7 @@
 			]
 			title: "Water"
 			x: 24.75d
-			y: 30.0d
+			y: 32.5d
 		}
 		{
 			icon: "minecraft:paper"
@@ -1271,7 +1272,7 @@
 			]
 			title: "Paper"
 			x: 29.0d
-			y: 29.25d
+			y: 31.75d
 		}
 		{
 			dependencies: ["388F688236DC7298", "3954D84FC7C457CA", "78E24E72C05280D7"]
@@ -1286,7 +1287,7 @@
 			]
 			title: "Radio Telescope"
 			x: 31.5d
-			y: 27.0d
+			y: 29.5d
 		}
 		{
 			dependencies: ["3BDA005617E8520F"]
@@ -1300,7 +1301,7 @@
 			]
 			title: "Lunar Landing-Site Chart"
 			x: 34.0d
-			y: 27.0d
+			y: 29.5d
 		}
 	]
 	subtitle: ["One plant runs the whole ore chain, wood and crude oil turn into chemistry, and sand turns into chips."]

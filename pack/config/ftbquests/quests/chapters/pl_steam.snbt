@@ -386,8 +386,7 @@
 			dependencies: ["501339470EC206FA"]
 			icon: "gtceu:raw_goethite"
 			id: "3D17304982F9676E"
-			shape: "circle"
-			size: 0.75d
+			size: 1.25d
 			subtitle: "With the vein's other ores"
 			tasks: [
 				{ id: "57165452E464BA92", item: "gtceu:raw_goethite", optional_task: true, type: "item" }
@@ -422,7 +421,7 @@
 				{ id: "31A1E5AD9571CA47", type: "checkmark" }
 			]
 			title: "Rubber Sapling"
-			x: 10.5d
+			x: 10.75d
 			y: 9.75d
 		}
 		{
@@ -437,7 +436,7 @@
 				{ id: "1A0D86268D1CEA71", type: "checkmark" }
 			]
 			title: "Steam Greenhouse"
-			x: 12.5d
+			x: 12.75d
 			y: 9.75d
 		}
 		{
@@ -451,7 +450,7 @@
 				{ id: "7FFCFDDD96C3B0B5", type: "checkmark" }
 			]
 			title: "Rubber Log"
-			x: 14.5d
+			x: 14.75d
 			y: 8.5d
 		}
 		{
@@ -464,7 +463,7 @@
 				{ id: "1F061308E134E56F", type: "checkmark" }
 			]
 			title: "Sticky Resin"
-			x: 14.5d
+			x: 14.75d
 			y: 10.0d
 		}
 		{
@@ -478,7 +477,7 @@
 				{ id: "1253367C9C11D3DF", type: "checkmark" }
 			]
 			title: "Raw Rubber"
-			x: 16.5d
+			x: 16.75d
 			y: 10.0d
 		}
 		{
@@ -493,7 +492,7 @@
 				{ id: "7CDD1738B40AB70C", type: "checkmark" }
 			]
 			title: "Raw Sulfur"
-			x: 14.5d
+			x: 14.75d
 			y: 11.5d
 		}
 		{
@@ -507,7 +506,7 @@
 				{ id: "5EA9DE438CFF2A19", type: "checkmark" }
 			]
 			title: "Sulfur"
-			x: 16.5d
+			x: 16.75d
 			y: 11.5d
 		}
 		{
@@ -522,7 +521,7 @@
 				{ id: "30CA8671E9CA5D3E", type: "checkmark" }
 			]
 			title: "Rubber"
-			x: 18.5d
+			x: 18.75d
 			y: 10.75d
 		}
 		{

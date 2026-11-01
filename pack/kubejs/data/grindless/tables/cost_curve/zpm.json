@@ -1,8 +1,8 @@
 {
   "era": "zpm",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 1.5,
+  "fluid": 1.5,
   "keys": [
     "extendedfeatures:zpm_universal_circuit",
     "gtceu:actinide_partitioning_plant",
@@ -52,7 +52,12 @@
     "gtnn:gooware_processor"
   ],
   "include": [],
-  "exclude": [],
-  "remove": [],
+  "exclude": [
+    "gtnn:component_assembly_line/*_zpm",
+    "gtnn:component_assembly_line/*_zpm_*"
+  ],
+  "remove": [
+    "gtceu:shaped/zpm_machine_hull"
+  ],
   "override": {}
 }

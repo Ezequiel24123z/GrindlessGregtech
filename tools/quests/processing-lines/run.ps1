@@ -53,15 +53,16 @@ if ($Dump) {
 }
 
 if ($Write) {
-    $book = Join-Path $repo 'pack\config\ftbquests\quests\chapters'
+    $book = Join-Path $repo (Join-Path 'pack' (Join-Path 'config' (Join-Path 'ftbquests' (Join-Path 'quests' 'chapters'))))
     $charts = ((Get-ChildItem $book -Filter 'pl_*.snbt' | ForEach-Object { $_.BaseName }) + @('power')) -join ','
+    $lintScript = Join-Path $repo (Join-Path 'tools' (Join-Path 'quests' 'lint.mjs'))
     Push-Location $repo
     try {
-        $lint = @('tools\quests\lint.mjs', '--chapter', $charts)
+        $lint = @($lintScript, '--chapter', $charts)
         if ($Dump) { $lint += @('--items', (Join-Path $Dump 'items.json'), '--tags', (Join-Path $Dump 'tags.json')) }
         & $node @lint
         if ($LASTEXITCODE -ne 0) { $failed++ }
-        & $node tools\quests\lint.mjs --quiet
+        & $node $lintScript --quiet
         if ($LASTEXITCODE -ne 0) { $failed++ }
         if ($Preview) {
             & powershell -NoProfile -ExecutionPolicy Bypass -File tools\quests\Render-QuestPreview.ps1 -Chapter $charts -OutDir (Join-Path $OutDir 'preview') -NodeExe $node

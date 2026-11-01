@@ -51,7 +51,8 @@
         var ins = MF.moduleRecipes['grindless:' + name]
         var r = event.recipes.gtceu.assembler('grindless:' + name)
         ins.forEach(function (i) { r.itemInputs(i) })
-        r.inputFluids(Fluid.of('gtceu:soldering_alloy', 576), Fluid.of('gtceu:lubricant', 200))
+        r.itemInputs('4x gtceu:soldering_alloy_ingot') // 576 mB; the assembler holds one fluid
+        r.inputFluids(Fluid.of('gtceu:lubricant', 200))
         r.itemOutputs('grindless:' + name).EUt(122880).duration(600)
       })
       // an assembly line with station research: the controller is built from the five modules it runs

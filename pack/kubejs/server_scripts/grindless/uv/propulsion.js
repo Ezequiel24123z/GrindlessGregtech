@@ -66,6 +66,7 @@
   var PROPELLANT_TANK = ids.propellantTank || 'grindless:propellant_tank'
   var PPU = '#gtceu:circuits/uv'
   var EPOXY = 'gtceu:epoxy'
+  var SOLDER_INGOT = 'gtceu:soldering_alloy_ingot' // 144 mB; the assembler holds one fluid
   var XENON = 'gtceu:xenon'
   var KRYPTON = 'gtceu:krypton'
   // UHV-A8's rows: ids of F1 (startup_scripts/grindless/uhv/foundation.js), A5, A7 and A8 (startup_scripts/grindless/uhv/propulsion.js)
@@ -124,11 +125,11 @@
     row('bn_discharge_channel', 'forming_press', null, [item(HBN, 3), item('gtceu:silicon_dioxide_dust', 1)], [], [item(CHANNEL, 1)], [],
       VA_IV, 300),
     row('uv_electromagnet', 'assembler', 7, [item('gtceu:iron_rod', 1), item('gtceu:fine_annealed_copper_wire', 16),
-      item('grindless:silicon_nitride_film', 1), item('gtceu:molybdenum_plate', 1), item('gtceu:tungsten_steel_plate', 1)],
-      [fluid('gtceu:polybenzimidazole', 144), fluid('gtceu:soldering_alloy', 72)], [item(MAGNET, 1)], [], VA_LUV, 200),
+      item('grindless:silicon_nitride_film', 1), item('gtceu:molybdenum_plate', 1), item('gtceu:tungsten_steel_plate', 1), item(SOLDER_INGOT, 1)],
+      [fluid('gtceu:polybenzimidazole', 144)], [item(MAGNET, 1)], [], VA_LUV, 200),
     row('propellant_tank', 'assembler', 8, [item('gtceu:titanium_plate', 4), item(CNT_YARN, 8), item('gtceu:uv_electric_pump', 1),
-      item('grindless:silicon_nitride_film', 1), item('gtceu:tritanium_plate', 1)],
-      [fluid(EPOXY, 288), fluid('gtceu:soldering_alloy', 144)], [item(PROPELLANT_TANK, 1)], [], VA_ZPM, 400)
+      item('grindless:silicon_nitride_film', 1), item('gtceu:tritanium_plate', 1), item(SOLDER_INGOT, 1)],
+      [fluid(EPOXY, 288)], [item(PROPELLANT_TANK, 1)], [], VA_ZPM, 400)
   ]
   SIDE[0].notConsumed = ['gtceu:sapphire_lens']
   SIDE[1].temp = 2500

@@ -1860,17 +1860,6 @@
 			y: 38.0d
 		}
 		{
-			icon: "extendedfeatures:expanded_assembly_line"
-			id: "20200C8C97EE70E4"
-			rewards: [{ id: "16675279939ADE14", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GTM Extended Features"
-			tasks: [{ id: "776BF073C3093643", item: "extendedfeatures:expanded_assembly_line", type: "item" }]
-			x: 6.0d
-			y: 38.0d
-		}
-		{
 			icon: "gtnn:large_dehydrator"
 			id: "3AF1F99341DA1993"
 			rewards: [{ id: "7E99662481FD48CE", type: "xp", xp: 10 }]
@@ -1878,7 +1867,7 @@
 			size: 1.25d
 			subtitle: "LuV, GT--"
 			tasks: [{ id: "5D3A6ED560E1C13F", item: "gtnn:large_dehydrator", type: "item" }]
-			x: 8.0d
+			x: 6.0d
 			y: 38.0d
 		}
 		{
@@ -1889,7 +1878,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "54F9BBDF568E163C", item: "gtceu:large_mixer", type: "item" }]
-			x: 10.0d
+			x: 8.0d
 			y: 38.0d
 		}
 		{
@@ -1900,18 +1889,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "5AE8179449593ED4", item: "gtceu:luv_large_miner", type: "item" }]
-			x: 12.0d
-			y: 38.0d
-		}
-		{
-			icon: "extendedfeatures:matrix_data_relay"
-			id: "4CBE01F0F6C8C728"
-			rewards: [{ id: "7936D6790DBA0717", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "LuV, GTM Extended Features"
-			tasks: [{ id: "32A68B4DFA9C4FF7", item: "extendedfeatures:matrix_data_relay", type: "item" }]
-			x: 14.0d
+			x: 10.0d
 			y: 38.0d
 		}
 		{
@@ -1922,7 +1900,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "675114A4C225050B", item: "gtceu:plasma_large_turbine", type: "item" }]
-			x: 16.0d
+			x: 12.0d
 			y: 38.0d
 		}
 		{
@@ -1933,7 +1911,7 @@
 			size: 1.25d
 			subtitle: "LuV, GregTech"
 			tasks: [{ id: "4C77CA0C00F8880E", item: "gtceu:power_substation", type: "item" }]
-			x: 18.0d
+			x: 14.0d
 			y: 38.0d
 		}
 		{
@@ -1944,7 +1922,7 @@
 			size: 1.25d
 			subtitle: "LuV, Gregicality Rocketry"
 			tasks: [{ id: "4D95F1E100FB0DC2", item: "gcyr:space_station_packager", type: "item" }]
-			x: 20.0d
+			x: 16.0d
 			y: 38.0d
 		}
 		{
@@ -4280,6 +4258,17 @@
 			y: 86.0d
 		}
 		{
+			icon: "gtceu:ergoregion_synchroniser"
+			id: "37E64634830FBF7D"
+			rewards: [{ id: "4119EC8B0A378A87", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "49A3B16EEB7AC18A", item: "gtceu:ergoregion_synchroniser", type: "item" }]
+			x: 8.0d
+			y: 86.0d
+		}
+		{
 			icon: "gtceu:gene_ark"
 			id: "4AF21F3607E72610"
 			rewards: [{ id: "258AECB839D14181", type: "xp", xp: 10 }]
@@ -4287,7 +4276,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "1B0CEBA407CB56A9", item: "gtceu:gene_ark", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 86.0d
 		}
 		{
@@ -4298,7 +4287,29 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "3806BCE6A8830613", item: "gtceu:geroch_winch", type: "item" }]
-			x: 10.0d
+			x: 12.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:horizon_flux_clamp"
+			id: "5B7514C3BBFA27DC"
+			rewards: [{ id: "56854477DD2C80B2", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "15C948A598026D2E", item: "gtceu:horizon_flux_clamp", type: "item" }]
+			x: 14.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:horizon_interferometer"
+			id: "7527C2F7AA25C8DC"
+			rewards: [{ id: "1B44D1AE9947B14D", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "7E08DB561025D622", item: "gtceu:horizon_interferometer", type: "item" }]
+			x: 16.0d
 			y: 86.0d
 		}
 		{
@@ -4309,7 +4320,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "2DDDE590AAB9BFD8", item: "gtceu:mass_stream_injector", type: "item" }]
-			x: 12.0d
+			x: 18.0d
 			y: 86.0d
 		}
 		{
@@ -4320,7 +4331,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "5E711DBE4A1696AA", item: "gtceu:membrane_line", type: "item" }]
-			x: 14.0d
+			x: 20.0d
 			y: 86.0d
 		}
 		{
@@ -4331,7 +4342,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "1FCFDA582FF00C51", item: "gtceu:mirror_shell", type: "item" }]
-			x: 16.0d
+			x: 22.0d
 			y: 86.0d
 		}
 		{
@@ -4342,7 +4353,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "4A9D341092B09E12", item: "gtceu:photon_ring_imager", type: "item" }]
-			x: 18.0d
+			x: 24.0d
 			y: 86.0d
 		}
 		{
@@ -4353,8 +4364,19 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "285C699AD4865827", item: "gtceu:rydberg_array_works", type: "item" }]
-			x: 20.0d
-			y: 86.0d
+			x: 2.0d
+			y: 88.0d
+		}
+		{
+			icon: "gtceu:segment_reclamation_works"
+			id: "6AF57E4EC01E946C"
+			rewards: [{ id: "611CC5D7B9AA69A3", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "50CB616DAB71ABDC", item: "gtceu:segment_reclamation_works", type: "item" }]
+			x: 4.0d
+			y: 88.0d
 		}
 	]
 	subtitle: ["Every multiblock controller you can build, tier by tier"]

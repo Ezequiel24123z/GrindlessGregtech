@@ -1,8 +1,8 @@
 {
   "era": "luv",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 2.0,
+  "fluid": 2.0,
   "keys": [
     "extendedfeatures:luv_universal_circuit",
     "gtceu:algae_bioreactor",
@@ -45,7 +45,12 @@
     "gtceu:zero_g_crystal_grower"
   ],
   "include": [],
-  "exclude": [],
-  "remove": [],
+  "exclude": [
+    "gtnn:component_assembly_line/*_luv",
+    "gtnn:component_assembly_line/*_luv_*"
+  ],
+  "remove": [
+    "gtceu:shaped/luv_machine_hull"
+  ],
   "override": {}
 }

@@ -114,12 +114,12 @@
       itemsOut: [item('gtceu:niobium_dust', 1)], fluidsOut: [fluid('gtceu:hydrofluoric_acid', 500), fluid('gtceu:sulfuric_acid', 500)], eut: 480, duration: 300 },
     { name: 'mu_metal_shield', type: 'assembler', circuit: null,
       itemsIn: [item('gtceu:nickel_plate', 6), item('gtceu:iron_plate', 2), item('gtceu:copper_foil', 1), item('grindless:silicon_nitride_film', 1),
-        item('gtceu:molybdenum_plate', 1)], fluidsIn: [fluid('gtceu:hydrogen', 500), fluid('gtceu:soldering_alloy', 72)],
+        item('gtceu:molybdenum_plate', 1), item('gtceu:soldering_alloy_ingot', 1)], fluidsIn: [fluid('gtceu:hydrogen', 500)],
       itemsOut: [item(SHIELD, 1)], fluidsOut: [], eut: 480, duration: 200 },
     // the linacs' structure block: a finished cryomodule in a welded tritanium housing, sealed under a liquid helium fill
     { name: 'srf_cryomodule_block', type: 'assembler', circuit: null,
-      itemsIn: [item(CRYOMODULE, 1), item('gtceu:tritanium_plate', 4), item(SHIELD, 1)],
-      fluidsIn: [fluid('gtceu:soldering_alloy', 144), fluid(LIQUID_HELIUM, 1000)],
+      itemsIn: [item(CRYOMODULE, 1), item('gtceu:tritanium_plate', 4), item(SHIELD, 1), item('gtceu:soldering_alloy_ingot', 1)],
+      fluidsIn: [fluid(LIQUID_HELIUM, 1000)],
       itemsOut: [item(CRYOMODULE_BLOCK, 1)], fluidsOut: [], eut: VA, duration: 300 },
     // MAX-G1 (docs/eras/max.md, line 18 step 3): a MAX SRF cavity electropolished in the acid bath, as real niobium cavities are; the spent
     // acid goes to the electrolyzer row above

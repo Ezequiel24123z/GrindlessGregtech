@@ -215,7 +215,7 @@
           "itemsIn": [{ "id": "gtceu:hftacn_ingot", "count": 2 },           { "id": "gtceu:tritanium_foil", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:hftacn_heating_element", "count": 1 }], "fluidsOut": [] },
         { "name": "hftacn_coil_block", "circuit": 0, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "grindless:hftacn_heating_element", "count": 8 }, { "id": "gtceu:tritanium_plate", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsIn": [{ "id": "grindless:hftacn_heating_element", "count": 8 }, { "id": "gtceu:tritanium_plate", "count": 2 }, { "id": "gtceu:uranium_rhodium_dinaquadide_single_wire", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:hftacn_coil_block", "count": 1 }], "fluidsOut": [] },
         { "name": "sic_fibre_preform", "circuit": 0, "eut": 30720, "duration": 300,
           "itemsIn": [{ "id": "grindless:bn_coated_sic_fibre", "count": 8 }, { "id": "gtceu:tritanium_foil", "count": 2 }, { "id": "grindless:polycarbosilane_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
