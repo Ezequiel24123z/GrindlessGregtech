@@ -59,8 +59,8 @@ test('rows on one type and circuit are told apart by their item inputs', () => {
 });
 
 test('ids are type-prefixed and the helium refrigerator row is registered as power.js does', () => {
-  assert.match(src, /'grindless:' \+ r\.type \+ '\/' \+ r\.name/);
-  assert.match(src, /'grindless:closed_loop_cooling\/' \+ COOL\.name/);
+  assert.match(src, /gtceu\[r\.type\]\('grindless:' \+ r\.name\)/);
+  assert.match(src, /closed_loop_cooling\('grindless:' \+ COOL\.name\)/);
   assert.match(src, /name: 'kerr_field_coil', input: 'grindless:impregnated_kerr_coil'/);
 });
 

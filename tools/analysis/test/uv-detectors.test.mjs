@@ -132,7 +132,7 @@ test('the ground station turns the Starshot probe into Proxima data only with an
   assert.equal(snspd.type, 'qubit_fabrication');
   assert.deepEqual(snspd.itemsIn, [{ id: 'grindless:nbn_film_wafer', count: 1 }]);
   assert.deepEqual(snspd.itemsOut, [{ id: 'grindless:snspd_array', count: 1 }]);
-  const arrayMakers = recipes.filter((x) => outputsOf(x).includes('grindless:snspd_array')).map((x) => x.i);
+  const arrayMakers = recipes.filter((x) => outputsOf(x).includes('"grindless:snspd_array"')).map((x) => x.i);
   assert.deepEqual(arrayMakers, ['grindless:qubit_fabrication/snspd_array']);
 });
 

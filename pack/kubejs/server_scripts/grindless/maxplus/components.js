@@ -53,8 +53,8 @@
     { type: 'assembler', name: 'horizon_actuator_stack', circuit: 25,
       items: ['grindless:electroded_pmn_stack'], fluids: [['gtceu:epoxy', 144]], outs: ['grindless:horizon_actuator_stack'], eut: LOW, duration: 300 },
     { type: 'assembler', name: 'horizon_machine_casing', circuit: 26,
-      items: ['gtceu:max_machine_casing', '4x grindless:horizon_compressed_plate', 'grindless:insulated_kerr_wire'],
-      fluids: [['gtceu:epoxy', 144]], outs: ['grindless:horizon_machine_casing'], eut: VA_MAX, duration: 200 }
+      items: ['gtceu:max_machine_casing', '4x grindless:horizon_compressed_plate', 'grindless:insulated_kerr_wire', '2x gtceu:horizon_strand_single_wire', 'grindless:chain_lamina_stack'],
+      fluids: [['gtceu:epoxy', 144], ['gtceu:soldering_alloy', 144]], outs: ['grindless:horizon_machine_casing'], eut: VA_MAX, duration: 200 }
   ]
 
   // Rows on the older machines. items/outs: 'Nx id', or [stack, chance in 1/10000]; kept: not consumed; charge: not-consumed fluid;
@@ -192,7 +192,7 @@
         skip(r.type + '/' + r.name, missing)
         return
       }
-      var b = event.recipes.gtceu[r.type]('grindless:' + r.type + '/' + r.name)
+      var b = event.recipes.gtceu[r.type]('grindless:' + r.name)
       r.items.forEach(function (s) {
         if (Array.isArray(s)) b.chancedInput('1x ' + s[0], s[1], 0)
         else b.itemInputs(s)
@@ -221,7 +221,7 @@
     var missing = missingOf([COOL.input, COOL.output], fl)
     if (missing.length > 0) return skip('closed_loop_cooling/' + COOL.name, missing)
     var dataKey = (G.heliumRefrigerator && G.heliumRefrigerator.dataKey) || 'grindless_closed_loop'
-    event.recipes.gtceu.closed_loop_cooling('grindless:closed_loop_cooling/' + COOL.name)
+    event.recipes.gtceu.closed_loop_cooling('grindless:' + COOL.name)
       .itemInputs('1x ' + COOL.input)
       .inputFluids(Fluid.of(cfg.makeUp.id, cfg.makeUp.amount))
       .inputFluids(Fluid.of(cfg.precoolIn.id, cfg.precoolIn.amount))
