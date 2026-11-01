@@ -232,15 +232,20 @@ export default {
         L('aramid', 9, 0.75, 'pl_hv:aramid'),
         L('nqdust', 9, 2.25, 'pl_iv:nqdust'),
         n('smelter', 11.5, 0, M('gtceu:microgravity_smelter', 'gtceu:microgravity_processing'), 'Microgravity Smelter', {
-          kind: 'ours', from: ['zblan', 'ptfe', 'aramid', 'nqdust'],
+          kind: 'ours', from: ['zblan', 'ptfe', 'aramid'],
           desc: 'ZBLAN fibre, metal foam and naquadah alloy, each made better in orbit than on the ground. The alloy skips the coil and the liquid helium altogether.',
         }),
         n('pipe', 14, -2.25, I('gtceu:normal_optical_pipe'), 'Optical Pipe', { kind: 'product', from: ['smelter'], sub: 'No silver in it: research, below' }),
         n('whipple', 14, -0.75, I('grindless:whipple_shield_casing'), 'Whipple Shield Casing', {
           from: ['smelter'], role: 'infrastructure', sub: 'The wake shield\'s hull',
         }),
-        n('nqa', 14, 0.75, I('gtceu:naquadah_alloy_ingot'), 'Naquadah Alloy', {
-          kind: 'product', from: ['smelter'], extends: 'pl_luv:naquadah', sub: 'Comes out cold; ZPM wants it',
+        n('osm', 9, 3.75, I('gtceu:osmiridium_dust'), 'Osmiridium Dust', { kind: 'raw' }),
+        n('trd', 9, 5.25, I('gtceu:trinium_dust'), 'Trinium Dust', { kind: 'raw' }),
+        n('smelter2', 11.5, 3.75, M('gtceu:microgravity_smelter', 'gtceu:microgravity_processing'), 'Microgravity Smelter', {
+          kind: 'ours', from: ['nqdust', 'osm', 'trd'], sub: 'The alloy skips the coil and the liquid helium',
+        }),
+        n('nqa', 14, 3.75, I('gtceu:naquadah_alloy_ingot'), 'Naquadah Alloy', {
+          kind: 'product', from: ['smelter2'], extends: 'pl_luv:naquadah', sub: 'Comes out cold; ZPM wants it',
         }),
       ],
     },
@@ -255,7 +260,9 @@ export default {
         n('mpic', 2.5, 1.5, I('gtceu:mpic_wafer'), 'MPIC Wafer', { kind: 'raw', sub: 'GTM\'s own wafer' }),
         n('vga', 2.5, 3, F('gtceu:vanadium_gallium'), 'Molten Vanadium Gallium', { kind: 'raw', sub: 'Circuit 2 only' }),
         n('whip', 2.5, 4.5, I('grindless:whipple_shield_casing'), 'Whipple Shield Casing', { kind: 'raw', sub: 'The microgravity smelter\'s' }),
-        n('ge', 2.5, 6, I('gtceu:germanium_plate'), 'Germanium Plate', { kind: 'raw', sub: 'Io\'s fumaroles' }),
+        n('ged', 0, 7.5, I('gtceu:germanium_dust'), 'Germanium', { kind: 'raw', sub: 'Io\'s fumaroles' }),
+        n('gei', 0, 6, I('gtceu:germanium_ingot'), 'Germanium Ingot', { from: ['ged'], by: ['gtceu:arc_furnace'], sub: 'Arc furnace' }),
+        n('ge', 2.5, 6, I('gtceu:germanium_plate'), 'Germanium Plate', { from: ['gei'], by: ['gtceu:bender'], sub: 'Bender' }),
         L('gaas', 2.5, 7.5, 'pl_lv:gaas'),
         n('wsf', 5, 3.75, M('gtceu:wake_shield_facility', 'gtceu:wake_epitaxy'), 'Wake Shield Facility', {
           kind: 'ours', from: [structure('whip'), 'mpic', 'ingap', 'vga', 'ge', 'gaas'],
@@ -271,7 +278,7 @@ export default {
         n('uhpic', 12.5, 2.25, I('gtceu:uhpic_wafer'), 'UHPIC Wafer', { from: ['wsf2'], sub: 'Every LuV hatch' }),
         n('wchip', 15, 2.25, I('gtceu:uhpic_chip'), 'UHPIC Chip', { kind: 'product', from: ['uhpic'], by: ['gtceu:cutter'], sub: 'Cutter; the fusion reactor\'s chips' }),
         n('tjc2', 10, 5.25, I('grindless:triple_junction_cell'), 'Triple-Junction Cell', {
-          kind: 'product', from: ['tjw'], by: ['gtceu:cutter'], sub: 'Cutter; the orbital solar panels take it',
+          kind: 'product', role: 'infrastructure', from: ['tjw'], by: ['gtceu:cutter'], sub: 'Cutter; the orbital solar panels take it',
         }),
       ],
     },
