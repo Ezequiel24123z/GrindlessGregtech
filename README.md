@@ -123,11 +123,8 @@ FTB Quests guides the whole journey: Welcome and Workshop chapters, one chapter 
 
 ## Known issues
 
-- Nine multiblocks still have no structure preview in EMI.
-- The Expanded Assembly Line's formation and research path are not yet proven in game.
+- The Expanded Assembly Line and the Matrix Data Relay (Extended Features add-on) cannot form on a dedicated server: the add-on loads a client-only class. They work in single player, and nothing in progression needs them. The Expanded Assembly Line forms, but it has not yet been seen completing a recipe in tests.
 - GCYR's configured low gravity is not applied in game.
-- v0.13.0 reshaped many multiblocks; rebuild them after updating from an older version.
-- A Horizon Collector placed in an older version can keep one output slot and stall: break it and place it again.
 
 ## How to play (Prism Launcher)
 

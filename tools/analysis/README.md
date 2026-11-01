@@ -6,7 +6,7 @@ Checks, tier by tier and **with no commands**, three things about the pack as it
 2. **Auto** (step 2): base resources are resupplied by machines (vein drill, greenhouse, pump, fluid rig, rock crusher...), not by hand. Only what's gathered by hand once to bootstrap counts.
 3. **Eras** (step 3, decision of 2026-10-24): nothing from an era can need a resource that comes from a later era. Every era's item has to be buildable with **every** later-era resource removed from every source (veins, byproducts, bees, addon recipes, other dimensions).
 
-Separately, a step that doesn't belong to any tier: the **obtain audit** (`--pass obtain`, see [below](#obtain-audit---pass-obtain)) lists what is never obtained anywhere in the pack and classifies it. And a check of what the player *sees*: the **EMI coverage audit** (`emi-coverage.mjs`, see [below](#emi-coverage-audit-emi-coveragemjs)) asks that EMI shows how every item of ours is obtained and used. Three Reforge tools measure the pack rather than its progression: the **capacity lint** ([below](#capacity-lint-capacity-lintmjs), part of T0), the **census** ([below](#census-censusmjs)) and the **cost matrix** ([below](#cost-matrix-cost-matrixmjs)).
+Separately, a step that doesn't belong to any tier: the **obtain audit** (`--pass obtain`, see [below](#obtain-audit---pass-obtain)) lists what is never obtained anywhere in the pack and classifies it. And a check of what the player *sees*: the **EMI coverage audit** (`emi-coverage.mjs`, see [below](#emi-coverage-audit-emi-coveragemjs)) asks that EMI shows how every item of ours is obtained and used. Five Reforge tools measure the pack rather than its progression: the **capacity lint** ([below](#capacity-lint-capacity-lintmjs), part of T0), the **census** ([below](#census-censusmjs)), the **cost matrix** with the cost-curve modes ([below](#cost-matrix-cost-matrixmjs)), the **line audit** ([below](#line-audit-line-auditmjs)) and the **assets audit** ([below](#assets-audit-assets-auditmjs)).
 
 ## How to run it
 
@@ -125,6 +125,7 @@ Every GTM recipe our scripts define must fit its machine's item slots and fluid 
 node tools\analysis\capacity-lint.mjs                                # exit 0 clean, 1 new or stale entries, 2 tool failure
 node tools\analysis\capacity-lint.mjs --write-snapshot <dump dir>    # rebuilds capacity_snapshot.json from a bench dump's machines.json
 node tools\analysis\capacity-lint.mjs --write-known                  # rewrites capacity_known.json (only after fixing recipes)
+node tools\analysis\capacity-lint.mjs --dump <dump dir> [--table <dir>] [--factors <solved.json>] [--top N]   # every recipe of a dump, GTM originals included, before and after the cost-curve pass
 ```
 
 - **Rules** (`lib/capacity.mjs`, with the GTM 7.5.3 sources in its header): a recipe's tier is the lowest tier whose voltage covers its EU/t. It fits if a singleblock of its type at that tier (or the next tier that exists) holds it, each fluid in one tank; the programmed circuit has its own slot. A recipe that fits only a multiblock's hatches one tier up is a warning (multiblock item slots are unbounded); one that fits nothing is an error. The type's max IO is always enforced: GTM 7.5.3 only logs "Trying to add more inputs/outputs than RecipeType can support" and keeps the ingredients, but EMI shows only the type's slots and no singleblock runs the recipe.
@@ -150,11 +151,37 @@ The cumulative base cost of the key items per era (core components, hulls, energ
 ```powershell
 node tools\analysis\cost-matrix.mjs --dump <dump dir> --out <dir>                     # writes 01_cost_matrix.csv and .md
 node tools\analysis\cost-matrix.mjs --dump <dump dir> --out <dir> --compare <old.csv>  # also prints new/old ratios per group and era
+node tools\analysis\cost-matrix.mjs --dump <dump dir> --table <dir> [--factors <solved.json>] [--out <dir>]   # what a set of cost-curve tables would produce
+node tools\analysis\cost-matrix.mjs --dump <dump dir> --solve [--table <dir>] [--out <dir>]                 # per-era factors against the curve; --out gets solved.json
 ```
+
+- **Cost curve** (RF-2A, `docs/reforge/02_cost_curve.md`): the pack's pass `server_scripts/grindless/integration/cost_curve.js` (band -300, after every recipe script) scales the consumed inputs of key-item recipes by a factor per era from `pack/kubejs/data/grindless/tables/cost_curve/<era>.json`; `lib/cost_curve.mjs` holds the one rule the pack and these modes share. `--table` applies tables to a dump before pricing, `--solve` finds the item factor per era from MV upward (settings `curve` in `cost_matrix.json`), `--factors` switches a solved set on and `--write-tables` writes it into the tables. The matrix counts a shaped recipe's ingredients per grid cell (`settings.shapedCells`).
 
 - **Method** (`lib/cost.mjs`, header): for every item and fluid, the cheapest acyclic recipe chain down to base resources (vein-drill outputs, natural fluids, free world blocks, source recipes such as gas collectors), expanded into base amounts and scored as base items plus fluid litres. A Knuth pass prices items in increasing cost, then a label-correcting pass repairs per-unit division (1 plate to 4 foil); a loop that multiplies matter cannot pump a cost down, and the run prints "non-loop improvements left" (0 means a fixed point). Every setting that changes a number (multi-output allocation, chances, catalysts, free resources, excluded recipes such as recycling and unpacking, molten metal priced as its ingot) is in `cost_matrix.json` and printed in the document.
 - **Outputs**: `docs/reforge/01_cost_matrix.csv` and `.md`; a re-run refreshes only the generated part between the `<!-- cost-matrix:begin/end -->` markers. Debug aids that write nothing: `--why <ids>` (what blocks an unreachable item) and `--trace <ids>` (the chosen chain with per-unit costs).
 - **Limits**: era-to-era ratios are more dependable than absolute scores. Absolute scores are a lower bound: a chain that multiplies matter without closing a loop (ash separation, tiny-dust splitting) is used whenever it wins, so review such recipes and exclude genuine amplifiers through `excludeRecipes` before calibrating. An item with no route to base resources is listed as unreachable, not priced.
+
+## Line audit (`line-audit.mjs`)
+
+Measures every process line of the Processing Lines charts (`tools/quests/processing-lines/pl-data-<era>.mjs`, one cluster = one line) against a dump and gives it a verdict (keep, fix, merge, remove) for Reforge Phase 3 (`docs/reforge/03_line_audit.md`). About 3 seconds, no Minecraft:
+
+```powershell
+node tools\analysis\line-audit.mjs --dump <kubejs-exported dir> --out <dir>   # writes 03_lines.csv and prints the per-era summary
+```
+
+- **Per line**: steps (longest chain of machine steps), crossings into earlier chapters and how far back they reach, end products and their consumers, a skip route (a shorter recipe outside the line that makes every end product) and duplicates. The rules are in `judge()`.
+- **Limits**: the charts may not list every line a chapter's content has; the skip route is a depth heuristic, not a price comparison. Verdicts are leads that each fix package confirms against the era docs.
+
+## Assets audit (`assets-audit.mjs`)
+
+Every texture and sound the pack ships under `grindless:`, plus the GTM textures and sounds our machines use (Reforge Phase 6, `docs/reforge/06_assets_audit.md`). About 30 seconds, no Minecraft, no npm dependencies (PNG through `node:zlib`, Ogg Vorbis decoded in pure JS):
+
+```powershell
+node tools\analysis\assets-audit.mjs [--out docs/reforge/data] [--pack pack] [--gtm-jar <gtceu.jar>] [--summary]   # writes 06_textures.csv and 06_sounds.csv
+```
+
+- **Textures**: missing, placeholder, inconsistent (opacity, colour count, light direction), recolour-only clusters and orphans. **Sounds**: events without a file, repeated files, loudness against GTM, loop seams and harsh or hissy loops. Without `--gtm-jar` the GTM rows say "unchecked".
+- **Limits**: absolute dB values carry a small scale uncertainty (no reference decoder); an orphan is judged by name, so GTM-convention covers can be false positives.
 
 ## Limits
 
