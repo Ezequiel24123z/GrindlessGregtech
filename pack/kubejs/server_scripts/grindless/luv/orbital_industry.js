@@ -4,6 +4,8 @@
   var G = global.grindless
   var B = G.orbitalIndustry
   var PIPE_RECYCLING = ['gtceu:arc_furnace/arc_normal_optical_pipe', 'gtceu:macerator/macerate_normal_optical_pipe']
+  // LD-LV3: the smelter's ZBLAN fibre is the only way to a pipe; GTM's assembler (borosilicate wire, silver foil, PTFE) skips the orbital line
+  var PIPE_GATE = ['gtceu:assembler/optical_pipe']
   var recipes = [
     { name: 'zblan_optical_pipe', type: 'microgravity_processing', circuit: 1,
       items: ['gtceu:zblan_dust'], fluids: [['gtceu:polytetrafluoroethylene', 72]],
@@ -26,6 +28,7 @@
   ]
   B.recipes = recipes
   B.pipeRecycling = PIPE_RECYCLING
+  B.pipeGate = PIPE_GATE
   // Quarter of the 100-mole formulation: exact elemental ratios with integer mB, five modest stacks.
   // A1's glass blend must disable decomposition: a ZBLAN dust denotes one cation share, not one atom.
   // 73,250 mB exceeds a single mixer's 64 B tank: use IV's GCYM Large Mixing Vessel and a large input hatch.
@@ -34,7 +37,7 @@
     fluorine: 73250, output: 25 }
 
   ServerEvents.recipes(function (event) {
-    PIPE_RECYCLING.forEach(function (id) { event.remove({ id: id }) })
+    PIPE_RECYCLING.concat(PIPE_GATE).forEach(function (id) { event.remove({ id: id }) })
     recipes.forEach(function (r) {
       var builder = event.recipes.gtceu[r.type]('grindless:' + r.name)
         .circuit(r.circuit).itemInputs(r.items).itemOutputs(r.output).EUt(r.eut).duration(r.duration)

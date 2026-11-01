@@ -300,7 +300,7 @@ export default {
           kind: 'product', role: 'infrastructure', from: ['grower'], sub: 'The detector\'s mirrors, on Ganymede', pending: { B9: { sub: 'Stored for now' } },
         }),
         n('cpu2', 7.25, -0.75, I('gtceu:crystal_cpu'), 'Crystal CPU', {
-          kind: 'product', from: [via('chip', 'gtceu:engraved_crystal_chip')], sub: 'EBF with an emerald plate, then the laser engraver',
+          kind: 'product', from: [via('chip', 'gtceu:engraved_crystal_chip')], keepShort: 'the grower folds GTM\'s autoclave chip step in orbit; GTM\'s route stays because IV crystal processors need chips before LuV, LD-LV3', sub: 'EBF with an emerald plate, then the laser engraver',
         }),
       ],
     },
@@ -364,7 +364,7 @@ export default {
         }),
         n('fe', 12, -1.75, I('gtceu:iron_dust'), 'Iron', { kind: 'by', from: ['aproc'], end: 'network', sub: 'With the cobalt: to the network' }),
         n('ni', 12, -0.75, I('gtceu:nickel_dust'), 'Nickel', { kind: 'by', from: ['aproc'], end: 'tape, network', sub: 'The coated conductor line, or the network' }),
-        n('ttd', 12, 0.75, I('gtceu:tetrataenite_dust'), 'Tetrataenite', { kind: 'product', from: ['aproc'], sub: 'Circuit 2 splits it out: rods for the magnet works' }),
+        n('ttd', 12, 0.75, I('gtceu:tetrataenite_dust'), 'Tetrataenite', { kind: 'product', from: ['aproc'], keepShort: 'three real steps (drill, macerator, processor split); the magnetic split is the processor\'s circuit 2, not a separate machine, and a fourth step would be padding', sub: 'Circuit 2 splits it out: rods for the magnet works' }),
         n('conc', 12, 2.25, I('grindless:asteroid_pgm_concentrate'), 'Asteroid PGM Concentrate', { from: ['aproc'] }),
         n('pplant', 14.5, 2.25, M('gtceu:platinum_plant'), 'Platinum Plant, Mode 4', {
           kind: 'ours', from: ['conc'], sub: 'Circuit 4',

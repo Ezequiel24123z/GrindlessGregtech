@@ -123,7 +123,7 @@ test('all six design routes retain exact quantities, circuits, costs, dimensions
 });
 test('pipe cut removes datapack recipes and requests late material-info clearing without rebuilding it', () => {
   const { recipes, removed } = harness();
-  assert.deepEqual(removed, ['gtceu:arc_furnace/arc_normal_optical_pipe', 'gtceu:macerator/macerate_normal_optical_pipe']);
+  assert.deepEqual(removed, ['gtceu:arc_furnace/arc_normal_optical_pipe', 'gtceu:macerator/macerate_normal_optical_pipe', 'gtceu:assembler/optical_pipe']);
   const pipe = recipes.find(r => r.id === 'grindless:zblan_optical_pipe');
   assert.deepEqual(calls(pipe, 'removePreviousMaterialInfo'), [[]]);
   assert.equal(pipe.calls.addMaterialInfo, undefined);
