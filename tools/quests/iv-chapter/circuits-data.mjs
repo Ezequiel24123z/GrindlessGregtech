@@ -75,7 +75,7 @@ export const QUESTS = [
   },
   {
     key: "IVSOC", kind: "wafer", title: "SoC Wafer", icon: "gtceu:soc_wafer",
-    deps: ["IVNB", "IVLE"], x: 4, y: 1.5,
+    deps: ["IVNB"], x: 4, y: 1.5,
     teach: {
       for: "A naquadah wafer, engraved, becomes the &6SoC Wafer&r and the cutter turns it into &6SoCs&r.",
       needs: "The IV laser engraver and a cleanroom.",
@@ -90,7 +90,7 @@ export const QUESTS = [
     key: "IVQB", kind: "wafer", title: "QBit CPU Wafer", icon: "gtceu:qbit_cpu_wafer",
     deps: ["IVSOC"], x: 6, y: 1.5,
     teach: {
-      for: "The &6QBit CPU Wafer&r is a CPU wafer treated with radon, and its chips are the heart of the quantum assembly.",
+      for: "The &6QBit CPU Wafer&r is a CPU wafer treated with radon, and its chips go into every quantum assembly.",
       needs: "Radon from the air line and a chemical reactor that can take it.",
       unlocks: "The quantum assembly and the supercomputer.",
       automate: "Radon by pipe, wafers by ME. Keep a spare tank of radon.",
