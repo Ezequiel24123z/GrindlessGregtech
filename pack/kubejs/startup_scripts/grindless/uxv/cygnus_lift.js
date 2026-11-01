@@ -49,7 +49,7 @@
     },
     {
       name: 'plasma_mass_filter', machine: 'gtceu:plasma_mass_filter', type: 'plasma_mass_filtering', dataKey: 'grindless_plasma_mass_filtering',
-      lang: 'Plasma Mass Filter', maxIO: { itemsIn: 1, itemsOut: 1, fluidsIn: 1, fluidsOut: 4 }, casing: HPC, texture: HPC_TEXTURE,
+      lang: 'Plasma Mass Filter', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 4 }, casing: HPC, texture: HPC_TEXTURE,
       width: 9, height: 9, depth: 15,
       pal: { F: HPC, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing' },
       parts: function () {
