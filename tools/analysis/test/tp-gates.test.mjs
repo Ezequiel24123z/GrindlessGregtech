@@ -19,9 +19,7 @@ const comps = (tier, ns = 'gtceu') => ['electric_motor', 'robot_arm', 'sensor'].
 const circ = (n = 4) => it('#gtceu:circuits/uev', n);
 const good = () => rec({ items: [...comps('uev'), circ()], eut: vaOf(10) });
 
-test('1:1 retired conversions are exempt from every gate; our uev components are components, not singles', () => {
-  const conv = rec({ id: 'grindless:crafting/retired/uev_sensor', form: 'crafting', outputs: ['gtceu:uev_sensor'], items: [it('grindless:uev_sensor')] });
-  assert.deepEqual(evaluate(facts([conv]), cfg), []);
+test('our uev components are components, not singles', () => {
   const own = rec({ id: 'grindless:assembler/uev_sensor', form: 'assembler', outputs: ['gtceu:uev_sensor'], items: [it('x:a')] });
   assert.ok(!evaluate(facts([own]), cfg).some((f) => f.code === 'S-FORM'));
 });
@@ -31,9 +29,8 @@ test('VA is floor(V * 15 / 16) with V = 8 * 4^t', () => {
   assert.equal(vaOf(13), 536870912 * 15 / 16);
 });
 
-test('the nine families in both namespaces; grindless only for uev, uiv and uxv', () => {
+test('the nine families in the gtceu namespace', () => {
   assert.deepEqual(tierComponent('gtceu:uhv_fluid_regulator'), { tier: 9, family: 'fluid_regulator' });
-  assert.deepEqual(tierComponent('grindless:uev_robot_arm'), { tier: 10, family: 'robot_arm' });
   assert.deepEqual(tierComponent('gtceu:max_sensor'), { tier: 14, family: 'sensor' });
   assert.equal(tierComponent('grindless:uv_robot_arm'), null);
   assert.equal(tierComponent('gtceu:uev_voltage_coil'), null);
@@ -44,8 +41,8 @@ test('a controller that meets every gate is clean', () => assert.deepEqual(tp(go
 test('T-COMP: no tier component below N, in both namespaces; other tiered items are not checked', () => {
   assert.deepEqual(tp({ ...good(), items: [...good().items, it('gtceu:uhv_emitter')] }), ['T-COMP']);
   const uiv = (item) => ({ ...good(), file: 'pack/kubejs/server_scripts/grindless/uiv/a.js', items: [...comps('uiv'), it('#gtceu:circuits/uiv', 4), it(item)], eut: vaOf(11) });
-  assert.deepEqual(tp(uiv('grindless:uev_emitter')), ['T-COMP'], 'the retired grindless: ids are checked like gtceu: ones');
-  assert.deepEqual(tp(uiv('grindless:uiv_emitter')), []);
+  assert.deepEqual(tp(uiv('gtceu:uev_emitter')), ['T-COMP']);
+  assert.deepEqual(tp(uiv('gtceu:uiv_emitter')), []);
   assert.deepEqual(tp({ ...good(), items: [...good().items, it('gtceu:uv_voltage_coil'), it('gtceu:uv_battery')] }), []);
 });
 
@@ -99,7 +96,6 @@ test('T-VOLT: EU/t >= VA[N]; recipes without EU/t (crafting) are skipped', () =>
 test('T-VOLT: tier components, hulls and the 2 A energy hatches only need VA[N-1]; the bootstrap list too', () => {
   const comp = (eut, out = 'gtceu:uev_emitter') => rec({ outputs: [out], items: [it('gtceu:uhv_sensor'), circ()], eut, form: 'assembler' });
   assert.deepEqual(tp(comp(vaOf(9))), []);
-  assert.deepEqual(tp(comp(vaOf(9), 'grindless:uev_emitter')), []);
   assert.deepEqual(tp(comp(vaOf(9) - 1)), ['T-VOLT']);
   const hull = rec({ outputs: ['gtceu:uev_machine_hull'], items: [], eut: vaOf(9), form: 'assembler' });
   assert.deepEqual(tp(hull), []);
@@ -118,18 +114,6 @@ test('T-VOLT: tier components, hulls and the 2 A energy hatches only need VA[N-1
 
 test('the gates start at UHV: a UV recipe is not held to them', () => {
   assert.deepEqual(tp({ ...good(), file: 'pack/kubejs/server_scripts/grindless/uv/a.js', items: [it('gtceu:luv_motor')], eut: 1 }), []);
-});
-
-test('a tier component keeps its baseline key when grindless:uev_x becomes gtceu:uev_x', () => {
-  const r = rec({ id: 'grindless:assembler/uev_sensor', outputs: ['grindless:uev_sensor'], items: [it('gtceu:uv_sensor')], eut: 1, form: 'assembler' });
-  const before = evaluate(facts([r]), cfg).filter((f) => f.code.startsWith('T-'));
-  const after = evaluate(facts([{ ...r, outputs: ['gtceu:uev_sensor'] }]), cfg).filter((f) => f.code.startsWith('T-'));
-  assert.deepEqual(before.map((f) => f.code), after.map((f) => f.code));
-  const baseline = Object.fromEntries([...new Set(before.map((f) => f.code))].map((c) => [`${r.id}|grindless:uev_sensor`, [c]]));
-  const merged = { [`${r.id}|grindless:uev_sensor`]: [...new Set(before.map((f) => f.code))] };
-  assert.deepEqual(compareBaseline(after, merged), { fresh: [], stale: [] });
-  assert.deepEqual(compareBaseline(before, merged), { fresh: [], stale: [] });
-  assert.ok(baseline);
 });
 
 test('item counts: crafting counts pattern cells per key, machine recipes the content count', () => {

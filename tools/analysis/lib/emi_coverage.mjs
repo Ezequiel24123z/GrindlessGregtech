@@ -292,7 +292,6 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
   for (const f of registry.fluids.values()) audited.push({ key: FLUID + f.id, kind: 'fluid', file: f.file, material: f.material || null });
 
   const results = [];
-  const legacy = [];
   const hiddenOurs = [];
   const missingInDump = [];
   for (const a of audited) {
@@ -307,8 +306,7 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
       continue;
     }
     if (indexHidden.has(k)) {
-      const conv = (usedBy.get(k) || []).map((r) => r.id);
-      legacy.push({ key: k, conversions: conv });
+      hiddenOurs.push({ key: k, why: 'hidden from the EMI index (c:hidden_from_recipe_viewers)' });
       continue;
     }
     const made = madeBy.get(k) || [];
@@ -453,7 +451,7 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
       audited: results.length, items: results.filter((r) => r.kind === 'item').length, machines: results.filter((r) => r.kind === 'machine').length,
       fluids: results.filter((r) => r.kind === 'fluid').length, recipes: recipes.length, pages: emi.pages.length, invisible: invisible.length,
     },
-    results, gaps, legacy, hiddenOurs, missingInDump, problems, previewWarnings, derivedChecks, processes, droppedRoutes, pendingRoutes,
+    results, gaps, hiddenOurs, missingInDump, problems, previewWarnings, derivedChecks, processes, droppedRoutes, pendingRoutes,
     // the item tags EMI disables: the native fixture exempts every machine in them (any namespace), not only ours
     disabledTags: [...new Set(emi.disabled.filter((d) => d.tag && d.kind !== 'fluid').map((d) => d.tag))].sort(),
     disabledItems: [...disabled].filter((k) => !k.startsWith(FLUID)).sort(),
@@ -494,9 +492,7 @@ export function renderCoverageText(res) {
     for (const r of res.invisibleRoutes) L.push(`  · ${r.key}: ${r.routes.map((x) => x.id + (x.dropped ? ' (disabled stack)' : ' (' + x.type + ')')).join(', ')}`);
   }
   if (res.viaPagesOnly.length) L.push(`Shown only through an info page: ${res.viaPagesOnly.join(', ')}`);
-  L.push(`Legacy items (hidden from EMI's index, kept for old saves): ${res.legacy.length}`);
-  for (const l of res.legacy) L.push(`  · ${l.key}: conversion ${l.conversions.join(', ') || 'NONE'}`);
-  if (res.hiddenOurs.length) L.push(`Ours, disabled until their era: ${res.hiddenOurs.map((h) => h.key).join(', ')}`);
+  if (res.hiddenOurs.length) L.push(`Ours, hidden from EMI until their era (or never): ${res.hiddenOurs.map((h) => h.key).join(', ')}`);
   if (res.missingInDump.length) L.push(`Registered by the scripts but not in the dump (older dump?): ${res.missingInDump.join(', ')}`);
   if (res.derivedChecks.length) L.push(`Derived routes found in the dump: ${res.derivedChecks.map((d) => d.id + ' ' + d.role + ' ' + d.found).join(', ')}`);
   if (res.unknownTypes.length) L.push(`Recipe types of unknown EMI visibility (counted as shown): ${res.unknownTypes.map((t) => t.type + ' ' + t.n).join(', ')}`);
@@ -515,8 +511,7 @@ export function renderExpectations(exp) {
   exp.items.forEach((it, i) => L.push('    ' + JSON.stringify(it) + (i < exp.items.length - 1 ? ',' : '')));
   L.push('  ],');
   L.push(`  "pages": ${JSON.stringify(exp.pages)},`);
-  L.push(`  "legacy": ${JSON.stringify(exp.legacy)},`);
-  L.push(`  "hidden": ${JSON.stringify(exp.hidden)},`);
+  L.push(`  "hidden":  ${JSON.stringify(exp.hidden)},`);
   L.push(`  "disabledTags": ${JSON.stringify(exp.disabledTags)},`);
   L.push('  "known": {');
   const kk = Object.keys(exp.known);
@@ -543,7 +538,6 @@ export function fixtureExpectations(res) {
       used: cats(r.used, declared(r, 'use')),
     })).sort((a, b) => (a.kind + a.id < b.kind + b.id ? -1 : 1)),
     pages: [...new Set(res.results.flatMap((r) => [...r.made, ...r.used]).filter((m) => m.source === 'page').map((m) => m.id))].sort(),
-    legacy: res.legacy.map((l) => ({ id: l.key, conversions: l.conversions })),
     hidden: res.hiddenOurs.map((h) => h.key),
     disabledTags: res.disabledTags || [],
     known: knownGaps(res.runtimeKnown),

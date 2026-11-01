@@ -56,7 +56,7 @@ test('a registered item no recipe makes is uncraftable unless the world gives it
   assert.ok(!ok.findings.some((f) => f.kind === 'uncraftable' && f.id.endsWith('grindless:orphan')));
 });
 
-test('a retired item (hidden from the index, never made, only converted 1:1) is not hidden_with_recipes', () => {
+test('an index-hidden item that recipes make or use is reported as hidden_with_recipes', () => {
   const run = (id) => auditProcesses({
     dump: mkDump({
       recipes: [gt(id, 'minecraft:crafting_shapeless', { ins: [gi('grindless:old')], outs: [gi('gtceu:new')] })],
@@ -65,7 +65,6 @@ test('a retired item (hidden from the index, never made, only converted 1:1) is 
     }),
     registry: reg({ items: ['grindless:old'] }),
   }).findings.map((f) => f.key);
-  assert.ok(!run('grindless:crafting/retired/old').includes('hidden_with_recipes|grindless:old'));
   assert.ok(run('grindless:assembler/old').includes('hidden_with_recipes|grindless:old'));
 });
 
