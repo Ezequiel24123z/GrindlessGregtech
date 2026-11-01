@@ -1,4 +1,4 @@
-// priority: -5644
+// priority: -5629
 // -----------------------------------------------------------------------------------------------
 // MAX+ machines 4 to 6 at 30 Doradus (docs/eras/maxplus.md "Machines" 4-6; package XP-B1): three multiblocks and their recipe types. The casings and every
 // item they use are XP-F1's (maxplus/foundation.js). The recipes, with lines P6, P7, P8, P17, P20 and P21's older-machine rows, are in
