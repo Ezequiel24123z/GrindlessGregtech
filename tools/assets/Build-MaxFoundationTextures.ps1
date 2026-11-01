@@ -281,7 +281,24 @@ foreach ($rel in $written) {
 if ($OnlySet.Count -eq 0) {
     foreach ($b in $Blocks) { if ($src -notmatch "grindless:block/max/${b}'") { Add-Problem $b 'block texture not referenced by foundation.js' } }
     $regBlocks = [regex]::Match($src, '(?s)const BLOCKS = \{(.*?)\n  \}').Groups[1].Value
-    foreach ($m in [regex]::Matches($regBlocks, '(?m)^\s+([a-z0-9_]+)\s*:')) { if ($Blocks -notcontains $m.Groups[1].Value) { Add-Problem $m.Groups[1].Value 'registered by foundation.js but not drawn here' } }
+    # casings a named per-machine generator draws; anything else registered here must be drawn by this script
+    $Elsewhere = @{
+        driver_ring_casing = 'Build-MaxSynchroniserTextures.ps1'
+        clamp_coil_casing = 'Build-MaxFluxClampTextures.ps1'
+        reclamation_bay_casing = 'Build-MaxReclamationTextures.ps1'
+        test_mass_enclosure_casing = 'Build-MaxHorizonInterferometerTextures.ps1'
+        laser_link_casing = 'Build-MaxHorizonInterferometerTextures.ps1'
+    }
+    foreach ($m in [regex]::Matches($regBlocks, '(?m)^\s+([a-z0-9_]+)\s*:')) {
+        $n = $m.Groups[1].Value
+        if ($Blocks -contains $n) { continue }
+        if ($Elsewhere.ContainsKey($n)) {
+            $gen = Join-Path $PSScriptRoot $Elsewhere[$n]
+            if (-not (Test-Path $gen) -or -not (Select-String -Path $gen -Pattern "${n}\.png" -Quiet)) { Add-Problem $n "expected from $($Elsewhere[$n]), which does not draw it" }
+            elseif (-not (Test-Path (Join-Path $OutRoot "block\max\$n.png"))) { Add-Problem $n "drawn by $($Elsewhere[$n]) but the PNG is missing" }
+        }
+        else { Add-Problem $n 'registered by foundation.js but not drawn here' }
+    }
 }
 if ($problems -gt 0) { throw "$problems problem(s) in the texture checks (see the warnings above)" }
 Write-Host "wrote $($written.Count) textures to $OutRoot"
