@@ -60,8 +60,8 @@
   function vesselCell(x, y, z) {
     var dx = x - 7
     var dz = z - 7
-    if (y === 0) return (z === 0 || z === 14) && x >= 5 && x <= 9 ? 'X' : 'F'
-    if (y === 10) return 'F'
+    if (y === 0) return (z === 0 || z === 14) && x >= 5 && x <= 9 ? 'X' : 'B'
+    if (y === 10) return 'B'
     var w = wallOf(x, y, z, 15, 15, 4, 6)
     if (w !== null) return w
     if (dx === 0 && dz === 0) return 'C'
@@ -73,8 +73,8 @@
     var dx = x - 6
     var dz = z - 6
     var cheb = Math.max(Math.abs(dx), Math.abs(dz))
-    if (y === 0) return (z === 0 || z === 12) && x >= 4 && x <= 8 ? 'X' : 'F'
-    if (y === 12) return 'F'
+    if (y === 0) return (z === 0 || z === 12) && x >= 4 && x <= 8 ? 'X' : 'B'
+    if (y === 12) return 'B'
     var w = wallOf(x, y, z, 13, 13, 5, 8)
     if (w !== null) return w
     if (y === 3 && cheb <= 4) return 'A'
