@@ -9,7 +9,15 @@
 	id: "3F00026F4534FBA3"
 	order_index: 9
 	progression_mode: "flexible"
-	quest_links: [ ]
+	quest_links: [
+		{
+			id: "3D0111E7FD74B8D7"
+			linked_quest: "3BBE3CEF2848F99D"
+			shape: "rsquare"
+			x: 51.0d
+			y: 24.75d
+		}
+	]
 	quests: [
 		{
 			icon: "grindless:heavy_curium_oxide"
@@ -1794,7 +1802,7 @@
 			y: 22.5d
 		}
 		{
-			dependencies: ["7ADA360596A0A025"]
+			dependencies: ["7ADA360596A0A025", "3BBE3CEF2848F99D"]
 			icon: "grindless:flare_shield_panel"
 			id: "5EA335F4F3251D30"
 			size: 1.25d
@@ -2353,17 +2361,70 @@
 			y: 40.75d
 		}
 		{
-			icon: "gtceu:diaminoresorcinol_dust"
-			id: "7101933CF762F055"
+			icon: "gtceu:benzene_bucket"
+			id: "31BB64428FA48D73"
 			shape: "rsquare"
 			size: 1.0d
+			subtitle: "The HV reformer's; chlorinated in a chemical reactor"
+			tasks: [
+				{ id: "77AC74CE7C86D183", item: "gtceu:benzene_bucket", optional_task: true, type: "item" }
+				{ id: "14A838E721C29064", type: "checkmark" }
+			]
+			title: "Benzene"
+			x: 32.25d
+			y: 37.75d
+		}
+		{
+			dependencies: ["31BB64428FA48D73"]
+			icon: "gtceu:trichlorobenzene_bucket"
+			id: "1D114DF364F87F82"
+			size: 1.25d
+			tasks: [
+				{ id: "77E47DB5EF27EEA0", item: "gtceu:trichlorobenzene_bucket", optional_task: true, type: "item" }
+				{ id: "3F8F2D7A7E462DE4", type: "checkmark" }
+			]
+			title: "Trichlorobenzene"
+			x: 34.75d
+			y: 37.75d
+		}
+		{
+			dependencies: ["1D114DF364F87F82"]
+			icon: "gtceu:dinitrotrichlorobenzene_bucket"
+			id: "5109A677DD85453F"
+			size: 1.25d
+			tasks: [
+				{ id: "5575434A105208F6", item: "gtceu:dinitrotrichlorobenzene_bucket", optional_task: true, type: "item" }
+				{ id: "33F3ADC09218D4E2", type: "checkmark" }
+			]
+			title: "Dinitrotrichlorobenzene"
+			x: 37.25d
+			y: 37.75d
+		}
+		{
+			dependencies: ["5109A677DD85453F"]
+			icon: "gtceu:chlorodinitroresorcinol_dust"
+			id: "579E97F1B7C9EE13"
+			size: 1.25d
+			tasks: [
+				{ id: "5D6F1AE432706C9B", item: "gtceu:chlorodinitroresorcinol_dust", optional_task: true, type: "item" }
+				{ id: "1F33DD5434D11DD9", type: "checkmark" }
+			]
+			title: "Chlorodinitroresorcinol"
+			x: 39.75d
+			y: 37.75d
+		}
+		{
+			dependencies: ["579E97F1B7C9EE13"]
+			icon: "gtceu:diaminoresorcinol_dust"
+			id: "7101933CF762F055"
+			size: 1.25d
 			subtitle: "With terephthalic acid"
 			tasks: [
 				{ id: "39F47C6A703D06B1", item: "gtceu:diaminoresorcinol_dust", optional_task: true, type: "item" }
 				{ id: "5613F3BD895AD7E1", type: "checkmark" }
 			]
 			title: "Diaminoresorcinol"
-			x: 24.75d
+			x: 42.25d
 			y: 37.75d
 		}
 		{
@@ -2376,7 +2437,7 @@
 				{ id: "7B93B3248914340D", type: "checkmark" }
 			]
 			title: "PBO Dope"
-			x: 27.25d
+			x: 44.75d
 			y: 37.75d
 		}
 		{
@@ -2391,7 +2452,7 @@
 				{ id: "7DBF993315E32AB4", type: "checkmark" }
 			]
 			title: "PBO Plant"
-			x: 29.75d
+			x: 47.25d
 			y: 37.75d
 		}
 		{
@@ -2404,7 +2465,7 @@
 				{ id: "7C16322A57FF29AF", type: "checkmark" }
 			]
 			title: "PBO Fibre"
-			x: 32.25d
+			x: 49.75d
 			y: 37.75d
 		}
 		{
@@ -2418,7 +2479,7 @@
 				{ id: "10FB66887BF73E76", type: "checkmark" }
 			]
 			title: "2-Ethylhexenal"
-			x: 24.75d
+			x: 32.25d
 			y: 39.75d
 		}
 		{
@@ -2431,7 +2492,7 @@
 				{ id: "5B534F67A46DDAAB", type: "checkmark" }
 			]
 			title: "2-Ethylhexanol"
-			x: 27.25d
+			x: 34.75d
 			y: 39.75d
 		}
 		{
@@ -2444,7 +2505,7 @@
 				{ id: "1FF72AA1E05A19E6", type: "checkmark" }
 			]
 			title: "HDEHP"
-			x: 29.75d
+			x: 37.25d
 			y: 39.75d
 		}
 		{
@@ -2457,7 +2518,7 @@
 				{ id: "736F1E6CE1F114EF", type: "checkmark" }
 			]
 			title: "HDEHP Solvent"
-			x: 32.25d
+			x: 39.75d
 			y: 39.75d
 		}
 		{
@@ -2470,21 +2531,61 @@
 				{ id: "7815D45A4F06376A", type: "checkmark" }
 			]
 			title: "Spent Solvent"
-			x: 32.25d
+			x: 39.75d
 			y: 41.25d
 		}
 		{
-			icon: "gtceu:uhtc_blend_dust"
-			id: "5BBBDD6A5CE8A626"
+			icon: "gtca:red_zircon_dust"
+			id: "351B0F947F2E48B9"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Zirconium diboride and carbon"
+			subtitle: "The End's zircon"
+			tasks: [
+				{ id: "5584F8972BC27DAC", item: "gtca:red_zircon_dust", optional_task: true, type: "item" }
+				{ id: "1CFA7FEAC0C2D3F2", type: "checkmark" }
+			]
+			title: "Red Zircon"
+			x: 24.75d
+			y: 42.75d
+		}
+		{
+			dependencies: ["351B0F947F2E48B9"]
+			icon: "gtceu:zirconia_dust"
+			id: "7827BDD25999D2FA"
+			size: 1.25d
+			tasks: [
+				{ id: "1F8C004BEB8A19ED", item: "gtceu:zirconia_dust", optional_task: true, type: "item" }
+				{ id: "559438D77ECED89B", type: "checkmark" }
+			]
+			title: "Zirconia"
+			x: 27.25d
+			y: 42.75d
+		}
+		{
+			dependencies: ["7827BDD25999D2FA"]
+			icon: "gtceu:zirconium_diboride_dust"
+			id: "3AC975C50CDAE89E"
+			size: 1.25d
+			tasks: [
+				{ id: "199201651CDFFA83", item: "gtceu:zirconium_diboride_dust", optional_task: true, type: "item" }
+				{ id: "1D483BB4EF2E9B9D", type: "checkmark" }
+			]
+			title: "Zirconium Diboride"
+			x: 29.75d
+			y: 42.75d
+		}
+		{
+			dependencies: ["3AC975C50CDAE89E"]
+			icon: "gtceu:uhtc_blend_dust"
+			id: "5BBBDD6A5CE8A626"
+			size: 1.25d
+			subtitle: "With silicon carbide"
 			tasks: [
 				{ id: "71EC28B541113564", item: "gtceu:uhtc_blend_dust", optional_task: true, type: "item" }
 				{ id: "5AF45D8FA79DA9C1", type: "checkmark" }
 			]
 			title: "UHTC Blend"
-			x: 24.75d
+			x: 32.25d
 			y: 42.75d
 		}
 		{
@@ -2499,7 +2600,7 @@
 				{ id: "5DBEAFBFC7D2C9FA", type: "checkmark" }
 			]
 			title: "Spark Plasma Sinterer"
-			x: 27.25d
+			x: 34.75d
 			y: 42.75d
 		}
 		{
@@ -2512,7 +2613,7 @@
 				{ id: "1FDC079D15E92575", type: "checkmark" }
 			]
 			title: "UHTC Tile"
-			x: 29.75d
+			x: 37.25d
 			y: 42.75d
 		}
 		{
@@ -2527,7 +2628,7 @@
 				{ id: "18143577CC51D01D", type: "checkmark" }
 			]
 			title: "Spark Plasma Sinterer"
-			x: 32.25d
+			x: 39.75d
 			y: 42.75d
 		}
 		{
@@ -2540,7 +2641,7 @@
 				{ id: "3D1AC682AE8983C0", type: "checkmark" }
 			]
 			title: "UHTC Nozzle"
-			x: 34.75d
+			x: 42.25d
 			y: 42.75d
 		}
 		{
@@ -2555,7 +2656,7 @@
 				{ id: "1455F0B2AA4AE84C", type: "checkmark" }
 			]
 			title: "Thruster Works"
-			x: 37.25d
+			x: 44.75d
 			y: 42.75d
 		}
 		{
@@ -2568,7 +2669,7 @@
 				{ id: "7198143B0DA0CF91", type: "checkmark" }
 			]
 			title: "ICAN Rocket Motor"
-			x: 39.75d
+			x: 47.25d
 			y: 42.75d
 		}
 		{
@@ -2582,7 +2683,7 @@
 				{ id: "12A2A8A127082849", type: "checkmark" }
 			]
 			title: "ICAN Pellet"
-			x: 34.75d
+			x: 42.25d
 			y: 46.75d
 		}
 		{
@@ -2596,7 +2697,7 @@
 				{ id: "366FADE34B71BBC3", type: "checkmark" }
 			]
 			title: "SiC Power Module"
-			x: 34.75d
+			x: 42.25d
 			y: 45.25d
 		}
 		{
@@ -2610,7 +2711,7 @@
 				{ id: "1742092490607626", type: "checkmark" }
 			]
 			title: "Geo-Assembled Stage"
-			x: 37.25d
+			x: 44.75d
 			y: 44.75d
 		}
 		{
@@ -2623,7 +2724,7 @@
 				{ id: "12C2D52B05CA67B1", type: "checkmark" }
 			]
 			title: "Magnesium Target"
-			x: 44.0d
+			x: 54.0d
 			y: 37.75d
 		}
 		{
@@ -2636,7 +2737,7 @@
 				{ id: "5B5038E3A5931B00", type: "checkmark" }
 			]
 			title: "Sodium-22 Target"
-			x: 46.5d
+			x: 56.5d
 			y: 37.75d
 		}
 		{
@@ -2649,7 +2750,7 @@
 				{ id: "5DE16793342576C4", type: "checkmark" }
 			]
 			title: "Moderated Source"
-			x: 49.0d
+			x: 59.0d
 			y: 37.75d
 		}
 		{
@@ -2664,7 +2765,7 @@
 				{ id: "3EA3331AAFCECB61", type: "checkmark" }
 			]
 			title: "Positron Accumulator"
-			x: 51.5d
+			x: 61.5d
 			y: 37.75d
 		}
 		{
@@ -2677,7 +2778,7 @@
 				{ id: "350DB7DF88CF1272", type: "checkmark" }
 			]
 			title: "Positron Cartridge"
-			x: 54.0d
+			x: 64.0d
 			y: 37.75d
 		}
 		{
@@ -2690,7 +2791,7 @@
 				{ id: "339EDE015B28E908", type: "checkmark" }
 			]
 			title: "Antihydrogen Cartridge"
-			x: 56.5d
+			x: 66.5d
 			y: 37.75d
 		}
 		{
@@ -2703,7 +2804,7 @@
 				{ id: "14F445C15A03F7A4", type: "checkmark" }
 			]
 			title: "Spent Source"
-			x: 51.5d
+			x: 61.5d
 			y: 39.25d
 		}
 		{
@@ -2716,7 +2817,7 @@
 				{ id: "1BC76BC3D1EC3B88", type: "checkmark" }
 			]
 			title: "SiC Mirror Blank"
-			x: 44.0d
+			x: 54.0d
 			y: 40.75d
 		}
 		{
@@ -2729,7 +2830,7 @@
 				{ id: "34E190B546998AF9", type: "checkmark" }
 			]
 			title: "NbN-Coated Plate"
-			x: 46.5d
+			x: 56.5d
 			y: 40.75d
 		}
 		{
@@ -2742,7 +2843,7 @@
 				{ id: "7C0CFD458F814B42", type: "checkmark" }
 			]
 			title: "Cavity Stack"
-			x: 49.0d
+			x: 59.0d
 			y: 40.75d
 		}
 		{
@@ -2757,7 +2858,7 @@
 				{ id: "5F8B3211E0BAD97C", type: "checkmark" }
 			]
 			title: "Casimir Array"
-			x: 51.5d
+			x: 61.5d
 			y: 40.75d
 		}
 		{
@@ -2770,7 +2871,7 @@
 				{ id: "5E5C52F26571C960", type: "checkmark" }
 			]
 			title: "Exotic Matter Cell"
-			x: 54.0d
+			x: 64.0d
 			y: 40.75d
 		}
 		{
@@ -2785,7 +2886,7 @@
 				{ id: "14E29A2B0546067E", type: "checkmark" }
 			]
 			title: "Warp Gate"
-			x: 56.5d
+			x: 66.5d
 			y: 40.75d
 		}
 		{
@@ -2799,7 +2900,7 @@
 				{ id: "5C0225C5E60BB06A", type: "checkmark" }
 			]
 			title: "Nuclear Clock"
-			x: 54.0d
+			x: 64.0d
 			y: 43.0d
 		}
 		{
@@ -2813,7 +2914,7 @@
 				{ id: "5965DC57803FE933", type: "checkmark" }
 			]
 			title: "Organoid Processor"
-			x: 56.5d
+			x: 66.5d
 			y: 43.0d
 		}
 		{
@@ -2826,7 +2927,7 @@
 				{ id: "3C2F2F99C9E32395", type: "checkmark" }
 			]
 			title: "Proxima Gate Seed"
-			x: 59.0d
+			x: 69.0d
 			y: 40.75d
 		}
 	]

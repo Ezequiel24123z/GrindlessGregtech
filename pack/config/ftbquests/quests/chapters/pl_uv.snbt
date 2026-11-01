@@ -21,21 +21,21 @@
 			id: "3BB8A4D52B7B7A08"
 			linked_quest: "5B7917A2F756FF8C"
 			shape: "rsquare"
-			x: 15.75d
+			x: 23.25d
 			y: 18.25d
 		}
 		{
 			id: "3843CBD513C776D5"
 			linked_quest: "5079D5197787258F"
 			shape: "rsquare"
-			x: 25.0d
+			x: 32.5d
 			y: 10.0d
 		}
 		{
 			id: "36B5E317B1A3AD9F"
 			linked_quest: "58DAD9867F70CBC7"
 			shape: "rsquare"
-			x: 25.0d
+			x: 32.5d
 			y: 11.5d
 		}
 		{
@@ -65,6 +65,20 @@
 			shape: "rsquare"
 			x: 57.0d
 			y: 52.5d
+		}
+		{
+			id: "73AB08E0E588FA8B"
+			linked_quest: "1C3ABC190214A62A"
+			shape: "rsquare"
+			x: 37.5d
+			y: 39.0d
+		}
+		{
+			id: "17122ED0F46AB8D9"
+			linked_quest: "10D7DA8F16132672"
+			shape: "rsquare"
+			x: 38.75d
+			y: 42.5d
 		}
 		{
 			id: "7C4D24990F51D7F7"
@@ -426,6 +440,92 @@
 			y: 2.25d
 		}
 		{
+			icon: "grindless:near_net_probe_frame"
+			id: "17C9BE08A1CE7B15"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the Starshot printers"
+			tasks: [
+				{ id: "5F23B1B734FE1900", item: "grindless:near_net_probe_frame", optional_task: true, type: "item" }
+				{ id: "7159F921ACB298FD", type: "checkmark" }
+			]
+			title: "Near-Net Probe Frame"
+			x: 0.75d
+			y: 12.5d
+		}
+		{
+			dependencies: ["17C9BE08A1CE7B15"]
+			description: ["Presses the frame in argon."]
+			icon: "gtceu:powder_bed_printer"
+			id: "103F73A467107300"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5B1CA7A7EB84529E", item: "gtceu:powder_bed_printer", optional_task: true, type: "item" }
+				{ id: "747B4826C9A56D0B", type: "checkmark" }
+			]
+			title: "Powder Bed Printer"
+			x: 0.75d
+			y: 14.0d
+		}
+		{
+			dependencies: ["103F73A467107300"]
+			icon: "grindless:printed_probe_frame"
+			id: "380FC29259361C3E"
+			size: 1.25d
+			subtitle: "Four go into the bay too"
+			tasks: [
+				{ id: "759967E0CE6EEEE2", item: "grindless:printed_probe_frame", optional_task: true, type: "item" }
+				{ id: "34BBFFCA727D0CDB", type: "checkmark" }
+			]
+			title: "Printed Probe Frame"
+			x: 3.25d
+			y: 12.5d
+		}
+		{
+			icon: "grindless:gphs_module"
+			id: "3A49FEC6555DDB8A"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the Starshot heat sources"
+			tasks: [
+				{ id: "3FDB6986B6D502C5", item: "grindless:gphs_module", optional_task: true, type: "item" }
+				{ id: "11A62E674AFE9AFC", type: "checkmark" }
+			]
+			title: "GPHS Module"
+			x: 3.25d
+			y: 14.0d
+		}
+		{
+			dependencies: ["380FC29259361C3E", "3A49FEC6555DDB8A"]
+			icon: "grindless:penetrator_probe"
+			id: "10F152F38703742F"
+			size: 1.25d
+			subtitle: "With an HPGe crystal, a melt head and a sensor"
+			tasks: [
+				{ id: "3D61B5A264FCA74A", item: "grindless:penetrator_probe", optional_task: true, type: "item" }
+				{ id: "168DDB683D4CEAB9", type: "checkmark" }
+			]
+			title: "Penetrator Probe"
+			x: 5.75d
+			y: 13.25d
+		}
+		{
+			icon: "grindless:triton_ice_core"
+			id: "3C08EE7429DCB78E"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Dug on Triton"
+			tasks: [
+				{ id: "5F273427A6FD1762", item: "grindless:triton_ice_core", optional_task: true, type: "item" }
+				{ id: "37E40CAC184E1E01", type: "checkmark" }
+			]
+			title: "Triton Ice Core"
+			x: 5.75d
+			y: 11.25d
+		}
+		{
+			dependencies: ["10F152F38703742F", "3C08EE7429DCB78E"]
 			description: ["Drops a probe that melts into the ice and sends a core up."]
 			icon: "gtceu:penetrator_probe_bay"
 			id: "7BDEC16CD15C21F0"
@@ -436,7 +536,7 @@
 				{ id: "50C071A8D52CEDF1", type: "checkmark" }
 			]
 			title: "Penetrator Probe Bay"
-			x: 0.75d
+			x: 8.25d
 			y: 13.25d
 		}
 		{
@@ -449,7 +549,7 @@
 				{ id: "3AB42B280DBE2DFF", type: "checkmark" }
 			]
 			title: "Sputnik Ice Core"
-			x: 3.25d
+			x: 10.75d
 			y: 11.75d
 		}
 		{
@@ -462,7 +562,7 @@
 				{ id: "74EEEB4BDA86F799", type: "checkmark" }
 			]
 			title: "Charon Core"
-			x: 3.25d
+			x: 10.75d
 			y: 14.75d
 		}
 		{
@@ -477,7 +577,7 @@
 				{ id: "3198A3407F203980", type: "checkmark" }
 			]
 			title: "Volatile Ice Fractionator"
-			x: 5.75d
+			x: 13.25d
 			y: 13.25d
 		}
 		{
@@ -490,7 +590,7 @@
 				{ id: "3BD2F90D598115BD", type: "checkmark" }
 			]
 			title: "Nitrogen"
-			x: 8.25d
+			x: 15.75d
 			y: 10.25d
 		}
 		{
@@ -503,7 +603,7 @@
 				{ id: "16E4276542D400BB", type: "checkmark" }
 			]
 			title: "Carbon Monoxide"
-			x: 8.25d
+			x: 15.75d
 			y: 11.75d
 		}
 		{
@@ -516,7 +616,7 @@
 				{ id: "5146991378053D24", type: "checkmark" }
 			]
 			title: "Methane"
-			x: 8.25d
+			x: 15.75d
 			y: 13.25d
 		}
 		{
@@ -530,7 +630,7 @@
 				{ id: "3F1713FC234734F8", type: "checkmark" }
 			]
 			title: "Water"
-			x: 8.25d
+			x: 15.75d
 			y: 14.75d
 		}
 		{
@@ -544,7 +644,7 @@
 				{ id: "74E5DEEBC4E2FA6E", type: "checkmark" }
 			]
 			title: "Ammonia"
-			x: 8.25d
+			x: 15.75d
 			y: 16.25d
 		}
 		{
@@ -558,7 +658,7 @@
 				{ id: "5E980811AD251AF3", type: "checkmark" }
 			]
 			title: "Agar"
-			x: 8.25d
+			x: 15.75d
 			y: 18.25d
 		}
 		{
@@ -573,7 +673,7 @@
 				{ id: "58F129777C778739", type: "checkmark" }
 			]
 			title: "Ark Biosphere"
-			x: 10.75d
+			x: 18.25d
 			y: 16.25d
 		}
 		{
@@ -586,7 +686,7 @@
 				{ id: "32D2DF02A8E10782", type: "checkmark" }
 			]
 			title: "Oxygen"
-			x: 13.25d
+			x: 20.75d
 			y: 14.75d
 		}
 		{
@@ -599,7 +699,7 @@
 				{ id: "1C2F77A9D8088E4C", type: "checkmark" }
 			]
 			title: "Biomass"
-			x: 13.25d
+			x: 20.75d
 			y: 17.75d
 		}
 		{
@@ -612,7 +712,7 @@
 				{ id: "17798B820938AAA2", type: "checkmark" }
 			]
 			title: "Raw Growth Medium"
-			x: 13.25d
+			x: 20.75d
 			y: 16.25d
 		}
 		{
@@ -627,7 +727,7 @@
 				{ id: "17038BD05357C2AD", type: "checkmark" }
 			]
 			title: "Neural Culture Vat"
-			x: 15.75d
+			x: 23.25d
 			y: 16.25d
 		}
 		{
@@ -641,7 +741,7 @@
 				{ id: "30D9B857AFDF4F60", type: "checkmark" }
 			]
 			title: "Stem Cells"
-			x: 18.25d
+			x: 25.75d
 			y: 16.25d
 		}
 		{
@@ -654,7 +754,7 @@
 				{ id: "1B267B70D47F763E", type: "checkmark" }
 			]
 			title: "Neuro Processing Unit"
-			x: 20.75d
+			x: 28.25d
 			y: 16.25d
 		}
 		{
@@ -667,7 +767,7 @@
 				{ id: "3FB97BFF2A8E5F71", type: "checkmark" }
 			]
 			title: "Enriched Naquadah Dust"
-			x: 27.5d
+			x: 35.0d
 			y: 10.0d
 		}
 		{
@@ -680,7 +780,7 @@
 				{ id: "13A6331E143B96B2", type: "checkmark" }
 			]
 			title: "Trinium Dust"
-			x: 27.5d
+			x: 35.0d
 			y: 11.5d
 		}
 		{
@@ -693,7 +793,7 @@
 				{ id: "399E1EAC4A1C30EE", type: "checkmark" }
 			]
 			title: "Europium"
-			x: 27.5d
+			x: 35.0d
 			y: 13.0d
 		}
 		{
@@ -706,7 +806,7 @@
 				{ id: "539CE7E8F5AD78A0", type: "checkmark" }
 			]
 			title: "Duranium"
-			x: 27.5d
+			x: 35.0d
 			y: 14.5d
 		}
 		{
@@ -721,7 +821,7 @@
 				{ id: "5D4FA24AD88D8B6C", type: "checkmark" }
 			]
 			title: "Powder-in-Tube Line"
-			x: 30.0d
+			x: 37.5d
 			y: 12.25d
 		}
 		{
@@ -734,7 +834,7 @@
 				{ id: "15776F0F45BF2975", type: "checkmark" }
 			]
 			title: "EnTED Powder"
-			x: 32.5d
+			x: 40.0d
 			y: 12.25d
 		}
 		{
@@ -748,7 +848,7 @@
 				{ id: "3AB1314F32D2C461", type: "checkmark" }
 			]
 			title: "Powder Billet"
-			x: 35.0d
+			x: 42.5d
 			y: 12.25d
 		}
 		{
@@ -761,7 +861,7 @@
 				{ id: "7AD25C796BBC4EAD", type: "checkmark" }
 			]
 			title: "EnTED Wire"
-			x: 37.5d
+			x: 45.0d
 			y: 12.25d
 		}
 		{
@@ -1694,7 +1794,7 @@
 			y: 35.75d
 		}
 		{
-			dependencies: ["55BABADA1B051F3D"]
+			dependencies: ["55BABADA1B051F3D", "1E95CAD2B8E5700C"]
 			description: ["Winds the yarn round an aerogel tank with carbon nanotube yarn and epoxy."]
 			icon: "gtceu:cryotank_winder"
 			id: "1826D2D1863BE1A8"
@@ -1705,8 +1805,8 @@
 				{ id: "3AE4288F230F99BC", type: "checkmark" }
 			]
 			title: "Cryotank Winder"
-			x: 40.0d
-			y: 37.75d
+			x: 41.5d
+			y: 37.5d
 		}
 		{
 			dependencies: ["1826D2D1863BE1A8"]
@@ -1718,8 +1818,22 @@
 				{ id: "38BB890A8E7B398E", type: "checkmark" }
 			]
 			title: "BNNT Fuel Tank"
-			x: 42.5d
-			y: 36.5d
+			x: 44.0d
+			y: 36.75d
+		}
+		{
+			dependencies: ["10D7DA8F16132672", "1C3ABC190214A62A"]
+			icon: "grindless:aerogel_fuel_tank"
+			id: "1E95CAD2B8E5700C"
+			size: 1.25d
+			subtitle: "The assembler builds it round a Naquadah tank and the aerogel"
+			tasks: [
+				{ id: "5A8B47DADD8853CE", item: "grindless:aerogel_fuel_tank", optional_task: true, type: "item" }
+				{ id: "719120EACDF1F0D8", type: "checkmark" }
+			]
+			title: "Aerogel Fuel Tank"
+			x: 40.0d
+			y: 40.5d
 		}
 		{
 			dependencies: ["305F916B3530ABAD"]
