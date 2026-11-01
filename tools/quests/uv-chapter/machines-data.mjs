@@ -35,15 +35,19 @@ export const LINKS = [
   { key: 'M_L_EDGE', ref: 'STN6', x: 0, y: 27 },
 ];
 
+// A row's first quest depends on the era quest its link points at.
+const REF = Object.fromEntries(LINKS.map((l) => [l.key, l.ref]));
+const deps_ = (d) => d.map((k) => REF[k] || k);
+
 // One multiblock gear: controller plus the casings and parts new in this era.
 const gear = (key, id, title, deps, x, y, teach, tasks, xpN = 120) => ({
-  key, kind: 'machine', title, icon: `gtceu:${id}`, deps, x, y,
+  key, kind: 'machine', title, icon: `gtceu:${id}`, deps: deps_(deps), x, y,
   teach, desc: [], tasks: [it(`gtceu:${id}`), ...tasks], rewards: [xp(xpN)],
 });
 
 // One product or material quest that closes a row.
 const prod = (key, title, icon, deps, x, y, text, tasks, xpN = 80) => ({
-  key, title, icon, deps, x, y, desc: [text], tasks, rewards: [xp(xpN)],
+  key, title, icon, deps: deps_(deps), x, y, desc: [text], tasks, rewards: [xp(xpN)],
 });
 
 const UVC = 'gtceu:uv_machine_casing';

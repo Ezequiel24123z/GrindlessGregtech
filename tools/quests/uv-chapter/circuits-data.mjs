@@ -27,7 +27,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the assembler and the ladder
   {
     key: 'UC_ASM', kind: 'machine', title: 'UV Circuit Assembler', icon: 'gtceu:uv_circuit_assembler',
-    deps: ['C_L_ST'], x: 2, y: 0,
+    deps: ['START'], x: 2, y: 0,
     teach: {
       for: 'The &6UV Circuit Assembler&r is the first assembler that can build the circuits UV machines are made of.',
       needs: 'UV components for its hull, the cleanroom you already run, and the ZPM circuits that feed it.',
@@ -68,7 +68,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ light: the photonic chip
   {
     key: 'UC_XMASK', kind: 'process', title: 'X-ray Mask', icon: 'grindless:x_ray_mask',
-    deps: ['C_L_LIGHT'], x: 2, y: 1.5,
+    deps: ['START'], x: 2, y: 1.5,
     teach: {
       for: 'An &6X-ray Mask&r is the stencil the synchrotron exposes a wafer through. Its lines are far finer than any lens can print.',
       needs: 'A cleanroom, the lithography you already run, and a gold absorber pattern on a thin membrane.',
@@ -109,7 +109,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ parts that are components: germanium and the photon counter
   {
     key: 'UC_HPGE', kind: 'wafer', title: 'High-Purity Germanium', icon: 'grindless:hpge_crystal',
-    deps: ['C_L_PARTS'], x: 2, y: 3,
+    deps: ['START'], x: 2, y: 3,
     teach: {
       for: 'The &6HPGe Crystal&r is germanium refined past thirteen nines. It is the detector eye that probes and the interferometer carry.',
       needs: 'Germanium tetrachloride from the photonics line and the zone refining tower from the machines chapter.',
@@ -137,7 +137,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the starchip
   {
     key: 'STARCHIP', kind: 'circuit', title: 'Starchip', icon: 'grindless:starchip',
-    deps: ['C_L_SAIL', 'UC_PCHIP', 'SNSPD'], x: 8, y: 3,
+    deps: ['START', 'UC_PCHIP', 'SNSPD'], x: 8, y: 3,
     teach: {
       for: 'A photonic chip, a diamond qubit, an americium source and a neutronium wafer become one &6Starchip&r. Mounted on a sail it is a probe about as heavy as a paperclip.',
       needs: 'The Starchip Fab from the machines chapter, and every part on this chapter\'s light row.',
