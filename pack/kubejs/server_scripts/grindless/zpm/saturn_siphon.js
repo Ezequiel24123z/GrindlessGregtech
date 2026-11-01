@@ -178,7 +178,7 @@
       return
     }
     event.recipes.gtceu.distillation_tower('grindless:ring_ice_melt')
-      .inputFluids(Fluid.of('gtceu:ring_ice', 1000)).circuit(1)
+      .inputFluids(Fluid.of('gtceu:ring_ice', 1000))
       .outputFluids(Fluid.of('minecraft:water', 900), Fluid.of('gtceu:ammonia', 100))
       .EUt(480).duration(100)
   }

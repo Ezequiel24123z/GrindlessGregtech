@@ -562,6 +562,8 @@ The pasta wire drawings `pasta_drawing/horizon_wire_drawing` and `pasta_drawing/
 
 The contract allows recipe edits only for capacity errors the re-solve forces, so they are left. Proposed: a small separate package, with the same fixes as above (a fluid becomes its ingot, an extra fluid is dropped) and the tests of those scripts. `docs/STATUS.md` says P2-Z empties the list; it does not.
 
+**Fixed by CAP-K (#131):** the three IV rows take their soldering as ingots (64 and 2, the same 9,216 and 288 mB); the belt samples and the radiation vault casing move to the assembly line with both fluids; the ring ice melt moves to the distillation tower (no circuit: the tower has no item input). `capacity_known.json` is empty; `mixer/zblan` stays a warning (the large mixer runs it).
+
 ### The hull outlier
 
 On the T1 dump the UXV hull scores 53,020 against 5,578 (motor) and 5,833 (pump); the OpV hull 95,320 against 5,628 and 11,603; the MAX hull 168,061 against 6,665 and 18,532. It is 9 to 25 times the other components, because the hull comes from the heavy UXV casing chain. It sits in the geometric mean of nine groups, so it lifts the index by tens of percent over the other eight; it is explained and left.
