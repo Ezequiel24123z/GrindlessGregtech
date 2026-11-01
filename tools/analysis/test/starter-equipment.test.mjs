@@ -12,14 +12,13 @@ const arrival = chapter.quests.find((q) => q.id === '69BDA9FBB0EB66F2');
 const itemId = (reward) => typeof reward.item === 'string' ? reward.item : reward.item?.id;
 const itemRewards = (id) => arrival.rewards.filter((r) => itemId(r) === id);
 
-test('Arrival preserves claimed bread and torches and adds only the missing food', () => {
+test('Arrival keeps its bread and torch reward ids, with the bread in one stack of 64', () => {
   assert.deepEqual(arrival.tasks, [{ id: '436062DAEF17D6AD', type: 'checkmark' }]);
   assert.deepEqual(arrival.rewards.find((r) => r.id === '21A6FB493B3D6DA8'),
-    { count: 8, id: '21A6FB493B3D6DA8', item: 'minecraft:bread', type: 'item' });
+    { count: 64, id: '21A6FB493B3D6DA8', item: 'minecraft:bread', type: 'item' });
   assert.deepEqual(arrival.rewards.find((r) => r.id === '4FE190B37FB472CA'),
     { count: 16, id: '4FE190B37FB472CA', item: 'minecraft:torch', type: 'item' });
-  assert.equal(itemRewards('minecraft:bread').reduce((n, r) => n + r.count, 0), 64);
-  assert.equal(itemRewards('minecraft:bread').filter((r) => r.id !== '21A6FB493B3D6DA8')[0].count, 56);
+  assert.equal(itemRewards('minecraft:bread').length, 1);
 });
 
 test('Arrival gives exactly four diamond working tools with Efficiency V, without armor or a sword', () => {

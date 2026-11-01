@@ -52,7 +52,7 @@
     { "from": "78BD114FD33A2A13", "to": "3E3C190F1A77EB6D", "why": "OpV: the Gate to MAX collects the three finished branches (Census IV, Bulge Collector, Annihilation Engine) as a convergence point." }
   ],
   "manyRewardsOk": [
-    { "quest": "69BDA9FBB0EB66F2", "why": "Arrival keeps the original bread and torch reward ids, adds a 56-bread top-up for existing saves, and supplies the requested starter equipment." },
+    { "quest": "69BDA9FBB0EB66F2", "why": "Arrival keeps the original bread and torch reward ids (the bread in one stack of 64, RF-5T) and supplies the requested starter equipment." },
     { "quest": "047B55ED9C952BC9", "why": "The Neutronium Toolbox (welcome): one reward per tool, on purpose (docs/quests.md)." }
   ],
   "quantityOk": [
