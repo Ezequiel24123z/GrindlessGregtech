@@ -94,7 +94,7 @@ export const QUESTS = [
   q('CI_FIELD', 'step', 'Field Generator', 'grindless:maxplus_field_generator', ['CI_EMIT', 'CI_PISTON'], 9.5, 5.5, null, [
     'The last component: an emitter, two Kerr Field Coils and a &6Condensate Field Cell&r. The cell is a five-step line that loads a niobium cavity with condensate in the refinery and seals it cold. The &6MAX+ Field Generator&r is what the big machines ask for most.',
   ], [it('grindless:condensate_field_cell'), it('grindless:maxplus_field_generator')], 250),
-  q('CI_HATCH', 'step', 'MAX Hatches in Bulk', 'gtceu:max_energy_input_hatch_16a', ['CI_HULL'], 7, 2.25, null, [
+  q('CI_HATCH', 'step', 'MAX Hatches in Bulk', 'gtceu:max_energy_input_hatch_16a', ['CI_HULL'], 7, 0.75, null, [
     'MAX+ has no hatches of its own. Rows take GTM\'s &6MAX Energy Input Hatches&r, buses and fluid hatches, two of them at the top voltage, in bulk. The wireless versions draw on the network instead, as the integration chapter shows.',
   ], [it('gtceu:max_energy_input_hatch_16a'), it('gtceu:max_input_bus'), it('gtceu:max_output_bus'), it('gtceu:max_input_hatch_9x')], 150),
 ];
