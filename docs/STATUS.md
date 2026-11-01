@@ -15,7 +15,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - Phase 5:
     - the design (`docs/reforge/05_quest_design.md`, RF-5A);
     - one shared chapter writer (`tools/quests/gen-chapters.mjs`, RF-5L1) and Steam to IV imported to data (RF-5L2);
-    - Welcome, the side tabs and Steam to UEV in the Phase 5 shape: EV, IV and LuV in three chapters each (age, circuits, machines), ZPM to UEV in four (plus integration); chapter groups per era (Early Ages for Steam to HV, then one per era).
+    - Welcome, the side tabs and Steam to UXV in the Phase 5 shape: EV, IV and LuV in three chapters each (age, circuits, machines), ZPM to UXV in four (plus integration); chapter groups per era (Early Ages for Steam to HV, then one per era).
   - Phase 6:
     - the audit;
     - the 50 missing textures and the 21 shared controller faces;
@@ -26,48 +26,41 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
     - MAX after Reforge: the routes, the ids, machines 11 to 14 with lines L47 to L57, the chart (PL-MX) and the ending rework (the shell's c3 makes `grindless:horizon_lock` and grants `maxplus`; the credits move to the MAX+ arrival);
     - MAX+ spikes S0-1 to S0-10 (`maxplus.md` S0 table: wireless instead of a kerr cable; creative items are `grindless:` stand-ins);
     - the MAX+ foundation (XP-F1): the ids table, nine components, the 1,024 A hatch `gtceu:max_maxplus_energy_hatch_1024a`, four creative stand-ins and the four places; the ids without a recipe are hidden (XP-F2);
-    - MAX+ build order rows 5 to 9, 16, 17 and 19 (first part): the power plumbing (XP-W, P18 and the 1,024 A hatch recipe), the condensate (XP-A1: the shell's c4, the condensate refinery and the bound-matter press), the horizon processor (XP-A3), the components and the horizon casing (XP-A2, C1 to C7), the AE2 top tier (XP-AE, A1 to A3), the meta-material loom (XP-H1, T4 to T7), the condensate assembler (XP-H3, machine 14; machine 15 waits for the dial's power mechanism) and the Hills slingshot with gate c16 to 30 Doradus (XP-T1, P15, P16). Every MAX+ machine runs on the 1,024 A hatch.
-- **Last accepted integration batch:** Reforge batch 8 (issues #112-#125).
-  - Packages: P2-Z, XP-A2, XP-H1, XP-AE, XP-H3, XP-T1, and the ZPM, UV, UHV and UEV quest pairs (RF-5Q-ZPMa to RF-5Q-UEVb).
+    - MAX+ build order rows 5 to 9, 16, 17 and 19 (first part): the power plumbing (XP-W, P18 and the 1,024 A hatch recipe), the condensate (XP-A1: the shell's c4, the condensate refinery and the bound-matter press), the horizon processor (XP-A3), the components and the horizon casing (XP-A2, C1 to C7), the AE2 top tier (XP-AE, A1 to A3), the meta-material loom (XP-H1, T4 to T7), the condensate assembler (XP-H3, machine 14; machine 15 waits for the dial's power mechanism) and the Hills slingshot with gate c16 to 30 Doradus (XP-T1, P15, P16). Every MAX+ machine runs on the 1,024 A hatch; the MAX+ components are tier 15 on the quality ladder and the controllers take the design's base (XP-Q).
+  - Capacity: no known violation left (CAP-K).
+- **Last accepted integration batch:** Reforge batch 9 (issues #126-#131).
+  - Packages: XP-Q, CAP-K, and the UIV and UXV quest pairs (RF-5Q-UIVa to RF-5Q-UXVb).
   - Integrator fixes:
-    - GTM's 64 A substation hatches do not fit a multiblock's energy slot, so MAX+ machines and gate rows use the 1,024 A hatch (`maxplus.md` hatch table);
-    - an older machine's MAX+ rows keep its site: the cryogenic plant's run on the Moon; P25's mass-filter row at 30 Doradus is excepted from MAX's Cygnus rule;
-    - `grindless:horizon_frame_part` registered; XP-H1's inverted gadolinium row fixed;
-    - quest layout fixes on the merged UEV and UHV chapters;
-    - older gate tests find c14 and c15 by name;
-    - P16's nav core takes the thorium nav clock (XP-T1 had left the clock without a use).
-  - T0: GitHub Actions on every merge.
-  - T1 on the VM:
-    - `gg_test_maxplus_loom` PASS (formed, ran at 2^33);
-    - `gg_test_maxplus_assembler` PASS (one 1,024 A hatch, c1 at 2^39);
-    - `gg_test_maxplus_slingshot` PASS (c2 at 2^35).
-
-    Gate c16 has not been thrown in game: it reuses the c14 and c15 mechanism.
-  - T2 on the VM, dump 82b206e8e4c9, confirmed on d883a6b82fb5 (`/var/lib/grindless/dumps/latest`):
+    - the UXV pair defined eleven keys and eight items twice (the journey's key list never arrived): one owner per key and per item;
+    - UIV's timed pulse profile was defined twice, and the metallic hydrogen cable lost its quest;
+    - CAP-K's ring ice melt on the distillation tower lost the circuit it could not hold.
+  - T0: GitHub Actions on every merge (green at ae46ca19).
+  - T2 on the VM, dump ae46ca19b865 (`/var/lib/grindless/dumps/latest`):
     - reachability PASS for all 15 tiers, Steam to MAX;
-    - obtain PASS: the 33 ids XP-H3 and XP-T1 gave a recipe left the class C row; the hidden table regenerated;
-    - capacity lint: 8 known violations, no new one (snapshot rebuilt);
-    - `gg_test_quests` PASS at d883a6b8 (56 chapters, 4,838 quests); quest lint 0 errors, the 6 known layout warnings (1 in `ev_machines`, 5 in `opv_age`).
+    - obtain PASS; capacity lint: 0 known violations, 1 warning (UHV's ZBLAN mixer row);
+    - `gg_test_quests` PASS at ae46ca19 (62 chapters, 4,912 quests); quest lint 0 errors, the 6 known layout warnings (1 in `ev_machines`, 5 in `opv_age`).
+  - Earlier batch 8 T1, still current: `gg_test_maxplus_loom`, `gg_test_maxplus_assembler` and `gg_test_maxplus_slingshot` PASS. Gate c16 has not been thrown in game yet; XP-B1's T1 throws it.
 - **In flight** (one nested session per package; no two share a file):
 
 | Package | Issue | Content | Phase |
 |---|---|---|---|
-| XP-Q | #126 | MAX+ components on the recipe-quality ladder; MAX+ controllers on the design's base | 7 |
-| RF-5Q-UIVa | #127 | Quests: UIV journey and integration chapters | 5 |
-| RF-5Q-UIVb | #128 | Quests: UIV circuits and machines chapters | 5 |
+| RF-5Q-OpVa | #132 | Quests: OpV journey and integration chapters (clears its 5 layout warnings) | 5 |
+| RF-5Q-OpVb | #133 | Quests: OpV circuits and machines chapters | 5 |
+| MX-C2a | #135 | Quests: MAX journey, integration and horizon chapters (machines 11 to 14, the lock) | 5 |
+| MX-C2b | #136 | Quests: MAX circuits and machines chapters | 5 |
+| XP-B1 | #134 | MAX+ at 30 Doradus: the stellar lift, the pair-instability crucible, the nickel-56 burner, P6 to P8, P17, P20, P21; its T1 also throws gate c16 | 7 |
 
 - **Next** (queue; serial where packages share files):
-  - Phase 5, in the order of `05_quest_design.md` §5.2: UXV and OpV in pairs (OpVa fixes its 5 warnings), PL-MX and MX-C2 (MAX), RF-5I3. The owner reviews the renders as they come (the integrator renders them with `tools/quests/render-book.mjs --compare`); they do not block.
-  - Phase 7, `maxplus.md` *Build order*, after XP-Q:
-    - XP-B1 (Tarantula; its T1 also throws gate c16), XP-T2 (gates c17 to c19, serial on `gate.json`), XP-B2 to XP-B4, XP-M1, XP-H2, XP-H4, XP-K;
+  - Phase 5: RF-5I3 (the integrator's batch for UHV to MAX, with renders). The owner reviews the renders as they come (the integrator renders them with `tools/quests/render-book.mjs --compare`); they do not block.
+  - Phase 7, `maxplus.md` *Build order*, after XP-B1:
+    - XP-T2 (gates c17 to c19, serial on `gate.json`), XP-B2 to XP-B4, XP-M1, XP-H2, XP-H4, XP-K;
     - the capacitor bank (machine 15) with XP-W2 and XP-G1, which settle how the dial is fed;
-    - XP-Z1, XP-C1 (the `maxplus` era in the era lists and its validator tier), XP-PL, XP-C2a and XP-C2b.
+    - XP-Z1, XP-C1 (the `maxplus` era in the era lists, its validator tier, and tier 15's circuits, hull and voltage on the quality ladder), XP-PL, XP-C2a and XP-C2b.
 
     Each merge takes its ids out of the class C row.
-  - A small capacity package: the six static overflows of `capacity_known.json` in other eras' scripts, and UHV's ZBLAN mixer row, whose 73,250 mB of fluorine no singleblock mixer holds after P2-Z.
   - Phase 6: the MAX+ assets package (textures for the MAX+ items, casings and controllers; XP-Z1's city structures), once the machine packages have landed.
   - Then Phase 8 and Phase 9.
-- **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom.
+- **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open questions for the owner (the defaults stand until answered)
@@ -79,7 +72,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **EV to ZPM line design** (RF-3S, `docs/eras/ev.md`): only production lines count toward the guide; keep GTM's one-step nitric folds; gate tetrataenite; keep belt Ir/Os (P2-C: not worse than Mercury); gate the tritium store; ZPM's gap stays named. Defaults as written.
 - **Logs at Steam and LV** (LD-T3): the Horizon Collector makes 960 oak logs a minute at 16 EU/t; the fertilized LV greenhouse makes 72. Keep the collector as the generous start, or cut its log row so the greenhouse is LV's log route? Default: keep (the start is generous by design, `steam.md`); the greenhouse line counts for its other outputs.
 - **Phase 5** (`05_quest_design.md` §6, nine questions): era chapter groups; MAX+ in nine chapters; six roles, not six chapters; longer text for teaching quests; restore the merged wafer and circuit steps; Power after LuV optional; item rewards only from gated lines; Welcome's bread; before captures per batch. Defaults: yes to each, as written.
-- **Phase 5 shape:** the before and after renders of batch 1 (Steam to EV) and of IV to UEV wait for the owner's review. They do not block: the owner asked for autonomous work.
+- **Phase 5 shape:** the before and after renders of batch 1 (Steam to EV) and of IV to UXV wait for the owner's review. They do not block: the owner asked for autonomous work.
 - **OpV and MAX components** (P2-E): the OpV rule of 2026-10-29 (`opv.md` *Validator*) forbade lower components; P2-E's band E lets each core component take its previous-tier counterpart, as UXV's take UIV's, because the OpV core cost 310 against 71,526. Keep it? Default: yes (AGENTS.md principle 2 wins over pre-Reforge docs; machines, hatches and controllers keep the rule whole).
 - **Save compatibility after v1.0.0?** Default: yes, from v1.0.0 on.
 
@@ -87,12 +80,12 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Cost:**
   - LuV (0.912) and UIV (0.907) sit near the lower edge of the 10% band; changing one era's factor means re-solving every era above it. The OpV and UXV hulls are outliers (9 to 25 times their peers), explained in `02_cost_curve.md`, not fixed.
   - Some routes multiply matter: ash separation fed by diamond CVD and diamond electrolysis, and blue topaz ore at ZPM and later (`02_cost_curve.md`).
-- **Capacity:** 8 known violations (`tools/analysis/capacity_known.json`); six are static overflows in other eras' scripts, for the small capacity package in *Next*.
+- **Capacity:** no known violation (`tools/analysis/capacity_known.json` is empty since CAP-K); one warning: UHV's ZBLAN mixer row takes 73,250 mB of fluorine, more than a singleblock mixer holds (the large mixer runs it). The lint does not count programmed circuits, so it cannot see a circuit on a multiblock with no item input.
 - **EMI:** 9 entries in `tools/analysis/emi_runtime_known.json`:
   - 8 previews, likely an audit false positive that the fixed fixture removes on the next 8 GB EMI run;
   - `launched_belt_seed` without a consumer (a MAX package).
 - **The `maxplus` stage** is a world persistentData flag (`grindless_stage_maxplus`, MX-E1): the pack has no stage mod, and MAX+ packages read the flag.
-- **MAX+ until XP-C1:** the ids with no recipe yet are one class C row in `tools/analysis/tiers/obtain.json` (hidden) and carry EMI exception rows; the `maxplus` era is not yet in the era lists; the es_es names of XP-F1 are word-by-word (Phase 8 review). Until XP-Q lands, MAX+ controllers take MAX components (the quality ladder stops at MAX).
+- **MAX+ until XP-C1:** the ids with no recipe yet are one class C row in `tools/analysis/tiers/obtain.json` (hidden) and carry EMI exception rows; the `maxplus` era is not yet in the era lists; the es_es names of XP-F1 are word-by-word (Phase 8 review). Each MAX+ controller carries three baselined quality findings (T-CIRC, T-HULL, T-VOLT at tier 15) until XP-C1 decides tier 15's circuits, hull and voltage.
 - **Assets:**
   - MAX+ has no textures yet: XP-F1's items and six casings point at files that do not exist, and the MAX+ machines (refinery, press, loom, condensate assembler, slingshot) wear MAX art until the MAX+ assets package;
   - the UEV, UIV and UXV foundation scripts still draw items that `foundation.js` no longer registers, so their self-check fails (Phase 8);
