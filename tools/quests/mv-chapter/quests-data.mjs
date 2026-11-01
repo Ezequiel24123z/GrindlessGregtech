@@ -312,7 +312,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "60E0CBE6799FF623", xp: 50 }],
   },
   {
-    key: "MV_HAZMAT_SUIT", id: "7B6466252E0C044A", title: "Hazmat Suit", icon: "gtceu:hazmat_chestpiece", deps: ["MV_PVC"], x: 12, y: 4.5,
+    key: "MV_HAZMAT_SUIT", id: "7B6466252E0C044A", title: "Hazmat Suit", icon: "gtceu:hazmat_chestpiece", deps: ["MV_PVC"], x: 16, y: 3,
     desc: [
       "GregTech's hazards are on in this pack, and some of what you handle from here on will hurt you. The &6Hazmat Suit&r keeps it off you, with PVC on the outside and an activated carbon filter in the mask.",
       "The carbon comes from pyrolysis with nitrogen in the hatch.",
@@ -321,7 +321,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "66D264C84F214235", xp: 45 }],
   },
   {
-    key: "MV_HV_MACHINE_HULL", id: "01AAEC5F1DC1C5EE", title: "HV Machine Hull", icon: "gtceu:hv_machine_hull", deps: ["MV_ETHYLENE_AND_PE"], x: 18, y: 1.5,
+    key: "MV_HV_MACHINE_HULL", id: "01AAEC5F1DC1C5EE", title: "HV Machine Hull", icon: "gtceu:hv_machine_hull", deps: ["MV_TRANSISTORS_AND_RESISTORS"], x: 18, y: 1.5,
     desc: [
       "Hull number three, in stainless steel with polyethylene trim. Both the furnace and the plastic line have to be running for this one.",
     ],
@@ -337,7 +337,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "1C8DB2E0CEAB0D08", xp: 40 }],
   },
   {
-    key: "MV_AE2_GROWS_UP", id: "63CD92CD1D3FC989", title: "AE2 Grows Up", icon: "ae2:controller", optional: true, deps: ["MV_GOOD_INTEGRATED_CIRCUIT"], x: 18, y: -3,
+    key: "MV_AE2_GROWS_UP", id: "63CD92CD1D3FC989", title: "AE2 Grows Up", icon: "ae2:controller", optional: true, deps: ["MV_RAM"], x: 16, y: -3,
     desc: [
       "Applied Flux, which stores FE in the network, and the wireless pattern terminals both need MV circuits in this pack. Build whichever you'll actually use.",
     ],

@@ -63,7 +63,7 @@ export const QUESTS = [
         rewards: [{ type: "xp", id: "35502C2CA21A059D", xp: 55 }],
   },
   {
-    key: "HV_REFINERY", id: "5C5D6FB9ECB7BC51", title: "Refinery",     icon: "gtceu:refinery", kind: "signature", deps: ["HV_HV_COMPONENTS"], x: 4, y: 0,
+    key: "HV_REFINERY", id: "5C5D6FB9ECB7BC51", title: "Refinery",     icon: "gtceu:refinery", kind: "plant", deps: ["HV_HV_COMPONENTS"], x: 4, y: 0,
         teach: {
           for: "Every crude oil fraction in one pass, sulfur already removed.",
           needs: "Crude oil, hydrogen, a programmed circuit for the job.",
@@ -217,7 +217,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "240589002FC5DF78", xp: 40 }],
   },
   {
-    key: "HV_ROCKET_FUEL", id: "76D281E9D9C6FD20", title: "Rocket Fuel", icon: "gtceu:hv_chemical_reactor", deps: ["HV_HYDRAZINE"], x: 14, y: 0,
+    key: "HV_ROCKET_FUEL", id: "76D281E9D9C6FD20", title: "Rocket Fuel", icon: "gtceu:hv_chemical_reactor", deps: ["HV_GASOLINE"], x: 14, y: 0,
     desc: [
       "&6Rocket Fuel&r is dimethylhydrazine and oxygen out of the mixer, and the hydrazine comes from methanol, ammonia and hypochlorous acid.",
       "A Moon launch needs at least 8 buckets in the tanks. Make extra, because every static fire burns some too.",
@@ -267,18 +267,6 @@ export const QUESTS = [
     ],
     tasks: [{ type: "dimension", id: "2717156C3769D52D", dimension: "gcyr:luna" }],
     rewards: [{ type: "xp", id: "178ADCEDFB41DCA4", xp: 150 }],
-  },
-  {
-    key: "HV_HYDRAZINE", title: "Hydrazine", icon: "gtceu:hv_chemical_reactor", kind: "process", deps: ["HV_GASOLINE"], x: 14, y: -1.5,
-    teach: {
-      for: "The fuel base for rocket propellant.",
-      needs: "Methanol, ammonia and hypochlorous acid.",
-      unlocks: "Rocket fuel.",
-      automate: "Three feeds into one reactor; keep the ammonia flowing.",
-    },
-    desc: [],
-    tasks: [{ type: "checkmark" }],
-    rewards: [{ type: "xp", xp: 35 }],
   },
   {
     key: "HV_CPU_WAFER", id: "51DD45CBEDEE31D9", title: "CPU Wafer and Chip", icon: "gtceu:cpu_chip", kind: "wafer", deps: ["HV_HV_COMPONENTS"], x: 4, y: 3,
