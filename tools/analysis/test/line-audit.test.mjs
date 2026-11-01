@@ -191,19 +191,19 @@ test('skip route drops: an ore block of a material with no vein, a circular rout
   // circular: a decolour route takes a stained variant that is made from the key itself
   const loop = buildFacts([
     rec('own', 'gtceu:mine', ['gtceu:ore'], 'gtceu:plate'),
-    rec('stain', 'minecraft:crafting_shaped', ['gtceu:sand', 'gtceu:plate'], 'gtceu:stained'),
-    rec('clear', 'minecraft:crafting_shaped', ['gtceu:stained'], 'gtceu:plate'),
+    rec('stain', 'minecraft:crafting_shaped', ['gtceu:sand', 'gtceu:plate'], 'gtceu:stained', { added: false }),
+    rec('clear', 'minecraft:crafting_shaped', ['gtceu:stained'], 'gtceu:plate', { added: false }),
   ]);
   assert.equal(skipRoute(l, 'gtceu:plate', loop), null);
   const open = buildFacts([
     rec('own', 'gtceu:mine', ['gtceu:ore'], 'gtceu:plate'),
-    rec('clear', 'minecraft:crafting_shaped', ['gtceu:stained'], 'gtceu:plate'),
+    rec('clear', 'minecraft:crafting_shaped', ['gtceu:stained'], 'gtceu:plate', { added: false }),
   ]);
   assert.ok(skipRoute(l, 'gtceu:plate', open));
   // glass: the clear-glass tweak takes a shard that only breaking glass gives
   const shard = buildFacts([
     rec('own', 'gtceu:mine', ['gtceu:ore'], 'minecraft:glass'),
-    rec('clear', 'minecraft:crafting_shaped', ['quark:clear_shard'], 'minecraft:glass'),
+    rec('clear', 'minecraft:crafting_shaped', ['quark:clear_shard'], 'minecraft:glass', { added: false }),
   ]);
   assert.equal(skipRoute(mkLine('steam', { steps: 4, products: [{ res: 'minecraft:glass' }] }), 'minecraft:glass', shard), null);
   // parallel source: the earlier line makes the key at an inner node, not as its end product
