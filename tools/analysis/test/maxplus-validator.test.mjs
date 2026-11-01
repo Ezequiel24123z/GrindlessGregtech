@@ -126,7 +126,7 @@ test('EU/t: no MAX+ row above 2^39; only the Hyperstargate dial goes to V[MAX] x
   const dial = [];
   for (const row of pack().mp) {
     for (const e of [...eu(row, 'tickInputs'), ...eu(row, 'tickOutputs')]) {
-      if (typeOf(row) === 'hyperstargate' && e === DIAL_EUT) dial.push(row.i);
+      if (typeOf(row) === 'hyperstargate_dial' && e === DIAL_EUT) dial.push(row.i);
       else if (e > CEILING) bad.push(`${row.i}: ${e}`);
     }
   }

@@ -40,7 +40,7 @@
     { "machine": "gtceu:pair_instability_crucible", "types": ["gtceu:pair_instability_crucible"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "pair_instability_crucible" },
     { "machine": "gtceu:nickel_56_burner", "types": ["gtceu:nickel_56_burner"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "nickel_56_burner" },
     { "machine": "gtceu:void_crystal_fab", "types": ["gtceu:void_crystal_fab"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "void_crystal_fab" },
-    { "machine": "gtceu:hyperstargate", "types": ["gtceu:hyperstargate"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "hyperstargate" },
+    { "machine": "gtceu:hyperstargate", "types": ["gtceu:hyperstargate_dial"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "hyperstargate" },
     { "id": "gtceu:hyperfactory@maxplus", "machine": "gtceu:hyperfactory", "types": ["gtceu:assembler", "gtceu:circuit_assembler", "gtceu:assembly_line", "gtceu:forming_press", "gtceu:laser_engraver"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "hyperfactory" }
   ]
 }
