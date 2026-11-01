@@ -1519,6 +1519,14 @@
     0
    ]
   },
+  "gtceu:meta_material_loom": {
+   "io": [
+    6,
+    2,
+    1,
+    0
+   ]
+  },
   "gtceu:methane_pyrolysis": {
    "io": [
     1,
@@ -9881,6 +9889,7 @@
   "gtceu:megabar_synthesis",
   "gtceu:membrane_rolling",
   "gtceu:mercury_solar",
+  "gtceu:meta_material_loom",
   "gtceu:methane_pyrolysis",
   "gtceu:microgravity_crystal_growth",
   "gtceu:microgravity_processing",
