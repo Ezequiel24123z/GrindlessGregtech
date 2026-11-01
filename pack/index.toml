@@ -15294,7 +15294,7 @@ hash = "ef1837996cdb949486e3b2a2caed5c9e23fc84947d716b984694513ed236080f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/composites.json"
-hash = "47b425798864d29a1b6c982dc71a040e05af5a204da9329621233446286b40e9"
+hash = "06e0ffc591a815cb73848317b5f486ef365b0fcda7e9188fadd4f056328ba4b1"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cost_curve/ev.json"
@@ -15366,7 +15366,7 @@ hash = "aff017c8e25aac284938251f4b464bd21a5c814a29e8a7a2e58525a32bc46cc7"
 
 [[files]]
 file = "kubejs/data/grindless/tables/earth_orbit.json"
-hash = "0fe08595dcdce81519cd1ebd41a4f1022a2b303cc3705ea8eb2ff157c226ee37"
+hash = "89df0ec6fa704af6f0e92cc7ce385a5192ded8bb292d8ceaecd69da2761a1471"
 
 [[files]]
 file = "kubejs/data/grindless/tables/electron_beam.json"
@@ -15562,7 +15562,7 @@ hash = "c030a1913b34fde63ae4011f033ee8da8ed7b8eb5b56e579a7d7f1466440b905"
 
 [[files]]
 file = "kubejs/data/grindless/tables/photonics_uev.json"
-hash = "607891957283ff8008f4f422621d54cd8c6b1ea7b6bc542e4fd9ecd6de265934"
+hash = "bf68d97674afd58da26901330062d69dc6cc4ed77b6efe296b1e195a73003c7e"
 
 [[files]]
 file = "kubejs/data/grindless/tables/places.json"
@@ -15630,7 +15630,7 @@ hash = "9e72961984aac839207d9492e30fe6a694fab465a408744eed97f9fef830dfda"
 
 [[files]]
 file = "kubejs/data/grindless/tables/superheavy.json"
-hash = "6d6d5e9be5b169106f09d054503855d875a052368ce5809a635845e870b6b95e"
+hash = "cce6ea68cb97694c61e8fada4984215957af66e9262178a3ff4a155a33092a01"
 
 [[files]]
 file = "kubejs/data/grindless/tables/tetron_optics.json"
