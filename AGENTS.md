@@ -30,7 +30,7 @@ GregTech Modern 7.5.3 pack (Minecraft 1.20.1, Forge): nothing is gathered by han
 
 ## Work packages
 - One package = one issue (template `work-package`) = one session = one branch from the integration branch. Write only the contract's allowed files. Packages never merge each other.
-- T0 `tools/Check-Fast.ps1` before every commit; T1 only for a mechanism the contract names. At most 2 repairs, then stop and return the escalation evidence.
+- T0 (`tools/Check-Fast.ps1`) before every handoff: push the branch and read GitHub Actions' T0 run, or run it on the VM (`tools/vm/gg-vm-exec.sh`). T1 only for a mechanism the contract names. At most 2 repairs, then stop and return the escalation evidence.
 - Handoff in the PR or merge commit body (never a new doc), at most 15 lines: result, files, tests and run ids, proposed DECISIONS/CREDITS lines, risks.
 
 ## Ownership
@@ -39,7 +39,7 @@ Only the integrator writes, once per batch: generated `pack/index.toml`, `pack/p
 ## Models
 - Orchestrator, integrator, implementer: Claude Sonnet. Repetitive edits, translations, table rows: `mechanical` (Haiku); judgement goes to Sonnet. Failed runs: `triage` (Haiku, read-only).
 - Opus only for era design, cross-system contradictions, or a package that failed 2 repairs (about 2 sessions per era).
-- A subagent answers one bounded question and spawns none unless authorised. The orchestrator may run up to 10 nested sessions at once (owner, 2026-11-01; was 6); no two edit the same files. Bench: the Linux VM first (3 run slots), the home PC only as fallback (one JVM); `docs/testing/`.
+- A subagent answers one bounded question and spawns none unless authorised. The orchestrator may run up to 10 nested sessions at once (owner, 2026-11-01; was 6); no two edit the same files. Bench: the Linux VM first (3 run slots), the home PC only as fallback (one JVM); `docs/testing/`. The workstation (4 cores, 12.5 GB) only edits: T0, the Node analysis suite, dump-based tools and Minecraft run in Actions or on the VM, and locally at most one quick Node command runs at a time (owner, 2026-11-01).
 
 ## Git
 Personal account `Ezequiel24123z`, never the corporate one. Small commits, clear messages. No `git stash` (shared by every worktree): use a WIP commit.

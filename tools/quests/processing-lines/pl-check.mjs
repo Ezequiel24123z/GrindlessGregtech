@@ -31,6 +31,7 @@ import zlib from 'node:zlib';
 import { buildModel, REPO } from './pl-model.mjs';
 import { loadIndex, inputKeys, outputKeys } from './pl-index.mjs';
 import { STATIONS, MODE as STATIONS_MODE } from '../luv-stations.mjs';
+import { tagProblems } from '../../analysis/line-audit.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : def; };
@@ -99,6 +100,7 @@ function readZipTexts(file, test) {
 }
 
 const model = buildModel();
+model.errors.push(...tagProblems(model));
 if (model.errors.length) { console.error(model.errors.join('\n')); process.exit(2); }
 const idx = await loadIndex({ dump: dumpDir });
 // a machine node without explicit recipe types runs the ones machines.json lists for its controller

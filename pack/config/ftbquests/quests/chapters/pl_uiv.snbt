@@ -9,7 +9,22 @@
 	id: "16145B39784C7B1F"
 	order_index: 11
 	progression_mode: "flexible"
-	quest_links: [ ]
+	quest_links: [
+		{
+			id: "320859EB66E5F474"
+			linked_quest: "78E982EC3DF45C59"
+			shape: "rsquare"
+			x: 37.25d
+			y: 0.5d
+		}
+		{
+			id: "5709BD959F20D8F9"
+			linked_quest: "557DE379A2DEF505"
+			shape: "rsquare"
+			x: 0.5d
+			y: 26.75d
+		}
+	]
 	quests: [
 		{
 			icon: "gtceu:rhea_ingot"
@@ -912,6 +927,71 @@
 			y: 14.75d
 		}
 		{
+			icon: "gtceu:gd_123_dust"
+			id: "3E8BFC1BBC608A63"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "500D60592841886A", item: "gtceu:gd_123_dust", optional_task: true, type: "item" }
+				{ id: "75E70B2950900416", type: "checkmark" }
+			]
+			title: "Gd-123"
+			x: 0.5d
+			y: 18.75d
+		}
+		{
+			dependencies: ["3E8BFC1BBC608A63"]
+			icon: "grindless:bulk_gdbco"
+			id: "5AD075A84A697367"
+			size: 1.25d
+			tasks: [
+				{ id: "35B31EAFF4A0CFAE", item: "grindless:bulk_gdbco", optional_task: true, type: "item" }
+				{ id: "3BEF0FD5BF41970F", type: "checkmark" }
+			]
+			title: "Bulk GdBCO"
+			x: 3.0d
+			y: 18.75d
+		}
+		{
+			dependencies: ["5AD075A84A697367"]
+			icon: "grindless:oxygenated_gdbco"
+			id: "141188353CE146AB"
+			size: 1.25d
+			tasks: [
+				{ id: "1DB48D537A3E8F03", item: "grindless:oxygenated_gdbco", optional_task: true, type: "item" }
+				{ id: "3754DA2CF9CE48C9", type: "checkmark" }
+			]
+			title: "Oxygenated GdBCO"
+			x: 5.5d
+			y: 18.75d
+		}
+		{
+			dependencies: ["141188353CE146AB"]
+			icon: "grindless:impregnated_gdbco"
+			id: "11F9A02DA961A98A"
+			size: 1.25d
+			tasks: [
+				{ id: "77116E36C5B1D86F", item: "grindless:impregnated_gdbco", optional_task: true, type: "item" }
+				{ id: "5DD10CB3C923C75C", type: "checkmark" }
+			]
+			title: "Impregnated GdBCO"
+			x: 8.0d
+			y: 18.75d
+		}
+		{
+			dependencies: ["11F9A02DA961A98A"]
+			icon: "grindless:field_cooled_gdbco"
+			id: "3ADC588E7CA552EE"
+			size: 1.25d
+			tasks: [
+				{ id: "503A6EC135E26390", item: "grindless:field_cooled_gdbco", optional_task: true, type: "item" }
+				{ id: "19373CE488732A3A", type: "checkmark" }
+			]
+			title: "Field-Cooled GdBCO"
+			x: 10.5d
+			y: 18.75d
+		}
+		{
 			icon: "grindless:reduced_iron_powder"
 			id: "13E139C6090F46F7"
 			shape: "rsquare"
@@ -1068,7 +1148,7 @@
 			]
 			title: "Polytetrafluoroethylene Foil"
 			x: 29.75d
-			y: 0.75d
+			y: 2.5d
 		}
 		{
 			dependencies: ["1C2996E6C1F4F9BA"]
@@ -1081,7 +1161,7 @@
 			]
 			title: "Polycarbonate Foil"
 			x: 32.25d
-			y: 0.75d
+			y: 2.5d
 		}
 		{
 			dependencies: ["1C2664E11F70209A"]
@@ -1095,10 +1175,10 @@
 			]
 			title: "Heavy Ion Cyclotron"
 			x: 34.75d
-			y: 0.75d
+			y: 2.5d
 		}
 		{
-			dependencies: ["794C553E34846230"]
+			dependencies: ["794C553E34846230", "78E982EC3DF45C59"]
 			icon: "grindless:ion_tracked_foil"
 			id: "185C2EA917DF6785"
 			size: 1.25d
@@ -1108,7 +1188,7 @@
 			]
 			title: "Ion Tracked Foil"
 			x: 37.25d
-			y: 0.75d
+			y: 2.5d
 		}
 		{
 			dependencies: ["185C2EA917DF6785"]
@@ -1121,7 +1201,7 @@
 			]
 			title: "Etched Membrane"
 			x: 39.75d
-			y: 0.75d
+			y: 2.5d
 		}
 		{
 			dependencies: ["5F0E05B044B4E44C"]
@@ -1135,7 +1215,7 @@
 			]
 			title: "Recoil Separator"
 			x: 42.25d
-			y: 0.75d
+			y: 2.5d
 		}
 		{
 			dependencies: ["30C5CD62A25A3CBC"]
@@ -1148,7 +1228,7 @@
 			]
 			title: "Element 120 Recoil"
 			x: 44.75d
-			y: 0.75d
+			y: 2.5d
 		}
 		{
 			icon: "gtceu:polytetrafluoroethylene_foil"
@@ -1161,7 +1241,7 @@
 			]
 			title: "Polytetrafluoroethylene Foil"
 			x: 29.75d
-			y: 2.75d
+			y: 4.5d
 		}
 		{
 			dependencies: ["340D0F2F66867218"]
@@ -1174,7 +1254,7 @@
 			]
 			title: "Polycarbonate Foil"
 			x: 32.25d
-			y: 2.75d
+			y: 4.5d
 		}
 		{
 			dependencies: ["50A79097AD1AF371"]
@@ -1188,7 +1268,7 @@
 			]
 			title: "Heavy Ion Cyclotron"
 			x: 34.75d
-			y: 2.75d
+			y: 4.5d
 		}
 		{
 			dependencies: ["3E00A95A8FC32195"]
@@ -1201,7 +1281,7 @@
 			]
 			title: "Ion Tracked Foil"
 			x: 37.25d
-			y: 2.75d
+			y: 4.5d
 		}
 		{
 			dependencies: ["527E4E787CD93426"]
@@ -1214,7 +1294,7 @@
 			]
 			title: "Etched Membrane"
 			x: 39.75d
-			y: 2.75d
+			y: 4.5d
 		}
 		{
 			dependencies: ["7F333AD85855DC07"]
@@ -1228,7 +1308,7 @@
 			]
 			title: "Recoil Separator"
 			x: 42.25d
-			y: 2.75d
+			y: 4.5d
 		}
 		{
 			dependencies: ["7D552D1C6A048F3F"]
@@ -1241,7 +1321,7 @@
 			]
 			title: "Element 119 Recoil"
 			x: 44.75d
-			y: 2.75d
+			y: 4.5d
 		}
 		{
 			icon: "gtceu:glass_plate"
@@ -1254,7 +1334,7 @@
 			]
 			title: "Glass Plate"
 			x: 29.75d
-			y: 4.75d
+			y: 6.5d
 		}
 		{
 			dependencies: ["1C3C6B3CF6AAA464"]
@@ -1268,7 +1348,7 @@
 			]
 			title: "MBE Reactor"
 			x: 32.25d
-			y: 4.75d
+			y: 6.5d
 		}
 		{
 			dependencies: ["727436FACBC3A263"]
@@ -1281,7 +1361,7 @@
 			]
 			title: "Ni-58 TI Multilayer"
 			x: 34.75d
-			y: 4.75d
+			y: 6.5d
 		}
 		{
 			dependencies: ["59D0AD4E644539AF"]
@@ -1294,7 +1374,7 @@
 			]
 			title: "Neutron Supermirror"
 			x: 37.25d
-			y: 4.75d
+			y: 6.5d
 		}
 		{
 			dependencies: ["1225918C6113479A"]
@@ -1307,7 +1387,7 @@
 			]
 			title: "Neutron Guide"
 			x: 39.75d
-			y: 4.75d
+			y: 6.5d
 		}
 		{
 			dependencies: ["73F028BD1731558A"]
@@ -1320,7 +1400,7 @@
 			]
 			title: "Cage Part"
 			x: 42.25d
-			y: 4.75d
+			y: 6.5d
 		}
 		{
 			dependencies: ["5F48285FB2DE75E2"]
@@ -1334,7 +1414,7 @@
 			]
 			title: "Neutronium Cage"
 			x: 44.75d
-			y: 4.75d
+			y: 6.5d
 		}
 		{
 			dependencies: ["3969676F7ACD037A"]
@@ -1347,7 +1427,7 @@
 			]
 			title: "Neutronium Pellet"
 			x: 47.25d
-			y: 4.75d
+			y: 6.5d
 		}
 		{
 			icon: "gtceu:lead_foil"
@@ -1360,7 +1440,7 @@
 			]
 			title: "Lead Foil"
 			x: 29.75d
-			y: 6.75d
+			y: 8.5d
 		}
 		{
 			dependencies: ["3590A626611C9D9B"]
@@ -1373,7 +1453,7 @@
 			]
 			title: "Lead Polymer Liner"
 			x: 32.25d
-			y: 6.75d
+			y: 8.5d
 		}
 		{
 			dependencies: ["165DC2B1073A8668"]
@@ -1386,7 +1466,7 @@
 			]
 			title: "Sealed Capsule"
 			x: 34.75d
-			y: 6.75d
+			y: 8.5d
 		}
 		{
 			dependencies: ["147039A49B77C2CE"]
@@ -1399,7 +1479,7 @@
 			]
 			title: "Kilonova Capsule"
 			x: 37.25d
-			y: 6.75d
+			y: 8.5d
 		}
 		{
 			dependencies: ["36F255D41F16A768"]
@@ -1413,7 +1493,7 @@
 			]
 			title: "Decay Heat Vault"
 			x: 39.75d
-			y: 6.75d
+			y: 8.5d
 		}
 		{
 			dependencies: ["3DE5392676200511"]
@@ -1426,7 +1506,7 @@
 			]
 			title: "Aged Kilonova Capsule"
 			x: 42.25d
-			y: 6.75d
+			y: 8.5d
 		}
 		{
 			dependencies: ["5B0F236A6D609398"]
@@ -1440,7 +1520,7 @@
 			]
 			title: "Decay Heat Vault"
 			x: 44.75d
-			y: 6.75d
+			y: 8.5d
 		}
 		{
 			dependencies: ["7BA1E802281A2B17"]
@@ -1453,7 +1533,7 @@
 			]
 			title: "R Process Ash"
 			x: 47.25d
-			y: 6.75d
+			y: 8.5d
 		}
 		{
 			icon: "grindless:worn_crust_lift_tether"
@@ -1466,7 +1546,7 @@
 			]
 			title: "Worn Crust Lift Tether"
 			x: 29.75d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			dependencies: ["3D25F42A01F7DDD5"]
@@ -1480,7 +1560,7 @@
 			]
 			title: "Tether Ribbon Works"
 			x: 32.25d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			dependencies: ["1919E228AFED5EB7"]
@@ -1493,7 +1573,7 @@
 			]
 			title: "Carbon Nanotube Yarn"
 			x: 34.75d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			dependencies: ["78A9BFD8C9472319"]
@@ -1507,7 +1587,7 @@
 			]
 			title: "Boron Nitride Reactor"
 			x: 37.25d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			dependencies: ["3929159601AC0043"]
@@ -1520,7 +1600,7 @@
 			]
 			title: "Bn Coated Cnt Yarn"
 			x: 39.75d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			dependencies: ["7A20B92853CBD5BB"]
@@ -1533,7 +1613,7 @@
 			]
 			title: "MH Laminated Yarn"
 			x: 42.25d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			dependencies: ["1D8E656DD3F895FF"]
@@ -1546,7 +1626,7 @@
 			]
 			title: "Braided MH Tether"
 			x: 44.75d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			dependencies: ["5A6AC677169D0D52"]
@@ -1560,7 +1640,7 @@
 			]
 			title: "Tether Ribbon Works"
 			x: 47.25d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			dependencies: ["5A8B527DB06D2A28"]
@@ -1573,7 +1653,7 @@
 			]
 			title: "MH Tether"
 			x: 49.75d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			dependencies: ["12476F36BD93A81C"]
@@ -1586,7 +1666,7 @@
 			]
 			title: "Crust Lift Tether"
 			x: 52.25d
-			y: 8.75d
+			y: 10.5d
 		}
 		{
 			icon: "grindless:synroc_block"
@@ -1599,7 +1679,7 @@
 			]
 			title: "Synroc Block"
 			x: 29.75d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["1389CF776BCBA0AE"]
@@ -1613,7 +1693,7 @@
 			]
 			title: "Waste Retrieval Plant"
 			x: 32.25d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["7281AAED50DA9C65"]
@@ -1626,7 +1706,7 @@
 			]
 			title: "Synroc Liner"
 			x: 34.75d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["31A6A0EE9C3A08A6"]
@@ -1640,7 +1720,7 @@
 			]
 			title: "Hot Cell"
 			x: 37.25d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["1DEA40BFC43BF726"]
@@ -1653,7 +1733,7 @@
 			]
 			title: "Filled Waste Canister"
 			x: 39.75d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["7B91169A8993B68E"]
@@ -1667,7 +1747,7 @@
 			]
 			title: "Megabar Press"
 			x: 42.25d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["723520BABE3EEDF1"]
@@ -1680,7 +1760,7 @@
 			]
 			title: "Compacted Waste Canister"
 			x: 44.75d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["5E0964BEE80B98D6"]
@@ -1694,7 +1774,7 @@
 			]
 			title: "Ergosphere Probe Bay"
 			x: 47.25d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["1E46B5C1CE6D4820"]
@@ -1707,7 +1787,7 @@
 			]
 			title: "Split Charge SLED"
 			x: 49.75d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["3BD627A4F0FEE24D"]
@@ -1721,7 +1801,7 @@
 			]
 			title: "Penrose Engine"
 			x: 52.25d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			dependencies: ["7A533D40AD1A6EA3"]
@@ -1734,7 +1814,7 @@
 			]
 			title: "Recovered Half SLED"
 			x: 54.75d
-			y: 10.75d
+			y: 12.5d
 		}
 		{
 			icon: "grindless:lithium_niobate_boule"
@@ -1746,8 +1826,8 @@
 				{ id: "327CB29418B1C328", type: "checkmark" }
 			]
 			title: "Lithium Niobate Boule"
-			x: 0.5d
-			y: 20.75d
+			x: 3.0d
+			y: 22.75d
 		}
 		{
 			dependencies: ["3DF11E3A3D83C4CF"]
@@ -1759,8 +1839,8 @@
 				{ id: "355B57A5375032BD", type: "checkmark" }
 			]
 			title: "Lithium Niobate Wafer"
-			x: 3.0d
-			y: 20.75d
+			x: 5.5d
+			y: 22.75d
 		}
 		{
 			dependencies: ["7BC3411714F6A3FF"]
@@ -1773,8 +1853,8 @@
 				{ id: "7AFCF1A522329597", type: "checkmark" }
 			]
 			title: "Ion Implanter"
-			x: 5.5d
-			y: 20.75d
+			x: 8.0d
+			y: 22.75d
 		}
 		{
 			dependencies: ["519221E9A5E51AA9"]
@@ -1786,8 +1866,8 @@
 				{ id: "114A6A9EDEAE0324", type: "checkmark" }
 			]
 			title: "Implanted LN Wafer"
-			x: 8.0d
-			y: 20.75d
+			x: 10.5d
+			y: 22.75d
 		}
 		{
 			dependencies: ["33A0C85EFBE20E29"]
@@ -1800,8 +1880,8 @@
 				{ id: "34E5199FF2D38C5D", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 10.5d
-			y: 20.75d
+			x: 13.0d
+			y: 22.75d
 		}
 		{
 			dependencies: ["1BC5A31586328B3E"]
@@ -1813,8 +1893,8 @@
 				{ id: "57871746A6B82F45", type: "checkmark" }
 			]
 			title: "LNOI Wafer"
-			x: 13.0d
-			y: 20.75d
+			x: 15.5d
+			y: 22.75d
 		}
 		{
 			dependencies: ["7408900F616C0489"]
@@ -1827,8 +1907,8 @@
 				{ id: "77D72E2D8EF2D47C", type: "checkmark" }
 			]
 			title: "Tfln Fab"
-			x: 15.5d
-			y: 20.75d
+			x: 18.0d
+			y: 22.75d
 		}
 		{
 			dependencies: ["30A225F4291C8DC3"]
@@ -1840,8 +1920,8 @@
 				{ id: "3B3FE80C1AFA4483", type: "checkmark" }
 			]
 			title: "LN On Sin Wafer"
-			x: 18.0d
-			y: 20.75d
+			x: 20.5d
+			y: 22.75d
 		}
 		{
 			dependencies: ["7AD6C64D41FC3845"]
@@ -1853,8 +1933,8 @@
 				{ id: "39590E4EA4A68B05", type: "checkmark" }
 			]
 			title: "LN On Sin Thinned"
-			x: 20.5d
-			y: 20.75d
+			x: 23.0d
+			y: 22.75d
 		}
 		{
 			dependencies: ["7C88B0C5BBC44CB2"]
@@ -1867,8 +1947,8 @@
 				{ id: "1A2C868FF156A5F8", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 23.0d
-			y: 20.75d
+			x: 25.5d
+			y: 22.75d
 		}
 		{
 			dependencies: ["5FA3F208DA857A25"]
@@ -1880,8 +1960,8 @@
 				{ id: "151AD34FBDEA80CC", type: "checkmark" }
 			]
 			title: "EO Transceiver"
-			x: 25.5d
-			y: 20.75d
+			x: 28.0d
+			y: 22.75d
 		}
 		{
 			icon: "gtceu:silicon_dust"
@@ -1893,8 +1973,8 @@
 				{ id: "77104D16592AA43D", type: "checkmark" }
 			]
 			title: "Silicon"
-			x: 0.5d
-			y: 22.75d
+			x: 3.0d
+			y: 24.75d
 		}
 		{
 			dependencies: ["76E78845BD4AC54B"]
@@ -1906,8 +1986,8 @@
 				{ id: "7707289B62B8D7D7", type: "checkmark" }
 			]
 			title: "Silicon Tetrachloride"
-			x: 3.0d
-			y: 22.75d
+			x: 5.5d
+			y: 24.75d
 		}
 		{
 			dependencies: ["53058F57028CAE4C"]
@@ -1919,8 +1999,8 @@
 				{ id: "109B4259CB623593", type: "checkmark" }
 			]
 			title: "Ule Soot"
-			x: 5.5d
-			y: 22.75d
+			x: 8.0d
+			y: 24.75d
 		}
 		{
 			dependencies: ["7CB98DA8EA3AF1F7"]
@@ -1932,8 +2012,8 @@
 				{ id: "1FAED01D4E70701F", type: "checkmark" }
 			]
 			title: "Ule Boule"
-			x: 8.0d
-			y: 22.75d
+			x: 10.5d
+			y: 24.75d
 		}
 		{
 			dependencies: ["5CF26FE541B2E0AD"]
@@ -1946,8 +2026,8 @@
 				{ id: "706CD1BBED9BFCF1", type: "checkmark" }
 			]
 			title: "Femtosecond Writer"
-			x: 10.5d
-			y: 22.75d
+			x: 13.0d
+			y: 24.75d
 		}
 		{
 			dependencies: ["7ED3732E31F6F4FD"]
@@ -1959,8 +2039,8 @@
 				{ id: "38F0595F4601387D", type: "checkmark" }
 			]
 			title: "Written Interposer Blank"
-			x: 13.0d
-			y: 22.75d
+			x: 15.5d
+			y: 24.75d
 		}
 		{
 			dependencies: ["53886BDDEFB45E50"]
@@ -1972,8 +2052,8 @@
 				{ id: "7D8ECB0869339A54", type: "checkmark" }
 			]
 			title: "Etched Interposer Blank"
-			x: 15.5d
-			y: 22.75d
+			x: 18.0d
+			y: 24.75d
 		}
 		{
 			dependencies: ["15B289F94E6544E7"]
@@ -1986,8 +2066,8 @@
 				{ id: "7C4D3EBBA2E167DE", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 18.0d
-			y: 22.75d
+			x: 20.5d
+			y: 24.75d
 		}
 		{
 			dependencies: ["71A6A90F1C967568"]
@@ -1999,21 +2079,21 @@
 				{ id: "3C3BEA9BA77D1FFD", type: "checkmark" }
 			]
 			title: "Glass Interposer"
-			x: 20.5d
-			y: 22.75d
+			x: 23.0d
+			y: 24.75d
 		}
 		{
+			dependencies: ["557DE379A2DEF505"]
 			icon: "grindless:hfo2_resist_wafer"
 			id: "3A3BFFD3A5EA74B5"
-			shape: "rsquare"
-			size: 1.0d
+			size: 1.25d
 			tasks: [
 				{ id: "541B379ECA5DCF3B", item: "grindless:hfo2_resist_wafer", optional_task: true, type: "item" }
 				{ id: "58C96108A9F12F89", type: "checkmark" }
 			]
 			title: "Hfo2 Resist Wafer"
-			x: 0.5d
-			y: 24.75d
+			x: 3.0d
+			y: 26.75d
 		}
 		{
 			dependencies: ["3A3BFFD3A5EA74B5"]
@@ -2026,8 +2106,8 @@
 				{ id: "58D5DEF8865FE1BE", type: "checkmark" }
 			]
 			title: "BEUV Scanner"
-			x: 3.0d
-			y: 24.75d
+			x: 5.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["3248F3D28DE78AA4"]
@@ -2039,8 +2119,8 @@
 				{ id: "561D5B60AA1BC8B2", type: "checkmark" }
 			]
 			title: "Fouled BEUV Mirror"
-			x: 5.5d
-			y: 24.75d
+			x: 8.0d
+			y: 26.75d
 		}
 		{
 			dependencies: ["7F6D6385B26A94C0"]
@@ -2053,8 +2133,8 @@
 				{ id: "56F0B59245CD0EA7", type: "checkmark" }
 			]
 			title: "BEUV Scanner"
-			x: 8.0d
-			y: 24.75d
+			x: 10.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["525C61375AB434A8"]
@@ -2066,8 +2146,8 @@
 				{ id: "7559A853E63AE5DF", type: "checkmark" }
 			]
 			title: "Terbium"
-			x: 10.5d
-			y: 24.75d
+			x: 13.0d
+			y: 26.75d
 		}
 		{
 			dependencies: ["3C611CF5B731AD9F"]
@@ -2079,8 +2159,8 @@
 				{ id: "121DAAC2396F09F1", type: "checkmark" }
 			]
 			title: "TB Droplet Target"
-			x: 13.0d
-			y: 24.75d
+			x: 15.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["18A2649372A8D37E"]
@@ -2093,8 +2173,8 @@
 				{ id: "7FBC533AF4550B74", type: "checkmark" }
 			]
 			title: "BEUV Scanner"
-			x: 15.5d
-			y: 24.75d
+			x: 18.0d
+			y: 26.75d
 		}
 		{
 			dependencies: ["50013D1252D90C65"]
@@ -2106,8 +2186,8 @@
 				{ id: "146FCDD5D75FA908", type: "checkmark" }
 			]
 			title: "BEUV Exposed Wafer"
-			x: 18.0d
-			y: 24.75d
+			x: 20.5d
+			y: 26.75d
 		}
 		{
 			dependencies: ["7F32F2CBB0BCEC43"]
@@ -2120,8 +2200,8 @@
 				{ id: "300F17FD4B5AEC29", type: "checkmark" }
 			]
 			title: "BEUV Scanner"
-			x: 20.5d
-			y: 24.75d
+			x: 23.0d
+			y: 26.75d
 		}
 		{
 			dependencies: ["7C32C79803986752"]
@@ -2133,8 +2213,8 @@
 				{ id: "5B56806DE16F3B96", type: "checkmark" }
 			]
 			title: "BEUV Driver ASIC"
-			x: 23.0d
-			y: 24.75d
+			x: 25.5d
+			y: 26.75d
 		}
 		{
 			icon: "gtceu:mixed_rare_earth_chloride_dust"
@@ -2146,8 +2226,8 @@
 				{ id: "5048E039589C1C3D", type: "checkmark" }
 			]
 			title: "Mixed Rare Earth Chloride"
-			x: 0.5d
-			y: 26.75d
+			x: 3.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["15385042634F9662"]
@@ -2160,8 +2240,8 @@
 				{ id: "39026DB68DEF9533", type: "checkmark" }
 			]
 			title: "Extraction Cascade"
-			x: 3.0d
-			y: 26.75d
+			x: 5.5d
+			y: 28.75d
 		}
 		{
 			dependencies: ["3562D01C7AEDEED1"]
@@ -2173,8 +2253,8 @@
 				{ id: "5013CE5A4D05F1C4", type: "checkmark" }
 			]
 			title: "Terbium Oxide"
-			x: 5.5d
-			y: 26.75d
+			x: 8.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["372CB24E51AADC1D"]
@@ -2187,8 +2267,8 @@
 				{ id: "7AFED911AD627F22", type: "checkmark" }
 			]
 			title: "Europium Reductor"
-			x: 8.0d
-			y: 26.75d
+			x: 10.5d
+			y: 28.75d
 		}
 		{
 			dependencies: ["119729D3CF2C624B"]
@@ -2200,8 +2280,8 @@
 				{ id: "516CB5145301CEF5", type: "checkmark" }
 			]
 			title: "Terbium"
-			x: 10.5d
-			y: 26.75d
+			x: 13.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["5696D3CDE1543CDD"]
@@ -2213,8 +2293,8 @@
 				{ id: "7F0FD6C833B5C306", type: "checkmark" }
 			]
 			title: "TB Droplet Target"
-			x: 13.0d
-			y: 26.75d
+			x: 15.5d
+			y: 28.75d
 		}
 		{
 			dependencies: ["5F9950E9F3849395"]
@@ -2227,8 +2307,8 @@
 				{ id: "50FA06E41B07C8D9", type: "checkmark" }
 			]
 			title: "BEUV Scanner"
-			x: 15.5d
-			y: 26.75d
+			x: 18.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["76F5541F1604C352"]
@@ -2240,8 +2320,8 @@
 				{ id: "579F39AE6DCF721B", type: "checkmark" }
 			]
 			title: "Fouled BEUV Mirror"
-			x: 18.0d
-			y: 26.75d
+			x: 20.5d
+			y: 28.75d
 		}
 		{
 			dependencies: ["1ADC7A72619FE88B"]
@@ -2254,8 +2334,8 @@
 				{ id: "18A9ABDE1ED385C8", type: "checkmark" }
 			]
 			title: "BEUV Scanner"
-			x: 20.5d
-			y: 26.75d
+			x: 23.0d
+			y: 28.75d
 		}
 		{
 			dependencies: ["1E9F08AFDF9DFFBE"]
@@ -2267,8 +2347,8 @@
 				{ id: "1F8D4D31BA90E9F0", type: "checkmark" }
 			]
 			title: "BEUV Mirror"
-			x: 23.0d
-			y: 26.75d
+			x: 25.5d
+			y: 28.75d
 		}
 		{
 			icon: "grindless:fz_silicon_boule"
@@ -2280,8 +2360,8 @@
 				{ id: "77BB1DF331D0FF65", type: "checkmark" }
 			]
 			title: "FZ Silicon Boule"
-			x: 0.5d
-			y: 28.75d
+			x: 3.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["1FA6FD6212547922"]
@@ -2293,8 +2373,8 @@
 				{ id: "3BFC22FA671DB71E", type: "checkmark" }
 			]
 			title: "FZ Silicon Wafer"
-			x: 3.0d
-			y: 28.75d
+			x: 5.5d
+			y: 30.75d
 		}
 		{
 			dependencies: ["15C645DBD29E36AC"]
@@ -2306,8 +2386,8 @@
 				{ id: "170DA7370236CF34", type: "checkmark" }
 			]
 			title: "Oxidised Wafer"
-			x: 5.5d
-			y: 28.75d
+			x: 8.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["7726A03016056D71"]
@@ -2320,8 +2400,8 @@
 				{ id: "75777102E38B0D33", type: "checkmark" }
 			]
 			title: "Synchrotron"
-			x: 8.0d
-			y: 28.75d
+			x: 10.5d
+			y: 30.75d
 		}
 		{
 			dependencies: ["1FAEC5DC0630BBF3"]
@@ -2333,8 +2413,8 @@
 				{ id: "1B7835C4A2276C2A", type: "checkmark" }
 			]
 			title: "Trenched Oxide Wafer"
-			x: 10.5d
-			y: 28.75d
+			x: 13.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["5E821617C710DF02"]
@@ -2346,8 +2426,8 @@
 				{ id: "11F7508EAA029004", type: "checkmark" }
 			]
 			title: "Damascene Sin Wafer"
-			x: 13.0d
-			y: 28.75d
+			x: 15.5d
+			y: 30.75d
 		}
 		{
 			dependencies: ["10551063A2704D47"]
@@ -2360,8 +2440,8 @@
 				{ id: "57CF1E345E15FE19", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 15.5d
-			y: 28.75d
+			x: 18.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["1164EE9E5B7D3689"]
@@ -2373,8 +2453,8 @@
 				{ id: "33023EF24DE85741", type: "checkmark" }
 			]
 			title: "Annealed Damascene Ring"
-			x: 18.0d
-			y: 28.75d
+			x: 20.5d
+			y: 30.75d
 		}
 		{
 			dependencies: ["5A1CF714AD4F518D"]
@@ -2387,8 +2467,8 @@
 				{ id: "129FDD1198E16F52", type: "checkmark" }
 			]
 			title: "Tfln Fab"
-			x: 20.5d
-			y: 28.75d
+			x: 23.0d
+			y: 30.75d
 		}
 		{
 			dependencies: ["58C7697F079480A0"]
@@ -2400,8 +2480,8 @@
 				{ id: "3E2DEFC3E871975F", type: "checkmark" }
 			]
 			title: "EO Microcomb"
-			x: 23.0d
-			y: 28.75d
+			x: 25.5d
+			y: 30.75d
 		}
 		{
 			icon: "grindless:lithium_niobate_wafer"
@@ -2413,8 +2493,8 @@
 				{ id: "75D31CDABCC7849F", type: "checkmark" }
 			]
 			title: "Lithium Niobate Wafer"
-			x: 0.5d
-			y: 30.75d
+			x: 3.0d
+			y: 32.75d
 		}
 		{
 			dependencies: ["5A7D895C5B810FC1"]
@@ -2427,8 +2507,8 @@
 				{ id: "19AA0EA1C64B5D6A", type: "checkmark" }
 			]
 			title: "Ion Implanter"
-			x: 3.0d
-			y: 30.75d
+			x: 5.5d
+			y: 32.75d
 		}
 		{
 			dependencies: ["1BC1441E93414A55"]
@@ -2440,8 +2520,8 @@
 				{ id: "72C1E74789FACC69", type: "checkmark" }
 			]
 			title: "Implanted LN Wafer"
-			x: 5.5d
-			y: 30.75d
+			x: 8.0d
+			y: 32.75d
 		}
 		{
 			dependencies: ["54D8312A9B117245"]
@@ -2454,8 +2534,8 @@
 				{ id: "1013B1DD1BD4D040", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 8.0d
-			y: 30.75d
+			x: 10.5d
+			y: 32.75d
 		}
 		{
 			dependencies: ["77301400EE15D291"]
@@ -2467,8 +2547,8 @@
 				{ id: "15862AAA924B7070", type: "checkmark" }
 			]
 			title: "LNOI Wafer"
-			x: 10.5d
-			y: 30.75d
+			x: 13.0d
+			y: 32.75d
 		}
 		{
 			dependencies: ["515B5FA2C69B2FA4"]
@@ -2481,8 +2561,8 @@
 				{ id: "5B254176FEF0B193", type: "checkmark" }
 			]
 			title: "Tfln Fab"
-			x: 13.0d
-			y: 30.75d
+			x: 15.5d
+			y: 32.75d
 		}
 		{
 			dependencies: ["7AAA90859B1F18B6"]
@@ -2494,8 +2574,8 @@
 				{ id: "53A66EE7FFA63BEF", type: "checkmark" }
 			]
 			title: "Poled LNOI Wafer"
-			x: 15.5d
-			y: 30.75d
+			x: 18.0d
+			y: 32.75d
 		}
 		{
 			dependencies: ["3DBDA9F160415719"]
@@ -2508,8 +2588,8 @@
 				{ id: "529283669638538D", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 18.0d
-			y: 30.75d
+			x: 20.5d
+			y: 32.75d
 		}
 		{
 			dependencies: ["734621C36924F0C2"]
@@ -2521,8 +2601,8 @@
 				{ id: "1745FC888A97311B", type: "checkmark" }
 			]
 			title: "PPLN Waveguide"
-			x: 20.5d
-			y: 30.75d
+			x: 23.0d
+			y: 32.75d
 		}
 		{
 			dependencies: ["50459AF269139396"]
@@ -2534,8 +2614,8 @@
 				{ id: "53D0EC87CD6E927E", type: "checkmark" }
 			]
 			title: "Shg 486 Stage"
-			x: 23.0d
-			y: 30.75d
+			x: 25.5d
+			y: 32.75d
 		}
 		{
 			dependencies: ["3E39FE0667F37D79"]
@@ -2547,8 +2627,8 @@
 				{ id: "3B71E32BCF875BD7", type: "checkmark" }
 			]
 			title: "PS Cooling Laser"
-			x: 25.5d
-			y: 30.75d
+			x: 28.0d
+			y: 32.75d
 		}
 		{
 			icon: "gtceu:silicon_dust"
@@ -2560,8 +2640,8 @@
 				{ id: "5F8D16654BAB9DB0", type: "checkmark" }
 			]
 			title: "Silicon"
-			x: 0.5d
-			y: 32.75d
+			x: 3.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["52CF603F2A2F8F35"]
@@ -2573,8 +2653,8 @@
 				{ id: "772C3EB52A9A3CAF", type: "checkmark" }
 			]
 			title: "Silicon Tetrachloride"
-			x: 3.0d
-			y: 32.75d
+			x: 5.5d
+			y: 34.75d
 		}
 		{
 			dependencies: ["1A31B2F35857EBF4"]
@@ -2587,8 +2667,8 @@
 				{ id: "50B80AF23029DC18", type: "checkmark" }
 			]
 			title: "Fibre Draw Tower"
-			x: 5.5d
-			y: 32.75d
+			x: 8.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["13945D7A6950DEEF"]
@@ -2600,8 +2680,8 @@
 				{ id: "5E69D4879CB1CF45", type: "checkmark" }
 			]
 			title: "Silica Storage Preform"
-			x: 8.0d
-			y: 32.75d
+			x: 10.5d
+			y: 34.75d
 		}
 		{
 			dependencies: ["349AF0A1974D6BD5"]
@@ -2614,8 +2694,8 @@
 				{ id: "7A24D17E1A786C09", type: "checkmark" }
 			]
 			title: "Femtosecond Writer"
-			x: 10.5d
-			y: 32.75d
+			x: 13.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["7F1556A0442ACB8D"]
@@ -2627,8 +2707,8 @@
 				{ id: "7D93387B7129977D", type: "checkmark" }
 			]
 			title: "Written Crystal Blank"
-			x: 13.0d
-			y: 32.75d
+			x: 15.5d
+			y: 34.75d
 		}
 		{
 			dependencies: ["361D5EC5C9360143"]
@@ -2640,8 +2720,8 @@
 				{ id: "3AA494A6FFF51A7C", type: "checkmark" }
 			]
 			title: "Verified Crystal"
-			x: 15.5d
-			y: 32.75d
+			x: 18.0d
+			y: 34.75d
 		}
 		{
 			dependencies: ["3167B18FC8542EB4"]
@@ -2653,8 +2733,8 @@
 				{ id: "365BAD639D37EBBD", type: "checkmark" }
 			]
 			title: "Data Crystal 5D"
-			x: 18.0d
-			y: 32.75d
+			x: 20.5d
+			y: 34.75d
 		}
 		{
 			icon: "gtceu:silicon_dust"
@@ -2666,8 +2746,8 @@
 				{ id: "3348866C1565E7DE", type: "checkmark" }
 			]
 			title: "Silicon"
-			x: 0.5d
-			y: 34.75d
+			x: 3.0d
+			y: 36.75d
 		}
 		{
 			dependencies: ["7D760579988104DE"]
@@ -2679,8 +2759,8 @@
 				{ id: "17D778AD3C06A50B", type: "checkmark" }
 			]
 			title: "Silicon Tetrachloride"
-			x: 3.0d
-			y: 34.75d
+			x: 5.5d
+			y: 36.75d
 		}
 		{
 			dependencies: ["798B9D06423637AF"]
@@ -2693,8 +2773,8 @@
 				{ id: "7CA80735ABB65974", type: "checkmark" }
 			]
 			title: "Fibre Draw Tower"
-			x: 5.5d
-			y: 34.75d
+			x: 8.0d
+			y: 36.75d
 		}
 		{
 			dependencies: ["1EEC1F1CEC722DAC"]
@@ -2706,8 +2786,8 @@
 				{ id: "79983616B34D3E90", type: "checkmark" }
 			]
 			title: "ER Preform"
-			x: 8.0d
-			y: 34.75d
+			x: 10.5d
+			y: 36.75d
 		}
 		{
 			dependencies: ["1A72EB3FE165DD19"]
@@ -2719,8 +2799,8 @@
 				{ id: "163DF4F0FF27E217", type: "checkmark" }
 			]
 			title: "ER Fibre"
-			x: 10.5d
-			y: 34.75d
+			x: 13.0d
+			y: 36.75d
 		}
 		{
 			dependencies: ["1A5686FC75F4F2DB"]
@@ -2732,8 +2812,8 @@
 				{ id: "1E65364B8085887D", type: "checkmark" }
 			]
 			title: "ER Fibre Coil"
-			x: 13.0d
-			y: 34.75d
+			x: 15.5d
+			y: 36.75d
 		}
 		{
 			dependencies: ["318902A5E1F121DC"]
@@ -2745,8 +2825,8 @@
 				{ id: "1607F064DD521171", type: "checkmark" }
 			]
 			title: "Pumped EDFA"
-			x: 15.5d
-			y: 34.75d
+			x: 18.0d
+			y: 36.75d
 		}
 		{
 			icon: "grindless:si28_soi_wafer"
@@ -2758,8 +2838,8 @@
 				{ id: "71F05B4FD4D1A5F5", type: "checkmark" }
 			]
 			title: "Si-28 Soi Wafer"
-			x: 29.75d
-			y: 20.75d
+			x: 32.25d
+			y: 22.75d
 		}
 		{
 			dependencies: ["5524B10B64E7F27D"]
@@ -2772,8 +2852,8 @@
 				{ id: "57A144C294248219", type: "checkmark" }
 			]
 			title: "Stm Lithography Cell"
-			x: 32.25d
-			y: 20.75d
+			x: 34.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["5CE2BBFC5DACAB6D"]
@@ -2785,8 +2865,8 @@
 				{ id: "7772F131945138D1", type: "checkmark" }
 			]
 			title: "H Terminated Wafer"
-			x: 34.75d
-			y: 20.75d
+			x: 37.25d
+			y: 22.75d
 		}
 		{
 			dependencies: ["79ABEFF8BC5BDB8F"]
@@ -2799,8 +2879,8 @@
 				{ id: "39CA465014A73EE7", type: "checkmark" }
 			]
 			title: "Stm Lithography Cell"
-			x: 37.25d
-			y: 20.75d
+			x: 39.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["3A44CBA32B1CDFAB"]
@@ -2812,8 +2892,8 @@
 				{ id: "3F05247FB3D4F7B9", type: "checkmark" }
 			]
 			title: "Stm Patterned Wafer"
-			x: 39.75d
-			y: 20.75d
+			x: 42.25d
+			y: 22.75d
 		}
 		{
 			dependencies: ["19B02A4AADE3F24D"]
@@ -2826,8 +2906,8 @@
 				{ id: "563E2BAE33A1D081", type: "checkmark" }
 			]
 			title: "Stm Lithography Cell"
-			x: 42.25d
-			y: 20.75d
+			x: 44.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["37CAAE66C73C4F2B"]
@@ -2839,8 +2919,8 @@
 				{ id: "3F1CC25C9BA7D617", type: "checkmark" }
 			]
 			title: "Ph3 Dosed Wafer"
-			x: 44.75d
-			y: 20.75d
+			x: 47.25d
+			y: 22.75d
 		}
 		{
 			dependencies: ["3964381F440070AA"]
@@ -2853,8 +2933,8 @@
 				{ id: "3872FACABEB026E2", type: "checkmark" }
 			]
 			title: "MBE Reactor"
-			x: 47.25d
-			y: 20.75d
+			x: 49.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["7257C2FE9224E837"]
@@ -2866,8 +2946,8 @@
 				{ id: "14387B9638219BD8", type: "checkmark" }
 			]
 			title: "P SI Die"
-			x: 49.75d
-			y: 20.75d
+			x: 52.25d
+			y: 22.75d
 		}
 		{
 			dependencies: ["1428B1FBBC07A0E2"]
@@ -2880,8 +2960,8 @@
 				{ id: "12AD22290169DAF6", type: "checkmark" }
 			]
 			title: "Millikelvin Cryostat Works"
-			x: 52.25d
-			y: 20.75d
+			x: 54.75d
+			y: 22.75d
 		}
 		{
 			dependencies: ["7610D637A9E17924"]
@@ -2893,8 +2973,8 @@
 				{ id: "3217543724D64D57", type: "checkmark" }
 			]
 			title: "P SI Processor"
-			x: 54.75d
-			y: 20.75d
+			x: 57.25d
+			y: 22.75d
 		}
 		{
 			icon: "gtceu:yttrium_dust"
@@ -2906,8 +2986,8 @@
 				{ id: "1748D06D4EC9819D", type: "checkmark" }
 			]
 			title: "Yttrium"
-			x: 29.75d
-			y: 22.75d
+			x: 32.25d
+			y: 24.75d
 		}
 		{
 			dependencies: ["3BCD0C4CEC358752"]
@@ -2920,8 +3000,8 @@
 				{ id: "7CC87C563FB3ED05", type: "checkmark" }
 			]
 			title: "Crystal Growth Furnace"
-			x: 32.25d
-			y: 22.75d
+			x: 34.75d
+			y: 24.75d
 		}
 		{
 			dependencies: ["1B1A42BF25974276"]
@@ -2933,8 +3013,8 @@
 				{ id: "532871D82756A771", type: "checkmark" }
 			]
 			title: "Eu-151 YSO Boule"
-			x: 34.75d
-			y: 22.75d
+			x: 37.25d
+			y: 24.75d
 		}
 		{
 			dependencies: ["145FFB9277DB1ECD"]
@@ -2946,8 +3026,8 @@
 				{ id: "7844AD8298F3A802", type: "checkmark" }
 			]
 			title: "Eu-151 YSO Slab"
-			x: 37.25d
-			y: 22.75d
+			x: 39.75d
+			y: 24.75d
 		}
 		{
 			dependencies: ["55501FE5290D9565"]
@@ -2960,8 +3040,8 @@
 				{ id: "59995967FBF980BA", type: "checkmark" }
 			]
 			title: "Spectral Hole Burner"
-			x: 39.75d
-			y: 22.75d
+			x: 42.25d
+			y: 24.75d
 		}
 		{
 			dependencies: ["362B761008CE3519"]
@@ -2973,8 +3053,8 @@
 				{ id: "50AFADDAA36EEB77", type: "checkmark" }
 			]
 			title: "Six Hour Memory Slab"
-			x: 42.25d
-			y: 22.75d
+			x: 44.75d
+			y: 24.75d
 		}
 		{
 			dependencies: ["109EABDA2BF9113B"]
@@ -2986,8 +3066,8 @@
 				{ id: "713904045269074D", type: "checkmark" }
 			]
 			title: "Six Hour Memory"
-			x: 44.75d
-			y: 22.75d
+			x: 47.25d
+			y: 24.75d
 		}
 		{
 			icon: "gtceu:yttrium_dust"
@@ -2999,8 +3079,8 @@
 				{ id: "7D674E3D0357CCB6", type: "checkmark" }
 			]
 			title: "Yttrium"
-			x: 29.75d
-			y: 24.75d
+			x: 32.25d
+			y: 26.75d
 		}
 		{
 			dependencies: ["3A2ED4AE085ADDF2"]
@@ -3013,8 +3093,8 @@
 				{ id: "3D79C6A29BFCAECE", type: "checkmark" }
 			]
 			title: "Crystal Growth Furnace"
-			x: 32.25d
-			y: 24.75d
+			x: 34.75d
+			y: 26.75d
 		}
 		{
 			dependencies: ["3B5B5D9A73A9203B"]
@@ -3026,8 +3106,8 @@
 				{ id: "314A340F606E8C48", type: "checkmark" }
 			]
 			title: "ER YSO Boule"
-			x: 34.75d
-			y: 24.75d
+			x: 37.25d
+			y: 26.75d
 		}
 		{
 			dependencies: ["5CA025D73BC9D7EA"]
@@ -3039,8 +3119,8 @@
 				{ id: "3CD51F61692FDB6E", type: "checkmark" }
 			]
 			title: "ER YSO Slab"
-			x: 37.25d
-			y: 24.75d
+			x: 39.75d
+			y: 26.75d
 		}
 		{
 			dependencies: ["593439483716A906"]
@@ -3053,8 +3133,8 @@
 				{ id: "7E666D49E9885C2B", type: "checkmark" }
 			]
 			title: "Spectral Hole Burner"
-			x: 39.75d
-			y: 24.75d
+			x: 42.25d
+			y: 26.75d
 		}
 		{
 			dependencies: ["321CDBC58825F11D"]
@@ -3066,8 +3146,8 @@
 				{ id: "579CB2CE4D2FC000", type: "checkmark" }
 			]
 			title: "Telecom Memory Slab"
-			x: 42.25d
-			y: 24.75d
+			x: 44.75d
+			y: 26.75d
 		}
 		{
 			dependencies: ["3C89070EB3EBF999"]
@@ -3080,8 +3160,8 @@
 				{ id: "7718AE94D2D9DB25", type: "checkmark" }
 			]
 			title: "Fibre Draw Tower"
-			x: 44.75d
-			y: 24.75d
+			x: 47.25d
+			y: 26.75d
 		}
 		{
 			dependencies: ["16B9514D7FAB2053"]
@@ -3093,8 +3173,8 @@
 				{ id: "59D01B4D3A7E028E", type: "checkmark" }
 			]
 			title: "Telecom Memory"
-			x: 47.25d
-			y: 24.75d
+			x: 49.75d
+			y: 26.75d
 		}
 		{
 			icon: "grindless:implanted_ln_wafer"
@@ -3106,8 +3186,8 @@
 				{ id: "33F67EBE3963A067", type: "checkmark" }
 			]
 			title: "Implanted LN Wafer"
-			x: 29.75d
-			y: 26.75d
+			x: 32.25d
+			y: 28.75d
 		}
 		{
 			dependencies: ["11FEE419E45E8294"]
@@ -3120,8 +3200,8 @@
 				{ id: "556FB42D2138694D", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 32.25d
-			y: 26.75d
+			x: 34.75d
+			y: 28.75d
 		}
 		{
 			dependencies: ["31134708148641A1"]
@@ -3133,8 +3213,8 @@
 				{ id: "76FAFADD61CB0D46", type: "checkmark" }
 			]
 			title: "LNOI Wafer"
-			x: 34.75d
-			y: 26.75d
+			x: 37.25d
+			y: 28.75d
 		}
 		{
 			dependencies: ["76C2E30358C51BB7"]
@@ -3147,8 +3227,8 @@
 				{ id: "16D17D763371BA52", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 37.25d
-			y: 26.75d
+			x: 39.75d
+			y: 28.75d
 		}
 		{
 			dependencies: ["594CAEE0CD19E607"]
@@ -3160,8 +3240,8 @@
 				{ id: "5D317106AE3633A1", type: "checkmark" }
 			]
 			title: "PCM Photonic Die"
-			x: 39.75d
-			y: 26.75d
+			x: 42.25d
+			y: 28.75d
 		}
 		{
 			dependencies: ["19C8F9ED1A66605F"]
@@ -3174,8 +3254,8 @@
 				{ id: "35A904EBA5E50853", type: "checkmark" }
 			]
 			title: "Photonic Foundry"
-			x: 42.25d
-			y: 26.75d
+			x: 44.75d
+			y: 28.75d
 		}
 		{
 			dependencies: ["32998E972440448D"]
@@ -3187,8 +3267,8 @@
 				{ id: "163E2C78B5E21D42", type: "checkmark" }
 			]
 			title: "PCM Crossbar"
-			x: 44.75d
-			y: 26.75d
+			x: 47.25d
+			y: 28.75d
 		}
 		{
 			dependencies: ["1DAB12A5F2C95A58"]
@@ -3200,8 +3280,8 @@
 				{ id: "59A5B584BA4E7177", type: "checkmark" }
 			]
 			title: "Crossbar On Interposer"
-			x: 47.25d
-			y: 26.75d
+			x: 49.75d
+			y: 28.75d
 		}
 		{
 			dependencies: ["330523FC7FE0DF5C"]
@@ -3214,8 +3294,8 @@
 				{ id: "3D57F2BACA999F6C", type: "checkmark" }
 			]
 			title: "Photonic Integration Hall"
-			x: 49.75d
-			y: 26.75d
+			x: 52.25d
+			y: 28.75d
 		}
 		{
 			dependencies: ["11E70F36C3AAEBA1"]
@@ -3227,8 +3307,8 @@
 				{ id: "5F28484AB668E6B9", type: "checkmark" }
 			]
 			title: "Optical Mainframe"
-			x: 52.25d
-			y: 26.75d
+			x: 54.75d
+			y: 28.75d
 		}
 		{
 			icon: "gtceu:niobium_dust"
@@ -3240,8 +3320,8 @@
 				{ id: "34CC4DA42D3C3009", type: "checkmark" }
 			]
 			title: "Niobium"
-			x: 29.75d
-			y: 28.75d
+			x: 32.25d
+			y: 30.75d
 		}
 		{
 			dependencies: ["5DC6862F6B30554A"]
@@ -3254,8 +3334,8 @@
 				{ id: "107061E4EEAF81AF", type: "checkmark" }
 			]
 			title: "Spark Plasma Sinterer"
-			x: 32.25d
-			y: 28.75d
+			x: 34.75d
+			y: 30.75d
 		}
 		{
 			dependencies: ["5BD4221F1AC847F2"]
@@ -3267,8 +3347,8 @@
 				{ id: "7812F73BC6AE949B", type: "checkmark" }
 			]
 			title: "NB Target"
-			x: 34.75d
-			y: 28.75d
+			x: 37.25d
+			y: 30.75d
 		}
 		{
 			dependencies: ["3D1CEB19EE4DC1A5"]
@@ -3281,8 +3361,8 @@
 				{ id: "7AB4E3FAAA1513E3", type: "checkmark" }
 			]
 			title: "MBE Reactor"
-			x: 37.25d
-			y: 28.75d
+			x: 39.75d
+			y: 30.75d
 		}
 		{
 			dependencies: ["7863433BB77AD44B"]
@@ -3294,8 +3374,8 @@
 				{ id: "3AA943D8B1E2B0E5", type: "checkmark" }
 			]
 			title: "NB Trilayer"
-			x: 39.75d
-			y: 28.75d
+			x: 42.25d
+			y: 30.75d
 		}
 		{
 			dependencies: ["7C1A6EE9B75F33B0"]
@@ -3308,8 +3388,8 @@
 				{ id: "3A42ECBAD7F5BA5C", type: "checkmark" }
 			]
 			title: "Snspd Foundry"
-			x: 42.25d
-			y: 28.75d
+			x: 44.75d
+			y: 30.75d
 		}
 		{
 			dependencies: ["14CE1ED7492E45A3"]
@@ -3321,8 +3401,8 @@
 				{ id: "345630742EF160F5", type: "checkmark" }
 			]
 			title: "NB Jj Wafer"
-			x: 44.75d
-			y: 28.75d
+			x: 47.25d
+			y: 30.75d
 		}
 		{
 			dependencies: ["707EC08F2C074034"]
@@ -3334,8 +3414,8 @@
 				{ id: "3A7B051FCC418436", type: "checkmark" }
 			]
 			title: "AQFP Die"
-			x: 47.25d
-			y: 28.75d
+			x: 49.75d
+			y: 30.75d
 		}
 		{
 			dependencies: ["5043CD0E19DC1992"]
@@ -3347,8 +3427,8 @@
 				{ id: "52A22E358D6D8BF0", type: "checkmark" }
 			]
 			title: "AQFP Module"
-			x: 49.75d
-			y: 28.75d
+			x: 52.25d
+			y: 30.75d
 		}
 		{
 			dependencies: ["726EA7FCE475E785"]
@@ -3360,8 +3440,8 @@
 				{ id: "73765672048A0501", type: "checkmark" }
 			]
 			title: "Matrioshka Logic Tile"
-			x: 52.25d
-			y: 28.75d
+			x: 54.75d
+			y: 30.75d
 		}
 		{
 			icon: "gtceu:praseodymium_dust"
@@ -3373,8 +3453,8 @@
 				{ id: "3A768C2121FE8BCA", type: "checkmark" }
 			]
 			title: "Praseodymium"
-			x: 29.75d
-			y: 30.75d
+			x: 32.25d
+			y: 32.75d
 		}
 		{
 			dependencies: ["5D267D1E0322A1FB"]
@@ -3387,8 +3467,8 @@
 				{ id: "52053EE0403B11CC", type: "checkmark" }
 			]
 			title: "Levitation Melter"
-			x: 32.25d
-			y: 30.75d
+			x: 34.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["5E990EDD256CEF00"]
@@ -3400,8 +3480,8 @@
 				{ id: "3138E7D4079359F3", type: "checkmark" }
 			]
 			title: "Prni5"
-			x: 34.75d
-			y: 30.75d
+			x: 37.25d
+			y: 32.75d
 		}
 		{
 			dependencies: ["7BF30216CFAC930A"]
@@ -3414,8 +3494,8 @@
 				{ id: "3AAEF97996EB80D3", type: "checkmark" }
 			]
 			title: "Millikelvin Cryostat Works"
-			x: 37.25d
-			y: 30.75d
+			x: 39.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["333054B374CA4A6F"]
@@ -3427,8 +3507,8 @@
 				{ id: "347B31EB659D7F70", type: "checkmark" }
 			]
 			title: "Nuclear Stage"
-			x: 39.75d
-			y: 30.75d
+			x: 42.25d
+			y: 32.75d
 		}
 		{
 			dependencies: ["5ED1E07011B8D320"]
@@ -3441,8 +3521,8 @@
 				{ id: "176785543517131A", type: "checkmark" }
 			]
 			title: "Millikelvin Cryostat Works"
-			x: 42.25d
-			y: 30.75d
+			x: 44.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["59C2753E6241A0BB"]
@@ -3454,8 +3534,8 @@
 				{ id: "5D1E39CF5602615C", type: "checkmark" }
 			]
 			title: "MK Cryostat Module"
-			x: 44.75d
-			y: 30.75d
+			x: 47.25d
+			y: 32.75d
 		}
 		{
 			icon: "gtceu:lithium_chloride_dust"
@@ -3468,7 +3548,7 @@
 			]
 			title: "Lithium Chloride"
 			x: 0.5d
-			y: 38.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["55BF3FEC727C6333"]
@@ -3482,7 +3562,7 @@
 			]
 			title: "Calutron"
 			x: 3.0d
-			y: 38.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["7AF011BDE486C389"]
@@ -3495,7 +3575,7 @@
 			]
 			title: "Lithium 6"
 			x: 5.5d
-			y: 38.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["562BEA774B8BEE36"]
@@ -3509,7 +3589,7 @@
 			]
 			title: "Pyroprocessing Cell"
 			x: 8.0d
-			y: 38.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["1F7AC2B42A0BDDF3"]
@@ -3522,7 +3602,7 @@
 			]
 			title: "Lithium 6 Metal"
 			x: 10.5d
-			y: 38.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["1C91703340026A9A"]
@@ -3535,7 +3615,7 @@
 			]
 			title: "Li-6 Hydride"
 			x: 13.0d
-			y: 38.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["13626908D08816F2"]
@@ -3549,7 +3629,7 @@
 			]
 			title: "Polarised Proton Source"
 			x: 15.5d
-			y: 38.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["30F2709326F74834"]
@@ -3562,7 +3642,7 @@
 			]
 			title: "Polarised Li-6h"
 			x: 18.0d
-			y: 38.75d
+			y: 40.75d
 		}
 		{
 			dependencies: ["364F86B037B0B791"]
@@ -3575,7 +3655,7 @@
 			]
 			title: "Polarised Li-6h Pellet"
 			x: 20.5d
-			y: 38.75d
+			y: 40.75d
 		}
 		{
 			icon: "grindless:rhea_am_powder"
@@ -3588,7 +3668,7 @@
 			]
 			title: "RHEA Am Powder"
 			x: 0.5d
-			y: 40.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["5AECD27E2630ABCB"]
@@ -3602,7 +3682,7 @@
 			]
 			title: "Powder Bed Printer"
 			x: 3.0d
-			y: 40.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["3082EAB8D8456B5E"]
@@ -3615,7 +3695,7 @@
 			]
 			title: "Near Net W Mesh"
 			x: 5.5d
-			y: 40.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["781EAA261ACB096A"]
@@ -3629,7 +3709,7 @@
 			]
 			title: "Powder Bed Printer"
 			x: 8.0d
-			y: 40.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["714AEC73375CB7C6"]
@@ -3642,7 +3722,7 @@
 			]
 			title: "W Mesh"
 			x: 10.5d
-			y: 40.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["1B99D844A31FC3C0"]
@@ -3655,7 +3735,7 @@
 			]
 			title: "CPS Wetted Mesh"
 			x: 13.0d
-			y: 40.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["5B4800DB61573F97"]
@@ -3668,7 +3748,7 @@
 			]
 			title: "Divertor Cassette"
 			x: 15.5d
-			y: 40.75d
+			y: 42.75d
 		}
 		{
 			dependencies: ["3645B5AA59AC83A2"]
@@ -3681,7 +3761,7 @@
 			]
 			title: "Divertor"
 			x: 18.0d
-			y: 40.75d
+			y: 42.75d
 		}
 		{
 			icon: "grindless:cooled_positron_bunch"
@@ -3694,7 +3774,7 @@
 			]
 			title: "Cooled Positron Bunch"
 			x: 0.5d
-			y: 42.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["155D0A7A32074FC6"]
@@ -3708,7 +3788,7 @@
 			]
 			title: "Positronium Condensate Lab"
 			x: 3.0d
-			y: 42.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["3A62713FAA91C17E"]
@@ -3721,7 +3801,7 @@
 			]
 			title: "PS In Aerogel"
 			x: 5.5d
-			y: 42.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["100CB8F1D3046348"]
@@ -3735,7 +3815,7 @@
 			]
 			title: "Positronium Condensate Lab"
 			x: 8.0d
-			y: 42.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["19699AEEBB5C5937"]
@@ -3748,7 +3828,7 @@
 			]
 			title: "Laser Cooled PS"
 			x: 10.5d
-			y: 42.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["5DC38CBFD8E8BFDB"]
@@ -3762,7 +3842,7 @@
 			]
 			title: "Antimatter Trap"
 			x: 13.0d
-			y: 42.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["110034569883D007"]
@@ -3775,7 +3855,7 @@
 			]
 			title: "PS Bec"
 			x: 15.5d
-			y: 42.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["5386F174D990111E"]
@@ -3789,7 +3869,7 @@
 			]
 			title: "Positronium Condensate Lab"
 			x: 18.0d
-			y: 42.75d
+			y: 44.75d
 		}
 		{
 			dependencies: ["1087AFBE6E5EDD4B"]
@@ -3802,7 +3882,7 @@
 			]
 			title: "Gamma Laser Cavity"
 			x: 20.5d
-			y: 42.75d
+			y: 44.75d
 		}
 		{
 			icon: "grindless:gallium_arsenide_wafer"
@@ -3815,7 +3895,7 @@
 			]
 			title: "Gallium Arsenide Wafer"
 			x: 0.5d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["72BBB0556FF42E4E"]
@@ -3829,7 +3909,7 @@
 			]
 			title: "Mocvd Reactor"
 			x: 3.0d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["3732965103C351CF"]
@@ -3842,7 +3922,7 @@
 			]
 			title: "Ingaasb Epi Wafer"
 			x: 5.5d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["35C46EEC24C20F6C"]
@@ -3856,7 +3936,7 @@
 			]
 			title: "Photonic Foundry"
 			x: 8.0d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["1E0FBF8E077D1D91"]
@@ -3869,7 +3949,7 @@
 			]
 			title: "Air Bridge Wafer"
 			x: 10.5d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["363D2DC24F7C0ABE"]
@@ -3882,7 +3962,7 @@
 			]
 			title: "Ingaasb TPV Cell"
 			x: 13.0d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["50C522997E5D1DCC"]
@@ -3896,7 +3976,7 @@
 			]
 			title: "Droplet Radiator Works"
 			x: 15.5d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["7326DAD2A07A3D54"]
@@ -3909,7 +3989,7 @@
 			]
 			title: "TPV Tile"
 			x: 18.0d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["1C00341408CDB7D6"]
@@ -3922,7 +4002,7 @@
 			]
 			title: "TPV Segment"
 			x: 20.5d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			dependencies: ["74F060685B0A7408"]
@@ -3935,7 +4015,7 @@
 			]
 			title: "Matrioshka TPV Shell"
 			x: 23.0d
-			y: 44.75d
+			y: 46.75d
 		}
 		{
 			icon: "grindless:c12_cvd_plate"
@@ -3948,7 +4028,7 @@
 			]
 			title: "C-12 CVD Plate"
 			x: 0.5d
-			y: 46.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["51BD455B4FBDF5D7"]
@@ -3962,7 +4042,7 @@
 			]
 			title: "Megabar Press"
 			x: 3.0d
-			y: 46.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["57821BE283639859"]
@@ -3975,7 +4055,7 @@
 			]
 			title: "C-12 HPHT Plate"
 			x: 5.5d
-			y: 46.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["5088D5871674DDE5"]
@@ -3988,7 +4068,7 @@
 			]
 			title: "C-12 004 Plate"
 			x: 8.0d
-			y: 46.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["5C9EA9513D2CB81E"]
@@ -4001,7 +4081,7 @@
 			]
 			title: "C-12 Ion Milled Plate"
 			x: 10.5d
-			y: 46.75d
+			y: 48.75d
 		}
 		{
 			dependencies: ["7E02A04033CFEF6D"]
@@ -4014,7 +4094,7 @@
 			]
 			title: "Gamma Bragg Mirror"
 			x: 13.0d
-			y: 46.75d
+			y: 48.75d
 		}
 		{
 			icon: "grindless:c12_cvd_plate"
@@ -4027,7 +4107,7 @@
 			]
 			title: "C-12 CVD Plate"
 			x: 0.5d
-			y: 48.75d
+			y: 50.75d
 		}
 		{
 			dependencies: ["3CBBEF8C5FB12333"]
@@ -4041,7 +4121,7 @@
 			]
 			title: "Ion Implanter"
 			x: 3.0d
-			y: 48.75d
+			y: 50.75d
 		}
 		{
 			dependencies: ["396E18A11705B0EA"]
@@ -4054,7 +4134,7 @@
 			]
 			title: "C-12 Boron Diamond"
 			x: 5.5d
-			y: 48.75d
+			y: 50.75d
 		}
 		{
 			dependencies: ["12101169C8DBAA82"]
@@ -4068,7 +4148,7 @@
 			]
 			title: "Photonic Foundry"
 			x: 8.0d
-			y: 48.75d
+			y: 50.75d
 		}
 		{
 			dependencies: ["7BA20818AEE819B2"]
@@ -4081,7 +4161,7 @@
 			]
 			title: "Diamond Contact Wafer"
 			x: 10.5d
-			y: 48.75d
+			y: 50.75d
 		}
 		{
 			dependencies: ["5B9150577A644892"]
@@ -4094,7 +4174,7 @@
 			]
 			title: "Diamond Schottky Die"
 			x: 13.0d
-			y: 48.75d
+			y: 50.75d
 		}
 		{
 			dependencies: ["5CD770FDB73DE470"]
@@ -4107,7 +4187,7 @@
 			]
 			title: "Rad Hard Controller"
 			x: 15.5d
-			y: 48.75d
+			y: 50.75d
 		}
 		{
 			icon: "gtceu:tungsten_dust"
@@ -4120,7 +4200,7 @@
 			]
 			title: "Tungsten"
 			x: 0.5d
-			y: 50.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["3F9F381D2D352924"]
@@ -4134,7 +4214,7 @@
 			]
 			title: "Spark Plasma Sinterer"
 			x: 3.0d
-			y: 50.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["13AD93033BA37182"]
@@ -4147,7 +4227,7 @@
 			]
 			title: "W Target"
 			x: 5.5d
-			y: 50.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["159E9D695EAF9609"]
@@ -4160,7 +4240,7 @@
 			]
 			title: "Sputtered W Wafer"
 			x: 8.0d
-			y: 50.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["7A9CA6F1B5AB7F79"]
@@ -4174,7 +4254,7 @@
 			]
 			title: "Photonic Foundry"
 			x: 10.5d
-			y: 50.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["35DBF073733A44C9"]
@@ -4187,7 +4267,7 @@
 			]
 			title: "W Photonic Crystal"
 			x: 13.0d
-			y: 50.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["17F74F5DE949F215"]
@@ -4200,7 +4280,7 @@
 			]
 			title: "Hfo2 Passivated Crystal"
 			x: 15.5d
-			y: 50.75d
+			y: 52.75d
 		}
 		{
 			dependencies: ["34E8EA80D2BE0FFC"]
@@ -4213,7 +4293,150 @@
 			]
 			title: "Selective Emitter"
 			x: 18.0d
-			y: 50.75d
+			y: 52.75d
+		}
+		{
+			icon: "gtceu:glass_plate"
+			id: "5C4993D53F42964B"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "16F4CD10F71A6646", item: "gtceu:glass_plate", optional_task: true, type: "item" }
+				{ id: "35A7AC07360B6C4C", type: "checkmark" }
+			]
+			title: "Glass Plate"
+			x: 0.5d
+			y: 56.75d
+		}
+		{
+			dependencies: ["5C4993D53F42964B"]
+			icon: "grindless:lattice_2pp"
+			id: "77E1EC02598AFB1D"
+			size: 1.25d
+			tasks: [
+				{ id: "33089E6E4FB65C91", item: "grindless:lattice_2pp", optional_task: true, type: "item" }
+				{ id: "502269B2F3D2A94B", type: "checkmark" }
+			]
+			title: "2PP Lattice"
+			x: 3.0d
+			y: 56.75d
+		}
+		{
+			dependencies: ["77E1EC02598AFB1D"]
+			icon: "grindless:glassy_carbon_lattice"
+			id: "70A01871C51E7B4C"
+			size: 1.25d
+			tasks: [
+				{ id: "1E1018B5ABD47287", item: "grindless:glassy_carbon_lattice", optional_task: true, type: "item" }
+				{ id: "73DE8D5437F5A5E8", type: "checkmark" }
+			]
+			title: "Glassy-Carbon Lattice"
+			x: 5.5d
+			y: 56.75d
+		}
+		{
+			dependencies: ["70A01871C51E7B4C"]
+			icon: "grindless:sic_coated_lattice"
+			id: "50367EA10CAD1703"
+			size: 1.25d
+			tasks: [
+				{ id: "70144D485DA5FC0C", item: "grindless:sic_coated_lattice", optional_task: true, type: "item" }
+				{ id: "7BFCC18E0ACB5FD3", type: "checkmark" }
+			]
+			title: "SiC-Coated Lattice"
+			x: 8.0d
+			y: 56.75d
+		}
+		{
+			dependencies: ["50367EA10CAD1703"]
+			icon: "grindless:droplet_wick"
+			id: "1135D6C8C48DF6FD"
+			size: 1.25d
+			tasks: [
+				{ id: "3B33B657263EBBBA", item: "grindless:droplet_wick", optional_task: true, type: "item" }
+				{ id: "7C4337A0B09D67E3", type: "checkmark" }
+			]
+			title: "Droplet Wick"
+			x: 10.5d
+			y: 56.75d
+		}
+		{
+			dependencies: ["1135D6C8C48DF6FD"]
+			icon: "grindless:droplet_collector"
+			id: "5D47AC89794FE48E"
+			size: 1.25d
+			tasks: [
+				{ id: "3BADAC278EA25553", item: "grindless:droplet_collector", optional_task: true, type: "item" }
+				{ id: "3639FDD8FA1F6270", type: "checkmark" }
+			]
+			title: "Droplet Collector"
+			x: 13.0d
+			y: 56.75d
+		}
+		{
+			dependencies: ["5D47AC89794FE48E", "108E3539AB343BD6", "3FDE31D6D83E3E70"]
+			icon: "grindless:droplet_radiator_module"
+			id: "5DB19AF5295A4766"
+			size: 1.25d
+			tasks: [
+				{ id: "114A4CA5BC56AD49", item: "grindless:droplet_radiator_module", optional_task: true, type: "item" }
+				{ id: "5132C5A3FEBB257C", type: "checkmark" }
+			]
+			title: "Droplet Radiator Module"
+			x: 15.5d
+			y: 56.75d
+		}
+		{
+			icon: "gtceu:tin_ingot"
+			id: "5DC3B7B693AA894C"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "17BE4E0D4B05DF91", item: "gtceu:tin_ingot", optional_task: true, type: "item" }
+				{ id: "77EFB9F41AACCCB4", type: "checkmark" }
+			]
+			title: "Tin Ingot"
+			x: 10.5d
+			y: 58.75d
+		}
+		{
+			dependencies: ["5DC3B7B693AA894C"]
+			icon: "grindless:eb_distilled_tin"
+			id: "108E3539AB343BD6"
+			size: 1.25d
+			tasks: [
+				{ id: "3032A4B49528761B", item: "grindless:eb_distilled_tin", optional_task: true, type: "item" }
+				{ id: "7DDF3A907D930E51", type: "checkmark" }
+			]
+			title: "EB-Distilled Tin"
+			x: 13.0d
+			y: 58.75d
+		}
+		{
+			icon: "gtceu:rhea_plate"
+			id: "7036A543D831C651"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1731353839679169", item: "gtceu:rhea_plate", optional_task: true, type: "item" }
+				{ id: "12A352DB1A78F93B", type: "checkmark" }
+			]
+			title: "RHEA Plate"
+			x: 10.5d
+			y: 60.25d
+		}
+		{
+			dependencies: ["7036A543D831C651"]
+			icon: "grindless:orifice_plate"
+			id: "3FDE31D6D83E3E70"
+			size: 1.25d
+			tasks: [
+				{ id: "7B29A12002624FCB", item: "grindless:orifice_plate", optional_task: true, type: "item" }
+				{ id: "55AA8A7A8F3FF5A5", type: "checkmark" }
+			]
+			title: "Orifice Plate"
+			x: 13.0d
+			y: 60.25d
 		}
 		{
 			icon: "gtceu:uranium_233_ingot"
@@ -4226,7 +4449,7 @@
 			]
 			title: "Uranium 233 Ingot"
 			x: 0.5d
-			y: 52.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["5F36E93D2AB9DAF8"]
@@ -4240,7 +4463,7 @@
 			]
 			title: "Transuranium Facility"
 			x: 3.0d
-			y: 52.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["1DE88748B42438E2"]
@@ -4253,7 +4476,7 @@
 			]
 			title: "Thorium 229"
 			x: 5.5d
-			y: 52.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["3DBE453C618A00C9"]
@@ -4267,7 +4490,7 @@
 			]
 			title: "Fluorspar Kiln"
 			x: 8.0d
-			y: 52.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["30C4088CD1E5B711"]
@@ -4280,7 +4503,7 @@
 			]
 			title: "Thf4"
 			x: 10.5d
-			y: 52.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["1FFB48D6C8F476BD"]
@@ -4294,7 +4517,7 @@
 			]
 			title: "MBE Reactor"
 			x: 13.0d
-			y: 52.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["703E24D55340D661"]
@@ -4307,7 +4530,7 @@
 			]
 			title: "Thf4 Film"
 			x: 15.5d
-			y: 52.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["1D632485585ECC13"]
@@ -4320,7 +4543,7 @@
 			]
 			title: "Capped Thf4 Film"
 			x: 18.0d
-			y: 52.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["5FA781756F267A0D"]
@@ -4334,7 +4557,7 @@
 			]
 			title: "Nuclear Clock Lab"
 			x: 20.5d
-			y: 52.75d
+			y: 54.75d
 		}
 		{
 			dependencies: ["33EDE4682EDFA4D5"]
@@ -4347,7 +4570,7 @@
 			]
 			title: "Chip Nuclear Clock"
 			x: 23.0d
-			y: 52.75d
+			y: 54.75d
 		}
 	]
 	subtitle: ["Metallic hydrogen and the hard parts, the atoms of dead stars, light and crystals, memories for the computer, and the fuel and the heat of the ring."]

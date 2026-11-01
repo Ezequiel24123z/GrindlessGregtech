@@ -182,12 +182,14 @@ export default {
       nodes: [
         // line 12
         ...chain(0, [
-          ['l12_0', I('grindless:hbn_dust'), 'hBN', 'raw'],
-          ['l12_1', mach('gtceu:megabar_press'), 'Megabar Press', 'ours'],
-          ['l12_2', I('grindless:raw_hbn_crystal'), 'Raw hBN Crystal'],
-          ['l12_3', I('grindless:hbn_crystal'), 'hBN Crystal'],
-          ['l12_4', mach('gtceu:vdw_stacking_cell'), 'vdW Stacking Cell', 'ours'],
-          ['l12_5', I('grindless:hbn_flake'), 'hBN Flake'],
+          ['l12_0', I('gtceu:boron_trioxide_dust'), 'Boron Trioxide', 'raw'],
+          ['l12_1', mach('gtceu:boron_nitride_reactor'), 'Boron Nitride Reactor', 'ours'],
+          ['l12_2', I('grindless:hbn_dust'), 'hBN'],
+          ['l12_3', mach('gtceu:megabar_press'), 'Megabar Press', 'ours'],
+          ['l12_4', I('grindless:raw_hbn_crystal'), 'Raw hBN Crystal'],
+          ['l12_5', I('grindless:hbn_crystal'), 'hBN Crystal'],
+          ['l12_6', mach('gtceu:vdw_stacking_cell'), 'vdW Stacking Cell', 'ours'],
+          ['l12_7', I('grindless:hbn_flake'), 'hBN Flake'],
         ]),
         // line 13
         ...chain(2, [
@@ -209,12 +211,14 @@ export default {
         ], 'the SOT heterostack'),
         // line 15
         ...chain(6, [
-          ['l15_0', I('grindless:hbn_flake'), 'hBN Flake', 'raw'],
+          ['l15_0', I('grindless:hbn_crystal'), 'hBN Crystal', 'raw'],
           ['l15_1', mach('gtceu:vdw_stacking_cell'), 'vdW Stacking Cell', 'ours'],
-          ['l15_2', I('grindless:sot_heterostack'), 'SOT Heterostack'],
-          ['l15_3', I('grindless:contacted_sot_stack'), 'Contacted SOT Stack'],
-          ['l15_4', mach('gtceu:nitride_magnet_works'), 'Nitride Magnet Works', 'ours'],
-          ['l15_5', I('grindless:sot_readout_stack'), 'SOT Readout Stack'],
+          ['l15_2', I('grindless:hbn_flake'), 'hBN Flake'],
+          ['l15_3', mach('gtceu:vdw_stacking_cell'), 'vdW Stacking Cell', 'ours'],
+          ['l15_4', I('grindless:sot_heterostack'), 'SOT Heterostack'],
+          ['l15_5', I('grindless:contacted_sot_stack'), 'Contacted SOT Stack'],
+          ['l15_6', mach('gtceu:nitride_magnet_works'), 'Nitride Magnet Works', 'ours'],
+          ['l15_7', I('grindless:sot_readout_stack'), 'SOT Readout Stack'],
         ], 'the MESO logic die'),
         // line 16
         ...chain(8, [
@@ -229,11 +233,13 @@ export default {
         ]),
         // line 17
         ...chain(10, [
-          ['l17_0', I('grindless:ggg_wafer'), 'GGG Wafer', 'raw'],
-          ['l17_1', mach('gtceu:yig_lpe_furnace'), 'YIG LPE Furnace', 'ours'],
-          ['l17_2', I('grindless:yig_film_wafer'), 'YIG Film Wafer'],
-          ['l17_3', I('grindless:yig_waveguide_wafer'), 'YIG Waveguide Wafer'],
-          ['l17_4', I('grindless:magnonic_bus'), 'Magnonic Bus'],
+          ['l17_0', I('grindless:ggg_polished_slice'), 'GGG Polished Slice', 'raw'],
+          ['l17_1', mach('gtceu:electric_blast_furnace'), 'Electric Blast Furnace', 'ours'],
+          ['l17_2', I('grindless:ggg_wafer'), 'GGG Wafer'],
+          ['l17_3', mach('gtceu:yig_lpe_furnace'), 'YIG LPE Furnace', 'ours'],
+          ['l17_4', I('grindless:yig_film_wafer'), 'YIG Film Wafer'],
+          ['l17_5', I('grindless:yig_waveguide_wafer'), 'YIG Waveguide Wafer'],
+          ['l17_6', I('grindless:magnonic_bus'), 'Magnonic Bus'],
         ], 'the spintronic mainframe'),
         // line 18
         ...chain(12, [
@@ -252,20 +258,26 @@ export default {
       nodes: [
         // line 19
         ...chain(0, [
-          ['l19_0', I('gtceu:fermium_dust'), 'Fermium', 'raw'],
-          ['l19_1', mach('gtceu:calutron'), 'Calutron', 'ours'],
-          ['l19_2', I('gtceu:fermium_257_dust'), 'Fermium 257'],
-          ['l19_3', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
-          ['l19_4', I('grindless:fm257_plated_blank'), 'Fm-257 Plated Blank'],
-          ['l19_5', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours'],
-          ['l19_6', I('grindless:fm257_target'), 'Fm-257 Target'],
+          ['l19_0', F('gtceu:es_fm_liquor'), 'Es/Fm Liquor', 'raw'],
+          ['l19_1', mach('gtceu:actinide_partitioning_plant'), 'Actinide Partitioning Plant', 'ours'],
+          ['l19_2', I('gtceu:fermium_dust'), 'Fermium'],
+          ['l19_3', mach('gtceu:calutron'), 'Calutron', 'ours'],
+          ['l19_4', I('gtceu:fermium_257_dust'), 'Fermium 257'],
+          ['l19_5', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
+          ['l19_6', I('grindless:fm257_plated_blank'), 'Fm-257 Plated Blank'],
+          ['l19_7', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours'],
+          ['l19_8', I('grindless:fm257_target'), 'Fm-257 Target'],
         ], 'element 122'),
         // line 20, then line 21
         ...chain(2, [
-          ['l20_0', F('gtceu:es_254_solution'), 'Es-254 Solution', 'raw'],
-          ['l20_1', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
-          ['l20_2', I('gtceu:einsteinium_dust'), 'Einsteinium'],
-          ['l20_3', I('grindless:es254_target'), 'Es-254 Target'],
+          ['l20_0', I('grindless:flashed_target'), 'Flashed Target', 'raw'],
+          ['l20_1', mach('gtceu:hot_cell'), 'Hot Cell', 'ours'],
+          ['l20_2', F('gtceu:es_fm_liquor'), 'Es/Fm Liquor'],
+          ['l20_3', mach('gtceu:actinide_partitioning_plant'), 'Actinide Partitioning Plant', 'ours'],
+          ['l20_4', F('gtceu:es_254_solution'), 'Es-254 Solution'],
+          ['l20_5', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
+          ['l20_6', I('gtceu:einsteinium_dust'), 'Einsteinium'],
+          ['l20_7', I('grindless:es254_target'), 'Es-254 Target'],
           ['l21_0', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
           ['l21_1', F('gtceu:element_121_recoil_gas'), 'Element 121 Recoil Gas'],
           ['l21_2', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
@@ -285,10 +297,12 @@ export default {
         ], 'the gate to OpV'),
         // line 23, then line 24
         ...chain(6, [
-          ['l23_0', I('gtceu:curium_248_dust'), 'Curium 248', 'raw'],
-          ['l23_1', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
-          ['l23_2', I('grindless:cm248_plated_blank'), 'Cm-248 Plated Blank'],
-          ['l23_3', I('grindless:cm248_target'), 'Cm-248 Target'],
+          ['l23_0', I('grindless:californium_252'), 'Californium 252', 'raw'],
+          ['l23_1', mach('gtceu:hot_cell'), 'Hot Cell', 'ours'],
+          ['l23_2', I('gtceu:curium_248_dust'), 'Curium 248'],
+          ['l23_3', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
+          ['l23_4', I('grindless:cm248_plated_blank'), 'Cm-248 Plated Blank'],
+          ['l23_5', I('grindless:cm248_target'), 'Cm-248 Target'],
           ['l24_0', mach('gtceu:mnt_collider'), 'MNT Collider', 'ours'],
           ['l24_1', F('gtceu:mnt_product_gas'), 'MNT Product Gas'],
           ['l24_2', I('grindless:mnt_thermal_ions'), 'MNT Thermal Ions'],
@@ -322,13 +336,15 @@ export default {
       nodes: [
         // line 26
         ...chain(0, [
-          ['l26_0', F('gtceu:stellar_plasma'), 'Stellar Plasma', 'raw'],
-          ['l26_1', mach('gtceu:plasma_mass_filter'), 'Plasma Mass Filter', 'ours'],
-          ['l26_2', F('gtceu:stellar_cno_cut'), 'Stellar CNO Cut'],
-          ['l26_3', mach('gtceu:uxv_fusion_reactor'), 'Mk6 Fusion Ring', 'ours'],
-          ['l26_4', F('gtceu:cno_ash_plasma'), 'CNO Ash Plasma'],
-          ['l26_5', mach('gtceu:direct_energy_converter'), 'Direct Energy Converter', 'ours'],
-          ['l26_6', F('gtceu:stellar_cno_cut'), 'Stellar CNO Cut'],
+          ['l26_0', F('gtceu:liquid_helium'), 'Liquid Helium', 'raw'],
+          ['l26_1', mach('gtceu:stellar_elevator'), 'Stellar Elevator', 'ours'],
+          ['l26_2', F('gtceu:stellar_plasma'), 'Stellar Plasma'],
+          ['l26_3', mach('gtceu:plasma_mass_filter'), 'Plasma Mass Filter', 'ours'],
+          ['l26_4', F('gtceu:stellar_cno_cut'), 'Stellar CNO Cut'],
+          ['l26_5', mach('gtceu:uxv_fusion_reactor'), 'Mk6 Fusion Ring', 'ours'],
+          ['l26_6', F('gtceu:cno_ash_plasma'), 'CNO Ash Plasma'],
+          ['l26_7', mach('gtceu:direct_energy_converter'), 'Direct Energy Converter', 'ours'],
+          ['l26_8', F('gtceu:stellar_cno_cut'), 'Stellar CNO Cut'],
         ], 'the Mk6 ring again'),
         // line 27
         ...chain(2, [
@@ -344,13 +360,15 @@ export default {
         ], 'carbon burning'),
         // line 28
         ...chain(4, [
-          ['l28_0', I('gtceu:carbon_12_dust'), 'Carbon 12', 'raw'],
-          ['l28_1', mach('gtceu:electron_beam_furnace'), 'Electron Beam Furnace', 'ours'],
-          ['l28_2', F('gtceu:carbon_burning_fuel'), 'Carbon Burning Fuel'],
-          ['l28_3', mach('gtceu:uxv_fusion_reactor'), 'Mk6 Fusion Ring', 'ours'],
-          ['l28_4', F('gtceu:carbon_burning_ash_plasma'), 'Carbon Burning Ash Plasma'],
-          ['l28_5', mach('gtceu:direct_energy_converter'), 'Direct Energy Converter', 'ours'],
-          ['l28_6', F('gtceu:carbon_burning_ash'), 'Carbon Burning Ash'],
+          ['l28_0', F('gtceu:helium_burning_ash'), 'Helium Burning Ash', 'raw'],
+          ['l28_1', mach('gtceu:plasma_quench_caster'), 'Plasma Quench Caster', 'ours'],
+          ['l28_2', I('gtceu:carbon_12_dust'), 'Carbon 12'],
+          ['l28_3', mach('gtceu:electron_beam_furnace'), 'Electron Beam Furnace', 'ours'],
+          ['l28_4', F('gtceu:carbon_burning_fuel'), 'Carbon Burning Fuel'],
+          ['l28_5', mach('gtceu:uxv_fusion_reactor'), 'Mk6 Fusion Ring', 'ours'],
+          ['l28_6', F('gtceu:carbon_burning_ash_plasma'), 'Carbon Burning Ash Plasma'],
+          ['l28_7', mach('gtceu:direct_energy_converter'), 'Direct Energy Converter', 'ours'],
+          ['l28_8', F('gtceu:carbon_burning_ash'), 'Carbon Burning Ash'],
         ], 'the plasma quench caster'),
         // line 29
         ...chain(6, [
@@ -378,12 +396,14 @@ export default {
         ]),
         // line 31
         ...chain(10, [
-          ['l31_0', I('grindless:mh_winding'), 'MH Winding', 'raw'],
-          ['l31_1', mach('gtceu:accretion_disk_skimmer'), 'Accretion Disk Skimmer', 'ours'],
-          ['l31_2', F('gtceu:disk_plasma'), 'Disk Plasma'],
-          ['l31_3', F('gtceu:filtered_disk_plasma'), 'Filtered Disk Plasma'],
-          ['l31_4', mach('gtceu:frc_former'), 'FRC Former', 'ours'],
-          ['l31_5', F('gtceu:flux_loaded_plasma'), 'Flux Loaded Plasma'],
+          ['l31_0', I('gtceu:metallic_hydrogen_single_wire'), 'Metallic Hydrogen Wire', 'raw'],
+          ['l31_1', mach('gtceu:naquadria_magnet_works'), 'Naquadria Magnet Works', 'ours'],
+          ['l31_2', I('grindless:mh_winding'), 'MH Winding'],
+          ['l31_3', mach('gtceu:accretion_disk_skimmer'), 'Accretion Disk Skimmer', 'ours'],
+          ['l31_4', F('gtceu:disk_plasma'), 'Disk Plasma'],
+          ['l31_5', F('gtceu:filtered_disk_plasma'), 'Filtered Disk Plasma'],
+          ['l31_6', mach('gtceu:frc_former'), 'FRC Former', 'ours'],
+          ['l31_7', F('gtceu:flux_loaded_plasma'), 'Flux Loaded Plasma'],
         ], 'the BZ dynamo'),
         // line 38
         ...chain(12, [
@@ -413,34 +433,40 @@ export default {
         ], 'UXV cables'),
         // line 33
         ...chain(3, [
-          ['l33_0', I('grindless:raw_pasta'), 'Raw Pasta', 'raw'],
-          ['l33_1', mach('gtceu:pasta_phase_sorter'), 'Pasta Phase Sorter', 'ours'],
-          ['l33_2', I('grindless:lasagna_phase'), 'Lasagna Phase'],
-          ['l33_3', mach('gtceu:pasta_laminator'), 'Pasta Laminator', 'ours'],
-          ['l33_4', I('grindless:lasagna_plate'), 'Lasagna Plate'],
-          ['l33_5', I('gtceu:uxv_machine_hull'), 'UXV Machine Hull'],
+          ['l33_0', I('grindless:neutronium_pellet'), 'Neutronium Pellet', 'raw'],
+          ['l33_1', mach('gtceu:pasta_extractor'), 'Pasta Extractor', 'ours'],
+          ['l33_2', I('grindless:raw_pasta'), 'Raw Pasta'],
+          ['l33_3', mach('gtceu:pasta_phase_sorter'), 'Pasta Phase Sorter', 'ours'],
+          ['l33_4', I('grindless:lasagna_phase'), 'Lasagna Phase'],
+          ['l33_5', mach('gtceu:pasta_laminator'), 'Pasta Laminator', 'ours'],
+          ['l33_6', I('grindless:lasagna_plate'), 'Lasagna Plate'],
+          ['l33_7', I('gtceu:uxv_machine_hull'), 'UXV Machine Hull'],
         ]),
         // line 39
         L('x39_ccl', 7.5, 4.5, 'pl_luv:ccl'),
         L('x39_nmw', 12.5, 4.5, 'pl_uev:nmw'),
         ...chain(6, [
-          ['l39_0', I('grindless:spaghetti_phase'), 'Spaghetti Phase', 'raw'],
-          ['l39_1', mach('gtceu:pasta_draw_bench'), 'Pasta Draw Bench', 'ours'],
-          ['l39_2', I('gtceu:pasta_strand_single_wire'), 'Pasta Strand Wire'],
-          ['l39_3', mach('gtceu:coated_conductor_line'), 'Coated Conductor Line', 'ours'],
-          ['l39_4', I('grindless:strand_tape'), 'Strand Tape'],
-          ['l39_5', mach('gtceu:nitride_magnet_works'), 'Nitride Magnet Works', 'ours'],
-          ['l39_6', I('grindless:uxv_smes_cell'), 'UXV SMES Cell'],
+          ['l39_0', I('grindless:raw_pasta'), 'Raw Pasta', 'raw'],
+          ['l39_1', mach('gtceu:pasta_phase_sorter'), 'Pasta Phase Sorter', 'ours'],
+          ['l39_2', I('grindless:spaghetti_phase'), 'Spaghetti Phase'],
+          ['l39_3', mach('gtceu:pasta_draw_bench'), 'Pasta Draw Bench', 'ours'],
+          ['l39_4', I('gtceu:pasta_strand_single_wire'), 'Pasta Strand Wire'],
+          ['l39_5', mach('gtceu:coated_conductor_line'), 'Coated Conductor Line', 'ours'],
+          ['l39_6', I('grindless:strand_tape'), 'Strand Tape'],
+          ['l39_7', mach('gtceu:nitride_magnet_works'), 'Nitride Magnet Works', 'ours'],
+          ['l39_8', I('grindless:uxv_smes_cell'), 'UXV SMES Cell'],
         ], 'the wireless towers'),
         // line 35
         L('x35_mill', 7.5, 7.5, 'pl_ev:mill'),
         ...chain(9, [
-          ['l35_0', I('grindless:lasagna_phase'), 'Lasagna Phase', 'raw'],
-          ['l35_1', mach('gtceu:pasta_laminator'), 'Pasta Laminator', 'ours'],
-          ['l35_2', I('grindless:lasagna_plate'), 'Lasagna Plate'],
-          ['l35_3', mach('gtceu:hot_strip_mill'), 'Hot Strip Mill', 'ours'],
-          ['l35_4', I('grindless:alip_duct'), 'ALIP Duct'],
-          ['l35_5', I('gtceu:uxv_electric_pump'), 'UXV Electric Pump'],
+          ['l35_0', I('grindless:raw_pasta'), 'Raw Pasta', 'raw'],
+          ['l35_1', mach('gtceu:pasta_phase_sorter'), 'Pasta Phase Sorter', 'ours'],
+          ['l35_2', I('grindless:lasagna_phase'), 'Lasagna Phase'],
+          ['l35_3', mach('gtceu:pasta_laminator'), 'Pasta Laminator', 'ours'],
+          ['l35_4', I('grindless:lasagna_plate'), 'Lasagna Plate'],
+          ['l35_5', mach('gtceu:hot_strip_mill'), 'Hot Strip Mill', 'ours'],
+          ['l35_6', I('grindless:alip_duct'), 'ALIP Duct'],
+          ['l35_7', I('gtceu:uxv_electric_pump'), 'UXV Electric Pump'],
         ]),
       ],
     },
@@ -449,21 +475,24 @@ export default {
       nodes: [
         // line 34
         ...chain(0, [
-          ['l34_0', I('gtceu:tetrataenite_ingot'), 'Tetrataenite Ingot', 'raw'],
-          ['l34_1', mach('gtceu:hot_strip_mill'), 'Hot Strip Mill', 'ours'],
-          ['l34_2', I('grindless:tetrataenite_lamination'), 'Tetrataenite Lamination'],
-          ['l34_3', mach('gtceu:hts_magnet_works'), 'HTS Magnet Works', 'ours'],
-          ['l34_4', I('grindless:strand_stator'), 'Strand Stator'],
-          ['l34_5', I('gtceu:uxv_electric_motor'), 'UXV Electric Motor'],
+          ['l34_0', I('gtceu:tetrataenite_dust'), 'Tetrataenite Dust', 'raw'],
+          ['l34_1', I('gtceu:tetrataenite_ingot'), 'Tetrataenite Ingot'],
+          ['l34_2', mach('gtceu:hot_strip_mill'), 'Hot Strip Mill', 'ours'],
+          ['l34_3', I('grindless:tetrataenite_lamination'), 'Tetrataenite Lamination'],
+          ['l34_4', mach('gtceu:hts_magnet_works'), 'HTS Magnet Works', 'ours'],
+          ['l34_5', I('grindless:strand_stator'), 'Strand Stator'],
+          ['l34_6', I('gtceu:uxv_electric_motor'), 'UXV Electric Motor'],
         ]),
         // line 36
         ...chain(2, [
-          ['l36_0', I('gtceu:terbium_dust'), 'Terbium', 'raw'],
-          ['l36_1', mach('gtceu:levitation_melter'), 'Levitation Melter', 'ours'],
-          ['l36_2', I('grindless:terfenol_d_ingot'), 'Terfenol-D Ingot'],
-          ['l36_3', mach('gtceu:crystal_growth_furnace'), 'Crystal Growth Furnace', 'ours'],
-          ['l36_4', I('grindless:terfenol_d_rod'), 'Terfenol-D Rod'],
-          ['l36_5', I('gtceu:uxv_electric_piston'), 'UXV Electric Piston'],
+          ['l36_0', I('grindless:terbium_oxide_dust'), 'Terbium Oxide', 'raw'],
+          ['l36_1', mach('gtceu:europium_reductor'), 'Europium Reductor', 'ours'],
+          ['l36_2', I('gtceu:terbium_dust'), 'Terbium'],
+          ['l36_3', mach('gtceu:levitation_melter'), 'Levitation Melter', 'ours'],
+          ['l36_4', I('grindless:terfenol_d_ingot'), 'Terfenol-D Ingot'],
+          ['l36_5', mach('gtceu:crystal_growth_furnace'), 'Crystal Growth Furnace', 'ours'],
+          ['l36_6', I('grindless:terfenol_d_rod'), 'Terfenol-D Rod'],
+          ['l36_7', I('gtceu:uxv_electric_piston'), 'UXV Electric Piston'],
         ]),
         // line 37
         ...chain(4, [
@@ -488,11 +517,12 @@ export default {
         ], 'the UXV robot arm'),
         // line 49
         ...chain(8, [
-          ['l49_0', I('gtceu:tetrataenite_ingot'), 'Tetrataenite Ingot', 'raw'],
-          ['l49_1', mach('gtceu:hot_strip_mill'), 'Hot Strip Mill', 'ours'],
-          ['l49_2', I('grindless:encoder_ring'), 'Encoder Ring'],
-          ['l49_3', I('grindless:multipole_encoder_ring'), 'Multipole Encoder Ring'],
-          ['l49_4', I('grindless:tmr_encoder'), 'TMR Encoder'],
+          ['l49_0', I('gtceu:tetrataenite_dust'), 'Tetrataenite Dust', 'raw'],
+          ['l49_1', I('gtceu:tetrataenite_ingot'), 'Tetrataenite Ingot'],
+          ['l49_2', mach('gtceu:hot_strip_mill'), 'Hot Strip Mill', 'ours'],
+          ['l49_3', I('grindless:encoder_ring'), 'Encoder Ring'],
+          ['l49_4', I('grindless:multipole_encoder_ring'), 'Multipole Encoder Ring'],
+          ['l49_5', I('grindless:tmr_encoder'), 'TMR Encoder'],
         ], 'the UXV robot arm'),
         // line 40
         ...chain(10, [
@@ -554,11 +584,13 @@ export default {
         ], 'the oxide PLD chamber'),
         // line 42
         ...chain(8, [
-          ['l42_0', I('grindless:five_n_platinum'), '5N Platinum', 'raw'],
-          ['l42_1', mach('gtceu:hot_strip_mill'), 'Hot Strip Mill', 'ours'],
-          ['l42_2', I('grindless:pt_sheet'), 'Pt Sheet'],
-          ['l42_3', I('grindless:pt_crucible_shell'), 'Pt Crucible Shell'],
-          ['l42_4', I('grindless:pt_lpe_crucible'), 'Pt LPE Crucible'],
+          ['l42_0', I('gtceu:platinum_dust'), 'Platinum', 'raw'],
+          ['l42_1', mach('gtceu:platinum_plant'), 'Platinum Plant', 'ours'],
+          ['l42_2', I('grindless:five_n_platinum'), '5N Platinum'],
+          ['l42_3', mach('gtceu:hot_strip_mill'), 'Hot Strip Mill', 'ours'],
+          ['l42_4', I('grindless:pt_sheet'), 'Pt Sheet'],
+          ['l42_5', I('grindless:pt_crucible_shell'), 'Pt Crucible Shell'],
+          ['l42_6', I('grindless:pt_lpe_crucible'), 'Pt LPE Crucible'],
         ], 'the YIG LPE furnace'),
         L('x0', 0, 10, 'pl_uhv:cgf'),
         L('x1', 2.5, 10, 'pl_uev:ebf'),

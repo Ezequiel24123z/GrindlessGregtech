@@ -1,4 +1,4 @@
-# Working sounds of our special multiblocks (QR-E0)
+﻿# Working sounds of our special multiblocks (QR-E0)
 
 Mechanism, generator and standard; three pilot loops are wired and generated. Phase 2 generates the rest from the candidate list.
 
@@ -22,7 +22,7 @@ Mechanism, generator and standard; three pilot loops are wired and generated. Ph
 3. Add `'gtceu:<type>': '<id>'` to `WIRING` in `sounds.js` (the integrator stamps the `// priority:` header).
 4. `node --test tools/analysis/test/sounds.test.mjs` (spec, sounds.json, files and wiring agree; size budget; part of the Node suite).
 
-The generator downloads a pinned portable ffmpeg (7.1.1 essentials, SHA-256 checked) into the gitignored `.work/`, calls `POST /v1/sound-generation?output_format=mp3_44100_128` with `loop: true`, `duration_seconds`, `prompt_influence`, model `eleven_text_to_sound_v2`, and converts to mono Ogg Vorbis (trim to the duration, no fades, no metadata). It refuses the free plan.
+The generator downloads a pinned portable ffmpeg (7.1.1 essentials, SHA-256 checked) into the gitignored `.work/`, calls `POST /v1/sound-generation?output_format=mp3_44100_128` with `loop: true`, `duration_seconds`, `prompt_influence`, model `eleven_text_to_sound_v2`, and converts to mono Ogg Vorbis (trim to the duration, then mastered offline, see below). It refuses the free plan.
 
 ## Budget and quality rules
 
@@ -30,7 +30,7 @@ The generator downloads a pinned portable ffmpeg (7.1.1 essentials, SHA-256 chec
 - Loop length 8 s, never over 12 s. Prompts: "seamless looping", no voices, no music.
 - Volume 0.6-0.7, attenuation 24-32 blocks for big multiblocks (default 16).
 - Only the signature multiblock of a line gets a loop; no loops for small machines.
-- Seam: the API's `loop: true` makes the clip loop smoothly; ffmpeg only trims. If a seam is audible, regenerate (`-Force`).
+- Seam: the API's `loop: true` makes the clip loop smoothly; `-Master` also applies a 150 ms equal-power tail-to-head crossfade. If a seam is audible, regenerate (`-Force`).
 - Cost: a pilot loop is about 160 credits (of 40000 per month on Starter).
 
 ## Licence (proposed CREDITS line)
@@ -77,3 +77,9 @@ Left without a loop: secondary types of multi-type files (e.g. conversion/second
 ## T3 check
 
 See the handoff for the run id: the client log must show no `Unable to play unknown soundEvent` / missing-sound warning for `grindless:loop_*`, and a working pilot machine must start its loop.
+
+## Mastering (`-Master`, RF-6E)
+
+Every loop is mastered offline (skipped when the Vorbis tag `GG_MASTER=1` is present; `-Master -Force` redoes unmastered sources only, so restore originals from git first). Steps: mono decode, optional spec `lowpass` (Hz; 6000 or lower is applied twice; 9000 for new generated loops, 3500-6000 for harsh ones), 150 ms equal-power tail-to-head crossfade (file is 0.15 s shorter), gain to about -24 dBFS RMS with peak at most -3 dBFS (tanh soft clip when the gain would exceed the peak allowance), 3 ms edge fades, libvorbis at the row quality. The T0 gate (`tools/analysis/test/sounds.test.mjs`) requires for every indexed event: .ogg present, mono, at most 12 s, within the size budget, RMS -33..-20 dBFS, peak at most -2 dBFS (it decodes all files, about 2 min).
+
+Status: 106 events, 0 missing, 0 silent machines (8 recipe types added to `WIRING`). Generation of the 36 missing events and 8 new machine loops used about 2,700 credits on the Starter plan (cap 9,000). Residual audit flags (seam, start/end level) are intrinsic to the sources; judge by ear at release.

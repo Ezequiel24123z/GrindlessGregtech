@@ -30,7 +30,7 @@ const STARTUP_SRC = () => readDir(STARTUP);
 const MULTIBLOCKS = {
   rydberg_array_works: 'rydberg_assembly', atom_interferometer_works: 'atom_interferometry', membrane_line: 'membrane_rolling', gene_ark: 'genome_archiving',
   photon_ring_imager: 'photon_ring_imaging', geroch_winch: 'geroch_power', mass_stream_injector: 'mass_stream_injection', mirror_shell: 'black_hole_bomb',
-  cluster_light_furnace: 'cluster_light_smelting', accretion_feeder: 'accretion_power', ergoregion_synchroniser: 'ergoregion_synchronisation',
+  cluster_light_furnace: 'cluster_light_smelting', accretion_feeder: 'accretion_power', horizon_flux_clamp: 'horizon_flux_clamp', segment_reclamation_works: 'segment_reclamation', horizon_interferometer: 'horizon_interferometry', ergoregion_synchroniser: 'ergoregion_synchronisation',
 };
 
 // ------------------------------------------------------------------ the real config
@@ -84,7 +84,7 @@ test('real tiers (max): the gate rows, the jumps, the Sgr A* and belt sites and 
   for (const id of ['gate-hold-sgr-a-probe', 'gate-hold-nsc-belt', 'gate-sgra-orbit', 'gate-nsc-belt', 'gate-gc-relay-probe', 'gate-nsc-belt-seed']) assert.ok(t[id], id);
   assert.deepEqual(t['site-max-sgra'].dimensions, ['gcyr:black_hole_orbit']);
   assert.deepEqual(t['site-max-nsc'].dimensions, ['grindless:nsc_belt']);
-  assert.deepEqual(t['site-max-sgra'].types.sort(), ['gtceu:accretion_power', 'gtceu:black_hole_bomb', 'gtceu:ergoregion_synchronisation', 'gtceu:geroch_power', 'gtceu:mass_stream_injection', 'gtceu:photon_ring_imaging']);
+  assert.deepEqual(t['site-max-sgra'].types.sort(), ['gtceu:accretion_power', 'gtceu:black_hole_bomb', 'gtceu:ergoregion_synchronisation', 'gtceu:geroch_power', 'gtceu:horizon_flux_clamp', 'gtceu:horizon_interferometry', 'gtceu:mass_stream_injection', 'gtceu:photon_ring_imaging']);
   const syn = byId(max().synthetic);
   assert.deepEqual(syn['sgra-jump'].produces, ['dim:gcyr:black_hole_orbit']);
   assert.deepEqual(syn['nsc-jump'].produces, ['dim:grindless:nsc_belt']);

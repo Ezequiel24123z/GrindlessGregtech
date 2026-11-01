@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings, splitChains, parseDesignLines, designReport } from '../line-audit.mjs';
+import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings, splitChains, parseDesignLines, designReport, checkRole, classify, isFold, tagProblems } from '../line-audit.mjs';
 
 const n = (key, kind, res, from = [], extra = {}) => ({ key, kind, res, from, cluster: 'a', ...extra });
 const chain = () => [
@@ -87,8 +87,96 @@ test('loadKeyItems keeps the first era per item', () => {
   assert.equal(m.get('a'), 'lv');
 });
 
+test('clusters sharing a line id join into one line; the joining raw adds no step', () => {
+  const m = { chapters: [{ file: 'pl_ev', clusters: { a: { name: 'A', line: 'L1' }, b: { line: 'L1' } }, nodes: [
+    n('r', 'raw', 'gtceu:ore'), n('m1', 'machine', null, ['r'], { item: 'gtceu:m1' }), n('x', 'item', 'gtceu:x', ['m1']),
+    n('rx', 'raw', 'gtceu:x', [], { cluster: 'b' }), n('m2', 'machine', null, ['rx'], { item: 'gtceu:m2', cluster: 'b' }), n('p', 'product', 'gtceu:p', ['m2'], { cluster: 'b' }),
+  ] }] };
+  const ls = collectLines(m);
+  assert.equal(ls.length, 1);
+  assert.equal(ls[0].id, 'ev.a+b');
+  assert.deepEqual(ls[0].clusters, ['a', 'b']);
+  assert.equal(ls[0].steps, 2);
+  assert.deepEqual(ls[0].products.map((p) => p.res), ['gtceu:p']);
+});
+
+test('tags: extends branch end, keepShort and fold verdicts', () => {
+  assert.equal(judge(line({ steps: 2 }), ctx({ kind: 'branch' })).verdict, 'keep');
+  assert.equal(judge(line({ steps: 2, crossings: [] }), ctx({ kind: 'branch', used: new Set() })).verdict, 'fix');
+  const ks = judge(line({ steps: 2, keepShort: 'one-off' }), ctx());
+  assert.equal(ks.verdict, 'keep');
+  assert.match(ks.reason, /keepShort \(one-off\)/);
+  assert.equal(judge(line({ steps: 2 }), ctx({ kind: 'fold' })).verdict, 'keep');
+  assert.equal(judge(line({ steps: 2 }), ctx({ kind: 'production' })).verdict, 'fix');
+});
+
+test('roles: pass and fail per role, and a failed role is judged as production', () => {
+  const eu = buildFacts([rec('g', 'gtceu:gen', ['gtceu:fuel'], 'gtceu:x', { euOut: 100 })]);
+  const L = (role, extra = {}) => ({ era: 'ev', role, steps: 2, products: [{ res: 'gtceu:p' }], machines: new Set(['gtceu:other']), inner: new Set(), raws: new Set(), ...extra });
+  assert.equal(checkRole(L('power', { machines: new Set(['gtceu:gen']) }), eu).ok, true);
+  assert.equal(checkRole(L('power'), eu).ok, false);
+  assert.equal(checkRole(L('research'), null).ok, false);
+  const res = buildFacts([
+    rec('use', 'gtceu:research_station', ['gtceu:p'], 'gtceu:data'),
+    { ...rec('cap', 'gtceu:other', ['gtceu:z'], 'gtceu:q'), inputs: [{ alts: ['gtceu:p'], count: 1, cap: true }] },
+  ]);
+  assert.equal(checkRole(L('research'), res).ok, true);
+  assert.equal(checkRole(L('infrastructure'), res).ok, false);
+  const bad = buildFacts([rec('mat', 'gtceu:assembler', ['gtceu:p'], 'gtceu:plate')]);
+  assert.equal(checkRole(L('research'), bad).ok, false);
+  assert.equal(checkRole(L('travel', { products: [{ res: 'grindless:x_key' }] }), bad).ok, true);
+  assert.equal(classify(L('research'), res).kind, 'role');
+  const failed = classify(L('research'), bad);
+  assert.equal(failed.kind, 'production');
+  assert.match(judge(L('research', { crossings: [] }), { used: new Set(), dup: null, skipped: [], endInfo: new Map(), ...failed }).reason, /declared role research fails/);
+});
+
+test('a short line of ours that replaces a stock chain is a fold', () => {
+  const facts = buildFacts([
+    rec('mid', 'gtceu:macerator', ['gtceu:sand'], 'gtceu:mid', { added: false }),
+    rec('sp', 'gtceu:assembler', ['gtceu:mid'], 'gtceu:plate', { added: false }),
+    rec('own', 'gtceu:ourtype', ['gtceu:sand'], 'gtceu:plate'),
+  ]);
+  const l = mkLine('ev', { steps: 2, ours: ['gtceu:our_mb'], raws: new Set(['gtceu:sand']), machines: new Set(['gtceu:ourtype']) });
+  assert.equal(isFold(l, facts), true);
+  assert.equal(skipRoute(l, 'gtceu:plate', facts), null);
+  assert.equal(classify(l, facts).kind, 'fold');
+});
+
+test('skip route drops: an ore with no vein', () => {
+  const facts = buildFacts([rec('b', 'gtceu:other', ['gtceu:ore_x'], 'gtceu:plate')]);
+  const l = mkLine('ev', { steps: 4 });
+  assert.ok(skipRoute(l, 'gtceu:plate', facts));
+  assert.equal(skipRoute(l, 'gtceu:plate', facts, null, { never: new Set(['gtceu:ore_x']) }), null);
+});
+
+test('skip route drops: a parallel source of an earlier production line', () => {
+  const facts = buildFacts([rec('b', 'gtceu:other', ['gtceu:sand'], 'gtceu:plate')]);
+  const l = mkLine('ev', { steps: 4 });
+  const earlier = [{ products: [{ res: 'gtceu:plate' }], machines: new Set(['gtceu:other']) }];
+  assert.equal(skipRoute(l, 'gtceu:plate', facts, null, { earlier }), null);
+});
+
+test('tagProblems reports bad role, line, extends and keepShort', () => {
+  const m = { chapters: [{ file: 'pl_ev', clusters: { a: { role: 'bogus', extends: 'pl_ev:zz' }, b: { line: 'L1', keepShort: ' ' } }, nodes: [n('x', 'item', 'k', [], { role: 'power', extends: 'pl_ev:a' })] }] };
+  const p = tagProblems(m);
+  assert.equal(p.length, 3);
+  assert.equal(tagProblems({ chapters: [{ file: 'pl_ev', clusters: { a: { role: 'power', keepShort: 'r' } }, nodes: [] }] }).length, 0);
+});
+
+test('toCsv and eraSummary carry roles and kinds', () => {
+  const l = line({ cluster: 'a', name: 'A', mbs: [], ours: [], role: 'power', lineId: 'L1' });
+  const rows = [{ line: l, real: true, reach: 0, used: new Set(), skipText: [], endInfo: new Map([['gtceu:x', { n: 1, reached: [] }]]), dup: null, verdict: 'keep', reason: 'ok', kind: 'role', role: { ok: true } }];
+  const csv = toCsv(rows).trim().split('\n');
+  assert.match(csv[0], /role,role_ok,line_id,extends,keep_short$/);
+  assert.match(csv[1], /,power,1,L1,"",""$/);
+  const s = eraSummary(rows).get('ev');
+  assert.equal(s.role, 1);
+  assert.equal(s.real, 0);
+});
+
 const io = (alts, count = 1) => ({ alts, count, cap: false });
-const rec = (id, type, ins, out, extra = {}) => ({ id, type, category: type, inputs: ins.map((a) => io([a])), outputs: [{ key: out, chance: 1 }], added: true, ...extra });
+const rec =  (id, type, ins, out, extra = {}) => ({ id, type, category: type, inputs: ins.map((a) => io([a])), outputs: [{ key: out, chance: 1 }], added: true, ...extra });
 const mkLine = (era, extra = {}) => ({
   era, steps: 3, raws: new Set(['gtceu:ore']), inner: new Set(['gtceu:dust', 'gtceu:plate']), products: [{ res: 'gtceu:plate' }], machines: new Set(['gtceu:mine']), ...extra,
 });

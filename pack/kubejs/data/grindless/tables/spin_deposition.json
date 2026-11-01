@@ -232,7 +232,13 @@
           "itemsOut": [{ "id": "grindless:iridium_coated_shell", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
         { "_why": "MX-S2 (max.md, L50 step 5, c26): titanium and gold sputtered over the patterned VO2 film as its contact metals; most of the argon is recovered", "name": "metallised_metasurface", "circuit": 26, "eut": 33554432, "duration": 900,
           "itemsIn": [{ "id": "grindless:patterned_vo2_metasurface", "count": 1 }, { "id": "gtceu:titanium_dust", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:metallised_metasurface", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] }
+          "itemsOut": [{ "id": "grindless:metallised_metasurface", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
+        { "_why": "MX-S1 (max.md, L47 step 4, c24): gold sputtered onto the lathe-turned Au-Pt test mass, its low-loss coat; most of the argon is recovered", "name": "coated_test_mass", "circuit": 24, "eut": 33554432, "duration": 800,
+          "itemsIn": [{ "id": "grindless:au_pt_test_mass", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:coated_test_mass", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] },
+        { "_why": "MX-S1 (max.md, L48 step 3, c25): gold sputtered onto the zero-expansion baseplate, the coated bench optics; most of the argon is recovered", "name": "coated_bench_optics", "circuit": 25, "eut": 33554432, "duration": 600,
+          "itemsIn": [{ "id": "grindless:zero_expansion_baseplate", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:coated_bench_optics", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 800 }] }
       ]
     },
     "pulsed_laser_deposition": {
@@ -317,6 +323,18 @@
           "kept": [{ "id": "grindless:krf_excimer_laser", "count": 1 }], "charge": [],
           "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:vo2_on_sapphire", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "MX-S3 line L54 (c7): the KrF laser ablates gadolinium barium copper oxide onto the buffered pump tape in oxygen, growing the thick film the flux pump's stator is wound from; the spent target stays in the chamber.",
+          "name": "thick_pump_tape", "circuit": 7, "eut": 33554432, "duration": 800,
+          "itemsIn": [
+            { "id": "grindless:pump_buffered_tape", "count": 2 },
+            { "id": "gtceu:gd_123_dust", "count": 2 }
+          ],
+          "kept": [{ "id": "grindless:krf_excimer_laser", "count": 1 }], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }],
+          "itemsOut": [{ "id": "grindless:thick_pump_tape", "count": 2 }],
           "fluidsOut": []
         }
       ]

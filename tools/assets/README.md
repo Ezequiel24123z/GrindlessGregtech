@@ -4,6 +4,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 
 | Script | What it does |
 |---|---|
+| `Era.Lib.ps1` | Era styles (shape, wear, trim, panel lines, tone targets), the finish pass hooked into `Save-Png` and the shared component body. Applied to OpV and MAX. |
 | `Pixel.Lib.ps1` | Shared library: ARGB canvas, palettes (character → color), text maps, selective outline, deterministic PNG writer (only `IHDR`, `IDAT` and `IEND`, deflate without compression) and `.png.mcmeta`. |
 | `Build-SteamTextures.ps1` | Writes the steam era textures to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-SteamPreview.ps1` | Review sheet at x8 with the casings, the frames and the items. It is only a preview: it is not published. |
@@ -1631,6 +1632,10 @@ Procedural, drawn by `Build-UIVJ0437Textures.ps1`; nothing is copied from anothe
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVJ0437Textures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVJ0437Textures.ps1 -Credits
 ```
+
+## Era style library (RF-6D)
+
+`Era.Lib.ps1` holds one style per era beyond the palette: shape language, wear, trim, panel lines and luminance and saturation targets. Steam to ZPM are described as they are (`Apply = $false`); UV to UIV carry targets for later parts; OpV and MAX are applied. A script opts in with `$EraName = 'opv'` (or `'max'`) before dot-sourcing `Era.Lib.ps1` after `Pixel.Lib.ps1`: the library wraps `Save-Png`, so every texture passes a deterministic finish (silhouette, trim, wear, panel lines, tone curve) before it is written. `New-EraComponentBody` is the shared component body that takes the era style (used by `Build-OpVComponentsTextures.ps1`). Every `Build-OpV*.ps1` and `Build-Max*.ps1` script uses the hook; to retouch, edit the style table in `Era.Lib.ps1` and re-run the scripts.
 
 ## OpV foundation items and casings (OpV-F1)
 

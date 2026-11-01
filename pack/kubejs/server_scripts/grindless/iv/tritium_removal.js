@@ -165,7 +165,8 @@
     }
     event.recipes.gtceu.assembler('grindless:tritium_removal_facility')
       .itemInputs(HULL, PLANT, ELECTROLYZER, '2x ' + PUMP, '4x #gtceu:circuits/iv', '4x grindless:sintered_regolith', '2x grindless:night_sky_radiator')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:helium', 1000))
+      .itemInputs('2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:helium', 1000))
       .itemOutputs(CONTROLLER)
       .EUt(1920).duration(600)
   }

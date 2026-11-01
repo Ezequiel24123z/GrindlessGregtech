@@ -248,8 +248,8 @@
       console.error(LOG + 'platinum gauze skipped, unknown item(s): ' + gauzeItems.join(', '))
     } else {
       event.recipes.gtceu.assembler('grindless:platinum_gauze')
-        .itemInputs('16x gtceu:fine_platinum_wire', '2x gtceu:fine_rhodium_wire', '2x grindless:ion_exchange_resin', '2x grindless:platinum_electrode')
-        .inputFluids(Fluid.of('gtceu:hydrochloric_acid', 1000), Fluid.of('gtceu:soldering_alloy', 144))
+        .itemInputs('16x gtceu:fine_platinum_wire', '2x gtceu:fine_rhodium_wire', '2x grindless:ion_exchange_resin', '2x grindless:platinum_electrode', 'gtceu:soldering_alloy_ingot')
+        .inputFluids(Fluid.of('gtceu:hydrochloric_acid', 1000))
         .itemOutputs(ids.platinumGauze)
         .EUt(1920).duration(200)
       added.push('platinum gauze')

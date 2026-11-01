@@ -113,6 +113,7 @@ test('the activated wheel returns to the hot cell and tritium has a destination'
   assert.ok(outputs(row).includes('grindless:target_wheel_blank'));
   const t = by(HOT.recipes ?? HOT, 'tritium_store');
   assert.ok(inputs(t).includes('gtceu:tritium') && outputs(t).includes('gtceu:helium_3'));
+  assert.equal(t.eut, 7864320, 'the tritium store runs at VA[UEV] (RF-3S)');
   assert.ok(producers('grindless:activated_target_wheel').some(([w]) => w.startsWith('superheavy.json:.types.heavy_ion_irradiation.')));
 });
 

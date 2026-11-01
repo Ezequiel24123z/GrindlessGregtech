@@ -58,7 +58,10 @@
           "itemsOut": [{ "id": "grindless:terfenol_ingot", "count": 4 }, { "id": "gtceu:quicklime_dust", "count": 3 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] },
         { "_why": "MAX-R1 (max.md, L13 step 3, c19): the carbonyl Fe-Ni powder melted with cobalt under helium into the segment alloy ingot; the oxide skin leaves as dross.", "name": "segment_alloy_ingot", "circuit": 19, "eut": 7864320, "duration": 2400,
           "itemsIn": [{ "id": "grindless:carbonyl_fe_ni_powder", "count": 4 }, { "id": "gtceu:cobalt_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:segment_alloy_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:segment_alloy_ingot", "count": 3 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] },
+        { "_why": "MX-S1 (max.md, L47 step 2, c22): gold melted with the platinum sponge under helium into the Au-Pt ingot of the test masses; the oxide skin leaves as dross.", "name": "au_pt_ingot", "circuit": 22, "eut": 7864320, "duration": 2400,
+          "itemsIn": [{ "id": "gtceu:gold_dust", "count": 11 }, { "id": "grindless:gr_platinum_sponge", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:helium", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:au_pt_ingot", "count": 15 }, { "id": "grindless:melter_dross", "count": 1, "chance": 5000 }], "fluidsOut": [] }
       ]
     },
     "mixer": {
@@ -112,7 +115,8 @@
           "itemsIn": [{ "id": "grindless:impregnated_mh_coil", "count": 4 }, { "id": "gtceu:rhea_plate", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 288 }], "charge": [],
           "itemsOut": [{ "id": "grindless:metallic_hydrogen_coil_block", "count": 1 }], "fluidsOut": [] },
         { "name": "rhea_cased_charge", "circuit": 0, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "grindless:quenched_cg_nitrogen", "count": 4 }, { "id": "gtceu:rhea_plate", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "_why": "RF-3Q line 4: the cased charge is overwrapped with PBO fibre (UHV line), so the levitation melter chain crosses back to UHV.",
+          "itemsIn": [{ "id": "grindless:quenched_cg_nitrogen", "count": 4 }, { "id": "gtceu:rhea_plate", "count": 1 }, { "id": "grindless:pbo_fibre", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:rhea_cased_charge", "count": 1 }], "fluidsOut": [] },
         { "name": "sled_charge", "circuit": 0, "eut": 491520, "duration": 400,
           "itemsIn": [{ "id": "grindless:rhea_cased_charge", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
@@ -127,7 +131,8 @@
           "itemsIn": [{ "id": "grindless:potted_mh_stator", "count": 1 }, { "id": "gtceu:metallic_hydrogen_single_cable", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:maglev_stator", "count": 1 }], "fluidsOut": [] },
         { "name": "uiv_conveyor_module", "circuit": 0, "eut": 7864320, "duration": 400,
-          "itemsIn": [{ "id": "grindless:maglev_stator", "count": 1 }, { "id": "gtceu:uev_conveyor_module", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "_why": "RF-3Q line 39: the stator rides a guideway of ITBTC coated-conductor tape (LuV line), so the conveyor module crosses back to LuV.",
+          "itemsIn": [{ "id": "grindless:maglev_stator", "count": 1 }, { "id": "gtceu:uev_conveyor_module", "count": 1 }, { "id": "grindless:itbtc_coated_conductor", "count": 4 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "gtceu:uiv_conveyor_module", "count": 1 }], "fluidsOut": [] }
       ]
     }

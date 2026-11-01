@@ -66,7 +66,8 @@
         },
         {
           "name": "lonsdaleite_bearing", "circuit": 5, "eut": 1966080, "duration": 200,
-          "itemsIn": [ { "id": "grindless:lonsdaleite_race", "count": 2 }, { "id": "gtceu:tungsten_plate", "count": 1 } ],
+          "_why": "RF-3Q line 3: the lonsdaleite races seat in a magnetic bearing housing (LuV line), so the diamond bearing crosses back to LuV.",
+          "itemsIn": [ { "id": "grindless:lonsdaleite_race", "count": 2 }, { "id": "gtceu:tungsten_plate", "count": 1 }, { "id": "grindless:magnetic_bearing", "count": 1 } ],
           "fluidsIn": [ { "id": "gtceu:lubricant", "amount": 100 } ],
           "itemsOut": [ { "id": "grindless:lonsdaleite_bearing", "count": 1 } ]
         },

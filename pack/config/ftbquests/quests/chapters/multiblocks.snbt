@@ -4015,6 +4015,347 @@
 			x: 20.0d
 			y: 78.0d
 		}
+		{
+			icon: "gtceu:opv_machine_hull"
+			id: "2D8BBFEEAC972EE9"
+			shape: "rsquare"
+			size: 1.5d
+			subtitle: "OpV multiblocks"
+			tasks: [{ id: "770EB0FC96F3E470", type: "checkmark" }]
+			title: "OpV"
+			x: 0.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:annihilation_engine"
+			id: "43C7BD359430929D"
+			rewards: [{ id: "5315BBEBB4CFAEB2", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "37D018F1CABDD058", item: "gtceu:annihilation_engine", type: "item" }]
+			x: 2.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:antihydrogen_foundry"
+			id: "326658CAA08B5811"
+			rewards: [{ id: "2E2C8C84A8BB6C95", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "1F02089FF4453719", item: "gtceu:antihydrogen_foundry", type: "item" }]
+			x: 4.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:assembly_line_array"
+			id: "38C70C2FE52EBDA0"
+			rewards: [{ id: "6BDF1DC4F2CCE6A0", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "4FF8BA8FA5A300F8", item: "gtceu:assembly_line_array", type: "item" }]
+			x: 6.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:bulge_collector"
+			id: "70E8EDC8F7657BD2"
+			rewards: [{ id: "797EAC92CBEA0B65", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "3E1174AA65738E36", item: "gtceu:bulge_collector", type: "item" }]
+			x: 8.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:collector_node_works"
+			id: "2B6EF5312469B78F"
+			rewards: [{ id: "21BE0B73E1C17EFE", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "3BC12B9A47D5D9CE", item: "gtceu:collector_node_works", type: "item" }]
+			x: 10.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:debris_harvester"
+			id: "162AF4E0B45AFEC3"
+			rewards: [{ id: "7FE5C3F030B18E1D", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "239642A3CC73BF67", item: "gtceu:debris_harvester", type: "item" }]
+			x: 12.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:field_frozen_press"
+			id: "74E7A35BEFEA370D"
+			rewards: [{ id: "7B497B049275332F", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "6BB16C5371F5186E", item: "gtceu:field_frozen_press", type: "item" }]
+			x: 14.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:gamma_optics_works"
+			id: "298B167D56AAD99D"
+			rewards: [{ id: "49FDA47AC7157433", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "4EA3D94A51DEEF69", item: "gtceu:gamma_optics_works", type: "item" }]
+			x: 16.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:hawking_collector"
+			id: "1FB72AFFAB0CEDE4"
+			rewards: [{ id: "5599351C0CF04C81", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "360910147A33543B", item: "gtceu:hawking_collector", type: "item" }]
+			x: 18.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:kugelblitz_forge"
+			id: "168666188614E916"
+			rewards: [{ id: "54B94B9F07FC7653", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "1059145BBF4EA0FA", item: "gtceu:kugelblitz_forge", type: "item" }]
+			x: 20.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:magnetic_pair_converter"
+			id: "78DFD86F36660196"
+			rewards: [{ id: "563B447B0EE001B2", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "42C8E9A2AF6EAE2C", item: "gtceu:magnetic_pair_converter", type: "item" }]
+			x: 22.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:replication_refinery"
+			id: "67C6C117430E95E4"
+			rewards: [{ id: "2EC85C261F6E7F0C", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "7B9ED2B060762152", item: "gtceu:replication_refinery", type: "item" }]
+			x: 24.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:strangelet_distiller"
+			id: "128DFD84D084221E"
+			rewards: [{ id: "66B34077EC1BCDE8", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "705FF24EF928D6F9", item: "gtceu:strangelet_distiller", type: "item" }]
+			x: 2.0d
+			y: 83.0d
+		}
+		{
+			icon: "gtceu:strangelet_vault"
+			id: "111EFB1A7C32CDC6"
+			rewards: [{ id: "1E0F3FA971337254", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "749B40E26D9E1802", item: "gtceu:strangelet_vault", type: "item" }]
+			x: 4.0d
+			y: 83.0d
+		}
+		{
+			icon: "gtceu:tetron_fab"
+			id: "573F6610891A54AD"
+			rewards: [{ id: "182D19E58A003041", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "4FEB2A0E932FC6CD", item: "gtceu:tetron_fab", type: "item" }]
+			x: 6.0d
+			y: 83.0d
+		}
+		{
+			icon: "gtceu:von_neumann_foundry"
+			id: "187E08A52965DE38"
+			rewards: [{ id: "5B1AC5E05AA80303", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "1A6280F946C8A78B", item: "gtceu:von_neumann_foundry", type: "item" }]
+			x: 8.0d
+			y: 83.0d
+		}
+		{
+			icon: "gtceu:antiproton_decelerator"
+			id: "6B4CBA2EBFBECA5C"
+			rewards: [{ id: "59C40C9F7E6DAE46", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.25d
+			subtitle: "OpV, GregTech"
+			tasks: [{ id: "4DE680BC28AD2AED", item: "gtceu:antiproton_decelerator", type: "item" }]
+			x: 10.0d
+			y: 83.0d
+		}
+		{
+			icon: "gtceu:jet_beam_line"
+			id: "1EC28119A12A47A8"
+			rewards: [{ id: "422B1466B837B583", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.25d
+			subtitle: "OpV, GregTech"
+			tasks: [{ id: "3059F771F0DEDF52", item: "gtceu:jet_beam_line", type: "item" }]
+			x: 12.0d
+			y: 83.0d
+		}
+		{
+			icon: "gtceu:spallation_target_station"
+			id: "2BCED42201F2E2AB"
+			rewards: [{ id: "158FB99FD4D4FC1E", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.25d
+			subtitle: "OpV, GregTech"
+			tasks: [{ id: "63E2B999A251F4B6", item: "gtceu:spallation_target_station", type: "item" }]
+			x: 14.0d
+			y: 83.0d
+		}
+		{
+			icon: "gtceu:max_machine_hull"
+			id: "1DDEF114BCE574AA"
+			shape: "rsquare"
+			size: 1.5d
+			subtitle: "MAX multiblocks"
+			tasks: [{ id: "1A75ED1CD3BA0D95", type: "checkmark" }]
+			title: "MAX"
+			x: 0.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:accretion_feeder"
+			id: "1CA1462A7318FD56"
+			rewards: [{ id: "763F3AE0DA367322", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "3A27FCFF23C6B645", item: "gtceu:accretion_feeder", type: "item" }]
+			x: 2.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:atom_interferometer_works"
+			id: "26911012C533475E"
+			rewards: [{ id: "59118B56DAC371A9", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "1E27B601EA4B3AF4", item: "gtceu:atom_interferometer_works", type: "item" }]
+			x: 4.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:cluster_light_furnace"
+			id: "1D704CC1E3E59FD1"
+			rewards: [{ id: "3592846A88F2DC89", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "7BFE277379B2CF91", item: "gtceu:cluster_light_furnace", type: "item" }]
+			x: 6.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:gene_ark"
+			id: "4AF21F3607E72610"
+			rewards: [{ id: "258AECB839D14181", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "1B0CEBA407CB56A9", item: "gtceu:gene_ark", type: "item" }]
+			x: 8.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:geroch_winch"
+			id: "66302A368FB8ACE5"
+			rewards: [{ id: "1BC0AC0BB58C23EF", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "3806BCE6A8830613", item: "gtceu:geroch_winch", type: "item" }]
+			x: 10.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:mass_stream_injector"
+			id: "2D765E766517F580"
+			rewards: [{ id: "2BAF98662FFFF13F", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "2DDDE590AAB9BFD8", item: "gtceu:mass_stream_injector", type: "item" }]
+			x: 12.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:membrane_line"
+			id: "30A9B8EE28522FAB"
+			rewards: [{ id: "5E86D99E157519CC", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "5E711DBE4A1696AA", item: "gtceu:membrane_line", type: "item" }]
+			x: 14.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:mirror_shell"
+			id: "26DC408DB5FE6C5A"
+			rewards: [{ id: "2377431A222854BD", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "1FCFDA582FF00C51", item: "gtceu:mirror_shell", type: "item" }]
+			x: 16.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:photon_ring_imager"
+			id: "75668DE739F5B189"
+			rewards: [{ id: "52CBAB3CFE124E47", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "4A9D341092B09E12", item: "gtceu:photon_ring_imager", type: "item" }]
+			x: 18.0d
+			y: 86.0d
+		}
+		{
+			icon: "gtceu:rydberg_array_works"
+			id: "5540BC0B0F57489B"
+			rewards: [{ id: "2007BFD772A744E0", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX, Grindless"
+			tasks: [{ id: "285C699AD4865827", item: "gtceu:rydberg_array_works", type: "item" }]
+			x: 20.0d
+			y: 86.0d
+		}
 	]
 	subtitle: ["Every multiblock controller you can build, tier by tier"]
 	title: "Multiblocks"

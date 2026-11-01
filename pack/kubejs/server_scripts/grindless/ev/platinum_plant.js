@@ -276,7 +276,6 @@
   })
 
   // crafting: the parts of the controller and of the electrode (the last id of each list is what the recipe makes)
-  const HULL = 'gtceu:ev_machine_hull'
   const REACTOR = 'gtceu:ev_chemical_reactor'
   const CENTRIFUGE = 'gtceu:ev_centrifuge'
   const ELECTROLYZER = 'gtceu:ev_electrolyzer'
@@ -286,7 +285,7 @@
   const FOIL = 'gtceu:platinum_foil'
   const ROD_TAG = '#forge:rods/titanium'
   const ROD = 'gtceu:titanium_rod'
-  const PLANT_PARTS = [HULL, REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, PUMP, 'gtceu:platinum_plant']
+  const PLANT_PARTS = [REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, PUMP, 'gtceu:platinum_plant']
   const ELECTRODE_PARTS = [ROD, FOIL, ELECTRODE]
 
   PP.electrode = ELECTRODE
@@ -767,6 +766,13 @@
       itemIn: 'grindless:spent_wolter_module', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
       itemsOut: [['gtceu:iridium_dust', 2]], fluidsOut: [['minecraft:water', 2000]],
       eut: 1920, duration: 300
+    },
+    // MX-S1 row (circuit 21; max.md L47 step 1): platinum dust dissolved in aqua regia and reduced to the platinum sponge of the test masses
+    {
+      name: 'gr_platinum_sponge', circuit: 21,
+      itemIn: 'gtceu:platinum_dust', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:hydrogen', 1000]],
+      itemsOut: [['grindless:gr_platinum_sponge', 1]], fluidsOut: [['minecraft:water', 1000]],
+      eut: 1920, duration: 300
     }
   ]
 
@@ -803,7 +809,7 @@
       console.error(LOG + 'Platinum Plant recipe skipped, unknown item(s): ' + missingPlant.join(', '))
     } else {
       event.recipes.gtceu.assembler('grindless:platinum_plant')
-        .itemInputs(HULL, REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, '2x ' + PUMP, '4x #gtceu:circuits/ev', '2x ' + ELECTRODE, '2x grindless:reforming_catalyst')
+        .itemInputs(REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, '2x ' + PUMP, '4x #gtceu:circuits/ev', '2x ' + ELECTRODE, '2x grindless:reforming_catalyst')
         .inputFluids(Fluid.of('gtceu:hydrochloric_acid', 2000))
         .itemOutputs('gtceu:platinum_plant')
         .EUt(480).duration(600)

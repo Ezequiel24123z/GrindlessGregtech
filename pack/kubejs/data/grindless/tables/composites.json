@@ -62,7 +62,10 @@
           "itemsOut": [{ "id": "grindless:bearing_rotor_ring", "count": 1 }], "fluidsOut": [] },
         { "_why": "MAX-R1 (max.md, L37 step 5, c20): the cold-pressed tetrataenite bonded with a Fe16N2 ring magnet in a nitrogen stream, below the 320 C ordering limit, into the shell segment's Halbach coupler.", "name": "halbach_segment_coupler", "circuit": 20, "eut": 1966080, "duration": 900,
           "itemsIn": [{ "id": "grindless:cold_pressed_tetrataenite", "count": 2 }, { "id": "grindless:fe16n2_ring_magnet", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 500 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:halbach_segment_coupler", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:halbach_segment_coupler", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MX-S3 (max.md, L54 step 4, c21): the potted flux pump stator set into a Fe16N2 ring magnet in a nitrogen stream, below the 320 C ordering limit, into the pump's rotor and stator unit.", "name": "fe16n2_rotor_magnet", "circuit": 21, "eut": 1966080, "duration": 900,
+          "itemsIn": [{ "id": "grindless:flux_pump_stator", "count": 1 }, { "id": "grindless:fe16n2_ring_magnet", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 500 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:fe16n2_rotor_magnet", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "sic_fibre_spinning": {

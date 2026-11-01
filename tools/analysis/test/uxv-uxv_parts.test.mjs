@@ -103,9 +103,9 @@ test('older rows: tables carry them with a UXV-A8 reason and the next free circu
   const a8 = mw.filter((r) => !/^MAX-/.test(r._why || '')).slice(-3, -1);
   assert.deepEqual(plain(a8.map((r) => [r.name, r.circuit, r.charge])), [['tetrataenite_rotor', 8, false], ['multipole_encoder_ring', 10, false]]);
   // OpV-A1 appended rebco_pancake (c7) and rebco_training (c8) after A8's row, so A8's row is the last one before OpV-A1's
-  const hts = tables('hts_magnet_works').filter((r) => !/^(OpV|MAX)-/.test(r._why || ''));
+  const hts = tables('hts_magnet_works').filter((r) => !/^(OpV|MAX|MX)-/.test(r._why || ''));
   assert.deepEqual(plain(hts.slice(-1).map((r) => [r.name, r.circuit, r.charge])), [['strand_stator', 6, true]]);
-  const cc = tables('coated_conductor_line').filter((r) => !/^MAX-/.test(r._why || ''));
+  const cc = tables('coated_conductor_line').filter((r) => !/^(MAX|MX)-/.test(r._why || ''));
   assert.deepEqual(plain(cc.slice(-1).map((r) => [r.name, r.circuit])), [['strand_tape', 4]]);
   for (const r of [...a8, ...hts.slice(-1), ...cc.slice(-1)]) assert.match(r._why, /^UXV-A8/, r.name);
   const rotor = mw.find((r) => r.name === 'tetrataenite_rotor');

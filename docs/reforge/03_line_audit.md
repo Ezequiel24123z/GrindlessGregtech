@@ -14,8 +14,33 @@ No pack content changed. MAX rows (8 lines, 5 to 7 steps) are data only: RF-7A d
 - **Skip route:** a recipe, usable at or below the line's era (RF-3H), outside the line, not of a type the line owns, producing the end product with fewer steps from base than the line, from obtainable non-same-material inputs. It is a lower-bound depth heuristic, not a price comparison, so it can only produce `fix`, never `remove`.
 - **Duplicate:** at least 4 shared intermediates covering 75% of the smaller line (or the same products and at least 2 shared).
 - **Verdicts:** `keep`, `fix`, `merge`, `remove`; rules in `judge()`. Short-line and isolation rules apply from EV on, the reach-back rule from LuV on.
+- **Roles (LD-T1):** implements the line rule of `docs/eras/ev.md:481-500`. A declared `role` (power, resource, infrastructure, research, travel) is tested against the dump and, if it holds, the line is not judged as production; a failed role is judged as production with the failure in the reason. `line` joins clusters of one chapter into one line, `extends` (3 steps or fewer) makes a branch end that needs a consumer, `keepShort` lets a short production line stay with its reason listed, and a short line of ours that replaces a stock chain is a fold. The skip route also drops ores with no vein, same-material loops, parallel sources of earlier lines and fold chains. The role, fold and resource tests are approximations; the audit prints each failed role.
 
 Limits: the chart covers chart lines, not every multiblock; the cost matrix lists key items only; skippability ignores recipe cost. Verdicts are leads for the packages below, to be confirmed against `docs/eras/<era>.md`.
+
+## Current state (batch 3 close, 2026-11-01)
+
+After the chart passes (RF-3K UEV/UIV, RF-3M LuV/ZPM, RF-3N UXV/OpV, RF-3O EV/IV; RF-3L UV/UHV and RF-3D Steam to HV still open), regenerated against the band A dump. Lines are design lines (RF-3G) where the era doc numbers them, chart lines otherwise. Missing = design lines no chart shows (count; then the name heuristic and how many of those the dump has; per-era checks in `03_charts_*.md` found most named ones to be false positives). The tables further down are history.
+
+| Era | Design | Chart | Real (4+) | Missing (count / named / in dump) | Chart crossings | Content crossings | Keep | Fix | Merge | Remove | Guide |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| steam | | 8 | 2 | | 0 | 0 | 6 | 2 | 0 | 0 | |
+| lv | | 15 | 3 | | 5 | 0 | 11 | 4 | 0 | 0 | |
+| mv | | 12 | 5 | | 11 | 0 | 10 | 1 | 1 | 0 | |
+| hv | | 16 | 2 | | 8 | 0 | 13 | 3 | 0 | 0 | |
+| ev | | 16 | 10 | | 4 | 13 | 10 | 6 | 0 | 0 | 11 |
+| iv | | 16 | 5 | | 12 | 12 | 4 | 12 | 0 | 0 | 15 |
+| luv | | 38 | 7 | | 34 | 11 | 6 | 31 | 0 | 1 | 20 |
+| zpm | 14 | 16 | 1 | 0 / 8 / 2 | 2 | 5 | 1 | 15 | 0 | 0 | 27 |
+| uv | 22 | 17 | 3 | 5 / 16 / 10 | 4 | 10 | 3 | 14 | 0 | 0 | 36 |
+| uhv | 32 | 27 | 9 | 5 / 23 / 14 | 0 | 10 | 6 | 21 | 0 | 0 | |
+| uev | 40 | 35 | 22 | 5 / 23 / 10 | 3 | 11 | 10 | 25 | 0 | 0 | |
+| uiv | 46 | 39 | 38 | 7 / 17 / 11 | 0 | 53 | 29 | 10 | 0 | 0 | |
+| uxv | 49 | 49 | 45 | 0 / 30 / 16 | 37 | 122 | 44 | 5 | 0 | 0 | |
+| opv | 45 | 45 | 37 | 0 / 4 / 3 | 107 | 127 | 37 | 8 | 0 | 0 | |
+| max | 46 | 46 | 40 | 0 / 46 / 0 | 0 | 205 | data only | | | | |
+
+The remaining fix verdicts are content problems (short or single-machine chains, bypasses), listed per line with the content files to touch in `03_charts_uev_uiv.md`, `03_charts_luv_zpm.md`, `03_charts_ev_iv.md` and `03_charts_uxv_opv.md`; RF-3S designs the EV to ZPM content packages.
 
 ## Per era (guide: AGENTS.md:18)
 

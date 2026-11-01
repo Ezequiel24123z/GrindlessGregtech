@@ -4,6 +4,7 @@
 import { blockCosts, groundedSustain, lfp } from './engine.mjs';
 import { makeRootCost } from './explain.mjs';
 import { asArray, makeGlobMatcher } from './util.mjs';
+import { dimensionIdEra, eraIdx, loadEraContext, recipeEra } from './era.mjs';
 
 export const STATUS = {
   SUSTAINED: 'sustained', // regenerates on its own
@@ -154,14 +155,20 @@ function evalSite(model, t) {
   const anywhere = makeGlobMatcher(asArray(t.allowAnywhere));
   const except = makeGlobMatcher(asArray(t.exceptRecipes));
   const site = asArray(t.dimensions);
+  // A dimension reached only in an era after the tier's belongs to a later era's rows (era.mjs, P2-T): not an offender.
+  const tierEra = eraIdx(String(model.cfg.era || '').split('/').pop());
+  const eraCtx = tierEra >= 0 ? loadEraContext(model.dump) : null;
+  const isLater = (d) => eraCtx !== null && dimensionIdEra(d, eraCtx) > tierEra;
   const defined = [];
   const offenders = [];
   let unconditioned = 0;
   for (const rule of g.rules) {
     if (rule.kind !== 'recipe' || (types.size > 0 && !types.has(rule.type)) || (nameMatch && !nameMatch(rule.name))) continue;
     if (except(rule.name)) continue;
-    defined.push(rule.id);
     const dims = rule.meta.dims || [];
+    if (eraCtx !== null && recipeEra({ type: rule.type, eut: rule.meta.eut, conditions: dims.map((d) => ({ dimension: d })) }, eraCtx) > tierEra) continue;
+    if (t.exact && dims.length > 0 && (rule.meta.notDims || []).length === 0 && dims.every(isLater)) continue;
+    defined.push(rule.id);
     const notDims = rule.meta.notDims || [];
     let why = null;
     if (notDims.length > 0) why = `a reversed condition (outside ${notDims.join(', ')}): with GTM's OR it holds almost everywhere`;
@@ -169,7 +176,7 @@ function evalSite(model, t) {
       if (anywhere(rule.name)) unconditioned++;
       else why = 'no dimension condition: it runs anywhere';
     } else {
-      const extra = dims.filter((d) => !site.includes(d));
+      const extra = dims.filter((d) => !site.includes(d) && !isLater(d));
       const missing = t.exact ? site.filter((d) => !dims.includes(d)) : [];
       if (extra.length > 0) why = `also runs in ${extra.join(', ')}`;
       else if (missing.length > 0) why = `doesn't run in ${missing.join(', ')}`;

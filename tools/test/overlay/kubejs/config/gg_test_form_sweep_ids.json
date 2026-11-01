@@ -290,11 +290,14 @@
    "gtceu:cluster_light_furnace",
    "gtceu:gene_ark",
    "gtceu:geroch_winch",
+   "gtceu:horizon_flux_clamp",
+   "gtceu:horizon_interferometer",
    "gtceu:mass_stream_injector",
    "gtceu:membrane_line",
    "gtceu:mirror_shell",
    "gtceu:photon_ring_imager",
-   "gtceu:rydberg_array_works"
+   "gtceu:rydberg_array_works",
+   "gtceu:segment_reclamation_works"
   ],
   "moon": [
    "gtceu:lunar_drill"

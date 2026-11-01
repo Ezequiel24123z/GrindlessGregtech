@@ -214,3 +214,64 @@ Core index, before (one model for all eras) to after, on the Band A dump (factor
 Routes that stopped setting early prices: LV steel was 0.0329 via `electrolyzer` oxygen from `offworld_only/distill_liquid_ender_air` and `centrifuge/ash_separation` fed by the HV `syngas/gasify_carbon` loop; at LV it is now 0.350 (`primitive_blast_furnace/steel_from_coal_dust`). Iron and oxygen are priced the same way.
 
 Band A re-check (target MV 3.0, HV 7.5, tolerance 10%): MV 2.96, inside, factor kept at 1.25. HV 10.08 left the tolerance, so its factor was re-solved on the band-less dump (`rf3a/out4`, `--solve --era mv,hv`): 2.6 to 2.092, index 7.91 there. Only `hv.json` item and fluid factors changed.
+
+## Band B (EV, IV) (P2-B)
+
+Tables `ev.json` and `iv.json` are on (bands A and B together). Baseline: the P2-T era-aware matrix (EV 3.10, IV 5.20). After: T1 dump of a pack copy, run `20261101-064722-server-46e`, reachability **PASS** (gate 1062/1063 (+1 warning), auto 401/401, eras 10/10) with the EV and IV hulls removed from the crafting table.
+
+### Factors and core index (item = fluid)
+
+| Era | Applied | Core index before | after (real dump) | Target |
+|---|---|---|---|---|
+| EV | **3.0** | 3.10 | **16.39** (-12.6%) | 18.75 |
+| IV | **3.191** | 5.20 | **48.48** (+3.4%) | 46.9 |
+
+Solved on the band-less dump (`--solve --era ev,iv`, MV 1.25 and HV 2.092 fixed, shaped bypasses removed): EV 2.875 predicts 16.27 and IV 3.191 predicts 48.30; the T1 dump gives 16.39 and 48.48. The fluid factor has no effect on either index.
+
+**EV quantization (limit, not a defect).** The core index is a step function of `ceil(n x f)`. A count of 1 from 3 becomes 4 only above 3.0, and every key item jumps at that step: factors 2.875 to 3.0 give 16.4 (-12.5%), 3.01 to 3.7 give 21.6 (+15%). Nothing inside 18.75 +-10% (16.9 to 20.6) is reachable with one global factor. 3.0 is the largest factor on the lower plateau and the curve anchor (3 x 2.5^n); the 10% criterion is missed on the low side. Open decision for the integrator: keep 3.0, or take 3.01 (+15%). A per-recipe lever (`override` or `exclude` of a few recipes) would land inside the band but is a hack and was not applied. IV is inside the 10%.
+
+Other eras after (core index, real dump): MV 2.96, HV 8.20 (target 7.5, inside 10%), LUV 33.3, ZPM 124.0, UV 150.3 (small shifts from the lifted unscaled floor; later bands re-solve them).
+
+Capacity of the scaled recipes (`capacity-lint --dump` of the T1 dump): EV 53 and IV 61 scaled recipes, **0 new overflows**; errors 116 on the T1 dump against 141 before this package (the 25 removed are the fixes below).
+
+### Removed bypasses and kept exceptions
+
+- `remove`: 13 shaped EV and 11 shaped IV core-component recipes (motor, pump, piston, conveyor, robot arm, emitter, sensor, field generator, hull and so on).
+- **The EV and IV hulls (`gtceu:shaped/ev_machine_hull`, `gtceu:shaped/iv_machine_hull`) are removed with no bootstrap kept.** They were the cost floor: with them the IV index plateaued at 164 whatever the factor. The hulls come from `gtceu:assembler/hull_ev` and `hull_iv`. Unlike MV and HV (band A) there is no cycle: T1 with both removed is PASS. The MV and HV exceptions stay.
+- `exclude` (both tables): `gtnn:component_assembly_line/*_ev(_*)` and `*_iv(_*)` (dead GT-- content, same reason as band A; Phase 8 removes it).
+- Benign survivors: the EV and IV `superconductor_wire` shapeless splitting recipes (growth 1.0) and the scaled assembler routes of the same parts (`electric_motor_iv`, `energy_hatch_iv`).
+
+### Capacity: 22 `capacity_known.json` entries emptied
+
+All 21 EV and IV `grindless:assembler/*` rows and `grindless:venus_heat/ground_heat` are gone from `tools/analysis/capacity_known.json`; none was fixed by a lower factor.
+
+| Entry | Cause | Fix |
+|---|---|---|
+| 20 IV controller recipes (mass_production x3, fission_reactor, foundation, heavy_water_plant, hot_cell, mega_smelting_complex, mercury x4, naquadah_plant, tritium_removal, uranium_cycle x2, venus x3, fluorspar_kiln) | `soldering_alloy` fluid plus a second fluid; the assembler holds one fluid | soldering alloy as an item: `gtceu:soldering_alloy_ingot` (`2x` for 288 mB, `1x` for 144 mB), made by `fluid_solidifier/solidify_soldering_alloy_to_ingot` and the alloy smelter; every recipe stays at 9 or fewer item slots. Test `mega-smelting_complex.test.mjs` pinned the old fluid and now expects the ingot |
+| `ev/platinum_plant` controller (10 item inputs) | 9 slots | the machine hull is dropped from the controller and from `PLANT_PARTS` (design call: the hull is a core component) |
+| `venus_heat/ground_heat` (32,000 mB steam out) | 16,000 mB tank | `iv/venus.js` splits the cycle (`STEAM_TANK`): 100 mB water in, 16,000 mB steam out, 200 ticks; EU/t and rate per tick unchanged |
+
+Dropped inputs: no EV or IV id appears in the T1 server log's "Max itemInputs / fluidInputs" lines (the earlier two were `ev/extraction_cascade.js` `calcium_chloride_recycle` and `hafnium_tantalum_oxide`: two solids plus a circuit in a type with two item slots). Fix: the circuit is skipped when a recipe already has two item inputs (`recipe.circuit(...)` only for fewer); the two solids identify the recipe. The data model keeps the circuit numbers. No new item was needed. The soldering-alloy swap above also clears the IV assembler dropped inputs.
+
+### Routes of the raised inputs
+
+188 recipes change (bands A and B); every raised input has a producer in the T1 dump and none needs a one-off source:
+
+| Input | Route (machine) | Tier |
+|---|---|---|
+| rubber, silicone rubber, SBR | `large_chemical_reactor/{silicone_rubber,styrene_butadiene_rubber}`, `chemical_reactor/rubber` | MV to EV |
+| polyethylene, PTFE | `chemical_reactor/polyethylene_*`, `ptfe_from_oxygen`, `large_chemical_reactor/ptfe_from_tetrachloride_air` | MV to EV |
+| sodium-potassium | `chemical_reactor/sodium_potassium`, `large_chemical_reactor/sodium_potassium` | MV |
+| soldering alloy (fluid and ingot) | `alloy_blast_smelter`, alloy smelter, `fluid_solidifier/solidify_soldering_alloy_to_ingot` | HV |
+| molten tin | extractor from ingots | LV |
+| EV and IV circuits, SMD parts | circuit assembler, `assembler/{smd_diode,asmd_*}`; crystal CPU and SoC by `laser_engraver` | EV to IV |
+| superconductor ingots (magnesium diboride, mercury barium calcium cuprate, uranium triplatinum, samarium iron arsenic oxide) | EBF, vacuum freezer, alloy smelter, fluid solidifier | EV to IV |
+| nether star, ender eye | `implosion_compressor`, `forge_hammer` (block to gem) | MV to HV |
+| tungsten steel and titanium parts, iridium and platinum rods, bolts, fine wires | cutter, extruder, lathe, wiremill from ingot | MV to EV |
+
+Single-producer inputs (SMD wraps, crystal chips, kanthal coils, catalyst mixes, zircaloy tubes) are made by one assembler, laser engraver, mixer or reactor recipe each; the raised counts stay within one machine's slots (capacity lint: 0 new overflows).
+
+### Notes and risks
+
+- The venus heat engine now runs 100 mB water and 16,000 mB steam per cycle; any doc, quest or data text with the old 200 mB and 32,000 mB figures is stale (not checked here: those files are outside this package).
+- Phase 8 dead rows kept in `capacity_known.json`: `gtca/*`, `gtnn/*`, `vein_sample/*_type_belt`, `luv/radiation_vault_casing`, `assembler/iridium_crucible`, `mu_metal_shield` and every UV and later row (other bands).

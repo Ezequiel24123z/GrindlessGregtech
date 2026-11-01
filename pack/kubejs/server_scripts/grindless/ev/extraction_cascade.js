@@ -414,6 +414,42 @@
       itemsOut: [{ id: 'grindless:vanadium_pentoxide', count: 2 }, { id: 'gtceu:sapphire_dust', count: 2 }],
       fluidsOut: [{ id: 'gtceu:diluted_sulfuric_acid', amount: 1000 }],
       eut: 1920, duration: 100
+    },
+    // MX-S4 (max.md, L52 step 3, c3): the Y, Ba and Cu raffinate pulled out of the bioleach liquor into kerosene, the acid coming back diluted
+    {
+      name: 'y_ba_cu_raffinate', mode: 'max', circuit: 3,
+      itemsIn: [{ id: 'grindless:bioleached_re_liquor', count: 4 }],
+      fluidsIn: [{ id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }, { id: HCL, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:y_ba_cu_raffinate', count: 4 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: DILUTED_HCL, amount: 2000 }],
+      eut: 1920, duration: 100
+    },
+    // MX-S4 (max.md, L53 step 4, c4): the erbium-rich fraction stripped into holmium-erbium oxide, the acid coming back diluted
+    {
+      name: 'er_ho_oxide_er_rich', mode: 'max', circuit: 4,
+      itemsIn: [{ id: 'grindless:er_rich_fraction', count: 8 }],
+      fluidsIn: [{ id: HCL, amount: 3000 }, { id: 'minecraft:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:er_ho_oxide', count: 4 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: DILUTED_HCL, amount: 4000 }],
+      eut: 1920, duration: 100
+    },
+    // MX-S4 (max.md, Sn-Li return, c3; repeat by item inputs): Sn-Li dross melted into kerosene and hydrogen, the eutectic of the droplet radiator coming back
+    {
+      name: 'sn_li_dross_eutectic', mode: 'max', circuit: 3,
+      itemsIn: [{ id: 'grindless:sn_li_dross', count: 2 }],
+      fluidsIn: [{ id: KEROSENE, amount: 1000 }, { id: 'gtceu:hydrogen', amount: 1000 }],
+      itemsOut: [],
+      fluidsOut: [{ id: 'gtceu:sn_li_eutectic', amount: 1000 }, { id: KEROSENE, amount: 950 }],
+      eut: 1920, duration: 100
+    },
+    // MX-S1 (max.md, L49 step 1, c31; repeat by item inputs): indium dust leached in sulfuric acid to indium sulfate; the hydrogen is the one the zone refiner's reduction consumes
+    {
+      name: 'indium_sulfate', mode: 'max', circuit: 31,
+      itemsIn: [{ id: 'gtceu:indium_dust', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:sulfuric_acid', amount: 3000 }],
+      itemsOut: [{ id: 'grindless:indium_sulfate', count: 2 }],
+      fluidsOut: [{ id: 'gtceu:hydrogen', amount: 3000 }],
+      eut: 1920, duration: 100
     }
   ]
 
@@ -542,7 +578,8 @@
       added++
       var recipe = event.recipes.gtceu.solvent_extraction(r.id)
       r.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
-      recipe.circuit(r.circuit)
+      // the recipe type holds two item inputs and a circuit takes one: a row with two solids is told apart by its item pair alone
+      if (r.itemsIn.length < 2) recipe.circuit(r.circuit)
       r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f.id, f.amount)) })
       r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f.id, f.amount)) })

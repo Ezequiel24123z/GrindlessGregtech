@@ -119,6 +119,14 @@
       "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
       "itemsOut": [ { "id": "grindless:fcl_coil", "count": 1 } ],
       "eut": 7864320, "duration": 600
+    },
+    {
+      "name": "flux_pump_stator", "circuit": 15, "charge": true,
+      "_why": "MX-S3 line L54 (c15): eight turns of thick pump tape wound with horizon strand wire and potted in epoxy, ramped in the cold-test helium: the stator of the HTS flux pump.",
+      "itemsIn": [ { "id": "grindless:thick_pump_tape", "count": 8 }, { "id": "gtceu:horizon_strand_single_wire", "count": 2 } ],
+      "fluidsIn": [ { "id": "gtceu:epoxy", "amount": 144 } ],
+      "itemsOut": [ { "id": "grindless:flux_pump_stator", "count": 1 } ],
+      "eut": 7864320, "duration": 600
     }
   ]
 }

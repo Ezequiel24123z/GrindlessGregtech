@@ -5,8 +5,15 @@
 // polarised ices, the C-12 spreader seed, the neon cone) are not drawn.
 import { I, L, M, n } from './pl-lib.mjs';
 
+// rows([t, ...], build): every row at y >= t is pushed down by one for each t, opening a gap above row t for a crossing link
+let INS = [];
+const at = (y) => y + INS.filter((t) => t <= y).length;
+const rows = (ins, build) => { INS = ins; return build(); };
+const above = (y) => at(y) - 1.5;
+
 // a step is [key, resource, title, kind?, options?]: the first step is raw, machines are 'ours', the rest products
-function chain(y, steps, end, x0 = 0) {
+function chain(y0, steps, end, x0 = 0) {
+  const y = at(y0);
   const out = steps.map(([key, res, title, kind, opt], i) => n(key, x0 + 2.5 * i, y, res, title, {
     kind: kind || (i === 0 ? 'raw' : res.machine ? 'ours' : 'product'),
     ...(i > 0 ? { from: [steps[i - 1][0]] } : {}),
@@ -29,7 +36,7 @@ export default {
   clusters: {
     hydrogen: {
       name: 'Metallic hydrogen and the hard parts',
-      nodes: [
+      nodes: rows([2, 4, 14, 16], () => [
         // line 2
         ...chain(0, [
           ['l2_0', I('gtceu:rhea_ingot'), 'RHEA Ingot', 'raw'],
@@ -48,8 +55,9 @@ export default {
           ['l3_2', I('gtceu:lonsdaleite_dust'), 'Lonsdaleite'],
           ['l3_3', I('grindless:leached_lonsdaleite'), 'Leached Lonsdaleite'],
           ['l3_4', I('grindless:lonsdaleite_race'), 'Lonsdaleite Race'],
-          ['l3_5', I('grindless:lonsdaleite_bearing'), 'Lonsdaleite Bearing'],
+          ['l3_5', I('grindless:lonsdaleite_bearing'), 'Lonsdaleite Bearing', 'product', { from: ['l3_4', 'x3_brg'] }],
         ], 'the UIV piston'),
+        L('x3_brg', 12.5, above(2), 'pl_luv:bearing'),
         // line 4
         ...chain(4, [
           ['l4_0', I('gtceu:diamond_plate'), 'Diamond Plate', 'raw'],
@@ -58,9 +66,10 @@ export default {
           ['l4_3', mach('gtceu:ramp_compression_pulser'), 'Ramp Compression Pulser', 'ours'],
           ['l4_4', I('gtceu:cubic_gauche_nitrogen_dust'), 'Cubic Gauche Nitrogen'],
           ['l4_5', I('grindless:quenched_cg_nitrogen'), 'Quenched CG Nitrogen'],
-          ['l4_6', I('grindless:rhea_cased_charge'), 'RHEA Cased Charge'],
+          ['l4_6', I('grindless:rhea_cased_charge'), 'RHEA Cased Charge', 'product', { from: ['l4_5', 'x4_pbo'] }],
           ['l4_7', I('grindless:sled_charge'), 'SLED Charge'],
         ], 'the sled'),
+        L('x4_pbo', 15, above(4), 'pl_uhv:fib'),
         // line 5
         ...chain(6, [
           ['l5_0', I('grindless:tantalite_fluoride_cake'), 'Tantalite Fluoride Cake', 'raw'],
@@ -120,8 +129,9 @@ export default {
           ['l23_4', mach('gtceu:nitride_magnet_works'), 'Nitride Magnet Works', 'ours'],
           ['l23_5', I('grindless:bonded_fe16n2_magnet'), 'Bonded Fe16n2 Magnet'],
           ['l23_6', I('gtceu:uev_electric_motor'), 'UEV Electric Motor'],
-          ['l23_7', I('gtceu:uiv_electric_motor'), 'UIV Electric Motor'],
+          ['l23_7', I('gtceu:uiv_electric_motor'), 'UIV Electric Motor', 'product', { from: ['l23_6', 'x23_coil'] }],
         ], 'the UIV motor'),
+        L('x23_coil', 17.5, above(14), 'pl_luv:coil'),
         // line 23, the GdBCO motor
         ...chain(18, [
           ['l123_0', I('gtceu:gd_123_dust'), 'Gd-123', 'raw'],
@@ -142,30 +152,32 @@ export default {
           ['l39_7', I('grindless:rhea_cased_halbach'), 'RHEA Cased Halbach'],
           ['l39_8', I('grindless:potted_mh_stator'), 'Potted MH Stator'],
           ['l39_9', I('grindless:maglev_stator'), 'Maglev Stator'],
-          ['l39_10', I('gtceu:uiv_conveyor_module'), 'UIV Conveyor Module'],
+          ['l39_10', I('gtceu:uiv_conveyor_module'), 'UIV Conveyor Module', 'product', { from: ['l39_9', 'x39_cc'] }],
         ], 'the UIV conveyor'),
-      ],
+        L('x39_cc', 25, above(16), 'pl_luv:cc'),
+      ]),
     },
     atoms: {
       name: 'Superheavy atoms and neutron star matter',
-      nodes: [
+      nodes: rows([2], () => [
         // line 9
         ...chain(0, [
           ['l9_0', I('gtceu:polytetrafluoroethylene_foil'), 'Polytetrafluoroethylene Foil', 'raw'],
           ['l9_1', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil'],
           ['l9_2', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
-          ['l9_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l9_2', 'x9_cav'] }],
+          ['l9_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l9_2', 'x9_cav', 'x9_cf'] }],
           ['l9_4', I('grindless:etched_membrane'), 'Etched Membrane'],
           ['l9_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
           ['l9_6', I('grindless:element_120_recoil'), 'Element 120 Recoil'],
         ], 'the superheavy census'),
         L('x9_cav', 7.5, -2, 'pl_uev:nsc'),
+        L('x9_cf', 7.5, above(2), 'pl_uhv:cf'),
         // line 32
         ...chain(2, [
           ['l32_0', I('gtceu:polytetrafluoroethylene_foil'), 'Polytetrafluoroethylene Foil', 'raw'],
           ['l32_1', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil'],
           ['l32_2', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
-          ['l32_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l32_2'] }],
+          ['l32_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l32_2', 'x9_cf'] }],
           ['l32_4', I('grindless:etched_membrane'), 'Etched Membrane'],
           ['l32_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
           ['l32_6', I('grindless:element_119_recoil'), 'Element 119 Recoil'],
@@ -219,11 +231,11 @@ export default {
           ['l35_9', mach('gtceu:penrose_engine'), 'Penrose Engine', 'ours'],
           ['l35_10', I('grindless:recovered_half_sled'), 'Recovered Half SLED'],
         ], 'the sled refit'),
-      ],
+      ]),
     },
     light: {
       name: 'Light and crystals',
-      nodes: [
+      nodes: rows([4], () => [
         // line 10
         ...chain(0, [
           ['l10_0', I('grindless:lithium_niobate_boule'), 'Lithium Niobate Boule', 'raw'],
@@ -250,7 +262,7 @@ export default {
           ['l12_7', mach('gtceu:photonic_foundry'), 'Photonic Foundry', 'ours'],
           ['l12_8', I('grindless:glass_interposer'), 'Glass Interposer'],
         ], 'the optical mainframe'),
-        L('x13_hfo', -2.5, 4, 'pl_uev:hfo'),
+        L('x13_hfo', -2.5, at(4), 'pl_uev:hfo'),
         // line 13
         ...chain(4, [
           ['l13_0', I('grindless:hfo2_resist_wafer'), 'Hfo2 Resist Wafer', 'product', { from: ['x13_hfo'] }],
@@ -262,20 +274,18 @@ export default {
           ['l13_6', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
           ['l13_7', I('grindless:beuv_exposed_wafer'), 'BEUV Exposed Wafer'],
           ['l13_8', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l13_9', I('grindless:beuv_driver_asic'), 'BEUV Driver ASIC'],
+          ['l13_9', I('grindless:beuv_driver_asic'), 'BEUV Driver ASIC', 'product', { from: ['l13_8', 'x13_comb'] }],
         ], 'the BEUV scanner'),
-        // line 14
+        L('x13_comb', 22.5, above(4), 'pl_uhv:comb'),
+        // line 14: RF-3Q: the BEUV mirror's own chain (the cap recipe is the last step of the line, not a bypass; the fouled-mirror loop is the cleaning recipe of line 13)
         ...chain(6, [
-          ['l14_0', I('gtceu:mixed_rare_earth_chloride_dust'), 'Mixed Rare Earth Chloride', 'raw'],
-          ['l14_1', mach('gtceu:extraction_cascade'), 'Extraction Cascade', 'ours'],
-          ['l14_2', I('grindless:terbium_oxide_dust'), 'Terbium Oxide'],
-          ['l14_3', mach('gtceu:europium_reductor'), 'Europium Reductor', 'ours'],
-          ['l14_4', I('gtceu:terbium_dust'), 'Terbium'],
-          ['l14_5', I('grindless:tb_droplet_target'), 'TB Droplet Target'],
-          ['l14_6', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l14_7', I('grindless:fouled_beuv_mirror'), 'Fouled BEUV Mirror'],
-          ['l14_8', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l14_9', I('grindless:beuv_mirror'), 'BEUV Mirror'],
+          ['l14_0', I('gtceu:boron_carbide_dust'), 'Boron Carbide', 'raw'],
+          ['l14_1', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours'],
+          ['l14_2', I('grindless:b4c_target'), 'B4C Target'],
+          ['l14_3', mach('gtceu:mbe_reactor'), 'MBE Reactor', 'ours'],
+          ['l14_4', I('grindless:la_b4c_multilayer'), 'La/B4C Multilayer'],
+          ['l14_5', I('grindless:lan_barrier_mirror'), 'LaN Barrier Mirror'],
+          ['l14_6', I('grindless:beuv_mirror'), 'BEUV Mirror'],
         ], 'the BEUV scanner'),
         // line 18
         ...chain(8, [
@@ -325,11 +335,11 @@ export default {
           ['l44_5', I('grindless:er_fibre_coil'), 'ER Fibre Coil'],
           ['l44_6', I('grindless:pumped_edfa'), 'Pumped EDFA'],
         ], 'the pulsar repeater'),
-      ],
+      ]),
     },
     memory: {
       name: 'Memories and computers',
-      nodes: [
+      nodes: rows([], () => [
         // line 11
         ...chain(0, [
           ['l11_0', I('grindless:si28_soi_wafer'), 'Si-28 Soi Wafer', 'raw'],
@@ -391,21 +401,23 @@ export default {
           ['l41_8', I('grindless:aqfp_module'), 'AQFP Module'],
           ['l41_9', I('grindless:matrioshka_logic_tile'), 'Matrioshka Logic Tile'],
         ], 'the Matrioshka computer'),
-        // line 42
+        // line 42: RF-3Q: the praseodymium is reduced from its oxide in the EBF (circuit 4, hydrogen) before the levitation melter
         ...chain(10, [
-          ['l42_0', I('gtceu:praseodymium_dust'), 'Praseodymium', 'raw'],
-          ['l42_1', mach('gtceu:levitation_melter'), 'Levitation Melter', 'ours'],
-          ['l42_2', I('gtceu:prni5_dust'), 'Prni5'],
-          ['l42_3', mach('gtceu:millikelvin_cryostat_works'), 'Millikelvin Cryostat Works', 'ours'],
-          ['l42_4', I('grindless:nuclear_stage'), 'Nuclear Stage'],
+          ['l42_0', I('gtceu:praseodymium_oxide_dust'), 'Praseodymium Oxide', 'raw'],
+          ['l42_1', mach('gtceu:electric_blast_furnace'), 'Electric Blast Furnace', 'ours'],
+          ['l42_2', I('gtceu:praseodymium_dust'), 'Praseodymium'],
+          ['l42_3', mach('gtceu:levitation_melter'), 'Levitation Melter', 'ours'],
+          ['l42_4', I('gtceu:prni5_dust'), 'Prni5'],
           ['l42_5', mach('gtceu:millikelvin_cryostat_works'), 'Millikelvin Cryostat Works', 'ours'],
-          ['l42_6', I('grindless:mk_cryostat_module'), 'MK Cryostat Module'],
+          ['l42_6', I('grindless:nuclear_stage'), 'Nuclear Stage'],
+          ['l42_7', mach('gtceu:millikelvin_cryostat_works'), 'Millikelvin Cryostat Works', 'ours'],
+          ['l42_8', I('grindless:mk_cryostat_module'), 'MK Cryostat Module'],
         ], 'the P:Si line and the memories'),
-      ],
+      ]),
     },
     fusion: {
       name: 'Fusion fuel and heat',
-      nodes: [
+      nodes: rows([8], () => [
         // line 26
         ...chain(0, [
           ['l26_0', I('gtceu:lithium_chloride_dust'), 'Lithium Chloride', 'raw'],
@@ -461,8 +473,9 @@ export default {
           ['l38_2', I('grindless:c12_hpht_plate'), 'C-12 HPHT Plate'],
           ['l38_3', I('grindless:c12_004_plate'), 'C-12 004 Plate'],
           ['l38_4', I('grindless:c12_ion_milled_plate'), 'C-12 Ion Milled Plate'],
-          ['l38_5', I('grindless:gamma_bragg_mirror'), 'Gamma Bragg Mirror'],
+          ['l38_5', I('grindless:gamma_bragg_mirror'), 'Gamma Bragg Mirror', 'product', { from: ['l38_4', 'x38_mass'] }],
         ], 'the positronium lab'),
+        L('x38_mass', 12.5, above(8), 'pl_luv:mass'),
         // line 43
         ...chain(10, [
           ['l43_0', I('grindless:c12_cvd_plate'), 'C-12 CVD Plate', 'raw'],
@@ -494,10 +507,10 @@ export default {
           ['l19_5', I('grindless:droplet_collector'), 'Droplet Collector'],
           ['l19_6', I('grindless:droplet_radiator_module'), 'Droplet Radiator Module', 'product', { from: ['l19_5', 'l19_8', 'l19_10'] }],
         ], 'the Matrioshka shell'),
-        n('l19_7', 10, 18, I('gtceu:tin_ingot'), 'Tin Ingot', { kind: 'raw' }),
-        n('l19_8', 12.5, 18, I('grindless:eb_distilled_tin'), 'EB-Distilled Tin', { kind: 'product', from: ['l19_7'] }),
-        n('l19_9', 10, 19.5, I('gtceu:rhea_plate'), 'RHEA Plate', { kind: 'raw' }),
-        n('l19_10', 12.5, 19.5, I('grindless:orifice_plate'), 'Orifice Plate', { kind: 'product', from: ['l19_9'] }),
+        n('l19_7', 10, at(18), I('gtceu:tin_ingot'), 'Tin Ingot', { kind: 'raw' }),
+        n('l19_8', 12.5, at(18), I('grindless:eb_distilled_tin'), 'EB-Distilled Tin', { kind: 'product', from: ['l19_7'] }),
+        n('l19_9', 10, at(19.5), I('gtceu:rhea_plate'), 'RHEA Plate', { kind: 'raw' }),
+        n('l19_10', 12.5, at(19.5), I('grindless:orifice_plate'), 'Orifice Plate', { kind: 'product', from: ['l19_9'] }),
         // line 22
         ...chain(14, [
           ['l22_0', I('gtceu:uranium_233_ingot'), 'Uranium 233 Ingot', 'raw'],
@@ -511,7 +524,7 @@ export default {
           ['l22_8', mach('gtceu:nuclear_clock_lab'), 'Nuclear Clock Lab', 'ours'],
           ['l22_9', I('grindless:chip_nuclear_clock'), 'Chip Nuclear Clock'],
         ], 'the UIV sensor'),
-      ],
+      ]),
     },
   },
 };

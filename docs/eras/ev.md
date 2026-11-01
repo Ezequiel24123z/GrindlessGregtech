@@ -473,3 +473,70 @@ The twelve proposals are approved, with these details:
 - **EV goes from 7 to 11 multiblocks of ours** (rule 7 of `AGENTS.md`: ×1.35 per era). The four additions are in *Raising EV to the target*, and their lines are in *New process lines*.
 - **The sealed dome is the greenhouse family's EV step.** The earlier "no EV greenhouse" is reversed.
 - **Test strips** follow the band table in `AGENTS.md` (from X 5632), not the old Moon and Mars figures of this document.
+
+## Reforge line design (RF-3S)
+
+Era-design pass for EV, IV, LuV and ZPM (issue #69, 2026-11-01), against `AGENTS.md:18` (rule 7) and `:20` (rule 9). Evidence: the RF-3O and RF-3M charts (`docs/reforge/03_charts_ev_iv.md`, `03_charts_luv_zpm.md`), `docs/reforge/data/03_lines.csv` and the rf3a dump (`out4`). This section also holds the rule shared by the four eras; `iv.md`, `luv.md` and `zpm.md` refer to it.
+
+### The rule: what the line audit counts
+
+A **chain** is one end product of a chart cluster, as RF-3G splits them. A chain is a **production line** unless it has one of the five roles below. Only production lines must meet `AGENTS.md:18`: a real chain of at least 4 steps and, from LuV on, a crossing with a line two or more eras back. The others are checked only for having an honest destination.
+
+| Role | A chain has it when | Test the audit runs on the dump |
+|---|---|---|
+| `power` | it ends in EU: a generator or the wireless network; its item and fluid outputs are returns or by-products | the last machine's recipe type outputs EU, or the chain has no item or fluid end |
+| `resource` | it is a site machine that turns a place, a wear part or a charge into a basic resource that other lines take (drills, siphons, collectors, harvesters, the condenser, the cryobot, the optical miner) | its recipes consume only wear parts, charges or circuits, and each output either feeds a line or is a stated by-product |
+| `infrastructure` | it ends in a structure part or equipment: casings, coils, cells, panels, controllers, hatches, a suit upgrade | at least half of the end product's consumers (recycling, packing and decomposition ignored) output a machine, hatch, casing or structure block named in `machines.json` or `structures.json`, or a GCYR suit, rocket or station part |
+| `research` | it ends in data: orbs, charts, catalogues, surveys, signals, models, or a research structure (HPCA, research station) | the end product is consumed only as a non-consumed input (chance 0) or by a research, telemetry or observatory recipe type |
+| `travel` | it ends in a rocket part, a station casing, a fuel tank, a quantum seed or a travel key | every consumer is a rocket, station, landing or seed recipe, or a site gate (chance 0) |
+
+Four more rules make the count honest:
+
+- **A declared role is checked, never trusted.** A cluster or end node in `pl-data-*.mjs` may carry `role: '<role>'`; if the test above fails, the chain is judged as production and the audit reports it.
+- **A design line may span clusters of one era.** Clusters that carry the same `line: '<id>'` are measured as one line: a raw node whose item is a product node of a sibling cluster continues that cluster's chain. Link nodes to other eras still add no step (they are crossings), so an older line's steps never count twice.
+- **Branch ends and convenience folds are not lines.** A chain of at most 3 steps that turns an older line's end product into a final form (an alloy, a plate, a cut wafer) is a **branch end** of that line (`extends: 'pl_<era>:<cluster>'`): it needs a consumer, not 4 steps. A multiblock row that folds an existing GTM chain into one step (rule 4, "several steps in one") is a **fold**: the GTM chain is the line, the fold is not counted again.
+- **A short production line may stay** only with `keepShort: '<reason>'` stating why lengthening would be padding; the audit lists every such reason.
+
+The skip-route test of RF-3C drops four false positives: ores with no vein (a `hidden_until.json` row with `until: never`, as nether star); same-material loops (magnetic samarium back to samarium); an earlier era's counted line that ends in the same product (a parallel source, judged by rate in Phase 2, not a bypass); and the GTM chain a fold replaces.
+
+### Classification (EV)
+
+Steps are machine steps after the chart work below (RF-3O's numbers in brackets where they change).
+
+| Cluster: end | Role | Steps | Decision |
+|---|---|---|---|
+| moon: titanium ingot, plate | production | 4 | keep (RF-3O added the bender) |
+| moon: liquid nitrogen, oxygen, helium | production | 5 (tripod, macerator, cell, cryogenic plant, and the tripod's LN₂ return) | keep |
+| moon: sintered regolith | infrastructure | 3 | role tag; its consumers are the cryogenic plant, fission reactor and fluorspar kiln builds |
+| kroll: titanium plate, ingot | production | 4 | keep (holds the hot strip mill) |
+| platinum: Pt, Pd, Rh, Ru, ruthenium catalyst | production | 4 (washer, plant, PGM refining, smelting complex) | keep (RF-3O) |
+| tungsten: tungsten, tungsten steel | production | 5-6 | keep |
+| mars: methalox | power | 3 | role tag; the processor is the resource head of the dome below |
+| power: combined cycle | power | 2 | role tag |
+| nitric: nitric acid | merged | 1 | **merge** into platinum (below) |
+| cascade: samarium, neodymium | production | 2 → 5 | **lengthen by chart:** draw the Martian tripod, raw merrillite and the ore plant upstream (`grindless:merrillite_vein_mars` exists), and the polarizer step that takes neodymium to magnetic neodymium for motors |
+| dome: nether star | production | 3 → 4 | **lengthen by chart:** the dome takes 200 mB of CO₂ a run (`greenhouse/ev/beetroot_sealed_moon`), and on Mars the atmosphere processor's circuit 2 makes it (`atmosphere_processing/ev/co2_intake`): processor c2 → dome → brewery → creature simulator |
+| *(new)* nano: nano processor, NOR chips | production | 5+ | **build the chart** (below) |
+| *(design)* metal mixture | not a line | 1 | **drop as a line;** the by-product gets one row (below) |
+
+### Redesigns (EV)
+
+- **Nitric acid joins the platinum plant.** The one-step `large_chemical_reactor/nitric_acid_from_elements` is GTM's own LCR fold of its Ostwald chain (`ammonia_from_elements` → `nitric_oxide_from_ammonia` → `nitrogen_dioxide_from_oxide` → `nitric_acid_from_dioxide_*`, all in the dump), so it is a fold, not an EV line. What EV adds is the plant's nitrogen dioxide coming back as acid: the platinum cluster draws `nitric_acid_from_dioxide` from the plant's NO₂ by-product and the link to IV's hot cell reprocessing. The `nitric` cluster goes. GTM's shortcuts stay (rule 6; open question 2).
+- **Nano circuits are charted, not built: they exist.** RF-3O's "designed, not built" was a chart gap. The dump has GTM's whole chain: phosphorus boule (EBF, 64 Si + 8 P + GaAs + N₂) → cutter (32 phosphorus wafers) → laser engraver (NOR wafer) → cutter (NOR chips); CPU wafer + 16 carbon fibres + 576 mB glowstone → nano CPU wafer (chemical reactor, cleanroom) → nano CPU chip → circuit assembler → nano processor, assembly, computer. New cluster `nano`, production, crossing LV's GaAs (`pl_lv:gaas`) and HV's epoxy boards (`pl_hv:epoxy`).
+- **Metal mixture: a by-product row, not a line.** GTM's `centrifuge/stone_dust_separation` gives 9.25 % metal mixture dust, and nothing takes it (the dump has no separation recipe), so today it is a by-product without a destination (rule 3). One EV centrifuge row, `metal_mixture_separation` at 900 EU/t, gives hematite, bauxite, pyrolusite, barite and chromite as small dusts, with no ilmenite (titanium stays lunar). The barite now has a destination: GTM's `electrolyzer/decomposition_electrolyzing_barite` gives barium, which LuV's ZBLAN takes (`grindless:mixer/zblan`, 20 small barium dusts). The package traces the cost matrix: if the row becomes the cheapest route to any key item, the outputs drop until it is not, or the mixture is voided instead (open question 3).
+
+### Packages (EV, and the shared tool)
+
+One Sonnet session each, under `AGENTS.md` *Work packages* (T0 before every commit, at most 2 repairs). `iv.md`, `luv.md` and `zpm.md` continue this list. **Before P2-B (EV and IV band):** LD-EV2. The chart packages change no recipe, so no band waits for them.
+
+| # | Id | Scope | Likely files | Depends on | Tests |
+|---|---|---|---|---|---|
+| 1 | **LD-T1** Line roles in the audit | Implement *The rule*: read `role`, `line`, `extends` and `keepShort` from clusters and nodes; run each role's test on the dump; measure same-`line` clusters as one chain; drop the four skip false positives; report declared roles that fail and every `keepShort` reason. `pl-check` accepts the four fields. | `tools/analysis/line-audit.mjs`, its test in `tools/analysis/test/`, `tools/quests/processing-lines/pl-check.mjs` | — | T0; node tests with one fixture per role and per false positive |
+| 2 | **LD-EV1** EV charts | The *Classification (EV)* tags and chart work: roles; nitric merged into platinum; cascade and dome upstream; the `nano` cluster. No recipe changes. | `tools/quests/processing-lines/pl-data-ev.mjs` | LD-T1 (fields accepted) | T0; `pl-check ev` 0 issues; line audit: no EV production line under 4 steps |
+| 3 | **LD-EV2** Metal mixture row | The `metal_mixture_separation` row, its EMI info page and lang; `cost-matrix.mjs --trace` on chromium, aluminium and manganese key items before and after. | one EV server script (`server_scripts/grindless/ev/`), `client_scripts/grindless/ev_*_lang.js`, `assets/emi/recipe/additions/grindless/ev_*` | — | T0; the trace in the handoff. T1 none (a centrifuge row on a GTM machine) |
+
+### Open questions (EV)
+
+1. **Does `AGENTS.md:18`'s line guide count only production lines?** Default: yes, and the figures stay as written; each era names its gap instead of padding (ZPM counts 6 against 14, `zpm.md`). If the owner restates the figures from the new counts, UV and later targets drop; if roles are not adopted, power, travel and research chains need 4 steps each, which means padding.
+2. **Remove GTM's one-step LCR folds for basic reagents** (`nitric_acid_from_elements`, `nitric_acid_from_ammonia`)? Default: no (rule 6; Phase 2 already prices them). Yes would make the Ostwald chain the only route and nitric acid dearer everywhere from EV.
+3. **Metal mixture: separate or void?** Default: separate (a renewable route for five ores from cobblestone, rule 1). Void would leave stone dust's by-product honest but useless and drop LD-EV2.

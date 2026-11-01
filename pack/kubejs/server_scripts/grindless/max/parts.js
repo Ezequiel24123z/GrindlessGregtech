@@ -1,4 +1,4 @@
-// priority: -20001
+// priority: -19986
 // Gregtech Grindless - the recipes of GTM's parts at MAX (package MAX-A4, docs/eras/max.md 'Hatches' and A4), generated at every server
 // load from data/grindless/tables/max_parts.json, plus the bender step of line L39:
 //

@@ -49,11 +49,12 @@
     'gtceu:greenhouse_crop_recipes/wheat', 'gtceu:greenhouse_crop_recipes/sugar_cane_boosted',
     'gtceu:greenhouse_wood_recipes/oak_sapling', 'gtceu:greenhouse_wood_recipes/rubber_sapling_boosted'
   ]
+  // the EAL and the Matrix Data Relay are removed and hidden since RF-3R (they never ran a recipe; extendedfeatures.js)
   var REMOVED_CONTROLLERS = ['industrial_greenhouse', 'advanced_conservatory', 'rock_processing_plant', 'synthesis_vessel',
-    'universal_disassembly_machine', 'robust_alloy_materializer']
-  var IV_GATED = ['large_cracking_machine', 'large_pyrolysis_oven', 'expanded_assembly_line', 'large_gas_collector']
+    'universal_disassembly_machine', 'robust_alloy_materializer', 'expanded_assembly_line', 'matrix_data_relay']
+  var IV_GATED = ['large_cracking_machine', 'large_pyrolysis_oven', 'large_gas_collector']
   // the Large Gas Collector must be there; the other machines may be switched off in config/extendedfeatures.yaml (MultiblocksConfig)
-  var OPTIONAL_MACHINES = ['large_cracking_machine', 'large_pyrolysis_oven', 'expanded_assembly_line', 'matrix_data_relay', 'power_transformer']
+  var OPTIONAL_MACHINES = ['large_cracking_machine', 'large_pyrolysis_oven', 'power_transformer']
   var CIRCUIT_TIERS = ['ulv', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv']
   var IV_UP = ['iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv']
   var IV_PART = /^gtceu:(iv|luv|zpm|uv|uhv|uev|uiv|uxv|opv)_/

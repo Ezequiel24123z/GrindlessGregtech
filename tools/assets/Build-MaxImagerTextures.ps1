@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
   Procedural 16x16 pixel art for the MAX photon ring imager controller face (package MAX-D2) of Gregtech Grindless.
 
@@ -30,6 +30,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'max'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 
 $RepoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 if (-not $OutRoot) { $OutRoot = Join-Path $RepoRoot 'pack\kubejs\assets\grindless\textures' }

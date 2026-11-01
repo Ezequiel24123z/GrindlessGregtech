@@ -17,7 +17,9 @@ scratch: [rebuild.md](rebuild.md).
 | Path | What |
 |---|---|
 | `/var/lib/grindless/bench` | Bench base (`GG_BASE`): `runs/<runId>/` (one workspace per run), `runs/.lock*` (slot locks), `sync/` and `cache/` (mods, Forge), `hmc/` (HeadlessMC), `tools/remote/<hash>/` (uploaded harness scripts) |
-| `/var/lib/grindless/workspaces` | `gg-vm-run.sh`: git mirror and per-SHA checkouts (newest 5) |
+| `/var/lib/grindless/workspaces` | `gg-vm-run.sh`: git mirror and per-SHA checkouts (newest 5); `gg-vm-exec.sh` fetches into the same mirror |
+| `/var/lib/grindless/exec` | `gg-vm-exec.sh`: one scratch checkout per call (removed afterwards) and its 2 slot locks |
+| `/var/lib/grindless/dumps` | Batch dumps (`<sha12>/`, recipes.json and the rest of `gg_dump`); `latest` points at the newest, exported as `$GG_DUMP` |
 | `/var/lib/grindless/artifacts` | `gg-vm-run.sh`: results kept 14 days |
 | `/var/lib/grindless/backups`, `inventory`, `/srv` | Leisure archive: never touched by the bench or its scripts |
 | `/opt/grindless/tools` | Installed copies of `tools/vm/*.sh` |

@@ -120,6 +120,20 @@
       "itemsOut": [{ "id": "grindless:fcl_tape", "count": 4 }],
       "eut": 7864320,
       "duration": 400
+    },
+    {
+      "name": "pump_buffered_tape",
+      "step": "tape",
+      "_why": "MX-S3 line L54 (c9): ITBTC coated conductor laid on the Hastelloy substrate strip under an epoxy bond, the buffered tape the flux pump's thick film is grown on.",
+      "circuit": 9,
+      "itemsIn": [
+        { "id": "grindless:fcl_substrate_strip", "count": 4 },
+        { "id": "grindless:itbtc_coated_conductor", "count": 4 }
+      ],
+      "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }],
+      "itemsOut": [{ "id": "grindless:pump_buffered_tape", "count": 4 }],
+      "eut": 7864320,
+      "duration": 400
     }
   ]
 }

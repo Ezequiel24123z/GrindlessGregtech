@@ -342,6 +342,8 @@
     { name: 'cold_qualified_cell', input: 'grindless:ar_coated_glass_cell', output: 'grindless:cold_qualified_cell', eut: 30720, duration: 600 },
     // MAX-A4 L39 step 5: the potted limiter coil run cold in the loop until it holds its critical current at 20 K
     { name: 'cold_fcl_module', input: 'grindless:fcl_coil', output: 'grindless:cold_fcl_module', eut: 30720, duration: 600 },
+    // MX-S3 L54 step 5: the rotor-and-stator flux pump run cold in the loop until its stator holds its critical current at 30 K
+    { name: 'cold_flux_pump', input: 'grindless:fe16n2_rotor_magnet', output: 'grindless:cold_flux_pump', eut: 30720, duration: 600 },
     // MAX-D2 L45 step 5: the HEMT die cooled in the loop and noise-tested at 4 K before it goes into a LNA module
     { name: 'cryo_tested_lna', input: 'grindless:hemt_die', output: 'grindless:cryo_tested_lna', eut: 30720, duration: 600 },
     // MAX-R1 L37 step 2: the iron core fragment chilled in the loop to the brittle range and milled cold (the EV cryogenic plant has no item slots)

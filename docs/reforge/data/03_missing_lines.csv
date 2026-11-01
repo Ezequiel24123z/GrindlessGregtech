@@ -47,41 +47,28 @@ uhv,30,"Oganesson propellant: Mk3 off-gas → crude oganesson → cryogenic plan
 uhv,31,"ZBLAN fibre: zirconia + HF → ZrF₄ → fluoride batch (Ba, La, Al, Na) → melt → preform → microgravity draw → ZBLAN fibre",1,2,8
 uhv,32,"Far-red photosynthesis: xeno genome data → biofoundry → far-red gene cassette → engineered algae → algae bioreactor (Proxima) → algal biomass → biorefinery fuel",1,3,8
 uev,1,"Calcium-48: calcite → CaCl₂ → Ca-48 40 % (calutron) → Ca-48 97 % → Ca-48 metal → ECR oven charge → Ca-48 beam",0,1,8
-uev,2,"Plutonium-244: Pu (IV hot cell) → PuO₂ target → irradiated target (HFIR c4) → Pu nitrate (ZPM partitioning) → Pu-242-rich PuO₂ → PuCl₃ → Pu-244 (calutron) → Pu-244 oxide → electrodeposited target",1,2,9
-uev,3,"Curium-248: Cf-252 (UHV HFIR) → aged Cf-252 (hot cell store) → Cf/Cm mix → Cm cut (ZPM partitioning) → Cm nitrate → CmO₂ → Cm-248 target",1,0,8
-uev,4,"Californium-249: Bk-249 (UHV, stored) → aged Bk (330 d, store) → Bk/Cf mix → HDEHP cut (ZPM partitioning) → Cf nitrate → Cf oxide → Cf-249 target",1,0,8
-uev,5,"Tennessine: Bk-249 → BkO₂ → target wheel → recoil gas (cyclotron) → separated atoms → gold chromatography → sealed capsule → tennessine sample → stored for UIV",1,1,10
+uev,3,"Curium-248: Cf-252 (UHV HFIR) → aged Cf-252 (hot cell store) → Cf/Cm mix → Cm cut (ZPM partitioning) → Cm nitrate → CmO₂ → Cm-248 target",1,1,8
 uev,6,"Ion-track membranes: Xe (EV cryo) → Xe beam charge → polycarbonate foil → tracked foil → UV-sensitised foil → etched membrane → filter cartridge",1,0,7
-uev,7,"Superhydride: La/Y oxide (EV cascade) → La–Y alloy → La–Y foil → (La,Y)H₁₀ (press) → PIT billet (UV) → wire → strand → cable → cable cooled with superfluid He",1,1,10
-uev,8,"Ammonia borane: borax → boric acid → trimethyl borate → NaBH₄ → ammonia borane → pressed charge",1,0,7
-uev,10,"Rhenium: Barnard rock → carbonyl residue → digest (EV platinum) → Re liquor → NH₄ReO₄ → recrystallised NH₄ReO₄ → Re powder → pellet → 6N Re (EB)",1,3,10
-uev,11,"Hafnium: zircon → (Zr,Hf)Cl₄ → thiocyanate liquor → MIBK cut (EV cascade) → Hf strip → HfO₂ → HfCl₄ → Kroll sponge → 6N Hf (EB)",1,0,10
+uev,7,"Superhydride: La/Y oxide (EV cascade) → La–Y alloy → La–Y foil → (La,Y)H₁₀ (press) → PIT billet (UV) → wire → strand → cable → cable cooled with superfluid He",1,3,10
+uev,8,"Ammonia borane: borax → boric acid → trimethyl borate → NaBH₄ → ammonia borane → pressed charge",1,2,7
+uev,11,"Hafnium: zircon → (Zr,Hf)Cl₄ → thiocyanate liquor → MIBK cut (EV cascade) → Hf strip → HfO₂ → HfCl₄ → Kroll sponge → 6N Hf (EB)",1,1,10
 uev,12,"Single-crystal superalloy: Ni + Re + Ru + Ta → master melt → shell mould → SX casting → blade → heat-treated blade → bond coat → EB-PVD YSZ blade",1,1,8
-uev,13,"Tantalum: tantalite → HF digest (IV kiln HF) → MIBK cut (EV cascade) → K₂TaF₇ → Na reduction → Ta powder → 6N Ta (EB)",1,1,8
-uev,14,"HfTaCN coil: HfO₂ (line 11) + Ta₂O₅ (line 13) → milled oxide–carbon blend → (Hf,Ta)C (carbothermal) → (Hf,Ta)CN → milled powder → SPS billet (UHV SPS) → heating element → coil block",0,0,7
-uev,17,"Wf/W divertor: tungsten → W wire → coated wire → woven preform → WF₆ (IV kiln HF) → CVI Wf/W → divertor tile",1,1,8
+uev,14,"HfTaCN coil: HfO₂ (line 11) + Ta₂O₅ (line 13) → milled oxide–carbon blend → (Hf,Ta)C (carbothermal) → (Hf,Ta)CN → milled powder → SPS billet (UHV SPS) → heating element → coil block",0,2,7
 uev,18,"WSi SNSPD: FZ Si wafer (UV) → Ta₂O₅/SiO₂ mirror → WSi film → HSQ resist → patterned wire → etched detector → packaged detector → cooled detector (UV superfluid He)",0,1,9
-uev,19,"hBN: ammonia borane (line 8) → borazine → CVD hBN on Cu → transferred hBN → annealed hBN → emitter chip",1,0,7
-uev,20,"Graphene: CH₄ → electropolished Cu → CVD graphene → PMMA-coated → transferred → hBN-encapsulated graphene → modulator",1,0,8
+uev,20,"Graphene: CH₄ → electropolished Cu → CVD graphene → PMMA-coated → transferred → hBN-encapsulated graphene → modulator",1,2,8
 uev,21,"SiN waveguides: FZ Si wafer (UV zone refining) → thermal oxide → LPCVD SiN → synchrotron lithography (UV) → etched waveguides → annealed SiN chip",0,1,7
-uev,22,"InAs quantum dots: indium (LuV Io) → 7N In (UV zone refining) → arsenic source → GaAs substrate → InAs QD growth (UHV MBE) → micropillar → QD source",0,0,8
+uev,22,"InAs quantum dots: indium (LuV Io) → 7N In (UV zone refining) → arsenic source → GaAs substrate → InAs QD growth (UHV MBE) → micropillar → QD source",0,2,8
 uev,23,"D–He-3 power: He-3 (EV Moon, ZPM Saturn, nebula) → 6N He-3 (EV cryo) → D₂ (IV heavy water) → D–He-3 mix → Mk4 plasma → DEC power (ZPM) → He-4 ash → recovered He-4 (EV cryo)",0,2,9
 uev,25,"Proton–boron: borax → boric acid → BF₃ → ¹¹BF₃ (ZPM column) → ¹¹B powder → p–¹¹B pellet → Mk4 c2",0,0,8
-uev,26,"Nebula gas: interstellar gas → compressed gas → cryogenic fractions (EV) → H/D → He-3/He-4 (UV superfluid flush) → Ne",1,0,6
-uev,27,"Silicon drift detectors: polysilicon → FZ Si (UV zone refining) → oxidised wafer → drift rings (ZPM implanter) → annealed wafer → metallised → SDD",1,0,7
+uev,26,"Nebula gas: interstellar gas → compressed gas → cryogenic fractions (EV) → H/D → He-3/He-4 (UV superfluid flush) → Ne",1,1,6
+uev,27,"Silicon drift detectors: polysilicon → FZ Si (UV zone refining) → oxidised wafer → drift rings (ZPM implanter) → annealed wafer → metallised → SDD",1,2,7
 uev,28,"Degenerate matter: Sirius B → degenerate matter → stasis field (UHV Casimir) → contained pellet → field generator core → UEV field generator",0,0,7
-uev,29,"Lithium-6: lithium → LiCl → Li-6 (calutron) → Li-6 metal → oven charge → laser-cooled Li-6 → Fermi gas",1,0,8
 uev,30,"Potassium-40: KCl → K-40 chloride (calutron) → K-40 metal → dispenser → cooled cloud → Fermi mixture → EOS model",0,0,8
-uev,31,"CNT muscles: CH₄ (ZPM pyrolyser) → floating-catalyst CNT → CNT sock → densified yarn → twisted yarn → coiled muscle → UEV robot arm",1,0,8
-uev,32,"TGG isolator: Tb (EV cascade) + Ga → oxides → co-precipitated hydroxide → calcined TGG powder → Ir crucible (EV platinum) → TGG boule (UHV crystal furnace) → polished rod → Faraday isolator",1,0,8
-uev,33,"YSZ: Zr (line 11) → ZrO₂ → Y₂O₃ (EV cascade) → YSZ powder → EB-PVD ingot → coated blade",0,0,6
-uev,34,"Hollow-core fibre: silica tube → capillaries (UV draw tower) → stacked preform → caned preform → pressurised draw → coated fibre",1,0,7
+uev,33,"YSZ: Zr (line 11) → ZrO₂ → Y₂O₃ (EV cascade) → YSZ powder → EB-PVD ingot → coated blade",0,2,6
 uev,35,"FFKM seals: HF (IV kiln) → CHClF₂ → TFE → PMVE → FFKM rubber → cured seal",0,0,6
-uev,36,"MCP optics: lead glass → etchable-core tube → multi-fibre (UV draw tower) → fused boule → sliced plate → etched, reduced plate → lobster-eye MCP",0,0,8
-uev,37,"Silica aerogel: SiCl₄ + ethanol → TEOS → sol → gel → aged gel → aerogel tile (supercritical CO₂)",1,0,7
-uev,38,"SRF cavities: Nb (line 13) → RRR Nb (EB) → half-cells → welded cavity → electropolished → Sn vapour diffusion → Nb₃Sn cavity → cooled cavity (UV superfluid He)",0,0,8
-uev,39,"PPKTP: KH₂PO₄ + TiO₂ → KTP flux → KTP crystal (UHV furnace) → wafer → electrode pattern → poled PPKTP → coated → SPDC source",1,2,9
-uev,40,"ULE cavity: SiCl₄ + TiCl₄ → flame soot → ULE boule → spacer → mirrored spacer (line 18's mirrors) → optical cavity → vacuum-housed reference",1,0,8
+uev,36,"MCP optics: lead glass → etchable-core tube → multi-fibre (UV draw tower) → fused boule → sliced plate → etched, reduced plate → lobster-eye MCP",0,1,8
+uev,38,"SRF cavities: Nb (line 13) → RRR Nb (EB) → half-cells → welded cavity → electropolished → Sn vapour diffusion → Nb₃Sn cavity → cooled cavity (UV superfluid He)",0,3,8
+uev,39,"PPKTP: KH₂PO₄ + TiO₂ → KTP flux → KTP crystal (UHV furnace) → wafer → electrode pattern → poled PPKTP → coated → SPDC source",1,3,9
 uiv,1,"Metallic hydrogen cable: protium (IV heavy water plant) → o/p-converted H₂ (EV cryogenic plant) → liquid para-H₂ → solid H₂ target (UV superfluid He) → ramp-compressed MH (1) → quenched MH rod → MH wire → FFKM-insulated MH cable",1,1,9
 uiv,3,"Lonsdaleite: methane → pyrolytic graphite (ZPM methane pyrolyser) → shocked lonsdaleite (1 c2) → acid-leached → laser-cut race → bearing → UIV piston",1,3,8
 uiv,5,"RHEA plate: columbite → Nb/Ta fluoride split (EV extraction cascade) → Nb₂O₅ + Ta₂O₅ → reduced Nb/Ta → EB-refined (UEV) → levitation RHEA (2) → homogenised ingot → hot-forged slab (EV hot strip mill) → RHEA plate",0,2,10
@@ -89,10 +76,7 @@ uiv,8,"BMG gear: Zr sponge (IV fuel fabrication) → master alloy → undercoole
 uiv,9,"Element 120: TiCl₄ → Ti-50 chloride (UEV calutron) → Ti-50 sponge (UV pyroprocessing) → melted Ti-50 (2 c3) → oven charge → beam on Cf-249 (UEV cyclotron; Cf-249 from the IV hot cell's Bk-249 decay store) → element 120 recoil (UEV separator) → census II entry",1,2,9
 uiv,12,"Glass interposer: SiCl₄ + TiCl₄ → ULE soot → ULE glass → fs-written (4) → KOH-etched → metallised vias (UHV foundry) → interposer",1,3,8
 uiv,18,"Microcomb: Si wafer → oxide preform → trenches by X-ray lithography (UV synchrotron c7) → Si₃N₄ fill from SiH₄ + NH₃ (UEV `sin_lpcvd` pattern) → CMP and anneal (UHV foundry) → EO-tunable soliton comb (3 c4, with LNOI) → UIV sensor (Pfeiffer 2016; Snigirev 2023)",0,2,8
-uiv,19,"Glassy-carbon wick: resin → 2PP lattice (4) → glassy carbon (UEV CVI) → SiC-coated → wick → collector → radiator module",1,0,8
-uiv,20,"Droplet sheet: Sn → EB-distilled (UEV) → orifice plate (4 c3) → droplet generator (12 c1) → droplet sheet → radiator module → Matrioshka shell",1,0,7
 uiv,21,"C-12 heat spreader: p–N-15 burn (10 c3) → C-12 ash → C-12 methane (HV syngas plant, `hv/syngas_plant.js:82`) → CVD C-12 diamond (ZPM diamond lattice) → polished spreader → metallised → Matrioshka node",0,0,8
-uiv,23,"GdBCO motor: Gd₂O₃ (ZPM Eu reductor) + Ba + Cu → Gd-123 (LuV coated conductor line) → seeded melt-grown bulk (LuV HTS magnet works) → oxygenated → impregnated → field-cooled (UEV nitride magnet works) → UIV motor",1,1,8
 uiv,25,"Polarised protium: depleted protium (IV HWP) → detritiated (IV tritium removal) → RF-dissociated (9 c1) → sextupole-selected H↑ → storage-cell H₂ → polarised ice (UV superfluid He) → pellet",0,0,8
 uiv,27,"He-3–He-3 power: He-3 ash → He-3/He-4 split (UV superfluid He) → polarised He-3 (UEV polariser) → pellet → Mk5 c1 → DEC (ZPM) → proton return",0,1,8
 uiv,28,"p–N-15 power: N-15 oxide (EV cryogenic plant) → N-15 → ¹⁵NH₃ → polarised ice (9 c3) → pellet → Mk5 c3 (ZPM DEC) → C-12 ash",1,1,8
@@ -120,7 +104,7 @@ uxv,19,"Fm-257 target: U-238 target (IV fuel fabrication) → neutron flash (UIV
 uxv,20,"Es-254 target: line 19's prefix to the actinide cut → Es-254 (UHV transuranium, HDEHP, as built by UIV-B2) → molecular-plated (UHV transuranium) → sintered `es254_target`",0,1,5
 uxv,21,"Element 121: TiCl₄ → Ti-50 chloride (UEV calutron c7, `isotopes.json:104-116`) → Ti-50 sponge (UV pyroprocessing c6, `transcurium_pyroprocessing.json:28`) → melted (UIV levitation melter c3) → `ti50_oven_charge` (`isotopes_uiv.json:39`) → Ti-50 beam on `es254_target` (UEV cyclotron) → recoils separated (UEV recoil separator) → caught, `element_121_recoil` (UEV chem lab)",1,2,9
 uxv,22,"Element 122, census III: line 21's Ti-50 prefix to `ti50_oven_charge` → beam on `fm257_target` (UEV cyclotron) → recoils (UEV recoil separator) → `element_122_recoil` → `superheavy_census_iii` with line 21's recoil (UEV chem lab)",0,2,6
-uxv,23,"Cm-248 target: curium oxide (ZPM actinide partitioning) → heavy curium oxide (UV heat source works c1) → `transcurium_target` (UHV transuranium c4) → irradiated (UHV HFIR c1) → transcurium liquor (UHV transuranium c1) → Cf-252 (c2) → `gtceu:curium_248_dust` by Cf-252 alpha decay (IV hot cell c8, `hot_cell.json:184-191`) → plated (UHV transuranium) → sintered `cm248_target`",1,2,11
+uxv,23,"Cm-248 target: curium oxide (ZPM actinide partitioning) → heavy curium oxide (UV heat source works c1) → `transcurium_target` (UHV transuranium c4) → irradiated (UHV HFIR c1) → transcurium liquor (UHV transuranium c1) → Cf-252 (c2) → `gtceu:curium_248_dust` by Cf-252 alpha decay (IV hot cell c8, `hot_cell.json:184-191`) → plated (UHV transuranium) → sintered `cm248_target`",1,3,11
 uxv,24,"Island nuclides: depleted UF₆ → UF₄ → U metal charge (IV fuel fabrication) → U-238 beam (UV synchrotron) → on `cm248_target` (7 c1, through the `gas_stopping_cell`) → thermalised (7 c2) → MR-TOF-selected `island_nuclide` (7 c3)",0,2,8
 uxv,25,"Gamma-ray emitter: Cas A knots → `ejecta_knot_dust` (21) → Ti fraction (EV extraction cascade) → TiCl₄ → Ti-44 (UEV calutron) → sealed `ti44_core` (IV hot cell) → positronium moderated on solid Ne (8 c1) → `positron_stack` (UV antimatter trap) → `gamma_laser_module` with the UIV gamma cavity and `mtj_die` (8 c2) → `uxv_emitter`",0,3,11
 uxv,26,"Hot CNO fuel: `stellar_plasma` lifted with He coolant (10; UV cold) → H and CNO cuts (11 c1) → burned (9 c1) → `cno_ash_plasma` → EU (ZPM DEC) → He-4 and 95% of the CNO back",1,2,6

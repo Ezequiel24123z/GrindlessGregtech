@@ -58,6 +58,8 @@ export default {
           ['i', 'gtceu:chain_strand_single_cable', 'Chain Strand Cable'],
         ], 'the OpV hull cables'),
         ...line(2, 2, [
+          ['i', 'grindless:neutronium_pellet', 'Neutronium Pellet'],
+          ['m', 'gtceu:pasta_extractor', 'Pasta Extractor'],
           ['i', 'grindless:chain_lattice_slab', 'Chain Lattice Slab'],
           ['m', 'gtceu:pasta_phase_sorter', 'Pasta Phase Sorter'],
           ['i', 'grindless:caged_chain_lattice', 'Caged Chain Lattice'],
@@ -66,6 +68,8 @@ export default {
           ['i', 'grindless:chain_lamina_stack', 'Chain Lamina Stack'],
         ], 'the OpV hull'),
         ...line(3, 4, [
+          ['i', 'grindless:chain_lamina_stack', 'Chain Lamina Stack'],
+          ['m', eb, 'Electron Beam Furnace'],
           ['i', 'grindless:field_canned_stack', 'Field Canned Stack'],
           ['m', 'gtceu:field_frozen_press', 'Field Frozen Press'],
           ['i', 'grindless:field_frozen_billet', 'Field Frozen Billet'],
@@ -92,6 +96,8 @@ export default {
           ['i', 'grindless:chain_composite_rotor', 'Chain Composite Rotor'],
         ], 'the OpV motor'),
         ...line(5, 2, [
+          ['f', 'gtceu:helium_3', 'Helium-3'],
+          ['m', 'gtceu:cryogenic_plant', 'Cryogenic Plant'],
           ['f', 'gtceu:helium_3_6n', '6N Helium-3'],
           ['m', 'gtceu:cryogenic_plant', 'Cryogenic Plant'],
           ['f', 'gtceu:liquid_helium_3', 'Liquid Helium-3'],
@@ -100,6 +106,8 @@ export default {
           ['i', 'grindless:superfluid_he3_seal', 'Superfluid He-3 Seal'],
         ], 'the OpV pump'),
         ...line(6, 4, [
+          ['i', 'grindless:pbo_fibre', 'PBO Fibre'],
+          ['m', 'gtceu:pasta_laminator', 'Pasta Laminator'],
           ['i', 'grindless:chain_mesh_weave', 'Chain Mesh Weave'],
           ['m', eb, 'Electron Beam Furnace'],
           ['i', 'grindless:welded_mesh_belt', 'Welded Mesh Belt'],
@@ -107,6 +115,8 @@ export default {
           ['i', 'grindless:chain_mesh_belt', 'Chain Mesh Belt'],
         ], 'the OpV conveyor'),
         ...line(7, 6, [
+          ['i', 'grindless:gum_metal_billet', 'Gum Metal Billet'],
+          ['m', 'gtceu:hot_strip_mill', 'Hot Strip Mill'],
           ['i', 'grindless:gum_metal_blank', 'Gum Metal Blank'],
           ['m', 'gtceu:megabar_press', 'Megabar Press'],
           ['i', 'grindless:chain_flexspline_cup', 'Flexspline Cup'],
@@ -115,6 +125,8 @@ export default {
           ['i', 'grindless:opv_harmonic_drive', 'OpV Harmonic Drive'],
         ], 'the OpV robot arm'),
         ...line(8, 8, [
+          ['i', 'grindless:itbtc_coated_conductor', 'ITBTC Coated Conductor'],
+          ['m', hts, 'HTS Magnet Works'],
           ['i', 'grindless:rebco_pancake', 'REBCO Pancake'],
           ['m', cvi, 'CVI Furnace'],
           ['i', 'grindless:potted_rebco_pancake', 'Potted REBCO Pancake'],
@@ -185,6 +197,8 @@ export default {
           ['i', 'grindless:cryo_cmos_die', 'Cryo-CMOS Die'],
         ], 'the tetron die'),
         ...line(14, 6, [
+          ['i', 'grindless:fz_silicon_wafer', 'FZ Silicon Wafer'],
+          ['m', 'gtceu:beuv_scanner', 'BEUV Scanner'],
           ['i', 'grindless:tsv_via_wafer', 'TSV Via Wafer'],
           ['m', sput, 'MTJ Sputter Cluster'],
           ['i', 'grindless:nb_filled_tsv_wafer', 'Nb Filled TSV Wafer'],
@@ -193,6 +207,8 @@ export default {
           ['i', 'grindless:nb_tsv_interposer', 'Nb TSV Interposer'],
         ], 'the tetron array'),
         ...line(15, 8, [
+          ['i', 'grindless:implanted_ln_wafer', 'Implanted LN Wafer'],
+          ['m', 'gtceu:tfln_fab', 'TFLN Fab'],
           ['i', 'grindless:ln_on_soi_wafer', 'LN on SOI Wafer'],
           ['m', 'gtceu:femtosecond_writer', 'Femtosecond Writer'],
           ['i', 'grindless:ln_soi_waveguide_wafer', 'LN Waveguide Wafer'],
@@ -221,6 +237,8 @@ export default {
           ['i', 'grindless:gan_mmic', 'GaN MMIC'],
         ], 'the cosmic mainframe'),
         ...line(18, 14, [
+          ['i', 'grindless:fz_silicon_boule', 'FZ Silicon Boule'],
+          ['m', 'gtceu:large_cutter', 'Large Cutter'],
           ['i', 'grindless:fz_silicon_wafer', 'FZ Silicon Wafer'],
           ['i', 'grindless:sdd_ring_wafer', 'SDD Ring Wafer'],
           ['i', 'grindless:sdd_anode_wafer', 'SDD Anode Wafer'],
@@ -245,6 +263,8 @@ export default {
           ['i', 'grindless:gamma_multilayer_mirror', 'Gamma Multilayer Mirror'],
         ], 'the gamma optics works'),
         ...line(35, 20, [
+          ['i', 'gtceu:germanium_dust', 'Germanium'],
+          ['m', 'gtceu:zone_refining_tower', 'Zone Refining Tower'],
           ['i', 'grindless:seven_n_germanium', '7N Germanium'],
           ['m', 'gtceu:megabar_press', 'Megabar Press'],
           ['i', 'grindless:bent_ge_tile', 'Bent Ge Tile'],
@@ -257,12 +277,16 @@ export default {
       name: 'Beam hardware at Cygnus',
       nodes: [
         ...line(20, 0, [
+          ['i', 'grindless:eb_beryllium_ingot', 'EB Beryllium Ingot'],
+          ['m', 'gtceu:hot_strip_mill', 'Hot Strip Mill'],
           ['i', 'grindless:be_window_foil', 'Be Window Foil'],
           ['m', eb, 'Electron Beam Furnace'],
           ['i', 'grindless:brazed_be_window', 'Brazed Be Window'],
           ['i', 'grindless:be_beam_window', 'Be Beam Window'],
         ], 'the jet beam line'),
         ...line(21, 2, [
+          ['i', 'gtceu:iridium_dust', 'Iridium'],
+          ['m', 'gtceu:platinum_plant', 'Platinum Plant'],
           ['i', 'grindless:five_n_iridium', '5N Iridium'],
           ['m', sx, 'Spark Plasma Sinterer'],
           ['i', 'grindless:ir_target_rod', 'Ir Target Rod'],
@@ -346,6 +370,8 @@ export default {
           ['i', 'grindless:octupole_trap_magnet', 'Octupole Trap Magnet'],
         ], 'the antihydrogen foundry'),
         ...line(28, 4, [
+          ['f', 'gtceu:methane', 'Methane'],
+          ['m', 'gtceu:methane_pyrolyser', 'Methane Pyrolyser'],
           ['i', 'grindless:pyrolytic_graphite', 'Pyrolytic Graphite'],
           ['i', 'grindless:hopg_blank', 'HOPG Blank'],
           ['i', 'grindless:hopg_plate', 'HOPG Plate'],
@@ -363,6 +389,8 @@ export default {
           ['i', 'grindless:dense_positron_cell', 'Dense Positron Cell'],
         ], 'the antihydrogen foundry'),
         ...line(31, 8, [
+          ['f', 'gtceu:curium_nitrate', 'Curium Nitrate'],
+          ['m', 'gtceu:actinide_partitioning_plant', 'Actinide Partitioning Plant'],
           ['i', 'grindless:cm245_fraction', 'Cm-245 Fraction'],
           ['m', eb, 'Electron Beam Furnace'],
           ['i', 'grindless:w_re_hohlraum', 'W-Re Hohlraum'],
@@ -375,6 +403,8 @@ export default {
           ['i', 'grindless:gamma_absorber_tile', 'Gamma Absorber Tile'],
         ], 'the annihilation engine'),
         ...line(33, 12, [
+          ['i', 'gtceu:gallium_dust', 'Gallium'],
+          ['m', cg, 'Crystal Growth Furnace'],
           ['i', 'grindless:gasb_boule', 'GaSb Boule'],
           ['i', 'grindless:gasb_wafer', 'GaSb Wafer'],
           ['m', mbe, 'MBE Reactor'],
@@ -407,6 +437,8 @@ export default {
           ['i', 'grindless:stable_exotic_matter', 'Stable Exotic Matter'],
         ], 'the Kugelblitz forge'),
         ...line(37, 2, [
+          ['i', 'grindless:moderated_ps_cell', 'Moderated Ps Cell'],
+          ['m', 'gtceu:annihilation_laser_works', 'Annihilation Laser Works'],
           ['i', 'grindless:gamma_laser_module', 'Gamma Laser Module'],
           ['i', 'grindless:gamma_pump_charge', 'Gamma Pump Charge'],
           ['i', 'grindless:kugelblitz_seed', 'Kugelblitz Seed'],
@@ -431,6 +463,8 @@ export default {
           ['i', 'grindless:probe_seed', 'Probe Seed'],
         ], 'the von Neumann foundry'),
         ...line(39, 2, [
+          ['i', 'grindless:bulge_debris', 'Bulge Debris'],
+          ['m', 'gtceu:debris_harvester', 'Debris Harvester'],
           ['i', 'grindless:silicate_debris_fraction', 'Silicate Debris Fraction'],
           ['i', 'grindless:ffc_pellet', 'FFC Pellet'],
           ['i', 'grindless:si_alloy_powder', 'Si Alloy Powder'],
@@ -438,6 +472,8 @@ export default {
           ['i', 'grindless:cluster_sinter_casing', 'Cluster Sinter Casing'],
         ], 'the von Neumann foundry'),
         ...line(40, 4, [
+          ['i', 'grindless:si_alloy_powder', 'Si Alloy Powder'],
+          ['m', 'gtceu:collector_node_works', 'Collector Node Works'],
           ['i', 'grindless:si_ribbon', 'Si Ribbon'],
           ['i', 'grindless:pv_collector_film', 'PV Collector Film'],
           ['m', 'gtceu:collector_node_works', 'Collector Node Works'],
@@ -445,6 +481,8 @@ export default {
           ['i', 'grindless:deployed_node_pack', 'Deployed Node Pack'],
         ], 'the bulge collector'),
         ...line(41, 6, [
+          ['i', 'grindless:hollow_capillaries', 'Hollow Capillaries'],
+          ['m', 'gtceu:fibre_draw_tower', 'Fibre Draw Tower'],
           ['i', 'grindless:polycapillary_optic', 'Polycapillary Optic'],
           ['i', 'grindless:xray_timing_head', 'X-ray Timing Head'],
           ['i', 'grindless:clock_locked_head', 'Clock-Locked Head'],
@@ -478,6 +516,8 @@ export default {
           ['i', 'grindless:element_124_recoil', 'Element 124 Recoil'],
         ], 'the superheavy chemistry lab'),
         ...line(44, 2, [
+          ['i', 'gtceu:californium_249_dust', 'Californium 249'],
+          ['m', 'gtceu:hot_cell', 'Hot Cell'],
           ['i', 'grindless:cf249_target_wheel', 'Cf-249 Target Wheel'],
           ['m', 'gtceu:heavy_ion_cyclotron', 'Heavy Ion Cyclotron'],
           ['f', 'gtceu:element_126_recoil_gas', 'Element 126 Recoil Gas'],

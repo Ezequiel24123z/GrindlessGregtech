@@ -126,7 +126,13 @@
           "itemsOut": [{ "id": "gtceu:niobium_dust", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
         { "_why": "MAX-E1 (max.md, L42 step 2, c30 repeated by its items): the iridium sponge melted and cast into a sputter target under the beam, argon purge 90% recovered.", "name": "iridium_target", "circuit": 30, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:iridium_sponge", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:iridium_target", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
+          "itemsOut": [{ "id": "grindless:iridium_target", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
+        { "_why": "MX-S1 (max.md, L49 step 3, c31, repeated by its items): tungsten powder sintered under the beam into the porous tungsten crown of the FEEP emitter, argon purge 90% recovered.", "name": "porous_tungsten_crown", "circuit": 31, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "gtceu:tungsten_dust", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:porous_tungsten_crown", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
+        { "_why": "MX-S1 (max.md, machine 11 byproduct, c32, repeated by its items): four spent FEEP crowns re-sintered under the beam into three fresh porous crowns; the indium they carried left as thrust, so a quarter is lost; argon purge 90% recovered.", "name": "spent_feep_crown_resinter", "circuit": 32, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:spent_feep_crown", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:porous_tungsten_crown", "count": 3 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
       ]
     },
     "single_crystal_casting": {

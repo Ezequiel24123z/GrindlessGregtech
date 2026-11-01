@@ -25,13 +25,13 @@
           "fluidsOut": []
         },
         {
-          "_why": "uiv.md line 13: the exposed film is developed in an ethanol bath (not consumed) and cut into driver ASICs",
+          "_why": "uiv.md line 13: the exposed film is developed in an ethanol bath (not consumed), its overlay is verified against a UV frequency comb (UHV line, not consumed) and it is cut into driver ASICs",
           "name": "driver_asic",
           "circuit": 2,
           "eut": 31457280,
           "duration": 1200,
           "itemsIn": [{ "id": "grindless:beuv_exposed_wafer", "count": 1 }],
-          "kept": [],
+          "kept": [{ "id": "grindless:vuv_frequency_comb", "count": 1 }],
           "fluidsIn": [],
           "charge": [{ "id": "gtceu:ethanol", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:beuv_driver_asic", "count": 4 }],
@@ -190,7 +190,10 @@
           "itemsOut": [{ "id": "grindless:hemt_gate_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] },
         { "_why": "MX-S2 (max.md, L50 step 4, c16): the VO2 film exposed with the metasurface pattern; the fouled mirror goes to c3 as in every exposure", "name": "patterned_vo2_metasurface", "circuit": 16, "eut": 31457280, "duration": 2000,
           "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 1 }, { "id": "grindless:vo2_on_sapphire", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:patterned_vo2_metasurface", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:patterned_vo2_metasurface", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MX-S1 (max.md, L57 step 4, c15): the SIMOX SOI wafer exposed with the FPGA pattern; the fouled mirror goes to c3 as in every exposure", "name": "rad_hard_fpga_wafer", "circuit": 15, "eut": 31457280, "duration": 2000,
+          "itemsIn": [{ "id": "grindless:tb_droplet_target", "count": 1 }, { "id": "grindless:simox_soi_wafer", "count": 1 }, { "id": "grindless:beuv_mirror", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:rad_hard_fpga_wafer", "count": 1 }, { "id": "grindless:fouled_beuv_mirror", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "stm_lithography": {

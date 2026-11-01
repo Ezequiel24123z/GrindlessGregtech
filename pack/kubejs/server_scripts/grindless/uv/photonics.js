@@ -256,7 +256,18 @@
     // MAX-D2 L44 step 1 (c28): the InP/InGaAs UTC photodiode stack grown on an InP wafer; the methyls leave as methane, most of the phosphine is recovered
     { name: 'inp_utc_epi_wafer', type: 'mocvd', circuit: 28, itemsIn: [item('grindless:semi_insulating_inp_wafer', 1), item('gtceu:indium_dust', 1), item('gtceu:gallium_dust', 1)],
       fluidsIn: [fluid(TMGA, 250), fluid('gtceu:phosphine', 1000)], itemsOut: [item('grindless:inp_utc_epi_wafer', 1)],
-      fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:phosphine', 500)], eut: 1966080, duration: 1200 }
+      fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:phosphine', 500)], eut: 1966080, duration: 1200 },
+    // MX-S1 L47 (max.md, mocvd c29): the AlGaN UV LED die of the reference sensor's charge control, grown on an AlN wafer; the methyls leave as methane
+    { name: 'uv_led_die', type: 'mocvd', circuit: 29, itemsIn: [item('grindless:aln_wafer', 1), item('gtceu:gallium_dust', 1)],
+      fluidsIn: [fluid(TMGA, 250), fluid('gtceu:ammonia', 1000)], itemsOut: [item('grindless:uv_led_die', 1)],
+      fluidsOut: [fluid('gtceu:methane', 750), fluid('gtceu:hydrogen', 1000)], eut: 1966080, duration: 1200 },
+    // MX-S1 L56 (max.md, mocvd c30): the 808 nm pump bar, a GaAs/AlGaAs stack grown on the GaAs wafer; most of the arsine is recovered
+    { name: 'gaas_808_pump_bar', type: 'mocvd', circuit: 30, itemsIn: [item(GAAS_WAFER, 1), item('gtceu:aluminium_dust', 1), item('gtceu:gallium_dust', 1)],
+      fluidsIn: [fluid(TMGA, 250), fluid(ARSINE, 1000)], itemsOut: [item('grindless:gaas_808_pump_bar', 1)],
+      fluidsOut: [fluid('gtceu:methane', 750), fluid(ARSINE, 500)], eut: 1966080, duration: 1200 },
+    // MX-S1 L56 (max.md, fibre draw c21): ytterbium-doped fibre drawn from the ultrapure silica tube
+    { name: 'yb_doped_fibre', type: 'fibre_draw', circuit: 21, itemsIn: [item('grindless:ultrapure_silica_tube', 1), item('gtceu:ytterbium_oxide_dust', 1)],
+      fluidsIn: [fluid('gtceu:argon', 500), fluid(ACRYLATE, 250)], itemsOut: [item('grindless:yb_doped_fibre', 4)], fluidsOut: [], eut: 1966080, duration: 600 }
   ]
 
   // side steps on GTM's own machines

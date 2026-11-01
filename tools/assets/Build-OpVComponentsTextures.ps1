@@ -4,9 +4,9 @@
   Grindless (GregTech style: top-left light, 3-4 tones per material, selective outlines).
 
 .DESCRIPTION
-  Every pixel is drawn by this script (the shape routines of Build-OpVFoundationTextures.ps1 with a new palette per item); nothing is copied
+  Every pixel is drawn by this script   (the shared component body of Era.Lib.ps1 with the OpV era style and a new palette per item); nothing is copied
   or edited from GregTech Modern, GCYR, Monifactory or any other mod. Output is deterministic: re-running overwrites the same bytes
-  (mottles come from Get-Noise, a hash of the position, not from a random generator). The materials need no PNG (GregTech draws them
+    (mottles come from a hash of the position, not from a random generator). The materials need no PNG (GregTech draws them
   from their colour).
 
   Writes item/<name>.png (under pack/kubejs/assets/grindless/textures/) for the items that startup_scripts/grindless/opv/components.js
@@ -35,18 +35,13 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'opv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 
 $RepoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 if (-not $OutRoot) { $OutRoot = Join-Path $RepoRoot 'pack\kubejs\assets\grindless\textures' }
 $OutRoot = [System.IO.Path]::GetFullPath($OutRoot)
 $ScriptName = Split-Path -Leaf $PSCommandPath
 $OnlySet = @(); foreach ($o in $Only) { $OnlySet += ($o -split ',') | Where-Object { $_ } }
-
-function Get-Noise {
-    param([int]$X, [int]$Y, [int]$Salt)
-    $v = [int64]($X * 73856093) -bxor [int64]($Y * 19349663) -bxor [int64]($Salt * 83492791)
-    return [int]([Math]::Abs($v) % 1000)
-}
 
 # name -> kind, body colour, accent colour
 $Items = [ordered]@{
@@ -70,69 +65,9 @@ $Items = [ordered]@{
     contacted_hpge_crystal    = @('crystal', '5C6068', 'D0A848')
 }
 
-function Get-Tone {
-    param([int]$Argb, [int]$X, [int]$Y, [int]$Salt)
-    $f = 1.2 - 0.035 * ($X + $Y)
-    $n = Get-Noise $X $Y $Salt
-    if ($n -lt 110) { $f *= 0.86 } elseif ($n -gt 900) { $f *= 1.14 }
-    return (Shade $Argb $f)
-}
-
-function Test-Shape {
-    param([string]$Kind, [int]$X, [int]$Y, [int]$Salt)
-    $dx = $X - 7.5; $dy = $Y - 7.5
-    $r = [Math]::Sqrt($dx * $dx + $dy * $dy)
-    switch ($Kind) {
-        'heap'     { $h = 9 - [Math]::Abs($dx) * 1.1; return ($Y -ge 14 - $h -and $Y -le 14 -and $h -gt 0) }
-        'orb'      { return ($r -le 6.2) }
-        'card'     { return ($X -ge 2 -and $X -le 13 -and $Y -ge 2 -and $Y -le 13) }
-        'vial'     { return (($X -ge 6 -and $X -le 9 -and $Y -ge 1 -and $Y -le 4) -or ($X -ge 4 -and $X -le 11 -and $Y -ge 5 -and $Y -le 14)) }
-        'cartridge' { return ($X -ge 1 -and $X -le 14 -and $Y -ge 3 -and $Y -le 12) }
-        'spool'    { return ($r -le 6.4 -and $r -ge 1.8) }
-        'crystal'  { return ([Math]::Abs($dx) + [Math]::Abs($dy) -le 7.2) }
-        'module'   { return (($X -ge 1 -and $X -le 14 -and $Y -ge 4 -and $Y -le 11) -or (($Y -eq 3 -or $Y -eq 12) -and $X % 2 -eq 0 -and $X -ge 2 -and $X -le 13)) }
-        'capsule'  { return ($X -ge 5 -and $X -le 10 -and $Y -ge 2 -and $Y -le 13 -and -not (($Y -eq 2 -or $Y -eq 13) -and ($X -eq 5 -or $X -eq 10))) }
-        'chip'     { return (($X -ge 3 -and $X -le 12 -and $Y -ge 3 -and $Y -le 12) -or (($X -eq 1 -or $X -eq 2 -or $X -eq 13 -or $X -eq 14) -and $Y -ge 4 -and $Y -le 11 -and $Y % 2 -eq 0)) }
-        'sail'     { return ($X -ge 1 -and $Y -ge 1 -and $Y -le 14 -and $X -le 1 + $Y -and ($X -eq 1 -or $X -le 14)) }
-        'cup'      { return ($r -le 6.6 -and $Y -ge 5) -or ($X -ge 2 -and $X -le 13 -and $Y -ge 3 -and $Y -le 5) }
-    }
-    return $false
-}
-
-function Test-Accent {
-    param([string]$Kind, [int]$X, [int]$Y, [int]$Salt)
-    $dx = $X - 7.5; $dy = $Y - 7.5
-    $r = [Math]::Sqrt($dx * $dx + $dy * $dy)
-    $n = Get-Noise $X $Y ($Salt + 7)
-    switch ($Kind) {
-        'heap'      { return ($n -gt 820) }
-        'orb'       { return ($Y -eq 7 -or $Y -eq 8 -or $r -lt 2) }
-        'card'      { return ($Y % 3 -eq 1 -and $X -ge 4 -and $X -le 11 -and $X % 4 -ne 0) }
-        'vial'      { return ($Y -le 4 -or $Y -ge 9) }
-        'cartridge' { return ($Y -ge 5 -and $Y -le 10 -and ($X % 5) -ge 1 -and ($X % 5) -le 3) }
-        'spool'     { return (($X + $Y) % 4 -eq 0) }
-        'crystal'   { return ($X -ge 8 -and $Y -ge 8) }
-        'module'    { return ($Y -ge 6 -and $Y -le 9 -and $X % 3 -ne 0) }
-        'capsule'   { return ($Y -ge 5 -and $Y -le 10) }
-        'chip'      { return ($X -ge 5 -and $X -le 10 -and $Y -ge 5 -and $Y -le 10 -and ($X + $Y) % 2 -eq 0) }
-        'sail'      { return (($X - $Y + 16) % 4 -eq 0) }
-        'cup'       { return ($Y -le 5 -or ($r -ge 5.2 -and $X % 2 -eq 0)) }
-    }
-    return $false
-}
-
 function New-Item16 {
     param([string]$Name, [string[]]$Spec)
-    $c = New-Canvas 16 16
-    $salt = 0; foreach ($ch in $Name.ToCharArray()) { $salt = ($salt * 31 + [int]$ch) % 9973 }
-    $body = Hex $Spec[1]; $accent = Hex $Spec[2]
-    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
-        if (-not (Test-Shape $Spec[0] $x $y $salt)) { continue }
-        $base = $body; if (Test-Accent $Spec[0] $x $y $salt) { $base = $accent }
-        Set-Px $c $x $y (Get-Tone $base $x $y $salt)
-    } }
-    Add-Outline $c
-    return $c
+    return (New-EraComponentBody 'opv' $Spec[0] $Name (Hex $Spec[1]) (Hex $Spec[2]))
 }
 
 $written = @()
