@@ -32,7 +32,7 @@ export default {
   subtitle: 'Metallic hydrogen and the hard parts, the atoms of dead stars, light and crystals, memories for the computer, and the fuel and the heat of the ring.',
   icon: 'gtceu:matrioshka_computer',
   focus: 'l11_0',
-  bands: [['hydrogen', 'atoms'], ['light', 'memory'], ['fusion']],
+  bands: [['hydrogen', 'atoms'], ['light', 'memory'], ['fusion', 'beuv']],
   clusters: {
     hydrogen: {
       name: 'Metallic hydrogen and the hard parts',
@@ -235,7 +235,7 @@ export default {
     },
     light: {
       name: 'Light and crystals',
-      nodes: rows([4], () => [
+      nodes: rows([], () => [
         // line 10
         ...chain(0, [
           ['l10_0', I('grindless:lithium_niobate_boule'), 'Lithium Niobate Boule', 'raw'],
@@ -262,23 +262,8 @@ export default {
           ['l12_7', mach('gtceu:photonic_foundry'), 'Photonic Foundry', 'ours'],
           ['l12_8', I('grindless:glass_interposer'), 'Glass Interposer'],
         ], 'the optical mainframe'),
-        L('x13_hfo', -2.5, at(4), 'pl_uev:hfo'),
-        // line 13
+        // line 14: RF-3Q: the BEUV mirror's own chain (the cap recipe is the last step of the line, not a bypass; the fouled-mirror loop is the cleaning recipe of line 13, in the beuv cluster)
         ...chain(4, [
-          ['l13_0', I('grindless:hfo2_resist_wafer'), 'Hfo2 Resist Wafer', 'product', { from: ['x13_hfo'] }],
-          ['l13_1', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l13_2', I('grindless:fouled_beuv_mirror'), 'Fouled BEUV Mirror'],
-          ['l13_3', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l13_4', I('gtceu:terbium_dust'), 'Terbium'],
-          ['l13_5', I('grindless:tb_droplet_target'), 'TB Droplet Target'],
-          ['l13_6', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l13_7', I('grindless:beuv_exposed_wafer'), 'BEUV Exposed Wafer'],
-          ['l13_8', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l13_9', I('grindless:beuv_driver_asic'), 'BEUV Driver ASIC', 'product', { from: ['l13_8', 'x13_comb'] }],
-        ], 'the BEUV scanner'),
-        L('x13_comb', 22.5, above(4), 'pl_uhv:comb'),
-        // line 14: RF-3Q: the BEUV mirror's own chain (the cap recipe is the last step of the line, not a bypass; the fouled-mirror loop is the cleaning recipe of line 13)
-        ...chain(6, [
           ['l14_0', I('gtceu:boron_carbide_dust'), 'Boron Carbide', 'raw'],
           ['l14_1', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours'],
           ['l14_2', I('grindless:b4c_target'), 'B4C Target'],
@@ -288,7 +273,7 @@ export default {
           ['l14_6', I('grindless:beuv_mirror'), 'BEUV Mirror'],
         ], 'the BEUV scanner'),
         // line 18
-        ...chain(8, [
+        ...chain(6, [
           ['l18_0', I('grindless:fz_silicon_boule'), 'FZ Silicon Boule', 'raw'],
           ['l18_1', I('grindless:fz_silicon_wafer'), 'FZ Silicon Wafer'],
           ['l18_2', I('grindless:oxidised_wafer'), 'Oxidised Wafer'],
@@ -301,7 +286,7 @@ export default {
           ['l18_9', I('grindless:eo_microcomb'), 'EO Microcomb'],
         ], 'the UIV sensor'),
         // line 36
-        ...chain(10, [
+        ...chain(8, [
           ['l36_0', I('grindless:lithium_niobate_wafer'), 'Lithium Niobate Wafer', 'raw'],
           ['l36_1', mach('gtceu:ion_implanter'), 'Ion Implanter', 'ours'],
           ['l36_2', I('grindless:implanted_ln_wafer'), 'Implanted LN Wafer'],
@@ -315,7 +300,7 @@ export default {
           ['l36_10', I('grindless:ps_cooling_laser'), 'PS Cooling Laser'],
         ], 'the positronium lab'),
         // line 40
-        ...chain(12, [
+        ...chain(10, [
           ['l40_0', I('gtceu:silicon_dust'), 'Silicon', 'raw'],
           ['l40_1', I('gtca:silicon_tetrachloride_dust'), 'Silicon Tetrachloride'],
           ['l40_2', mach('gtceu:fibre_draw_tower'), 'Fibre Draw Tower', 'ours'],
@@ -326,7 +311,7 @@ export default {
           ['l40_7', I('grindless:data_crystal_5d'), 'Data Crystal 5D'],
         ], 'the Matrioshka computer'),
         // line 44
-        ...chain(14, [
+        ...chain(12, [
           ['l44_0', I('gtceu:silicon_dust'), 'Silicon', 'raw'],
           ['l44_1', I('gtca:silicon_tetrachloride_dust'), 'Silicon Tetrachloride'],
           ['l44_2', mach('gtceu:fibre_draw_tower'), 'Fibre Draw Tower', 'ours'],
@@ -335,6 +320,27 @@ export default {
           ['l44_5', I('grindless:er_fibre_coil'), 'ER Fibre Coil'],
           ['l44_6', I('grindless:pumped_edfa'), 'Pumped EDFA'],
         ], 'the pulsar repeater'),
+      ]),
+    },
+    // RF-3W: line 13 in its own cluster (no lNN_N keys), so the audit reads its links as crossings: the HfO2 line from UEV, the comb from UHV
+    beuv: {
+      name: 'BEUV driver ASIC',
+      nodes: rows([], () => [
+        L('b13_hfo', 0, 0, 'pl_uev:hfo'),
+        ...chain(1, [
+          ['b13_0', I('grindless:hfo2_resist_wafer'), 'Hfo2 Resist Wafer', 'product', { from: ['b13_hfo'] }],
+          ['b13_1', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
+          ['b13_2', I('grindless:fouled_beuv_mirror'), 'Fouled BEUV Mirror'],
+          ['b13_3', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
+          ['b13_4', I('gtceu:terbium_dust'), 'Terbium'],
+          ['b13_5', I('grindless:tb_droplet_target'), 'TB Droplet Target'],
+          ['b13_6', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
+          ['b13_7', I('grindless:beuv_exposed_wafer'), 'BEUV Exposed Wafer'],
+          ['b13_8', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
+          ['b13_9', I('grindless:beuv_driver_asic'), 'BEUV Driver ASIC', 'product', { from: ['b13_8', 'b13_comb'] }],
+          ['b13_10', I('grindless:photonic_tensor_core'), 'Photonic Tensor Core'],
+        ], 'the optical mainframe'),
+        L('b13_comb', 22.5, -0.5, 'pl_uhv:comb'),
       ]),
     },
     memory: {

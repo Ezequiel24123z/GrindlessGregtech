@@ -225,7 +225,7 @@ const data = {
         n('algc', 10, 7, I('grindless:algae_culture'), 'Algae Culture', { kind: 'raw', sub: 'With agar, from the closed ecosystem' }),
         n('alg', 10, 5, I('grindless:engineered_far_red_algae'), 'Engineered Algae', { kind: 'product', from: ['cass', 'algc'] }),
         n('abr', 12.5, 5, mach('gtceu:algae_bioreactor'), 'Algae Bioreactor', { kind: 'ours', from: ['alg'], desc: 'Feeds the algae carbon dioxide and water in the red light.' }),
-        n('biom', 15, 5, F('gtceu:biomass'), 'Biomass', { kind: 'product', role: 'resource', from: ['abr'], end: 'biorefinery fuel, and oxygen for the base\'s air' }),
+        n('biom', 15, 5, F('gtceu:biomass'), 'Biomass', { kind: 'by', from: ['abr'], end: 'biorefinery fuel, and oxygen for the base\'s air' }),
         // 15 melanin flare shielding
         ...chain(-4.5, [
           ['clado', I('grindless:cladosporium_culture'), 'Cladosporium Culture', 'raw'],
