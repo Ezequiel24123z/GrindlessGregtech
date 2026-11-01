@@ -1,4 +1,4 @@
-// priority: -5556
+// priority: -5574
 // -----------------------------------------------------------------------------------------------
 // MAX+ machines 1 and 2 (docs/eras/maxplus.md "Machines" 1 and 2; package XP-A1): the multiblocks and their recipe types. Every item, fluid
 // and casing they use is XP-F1's (maxplus/foundation.js). The recipes are in server_scripts/grindless/maxplus/condensate.js.

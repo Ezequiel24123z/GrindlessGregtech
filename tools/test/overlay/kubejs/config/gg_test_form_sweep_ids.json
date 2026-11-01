@@ -302,7 +302,8 @@
   ],
   "maxplus": [
    "gtceu:bound_matter_press",
-   "gtceu:condensate_refinery"
+   "gtceu:condensate_refinery",
+   "gtceu:meta_material_loom"
   ],
   "moon": [
    "gtceu:lunar_drill"

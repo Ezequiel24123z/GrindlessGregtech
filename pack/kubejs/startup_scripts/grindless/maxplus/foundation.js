@@ -1,4 +1,4 @@
-// priority: -5567
+// priority: -5594
 // -----------------------------------------------------------------------------------------------
 // MAX+ foundation (package XP-F1, docs/eras/maxplus.md "Build order", F1): the shared registrations the MAX+ packages build on. No
 // controller, no recipe type, no worldgen and no recipe. Published in global.grindless.maxPlusFoundation. The load order is stamped
