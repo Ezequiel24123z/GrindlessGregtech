@@ -62,8 +62,8 @@
       outs: [['grindless:deep_horizon_tether', 1]] },
     // P24
     { type: 'solvent_extraction', name: 'beryllium_hydroxide', circuit: 32, eut: va(8), duration: 600,
-      items: [['gtceu:emerald_dust', 8]], fluids: [['gtceu:sulfuric_acid', 3000], ['gtceu:water', 4000]],
-      outs: [['grindless:beryllium_hydroxide', 2], ['gtceu:silicon_dioxide_dust', 6], ['gtceu:alumina_dust', 1]], fluidOuts: [['gtceu:diluted_sulfuric_acid', 3000]] },
+      items: [['gtceu:emerald_dust', 8]], fluids: [['gtceu:sulfuric_acid', 3000],       ['minecraft:water', 4000]],
+            outs: [['grindless:beryllium_hydroxide', 2], ['gtceu:silicon_dioxide_dust', 6]], fluidOuts: [['gtceu:diluted_sulfuric_acid', 3000]] },
     { type: 'electric_blast_furnace', name: 'be_pebbles', circuit: 25, eut: va(5), duration: 600, ebf: 1700,
       items: [['grindless:beryllium_hydroxide', 4], ['gtceu:magnesium_dust', 2]],
       outs: [['grindless:be_pebbles', 2], ['gtceu:magnesia_dust', 2]] },
