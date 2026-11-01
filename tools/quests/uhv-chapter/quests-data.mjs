@@ -28,7 +28,7 @@ export const QUESTS = [
     deps: ['X:183EEB9BF7A06AC5'], x: 0, y: 0,
     desc: [
       'The &6Proxima Approach Data&r says the nearest star has a rocky planet in its habitable zone. The &6Heavy Curium Oxide&r in store is what the next isotopes start from.',
-      'This tab is the road: the elevator, a gate, Mercury and Proxima b. The machines on that road have their own tabs.',
+      'The road runs up the elevator, through a gate, to Mercury and Proxima b. The machines on that road have their own chapters.',
     ],
     tasks: [it('grindless:proxima_approach_data'), it('grindless:heavy_curium_oxide')],
     rewards: [xp(50)],
@@ -86,7 +86,7 @@ export const QUESTS = [
     key: 'PLAN', kind: 'step', title: 'Planetary Protection', icon: 'grindless:bsl4_casing',
     deps: ['LVL8'], x: 6, y: 2,
     desc: [
-      'Nothing that lived on another world reaches Earth unsterilised. The &6BSL-4 Casing&r seals every lab that handles samples.',
+      'Nothing that lived on another world reaches Earth unsterilised. Every lab that handles samples sits behind casing rated &6BSL-4&r: it seals the room.',
     ],
     tasks: [it('grindless:bsl4_casing')],
     rewards: [xp(100)],

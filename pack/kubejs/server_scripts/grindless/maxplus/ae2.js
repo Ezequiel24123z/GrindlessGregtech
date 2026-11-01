@@ -1,3 +1,4 @@
+// priority: -20089
 // MAX+ lines A1 to A3, the AE2 lines, on the older machines (docs/eras/maxplus.md 'Lines' and 'AE2'; package XP-AE).
 // (no priority header: the integrator stamps it with tools/analysis/script-order.mjs --write)
 //

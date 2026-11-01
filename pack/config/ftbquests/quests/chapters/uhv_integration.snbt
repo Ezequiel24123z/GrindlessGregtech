@@ -1,0 +1,368 @@
+{
+	autofocus_id: "5777F10880908743"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "uhv_integration"
+	group: "5588266FE7D27583"
+	icon: "gtceu:swarm_control_station"
+	id: "5B96F8B9E36B6F31"
+	order_index: 3
+	quest_links: [
+		{
+			id: "1B20374916F6107B"
+			linked_quest: "7547756221DFC688"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "5D63983128EAA809"
+			linked_quest: "188AE1CE6129054A"
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			id: "762A02AE88B49811"
+			linked_quest: "7547756221DFC688"
+			x: 0.0d
+			y: 4.0d
+		}
+		{
+			id: "3A719BCCFEDEB8CE"
+			linked_quest: "7547756221DFC688"
+			x: 0.0d
+			y: 6.0d
+		}
+		{
+			id: "1A1CB519939E7CA8"
+			linked_quest: "188AE1CE6129054A"
+			x: 0.0d
+			y: 8.0d
+		}
+		{
+			id: "3FCF41E2C240554B"
+			linked_quest: "773081F576E0FF0C"
+			x: 0.0d
+			y: 10.0d
+		}
+		{
+			id: "3259B0683E212888"
+			linked_quest: "7547756221DFC688"
+			x: 0.0d
+			y: 12.0d
+		}
+		{
+			id: "34A13A834F07EBAE"
+			linked_quest: "7547756221DFC688"
+			x: 0.0d
+			y: 14.0d
+		}
+		{
+			id: "173352A904B88C26"
+			linked_quest: "7547756221DFC688"
+			x: 0.0d
+			y: 16.0d
+		}
+		{
+			id: "33645A053D70D9AA"
+			linked_quest: "7547756221DFC688"
+			x: 0.0d
+			y: 18.0d
+		}
+		{
+			id: "35E1A44686B7B631"
+			linked_quest: "7547756221DFC688"
+			x: 0.0d
+			y: 20.0d
+		}
+		{
+			id: "1E4524AF24A8364F"
+			linked_quest: "7547756221DFC688"
+			x: 0.0d
+			y: 22.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["7547756221DFC688"]
+			description: ["Silicon carbide takes more heat and volts than silicon, and the &6SiC Power Module&r is what the swarm's control gear is built from. An inverted metamorphic array stacks a junction for every colour of light. The SiC device fab and the solar array fab, both from the machines tab, and ultrapure water for the wafers. Swarm segments and the UHV power gear. Boules and wafers move by bus; keep the ultrapure water on its own pipe."]
+			icon: "grindless:sic_power_module"
+			id: "5777F10880908743"
+			rewards: [{ id: "3A939E13B316928C", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "74C792F613E9D327", item: "gtceu:sic_device_fab", type: "item" }
+				{ id: "3F4FE809733A53B3", item: "grindless:sic_power_module", type: "item" }
+				{ id: "36ABAC76BA437D4D", item: "gtceu:solar_array_fab", type: "item" }
+				{ id: "50510D2F6FF87557", item: "grindless:imm_solar_array", type: "item" }
+			]
+			title: "Power Devices"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5777F10880908743"]
+			description: ["The &6Platinum Plant&r turns the biomining liquor into salts, and the ruthenium, iridium and americium end up as the alloy that carries the highest currents yet: RTAN wire. Proxima leach liquor from the biomining heap, and a long afternoon on the platinum plant. UHV wiring for the network and the heaviest machines. Liquor by pipe from Proxima b over the gate's AE2 pair; the plant hands salts to the blast furnace line."]
+			icon: "gtceu:platinum_plant"
+			id: "5E8DBDD3BE5E8C23"
+			rewards: [{ id: "3E1032E7810A80D1", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "75C2CB17134C60BC", item: "gtceu:platinum_plant", type: "item" }
+				{ id: "14B88CD68D841270", item: "gtceu:ruthenium_trinium_americium_neutronate_single_wire", type: "item" }
+			]
+			title: "RTAN"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["188AE1CE6129054A"]
+			description: ["The &6Swarm Control Station&r steers a cloud of segments round the Sun and sends the power down as a beam. Two stations feed one bank, and the bank loses a little on the way. Swarm segments from the foundry in Mercury orbit, and the station in the orbit itself. UHV power without fuel, and the swarm half of the gate to UEV. Segments ride the Mercury AE2 pair; worn ones go back to the foundry as scrap."]
+			icon: "gtceu:swarm_control_station"
+			id: "7AAE7008AA466590"
+			rewards: [{ id: "163E8662FE869F6E", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "105E5722D91D5E94", item: "gtceu:swarm_control_station", type: "item" }
+				{ id: "38C26A13EB4BDEF0", item: "grindless:swarm_segment", type: "item" }
+			]
+			title: "The Swarm"
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7AAE7008AA466590"]
+			description: ["A probe that dips into the corona comes back with the &6Coronal Field Map&r. The swarm points itself with it. The solar probe bay in Mercury orbit, and a probe for every run. Aimed beams, and the map the Gate to UEV asks for. The bay builds probes from ME; the map goes back to the network."]
+			icon: "grindless:coronal_field_map"
+			id: "10329AFF72FD580B"
+			rewards: [{ id: "1B6AB5FBDA3A9AAB", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5CD6060A433B2B8E", item: "gtceu:solar_probe_bay", type: "item" }
+				{ id: "16B9394E724BC350", item: "grindless:solar_probe", type: "item" }
+				{ id: "593C83F3B2D3AD76", item: "grindless:coronal_field_map", type: "item" }
+			]
+			title: "Coronal Map"
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["10329AFF72FD580B"]
+			description: ["A civilisation that uses all the power of its star is a type II on the Kardashev scale. You have a swarm, so you are on the way. It is only on the way."]
+			icon: "gtceu:swarm_control_station"
+			id: "540417452644F0F3"
+			rewards: [{ id: "314EA8A0CB5E59DE", type: "xp", xp: 100 }]
+			shape: "rsquare"
+			size: 1.25d
+			tasks: [{ id: "35EC929F0411AD1C", type: "checkmark" }]
+			title: "Kardashev II"
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7547756221DFC688"]
+			description: ["The &6UHV SMES Cell&r holds a huge store of EU, and the nuclear clock keeps it in step with the network. The naquadria magnet works, and the nuclear clock for the sync. The UHV wireless tier. Nothing to feed. Size the towers for your busiest hour."]
+			icon: "grindless:uhv_smes_cell"
+			id: "5E6B4DEB712EECBE"
+			rewards: [{ id: "3CE50DA47EC8E899", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "73DB8F65AD12D9BD", item: "gtceu:naquadria_magnet_works", type: "item" }
+				{ id: "36ADD428AD14F1EB", item: "grindless:uhv_smes_cell", type: "item" }
+			]
+			title: "The UHV Cell"
+			x: 2.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["5E6B4DEB712EECBE"]
+			description: ["Move your towers onto &6UHV SMES Cells&r and the wireless network carries UHV, out to the stations and now to Mercury and Proxima. Every formed tower holding UHV cells: until then the network stays at UV. Stations that run on power made at home, and the wireless hatches and covers at UHV. Add cells when the network dips at your busiest hour."]
+			icon: "gtceu:uhv_wireless_energy_hatch"
+			id: "3B594BE1402C7B55"
+			rewards: [{ id: "758A54F40ABB6F18", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "55A118F8F168C4C7", item: "gtceu:uhv_wireless_energy_hatch", type: "item" }
+				{ id: "32CE1F0CEC423BA8", item: "gtceu:uhv_wireless_dynamo_hatch", type: "item" }
+			]
+			title: "The Network Goes UHV"
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3B594BE1402C7B55"]
+			description: ["There is no UHV parallel hatch. The &6UV Parallel Hatch&r is the top of the line, and one more machine of the same kind is the only other way to go wider."]
+			icon: "gtceu:uv_parallel_hatch"
+			id: "32E554E77D7298BA"
+			rewards: [{ id: "7C3C911F3C4092B6", type: "xp", xp: 60 }]
+			tasks: [{ id: "74B755A21A7ACD91", item: "gtceu:uv_parallel_hatch", type: "item" }]
+			title: "Parallel Hatch"
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["7547756221DFC688"]
+			description: ["The &6Quantum Fabricator&r does the work of the assembler, circuit assembler, forming press, laser engraver and cutter in one cleanroom machine. A parallel hatch multiplies it, and it overclocks perfectly. A cleanroom, UHV power, a parallel hatch and every older recipe's inputs on one bus. Your Assembly Hall folded into one machine. One bus of inputs, one of outputs: it takes the recipes of five machines."]
+			icon: "gtceu:quantum_fabricator"
+			id: "1A714B616F2F3010"
+			rewards: [{ id: "57E37DFAF7195F0E", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5B0B675A6B7F3B45", item: "gtceu:quantum_fabricator", type: "item" }]
+			title: "Quantum Fabricator"
+			x: 2.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["188AE1CE6129054A"]
+			description: ["The seed for the Mercury bridge is made in Mercury orbit, with the first swarm segment as the catalyst. Once linked, the foundry's output reaches home through ME."]
+			icon: "gcyr:mercury_orbit"
+			id: "555DAA8FBE97E6F1"
+			rewards: [{ id: "7FF1FBD3EC6380EA", type: "xp", xp: 100 }]
+			tasks: [{ id: "53B865DC8B0C2AFF", item: "grindless:swarm_segment", type: "item" }]
+			title: "Mercury on AE2"
+			x: 2.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["773081F576E0FF0C"]
+			description: ["Proxima b has no bridge of its own: only the gate makes the &6Proxima Gate Seed&r, and the first flora sample is its catalyst. Samples then arrive through ME, never by hand."]
+			icon: "grindless:proxima_gate_seed"
+			id: "533F887480ED2BCA"
+			rewards: [{ id: "599BF2A3F82EEE46", type: "xp", xp: 100 }]
+			tasks: [{ id: "31C1EFE9947FAFA3", item: "grindless:proxima_gate_seed", type: "item" }]
+			title: "Proxima b on AE2"
+			x: 2.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["7547756221DFC688"]
+			description: ["The &6Fuel Fabrication Plant&r, the &6Hot Cell&r and the &6Pyroprocessing Cell&r take on the heavier isotopes: new fuels, new reprocessing, nothing new to build. Berkelium and californium from the reactor, and the hot cell's shielding. Driver elements, targets and the thorium line. Targets in by bus; spent elements back to the pyroprocessing cell."]
+			icon: "gtceu:fuel_fabrication_plant"
+			id: "10C98ECFE06EDE0A"
+			rewards: [{ id: "7974891693F480A4", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5E73BD790AA85B35", item: "gtceu:fuel_fabrication_plant", type: "item" }
+				{ id: "585ACFB36DC915C8", item: "gtceu:hot_cell", type: "item" }
+				{ id: "3A3A9E0F9E158E34", item: "gtceu:pyroprocessing_cell", type: "item" }
+				{ id: "3710DE6B774E9372", type: "checkmark" }
+			]
+			title: "Isotope Chemistry"
+			x: 2.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["7547756221DFC688"]
+			description: ["Heavy water, platinum salts and rare-earth liquors from Proxima b go through the &6Platinum Plant&r, &6Heavy Water Plant&r, &6Extraction Cascade&r, &6Regolith Cell&r and &6Lunar Solar Array&r. Each machine learns a new input. Proxima leach liquors, and the arrays tuned to the red. RTAN, UHV catalysts and the base's power. Liquors arrive over the Proxima AE2 pair; each plant hands its output on."]
+			icon: "gtceu:heavy_water_plant"
+			id: "7F6C236A1EA2F118"
+			rewards: [{ id: "374ADDEBCB73B958", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7EC95867CCACAC3A", item: "gtceu:platinum_plant", type: "item" }
+				{ id: "7F9C8DAD7E31772F", item: "gtceu:heavy_water_plant", type: "item" }
+				{ id: "7AA6BEE3EB895F7A", item: "gtceu:extraction_cascade", type: "item" }
+				{ id: "5B6CA931AF1485DF", item: "gtceu:regolith_cell", type: "item" }
+				{ id: "72B09B06F2E08E58", item: "gtceu:lunar_solar_array", type: "item" }
+			]
+			title: "Proxima Liquors"
+			x: 2.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["7547756221DFC688"]
+			description: ["The &6Biofoundry&r, &6Organoid Lab&r and &6Algae Bioreactor&r grow new strains: neural tissue on a scaffold, and an algae that feeds on red light. Gene cassettes, the far-red strain, and sealed rooms. Organoid processors and the far-red algae. Seed cultures from ME; keep every room sealed."]
+			icon: "gtceu:biofoundry"
+			id: "3F2C2F3D89E4BC2C"
+			rewards: [{ id: "3E28325197DB75D9", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "715641168CFC2731", item: "gtceu:biofoundry", type: "item" }
+				{ id: "5D07FC51FB932DD4", item: "gtceu:organoid_lab", type: "item" }
+				{ id: "7164D1C754D82646", item: "gtceu:algae_bioreactor", type: "item" }
+				{ id: "77FC40BD48FDC8EE", item: "grindless:engineered_far_red_algae", type: "item" }
+			]
+			title: "Life at Home"
+			x: 2.0d
+			y: 16.0d
+		}
+		{
+			dependencies: ["7547756221DFC688"]
+			description: ["The &6Ion Implanter&r, &6Isotope Column&r, &6MOCVD Reactor&r, &6Synchrotron&r, &6Antimatter Trap&r, &6Powder-in-Tube Line&r and &6Diamond Lattice Fab&r each take a new mode in UHV, for wafers and cells at the next purity. The UV versions of each, and the new isotopes. The next wafers and the antimatter route. Wafers and boules by bus; recycle what the column rejects."]
+			icon: "gtceu:ion_implanter"
+			id: "5E29F800F909D333"
+			rewards: [{ id: "3E321182A085E6C4", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5A8E4EE9310B3FDC", item: "gtceu:ion_implanter", type: "item" }
+				{ id: "3B3833C4CC2DE738", item: "gtceu:isotope_column", type: "item" }
+				{ id: "3ACDBE97BFC90D60", item: "gtceu:mocvd_reactor", type: "item" }
+				{ id: "53B64BC87DF83714", item: "gtceu:synchrotron", type: "item" }
+				{ id: "36F0B08D6B6F99F9", item: "gtceu:antimatter_trap", type: "item" }
+				{ id: "35AF93300BD39444", item: "gtceu:powder_in_tube_line", type: "item" }
+				{ id: "3E2E0C678B47E5A0", item: "gtceu:diamond_lattice_fab", type: "item" }
+			]
+			title: "Crystals and Chips"
+			x: 2.0d
+			y: 18.0d
+		}
+		{
+			dependencies: ["7547756221DFC688"]
+			description: ["The &6Thruster Works&r, &6Light Sail Fab&r and &6Cryogenic Plant&r make the motors and sails for the trip, with oganesson as the propellant. Oganesson from the cryogenic plant, and film from the aluminium line. The ICAN motor's pods and the sails. Pods and sails to ME; keep oganesson in its own tank."]
+			icon: "gtceu:thruster_works"
+			id: "166C0A74107A1EF3"
+			rewards: [{ id: "3D0B9F74CD0D8410", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "770A16A945E63EB4", item: "gtceu:thruster_works", type: "item" }
+				{ id: "167A9081EEEA7F73", item: "gtceu:light_sail_fab", type: "item" }
+				{ id: "5ED39784ABE4D6CD", item: "gtceu:cryogenic_plant", type: "item" }
+			]
+			title: "Thrusters and Sails"
+			x: 2.0d
+			y: 20.0d
+		}
+		{
+			dependencies: ["7547756221DFC688"]
+			description: ["The &6Large Chemical Reactor&r takes the era's new rows: solvents, propellant chemistry and the sulfide route. The raw materials from the Proxima liquors and the isotopes. Every liquor and solvent the machines above ask for. Pipe each product to its consumer; no tank should ever overflow."]
+			icon: "gtceu:large_chemical_reactor"
+			id: "727596C723BF878B"
+			rewards: [{ id: "743A37017C1A3F17", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "14B5EE07DE9EA668", item: "gtceu:large_chemical_reactor", type: "item" }]
+			title: "Chemistry Rows"
+			x: 2.0d
+			y: 22.0d
+		}
+		{
+			dependencies: ["166C0A74107A1EF3"]
+			description: [
+				"Oganesson is the heaviest noble gas and the best propellant a thruster could ask for. The &6Oganesson Propellant Pod&r packs it for the ICAN motor. Oganesson from the cryogenic plant. The motor and the sails' pods. One pod line off the cryogenic plant, kept in its own tank."
+				"Real oganesson lasts milliseconds and only a few atoms exist. GregTech Modern treats it as a stable gas, and the pack goes along."
+			]
+			icon: "grindless:oganesson_propellant_pod"
+			id: "5388F974D6992B80"
+			rewards: [{ id: "5EDF89574D0DA2FE", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "76608925D8F02E2C", item: "grindless:oganesson_propellant_pod", type: "item" }]
+			title: "Noble Thrust"
+			x: 4.0d
+			y: 20.0d
+		}
+	]
+	subtitle: ["Silicon carbide power, a swarm round the Sun, the network at UHV, one machine doing five jobs, older machines with new tricks and two more stations on AE2."]
+	title: "UHV: Power and Scale"
+}

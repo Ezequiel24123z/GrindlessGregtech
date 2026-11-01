@@ -1,4 +1,4 @@
-// priority: 6841
+// priority: 6910
 // Gregtech Grindless - EMI lines of the MAX+ AE2 lines A1 to A3 on the older machines (package XP-AE):
 //
 //   gtceu.recipe.<dataKey>.<recipe>                    the EMI line of each recipe that carries a data key
