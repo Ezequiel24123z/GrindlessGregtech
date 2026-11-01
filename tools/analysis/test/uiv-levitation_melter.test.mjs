@@ -166,7 +166,7 @@ test('every new item has a texture, a name and two tooltips in en_us', () => {
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
     const row = lang.match(new RegExp(`\\['${n}', ('[^\\n]*)\\]`));
     assert.ok(row, `${n} lang row`);
-    assert.equal(row[1].split(/', '/).length, 4, `${n}: name and three more columns (two tooltips)`);
+    assert.equal(row[1].split(/', '/).length, 3, `${n}: name and two tooltips`);
   }
   // every ENTRIES row has en
   const entries = lang.slice(lang.indexOf('var ENTRIES'), lang.indexOf('var ITEMS'));

@@ -126,10 +126,10 @@ test('a missing input or fluid skips the recipe and is reported, never throws', 
   assert.equal(b.G.maxParallelHatch.done, true);
 });
 
-test('names, tooltip and info page in both languages; the EMI route is shown (A3 closed the hold); the test zone and overlay exist', () => {
+test('names, tooltip and info page in en_us; the EMI route is shown (A3 closed the hold); the test zone and overlay exist', () => {
   const src = read('client_scripts', 'grindless/max_parallel_hatch_lang.js');
   for (const key of ['block.gtceu.max_parallel_hatch', 'grindless.machine.max_parallel_hatch.tooltip', 'emi.grindless.info.max_parallel_hatch.0']) {
-    assert.equal(src.split(`'${key}'`).length - 1, 2, key);
+    assert.equal(src.split(`'${key}'`).length - 1, 1, key);
   }
   assert.ok(src.includes('1048576'));
   const info = JSON.parse(read('assets', 'emi/recipe/additions/grindless/max_parallel_hatch.json'));

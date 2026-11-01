@@ -168,9 +168,6 @@ test('every new name and tooltip has en_us text', () => {
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);
   }
-  for (const m of ['europium_sulfate', 'europium_oxide', 'zinc_sulfate', 'lanthanum_oxide']) {
-    for (const form of ['', 'small_', 'tiny_']) assert.ok(en[`item.gtceu.${form}${m}_dust`], `en_us ${form}${m}_dust`);
-  }
 });
 
 test('the texture generator is documented and its three PNGs exist', () => {

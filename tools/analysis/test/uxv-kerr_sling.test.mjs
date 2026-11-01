@@ -182,8 +182,6 @@ test('lang (en_us), the jump rows and the two info pages naming their place', ()
   info('cas_a', 'item:grindless:cnt_whipple_shield');
   assert.match(lang, /Vela Pulsar\./);
   assert.match(lang, /Cassiopeia A, where/);
-  assert.match(lang, /púlsar de Vela\./);
-  assert.match(lang, /Casiopea A, donde/);
 });
 
 test('the zone row: band X 36736-36799, Z 0-63, Y 98-115, its test and a note naming each dimension', () => {

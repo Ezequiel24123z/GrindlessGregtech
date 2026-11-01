@@ -208,7 +208,7 @@ test('lang parity: every ENTRY and ITEM has en_us, every item has a texture', ()
   assert.equal(registered.length, 16);
   assert.deepEqual(itemNames.sort(), registered.slice().sort());
   const keys = [...lang.matchAll(/^\s+\['((?:block|gtceu|material|grindless|emi)\.[^']+)',\s*$/gm)].map((m) => m[1]);
-  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)',   '[^']+'\]/gm)].map((m) => m[1]);
+  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)',\s+'[^']+'\]/gm)].map((m) => m[1]);
   for (const k of ['block.gtceu.polarised_proton_source', 'block.gtceu.uiv_fusion_reactor', 'gtceu.proton_polarisation', 'material.gtceu.detritiated_protium', 'material.gtceu.polarised_h_gas', 'material.gtceu.nitrogen_15_ammonia']) assert.ok(flat.includes(k), k);
   assert.ok(keys.includes('gtceu.recipe.grindless_pyroprocessing.li_sn_eutectic'));
   for (const m of ['polarised_proton_source', 'uiv_fusion_reactor']) for (let i = 0; i < (m === 'polarised_proton_source' ? 2 : 1); i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
