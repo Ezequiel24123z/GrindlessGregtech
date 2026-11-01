@@ -1500,3 +1500,56 @@ The design above follows these. The first twelve came with the design review; th
 20. **Duranium moves to the Mk2:** Ga + Rn → duranium gets a 200 M EU start.
 21. **Spent naquadah rods** are re-enriched in mode 2's circuit 3.
 22. **The gate's power test:** 524,288 EU/t for 60 s into a power substation.
+
+## Reforge line design (RF-3S)
+
+Era-design pass (issue #69, 2026-11-01). The rule, the roles and the shared tool package LD-T1 are in `ev.md`, *Reforge line design (RF-3S)*. RF-3M found 33 fix verdicts in 38 chains and held that no chart edit could move them, because the audit gives a machine node with no inputs 0 steps. That is true per cluster, and it is why LuV reads short: its design lines (*New process lines*, above) were drawn as 18 clusters joined by raw nodes. With the `line` tag, the roles and the branch-end rule, LuV has **6 production lines** of 4 to 9 steps, each crossing a line two or more eras back, and only one needs a recipe change (the tetrataenite gate). *New process lines* stays as the design record; this section is how the audit reads it.
+
+### Classification (LuV)
+
+| Cluster: end | Role | Steps (line) | Decision |
+|---|---|---|---|
+| naquadah: trinium, enriched naquadah | production | 4-5 (`trinium`) | keep: mode 2 → EBF 7,200 K → helium refrigerator, crossing EV's liquid helium and nitrogen |
+| orbital: naquadah alloy | branch end | 1 | **branch end** of `trinium` (`containerless_naquadah_alloy`: 2 Nq + osmiridium + trinium dust) |
+| reactor: reactor III | power | 4 | role tag (spent rods return to mode 2) |
+| tape: ITBTC coated conductor | infrastructure | 2 | role tag: the tape's only consumers are magnet works rows |
+| magnets: coil, SMES cell, coilgun casing, bearing | infrastructure | 1-2 | role tag: `fusion_coil`, `fusion_casing`, the Mk1, the wireless tower, the ring and the processor builds |
+| network: orbital solar, wireless tower | power | 3 | role tag |
+| biofoundry, organoid, europa, miner (extract): stem cells, wetware | production | 9 (`living`) | **merge:** cryobot (resource) → algae bioreactor → biofoundry (sludge, mutagen, medium) → stem cells → organoid lab (organoid, NPU) → circuit assembly line. Crossings: LV creature simulator (bone), MV CO₂ (ring), IV U-235 (mutagen) |
+| biofoundry: engineered seeds | infrastructure | 1 | role tag: the ring keeps them (chance 0) |
+| belt + miner (CO): iridium, osmium, tetrataenite | production | 5-6 (`asteroid`) | **merge and gate:** harpoon drill (resource) → macerator → asteroid processor (Mond c1, or magnetic split c2) → platinum plant mode 4 → EBF → freezer. Crossing EV's platinum plant. Bypasses below |
+| miner: chondritic extract, CO | resource | 1-2 | role tag: heads of `living` and `asteroid` |
+| fusion + grower: europium, crystal CPU | production | 5 (`crystals`) | **merge:** Mars neodymium (link `pl_ev:nd`) → EBF and extractor → Mk1 (Nd + H → Eu) → zero-g grower → EBF (engraved chip) → laser engraver. Crossing EV's cascade |
+| fusion: helium and calcium plasma | power | 2 | role tag (the plasma turbine) |
+| grower: sapphire test mass | infrastructure | 1 | role tag: deep space network, lattice fab and observatory builds |
+| io: germanium, indium | resource heads | 1 | **merge** into `wake` |
+| orbital: UHPIC, triple-junction cell | production | 5-6 (`wake`) | **merge and lengthen by chart:** fumarole condenser (resource) → condenser c2 (indium) → mixer (InGaP, `gtceu:mixer/indium_gallium_phosphide`) → wake shield c2 (HPIC from GTM's MPIC) → wake shield c1 (UHPIC, with IV's molten naquadah) → cutter (UHPIC chip). Germanium → wake shield c3 → cutter → triple-junction cell (its end is the orbital panel: `infrastructure`). Crossing MV gallium and vanadium, IV naquadah |
+| io: sulfur concrete casing | infrastructure | 0 | role tag |
+| orbital: optical pipe | production | 2 → 5 (`optics`) | **lengthen by chart:** GTCA's bastnasite chain (`centrifuge/suspension_to_concentrate` → `neod_to_cl` → `electrolyzer/lacl_to_la`) and `electrolyzer/decomposition_electrolyzing_red_zircon` → mixer (ZBLAN, with barium and IV's fluorine) → microgravity smelter (with HV's PTFE). Crossing MV (bastnasite ore, End zircon), HV PTFE. The chart's "Mars rare earths" note on lanthanum is wrong: the dump's lanthanum comes from bastnasite |
+| orbital: Whipple shield casing | infrastructure | 1 | role tag |
+| research: HPCA, data orb | infrastructure, research | 2 | role tags. RF-3C's "remove" on the HPCA is a false positive: it is a structure. RF-3M's data-orb bypass is one too: `circuit_assembler/data_orb` makes the blank orb and `research_station/*` writes research on it, so the chart's arrow from the station should read "writes" |
+| ioorbit: tether or sulfur–iodine plant | power or resource | 1 | role tag (whichever `tables/stations.json` lands) |
+| ganymede: catalogue, survey, Saturn chart | research, travel | 1 | role tags |
+| travel: seed, truss, cryogenic tank | travel | 1 | role tag |
+
+### Bypasses (LuV)
+
+- **Tetrataenite: gate.** GTM's ore chain (`forge_hammer/hammer_tetrataenite_refined_ore_to_dust` and the rest) turns each crushed ore into one dust, so it beats the processor's magnetic split (16 crushed → 12 tetrataenite + 4 meteoric iron) and skips the Mond and PGM half of the line. The split is the meaningful route (rule 9): it separates the alloy from the kamacite the way a meteorite really comes apart, and the meteoric iron it frees carries the PGM concentrate. GTM's tetrataenite steps past the crushed ore are removed, so crushed tetrataenite goes only to the split.
+- **Iridium and osmium: keep, as a parallel source.** The skip routes (`pgm_refining/iv/iridosmine`, `osmium_dust_completion`) are IV's Mercury line, which RF-3C's test reads as a bypass. *Only from there, and the cuts* says Ir and Os come from Mercury **or** the belt by design. The belt line's mandatory end is tetrataenite, so it is never skippable as a whole; P2-C checks that mode 4 is not worse per unit than Mercury (open question 2).
+- **Carbon monoxide: keep.** CO is a charge in the Mond rows (chance 0), so GTM's `air_scrubber/carbon_monoxide_poisoning` skips nothing: the optical miner's Boudouard row only saves shipping CO to the belt.
+- **Data orb: no bypass** (above).
+
+### Packages (LuV)
+
+Continues `iv.md`'s list. **Before P2-C (LuV to UV band):** LD-LV2.
+
+| # | Id | Scope | Likely files | Depends on | Tests |
+|---|---|---|---|---|---|
+| 5 | **LD-LV1** LuV charts | The *Classification (LuV)* tags: `line` on `trinium`, `living`, `asteroid`, `crystals`, `wake` and `optics` clusters; the upstream nodes for `wake` (InGaP mixer, GTM MPIC) and `optics` (bastnasite, red zircon, fluorine); the `extends` on naquadah alloy; every role; the research arrow; the lanthanum note. No recipe changes. | `tools/quests/processing-lines/pl-data-luv.mjs` | LD-T1 | T0; `pl-check luv` 0 issues; line audit: 6 LuV production lines, none under 4 steps, each with reach back ≥ 2 |
+| 6 | **LD-LV2** Tetrataenite gate | Remove GTM's tetrataenite ore steps past the crushed ore (purify, refine, hammer and macerate to dust, thermal centrifuge, sifter); keep the magnetic split as the only crushed → dust route. The hidden-table rows for the dead forms go to the integrator in the handoff (`hidden_until.json` is the integrator's). | the belt server script `server_scripts/grindless/luv/asteroid_belt.js` (its removal list) | — | T0 (obtain pass: tetrataenite dust still reachable); `cost-matrix.mjs --trace` on `grindless:magnetic_bearing`; T1 none (a removal, proven statically) |
+
+### Open questions (LuV)
+
+1. **Tetrataenite: gate GTM's ore chain or drop the split?** Default: gate (above). Dropping the split instead keeps GTM's chain, makes the asteroid processor a Mond-only machine and cuts the belt's link between tetrataenite and the PGM concentrate.
+2. **Belt iridium and osmium against Mercury.** Default: keep both, and P2-C prices mode 4 so a run gives at least Mercury's iridium per drill-hour. If it cannot without lowering a cost (DECISIONS.md:697), the owner chooses between Mercury-only Ir/Os from LuV on (mode 4 then gives only Pt, Pd, Rh, Ru) and a belt that is a second, dearer source.
+3. **Should the merged lines become single clusters in the chapter** instead of tagged neighbours? Default: no; the `line` tag keeps the layout and quests. Yes means a larger chart rebuild in Phase 5.
