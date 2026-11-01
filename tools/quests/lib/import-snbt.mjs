@@ -26,7 +26,7 @@ const q = (s) => JSON.stringify(s);
 const isNum = (v) => v && typeof v === 'object' && '$n' in v;
 
 function number(v, suffix, where) {
-  if (!isNum(v) || v.$t !== suffix) throw new Error(`${where}: expected a number with suffix "${suffix}", got ${JSON.stringify(v)}`);
+  if (!isNum(v) || v.$t !== (suffix || 'i')) throw new Error(`${where}: expected a number with suffix "${suffix}", got ${JSON.stringify(v)}`);
   return v.$n;
 }
 
@@ -34,7 +34,7 @@ function number(v, suffix, where) {
 function rawText(v, where) {
   if (typeof v === 'boolean') return String(v);
   if (typeof v === 'string') return q(v);
-  if (isNum(v)) return String(v.$n) + (v.$t || '');
+  if (isNum(v)) return String(v.$n) + (v.$t === 'i' ? '' : v.$t || '');
   throw new Error(`${where}: a nested value cannot be carried in raw`);
 }
 
