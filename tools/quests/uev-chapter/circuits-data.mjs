@@ -20,9 +20,9 @@ export const CHAPTER = {
 export const LINKS = [
   { key: 'C_L_ASM', ref: 'START', x: 0, y: 0 },
   { key: 'C_L_LIGHT', ref: 'START', x: 0, y: 2 },
-  { key: 'C_L_DET', ref: 'START', x: 0, y: 4 },
-  { key: 'C_L_VDW', ref: 'START', x: 0, y: 5.5 },
-  { key: 'C_L_NET', ref: 'START', x: 0, y: 7.5 },
+  { key: 'C_L_DET', ref: 'START', x: 0, y: 5 },
+  { key: 'C_L_VDW', ref: 'START', x: 0, y: 6.5 },
+  { key: 'C_L_NET', ref: 'START', x: 0, y: 8.5 },
 ];
 
 // A row's first quest depends on the era quest its link points at.
@@ -54,13 +54,13 @@ export const QUESTS = [
     unlocks: 'The waveguide circuit next to it, and through it the whole photonic line.',
     automate: 'Bonding runs in plain machines by ME; keep spare wafers for the foundry.',
   }, [it('grindless:lnoi_wafer')], 100),
-  q('CH_SIN', 'wafer', 'Silicon Nitride Chip', 'grindless:annealed_sin_chip', ['C_L_LIGHT'], 2, 3.2, {
+  q('CH_SIN', 'wafer', 'Silicon Nitride Chip', 'grindless:annealed_sin_chip', ['C_L_LIGHT'], 2, 3.5, {
     for: 'Light travels in silicon nitride with almost no loss. An annealed &6SiN Chip&r carries the waveguides cut into it.',
     needs: 'The photonic foundry, a damascene SiN wafer and the cleanroom.',
     unlocks: 'The waveguide circuit, which joins it to the LNOI wafer.',
     automate: 'The anneal is slow, so run two foundries; keep chips in a stocked chest by ME.',
   }, [it('grindless:annealed_sin_chip')], 100),
-  q('CH_WG', 'circuit', 'Waveguide Circuit', 'grindless:waveguide_circuit', ['CH_LNOI', 'CH_SIN'], 5, 2.6, {
+  q('CH_WG', 'circuit', 'Waveguide Circuit', 'grindless:waveguide_circuit', ['CH_LNOI', 'CH_SIN'], 5, 2.75, {
     for: 'An SiN chip bonded to an LNOI wafer is a &6Waveguide Circuit&r: light goes in, is steered and switched, and comes out.',
     needs: 'The photonic integration hall, one SiN chip, one LNOI wafer and a circuit 1 program.',
     unlocks: 'The quantum photonic chip, which puts sources and detectors on it.',
@@ -68,25 +68,25 @@ export const QUESTS = [
   }, [it('grindless:waveguide_circuit')], 120),
 
   // ------------------------------------------------------------------ sources and detectors
-  q('CH_QD', 'wafer', 'Quantum Dot Wafer', 'grindless:inas_qd_wafer', ['C_L_DET'], 2, 4, {
+  q('CH_QD', 'wafer', 'Quantum Dot Wafer', 'grindless:inas_qd_wafer', ['C_L_DET'], 2, 5, {
     for: 'Indium arsenide islands a few nanometres wide emit one photon at a time. The &6InAs Quantum Dot Wafer&r is where the chip\'s source comes from.',
     needs: 'UHV\'s MBE reactor, indium and arsenic, which is contained.',
     unlocks: 'The quantum dot source, mounted and ready for the chip.',
     automate: 'Contain the arsenic loop; keep wafers by ME and cut one source per chip.',
   }, [it('grindless:inas_qd_wafer'), it('grindless:qd_source')], 120),
-  q('CH_SNS', 'circuit', 'Single-Photon Detector', 'grindless:snspd', ['CH_QD'], 4, 4, {
+  q('CH_SNS', 'circuit', 'Single-Photon Detector', 'grindless:snspd', ['CH_QD'], 4, 5, {
     for: 'A tungsten silicide nanowire cooled to near zero fires when a single photon lands on it: the &6SNSPD&r.',
     needs: 'The SNSPD foundry, a WSi wafer and superfluid helium to cool and package it.',
     unlocks: 'The quantum photonic chip, and the entanglement station\'s repeater.',
     automate: 'Helium by pipe; stock packaged detectors by ME, one per chip and one per repeater.',
   }, [it('grindless:snspd')], 120),
-  q('CH_HBN', 'circuit', 'Single-Photon Emitter', 'grindless:hbn_emitter_chip', ['C_L_VDW'], 2, 5.5, {
+  q('CH_HBN', 'circuit', 'Single-Photon Emitter', 'grindless:hbn_emitter_chip', ['C_L_VDW'], 2, 6.5, {
     for: 'A defect in a layer of hexagonal boron nitride gives off photons one by one: the &6hBN Emitter Chip&r.',
     needs: 'The van der Waals stacker, CVD boron nitride film and a cleanroom.',
     unlocks: 'The quantum photonic chip, as its second light source.',
     automate: 'Film by ME; the stacker returns chips in a chest, stock a few.',
   }, [it('grindless:hbn_emitter_chip')], 120),
-  q('CH_GRM', 'circuit', 'Graphene Modulator', 'grindless:graphene_modulator', ['CH_HBN'], 4, 5.5, {
+  q('CH_GRM', 'circuit', 'Graphene Modulator', 'grindless:graphene_modulator', ['CH_HBN'], 4, 6.5, {
     for: 'Graphene between two films of boron nitride changes how much light passes when a voltage is applied: the &6Graphene Modulator&r.',
     needs: 'The van der Waals stacker, graphene film and hBN film.',
     unlocks: 'The quantum photonic chip.',
@@ -94,13 +94,13 @@ export const QUESTS = [
   }, [it('grindless:graphene_modulator')], 120),
 
   // ------------------------------------------------------------------ the chip and the circuit
-  q('CH_QPC', 'circuit', 'Quantum Photonic Chip', 'grindless:quantum_photonic_chip', ['CH_WG', 'CH_SNS', 'CH_GRM'], 8, 4, {
+  q('CH_QPC', 'circuit', 'Quantum Photonic Chip', 'grindless:quantum_photonic_chip', ['CH_WG', 'CH_SNS', 'CH_GRM'], 8, 5, {
     for: 'A waveguide circuit with a quantum dot source, a detector, a modulator and an emitter on it is the &6Quantum Photonic Chip&r: a whole optical circuit on a few millimetres.',
     needs: 'The photonic integration hall, a circuit 2 program and one of each part above.',
     unlocks: 'The optical computer, which is a chip on an optical assembly.',
     automate: 'Parts by ME in matched counts; keep a few chips in stock, one per computer.',
   }, [it('grindless:quantum_photonic_chip')], 180),
-  q('FIRST', 'circuit', 'Optical Computer', 'gtnn:optical_computer', ['CH_QPC'], 10, 4, {
+  q('FIRST', 'circuit', 'Optical Computer', 'gtnn:optical_computer', ['CH_QPC'], 10, 5, {
     for: 'The &6Optical Computer&r thinks in photons and runs cold. It is the UEV circuit, and the hall is the only machine that makes it.',
     needs: 'A quantum photonic chip and an optical assembly from UHV, in the photonic integration hall.',
     unlocks: 'Every UEV controller after the hull, and the hatches and parts that go with them.',
@@ -108,7 +108,7 @@ export const QUESTS = [
   }, [it('gtnn:optical_computer')], 220),
 
   // ------------------------------------------------------------------ the repeater
-  q('CH_REP', 'circuit', 'Quantum Repeater Node', 'grindless:quantum_repeater_node', ['C_L_NET'], 2, 7.5, {
+  q('CH_REP', 'circuit', 'Quantum Repeater Node', 'grindless:quantum_repeater_node', ['C_L_NET'], 2, 8.5, {
     for: 'Two photons entangled over a distance let a network stay in step. A &6Quantum Repeater Node&r keeps one end of the link.',
     needs: 'The entanglement station in Earth orbit, an Eu:YSO memory crystal, quantum dots, SNSPDs and hollow-core fibre.',
     unlocks: 'The UEV wireless link, and the cell that the quantum repeater keeps in step.',

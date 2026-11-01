@@ -25,7 +25,7 @@ export const LINKS = [
   { key: 'M_L_SNS', ref: 'MK1', x: 0, y: 13.5 },
   { key: 'M_L_VDW', ref: 'MK1', x: 0, y: 15 },
   { key: 'M_L_POL', ref: 'MK1', x: 0, y: 17.5 },
-  { key: 'M_L_QGL', ref: 'MK1', x: 0, y: 20 },
+  { key: 'M_L_QGL', ref: 'MK1', x: 0, y: 21 },
   { key: 'M_L_NEB', ref: 'ALPHA', x: 0, y: 23 },
   { key: 'M_L_DUST', ref: 'ALPHA', x: 0, y: 24.5 },
   { key: 'M_L_PULS', ref: 'ALPHA', x: 0, y: 26 },
@@ -96,12 +96,12 @@ export const QUESTS = [
     for: 'The &6Electron-Beam Furnace&r melts metal in a vacuum with a beam, so it comes out purer than a coil could make it.',
     needs: 'A UHV hull, the clean casing and a vacuum system.',
     unlocks: 'Six-nines hafnium and tantalum for the single-crystal foundry.',
-    automate: 'Feed bars by ME; the vacuum pump runs on its own hatch.',
+    automate: 'Feed bars by ME; the vacuum pump has a hatch of its own.',
   }, [CLEAN]),
   gear('SX', 'single_crystal_foundry', 'Single-Crystal Foundry', ['EBF'], 4.5, 5.5, {
     for: 'The &6Single-Crystal Foundry&r pulls a metal blade as one grain, with no boundaries to fail.',
     needs: 'A UHV hull, the heatproof casing and pure metal from the beam furnace.',
-    unlocks: 'The single-crystal blade, the heart of a turbine wheel that survives a hot core.',
+    unlocks: 'The single-crystal blade: a turbine wheel of these survives a hot core.',
     automate: 'Pure metal by ME; keep a stock of blanks and send blades on by ME.',
   }, [HEAT]),
   prod('SXB', 'Single-Crystal Blade', 'grindless:sx_blade', ['SX'], 7, 5.5, ['A blade grown as a single grain. The UEV Lines chart shows how a turbine wheel is built from it.']),
@@ -150,7 +150,7 @@ export const QUESTS = [
     unlocks: 'The graphene modulator and the hBN emitter chip.',
     automate: 'Films by ME; the stacker returns finished chips in a chest.',
   }, [PHOTO]),
-  gear('PHOT', 'photonic_integration_hall', 'Photonic Integration Hall', ['SNSPD', 'VDW'], 4.5, 14.2, {
+  gear('PHOT', 'photonic_integration_hall', 'Photonic Integration Hall', ['SNSPD', 'VDW'], 4.5, 14.25, {
     for: 'The &6Photonic Integration Hall&r bonds waveguides, sources and detectors into one optical chip.',
     needs: 'A UHV hull, the photonic casing and every part the UEV chip asks for.',
     unlocks: 'The waveguide circuit, the quantum photonic chip and the optical computer.',
@@ -173,14 +173,14 @@ export const QUESTS = [
   }, [it('grindless:uev_fusion_casing'), it('grindless:hftacn_coil_block')], 180),
 
   // ------------------------------------------------------------------ quantum gases and entanglement
-  gear('QGL', 'quantum_gas_lab', 'Quantum Gas Lab', ['M_L_QGL'], 2, 20, {
+  gear('QGL', 'quantum_gas_lab', 'Quantum Gas Lab', ['M_L_QGL'], 2, 21, {
     for: 'The &6Quantum Gas Lab&r holds a cloud of atoms a millionth of a degree above zero.',
     needs: 'A UHV hull, the photonic casing and cooling lasers.',
     unlocks: 'Cold atoms, which the entanglement station uses as memory.',
     automate: 'Atoms by hatch and lasers by ME; the lab is slow and small, so run two.',
   }, [PHOTO]),
-  prod('COOL', 'Cold Atoms', 'grindless:li_cooling_laser', ['QGL'], 4.5, 20, ['The cooling laser that gets atoms cold. The UEV Lines chart shows its line.']),
-  gear('ENT', 'entanglement_station', 'Entanglement Station', ['COOL'], 7, 20, {
+  prod('COOL', 'Cold Atoms', 'grindless:li_cooling_laser', ['QGL'], 4.5, 21, ['The cooling laser that gets atoms cold. The UEV Lines chart shows its line.']),
+  gear('ENT', 'entanglement_station', 'Entanglement Station', ['COOL'], 7, 21, {
     for: 'The &6Entanglement Station&r in Earth orbit ties two photons together across a distance.',
     needs: 'A UEV hull, two UEV components, two optical computers and the photonic casing.',
     unlocks: 'The quantum repeater node in the circuits chapter.',

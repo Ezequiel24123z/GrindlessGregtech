@@ -1,0 +1,634 @@
+{
+	autofocus_id: "79361740BE1544E3"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "uev_machines"
+	group: "1D2C127632B5B46E"
+	icon: "gtceu:calutron"
+	id: "120C0E80B67A4EFE"
+	order_index: 2
+	quest_links: [
+		{
+			id: "57E86F0DF36B35F3"
+			linked_quest: "19984A527170882C"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "7E9F4176EAC90F36"
+			linked_quest: "19984A527170882C"
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			id: "3FB52A7A2BDB8BF0"
+			linked_quest: "19984A527170882C"
+			x: 0.0d
+			y: 5.5d
+		}
+		{
+			id: "1ACBB75D7D8AE2CC"
+			linked_quest: "19984A527170882C"
+			x: 0.0d
+			y: 8.0d
+		}
+		{
+			id: "3573CB036E165F4B"
+			linked_quest: "19984A527170882C"
+			x: 0.0d
+			y: 10.5d
+		}
+		{
+			id: "1C75942FA044AD5E"
+			linked_quest: "19984A527170882C"
+			x: 0.0d
+			y: 13.5d
+		}
+		{
+			id: "57808A10C101CEAF"
+			linked_quest: "19984A527170882C"
+			x: 0.0d
+			y: 15.0d
+		}
+		{
+			id: "78A5F189D475AB37"
+			linked_quest: "19984A527170882C"
+			x: 0.0d
+			y: 17.5d
+		}
+		{
+			id: "169BD730C1E4D9F8"
+			linked_quest: "19984A527170882C"
+			x: 0.0d
+			y: 21.0d
+		}
+		{
+			id: "56439EFEEA88C23F"
+			linked_quest: "52CC6BA393B05B31"
+			x: 0.0d
+			y: 23.0d
+		}
+		{
+			id: "777B3860E7DC8A9B"
+			linked_quest: "52CC6BA393B05B31"
+			x: 0.0d
+			y: 24.5d
+		}
+		{
+			id: "7584742DA4C54039"
+			linked_quest: "52CC6BA393B05B31"
+			x: 0.0d
+			y: 26.0d
+		}
+		{
+			id: "38620F6DC587AAEC"
+			linked_quest: "545210E1EB9C1D44"
+			x: 0.0d
+			y: 28.5d
+		}
+		{
+			id: "5C1D9EE6C2B91EAB"
+			linked_quest: "31F75527A44532C5"
+			x: 0.0d
+			y: 31.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["19984A527170882C"]
+			description: ["The &6Calutron&r bends a beam of ions in a magnet, and each isotope lands in its own cup. A UHV hull, the stable casing and the ion source parts, with power for the magnet. Calcium-48 and plutonium-244, the bullet and the target of every superheavy run. Feed the ore dust by ME and send each isotope to its own chest; the rest returns for another pass."]
+			icon: "gtceu:calutron"
+			id: "79361740BE1544E3"
+			rewards: [{ id: "395826FDC6229A5D", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "32893A9101F71182", item: "gtceu:calutron", type: "item" }
+				{ id: "117CC29E7E3FF1BE", item: "gtceu:stable_machine_casing", type: "item" }
+			]
+			title: "Calutron"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["79361740BE1544E3"]
+			description: ["The rare isotope that a superheavy run fires. The UEV Lines chart shows how much one run uses."]
+			icon: "gtceu:calcium_48_dust"
+			id: "74EDD2F1292FA7D3"
+			rewards: [{ id: "5FCA6F32FAE6E0E5", type: "xp", xp: 80 }]
+			tasks: [{ id: "5DB2914AC4ED3A3F", item: "gtceu:calcium_48_dust", type: "item" }]
+			title: "Calcium-48"
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["79361740BE1544E3"]
+			description: ["The heavy target the beam hits. Keep a stock of it before the cyclotron."]
+			icon: "gtceu:plutonium_244_dust"
+			id: "72B06FB4F8A19AD6"
+			rewards: [{ id: "5FBFCF7A4E779BB7", type: "xp", xp: 80 }]
+			tasks: [{ id: "5FBA6497D61A3BFE", item: "gtceu:plutonium_244_dust", type: "item" }]
+			title: "Plutonium-244"
+			x: 4.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["79361740BE1544E3"]
+			description: ["The &6Heavy Ion Cyclotron&r accelerates calcium-48 until it can fuse with a plutonium target. A UHV hull, the stable casing and the cyclotron parts, and a calcium-48 supply. Atoms of flerovium and heavier, which the recoil separator catches. Beam and target arrive by ME; the output is a few atoms, so route it straight to the separator."]
+			icon: "gtceu:heavy_ion_cyclotron"
+			id: "5BA764E947B7B979"
+			rewards: [{ id: "53BCABF510A06DA8", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1F940BF3B344C423", item: "gtceu:heavy_ion_cyclotron", type: "item" }
+				{ id: "52A320958EBC388E", item: "gtceu:stable_machine_casing", type: "item" }
+			]
+			title: "Heavy Ion Cyclotron"
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5BA764E947B7B979"]
+			description: ["The &6Recoil Separator&r picks the few new atoms out of the beam, in the milliseconds they live. A UHV hull, the stable casing and the cyclotron output. Counted superheavy atoms, ready for the chemistry lab. Link it to the cyclotron by pipe and hatch; sort the atoms by element."]
+			icon: "gtceu:recoil_separator"
+			id: "77D53467B126D5EE"
+			rewards: [{ id: "121C1B76AC1BE722", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3D96FDD271409FA1", item: "gtceu:recoil_separator", type: "item" }
+				{ id: "712DA0136A61369D", item: "gtceu:stable_machine_casing", type: "item" }
+			]
+			title: "Recoil Separator"
+			x: 7.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["77D53467B126D5EE"]
+			description: ["The &6Superheavy Chemistry Lab&r studies a handful of atoms before they decay. A UHV hull, the stable casing and a steady supply of counted atoms. The superheavy census, and the data the later lines ask for. Atoms come by hatch from the separator; log the results, then discard the decayed rest."]
+			icon: "gtceu:superheavy_chemistry_lab"
+			id: "7997AD3A03140BA9"
+			rewards: [{ id: "565E8472C7FE5E24", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "500E37F01188E578", item: "gtceu:superheavy_chemistry_lab", type: "item" }
+				{ id: "510AE8C544AF4DF5", item: "gtceu:stable_machine_casing", type: "item" }
+			]
+			title: "Superheavy Chemistry Lab"
+			x: 9.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7997AD3A03140BA9"]
+			description: ["A record of what the lab learned. The UEV Lines chart shows where it is spent."]
+			icon: "grindless:superheavy_census"
+			id: "126F9AD96DF01551"
+			rewards: [{ id: "1A6FBC887A3A2EB6", type: "xp", xp: 80 }]
+			tasks: [{ id: "37966AB81810C9C8", item: "grindless:superheavy_census", type: "item" }]
+			title: "Superheavy Census"
+			x: 9.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["19984A527170882C"]
+			description: ["The &6Megabar Press&r squeezes a sample between diamond anvils to a million atmospheres. A UHV hull, the robust casing and the diamond anvil parts. Superhydrides, which hold their superconducting state under pressure. Feed samples and nanotwinned diamond by ME; anvils wear, so keep spares."]
+			icon: "gtceu:megabar_press"
+			id: "108A7CEF368AEE45"
+			rewards: [{ id: "71F5485184FAA33B", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "781267B2B500E9CE", item: "gtceu:megabar_press", type: "item" }
+				{ id: "141AF73998C8BA7D", item: "gtceu:robust_machine_casing", type: "item" }
+			]
+			title: "Megabar Press"
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["108A7CEF368AEE45"]
+			description: ["A lanthanum superhydride, pressed in the megabar press. The UEV Lines chart shows what it feeds."]
+			icon: "gtceu:lay_superhydride_ingot"
+			id: "5E8BE7618AF5F077"
+			rewards: [{ id: "5283C20A65E56E75", type: "xp", xp: 80 }]
+			tasks: [{ id: "3EF92ADE27C994DE", item: "gtceu:lay_superhydride_ingot", type: "item" }]
+			title: "Squeeze a Hydride"
+			x: 4.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["19984A527170882C"]
+			description: ["The &6Electron-Beam Furnace&r melts metal in a vacuum with a beam, so it comes out purer than a coil could make it. A UHV hull, the clean casing and a vacuum system. Six-nines hafnium and tantalum for the single-crystal foundry. Feed bars by ME; the vacuum pump has a hatch of its own."]
+			icon: "gtceu:electron_beam_furnace"
+			id: "5BD47CE42EDF75A2"
+			rewards: [{ id: "30FFB5CB6AF66CBA", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7D11FCBBD5747E23", item: "gtceu:electron_beam_furnace", type: "item" }
+				{ id: "1D83938AFE630824", item: "gtceu:clean_machine_casing", type: "item" }
+			]
+			title: "Electron-Beam Furnace"
+			x: 2.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["5BD47CE42EDF75A2"]
+			description: ["The &6Single-Crystal Foundry&r pulls a metal blade as one grain, with no boundaries to fail. A UHV hull, the heatproof casing and pure metal from the beam furnace. The single-crystal blade: a turbine wheel of these survives a hot core. Pure metal by ME; keep a stock of blanks and send blades on by ME."]
+			icon: "gtceu:single_crystal_foundry"
+			id: "7674F530D0218D45"
+			rewards: [{ id: "3E1C6FCD826E5E70", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5DAAE11D07F2FE54", item: "gtceu:single_crystal_foundry", type: "item" }
+				{ id: "79A5CFF5F110C04B", item: "gtceu:heatproof_machine_casing", type: "item" }
+			]
+			title: "Single-Crystal Foundry"
+			x: 4.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["7674F530D0218D45"]
+			description: ["A blade grown as a single grain. The UEV Lines chart shows how a turbine wheel is built from it."]
+			icon: "grindless:sx_blade"
+			id: "3A453C8950865687"
+			rewards: [{ id: "5DD3025CAD84C50D", type: "xp", xp: 80 }]
+			tasks: [{ id: "1A797E70B6C6D48F", item: "grindless:sx_blade", type: "item" }]
+			title: "Single-Crystal Blade"
+			x: 7.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["19984A527170882C"]
+			description: ["The &6Nitride Magnet Works&r makes a magnet of iron and nitrogen, stronger than any rare earth. A UHV hull, the heatproof casing and iron from the Barnard line. Bonded magnets for the UEV motor and the Mk2 drive. Iron and nitrogen come by ME and pipe; bonding runs on a timer."]
+			icon: "gtceu:nitride_magnet_works"
+			id: "1128B01901C86B97"
+			rewards: [{ id: "56255DB55EF43917", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "71E96BA168B9ABD8", item: "gtceu:nitride_magnet_works", type: "item" }
+				{ id: "17EDC41534655381", item: "gtceu:heatproof_machine_casing", type: "item" }
+			]
+			title: "Nitride Magnet Works"
+			x: 2.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["1128B01901C86B97"]
+			description: ["An iron nitride magnet in a bonded body, ready for a motor. The UEV Lines chart shows which ones need it."]
+			icon: "grindless:bonded_fe16n2_magnet"
+			id: "35189CD5902AFFE4"
+			rewards: [{ id: "120E64B3576E82D9", type: "xp", xp: 80 }]
+			tasks: [{ id: "7BD48DE68E38D3A7", item: "grindless:bonded_fe16n2_magnet", type: "item" }]
+			title: "Bonded Magnet"
+			x: 4.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["19984A527170882C"]
+			description: ["The &6SiC Fibre Plant&r spins silicon carbide into a fibre as strong as steel and a quarter of the weight. A UHV hull, the clean casing and a spinning line. Fibre for the SiC composite plates that the CVI furnace infiltrates. Feed the precursor by pipe; fibre rolls out by ME."]
+			icon: "gtceu:sic_fibre_plant"
+			id: "34F0084064B3AF4F"
+			rewards: [{ id: "398CDAE86141C295", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3A10AB107DEC9890", item: "gtceu:sic_fibre_plant", type: "item" }
+				{ id: "393799D155907268", item: "gtceu:clean_machine_casing", type: "item" }
+			]
+			title: "SiC Fibre Plant"
+			x: 2.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["34F0084064B3AF4F"]
+			description: ["A spool of silicon carbide fibre. Keep a stock for the furnace."]
+			icon: "grindless:sic_fibre"
+			id: "58A72224E8A51DDA"
+			rewards: [{ id: "7824EB3EA7CF474B", type: "xp", xp: 80 }]
+			tasks: [{ id: "533A8B89BD0DC780", item: "grindless:sic_fibre", type: "item" }]
+			title: "SiC Fibre"
+			x: 2.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["34F0084064B3AF4F"]
+			description: ["The &6CVI Furnace&r fills a woven preform with gas that deposits carbide in the gaps. A UHV hull, the heatproof casing and a gas supply. SiC composite plates, and the HfTaCN coil that the stellar forge uses. Preforms arrive by ME; the cycle is long, so run several furnaces."]
+			icon: "gtceu:cvi_furnace"
+			id: "7B6FD0C43D93BA99"
+			rewards: [{ id: "5570EFE8ECF17B72", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1A13B7252BF62AB5", item: "gtceu:cvi_furnace", type: "item" }
+				{ id: "17C3DF234A3B97C8", item: "gtceu:heatproof_machine_casing", type: "item" }
+			]
+			title: "CVI Furnace"
+			x: 4.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["7B6FD0C43D93BA99"]
+			description: ["The hottest coil in the pack. The UEV Lines chart shows what it gives."]
+			icon: "grindless:hftacn_coil_block"
+			id: "76EFA041DAC4B333"
+			rewards: [{ id: "3AE1924D9EA3EDC1", type: "xp", xp: 80 }]
+			tasks: [{ id: "1411EEA706F9B0D8", item: "grindless:hftacn_coil_block", type: "item" }]
+			title: "HfTaCN Coil"
+			x: 7.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["76EFA041DAC4B333"]
+			description: ["The &6Stellar Forge&r is a furnace that holds a fragment of a star. A UEV hull, two UEV components, two optical computers and the HfTaCN coil block. The hottest recipes in the pack, which the Mk4 plasma line runs on. Fuel and heat sinks by ME; plan for the byproducts before you start."]
+			icon: "gtceu:stellar_forge"
+			id: "3875C96B236BA596"
+			rewards: [{ id: "5D071458EA723917", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "55C52864C928DD6C", item: "gtceu:stellar_forge", type: "item" }
+				{ id: "581996F27A9B9A0A", item: "grindless:hftacn_coil_block", type: "item" }
+			]
+			title: "Stellar Forge"
+			x: 9.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["19984A527170882C"]
+			description: ["The &6SNSPD Foundry&r grows a nanowire detector that counts single photons. A UHV hull, the photonic casing and superfluid helium for the cold stage. The single-photon detector in the circuits chapter. Helium by pipe; send finished detectors on by ME."]
+			icon: "gtceu:snspd_foundry"
+			id: "1DCFFEC97F5A28AF"
+			rewards: [{ id: "3EABC6E55043A77A", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "345ABB223607BFA0", item: "gtceu:snspd_foundry", type: "item" }
+				{ id: "32DEFC24DB72379C", item: "grindless:photonic_casing", type: "item" }
+			]
+			title: "SNSPD Foundry"
+			x: 2.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["19984A527170882C"]
+			description: ["The &6Van der Waals Stacker&r lays one atomic film on another, in the order the design asks for. A UHV hull, the photonic casing and films from the cleanroom. The graphene modulator and the hBN emitter chip. Films by ME; the stacker returns finished chips in a chest."]
+			icon: "gtceu:vdw_stacker"
+			id: "3EEACFBDD09FDD21"
+			rewards: [{ id: "162C0A1ADE83DA1A", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3F1ECDC8FB81A8B7", item: "gtceu:vdw_stacker", type: "item" }
+				{ id: "56106516C6459E28", item: "grindless:photonic_casing", type: "item" }
+			]
+			title: "Van der Waals Stacker"
+			x: 2.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["1DCFFEC97F5A28AF", "3EEACFBDD09FDD21"]
+			description: ["The &6Photonic Integration Hall&r bonds waveguides, sources and detectors into one optical chip. A UHV hull, the photonic casing and every part the UEV chip asks for. The waveguide circuit, the quantum photonic chip and the optical computer. Parts in matched counts by ME; keep a stock of finished chips and send them to the assembler."]
+			icon: "gtceu:photonic_integration_hall"
+			id: "1AC90115EC98790D"
+			rewards: [{ id: "75B303C7904D000F", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "70BDD4DE23FE3D83", item: "gtceu:photonic_integration_hall", type: "item" }
+				{ id: "5DCD4B328FFE1299", item: "grindless:photonic_casing", type: "item" }
+				{ id: "3E93BF3C348B2353", item: "gtceu:laminated_glass", type: "item" }
+			]
+			title: "Photonic Integration Hall"
+			x: 4.5d
+			y: 14.25d
+		}
+		{
+			dependencies: ["19984A527170882C"]
+			description: ["The &6Helium-3 Polariser&r aligns the spin of each nucleus, so more of them fuse. A UHV hull, the clean casing and a helium-3 supply. Polarised helium-3, the fuel of the Mk4 ring. Helium-3 by pipe; keep the polarised stock sealed and ready."]
+			icon: "gtceu:helium3_polariser"
+			id: "15578A4882F50B8B"
+			rewards: [{ id: "31D04D6B046A8987", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1B5E275D9B9CEF5D", item: "gtceu:helium3_polariser", type: "item" }
+				{ id: "727A402D2D486D44", item: "gtceu:clean_machine_casing", type: "item" }
+			]
+			title: "Helium-3 Polariser"
+			x: 2.0d
+			y: 17.5d
+		}
+		{
+			dependencies: ["15578A4882F50B8B"]
+			description: ["A bucket of polarised helium-3. Fusion at Mk4 starts from this."]
+			icon: "gtceu:polarised_helium_3_bucket"
+			id: "33096F5E17C7F716"
+			rewards: [{ id: "755BC53C955390F4", type: "xp", xp: 80 }]
+			tasks: [{ id: "51C1656AA08C0DEE", item: "gtceu:polarised_helium_3_bucket", type: "item" }]
+			title: "Polarised Helium-3"
+			x: 2.0d
+			y: 19.0d
+		}
+		{
+			dependencies: ["15578A4882F50B8B"]
+			description: ["The &6Mk4 Fusion Reactor&r is a ring that burns polarised helium-3 and deuterium into the most energy a reactor makes. A UEV hull, two UEV components, two optical computers, the UEV fusion casing and the HfTaCN coil block. The plasma and burn quests in the integration chapter. Fuel and coolant by pipe; build the plant before you light it."]
+			icon: "gtceu:uev_fusion_reactor"
+			id: "3C4381FD6FA32403"
+			rewards: [{ id: "1EB7C44FBD8DC722", type: "xp", xp: 180 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "35B078D6E5088C81", item: "gtceu:uev_fusion_reactor", type: "item" }
+				{ id: "3AB164C2E8DBEF20", item: "grindless:uev_fusion_casing", type: "item" }
+				{ id: "335C6539C0B3A778", item: "grindless:hftacn_coil_block", type: "item" }
+			]
+			title: "Mk4 Fusion Reactor"
+			x: 4.5d
+			y: 17.5d
+		}
+		{
+			dependencies: ["19984A527170882C"]
+			description: ["The &6Quantum Gas Lab&r holds a cloud of atoms a millionth of a degree above zero. A UHV hull, the photonic casing and cooling lasers. Cold atoms, which the entanglement station uses as memory. Atoms by hatch and lasers by ME; the lab is slow and small, so run two."]
+			icon: "gtceu:quantum_gas_lab"
+			id: "336F09E29287CDEA"
+			rewards: [{ id: "54AF3D2F84B0FEB8", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "174AFAD7C9162AED", item: "gtceu:quantum_gas_lab", type: "item" }
+				{ id: "7B6636E89FD154BF", item: "grindless:photonic_casing", type: "item" }
+			]
+			title: "Quantum Gas Lab"
+			x: 2.0d
+			y: 21.0d
+		}
+		{
+			dependencies: ["336F09E29287CDEA"]
+			description: ["The cooling laser that gets atoms cold. The UEV Lines chart shows its line."]
+			icon: "grindless:li_cooling_laser"
+			id: "147A35DB262693FF"
+			rewards: [{ id: "175D3FC4CDBBF1C7", type: "xp", xp: 80 }]
+			tasks: [{ id: "16A88D4229B57107", item: "grindless:li_cooling_laser", type: "item" }]
+			title: "Cold Atoms"
+			x: 4.5d
+			y: 21.0d
+		}
+		{
+			dependencies: ["147A35DB262693FF"]
+			description: ["The &6Entanglement Station&r in Earth orbit ties two photons together across a distance. A UEV hull, two UEV components, two optical computers and the photonic casing. The quantum repeater node in the circuits chapter. Ship the parts to orbit by ME and bring the nodes back."]
+			icon: "gtceu:entanglement_station"
+			id: "5D8B9A9839432298"
+			rewards: [{ id: "5B16504A2B469DC1", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "149EDA0FC2E491F1", item: "gtceu:entanglement_station", type: "item" }
+				{ id: "36BBF625A4664059", item: "grindless:photonic_casing", type: "item" }
+			]
+			title: "Entanglement Station"
+			x: 7.0d
+			y: 21.0d
+		}
+		{
+			dependencies: ["52CC6BA393B05B31"]
+			description: ["The &6Nebula Collector&r gathers gas from a nebula and sorts it by element. A UEV hull, two UEV components, two optical computers and the photonic casing. Gas streams that the Alpha Centauri lines consume. Run it on a pipe loop to the plant and send the surplus to a tank."]
+			icon: "gtceu:nebula_collector"
+			id: "35EB2F3BC6F8AEB8"
+			rewards: [{ id: "17921AAF6FF4A96E", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "34A9A2D26909AD43", item: "gtceu:nebula_collector", type: "item" }
+				{ id: "5A43B764A7FC6DD1", item: "grindless:photonic_casing", type: "item" }
+			]
+			title: "Nebula Collector"
+			x: 2.0d
+			y: 23.0d
+		}
+		{
+			dependencies: ["52CC6BA393B05B31"]
+			description: ["The &6Interstellar Dust Lab&r studies grains of dust that formed around other stars. A UEV hull, two UEV components, two optical computers and the photonic casing. The iron-60 record and the dust data the star charts use. Dust by ME; log the records and store the rest."]
+			icon: "gtceu:interstellar_dust_lab"
+			id: "58D016D6E9BAFE59"
+			rewards: [{ id: "3039FB2C6B9D067B", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "58D7AD17BA1A6047", item: "gtceu:interstellar_dust_lab", type: "item" }
+				{ id: "79A6D2C8364885FF", item: "grindless:photonic_casing", type: "item" }
+			]
+			title: "Interstellar Dust Lab"
+			x: 2.0d
+			y: 24.5d
+		}
+		{
+			dependencies: ["52CC6BA393B05B31"]
+			description: ["The &6Pulsar Timing Station&r keeps time with a pulsar and finds the way by it. A UEV hull, two UEV components, two optical computers and the photonic casing. The pulsar navigation chart that the way to Sirius B needs. The station asks for little by ME; keep a stock of charts for the gate."]
+			icon: "gtceu:pulsar_timing_station"
+			id: "530544BFDCF5D75E"
+			rewards: [{ id: "33EE8AC91B0EC6F0", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7525004BFC32D492", item: "gtceu:pulsar_timing_station", type: "item" }
+				{ id: "797A11823A9849BF", item: "grindless:photonic_casing", type: "item" }
+			]
+			title: "Pulsar Timing Station"
+			x: 2.0d
+			y: 26.0d
+		}
+		{
+			dependencies: ["545210E1EB9C1D44"]
+			description: ["The &6Carbonyl Refinery&r turns iron and carbon monoxide into a liquid and back, leaving a very pure metal. A UEV hull, two UEV components, two optical computers and the inert casing. Iron pentacarbonyl and pure iron, for the nitride magnets. Contain the carbon monoxide; keep the loop sealed and vented to a scrubber."]
+			icon: "gtceu:carbonyl_refinery"
+			id: "3664E92DBC4A97AB"
+			rewards: [{ id: "1F78323E49E5E7A6", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7F7A2B1C383ED0D8", item: "gtceu:carbonyl_refinery", type: "item" }
+				{ id: "593D5D39FDA7EF5A", item: "gtceu:inert_machine_casing", type: "item" }
+			]
+			title: "Carbonyl Refinery"
+			x: 2.0d
+			y: 28.5d
+		}
+		{
+			dependencies: ["3664E92DBC4A97AB"]
+			description: ["The carrier that purifies Barnard iron. Handle it as a toxic fluid."]
+			icon: "gtceu:iron_pentacarbonyl_bucket"
+			id: "321F1DE71E915C12"
+			rewards: [{ id: "77DE399F55ACF478", type: "xp", xp: 80 }]
+			tasks: [{ id: "3B976D09C20B58CD", item: "gtceu:iron_pentacarbonyl_bucket", type: "item" }]
+			title: "Iron Pentacarbonyl"
+			x: 4.5d
+			y: 28.5d
+		}
+		{
+			dependencies: ["31F75527A44532C5"]
+			description: ["The &6White Dwarf Spectrograph&r reads a dead star's light and from it the mass and radius. A UEV hull, two UEV components, two optical computers and the photonic casing. The mass-radius chart and the degenerate harvester. The station asks for little by ME; keep a stock of charts."]
+			icon: "gtceu:white_dwarf_spectrograph"
+			id: "565457BFBC2B7232"
+			rewards: [{ id: "147D8ECF0980A518", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7A1AEEE78D2068BF", item: "gtceu:white_dwarf_spectrograph", type: "item" }
+				{ id: "32EAF273ADACDE8A", item: "grindless:photonic_casing", type: "item" }
+			]
+			title: "White Dwarf Spectrograph"
+			x: 2.0d
+			y: 31.0d
+		}
+		{
+			dependencies: ["565457BFBC2B7232"]
+			description: ["The &6Degenerate Harvester&r takes matter from a white dwarf, in which atoms are crushed together. A UEV hull, two UEV components, two optical computers and the degenerate containment casing. Degenerate matter, which the containment works bottles. Put the plant behind a safe containment loop; never route this matter by plain pipe."]
+			icon: "gtceu:degenerate_harvester"
+			id: "3970BC63BB8C9A9F"
+			rewards: [{ id: "745528F2ED9D2076", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "51698E7020312155", item: "gtceu:degenerate_harvester", type: "item" }
+				{ id: "580B7DC1EC7E017A", item: "grindless:degenerate_containment_casing", type: "item" }
+			]
+			title: "Degenerate Harvester"
+			x: 4.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["3970BC63BB8C9A9F"]
+			description: ["The &6Containment Works&r bottles degenerate matter into a pellet that can be carried safely. A UEV hull, two UEV components, two optical computers and the degenerate containment casing. The degenerate pellet, the last item the gate at UEV asks for. Feed the matter from the harvester by hatch; ship pellets by ME."]
+			icon: "gtceu:containment_works"
+			id: "7F1047B6CDE89AFA"
+			rewards: [{ id: "33801BB8BE900B1E", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1499500AF70755CE", item: "gtceu:containment_works", type: "item" }
+				{ id: "1D09E958CED9E0A2", item: "grindless:degenerate_containment_casing", type: "item" }
+			]
+			title: "Containment Works"
+			x: 7.0d
+			y: 31.0d
+		}
+		{
+			dependencies: ["7F1047B6CDE89AFA"]
+			description: ["A pellet of degenerate matter, bottled. The gate at UEV is built from it."]
+			icon: "grindless:degenerate_pellet"
+			id: "3D4A477227A97A0D"
+			rewards: [{ id: "5D228A727C3D2C7A", type: "xp", xp: 80 }]
+			tasks: [{ id: "514D84B7A433C8AA", item: "grindless:degenerate_pellet", type: "item" }]
+			title: "Degenerate Pellet"
+			x: 9.5d
+			y: 31.0d
+		}
+	]
+	subtitle: ["Isotopes, a megabar of pressure, light and a new fusion reactor at home; then Alpha Centauri, Barnard b and a white dwarf."]
+	title: "UEV: Machines"
+}

@@ -801,7 +801,7 @@ export default gate({
           figs: [P.wcell('grindless:uhv_smes_cell', 'UHV SMES', 62914560000)],
         }),
         // UEV's cell: four UHV cells' worth, with the quantum repeater keeping the network in step
-        E('eqUevCell', 0, 8, 'uev_age', '5304F9E360A95261'),
+        E('eqUevCell', 0, 8, 'uev_integration', '5304F9E360A95261'),
         n('wuev', 2.25, 8, I('grindless:uev_smes_cell'), 'UEV SMES Cell', {
           kind: 'info', from: ['eqUevCell'], sub: 'Ninety-six UV batteries\' worth, the UEV wireless hatches work with it',
           desc: 'The network jumps to UEV only when every formed tower holds these.',
