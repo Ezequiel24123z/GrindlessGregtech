@@ -27,7 +27,6 @@
     if (C !== null) return C
     C = {
       Pos: Java.loadClass('net.minecraft.core.BlockPos'),
-      Sys: Java.loadClass('java.lang.System'),
       FPF: Java.loadClass('net.minecraftforge.common.util.FakePlayerFactory'),
       Profile: Java.loadClass('com.mojang.authlib.GameProfile'),
       UUID: Java.loadClass('java.util.UUID')
@@ -47,7 +46,7 @@
   }
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function cmd(dim, text) { return S.server.runCommandSilent('execute in ' + dim + ' run ' + text) }
-  function ms() { return Number(classes().Sys.nanoTime()) / 1e6 }
+  function ms() { return Date.now() }
   function r1(x) { return Math.round(x * 10) / 10 }
   function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }
   function put(dim, x, y, z, block) {

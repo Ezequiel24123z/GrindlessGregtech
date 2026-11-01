@@ -30,8 +30,7 @@
     C = {
       Pos: Java.loadClass('net.minecraft.core.BlockPos'),
       ArrayList: Java.loadClass('java.util.ArrayList'),
-      Meta: Java.loadClass('com.gregtechceu.gtceu.api.machine.MetaMachine'),
-      Sys: Java.loadClass('java.lang.System')
+      Meta: Java.loadClass('com.gregtechceu.gtceu.api.machine.MetaMachine')
     }
     return C
   }
@@ -48,7 +47,7 @@
   }
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function cmd(text) { return S.server.runCommandSilent('execute in ' + DIM + ' run ' + text) }
-  function ms() { return Number(classes().Sys.nanoTime()) / 1e6 }
+  function ms() { return Date.now() }
   function r1(x) { return Math.round(x * 10) / 10 }
   function bp(x, y, z) { return new (classes().Pos)(x, y, z) }
   function inBand(x, y, z) { return x >= X0 && x <= X1 && z >= 0 && z <= 63 && y >= Y0 && y <= Y1 }

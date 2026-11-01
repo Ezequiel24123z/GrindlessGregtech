@@ -23,13 +23,7 @@
   ]
   var LOADED = Date.now()
   var S = null
-  var C = null
 
-  function classes() {
-    if (C !== null) return C
-    C = { Rt: Java.loadClass('java.lang.Runtime') }
-    return C
-  }
   function errText(e) {
     var s = ''
     try { s = String(e.message || '') } catch (x) { }
@@ -44,10 +38,6 @@
   function note(name, detail) { console.info('GGTEST|' + NAME + '|' + name + '|NOTE|' + clean(detail)) }
   function cmd(dim, text) { return S.server.runCommandSilent('execute in ' + dim + ' run ' + text) }
   function r1(x) { return Math.round(x * 10) / 10 }
-  function usedMb() {
-    var rt = classes().Rt.getRuntime()
-    return Math.round((Number(rt.totalMemory()) - Number(rt.freeMemory())) / 1048576)
-  }
   function cityDim(v) { return 'gg_test:s0_city_' + v }
   function bandLoaded(level) {
     var n = 0
@@ -127,7 +117,6 @@
         S.level = S.server.getLevel(dim)
         if (S.level === null || S.level === undefined) { check('dimension_' + p.v, false, dim + ' is not loaded'); S.timedOut = true; return }
         S.gaps = []
-        S.mem0 = usedMb()
         S.t0 = Date.now()
         cmd(dim, 'forceload add ' + X0 + ' 0 ' + X1 + ' 63')
       },
@@ -142,9 +131,8 @@
         var max = 0
         for (var i = 0; i < g.length; i++) { mean += g[i]; if (g[i] > max) max = g[i] }
         mean = g.length ? mean / g.length : 0
-        var tail = ' | wall ' + ms + ' ms, ' + tk + ' ticks; loaded chunks ' + n + '/16; tick gap mean ' + r1(mean) + ' ms, max ' + max + ' ms; server average tick ' + r1(Number(S.server.getAverageTickTime())) +
-          ' ms; heap ' + S.mem0 + ' -> ' + usedMb() + ' MB'
-        if (n < 16) {
+        var tail = ' | wall ' + ms + ' ms, ' + tk + ' ticks; loaded chunks ' + n + '/16; tick gap mean ' + r1(mean) + ' ms, max ' + max + ' ms; server average tick ' + r1(Number(S.server.getAverageTickTime()))         + ' ms'
+               if (n < 16) {
           note('city_' + p.v, 'TIMEOUT: the band did not finish loading in ' + CEIL + ' ticks (' + p.w + 'x' + p.d + ' plots)' + tail)
         } else {
           var si = startInfo(S.level)
