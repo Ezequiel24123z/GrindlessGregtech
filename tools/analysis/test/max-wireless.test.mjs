@@ -73,7 +73,7 @@ const L27 = [
 
 test('L27: every older row is the last of its table, on its own free circuit (at most 32), with ids made by the chain', () => {
   for (const [file, , name, circuit] of L27) {
-    const rows = table(file).recipes.filter((r) => !['fcl_tape', 'fcl_coil', 'pump_buffered_tape', 'flux_pump_stator'].includes(r.name)); // MAX-A4 appends L39 rows after, MX-S3 L54
+    const rows = table(file).recipes.filter((r) => !['fcl_tape', 'fcl_coil', 'pump_buffered_tape', 'flux_pump_stator', 'kerr_coil_winding'].includes(r.name)); // MAX-A4 appends L39 rows after, MX-S3 L54
     const last = rows[rows.length - 1];
     assert.equal(last.name, name, file);
     assert.equal(last.circuit, circuit, file);

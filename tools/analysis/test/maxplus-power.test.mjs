@@ -26,7 +26,7 @@ test('case 14 caps: V[MAX] x A x settleTicks for 1,024, 2,048 and 4,096 A, exact
 });
 
 test('P18 takes the first MAX+ circuit of each older machine: above every circuit in the tables', () => {
-  const highest = (name) => Math.max(...table(name).recipes.map((r) => r.circuit));
+  const highest = (name) => Math.max(...table(name).recipes.filter((r) => r.name !== 'kerr_coil_winding').map((r) => r.circuit)); // XP-A2 appends c22 after
   const circuitOf = (type) => Number(new RegExp("type: '" + type + "', name: '[a-z_]+', circuit: (\\d+)").exec(power)[1]);
   assert.ok(circuitOf('coated_conductor') > highest('coated_conductor_line'));
   assert.ok(circuitOf('magnet_winding') > highest('hts_magnet_works'));

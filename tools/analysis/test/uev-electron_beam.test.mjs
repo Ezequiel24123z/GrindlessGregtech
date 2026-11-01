@@ -324,7 +324,8 @@ test('every new item is named and tooltipped in en_us and es_es, and every item 
     // OpV-B3a's c21, c22 and c32 rows are registered in opv/antimatter.js (read with the opv directory below)
     // OpV-A3's c22 rows (W-Re can and re-melt): the can items in opv/field_press.js, the chain lamina stack in opv/foundation.js
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'foundation.js'))
-    + read(path.join(kube, 'startup_scripts', 'grindless', 'max', 'foundation.js')) // MAX-A2's c25 bulk and c27 rod, registered by MAX-F
+    + read(path.join(kube, 'startup_scripts', 'grindless', 'maxplus', 'foundation.js')) // XP-A2's refractory_coated_web
+  + read(path.join(kube, 'startup_scripts', 'grindless', 'max', 'foundation.js')) // MAX-A2's c25 bulk and c27 rod, registered by MAX-F
     + fs.readdirSync(path.join(kube, 'startup_scripts', 'grindless', 'opv')).filter((f) => f.endsWith('.js')).map((f) => read(path.join(kube, 'startup_scripts', 'grindless', 'opv', f))).join('\n');
   // OpV-B2's c23 thaws OpV-A0's caged_ni_chain and OpV-A1's c21 takes A0's chain_mesh_weave: both registered in opv/chain_matter.js
   for (const [, r] of allRows().filter(([w]) => w.startsWith('electron_beam.json'))) {

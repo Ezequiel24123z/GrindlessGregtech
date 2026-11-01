@@ -30,9 +30,9 @@ test('membrane_line.js scripts run without errors and skip nothing', () => {
 test('the table has circuits 1-3 at VA[MAX] and each outputs its product plus a scrap byproduct', () => {
   assert.equal(table.dataKey, 'grindless_membrane_rolling');
   const rows = table.recipes;
-  assert.deepEqual(rows.map((r) => r.circuit), [1, 2, 3]);
+  assert.deepEqual(rows.map((r) => r.circuit), [1, 2, 3, 4]);
   rows.forEach((r) => assert.equal(r.eut, VA_MAX, r.name));
-  assert.deepEqual(rows.map((r) => r.name), ['superconducting_membrane', 'albedo_multilayer_panel', 'membrane_belt']);
+  assert.deepEqual(rows.map((r) => r.name), ['superconducting_membrane', 'albedo_multilayer_panel', 'membrane_belt', 'horizon_belt']);
 });
 
 test('the machine is gtceu:membrane_line with the membrane_rolling type and a 5 x 5 x 21 shape', () => {
@@ -43,7 +43,7 @@ test('the machine is gtceu:membrane_line with the membrane_rolling type and a 5 
 });
 
 test('lang keys of the machine, the type and every recipe exist in en_us and es_es', () => {
-  const lang = read('client_scripts/grindless/max_membrane_line_lang.js');
+  const lang = read('client_scripts/grindless/max_membrane_line_lang.js') + read('client_scripts/grindless/maxplus_components_lang.js'); // XP-A2 horizon_belt
   const keys = [...lang.matchAll(/\['([a-z0-9_.]+)', '/g)].map((m) => m[1]);
   for (const k of ['block.gtceu.membrane_line', 'gtceu.membrane_rolling', 'grindless.machine.membrane_line.tooltip.0',
     'emi.grindless.info.membrane_line.0', 'emi.grindless.info.membrane_line.1']) assert.ok(keys.includes(k), k);
