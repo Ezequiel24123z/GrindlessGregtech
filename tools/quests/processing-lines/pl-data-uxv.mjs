@@ -294,7 +294,7 @@ export default {
           ['l21_t4', I('gtceu:titanium_50_sponge_dust'), 'Ti-50 Sponge'],
           ['l21_t5', mach('gtceu:levitation_melter'), 'Levitation Melter', 'ours'],
           ['l21_t6', I('gtceu:titanium_50_dust'), 'Titanium 50'],
-          ['l21_t7', mach('gtceu:assembler'), 'Assembler', 'ours'],
+          ['l21_t7', mach('gtceu:ev_assembler'), 'Assembler', 'ours'],
           ['l21_t8', I('grindless:ti50_oven_charge'), 'Ti-50 Oven Charge'],
         ]),
         ...chain(6, [
