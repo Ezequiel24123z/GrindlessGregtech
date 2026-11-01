@@ -269,7 +269,7 @@ export default {
           kind: 'ours', from: ['hpic', 'ingap2', 'nqm'], sub: 'The same facility, a second pass',
         }),
         n('uhpic', 12.5, 2.25, I('gtceu:uhpic_wafer'), 'UHPIC Wafer', { from: ['wsf2'], sub: 'Every LuV hatch' }),
-        n('uhchip', 15, 2.25, I('gtceu:uhpic_chip'), 'UHPIC Chip', { kind: 'product', from: ['uhpic'], by: ['gtceu:cutter'], sub: 'Cutter; the fusion reactor\'s chips' }),
+        n('wchip', 15, 2.25, I('gtceu:uhpic_chip'), 'UHPIC Chip', { kind: 'product', from: ['uhpic'], by: ['gtceu:cutter'], sub: 'Cutter; the fusion reactor\'s chips' }),
         n('tjc2', 10, 5.25, I('grindless:triple_junction_cell'), 'Triple-Junction Cell', {
           kind: 'product', from: ['tjw'], by: ['gtceu:cutter'], sub: 'Cutter; the orbital solar panels take it',
         }),
