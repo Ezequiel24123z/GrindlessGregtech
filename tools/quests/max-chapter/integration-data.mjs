@@ -3,7 +3,7 @@
 // docs/eras/max.md, "Older machines in MAX", "Power", "Nothing one at a time", "AE2").
 // REPEAT and SMES moved here from max_age and keep their keys and ids. The machines of the era are taught in max_machines, the shell and the
 // horizon machines in max_horizon. AE2 has no new tier at MAX: the far rings of the platforms seed it, so its quest is a note.
-// Every row starts at a link to the max_age quest that opens it, and its first quest depends on that key.
+// Every row starts at a link to the max_age quest that opens it, and its first quest depends on the same age quest.
 // Positions: columns every 2, rows every 2 or more.
 const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
@@ -37,7 +37,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ cell and network
   {
     key: 'REPEAT', kind: 'machine', title: 'Strand Repeater', icon: 'grindless:horizon_strand_repeater',
-    deps: ['I_L_NET'], x: 2, y: 0,
+    deps: ['STRAND'], x: 2, y: 0,
     teach: {
       for: 'The &6Horizon Strand Repeater&r keeps the wireless network in step across the galaxy. Without one in each tower the MAX tier cannot reach the platforms at the centre.',
       needs: 'Horizon strand from the way in, and the assembly hall on two OpV hatches.',
@@ -78,7 +78,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the parallel hatch
   {
     key: 'PARMAX', kind: 'machine', title: 'The MAX Parallel Hatch', icon: 'gtceu:max_parallel_hatch',
-    deps: ['I_L_PAR'], x: 2, y: 3,
+    deps: ['START'], x: 2, y: 3,
     teach: {
       for: 'The &6MAX Parallel Hatch&r is the widest in the pack. Behind it a mega machine runs a whole hall of recipes at once.',
       needs: 'A mega machine that takes parallel hatches, and the power for the width you ask for.',
@@ -93,7 +93,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ AE2
   {
     key: 'I_AE2', kind: 'milestone', title: 'AE2 at the Centre', icon: 'ae2:controller',
-    deps: ['I_L_AE2'], x: 2, y: 5,
+    deps: ['GATE14'], x: 2, y: 5,
     desc: [
       'AE2 has no new tier at MAX. The far rings of the platforms around the hole seed a network of their own, and the wireless network carries it home.',
     ],
@@ -104,7 +104,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ power at the centre
   {
     key: 'I_WINCH', kind: 'process', title: 'Power From the Spin', icon: 'gtceu:geroch_winch',
-    deps: ['I_L_PWR'], x: 2, y: 7,
+    deps: ['SPIN'], x: 2, y: 7,
     teach: {
       for: 'The &6Geroch Winch&r lowers a tether over the horizon and takes power from the spin of the hole. It wears its tether as it works.',
       needs: 'A formed winch at the black hole orbit and a stock of tethers.',
@@ -145,7 +145,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ older machines
   {
     key: 'I_OM_UXV', kind: 'process', title: 'Disc and Plasma', icon: 'gtceu:accretion_disk_skimmer',
-    deps: ['I_L_OM1'], x: 2, y: 10,
+    deps: ['GATE14'], x: 2, y: 10,
     teach: {
       for: 'The &6Accretion Disk Skimmer&r, &6Plasma Mass Filter&r, &6FRC Former&r and &6BZ Dynamo&r each take a mode that works on matter from the disc: hot flow, filtered flow, flux-loaded plasma and a dynamo fed by it.',
       needs: 'The UXV controllers you already own, and the hot flow from the black hole orbit.',
@@ -160,7 +160,7 @@ export const QUESTS = [
   },
   {
     key: 'I_OM_UIV', kind: 'process', title: 'Radiators and Writers', icon: 'gtceu:femtosecond_writer',
-    deps: ['I_L_OM2'], x: 2, y: 12,
+    deps: ['GATE14'], x: 2, y: 12,
     teach: {
       for: 'The &6Droplet Radiator Works&r and &6Femtosecond Writer&r each take a MAX mode: nozzle plates for the shell radiator, and writes on the new die.',
       needs: 'The UIV controllers you already own.',
@@ -173,7 +173,7 @@ export const QUESTS = [
   },
   {
     key: 'I_OM_UEV', kind: 'process', title: 'Press and Harvest', icon: 'gtceu:degenerate_harvester',
-    deps: ['I_L_OM3'], x: 2, y: 14,
+    deps: ['START'], x: 2, y: 14,
     teach: {
       for: 'The &6Megabar Press&r and &6Degenerate Harvester&r each take a MAX row: the press shapes the heavy plates of the shell and the harvester gathers degenerate matter for the engine\'s slug.',
       needs: 'The UEV controllers you already own and matter from the orbit.',
@@ -186,7 +186,7 @@ export const QUESTS = [
   },
   {
     key: 'I_OM_UHV', kind: 'process', title: 'Sinter the Segments', icon: 'gtceu:spark_plasma_sinterer',
-    deps: ['I_L_OM4'], x: 2, y: 16,
+    deps: ['START'], x: 2, y: 16,
     teach: {
       for: 'The &6Spark Plasma Sinterer&r takes a row that sinters the cores of the shell segments.',
       needs: 'The UHV controller you already own and the powders of the belt.',
@@ -199,7 +199,7 @@ export const QUESTS = [
   },
   {
     key: 'I_OM_UV', kind: 'process', title: 'Cavities for the Drivers', icon: 'gtceu:srf_cavity_works',
-    deps: ['I_L_OM5'], x: 2, y: 18,
+    deps: ['SPIN'], x: 2, y: 18,
     teach: {
       for: 'The &6SRF Cavity Works&r takes a row for the cavities of the drivers and the coil. Fiction: the drivers and the coil are built at the scale of the solar system.',
       needs: 'The UV controller you already own and the niobium of the platforms.',
@@ -212,7 +212,7 @@ export const QUESTS = [
   },
   {
     key: 'I_OM_EV', kind: 'process', title: 'Cascade of the Belt', icon: 'gtceu:extraction_cascade',
-    deps: ['I_L_OM6'], x: 2, y: 20,
+    deps: ['EPHEM'], x: 2, y: 20,
     teach: {
       for: 'The &6Extraction Cascade&r takes a row that sorts belt rock into its metals before the furnace takes it.',
       needs: 'The EV controller you already own and rock from the belt.',

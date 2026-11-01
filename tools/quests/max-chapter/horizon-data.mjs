@@ -5,7 +5,7 @@
 // The era's other machines, circuits and components are in max_machines and max_circuits. The horizon lock opens MAX+ and rolls no credits.
 // Fixed keys (other chapters link to them): SHELL, LOCK.
 // Named fiction is marked in one line: the stationary horizon, Sagittarius A*'s spin and the mirror shell.
-// The row starts at a link to the max_age exit quest, and its first quest depends on that key.
+// The row starts at a link to the max_age exit quest, and its first quest depends on the same age quest.
 // Positions: columns every 2, rows every 2 or more; the four horizon machines stand in a column at x = 16 and their products one column on.
 const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
@@ -30,7 +30,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the shell
   {
     key: 'GRAD', kind: 'step', title: 'Shell Gradient Map', icon: 'grindless:shell_gradient_map',
-    deps: ['I_L_IN'], x: 2, y: 0,
+    deps: ['J_EXIT'], x: 2, y: 0,
     desc: [
       'The &6Shell Gradient Map&r shows where on the shell the field is steepest, so the first segments go where they are needed.',
     ],
