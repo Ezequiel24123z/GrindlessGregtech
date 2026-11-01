@@ -100,6 +100,11 @@ export function dimensionEra(conditions, ctx) {
   return best ?? 0;
 }
 
+/** Era index of one dimension id: the first era folder naming it (0 when none does), as `dimensionEra` reads it. */
+export function dimensionIdEra(dimension, ctx) {
+  return ctx.startup.get(dimension) ?? 0;
+}
+
 /** Era index a player needs to run a normalized recipe {type, eut, conditions}. */
 export function recipeEra(r, ctx) {
   const volt = r.eut ? tierOfEut(r.eut) : 0;

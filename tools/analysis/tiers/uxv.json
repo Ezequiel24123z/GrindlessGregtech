@@ -1735,8 +1735,9 @@
         "grindless:sgr1806_orbit"
       ],
       "exact": true,
+      "optional": true,
       "package": "B4",
-      "note": "OpV-A0 rows in B4's file (uxv/vela_pasta.js, older rows under the DECISIONS.md placement rule, opv.md:70); recipe.dimension(sgr1806_orbit) only."
+      "note": "Optional: the OpV-A0 chain-matter rows never landed (v0.17.0 lacks them too), so the check has nothing to read. OpV-A0 rows in B4's file (uxv/vela_pasta.js, older rows under the DECISIONS.md placement rule, opv.md:70); recipe.dimension(sgr1806_orbit) only."
     },
     {
       "id": "site-cas-a",
