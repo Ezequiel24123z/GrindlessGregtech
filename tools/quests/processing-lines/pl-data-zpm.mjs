@@ -9,7 +9,7 @@ export default {
   subtitle: 'Naquadria and its fuel, actinides, europium, carbon and qubits, and the gas giants.',
   icon: 'gtceu:naquadria_refinery',
   focus: 'refinery',
-  bands: [['naquadria', 'actinides'], ['europium', 'qubits'], ['saturn', 'uranus']],
+  bands: [['naquadria', 'actinides'], ['europium', 'qubits'], ['saturn', 'uranus'], ['power', 'duranium']],
   clusters: {
     naquadria: {
       name: 'Naquadria and its fuel',
@@ -106,6 +106,28 @@ export default {
         n('slurry', 2.5, 0.75, F('gtceu:diamond_slurry'), 'Diamond Slurry', { kind: 'product', from: ['usiphon'] }),
         n('sep', 5, 0.75, M('gtceu:slurry_separator'), 'Slurry Separator', { kind: 'ours', from: ['slurry'] }),
         n('dseed', 7.5, 0.75, I('grindless:ice_giant_diamond_seed'), 'Ice Giant Diamond Seed', { kind: 'product', from: ['sep'], end: 'qubit plates' }),
+      ],
+    },
+    power: {
+      name: 'Helium-3 power',
+      nodes: [
+        n('pd2', 0, 0, F('gtceu:deuterium'), 'Deuterium', { kind: 'raw', sub: 'From the Saturn column' }),
+        n('phe3', 0, 1.5, F('gtceu:helium_3'), 'Helium-3', { kind: 'raw', sub: 'From the Saturn column' }),
+        n('mk2', 2.5, 0.75, M('gtceu:zpm_fusion_reactor'), 'Fusion Reactor Mk2', { kind: 'ours', from: ['pd2', 'phe3'], by: ['gtceu:fusion_reactor'] }),
+        n('hpl', 5, 0.75, F('gtceu:helium_plasma'), 'Helium Plasma', { kind: 'product', from: ['mk2'] }),
+        n('dec', 7.5, 0.75, M('gtceu:direct_energy_converter'), 'Direct Energy Converter', { kind: 'ours', from: ['hpl'], by: ['gtceu:direct_conversion'], desc: 'Plasma straight to current, with no turbine between.' }),
+        n('phe', 10, 0.75, F('gtceu:helium'), 'Helium', { kind: 'ret', from: ['dec'], sub: 'Back to the Saturn column' }),
+      ],
+    },
+    duranium: {
+      name: 'Duranium and the quench',
+      nodes: [
+        n('gal', 0, 0, F('gtceu:gallium'), 'Gallium', { kind: 'raw', sub: 'From the gallium arsenide line' }),
+        L('rad', 0, 1.5, 'pl_iv:radon'),
+        n('mk2b', 2.5, 0.75, M('gtceu:zpm_fusion_reactor'), 'Fusion Reactor Mk2', { kind: 'ours', from: ['gal', 'rad'], by: ['gtceu:fusion_reactor'] }),
+        n('duf', 5, 0.75, F('gtceu:duranium'), 'Duranium Plasma', { kind: 'product', from: ['mk2b'] }),
+        n('arg', 5, 2.25, F('gtceu:argon'), 'Argon', { kind: 'raw', sub: 'From the Mars processor' }),
+        n('duplate', 7.5, 0.75, I('gtceu:duranium_plate'), 'Duranium Plate', { kind: 'product', from: ['duf', 'arg'], by: ['gtceu:plasma_quench'], end: 'ZPM hulls and the frames' }),
       ],
     },
   },
