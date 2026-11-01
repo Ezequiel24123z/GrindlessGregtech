@@ -350,7 +350,7 @@ Solved on the batch dump with `--table` (bands A to C already in it); the predic
 
 **Quantisation cliff (a limit of the mechanism, not a defect):** the pass scales a count with `ceil(n * f)`, so every factor above 1 turns each count of 1 into 2 and the index jumps by about 2x; factors from 1.001 up to the point where counts of 2 become 3 give nearly the same index. No continuous factor lands inside the 10% tolerance for UHV or UIV. The solver therefore keeps, per era, the closer of the two nearest candidates (1.0 and the first factor above it): UHV 1.001, UEV 1.0, UIV 1.0. The all-1 set would give 0.620 / 0.502 / 0.344 of target; UHV 1 / UEV 1 / UIV 1.001 would give 0.62 / 0.50 / 0.79. Eras compound through era-aware pricing, so the choice for one era moves the next. P2-Z re-solves the whole set and may reopen these three. Item and fluid factors are equal (capacity forced no split).
 
-Predicted later eras with this set (batch dump plus `--table`; each is re-solved by its own band, P2-Z last): UXV 22,316 (target 28,610, 0.780), OPV 310 (71,526, 0.004), MAX 2,499 (178,814, 0.014). The OPV and MAX cores are still anomalously cheap (they skip earlier chains), a problem for their own bands.
+Predicted later eras with this set (batch dump plus `--table`; each is re-solved by its own band, P2-Z last): UXV 22,316 (target 28,610, 0.780), OPV 310 (71,526, 0.004), MAX 2,499 (178,814, 0.014). The OPV and MAX cores are still anomalously cheap (they skip earlier chains), a problem for their own bands. Band E explains and fixes this: see *Band E (UXV, OpV, MAX)* below.
 
 ### Removed bypasses and kept exceptions
 
@@ -394,3 +394,114 @@ The 118 inputs whose count is higher in the T1 dump than in the batch dump each 
 - The `capacity-lint` circuit-slot gap above (`lib/capacity.mjs`, prohibited) needs its own package.
 - Rows in the static `capacity_known.json` are other bands.
 - The EMI coverage expectation was regenerated (three lines: `cvd_diamond_plate`, `kh2po4_dust`, `ktp_flux`); the integrator regenerates it again on merge.
+
+## Band E (UXV, OpV, MAX)
+
+Package P2-E. The tables `uxv.json`, `opv.json` and `max.json` are on. Targets (3 x 2.5^n): UXV 28,610, OpV 71,526, MAX 178,814.
+
+### The anomaly: routes, not pricing
+
+The OpV and MAX cores sat at 0.4% and 1.4% of target because their component recipes skipped the earlier chains. The matrix priced them correctly.
+
+- Every UXV and UIV component consumes the previous tier's same-kind component, so cost compounds from era to era.
+- The OpV components were plain assembler recipes built from a few OpV-era intermediates (cost 1 to 30 each). They took no UXV, UIV or earlier component or circuit.
+- The MAX components took only MAX parts, and no OpV component.
+- Cause: the pre-Reforge owner rule "OpV and MAX recipes never take lower-tier components or circuits" (`docs/eras/opv.md` lines 183, 1091, 1291, 1541; `docs/eras/max.md` lines 783, 902). AGENTS.md says the Reforge rules win, so the rule is lifted for these two eras.
+- The core index is the median over hull, motor, pump, piston, conveyor, robot arm, emitter, sensor and field generator, so one cheap item among several does not move it; all of them were cheap.
+
+| Core item (score before the fix) | OpV | MAX |
+|---|---|---|
+| motor | 49 | 991 |
+| pump | 191 | 1,241 |
+| piston | 130 | 1,102 |
+| conveyor | 116 | 4,124 |
+| robot arm | 327 | 3,354 |
+| emitter | 95 | 560 |
+| sensor | 86 | 509 |
+| field generator | 317 | 3,131 |
+| hull | about 107k (from the UXV casing) | about 600k |
+
+Fix (commit "Cost matrix: the OpV and MAX cores price through the earlier chain"):
+
+- OpV motor, pump, piston, robot arm, emitter, sensor and field generator each take one `gtceu:uxv_<kind>` (`opv/components.js`, `opv/field_press.js`).
+- MAX motor, pump, piston, robot arm, emitter, conveyor module, sensor and field generator each take one `gtceu:opv_<kind>` (`max/components.js`, `max/components_late.js`).
+- The OpV conveyor and fluid regulator keep their inputs: the native probe in `tools/test/` (prohibited) hardcodes the conveyor's inputs.
+- The OpV field generator keeps its single soldering alloy input (`gtceu:soldering_alloy_ingot`) after an early slip that added a second fluid.
+- Pinning tests changed: `opv-components`, `opv-field_press`, `max-validator`, and `opv-bulge_relay` (the hull test now pins the item ids and reads count floors, because `opv.json` raises the counts).
+
+### Factors and core index
+
+| Era | Factor | Index before (band D) | Index after | Target | Ratio | Nearest other factor |
+|---|---|---|---|---|---|---|
+| UXV | **1** | 22,316 | 22,316 | 28,610 | 0.780 | 1.001: 42,624 (1.490) |
+| OpV | **1.001** (item and fluid) | 310 | **85,795** | 71,526 | 1.200 | 2.083: 157,321 (2.20) |
+| MAX | **1** | 2,499 | **120,043** | 178,814 | 0.671 | 1.001: 293,204 (1.640) |
+
+- The prediction (solver on the batch dump plus the route fix) was UXV 22,316, OpV 85,796 and MAX 120,044. The T1 dump gives 22,316, 85,795 and 120,043 (the solver on the T1 dump). The one-point differences (85,795 against 85,796, 120,043 against 120,044) come from the capacity edits made after the prediction.
+- UXV and MAX tables scale nothing at factor 1; their change comes from the route fix and band D. They stay on so that P2-Z can raise the factor and so that the pass lists their keys.
+- Quantisation cliff: `ceil(n * f)` turns every 1 into 2 above f = 1, so UXV and MAX jump by about 1.9x and 2.4x at the first step. No factor lands inside 10% for UXV (0.78 against 1.49) or MAX (0.67 against 1.64). The closer of the two is kept (1.0 for both). OpV 1.001, 1.059, 1.270 and 1.424 all give about 85.8k; the next step, 2.083, is further away.
+- The per-item scores on the T1 dump (before the factor, because UXV and MAX are at 1):
+
+| Item | UXV | OpV | MAX |
+|---|---|---|---|
+| hull | 128,096 | 451,690 | 611,226 |
+| motor | 11,106 | 22,327 | 23,319 |
+| pump | 12,936 | 70,766 | 94,335 |
+| piston | 9,251 | 63,306 | 86,736 |
+| conveyor | 10,474 | 67,019 | 209,132 |
+| robot arm | 41,606 | 277,010 | 410,733 |
+| emitter | 30,260 | 60,734 | 61,456 |
+| sensor | 10,055 | 20,306 | 20,977 |
+| field generator | 60,815 | 243,488 | 400,849 |
+
+The OpV and MAX motor and sensor stay about 3x below the pump or piston: they consume a cheap UXV or OpV part with a light own chain. This is a route question for P2-Z or a later package, not a factor.
+
+### Removed bypasses and kept exceptions
+
+None removed: no `remove`, `exclude`, `include` or `override` entry in the three tables. At factor 1 the solver lists 61 UXV and MAX rows as bypasses; they are an artefact of the factor being 1 (nothing is scaled). The only real unscaled routes are the wire drawing rows `grindless:pasta_drawing/strand_drawing` and `grindless:pasta_drawing/horizon_wire_drawing`; OpV has none. Raise them with the factor in P2-Z. `gtceu:assembler/energy_hatch_4a_uxv` and `uxv_universal_circuit` are normal GTM upgrade and conversion recipes, not bypasses.
+
+### Capacity: all UXV, OpV and MAX entries of `capacity_known.json` emptied
+
+Static `capacity-lint --pack pack` reports ok: 3,374 recipes, 8 known violations (other bands), 1 warning (`mixer/zblan` fluorine, not ours). Dump mode on the T1 dump: errors 51 before and after, cost-curve overflows 0 at every UXV, OpV and MAX row (OpV 38 scaled recipes, UXV and MAX 0).
+
+| Row | Fix |
+|---|---|
+| `opv/wireless.js` `chain_strand_repeater`; `max/wireless.js` `horizon_strand_repeater`; `uxv/vela_pasta.js` `pasta_strand_repeater` | solder fluid becomes 1x `gtceu:soldering_alloy_ingot`; lubricant 100 stays the one fluid |
+| `uxv/vela_pasta.js` `finemet_toroid`, `uxv_voltage_coil` | epoxy fluid 144 becomes 1x `gtceu:epoxy_ingot` |
+| `uxv/uxv_parts.js` `uxv_strain_wave_gear`; `gum_metal_flexspline` lathe | the second fluid is dropped (lubricant 250, lathe fluid) |
+| `uxv/uxv_parts.js` `tmr_encoder` | solder fluid becomes 1x `gtceu:soldering_alloy_ingot` |
+| `uxv/spin_feed.js` seven target rows | `SOLDER` is the ingot item (1x); the argon 1000 fluid stays |
+| `spin_deposition.json` `krf_discharge_tube_blank`, `pulsed_power_head` | solder fluid becomes 1x and 2x ingot |
+| `spin_deposition.json` `cofe_target` | the solder fluid is dropped and `copper_foil` x4 removed (9 items) |
+| `uxv/superheavy.js` spark plasma sintering rows | the argon fluid is dropped (the machine takes 0 fluid) |
+| `antimatter_opv.json` `kr_tripler_cell` | the helium 1000 purge is dropped; krypton 1000 stays |
+| `opv/pathfinder.js` `xray_timing_head` | outputs only 3x `xray_timing_head`; the assembler has one item output slot |
+
+`gtceu:assembler` takes 9 items, 1 item output and 1 fluid; `gtceu:lathe` 1 item in, 2 out, no fluid.
+
+### Dropped inputs
+
+The UXV, OpV and MAX ids of `00_dropped_inputs.csv` are gone from the T1 server log (28 recipe warnings remain, none from `uxv`, `opv` or `max`; they come from `ev/mega_ore_refinery.js`, `zpm/*` and `lookup_collisions.js`). Most were the second fluid and the extra item slot above. The `srf_driver_module` change below is a route fix, not a dropped input.
+
+### Routes
+
+At OpV the table raises 234 item and 54 fluid inputs in 38 recipes (UXV and MAX raise none at factor 1). Every raised input has a producer in the T1 dump: reachability gate 1,064 of 1,065 (the one warning is `gcyr:keycard`, a packager output), auto 401 of 401, eras 10 of 10, no new unreachable item. The inputs are OpV-era chain intermediates and UXV components, each made by an assembler, assembly line or an earlier-era multiblock recipe of the same chain.
+
+### Depth loop caused by the route fix (recipe quality)
+
+After the route fix the chain `darmstadtium_rotor` to `uhv_electric_pump` to `uev` to `uiv` to `uxv` to `opv_electric_pump` to `srf_driver_module` to `horizon_phase_lock` to a chanced `fatigued_vo2_sheet` byproduct, back to `near_net_darmstadtium_rotor`, formed a loop of 975 recipes. `depthMap` in `tools/analysis/lib/recipe_quality.mjs` cuts loops, which dropped the rotor's depth from 9 to 1 and the UHV fluid regulator below its floor of 8 (`C-COMPLEX`). `srf_driver_module` was the only loop-closing consumer of `opv_electric_pump`, so it now takes 2x `gtceu:opv_electric_motor` instead (`max/synchroniser.js`). The tool is prohibited here, so the recipe was changed. The OpV and UXV motor, piston, robot arm and sensor are still inside a loop; this affects no item that is checked today.
+
+### For P2-Z (the whole curve)
+
+- UHV 1.336 of target (2,446) and UIV 0.700 (8,014) from band D.
+- UXV 0.780 and MAX 0.671 from the quantisation cliff; OpV 1.200.
+- The OpV hull costs about 450k against a core index of 86k, because it comes from the UXV casing; the hull dominates no median, but it is an outlier.
+- Wire drawing rows (`pasta_drawing/*`) are unscaled routes; raise them with the factor.
+- Watch the depth loop above when more tiers chain.
+- OpV conveyor and fluid regulator do not take the UXV counterpart (native probe, prohibited); a later package with the probe in scope can finish that.
+
+### Notes and risks
+
+- `grindless:rejected_timing_head` has no producer now. Its recovery recipe `rejected_timing_head_recovery` (`ev/extraction_cascade.js` lines 309 to 316, prohibited) is dead. The EMI coverage expectation was regenerated for this one line (`rejected_timing_head` is made only by `emi:info`).
+- `docs/eras/opv.md`, `docs/eras/max.md` and the `tiers/*.json` validators still state the old no-lower-component rule; the integrator owns them.
+- Proposed DECISIONS line: OpV and MAX core components take the same-kind previous-tier component; the old no-lower-component rule is lifted for them.
