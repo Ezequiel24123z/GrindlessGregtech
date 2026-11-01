@@ -10,7 +10,18 @@
     "sourceAsBase": true,
     "euWeight": 0,
     "freeEpsilon": 0.0001,
-    "topContributors": 3
+    "topContributors": 3,
+    "shapedCells": true
+  },
+
+  "curve": {
+    "note": "Phase 2 cost curve (DECISIONS.md:708): the core index of era n (MV = 0) should be anchor x rate^n. --solve finds per-era factors for it within tolerance; fluidFactorRatio is fluid factor / item factor.",
+    "anchor": 3,
+    "rate": 2.5,
+    "fluidFactorRatio": 1,
+    "tolerance": 0.1,
+    "solveTolerance": 0.03,
+    "maxIterations": 7
   },
 
   "excludeRecipes": {

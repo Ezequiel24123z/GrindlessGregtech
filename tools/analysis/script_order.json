@@ -4,6 +4,7 @@
                   "server_scripts/grindless/data/greenhouse.js":  100,
                   "server_scripts/grindless/data/veins.js":  100,
                   "server_scripts/grindless/ev/combined_cycle_and_hot_mill.js":  -200,
+                  "server_scripts/grindless/integration/cost_curve.js":  -300,
                   "server_scripts/grindless/integration/hidden.js":  -100,
                   "server_scripts/grindless/lib/compose.js":  1000,
                   "server_scripts/grindless/lib/wireless_adapters.js":  1000,

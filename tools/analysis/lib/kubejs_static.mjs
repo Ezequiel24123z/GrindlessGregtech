@@ -158,10 +158,21 @@ function recipeWrapper(rec, onRead) {
     getOrCreateId: () => rec.i,
     get id() { return rec.i; },
     get type() { return rec.t; },
+    // KubeJS 2001 hands RecipeJS.json, a Gson JsonObject: String(json) is its text, add(key, value) sets a member
     get json() {
       onRead(rec.i);
-      return JSON.stringify(rec.j);
+      return {
+        toString: () => JSON.stringify(rec.j),
+        add: (k, v) => { rec.j[k] = v; },
+        get: (k) => (rec.j[k] === undefined ? null : rec.j[k]),
+        has: (k) => rec.j[k] !== undefined,
+      };
     },
+    // RecipeJS.save() marks the JSON as changed; set(key, value) goes through the component and serialize() writes it back
+    save() { rec.saved = true; },
+    hasChanged: () => rec.saved === true,
+    serialize() {},
+    set(k, v) { rec.j[k] = v; rec.saved = true; },
     toString: () => `${rec.i}[${rec.t}]`,
   };
 }
@@ -381,6 +392,7 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
     toString: (j) => JSON.stringify(j),
     write: () => {},
     parse: (s) => JSON.parse(String(s)),
+    parseRaw: (s) => JSON.parse(String(s)),
   };
   const javaClasses = {
     'java.util.ArrayList': function (init) { return javaList(init && typeof init.length === 'number' ? Array.from(init) : []); },
@@ -864,7 +876,12 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
     structures: { structures: JSON.parse(JSON.stringify((global_.grindless && global_.grindless.structures) || {}, (k, v) => (typeof v === 'function' ? undefined : v))) },
     info: { format: 'gg-static-1', source: 'tools/analysis/lib/kubejs_static.mjs' },
   };
-  return { docs, errors, logs, handlers, lang, registry, recipeFiles, removals, blockTags, originalsRead, global: global_ };
+  return {
+    docs, errors, logs, handlers, lang, registry, recipeFiles, removals, blockTags, originalsRead, global: global_,
+    // the originals a script rewrote (save()/set()) and removed, for the cost-curve parity test
+    originalsChanged: new Map(originalList.filter((o) => o.saved).map((o) => [o.i, o.j])),
+    originalsRemoved: new Set(removedOriginals),
+  };
 }
 
 /**

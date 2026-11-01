@@ -13,6 +13,19 @@
 //   --why      an item id (comma list): prints the items nothing can make that block it (debug aid for unreachable key items; writes nothing).
 //   --trace    an item id (comma list): prints the cheapest recipe chain with per-unit costs, 5 levels deep (debug aid; writes nothing).
 //
+// Cost curve (Project Reforge, RF-2A; docs/reforge/02_cost_curve.md). The pack's pass (integration/cost_curve.js) scales consumed
+// inputs by a per-era factor read from data/grindless/tables/cost_curve/<era>.json. These modes run that same rule on the dump:
+//   --table <dir>        the tables of <dir> are applied to the dump before pricing (enabled tables only), so the matrix, the core
+//                        index per era and the recipes' amounts are what the pack would produce. --out is optional here.
+//   --factors <file>     with --table or --write-tables: a solved.json (see --solve); its factors replace the tables' and switch them on.
+//   --solve              finds the item factor per era, MV first, so each era's core index is within `curve.solveTolerance` of
+//                        anchor x rate^n given the factors of the lower eras (settings `curve` in cost_matrix.json). Prints the
+//                        factors, the predicted index, the bypasses and the real-shortcut candidates; --out gets solved.json.
+//                        Needs --table <dir> for the keys (default: the pack's tables). Several matrix runs per era: minutes.
+//   --era <list>         with --solve: only these eras (the factors of the lower eras come from --factors, else 1).
+//   --write-tables <dir> writes one disabled table per era (every factor 1.0) with the key items resolved from the dump and the
+//                        config; include/exclude/override/remove already in <dir> are kept.
+//
 // How a cost is built: every recipe of the dump is normalized with the obtainability tier (tools/analysis/tiers), then
 // lib/cost.mjs picks, for every item and fluid, the cheapest recipe chain down to base resources (vein-drill outputs, natural
 // fluids, free world blocks, source recipes such as gas collectors) and expands it into a vector of base amounts. Settings
@@ -26,19 +39,25 @@ import { loadTierConfig } from './lib/config.mjs';
 import { prepareConfig } from './lib/model.mjs';
 import { normalizeRecipe } from './lib/normalize.mjs';
 import { solveCosts, summarize, globMatcher, EU_KEY } from './lib/cost.mjs';
+import { loadRule, loadTables, withFactors, applyToDump, TABLE_DIR } from './lib/cost_curve.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const BEGIN = '<!-- cost-matrix:begin -->';
 const END = '<!-- cost-matrix:end -->';
+const USAGE = 'usage: node tools/analysis/cost-matrix.mjs --dump <dir> --out <dir> [--compare <old.csv>] [--config <file>]\n       node tools/analysis/cost-matrix.mjs --dump <dir> (--table <dir> [--factors <solved.json>] | --solve [--table <dir>] [--era <list>] | --write-tables <dir>) [--out <dir>] [--compare <old.csv>]';
 
 function parseArgs(argv) {
   const a = { config: path.join(here, 'cost_matrix.json') };
   for (let i = 0; i < argv.length; i++) {
     const k = argv[i];
-    if (['--dump', '--out', '--compare', '--config', '--why', '--trace'].includes(k)) a[k.slice(2)] = argv[++i];
+    if (['--dump', '--out', '--compare', '--config', '--why', '--trace', '--table', '--factors', '--era', '--write-tables'].includes(k)) a[k.slice(2)] = argv[++i];
+    else if (k === '--solve') a.solve = true;
     else throw new Error(`unknown argument ${k}`);
   }
-  if (!a.dump || !a.out) throw new Error('usage: node tools/analysis/cost-matrix.mjs --dump <dir> --out <dir> [--compare <old.csv>] [--config <file>]');
+  a.curveMode = Boolean(a.table || a.solve || a['write-tables']);
+  const light = a.trace || a.why || a.curveMode;
+  if (!a.dump || (!a.out && !light)) throw new Error(USAGE);
+  if (a.factors && !a.table && !a['write-tables']) throw new Error('--factors goes with --table or --write-tables');
   return a;
 }
 
@@ -58,7 +77,21 @@ function fmt(n) {
 }
 const num = (n) => (Number.isFinite(n) ? String(Math.round(n * 1e4) / 1e4) : '');
 
-function normalizeAll(dump, excl) {
+/**
+ * lib/normalize.mjs lists a shaped recipe's ingredients once per distinct pattern symbol, so nine tiny dusts crafted into one dust
+ * count as one. The matrix needs the real number of cells: the same symbol repeated n times is n items. Only the cost model is
+ * corrected here (the shared normalizer feeds the other analyses unchanged).
+ */
+export function fixShapedCounts(n, json) {
+  if (n.shape !== 'shaped' || !json || !json.pattern || !json.key) return;
+  const cells = new Map();
+  for (const row of [].concat(json.pattern)) for (const ch of String(row)) if (ch !== ' ') cells.set(ch, (cells.get(ch) || 0) + 1);
+  const syms = [...cells.keys()].filter((s) => json.key[s] !== undefined);
+  if (syms.length !== n.inputs.length) return;
+  syms.forEach((s, i) => { n.inputs[i].count *= cells.get(s); });
+}
+
+function normalizeAll(dump, excl, settings = {}) {
   const { raw } = loadTierConfig({ tier: 'obtain' }, path.join(here, 'tiers'));
   const cfg = prepareConfig(raw);
   const ctx = { tags: dump.tags, st: { unresolved: new Set() }, cfg, gtTypes: new Set(dump.recipeTypes.keys()) };
@@ -71,6 +104,7 @@ function normalizeAll(dump, excl) {
     const al = cfg.typeAliases[rec.type] || rec.type;
     if (cfg.ignoreMatch(rec.type) || cfg.ignoreMatch(al)) continue;
     const n = normalizeRecipe(rec, ctx);
+    if (settings.shapedCells) fixShapedCounts(n, rec.json);
     n.duration = (rec.json && rec.json.duration) || 0;
     if (types.has(rec.type) || types.has(al)) { drill.push(n); continue; }
     if (n.category && cats(n.category)) continue;
@@ -80,8 +114,9 @@ function normalizeAll(dump, excl) {
   return { recipes, drill };
 }
 
-function resolveKeys(cfg, dump, model) {
-  const rows = [];
+/** Every key slot of the config, with the candidates that exist in the dump: [{era, group, candidates, present}] and the slots with none. */
+function keyCandidates(cfg, dump) {
+  const slots = [];
   const missing = [];
   const tiers = cfg.tiers;
   const exists = (k) => dump.items.has(k);
@@ -89,8 +124,7 @@ function resolveKeys(cfg, dump, model) {
   const add = (era, group, candidates) => {
     const present = candidates.filter(exists);
     if (!present.length) { missing.push(`${era}/${group}: ${candidates[0]}`); return; }
-    const pick = present.find((k) => model.reachable(k)) || present[0];
-    rows.push({ era, group, item: pick, alt: present.length > 1 && pick !== present[0] ? present[0] : '' });
+    slots.push({ era, group, present });
   };
   for (const t of tiers) {
     for (const [g, cand] of Object.entries(cfg.groups)) if (g !== 'note') add(t, g, cand.map((c) => expand(c, t)));
@@ -101,6 +135,15 @@ function resolveKeys(cfg, dump, model) {
     if (cfg.capstones[t]) add(t, 'capstone', [`gtceu:${cfg.capstones[t]}`]);
     for (const c of cfg.controllers[t] || []) add(t, 'controller', [`gtceu:${c}`]);
   }
+  return { slots, missing };
+}
+
+function resolveKeys(cfg, dump, model) {
+  const { slots, missing } = keyCandidates(cfg, dump);
+  const rows = slots.map(({ era, group, present }) => {
+    const pick = present.find((k) => model.reachable(k)) || present[0];
+    return { era, group, item: pick, alt: present.length > 1 && pick !== present[0] ? present[0] : '' };
+  });
   const have = new Set(rows.map((r) => r.item));
   const lv = [...dump.items].filter((k) => k.startsWith('gtceu:lv_') && !have.has(k)).sort();
   for (const k of lv) rows.push({ era: 'lv', group: 'lv_item', item: k, alt: '' });
@@ -192,11 +235,9 @@ function whyUnreachable(key, recipes, model) {
   return out;
 }
 
-function main() {
-  const args = parseArgs(process.argv.slice(2));
-  const cfg = JSON.parse(fs.readFileSync(args.config, 'utf8'));
-  const dump = loadDump(args.dump, { log: null });
-  const { recipes, drill } = normalizeAll(dump, cfg.excludeRecipes);
+/** Normalizes and prices a dump: {recipes, model, summ, weight, trivial}. The pricing is the same for the baseline and for a dump the cost curve rewrote. */
+export function priceDump(dump, cfg) {
+  const { recipes, drill } = normalizeAll(dump, cfg.excludeRecipes, cfg.settings);
 
   // Molten metals have no producing recipe in the dump (the melting is the machine's job); without this they would be
   // natural base resources and every alloy casing would look free. One item of the metal makes `mbPerItem` mB of it.
@@ -249,6 +290,255 @@ function main() {
     sourceAsBase: s.sourceAsBase, euWeight: s.euWeight, freeEpsilon: s.freeEpsilon,
   });
   const summ = (v) => summarize(v, { weight, fluidUnitMb: s.fluidUnitMb, top: s.topContributors });
+  return { recipes, model, summ, weight, trivial };
+}
+
+const CORE_GROUPS = ['hull', 'motor', 'pump', 'piston', 'conveyor', 'robot_arm', 'emitter', 'sensor', 'field_generator'];
+
+/** Core index per era: the geometric mean of the nine core components' scores (the reading of docs/reforge/01_cost_matrix.md). */
+export function coreIndex(rows, tiers) {
+  const out = new Map();
+  for (const t of tiers) {
+    const xs = rows.filter((r) => r.era === t && CORE_GROUPS.includes(r.group) && r.status !== 'unreachable' && r.score > 0).map((r) => r.score);
+    if (xs.length) out.set(t, { index: Math.exp(xs.reduce((s, x) => s + Math.log(x), 0) / xs.length), n: xs.length });
+  }
+  return out;
+}
+
+export function pricedRows(dump, cfg) {
+  const priced = priceDump(dump, cfg);
+  const { rows: keys, missing } = resolveKeys(cfg, dump, priced.model);
+  const rows = keys.map((r) => costRow(r, priced.model, priced.summ));
+  return { ...priced, rows, missing };
+}
+
+/** The factors of a solved.json, or null. */
+function readFactors(file) {
+  if (!file) return null;
+  const j = JSON.parse(fs.readFileSync(file, 'utf8'));
+  if (!j.factors || typeof j.factors !== 'object') throw new Error(`${file}: no "factors" object`);
+  return j.factors;
+}
+
+const curveOf = (cfg) => ({ anchor: 3, rate: 2.5, fluidFactorRatio: 1, tolerance: 0.1, solveTolerance: 0.03, maxIterations: 7, maxFactor: 4096, ...(cfg.curve || {}) });
+/** Target core index of an era of the cost-curve table (MV = n 0). */
+const targetOf = (curve, era) => { const n = loadRule().eras.indexOf(era); return n < 0 ? null : curve.anchor * Math.pow(curve.rate, n); };
+
+function tablesFor(args, factors) {
+  const { tables, problems } = loadTables(args.table || TABLE_DIR);
+  if (problems.length) throw new Error('cost-curve tables:\n  ' + problems.join('\n  '));
+  return factors ? withFactors(tables, factors) : tables;
+}
+
+/** The dump after the pass, plus what it did (applyToDump). */
+export function curved(dump, tables) {
+  const res = applyToDump(dump, tables);
+  return { dump: { ...dump, recipes: res.recipes }, res };
+}
+
+/** Key items whose cheapest recipe was not changed by the pass, or whose score grew far less than its era's median. */
+function bypassReport(before, after, res, curve) {
+  const changed = res.changed;
+  const growth = new Map();
+  const byEra = new Map();
+  for (const a of after.rows) {
+    const b = before.rows.find((x) => x.item === a.item && x.era === a.era);
+    if (!b || a.status === 'unreachable' || b.status === 'unreachable' || !(b.score > 0) || a.era === 'lv' || a.era === 'ulv' || a.era === 'steam') continue;
+    const g = a.score / b.score;
+    growth.set(a.item, g);
+    if (!byEra.has(a.era)) byEra.set(a.era, []);
+    byEra.get(a.era).push(g);
+  }
+  const out = [];
+  for (const a of after.rows) {
+    if (!growth.has(a.item)) continue;
+    const ch = after.model.choiceOf(a.item);
+    const g = growth.get(a.item);
+    const med = median(byEra.get(a.era));
+    const direct = ch && !changed.has(ch.id);
+    const weak = med > 1.5 && g < med * (curve.bypassShare ?? 0.25);
+    if (direct || weak) out.push({ era: a.era, group: a.group, item: a.item, via: ch ? ch.id : null, growth: g, eraMedianGrowth: med, why: direct ? 'cheapest recipe not scaled' : 'grew far less than its era' });
+  }
+  return out;
+}
+
+function printEraTable(cfg, curve, base, after, factors) {
+  const eras = loadRule().eras;
+  const ib = coreIndex(base.rows, cfg.tiers);
+  const ia = coreIndex(after.rows, cfg.tiers);
+  console.log('era   item   fluid   index before   index after   target      after/target');
+  for (const e of eras) {
+    const f = factors && factors[e];
+    const t = targetOf(curve, e);
+    const b = ib.get(e);
+    const a = ia.get(e);
+    console.log(`${e.padEnd(5)} ${f ? String(f.item).padStart(6) : '     -'} ${f ? String(f.fluid).padStart(6) : '     -'}   ${b ? fmt(b.index).padStart(12) : '           -'}   ${a ? fmt(a.index).padStart(11) : '          -'}   ${fmt(t).padStart(9)}   ${a ? (a.index / t).toFixed(3) : '-'}`);
+  }
+}
+
+function writeTables(dir, cfg, dump, factors) {
+  const rule = loadRule();
+  const { slots } = keyCandidates(cfg, dump);
+  fs.mkdirSync(dir, { recursive: true });
+  const skip = new Set(['ulv', 'lv', 'steam']);
+  for (const era of rule.eras) {
+    const keys = [...new Set(slots.filter((x) => x.era === era && !skip.has(x.era)).flatMap((x) => x.present))].sort();
+    const f = path.join(dir, `${era}.json`);
+    const old = fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : {};
+    const t = {
+      era, enabled: false, item: 1.0, fluid: 1.0, keys,
+      include: old.include || [], exclude: old.exclude || [], remove: old.remove || [], override: old.override || {},
+    };
+    if (factors && factors[era]) { t.item = factors[era].item; t.fluid = factors[era].fluid; }
+    fs.writeFileSync(f, JSON.stringify(t, null, 2) + '\n');
+  }
+  return rule.eras.length;
+}
+
+export function solveFactors(args, cfg, dump) {
+  const curve = curveOf(cfg);
+  const rule = loadRule();
+  const eras = args.era ? args.era.split(',') : rule.eras;
+  const fixed = readFactors(args.factors) || {};
+  const base = pricedRows(dump, cfg);
+  const baseIdx = coreIndex(base.rows, cfg.tiers);
+  const factors = {};
+  for (const e of rule.eras) factors[e] = fixed[e] ? { ...fixed[e] } : { item: 1, fluid: 1 };
+  const tables = tablesFor(args, null);
+  const run = (fs_) => {
+    const { dump: d2, res } = curved(dump, withFactors(tables, fs_));
+    return { ...pricedRows(d2, cfg), res, dump: d2 };
+  };
+  const ratio = curve.fluidFactorRatio;
+  const setFactor = (era, f) => { factors[era] = { item: f, fluid: Math.max(1, Math.round(f * ratio * 1e4) / 1e4) }; };
+  const log = [];
+  let solves = 0;
+  const unsolved = [];
+  const plateaus = [];
+  for (const era of eras) {
+    const target = targetOf(curve, era);
+    const tryF = (f) => {
+      setFactor(era, f);
+      const only = {};
+      for (const e of rule.eras) if (factors[e].item !== 1 || factors[e].fluid !== 1 || e === era) only[e] = factors[e];
+      const r = run(only);
+      solves++;
+      const idx = coreIndex(r.rows, cfg.tiers).get(era);
+      return idx ? idx.index : null;
+    };
+    const i0 = tryF(1);
+    if (i0 === null) { unsolved.push(era); factors[era] = { item: 1, fluid: 1 }; log.push(`${era}: core index not priceable (a core component is unreachable); factor left at 1`); console.log(log[log.length - 1]); continue; }
+    if (i0 >= target * (1 - curve.solveTolerance)) { setFactor(era, 1); log.push(`${era}: index ${fmt(i0)} already meets target ${fmt(target)} at factor 1`); console.log(log[log.length - 1]); continue; }
+    const pts = [{ lf: 0, g: Math.log(i0 / target) }];
+    const tried = [{ f: 1, idx: i0 }];
+    let f = target / i0;
+    let best = null;
+    let plateau = false;
+    for (let k = 0; k < curve.maxIterations; k++) {
+      const idx = tryF(f);
+      if (idx === null) break;
+      const g = Math.log(idx / target);
+      pts.push({ lf: Math.log(f), g });
+      tried.push({ f, idx });
+      if (!best || Math.abs(g) < Math.abs(best.g)) best = { f, g, idx };
+      console.log(`  ${era}: f=${f.toPrecision(4)} -> index ${fmt(idx)} (target ${fmt(target)}, ${(idx / target).toFixed(3)})`);
+      if (Math.abs(g) <= curve.solveTolerance) break;
+      const a = pts[pts.length - 2];
+      const b = pts[pts.length - 1];
+      // the index stopped answering to the factor: the cheapest route of some core item bypasses the scaled recipes
+      if (b.lf > a.lf && idx < Math.exp(a.g) * target * 1.02 && g < -curve.solveTolerance) { plateau = true; break; }
+      if (f >= curve.maxFactor) { plateau = true; break; }
+      const slope = (b.g - a.g) / (b.lf - a.lf);
+      let lfNext = Number.isFinite(slope) && slope > 0.05 ? b.lf - b.g / slope : b.lf - b.g;
+      lfNext = Math.min(lfNext, b.lf + Math.log(8));
+      f = Math.min(Math.exp(lfNext), curve.maxFactor);
+      if (!(f >= 1)) f = 1.0001;
+    }
+    let pick = best ? best.f : 1;
+    let shown = best ? best.idx : null;
+    if (plateau) {
+      // the smallest factor that already gives (nearly) the best index: more only raises costs the index never sees
+      const top = Math.max(...tried.map((x) => x.idx));
+      const t0 = tried.filter((x) => x.idx >= top * 0.98).sort((x, y) => x.f - y.f)[0];
+      pick = t0.f;
+      shown = t0.idx;
+      plateaus.push({ era, factor: pick, index: shown, target });
+    }
+    setFactor(era, Math.round(pick * 1e3) / 1e3);
+    log.push(`${era}: item factor ${factors[era].item}, fluid ${factors[era].fluid}, index ${shown === null ? '-' : fmt(shown)} (target ${fmt(target)})${plateau ? ' PLATEAU: more factor does not raise the index, fix the routes' : ''}`);
+    console.log(log[log.length - 1]);
+  }
+  const final = {};
+  for (const e of rule.eras) if (factors[e].item !== 1 || factors[e].fluid !== 1) final[e] = factors[e];
+  const after = run(final);
+  console.log(`\nsolved with ${solves + 1} matrix runs.\n`);
+  printEraTable(cfg, curve, base, after, factors);
+  for (const p of plateaus) {
+    const groups = after.rows
+      .filter((a) => a.era === p.era && CORE_GROUPS.includes(a.group) && a.status !== 'unreachable')
+      .map((a) => { const b = base.rows.find((x) => x.item === a.item && x.era === a.era); return { g: a.group, grow: b && b.score > 0 ? a.score / b.score : null, via: after.model.choiceOf(a.item)?.id }; })
+      .filter((x) => x.grow !== null)
+      .sort((x, y) => x.grow - y.grow)
+      .slice(0, 3);
+    console.log(`\n${p.era} plateau at x${p.factor} (index ${fmt(p.index)} of ${fmt(p.target)}); least-grown core groups: ${groups.map((x) => `${x.g} x${x.grow.toFixed(2)} via ${x.via}`).join('; ')}`);
+  }
+  const bypass = bypassReport(base, after, after.res, curve);
+  console.log(`\n${bypass.length} bypasses (key items whose cheapest route escapes the scaled recipes):`);
+  for (const b of bypass.slice(0, 60)) console.log(`  ${b.era}  ${b.group}  ${b.item}  via ${b.via}  x${b.growth.toFixed(2)} vs era median x${b.eraMedianGrowth.toFixed(2)}  (${b.why})`);
+  const afterIdx = coreIndex(after.rows, cfg.tiers);
+  const result = {
+    note: 'Solved by tools/analysis/cost-matrix.mjs --solve. Factors per era; the tables stay disabled until a Phase 2 package switches them on.',
+    curve: { anchor: curve.anchor, rate: curve.rate, fluidFactorRatio: curve.fluidFactorRatio, solveTolerance: curve.solveTolerance },
+    factors,
+    index: Object.fromEntries(rule.eras.map((e) => [e, { baseline: baseIdx.get(e)?.index ?? null, predicted: afterIdx.get(e)?.index ?? null, target: targetOf(curve, e) }])),
+    unsolved,
+    plateaus,
+    changedRecipes: Object.fromEntries(Object.entries(after.res.byEra).map(([e, v]) => [e, v])),
+    bypasses: bypass,
+  };
+  if (args.out) {
+    fs.mkdirSync(args.out, { recursive: true });
+    fs.writeFileSync(path.join(args.out, 'solved.json'), JSON.stringify(result, null, 2) + '\n');
+    console.log(`\nwrote ${path.join(args.out, 'solved.json')}`);
+  }
+  return { base, after };
+}
+
+function curveMain(args, cfg, dump) {
+  const curve = curveOf(cfg);
+  if (args['write-tables']) {
+    const n = writeTables(args['write-tables'], cfg, dump, readFactors(args.factors));
+    console.log(`wrote ${n} tables to ${args['write-tables']} (disabled; key items from ${path.basename(path.dirname(path.resolve(args.dump)))})`);
+    return;
+  }
+  if (args.solve) { solveFactors(args, cfg, dump); return; }
+  const factors = readFactors(args.factors);
+  const tables = tablesFor(args, factors);
+  const base = pricedRows(dump, cfg);
+  const { dump: d2, res } = curved(dump, tables);
+  const after = pricedRows(d2, cfg);
+  const enabled = tables.filter((t) => t.enabled).map((t) => t.era);
+  console.log(`cost curve: ${enabled.length ? 'enabled: ' + enabled.join(', ') : 'no table enabled (the dump is unchanged)'}; ${res.selected.length} recipes selected, ${res.changed.size} changed, ${res.removed.size} removed`);
+  for (const [e, v] of Object.entries(res.byEra)) console.log(`  ${e}: ${v.selected} scaled, ${v.changed} changed (${v.items} item and ${v.fluids} fluid inputs)`);
+  printEraTable(cfg, curve, base, after, factors || Object.fromEntries(tables.filter((t) => t.enabled).map((t) => [t.era, { item: t.item, fluid: t.fluid }])));
+  if (args.out) {
+    fs.mkdirSync(args.out, { recursive: true });
+    const csv = ['era,group,item,status,score_before,score_after'];
+    for (const a of after.rows) {
+      const b = base.rows.find((x) => x.item === a.item && x.era === a.era);
+      csv.push([a.era, a.group, a.item, a.status, num(b && b.score), num(a.score)].join(','));
+    }
+    fs.writeFileSync(path.join(args.out, '02_cost_curve_matrix.csv'), csv.join('\n') + '\n');
+  }
+  if (args.compare) console.log('\n' + compareReport(args.compare, after.rows));
+}
+
+function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const cfg = JSON.parse(fs.readFileSync(args.config, 'utf8'));
+  const dump = loadDump(args.dump, { log: null });
+  if (args.curveMode) { curveMain(args, cfg, dump); return; }
+  const { recipes, model, summ, weight, trivial } = priceDump(dump, cfg);
 
   if (args.trace) {
     const show = (key, factor, depth, seen) => {
@@ -421,4 +711,4 @@ function renderMarkdown({ cfg, rows, missing, model, recipes, trivial, dump, arg
 
 const eraIdxOf = (tiers, t) => tiers.indexOf(t);
 
-main();
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

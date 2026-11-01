@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { checkRecipe, tierOfEut, buildSnapshot } from '../lib/capacity.mjs';
-import { diffKnown } from '../capacity-lint.mjs';
+import { diffKnown, lintCurve } from '../capacity-lint.mjs';
+import { loadTables, withFactors, TABLE_DIR } from '../lib/cost_curve.mjs';
+import { mkDump } from './helpers.mjs';
 
 const fl = (fluid, amount) => ({ content: { amount, value: [{ fluid }] } });
 const it = (item, count) => ({ content: { type: 'gtceu:sized', count, ingredient: { item } } });
@@ -69,4 +71,18 @@ test('capacity: the snapshot builder reads the dump format', () => {
 test('capacity: the known list is a ratchet (new and stale entries fail)', () => {
   const d = diffKnown({ a: 'x', b: 'y' }, { violations: { b: 'y', c: 'z' } });
   assert.deepEqual(d, { fresh: ['a'], stale: ['c'] });
+});
+
+test('capacity --dump: the cost-curve pass pushes a LuV recipe over its tank, and only that recipe is reported', () => {
+  const out = (item) => ({ item: [{ content: { type: 'gtceu:sized', count: 1, ingredient: { item } }, chance: 10000, maxChance: 10000 }] });
+  const mixer = (id, item, mb) => ({ id, type: 'gtceu:mixer', json: { type: 'gtceu:mixer', duration: 100, inputs: { fluid: [{ content: { amount: mb, value: [{ fluid: 'a:f' }] }, chance: 10000, maxChance: 10000 }] }, outputs: out(item), tickInputs: { eu: [{ content: 30720, chance: 10000, maxChance: 10000 }] } } });
+  const dump = mkDump({ recipes: [mixer('gtceu:mixer/key', 'gtceu:luv_electric_motor', 40000), mixer('gtceu:mixer/other', 'a:unrelated', 40000)] });
+  const { tables } = loadTables(TABLE_DIR);
+  const off = lintCurve(dump, tables, snap);
+  assert.deepEqual(Object.keys(off.after.errors), []);
+  const on = lintCurve(dump, withFactors(tables, { luv: { item: 2, fluid: 2 } }), snap);
+  assert.deepEqual(Object.keys(on.after.errors), ['gtceu:mixer/key']);
+  assert.equal(on.byEra.luv.overflows, 1);
+  assert.equal(on.byEra.luv.top[0].biggest, 80000);
+  assert.match(on.byEra.luv.top[0].reason, /80000 mB > 64000 mB/);
 });
