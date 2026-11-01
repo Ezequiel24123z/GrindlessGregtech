@@ -23,6 +23,10 @@
             'Circuit 2 relocks a spent phase lock with one fresh oscillator bank. The sheets are lines L50 (VO2 on sapphire, patterned and metallised), the driver modules are L51 (niobium cavities, Nb3Sn layer, conduction cooling) and the oscillator banks are L55 (sapphire resonators, nuclear clock, photonic foundry).',
             'El circuito 2 reajusta un bloqueo de fase gastado con un banco de osciladores nuevo. Las láminas son la línea L50 (VO2 sobre zafiro, modelado y metalizado), los módulos impulsores la L51 (cavidades de niobio, capa de Nb3Sn, refrigeración por conducción) y los bancos de osciladores la L55 (resonadores de zafiro, reloj nuclear, fundición fotónica).'],
 
+        ['emi.grindless.info.driver_ring_casing.0',
+            'A structure block: a ring segment of the Ergoregion Synchroniser. Made in the assembler.',
+            'Un bloque de estructura: un segmento de anillo del sincronizador de ergorregión. Se fabrica en el ensamblador.'],
+
         ['gtceu.recipe.grindless_ergoregion_synchronisation.horizon_phase_lock',
             'Circuit 1: two driver modules, two oscillator banks, four impedance sheets and a memory node in superfluid He-3; one time in eight a fatigued VO2 sheet comes back.',
             'Circuito 1: dos módulos impulsores, dos bancos de osciladores, cuatro láminas de impedancia y un nodo de memoria en He-3 superfluido; una vez de cada ocho vuelve una lámina de VO2 fatigada.'],

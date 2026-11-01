@@ -396,6 +396,24 @@
       itemsOut: [{ id: 'grindless:hafnium_tantalum_oxide', count: 4 }, { id: 'gtceu:ammonium_chloride_dust', count: 2 }],
       fluidsOut: [],
       eut: 1920, duration: 100
+    },
+    // MX-S2 (max.md, L50 step 1, c30; repeat by item inputs): vanadium magnetite leached in sulfuric acid and precipitated as vanadium pentoxide; the iron goes to the foundry, the acid returns diluted
+    {
+      name: 'vanadium_pentoxide', mode: 'max', circuit: 30,
+      itemsIn: [{ id: 'gtceu:vanadium_magnetite_dust', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:sulfuric_acid', amount: 1000 }, { id: 'minecraft:water', amount: 2000 }],
+      itemsOut: [{ id: 'grindless:vanadium_pentoxide', count: 2 }, { id: 'gtceu:iron_dust', count: 2 }],
+      fluidsOut: [{ id: 'gtceu:diluted_sulfuric_acid', amount: 1000 }],
+      eut: 1920, duration: 100
+    },
+    // MX-S2 (max.md, L50 return, c32; repeat by item inputs): the fatigued VO2 sheets of the ergoregion synchroniser leached in sulfuric acid back to vanadium pentoxide and sapphire dust
+    {
+      name: 'fatigued_vo2_sheet', mode: 'max', circuit: 32,
+      itemsIn: [{ id: 'grindless:fatigued_vo2_sheet', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:sulfuric_acid', amount: 1000 }, { id: 'minecraft:water', amount: 2000 }],
+      itemsOut: [{ id: 'grindless:vanadium_pentoxide', count: 2 }, { id: 'gtceu:sapphire_dust', count: 2 }],
+      fluidsOut: [{ id: 'gtceu:diluted_sulfuric_acid', amount: 1000 }],
+      eut: 1920, duration: 100
     }
   ]
 

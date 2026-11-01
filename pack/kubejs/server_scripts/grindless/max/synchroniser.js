@@ -76,6 +76,10 @@
       items: ['4x grindless:conduction_cooled_cell', '2x gtceu:opv_electric_pump', '1x gtceu:opv_sensor', '2x gtceu:tungsten_steel_plate',
         '4x gtceu:niobium_titanium_foil', '#gtceu:circuits/opv'],
       fluids: [['gtceu:helium', 2000]], outs: ['1x grindless:srf_driver_module'], fluidOuts: [] },
+    // the ring casing: made at home from OpV parts, so the synchroniser can be built (no input comes from its own lines)
+    { name: 'driver_ring_casing', type: 'assembler', circuit: 14, eut: VA_MAX, duration: 200,
+      items: ['gtceu:opv_machine_casing', '8x gtceu:niobium_titanium_foil', '2x gtceu:opv_electric_motor', '2x #gtceu:circuits/opv'],
+      fluids: [['gtceu:superfluid_helium_3', 250]], outs: ['2x grindless:driver_ring_casing'], fluidOuts: [] },
     // L55 step 6: two optical phase lock units on a sensor board in a shielded case, the oscillator bank
     { name: 'phase_lock_oscillator_bank', type: 'assembler', eut: 31457280, duration: 800,
       items: ['2x grindless:optical_phase_lock_unit', '2x gtceu:opv_sensor', '1x gtceu:opv_robot_arm', '2x gtceu:tungsten_steel_plate',
@@ -133,6 +137,7 @@
           return
         }
         var b = event.recipes.gtceu[r.type](SFX + r.name)
+        if (r.circuit) b.circuit(r.circuit)
         r.items.forEach(function (s) { b.itemInputs(s) })
         r.fluids.forEach(function (f) { b.inputFluids(Fluid.of(f[0], f[1])) })
         r.outs.forEach(function (s) { b.itemOutputs(s) })

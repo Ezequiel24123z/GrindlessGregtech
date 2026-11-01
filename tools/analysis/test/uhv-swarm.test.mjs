@@ -56,7 +56,7 @@ test('the stand-in runs the swarm scripts without errors, nothing clashing or sk
   assert.deepEqual(SW.skipped, []);
   // UEV-B2 adds the Alpha Centauri rows alpha_full_swarm and alpha_corona
   // UIV-A10 adds the Mercury row matrioshka_feed
-  // MAX-G1 adds the Sgr A* row mirror_shell_segment (circuit 5, VA[MAX])
+  // MAX-G1 adds the Sgr A* row mirror_shell_segment (no circuit, 8 items after MX-S2, VA[MAX])
   assert.equal(SW.recipes.length, 12);
 });
 

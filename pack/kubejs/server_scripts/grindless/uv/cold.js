@@ -97,7 +97,11 @@
     // MAX-G1 (docs/eras/max.md, line 18 step 2): the clock reference sets the target frequency of a niobium cavity pressed from RRR sheet on
     // an SRF cavity blank under nitrogen (c10: 1-9 are taken); the trim goes to the scrap loop
     { name: 'max_srf_cavity', type: 'srf_cavity', circuit: 10, itemsIn: [item('grindless:thorium_clock_reference', 1), item(CAVITY, 1), item(SHEET, 2)],
-      fluidsIn: [fluid('gtceu:nitrogen', 100)], itemsOut: [item('grindless:max_srf_cavity', 1), item(SCRAP, 1)], fluidsOut: [], eut: VA, duration: 600 }
+      fluidsIn: [fluid('gtceu:nitrogen', 100)], itemsOut: [item('grindless:max_srf_cavity', 1), item(SCRAP, 1)], fluidsOut: [], eut: VA, duration: 600 },
+    // MX-S2 (docs/eras/max.md, L51 step 2): a large-grain niobium disc pressed with RRR sheet into the driver cell on an SRF cavity blank under
+    // nitrogen (c11: 1-10 are taken); the trim goes to the scrap loop
+    { name: 'nb_driver_cell', type: 'srf_cavity', circuit: 11, itemsIn: [item('grindless:large_grain_nb_disc', 1), item(SHEET, 2)],
+      fluidsIn: [fluid('gtceu:nitrogen', 500)], itemsOut: [item('grindless:nb_driver_cell', 1), item(SCRAP, 1)], fluidsOut: [], eut: VA, duration: 600 }
   ]
 
   // side steps on GTM's own machines

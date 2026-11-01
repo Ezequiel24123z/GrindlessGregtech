@@ -96,7 +96,8 @@ test('the older rows exist and are marked MAX-G1', () => {
   assert.match(cold, /name: 'max_srf_cavity', type: 'srf_cavity', circuit: 10/);
   assert.match(cold, /polished_srf_cavity/);
   const swarm = read(kube, 'server_scripts', 'grindless', 'uhv', 'swarm.js');
-  assert.match(swarm, /row\('mirror_shell_segment', FOUNDRY, 5,/);
+  assert.match(swarm, /row\('mirror_shell_segment', FOUNDRY, null,/);
+  assert.match(swarm, /item\('grindless:tunable_impedance_sheet', 1\)\], \[\],/);
 });
 
 test('the shape, textures and EMI page exist; one controller carries both kinds of row without generator(true)', () => {

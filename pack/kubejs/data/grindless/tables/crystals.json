@@ -43,7 +43,12 @@
           "_why": "MAX-G1 (max.md, L18 step 1, c6): a thorium-229 sample and a VUV optic read against the running clock (not consumed) into the frequency reference the seed cavity is tuned to.",
           "itemsIn": [{ "id": "grindless:thorium_229", "count": 1 }, { "id": "grindless:vuv_caf2_optic", "count": 1 }],
           "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 100 }],
-          "itemsOut": [{ "id": "grindless:thorium_clock_reference", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:thorium_clock_reference", "count": 1 }], "fluidsOut": [] },
+        { "name": "clock_steer_oscillator", "circuit": 8, "eut": 1966080, "duration": 800,
+          "_why": "MX-S2 (max.md, L55 step 4, c8): the cryogenic sapphire oscillator is steered to the running nuclear clock (the clock is not consumed), the reference its phase is held against.",
+          "itemsIn": [{ "id": "grindless:cryo_sapphire_oscillator", "count": 1 }],
+          "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:clock_steered_oscillator", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "crystal_growth": {
@@ -178,7 +183,13 @@
           "itemsOut": [{ "id": "grindless:teo2_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
         { "_why": "MAX-D2 (max.md, L45 step 1, c32, a third repeat on this type with its own inputs): semi-insulating InP pulled from indium, phosphorus and an iron dopant, sliced to a wafer; the Ir crucible wears as in every row", "name": "semi_insulating_inp_wafer", "circuit": 32, "eut": 491520, "duration": 1200,
           "itemsIn": [{ "id": "gtceu:indium_dust", "count": 1 }, { "id": "gtceu:phosphorus_dust", "count": 1 }, { "id": "gtceu:iron_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:semi_insulating_inp_wafer", "count": 2 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:semi_insulating_inp_wafer", "count": 2 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "MX-S2 (max.md, L50 step 2, c30): c-plane sapphire pulled from the alumina melt and sliced to a web wafer, the substrate the VO2 film is grown on; the Ir crucible wears as in every row", "name": "sapphire_web_wafer", "circuit": 30, "eut": 491520, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:sapphire_dust", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sapphire_web_wafer", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "MX-S2 (max.md, L55 step 1, c31): a larger sapphire boule pulled for the whispering-gallery resonator disc; the swarf of the lathe comes back here as sapphire dust; the Ir crucible wears as in every row", "name": "sapphire_resonator_disc", "circuit": 31, "eut": 491520, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:sapphire_dust", "count": 8 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:sapphire_resonator_disc", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {
