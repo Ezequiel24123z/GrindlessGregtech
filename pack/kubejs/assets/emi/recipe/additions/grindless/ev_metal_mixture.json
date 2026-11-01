@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:gtceu:metal_mixture_dust"],
+  "text": ["emi.grindless.info.metal_mixture_separation.0", "emi.grindless.info.metal_mixture_separation.1"]
+}
