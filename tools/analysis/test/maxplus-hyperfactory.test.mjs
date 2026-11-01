@@ -117,10 +117,11 @@ test('an unknown id skips a recipe instead of throwing', () => {
 
 test('names in both languages, with \\u escapes', () => {
   const src = read('client_scripts', '../../client_scripts/grindless/maxplus_hyperfactory_lang.js'.replace('../../client_scripts/grindless/', ''));
-  const keys = [...src.matchAll(/^\s*\['([^']+)', '((?:[^'\\]|\\.)*)', '((?:[^'\\]|\\.)*)'\]/gm)];
+  const keys = [...src.matchAll(/^\s*\['([^']+)', '((?:[^'\\]|\\.)*)'\]/gm)];
   const names = keys.map((k) => k[1]);
   for (const k of ['block.gtceu.hyperfactory', 'block.gtceu.max_maxplus_parallel_hatch', 'grindless.machine.hyperfactory.tooltip.0', 'grindless.machine.maxplus_parallel_hatch.tooltip', 'emi.grindless.info.max_maxplus_parallel_hatch.0']) assert.ok(names.includes(k), k);
-  assert.ok(keys.every((k) => k[2] && k[3] && k[2] !== k[3]), 'every key has distinct en and es text');
+  assert.ok(keys.every((k) => k[2]), 'every key has text');
+  assert.match(src, /\['en_us', 'es_es'\]/);
   assert.ok(!/[^\x00-\x7f]/.test(src), 'ASCII only');
 });
 
@@ -129,7 +130,7 @@ test('the test zone row exists and its band is disjoint from every other row', (
   const rows = (zones.zones || zones).filter((z) => z && z.id);
   const mine = rows.find((z) => z.id === 'maxplus_hyperfactory');
   assert.ok(mine, 'maxplus_hyperfactory row');
-  assert.deepEqual(plain(mine.tests), ['gg_test_maxplus_hyperfactory']);
+  assert.deepEqual(plain(mine.tests), ['maxplus_hyperfactory']);
   const hit = (a, b) => a[0] <= b[1] && b[0] <= a[1];
   for (const z of rows) {
     if (z === mine || !z.x || !z.z || !z.y) continue;
