@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
   Procedural 16x16 pixel art for the foundations of the UIV era of Gregtech Grindless (package UIV-F1, shared registrations):
-  34 items and two block textures (GregTech style: top-left light, 3-4 tones per material, selective outlines).
+  26 items and two block textures (GregTech style: top-left light, 3-4 tones per material, selective outlines).
 
 .DESCRIPTION
   Every pixel is drawn by this script (the shape routines of the UEV foundation script with a new palette per item); nothing is copied
@@ -10,7 +10,7 @@
   colour), and the metallic hydrogen coil block borrows GregTech's tritanium coil texture.
 
   Writes (under pack/kubejs/assets/grindless/textures/):
-      item/<name>.png for the 34 items that startup_scripts/grindless/uiv/foundation.js registers (see $Items below).
+      item/<name>.png for the 26 items that startup_scripts/grindless/uiv/foundation.js registers (see $Items below).
       block/uiv/uiv_fusion_casing.png          dark tungsten tiles with a white-hot seam; seamless.
       block/uiv/neutron_star_site_casing.png   blue-black shell with a bright core ring; seamless.
 
@@ -54,14 +54,6 @@ function Get-Noise {
 
 # name -> kind, body colour, accent colour
 $Items = [ordered]@{
-    uiv_electric_motor         = @('module', '6A809A', 'A8F0FF')
-    uiv_electric_pump          = @('capsule', '7A90A8', '5AD0F0')
-    uiv_conveyor_module        = @('module', '5A6878', 'F0D060')
-    uiv_electric_piston        = @('capsule', '8A98A8', 'F0785A')
-    uiv_robot_arm              = @('assembly', '8A94A8', 'FFC85A')
-    uiv_sensor                 = @('chip', '4A6080', '8AFFD8')
-    uiv_emitter                = @('chip', '604A80', 'FF8AF0')
-    uiv_field_generator        = @('orb', '3A509A', 'A8F0FF')
     ti50_oven_charge           = @('cartridge', '8A94A0', 'C8D4E0')
     element_119_recoil         = @('card', '2A3248', 'F0A850')
     element_120_recoil         = @('card', '2A3248', '58E8B0')

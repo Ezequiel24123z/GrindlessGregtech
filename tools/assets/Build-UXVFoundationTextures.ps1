@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
   Procedural 16x16 pixel art for the foundations of the UXV era of Gregtech Grindless (package UXV-F1, shared registrations):
-  106 items and one block texture (GregTech style: top-left light, 3-4 tones per material, selective outlines).
+  98 items and one block texture (GregTech style: top-left light, 3-4 tones per material, selective outlines).
 
 .DESCRIPTION
   Every pixel is drawn by this script (the shape routines of the UIV foundation script with a new palette per item); nothing is copied
@@ -10,7 +10,7 @@
   from their colour).
 
   Writes (under pack/kubejs/assets/grindless/textures/):
-      item/<name>.png for the 106 items that startup_scripts/grindless/uxv/foundation.js registers (see $Items below).
+      item/<name>.png for the 98 items that startup_scripts/grindless/uxv/foundation.js registers (see $Items below).
       block/uxv/uxv_fusion_casing.png   dark W-184 fibre weave with a violet-white seam; seamless.
 
   Run from the repo root:
@@ -53,14 +53,6 @@ function Get-Noise {
 
 # name -> kind, body colour, accent colour
 $Items = [ordered]@{
-    uxv_electric_motor      = @('module', '5A5E72', 'C8A0FF')
-    uxv_electric_pump       = @('capsule', '6A6E84', '7AC8F0')
-    uxv_conveyor_module     = @('module', '4E5468', 'F0C870')
-    uxv_electric_piston     = @('capsule', '7E8090', 'F08C70')
-    uxv_robot_arm           = @('assembly', '7E8098', 'FFD070')
-    uxv_sensor              = @('chip', '3E5078', '90FFE0')
-    uxv_emitter             = @('chip', '56407A', 'FFA0F0')
-    uxv_field_generator     = @('orb', '3A4488', 'C0F0FF')
     cofeb_target            = @('cartridge', '6A7890', 'A8C0E8')
     mgo_target              = @('cartridge', 'C8C8C0', 'F0F0E8')
     heusler_target          = @('cartridge', '98886A', 'E0C890')
