@@ -16934,7 +16934,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "8396480d5a2f55669f4067f12da9060df0e5c6be6302613d4b64affe18349881"
+hash = "006399d344fb331d52e79ba91605b0296d91d92df98fddfbd052f28dae528966"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
