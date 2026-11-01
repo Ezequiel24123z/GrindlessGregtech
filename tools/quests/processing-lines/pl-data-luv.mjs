@@ -21,12 +21,13 @@ export default {
   icon: 'gtceu:hts_magnet_works',
   focus: 'enox',
   landed: LANDED,
-  bands: [['naquadah', 'reactor'], ['tape', 'magnets', 'network'], ['biofoundry', 'organoid'], ['orbital', 'grower'], ['fusion', 'research'],
+  bands: [['naquadah', 'reactor'], ['tape', 'magnets', 'network'], ['biofoundry', 'organoid'], ['optics'], ['wake', 'grower'], ['fusion', 'research'],
     ['io', 'ioorbit'], ['belt', 'miner'], ['europa', 'ganymede'], ['travel']],
   clusters: {
     // ---------------------------------------------------------------- A2 (naquadah plant mode 2) and A3 (helium refrigerator)
     naquadah: {
       name: 'Trinium and enriched naquadah',
+      line: 'trinium',
       nodes: [
         L('nqore', 0, -2.25, 'pl_iv:rawnq'),
         n('enox', 2, -2.25, I('gtceu:enriched_naquadah_oxide_mixture_dust'), 'Enriched Naquadah Oxide', {
@@ -65,6 +66,7 @@ export default {
     },
     reactor: {
       name: 'Reactor III and the spent rods',
+      role: 'power',
       nodes: [
         n('enq2', 0, 0, I('gtceu:enriched_naquadah_ingot'), 'Enriched Naquadah', { kind: 'raw', sub: 'From the refrigerator' }),
         n('lrod', 2, 0, I('gtceu:long_enriched_naquadah_rod'), 'Long Enriched Naquadah Rod', {
@@ -82,6 +84,7 @@ export default {
     // ---------------------------------------------------------------- A3 (coated conductor line), A4 (HTS magnet works), B2 and A4's network
     tape: {
       name: 'Coated conductor',
+      role: 'infrastructure',
       nodes: [
         n('nickel', 0, -1.5, I('gtceu:nickel_dust'), 'Nickel', { kind: 'raw' }),
         L('w', 0, 0, 'pl_ev:wdust'),
@@ -96,6 +99,7 @@ export default {
     },
     magnets: {
       name: 'HTS magnet works',
+      role: 'infrastructure',
       nodes: [
         n('cc2', 0, -3, I('grindless:itbtc_coated_conductor'), 'ITBTC Coated Conductor', { kind: 'raw', sub: 'The coated conductor line\'s tape' }),
         n('trin2', 0, -1.5, F('gtceu:trinium'), 'Molten Trinium', { kind: 'raw', sub: 'Mode 2\'s trinium, melted down' }),
@@ -117,6 +121,7 @@ export default {
     },
     network: {
       name: 'Orbital solar and the network',
+      role: 'power',
       nodes: [
         L('nqwafer', 0, -1.5, 'pl_iv:wafer'),
         n('pvcell', 2.25, -1.5, I('gcyr:photovoltaic_cell'), 'Photovoltaic Cell', { from: ['nqwafer'], sub: 'GCYR\'s cell, at the crafting table' }),
@@ -141,6 +146,7 @@ export default {
     // ---------------------------------------------------------------- A5 (biofoundry, GT--'s circuit line) and B4 (ring, organoid lab)
     biofoundry: {
       name: 'The biofoundry',
+      line: 'living',
       nodes: [
         n('bone', 0, -0.75, I('minecraft:bone'), 'Bone', { kind: 'raw', sub: 'The creature simulator, with the meat' }),
         n('bact', 0, 2.25, F('gtceu:bacteria'), 'Bacteria', {
@@ -180,6 +186,7 @@ export default {
     },
     organoid: {
       name: 'Living circuits, in orbit',
+      line: 'living',
       nodes: [
         n('barley2', 0, -0.75, I('grindless:engineered_barley_seed'), 'Engineered Barley Seed', { kind: 'raw', sub: 'The crop replants: it\'s never used up' }),
         n('tobacco2', 0, 0.75, I('grindless:engineered_tobacco_seed'), 'Engineered Tobacco Seed', { kind: 'raw' }),
@@ -208,40 +215,69 @@ export default {
       ],
     },
     // ---------------------------------------------------------------- B3 (microgravity smelter, wake shield facility) and B4 (crystal grower)
-    orbital: {
-      name: 'Orbital industry',
+    optics: {
+      name: 'Optical pipe and the microgravity smelter',
+      line: 'optics',
       nodes: [
-        n('zr', 0, -3, I('gtceu:small_zirconium_dust'), 'Zirconium', { kind: 'raw', sub: 'The End\'s zircon' }),
-        n('la', 0, -1.5, I('gtceu:small_lanthanum_dust'), 'Lanthanum', { kind: 'raw', sub: 'Mars rare earths' }),
-        n('zblan', 2.25, -2.25, I('gtceu:zblan_dust'), 'ZBLAN', { from: ['zr', 'la'], by: ['gtceu:mixer'], sub: 'Large mixer, with fluorine: a fluoride glass' }),
-        L('ptfe', 2.25, -0.75, 'pl_hv:ptfe'),
-        L('aramid', 2.25, 0.75, 'pl_hv:aramid'),
-        L('nqdust', 2.25, 2.25, 'pl_iv:nqdust'),
-        n('smelter', 4.75, 0, M('gtceu:microgravity_smelter', 'gtceu:microgravity_processing'), 'Microgravity Smelter', {
+        n('rz', 0, -3.75, I('gtca:red_zircon_dust'), 'Red Zircon', { kind: 'raw', sub: 'The End\'s zircon' }),
+        n('zrd', 2.25, -3.75, I('gtceu:zirconium_dust'), 'Zirconium', { from: ['rz'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer: the silica and oxygen go' }),
+        n('zr', 4.5, -3.75, I('gtceu:small_zirconium_dust'), 'Small Zirconium Dust', { from: ['zrd'], by: ['gtceu:packer'], sub: 'Packer' }),
+        n('ndc', 0, -2.25, I('gtca:neodymium_rare_earth_concentrate_dust'), 'Neodymium Rare-Earth Concentrate', { kind: 'raw', sub: 'Mars bastnasite, centrifuged out of its suspension' }),
+        n('lacl', 2.25, -2.25, I('gtca:lanthanium_chloride_dust'), 'Lanthanum Chloride', { from: ['ndc'], by: ['gtceu:large_chemical_reactor'], sub: 'With hydrochloric acid' }),
+        n('lad', 4.5, -2.25, I('gtceu:lanthanum_dust'), 'Lanthanum', { from: ['lacl'], by: ['gtceu:electrolyzer'], sub: 'The chlorine goes back' }),
+        n('la', 6.75, -2.25, I('gtceu:small_lanthanum_dust'), 'Small Lanthanum Dust', { from: ['lad'], by: ['gtceu:packer'], sub: 'Packer' }),
+        n('fl', 6.75, -4.5, F('gtceu:fluorine'), 'Fluorine', { kind: 'raw', sub: 'IV\'s fluorine' }),
+        n('zblan', 9, -2.25, I('gtceu:zblan_dust'), 'ZBLAN', { from: ['zr', 'la', 'fl'], by: ['gtceu:mixer'], sub: 'Mixer, with barium: a fluoride glass' }),
+        L('ptfe', 9, -0.75, 'pl_hv:ptfe'),
+        L('aramid', 9, 0.75, 'pl_hv:aramid'),
+        L('nqdust', 9, 2.25, 'pl_iv:nqdust'),
+        n('smelter', 11.5, 0, M('gtceu:microgravity_smelter', 'gtceu:microgravity_processing'), 'Microgravity Smelter', {
           kind: 'ours', from: ['zblan', 'ptfe', 'aramid', 'nqdust'],
           desc: 'ZBLAN fibre, metal foam and naquadah alloy, each made better in orbit than on the ground. The alloy skips the coil and the liquid helium altogether.',
         }),
-        n('pipe', 7.25, -2.25, I('gtceu:normal_optical_pipe'), 'Optical Pipe', { kind: 'product', from: ['smelter'], sub: 'No silver in it: research, below' }),
-        n('whipple', 7.25, -0.75, I('grindless:whipple_shield_casing'), 'Whipple Shield Casing', { from: ['smelter'] }),
-        n('nqa', 7.25, 0.75, I('gtceu:naquadah_alloy_ingot'), 'Naquadah Alloy', { kind: 'product', from: ['smelter'], sub: 'Comes out cold; ZPM wants it' }),
-        n('hpic', 7.25, 2.25, I('gtceu:hpic_wafer'), 'HPIC Wafer', { kind: 'raw', sub: 'Or MPIC, for circuit 2' }),
-        n('ge', 7.25, 3.75, I('gtceu:germanium_plate'), 'Germanium Plate', {
-          kind: 'raw', sub: 'Io\'s fumaroles',
+        n('pipe', 14, -2.25, I('gtceu:normal_optical_pipe'), 'Optical Pipe', { kind: 'product', from: ['smelter'], sub: 'No silver in it: research, below' }),
+        n('whipple', 14, -0.75, I('grindless:whipple_shield_casing'), 'Whipple Shield Casing', {
+          from: ['smelter'], role: 'infrastructure', sub: 'The wake shield\'s hull',
         }),
-        L('gaas', 7.25, 5.25, 'pl_lv:gaas'),
-        n('wsf', 9.75, 1.5, M('gtceu:wake_shield_facility', 'gtceu:wake_epitaxy'), 'Wake Shield Facility', {
-          kind: 'ours', from: [structure('whipple'), 'hpic', 'ge', 'gaas'],
+        n('nqa', 14, 0.75, I('gtceu:naquadah_alloy_ingot'), 'Naquadah Alloy', {
+          kind: 'product', from: ['smelter'], extends: 'pl_luv:naquadah', sub: 'Comes out cold; ZPM wants it',
+        }),
+      ],
+    },
+    wake: {
+      name: 'Wake shield wafers',
+      line: 'wake',
+      nodes: [
+        n('indr', 0, -1.5, I('gtceu:indium_dust'), 'Indium', { kind: 'raw', sub: 'Io\'s fumaroles' }),
+        n('gal', 0, 0, I('gtceu:gallium_dust'), 'Gallium', { kind: 'raw', sub: 'MV\'s' }),
+        n('wphos', 0, 1.5, I('gtceu:phosphorus_dust'), 'Phosphorus', { kind: 'raw' }),
+        n('ingap', 2.5, 0, I('gtceu:indium_gallium_phosphide_dust'), 'Indium Gallium Phosphide', { from: ['indr', 'gal', 'wphos'], by: ['gtceu:mixer'], sub: 'Mixer' }),
+        n('mpic', 2.5, 1.5, I('gtceu:mpic_wafer'), 'MPIC Wafer', { kind: 'raw', sub: 'GTM\'s own wafer' }),
+        n('vga', 2.5, 3, F('gtceu:vanadium_gallium'), 'Molten Vanadium Gallium', { kind: 'raw', sub: 'Circuit 2 only' }),
+        n('whip', 2.5, 4.5, I('grindless:whipple_shield_casing'), 'Whipple Shield Casing', { kind: 'raw', sub: 'The microgravity smelter\'s' }),
+        n('ge', 2.5, 6, I('gtceu:germanium_plate'), 'Germanium Plate', { kind: 'raw', sub: 'Io\'s fumaroles' }),
+        L('gaas', 2.5, 7.5, 'pl_lv:gaas'),
+        n('wsf', 5, 3.75, M('gtceu:wake_shield_facility', 'gtceu:wake_epitaxy'), 'Wake Shield Facility', {
+          kind: 'ours', from: [structure('whip'), 'mpic', 'ingap', 'vga', 'ge', 'gaas'],
           desc: 'A disc flying through orbit leaves a wake emptier than any vacuum chamber. Wafers grown in it waste less of their source and take less time.',
         }),
-        n('uhpic', 12.25, 0.75, I('gtceu:uhpic_wafer'), 'UHPIC Wafer', { kind: 'product', from: ['wsf'], sub: 'The fusion reactor\'s chips, and every LuV hatch' }),
-        n('tjw', 12.25, 2.25, I('grindless:triple_junction_wafer'), 'Triple-Junction Wafer', { from: ['wsf'] }),
-        n('tjc2', 14.5, 2.25, I('grindless:triple_junction_cell'), 'Triple-Junction Cell', {
+        n('hpic', 7.5, 2.25, I('gtceu:hpic_wafer'), 'HPIC Wafer', { from: ['wsf'], sub: 'Circuit 2' }),
+        n('tjw', 7.5, 5.25, I('grindless:triple_junction_wafer'), 'Triple-Junction Wafer', { from: ['wsf'], sub: 'Circuit 3' }),
+        n('nqm', 7.5, -0.75, F('gtceu:naquadah'), 'Molten Naquadah', { kind: 'raw', sub: 'IV\'s' }),
+        n('ingap2', 7.5, 0.75, I('gtceu:indium_gallium_phosphide_dust'), 'Indium Gallium Phosphide', { kind: 'raw', sub: 'Again' }),
+        n('wsf2', 10, 2.25, M('gtceu:wake_shield_facility', 'gtceu:wake_epitaxy'), 'Wake Shield Facility, Circuit 1', {
+          kind: 'ours', from: ['hpic', 'ingap2', 'nqm'], sub: 'The same facility, a second pass',
+        }),
+        n('uhpic', 12.5, 2.25, I('gtceu:uhpic_wafer'), 'UHPIC Wafer', { from: ['wsf2'], sub: 'Every LuV hatch' }),
+        n('uhchip', 15, 2.25, I('gtceu:uhpic_chip'), 'UHPIC Chip', { kind: 'product', from: ['uhpic'], by: ['gtceu:cutter'], sub: 'Cutter; the fusion reactor\'s chips' }),
+        n('tjc2', 10, 5.25, I('grindless:triple_junction_cell'), 'Triple-Junction Cell', {
           kind: 'product', from: ['tjw'], by: ['gtceu:cutter'], sub: 'Cutter; the orbital solar panels take it',
         }),
       ],
     },
     grower: {
       name: 'Crystals in orbit',
+      line: 'crystals',
       nodes: [
         n('emerald', 0, -0.75, I('gtceu:exquisite_emerald_gem'), 'Exquisite Emerald', {
           kind: 'raw', sub: 'Or the belt\'s olivine', pending: { B5: { sub: 'Or exquisite olivine' } },
@@ -254,7 +290,7 @@ export default {
         }),
         n('chip', 5, -0.75, I('gtceu:raw_crystal_chip'), 'Raw Crystal Chip', { from: ['grower'] }),
         n('mass', 5, 1.5, I('grindless:sapphire_test_mass'), 'Sapphire Test Mass', {
-          kind: 'product', from: ['grower'], sub: 'The detector\'s mirrors, on Ganymede', pending: { B9: { sub: 'Stored for now' } },
+          kind: 'product', role: 'infrastructure', from: ['grower'], sub: 'The detector\'s mirrors, on Ganymede', pending: { B9: { sub: 'Stored for now' } },
         }),
         n('cpu2', 7.25, -0.75, I('gtceu:crystal_cpu'), 'Crystal CPU', {
           kind: 'product', from: [via('chip', 'gtceu:engraved_crystal_chip')], sub: 'EBF with an emerald plate, then the laser engraver',
@@ -264,10 +300,13 @@ export default {
     // ---------------------------------------------------------------- B10 (fusion and research)
     fusion: {
       name: 'Fusion, Mk1',
+      line: 'crystals',
       nodes: [
         n('coil2', 2, -2.25, I('gtceu:superconducting_coil'), 'Superconducting Coil', { kind: 'raw', sub: 'Wound in the magnet works' }),
         n('uhchip', 2, -0.75, I('gtceu:uhpic_chip'), 'UHPIC Chip', { kind: 'raw', sub: 'The wake shield\'s wafers, cut' }),
-        n('ndf', 2, 0.75, F('gtceu:neodymium'), 'Molten Neodymium', { kind: 'raw', sub: 'Mars neodymium: the EBF, then the extractor' }),
+        L('nd0', 0, -0.75, 'pl_ev:nd'),
+        n('nd1', 0, 0.75, I('gtceu:neodymium_ingot'), 'Neodymium Ingot', { from: ['nd0'], by: ['gtceu:electric_blast_furnace'], sub: 'EBF' }),
+        n('ndf', 2, 0.75, F('gtceu:neodymium'), 'Molten Neodymium', { from: ['nd1'], by: ['gtceu:extractor'], sub: 'Mars neodymium: the EBF, then the extractor' }),
         L('deut', 2, 2.25, 'pl_iv:deut'),
         L('tritium', 2, 3.75, 'pl_iv:tritium'),
         n('mg', 2, 5.25, F('gtceu:magnesium'), 'Molten Magnesium', { kind: 'raw', sub: 'With oxygen, for GTCA\'s calcium plasma' }),
@@ -290,14 +329,15 @@ export default {
         n('ccase', 0, 0.75, I('gtceu:computer_casing'), 'Computer Casing', { kind: 'raw', sub: 'Iridium, from Mercury' }),
         n('bank', 2.25, 0, I('gtceu:data_bank'), 'Data Bank', { from: ['pipe2', 'ccase'], by: ['gtceu:assembly_line'], sub: 'Assembly line' }),
         n('urh', 2.25, 1.5, I('gtceu:uranium_rhodium_dinaquadide_double_wire'), 'URhNq2 Wire', { kind: 'raw', sub: 'The large mixer, on two LuV hatches' }),
-        n('hpca', 4.5, -0.75, I('gtceu:high_performance_computation_array'), 'HPCA', { kind: 'product', from: [build('bank')], sub: 'Computation for the research station' }),
+        n('hpca', 4.5, -0.75, I('gtceu:high_performance_computation_array'), 'HPCA', { kind: 'product', role: 'infrastructure', from: [build('bank')], sub: 'Computation for the research station' }),
         n('rs', 4.5, 0.75, M('gtceu:research_station', 'gtceu:research_station'), 'Research Station', { from: [build('bank'), build('urh')] }),
-        n('orb', 6.75, 0.75, I('gtceu:data_orb'), 'Data Orb', { kind: 'product', from: ['rs'], sub: 'The research for ZPM\'s energy hatch' }),
+        n('orb', 6.75, 0.75, I('gtceu:data_orb'), 'Data Orb', { kind: 'product', role: 'research', from: ['rs'], sub: 'The station writes it: the research for ZPM\'s energy hatch' }),
       ],
     },
     // ---------------------------------------------------------------- pending: B5 (the belt)
     belt: {
       name: 'Asteroid metals',
+      line: 'asteroid',
       pkg: 'B5',
       nodes: [
         n('bit', 0, -0.75, I('grindless:hss_s_drill_bit'), 'HSS-S Drill Bit', { kind: 'raw' }),
@@ -331,6 +371,7 @@ export default {
     },
     miner: {
       name: 'Boulders and sunlight',
+      line: 'asteroid',
       pkg: 'B5',
       nodes: [
         n('bag', 0, 0.5, I('grindless:capture_bag'), 'Capture Bag', { kind: 'raw', sub: 'Worn out a little every run' }),
@@ -341,7 +382,7 @@ export default {
         n('water', 5, -1.5, F('minecraft:water'), 'Water', { kind: 'by', from: ['om'], end: 'network', sub: 'The belt base, and the network' }),
         n('co2b', 5, -0.25, F('gtceu:carbon_dioxide'), 'Carbon Dioxide', { from: ['om'] }),
         n('carbon', 5, 1, I('gtceu:carbon_dust'), 'Carbon', { from: ['om'] }),
-        n('extract', 5, 2.5, I('grindless:chondritic_extract'), 'Chondritic Extract', { kind: 'product', from: ['om'], sub: 'Europa\'s culture needs it' }),
+        n('extract', 5, 2.5, I('grindless:chondritic_extract'), 'Chondritic Extract', { kind: 'product', role: 'resource', from: ['om'], sub: 'Europa\'s culture needs it' }),
         n('co3', 7.5, 0.25, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', {
           kind: 'product', from: ['co2b', 'carbon'], by: ['gtceu:optical_mining'], sub: 'Circuit 2: the asteroid processor\'s charge',
         }),
@@ -350,6 +391,7 @@ export default {
     // ---------------------------------------------------------------- B6 (Io's surface); pending: B7T or B7S (Io orbit), B8 (Europa), B9 (Ganymede), B1 (travel)
     io: {
       name: 'Io: fumaroles and heat',
+      line: 'wake',
       pkg: 'B6',
       nodes: [
         n('cond', 2.5, 0, M('gtceu:fumarole_condenser', 'gtceu:fumarole_condensing'), 'Fumarole Condenser', {
@@ -362,7 +404,7 @@ export default {
         n('subl', 5, 0.75, I('grindless:ionian_sublimate'), 'Ionian Sublimate', { from: ['cond'] }),
         n('rock', 2.5, 2.25, I('minecraft:basalt'), 'Basalt', { kind: 'raw', sub: 'The rock breaker\'s, or Io\'s black sand' }),
         n('concrete', 5, 2.25, I('grindless:sulfur_concrete_casing'), 'Sulfur Concrete Casing', {
-          kind: 'product', from: ['cond', 'rock'], by: ['gtceu:fumarole_condensing'], sub: 'Circuit 3; the Jovian bases are built of it',
+          kind: 'product', role: 'infrastructure', from: ['cond', 'rock'], by: ['gtceu:fumarole_condensing'], sub: 'Circuit 3; the Jovian bases are built of it',
         }),
         n('intake', 7.5, -3, M('gtceu:volcanic_intake', 'gtceu:volcanic_heat'), 'Volcanic Intake', {
           kind: 'ours', from: ['bundle', 'so2'],
@@ -376,6 +418,7 @@ export default {
     // lands; both sit in the same place, and pl-model.mjs keeps the slot's room in the layout while neither has landed
     ioorbit: {
       name: 'Io orbit, or the sulfur-iodine plant',
+      role: 'power',
       nodes: [
         n('spool', 0, -0.75, I('grindless:tether_spool'), 'Tether Spool', { kind: 'raw', pkg: 'B7T', sub: 'Used up now and then: about one an hour' }),
         n('argon', 0, 0.75, F('gtceu:argon'), 'Argon', { kind: 'raw', pkg: 'B7T', sub: 'Mars argon for the hollow cathode, 50 mB a run' }),
@@ -400,6 +443,7 @@ export default {
     },
     europa: {
       name: 'Europa: something alive',
+      line: 'living',
       pkg: 'B8',
       nodes: [
         n('probe', 0, -0.75, I('grindless:cryobot_probe'), 'Cryobot Probe', { kind: 'raw', sub: 'Made at home, spent on the first dive' }),
@@ -433,7 +477,7 @@ export default {
           kind: 'ours', from: ['sgr2', 'orb2', structure('mass2'), 'lhe3'],
           desc: 'Two long arms buried in quiet ice, listening for space itself to stretch. The Sagittarius A* signal stays in its bus, and the first catalogue holds a black hole merger, heard as a chirp.',
         }),
-        n('catalogue', 5, 0.75, I('grindless:gravitational_wave_catalogue'), 'Gravitational-Wave Catalogue', { kind: 'product', from: ['gw'] }),
+        n('catalogue', 5, 0.75, I('grindless:gravitational_wave_catalogue'), 'Gravitational-Wave Catalogue', { kind: 'product', role: 'research', from: ['gw'] }),
         n('coilc', 0, 4, I('grindless:coilgun_coil_casing'), 'Coilgun Coil Casing', { kind: 'raw', sub: 'Wound in the magnet works' }),
         n('jprobe', 0, 5.5, I('grindless:jupiter_entry_probe'), 'Jupiter Entry Probe', { kind: 'raw' }),
         n('sprobe', 0, 7, I('grindless:saturn_flyby_probe'), 'Saturn Flyby Probe', { kind: 'raw' }),
@@ -441,12 +485,13 @@ export default {
           kind: 'ours', from: [structure('coilc'), 'jprobe', 'sprobe'],
           desc: 'Ganymede\'s cold lets an HV superconductor work with no cryostat at all. The barrel throws probes off the moon without a rocket.',
         }),
-        n('survey', 5, 4.75, I('grindless:jovian_atmosphere_survey'), 'Jovian Atmosphere Survey', { kind: 'product', from: ['coilgunl'], sub: 'Kept for ZPM' }),
-        n('chart', 5, 6.25, I('grindless:saturn_transfer_chart'), 'Saturn Transfer Chart', { kind: 'product', from: ['coilgunl'], sub: 'The next trip: kept for ZPM' }),
+        n('survey', 5, 4.75, I('grindless:jovian_atmosphere_survey'), 'Jovian Atmosphere Survey', { kind: 'product', role: 'travel', from: ['coilgunl'], sub: 'Kept for ZPM' }),
+        n('chart', 5, 6.25, I('grindless:saturn_transfer_chart'), 'Saturn Transfer Chart', { kind: 'product', role: 'travel', from: ['coilgunl'], sub: 'The next trip: kept for ZPM' }),
       ],
     },
     travel: {
       name: 'Getting there',
+      role: 'travel',
       pkg: 'B1',
       nodes: [
         n('pearl', 0, -0.75, I('minecraft:ender_pearl'), 'Ender Pearl', { kind: 'raw' }),
