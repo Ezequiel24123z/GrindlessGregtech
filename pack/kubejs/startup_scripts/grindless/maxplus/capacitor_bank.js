@@ -99,7 +99,7 @@
         .resistance(6)
         .requiresTool(true)
         .tagBlock('minecraft:mineable/pickaxe')
-        .textureAll(String(r.texture))
+        .textureAll('grindless:block/maxplus/horizon_capacitor')
         .item(function (item) {
           item.tooltip(Text.gray(Text.translate('tooltip.grindless.horizon_capacitor.0', String(FU.formatNumbers(r.capacity)))))
           item.tooltip(Text.darkGray(Text.translate('tooltip.grindless.horizon_capacitor.1')))
@@ -124,6 +124,6 @@
         Text.translate('grindless.machine.horizon_capacitor_bank.tooltip.0'),
         Text.translate('grindless.machine.horizon_capacitor_bank.tooltip.1')
       ])
-      .workableCasingModel(b.casingTexture, 'grindless:block/multiblock/wireless_energy_tower')
+      .workableCasingModel(b.casingTexture, 'grindless:block/multiblock/horizon_capacitor_bank')
   })
 })()
