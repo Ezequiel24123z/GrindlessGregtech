@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.magellanic_stream",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:magellanic_stream",
+  "world": "grindless:magellanic_stream",
+  "orbit_world": "grindless:magellanic_stream",
+  "rocket_tier": 14,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 5,
+  "temperature": 100,
+  "solar_power": 0,
+  "has_oxygen": false,
+  "button_color": 3158064
+}
