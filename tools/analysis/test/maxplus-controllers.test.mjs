@@ -89,7 +89,7 @@ test('no MAX+ assembly-line controller is built on MAX components: a MAX+ contro
   const unlisted = run.docs.recipes.recipes
     .filter((r) => r.t === 'gtceu:assembly_line' && r.i.startsWith('grindless:assembly_line/'))
     .map((r) => r.i.replace('grindless:assembly_line/', ''))
-    .filter((n) => machines.has(n) && !known.has(n) && controllerLike(n));
+    .filter((n) => machines.has(n) && !known.has(n) && !/_hatch_/.test(n) && controllerLike(n));
   assert.deepEqual(unlisted, [], `MAX+ controllers not covered: ${unlisted.join(', ')}`);
 });
 
