@@ -52,7 +52,7 @@ export default {
           ['hic', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours', { desc: 'A calcium-48 beam on an actinide target; the atoms fly out as recoil gas.' }],
           ['gas', F('gtceu:flerovium_recoil_gas'), 'Flerovium Recoil Gas'],
           ['rec', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours', { from: ['gas', 'mem'], desc: 'Sends the gas through an etched membrane; the helium returns.' }],
-          ['fl', I('grindless:flerovium_atoms'), 'Flerovium Atoms', 'product', { role: 'research' }],
+          ['fl', I('grindless:flerovium_atoms'), 'Flerovium Atoms'],
         ], 'the superheavy census'),
         L('x_fsc', 5, 3.5, 'pl_zpm:duplate'),
         // californium-249 wheel
