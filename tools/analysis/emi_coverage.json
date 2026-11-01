@@ -92,10 +92,8 @@
     { "id": "gtceu:horizon_strand_ingot", "role": "acquisition", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "gtceu:horizon_strand_ingot", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "grindless:epilogue", "role": "acquisition", "reason": "MX-E1: the epilogue book is given at the MAX+ arrival, not by a recipe" },
-        { "id": "grindless:launched_belt_seed", "role": "use", "reason": "C3 audit (C1 F2): gate c15 makes it and the max-nsc grant in tiers/max.json (travel.js) takes it when the belt opens; no recipe uses it" }
-      ],
-      "pendingRoutes": [
-    { "id": "grindless:horizon_machine_casing", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-A1; delete the row then" },
+        { "id": "grindless:launched_belt_seed", "role": "use", "reason": "C3 audit (C1 F2): gate c15 makes it and the max-nsc grant in tiers/max.json (travel.js) takes it when the belt opens;         no recipe uses it" },
+            { "id": "grindless:horizon_machine_casing", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-A1; delete the row then" },
     { "id": "grindless:horizon_machine_casing", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-A1; delete the row then" },
     { "id": "grindless:condensate_vessel_casing", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-A1; delete the row then" },
     { "id": "grindless:condensate_vessel_casing", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-A1; delete the row then" },
@@ -647,5 +645,6 @@
     { "id": "fluid:gtceu:ime_leach_fractions", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-B1; delete the row then" },
     { "id": "fluid:gtceu:ime_leach_fractions", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-B1; delete the row then" }
   ],
-  "pendingUses": []
+      "pendingRoutes": [],
+      "pendingUses": []
 }
