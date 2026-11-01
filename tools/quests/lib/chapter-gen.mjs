@@ -10,6 +10,7 @@
 //   LINKS   [{ key, ref, x, y, shape?, size? }]  quest links shown in this chapter; ref is a key of the era, '<era>:KEY' or 'X:<hex>'
 //   QUESTS  [{ key, kind?, title, icon, x, y, deps, teach?, desc, tasks, rewards, id?, shape?, size?, optional?, pkg?, fallback?,
 //              slot?, adjust?, raw? }]
+//   a task: { type, id?, item?, count?, dimension?, raw?, snbt? }; `snbt` is the task's own SNBT text, written as it is.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -198,6 +199,8 @@ function withRaw(f, raw, where) {
   return f;
 }
 function task(t, where) {
+  // snbt: the task as the book has it, for a task the writer does not model (a tag filter, a title); lines are relative to the task
+  if (t.snbt !== undefined) return t.snbt;
   const f = { id: str(t.id), type: str(t.type) };
   if (t.type === 'item') {
     f.item = str(t.item);
@@ -217,8 +220,8 @@ function reward(r, where) {
   return compound(withRaw(f, r.raw, where));
 }
 function list(key, items, indent) {
-  if (items.length === 1) return key + ': [' + items[0] + ']';
-  return key + ': [\n' + items.map((s) => indent + '\t' + s).join('\n') + '\n' + indent + ']';
+  if (items.length === 1 && !items[0].includes('\n')) return key + ': [' + items[0] + ']';
+  return key + ': [\n' + items.map((s) => s.split('\n').map((l) => indent + '\t' + l).join('\n')).join('\n') + '\n' + indent + ']';
 }
 
 // the description: the teach paragraph (for, needs, unlocks, automate, joined), then the extra paragraphs

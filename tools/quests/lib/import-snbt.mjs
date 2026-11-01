@@ -11,7 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parse } from './snbt.mjs';
+import { parse, stringify } from './snbt.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const QUESTS_DIR = path.resolve(HERE, '..');
@@ -106,6 +106,9 @@ export function importChapters(dir, eras) {
       if (desc.length) L.push('    desc: [', ...desc.map((p) => `      ${q(p)},`), '    ],');
       const tasks = quest.tasks.map((t, i) => {
         const w = `${where} task ${i}`;
+        if (Object.values(t).some((v) => v && typeof v === 'object' && !isNum(v))) {
+          return `{ type: ${q(t.type)}, id: ${q(t.id)}, snbt: ${q(stringify(t).trimEnd())} }`;
+        }
         const extra = rawOf(t, TASK_KEYS, w);
         const parts = [`type: ${q(t.type)}`, `id: ${q(t.id)}`];
         if (t.type === 'item') {
