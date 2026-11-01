@@ -55,8 +55,8 @@ $script:EraStyles = [ordered]@{
     uxv   = New-EraStyle @{ Apply = $true; Shape = 'step'; Wear = 'etched'; WearDensity = 0.04; Trim = 'rim'; Panel = 'grid'; RampSteps = 8; LumTarget = 0.42; SatTarget = 0.30; Gamma = 1.05; LumLo = 0.02; LumHi = 0.97; SatGain = 1.05; SatLift = 0.02; TintHue = 280; TintSat = 0.10; Note = 'violet-tinted etched hardware' }
 
     # Distinct signatures. UEV and UIV: applied by RF-6D-b.
-    uev   = New-EraStyle @{ Apply = $true; Shape = 'notch'; Wear = 'scorch'; WearDensity = 0.06; Trim = 'edge-light'; Panel = 'rib'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.36; Gamma = 0.9; LumLo = 0.03; LumHi = 0.97; SatGain = 1.3; SatLift = 0.04; TintHue = 12; TintSat = 0.16; Note = 'ribbed, scorched ember steel' }
-    uiv   = New-EraStyle @{ Apply = $true; Shape = 'round'; Wear = 'frost'; WearDensity = 0.07; Trim = 'edge-light'; Panel = 'ring'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.38; Gamma = 0.88; LumLo = 0.03; LumHi = 0.97; SatGain = 1.05; SatLift = 0.02; TintHue = 165; TintSat = 0.12; Note = 'rounded, frosted and cool' }
+    uev   = New-EraStyle @{ Apply = $true; Shape = 'notch'; Wear = 'scorch'; WearDensity = 0.06; Trim = 'edge-light'; Panel = 'rib'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.36; Gamma = 1.15; LumLo = 0.03; LumHi = 0.97; SatGain = 1.3; SatLift = 0.04; TintHue = 12; TintSat = 0.16; Note = 'ribbed, scorched ember steel' }
+    uiv   = New-EraStyle @{ Apply = $true; Shape = 'round'; Wear = 'frost'; WearDensity = 0.07; Trim = 'edge-light'; Panel = 'ring'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.38; Gamma = 1.3; LumLo = 0.03; LumHi = 0.97; SatGain = 1.05; SatLift = 0.02; TintHue = 165; TintSat = 0.12; Note = 'rounded, frosted and cool' }
 
     # OpV: polished brass-and-ceramic hardware. Chamfered corners, warm bevel trim, verdigris-free brass speckle, one seam.
     opv   = New-EraStyle @{ Apply = $true; Shape = 'bevel'; Wear = 'brass-speckle'; WearDensity = 0.07; Trim = 'bevel'; Panel = 'seam'; Glint = 0; RampSteps = 10
@@ -366,7 +366,7 @@ function Test-EraBodyAccent {
 }
 
 function New-EraComponentBody {
-    param([string]$Era, [string]$Kind, [string]$Name, [int]$Body, [int]$Accent)
+    param([string]$Era, [string]$Kind, [string]$Name, [int]$Body, [int]$Accent, [switch]$Carve)
     $style = Get-EraStyle $Era
     $seed = Get-EraHash $Name
     $steps = [Math]::Max(3, $style.RampSteps)
@@ -383,6 +383,15 @@ function New-EraComponentBody {
         $f = 0.62 + 0.76 * ($q / [double]($steps - 1))
         Set-Px $c $x $y (EraShade $base $f)
     } }
+    # per-item silhouette: a seeded 9% of the boundary pixels is carved so same-kind items stop sharing one mask
+    if ($Carve) {
+        $src = [int[]]$c.P.Clone()
+        for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+            if (-not ($src[$y * 16 + $x] -band 0xFF000000)) { continue }
+            $edge = ($x -eq 0 -or $y -eq 0 -or $x -eq 15 -or $y -eq 15 -or -not ($src[$y * 16 + $x - 1] -band 0xFF000000) -or -not ($src[$y * 16 + $x + 1] -band 0xFF000000) -or -not ($src[($y - 1) * 16 + $x] -band 0xFF000000) -or -not ($src[($y + 1) * 16 + $x] -band 0xFF000000))
+            if ($edge -and (Get-EraNoise $x $y ($seed + 31)) -lt 90) { $c.P[$y * 16 + $x] = 0 }
+        } }
+    }
     $src = [int[]]$c.P.Clone()
     for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
         if (($src[$y * 16 + $x] -band 0xFF000000) -ne 0) { continue }
@@ -402,7 +411,7 @@ function New-EraLegacyItem {
     $map = @{ dust = 'heap'; disk = 'orb'; tube = 'vial'; mould = 'cup'; blade = 'sail'; ingot = 'module'; plate = 'card'; foil = 'card'; wafer = 'chip'; chip = 'chip'; chunk = 'crystal'; pellet = 'capsule'; vial = 'vial' }
     if (-not $map.ContainsKey($Kind)) { return $null }
     $body = Hex $Rgb
-    return New-EraComponentBody $Era $map[$Kind] $Name $body (EraShade $body 1.35)
+    return New-EraComponentBody $Era $map[$Kind] $Name $body (EraShade $body 1.35) -Carve
 }
 
 # ---------------------------------------------------------------- Save-Png hook
