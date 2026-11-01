@@ -1,4 +1,4 @@
-// priority: -5540
+// priority: -5609
 // -----------------------------------------------------------------------------------------------
 // MAX+ machine 17, the Hyperstargate (docs/eras/maxplus.md "The Hyperstargate", lines 414 to 472; package XP-G1). This file registers:
 //

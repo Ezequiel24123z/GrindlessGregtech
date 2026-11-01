@@ -1,4 +1,4 @@
-// priority: -5304
+// priority: -5310
 // TEST ONLY, XP-B1 (gtceu:nickel_56_burner and gate c16). Command: kubejs custom_command gg_test_maxplus_tarantula
 // Band ONLY: X 46592-46655, Z 0-63, Y 98-125, in grindless:tarantula_orbit (the burner) and gcyr:black_hole_orbit (the gate); zones.json row maxplus_tarantula.
 //   T1 (named uncertainties):

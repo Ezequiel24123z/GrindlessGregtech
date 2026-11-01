@@ -1,4 +1,4 @@
-// priority: 6803
+// priority: 6816
 // Gregtech Grindless - names, tooltips and EMI lines of MAX's accretion feeder (server_scripts/grindless/max/feeder.js; package MAX-E1):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each older row of the package

@@ -1,4 +1,4 @@
-// priority: -5609
+// priority: -5619
 // -----------------------------------------------------------------------------------------------
 // MAX+ machine 11, the meta-material loom (docs/eras/maxplus.md "Machines" 11; package XP-H1): the multiblock and its recipe type. Every item
 // and casing it uses is XP-F1's (maxplus/foundation.js). The recipes, with lines T4 to T7's older-machine rows, are in

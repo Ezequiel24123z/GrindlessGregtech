@@ -1,4 +1,4 @@
-// priority: -5192
+// priority: -5190
 // TEST ONLY, XP-H3 (gtceu:condensate_assembler). Command: kubejs custom_command gg_test_maxplus_assembler
 // Band ONLY: X 46464-46527, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_assembler).
 //   T1 (named uncertainty: the assembler forms at Sgr A* on one 1,024 A MAX+ hatch and runs c1 at 2^39 EU/t;

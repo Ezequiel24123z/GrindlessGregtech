@@ -1,4 +1,4 @@
-// priority: 6814
+// priority: 6828
 // Gregtech Grindless - EMI lines of MAX-A3's L8 rows on older machines (the power die line). Item and component names are in
 // max_foundation_lang.js. Names go in en_us.
 (function () {

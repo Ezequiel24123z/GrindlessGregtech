@@ -1,4 +1,4 @@
-// priority: -5316
+// priority: -5320
 // TEST ONLY, XP-W2 (bench overlay, never shipped; needs the startup overlay on: kubejs/config/gg_test_maxplus_wireless.json {"enabled": true}).
 // The exact wireless store and the 4,096 A MAX+ hatch:
 //

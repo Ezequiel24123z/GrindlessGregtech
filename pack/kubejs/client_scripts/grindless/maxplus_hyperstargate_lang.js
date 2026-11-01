@@ -1,4 +1,4 @@
-// priority: 6990
+// priority: 6948
 // MAX+ machine 17, the Hyperstargate: names, tooltips, controller lines and recipe info (package XP-G1). English only.
 ClientEvents.lang('en_us', function (e) {
   var L = function (k, v) { e.add('grindless', k, v) }
