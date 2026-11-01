@@ -2989,6 +2989,10 @@ file = "kubejs/assets/grindless/textures/block/max/geroch_drum_casing.png"
 hash = "a5c7d8aea63ea1a00b369b44e5d9b26320ebdb52a9a2ec28542702aabd17878d"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/block/max/laser_link_casing.png"
+hash = "0356d0b45102f2e0cb58052e9ae3b2747709900523deb301de96853b077393f7"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/block/max/max_optical_table_casing.png"
 hash = "924259fce5e0018a667dbdeadf0692af535018f73f2b80911625303f57893340"
 
@@ -3011,6 +3015,10 @@ hash = "8f2555c350fb37b47d778c8e26878197f072ddc3f042333ae1bc2106449b28ff"
 [[files]]
 file = "kubejs/assets/grindless/textures/block/max/stream_turn_casing.png"
 hash = "ae3180625b223a32db5b75899592134f2b78517dcfc569f50a4cf13a58ac1367"
+
+[[files]]
+file = "kubejs/assets/grindless/textures/block/max/test_mass_enclosure_casing.png"
+hash = "c4a9705b01c9bfc28414904b10cc4328d642e719c751ea87d7d9f29bcfdef65b"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/block/maxplus/bound_press_casing.png"
@@ -9942,7 +9950,7 @@ hash = "5d555473a62d04b8bb0f52205ae733a209d513e3b5789d831080c957c9bdf019"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/epilogue.png"
-hash = "1f43460647c7a0018c0c7458dba0ec7bdd7b030cab209a754ef440da2835f882"
+hash = "a769aa4de9002c09399ebe6fb452c03935295bff076611012bb5d0f06dd97997"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/epitaxial_silicon_wafer.png"
@@ -18762,7 +18770,7 @@ hash = "d08270bf8d973b1575db4cd55d888369a841d5ebe35f1a654141cfe042a897fe"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/foundation.js"
-hash = "07eb7d4380c62cc83d67abf9977e008ac43ba47551f3525fd50e788115aaa794"
+hash = "626d661be09fb33c63a3c55660d58e6da01e183c49543e9fef591c6533d78eee"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/furnace.js"
@@ -18774,7 +18782,7 @@ hash = "aad640d44bbc63c6b7e8d3ec320b5e8cd86be66c1fa45b428ff588170217b523"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/horizon_interferometer.js"
-hash = "4aab03789662031348ea2d7e0ac357b6d8374163fc1bb1be41475bf6c1f04100"
+hash = "1a06b1ecfefa04313fcb757adbd2b6582843793e9f6a8cd422d9a557fecaf08a"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/imager.js"

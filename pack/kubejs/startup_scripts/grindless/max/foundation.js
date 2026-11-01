@@ -361,7 +361,8 @@
     mirror_shell_segment: { texture: 'grindless:block/max/mirror_shell_segment' },
     stream_bundle_block: { texture: 'grindless:block/max/stream_bundle_block' },
     feeder_coil_casing: { texture: 'grindless:block/max/feeder_coil_casing' },
-    // RF-7A casings of machines 11-14; no texture yet (Phase 6), so they show the missing-texture cube until then
+    // RF-7A casings of machines 11-14 (textures: Build-MaxHorizonInterferometerTextures.ps1, Build-MaxSynchroniserTextures.ps1,
+    // Build-MaxFluxClampTextures.ps1, Build-MaxReclamationTextures.ps1)
     test_mass_enclosure_casing: { texture: 'grindless:block/max/test_mass_enclosure_casing' },
     laser_link_casing: { texture: 'grindless:block/max/laser_link_casing' },
     driver_ring_casing: { texture: 'grindless:block/max/driver_ring_casing' },
