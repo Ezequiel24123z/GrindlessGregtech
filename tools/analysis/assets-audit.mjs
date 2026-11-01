@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(HERE, '..', '..');
 
-export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 
 // Thresholds, stated in docs/reforge/06_assets_audit.md.
 export const LIMITS = {
@@ -479,6 +479,16 @@ export function auditTextures({ root = ROOT, packDir = 'pack', gtmJar = null, st
       const j = JSON.parse(fs.readFileSync(f, 'utf8'));
       for (const v of Object.values(j.textures || {})) if (typeof v === 'string' && rows.has(v)) { const row = rows.get(v); row.refs++; row.owner = row.owner || `model:${rel(assetsDir, f)}`; }
     } catch { /* ignore unparsable */ }
+  }
+  // JSON that names a texture by its full path (sky renderers) also references it
+  for (const f of walk(path.join(assetsDir, 'grindless'), '.json')) {
+    if (/[\\/]models[\\/]/.test(f)) continue;
+    let text = '';
+    try { text = fs.readFileSync(f, 'utf8'); } catch { continue; }
+    for (const m of text.matchAll(/"([a-z0-9_.-]+):textures\/([a-z0-9_./-]+)\.png"/g)) {
+      const row = rows.get(`${m[1]}:${m[2]}`);
+      if (row) { row.refs++; row.owner = row.owner || `json:${rel(assetsDir, f)}`; }
+    }
   }
   // per-file categories
   const clusters = clusterRecolours(stats);

@@ -29,7 +29,7 @@ export const KINDS = [
   'cycle_gain',
   'trivial_step',
 ];
-const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 const TIER_ERA = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
 const OURS_NS = ['grindless'];
 // GT forms that are used by placing or wearing them, not by a recipe: no use is expected.
@@ -207,7 +207,8 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
       add('hidden_with_recipes', k, era, file, `hidden from the index only, yet ${prod.length} recipes make it and ${cons.length} use it (hide with grindless:hidden_with_recipes or drop the recipes)`);
     }
     // trivial step: the only producer is a 1:1 recipe from one other item of ours
-    if (!hidden && prod.length === 1 && prod[0].added) {
+    // a direct_conversion recipe is a generator (plasma in, EU out), not a process step
+    if (!hidden && prod.length === 1 && prod[0].added && prod[0].type !== 'gtceu:direct_conversion') {
       const rec = norm.find((x) => x.r.id === prod[0].id);
       const ins = rec.n.inputs.filter((i) => !i.cap && i.consume > 0 && !i.alts.includes('gtceu:programmed_circuit'));
       const outs = rec.n.outputs;
