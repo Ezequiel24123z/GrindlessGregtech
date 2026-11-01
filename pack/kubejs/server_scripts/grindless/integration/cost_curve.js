@@ -1,3 +1,4 @@
+// priority: -27774
 // -----------------------------------------------------------------------------------------------
 // Cost curve (Project Reforge, RF-2A; docs/reforge/02_cost_curve.md): scales the consumed item and fluid inputs of the recipes
 // that make key items, GTM's own and ours, by a factor per era read from data/grindless/tables/cost_curve/<era>.json (mv..max).
