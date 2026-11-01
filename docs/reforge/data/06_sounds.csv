@@ -1,0 +1,415 @@
+kind,id,source,era,categories,detail,soundOf,soundSource,recipeTypes,shared,file,bytes,seconds,rmsDb,peakDb,effectiveDb,volume,attenuation,levelMismatchDb,seamRatio,hfShare,cycleStrength,cycleSeconds,usedBy,wired,specType
+file,grindless:loop_antimatter_accumulator,grindless,,annoying;level,peak -0.2 dBFS | 82% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_antimatter_accumulator.ogg,41057,6,-14,-0.2,-17.7,0.65,32,0,0.5,0.82,0.31,0.36,1,gtceu:positron_accumulation,gtceu:positron_accumulation
+file,grindless:loop_asteroid_processor,grindless,,level,peak 2 dBFS | rms -13.8 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_asteroid_processor.ogg,42184,6,-13.8,2,-16.9,0.7,28,0.5,0.1,0.071,0.31,0.54,1,gtceu:asteroid_processing,gtceu:asteroid_processing
+file,grindless:loop_biofoundry,grindless,,level,-6.2 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_biofoundry.ogg,39525,6,-18.9,-8.3,-23.3,0.6,20,2.9,0.4,0.005,0.2,0.24,1,gtceu:sterile_culture,gtceu:sterile_culture
+file,grindless:loop_biorefinery,grindless,,level;loop,-20.2 dB from the pack median once volume is applied | start/end level differ by 13.6 dB,,,,,pack/kubejs/assets/grindless/sounds/loop_biorefinery.ogg,51329,6,-32.9,-5.8,-37.3,0.6,24,13.6,0.5,0.235,0.14,0.9,1,gtceu:bio_distillation,gtceu:bio_distillation
+file,grindless:loop_coking_battery,grindless,,level,peak 1.1 dBFS | rms -10.8 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_coking_battery.ogg,44030,6,-10.8,1.1,-14.5,0.65,24,2.1,3.5,0,0.2,2.92,1,gtceu:coking,gtceu:coking
+file,grindless:loop_combined_cycle,grindless,,level,peak 0.1 dBFS | rms -13 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_combined_cycle.ogg,40213,6,-13,0.1,-16.1,0.7,32,0.1,0.5,0.02,0.18,1.34,1,gtceu:combined_cycle,gtceu:combined_cycle
+file,grindless:loop_cryogenic_plant,grindless,,annoying;level,peak 1.6 dBFS | 81% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_cryogenic_plant.ogg,41115,6,-15,1.6,-18.7,0.65,24,1.5,0.7,0.814,0.8,0.16,1,gtceu:cryogenic_processing,gtceu:cryogenic_processing
+file,grindless:loop_cvi_furnace,grindless,,level,peak 2.7 dBFS | rms -9 dBFS too loud | 4.4 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_cvi_furnace.ogg,40684,6,-9,2.7,-12.7,0.65,24,0.6,1.2,0.039,0.13,0.18,1,gtceu:chemical_vapour_infiltration,gtceu:chemical_vapour_infiltration
+file,grindless:loop_deep_space_antenna,grindless,,level,peak 2.2 dBFS | rms -10.5 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_deep_space_antenna.ogg,37674,6,-10.5,2.2,-14.9,0.6,28,1.4,0.1,0.023,0.16,0.26,1,gtceu:deep_space_tracking,gtceu:deep_space_tracking
+file,grindless:loop_dyson_swarm,grindless,,annoying;level,peak 3.4 dBFS | rms -10.4 dBFS too loud | 96% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_dyson_swarm.ogg,42295,6,-10.4,3.4,-14.1,0.65,32,0.5,0.3,0.962,0.37,0.16,1,gtceu:dyson_swarm,gtceu:dyson_swarm
+file,grindless:loop_earth_orbit_lab,grindless,,level,peak 0.5 dBFS,,,,,pack/kubejs/assets/grindless/sounds/loop_earth_orbit_lab.ogg,29270,6,-14.5,0.5,-19.7,0.55,20,0.1,2.1,0,0.5,0.78,1,gtceu:quantum_degenerate_gas,gtceu:quantum_degenerate_gas
+file,grindless:loop_electron_beam_furnace,grindless,,level,peak 1.6 dBFS | rms -9.2 dBFS too loud | 4.2 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_electron_beam_furnace.ogg,35516,6,-9.2,1.6,-12.9,0.65,24,0.3,0.4,0.007,0.39,0.4,1,gtceu:electron_beam_refining,gtceu:electron_beam_refining
+file,grindless:loop_extraction_cascade,grindless,,level;loop,peak 2.7 dBFS | -6.1 dB from the pack median once volume is applied | seam jump x5.5 the typical sample step,,,,,pack/kubejs/assets/grindless/sounds/loop_extraction_cascade.ogg,42926,6,-18.8,2.7,-23.2,0.6,24,0.8,5.5,0.336,0.76,0.24,1,gtceu:solvent_extraction,gtceu:solvent_extraction
+file,grindless:loop_fibre_draw_tower,grindless,,level,peak -0.1 dBFS | rms -11.9 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_fibre_draw_tower.ogg,42245,6,-11.9,-0.1,-16.3,0.6,24,2.2,2,0.001,0.18,0.54,1,gtceu:fibre_draw,gtceu:fibre_draw
+file,grindless:loop_fission_reactor,grindless,,level;loop,peak 1.9 dBFS | rms -7.4 dBFS too loud | 6.6 dB from the pack median once volume is applied | seam jump x18 the typical sample step | start/end level differ by 5.2 dB,,,,,pack/kubejs/assets/grindless/sounds/loop_fission_reactor.ogg,25212,6,-7.4,1.9,-10.5,0.7,32,5.2,18,0,0.23,3,1,gtceu:fission_core,gtceu:fission_core
+file,grindless:loop_fluorspar_kiln,grindless,,level,peak 3.8 dBFS | rms -9.2 dBFS too loud | 4.2 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_fluorspar_kiln.ogg,41153,6,-9.2,3.8,-12.9,0.65,24,0.3,0.5,0.23,0.77,0.16,1,gtceu:fluorspar_digestion,gtceu:fluorspar_digestion
+file,grindless:loop_fuel_fabrication,grindless,,level,peak 3.7 dBFS,,,,,pack/kubejs/assets/grindless/sounds/loop_fuel_fabrication.ogg,36870,6,-15.8,3.7,-20.2,0.6,24,1.6,0.2,0.005,0.25,0.22,1,gtceu:fuel_fabrication,gtceu:fuel_fabrication
+file,grindless:loop_gas_giant_siphon,grindless,,level,peak 3 dBFS | rms -8.8 dBFS too loud | 5.2 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_gas_giant_siphon.ogg,40803,6,-8.8,3,-11.9,0.7,32,2.7,0.6,0.02,0.19,2.28,1,gtceu:gas_giant_siphon,gtceu:gas_giant_siphon
+file,grindless:loop_heavy_water_plant,grindless,,level,-4.1 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_heavy_water_plant.ogg,41457,6,-17.5,-3.8,-21.2,0.65,24,0.2,2.7,0.176,0.19,0.16,1,gtceu:isotope_exchange,gtceu:isotope_exchange
+file,grindless:loop_heliostat_tower,grindless,,level,-19.0 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_heliostat_tower.ogg,39885,6,-31.7,-16.1,-36.1,0.6,24,0.6,0.1,0.241,0.25,2.52,1,gtceu:solar_steam,gtceu:solar_steam
+file,grindless:loop_helium_refrigerator,grindless,,level,peak 4.1 dBFS | rms -12.9 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_helium_refrigerator.ogg,39835,6,-12.9,4.1,-16.6,0.65,24,0.1,0.1,0.289,0.77,0.16,1,gtceu:closed_loop_cooling,gtceu:closed_loop_cooling
+file,grindless:loop_horizon_collector,grindless,,annoying,59% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_horizon_collector.ogg,41050,6,-16.1,-2.1,-20.5,0.6,20,0.8,0.4,0.594,0.21,0.5,0,gtceu:horizon_collection,gtceu:horizon_collection
+file,grindless:loop_hot_cell,grindless,,level;loop,peak 1.2 dBFS | rms -12.6 dBFS too loud | seam jump x4.8 the typical sample step | start/end level differ by 6.6 dB,,,,,pack/kubejs/assets/grindless/sounds/loop_hot_cell.ogg,26920,6,-12.6,1.2,-17,0.6,20,6.6,4.8,0,0.78,0.2,1,gtceu:hot_cell,gtceu:hot_cell
+file,grindless:loop_hot_strip_mill,grindless,,,,,,,,pack/kubejs/assets/grindless/sounds/loop_hot_strip_mill.ogg,41101,6,-15.9,-1.9,-19,0.7,28,1.9,1.6,0.028,0.41,0.56,1,gtceu:hot_rolling,gtceu:hot_rolling
+file,grindless:loop_hts_magnet_works,grindless,,annoying;level,-5.3 dB from the pack median once volume is applied | 92% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_hts_magnet_works.ogg,39826,6,-18.7,-4.9,-22.4,0.65,24,0.4,1,0.928,0.31,0.16,1,gtceu:magnet_winding,gtceu:magnet_winding
+file,grindless:loop_io_hydrogen_plant,grindless,,level,peak 0.4 dBFS | rms -12.7 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_io_hydrogen_plant.ogg,40555,6,-12.7,0.4,-16.4,0.65,28,2.6,0.3,0.024,0.15,2.46,0,gtceu:thermochemical_hydrogen,gtceu:thermochemical_hydrogen
+file,grindless:loop_io_tether,grindless,,annoying;level,peak 1.2 dBFS | rms -11.7 dBFS too loud | 98% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_io_tether.ogg,41560,6,-11.7,1.2,-15.4,0.65,28,0.3,0.2,0.989,0.33,0.16,1,gtceu:electrodynamic_tether,gtceu:electrodynamic_tether
+file,grindless:loop_laser_fusion_chamber,grindless,,level,peak 2.1 dBFS | rms -8.5 dBFS too loud | 5.5 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_laser_fusion_chamber.ogg,24801,6,-8.5,2.1,-11.6,0.7,32,0.1,1.8,0,0.2,1.2,1,gtceu:laser_fusion,gtceu:laser_fusion
+file,grindless:loop_light_sail_works,grindless,,,,,,,,pack/kubejs/assets/grindless/sounds/loop_light_sail_works.ogg,39804,6,-16.6,-3.7,-21,0.6,24,2,0.2,0.002,0.13,0.98,1,gtceu:light_sail,gtceu:light_sail
+file,grindless:loop_lunar_power,grindless,,level;loop,-4.7 dB from the pack median once volume is applied | seam jump x7.6 the typical sample step,,,,,pack/kubejs/assets/grindless/sounds/loop_lunar_power.ogg,22783,6,-17.4,-10.7,-21.8,0.6,28,0.1,7.6,0,0.31,1.96,1,gtceu:lunar_solar,gtceu:lunar_solar
+file,grindless:loop_mega_chemical_complex,grindless,,level,peak 1 dBFS | rms -12 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_mega_chemical_complex.ogg,63348,8,-12,1,-15.1,0.7,32,1.4,1,0.012,0.21,0.16,1,gtceu:mega_chemical_complex,gtceu:mega_chemical_complex
+file,grindless:loop_megabar_press,grindless,,level,peak 2.9 dBFS | -5.8 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_megabar_press.ogg,27127,6,-19.8,2.9,-22.9,0.7,28,1.3,1.1,0.002,0.42,0.16,1,gtceu:megabar_synthesis,gtceu:megabar_synthesis
+file,grindless:loop_mnt_collider,grindless,,level,peak 1.6 dBFS | rms -7.9 dBFS too loud | 5.5 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_mnt_collider.ogg,35767,6,-7.9,1.6,-11.6,0.65,24,1.7,1,0,0.19,1.56,1,gtceu:multinucleon_transfer,gtceu:multinucleon_transfer
+file,grindless:loop_mtj_sputter_cluster,grindless,,annoying;level,peak 0.2 dBFS | rms -12.2 dBFS too loud | envelope repeats every 0.26s (strength 0.91),,,,,pack/kubejs/assets/grindless/sounds/loop_mtj_sputter_cluster.ogg,38373,6,-12.2,0.2,-15.9,0.65,24,0.5,1,0.194,0.91,0.26,1,gtceu:mtj_sputtering,gtceu:mtj_sputtering
+file,grindless:loop_naquadah_plant,grindless,,loop,start/end level differ by 4.7 dB,,,,,pack/kubejs/assets/grindless/sounds/loop_naquadah_plant.ogg,26820,6,-15.4,-2.9,-19.1,0.65,28,4.7,1.5,0,0.15,3,1,gtceu:naquadah_refining,gtceu:naquadah_refining
+file,grindless:loop_naquadria_magnet_works,grindless,,level;loop,-10.6 dB from the pack median once volume is applied | start/end level differ by 6.4 dB,,,,,pack/kubejs/assets/grindless/sounds/loop_naquadria_magnet_works.ogg,33817,6,-24,-9.1,-27.7,0.65,28,6.4,0.1,0.073,0.24,1.36,1,gtceu:naquadria_magnets,gtceu:naquadria_magnets
+file,grindless:loop_naquadria_refinery,grindless,,level,peak 0.8 dBFS | rms -10.4 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_naquadria_refinery.ogg,31999,6,-10.4,0.8,-14.1,0.65,28,0,1.3,0,0.21,0.16,1,gtceu:naquadria_refining,gtceu:naquadria_refining
+file,grindless:loop_observatory,grindless,,level;loop,-5.7 dB from the pack median once volume is applied | seam jump x5.6 the typical sample step,,,,,pack/kubejs/assets/grindless/sounds/loop_observatory.ogg,48143,8,-18.4,-4.4,-22.8,0.6,24,2.4,5.6,0,0.76,0.16,1,gtceu:radio_astronomy,gtceu:radio_astronomy
+file,grindless:loop_optical_miner,grindless,,annoying;level,peak 5.4 dBFS | rms -7.5 dBFS too loud | 5.9 dB from the pack median once volume is applied | 74% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_optical_miner.ogg,43313,6,-7.5,5.4,-11.2,0.65,28,0.3,0.1,0.743,0.38,0.16,1,gtceu:optical_mining,gtceu:optical_mining
+file,grindless:loop_ore_plant,grindless,,level,peak 2.4 dBFS | -8.5 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_ore_plant.ogg,47461,6,-21.9,2.4,-25.6,0.65,24,0.2,1.1,0.098,0.19,2.34,1,gtceu:ore_processing,gtceu:ore_processing
+file,grindless:loop_oxide_pld_chamber,grindless,,level,peak 4.2 dBFS | rms -12 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_oxide_pld_chamber.ogg,41881,6,-12,4.2,-15.7,0.65,24,1.9,0,0.367,0.61,2.3,1,gtceu:pulsed_laser_deposition,gtceu:pulsed_laser_deposition
+file,grindless:loop_plasma_quench_caster,grindless,,level,peak 0.5 dBFS | rms -12.3 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_plasma_quench_caster.ogg,50942,8,-12.3,0.5,-15.4,0.7,32,0.9,3.8,0,0.33,0.16,1,gtceu:plasma_quench,gtceu:plasma_quench
+file,grindless:loop_platinum_plant,grindless,,annoying;level,-19.9 dB from the pack median once volume is applied | 91% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_platinum_plant.ogg,41100,6,-32.6,-13.4,-37,0.6,24,0.9,1.9,0.916,0.19,2.88,1,gtceu:pgm_refining,gtceu:pgm_refining
+file,grindless:loop_polymer_works,grindless,,,,,,,,pack/kubejs/assets/grindless/sounds/loop_polymer_works.ogg,42300,6,-14.6,-4,-18.3,0.65,24,1.6,0.5,0.02,0.83,0.28,1,gtceu:polymer_works,gtceu:polymer_works
+file,grindless:loop_power_devices_fab,grindless,,level;loop,peak 0.9 dBFS | rms -7.5 dBFS too loud | 5.9 dB from the pack median once volume is applied | start/end level differ by 3.3 dB,,,,,pack/kubejs/assets/grindless/sounds/loop_power_devices_fab.ogg,25454,6,-7.5,0.9,-11.2,0.65,24,3.3,2,0,0.16,2.26,1,gtceu:silicon_carbide,gtceu:silicon_carbide
+file,grindless:loop_qubit_fab,grindless,,annoying,99% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_qubit_fab.ogg,39764,6,-14.6,-2.1,-19.8,0.55,20,0.3,0.2,0.998,0.25,0.16,1,gtceu:qubit_fabrication,gtceu:qubit_fabrication
+file,grindless:loop_racetrack_fab,grindless,,level;loop,-4.1 dB from the pack median once volume is applied | seam jump x6.8 the typical sample step,,,,,pack/kubejs/assets/grindless/sounds/loop_racetrack_fab.ogg,27397,6,-17.5,-5.1,-21.2,0.65,24,1.3,6.8,0,0.6,0.18,1,gtceu:racetrack_patterning,gtceu:racetrack_patterning
+file,grindless:loop_refinery,grindless,,level;loop,peak -0.7 dBFS | rms -11.2 dBFS too loud | seam jump x8.9 the typical sample step,,,,,pack/kubejs/assets/grindless/sounds/loop_refinery.ogg,26936,6,-11.2,-0.7,-14.3,0.7,28,0.8,8.9,0,0.17,0.3,1,gtceu:refining,gtceu:refining
+file,grindless:loop_reformer,grindless,,level,peak 0.1 dBFS | rms -13.9 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_reformer.ogg,39841,6,-13.9,0.1,-17.6,0.65,24,0.3,0.1,0.29,0.38,0.16,1,gtceu:reforming,gtceu:reforming
+file,grindless:loop_shequid_works,grindless,,level;loop,peak -0.4 dBFS | rms -13.4 dBFS too loud | seam jump x4.8 the typical sample step,,,,,pack/kubejs/assets/grindless/sounds/loop_shequid_works.ogg,35043,6,-13.4,-0.4,-17.1,0.65,24,0.8,4.8,0,0.25,1.26,1,gtceu:shequid_assembly,gtceu:shequid_assembly
+file,grindless:loop_space_elevator,grindless,,level,-4.8 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_space_elevator.ogg,40309,6,-18.2,-7.3,-21.9,0.65,28,2.1,2.7,0.001,0.26,2.9,1,gtceu:pbo_synthesis,gtceu:pbo_synthesis
+file,grindless:loop_steam_blast_furnace,grindless,,level,peak -0.9 dBFS | rms -13.9 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_steam_blast_furnace.ogg,40410,6,-13.9,-0.9,-17.6,0.65,24,2,3,0.002,0.19,2.8,1,gtceu:steelmaking,gtceu:steelmaking
+file,grindless:loop_sulfide_roaster,grindless,,,,,,,,pack/kubejs/assets/grindless/sounds/loop_sulfide_roaster.ogg,41940,6,-16.3,-2.8,-20,0.65,24,0.5,0.5,0.241,0.12,1.44,1,gtceu:sulfide_roasting,gtceu:sulfide_roasting
+file,grindless:loop_superfluid_helium,grindless,,annoying;level,peak 1.7 dBFS | rms -11.2 dBFS too loud | 98% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_superfluid_helium.ogg,42159,6,-11.2,1.7,-15.6,0.6,24,0.5,0.9,0.989,0.4,0.16,1,gtceu:superfluid_helium,gtceu:superfluid_helium
+file,grindless:loop_synchrotron,grindless,,level,peak 0.5 dBFS | rms -9.4 dBFS too loud | 4.6 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_synchrotron.ogg,35021,6,-9.4,0.5,-12.5,0.7,32,0.4,1.3,0.001,0.57,0.16,1,gtceu:synchrotron,gtceu:synchrotron
+file,grindless:loop_syngas_plant,grindless,,,,,,,,pack/kubejs/assets/grindless/sounds/loop_syngas_plant.ogg,40160,6,-15,-1,-18.7,0.65,24,0.7,0.2,0.171,0.2,0.16,1,gtceu:syngas,gtceu:syngas
+file,grindless:loop_thorium_pyro,grindless,,annoying;level,peak 2.2 dBFS | rms -13.9 dBFS too loud | 48% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_thorium_pyro.ogg,41328,6,-13.9,2.2,-17.6,0.65,24,0.4,0.4,0.484,0.32,0.16,1,gtceu:pyroprocessing,gtceu:pyroprocessing
+file,grindless:loop_tritium_removal,grindless,,annoying;level,peak 1.2 dBFS | rms -11.9 dBFS too loud | 50% of the energy above 4 kHz,,,,,pack/kubejs/assets/grindless/sounds/loop_tritium_removal.ogg,41200,6,-11.9,1.2,-16.3,0.6,24,0,0.2,0.508,0.22,0.18,1,gtceu:detritiation,gtceu:detritiation
+file,grindless:loop_uranium_leaching,grindless,,level,-5.5 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_uranium_leaching.ogg,27131,6,-18.2,-2.9,-22.6,0.6,24,0.1,3.2,0,0.28,2.56,1,gtceu:in_situ_leaching,gtceu:in_situ_leaching
+file,grindless:loop_vdw_stacking_cell,grindless,,level,peak -0.7 dBFS | -18.7 dB from the pack median once volume is applied,,,,,pack/kubejs/assets/grindless/sounds/loop_vdw_stacking_cell.ogg,37520,6,-32.1,-0.7,-35.8,0.65,24,1.1,0,0.229,0.53,2.16,1,gtceu:vdw_stacking,gtceu:vdw_stacking
+file,grindless:loop_warp_gate,grindless,,level,peak 0.7 dBFS | rms -10.2 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_warp_gate.ogg,30086,6,-10.2,0.7,-13.3,0.7,32,1,1.6,0,0.18,0.94,1,gtceu:warp_gate,gtceu:warp_gate
+file,grindless:loop_yig_lpe_furnace,grindless,,level,peak 1.2 dBFS | rms -11.3 dBFS too loud,,,,,pack/kubejs/assets/grindless/sounds/loop_yig_lpe_furnace.ogg,28310,6,-11.3,1.2,-15,0.65,24,0.7,2.3,0,0.2,0.32,1,gtceu:liquid_phase_epitaxy,gtceu:liquid_phase_epitaxy
+file,grindless:loop_stellar_elevator,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:star_lifting,gtceu:star_lifting
+file,grindless:loop_plasma_mass_filter,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:plasma_mass_filtering,gtceu:plasma_mass_filtering
+file,grindless:loop_stellar_condensation_tower,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:stellar_condensation,gtceu:stellar_condensation
+file,grindless:loop_accretion_disk_skimmer,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:disk_skimming,gtceu:disk_skimming
+file,grindless:loop_frc_former,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:frc_forming,gtceu:frc_forming
+file,grindless:loop_bz_dynamo,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:blandford_znajek,gtceu:blandford_znajek
+file,grindless:loop_pasta_extractor,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:pasta_extraction,gtceu:pasta_extraction
+file,grindless:loop_pasta_phase_sorter,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:pasta_sorting,gtceu:pasta_sorting
+file,grindless:loop_pasta_draw_bench,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:pasta_drawing,gtceu:pasta_drawing
+file,grindless:loop_pasta_laminator,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:pasta_lamination,gtceu:pasta_lamination
+file,grindless:loop_polar_cap_tap,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:polar_cap_tapping,gtceu:polar_cap_tapping
+file,grindless:loop_ejecta_knot_sweeper,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:ejecta_sweeping,gtceu:ejecta_sweeping
+file,grindless:loop_annihilation_laser_works,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:annihilation_lasing,gtceu:annihilation_lasing
+file,grindless:loop_field_frozen_press,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:field_freezing,gtceu:field_freezing
+file,grindless:loop_tetron_fab,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:tetron_assembly,gtceu:tetron_assembly
+file,grindless:loop_gamma_optics_works,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:gamma_optics,gtceu:gamma_optics
+file,grindless:loop_magnetic_pair_converter,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:magnetic_pair_production,gtceu:magnetic_pair_production
+file,grindless:loop_antihydrogen_foundry,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:antihydrogen_synthesis,gtceu:antihydrogen_synthesis
+file,grindless:loop_annihilation_engine,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:annihilation_power,gtceu:annihilation_power
+file,grindless:loop_jet_beam_line,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:jet_beam_extraction,gtceu:jet_beam_extraction
+file,grindless:loop_spallation_target_station,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:antiproton_production,gtceu:antiproton_production
+file,grindless:loop_antiproton_decelerator,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:beam_cooling,gtceu:beam_cooling
+file,grindless:loop_strangelet_vault,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:strangelet_growth,gtceu:strangelet_growth
+file,grindless:loop_strangelet_distiller,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:strangelet_distillation,gtceu:strangelet_distillation
+file,grindless:loop_kugelblitz_forge,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:kugelblitz_forming,gtceu:kugelblitz_forming
+file,grindless:loop_hawking_collector,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:hawking_power,gtceu:hawking_power
+file,grindless:loop_atom_interferometer_works,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:atom_interferometry,gtceu:atom_interferometry
+file,grindless:loop_membrane_line,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:membrane_rolling,gtceu:membrane_rolling
+file,grindless:loop_rydberg_array_works,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:rydberg_assembly,gtceu:rydberg_assembly
+file,grindless:loop_photon_ring_imager,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:photon_ring_imaging,gtceu:photon_ring_imaging
+file,grindless:loop_geroch_winch,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:geroch_power,gtceu:geroch_power
+file,grindless:loop_gene_ark,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:genome_archiving,gtceu:genome_archiving
+file,grindless:loop_cluster_light_furnace,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:cluster_light_smelting,gtceu:cluster_light_smelting
+file,grindless:loop_mass_stream_injector,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:mass_stream_injection,gtceu:mass_stream_injection
+file,grindless:loop_accretion_feeder,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:accretion_power,gtceu:accretion_power
+file,grindless:loop_mirror_shell,grindless,,missing,sound event without a file,,,,,,,,,,,,,,,,,,1,gtceu:black_hole_bomb,gtceu:black_hole_bomb
+gtm_file,gtceu:arc,gtceu,,,,,,,,assets/gtceu/sounds/arc.ogg,,3.02,-21.4,-12,,1,,0.4,6,0,0.91,0.96,31,,
+gtm_file,gtceu:assembler,gtceu,,,,,,,,assets/gtceu/sounds/assembler.ogg,,2.03,-33.3,-15.9,,1,,0.9,0.9,0.23,0.86,0.64,8,,
+gtm_file,gtceu:bath,gtceu,,,,,,,,assets/gtceu/sounds/bath.ogg,,3.64,-33.7,-16.5,,1,,1,2.1,0.082,0.25,1.16,3,,
+gtm_file,gtceu:boiler,gtceu,,,,,,,,assets/gtceu/sounds/boiler.ogg,,3.2,-23.3,-12.3,,1,,1.8,6.6,0.001,0.15,1.28,6,,
+gtm_file,gtceu:chemical,gtceu,,,,,,,,assets/gtceu/sounds/chemical.ogg,,4.03,-32.7,-10.4,,1,,2.9,29.7,0.004,0.2,0.96,33,,
+gtm_file,gtceu:combustion,gtceu,,,,,,,,assets/gtceu/sounds/combustion.ogg,,0.59,-24.7,-14.7,,1,,0.3,4.5,0.021,0.39,0.16,1,,
+gtm_file,gtceu:computation,gtceu,,,,,,,,assets/gtceu/sounds/computation.ogg,,3.85,-33.8,-21.8,,1,,6.6,0.4,0.983,0.52,1.56,7,,
+gtm_file,gtceu:cooling,gtceu,,,,,,,,assets/gtceu/sounds/cooling.ogg,,3.17,-27.2,-15.3,,1,,1.1,18.3,0.003,0.31,1.56,1,,
+gtm_file,gtceu:electrolyzer,gtceu,,,,,,,,assets/gtceu/sounds/electrolyzer.ogg,,0.39,-41.8,-25.8,,1,,0.3,1.9,0.467,0,0,5,,
+gtm_file,gtceu:furnace,gtceu,,,,,,,,assets/gtceu/sounds/furnace.ogg,,1.98,-29.8,-18,,1,,1.9,1,0.019,0.34,0.76,9,,
+gtm_file,gtceu:jet_engine,gtceu,,,,,,,,assets/gtceu/sounds/jet_engine.ogg,,0.2,-29.9,-18.5,,1,,0.4,1.4,0.567,0,0,1,,
+gtm_file,gtceu:macerator,gtceu,,,,,,,,assets/gtceu/sounds/macerator.ogg,,0.87,-33.5,-19.9,,1,,2.7,0.1,0.239,0.33,0.3,2,,
+gtm_file,gtceu:miner,gtceu,,,,,,,,assets/gtceu/sounds/miner.ogg,,3.1,-16.4,-7.6,,1,,3.3,0.8,0.002,0.53,0.16,13,,
+gtm_file,gtceu:motor,gtceu,,,,,,,,assets/gtceu/sounds/motor.ogg,,1.47,-38.2,-26,,1,,1.9,0.7,0.107,0.29,0.6,28,,
+gtm_file,gtceu:science,gtceu,,,,,,,,assets/gtceu/sounds/science.ogg,,1,-44.4,-23.9,,1,,1.5,0.2,0.758,0.07,0.5,2,,
+gtm_file,gtceu:turbine,gtceu,,,,,,,,assets/gtceu/sounds/turbine.ogg,,1.84,-26.1,-14,,1,,10,13.7,0.001,0.29,0.54,4,,
+machine,parallel_hatch,machine,other,,,,none,,,pack/kubejs/startup_scripts/grindless/lib/parallel_hatch.js,,,,,,,,,,,,,,,
+machine,combined_cycle_plant,multiblock,ev,,,grindless:loop_combined_cycle,wired loop,gtceu:combined_cycle,1,pack/kubejs/startup_scripts/grindless/ev/combined_cycle_and_hot_mill.js,,,,,,,,,,,,,,,
+machine,hot_strip_mill,multiblock,ev,,,grindless:loop_hot_strip_mill,wired loop,gtceu:hot_rolling,1,pack/kubejs/startup_scripts/grindless/ev/combined_cycle_and_hot_mill.js,,,,,,,,,,,,,,,
+machine,cryogenic_plant,multiblock,ev,,,grindless:loop_cryogenic_plant,wired loop,gtceu:cryogenic_processing,1,pack/kubejs/startup_scripts/grindless/ev/cryogenic_plant.js,,,,,,,,,,,,,,,
+machine,extraction_cascade,multiblock,ev,,,grindless:loop_extraction_cascade,wired loop,gtceu:solvent_extraction,1,pack/kubejs/startup_scripts/grindless/ev/extraction_cascade.js,,,,,,,,,,,,,,,
+machine,lunar_solar_array,multiblock,ev,,,grindless:loop_lunar_power,wired loop,gtceu:lunar_solar,1,pack/kubejs/startup_scripts/grindless/ev/lunar_power_and_antenna.js,,,,,,,,,,,,,,,
+machine,deep_space_antenna,multiblock,ev,,,grindless:loop_deep_space_antenna,wired loop,gtceu:deep_space_tracking,1,pack/kubejs/startup_scripts/grindless/ev/lunar_power_and_antenna.js,,,,,,,,,,,,,,,
+machine,atmosphere_processor,multiblock,ev,,,gtceu:chemical,GTM sound entry,gtceu:atmosphere_processing,,pack/kubejs/startup_scripts/grindless/ev/mars_site.js,,,,,,,,,,,,,,,
+machine,ore_refinery,multiblock,ev,,,gtceu:macerator,GTM sound entry,gtceu:ore_refinery,,pack/kubejs/startup_scripts/grindless/ev/mega_ore_refinery.js,,,,,,,,,,,,,,,
+machine,platinum_plant,multiblock,ev,,,grindless:loop_platinum_plant,wired loop,gtceu:pgm_refining,1,pack/kubejs/startup_scripts/grindless/ev/platinum_plant.js,,,,,,,,,,,,,,,
+machine,regolith_cell,multiblock,ev,,,gtceu:electrolyzer,GTM sound entry,gtceu:regolith_processing,,pack/kubejs/startup_scripts/grindless/ev/regolith_cell.js,,,,,,,,,,,,,,,
+machine,sealed_dome,multiblock,ev,,,gtceu:boiler,GTM sound entry,gtceu:greenhouse,,pack/kubejs/startup_scripts/grindless/ev/sealed_dome.js,,,,,,,,,,,,,,,
+machine,ev_vein_drill,multiblock,ev,,,gtceu:miner,GTM sound entry,gtceu:vein_drilling,,pack/kubejs/startup_scripts/grindless/ev/tripod.js,,,,,,,,,,,,,,,
+machine,hv_vein_drill,multiblock,hv,,,gtceu:miner,GTM sound entry,gtceu:vein_drilling,,pack/kubejs/startup_scripts/grindless/hv/family_multis.js,,,,,,,,,,,,,,,
+machine,hv_greenhouse,multiblock,hv,,,gtceu:boiler,GTM sound entry,gtceu:greenhouse,,pack/kubejs/startup_scripts/grindless/hv/family_multis.js,,,,,,,,,,,,,,,
+machine,coil_chemical_plant,multiblock,hv,,,(GTM recipe type default),GTM built-in,gtceu:large_chemical_reactor,,pack/kubejs/startup_scripts/grindless/hv/mega_coil_chemical_plant.js,,,,,,,,,,,,,,,
+machine,refinery,multiblock,hv,,,grindless:loop_refinery,wired loop,gtceu:refining,1,pack/kubejs/startup_scripts/grindless/hv/refinery.js,,,,,,,,,,,,,,,
+machine,reformer,multiblock,hv,,,grindless:loop_reformer,wired loop,gtceu:reforming,1,pack/kubejs/startup_scripts/grindless/hv/reformer.js,,,,,,,,,,,,,,,
+machine,syngas_plant,multiblock,hv,,,grindless:loop_syngas_plant,wired loop,gtceu:syngas,1,pack/kubejs/startup_scripts/grindless/hv/syngas_plant.js,,,,,,,,,,,,,,,
+machine,fission_reactor,multiblock,iv,,,grindless:loop_fission_reactor,wired loop,gtceu:fission_core,1,pack/kubejs/startup_scripts/grindless/iv/fission_reactor.js,,,,,,,,,,,,,,,
+machine,fluorspar_kiln,multiblock,iv,,,grindless:loop_fluorspar_kiln,wired loop,gtceu:fluorspar_digestion,1,pack/kubejs/startup_scripts/grindless/iv/fluorspar_kiln.js,,,,,,,,,,,,,,,
+machine,heavy_water_plant,multiblock,iv,,,grindless:loop_heavy_water_plant,wired loop,gtceu:isotope_exchange,1,pack/kubejs/startup_scripts/grindless/iv/heavy_water_plant.js,,,,,,,,,,,,,,,
+machine,hot_cell,multiblock,iv,,,grindless:loop_hot_cell,wired loop,gtceu:hot_cell,1,pack/kubejs/startup_scripts/grindless/iv/hot_cell.js,,,,,,,,,,,,,,,
+machine,smelting_complex,multiblock,iv,,,gtceu:furnace,GTM sound entry,gtceu:smelting_complex,,pack/kubejs/startup_scripts/grindless/iv/mega_smelting_complex.js,,,,,,,,,,,,,,,
+machine,mercury_vein_drill,multiblock,iv,,,gtceu:miner,GTM sound entry,gtceu:vein_drilling,,pack/kubejs/startup_scripts/grindless/iv/mercury.js,,,,,,,,,,,,,,,
+machine,mercury_solar_works,multiblock,iv,,,gtceu:furnace,GTM sound entry,gtceu:solar_processing,,pack/kubejs/startup_scripts/grindless/iv/mercury.js,,,,,,,,,,,,,,,
+machine,mercury_solar_field,multiblock,iv,missing,no recipe-type sound,,none,gtceu:mercury_solar,,pack/kubejs/startup_scripts/grindless/iv/mercury.js,,,,,,,,,,,,,,,
+machine,interferometer,multiblock,iv,,,gtceu:science,GTM sound entry,gtceu:interferometry,,pack/kubejs/startup_scripts/grindless/iv/mercury.js,,,,,,,,,,,,,,,
+machine,naquadah_plant,multiblock,iv,,,grindless:loop_naquadah_plant,wired loop,gtceu:naquadah_refining,1,pack/kubejs/startup_scripts/grindless/iv/naquadah_plant.js,,,,,,,,,,,,,,,
+machine,rtg,machine,iv,,,,none,gtceu:radioisotope_decay,,pack/kubejs/startup_scripts/grindless/iv/travel_network.js,,,,,,,,,,,,,,,
+machine,tritium_removal_facility,multiblock,iv,,,grindless:loop_tritium_removal,wired loop,gtceu:detritiation,1,pack/kubejs/startup_scripts/grindless/iv/tritium_removal.js,,,,,,,,,,,,,,,
+machine,isr_wellfield,multiblock,iv,,,grindless:loop_uranium_leaching,wired loop,gtceu:in_situ_leaching,1,pack/kubejs/startup_scripts/grindless/iv/uranium_cycle.js,,,,,,,,,,,,,,,
+machine,fuel_fabrication_plant,multiblock,iv,,,grindless:loop_fuel_fabrication,wired loop,gtceu:fuel_fabrication,1,pack/kubejs/startup_scripts/grindless/iv/uranium_cycle.js,,,,,,,,,,,,,,,
+machine,composite_autoclave,multiblock,other,,,gtceu:furnace,GTM sound entry,gtceu:composite_curing,,pack/kubejs/startup_scripts/grindless/launch_road/composite_autoclave.js,,,,,,,,,,,,,,,
+machine,engine_test_stand,multiblock,other,,,gtceu:combustion,GTM sound entry,gtceu:static_fire,,pack/kubejs/startup_scripts/grindless/launch_road/engine_test_stand.js,,,,,,,,,,,,,,,
+machine,biofoundry,multiblock,luv,,,grindless:loop_biofoundry,wired loop,gtceu:sterile_culture,1,pack/kubejs/startup_scripts/grindless/luv/biofoundry.js,,,,,,,,,,,,,,,
+machine,coated_conductor_line,multiblock,luv,,,gtceu:arc,GTM sound entry,gtceu:coated_conductor,,pack/kubejs/startup_scripts/grindless/luv/coated_conductor_line.js,,,,,,,,,,,,,,,
+machine,helium_refrigerator,multiblock,luv,,,grindless:loop_helium_refrigerator,wired loop,gtceu:closed_loop_cooling,1,pack/kubejs/startup_scripts/grindless/luv/helium_refrigerator.js,,,,,,,,,,,,,,,
+machine,hts_magnet_works,multiblock,luv,,,grindless:loop_hts_magnet_works,wired loop,gtceu:magnet_winding,1,pack/kubejs/startup_scripts/grindless/luv/hts_magnet_works.js,,,,,,,,,,,,,,,
+machine,flux_tube_tether,multiblock,luv,,,grindless:loop_io_tether,wired loop,gtceu:electrodynamic_tether,1,pack/kubejs/startup_scripts/grindless/luv/io_orbit.js,,,,,,,,,,,,,,,
+machine,fumarole_condenser,multiblock,luv,,,gtceu:chemical,GTM sound entry,gtceu:fumarole_condensing,,pack/kubejs/startup_scripts/grindless/luv/io_surface.js,,,,,,,,,,,,,,,
+machine,volcanic_intake,multiblock,luv,,,gtceu:turbine,GTM sound entry,gtceu:volcanic_heat,,pack/kubejs/startup_scripts/grindless/luv/io_surface.js,,,,,,,,,,,,,,,
+machine,mega_chemical_complex,multiblock,luv,,,grindless:loop_mega_chemical_complex,wired loop,gtceu:large_chemical_reactor gtceu:mega_chemical_complex,1,pack/kubejs/startup_scripts/grindless/luv/mega_chemical_complex.js,,,,,,,,,,,,,,,
+machine,microgravity_smelter,multiblock,luv,missing,no recipe-type sound,,none,gtceu:microgravity_processing,,pack/kubejs/startup_scripts/grindless/luv/orbital_industry.js,,,,,,,,,,,,,,,
+machine,wake_shield_facility,multiblock,luv,missing,no recipe-type sound,,none,gtceu:wake_epitaxy,,pack/kubejs/startup_scripts/grindless/luv/orbital_industry.js,,,,,,,,,,,,,,,
+machine,orbital_solar_station,multiblock,luv,missing,no recipe-type sound,,none,gtceu:orbital_solar,,pack/kubejs/startup_scripts/grindless/luv/orbital_solar.js,,,,,,,,,,,,,,,
+machine,creature_simulator,machine,lv,,,gtceu:chemical,GTM sound entry,gtceu:creature_simulation,,pack/kubejs/startup_scripts/grindless/lv/creatures.js,,,,,,,,,,,,,,,
+machine,heliostat_tower,multiblock,lv,,,grindless:loop_heliostat_tower,wired loop,gtceu:solar_steam,1,pack/kubejs/startup_scripts/grindless/lv/heliostat_tower.js,,,,,,,,,,,,,,,
+machine,wire_works,multiblock,lv,,,(GTM recipe type default),GTM built-in,gtceu:wiremill gtceu:bender,,pack/kubejs/startup_scripts/grindless/lv/mega_wire_works.js,,,,,,,,,,,,,,,
+machine,lv_vein_drill,multiblock,lv,,,gtceu:miner,GTM sound entry,gtceu:vein_drilling,,pack/kubejs/startup_scripts/grindless/lv/multis.js,,,,,,,,,,,,,,,
+machine,lv_greenhouse,multiblock,lv,,,gtceu:boiler,GTM sound entry,gtceu:greenhouse,,pack/kubejs/startup_scripts/grindless/lv/multis.js,,,,,,,,,,,,,,,
+machine,submerged_arc_furnace,multiblock,lv,,,gtceu:arc,GTM sound entry,gtceu:arc_smelting,,pack/kubejs/startup_scripts/grindless/lv/multis.js,,,,,,,,,,,,,,,
+machine,sulfide_roaster,multiblock,lv,,,grindless:loop_sulfide_roaster,wired loop,gtceu:sulfide_roasting,1,pack/kubejs/startup_scripts/grindless/lv/sulfide_roaster.js,,,,,,,,,,,,,,,
+machine,wireless_energy_hatch,machine,lv,,,,none,,,pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js,,,,,,,,,,,,,,,
+machine,wireless_energy_hatch_4a,machine,lv,,,,none,,,pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js,,,,,,,,,,,,,,,
+machine,wireless_energy_hatch_16a,machine,lv,,,,none,,,pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js,,,,,,,,,,,,,,,
+machine,wireless_energy_hatch_64a,machine,lv,,,,none,,,pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js,,,,,,,,,,,,,,,
+machine,wireless_dynamo_hatch,machine,lv,,,,none,,,pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js,,,,,,,,,,,,,,,
+machine,wireless_dynamo_hatch_4a,machine,lv,,,,none,,,pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js,,,,,,,,,,,,,,,
+machine,wireless_dynamo_hatch_16a,machine,lv,,,,none,,,pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js,,,,,,,,,,,,,,,
+machine,wireless_dynamo_hatch_64a,machine,lv,,,,none,,,pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js,,,,,,,,,,,,,,,
+machine,wireless_energy_tower,multiblock,lv,,,(GTM recipe type default),GTM built-in,gtceu:dummy,,pack/kubejs/startup_scripts/grindless/lv/wireless_energy.js,,,,,,,,,,,,,,,
+machine,accretion_feeder,multiblock,max,,,grindless:loop_accretion_feeder,wired loop,gtceu:accretion_power,1,pack/kubejs/startup_scripts/grindless/max/feeder.js,,,,,,,,,,,,,,,
+machine,cluster_light_furnace,multiblock,max,,,grindless:loop_cluster_light_furnace,wired loop,gtceu:cluster_light_smelting,1,pack/kubejs/startup_scripts/grindless/max/furnace.js,,,,,,,,,,,,,,,
+machine,gene_ark,multiblock,max,,,grindless:loop_gene_ark,wired loop,gtceu:genome_archiving,1,pack/kubejs/startup_scripts/grindless/max/gene_ark.js,,,,,,,,,,,,,,,
+machine,photon_ring_imager,multiblock,max,,,grindless:loop_photon_ring_imager,wired loop,gtceu:photon_ring_imaging,1,pack/kubejs/startup_scripts/grindless/max/imager.js,,,,,,,,,,,,,,,
+machine,mass_stream_injector,multiblock,max,,,grindless:loop_mass_stream_injector,wired loop,gtceu:mass_stream_injection,1,pack/kubejs/startup_scripts/grindless/max/injector.js,,,,,,,,,,,,,,,
+machine,atom_interferometer_works,multiblock,max,,,grindless:loop_atom_interferometer_works,wired loop,gtceu:atom_interferometry,1,pack/kubejs/startup_scripts/grindless/max/interferometer.js,,,,,,,,,,,,,,,
+machine,membrane_line,multiblock,max,,,grindless:loop_membrane_line,wired loop,gtceu:membrane_rolling,1,pack/kubejs/startup_scripts/grindless/max/membrane_line.js,,,,,,,,,,,,,,,
+machine,rydberg_array_works,multiblock,max,,,grindless:loop_rydberg_array_works,wired loop,gtceu:rydberg_assembly,1,pack/kubejs/startup_scripts/grindless/max/rydberg.js,,,,,,,,,,,,,,,
+machine,mirror_shell,multiblock,max,,,grindless:loop_mirror_shell,wired loop,gtceu:black_hole_bomb,1,pack/kubejs/startup_scripts/grindless/max/shell.js,,,,,,,,,,,,,,,
+machine,geroch_winch,multiblock,max,,,grindless:loop_geroch_winch,wired loop,gtceu:geroch_power,1,pack/kubejs/startup_scripts/grindless/max/winch.js,,,,,,,,,,,,,,,
+machine,lunar_drill,multiblock,other,,,gtceu:miner,GTM sound entry,gtceu:lunar_drilling,,pack/kubejs/startup_scripts/grindless/moon/lunar_drill.js,,,,,,,,,,,,,,,
+machine,biorefinery,multiblock,mv,,,grindless:loop_biorefinery,wired loop,gtceu:bio_distillation,1,pack/kubejs/startup_scripts/grindless/mv/biorefinery.js,,,,,,,,,,,,,,,
+machine,mv_vein_drill,multiblock,mv,,,gtceu:miner,GTM sound entry,gtceu:vein_drilling,,pack/kubejs/startup_scripts/grindless/mv/family_multis.js,,,,,,,,,,,,,,,
+machine,mv_greenhouse,multiblock,mv,,,gtceu:boiler,GTM sound entry,gtceu:greenhouse,,pack/kubejs/startup_scripts/grindless/mv/family_multis.js,,,,,,,,,,,,,,,
+machine,universal_processing_factory,multiblock,mv,,,(GTM recipe type default),GTM built-in,gtceu:bender gtceu:wiremill gtceu:lathe gtceu:cutter gtceu:extruder gtceu:compressor gtceu:forge_hammer gtceu:forming_press gtceu:polarizer gtceu:laser_engraver gtceu:fluid_solidifier,,pack/kubejs/startup_scripts/grindless/mv/leisure_factories.js,,,,,,,,,,,,,,,
+machine,universal_assembly_factory,multiblock,mv,,,(GTM recipe type default),GTM built-in,gtceu:assembler gtceu:circuit_assembler,,pack/kubejs/startup_scripts/grindless/mv/leisure_factories.js,,,,,,,,,,,,,,,
+machine,universal_separation_factory,multiblock,mv,,,(GTM recipe type default),GTM built-in,gtceu:centrifuge gtceu:electrolyzer gtceu:thermal_centrifuge gtceu:macerator gtceu:sifter gtceu:extractor gtceu:electromagnetic_separator,,pack/kubejs/startup_scripts/grindless/mv/leisure_factories.js,,,,,,,,,,,,,,,
+machine,universal_mixing_factory,multiblock,mv,,,(GTM recipe type default),GTM built-in,gtceu:mixer gtceu:chemical_reactor gtceu:chemical_bath gtceu:ore_washer,,pack/kubejs/startup_scripts/grindless/mv/leisure_factories.js,,,,,,,,,,,,,,,
+machine,advanced_multi_smelter,multiblock,mv,,,(GTM recipe type default),GTM built-in,gtceu:electric_furnace,,pack/kubejs/startup_scripts/grindless/mv/leisure_utility.js,,,,,,,,,,,,,,,
+machine,lava_furnace,multiblock,mv,,,(GTM recipe type default),GTM built-in,gtceu:electric_furnace,,pack/kubejs/startup_scripts/grindless/mv/leisure_utility.js,,,,,,,,,,,,,,,
+machine,weather_controller,multiblock,mv,,,gtceu:jet_engine,GTM sound entry,gtceu:weather_control,,pack/kubejs/startup_scripts/grindless/mv/leisure_utility.js,,,,,,,,,,,,,,,
+machine,polymer_works,multiblock,mv,,,grindless:loop_polymer_works,wired loop,gtceu:polymer_works,1,pack/kubejs/startup_scripts/grindless/mv/mega_polymer_works.js,,,,,,,,,,,,,,,
+machine,ore_plant,multiblock,mv,,,grindless:loop_ore_plant,wired loop,gtceu:ore_processing,1,pack/kubejs/startup_scripts/grindless/mv/ore_plant.js,,,,,,,,,,,,,,,
+machine,steam_observatory,multiblock,other,,,gtceu:motor,GTM sound entry,gtceu:stargazing,,pack/kubejs/startup_scripts/grindless/observatory/machines.js,,,,,,,,,,,,,,,
+machine,optical_observatory,multiblock,other,,,gtceu:motor,GTM sound entry,gtceu:astrophotography,,pack/kubejs/startup_scripts/grindless/observatory/machines.js,,,,,,,,,,,,,,,
+machine,radio_telescope,multiblock,other,,,grindless:loop_observatory,wired loop,gtceu:radio_astronomy,1,pack/kubejs/startup_scripts/grindless/observatory/machines.js,,,,,,,,,,,,,,,
+machine,antihydrogen_foundry,multiblock,opv,,,grindless:loop_antihydrogen_foundry,wired loop,gtceu:antihydrogen_synthesis,1,pack/kubejs/startup_scripts/grindless/opv/antimatter.js,,,,,,,,,,,,,,,
+machine,annihilation_engine,multiblock,opv,,,grindless:loop_annihilation_engine,wired loop,gtceu:annihilation_power,1,pack/kubejs/startup_scripts/grindless/opv/antimatter.js,,,,,,,,,,,,,,,
+machine,jet_beam_line,multiblock,opv,,,grindless:loop_jet_beam_line,wired loop,gtceu:jet_beam_extraction,1,pack/kubejs/startup_scripts/grindless/opv/antimatter_cygnus.js,,,,,,,,,,,,,,,
+machine,spallation_target_station,multiblock,opv,,,grindless:loop_spallation_target_station,wired loop,gtceu:antiproton_production,1,pack/kubejs/startup_scripts/grindless/opv/antimatter_cygnus.js,,,,,,,,,,,,,,,
+machine,antiproton_decelerator,multiblock,opv,,,grindless:loop_antiproton_decelerator,wired loop,gtceu:beam_cooling,1,pack/kubejs/startup_scripts/grindless/opv/antimatter_cygnus.js,,,,,,,,,,,,,,,
+machine,assembly_line_array,multiblock,opv,,,(GTM recipe type default),GTM built-in,gtceu:assembly_line,,pack/kubejs/startup_scripts/grindless/opv/assembly_line_array.js,,,,,,,,,,,,,,,
+machine,collector_node_works,multiblock,opv,,,gtceu:motor,GTM sound entry,gtceu:collector_node_assembly,,pack/kubejs/startup_scripts/grindless/opv/bulge_collector.js,,,,,,,,,,,,,,,
+machine,bulge_collector,multiblock,opv,,,gtceu:motor,GTM sound entry,gtceu:bulge_light_collection,,pack/kubejs/startup_scripts/grindless/opv/bulge_collector.js,,,,,,,,,,,,,,,
+machine,strangelet_vault,multiblock,opv,,,grindless:loop_strangelet_vault,wired loop,gtceu:strangelet_growth,1,pack/kubejs/startup_scripts/grindless/opv/exotic_matter.js,,,,,,,,,,,,,,,
+machine,strangelet_distiller,multiblock,opv,,,grindless:loop_strangelet_distiller,wired loop,gtceu:strangelet_distillation,1,pack/kubejs/startup_scripts/grindless/opv/exotic_matter.js,,,,,,,,,,,,,,,
+machine,field_frozen_press,multiblock,opv,,,grindless:loop_field_frozen_press,wired loop,gtceu:field_freezing,1,pack/kubejs/startup_scripts/grindless/opv/field_press.js,,,,,,,,,,,,,,,
+machine,kugelblitz_forge,multiblock,opv,,,grindless:loop_kugelblitz_forge,wired loop,gtceu:kugelblitz_forming,1,pack/kubejs/startup_scripts/grindless/opv/kugelblitz.js,,,,,,,,,,,,,,,
+machine,hawking_collector,multiblock,opv,,,grindless:loop_hawking_collector,wired loop,gtceu:hawking_power,1,pack/kubejs/startup_scripts/grindless/opv/kugelblitz.js,,,,,,,,,,,,,,,
+machine,magnetic_pair_converter,multiblock,opv,,,grindless:loop_magnetic_pair_converter,wired loop,gtceu:magnetic_pair_production,1,pack/kubejs/startup_scripts/grindless/opv/pair_converter.js,,,,,,,,,,,,,,,
+machine,debris_harvester,multiblock,opv,,,gtceu:motor,GTM sound entry,gtceu:debris_harvesting,,pack/kubejs/startup_scripts/grindless/opv/replication.js,,,,,,,,,,,,,,,
+machine,replication_refinery,multiblock,opv,,,gtceu:motor,GTM sound entry,gtceu:replication_refining,,pack/kubejs/startup_scripts/grindless/opv/replication.js,,,,,,,,,,,,,,,
+machine,von_neumann_foundry,multiblock,opv,,,gtceu:motor,GTM sound entry,gtceu:self_replication,,pack/kubejs/startup_scripts/grindless/opv/replication.js,,,,,,,,,,,,,,,
+machine,tetron_fab,multiblock,opv,,,grindless:loop_tetron_fab,wired loop,gtceu:tetron_assembly,1,pack/kubejs/startup_scripts/grindless/opv/tetron_optics.js,,,,,,,,,,,,,,,
+machine,gamma_optics_works,multiblock,opv,,,grindless:loop_gamma_optics_works,wired loop,gtceu:gamma_optics,1,pack/kubejs/startup_scripts/grindless/opv/tetron_optics.js,,,,,,,,,,,,,,,
+machine,generator_array,multiblock,other,,,(GTM recipe type default),GTM built-in,,,pack/kubejs/startup_scripts/grindless/power/generator_array.js,,,,,,,,,,,,,,,
+machine,steam_blast_furnace,multiblock,steam,,,grindless:loop_steam_blast_furnace,wired loop,gtceu:steelmaking,1,pack/kubejs/startup_scripts/grindless/steam/blast_furnace.js,,,,,,,,,,,,,,,
+machine,coking_battery,multiblock,steam,,,grindless:loop_coking_battery,wired loop,gtceu:coking,1,pack/kubejs/startup_scripts/grindless/steam/coking_battery.js,,,,,,,,,,,,,,,
+machine,horizon_collector,machine,steam,,,grindless:loop_horizon_collector,wired loop,gtceu:horizon_collection,,pack/kubejs/startup_scripts/grindless/steam/horizon_collector.js,,,,,,,,,,,,,,,
+machine,large_steam_macerator,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:macerator,,pack/kubejs/startup_scripts/grindless/steam/large_family.js,,,,,,,,,,,,,,,
+machine,large_steam_thermal_centrifuge,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:thermal_centrifuge,,pack/kubejs/startup_scripts/grindless/steam/large_family.js,,,,,,,,,,,,,,,
+machine,large_steam_ore_washer,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:ore_washer,,pack/kubejs/startup_scripts/grindless/steam/large_family.js,,,,,,,,,,,,,,,
+machine,large_steam_chemical_bath,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:chemical_bath,,pack/kubejs/startup_scripts/grindless/steam/large_family.js,,,,,,,,,,,,,,,
+machine,large_steam_centrifuge,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:centrifuge,,pack/kubejs/startup_scripts/grindless/steam/large_family.js,,,,,,,,,,,,,,,
+machine,steam_vein_drill,multiblock,steam,,,gtceu:miner,GTM sound entry,gtceu:vein_drilling,,pack/kubejs/startup_scripts/grindless/steam/machines.js,,,,,,,,,,,,,,,
+machine,steam_greenhouse,multiblock,steam,,,gtceu:boiler,GTM sound entry,gtceu:greenhouse,,pack/kubejs/startup_scripts/grindless/steam/machines.js,,,,,,,,,,,,,,,
+machine,steam_forge_hammer,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:forge_hammer,,pack/kubejs/startup_scripts/grindless/steam/small_family.js,,,,,,,,,,,,,,,
+machine,steam_compressor,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:compressor,,pack/kubejs/startup_scripts/grindless/steam/small_family.js,,,,,,,,,,,,,,,
+machine,steam_alloy_smelter,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:alloy_smelter,,pack/kubejs/startup_scripts/grindless/steam/small_family.js,,,,,,,,,,,,,,,
+machine,steam_mixer,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:mixer,,pack/kubejs/startup_scripts/grindless/steam/small_family.js,,,,,,,,,,,,,,,
+machine,steam_chemical_bath,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:chemical_bath,,pack/kubejs/startup_scripts/grindless/steam/small_family.js,,,,,,,,,,,,,,,
+machine,steam_ore_washer,multiblock,steam,,,(GTM recipe type default),GTM built-in,gtceu:ore_washer,,pack/kubejs/startup_scripts/grindless/steam/small_family.js,,,,,,,,,,,,,,,
+machine,nebula_collector,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:nebula_collection,,pack/kubejs/startup_scripts/grindless/uev/alpha_centauri.js,,,,,,,,,,,,,,,
+machine,interstellar_dust_lab,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:interstellar_dust_analysis,,pack/kubejs/startup_scripts/grindless/uev/alpha_centauri.js,,,,,,,,,,,,,,,
+machine,pulsar_timing_station,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:pulsar_timing,,pack/kubejs/startup_scripts/grindless/uev/alpha_centauri.js,,,,,,,,,,,,,,,
+machine,barnard_core_drill,multiblock,uev,,,gtceu:miner,GTM sound entry,gtceu:barnard_core_drilling,,pack/kubejs/startup_scripts/grindless/uev/barnard.js,,,,,,,,,,,,,,,
+machine,carbonyl_refinery,multiblock,uev,,,gtceu:chemical,GTM sound entry,gtceu:carbonyl_refining,,pack/kubejs/startup_scripts/grindless/uev/barnard.js,,,,,,,,,,,,,,,
+machine,nitride_magnet_works,multiblock,uev,,,gtceu:chemical,GTM sound entry,gtceu:nitride_magnet_synthesis,,pack/kubejs/startup_scripts/grindless/uev/composites.js,,,,,,,,,,,,,,,
+machine,sic_fibre_plant,multiblock,uev,,,gtceu:assembler,GTM sound entry,gtceu:sic_fibre_spinning,,pack/kubejs/startup_scripts/grindless/uev/composites.js,,,,,,,,,,,,,,,
+machine,cvi_furnace,multiblock,uev,,,grindless:loop_cvi_furnace,wired loop,gtceu:chemical_vapour_infiltration,1,pack/kubejs/startup_scripts/grindless/uev/composites.js,,,,,,,,,,,,,,,
+machine,quantum_gas_lab,multiblock,uev,,,grindless:loop_earth_orbit_lab,wired loop,gtceu:quantum_degenerate_gas,1,pack/kubejs/startup_scripts/grindless/uev/earth_orbit.js,,,,,,,,,,,,,,,
+machine,entanglement_station,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:entanglement_distribution,,pack/kubejs/startup_scripts/grindless/uev/earth_orbit.js,,,,,,,,,,,,,,,
+machine,electron_beam_furnace,multiblock,uev,,,grindless:loop_electron_beam_furnace,wired loop,gtceu:electron_beam_refining,1,pack/kubejs/startup_scripts/grindless/uev/electron_beam.js,,,,,,,,,,,,,,,
+machine,single_crystal_foundry,multiblock,uev,,,gtceu:furnace,GTM sound entry,gtceu:single_crystal_casting,,pack/kubejs/startup_scripts/grindless/uev/electron_beam.js,,,,,,,,,,,,,,,
+machine,helium3_polariser,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:spin_polarisation,,pack/kubejs/startup_scripts/grindless/uev/fusion.js,,,,,,,,,,,,,,,
+machine,uev_fusion_reactor,multiblock,uev,,,(GTM recipe type default),GTM built-in,gtceu:fusion_reactor,,pack/kubejs/startup_scripts/grindless/uev/fusion.js,,,,,,,,,,,,,,,
+machine,calutron,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:calutron_separation,,pack/kubejs/startup_scripts/grindless/uev/isotopes.js,,,,,,,,,,,,,,,
+machine,megabar_press,multiblock,uev,,,grindless:loop_megabar_press,wired loop,gtceu:megabar_synthesis,1,pack/kubejs/startup_scripts/grindless/uev/megabar.js,,,,,,,,,,,,,,,
+machine,snspd_foundry,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:snspd_fabrication,,pack/kubejs/startup_scripts/grindless/uev/photonics.js,,,,,,,,,,,,,,,
+machine,vdw_stacker,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:vdw_assembly,,pack/kubejs/startup_scripts/grindless/uev/photonics.js,,,,,,,,,,,,,,,
+machine,photonic_integration_hall,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:photonic_integration,,pack/kubejs/startup_scripts/grindless/uev/photonics.js,,,,,,,,,,,,,,,
+machine,white_dwarf_spectrograph,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:gravitational_redshift,,pack/kubejs/startup_scripts/grindless/uev/sirius.js,,,,,,,,,,,,,,,
+machine,degenerate_harvester,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:degenerate_harvesting,,pack/kubejs/startup_scripts/grindless/uev/sirius.js,,,,,,,,,,,,,,,
+machine,containment_works,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:degenerate_containment,,pack/kubejs/startup_scripts/grindless/uev/sirius.js,,,,,,,,,,,,,,,
+machine,stellar_forge,multiblock,uev,,,(GTM recipe type default),GTM built-in,gtceu:electric_blast_furnace,,pack/kubejs/startup_scripts/grindless/uev/stellar_forge.js,,,,,,,,,,,,,,,
+machine,heavy_ion_cyclotron,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:heavy_ion_irradiation,,pack/kubejs/startup_scripts/grindless/uev/superheavy.js,,,,,,,,,,,,,,,
+machine,recoil_separator,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:recoil_separation,,pack/kubejs/startup_scripts/grindless/uev/superheavy.js,,,,,,,,,,,,,,,
+machine,superheavy_chemistry_lab,multiblock,uev,,,gtceu:arc,GTM sound entry,gtceu:superheavy_chemistry,,pack/kubejs/startup_scripts/grindless/uev/superheavy.js,,,,,,,,,,,,,,,
+machine,positron_accumulator,multiblock,uhv,,,grindless:loop_antimatter_accumulator,wired loop,gtceu:positron_accumulation,1,pack/kubejs/startup_scripts/grindless/uhv/antimatter.js,,,,,,,,,,,,,,,
+machine,casimir_array,multiblock,uhv,,,gtceu:electrolyzer,GTM sound entry,gtceu:casimir_cavity,,pack/kubejs/startup_scripts/grindless/uhv/antimatter.js,,,,,,,,,,,,,,,
+machine,ultrapure_water_plant,multiblock,uhv,,,gtceu:bath,GTM sound entry,gtceu:ultrapure_water,,pack/kubejs/startup_scripts/grindless/uhv/betavoltaics.js,,,,,,,,,,,,,,,
+machine,betavoltaic_fab,multiblock,uhv,,,gtceu:chemical,GTM sound entry,gtceu:betavoltaic,,pack/kubejs/startup_scripts/grindless/uhv/betavoltaics.js,,,,,,,,,,,,,,,
+machine,nuclear_clock_lab,multiblock,uhv,,,gtceu:science,GTM sound entry,gtceu:nuclear_clock,,pack/kubejs/startup_scripts/grindless/uhv/crystals.js,,,,,,,,,,,,,,,
+machine,crystal_growth_furnace,multiblock,uhv,,,gtceu:furnace,GTM sound entry,gtceu:crystal_growth,,pack/kubejs/startup_scripts/grindless/uhv/crystals.js,,,,,,,,,,,,,,,
+machine,pbo_plant,multiblock,uhv,,,grindless:loop_space_elevator,wired loop,gtceu:pbo_synthesis,1,pack/kubejs/startup_scripts/grindless/uhv/elevator.js,,,,,,,,,,,,,,,
+machine,tether_ribbon_works,multiblock,uhv,,,gtceu:assembler,GTM sound entry,gtceu:tether_ribbon,,pack/kubejs/startup_scripts/grindless/uhv/elevator.js,,,,,,,,,,,,,,,
+machine,warp_gate,multiblock,uhv,,,grindless:loop_warp_gate,wired loop,gtceu:warp_gate,1,pack/kubejs/startup_scripts/grindless/uhv/gate.js,,,,,,,,,,,,,,,
+machine,baseline_astrometer,multiblock,uhv,,,gtceu:computation,GTM sound entry,gtceu:baseline_astrometry,,pack/kubejs/startup_scripts/grindless/uhv/gate.js,,,,,,,,,,,,,,,
+machine,quantum_fabricator,multiblock,uhv,,,(GTM recipe type default),GTM built-in,gtceu:assembler gtceu:circuit_assembler gtceu:forming_press gtceu:laser_engraver gtceu:cutter,,pack/kubejs/startup_scripts/grindless/uhv/mega_quantum_fabricator.js,,,,,,,,,,,,,,,
+machine,regolith_excavator,multiblock,uhv,,,gtceu:macerator,GTM sound entry,gtceu:regolith_excavation,,pack/kubejs/startup_scripts/grindless/uhv/mercury.js,,,,,,,,,,,,,,,
+machine,solar_vapour_furnace,multiblock,uhv,,,gtceu:furnace,GTM sound entry,gtceu:solar_vaporisation,,pack/kubejs/startup_scripts/grindless/uhv/mercury.js,,,,,,,,,,,,,,,
+machine,mbe_reactor,multiblock,uhv,,,gtceu:arc,GTM sound entry,gtceu:molecular_beam_epitaxy,,pack/kubejs/startup_scripts/grindless/uhv/photonics.js,,,,,,,,,,,,,,,
+machine,photonic_foundry,multiblock,uhv,,,gtceu:assembler,GTM sound entry,gtceu:photonic_foundry,,pack/kubejs/startup_scripts/grindless/uhv/photonics.js,,,,,,,,,,,,,,,
+machine,sic_device_fab,multiblock,uhv,,,grindless:loop_power_devices_fab,wired loop,gtceu:silicon_carbide,1,pack/kubejs/startup_scripts/grindless/uhv/power_devices.js,,,,,,,,,,,,,,,
+machine,solar_array_fab,multiblock,uhv,,,gtceu:assembler,GTM sound entry,gtceu:space_photovoltaics,,pack/kubejs/startup_scripts/grindless/uhv/power_devices.js,,,,,,,,,,,,,,,
+machine,spark_plasma_sinterer,multiblock,uhv,,,gtceu:arc,GTM sound entry,gtceu:spark_plasma_sintering,,pack/kubejs/startup_scripts/grindless/uhv/propulsion.js,,,,,,,,,,,,,,,
+machine,cold_trap_drill,multiblock,uhv,,,gtceu:miner,GTM sound entry,gtceu:cold_trap_drilling,,pack/kubejs/startup_scripts/grindless/uhv/proxima_ground.js,,,,,,,,,,,,,,,
+machine,biomining_heap,multiblock,uhv,,,gtceu:chemical,GTM sound entry,gtceu:biomining,,pack/kubejs/startup_scripts/grindless/uhv/proxima_ground.js,,,,,,,,,,,,,,,
+machine,xenoflora_rover_bay,multiblock,uhv,,,gtceu:arc,GTM sound entry,gtceu:xenoflora_rover,,pack/kubejs/startup_scripts/grindless/uhv/proxima_life.js,,,,,,,,,,,,,,,
+machine,sample_receiving_facility,multiblock,uhv,,,gtceu:chemical,GTM sound entry,gtceu:sample_receiving,,pack/kubejs/startup_scripts/grindless/uhv/proxima_life.js,,,,,,,,,,,,,,,
+machine,xenobotany_greenhouse,multiblock,uhv,,,gtceu:chemical,GTM sound entry,gtceu:xenobotany,,pack/kubejs/startup_scripts/grindless/uhv/proxima_life.js,,,,,,,,,,,,,,,
+machine,xenobiochem_plant,multiblock,uhv,,,gtceu:chemical,GTM sound entry,gtceu:xenobiochemistry,,pack/kubejs/startup_scripts/grindless/uhv/proxima_life.js,,,,,,,,,,,,,,,
+machine,radiotrophic_vat,multiblock,uhv,,,gtceu:chemical,GTM sound entry,gtceu:radiotrophic,,pack/kubejs/startup_scripts/grindless/uhv/proxima_life.js,,,,,,,,,,,,,,,
+machine,swarm_segment_foundry,multiblock,uhv,,,gtceu:assembler,GTM sound entry,gtceu:swarm_segment,,pack/kubejs/startup_scripts/grindless/uhv/swarm.js,,,,,,,,,,,,,,,
+machine,swarm_control_station,multiblock,uhv,,,grindless:loop_dyson_swarm,wired loop,gtceu:dyson_swarm,1,pack/kubejs/startup_scripts/grindless/uhv/swarm.js,,,,,,,,,,,,,,,
+machine,solar_probe_bay,multiblock,uhv,,,gtceu:assembler,GTM sound entry,gtceu:solar_probe,,pack/kubejs/startup_scripts/grindless/uhv/swarm.js,,,,,,,,,,,,,,,
+machine,high_flux_reactor,multiblock,uhv,,,gtceu:arc,GTM sound entry,gtceu:high_flux_irradiation,,pack/kubejs/startup_scripts/grindless/uhv/transcurium.js,,,,,,,,,,,,,,,
+machine,transuranium_facility,multiblock,uhv,,,gtceu:chemical,GTM sound entry,gtceu:transuranium_processing,,pack/kubejs/startup_scripts/grindless/uhv/transcurium.js,,,,,,,,,,,,,,,
+machine,organoid_array,multiblock,uhv,,,gtceu:chemical,GTM sound entry,gtceu:organoid_computing,,pack/kubejs/startup_scripts/grindless/uhv/wetware.js,,,,,,,,,,,,,,,
+machine,zblan_draw_tower,multiblock,uhv,,,gtceu:furnace,GTM sound entry,gtceu:zblan_draw,,pack/kubejs/startup_scripts/grindless/uhv/zblan.js,,,,,,,,,,,,,,,
+machine,beuv_scanner,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:beuv_lithography,,pack/kubejs/startup_scripts/grindless/uiv/beuv_stm.js,,,,,,,,,,,,,,,
+machine,stm_lithography_cell,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:stm_lithography,,pack/kubejs/startup_scripts/grindless/uiv/beuv_stm.js,,,,,,,,,,,,,,,
+machine,neutronium_compression_hall,multiblock,uiv,,,(GTM recipe type default),GTM built-in,,,pack/kubejs/startup_scripts/grindless/uiv/compression_hall.js,,,,,,,,,,,,,,,
+machine,ergosphere_probe_bay,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:ergosphere_probing,,pack/kubejs/startup_scripts/grindless/uiv/cygnus.js,,,,,,,,,,,,,,,
+machine,penrose_engine,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:penrose_extraction,,pack/kubejs/startup_scripts/grindless/uiv/cygnus.js,,,,,,,,,,,,,,,
+machine,pulsar_wind_trap,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:pulsar_wind_trapping,,pack/kubejs/startup_scripts/grindless/uiv/j0437.js,,,,,,,,,,,,,,,
+machine,positronium_condensate_lab,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:positronium_condensation,,pack/kubejs/startup_scripts/grindless/uiv/j0437.js,,,,,,,,,,,,,,,
+machine,xray_pulse_profiler,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:xray_pulse_profiling,,pack/kubejs/startup_scripts/grindless/uiv/j0437.js,,,,,,,,,,,,,,,
+machine,levitation_melter,multiblock,uiv,,,gtceu:arc,GTM sound entry,gtceu:levitation_melting,,pack/kubejs/startup_scripts/grindless/uiv/levitation_melter.js,,,,,,,,,,,,,,,
+machine,matrioshka_computer,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:matrioshka_computing,,pack/kubejs/startup_scripts/grindless/uiv/matrioshka.js,,,,,,,,,,,,,,,
+machine,droplet_radiator_works,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:droplet_radiator_assembly,,pack/kubejs/startup_scripts/grindless/uiv/matrioshka.js,,,,,,,,,,,,,,,
+machine,spectral_hole_burner,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:spectral_hole_burning,,pack/kubejs/startup_scripts/grindless/uiv/memories_cryostat.js,,,,,,,,,,,,,,,
+machine,millikelvin_cryostat_works,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:nuclear_demagnetisation,,pack/kubejs/startup_scripts/grindless/uiv/memories_cryostat.js,,,,,,,,,,,,,,,
+machine,ramp_compression_pulser,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:ramp_compression,,pack/kubejs/startup_scripts/grindless/uiv/metallic_hydrogen.js,,,,,,,,,,,,,,,
+machine,polarised_proton_source,multiblock,uiv,,,gtceu:arc,GTM sound entry,gtceu:proton_polarisation,,pack/kubejs/startup_scripts/grindless/uiv/mk5.js,,,,,,,,,,,,,,,
+machine,uiv_fusion_reactor,multiblock,uiv,,,(GTM recipe type default),GTM built-in,gtceu:fusion_reactor,,pack/kubejs/startup_scripts/grindless/uiv/mk5.js,,,,,,,,,,,,,,,
+machine,crust_lift,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:crust_lifting,,pack/kubejs/startup_scripts/grindless/uiv/rx_j1856.js,,,,,,,,,,,,,,,
+machine,neutron_drip_separator,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:neutron_drip_separation,,pack/kubejs/startup_scripts/grindless/uiv/rx_j1856.js,,,,,,,,,,,,,,,
+machine,neutronium_cage,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:neutronium_caging,,pack/kubejs/startup_scripts/grindless/uiv/rx_j1856.js,,,,,,,,,,,,,,,
+machine,r_process_decompressor,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:r_process_decompression,,pack/kubejs/startup_scripts/grindless/uiv/rx_j1856.js,,,,,,,,,,,,,,,
+machine,decay_heat_vault,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:decay_heat,,pack/kubejs/startup_scripts/grindless/uiv/rx_j1856.js,,,,,,,,,,,,,,,
+machine,tfln_fab,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:ion_slicing,,pack/kubejs/startup_scripts/grindless/uiv/tfln_femtosecond.js,,,,,,,,,,,,,,,
+machine,femtosecond_writer,multiblock,uiv,,,gtceu:motor,GTM sound entry,gtceu:femtosecond_writing,,pack/kubejs/startup_scripts/grindless/uiv/tfln_femtosecond.js,,,,,,,,,,,,,,,
+machine,synchrotron,multiblock,uv,,,grindless:loop_synchrotron,wired loop,gtceu:synchrotron,1,pack/kubejs/startup_scripts/grindless/uv/accelerators.js,,,,,,,,,,,,,,,
+machine,muon_fusion_cell,multiblock,uv,,,gtceu:turbine,GTM sound entry,gtceu:muon_catalysed_fusion,,pack/kubejs/startup_scripts/grindless/uv/accelerators.js,,,,,,,,,,,,,,,
+machine,antimatter_trap,multiblock,uv,,,gtceu:electrolyzer,GTM sound entry,gtceu:antimatter_storage,,pack/kubejs/startup_scripts/grindless/uv/accelerators.js,,,,,,,,,,,,,,,
+machine,superfluid_helium_plant,multiblock,uv,,,grindless:loop_superfluid_helium,wired loop,gtceu:superfluid_helium,1,pack/kubejs/startup_scripts/grindless/uv/cold.js,,,,,,,,,,,,,,,
+machine,srf_cavity_works,multiblock,uv,,,gtceu:electrolyzer,GTM sound entry,gtceu:srf_cavity,,pack/kubejs/startup_scripts/grindless/uv/cold.js,,,,,,,,,,,,,,,
+machine,zone_refining_tower,multiblock,uv,,,gtceu:furnace,GTM sound entry,gtceu:zone_refining,,pack/kubejs/startup_scripts/grindless/uv/detectors.js,,,,,,,,,,,,,,,
+machine,optical_ground_station,multiblock,uv,,,gtceu:computation,GTM sound entry,gtceu:optical_downlink,,pack/kubejs/startup_scripts/grindless/uv/detectors.js,,,,,,,,,,,,,,,
+machine,precursor_probe_bay,multiblock,uv,,,gtceu:computation,GTM sound entry,gtceu:precursor_probe,,pack/kubejs/startup_scripts/grindless/uv/edge.js,,,,,,,,,,,,,,,
+machine,event_horizon_interferometer,multiblock,uv,,,gtceu:computation,GTM sound entry,gtceu:event_horizon_imaging,,pack/kubejs/startup_scripts/grindless/uv/edge.js,,,,,,,,,,,,,,,
+machine,laser_fusion_chamber,multiblock,uv,,,grindless:loop_laser_fusion_chamber,wired loop,gtceu:laser_fusion,1,pack/kubejs/startup_scripts/grindless/uv/fusion.js,,,,,,,,,,,,,,,
+machine,heat_source_works,multiblock,uv,,,gtceu:furnace,GTM sound entry,gtceu:heat_source,,pack/kubejs/startup_scripts/grindless/uv/heat_sources.js,,,,,,,,,,,,,,,
+machine,kuiper_interceptor_bay,multiblock,uv,,,gtceu:chemical,GTM sound entry,gtceu:kuiper_intercept,,pack/kubejs/startup_scripts/grindless/uv/kuiper.js,,,,,,,,,,,,,,,
+machine,amorphous_ice_annealer,multiblock,uv,,,gtceu:chemical,GTM sound entry,gtceu:ice_annealing,,pack/kubejs/startup_scripts/grindless/uv/kuiper.js,,,,,,,,,,,,,,,
+machine,ark_biosphere,multiblock,uv,,,gtceu:bath,GTM sound entry,gtceu:closed_ecosystem,,pack/kubejs/startup_scripts/grindless/uv/life.js,,,,,,,,,,,,,,,
+machine,neural_culture_vat,multiblock,uv,,,gtceu:chemical,GTM sound entry,gtceu:neural_culture,,pack/kubejs/startup_scripts/grindless/uv/life.js,,,,,,,,,,,,,,,
+machine,boron_nitride_reactor,multiblock,uv,,,gtceu:arc,GTM sound entry,gtceu:boron_nitride,,pack/kubejs/startup_scripts/grindless/uv/materials.js,,,,,,,,,,,,,,,
+machine,powder_in_tube_line,multiblock,uv,,,gtceu:motor,GTM sound entry,gtceu:powder_in_tube,,pack/kubejs/startup_scripts/grindless/uv/materials.js,,,,,,,,,,,,,,,
+machine,powder_bed_printer,multiblock,uv,,,gtceu:arc,GTM sound entry,gtceu:powder_bed_fusion,,pack/kubejs/startup_scripts/grindless/uv/materials.js,,,,,,,,,,,,,,,
+machine,mega_factory,multiblock,uv,,,(GTM recipe type default),GTM built-in,gtceu:centrifuge gtceu:electrolyzer gtceu:sifter gtceu:bender gtceu:extruder gtceu:forming_press gtceu:wiremill gtceu:cutter gtceu:lathe gtceu:laser_engraver gtceu:mixer gtceu:chemical_bath gtceu:autoclave gtceu:arc_furnace gtceu:alloy_smelter,,pack/kubejs/startup_scripts/grindless/uv/mega_factory.js,,,,,,,,,,,,,,,
+machine,neptune_deep_siphon,multiblock,uv,,,gtceu:chemical,GTM sound entry,gtceu:ice_giant_siphon,,pack/kubejs/startup_scripts/grindless/uv/neptune.js,,,,,,,,,,,,,,,
+machine,triton_geyser_sampler,multiblock,uv,,,gtceu:chemical,GTM sound entry,gtceu:triton_plume,,pack/kubejs/startup_scripts/grindless/uv/neptune.js,,,,,,,,,,,,,,,
+machine,fibre_draw_tower,multiblock,uv,,,grindless:loop_fibre_draw_tower,wired loop,gtceu:fibre_draw,1,pack/kubejs/startup_scripts/grindless/uv/photonics.js,,,,,,,,,,,,,,,
+machine,mocvd_reactor,multiblock,uv,,,gtceu:chemical,GTM sound entry,gtceu:mocvd,,pack/kubejs/startup_scripts/grindless/uv/photonics.js,,,,,,,,,,,,,,,
+machine,penetrator_probe_bay,multiblock,uv,,,gtceu:miner,GTM sound entry,gtceu:penetrator_probe,,pack/kubejs/startup_scripts/grindless/uv/pluto_ices.js,,,,,,,,,,,,,,,
+machine,volatile_ice_fractionator,multiblock,uv,,,gtceu:cooling,GTM sound entry,gtceu:ice_fractionation,,pack/kubejs/startup_scripts/grindless/uv/pluto_ices.js,,,,,,,,,,,,,,,
+machine,cryotank_winder,multiblock,uv,,,gtceu:motor,GTM sound entry,gtceu:cryotank_winding,,pack/kubejs/startup_scripts/grindless/uv/propulsion.js,,,,,,,,,,,,,,,
+machine,thruster_works,multiblock,uv,,,gtceu:assembler,GTM sound entry,gtceu:thruster_assembly,,pack/kubejs/startup_scripts/grindless/uv/propulsion.js,,,,,,,,,,,,,,,
+machine,light_sail_fab,multiblock,uv,,,grindless:loop_light_sail_works,wired loop,gtceu:light_sail,1,pack/kubejs/startup_scripts/grindless/uv/starshot.js,,,,,,,,,,,,,,,
+machine,starchip_fab,multiblock,uv,,,gtceu:assembler,GTM sound entry,gtceu:starchip,,pack/kubejs/startup_scripts/grindless/uv/starshot.js,,,,,,,,,,,,,,,
+machine,laser_sail_launcher,multiblock,uv,,,gtceu:arc,GTM sound entry,gtceu:laser_sail_launch,,pack/kubejs/startup_scripts/grindless/uv/starshot.js,,,,,,,,,,,,,,,
+machine,pyroprocessing_cell,multiblock,uv,,,grindless:loop_thorium_pyro,wired loop,gtceu:pyroprocessing,1,pack/kubejs/startup_scripts/grindless/uv/thorium.js,,,,,,,,,,,,,,,
+machine,accelerator_driven_reactor,multiblock,uv,,,gtceu:turbine,GTM sound entry,gtceu:accelerator_driven,,pack/kubejs/startup_scripts/grindless/uv/thorium.js,,,,,,,,,,,,,,,
+machine,ejecta_knot_sweeper,multiblock,uxv,,,grindless:loop_ejecta_knot_sweeper,wired loop,gtceu:ejecta_sweeping,1,pack/kubejs/startup_scripts/grindless/uxv/cas_a.js,,,,,,,,,,,,,,,
+machine,annihilation_laser_works,multiblock,uxv,,,grindless:loop_annihilation_laser_works,wired loop,gtceu:annihilation_lasing,1,pack/kubejs/startup_scripts/grindless/uxv/cas_a.js,,,,,,,,,,,,,,,
+machine,accretion_disk_skimmer,multiblock,uxv,,,grindless:loop_accretion_disk_skimmer,wired loop,gtceu:disk_skimming,1,pack/kubejs/startup_scripts/grindless/uxv/cygnus_disk.js,,,,,,,,,,,,,,,
+machine,frc_former,multiblock,uxv,,,grindless:loop_frc_former,wired loop,gtceu:frc_forming,1,pack/kubejs/startup_scripts/grindless/uxv/cygnus_disk.js,,,,,,,,,,,,,,,
+machine,bz_dynamo,multiblock,uxv,,,grindless:loop_bz_dynamo,wired loop,gtceu:blandford_znajek,1,pack/kubejs/startup_scripts/grindless/uxv/cygnus_disk.js,,,,,,,,,,,,,,,
+machine,stellar_elevator,multiblock,uxv,,,grindless:loop_stellar_elevator,wired loop,gtceu:star_lifting,1,pack/kubejs/startup_scripts/grindless/uxv/cygnus_lift.js,,,,,,,,,,,,,,,
+machine,plasma_mass_filter,multiblock,uxv,,,grindless:loop_plasma_mass_filter,wired loop,gtceu:plasma_mass_filtering,1,pack/kubejs/startup_scripts/grindless/uxv/cygnus_lift.js,,,,,,,,,,,,,,,
+machine,stellar_condensation_tower,multiblock,uxv,,,grindless:loop_stellar_condensation_tower,wired loop,gtceu:stellar_condensation,1,pack/kubejs/startup_scripts/grindless/uxv/cygnus_lift.js,,,,,,,,,,,,,,,
+machine,uxv_fusion_reactor,multiblock,uxv,,,(GTM recipe type default),GTM built-in,gtceu:fusion_reactor,,pack/kubejs/startup_scripts/grindless/uxv/fusion_mk6.js,,,,,,,,,,,,,,,
+machine,shequid_works,multiblock,uxv,,,grindless:loop_shequid_works,wired loop,gtceu:shequid_assembly,1,pack/kubejs/startup_scripts/grindless/uxv/shequid_mnt.js,,,,,,,,,,,,,,,
+machine,mnt_collider,multiblock,uxv,,,grindless:loop_mnt_collider,wired loop,gtceu:multinucleon_transfer,1,pack/kubejs/startup_scripts/grindless/uxv/shequid_mnt.js,,,,,,,,,,,,,,,
+machine,mtj_sputter_cluster,multiblock,uxv,,,grindless:loop_mtj_sputter_cluster,wired loop,gtceu:mtj_sputtering,1,pack/kubejs/startup_scripts/grindless/uxv/spin_deposition.js,,,,,,,,,,,,,,,
+machine,oxide_pld_chamber,multiblock,uxv,,,grindless:loop_oxide_pld_chamber,wired loop,gtceu:pulsed_laser_deposition,1,pack/kubejs/startup_scripts/grindless/uxv/spin_deposition.js,,,,,,,,,,,,,,,
+machine,vdw_stacking_cell,multiblock,uxv,,,grindless:loop_vdw_stacking_cell,wired loop,gtceu:vdw_stacking,1,pack/kubejs/startup_scripts/grindless/uxv/spin_logic.js,,,,,,,,,,,,,,,
+machine,racetrack_fab,multiblock,uxv,,,grindless:loop_racetrack_fab,wired loop,gtceu:racetrack_patterning,1,pack/kubejs/startup_scripts/grindless/uxv/spin_logic.js,,,,,,,,,,,,,,,
+machine,yig_lpe_furnace,multiblock,uxv,,,grindless:loop_yig_lpe_furnace,wired loop,gtceu:liquid_phase_epitaxy,1,pack/kubejs/startup_scripts/grindless/uxv/spin_logic.js,,,,,,,,,,,,,,,
+machine,stellar_fractionation_hall,multiblock,uxv,,,(GTM recipe type default),GTM built-in,gtceu:distillation_tower gtceu:distillery,,pack/kubejs/startup_scripts/grindless/uxv/stellar_fractionation_hall.js,,,,,,,,,,,,,,,
+machine,pasta_extractor,multiblock,uxv,,,grindless:loop_pasta_extractor,wired loop,gtceu:pasta_extraction,1,pack/kubejs/startup_scripts/grindless/uxv/vela_pasta.js,,,,,,,,,,,,,,,
+machine,pasta_phase_sorter,multiblock,uxv,,,grindless:loop_pasta_phase_sorter,wired loop,gtceu:pasta_sorting,1,pack/kubejs/startup_scripts/grindless/uxv/vela_pasta.js,,,,,,,,,,,,,,,
+machine,pasta_draw_bench,multiblock,uxv,,,grindless:loop_pasta_draw_bench,wired loop,gtceu:pasta_drawing,1,pack/kubejs/startup_scripts/grindless/uxv/vela_pasta.js,,,,,,,,,,,,,,,
+machine,pasta_laminator,multiblock,uxv,,,grindless:loop_pasta_laminator,wired loop,gtceu:pasta_lamination,1,pack/kubejs/startup_scripts/grindless/uxv/vela_pasta.js,,,,,,,,,,,,,,,
+machine,polar_cap_tap,multiblock,uxv,,,grindless:loop_polar_cap_tap,wired loop,gtceu:polar_cap_tapping,1,pack/kubejs/startup_scripts/grindless/uxv/vela_pasta.js,,,,,,,,,,,,,,,
+machine,waste_retrieval_plant,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:waste_retrieval,,pack/kubejs/startup_scripts/grindless/zpm/actinides.js,,,,,,,,,,,,,,,
+machine,actinide_partitioning_plant,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:actinide_partitioning,,pack/kubejs/startup_scripts/grindless/zpm/actinides.js,,,,,,,,,,,,,,,
+machine,europium_reductor,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:valence_reduction,,pack/kubejs/startup_scripts/grindless/zpm/europium.js,,,,,,,,,,,,,,,
+machine,plasma_quench_caster,multiblock,zpm,,,grindless:loop_plasma_quench_caster,wired loop,gtceu:plasma_quench,1,pack/kubejs/startup_scripts/grindless/zpm/fusion.js,,,,,,,,,,,,,,,
+machine,direct_energy_converter,multiblock,zpm,,,gtceu:electrolyzer,GTM sound entry,gtceu:direct_conversion,,pack/kubejs/startup_scripts/grindless/zpm/fusion.js,,,,,,,,,,,,,,,
+machine,naquadria_magnet_works,multiblock,zpm,,,grindless:loop_naquadria_magnet_works,wired loop,gtceu:naquadria_magnets,1,pack/kubejs/startup_scripts/grindless/zpm/magnet_works.js,,,,,,,,,,,,,,,
+machine,assembly_hall,multiblock,zpm,,,(GTM recipe type default),GTM built-in,gtceu:assembler gtceu:circuit_assembler,,pack/kubejs/startup_scripts/grindless/zpm/mega_assembly_hall.js,,,,,,,,,,,,,,,
+machine,naquadria_refinery,multiblock,zpm,,,grindless:loop_naquadria_refinery,wired loop,gtceu:naquadria_refining,1,pack/kubejs/startup_scripts/grindless/zpm/naquadria.js,,,,,,,,,,,,,,,
+machine,naquadah_fuel_works,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:naquadah_fuel,,pack/kubejs/startup_scripts/grindless/zpm/naquadria.js,,,,,,,,,,,,,,,
+machine,neutrino_observatory,multiblock,zpm,,,gtceu:computation,GTM sound entry,gtceu:neutrino_detection,,pack/kubejs/startup_scripts/grindless/zpm/observatory.js,,,,,,,,,,,,,,,
+machine,deep_space_network,multiblock,zpm,,,gtceu:computation,GTM sound entry,gtceu:telemetry_decoding,,pack/kubejs/startup_scripts/grindless/zpm/observatory.js,,,,,,,,,,,,,,,
+machine,kuiper_survey_telescope,multiblock,zpm,,,gtceu:computation,GTM sound entry,gtceu:kuiper_survey,,pack/kubejs/startup_scripts/grindless/zpm/observatory.js,,,,,,,,,,,,,,,
+machine,methane_pyrolyser,multiblock,zpm,,,gtceu:arc,GTM sound entry,gtceu:methane_pyrolysis,,pack/kubejs/startup_scripts/grindless/zpm/outer_chemistry.js,,,,,,,,,,,,,,,
+machine,vent_bioreactor,multiblock,zpm,,,gtceu:arc,GTM sound entry,gtceu:chemosynthesis,,pack/kubejs/startup_scripts/grindless/zpm/outer_chemistry.js,,,,,,,,,,,,,,,
+machine,aerogel_works,multiblock,zpm,,,gtceu:arc,GTM sound entry,gtceu:supercritical_drying,,pack/kubejs/startup_scripts/grindless/zpm/outer_chemistry.js,,,,,,,,,,,,,,,
+machine,diamond_lattice_fab,multiblock,zpm,,,gtceu:arc,GTM sound entry,gtceu:diamond_cvd,,pack/kubejs/startup_scripts/grindless/zpm/qubits.js,,,,,,,,,,,,,,,
+machine,ion_implanter,multiblock,zpm,,,gtceu:arc,GTM sound entry,gtceu:ion_implantation,,pack/kubejs/startup_scripts/grindless/zpm/qubits.js,,,,,,,,,,,,,,,
+machine,qubit_fab,multiblock,zpm,,,grindless:loop_qubit_fab,wired loop,gtceu:qubit_fabrication,1,pack/kubejs/startup_scripts/grindless/zpm/qubits.js,,,,,,,,,,,,,,,
+machine,plume_sampler,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:plume_sampling,,pack/kubejs/startup_scripts/grindless/zpm/saturn_science.js,,,,,,,,,,,,,,,
+machine,ring_seismometer,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:kronoseismology,,pack/kubejs/startup_scripts/grindless/zpm/saturn_science.js,,,,,,,,,,,,,,,
+machine,gas_giant_siphon,multiblock,zpm,,,grindless:loop_gas_giant_siphon,wired loop,gtceu:gas_giant_siphon,1,pack/kubejs/startup_scripts/grindless/zpm/saturn_siphon.js,,,,,,,,,,,,,,,
+machine,isotope_column,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:cryogenic_isotope_separation,,pack/kubejs/startup_scripts/grindless/zpm/saturn_siphon.js,,,,,,,,,,,,,,,
+machine,ring_harvester,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:ring_harvesting,,pack/kubejs/startup_scripts/grindless/zpm/saturn_siphon.js,,,,,,,,,,,,,,,
+machine,entry_probe_bay,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:titan_entry,,pack/kubejs/startup_scripts/grindless/zpm/titan_probes.js,,,,,,,,,,,,,,,
+machine,tholin_reformer,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:tholin_reforming,,pack/kubejs/startup_scripts/grindless/zpm/titan_probes.js,,,,,,,,,,,,,,,
+machine,ice_giant_siphon,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:ice_giant_siphon,,pack/kubejs/startup_scripts/grindless/zpm/uranus.js,,,,,,,,,,,,,,,
+machine,slurry_separator,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:slurry_separation,,pack/kubejs/startup_scripts/grindless/zpm/uranus.js,,,,,,,,,,,,,,,
+machine,flyby_probe_bay,multiblock,zpm,,,gtceu:chemical,GTM sound entry,gtceu:outer_flyby,,pack/kubejs/startup_scripts/grindless/zpm/uranus.js,,,,,,,,,,,,,,,
+machine,pressurized_vein_drill,multiblock,iv,,,gtceu:miner,GTM sound entry,gtceu:vein_drilling,,pack/kubejs/startup_scripts/grindless/iv/venus.js,,,,,,,,,,,,,,,
+machine,venus_heat_engine,multiblock,iv,,,gtceu:turbine,GTM sound entry,gtceu:venus_heat,,pack/kubejs/startup_scripts/grindless/iv/venus.js,,,,,,,,,,,,,,,
+machine,venus_acid_works,multiblock,iv,,,gtceu:chemical,GTM sound entry,gtceu:acid_cracking,,pack/kubejs/startup_scripts/grindless/iv/venus.js,,,,,,,,,,,,,,,
+machine,harpoon_anchor_drill,multiblock,luv,,,gtceu:miner,GTM sound entry,gtceu:vein_drilling,,pack/kubejs/startup_scripts/grindless/luv/asteroid_belt.js,,,,,,,,,,,,,,,
+machine,asteroid_processor,multiblock,luv,,,grindless:loop_asteroid_processor,wired loop,gtceu:asteroid_processing,1,pack/kubejs/startup_scripts/grindless/luv/asteroid_belt.js,,,,,,,,,,,,,,,
+machine,optical_miner,multiblock,luv,,,grindless:loop_optical_miner,wired loop,gtceu:optical_mining,1,pack/kubejs/startup_scripts/grindless/luv/asteroid_belt.js,,,,,,,,,,,,,,,
+machine,cryobot,multiblock,luv,,,gtceu:miner,GTM sound entry,gtceu:vein_drilling,,pack/kubejs/startup_scripts/grindless/luv/europa.js,,,,,,,,,,,,,,,
+machine,algae_bioreactor,multiblock,luv,,,gtceu:bath,GTM sound entry,gtceu:bioreactor,,pack/kubejs/startup_scripts/grindless/luv/europa.js,,,,,,,,,,,,,,,
+machine,gravitational_wave_detector,multiblock,luv,missing,no recipe-type sound,,none,gtceu:gravitational_wave_astronomy,,pack/kubejs/startup_scripts/grindless/luv/ganymede.js,,,,,,,,,,,,,,,
+machine,coilgun_launcher,multiblock,luv,missing,no recipe-type sound,,none,gtceu:probe_launch,,pack/kubejs/startup_scripts/grindless/luv/ganymede.js,,,,,,,,,,,,,,,
+machine,zero_g_crystal_grower,multiblock,luv,missing,no recipe-type sound,,none,gtceu:microgravity_crystal_growth,,pack/kubejs/startup_scripts/grindless/luv/orbital_biology.js,,,,,,,,,,,,,,,
+machine,hydroponic_ring,multiblock,luv,,,gtceu:boiler,GTM sound entry,gtceu:greenhouse,,pack/kubejs/startup_scripts/grindless/luv/orbital_biology.js,,,,,,,,,,,,,,,
+machine,organoid_lab,multiblock,luv,missing,no recipe-type sound,,none,gtceu:organoid_assembly,,pack/kubejs/startup_scripts/grindless/luv/orbital_biology.js,,,,,,,,,,,,,,,
