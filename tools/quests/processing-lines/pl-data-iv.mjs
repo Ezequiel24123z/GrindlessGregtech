@@ -199,7 +199,7 @@ export default {
         n('graphite', 4, 1.25, I('gtceu:raw_graphite'), 'Raw Graphite', { kind: 'by', from: ['mdrill'], end: 'graphite', sub: 'Electrodes and graphene' }),
         n('rsulfur', 4, 2.25, I('gtceu:raw_sulfur'), 'Raw Sulfur', { kind: 'by', from: ['mdrill'], end: 'sulfur', sub: 'Sulfuric acid at home' }),
         n('irdust', 6, 0, I('gtceu:iridosmine_dust'), 'Iridosmine Dust', { from: ['rawir'], by: ['gtceu:ore_processing'], sub: 'Ore plant' }),
-        n('pplant', 8, 0, M('gtceu:platinum_plant'), 'Platinum Plant, Mode 3', {
+        n('pplant', 8, 0, M('gtceu:platinum_plant', 'gtceu:pgm_refining'), 'Platinum Plant, Mode 3', {
           kind: 'ours', from: ['irdust'],
           desc: 'The EV plant learns one more trick. The osmium tetroxide and the chlorine never leave it.',
         }),
