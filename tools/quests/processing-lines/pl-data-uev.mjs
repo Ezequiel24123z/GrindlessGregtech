@@ -48,12 +48,13 @@ export default {
           ['pfd', I('gtceu:plutonium_244_dust'), 'Plutonium-244', 'raw'],
           ['po4', I('gtceu:plutonium_244_oxide_dust'), 'Plutonium-244 Oxide'],
           ['pam', I('grindless:pu244_plating_ampoule'), 'Plating Ampoule'],
-          ['pt2', I('grindless:plutonium_244_target'), 'Plutonium-244 Target'],
+          ['pt2', I('grindless:plutonium_244_target'), 'Plutonium-244 Target', 'product', { from: ['pam', 'x_fsc'] }],
           ['hic', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours', { desc: 'A calcium-48 beam on an actinide target; the atoms fly out as recoil gas.' }],
           ['gas', F('gtceu:flerovium_recoil_gas'), 'Flerovium Recoil Gas'],
           ['rec', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours', { from: ['gas', 'mem'], desc: 'Sends the gas through an etched membrane; the helium returns.' }],
-          ['fl', I('grindless:flerovium_atoms'), 'Flerovium Atoms', 'product', { role: 'research' }],
+          ['fl', I('grindless:flerovium_atoms'), 'Flerovium Atoms'],
         ], 'the superheavy census'),
+        L('x_fsc', 5, 3.5, 'pl_zpm:duplate'),
         // californium-249 wheel
         ...chain(8, [
           ['tcl', F('gtceu:transcurium_liquor'), 'Transcurium Liquor', 'raw'],
@@ -275,11 +276,12 @@ export default {
         // PPKTP
         ...chain(16, [
           ['kdp', I('grindless:kh2po4_dust'), 'KH2PO4', 'raw'],
-          ['kpf', I('grindless:ktp_flux'), 'KTP Flux'],
+          ['kpf', I('grindless:ktp_flux'), 'KTP Flux', 'product', { from: ['kdp', 'x_plate'] }],
           ['ktb', I('grindless:ktp_boule'), 'KTP Boule'],
           ['ktw', I('grindless:ktp_wafer'), 'KTP Wafer'],
           ['kte', I('grindless:ktp_electroded_wafer'), 'Electroded Wafer'],
-        ], 'the poled crystal of the SPDC source'),
+        ], 'the poled crystal of the SPDC source', -5),
+        L('x_plate', -5, 17.5, 'pl_zpm:plate'),
         // TGG isolator
         ...chain(18, [
           ['tgd', I('gtceu:tgg_dust'), 'TGG Powder', 'raw'],

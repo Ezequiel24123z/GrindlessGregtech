@@ -476,7 +476,7 @@
     {"id":"grindless:curium_oxide","kind":"item","needUse":true,"needMade":true,"made":["gtceu:actinide_partitioning"],"used":["gtceu:assembly_line","gtceu:heat_source"]},
     {"id":"grindless:curium_rtg_pellet","kind":"item","needUse":true,"needMade":true,"made":["gtceu:heat_source"],"used":["gtceu:radioisotope_decay"]},
     {"id":"grindless:cutting_module","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:assembly_line"]},
-    {"id":"grindless:cvd_diamond_plate","kind":"item","needUse":true,"needMade":true,"made":["gtceu:diamond_cvd"],"used":["gtceu:assembler","gtceu:assembly_line","gtceu:diamond_cvd","gtceu:kuiper_survey"]},
+    {"id":"grindless:cvd_diamond_plate","kind":"item","needUse":true,"needMade":true,"made":["gtceu:diamond_cvd"],"used":["gtceu:assembler","gtceu:assembly_line","gtceu:chemical_reactor","gtceu:diamond_cvd","gtceu:kuiper_survey"]},
     {"id":"grindless:cygnus_vlbi_record","kind":"item","needUse":true,"needMade":true,"made":["gtceu:event_horizon_imaging"],"used":["gtceu:matrioshka_computing"]},
     {"id":"grindless:d_he3_capsule","kind":"item","needUse":true,"needMade":true,"made":["gtceu:diamond_cvd"],"used":["gtceu:assembly_line","gtceu:laser_fusion"]},
     {"id":"grindless:dac_charge","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:laser_engraver"]},
