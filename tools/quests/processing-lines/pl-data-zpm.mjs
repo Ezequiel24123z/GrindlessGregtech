@@ -176,10 +176,10 @@ export default {
       name: 'Titan: nitriles and polybenzimidazole',
       line: 'titan',
       nodes: [
-        n('pica', 0, -2.25, I('grindless:pica_heat_shield'), 'PICA Heat Shield', { kind: 'raw', sub: 'Carbon fibre cured in phenolic resin' }),
-        L('whip', 0, -0.75, 'pl_luv:whipple'),
-        L('jp', 0, 0.75, 'pl_iv:probe'),
-        L('mirror', 0, 2.25, 'pl_lv:mirror'),
+        n('pica', 2.5, -2.25, I('grindless:pica_heat_shield'), 'PICA Heat Shield', { kind: 'raw', sub: 'Carbon fibre cured in phenolic resin' }),
+        L('whip', 2.5, -0.75, 'pl_luv:whipple'),
+        L('jp', 2.5, 0.75, 'pl_iv:probe'),
+        L('mirror', 2.5, 2.25, 'pl_lv:mirror'),
         n('probe', 5, 0, I('grindless:titan_entry_probe'), 'Titan Entry Probe', { kind: 'product', from: ['pica', 'whip', 'jp', 'mirror'], by: ['gtceu:assembler'], sub: 'Used up on the way down' }),
         n('n2', 5, -1.5, F('gtceu:nitrogen'), 'Nitrogen', { kind: 'raw', sub: 'Titan\'s air, from the LV plant' }),
         n('bay', 7.5, 0, M('gtceu:entry_probe_bay'), 'Entry Probe Bay', { kind: 'ours', from: ['probe', 'n2'], desc: 'Drops the probe through Titan\'s haze, or into a lake.' }),
@@ -228,7 +228,6 @@ export default {
     },
     network: {
       name: 'Network storage',
-      role: 'infrastructure',
       nodes: [
         n('u', 0, -2.25, I('gtceu:uranium_dust'), 'Uranium', { kind: 'raw' }),
         n('rh', 0, -0.75, I('gtceu:rhodium_dust'), 'Rhodium', { kind: 'raw' }),
@@ -241,7 +240,6 @@ export default {
     },
     charts: {
       name: 'Charts and data',
-      role: 'research',
       nodes: [
         n('sat', 0, 0, I('grindless:saturn_transfer_chart'), 'Saturn Transfer Chart', { kind: 'raw' }),
         n('seis', 2.5, 0, M('gtceu:ring_seismometer'), 'Ring Seismometer', { kind: 'ours', from: ['sat'], desc: 'Listens to Saturn\'s rings ring.' }),
