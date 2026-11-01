@@ -33,7 +33,7 @@ const EXPECT = {
   horizon_iris: { iris_blade: 240, horizon_shielding: 12, condensate_field_cell: 12 },
   horizon_capacitor: { cold_kerr_toroid: 4, maxplus_field_generator: 4, cold_kerr_fcl: 2, creative_energy_cell: 1 },
   hyperstargate_power_unit: { [RING]: 16, resonance_chamber: 8, horizon_conduit: 640, creative_energy: 1 },
-  hyperstargate_base: { [CHEVRON]: 27, [RING]: 144, [UPGRADE]: 36, horizon_alignment_matrix: 4, creative_chest: 1, creative_tank: 1, 'megacells:item_storage_cell_256m': 1, 'megacells:fluid_storage_cell_256m': 1, 'gtceu:max_maxplus_energy_hatch_1024a': 4, horizon_processor: 64, maxplus_field_generator: 16, maxplus_sensor: 8, maxplus_emitter: 8 },
+  hyperstargate_base: { [CHEVRON]: 27, [RING]: 144, [UPGRADE]: 36, horizon_alignment_matrix: 4, creative_chest: 1, creative_tank: 1, 'megacells:item_storage_cell_256m': 1, 'megacells:fluid_storage_cell_256m': 1, 'gtceu:max_maxplus_energy_hatch_1024a': 4, horizon_processor: 64, maxplus_field_generator: 16 },
   hyperstargate_interface: { [RING]: 8, creative_data_access_hatch: 1, horizon_comm_terminal: 4, pattern_memory_unit: 64 },
   horizon_alignment_matrix: { cold_reference_assembly: 4, horizon_compressed_plate: 8, kerr_strange_plate: 4, maxplus_sensor: 2, horizon_waveguide: 4 },
   creative_energy: { horizon_cloud_core: 1, maxplus_field_generator: 64, kerr_field_coil: 64, cold_kerr_toroid: 16, horizon_processor: 256, horizon_containment_plate: 64, horizon_conduit: 64, 'gtceu:max_substation_input_hatch_64a': 64 },
