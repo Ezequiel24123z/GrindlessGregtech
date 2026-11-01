@@ -140,7 +140,7 @@
     })
     rec.kept.forEach(function (x) { recipe.notConsumable(x.count + 'x ' + x.id) })
     // the reformer holds one item input and a circuit takes it: a row with its own solid is told apart by that solid alone
-    if (rec.circuit > 0 && !(rec.hosted && rec.itemsIn.length + rec.kept.length >= HOSTED[rec.type]().itemsIn)) recipe.circuit(rec.circuit)
+    if (rec.circuit > 0 && !(rec.hosted && rec.itemsIn.length + rec.kept.length >= ((HOSTED[rec.type]() || {}).itemsIn || 99))) recipe.circuit(rec.circuit)
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
     rec.itemsOut.forEach(function (x) {
       if (x.chance < MAX_CHANCE) recipe.chancedOutput('1x ' + x.id, x.chance, 0)
