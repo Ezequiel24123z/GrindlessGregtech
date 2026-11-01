@@ -673,7 +673,7 @@ One line per decision. The most recent one is at the bottom.
 - 2026-10-31 · MAX-F1: ids, tier-14 places black_hole_orbit and nsc_belt, strand cable 16 A x V[MAX] loss 1.
 - 2026-10-31 · MAX-F1/C3 correction: V[MAX] = 2^31 (opv.md said Integer.MAX_VALUE; V[14] is 2^31 as a long) and VA[MAX] = 2013265920; every MAX row stays at most VA[MAX], and generator rows stay at most 2^30 EU/t.
 - 2026-10-31 · MAX-A1: the three line ends and a tetron array go into the UEV hall c9 join; the supracausal mainframe has no other maker once F2 cuts GT--; the join runs at VA[MAX].
-- 2026-10-31 · MAX-A0: the horizon strand draws only at SGR 1806-20 (c5/c6); clad strand and max_machine_hull stay on home assembly lines (deviation from max.md:166, as the OpV hull).
+- 2026-10-31 · MAX-A0: the horizon strand draws only at SGR 1806-20 (c5/c6); clad strand and max_machine_hull stay on home assembly lines (deviation from max.md:167, as the OpV hull).
 - 2026-10-31 · MAX-A2: the six components are made from MAX parts at VA[MAX]; SPS c21, extraction c30-31. MAX-A4: parts on assembly_line without research; L39 bender c30, CC c8, PLD c5, HTS c14; GTM max_battery kept.
 - 2026-10-31 · MAX-CS/H1/W: crystals and the extraction cascade reuse OpV-F3's per-type circuit-repeat rule; tier 14 wireless 64 A hatch, cap 1.37e12 EU per settlement (exact in long).
 - 2026-10-31 · Gate c14 row hold_sgr_a_probe (c13 owns hold_sgr_a): the Sgr A* gate row consumes gc_relay_probe.

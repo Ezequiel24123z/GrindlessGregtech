@@ -1,7 +1,7 @@
 // priority: -5369
 // -----------------------------------------------------------------------------------------------
 // MAX's cluster-light furnace (docs/eras/max.md, machine 9, lines L13, L14, L25, L36, L37; package MAX-R1): the item nsc_planetesimal.
-// F1's id list missed it (max.md:847), so R1 registers it here: the only source is the OpV debris harvester row at the NSC belt
+// F1's id list missed it (max.md:991), so R1 registers it here: the only source is the OpV debris harvester row at the NSC belt
 // (server_scripts/grindless/max/furnace.js), nothing by hand. Texture: tools/assets/Build-MaxFurnaceTextures.ps1. Names: client_scripts/
 // grindless/max_furnace_lang.js. Published for the recipe script: global.grindless.maxFurnace.
 (function () {

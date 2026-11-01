@@ -120,7 +120,7 @@ test('the join: one photonic hall row, circuit 9, the only maker of gtnn:supraca
   for (const p of r.itemsIn) assert.ok(producers(p.id).length >= 1 || /^gtceu:|^#/.test(p.id) || p.id === 'grindless:tetron_array', `${p.id} has a producer`);
 });
 
-test('every MAX-A1 row is at most VA[MAX] = 2013265920 EU/t (max.md:160)', () => {
+test('every MAX-A1 row is at most VA[MAX] = 2013265920 EU/t (max.md:161)', () => {
   for (const [f, type, name] of TABLE_ROWS) {
     const r = table(f).types[type].recipes.find((x) => x.name === name);
     assert.ok(r.eut <= 2013265920, `${type}/${name} eut ${r.eut}`);

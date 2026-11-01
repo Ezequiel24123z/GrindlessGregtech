@@ -136,10 +136,10 @@ Sources: wiki pages and repo licence fields checked via a bounded research subag
 ### 7.2 GTM 7.5.3 and Grindless limits and analogues
 
 - MAX = 2,147,483,648 EU/t is the last tier; there is no T15. Anything beyond must be MAX amperage or a custom mechanic (`docs/research/space/gtm-tiers.md:23-27`).
-- Hulls, energy hatches and dual hatches reach MAX with the ON flag (`gtm-tiers.md:33`). GTM has no MAX single-block components (`gtm-tiers.md:50`). The pack adds 9 MAX components, 1 circuit, 1 parallel hatch, 1 cable (`docs/eras/max.md:482,687`).
-- Wireless: case 14, V[MAX] x A x 10 caps (`docs/eras/max.md:57,153,555,719`; `docs/eras/opv.md:63,621,711`). This is the analogue of GTNH EOH/Godforge wireless-only.
+- Hulls, energy hatches and dual hatches reach MAX with the ON flag (`gtm-tiers.md:33`). GTM has no MAX single-block components (`gtm-tiers.md:50`). The pack adds 9 MAX components, 1 circuit, 1 parallel hatch, 1 cable (`docs/eras/max.md:568,808`).
+- Wireless: case 14, V[MAX] x A x 10 caps (`docs/eras/max.md:58,154,653,840`; `docs/eras/opv.md:63,621,711`). This is the analogue of GTNH EOH/Godforge wireless-only.
 - UEV+ circuits, space elevator and GTMU wireless are recipeless in GTM and must be ours (`gtm-tiers.md:107-115`).
-- Mirror shell over Sgr A* is the analogue of the Black Hole Containment seed and horizon (`docs/eras/max.md:3,7,46,190,192,330-344`). Per the owner decision, its final recipe stabilises or opens the horizon and outputs the key MAX+ needs.
+- Mirror shell over Sgr A* is the analogue of the Black Hole Containment seed and horizon (`docs/eras/max.md:3,7,46,191,193,335-350`). Per the owner decision, its final recipe stabilises or opens the horizon and outputs the key MAX+ needs.
 - Previous space and endgame notes: `docs/research/space/packs-space.md:10,26,46,128-137`. Reuse stance: `docs/research/reuse.md:71,95`.
 - Era sizing: progression multiblocks grow about x1.35 per era (`docs/research/complexity.md`); MAX has 10 multiblocks and 46 lines (`docs/eras/max.md`).
 
