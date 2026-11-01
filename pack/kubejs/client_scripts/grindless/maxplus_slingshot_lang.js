@@ -10,7 +10,7 @@
     var ENTRIES = [
         ['gtceu.hills_slingshot', 'Hills Slingshot', 'Honda de Hills'],
         ['block.gtceu.hills_slingshot', 'Hills Slingshot', 'Honda de Hills'],
-        ['grindless.machine.hills_slingshot.tooltip.0', '\u00a77Binds a relay probe to a counterweight and slings it out of the galaxy past Sgr A*.', '\u00a77Ata una sonda de relevo a un contrapeso y la lanza fuera de la galaxia junto a Sgr A*.'],
+        ['grindless.machine.hills_slingshot.tooltip.0', '\u00a77Slings a probe and counterweight out of the Galaxy past Sgr A*.', '\u00a77Lanza sonda y contrapeso fuera de la Galaxia junto a Sgr A*.'],
         ['gtceu.recipe.grindless_hills_slingshot.bound_probe_pair', 'Circuit 1: an intergalactic relay probe bound to a canned counterweight in the capture ring (line P16).', 'Circuito 1: una sonda de relevo intergal\u00e1ctica atada a un contrapeso enlatado en el anillo de captura (l\u00ednea P16).'],
         ['gtceu.recipe.grindless_hills_slingshot.launched_ig_probe', 'Circuit 2: the bound pair released at V[MAX] x 16 A; the counterweight falls into the hole and the probe leaves the galaxy launched (line P16).', 'Circuito 2: el par atado liberado a V[MAX] x 16 A; el contrapeso cae al agujero y la sonda sale lanzada de la galaxia (l\u00ednea P16).'],
         ['gtceu.recipe.grindless_megabar.dense_counterweight_core', 'Circuit 14: metal-rich bloom and graded Z billets pressed to megabar density into a dense counterweight core (line P15).', 'Circuito 14: lupia rica en metal y tochos de Z graduado prensados a densidad de megabar en un n\u00facleo de contrapeso denso (l\u00ednea P15).'],
