@@ -71,8 +71,10 @@
     return e && typeof e.content === 'number' ? e.content : null
   }
 
-  function isGtRecipe(json) {
-    return !!json && typeof json.type === 'string' && json.type.indexOf('gtceu:') === 0 &&
+  // 	ype is the recipe type when the json does not carry it: a recipe a script added dumps as type "unknown" even after serialize()
+  function isGtRecipe(json, type) {
+    var ty = typeof type === 'string' && type !== '' ? type : json && json.type
+    return !!json && typeof ty === 'string' && ty.indexOf('gtceu:') === 0 &&
       !!json.inputs && typeof json.inputs === 'object' && !Array.isArray(json.inputs)
   }
 
@@ -207,8 +209,8 @@
       if (t.enabled) t.remove.forEach(function (id) { removeIds.push(id) })
     })
 
-    function select(id, json) {
-      if (!isGtRecipe(json)) return null
+    function select(id, json, type) {
+      if (!isGtRecipe(json, type)) return null
       var out = primaryOutput(json)
       var era = null
       var via = null
@@ -239,8 +241,8 @@
       return { era: era, via: via, enabled: t.enabled === true, item: t.item, fluid: t.fluid }
     }
 
-    function apply(id, json) {
-      var sel = select(id, json)
+    function apply(id, json, type) {
+      var sel = select(id, json, type)
       if (sel === null || !sel.enabled) return null
       var r = scaleRecipe(json, sel.item, sel.fluid)
       r.era = sel.era
@@ -290,6 +292,10 @@
     var m = /^(.*)\[([^\[\]]*)\]$/.exec(String(r))
     return m ? m[1] : String(r.getOrCreateId())
   }
+  function typeOfAdded(r) {
+    var m = /^(.*)\[([^\[\]]*)\]$/.exec(String(r))
+    return m ? m[2] : ''
+  }
 
   function scanOriginal(r, sel, drop) {
     if (r.removed) return
@@ -319,7 +325,7 @@
     if (text.indexOf('"inputs"') < 0) return
     var json = JSON.parse(text)
     S.scanned++
-    var res = sel.apply(id, json)
+    var res = sel.apply(id, json, typeOfAdded(r))
     if (res === null) return
     S.selected.added++
     if (!res.changed) return

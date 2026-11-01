@@ -1,4 +1,4 @@
-﻿// cost-matrix.mjs --table / --solve on a one-recipe-per-era fixture (RF-2A): the solver finds the factor that puts the core index
+// cost-matrix.mjs --table / --solve on a one-recipe-per-era fixture (RF-2A): the solver finds the factor that puts the core index
 // on the curve, and the predicted index is what the rule gives. T0: local, deterministic.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

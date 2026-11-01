@@ -77,7 +77,7 @@ export function applyToRecipes(recipes, tables) {
       removed.add(id);
       continue;
     }
-    const s = sel.select(id, json);
+    const s = sel.select(id, json, rec.type !== undefined ? rec.type : rec.t);
     if (s === null) continue;
     const e = (byEra[s.era] = byEra[s.era] || { selected: 0, changed: 0, items: 0, fluids: 0 });
     selected.push({ id, era: s.era, via: s.via, enabled: s.enabled });

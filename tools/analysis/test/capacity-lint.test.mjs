@@ -1,4 +1,4 @@
-﻿import test from 'node:test';
+import test from 'node:test';
 import assert from 'node:assert/strict';
 import { checkRecipe, tierOfEut, buildSnapshot } from '../lib/capacity.mjs';
 import { diffKnown, lintCurve } from '../capacity-lint.mjs';

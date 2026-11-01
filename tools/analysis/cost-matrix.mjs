@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 // Cost matrix: the cumulative base cost of key items per era, from the bench's recipe dump (not from the JS).
 //
 //   node tools/analysis/cost-matrix.mjs --dump <dump dir> --out <dir> [--compare <old.csv>] [--config <file>]
@@ -320,7 +320,7 @@ function readFactors(file) {
   return j.factors;
 }
 
-const curveOf = (cfg) => ({ anchor: 3, rate: 2.5, fluidFactorRatio: 1, tolerance: 0.1, solveTolerance: 0.03, maxIterations: 7, ...(cfg.curve || {}) });
+const curveOf = (cfg) => ({ anchor: 3, rate: 2.5, fluidFactorRatio: 1, tolerance: 0.1, solveTolerance: 0.03, maxIterations: 7, maxFactor: 4096, ...(cfg.curve || {}) });
 /** Target core index of an era of the cost-curve table (MV = n 0). */
 const targetOf = (curve, era) => { const n = loadRule().eras.indexOf(era); return n < 0 ? null : curve.anchor * Math.pow(curve.rate, n); };
 
@@ -414,6 +414,7 @@ export function solveFactors(args, cfg, dump) {
   const log = [];
   let solves = 0;
   const unsolved = [];
+  const plateaus = [];
   for (const era of eras) {
     const target = targetOf(curve, era);
     const tryF = (f) => {
@@ -429,26 +430,42 @@ export function solveFactors(args, cfg, dump) {
     if (i0 === null) { unsolved.push(era); factors[era] = { item: 1, fluid: 1 }; log.push(`${era}: core index not priceable (a core component is unreachable); factor left at 1`); console.log(log[log.length - 1]); continue; }
     if (i0 >= target * (1 - curve.solveTolerance)) { setFactor(era, 1); log.push(`${era}: index ${fmt(i0)} already meets target ${fmt(target)} at factor 1`); console.log(log[log.length - 1]); continue; }
     const pts = [{ lf: 0, g: Math.log(i0 / target) }];
+    const tried = [{ f: 1, idx: i0 }];
     let f = target / i0;
     let best = null;
+    let plateau = false;
     for (let k = 0; k < curve.maxIterations; k++) {
       const idx = tryF(f);
       if (idx === null) break;
       const g = Math.log(idx / target);
       pts.push({ lf: Math.log(f), g });
+      tried.push({ f, idx });
       if (!best || Math.abs(g) < Math.abs(best.g)) best = { f, g, idx };
       console.log(`  ${era}: f=${f.toPrecision(4)} -> index ${fmt(idx)} (target ${fmt(target)}, ${(idx / target).toFixed(3)})`);
       if (Math.abs(g) <= curve.solveTolerance) break;
       const a = pts[pts.length - 2];
       const b = pts[pts.length - 1];
+      // the index stopped answering to the factor: the cheapest route of some core item bypasses the scaled recipes
+      if (b.lf > a.lf && idx < Math.exp(a.g) * target * 1.02 && g < -curve.solveTolerance) { plateau = true; break; }
+      if (f >= curve.maxFactor) { plateau = true; break; }
       const slope = (b.g - a.g) / (b.lf - a.lf);
-      const lfNext = Number.isFinite(slope) && slope > 0.05 ? b.lf - b.g / slope : b.lf - b.g;
-      f = Math.exp(lfNext);
+      let lfNext = Number.isFinite(slope) && slope > 0.05 ? b.lf - b.g / slope : b.lf - b.g;
+      lfNext = Math.min(lfNext, b.lf + Math.log(8));
+      f = Math.min(Math.exp(lfNext), curve.maxFactor);
       if (!(f >= 1)) f = 1.0001;
     }
-    const pick = best ? best.f : 1;
+    let pick = best ? best.f : 1;
+    let shown = best ? best.idx : null;
+    if (plateau) {
+      // the smallest factor that already gives (nearly) the best index: more only raises costs the index never sees
+      const top = Math.max(...tried.map((x) => x.idx));
+      const t0 = tried.filter((x) => x.idx >= top * 0.98).sort((x, y) => x.f - y.f)[0];
+      pick = t0.f;
+      shown = t0.idx;
+      plateaus.push({ era, factor: pick, index: shown, target });
+    }
     setFactor(era, Math.round(pick * 1e3) / 1e3);
-    log.push(`${era}: item factor ${factors[era].item}, fluid ${factors[era].fluid}, index ${best ? fmt(best.idx) : '-'} (target ${fmt(target)})`);
+    log.push(`${era}: item factor ${factors[era].item}, fluid ${factors[era].fluid}, index ${shown === null ? '-' : fmt(shown)} (target ${fmt(target)})${plateau ? ' PLATEAU: more factor does not raise the index, fix the routes' : ''}`);
     console.log(log[log.length - 1]);
   }
   const final = {};
@@ -456,6 +473,15 @@ export function solveFactors(args, cfg, dump) {
   const after = run(final);
   console.log(`\nsolved with ${solves + 1} matrix runs.\n`);
   printEraTable(cfg, curve, base, after, factors);
+  for (const p of plateaus) {
+    const groups = after.rows
+      .filter((a) => a.era === p.era && CORE_GROUPS.includes(a.group) && a.status !== 'unreachable')
+      .map((a) => { const b = base.rows.find((x) => x.item === a.item && x.era === a.era); return { g: a.group, grow: b && b.score > 0 ? a.score / b.score : null, via: after.model.choiceOf(a.item)?.id }; })
+      .filter((x) => x.grow !== null)
+      .sort((x, y) => x.grow - y.grow)
+      .slice(0, 3);
+    console.log(`\n${p.era} plateau at x${p.factor} (index ${fmt(p.index)} of ${fmt(p.target)}); least-grown core groups: ${groups.map((x) => `${x.g} x${x.grow.toFixed(2)} via ${x.via}`).join('; ')}`);
+  }
   const bypass = bypassReport(base, after, after.res, curve);
   console.log(`\n${bypass.length} bypasses (key items whose cheapest route escapes the scaled recipes):`);
   for (const b of bypass.slice(0, 60)) console.log(`  ${b.era}  ${b.group}  ${b.item}  via ${b.via}  x${b.growth.toFixed(2)} vs era median x${b.eraMedianGrowth.toFixed(2)}  (${b.why})`);
@@ -466,6 +492,7 @@ export function solveFactors(args, cfg, dump) {
     factors,
     index: Object.fromEntries(rule.eras.map((e) => [e, { baseline: baseIdx.get(e)?.index ?? null, predicted: afterIdx.get(e)?.index ?? null, target: targetOf(curve, e) }])),
     unsolved,
+    plateaus,
     changedRecipes: Object.fromEntries(Object.entries(after.res.byEra).map(([e, v]) => [e, v])),
     bypasses: bypass,
   };

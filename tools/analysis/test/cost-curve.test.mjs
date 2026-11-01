@@ -1,4 +1,4 @@
-﻿// The cost-curve rule (pack/kubejs/server_scripts/grindless/integration/cost_curve.js), the Node side that applies it to a dump
+// The cost-curve rule (pack/kubejs/server_scripts/grindless/integration/cost_curve.js), the Node side that applies it to a dump
 // (lib/cost_curve.mjs) and the static stand-in that runs the pack's pass (RF-2A). T0: local and deterministic.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -114,6 +114,14 @@ test('selection: the era is the key item the recipe makes; include falls back to
   assert.equal(sel.select(toNone.id, toNone.json), null);
   const craft = { type: 'minecraft:crafting_shaped', pattern: ['A'], key: {}, result: { item: 'gtceu:mv_machine_hull' } };
   assert.equal(sel.select('minecraft:x', craft), null, 'only GT machine recipes are scaled');
+  // a recipe a script added dumps as type "unknown" even after serialize(): the recipe type comes from the event
+  const added = recipe('grindless:assembler/ours', { outs: ['gtceu:mv_machine_hull'] });
+  added.json.type = 'unknown';
+  assert.equal(sel.select(added.id, added.json), null, 'no type, no selection');
+  assert.equal(sel.select(added.id, added.json, 'gtceu:assembler').era, 'mv');
+  assert.equal(sel.select(added.id, added.json, 'minecraft:crafting_shaped'), null);
+  const res = applyToRecipes([{ id: added.id, type: 'gtceu:assembler', json: added.json }], [table('mv', { keys: ['gtceu:mv_machine_hull'] })]);
+  assert.equal(res.selected.length, 1, 'the Node bridge passes rec.type');
 });
 
 test('remove ids apply only for an enabled table', () => {
