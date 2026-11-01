@@ -93,9 +93,11 @@ export function checkBook(book, cfg, options = {}) {
   const inScope = (ch) => !only || only.has(ch.filename);
   const manyOk = new Set((cfg.manyRewardsOk || []).map((e) => e.quest));
   // chapter groups (and single chapters) whose quests give no reward on purpose
-  // (lint-config.json noRewardGroups: { groups: [titles], chapters: [file names], why })
+  // (lint-config.json noRewardGroups: { groups: [titles], chapters: [file names], why }; pl-gen.mjs rewrites that line), and single
+  // quests that give nothing on purpose (noRewardQuests: { ids: [quest ids], why }; no generator touches it)
   const noRewardGroups = new Set(((cfg.noRewardGroups && cfg.noRewardGroups.groups) || []).map((t) => String(t)));
   const noRewardChapters = new Set(((cfg.noRewardGroups && cfg.noRewardGroups.chapters) || []).map((t) => String(t)));
+  const noRewardQuests = new Set(((cfg.noRewardQuests && cfg.noRewardQuests.ids) || []).map((t) => String(t)));
   const rewardFree = (ch) => noRewardChapters.has(ch.filename) || noRewardGroups.has((book.groups.find((g) => g.id === ch.group) || {}).title);
   // quantityOk: { quest, why } for one quest, or { chapter, why } for a whole chapter whose numbers are its point
   const quantityOk = new Set((cfg.quantityOk || []).filter((e) => e.quest).map((e) => e.quest));
@@ -249,7 +251,7 @@ export function checkBook(book, cfg, options = {}) {
       const qty = /\b\d+\s*(?:x\s*)?(?:ingots?|plates?|dusts?|blocks?|bricks?|logs?|planks?|items?|mb|buckets?|stacks?|nuggets?|gems?|pieces?|cables?|wires?|rods?|bolts?|screws?|gears?|casings?|ores?)\b|\bx\s?\d+\b/i.exec(text);
       if (qty && !quantityOk.has(q.id) && !quantityOkChapters.has(ch.filename)) add('warn', 'text-quantity', ch, q, `quantity in the text ("${qty[0]}"): counts go in the task or in EMI`);
       const infoOnly = q.tasks.length > 0 && q.tasks.every((t) => t.type === 'checkmark');
-      if (q.rewards.length === 0 && !infoOnly && !rewardFree(ch)) add('warn', 'no-reward', ch, q, 'no reward (rule: every quest gives a small one)');
+      if (q.rewards.length === 0 && !infoOnly && !rewardFree(ch) && !noRewardQuests.has(q.id)) add('warn', 'no-reward', ch, q, 'no reward (rule: every quest gives a small one)');
       if (q.rewards.length > (cfg.maxRewardEntries ?? 6) && !manyOk.has(q.id)) add('warn', 'reward-entries', ch, q, `${q.rewards.length} rewards (max ${cfg.maxRewardEntries})`);
       for (const r of q.rewards) {
         const n = Number(r.count ?? (r.item && r.item.Count) ?? 1);

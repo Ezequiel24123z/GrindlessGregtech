@@ -18,6 +18,7 @@
   "maxRewardEntries": 6,
   "direction": { "default": "ltr" },
   "noRewardGroups": { "groups": ["Processing Lines"], "chapters": ["power"], "why": "The processing-line charts and the Power tab are reference: no rewards, nothing to claim (docs/quests.md, sections 17 and 18)." },
+  "noRewardQuests": { "ids": ["7CC0C382D16D561D"], "why": "Beyond the Horizon (maxplus_age_3, key ARRIVAL), the book's last quest: entering grindless:horizon_city gives nothing (docs/eras/maxplus.md, Quests); the arrival itself gives the credits and the epilogue (maxplus/ending.js)." },
   "allowRoots": {
     "_why_pl": "Processing Lines (pl_*): every line starts from its own raw inputs, so a chart has one starting point per input. The charts are reference only: no quest outside the group depends on them (docs/quests.md, section 17).",
     "_why_power": "Power: every generator starts from its own fuel, so the tab has one starting point per fuel and per generator that burns nothing. It is reference only: no quest outside it depends on it (docs/quests.md, section 18).",

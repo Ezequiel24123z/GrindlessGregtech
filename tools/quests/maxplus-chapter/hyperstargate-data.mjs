@@ -17,7 +17,7 @@ export const CHAPTER = {
   order: 8,
   icon: 'gtceu:hyperstargate',
   autofocus: 'TR_BLEND',
-  title: 'MAX+: The Hyperstargate',
+  title: 'MAX+: Building the Gate',
   subtitle: ['Six machines, eight kinds of part, one dial and a ring that opens for one crossing at a time.'],
 };
 
