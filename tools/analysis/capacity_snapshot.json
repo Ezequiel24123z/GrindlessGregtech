@@ -1175,6 +1175,14 @@
     0
    ]
   },
+  "gtceu:hills_slingshot": {
+   "io": [
+    2,
+    1,
+    0,
+    0
+   ]
+  },
   "gtceu:homemade_bedrock_ore_machine": {
    "io": [
     1,
@@ -9856,6 +9864,7 @@
   "gtceu:heavy_ion_irradiation",
   "gtceu:high_energy_laser_purification_unit",
   "gtceu:high_flux_irradiation",
+  "gtceu:hills_slingshot",
   "gtceu:horizon_flux_clamp",
   "gtceu:horizon_interferometry",
   "gtceu:hot_cell",
