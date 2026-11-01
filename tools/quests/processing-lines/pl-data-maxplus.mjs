@@ -896,7 +896,7 @@ const BYEND = {
 
 const title = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '').split('_').map((w) => (w.length <= 3 && /^(sic|pbo|tfln|mtj|snspd|beuv|frc|bz|fcl|smes|yig|hbn|ybco|rebco|aod|lna|utc|inp|hemt|sis|uv|cvi|ppln|eu|yso|teo2|sn|li|cu111|mram|srf|he|gr|npro|nd|yag|simox|soi|fpga|feep|gaas|nb3sn|yb|led|vo2|pmn|pt|fe|ni|sr|co2|sco2|bec|nsc|ime|pgm|hts|gd)$/.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
 const shortId = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '');
-const BY_Y = [1, -1, 2, -2];
+const BY_Y = [1.5, -1.5, 2.75, -2.75];
 
 // one line at row y: main nodes at 2.5 columns per step, by-products beside their source
 function line(num, y) {
@@ -928,7 +928,7 @@ function line(num, y) {
     return n(key(i), px, py, res, title(id), opt);
   });
 }
-const cluster = (name, nums) => ({ name, nodes: nums.flatMap((num, i) => line(num, 5 * i)) });
+const cluster = (name, nums) => ({ name, nodes: nums.flatMap((num, i) => line(num, 6 * i)) });
 
 export default {
   file: 'pl_maxplus',
