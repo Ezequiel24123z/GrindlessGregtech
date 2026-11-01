@@ -301,9 +301,9 @@ export default {
           ['l21_m0', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil', 'raw'],
           ['l21_m1', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
           ['l21_m2', I('grindless:ion_tracked_foil'), 'Ion-Tracked Foil'],
-          ['l21_m3', mach('gtceu:large_chemical_reactor'), 'Chemical Reactor', 'ours'],
+          ['l21_m3', mach('gtceu:ev_chemical_reactor'), 'Chemical Reactor', 'ours'],
           ['l21_m4', I('grindless:etched_membrane'), 'Etched Membrane'],
-        ], null, 17.5),
+        ], null, 16.25),
         // line 22
         ...chain(8, [
           ['l22_0', I('grindless:ti50_oven_charge'), 'Ti-50 Oven Charge', 'raw'],
@@ -346,14 +346,14 @@ export default {
           ['l43_1', F('gtceu:liquid_helium'), 'Liquid Helium'],
           ['l43_2', mach('gtceu:cryogenic_plant'), 'Cryogenic Plant', 'ours'],
           ['l43_3', F('gtceu:he_6n'), '6N Helium'],
-          ['l43_5', mach('gtceu:assembler'), 'Assembler', 'ours', { from: ['l43_3', 'l43_r2'] }],
+          ['l43_5', mach('gtceu:ev_assembler'), 'Assembler', 'ours', { from: ['l43_3', 'l43_r2'] }],
           ['l43_4', I('grindless:gas_stopping_cell'), 'Gas Stopping Cell'],
-        ], 'the MNT collider', 10),
+        ], 'the MNT collider', 8.75),
         ...chain(16, [
           ['l43_r0', I('gtceu:silicon_wafer'), 'Silicon Wafer', 'raw'],
           ['l43_r1', mach('gtceu:photonic_foundry'), 'Photonic Foundry', 'ours'],
           ['l43_r2', I('grindless:rf_carpet_board'), 'RF Carpet Board'],
-        ], null, 15),
+        ], null, 13.75),
         // line 25
         ...chain(18, [
           ['l25_0', I('grindless:ejecta_knot_dust'), 'Ejecta Knot Dust', 'raw'],
@@ -619,7 +619,7 @@ export default {
           ['l41_0', F('gtceu:krypton'), 'Krypton'],
           ['l41_m', mach('gtceu:ev_mixer'), 'Mixer', 'ours'],
           ['l41_1', I('grindless:kr_f2_premix'), 'Kr-F2 Premix'],
-          ['l41_r', mach('gtceu:large_chemical_reactor'), 'Chemical Reactor', 'ours'],
+          ['l41_r', mach('gtceu:ev_chemical_reactor'), 'Chemical Reactor', 'ours'],
           ['l41_2', I('grindless:krf_discharge_tube'), 'KrF Discharge Tube'],
           ['l41_l', mach('gtceu:assembly_line'), 'Assembly Line', 'ours'],
           ['l41_3', I('grindless:krf_excimer_laser'), 'KrF Excimer Laser'],
