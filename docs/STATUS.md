@@ -32,8 +32,8 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
     - MAX+ build order rows 22 to 25 (batch 13): the Hyperstargate (XP-G1: machine 17, its dial and the open ring), the crossing and the arrival (XP-Z1b: the credits, the title and the epilogue book), the validator and tier 15 (XP-C1), the chart `pl_maxplus` (XP-PL) and the quests (XP-C2a to XP-C2c). Phase 7 is done.
   - Capacity: no known violation left (CAP-K).
   - English only (EN-1): no `es_es` anywhere under `pack/kubejs`; T0's english-only guard keeps it so.
-  - Phase 8, all but its last pass: the triage (`docs/reforge/08_cleanup.md`, P8-T) and P8-A to P8-G, which fixed the census and audit false positives, the old-save leftovers, GT--'s component assembly line, the orphan textures and their generators, the trivial steps and the culture seed's gain, the wrong-era quest and byproduct, and the era docs' old rules. P8-H1 and P8-H2 are the last pass.
-- **Last accepted integration batch:** Reforge batches 13 and 14 (issues #152 and #154 to #167).
+  - Phase 8: the triage (`docs/reforge/08_cleanup.md`, P8-T) and P8-A to P8-H2 fixed the census and audit false positives, the old-save leftovers, GT--'s component assembly line, the orphan textures and their generators, the trivial steps and the culture seed's gain, the wrong-era quest and byproduct, the era docs' old rules, the MAX+ leftovers (machine info pages, a truthful process baseline) and the gate parts' quality. On the final dump nothing is open (`08_cleanup.md` section 11).
+- **Last accepted integration batch:** Reforge batches 13 to 15 (issues #152 and #154 to #170). Batch 15: P8-H1 (MAX+ audit leftovers, 20 machine info pages, the process baseline), P8-H2 (the assets audit's built strings, the gate parts on the tier-15 ladder, `pl_zpm`'s ring ice route), P9-N (the v1.0.0 notes and README); the integrator set the pack version to 1.0.0, regenerated the EMI expect list and retook the capacity snapshot. Final dump 123bae22: reachability PASS for 16 tiers, capacity 0 known violations, 3,806 chart arrows and 0 failing, the quest lint 0 errors, and the census, assets audit and process audit with nothing open.
   - Packages:
     - XP-G1: the Hyperstargate (machine 17), its dial at 2^43 for 1,200 t, the charge check, the spent charge's recharge and the open ring;
     - XP-Z1b: the crossing (one player per dial), the arrival plaza, the credits, the title and the readable epilogue;
@@ -55,14 +55,11 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 
 | Package | Issue | Content | Phase |
 |---|---|---|---|
-| P8-H1 | #168 | MAX+ audit leftovers: the process audit's `pending` list, MAX+ and MAX machine info, the census's MAX+ items, a truthful baseline, the alkali sulfate's EMI page | 8 |
-| P8-H2 | #169 | The assets audit reads built texture strings; the gate base and locked chevron rows on the tier-15 ladder; `pl_zpm`'s ring ice arrows | 8 |
+| P9-T3a | #171 | T3, visual half: the gallery, the MAX+ multiblocks formed and shot, the final city's skyline and sky | 9 |
 
 - **Next:** Phase 9, v1.0.0:
-  - T3: the client suite (EMI audit, the quest book), a gallery of the MAX+ art and the final city, and the changed tiers' integrated run;
-  - `docs/releases/v1.0.0.md` and README; the version bump in `pack/pack.toml`;
-  - with the owner's go: the tag, `main`, the `releases` channel and the GitHub release.
-- **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
+  - P9-T3b: the client suite's mandatory EMI audit and the quest book on the candidate;
+  - then, with the owner's go: the tag `v1.0.0`, `main`, the `releases` channel and the GitHub release with the Prism zip.- **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open questions for the owner (the defaults stand until answered)
@@ -85,9 +82,8 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Capacity:** no known violation (`tools/analysis/capacity_known.json` is empty since CAP-K); one warning: UHV's ZBLAN mixer row takes 73,250 mB of fluorine, more than a singleblock mixer holds (the large mixer runs it). The lint does not count programmed circuits, so it cannot see a circuit on a multiblock with no item input.
 - **EMI:** 8 entries in `tools/analysis/emi_runtime_known.json`:
   - 8 previews, likely an audit false positive that the fixed fixture removes on the next 8 GB EMI run.
-  - The client suite's EMI audit also reported acquisition and machine-info gaps on XP-Z1b's run; P8-H1 adds the machine info.
+  - The client suite's EMI audit also reported acquisition and machine-info gaps on XP-Z1b's run; P8-H1 added the machine info pages, and P9-T3b reruns the audit.
 - **The `maxplus` stage** is a world persistentData flag (`grindless_stage_maxplus`, MX-E1): the pack has no stage mod, and MAX+ packages read the flag.
-- **Phase 8 leftovers** (P8-H1, P8-H2): the process audit's MAX+ `pending` list, the census's MAX+ unused items, the textures the scripts name by built strings, the gate base and locked chevron rows' three baselined quality findings, and two `pl_zpm` arrows (ring ice to ammonia; no distillery recipe takes ring ice).
 - **Assets:**
   - MAX+ has its own art (XP-V1, XP-V2), and the Hyperstargate wears its face;
   - sound loop-seam and harsh flags need an in-game listen at release; 220 multiblocks have no loop of their own (Phase 6 scope).
