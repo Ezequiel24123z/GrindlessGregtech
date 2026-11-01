@@ -39,7 +39,7 @@ export function lineSteps(nodes) {
   const byKey = new Map(nodes.map((n) => [n.key, n]));
   const cost = new Map();
   const stepOf = (nd) => {
-    if (nd.link || !nd.from.length) return 0;
+    if (nd.link || !nd.from.length || nd.joined) return 0;
     const srcs = nd.from.map((f) => byKey.get(typeof f === 'string' ? f : f.k)).filter(Boolean);
     if (isMachine(nd)) return 1;
     return srcs.some(isMachine) ? 0 : srcs.length ? 1 : 0;
@@ -98,6 +98,59 @@ export function splitChains(nodes) {
   });
 }
 
+// RF-3S (docs/eras/ev.md, "The rule: what the line audit counts"): the optional fields of a pl-data cluster or node.
+//   role      power | resource | infrastructure | research | travel: the chain is not a production line if its test passes
+//   line      a design-line id: clusters of one chapter with the same id are measured as one chain
+//   extends   'pl_<era>:<cluster>': a chain of at most 3 steps that is a branch end of an older line (needs a consumer)
+//   keepShort a reason: a production line under 4 steps may stay, and the audit lists the reason
+export const ROLES = ['power', 'resource', 'infrastructure', 'research', 'travel'];
+const TAGS = ['role', 'line', 'extends', 'keepShort'];
+
+// Format problems of the four fields over a built model (pl-check.mjs reports them).
+export function tagProblems(model) {
+  const out = [];
+  const has = (file, cluster) => model.chapters.some((c) => c.file === file && c.clusters && c.clusters[cluster]);
+  const check = (where, o) => {
+    if (o.role !== undefined && !ROLES.includes(o.role)) out.push(`${where}: unknown role ${JSON.stringify(o.role)} (${ROLES.join(', ')})`);
+    if (o.line !== undefined && !(typeof o.line === 'string' && /^[A-Za-z0-9_.-]+$/.test(o.line))) out.push(`${where}: line must be an id string`);
+    if (o.extends !== undefined) {
+      const m = typeof o.extends === 'string' && /^(pl_[a-z]+):(\w+)$/.exec(o.extends);
+      if (!m) out.push(`${where}: extends must be 'pl_<era>:<cluster>'`);
+      else if (!has(m[1], m[2])) out.push(`${where}: extends names unknown cluster ${o.extends}`);
+    }
+    if (o.keepShort !== undefined && !(typeof o.keepShort === 'string' && o.keepShort.trim())) out.push(`${where}: keepShort must be a reason string`);
+  };
+  for (const ch of model.chapters) {
+    if (!eraOfChapter(ch.file)) continue;
+    for (const [ck, cl] of Object.entries(ch.clusters || {})) check(`${ch.file}/${ck}`, cl);
+    for (const nd of ch.nodes) check(`${ch.file}/${nd.key}`, nd);
+  }
+  return out;
+}
+
+// Chain tags: the end node's own, then any product node's, then the cluster's.
+const tagsOf = (nodes, sink, clusterDefs) => {
+  const sources = [sink, ...nodes.filter((nd) => nd.kind === 'product'), ...clusterDefs].filter(Boolean);
+  const out = {};
+  for (const t of TAGS) { const s = sources.find((o) => o[t] !== undefined); if (s) out[t] = s[t]; }
+  return out;
+};
+
+// Clusters of one chapter that share a `line` id are one group; a raw node whose item a sibling cluster makes continues that
+// cluster's chain (it takes the product node as its source and adds no step).
+function joinGroup(all, keys) {
+  const sibling = (rn) => all.find((o) => o.cluster !== rn.cluster && !o.link && o.kind !== 'raw' && o.res === rn.res && o.from.length && !o.joined);
+  const joined = new Set();
+  const nodes = all.map((nd) => {
+    if (nd.link || nd.kind !== 'raw' || !nd.res || nd.from.length) return nd;
+    const sib = sibling(nd);
+    if (!sib) return nd;
+    joined.add(sib.key);
+    return { ...nd, from: [sib.key], joined: true };
+  });
+  return { nodes, joined, keys };
+}
+
 // Lines of a built model (pl-model.mjs#buildModel): one record per design line of a pl_<era> chapter (see splitChains).
 export function collectLines(model) {
   const lines = [];
@@ -109,7 +162,19 @@ export function collectLines(model) {
       if (!clusters.has(nd.cluster)) clusters.set(nd.cluster, []);
       clusters.get(nd.cluster).push(nd);
     }
+    const groups = new Map();
     for (const [cluster, all] of clusters) {
+      const lid = ch.clusters[cluster]?.line;
+      const gk = lid !== undefined ? `line:${lid}` : `cluster:${cluster}`;
+      if (!groups.has(gk)) groups.set(gk, { keys: [], all: [] });
+      groups.get(gk).keys.push(cluster);
+      groups.get(gk).all.push(...all);
+    }
+    for (const g of groups.values()) {
+      const cluster = g.keys.join('+');
+      const grp = g.keys.length > 1 ? joinGroup(g.all, g.keys) : { nodes: g.all, joined: new Set(), keys: g.keys };
+      const all = grp.nodes;
+      const clusterDefs = g.keys.map((k) => ch.clusters[k]).filter(Boolean);
       const parts = splitChains(all);
       for (const part of parts) {
         const nodes = part.nodes;
@@ -125,19 +190,22 @@ export function collectLines(model) {
         let products;
         if (parts.length > 1 && part.sink) products = [part.sink];
         else {
-          products = nodes.filter((nd) => !nd.link && nd.kind === 'product' && nd.res && !nd.machine);
+          products = nodes.filter((nd) => !nd.link && nd.kind === 'product' && nd.res && !nd.machine && !grp.joined.has(nd.key));
           if (!products.length) products = nodes.filter((nd) => leaf(nd) && nd.res && !nd.machine);
         }
-        const name = ch.clusters[cluster]?.name || cluster;
+        const name = ch.clusters[g.keys[0]]?.name || g.keys[0];
+        const lineId = ch.clusters[g.keys[0]]?.line;
         lines.push({
-          era, cluster, id: `${era}.${cluster}${parts.length > 1 ? `#${part.label}` : ''}`, name: parts.length > 1 ? `${name}: ${part.label}` : name,
+          era, cluster, clusters: g.keys, id: `${era}.${cluster}${parts.length > 1 ? `#${part.label}` : ''}`, name: parts.length > 1 ? `${name}: ${part.label}` : name,
           multi: parts.length > 1, nodes, crossings, products,
+          ...tagsOf(nodes, part.sink, clusterDefs),
+          lineId: lineId ?? '',
           steps: lineSteps(nodes),
           mbs: [...new Set(nodes.filter((nd) => !nd.link && (isMachine(nd))).map((nd) => nd.item))],
           machines: new Set(nodes.flatMap((nd) => (nd.machine || nd.kind === 'ours' ? [nd.item, ...(nd.types || []), ...(nd.by || [])] : (nd.by ? [].concat(nd.by) : [])))),
           ours: [...new Set(nodes.filter((nd) => nd.kind === 'ours').map((nd) => nd.item))],
           inner: new Set(nodes.filter((nd) => !nd.link && nd.kind !== 'raw' && !isMachine(nd) && nd.res).map((nd) => nd.res)),
-          raws: new Set(nodes.filter((nd) => !nd.link && nd.kind === 'raw' && nd.res).map((nd) => nd.res)),
+          raws: new Set(nodes.filter((nd) => !nd.link && nd.kind === 'raw' && !nd.joined && nd.res).map((nd) => nd.res)),
         });
       }
     }
@@ -151,7 +219,7 @@ export function usedBy(lines) {
   const out = new Map(lines.map((l) => [l.id, new Set()]));
   for (const l of lines) {
     for (const x of l.crossings) {
-      const inCluster = lines.filter((o) => `pl_${o.era}:${o.cluster}` === x.to);
+      const inCluster = lines.filter((o) => (o.clusters || [o.cluster]).some((c) => `pl_${o.era}:${c}` === x.to));
       const hit = x.key ? inCluster.filter((o) => o.nodes.some((nd) => nd.key === x.key)) : [];
       for (const tgt of hit.length ? hit : inCluster) if (tgt !== l) out.get(tgt.id).add(l.id);
     }
@@ -220,10 +288,12 @@ export function buildFacts(recipes) {
   const typeCount = new Map();
   for (const r of usable) typeCount.set(r.type, (typeCount.get(r.type) || 0) + 1);
   const byId = new Map(usable.map((r) => [r.id, r]));
+  // recipe types that output EU (generators): the power role's test
+  const euTypes = new Set(recipes.filter((r) => r.euOut > 0).map((r) => r.type));
   // types the pack registers: every recipe of the type comes from our scripts (stock GT types also hold stock recipes)
   const stock = new Set(recipes.filter((r) => r.added === false).map((r) => r.type));
   const ourTypes = new Set(recipes.filter((r) => !stock.has(r.type)).map((r) => r.type));
-  return { producers, consumers, depth, dOf, recDepth, unobtainable, typeCount, byId, ourTypes };
+  return { producers, consumers, depth, dOf, recDepth, unobtainable, typeCount, byId, ourTypes, euTypes };
 }
 
 // Era context of the pack: first era folder of pack/kubejs/startup_scripts/grindless/<era>/ naming an id (a machine, a
@@ -283,7 +353,52 @@ export function contentCrossings(line, facts, eraCtx) {
 }
 
 const MATERIAL_FORM = /_(dust|ingot|nugget|plate|block|gem|rod|foil|cell|wire|gear|bolt|screw|ring|raw|crushed|purified|impure|pure)(_(small|tiny|long|fine|double|dense))?$/;
-const materialOf = (k) => k.replace(/^fluid:/, '').replace(/^[^:]*:/, '').replace(/^(molten_|liquid_)/, '').replace(/^(small_|tiny_|hot_|dirty_|impure_|pure_|crushed_|purified_|centrifuged_|raw_)+/, '').replace(MATERIAL_FORM, '');
+const materialOf = (k) => k.replace(/^fluid:/, '').replace(/^[^:]*:/, '').replace(/^(molten_|liquid_)/, '').replace(/^(small_|tiny_|hot_|dirty_|impure_|pure_|crushed_|purified_|centrifuged_|raw_|magnetic_)+/, '').replace(MATERIAL_FORM, '');
+
+// Keys a recipe's inputs reach through producers of stock types (the GTM chain), with the hops to each; hop 0 is the recipe's own
+// inputs. Bounded: three producers per key, `depth` hops.
+export function routeClosure(r, facts, depth = 4) {
+  const seen = new Map();
+  let frontier = [r];
+  for (let h = 0; h <= depth && frontier.length; h++) {
+    const next = [];
+    for (const rec of frontier) {
+      for (const i of rec.inputs) {
+        if (i.cap) continue;
+        for (const a of i.alts) {
+          if (seen.has(a)) continue;
+          seen.set(a, h);
+          let n = 0;
+          for (const p of facts.producers.get(a) || []) { if (facts.ourTypes.has(p.type) || p.outputs[0]?.key !== a) continue; next.push(p); if (++n >= 3) break; }
+        }
+      }
+    }
+    frontier = next;
+  }
+  return seen;
+}
+
+// A fold (rule 4, "several steps in one"): one of the line's own recipes that makes `key` takes an input that the stock route `r`
+// also reaches, but only through a GTM chain of two or more steps (hop 1 or later): the route is the chain the fold replaces.
+export function foldReplaces(line, r, key, facts) {
+  if (!(line.ours || []).length) return false;
+  const own = ownedTypes(line, facts);
+  const ins = new Set();
+  for (const id of own.ids.keys()) {
+    const o = facts.byId.get(id);
+    if (!o || !o.outputs.some((x) => x.key === key)) continue;
+    for (const i of o.inputs) if (!i.cap) for (const a of i.alts) ins.add(a);
+  }
+  if (!ins.size) return false;
+  for (const [k, hop] of routeClosure(r, facts)) if (hop >= 1 && ins.has(k) && !line.inner.has(k)) return true;
+  return false;
+}
+
+// A line is a fold when it is short, has a multiblock of ours, and every end product has a stock route it replaces.
+export function isFold(line, facts) {
+  if (!facts || !(line.ours || []).length || line.steps >= REAL_STEPS || !line.products.length) return false;
+  return line.products.every((p) => (facts.producers.get(p.res) || []).some((r) => !facts.ourTypes.has(r.type) && r.outputs[0]?.key === p.res && r.outputs[0].chance >= 1 && foldReplaces(line, r, p.res, facts)));
+}
 
 // Recipe types the line "owns": most of that type's recipes are recipes of the line itself.
 export function ownedTypes(line, facts) {
@@ -298,7 +413,7 @@ export function ownedTypes(line, facts) {
 }
 
 // A recipe of the dump that makes `key` without any of the line's intermediates, in fewer steps than the line takes.
-export function skipRoute(line, key, facts, eraCtx = null) {
+export function skipRoute(line, key, facts, eraCtx = null, x = {}) {
   const lineBase = Math.max(0, ...[...line.raws].map((k) => facts.dOf(k) ?? 0));
   const budget = lineBase + line.steps;
   const own = ownedTypes(line, facts);
@@ -320,6 +435,14 @@ export function skipRoute(line, key, facts, eraCtx = null) {
     if (ins.some((a) => materialOf(a) === mat)) continue;
     const d = facts.recDepth(r);
     if (d === undefined || d >= budget) continue;
+    // the four false positives of RF-3C (ev.md): an ore with no vein, a same-material loop, a parallel source, a fold's chain
+    {
+      const clo = routeClosure(r, facts);
+      if (x.never && [...clo.keys()].some((k) => x.never.has(k))) continue;
+      if ([...clo.keys()].some((k) => mat && materialOf(k) === mat)) continue;
+      if ((x.earlier || []).some((o) => o.products.some((p) => p.res === key) && (o.machines.has(r.type) || ownedTypes(o, facts).ids.has(r.id)))) continue;
+      if (foldReplaces(line, r, key, facts)) continue;
+    }
     if (!best || d < best.depth) best = { id: r.id, type: r.type, depth: d, budget };
   }
   return best;
@@ -342,8 +465,73 @@ export function consumerSummary(key, facts, keyItems) {
 
 const TRAVEL_KEY = /^grindless:\w+_key$/;
 const eraIdx = (e) => ERAS.indexOf(e);
+const WEAR = /lubricant|coolant|battery|circuit|catalyst|filter|mold|lens|charge|water$|distilled/;
+const wearOnly = (r) => r.inputs.every((i) => i.cap || i.circuit || i.alts.every((a) => WEAR.test(a)));
 
-export function judge(l, { used, dup, skipped, endInfo }) {
+// The declared roles of RF-3S (ev.md:481-500), tested against the dump's recipes. Approximate by design: each test is a few
+// lines of evidence, not a proof. Returns { ok, why }; a role is never judged without a dump.
+export function checkRole(l, facts, rc = {}) {
+  if (!l.role) return null;
+  if (!facts) return { ok: false, why: 'no dump to test it' };
+  const cons = (k) => facts.consumers.get(k) || [];
+  const prods = l.products;
+  const fail = (why) => ({ ok: false, why });
+  const ok = { ok: true, why: '' };
+  switch (l.role) {
+    case 'power':
+      return !prods.length || [...l.machines].some((t) => facts.euTypes.has(t)) ? ok : fail('no machine of the line outputs EU');
+    case 'resource': {
+      if (!prods.length) return fail('no end product');
+      for (const p of prods) {
+        const mine = (facts.producers.get(p.res) || []).filter((r) => l.machines.has(r.type) || ownedTypes(l, facts).ids.has(r.id));
+        if (!mine.length) return fail(`no recipe of the line makes ${p.res}`);
+        if (!mine.some(wearOnly)) return fail(`${p.res} is made from consumed inputs, not only wear or charge`);
+        if (!rc.feeds?.get(p.res)?.size) return fail(`${p.res} feeds no other line`);
+      }
+      return ok;
+    }
+    case 'infrastructure': {
+      if (!prods.length) return fail('no end product');
+      for (const p of prods) {
+        const cs = cons(p.res);
+        if (!cs.length) return fail(`${p.res} has no consumer`);
+        const hit = cs.filter((r) => r.outputs.some((o) => rc.infra?.has(o.key) || /^gcyr:.*(suit|rocket|station)/.test(o.key))).length;
+        if (hit * 2 < cs.length) return fail(`${p.res} mostly feeds recipes that are not machines, structures or suits`);
+      }
+      return ok;
+    }
+    case 'research': {
+      if (!prods.length) return fail('no end product');
+      for (const p of prods) {
+        const cs = cons(p.res);
+        if (!cs.length) return fail(`${p.res} has no consumer`);
+        if (!cs.every((r) => /research|telemetry|observatory/.test(r.type) || r.inputs.some((i) => i.cap && i.alts.includes(p.res)))) return fail(`${p.res} is consumed as material`);
+      }
+      return ok;
+    }
+    case 'travel': {
+      if (!prods.length) return fail('no end product');
+      for (const p of prods) {
+        const cs = cons(p.res);
+        if (!cs.length) { if (TRAVEL_KEY.test(p.res)) continue; return fail(`${p.res} has no consumer`); }
+        if (!cs.every((r) => /rocket|station|landing|seed/.test(r.type) || r.inputs.some((i) => i.cap))) return fail(`${p.res} is consumed as material`);
+      }
+      return ok;
+    }
+  }
+  return fail(`unknown role ${l.role}`);
+}
+
+// kind: role (declared and tested), branch (extends, three steps or fewer), fold (rule 4), or production.
+export function classify(l, facts, rc = {}) {
+  const role = checkRole(l, facts, rc);
+  if (role?.ok) return { kind: 'role', role };
+  if (!role && l.extends && l.steps <= 3) return { kind: 'branch', role };
+  if (!role && eraIdx(l.era) >= eraIdx('ev') && isFold(l, facts)) return { kind: 'fold', role };
+  return { kind: 'production', role };
+}
+
+export function judge(l, { used, dup, skipped, endInfo, kind = 'production', role = null }) {
   const real = l.steps >= REAL_STEPS;
   // chart link nodes first; the dump's recipes (older multiblocks and end products really used) fill an incomplete chart
   const cross = [...l.crossings, ...(l.content || [])];
@@ -352,15 +540,25 @@ export function judge(l, { used, dup, skipped, endInfo }) {
   const dead = l.products.filter((p) => !p.end && !TRAVEL_KEY.test(p.res) && endInfo.get(p.res)?.n === 0 && !used.size);
   const allSkip = l.products.length > 0 && skipped.length === l.products.length;
   const noEnd = l.products.length === 0;
+  const short = !real && eraIdx(l.era) >= eraIdx('ev');
   let verdict = 'keep';
   let reason = `${l.steps} steps, ${l.crossings.length} chart + ${(l.content || []).length} content crossings (reach ${reach}), used by ${used.size} lines`;
-  if (l.era === 'max') return { verdict: 'data-only', reason: 'MAX: RF-7A decides', real, reach };
+  if (l.era === 'max') return { verdict: 'data-only', reason: 'MAX: RF-7A decides', real, reach, kind };
   // Skippability is only a lower-bound depth heuristic, so it never removes a line on its own.
-  if (dead.length && dead.length === l.products.length) {
+  if (dead.length && dead.length === l.products.length && kind !== 'role') {
     verdict = 'remove'; reason = `no end product feeds a recipe or another line (decorative)`;
-  } else if (dup) {
+  } else if (dup && kind !== 'role') {
     verdict = 'merge'; reason = `shares ${dup.shared} intermediates with ${dup.of}`;
-  } else if (!real && eraIdx(l.era) >= eraIdx('ev')) {
+  } else if (kind === 'role') {
+    reason = `role ${l.role}: ${reason}`;
+  } else if (kind === 'fold') {
+    reason = `fold: one multiblock replaces a GTM chain; ${reason}`;
+  } else if (kind === 'branch') {
+    if (!used.size && !cross.length && !l.products.some((p) => p.end)) { verdict = 'fix'; reason = 'branch end has no consumer'; }
+    else reason = `branch end of ${l.extends}: ${reason}`;
+  } else if (short && l.keepShort) {
+    reason = `keepShort (${l.keepShort}): ${l.steps} steps; ${reason}`;
+  } else if (short) {
     verdict = 'fix'; reason = `only ${l.steps} steps (a real line has ${REAL_STEPS}+)`;
   } else if (allSkip) {
     verdict = 'fix'; reason = `every end product has a shorter bypass recipe; make the line the better route`;
@@ -373,27 +571,36 @@ export function judge(l, { used, dup, skipped, endInfo }) {
   } else if (noEnd) {
     verdict = 'fix'; reason = 'no end product marked';
   }
-  return { verdict, reason, real, reach };
+  if (role && !role.ok) reason = `declared role ${l.role} fails: ${role.why}; ${reason}`;
+  return { verdict, reason, real, reach, kind };
 }
 
-export function auditAll(model, facts, keyItems, { startup = new Map(), machines = [] } = {}) {
+export function auditAll(model, facts, keyItems, { startup = new Map(), machines = [], never = new Set(), infra = new Set() } = {}) {
   const lines = collectLines(model);
   const eraCtx = facts ? buildEraContext({ startup, machines, lines }) : null;
   const used = usedBy(lines);
   const dups = findDuplicates(lines);
-  const rows = [];
+  const feeds = new Map();
+  for (const o of lines) for (const k of o.raws) { if (!feeds.has(k)) feeds.set(k, new Set()); feeds.get(k).add(o.id); }
+  const rowsOf = [];
   for (const l of lines) {
+    const rcl = { infra: new Set([...infra, ...machines.map((m) => m.id)]), feeds: new Map([...feeds].map(([k, v]) => [k, new Set([...v].filter((id) => id !== l.id))])) };
+    rowsOf.push({ l, ...classify(l, facts, rcl) });
+  }
+  const rows = [];
+  for (const { l, kind, role } of rowsOf) {
     const endInfo = new Map();
     const skipped = [];
     const skipText = [];
+    const earlier = rowsOf.filter((o) => o.kind === 'production' && eraIdx(o.l.era) < eraIdx(l.era)).map((o) => o.l);
     for (const p of l.products) {
       endInfo.set(p.res, facts ? consumerSummary(p.res, facts, keyItems) : { n: -1, reached: [] });
-      if (facts) { const s = skipRoute(l, p.res, facts, eraCtx); if (s) { skipped.push(p); skipText.push(`${p.res.replace(/^gtceu:/, '')} via ${s.id} (${s.type}, ${s.depth} < ${s.budget})`); } }
+      if (facts && kind === 'production') { const s = skipRoute(l, p.res, facts, eraCtx, { never, earlier }); if (s) { skipped.push(p); skipText.push(`${p.res.replace(/^gtceu:/, '')} via ${s.id} (${s.type}, ${s.depth} < ${s.budget})`); } }
     }
     if (facts) l.content = contentCrossings(l, facts, eraCtx);
     const u = used.get(l.id);
-    const j = judge(l, { used: u, dup: dups.get(l.id), skipped, endInfo });
-    rows.push({ line: l, used: u, dup: dups.get(l.id), skipText, endInfo, ...j });
+    const j = judge(l, { used: u, dup: dups.get(l.id), skipped, endInfo, kind, role });
+    rows.push({ line: l, used: u, dup: dups.get(l.id), skipText, endInfo, role, ...j });
   }
   return rows;
 }
@@ -444,7 +651,7 @@ export function designReport(era, rows, chartLines, dumpKeys, { built = null } =
 }
 const q = (s) => `"${String(s ?? '').replace(/"/g, '""')}"`;
 export function toCsv(rows) {
-  const head = ['era', 'line', 'name', 'steps', 'real', 'multiblocks', 'ours', 'crossings', 'crossing_eras', 'content_crossings', 'content_eras', 'reach_back', 'used_by_lines', 'end_products', 'end_consumers', 'skip_route', 'duplicate_of', 'verdict', 'reason'];
+  const head = ['era', 'line', 'name', 'steps', 'real', 'multiblocks', 'ours', 'crossings', 'crossing_eras', 'content_crossings', 'content_eras', 'reach_back', 'used_by_lines', 'end_products', 'end_consumers', 'skip_route', 'duplicate_of', 'verdict', 'reason', 'role', 'role_ok', 'line_id', 'extends', 'keep_short'];
   const out = [head.join(',')];
   for (const r of rows) {
     const l = r.line;
@@ -454,17 +661,20 @@ export function toCsv(rows) {
       q(l.products.map((p) => p.res.replace(/^gtceu:/, '')).join(' ')),
       q(l.products.map((p) => { const e = r.endInfo.get(p.res); return `${p.res.replace(/^gtceu:/, '')}=${e.n}${e.reached.length ? '>' + e.reached.slice(0, 3).join('|') : ''}`; }).join('; ')),
       q(r.skipText.join('; ')), r.dup ? r.dup.of : '', r.verdict, q(r.reason),
+      l.role ?? '', l.role ? (r.role?.ok ? 1 : 0) : '', l.lineId ?? '', q(l.extends ?? ''), q(l.keepShort ?? ''),
     ].join(','));
   }
   return out.join('\n') + '\n';
 }
 
 export function eraSummary(rows) {
-  const per = new Map(ERAS.map((e) => [e, { lines: 0, real: 0, crossings: 0, content: 0, keep: 0, fix: 0, merge: 0, remove: 0 }]));
+  const per = new Map(ERAS.map((e) => [e, { lines: 0, real: 0, crossings: 0, content: 0, keep: 0, fix: 0, merge: 0, remove: 0, prod: 0, role: 0, branch: 0, fold: 0 }]));
   for (const r of rows) {
     const s = per.get(r.line.era);
-    s.lines++; if (r.real) s.real++; s.crossings += r.line.crossings.length; s.content += (r.line.content || []).length;
+    const kind = r.kind || 'production';
+    s.lines++; if (r.real && kind === 'production') s.real++; s.crossings += r.line.crossings.length; s.content += (r.line.content || []).length;
     if (s[r.verdict] !== undefined) s[r.verdict]++;
+    s[kind === 'production' ? 'prod' : kind]++;
   }
   return per;
 }
@@ -481,7 +691,10 @@ async function main(argv) {
   const csvPath = path.join(REPO, 'docs', 'reforge', '01_cost_matrix.csv');
   const keyItems = fs.existsSync(csvPath) ? loadKeyItems(fs.readFileSync(csvPath, 'utf8')) : new Map();
   const startup = scanStartupEras(path.join(REPO, 'pack', 'kubejs', 'startup_scripts', 'grindless'));
-  const rows = auditAll(model, facts, keyItems, { startup, machines: [...idx.machines.values()] });
+  const hidden = path.join(REPO, 'pack', 'kubejs', 'data', 'grindless', 'tables', 'hidden_until.json');
+  const never = new Set(fs.existsSync(hidden) ? (JSON.parse(fs.readFileSync(hidden, 'utf8')).groups || []).filter((g) => g.until === 'never').flatMap((g) => g.items || []) : []);
+  const infra = new Set([...(idx.dump?.structures?.keys?.() || [])]);
+  const rows = auditAll(model, facts, keyItems, { startup, machines: [...idx.machines.values()], never, infra });
   fs.mkdirSync(opt.out, { recursive: true });
   fs.writeFileSync(path.join(opt.out, '03_lines.csv'), toCsv(rows));
   const per = eraSummary(rows);
@@ -506,12 +719,16 @@ async function main(argv) {
   fs.writeFileSync(path.join(opt.out, '03_design_lines.csv'), cnt.join('\n') + '\n');
   fs.writeFileSync(path.join(opt.out, '03_missing_lines.csv'), miss.join('\n') + '\n');
   const rep = new Map(reports.map((r) => [r.era, r]));
-  console.log('era    design chart real | missing (count / named, in dump)  planned | cross content  keep fix merge remove   guide');
+  console.log('era    design chart real | missing (count / named, in dump)  planned | cross content  keep fix merge remove  prod role branch fold   guide');
   for (const [e, s] of per) {
     if (!s.lines) continue;
     const r = rep.get(e);
     const d = r ? `${String(r.design).padStart(6)} ${String(r.chart).padStart(5)} ${String(s.real).padStart(4)} | ${String(r.missingByCount).padStart(7)} / ${String(r.missing.length).padStart(2)}, ${String(r.missing.filter((m) => m.dump).length).padStart(2)}  ${String(r.planned || '').padStart(14)}` : `${''.padStart(6)} ${String(s.lines).padStart(5)} ${String(s.real).padStart(4)} | ${''.padStart(25)}`;
-    console.log(`${e.padEnd(6)} ${d} | ${String(s.crossings).padStart(5)} ${String(s.content).padStart(7)}  ${String(s.keep).padStart(4)} ${String(s.fix).padStart(3)} ${String(s.merge).padStart(5)} ${String(s.remove).padStart(6)}   ${GUIDE[e] ?? ''}`);
+    console.log(`${e.padEnd(6)} ${d} | ${String(s.crossings).padStart(5)} ${String(s.content).padStart(7)}  ${String(s.keep).padStart(4)} ${String(s.fix).padStart(3)} ${String(s.merge).padStart(5)}     ${String(s.remove).padStart(6)}  ${String(s.prod).padStart(4)} ${String(s.role).padStart(4)} ${String(s.branch).padStart(6)} ${String(s.fold).padStart(4)}   ${GUIDE[e] ?? ''}`);
   }
+      for (const r of rows) {
+        if (r.line.keepShort && r.kind === 'production') console.log(`keepShort ${r.line.id}: ${r.line.keepShort}`);
+        if (r.line.role && !r.role?.ok) console.log(`role fails ${r.line.id}: ${r.line.role}: ${r.role?.why}`);
+      }
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await main(process.argv.slice(2));
