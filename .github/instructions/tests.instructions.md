@@ -6,9 +6,9 @@ applyTo: "tools/test/**,tools/analysis/**,tools/Check-Fast.ps1"
 ## When to run what
 | Tier | When | Command | Who |
 |---|---|---|---|
-| T0 | Before every package commit | `powershell -NoProfile -ExecutionPolicy Bypass -File tools\Check-Fast.ps1` (`-Skip analysis` only for inner loops) | Every worker |
+| T0 | Before every package handoff | Push the branch: GitHub Actions runs `tools/Check-Fast.ps1` on every push (about 2 min; `gh run watch <id> --exit-status`). On the VM instead: `'pwsh -NoProfile -File tools/Check-Fast.ps1' \| ssh grindless-vm "bash /opt/grindless/tools/gg-vm-exec.sh <branch>"`. Never on the workstation | Every worker |
 | T1 | Only for a new or changed mechanism named in the package | One test on a copy of the pack: `tools\test\Invoke-GGTest.ps1 -Suite server -PackDir <copy of pack> -Commands 'kubejs custom_command gg_test_<x>' -WaitForLog '<marker>'` | Implementer, at most once per repair |
-| T2 | Once per integration batch | Reachability (`tools\analysis\Invoke-Reachability.ps1 -Tier <tier>`), `gg_test_recipe_lookup`, EMI coverage, regeneration | Integrator |
+| T2 | Once per integration batch | A batch dump on the VM (`gg-vm-run.sh <sha> -Commands 'kubejs custom_command gg_dump'`, published as `dumps/latest`), reachability for every implemented tier on it (`gg-vm-exec.sh`), `gg_test_recipe_lookup`, EMI coverage, regeneration | Integrator |
 | T3 | Release candidate only | Client suite, gallery, quest book, the changed tiers' integrated run | Integrator |
 
 - Before any native run, state the doubt it resolves. No doubt, no run.
@@ -32,7 +32,7 @@ applyTo: "tools/test/**,tools/analysis/**,tools/Check-Fast.ps1"
 - Client and server use `-Xms1G -Xmx4G` (heap, not total RAM). Available RAM is not a launch condition and unreadable counters do not block a run.
 - One exception: the EMI client audit stalls in EMI's reload at 4G. It runs with `-EmiAuditClientXmx 8G -Slots 1 -EmiAuditTimeoutSec 1800`, alone on the VM, by the integrator only (T2/T3).
 - Native budget: at most 600 s per stage (startup included), 30 s for server shutdown, commands 60 s, marker waits 180 s. These are failure ceilings, not targets. Never raise heap, time or concurrency limits or automatically retry a resource failure.
-- Do source/static validation locally, not on a bench. Before using an older worktree, merge the current bench resource-policy changes; never use a historical launcher to bypass the limits.
+- The workstation (4 cores, 12.5 GB, shared by every session) only edits and runs at most one quick Node command at a time (a single test file, `emi-coverage.mjs --expect`, the quest linter). T0, the analysis suite (`tools/analysis/test/run.mjs`), cost solves and every dump-based tool (`run.ps1 -Dump`, reachability, line audit, cost matrix, `capacity-lint --write-snapshot`) run in Actions or on the VM: `'<command>' | ssh grindless-vm "bash /opt/grindless/tools/gg-vm-exec.sh <pushed ref>"` runs it at the root of a scratch checkout of that commit, with `$GG_DUMP` set to the newest batch dump (`docs/testing/usage.md`). Before any native run, merge the current bench resource-policy changes; never use a historical launcher to bypass the limits.
 - Test clients start with all sound at zero (`Set-GGClientOptions` in `tools/test/remote/gg-client.ps1`).
 
 ## Test scripts and zones

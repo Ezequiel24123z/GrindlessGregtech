@@ -15,11 +15,40 @@ WARN is usable (for example `leisure-backup` not present, or a stale lock the ne
 
 ## T0
 
+Never on the workstation (4 cores, 12.5 GB, shared by every session; owner, 2026-11-01). Two places:
+
+- **GitHub Actions**, on every push ([ci.md](ci.md)), about 2 minutes. Read the run of your branch:
+
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\Check-Fast.ps1 [-NodeExe <node.exe>]
+gh run list --repo Ezequiel24123z/GrindlessGregtech --workflow t0.yml --branch <branch> --limit 1 --json databaseId,headSha,status,conclusion
+gh run watch <databaseId> --repo Ezequiel24123z/GrindlessGregtech --exit-status
+gh run view <databaseId> --repo Ezequiel24123z/GrindlessGregtech --log-failed | Select-Object -Last 40   # on failure
 ```
 
-Local, about 4-5 minutes, no Minecraft or network. Also runs in GitHub Actions on every push ([ci.md](ci.md)).
+- **The VM**, for a pushed commit (below): `'pwsh -NoProfile -File tools/Check-Fast.ps1' | ssh grindless-vm "bash /opt/grindless/tools/gg-vm-exec.sh <branch>"`.
+
+`tools\Check-Fast.ps1` itself is unchanged (static KubeJS load, lang parity, quest lint, zones, order, tooltips,
+capacity, analysis suite); on an idle 4-core machine it takes 4-5 minutes, which is why it no longer runs locally.
+
+## Node tools on the VM (`gg-vm-exec.sh`)
+
+Any Node or PowerShell tool of a **pushed** commit (commit and push first; a WIP commit is fine), with the command on
+stdin so Windows quoting never matters:
+
+```powershell
+'node tools/analysis/reachability.mjs --tier lv --dump $GG_DUMP' | ssh grindless-vm "bash /opt/grindless/tools/gg-vm-exec.sh <branch|sha>"
+'node tools/analysis/line-audit.mjs --dump $GG_DUMP --out /tmp/la && cat /tmp/la/03_lines.csv' | ssh grindless-vm "bash /opt/grindless/tools/gg-vm-exec.sh <branch|sha>"
+```
+
+- It runs at the root of a scratch checkout of that commit (removed afterwards), with the bench's Node first on
+  `PATH`, under `nice`, at most 2 at once. Files it writes there are discarded: print what you need.
+- `$GG_DUMP` is the newest batch dump (`/var/lib/grindless/dumps/latest`, the integrator's T2 dump of current
+  content). A dump of your own: `scp -r <dump dir> grindless-vm:/var/lib/grindless/dumps/<branch>-<n>` and pass that
+  path instead.
+- The last line is `GGEXEC|<runId>|<exit>|<sha>|<seconds>s`; the exit code is the command's (2 when it cannot
+  start: unknown ref, fetch or checkout failure, no slot within 30 minutes).
+- Installing or updating the script: `scp tools/vm/*.sh grindless-vm:/opt/grindless/tools/` (strip `\r` if the
+  working tree has CRLF).
 
 ## T1-T3
 
