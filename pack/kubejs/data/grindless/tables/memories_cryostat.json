@@ -162,7 +162,10 @@
           "itemsOut": [{ "id": "grindless:tested_sis_die", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] },
         { "_why": "MAX-G1 (max.md, L18 step 4, c10): the polished SRF cavity cooled to its operating point in the mK module and its fundamental mode characterised; the mixture is returned.", "name": "cooled_cavity_mode", "circuit": 10, "eut": 31457280, "duration": 1600,
           "itemsIn": [{ "id": "grindless:polished_srf_cavity", "count": 1 }], "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }], "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:cooled_cavity_mode", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] }
+          "itemsOut": [{ "id": "grindless:cooled_cavity_mode", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] },
+        { "_why": "XP-A3 (maxplus.md, Q2 step 5, c32, a repeat on this type with its own inputs): the interposer die cooled in the mK module and its piezo transducers tuned; the mixture is returned.", "name": "horizon_interposer", "circuit": 32, "eut": 536870912, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:interposer_die", "count": 1 }], "kept": [{ "id": "grindless:mk_cryostat_module", "count": 1 }], "fluidsIn": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:horizon_interposer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:he3_he4_mixture", "amount": 200 }] }
       ]
     }
   }

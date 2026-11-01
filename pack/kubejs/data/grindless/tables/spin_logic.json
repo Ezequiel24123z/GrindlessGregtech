@@ -80,6 +80,15 @@
           "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:racetrack_memory_die", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "XP-A3 (maxplus.md, Q1 step 5, c6): the spin interconnect wafer stacked over two patterned track wafers into the racetrack logic stack; the platinum-group sludge of the lift-off is collected as in c1",
+          "name": "stacked_logic_wafer", "circuit": 6, "eut": 536870912, "duration": 1800,
+          "itemsIn": [{ "id": "grindless:spin_interconnect_wafer", "count": 1 }, { "id": "grindless:patterned_track_wafer", "count": 2 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:argon", "amount": 200 }],
+          "itemsOut": [{ "id": "grindless:stacked_logic_wafer", "count": 1 }, { "id": "gtceu:platinum_group_sludge_dust", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
         }
       ]
     },

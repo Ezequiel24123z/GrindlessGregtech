@@ -192,7 +192,10 @@
           "itemsOut": [{ "id": "grindless:sapphire_resonator_disc", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
         { "_why": "MX-S1 (max.md, L56 step 1, c32, a fourth repeat on this type with its own inputs): Nd:YAG pulled from yttrium, aluminium and neodymium under oxygen; the Ir crucible wears as in every row", "name": "nd_yag_boule", "circuit": 32, "eut": 491520, "duration": 1200,
           "itemsIn": [{ "id": "gtceu:yttrium_dust", "count": 3 }, { "id": "gtceu:aluminium_dust", "count": 5 }, { "id": "gtceu:neodymium_dust", "count": 1 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [{ "id": "gtceu:oxygen", "amount": 2000 }], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:nd_yag_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:nd_yag_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] },
+        { "_why": "XP-A3 (maxplus.md, Q1 step 2, c32, a repeat on this type with its own inputs): the Si-28 feed pulled into a single-isotope boule; the Ir crucible wears as in every row", "name": "si28_boule", "circuit": 32, "eut": 536870912, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:si28_feed", "count": 4 }, { "id": "grindless:iridium_crucible", "count": 1, "chance": 313 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:si28_boule", "count": 1 }, { "id": "grindless:worn_iridium_crucible", "count": 1, "chance": 313 }], "fluidsOut": [] }
       ]
     },
     "cutter": {
