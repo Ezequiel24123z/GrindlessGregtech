@@ -27,7 +27,7 @@
   "excludeRecipes": {
     "types": ["gtceu:vein_drilling"],
     "categories": ["*recycling*", "*decomposition*"],
-    "ids": ["*/uncraft*", "*_recycling*", "*/unpack*", "gtceu:forge_hammer/decompress_*", "quark:*_decompress", "megacells:*decompress*", "grindless:r_process_decompression/*", "grindless:slurry_separation/slurry_decompression"]
+    "ids": ["*/uncraft*", "*_recycling*", "*/unpack*", "gtceu:forge_hammer/decompress_*", "quark:*_decompress", "megacells:*decompress*", "grindless:r_process_decompression/*", "grindless:slurry_separation/slurry_decompression", "gtnn:component_assembly_line/*"]
   },
 
   "base": {

@@ -1,8 +1,8 @@
 {
   "era": "hv",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 2.6,
+  "fluid": 2.6,
   "keys": [
     "extendedfeatures:hv_universal_circuit",
     "gtceu:advanced_integrated_circuit",
@@ -29,7 +29,23 @@
     "gtceu:syngas_plant"
   ],
   "include": [],
-  "exclude": [],
-  "remove": [],
+  "exclude": [
+    "gtnn:component_assembly_line/*_hv",
+    "gtnn:component_assembly_line/*_hv_*"
+  ],
+  "remove": [
+    "gtceu:shaped/conveyor_module_hv_rubber",
+    "gtceu:shaped/conveyor_module_hv_silicone_rubber",
+    "gtceu:shaped/conveyor_module_hv_styrene_butadiene_rubber",
+    "gtceu:shaped/electric_motor_hv",
+    "gtceu:shaped/electric_piston_hv",
+    "gtceu:shaped/electric_pump_hv_rubber",
+    "gtceu:shaped/electric_pump_hv_silicone_rubber",
+    "gtceu:shaped/electric_pump_hv_styrene_butadiene_rubber",
+    "gtceu:shaped/emitter_hv",
+    "gtceu:shaped/field_generator_hv",
+    "gtceu:shaped/robot_arm_hv",
+    "gtceu:shaped/sensor_hv"
+  ],
   "override": {}
 }

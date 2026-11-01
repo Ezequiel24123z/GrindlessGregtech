@@ -6,10 +6,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { solveFactors, pricedRows, coreIndex, curved, fixShapedCounts, priceDump, keyCandidates } from '../cost-matrix.mjs';
-import { loadTables, withFactors, TABLE_DIR } from '../lib/cost_curve.mjs';
+import { loadRule, loadTables, withFactors, TABLE_DIR } from '../lib/cost_curve.mjs';
 import { mkDump } from './helpers.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
+const rule = loadRule();
 const realCfg = JSON.parse(fs.readFileSync(path.join(here, '..', 'cost_matrix.json'), 'utf8'));
 
 // one key group (the hull), no controllers, circuits or capstones: the core index is the hull's score
@@ -53,10 +54,15 @@ test('the core index of a one-group era is the key item score', () => {
   assert.equal(idx.get('hv').index, 4);
 });
 
-test('the disabled tables change nothing, and a factor changes the index as the rule says', () => {
+test('the committed tables forced off change nothing, enabled ones apply their factors, and a factor changes the index as the rule says', () => {
   const { tables } = loadTables(TABLE_DIR);
-  const off = curved(dump(), tables);
+  const off = curved(dump(), tables.map((t) => ({ ...t, enabled: false })));
   assert.equal(off.res.changed.size, 0);
+  const committed = curved(dump(), tables);
+  const eras = tables.filter((t) => t.enabled && cfg.tiers.includes(t.era));
+  assert.equal(committed.res.changed.size, eras.length);
+  const idxC = coreIndex(pricedRows(committed.dump, cfg).rows, cfg.tiers);
+  for (const t of eras) assert.ok(Math.abs(idxC.get(t.era).index - rule.ceilScaled({ mv: 2, hv: 4 }[t.era], t.item)) < 1e-6, t.era);
   const on = curved(dump(), withFactors(tables, { mv: { item: 2.5, fluid: 2.5 } }));
   assert.deepEqual([...on.res.changed.keys()], ['gtceu:assembler/hull_mv']);
   assert.equal(coreIndex(pricedRows(on.dump, cfg).rows, cfg.tiers).get('mv').index, 5);

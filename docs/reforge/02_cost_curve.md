@@ -123,3 +123,73 @@ Bypasses in the solved output (`cost-matrix --solve` writes them to `solved.json
 - `capacity-lint.mjs --dump <dir> [--table <dir>] [--factors <f>] [--top N]` lints every dump recipe (GTM originals included) and reports new overflows per era.
 - `kubejs_static.mjs` mirrors `ServerEvents.recipes` for the pass; the default T0 capacity ratchet (`capacity_known.json`) is unchanged: 87 known violations.
 - One `--solve` takes 10 to 25 minutes (15 s per matrix run); run it in the background.
+
+## Band A (LV review, MV, HV) (P2-A)
+
+Tables `mv.json` and `hv.json` are on. Baseline is the v0.17.0 dump (pre RF-3A) with the CAL exclusion below; after is the T1 dump of a pack copy with the band on (run `20261101-025746-server-6b5`, reachability **PASS**: gate 1062/1063, auto 401/401, eras 10/10).
+
+### Factors and core index (item = fluid)
+
+| Era | RF-2A proposal | Applied | Core index before | after (`--table`) | Target |
+|---|---|---|---|---|---|
+| MV | 1.888 | **1.25** | 1.73 | 3.08 | 3.0 |
+| HV | 3.421 | **2.6** | 1.67 | 7.50 | 7.5 |
+
+The proposal was solved with the shaped bypasses still in the dump. Removing them (below) and the CAL recipes lifts the unscaled floor, so lower factors reach the same targets. Costs still go up: 74 recipes change (MV 35, HV 39) and 24 are removed. HV 2.6 is exact; 2.8 gives 7.81, 3.0 gives 7.85, 3.2 gives 10.1 (the index is a step function of `ceil`).
+
+Per-group growth on the real dump, median new/old (baseline to after):
+
+- MV: capstone 1.30, circuit 1.49, controller 1.57 (14), conveyor 2.16, emitter 1.68, energy hatch 1.09, field generator 1.31, hull 1.13, motor 1.32, piston 2.16, pump 2.38, robot arm 2.91, sensor 1.69.
+- HV: capstone 3.55, circuit 3.52, controller 4.34 (8), conveyor 8.45, emitter 3.70, energy hatch 3.24, field generator 3.66, hull 1.10, motor 2.88, piston 6.58, pump 7.14, robot arm 12.6, sensor 3.50.
+- Full-matrix median score per era (base items): MV 1.69 to 3.82, HV 1.56 to 8.70; EV and IV unchanged (2.65 and 1.94). Largest single moves: composite autoclave x14.6, HV robot arm x12.6, refinery x11.3, HV conveyor x8.5.
+- Capacity: `capacity-lint --table` 138 errors before and after, **0 new overflows** in MV and HV. `--dump` of the T1 dump: 141 errors before and after (baseline dump 138; the +3 come from content merged after v0.17.0, not from this band). T0 ratchet unchanged (87 known).
+
+### Removed bypasses and kept exceptions
+
+- `remove` (12 shaped recipes per table): the crafting-table recipes of motor, pump (rubber, silicone, SBR), piston, conveyor, robot arm, emitter, sensor, field generator and so on for MV and HV.
+- **Exception, kept: `gtceu:shaped/mv_machine_hull` and `gtceu:shaped/hv_machine_hull`.** They are the progression bootstrap. Without them the MV hull needs `assembler/hull_mv_annealed` (polyethylene), polyethylene needs ethylene, and ethylene needs the MV chemical reactor or the large reactor and IV distillery, all of which need MV or HV hulls: a cycle. T1 with the two removed: FAIL (gate 427/1063, auto 115/401, eras 1/10). With them restored: PASS. The other 24 removals do not break reachability. The contract listed "hull" among the removals, so this deviates from it; a real LV-capable polyethylene bootstrap would be a separate route package.
+- `exclude` (both tables): `gtnn:component_assembly_line/*`, plus the same glob in `tools/analysis/cost_matrix.json` `excludeRecipes.ids` (solver artefact).
+
+### Conveyor overflows (six predicted)
+
+The six gtnn conveyor-module rubber overflows came from the GT-- Component Assembly Line, which is obtain-never (dead content): its unscaled recipes were also falsely the cheapest route in the matrix. Excluding them from the table and the matrix resolves all six with no lower factor and no live recipe affected. Phase 8 list (dead, still to be removed): `gtnn:component_assembly_line/*` (all conveyor, motor, pump, piston, robot arm, emitter, sensor and field generator variants).
+
+### Routes of the raised inputs (T1 dump, real recipes)
+
+The raised base inputs are fluids first: rubber, silicone rubber and SBR (about +1600 mB each), molten tin, soldering alloy, sodium-potassium, lubricant, polyethylene, then bolts, fine wires and circuit parts. All have a producer in the dump at LV to HV machines and none needs a one-off source:
+
+| Input | Route (machine) | Tier |
+|---|---|---|
+| rubber, SBR, silicone | `chemical_reactor/rubber` and `large_chemical_reactor/*` from raw rubber (isoprene, styrene, butadiene) | MV to EV |
+| polyethylene | `chemical_reactor/polyethylene_from_oxygen` and `_from_air`; large reactor variants | MV to EV |
+| soldering alloy | `alloy_blast_smelter/soldering_alloy` (tin and lead ingots) | HV |
+| lubricant | brewery (creosote, seed oil, oil plus talc, redstone or soapstone), distillery | LV to MV |
+| sodium-potassium | `chemical_reactor/sodium_potassium` | MV |
+| molten tin | extractor melts tin ingots (cassiterite, macerator, furnace) | LV |
+| platinum and annealed copper bolts | cutter or extruder from ingot or rod | LV to MV |
+| MV micro processor | `circuit_assembler/processor_mv*` | MV |
+
+No route was missing in the data, so none was added for these. The matrix prices several of them through off-world or loop routes (ender-air oxygen, ash-to-hematite, silver-to-tin-plasma); those prices are artefacts of the solver and are what the MX-R molten-metal rule addresses. Real play uses the routes above.
+
+### LV review (factor stays 1.0)
+
+- **Hull LV** (`lv/cost_review.js`): `grindless:hull_lv` replaces `gtceu:assembler/hull_lv`: casing + 4 tin cables + 576 mB polyethylene (was 2 cables + 288 mB). The matrix hull stays at 0.21 (0.19 before) because `gtceu:shaped/lv_machine_hull` is the cost floor; it stays as the bootstrap for the first assembler (same cycle as above). The assembler recipe is the coherent upgrade path once an assembler exists.
+- **Energy hatch LV**: `grindless:energy_hatch_lv`: hull + 4 tin cables + 2 LV voltage coils (was 1 coil + 2 cables); matrix 0.37 to 0.40. The ULV > LV gap (ULV 0.47 hull, 1.37 hatch) is a price artefact on the out-of-scope ULV side (red alloy cable and lead fine wire).
+- **Netherite template** (real gap, fixed in MV): `grindless:netherite_upgrade_smithing_template` assembler recipe (`mv/netherite_template.js`): 7 diamonds + 1 netherrack + 1 netherite scrap, 200 ticks, 120 EU/t. Before, nothing made the template (vanilla gives it only as loot), so the five netherite tools were unreachable.
+- **Dynamite** (`grindless:chemical_reactor/dynamite`: paper, string, circuit 2, 500 mB glyceryl trinitrate): nothing is dropped in the dump (all three inputs load); GTM only logs "Max itemInputs: 2" because the small reactor has two item slots. Moving it to the large reactor is the clean fix, but the test overlay pins both dynamite ids (`tools/test/overlay/.../gg_test_recipe_lookup.js:73-74`, outside this package): escalated, not changed.
+- Cheap-LV list: casing, hermetic casing and voltage coil show score 0.00 only because LV steel is priced through `centrifuge/ash_separation` fed by the HV `syngas/gasify_carbon` loop (known route-fix item above); the real cost (8 steel plates for a casing) is not absurd. Fix belongs to the matrix (price items by routes of their own era), not to recipes.
+
+### The 13 unreachable LV key items
+
+| Item | Class | Setting or fix |
+|---|---|---|
+| 5 damascus tools (sword, pickaxe, axe, hoe, shovel) | matrix artefact: GTM material tool that no recipe makes (`hidden_until.json:43`, obtain class C, "never") | drop obtain-never (class C) items from the key list |
+| 5 netherite tools (smithing: LV diamond tool + netherite ingot + template) | **real gap**: the template had no route | fixed, `mv/netherite_template.js` |
+| item passthrough hatch, fluid passthrough hatch | matrix artefact: GTM 7.5.3 gives a recipe only to the HV one (`hidden_until.json:257`, obtain class C) | same key-list rule as the damascus tools |
+| `grindless:lv_horizon_collector` (Steam) | matrix artefact: welcome quest reward, never crafted (`obtain.json` manual `horizon-collector-quest`) | synthetic quest-reward source, or `base.unproducedItems` |
+
+### Solver notes
+
+- `cost_curve.js` scales with `ceil(n x f)`, so even f = 1.0001 adds 1 to every count. The solver's MV "factor 1.000" was a rounding artefact; the real factor-1 index is 1.77. MV sweep (core index): 1.1 gives 3.26, 1.25 gives 3.27 (before the hull exception), 1.4 gives 3.61, 1.7 gives 4.37, 1.9 gives 4.70. The index is not continuous, so tolerances of 3% are luck at small counts.
+- `// priority:` headers of `lv/cost_review.js` (-19074) and `mv/netherite_template.js` (-21099) were stamped by the integrator at merge (`script-order.mjs --write`).
+- Not done here, for P2-B: the EV and IV shaped bypasses remain.
