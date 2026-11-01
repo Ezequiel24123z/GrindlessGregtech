@@ -56,7 +56,7 @@ $script:EraStyles = [ordered]@{
 
     # Distinct signatures. UEV and UIV: applied by RF-6D-b.
     uev   = New-EraStyle @{ Apply = $true; Shape = 'notch'; Wear = 'scorch'; WearDensity = 0.06; Trim = 'edge-light'; Panel = 'rib'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.36; Gamma = 1.15; LumLo = 0.03; LumHi = 0.97; SatGain = 1.3; SatLift = 0.04; TintHue = 12; TintSat = 0.16; Note = 'ribbed, scorched ember steel' }
-    uiv   = New-EraStyle @{ Apply = $true; Shape = 'round'; Wear = 'frost'; WearDensity = 0.07; Trim = 'edge-light'; Panel = 'ring'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.38; Gamma = 1.3; LumLo = 0.03; LumHi = 0.97; SatGain = 1.05; SatLift = 0.02; TintHue = 165; TintSat = 0.12; Note = 'rounded, frosted and cool' }
+    uiv   = New-EraStyle @{ Apply = $true; Shape = 'round'; Wear = 'frost'; WearDensity = 0.07; Trim = 'edge-light'; Panel = 'ring'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.38; Gamma = 1.42; LumLo = 0.03; LumHi = 0.97; SatGain = 1.05; SatLift = 0.02; TintHue = 165; TintSat = 0.12; Note = 'rounded, frosted and cool' }
 
     # OpV: polished brass-and-ceramic hardware. Chamfered corners, warm bevel trim, verdigris-free brass speckle, one seam.
     opv   = New-EraStyle @{ Apply = $true; Shape = 'bevel'; Wear = 'brass-speckle'; WearDensity = 0.07; Trim = 'bevel'; Panel = 'seam'; Glint = 0; RampSteps = 10
