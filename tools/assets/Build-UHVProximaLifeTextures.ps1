@@ -80,8 +80,57 @@ function New-Bezel {
 }
 
 # The window is x4..11, y4..9.
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
+}
+
+# the xenobotany greenhouse: a glass dome over a bioluminescent plant with drifting spores, in a soil planter
+$GreenhouseFace = @{ Mode = 'twinkle'; Pal = @{ k = (Hex '7A4A2A'); q = (Hex '5A3A22') }
+    Ramp = @((Hex '2A1A3A'), (Hex '8A3AA0'), (Hex 'C060E0'), (Hex 'E898FF'), (Hex 'FFD0FF'))
+    Ramp2 = @((Hex '123A2A'), (Hex '1E8A5A'), (Hex '2ED08A'), (Hex '8AF0B8'), (Hex 'D0FFE0'))
+    Map = @('...MMMMMM...', '..MD....DM..', '.MD..2...DM.', '.D..ab..1.D.', '.D..bcb...D.', '.D.b.c.b..D.', '.D..bcb.3.D.', '.D...c....D.', '.MDDDDDDDDM.', 'kqkqkqkqkqkq', '............', '.....ll.....') }
+
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
+    if ($Kind -eq 'greenhouse') { return New-OwnFace $GreenhouseFace $Frame $Active }
     $c = New-Bezel
     $e = New-Canvas
     for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
@@ -110,19 +159,6 @@ function New-Face {
                 Set-Both $c $e 7 4 (Hex 'FFB020'); Set-Both $c $e 8 4 (Hex 'FFB020')
             }
             else { Set-Px $c 7 4 (Hex '6A4A1A'); Set-Px $c 8 4 (Hex '6A4A1A') }
-        }
-        'greenhouse' {
-            # the soil bed on row 9, crops at x5, 7, 9, 11 up to row 6; the lamps on row 4
-            for ($x = 4; $x -le 11; $x++) { Set-Px $c $x 9 (Hex '5A3A22') }
-            foreach ($x in 5, 7, 9) {
-                $sway = 0
-                if ($Active -and ((($x + $Frame) % 2) -eq 0)) { $sway = 1 }
-                Set-Px $c $x 8 (Hex '4A0E1C'); Set-Px $c $x 7 (Hex '6A1426'); Set-Px $c ($x + $sway) 6 (Hex '8A1A2E')
-            }
-            foreach ($x in 5, 6, 9, 10) {
-                if ($Active) { Set-Both $c $e $x 4 (Hex 'FF6A4A') } else { Set-Px $c $x 4 (Hex '5A2A22') }
-            }
-            if ($Active) { Set-Both $c $e (4 + 2 * $Frame) 5 (Hex 'C83A3A') }
         }
         'plant' {
             # two PTFE columns at x4..5 and x10..11; the reactor x7..8, y5..9 with amber lysate
