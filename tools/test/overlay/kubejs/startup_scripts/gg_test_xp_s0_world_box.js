@@ -1,3 +1,4 @@
+// priority: -552
 // TEST ONLY, XP-S0b spike S0-8 (docs/eras/maxplus.md S0 table). Throwaway registration, never shipped; id gtceu:gg_s0_world_box.
 //   A 45 x 45 x 9 hollow box (casing shell, air inside) with the controller in the middle of the front face and exactly 64 substation input
 //   hatches on the floor row. It stands in for the planned Hyperstargate-sized structure: what matters is the number of cells the pattern

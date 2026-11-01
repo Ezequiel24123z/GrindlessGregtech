@@ -1,3 +1,4 @@
+// priority: -10414
 // TEST ONLY, XP-S0b spike S0-9 (docs/eras/maxplus.md S0 table). Command: kubejs custom_command gg_test_xp_s0_world_teleport
 // Band ONLY: X 44544-44607, Z 0-63, gg_test:s0_flat and gg_test:s0_plots Y 0-12 (zones.json row xp_s0_world_teleport). Never shipped.
 //   Question: can a Hyperstargate-style gate carry a player into another dimension and back, exactly as the shipped warp gate (uhv/gate.js transit) does?

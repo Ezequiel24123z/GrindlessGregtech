@@ -1,3 +1,4 @@
+// priority: -10384
 // TEST ONLY, XP-S0b spike S0-10 (docs/eras/maxplus.md S0 table). Command: kubejs custom_command gg_test_xp_s0_world_city
 // Band ONLY: X 44800-44863, Z 0-63, Y 0-12 (zones.json row xp_s0_world_city). Dimensions gg_test:s0_plots (template workshop) and
 //   gg_test:s0_city_s / s0_city_m / s0_city_l (reserved for this fixture). Never shipped.
