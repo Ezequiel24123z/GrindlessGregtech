@@ -68,23 +68,6 @@
     acc: 'gtceu:advanced_computer_casing',
     hp: 'gtceu:high_power_casing'
   }
-  // the relay's pattern (FactoryBlockPattern.start(): chars right, strings up, aisles back), 13 aisles of 5 strings
-  var MDR_AISLES = [
-    ['    CCCCC    ', '    C   C    ', '    C   C    ', '    C   C    ', '    CCCCC    '],
-    ['  DDDDDDDDD  ', '  EEC   CEE  ', '  EEC   CEE  ', '  EEC   CEE  ', '  DDDDDDDDD  '],
-    [' DDCFFFFFCDD ', ' EDEF F FEDE ', ' EDEF F FEDE ', ' EDEF F FEDE ', ' DDCFFFFFCDD '],
-    [' DCCCCFCCCCD ', ' EE       EE ', ' EE       EE ', ' EE       EE ', ' DCCCCFCCCCD '],
-    ['CDFCCCFCCCFDC', 'CCF       FCC', 'CCX       XCC', 'CCF       FCC', 'CDFCCCFCCCFDC'],
-    ['CDFCCCFCCCFDC', '             ', '             ', '             ', 'CDFCCCFCCCFDC'],
-    ['CDFFFFFFFFFDC', '  F   F   F  ', '  X   H   X  ', '  F   F   F  ', 'CDFFFFFFFFFDC'],
-    ['CDFCCCFCCCFDC', '             ', '             ', '             ', 'CDFCCCFCCCFDC'],
-    ['CDFCCCFCCCFDC', 'CCF       FCC', 'CCX       XCC', 'CCF       FCC', 'CDFCCCFCCCFDC'],
-    [' DCCCCFCCCCD ', ' EE       EE ', ' EE       EE ', ' EE       EE ', ' DCCCCFCCCCD '],
-    [' DDCFFFFFCDD ', ' EDEF F FEDE ', ' EDEF @ FEDE ', ' EDEF F FEDE ', ' DDCFFFFFCDD '],
-    ['  DDDDDDDDD  ', '  EEC   CEE  ', '  EEC   CEE  ', '  EEC   CEE  ', '  DDDDDDDDD  '],
-    ['    CCCCC    ', '    C   C    ', '    C   C    ', '    C   C    ', '    CCCCC    ']
-  ]
-
   var S = null
   var classes = null
 
@@ -106,7 +89,8 @@
         RecipeHelper: Java.loadClass('com.gregtechceu.gtceu.api.recipe.RecipeHelper'),
         ItemStack: Java.loadClass('net.minecraft.world.item.ItemStack'),
         FluidStack: Java.loadClass('net.minecraftforge.fluids.FluidStack'),
-        Registries: Java.loadClass('net.minecraftforge.registries.ForgeRegistries')
+        Registries: Java.loadClass('net.minecraftforge.registries.ForgeRegistries'),
+        GTRegistries: Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries')
       }
     }
     return classes
@@ -236,57 +220,78 @@
     return cells
   }
 
-  // the Expanded line (start(RIGHT, UP, BACK)): rows bottom -> top "EE@EE"/"EEDEE"/"EENEE", "RLKLR", "HHEHH"; slices go south
-  function ealCells() {
-    var cells = []
-    var cx = EAL.cx
-    for (var a = 0; a < EAL.slices; a++) {
-      var z = EAL.z0 + a
-      var first = a === 0
-      var last = a === EAL.slices - 1
-      for (var dx = -2; dx <= 2; dx++) {
-        var x = cx + dx
-        var bottom
-        if (dx === 0) {
-          if (first) bottom = cell(x, EAL.y0, z, B.eal, '[facing=north]', 'controller')
-          else if (last) bottom = cell(x, EAL.y0, z, B.outBus, '[facing=down]', 'out')
-          else bottom = cell(x, EAL.y0, z, B.bus, '[facing=down]', 'bus' + (a - 1))
-        } else if (a === 0 && dx === -1) bottom = cell(x, EAL.y0, z, B.maint)
-        else if (a === 1 && dx === -1) bottom = cell(x, EAL.y0, z, B.fluid, '[facing=down]', 'fluid0')
-        else if (a === 2 && dx === -1) bottom = cell(x, EAL.y0, z, B.fluid, '[facing=down]', 'fluid1')
-        else if (a === 0 && dx === 1) bottom = cell(x, EAL.y0, z, B.recv, '[facing=down]', 'recv')
-        else bottom = cell(x, EAL.y0, z, B.casing)
-        cells.push(bottom)
-        var mid = Math.abs(dx) === 2 ? B.glass : (dx === 0 ? B.unit : B.control)
-        cells.push(cell(x, EAL.y0 + 1, z, mid))
-        if (dx === 0) cells.push(first ? cell(x, EAL.y0 + 2, z, B.energy, '[facing=up]', 'energy') : cell(x, EAL.y0 + 2, z, B.casing))
-        else cells.push(cell(x, EAL.y0 + 2, z, B.grating))
+  // the cells of a machine's own GTM preview shape (the first one with at least minBuses input buses), the same blocks EMI shows
+  // and the formed-shot fixture proved; roles come from the part ids, extras replace or add cells by preview coordinates
+  function shapeCells(id, ox, oy, oz, minBuses, extras) {
+    var def = lazy().GTRegistries.MACHINES.get(rl(id))
+    var shapes = asArray(def.getMatchingShapes())
+    var all = shapes.map(function (shape) {
+      var blocks = shape.getBlocks()
+      var list = []
+      for (var x = 0; x < blocks.length; x++) {
+        for (var y = 0; y < blocks[x].length; y++) {
+          for (var z = 0; z < blocks[x][y].length; z++) {
+            var bi = blocks[x][y][z]
+            if (bi === null || bi === undefined) continue
+            var state = bi.getBlockState()
+            var bid = String(Block.getId(state.getBlock()))
+            if (bid !== 'minecraft:air') list.push({ x: x, y: y, z: z, id: bid, state: state })
+          }
+        }
       }
+      return list
+    })
+    var pick = all[all.length - 1]
+    for (var i = 0; i < all.length; i++) {
+      var n = all[i].filter(function (c) { return /_input_bus$/.test(c.id) }).length
+      if (n >= minBuses) { pick = all[i]; break }
     }
+    var byKey = {}
+    pick.forEach(function (c) { byKey[c.x + ',' + c.y + ',' + c.z] = c })
+    ;(extras || []).forEach(function (e) { byKey[e.x + ',' + e.y + ',' + e.z] = e })
+    var cells = []
+    var ctrl = null
+    Object.keys(byKey).forEach(function (k) { if (byKey[k].id === id) ctrl = byKey[k] })
+    var buses = []
+    var hatches = []
+    Object.keys(byKey).forEach(function (k) {
+      var c = byKey[k]
+      var out = { x: ox + c.x, y: oy + c.y, z: oz + c.z, id: c.id, props: c.props || '', state: c.state || null, role: c.role || null, rel: c }
+      if (out.role === null) {
+        if (c.id === id) out.role = 'controller'
+        else if (/_output_bus$/.test(c.id)) out.role = 'out'
+        else if (/_input_bus$/.test(c.id) && ctrl !== null && c.x === ctrl.x) buses.push(out)
+        else if (/_input_hatch$/.test(c.id)) hatches.push(out)
+        else if (/wireless_data_receptor$/.test(c.id)) out.role = 'recv'
+        else if (/wireless_data_transmissor$/.test(c.id)) out.role = 'tx'
+      }
+      cells.push(out)
+    })
+    buses.sort(function (p, q) { return p.z - q.z }).forEach(function (c, i) { c.role = 'bus' + i })
+    hatches.forEach(function (c, i) { c.role = 'fluid' + i })
     return cells
   }
 
+  // the Expanded line: its preview (controller at x2, z0 of the shape, buses along z, receptor and maintenance hatch beside it)
+  function ealCells() {
+    return shapeCells(B.eal, EAL.cx - 2, EAL.y0, EAL.z0, 5, [
+      { x: 2, y: 2, z: 0, id: B.energy, props: '[facing=up]', role: 'energy' },
+      { x: 0, y: 0, z: 1, id: B.fluid, props: '[facing=down]', role: 'fluid1' }
+    ])
+  }
+
+  // the relay: its preview shape; the data access hatches replace six high power casings, as the old hand layout had them
   function mdrCells() {
-    var cells = []
-    var data = 0
-    MDR_AISLES.forEach(function (aisle, a) {
-      aisle.forEach(function (str, r) {
-        for (var c = 0; c < str.length; c++) {
-          var ch = str.charAt(c)
-          if (ch === ' ') continue
-          var x = MDR.cx + c - 6
-          var y = MDR.cy + r - 2
-          var z = MDR.cz + 10 - a
-          if (ch === '@') cells.push(cell(x, y, z, B.mdr, '[facing=north]', 'controller'))
-          else if (ch === 'H') cells.push(cell(x, y, z, B.tx, '[facing=north]', 'tx'))
-          else if (ch === 'X') {
-            cells.push(cell(x, y, z, B.data, '[facing=north]', 'data' + data))
-            data++
-          } else cells.push(cell(x, y, z, ch === 'C' ? B.cc : ch === 'D' ? B.acc : ch === 'E' ? B.glass : B.hp))
-        }
-      })
-    })
-    return cells
+    var ex = []
+    var spots = [[2, 4], [2, 6], [2, 8], [10, 4], [10, 6], [10, 8]]
+    spots.forEach(function (p, i) { ex.push({ x: p[0], y: 2, z: p[1], id: B.data, props: '[facing=north]', role: 'data' + i }) })
+    return shapeCells(B.mdr, MDR.cx - 6, MDR.cy - 2, MDR.cz - 2, 0, ex)
+  }
+  // preview cells carry their block state; hand-made cells go through setblock
+  function setCell(c, flags) {
+    if (c.state === null || c.state === undefined) return setBlock(c.x, c.y, c.z, c.id, c.props)
+    S.level.setBlock(new BlockPos(c.x, c.y, c.z), c.state, flags)
+    return 1
   }
 
   // places the cells (the controller last) and checks every block
@@ -297,9 +302,9 @@
     cells.forEach(function (c) {
       if (c.role === 'controller') { ctrlCell = c; return }
       if (c.role) m.roles[at(c)] = c.role
-      if (setBlock(c.x, c.y, c.z, c.id, c.props) < 1) failed.push(at(c) + ' ' + c.id)
+      if (setCell(c, 18) < 1) failed.push(at(c) + ' ' + c.id)
     })
-    if (ctrlCell === null || setBlock(ctrlCell.x, ctrlCell.y, ctrlCell.z, ctrlCell.id, ctrlCell.props) < 1) failed.push('controller')
+    if (ctrlCell === null || setCell(ctrlCell, 3) < 1) failed.push('controller')
     m.ctrlPos = ctrlCell === null ? null : { x: ctrlCell.x, y: ctrlCell.y, z: ctrlCell.z }
     var wrong = []
     cells.forEach(function (c) {
