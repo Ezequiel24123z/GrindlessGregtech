@@ -50,7 +50,7 @@ hash = "98ea8500c9581fed686902c6aa0eaba43987afa93ea08ed63a9bd15722072073"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_ev.snbt"
-hash = "c61fc6203f2247ff8a759810cd2999dda2d010010772aae2cd677addc3e4778b"
+hash = "a060d503d3baf4e33e7feac007cf2fe9f1136a7999cf67f8282239debc463f30"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_hv.snbt"
@@ -82,7 +82,7 @@ hash = "0e8829bf893f38e47c5a1d995f64d30101a2e68770f74437bc8a792bbda610e5"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_steam.snbt"
-hash = "c76f0401fd94549885642511c583ccf17b56e4531b62b3835fc9e55a68636c32"
+hash = "1b04772b52bf2ea03018f11544477bacf10ceef3a52490a4c5256e98c5c77564"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uev.snbt"
@@ -90,15 +90,15 @@ hash = "72111182a0bbba2f6725af6358afd88a4e60f660830074c3df5741feb3e14b3b"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uhv.snbt"
-hash = "7c54bfdac3658b14b044af314879b018af4ab6fb2a83b65265c430b588bd4a11"
+hash = "de8a71d911cac4d093f9814f76c4ba873577ce229b6c3df420c0032f23876fcf"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uiv.snbt"
-hash = "023391661efca90447f6e71e85d11c1c590db3f6e167e9d3b6d30936e718ddd1"
+hash = "88002b49294a476f813120972337b07d45ee05818a282e44bfd794b2648c1f77"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uv.snbt"
-hash = "1ab0353d5d623f924ddfa13f8ac15af8724938fbddde79d60148c8be1a020f63"
+hash = "f87e2dec1db87c3031d6368c938750b385c1caf73ee1c42b4a85813b44976089"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_uxv.snbt"
@@ -106,7 +106,7 @@ hash = "c19afe2300528189cd6ca47f5f2dda8f1a08ea1c1e135c08cc93bca9e9b26009"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_zpm.snbt"
-hash = "b71f5bf3f880344c6b1bf7cc8340c9fa6e02877b9de6bf9ca191d319686e58bb"
+hash = "74d20235df51fd65f4fb83208816215fcbad20cb5f1a5b55f6a45368b83f0c92"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
@@ -15418,7 +15418,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "759e338d0377f21a5c5b3f5394e82aebc9e70fc9d6e6c45370dbfc42113f9a9f"
+hash = "ff798a9970379904f84e28a8dec17ca5eec19a7d044460999010ba0b5a904026"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
