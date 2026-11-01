@@ -435,6 +435,7 @@
       "max-sgra",
       "max-nsc",
       "maxplus"
+    ]
   },
   "places": {
     "_why": "the two tier-14 places (S0-1; startup_scripts/grindless/max/travel.js publishes them as global.grindless.maxTravel); the dimension ids are final",
