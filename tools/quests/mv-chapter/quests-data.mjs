@@ -312,7 +312,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "60E0CBE6799FF623", xp: 50 }],
   },
   {
-    key: "MV_HAZMAT_SUIT", id: "7B6466252E0C044A", title: "Hazmat Suit", icon: "gtceu:hazmat_chestpiece", deps: ["MV_PVC"], x: 16, y: 3,
+    key: "MV_HAZMAT_SUIT", id: "7B6466252E0C044A", title: "Hazmat Suit", icon: "gtceu:hazmat_chestpiece", deps: ["MV_PVC"], x: 14, y: 1.5,
     desc: [
       "GregTech's hazards are on in this pack, and some of what you handle from here on will hurt you. The &6Hazmat Suit&r keeps it off you, with PVC on the outside and an activated carbon filter in the mask.",
       "The carbon comes from pyrolysis with nitrogen in the hatch.",
