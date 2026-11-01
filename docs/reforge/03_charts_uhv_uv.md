@@ -32,6 +32,8 @@ Real problems (content package, not fixed):
 
 Risk: the cold line is still judged keep but lists several bypasses; it may turn fix if they are enforced.
 
+Layout fix (RF-3L repair): the merged starshot cluster is drawn as three clusters (`starshot` fusion and lasers, `parts`, `probe`), all tagged `line: 'starshot'`. Where an arrow crossed a cut, the downstream cluster holds a raw node with the same item (`laserB`, `laserC`, `microC`, `rtgC`, `podC`, `hpgeC`, `lsailC`); LD-T1 joins it to the sibling product node, so the line keeps its steps. No node or dependency was dropped. UHV: the `life` cluster was re-laid out. Layout findings 18 to 0 on every chart; pl-check 0 issues.
+
 ## UHV
 
 All 32 design lines were already drawn; the "missing" list came from a condensed chart. Added real intermediate stages and merged single-step lines into true chains in all 9 clusters (VUV comb, nuclear clock, optical processor to wetware mainframe, swarm line of 9 steps, RTAN to UHV SMES cell, Proxima gate seed).
