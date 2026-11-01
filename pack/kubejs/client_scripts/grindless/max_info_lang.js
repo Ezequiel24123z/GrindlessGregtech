@@ -1,4 +1,4 @@
-// priority: 6691
+// priority: 6714
 // Gregtech Grindless - EMI info pages of two MAX controllers that had none (P8-H1; the process audit's m_info_missing check):
 // the horizon flux clamp and the horizon interferometer (kubejs/assets/emi/recipe/additions/grindless/max_<machine>.json). Names go in en_us.
 (function () {

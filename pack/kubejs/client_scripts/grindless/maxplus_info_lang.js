@@ -1,4 +1,4 @@
-// priority: 6690
+// priority: 6942
 // Gregtech Grindless - EMI info pages of the MAX+ controllers that had none (P8-H1; the process audit's m_info_missing check). Each
 // page is kubejs/assets/emi/recipe/additions/grindless/maxplus_<machine>.json (type emi:info) with these keys: what the machine does
 // and what it is for. The recipe lines and tooltips stay in each machine's own *_lang.js. Names go in en_us.
