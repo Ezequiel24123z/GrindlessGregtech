@@ -81,8 +81,57 @@ function New-Bezel {
     return $c
 }
 
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
+}
+
+# the laser-sail launcher: a gold sail on top, four violet beams rising from the emitter row, a few stars
+$LaunchFace = @{ Mode = 'chase'; Pal = @{ x = (Hex 'E8C34A'); y = (Hex 'B09030'); w = (Hex '8890B8') }
+    Ramp = @((Hex '3A1E5A'), (Hex '5A2AA0'), (Hex '7A3AD0'), (Hex '9A4AF0'), (Hex 'C88AFF'))
+    Ramp2 = @((Hex '5A3A6A'), (Hex '8A5AC0'), (Hex 'A870E8'), (Hex 'C88AFF'), (Hex 'F0D8FF'))
+    Map = @('PwPPPxxPPPwP', 'PPPPyxxyPPPP', 'PPPPPyyPPPPP', 'PPP3P33P3PPP', 'PwP4P44P4PwP', 'PPP5P55P5PPP', 'PPP6P66P6PPP', 'PPaPbPPcPdPP', '............', '............', '............', '.....ll.....') }
+
 function New-Face {
     param([string]$Kind, [int]$Frame, [bool]$Active)
+    if ($Kind -eq 'launch') { return New-OwnFace $LaunchFace $Frame $Active }
     $c = New-Bezel
     $e = New-Canvas
     if ($Kind -eq 'sail') {
@@ -113,22 +162,6 @@ function New-Face {
             $tip = $pads[$Frame]
             $ty = if ($tip[1] -lt 6) { $tip[1] - 1 } else { $tip[1] + 1 }
             Set-Px $c $tip[0] $ty (Hex 'D8DCE0')
-        }
-    }
-    else {
-        # the sky x3..12, y3..10, the emitter row along the bottom (y10)
-        Set-Rect $c 3 3 10 8 (Hex '0E1430')
-        $emOff = Hex '5A3A6A'
-        for ($x = 4; $x -le 11; $x += 2) { Set-Px $c $x 10 $emOff }
-        Set-Px $c 11 4 (Hex '8890B8')
-        if ($Active) {
-            $emOn = Hex 'C88AFF'
-            for ($x = 4; $x -le 11; $x += 2) { Set-Both $c $e $x 10 $emOn }
-            # the beam climbs from y9 two rows a frame; the sail rides its tip
-            $top = 9 - ($Frame * 2)
-            for ($y = 9; $y -ge $top; $y--) { Set-Both $c $e 7 $y (Hex '9A4AF0'); Set-Both $c $e 8 $y (Hex '7A3AD0') }
-            $sy = $top - 1
-            if ($sy -ge 3) { Set-Both $c $e 7 $sy (Hex 'FFF4C8'); Set-Both $c $e 8 $sy (Hex 'FFF4C8') }
         }
     }
     # run lamp under the window
