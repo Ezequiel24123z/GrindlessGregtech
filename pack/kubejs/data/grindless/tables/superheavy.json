@@ -361,7 +361,8 @@
           "duration": 1200,
           "itemsIn": [
             { "id": "grindless:tennessine_atoms", "count": 1 },
-            { "id": "grindless:sealed_capsule", "count": 1 }
+            { "id": "grindless:sealed_capsule", "count": 1 },
+            { "id": "grindless:silica_aerogel", "count": 1 }
           ],
           "kept": [],
           "charge": [],
@@ -481,7 +482,7 @@
           "eut": 131072,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:ca48_plasma_bunch", "count": 1 }],
-          "kept": [{ "id": "gtceu:uv_emitter", "count": 1 }],
+          "kept": [{ "id": "gtceu:uv_emitter", "count": 1 }, { "id": "grindless:srf_cryomodule", "count": 1 }],
           "charge": [{ "id": "gtceu:helium", "amount": 500 }],
           "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:ca48_beam", "count": 4 }],
