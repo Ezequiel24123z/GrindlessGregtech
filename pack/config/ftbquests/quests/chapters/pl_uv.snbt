@@ -11,35 +11,153 @@
 	progression_mode: "flexible"
 	quest_links: [
 		{
-			id: "5E4D81E502FD51F5"
-			linked_quest: "7C00BCD35855B841"
-			shape: "rsquare"
-			x: 0.75d
-			y: 13.0d
-		}
-		{
 			id: "312A81E32F1A501B"
 			linked_quest: "5047605FE0A03D21"
 			shape: "rsquare"
-			x: 17.5d
-			y: 14.0d
+			x: 32.5d
+			y: 0.75d
+		}
+		{
+			id: "3BB8A4D52B7B7A08"
+			linked_quest: "5B7917A2F756FF8C"
+			shape: "rsquare"
+			x: 15.75d
+			y: 18.25d
+		}
+		{
+			id: "3843CBD513C776D5"
+			linked_quest: "5079D5197787258F"
+			shape: "rsquare"
+			x: 25.0d
+			y: 10.0d
+		}
+		{
+			id: "36B5E317B1A3AD9F"
+			linked_quest: "58DAD9867F70CBC7"
+			shape: "rsquare"
+			x: 25.0d
+			y: 11.5d
+		}
+		{
+			id: "5E4D81E502FD51F5"
+			linked_quest: "7C00BCD35855B841"
+			shape: "rsquare"
+			x: 5.25d
+			y: 39.0d
 		}
 		{
 			id: "100BBBE325194401"
 			linked_quest: "556DE618DC0980FF"
 			shape: "rsquare"
-			x: 5.5d
-			y: 21.5d
+			x: 12.0d
+			y: 35.75d
 		}
 		{
 			id: "1CF5140D46147D27"
 			linked_quest: "73C9096FE61142F2"
 			shape: "rsquare"
-			x: 8.0d
-			y: 20.0d
+			x: 12.0d
+			y: 38.75d
+		}
+		{
+			id: "5CC78C34CD162103"
+			linked_quest: "132326AF4E432EEB"
+			shape: "rsquare"
+			x: 57.0d
+			y: 52.5d
+		}
+		{
+			id: "7C4D24990F51D7F7"
+			linked_quest: "305F916B3530ABAD"
+			shape: "rsquare"
+			x: 20.25d
+			y: 31.0d
 		}
 	]
 	quests: [
+		{
+			description: ["Flies through Triton's geysers from Neptune orbit."]
+			icon: "gtceu:triton_geyser_sampler"
+			id: "396C8E2B0EB5FA70"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3A4D3E0B3560F28A", item: "gtceu:triton_geyser_sampler", optional_task: true, type: "item" }
+				{ id: "7CBD36F19E5BB3A3", type: "checkmark" }
+			]
+			title: "Triton Geyser Sampler"
+			x: 0.75d
+			y: 2.25d
+		}
+		{
+			dependencies: ["396C8E2B0EB5FA70"]
+			icon: "gtceu:triton_nitrogen_bucket"
+			id: "7B1A4DB5B035A5FA"
+			size: 1.25d
+			subtitle: "Rich in nitrogen-15"
+			tasks: [
+				{ id: "3C12A3136F37EE32", item: "gtceu:triton_nitrogen_bucket", optional_task: true, type: "item" }
+				{ id: "7BD26D754E592F30", type: "checkmark" }
+			]
+			title: "Triton Nitrogen"
+			x: 3.25d
+			y: 2.25d
+		}
+		{
+			dependencies: ["396C8E2B0EB5FA70"]
+			icon: "grindless:tholin"
+			id: "5EF7D3C93F934616"
+			size: 0.75d
+			tasks: [
+				{ id: "54534598745E33FA", item: "grindless:tholin", optional_task: true, type: "item" }
+				{ id: "39D7DCF78132C9C4", type: "checkmark" }
+			]
+			title: "Tholin"
+			x: 3.25d
+			y: 3.75d
+		}
+		{
+			dependencies: ["7B1A4DB5B035A5FA"]
+			icon: "gtceu:triton_nitric_oxide_bucket"
+			id: "19E4D7BBF323BF02"
+			size: 1.25d
+			subtitle: "Burnt with oxygen in a chemical reactor"
+			tasks: [
+				{ id: "123B648FB88AF082", item: "gtceu:triton_nitric_oxide_bucket", optional_task: true, type: "item" }
+				{ id: "385BA93C0B354A80", type: "checkmark" }
+			]
+			title: "Triton Nitric Oxide"
+			x: 5.75d
+			y: 2.25d
+		}
+		{
+			dependencies: ["19E4D7BBF323BF02"]
+			icon: "gtceu:nitrogen_15_oxide_bucket"
+			id: "529DD45B90446B4D"
+			size: 1.25d
+			subtitle: "Distilled out in the EV cryogenic plant"
+			tasks: [
+				{ id: "1687CF573A0CD769", item: "gtceu:nitrogen_15_oxide_bucket", optional_task: true, type: "item" }
+				{ id: "171BBD4C4B888305", type: "checkmark" }
+			]
+			title: "Nitrogen-15 Oxide"
+			x: 8.25d
+			y: 2.25d
+		}
+		{
+			dependencies: ["529DD45B90446B4D"]
+			icon: "gtceu:nitrogen_15_bucket"
+			id: "3C228B8C199793A5"
+			size: 1.25d
+			subtitle: "Reduced with hydrogen; the water goes to the network"
+			tasks: [
+				{ id: "590857EB4EFDFC88", item: "gtceu:nitrogen_15_bucket", optional_task: true, type: "item" }
+				{ id: "109FD4E2A0A2F70B", type: "checkmark" }
+			]
+			title: "Nitrogen-15"
+			x: 10.75d
+			y: 3.0d
+		}
 		{
 			icon: "gtceu:thorium_dust"
 			id: "732997C2DF93CF23"
@@ -51,22 +169,8 @@
 				{ id: "11BEF45445720A39", type: "checkmark" }
 			]
 			title: "Thorium"
-			x: 0.5d
-			y: 2.25d
-		}
-		{
-			icon: "gtceu:nitrogen_15_bucket"
-			id: "33E417E66730972B"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "From Triton, and back from the cell"
-			tasks: [
-				{ id: "5172B087AD291DBB", item: "gtceu:nitrogen_15_bucket", optional_task: true, type: "item" }
-				{ id: "18CAD479D3EE833A", type: "checkmark" }
-			]
-			title: "Nitrogen-15"
-			x: 0.5d
-			y: 3.75d
+			x: 13.25d
+			y: 1.5d
 		}
 		{
 			dependencies: ["732997C2DF93CF23"]
@@ -79,21 +183,21 @@
 				{ id: "5A55F4808428FFD5", type: "checkmark" }
 			]
 			title: "Thorium Oxide Assembly"
-			x: 3.0d
+			x: 15.75d
 			y: 1.5d
 		}
 		{
-			dependencies: ["732997C2DF93CF23", "33E417E66730972B"]
+			dependencies: ["732997C2DF93CF23", "3C228B8C199793A5"]
 			icon: "grindless:thorium_nitride_fuel_assembly"
 			id: "1DB9DF47A4A7FC7F"
 			size: 1.25d
-			subtitle: "Carbon and nitrogen-15; it breeds better"
+			subtitle: "Carbon and nitrogen-15 from Triton, and back from the cell; it breeds better"
 			tasks: [
 				{ id: "3615F21E136282E9", item: "grindless:thorium_nitride_fuel_assembly", optional_task: true, type: "item" }
 				{ id: "56DDC20E2DDD2DBB", type: "checkmark" }
 			]
 			title: "Thorium Nitride Assembly"
-			x: 3.0d
+			x: 15.75d
 			y: 3.0d
 		}
 		{
@@ -108,7 +212,7 @@
 				{ id: "7CF6C0CB86AA9B89", type: "checkmark" }
 			]
 			title: "Accelerator-Driven Reactor"
-			x: 5.5d
+			x: 18.25d
 			y: 2.25d
 		}
 		{
@@ -121,7 +225,7 @@
 				{ id: "1B622ED4FDC996D9", type: "checkmark" }
 			]
 			title: "Spent Oxide Fuel"
-			x: 8.0d
+			x: 20.75d
 			y: 1.5d
 		}
 		{
@@ -134,7 +238,7 @@
 				{ id: "7E69077498CA9FD0", type: "checkmark" }
 			]
 			title: "Spent Nitride Fuel"
-			x: 8.0d
+			x: 20.75d
 			y: 3.0d
 		}
 		{
@@ -147,7 +251,7 @@
 				{ id: "7390A38AB52BBDD1", type: "checkmark" }
 			]
 			title: "Polonium-210"
-			x: 8.0d
+			x: 20.75d
 			y: 4.5d
 		}
 		{
@@ -162,7 +266,7 @@
 				{ id: "3FF415A835320C02", type: "checkmark" }
 			]
 			title: "Pyroprocessing Cell"
-			x: 10.5d
+			x: 23.25d
 			y: 2.25d
 		}
 		{
@@ -176,7 +280,7 @@
 				{ id: "7F7E164BA244CDB4", type: "checkmark" }
 			]
 			title: "Uranium-233"
-			x: 13.0d
+			x: 25.75d
 			y: 0.75d
 		}
 		{
@@ -189,7 +293,7 @@
 				{ id: "149E7B1CC4DDB83B", type: "checkmark" }
 			]
 			title: "U-233 Fuel Rod"
-			x: 15.5d
+			x: 28.25d
 			y: 0.75d
 		}
 		{
@@ -204,7 +308,7 @@
 				{ id: "1CDBC633A7B34918", type: "checkmark" }
 			]
 			title: "Thorium"
-			x: 13.0d
+			x: 25.75d
 			y: 2.25d
 		}
 		{
@@ -219,7 +323,7 @@
 				{ id: "55081C1BCA73BE1A", type: "checkmark" }
 			]
 			title: "Nitrogen-15"
-			x: 13.0d
+			x: 25.75d
 			y: 3.75d
 		}
 		{
@@ -233,7 +337,7 @@
 				{ id: "30C3D75E42DF573D", type: "checkmark" }
 			]
 			title: "Loaded Salt"
-			x: 13.0d
+			x: 25.75d
 			y: 5.25d
 		}
 		{
@@ -246,7 +350,7 @@
 				{ id: "564075D8B686E4EC", type: "checkmark" }
 			]
 			title: "Radioactive Waste"
-			x: 15.5d
+			x: 28.25d
 			y: 5.25d
 		}
 		{
@@ -261,420 +365,8 @@
 				{ id: "73EF9B2A18E6769C", type: "checkmark" }
 			]
 			title: "Clean Salt"
-			x: 15.5d
+			x: 28.25d
 			y: 6.75d
-		}
-		{
-			description: ["Flies through Triton's geysers from Neptune orbit."]
-			icon: "gtceu:triton_geyser_sampler"
-			id: "396C8E2B0EB5FA70"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "3A4D3E0B3560F28A", item: "gtceu:triton_geyser_sampler", optional_task: true, type: "item" }
-				{ id: "7CBD36F19E5BB3A3", type: "checkmark" }
-			]
-			title: "Triton Geyser Sampler"
-			x: 20.0d
-			y: 0.75d
-		}
-		{
-			dependencies: ["396C8E2B0EB5FA70"]
-			icon: "gtceu:triton_nitrogen_bucket"
-			id: "7B1A4DB5B035A5FA"
-			size: 1.25d
-			subtitle: "Rich in nitrogen-15"
-			tasks: [
-				{ id: "3C12A3136F37EE32", item: "gtceu:triton_nitrogen_bucket", optional_task: true, type: "item" }
-				{ id: "7BD26D754E592F30", type: "checkmark" }
-			]
-			title: "Triton Nitrogen"
-			x: 22.5d
-			y: 0.75d
-		}
-		{
-			dependencies: ["396C8E2B0EB5FA70"]
-			icon: "grindless:tholin"
-			id: "5EF7D3C93F934616"
-			size: 0.75d
-			tasks: [
-				{ id: "54534598745E33FA", item: "grindless:tholin", optional_task: true, type: "item" }
-				{ id: "39D7DCF78132C9C4", type: "checkmark" }
-			]
-			title: "Tholin"
-			x: 22.5d
-			y: 2.25d
-		}
-		{
-			dependencies: ["7B1A4DB5B035A5FA"]
-			icon: "gtceu:triton_nitric_oxide_bucket"
-			id: "19E4D7BBF323BF02"
-			size: 1.25d
-			subtitle: "Burnt with oxygen in a chemical reactor"
-			tasks: [
-				{ id: "123B648FB88AF082", item: "gtceu:triton_nitric_oxide_bucket", optional_task: true, type: "item" }
-				{ id: "385BA93C0B354A80", type: "checkmark" }
-			]
-			title: "Triton Nitric Oxide"
-			x: 25.0d
-			y: 0.75d
-		}
-		{
-			dependencies: ["19E4D7BBF323BF02"]
-			icon: "gtceu:nitrogen_15_oxide_bucket"
-			id: "529DD45B90446B4D"
-			size: 1.25d
-			subtitle: "Distilled out in the EV cryogenic plant"
-			tasks: [
-				{ id: "1687CF573A0CD769", item: "gtceu:nitrogen_15_oxide_bucket", optional_task: true, type: "item" }
-				{ id: "171BBD4C4B888305", type: "checkmark" }
-			]
-			title: "Nitrogen-15 Oxide"
-			x: 27.5d
-			y: 0.75d
-		}
-		{
-			dependencies: ["529DD45B90446B4D"]
-			icon: "gtceu:nitrogen_15_bucket"
-			id: "3C228B8C199793A5"
-			size: 1.25d
-			subtitle: "Reduced with hydrogen; the water goes to the network"
-			tasks: [
-				{ id: "590857EB4EFDFC88", item: "gtceu:nitrogen_15_bucket", optional_task: true, type: "item" }
-				{ id: "109FD4E2A0A2F70B", type: "checkmark" }
-			]
-			title: "Nitrogen-15"
-			x: 30.0d
-			y: 0.75d
-		}
-		{
-			icon: "gtceu:niobium_ingot"
-			id: "737B55A72A285CE9"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "5559146BB216CD0F", item: "gtceu:niobium_ingot", optional_task: true, type: "item" }
-				{ id: "313B0BE6073AE079", type: "checkmark" }
-			]
-			title: "Niobium"
-			x: 0.75d
-			y: 11.5d
-		}
-		{
-			dependencies: ["737B55A72A285CE9"]
-			icon: "grindless:rrr_niobium_sheet"
-			id: "7D5C7B885E7FAC98"
-			size: 1.25d
-			subtitle: "Melted very pure in the cavity works"
-			tasks: [
-				{ id: "745A4D6566EA0E03", item: "grindless:rrr_niobium_sheet", optional_task: true, type: "item" }
-				{ id: "3BDB16E59A86C6C5", type: "checkmark" }
-			]
-			title: "RRR Niobium Sheet"
-			x: 3.25d
-			y: 11.5d
-		}
-		{
-			dependencies: ["7D5C7B885E7FAC98"]
-			icon: "grindless:bare_srf_cavity"
-			id: "18B6D37CFE5F3F58"
-			size: 1.25d
-			subtitle: "Nine cells, formed in the same works"
-			tasks: [
-				{ id: "727BD13012DCC813", item: "grindless:bare_srf_cavity", optional_task: true, type: "item" }
-				{ id: "36BA3379360B0EB8", type: "checkmark" }
-			]
-			title: "Bare Cavity"
-			x: 5.75d
-			y: 11.5d
-		}
-		{
-			dependencies: ["18B6D37CFE5F3F58"]
-			description: ["Melts the niobium very pure, forms nine-cell cavities and polishes them in acid."]
-			icon: "gtceu:srf_cavity_works"
-			id: "53E29708237834AC"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "338170AEEF3C42CC", item: "gtceu:srf_cavity_works", optional_task: true, type: "item" }
-				{ id: "517B4E0655FE3E95", type: "checkmark" }
-			]
-			title: "SRF Cavity Works"
-			x: 8.25d
-			y: 11.5d
-		}
-		{
-			dependencies: ["53E29708237834AC"]
-			icon: "gtceu:spent_electropolish_acid_bucket"
-			id: "75ACFD49434C3DBC"
-			size: 0.75d
-			tasks: [
-				{ id: "19AD74F4950D51E1", item: "gtceu:spent_electropolish_acid_bucket", optional_task: true, type: "item" }
-				{ id: "3B2AEDB19AF4F185", type: "checkmark" }
-			]
-			title: "Spent Acid"
-			x: 10.75d
-			y: 10.0d
-		}
-		{
-			dependencies: ["53E29708237834AC"]
-			icon: "grindless:srf_cavity"
-			id: "16186DF8EF2485AD"
-			size: 1.25d
-			tasks: [
-				{ id: "31FEEC73A1DBDFFA", item: "grindless:srf_cavity", optional_task: true, type: "item" }
-				{ id: "30A5863BB9AE4C4F", type: "checkmark" }
-			]
-			title: "SRF Cavity"
-			x: 10.75d
-			y: 11.5d
-		}
-		{
-			dependencies: ["39C7F4E0414EFD2A"]
-			icon: "gtceu:neptune_helium_bucket"
-			id: "560DDDF52F5EA14D"
-			size: 1.25d
-			tasks: [
-				{ id: "714E74FA1D92BB89", item: "gtceu:neptune_helium_bucket", optional_task: true, type: "item" }
-				{ id: "7E9D5E1591188A14", type: "checkmark" }
-			]
-			title: "Neptune Helium"
-			x: 0.75d
-			y: 14.5d
-		}
-		{
-			description: ["Drops a scoop through Neptune's methane deck."]
-			icon: "gtceu:neptune_deep_siphon"
-			id: "39C7F4E0414EFD2A"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "76546A97BEFCF851", item: "gtceu:neptune_deep_siphon", optional_task: true, type: "item" }
-				{ id: "3B42D4BC87F29AB7", type: "checkmark" }
-			]
-			title: "Neptune Deep Siphon"
-			x: 0.75d
-			y: 16.25d
-		}
-		{
-			dependencies: ["39C7F4E0414EFD2A"]
-			icon: "gtceu:neptune_hydrogen_bucket"
-			id: "5B566E50A9782407"
-			size: 1.25d
-			subtitle: "The isotope column takes its deuterium"
-			tasks: [
-				{ id: "157F98B3C97D5361", item: "gtceu:neptune_hydrogen_bucket", optional_task: true, type: "item" }
-				{ id: "573582CA946C2E2D", type: "checkmark" }
-			]
-			title: "Neptune Hydrogen"
-			x: 3.25d
-			y: 16.25d
-		}
-		{
-			dependencies: ["5B566E50A9782407"]
-			icon: "gtceu:deuterium_bucket"
-			id: "37034F8171F97435"
-			size: 1.25d
-			tasks: [
-				{ id: "114A1725334E4926", item: "gtceu:deuterium_bucket", optional_task: true, type: "item" }
-				{ id: "3210692DEFC238BE", type: "checkmark" }
-			]
-			title: "Deuterium"
-			x: 5.75d
-			y: 16.25d
-		}
-		{
-			dependencies: ["7C00BCD35855B841", "560DDDF52F5EA14D"]
-			description: ["Cools helium past the lambda point. Only helium-4 passes its superleak."]
-			icon: "gtceu:superfluid_helium_plant"
-			id: "5A10EE47550729A5"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "7458529298A93A61", item: "gtceu:superfluid_helium_plant", optional_task: true, type: "item" }
-				{ id: "35F29F32866C7C01", type: "checkmark" }
-			]
-			title: "Superfluid Helium Plant"
-			x: 3.25d
-			y: 13.75d
-		}
-		{
-			dependencies: ["5A10EE47550729A5"]
-			icon: "gtceu:superfluid_helium_bucket"
-			id: "7B0AB0696106579D"
-			size: 1.25d
-			tasks: [
-				{ id: "3A2AE3C81FC7FF3F", item: "gtceu:superfluid_helium_bucket", optional_task: true, type: "item" }
-				{ id: "12CB246304888FAD", type: "checkmark" }
-			]
-			title: "Superfluid Helium"
-			x: 5.75d
-			y: 13.0d
-		}
-		{
-			dependencies: ["5A10EE47550729A5"]
-			icon: "gtceu:helium_3_concentrate_bucket"
-			id: "7A0B641AFC216EF1"
-			size: 1.25d
-			subtitle: "What the superleak holds back"
-			tasks: [
-				{ id: "754C2C9EF5283A0A", item: "gtceu:helium_3_concentrate_bucket", optional_task: true, type: "item" }
-				{ id: "5A0837E4B93F0743", type: "checkmark" }
-			]
-			title: "Helium-3 Concentrate"
-			x: 5.75d
-			y: 14.5d
-		}
-		{
-			dependencies: ["7A0B641AFC216EF1"]
-			icon: "gtceu:helium_3_bucket"
-			id: "57729769773E4E58"
-			size: 1.25d
-			tasks: [
-				{ id: "3947C9AC4C65611E", item: "gtceu:helium_3_bucket", optional_task: true, type: "item" }
-				{ id: "5704A295A53E32AA", type: "checkmark" }
-			]
-			title: "Helium-3"
-			x: 8.25d
-			y: 14.5d
-		}
-		{
-			dependencies: ["16186DF8EF2485AD"]
-			icon: "grindless:srf_cryomodule"
-			id: "7881A8BE010C67AF"
-			size: 1.25d
-			subtitle: "Eight cavities in superfluid helium"
-			tasks: [
-				{ id: "547EC324EDC641F7", item: "grindless:srf_cryomodule", optional_task: true, type: "item" }
-				{ id: "547CB482D02B45A7", type: "checkmark" }
-			]
-			title: "SRF Cryomodule"
-			x: 13.25d
-			y: 11.5d
-		}
-		{
-			icon: "grindless:pmma_coated_wafer"
-			id: "1E76B321FEFC8307"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Exposed through the X-ray mask"
-			tasks: [
-				{ id: "376F236CFBA71666", item: "grindless:pmma_coated_wafer", optional_task: true, type: "item" }
-				{ id: "71228CAC5F12E94F", type: "checkmark" }
-			]
-			title: "PMMA Wafer"
-			x: 17.5d
-			y: 10.75d
-		}
-		{
-			icon: "gtca:proton"
-			id: "3B49BD228435262C"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "From the COMET"
-			tasks: [
-				{ id: "3DE3731AF12ABFE6", item: "gtca:proton", optional_task: true, type: "item" }
-				{ id: "348BEA0CFB702AB0", type: "checkmark" }
-			]
-			title: "Protons"
-			x: 17.5d
-			y: 12.25d
-		}
-		{
-			dependencies: ["1E76B321FEFC8307", "3B49BD228435262C"]
-			description: ["Bends a beam into X-rays for lithography, and knocks antiprotons off a target."]
-			icon: "gtceu:synchrotron"
-			id: "3F493BFC69CE398E"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "3845E9BB03C534B3", item: "gtceu:synchrotron", optional_task: true, type: "item" }
-				{ id: "77655C4B903DC77A", type: "checkmark" }
-			]
-			title: "Synchrotron"
-			x: 20.0d
-			y: 11.5d
-		}
-		{
-			dependencies: ["3F493BFC69CE398E"]
-			icon: "grindless:exposed_wafer"
-			id: "3F12FE591EEA56EE"
-			size: 1.25d
-			subtitle: "Developed and finished in the same ring"
-			tasks: [
-				{ id: "7D5C0FA0E65F6E15", item: "grindless:exposed_wafer", optional_task: true, type: "item" }
-				{ id: "337D8AA40FD242AA", type: "checkmark" }
-			]
-			title: "Exposed Wafer"
-			x: 22.5d
-			y: 10.75d
-		}
-		{
-			dependencies: ["3F12FE591EEA56EE"]
-			icon: "grindless:photonic_chip"
-			id: "78647DFC80A8F762"
-			size: 1.25d
-			tasks: [
-				{ id: "397999CE2EEED072", item: "grindless:photonic_chip", optional_task: true, type: "item" }
-				{ id: "1245A04233DBA999", type: "checkmark" }
-			]
-			title: "Photonic Chip"
-			x: 25.0d
-			y: 10.25d
-		}
-		{
-			dependencies: ["3F493BFC69CE398E"]
-			icon: "grindless:antiproton_cartridge"
-			id: "73BC62AD5BA0017B"
-			size: 1.25d
-			tasks: [
-				{ id: "125E66A5BD7291E1", item: "grindless:antiproton_cartridge", optional_task: true, type: "item" }
-				{ id: "5EDB65D1B072BB13", type: "checkmark" }
-			]
-			title: "Antiproton Cartridge"
-			x: 22.5d
-			y: 12.25d
-		}
-		{
-			dependencies: ["73BC62AD5BA0017B"]
-			description: ["Stacks the cartridges into one bottle; the empties go back to the synchrotron."]
-			icon: "gtceu:antimatter_trap"
-			id: "50BABCF9072CBE65"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "7EA14802871EF2DE", item: "gtceu:antimatter_trap", optional_task: true, type: "item" }
-				{ id: "3D21C77D66F0FBF1", type: "checkmark" }
-			]
-			title: "Antimatter Trap"
-			x: 25.0d
-			y: 12.25d
-		}
-		{
-			dependencies: ["50BABCF9072CBE65"]
-			icon: "grindless:antiproton_trap"
-			id: "5B93BC6143D6D2DF"
-			size: 1.25d
-			tasks: [
-				{ id: "5B0DD08105055C7F", item: "grindless:antiproton_trap", optional_task: true, type: "item" }
-				{ id: "1EC5AE16585F2D13", type: "checkmark" }
-			]
-			title: "Antiproton Trap"
-			x: 27.5d
-			y: 12.25d
-		}
-		{
-			dependencies: ["5B93BC6143D6D2DF"]
-			icon: "grindless:ican_pellet"
-			id: "3EFF726F9BCF1AD6"
-			size: 1.25d
-			tasks: [
-				{ id: "5F2298A1518D0FC1", item: "grindless:ican_pellet", optional_task: true, type: "item" }
-				{ id: "580B381DE1112AA8", type: "checkmark" }
-			]
-			title: "ICAN Pellet"
-			x: 30.0d
-			y: 12.25d
 		}
 		{
 			dependencies: ["5047605FE0A03D21"]
@@ -687,8 +379,8 @@
 				{ id: "5C97365D96A27FDD", type: "checkmark" }
 			]
 			title: "Liquid D-T"
-			x: 20.0d
-			y: 14.0d
+			x: 35.0d
+			y: 0.75d
 		}
 		{
 			dependencies: ["77B2C9DE3CD3FBB8"]
@@ -702,8 +394,8 @@
 				{ id: "7D09980122B5D475", type: "checkmark" }
 			]
 			title: "Muon Fusion Cell"
-			x: 22.5d
-			y: 14.0d
+			x: 37.5d
+			y: 0.75d
 		}
 		{
 			dependencies: ["3D07ACFB7FB7F98B"]
@@ -715,8 +407,8 @@
 				{ id: "11D4C297C60A0A26", type: "checkmark" }
 			]
 			title: "Helium"
-			x: 25.0d
-			y: 14.0d
+			x: 40.0d
+			y: 0.75d
 		}
 		{
 			dependencies: ["3D07ACFB7FB7F98B"]
@@ -730,268 +422,8 @@
 				{ id: "3CE0CDB9BF752881", type: "checkmark" }
 			]
 			title: "Tritium"
-			x: 25.0d
-			y: 15.5d
-		}
-		{
-			icon: "gtceu:boron_dust"
-			id: "51F8622E93604454"
-			shape: "rsquare"
-			size: 1.0d
-			tasks: [
-				{ id: "504FA02C836825DA", item: "gtceu:boron_dust", optional_task: true, type: "item" }
-				{ id: "1D9B608039F768CE", type: "checkmark" }
-			]
-			title: "Boron"
-			x: 0.5d
-			y: 23.75d
-		}
-		{
-			dependencies: ["51F8622E93604454"]
-			icon: "gtceu:boron_11_trifluoride_bucket"
-			id: "7A305ADC6A2F5A8B"
-			size: 1.25d
-			subtitle: "Split from boron-10 with fluorine in the IV hot cell"
-			tasks: [
-				{ id: "7543C7EE2F1B6396", item: "gtceu:boron_11_trifluoride_bucket", optional_task: true, type: "item" }
-				{ id: "3D076CD3AD9E6536", type: "checkmark" }
-			]
-			title: "Boron-11 Trifluoride"
-			x: 3.0d
-			y: 23.0d
-		}
-		{
-			dependencies: ["51F8622E93604454"]
-			icon: "gtceu:boron_10_trifluoride_bucket"
-			id: "7F29FB5B46AADDF6"
-			size: 0.75d
-			tasks: [
-				{ id: "3E328B7FABE62180", item: "gtceu:boron_10_trifluoride_bucket", optional_task: true, type: "item" }
-				{ id: "13FBE066D02900DA", type: "checkmark" }
-			]
-			title: "Boron-10 Trifluoride"
-			x: 3.0d
-			y: 24.5d
-		}
-		{
-			dependencies: ["7A305ADC6A2F5A8B"]
-			icon: "gtceu:decaborane_bucket"
-			id: "7680E8161597F21E"
-			size: 1.25d
-			subtitle: "With hydrogen in a chemical reactor"
-			tasks: [
-				{ id: "168BB2F5C00C5F95", item: "gtceu:decaborane_bucket", optional_task: true, type: "item" }
-				{ id: "7BBC7762547F1C2A", type: "checkmark" }
-			]
-			title: "Decaborane"
-			x: 5.5d
-			y: 23.0d
-		}
-		{
-			dependencies: ["7A305ADC6A2F5A8B"]
-			icon: "gtceu:hydrofluoric_acid_bucket"
-			id: "7C0E288208A02B53"
-			size: 0.75d
-			tasks: [
-				{ id: "748BA29B065269FB", item: "gtceu:hydrofluoric_acid_bucket", optional_task: true, type: "item" }
-				{ id: "16D45DF87C7237E0", type: "checkmark" }
-			]
-			title: "Hydrofluoric Acid"
-			x: 5.5d
-			y: 24.5d
-		}
-		{
-			dependencies: ["7680E8161597F21E", "556DE618DC0980FF"]
-			icon: "grindless:pb11_capsule"
-			id: "1BD6C43944F7BFC3"
-			size: 1.25d
-			tasks: [
-				{ id: "704D1A5071620D0C", item: "grindless:pb11_capsule", optional_task: true, type: "item" }
-				{ id: "75F3AD6005EC0B5B", type: "checkmark" }
-			]
-			title: "Boron Capsule"
-			x: 8.0d
-			y: 23.0d
-		}
-		{
-			dependencies: ["556DE618DC0980FF", "73C9096FE61142F2"]
-			icon: "grindless:d_he3_capsule"
-			id: "126AEEE884FD4F6B"
-			size: 1.25d
-			tasks: [
-				{ id: "7BD47986AA0E1E6D", item: "grindless:d_he3_capsule", optional_task: true, type: "item" }
-				{ id: "3E5D37FC3E6EF12D", type: "checkmark" }
-			]
-			title: "D-He3 Capsule"
-			x: 8.0d
-			y: 21.5d
-		}
-		{
-			dependencies: ["1BD6C43944F7BFC3", "126AEEE884FD4F6B"]
-			description: ["Fires a ring of fibre lasers at one capsule a shot. The lasers wear."]
-			icon: "gtceu:laser_fusion_chamber"
-			id: "705C2604CD4594D7"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "531335E86A8C96E6", item: "gtceu:laser_fusion_chamber", optional_task: true, type: "item" }
-				{ id: "51DCCA36AD92C400", type: "checkmark" }
-			]
-			title: "Laser Fusion Chamber"
-			x: 10.5d
-			y: 22.25d
-		}
-		{
-			dependencies: ["705C2604CD4594D7"]
-			icon: "gtceu:helium_bucket"
-			id: "5A152D812EA0DF0C"
-			size: 0.75d
-			tasks: [
-				{ id: "36625D6B69EE28CB", item: "gtceu:helium_bucket", optional_task: true, type: "item" }
-				{ id: "7C628582B24DB586", type: "checkmark" }
-			]
-			title: "Helium"
-			x: 13.0d
-			y: 21.5d
-		}
-		{
-			dependencies: ["705C2604CD4594D7"]
-			icon: "grindless:spent_laser_module"
-			id: "1DF9CC3F595C6367"
-			shape: "circle"
-			size: 0.75d
-			subtitle: "Refurbished in the fibre draw tower"
-			tasks: [
-				{ id: "7A573B1365241D04", item: "grindless:spent_laser_module", optional_task: true, type: "item" }
-				{ id: "1469CE9A5F40CCE9", type: "checkmark" }
-			]
-			title: "Spent Laser Module"
-			x: 13.0d
-			y: 23.0d
-		}
-		{
-			icon: "grindless:yb_doped_preform"
-			id: "72BF1E6751A8C854"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "Ytterbium glass laid inside a tube"
-			tasks: [
-				{ id: "35B9476C90F69A9E", item: "grindless:yb_doped_preform", optional_task: true, type: "item" }
-				{ id: "5EE9A65CE2302E4C", type: "checkmark" }
-			]
-			title: "Doped Preform"
-			x: 17.0d
-			y: 20.25d
-		}
-		{
-			dependencies: ["72BF1E6751A8C854"]
-			description: ["Draws the preform into fibre and builds the laser modules."]
-			icon: "gtceu:fibre_draw_tower"
-			id: "1913638BF996E35B"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "19F2387078AA826C", item: "gtceu:fibre_draw_tower", optional_task: true, type: "item" }
-				{ id: "7F2F6243FD40DCEC", type: "checkmark" }
-			]
-			title: "Fibre Draw Tower"
-			x: 19.5d
-			y: 20.25d
-		}
-		{
-			dependencies: ["1913638BF996E35B"]
-			icon: "grindless:ytterbium_fibre"
-			id: "56FC94895700579E"
-			size: 1.25d
-			tasks: [
-				{ id: "518C8F24EE4AF8AE", item: "grindless:ytterbium_fibre", optional_task: true, type: "item" }
-				{ id: "53CA7BC313D9335D", type: "checkmark" }
-			]
-			title: "Ytterbium Fibre"
-			x: 22.0d
-			y: 20.25d
-		}
-		{
-			icon: "grindless:gallium_arsenide_wafer"
-			id: "5D61CB9C4E38A555"
-			shape: "rsquare"
-			size: 1.0d
-			subtitle: "With the organometallics and arsine"
-			tasks: [
-				{ id: "19ECCE8926427998", item: "grindless:gallium_arsenide_wafer", optional_task: true, type: "item" }
-				{ id: "162436F14DDC28AF", type: "checkmark" }
-			]
-			title: "GaAs Wafer"
-			x: 17.0d
-			y: 22.25d
-		}
-		{
-			dependencies: ["5D61CB9C4E38A555"]
-			description: ["Grows indium gallium arsenide one layer at a time, then cleaves and mounts the bars."]
-			icon: "gtceu:mocvd_reactor"
-			id: "105048B8DD3BFB2F"
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "10C44B5B7C38BB6B", item: "gtceu:mocvd_reactor", optional_task: true, type: "item" }
-				{ id: "52F4117417C0E581", type: "checkmark" }
-			]
-			title: "MOCVD Reactor"
-			x: 19.5d
-			y: 22.25d
-		}
-		{
-			dependencies: ["105048B8DD3BFB2F"]
-			icon: "gtceu:arsine_bucket"
-			id: "788243A99926C67D"
-			size: 0.75d
-			tasks: [
-				{ id: "3E88479BE6B153AF", item: "gtceu:arsine_bucket", optional_task: true, type: "item" }
-				{ id: "3B1BF61495F61E49", type: "checkmark" }
-			]
-			title: "Arsine"
-			x: 19.5d
-			y: 24.0d
-		}
-		{
-			dependencies: ["105048B8DD3BFB2F"]
-			icon: "grindless:ingaas_epi_wafer"
-			id: "15A03CCA93401FCE"
-			size: 1.25d
-			tasks: [
-				{ id: "34F81833D98B95FC", item: "grindless:ingaas_epi_wafer", optional_task: true, type: "item" }
-				{ id: "504BCE841F2EBAD6", type: "checkmark" }
-			]
-			title: "InGaAs Epi Wafer"
-			x: 22.0d
-			y: 22.25d
-		}
-		{
-			dependencies: ["15A03CCA93401FCE"]
-			icon: "grindless:ingaas_pump_module"
-			id: "30F0C9D2FA169DBA"
-			size: 1.25d
-			subtitle: "Cleaved into bars and mounted on copper"
-			tasks: [
-				{ id: "5A66C1555F50604C", item: "grindless:ingaas_pump_module", optional_task: true, type: "item" }
-				{ id: "1CF10FA44CF46C0C", type: "checkmark" }
-			]
-			title: "Pump Module"
-			x: 24.5d
-			y: 22.25d
-		}
-		{
-			dependencies: ["56FC94895700579E", "30F0C9D2FA169DBA"]
-			icon: "grindless:fibre_laser_module"
-			id: "1EC3359768A784AB"
-			size: 1.25d
-			tasks: [
-				{ id: "5FA06AE72D7767E9", item: "grindless:fibre_laser_module", optional_task: true, type: "item" }
-				{ id: "1A401D31A6164BDB", type: "checkmark" }
-			]
-			title: "Fibre Laser Module"
-			x: 26.75d
-			y: 21.25d
+			x: 40.0d
+			y: 2.25d
 		}
 		{
 			description: ["Drops a probe that melts into the ice and sends a core up."]
@@ -1005,7 +437,7 @@
 			]
 			title: "Penetrator Probe Bay"
 			x: 0.75d
-			y: 31.25d
+			y: 13.25d
 		}
 		{
 			dependencies: ["7BDEC16CD15C21F0"]
@@ -1018,7 +450,7 @@
 			]
 			title: "Sputnik Ice Core"
 			x: 3.25d
-			y: 29.75d
+			y: 11.75d
 		}
 		{
 			dependencies: ["7BDEC16CD15C21F0"]
@@ -1031,7 +463,7 @@
 			]
 			title: "Charon Core"
 			x: 3.25d
-			y: 32.75d
+			y: 14.75d
 		}
 		{
 			dependencies: ["5D36643AF54C0D85", "593B1B284B366B9F"]
@@ -1046,7 +478,7 @@
 			]
 			title: "Volatile Ice Fractionator"
 			x: 5.75d
-			y: 31.25d
+			y: 13.25d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
@@ -1059,7 +491,7 @@
 			]
 			title: "Nitrogen"
 			x: 8.25d
-			y: 28.25d
+			y: 10.25d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
@@ -1072,7 +504,7 @@
 			]
 			title: "Carbon Monoxide"
 			x: 8.25d
-			y: 29.75d
+			y: 11.75d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
@@ -1085,47 +517,946 @@
 			]
 			title: "Methane"
 			x: 8.25d
-			y: 31.25d
+			y: 13.25d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
 			icon: "minecraft:water_bucket"
 			id: "5F381A218F2A1AC5"
 			size: 1.25d
+			subtitle: "The ark drinks it; the rest goes to the shift and the network"
 			tasks: [
 				{ id: "1E701442EBE064AC", item: "minecraft:water_bucket", optional_task: true, type: "item" }
 				{ id: "3F1713FC234734F8", type: "checkmark" }
 			]
 			title: "Water"
 			x: 8.25d
-			y: 32.75d
+			y: 14.75d
 		}
 		{
 			dependencies: ["39CB4C69596C1BAF"]
 			icon: "gtceu:ammonia_bucket"
 			id: "3AC40D3B370A980F"
 			size: 1.25d
+			subtitle: "The ark takes it; the nitric acid line too"
 			tasks: [
 				{ id: "7BCEA36036D5CC62", item: "gtceu:ammonia_bucket", optional_task: true, type: "item" }
 				{ id: "74E5DEEBC4E2FA6E", type: "checkmark" }
 			]
 			title: "Ammonia"
 			x: 8.25d
+			y: 16.25d
+		}
+		{
+			icon: "gtceu:agar_dust"
+			id: "5DD47A1F6A593889"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Seeds the algae culture"
+			tasks: [
+				{ id: "36207E2F3D7F286D", item: "gtceu:agar_dust", optional_task: true, type: "item" }
+				{ id: "5E980811AD251AF3", type: "checkmark" }
+			]
+			title: "Agar"
+			x: 8.25d
+			y: 18.25d
+		}
+		{
+			dependencies: ["5DD47A1F6A593889", "3AC40D3B370A980F", "5F381A218F2A1AC5"]
+			description: ["Algae and archaea turn Pluto's ammonia and water, with carbon dioxide, into growth medium and oxygen."]
+			icon: "gtceu:ark_biosphere"
+			id: "76A06914A4AD473B"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1F5CB139B67212AD", item: "gtceu:ark_biosphere", optional_task: true, type: "item" }
+				{ id: "58F129777C778739", type: "checkmark" }
+			]
+			title: "Ark Biosphere"
+			x: 10.75d
+			y: 16.25d
+		}
+		{
+			dependencies: ["76A06914A4AD473B"]
+			icon: "gtceu:oxygen_bucket"
+			id: "79387BB960F74836"
+			size: 0.75d
+			tasks: [
+				{ id: "3838F04B032505B2", item: "gtceu:oxygen_bucket", optional_task: true, type: "item" }
+				{ id: "32D2DF02A8E10782", type: "checkmark" }
+			]
+			title: "Oxygen"
+			x: 13.25d
+			y: 14.75d
+		}
+		{
+			dependencies: ["76A06914A4AD473B"]
+			icon: "gtceu:biomass_bucket"
+			id: "358AEA0D89BBCB75"
+			size: 0.75d
+			tasks: [
+				{ id: "3B7E4ECEC746E344", item: "gtceu:biomass_bucket", optional_task: true, type: "item" }
+				{ id: "1C2F77A9D8088E4C", type: "checkmark" }
+			]
+			title: "Biomass"
+			x: 13.25d
+			y: 17.75d
+		}
+		{
+			dependencies: ["76A06914A4AD473B"]
+			icon: "gtceu:raw_growth_medium_bucket"
+			id: "5C496D701F2F2BF4"
+			size: 1.25d
+			tasks: [
+				{ id: "1F3E48551EE57DD4", item: "gtceu:raw_growth_medium_bucket", optional_task: true, type: "item" }
+				{ id: "17798B820938AAA2", type: "checkmark" }
+			]
+			title: "Raw Growth Medium"
+			x: 13.25d
+			y: 16.25d
+		}
+		{
+			dependencies: ["5C496D701F2F2BF4", "5B7917A2F756FF8C"]
+			description: ["Grows neural organoids into stem cells by the batch, and stem cells into processing units."]
+			icon: "gtceu:neural_culture_vat"
+			id: "3E25D24AE9CC0494"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3DA80D6E78BFA413", item: "gtceu:neural_culture_vat", optional_task: true, type: "item" }
+				{ id: "17038BD05357C2AD", type: "checkmark" }
+			]
+			title: "Neural Culture Vat"
+			x: 15.75d
+			y: 16.25d
+		}
+		{
+			dependencies: ["3E25D24AE9CC0494"]
+			icon: "gtceu:stem_cells"
+			id: "5FD8849631976219"
+			size: 1.25d
+			subtitle: "Sixty-four from one organoid"
+			tasks: [
+				{ id: "1511EFECAA37BC5E", item: "gtceu:stem_cells", optional_task: true, type: "item" }
+				{ id: "30D9B857AFDF4F60", type: "checkmark" }
+			]
+			title: "Stem Cells"
+			x: 18.25d
+			y: 16.25d
+		}
+		{
+			dependencies: ["5FD8849631976219"]
+			icon: "gtceu:neuro_processing_unit"
+			id: "740866893B07B39F"
+			size: 1.25d
+			tasks: [
+				{ id: "5E119F1C1BF11CA8", item: "gtceu:neuro_processing_unit", optional_task: true, type: "item" }
+				{ id: "1B267B70D47F763E", type: "checkmark" }
+			]
+			title: "Neuro Processing Unit"
+			x: 20.75d
+			y: 16.25d
+		}
+		{
+			dependencies: ["5079D5197787258F"]
+			icon: "gtceu:enriched_naquadah_dust"
+			id: "538721E09C28DC76"
+			size: 1.0d
+			tasks: [
+				{ id: "156DD737497C5567", item: "gtceu:enriched_naquadah_dust", optional_task: true, type: "item" }
+				{ id: "3FB97BFF2A8E5F71", type: "checkmark" }
+			]
+			title: "Enriched Naquadah Dust"
+			x: 27.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["58DAD9867F70CBC7"]
+			icon: "gtceu:trinium_dust"
+			id: "76B11B4E7AF2463C"
+			size: 1.0d
+			tasks: [
+				{ id: "36AA02C57A1628F9", item: "gtceu:trinium_dust", optional_task: true, type: "item" }
+				{ id: "13A6331E143B96B2", type: "checkmark" }
+			]
+			title: "Trinium Dust"
+			x: 27.5d
+			y: 11.5d
+		}
+		{
+			icon: "gtceu:europium_dust"
+			id: "5797EF1823A4374A"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1576E21E54793901", item: "gtceu:europium_dust", optional_task: true, type: "item" }
+				{ id: "399E1EAC4A1C30EE", type: "checkmark" }
+			]
+			title: "Europium"
+			x: 27.5d
+			y: 13.0d
+		}
+		{
+			icon: "gtceu:duranium_dust"
+			id: "184F715DC77E0DA0"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "378B10081C62EB69", item: "gtceu:duranium_dust", optional_task: true, type: "item" }
+				{ id: "539CE7E8F5AD78A0", type: "checkmark" }
+			]
+			title: "Duranium"
+			x: 27.5d
+			y: 14.5d
+		}
+		{
+			dependencies: ["538721E09C28DC76", "76B11B4E7AF2463C", "5797EF1823A4374A", "184F715DC77E0DA0"]
+			description: ["Packs a powder into a silver tube and draws it down to wire."]
+			icon: "gtceu:powder_in_tube_line"
+			id: "387BBDD72B6D189F"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "334B7054BF66F6C4", item: "gtceu:powder_in_tube_line", optional_task: true, type: "item" }
+				{ id: "5D4FA24AD88D8B6C", type: "checkmark" }
+			]
+			title: "Powder-in-Tube Line"
+			x: 30.0d
+			y: 12.25d
+		}
+		{
+			dependencies: ["387BBDD72B6D189F"]
+			icon: "grindless:ented_powder"
+			id: "15C35131C1043FB2"
+			size: 1.25d
+			tasks: [
+				{ id: "732F430DF2AE328A", item: "grindless:ented_powder", optional_task: true, type: "item" }
+				{ id: "15776F0F45BF2975", type: "checkmark" }
+			]
+			title: "EnTED Powder"
+			x: 32.5d
+			y: 12.25d
+		}
+		{
+			dependencies: ["15C35131C1043FB2"]
+			icon: "grindless:pit_billet"
+			id: "57E5EED6C5724611"
+			size: 1.25d
+			subtitle: "Four loads in a silver tube"
+			tasks: [
+				{ id: "1198C6762093C7B6", item: "grindless:pit_billet", optional_task: true, type: "item" }
+				{ id: "3AB1314F32D2C461", type: "checkmark" }
+			]
+			title: "Powder Billet"
+			x: 35.0d
+			y: 12.25d
+		}
+		{
+			dependencies: ["57E5EED6C5724611"]
+			icon: "gtceu:enriched_naquadah_trinium_europium_duranide_single_wire"
+			id: "3286B6D38E8E0070"
+			size: 1.25d
+			tasks: [
+				{ id: "78B1416320836622", item: "gtceu:enriched_naquadah_trinium_europium_duranide_single_wire", optional_task: true, type: "item" }
+				{ id: "7AD25C796BBC4EAD", type: "checkmark" }
+			]
+			title: "EnTED Wire"
+			x: 37.5d
+			y: 12.25d
+		}
+		{
+			icon: "gtceu:niobium_ingot"
+			id: "737B55A72A285CE9"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "5559146BB216CD0F", item: "gtceu:niobium_ingot", optional_task: true, type: "item" }
+				{ id: "313B0BE6073AE079", type: "checkmark" }
+			]
+			title: "Niobium"
+			x: 0.5d
+			y: 34.5d
+		}
+		{
+			dependencies: ["737B55A72A285CE9"]
+			icon: "grindless:rrr_niobium_sheet"
+			id: "7D5C7B885E7FAC98"
+			size: 1.25d
+			subtitle: "Melted very pure in the cavity works"
+			tasks: [
+				{ id: "745A4D6566EA0E03", item: "grindless:rrr_niobium_sheet", optional_task: true, type: "item" }
+				{ id: "3BDB16E59A86C6C5", type: "checkmark" }
+			]
+			title: "RRR Niobium Sheet"
+			x: 1.0d
+			y: 36.25d
+		}
+		{
+			dependencies: ["7D5C7B885E7FAC98"]
+			icon: "grindless:bare_srf_cavity"
+			id: "18B6D37CFE5F3F58"
+			size: 1.25d
+			subtitle: "Nine cells, formed in the same works"
+			tasks: [
+				{ id: "727BD13012DCC813", item: "grindless:bare_srf_cavity", optional_task: true, type: "item" }
+				{ id: "36BA3379360B0EB8", type: "checkmark" }
+			]
+			title: "Bare Cavity"
+			x: 2.5d
+			y: 36.25d
+		}
+		{
+			dependencies: ["18B6D37CFE5F3F58"]
+			description: ["Melts the niobium very pure, forms nine-cell cavities and polishes them in acid."]
+			icon: "gtceu:srf_cavity_works"
+			id: "53E29708237834AC"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "338170AEEF3C42CC", item: "gtceu:srf_cavity_works", optional_task: true, type: "item" }
+				{ id: "517B4E0655FE3E95", type: "checkmark" }
+			]
+			title: "SRF Cavity Works"
+			x: 4.5d
+			y: 36.25d
+		}
+		{
+			dependencies: ["53E29708237834AC"]
+			icon: "gtceu:spent_electropolish_acid_bucket"
+			id: "75ACFD49434C3DBC"
+			size: 0.75d
+			tasks: [
+				{ id: "19AD74F4950D51E1", item: "gtceu:spent_electropolish_acid_bucket", optional_task: true, type: "item" }
+				{ id: "3B2AEDB19AF4F185", type: "checkmark" }
+			]
+			title: "Spent Acid"
+			x: 5.0d
+			y: 34.75d
+		}
+		{
+			dependencies: ["53E29708237834AC"]
+			icon: "grindless:srf_cavity"
+			id: "16186DF8EF2485AD"
+			size: 1.25d
+			tasks: [
+				{ id: "31FEEC73A1DBDFFA", item: "grindless:srf_cavity", optional_task: true, type: "item" }
+				{ id: "30A5863BB9AE4C4F", type: "checkmark" }
+			]
+			title: "SRF Cavity"
+			x: 6.25d
+			y: 35.5d
+		}
+		{
+			dependencies: ["39C7F4E0414EFD2A"]
+			icon: "gtceu:neptune_helium_bucket"
+			id: "560DDDF52F5EA14D"
+			size: 1.25d
+			tasks: [
+				{ id: "714E74FA1D92BB89", item: "gtceu:neptune_helium_bucket", optional_task: true, type: "item" }
+				{ id: "7E9D5E1591188A14", type: "checkmark" }
+			]
+			title: "Neptune Helium"
+			x: 6.25d
+			y: 40.5d
+		}
+		{
+			description: ["Drops a scoop through Neptune's methane deck."]
+			icon: "gtceu:neptune_deep_siphon"
+			id: "39C7F4E0414EFD2A"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "76546A97BEFCF851", item: "gtceu:neptune_deep_siphon", optional_task: true, type: "item" }
+				{ id: "3B42D4BC87F29AB7", type: "checkmark" }
+			]
+			title: "Neptune Deep Siphon"
+			x: 5.75d
+			y: 42.25d
+		}
+		{
+			dependencies: ["39C7F4E0414EFD2A"]
+			icon: "gtceu:neptune_hydrogen_bucket"
+			id: "5B566E50A9782407"
+			size: 1.25d
+			subtitle: "The isotope column takes its deuterium"
+			tasks: [
+				{ id: "157F98B3C97D5361", item: "gtceu:neptune_hydrogen_bucket", optional_task: true, type: "item" }
+				{ id: "573582CA946C2E2D", type: "checkmark" }
+			]
+			title: "Neptune Hydrogen"
+			x: 7.75d
+			y: 41.25d
+		}
+		{
+			dependencies: ["5B566E50A9782407"]
+			icon: "gtceu:deuterium_bucket"
+			id: "37034F8171F97435"
+			size: 1.25d
+			subtitle: "Into the D-He3 capsules and the D-T freezer"
+			tasks: [
+				{ id: "114A1725334E4926", item: "gtceu:deuterium_bucket", optional_task: true, type: "item" }
+				{ id: "3210692DEFC238BE", type: "checkmark" }
+			]
+			title: "Deuterium"
+			x: 10.0d
+			y: 40.0d
+		}
+		{
+			dependencies: ["7C00BCD35855B841", "560DDDF52F5EA14D"]
+			description: ["Cools helium past the lambda point. Only helium-4 passes its superleak."]
+			icon: "gtceu:superfluid_helium_plant"
+			id: "5A10EE47550729A5"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7458529298A93A61", item: "gtceu:superfluid_helium_plant", optional_task: true, type: "item" }
+				{ id: "35F29F32866C7C01", type: "checkmark" }
+			]
+			title: "Superfluid Helium Plant"
+			x: 6.75d
+			y: 38.75d
+		}
+		{
+			dependencies: ["5A10EE47550729A5"]
+			icon: "gtceu:superfluid_helium_bucket"
+			id: "7B0AB0696106579D"
+			size: 1.25d
+			subtitle: "Bathes the cryomodules, the antimatter trap and the downlink"
+			tasks: [
+				{ id: "3A2AE3C81FC7FF3F", item: "gtceu:superfluid_helium_bucket", optional_task: true, type: "item" }
+				{ id: "12CB246304888FAD", type: "checkmark" }
+			]
+			title: "Superfluid Helium"
+			x: 7.25d
+			y: 37.0d
+		}
+		{
+			dependencies: ["5A10EE47550729A5"]
+			icon: "gtceu:helium_3_concentrate_bucket"
+			id: "7A0B641AFC216EF1"
+			size: 1.25d
+			subtitle: "What the superleak holds back"
+			tasks: [
+				{ id: "754C2C9EF5283A0A", item: "gtceu:helium_3_concentrate_bucket", optional_task: true, type: "item" }
+				{ id: "5A0837E4B93F0743", type: "checkmark" }
+			]
+			title: "Helium-3 Concentrate"
+			x: 8.75d
+			y: 38.0d
+		}
+		{
+			dependencies: ["7A0B641AFC216EF1"]
+			icon: "gtceu:helium_3_bucket"
+			id: "57729769773E4E58"
+			size: 1.25d
+			subtitle: "Into the D-He3 capsules"
+			tasks: [
+				{ id: "3947C9AC4C65611E", item: "gtceu:helium_3_bucket", optional_task: true, type: "item" }
+				{ id: "5704A295A53E32AA", type: "checkmark" }
+			]
+			title: "Helium-3"
+			x: 10.25d
+			y: 37.5d
+		}
+		{
+			dependencies: ["16186DF8EF2485AD", "7B0AB0696106579D"]
+			icon: "grindless:srf_cryomodule"
+			id: "7881A8BE010C67AF"
+			size: 1.25d
+			subtitle: "Eight cavities in superfluid helium"
+			tasks: [
+				{ id: "547EC324EDC641F7", item: "grindless:srf_cryomodule", optional_task: true, type: "item" }
+				{ id: "547CB482D02B45A7", type: "checkmark" }
+			]
+			title: "SRF Cryomodule"
+			x: 7.75d
+			y: 35.5d
+		}
+		{
+			icon: "gtceu:boron_dust"
+			id: "51F8622E93604454"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "504FA02C836825DA", item: "gtceu:boron_dust", optional_task: true, type: "item" }
+				{ id: "1D9B608039F768CE", type: "checkmark" }
+			]
+			title: "Boron"
+			x: 7.75d
+			y: 33.75d
+		}
+		{
+			dependencies: ["51F8622E93604454"]
+			icon: "gtceu:boron_11_trifluoride_bucket"
+			id: "7A305ADC6A2F5A8B"
+			size: 1.25d
+			subtitle: "Split from boron-10 with fluorine in the IV hot cell"
+			tasks: [
+				{ id: "7543C7EE2F1B6396", item: "gtceu:boron_11_trifluoride_bucket", optional_task: true, type: "item" }
+				{ id: "3D076CD3AD9E6536", type: "checkmark" }
+			]
+			title: "Boron-11 Trifluoride"
+			x: 9.25d
+			y: 34.5d
+		}
+		{
+			dependencies: ["51F8622E93604454"]
+			icon: "gtceu:boron_10_trifluoride_bucket"
+			id: "7F29FB5B46AADDF6"
+			size: 0.75d
+			tasks: [
+				{ id: "3E328B7FABE62180", item: "gtceu:boron_10_trifluoride_bucket", optional_task: true, type: "item" }
+				{ id: "13FBE066D02900DA", type: "checkmark" }
+			]
+			title: "Boron-10 Trifluoride"
+			x: 9.25d
+			y: 33.25d
+		}
+		{
+			dependencies: ["7A305ADC6A2F5A8B"]
+			icon: "gtceu:decaborane_bucket"
+			id: "7680E8161597F21E"
+			size: 1.25d
+			subtitle: "With hydrogen in a chemical reactor"
+			tasks: [
+				{ id: "168BB2F5C00C5F95", item: "gtceu:decaborane_bucket", optional_task: true, type: "item" }
+				{ id: "7BBC7762547F1C2A", type: "checkmark" }
+			]
+			title: "Decaborane"
+			x: 11.5d
+			y: 33.75d
+		}
+		{
+			dependencies: ["7A305ADC6A2F5A8B"]
+			icon: "gtceu:hydrofluoric_acid_bucket"
+			id: "7C0E288208A02B53"
+			size: 0.75d
+			tasks: [
+				{ id: "748BA29B065269FB", item: "gtceu:hydrofluoric_acid_bucket", optional_task: true, type: "item" }
+				{ id: "16D45DF87C7237E0", type: "checkmark" }
+			]
+			title: "Hydrofluoric Acid"
+			x: 10.0d
+			y: 35.75d
+		}
+		{
+			dependencies: ["7680E8161597F21E", "556DE618DC0980FF"]
+			icon: "grindless:pb11_capsule"
+			id: "1BD6C43944F7BFC3"
+			size: 1.25d
+			tasks: [
+				{ id: "704D1A5071620D0C", item: "grindless:pb11_capsule", optional_task: true, type: "item" }
+				{ id: "75F3AD6005EC0B5B", type: "checkmark" }
+			]
+			title: "Boron Capsule"
+			x: 13.0d
 			y: 34.25d
 		}
 		{
-			icon: "grindless:kuiper_interceptor"
-			id: "73C4A08EDFACCFA9"
+			dependencies: ["556DE618DC0980FF", "73C9096FE61142F2", "57729769773E4E58", "37034F8171F97435"]
+			icon: "grindless:d_he3_capsule"
+			id: "126AEEE884FD4F6B"
+			size: 1.25d
+			tasks: [
+				{ id: "7BD47986AA0E1E6D", item: "grindless:d_he3_capsule", optional_task: true, type: "item" }
+				{ id: "3E5D37FC3E6EF12D", type: "checkmark" }
+			]
+			title: "D-He3 Capsule"
+			x: 12.5d
+			y: 37.25d
+		}
+		{
+			dependencies: ["1BD6C43944F7BFC3", "126AEEE884FD4F6B", "1EC3359768A784AB"]
+			description: ["Fires a ring of fibre lasers at one capsule a shot. The lasers wear."]
+			icon: "gtceu:laser_fusion_chamber"
+			id: "705C2604CD4594D7"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "531335E86A8C96E6", item: "gtceu:laser_fusion_chamber", optional_task: true, type: "item" }
+				{ id: "51DCCA36AD92C400", type: "checkmark" }
+			]
+			title: "Laser Fusion Chamber"
+			x: 14.75d
+			y: 33.75d
+		}
+		{
+			dependencies: ["705C2604CD4594D7"]
+			icon: "gtceu:helium_bucket"
+			id: "5A152D812EA0DF0C"
+			size: 0.75d
+			tasks: [
+				{ id: "36625D6B69EE28CB", item: "gtceu:helium_bucket", optional_task: true, type: "item" }
+				{ id: "7C628582B24DB586", type: "checkmark" }
+			]
+			title: "Helium"
+			x: 16.25d
+			y: 35.75d
+		}
+		{
+			dependencies: ["705C2604CD4594D7"]
+			icon: "grindless:spent_laser_module"
+			id: "1DF9CC3F595C6367"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Refurbished in the fibre draw tower"
+			tasks: [
+				{ id: "7A573B1365241D04", item: "grindless:spent_laser_module", optional_task: true, type: "item" }
+				{ id: "1469CE9A5F40CCE9", type: "checkmark" }
+			]
+			title: "Spent Laser Module"
+			x: 15.25d
+			y: 35.25d
+		}
+		{
+			icon: "grindless:yb_doped_preform"
+			id: "72BF1E6751A8C854"
 			shape: "rsquare"
 			size: 1.0d
-			subtitle: "Spent; its canister comes back"
+			subtitle: "Ytterbium glass laid inside a tube"
+			tasks: [
+				{ id: "35B9476C90F69A9E", item: "grindless:yb_doped_preform", optional_task: true, type: "item" }
+				{ id: "5EE9A65CE2302E4C", type: "checkmark" }
+			]
+			title: "Doped Preform"
+			x: 10.0d
+			y: 31.5d
+		}
+		{
+			dependencies: ["72BF1E6751A8C854"]
+			description: ["Draws the preform into fibre and builds the laser modules."]
+			icon: "gtceu:fibre_draw_tower"
+			id: "1913638BF996E35B"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "19F2387078AA826C", item: "gtceu:fibre_draw_tower", optional_task: true, type: "item" }
+				{ id: "7F2F6243FD40DCEC", type: "checkmark" }
+			]
+			title: "Fibre Draw Tower"
+			x: 11.5d
+			y: 31.75d
+		}
+		{
+			dependencies: ["1913638BF996E35B"]
+			icon: "grindless:ytterbium_fibre"
+			id: "56FC94895700579E"
+			size: 1.25d
+			tasks: [
+				{ id: "518C8F24EE4AF8AE", item: "grindless:ytterbium_fibre", optional_task: true, type: "item" }
+				{ id: "53CA7BC313D9335D", type: "checkmark" }
+			]
+			title: "Ytterbium Fibre"
+			x: 12.0d
+			y: 30.0d
+		}
+		{
+			icon: "grindless:gallium_arsenide_wafer"
+			id: "5D61CB9C4E38A555"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "With the organometallics and arsine"
+			tasks: [
+				{ id: "19ECCE8926427998", item: "grindless:gallium_arsenide_wafer", optional_task: true, type: "item" }
+				{ id: "162436F14DDC28AF", type: "checkmark" }
+			]
+			title: "GaAs Wafer"
+			x: 8.25d
+			y: 23.25d
+		}
+		{
+			dependencies: ["5D61CB9C4E38A555"]
+			description: ["Grows indium gallium arsenide one layer at a time, then cleaves and mounts the bars."]
+			icon: "gtceu:mocvd_reactor"
+			id: "105048B8DD3BFB2F"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "10C44B5B7C38BB6B", item: "gtceu:mocvd_reactor", optional_task: true, type: "item" }
+				{ id: "52F4117417C0E581", type: "checkmark" }
+			]
+			title: "MOCVD Reactor"
+			x: 9.75d
+			y: 23.25d
+		}
+		{
+			dependencies: ["105048B8DD3BFB2F"]
+			icon: "gtceu:arsine_bucket"
+			id: "788243A99926C67D"
+			size: 0.75d
+			tasks: [
+				{ id: "3E88479BE6B153AF", item: "gtceu:arsine_bucket", optional_task: true, type: "item" }
+				{ id: "3B1BF61495F61E49", type: "checkmark" }
+			]
+			title: "Arsine"
+			x: 10.25d
+			y: 21.75d
+		}
+		{
+			dependencies: ["105048B8DD3BFB2F"]
+			icon: "grindless:ingaas_epi_wafer"
+			id: "15A03CCA93401FCE"
+			size: 1.25d
+			tasks: [
+				{ id: "34F81833D98B95FC", item: "grindless:ingaas_epi_wafer", optional_task: true, type: "item" }
+				{ id: "504BCE841F2EBAD6", type: "checkmark" }
+			]
+			title: "InGaAs Epi Wafer"
+			x: 11.5d
+			y: 23.5d
+		}
+		{
+			dependencies: ["15A03CCA93401FCE"]
+			icon: "grindless:ingaas_pump_module"
+			id: "30F0C9D2FA169DBA"
+			size: 1.25d
+			subtitle: "Cleaved into bars and mounted on copper"
+			tasks: [
+				{ id: "5A66C1555F50604C", item: "grindless:ingaas_pump_module", optional_task: true, type: "item" }
+				{ id: "1CF10FA44CF46C0C", type: "checkmark" }
+			]
+			title: "Pump Module"
+			x: 12.75d
+			y: 25.25d
+		}
+		{
+			dependencies: ["56FC94895700579E", "30F0C9D2FA169DBA"]
+			icon: "grindless:fibre_laser_module"
+			id: "1EC3359768A784AB"
+			size: 1.25d
+			subtitle: "The laser chamber, the printer, the comb and the launcher take it"
+			tasks: [
+				{ id: "5FA06AE72D7767E9", item: "grindless:fibre_laser_module", optional_task: true, type: "item" }
+				{ id: "1A401D31A6164BDB", type: "checkmark" }
+			]
+			title: "Fibre Laser Module"
+			x: 14.25d
+			y: 29.0d
+		}
+		{
+			icon: "grindless:curium_oxide"
+			id: "7D837D5FBC46B83E"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the actinide partitioning plant"
+			tasks: [
+				{ id: "5A9B2A789FC970EB", item: "grindless:curium_oxide", optional_task: true, type: "item" }
+				{ id: "164EF0FB45DE6CB7", type: "checkmark" }
+			]
+			title: "Curium Oxide"
+			x: 36.5d
+			y: 26.25d
+		}
+		{
+			icon: "gtceu:americium_dust"
+			id: "16315CD2FE92BF69"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Also from the partitioning plant"
+			tasks: [
+				{ id: "360A03BAC4E41318", item: "gtceu:americium_dust", optional_task: true, type: "item" }
+				{ id: "75C61B1A1E299EC4", type: "checkmark" }
+			]
+			title: "Americium"
+			x: 36.75d
+			y: 29.0d
+		}
+		{
+			dependencies: ["7D837D5FBC46B83E", "16315CD2FE92BF69"]
+			description: ["Presses curium into pellets, clads them in iridium and builds RTGs; it also seals americium micro-sources."]
+			icon: "gtceu:heat_source_works"
+			id: "1CFB6029BDD0B187"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "589AF714226646B5", item: "gtceu:heat_source_works", optional_task: true, type: "item" }
+				{ id: "15572846CDB67B9F", type: "checkmark" }
+			]
+			title: "Heat Source Works"
+			x: 38.5d
+			y: 29.5d
+		}
+		{
+			dependencies: ["1CFB6029BDD0B187"]
+			icon: "grindless:curium_244_pellet"
+			id: "3641A825E4A4364E"
+			size: 1.25d
+			subtitle: "The heavy curium oxide goes back"
+			tasks: [
+				{ id: "36797C423B3BC5A8", item: "grindless:curium_244_pellet", optional_task: true, type: "item" }
+				{ id: "562CD1AB23963857", type: "checkmark" }
+			]
+			title: "Curium-244 Pellet"
+			x: 42.25d
+			y: 29.0d
+		}
+		{
+			dependencies: ["3641A825E4A4364E"]
+			icon: "grindless:gphs_module"
+			id: "366B215654E5F72E"
+			size: 1.25d
+			subtitle: "Iridium foil and a carbon-carbon aeroshell around the pellet"
+			tasks: [
+				{ id: "7F6FCA00A4BB34CC", item: "grindless:gphs_module", optional_task: true, type: "item" }
+				{ id: "7E387186F4874424", type: "checkmark" }
+			]
+			title: "GPHS Module"
+			x: 45.25d
+			y: 29.75d
+		}
+		{
+			dependencies: ["366B215654E5F72E"]
+			icon: "grindless:probe_rtg"
+			id: "5AA458C49D0C17C1"
+			size: 1.25d
+			subtitle: "The precursor probe, the Kuiper craft and two UV machines take it"
+			tasks: [
+				{ id: "3D343AD71A608730", item: "grindless:probe_rtg", optional_task: true, type: "item" }
+				{ id: "733B7415AB217301", type: "checkmark" }
+			]
+			title: "Probe RTG"
+			x: 47.75d
+			y: 33.5d
+		}
+		{
+			dependencies: ["1CFB6029BDD0B187"]
+			icon: "grindless:americium_micro_source"
+			id: "7CFF9B9D7AF01B14"
+			size: 1.25d
+			subtitle: "Eight from one run"
+			tasks: [
+				{ id: "3DB168039E0784AB", item: "grindless:americium_micro_source", optional_task: true, type: "item" }
+				{ id: "7BF518C26B93406C", type: "checkmark" }
+			]
+			title: "Americium Micro-Source"
+			x: 40.75d
+			y: 27.75d
+		}
+		{
+			icon: "gtceu:tritanium_ingot"
+			id: "3E03D99EBC4197FF"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "31317DB84F05AC29", item: "gtceu:tritanium_ingot", optional_task: true, type: "item" }
+				{ id: "7ED411A3D6050658", type: "checkmark" }
+			]
+			title: "Tritanium"
+			x: 40.5d
+			y: 25.0d
+		}
+		{
+			dependencies: ["3E03D99EBC4197FF", "3B3EF30C00C0A27A"]
+			description: ["Atomises tritanium in argon and prints it a layer at a time with a fibre laser. The lasers wear."]
+			icon: "gtceu:powder_bed_printer"
+			id: "1B677ACC858CD860"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "55CE75D8DEE96446", item: "gtceu:powder_bed_printer", optional_task: true, type: "item" }
+				{ id: "33C661B608EDE30D", type: "checkmark" }
+			]
+			title: "Powder Bed Printer"
+			x: 42.25d
+			y: 24.5d
+		}
+		{
+			dependencies: ["1B677ACC858CD860"]
+			icon: "grindless:tritanium_am_powder"
+			id: "5ADB873F80CCF712"
+			size: 1.25d
+			tasks: [
+				{ id: "1BA35DAEF70F0548", item: "grindless:tritanium_am_powder", optional_task: true, type: "item" }
+				{ id: "3C362D834C3C095E", type: "checkmark" }
+			]
+			title: "Tritanium Powder"
+			x: 44.5d
+			y: 23.5d
+		}
+		{
+			dependencies: ["5ADB873F80CCF712", "3B3EF30C00C0A27A"]
+			icon: "grindless:near_net_thruster_chamber"
+			id: "7EA7315ADF00D872"
+			size: 1.25d
+			subtitle: "Most of the powder is left over"
+			tasks: [
+				{ id: "3155A01E75D219A8", item: "grindless:near_net_thruster_chamber", optional_task: true, type: "item" }
+				{ id: "15049BCA34649D60", type: "checkmark" }
+			]
+			title: "Near-Net Chamber"
+			x: 45.0d
+			y: 22.0d
+		}
+		{
+			dependencies: ["7EA7315ADF00D872"]
+			icon: "grindless:printed_thruster_chamber"
+			id: "1401BB7BF5F40599"
+			size: 1.25d
+			subtitle: "Pressed in argon"
+			tasks: [
+				{ id: "12EDC680EDFDAA48", item: "grindless:printed_thruster_chamber", optional_task: true, type: "item" }
+				{ id: "1E08A566785AD62A", type: "checkmark" }
+			]
+			title: "Printed Chamber"
+			x: 48.0d
+			y: 22.0d
+		}
+		{
+			dependencies: ["1401BB7BF5F40599"]
+			description: ["Fits grids, cathodes and chambers into thrusters, and thrusters into pods."]
+			icon: "gtceu:thruster_works"
+			id: "1A0C266EEBA41CE6"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "304BD4525C08920A", item: "gtceu:thruster_works", optional_task: true, type: "item" }
+				{ id: "18BDEDDA348FB7C5", type: "checkmark" }
+			]
+			title: "Thruster Works"
+			x: 49.0d
+			y: 25.25d
+		}
+		{
+			dependencies: ["1A0C266EEBA41CE6"]
+			icon: "grindless:ion_thruster"
+			id: "1D2BC3DBDD8B9BDD"
+			size: 1.25d
+			subtitle: "Xenon burns in it"
+			tasks: [
+				{ id: "36240D1558EBD865", item: "grindless:ion_thruster", optional_task: true, type: "item" }
+				{ id: "740B49AC4AEB58A0", type: "checkmark" }
+			]
+			title: "Ion Thruster"
+			x: 49.5d
+			y: 29.0d
+		}
+		{
+			dependencies: ["1D2BC3DBDD8B9BDD"]
+			icon: "grindless:thruster_pod"
+			id: "7DB3610484C93363"
+			size: 1.25d
+			subtitle: "With a Hall thruster and a propellant tank; the Kuiper craft, the probe and the UHV machines take it"
+			tasks: [
+				{ id: "523220A8B5CC5DD9", item: "grindless:thruster_pod", optional_task: true, type: "item" }
+				{ id: "168D894F47CA2941", type: "checkmark" }
+			]
+			title: "Thruster Pod"
+			x: 49.5d
+			y: 31.0d
+		}
+		{
+			dependencies: ["7DB3610484C93363", "5AA458C49D0C17C1"]
+			icon: "grindless:kuiper_interceptor"
+			id: "73C4A08EDFACCFA9"
+			size: 1.25d
+			subtitle: "A thruster pod and a probe RTG; spent, its canister comes back"
 			tasks: [
 				{ id: "3E882E55368F5C04", item: "grindless:kuiper_interceptor", optional_task: true, type: "item" }
 				{ id: "71685FE920818B2E", type: "checkmark" }
 			]
 			title: "Kuiper Interceptor"
-			x: 12.5d
-			y: 29.5d
+			x: 52.25d
+			y: 33.25d
 		}
 		{
 			dependencies: ["73C4A08EDFACCFA9"]
@@ -1139,8 +1470,8 @@
 				{ id: "7A68341B1593D381", type: "checkmark" }
 			]
 			title: "Kuiper Interceptor Bay"
-			x: 15.0d
-			y: 29.5d
+			x: 55.75d
+			y: 32.75d
 		}
 		{
 			dependencies: ["376DC558BBCD7C55"]
@@ -1152,8 +1483,8 @@
 				{ id: "3FFE2ABEB39B57C5", type: "checkmark" }
 			]
 			title: "Planetesimal Sample"
-			x: 17.5d
-			y: 29.5d
+			x: 57.0d
+			y: 31.0d
 		}
 		{
 			dependencies: ["5407A130F1940E57"]
@@ -1167,8 +1498,8 @@
 				{ id: "3AD29BA9476E31F1", type: "checkmark" }
 			]
 			title: "Amorphous Ice Annealer"
-			x: 20.0d
-			y: 29.5d
+			x: 58.25d
+			y: 33.75d
 		}
 		{
 			dependencies: ["170B6DA637F53BAB"]
@@ -1180,8 +1511,8 @@
 				{ id: "3C25F7D426B3D4ED", type: "checkmark" }
 			]
 			title: "Water"
-			x: 22.5d
-			y: 28.0d
+			x: 62.25d
+			y: 33.5d
 		}
 		{
 			dependencies: ["170B6DA637F53BAB"]
@@ -1194,8 +1525,8 @@
 				{ id: "195873DBA1FAB5C4", type: "checkmark" }
 			]
 			title: "Kuiper Noble Gas"
-			x: 22.5d
-			y: 29.5d
+			x: 59.0d
+			y: 38.5d
 		}
 		{
 			dependencies: ["170B6DA637F53BAB"]
@@ -1207,8 +1538,8 @@
 				{ id: "14C2704603D1192A", type: "checkmark" }
 			]
 			title: "Carbon Monoxide"
-			x: 22.5d
-			y: 31.0d
+			x: 60.0d
+			y: 31.25d
 		}
 		{
 			dependencies: ["35C5A56457C63A73"]
@@ -1220,8 +1551,8 @@
 				{ id: "77FE22F88A758372", type: "checkmark" }
 			]
 			title: "Krypton"
-			x: 25.0d
-			y: 28.75d
+			x: 61.5d
+			y: 37.25d
 		}
 		{
 			dependencies: ["35C5A56457C63A73"]
@@ -1233,10 +1564,706 @@
 				{ id: "7CA4162BB2C33623", type: "checkmark" }
 			]
 			title: "Xenon"
+			x: 63.0d
+			y: 39.0d
+		}
+		{
+			dependencies: ["132326AF4E432EEB"]
+			description: ["Chlorinates germanium to a liquid, reduces it back to ingots and grows the detector crystals."]
+			icon: "gtceu:zone_refining_tower"
+			id: "15075EB2695D9C02"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "5EA7DEF8C77F1755", item: "gtceu:zone_refining_tower", optional_task: true, type: "item" }
+				{ id: "76F46DCBCBB7E7A7", type: "checkmark" }
+			]
+			title: "Zone Refining Tower"
+			x: 60.25d
+			y: 51.5d
+		}
+		{
+			dependencies: ["15075EB2695D9C02"]
+			icon: "gtceu:germanium_tetrachloride_bucket"
+			id: "51CC496F68BA497B"
+			size: 1.25d
+			subtitle: "Reduced with hydrogen; the acid goes to the network"
+			tasks: [
+				{ id: "3B0A84C38974D952", item: "gtceu:germanium_tetrachloride_bucket", optional_task: true, type: "item" }
+				{ id: "7426DB274B3DCAFE", type: "checkmark" }
+			]
+			title: "Germanium Tetrachloride"
+			x: 64.0d
+			y: 52.25d
+		}
+		{
+			dependencies: ["51CC496F68BA497B"]
+			icon: "gtceu:germanium_ingot"
+			id: "5ACE93F5A9B4E11A"
+			size: 1.25d
+			tasks: [
+				{ id: "398E4B2F54F59909", item: "gtceu:germanium_ingot", optional_task: true, type: "item" }
+				{ id: "36717145812EEEC4", type: "checkmark" }
+			]
+			title: "Germanium Ingot"
+			x: 67.5d
+			y: 53.75d
+		}
+		{
+			dependencies: ["5ACE93F5A9B4E11A"]
+			icon: "grindless:hpge_crystal"
+			id: "362E3FF78B543814"
+			size: 1.25d
+			subtitle: "The Proxima rover, the solar probe, the precursor probe and the ground station take it"
+			tasks: [
+				{ id: "5790B38FCCCE5B1F", item: "grindless:hpge_crystal", optional_task: true, type: "item" }
+				{ id: "53BF94561ADEB55A", type: "checkmark" }
+			]
+			title: "HPGe Crystal"
+			x: 71.5d
+			y: 55.5d
+		}
+		{
+			icon: "gtceu:boron_trioxide_dust"
+			id: "345EDE5C2A8BCBE6"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "34E61987EA4015DB", item: "gtceu:boron_trioxide_dust", optional_task: true, type: "item" }
+				{ id: "3ED9E43FBC1CFEAB", type: "checkmark" }
+			]
+			title: "Boron Trioxide"
+			x: 24.25d
+			y: 34.25d
+		}
+		{
+			dependencies: ["345EDE5C2A8BCBE6"]
+			description: ["Makes hexagonal boron nitride with ammonia, grows nanotubes on it and spins them into yarn."]
+			icon: "gtceu:boron_nitride_reactor"
+			id: "18B01D29BF90C6D3"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3740912BAAAC4141", item: "gtceu:boron_nitride_reactor", optional_task: true, type: "item" }
+				{ id: "5DF82E0EF918CC8D", type: "checkmark" }
+			]
+			title: "Boron Nitride Reactor"
+			x: 27.75d
+			y: 33.0d
+		}
+		{
+			dependencies: ["18B01D29BF90C6D3"]
+			icon: "grindless:hbn_dust"
+			id: "5BC20C8BF9F98631"
+			size: 1.25d
+			subtitle: "The sail film takes some too"
+			tasks: [
+				{ id: "7751B32D1E9D43EE", item: "grindless:hbn_dust", optional_task: true, type: "item" }
+				{ id: "10DA4E175767958D", type: "checkmark" }
+			]
+			title: "Hexagonal Boron Nitride"
+			x: 32.5d
+			y: 31.75d
+		}
+		{
+			dependencies: ["5BC20C8BF9F98631"]
+			icon: "grindless:bnnt_dust"
+			id: "730984219181AC70"
+			size: 1.25d
+			subtitle: "Grown in hydrogen"
+			tasks: [
+				{ id: "7194AF380CCD1437", item: "grindless:bnnt_dust", optional_task: true, type: "item" }
+				{ id: "3F5F5C2E4097DEF1", type: "checkmark" }
+			]
+			title: "Nanotube Dust"
+			x: 35.25d
+			y: 34.25d
+		}
+		{
+			dependencies: ["730984219181AC70"]
+			icon: "grindless:bnnt_yarn"
+			id: "55BABADA1B051F3D"
+			size: 1.25d
+			subtitle: "Spun five to one; the boron nitride comes back"
+			tasks: [
+				{ id: "7F7856DB1642C9CE", item: "grindless:bnnt_yarn", optional_task: true, type: "item" }
+				{ id: "78C97525361A7D4D", type: "checkmark" }
+			]
+			title: "BNNT Yarn"
+			x: 37.0d
+			y: 35.75d
+		}
+		{
+			dependencies: ["55BABADA1B051F3D"]
+			description: ["Winds the yarn round an aerogel tank with carbon nanotube yarn and epoxy."]
+			icon: "gtceu:cryotank_winder"
+			id: "1826D2D1863BE1A8"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "33A2E92E2F0D5CE9", item: "gtceu:cryotank_winder", optional_task: true, type: "item" }
+				{ id: "3AE4288F230F99BC", type: "checkmark" }
+			]
+			title: "Cryotank Winder"
+			x: 40.0d
+			y: 37.75d
+		}
+		{
+			dependencies: ["1826D2D1863BE1A8"]
+			icon: "grindless:bnnt_fuel_tank"
+			id: "33F72AD122F5AC7D"
+			size: 1.25d
+			tasks: [
+				{ id: "16F2A009D6202F23", item: "grindless:bnnt_fuel_tank", optional_task: true, type: "item" }
+				{ id: "38BB890A8E7B398E", type: "checkmark" }
+			]
+			title: "BNNT Fuel Tank"
+			x: 42.5d
+			y: 36.5d
+		}
+		{
+			dependencies: ["305F916B3530ABAD"]
+			description: ["Grows silicon epitaxially in the vacuum behind a shield, in orbit."]
+			icon: "gtceu:wake_shield_facility"
+			id: "14729250D9B51518"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7ED5032576A379AB", item: "gtceu:wake_shield_facility", optional_task: true, type: "item" }
+				{ id: "1EA3FC5C209CCF32", type: "checkmark" }
+			]
+			title: "Wake Shield Facility"
+			x: 22.5d
+			y: 29.75d
+		}
+		{
+			dependencies: ["14729250D9B51518"]
+			icon: "grindless:epitaxial_silicon_wafer"
+			id: "3FAE95B73A334D7D"
+			size: 1.25d
+			tasks: [
+				{ id: "7D31962C9D72F44A", item: "grindless:epitaxial_silicon_wafer", optional_task: true, type: "item" }
+				{ id: "713130F71B240DC9", type: "checkmark" }
+			]
+			title: "Epitaxial Silicon Wafer"
 			x: 25.0d
-			y: 30.25d
+			y: 29.5d
+		}
+		{
+			dependencies: ["3FAE95B73A334D7D"]
+			description: ["Coats the wafer, patterns the film and releases the sail in orbit."]
+			icon: "gtceu:light_sail_fab"
+			id: "17A1320885A6A2F6"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "326DF7464F80C9B3", item: "gtceu:light_sail_fab", optional_task: true, type: "item" }
+				{ id: "3218A9EE4FB9D438", type: "checkmark" }
+			]
+			title: "Light Sail Fab"
+			x: 28.5d
+			y: 30.0d
+		}
+		{
+			dependencies: ["17A1320885A6A2F6"]
+			icon: "grindless:nitride_coated_carrier"
+			id: "71E595C0B00CF12E"
+			size: 1.25d
+			subtitle: "Silane and ammonia"
+			tasks: [
+				{ id: "55CFAADA769578B9", item: "grindless:nitride_coated_carrier", optional_task: true, type: "item" }
+				{ id: "3A0A7D59E2A06515", type: "checkmark" }
+			]
+			title: "Nitride-Coated Carrier"
+			x: 31.5d
+			y: 28.25d
+		}
+		{
+			dependencies: ["71E595C0B00CF12E", "5BC20C8BF9F98631"]
+			icon: "grindless:patterned_sail_carrier"
+			id: "1AC968C7C9D290C2"
+			size: 1.25d
+			subtitle: "Boron nitride and an X-ray mask"
+			tasks: [
+				{ id: "78488C5FDE46B688", item: "grindless:patterned_sail_carrier", optional_task: true, type: "item" }
+				{ id: "5EB1EDF3A275ADCB", type: "checkmark" }
+			]
+			title: "Patterned Sail Carrier"
+			x: 34.25d
+			y: 28.5d
+		}
+		{
+			dependencies: ["1AC968C7C9D290C2"]
+			icon: "grindless:light_sail"
+			id: "1AF66FAEDC3E908E"
+			size: 1.25d
+			subtitle: "Released with xenon difluoride"
+			tasks: [
+				{ id: "3420CDBDEB54BF67", item: "grindless:light_sail", optional_task: true, type: "item" }
+				{ id: "3C9BE4CF52C3741E", type: "checkmark" }
+			]
+			title: "Light Sail"
+			x: 35.5d
+			y: 30.75d
+		}
+		{
+			icon: "grindless:fibre_laser_module"
+			id: "3B3EF30C00C0A27A"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Made in the fibre laser line"
+			tasks: [
+				{ id: "3E7F01362C402586", item: "grindless:fibre_laser_module", optional_task: true, type: "item" }
+				{ id: "16E4C77521600E92", type: "checkmark" }
+			]
+			title: "Fibre Laser Module"
+			x: 41.75d
+			y: 22.5d
+		}
+		{
+			icon: "gtceu:sapphire_block"
+			id: "1A6510A89F15B4D8"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "56038E73529CCF01", item: "gtceu:sapphire_block", optional_task: true, type: "item" }
+				{ id: "752F48B98BB5A495", type: "checkmark" }
+			]
+			title: "Sapphire Block"
+			x: 83.5d
+			y: 21.75d
+		}
+		{
+			dependencies: ["1A6510A89F15B4D8"]
+			description: ["Melts the block in argon at 2400 K."]
+			icon: "gtceu:electric_blast_furnace"
+			id: "136DAEFE4CADCEE6"
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "19345E6ED3A6C0FD", item: "gtceu:electric_blast_furnace", optional_task: true, type: "item" }
+				{ id: "79F521885A2D2323", type: "checkmark" }
+			]
+			title: "Electric Blast Furnace"
+			x: 88.0d
+			y: 23.75d
+		}
+		{
+			dependencies: ["136DAEFE4CADCEE6"]
+			icon: "grindless:sapphire_boule"
+			id: "186A1E8F4753F492"
+			size: 1.25d
+			tasks: [
+				{ id: "1A8BECDDC0B839FC", item: "grindless:sapphire_boule", optional_task: true, type: "item" }
+				{ id: "370E3B0C385750BE", type: "checkmark" }
+			]
+			title: "Sapphire Boule"
+			x: 91.5d
+			y: 26.5d
+		}
+		{
+			dependencies: ["186A1E8F4753F492"]
+			icon: "grindless:sapphire_wafer"
+			id: "3BFBB4038ABB0B5C"
+			size: 1.25d
+			subtitle: "Cut with lubricant"
+			tasks: [
+				{ id: "76E0F767E715925E", item: "grindless:sapphire_wafer", optional_task: true, type: "item" }
+				{ id: "3698F43C00E10BA8", type: "checkmark" }
+			]
+			title: "Sapphire Wafer"
+			x: 94.25d
+			y: 28.5d
+		}
+		{
+			dependencies: ["3BFBB4038ABB0B5C"]
+			icon: "grindless:nbn_film_wafer"
+			id: "1E1FED2FA9F54CD4"
+			size: 1.25d
+			subtitle: "Grown in the MOCVD reactor"
+			tasks: [
+				{ id: "7B9ED55E13688F22", item: "grindless:nbn_film_wafer", optional_task: true, type: "item" }
+				{ id: "1FBA7292A5E02252", type: "checkmark" }
+			]
+			title: "Niobium Nitride Film Wafer"
+			x: 95.0d
+			y: 33.25d
+		}
+		{
+			dependencies: ["1E1FED2FA9F54CD4"]
+			icon: "grindless:snspd_array"
+			id: "308DBAD22E60AB39"
+			size: 1.25d
+			subtitle: "Cooled in the qubit fab; the downlink and the ground station take it"
+			tasks: [
+				{ id: "1CF458E2FDD467B6", item: "grindless:snspd_array", optional_task: true, type: "item" }
+				{ id: "54E29D93EC3D0563", type: "checkmark" }
+			]
+			title: "SNSPD Array"
+			x: 95.75d
+			y: 31.25d
+		}
+		{
+			icon: "grindless:pmma_coated_wafer"
+			id: "1E76B321FEFC8307"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Exposed through the X-ray mask"
+			tasks: [
+				{ id: "376F236CFBA71666", item: "grindless:pmma_coated_wafer", optional_task: true, type: "item" }
+				{ id: "71228CAC5F12E94F", type: "checkmark" }
+			]
+			title: "PMMA Wafer"
+			x: 75.75d
+			y: 33.0d
+		}
+		{
+			icon: "gtca:proton"
+			id: "3B49BD228435262C"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "From the COMET"
+			tasks: [
+				{ id: "3DE3731AF12ABFE6", item: "gtca:proton", optional_task: true, type: "item" }
+				{ id: "348BEA0CFB702AB0", type: "checkmark" }
+			]
+			title: "Protons"
+			x: 76.5d
+			y: 34.25d
+		}
+		{
+			dependencies: ["1E76B321FEFC8307", "3B49BD228435262C"]
+			description: ["Bends a beam into X-rays for lithography, and knocks antiprotons off a target."]
+			icon: "gtceu:synchrotron"
+			id: "3F493BFC69CE398E"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3845E9BB03C534B3", item: "gtceu:synchrotron", optional_task: true, type: "item" }
+				{ id: "77655C4B903DC77A", type: "checkmark" }
+			]
+			title: "Synchrotron"
+			x: 78.25d
+			y: 31.5d
+		}
+		{
+			dependencies: ["3F493BFC69CE398E"]
+			icon: "grindless:exposed_wafer"
+			id: "3F12FE591EEA56EE"
+			size: 1.25d
+			subtitle: "Developed and finished in the same ring"
+			tasks: [
+				{ id: "7D5C0FA0E65F6E15", item: "grindless:exposed_wafer", optional_task: true, type: "item" }
+				{ id: "337D8AA40FD242AA", type: "checkmark" }
+			]
+			title: "Exposed Wafer"
+			x: 78.75d
+			y: 29.0d
+		}
+		{
+			dependencies: ["3F12FE591EEA56EE"]
+			icon: "grindless:photonic_chip"
+			id: "78647DFC80A8F762"
+			size: 1.25d
+			tasks: [
+				{ id: "397999CE2EEED072", item: "grindless:photonic_chip", optional_task: true, type: "item" }
+				{ id: "1245A04233DBA999", type: "checkmark" }
+			]
+			title: "Photonic Chip"
+			x: 80.75d
+			y: 28.25d
+		}
+		{
+			dependencies: ["3F493BFC69CE398E"]
+			icon: "grindless:antiproton_cartridge"
+			id: "73BC62AD5BA0017B"
+			size: 1.25d
+			tasks: [
+				{ id: "125E66A5BD7291E1", item: "grindless:antiproton_cartridge", optional_task: true, type: "item" }
+				{ id: "5EDB65D1B072BB13", type: "checkmark" }
+			]
+			title: "Antiproton Cartridge"
+			x: 80.75d
+			y: 35.0d
+		}
+		{
+			dependencies: ["73BC62AD5BA0017B"]
+			description: ["Stacks the cartridges into one bottle; the empties go back to the synchrotron."]
+			icon: "gtceu:antimatter_trap"
+			id: "50BABCF9072CBE65"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7EA14802871EF2DE", item: "gtceu:antimatter_trap", optional_task: true, type: "item" }
+				{ id: "3D21C77D66F0FBF1", type: "checkmark" }
+			]
+			title: "Antimatter Trap"
+			x: 83.25d
+			y: 34.5d
+		}
+		{
+			dependencies: ["50BABCF9072CBE65"]
+			icon: "grindless:antiproton_trap"
+			id: "5B93BC6143D6D2DF"
+			size: 1.25d
+			tasks: [
+				{ id: "5B0DD08105055C7F", item: "grindless:antiproton_trap", optional_task: true, type: "item" }
+				{ id: "1EC5AE16585F2D13", type: "checkmark" }
+			]
+			title: "Antiproton Trap"
+			x: 87.0d
+			y: 35.5d
+		}
+		{
+			dependencies: ["5B93BC6143D6D2DF"]
+			icon: "grindless:ican_pellet"
+			id: "3EFF726F9BCF1AD6"
+			size: 1.25d
+			subtitle: "Four per heliopause run"
+			tasks: [
+				{ id: "5F2298A1518D0FC1", item: "grindless:ican_pellet", optional_task: true, type: "item" }
+				{ id: "580B381DE1112AA8", type: "checkmark" }
+			]
+			title: "ICAN Pellet"
+			x: 89.25d
+			y: 39.0d
+		}
+		{
+			icon: "grindless:nv_diamond_chip"
+			id: "75B27C986019D15C"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Ion-implanted CVD diamond"
+			tasks: [
+				{ id: "35A042FFC49C64AD", item: "grindless:nv_diamond_chip", optional_task: true, type: "item" }
+				{ id: "773581D0E7FF8298", type: "checkmark" }
+			]
+			title: "NV Diamond Chip"
+			x: 83.25d
+			y: 27.25d
+		}
+		{
+			icon: "gtceu:neutronium_wafer"
+			id: "318F2CDAB746FE88"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "1F9420607A512ED9", item: "gtceu:neutronium_wafer", optional_task: true, type: "item" }
+				{ id: "12C2ADF2504A7ACC", type: "checkmark" }
+			]
+			title: "Neutronium Wafer"
+			x: 81.25d
+			y: 29.75d
+		}
+		{
+			dependencies: ["78647DFC80A8F762", "75B27C986019D15C", "1A554317A11FB074", "318F2CDAB746FE88"]
+			description: ["Bonds a photonic chip, a diamond sensor, an americium source and a neutronium wafer into one starchip."]
+			icon: "gtceu:starchip_fab"
+			id: "7B284661BA05367D"
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "13C6352A6DC9009C", item: "gtceu:starchip_fab", optional_task: true, type: "item" }
+				{ id: "7F88950CFCFC6C68", type: "checkmark" }
+			]
+			title: "Starchip Fab"
+			x: 85.25d
+			y: 28.0d
+		}
+		{
+			dependencies: ["7B284661BA05367D"]
+			icon: "grindless:starchip"
+			id: "5E62AB00D97F5F31"
+			size: 1.25d
+			tasks: [
+				{ id: "176B13DFA0334300", item: "grindless:starchip", optional_task: true, type: "item" }
+				{ id: "3B8CFB797A90F694", type: "checkmark" }
+			]
+			title: "Starchip"
+			x: 89.75d
+			y: 29.75d
+		}
+		{
+			dependencies: ["5E62AB00D97F5F31"]
+			icon: "grindless:relay_seed"
+			id: "17745B0A5CEA91FF"
+			size: 1.25d
+			tasks: [
+				{ id: "1F891996DF87F456", item: "grindless:relay_seed", optional_task: true, type: "item" }
+				{ id: "5628BF644B2C6705", type: "checkmark" }
+			]
+			title: "Relay Seed"
+			x: 92.5d
+			y: 30.5d
+		}
+		{
+			dependencies: ["5E62AB00D97F5F31", "75DF7E9F37652BC6"]
+			icon: "grindless:sailcraft"
+			id: "1AA902DA00F9AFB4"
+			size: 1.25d
+			tasks: [
+				{ id: "7983341175E4196A", item: "grindless:sailcraft", optional_task: true, type: "item" }
+				{ id: "153BFC6F92DF2BB3", type: "checkmark" }
+			]
+			title: "Sailcraft"
+			x: 91.5d
+			y: 33.5d
+		}
+		{
+			dependencies: ["56DD2E47CDE2F080", "1888818E1D8EEBCF", "7D31CF07942D4D25"]
+			icon: "grindless:precursor_probe"
+			id: "77742379B377D9B8"
+			size: 1.25d
+			subtitle: "Built with a UV sensor and a printed frame"
+			tasks: [
+				{ id: "71E73E8D311ED236", item: "grindless:precursor_probe", optional_task: true, type: "item" }
+				{ id: "3D6A586AF1E099DF", type: "checkmark" }
+			]
+			title: "Precursor Probe"
+			x: 90.0d
+			y: 40.5d
+		}
+		{
+			dependencies: ["77742379B377D9B8", "3EFF726F9BCF1AD6"]
+			icon: "grindless:heliopause_data"
+			id: "37565FD4507A4CAD"
+			size: 1.25d
+			subtitle: "Six thousand ticks at Pluto's orbit"
+			tasks: [
+				{ id: "1125B42A410F52E8", item: "grindless:heliopause_data", optional_task: true, type: "item" }
+				{ id: "78DCFDC5FB0AB57D", type: "checkmark" }
+			]
+			title: "Heliopause Data"
+			x: 91.0d
+			y: 39.0d
+		}
+		{
+			dependencies: ["1AA902DA00F9AFB4", "37565FD4507A4CAD", "37F5978B0FE9F68C"]
+			icon: "grindless:starshot_probe"
+			id: "54563CBB8AE25F24"
+			size: 1.25d
+			subtitle: "Launched from the Moon"
+			tasks: [
+				{ id: "1952A6E63FDCF8E3", item: "grindless:starshot_probe", optional_task: true, type: "item" }
+				{ id: "7DF54BA9DBFDA421", type: "checkmark" }
+			]
+			title: "Starshot Probe"
+			x: 94.75d
+			y: 36.25d
+		}
+		{
+			dependencies: ["1AA902DA00F9AFB4"]
+			icon: "grindless:spent_laser_module"
+			id: "1E4A497B7D3A6A0D"
+			shape: "circle"
+			size: 0.75d
+			subtitle: "Refurbished in the fibre draw tower"
+			tasks: [
+				{ id: "18429AC347105671", item: "grindless:spent_laser_module", optional_task: true, type: "item" }
+				{ id: "5E8B8BFF22C9F3AA", type: "checkmark" }
+			]
+			title: "Spent Laser Module"
+			x: 93.75d
+			y: 30.5d
+		}
+		{
+			dependencies: ["54563CBB8AE25F24", "308DBAD22E60AB39"]
+			icon: "grindless:proxima_approach_data"
+			id: "32DBD334268FC245"
+			size: 1.25d
+			tasks: [
+				{ id: "158765AF2305BE49", item: "grindless:proxima_approach_data", optional_task: true, type: "item" }
+				{ id: "37794A9C48A6DC0D", type: "checkmark" }
+			]
+			title: "Proxima Approach Data"
+			x: 97.75d
+			y: 32.25d
+		}
+		{
+			icon: "grindless:fibre_laser_module"
+			id: "37F5978B0FE9F68C"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Made in the fibre laser line"
+			tasks: [
+				{ id: "75AC769E1E5BE3BF", item: "grindless:fibre_laser_module", optional_task: true, type: "item" }
+				{ id: "7BA7C0400036BB34", type: "checkmark" }
+			]
+			title: "Fibre Laser Module"
+			x: 90.0d
+			y: 37.25d
+		}
+		{
+			icon: "grindless:americium_micro_source"
+			id: "1A554317A11FB074"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Sealed in the heat source works"
+			tasks: [
+				{ id: "5213C8490D78BDA5", item: "grindless:americium_micro_source", optional_task: true, type: "item" }
+				{ id: "5079B668F01E012C", type: "checkmark" }
+			]
+			title: "Americium Micro-Source"
+			x: 82.5d
+			y: 31.0d
+		}
+		{
+			icon: "grindless:probe_rtg"
+			id: "56DD2E47CDE2F080"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Built in the heat source works"
+			tasks: [
+				{ id: "5D09DDC512F5278E", item: "grindless:probe_rtg", optional_task: true, type: "item" }
+				{ id: "386786D14849F887", type: "checkmark" }
+			]
+			title: "Probe RTG"
+			x: 86.0d
+			y: 37.75d
+		}
+		{
+			icon: "grindless:thruster_pod"
+			id: "1888818E1D8EEBCF"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Fitted in the thruster works"
+			tasks: [
+				{ id: "5B320407167A28A8", item: "grindless:thruster_pod", optional_task: true, type: "item" }
+				{ id: "3E12C96F38C59E0C", type: "checkmark" }
+			]
+			title: "Thruster Pod"
+			x: 86.25d
+			y: 40.0d
+		}
+		{
+			icon: "grindless:hpge_crystal"
+			id: "7D31CF07942D4D25"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Grown in the zone refining tower"
+			tasks: [
+				{ id: "1177991916266F1D", item: "grindless:hpge_crystal", optional_task: true, type: "item" }
+				{ id: "59986914F9677BDB", type: "checkmark" }
+			]
+			title: "HPGe Crystal"
+			x: 88.25d
+			y: 42.0d
+		}
+		{
+			icon: "grindless:light_sail"
+			id: "75DF7E9F37652BC6"
+			shape: "rsquare"
+			size: 1.0d
+			subtitle: "Released in the light sail fab"
+			tasks: [
+				{ id: "31660189F5F531A2", item: "grindless:light_sail", optional_task: true, type: "item" }
+				{ id: "3872AB66800F3335", type: "checkmark" }
+			]
+			title: "Light Sail"
+			x: 88.5d
+			y: 31.25d
 		}
 	]
-	subtitle: ["Thorium and nitrogen-15, superfluid helium and its beams, laser fusion fuel and fibre lasers, and the ices of Pluto and the Kuiper belt."]
+	subtitle: ["Thorium and nitrogen-15, superfluid helium, laser fusion fuel and fibre lasers, the ices of Pluto and closed life, EnTED wire, and the Starshot programme with the Kuiper belt."]
 	title: "UV Lines"
 }
