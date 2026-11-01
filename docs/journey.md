@@ -1,6 +1,6 @@
 # Gregtech Grindless: the journey to the black hole
 
-The user approved this table on 2026-10-24, with the changes in the last section. It is the pack's guide. Each era is designed in detail when we reach it, in `docs/eras/`. **Revised 2026-10-31 (Project Reforge, owner decision):** the mirror shell no longer bursts the black hole; it stabilises Sagittarius A\*'s horizon and opens MAX+, which ends beyond the Hyperstargate (the MAX row and *The end*).
+The user approved this table on 2026-10-24, with the changes in the last section. It is the pack's guide. Each era is designed in detail when we reach it, in `docs/eras/`. **Revised 2026-10-31 and 2026-11-01 (Project Reforge, owner decision, DECISIONS.md:702; RF-7A):** the mirror shell no longer bursts the black hole; its last recipe stabilises Sagittarius A\*'s horizon and makes `horizon_lock`, the key MAX+ needs. MAX+ (`docs/eras/maxplus.md`) leaves the Galaxy, builds the Hyperstargate and ends the pack beyond it (the MAX and MAX+ rows and *The end*).
 
 The supporting research is in `docs/research/space/`:
 - the `grindless-earlygame` campaign (`grindless-campaign.md`);
@@ -11,7 +11,7 @@ The supporting research is in `docs/research/space/`:
 
 ## How Grindless and GregTech fit together
 
-- **Energy.** Grindless climbs with `8 × 4ⁿ`, which is exactly GT's voltage ladder: T0 = steam/ULV … T14 = MAX. Its T15 (8,590 million per tick) does not exist in GT. The endgame (MAX, then MAX+) runs on several amps of MAX (4 A of MAX = T15); no fake voltage is invented.
+- **Energy.** Grindless climbs with `8 × 4ⁿ`, which is exactly GT's voltage ladder: T0 = steam/ULV … T14 = MAX. Its T15 (8,590 million per tick) does not exist in GT: GTM 7.5.3's voltage table and tier list end at MAX (GTValues.java:60-61, :107-108). The endgame (MAX, then MAX+) runs on several amps of MAX (4 A of MAX = T15; MAX+'s Hyperstargate dials on 4,096 A); no fake voltage is invented.
 - **Industry.** Grindless's T0–T9 topics map 1:1 onto Steam Age–UHV, and they are exactly what GT provides there:
 
   | Grindless topic | GT era |
@@ -31,7 +31,7 @@ The supporting research is in `docs/research/space/`:
   | Stellar and Kardashev II (T12) | UV–UHV |
   | Interstellar (T13) | UEV–UXV |
   | Galactic and Kardashev III (T14) | OpV |
-  | Event horizon (T15) | MAX |
+  | Event horizon (T15) | MAX; beyond the Galaxy, MAX+ |
 
 ## The table
 
@@ -51,7 +51,8 @@ The supporting research is in `docs/research/space/`:
 | **UIV** (T11) | neutron stars, pulsars and the first black hole, Cygnus X-1 | neutronium, r-process metals | Penrose engine (test with a black hole), Matrioshka computer | UXV |
 | **UXV** (T12) | the galactic arm: many systems at once | stellar plasma, accretion disk plasma | stellar elevator, accretion disk skimmer | OpV |
 | **OpV** (T13) | the galactic bulge | industrial antimatter, stable exotic matter | Kugelblitz forge (micro black holes made of light), probes that replicate on their own. **Kardashev III** | MAX |
-| **MAX** (T14–T15) | **Sagittarius A\***, the center of the galaxy | — | **the mirror shell**: the largest multiblock before MAX+. It surrounds the black hole and uses a spin-amplified wave to stabilise its horizon | **MAX+** (2026-10-31): intergalactic travel, extraordinary materials, creative items crafted at enormous cost and the Hyperstargate, the only way through that horizon. Beyond it lies the final dimension, where the credits roll (*The end*) |
+| **MAX** (T14–T15) | **Sagittarius A\***, the center of the galaxy, and the nuclear star cluster's belt | hot flow, spin and horizon work at Sgr A\*; metal-rich planetesimals | **the mirror shell**, the largest multiblock of MAX: it surrounds the black hole and uses a spin-amplified wave to stabilise its horizon; with it the horizon interferometer, the ergoregion synchroniser, the flux clamp and the segment reclamation works (14 own multiblocks, `docs/eras/max.md`) | **MAX+**: the last recipe makes `horizon_lock`, the key MAX+ needs |
+| **MAX+** (MAX voltage, huge amperage) | **out of the Galaxy**: the Large Magellanic Cloud (30 Doradus), the Magellanic Stream, Andromeda's nucleus and the intergalactic filament between them; then back to Sgr A\* | Kerr condensate (from the stabilised horizon), very-massive-star plasma and nickel-56, primordial deuterium and helium-3, photonuclear isotopes, void-grown crystals | Hills slingshot, condensate refinery and bound-matter press, stellar lift and pair-instability crucible, primordial fusion torus, blueshift forge, void crystal fab, the Hyperstargate's tree (meta-material loom, plasma blender, crystal furnace, condensate assembler, capacitor bank, hyper assembly array) and **the Hyperstargate** (17 own multiblocks, `docs/eras/maxplus.md`); creative items crafted at enormous cost as its ingredients | **the end**: the Hyperstargate crosses the stabilised horizon into a final dimension of ruined futuristic cities, where the credits roll (*The end*) |
 
 The exact materials for each row are set when each era is designed. What is approved here is the general shape.
 
@@ -90,8 +91,7 @@ Today HV opens the End and, with the Moon, it would open two places. Proposal: *
   - With radiation, shielded casings are needed.
   - Solar power depends on the light (Mercury ×6.7, Moon ×1.4, Earth orbit ×1.4 with no night, Mars ×0.43, the asteroid belt ×0.19, Jupiter's moons ×0.052). One table, `tables/sunlight.json`, holds the factors.
 - **Power on site.**
-  - Solar.
-  - Local fuels: methane and oxygen on Mars, heat on Venus, volcanoes on Io.
+  - Solar, and local fuels: methane and oxygen on Mars, heat on Venus, volcanoes on Io.
   - RTG batteries.
   - From LuV on, the orbital solar station, Io's volcanic intake and Jupiter's tether feed the global wireless network, and every base draws from it.
 - **Transport (user's decision).**
@@ -107,7 +107,7 @@ Today HV opens the End and, with the Moon, it would open two places. Proposal: *
 2. **Connected automatic bases:** EV–LuV.
 3. **Orbital stations that exploit without landing:** LuV–UV.
 4. **Industry the size of a star or a system:** UHV–OpV (Dyson, stellar forge, stellar elevator; Kardashev II and III).
-5. **The black hole project:** MAX stabilises the horizon; MAX+ travels between galaxies and builds the Hyperstargate to cross it.
+5. **The black hole project:** MAX stabilises the horizon; MAX+ travels between galaxies, brings their materials home and builds the Hyperstargate to cross it.
 
 ## The end
 
@@ -118,12 +118,12 @@ It is a single project in five stages (the fifth added 2026-10-31), and each one
 | UIV | Penrose engine | Test on a stellar black hole: extracts energy from its spin. |
 | UXV | Disk skimmer | Turns accretion disk plasma into exotic matter. |
 | OpV | Kugelblitz forge | Makes micro black holes from light, which must be contained. |
-| MAX | Mirror shell | Surrounds Sagittarius A\* and uses a spin-amplified wave to stabilise the hole's horizon. It is the largest multiblock before MAX+. |
-| MAX+ | Hyperstargate | The final multiblock and the only feasible way through the stabilised horizon: the GTNH Stargate process at about 10× scale, on huge MAX amperage, with creative items crafted at enormous cost among its ingredients. |
+| MAX | Mirror shell | Surrounds Sagittarius A\* and pumps a spin-amplified wave into a stationary cloud, which holds the hole's horizon still. It is the largest multiblock of MAX. |
+| MAX+ | Hyperstargate | The final multiblock and the only feasible way through the stabilised horizon: the GTNH Stargate process at about 10× scale (1,212 grid crafts), on huge MAX amperage, with creative items crafted at enormous cost among its ingredients. |
 
-- **The final recipes.** MAX's last recipe asks for the stored energy, the seed wave from the forge and every segment in place; it stabilises the horizon instead of bursting the hole and makes the key output MAX+ needs. Crossing the Hyperstargate leads to a final dimension of ruined futuristic cities, with monumental architecture, a striking skyline and a mysterious atmosphere, and no mechanics, research or blueprints inside. Arriving rolls the credits, with the epilogue and the ending text, and ends the pack.
-- **Where:** GCYR ships the `black_hole_orbit` dimension with a black hole sky and nothing that leads to it. It is the perfect place.
-- **What has to be prepared first:** the pattern helper (16 rows today) has to accept much larger structures.
+- **The final recipes.** MAX's last recipe asks for the stored energy, seed waves from the forge, every segment in place, and the phase locks, flux clamps and cloud map of its four stabilisation machines; it stabilises the horizon instead of bursting the hole and makes `horizon_lock`, the key output MAX+ needs (twelve of them: the gate out of the Galaxy, the condensate tap and the Hyperstargate's dial keep one each, its nine chevrons consume one each). The Hyperstargate's dial consumes the gene ark's genome archive, the one thing that crosses with the player. Crossing it leads to a final dimension of ruined futuristic cities, with monumental architecture, a striking skyline and a mysterious atmosphere, and no mechanics, research or blueprints inside. Arriving rolls the credits, with the epilogue and the ending text, and ends the pack. Nothing changes game mode, and the world goes on.
+- **Where:** GCYR ships the `black_hole_orbit` dimension with a black hole sky and nothing that leads to it. It is the perfect place, for the shell and for the Hyperstargate.
+- **What has to be prepared first:** the pattern helper (16 rows before MAX, 64 since) accepts the shell and the Hyperstargate.
 
 ## The families change shape and parts, not just color
 
@@ -151,11 +151,11 @@ It is a single project in five stages (the fifth added 2026-10-31), and each one
   4. deep-space antenna;
   5. interferometer;
   6. gravitational-wave detector;
-  7. the telescope that photographs Sagittarius A\*, which supplies the data for the final goal.
+  7. the telescope that photographs Sagittarius A\*, which supplies the data for the final goal; then the horizon interferometer, which hears the stabilised cloud round it (MAX).
 
 ## Quests
 
-In English, one chapter per era. Each chapter tells the step that brings you closer to the center of the galaxy. It opens with what is seen from the observatory and closes with the next journey. Never promise a multiblock that doesn't exist yet.
+In English. Each era tells the step that brings you closer to the center of the galaxy, and then beyond it. It opens with what is seen from the observatory and closes with the next journey. Never promise a multiblock that doesn't exist yet. Since 2026-10-31 (Reforge rule 5) advanced eras get several longer chapters that teach every new wafer, circuit, process and multiblock; MAX+ ends on the arrival quest.
 
 ## What other packs do
 
@@ -170,7 +170,7 @@ In English, one chapter per era. Each chapter tells the step that brings you clo
   - **Planets:** 8 rockets, each planet with its own fluid.
   - **Exploitation without going back:** space center with drones that don't wear out.
   - **Cosmic:** Dyson sphere and Eye of Harmony.
-  - **The ending:** MAX ends in "creative mode", a dull ending; it has to be avoided.
+  - **The ending:** MAX ends in "creative mode", a dull ending; it has to be avoided. MAX+ crafts creative items only as Hyperstargate ingredients that cannot be placed, and its ending is a place, not a game-mode change (DECISIONS.md:102 superseded for those items only).
   - **Absurd quantities:** machines with millions of parallels.
   - **License:** contradictory; ideas only.
 - **Star Technology:**
