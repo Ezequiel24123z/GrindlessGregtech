@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 // A link:    L(key, x, y, 'pl_lv:acid'): a quest link to a node of an earlier chapter; this chapter's nodes depend on it by key.
 // An era link: E(key, x, y, 'lv_age', '<quest id>'): a link to a quest of a hand-written chapter; an arrow out of it says "that
 //            quest introduces this", and the checker wants this node's item among that quest's tasks or its icon. The chapter
-//            is a hint: the link resolves to whichever era chapter holds the id (eraChapterOf).
+//            is a hint: the link resolves to the era chapter that holds the id (eraChapterOf), and keeps the hint if none does.
 // Power tab (power-data.mjs): figs: [P.single(32), P.fuel(...), ...] are the node's numbers. The generator writes them into the
 //            subtitle and description, and the checker recomputes every one from the dump, the pack's config or a script.
 export const KINDS = {
@@ -60,8 +60,8 @@ export function L(key, x, y, ref, opts = {}) {
   return { key, x, y, link: ref, kind: 'link', from: [], ...opts };
 }
 
-// The chapter that holds a quest id. `hint` is the chapter the data file names: it wins while it still holds the id; otherwise
-// the era chapters of the book (or of GG_QUESTS_ERA_DIR, as in pl-model.mjs) are searched, because quests move between an era's
+// The chapter that holds a quest id. `hint` is the chapter the data file names; the era chapters of the book (or of
+// GG_QUESTS_ERA_DIR, as in pl-model.mjs) are searched, because quests move between an era's
 // chapters (docs/reforge/05_quest_design.md, section 4.2: the era seed keeps the id). Charts and Power never link a chart.
 const BOOK_CHAPTERS = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'pack', 'config', 'ftbquests', 'quests', 'chapters');
 const NOT_ERA = /^(pl_|power\.|multiblocks\.)/;
