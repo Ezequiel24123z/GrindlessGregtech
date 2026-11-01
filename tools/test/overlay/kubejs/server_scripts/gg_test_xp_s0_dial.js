@@ -157,6 +157,12 @@
   }
   function hatchStored() { return Number(hatchContainer().getEnergyStored()) }
   function whole(n) { return typeof n === 'number' && n % 1 === 0 }
+  // a long tag's digits: getAsString gives the SNBT form, 123L
+  function digitsOf(tag) {
+    var s = ''
+    try { s = String(tag.getAsString()) } catch (e) { s = String(tag) }
+    return s.replace(/L$/, '')
+  }
   function exactPositive(n) { return whole(n) && n > 0 && n <= SAFE }
   function setBus(p, id) {
     var st = p.getInventory().storage
@@ -381,9 +387,10 @@
     S.runTick = 0
     S.eutDone = false
     S.doneAt = -1
-    // from here on the pack's own timed settlement runs every settleTicks
+    // from here on the pack's own timed settlement runs every settleTicks; the run is sampled every tick from the next one
     w.paused = false
     S.step = 1
+    S.nextAt = S.server.getTickCount() + 1
     S.phase = 'run'
     note('RUN', 'catalyst in, timed settlements on; store ' + S.storeStart + ', hatch ' + S.hatchStart + ', store + hatch ' + S.T0)
   }
@@ -474,8 +481,7 @@
     var notExact = vals.filter(function (v) { return !exactPositive(v) })
     var tagDigits = ''
     try {
-      var tag = S.server.persistentData.get(w.storeKey)
-      try { tagDigits = String(tag.getAsString()) } catch (e1) { tagDigits = String(tag).replace(/L$/, '') }
+      tagDigits = digitsOf(S.server.persistentData.get(w.storeKey))
     } catch (e) { tagDigits = 'unreadable (' + e + ')' }
     var books = S.T0 - (sEnd + hEnd) === drawn && STORE0 - S.prefilled - given === sEnd && S.hatchStart + given - drawn === hEnd && drawn === drops.length * DIAL
     check('exact', notExact.length === 0 && books && tagDigits === String(sEnd),
@@ -498,9 +504,7 @@
       var big = new BI('9007199254740993')
       parts.push('BigInteger ' + String(big.toString()))
       pd.putLong(KEY, big.longValue())
-      var tag = pd.get(KEY)
-      var back = ''
-      try { back = String(tag.getAsString()) } catch (e1) { back = String(tag).replace(/L$/, '') }
+      var back = digitsOf(pd.get(KEY))
       parts.push('putLong(longValue()) stored ' + back + (back === '9007199254740993' ? ' (exact)' : ' (rounded)'))
       var js = Number(pd.getLong(KEY))
       parts.push('Number(getLong) reads ' + String(js) + (String(js) === '9007199254740993' ? ' (exact)' : ' (rounded: a double above 2^53 is even)'))
