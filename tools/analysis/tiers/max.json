@@ -237,10 +237,11 @@
         "grindless:frc_forming/load_flux_frc",
         "grindless:blandford_znajek/frc_spin_down",
         "grindless:plasma_mass_filtering/hot_flow_filter",
-        "grindless:plasma_mass_filtering/cooled_exhaust_return"
+        "grindless:plasma_mass_filtering/cooled_exhaust_return",
+        "grindless:plasma_mass_filtering/reconnection_plasmoid_return"
       ],
       "package": ["B2", "B3"],
-      "note": "As built (see uxv.json). The five MAX rows (hot flow skim, flux-loaded FRC, spin-down, hot-flow filter, cooled exhaust return) are MAX's older-machine rows at Sgr A* orbit (site-max-sgra-older-rows)."
+      "note": "As built (see uxv.json). The six MAX rows (hot flow skim, flux-loaded FRC, spin-down, hot-flow filter, cooled exhaust return, and MX-S3's reconnection plasmoid return) are MAX's older-machine rows at Sgr A* orbit (site-max-sgra-older-rows)."
     },
     {
       "id": "site-vela",
