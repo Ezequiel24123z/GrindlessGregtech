@@ -326,7 +326,7 @@ export default {
     beuv: {
       name: 'BEUV driver ASIC',
       nodes: rows([], () => [
-        L('b13_hfo', 0, 0, 'pl_uev:hfo'),
+        L('b13_hfo', -2.5, 1, 'pl_uev:hfo'),
         ...chain(1, [
           ['b13_0', I('grindless:hfo2_resist_wafer'), 'Hfo2 Resist Wafer', 'product', { from: ['b13_hfo'] }],
           ['b13_1', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
