@@ -4,8 +4,8 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 
 | Script | What it does |
 |---|---|
-| `Era.Lib.ps1` | Era styles (shape, wear, trim, panel lines, tone targets), the finish pass hooked into `Save-Png` and the shared component body. Applied to OpV and MAX. |
-| `Pixel.Lib.ps1` | Shared library: ARGB canvas, palettes (character → color), text maps, selective outline, deterministic PNG writer (only `IHDR`, `IDAT` and `IEND`, deflate without compression) and `.png.mcmeta`. |
+| `Era.Lib.ps1` | Era styles (shape, wear, trim, panel lines, tone targets), the finish pass hooked into `Save-Png` and the shared component body. Applied to OpV, MAX and MAX+. |
+| `Build-MaxPlusTextures.ps1` | Writes the textures of every MAX+ item and the six MAX+ casings (XP-V1) in the MAX+ era style, reading the lists from `maxplus/foundation.js`. `-Credits`, `-Preview`. || `Pixel.Lib.ps1` | Shared library: ARGB canvas, palettes (character → color), text maps, selective outline, deterministic PNG writer (only `IHDR`, `IDAT` and `IEND`, deflate without compression) and `.png.mcmeta`. |
 | `Build-SteamTextures.ps1` | Writes the steam era textures to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-SteamPreview.ps1` | Review sheet at x8 with the casings, the frames and the items. It is only a preview: it is not published. |
 | `Build-SteamContentTextures.ps1` | Writes the faces of the steam blast furnace and the coke battery (steam era, journey plan) to `pack/kubejs/assets/grindless/textures/`. |
@@ -1691,6 +1691,16 @@ Procedural, drawn by `Build-MaxFoundationTextures.ps1` with the shape routines o
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxFoundationTextures.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxFoundationTextures.ps1 -Credits
+```
+
+## MAX+ items and casings (XP-V1)
+
+Procedural, drawn by `Build-MaxPlusTextures.ps1` on the shared component body of `Era.Lib.ps1` in the `maxplus` era style (fiction: kerr condensate and the stationary horizon): violet-black bodies, lens-rounded silhouettes (`Shape = 'lens'`), a hot amber halo on the lit rim (`Trim = 'halo'`), ember motes (`Wear = 'ember-mote'`) and one orbiting bead (`Panel = 'orbit'`); the style only adds keywords, so no other era changes. It writes `item/<id>.png` for every item that `startup_scripts/grindless/maxplus/foundation.js` registers (COMPONENTS, UNIQUE, CIRCUITS, STANDINS and LINE_ITEMS are read from the script, so a new item needs no table here) and the six casings `block/maxplus/<name>.png`. The body kind comes from the words of the name (wafer: card, dust: heap, ingot: bar, cell: vial, core: orb...). The materials need no PNG (GregTech draws them from their colour). Controllers' faces are a later part.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxPlusTextures.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxPlusTextures.ps1 -Credits
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MaxPlusTextures.ps1 -Preview C:\temp\maxplus-preview.png
 ```
 
 ## MAX wireless tier (MAX-W)
