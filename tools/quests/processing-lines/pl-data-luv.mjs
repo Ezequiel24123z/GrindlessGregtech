@@ -239,10 +239,10 @@ export default {
         n('whipple', 14, -0.75, I('grindless:whipple_shield_casing'), 'Whipple Shield Casing', {
           from: ['smelter'], role: 'infrastructure', sub: 'The wake shield\'s hull',
         }),
-        n('osm', 9, 3.75, I('gtceu:osmiridium_dust'), 'Osmiridium Dust', { kind: 'raw' }),
+        n('osm2', 9, 3.75, I('gtceu:osmiridium_dust'), 'Osmiridium Dust', { kind: 'raw' }),
         n('trd', 9, 5.25, I('gtceu:trinium_dust'), 'Trinium Dust', { kind: 'raw' }),
         n('smelter2', 11.5, 3.75, M('gtceu:microgravity_smelter', 'gtceu:microgravity_processing'), 'Microgravity Smelter', {
-          kind: 'ours', from: ['nqdust', 'osm', 'trd'], sub: 'The alloy skips the coil and the liquid helium',
+          kind: 'ours', from: ['nqdust', 'osm2', 'trd'], sub: 'The alloy skips the coil and the liquid helium',
         }),
         n('nqa', 14, 3.75, I('gtceu:naquadah_alloy_ingot'), 'Naquadah Alloy', {
           kind: 'product', from: ['smelter2'], extends: 'pl_luv:naquadah', sub: 'Comes out cold; ZPM wants it',
