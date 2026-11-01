@@ -714,6 +714,8 @@ Steps are the items between arrows, counted as UHV's. Every line ends in a UEV p
 
 Chart merges (RF-3P1, `pl-data-uev.mjs`; the recipes are unchanged): the Pu-244 target (2) feeds the flerovium atoms in one chain, with the membrane (6) into the recoil separator; the SX blade (12) runs through the heat treatment and bond coat into the YSZ coating (33) and the turbine wheel; the Wf/W divertor (17) starts at tungsten dust; the SiN chip (21) runs on into the waveguide circuit and the optical computer; ammonia borane (8) is drawn into the superhydride ingot; Li-6 (29) and K-40 (30) meet in one EOS model. Short by design: the Cf-249 wheel, the EOS model, polarised D–He-3 fuel and Barnard iron pentacarbonyl.
 
+Crossings (RF-3P2): nine lines gain one real input from UV or earlier, never lowering a cost: the calcium-48 beam keeps an SRF cryomodule (UV; kept in the assembler); the tennessine sample takes a silica aerogel (ZPM) as catcher; the HfTaCN coil block takes two URhNq₂ wires (ZPM) as leads; the SNSPD takes an optical pipe (LuV) as pigtail; the hBN emitter chip takes an InGaAs pump module and the graphene modulator a ytterbium fibre (UV); the SPDC source takes a photonic chip (UV); the CNT coiled muscle takes a superconducting coil (LuV); the ULE cavity takes a sapphire test mass (LuV) as reference. The electroded KTP wafer stays isolated (no free chart slot for a link within the row rules; one more recipe line is left for a later package). Chart roles: the Fe-60 record and the flerovium atoms are research, the aerogel tile and the superhydride ingot are infrastructure. Every consumed input is an automated product of its own line, and no new byproduct appears.
+
 **Totals:** 40 lines, 295 steps, an average of 7.4, none under 6.
 
 **Weakest claims:**
