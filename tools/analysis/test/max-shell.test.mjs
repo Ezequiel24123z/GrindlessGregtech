@@ -50,22 +50,23 @@ test('c2 is a consumer at VA[MAX] for 1,200 t', () => {
 });
 
 test('c3 is the only recipe of the pack above VA[MAX]: 2^35 EU/t for 1,200 t, V[MAX] x 16 in the source', () => {
-  const r = find('grindless:black_hole_bomb/universe_seed');
+  const r = find('grindless:black_hole_bomb/horizon_lock');
   assert.ok(r);
   assert.equal(euIn(r), V_MAX * 16);
   assert.equal(euIn(r), 2 ** 35);
   const s = JSON.stringify(r.j);
-  assert.match(s, /universe_seed/);
-  assert.match(s, /mirror_shell_scrap/);
+  assert.match(s, /horizon_lock/);
   assert.match(s, /spent_rydberg_array/);
+  assert.match(s, /spent_phase_lock/);
+  assert.doesNotMatch(s, /universe_seed|mirror_shell_scrap/);
   const src = read(kube, 'server_scripts', 'grindless', 'max', 'shell.js');
   assert.match(src, /V_MAX \* 16/);
   assert.doesNotMatch(src, /34359738368/);
-  assert.match(src, /duration: 1200,\s*\n?\s*items: \['1x grindless:seed_wave_packet', '1x grindless:genome_archive', '16x grindless:stream_bundle'/);
+  assert.match(src, /duration: 1200,\s*\n?\s*items: \['4x grindless:seed_wave_packet', '64x grindless:stream_bundle', '1x grindless:final_spin_map', '1x grindless:cloud_phase_map',\s*\n?\s*'16x grindless:horizon_phase_lock', '8x grindless:horizon_flux_clamp', '1x grindless:rydberg_logic_array'\]/);
 });
 
 test('c3 is above the other two shell rows and the source keeps V[MAX] x 16', () => {
-  const c3 = euIn(find('grindless:black_hole_bomb/universe_seed'));
+  const c3 = euIn(find('grindless:black_hole_bomb/horizon_lock'));
   assert.ok(c3 > euIn(find('grindless:black_hole_bomb/final_spin_map')));
   assert.ok(c3 > euOut(find('grindless:black_hole_bomb/vent_wave_packet')));
 });
@@ -77,7 +78,7 @@ test('the controller recipe is an assembly line with MAX circuits, a hull and at
   assert.match(s, /max_machine_hull/);
   assert.match(s, /circuits\/max/);
   assert.ok(Number((s.match(/"EUt":\s*(\d+)/) || [0, 0])[1]) <= VA_MAX);
-  for (const banned of ['seed_wave_packet', 'final_spin_map', 'universe_seed']) assert.doesNotMatch(s, new RegExp(banned));
+  for (const banned of ['seed_wave_packet', 'final_spin_map', 'horizon_lock']) assert.doesNotMatch(s, new RegExp(banned));
 });
 
 test('the older rows exist and are marked MAX-G1', () => {
@@ -119,20 +120,19 @@ test('the shape, textures and EMI page exist; one controller carries both kinds 
 });
 
 test('the lang file has en_us and es_es keys in parity', () => {
-  const keys = ['block.gtceu.mirror_shell', 'gtceu.black_hole_bomb', 'grindless.machine.mirror_shell.tooltip.0', 'grindless.max.ending.title',
-    'grindless.max.ending.subtitle', 'emi.grindless.info.mirror_shell.0', 'emi.grindless.info.mirror_shell.1', 'emi.grindless.info.mirror_shell.2'];
-  for (const n of ['vent_wave_packet', 'final_spin_map', 'universe_seed']) keys.push(`gtceu.recipe.grindless_black_hole_bomb.${n}`);
+  const keys = ['block.gtceu.mirror_shell', 'gtceu.black_hole_bomb', 'grindless.machine.mirror_shell.tooltip.0',
+    'emi.grindless.info.mirror_shell.0', 'emi.grindless.info.mirror_shell.1', 'emi.grindless.info.mirror_shell.2'];
+  for (const n of ['vent_wave_packet', 'final_spin_map', 'horizon_lock']) keys.push(`gtceu.recipe.grindless_black_hole_bomb.${n}`);
   for (const lang of ['en_us', 'es_es']) for (const k of keys) assert.ok(run.lang[lang][k], `${lang} ${k}`);
 });
 
-test('the credits: WIN_GAME with value 1 once per player, never wonGame, the epilogue once, only for the ending recipe', () => {
+test('the ending: c3 grants maxplus once through the world flag; no credits, no book, no title', () => {
   const s = read(kube, 'startup_scripts', 'grindless', 'max', 'shell.js');
-  assert.match(s, /WIN_GAME, 1\.0/);
-  assert.match(s, /grindless_max_credits/);
-  assert.match(s, /grindless_max_epilogue/);
-  assert.match(s, /grindless:max_epilogue/);
-  assert.match(s, /\.afterWorking\(credits\)/);
-  assert.doesNotMatch(s.split('\n').filter((l) => !/^\s*\/\//.test(l)).join('\n'), /wonGame/);
+  assert.match(s, /grindless_stage_maxplus/);
+  assert.match(s, /\.afterWorking\(grantStage\)/);
+  assert.match(s, /ENDING = 'horizon_lock'/);
+  const code = s.split('\n').filter((l) => !/^\s*\/\//.test(l)).join('\n');
+  assert.doesNotMatch(code, /WIN_GAME|max_epilogue|universe_seed|wonGame|setTitle|ending\.title/);
 });
 
 test('the overlay stays in its band, has no priority line and is registered in zones.json', () => {

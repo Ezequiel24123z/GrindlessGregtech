@@ -28,8 +28,8 @@
       { "id": "grindless:tennessine_sample", "reason": "UEV-A2: stored for UIV, no UEV recipe consumes tennessine (uev.md machine 4 c1 and 'What UEV leaves': a MAX+ hook)" },
       { "id": "grindless:superheavy_census", "reason": "UEV-A2: data, the UIV hook (uev.md machine 4 c2 and 'What UEV leaves': a MAX+ hook)" },
       { "id": "grindless:spent_wave_packet", "reason": "G1: the mirror shell vent's inert byproduct (c1); the wave leaves as light, nothing takes it (principle 3)" },
-      { "id": "grindless:universe_seed", "reason": "G1: the mirror shell's last recipe (c3), the end of the pack; nothing takes it" },
-      { "id": "grindless:max_epilogue", "reason": "G1: the epilogue book given once per player by the mirror shell credits handler; nothing takes it" }
+      { "id": "grindless:horizon_lock", "reason": "MX-E1: the last recipe of MAX (shell c3) and the maxplus grant; MAX+ consumes it, no MAX recipe does" },
+      { "id": "grindless:epilogue", "reason": "MX-E1: the epilogue book given at the MAX+ arrival, not by a recipe; nothing takes it" }
     ]
   },
   "derived": [
@@ -91,12 +91,7 @@
     { "id": "gtceu:horizon_strand_dust", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "gtceu:horizon_strand_ingot", "role": "acquisition", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
     { "id": "gtceu:horizon_strand_ingot", "role": "use", "reason": "GTM registers the dust and ingot forms of the horizon_strand material (MAX-F1); the strand is only ever a wire, cable, preform or sleeve, so nothing makes or takes them" },
-    { "id": "grindless:horizon_phase_lock", "role": "use", "reason": "MX-F1 pending, RF-7A (docs/eras/max.md:865-878): delete when its MX-S1..S4 or MX-E1 route lands" },
-    { "id": "grindless:spent_phase_lock", "role": "acquisition", "reason": "MX-F1 pending, RF-7A (docs/eras/max.md:865-878): delete when its MX-S1..S4 or MX-E1 route lands" },
-    { "id": "grindless:horizon_flux_clamp", "role": "use", "reason": "MX-F1 pending, RF-7A (docs/eras/max.md:865-878): delete when its MX-S1..S4 or MX-E1 route lands" },
-    { "id": "grindless:horizon_lock", "role": "acquisition", "reason": "MX-F1 pending, RF-7A (docs/eras/max.md:865-878): delete when its MX-S1..S4 or MX-E1 route lands" },
-    { "id": "grindless:horizon_lock", "role": "use", "reason": "MX-F1 pending, RF-7A (docs/eras/max.md:865-878): delete when its MX-S1..S4 or MX-E1 route lands" },
-    { "id": "grindless:max_epilogue", "role": "acquisition", "reason": "G1: the mirror shell credits handler gives it to the player (shell.js),     not a recipe" },
+    { "id": "grindless:epilogue", "role": "acquisition", "reason": "MX-E1: the epilogue book is given at the MAX+ arrival, not by a recipe" },
         { "id": "grindless:launched_belt_seed", "role": "use", "reason": "C3 audit (C1 F2): gate c15 makes it and the max-nsc grant in tiers/max.json (travel.js) takes it when the belt opens; no recipe uses it" }
       ],
       "pendingRoutes": [

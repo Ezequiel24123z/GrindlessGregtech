@@ -36,9 +36,10 @@
     },
     {
       name: 'genome_copy', circuit: 2, duration: 1200,
-      items: ['1x grindless:genome_archive', '4x grindless:synthetic_oligo_pool'],
+      items: ['4x grindless:synthetic_oligo_pool', '1x grindless:encapsulated_genome_library'],
+      kept: ['grindless:genome_archive'],
       fluid: null, amount: 0,
-      outs: ['2x grindless:genome_archive']
+      outs: ['1x grindless:genome_archive']
     }
   ]
 
@@ -61,7 +62,7 @@
   ServerEvents.recipes(function (event) {
     ROWS.forEach(function (r) {
       try {
-        var missing = missingOf(r.items.concat(r.outs), r.fluid === null ? [] : [r.fluid])
+        var missing = missingOf(r.items.concat(r.outs, r.kept || []), r.fluid === null ? [] : [r.fluid])
         if (missing.length > 0) {
           skip(r.name, missing)
           return
@@ -69,6 +70,7 @@
         var b = event.recipes.gtceu.genome_archiving('grindless:' + r.name)
         b.circuit(r.circuit)
         b.itemInputs(r.items)
+        ;(r.kept || []).forEach(function (id) { b.notConsumable(id) })
         if (r.fluid !== null) b.inputFluids(Fluid.of(r.fluid, r.amount))
         b.itemOutputs(r.outs)
         b.addDataString('grindless_genome_archiving', r.name)

@@ -114,10 +114,10 @@ test('F1: every item and block of the id table is checked in a MAX group (glob-a
   const covered = (n) => where[n] || globs.some((g) => n.startsWith(g)) || made.has(n);
   const missing = names.filter((n) => !covered(n));
   t.diagnostic(`F1: ${ids.foundation.items.length} items, ${ids.foundation.blocks.length} blocks; unchecked: ${missing.join(', ') || 'none'}`);
-  // Ids with no era group are covered by a recipe that makes them. max_epilogue has no recipe or source; max_ids.json lists grindless:max_parallel_hatch where the real id is gtceu:max_parallel_hatch (covered by the glob).
+  // Ids with no era group are covered by a recipe that makes them. epilogue has no recipe or source; max_ids.json lists grindless:max_parallel_hatch where the real id is gtceu:max_parallel_hatch (covered by the glob).
   // The 72 RF-7A items and 5 casings (MX-F1) get their recipes and era groups in later packages.
   const rf7a = new Set([...ids.foundation.items.slice(-72), ...ids.foundation.blocks.slice(-5)].map((n) => (n.includes(':') ? n : `grindless:${n}`)));
-  assert.deepEqual(missing.filter((n) => !rf7a.has(n)).sort(), ['grindless:max_epilogue']);
+  assert.deepEqual(missing.filter((n) => !rf7a.has(n)).sort(), ['grindless:epilogue']);
   const at = (id) => where[id]?.[0];
   assert.equal(at('grindless:nsc_planetesimal'), 'max-nsc-items');
   assert.equal(at('grindless:sgr_a_spin_map'), 'max-sgra-items');
@@ -256,12 +256,12 @@ test('static run: no MAX recipe above 2^31 EU/t except gate c14 and c15 (2^33) a
   const bad = [];
   for (const r of pack().recs) {
     for (const e of eu(r, 'tickInputs')) {
-      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && r.i !== 'grindless:black_hole_bomb/universe_seed') bad.push(`${r.i}: ${e}`);
+      if (e > LONG && !gate.has(r.i) && !old.has(r.i) && r.i !== 'grindless:black_hole_bomb/horizon_lock') bad.push(`${r.i}: ${e}`);
     }
     for (const e of eu(r, 'tickOutputs')) if (e > 2 ** 30) bad.push(`${r.i}: generator ${e} above 2^30`);
   }
   assert.deepEqual(bad, []);
-  assert.deepEqual(eu(rec('grindless:black_hole_bomb/universe_seed'), 'tickInputs'), [2 ** 35]);
+  assert.deepEqual(eu(rec('grindless:black_hole_bomb/horizon_lock'), 'tickInputs'), [2 ** 35]);
   for (const id of gate) assert.equal(eu(rec(id), 'tickInputs')[0], 2 ** 33, id);
   // the script text names no literal at or above 2^31 either (V_MAX x 16 is an expression)
   const lit = [];
@@ -313,7 +313,7 @@ test('generator types hold only EU-out rows; the mirror shell is the one mixed m
   const bomb = Object.fromEntries(recsOfType('black_hole_bomb').map((r) => [r.i.split('/')[1], r]));
   assert.equal(eu(bomb.vent_wave_packet, 'tickOutputs').length, 1);
   assert.equal(eu(bomb.vent_wave_packet, 'tickInputs').length, 0);
-  for (const n of ['final_spin_map', 'universe_seed']) {
+  for (const n of ['final_spin_map', 'horizon_lock']) {
     assert.equal(eu(bomb[n], 'tickOutputs').length, 0, `${n} must consume`);
     assert.equal(eu(bomb[n], 'tickInputs').length, 1, `${n} must consume`);
   }
@@ -444,8 +444,8 @@ test('component thresholds: each of the 10 controllers has at least 4 MAX circui
   t.diagnostic(report.join('; '));
 });
 
-test('no MAX recipe consumes a MAX+ hook (universe_seed, GT-- max casing and converter)', () => {
-  for (const hook of ['grindless:universe_seed', 'gtnn:component_assline_casing_max', 'gtmutils:max_64a_energy_converter']) {
+test('no MAX recipe consumes a MAX+ hook (horizon_lock, GT-- max casing and converter)', () => {
+  for (const hook of ['grindless:horizon_lock', 'gtnn:component_assline_casing_max', 'gtmutils:max_64a_energy_converter']) {
     assert.deepEqual(pack().recs.filter((r) => ins(r).includes(hook)).map((r) => r.i), [], hook);
   }
 });

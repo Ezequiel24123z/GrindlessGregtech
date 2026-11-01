@@ -209,11 +209,8 @@ export const QUESTS = [
   P('WAVE', 'Seed Wave Packet', 'grindless:seed_wave_packet', ['SMES'], 107.5, 0, [
     'A packet of waves tuned to the shell. One of them runs the shell vent for a long while.',
   ], [it('grindless:seed_wave_packet')], 100),
-  P('SEED', 'The Universe Seed', 'grindless:universe_seed', ['WAVE'], 110, 0, [
-    'The mirror shell\'s last recipe. ' + FICTION + 'Smolin\'s cosmological natural selection, named and not claimed: a black hole may be the seed of a new universe. The credits roll on the first one.',
-    'The shell stays, and the recipe can run again.',
-  ], [it('grindless:universe_seed')], 200, { shape: 'rsquare', size: 1.5 }),
-  P('EPILOGUE', 'Epilogue', 'grindless:max_epilogue', ['SEED'], 112.5, 0, [
-    'The credits hand you this once. It is the end of the book, and nothing more.',
-  ], [it('grindless:max_epilogue')], 50, { optional: true }),
+  P('LOCK', 'The Horizon Lock', 'grindless:horizon_lock', ['WAVE'], 110, 0, [
+    'The mirror shell\'s last recipe stabilises the horizon. ' + FICTION + 'A rotating black hole\'s horizon, held still long enough to be measured and sealed in a reference.',
+    'The first lock opens MAX+. The shell stays, and the recipe can run again.',
+  ], [it('grindless:horizon_lock')], 200, { shape: 'rsquare', size: 1.5 }),
 ];

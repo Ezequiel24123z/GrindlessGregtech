@@ -45,8 +45,8 @@ test('the stand-in runs the MAX foundation and its names without errors', () => 
   assert.deepEqual(run.errors.filter(mine), [], 'no console.error');
 });
 
-test('the id list is pinned: 329 items, 12 blocks, the strand and 5 fluids; nothing twice', () => {
-  assert.equal(ITEMS.length, 329);
+test('the id list is pinned: 328 items, 12 blocks, the strand and 5 fluids; nothing twice', () => {
+  assert.equal(ITEMS.length, 328);
   assert.deepEqual([...got.controllers], table.ours.controllers);
   assert.deepEqual(table.ours.controllers, ['gtceu:horizon_interferometer', 'gtceu:ergoregion_synchroniser', 'gtceu:horizon_flux_clamp', 'gtceu:segment_reclamation_works']);
   assert.deepEqual([...got.blocks], BLOCKS);
@@ -115,7 +115,7 @@ test('tables/max_ids.json lists the 29 MAX ids, every F1 id and the circuits blo
   assert.deepEqual(table.ours.components, COMPONENTS);
   assert.deepEqual(table.ours.parallel_hatch, ['gtceu:max_parallel_hatch']);
   assert.deepEqual(table.existing, EXISTING);
-  assert.deepEqual(table.substages.names, ['max', 'max-sgra', 'max-nsc']);
+  assert.deepEqual(table.substages.names, ['max', 'max-sgra', 'max-nsc', 'maxplus']);
   assert.deepEqual(table.places, { _why: table.places._why, sgra: 'gcyr:black_hole_orbit', nsc: 'grindless:nsc_belt' });
   const circuits = Object.entries(table.circuits).filter(([k]) => k !== '_why' && k !== 'gates');
   assert.ok(circuits.length >= 20);
