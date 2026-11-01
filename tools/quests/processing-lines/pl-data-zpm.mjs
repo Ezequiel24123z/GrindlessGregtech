@@ -82,20 +82,18 @@ export default {
           kind: 'machine', from: ['froth'], sub: 'EV\'s cascade, its ZPM mode',
         }),
         n('ecl', 10, 0.75, F('gtceu:europium_chloride_solution'), 'Europium Chloride', { kind: 'product', from: ['casc'], sub: 'The phosphoric acid goes to the EV acid loop' }),
-        n('zn', 10, 2.25, I('gtceu:zinc_dust'), 'Zinc', { kind: 'raw', sub: 'Reduces the solution, then comes back' }),
+        n('zn', 10, 2.25, I('gtceu:zinc_dust'), 'Zinc', { kind: 'raw', sub: 'Reduces the solution, then comes back (recovered with hydrogen, never spent)' }),
         n('red', 12.5, 0.75, M('gtceu:europium_reductor'), 'Europium Reductor', {
           kind: 'ours', from: ['ecl', 'zn'], desc: 'Pulls europium out of the solution with zinc, then roasts and reduces it.',
         }),
         n('esul', 15, -0.75, I('gtceu:europium_sulfate_dust'), 'Europium Sulfate', { kind: 'product', from: ['red'], sub: 'Roasted to the oxide' }),
         n('eox', 17.5, -0.75, I('gtceu:europium_oxide_dust'), 'Europium Oxide', { kind: 'product', from: ['esul'], by: ['gtceu:valence_reduction'], sub: 'Reduced with lanthanum' }),
         n('eu', 20, -0.75, I('gtceu:europium_dust'), 'Europium', { kind: 'product', from: ['eox', 'lan'], by: ['gtceu:valence_reduction'], end: 'the Mk2 and ZPM wire' }),
-        n('lan', 17.5, -2.25, I('gtceu:lanthanum_dust'), 'Lanthanum', { kind: 'raw', sub: 'The metallothermic partner, recovered' }),
+        n('lan', 17.5, -2.25, I('gtceu:lanthanum_dust'), 'Lanthanum', { kind: 'raw', sub: 'The metallothermic partner, recovered from its oxide, never spent' }),
         L('lanluv', 15, -2.25, 'pl_luv:la'),
         n('ree', 15, 0.75, F('gtceu:rare_earth_chloride_solution'), 'Rare Earth Chloride', {
           kind: 'by', from: ['red'], end: 'lanthanide line: what is left is rare earths',
         }),
-        n('zret', 15, 2.25, I('gtceu:zinc_dust'), 'Zinc, Back', { kind: 'info', sub: 'Recovered with hydrogen, never spent' }),
-        n('lret', 15, 3.75, I('gtceu:lanthanum_dust'), 'Lanthanum, Back', { kind: 'info', sub: 'Recovered from its oxide, never spent' }),
       ],
     },
     qubits: {
