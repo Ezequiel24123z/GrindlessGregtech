@@ -685,9 +685,9 @@ export default gate({
     maxStars: {
       name: 'The Galactic Centre (MAX)',
       nodes: [
-        E('eqMaxWinch', 0, -1.5, 'max_age', '545A65919796969A'),
-        E('eqMaxFeeder', 0, 0, 'max_age', '5AF8BC627162C8C5'),
-        E('eqMaxShell', 0, 1.5, 'max_age', '3AD1F00AD8DB5003'),
+        E('eqMaxWinch', 0, -1.5, 'max_machines', '110860BEED613414'),
+        E('eqMaxFeeder', 0, 0, 'max_machines', '700822AA57C7AE85'),
+        E('eqMaxShell', 0, 1.5, 'max_horizon', '3AD1F00AD8DB5003'),
         n('maxWinch', 2.25, -1.5, M('gtceu:geroch_winch'), 'Geroch Winch', {
           kind: 'info', tier: 'max', from: ['eqMaxWinch'], sub: 'A tether lowered into the ergosphere pulls power out of Sgr A* as the hole slows',
           desc: 'It runs at Sgr A* only, and wears a horizon tether as it works.',
@@ -829,7 +829,7 @@ export default gate({
           figs: [P.wcell('grindless:opv_smes_cell', 'OpV SMES', 16106127360000)],
         }),
         // MAX's cell: four OpV cells' worth
-        E('eqMaxCell', 0, 16, 'max_age', '586558AD36EEC6F4'),
+        E('eqMaxCell', 0, 16, 'max_integration', '586558AD36EEC6F4'),
         n('wmax', 2.25, 16, I('grindless:max_smes_cell'), 'MAX SMES Cell', {
           kind: 'info', from: ['eqMaxCell'], sub: 'Twenty-four thousand five hundred and seventy-six UV batteries\' worth',
           desc: 'The network jumps to MAX only when every formed tower holds these. The mirror shell\'s last recipe draws from it, so charge it first.',

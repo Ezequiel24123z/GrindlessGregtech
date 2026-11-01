@@ -94,6 +94,6 @@ export const QUESTS = [
     'The part that bends space: an emitter, two field coils, a superconducting membrane and a pinch of stable exotic matter. The &6MAX Field Generator&r is the last component and the one every big machine asks for most.',
   ], [it('grindless:max_field_generator')], 150),
   q('C_PARTS', 'step', 'MAX Parts and Hatches', 'gtceu:max_energy_input_hatch', ['C_SENS', 'C_CONV'], 17.5, 3, null, [
-    'The &6MAX Energy Input Hatch&r, the &6MAX Input Bus&r and the &6MAX Battery&r are built on the MAX hull. With them in place the OpV pair you have been using can retire.',
-  ], [it('gtceu:max_energy_input_hatch'), it('gtceu:max_input_bus'), it('gtceu:max_battery')], 150),
+    'The &6MAX Energy Input Hatch&r, its &616 A&r version, the &6MAX Input Bus&r and the &6MAX Battery&r are built on the MAX hull. With them in place the OpV pair you have been using can retire; the big rows at Sgr A* run on two 16 A hatches.',
+  ], [it('gtceu:max_energy_input_hatch'), it('gtceu:max_energy_input_hatch_16a'), it('gtceu:max_input_bus'), it('gtceu:max_battery')], 150),
 ];

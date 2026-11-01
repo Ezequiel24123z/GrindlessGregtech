@@ -1,0 +1,212 @@
+{
+	autofocus_id: "5910FF92CEC15A2E"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "max_circuits"
+	group: "14CC251BB70F88DF"
+	icon: "gtnn:supracausal_mainframe"
+	id: "5CDB88D0E1E6C428"
+	order_index: 1
+	quest_links: [
+		{
+			id: "51DB754823244EBD"
+			linked_quest: "1F08060BC8BCA682"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "545155DFF132A460"
+			linked_quest: "18197070E4168342"
+			x: 12.5d
+			y: 3.0d
+		}
+		{
+			id: "53E442FD309CC499"
+			linked_quest: "3FC8F0795380E0E2"
+			x: 12.5d
+			y: 4.5d
+		}
+		{
+			id: "15ED9CED1563B843"
+			linked_quest: "3FC8F0795380E0E2"
+			x: 12.5d
+			y: 6.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["1F08060BC8BCA682"]
+			description: ["Light squeezed until its noise drops below what any ordinary beam can reach. The &6Squeezed-Light Chip&r is the part that makes MAX emitters and the mainframe sharp. The crystals and the femtosecond writer from the older photonic lines, with a cleanroom that stays cold. The tweezer die, the MAX emitter and the mainframe. Crystals by ME; chips are small, so stock a few and send the rest on."]
+			icon: "grindless:squeezed_light_chip"
+			id: "5910FF92CEC15A2E"
+			rewards: [{ id: "113B65BEADB549B4", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1DB6B458168FE556", item: "grindless:squeezed_light_chip", type: "item" }]
+			title: "Squeezed-Light Chip"
+			x: 2.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5910FF92CEC15A2E"]
+			description: ["Single atoms held in beams of light, one by one, on a die. The &6Tweezer Array Die&r is the logic the mainframe reads its qubits from. A laser engraver for the last step, a squeezed-light chip and a calibrated lens. The interposer and the Rydberg array works, which is researched from it. Lenses and chips by ME in matched counts; the engraver returns dies in a chest."]
+			icon: "grindless:tweezer_array_die"
+			id: "17CBBAAEADB21164"
+			rewards: [{ id: "5FC4C428E07A8BBA", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7FDED9EDDD366B8E", item: "grindless:tweezer_array_die", type: "item" }]
+			title: "Tweezer Array Die"
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["17CBBAAEADB21164"]
+			description: ["The board that joins the chips at millikelvin. The &6Cryo Photonic Interposer&r carries light between them without heating either. A cold line: the helium refrigerator and a vacuum, with a die and a chip to bond. The mainframe, which takes one of each part. Keep one of each part per mainframe in a dedicated chest; a big stock gains nothing."]
+			icon: "grindless:cryo_photonic_interposer"
+			id: "18F41DE9388D684D"
+			rewards: [{ id: "30CD7A6501005BD9", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5C233FAA3A69F48D", item: "grindless:cryo_photonic_interposer", type: "item" }]
+			title: "Cryo Photonic Interposer"
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["18F41DE9388D684D"]
+			description: ["The only circuit of MAX, and the last one the pack has. The &6Supracausal Mainframe&r joins two chips, two dies and an interposer with OpV circuits and a tetron array. The photonic integration hall from UEV, superfluid helium-3 and a full set of the three parts. Every MAX component, hatch and controller. Three part lines into one hall: give each its own chest so one slow line never starves the others."]
+			icon: "gtnn:supracausal_mainframe"
+			id: "3BEE68D81D2C0817"
+			rewards: [{ id: "3F96CF74225A6C7E", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "13AC629C7C67ED7B", item: "gtnn:supracausal_mainframe", type: "item" }]
+			title: "Supracausal Mainframe"
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3BEE68D81D2C0817"]
+			description: ["MAX has no assembler of its own, so MAX parts are put together in the &6Assembly Hall&r. It takes many parts at once and does the work of a whole row of assemblers. The hall controller and two OpV hatches that give it MAX voltage, because MAX hatches do not exist yet. Every MAX component, and later the hatches that replace the OpV pair. Parts by ME; the hall hands back one kind at a time, so a pattern provider per component keeps it busy."]
+			icon: "gtceu:assembly_hall"
+			id: "34FED870BAF8944F"
+			rewards: [{ id: "30FF56E65BF22E96", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7768C56441CEB741", item: "gtceu:assembly_hall", type: "item" }]
+			title: "The Assembly Hall"
+			x: 12.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["34FED870BAF8944F"]
+			description: ["MAX motors wind strand cable round a bearing that floats without touching anything, and the piston is a motor with a harmonic drive and a stack of shape-changing metal. The older motors will not do here."]
+			icon: "grindless:max_electric_motor"
+			id: "1E1DCCA995ABBA6C"
+			rewards: [{ id: "55C419ADEC17517D", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "72FE9231B0F93961", item: "grindless:max_electric_motor", type: "item" }
+				{ id: "32E4CED7A3567894", item: "grindless:max_electric_piston", type: "item" }
+			]
+			title: "Motors and Pistons"
+			x: 15.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1E1DCCA995ABBA6C"]
+			description: ["The &6MAX Electric Pump&r is a motor with a rotor and a superfluid seal. Nothing leaks past it, which is the point."]
+			icon: "grindless:max_electric_pump"
+			id: "343CB9FB8854A4CA"
+			rewards: [{ id: "5F55ADB167D1F5F7", type: "xp", xp: 100 }]
+			tasks: [{ id: "1F7AC72324ED09A2", item: "grindless:max_electric_pump", type: "item" }]
+			title: "Pump"
+			x: 17.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["343CB9FB8854A4CA"]
+			description: ["The &6MAX Fluid Regulator&r adds a superfluid valve and a tetron array to the pump, so it can meter a flow nobody can see."]
+			icon: "grindless:max_fluid_regulator"
+			id: "323F3AD3182A3174"
+			rewards: [{ id: "59B99A9A813B4888", type: "xp", xp: 100 }]
+			tasks: [{ id: "7065F3002E28EA13", item: "grindless:max_fluid_regulator", type: "item" }]
+			title: "Fluid Regulator"
+			x: 20.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["34FED870BAF8944F"]
+			description: ["A squeezed-light chip behind an optical isolator, so the light goes out and nothing comes back. The &6MAX Emitter&r goes into the field generator and most controllers."]
+			icon: "grindless:max_emitter"
+			id: "1474BC43B0215EB5"
+			rewards: [{ id: "19679F8DE781C09B", type: "xp", xp: 100 }]
+			tasks: [{ id: "19F620BA2657589A", item: "grindless:max_emitter", type: "item" }]
+			title: "Emitter"
+			x: 12.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1E1DCCA995ABBA6C"]
+			description: ["Two motors, a piston and a circuit: the &6MAX Robot Arm&r. It is also what the belt seed and the Rydberg works are built around."]
+			icon: "grindless:max_robot_arm"
+			id: "5E0E8820A0ECD4C2"
+			rewards: [{ id: "55206BAC67F2D78E", type: "xp", xp: 100 }]
+			tasks: [{ id: "54EE4A0DDFD0EA36", item: "grindless:max_robot_arm", type: "item" }]
+			title: "Robot Arm"
+			x: 15.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["18197070E4168342"]
+			description: ["The &6MAX Sensor&r reads gravity from atoms, so it waits for the atom interferometer works to make the gradiometer. Until then, every MAX machine that wants one waits too."]
+			icon: "grindless:max_sensor"
+			id: "14F8810FFFD16F9C"
+			rewards: [{ id: "5EF24D3053494F2A", type: "xp", xp: 120 }]
+			tasks: [{ id: "1DC0F611B6A04C80", item: "grindless:max_sensor", type: "item" }]
+			title: "Sensor"
+			x: 15.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3FC8F0795380E0E2"]
+			description: ["A belt that carries the load on a film one atom thick. The &6MAX Conveyor Module&r needs the membrane line, and the buses need the conveyor."]
+			icon: "grindless:max_conveyor_module"
+			id: "389ED54791286682"
+			rewards: [{ id: "5B23EFF10DE69E16", type: "xp", xp: 120 }]
+			tasks: [{ id: "5E4AAF8CFD7A30D9", item: "grindless:max_conveyor_module", type: "item" }]
+			title: "Conveyor Module"
+			x: 15.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["3FC8F0795380E0E2"]
+			description: ["The part that bends space: an emitter, two field coils, a superconducting membrane and a pinch of stable exotic matter. The &6MAX Field Generator&r is the last component and the one every big machine asks for most."]
+			icon: "grindless:max_field_generator"
+			id: "7FDC7DC697D09839"
+			rewards: [{ id: "32CBC11FF4BFA1DE", type: "xp", xp: 150 }]
+			tasks: [{ id: "37B25007E07E59FA", item: "grindless:max_field_generator", type: "item" }]
+			title: "Field Generator"
+			x: 15.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["14F8810FFFD16F9C", "389ED54791286682"]
+			description: ["The &6MAX Energy Input Hatch&r, its &616 A&r version, the &6MAX Input Bus&r and the &6MAX Battery&r are built on the MAX hull. With them in place the OpV pair you have been using can retire; the big rows at Sgr A* run on two 16 A hatches."]
+			icon: "gtceu:max_energy_input_hatch"
+			id: "5F47DE9BFA3F4C62"
+			rewards: [{ id: "1586F0A123C68BE3", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "5E71376FD54CBE46", item: "gtceu:max_energy_input_hatch", type: "item" }
+				{ id: "162F1C751ADE5AF4", item: "gtceu:max_energy_input_hatch_16a", type: "item" }
+				{ id: "7A759BCB606DBC0A", item: "gtceu:max_input_bus", type: "item" }
+				{ id: "18CD5CA0B99D570F", item: "gtceu:max_battery", type: "item" }
+			]
+			title: "MAX Parts and Hatches"
+			x: 17.5d
+			y: 3.0d
+		}
+	]
+	subtitle: ["One circuit at the top of the ladder, and the hall, components and hatches that turn it into machines."]
+	title: "MAX: Circuits"
+}

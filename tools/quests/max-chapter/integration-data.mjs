@@ -112,7 +112,7 @@ export const QUESTS = [
       automate: 'Spare tethers arrive over AE2; a worn one goes back to its line.',
     },
     desc: [],
-    tasks: [it('gtceu:geroch_winch')],
+    tasks: [it('grindless:horizon_tether')],
     rewards: [xp(150)],
   },
   {
@@ -138,7 +138,7 @@ export const QUESTS = [
       automate: 'Packets arrive by bus; watch the network at the start of each one.',
     },
     desc: [],
-    tasks: [it('gtceu:mirror_shell')],
+    tasks: [it('grindless:spent_wave_packet')],
     rewards: [xp(150)],
   },
 

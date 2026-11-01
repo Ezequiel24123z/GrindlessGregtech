@@ -453,14 +453,14 @@
 		}
 		{
 			id: "53F650D5CA34CD9D"
-			linked_quest: "545A65919796969A"
+			linked_quest: "110860BEED613414"
 			shape: "rsquare"
 			x: 0.5d
 			y: 83.0d
 		}
 		{
 			id: "51E58822681F0387"
-			linked_quest: "5AF8BC627162C8C5"
+			linked_quest: "700822AA57C7AE85"
 			shape: "rsquare"
 			x: 0.5d
 			y: 84.5d
@@ -1953,7 +1953,7 @@
 			y: 79.5d
 		}
 		{
-			dependencies: ["545A65919796969A"]
+			dependencies: ["110860BEED613414"]
 			description: ["It runs at Sgr A* only, and wears a horizon tether as it works."]
 			icon: "gtceu:geroch_winch"
 			id: "37A6F572D6014003"
@@ -1968,7 +1968,7 @@
 			y: 83.0d
 		}
 		{
-			dependencies: ["5AF8BC627162C8C5"]
+			dependencies: ["700822AA57C7AE85"]
 			description: ["It runs at Sgr A* only; the panel and the module wear, and the solar array fab and the assembler rework them."]
 			icon: "gtceu:accretion_feeder"
 			id: "130AE52A0DDA917E"

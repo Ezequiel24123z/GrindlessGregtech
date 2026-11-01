@@ -107,7 +107,11 @@ var GG_QUESTS_EXPECTED = {
   opv_circuits: [10, 11],
   opv_machines: [23, 23],
   opv_integration: [18, 21],
-  max_age: [52, 52]
+  max_age: [19, 19],
+  max_circuits: [14, 15],
+  max_machines: [15, 16],
+  max_integration: [14, 14],
+  max_horizon: [17, 21]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
 var GG_UNGROUPED = { welcome: true }
