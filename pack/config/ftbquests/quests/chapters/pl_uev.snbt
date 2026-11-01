@@ -9,7 +9,29 @@
 	id: "5EEDC8CC5EA8EEDE"
 	order_index: 10
 	progression_mode: "flexible"
-	quest_links: [ ]
+	quest_links: [
+		{
+			id: "119EA60DDAA2AF8E"
+			linked_quest: "5AF85FE2C9DA1793"
+			shape: "rsquare"
+			x: 17.25d
+			y: 2.75d
+		}
+		{
+			id: "1889FC74C1A4C768"
+			linked_quest: "7F158CF0E872F990"
+			shape: "rsquare"
+			x: 17.25d
+			y: 10.25d
+		}
+		{
+			id: "1FD34933319C8AD4"
+			linked_quest: "32DB086A900C3F2A"
+			shape: "rsquare"
+			x: 0.5d
+			y: 18.25d
+		}
+	]
 	quests: [
 		{
 			icon: "gtceu:calcium_chloride_dust"
@@ -53,6 +75,7 @@
 			y: 0.75d
 		}
 		{
+			dependencies: ["5F9396C120C2D279"]
 			icon: "gtceu:calcium_48_enriched_chloride_dust"
 			id: "589197F96E2B3C2C"
 			size: 1.25d
@@ -237,7 +260,7 @@
 				{ id: "7C5CDD4DFE67E7A0", type: "checkmark" }
 			]
 			title: "Nanodiamond Pellet"
-			x: 17.25d
+			x: 19.75d
 			y: 0.75d
 		}
 		{
@@ -252,7 +275,7 @@
 				{ id: "3E9A395FDF40F152", type: "checkmark" }
 			]
 			title: "Megabar Press"
-			x: 19.75d
+			x: 22.25d
 			y: 0.75d
 		}
 		{
@@ -265,7 +288,7 @@
 				{ id: "3CCA7A2566BD2C40", type: "checkmark" }
 			]
 			title: "Nanotwinned Diamond"
-			x: 22.25d
+			x: 24.75d
 			y: 0.75d
 		}
 		{
@@ -278,7 +301,7 @@
 				{ id: "1B2F4638C6E4C231", type: "checkmark" }
 			]
 			title: "Diamond Anvil"
-			x: 24.75d
+			x: 27.25d
 			y: 0.75d
 		}
 		{
@@ -293,7 +316,7 @@
 				{ id: "78EED4F2C5B69FE6", type: "checkmark" }
 			]
 			title: "Megabar Press"
-			x: 27.25d
+			x: 29.75d
 			y: 0.75d
 		}
 		{
@@ -306,10 +329,11 @@
 				{ id: "7462238C99971DEB", type: "checkmark" }
 			]
 			title: "Superhydride Ingot"
-			x: 29.75d
+			x: 32.25d
 			y: 0.75d
 		}
 		{
+			dependencies: ["5AF85FE2C9DA1793"]
 			icon: "grindless:bond_coated_sx_blade"
 			id: "745677096D8A395E"
 			shape: "rsquare"
@@ -319,7 +343,7 @@
 				{ id: "324629DED5C3C4C5", type: "checkmark" }
 			]
 			title: "Bond-Coated Blade"
-			x: 17.25d
+			x: 19.75d
 			y: 2.75d
 		}
 		{
@@ -334,7 +358,7 @@
 				{ id: "51FF86BB92D90E5D", type: "checkmark" }
 			]
 			title: "Electron Beam Furnace"
-			x: 19.75d
+			x: 22.25d
 			y: 2.75d
 		}
 		{
@@ -347,7 +371,7 @@
 				{ id: "3B7B89E7F9657576", type: "checkmark" }
 			]
 			title: "Coated SX Blade"
-			x: 22.25d
+			x: 24.75d
 			y: 2.75d
 		}
 		{
@@ -362,7 +386,7 @@
 				{ id: "573D1623763D9E10", type: "checkmark" }
 			]
 			title: "Single-Crystal Foundry"
-			x: 24.75d
+			x: 27.25d
 			y: 2.75d
 		}
 		{
@@ -375,7 +399,7 @@
 				{ id: "348BD9A2FE7F7BBB", type: "checkmark" }
 			]
 			title: "Brayton Turbine Wheel"
-			x: 27.25d
+			x: 29.75d
 			y: 2.75d
 		}
 		{
@@ -388,7 +412,7 @@
 				{ id: "325F4DFF80EB1E6C", type: "checkmark" }
 			]
 			title: "Polycarbosilane"
-			x: 17.25d
+			x: 19.75d
 			y: 4.75d
 		}
 		{
@@ -403,7 +427,7 @@
 				{ id: "1AE9934186709847", type: "checkmark" }
 			]
 			title: "SiC Fibre Plant"
-			x: 19.75d
+			x: 22.25d
 			y: 4.75d
 		}
 		{
@@ -416,7 +440,7 @@
 				{ id: "11627732C63CC319", type: "checkmark" }
 			]
 			title: "Green Fibre"
-			x: 22.25d
+			x: 24.75d
 			y: 4.75d
 		}
 		{
@@ -431,7 +455,7 @@
 				{ id: "7CE7E80E7BF8A123", type: "checkmark" }
 			]
 			title: "SiC Fibre Plant"
-			x: 24.75d
+			x: 27.25d
 			y: 4.75d
 		}
 		{
@@ -444,7 +468,7 @@
 				{ id: "16ABC514BEB31A07", type: "checkmark" }
 			]
 			title: "Cured Fibre"
-			x: 27.25d
+			x: 29.75d
 			y: 4.75d
 		}
 		{
@@ -459,7 +483,7 @@
 				{ id: "7B1BA4F2055266FF", type: "checkmark" }
 			]
 			title: "SiC Fibre Plant"
-			x: 29.75d
+			x: 32.25d
 			y: 4.75d
 		}
 		{
@@ -472,22 +496,35 @@
 				{ id: "52B01F67941D214B", type: "checkmark" }
 			]
 			title: "SiC Fibre"
-			x: 32.25d
+			x: 34.75d
 			y: 4.75d
 		}
 		{
+			dependencies: ["1D985596CF0D782F"]
+			icon: "grindless:bn_coated_sic_fibre"
+			id: "509204643CD3A8BE"
+			size: 1.25d
+			tasks: [
+				{ id: "1F59C929973DCAB6", item: "grindless:bn_coated_sic_fibre", optional_task: true, type: "item" }
+				{ id: "786A7FEF9BDEFDDE", type: "checkmark" }
+			]
+			title: "BN-Coated Fibre"
+			x: 37.25d
+			y: 4.75d
+		}
+		{
+			dependencies: ["509204643CD3A8BE"]
 			icon: "grindless:sic_fibre_preform"
 			id: "17E8860ADDE629E2"
-			shape: "rsquare"
-			size: 1.0d
+			size: 1.25d
 			subtitle: "Woven from the fibre above"
 			tasks: [
 				{ id: "3E19ECE541592CB8", item: "grindless:sic_fibre_preform", optional_task: true, type: "item" }
 				{ id: "1BB7DCB0371CA0D3", type: "checkmark" }
 			]
 			title: "Fibre Preform"
-			x: 17.25d
-			y: 6.75d
+			x: 39.75d
+			y: 4.75d
 		}
 		{
 			dependencies: ["17E8860ADDE629E2"]
@@ -501,8 +538,8 @@
 				{ id: "7B1B65D54D4EE09A", type: "checkmark" }
 			]
 			title: "CVI Furnace"
-			x: 19.75d
-			y: 6.75d
+			x: 42.25d
+			y: 4.75d
 		}
 		{
 			dependencies: ["1B955F70A8A2B6B9"]
@@ -514,8 +551,8 @@
 				{ id: "747C7D0643F36FC9", type: "checkmark" }
 			]
 			title: "SiC/SiC Plate"
-			x: 22.25d
-			y: 6.75d
+			x: 44.75d
+			y: 4.75d
 		}
 		{
 			dependencies: ["1B955F70A8A2B6B9"]
@@ -527,10 +564,11 @@
 				{ id: "559101EB7EB06986", type: "checkmark" }
 			]
 			title: "Hydrochloric Acid"
-			x: 22.25d
-			y: 8.25d
+			x: 42.25d
+			y: 6.75d
 		}
 		{
+			dependencies: ["7F158CF0E872F990"]
 			icon: "grindless:reduced_iron_powder"
 			id: "721988CD83636776"
 			shape: "rsquare"
@@ -541,7 +579,7 @@
 				{ id: "33AFE001A8EFF6E4", type: "checkmark" }
 			]
 			title: "Reduced Iron Powder"
-			x: 17.25d
+			x: 19.75d
 			y: 10.25d
 		}
 		{
@@ -556,7 +594,7 @@
 				{ id: "708656BA126394CA", type: "checkmark" }
 			]
 			title: "Nitride Magnet Works"
-			x: 19.75d
+			x: 22.25d
 			y: 10.25d
 		}
 		{
@@ -569,7 +607,7 @@
 				{ id: "74A2836540C7B9C3", type: "checkmark" }
 			]
 			title: "Fe16N2 Powder"
-			x: 22.25d
+			x: 24.75d
 			y: 10.25d
 		}
 		{
@@ -584,7 +622,7 @@
 				{ id: "5D8B7C16F9857D7A", type: "checkmark" }
 			]
 			title: "Nitride Magnet Works"
-			x: 24.75d
+			x: 27.25d
 			y: 10.25d
 		}
 		{
@@ -597,7 +635,7 @@
 				{ id: "7096D811B40E2E2D", type: "checkmark" }
 			]
 			title: "Strain-Annealed Powder"
-			x: 27.25d
+			x: 29.75d
 			y: 10.25d
 		}
 		{
@@ -612,7 +650,7 @@
 				{ id: "34CC1EA16042433B", type: "checkmark" }
 			]
 			title: "Nitride Magnet Works"
-			x: 29.75d
+			x: 32.25d
 			y: 10.25d
 		}
 		{
@@ -625,7 +663,7 @@
 				{ id: "3EA6719F00D3A82D", type: "checkmark" }
 			]
 			title: "Bonded Magnet"
-			x: 32.25d
+			x: 34.75d
 			y: 10.25d
 		}
 		{
@@ -638,7 +676,7 @@
 				{ id: "7055C5CF0304FE2A", type: "checkmark" }
 			]
 			title: "Float-Zone Wafer"
-			x: 0.5d
+			x: 3.0d
 			y: 14.25d
 		}
 		{
@@ -651,7 +689,7 @@
 				{ id: "13B30C97696786C1", type: "checkmark" }
 			]
 			title: "WSi Wafer"
-			x: 3.0d
+			x: 5.5d
 			y: 14.25d
 		}
 		{
@@ -664,7 +702,7 @@
 				{ id: "519B33C156937962", type: "checkmark" }
 			]
 			title: "Nanowire Wafer"
-			x: 5.5d
+			x: 8.0d
 			y: 14.25d
 		}
 		{
@@ -677,7 +715,7 @@
 				{ id: "55A97AEF154331ED", type: "checkmark" }
 			]
 			title: "SNSPD Die"
-			x: 8.0d
+			x: 10.5d
 			y: 14.25d
 		}
 		{
@@ -690,7 +728,7 @@
 				{ id: "717428BA98FF3BAC", type: "checkmark" }
 			]
 			title: "SNSPD"
-			x: 10.5d
+			x: 13.0d
 			y: 14.25d
 		}
 		{
@@ -703,7 +741,7 @@
 				{ id: "576799445C23E05A", type: "checkmark" }
 			]
 			title: "Annealed SiN Chip"
-			x: 0.5d
+			x: 3.0d
 			y: 16.25d
 		}
 		{
@@ -716,7 +754,7 @@
 				{ id: "1E99447292119D53", type: "checkmark" }
 			]
 			title: "Waveguide Circuit"
-			x: 3.0d
+			x: 5.5d
 			y: 16.25d
 		}
 		{
@@ -729,7 +767,7 @@
 				{ id: "7F82FB44D442DC48", type: "checkmark" }
 			]
 			title: "Quantum Photonic Chip"
-			x: 5.5d
+			x: 8.0d
 			y: 16.25d
 		}
 		{
@@ -744,7 +782,7 @@
 				{ id: "72ABB9B72810308C", type: "checkmark" }
 			]
 			title: "Photonic Integration Hall"
-			x: 8.0d
+			x: 10.5d
 			y: 16.25d
 		}
 		{
@@ -757,10 +795,11 @@
 				{ id: "7D719311DF75EEA6", type: "checkmark" }
 			]
 			title: "Optical Computer"
-			x: 10.5d
+			x: 13.0d
 			y: 16.25d
 		}
 		{
+			dependencies: ["32DB086A900C3F2A"]
 			icon: "gtceu:helium_3_6n_bucket"
 			id: "1AFA54094FF10CCF"
 			shape: "rsquare"
@@ -770,7 +809,7 @@
 				{ id: "1E485CDB518153AD", type: "checkmark" }
 			]
 			title: "Helium-3, 6N"
-			x: 0.5d
+			x: 3.0d
 			y: 18.25d
 		}
 		{
@@ -785,7 +824,7 @@
 				{ id: "1FA9367270E77C37", type: "checkmark" }
 			]
 			title: "Helium-3 Polariser"
-			x: 3.0d
+			x: 5.5d
 			y: 18.25d
 		}
 		{
@@ -798,7 +837,7 @@
 				{ id: "5C79EDB4B76B9B50", type: "checkmark" }
 			]
 			title: "Polarised Helium-3"
-			x: 5.5d
+			x: 8.0d
 			y: 18.25d
 		}
 		{
@@ -811,7 +850,7 @@
 				{ id: "16A1B93ACEB89D1E", type: "checkmark" }
 			]
 			title: "Polarised D-He-3 Fuel"
-			x: 8.0d
+			x: 10.5d
 			y: 18.25d
 		}
 		{
@@ -824,7 +863,7 @@
 				{ id: "5CBC36FC1CBA3C7A", type: "checkmark" }
 			]
 			title: "Aerogel Tile"
-			x: 15.0d
+			x: 17.5d
 			y: 14.25d
 		}
 		{
@@ -839,7 +878,7 @@
 				{ id: "59493C40A08EBC18", type: "checkmark" }
 			]
 			title: "Nebula Collector"
-			x: 17.5d
+			x: 20.0d
 			y: 14.25d
 		}
 		{
@@ -852,7 +891,7 @@
 				{ id: "540D099A8A65CDE8", type: "checkmark" }
 			]
 			title: "Dust-Laden Aerogel"
-			x: 20.0d
+			x: 22.5d
 			y: 14.25d
 		}
 		{
@@ -867,7 +906,7 @@
 				{ id: "7C143E07D763F6A0", type: "checkmark" }
 			]
 			title: "Interstellar Dust Lab"
-			x: 22.5d
+			x: 25.0d
 			y: 14.25d
 		}
 		{
@@ -880,7 +919,7 @@
 				{ id: "70AE278C7A965C8C", type: "checkmark" }
 			]
 			title: "Extracted Grains"
-			x: 25.0d
+			x: 27.5d
 			y: 14.25d
 		}
 		{
@@ -893,7 +932,7 @@
 				{ id: "1A6B4AC408DCC9E9", type: "checkmark" }
 			]
 			title: "Demineralised Grains"
-			x: 27.5d
+			x: 30.0d
 			y: 14.25d
 		}
 		{
@@ -906,7 +945,7 @@
 				{ id: "5DE7851AFDA5233E", type: "checkmark" }
 			]
 			title: "Iron-60 Record"
-			x: 30.0d
+			x: 32.5d
 			y: 14.25d
 		}
 		{
@@ -920,7 +959,7 @@
 				{ id: "123AE2FFE07CAD19", type: "checkmark" }
 			]
 			title: "Barnard Core Drill"
-			x: 15.0d
+			x: 17.5d
 			y: 16.25d
 		}
 		{
@@ -933,7 +972,7 @@
 				{ id: "5BC3ECB86A4C708E", type: "checkmark" }
 			]
 			title: "Barnard Core Rock"
-			x: 17.5d
+			x: 20.0d
 			y: 16.25d
 		}
 		{
@@ -948,7 +987,7 @@
 				{ id: "14ACF050D3876C55", type: "checkmark" }
 			]
 			title: "Carbonyl Refinery"
-			x: 20.0d
+			x: 22.5d
 			y: 16.25d
 		}
 		{
@@ -961,7 +1000,7 @@
 				{ id: "7C465A1163F9ACCE", type: "checkmark" }
 			]
 			title: "Iron Pentacarbonyl"
-			x: 22.5d
+			x: 25.0d
 			y: 16.25d
 		}
 		{
@@ -974,7 +1013,7 @@
 				{ id: "73A32E20EB3AB9FE", type: "checkmark" }
 			]
 			title: "Barnard Residue"
-			x: 22.5d
+			x: 25.0d
 			y: 17.75d
 		}
 	]
