@@ -2491,14 +2491,18 @@
         "grindless:vela_pulsar_orbit",
         "grindless:cas_a_remnant",
         "grindless:sgr1806_orbit",
-        "grindless:terzan5_core"
+        "grindless:terzan5_core",
+        "grindless:tarantula_orbit",
+        "grindless:magellanic_stream",
+        "grindless:m31_nucleus_orbit",
+        "grindless:local_group_filament"
       ],
       "exceptRecipes": [
         "grindless:warp_gate/hold*"
       ],
       "package": "B7",
       "exact": true,
-      "note": "The dump holds every era: open and sustain share one ends list (gate.json `orbits`; UXV-B1 adds the Vela pulsar orbit and Cassiopeia A, uhv/gate.js:36). The hold rows are UEV's (Sirius B) and UIV's (relays); uev.json checks them."
+      "note": "The dump holds every era: open and sustain share one ends list (gate.json `orbits`; UXV-B1 adds the Vela pulsar orbit and Cassiopeia A, uhv/gate.js:36; XP-T2 adds the four MAX+ places). The hold rows are UEV's (Sirius B) and UIV's (relays); uev.json checks them."
     },
     {
       "id": "site-proxima-orbit",

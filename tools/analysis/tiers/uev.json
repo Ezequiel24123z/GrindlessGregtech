@@ -1499,10 +1499,14 @@
         "grindless:vela_pulsar_orbit",
         "grindless:cas_a_remnant",
         "grindless:sgr1806_orbit",
-        "grindless:terzan5_core"
+        "grindless:terzan5_core",
+        "grindless:tarantula_orbit",
+        "grindless:magellanic_stream",
+        "grindless:m31_nucleus_orbit",
+        "grindless:local_group_filament"
       ],
       "package": "B5",
-      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV ends to open and sustain (uhv/gate.js:36), as uxv.json. UHV's target checks that open and sustain name every end."
+      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV ends to open and sustain (uhv/gate.js:36), as uxv.json; XP-T2 adds the four MAX+ places. UHV's target checks that open and sustain name every end."
     },
     {
       "id": "site-mercury-orbit",

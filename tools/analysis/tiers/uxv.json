@@ -1630,10 +1630,14 @@
         "grindless:vela_pulsar_orbit",
         "grindless:cas_a_remnant",
         "grindless:sgr1806_orbit",
-        "grindless:terzan5_core"
+        "grindless:terzan5_core",
+        "grindless:tarantula_orbit",
+        "grindless:magellanic_stream",
+        "grindless:m31_nucleus_orbit",
+        "grindless:local_group_filament"
       ],
       "package": "B5",
-      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV places to open and sustain; the OpV integrator adds SGR 1806-20 orbit and Terzan 5 core (DECISIONS.md 2026-10-30 \"join the warp gate's ride-home orbits\", uhv/gate.js SITES)."
+      "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV places to open and sustain; the OpV integrator adds SGR 1806-20 orbit and Terzan 5 core (DECISIONS.md 2026-10-30 \"join the warp gate's ride-home orbits\", uhv/gate.js SITES); XP-T2 adds the four MAX+ places."
     },
     {
       "id": "site-j0437",
@@ -1670,13 +1674,15 @@
       ],
       "exceptRecipes": [
         "grindless:frc_forming/load_flux",
-        "grindless:plasma_mass_filtering/disk_filter"
+        "grindless:plasma_mass_filtering/disk_filter",
+        "grindless:plasma_mass_filtering/vms_core_plasma",
+        "grindless:frc_forming/confined_vms_plasma"
       ],
       "package": [
         "B2",
         "B3"
       ],
-      "note": "As built: the FRC former's c2 (load_flux) is unconditioned, as the audit's \"S (c1)\" says; the filter's disk_filter (c2) is unconditioned too, while the audit says \"S (c1-c3)\" (the filter has two rows). Both read disk plasma, a Cygnus product (cygnus-uxv resource)."
+      "note": "As built: the FRC former's c2 (load_flux) is unconditioned, as the audit's \"S (c1)\" says; the filter's disk_filter (c2) is unconditioned too, while the audit says \"S (c1-c3)\" (the filter has two rows). Both read disk plasma, a Cygnus product (cygnus-uxv resource). vms_core_plasma and confined_vms_plasma are XP-B1's MAX+ rows at 30 Doradus (P6, grindless:tarantula_orbit)."
     },
     {
       "id": "site-vela",

@@ -7,7 +7,7 @@
   "obtain": {
     "audit": ["gtceu", "gtca", "gtnn", "gcyr", "grindless", "extendedfeatures", "gtmutils", "gtstoragedrawers", "gtceuterminal"],
     "ignoreNamespaces": ["create", "createaddition", "create_new_age", "createdeco", "create_enchantment_industry"],
-    "reachableDimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:flat", "grindless:void", "gcyr:luna", "gcyr:mars", "gcyr:venus", "gcyr:mercury", "gcyr:black_hole_orbit", "grindless:nsc_belt", "${places}", "${orbits}"],
+    "reachableDimensions": ["minecraft:overworld", "minecraft:the_nether", "minecraft:the_end", "grindless:flat", "grindless:void", "gcyr:luna", "gcyr:mars", "gcyr:venus", "gcyr:mercury", "gcyr:black_hole_orbit", "grindless:nsc_belt", "grindless:tarantula_orbit", "grindless:magellanic_stream", "grindless:m31_nucleus_orbit", "grindless:local_group_filament", "${places}", "${orbits}"],
 
     "notFree": [
       "*:*spawn_egg*",
