@@ -1,8 +1,8 @@
 {
   "era": "uhv",
   "enabled": true,
-  "item": 1.001,
-  "fluid": 1.001,
+  "item": 1.492,
+  "fluid": 1.492,
   "keys": [
     "extendedfeatures:uhv_universal_circuit",
     "gtceu:baseline_astrometer",

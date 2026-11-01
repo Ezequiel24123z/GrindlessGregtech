@@ -1,8 +1,8 @@
 {
   "era": "uev",
   "enabled": true,
-  "item": 1,
-  "fluid": 1,
+  "item": 1.443,
+  "fluid": 1.443,
   "keys": [
     "extendedfeatures:uev_universal_circuit",
     "grindless:uev_conveyor_module",

@@ -1,8 +1,8 @@
 {
   "era": "max",
   "enabled": true,
-  "item": 1,
-  "fluid": 1,
+  "item": 1.571,
+  "fluid": 1.571,
   "keys": [
     "grindless:max_conveyor_module",
     "grindless:max_electric_motor",

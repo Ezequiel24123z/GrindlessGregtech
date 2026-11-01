@@ -1,8 +1,8 @@
 {
   "era": "mv",
   "enabled": true,
-  "item": 1.25,
-  "fluid": 1.25,
+  "item": 1.677,
+  "fluid": 1.677,
   "keys": [
     "extendedfeatures:mv_universal_circuit",
     "gtceu:advanced_multi_smelter",
