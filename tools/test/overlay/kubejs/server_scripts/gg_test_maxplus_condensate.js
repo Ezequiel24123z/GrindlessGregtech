@@ -1,4 +1,4 @@
-// priority: -5210
+// priority: -5150
 // TEST ONLY, XP-A1 (gtceu:condensate_refinery, gtceu:bound_matter_press). Command: kubejs custom_command gg_test_maxplus_condensate
 // Band ONLY: X 46144-46207, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_condensate).
 //   T1 (named uncertainty: the two new multiblocks form at Sgr A* on one 1,024 A MAX+ hatch and run a row above VA[MAX]):

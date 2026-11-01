@@ -1,4 +1,4 @@
-// priority: -20240
+// priority: -20296
 // MAX+ machine 3, the Hills slingshot, and lines P15 and P16 (docs/eras/maxplus.md, machine 3 and 'Lines'; package XP-T1). Gate c16 to 30 Doradus is a
 // row of data/grindless/tables/gate.json.
 //

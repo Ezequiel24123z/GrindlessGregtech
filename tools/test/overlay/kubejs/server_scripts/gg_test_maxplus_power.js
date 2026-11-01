@@ -1,4 +1,4 @@
-// priority: -5280
+// priority: -5262
 // Gregtech Grindless - smoke test of MAX+ power plumbing (package XP-W; TEST-ONLY overlay: copied over the instance on the test PC, never
 // shipped with the pack): line P18, the hatch recipes of maxplus/power.js and the case 14 feed of one MAX 64 A substation hatch.
 //

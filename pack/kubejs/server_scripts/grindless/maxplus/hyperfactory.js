@@ -1,4 +1,4 @@
-// priority: -20200
+// priority: -20248
 // MAX+ machine 15, the Hyperfactory, and its parallel hatch (docs/eras/maxplus.md, 'Hyperfactory' and Controllers; package XP-M1). The hatch is registered in
 // startup_scripts/grindless/lib/parallel_hatch.js (gtceu:max_maxplus_parallel_hatch, x4,194,304), the machine in startup_scripts/grindless/maxplus/hyperfactory.js.
 //

@@ -1,4 +1,4 @@
-// priority: 6984
+// priority: 6978
 // Gregtech Grindless - names of MAX+'s second-hop gate rows (data/grindless/tables/gate.json c17 to c19; package XP-T2):
 //
 //   gtceu.recipe.grindless_warp_gate.<name>   the EMI line of each row

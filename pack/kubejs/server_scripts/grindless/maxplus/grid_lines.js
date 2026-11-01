@@ -1,4 +1,4 @@
-// priority: -20190
+// priority: -20236
 // MAX+ grid lines P19, T11, T12, T13 and T17 on the older machines (docs/eras/maxplus.md 'Lines' and 'Older machines'; package XP-H4b).
 // (hand-stamped between crystals.js and hyperfactory.js; the integrator re-stamps with tools/analysis/script-order.mjs --write)
 //

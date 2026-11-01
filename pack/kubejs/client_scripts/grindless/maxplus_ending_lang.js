@@ -1,3 +1,4 @@
+// priority: 7008
 // XP-Z1b: the ending's title, subtitle and the epilogue book's pages (docs/eras/maxplus.md "The ending"; the pages joined with a space are that text).
 ;(function () {
   var PAGES = [

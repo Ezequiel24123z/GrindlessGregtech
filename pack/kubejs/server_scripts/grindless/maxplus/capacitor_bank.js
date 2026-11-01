@@ -1,4 +1,4 @@
-// priority: -20120
+// priority: -20140
 // MAX+ machine 15, the horizon capacitor bank: its controller on the assembly line (docs/eras/maxplus.md, Controllers and machine 15; package XP-H5).
 //
 // The design's base (MAX hull, 2 horizon_machine_casing, 8 horizon_processor, 4 MAX circuits, 8 MAX+ components from 3 families, a plate,

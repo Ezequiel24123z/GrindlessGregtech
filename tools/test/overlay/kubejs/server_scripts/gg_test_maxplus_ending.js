@@ -1,3 +1,4 @@
+// priority: -5164
 // TEST ONLY, XP-Z1b ending (docs/eras/maxplus.md "The ending"). Server half; partner of client_scripts/gg_test_maxplus_ending.js.
 // Runs in the client suite (integrated server) and only with kubejs/config/gg_test_maxplus_ending.json {"enabled": true}.
 // Installs a test-only double of global.grindless.hyperstargate (XP-G1): one gate whose interior box surrounds the test player, open on demand.

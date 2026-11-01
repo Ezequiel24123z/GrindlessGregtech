@@ -1,4 +1,4 @@
-// priority: -5250
+// priority: -5220
 // TEST ONLY, XP-G1 (gtceu:hyperstargate). Command: kubejs custom_command gg_test_maxplus_hyperstargate
 // Band ONLY: X 46912-46975, Z 0-63, Y 98-160 of gcyr:black_hole_orbit (Sgr A*) (zones.json row maxplus_hyperstargate). No startup overlay: the gate,
 // its dial type and the spent charge are part of the pack.

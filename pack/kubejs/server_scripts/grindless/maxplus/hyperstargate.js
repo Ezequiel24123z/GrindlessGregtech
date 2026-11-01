@@ -1,4 +1,4 @@
-// priority: -20210
+// priority: -20260
 // -----------------------------------------------------------------------------------------------
 // MAX+ machine 17, the Hyperstargate's rows (docs/eras/maxplus.md "The Hyperstargate"; package XP-G1). Three rows and one visual:
 //   hyper_assembly_array  hyperstargate           the controller, at Sgr A*

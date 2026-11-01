@@ -1,3 +1,4 @@
+// priority: 6998
 // XP-Z1b: opens the epilogue as a vanilla written-book screen. The server right-click handler (server_scripts/grindless/maxplus/ending.js) sends the
 // 'grindless_epilogue_open' data packet; the stack here is client-built and never exists in the world. Pages are lang keys (maxplus_ending_lang.js).
 ;(function () {

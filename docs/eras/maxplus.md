@@ -41,7 +41,7 @@ Places (named fiction only where marked):
 **Stage I: out of the Galaxy** (`maxplus`, `maxplus-lmc`, `maxplus-stream`).
 
 1. **The key.** MAX's last recipe makes `horizon_lock` and grants `maxplus` (max.md *The ending*). With a lock kept as catalyst, the mirror shell's c4 taps `kerr_condensate` from the stationary cloud (P1).
-2. **Horizon-bound matter.** The condensate refinery binds UIV neutronium, OpV strange matter and UEV degenerate matter into condensate (P2, P3, P5) and clads horizon strand into `gtceu:kerr_strand`, the MAX+ cable (P4). The bound-matter press makes `horizon_compressed_plate`, the pack's superdense plate.
+2. **Horizon-bound matter.** The condensate refinery binds UIV neutronium, OpV strange matter and UEV degenerate matter into condensate (P2, P3, P5) and clads horizon strand into Kerr strand wire (P4), which goes into the MAX+ casing and the tree's mesh and windings. The bound-matter press makes `horizon_compressed_plate`, the pack's superdense plate.
 3. **Components and circuit.** Nine `grindless:maxplus_*` components from seven core lines (C1-C7) and the horizon processor (Q1, Q2) close the family. MAX+ hatches are GTM's MAX hatches in bulk (*Voltages*).
 4. **The slingshot.** At Sgr A\* the Hills slingshot binds an `ig_relay_probe` to a counterweight (P15, P16) on a plunging orbit; the hole's tide splits the pair and throws the probe out of the Galaxy. Gate c16 catches it at 30 Doradus: `maxplus-lmc`.
 5. **The Tarantula.** The stellar lift draws core plasma from R136's very massive stars (P6); the pair-instability crucible burns it into nickel-56 (P7) and intermediate-mass ash (P8); the nickel-56 burner is stage I's power.
@@ -158,9 +158,9 @@ Nothing is mined by hand; no platform deck is a quarry.
 
 **No fallback.** The 2^39 x 19,200 t fallback of open question 6 is retired: power, not cost, limits the dial, and it limits only how often the gate can dial (the bank's recharge, *Power*), never the dial's 1,200 ticks.
 
-**Hull.** MAX+ machines use GTM's `gtceu:max_machine_hull` with a MAX+ casing (`grindless:horizon_machine_casing`: MAX casing + 4 `horizon_compressed_plate` + 2 `gtceu:kerr_strand_single_cable`). There is no MAX+ hull id: GTM's builder key is the base id and a second hull at the same tier crashes the boot (DECISIONS.md:526).
+**Hull.** MAX+ machines use GTM's `gtceu:max_machine_hull` with a MAX+ casing (`grindless:horizon_machine_casing`: MAX casing + 4 `horizon_compressed_plate` + 1 `insulated_kerr_wire` + 2 `gtceu:horizon_strand_single_wire` + a chain lamina stack + a MAX sensor; `maxplus/components.js:55`). There is no MAX+ hull id: GTM's builder key is the base id and a second hull at the same tier crashes the boot (DECISIONS.md:526).
 
-**Cable.** `gtceu:kerr_strand` (P4; KubeJS material, single cable at V[MAX], 256 A, loss 0 *(tune)*; S0-3). Fallback: power by wireless only.
+**Cable.** None. S0-3 found no KubeJS cable that carries 256 A at V[MAX], so MAX+ power travels by wireless only. P4 makes Kerr strand wire as a component; XP-C1 removed the unused `gtceu:kerr_strand` material.
 
 **Components.** `grindless:maxplus_*` (XP-F1, the `uiv_components.js` pattern), at VA[MAX] on GTM's assembly line:
 
@@ -317,7 +317,7 @@ Each step is a real transformation; a line counts with at least 4 transformation
 | P1 | Kerr condensate | Kugelblitz forge (OpV, Cygnus) → `seed_wave_packet`; mirror shell c4 (MAX) → `kerr_condensate`; condensate refinery c1 → `settled_condensate`; superfluid He plant → `jacketed_condensate_cell` (the travel form) | 4 | 2 | XP-A1 |
 | P2 | Horizon-bound neutronium | neutron drip separator (UIV) → `neutronium_pellet`; megabar → `compressed_neutronium_core`; refinery c2 → `bound_neutronium_ingot`; bound-matter press c1 → `horizon_compressed_plate` | 4 | 2 | XP-A1 |
 | P3 | Kerr strange alloy | strangelet vault (OpV) → `fed_strangelet`; levitation melter → `strange_alloy_charge`; refinery c3 → `kerr_strange_ingot`; press c2 → `kerr_strange_plate` | 4 | 2 | XP-A1 |
-| P4 | Kerr strand (MAX+ cable) | refinery c4 (on MAX horizon strand wire) → `kerr_clad_strand`; pasta draw bench (UXV, SGR) → `kerr_strand_wire`; MTJ (oxide interlayer) → `insulated_kerr_wire`; PBO plant → `kerr_braid_sleeve`; GTM assembler → `gtceu:kerr_strand_single_cable` | 5 | 3 | XP-A1 |
+| P4 | Kerr strand wire | refinery c4 (on MAX horizon strand wire) → `kerr_clad_strand`; pasta draw bench (UXV, SGR) → `kerr_strand_wire`; MTJ (oxide interlayer) → `insulated_kerr_wire`; PBO plant → `kerr_braid_sleeve`; GTM assembler: `insulated_kerr_wire` into `horizon_machine_casing` | 5 | 3 | XP-A1 |
 | P5 | Bound degenerate billet | degenerate harvester (UEV, Sirius B) → `degenerate_matter_slug`; megabar → `degenerate_compact`; refinery c5 → `bound_degenerate_powder`; SPS → `bound_degenerate_billet` | 4 | 3 | XP-A1 |
 | P6 | Very-massive-star plasma | stellar lift c1 → `raw_vms_plasma`; plasma mass filter (30 Dor row) → `vms_core_plasma`; FRC former (30 Dor row) → `confined_vms_plasma`; crucible c1 → `ni56_slug` + `ime_ash` | 4 | 2 | XP-B1 |
 | P7 | Nickel-56 cask | GTM canner (+ `chain_lamina_stack`) → `canned_ni56`; hot cell → `shielded_ni56_cask`; burner c1 → EU + `co56_cask`; burner c2 → EU + `spent_fe56_cask` | 4 | 1 | XP-B1 |

@@ -1,3 +1,4 @@
+// priority: -20212
 // XP-Z1b: the ending (docs/eras/maxplus.md "The ending"). The crossing through an open Hyperstargate plane, the arrival plaza (placed once per
 // world), each player's first arrival (title, epilogue, the WIN_GAME credits) and the epilogue book's open signal. Game mode never changes and
 // the player stays alive and in place (MAX-C3 proved the packet, DECISIONS.md:693). No quest code: the arrival quest is a dimension task.

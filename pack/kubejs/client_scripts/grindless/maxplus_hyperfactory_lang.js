@@ -1,4 +1,4 @@
-// priority: 6960
+// priority: 6958
 // Gregtech Grindless - names and tooltips of MAX+'s Hyperfactory and parallel hatch (startup_scripts/grindless/maxplus/hyperfactory.js and
 // lib/parallel_hatch.js; package XP-M1). The EMI info keys are here: the shared emi_info_lang.js and the additions json are the integrator's.
 //

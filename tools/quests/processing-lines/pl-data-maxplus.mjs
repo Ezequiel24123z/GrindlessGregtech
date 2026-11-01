@@ -919,7 +919,7 @@ const NAMES = {
   P1: "Kerr condensate",
   P2: "Horizon-bound neutronium",
   P3: "Kerr strange alloy",
-  P4: "Kerr strand (MAX+ cable)",
+  P4: "Kerr strand wire",
   P5: "Bound degenerate billet",
   P6: "Very-massive-star plasma",
   P7: "Nickel-56 cask",

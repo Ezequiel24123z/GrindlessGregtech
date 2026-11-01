@@ -1,4 +1,4 @@
-// priority: -20250
+// priority: -20308
 // MAX+ machines 7 and 8 at the Magellanic Stream and lines P9, P10, P11, P22 and P23 (docs/eras/maxplus.md, machines 7-8 and 'Lines'; package XP-B2).
 //
 //   P9  pristine hydrogen   gas works (c1) -> pristine_gas; cryogenic plant -> liquid_pristine_hydrogen; distillation -> hd_fraction;

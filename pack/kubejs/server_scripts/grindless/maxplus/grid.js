@@ -1,4 +1,4 @@
-// priority: -20180
+// priority: -20224
 // -----------------------------------------------------------------------------------------------
 // MAX+ machine 16, the hyper assembly array: its rows and its controller (docs/eras/maxplus.md "Machines" 16 and the Hyperstargate grid; package
 // XP-H4a). The rows (ring block ... base, the T11 and T12 last steps and the six creative-item rows) are data in startup_scripts/grindless/maxplus/
