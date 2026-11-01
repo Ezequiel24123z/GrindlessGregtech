@@ -1,10 +1,14 @@
 // priority: -20100
-// MAX+ lines K1 to K2, the creative cores, on the OpV-UXV older machines and the MAX+ refinery and fab (docs/eras/maxplus.md 'Lines'; package XP-K).
+// MAX+ lines K1 to K4, the creative cores, on the OpV-UXV older machines and the MAX+ refinery and fab (docs/eras/maxplus.md 'Lines'; package XP-K).
 //
 //   K1 horizon cloud core       Kugelblitz forge c7 -> caged_kugelblitz; strangelet vault c5 -> strange_cage_lining;
 //                               magnetic pair converter c3 -> pair_confined_cage; condensate refinery c8 -> cloud_loaded_cage; mK cryostat c32 -> horizon_cloud_core
 //   K2 bottomless store core    void crystal fab c2 -> void_holographic_block; femto writer c22 -> addressed_holo_block;
 //                               spectral hole burner c28 -> burned_store_block; mK cryostat c32 -> bottomless_store_core
+//   K3 bottomless tank core     aerogel works c8 -> condensate_aerogel; SHeQUID c13 -> superfluid_reservoir_core; refinery c9 -> condensate_wetted_core;
+//                               SHeQUID c14 -> bottomless_tank_core (the superfluid helium plant cannot output an item)
+//   K4 horizon computation core TFLN fab c21 -> photonic_qpu_wafer; SNSPD foundry c9 -> detector_layer_wafer; photonic integration hall c15 -> photonic_qpu;
+//                               mK cryostat c32 -> horizon_computation_core
 //
 // Circuits are the first free ones of each machine type (strictly above every row built or reserved). The cryostat type is already at 32, so its
 // rows share it and differ by item inputs (maxplus/ae2.js, loom.js). Site rows carry their machine's site (Cygnus X-1, SGR 1806, Sgr A*, the
@@ -58,7 +62,33 @@
       outs: [['grindless:burned_store_block', 1]] },
     { type: 'nuclear_demagnetisation', name: 'bottomless_store_core', circuit: 32, eut: va(14), duration: 2400, key: 'grindless_nuclear_demagnetisation',
       items: [['grindless:burned_store_block', 2], ['grindless:horizon_logic_wafer', 8], ['grindless:horizon_strand_preform', 16]], fluids: [[HE3, 32000]],
-      outs: [['grindless:bottomless_store_core', 1]] }
+      outs: [['grindless:bottomless_store_core', 1]] },
+    // K3: the superfluid helium plant has no item slot, so its final step is a second SHeQUID row (c14), as XP-H1's T7 does
+    { type: 'supercritical_drying', name: 'condensate_aerogel', circuit: 8, eut: va(12), duration: 2400,
+      items: [['grindless:silica_aerogel', 64], ['grindless:refractory_condensate', 32], ['grindless:silicate_condensate', 32]], fluids: [[HE3, 8000]],
+      outs: [['grindless:condensate_aerogel', 8]] },
+    { type: 'shequid_assembly', name: 'superfluid_reservoir_core', circuit: 13, eut: va(13), duration: 2400, key: 'grindless_shequid_assembly',
+      items: [['grindless:condensate_aerogel', 16], ['grindless:aerogel_superleak_plug', 16], ['grindless:superfluid_he3_seal', 8]], fluids: [[HE3, 64000]],
+      outs: [['grindless:superfluid_reservoir_core', 1]] },
+    { type: 'condensate_refinery', name: 'condensate_wetted_core', circuit: 9, eut: V_MAX * 16, duration: 2400, key: 'grindless_condensate_refinery', dim: SGRA,
+      items: [['grindless:superfluid_reservoir_core', 2], ['grindless:metal_condensate', 32]], fluids: [[SETTLED, 64000]],
+      outs: [['grindless:condensate_wetted_core', 1], ['grindless:condensate_boil_off', 8]] },
+    { type: 'shequid_assembly', name: 'bottomless_tank_core', circuit: 14, eut: va(13), duration: 2400, key: 'grindless_shequid_assembly',
+      items: [['grindless:condensate_wetted_core', 2], ['grindless:superfluid_valve', 16], ['grindless:aerogel_fuel_tank', 8]], fluids: [[HE3, 64000]],
+      outs: [['grindless:bottomless_tank_core', 1]] },
+    // K4: electronic-grade silicon is the substrate of both wafer steps
+    { type: 'ion_slicing', name: 'photonic_qpu_wafer', circuit: 21, eut: va(13), duration: 2400, key: 'grindless_ion_slicing',
+      items: [['grindless:electronic_grade_silicon', 64], ['grindless:ln_on_insulator_plus', 32]], fluids: [['gtceu:helium', 32000]],
+      outs: [['grindless:photonic_qpu_wafer', 2]], fluidOuts: [['gtceu:helium', 25600]] },
+    { type: 'snspd_fabrication', name: 'detector_layer_wafer', circuit: 9, eut: va(13), duration: 2400, key: 'grindless_snspd_fabrication',
+      items: [['grindless:photonic_qpu_wafer', 2], ['grindless:wsi_nanowire_wafer', 16], ['grindless:snspd_die', 16], ['grindless:electronic_grade_silicon', 32]], fluids: [['gtceu:helium', 16000]],
+      outs: [['grindless:detector_layer_wafer', 2]] },
+    { type: 'photonic_integration', name: 'photonic_qpu', circuit: 15, eut: va(14), duration: 2400, key: 'grindless_photonic_integration',
+      items: [['grindless:detector_layer_wafer', 4], ['grindless:snspd_link_wafer', 16], ['grindless:horizon_logic_die', 8], ['grindless:quantum_photonic_chip', 4]], fluids: [['gtceu:epoxy', 2304]],
+      outs: [['grindless:photonic_qpu', 1]] },
+    { type: 'nuclear_demagnetisation', name: 'horizon_computation_core', circuit: 32, eut: va(14), duration: 2400, key: 'grindless_nuclear_demagnetisation',
+      items: [['grindless:photonic_qpu', 2], ['grindless:horizon_interposer', 8], ['grindless:horizon_alignment_matrix', 4]], fluids: [[HE3, 32000]],
+      outs: [['grindless:horizon_computation_core', 1]] }
   ]
 
   MK.rows = ROWS
