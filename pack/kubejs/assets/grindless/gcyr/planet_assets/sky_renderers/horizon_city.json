@@ -1,0 +1,13 @@
+{
+  "world": "grindless:horizon_city",
+  "stars": { "fancy_count": 2500, "fast_count": 1200, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 60, "color": 16757888, "rotation": [35, 0, 0] },
+    { "texture": "grindless:textures/sky/horizon_ring.png", "blending": true, "render_type": "static", "scale": 100, "rotation": [35, 0, 0] }
+  ]
+}
