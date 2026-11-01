@@ -7,6 +7,10 @@
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
 (function () {
     // [key, en, es]
+    var MACHINES = [
+        ['block.gtceu.condensate_refinery', 'Condensate Refinery', 'Refiner\u00eda de condensado'],
+        ['block.gtceu.bound_matter_press', 'Bound-Matter Press', 'Prensa de materia ligada']
+    ]
     var ENTRIES = [
         ['gtceu.condensate_refinery', 'Condensate Refinery', 'Refiner\u00eda de condensado'],
         ['gtceu.bound_matter_press', 'Bound-Matter Press', 'Prensa de materia ligada'],
@@ -32,6 +36,10 @@
         ClientEvents.lang(lang, function (event) {
             ENTRIES.forEach(function (e) {
                 event.add('grindless', e[0], e[1 + li])
+            })
+            // the controllers' block names (GTM reads block.gtceu.<id>)
+            MACHINES.forEach(function (e) {
+                event.add('gtceu', e[0], e[1 + li])
             })
         })
     })
