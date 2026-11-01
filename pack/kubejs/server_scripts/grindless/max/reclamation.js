@@ -4,7 +4,7 @@
 // machines' rows of the two lines are marked MX-S4 in their own files (biofoundry table c20, extraction cascade c3/c4).
 //
 //   L52 REBCO reclamation: c1 -> stripped_membrane_scrap -> biofoundry (bioleaching) -> bioleached_re_liquor -> extraction cascade (solvent
-//       extraction) -> y_ba_cu_raffinate -> GTM chemical reactor (oxalate co-precipitation) -> ybco_oxalate -> GTM electric furnace
+//       extraction) -> y_ba_cu_raffinate -> GTM chemical reactor (oxalate co-precipitation) -> ybco_oxalate -> GTM electric blast furnace
 //       (calcination) -> ybco_precursor_powder (L32 step 2)
 //   L53 Erbium regenerator return: c1 -> cryocooler_scrap -> GTM macerator (Er3Ni is brittle) -> er3ni_grit -> GTM electromagnetic separator
 //       -> er_rich_fraction -> extraction cascade (leach and solvent extraction) -> er_ho_oxide (L30 step 1)
@@ -41,7 +41,7 @@
   // the casing, two per craft at VA[MAX] from stock parts, like the other F1 casings (max/casings.js)
   var CASING_ROW = {
     name: 'reclamation_bay_casing', circuit: 24,
-    items: ['gtceu:opv_machine_casing', '4x gtceu:tungsten_steel_plate', '4x gtceu:tungsten_steel_rod', '2x gtceu:rubber_plate', '2x #gtceu:circuits/max']
+    items: ['gtceu:opv_machine_casing', '4x gtceu:tungsten_steel_plate', '4x gtceu:tungsten_steel_rod', '2x grindless:max_conveyor_module', '2x #gtceu:circuits/max']
   }
 
   // GTM rows: type, name, items in, fluids in, items out, EU/t, ticks
@@ -56,9 +56,9 @@
     { type: 'chemical_reactor', name: 'ybco_oxalate', items: ['4x grindless:y_ba_cu_raffinate'],
       fluids: [['gtceu:ammonia', 3000], ['gtceu:carbon_monoxide', 3000], ['minecraft:water', 1000]],
       outs: ['4x grindless:ybco_oxalate', '3x gtceu:ammonium_chloride_dust'], fluidOuts: [], eut: 7864320, duration: 600 },
-    // L52 step 5: calcination, the oxalate decomposes to the oxide precursor of the YBCO tape (L32 step 2)
-    { type: 'electric_furnace', name: 'ybco_precursor_calcined', items: ['4x grindless:ybco_oxalate'], fluids: [],
-      outs: ['4x grindless:ybco_precursor_powder'], fluidOuts: [], eut: 7864320, duration: 800 },
+    // L52 step 5: calcination in the blast furnace (EMI shows its recipes), the oxalate decomposes to the oxide precursor of the YBCO tape (L32 step 2)
+    { type: 'electric_blast_furnace', name: 'ybco_precursor_calcined', items: ['4x grindless:ybco_oxalate'], fluids: [],
+      outs: ['4x grindless:ybco_precursor_powder'], fluidOuts: [], eut: 7864320, duration: 800, temp: 1800 },
     // the coupler's magnet stack is tetrataenite-bearing iron: its concentrate goes to the cold press, never melted (L37 step 3)
     { type: 'electromagnetic_separator', name: 'coupler_scrap_tetrataenite', items: ['1x grindless:coupler_scrap'], fluids: [],
       outs: ['1x grindless:tetrataenite_concentrate', '2x gtceu:iron_dust'], fluidOuts: [], eut: 31457280, duration: 600 },
@@ -135,6 +135,7 @@
         r.outs.forEach(function (s) { g.itemOutputs(s) })
         r.fluidOuts.forEach(function (f) { g.outputFluids(Fluid.of(f[0], f[1])) })
         g.EUt(r.eut).duration(r.duration)
+        if (r.temp) g.blastFurnaceTemp(r.temp)
         MR.recipes.push('grindless:' + r.type + '/' + r.name)
       } catch (e) {
         console.error(LOG + 'reclamation ' + r.name + ' failed: ' + e)

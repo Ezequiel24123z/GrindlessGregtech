@@ -396,6 +396,33 @@
       itemsOut: [{ id: 'grindless:hafnium_tantalum_oxide', count: 4 }, { id: 'gtceu:ammonium_chloride_dust', count: 2 }],
       fluidsOut: [],
       eut: 1920, duration: 100
+    },
+    // MX-S4 (max.md, L52 step 3, c3): the Y, Ba and Cu raffinate pulled out of the bioleach liquor into kerosene, the acid coming back diluted
+    {
+      name: 'y_ba_cu_raffinate', mode: 'max', circuit: 3,
+      itemsIn: [{ id: 'grindless:bioleached_re_liquor', count: 4 }],
+      fluidsIn: [{ id: 'gtceu:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }, { id: HCL, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:y_ba_cu_raffinate', count: 4 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: DILUTED_HCL, amount: 2000 }],
+      eut: 1920, duration: 100
+    },
+    // MX-S4 (max.md, L53 step 4, c4): the erbium-rich fraction stripped into holmium-erbium oxide, the hydrogen of the reduction coming off
+    {
+      name: 'er_ho_oxide_er_rich', mode: 'max', circuit: 4,
+      itemsIn: [{ id: 'grindless:er_rich_fraction', count: 8 }],
+      fluidsIn: [{ id: HCL, amount: 3000 }, { id: 'gtceu:water', amount: 3000 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [{ id: 'grindless:er_ho_oxide', count: 4 }],
+      fluidsOut: [{ id: KEROSENE, amount: 950 }, { id: DILUTED_HCL, amount: 4000 }, { id: 'gtceu:hydrogen', amount: 1500 }],
+      eut: 1920, duration: 100
+    },
+    // MX-S4 (max.md, Sn-Li return, c3; repeat by item inputs): Sn-Li dross melted into kerosene and hydrogen, the eutectic of the droplet radiator coming back
+    {
+      name: 'sn_li_dross_eutectic', mode: 'max', circuit: 3,
+      itemsIn: [{ id: 'grindless:sn_li_dross', count: 2 }],
+      fluidsIn: [{ id: KEROSENE, amount: 1000 }, { id: 'gtceu:hydrogen', amount: 1000 }],
+      itemsOut: [],
+      fluidsOut: [{ id: 'gtceu:sn_li_eutectic', amount: 1000 }, { id: KEROSENE, amount: 950 }, { id: 'gtceu:water', amount: 500 }],
+      eut: 1920, duration: 100
     }
   ]
 

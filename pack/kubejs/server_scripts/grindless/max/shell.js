@@ -32,7 +32,7 @@
 
   var SHELL = [
     { name: 'vent_wave_packet', circuit: 1, eut: -VH_MAX, duration: 4800, items: ['1x grindless:seed_wave_packet'],
-      outs: ['1x grindless:spent_wave_packet'] },
+      outs: ['1x grindless:spent_wave_packet'], chanced: [{ id: 'grindless:ablated_shell_segment', chance: 625 }] },
     { name: 'final_spin_map', circuit: 2, eut: VA_MAX, duration: 1200,
       items: ['1x grindless:sgr_a_spin_map', '1x grindless:shell_gradient_map'], outs: ['1x grindless:final_spin_map'] },
     { name: 'universe_seed', circuit: 3, eut: V_MAX * 16, duration: 1200,
@@ -60,7 +60,8 @@
   ServerEvents.recipes(function (event) {
     SHELL.forEach(function (r) {
       try {
-        var missing = missingOf(r.items.concat(r.outs), [])
+        var chanced = r.chanced || []
+        var missing = missingOf(r.items.concat(r.outs).concat(chanced.map(function (c) { return c.id })), [])
         if (missing.length > 0) {
           skip(r.name, missing)
           return
@@ -69,6 +70,8 @@
         b.circuit(r.circuit)
         r.items.forEach(function (s) { b.itemInputs(s) })
         r.outs.forEach(function (s) { b.itemOutputs(s) })
+        // the ablated segment of the shell's wear: 1 in 16 vents, the input of the segment reclamation works
+        chanced.forEach(function (c) { b.chancedOutput('1x ' + c.id, c.chance, 0) })
         b.dimension(SITE)
         b.addDataString(KEY, r.name)
         b.EUt(r.eut).duration(r.duration)
