@@ -37,7 +37,11 @@ export default {
           ['enr', I('gtceu:calcium_48_enriched_chloride_dust'), 'Enriched Chloride', 'product', { sub: 'Chlorinated again' }],
           ['cal2', mach('gtceu:calutron'), 'Calutron, second pass', 'ours'],
           ['ca48', I('gtceu:calcium_48_dust'), 'Calcium-48'],
-        ], 'the beam of the cyclotron'),
+          ['crl', I('grindless:ca48_crucible_load'), 'Crucible Load'],
+          ['ovc', I('grindless:ca48_oven_charge'), 'Oven Charge'],
+          ['plb', I('grindless:ca48_plasma_bunch'), 'Plasma Bunch'],
+          ['beam', I('grindless:ca48_beam'), 'Calcium-48 Beam'],
+        ], 'the heavy ion cyclotron'),
         // flerovium atoms
         ...chain(2, [
           ['pt', I('grindless:plutonium_244_target'), 'Plutonium-244 Target', 'raw'],
@@ -46,6 +50,42 @@ export default {
           ['rec', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours', { desc: 'Sends the gas through an etched membrane; the helium returns.' }],
           ['fl', I('grindless:flerovium_atoms'), 'Flerovium Atoms'],
         ], 'the superheavy census'),
+        // plutonium-244 target
+        ...chain(6, [
+          ['pfd', I('gtceu:plutonium_244_dust'), 'Plutonium-244', 'raw'],
+          ['po4', I('gtceu:plutonium_244_oxide_dust'), 'Plutonium-244 Oxide'],
+          ['pam', I('grindless:pu244_plating_ampoule'), 'Plating Ampoule'],
+          ['pt2', I('grindless:plutonium_244_target'), 'Plutonium-244 Target'],
+        ], 'the flerovium line'),
+        // californium-249 wheel
+        ...chain(8, [
+          ['tcl', F('gtceu:transcurium_liquor'), 'Transcurium Liquor', 'raw'],
+          ['bk', I('grindless:berkelium_249'), 'Berkelium-249'],
+          ['cf9', I('gtceu:californium_249_dust'), 'Californium-249', 'product', { sub: 'Aged in the hot cell' }],
+          ['cfw', I('grindless:cf249_target_wheel'), 'Californium-249 Target Wheel'],
+        ], 'the oganesson line'),
+        // tennessine sample
+        ...chain(10, [
+          ['bkn', F('gtceu:berkelium_nitrate'), 'Berkelium Nitrate', 'raw'],
+          ['bko', I('grindless:berkelium_oxide_dust'), 'Berkelium Oxide'],
+          ['tw', I('grindless:target_wheel'), 'Target Wheel'],
+          ['tgas', F('gtceu:tennessine_recoil_gas'), 'Tennessine Recoil Gas'],
+          ['tna', I('grindless:tennessine_atoms'), 'Tennessine Atoms'],
+          ['tns', I('grindless:tennessine_sample'), 'Tennessine Sample'],
+        ], 'the UIV atoms'),
+        // lithium-6 and potassium-40
+        ...chain(12, [
+          ['licl', I('gtceu:lithium_chloride_dust'), 'Lithium Chloride', 'raw'],
+          ['cal4', mach('gtceu:calutron'), 'Calutron', 'ours'],
+          ['li6', I('gtceu:lithium_6_dust'), 'Lithium-6'],
+          ['eos', I('grindless:degenerate_eos_model'), 'Degenerate EOS Model'],
+        ], 'the stasis field'),
+        ...chain(14, [
+          ['rks', I('gtceu:rock_salt_dust'), 'Rock Salt', 'raw'],
+          ['cal5', mach('gtceu:calutron'), 'Calutron', 'ours'],
+          ['k40', I('gtceu:potassium_40_dust'), 'Potassium-40'],
+          ['eos2', I('grindless:degenerate_eos_model'), 'Degenerate EOS Model'],
+        ], 'the stasis field'),
         // etched membranes
         ...chain(4, [
           ['pc', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil', 'raw'],
@@ -93,6 +133,69 @@ export default {
         ], 'the hull and the Mk4 casing'),
         n('hcl', 22.5, 6, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { kind: 'by', from: ['cvi'], end: 'the chlorine loop' }),
         L('xp_h2', -2.5, 9.5, 'pl_hv:shifted'),
+        // ammonia borane
+        ...chain(12, [
+          ['amc', I('gtceu:ammonium_chloride_dust'), 'Ammonium Chloride', 'raw'],
+          ['abd', I('gtceu:ammonia_borane_dust'), 'Ammonia Borane'],
+          ['abc', I('grindless:ammonia_borane_charge'), 'Pressed Charge'],
+          ['hyd2', I('gtceu:lay_superhydride_ingot'), 'Superhydride Ingot'],
+        ], 'the scoop coil'),
+        // rhenium and the single-crystal blade
+        ...chain(14, [
+          ['rhi', I('gtceu:rhenium_ingot'), 'Rhenium Ingot', 'raw'],
+          ['re6', I('grindless:six_n_rhenium'), '6N Rhenium'],
+          ['sxm', I('grindless:sx_master_alloy_dust'), 'SX Master Alloy'],
+          ['sxb', I('grindless:sx_blade'), 'SX Blade'],
+        ], 'the heat-treated blade'),
+        // hafnium
+        ...chain(16, [
+          ['zrh', I('grindless:zr_hf_chloride_dust'), 'Zr-Hf Chloride', 'raw'],
+          ['hfc', I('grindless:hafnium_chloride_dust'), 'Hafnium Chloride'],
+          ['hfo', I('grindless:hafnia_dust'), 'Hafnia'],
+          ['hf4', I('grindless:hafnium_tetrachloride_dust'), 'Hafnium Tetrachloride'],
+          ['hfs', I('grindless:hafnium_sponge'), 'Hafnium Sponge'],
+          ['hf6', I('grindless:six_n_hafnium'), '6N Hafnium'],
+        ], 'the pump, the coil and the fusion alloy'),
+        // tantalum
+        ...chain(18, [
+          ['tan', I('gtceu:tantalite_dust'), 'Tantalite', 'raw'],
+          ['tfc', I('grindless:tantalite_fluoride_cake'), 'Fluoride Cake'],
+          ['ktf', I('grindless:k2taf7_dust'), 'K2TaF7'],
+          ['tap', I('grindless:tantalum_powder'), 'Tantalum Powder'],
+          ['ta6', I('grindless:six_n_tantalum'), '6N Tantalum'],
+        ], 'the emitter, the conveyor and the blade alloy'),
+        // HfTaCN coil block
+        ...chain(20, [
+          ['hcd', I('grindless:hftacn_crude_dust'), 'HfTaCN Crude', 'raw'],
+          ['hcp', I('grindless:hftacn_powder'), 'HfTaCN Powder'],
+          ['hci', I('gtceu:hftacn_ingot'), 'HfTaCN Ingot'],
+          ['hce', I('grindless:hftacn_heating_element'), 'Heating Element'],
+          ['hcb', I('grindless:hftacn_coil_block'), 'Coil Block'],
+        ], 'the Mk4 reactor and the stellar forge'),
+        // tungsten divertor
+        ...chain(22, [
+          ['tsw', I('gtceu:tungsten_single_wire'), 'Tungsten Wire', 'raw'],
+          ['cww', I('grindless:coated_w_wire'), 'Coated Wire'],
+          ['wfp', I('grindless:w_fibre_preform'), 'Fibre Preform'],
+          ['div', I('grindless:divertor'), 'Divertor'],
+        ], 'the UIV fusion casing'),
+        n('wft', 8.75, 24, I('grindless:wf_w_tile'), 'Wf/W Tile', { kind: 'product', from: ['wfp'], end: 'the Mk4 fusion casing' }),
+        // YSZ coating
+        ...chain(26, [
+          ['yo', I('grindless:yttrium_oxide_dust'), 'Yttrium Oxide', 'raw'],
+          ['ysp', I('grindless:ysz_powder'), 'YSZ Powder'],
+          ['ysi', I('grindless:ysz_ingot'), 'YSZ Ingot'],
+          ['csb', I('grindless:coated_sx_blade'), 'Coated SX Blade'],
+        ], 'the turbine wheel'),
+        // niobium cavities
+        ...chain(28, [
+          ['nbp', I('grindless:niobium_powder'), 'Niobium Powder', 'raw'],
+          ['nb6', I('grindless:six_n_niobium'), '6N Niobium'],
+          ['rrr', I('grindless:rrr_niobium_sheet'), 'RRR Niobium Sheet'],
+          ['bsc', I('grindless:bare_srf_cavity'), 'Bare Cavity'],
+          ['src', I('grindless:srf_cavity'), 'SRF Cavity'],
+          ['nsc', I('grindless:nb3sn_srf_cavity'), 'Nb3Sn Cavity'],
+        ], 'the cyclotron and the calutron'),
         // nitride magnet
         ...chain(9.5, [
           ['rip', I('grindless:reduced_iron_powder'), 'Reduced Iron Powder', 'raw', { from: ['xp_h2'], sub: 'From carbonyl iron' }],
@@ -124,6 +227,107 @@ export default {
           ['pih', mach('gtceu:photonic_integration_hall'), 'Photonic Integration Hall', 'ours', { desc: 'Bonds the chip to the optical assembly.' }],
           ['oc', I('gtnn:optical_computer'), 'Optical Computer'],
         ], 'the next computers'),
+        // hBN
+        ...chain(6, [
+          ['abd2', I('gtceu:ammonia_borane_dust'), 'Ammonia Borane', 'raw'],
+          ['bza', I('grindless:borazine_ampoule'), 'Borazine Ampoule'],
+          ['hcf', I('grindless:hbn_copper_foil'), 'hBN on Copper'],
+          ['hf', I('grindless:hbn_film'), 'hBN Film'],
+          ['ahf', I('grindless:annealed_hbn_film'), 'Annealed hBN'],
+          ['hec', I('grindless:hbn_emitter_chip'), 'Emitter Chip'],
+        ], 'the photonic chip'),
+        // graphene
+        ...chain(8, [
+          ['cuf', I('gtceu:copper_foil'), 'Copper Foil', 'raw'],
+          ['ecf', I('grindless:electropolished_copper_foil'), 'Electropolished Copper'],
+          ['gcf', I('grindless:graphene_copper_foil'), 'Graphene on Copper'],
+          ['pgf', I('grindless:pmma_graphene_foil'), 'PMMA Graphene Foil'],
+          ['pgm', I('grindless:pmma_graphene_film'), 'PMMA Graphene Film'],
+          ['gfl', I('grindless:graphene_film'), 'Graphene Film'],
+          ['eg', I('grindless:encapsulated_graphene'), 'Encapsulated Graphene'],
+          ['gm', I('grindless:graphene_modulator'), 'Graphene Modulator'],
+        ], 'the photonic chip'),
+        // silicon nitride waveguide chip
+        ...chain(10, [
+          ['fzb', I('grindless:fz_silicon_boule'), 'Float-Zone Boule', 'raw'],
+          ['fzw', I('grindless:fz_silicon_wafer'), 'Float-Zone Wafer'],
+          ['oxw', I('grindless:oxidised_wafer'), 'Oxidised Wafer'],
+          ['scw', I('grindless:sin_coated_wafer'), 'SiN-Coated Wafer'],
+          ['slw', I('grindless:sin_lithographed_wafer'), 'Lithographed Wafer'],
+          ['sew', I('grindless:sin_etched_wafer'), 'Etched Wafer'],
+          ['asc', I('grindless:annealed_sin_chip'), 'Annealed SiN Chip'],
+        ], 'the waveguide circuit'),
+        // quantum dots
+        ...chain(12, [
+          ['ini', I('gtceu:indium_ingot'), 'Indium Ingot', 'raw'],
+          ['in7', I('grindless:seven_n_indium'), '7N Indium'],
+          ['iqd', I('grindless:inas_qd_wafer'), 'InAs Quantum-Dot Wafer'],
+          ['mpw', I('grindless:micropillar_wafer'), 'Micropillar Wafer'],
+          ['qds', I('grindless:qd_source'), 'Quantum-Dot Source'],
+        ], 'the photonic chip and the repeater'),
+        // silicon drift detector
+        ...chain(14, [
+          ['fzb2', I('grindless:fz_silicon_boule'), 'Float-Zone Boule', 'raw'],
+          ['fzw2', I('grindless:fz_silicon_wafer'), 'Float-Zone Wafer'],
+          ['oxw2', I('grindless:oxidised_wafer'), 'Oxidised Wafer'],
+          ['siw', I('grindless:sdd_implanted_wafer'), 'Implanted Wafer'],
+          ['saw', I('grindless:sdd_annealed_wafer'), 'Annealed Wafer'],
+          ['sdd', I('grindless:sdd'), 'Silicon Drift Detector'],
+        ], 'the UEV sensor and the pulsar station'),
+        // PPKTP
+        ...chain(16, [
+          ['kdp', I('grindless:kh2po4_dust'), 'KH2PO4', 'raw'],
+          ['kpf', I('grindless:ktp_flux'), 'KTP Flux'],
+          ['ktb', I('grindless:ktp_boule'), 'KTP Boule'],
+          ['ktw', I('grindless:ktp_wafer'), 'KTP Wafer'],
+          ['kte', I('grindless:ktp_electroded_wafer'), 'Electroded Wafer'],
+        ], 'the poled crystal of the SPDC source'),
+        // TGG isolator
+        ...chain(18, [
+          ['tgd', I('gtceu:tgg_dust'), 'TGG Powder', 'raw'],
+          ['tgb', I('grindless:tgg_boule'), 'TGG Boule'],
+          ['tgr', I('grindless:tgg_rod'), 'TGG Rod'],
+          ['tgp', I('grindless:tgg_polished_rod'), 'Polished Rod'],
+          ['fi', I('grindless:faraday_isolator'), 'Faraday Isolator'],
+          ['spd', I('grindless:spdc_source'), 'SPDC Source'],
+        ], 'the entanglement station'),
+        // carbon nanotube muscle
+        ...chain(20, [
+          ['cs', I('grindless:cnt_sock'), 'CNT Sock', 'raw'],
+          ['cr', I('grindless:cnt_ribbon'), 'CNT Ribbon'],
+          ['cdy', I('grindless:cnt_densified_yarn'), 'Densified Yarn'],
+          ['cay', I('grindless:cnt_annealed_yarn'), 'Annealed Yarn'],
+          ['csy', I('grindless:cnt_sized_yarn'), 'Sized Yarn'],
+          ['cty', I('grindless:cnt_twisted_yarn'), 'Twisted Yarn'],
+          ['cm', I('grindless:cnt_coiled_muscle'), 'Coiled Muscle'],
+        ], 'the UEV robot arm'),
+        // hollow-core fibre
+        ...chain(22, [
+          ['fst', I('grindless:fused_silica_tube'), 'Fused Silica Tube', 'raw'],
+          ['hcap', I('grindless:hollow_capillaries'), 'Capillaries'],
+          ['stp', I('grindless:stacked_preform'), 'Stacked Preform'],
+          ['cnp', I('grindless:caned_preform'), 'Caned Preform'],
+          ['dhf', I('grindless:drawn_hollow_fibre'), 'Drawn Fibre'],
+          ['hcf2', I('grindless:hollow_core_fibre'), 'Hollow-Core Fibre'],
+        ], 'the repeater node and the containment casing'),
+        // lobster-eye optics
+        ...chain(24, [
+          ['ect', I('grindless:etchable_core_tube'), 'Etchable-Core Tube', 'raw'],
+          ['mmf', I('grindless:mcp_multifibre'), 'Multi-Fibre'],
+          ['mbl', I('grindless:mcp_boule'), 'Fused Boule'],
+          ['mpl', I('grindless:mcp_plate'), 'Sliced Plate'],
+          ['mep', I('grindless:mcp_etched_plate'), 'Etched Plate'],
+          ['mrp', I('grindless:mcp_reduced_plate'), 'Reduced Plate'],
+          ['lem', I('grindless:lobster_eye_mcp'), 'Lobster-Eye MCP'],
+        ], 'the pulsar station'),
+        // ULE cavity
+        ...chain(26, [
+          ['uso', I('grindless:ule_soot'), 'ULE Soot', 'raw'],
+          ['ubl', I('grindless:ule_boule'), 'ULE Boule'],
+          ['usp', I('grindless:ule_spacer'), 'Spacer'],
+          ['ums', I('grindless:ule_mirrored_spacer'), 'Mirrored Spacer'],
+          ['ucv', I('grindless:ule_cavity'), 'ULE Cavity'],
+        ], 'the cold-atom calibrations'),
         // polarised helium-3
         ...chain(4, [
           ['he3', F('gtceu:helium_3_6n'), 'Helium-3, 6N', 'raw', { from: ['xl_he'] }],
@@ -154,7 +358,16 @@ export default {
           ['carb', mach('gtceu:carbonyl_refinery'), 'Carbonyl Refinery', 'ours', { desc: 'Carbon monoxide lifts the iron out as a gas.' }],
           ['fepc', F('gtceu:iron_pentacarbonyl'), 'Iron Pentacarbonyl'],
         ], 'the magnet powder and the UEV motor'),
-        n('res', 7.5, 3.5, I('grindless:barnard_residue'), 'Barnard Residue', { kind: 'by', from: ['carb'], end: 'rhenium, by the platinum plant' }),
+        n('res', 7.5, 4, I('grindless:barnard_residue'), 'Barnard Residue', { kind: 'by', from: ['carb'], end: 'rhenium, by the platinum plant' }),
+        // aerogel
+        ...chain(6, [
+          ['sic4', I('gtca:silicon_tetrachloride_dust'), 'Silicon Tetrachloride', 'raw'],
+          ['teo', I('grindless:teos_flask'), 'TEOS Flask'],
+          ['sol', I('grindless:silica_sol'), 'Silica Sol'],
+          ['wet', I('grindless:silica_wet_gel'), 'Wet Gel'],
+          ['age', I('grindless:silica_aged_gel'), 'Aged Gel'],
+          ['aer2', I('grindless:aerogel_tile'), 'Aerogel Tile'],
+        ], 'the nebula collector'),
       ],
     },
   },
