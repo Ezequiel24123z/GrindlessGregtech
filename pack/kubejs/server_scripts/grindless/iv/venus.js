@@ -47,6 +47,7 @@
   const TABLE = 'kubejs/data/grindless/tables/venus.json'
   const MAX_CHANCE = 10000
   const STEAM_PER_WATER = 160
+  const STEAM_TANK = 16000
 
   const CONTROLLER_PARTS = ['gtceu:ev_vein_drill', 'gtceu:iv_machine_hull', 'gtceu:iv_electric_motor', 'gtceu:iv_electric_pump',
     'gtceu:heliostat_tower', 'gtceu:steam_large_turbine', 'gtceu:iv_chemical_reactor', 'gtceu:iv_fluid_heater']
@@ -152,12 +153,14 @@
       out.problems.push('heat engine: ' + steam.amount + ' mB of steam for ' + water.amount + ' mB of water, not GTM\'s ' + STEAM_PER_WATER + ':1')
     }
     if (String(E.type) !== 'venus_heat') throw new Error('the heat engine type is gtceu:venus_heat (startup), the table says ' + E.type)
+    // a run must fit the engine's 16,000 mB steam tank: split the cycle into equal shorter ones (same EU/t, same mB of steam per tick)
+    var split = Math.max(1, Math.ceil(Number(steam.amount) / STEAM_TANK))
     event.recipes.gtceu.venus_heat('grindless:' + E.name)
-      .inputFluids(Fluid.of(String(water.id), Number(water.amount)))
-      .outputFluids(Fluid.of(String(steam.id), Number(steam.amount)))
+      .inputFluids(Fluid.of(String(water.id), Number(water.amount) / split))
+      .outputFluids(Fluid.of(String(steam.id), Number(steam.amount) / split))
       .dimension(String(T.site.dimension))
       .EUt(-Number(E.eut))
-      .duration(Number(E.duration))
+      .duration(Number(E.duration) / split)
     out.engine = 'grindless:' + E.type + '/' + E.name
   }
 
@@ -255,21 +258,24 @@
     event.recipes.gtceu.assembler('grindless:pressurized_vein_drill')
       .itemInputs('gtceu:iv_machine_hull', 'gtceu:ev_vein_drill', '2x gtceu:iv_electric_motor', 'gtceu:iv_electric_pump', '4x #gtceu:circuits/iv',
         '4x #forge:plates/polytetrafluoroethylene', '2x grindless:stainless_steel_drill_bit', '2x grindless:platinum_electrode')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+      .itemInputs('2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(T.drill.machine)
       .EUt(1920).duration(600)
 
     event.recipes.gtceu.assembler('grindless:venus_heat_engine')
       .itemInputs('gtceu:iv_machine_hull', 'gtceu:heliostat_tower', 'gtceu:steam_large_turbine', '2x gtceu:iv_electric_pump', '4x #gtceu:circuits/iv',
         '2x grindless:night_sky_radiator', '2x grindless:zircaloy_cladding_tube')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+      .itemInputs('2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(T.heatEngine.machine)
       .EUt(1920).duration(600)
 
     event.recipes.gtceu.assembler('grindless:venus_acid_works')
       .itemInputs('gtceu:iv_machine_hull', 'gtceu:iv_chemical_reactor', 'gtceu:iv_fluid_heater', '4x #gtceu:circuits/iv', '2x ' + T.acidWorks.gauze,
         '2x grindless:contact_catalyst', '2x grindless:ion_exchange_resin')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:sulfuric_acid', 1000))
+      .itemInputs('2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:sulfuric_acid', 1000))
       .itemOutputs(T.acidWorks.machine)
       .EUt(1920).duration(600)
 

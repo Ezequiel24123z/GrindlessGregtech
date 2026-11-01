@@ -352,7 +352,8 @@
     }
     var rc = event.recipes.gtceu.assembler(SC.crafting)
     INPUTS.forEach(function (x) { rc.itemInputs(x) })
-    rc.inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+    rc.itemInputs('2x gtceu:soldering_alloy_ingot')
+    rc.inputFluids(Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(CONTROLLER)
       .EUt(1920)
       .duration(400)

@@ -397,14 +397,16 @@
     event.recipes.gtceu.assembler('grindless:isr_wellfield')
       .itemInputs(HULL, 'gtceu:hv_fluid_drilling_rig', '2x gtceu:iv_electric_pump', 'gtceu:iv_chemical_bath', '4x ' + CIRCUIT,
         '2x grindless:stainless_steel_drill_bit', '2x grindless:platinum_electrode')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:sulfuric_acid', 1000))
+      .itemInputs('2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:sulfuric_acid', 1000))
       .itemOutputs(FIELD)
       .EUt(1920).duration(600)
 
     event.recipes.gtceu.assembler('grindless:fuel_fabrication_plant')
       .itemInputs(HULL, 'gtceu:iv_forming_press', 'gtceu:iv_extruder', 'gtceu:iv_assembler', '4x ' + CIRCUIT,
         '2x grindless:sintered_regolith', '2x grindless:platinum_electrode')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:helium', 1000))
+      .itemInputs('2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:helium', 1000))
       .itemOutputs(PLANT)
       .EUt(1920).duration(600)
   }

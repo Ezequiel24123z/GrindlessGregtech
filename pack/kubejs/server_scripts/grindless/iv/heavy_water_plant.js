@@ -227,8 +227,8 @@
       return
     }
     event.recipes.gtceu.assembler('grindless:heavy_water_plant')
-      .itemInputs(HULL, TOWER, HEATER, '2x ' + PUMP, '4x #gtceu:circuits/iv', '2x grindless:platinum_electrode', '2x grindless:night_sky_radiator')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:distilled_water', 4000))
+      .itemInputs(HULL, TOWER, HEATER, '2x ' + PUMP, '4x #gtceu:circuits/iv', '2x grindless:platinum_electrode', '2x grindless:night_sky_radiator', '2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:distilled_water', 4000))
       .itemOutputs(CONTROLLER)
       .EUt(1920).duration(600)
   }

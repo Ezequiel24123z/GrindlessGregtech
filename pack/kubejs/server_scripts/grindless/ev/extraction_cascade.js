@@ -524,7 +524,8 @@
       added++
       var recipe = event.recipes.gtceu.solvent_extraction(r.id)
       r.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
-      recipe.circuit(r.circuit)
+      // the recipe type holds two item inputs and a circuit takes one: a row with two solids is told apart by its item pair alone
+      if (r.itemsIn.length < 2) recipe.circuit(r.circuit)
       r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f.id, f.amount)) })
       r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f.id, f.amount)) })

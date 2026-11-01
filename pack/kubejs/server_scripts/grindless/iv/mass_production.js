@@ -42,24 +42,24 @@
       output: 'gtceu:iv_parallel_hatch',
       replaces: 'gtceu:shaped/parallel_hatch_mk1',
       items: ['gtceu:iv_sensor', 'gtceu:iv_emitter', '4x ' + IV_CIRCUIT, 'gtceu:iv_machine_hull', '2x gtceu:platinum_double_cable',
-        '2x grindless:platinum_electrode', '2x grindless:night_sky_radiator'],
-      fluids: [['gtceu:soldering_alloy', 288], ['gtceu:lubricant', 500]]
+        '2x grindless:platinum_electrode', '2x grindless:night_sky_radiator', '2x gtceu:soldering_alloy_ingot'],
+      fluids: [['gtceu:lubricant', 500]]
     },
     {
       id: 'grindless:assembler/large_packer',
       output: 'gtceu:large_packer',
       replaces: 'gtceu:shaped/large_packer',
       items: ['4x ' + IV_CIRCUIT, '4x #forge:plates/hsla_steel', '2x gtceu:iv_robot_arm', '2x gtceu:iv_conveyor_module', 'gtceu:iv_packer',
-        '2x grindless:sintered_regolith', '2x grindless:platinum_electrode'],
-      fluids: [['gtceu:soldering_alloy', 288], ['gtceu:lubricant', 500]]
+        '2x grindless:sintered_regolith', '2x grindless:platinum_electrode', '2x gtceu:soldering_alloy_ingot'],
+      fluids: [['gtceu:lubricant', 500]]
     },
     {
       id: 'grindless:assembler/alloy_blast_smelter',
       output: 'gtceu:alloy_blast_smelter',
       replaces: 'gtceu:shaped/blast_alloy_smelter',
       items: ['4x ' + IV_CIRCUIT, '4x #forge:plates/tantalum_carbide', '2x gtceu:platinum_single_cable', 'gtceu:iv_alloy_smelter',
-        '2x grindless:sintered_regolith', '2x grindless:zircaloy_cladding_tube'],
-      fluids: [['gtceu:soldering_alloy', 288], ['gtceu:lubricant', 500]]
+        '2x grindless:sintered_regolith', '2x grindless:zircaloy_cladding_tube', '2x gtceu:soldering_alloy_ingot'],
+      fluids: [['gtceu:lubricant', 500]]
     }
   ]
   MP.recipes = RECIPES

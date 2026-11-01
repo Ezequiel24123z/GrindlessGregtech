@@ -276,7 +276,6 @@
   })
 
   // crafting: the parts of the controller and of the electrode (the last id of each list is what the recipe makes)
-  const HULL = 'gtceu:ev_machine_hull'
   const REACTOR = 'gtceu:ev_chemical_reactor'
   const CENTRIFUGE = 'gtceu:ev_centrifuge'
   const ELECTROLYZER = 'gtceu:ev_electrolyzer'
@@ -286,7 +285,7 @@
   const FOIL = 'gtceu:platinum_foil'
   const ROD_TAG = '#forge:rods/titanium'
   const ROD = 'gtceu:titanium_rod'
-  const PLANT_PARTS = [HULL, REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, PUMP, 'gtceu:platinum_plant']
+  const PLANT_PARTS = [REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, PUMP, 'gtceu:platinum_plant']
   const ELECTRODE_PARTS = [ROD, FOIL, ELECTRODE]
 
   PP.electrode = ELECTRODE
@@ -803,7 +802,7 @@
       console.error(LOG + 'Platinum Plant recipe skipped, unknown item(s): ' + missingPlant.join(', '))
     } else {
       event.recipes.gtceu.assembler('grindless:platinum_plant')
-        .itemInputs(HULL, REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, '2x ' + PUMP, '4x #gtceu:circuits/ev', '2x ' + ELECTRODE, '2x grindless:reforming_catalyst')
+        .itemInputs(REACTOR, CENTRIFUGE, ELECTROLYZER, SIFTER, MIXER, '2x ' + PUMP, '4x #gtceu:circuits/ev', '2x ' + ELECTRODE, '2x grindless:reforming_catalyst')
         .inputFluids(Fluid.of('gtceu:hydrochloric_acid', 2000))
         .itemOutputs('gtceu:platinum_plant')
         .EUt(480).duration(600)
