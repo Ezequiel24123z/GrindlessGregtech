@@ -66,6 +66,11 @@ $script:EraStyles = [ordered]@{
     max   = New-EraStyle @{ Apply = $true; Shape = 'step'; Wear = 'none'; WearDensity = 0.0; Trim = 'rim'; Panel = 'grid'; Glint = 2; RampSteps = 12
                             Gamma = 0.62; LumLo = 0.03; LumHi = 1.0; SatGain = 1.85; SatLift = 0.14; TintHue = 196; TintSat = 0.34
                             LumTarget = 0.62; SatTarget = 0.50; Note = 'cool pearl and prism; stepped, gridded, rim-lit, glinting' }
+    # MAX+: kerr condensate and the stationary horizon. Dark violet-black bodies, lens-rounded silhouettes, a hot amber halo on the lit rim,
+    # ember motes and one orbiting bead per item.
+    maxplus = New-EraStyle @{ Apply = $true; Shape = 'lens'; Wear = 'ember-mote'; WearDensity = 0.05; Trim = 'halo'; Panel = 'orbit'; Glint = 3; RampSteps = 14
+                            Gamma = 1.25; LumLo = 0.02; LumHi = 0.95; SatGain = 1.55; SatLift = 0.10; TintHue = 268; TintSat = 0.30
+                            LumTarget = 0.40; SatTarget = 0.46; Note = 'event-horizon violet-black with an amber accretion halo; lens-rounded, orbiting bead' }
 }
 
 function Get-EraStyle {
@@ -163,6 +168,7 @@ function Invoke-EraShape {
         'round' { $passes = 1; $corners = 15 }
         'step'  { $passes = 2; $corners = 1 + ($Seed % 15) }
         'notch' { $passes = 1; $corners = 1 + ($Seed % 15) }
+        'lens'  { $passes = 3; $corners = 15 }
         default { return }
     }
     for ($pass = 0; $pass -lt $passes; $pass++) {
@@ -192,6 +198,7 @@ function Invoke-EraTrim {
         'bevel'      { $lit = 1.22; $shd = 0.80 }
         'rim'        { $lit = 1.34; $shd = 0.74 }
         'edge-light' { $lit = 1.20; $shd = 0.86 }
+        'halo'       { $lit = 1.45; $shd = 0.62 }
         default      { return }
     }
     $src = [int[]]$C.P.Clone()
@@ -230,6 +237,7 @@ function Invoke-EraWear {
             'frost'         { $C.P[$y * $C.W + $x] = EraMix $p (Hex 'E0F4FF') 0.5 }
             'machined'      { $C.P[$y * $C.W + $x] = EraShade $p 0.85 }
             'etched'        { $C.P[$y * $C.W + $x] = EraMix $p (Hex 'C8A8F0') 0.4 }
+            'ember-mote'    { $C.P[$y * $C.W + $x] = EraMix $p (Hex 'FFB848') 0.75 }
         }
     } }
 }
@@ -251,7 +259,7 @@ function Invoke-EraPanel {
         for ($y = $phase; $y -le $y1 - 1; $y += 3) { for ($x = $x0; $x -le $x1; $x++) { if (& $isInner $x $y) { $C.P[$y * $C.W + $x] = EraShade $src[$y * $C.W + $x] 0.80 } } }
         return
     }
-    if ($Style.Panel -eq 'ring') {
+    if ($Style.Panel -eq 'ring' -or $Style.Panel -eq 'orbit') {
         # UIV: one concentric ring around the middle of the silhouette, lit on its upper-left arc
         $cx = ($x0 + $x1) / 2.0; $cy = ($y0 + $y1) / 2.0
         $rad = [Math]::Max(2.0, [Math]::Min($x1 - $x0, $y1 - $y0) / 2.0 - 2.0 - ($Seed % 2))
@@ -260,6 +268,12 @@ function Invoke-EraPanel {
             $d = [Math]::Sqrt(($x - $cx) * ($x - $cx) + ($y - $cy) * ($y - $cy))
             if ([Math]::Abs($d - $rad) -lt 0.6) { $C.P[$y * $C.W + $x] = EraShade $src[$y * $C.W + $x] $(if ($x + $y -lt $cx + $cy) { 1.25 } else { 0.78 }) }
         } }
+        if ($Style.Panel -eq 'orbit') {
+            # MAX+: one bright bead rides the ring, like a mote on the stationary horizon
+            $ang = ($Seed % 360) * [Math]::PI / 180.0
+            $bx = [int][Math]::Round($cx + $rad * [Math]::Cos($ang)); $by = [int][Math]::Round($cy + $rad * [Math]::Sin($ang))
+            if (& $isInner $bx $by) { $C.P[$by * $C.W + $bx] = EraMix $src[$by * $C.W + $bx] (Hex 'FFD890') 0.8 }
+        }
         return
     }
     $vertical = ($Style.Panel -eq 'seam' -or $Style.Panel -eq 'grid')
