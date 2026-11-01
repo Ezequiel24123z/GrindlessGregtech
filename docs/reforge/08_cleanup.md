@@ -171,25 +171,28 @@ Order is the proposed run order. "Beside" = may run in parallel with XP-G1, XP-Z
 
 ## 11. Outcome
 
-What each row became. Rows still open name the package that owns them.
+What each row became. Rows still open name the package that owns them; after batch 15 none is open.
 
 | Rows | Outcome | Package |
 |---|---|---|
 | U1-U5, A1, Q2-Q5, O6, R2 | false positives: the census reads covers, structure cells, const aliases and tool handlers, defers to the assets audit for textures and skips optional chart tasks; the assets audit reads sky renderers; the process audit skips `direct_conversion` generators | P8-A (#158) |
-| R7 | the process baseline refreshed, MAX+ findings parked as `pending` | P8-A (#158); made truthful by P8-H1 (#168) |
+| R7 | the process baseline refreshed by P8-A; P8-H1 made it truthful: `pending` empty, five intentional keys with their reasons | P8-A (#158), P8-H1 (#168) |
 | D1 | the 24 stale cost-curve keys removed; their textures deleted | P8-B (#159), P8-D (#160) |
 | D2 | the old-save leftovers removed; `LEGACY_KEY` stays, because it is `lib/wireless_registry.js`'s backup of unreadable lists, not save compatibility | P8-B (#159) |
 | D3 | `hidden.js` handles only `never`, `unless` and `keepRecipes`; the implemented era is `maxplus` | P8-B (#159), integrator |
 | D4, D5 | no row of ours serves only `never` content; GT--'s component assembly line recipes and cost-curve rows removed | P8-C (#163) |
 | D6 | the era docs state the current rules; `maxplus.md` too | P8-G (#161), integrator |
 | O3, O4 | 25 orphan textures deleted; the UEV, UIV and UXV foundation generators pass their self-checks | P8-D (#160) |
-| O1, O2, O5 | false positives: the scripts name these textures by built strings (cover renderer, parallel hatch overlay, sulfur-iodine plant model) | P8-D (#160); the audit learns the rule in P8-H2 (#169) |
+| O1, O2, O5 | false positives: the scripts name these textures by built strings (cover renderer, parallel hatch overlay, sulfur-iodine plant model); the assets audit now evaluates those renderer, cover, tier and model-path calls | P8-D (#160), P8-H2 (#169) |
 | O7 | the Hyperstargate wears its face | integrator (XP-G1 merge) |
 | Q1 | the four HV End vein samples moved from `mv_age` to `hv_age` | P8-E (#167) |
-| U6 | `alkali_sulfate_dust` registered in the IV kiln's file, voided as inert | P8-E (#167); its EMI page in P8-H1 (#168) |
+| U6 | `alkali_sulfate_dust` registered in the IV kiln's file, voided as inert, with an EMI info page | P8-E (#167), P8-H1 (#168) |
 | U7 | `epilogue` is given at the MAX+ arrival and stays out of EMI by design | XP-Z1b (#155) |
 | R1 (outside MAX+), R4, R5 | 26 trivial steps take a consumed input (two lathe rows return swarf); the culture seed pays for its gain; the unused OpV chain forms lost their recipes and are hidden | P8-F (#166) |
 | R3 | intentional (phase changes, a shapeless unpack) | baseline |
-| U8-U10, R1 (MAX+), R6 | MAX+ findings after MAX+ landed | P8-H1 (#168) |
-| §7 | recipe quality stays Phase 2's baseline; XP-C1 cleared the MAX+ controllers' tier-15 entries; the gate base and locked chevron rows | XP-C1 (#156); P8-H2 (#169) |
+| U8-U10, R1 (MAX+), R6 | after MAX+ landed: no unused item is left; 20 MAX and MAX+ machines got EMI info pages; five MAX+ steps became real (lathe dust returns, a tungsten steel plate, a niobium target) | P8-H1 (#168) |
+| §7 | recipe quality stays Phase 2's baseline; XP-C1 cleared the MAX+ controllers' tier-15 entries; the gate base and locked chevron rows take horizon processors and field generators | XP-C1 (#156), P8-H2 (#169) |
+| pl-check | `pl_zpm`'s ring ice runs through the distillation tower (`ring_ice_melt`: water and ammonia), and the chart says so | P8-H2 (#169) |
 | A2 | 220 multiblocks without a loop sound of their own | Phase 6 scope, not Phase 8 |
+
+Batch 15 (dump 123bae22): the census finds no unused item and no misplaced quest item, the assets audit no orphan texture, the process audit no finding beyond its five intentional keys, and pl-check no failing arrow.
