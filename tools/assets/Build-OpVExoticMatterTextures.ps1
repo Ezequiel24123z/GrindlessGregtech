@@ -8,6 +8,7 @@
 param([string]$OutRoot = '')
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'opv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 if (-not $OutRoot) { $OutRoot = Join-Path $PSScriptRoot '..\..\pack\kubejs\assets\grindless\textures' }
 $steel = Hex '8C9BA8'
 $dark = Hex '303B50'

@@ -6,6 +6,7 @@
 param([string]$OutRoot = '', [switch]$Credits)
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'opv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 if (-not $OutRoot) { $OutRoot = Join-Path $PSScriptRoot '..\..\pack\kubejs\assets\grindless\textures' }
 $steel = New-Palette 'L=B8C8D0 M=607078 D=303C48 P=181C28 C=C89058 V=6088A0 B=6098FF S=A4B070'
 function Face {
