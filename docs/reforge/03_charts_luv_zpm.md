@@ -35,3 +35,7 @@ Honest result: the new lines and the existing short lines cannot be lengthened b
 | ZPM power, duranium | 2 | Few steps: the quench and the converter are one machine away from raw fluids | Add upstream steps (He-3 loop crossing the Saturn column, foil casting) | zpm recipe files |
 
 Proposed DECISIONS line: LuV/ZPM chart verdicts are real content problems; the content package owns step additions.
+
+## ZPM after LD-ZP3 (2026-11-01)
+
+Line audit on dump 4d2cd154de6d: 25 keep, 0 fix (was 19 fix). Chart-only change plus keepShort reasons for the single-step ends; no recipe changed. See docs/eras/zpm.md, *Reforge line design (RF-3S)*.
