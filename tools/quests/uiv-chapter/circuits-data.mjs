@@ -44,7 +44,7 @@ export const QUESTS = [
     it('gtceu:uiv_emitter'), it('gtceu:uiv_sensor'), it('gtceu:uiv_field_generator'), it('gtceu:uiv_robot_arm'), it('gtceu:uiv_conveyor_module'),
     it('gtceu:uiv_electric_pump'), it('gtceu:uiv_electric_piston'), it('gtceu:uiv_electric_motor'),
   ], 120),
-  q('HATCH', 'step', 'UIV Hatches', 'gtceu:uiv_energy_input_hatch', ['PUMP'], 7, 0, {}, [it('gtceu:uiv_energy_input_hatch'), it('gtceu:uiv_energy_output_hatch')], 100),
+  q('HATCH', 'step', 'UIV Hatches and Cable', 'gtceu:uiv_energy_input_hatch', ['PUMP'], 7, 0, {}, [it('gtceu:uiv_energy_input_hatch'), it('gtceu:uiv_energy_output_hatch'), it('gtceu:metallic_hydrogen_single_cable')], 100),
 
   // ------------------------------------------------------------------ light on a wafer
   q('CH_LNSIN', 'wafer', 'Lithium Niobate on Nitride', 'grindless:ln_on_sin_wafer', ['C_L_LN'], 2, 2.5, {

@@ -196,7 +196,6 @@ export const QUESTS = [
     unlocks: 'Timed profiles, four of which the navigation solution needs.',
     automate: 'Run it on a loop and send each timed profile on by ME.',
   }, [UIV]),
-  prod('P_TIMED', 'Timed Pulse Profile', 'grindless:xray_pulse_timed', ['PROF'], 4.5, 25, ['A pulse profile tied to a clock. The navigation solution takes four.']),
 
   // ------------------------------------------------------------------ Cygnus X-1
   gear('PROBE', 'ergosphere_probe_bay', 'Probe Run', ['M_L_CYG'], 2, 28, {

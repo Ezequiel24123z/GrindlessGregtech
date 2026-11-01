@@ -1,4 +1,4 @@
-﻿// The Power tab (power.snbt, in the Quality of Life group): every way to make power in the pack today, by tier, Steam to LuV, and
+// The Power tab (power.snbt, in the Quality of Life group): every way to make power in the pack today, by tier, Steam to LuV, and
 // what carries and stores it. Positions are relative to each cluster (pl-model.mjs places the clusters). Every number in a node's
 // text is a figure (pl-lib.mjs#P) that pl-check.mjs recomputes from the dump, the pack's config or a script.
 import { I, F, M, n, L, E, P, engineFluid, boilerWater, build, structure, network } from './pl-lib.mjs';
@@ -641,9 +641,9 @@ export default gate({
     uivStars: {
       name: 'Dead stars (UIV)',
       nodes: [
-        E('eqUivRing', 0, -1.5, 'uiv_age', '72D797E3DDE7ED0E'),
-        E('eqUivVault', 0, 0, 'uiv_age', '7AB8B56ED4A5C759'),
-        E('eqUivPenrose', 0, 1.5, 'uiv_age', '773D4D794D1EA7A1'),
+        E('eqUivRing', 0, -1.5, 'uiv_machines', '72D797E3DDE7ED0E'),
+        E('eqUivVault', 0, 0, 'uiv_machines', '7AB8B56ED4A5C759'),
+        E('eqUivPenrose', 0, 1.5, 'uiv_machines', '773D4D794D1EA7A1'),
         n('uivRing', 2.25, -1.5, M('gtceu:uiv_fusion_reactor'), 'Mk5 Fusion Ring', {
           kind: 'info', tier: 'uiv', from: ['eqUivRing'], sub: 'Three polarised fuels, and a direct converter takes the power off the ash',
           desc: 'Each fuel is its own recipe on the ring, and the ash of one is the feed of another.',
@@ -808,7 +808,7 @@ export default gate({
           figs: [P.wcell('grindless:uev_smes_cell', 'UEV SMES', 251658240000)],
         }),
         // UIV's cell: four UEV cells' worth
-        E('eqUivCell', 0, 10, 'uiv_age', '5FB006B879741A02'),
+        E('eqUivCell', 0, 10, 'uiv_integration', '5FB006B879741A02'),
         n('wuiv', 2.25, 10, I('grindless:uiv_smes_cell'), 'UIV SMES Cell', {
           kind: 'info', from: ['eqUivCell'], sub: 'Three hundred and eighty-four UV batteries\' worth, wound in metallic hydrogen',
           desc: 'The network jumps to UIV only when every formed tower holds these.',

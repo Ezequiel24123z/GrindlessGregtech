@@ -1,0 +1,222 @@
+{
+	autofocus_id: "5F0ADBEB1F3839D6"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "uiv_circuits"
+	group: "26251651D4D8EF21"
+	icon: "gtnn:optical_mainframe"
+	id: "5FB7111808A54BA9"
+	order_index: 1
+	quest_links: [
+		{
+			id: "315A2F02391FDDD7"
+			linked_quest: "7B955176F4E8579C"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "19022DAD81790146"
+			linked_quest: "7B955176F4E8579C"
+			x: 0.0d
+			y: 2.5d
+		}
+		{
+			id: "3F270B39F5CB0E52"
+			linked_quest: "7B955176F4E8579C"
+			x: 0.0d
+			y: 5.0d
+		}
+		{
+			id: "112B7C307E613565"
+			linked_quest: "7B955176F4E8579C"
+			x: 0.0d
+			y: 7.5d
+		}
+		{
+			id: "5EFC0FEB7E446476"
+			linked_quest: "7B955176F4E8579C"
+			x: 0.0d
+			y: 10.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["7B955176F4E8579C"]
+			description: ["The &6UIV Circuit Assembler&r puts the UIV components and the controllers of this era together from the circuits on this page. A UIV hull and UIV components, and the cleanroom you already run. The parts and hatches on the next two quests, and every controller past the UIV hull. Boards and chips come from the cleanroom by ME; stock what it returns."]
+			icon: "gtceu:uiv_circuit_assembler"
+			id: "5F0ADBEB1F3839D6"
+			rewards: [{ id: "5501DBD81F3DF096", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "13689E3A76730312", item: "gtceu:uiv_circuit_assembler", type: "item" }]
+			title: "UIV Circuit Assembler"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5F0ADBEB1F3839D6"]
+			icon: "gtceu:uiv_electric_pump"
+			id: "17C0F46C21B9CD13"
+			rewards: [{ id: "366424FA6A7C7F5A", type: "xp", xp: 120 }]
+			tasks: [
+				{ id: "1AA68077E0F69895", item: "gtceu:uiv_emitter", type: "item" }
+				{ id: "7C32D85ED5A8962B", item: "gtceu:uiv_sensor", type: "item" }
+				{ id: "341E7C5D516B1A81", item: "gtceu:uiv_field_generator", type: "item" }
+				{ id: "703A36FB7A12A8CF", item: "gtceu:uiv_robot_arm", type: "item" }
+				{ id: "54AF6A72F00217EC", item: "gtceu:uiv_conveyor_module", type: "item" }
+				{ id: "7D2C24DA6D33B204", item: "gtceu:uiv_electric_pump", type: "item" }
+				{ id: "5B252114B6F91E09", item: "gtceu:uiv_electric_piston", type: "item" }
+				{ id: "57B642F3EC7C6479", item: "gtceu:uiv_electric_motor", type: "item" }
+			]
+			title: "UIV Parts"
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["17C0F46C21B9CD13"]
+			icon: "gtceu:uiv_energy_input_hatch"
+			id: "3D4BC3A7590B186D"
+			rewards: [{ id: "5F3A576C2576D7CD", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "18B7A3818E17CF51", item: "gtceu:uiv_energy_input_hatch", type: "item" }
+				{ id: "5B0E9F3C7F3EE7FD", item: "gtceu:uiv_energy_output_hatch", type: "item" }
+				{ id: "7CDFB1EB2153A1EA", item: "gtceu:metallic_hydrogen_single_cable", type: "item" }
+			]
+			title: "UIV Hatches and Cable"
+			x: 7.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7B955176F4E8579C"]
+			description: ["A thin crystal of lithium niobate bonded onto silicon nitride makes the &6LN-on-SiN Wafer&r: one wafer that steers light and tunes it. The TFLN fab, a lithium niobate boule and silicon nitride wafers, in the cleanroom. The comb that the optical mainframe is built round. Boules and nitride wafers by ME; the fab returns wafers to a chest."]
+			icon: "grindless:ln_on_sin_wafer"
+			id: "5F3FD5DD9FD7DBAA"
+			rewards: [{ id: "3CA2E756FC79E223", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "71264424E4B1A667", item: "grindless:ln_on_sin_wafer", type: "item" }]
+			title: "Lithium Niobate on Nitride"
+			x: 2.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["7B955176F4E8579C"]
+			description: ["A wafer exposed at 6.7 nanometres holds finer lines than any light before it: the &6BEUV Exposed Wafer&r. The BEUV scanner, a resist-coated wafer and clean mirrors. The terbium debris is caught and recycled. The driver ASIC next to it, and through it the P:Si processor. Wafers by ME; send the fouled mirrors to the cleaning line, not to the bin."]
+			icon: "grindless:beuv_exposed_wafer"
+			id: "127106AB450BDD99"
+			rewards: [{ id: "1EF0814AE2DDE468", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "30D318F8CE4D52FA", item: "grindless:beuv_exposed_wafer", type: "item" }]
+			title: "BEUV Exposure"
+			x: 2.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["127106AB450BDD99"]
+			description: ["Cut from the exposed wafer, the &6BEUV Driver ASIC&r is the logic that steers the single-atom writer. A BEUV exposed wafer and a circuit 1 program in the cleanroom. The P:Si processor. One wafer yields many chips; stock them in a chest by ME."]
+			icon: "grindless:beuv_driver_asic"
+			id: "1667D9ECE9C63D16"
+			rewards: [{ id: "3344372EEA8AEA05", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "11C43C43F0D51D7D", item: "grindless:beuv_driver_asic", type: "item" }]
+			title: "Driver ASIC"
+			x: 6.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["7B955176F4E8579C"]
+			description: ["A laser pulse a millionth of a millionth of a second long writes inside glass. The &65D Data Crystal&r keeps what it holds longer than the Sun will shine. The femtosecond writer and a block of fused silica. The research data that Matrioshka runs and the six-hour memory. Silica blanks by ME; written crystals go to the research store."]
+			icon: "grindless:data_crystal_5d"
+			id: "5F6361D2A096AE06"
+			rewards: [{ id: "10D504AFB6BB5530", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "73EA794520B79B4C", item: "grindless:data_crystal_5d", type: "item" }]
+			title: "Five-Dimensional Crystal"
+			x: 2.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["5F6361D2A096AE06"]
+			description: ["A crystal of one europium isotope remembers a light pulse for hours when the right comb is burned in. That is the &6Six-Hour Memory&r. The spectral hole burner, a 5D crystal and superfluid helium. The P:Si processor, which holds its state in this memory. Crystals by ME, helium by pipe; a few stocked memories are enough."]
+			icon: "grindless:six_hour_memory"
+			id: "53A536B775F9CA25"
+			rewards: [{ id: "3DBE1A212FF60EE2", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5224BA951F8FF24A", item: "grindless:six_hour_memory", type: "item" }]
+			title: "Six-Hour Memory"
+			x: 4.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["7B955176F4E8579C"]
+			description: ["A scanning tip peels hydrogen off silicon one atom at a time. The &6STM-Patterned Wafer&r is the silicon with the holes ready. The STM lithography cell, a clean silicon wafer and ultra-high vacuum. The P:Si die, once phosphine fills the holes. Wafers by ME; the cell is slow, so run two."]
+			icon: "grindless:stm_patterned_wafer"
+			id: "32D6BBEFBFA91930"
+			rewards: [{ id: "17AF2F6E34C9BFB3", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "155D7B8A6158F5CE", item: "grindless:stm_patterned_wafer", type: "item" }]
+			title: "STM-Patterned Wafer"
+			x: 2.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["32D6BBEFBFA91930"]
+			description: ["Phosphine fills the holes and a cap seals them. The &6P:Si Die&r holds qubits made of single phosphorus atoms. A patterned wafer in the STM lithography cell. The excess phosphine is scrubbed and kept. The cryostat module and the P:Si processor. Phosphine by pipe in a contained loop; dies back by ME."]
+			icon: "grindless:p_si_die"
+			id: "5DB68611D99B3EB9"
+			rewards: [{ id: "72A4D6369184985F", type: "xp", xp: 140 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7F0A9CC9D347E680", item: "grindless:p_si_die", type: "item" }]
+			title: "P:Si Die"
+			x: 4.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["5DB68611D99B3EB9"]
+			description: ["The die has to be cold before it works. The &6mK Cryostat Module&r wets a rare-earth stage with helium-3 and holds the die at millikelvin. The millikelvin cryostat works, a P:Si die and helium-3. The P:Si processor. The helium mixture returns to the works; send finished modules on by ME."]
+			icon: "grindless:mk_cryostat_module"
+			id: "741A4E00415BD039"
+			rewards: [{ id: "115633C9C90A480F", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5E6D3465F76B4438", item: "grindless:mk_cryostat_module", type: "item" }]
+			title: "Millikelvin Cryostat Module"
+			x: 7.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["1667D9ECE9C63D16", "53A536B775F9CA25", "741A4E00415BD039"]
+			description: ["A cooled die, a driver and a memory make the &6P:Si Processor&r. It is the logic of the UIV circuit. The millikelvin cryostat works, a cryostat module, a driver ASIC and a six-hour memory. The optical mainframe. Parts in matched counts by ME; keep one processor per mainframe."]
+			icon: "grindless:p_si_processor"
+			id: "5F5A39AD463A9E68"
+			rewards: [{ id: "306A140944DC4CA9", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3A63AF8E8D0E294B", item: "grindless:p_si_processor", type: "item" }]
+			title: "P:Si Processor"
+			x: 9.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["5F5A39AD463A9E68"]
+			description: ["A processor, a crossbar, a glass interposer and a comb on a LN-on-SiN wafer make the &6Optical Mainframe&r, the UIV circuit. The photonic integration hall, a P:Si processor and a LN-on-SiN wafer. The controllers of Mk5, Matrioshka and every dead-star machine, and the gate store. Keep a dedicated chest and never a big stock; one processor and one wafer go into each."]
+			icon: "gtnn:optical_mainframe"
+			id: "58A76179A3648724"
+			rewards: [{ id: "18518FAE64E1C23C", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "35FB3D880CCE335E", item: "gtnn:optical_mainframe", type: "item" }]
+			title: "Optical Mainframe"
+			x: 12.0d
+			y: 7.5d
+		}
+	]
+	subtitle: ["A wafer with light on it, an exposure at 6.7 nanometres, a crystal that outlives the Sun and a processor of single phosphorus atoms."]
+	title: "UIV: Circuits"
+}
