@@ -307,7 +307,7 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
 
 /** Findings not in the baseline ({keys: [...]}). */
 export function newFindings(res, baseline) {
-  const known = new Set((baseline && baseline.keys) || []);
+  const known = new Set([...((baseline && baseline.keys) || []), ...((baseline && baseline.pending) || [])]);
   return res.findings.filter((f) => !known.has(f.key));
 }
 
