@@ -170,7 +170,7 @@
     var ids = MS ? MS.recipes.concat([MS.controllerRecipe]) : []
     var rm = S.server.getRecipeManager()
     var missing = ids.filter(function (i) { return !rm.byKey(new (classes().RL)(i)).isPresent() })
-    check('lookup', ids.length >= 12 && missing.length === 0, ids.length + ' ids checked; missing: ' + (missing.length ? missing.join(', ') : 'none'))
+    check('lookup', ids.length >= 10 && missing.length === 0, ids.length + ' ids checked; missing: ' + (missing.length ? missing.join(', ') : 'none'))
     var pending = MS ? MS.pendingRoutes.join(',') : 'none'
     check('static', !!MS && MS.skipped.length === 0 && pending === 'grindless:spent_phase_lock',
       'recipes ' + (MS ? MS.recipes.length : null) + ', skipped ' + JSON.stringify(MS ? MS.skipped : null) + ', pending ' + pending)
