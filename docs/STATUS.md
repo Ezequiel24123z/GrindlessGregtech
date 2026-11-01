@@ -64,9 +64,9 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 
 - **Next** (queue; serial where packages share files):
   - Phase 7, `maxplus.md` *Build order*:
-    - XP-H4 (the grid layer, the hyper assembly array and the six creative-item rows; after XP-H2 and XP-K);
-    - the horizon capacitor bank (machine 15; after XP-W2 and XP-H4);
-    - XP-G1 (the Hyperstargate and its dial; after the bank), then XP-Z1b (the crossing and the arrival);
+    - ready, waiting for workstation memory (6 sessions use it all): XP-H4a (#150: the hyper assembly array, the Hyperstargate's parts, the grid and creative-item rows) and XP-H4b (#149: lines P19, T11, T12, T13 and T17, which also unblock XP-AE's A2 and A3);
+    - the horizon capacitor bank (machine 15; after XP-W2, beside XP-H4a);
+    - XP-G1 (the Hyperstargate, its controller row and its dial; after XP-H2, XP-H4a, XP-H4b, XP-K and the bank), then XP-Z1b (the crossing and the arrival);
     - XP-C1 (the `maxplus` era in the era lists, its validator tier, and tier 15's circuits, hull and voltage on the quality ladder), XP-PL, XP-C2a and XP-C2b.
 
     Each merge takes its ids out of the class C row.
@@ -98,7 +98,8 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - `launched_belt_seed` without a consumer (a MAX package).
 - **The `maxplus` stage** is a world persistentData flag (`grindless_stage_maxplus`, MX-E1): the pack has no stage mod, and MAX+ packages read the flag.
 - **MAX+ until XP-C1:** the ids with no recipe yet are one class C row in `tools/analysis/tiers/obtain.json` (hidden; 65 entries left) and carry EMI exception rows; the `maxplus` era is not yet in the era lists. Each MAX+ controller carries three baselined quality findings (T-CIRC, T-HULL, T-VOLT at tier 15) until XP-C1 decides tier 15's circuits, hull and voltage.
-- **MAX+ outputs without a destination yet:** P12's `p_process_plasma` (XP-H2's blender takes it) and XP-B1's `electronic_grade_silicon` (XP-K is asked to use it as a K4 wafer substrate).
+- **MAX+ outputs without a destination yet:** P12's `p_process_plasma` (XP-H2's blender takes it) and XP-B1's `electronic_grade_silicon` (XP-K is asked to use it as a K4 wafer substrate). MAX's `launched_belt_seed` (gate c15) has no consumer either; the integrator removes it after EN-1 and XP-V1b (c15 will output nothing, as c16 to c19 do).
+- **XP-AE's A2 and A3 wait for line T17:** the laser array wafer takes T17's `inp_1550_laser_die`, so the photonic coprocessor, the pattern memory unit and the pattern providers re-gated on them stay hidden until XP-H4b lands.
 - **Assets:**
   - MAX+ items and casings have textures (XP-V1); the MAX+ controllers wear MAX art until XP-V2;
   - two MAX casings have no texture (`test_mass_enclosure_casing`, `laser_link_casing`: the missing-texture cube) and `Build-MaxFoundationTextures.ps1` fails its self-check (XP-V1b);
