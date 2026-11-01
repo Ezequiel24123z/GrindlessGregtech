@@ -33,6 +33,20 @@ Most end products do feed a machine recipe (for example cnt_coiled_muscle -> UEV
 
 **Real problem C: bypass.** UIV L14 BEUV mirror: `gtceu:assembler` recipe (9 < 11 steps) skips the line. Proposed fix: remove or gate the assembler recipe in `uiv/beuv_stm.js`.
 
+## UIV fixes (RF-3Q)
+
+- **A. L42 mK cryostat**: fixed. New upstream stage Pr₆O₁₁ → EBF → Pr metal (existing `memories_cryostat` recipe, no table change), then levitation melter → PrNi₅, two cryostat-works steps and the dilution unit: 9 chart nodes instead of 3.
+- **A. L20 droplet sheet**: merged into L19. The orifice plate, EB-distilled Sn and collector are already side inputs of the radiator module recipe (`matrioshka.json`); no separate droplet generator exists, so the doc row is rewritten and no recipe changes.
+- **B. L3 lonsdaleite bearing**: fixed, +1 LuV `magnetic_bearing` (housing) in `metallic_hydrogen.json`.
+- **B. L4 sled charge**: fixed, +4 UHV `pbo_fibre` (overwrap) in `levitation_melter.json`.
+- **B. L39 UIV conveyor**: fixed, +4 LuV `itbtc_coated_conductor` (guideway) in `levitation_melter.json`.
+- **B. L23 UIV motor**: fixed, +2 LuV `superconducting_coil` in `uiv_components.json`.
+- **B. L38 gamma Bragg mirror**: fixed, +1 LuV `sapphire_test_mass` (substrate) in `j0437.json`.
+- **B. L13 driver ASIC**: fixed, kept UHV `vuv_frequency_comb` on the `beuv_lithography` develop step in `beuv_stm.json`. The exposure step already uses all 4 item slots.
+- **B. L9 element 120 and L32 element 119**: fixed through the shared `ion_track` recipe in `superheavy.json` (heavy_ion_irradiation), now with a kept UHV `californium_252` source (fission-fragment track count cross-checks the beam fluence). The recoil separator takes only 2 item inputs and the chemical reactor of `etched_membrane` is full, so the input sits on the ion-track step. The same recipe also feeds the other superheavy (UEV and UXV) lines.
+- **C. L14 BEUV mirror**: kept as is. The `assembler/beuv_mirror` cap is the last step of the line, not a bypass: the BEUV scanner's assembly-line research requires `beuv_mirror`, so moving the cap into `beuv_lithography` would make that research circular. The real gap was the chart, which showed only a short chain; it now draws B₄C → SPS → target → MBE → La/B₄C multilayer → LaN barrier → mirror (7 nodes, two UHV machine crossings).
+- Chart: link nodes `x3_brg`, `x4_pbo`, `x23_coil`, `x39_cc`, `x9_cf` (shared by L9 and L32), `x13_comb`, `x38_mass` in `pl-data-uiv.mjs`; `uiv.md` rows and crossings 101 to 110 updated.
+
 ## Risks
 
 - Link nodes added to UIV rows are a chart annotation only; row-mode lines (`lN_M` keys) ignore consumed links in the audit.

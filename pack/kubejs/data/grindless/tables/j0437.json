@@ -111,8 +111,8 @@
       "recipes": [
         {
           "name": "gamma_bragg_mirror", "circuit": 0, "eut": 1966080, "duration": 600,
-          "_why": "UIV-B3 line 38: ion-milled C-12 plates and tungsten foils are stacked into a pair of gamma Bragg mirrors.",
-          "itemsIn": [ { "id": "grindless:c12_ion_milled_plate", "count": 4 }, { "id": "gtceu:tungsten_foil", "count": 4 } ], "kept": [], "fluidsIn": [ ],
+          "_why": "UIV-B3 line 38: ion-milled C-12 plates and tungsten foils are stacked on a super-polished sapphire test mass (LuV line) into a pair of gamma Bragg mirrors.",
+          "itemsIn": [ { "id": "grindless:c12_ion_milled_plate", "count": 4 }, { "id": "gtceu:tungsten_foil", "count": 4 }, { "id": "grindless:sapphire_test_mass", "count": 1 } ], "kept": [], "fluidsIn": [ ],
           "itemsOut": [ { "id": "grindless:gamma_bragg_mirror", "count": 2 } ], "fluidsOut": []
         },
         {
