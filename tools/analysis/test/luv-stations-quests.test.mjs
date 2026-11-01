@@ -11,7 +11,7 @@ import { stationsMode, stationPackages, readStations, STATIONS_FILE } from '../.
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const quests = path.join(root, 'tools', 'quests');
-const luvGen = path.join(quests, 'luv-chapter', 'gen.mjs');
+const luvGen = path.join(quests, 'gen-chapters.mjs');
 const plGen = path.join(quests, 'processing-lines', 'pl-gen.mjs');
 // scratch folder for the luv_age each mode links into (tools/analysis/.work is ignored by git)
 const work = path.join(root, 'tools', 'analysis', '.work', `luv-stations-${process.pid}`);
@@ -49,7 +49,7 @@ function landedSets(json) {
 
 // luv_age, then pl_luv and power linked against that luv_age
 function drawMode(name, json) {
-  const luv = run([luvGen, '--out', '-'], json);
+  const luv = run([luvGen, '--chapter', 'luv_age', '--out', '-'], json);
   const dir = path.join(work, name);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'luv_age.snbt'), luv);

@@ -18,6 +18,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { buildModel, layoutFindings, GROUP_ID, GROUP_TITLE, REPO, BOOK, hid } from './pl-model.mjs';
 import { KINDS } from './pl-lib.mjs';
+import { groupIdByTitle, ensureGroup, PROGRESSION_GROUP } from '../lib/groups.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : def; };
@@ -145,13 +146,7 @@ function linkSnbt(nd, indent) {
 }
 
 // a chapter group's id by its title in chapter_groups.snbt (the Processing Lines group is ours: its id is fixed)
-function groupId(title) {
-  if (title === GROUP_TITLE) return GROUP_ID;
-  const text = fs.readFileSync(path.join(BOOK, 'chapter_groups.snbt'), 'utf8');
-  const m = new RegExp('\\{ id: "([0-9A-F]{16})", title: "' + title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '" \\}').exec(text);
-  if (!m) throw new Error(`no chapter group titled "${title}" in chapter_groups.snbt`);
-  return m[1];
-}
+const groupId = (title) => groupIdByTitle(BOOK, title, { [GROUP_TITLE]: GROUP_ID, [PROGRESSION_GROUP.title]: PROGRESSION_GROUP.id });
 
 function chapterSnbt(m) {
   const quests = m.nodes.filter((nd) => !nd.link);
@@ -181,15 +176,7 @@ function chapterSnbt(m) {
   return lines.join('\n') + '\n';
 }
 
-function writeGroup(file) {
-  let text = fs.readFileSync(file, 'utf8');
-  if (text.includes(GROUP_ID)) return false;
-  const line = `\t\t{ id: "${GROUP_ID}", title: "${GROUP_TITLE}" }\n`;
-  text = text.replace(/(\n\t\]\n\}\s*)$/, '\n' + line.replace(/\n$/, '') + '$1');
-  if (!text.includes(GROUP_ID)) throw new Error('could not add the group to ' + file);
-  fs.writeFileSync(file, text);
-  return true;
-}
+const writeGroup = (file) => ensureGroup(file, { id: GROUP_ID, title: GROUP_TITLE });
 
 // The linter's exceptions for the generated chapters: a targeted text edit, so the rest of lint-config.json keeps its formatting.
 //   allowRoots      every chart starts from its own raw inputs (one root per input)
