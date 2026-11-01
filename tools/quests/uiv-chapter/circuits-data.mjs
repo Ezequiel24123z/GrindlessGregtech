@@ -61,7 +61,7 @@ export const QUESTS = [
     unlocks: 'The driver ASIC next to it, and through it the P:Si processor.',
     automate: 'Wafers by ME; send the fouled mirrors to the cleaning line, not to the bin.',
   }, [it('grindless:beuv_exposed_wafer')], 120),
-  q('CH_ASIC', 'circuit', 'Driver ASIC', 'grindless:beuv_driver_asic', ['CH_BEUV'], 4.5, 5, {
+  q('CH_ASIC', 'circuit', 'Driver ASIC', 'grindless:beuv_driver_asic', ['CH_BEUV'], 6, 5, {
     for: 'Cut from the exposed wafer, the &6BEUV Driver ASIC&r is the logic that steers the single-atom writer.',
     needs: 'A BEUV exposed wafer and a circuit 1 program in the cleanroom.',
     unlocks: 'The P:Si processor.',
