@@ -149,7 +149,7 @@ export const QUESTS = [
   },
   {
     key: "LOX", id: "587829FDC7BAB863", title: "Liquid Oxygen", icon: "gtceu:liquid_oxygen_bucket",
-    deps: ["CRY"], x: 6, y: -3,
+    deps: ["CRY"], x: 6, y: -4.5,
     desc: [
       "The cell's oxygen becomes &6Liquid Oxygen&r here, as fast as in the freezer and at half the energy once the sun's down. The controller tells you what the next run will cost.",
       "Start a stockpile of liquid oxygen and liquid helium: IV's extreme engines want the first, its hottest ingots the second.",
