@@ -1,4 +1,4 @@
-// priority: -20140
+// priority: -20144
 // MAX+ machines 1 and 2 (docs/eras/maxplus.md, machines 1 and 2, lines P1 to P5; package XP-A1). The older steps of the lines are rows marked
 // XP-A1 in their own tables and scripts; this file holds the two machines' recipes, their controllers, the two casings and the empty cell shell:
 //

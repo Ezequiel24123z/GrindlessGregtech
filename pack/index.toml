@@ -17802,35 +17802,39 @@ hash = "7f64be861aa983730bbccc833ddf897e606713cef9c29922db4ef29212fc9899"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/blueshift.js"
-hash = "12db4fa3f443c04372ed63b62f4ac4ff2576905a0a166cb66c0a61a968f7ac33"
+hash = "d06a863909db6fe5093d4df18a640c87d82f987780e680968d8c3427f490aca9"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/circuits.js"
-hash = "4d3f3b5b7b688c71c864c9855a2b80833c65375bf8ddc18a66e93f706c3118f9"
+hash = "434a81aaabb698fdcb41d8610fe0abe26d79c1518a4df426820d1eb7989d6a63"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/components.js"
-hash = "dd29b859df59caa33549c78af949939ad3ffbb70c1cf7bd8b7ce7665f8a02e55"
+hash = "e955089c4150cf5a8f06e89bd9d423a70c324de6fe48a6b5e31b5247ea43769a"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/condensate.js"
-hash = "41ccd4288afc0215872d731ff7ac7ae94c4807c70d5de730ebfbffd3639b1c5d"
+hash = "17f3d7afc758bfb47348028c38dd4c0b677eda1bd9e2073bd99abd145929c9ed"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/maxplus/creative_cores.js"
+hash = "c14a8f2e7995b839d9381e0078c32543366d05fe2fb76d2d181569f838b349ca"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/crystals.js"
-hash = "23e9e145f57e4da169bfff256488af24889441cdcec409f2ce2c28a61f15f063"
+hash = "01bae0e66985feaa72932bf06141c2f52b884a12995e9c27cfea171afdd9dddd"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/hyperfactory.js"
-hash = "751d4bc531348bfbb7fa790962592bc8a2bd323dec7738a53a6e82097c198fc4"
+hash = "af0adf62dcfd9e018adf432b570d87066098356156ae7c549bc883f3f1637e28"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/loom.js"
-hash = "3440f9eaeba029c96063489ac6612cc4161e236331f96851c6ecef6414d615bc"
+hash = "44e3a3a63a659726fcb7e14fc587c25d70c720d511c78ebe4702d0ebf319dfcb"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/power.js"
-hash = "c6934b93ca1a9cbc06ecdc24463e2e5fcf412e95d3c63bef8f44666ca36e2956"
+hash = "bee3c11b42d555eff991d9d8d5d29f088c6a0449d3d4761acbe1bb5232a190d5"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/slingshot.js"
