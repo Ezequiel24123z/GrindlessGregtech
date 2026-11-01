@@ -49,8 +49,10 @@
   var DIAL = 8796093022208
   var CAP = 87960930222080
   var BUFFER = 140737488355328
-  // 2^53 + 1; the run's store: 3e14 above it, so 60 ticks of the dial (5.28e14) carry it back below 2^53
-  var ODD = '9007199254740993'
+  // 2^53 + 1 + 2 caps (odd): the exact check's one cap withdrawal leaves the store above 2^53, so the settlement runs its BigInteger
+  // path end to end (seeded at 2^53 + 1, one cap took it back below 2^53); the run's store: 3e14 above 2^53, so 60 ticks of the dial
+  // (5.28e14) carry it back below 2^53
+  var ODD = '9183121115185153'
   var STORE_RUN = '9307199254740993'
   var DEPOSIT_GAVE = 12345678900
   var RUN = 60
