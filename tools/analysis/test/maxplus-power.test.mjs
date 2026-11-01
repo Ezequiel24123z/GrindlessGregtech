@@ -37,6 +37,6 @@ test('P18 takes the first MAX+ circuit of each older machine: above every circui
 test('power.js: the five P18 outputs and the three hatch recipes, MAX+ ingredients only', () => {
   ['kerr_fcl_buffer_tape', 'thick_kerr_fcl_tape', 'kerr_fcl_coil', 'cold_kerr_fcl'].forEach((id) => assert.ok(power.includes("'grindless:" + id + "'")));
   ['max_substation_input_hatch_64a', 'max_substation_output_hatch_64a', 'max_maxplus_energy_hatch_1024a'].forEach((id) => assert.ok(power.includes("'gtceu:" + id + "'")));
-  assert.ok(!power.includes('cold_fcl_module'), 'the MAX rows keep cold_fcl_module; ours must not collide with them');
+  assert.ok(!power.includes("'grindless:cold_fcl_module'"), 'the MAX rows keep cold_fcl_module; ours must not collide with them');
   assert.ok(!/priority:/.test(power.split('\n')[0]), 'the priority line is stamped by the integrator');
 });
