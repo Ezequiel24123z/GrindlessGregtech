@@ -1194,16 +1194,16 @@
 		}
 		{
 			dependencies: ["3E34BD03805ECEE0"]
-			description: ["Melts the ring ice into water and ammonia."]
-			icon: "gtceu:lv_distillery"
+			description: ["Melts the ring ice into water and ammonia (grindless:distillation_tower/ring_ice_melt)."]
+			icon: "gtceu:distillation_tower"
 			id: "3006EED826B60D50"
 			shape: "gear"
 			size: 1.25d
 			tasks: [
-				{ id: "564D745FA9FEF92A", item: "gtceu:lv_distillery", optional_task: true, type: "item" }
+				{ id: "564D745FA9FEF92A", item: "gtceu:distillation_tower", optional_task: true, type: "item" }
 				{ id: "766D29BAEEF8E96A", type: "checkmark" }
 			]
-			title: "Distillery"
+			title: "Distillation Tower"
 			x: 10.5d
 			y: 37.75d
 		}

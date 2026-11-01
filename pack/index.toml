@@ -194,7 +194,7 @@ hash = "c19afe2300528189cd6ca47f5f2dda8f1a08ea1c1e135c08cc93bca9e9b26009"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_zpm.snbt"
-hash = "74d20235df51fd65f4fb83208816215fcbad20cb5f1a5b55f6a45368b83f0c92"
+hash = "d09761fbd8f2d6d26c0b72d1288c69af63a762f3e4869caf313715f3d096b686"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
@@ -17518,7 +17518,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "5323ac93cfebc82156909509e8c477bdbf5e0ffbfc075baa35f0f8f1bd3ff57d"
+hash = "bac82fa92e9410232c88ba09ff9fc46466a720c25b9e9d7e359b49aa7a822d8d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_city.json"
