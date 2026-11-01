@@ -170,8 +170,6 @@
     { "id": "fluid:gtceu:he3_enriched_helium", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-B2; delete the row then" },
     { "id": "fluid:gtceu:hd_fraction", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-B2; delete the row then" },
     { "id": "fluid:gtceu:hd_fraction", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-B2; delete the row then" },
-    { "id": "fluid:gtceu:condensate_boil_off_gas", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-A1; delete the row then" },
-    { "id": "fluid:gtceu:condensate_boil_off_gas", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-A1; delete the row then" },
     { "id": "grindless:hyperstargate_locked_chevron", "role": "use", "reason": "XP-H4a: placed in the Hyperstargate or taken by its controller row, both XP-G1's (docs/eras/maxplus.md, The Hyperstargate); delete the row then" },
     { "id": "grindless:hyperstargate_power_unit", "role": "use", "reason": "XP-H4a: placed in the Hyperstargate or taken by its controller row, both XP-G1's (docs/eras/maxplus.md, The Hyperstargate); delete the row then" },
     { "id": "grindless:horizon_iris", "role": "use", "reason": "XP-H4a: placed in the Hyperstargate or taken by its controller row, both XP-G1's (docs/eras/maxplus.md, The Hyperstargate); delete the row then" },

@@ -22,7 +22,6 @@
     {"id":"gtceu:cno_ash_plasma","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:fusion_reactor"],"used":["gtceu:direct_conversion"]},
     {"id":"gtceu:cold_dt_fill","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:cryogenic_processing"],"used":["gtceu:fuel_fabrication"]},
     {"id":"gtceu:compressed_interstellar_gas","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor"],"used":["gtceu:cryogenic_processing"]},
-    {"id":"gtceu:condensate_boil_off_gas","kind":"fluid","needUse":true,"needMade":true,"made":[],"used":[]},
     {"id":"gtceu:confined_vms_plasma","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:frc_forming"],"used":["gtceu:multi_plasma_blender","gtceu:pair_instability_crucible"]},
     {"id":"gtceu:cooled_exhaust","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:blandford_znajek","gtceu:mass_stream_injection"],"used":["gtceu:plasma_mass_filtering"]},
     {"id":"gtceu:crude_helium_3","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:distillation_tower"],"used":["gtceu:calutron_separation"]},

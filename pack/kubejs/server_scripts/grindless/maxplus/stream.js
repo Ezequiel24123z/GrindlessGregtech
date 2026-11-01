@@ -9,7 +9,7 @@
 //                           electron beam -> refined_mo_grid; assembler c27 -> direct_converter_stack
 //   P22 neutral beam        solvent extraction -> caesium_chloride; zone refining c18 -> six_n_caesium; SRF cavity c12 -> rfq_cavity;
 //                           jet beam line c3 (Cygnus) -> beam_neutraliser; assembler -> neutral_beam_injector
-//   P23 magnetic scoop      PBO synthesis c6 -> scoop_web; field press c4 (SGR 1806-20) -> field_frozen_hoop; MTJ sputtering c28 -> insulated_hoop;
+//   P23 magnetic scoop      PBO synthesis c6 -> scoop_web; field press c4 (SGR 1806-20) -> field_frozen_hoop; MTJ sputtering c29 -> insulated_hoop;
 //                           magnet winding c18 -> scoop_coil; closed-loop cooling -> cold_scoop_coil; assembler -> magnetic_scoop_module
 //
 // One gas works run (64,000 mB) makes 1,000 mB of deuterium and 1,000 mB of helium-3, which is exactly one torus run: the torus c1 makes 2^34 x 2,400
@@ -87,7 +87,7 @@
       outs: [['grindless:scoop_web', 1]] },
     { type: 'field_freezing', name: 'field_frozen_hoop', circuit: 4, eut: 268435456, duration: 1000, dim: SGR, key: 'grindless_field_freezing',
       items: [['grindless:scoop_web', 1], ['gtceu:niobium_titanium_plate', 4]], outs: [['grindless:field_frozen_hoop', 1]] },
-    { type: 'mtj_sputtering', name: 'insulated_hoop', circuit: 28, eut: va(12), duration: 900, key: 'grindless_mtj_sputtering',
+    { type: 'mtj_sputtering', name: 'insulated_hoop', circuit: 29, eut: va(12), duration: 900, key: 'grindless_mtj_sputtering',
       items: [['grindless:field_frozen_hoop', 1], ['gtceu:molybdenum_plate', 4]], fluids: [['gtceu:argon', 1000]], outs: [['grindless:insulated_hoop', 1]] },
     { type: 'magnet_winding', name: 'scoop_coil', circuit: 18, eut: va(6), duration: 800, key: 'grindless_magnet_winding',
       items: [['grindless:insulated_hoop', 1], ['gtceu:superconducting_coil', 2]], fluids: [['gtceu:liquid_helium', 1000]], outs: [['grindless:scoop_coil', 1]] },

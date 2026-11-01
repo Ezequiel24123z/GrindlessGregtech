@@ -3,7 +3,6 @@
 //
 //   grindless:<item> / <block>      item.grindless.<n> / block.grindless.<n>
 //   grindless:<fluid> (GT material) material.grindless.<n>
-//   gtceu:kerr_strand               material.gtceu.kerr_strand
 //   the 1,024 A hatch               block.gtceu.max_maxplus_energy_hatch_1024a
 //   the four places                 level.grindless.<world>, dimension.grindless.<world>, planet.grindless.<key>
 //
@@ -106,7 +105,6 @@
             F.blocks.forEach(function (id) { add('block.grindless.' + strip(id), nameOf(strip(id))) })
             F.fluids.forEach(function (id) { add('material.grindless.' + strip(id), nameOf(strip(id))) })
         }
-        add('material.gtceu.kerr_strand', 'Kerr Strand')
         add('block.gtceu.max_maxplus_energy_hatch_1024a', 'MAX+ 1,024 A Energy Hatch')
         PLACES.forEach(function (p) {
             add('level.grindless.' + p[0], p[2])

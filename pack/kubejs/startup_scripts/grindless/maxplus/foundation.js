@@ -85,7 +85,6 @@
     he_rich_fraction: [GAS, 0xD0E0F0, 'He(rich)'],
     hd_fraction: [GAS, 0xC0D0F0, 'HD(f)'],
     photonuclear_mix: [GAS, 0x90FF90, 'Pn(mix)'],
-    condensate_boil_off_gas: [GAS, 0x8090C0, 'Kc(g)'],
     kerr_condensate: [LIQ, 0x5060C0, 'Kc'],
     settled_condensate: [LIQ, 0x6070D0, 'Kc(s)'],
     liquid_helium_4: [LIQ, 0xE0F4FF, '4He(l)'],
@@ -96,8 +95,6 @@
     ime_leach_fractions: [LIQ, 0xB0A070, 'IME(l)']
   }
 
-  // gtceu:kerr_strand: item forms only, no cable property (S0-3: not a cable at 1,024 A; the strand wire is an item)
-  var STRAND = 'gtceu:kerr_strand'
   var HATCH = 'maxplus_energy_hatch_1024a'
 
   // registered elsewhere: read, never created here
@@ -107,7 +104,6 @@
   MXP.items = Object.keys(ITEMS).map(function (name) { return 'grindless:' + name })
   MXP.blocks = Object.keys(BLOCKS).map(function (name) { return 'grindless:' + name })
   MXP.fluids = Object.keys(FLUIDS).map(function (name) { return 'grindless:' + name })
-  MXP.materials = [STRAND]
   MXP.hatch = 'gtceu:max_' + HATCH
   MXP.hatchAmps = 1024
   MXP.components = COMPONENTS.map(function (name) { return 'grindless:' + name })
@@ -116,7 +112,6 @@
   MXP.ids = {}
   function camel(name) { return name.replace(/_([a-z0-9])/g, function (m, c) { return c.toUpperCase() }) }
   Object.keys(ITEMS).concat(Object.keys(BLOCKS), Object.keys(FLUIDS)).forEach(function (name) { MXP.ids[camel(name)] = 'grindless:' + name })
-  MXP.ids.kerrStrand = STRAND
   MXP.existing.forEach(function (id) { MXP.ids[camel(id.slice(id.indexOf(':') + 1))] = id })
 
   StartupEvents.registry('block', function (event) {
@@ -147,12 +142,6 @@
       else material.liquid()
       material.color(spec[1]).formula(spec[2]).flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
     })
-    event.create(STRAND)
-      .ingot()
-      .iconSet(GTMaterialIconSet.METALLIC)
-      .color(0x2030A0)
-      .formula('Ks')
-      .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
   })
 
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {

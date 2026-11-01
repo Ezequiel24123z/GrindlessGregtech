@@ -23,7 +23,7 @@
         ['gtceu.recipe.grindless_calutron_separation.pristine_helium_3', 'Circuit 21: crude helium-3 separated into pristine helium-3 (line P10).'],
         ['gtceu.recipe.grindless_electron_beam.refined_mo_grid', 'A molybdenum grid billet refined under argon (line P11).'],
         ['gtceu.recipe.grindless_field_freezing.field_frozen_hoop', 'Circuit 4: a scoop web frozen into a field-frozen hoop at SGR 1806-20 (line P23).'],
-        ['gtceu.recipe.grindless_mtj_sputtering.insulated_hoop', 'Circuit 28: a field-frozen hoop sputtered with a molybdenum insulating layer (line P23).'],
+        ['gtceu.recipe.grindless_mtj_sputtering.insulated_hoop', 'Circuit 29: a field-frozen hoop sputtered with a molybdenum insulating layer (line P23).'],
         ['gtceu.recipe.grindless_magnet_winding.scoop_coil', 'Circuit 18: an insulated hoop wound with superconducting coils into a scoop coil (line P23).']
     ]
 
