@@ -48,8 +48,9 @@ export default {
           ['l3_2', I('gtceu:lonsdaleite_dust'), 'Lonsdaleite'],
           ['l3_3', I('grindless:leached_lonsdaleite'), 'Leached Lonsdaleite'],
           ['l3_4', I('grindless:lonsdaleite_race'), 'Lonsdaleite Race'],
-          ['l3_5', I('grindless:lonsdaleite_bearing'), 'Lonsdaleite Bearing'],
+          ['l3_5', I('grindless:lonsdaleite_bearing'), 'Lonsdaleite Bearing', 'product', { from: ['l3_4', 'x3_brg'] }],
         ], 'the UIV piston'),
+        L('x3_brg', 12.5, 1, 'pl_luv:bearing'),
         // line 4
         ...chain(4, [
           ['l4_0', I('gtceu:diamond_plate'), 'Diamond Plate', 'raw'],
@@ -58,9 +59,10 @@ export default {
           ['l4_3', mach('gtceu:ramp_compression_pulser'), 'Ramp Compression Pulser', 'ours'],
           ['l4_4', I('gtceu:cubic_gauche_nitrogen_dust'), 'Cubic Gauche Nitrogen'],
           ['l4_5', I('grindless:quenched_cg_nitrogen'), 'Quenched CG Nitrogen'],
-          ['l4_6', I('grindless:rhea_cased_charge'), 'RHEA Cased Charge'],
+          ['l4_6', I('grindless:rhea_cased_charge'), 'RHEA Cased Charge', 'product', { from: ['l4_5', 'x4_pbo'] }],
           ['l4_7', I('grindless:sled_charge'), 'SLED Charge'],
         ], 'the sled'),
+        L('x4_pbo', 15, 3, 'pl_uhv:fib'),
         // line 5
         ...chain(6, [
           ['l5_0', I('grindless:tantalite_fluoride_cake'), 'Tantalite Fluoride Cake', 'raw'],
@@ -120,8 +122,9 @@ export default {
           ['l23_4', mach('gtceu:nitride_magnet_works'), 'Nitride Magnet Works', 'ours'],
           ['l23_5', I('grindless:bonded_fe16n2_magnet'), 'Bonded Fe16n2 Magnet'],
           ['l23_6', I('gtceu:uev_electric_motor'), 'UEV Electric Motor'],
-          ['l23_7', I('gtceu:uiv_electric_motor'), 'UIV Electric Motor'],
+          ['l23_7', I('gtceu:uiv_electric_motor'), 'UIV Electric Motor', 'product', { from: ['l23_6', 'x23_coil'] }],
         ], 'the UIV motor'),
+        L('x23_coil', 17.5, 13, 'pl_luv:coil'),
         // line 23, the GdBCO motor
         ...chain(18, [
           ['l123_0', I('gtceu:gd_123_dust'), 'Gd-123', 'raw'],
@@ -142,8 +145,9 @@ export default {
           ['l39_7', I('grindless:rhea_cased_halbach'), 'RHEA Cased Halbach'],
           ['l39_8', I('grindless:potted_mh_stator'), 'Potted MH Stator'],
           ['l39_9', I('grindless:maglev_stator'), 'Maglev Stator'],
-          ['l39_10', I('gtceu:uiv_conveyor_module'), 'UIV Conveyor Module'],
+          ['l39_10', I('gtceu:uiv_conveyor_module'), 'UIV Conveyor Module', 'product', { from: ['l39_9', 'x39_cc'] }],
         ], 'the UIV conveyor'),
+        L('x39_cc', 25, 15, 'pl_luv:cc'),
       ],
     },
     atoms: {
@@ -155,18 +159,19 @@ export default {
           ['l9_1', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil'],
           ['l9_2', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
           ['l9_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l9_2', 'x9_cav'] }],
-          ['l9_4', I('grindless:etched_membrane'), 'Etched Membrane'],
+          ['l9_4', I('grindless:etched_membrane'), 'Etched Membrane', 'product', { from: ['l9_3', 'x9_cf'] }],
           ['l9_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
           ['l9_6', I('grindless:element_120_recoil'), 'Element 120 Recoil'],
         ], 'the superheavy census'),
         L('x9_cav', 7.5, -2, 'pl_uev:nsc'),
+        L('x9_cf', 10, 1, 'pl_uhv:cf'),
         // line 32
         ...chain(2, [
           ['l32_0', I('gtceu:polytetrafluoroethylene_foil'), 'Polytetrafluoroethylene Foil', 'raw'],
           ['l32_1', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil'],
           ['l32_2', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
           ['l32_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l32_2'] }],
-          ['l32_4', I('grindless:etched_membrane'), 'Etched Membrane'],
+          ['l32_4', I('grindless:etched_membrane'), 'Etched Membrane', 'product', { from: ['l32_3', 'x9_cf'] }],
           ['l32_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
           ['l32_6', I('grindless:element_119_recoil'), 'Element 119 Recoil'],
         ], 'the superheavy census'),
@@ -262,20 +267,18 @@ export default {
           ['l13_6', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
           ['l13_7', I('grindless:beuv_exposed_wafer'), 'BEUV Exposed Wafer'],
           ['l13_8', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l13_9', I('grindless:beuv_driver_asic'), 'BEUV Driver ASIC'],
+          ['l13_9', I('grindless:beuv_driver_asic'), 'BEUV Driver ASIC', 'product', { from: ['l13_8', 'x13_comb'] }],
         ], 'the BEUV scanner'),
-        // line 14
+        L('x13_comb', 22.5, 3, 'pl_uhv:comb'),
+        // line 14: RF-3Q: the BEUV mirror's own chain (the cap recipe is the last step of the line, not a bypass; the fouled-mirror loop is the cleaning recipe of line 13)
         ...chain(6, [
-          ['l14_0', I('gtceu:mixed_rare_earth_chloride_dust'), 'Mixed Rare Earth Chloride', 'raw'],
-          ['l14_1', mach('gtceu:extraction_cascade'), 'Extraction Cascade', 'ours'],
-          ['l14_2', I('grindless:terbium_oxide_dust'), 'Terbium Oxide'],
-          ['l14_3', mach('gtceu:europium_reductor'), 'Europium Reductor', 'ours'],
-          ['l14_4', I('gtceu:terbium_dust'), 'Terbium'],
-          ['l14_5', I('grindless:tb_droplet_target'), 'TB Droplet Target'],
-          ['l14_6', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l14_7', I('grindless:fouled_beuv_mirror'), 'Fouled BEUV Mirror'],
-          ['l14_8', mach('gtceu:beuv_scanner'), 'BEUV Scanner', 'ours'],
-          ['l14_9', I('grindless:beuv_mirror'), 'BEUV Mirror'],
+          ['l14_0', I('gtceu:boron_carbide_dust'), 'Boron Carbide', 'raw'],
+          ['l14_1', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours'],
+          ['l14_2', I('grindless:b4c_target'), 'B4C Target'],
+          ['l14_3', mach('gtceu:mbe_reactor'), 'MBE Reactor', 'ours'],
+          ['l14_4', I('grindless:la_b4c_multilayer'), 'La/B4C Multilayer'],
+          ['l14_5', I('grindless:lan_barrier_mirror'), 'LaN Barrier Mirror'],
+          ['l14_6', I('grindless:beuv_mirror'), 'BEUV Mirror'],
         ], 'the BEUV scanner'),
         // line 18
         ...chain(8, [
@@ -391,15 +394,17 @@ export default {
           ['l41_8', I('grindless:aqfp_module'), 'AQFP Module'],
           ['l41_9', I('grindless:matrioshka_logic_tile'), 'Matrioshka Logic Tile'],
         ], 'the Matrioshka computer'),
-        // line 42
+        // line 42: RF-3Q: the praseodymium is reduced from its oxide in the EBF (circuit 4, hydrogen) before the levitation melter
         ...chain(10, [
-          ['l42_0', I('gtceu:praseodymium_dust'), 'Praseodymium', 'raw'],
-          ['l42_1', mach('gtceu:levitation_melter'), 'Levitation Melter', 'ours'],
-          ['l42_2', I('gtceu:prni5_dust'), 'Prni5'],
-          ['l42_3', mach('gtceu:millikelvin_cryostat_works'), 'Millikelvin Cryostat Works', 'ours'],
-          ['l42_4', I('grindless:nuclear_stage'), 'Nuclear Stage'],
+          ['l42_0', I('gtceu:praseodymium_oxide_dust'), 'Praseodymium Oxide', 'raw'],
+          ['l42_1', mach('gtceu:electric_blast_furnace'), 'Electric Blast Furnace', 'ours'],
+          ['l42_2', I('gtceu:praseodymium_dust'), 'Praseodymium'],
+          ['l42_3', mach('gtceu:levitation_melter'), 'Levitation Melter', 'ours'],
+          ['l42_4', I('gtceu:prni5_dust'), 'Prni5'],
           ['l42_5', mach('gtceu:millikelvin_cryostat_works'), 'Millikelvin Cryostat Works', 'ours'],
-          ['l42_6', I('grindless:mk_cryostat_module'), 'MK Cryostat Module'],
+          ['l42_6', I('grindless:nuclear_stage'), 'Nuclear Stage'],
+          ['l42_7', mach('gtceu:millikelvin_cryostat_works'), 'Millikelvin Cryostat Works', 'ours'],
+          ['l42_8', I('grindless:mk_cryostat_module'), 'MK Cryostat Module'],
         ], 'the P:Si line and the memories'),
       ],
     },
@@ -461,8 +466,9 @@ export default {
           ['l38_2', I('grindless:c12_hpht_plate'), 'C-12 HPHT Plate'],
           ['l38_3', I('grindless:c12_004_plate'), 'C-12 004 Plate'],
           ['l38_4', I('grindless:c12_ion_milled_plate'), 'C-12 Ion Milled Plate'],
-          ['l38_5', I('grindless:gamma_bragg_mirror'), 'Gamma Bragg Mirror'],
+          ['l38_5', I('grindless:gamma_bragg_mirror'), 'Gamma Bragg Mirror', 'product', { from: ['l38_4', 'x38_mass'] }],
         ], 'the positronium lab'),
+        L('x38_mass', 12.5, 7, 'pl_luv:mass'),
         // line 43
         ...chain(10, [
           ['l43_0', I('grindless:c12_cvd_plate'), 'C-12 CVD Plate', 'raw'],
