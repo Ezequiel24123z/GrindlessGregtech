@@ -1909,6 +1909,10 @@ file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/ganymede.json"
 hash = "a89c6cdf82b947179b585bc57238bea2097cc25242cd12048b7bf5b72a2dc609"
 
 [[files]]
+file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/horizon_city.json"
+hash = "68a8022fc14a5652b9f8ad2c57cc194361c5e23da26ffbf9e06690e503a949df"
+
+[[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/io.json"
 hash = "d9198d8e280be23e9671a3ab40f59cd108fad52e4cc5ce9ee492e154e91d4503"
 
@@ -15425,6 +15429,10 @@ file = "kubejs/assets/grindless/textures/item/zr_master_alloy.png"
 hash = "3ec42f8460c6c5d6f8c36a5857b34ebc026044aa011b205fed3c0ddc2665a8ce"
 
 [[files]]
+file = "kubejs/assets/grindless/textures/sky/horizon_ring.png"
+hash = "76b44ff567fca6602b364ef647c060d39155a121814ed9769c18d0f607b9fb01"
+
+[[files]]
 file = "kubejs/assets/grindless/textures/sky/pluto.png"
 hash = "1b885806cbb6a4d02413fd75a427d64534762fdb24a6268b1867f4f1806ffbce"
 
@@ -15499,6 +15507,10 @@ hash = "58a42de1493400906dd80386754b267affc345bb182bec9e71ac76e71d5ce237"
 [[files]]
 file = "kubejs/client_scripts/grindless/hologram_projector_lang.js"
 hash = "01dd87b665ecfb07afd123130287dd83677863aa535c698e588fec43d0c924d6"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/horizon_city_lang.js"
+hash = "cf5c39730da6e331a319483dc09f32e4f82cfbaf62dbc9a0264f764e7d088814"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/hv_family_lang.js"
@@ -16525,6 +16537,10 @@ file = "kubejs/data/grindless/dimension/ganymede_orbit.json"
 hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
 
 [[files]]
+file = "kubejs/data/grindless/dimension/horizon_city.json"
+hash = "1c8e0a8122a0d46674bf1ce01e13c42d6ea560a956046f58aab3abb0bc1d884a"
+
+[[files]]
 file = "kubejs/data/grindless/dimension/io.json"
 hash = "ed4fa5c0cebb33c57806a206f1d63f92f048f3f0baf13ad93c29362952d8c2dd"
 
@@ -16641,6 +16657,10 @@ file = "kubejs/data/grindless/dimension_type/ganymede.json"
 hash = "14a8de16dcaaa6f7237726db04d135f566bfea5115768d978025bbf339d81c8a"
 
 [[files]]
+file = "kubejs/data/grindless/dimension_type/horizon_city.json"
+hash = "04d9d0fe649e595c5f14226e54521f357d183c1d642c13e2ee919ecf4a2298ff"
+
+[[files]]
 file = "kubejs/data/grindless/dimension_type/io.json"
 hash = "e68c5e54d183dad9a87e949e12b3a8c9cf0ff7112e3a5d28ab2c69eaf9fc093b"
 
@@ -16747,6 +16767,78 @@ hash = "4002bd1f5849a2e1cb0562b602b4c8a5a3fd562237c0c9a6b6519247e45f0f73"
 [[files]]
 file = "kubejs/data/grindless/gcyr/planets/vela_pulsar_orbit.json"
 hash = "be828f83119cd4d39e707e8f6c5766c63b3de7489db698c845633c14cd749eb3"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/arrival_plaza.nbt"
+hash = "c8a5443568af7f9ba09ecfbacc5cff664f3913f1ebf738069f6478506dc49394"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/boulevard.nbt"
+hash = "7a5a237bb40dd787a85d258189deed511a0f5274a0b0a3ea22e176a258a7486d"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/bridge_broken_a.nbt"
+hash = "d8a933aa1af0a58e90526cf265b39f73016dff2548624a0b8adec59b8b5a831f"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/bridge_broken_b.nbt"
+hash = "ea4f1a881ff91dcec7498ed8c9b4df90ebc0591d30dd53e6f25168d0f215ae11"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/bridge_span_a.nbt"
+hash = "a78ab154e3bb9a356998bd8f521869bb98c5a214a6c174e0c363fd873fc6aaf5"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/bridge_span_b.nbt"
+hash = "1a72f5fd28299f371b4dea19eb0340b1f028562201c3f7c700e03dd492da2012"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/cap_ruin.nbt"
+hash = "5180f6ccfa237eb7a01919c0dc1320c3891e525395d3c747af8a3f21d76c4382"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/colonnade.nbt"
+hash = "7654f20317b060bc2aecf2d387e5d58d60b2973bf024a137478c3dfbfba94cc4"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/plaza_glass.nbt"
+hash = "37300c241cfbbae0af3dadbe0f5fd8ca3da90a2d2de20e5e6e6514fb49b6c35e"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/plaza_glass_b.nbt"
+hash = "d68eee4c23abd6f51a5e13132469013052610421b0c044ca01793d8a0d8ad57f"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/plaza_pale.nbt"
+hash = "3e9d6a4757b590b1e5fc371e8fb75aa5863cd8e4c7cf23fc6ca295707874a2ce"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/plaza_pale_b.nbt"
+hash = "0b1b33134bf298f8ba789a66a0b69790b39dbb91158494628879a56b0eac28c5"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/rubble_field.nbt"
+hash = "49795bb682177185d71a165538fd8684302d51169f9a09d778225c3c65cd956c"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/start_plaza.nbt"
+hash = "9b7c0182c7bfdf9da868c1a753d923f10f7c7913b19114e649bfbe0ac5856b04"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/tower_a.nbt"
+hash = "ed80c23ef9293ee4b3c76e55ec0fd1a7e8e7d31d38d25349e306b74ef0cc91cd"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/tower_b.nbt"
+hash = "399b4db7b8adf2966ec5b7b1c8489754d2fc2f90a6a994dd13132a2eb6cfa67a"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/tower_c.nbt"
+hash = "5cfb6db72268592a6508e7be4e1b9df17c83b02f7b6ef0325246e7332ab86498"
+
+[[files]]
+file = "kubejs/data/grindless/structures/horizon_city/tower_d.nbt"
+hash = "a30289ca645c0fc75db69fbed3543b5905511049b1be33f41cb562e35fcbe68f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/accelerators.json"
@@ -16951,6 +17043,10 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
 hash = "006399d344fb331d52e79ba91605b0296d91d92df98fddfbd052f28dae528966"
+
+[[files]]
+file = "kubejs/data/grindless/tables/horizon_city.json"
+hash = "1e04e64ebb1356830dd5c6cc935f16fc27b7f2e9b4f04f71b2df854b6eb9a12e"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_collector.json"
@@ -17273,6 +17369,10 @@ file = "kubejs/data/grindless/worldgen/biome/ganymede.json"
 hash = "851388636c5f92f39cf43ea68da7a3a46b1eb1d7f7cc17bb4ffd6a983011c18f"
 
 [[files]]
+file = "kubejs/data/grindless/worldgen/biome/horizon_city.json"
+hash = "db6d5845792d910f3a9148fde46fb676351ac744899329e43cfd6757bbd97375"
+
+[[files]]
 file = "kubejs/data/grindless/worldgen/biome/io.json"
 hash = "59d683cf02c826272cf24fdcf7c152947af2c5c6ec170a5f409446db080316f0"
 
@@ -17291,6 +17391,34 @@ hash = "4cb8e96cecaba51e6e5bf6017d6336e03649189520fcfe6ce438f3d07fd25238"
 [[files]]
 file = "kubejs/data/grindless/worldgen/noise_settings/io.json"
 hash = "4d2c0f37eeda8810984d07fbabf60f29d2595753cce7a41e543832faba00bb95"
+
+[[files]]
+file = "kubejs/data/grindless/worldgen/structure/horizon_city.json"
+hash = "f32a77171279c26a3104de4ea01edbed8c57d050c75ffefb190798c479d86743"
+
+[[files]]
+file = "kubejs/data/grindless/worldgen/structure_set/horizon_city.json"
+hash = "dee858539abc6f0df4ef85feaa03d3b629c555a2ec71142214d2d7edfda5c81f"
+
+[[files]]
+file = "kubejs/data/grindless/worldgen/template_pool/horizon_city/bridge_caps.json"
+hash = "9f02b577a0c0179d8a6149c77548fece04321ecdae224cd3638ec3870bbf6848"
+
+[[files]]
+file = "kubejs/data/grindless/worldgen/template_pool/horizon_city/bridges.json"
+hash = "4b3df35f07db2b98ae4e88dc8ad6b904cbf6ff931786916a9688d6263393f887"
+
+[[files]]
+file = "kubejs/data/grindless/worldgen/template_pool/horizon_city/caps.json"
+hash = "f31cecf02258c9d306f3bccb7c351a4fc1e7bda7bab738b4bdb4e1332761a7ef"
+
+[[files]]
+file = "kubejs/data/grindless/worldgen/template_pool/horizon_city/ground.json"
+hash = "f6a039a94703912b04bba2962ecb21cc1a1ee72f344ece7b12f3d1effd7b892c"
+
+[[files]]
+file = "kubejs/data/grindless/worldgen/template_pool/horizon_city/ground_start.json"
+hash = "d5701a25e78d6a97d3b3e243710445db5321b2ef1dc72f0e128e734b9fa433a4"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/data/greenhouse.js"

@@ -6,7 +6,9 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 |---|---|
 | `Era.Lib.ps1` | Era styles (shape, wear, trim, panel lines, tone targets), the finish pass hooked into `Save-Png` and the shared component body. Applied to OpV, MAX and MAX+. |
 | `Build-MaxHorizonInterferometerTextures.ps1` | Writes the two casings of the MAX horizon interferometer, `test_mass_enclosure_casing` and `laser_link_casing` (XP-V1b), in the MAX era style. `-Credits`. |
-| `Build-MaxPlusTextures.ps1` | Writes the textures of every MAX+ item and the six MAX+ casings (XP-V1) in the MAX+ era style, reading the lists from `maxplus/foundation.js`. `-Credits`, `-Preview`. || `Pixel.Lib.ps1` | Shared library: ARGB canvas, palettes (character → color), text maps, selective outline, deterministic PNG writer (only `IHDR`, `IDAT` and `IEND`, deflate without compression) and `.png.mcmeta`. |
+| `Build-MaxPlusTextures.ps1` | Writes the textures of every MAX+ item and the six MAX+ casings (XP-V1) in the MAX+ era style, reading the lists from `maxplus/foundation.js`. `-Credits`, `-Preview`. |
+| `Build-HorizonCity.mjs` | Node, no dependencies: writes the final dimension's city (XP-Z1a): the NBT templates under `data/grindless/structures/horizon_city/`, their template pools, the jigsaw structure and structure set, the `arrival_plaza` template, the sky's lensed ring (`textures/sky/horizon_ring.png`) and a preview sheet outside the repository. Deterministic: a rerun leaves the tree clean. |
+| `Pixel.Lib.ps1` | Shared library: ARGB canvas, palettes (character → color), text maps, selective outline, deterministic PNG writer (only `IHDR`, `IDAT` and `IEND`, deflate without compression) and `.png.mcmeta`. |
 | `Build-SteamTextures.ps1` | Writes the steam era textures to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-SteamPreview.ps1` | Review sheet at x8 with the casings, the frames and the items. It is only a preview: it is not published. |
 | `Build-SteamContentTextures.ps1` | Writes the faces of the steam blast furnace and the coke battery (steam era, journey plan) to `pack/kubejs/assets/grindless/textures/`. |
