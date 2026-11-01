@@ -411,7 +411,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "499C3B20D8C53E18", xp: 50 }, { type: "item", id: "21410F60279332F6", item: "minecraft:bread", count: 8 }],
   },
   {
-    key: "STEAM_SMALL_STEAM_PLANTS", id: "325185F9C76235D6", title: "Small Steam Plants",     icon: "gtceu:steam_mixer", kind: "plant", optional: true, deps: ["STEAM_STEAM_MACHINES"], x: 8, y: 6,
+    key: "STEAM_SMALL_STEAM_PLANTS", id: "325185F9C76235D6", title: "Small Steam Plants",     icon: "gtceu:steam_mixer", kind: "plant", optional: true, deps: ["STEAM_STEAM_MACHINES"], x: 8, y: 4.5,
         teach: {
           for: "Small steam multiblocks that run several recipes at once from one steam hatch.",
           needs: "Bronze and steel casings, a steam hatch, and hand-made ULV hatches for the bath and washer.",
@@ -425,7 +425,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "6BCC7552C07375CE",     xp: 40 }],
   },
   {
-        key: "STEAM_LARGE_STEAM_PLANTS", id: "52D6BD0494A56791", title: "Large Steam Plants", icon: "gtceu:large_steam_macerator", kind: "plant", optional: true, deps: ["STEAM_STEEL"], x: 16, y: 6,
+        key: "STEAM_LARGE_STEAM_PLANTS", id: "52D6BD0494A56791", title: "Large Steam Plants", icon: "gtceu:large_steam_macerator", kind: "plant", optional: true, deps: ["STEAM_STEEL"], x: 16, y: 4.5,
         teach: {
           for: "Big steel halls that run ore by the stack on steam and keep every byproduct.",
           needs: "Steel casings, a steam grinder or primitive pump inside, and ULV fluid hatches.",

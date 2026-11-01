@@ -135,7 +135,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "446F9500700968E8", xp: 30 }],
   },
   {
-    key: "LV_CREATURE_SIMULATOR", id: "15D34CE9F5FCE6B3", title: "Creature Simulator", icon: "gtceu:lv_creature_simulator", deps: ["LV_FERTILIZER"], x: 8, y: 4.5,
+    key: "LV_CREATURE_SIMULATOR", id: "15D34CE9F5FCE6B3", title: "Creature Simulator", icon: "gtceu:lv_creature_simulator", deps: ["LV_FERTILIZER"], x: 8, y: 7.5,
     desc: [
       "Mob drops without the mob. The &6Creature Simulator&r turns a model, some biomass and the creature's own mineral into drops.",
       "The programmed circuit picks the roll: circuit 1 gives the full set, the others a single kind of drop.",
@@ -144,7 +144,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "391C99C4924378FE", xp: 40 }],
   },
   {
-    key: "LV_FIRST_PEARL", id: "32CF7B11121B4DA9", title: "First Pearl", icon: "minecraft:ender_pearl", deps: ["LV_CREATURE_SIMULATOR"], x: 10, y: 4.5,
+    key: "LV_FIRST_PEARL", id: "32CF7B11121B4DA9", title: "First Pearl", icon: "minecraft:ender_pearl", deps: ["LV_CREATURE_SIMULATOR"], x: 10, y: 7.5,
     desc: [
       "GregTech asks for ender pearls at LV and only lets you synthesize them much later, so here's one on the house.",
       "Spend it on the enderman model. The simulator makes every pearl after that.",
@@ -153,7 +153,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5E7E5F853EC1126C", xp: 40 }, { type: "item", id: "4D1381871CA636B6", item: "minecraft:ender_pearl" }],
   },
   {
-    key: "LV_CREATURE_MODELS", id: "29B4717D718C6BB5", title: "Creature Models", icon: "grindless:blank_creature_model", deps: ["LV_FIRST_PEARL"], x: 12, y: 4.5,
+    key: "LV_CREATURE_MODELS", id: "29B4717D718C6BB5", title: "Creature Models", icon: "grindless:blank_creature_model", deps: ["LV_FIRST_PEARL"], x: 12, y: 7.5,
     desc: [
       "Print models for whatever you're short on. A blank model plus some of the creature's own material makes one, and the simulator never uses it up.",
       "Any one of them counts here.",
@@ -162,7 +162,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "782162B7F4EAE965", xp: 30 }],
   },
   {
-    key: "LV_CREEPER_AND_BLAZE_MODELS", id: "47892302FAEA3244", title: "Creeper and Blaze Models", icon: "grindless:creature_model_creeper", optional: true, deps: ["LV_CREATURE_MODELS"], x: 14, y: 4.5,
+    key: "LV_CREEPER_AND_BLAZE_MODELS", id: "47892302FAEA3244", title: "Creeper and Blaze Models", icon: "grindless:creature_model_creeper", optional: true, deps: ["LV_CREATURE_MODELS"], x: 14, y: 7.5,
     desc: [
       "Both models print at LV, but the creeper and the blaze only run in an MV simulator. Make them now and they'll be waiting.",
     ],
@@ -284,7 +284,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "74420A10ED35F67C", xp: 70 }],
   },
   {
-    key: "LV_AE2_BRANCH", title: "The AE2 Branch", icon: "ae2:controller", kind: "milestone", id: "4B8D2F6A1C7E9035", deps: ["LV_SUBMERGED_ARC_FURNACE"], x: 24, y: 7.5,
+    key: "LV_AE2_BRANCH", title: "The AE2 Branch", icon: "ae2:controller", kind: "milestone", id: "4B8D2F6A1C7E9035", deps: ["LV_SUBMERGED_ARC_FURNACE"], x: 22, y: 9,
     desc: [
       "Silicon is in hand, so the storage network is within reach. The row below walks it from crystal to terminal.",
     ],
@@ -292,7 +292,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "6F2B8D4A1E7C3095", xp: 30 }],
   },
   {
-    key: "LV_CERTUS_QUARTZ_CRYSTAL", id: "3D374AE4AF789B83", title: "Certus Quartz Crystal", icon: "ae2:certus_quartz_crystal", deps: ["LV_AE2_BRANCH"], x: 22, y: 9,
+    key: "LV_CERTUS_QUARTZ_CRYSTAL", id: "3D374AE4AF789B83", title: "Certus Quartz Crystal", icon: "ae2:certus_quartz_crystal", deps: ["LV_AE2_BRANCH"], x: 24, y: 9,
     desc: [
       "The autoclave grows certus dust into crystals in water, and distilled water does it faster and never fails. GregTech's machines hand out AE2's crystal here, so the ore line and the network share one pile.",
     ],
@@ -300,7 +300,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5686983FDF28C1EF", xp: 30 }],
   },
   {
-    key: "LV_INSCRIBER_AND_CHARGER", id: "28CA19174EBE8705", title: "Inscriber and Charger", icon: "ae2:inscriber", deps: ["LV_CERTUS_QUARTZ_CRYSTAL"], x: 24, y: 9,
+    key: "LV_INSCRIBER_AND_CHARGER", id: "28CA19174EBE8705", title: "Inscriber and Charger", icon: "ae2:inscriber", deps: ["LV_CERTUS_QUARTZ_CRYSTAL"], x: 26, y: 9,
     desc: [
       "AE2's own &6Inscriber&r and &6Charger&r, built in the assembler from GregTech parts instead of a handful of iron. Once they're down they work exactly like they do anywhere else.",
     ],
@@ -308,7 +308,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "3EDF966589041684", xp: 35 }],
   },
   {
-    key: "LV_CHARGED_CERTUS_QUARTZ", id: "19778BA6D436527A", title: "Charged Certus Quartz", icon: "ae2:charged_certus_quartz_crystal", deps: ["LV_INSCRIBER_AND_CHARGER"], x: 26, y: 9,
+    key: "LV_CHARGED_CERTUS_QUARTZ", id: "19778BA6D436527A", title: "Charged Certus Quartz", icon: "ae2:charged_certus_quartz_crystal", deps: ["LV_INSCRIBER_AND_CHARGER"], x: 28, y: 9,
     desc: [
       "The charger you just built and GregTech's polarizer both charge certus, and they make the same crystal. Use whichever one isn't busy.",
     ],
@@ -316,7 +316,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "78479C7E6FA1CB30", xp: 30 }],
   },
   {
-    key: "LV_FLUIX_CRYSTAL", id: "382D3153A231CEBF", title: "Fluix Crystal", icon: "ae2:fluix_crystal", deps: ["LV_CHARGED_CERTUS_QUARTZ"], x: 28, y: 9,
+    key: "LV_FLUIX_CRYSTAL", id: "382D3153A231CEBF", title: "Fluix Crystal", icon: "ae2:fluix_crystal", deps: ["LV_CHARGED_CERTUS_QUARTZ"], x: 30, y: 9,
     desc: [
       "The mixer makes fluix from charged certus, redstone and quartzite dust. Quartzite stands in for Nether quartz here, and this one needs no trip at all.",
     ],
@@ -324,7 +324,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "18C037E708F2E829", xp: 30 }],
   },
   {
-    key: "LV_PROCESSOR_PRESSES", id: "7F321CF5445BE4CA", title: "Processor Presses", icon: "ae2:logic_processor_press", deps: ["LV_FLUIX_CRYSTAL"], x: 30, y: 9,
+    key: "LV_PROCESSOR_PRESSES", id: "7F321CF5445BE4CA", title: "Processor Presses", icon: "ae2:logic_processor_press", deps: ["LV_FLUIX_CRYSTAL"], x: 32, y: 9,
     desc: [
       "The forming press stamps the presses and the inscriber uses them the usual way. Any one counts here. Make whichever your next build needs.",
     ],
@@ -332,7 +332,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "26CC9027970196F1", xp: 30 }],
   },
   {
-    key: "LV_NETWORK_CORE", id: "0BB3182B7BA1B9AF", title: "Network Core", icon: "ae2:controller", deps: ["LV_PROCESSOR_PRESSES"], x: 32, y: 10.5,
+    key: "LV_NETWORK_CORE", id: "0BB3182B7BA1B9AF", title: "Network Core", icon: "ae2:controller", deps: ["LV_PROCESSOR_PRESSES"], x: 34, y: 10.5,
     desc: [
       "A controller, a drive and an energy acceptor are all a network needs to wake up. Here they come out of the LV assembler, built on machine hulls like any GregTech machine.",
       "AE2 runs on FE, but GregTech cable plugged straight into the acceptor powers it. No converter needed.",
@@ -341,7 +341,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "4A7EA0B8AF33B190", xp: 35 }],
   },
   {
-    key: "LV_ME_INTERFACES", id: "3B94B80BD64D83F2", title: "ME Interfaces", icon: "ae2:interface", deps: ["LV_NETWORK_CORE"], x: 34, y: 10.5,
+    key: "LV_ME_INTERFACES", id: "3B94B80BD64D83F2", title: "ME Interfaces", icon: "ae2:interface", deps: ["LV_NETWORK_CORE"], x: 36, y: 10.5,
     desc: [
       "With an interface, a pattern provider and a molecular assembler, the network starts crafting for you. They're LV hull builds too, around AE2's usual cores, and the annihilation core takes a quartzite gem where AE2 would ask for Nether quartz.",
     ],
@@ -349,7 +349,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "3AEB32EA0C418EC9", xp: 35 }],
   },
   {
-    key: "LV_ME_NETWORK_ACCESS", id: "09539172C5EF719B", title: "ME Network Access", icon: "ae2:terminal", deps: ["LV_ME_INTERFACES"], x: 36, y: 10.5,
+    key: "LV_ME_NETWORK_ACCESS", id: "09539172C5EF719B", title: "ME Network Access", icon: "ae2:terminal", deps: ["LV_ME_INTERFACES"], x: 38, y: 10.5,
     desc: [
       "A terminal to see everything and a crafting CPU to plan the jobs. From here on AE2 is plain AE2, and the Applied Energistics tab has the rest.",
     ],
@@ -392,7 +392,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "68887B95D69575F2", xp: 120 }],
   },
   {
-    key: "LV_PHOTOGRAPHIC_PLATES", id: "365B9E86E3AA4894", title: "Photographic Plates", icon: "grindless:photographic_plate", deps: ["LV_LV_ASSEMBLER"], x: 6, y: -4.5,
+    key: "LV_PHOTOGRAPHIC_PLATES", id: "365B9E86E3AA4894", title: "Photographic Plates", icon: "grindless:photographic_plate", deps: ["LV_MACERATOR"], x: 6, y: -4.5,
     desc: [
       "Glass with a silver emulsion, made in the assembler. The optical observatory exposes them to the Moon, and this time the Moon draws itself.",
     ],
