@@ -1,4 +1,4 @@
-# RF-3B: formed multiblock review and Expanded Assembly Line
+﻿# RF-3B: formed multiblock review and Expanded Assembly Line
 
 Issue #41. Bench evidence only; the fix list below is for later packages.
 
@@ -32,9 +32,11 @@ Runs: server `20261101-004409-server-062`, `20261101-005138-server-e97`; client 
 - Recipes: 4 static checks PASS (assembly_line recipes at LuV for the line, receptor, transmissor, relay; no crafting-table recipe).
 - Stock assembly line control: forms, refuses a wrong bus order, runs with the right order.
 - Dedicated server: the EAL and the Matrix Data Relay can never form. `WirelessOpticalHatch` (the receptor/transmissor class, extendedfeatures 3.0.0) references `net.minecraft.client.gui.screens.Screen`; the first class load fails with `Attempted to load class ... for invalid dist DEDICATED_SERVER`. The structure requires the receptor (`expanded_assembly_line.js:10-17`). Add-on defect; works on an integrated server.
-- Client run: the preview of both forms (13 shapes for the EAL). The hand-built test layouts did not form (`eal_FORMED`: energy hatch joined no controller; `mdr_FORMED`: air at 36044,104,12). The preview layout (manifest `layout`) shows what the test got wrong: a `configurable_maintenance_hatch` at layer 0, x1, z0 and the receptor at x3, z0 (the test had no maintenance hatch and put the receptor at slice 1); the relay needs a maintenance hatch too (layer 0, x8, z10). I added the EAL maintenance hatch and moved the receptor in the test; it has NOT been rerun (run budget spent), so recipe execution and the research path stay unproven.
+- Earlier client run: the hand-built test layouts did not form (`eal_FORMED`: energy hatch joined no controller; `mdr_FORMED`: air at 36044,104,12): they lacked the maintenance hatch and had the receptor misplaced.
+- Final repair: the test now builds both layouts from the machine's own GTM preview shape (`shapeCells`; the first shape with 5 input buses for the EAL, plus a luv energy hatch, a second fluid hatch and the relay's six data hatches as roles). Client run `20261101-020719-client-23b` (integrated server): `eal_PLACED`, `eal_FORMED` (energy hatch joined 1 controller after 10 ticks), `eal_PARTS`, `mdr_PLACED`, `mdr_FORMED` (MatrixDataRelayMachine, 8 parts), `mdr_PARTS`, and the control all PASS. The previous run `20261101-020025-client-ad6` died at placement on a test bug (`Block.getId` resolved to the wrong overload).
+- EAL recipe run: FAIL. `eal_RUNS_WRONG_ORDER_start`: `assembly_line/dynamo_hatch_luv` with the inputs in the reverse bus order did not start in 400 ticks (10 of 10 items in the buses, reasons `unreadable (addon controller)`, fluid hatches not shown in the line). The test then skipped the right-order run and the research path, so `eal_RUNS`, `eal_RESEARCH_*` were never reached. Unknown whether the cause is the fluid inputs (hatch 0 is the preview's ULV hatch), the add-on refusing the order, or the test; the failure message hides the controller's reasons. No further repairs were made.
 
-Verdict: KEEP, conditional. The multiblock, its four recipes and its preview work; the research path is untested, and on a dedicated server it cannot form because of the add-on. Needed before release: either a dedicated-server guard (not ours to patch) or a note that the EAL needs an integrated server, plus one more bench run of `gg_test_expanded_assembly_line` with the layout fixed (also for the relay, `MDR_AISLES`).
+Verdict: KEEP, still conditional. Both multiblocks form from their preview on an integrated server and their recipes are valid. The EAL has not been seen completing a recipe and the relay research link is untested; on a dedicated server neither can form (add-on). Next step for a later package: print the fluid hatch contents and the recipe-logic status in `eal_RUNS_WRONG_ORDER_start`, run the right order first, then the research path.
 
 ## Fix list by file
 
