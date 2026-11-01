@@ -760,11 +760,12 @@ const ROWS = {
   ],
   H1: [
     ["i", "grindless:horizon_shielding", []],
-    ["i", "grindless:horizon_waveguide", []],
-    ["i", "grindless:horizon_conduit", []],
+    ["i", "grindless:cold_horizon_waveguide", []],
+    ["i", "grindless:cold_horizon_conduit", []],
     ["i", "grindless:horizon_mesh", []],
-    ["m", "gtceu:condensate_assembler", [0, 1, 2, 3]],
-    ["i", "grindless:horizon_frame_part", [4]],
+    ["i", "grindless:he4_dewar", []],
+    ["m", "gtceu:condensate_assembler", [0, 1, 2, 3, 4]],
+    ["i", "grindless:horizon_frame_part", [5]],
   ],
   H2: [
     ["i", "grindless:horizon_frame_part", []],
