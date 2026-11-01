@@ -7,7 +7,7 @@
     var ENTRIES = [
         ['gtceu.hyper_assembly_array', 'Hyper Assembly Array'],
         ['block.gtceu.hyper_assembly_array', 'Hyper Assembly Array'],
-        ['grindless.machine.hyper_assembly_array.tooltip.0', '\u00a77Builds the Hyperstargate\'s parts and the creative-item ingredients from dozens of inputs at once.'],
+        ['grindless.machine.hyper_assembly_array.tooltip.0', '\u00a77Builds the Hyperstargate\'s parts and creative items from many inputs.'],
         ['gtceu.recipe.grindless_hyper_assembly_array.hyperstargate_ring_block', 'Circuit 1: frame parts, containment plates, field generators and the rest assembled into a Hyperstargate ring block under a condensate bath.'],
         ['gtceu.recipe.grindless_hyper_assembly_array.hyperstargate_chevron_upgrade', 'Circuit 2: compressed plates, frame parts, chevron cores and drives assembled into a chevron upgrade under a condensate bath.'],
         ['gtceu.recipe.grindless_hyper_assembly_array.hyperstargate_chevron_block', 'Circuit 3: ring blocks, chevron upgrades and the four horizon parts assembled into a chevron block.'],
