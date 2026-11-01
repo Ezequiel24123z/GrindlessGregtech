@@ -1,5 +1,5 @@
 // XP-H2 (MAX+ multi-plasma blender and horizon crystal furnace, lines T8, T9 and T10): the stand-in run of maxplus/crystals.js, row shape, sites,
-// circuits, the 1.28e9 mB slurry bill and lang parity.
+// circuits, the 2.56e8 mB slurry bill (one MAX fluid hatch per core run) and lang parity.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -40,7 +40,7 @@ test('blender row: eight fluids of 1,000 mB make 1,000 mB of slurry at V[MAX] x 
   assert.equal(b.items, undefined);
 });
 
-test('furnace rows: c1 core and c2 controller boule at V[MAX] x 256 A for 2,400 t; the core bill is 20,000,000 mB x 64 = 1.28e9 mB', () => {
+test('furnace rows: c1 core and c2 controller boule at V[MAX] x 256 A for 2,400 t; the core bill is 4,000,000 mB x 64 = 2.56e8 mB, each slurry input fits one MAX fluid hatch', () => {
   const [core, ctrl] = plain(MC.furnace);
   assert.deepEqual([core.circuit, ctrl.circuit], [1, 2]);
   assert.deepEqual([core.outs[0][0], ctrl.outs[0][0]], ['grindless:core_crystal_boule', 'grindless:controller_crystal_boule']);
@@ -52,7 +52,9 @@ test('furnace rows: c1 core and c2 controller boule at V[MAX] x 256 A for 2,400 
     assert.ok(r.items.some((i) => i[0] === 'grindless:kerr_strange_plate'), 'P3 lines the crucible');
   }
   const slurry = core.fluids.find((f) => f[0] === 'gtceu:horizon_crystal_slurry')[1];
-  assert.equal(slurry * 64, 1.28e9);
+  assert.equal(slurry * 64, 2.56e8);
+  // GTM 7.5.3: a MAX fluid hatch holds 8,000 x 2^9 = 4,096,000 mB (the capacity lint's tank)
+  for (const r of [core, ctrl]) for (const f of r.fluids) assert.ok(f[1] <= 4096000, f[0] + ' ' + f[1] + ' mB fits one MAX hatch');
 });
 
 test('older rows keep their sites: the elevator and the filter are bound to Cygnus X-1, the refinery to Sgr A*, the rest are home rows', () => {

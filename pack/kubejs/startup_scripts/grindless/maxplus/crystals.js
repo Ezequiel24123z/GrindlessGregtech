@@ -26,13 +26,11 @@
     ]
   }
 
-  // one core boule takes 20,000,000 mB of slurry and a MAX fluid hatch holds 4,096,000 mB (GTM: 8,000 x 2^9), so the slurry needs five
-  // hatches (GTM drains one fluid ingredient across hatches) and the kerr condensate a sixth: nine part cells on the floor's front row
   function furnaceParts() {
     return [
       Pat.part('input_bus', { min: 1, max: 2 }),
       Pat.part('output_bus', { min: 1, max: 2 }),
-      Pat.part('input_hatch', { min: 1, max: 8 }),
+      Pat.part('input_hatch', { min: 1, max: 2 }),
       Pat.part('energy_input', { min: 1, max: 2 })
     ]
   }
@@ -66,7 +64,7 @@
   }
 
   function furnaceCell(x, y, z) {
-    if (y === 0) return z === 0 && x >= 3 && x <= 11 ? 'X' : 'B'
+    if (y === 0) return z === 0 && x >= 5 && x <= 9 ? 'X' : 'B'
     if (y === 16) return 'B'
     if (x === 0 || x === 14 || z === 0 || z === 14) {
       var along = x === 0 || x === 14 ? z : x

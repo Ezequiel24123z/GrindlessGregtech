@@ -236,7 +236,7 @@ Format as in max.md, shortened: gains, recipes, byproducts, structure, crossings
 
 ### 13. Horizon crystal furnace (Sgr A\* orbit)
 
-**Gains.** GTNH grows its stargate crystals for two weeks at heat 100,000; we refuse the time (rule 2) and pay in slurry and parallels: 1.28e9 mB of slurry for 64 core crystals, in many parallel runs of 2,400 t. Heat from condensate, not coils (GTM's coils stop at 10,800 K). **Recipes.** c1 core crystal (T9), c2 controller crystal (T10); V[MAX] x 256 A, 2,400 t. **Structure.** 15 x 17 x 15.
+**Gains.** GTNH grows its stargate crystals for two weeks at heat 100,000; we refuse the time (rule 2) and pay in slurry and parallels: 2.56e8 mB of slurry for 64 core crystals (4,000,000 mB each, the most one MAX fluid hatch holds: the capacity lint's rule; *As built* XP-H2), in many parallel runs of 2,400 t. Heat from condensate, not coils (GTM's coils stop at 10,800 K). **Recipes.** c1 core crystal (T9), c2 controller crystal (T10); V[MAX] x 256 A, 2,400 t. **Structure.** 15 x 17 x 15.
 
 ### 14. Condensate assembler (Sgr A\* orbit)
 
@@ -443,8 +443,8 @@ Recomputed from the *Lines* table by machine name (RF-7A; the integrator re-sums
 | Horizon containment plate | about 6,000 | about 6,000 (GTNH 601) |
 | Horizon processor (direct, through parts) | about 155,000 (8 per frame part, 8 per plate) | 100,000-200,000 |
 | Meta-materials (shielding, waveguide, conduit, valve) | about 380,000 each (25 of each per frame part, plus chevron blocks) | GTNH about 378,000 total |
-| Core crystals | 64 (1.28e9 mB of slurry) | GTNH 1 (128M L) x10 runs, without the two weeks |
-| Fluids | kerr condensate about 2e10 mB; superfluid He-3 about 5e9 mB; molten kerr strange about 1e9 mB; crystal slurry 1.28e9 mB; eight plasmas about 1.3e9 mB each | 1e10-1e13 L, split over many fluids |
+| Core crystals | 64 (2.56e8 mB of slurry: 4,000,000 mB each, one MAX fluid hatch) | GTNH 1 (128M L) x10 runs, without the two weeks |
+| Fluids | kerr condensate about 2e10 mB; superfluid He-3 about 5e9 mB; molten kerr strange about 1e9 mB; crystal slurry about 2.6e8 mB; eight plasmas about 2.6e8 mB each | 1e10-1e13 L, split over many fluids |
 | Horizon locks | 9 consumed (chevrons) + 1 kept (dial) | — |
 | Creative items | 48 | GTNH 40 chaotic capacitors |
 

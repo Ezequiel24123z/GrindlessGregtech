@@ -9,8 +9,8 @@
 (function () {
     var T = {
         blender: 'Eight plasmas, 1,000 mB each (stellar, lifted, filtered, very-massive-star, p-process, jet, hot flow) and kerr condensate, blended into 1,000 mB of horizon crystal slurry at V[MAX] x 64 A.',
-        core: 'Circuit 1: a sapphire seed plate and condensate-doped dust grown in 20,000,000 mB of slurry, lined with kerr strange plate, at V[MAX] x 256 A (line T9). Kerr condensate carries the heat.',
-        controller: 'Circuit 2: a controller seed and condensate-doped dust grown in 5,000,000 mB of slurry, lined with kerr strange plate, at V[MAX] x 256 A (line T10).',
+        core: 'Circuit 1: a sapphire seed plate and condensate-doped dust grown in 4,000,000 mB of slurry, lined with kerr strange plate, at V[MAX] x 256 A (line T9). Kerr condensate carries the heat.',
+        controller: 'Circuit 2: a controller seed and condensate-doped dust grown in 1,000,000 mB of slurry, lined with kerr strange plate, at V[MAX] x 256 A (line T10).',
         lifted: 'Circuit 5: stellar plasma lifted out of the star at Cygnus X-1 (line T8).',
         filtered: 'Circuit 8: lifted stellar plasma split by mass at Cygnus X-1 (line T8).',
         seedPlate: 'Circuit 32: sapphire plates grown in a crucible under argon into seed plates (line T9).',

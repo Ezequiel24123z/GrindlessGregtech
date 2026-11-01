@@ -11,7 +11,8 @@
 //   T10 controller crystal       levitation melter c25 (P3 ingot) -> molten_kerr_strange; crystal growth c32 -> controller_seed; furnace c2 ->
 //                                controller_crystal_boule; BEUV c23 -> horizon_controller_crystal
 //
-// The furnace pays the design's 1.28e9 mB of slurry for 64 core crystals as 20,000,000 mB per run, many runs in parallel, 2,400 t each; heat comes
+// The furnace pays 4,000,000 mB of slurry per core crystal (2.56e8 mB for the 64), the most one MAX fluid hatch holds (4,096,000 mB, the
+// capacity lint's rule), many runs in parallel, 2,400 t each; heat comes
 // from kerr condensate, not coils. Older-machine rows live here. Circuits are the first free ones of each older machine type (crystal growth is full
 // at 32, which rows share by item inputs). Every older machine keeps its site: the stellar elevator and the plasma mass filter run only at Cygnus X-1
 // (the site rule of tiers/uxv.json), the others are home rows; the refinery, the blender and the furnace sit at Sgr A* orbit.
@@ -78,15 +79,16 @@
   ]
   MC.blender = BLEND
 
-  // the furnace (V[MAX] x 256 A, 2,400 t): 20,000,000 mB of slurry per core crystal, 5,000,000 mB per controller crystal; P3's plate lines the crucible
+  // the furnace (V[MAX] x 256 A, 2,400 t): 4,000,000 mB of slurry per core crystal, 1,000,000 mB per controller crystal (each fits one MAX
+  // fluid hatch, 4,096,000 mB); P3's plate lines the crucible
   var FURNACE = [
     { type: 'horizon_crystal_furnace', name: 'core_crystal_boule', circuit: 1, eut: V_MAX * 256, duration: 2400, key: 'grindless_horizon_crystal_furnace', dimension: SGRA,
       items: [['grindless:sapphire_seed_plate', 1], ['grindless:condensate_doped_dust', 64], ['grindless:kerr_strange_plate', 4]],
-      fluids: [[SLURRY, 20000000], [KERR, 100000]],
+      fluids: [[SLURRY, 4000000], [KERR, 100000]],
       outs: [['grindless:core_crystal_boule', 1]] },
     { type: 'horizon_crystal_furnace', name: 'controller_crystal_boule', circuit: 2, eut: V_MAX * 256, duration: 2400, key: 'grindless_horizon_crystal_furnace', dimension: SGRA,
       items: [['grindless:controller_seed', 1], ['grindless:condensate_doped_dust', 64], ['grindless:kerr_strange_plate', 4]],
-      fluids: [[SLURRY, 5000000], [KERR, 100000]],
+      fluids: [[SLURRY, 1000000], [KERR, 100000]],
       outs: [['grindless:controller_crystal_boule', 1]] }
   ]
   MC.furnace = FURNACE
