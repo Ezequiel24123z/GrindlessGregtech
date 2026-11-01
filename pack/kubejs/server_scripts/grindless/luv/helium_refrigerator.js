@@ -328,6 +328,8 @@
   //   OpV-A1 (lines 6 and 10): welded_mesh_belt -> chain_mesh_belt, the PBO/chain belt accepted at 4 K; contacted_hpge_crystal ->
   //   hpge_compton_crystal, the HPGe detector's leakage and resolution test at 77 K
   var OPV_ROWS = [
+    // XP-A2 (maxplus.md, line C1 step 5): the impregnated Kerr coil run cold in the loop until it holds its critical current
+    { name: 'kerr_field_coil', input: 'grindless:impregnated_kerr_coil', output: 'grindless:kerr_field_coil', eut: 30720, duration: 600 },
     { name: 'opv_electron_cooler', input: 'grindless:cooler_electron_gun', output: 'grindless:electron_cooler', eut: 30720, duration: 600 },
     { name: 'opv_stochastic_cooling_pickup', input: 'grindless:brazed_pickup_tank', output: 'grindless:stochastic_cooling_pickup',
       eut: 30720, duration: 600 },

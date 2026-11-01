@@ -26,6 +26,14 @@
           "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
           "itemsOut": [{ "id": "grindless:membrane_belt", "count": 1 }, { "id": "grindless:membrane_scrap", "count": 1, "chance": 2500 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "XP-A2 (maxplus.md, line C6 step 4, c4): the refractory-coated Kerr web is spliced with horizon strand wire and potted in epoxy into the horizon belt; the trim goes to the scrap loop.",
+          "name": "horizon_belt", "circuit": 4, "eut": 2013265920, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:refractory_coated_web", "count": 1 }, { "id": "gtceu:horizon_strand_single_wire", "count": 2 }],
+          "kept": [], "fluidsIn": [{ "id": "gtceu:epoxy", "amount": 144 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:horizon_belt", "count": 1 }, { "id": "grindless:membrane_scrap", "count": 1, "chance": 2500 }],
+          "fluidsOut": []
         }
       ]
     }

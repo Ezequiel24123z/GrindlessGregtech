@@ -53,6 +53,15 @@
           "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 500 }],
           "itemsOut": [{ "id": "grindless:shequid_rotation_ref", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "XP-A2 (maxplus.md, line C2 step 1, c10): the bound degenerate billet balanced in the He-II bath against the weak-link cell (kept as the gauge) until its flux is symmetric; the bath is consumed. Circuit 10: P19 and T7 take 8 and 9.",
+          "name": "balanced_bound_billet", "circuit": 10, "eut": 536870912, "duration": 1600,
+          "itemsIn": [{ "id": "grindless:bound_degenerate_billet", "count": 1 }],
+          "kept": [{ "id": "grindless:weak_link_cell", "count": 1 }],
+          "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 500 }],
+          "itemsOut": [{ "id": "grindless:balanced_bound_billet", "count": 1 }],
+          "fluidsOut": []
         }
       ]
     },

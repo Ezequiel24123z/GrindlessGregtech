@@ -132,7 +132,10 @@
           "itemsOut": [{ "id": "grindless:porous_tungsten_crown", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
         { "_why": "MX-S1 (max.md, machine 11 byproduct, c32, repeated by its items): four spent FEEP crowns re-sintered under the beam into three fresh porous crowns; the indium they carried left as thrust, so a quarter is lost; argon purge 90% recovered.", "name": "spent_feep_crown_resinter", "circuit": 32, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:spent_feep_crown", "count": 4 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:porous_tungsten_crown", "count": 3 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
+          "itemsOut": [{ "id": "grindless:porous_tungsten_crown", "count": 3 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] },
+        { "_why": "XP-A2 (maxplus.md, line C6 step 3, c32, a repeat on this type with its own inputs): the primed Kerr web coated under the beam with a refractory carbide, the wear skin of the horizon belt; argon purge 90% recovered.", "name": "refractory_coated_web", "circuit": 32, "eut": 536870912, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:primed_kerr_web", "count": 1 }, { "id": "gtceu:tungsten_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:argon", "amount": 100 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:refractory_coated_web", "count": 1 }], "fluidsOut": [{ "id": "gtceu:argon", "amount": 90 }] }
       ]
     },
     "single_crystal_casting": {
@@ -251,7 +254,12 @@
       "recipes": [
         { "name": "nb3sn_diffusion", "circuit": 5, "eut": 122880, "duration": 400,
           "itemsIn": [{ "id": "grindless:srf_cavity", "count": 1 }, { "id": "gtceu:tin_dust", "count": 2 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }], "fluidsOut": [] },
+        { "_why": "XP-A2 (maxplus.md, line C5 step 1, c14; cold.js uses 1-11 on this machine and P22 and T13 take 12 and 13): niobium sheet formed into a confinement cavity blank, a SRF cavity with the bore left open for the condensate; the trim goes to the niobium scrap loop",
+          "name": "confinement_cavity", "circuit": 14, "eut": 536870912, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:srf_cavity", "count": 1 }, { "id": "grindless:rrr_niobium_sheet", "count": 4 }], "kept": [],
+          "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:confinement_cavity", "count": 1 }, { "id": "grindless:niobium_scrap", "count": 2 }], "fluidsOut": [] }
       ]
     }
   }

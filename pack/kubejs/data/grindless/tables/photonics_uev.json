@@ -158,7 +158,10 @@
           "itemsOut": [{ "id": "grindless:snspd_link_wafer", "count": 1 }] },
         { "_why": "MAX-A1 (max.md, L5): the pump-bonded waveguide die and an SNSPD packaged under superfluid helium into the squeezed-light chip", "name": "squeezed_light_chip", "circuit": 7, "eut": 1966080, "duration": 800,
           "itemsIn": [{ "id": "grindless:pump_laser_bonded_die", "count": 1 }, { "id": "grindless:snspd", "count": 1 }, { "id": "gtceu:gold_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 100 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:squeezed_light_chip", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:squeezed_light_chip", "count": 1 }], "fluidsOut": [] },
+        { "_why": "XP-A2 (maxplus.md, line C4 step 1, c10): four SNSPDs bonded in a gold-contacted array under superfluid helium. Circuit 10: the type's highest was 7.", "name": "snspd_array_die", "circuit": 10, "eut": 536870912, "duration": 1200,
+          "itemsIn": [{ "id": "grindless:snspd", "count": 4 }, { "id": "gtceu:gold_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:superfluid_helium", "amount": 200 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:snspd_array_die", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "vdw_assembly": {
