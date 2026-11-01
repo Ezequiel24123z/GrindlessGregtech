@@ -175,6 +175,7 @@ node tools\analysis\line-audit.mjs --dump <kubejs-exported dir> --out <dir>   # 
 - **Design lines** (RF-3G): the audit counts design lines (numbered chart rows `l<N>_<i>`, otherwise one line per end-product chain), not chart groups, and also writes `03_design_lines.csv` (design and chart lines per era) and `03_missing_lines.csv` (design lines no chart shows yet; a heuristic, check each row against the era doc).
 - **Era-aware** (RF-3H): a skip route counts only when a player can use it at or below the line's era (tier from EU/t, dimension, multiblock era), and crossings are also measured from the dump's recipes (content crossings), not only from chart links. Steps count chart nodes, so a raw, a link or a machine without an input adds no step.
 - **Limits**: the charts may not list every line a chapter's content has; the skip route is a depth heuristic, not a price comparison. Verdicts are leads that each fix package confirms against the era docs.
+- **Roles** (LD-T1): `role`, `line`, `extends` and `keepShort` on clusters or nodes of `pl_*` chapters (checked by `pl-check`) are read by the audit; `03_lines.csv` gains `role, role_ok, line_id, extends, keep_short` and the summary counts production, role, branch and fold lines.
 
 ## Assets audit (`assets-audit.mjs`)
 
