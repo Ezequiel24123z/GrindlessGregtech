@@ -228,7 +228,12 @@
     return BIG
   }
   function isNum(x) { return typeof x === 'number' }
-  function toBig(x) { return isNum(x) ? new (bi())(String(x)) : x }
+  // a Number, a digit string (exact values above 2^53 that a caller writes as text, such as the dial's 1,200 x 2^43) or a BigInteger
+  function toBig(x) {
+    if (isNum(x)) return new (bi())(String(x))
+    if (typeof x === 'string') return new (bi())(x)
+    return typeof x.subtract === 'function' ? x : new (bi())(String(x))
+  }
   function norm(b) { return b.abs().compareTo(toBig(SAFE)) <= 0 ? Number(String(b.toString())) : b }
   function add(a, b) {
     if (isNum(a) && isNum(b)) {

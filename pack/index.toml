@@ -17802,7 +17802,7 @@ hash = "f793148a54b3319c8a8f42228af2a328cc039cd018b5ddd149d5c5a693fb9c24"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lv/wireless_energy.js"
-hash = "376e9de1b7191b6e42d485a41e708c9dd72d8be91e8a1eac984802d2f00b2a19"
+hash = "801808b527d55e58ee92908e4bbcb120c2c03cfb78e93f69ba9baf0522d89a3b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/mars/travel.js"

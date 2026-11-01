@@ -65,10 +65,10 @@
       var w0 = Date.now()
       var start = st.generate(level.registryAccess(), gen, gen.getBiomeSource(), level.getChunkSource().randomState(), level.getStructureManager(), level.getSeed(), new ChunkPos(X0 >> 4, 0), 0, level, function (b) { return true })
       var ws = Date.now() - w0
-      check('start_generated', start != null && start.isPresent(), 'start')
-      if (start != null && start.isPresent()) {
-        var ss = start.get().getPieces()
-        var bb = start.get().getBoundingBox()
+      check('start_generated', start != null && start.isValid(), 'start')
+      if (start != null && start.isValid()) {
+        var ss = start.getPieces()
+        var bb = start.getBoundingBox()
         note('start_layout', ss.size() + ' pieces, ' + (bb.maxX() - bb.minX() + 1) + 'x' + (bb.maxY() - bb.minY() + 1) + 'x' + (bb.maxZ() - bb.minZ() + 1) + ' blocks, ' + ws + ' ms')
         check('start_has_pieces', ss.size() > 8, ss.size() + ' pieces')
         check('start_fits_height', bb.maxY() < 320, 'maxY ' + bb.maxY())
