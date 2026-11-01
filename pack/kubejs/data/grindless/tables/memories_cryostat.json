@@ -28,13 +28,13 @@
     "cutter": {
       "recipes": [
         {
-          "name": "eu151_yso_slabs", "circuit": 0, "eut": 30720, "duration": 400,
+          "name": "eu151_yso_slabs", "circuit": 1, "eut": 30720, "duration": 400,
           "itemsIn": [{ "id": "grindless:eu151_yso_boule", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:eu151_yso_slab", "count": 4 }]
         },
         {
-          "name": "er_yso_slabs", "circuit": 0, "eut": 30720, "duration": 400,
+          "name": "er_yso_slabs", "circuit": 2, "eut": 30720, "duration": 400,
           "itemsIn": [{ "id": "grindless:er_yso_boule", "count": 1 }],
           "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:er_yso_slab", "count": 4 }]
