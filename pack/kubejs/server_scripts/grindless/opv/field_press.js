@@ -237,7 +237,6 @@
       .itemInputs('1x gtceu:opv_emitter', '2x grindless:chain_field_coil', '4x grindless:field_frozen_plate', '2x #gtceu:circuits/opv',
         '2x gtceu:chain_strand_single_cable', '1x gtceu:uxv_field_generator')
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 1152))
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 1152))
       .itemOutputs('1x gtceu:opv_field_generator')
       .EUt(268435456).duration(600)
     FP.fieldGeneratorRecipes.push('grindless:assembler/opv_field_generator')
