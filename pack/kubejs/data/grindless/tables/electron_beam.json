@@ -155,7 +155,10 @@
           "itemsOut": [{ "id": "grindless:oriented_terfenol_rod", "count": 2 }], "fluidsOut": [] },
         { "_why": "MAX-B1 line L34 (c26): four rolled copper foils re-melted and drawn under argon in a ceramic mould into one Cu(111) single-crystal foil; the dross is the gate.", "name": "cu111_foil", "circuit": 26, "eut": 1966080, "duration": 1200,
           "itemsIn": [{ "id": "grindless:rolled_cu_foil", "count": 4 }, { "id": "grindless:ceramic_shell_mould", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
-          "itemsOut": [{ "id": "grindless:cu111_foil", "count": 1 }, { "id": "grindless:sx_dross", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:cu111_foil", "count": 1 }, { "id": "grindless:sx_dross", "count": 1 }], "fluidsOut": [] },
+        { "_why": "MX-S2 (max.md, L51 step 1, c28): four niobium ingots re-melted and drawn under argon in a ceramic mould into one large-grain disc, the SRF cavity blank; the dross is the gate.", "name": "large_grain_nb_disc", "circuit": 28, "eut": 1966080, "duration": 1200,
+          "itemsIn": [{ "id": "gtceu:niobium_ingot", "count": 4 }, { "id": "grindless:ceramic_shell_mould", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:large_grain_nb_disc", "count": 1 }, { "id": "grindless:sx_dross", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "mixer": {
