@@ -25,7 +25,7 @@ const pathOf = (id) => {
 
 export const DEFAULT_DIMENSIONS = ['minecraft:overworld', 'minecraft:the_nether', 'minecraft:the_end', 'grindless:flat', 'grindless:void'];
 /** The pack's eras in order (the ones in docs/journey.md); class B's `until` is one of them, and class C's is "never". */
-export const ERA_IDS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+export const ERA_IDS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 const DEFAULT_NBT_TYPED = ['productivebees:configurable_honeycomb', 'productivebees:configurable_comb', 'productivebees:spawn_egg_configurable_bee'];
 const HIDDEN_TAG = 'c:hidden_from_recipe_viewers';
 
@@ -727,7 +727,7 @@ export function hiddenTable(res, opts = {}) {
     _source: `tools/analysis obtainability audit: node tools/analysis/reachability.mjs --pass obtain --dump <dump> --table <this file> (config tools/analysis/tiers/obtain.json${opts.dump ? `, dump ${opts.dump}` : ''}${opts.date ? `, ${opts.date}` : ''}). Do not edit by hand: change the audit config and regenerate.`,
     _how_it_is_used: [
       'server_scripts/grindless/integration/hidden.js reads it. Every group whose `until` is above IMPLEMENTED_ERA (the constant at the top of hidden.js) or is "never" gets its items and fluids into the tags c:hidden_from_recipe_viewers (EMI drops them from its index) and grindless:hidden_with_recipes (assets/emi/index/stacks/grindless_hidden_with_recipes.json disables that tag in EMI: every recipe with one of them as input, output or catalyst disappears from EMI too). Bumping IMPLEMENTED_ERA when an era lands shows that era\'s content again.',
-      'until = era id of docs/journey.md (steam, lv, mv, hv, ev, iv, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max) in which the group can first be obtained (class B of the audit: planets, the excluded End veins and everything that hangs on them). Its recipes stay on the server, only hidden.',
+      'until = era id of docs/journey.md (steam, lv, mv, hv, ev, iv, luv, zpm, uv, uhv, uev, uiv, uxv, opv, max, maxplus) in which the group can first be obtained (class B of the audit: planets, the excluded End veins and everything that hangs on them). Its recipes stay on the server, only hidden.',
       'until = "never": junk (class C of the audit): hidden for good and its removeRecipes are removed from the server (recipes that only exist for it: an ingredient that only accepts junk, or junk as every output). Nothing is unregistered: old saves keep every id.',
       'keepRecipes = true: a hidden item whose recipes stay, on the server and in EMI (the old items of earlier versions and their conversion into the new ones): only c:hidden_from_recipe_viewers.',
             'unless = switch name: the group stays hidden only while that switch of global.grindless.stations.switches (startup_scripts/grindless/lib/stations.js, from tables/stations.json) is off; with the switch on, hidden.js shows it.',
