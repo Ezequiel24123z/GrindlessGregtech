@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
   Procedural 16x16 pixel art for the foundations of the UEV era of Gregtech Grindless (package UEV-F1, shared registrations):
-  31 items and three block textures (GregTech style: top-left light, 3-4 tones per material, selective outlines).
+  23 items and three block textures (GregTech style: top-left light, 3-4 tones per material, selective outlines).
 
 .DESCRIPTION
   Every pixel is drawn by this script (the shape routines of the UHV foundation script with a new palette per item); nothing is copied
@@ -10,7 +10,7 @@
   colour), and the HfTaCN coil block borrows GregTech's tritanium coil texture, the one S0-7 proved.
 
   Writes (under pack/kubejs/assets/grindless/textures/):
-      item/<name>.png for the 31 items that startup_scripts/grindless/uev/foundation.js registers (see $Items below).
+      item/<name>.png for the 23 items that startup_scripts/grindless/uev/foundation.js registers (see $Items below).
       block/uev/uev_fusion_casing.png               dark tungsten tiles with a hot orange seam; seamless.
       block/uev/degenerate_containment_casing.png   violet-black shell with a bright core ring; seamless.
       block/uev/photonic_casing.png                 white cleanroom panels with a cyan light strip; seamless.
@@ -55,14 +55,6 @@ function Get-Noise {
 
 # name -> kind, body colour, accent colour
 $Items = [ordered]@{
-    uev_electric_motor            = @('module', '6A7A9A', '9FE8FF')
-    uev_electric_pump             = @('capsule', '7A8AA0', '5AB8E8')
-    uev_conveyor_module           = @('module', '5A6070', 'E8C050')
-    uev_electric_piston           = @('capsule', '8A909C', 'E86A4A')
-    uev_robot_arm                 = @('assembly', '8A8EA0', 'FFB84A')
-    uev_sensor                    = @('chip', '4A5A78', '7AFFC8')
-    uev_emitter                   = @('chip', '5A4A78', 'FF7AE0')
-    uev_field_generator           = @('orb', '3A4A8A', '9FE8FF')
     ca48_beam                     = @('cartridge', '7A8A9A', 'F0F0D8')
     target_wheel                  = @('spool', '9A9AA8', 'E87A3A')
     tennessine_sample             = @('vial', 'B8C0D0', 'C85AF0')

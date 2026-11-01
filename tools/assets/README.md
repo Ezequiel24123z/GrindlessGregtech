@@ -64,8 +64,8 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-ZPMFoundationTextures.ps1` | Writes the shared ZPM textures (ZPM-F1): 31 items and the six block textures under `block/zpm/`. `-Only <output or group>`, `-Preview <png outside the repo>`, `-Credits`. |
 | `Build-UVFoundationTextures.ps1` | Writes the shared UV textures (UV-F1): 33 items and three block textures under `block/uv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UHVFoundationTextures.ps1` | Writes the shared UHV textures (UHV-F1): 52 items and three casings under `block/uhv/`. `-Only <output or group>`, `-Credits`. |
-| `Build-UEVFoundationTextures.ps1` | Writes the shared UEV textures (UEV-F1): 31 items and three casings under `block/uev/`. `-Only <output or group>`, `-Credits`. |
-| `Build-UIVFoundationTextures.ps1` | Writes the shared UIV textures (UIV-F1): 34 items and two casings under `block/uiv/`. `-Only <output or group>`, `-Credits`. |
+| `Build-UEVFoundationTextures.ps1` | Writes the shared UEV textures (UEV-F1): 23 items and three casings under `block/uev/`. `-Only <output or group>`, `-Credits`. |
+| `Build-UIVFoundationTextures.ps1` | Writes the shared UIV textures (UIV-F1): 26 items and two casings under `block/uiv/`. `-Only <output or group>`, `-Credits`. |
 | `Build-UIVIsotopesTextures.ps1` | Writes the four item icons of UIV's isotopes (UIV-A1): Cf-249 target wheel, Ni-58/Ti multilayer, neutron supermirror, neutron guide. `-Credits`. |
 | `Build-UIVMetallicHydrogenTextures.ps1` | Writes the ramp-compression pulser's controller face and the eight item icons of UIV's metallic hydrogen, lonsdaleite and cg-N lines (UIV-A2). `-Credits`. |
 | `Build-UIVLevitationMelterTextures.ps1` | Writes the levitation melter's controller face and the fourteen item icons of UIV's RHEA, metallic-glass and maglev parts (UIV-A3). `-Credits`. |
@@ -1206,7 +1206,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MegaWireW
 
 ## UEV foundation (UEV-F1)
 
-`Build-UEVFoundationTextures.ps1`: the UHV foundation script with a new palette. It writes the 31 shared UEV items (`item/<id>.png`) and three casings under `block/uev/` (`uev_fusion_casing`, `degenerate_containment_casing`, `photonic_casing`). The materials are GT materials and need no PNG; the HfTaCN coil block borrows GregTech's tritanium coil texture (S0-7).
+`Build-UEVFoundationTextures.ps1`: the UHV foundation script with a new palette. It writes the 23 shared UEV items (`item/<id>.png`) and three casings under `block/uev/` (`uev_fusion_casing`, `degenerate_containment_casing`, `photonic_casing`). The materials are GT materials and need no PNG; the HfTaCN coil block borrows GregTech's tritanium coil texture (S0-7).
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UEVFoundationTextures.ps1
@@ -1217,7 +1217,7 @@ Same final check as UHV, against `startup_scripts/grindless/uev/foundation.js`, 
 
 ## UIV foundation (UIV-F1)
 
-`Build-UIVFoundationTextures.ps1`: the UEV foundation script with a new palette per item. It writes the 34 shared UIV items (`item/<id>.png`) and two casings under `block/uiv/` (`uiv_fusion_casing`, `neutron_star_site_casing`). The materials are GT materials and need no PNG; the metallic hydrogen coil block borrows GregTech's tritanium coil texture.
+`Build-UIVFoundationTextures.ps1`: the UEV foundation script with a new palette per item. It writes the 26 shared UIV items (`item/<id>.png`) and two casings under `block/uiv/` (`uiv_fusion_casing`, `neutron_star_site_casing`). The materials are GT materials and need no PNG; the metallic hydrogen coil block borrows GregTech's tritanium coil texture.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UIVFoundationTextures.ps1
