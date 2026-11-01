@@ -8,7 +8,7 @@
 //                                   gtceu:ergoregion_synchronisation: circuit 1 builds a horizon phase lock (a fatigued VO2 sheet may
 //                                   come out), circuit 2 re-locks a spent one on a fresh oscillator bank. Both run only at Sgr A*.
 //
-// Textures: left for RF-6D (the face and the loop sound for RF-6E). Names: client_scripts/grindless/max_synchroniser_lang.js.
+// Textures: tools/assets/Build-MaxSynchroniserTextures.ps1 (the loop sound is left for RF-6E). Names: client_scripts/grindless/max_synchroniser_lang.js.
 // Published for the recipe script: global.grindless.maxSynchroniser.
 (function () {
   const G = global.grindless
