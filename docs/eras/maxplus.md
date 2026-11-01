@@ -592,6 +592,8 @@ Serial: `lib/` (XP-M1), `tables/gate.json` (XP-T1 then XP-T2), the integrator fi
 | S0-9 | Does a player tick check plus teleport into a datapack dimension work on a dedicated server? | a right-click key item at the open gate |
 | S0-10 | How large can the city's jigsaw structures be before generation stalls? | fewer, smaller districts |
 
+**Result (XP-S0a, `docs/research/maxplus-s0.md`).** S0-1 yes: 2^37, 2^39 and 2^43 EU/t run as longs on 1, 4 and 64 substation hatches, but 2^43 sits exactly on the 64 x V x A cap. S0-2 yes: a 1,024 A hatch (buffer 2^45) carries 2^41. S0-3 inconclusive: the cable properties are accepted, but no cable flowed in the overlay, controls included (fixture); keep the fallback. S0-4 yes: generators emit 2^33 to 2^41, capped by the dynamo hatch's V x A (2^35 on 16 A, 2^37 on 64 A, 2^41 on 1,024 A). S0-5 yes by reflection (`Java.extend` is unavailable); 4,194,304 copies run, capped at `floor(supply voltage / EU/t)`.
+
 ## Decisions proposed
 
 - 2026-11-01 MAX+ design (RF-7A): one era in three stages (out of the Galaxy; the Local Group; the Hyperstargate) with substages `maxplus`, `-lmc`, `-stream`, `-m31`, `-void`, `-gate`; four new GCYR places at tier 14 (30 Doradus, Magellanic Stream, M31 nucleus, Local Group filament); 17 multiblocks, 58 lines (265 steps), 185 crossings with OpV-and-older lines on 56 machines; the gap to the x1.5 line guide is stated, not padded.
