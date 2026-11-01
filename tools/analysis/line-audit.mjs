@@ -418,7 +418,7 @@ const DERIVED_FROM = { 'minecraft:glass': new Set(['quark:clear_shard', 'quark:d
 
 // An item of a material that has no vein (`until: never`): its listed forms, or any ore block of it (`material:<id>` entries; the
 // groups list the crushed and purified forms, not the stone-variant ore blocks).
-const STONES = '(?:tuff|deepslate|netherrack|end_stone|endstone|blackstone|basalt|granite|red_granite|diorite|andesite|marble|dripstone|sand|red_sand|gravel|stone)';
+const STONES = '(?:tuff|deepslate|netherrack|end_stone|endstone|blackstone|basalt|granite|red_granite|diorite|andesite|marble|dripstone|sand|red_sand|gravel|stone|mars|moon|venus|mercury|glacio)';
 export function isNoVein(k, never) {
   if (never.has(k)) return true;
   for (const e of never) {
