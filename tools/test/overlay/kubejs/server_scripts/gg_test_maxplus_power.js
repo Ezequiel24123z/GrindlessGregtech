@@ -6,7 +6,7 @@
 //
 // It takes its turn on the wireless network with the other wireless fixtures (the queue `ggTestWirelessQueue` in `global`), pauses the timed
 // settlements while it runs and puts the network's persistent data back at the end (as gg_test_max_wireless does).
-//   maxplus_power|recipes   the P18 rows, the three hatch recipes (input and output 64 A, the 1,024 A hatch) are in the recipe manager
+//   maxplus_power|recipes   the P18 rows and the 1,024 A hatch's recipe are in the recipe manager (the 64 A hatches keep MAX's rows)
 //   maxplus_power|CAP       a case 14 64 A wireless hatch gets V[MAX] x 64 x 10 = 1,374,389,534,720 EU on a settlement
 //   maxplus_power|ROW       one MAX 64 A substation hatch takes 2^37 EU/t (V[MAX] x 64 A) and the wireless hatch beside it refills exactly that,
 //                           so a 2^37 row has its feed; every figure a long
@@ -35,7 +35,6 @@
   var RECIPES = [
     'grindless:coated_conductor/kerr_fcl_buffer_tape', 'grindless:pulsed_laser_deposition/thick_kerr_fcl_tape',
     'grindless:magnet_winding/kerr_fcl_coil', 'grindless:closed_loop_cooling/cold_kerr_fcl',
-    'grindless:assembly_line/maxplus_substation_input_hatch_64a', 'grindless:assembly_line/maxplus_substation_output_hatch_64a',
     'grindless:assembly_line/max_maxplus_energy_hatch_1024a'
   ]
 
@@ -109,7 +108,7 @@
     })
     var mp = global.grindless.maxplusPower
     if (mp && mp.skipped && mp.skipped.length > 0) bad.push('power.js skipped ' + JSON.stringify(mp.skipped))
-    check('recipes', bad.length === 0, bad.join(' ; ') || RECIPES.length + ' recipes live; P18 ends in grindless:cold_kerr_fcl and three hatch recipes take it')
+    check('recipes', bad.length === 0, bad.join(' ; ') || RECIPES.length + ' recipes live; P18 ends in grindless:cold_kerr_fcl and the 1,024 A hatch takes it')
   }
 
   function saveNetwork() {

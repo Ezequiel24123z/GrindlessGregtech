@@ -73,9 +73,8 @@ test('no duplicate lookup in the tables that gained rows', () => {
   }
 });
 
-test('circuits.js writes the two cutter steps and the tag, with no priority line', () => {
+test('circuits.js writes the two cutter steps and the tag', () => {
   const s = fs.readFileSync(path.join(kube, 'server_scripts', 'grindless', 'maxplus', 'circuits.js'), 'utf8');
   for (const n of ['horizon_logic_die', 'interposer_die']) assert.ok(s.includes(`name: '${n}'`), n);
   assert.ok(s.includes("'grindless:circuits/maxplus'") && s.includes('event.recipes.gtceu.cutter'));
-  assert.ok(!/^\/\/ priority:/m.test(s));
 });

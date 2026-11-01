@@ -328,7 +328,7 @@ v_engineered_diamond`; femto writer → `void_crystal_lattice` | 4 | 3 | XP-B4 |
 sc_planetesimal`; cluster-light furnace (MAX) → `metal_rich_bloom`; megabar → `dense_counterweight_core`; GTM canner → `canned_counterweight` | 4 | 2 | XP-T1 |
 | P16 | Intergalactic relay probe | replication refinery (OpV) → `probe_seed`; Kugelblitz forge (OpV) → `hawking_drive`; clock lab → `thorium_nav_clock`; photonic foundry → `optical_nav_core`; GTM assembly line → `ig_relay_probe` | 5 | 4 | XP-T1 |
 | P17 | sCO2 turbine module | single crystal foundry → `sx_turbine_blade`; EB furnace → `tbc_coated_blade`; SPS → `turbine_disc`; hot strip mill → `pche_recuperator_foil`; GTM assembler → `sco2_turbine_module` | 5 | 4 | XP-B1 |
-| P18 | Kerr fault-current limiter | GTM bender → `fcl_substrate_strip`; coated conductor → `kerr_fcl_buffer_tape`; oxide PLD → `thick_kerr_fcl_tape`; HTS works → `kerr_fcl_coil`; He refrigerator → `cold_kerr_fcl` (→ 64 A hatch rows, capacitor bank) | 5 | 4 | XP-W |
+| P18 | Kerr fault-current limiter | GTM bender → `fcl_substrate_strip`; coated conductor → `kerr_fcl_buffer_tape`; oxide PLD → `thick_kerr_fcl_tape`; HTS works → `kerr_fcl_coil`; He refrigerator → `cold_kerr_fcl` (→ the 1,024 A hatch row, capacitor bank; the MAX 64 A substation hatches keep MAX's rows) | 5 | 4 | XP-W |
 | P19 | Kerr gyroscope (Everitt 2011, PRL 106:221101) | zone refining → `fused_quartz_sphere_blank`; GTM lathe (lapped to Gravity Probe B sphericity) → `lapped_quartz_sphere`; MTJ → 
 b_coated_sphere`; SHeQUID → `calibrated_gyro`; superfluid He plant → `cold_kerr_gyro` (→ chevron upgrade) | 5 | 4 | XP-H4 |
 | P20 | Lift nozzle coil | CVI → `sic_nozzle_former`; coated conductor → 

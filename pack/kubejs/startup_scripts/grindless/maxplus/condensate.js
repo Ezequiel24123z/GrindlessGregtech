@@ -30,17 +30,22 @@
     ]
   }
 
+  // Textures: a bridge until the MAX+ assets package (Phase 6, maxplus.md 'Build order') draws the two casings and faces. The formed
+  // machines wear MAX art meanwhile: the mirror shell's segment with the positronium condensate lab's face, and the clamp coil casing with
+  // the flux clamp's face. Then set texture to grindless:block/maxplus/<casing> and overlay to grindless:block/multiblock/<name>.
   MC.machines = [
     {
       name: 'condensate_refinery', machine: 'gtceu:condensate_refinery', type: 'condensate_refinery', dataKey: 'grindless_condensate_refinery',
-      lang: 'Condensate Refinery', maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 2, fluidsOut: 2 }, casing: VESSEL, texture: 'grindless:block/maxplus/condensate_vessel_casing',
+      lang: 'Condensate Refinery', maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 2, fluidsOut: 2 }, casing: VESSEL, texture: 'grindless:block/max/mirror_shell_segment',
+      overlay: 'grindless:block/multiblock/positronium_condensate_lab',
       width: 15, height: 11, depth: 15,
       pal: { F: VESSEL, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
       parts: parts
     },
     {
       name: 'bound_matter_press', machine: 'gtceu:bound_matter_press', type: 'bound_matter_press', dataKey: 'grindless_bound_matter_press',
-      lang: 'Bound-Matter Press', maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 1 }, casing: PRESS, texture: 'grindless:block/maxplus/bound_press_casing',
+      lang: 'Bound-Matter Press', maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 1 }, casing: PRESS, texture: 'grindless:block/max/clamp_coil_casing',
+      overlay: 'grindless:block/multiblock/horizon_flux_clamp',
       width: 13, height: 13, depth: 13,
       pal: { F: PRESS, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing' },
       parts: parts
@@ -132,7 +137,7 @@
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type))
         ])
-        .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
+        .workableCasingModel(m.texture, m.overlay)
     })
   })
 })()

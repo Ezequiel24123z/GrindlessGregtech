@@ -34,7 +34,7 @@
   MS.machines = [
     {
       name: 'mirror_shell', machine: 'gtceu:mirror_shell', type: 'black_hole_bomb', dataKey: 'grindless_black_hole_bomb',
-      lang: 'Mirror Shell', maxIO: { itemsIn: 8, itemsOut: 3, fluidsIn: 0, fluidsOut: 0 }, casing: SEGMENT, texture: SEGMENT_TEXTURE
+      lang: 'Mirror Shell', maxIO: { itemsIn: 8, itemsOut: 3, fluidsIn: 0, fluidsOut: 1 }, casing: SEGMENT, texture: SEGMENT_TEXTURE
     }
   ]
 
@@ -74,12 +74,14 @@
     return out
   }
 
+  // the output hatch is optional: only c4 (MAX+, XP-A1) makes a fluid, the condensate it taps
   function parts() {
     return [
       Pat.part('input_bus', { min: 1, max: 2 }),
       Pat.part('output_bus', { min: 1, max: 2 }),
       Pat.part('energy_input', { min: 2, max: 2 }),
-      Pat.part('energy_output', { min: 1, max: 2 })
+      Pat.part('energy_output', { min: 1, max: 2 }),
+      Pat.part('output_hatch', { min: 0, max: 1 })
     ]
   }
 

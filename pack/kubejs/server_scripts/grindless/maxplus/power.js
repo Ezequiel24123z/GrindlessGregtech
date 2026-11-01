@@ -6,11 +6,12 @@
 //     pulsed laser dep  grindless:pulsed_laser_deposition/thick_kerr_fcl_tape (circuit 8)
 //     magnet winding    grindless:magnet_winding/kerr_fcl_coil           (circuit 16, charged with liquid helium)
 //     closed loop cool  grindless:closed_loop_cooling/cold_kerr_fcl
-//   assembly line       grindless:maxplus_substation_{input,output}_hatch_64a (cold_kerr_fcl in place of the MAX row's cold_fcl_module)
-//                       grindless:max_maxplus_energy_hatch_1024a (the 1,024 A hatch the Hyperstargate dial needs four of)
+//   assembly line       grindless:max_maxplus_energy_hatch_1024a (the 1,024 A hatch the Hyperstargate dial needs four of)
+//   The MAX 64 A substation hatches keep MAX's rows (max_parts.json, cold_fcl_module): a dearer MAX+ copy would be a dominated recipe.
+//   P18's other outlet is the horizon capacitor bank (2 cold_kerr_fcl, its own package).
 //
 // Circuits are the first free ones of each older machine type, counted in line-id order (maxplus.md 'Older machines'): P18 comes before every
-// other MAX+ row on these three tables. Lookup safety: every row differs from the MAX rows in ingredient ids (the MAX hatches take cold_fcl_module).
+// other MAX+ row on these three tables. Lookup safety: the hatch row takes MAX+ ingredients only (the MAX hatches take cold_fcl_module).
 // Published for the smoke test: global.grindless.maxplusPower { line, cool, hatches, skipped }.
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
@@ -48,10 +49,6 @@
   var WINDING_CHARGE = { id: 'gtceu:liquid_helium', amount: 1000 }
 
   var HATCHES = [
-    { name: 'maxplus_substation_input_hatch_64a', out: 'gtceu:max_substation_input_hatch_64a',
-      parts: [['grindless:cold_kerr_fcl', 4], ['grindless:maxplus_sensor', 2], ['grindless:maxplus_electric_motor', 2]] },
-    { name: 'maxplus_substation_output_hatch_64a', out: 'gtceu:max_substation_output_hatch_64a',
-      parts: [['grindless:cold_kerr_fcl', 4], ['grindless:maxplus_sensor', 2], ['grindless:maxplus_electric_pump', 2]] },
     { name: 'max_maxplus_energy_hatch_1024a', out: 'gtceu:max_maxplus_energy_hatch_1024a',
       parts: [['grindless:cold_kerr_fcl', 16], ['grindless:maxplus_field_generator', 4], ['grindless:maxplus_electric_motor', 4]] }
   ]
