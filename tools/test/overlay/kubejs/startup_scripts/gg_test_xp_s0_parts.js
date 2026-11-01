@@ -30,6 +30,12 @@
         .formula('Kx')
         .cableProperties(GTValues.V[MAXT], 256, 0, false)
         .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
+      event.create('gg_xp_s0_kerr_lossy')
+        .ingot()
+        .color(0x6070c1)
+        .formula('Kxl')
+        .cableProperties(GTValues.V[MAXT], 256, 1, false)
+        .flags(GTMaterialFlags.DISABLE_DECOMPOSITION)
     })
   })
 

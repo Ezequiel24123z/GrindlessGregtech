@@ -354,6 +354,7 @@
         u.sum += e.drain
         u.fed += e.fed
         u.n++
+        if (run > 12) { u.fedS = (u.fedS || 0) + e.fed; u.nS = (u.nS || 0) + 1 }
         if (e.drain < u.min) u.min = e.drain
         if (e.drain > u.max) u.max = e.drain
         if (e.drain < 0) u.neg++
@@ -364,7 +365,8 @@
         var avgFed = u.fed / u.n
         var drift = u.after - u.first
         check(u.name + '_draw', u.neg === 0 && u.n > 0 && Math.abs(avg - u.want) < u.want * 0.01, 'per-tick draw over ' + u.n + ' ticks: avg ' + Math.round(avg) + ', min ' + u.min + ', max ' + u.max + ', negative samples ' + u.neg + ' (expected ' + u.want + ')')
-        check(u.name + '_sustained', avgFed >= u.want * 0.99, 'energy-net inflow avg ' + Math.round(avgFed) + ' EU/t (' + u.energy.length + ' hatches x ' + u.amps + ' A x V[MAX]) against a draw of ' + u.want + '; stored drift over the run ' + drift + ' EU')
+        var avgFedS = u.nS > 0 ? u.fedS / u.nS : 0
+        check(u.name + '_sustained', avgFedS >= u.want * 0.99, 'energy-net inflow after the 12-tick start-up: avg ' + Math.round(avgFedS) + ' EU/t (whole run ' + Math.round(avgFed) + ', ' + u.energy.length + ' hatches x ' + u.amps + ' A x V[MAX]) against a draw of ' + u.want + '; stored drift over the run ' + drift + ' EU')
         check(u.name + '_completes', made >= 1, 'the output bus holds ' + made + ' ' + u.outItem + ' ' + run + ' ticks after the start (a ' + u.ticks + ' t recipe completed); status ' + status(m))
         u.phase = 'done'
       }
@@ -375,7 +377,7 @@
   function cableBuild(u) {
     var z = 60
     put(u.x, 75, z, u.srcId + '[facing=north]')
-    for (var i = 1; i <= 3; i++) put(u.x, 75, z - i, CABLE)
+    for (var i = 1; i <= 3; i++) put(u.x, 75, z - i, u.cable || CABLE)
     put(u.x, 75, z - 4, u.sinkId + '[facing=south]')
     u.src = pos(u.x, 75, z)
     u.wire = [pos(u.x, 75, z - 1), pos(u.x, 75, z - 2), pos(u.x, 75, z - 3)]
@@ -393,7 +395,7 @@
     u.started = S.tick
   }
   function cableAlive(u) {
-    return u.wire.every(function (p) { return String(S.level.getBlock(p.getX(), p.getY(), p.getZ()).getId()) === CABLE })
+    return u.wire.every(function (p) { return String(S.level.getBlock(p.getX(), p.getY(), p.getZ()).getId()) === (u.cable || CABLE) })
   }
   function cableTick(u) {
     var src = machine(u.src)
@@ -416,6 +418,7 @@
         } catch (e) { note(u.name + '_wire_property', 'unreadable: ' + errText(e)) }
       }
       if (S.tick - u.started >= 20) { u.phase = 'sample'; u.gain = []; u.draw = []; u.started = S.tick }
+      u.warmGain = (u.warmGain || []).concat([Number(kc.getEnergyStored())])
       sc.setEnergyStored(sc.getEnergyCapacity())
       kc.setEnergyStored(0)
       return
@@ -431,7 +434,14 @@
         var want = V * u.amps
         var allWant = steady.length > 0 && steady.every(function (g) { return g === want })
         var equal = steady.every(function (g, i) { return u.draw.slice(5)[i] - g === 0 })
-        note(u.name + '_samples', 'sink gain per tick ' + steady.slice(0, 6).join(',') + ' ...; source draw ' + u.draw.slice(5, 11).join(',') + ' ...; cable intact ' + alive)
+        var netInfo = ''
+        try {
+          var be0 = S.level.getBlockEntity(u.wire[1])
+          var pn = be0.getPipeNet()
+          netInfo = '; pipe net ' + (pn === null ? 'null' : String(pn.getAllNodes().size()) + ' nodes')
+          netInfo += ', routes from the cable ' + String(pn.getNetData(u.wire[0]).size())
+        } catch (x) { netInfo = '; net unreadable: ' + errText(x) }
+        note(u.name + '_samples', 'warm-up sink gain ' + (u.warmGain || []).slice(0, 12).join(',') + '; sample sink gain ' + steady.slice(0, 6).join(',') + ' ...; source draw ' + u.draw.slice(5, 11).join(',') + ' ...; cable intact ' + alive + netInfo)
         if (u.strict) {
           check(u.name + '_flow', alive && allWant, 'sink gained ' + (steady.length ? steady[0] : 'none') + ' EU/t (expected ' + want + ' = ' + u.amps + ' A x V[MAX], loss 0) on every one of ' + steady.length + ' ticks: ' + allWant + '; cable intact ' + alive)
           check(u.name + '_loss_zero', equal, 'source draw minus sink gain is exactly 0 EU/t on every tick: ' + equal)
@@ -558,6 +568,7 @@
     add({ name: 's0_3_cable256', tick: cableTick, phase: 'warm', started: 0, x: X0 + 4, srcId: OUT256, sinkId: IN256, amps: 256, strict: true }, cableBuild)
     add({ name: 's0_3_control1024', tick: cableTick, phase: 'warm', started: 0, x: X0 + 12, srcId: OUT1024, sinkId: IN1024, amps: 1024, strict: false }, cableBuild)
     add({ name: 's0_3_stock16', tick: cableTick, phase: 'warm', started: 0, x: X0 + 20, srcId: DYNAMO16, sinkId: HATCH16, amps: 16, strict: false }, cableBuild)
+    add({ name: 's0_3_lossy16', tick: cableTick, phase: 'warm', started: 0, x: X0 + 28, srcId: DYNAMO16, sinkId: HATCH16, amps: 16, strict: false, cable: 'gtceu:gg_xp_s0_kerr_lossy_single_cable' }, cableBuild)
   }
   ServerEvents.customCommand('gg_test_xp_s0_machines', function () {
     if (S !== null && !S.finished) return 0
