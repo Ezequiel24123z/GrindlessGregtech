@@ -278,14 +278,34 @@ export default {
           ['l20_5', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
           ['l20_6', I('gtceu:einsteinium_dust'), 'Einsteinium'],
           ['l20_7', I('grindless:es254_target'), 'Es-254 Target'],
-          ['l21_0', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
+          ['l21_0', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours', { from: ['l20_7', 'l21_t8'] }],
           ['l21_1', F('gtceu:element_121_recoil_gas'), 'Element 121 Recoil Gas'],
           ['l21_2', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
-          ['l21_3', I('grindless:element_121_atoms'), 'Element 121 Atoms'],
+          ['l21_3', I('grindless:element_121_atoms'), 'Element 121 Atoms', undefined, { from: ['l21_2', 'l21_m4'] }],
+          ['l21_5', mach('gtceu:superheavy_chemistry_lab'), 'Superheavy Chemistry Lab', 'ours'],
           ['l21_4', I('grindless:element_121_recoil'), 'Element 121 Recoil'],
         ], 'superheavy census III'),
-        // line 22
+        // the Ti-50 beam charge and the etched ion-track membrane that line 21 consumes, one row down
         ...chain(4, [
+          ['l21_t0', I('gtceu:titanium_tetrachloride_ice_dust'), 'TiCl4 Ice', 'raw'],
+          ['l21_t1', mach('gtceu:calutron'), 'Calutron', 'ours'],
+          ['l21_t2', I('gtceu:titanium_50_chloride_dust'), 'Ti-50 Chloride'],
+          ['l21_t3', mach('gtceu:pyroprocessing_cell'), 'Pyroprocessing Cell', 'ours'],
+          ['l21_t4', I('gtceu:titanium_50_sponge_dust'), 'Ti-50 Sponge'],
+          ['l21_t5', mach('gtceu:levitation_melter'), 'Levitation Melter', 'ours'],
+          ['l21_t6', I('gtceu:titanium_50_dust'), 'Titanium 50'],
+          ['l21_t7', mach('gtceu:ev_assembler'), 'Assembler', 'ours'],
+          ['l21_t8', I('grindless:ti50_oven_charge'), 'Ti-50 Oven Charge'],
+        ]),
+        ...chain(6, [
+          ['l21_m0', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil', 'raw'],
+          ['l21_m1', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
+          ['l21_m2', I('grindless:ion_tracked_foil'), 'Ion-Tracked Foil'],
+          ['l21_m3', mach('gtceu:ev_chemical_reactor'), 'Chemical Reactor', 'ours'],
+          ['l21_m4', I('grindless:etched_membrane'), 'Etched Membrane'],
+        ], null, 16.25),
+        // line 22
+        ...chain(8, [
           ['l22_0', I('grindless:ti50_oven_charge'), 'Ti-50 Oven Charge', 'raw'],
           ['l22_1', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
           ['l22_2', F('gtceu:element_122_recoil_gas'), 'Element 122 Recoil Gas'],
@@ -296,29 +316,46 @@ export default {
           ['l22_7', I('grindless:superheavy_census_iii'), 'Superheavy Census III'],
         ], 'the gate to OpV'),
         // line 23, then line 24
-        ...chain(6, [
-          ['l23_0', I('grindless:californium_252'), 'Californium 252', 'raw'],
+        ...chain(10, [
+          ['l23_a', F('gtceu:transcurium_liquor'), 'Transcurium Liquor', 'raw'],
+          ['l23_b', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
+          ['l23_0', I('grindless:californium_252'), 'Californium 252'],
           ['l23_1', mach('gtceu:hot_cell'), 'Hot Cell', 'ours'],
           ['l23_2', I('gtceu:curium_248_dust'), 'Curium 248'],
           ['l23_3', mach('gtceu:transuranium_facility'), 'Transuranium Facility', 'ours'],
           ['l23_4', I('grindless:cm248_plated_blank'), 'Cm-248 Plated Blank'],
+          ['l23_c', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours'],
           ['l23_5', I('grindless:cm248_target'), 'Cm-248 Target'],
-          ['l24_0', mach('gtceu:mnt_collider'), 'MNT Collider', 'ours'],
+          ['l24_0', mach('gtceu:mnt_collider'), 'MNT Collider', 'ours', { from: ['l23_5', 'l24_u4', 'l43_4'] }],
           ['l24_1', F('gtceu:mnt_product_gas'), 'MNT Product Gas'],
           ['l24_2', I('grindless:mnt_thermal_ions'), 'MNT Thermal Ions'],
           ['l24_3', I('grindless:island_nuclide'), 'Island Nuclide'],
           ['l24_4', I('grindless:island_chart'), 'Island Chart'],
         ], 'the gate to OpV'),
+        // the U-238 beam charge that line 24's collisions consume
+        ...chain(12, [
+          ['l24_u0', F('gtceu:depleted_uranium_hexafluoride'), 'Depleted UF6', 'raw'],
+          ['l24_u1', mach('gtceu:fuel_fabrication_plant'), 'Fuel Fabrication Plant', 'ours'],
+          ['l24_u2', I('grindless:u238_ion_source'), 'U-238 Ion Source'],
+          ['l24_u3', mach('gtceu:synchrotron'), 'Synchrotron', 'ours'],
+          ['l24_u4', I('grindless:u238_beam_charge'), 'U-238 Beam Charge'],
+        ], null, 10),
         // line 43
-        ...chain(8, [
+        ...chain(14, [
           ['l43_0', F('gtceu:helium'), 'Helium', 'raw'],
           ['l43_1', F('gtceu:liquid_helium'), 'Liquid Helium'],
           ['l43_2', mach('gtceu:cryogenic_plant'), 'Cryogenic Plant', 'ours'],
           ['l43_3', F('gtceu:he_6n'), '6N Helium'],
+          ['l43_5', mach('gtceu:ev_assembler'), 'Assembler', 'ours', { from: ['l43_3', 'l43_r2'] }],
           ['l43_4', I('grindless:gas_stopping_cell'), 'Gas Stopping Cell'],
-        ], 'the MNT collider'),
+        ], 'the MNT collider', 8.75),
+        ...chain(16, [
+          ['l43_r0', I('gtceu:silicon_wafer'), 'Silicon Wafer', 'raw'],
+          ['l43_r1', mach('gtceu:photonic_foundry'), 'Photonic Foundry', 'ours'],
+          ['l43_r2', I('grindless:rf_carpet_board'), 'RF Carpet Board'],
+        ], null, 13.75),
         // line 25
-        ...chain(10, [
+        ...chain(18, [
           ['l25_0', I('grindless:ejecta_knot_dust'), 'Ejecta Knot Dust', 'raw'],
           ['l25_1', I('grindless:ejecta_ti_fraction_dust'), 'Ejecta Ti Fraction'],
           ['l25_2', mach('gtceu:calutron'), 'Calutron', 'ours'],
@@ -577,9 +614,14 @@ export default {
         ]),
         // line 41
         ...chain(6, [
-          ['l41_0', F('gtceu:krypton'), 'Krypton', 'raw'],
+          ['l41_a', F('gtceu:liquid_air'), 'Liquid Air', 'raw'],
+          ['l41_b', mach('gtceu:cryogenic_plant'), 'Cryogenic Plant', 'ours'],
+          ['l41_0', F('gtceu:krypton'), 'Krypton'],
+          ['l41_m', mach('gtceu:ev_mixer'), 'Mixer', 'ours'],
           ['l41_1', I('grindless:kr_f2_premix'), 'Kr-F2 Premix'],
+          ['l41_r', mach('gtceu:ev_chemical_reactor'), 'Chemical Reactor', 'ours'],
           ['l41_2', I('grindless:krf_discharge_tube'), 'KrF Discharge Tube'],
+          ['l41_l', mach('gtceu:assembly_line'), 'Assembly Line', 'ours'],
           ['l41_3', I('grindless:krf_excimer_laser'), 'KrF Excimer Laser'],
         ], 'the oxide PLD chamber'),
         // line 42
