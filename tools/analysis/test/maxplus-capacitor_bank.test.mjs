@@ -55,6 +55,8 @@ test('the ring: 25 x 5 x 25, 40 capacitor slots, the controller in the middle of
   assert.equal([...all].filter((c) => c === 'C').length, 40);
   assert.equal([...all].filter((c) => c === 'S').length, 1);
   assert.equal(slices[24][1][12], 'S');
-  assert.ok(slices.every((rows) => rows[2].split('').every((c) => ' CF'.includes(c))), 'the slot row is slots and casing');
+  assert.ok(slices.every((rows) => rows[2].split('').every((c) => ' CKA'.includes(c))), 'the slot row is slots, superconducting coils and corner pillars');
+  assert.equal([...all].filter((c) => c === 'K').length, 52, 'a coil in every slot row cell that is not a slot or a corner');
+  assert.equal([...all].filter((c) => c === 'L').length, 24, 'the glass band over the coils');
   assert.ok(slices[12].every((row) => row.slice(1, 24).trim() === ''), 'the inside of the ring is empty');
 });

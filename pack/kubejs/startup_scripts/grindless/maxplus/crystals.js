@@ -39,13 +39,13 @@
     blender: {
       name: 'multi_plasma_blender', machine: 'gtceu:multi_plasma_blender', type: 'multi_plasma_blender', dataKey: 'grindless_multi_plasma_blender',
       lang: 'Multi-Plasma Blender', maxIO: { itemsIn: 0, itemsOut: 0, fluidsIn: 8, fluidsOut: 1 }, casing: CASING,
-      texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+      texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/multi_plasma_blender',
       width: 11, height: 11, depth: 11, pal: PAL, parts: blenderParts
     },
     furnace: {
       name: 'horizon_crystal_furnace', machine: 'gtceu:horizon_crystal_furnace', type: 'horizon_crystal_furnace', dataKey: 'grindless_horizon_crystal_furnace',
       lang: 'Horizon Crystal Furnace', maxIO: { itemsIn: 5, itemsOut: 1, fluidsIn: 2, fluidsOut: 0 }, casing: CASING,
-      texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+      texture: 'grindless:block/max/mirror_shell_segment', overlay: 'grindless:block/multiblock/horizon_crystal_furnace',
       width: 15, height: 17, depth: 15, pal: PAL, parts: furnaceParts
     }
   }

@@ -28,50 +28,45 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
     - the MAX+ foundation (XP-F1): the ids table, nine components, the 1,024 A hatch `gtceu:max_maxplus_energy_hatch_1024a`, four creative stand-ins and the four places; the ids without a recipe are hidden (XP-F2);
     - MAX+ build order rows 5 to 9, 16, 17 and 19 (first part): the power plumbing (XP-W, P18 and the 1,024 A hatch recipe), the condensate (XP-A1: the shell's c4, the condensate refinery and the bound-matter press), the horizon processor (XP-A3), the components and the horizon casing (XP-A2, C1 to C7), the AE2 top tier (XP-AE, A1 to A3), the meta-material loom (XP-H1, T4 to T7), the condensate assembler (XP-H3, machine 14) and the Hills slingshot with gate c16 to 30 Doradus (XP-T1, P15, P16). Every MAX+ machine runs on the 1,024 A hatch; the MAX+ components are tier 15 on the quality ladder and the controllers take the design's base (XP-Q);
     - MAX+ build order rows 10 to 15 (batch 11): the four MAX+ places all reached (gates c16 to c19), machines 4 to 10 (30 Doradus, the Stream, M31, the filament) with lines P6 to P14, P17 and P20 to P24, the Hyperfactory and the x4,194,304 parallel hatch, the MAX+ item and casing textures, and the dial's power design (XP-D1: the horizon capacitor bank, machine 15, feeds one 4,096 A wireless hatch).
+    - MAX+ build order rows 18 to 21 and 23 (first half) (batch 12): the crystals (XP-H2, machines 12 and 13), the creative cores (XP-K), the grid layer (XP-H4a: machine 16, the Hyperstargate's parts and the six creative stand-ins; XP-H4b: lines P19, T11 to T13 and T17), the exact wireless store and the MAX+ wireless hatches (XP-W2), the horizon capacitor bank (XP-H5, machine 15), the final dimension with its city and sky (XP-Z1a), and the MAX+ art (XP-V2: every MAX+ controller face, the gate's parts and the stand-ins). Every MAX+ machine but the Hyperstargate exists.
   - Capacity: no known violation left (CAP-K).
-- **Last accepted integration batch:** Reforge batch 11 (issues #134, #137, #138, #139, #140, #141, #142).
+  - English only (EN-1): no `es_es` anywhere under `pack/kubejs`; T0's english-only guard keeps it so.
+- **Last accepted integration batch:** Reforge batch 12 (issues #143 to #151 and #153).
   - Packages:
-    - XP-T2: gates c17 to c19 (the Magellanic Stream, the M31 nucleus, the Local Group filament);
-    - XP-M1: the MAX+ parallel hatch (x4,194,304) and the Hyperfactory;
-    - XP-B1: 30 Doradus (the stellar lift, the pair-instability crucible, the nickel-56 burner);
-    - XP-B2: the Stream (the pristine gas works, the primordial fusion torus); the calutron and the jet beam line gained optional hatches;
-    - XP-B3/B4: the blueshift forge at M31 and the void crystal fab in the filament;
-    - XP-V1: MAX+ textures for 244 items and 6 casings in Era.Lib's MAX+ style, plus 72 RF-7A MAX items that had none;
-    - XP-D1: the dial's power: one 4,096 A wireless MAX+ hatch fed by the horizon capacitor bank (S0-11). The 64-hatch path and the 19,200 t fallback are retired.
+    - XP-H2: the multi-plasma blender and the horizon crystal furnace, lines T8 to T10;
+    - XP-K: the creative cores K1 to K4;
+    - XP-W2: the exact wireless store above 2^53 and the 1,024 A and 4,096 A wireless MAX+ hatches;
+    - EN-1: English only, with a T0 guard;
+    - XP-V1b: the horizon interferometer's casings and the MAX foundation texture self-check;
+    - XP-Z1a: the final dimension `grindless:horizon_city`, its generated city, its sky and the arrival plaza;
+    - XP-H4b: lines P19, T11, T12, T13 and T17 (which also unblock XP-AE's A2 and A3);
+    - XP-H5: the horizon capacitor bank (machine 15) and `W.dialCharge`;
+    - XP-H4a: the hyper assembly array, the Hyperstargate's parts, the grid rows and the six creative stand-ins;
+    - XP-V2: the MAX+ art pass.
   - Integrator fixes:
-    - the burner and torus T1s:
-      - a generator takes no energy input;
-      - GTM 7.5.3 reports a generator's EU/t as a positive amount, so the direction is read from the dynamo;
-      - long runs skip to their end, because the bench waits at most 180 s;
-      - a bare `/output_hatch/` also matched the dynamo;
-    - `Build-MaxPlusTextures.ps1` shifted with `>>`, a PowerShell redirect, instead of `-shr`;
-    - `maxplus.md`: 14 lines rejoined where a PowerShell backtick-n had eaten an id's leading n; open question 6 closed;
-    - the validators know the four MAX+ places (warp gate ends; XP-B1's P6 rows excepted from the Cygnus-only rule), and the obtain audit reaches them, so 76 entries left the XP-F1 hide row (65 remain).
-  - T0: GitHub Actions green at 4510a293.
-  - T1 on the VM: `gg_test_maxplus_gates`, `gg_test_maxplus_hyperfactory`, `gg_test_maxplus_tarantula` (gate c16 thrown from Sgr A\*, burner at 2^34) and `gg_test_maxplus_stream` (torus at 2^34) PASS.
-  - T2 on the VM, dump 72387188 (`/var/lib/grindless/dumps/latest`): reachability PASS for all 15 tiers, obtain PASS, capacity lint 0 known violations and 1 warning (UHV's ZBLAN mixer row).
-  - Earlier T1, still current: `gg_test_maxplus_loom`, `gg_test_maxplus_assembler`, `gg_test_maxplus_slingshot` PASS.
+    - the crystal furnace's slurry rows fit one MAX fluid hatch (4,000,000 and 1,000,000 mB; the capacity lint's rule), and XP-H4b's argon returns on machine types with no fluid output became net argon inputs;
+    - XP-K's holographic block moved off a femtosecond-writer circuit XP-H2 took;
+    - XP-H4a's base row named MEGA cells that do not exist (its guard would have skipped it);
+    - the bank's ring gained coils, a glass band and pillars (structure quality), and `W.big` accepts digit strings;
+    - the lang files of packages that branched before EN-1 lost their `es_es` copies;
+    - `grindless:launched_belt_seed` is removed: gate c15 returns nothing (MAX quest J_LAUNCH is a reading step);
+    - T1 fixtures: the wireless exact check's seed, the city's level and StructureStart calls.
+  - T0: GitHub Actions on every merge (fixes for this batch's failures in 82f643cf).
+  - T1 on the VM: `gg_test_maxplus_wireless` (2^43 exact on 60 ticks, the store exact above 2^53 after a save), `gg_test_maxplus_bank` (40 x 2^48 at Sgr A\*, 0 at home), `gg_test_horizon_city` (a 32-piece city start in 172 ms, no entity in 600 ticks), `gg_test_maxplus_grid` (81 buses, the base made at 2^39) and `gg_test_max_gate_nsc` (c15 returns nothing) PASS.
+  - T2 on the VM, dump 0e435caf: reachability PASS for all 15 tiers; capacity lint 0 known violations and 1 warning (UHV's ZBLAN mixer row); 72 ids left the XP-F1 hide row (2 remain).
+  - Earlier T1, still current: the batch 11 set (gates, Hyperfactory, Tarantula, Stream) and `gg_test_maxplus_loom`, `_assembler`, `_slingshot`.
 - **In flight** (one nested session per package; no two share a file):
 
 | Package | Issue | Content | Phase |
 |---|---|---|---|
-| XP-H2 | #143 | MAX+ crystals: the multi-plasma blender and the horizon crystal furnace, T8 to T10 | 7 |
-| XP-K | #144 | MAX+ creative cores K1 to K4 (the six creative-item rows move to XP-H4, with the hyper assembly array) | 7 |
-| XP-W2 | #145 | Wireless MAX+ hatches (1,024 A and 4,096 A) and an exact network store above 2^53; serial on `lib/**` | 7 |
-| EN-1 | #146 | English only: every `es_es` text and check removed, and a guard that keeps Spanish out | 8 |
-| XP-V1b | #147 | The horizon interferometer's two missing MAX casing textures and the MAX foundation generator's self-check | 6 |
-| XP-Z1a | #148 | The final dimension `grindless:horizon_city`: its generated ruined city, its sky and the arrival plaza (XP-Z1b, the crossing and the arrival, follows XP-G1) | 7 |
+| XP-G1 | #152 | The Hyperstargate (machine 17): its structure, controller row, the dial at 2^43 for 1,200 t with its charge check, the spent charge's recharge row and the open state XP-Z1b uses | 7 |
 
 - **Next** (queue; serial where packages share files):
   - Phase 7, `maxplus.md` *Build order*:
-    - ready, waiting for workstation memory (6 sessions use it all): XP-H4a (#150: the hyper assembly array, the Hyperstargate's parts, the grid and creative-item rows) and XP-H4b (#149: lines P19, T11, T12, T13 and T17, which also unblock XP-AE's A2 and A3);
-    - the horizon capacitor bank (machine 15; after XP-W2, beside XP-H4a);
-    - XP-G1 (the Hyperstargate, its controller row and its dial; after XP-H2, XP-H4a, XP-H4b, XP-K and the bank), then XP-Z1b (the crossing and the arrival);
-    - XP-C1 (the `maxplus` era in the era lists, its validator tier, and tier 15's circuits, hull and voltage on the quality ladder), XP-PL, XP-C2a and XP-C2b.
-
-    Each merge takes its ids out of the class C row.
-  - Phase 6: XP-V2, the MAX+ controller faces, once the last MAX+ machine has landed.
-  - Then Phase 8 and Phase 9.
+    - XP-Z1b, the crossing and the arrival (after XP-G1): the player check against the open ring, the teleport to `tables/horizon_city.json`'s arrival point and plaza, the credits (`WIN_GAME`), the title *Beyond the Horizon*, the `epilogue` book and the last quest; the integrator wires XP-V2's gate face to `hyperstargate.js`;
+    - XP-C1: the `maxplus` era in the era lists, its validator tier, tier 15's circuits, hull and voltage on the quality ladder, one circuit per row outside c32 (MTJ c28 and chemical bath c2 are shared today), and the last two hidden ids (`condensate_boil_off_gas`, `kerr_strand`);
+    - then XP-PL (the MAX+ line chart) and XP-C2a and XP-C2b (the MAX+ quests).
+  - Then Phase 8 (cleanup) and Phase 9 (v1.0.0).
 - **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
@@ -93,16 +88,12 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - LuV (0.912) and UIV (0.907) sit near the lower edge of the 10% band; changing one era's factor means re-solving every era above it. The OpV and UXV hulls are outliers (9 to 25 times their peers), explained in `02_cost_curve.md`, not fixed.
   - Some routes multiply matter: ash separation fed by diamond CVD and diamond electrolysis, and blue topaz ore at ZPM and later (`02_cost_curve.md`).
 - **Capacity:** no known violation (`tools/analysis/capacity_known.json` is empty since CAP-K); one warning: UHV's ZBLAN mixer row takes 73,250 mB of fluorine, more than a singleblock mixer holds (the large mixer runs it). The lint does not count programmed circuits, so it cannot see a circuit on a multiblock with no item input.
-- **EMI:** 9 entries in `tools/analysis/emi_runtime_known.json`:
-  - 8 previews, likely an audit false positive that the fixed fixture removes on the next 8 GB EMI run;
-  - `launched_belt_seed` without a consumer (a MAX package).
+- **EMI:** 8 entries in `tools/analysis/emi_runtime_known.json`:
+  - 8 previews, likely an audit false positive that the fixed fixture removes on the next 8 GB EMI run.
 - **The `maxplus` stage** is a world persistentData flag (`grindless_stage_maxplus`, MX-E1): the pack has no stage mod, and MAX+ packages read the flag.
-- **MAX+ until XP-C1:** the ids with no recipe yet are one class C row in `tools/analysis/tiers/obtain.json` (hidden; 65 entries left) and carry EMI exception rows; the `maxplus` era is not yet in the era lists. Each MAX+ controller carries three baselined quality findings (T-CIRC, T-HULL, T-VOLT at tier 15) until XP-C1 decides tier 15's circuits, hull and voltage.
-- **MAX+ outputs without a destination yet:** P12's `p_process_plasma` (XP-H2's blender takes it) and XP-B1's `electronic_grade_silicon` (XP-K is asked to use it as a K4 wafer substrate). MAX's `launched_belt_seed` (gate c15) has no consumer either; the integrator removes it after EN-1 and XP-V1b (c15 will output nothing, as c16 to c19 do).
-- **XP-AE's A2 and A3 wait for line T17:** the laser array wafer takes T17's `inp_1550_laser_die`, so the photonic coprocessor, the pattern memory unit and the pattern providers re-gated on them stay hidden until XP-H4b lands.
+- **MAX+ until XP-C1:** the ids with no recipe yet are one class C row in `tools/analysis/tiers/obtain.json` (hidden; 2 left: `condensate_boil_off_gas` and `kerr_strand`) and carry EMI exception rows; the `maxplus` era is not yet in the era lists. Each MAX+ controller carries three baselined quality findings (T-CIRC, T-HULL, T-VOLT at tier 15) until XP-C1 decides tier 15's circuits, hull and voltage.
 - **Assets:**
-  - MAX+ items and casings have textures (XP-V1); the MAX+ controllers wear MAX art until XP-V2;
-  - two MAX casings have no texture (`test_mass_enclosure_casing`, `laser_link_casing`: the missing-texture cube) and `Build-MaxFoundationTextures.ps1` fails its self-check (XP-V1b);
+  - MAX+ has its own art (XP-V1, XP-V2); the Hyperstargate's face is drawn and waits for XP-G1's controller;
   - the UEV, UIV and UXV foundation scripts still draw items that `foundation.js` no longer registers, so their self-check fails (Phase 8);
   - textures of removed items are orphans (Phase 8);
   - sound loop-seam and harsh flags need an in-game listen at release.
@@ -112,6 +103,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - The 4 GB test client is tight with EMI plus world generation; leave spark out of copied clients in EMI stages. The EMI audit needs an 8 GB client alone on the VM.
   - A batch dump for the validator comes from a minimal overlay (`gg_dump.js` only): the full test overlay adds probe recipes, the lava probe among them, that fail the `auto` checks. `--table` must target the existing hidden table so that its `removeRecipes` are kept. Commit a fresh pack index before any VM dump (the VM runs skip the refresh).
   - The bench waits at most 180 s for a marker: a T1 of a longer recipe skips to its end with `setProgress(duration - 20)` once the first output is measured.
+  - On the VM, `uiv-compression_hall` fails its "lib/mega.js untouched" check (the VM compares against an older commit); it passes in Actions.
 - **Mirror:** `playable` mirrors `releases` until old instances switch their Prism pre-launch URL to `/releases/`; then retire it.
 
 ## Where details live (read one section, not the file)

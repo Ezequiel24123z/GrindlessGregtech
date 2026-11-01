@@ -1247,6 +1247,14 @@
     1
    ]
   },
+  "gtceu:hyper_assembly_array": {
+   "io": [
+    10,
+    1,
+    2,
+    0
+   ]
+  },
   "gtceu:ice_annealing": {
    "io": [
     2,
@@ -9943,6 +9951,7 @@
   "gtceu:horizon_interferometry",
   "gtceu:hot_cell",
   "gtceu:hot_rolling",
+  "gtceu:hyper_assembly_array",
   "gtceu:ice_annealing",
   "gtceu:ice_fractionation",
   "gtceu:ice_giant_siphon",

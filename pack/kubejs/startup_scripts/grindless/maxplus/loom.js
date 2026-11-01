@@ -34,7 +34,7 @@
   ML.machine = {
     name: 'meta_material_loom', machine: 'gtceu:meta_material_loom', type: 'meta_material_loom', dataKey: 'grindless_meta_material_loom',
     lang: 'Meta-Material Loom', maxIO: { itemsIn: 6, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: CASING, texture: 'grindless:block/max/mirror_shell_segment',
-    overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+    overlay: 'grindless:block/multiblock/meta_material_loom',
     width: 21, height: 9, depth: 9,
     pal: { F: CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
     parts: parts

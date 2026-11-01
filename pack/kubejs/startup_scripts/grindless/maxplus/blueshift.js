@@ -28,7 +28,7 @@
   MB.machine = {
     name: 'blueshift_forge', machine: 'gtceu:blueshift_forge', type: 'blueshift_forge', dataKey: 'grindless_blueshift_forge',
     lang: 'Blueshift Forge', maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 0, fluidsOut: 1 }, casing: CASING, texture: 'grindless:block/max/mirror_shell_segment',
-    overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+    overlay: 'grindless:block/multiblock/blueshift_forge',
     width: 13, height: 31, depth: 13,
     pal: { F: CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
     parts: parts
