@@ -1835,3 +1835,5 @@ The design above follows these proposals; none is in `DECISIONS.md` yet. The orc
 6. Size: **accept 22 machines and 46 lines**, with the growth in crossings and older modes. If the user wants 25, the candidates are the Ti-50 ECR source, the gamma transmutation hall and the Blandford–Znajek dynamo.
 7. Substage order: **RX J1856 ‖ J0437, then Cygnus X-1**.
 8. The UXV gate needs a recovered half-sled, so power alone does not open it: **yes**.
+
+- 2026-11-01 (RF-3W): line 13 (BEUV driver ASIC) is its own chart cluster and ends in the photonic tensor core.
