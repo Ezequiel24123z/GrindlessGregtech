@@ -487,6 +487,17 @@ function writeTables(dir, cfg, dump, factors) {
   return rule.eras.length;
 }
 
+/**
+ * The one measurement the solver loop and the factor check share: the pass with these factors, every table of the set switched on at
+ * its factor (1 included, so a later era's `remove` list applies in both), then the era-aware pricing and the core index per era.
+ * `eras` limits the eras priced (solver speed); the index of a priced era is the same either way.
+ */
+export function measure(dump, cfg, tables, factors, eras) {
+  const { dump: d2, res } = curved(dump, withFactors(tables, factors));
+  const priced = pricedRows(d2, cfg, eras ? { eras } : {});
+  return { ...priced, res, dump: d2, index: coreIndex(priced.rows, cfg.tiers) };
+}
+
 export function solveFactors(args, cfg, dump) {
   const curve = curveOf(cfg);
   const rule = loadRule();
@@ -497,10 +508,9 @@ export function solveFactors(args, cfg, dump) {
   const factors = {};
   for (const e of rule.eras) factors[e] = fixed[e] ? { ...fixed[e] } : { item: 1, fluid: 1 };
   const tables = tablesFor(args, null);
-  const run = (fs_, eras_) => {
-    const { dump: d2, res } = curved(dump, withFactors(tables, fs_));
-    return { ...pricedRows(d2, cfg, eras_ ? { eras: eras_ } : {}), res, dump: d2 };
-  };
+  const run = (fs_, eras_) => measure(dump, cfg, tables, fs_, eras_);
+  const allOn = () => Object.fromEntries(rule.eras.map((e) => [e, { ...factors[e] }]));
+  const predicted = {};
   const ratio = curve.fluidFactorRatio;
   const setFactor = (era, f) => { factors[era] = { item: f, fluid: Math.max(1, Math.round(f * ratio * 1e4) / 1e4) }; };
   const log = [];
@@ -511,11 +521,9 @@ export function solveFactors(args, cfg, dump) {
     const target = targetOf(curve, era);
     const tryF = (f) => {
       setFactor(era, f);
-      const only = {};
-      for (const e of rule.eras) if (factors[e].item !== 1 || factors[e].fluid !== 1 || e === era) only[e] = factors[e];
-      const r = run(only, [era]);
+      const r = run(allOn(), [era]);
       solves++;
-      const idx = coreIndex(r.rows, cfg.tiers).get(era);
+      const idx = r.index.get(era);
       return idx ? idx.index : null;
     };
     const i0 = tryF(1);
@@ -523,7 +531,9 @@ export function solveFactors(args, cfg, dump) {
     if (i0 >= target * (1 - curve.solveTolerance)) { setFactor(era, 1); log.push(`${era}: index ${fmt(i0)} already meets target ${fmt(target)} at factor 1`); console.log(log[log.length - 1]); continue; }
     const pts = [{ lf: 0, g: Math.log(i0 / target) }];
     const tried = [{ f: 1, idx: i0 }];
-    let f = target / i0;
+    // the table holds the factor to 3 decimals and the index jumps at some factors: measure the number that will be written
+    const r3 = (x) => Math.max(1.001, Math.round(x * 1e3) / 1e3);
+    let f = r3(target / i0);
     let best = null;
     let plateau = false;
     for (let k = 0; k < curve.maxIterations; k++) {
@@ -543,8 +553,7 @@ export function solveFactors(args, cfg, dump) {
       const slope = (b.g - a.g) / (b.lf - a.lf);
       let lfNext = Number.isFinite(slope) && slope > 0.05 ? b.lf - b.g / slope : b.lf - b.g;
       lfNext = Math.min(lfNext, b.lf + Math.log(8));
-      f = Math.min(Math.exp(lfNext), curve.maxFactor);
-      if (!(f >= 1)) f = 1.0001;
+      f = r3(Math.min(Math.exp(lfNext), curve.maxFactor));
     }
     let pick = best ? best.f : 1;
     let shown = best ? best.idx : null;
@@ -556,13 +565,12 @@ export function solveFactors(args, cfg, dump) {
       shown = t0.idx;
       plateaus.push({ era, factor: pick, index: shown, target });
     }
-    setFactor(era, Math.round(pick * 1e3) / 1e3);
+    setFactor(era, r3(pick));
+    predicted[era] = shown;
     log.push(`${era}: item factor ${factors[era].item}, fluid ${factors[era].fluid}, index ${shown === null ? '-' : fmt(shown)} (target ${fmt(target)})${plateau ? ' PLATEAU: more factor does not raise the index, fix the routes' : ''}`);
     console.log(log[log.length - 1]);
   }
-  const final = {};
-  for (const e of rule.eras) if (factors[e].item !== 1 || factors[e].fluid !== 1) final[e] = factors[e];
-  const after = run(final);
+  const after = run(allOn());
   console.log(`\nsolved with ${solves + 1} matrix runs.\n`);
   printEraTable(cfg, curve, base, after, factors);
   for (const p of plateaus) {
@@ -593,7 +601,7 @@ export function solveFactors(args, cfg, dump) {
     fs.writeFileSync(path.join(args.out, 'solved.json'), JSON.stringify(result, null, 2) + '\n');
     console.log(`\nwrote ${path.join(args.out, 'solved.json')}`);
   }
-  return { base, after };
+  return { base, after, factors, predicted };
 }
 
 function curveMain(args, cfg, dump) {
@@ -607,9 +615,9 @@ function curveMain(args, cfg, dump) {
   const factors = readFactors(args.factors);
   const tables = tablesFor(args, factors);
   const base = pricedRows(dump, cfg);
-  const { dump: d2, res } = curved(dump, tables);
-  const after = pricedRows(d2, cfg);
   const enabled = tables.filter((t) => t.enabled).map((t) => t.era);
+  const { res, rows: afterRows } = measure(dump, cfg, tables, Object.fromEntries(tables.filter((t) => t.enabled).map((t) => [t.era, { item: t.item, fluid: t.fluid }])));
+  const after = { rows: afterRows };
   console.log(`cost curve: ${enabled.length ? 'enabled: ' + enabled.join(', ') : 'no table enabled (the dump is unchanged)'}; ${res.selected.length} recipes selected, ${res.changed.size} changed, ${res.removed.size} removed`);
   for (const [e, v] of Object.entries(res.byEra)) console.log(`  ${e}: ${v.selected} scaled, ${v.changed} changed (${v.items} item and ${v.fluids} fluid inputs)`);
   printEraTable(cfg, curve, base, after, factors || Object.fromEntries(tables.filter((t) => t.enabled).map((t) => [t.era, { item: t.item, fluid: t.fluid }])));

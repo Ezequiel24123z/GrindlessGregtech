@@ -3,9 +3,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { solveFactors, pricedRows, coreIndex, curved, fixShapedCounts, priceDump, keyCandidates } from '../cost-matrix.mjs';
+import { measure, solveFactors, pricedRows, coreIndex, curved, fixShapedCounts, priceDump, keyCandidates } from '../cost-matrix.mjs';
 import { loadRule, loadTables, withFactors, TABLE_DIR } from '../lib/cost_curve.mjs';
 import { mkDump } from './helpers.mjs';
 
@@ -81,6 +82,36 @@ test('--solve: factors that put each era on 3 x 2.5^n, MV first, within the tole
   const hv = coreIndex(res.after.rows, cfg.tiers).get('hv').index;
   assert.ok(Math.abs(mv / 3 - 1) <= 0.1, `mv ${mv}`);
   assert.ok(Math.abs(hv / 7.5 - 1) <= 0.1, `hv ${hv}`);
+});
+
+test('--solve predicts what the factor check measures: a later era\'s remove list applies to an earlier era in both', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'gg-cc-'));
+  try {
+    for (const f of fs.readdirSync(TABLE_DIR)) fs.copyFileSync(path.join(TABLE_DIR, f), path.join(dir, f));
+    const hvT = JSON.parse(fs.readFileSync(path.join(dir, 'hv.json'), 'utf8'));
+    hvT.remove = ['gtceu:assembler/bypass_mv'];
+    fs.writeFileSync(path.join(dir, 'hv.json'), JSON.stringify(hvT));
+    const bypass = hull('mv', 1, 0, 30);
+    bypass.id = 'gtceu:assembler/bypass_mv';
+    const d = mkDump({ recipes: [source, hull('mv', 2, 0, 30), bypass, hull('hv', 4, 0, 120)], items: ['gtceu:mv_machine_hull', 'gtceu:hv_machine_hull'] });
+    const log = console.log;
+    console.log = () => {};
+    let res;
+    try {
+      res = solveFactors({ table: dir }, cfg, d);
+    } finally {
+      console.log = log;
+    }
+    const { tables } = loadTables(dir);
+    const m = measure(d, cfg, tables, res.factors);
+    for (const era of cfg.tiers) {
+      assert.equal(res.predicted[era], m.index.get(era).index, `${era}: solver prediction vs factor check`);
+      assert.equal(coreIndex(res.after.rows, cfg.tiers).get(era).index, m.index.get(era).index, `${era}: final measurement`);
+    }
+    assert.ok(m.res.removed.has('gtceu:assembler/bypass_mv'), 'the bypass is removed in the check');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('shaped recipes count every pattern cell, and an unmatched symbol table is left alone', () => {
