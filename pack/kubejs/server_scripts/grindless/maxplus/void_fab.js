@@ -1,4 +1,4 @@
-// priority: -20165
+// priority: -20175
 // MAX+ machine 10, the void crystal fab, and line P14 (docs/eras/maxplus.md, machine 10 and 'Lines'; package XP-B4). Gate c19 to the Local Group
 // filament is a row of data/grindless/tables/gate.json.
 //
@@ -40,9 +40,9 @@
   ]
   MV.fab = FAB
 
-  var CONTROLLER = { machine: 'gtceu:void_crystal_fab', research: 'grindless:void_crystal_lattice', casing: 'grindless:horizon_machine_casing',
+  var CONTROLLER = { machine: 'gtceu:void_crystal_fab',   research: 'grindless:c12_seed_plate', casing: 'grindless:horizon_machine_casing',
     comps: ['2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor'],
-    plates: ['4x grindless:horizon_compressed_plate', '2x grindless:void_crystal_lattice'] }
+      plates: ['4x grindless:horizon_compressed_plate', '2x grindless:c12_seed_plate'] }
   MV.controllerSpec = CONTROLLER
 
   function missingIds(ids, fluids) {

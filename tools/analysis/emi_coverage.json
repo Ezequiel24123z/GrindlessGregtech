@@ -289,6 +289,7 @@
     { "id": "grindless:turbine_disc", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-B1; delete the row then" },
     { "id": "grindless:vms_lift_nozzle", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-B1; delete the row then" },
     { "id": "grindless:vms_lift_nozzle", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-B1; delete the row then" },
+    { "id": "grindless:void_crystal_lattice", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-K; delete the row then" },
     { "id": "grindless:void_holographic_block", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-K; delete the row then" },
     { "id": "grindless:void_holographic_block", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-K; delete the row then" },
     { "id": "grindless:horizon_processor", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-A3; delete the row then" },

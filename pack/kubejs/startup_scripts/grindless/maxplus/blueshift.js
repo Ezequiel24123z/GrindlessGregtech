@@ -1,4 +1,4 @@
-// priority: -5621
+// priority: -5569
 // MAX+ machine 9, the blueshift forge (docs/eras/maxplus.md "Machines" 9; package XP-B3): the multiblock and its recipe type. Items and the casing
 // are XP-F1's (maxplus/foundation.js); the recipes, with lines P12, P13 and P24's older-machine rows, are in
 // server_scripts/grindless/maxplus/blueshift.js. Names: client_scripts/grindless/maxplus_blueshift_lang.js.
