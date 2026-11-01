@@ -2,7 +2,8 @@
 // TEST ONLY, XP-B1 (gtceu:nickel_56_burner and gate c16). Command: kubejs custom_command gg_test_maxplus_tarantula
 // Band ONLY: X 46592-46655, Z 0-63, Y 98-125, in grindless:tarantula_orbit (the burner) and gcyr:black_hole_orbit (the gate); zones.json row maxplus_tarantula.
 //   T1 (named uncertainties):
-//     burner  forms at 30 Doradus on one 1,024 A MAX+ hatch and a MAX 16 A dynamo hatch and runs c1 with a 2^34 EU/t output; a co56 cask in the output bus
+//     burner  forms at 30 Doradus on a MAX 16 A dynamo hatch (a generator: no energy input) and runs c1 (4,800 t) with a 2^34 EU/t output;
+//             a co56 cask in the output bus; the dynamo is drained every tick so the run never stalls on a full hatch
 //     gate    c16 (hold_tarantula) runs at Sgr A* on one 1,024 A hatch at 2^37 EU/t for 1,200 t with the horizon lock kept; the probe is consumed;
 //             the 30 Doradus platform appears (mark uxvPlatform_tarantula, warp gate controller at 64,100,64 of grindless:tarantula_orbit)
 //     lookup  every recipe id of the package is in the recipe manager; static: nothing skipped
@@ -143,7 +144,7 @@
       if (c.sym.kind === 'oneOf') xs.push(c)
     })
     xs.sort(function (a, b) { return a.z - b.z || a.x - b.x })
-    var parts = [HATCH, 'gtceu:max_input_bus', 'gtceu:max_output_bus', DYNAMO]
+    var parts = ['gtceu:max_input_bus', 'gtceu:max_output_bus', DYNAMO]
     var chosen = {}
     var n = xs.length
     parts.forEach(function (id, i) { chosen[Math.floor(i * (n - 1) / (parts.length - 1))] = id })
@@ -235,21 +236,22 @@
         return
       }
       u.m = m
-      u.energy = partsLike(m, /max_maxplus_energy_hatch_1024a/)
       u.dynamo = partsLike(m, /max_energy_output_hatch_16a/)
       u.bus = partsLike(m, /input_bus/)[0]
       u.outBus = partsLike(m, /output_bus/)[0]
-      var ok = !!u.bus && !!u.outBus && u.energy.length === 1 && u.dynamo.length === 1
-      check('burner_formed', ok, 'class ' + m.getClass().getSimpleName() + ', 1,024 A hatches ' + u.energy.length + ', dynamo hatches ' + u.dynamo.length + ', parts ' + array(m.getParts()).length)
+      var ok = !!u.bus && !!u.outBus && u.dynamo.length === 1
+      check('burner_formed', ok, 'class ' + m.getClass().getSimpleName() + ', dynamo hatches ' + u.dynamo.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
-      topUp(u.energy)
       setBus(u.bus, [[CIRCUIT, 1, '{Configuration:1}'], ['grindless:shielded_ni56_cask', 1]])
       u.last = m.getRecipeLogic().getLastRecipe()
       u.started = S.tick
       u.phase = 'run'
       return
     }
-    topUp(u.energy)
+    var dyn = u.dynamo[0].energyContainer
+    var stored = Number(dyn.getEnergyStored())
+    if (u.peak === undefined || stored > u.peak) u.peak = stored
+    dyn.setEnergyStored(0)
     var rlg = u.m.getRecipeLogic()
     if (u.phase === 'run') {
       var rec = rlg.getLastRecipe()
@@ -267,8 +269,6 @@
       return
     }
     if (u.phase === 'wait') {
-      var stored = Number(u.dynamo[0].energyContainer.getEnergyStored())
-      if (stored > u.peak || u.peak === undefined) u.peak = stored
       var got = count(u.outBus, 'grindless:co56_cask')
       if (got >= 1) {
         check('burner_dynamo', u.peak > 0, 'the dynamo hatch held up to ' + u.peak + ' EU')
