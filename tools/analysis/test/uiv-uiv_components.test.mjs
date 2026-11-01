@@ -82,7 +82,7 @@ test('the three components: UEV part + line part + a UIV circuit tag', () => {
   assert.equal(arm.itemsIn[1].count, 3);
   assert.deepEqual(outputs(arm), ['gtceu:uiv_robot_arm']);
   const motor = by('assembler', 'uiv_electric_motor');
-  assert.deepEqual(inputs(motor), ['gtceu:uev_electric_motor', 'grindless:field_cooled_gdbco', 'grindless:mh_winding', 'gtceu:metallic_hydrogen_single_cable', '#gtceu:circuits/uiv']);
+  assert.deepEqual(inputs(motor), ['gtceu:uev_electric_motor', 'grindless:field_cooled_gdbco', 'grindless:mh_winding', 'gtceu:metallic_hydrogen_single_cable', '#gtceu:circuits/uiv', 'gtceu:superconducting_coil']);
   assert.deepEqual(outputs(motor), ['gtceu:uiv_electric_motor']);
   for (const r of [pump, arm, motor]) assert.equal(r.eut, 7864320, r.name);
 });

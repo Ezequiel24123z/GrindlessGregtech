@@ -665,6 +665,7 @@
           "fluidsOut": [{ "id": "minecraft:water", "amount": 2000 }]
         },
         {
+          "_why": "RF-3Q lines 9 and 32: a californium-252 fission source (UHV isotope line, not consumed) counts the fragment tracks to calibrate the etch.",
           "name": "etched_membrane",
           "circuit": 25,
           "eut": 131072,
@@ -673,7 +674,7 @@
             { "id": "grindless:ion_tracked_foil", "count": 1 },
             { "id": "gtceu:sodium_hydroxide_dust", "count": 1 }
           ],
-          "kept": [],
+          "kept": [{ "id": "grindless:californium_252", "count": 1 }],
           "charge": [],
           "fluidsIn": [{ "id": "gtceu:hydrochloric_acid", "amount": 100 }],
           "itemsOut": [

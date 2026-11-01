@@ -25,13 +25,13 @@
           "fluidsOut": []
         },
         {
-          "_why": "uiv.md line 13: the exposed film is developed in an ethanol bath (not consumed) and cut into driver ASICs",
+          "_why": "uiv.md line 13: the exposed film is developed in an ethanol bath (not consumed), its overlay is verified against a UV frequency comb (UHV line, not consumed) and it is cut into driver ASICs",
           "name": "driver_asic",
           "circuit": 2,
           "eut": 31457280,
           "duration": 1200,
           "itemsIn": [{ "id": "grindless:beuv_exposed_wafer", "count": 1 }],
-          "kept": [],
+          "kept": [{ "id": "grindless:vuv_frequency_comb", "count": 1 }],
           "fluidsIn": [],
           "charge": [{ "id": "gtceu:ethanol", "amount": 100 }],
           "itemsOut": [{ "id": "grindless:beuv_driver_asic", "count": 4 }],
