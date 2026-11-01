@@ -131,6 +131,30 @@ test('roles: pass and fail per role, and a failed role is judged as production',
   assert.match(judge(L('research', { crossings: [] }), { used: new Set(), dup: null, skipped: [], endInfo: new Map(), ...failed }).reason, /declared role research fails/);
 });
 
+test('LD-T2 role tests follow RF-3S: one positive and one negative fixture per role', () => {
+  const L = (role, res, extra = {}) => ({ era: 'luv', role, steps: 2, products: [{ res }], machines: new Set(['gtceu:site']), inner: new Set(), raws: new Set(), ...extra });
+  const plate = rec('plate', 'gtceu:assembler', ['gtceu:p'], 'gtceu:plate');
+  // infrastructure: a part consumed by a part recipe that leads to a casing within 2 hops; a placed machine needs no consumer
+  const infra = buildFacts([rec('part', 'gtceu:assembler', ['gtceu:p'], 'gtceu:q'), rec('cas', 'gtceu:assembler', ['gtceu:q'], 'grindless:x_casing')]);
+  assert.equal(checkRole(L('infrastructure', 'gtceu:p'), infra).ok, true);
+  assert.equal(checkRole(L('infrastructure', 'gtceu:p'), buildFacts([plate])).ok, false);
+  assert.equal(checkRole(L('infrastructure', 'gtceu:hpca'), buildFacts([]), { infra: new Set(['gtceu:hpca']) }).ok, true);
+  assert.equal(checkRole(L('infrastructure', 'gtceu:hpca'), buildFacts([])).ok, false);
+  // research: consumed as a material by a recipe whose output is a research item
+  const rs = buildFacts([rec('chart', 'minecraft:crafting_shapeless', ['gtceu:p'], 'grindless:outer_system_chart')]);
+  assert.equal(checkRole(L('research', 'gtceu:p'), rs).ok, true);
+  assert.equal(checkRole(L('research', 'gtceu:p'), buildFacts([plate])).ok, false);
+  // travel: consumed by a recipe whose output is a tank or seed part
+  const tv = buildFacts([rec('tank', 'gtceu:assembler', ['gtceu:p'], 'grindless:naquadah_fuel_tank')]);
+  assert.equal(checkRole(L('travel', 'gtceu:p'), tv).ok, true);
+  assert.equal(checkRole(L('travel', 'gtceu:p'), buildFacts([plate])).ok, false);
+  // resource: a site recipe that takes a fluid and a capture bag; a plain assembler recipe from ingots is production
+  const site = (ins) => buildFacts([rec('mine', 'gtceu:site', ins, 'gtceu:ore')]);
+  const feeds = { feeds: new Map([['gtceu:ore', new Set(['other'])]]) };
+  assert.equal(checkRole(L('resource', 'gtceu:ore'), site(['fluid:gtceu:helium', 'grindless:capture_bag']), feeds).ok, true);
+  assert.equal(checkRole(L('resource', 'gtceu:ore'), site(['gtceu:steel_ingot']), feeds).ok, false);
+});
+
 test('a short line of ours that replaces a stock chain is a fold', () => {
   const facts = buildFacts([
     rec('mid', 'gtceu:macerator', ['gtceu:sand'], 'gtceu:mid', { added: false }),

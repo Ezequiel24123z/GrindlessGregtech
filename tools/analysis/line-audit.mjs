@@ -467,6 +467,16 @@ const TRAVEL_KEY = /^grindless:\w+_key$/;
 const eraIdx = (e) => ERAS.indexOf(e);
 const WEAR = /lubricant|coolant|battery|circuit|catalyst|filter|mold|lens|charge|water$|distilled/;
 const wearOnly = (r) => r.inputs.every((i) => i.cap || i.circuit || i.alts.every((a) => WEAR.test(a)));
+// LD-T2: a site machine's recipe also takes the site's own fluids and air, and consumable capture gear (bag, net, bit, sail)
+const SITE_GEAR = /bag|net$|bit$|sail|probe|blade|nozzle/;
+const siteOnly = (r) => r.inputs.every((i) => i.cap || i.circuit || i.alts.every((a) => a.startsWith('fluid:') || WEAR.test(a) || SITE_GEAR.test(a)));
+// recycling, packing and decomposition are not uses of an item
+const IGNORED_TYPE = /recycl|pack|decompos|macerat|arc_furnace|extractor/;
+const INFRA_PART = /^(gtceu|gcyr|gtca|grindless):[a-z0-9_]*(casing|coil|hatch|hull|controller|panel|cell|insert|floor|support|heat_pipe|crucible|suit|rocket|station|shield|spool|net)(_[a-z0-9]+)?$/;
+const RESEARCH_TYPE = /research|data_bank|telemetry|observatory/;
+const RESEARCH_ITEM = /data|orb|chart|catalogue|catalog|survey|signal|model|record|image|map|research|flyby|computation|observat|telescope/;
+const TRAVEL_TYPE = /rocket|station|landing|seed/;
+const TRAVEL_ITEM = /rocket|station|landing|seed|tank|chart|model|singularity|probe|capsule|lander|_key$/;
 
 // The declared roles of RF-3S (ev.md:481-500), tested against the dump's recipes. Approximate by design: each test is a few
 // lines of evidence, not a proof. Returns { ok, why }; a role is never judged without a dump.
@@ -485,36 +495,41 @@ export function checkRole(l, facts, rc = {}) {
       for (const p of prods) {
         const mine = (facts.producers.get(p.res) || []).filter((r) => l.machines.has(r.type) || ownedTypes(l, facts).ids.has(r.id));
         if (!mine.length) return fail(`no recipe of the line makes ${p.res}`);
-        if (!mine.some(wearOnly)) return fail(`${p.res} is made from consumed inputs, not only wear or charge`);
+        if (!mine.some(siteOnly)) return fail(`${p.res} is made from consumed inputs, not only wear, charge, site fluids or air`);
         if (!rc.feeds?.get(p.res)?.size) return fail(`${p.res} feeds no other line`);
       }
       return ok;
     }
     case 'infrastructure': {
       if (!prods.length) return fail('no end product');
+      const isInfra = (k) => rc.infra?.has(k) || INFRA_PART.test(k);
+      const useful = (r) => !IGNORED_TYPE.test(r.type);
       for (const p of prods) {
-        const cs = cons(p.res);
+        // a machine, hatch, casing or structure block is placed in the world: it needs no recipe consumer
+        if (rc.infra?.has(p.res)) continue;
+        const cs = cons(p.res).filter(useful);
         if (!cs.length) return fail(`${p.res} has no consumer`);
-        const hit = cs.filter((r) => r.outputs.some((o) => rc.infra?.has(o.key) || /^gcyr:.*(suit|rocket|station)/.test(o.key))).length;
-        if (hit * 2 < cs.length) return fail(`${p.res} mostly feeds recipes that are not machines, structures or suits`);
+        // a consumer counts when its output, or the output of a recipe that consumes that output, is infrastructure
+        const hit = cs.filter((r) => r.outputs.some((o) => isInfra(o.key) || cons(o.key).some((r2) => useful(r2) && r2.outputs.some((o2) => isInfra(o2.key))))).length;
+        if (hit * 2 < cs.length) return fail(`${p.res} mostly feeds recipes that lead to no machine, structure, casing or suit within 2 hops`);
       }
       return ok;
     }
     case 'research': {
       if (!prods.length) return fail('no end product');
       for (const p of prods) {
-        const cs = cons(p.res);
+        const cs = cons(p.res).filter((r) => !IGNORED_TYPE.test(r.type));
         if (!cs.length) return fail(`${p.res} has no consumer`);
-        if (!cs.every((r) => /research|telemetry|observatory/.test(r.type) || r.inputs.some((i) => i.cap && i.alts.includes(p.res)))) return fail(`${p.res} is consumed as material`);
+        if (!cs.every((r) => RESEARCH_TYPE.test(r.type) || r.inputs.some((i) => i.cap && i.alts.includes(p.res)) || r.outputs.some((o) => RESEARCH_ITEM.test(o.key)))) return fail(`${p.res} is consumed as material that does not lead to research`);
       }
       return ok;
     }
     case 'travel': {
       if (!prods.length) return fail('no end product');
       for (const p of prods) {
-        const cs = cons(p.res);
+        const cs = cons(p.res).filter((r) => !IGNORED_TYPE.test(r.type));
         if (!cs.length) { if (TRAVEL_KEY.test(p.res)) continue; return fail(`${p.res} has no consumer`); }
-        if (!cs.every((r) => /rocket|station|landing|seed/.test(r.type) || r.inputs.some((i) => i.cap))) return fail(`${p.res} is consumed as material`);
+        if (!cs.every((r) => TRAVEL_TYPE.test(r.type) || r.inputs.some((i) => i.cap && i.alts.includes(p.res)) || r.outputs.some((o) => TRAVEL_ITEM.test(o.key) || rc.infra?.has(o.key)))) return fail(`${p.res} is consumed as material that does not lead to travel`);
       }
       return ok;
     }
