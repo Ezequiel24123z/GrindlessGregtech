@@ -1,7 +1,7 @@
 // Quest data for zpm_integration ("ZPM: Power and Scale"): the era's power plant, the Mk2, the network and the older machines' new modes
 // (docs/reforge/05_quest_design.md, sections 2 and 3.2; docs/eras/zpm.md, "Older machines, new modes", "Power", "AE2 between planets").
 // BIG, MK2, DEC, EXC, ANEU, NETZ and SIXTYFOUR moved here from zpm_age: they keep their keys and ids, and the power chart still points at
-// BIG, MK2 and DEC. Every row starts at a link to the zpm_age quest that opens it.
+// BIG, MK2 and DEC. Every row starts at a link to the zpm_age quest that opens it, and its first quest depends on that quest.
 // Positions: columns every 2, rows every 1.5.
 const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
@@ -13,7 +13,7 @@ export const CHAPTER = {
   role: 'integration',
   order: 3,
   icon: 'gtceu:zpm_fusion_reactor',
-  autofocus: 'I_L_PW',
+  autofocus: 'EXC',
   title: 'ZPM: Power and Scale',
   subtitle: ['Naquadria burnt at home, the Mk2 and its converter, a network that reaches Uranus, and four older machines learning new tricks.'],
 };
@@ -29,7 +29,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ power at home
   {
     key: 'EXC', kind: 'step', title: 'Excited', icon: 'gtceu:radon_bucket', size: 0.75,
-    deps: ['I_L_PW'], x: 2, y: 0,
+    deps: ['START'], x: 2, y: 0,
     desc: [
       "Fuel only gets worth burning once the Mk2 has excited it with radon. That's a big start for a small amount, so in practice the Mk2 comes before the reactor.",
     ],
@@ -92,7 +92,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ helium-3 power
   {
     key: 'ANEU', kind: 'process', title: 'Aneutronic', icon: 'gtceu:helium_3_bucket',
-    deps: ['I_L_HE'], x: 2, y: 2,
+    deps: ['STN3'], x: 2, y: 2,
     teach: {
       for: "Deuterium and helium-3 fuse into helium with almost no stray neutrons. It runs on the Mk2 only, and it's the clean way to turn Saturn's gas into power.",
       needs: "Helium-3 and deuterium from the isotope column, and a Mk2 that's already running.",
@@ -120,7 +120,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ older machines, new modes
   {
     key: 'ZI_NAQ', kind: 'process', title: 'Mode Three', icon: 'gtceu:naquadah_plant',
-    deps: ['I_L_OM'], x: 2, y: 4,
+    deps: ['START'], x: 2, y: 4,
     teach: {
       for: 'The IV &6Naquadah Plant&r learns a third mode: the leftover solution from the refinery becomes enriched naquadah dust, and the acid comes back.',
       needs: 'Enriched naquadah solution from the naquadria refinery, and the right circuit in the plant.',
@@ -174,7 +174,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ AE2 between planets
   {
     key: 'ZI_AE1', kind: 'step', title: 'Saturn on the Network', icon: 'grindless:station_truss_casing',
-    deps: ['I_L_AE'], x: 2, y: 6,
+    deps: ['STN4'], x: 2, y: 6,
     desc: [
       "Saturn orbit gets its own &6AE2 pair&r, so what the station makes goes home and what it needs comes out. Power doesn't need it: the wireless network already carries that.",
     ],
