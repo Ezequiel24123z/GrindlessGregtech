@@ -266,6 +266,14 @@
           "kept": [], "charge": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:rb87_isotope", "count": 1 }],
           "fluidsOut": []
+        },
+        {
+          "_why": "XP-A3 (maxplus.md, Q1 step 1, c31): natural silicon separated to the 99.9998 % Si-28 feed; the Si-29 and Si-30 tails return to stock as natural-grade silicon",
+          "name": "si28_feed", "circuit": 31, "eut": 536870912, "duration": 4000,
+          "itemsIn": [{ "id": "gtceu:silicon_dust", "count": 64 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:si28_feed", "count": 4 }, { "id": "gtceu:silicon_dust", "count": 48 }],
+          "fluidsOut": []
         }
       ]
     },

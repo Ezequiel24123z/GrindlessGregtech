@@ -58,7 +58,7 @@ const ISOTOPES = ['gtceu:calcium_48_dust', 'gtceu:potassium_40_dust', 'gtceu:lit
 
 test('every calutron recipe has a unique name and circuit 1-6, a UHV-voltage EU/t and a positive duration', () => {
   assert.equal(new Set(CAL.map((r) => r.name)).size, CAL.length);
-  assert.deepEqual(CAL.map((r) => r.circuit).sort(), [1, 16, 17, 18, 19, 2, 3, 4, 5, 6]); // MAX-B2 c16-17 (Sr-88, spent Sr cartridge), MAX-B3 c18-19 (Rb-87, Rb getter scrap); lexicographic sort
+  assert.deepEqual(CAL.map((r) => r.circuit).sort(), [1, 16, 17, 18, 19, 2, 3, 31, 4, 5, 6]); // XP-A3 c31 (si28_feed); MAX-B2 c16-17 (Sr-88, spent Sr cartridge), MAX-B3 c18-19 (Rb-87, Rb getter scrap); lexicographic sort
   for (const r of CAL) {
     assert.ok(Number.isInteger(r.eut) && r.eut === 1966080, r.name);
     assert.ok(Number.isInteger(r.duration) && r.duration > 0, r.name);

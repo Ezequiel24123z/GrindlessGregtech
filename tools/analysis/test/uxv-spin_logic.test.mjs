@@ -29,7 +29,7 @@ test('the stand-in runs the UXV-A5 scripts without errors, nothing skipped, no l
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(SL.skipped), []);
   assert.deepEqual(plain(SL.clashes), []);
-  assert.equal(SL.recipes.length, 12 + 1 + 1 + 1); // MAX-B1 vdW c5 graphene_hbn_film (L2); MAX-H1 appended racetrack c3 racetrack_memory_die (line 38); MAX-A2 LPE c4 bi_yig_film (line 31)
+  assert.equal(SL.recipes.length, 12 + 1 + 1 + 1 + 1); // XP-A3 appended racetrack c6 stacked_logic_wafer (Q1 step 5); MAX-B1 vdW c5 graphene_hbn_film (L2); MAX-H1 appended racetrack c3 racetrack_memory_die (line 38); MAX-A2 LPE c4 bi_yig_film (line 31)
 });
 
 test('5 items registered by the startup file, named in en_us and es_es', () => {

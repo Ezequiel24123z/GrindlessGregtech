@@ -58,7 +58,10 @@
           "itemsOut": [{ "id": "grindless:atom_optics_modulator", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
         { "_why": "MAX-B3 (max.md, L46 step 3, c13): the transducer wafer bonded to the AOD blank and sliced by hydrogen implantation", "name": "ln_transducer_bonded_blank", "circuit": 13, "eut": 31457280, "duration": 1600,
           "itemsIn": [{ "id": "grindless:teo2_aod_blank", "count": 1 }, { "id": "grindless:lithium_niobate_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:ln_transducer_bonded_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] }
+          "itemsOut": [{ "id": "grindless:ln_transducer_bonded_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
+        { "_why": "XP-A3 (maxplus.md, Q2 step 1, c19): two poled lithium niobate wafers bonded to the Si-28 SOI handle and sliced by hydrogen implantation into the enhanced LN-on-insulator", "name": "ln_on_insulator_plus", "circuit": 19, "eut": 536870912, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:poled_lnoi_wafer", "count": 2 }, { "id": "grindless:si28_soi_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:ln_on_insulator_plus", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] }
       ]
     },
     "femtosecond_writing": {
@@ -115,7 +118,10 @@
           "itemsOut": [{ "id": "grindless:endcapped_hc_fibre", "count": 1 }], "fluidsOut": [] },
         { "_why": "MAX-B3 (max.md, L43 step 2, c12): two silica plates laser-welded around a fused-silica spacer into the vacuum cell", "name": "laser_welded_glass_cell", "circuit": 12, "eut": 7864320, "duration": 1000,
           "itemsIn": [{ "id": "grindless:ultrapure_silica_plate", "count": 2 }, { "id": "grindless:fused_silica_tube", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:laser_welded_glass_cell", "count": 1 }], "fluidsOut": [] }
+          "itemsOut": [{ "id": "grindless:laser_welded_glass_cell", "count": 1 }], "fluidsOut": [] },
+        { "_why": "XP-A3 (maxplus.md, Q2 step 2, c20): the interposer waveguides written into the enhanced LN-on-insulator and sealed with a fused-silica cladding tube", "name": "interposer_waveguides", "circuit": 20, "eut": 536870912, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:ln_on_insulator_plus", "count": 1 }, { "id": "grindless:fused_silica_tube", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:interposer_waveguides", "count": 1 }], "fluidsOut": [] }
       ]
     },
     "chemical_reactor": {

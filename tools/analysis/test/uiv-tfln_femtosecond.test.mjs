@@ -48,7 +48,7 @@ test('names unique, EU/t and duration positive, circuits unique per type', () =>
 test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
   const rc = T.types.ion_slicing.recipes;
   // OpV-A2 appended c5 (the Nb TSV bond) and c6 (LN on Si-28 SOI); OpV-B1 c8 bonded_tetron_die (OpV line 19, the flip-chip bond)
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4], ['tsv_bond', 5], ['ln_on_soi', 6], ['bonded_tetron_die', 8], ['ppln_thin_film_wafer', 9], ['transducer_wafer', 10], ['yig_on_ln_wafer', 12], ['atom_optics_modulator', 11], ['ln_transducer_bonded_blank', 13]]); // MAX-B3 c13 (line 46) // MAX-B2 c11 (line 4) // MAX-A2 c12 (line 31) // MAX-A1 c9-10 (lines 5 and 7)
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['ln_on_sin', 1], ['si28_soi', 2], ['poled_lnoi', 3], ['eo_microcomb', 4], ['tsv_bond', 5], ['ln_on_soi', 6], ['bonded_tetron_die', 8], ['ppln_thin_film_wafer', 9], ['transducer_wafer', 10], ['yig_on_ln_wafer', 12], ['atom_optics_modulator', 11], ['ln_transducer_bonded_blank', 13], ['ln_on_insulator_plus', 19]]); // XP-A3 c19 (Q2 step 1) // MAX-B3 c13 (line 46) // MAX-B2 c11 (line 4) // MAX-A2 c12 (line 31) // MAX-A1 c9-10 (lines 5 and 7)
   for (const r of rc) {
     assert.equal(r.eut, 31457280, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 3 && ids(r.itemsOut).length <= 2, r.name);
@@ -65,7 +65,7 @@ test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
 test('femtosecond writer: femtosecond_writing circuits 1-4, figures and slots', () => {
   const rc = T.types.femtosecond_writing.recipes;
   // OpV-A1 appended c5 (the flexspline teeth), OpV-A2 c6 (the LN-on-SOI link waveguides)
-  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['interposer_blank', 1], ['lattice_2pp', 2], ['orifice_plate', 3], ['crystal_blank', 4], ['flexspline_teeth', 5], ['ln_soi_waveguides', 6], ['squeezer_waveguide_die', 7], ['isolator_waveguide_die', 10], ['droplet_nozzle_plate', 8], ['trimmed_microring', 9], ['endcapped_hc_fibre', 11], ['laser_welded_glass_cell', 12]]); // MAX-B3 c9, c11, c12 // MAX-D1 c8 (L15) // MAX-A2 c10 // MAX-A1 c7
+  assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['interposer_blank', 1], ['lattice_2pp', 2], ['orifice_plate', 3], ['crystal_blank', 4], ['flexspline_teeth', 5], ['ln_soi_waveguides', 6], ['squeezer_waveguide_die', 7], ['isolator_waveguide_die', 10], ['droplet_nozzle_plate', 8], ['trimmed_microring', 9], ['endcapped_hc_fibre', 11], ['laser_welded_glass_cell', 12], ['interposer_waveguides', 20]]); // XP-A3 c20 (Q2 step 2) // MAX-B3 c9, c11, c12 // MAX-D1 c8 (L15) // MAX-A2 c10 // MAX-A1 c7
   for (const r of rc) {
     assert.equal(r.eut, 7864320, r.name);
     assert.ok(ids(r.itemsIn).length + 1 <= 3 && ids(r.itemsOut).length <= 2, r.name);

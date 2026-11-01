@@ -13,7 +13,7 @@ const kube = path.join(root, 'pack', 'kubejs');
 const tables = path.join(kube, 'data', 'grindless', 'tables');
 const T = JSON.parse(fs.readFileSync(path.join(tables, 'crystals.json'), 'utf8'));
 const CLOCK = T.types.nuclear_clock.recipes;
-const GROW = T.types.crystal_growth.recipes.filter((r) => !/^(UXV|OpV|MAX|MX)-/.test(r._why || '')); // MX-S1's c32 nd_yag_boule is pinned in max-horizon-interferometer rows; // UXV rows are pinned in uxv-spin_rows.test.mjs (A3) and uxv-spin_logic.test.mjs (c18); OpV rows in opv-*.test.mjs (A2: opv-circuits; D1's c23 ceb6_boule: opv-beam_hardware); OpV-A1's c19-20 in opv-components.test.mjs; OpV-A3's c22 in opv-field_press.test.mjs; OpV-B1's c24 in opv-tetron_optics.test.mjs
+const GROW = T.types.crystal_growth.recipes.filter((r) => !/^(UXV|OpV|MAX|MX|XP)-/.test(r._why || '')); // MX-S1's c32 nd_yag_boule is pinned in max-horizon-interferometer rows; // UXV rows are pinned in uxv-spin_rows.test.mjs (A3) and uxv-spin_logic.test.mjs (c18); OpV rows in opv-*.test.mjs (A2: opv-circuits; D1's c23 ceb6_boule: opv-beam_hardware); OpV-A1's c19-20 in opv-components.test.mjs; OpV-A3's c22 in opv-field_press.test.mjs; OpV-B1's c24 in opv-tetron_optics.test.mjs
 const CUT = T.types.cutter.recipes;
 const ASM = T.types.assembler.recipes;
 const PGM = T.types.pgm_refining.recipes;

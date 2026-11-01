@@ -210,7 +210,10 @@
           "itemsOut": [{ "id": "grindless:algaas_bragg_stack", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] },
         { "_why": "MAX-D2 (max.md, L45 step 2, c14): the InGaAs/InAlAs HEMT stack grown on the semi-insulating InP wafer", "name": "hemt_stack_epi", "circuit": 14, "eut": 1966080, "duration": 1600,
           "itemsIn": [{ "id": "grindless:semi_insulating_inp_wafer", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }, { "id": "gtceu:indium_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }], "charge": [],
-          "itemsOut": [{ "id": "grindless:inp_hemt_epi", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] }
+          "itemsOut": [{ "id": "grindless:inp_hemt_epi", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] },
+        { "_why": "XP-A3 (maxplus.md, Q2 step 3, c32, a repeat on this type with its own inputs): the aluminium nitride piezoelectric transducer layer grown over the interposer waveguides", "name": "piezo_transducer_layer", "circuit": 32, "eut": 536870912, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:interposer_waveguides", "count": 1 }, { "id": "grindless:aln_powder", "count": 1 }, { "id": "gtceu:aluminium_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:liquid_nitrogen", "amount": 1000 }], "charge": [],
+          "itemsOut": [{ "id": "grindless:piezo_transducer_layer", "count": 1 }], "fluidsOut": [{ "id": "gtceu:nitrogen", "amount": 1000 }] }
       ]
     },
     "photonic_foundry": {

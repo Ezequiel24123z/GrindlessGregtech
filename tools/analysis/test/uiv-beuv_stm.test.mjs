@@ -59,7 +59,7 @@ test('BEUV scanner: beuv_lithography circuits 1-3, figures and slots', () => {
   const rc = T.types.beuv_lithography.recipes;
   // OpV-A2 appended c4 (cryo-CMOS gates), c5 (Nb TSV vias), c6 (HEMT T-gates), c7 (GaN gates) and c8 (the SDD anode); OpV-A3 appends algan_gates (c9), pinned in opv-field_press.test.mjs
   assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['exposure', 1], ['driver_asic', 2], ['mirror_cleaning', 3], ['cryo_cmos_exposure', 4], ['tsv_exposure', 5],
-    ['hemt_gate_exposure', 6], ['gan_gate_exposure', 7], ['sdd_anode_exposure', 8], ['algan_gates', 9], ['metalens_wafer', 10], ['microring_wafer', 12], ['sis_junction_wafer', 11], ['utc_photodiode_wafer', 13], ['hemt_gate_wafer', 14], ['rad_hard_fpga_wafer', 15], ['patterned_vo2_metasurface', 16]]); // MX-S2 c16; MX-S1 c15 (rad_hard_fpga_wafer); MAX-D2 c11, c13, c14 (lines 22, 44, 45); MAX-B3 c12 (line 29) // MAX-A1 c10 (metalens_wafer, line 6)
+    ['hemt_gate_exposure', 6], ['gan_gate_exposure', 7], ['sdd_anode_exposure', 8], ['algan_gates', 9], ['metalens_wafer', 10], ['microring_wafer', 12], ['sis_junction_wafer', 11], ['utc_photodiode_wafer', 13], ['hemt_gate_wafer', 14], ['rad_hard_fpga_wafer', 15], ['patterned_vo2_metasurface', 16], ['horizon_logic_wafer', 21]]); // XP-A3 c21 (Q1 step 3); MX-S2 c16; MX-S1 c15 (rad_hard_fpga_wafer); MAX-D2 c11, c13, c14 (lines 22, 44, 45); MAX-B3 c12 (line 29) // MAX-A1 c10 (metalens_wafer, line 6)
   for (const r of rc) {
     assert.ok(ids(r.itemsIn).length + 1 <= 4 && ids(r.itemsOut).length <= 2, r.name);
     assert.ok(ids(r.fluidsIn).length <= 1 && ids(r.fluidsOut).length === 0, r.name);
