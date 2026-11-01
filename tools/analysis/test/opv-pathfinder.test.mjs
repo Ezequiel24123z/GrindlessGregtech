@@ -13,7 +13,7 @@ const run = runPackScripts(pack);
 const tables = path.join(pack, 'kubejs', 'data', 'grindless', 'tables');
 const GATE = JSON.parse(fs.readFileSync(path.join(tables, 'gate.json'), 'utf8'));
 const P = run.global.grindless.opvPathfinder;
-const INTERMEDIATES = ['polycapillary_optic', 'xray_timing_head', 'rejected_timing_head', 'clock_locked_head',
+const INTERMEDIATES = ['polycapillary_optic', 'xray_timing_head', 'clock_locked_head',
   'gan_mmic_tile', 'tested_mmic_tile', 'rejected_mmic_tile', 'sealed_mmic_tile'];
 const lang = fs.readFileSync(path.join(pack, 'kubejs', 'client_scripts', 'grindless', 'opv_pathfinder_lang.js'), 'utf8');
 
@@ -86,7 +86,6 @@ test('older rows preserve their assigned circuits, J0437 site and reject destina
   assert.equal(row('power_devices.json', 'silicon_carbide', 'gan_mmic_tile').circuit, 7);
   assert.equal(row('electron_beam.json', 'electron_beam_refining', 'seal_node_tile').circuit, 24);
   const cascade = fs.readFileSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'ev', 'extraction_cascade.js'), 'utf8');
-  assert.match(cascade, /name: 'rejected_timing_head_recovery', mode: 'opv', circuit: 28/);
   assert.match(cascade, /name: 'rejected_mmic_tile_gallium', mode: 'opv', circuit: 29/);
 });
 

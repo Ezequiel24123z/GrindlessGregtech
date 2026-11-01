@@ -47,7 +47,6 @@ function Get-Noise {
 $Items = [ordered]@{
     polycapillary_optic  = @('spool', '8A9AA8', 'E0F4FF')
     xray_timing_head     = @('module', '3E4A5A', '80F0FF')
-    rejected_timing_head = @('module', '4A4440', 'B08060')
     clock_locked_head    = @('module', '3A3E5E', 'FFE080')
     gan_mmic_tile        = @('card', '3A5048', 'B0FF90')
     tested_mmic_tile     = @('card', '3A5A58', '90FFE0')

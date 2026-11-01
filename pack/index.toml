@@ -934,7 +934,7 @@ hash = "34af8a5ab6cf4a9eac5dc58607c7b7641d019ccee30e197942ccb83930bc7adf"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/opv_pathfinder_transmitter.json"
-hash = "f600ead799e159e71229137a9652a6f1577584e7c9f7a0246a4db3236df5c695"
+hash = "7e43297df1a984296cd77a9b1967d5f5253d6648ae9d7f874be903660d47b56e"
 
 [[files]]
 file = "kubejs/assets/emi/recipe/additions/grindless/opv_replication_debris_harvester.json"
@@ -12077,10 +12077,6 @@ file = "kubejs/assets/grindless/textures/item/rejected_mmic_tile.png"
 hash = "c15d9366620fd38e7b46d34bef5248a4861863cae2ec4e489bde765dade523fc"
 
 [[files]]
-file = "kubejs/assets/grindless/textures/item/rejected_timing_head.png"
-hash = "cdb76b7ec16440d476c388864db9b53be03712469f4431ad28188f01237d0ac2"
-
-[[files]]
 file = "kubejs/assets/grindless/textures/item/relay_seed.png"
 hash = "516515cf74abaae15d2ec3f799e082037905a5a0b1e561be6c4216ec7a27e45c"
 
@@ -14498,7 +14494,7 @@ hash = "4a237dc31c3d56a21b450b126738392f5dcf3797086ee72568174ae6167a8067"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/opv_pathfinder_lang.js"
-hash = "37194e7f8be1ba8e36a58de02d531b023bc46a84262bad0519260317355c2b12"
+hash = "3d52e2261d067067848cc3108e6268a65f1e06ea916a52b9c37467e3a13720bd"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/opv_replication_lang.js"
@@ -15882,7 +15878,7 @@ hash = "1161a333fc6991de19fb486aebf1422c47cc6ddd28d77c4ee7e6a2bdf961cf53"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/extraction_cascade.js"
-hash = "6d5c4119c9730cbd69b7211a673baccb462f7de7c08cb84dd51daf07cf67c1a5"
+hash = "12c3e0d6987a8bb861758667997ea559d3067723bb12be6c7394febadecf1c10"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/ev/foundation.js"
@@ -17454,7 +17450,7 @@ hash = "b0282b5793a7f48bed6442a983bb6f1850efa98e49681e7c81d23eeea4e7b290"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/opv/pathfinder.js"
-hash = "6177297d26436f5af51c3302f1ebbcc288f74e5361a99305d87dcc91a1edfaf9"
+hash = "4129bcaa1ce1d2bebd2a6d9cdc49b13c1b7aa9c00d7d84306ab2c2e87ed268d2"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/opv/replication.js"

@@ -3,7 +3,7 @@
 // the XNAV unit, the node power transmitter and the vitamin kit are F1's (startup_scripts/grindless/opv/foundation.js); only the steps
 // between the older machines' rows and those products are registered here:
 //
-//   line 41, XNAV unit:        polycapillary_optic -> xray_timing_head (+ sdd_die; the rejected heads go to the extraction cascade)
+//   line 41, XNAV unit:        polycapillary_optic -> xray_timing_head (+ sdd_die; heads that fail burn-in are not a product, P2-E)
 //                              -> clock_locked_head -> xnav_unit (X-ray pulse profiler, at J0437 only)
 //   line 42, node transmitter: gan_mmic -> gan_mmic_tile (SiC device fab) -> tested_mmic_tile (hot cell; the rejected tiles go to the
 //                              extraction cascade) -> sealed_mmic_tile (electron beam furnace, circuit 24) -> node_power_transmitter
@@ -17,7 +17,6 @@
   const ITEMS = {
     polycapillary_optic: { stack: 64 },
     xray_timing_head: { stack: 16 },
-    rejected_timing_head: { stack: 64 },
     clock_locked_head: { stack: 16 },
     gan_mmic_tile: { stack: 64 },
     tested_mmic_tile: { stack: 64 },
