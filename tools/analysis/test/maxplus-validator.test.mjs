@@ -196,9 +196,9 @@ test('moved circuits: the magnetic scoop hoop uses MTJ c29 and the waveguide tub
 test('removed ids: gtceu:kerr_strand and gtceu:condensate_boil_off_gas are gone from the foundation and the id table', () => {
   const text = fs.readFileSync(path.join(TABLES, 'maxplus_ids.json'), 'utf8');
   const foundation = fs.readFileSync(path.join(PACK, 'kubejs', 'startup_scripts', 'grindless', 'maxplus', 'foundation.js'), 'utf8');
-  for (const gone of ['kerr_strand"', 'condensate_boil_off_gas']) {
-    assert.ok(!text.includes(gone), gone);
-    assert.ok(!foundation.includes(gone.replace('"', '')), gone);
+  for (const gone of [/\bkerr_strand\b/, /condensate_boil_off_gas/]) {
+    assert.ok(!gone.test(text), String(gone));
+    assert.ok(!gone.test(foundation), String(gone));
   }
 });
 
