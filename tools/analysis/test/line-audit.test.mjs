@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings } from '../line-audit.mjs';
+import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings, splitChains, parseDesignLines, designReport } from '../line-audit.mjs';
 
 const n = (key, kind, res, from = [], extra = {}) => ({ key, kind, res, from, cluster: 'a', ...extra });
 const chain = () => [
@@ -137,4 +137,23 @@ test('a content crossing is found from the recipes without a chart link', () => 
   assert.notEqual(ok.reason.startsWith('no crossing'), true);
   const bare = judge({ ...l, content: [] }, { used: new Set(), dup: null, skipped: [], endInfo: new Map([['gtceu:plate', { n: 2, reached: [] }]]) });
   assert.match(bare.reason, /isolated/);
+});
+test('splitChains: numbered rows are lines, a cluster with two end products is two lines', () => {
+  const rows = [n('l1_0', 'raw', 'x'), n('l1_1', 'product', 'a', ['l1_0']), n('l2_0', 'raw', 'y'), n('l2_1', 'product', 'b', ['l2_0'])];
+  assert.deepEqual(splitChains(rows).map((c) => c.label), ['L1', 'L2']);
+  const two = [n('r', 'raw', 'x'), n('i', 'item', 'm', ['r']), n('p1', 'product', 'a', ['i']), n('p2', 'product', 'b', ['i'])];
+  assert.equal(splitChains(two).length, 2);
+  assert.equal(splitChains(chain()).length, 1);
+});
+
+test('parseDesignLines reads the first table only; designReport counts the missing', () => {
+  const md = '## New process lines\n\n| # | Line | Steps |\n|---|---|---|\n| 1 | Alpha | ore \u2192 dust \u2192 ingot |\n| 2 | Beta | quartz \u2192 wafer |\n\n| # | Crossing |\n|---|---|\n| 1 | x |\n';
+  const rows = parseDesignLines(md, 'uhv');
+  assert.deepEqual(rows.map((r) => r.num), [1, 2]);
+  const chart = [{ nodes: [n('a', 'item', 'gtceu:ore'), n('b', 'item', 'gtceu:dust'), n('c', 'item', 'gtceu:ingot')] }];
+  const r = designReport('uhv', rows, chart, new Set(['gtceu:quartz', 'gtceu:wafer']));
+  assert.equal(r.design, 2);
+  assert.equal(r.chart, 1);
+  assert.equal(r.missing.length, 1);
+  assert.equal(r.missing[0].dump, true);
 });
