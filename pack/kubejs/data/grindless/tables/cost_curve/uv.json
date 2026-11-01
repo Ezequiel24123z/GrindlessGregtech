@@ -1,8 +1,8 @@
 {
   "era": "uv",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 2.7,
+  "fluid": 2.7,
   "keys": [
     "extendedfeatures:uv_universal_circuit",
     "gtceu:accelerator_driven_reactor",
