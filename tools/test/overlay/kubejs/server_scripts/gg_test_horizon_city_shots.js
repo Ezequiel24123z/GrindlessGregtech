@@ -1,4 +1,4 @@
-// priority: -5165
+// priority: -2460
 // TEST ONLY, P9-T3a. Server half; partner of client_scripts/gg_test_horizon_city_shots.js (talks through global.ggCityShots).
 // Client suite only, and only with kubejs/config/gg_test_horizon_city_shots.json {"enabled": true}. Sends the test player (spectator) to the
 // arrival point of grindless:horizon_city (pack/kubejs/data/grindless/tables/horizon_city.json: 0,4,0), stands the plaza template where the
