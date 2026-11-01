@@ -169,7 +169,7 @@ test('B5 drill: one harpoon recipe per belt vein, sample first, bit and harpoon 
     '1x gtceu:raw_pentlandite']);
   // the family's lookup rule: no other belt sample, and the vein drilling type takes three item inputs
   assert.deepEqual([...G._widened], ['in', 'item', 3]);
-  const samples = recipes.filter((r) => r.type === 'assembler' && r.args[0].startsWith('grindless:vein_sample/'));
+  const samples = recipes.filter((r) => r.type === 'assembly_line' && r.args[0].startsWith('grindless:vein_sample/'));
   assert.equal(samples.length, 3);
   assert.deepEqual([...call(samples[0], 'itemInputs')[0]], ['grindless:empty_vein_probe', '#forge:raw_materials/meteoric_iron', '#forge:raw_materials/tetrataenite', 'grindless:stainless_steel_drill_bit', 'grindless:sintered_regolith']);
   assert.deepEqual(call(samples[0], 'inputFluids')[0].map((f) => ({ ...f })), [{ id: 'gtceu:distilled_water', amount: 250 }, { id: 'gtceu:lubricant', amount: 100 }]);

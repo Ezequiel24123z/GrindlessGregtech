@@ -1,13 +1,4 @@
 {
  "note": "Today's capacity errors (recipe id -> reason). May only shrink; fix the recipe, then rerun --write-known.",
- "violations": {
-  "grindless:assembler/gtca/mega_lcr": "2 fluid inputs > type max 1",
-  "grindless:assembler/gtca/mega_oil_cracking_unit": "2 fluid inputs > type max 1",
-  "grindless:assembler/gtnn/maceration_stack_controller": "2 fluid inputs > type max 1",
-  "grindless:assembler/vein_sample/m_type_belt": "2 fluid inputs > type max 1",
-  "grindless:assembler/vein_sample/s_type_belt": "2 fluid inputs > type max 1",
-  "grindless:assembler/vein_sample/c_type_belt": "2 fluid inputs > type max 1",
-  "grindless:assembler/luv/radiation_vault_casing": "2 fluid inputs > type max 1",
-  "grindless:distillery/ring_ice_melt": "2 fluid outputs > type max 1"
- }
+ "violations": {}
 }
