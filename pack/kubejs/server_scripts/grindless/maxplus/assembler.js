@@ -52,7 +52,7 @@
     { type: 'mtj_sputtering', name: 'multilayer_xray_mirror', eut: va(12), duration: 900, key: 'grindless_mtj_sputtering',
       items: [['grindless:zone_plate_wafer', 1], ['grindless:nb_target', 1], ['gtceu:molybdenum_plate', 4]], fluids: [['gtceu:argon', 1000]],
       outs: [['grindless:multilayer_xray_mirror', 2]], fluidOuts: [['gtceu:argon', 800]] },
-    { type: 'gamma_optics', name: 'gamma_focus_element', circuit: 3, eut: V_MAX * 2, duration: 1200, key: 'grindless_gamma_optics',
+    { type: 'gamma_optics', name: 'gamma_focus_element', circuit: 3, eut: V_MAX, duration: 1200, key: 'grindless_gamma_optics',
       items: [['grindless:zone_plate_wafer', 2], ['gtceu:iridium_plate', 4]],
       outs: [['grindless:gamma_focus_element', 1]] },
     // T3
@@ -102,7 +102,7 @@
       items: [['grindless:coated_truss_billet', 1]], kept: [['gtceu:rod_extruder_mold', 1]],
       outs: [['grindless:horizon_frame_truss', 2]] },
     // P25
-    { type: 'plasma_mass_filtering', name: 'he_rich_fraction', circuit: 7, eut: V_MAX * 2, duration: 600, key: 'grindless_plasma_mass_filtering', dimension: TARANTULA,
+    { type: 'plasma_mass_filtering', name: 'he_rich_fraction', circuit: 7, eut: V_MAX, duration: 600, key: 'grindless_plasma_mass_filtering', dimension: TARANTULA,
       fluids: [['gtceu:raw_vms_plasma', 10000]],
       outs: [], fluidOuts: [['gtceu:he_rich_fraction', 5000], ['gtceu:stellar_heavy_cut', 1000]] },
     { type: 'cryogenic_processing', name: 'liquid_helium_4', eut: 7680, duration: 400,
@@ -214,7 +214,7 @@
     var missing = missingIds(ins, [KERR])
     if (missing.length > 0) return skip('condensate_assembler controller', 'unknown id(s): ' + missing.join(', '))
     var a = event.recipes.gtceu.assembly_line('grindless:condensate_assembler')
-    a.itemInputs(HULL, '2x ' + c.casing, '8x grindless:horizon_processor')
+    a.itemInputs(HULL, '2x ' + c.casing, '8x grindless:horizon_processor', '4x #gtceu:circuits/max')
     c.comps.concat(c.plates).forEach(function (s) { a.itemInputs(s) })
     a.inputFluids(Fluid.of(KERR, 2000))
     a.itemOutputs(c.machine)

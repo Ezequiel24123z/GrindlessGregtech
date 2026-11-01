@@ -21,7 +21,7 @@ test('the stand-in runs the script without errors; only the unregistered frame-p
   assert.deepEqual(mine, [], mine.map((e) => `${e.stage} ${e.file}: ${e.message}`).join('\n'));
   assert.deepEqual(plain(MA.skipped).filter((s) => !/horizon_frame_part/.test(s.name)), []);
   assert.equal(MA.assembler.length, 4);
-  assert.equal(MA.rows.length, 24);
+  assert.equal(MA.rows.length, 23);
   assert.equal(MA.coolRows.length, 2);
 });
 
