@@ -1797,6 +1797,18 @@ file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/io.json"
 hash = "d9198d8e280be23e9671a3ab40f59cd108fad52e4cc5ce9ee492e154e91d4503"
 
 [[files]]
+file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/local_group_filament.json"
+hash = "180b8a802518fb504b3d4caec33e7039a529b460a28785f2d6cd56ee4a67774d"
+
+[[files]]
+file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/m31_nucleus_orbit.json"
+hash = "0a69fe314cfb23c2c1bdb60178cd2e9197dd3966419730c6d3c7ea3f80a62a23"
+
+[[files]]
+file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/magellanic_stream.json"
+hash = "e7e952b5585e3528c934ddbc4cd8f326f30369bf984d7f09324e5edcc9aa8989"
+
+[[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/neptune_orbit.json"
 hash = "1510c8eb91a57050e01ac522c15caf1ae05044377e58ddc18bab9c1759e19321"
 
@@ -1831,6 +1843,10 @@ hash = "437ea9fb49b1483ac6bc916aae6b09ff702373b4dade3964d916f18413d244ad"
 [[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/sirius_b_orbit.json"
 hash = "0427b6db1ddfd4e386fa03cf2a2bed4d5d5c27542cca6c28f9c934d39776b376"
+
+[[files]]
+file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/tarantula_orbit.json"
+hash = "6ddfaa0e3bf23b8ea340e00d8dd70aa212d9a0d354fac940f5ac6d2bfbd5daf2"
 
 [[files]]
 file = "kubejs/assets/grindless/gcyr/planet_assets/sky_renderers/terzan5_core.json"
@@ -14242,7 +14258,7 @@ hash = "95ca76226a6ece0f4b7bc865fc32483dcb46855448ca66c3b97aee427d7d4db3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_circuits_lang.js"
-hash = "7031a106c4a5dc1909cc54c46ec9e229025da674a0d07e19724b266353fa7479"
+hash = "179f870fc4dfda82671e241b11eee236b6e6e035cbf669f6b449e95e22a0b4ea"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/max_components_lang.js"
@@ -14343,6 +14359,10 @@ hash = "069a67c95011ef7153f43a88af8e7f845d9e1241d0527a019614483e47e2edac"
 [[files]]
 file = "kubejs/client_scripts/grindless/max_wireless_lang.js"
 hash = "8aa41c8b368bd16b41f9891f831641e585b7141b1c3ead64d9c443815b98bb21"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/maxplus_foundation_lang.js"
+hash = "38fe7b83d9f2e6207bf06c2184411b3cb18856a6b01e7b0d885ef789d5bb431c"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/moon_info_lang.js"
@@ -15049,6 +15069,18 @@ file = "kubejs/data/grindless/dimension/jupiter_orbit.json"
 hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
 
 [[files]]
+file = "kubejs/data/grindless/dimension/local_group_filament.json"
+hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/m31_nucleus_orbit.json"
+hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/magellanic_stream.json"
+hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
+
+[[files]]
 file = "kubejs/data/grindless/dimension/neptune.json"
 hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
 
@@ -15094,6 +15126,10 @@ hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
 
 [[files]]
 file = "kubejs/data/grindless/dimension/sirius_b_orbit.json"
+hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
+
+[[files]]
+file = "kubejs/data/grindless/dimension/tarantula_orbit.json"
 hash = "a616d38296854ee437b299bad517415b425cab549d6ef72e46b44803ca5a1ce9"
 
 [[files]]
@@ -15177,6 +15213,18 @@ file = "kubejs/data/grindless/gcyr/planets/jupiter.json"
 hash = "ecb66b5791c047f2201f5e7dadc3a45a51d589852e5463900893d1a2889b43f2"
 
 [[files]]
+file = "kubejs/data/grindless/gcyr/planets/local_group_filament.json"
+hash = "7c22a1e758679e764d3367bf3ae13a695e86615b7183109fc5d692acc068e9d1"
+
+[[files]]
+file = "kubejs/data/grindless/gcyr/planets/m31_nucleus_orbit.json"
+hash = "f761c45029336998d336e5b15c3387087413f5320bd492f9f8a548ef8f75d3d1"
+
+[[files]]
+file = "kubejs/data/grindless/gcyr/planets/magellanic_stream.json"
+hash = "d623104e026005390e8fef48e901415746fb1c1e294cd10d6be76529e102d7d1"
+
+[[files]]
 file = "kubejs/data/grindless/gcyr/planets/neptune.json"
 hash = "0d582d8eb6547c1f1a747e0929b8f2d7994173f269af46f874c2b4704a186e08"
 
@@ -15211,6 +15259,10 @@ hash = "c961a49dd6554cb3099e70fd45c80176aa81248663db5716e700ceeae3620651"
 [[files]]
 file = "kubejs/data/grindless/gcyr/planets/sirius_b_orbit.json"
 hash = "0c557118299409769ca46a68fb94cc5d6cef7d1635316dfe4cc25bc571c61265"
+
+[[files]]
+file = "kubejs/data/grindless/gcyr/planets/tarantula_orbit.json"
+hash = "b60e4da5ca5ababdb7dff8125948c4b9d0823f8c7a1ba8fb320d450c3893377d"
 
 [[files]]
 file = "kubejs/data/grindless/gcyr/planets/terzan5_core.json"
@@ -15493,6 +15545,10 @@ file = "kubejs/data/grindless/tables/max_parts.json"
 hash = "e5dc0f3f0e2a4987e40e7cacdd67a6d6a76c5297d9a281ca90ef7ec8036c9a7f"
 
 [[files]]
+file = "kubejs/data/grindless/tables/maxplus_ids.json"
+hash = "eb5a16934954d8fcb5492302fb32cb9791e5138e9a226156a906498a1b065b5e"
+
+[[files]]
 file = "kubejs/data/grindless/tables/mega_chemical_complex.json"
 hash = "c35d0d05d9f9b114711f1ec813805f8249af164e9570574484e4457f998c8c32"
 
@@ -15590,7 +15646,7 @@ hash = "2041f44d28b039b47a93e778d08ff20822097f9a6c4738a40d2a802b8de29ce6"
 
 [[files]]
 file = "kubejs/data/grindless/tables/relay_platforms.json"
-hash = "7f57fe3d19781afbab84e9c775c16a9a3f684fe3164f5ef4a7a2b9dcfc541297"
+hash = "f3a7ed145b099b89bb4a160e72c45e7ff36672bedc861b0e3fdc9ea6453a1985"
 
 [[files]]
 file = "kubejs/data/grindless/tables/replication.json"
@@ -17234,7 +17290,15 @@ hash = "7e8cd45298cb312c0e782fe8a2de6559d759503fa6221f84d5f89f0f5fcec8ef"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/winch.js"
-hash = "b23a44303d4a83277b92fc0efb597917ca45bf4124c7a7579e2a4b24af0f364e"
+hash = "b6663f237dfecf5d4868ac8d0241e1d5beeb886a11c524d20d4c5b4cd57b10be"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/maxplus/foundation.js"
+hash = "4a216d7adff684b42cd0ae1113bbcb1a649a4b5c4f5a0fd6391345478c968d54"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/maxplus/travel.js"
+hash = "d698397601d14c623aca2952f8f0ec1e0aab7eb2727ddd8fd9c633764b68dd10"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/moon/earth_byproducts.js"
