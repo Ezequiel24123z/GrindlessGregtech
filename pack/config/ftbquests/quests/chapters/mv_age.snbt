@@ -27,9 +27,7 @@
 		}
 		{
 			dependencies: ["51BBBA6F37785CD7"]
-			description: [
-				"Ruby from the deep redstone vein splits into chromium and aluminium in the electrolyzer. Now that you have MV power, bauxite gives you aluminium too."
-			]
+			description: ["Ruby from the deep redstone vein splits into chromium and aluminium in the electrolyzer. Now that you have MV power, bauxite gives you aluminium too."]
 			icon: "gtceu:chromium_ingot"
 			id: "3EB82BACA3DFF6DB"
 			rewards: [{ id: "2CADAAFB5EDA183C", type: "xp", xp: 30 }]
@@ -57,9 +55,7 @@
 		}
 		{
 			dependencies: ["3EB82BACA3DFF6DB"]
-			description: [
-				"Mostly steel, with a little vanadium and chromium. The cutter's saw blade is made of it, and so is the drill bit that can reach the End veins."
-			]
+			description: ["Mostly steel, with a little vanadium and chromium. The cutter's saw blade is made of it, and so is the drill bit that can reach the End veins."]
 			icon: "gtceu:vanadium_steel_ingot"
 			id: "74057E6BDC378944"
 			rewards: [{ id: "41D73766281A9B27", type: "xp", xp: 30 }]
@@ -70,9 +66,7 @@
 		}
 		{
 			dependencies: ["5DC39DF3C1563B6B"]
-			description: [
-				"Iron with chromium, manganese and nickel, through the blast furnace on its two MV hatches. The HV hull and the HV motor are made of it, and the cleanroom needs both."
-			]
+			description: ["Iron with chromium, manganese and nickel, through the blast furnace on its two MV hatches. The HV hull and the HV motor are made of it, and the cleanroom needs both."]
 			icon: "gtceu:stainless_steel_ingot"
 			id: "24DEACCFA4DCD216"
 			rewards: [{ id: "40C419EDB155285F", type: "xp", xp: 30 }]
@@ -83,9 +77,7 @@
 		}
 		{
 			dependencies: ["055851443092A93B"]
-			description: [
-				"The same five parts, one size up, with aluminium and cupronickel where iron and copper used to be. The rest of MV is built from them."
-			]
+			description: ["The same five parts, one size up, with aluminium and cupronickel where iron and copper used to be. The rest of MV is built from them."]
 			icon: "gtceu:mv_electric_motor"
 			id: "51BBBA6F37785CD7"
 			rewards: [{ id: "790DC64279681079", type: "xp", xp: 35 }]
@@ -157,9 +149,7 @@
 		}
 		{
 			dependencies: ["430CFDDFCF9174C1", "74057E6BDC378944"]
-			description: [
-				"Wears down far slower than steel, and drilling fluid slows the wear again. It's the first bit that can bite into the End veins."
-			]
+			description: ["Wears down far slower than steel, and drilling fluid slows the wear again. It's the first bit that can bite into the End veins."]
 			icon: "grindless:vanadium_steel_drill_bit"
 			id: "30D3D68203F455F9"
 			rewards: [{ id: "269EC3BA9860D58B", type: "xp", xp: 25 }]
@@ -198,9 +188,7 @@
 		}
 		{
 			dependencies: ["7C7BAECAD00C19E7"]
-			description: [
-				"Back into the furnace with silicon dust and a pinch of gallium arsenide, and out comes a &6Silicon Boule&r, one big single crystal. All your chips for a long while start as slices of one of these."
-			]
+			description: ["Back into the furnace with silicon dust and a pinch of gallium arsenide, and out comes a &6Silicon Boule&r, one big single crystal. All your chips for a long while start as slices of one of these."]
 			icon: "gtceu:silicon_boule"
 			id: "12A688D7F923740B"
 			rewards: [{ id: "723753988B299A39", type: "xp", xp: 35 }]
@@ -211,9 +199,7 @@
 		}
 		{
 			dependencies: ["12A688D7F923740B", "6213116B3B6723B8"]
-			description: [
-				"The cutter slices a boule into a stack of wafers. Handle them gently; there's a long road between a wafer and a working chip."
-			]
+			description: ["The cutter slices a boule into a stack of wafers. Handle them gently; there's a long road between a wafer and a working chip."]
 			icon: "gtceu:silicon_wafer"
 			id: "086C8CD2541ED490"
 			rewards: [{ id: "0B53DE86A2D8D40B", type: "xp", xp: 30 }]
@@ -260,9 +246,7 @@
 		}
 		{
 			dependencies: ["3AE74DC5E01AD916"]
-			description: [
-				"The &6Pyrolyse Oven&r cooks logs into charcoal and a whole chemistry set of liquids and gases, and the circuit decides which. Nitrogen in the hatch makes it run twice as fast."
-			]
+			description: ["The &6Pyrolyse Oven&r cooks logs into charcoal and a whole chemistry set of liquids and gases, and the circuit decides which. Nitrogen in the hatch makes it run twice as fast."]
 			icon: "gtceu:pyrolyse_oven"
 			id: "7168260562812CF8"
 			rewards: [{ id: "716F10BFB3CF8C10", type: "xp", xp: 35 }]
@@ -303,9 +287,7 @@
 		}
 		{
 			dependencies: ["51BBBA6F37785CD7"]
-			description: [
-				"GregTech's rig pumps oil, gas or salt water from the fluid vein under it. Veins never run dry in this pack, and the Flatlands and the Void have oil and gas too, so pick a spot once and leave it there."
-			]
+			description: ["GregTech's rig pumps oil, gas or salt water from the fluid vein under it. Veins never run dry in this pack, and the Flatlands and the Void have oil and gas too, so pick a spot once and leave it there."]
 			icon: "gtceu:mv_fluid_drilling_rig"
 			id: "1A38798F23E8EA97"
 			rewards: [{ id: "58FE1CD5AD9C17E5", type: "xp", xp: 50 }]
@@ -346,9 +328,7 @@
 		}
 		{
 			dependencies: ["62C555A8293900FA"]
-			description: [
-				"Ethanol and sulfuric acid give ethylene, and ethylene with air or oxygen gives polyethylene, your first plastic. Transistors and the HV hull are both waiting on it."
-			]
+			description: ["Ethanol and sulfuric acid give ethylene, and ethylene with air or oxygen gives polyethylene, your first plastic. Transistors and the HV hull are both waiting on it."]
 			icon: "gtceu:lv_chemical_reactor"
 			id: "0D69D5BBC371A5B7"
 			rewards: [{ id: "5946CE65167C48A5", type: "xp", xp: 30 }]
@@ -359,9 +339,7 @@
 		}
 		{
 			dependencies: ["0D69D5BBC371A5B7", "498077C9A58D9578"]
-			description: [
-				"Chlorine and ethylene make vinyl chloride, and that polymerizes into PVC. The hazmat suit is mostly PVC."
-			]
+			description: ["Chlorine and ethylene make vinyl chloride, and that polymerizes into PVC. The hazmat suit is mostly PVC."]
 			icon: "gtceu:mv_mixer"
 			id: "0F6966AED46B5795"
 			rewards: [{ id: "5DE2D5B9164A186F", type: "xp", xp: 30 }]
@@ -372,9 +350,7 @@
 		}
 		{
 			dependencies: ["0D69D5BBC371A5B7"]
-			description: [
-				"The small parts the integrated circuits eat by the handful. Transistors need silicon and polyethylene, and the plastic only just arrived. The assembler now makes resistors in batches, too."
-			]
+			description: ["The small parts the integrated circuits eat by the handful. Transistors need silicon and polyethylene, and the plastic only just arrived. The assembler now makes resistors in batches, too."]
 			icon: "gtceu:transistor"
 			id: "6A521D8B1437F9E4"
 			rewards: [{ id: "24107FFF763CEE90", type: "xp", xp: 30 }]
@@ -388,9 +364,7 @@
 		}
 		{
 			dependencies: ["4A6B8F971E17C847", "6A521D8B1437F9E4"]
-			description: [
-				"The first circuits with a real chip inside. The basic one counts as an LV circuit and the good one as MV, and the circuit assembler makes both."
-			]
+			description: ["The first circuits with a real chip inside. The basic one counts as an LV circuit and the good one as MV, and the circuit assembler makes both."]
 			icon: "gtceu:good_integrated_circuit"
 			id: "1617CBC90D126D2F"
 			rewards: [{ id: "6E0340634B4E4921", type: "xp", xp: 40 }]
@@ -404,9 +378,7 @@
 		}
 		{
 			dependencies: ["1617CBC90D126D2F", "6A521D8B1437F9E4"]
-			description: [
-				"The HV circuit, made on MV power. It wants a bit of everything the chip line makes, and the cleanroom won't build without it."
-			]
+			description: ["The HV circuit, made on MV power. It wants a bit of everything the chip line makes, and the cleanroom won't build without it."]
 			icon: "gtceu:advanced_integrated_circuit"
 			id: "49BA4B42FA5DD586"
 			rewards: [{ id: "60E0CBE6799FF623", type: "xp", xp: 50 }]
@@ -436,9 +408,7 @@
 		}
 		{
 			dependencies: ["0D69D5BBC371A5B7"]
-			description: [
-				"Hull number three, in stainless steel with polyethylene trim. Both the furnace and the plastic line have to be running for this one."
-			]
+			description: ["Hull number three, in stainless steel with polyethylene trim. Both the furnace and the plastic line have to be running for this one."]
 			icon: "gtceu:hv_machine_hull"
 			id: "01AAEC5F1DC1C5EE"
 			rewards: [{ id: "57FE7D4629271854", type: "xp", xp: 40 }]
@@ -449,9 +419,7 @@
 		}
 		{
 			dependencies: ["01AAEC5F1DC1C5EE"]
-			description: [
-				"The first two HV parts, made ahead of the rest. The cleanroom runs its fans on these motors."
-			]
+			description: ["The first two HV parts, made ahead of the rest. The cleanroom runs its fans on these motors."]
 			icon: "gtceu:hv_electric_motor"
 			id: "21B999C2D0EF51A9"
 			rewards: [{ id: "1C8DB2E0CEAB0D08", type: "xp", xp: 40 }]
@@ -465,9 +433,7 @@
 		}
 		{
 			dependencies: ["1617CBC90D126D2F"]
-			description: [
-				"Applied Flux, which stores FE in the network, and the wireless pattern terminals both need MV circuits in this pack. Build whichever you'll actually use."
-			]
+			description: ["Applied Flux, which stores FE in the network, and the wireless pattern terminals both need MV circuits in this pack. Build whichever you'll actually use."]
 			icon: "ae2:controller"
 			id: "63CD92CD1D3FC989"
 			optional: true
@@ -528,9 +494,7 @@
 		}
 		{
 			dependencies: ["44031073B1E3A181"]
-			description: [
-				"Run diesel through the distillery again and kerosene comes off. Hang on to it; it's halfway to rocket fuel."
-			]
+			description: ["Run diesel through the distillery again and kerosene comes off. Hang on to it; it's halfway to rocket fuel."]
 			icon: "gtceu:kerosene_bucket"
 			id: "6E2B9F41C5A7D038"
 			rewards: [{ id: "7A4D2C90E61B53F8", type: "xp", xp: 30 }]
@@ -541,9 +505,7 @@
 		}
 		{
 			dependencies: ["6E2B9F41C5A7D038"]
-			description: [
-				"One more pass through the distillery turns kerosene into &6RP-1&r, rocket-grade kerosene. The engine test stand burns it with oxygen."
-			]
+			description: ["One more pass through the distillery turns kerosene into &6RP-1&r, rocket-grade kerosene. The engine test stand burns it with oxygen."]
 			icon: "gtceu:rp_1_rocket_fuel_bucket"
 			id: "4B8E1D73A0F25C69"
 			rewards: [{ id: "1D5E8B2A7C90F436", type: "xp", xp: 40 }]
@@ -554,9 +516,7 @@
 		}
 		{
 			dependencies: ["115744A9113F8B38"]
-			description: [
-				"A set of power thrusters goes on the stand together for a static fire on RP-1 and oxygen, and comes off qualified. HV's rocket motor only takes qualified thrusters."
-			]
+			description: ["A set of power thrusters goes on the stand together for a static fire on RP-1 and oxygen, and comes off qualified. HV's rocket motor only takes qualified thrusters."]
 			icon: "grindless:qualified_power_thruster"
 			id: "3A9D0C6F82B14E57"
 			rewards: [{ id: "5E0A7D3C1F92B684", type: "xp", xp: 50 }]
@@ -567,9 +527,7 @@
 		}
 		{
 			dependencies: ["4B8E1D73A0F25C69"]
-			description: [
-				"Fires rocket engines while they're bolted to the ground, which is the right order to do things in. Your first rocket's thrusters and its motor both get a burn here before they're allowed to fly."
-			]
+			description: ["Fires rocket engines while they're bolted to the ground, which is the right order to do things in. Your first rocket's thrusters and its motor both get a burn here before they're allowed to fly."]
 			icon: "gtceu:engine_test_stand"
 			id: "115744A9113F8B38"
 			rewards: [{ id: "2B6F4C9E8D0A17E3", type: "xp", xp: 60 }]
@@ -582,9 +540,7 @@
 		}
 		{
 			dependencies: ["51BBBA6F37785CD7", "47892302FAEA3244"]
-			description: [
-				"The blaze model you printed in LV gets to run now, in an MV simulator. Blaze rods lead to ender eyes, and ender eyes lead to the End."
-			]
+			description: ["The blaze model you printed in LV gets to run now, in an MV simulator. Blaze rods lead to ender eyes, and ender eyes lead to the End."]
 			icon: "minecraft:blaze_rod"
 			id: "3C356A1439744E15"
 			rewards: [{ id: "5C2423EF0233FD7F", type: "xp", xp: 30 }]
@@ -598,9 +554,7 @@
 		}
 		{
 			dependencies: ["3C356A1439744E15"]
-			description: [
-				"No crafting-table eyes in this pack. The extractor melts blaze rods into liquid blaze, and the MV chemical bath soaks an ender pearl in it until it comes out as an eye."
-			]
+			description: ["No crafting-table eyes in this pack. The extractor melts blaze rods into liquid blaze, and the MV chemical bath soaks an ender pearl in it until it comes out as an eye."]
 			icon: "minecraft:ender_eye"
 			id: "3DDBE9267C197FEE"
 			rewards: [{ id: "455F4629A4E480F9", type: "xp", xp: 35 }]
@@ -614,9 +568,7 @@
 		}
 		{
 			dependencies: ["3DDBE9267C197FEE"]
-			description: [
-				"The &6End Key&r drops you on a safe platform well away from the main island, and brings you home again. You're here for ore; the dragon can keep its island."
-			]
+			description: ["The &6End Key&r drops you on a safe platform well away from the main island, and brings you home again. You're here for ore; the dragon can keep its island."]
 			icon: "grindless:end_key"
 			id: "756117B334515EA3"
 			rewards: [{ id: "1232F0B14764A6C8", type: "xp", xp: 30 }]
@@ -627,9 +579,7 @@
 		}
 		{
 			dependencies: ["756117B334515EA3", "30D3D68203F455F9"]
-			description: [
-				"Bring back raw ore from each End vein and make the samples at home, same as ever. The MV drill runs them with a vanadium steel bit and drilling fluid in the tank, and platinum, palladium and zirconium come up with the rest."
-			]
+			description: ["Bring back raw ore from each End vein and make the samples at home, same as ever. The MV drill runs them with a vanadium steel bit and drilling fluid in the tank, and platinum, palladium and zirconium come up with the rest."]
 			icon: "grindless:vein_sample_sheldonite"
 			id: "004525B795119B1B"
 			rewards: [{ id: "6BC885CD026BAD65", type: "xp", xp: 40 }]
@@ -645,9 +595,7 @@
 		}
 		{
 			dependencies: ["51BBBA6F37785CD7"]
-			description: [
-				"Eleven shaping machines share one controller, from the bender and wiremill to the lathe and cutter, and its mode tab picks which one it is. It runs a few recipes at once, each at full price: less floor space, same power bill."
-			]
+			description: ["Eleven shaping machines share one controller, from the bender and wiremill to the lathe and cutter, and its mode tab picks which one it is. It runs a few recipes at once, each at full price: less floor space, same power bill."]
 			icon: "gtceu:universal_processing_factory"
 			id: "627E186404378CB4"
 			rewards: [{ id: "2D3C6C97135BC1D7", type: "xp", xp: 50 }]
@@ -658,9 +606,7 @@
 		}
 		{
 			dependencies: ["627E186404378CB4"]
-			description: [
-				"The assembler and the circuit assembler in one hall. If a recipe needs a cleanroom, so does this."
-			]
+			description: ["The assembler and the circuit assembler in one hall. If a recipe needs a cleanroom, so does this."]
 			icon: "gtceu:universal_assembly_factory"
 			id: "661F318CAF9FAB23"
 			rewards: [{ id: "36FBB71246272AC6", type: "xp", xp: 50 }]
@@ -671,9 +617,7 @@
 		}
 		{
 			dependencies: ["661F318CAF9FAB23"]
-			description: [
-				"Seven ways of taking things apart in one hall, from the centrifuge and electrolyzer to the electromagnetic separator. Each output hatch holds one fluid, so give it one for every fluid a recipe makes."
-			]
+			description: ["Seven ways of taking things apart in one hall, from the centrifuge and electrolyzer to the electromagnetic separator. Each output hatch holds one fluid, so give it one for every fluid a recipe makes."]
 			icon: "gtceu:universal_separation_factory"
 			id: "12DED2DD9F460B1E"
 			rewards: [{ id: "1BC8ED62911B2B29", type: "xp", xp: 50 }]
@@ -684,9 +628,7 @@
 		}
 		{
 			dependencies: ["12DED2DD9F460B1E"]
-			description: [
-				"The mixer, chemical reactor, chemical bath and ore washer under one roof. Dry mixes don't need a single hatch."
-			]
+			description: ["The mixer, chemical reactor, chemical bath and ore washer under one roof. Dry mixes don't need a single hatch."]
 			icon: "gtceu:universal_mixing_factory"
 			id: "334DF899A63DBB13"
 			rewards: [{ id: "6CD8011712E8A87D", type: "xp", xp: 50 }]
@@ -697,9 +639,7 @@
 		}
 		{
 			dependencies: ["334DF899A63DBB13"]
-			description: [
-				"Throw in a mixed batch and it smelts everything that shares a cooking time in one run, dusts and dinner alike. Each better coil doubles how much it takes at once."
-			]
+			description: ["Throw in a mixed batch and it smelts everything that shares a cooking time in one run, dusts and dinner alike. Each better coil doubles how much it takes at once."]
 			icon: "gtceu:advanced_multi_smelter"
 			id: "1DAF5DAC3FE8DF4E"
 			rewards: [{ id: "1CA714AF20413892", type: "xp", xp: 50 }]
@@ -710,9 +650,7 @@
 		}
 		{
 			dependencies: ["1DAF5DAC3FE8DF4E"]
-			description: [
-				"Smelts with lava for heat and needs no power at all. It won't make lava, mind you, only burn it."
-			]
+			description: ["Smelts with lava for heat and needs no power at all. It won't make lava, mind you, only burn it."]
 			icon: "gtceu:lava_furnace"
 			id: "7F6788F6AAD7AE1B"
 			rewards: [{ id: "31EB13E7D3C67344", type: "xp", xp: 40 }]
@@ -737,9 +675,7 @@
 		}
 		{
 			dependencies: ["0D69D5BBC371A5B7"]
-			description: [
-				"The &6Polymer Works&r turns raw inputs into polyethylene and rubber sheets in a single recipe, with no chemical reactor, mixer and solidifier chain in between. It runs several at once, up to what your hatch voltage allows."
-			]
+			description: ["The &6Polymer Works&r turns raw inputs into polyethylene and rubber sheets in a single recipe, with no chemical reactor, mixer and solidifier chain in between. It runs several at once, up to what your hatch voltage allows."]
 			icon: "gtceu:polymer_works"
 			id: "3B42346CE2FA1CC4"
 			rewards: [

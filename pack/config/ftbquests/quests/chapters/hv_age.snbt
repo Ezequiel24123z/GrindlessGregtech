@@ -27,9 +27,7 @@
 		}
 		{
 			dependencies: ["3610F788A08B9FD3"]
-			description: [
-				"Another tier, another round of motors, pumps and arms, mostly in stainless steel this time. You'll be making these for the rest of the age, so an assembler that does nothing else isn't a bad idea."
-			]
+			description: ["Another tier, another round of motors, pumps and arms, mostly in stainless steel this time. You'll be making these for the rest of the age, so an assembler that does nothing else isn't a bad idea."]
 			icon: "gtceu:hv_electric_motor"
 			id: "5B595A919C80BFC0"
 			rewards: [{ id: "5B58F6733D9F1DB6", type: "xp", xp: 35 }]
@@ -46,9 +44,7 @@
 		}
 		{
 			dependencies: ["5B595A919C80BFC0"]
-			description: [
-				"The drill family grows again: one HV hatch now runs more bores at once. It knows every vein the smaller drills do, Earth and End alike, and your pickaxe stays retired."
-			]
+			description: ["The drill family grows again: one HV hatch now runs more bores at once. It knows every vein the smaller drills do, Earth and End alike, and your pickaxe stays retired."]
 			icon: "gtceu:hv_vein_drill"
 			id: "721FA9268C278B3F"
 			rewards: [
@@ -64,9 +60,7 @@
 		}
 		{
 			dependencies: ["721FA9268C278B3F"]
-			description: [
-				"The HV drill's own bit, in stainless steel. If you run out, the old vanadium steel bit still fits, so the drill never has to sit idle."
-			]
+			description: ["The HV drill's own bit, in stainless steel. If you run out, the old vanadium steel bit still fits, so the drill never has to sit idle."]
 			icon: "grindless:stainless_steel_drill_bit"
 			id: "2CD2C8EF5A408796"
 			rewards: [{ id: "396C938D1616ED8E", type: "xp", xp: 25 }]
@@ -77,9 +71,7 @@
 		}
 		{
 			dependencies: ["5B595A919C80BFC0"]
-			description: [
-				"The greenhouse's HV size: same crops, more bores per run. HV doesn't need more wood than MV did, because the new carbon comes up out of the ground as crude oil."
-			]
+			description: ["The greenhouse's HV size: same crops, more bores per run. HV doesn't need more wood than MV did, because the new carbon comes up out of the ground as crude oil."]
 			icon: "gtceu:hv_greenhouse"
 			id: "3C06724477E3E0BB"
 			rewards: [
@@ -144,9 +136,7 @@
 		}
 		{
 			dependencies: ["5C5D6FB9ECB7BC51"]
-			description: [
-				"The refinery eats a &6Hydrotreating Catalyst&r every so often, so keep spares in its input bus. Cobalt comes from the nickel vein and molybdenum from the Nether, and the syngas plant's ash can stand in for the silica."
-			]
+			description: ["The refinery eats a &6Hydrotreating Catalyst&r every so often, so keep spares in its input bus. Cobalt comes from the nickel vein and molybdenum from the Nether, and the syngas plant's ash can stand in for the silica."]
 			icon: "grindless:hydrotreating_catalyst"
 			id: "64F01001238ACD74"
 			rewards: [{ id: "7BB92FDB97461071", type: "xp", xp: 30 }]
@@ -188,9 +178,7 @@
 		}
 		{
 			dependencies: ["52781D6F5A69C4BE"]
-			description: [
-				"Platinum on silica, and the platinum comes from the End's sheldonite vein. That End sample in your drill finally earns its keep."
-			]
+			description: ["Platinum on silica, and the platinum comes from the End's sheldonite vein. That End sample in your drill finally earns its keep."]
 			icon: "grindless:reforming_catalyst"
 			id: "045FA73ADE3D0624"
 			rewards: [{ id: "5669400C0C30D05F", type: "xp", xp: 30 }]
@@ -245,9 +233,7 @@
 		}
 		{
 			dependencies: ["3B7E2C9A41D06F85"]
-			description: [
-				"&6Ablative Heat-Shield Tiles&r are fiberglass soaked in epoxy and cured under nitrogen. They sit at the base of each motor and burn away so the motor doesn't."
-			]
+			description: ["&6Ablative Heat-Shield Tiles&r are fiberglass soaked in epoxy and cured under nitrogen. They sit at the base of each motor and burn away so the motor doesn't."]
 			icon: "grindless:ablative_heat_shield_tile"
 			id: "6D0A4F18B2E93C57"
 			rewards: [{ id: "2C6E9B0F4D17A853", type: "xp", xp: 45 }]
@@ -258,9 +244,7 @@
 		}
 		{
 			dependencies: ["471A024EBFCA8459", "3B7E2C9A41D06F85"]
-			description: [
-				"An &6Overwrapped Tank&r is a stainless steel drum wrapped in para-aramid and cured in epoxy, light and very hard to burst. The rocket's fuel tanks are built around them."
-			]
+			description: ["An &6Overwrapped Tank&r is a stainless steel drum wrapped in para-aramid and cured in epoxy, light and very hard to burst. The rocket's fuel tanks are built around them."]
 			icon: "grindless:composite_overwrapped_tank"
 			id: "1F8C57E2A6D40B93"
 			rewards: [{ id: "7F1A4D82B0E6C395", type: "xp", xp: 45 }]
@@ -271,9 +255,7 @@
 		}
 		{
 			dependencies: ["6D0A4F18B2E93C57"]
-			description: [
-				"The &6Untested Rocket Motor&r is where the qualified thrusters and heat-shield tiles come together, on a stainless steel frame. The name is honest."
-			]
+			description: ["The &6Untested Rocket Motor&r is where the qualified thrusters and heat-shield tiles come together, on a stainless steel frame. The name is honest."]
 			icon: "grindless:untested_rocket_motor"
 			id: "5E26B9D13A7C08F4"
 			rewards: [{ id: "305E3C97D2A18F64", type: "xp", xp: 50 }]
@@ -341,9 +323,7 @@
 		}
 		{
 			dependencies: ["35719B747A75F7B6"]
-			description: [
-				"The rocket stands on a square of &6Launch Pads&r with a short tower of stainless steel frames. The scanner's EMI page shows where every block goes."
-			]
+			description: ["The rocket stands on a square of &6Launch Pads&r with a short tower of stainless steel frames. The scanner's EMI page shows where every block goes."]
 			icon: "gcyr:launch_pad"
 			id: "7B21622AADB1E1D1"
 			rewards: [{ id: "559F7D571DE034D2", type: "xp", xp: 30 }]
@@ -376,9 +356,7 @@
 		}
 		{
 			dependencies: ["5C1D3FB96A9FB74A", "4A6E81ABD8026025", "7B21622AADB1E1D1"]
-			description: [
-				"Motors on the pad, tanks on the motors, the &6Seat&r on top, all in front of the &6Rocket Scanner&r. Right-click the scanner and press Build, and the pile of blocks becomes a rocket."
-			]
+			description: ["Motors on the pad, tanks on the motors, the &6Seat&r on top, all in front of the &6Rocket Scanner&r. Right-click the scanner and press Build, and the pile of blocks becomes a rocket."]
 			icon: "gcyr:rocket_scanner"
 			id: "5151DE8D3623EDCF"
 			rewards: [{ id: "6C490E4AB37CEB62", type: "xp", xp: 60 }]
@@ -474,9 +452,7 @@
 		}
 		{
 			dependencies: ["24DEACCFA4DCD216"]
-			description: [
-				"A &6Stainless Steel Drum&r holds a lot of fluid and keeps it when you pick it up. It's also the liner inside the rocket's overwrapped tanks, so make a few extra."
-			]
+			description: ["A &6Stainless Steel Drum&r holds a lot of fluid and keeps it when you pick it up. It's also the liner inside the rocket's overwrapped tanks, so make a few extra."]
 			icon: "gtceu:stainless_steel_drum"
 			id: "471A024EBFCA8459"
 			rewards: [{ id: "6707FD083533EF59", type: "xp", xp: 30 }]
@@ -501,9 +477,7 @@
 		}
 		{
 			dependencies: ["35719B747A75F7B6"]
-			description: [
-				"The &6Coil Chemical Plant&r is a large chemical reactor that heats with coils. The better the coil, the more recipes it runs at once, and a good coil also trims the energy bill."
-			]
+			description: ["The &6Coil Chemical Plant&r is a large chemical reactor that heats with coils. The better the coil, the more recipes it runs at once, and a good coil also trims the energy bill."]
 			icon: "gtceu:coil_chemical_plant"
 			id: "5731FF20BC9CBDD9"
 			rewards: [

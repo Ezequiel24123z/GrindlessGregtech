@@ -27,9 +27,7 @@
 		}
 		{
 			dependencies: ["5795EAFBAB034E45"]
-			description: [
-				"The &6Assembler&r puts parts together into finished pieces, and here it builds a surprising amount: the blast furnace's coils, the heliostat mirrors, the creature models and AE2's network blocks. It rarely sits idle."
-			]
+			description: ["The &6Assembler&r puts parts together into finished pieces, and here it builds a surprising amount: the blast furnace's coils, the heliostat mirrors, the creature models and AE2's network blocks. It rarely sits idle."]
 			icon: "gtceu:lv_assembler"
 			id: "6D668A4CB9B8384A"
 			rewards: [{ id: "1B81E3E9597DAE9B", type: "xp", xp: 30 }]
@@ -40,9 +38,7 @@
 		}
 		{
 			dependencies: ["6D668A4CB9B8384A"]
-			description: [
-				"They make the blast furnace's heating ring. The coil decides how hot the furnace gets, and the heat decides what it can make. Cupronickel is the first and coolest of them; you'll be back for better ones."
-			]
+			description: ["They make the blast furnace's heating ring. The coil decides how hot the furnace gets, and the heat decides what it can make. Cupronickel is the first and coolest of them; you'll be back for better ones."]
 			icon: "gtceu:cupronickel_coil_block"
 			id: "5C7A2E94B1D03F68"
 			rewards: [{ id: "2B8E4D1A7C09F356", type: "xp", xp: 35 }]
@@ -53,9 +49,7 @@
 		}
 		{
 			dependencies: ["1AC672110DFD0C14"]
-			description: [
-				"Motor, piston, pump, conveyor and robot arm. Nearly every LV machine is some mix of the five. Keep a few of each in a chest and you'll walk to the crafting table a lot less."
-			]
+			description: ["Motor, piston, pump, conveyor and robot arm. Nearly every LV machine is some mix of the five. Keep a few of each in a chest and you'll walk to the crafting table a lot less."]
 			icon: "gtceu:lv_electric_motor"
 			id: "5795EAFBAB034E45"
 			rewards: [{ id: "4B9A14388EC1DE1F", type: "xp", xp: 35 }]
@@ -100,9 +94,7 @@
 		}
 		{
 			dependencies: ["766C58FC4FAC6D61"]
-			description: [
-				"Heat and spin turn washed ore into refined ore, and a second byproduct falls out on the way. The macerator then grinds it into clean dust. In MV the Ore Plant does all of this in one building."
-			]
+			description: ["Heat and spin turn washed ore into refined ore, and a second byproduct falls out on the way. The macerator then grinds it into clean dust. In MV the Ore Plant does all of this in one building."]
 			icon: "gtceu:lv_thermal_centrifuge"
 			id: "18D60FF391B2F8DC"
 			rewards: [{ id: "7C387B8FD56D62F2", type: "xp", xp: 30 }]
@@ -261,9 +253,7 @@
 		}
 		{
 			dependencies: ["29B4717D718C6BB5"]
-			description: [
-				"Both models print at LV, but the creeper and the blaze only run in an MV simulator. Make them now and they'll be waiting."
-			]
+			description: ["Both models print at LV, but the creeper and the blaze only run in an MV simulator. Make them now and they'll be waiting."]
 			icon: "grindless:creature_model_creeper"
 			id: "47892302FAEA3244"
 			optional: true
@@ -278,9 +268,7 @@
 		}
 		{
 			dependencies: ["5795EAFBAB034E45"]
-			description: [
-				"It breathes in air for the centrifuge to split into nitrogen and oxygen. Stock GregTech only lets it do that in the Overworld; here the Void and the Flatlands work too."
-			]
+			description: ["It breathes in air for the centrifuge to split into nitrogen and oxygen. Stock GregTech only lets it do that in the Overworld; here the Void and the Flatlands work too."]
 			icon: "gtceu:lv_gas_collector"
 			id: "09FAB2A84C90B5D6"
 			rewards: [{ id: "4C62188771A6494D", type: "xp", xp: 30 }]
@@ -291,9 +279,7 @@
 		}
 		{
 			dependencies: ["09FAB2A84C90B5D6"]
-			description: [
-				"It pulls compounds apart with electricity and nothing else. Its big job right now is sapphire, which splits into aluminium and oxygen, and aluminium is your way into MV."
-			]
+			description: ["It pulls compounds apart with electricity and nothing else. Its big job right now is sapphire, which splits into aluminium and oxygen, and aluminium is your way into MV."]
 			icon: "gtceu:lv_electrolyzer"
 			id: "50622961B58725B8"
 			rewards: [{ id: "1737F89DF7F3A701", type: "xp", xp: 30 }]
@@ -318,9 +304,7 @@
 		}
 		{
 			dependencies: ["09155B5B0F1BE994"]
-			description: [
-				"It mixes things, as advertised. Here that means drilling fluid, gallium arsenide, the roaster's catalyst and AE2's fluix crystal."
-			]
+			description: ["It mixes things, as advertised. Here that means drilling fluid, gallium arsenide, the roaster's catalyst and AE2's fluix crystal."]
 			icon: "gtceu:lv_mixer"
 			id: "3C89167418EA462B"
 			rewards: [{ id: "3FE8B3BDBC000C5D", type: "xp", xp: 30 }]
@@ -331,9 +315,7 @@
 		}
 		{
 			dependencies: ["3879D8323DF4F8BB"]
-			description: [
-				"It makes circuits in batches and takes the soldering off your hands. Its own recipe asks for MV circuits, so it waits until you've made a few of those by hand."
-			]
+			description: ["It makes circuits in batches and takes the soldering off your hands. Its own recipe asks for MV circuits, so it waits until you've made a few of those by hand."]
 			icon: "gtceu:lv_circuit_assembler"
 			id: "220C6C2F1D568194"
 			rewards: [{ id: "32A9BD5A41455BB9", type: "xp", xp: 35 }]
@@ -344,9 +326,7 @@
 		}
 		{
 			dependencies: ["09155B5B0F1BE994"]
-			description: [
-				"A better board than the resin one. The phenolic board gets etched with silver foil in sodium persulfate or iron chloride, whichever you have more of, and both come out of the chemistry you just set up."
-			]
+			description: ["A better board than the resin one. The phenolic board gets etched with silver foil in sodium persulfate or iron chloride, whichever you have more of, and both come out of the chemistry you just set up."]
 			icon: "gtceu:phenolic_printed_circuit_board"
 			id: "5F2D3E9A2F35D8E0"
 			rewards: [{ id: "3CCE26DF092C48D3", type: "xp", xp: 30 }]
@@ -371,9 +351,7 @@
 		}
 		{
 			dependencies: ["0785A341666D046E"]
-			description: [
-				"You can make the &6Good Electronic Circuit&r by hand, no MV power needed. Good thing, too, because the circuit assembler won't build without it. Make a few."
-			]
+			description: ["You can make the &6Good Electronic Circuit&r by hand, no MV power needed. Good thing, too, because the circuit assembler won't build without it. Make a few."]
 			icon: "gtceu:good_electronic_circuit"
 			id: "3879D8323DF4F8BB"
 			rewards: [{ id: "7A7D7E619B5877B2", type: "xp", xp: 45 }]
@@ -384,9 +362,7 @@
 		}
 		{
 			dependencies: ["220C6C2F1D568194"]
-			description: [
-				"The press stamps shaped parts out of plates. In this pack it also stamps AE2's processor presses out of steel plate, so you can skip the meteorite hunting."
-			]
+			description: ["The press stamps shaped parts out of plates. In this pack it also stamps AE2's processor presses out of steel plate, so you can skip the meteorite hunting."]
 			icon: "gtceu:lv_forming_press"
 			id: "2C50918B882FA400"
 			rewards: [{ id: "04A087AC4B66AAE9", type: "xp", xp: 30 }]
@@ -397,9 +373,7 @@
 		}
 		{
 			dependencies: ["2C50918B882FA400"]
-			description: [
-				"Graphite dust from the diamond vein, pressed around a steel rod. The arc furnace burns through one now and then, the way the drill eats bits. Spares go in its bus."
-			]
+			description: ["Graphite dust from the diamond vein, pressed around a steel rod. The arc furnace burns through one now and then, the way the drill eats bits. Spares go in its bus."]
 			icon: "grindless:graphite_electrode"
 			id: "4767E74EF8428F44"
 			rewards: [{ id: "4BD45FED6F5C4863", type: "xp", xp: 30 }]
@@ -426,9 +400,7 @@
 		}
 		{
 			dependencies: ["62D5FBAC11D478E9"]
-			description: [
-				"The autoclave grows certus dust into crystals in water, and distilled water does it faster and never fails. GregTech's machines hand out AE2's crystal here, so the ore line and the network share one pile."
-			]
+			description: ["The autoclave grows certus dust into crystals in water, and distilled water does it faster and never fails. GregTech's machines hand out AE2's crystal here, so the ore line and the network share one pile."]
 			icon: "ae2:certus_quartz_crystal"
 			id: "3D374AE4AF789B83"
 			rewards: [{ id: "5686983FDF28C1EF", type: "xp", xp: 30 }]
@@ -439,9 +411,7 @@
 		}
 		{
 			dependencies: ["3D374AE4AF789B83"]
-			description: [
-				"AE2's own &6Inscriber&r and &6Charger&r, built in the assembler from GregTech parts instead of a handful of iron. Once they're down they work exactly like they do anywhere else."
-			]
+			description: ["AE2's own &6Inscriber&r and &6Charger&r, built in the assembler from GregTech parts instead of a handful of iron. Once they're down they work exactly like they do anywhere else."]
 			icon: "ae2:inscriber"
 			id: "28CA19174EBE8705"
 			rewards: [{ id: "3EDF966589041684", type: "xp", xp: 35 }]
@@ -455,9 +425,7 @@
 		}
 		{
 			dependencies: ["28CA19174EBE8705"]
-			description: [
-				"The charger you just built and GregTech's polarizer both charge certus, and they make the same crystal. Use whichever one isn't busy."
-			]
+			description: ["The charger you just built and GregTech's polarizer both charge certus, and they make the same crystal. Use whichever one isn't busy."]
 			icon: "ae2:charged_certus_quartz_crystal"
 			id: "19778BA6D436527A"
 			rewards: [{ id: "78479C7E6FA1CB30", type: "xp", xp: 30 }]
@@ -468,9 +436,7 @@
 		}
 		{
 			dependencies: ["19778BA6D436527A"]
-			description: [
-				"The mixer makes fluix from charged certus, redstone and quartzite dust. Quartzite stands in for Nether quartz here, and this one needs no trip at all."
-			]
+			description: ["The mixer makes fluix from charged certus, redstone and quartzite dust. Quartzite stands in for Nether quartz here, and this one needs no trip at all."]
 			icon: "ae2:fluix_crystal"
 			id: "382D3153A231CEBF"
 			rewards: [{ id: "18C037E708F2E829", type: "xp", xp: 30 }]
@@ -481,9 +447,7 @@
 		}
 		{
 			dependencies: ["382D3153A231CEBF"]
-			description: [
-				"The forming press stamps the presses and the inscriber uses them the usual way. Any one counts here. Make whichever your next build needs."
-			]
+			description: ["The forming press stamps the presses and the inscriber uses them the usual way. Any one counts here. Make whichever your next build needs."]
 			icon: "ae2:logic_processor_press"
 			id: "7F321CF5445BE4CA"
 			rewards: [{ id: "26CC9027970196F1", type: "xp", xp: 30 }]
@@ -517,9 +481,7 @@
 		}
 		{
 			dependencies: ["0BB3182B7BA1B9AF"]
-			description: [
-				"With an interface, a pattern provider and a molecular assembler, the network starts crafting for you. They're LV hull builds too, around AE2's usual cores, and the annihilation core takes a quartzite gem where AE2 would ask for Nether quartz."
-			]
+			description: ["With an interface, a pattern provider and a molecular assembler, the network starts crafting for you. They're LV hull builds too, around AE2's usual cores, and the annihilation core takes a quartzite gem where AE2 would ask for Nether quartz."]
 			icon: "ae2:interface"
 			id: "3B94B80BD64D83F2"
 			rewards: [{ id: "3AEB32EA0C418EC9", type: "xp", xp: 35 }]
@@ -534,9 +496,7 @@
 		}
 		{
 			dependencies: ["3B94B80BD64D83F2"]
-			description: [
-				"A terminal to see everything and a crafting CPU to plan the jobs. From here on AE2 is plain AE2, and the Applied Energistics tab has the rest."
-			]
+			description: ["A terminal to see everything and a crafting CPU to plan the jobs. From here on AE2 is plain AE2, and the Applied Energistics tab has the rest."]
 			icon: "ae2:terminal"
 			id: "09539172C5EF719B"
 			rewards: [{ id: "083A7ABE76B72B69", type: "xp", xp: 40 }]
@@ -567,9 +527,7 @@
 		}
 		{
 			dependencies: ["7853BCDA154074E2"]
-			description: [
-				"Another hull, one tier up. Its casing is aluminium, hence the wait for the ingots."
-			]
+			description: ["Another hull, one tier up. Its casing is aluminium, hence the wait for the ingots."]
 			icon: "gtceu:mv_machine_hull"
 			id: "0B26AF4B18A1BE7D"
 			rewards: [{ id: "67869852D11F151B", type: "xp", xp: 40 }]
@@ -614,9 +572,7 @@
 		}
 		{
 			dependencies: ["6D668A4CB9B8384A"]
-			description: [
-				"Glass with a silver emulsion, made in the assembler. The optical observatory exposes them to the Moon, and this time the Moon draws itself."
-			]
+			description: ["Glass with a silver emulsion, made in the assembler. The optical observatory exposes them to the Moon, and this time the Moon draws itself."]
 			icon: "grindless:photographic_plate"
 			id: "365B9E86E3AA4894"
 			rewards: [{ id: "5422CC6BEE374C8F", type: "xp", xp: 30 }]
@@ -643,9 +599,7 @@
 		}
 		{
 			dependencies: ["3D32B4FC8AEE49CE"]
-			description: [
-				"The plates come back with crater chains, cracks and long shadows along the terminator, and for the first time you can tell flat ground from rough. The same run gives you the ephemeris too."
-			]
+			description: ["The plates come back with crater chains, cracks and long shadows along the terminator, and for the first time you can tell flat ground from rough. The same run gives you the ephemeris too."]
 			icon: "grindless:lunar_map"
 			id: "101BAA038F0ACAA6"
 			rewards: [{ id: "763B0BB08C2440D6", type: "xp", xp: 40 }]
@@ -656,9 +610,7 @@
 		}
 		{
 			dependencies: ["101BAA038F0ACAA6"]
-			description: [
-				"Tables of where the Moon will be on any night, worked out from the same plates as the map. The radio telescope in MV reads both and never uses them up."
-			]
+			description: ["Tables of where the Moon will be on any night, worked out from the same plates as the map. The radio telescope in MV reads both and never uses them up."]
 			icon: "grindless:lunar_ephemeris"
 			id: "1EEB24C2AB3EF4B0"
 			rewards: [{ id: "3F3B1C55D2A048F1", type: "xp", xp: 40 }]
@@ -683,9 +635,7 @@
 		}
 		{
 			dependencies: ["30B1A00EBEC54B6D"]
-			description: [
-				"The roaster burns sulfide ores in air, and the sulfur comes out as sulfuric acid instead of a cloud. The heat comes back as steam for your turbines."
-			]
+			description: ["The roaster burns sulfide ores in air, and the sulfur comes out as sulfuric acid instead of a cloud. The heat comes back as steam for your turbines."]
 			icon: "gtceu:sulfide_roaster"
 			id: "5A176E45F8E64ED7"
 			rewards: [{ id: "6A1E3C0D9B2F4E58", type: "xp", xp: 35 }]
@@ -696,9 +646,7 @@
 		}
 		{
 			dependencies: ["5A176E45F8E64ED7"]
-			description: [
-				"Roast galena and silver nuggets drop out with the lead oxide. The heliostat mirrors and the photographic plates both want silver."
-			]
+			description: ["Roast galena and silver nuggets drop out with the lead oxide. The heliostat mirrors and the photographic plates both want silver."]
 			icon: "gtceu:silver_nugget"
 			id: "2B7D9F41C0E83A65"
 			rewards: [{ id: "34D2F60B19C7E853", type: "xp", xp: 35 }]
@@ -709,9 +657,7 @@
 		}
 		{
 			dependencies: ["3A7E2C5F1B9D4061"]
-			description: [
-				"A steel multiblock tank soaks up the tower's daytime steam so the turbines keep turning after dark. A long night with a lot of turbines needs more than one."
-			]
+			description: ["A steel multiblock tank soaks up the tower's daytime steam so the turbines keep turning after dark. A long night with a lot of turbines needs more than one."]
 			icon: "gtceu:steel_multiblock_tank"
 			id: "1D9C4B27E05F8A36"
 			rewards: [{ id: "5E0A7C93D2B14F68", type: "xp", xp: 35 }]
@@ -722,9 +668,7 @@
 		}
 		{
 			dependencies: ["6D668A4CB9B8384A"]
-			description: [
-				"The heliostat tower needs a whole field of these behind it, each angled to throw sunlight at the top. They're silvered glass. Get the silver going before you start on them."
-			]
+			description: ["The heliostat tower needs a whole field of these behind it, each angled to throw sunlight at the top. They're silvered glass. Get the silver going before you start on them."]
 			icon: "grindless:heliostat_mirror"
 			id: "2F6B1D9A8C4E0527"
 			rewards: [{ id: "7B1F4C8E2D05A930", type: "xp", xp: 40 }]
@@ -763,9 +707,7 @@
 		}
 		{
 			dependencies: ["1AC672110DFD0C14"]
-			description: [
-				"The &6Wire Works&r puts a wiremill and a bender in one box, so wire and plate come off the same line. Several recipes run side by side, as many as your hatch voltage can feed."
-			]
+			description: ["The &6Wire Works&r puts a wiremill and a bender in one box, so wire and plate come off the same line. Several recipes run side by side, as many as your hatch voltage can feed."]
 			icon: "gtceu:wire_works"
 			id: "70655BD4956EB088"
 			rewards: [

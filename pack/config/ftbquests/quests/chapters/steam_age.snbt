@@ -27,9 +27,7 @@
 		}
 		{
 			dependencies: ["3041A191AB566E3E"]
-			description: [
-				"Smelt clay into bricks. The boiler and the bricked casings of the steam machines are built on them, and the clay you got for finishing bronze was meant for exactly this."
-			]
+			description: ["Smelt clay into bricks. The boiler and the bricked casings of the steam machines are built on them, and the clay you got for finishing bronze was meant for exactly this."]
 			icon: "minecraft:bricks"
 			id: "2504804D432C502B"
 			rewards: [{ id: "2A35AC3AAAB1DF17", type: "xp", xp: 20 }]
@@ -40,9 +38,7 @@
 		}
 		{
 			dependencies: ["3041A191AB566E3E"]
-			description: [
-				"The coke oven wants its own bricks, and they take a few more steps than the plain kind: a carved wooden form, coke clay, then the furnace. The form never leaves the grid, so one carving lasts forever."
-			]
+			description: ["The coke oven wants its own bricks, and they take a few more steps than the plain kind: a carved wooden form, coke clay, then the furnace. The form never leaves the grid, so one carving lasts forever."]
 			icon: "gtceu:coke_oven_bricks"
 			id: "2FF295FBA78AF335"
 			rewards: [{ id: "6A7800690D415A43", type: "xp", xp: 25 }]
@@ -147,9 +143,7 @@
 		}
 		{
 			dependencies: ["4F0049B2E382BA8E"]
-			description: [
-				"GregTech's miner chews through the ore under it, block by block, until there's nothing left. Don't scrap it when it runs dry; the steam vein drill is built around one."
-			]
+			description: ["GregTech's miner chews through the ore under it, block by block, until there's nothing left. Don't scrap it when it runs dry; the steam vein drill is built around one."]
 			icon: "gtceu:lp_steam_miner"
 			id: "3E65A226A598A301"
 			rewards: [{ id: "000E98439123F51B", type: "xp", xp: 30 }]
@@ -174,9 +168,7 @@
 		}
 		{
 			dependencies: ["4F0049B2E382BA8E"]
-			description: [
-				"GregTech won't let you pack nuggets into ingots by hand, so the compressor does it. It also presses wood dust into the wood plates the first circuit boards start from, and fireclay dust into bricks ready for the furnace."
-			]
+			description: ["GregTech won't let you pack nuggets into ingots by hand, so the compressor does it. It also presses wood dust into the wood plates the first circuit boards start from, and fireclay dust into bricks ready for the furnace."]
 			icon: "gtceu:lp_steam_compressor"
 			id: "6BB23A9836716A37"
 			rewards: [{ id: "1D0789B0F2987E54", type: "xp", xp: 25 }]
@@ -204,9 +196,7 @@
 		}
 		{
 			dependencies: ["4F0049B2E382BA8E"]
-			description: [
-				"With water on one side and lava on the other, it breaks out cobblestone and stone for as long as you like. Neither fluid gets used up, so the first bucket of lava is also the last."
-			]
+			description: ["With water on one side and lava on the other, it breaks out cobblestone and stone for as long as you like. Neither fluid gets used up, so the first bucket of lava is also the last."]
 			icon: "gtceu:lp_steam_rock_crusher"
 			id: "68EB76B726CD7484"
 			optional: true
@@ -219,9 +209,7 @@
 		}
 		{
 			dependencies: ["68EB76B726CD7484"]
-			description: [
-				"It gets more plates out of your ingots than the hand hammer, and it smashes cobblestone into gravel and gravel into sand. Put it behind the rock crusher and you never dig sand again."
-			]
+			description: ["It gets more plates out of your ingots than the hand hammer, and it smashes cobblestone into gravel and gravel into sand. Put it behind the rock crusher and you never dig sand again."]
 			icon: "gtceu:lp_steam_forge_hammer"
 			id: "15187E005F30E142"
 			optional: true
@@ -253,9 +241,7 @@
 		}
 		{
 			dependencies: ["6BB23A9836716A37", "0238F574F77C30E5"]
-			description: [
-				"The primitive blast furnace runs hot enough to ruin ordinary bricks. Firebricks can take it. They start as ground clay and brick, and the compressor and a furnace do the rest."
-			]
+			description: ["The primitive blast furnace runs hot enough to ruin ordinary bricks. Firebricks can take it. They start as ground clay and brick, and the compressor and a furnace do the rest."]
 			icon: "gtceu:firebricks"
 			id: "7E4FF9E6FF9F495C"
 			rewards: [{ id: "6162F57F24166A2C", type: "xp", xp: 30 }]
@@ -273,9 +259,7 @@
 		}
 		{
 			dependencies: ["6BB23A9836716A37"]
-			description: [
-				"Smelt iron nuggets and they come out as wrought iron nuggets. It surprises everyone the first time. The compressor packs them into ingots, and those turn into steel faster than plain iron. LV hulls wear its plates, too."
-			]
+			description: ["Smelt iron nuggets and they come out as wrought iron nuggets. It surprises everyone the first time. The compressor packs them into ingots, and those turn into steel faster than plain iron. LV hulls wear its plates, too."]
 			icon: "gtceu:wrought_iron_ingot"
 			id: "2985D1F260EE851E"
 			rewards: [{ id: "77068FD9291EF2AB", type: "xp", xp: 20 }]
@@ -289,9 +273,7 @@
 		}
 		{
 			dependencies: ["7E4FF9E6FF9F495C"]
-			description: [
-				"Iron and coke, or coal, make steel in here, slowly. Wrought iron speeds it up. When one furnace can't keep up, build the next against it; they're happy to share a wall."
-			]
+			description: ["Iron and coke, or coal, make steel in here, slowly. Wrought iron speeds it up. When one furnace can't keep up, build the next against it; they're happy to share a wall."]
 			icon: "gtceu:primitive_blast_furnace"
 			id: "376295DE4FA3B31E"
 			rewards: [{ id: "2C462FC0FC9B6EA1", type: "xp", xp: 35 }]
@@ -304,9 +286,7 @@
 		}
 		{
 			dependencies: ["376295DE4FA3B31E"]
-			description: [
-				"A second road to steel that takes iron ore straight from the drill, with coke and some calcite from the lapis vein. One of these out-produces half a dozen primitive furnaces, and it drinks steam to do it."
-			]
+			description: ["A second road to steel that takes iron ore straight from the drill, with coke and some calcite from the lapis vein. One of these out-produces half a dozen primitive furnaces, and it drinks steam to do it."]
 			icon: "gtceu:steam_blast_furnace"
 			id: "4B8E2D6A1F9C3057"
 			rewards: [{ id: "5D9B3F7A1C2E6048", type: "xp", xp: 40 }]
@@ -319,9 +299,7 @@
 		}
 		{
 			dependencies: ["376295DE4FA3B31E"]
-			description: [
-				"Through the eyepiece the Moon shows dark seas, bright highlands and big craters with long rays. The &6Clockwork Observatory&r only works at night under a clear sky, with the controller at Y 100 or higher, above the haze and the smoke from your coke ovens."
-			]
+			description: ["Through the eyepiece the Moon shows dark seas, bright highlands and big craters with long rays. The &6Clockwork Observatory&r only works at night under a clear sky, with the controller at Y 100 or higher, above the haze and the smoke from your coke ovens."]
 			icon: "gtceu:steam_observatory"
 			id: "1253203E620BE055"
 			rewards: [{ id: "1F6D3B9E4A2C8075", type: "xp", xp: 45 }]
@@ -334,9 +312,7 @@
 		}
 		{
 			dependencies: ["1253203E620BE055"]
-			description: [
-				"Your first map of the Moon, drawn by hand at the eyepiece. Hold on to it: the optical observatory in LV reads it on every run and never uses it up. If you ever want a second one, a copy is cheap."
-			]
+			description: ["Your first map of the Moon, drawn by hand at the eyepiece. Hold on to it: the optical observatory in LV reads it on every run and never uses it up. If you ever want a second one, a copy is cheap."]
 			icon: "grindless:lunar_chart_draft"
 			id: "10F6A7BFB476944C"
 			rewards: [{ id: "6E2A8C4F1D9B3072", type: "xp", xp: 45 }]
@@ -347,9 +323,7 @@
 		}
 		{
 			dependencies: ["376295DE4FA3B31E"]
-			description: [
-				"Steel goes into the high-pressure steam machines, the casting molds and the steel drill bit, and it stays in your recipes from then on. Leave a blast furnace running and let the ingots pile up."
-			]
+			description: ["Steel goes into the high-pressure steam machines, the casting molds and the steel drill bit, and it stays in your recipes from then on. Leave a blast furnace running and let the ingots pile up."]
 			icon: "gtceu:steel_ingot"
 			id: "33AF6A368B3587E0"
 			rewards: [{ id: "57EE27EA8875AE38", type: "xp", xp: 40 }]
@@ -397,9 +371,7 @@
 		}
 		{
 			dependencies: ["64A0425E87F233F6"]
-			description: [
-				"Squeezes sticky resin into raw rubber pulp. Rubber logs and saplings work too, only slower. Rubber also wants sulfur, and that's a trip."
-			]
+			description: ["Squeezes sticky resin into raw rubber pulp. Rubber logs and saplings work too, only slower. Rubber also wants sulfur, and that's a trip."]
 			icon: "gtceu:lp_steam_extractor"
 			id: "64373EE5BFA62739"
 			rewards: [{ id: "29189781B581B2F3", type: "xp", xp: 25 }]
@@ -442,9 +414,7 @@
 		}
 		{
 			dependencies: ["61E429627580A285"]
-			description: [
-				"A magnetic iron rod wrapped in copper wire does most of the work in a motor. Most LV machines have one inside, and so does the turbine."
-			]
+			description: ["A magnetic iron rod wrapped in copper wire does most of the work in a motor. Most LV machines have one inside, and so does the turbine."]
 			icon: "gtceu:lv_electric_motor"
 			id: "2AEFA5A96D5BA55D"
 			rewards: [{ id: "27376BB009545BF4", type: "xp", xp: 30 }]
@@ -458,9 +428,7 @@
 		}
 		{
 			dependencies: ["61E429627580A285"]
-			description: [
-				"The empty box every LV machine starts from: a steel casing dressed in wrought iron plates and tin cable. You'll make a great many of these, so get comfortable."
-			]
+			description: ["The empty box every LV machine starts from: a steel casing dressed in wrought iron plates and tin cable. You'll make a great many of these, so get comfortable."]
 			icon: "gtceu:lv_machine_hull"
 			id: "6862838CB35D8296"
 			rewards: [{ id: "7E0CC46E3BF5F812", type: "xp", xp: 30 }]
@@ -471,9 +439,7 @@
 		}
 		{
 			dependencies: ["64A0425E87F233F6"]
-			description: [
-				"The first electronics in the pack are glowing glass bottles. The glass tube comes out of the ball mold, and EMI has the rest of the &6Vacuum Tube&r."
-			]
+			description: ["The first electronics in the pack are glowing glass bottles. The glass tube comes out of the ball mold, and EMI has the rest of the &6Vacuum Tube&r."]
 			icon: "gtceu:vacuum_tube"
 			id: "4A21D67EFA0E04C5"
 			rewards: [{ id: "6EDBD02B79B38D90", type: "xp", xp: 25 }]
@@ -484,9 +450,7 @@
 		}
 		{
 			dependencies: ["4A21D67EFA0E04C5"]
-			description: [
-				"Both lean on sticky resin. It pays to have a rubber sapling in the greenhouse by now. The board starts as a wood plate from the compressor."
-			]
+			description: ["Both lean on sticky resin. It pays to have a rubber sapling in the greenhouse by now. The board starts as a wood plate from the compressor."]
 			icon: "gtceu:resin_printed_circuit_board"
 			id: "1861D320C9F055D2"
 			rewards: [{ id: "0D7381C6AD892F5B", type: "xp", xp: 25 }]
@@ -500,9 +464,7 @@
 		}
 		{
 			dependencies: ["1861D320C9F055D2"]
-			description: [
-				"Copper and redstone melt together into red alloy in the alloy smelter. Hammer it into a plate, cut that into wire and wrap it like tin cable. The first circuits are wired with it."
-			]
+			description: ["Copper and redstone melt together into red alloy in the alloy smelter. Hammer it into a plate, cut that into wire and wrap it like tin cable. The first circuits are wired with it."]
 			icon: "gtceu:red_alloy_ingot"
 			id: "30D4DD1212DB31E0"
 			rewards: [{ id: "56375B9B39F19228", type: "xp", xp: 25 }]
@@ -513,9 +475,7 @@
 		}
 		{
 			dependencies: ["30D4DD1212DB31E0", "61E429627580A285"]
-			description: [
-				"All those small parts meet in the &6Basic Electronic Circuit&r, the first LV circuit. The turbine needs one, and so do most LV machines after it."
-			]
+			description: ["All those small parts meet in the &6Basic Electronic Circuit&r, the first LV circuit. The turbine needs one, and so do most LV machines after it."]
 			icon: "gtceu:basic_electronic_circuit"
 			id: "59DE11D9BE2E0E47"
 			rewards: [{ id: "7E788BEAF5DACB6D", type: "xp", xp: 40 }]
@@ -528,9 +488,7 @@
 		}
 		{
 			dependencies: ["59DE11D9BE2E0E47"]
-			description: [
-				"A boiler the size of a shed, and its recipe asks for LV circuits, so it comes late. One out-steams a yard full of small boilers, and it burns creosote and biomass as well as coal."
-			]
+			description: ["A boiler the size of a shed, and its recipe asks for LV circuits, so it comes late. One out-steams a yard full of small boilers, and it burns creosote and biomass as well as coal."]
 			icon: "gtceu:bronze_large_boiler"
 			id: "36B68B4C2B1E0DBA"
 			optional: true
@@ -581,9 +539,7 @@
 		}
 		{
 			dependencies: ["64A0425E87F233F6"]
-			description: [
-				"On its own it's a fancy bronze jar. It stays one until you bring home ore from a vein."
-			]
+			description: ["On its own it's a fancy bronze jar. It stays one until you bring home ore from a vein."]
 			icon: "grindless:empty_vein_probe"
 			id: "5DF70249D310BA55"
 			rewards: [{ id: "45FD9A5114AE0F7F", type: "xp", xp: 25 }]
@@ -594,9 +550,7 @@
 		}
 		{
 			dependencies: ["5DF70249D310BA55"]
-			description: [
-				"A probe and raw ore from one vein make that vein's sample; EMI shows which ores each vein takes. The drill reads the sample and never uses it up, so one per vein lasts forever."
-			]
+			description: ["A probe and raw ore from one vein make that vein's sample; EMI shows which ores each vein takes. The drill reads the sample and never uses it up, so one per vein lasts forever."]
 			icon: "grindless:vein_sample_copper_tin"
 			id: "4B2FCEC042219588"
 			rewards: [{ id: "6200EA49FE45BD7E", type: "xp", xp: 25 }]
@@ -619,9 +573,7 @@
 		}
 		{
 			dependencies: ["5DF70249D310BA55"]
-			description: [
-				"Bronze, filed sharp. The drill grinds one down every so often. Keep spares in the input bus and it won't stall on you."
-			]
+			description: ["Bronze, filed sharp. The drill grinds one down every so often. Keep spares in the input bus and it won't stall on you."]
 			icon: "grindless:bronze_drill_bit"
 			id: "54FC9D8B7F999601"
 			rewards: [{ id: "2F36C1C84B8AA4B0", type: "xp", xp: 20 }]
@@ -651,9 +603,7 @@
 		}
 		{
 			dependencies: ["54FC9D8B7F999601"]
-			description: [
-				"Lasts a lot longer than bronze. It's also the only bit that reaches the veins lying wholly below Y 0, which means diamond, redstone and mica."
-			]
+			description: ["Lasts a lot longer than bronze. It's also the only bit that reaches the veins lying wholly below Y 0, which means diamond, redstone and mica."]
 			icon: "grindless:steel_drill_bit"
 			id: "0634FBEA53408D40"
 			optional: true
@@ -666,9 +616,7 @@
 		}
 		{
 			dependencies: ["103C07A78792B593", "1AFD1F4557C5DA80"]
-			description: [
-				"Ore comes from the drills now and wood from the greenhouses. You can hang the pickaxe on the wall; it had a good run."
-			]
+			description: ["Ore comes from the drills now and wood from the greenhouses. You can hang the pickaxe on the wall; it had a good run."]
 			icon: "gtceu:steam_vein_drill"
 			id: "3557D15A5D2004C4"
 			rewards: [

@@ -880,9 +880,7 @@
 		}
 		{
 			dependencies: ["3FB9EA4152DCD1D3"]
-			description: [
-				"The &6Smelting Complex&r runs the blast furnace and the vacuum freezer as one recipe, so a hot ingot never has to be carried between machines. EMI shows which ingots it takes."
-			]
+			description: ["The &6Smelting Complex&r runs the blast furnace and the vacuum freezer as one recipe, so a hot ingot never has to be carried between machines. EMI shows which ingots it takes."]
 			icon: "gtceu:smelting_complex"
 			id: "14682D455D2C4F7C"
 			rewards: [
