@@ -172,6 +172,8 @@
   "grindless:assembly_line/hills_slingshot|gtceu:hills_slingshot": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/hyperfactory|gtceu:hyperfactory": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/hyper_assembly_array|gtceu:hyper_assembly_array": ["T-CIRC","T-HULL","T-VOLT"],
+  "grindless:hyper_assembly_array/hyperstargate_base|grindless:hyperstargate_base": ["T-CIRC","T-COUNT"],
+  "grindless:hyper_assembly_array/hyperstargate_locked_chevron|grindless:hyperstargate_locked_chevron": ["T-CIRC"],
   "grindless:assembly_line/horizon_crystal_furnace|gtceu:horizon_crystal_furnace": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/multi_plasma_blender|gtceu:multi_plasma_blender": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/nickel_56_burner|gtceu:nickel_56_burner": ["T-CIRC","T-HULL","T-VOLT"],
