@@ -306,6 +306,7 @@
    "gtceu:condensate_assembler",
    "gtceu:condensate_refinery",
    "gtceu:hills_slingshot",
+   "gtceu:horizon_capacitor_bank",
    "gtceu:horizon_crystal_furnace",
    "gtceu:hyperfactory",
    "gtceu:meta_material_loom",

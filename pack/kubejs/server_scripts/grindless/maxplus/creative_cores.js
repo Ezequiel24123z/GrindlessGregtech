@@ -1,4 +1,4 @@
-// priority: -20154
+// priority: -20160
 // MAX+ lines K1 to K4, the creative cores, on the OpV-UXV older machines and the MAX+ refinery and fab (docs/eras/maxplus.md 'Lines'; package XP-K).
 //
 //   K1 horizon cloud core       Kugelblitz forge c7 -> caged_kugelblitz; strangelet vault c5 -> strange_cage_lining;

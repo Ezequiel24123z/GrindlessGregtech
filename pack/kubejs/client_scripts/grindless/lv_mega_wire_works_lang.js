@@ -1,4 +1,4 @@
-// priority: 7045
+// priority: 7050
 // Gregtech Grindless - names and tooltips of the LV Wire Works (startup_scripts/grindless/lv/mega_wire_works.js).
 //
 //   gtceu:wire_works   (machine name + 3 tooltip lines, en_us and es_es)

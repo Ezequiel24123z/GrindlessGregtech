@@ -1,4 +1,4 @@
-// priority: -5624
+// priority: -5619
 // -----------------------------------------------------------------------------------------------
 // MAX+ machines 7 and 8 at the Magellanic Stream (docs/eras/maxplus.md "Machines" 7-8; package XP-B2): two multiblocks and their recipe types. Every item
 // they use is XP-F1's (maxplus/foundation.js). The recipes, with lines P9, P10, P11, P22 and P23's older-machine rows, are in

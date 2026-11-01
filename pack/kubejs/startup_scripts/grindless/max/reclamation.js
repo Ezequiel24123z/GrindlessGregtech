@@ -1,4 +1,4 @@
-// priority: -5480
+// priority: -5469
 // -----------------------------------------------------------------------------------------------
 // MAX's segment reclamation works (docs/eras/max.md, machine 14, lines L52 and L53; package MX-S4): the multiblock and its recipe type. No
 // item of its own: every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/reclamation.js.

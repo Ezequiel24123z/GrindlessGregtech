@@ -146,7 +146,6 @@
     { "id": "grindless:horizon_alignment_matrix", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-H4; delete the row then" },
     { "id": "grindless:horizon_alignment_matrix", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H4; delete the row then" },
     { "id": "grindless:horizon_capacitor", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-H3; delete the row then" },
-    { "id": "grindless:horizon_capacitor", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H3; delete the row then" },
     { "id": "grindless:horizon_comm_terminal", "role": "acquisition", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its recipe lands with XP-H4; delete the row then" },
     { "id": "grindless:horizon_comm_terminal", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-H4; delete the row then" },
     { "id": "grindless:horizon_compressed_plate", "role": "use", "reason": "XP-F1 pending (docs/eras/maxplus.md Build order): its use lands with XP-A1; delete the row then" },

@@ -1,4 +1,4 @@
-// priority: -5523
+// priority: -5499
 // -----------------------------------------------------------------------------------------------
 // MAX's ergoregion synchroniser (docs/eras/max.md, machine 12, lines L50 L51 L55; package MX-S2): the multiblock and its recipe type. No item
 // of its own: every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/synchroniser.js.

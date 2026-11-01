@@ -1,4 +1,4 @@
-// priority: -5579
+// priority: -5569
 // MAX+ machines 12 and 13, the multi-plasma blender and the horizon crystal furnace (docs/eras/maxplus.md "Machines" 12 and 13; package XP-H2): the
 // multiblocks and their recipe types. Items, fluids and the casing are XP-F1's (maxplus/foundation.js); the recipes, with lines T8, T9 and T10's
 // older-machine rows, are in server_scripts/grindless/maxplus/crystals.js. Names: client_scripts/grindless/maxplus_crystals_lang.js.

@@ -1,4 +1,4 @@
-// priority: -5594
+// priority: -5589
 // -----------------------------------------------------------------------------------------------
 // MAX+ machine 15, the Hyperfactory, gtceu:hyperfactory (docs/eras/maxplus.md "Hyperfactory"; package XP-M1): the top member of the mega family
 // (docs/eras/mega.md 4.1). One machine runs GTM's assembler, circuit assembler, assembly line, forming press and laser engraver recipes (no new

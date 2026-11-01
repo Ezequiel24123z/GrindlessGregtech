@@ -1,4 +1,4 @@
-// priority: -5564
+// priority: -5529
 // -----------------------------------------------------------------------------------------------
 // MAX+ machine 14, the condensate assembler (docs/eras/maxplus.md "Machines" 14; package XP-H3): the multiblock and its recipe type. Every item
 // and casing it uses is XP-F1's (maxplus/foundation.js). The recipes, with lines T1 to T3, T14 to T16 and P25's older-machine rows, are in

@@ -1,4 +1,4 @@
-// priority: 7002
+// priority: 7010
 // Gregtech Grindless - names and tooltips of MAX+'s condensate assembler (startup_scripts/grindless/maxplus/assembler.js; package XP-H3):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>             the EMI line of each row of the package that has one (the assembler's rows, the press's

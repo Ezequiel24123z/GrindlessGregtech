@@ -1,4 +1,4 @@
-// priority: -5584
+// priority: -5579
 // -----------------------------------------------------------------------------------------------
 // MAX+ foundation (package XP-F1, docs/eras/maxplus.md "Build order", F1): the shared registrations the MAX+ packages build on. No
 // controller, no recipe type, no worldgen and no recipe. Published in global.grindless.maxPlusFoundation. The load order is stamped
@@ -35,7 +35,7 @@
     'deep_horizon_tether degenerate_compact dense_counterweight_core densified_blade densified_liner densified_truss_billet detector_layer_wafer direct_converter_stack edged_blade ' +
     'electroded_pmn_stack electronic_grade_silicon enriched_mo_target er_amplifier_fibre fe_ln_boule fe16n2_absorber_ring field_frozen_hoop flux_absorber_casing ' +
     'fused_quartz_sphere_blank gamma_focus_element gan_laser_array gd_absorber_tile gd_hfb2_cermet graded_horizon_laminate graded_z_billet he4_dewar holographic_slab ' +
-    'horizon_actuator_stack horizon_alignment_matrix horizon_belt horizon_capacitor horizon_comm_terminal horizon_compressed_plate horizon_conduit horizon_containment_plate ' +
+    'horizon_actuator_stack horizon_alignment_matrix horizon_belt horizon_comm_terminal horizon_compressed_plate horizon_conduit horizon_containment_plate ' +
     'horizon_controller_crystal horizon_core_crystal horizon_frame_part horizon_frame_truss horizon_interposer horizon_logic_die horizon_logic_wafer horizon_mesh horizon_phase_sensor_core ' +
     'horizon_photonic_engine horizon_shielding horizon_storage_die horizon_valve horizon_valve_body horizon_waveguide ime_ash impregnated_kerr_coil impregnated_kerr_winding ' +
     'impregnated_nozzle infiltrated_liner infiltrated_mesh inp_1550_laser_die inscribed_core_crystal inscribed_reference_crystal insulated_hoop insulated_kerr_wire interposer_die ' +

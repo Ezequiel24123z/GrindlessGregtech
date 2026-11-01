@@ -1,4 +1,4 @@
-// priority: -20064
+// priority: -20060
 // -----------------------------------------------------------------------------------------------
 // MAX ergoregion synchroniser (docs/eras/max.md, machine 12, L50 L51 L55; package MX-S2). Its recipes, the three assembler steps and the GTM
 // steps of the lines, and its controller. The other steps of the lines are one row each of an older machine, marked MX-S2 in their own files:

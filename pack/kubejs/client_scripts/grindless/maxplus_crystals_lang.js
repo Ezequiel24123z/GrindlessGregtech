@@ -1,4 +1,4 @@
-// priority: 6952
+// priority: 6950
 // Gregtech Grindless - names and tooltips of MAX+'s multi-plasma blender and horizon crystal furnace (startup_scripts/grindless/maxplus/crystals.js;
 // package XP-H2):
 //
