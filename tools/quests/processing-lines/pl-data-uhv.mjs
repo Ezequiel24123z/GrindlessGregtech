@@ -227,7 +227,7 @@ const data = {
         n('abr', 12.5, 5, mach('gtceu:algae_bioreactor'), 'Algae Bioreactor', { kind: 'ours', from: ['alg'], desc: 'Feeds the algae carbon dioxide and water in the red light.' }),
         n('biom', 15, 5, F('gtceu:biomass'), 'Biomass', { kind: 'product', from: ['abr'], end: 'biorefinery fuel, and oxygen for the base\'s air' }),
         // 15 melanin flare shielding
-        ...chain(2.5, [
+        ...chain(-4.5, [
           ['clado', I('grindless:cladosporium_culture'), 'Cladosporium Culture', 'raw'],
           ['vat', mach('gtceu:radiotrophic_vat'), 'Radiotrophic Vat', 'ours', { desc: 'Grows black fungi that eat radiation.' }],
           ['melb', I('grindless:melanised_biomass'), 'Melanised Biomass'],
@@ -237,12 +237,12 @@ const data = {
           ['pbc', I('grindless:proxima_base_casing'), 'Proxima Base Casing'],
         ], 'the base on Proxima b', 9.5),
         // 17 biocement
-        n('tail2', 14.5, 7, I('grindless:leached_tailings'), 'Leached Tailings', { kind: 'raw', sub: 'From the biomining heap' }),
-        n('cacl', 17, 7, I('gtceu:calcium_chloride_dust'), 'Calcium Chloride', { kind: 'product', from: ['tail2'] }),
-        n('cold2', 17, 9, I('grindless:cold_trap_regolith'), 'Cold-Trap Regolith', { kind: 'raw' }),
-        n('sp', 19.5, 9, I('grindless:sporosarcina_culture'), 'Sporosarcina Culture', { kind: 'raw', sub: 'With urea' }),
-        n('heap2', 19.5, 7, mach('gtceu:biomining_heap'), 'Biomining Heap', { kind: 'ours', from: ['cacl', 'cold2', 'sp'], desc: 'Bacteria cement the regolith with calcium carbonate.' }),
-        n('bcr', 22, 7, I('grindless:biocemented_regolith'), 'Biocemented Regolith', { kind: 'product', from: ['heap2'] }),
+        n('tail2', 14.5, -7, I('grindless:leached_tailings'), 'Leached Tailings', { kind: 'raw', sub: 'From the biomining heap' }),
+        n('cacl', 17, -7, I('gtceu:calcium_chloride_dust'), 'Calcium Chloride', { kind: 'product', from: ['tail2'] }),
+        n('cold2', 17, -9, I('grindless:cold_trap_regolith'), 'Cold-Trap Regolith', { kind: 'raw' }),
+        n('sp', 19.5, -9, I('grindless:sporosarcina_culture'), 'Sporosarcina Culture', { kind: 'raw', sub: 'With urea' }),
+        n('heap2', 19.5, -7, mach('gtceu:biomining_heap'), 'Biomining Heap', { kind: 'ours', from: ['cacl', 'cold2', 'sp'], desc: 'Bacteria cement the regolith with calcium carbonate.' }),
+        n('bcr', 22, -7, I('grindless:biocemented_regolith'), 'Biocemented Regolith', { kind: 'product', from: ['heap2'] }),
       ],
     },
     ground: {
@@ -376,5 +376,4 @@ take('antimatter', 'gate', 'ah', 'clk', 'opg');
 take('ground', 'nmw', 'uvc');
 take('power', 'thw', 'tank');
 take('materials', 'thk', 'pellet', 'sicm', 'geo');
-data.clusters.life.nodes.find((nd) => nd.key === 'pbc').y = 4;
 export default data;
