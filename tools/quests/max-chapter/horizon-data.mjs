@@ -23,14 +23,14 @@ export const CHAPTER = {
 };
 
 export const LINKS = [
-  { key: 'H_L_IN', ref: 'J_EXIT', x: 0, y: 0 },
+  { key: 'I_L_IN', ref: 'J_EXIT', x: 0, y: 0 },
 ];
 
 export const QUESTS = [
   // ------------------------------------------------------------------ the shell
   {
     key: 'GRAD', kind: 'step', title: 'Shell Gradient Map', icon: 'grindless:shell_gradient_map',
-    deps: ['H_L_IN'], x: 2, y: 0,
+    deps: ['I_L_IN'], x: 2, y: 0,
     desc: [
       'The &6Shell Gradient Map&r shows where on the shell the field is steepest, so the first segments go where they are needed.',
     ],
