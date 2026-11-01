@@ -179,16 +179,16 @@ export default {
           ['wfp', I('grindless:w_fibre_preform'), 'Fibre Preform'],
           ['div', I('grindless:divertor'), 'Divertor'],
         ], 'the UIV fusion casing'),
-        n('wft', 7.5, 23, I('grindless:wf_w_tile'), 'Wf/W Tile', { kind: 'product', from: ['wfp'], end: 'the Mk4 fusion casing' }),
+        n('wft', 8.75, 24, I('grindless:wf_w_tile'), 'Wf/W Tile', { kind: 'product', from: ['wfp'], end: 'the Mk4 fusion casing' }),
         // YSZ coating
-        ...chain(24, [
+        ...chain(26, [
           ['yo', I('grindless:yttrium_oxide_dust'), 'Yttrium Oxide', 'raw'],
           ['ysp', I('grindless:ysz_powder'), 'YSZ Powder'],
           ['ysi', I('grindless:ysz_ingot'), 'YSZ Ingot'],
           ['csb', I('grindless:coated_sx_blade'), 'Coated SX Blade'],
         ], 'the turbine wheel'),
         // niobium cavities
-        ...chain(26, [
+        ...chain(28, [
           ['nbp', I('grindless:niobium_powder'), 'Niobium Powder', 'raw'],
           ['nb6', I('grindless:six_n_niobium'), '6N Niobium'],
           ['rrr', I('grindless:rrr_niobium_sheet'), 'RRR Niobium Sheet'],
@@ -358,9 +358,9 @@ export default {
           ['carb', mach('gtceu:carbonyl_refinery'), 'Carbonyl Refinery', 'ours', { desc: 'Carbon monoxide lifts the iron out as a gas.' }],
           ['fepc', F('gtceu:iron_pentacarbonyl'), 'Iron Pentacarbonyl'],
         ], 'the magnet powder and the UEV motor'),
-        n('res', 7.5, 3.5, I('grindless:barnard_residue'), 'Barnard Residue', { kind: 'by', from: ['carb'], end: 'rhenium, by the platinum plant' }),
+        n('res', 7.5, 4, I('grindless:barnard_residue'), 'Barnard Residue', { kind: 'by', from: ['carb'], end: 'rhenium, by the platinum plant' }),
         // aerogel
-        ...chain(4, [
+        ...chain(6, [
           ['sic4', I('gtca:silicon_tetrachloride_dust'), 'Silicon Tetrachloride', 'raw'],
           ['teo', I('grindless:teos_flask'), 'TEOS Flask'],
           ['sol', I('grindless:silica_sol'), 'Silica Sol'],

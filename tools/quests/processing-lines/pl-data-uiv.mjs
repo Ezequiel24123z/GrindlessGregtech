@@ -159,13 +159,13 @@ export default {
           ['l9_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
           ['l9_6', I('grindless:element_120_recoil'), 'Element 120 Recoil'],
         ], 'the superheavy census'),
-        L('x9_cav', 7.5, 1, 'pl_uev:nsc'),
+        L('x9_cav', 7.5, -2, 'pl_uev:nsc'),
         // line 32
         ...chain(2, [
           ['l32_0', I('gtceu:polytetrafluoroethylene_foil'), 'Polytetrafluoroethylene Foil', 'raw'],
           ['l32_1', I('grindless:polycarbonate_foil'), 'Polycarbonate Foil'],
           ['l32_2', mach('gtceu:heavy_ion_cyclotron'), 'Heavy Ion Cyclotron', 'ours'],
-          ['l32_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l32_2', 'x9_cav'] }],
+          ['l32_3', I('grindless:ion_tracked_foil'), 'Ion Tracked Foil', 'product', { from: ['l32_2'] }],
           ['l32_4', I('grindless:etched_membrane'), 'Etched Membrane'],
           ['l32_5', mach('gtceu:recoil_separator'), 'Recoil Separator', 'ours'],
           ['l32_6', I('grindless:element_119_recoil'), 'Element 119 Recoil'],
@@ -494,10 +494,10 @@ export default {
           ['l19_5', I('grindless:droplet_collector'), 'Droplet Collector'],
           ['l19_6', I('grindless:droplet_radiator_module'), 'Droplet Radiator Module', 'product', { from: ['l19_5', 'l19_8', 'l19_10'] }],
         ], 'the Matrioshka shell'),
-        n('l19_7', 7.5, 17.5, I('gtceu:tin_ingot'), 'Tin Ingot', { kind: 'raw' }),
-        n('l19_8', 10, 17.5, I('grindless:eb_distilled_tin'), 'EB-Distilled Tin', { kind: 'product', from: ['l19_7'] }),
-        n('l19_9', 7.5, 19, I('gtceu:rhea_plate'), 'RHEA Plate', { kind: 'raw' }),
-        n('l19_10', 10, 19, I('grindless:orifice_plate'), 'Orifice Plate', { kind: 'product', from: ['l19_9'] }),
+        n('l19_7', 10, 18, I('gtceu:tin_ingot'), 'Tin Ingot', { kind: 'raw' }),
+        n('l19_8', 12.5, 18, I('grindless:eb_distilled_tin'), 'EB-Distilled Tin', { kind: 'product', from: ['l19_7'] }),
+        n('l19_9', 10, 19.5, I('gtceu:rhea_plate'), 'RHEA Plate', { kind: 'raw' }),
+        n('l19_10', 12.5, 19.5, I('grindless:orifice_plate'), 'Orifice Plate', { kind: 'product', from: ['l19_9'] }),
         // line 22
         ...chain(14, [
           ['l22_0', I('gtceu:uranium_233_ingot'), 'Uranium 233 Ingot', 'raw'],
