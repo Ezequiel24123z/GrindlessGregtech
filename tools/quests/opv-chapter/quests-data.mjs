@@ -1,219 +1,298 @@
-// Quest data for opv_age ("OpV - The Galactic Bulge"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
-// docs/eras/opv.md, "Quests", the sixteen parts). Ids come from the keys: never rename a key once a quest has shipped.
-// Positions: the trunk runs right along y = 0 from the hull to the gate. Each part is a column group; lanes above and below hold the
-// side products. Every OpV package has landed, so there is no package gating.
-// Texts say what a machine does, never its inputs or counts. The gate quest never rewards the gate product: it is a checkmark and the
-// MAX casing, because the Sagittarius A* chart stays hidden until MAX.
-// Named fiction is marked in one line: the chain strand, the Kugelblitz, the von Neumann foundry, the stable strangelet, census IV.
+// Quest data for opv_age ("OpV: The Galactic Bulge"), the journey chapter: the bulge relay, SGR 1806-20, Cygnus X-1 again, Terzan 5 and the gate
+// (docs/reforge/05_quest_design.md, sections 2 and 3.2; docs/eras/opv.md, "Route", "Places and site rules", "Quests", "Gate to MAX").
+// The era's machines, circuits, wafers and components are in opv_machines and opv_circuits (RF-5Q-OpVb); the power plants, the parallel hatch,
+// the network and the older machines' new modes are in opv_integration. A quest that asked for a machine and its product stays here as a product
+// step under its old key, and the machine has a new key in opv_machines.
+// The journey does not depend on the other OpV chapters, as UEV's does not.
+// Fixed keys (other chapters link to them): START, LOOK, RELAY, LAUNCH, J_SGR, BCHART, STRAND, J_CYG, STACK, ANTIH, KCORE, TETRON, J_TERZ, NODE, MAX.
+// Positions: columns every 2, rows every 2. The spine runs along y = 0; SGR is above it, Cygnus below, and Terzan 5 closes the way to the gate.
 const it = (item, count) => ({ type: 'item', item, count });
+const dim = (dimension) => ({ type: 'dimension', dimension });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
-// a machine quest: gear shape, 1.25
-const M = (key, title, icon, deps, x, y, desc, tasks, reward = 100, extra = {}) => ({
-  key, title, icon, shape: 'gear', size: 1.25, deps, x, y, desc, tasks, rewards: [xp(reward)], ...extra,
-});
-// a product quest: default shape
-const P = (key, title, icon, deps, x, y, desc, tasks, reward = 100, extra = {}) => ({
-  key, title, icon, deps, x, y, desc, tasks, rewards: [xp(reward)], ...extra,
-});
 
 export const CHAPTER = {
   order: 0,
   icon: 'gtceu:opv_machine_casing',
   autofocus: 'START',
-  title: 'OpV - The Galactic Bulge',
-  subtitle: ['Chain strand cables, cryogenic circuits, a beam of antiprotons, a Kugelblitz and a fleet of probes: the way to the heart of the Milky Way.'],
+  title: 'OpV: The Galactic Bulge',
+  subtitle: ['Chain strand cables, a beam of antiprotons, a Kugelblitz and a fleet of probes: the way to the heart of the Milky Way.'],
 };
 
 export const QUESTS = [
-  // ------------------------------------------------------------------ 1. arrival
-  P('START', 'The Galactic Bulge', 'gtceu:opv_machine_casing', ['X:3D7C8C36A2896D4E'], 0, 0, [
-    'The Superheavy chart gave you the &6OpV Machine Casing&r. The hull waits for parts nobody has made yet.',
-    'The bulge is crowded and very old. Terzan 5 is a fossil of the early galaxy, and Sagittarius A* sits at its centre.',
-  ], [it('gtceu:opv_machine_casing')], 50, { shape: 'rsquare', size: 1.5 }),
-  P('HULL', 'OpV Hull', 'gtceu:opv_machine_hull', ['START'], 2.5, 0, [
-    'The &6OpV Machine Hull&r is the first thing every OpV machine needs. Its cables and plates are made from a strand nobody had before.',
-  ], [it('gtceu:opv_machine_hull')], 100),
-  P('LOOK', 'The Way In', 'gtceu:opv_machine_casing', ['HULL'], 5, 0, [
-    'Four ways lead out of the hull: chain strand and field freezing for the parts, cryogenic circuits, beams and antimatter, and the probes. Read the OpV Lines chart before you pick one.',
-  ], [ck()], 50),
+  // ------------------------------------------------------------------ arrival and the relay
+  {
+    key: 'START', kind: 'start', title: 'The Galactic Bulge', icon: 'gtceu:opv_machine_casing',
+    deps: ['X:3D7C8C36A2896D4E'], x: 0, y: 0,
+    desc: [
+      'The Superheavy chart gave you the &6OpV Machine Casing&r. The hull waits for parts nobody has made yet.',
+      'The bulge is crowded and very old. Terzan 5 is a fossil of the early galaxy, and Sagittarius A* sits at its centre.',
+    ],
+    tasks: [it('gtceu:opv_machine_casing')],
+    rewards: [xp(50)],
+  },
+  {
+    key: 'LOOK', kind: 'reading', title: 'The Way In', icon: 'gtceu:opv_machine_casing',
+    deps: ['START'], x: 2, y: 0,
+    desc: [
+      'Three places lie ahead: a magnetar for chain matter, Cygnus X-1 for antimatter and the Kugelblitz, and a globular cluster for probes. The machine and circuit tabs hold the parts, and the integration tab holds the power.',
+    ],
+    tasks: [ck()],
+    rewards: [xp(25)],
+  },
+  {
+    key: 'RELAY', kind: 'step', title: 'Bulge Relay', icon: 'grindless:bulge_relay_seed',
+    deps: ['LOOK'], x: 4, y: 0,
+    desc: [
+      'A relay seed is the first thing you send to the bulge. A pasta-strand magsail brakes it on the thin gas between the stars. The seed is made from UXV parts only.',
+    ],
+    tasks: [it('grindless:bulge_relay_seed')],
+    rewards: [xp(100)],
+  },
+  {
+    key: 'LAUNCH', kind: 'step', title: 'Seed Away', icon: 'grindless:launched_bulge_seed',
+    deps: ['RELAY'], x: 6, y: 0,
+    desc: [
+      'The warp gate throws the seed across the dark between the arm and the bulge. Nothing comes back, and that is the idea.',
+      'The gate is fiction. The magsail braking it uses is real physics.',
+    ],
+    tasks: [it('grindless:launched_bulge_seed')],
+    rewards: [xp(150)],
+  },
+  {
+    key: 'J_SGR', kind: 'step', title: 'SGR 1806-20', icon: 'grindless:launched_bulge_seed',
+    deps: ['LAUNCH'], x: 8, y: -2,
+    desc: [
+      'The seed unfolds a platform in orbit around a magnetar. Its field is about a thousand trillion times Earth\'s, strong enough to bend atoms into chains. Chain matter, field-frozen plate and positron cells come from here and nowhere else.',
+    ],
+    tasks: [dim('grindless:sgr1806_orbit')],
+    rewards: [xp(200)],
+  },
+  {
+    key: 'BCHART', kind: 'step', title: 'Bulge Chart', icon: 'grindless:bulge_chart',
+    deps: ['LAUNCH'], x: 8, y: 0,
+    desc: [
+      'The first image from the bulge. It shows where the debris, the nodes and the old stars are, and the gate keeps it.',
+    ],
+    tasks: [it('grindless:bulge_chart')],
+    rewards: [xp(100)],
+  },
 
-  // ------------------------------------------------------------------ 2. bulge relay
-  P('RELAY', 'Bulge Relay', 'grindless:bulge_relay_seed', ['LOOK'], 7.5, 0, [
-    'A relay seed is the first thing you send to the bulge. It arrives and starts to listen.',
-  ], [it('grindless:bulge_relay_seed')], 100),
-  P('LAUNCH', 'Seed Away', 'grindless:launched_bulge_seed', ['RELAY'], 10, 0, [
-    'The launched seed crosses the dark between the arm and the bulge. Nothing comes back, and that is the idea.',
-  ], [it('grindless:launched_bulge_seed')], 100),
-  P('BCHART', 'Bulge Chart', 'grindless:bulge_chart', ['LAUNCH'], 12.5, 0, [
-    'The first image from the bulge. It shows where the debris, the nodes and the old stars are.',
-  ], [it('grindless:bulge_chart')], 100),
+  // ------------------------------------------------------------------ SGR 1806-20
+  {
+    key: 'STRAND', kind: 'step', title: 'Chain Strand', icon: 'gtceu:chain_strand_ingot',
+    deps: ['J_SGR'], x: 10, y: -2,
+    desc: [
+      'The pasta machines skim the magnetar\'s crust, cage each phase and draw it into an &6ingot&r of chain-like matter. Chain strand is fiction. The crust and its field are real.',
+    ],
+    tasks: [it('gtceu:chain_strand_ingot')],
+    rewards: [xp(150)],
+  },
+  {
+    key: 'CABLE', kind: 'step', title: 'Chain Strand Cable', icon: 'gtceu:chain_strand_single_cable',
+    deps: ['STRAND'], x: 12, y: -2,
+    desc: [
+      'The strand is drawn into wire, braided in PBO and sheathed. The &6Chain Strand Cable&r carries OpV power.',
+    ],
+    tasks: [it('gtceu:chain_strand_single_cable')],
+    rewards: [xp(100)],
+  },
+  {
+    key: 'LAMINA', kind: 'step', title: 'Chain Lamina', icon: 'grindless:chain_lamina_stack',
+    deps: ['STRAND'], x: 12, y: -4,
+    desc: [
+      'Sheets of strand lattice are laminated with lasagna plate into a &6Chain Lamina Stack&r for the hull plates.',
+    ],
+    tasks: [it('grindless:chain_lamina_stack')],
+    rewards: [xp(100)],
+  },
+  {
+    key: 'HULL', kind: 'step', title: 'OpV Hull', icon: 'gtceu:opv_machine_hull',
+    deps: ['CABLE', 'LAMINA'], x: 14, y: -3,
+    desc: [
+      'The &6OpV Machine Hull&r joins the casing, the cable and the lamina stack. Every OpV machine starts from one.',
+    ],
+    tasks: [it('gtceu:opv_machine_hull')],
+    rewards: [xp(150)],
+  },
+  {
+    key: 'POS', kind: 'step', title: 'Dense Positron Cell', icon: 'grindless:dense_positron_cell',
+    deps: ['J_SGR'], x: 10, y: -4,
+    desc: [
+      'A magnetar\'s field is strong enough to turn gamma rays into pairs of electrons and positrons. A magnetic converter here seals the positrons into a &6Dense Positron Cell&r, and the antihydrogen line needs it.',
+    ],
+    tasks: [it('grindless:dense_positron_cell')],
+    rewards: [xp(150)],
+  },
 
-  // ------------------------------------------------------------------ 3. chain strand
-  P('STRAND', 'Chain Strand', 'gtceu:chain_strand_ingot', ['HULL'], 2.5, -2.5, [
-    'A strand of chain-like matter, drawn from a slab of crust. In the real universe this is only a hypothesis; here it is a material.',
-    'It is caged, sorted, drawn and made into an &6ingot&r.',
-  ], [it('gtceu:chain_strand_ingot')], 100),
-  P('CABLE', 'Chain Strand Cable', 'gtceu:chain_strand_single_cable', ['STRAND'], 5, -2.5, [
-    'Wire, braided in PBO and sheathed. The &6Chain Strand Cable&r carries OpV power.',
-  ], [it('gtceu:chain_strand_single_cable')], 100),
-  P('LAMINA', 'Chain Lamina', 'grindless:chain_lamina_stack', ['STRAND'], 5, -5, [
-    'Thin sheets, laminated into a &6Chain Lamina Stack&r for the hull plates.',
-  ], [it('grindless:chain_lamina_stack')], 100),
-  P('REPEAT', 'Chain Strand Repeater', 'grindless:chain_strand_repeater', ['CABLE', 'LAMINA'], 7.5, -3.75, [
-    'The link that keeps the wireless network in step across the bulge.',
-  ], [it('grindless:chain_strand_repeater')], 150),
+  // ------------------------------------------------------------------ home
+  {
+    key: 'TETRON', kind: 'step', title: 'Tetron Array', icon: 'grindless:tetron_array',
+    deps: ['BCHART'], x: 10, y: 2,
+    desc: [
+      'Dies are bumped, bonded and tested near absolute zero, then put together as a &6Tetron Array&r. The gate keeps one.',
+    ],
+    tasks: [it('grindless:tetron_array')],
+    rewards: [xp(150)],
+  },
 
-  // ------------------------------------------------------------------ 4. components
-  M('MOTOR', 'Motors and Pistons', 'gtceu:opv_electric_motor', ['CABLE'], 5, 2.5, [
-    'OpV motors and pistons, built from composite rotors, mesh belts and harmonic drives.',
-  ], [it('gtceu:opv_electric_motor'), it('gtceu:opv_electric_piston')], 150),
-  M('ARM', 'Arms and Conveyors', 'gtceu:opv_robot_arm', ['MOTOR'], 7.5, 2.5, [
-    'Harmonic drives let an arm place things without a wobble. Conveyors carry them off.',
-  ], [it('gtceu:opv_robot_arm'), it('gtceu:opv_conveyor_module')], 150),
-  M('EMIT', 'Emitters and Sensors', 'gtceu:opv_emitter', ['ARM'], 10, 2.5, [
-    'A thorium-229 crystal makes the emitter. A Compton crystal makes the sensor.',
-  ], [it('gtceu:opv_emitter'), it('gtceu:opv_sensor')], 150),
-  M('FIELD', 'Field Generator', 'gtceu:opv_field_generator', ['EMIT'], 12.5, 2.5, [
-    'A trained coil in a chain-strand frame.',
-  ], [it('gtceu:opv_field_generator')], 150),
-  M('PUMP', 'Pumps and Regulators', 'gtceu:opv_electric_pump', ['FIELD'], 15, 2.5, [
-    'A superfluid seal holds against any pressure. Pumps and fluid regulators use it.',
-  ], [it('gtceu:opv_electric_pump'), it('gtceu:opv_fluid_regulator')], 150),
+  // ------------------------------------------------------------------ Cygnus X-1
+  {
+    key: 'J_CYG', kind: 'step', title: 'Back to Cygnus X-1', icon: 'gtceu:annihilation_engine',
+    deps: ['BCHART'], x: 10, y: 0,
+    desc: [
+      'The black hole\'s companion is still there, and now the platform serves a different job. The beams, the antimatter and the Kugelblitz are made here.',
+    ],
+    tasks: [dim('grindless:cygnus_x1_orbit')],
+    rewards: [xp(100)],
+  },
+  {
+    key: 'WINDOW', kind: 'step', title: 'Beam Window', icon: 'grindless:be_beam_window',
+    deps: ['J_CYG'], x: 12, y: 0,
+    desc: [
+      'A thin beryllium foil lets the proton beam out and keeps the vacuum in. Brazed and tested, it is the &6Beam Window&r.',
+    ],
+    tasks: [it('grindless:be_beam_window')],
+    rewards: [xp(100)],
+  },
+  {
+    key: 'STACK', kind: 'step', title: 'Antiproton Stack', icon: 'grindless:antiproton_stack_opv',
+    deps: ['WINDOW'], x: 14, y: 0,
+    desc: [
+      'Protons strike an iridium target, and a decelerator slows what comes out until a trap can hold it. The trap stacks the antiprotons into an &6Antiproton Stack&r. Half of them are lost to annihilation, so handle the stack with care.',
+    ],
+    tasks: [it('grindless:antiproton_stack_opv')],
+    rewards: [xp(200)],
+  },
+  {
+    key: 'ANTIH', kind: 'step', title: 'Antihydrogen Ice', icon: 'grindless:antihydrogen_ice_cell',
+    deps: ['STACK', 'POS'], x: 16, y: 0,
+    desc: [
+      'An antiproton and a positron make antihydrogen, and a magnetic trap keeps it off the walls. Cooled by a Lyman-alpha laser, it freezes into an &6Antihydrogen Ice Cell&r.',
+    ],
+    tasks: [it('grindless:antihydrogen_ice_cell')],
+    rewards: [xp(250)],
+  },
+  {
+    key: 'DISTIL', kind: 'step', title: 'Strangelet Seed', icon: 'grindless:strangelet_seed',
+    deps: ['J_CYG'], x: 12, y: 2,
+    desc: [
+      'A lead beam fired into a target gives a fireball, and the distiller picks the seed of a strangelet out of it. A strangelet is a hypothesis. The seed is fiction.',
+    ],
+    tasks: [it('grindless:strangelet_seed')],
+    rewards: [xp(200)],
+  },
+  {
+    key: 'EXOTIC', kind: 'step', title: 'Stable Exotic Matter', icon: 'grindless:stable_exotic_matter',
+    deps: ['DISTIL'], x: 14, y: 2,
+    desc: [
+      'The vault grows the seed by feeding it neutrons until it is stable. A stable strangelet is not observed. In this pack it is a fuel, and the gate keeps one.',
+    ],
+    tasks: [it('grindless:stable_exotic_matter')],
+    rewards: [xp(250)],
+  },
+  {
+    key: 'KCORE', kind: 'step', title: 'Kugelblitz Core', icon: 'grindless:kugelblitz_core',
+    deps: ['EXOTIC', 'ANTIH'], x: 18, y: 0,
+    desc: [
+      'Light so dense it collapses into a black hole. The forge holds the seed, and the result is the &6Kugelblitz Core&r. A real Kugelblitz is only a prediction of general relativity. Here it is made on purpose, and the gate consumes it.',
+    ],
+    tasks: [it('grindless:kugelblitz_core')],
+    rewards: [xp(300)],
+  },
+  {
+    key: 'HAWK', kind: 'step', title: 'Hawking Drive', icon: 'grindless:hawking_drive',
+    deps: ['KCORE'], x: 20, y: 0,
+    desc: [
+      'A black hole radiates, and the drive points that radiation one way. Globular clusters hold too little gas for a magsail, so the probe to Terzan 5 brakes on this drive.',
+    ],
+    tasks: [it('grindless:hawking_drive')],
+    rewards: [xp(250)],
+  },
+  {
+    key: 'CENSUS4', kind: 'step', title: 'Superheavy Census IV', icon: 'grindless:superheavy_census_iv',
+    deps: ['CABLE', 'J_CYG'], x: 16, y: 2,
+    desc: [
+      'Nickel-64 from the magnetar and californium make elements 124 and 126, and the superheavy lab records them. Element 126 is fiction here: the real island of stability has not been found.',
+    ],
+    tasks: [it('grindless:superheavy_census_iv')],
+    rewards: [xp(300)],
+  },
 
-  // ------------------------------------------------------------------ 5. field freezing
-  M('PRESS', 'Field Frozen Press', 'gtceu:field_frozen_press', ['LAMINA'], 7.5, -7.5, [
-    'The &6Field Frozen Press&r freezes a metal in a strong magnetic field so its grains line up.',
-  ], [it('gtceu:field_frozen_press')], 150),
-  P('FROZEN', 'Field Frozen Casing', 'grindless:field_frozen_casing', ['PRESS'], 10, -7.5, [
-    'A casing with no weak direction. The energy hatches are built around it.',
-  ], [it('grindless:field_frozen_casing')], 100),
-  M('HATCH', 'OpV Energy Hatches', 'gtceu:opv_energy_input_hatch', ['FROZEN'], 12.5, -7.5, [
-    'The first hatches that can carry OpV power. Build a wireless network first if you can; the cells in it are your buffer.',
-  ], [it('gtceu:opv_energy_input_hatch'), it('gtceu:opv_energy_output_hatch'), it('grindless:opv_smes_cell')], 200),
+  // ------------------------------------------------------------------ Terzan 5
+  {
+    key: 'PATH', kind: 'step', title: 'The Pathfinder', icon: 'grindless:launched_pathfinder',
+    deps: ['HAWK', 'TETRON'], x: 22, y: 0,
+    desc: [
+      'A probe with a tetron array, an XNAV unit and a Hawking drive brakes into the cluster by itself. The gate throws it, and it opens a ring at the other end.',
+    ],
+    tasks: [it('grindless:launched_pathfinder')],
+    rewards: [xp(250)],
+  },
+  {
+    key: 'J_TERZ', kind: 'step', title: 'Terzan 5', icon: 'grindless:probe_seed',
+    deps: ['PATH'], x: 24, y: 0,
+    desc: [
+      'Terzan 5 is a globular cluster, a ball of very old stars packed tight at the galaxy\'s centre. Its core is the last place before Sagittarius A*. Debris, metal and starlight are all here.',
+    ],
+    tasks: [dim('grindless:terzan5_core')],
+    rewards: [xp(300)],
+  },
+  {
+    key: 'DEBRIS', kind: 'step', title: 'Bulge Debris', icon: 'grindless:bulge_debris',
+    deps: ['J_TERZ'], x: 26, y: 0,
+    desc: [
+      'The core is strewn with debris that no atmosphere has weathered. The debris harvester collects it as feed for the probes.',
+    ],
+    tasks: [it('grindless:bulge_debris')],
+    rewards: [xp(150)],
+  },
+  {
+    key: 'PSEED', kind: 'step', title: 'Probe Seed', icon: 'grindless:probe_seed',
+    deps: ['DEBRIS'], x: 28, y: 0,
+    desc: [
+      'A probe that copies itself. Terzan 5 supplies the metal, and a kit from home supplies what the cluster cannot. Self-replication is fiction here; a real one is far away.',
+    ],
+    tasks: [it('grindless:probe_seed')],
+    rewards: [xp(250)],
+  },
+  {
+    key: 'SINTER', kind: 'step', title: 'Sinter Casing', icon: 'grindless:cluster_sinter_casing',
+    deps: ['PSEED'], x: 30, y: 0,
+    desc: [
+      'Every copy needs a shell. The refinery sinters cluster silicate into a &6Cluster Sinter Casing&r, and no copy leaves without one.',
+    ],
+    tasks: [it('grindless:cluster_sinter_casing')],
+    rewards: [xp(200)],
+  },
+  {
+    key: 'NODE', kind: 'step', title: 'Deployed Node Packs', icon: 'grindless:deployed_node_pack',
+    deps: ['SINTER'], x: 32, y: 0,
+    desc: [
+      'Each seed carries collector nodes out into the swarm, where they unfold and begin to collect starlight. A pack is consumed as it degrades, so the supply must never stop.',
+    ],
+    tasks: [it('grindless:deployed_node_pack')],
+    rewards: [xp(250)],
+  },
+  {
+    key: 'CENSUS3', kind: 'step', title: 'Bulge Light Census', icon: 'grindless:bulge_light_census',
+    deps: ['NODE'], x: 34, y: 0,
+    desc: [
+      'With enough nodes running, the bulge collector records how much starlight the swarm gathers. The &6Bulge Light Census&r is the proof of a Kardashev III civilisation that the gate keeps.',
+    ],
+    tasks: [it('grindless:bulge_light_census')],
+    rewards: [xp(300)],
+  },
 
-  // ------------------------------------------------------------------ 6. cosmic circuits
-  P('SOI', 'Silicon-28 on Insulator', 'grindless:si28_soi_wafer', ['BCHART'], 15, 0, [
-    'Isotopically pure silicon, split off and bonded. Fewer spins, longer coherence.',
-  ], [it('grindless:si28_soi_wafer')], 100),
-  P('CMOS', 'Cryo-CMOS', 'grindless:cryo_cmos_die', ['SOI'], 17.5, -2.5, [
-    'Logic that works at 4 K, for control electronics next to the qubits.',
-  ], [it('grindless:cryo_cmos_die')], 100),
-  P('LINK', 'Cryo Optical Link', 'grindless:cryo_optical_link', ['SOI'], 17.5, 2.5, [
-    'Light carries the signals in, because wires carry heat.',
-  ], [it('grindless:cryo_optical_link')], 100),
-  P('COSMIC', 'Cosmic Mainframe', 'gtnn:cosmic_mainframe', ['CMOS', 'LINK'], 20, 0, [
-    'The OpV circuit. It joins tetrons, cryogenic logic and optical links in one mainframe.',
-  ], [it('gtnn:cosmic_mainframe')], 250),
-
-  // ------------------------------------------------------------------ 7. tetrons and gamma optics
-  M('TFAB', 'Tetron Fab', 'gtceu:tetron_fab', ['COSMIC'], 22.5, -2.5, [
-    'The &6Tetron Fab&r bonds a tested die to its amplifier.',
-  ], [it('gtceu:tetron_fab')], 150),
-  P('TETRON', 'Tetron Array', 'grindless:tetron_array', ['TFAB'], 25, -2.5, [
-    'Dies are bumped, bonded and tested near absolute zero before they are put together.',
-  ], [it('grindless:tetron_array')], 150),
-  M('GOPT', 'Gamma Optics Works', 'gtceu:gamma_optics_works', ['COSMIC'], 22.5, 2.5, [
-    'Mirrors for gamma rays are multilayers a few atoms thick. The &6Gamma Optics Works&r makes them.',
-  ], [it('gtceu:gamma_optics_works'), it('grindless:gamma_multilayer_mirror')], 150),
-  P('LAUE', 'Laue Lens', 'grindless:laue_lens', ['GOPT'], 25, 2.5, [
-    'Bent crystals focus gamma rays by diffraction.',
-  ], [it('grindless:laue_lens')], 150),
-
-  // ------------------------------------------------------------------ 8. beams at Cygnus
-  P('WINDOW', 'Beam Window', 'grindless:be_beam_window', ['TETRON'], 27.5, -2.5, [
-    'A thin beryllium foil that lets the beam out and keeps the vacuum in.',
-  ], [it('grindless:be_beam_window')], 100),
-  M('SPALL', 'Spallation Target', 'gtceu:spallation_target_station', ['WINDOW'], 30, -2.5, [
-    'The &6Spallation Target Station&r hits an iridium target with protons and collects what comes out.',
-  ], [it('gtceu:spallation_target_station'), it('grindless:ir_spallation_target')], 200),
-  M('COOLER', 'Antiproton Decelerator', 'gtceu:antiproton_decelerator', ['SPALL'], 32.5, -2.5, [
-    'Stochastic cooling pickups and an electron cooler slow the antiprotons until they can be trapped.',
-  ], [it('gtceu:antiproton_decelerator'), it('grindless:electron_cooler')], 200),
-  P('STACK', 'Antiproton Stack', 'grindless:antiproton_stack_opv', ['COOLER'], 35, -2.5, [
-    'Cold antiprotons, held in a trap. Handle them as you would anything that destroys itself on touch.',
-  ], [it('grindless:antiproton_stack_opv')], 200),
-
-  // ------------------------------------------------------------------ 9. antihydrogen and power
-  P('LYMAN', 'Lyman-alpha Laser', 'grindless:lyman_alpha_laser', ['LAUE'], 27.5, 2.5, [
-    'A laser that cools antihydrogen to a standstill.',
-  ], [it('grindless:lyman_alpha_laser'), it('grindless:octupole_trap_magnet')], 150),
-  M('ANTIH', 'Antihydrogen Foundry', 'gtceu:antihydrogen_foundry', ['LYMAN', 'STACK'], 37.5, 0, [
-    'The &6Antihydrogen Foundry&r joins an antiproton with a positron, and the magnetic trap keeps it off the walls.',
-  ], [it('gtceu:antihydrogen_foundry'), it('grindless:antihydrogen_ice_cell')], 250),
-  M('ENGINE', 'Annihilation Engine', 'gtceu:annihilation_engine', ['ANTIH'], 40, 0, [
-    'Matter and antimatter turned entirely into energy. Everything that comes out is either captured or absorbed.',
-  ], [it('gtceu:annihilation_engine')], 300),
-  P('ABSORB', 'Absorbers and Panels', 'grindless:gamma_absorber_tile', ['ENGINE'], 42.5, 0, [
-    'Absorber tiles take the gamma flash. TPV panels turn heat into power. ACMF pellets start the burn.',
-  ], [it('grindless:gamma_absorber_tile'), it('grindless:tpv_panel'), it('grindless:acmf_pellet')], 150),
-
-  // ------------------------------------------------------------------ 10. positrons at SGR
-  M('PACC', 'Positron Accumulator', 'gtceu:positron_accumulator', ['ANTIH'], 40, -2.5, [
-    'Positrons collect in a Penning trap until there are enough.',
-  ], [it('gtceu:positron_accumulator')], 150),
-  P('POS', 'Dense Positron Cell', 'grindless:dense_positron_cell', ['PACC'], 42.5, -2.5, [
-    'A dense plasma of positrons, sealed in a cell.',
-  ], [it('grindless:dense_positron_cell')], 150),
-
-  // ------------------------------------------------------------------ 11. exotic matter
-  M('DISTIL', 'Strangelet Distiller', 'gtceu:strangelet_distiller', ['POS'], 45, -2.5, [
-    'A lead beam gives a fireball. The distiller picks out the seed of a strangelet.',
-  ], [it('gtceu:strangelet_distiller'), it('grindless:strangelet_seed')], 200),
-  M('VAULT', 'Strangelet Vault', 'gtceu:strangelet_vault', ['DISTIL'], 47.5, -2.5, [
-    'The vault grows a strangelet by feeding it neutrons. A negative strangelet is contained and annihilated.',
-  ], [it('gtceu:strangelet_vault'), it('grindless:grown_strangelet')], 200),
-  P('EXOTIC', 'Stable Exotic Matter', 'grindless:stable_exotic_matter', ['VAULT'], 50, -2.5, [
-    'A strangelet that stays stable is a hypothesis, not an observation. In this pack it is a fuel.',
-  ], [it('grindless:stable_exotic_matter')], 250),
-
-  // ------------------------------------------------------------------ 12. Kugelblitz
-  M('KFORGE', 'Kugelblitz Forge', 'gtceu:kugelblitz_forge', ['EXOTIC'], 52.5, -2.5, [
-    'Light so dense it collapses into a black hole. The forge holds the seed.',
-    'Forming a Kugelblitz goes beyond Hawking evaporation, which is real physics. Here it is fiction.',
-  ], [it('gtceu:kugelblitz_forge'), it('grindless:kugelblitz_seed')], 250),
-  P('KCORE', 'Kugelblitz Core', 'grindless:kugelblitz_core', ['KFORGE'], 55, -2.5, [
-    'A small black hole made of nothing but gamma rays.',
-  ], [it('grindless:kugelblitz_core')], 250),
-  M('HAWK', 'Hawking Collector', 'gtceu:hawking_collector', ['KCORE'], 57.5, -2.5, [
-    'A black hole radiates. The collector takes the power and leaves the shell. It also makes the drive for the warp gate.',
-  ], [it('gtceu:hawking_collector'), it('grindless:hawking_drive')], 300),
-
-  // ------------------------------------------------------------------ 13. probes to Terzan 5
-  M('DEBRIS', 'Debris Harvester', 'gtceu:debris_harvester', ['BCHART'], 15, 5, [
-    'The bulge is full of debris. The &6Debris Harvester&r collects it for the probes.',
-  ], [it('gtceu:debris_harvester'), it('grindless:bulge_debris')], 150),
-  P('PSEED', 'Probe Seed', 'grindless:probe_seed', ['DEBRIS'], 17.5, 5, [
-    'A probe that copies itself. Terzan 5 supplies the metal.',
-  ], [it('grindless:probe_seed')], 200),
-  M('FOUNDRY', 'Von Neumann Foundry', 'gtceu:von_neumann_foundry', ['PSEED'], 20, 5, [
-    'A foundry that makes copies of its own probes. Self-replication is fiction here; a real one is far away.',
-  ], [it('gtceu:von_neumann_foundry')], 250),
-  M('SINTER', 'Replication Refinery', 'gtceu:replication_refinery', ['FOUNDRY'], 22.5, 5, [
-    'The refinery sinters silicate into casings for the copies.',
-  ], [it('gtceu:replication_refinery'), it('grindless:cluster_sinter_casing')], 200),
-
-  // ------------------------------------------------------------------ 14. Kardashev III
-  M('NODE', 'Collector Node Works', 'gtceu:collector_node_works', ['SINTER'], 25, 5, [
-    'Nodes unfold in the bulge and collect the light of its stars.',
-  ], [it('gtceu:collector_node_works'), it('grindless:deployed_node_pack')], 200),
-  M('CENSUS3', 'Bulge Collector', 'gtceu:bulge_collector', ['NODE'], 27.5, 5, [
-    'The &6Bulge Collector&r turns starlight into power. The &6Bulge Light Census&r records what it finds.',
-  ], [it('gtceu:bulge_collector'), it('grindless:bulge_light_census')], 300),
-
-  // ------------------------------------------------------------------ 15. census IV and scale
-  P('CENSUS4', 'Superheavy Census IV', 'grindless:superheavy_census_iv', ['HAWK'], 60, -2.5, [
-    'Californium and nickel, fired at one another, make an element beyond 124. Element 126 is fiction here: the real island of stability is not found.',
-  ], [it('grindless:superheavy_census_iv')], 300),
-  M('PARHATCH', 'Parallel Hatch', 'gtceu:opv_parallel_hatch', ['COSMIC'], 22.5, 7.5, [
-    'The &6OpV Parallel Hatch&r runs a machine many times at once.',
-  ], [it('gtceu:opv_parallel_hatch')], 250),
-  M('ARRAY', 'Assembly Line Array', 'gtceu:assembly_line_array', ['PARHATCH'], 25, 7.5, [
-    'An array of assembly lines, side by side, all running together.',
-  ], [it('gtceu:assembly_line_array')], 300),
-
-  // ------------------------------------------------------------------ 16. gate to MAX
-  P('MAX', 'Gate to MAX', 'gtceu:max_machine_casing', ['CENSUS4', 'CENSUS3', 'ENGINE'], 62.5, 0, [
-    'The Sagittarius A* chart is not on any shelf yet. When you have power to spare, the warp gate waits for it. Charge your SMES bank first.',
-  ], [it('gtceu:max_machine_casing')], 100, { shape: 'rsquare', size: 1.5 }),
+  // ------------------------------------------------------------------ the gate
+  {
+    key: 'MAX', kind: 'exit', title: 'Gate to MAX', icon: 'gtceu:max_machine_casing',
+    deps: ['CENSUS4', 'CENSUS3', 'KCORE', 'TETRON'], x: 36, y: 0,
+    desc: [
+      'The Sagittarius A* chart is not on any shelf yet. When your power is ready, the warp gate waits for the Kugelblitz core, the light census, the stable exotic matter, a tetron array, census IV, the bulge chart and cosmic mainframes.',
+      'It writes the chart and researches the &6MAX Machine Casing&r. Charge your SMES bank first.',
+    ],
+    tasks: [it('gtceu:max_machine_casing')],
+    rewards: [xp(400)],
+  },
 ];
