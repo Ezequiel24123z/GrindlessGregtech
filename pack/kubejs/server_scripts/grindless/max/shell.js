@@ -8,7 +8,9 @@
 //      spin map, 1 cloud phase map, 16 horizon phase locks, 8 horizon flux clamps and 1 Rydberg logic array -> 1 horizon lock, the spent
 //      array and 16 spent phase locks (the mirror holds, no scrap). Its first output grants the maxplus stage (startup max/shell.js)
 //
-// c3 is the only recipe above VA[MAX] in the pack (V[MAX] x 16, never a literal). Balance of c1: the packet costs about 2.24e12 EU along L18
+//   c4 condensate tap (MAX+, XP-A1): 1 seed wave packet, the horizon lock kept, a horizon phase lock worn at 1/32 -> 16,000 mB kerr condensate
+//
+// c3 and c4 are the only recipes above VA[MAX] in the pack (V[MAX] x 16, never a literal). Balance of c1: the packet costs about 2.24e12 EU along L18
 // and c1 gives 2^30 x 4,800 = 5.15e12 EU: about 2.3x. All three run in gcyr:black_hole_orbit. The segment is made on the UHV swarm foundry
 // (uhv/swarm.js, circuit 5). Published for the tests: global.grindless.maxShell.recipes, .skipped, .pendingRoutes, .controllerRecipe.
 // Rhino: var + function in callbacks.
@@ -39,7 +41,13 @@
     { name: 'horizon_lock', circuit: 3, eut: V_MAX * 16, duration: 1200,
       items: ['4x grindless:seed_wave_packet', '64x grindless:stream_bundle', '1x grindless:final_spin_map', '1x grindless:cloud_phase_map',
         '16x grindless:horizon_phase_lock', '8x grindless:horizon_flux_clamp', '1x grindless:rydberg_logic_array'],
-      outs: ['1x grindless:horizon_lock', '1x grindless:spent_rydberg_array', '16x grindless:spent_phase_lock'] }
+      outs: ['1x grindless:horizon_lock', '1x grindless:spent_rydberg_array', '16x grindless:spent_phase_lock'] },
+    // c4 (MAX+, package XP-A1, line P1 step 1): the condensate tap. The horizon lock is the tool and is never consumed; the phase lock it
+    // wears is a 1 in 32 chanced input. Runs at Sgr A* like c1 to c3 (tune: amounts)
+    { name: 'condensate_tap', circuit: 4, eut: V_MAX * 16, duration: 1200,
+      items: ['1x grindless:seed_wave_packet'], kept: ['1x grindless:horizon_lock'],
+      chancedIn: [{ id: 'grindless:horizon_phase_lock', chance: 312 }],
+      outs: [], fluidOuts: [['grindless:kerr_condensate', 16000]] }
   ]
 
   function missingOf(items, fluids) {
@@ -62,7 +70,11 @@
     SHELL.forEach(function (r) {
       try {
         var chanced = r.chanced || []
-        var missing = missingOf(r.items.concat(r.outs).concat(chanced.map(function (c) { return c.id })), [])
+        var kept = r.kept || []
+        var chancedIn = r.chancedIn || []
+        var fluidOuts = r.fluidOuts || []
+        var missing = missingOf(r.items.concat(r.outs, kept).concat(chanced.concat(chancedIn).map(function (c) { return c.id })),
+          fluidOuts.map(function (f) { return f[0] }))
         if (missing.length > 0) {
           skip(r.name, missing)
           return
@@ -70,7 +82,10 @@
         var b = event.recipes.gtceu.black_hole_bomb('grindless:' + r.name)
         b.circuit(r.circuit)
         r.items.forEach(function (s) { b.itemInputs(s) })
+        kept.forEach(function (s) { b.notConsumable(s) })
+        chancedIn.forEach(function (c) { b.chancedInput('1x ' + c.id, c.chance, 0) })
         r.outs.forEach(function (s) { b.itemOutputs(s) })
+        fluidOuts.forEach(function (f) { b.outputFluids(Fluid.of(f[0], f[1])) })
         // the ablated segment of the shell's wear: 1 in 16 vents, the input of the segment reclamation works
         chanced.forEach(function (c) { b.chancedOutput('1x ' + c.id, c.chance, 0) })
         b.dimension(SITE)
