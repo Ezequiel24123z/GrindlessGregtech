@@ -30,6 +30,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'uhv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 
 if (-not $OutRoot) { $OutRoot = Join-Path $PSScriptRoot '..\..\pack\kubejs\assets\grindless\textures' }
 $OutRoot = [System.IO.Path]::GetFullPath($OutRoot)
@@ -37,6 +38,7 @@ $ScriptName = Split-Path -Leaf $PSCommandPath
 $Dir = 'block/machines/uhv_parallel_hatch'
 
 $base = Hex 'B0181E'
+$baseCanvas = New-Canvas 1 1; Set-Px $baseCanvas 0 0 $base; $baseToned = (Convert-EraTexture $baseCanvas $EraName 'overlay.png').P[0] -bor 0xFF000000
 $Pal = New-Object 'System.Collections.Generic.Dictionary[string,int]' ([System.StringComparer]::Ordinal)
 $Pal['R'] = $base                               # the bars, UHV red
 $Pal['r'] = Shade $base 0.62                    # a bar's lower edge
@@ -113,7 +115,7 @@ foreach ($rel in $written) {
             $opaque++
             $q = Get-Rgba $px
             if ($q[0] -eq 0 -and $q[1] -eq 0 -and $q[2] -eq 0) { $black++ }
-            if (($px -bor 0xFF000000) -eq $base) { $red++ }
+            if (($px -bor 0xFF000000) -eq $baseToned) { $red++ }
         }
     }
     if ($opaque -eq 0) { $msgs += 'fully transparent' }

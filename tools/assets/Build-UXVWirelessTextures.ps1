@@ -30,6 +30,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'uxv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 
 if (-not $OutRoot) { $OutRoot = Join-Path $PSScriptRoot '..\..\pack\kubejs\assets\grindless\textures' }
 $OutRoot = [System.IO.Path]::GetFullPath($OutRoot)
@@ -92,7 +93,7 @@ Out-Tex (New-CoverItem (New-SmallMast) 'z' $Tier) "item/wireless/dynamo_cover_$T
 # ============================================================================================
 $problems = 0
 $seen = @{}
-$ramp = @(Get-TierRamp $Tier)
+$ramp = @(Get-TierRamp $Tier | ForEach-Object { $t = New-Canvas 1 1; Set-Px $t 0 0 $_; (Convert-EraTexture $t $EraName 'overlay.png').P[0] -bor 0xFF000000 })
 foreach ($rel in $written) {
     $path = Join-Path $OutRoot ($rel -replace '/', '\')
     $img = Read-Png $path
@@ -107,6 +108,10 @@ foreach ($rel in $written) {
             $q = Get-Rgba $px
             if ($q[0] -eq 0 -and $q[1] -eq 0 -and $q[2] -eq 0) { $black++ }
             if ($ramp -contains ($px -bor 0xFF000000)) { $tier++ }
+            elseif ($rel -like 'item/*') {
+                # item finishes (step shape, wear, panel) re-tone every pixel; accept a near-ramp colour
+                foreach ($r in $ramp) { if ([math]::Abs((($r -shr 16) -band 255) - $q[0]) + [math]::Abs((($r -shr 8) -band 255) - $q[1]) + [math]::Abs(($r -band 255) - $q[2]) -le 48) { $tier++; break } }
+            }
         }
     }
     if ($opaque -eq 0) { $msgs += 'fully transparent' }

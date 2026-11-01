@@ -15,6 +15,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'uhv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 $ScriptName = Split-Path -Leaf $PSCommandPath
 if (-not $OutRoot) { $OutRoot = Join-Path $PSScriptRoot '..\..\pack\kubejs\assets\grindless\textures' }
 $itemDir = Join-Path $OutRoot 'item'

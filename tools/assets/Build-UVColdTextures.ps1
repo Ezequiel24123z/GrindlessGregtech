@@ -25,6 +25,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'uv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 
 $RepoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 if (-not $OutRoot) { $OutRoot = Join-Path $RepoRoot 'pack\kubejs\assets\grindless\textures' }
@@ -85,6 +86,7 @@ function Test-Accent {
 
 function New-Item16 {
     param([string]$Name, [string[]]$Spec)
+    if (@('heap', 'orb', 'card', 'vial', 'spool', 'crystal', 'module', 'capsule', 'chip', 'sail', 'cup', 'cartridge') -contains $Spec[0] -and $Spec.Count -le 3) { return New-EraComponentBody $EraName $Spec[0] $Name (Hex $Spec[1]) (Hex $Spec[2]) }
     $c = New-Canvas 16 16
     $salt = 0; foreach ($ch in $Name.ToCharArray()) { $salt = ($salt * 31 + [int]$ch) % 9973 }
     $body = Hex $Spec[1]; $accent = Hex $Spec[2]

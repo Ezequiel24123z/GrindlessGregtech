@@ -11,6 +11,7 @@
 param([string]$OutRoot = '', [switch]$Credits)
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'Pixel.Lib.ps1')
+$EraName = 'uiv'; . (Join-Path $PSScriptRoot 'Era.Lib.ps1')
 if (-not $OutRoot) { $OutRoot = Join-Path $PSScriptRoot '..\..\pack\kubejs\assets\grindless\textures' }
 
 $dir = Join-Path $OutRoot 'block\multiblock\neutronium_compression_hall'
