@@ -1,5 +1,5 @@
 // pl_ev: the EV lines. Positions are relative to each cluster (pl-model.mjs places the clusters).
-import { I, F, M, n, L, via } from './pl-lib.mjs';
+import { I, F, M, n, L, via, build } from './pl-lib.mjs';
 
 export default {
   file: 'pl_ev',
@@ -192,9 +192,9 @@ export default {
       name: 'Crops without sky',
       nodes: [
         n('seeds', 0, -0.75, I('minecraft:beetroot_seeds'), 'Seeds', { kind: 'raw', sub: 'Any plant; never used up' }),
-        n('air', -5, 0.75, F('gtceu:mars_air'), 'Martian Air', { kind: 'raw', sub: 'Taken from the sky of Mars' }),
+        n('air', -5, 0.75, I('gtceu:ev_machine_hull'), 'EV Hull', { kind: 'raw', sub: 'The processor is crafted around it' }),
         n('aproc', -2.5, 0.75, M('gtceu:atmosphere_processor'), 'Atmosphere Processor', {
-          kind: 'ours', from: ['air'], sub: 'Circuit 2, on Mars',
+          kind: 'ours', from: [build('air')], sub: 'Circuit 2, on Mars',
           desc: 'Circuit 2 only breathes: Martian air in, its carbon dioxide out, with no water and no catalyst.',
         }),
         n('co2', 0, 0.75, F('gtceu:carbon_dioxide'), 'Carbon Dioxide', { from: ['aproc'], sub: 'Martian air, or MV\'s test stand exhaust' }),
