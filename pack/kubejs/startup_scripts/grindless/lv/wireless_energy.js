@@ -98,6 +98,11 @@
     W.cellIds.push(r.cell)
   })
 
+  // the horizon capacitor bank (XP-H5): its cell and site are not in W.cells, so no tower takes the cell (maxplus/capacitor_bank.js, startup)
+  W.bank = T.maxplusBank ? T.maxplusBank : null
+  W.bankCells = (T.maxplusCells || []).slice()
+  W.bankId = W.bank ? W.bank.id : ''
+
   // the hatches: role 'deposit' = the settlement empties it into the network, 'withdraw' = it fills it from the network
   W.hatchKinds = {
     hatch: { key: 'hatch', base: 'wireless_energy_hatch', io: 'IN', role: 'withdraw', ability: 'INPUT_ENERGY', label: 'Wireless Energy Hatch' },
