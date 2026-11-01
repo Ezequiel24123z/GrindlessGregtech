@@ -26,7 +26,7 @@ const q = (s) => JSON.stringify(s);
 const isNum = (v) => v && typeof v === 'object' && '$n' in v;
 
 function number(v, suffix, where) {
-  if (!isNum(v) || v.$t !== (suffix || 'i')) throw new Error(`${where}: expected a number with suffix "${suffix}", got ${JSON.stringify(v)}`);
+  if (!isNum(v) || String(v.$t).toLowerCase() !== (suffix || 'i').toLowerCase()) throw new Error(`${where}: expected a number with suffix "${suffix}", got ${JSON.stringify(v)}`);
   return v.$n;
 }
 
