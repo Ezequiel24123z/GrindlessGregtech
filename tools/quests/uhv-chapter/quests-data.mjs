@@ -1,4 +1,4 @@
-// Quest data for uhv_age ("UHV: Proxima and the Swarm"); gen.mjs in this folder writes the chapter (docs/quests.md, sections 8 and 14;
+// Quest data for uhv_age ("UHV: Proxima and the Swarm"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
 // docs/eras/uhv.md, "Quests"). Ids come from the keys: never rename a key once a quest has shipped.
 // Positions: columns every 2. Home is the left half, in lanes off START: isotopes above, then light, power devices and water, life,
 // materials and antimatter below. The right half leaves home: Mercury and the Swarm on the upper rows, Proxima b on the lower

@@ -205,13 +205,12 @@ node tools\quests\fix-ids.mjs [--chapter lv_age] [--write] [--map]
 powershell -File tools\quests\Render-QuestPreview.ps1 -Chapter steam_age -OutDir <folder> [-Prefix after-]
 
 # Generated chapters: edit the data, then regenerate (the SNBT comes out with the same ids)
-node tools\quests\ev-chapter\gen.mjs                                    # ev_age.snbt from quests-data.mjs (section 14)
-node tools\quests\luv-chapter\gen.mjs [--pending] [--all --out <file>]  # luv_age.snbt; only the landed LuV packages (section 14)
-node tools\quests\zpm-chapter\gen.mjs                                   # zpm_age.snbt (section 14)
+node tools\quests\gen-chapters.mjs [--era ev,luv] [--pending] [--every-package --out <dir>]   # every era chapter (EV to MAX) from its quests-data.mjs (section 14); LuV keeps only the landed packages
 powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]   # Processing Lines and Power (sections 17 and 18)
 ```
 
 - The preview draws quest links as teal dashed boxes, with the lines FTB Quests draws to them.
+- `gen-chapters.mjs` also reads, per quest, `kind` (start, step, reading, side, exit, milestone, machine, plant, signature, wafer, circuit, process: shape and size as in `docs/reforge/05_quest_design.md` §4.2), `teach` (`for`, `needs`, `unlocks`, `automate`; required for machine, plant, signature, wafer, circuit and process) and a chapter-level `LINKS` list (quest links by key). The package gate (`PACKAGES`, `LANDED`, `pkg`, `fallback`, `slot`) works in every era. An explicit `shape` or `size` always wins over `kind`.
 - `--items`/`--tags` use the `items.json` and `tags.json` files from a `gg_dump` (the most recent one, with the Moon: `files/test-runs/hidden-moon-dump1/results/server/kubejs-exported/`). The dump only includes the tags that some recipe uses, so a tag missing there is a warning; `gg_test_quests` checks all of them in-game.
 - Errors: repeated id, id that FTB Quests cannot read (8–F), dependency that does not exist or is circular, second start, floating quest, overlapping boxes, backward line, line longer than 5 squares, item that does not exist, chapter without a title, quest without tasks.
 - Warnings: off the grid, boxes almost touching, vertical drop of more than 3, line passing under another quest, crossings, long text, banned phrase, long dash or " - " used as a dash, quantity in the text, no reward, too many rewards.

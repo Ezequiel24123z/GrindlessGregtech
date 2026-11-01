@@ -1,4 +1,4 @@
-// Quest data for uiv_age ("UIV - Dead Stars"); gen.mjs in this folder writes the chapter (docs/quests.md, sections 8 and 14;
+// Quest data for uiv_age ("UIV - Dead Stars"); tools/quests/gen-chapters.mjs writes the chapter (docs/quests.md, sections 8 and 14;
 // docs/eras/uiv.md, "Quests", the ten parts). Ids come from the keys: never rename a key once a quest has shipped.
 // Positions: the foundation spine runs along y = 0 and the three home lanes leave START (metallic hydrogen and RHEA above,
 // superheavy II above that, light and the Mk5 below). The trunk then runs right along y = 0: Mercury, RX J1856, PSR J0437, Cygnus X-1
