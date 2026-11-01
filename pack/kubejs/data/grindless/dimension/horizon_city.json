@@ -1,0 +1,17 @@
+{
+  "type": "grindless:horizon_city",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "grindless:horizon_city",
+      "features": false,
+      "lakes": false,
+      "layers": [
+        { "block": "minecraft:bedrock", "height": 1 },
+        { "block": "minecraft:diorite", "height": 2 },
+        { "block": "minecraft:calcite", "height": 1 }
+      ],
+      "structure_overrides": ["grindless:horizon_city"]
+    }
+  }
+}
