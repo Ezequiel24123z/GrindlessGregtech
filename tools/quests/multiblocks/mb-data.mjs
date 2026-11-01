@@ -11,7 +11,7 @@ export const CHAPTER = {
 };
 
 // Band order, top to bottom. A band with no controllers is skipped; a later tier is added here when it lands.
-export const TIERS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+export const TIERS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 
 // The tiers whose gate decides where a controller of the other mods goes: every tier up to the dump's implemented era
 // that has a tools/analysis/tiers/<tier>.json.
@@ -19,11 +19,11 @@ export const gateTiers = (implemented, hasConfig) => TIERS.slice(0, TIERS.indexO
 
 export const TIER_NAMES = {
   steam: 'Steam', lv: 'LV', mv: 'MV', hv: 'HV', ev: 'EV', iv: 'IV', luv: 'LuV', zpm: 'ZPM', uv: 'UV', uhv: 'UHV',
-  uev: 'UEV', uiv: 'UIV', uxv: 'UXV', opv: 'OpV', max: 'MAX',
+  uev: 'UEV', uiv: 'UIV', uxv: 'UXV', opv: 'OpV', max: 'MAX', maxplus: 'MAX+',
 };
 
-// A band's label icon: the tier's machine hull; Steam has no hull, so its bronze casing.
-export const LABEL_ICON_OVERRIDES = { steam: 'gtceu:bronze_machine_casing' };
+// A band's label icon: the tier's machine hull; Steam has no hull, so its bronze casing, and MAX+ (GTM's MAX hull) its own casing.
+export const LABEL_ICON_OVERRIDES = { steam: 'gtceu:bronze_machine_casing', maxplus: 'grindless:horizon_machine_casing' };
 export const labelIcon = (tier) => LABEL_ICON_OVERRIDES[tier] || `gtceu:${tier}_machine_hull`;
 
 // Era folders of startup_scripts/grindless/: a multiblock registered there shows in that tier's band.

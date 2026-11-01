@@ -604,22 +604,6 @@
 			y: -4.5d
 		}
 		{
-			dependencies: ["756117B334515EA3", "30D3D68203F455F9"]
-			description: ["Bring back raw ore from each End vein and make the samples at home, same as ever. The MV drill runs them with a vanadium steel bit and drilling fluid in the tank, and platinum, palladium and zirconium come up with the rest."]
-			icon: "grindless:vein_sample_sheldonite"
-			id: "004525B795119B1B"
-			rewards: [{ id: "6BC885CD026BAD65", type: "xp", xp: 40 }]
-			tasks: [
-				{ id: "1AF75215B6DC9170", item: "grindless:vein_sample_bauxite_end", type: "item" }
-				{ id: "6EAC9D6932581F0E", item: "grindless:vein_sample_magnetite_end", type: "item" }
-				{ id: "456E0BD2E8DB3874", item: "grindless:vein_sample_sheldonite", type: "item" }
-				{ id: "1DA53D76EFA29AB0", item: "grindless:vein_sample_zirconium", type: "item" }
-			]
-			title: "End Veins"
-			x: 10.0d
-			y: -4.5d
-		}
-		{
 			dependencies: ["51BBBA6F37785CD7"]
 			description: ["Eleven shaping machines share one controller, from the bender and wiremill to the lathe and cutter, and its mode tab picks which one it is. It runs a few recipes at once, each at full price: less floor space, same power bill."]
 			icon: "gtceu:universal_processing_factory"

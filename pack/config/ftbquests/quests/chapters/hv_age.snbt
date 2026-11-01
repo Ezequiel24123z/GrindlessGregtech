@@ -67,6 +67,22 @@
 			y: -3.0d
 		}
 		{
+			dependencies: ["756117B334515EA3", "2CD2C8EF5A408796"]
+			description: ["Bring back raw ore from each End vein and make the samples at home, same as ever. The HV drill runs them with a stainless steel bit and drilling fluid in the tank, and platinum, palladium and zirconium come up with the rest."]
+			icon: "grindless:vein_sample_sheldonite"
+			id: "004525B795119B1B"
+			rewards: [{ id: "6BC885CD026BAD65", type: "xp", xp: 40 }]
+			tasks: [
+				{ id: "1AF75215B6DC9170", item: "grindless:vein_sample_bauxite_end", type: "item" }
+				{ id: "6EAC9D6932581F0E", item: "grindless:vein_sample_magnetite_end", type: "item" }
+				{ id: "456E0BD2E8DB3874", item: "grindless:vein_sample_sheldonite", type: "item" }
+				{ id: "1DA53D76EFA29AB0", item: "grindless:vein_sample_zirconium", type: "item" }
+			]
+			title: "End Veins"
+			x: 8.0d
+			y: -4.5d
+		}
+		{
 			dependencies: ["5B595A919C80BFC0"]
 			description: [
 				"The greenhouse at HV size: more bores per run. Fertilizer and carbon dioxide. Plant stock for the chemistry ahead. Seeds in, harvest out, both by bus."
