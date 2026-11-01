@@ -11,6 +11,12 @@
   "loss": { "numerator": 19, "denominator": 20 },
   "hatchAmps": [2, 4, 16, 64],
   "coverAmps": 2,
+  "_maxplusCaps": "XP-W (docs/eras/maxplus.md 'Hatches'): the case 14 (tier 14) caps of the 1,024 to 4,096 A hatches, V[MAX] x A x settleTicks as a long. Rows only: no startup script registers these hatches yet (hatchAmps would register them at every tier).",
+  "maxplusCaps": [
+    { "tier": 14, "amps": 1024, "cap": 21990232555520 },
+    { "tier": 14, "amps": 2048, "cap": 43980465111040 },
+    { "tier": 14, "amps": 4096, "cap": 87960930222080 }
+  ],
   "tower": {
     "id": "gtceu:wireless_energy_tower",
     "casing": "gtceu:solid_machine_casing",
