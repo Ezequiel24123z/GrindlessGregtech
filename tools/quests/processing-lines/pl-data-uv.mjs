@@ -48,7 +48,7 @@ const chapter = {
       ],
     },
     beams: {
-      name: 'Muon-catalysed fusion', role: 'power',
+      name: 'Muon-catalysed fusion',
       keepShort: 'a generator fed by one freezer and the blanket it also wears; the tritium it makes is bred back, so the loop is the whole line',
       nodes: [
         L('trit', 0, 0, 'pl_iv:tritium'),
@@ -123,7 +123,9 @@ const chapter = {
     pluto: {
       name: 'Pluto\'s ices and closed life',
       nodes: [
-        n('pfr', -5, -0.75, I('grindless:printed_probe_frame'), 'Printed Probe Frame', { kind: 'raw', sub: 'Four go into the bay too' }),
+        n('nnpf', -7.5, -0.75, I('grindless:near_net_probe_frame'), 'Near-Net Probe Frame', { kind: 'raw', sub: 'From the Starshot printers' }),
+        n('ppf', -7.5, 0.75, M('gtceu:powder_bed_printer'), 'Powder Bed Printer', { kind: 'ours', from: ['nnpf'], desc: 'Presses the frame in argon.' }),
+        n('pfr', -5, -0.75, I('grindless:printed_probe_frame'), 'Printed Probe Frame', { kind: 'product', from: ['ppf'], sub: 'Four go into the bay too' }),
         n('pgph', -5, 0.75, I('grindless:gphs_module'), 'GPHS Module', { kind: 'raw', sub: 'From the Starshot heat sources' }),
         n('ppr', -2.5, 0, I('grindless:penetrator_probe'), 'Penetrator Probe', { kind: 'product', from: ['pfr', 'pgph'], sub: 'With an HPGe crystal, a melt head and a sensor' }),
         n('tic', -2.5, -2, I('grindless:triton_ice_core'), 'Triton Ice Core', { kind: 'raw', sub: 'Dug on Triton' }),
@@ -208,8 +210,8 @@ const chapter = {
         n('kwater', 30, 1.5, F('minecraft:water'), 'Water', { kind: 'by', from: ['anneal'], end: 'the network' }),
         n('noble', 30, 3, F('gtceu:kuiper_noble_gas'), 'Kuiper Noble Gas', { kind: 'product', from: ['anneal'], sub: 'Split in the cryogenic plant' }),
         n('kco', 30, 4.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'by', from: ['anneal'], end: 'the syngas plant' }),
-        n('kr', 32.5, 2.25, F('gtceu:krypton'), 'Krypton', { kind: 'product', role: 'travel', from: ['noble'], end: 'the Hall thruster' }),
-        n('xe', 32.5, 3.75, F('gtceu:xenon'), 'Xenon', { kind: 'product', role: 'travel', from: ['noble'], end: 'the ion thruster' }),
+        n('kr', 32.5, 2.25, F('gtceu:krypton'), 'Krypton', {         kind: 'product', from: ['noble'], end: 'the Hall thruster' }),
+                n('xe', 32.5, 3.75, F('gtceu:xenon'), 'Xenon', { kind: 'product', from: ['noble'], end: 'the ion thruster' }),
         // high-purity germanium
         L('lgedust', 0, 9, 'pl_luv:gedust'),
         n('zrt', 2.5, 9, M('gtceu:zone_refining_tower'), 'Zone Refining Tower', {
@@ -226,9 +228,10 @@ const chapter = {
         n('hbn', 5, 12, I('grindless:hbn_dust'), 'Hexagonal Boron Nitride', { kind: 'product', from: ['bnr'], sub: 'The sail film takes some too' }),
         n('bnntd', 7.5, 12, I('grindless:bnnt_dust'), 'Nanotube Dust', { kind: 'product', from: ['hbn'], sub: 'Grown in hydrogen' }),
         n('yarn', 10, 12, I('grindless:bnnt_yarn'), 'BNNT Yarn', { kind: 'product', from: ['bnntd'], sub: 'Spun five to one; the boron nitride comes back' }),
-        n('winder', 12.5, 12, M('gtceu:cryotank_winder'), 'Cryotank Winder', { kind: 'ours', from: ['yarn', via('laer', 'grindless:aerogel_fuel_tank')], desc: 'Winds the yarn round an aerogel tank with carbon nanotube yarn and epoxy.' }),
+        n('winder', 12.5, 12, M('gtceu:cryotank_winder'), 'Cryotank Winder', { kind: 'ours', from: ['yarn', 'laer', 'lct'], desc: 'Winds the yarn round an aerogel tank with carbon nanotube yarn and epoxy.' }),
         n('tank', 15, 12, I('grindless:bnnt_fuel_tank'), 'BNNT Fuel Tank', { kind: 'product', from: ['winder'], end: 'built into the Pluto rocket' }),
         L('laer', 10, 13.5, 'pl_zpm:aer'),
+        L('lct', 15, 13.5, 'pl_luv:cryotank'),
         // the light sail
         L('lsw', 0, 15, 'pl_mv:wafer'),
         n('wsf', 2.5, 15, M('gtceu:wake_shield_facility'), 'Wake Shield Facility', {
@@ -298,7 +301,7 @@ const TOGETHER = {
   kwater: [32.75, 14.75], noble: [29.5, 19.75], kco: [30.5, 12.5], kr: [32, 18.5],
   xe: [33.5, 20.25], lgedust: [27.5, 33.75], zrt: [30.75, 32.75], gecl4: [34.5, 33.5],
   gein: [38, 35], hpge: [42, 36.75], b2o3: [-5.25, 15.5], bnr: [-1.75, 14.25],
-  hbn: [3, 13], bnntd: [5.75, 15.5], yarn: [7.5, 17], winder: [10.5, 19], laer: [8, 20.25],
+  hbn: [3, 13], bnntd: [5.75, 15.5], yarn: [7.5, 17], winder: [10.5, 19], laer: [8, 20.25], lct: [12.5, 20.5],
   tank: [13, 17.75], lsw: [-9.25, 12.25], wsf: [-7, 11], sepi: [-4.5, 10.75],
   lsf: [-1, 11.25], film: [2, 9.5], pat: [4.75, 9.75], lsail: [6, 12],
   sb: [9, -4.25], sebf: [13.5, -2.25], boule: [17, 0.5], swafer: [19.75, 2.5],
@@ -313,7 +316,7 @@ const TOGETHER = {
 };
 const PARTS = new Set(['cmox', 'am', 'hs', 'pellet', 'gphs', 'rtg', 'micro', 'ti', 'pbp', 'tipow', 'near', 'pchamber', 'tw', 'ion', 'pod',
   'craft', 'ibay', 'sample', 'anneal', 'kwater', 'noble', 'kco', 'kr', 'xe', 'lgedust', 'zrt', 'gecl4', 'gein', 'hpge',
-  'b2o3', 'bnr', 'hbn', 'bnntd', 'yarn', 'winder', 'laer', 'tank', 'lsw', 'wsf', 'sepi', 'lsf', 'film', 'pat', 'lsail']);
+  'b2o3', 'bnr', 'hbn', 'bnntd', 'yarn', 'winder', 'laer', 'lct', 'tank', 'lsw', 'wsf', 'sepi', 'lsf', 'film', 'pat', 'lsail']);
 const fusion = chapter.clusters.cold.nodes;
 const parts = chapter.clusters.starshot.nodes.filter((nd) => PARTS.has(nd.key));
 const probe = chapter.clusters.starshot.nodes.filter((nd) => !PARTS.has(nd.key));

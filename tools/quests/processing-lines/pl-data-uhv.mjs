@@ -2,7 +2,7 @@
 // Every UHV package has landed, so nothing is gated. Arrows are checked against a recipe dump by pl-check.mjs (integrator).
 // Each row is one line of docs/eras/uhv.md ("New process lines", numbers in the comments): its feedstock, its machines and
 // its product, with the keys steps that carry the chain. Rows are laid out by chain(), 2.5 columns per step.
-import { I, F, M, n } from './pl-lib.mjs';
+import { I, F, M, n, L } from './pl-lib.mjs';
 
 // a step is [key, resource, title, kind?, options?]: the first step is raw, machines are 'ours', the rest products
 function chain(y, steps, end, x0 = 0) {
@@ -243,6 +243,7 @@ const data = {
         n('sp', 19.5, -9, I('grindless:sporosarcina_culture'), 'Sporosarcina Culture', { kind: 'raw', sub: 'With urea' }),
         n('heap2', 19.5, -7, mach('gtceu:biomining_heap'), 'Biomining Heap', { kind: 'ours', from: ['cacl', 'cold2', 'sp'], desc: 'Bacteria cement the regolith with calcium carbonate.' }),
         n('bcr', 22, -7, I('grindless:biocemented_regolith'), 'Biocemented Regolith', { kind: 'product', from: ['heap2'] }),
+        L('lnqa', 22, -2.25, 'pl_luv:nqa'),
       ],
     },
     ground: {
@@ -296,7 +297,7 @@ const data = {
           ['mg', I('gtceu:magnesium_dust'), 'Magnesium', 'raw', { sub: 'With boron' }],
           ['mgb2', I('gtceu:magnesium_diboride_dust'), 'MgB2 Powder'],
           ['pit', mach('gtceu:powder_in_tube_line'), 'Powder-in-Tube Line', 'ours', { desc: 'Packs the powder in an iron tube and draws it to wire.' }],
-          ['wire', I('gtceu:magnesium_diboride_single_wire'), 'MgB2 Wire', 'product'],
+          ['wire', I('gtceu:magnesium_diboride_single_wire'), 'MgB2 Wire', 'product', { role: 'infrastructure' }],
         ], 'cables and the field generators'),
       ],
     },
@@ -379,6 +380,7 @@ take('photonics', 'pf', 'lnoi');
 take('life', 'oa', 'chs');
 take('life', 'comp', 'chs');
 take('life', 'pbc', 'bcr');
+take('life', 'panel', 'lnqa');
 take('antimatter', 'gate', 'ah', 'clk', 'opg');
 take('ground', 'nmw', 'uvc');
 take('power', 'thw', 'tank');
