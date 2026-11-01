@@ -33,7 +33,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ older machines at the shell
   {
     key: 'OM_SHELL', kind: 'machine', title: 'The Shell and Its Tenants', icon: 'gtceu:mirror_shell',
-    deps: ['I_L_OM1'], x: 2, y: 0,
+    deps: ['START'], x: 2, y: 0,
     teach: {
       for: 'The &6Mirror Shell&r is the one place the horizon is tapped; the old c4 row sits in its shadow and feeds it.',
       needs: 'The shell and the c4 machines of the hole row.',
@@ -72,7 +72,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_DOR', kind: 'machine', title: 'At 30 Doradus', icon: 'gtceu:plasma_mass_filter',
-    deps: ['I_L_OM2'], x: 2, y: 3,
+    deps: ['LMC'], x: 2, y: 3,
     teach: {
       for: 'The plasma mass filter and the FRC former turn the lift\'s raw wind into confined plasma, the same way at this scale as before.',
       needs: 'Both controllers, on the platform at 30 Doradus.',
@@ -87,7 +87,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ home rows
   {
     key: 'OM_UXV', kind: 'machine', title: 'Home Rows: UXV', icon: 'gtceu:pasta_draw_bench',
-    deps: ['I_L_OM3'], x: 2, y: 6,
+    deps: ['START'], x: 2, y: 6,
     teach: {
       for: 'The UXV row\'s controllers at home: draw bench, sputter cluster, PLD chamber, shequid works, racetrack fab and stellar elevator.',
       needs: 'All six controllers.',
@@ -154,7 +154,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ power
   {
     key: 'PW_NI', kind: 'plant', title: 'Power from Nickel-56', icon: 'grindless:co56_cask',
-    deps: ['I_L_PWR1'], x: 2, y: 9,
+    deps: ['CASK'], x: 2, y: 9,
     teach: {
       for: 'The burner takes a shielded nickel-56 cask and returns a cobalt-56 cask, then a spent iron-56 cask. Heat becomes steam, and steam becomes EU on the platform.',
       needs: 'Casks from the crucible, and a dynamo hatch on the platform.',
@@ -167,7 +167,7 @@ export const QUESTS = [
   },
   {
     key: 'PW_TORUS', kind: 'plant', title: 'Power from Fusion Fuel', icon: 'gtceu:primordial_deuterium_bucket',
-    deps: ['I_L_PWR2'], x: 2, y: 12,
+    deps: ['PD'], x: 2, y: 12,
     teach: {
       for: 'Primordial deuterium and pristine helium-3 fuel a torus on the platform. The fusion reactions are not new; the fuel comes from the Stream.',
       needs: 'Both fuels in bulk, and a torus.',
@@ -208,7 +208,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ AE2
   {
     key: 'AE_A1', kind: 'process', title: '256M Storage', icon: 'megacells:item_storage_cell_256m',
-    deps: ['I_L_AE2'], x: 2, y: 15,
+    deps: ['SCALE'], x: 2, y: 15,
     teach: {
       for: 'The 256M cell component and a horizon storage die make cells that hold the stage\'s item and fluid counts.',
       needs: 'The &6Horizon Storage Die&r from the circuits tab, and the 256M component.',
@@ -247,7 +247,7 @@ export const QUESTS = [
   },
   {
     key: 'PAR', kind: 'machine', title: 'The Parallel Hatch', icon: 'gtceu:max_maxplus_parallel_hatch',
-    deps: ['I_L_PAR'], x: 2, y: 18,
+    deps: ['SCALE'], x: 2, y: 18,
     teach: {
       for: 'The MAX+ parallel hatch lets one machine run a very large batch at once. It does not make a recipe faster; it makes the plan fit.',
       needs: 'The &6parallel hatch&r, on a controller that accepts it.',
