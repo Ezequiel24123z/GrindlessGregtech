@@ -2,7 +2,6 @@
 
 export const CHAPTER = {
   id: "47DE4F5800320CB8",
-  group: "3F021F40CD26BF57",
   order: 0,
   icon: "gtceu:bronze_gear",
   autofocus: "STEAM_STEAM_AGE",

@@ -9,8 +9,7 @@ const ri = (item, count, id) => ({ type: 'item', item, count, id });
 
 export const CHAPTER = {
   id: "36522099DD26AB80",
-  group: "3F021F40CD26BF57",
-  order: 4,
+  order: 0,
   icon: "gtceu:ev_vein_drill",
   autofocus: "LB",
   title: "EV: Lunar Base",

@@ -2,8 +2,7 @@
 
 export const CHAPTER = {
   id: "10A73E7D249CDD67",
-  group: "3F021F40CD26BF57",
-  order: 5,
+  order: 0,
   icon: "gtceu:fission_reactor",
   autofocus: "IV_INNER_PLANETS",
   title: "IV: Inner Planets",

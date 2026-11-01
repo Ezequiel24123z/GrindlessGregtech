@@ -8,7 +8,7 @@ export const CHAPTER = {
   filename: "ev_circuits",
   era: "ev",
   role: "circuits",
-  order: 5,
+  order: 1,
   icon: "gtceu:nano_processor",
   autofocus: "ECA",
   title: "EV: Circuits",

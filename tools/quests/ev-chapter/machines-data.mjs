@@ -9,7 +9,7 @@ export const CHAPTER = {
   filename: "ev_machines",
   era: "ev",
   role: "machines",
-  order: 6,
+  order: 2,
   icon: "gtceu:regolith_cell",
   autofocus: "TRP",
   title: "EV: Machines",

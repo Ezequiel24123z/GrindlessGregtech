@@ -19,8 +19,7 @@ const P = (key, title, icon, deps, x, y, desc, tasks, reward = 100, extra = {}) 
 });
 
 export const CHAPTER = {
-  group: '3F021F40CD26BF57',
-  order: 10,
+  order: 0,
   icon: 'gtceu:uev_machine_casing',
   autofocus: 'START',
   title: 'UEV - Several Stars',

@@ -10,8 +10,7 @@ const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
 export const CHAPTER = {
-  group: '3F021F40CD26BF57',
-  order: 7,
+  order: 0,
   icon: 'grindless:saturn_transfer_chart',
   autofocus: 'START',
   title: 'ZPM: The Ringed and Ice Giants',

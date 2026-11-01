@@ -20,8 +20,7 @@ const P = (key, title, icon, deps, x, y, desc, tasks, reward = 100, extra = {}) 
 });
 
 export const CHAPTER = {
-  group: '3F021F40CD26BF57',
-  order: 11,
+  order: 0,
   icon: 'gtceu:uiv_machine_casing',
   autofocus: 'START',
   title: 'UIV - Dead Stars',

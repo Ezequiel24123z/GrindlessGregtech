@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import { buildWorld, renderWorld, newId, descriptionOf, KINDS } from '../lib/chapter-gen.mjs';
-import { eraGroupId, PROGRESSION_GROUP } from '../lib/groups.mjs';
+import { eraGroupId, PROGRESSION_GROUP, ERA_GROUPS } from '../lib/groups.mjs';
 import { parse } from '../lib/snbt.mjs';
 
 const it = (item, count) => ({ type: 'item', item, count });
@@ -133,8 +133,14 @@ test('raw fields pass through and cannot shadow modelled ones', () => {
   assert.throws(() => text([quest('A', { raw: { title: '"x"' } })]), /collides/);
 });
 
-test('group ids: pinned group wins, else Progression', () => {
+test('group ids: pinned group wins, else the era group, else Progression', () => {
   assert.equal(eraGroupId({ filename: 'x' }), PROGRESSION_GROUP.id);
+  assert.equal(eraGroupId({ filename: 'x', era: 'tst' }), PROGRESSION_GROUP.id);
   assert.equal(eraGroupId({ filename: 'x', group: '7C6BF927E205E2F4' }), '7C6BF927E205E2F4');
+  assert.equal(eraGroupId({ filename: 'x', era: 'ev', group: '7C6BF927E205E2F4' }), '7C6BF927E205E2F4');
+  for (const era of ['steam', 'lv', 'mv', 'hv']) assert.equal(eraGroupId({ filename: 'x', era }), ERA_GROUPS.steam.id, era);
+  assert.equal(eraGroupId({ filename: 'x', era: 'ev' }), ERA_GROUPS.ev.id);
+  assert.equal(new Set(Object.values(ERA_GROUPS).map((g) => g.id)).size, 13);
+  for (const g of Object.values(ERA_GROUPS)) assert.match(g.id, /^[1-7][0-9A-F]{15}$/, g.title);
   assert.throws(() => eraGroupId({ filename: 'x', group: 'abc' }), /16 uppercase hex/);
 });

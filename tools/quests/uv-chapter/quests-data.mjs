@@ -11,8 +11,7 @@ const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
 export const CHAPTER = {
-  group: '3F021F40CD26BF57',
-  order: 8,
+  order: 0,
   icon: 'grindless:pluto_kuiper_chart',
   autofocus: 'START',
   title: 'UV: Pluto and the Edge',

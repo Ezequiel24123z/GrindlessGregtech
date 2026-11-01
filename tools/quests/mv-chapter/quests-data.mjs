@@ -2,7 +2,6 @@
 
 export const CHAPTER = {
   id: "358BED21B6D9DE8C",
-  group: "3F021F40CD26BF57",
   order: 2,
   icon: "gtceu:mv_machine_hull",
   autofocus: "MV_MV_FACTORY",

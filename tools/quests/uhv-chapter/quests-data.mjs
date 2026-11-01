@@ -18,8 +18,7 @@ const P = (key, title, icon, deps, x, y, desc, tasks, reward = 100, extra = {}) 
 });
 
 export const CHAPTER = {
-  group: '3F021F40CD26BF57',
-  order: 9,
+  order: 0,
   icon: 'grindless:stellar_neighbourhood_chart',
   autofocus: 'START',
   title: 'UHV: Proxima and the Swarm',

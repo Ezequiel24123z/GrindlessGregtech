@@ -18,8 +18,7 @@ const P = (key, title, icon, deps, x, y, desc, tasks, reward = 100, extra = {}) 
 });
 
 export const CHAPTER = {
-  group: '3F021F40CD26BF57',
-  order: 13,
+  order: 0,
   icon: 'gtceu:opv_machine_casing',
   autofocus: 'START',
   title: 'OpV - The Galactic Bulge',

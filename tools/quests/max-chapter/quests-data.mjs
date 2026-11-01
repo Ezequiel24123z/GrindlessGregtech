@@ -23,8 +23,7 @@ const P = (key, title, icon, deps, x, y, desc, tasks, reward = 100, extra = {}) 
 });
 
 export const CHAPTER = {
-  group: '3F021F40CD26BF57',
-  order: 14,
+  order: 0,
   icon: 'gtceu:max_machine_casing',
   autofocus: 'START',
   title: 'MAX - The Galactic Centre',

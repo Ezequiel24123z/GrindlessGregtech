@@ -281,7 +281,7 @@ export function renderChapter(world, era, chapter) {
     '\tdefault_hide_dependency_lines: false',
     '\tdefault_quest_shape: ""',
     '\tfilename: ' + str(chapter.filename),
-    '\tgroup: ' + str(eraGroupId({ ...ch, filename: chapter.filename })),
+    '\tgroup: ' + str(eraGroupId({ ...ch, era, filename: chapter.filename })),
     '\ticon: ' + str(ch.icon),
     '\tid: ' + str(ch.id || newId(era, 'chapter|' + chapter.filename)),
     '\torder_index: ' + ch.order,

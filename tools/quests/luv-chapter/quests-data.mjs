@@ -26,8 +26,7 @@ export const LANDED = PACKAGES.filter((p) => STATIC.includes(p) || STATION_PACKA
 export const ALL_STATE = PACKAGES.filter((p) => p !== 'B7S');
 
 export const CHAPTER = {
-  group: '3F021F40CD26BF57',
-  order: 6,
+  order: 0,
   icon: 'grindless:outer_system_chart',
   autofocus: 'START',
   title: 'LuV: The Outer System',
