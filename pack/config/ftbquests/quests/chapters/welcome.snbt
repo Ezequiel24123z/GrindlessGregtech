@@ -17,9 +17,8 @@
 			icon: "ftbquests:book"
 			id: "69BDA9FBB0EB66F2"
 			rewards: [
-				{ count: 8, id: "21A6FB493B3D6DA8", item: "minecraft:bread", type: "item" }
+				{ count: 64, id: "21A6FB493B3D6DA8", item: "minecraft:bread", type: "item" }
 				{ count: 16, id: "4FE190B37FB472CA", item: "minecraft:torch", type: "item" }
-				{ count: 56, id: "187B14E841DD7041", item: "minecraft:bread", type: "item" }
 				{
 					id: "2DF9A8557F6B01A4"
 					item: {
