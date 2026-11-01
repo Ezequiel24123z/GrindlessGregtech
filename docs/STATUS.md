@@ -7,42 +7,46 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Current milestone:** Project Reforge (DECISIONS.md:695), v0.17.0 to v1.0.0 in ten phases: 0 rules and diagnosis, 1 cost tooling, 2 cost rebalance, 3 era and line audit, 4 research, 5 quests, 6 assets and sounds, 7 MAX+ and the Hyperstargate, 8 cleanup, 9 release. No save compatibility (DECISIONS.md:701): v1.0.0 needs a new world.
 - **Done:**
   - Phases 0, 1 and 4.
-  - Phase 2: the cost-curve pass and era-aware pricing; bands A (MV, HV), B (EV, IV) and C (LuV, ZPM, UV) on (`docs/reforge/02_cost_curve.md`).
+  - Phase 2: the cost-curve pass and era-aware pricing; bands A (MV, HV), B (EV, IV), C (LuV, ZPM, UV) and D (UHV, UEV, UIV) on (`docs/reforge/02_cost_curve.md`).
   - Phase 3:
     - every era's chart pass and the line design of EV to ZPM (RF-3S, with the role tests of LD-T1, LD-T2 and LD-T3);
     - the line audit has no fix row left in any era from Steam to OpV (MAX is judged by its own validator, MX-C1);
     - era-aware site checks: reachability passes for every tier from Steam to MAX.
-  - Phase 5: the design (`docs/reforge/05_quest_design.md`, RF-5A).
+  - Phase 5:
+    - the design (`docs/reforge/05_quest_design.md`, RF-5A);
+    - one shared chapter writer (`tools/quests/gen-chapters.mjs`, RF-5L1) and Steam to IV imported to data (RF-5L2);
+    - Welcome, the side tabs and Steam to LuV in the Phase 5 shape: EV, IV and LuV in three chapters each (age, circuits, machines); chapter groups per era (Early Ages for Steam to HV, then one per era).
   - Phase 6:
     - the audit;
     - the 50 missing textures and the 21 shared controller faces;
-    - the era-style library, applied to OpV and MAX;
+    - the era-style library, applied to UV, UHV, UEV, UIV, UXV, OpV and MAX;
     - the sound pipeline.
   - Phase 7:
     - the MAX and MAX+ design (`docs/eras/max.md`, `maxplus.md`);
-    - MAX after Reforge: the routes, the ids, machines 11 to 14 with lines L47 to L57, and the ending rework (the shell's c3 makes `grindless:horizon_lock` and grants `maxplus`; the credits move to the MAX+ arrival).
-- **Last accepted integration batch:** Reforge batch 4, rolling (issues #59, #65-#68, #72-#92, #94, #97).
-  - Packages: RF-3T, MX-S1 to MX-S4, MX-E1, MX-C1, LD-T1 to LD-T3, LD-ZP1 to LD-ZP3, LD-LV1 to LD-LV3, LD-EV1, LD-IV1, RF-3P1, RF-3P2, RF-3L, RF-3U, RF-3V, RF-3W, P2-C, RF-5A; LD-EV2 closed with no change (its row already existed).
-  - T0: GitHub Actions on every merge.
-  - T2 on the VM, on the minimal-overlay dump of d20eeca2 (`/var/lib/grindless/dumps/latest`):
-    - reachability PASS for all 15 tiers, Steam to MAX (LuV's research check moved after the first station: LD-LV3's optics gate);
-    - obtain PASS;
-    - pl-check: 3,015 arrows, 0 issues; quest lint 0 errors;
-    - line audit: one fix row left (MV wood's methanol), closed in the batch close by drawing it as a by-product.
+    - MAX after Reforge: the routes, the ids, machines 11 to 14 with lines L47 to L57, the chart (PL-MX) and the ending rework (the shell's c3 makes `grindless:horizon_lock` and grants `maxplus`; the credits move to the MAX+ arrival);
+    - MAX+ spikes S0-1 to S0-10 (`maxplus.md` S0 table: wireless instead of a kerr cable; creative items are `grindless:` stand-ins);
+    - the MAX+ foundation (XP-F1): the ids table, nine components, the 1,024 A hatch `gtceu:max_maxplus_energy_hatch_1024a`, four creative stand-ins and the four places; the ids without a recipe are hidden (XP-F2).
+- **Last accepted integration batch:** Reforge batch 5, rolling (issues #88, #93, #95, #96, #98-#104, #106-#108).
+  - Packages: P2-D, XP-S0a, XP-S0b, XP-F1, XP-F2 (integrator), RF-6D-b, PL-MX, RF-5L1, RF-5L2, RF-5Q-SL, RF-5Q-MH, RF-5Q-EV, RF-5T, RF-5I1 (integrator), RF-5Q-IV, RF-5Q-LUV.
+  - T0: GitHub Actions on every merge; green at d8791224.
+  - T1 on the VM: `gg_test_maxplus_places` PASS (the places, components and hatch load).
+  - T2 on the VM:
+    - dump bc36ab22e1e8 (after XP-F1): obtain listed the 273 MAX+ groups with no recipe; they are one class C row in `tiers/obtain.json` and the hidden table holds 724 groups (the next dump confirms obtain PASS on it);
+    - `gg_test_quests` PASS at d8791224: 44 chapters, 4,653 quests, every chapter's counts in every LuV station mode;
+    - quest lint: 0 errors, 6 layout warnings (1 in `ev_machines`, 5 old ones in `opv_age`, which its Phase 5 package rebuilds).
 - **In flight** (one nested session per package; no two share a file):
 
 | Package | Issue | Content | Phase |
 |---|---|---|---|
-| P2-D | #88 | Cost band D: UHV, UEV and UIV on, after reconciling the solver's two paths | 2 |
-| XP-S0a | #93 | MAX+ spikes S0-1 to S0-5: amperage, hatches, cable, generators, parallels | 7 |
-| XP-S0b | #95 | MAX+ spikes S0-6 to S0-10: registry ids, placement guard, structure size, dimension teleport, city size | 7 |
-| RF-6D-b | #96 | Era style for the UV, UHV, UEV, UIV and UXV textures | 6 |
-| RF-5L1 | #98 | Quests: one shared chapter writer (byte-identical port of the ten era generators) | 5 |
+| P2-E | #105 | Cost band E: UXV, OpV and MAX, after explaining the OpV and MAX anomaly | 2 |
+| XP-W | #109 | MAX+ power: the Kerr fault-current limiter (P18), the substation and 1,024 A hatch recipes, wireless caps | 7 |
+| XP-A3 | #110 | MAX+ circuits: the horizon logic die (Q1), interposer (Q2) and processor | 7 |
+| XP-A1 | #111 | MAX+ condensate: the mirror shell's c4, machines 1 and 2, lines P1 to P5 | 7 |
 
 - **Next** (queue; serial where packages share files):
-  - Phase 2: P2-E (UXV to MAX, the OpV anomaly) after P2-D; P2-Z (final re-solve).
-  - Phase 5, in the order of `05_quest_design.md` §5.2: RF-5L2 (importer), then the era packages in pairs; the owner reviews the EV renders (RF-5I1) before ZPM starts.
-  - Phase 7: XP-F1 and the MAX+ build order (`maxplus.md` *Build order*) after the spikes.
+  - Phase 2: P2-Z (the final re-solve; one factor per era misfits single items, so it may change the mechanism) after P2-E.
+  - Phase 5, in the order of `05_quest_design.md` §5.2: the owner reviews the batch 1 renders (Steam to EV, RF-5I1); then ZPM and UV, RF-5I2, UHV to OpV in pairs, MAX (MX-C2) and RF-5I3.
+  - Phase 7, `maxplus.md` *Build order*: XP-A2, XP-T1, XP-B1, XP-T2, XP-B2 to XP-B4, XP-M1, XP-AE, XP-H1 to XP-H4, XP-K, XP-G1, XP-Z1, XP-C1 (with the `maxplus` era in the era lists), XP-PL, XP-C2a and XP-C2b. Each merge takes its ids out of the class C row.
   - Then Phase 8 and Phase 9.
 - **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
@@ -50,28 +54,29 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 ## Open questions for the owner (the defaults stand until answered)
 - **Hand recipes:** remove the crafting-table recipes of the core components from MV up? A 3x3 grid cannot scale, so they bypass the curve. Default: yes (done for MV to UV; the MV and HV hulls stay as the bootstrap).
 - **Art:** commission the genuine-art list (`06_assets_audit.md` section 8), or use generators only? Default: generators only.
-- **Era style:** does the OpV and MAX look of RF-6D (brighter, more saturated, speckled) work? Default: yes, and RF-6D-b extends it to UV to UIV.
+- **Era style:** does the OpV and MAX look of RF-6D (brighter, more saturated, speckled) work? Default: yes; RF-6D-b extended it to UV to UXV.
 - **MAX** (`max.md` open questions 1, 12, 13): accept 14 / 57 / 204, 12 horizon locks, and c3 gated on all four new machines? Default: yes.
 - **MAX+** (`maxplus.md` open questions 1-9): one era in three stages; 58 lines plus a second pass after stage I; x5 per stage; creative items never placeable; one-way gate with a repeatable dial; the 2^39 x 19,200 t fallback; `horizon_city`; the archive crosses with the player; the ending text. Defaults as written.
 - **EV to ZPM line design** (RF-3S, `docs/eras/ev.md`): only production lines count toward the guide; keep GTM's one-step nitric folds; gate tetrataenite; keep belt Ir/Os (P2-C: not worse than Mercury); gate the tritium store; ZPM's gap stays named. Defaults as written.
 - **Logs at Steam and LV** (LD-T3): the Horizon Collector makes 960 oak logs a minute at 16 EU/t; the fertilized LV greenhouse makes 72. Keep the collector as the generous start, or cut its log row so the greenhouse is LV's log route? Default: keep (the start is generous by design, `steam.md`); the greenhouse line counts for its other outputs.
 - **Phase 5** (`05_quest_design.md` §6, nine questions): era chapter groups; MAX+ in nine chapters; six roles, not six chapters; longer text for teaching quests; restore the merged wafer and circuit steps; Power after LuV optional; item rewards only from gated lines; Welcome's bread; before captures per batch. Defaults: yes to each, as written.
+- **Phase 5 shape:** the before and after renders of batch 1 (Steam to EV) wait for the owner's review; the ZPM and later quest packages start after the OK.
 - **Save compatibility after v1.0.0?** Default: yes, from v1.0.0 on.
 
 ## Open blockers and known issues
 - **Cost:**
-  - EV's core index is 12.6% and LuV's 8.5% under the curve (one global factor is quantised); P2-Z re-solves.
-  - UHV to UXV factors wait for P2-D, which first reconciles the solver loop with the `--table` check.
-  - OpV's core is anomalously cheap: one route skips earlier chains (P2-E).
+  - One global factor per era is quantised: ceil(n x f) takes single items from 1 to 2, so EV's core index is 12.6% and LuV's 8.5% under the curve, UHV 1.34x over and UIV 0.70x under; P2-Z re-solves.
+  - OpV's and MAX's cores are anomalously cheap (OpV 310 against 71,526; MAX 2,499 against 178,814): P2-E explains it first.
   - Some routes multiply matter: ash separation fed by diamond CVD and diamond electrolysis, and blue topaz ore at ZPM and later (`02_cost_curve.md`).
-- **Capacity:** 48 known violations (`tools/analysis/capacity_known.json`); the cost bands empty the list.
+- **Capacity:** 30 known violations (`tools/analysis/capacity_known.json`); the cost bands empty the list.
 - **EMI:** 10 entries in `tools/analysis/emi_runtime_known.json`:
   - 8 previews, likely an audit false positive that the fixed fixture removes on the next 8 GB EMI run;
   - `launched_belt_seed` without a consumer (a MAX package);
   - `rejected_timing_head` (the route check must read every output).
 - **The `maxplus` stage** is a world persistentData flag (`grindless_stage_maxplus`, MX-E1): the pack has no stage mod, and MAX+ packages read the flag.
+- **MAX+ until XP-C1:** the ids with no recipe yet are one class C row in `tools/analysis/tiers/obtain.json` (hidden) and carry EMI exception rows; the `maxplus` era is not yet in the era lists; the es_es names of XP-F1 are word-by-word (Phase 8 review).
 - **Assets:**
-  - UEV to UIV items are tint swaps until RF-6D-b;
+  - the UEV, UIV and UXV foundation scripts still draw items that `foundation.js` no longer registers, so their self-check fails (Phase 8);
   - textures of removed items are orphans (Phase 8);
   - sound loop-seam and harsh flags need an in-game listen at release.
 - **Test environment:**
