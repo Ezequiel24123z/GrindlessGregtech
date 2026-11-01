@@ -32,7 +32,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the third ring and the network
   {
     key: 'MK3', kind: 'signature', title: 'Third Ring', icon: 'gtceu:uv_fusion_reactor',
-    deps: ['I_L_FUS'], x: 2, y: 0,
+    deps: ['START'], x: 2, y: 0,
     teach: {
       for: 'The &6Fusion Reactor Mk3&r is a bigger ring that lights plasmas the Mk2 cannot start.',
       needs: 'Sixteen UV energy hatches on the network for a 640 M start, and four wetware mainframes in the build.',
@@ -104,7 +104,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ three fuel chains
   {
     key: 'I_THOR', kind: 'process', title: 'The Thorium Burn', icon: 'grindless:thorium_oxide_fuel_assembly',
-    deps: ['I_L_PW'], x: 2, y: 2,
+    deps: ['START'], x: 2, y: 2,
     teach: {
       for: 'Thorium assemblies feed the accelerator-driven reactor: about six an hour, four and a half on nitride. IV\'s stored thorium and its live output decide how many reactors run.',
       needs: 'The reactor from the machines chapter, and assemblies from the fuel fabrication plant.',
@@ -130,7 +130,7 @@ export const QUESTS = [
   },
   {
     key: 'I_MUON', kind: 'process', title: 'Tritium Comes Back', icon: 'grindless:lithium_breeder_blanket',
-    deps: ['I_L_PW'], x: 6, y: 2,
+    deps: ['START'], x: 6, y: 2,
     teach: {
       for: 'A &6Muon Fusion Cell&r burns liquid deuterium and tritium, and its lithium blanket breeds most of the tritium back. The rest is IV\'s tritium removal facility\'s work.',
       needs: 'The cell from the machines chapter, deuterium and tritium by pipe, and a linac behind it.',
@@ -158,7 +158,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ older machines, new modes
   {
     key: 'B11', kind: 'process', title: 'Boron-11', icon: 'gtceu:hot_cell',
-    deps: ['I_L_OM'], x: 2, y: 4,
+    deps: ['START'], x: 2, y: 4,
     teach: {
       for: "The IV &6Hot Cell&r learns a boron mode: four boron trifluoride in, one boron-11 trifluoride and a little boron-10 out.",
       needs: 'Boron trifluoride from the centrifuges and the next free circuit in the cell.',
@@ -225,7 +225,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ AE2 between planets
   {
     key: 'I_AE1', kind: 'step', title: 'Neptune on the Network', icon: 'grindless:station_truss_casing',
-    deps: ['I_L_AE1'], x: 2, y: 6,
+    deps: ['STN5'], x: 2, y: 6,
     desc: [
       "Neptune orbit gets its own &6AE2 pair&r, so what the station makes goes home and what it needs comes out. Power doesn't need it: the wireless network already carries that.",
     ],
@@ -234,7 +234,7 @@ export const QUESTS = [
   },
   {
     key: 'I_AE2', kind: 'step', title: 'Pluto on the Network', icon: 'grindless:station_truss_casing',
-    deps: ['I_AE1', 'I_L_AE2'], x: 2, y: 8,
+    deps: ['I_AE1', 'STN6'], x: 2, y: 8,
     desc: [
       'Same again at Pluto orbit. Both stations send hydrogen, helium, nitrogen and noble gases by the tankful, so fluid cells and extra coprocessors matter more than item storage. Chunk-load them both: the far machines only run while their chunks are loaded.',
     ],
