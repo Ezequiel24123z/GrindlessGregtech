@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import { ROOT, DIRS, buildTemplates, encodeTemplate, encodePng, ringPixels, POOLS, STRUCTURE, STRUCTURE_SET, TABLE } from '../../assets/Build-HorizonCity.mjs';
+import { ROOT, DIRS, buildTemplates, encodeTemplate, encodePng, ringPixels, RING_SIZE, POOLS, STRUCTURE, STRUCTURE_SET, TABLE } from '../../assets/Build-HorizonCity.mjs';
 
 const DATA = path.join(ROOT, 'pack', 'kubejs', 'data', 'grindless');
 const readJson = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
@@ -117,7 +117,7 @@ test('the generator is deterministic and matches the committed files', () => {
     assert.ok(zlib.gunzipSync(encodeTemplate(t)).equals(disk), t.name);
     assert.ok(encodeTemplate(t).equals(encodeTemplate(t)), t.name + ' twice');
   }
-  assert.ok(idat(encodePng(512, 512, ringPixels(512))).equals(idat(fs.readFileSync(DIRS.ring))));
+  assert.ok(idat(encodePng(RING_SIZE, RING_SIZE, ringPixels(RING_SIZE))).equals(idat(fs.readFileSync(DIRS.ring))));
   assert.deepEqual(readJson(DIRS.structure), STRUCTURE);
   assert.deepEqual(readJson(DIRS.structureSet), STRUCTURE_SET);
   assert.deepEqual(readJson(DIRS.table), TABLE);

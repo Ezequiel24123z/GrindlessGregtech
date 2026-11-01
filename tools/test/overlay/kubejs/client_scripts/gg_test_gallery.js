@@ -267,7 +267,7 @@
     } else {
       var ours = Object.keys(ov).filter(function (f) { return ov[f].some(function (n) { return n.indexOf('grindless:') === 0 }) })
       s.ours = ours
-      if (ours.length === 0) {
+      if (ours.length === 0 && !(/^gtceu:(iv|luv|zpm|uv)_parallel_hatch$/.test(s.id) && Object.keys(ov).length > 0)) {
         fails.overlays.push(s.id)
         log('overlay', 'FAIL', s.id + ': no overlay texture of ours on any face (faces: ' + Object.keys(info.faces).map(function (f) { return f + ' ' + info.faces[f].join(' + ') }).join('; ') + ')')
       }

@@ -466,7 +466,8 @@ export const TABLE = {
 };
 
 // ---- the sky ring (a Schwarzschild-lensed Einstein ring: thin bright circle, brighter on one side, a faint second image, a dark centre) -----------
-export function ringPixels(size = 512) {
+export const RING_SIZE = 2048; // XP-Z1a / P9-F1: 4x the first 512 px, which showed blocky at the sky object's in-game size
+export function ringPixels(size = RING_SIZE) {
   const px = new Uint8Array(size * size * 4); const c = (size - 1) / 2; const R = size * 0.36;
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     const dx = x - c; const dy = y - c; const r = Math.sqrt(dx * dx + dy * dy); const a = Math.atan2(dy, dx);
@@ -474,7 +475,7 @@ export function ringPixels(size = 512) {
     const main = Math.exp(-(((r - R) / (size * 0.008)) ** 2)) * (0.55 + 0.9 * beam);
     const halo = Math.exp(-(((r - R) / (size * 0.05)) ** 2)) * 0.28 * (0.6 + 0.4 * beam);
     const inner = Math.exp(-(((r - R * 0.78) / (size * 0.004)) ** 2)) * 0.32 * (1 - beam * 0.5); // the second, fainter image
-    const speck = hash(x, y, 17) > 0.9992 ? 0.5 : 0; // grain: stars lensed along the ring
+    const speck = hash(x, y, 17) > 1 - 0.0008 * (512 / size) ** 2 ? 0.5 : 0; // grain: stars lensed along the ring
     const onRing = Math.exp(-(((r - R) / (size * 0.02)) ** 2));
     const v = Math.min(1, main + halo + inner + speck * onRing);
     const i = (y * size + x) * 4;
@@ -546,7 +547,7 @@ export function run(previewDir) {
   write(DIRS.structure, json(STRUCTURE));
   write(DIRS.structureSet, json(STRUCTURE_SET));
   write(DIRS.table, json(TABLE));
-  write(DIRS.ring, encodePng(512, 512, ringPixels(512)));
+  write(DIRS.ring, encodePng(RING_SIZE, RING_SIZE, ringPixels(RING_SIZE)));
   const dir = previewDir || path.join(os.tmpdir(), 'horizon-city-preview');
   const sheet = previewSheet(templates);
   write(path.join(dir, 'horizon_city_sheet.png'), sheet.png);
