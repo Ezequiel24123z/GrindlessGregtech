@@ -17,15 +17,15 @@ export const CHAPTER = {
 };
 
 export const LINKS = [
-  { key: "L_LB", ref: "LB", x: 0, y: -3 },
-  { key: "L_HE", ref: "HE", x: 0, y: -6 },
-  { key: "L_BRK", ref: "BRK", x: 0, y: 0 },
-  { key: "L_MP", ref: "MP", x: 0, y: 1.5 },
-  { key: "L_TI", ref: "TI", x: 0, y: 3 },
-  { key: "L_MSEED", ref: "MSEED", x: 6, y: -6 },
-  { key: "L_MTR", ref: "MTR", x: 6, y: -7.5 },
-  { key: "L_PT", ref: "PT", x: 0, y: 6 },
-  { key: "L_EVH", ref: "EVH", x: 0, y: 7.5 },
+  { key: "M_L_LB", ref: "LB", x: 0, y: -3 },
+  { key: "M_L_HE", ref: "HE", x: 0, y: -6 },
+  { key: "M_L_BRK", ref: "BRK", x: 0, y: 0 },
+  { key: "M_L_MP", ref: "MP", x: 0, y: 1.5 },
+  { key: "M_L_TI", ref: "TI", x: 0, y: 3 },
+  { key: "M_L_MSEED", ref: "MSEED", x: 6, y: -6 },
+  { key: "M_L_MTR", ref: "MTR", x: 6, y: -7.5 },
+  { key: "M_L_PT", ref: "PT", x: 0, y: 6 },
+  { key: "M_L_EVH", ref: "EVH", x: 0, y: 7.5 },
 ];
 
 export const QUESTS = [

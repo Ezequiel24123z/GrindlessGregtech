@@ -16,8 +16,8 @@ export const CHAPTER = {
 };
 
 export const LINKS = [
-  { key: "L_MP", ref: "MP", x: 0, y: 0 },
-  { key: "L_TI", ref: "TI", x: 0, y: 1.5 },
+  { key: "C_L_MP", ref: "MP", x: 0, y: 0 },
+  { key: "C_L_TI", ref: "TI", x: 0, y: 1.5 },
 ];
 
 export const QUESTS = [
