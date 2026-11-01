@@ -100,7 +100,7 @@ test('lib/mega.js clamps copies to an int: 4,096 x 4,194,304 never reaches getPa
 test('the controller and the hatch recipes are published, at VA[MAX], with the literal 4,800 t', () => {
   const h = harness();
   h.recipeHandlers.forEach((cb) => cb(h.event));
-  assert.deepEqual(h.G.hyperfactoryRecipes.skipped, []);
+  assert.deepEqual(plain(h.G.hyperfactoryRecipes.skipped), []);
   const ids = h.lines.map((l) => l[0]);
   assert.ok(ids.includes('grindless:maxplus_parallel_hatch') && ids.includes('grindless:hyperfactory'));
   const src = read('server_scripts', 'maxplus/hyperfactory.js');

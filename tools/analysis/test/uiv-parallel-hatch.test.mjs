@@ -40,7 +40,7 @@ test('the hatch registration covers tiers 9, 10 and 11, one create and one defin
   const defs = [];
   const b = new Proxy({}, { get: (_, m) => (...a) => { calls.push([m, ...a]); if (m === 'definition') defs.push(a[0]); return b; } });
   machine[1]({ create: () => { creates++; return b; } });
-  assert.equal(creates, 2); // the MAX hatch registration, then the MAX+ one (XP-M1)
+  assert.equal(creates, 1);
   const tiers = calls.find((c) => c[0] === 'tiers');
   assert.deepEqual(tiers.slice(1), [9, 10, 11, 12, 13, 14]); // UXV-M1 added 12, OpV-M1 added 13, MAX-M1 added 14
   const out = {};

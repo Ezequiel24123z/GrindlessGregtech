@@ -1,4 +1,4 @@
-// priority: -20180
+// priority: -20139
 // MAX+ machine 15, the Hyperfactory, and its parallel hatch (docs/eras/maxplus.md, 'Hyperfactory' and Controllers; package XP-M1). The hatch is registered in
 // startup_scripts/grindless/lib/parallel_hatch.js (gtceu:max_maxplus_parallel_hatch, x4,194,304), the machine in startup_scripts/grindless/maxplus/hyperfactory.js.
 //
@@ -23,7 +23,7 @@
     items: ['1x ' + HULL, '4x grindless:maxplus_field_generator', '4x grindless:maxplus_robot_arm', '2x grindless:maxplus_sensor', '4x ' + CIRCUIT],
     fluids: [[KERR, 4000]] }
   var CONTROLLER = { out: 'gtceu:hyperfactory', research: 'grindless:horizon_photonic_engine', cwut: 64,
-    items: ['1x ' + HULL, '2x grindless:horizon_machine_casing', '8x grindless:horizon_processor', '4x ' + CIRCUIT,
+    items: ['1x ' + HULL, '2x grindless:horizon_machine_casing', '8x grindless:horizon_processor', '4x ' + CIRCUIT, '1x gtceu:max_parallel_hatch',
       '2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor'],
     fluids: [[KERR, 2000]] }
   HR.specs = { hatch: HATCH, controller: CONTROLLER }

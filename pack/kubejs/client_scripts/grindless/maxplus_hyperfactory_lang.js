@@ -1,4 +1,4 @@
-// priority: 6830
+// priority: 6853
 // Gregtech Grindless - names and tooltips of MAX+'s Hyperfactory and parallel hatch (startup_scripts/grindless/maxplus/hyperfactory.js and
 // lib/parallel_hatch.js; package XP-M1). The EMI info keys are here: the shared emi_info_lang.js and the additions json are the integrator's.
 //
@@ -8,7 +8,7 @@
     var ENTRIES = [
         ['gtceu.hyperfactory', 'Hyperfactory'],
         ['block.gtceu.hyperfactory', 'Hyperfactory'],
-        ['grindless.machine.hyperfactory.tooltip.0', '\u00a77Assembler, circuit assembler, assembly line, forming press and laser engraver in one, up to 4,096 copies per hatch step.'],
+        ['grindless.machine.hyperfactory.tooltip.0', '\u00a77Five assembly machines in one, 4,096x the hatch.'],
         ['block.gtceu.max_maxplus_parallel_hatch', 'MAX+ Parallel Control Hatch'],
         ['grindless.machine.maxplus_parallel_hatch.tooltip', '\u00a77Sets the parallels of a recipe: up to 4,194,304 copies at once.'],
         ['emi.grindless.info.hyperfactory.0', 'The top of the mega family: five machines in one, at 4,096 times the parallel hatch.'],

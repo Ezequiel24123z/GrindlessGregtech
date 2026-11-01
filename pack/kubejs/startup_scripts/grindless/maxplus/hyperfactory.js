@@ -1,4 +1,4 @@
-// priority: -5644
+// priority: -5604
 // -----------------------------------------------------------------------------------------------
 // MAX+ machine 15, the Hyperfactory, gtceu:hyperfactory (docs/eras/maxplus.md "Hyperfactory"; package XP-M1): the top member of the mega family
 // (docs/eras/mega.md 4.1). One machine runs GTM's assembler, circuit assembler, assembly line, forming press and laser engraver recipes (no new
@@ -44,7 +44,12 @@
       return 'F'
     }
     if (z === 0) return 'F'
-    if (edge) return (x === 0 || x === W - 1) && y === 4 && z % 4 === 2 ? 'L' : 'F'
+    if (edge) {
+      if ((x === 0 || x === W - 1) && y === 4 && z % 4 === 2) return 'L'
+      if (z % 4 === 0) return 'A'
+      if ((y === 0 || y === H - 1) && (x + z) % 2 === 0) return 'A'
+      return 'F'
+    }
     if (x === 7 && y === 4) return z % 4 === 0 ? 'C' : 'A'
     return '#'
   }

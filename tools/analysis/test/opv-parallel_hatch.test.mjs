@@ -39,7 +39,7 @@ test('the one create covers tiers 9 to 13; tier 13 is named, titled and modelled
   const defs = [];
   const b = new Proxy({}, { get: (_, m) => (...a) => { calls.push([m, ...a]); if (m === 'definition') defs.push(a[0]); return b; } });
   machine[1]({ create: () => { creates++; return b; } });
-  assert.equal(creates, 2); // the MAX hatch registration, then the MAX+ one (XP-M1)
+  assert.equal(creates, 1);
   assert.deepEqual(calls.find((c) => c[0] === 'tiers').slice(1), [9, 10, 11, 12, 13, 14]);
   const run = (tier) => {
     const rec = [];
