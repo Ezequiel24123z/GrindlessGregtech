@@ -1501,6 +1501,8 @@ The design above follows these. The first twelve came with the design review; th
 
 Era-design pass (issue #69, 2026-11-01). The rule, the roles and the shared tool package LD-T1 are in `ev.md`, *Reforge line design (RF-3S)*. RF-3M found 33 fix verdicts in 38 chains and held that no chart edit could move them, because the audit gives a machine node with no inputs 0 steps. That is true per cluster, and it is why LuV reads short: its design lines (*New process lines*, above) were drawn as 18 clusters joined by raw nodes. With the `line` tag, the roles and the branch-end rule, LuV has **6 production lines** of 4 to 9 steps, each crossing a line two or more eras back, and only one needs a recipe change (the tetrataenite gate). *New process lines* stays as the design record; this section is how the audit reads it.
 
+Status, LD-LV3 (#91, 2026-11-01): GTM's `gtceu:assembler/optical_pipe` is removed (the ZBLAN smelter is the only pipe route; this overrides decision 11), the tetrataenite end carries `keepShort`, and the Kerr ringdown type has a fourth item slot. Still open, escalated: crystals (the IV crystal processor and the laser engraver need raw chips from GTM's autoclave/EBF routes before the LuV grower exists, so gating them breaks IV; needs an IV parallel source or open question 4) and asteroid iridium (the audit splits the Mercury line by its ingot sinks, so the dust never counts as a product).
+
 ### Classification (LuV)
 
 | Cluster: end | Role | Steps (line) | Decision |
