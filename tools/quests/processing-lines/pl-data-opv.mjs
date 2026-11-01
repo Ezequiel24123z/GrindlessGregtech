@@ -106,6 +106,10 @@ export default {
           ['i', 'grindless:superfluid_he3_seal', 'Superfluid He-3 Seal'],
         ], 'the OpV pump'),
         ...line(6, 4, [
+          ['i', 'gtceu:diaminoresorcinol_dust', 'Diaminoresorcinol'],
+          ['m', 'gtceu:pbo_plant', 'PBO Plant'],
+          ['f', 'gtceu:pbo_dope', 'PBO Dope'],
+          ['m', 'gtceu:pbo_plant', 'PBO Plant'],
           ['i', 'grindless:pbo_fibre', 'PBO Fibre'],
           ['m', 'gtceu:pasta_laminator', 'Pasta Laminator'],
           ['i', 'grindless:chain_mesh_weave', 'Chain Mesh Weave'],
@@ -256,13 +260,19 @@ export default {
           ['i', 'grindless:tetron_array', 'Tetron Array'],
         ], 'the cosmic mainframe'),
         ...line(34, 18, [
+          ['i', 'gtceu:carbon_dust', 'Carbon'],
+          ['m', 'gtceu:mixer', 'Mixer'],
           ['i', 'gtca:silicon_carbide_dust', 'Silicon Carbide'],
-          ['m', cvi, 'CVI Furnace'],
-          ['i', 'grindless:superpolished_sic_blank', 'Superpolished SiC Blank'],
+          ['m', sput, 'MTJ Sputter Cluster'],
+          ['i', 'grindless:wc_sic_multilayer', 'WC/SiC Multilayer'],
+          ['m', 'gtceu:synchrotron', 'Synchrotron'],
+          ['i', 'grindless:mirror_metrology_record', 'Mirror Metrology Record'],
           ['m', 'gtceu:gamma_optics_works', 'Gamma Optics Works'],
           ['i', 'grindless:gamma_multilayer_mirror', 'Gamma Multilayer Mirror'],
         ], 'the gamma optics works'),
         ...line(35, 20, [
+          ['i', 'grindless:ionian_sublimate', 'Ionian Sublimate'],
+          ['m', 'gtceu:fumarole_condenser', 'Fumarole Condenser'],
           ['i', 'gtceu:germanium_dust', 'Germanium'],
           ['m', 'gtceu:zone_refining_tower', 'Zone Refining Tower'],
           ['i', 'grindless:seven_n_germanium', '7N Germanium'],
@@ -277,6 +287,10 @@ export default {
       name: 'Beam hardware at Cygnus',
       nodes: [
         ...line(20, 0, [
+          ['i', 'gtceu:beryllium_dust', 'Beryllium'],
+          ['m', 'gtceu:fluorspar_kiln', 'Fluorspar Kiln'],
+          ['i', 'grindless:be_fluoride_dust', 'BeF2'],
+          ['m', eb, 'Electron Beam Furnace'],
           ['i', 'grindless:eb_beryllium_ingot', 'EB Beryllium Ingot'],
           ['m', 'gtceu:hot_strip_mill', 'Hot Strip Mill'],
           ['i', 'grindless:be_window_foil', 'Be Window Foil'],
@@ -295,6 +309,12 @@ export default {
           ['i', 'grindless:ir_spallation_target', 'Ir Spallation Target'],
         ], 'the spallation target station'),
         ...line(22, 4, [
+          ['i', 'gtceu:lithium_chloride_dust', 'Lithium Chloride'],
+          ['m', 'gtceu:calutron', 'Calutron'],
+          ['i', 'gtceu:lithium_6_dust', 'Li-6'],
+          ['m', 'gtceu:pyroprocessing_cell', 'Pyroprocessing Cell'],
+          ['i', 'gtceu:lithium_6_metal_dust', 'Li-6 Metal'],
+          ['m', 'gtceu:chemical_reactor', 'Chemical Reactor'],
           ['i', 'grindless:li6_hydride', 'Li-6 Hydride'],
           ['m', sx, 'Spark Plasma Sinterer'],
           ['i', 'grindless:li6h_tile', 'Li-6 Hydride Tile'],
@@ -354,6 +374,8 @@ export default {
       name: 'Antimatter and power parts',
       nodes: [
         ...line(26, 0, [
+          ['i', 'gtceu:raw_lithium', 'Raw Lithium'],
+          ['m', 'gtceu:ore_refinery', 'Ore Refinery'],
           ['i', 'gtceu:lithium_dust', 'Lithium'],
           ['m', cg, 'Crystal Growth Furnace'],
           ['i', 'grindless:lbo_boule', 'LBO Boule'],
@@ -389,6 +411,8 @@ export default {
           ['i', 'grindless:dense_positron_cell', 'Dense Positron Cell'],
         ], 'the antihydrogen foundry'),
         ...line(31, 8, [
+          ['f', 'gtceu:curium_californium_nitrate', 'Cm-Cf Nitrate'],
+          ['m', 'gtceu:actinide_partitioning_plant', 'Actinide Partitioning Plant'],
           ['f', 'gtceu:curium_nitrate', 'Curium Nitrate'],
           ['m', 'gtceu:actinide_partitioning_plant', 'Actinide Partitioning Plant'],
           ['i', 'grindless:cm245_fraction', 'Cm-245 Fraction'],
@@ -397,6 +421,10 @@ export default {
           ['i', 'grindless:acmf_pellet', 'ACMF Pellet'],
         ], 'the annihilation engine'),
         ...line(32, 10, [
+          ['i', 'gtceu:boron_dust', 'Boron'],
+          ['m', 'gtceu:calutron', 'Calutron'],
+          ['i', 'grindless:boron_10_dust', 'B-10'],
+          ['m', 'gtceu:chemical_reactor', 'Chemical Reactor'],
           ['i', 'grindless:b4c_10_dust', 'B4C-10'],
           ['i', 'grindless:w_b4c_powder', 'W/B4C Powder'],
           ['m', sx, 'Spark Plasma Sinterer'],
