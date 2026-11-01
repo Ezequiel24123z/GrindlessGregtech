@@ -15362,7 +15362,7 @@ hash = "aff017c8e25aac284938251f4b464bd21a5c814a29e8a7a2e58525a32bc46cc7"
 
 [[files]]
 file = "kubejs/data/grindless/tables/earth_orbit.json"
-hash = "972380f633f90aabf8e051a38ea9de997c5c46015fc3b3805c45882a8f4291c5"
+hash = "559638bd4e7fe1cc34243640a452566fff3e2f782c4447b206a7f3148f2884ff"
 
 [[files]]
 file = "kubejs/data/grindless/tables/electron_beam.json"
@@ -16090,7 +16090,7 @@ hash = "cd66172f292e6f17cf9b35579f28010b300a5cb427e217978566694a730df5a3"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/orbital_industry.js"
-hash = "2f566dc16df89c2596cab8d340cc6381670272bd0a71f112f81428e1afd3c5af"
+hash = "54f6478a4547bfadedb71b43979039a79e916ba954275526939a975af2dc7f4a"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/orbital_solar.js"
@@ -17094,7 +17094,7 @@ hash = "e38064759a9c4b3a98c4508c2af4a15e76c6424a3682096da6338924a00ebe31"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/ganymede.js"
-hash = "5830944616f03780a5f39d181599bb1e1a1a72a4897861d40a6668817d468662"
+hash = "fc0926938694db2e34248709a558eae5967bdbe4536f8919f96be285c3edecd6"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/luv/helium_refrigerator.js"
@@ -17630,7 +17630,7 @@ hash = "a0a28c709c390cf73c2939a9483c0b2326e9973a7d31f35cca6556226e4441a0"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/life.js"
-hash = "b78d471c38c84ce80d2527d2871ace1a03fa7d917bd21793997d33da91659508"
+hash = "73c688cd79aa37ff5bbcce2ebdb69e0c47378149c7a8c43d6cb28ec351f606f3"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/uv/materials.js"
