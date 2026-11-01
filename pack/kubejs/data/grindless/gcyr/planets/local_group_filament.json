@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.local_group_filament",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:local_group_filament",
+  "world": "grindless:local_group_filament",
+  "orbit_world": "grindless:local_group_filament",
+  "rocket_tier": 14,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 5,
+  "temperature": 3,
+  "solar_power": 0,
+  "has_oxygen": false,
+  "button_color": 1052688
+}

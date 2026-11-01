@@ -1,0 +1,13 @@
+{
+  "world": "grindless:magellanic_stream",
+  "stars": { "fancy_count": 6000, "fast_count": 3000, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 160, "color": 5614335, "rotation": [70, 30, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 70, "color": 16766080, "rotation": [15, 210, 0] }
+  ]
+}

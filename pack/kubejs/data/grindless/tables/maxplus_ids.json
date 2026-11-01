@@ -1,0 +1,62 @@
+{
+  "_why": "XP-F1: the MAX+ ids (docs/eras/maxplus.md). startup_scripts/grindless/maxplus/foundation.js registers them and publishes global.grindless.maxPlusFoundation; travel.js publishes global.grindless.maxPlusTravel. The final dimension grindless:horizon_city is XP-Z1's.",
+  "components": [
+    "grindless:maxplus_electric_motor", "grindless:maxplus_electric_pump", "grindless:maxplus_electric_piston", "grindless:maxplus_robot_arm", "grindless:maxplus_emitter",
+    "grindless:maxplus_sensor", "grindless:maxplus_field_generator", "grindless:maxplus_conveyor_module", "grindless:maxplus_fluid_regulator"
+  ],
+  "circuit": "grindless:horizon_processor",
+  "hatch": {
+    "id": "gtceu:max_maxplus_energy_hatch_1024a",
+    "amps": 1024,
+    "tier": 14,
+    "io": "input",
+    "why": "S0-2: an EnergyHatchPartMachine; GTM's gtceu:max_machine_hull stays the only MAX hull (DECISIONS.md:526)"
+  },
+  "casings": [
+    "grindless:horizon_machine_casing", "grindless:condensate_vessel_casing", "grindless:bound_press_casing", "grindless:slingshot_coil_casing",
+    "grindless:lift_nozzle_casing", "grindless:crucible_liner_casing"
+  ],
+  "standins": {
+    "_why": "K1-K4: plain items that are never placeable and never gtceu:creative_*, ae2: or appflux ids",
+    "ids": ["grindless:bottomless_store_core", "grindless:bottomless_tank_core", "grindless:horizon_cloud_core", "grindless:horizon_computation_core"]
+  },
+  "probes": ["grindless:ig_relay_probe", "grindless:launched_ig_probe", "grindless:bound_probe_pair"],
+  "materials": {
+    "gtceu:kerr_strand": "ingot forms only, no cable property (S0-3 inconclusive); the strand wire is grindless:kerr_strand_wire"
+  },
+  "existing": [
+    "grindless:chain_lamina_stack", "grindless:cmc_coil_former", "grindless:degenerate_matter_slug", "grindless:fcl_substrate_strip", "grindless:fed_strangelet",
+    "grindless:gadolinium_oxide", "grindless:hawking_drive", "grindless:metal_rich_bloom", "grindless:neutronium_pellet", "grindless:nsc_planetesimal", "grindless:probe_seed",
+    "grindless:seed_wave_packet", "grindless:segment_truss_billet", "grindless:stellar_plasma"
+  ],
+  "controllers": {
+    "_why": "named here, registered by the machine packages (XP-M*)",
+    "ids": [
+      "gtceu:condensate_refinery", "gtceu:bound_matter_press", "gtceu:hills_slingshot", "gtceu:tarantula_stellar_lift", "gtceu:pair_instability_crucible",
+      "gtceu:nickel_56_burner", "gtceu:pristine_gas_works", "gtceu:primordial_fusion_torus", "gtceu:blueshift_forge", "gtceu:void_crystal_fab",
+      "gtceu:meta_material_loom", "gtceu:multi_plasma_blender", "gtceu:horizon_crystal_furnace", "gtceu:condensate_assembler", "gtceu:horizon_capacitor_bank",
+      "gtceu:hyper_assembly_array", "gtceu:hyperstargate"
+    ]
+  },
+  "substages": {
+    "_why": "names only: their hidden_until entries are F2's and their grants belong to the packages that send the player there",
+    "names": ["maxplus-lmc", "maxplus-stream", "maxplus-m31", "maxplus-void"]
+  },
+  "places": {
+    "_why": "the four tier-14 places (startup_scripts/grindless/maxplus/travel.js); the dimension ids are final",
+    "lmc": "grindless:tarantula_orbit",
+    "stream": "grindless:magellanic_stream",
+    "m31": "grindless:m31_nucleus_orbit",
+    "void": "grindless:local_group_filament"
+  },
+  "circuits": {
+    "_why": "decision 48: programmed circuits are 0..32. Gates c16-19 are the four places; the first free circuit of older machine types is each table's highest circuit plus one, to be re-checked by the integrator once the parallel batches land",
+    "gates": { "first_free_after_maxplus": 20, "note": "c16 hold_tarantula, c17 hold_magellanic_stream, c18 hold_m31_nucleus, c19 hold_local_group_filament" },
+    "highest_in_table": {
+      "_why": "highest circuit found in tables/*.json when XP-F1 ran; types at 32 take repeats by differing item inputs (OpV-F3 rule)",
+      "crystals": 32, "electron_beam": 32, "isotopes_uiv": 32, "superheavy": 28, "photonics": 27, "isotopes": 27, "fusion_mk4": 27, "max_parts": 27,
+      "spin_deposition": 26, "memories_cryostat": 26, "hot_cell": 23, "levitation_melter": 22, "composites": 21, "opv_basic_machines": 21, "biofoundry": 20,
+      "hts_magnet_works": 15, "tfln_femtosecond": 13, "megabar": 11, "magnet_works": 11, "transcurium": 11
+    }
+  }
+}

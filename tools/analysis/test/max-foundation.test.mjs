@@ -84,8 +84,10 @@ test('no script of ours registers a gtceu:max_* id (GTM\'s), except M1\'s parall
   const w = (id, v) => /^gtceu:max_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(id) && /(^|[\\/])lv[\\/]wireless_energy\.js$/.test(String(v.file));
   // MAX-M1: lib/parallel_hatch.js registers gtceu:max_parallel_hatch (tier 14) with the older tiers
   const ph = (id, v) => id === 'gtceu:max_parallel_hatch' && /(^|[\\/])lib[\\/]parallel_hatch\.js$/.test(String(v.file));
+  // MAX+ XP-F1: maxplus/foundation.js registers the 1,024 A hatch (the custom builder tier-prefixes its name)
+  const xh = (id, v) => id === 'gtceu:max_maxplus_energy_hatch_1024a' && /(^|[\\/])maxplus[\\/]foundation\.js$/.test(String(v.file));
   for (const reg of [run.registry.items, run.registry.machines]) {
-    for (const [id, v] of reg) if (/^gtceu:max_/.test(id) && !v.seeded && !w(id, v) && !ph(id, v)) bad.push(`${id} (${v.file})`);
+    for (const [id, v] of reg) if (/^gtceu:max_/.test(id) && !v.seeded && !w(id, v) && !ph(id, v) && !xh(id, v)) bad.push(`${id} (${v.file})`);
   }
   assert.deepEqual(bad, []);
   assert.doesNotMatch(code, /'(gtceu:)?max_[a-z0-9_]+'/, 'foundation.js creates no GTM MAX id');
@@ -159,7 +161,9 @@ test('the two places load at tier 14: dimension (nsc_belt), planet rows (no air)
   assert.equal(sky.world, 'grindless:nsc_belt');
   assert.ok(sky.sky_objects.length >= 3);
   for (const f of fs.readdirSync(path.join(kube, 'data', 'grindless', 'gcyr', 'planets'))) {
-    if (json('data', 'grindless', 'gcyr', 'planets', f).rocket_tier === 14) assert.ok(Object.values(PLACES).some(([, file]) => f === `${file}.json`), f);
+    // MAX+ XP-F1 adds four more tier-14 places
+    const xp = ['tarantula_orbit', 'magellanic_stream', 'm31_nucleus_orbit', 'local_group_filament'].map((n) => `${n}.json`);
+    if (json('data', 'grindless', 'gcyr', 'planets', f).rocket_tier === 14) assert.ok(xp.includes(f) || Object.values(PLACES).some(([, file]) => f === `${file}.json`), f);
   }
 });
 
@@ -183,7 +187,9 @@ test('relay_platforms.json: the two MAX rows are appended, one jump each, Sgr A*
   const mine = plat.filter((p) => Object.hasOwn(PLACES, p.place));
   assert.deepEqual(mine.map((p) => [p.place, p.jump, p.dimension, p.source, p.x, p.y, p.z]),
     Object.entries(PLACES).map(([k, [world, , , jump, source]]) => [k, jump, world, source, 64, 100, 64]));
-  assert.deepEqual(plat.slice(-2), mine, 'appended after the OpV rows');
+  const at = plat.indexOf(mine[0]);
+  assert.deepEqual(plat.slice(at, at + 2), mine, 'appended after the OpV rows (MAX+ rows follow)');
+  assert.equal(plat.length, at + 2 + 4, 'only the four MAX+ rows follow the MAX rows');
   assert.equal(new Set(plat.map((p) => p.jump)).size, plat.length, 'every jump once');
 });
 

@@ -1,0 +1,12 @@
+{
+  "world": "grindless:local_group_filament",
+  "stars": { "fancy_count": 1500, "fast_count": 700, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 40, "color": 6314000, "rotation": [30, 60, 0] }
+  ]
+}

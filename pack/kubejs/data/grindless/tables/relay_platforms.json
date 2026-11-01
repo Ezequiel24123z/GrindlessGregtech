@@ -18,6 +18,10 @@
     { "_why": "OpV-F1: the c11 and c12 jumps leave from Cygnus X-1's orbit too (server_scripts/grindless/uxv/kerr_sling.js places every row with a source); their gate rows are OpV-A0's and OpV-R1's", "place": "sgr1806", "jump": "hold_sgr1806", "dimension": "grindless:sgr1806_orbit", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
     { "place": "terzan5", "jump": "hold_terzan5", "dimension": "grindless:terzan5_core", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
     { "_why": "MAX-F1: the c14 jump leaves from Cygnus X-1's orbit to Sgr A* (gcyr:black_hole_orbit); the c15 jump to the NSC belt leaves from Sgr A*'s orbit. Their gate rows are MAX-G1's", "place": "sgra", "jump": "hold_sgr_a_probe", "dimension": "gcyr:black_hole_orbit", "source": "grindless:cygnus_x1_orbit", "x": 64, "y": 100, "z": 64 },
-    { "place": "nsc", "jump": "hold_nsc_belt", "dimension": "grindless:nsc_belt", "source": "gcyr:black_hole_orbit", "x": 64, "y": 100, "z": 64 }
+    { "place": "nsc", "jump": "hold_nsc_belt", "dimension": "grindless:nsc_belt", "source": "gcyr:black_hole_orbit", "x": 64, "y": 100, "z": 64 },
+    { "_why": "XP-F1: c16 leaves from Sgr A*'s orbit to 30 Doradus; c17 and c18 leave from 30 Doradus; c19 leaves from the M31 nucleus (docs/eras/maxplus.md Places). Their gate rows are the transport package's", "place": "tarantula", "jump": "hold_tarantula", "dimension": "grindless:tarantula_orbit", "source": "gcyr:black_hole_orbit", "x": 64, "y": 100, "z": 64 },
+    { "place": "magellanic_stream", "jump": "hold_magellanic_stream", "dimension": "grindless:magellanic_stream", "source": "grindless:tarantula_orbit", "x": 64, "y": 100, "z": 64 },
+    { "place": "m31", "jump": "hold_m31_nucleus", "dimension": "grindless:m31_nucleus_orbit", "source": "grindless:tarantula_orbit", "x": 64, "y": 100, "z": 64 },
+    { "place": "local_group_filament", "jump": "hold_local_group_filament", "dimension": "grindless:local_group_filament", "source": "grindless:m31_nucleus_orbit", "x": 64, "y": 100, "z": 64 }
   ]
 }

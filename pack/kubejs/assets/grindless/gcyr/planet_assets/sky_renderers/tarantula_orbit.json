@@ -1,0 +1,13 @@
+{
+  "world": "grindless:tarantula_orbit",
+  "stars": { "fancy_count": 9000, "fast_count": 4000, "colored_stars": true, "daylight_visible": true },
+  "sunset_color": "none",
+  "dimension_effects": { "type": "none" },
+  "cloud_effects": "none",
+  "weather_effects": "none",
+  "horizon_angle": 0,
+  "sky_objects": [
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 120, "color": 16741200, "rotation": [40, 0, 0] },
+    { "texture": "gcyr:textures/sky/light.png", "blending": true, "render_type": "static", "scale": 50, "color": 11184895, "rotation": [20, 120, 0] }
+  ]
+}

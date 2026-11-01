@@ -1,0 +1,15 @@
+{
+  "translation": "level.grindless.m31_nucleus_orbit",
+  "galaxy": "gcyr:milky_way",
+  "solar_system": "grindless:m31",
+  "world": "grindless:m31_nucleus_orbit",
+  "orbit_world": "grindless:m31_nucleus_orbit",
+  "rocket_tier": 14,
+  "gravity": 0.0,
+  "has_atmosphere": false,
+  "days_in_year": 5,
+  "temperature": 100,
+  "solar_power": 0,
+  "has_oxygen": false,
+  "button_color": 3158064
+}
