@@ -250,7 +250,7 @@ export const QUESTS = [
   },
   {
     key: 'J_SOL', kind: 'step', title: 'The Sun From Inside', icon: 'grindless:solar_core_survey',
-    deps: ['J_FLY'], x: 24, y: 1.5,
+    deps: ['J_KUI'], x: 26, y: 1.5,
     desc: [
       "A tank of heavy water catches the odd neutrino from the Sun's core. Enough flashes make a &6Solar Core Survey&r, and the gate asks for it.",
     ],
@@ -268,7 +268,7 @@ export const QUESTS = [
   },
   {
     key: 'J_RESERVE', kind: 'reading', title: 'What UV Keeps', icon: 'gtceu:uv_machine_hull', size: 0.75,
-    deps: ['J_PLU'], x: 26, y: 1.5,
+    deps: ['J_PLU'], x: 26, y: -1.5,
     desc: [
       'The Mk3, a fifth station and the first interstellar probe all wait for UV. ZPM only leaves you the flyby data, the chart and a lot of americium.',
     ],
