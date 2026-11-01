@@ -58,7 +58,23 @@ hash = "96474c0fb88f5b2a78589626554f6970cd76e411eb47711f175e953d87df9dd6"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/max_age.snbt"
-hash = "b0e961941bf42dba0778f35528f625c36886e3491d7903541996161794c91a5e"
+hash = "074116aa80df61209b944e60e4110b4a2d433d47986f4ecf3bce04cd12e10988"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/max_circuits.snbt"
+hash = "1f30106d07f437f7ce6b76dd0cf0bfb99bf331bb006e153dbc3b80f55fd43f07"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/max_horizon.snbt"
+hash = "e8a175642ec71f7a02aa87549a20526d1ae6cad35be6f0a9abd5341c9721210c"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/max_integration.snbt"
+hash = "012c386a9334a536c7eec87578f12d4e41477974b38ceec9ad6c220e32bee0af"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/max_machines.snbt"
+hash = "dbb4d0062127225839700ac90f0bec18a3c0da58e1619bef4dbc4b8874dc147f"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
@@ -70,7 +86,19 @@ hash = "8d2c6cdba68c88bb93abaf47bc0ce2878939b2c7d66c2b850e2226f510367851"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/opv_age.snbt"
-hash = "65686e519079e83bfa1c88cdce050f58353bdc09527c3c64a8afddde8b8dffe8"
+hash = "f6ec94a49be36ac2d6a249785346b30c2b1f350a49fa0600a38e4cf8a5107c1a"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/opv_circuits.snbt"
+hash = "6a8623dd69a2f6bc5fd685710b37fb3a767dc3891e8e8611fae4291a12cd06bc"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/opv_integration.snbt"
+hash = "3355dd5923078ebbc277f7827a9a1642a5ca1e0fff49dbaa3f6a681a79db82fe"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/opv_machines.snbt"
+hash = "b2a82caec17f60bdb1413b0aae9bdfbb9c2ccf76bb17ef9b8769dd274e2d98cb"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_ev.snbt"
@@ -134,7 +162,7 @@ hash = "74d20235df51fd65f4fb83208816215fcbad20cb5f1a5b55f6a45368b83f0c92"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
-hash = "5ba3b8ea272e07af6aadf2bb21a05beabca4278d8f7084ce22ddb465e73f57b7"
+hash = "a96c71823cb07d73b461b5f267741f28e97f09ecc599b9c1d7b80ed3481bf99d"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/productive_bees.snbt"
