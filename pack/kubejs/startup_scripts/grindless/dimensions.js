@@ -1,4 +1,4 @@
-// priority: -500
+// priority: -568
 // Gregtech Grindless - "Building Dimensions"
 //
 // Registers the three travel keys. Names/tooltips live in client_scripts/grindless/dimensions_lang.js

@@ -1,4 +1,4 @@
-// priority: -490
+// priority: -506
 // TEST ONLY (bench overlay, never shipped). UXV-S0 disposable registrations, off unless kubejs/config/gg_test_uxv_s0.json says {"enabled": true}.
 // The UXV hull and hatches are NOT registered here: S0-1 widens UEV's builders in a temp copy of pack/ (uev/foundation.js .tiers(UEV, UIV, UXV)).
 //   S0-1/S0-4/S0-6 gtceu:gg_uxv_s0_frame, a multiblock of ours that takes the UXV hatches and one parallel hatch

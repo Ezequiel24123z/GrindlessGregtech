@@ -1,3 +1,4 @@
+// priority: -10374
 // TEST ONLY, XP-S0a (bench overlay, never shipped; needs the startup overlay on: kubejs/config/gg_test_xp_s0.json {"enabled": true}).
 // Command: kubejs custom_command gg_test_xp_s0_machines. Band ONLY: X 43520-43583, Z 0-63, Overworld Y 70-85. Everything placed is cleared before DONE.
 //   s0_1a/1b/1c  1, 4 and 64 gtceu:max_substation_input_hatch_64a in gtceu:gg_xp_s0_plate run a macerator row at 2^37, 2^39 and 2^43 EU/t, fed through the energy-net path (64 A at V[MAX] per hatch per tick)

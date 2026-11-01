@@ -1,3 +1,4 @@
+// priority: -537
 // TEST ONLY (bench overlay, never shipped). XP-S0a MAX+ spike registrations, off unless kubejs/config/gg_test_xp_s0.json says {"enabled": true}.
 // GTM's highTierContent registers gtceu:max_substation_input_hatch_64a, gtceu:max_substation_output_hatch_64a and the 16 A hatches itself.
 //   S0-2  gtceu:max_gg_xp_s0_in1024 / _out1024  EnergyHatchPartMachine at tier 14 with 1,024 A (input, dynamo)

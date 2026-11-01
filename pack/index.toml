@@ -70,7 +70,7 @@ hash = "df7a141d8d4099fe493af99ad7ad5e7f21f14d990d7b864a4c11823003d43acf"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_max.snbt"
-hash = "7b51f0bc6b38a67636fd9e97156e46cbd9d94555bce9422ccc3bdfcd4036f9ee"
+hash = "40e5c5905cfaadca14c6ea1a358981f4686792362fe49d0d4178e0cbc6949fa1"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_mv.snbt"
@@ -16882,7 +16882,7 @@ hash = "a9046d10b5f38017a7294fe32ddd04125f5847d6419c85f71ab21da9f035201b"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/dimensions.js"
-hash = "ea6fef13b75340c694f5a8705dac5b4645fa88567d833c74eb1ffacd6f854515"
+hash = "fccafe248b0f752623858e98ef66ce7b7654a741253831197db818deb4fcf97b"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/ev/ae2_interplanetary.js"
