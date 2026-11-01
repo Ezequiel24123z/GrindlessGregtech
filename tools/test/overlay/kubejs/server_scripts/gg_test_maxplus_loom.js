@@ -167,7 +167,7 @@
     var rm = S.server.getRecipeManager()
     var missing = IDS.filter(function (i) { return !rm.byKey(new (classes().RL)('grindless:' + i)).isPresent() })
     check('lookup', missing.length === 0, IDS.length + ' ids checked; missing: ' + (missing.length ? missing.join(', ') : 'none'))
-    var MD = global.grindless.MaxplusLoom
+    var MD = global.grindless.maxPlusLoom
     check('static', !!MD && !!MD.skipped && MD.skipped.length === 0, 'rows ' + (MD ? MD.rows.length + MD.loom.length : null) + ', skipped ' + JSON.stringify(MD ? MD.skipped : null))
   }
 

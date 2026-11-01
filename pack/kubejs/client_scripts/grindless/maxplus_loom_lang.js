@@ -7,6 +7,9 @@
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
 (function () {
     // [key, en, es]
+    var MACHINES = [
+        ['block.gtceu.meta_material_loom', 'Meta-Material Loom', 'Telar de metamateriales']
+    ]
     var ENTRIES = [
         ['gtceu.meta_material_loom', 'Meta-Material Loom', 'Telar de metamateriales'],
         ['grindless.machine.meta_material_loom.tooltip.0', '\u00a77Weaves bound plates and Kerr strand into horizon meta-materials.', '\u00a77Teje placas ligadas y hebra de Kerr en metamateriales.'],
@@ -22,7 +25,7 @@
         ['gtceu.recipe.grindless_pulsed_laser_deposition.thick_conduit_tape', 'Circuit 9: gadolinium-doped layers laser-deposited on the conduit tape in oxygen; the laser is not consumed (line T6).', 'Circuito 9: capas dopadas con gadolinio depositadas por l\u00e1ser sobre la cinta de conducto en ox\u00edgeno; el l\u00e1ser no se consume (l\u00ednea T6).'],
         ['gtceu.recipe.grindless_magnet_winding.cabled_conductor', 'Circuit 19: thick conduit tape and Kerr strand wound into a cabled conductor on a liquid helium charge that is not consumed (line T6).', 'Circuito 19: cinta gruesa de conducto y hebra de Kerr bobinadas en un conductor cableado con una carga de helio l\u00edquido que no se consume (l\u00ednea T6).'],
         ['gtceu.recipe.grindless_closed_loop.cold_horizon_conduit', 'The woven horizon conduit run cold until it holds its critical current (line T6).', 'El conducto del horizonte tejido, enfriado hasta que sostiene su corriente cr\u00edtica (l\u00ednea T6).'],
-        ['gtceu.recipe.grindless_shequid_assembly.horizon_valve', 'Circuit 10: the woven valve body fitted and sealed on liquid helium, with the rotation reference not consumed; the boil-off helium is kept (line T7).', 'Circuito 10: el cuerpo de v\u00e1lvula tejido ajustado y sellado en helio l\u00edquido, con la referencia de rotaci\u00f3n sin consumir; el helio evaporado se conserva (l\u00ednea T7).'],
+        ['gtceu.recipe.grindless_shequid_assembly.horizon_valve', 'Circuit 12: the woven valve body fitted and sealed on liquid helium, with the rotation reference not consumed; the boil-off helium is kept (line T7).', 'Circuito 12: el cuerpo de v\u00e1lvula tejido ajustado y sellado en helio l\u00edquido, con la referencia de rotaci\u00f3n sin consumir; el helio evaporado se conserva (l\u00ednea T7).'],
         ['gtceu.recipe.grindless_shequid_assembly.calibrated_condensate_leak', 'Circuit 9: the condensate superleak plug calibrated against Josephson wafers and a rotation reference on liquid helium; the boil-off helium is kept (line T7).', 'Circuito 9: el tap\u00f3n de superfuga de condensado calibrado con obleas Josephson y una referencia de rotaci\u00f3n en helio l\u00edquido; el helio evaporado se conserva (l\u00ednea T7).']
     ]
 
@@ -30,6 +33,10 @@
         ClientEvents.lang(lang, function (event) {
             ENTRIES.forEach(function (e) {
                 event.add('grindless', e[0], e[1 + li])
+            })
+            // the controller's block name (GTM reads block.gtceu.<id>)
+            MACHINES.forEach(function (e) {
+                event.add('gtceu', e[0], e[1 + li])
             })
         })
     })

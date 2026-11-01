@@ -95,7 +95,7 @@ export const QUESTS = [
     unlocks: 'Aneutronic power from boron capsules.',
     automate: 'Capsules arrive by ME and the helium goes back to the compressor loop.',
   }, [it(UVC), it(LASER)], 150),
-  gear('MUCF', 'muon_fusion_cell', 'Muon Fusion Cell', ['ALPHA'], 4, 3, {
+  gear('MUCF', 'muon_fusion_cell', 'Muon Fusion Cell', ['P_CAV'], 8, 4.5, {
     for: 'The &6Muon Fusion Cell&r makes cold fusion with muons as the catalyst: deuterium and tritium fuse close to room temperature.',
     needs: 'Its controller, the cryostat casing and the &6SRF Cryomodule Block&r that drives the muon channel.',
     unlocks: 'A second fusion generator that needs no plasma.',

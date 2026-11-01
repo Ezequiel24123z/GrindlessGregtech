@@ -204,7 +204,7 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["11FAD777A18E748F"]
+			dependencies: ["598B196C669CA9B5"]
 			description: ["The &6Muon Fusion Cell&r makes cold fusion with muons as the catalyst: deuterium and tritium fuse close to room temperature. Its controller, the cryostat casing and the &6SRF Cryomodule Block&r that drives the muon channel. A second fusion generator that needs no plasma. Keep a deuterium-tritium tank on a pipe and let the helium out by ME."]
 			icon: "gtceu:muon_fusion_cell"
 			id: "1225702AF9F2A2E4"
@@ -217,8 +217,8 @@
 				{ id: "7FB86716C4ABEA64", item: "grindless:srf_cryomodule_block", type: "item" }
 			]
 			title: "Muon Fusion Cell"
-			x: 4.0d
-			y: 3.0d
+			x: 8.0d
+			y: 4.5d
 		}
 		{
 			dependencies: ["7D5E30D919EC171F"]
