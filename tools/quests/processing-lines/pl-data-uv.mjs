@@ -274,8 +274,9 @@ const chapter = {
 };
 
 // The fibre laser module feeds the laser chamber, both printers and the Starshot probe, and the probe's parts all feed the
-// probe, so the 'cold' and 'starshot' nodes are one tangle: they are laid out together (x, y in cells, relative), within the
-// 5-cell line limit and reading left to right. The per-cluster coordinates above are only the order they were first written in.
+// probe, so the nodes written above as 'cold' and 'starshot' are one tangle: it is laid out as one set of coordinates (x, y in
+// cells, relative to the cluster each node ends up in below), within the 5-cell line limit and reading left to right. The
+// per-cluster coordinates above are only the order they were first written in.
 const TOGETHER = {
   nb: [0, 16], sheet: [0.5, 17.75], bare: [2, 17.75], works: [4, 17.75], acid: [4.5, 16.25], cav: [5.75, 17], lhe: [4.75, 20.5],
   nh: [5.75, 22], siphon: [5.25, 23.75], nhyd: [7.25, 22.75], d2: [9.5, 21.5], plant: [6.25, 20.25], sf: [6.75, 18.5],
@@ -283,28 +284,66 @@ const TOGETHER = {
   deca: [11, 15.25], hf: [9.5, 17.25], dplate: [11.5, 17.25], zhe3: [11.5, 20.25], pb11: [12.5, 15.75], dhe3: [12, 18.75],
   chamber: [14.25, 15.25], alpha: [15.75, 17.25], spentL: [14.75, 16.75], preform: [9.5, 13], tower: [11, 13.25],
   fibre: [11.5, 11.5], epi: [7.75, 4.75], mocvd: [9.25, 4.75], arsine: [9.75, 3.25], epiw: [11, 5], pump: [12.25, 6.75],
-  laser: [13.75, 10.5], cmox: [9, 6.25], am: [9, 7.5], hs: [10.5, 6.75], pellet: [11.75, 10], gphs: [13, 12.75],
-  rtg: [16.5, 16], micro: [13.75, 4.75], ti: [12.75, 14.25], pbp: [14.75, 12.75], tipow: [15.25, 11], near: [15.75, 9.5],
-  pchamber: [16.75, 11], tw: [16.75, 12.75], ion: [17.25, 14.5], pod: [17.25, 17.5], craft: [18.75, 17.5], ibay: [20.5, 17],
-  sample: [22.5, 16.5], anneal: [23.25, 18.25], kwater: [23.75, 16.75], noble: [25, 17.5], kco: [24, 20], kr: [25.5, 19],
-  xe: [26.5, 17.25], lgedust: [11.75, 21.5], zrt: [13.25, 21], gecl4: [15, 20], gein: [16.5, 19.25], hpge: [18, 19],
-  b2o3: [3.25, 10.5], bnr: [4.25, 9], hbn: [6, 9.5], bnntd: [6.5, 11], yarn: [7, 12.5], winder: [8.75, 11.5], tank: [9.5, 9.75],
-  lsw: [2, 5.75], wsf: [2.5, 4], sepi: [3.5, 5.75], lsf: [5.25, 6.25], film: [7, 7], pat: [7.5, 8.5], lsail: [12, 8.5],
-  sb: [15.75, 1.5], sebf: [16.25, 3], boule: [17.75, 3.25], swafer: [18.5, 4.75], nbnw: [19, 6.5], snspd: [19.5, 8],
-  wafer: [8.25, 1.75], proton: [7.25, 0.5], sync: [8.75, 0.25], exposed: [10.75, 0], chip: [12.25, 1], cart: [10.75, 1.5],
-  trap: [11.25, 3.25], aptrap: [13.75, 6.75], ican: [15.75, 8], nv: [13.75, 1.25], nw: [12.75, 3], sfab: [14.25, 3],
-  schip: [15.25, 5], relay: [16.75, 4.75], sailc: [16, 6.5], pprobe: [18, 16], helio: [18.5, 11.25], launch: [18.5, 9.75],
-  spentS: [17.25, 7], data: [20, 9.75],
+  laser: [13.75, 10.5], cmox: [7, 7.5], am: [7.25, 10.25], hs: [9, 10.75],
+  pellet: [12.75, 10.25], gphs: [15.75, 11], rtg: [18.25, 14.75], micro: [11.25, 9],
+  ti: [11, 6.25], pbp: [12.75, 5.75], tipow: [15, 4.75], near: [15.5, 3.25],
+  pchamber: [18.5, 3.25], tw: [19.5, 6.5], ion: [20, 10.25], pod: [20, 12.25],
+  craft: [22.75, 14.5], ibay: [26.25, 14], sample: [27.5, 12.25], anneal: [28.75, 15],
+  kwater: [32.75, 14.75], noble: [29.5, 19.75], kco: [30.5, 12.5], kr: [32, 18.5],
+  xe: [33.5, 20.25], lgedust: [27.5, 33.75], zrt: [30.75, 32.75], gecl4: [34.5, 33.5],
+  gein: [38, 35], hpge: [42, 36.75], b2o3: [-5.25, 15.5], bnr: [-1.75, 14.25],
+  hbn: [3, 13], bnntd: [5.75, 15.5], yarn: [7.5, 17], winder: [10.5, 19],
+  tank: [13, 17.75], lsw: [-9.25, 12.25], wsf: [-7, 11], sepi: [-4.5, 10.75],
+  lsf: [-1, 11.25], film: [2, 9.5], pat: [4.75, 9.75], lsail: [6, 12],
+  sb: [9, -4.25], sebf: [13.5, -2.25], boule: [17, 0.5], swafer: [19.75, 2.5],
+  nbnw: [20.5, 7.25], snspd: [21.25, 5.25], wafer: [1.25, 7], proton: [2, 8.25],
+  sync: [3.75, 5.5], exposed: [4.25, 3], chip: [6.25, 2.25], cart: [6.25, 9],
+  trap: [8.75, 8.5], aptrap: [12.5, 9.5], ican: [14.75, 13], nv: [8.75, 1.25],
+  nw: [6.75, 3.75], sfab: [10.75, 2], schip: [15.25, 3.75], relay: [18, 4.5],
+  sailc: [17, 7.5], pprobe: [15.5, 14.5], helio: [16.5, 13], launch: [20.25, 10.25],
+  spentS: [19.25, 4.5], data: [23.25, 6.25], laserB: [12.25, 3.75], laserC: [15.5, 11.25],
+  microC: [8, 5], rtgC: [11.5, 11.75], podC: [11.75, 14], hpgeC: [13.75, 16],
+  lsailC: [14, 5.25],
 };
-const together = [...chapter.clusters.cold.nodes, ...chapter.clusters.starshot.nodes];
-for (const nd of together) {
+const PARTS = new Set(['cmox', 'am', 'hs', 'pellet', 'gphs', 'rtg', 'micro', 'ti', 'pbp', 'tipow', 'near', 'pchamber', 'tw', 'ion', 'pod',
+  'craft', 'ibay', 'sample', 'anneal', 'kwater', 'noble', 'kco', 'kr', 'xe', 'lgedust', 'zrt', 'gecl4', 'gein', 'hpge',
+  'b2o3', 'bnr', 'hbn', 'bnntd', 'yarn', 'winder', 'tank', 'lsw', 'wsf', 'sepi', 'lsf', 'film', 'pat', 'lsail']);
+const fusion = chapter.clusters.cold.nodes;
+const parts = chapter.clusters.starshot.nodes.filter((nd) => PARTS.has(nd.key));
+const probe = chapter.clusters.starshot.nodes.filter((nd) => !PARTS.has(nd.key));
+// One chart line in three clusters (all tagged line 'starshot', so the line audit still measures one chain). An arrow that would
+// cross from one cluster to another is drawn instead from a raw node of the same item in the consuming cluster: the audit joins
+// it to the sibling cluster's product node (LD-T1), so the chain and its steps are unchanged.
+const copy = (src, key, sub) => {
+  const o = [...fusion, ...parts, ...probe].find((nd) => nd.key === src);
+  return n(key, 0, 0, o.res, o.title, { kind: 'raw', sub });
+};
+const feed = (list, key, was, now) => {
+  const nd = list.find((x) => x.key === key);
+  nd.from = nd.from.map((f) => (f === was ? now : f));
+};
+parts.push(copy('laser', 'laserB', 'Made in the fibre laser line'));
+feed(parts, 'pbp', 'laser', 'laserB');
+feed(parts, 'near', 'laser', 'laserB');
+probe.push(copy('laser', 'laserC', 'Made in the fibre laser line'), copy('micro', 'microC', 'Sealed in the heat source works'),
+  copy('rtg', 'rtgC', 'Built in the heat source works'), copy('pod', 'podC', 'Fitted in the thruster works'),
+  copy('hpge', 'hpgeC', 'Grown in the zone refining tower'), copy('lsail', 'lsailC', 'Released in the light sail fab'));
+feed(probe, 'launch', 'laser', 'laserC');
+feed(probe, 'sailc', 'lsail', 'lsailC');
+feed(probe, 'sfab', 'micro', 'microC');
+feed(probe, 'pprobe', 'rtg', 'rtgC');
+feed(probe, 'pprobe', 'pod', 'podC');
+feed(probe, 'pprobe', 'hpge', 'hpgeC');
+for (const nd of [...fusion, ...parts, ...probe]) {
   const p = TOGETHER[nd.key];
   if (!p) throw new Error('pl_uv: no layout for ' + nd.key);
   nd.x = p[0];
   nd.y = p[1];
 }
-chapter.clusters.starshot.nodes = together;
-chapter.clusters.starshot.name = 'Superfluid helium, laser fusion fuel, fibre lasers, and Starshot with the Kuiper belt';
 delete chapter.clusters.cold;
+chapter.clusters.starshot = { name: 'Superfluid helium, laser fusion fuel and fibre lasers', line: 'starshot', nodes: fusion };
+chapter.clusters.parts = { name: 'Heat sources, printed thrusters, the Kuiper belt, germanium, boron nitride and the light sail', line: 'starshot', nodes: parts };
+chapter.clusters.probe = { name: 'Detectors, antimatter, and the Starshot probe', line: 'starshot', nodes: probe };
+chapter.bands = [['thorium', 'beams'], ['pluto', 'ented'], ['starshot', 'parts', 'probe']];
 
 export default chapter;
