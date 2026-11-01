@@ -196,7 +196,8 @@ foreach ($it in $items) {
     foreach ($row in $map) { if ($row.Length -ne 16) { throw "$($it[0]): a map row is $($row.Length) wide" } }
     if ($map.Count -ne 16) { throw "$($it[0]): the map is $($map.Count) rows" }
     $c = New-Canvas
-    Write-Map $c 0 0 $map (New-Tint $it[2])
+    $era = New-EraLegacyItem $EraName $it[0] $it[1] $it[2]
+    if ($era -and $it.Count -le 3) { $c = $era } else { Write-Map $c 0 0 $map (New-Tint $it[2]) }
     Out-Tex $c "item/$($it[0]).png"
 }
 
