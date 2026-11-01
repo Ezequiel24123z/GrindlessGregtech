@@ -160,7 +160,8 @@ test('the OpV field generator: the emitter between two field coils inside four f
   const text = JSON.stringify(r.j);
   for (const need of ['gtceu:opv_emitter', 'grindless:chain_field_coil', 'grindless:field_frozen_plate', 'gtceu:circuits/opv', 'gtceu:chain_strand_single_cable',
     'gtceu:soldering_alloy']) assert.ok(text.includes(need), `takes ${need}`);
-  assert.ok(!named(r).some((s) => /uxv|uiv|uev|uhv|circuits\/(?!opv)/.test(s)), 'no lower component or circuit');
+  assert.ok(!named(r).some((s) => /uxv|uiv|uev|uhv|circuits\/(?!opv)/.test(s) && !s.includes('gtceu:uxv_field_generator')), 'no lower component or circuit but the UXV field generator (band E)');
+  assert.ok(text.includes('gtceu:uxv_field_generator'), 'band E: takes the UXV field generator, so the OpV core prices through the UXV chain');
   assert.ok(text.includes(`${2 * V_UXV}`), '2 A of UXV');
   assert.deepEqual(producers('gtceu:opv_field_generator').map((x) => x.i), ['grindless:assembler/opv_field_generator']);
 });

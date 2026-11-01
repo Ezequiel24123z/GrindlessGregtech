@@ -21,6 +21,9 @@
 //   assembler  opv_emitter           Th-229 lasing crystal + 2 lamina stacks + cryogenic optical link + 2 cables + 2 OpV circuits, solder
 //   assembler  opv_sensor            HPGe Compton crystal + 2 lamina stacks + cryogenic optical link + 2 cables + 2 OpV circuits, solder
 //   assembler  opv_fluid_regulator   pump + harmonic drive + 2 OpV circuits + superfluid seal + 1 tritanium gear (tritanium has no small gear), solder
+// Project Reforge band E (P2-E): the motor, pump, piston, robot arm, emitter and sensor also take the UXV component of their own kind, as the UXV
+// ones take the UIV ones (the conveyor keeps the native probe's inputs and gets the UXV chain through its two motors), so the OpV cores price
+// through the earlier chain (docs/reforge/02_cost_curve.md, Band E). The field generator's row (field_press.js) does the same.
 // The process fluids and tritanium hardware lift every row to the OpV complexFloor (one fluid each: GTM's assembler takes one).
 // The last four take OpV-A2's circuits (the emitter and sensor also its cryo_optical_link); the integrator wrote them when A2 landed.
 // Every row runs at 2^28 EU/t (two UXV amps of a 4 A hatch pair: the OpV assembler or the GCYM large assembler). An unknown id skips its
@@ -83,26 +86,27 @@
     // the components (docs/eras/opv.md "Voltages and controllers", component table): no circuit, as GTM's motor, pump, conveyor and piston
     // motor: the shaft runs on tritanium bearing rings
     row('opv_electric_motor', 'assembler', null, [item('grindless:chain_field_coil', 1), item(ROD, 2), item(WIRE, 4), item(CABLE, 2),
-      item(TRI_RING, 2)], [fluid(SUPERFLUID, 250)], [item(MOTOR, 1)], [], OPV_EUT, COMPONENT_TICKS),
+      item(TRI_RING, 2), item('gtceu:uxv_electric_motor', 1)], [fluid(SUPERFLUID, 250)], [item(MOTOR, 1)], [], OPV_EUT, COMPONENT_TICKS),
     // pump: the rotor sits in a tritanium casing; the superfluid seals need no lubricant
     row('opv_electric_pump', 'assembler', null, [item(MOTOR, 1), item('grindless:chain_composite_rotor', 1),
-      item('grindless:superfluid_he3_seal', 2), item(STACK, 2), item(CABLE, 1), item(TRI_PLATE, 2)], [], [item('gtceu:opv_electric_pump', 1)],
-      [], OPV_EUT, COMPONENT_TICKS),
+      item('grindless:superfluid_he3_seal', 2), item(STACK, 2), item(CABLE, 1), item(TRI_PLATE, 2), item('gtceu:uxv_electric_pump', 1)], [],
+      [item('gtceu:opv_electric_pump', 1)], [], OPV_EUT, COMPONENT_TICKS),
     // conveyor: the mesh belt over tritanium idler rounds in a tritanium frame, tensioned on tritanium rings (no fluid: the native probe row)
     row('opv_conveyor_module', 'assembler', null, [item(MOTOR, 2), item('grindless:chain_mesh_belt', 2), item(CABLE, 1), item(TRI_PLATE, 2),
       item(TRI_ROUND, 4), item(TRI_RING, 2)], [], [item('gtceu:opv_conveyor_module', 1)], [], OPV_EUT, COMPONENT_TICKS),
     // piston: the harmonic drive's bearings lubricated
     row('opv_electric_piston', 'assembler', null, [item(MOTOR, 1), item('grindless:opv_harmonic_drive', 1), item(ROD, 2), item(STACK, 2),
-      item(CABLE, 2)], [fluid(LUBRICANT, 250)], [item('gtceu:opv_electric_piston', 1)], [], OPV_EUT, COMPONENT_TICKS),
+      item(CABLE, 2), item('gtceu:uxv_electric_piston', 1)], [fluid(LUBRICANT, 250)], [item('gtceu:opv_electric_piston', 1)], [], OPV_EUT,
+      COMPONENT_TICKS),
     // the four that take OpV circuits (A2): the circuit is an ingredient, as in GTM's own; no programmed circuit
     // robot arm: the joints lubricated
     row('opv_robot_arm', 'assembler', null, [item(MOTOR, 2), item('gtceu:opv_electric_piston', 1), item(DRIVE, 2), item(CABLE, 2),
-      item(CIRCUIT, 1)], [fluid(LUBRICANT, 250)], [item('gtceu:opv_robot_arm', 1)], [], OPV_EUT, COMPONENT_TICKS),
+      item(CIRCUIT, 1), item('gtceu:uxv_robot_arm', 1)], [fluid(LUBRICANT, 250)], [item('gtceu:opv_robot_arm', 1)], [], OPV_EUT, COMPONENT_TICKS),
     // emitter and sensor: the circuits and the optical link's driver soldered on
     row('opv_emitter', 'assembler', null, [item('grindless:th229_lasing_crystal', 1), item(STACK, 2), item(LINK, 1), item(CABLE, 2),
-      item(CIRCUIT, 2)], [fluid(SOLDER, 288)], [item('gtceu:opv_emitter', 1)], [], OPV_EUT, COMPONENT_TICKS),
+      item(CIRCUIT, 2), item('gtceu:uxv_emitter', 1)], [fluid(SOLDER, 288)], [item('gtceu:opv_emitter', 1)], [], OPV_EUT, COMPONENT_TICKS),
     row('opv_sensor', 'assembler', null, [item('grindless:hpge_compton_crystal', 1), item(STACK, 2), item(LINK, 1), item(CABLE, 2),
-      item(CIRCUIT, 2)], [fluid(SOLDER, 288)], [item('gtceu:opv_sensor', 1)], [], OPV_EUT, COMPONENT_TICKS),
+      item(CIRCUIT, 2), item('gtceu:uxv_sensor', 1)], [fluid(SOLDER, 288)], [item('gtceu:opv_sensor', 1)], [], OPV_EUT, COMPONENT_TICKS),
     // fluid regulator: the pump behind a valve on a superfluid seal seat, driven through tritanium small gears; the circuits soldered on
     row('opv_fluid_regulator', 'assembler', null, [item('gtceu:opv_electric_pump', 1), item(DRIVE, 1), item(CIRCUIT, 2),
       item('grindless:superfluid_he3_seal', 1), item(TRI_GEAR, 1)], [fluid(SOLDER, 288)], [item('gtceu:opv_fluid_regulator', 1)], [],

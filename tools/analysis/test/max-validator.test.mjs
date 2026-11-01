@@ -422,15 +422,25 @@ const TIERS_LE_OPV = '(lv|mv|hv|ev|iv|luv|zpm|uv|uhv|uev|uiv|uxv|opv)';
 const OLD_COMPONENT = new RegExp(`^gtceu:${TIERS_LE_OPV}_(electric_motor|electric_pump|conveyor_module|electric_piston|robot_arm|emitter|sensor|field_generator)$`);
 const OLD_CIRCUIT = new RegExp(`^#gtceu:circuits/${TIERS_LE_OPV}$`);
 
-test('no MAX controller, hatch or MAX component recipe takes an OpV-or-lower component or circuit (gc_relay_probe excepted)', (t) => {
+test('no MAX controller or hatch recipe takes an OpV-or-lower component or circuit, and a MAX component only its own OpV counterpart (gc_relay_probe excepted)', (t) => {
   const { recs } = pack();
   const isMax = (r) => outs(r).some((o) => /^(gtceu|grindless):max_/.test(o) || Object.keys(MULTIBLOCKS).some((m) => o === `gtceu:${m}`));
   const rows = recs.filter((r) => isMax(r) && r.i !== 'grindless:assembly_line/gc_relay_probe' && r.i !== 'grindless:assembly_line/max_machine_casing');
   assert.ok(rows.length >= 30, `${rows.length} MAX rows`);
+  // band E (P2-E): the MAX component of a kind takes the OpV component of the same kind, so the MAX cores price through the OpV chain
+  const COMPONENT_KIND = /^grindless:max_(electric_motor|electric_pump|conveyor_module|electric_piston|robot_arm|emitter|sensor|field_generator)$/;
+  const counterpart = (r) => {
+    const o = outs(r).map((x) => COMPONENT_KIND.exec(x)).find(Boolean);
+    return o ? `gtceu:opv_${o[1]}` : null;
+  };
   const bad = [];
-  for (const r of rows) for (const i of ins(r)) if (OLD_COMPONENT.test(i) || OLD_CIRCUIT.test(i)) bad.push(`${r.i}: ${i}`);
+  for (const r of rows) for (const i of ins(r)) if ((OLD_COMPONENT.test(i) || OLD_CIRCUIT.test(i)) && i !== counterpart(r)) bad.push(`${r.i}: ${i}`);
   t.diagnostic(`${rows.length} MAX output rows checked`);
   assert.deepEqual(bad, []);
+  for (const k of ['electric_motor', 'electric_pump', 'conveyor_module', 'electric_piston', 'robot_arm', 'emitter', 'sensor', 'field_generator']) {
+    const r = rec(`grindless:assembler/max_${k}`);
+    assert.ok(r && ins(r).includes(`gtceu:opv_${k}`), `max_${k} takes the OpV ${k}`);
+  }
   const probe = rec('grindless:assembly_line/gc_relay_probe');
   assert.ok(ins(probe).includes('gtceu:opv_sensor'), 'the probe is the exempt OpV-stage travel item');
 });
