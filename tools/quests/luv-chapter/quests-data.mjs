@@ -45,7 +45,7 @@ export const QUESTS = [
     deps: ['X:77B4DDD47050E3C7'], x: 0, y: 0,
     desc: [
       "The interferometer's chart shows the asteroid belt and Jupiter's big moons: cold, dark and a very long way from a wall socket. Out there is metal that fell from the sky, a volcano that powers a grid, and the only living thing in the pack.",
-      'This chapter is the trip. The halls you build along the way are in LuV: Machines, and the circuits in LuV: Circuits.',
+      'The trip is this page. The halls you build along the way are in LuV: Machines, and the circuits in LuV: Circuits.',
     ],
     tasks: [ck()],
     rewards: [xp(50)],
@@ -275,7 +275,7 @@ export const QUESTS = [
   },
   {
     key: 'CAT', title: 'The Catalogue', icon: 'grindless:gravitational_wave_catalogue', pkg: ['B1', 'B9', 'S03'],
-    deps: ['GANY'], x: 12, y: 3,
+    deps: ['GANY'], x: 14, y: 3,
     desc: [
       "A long run at the detector writes the &6Gravitational-Wave Catalogue&r: two black holes merging, heard as a rising chirp. Copy it with a data orb, because the next era wants it and the detector keeps the original.",
     ],
@@ -314,7 +314,7 @@ export const QUESTS = [
   },
   {
     key: 'GATE', title: 'Gate to ZPM', icon: 'gtceu:zpm_machine_hull', pkg: ['B1', 'B5', 'B6', 'B8', 'B9', 'B10', 'S03'], shape: 'diamond', size: 1.75,
-    deps: ['EUROP', 'ORB', 'CAT', 'SLING'], x: 18, y: 3,
+    deps: ['EUROP', 'ORB', 'CAT', 'SLING'], x: 18, y: 4.5,
     desc: [
       "Trinium and naquadah alloy make the &6ZPM Machine Hull&r, and the ZPM energy hatch needs everything you learned out here. Bring the wetware, the catalogue and the Saturn chart along: the next trip starts in orbit and never touches the ground.",
     ],
