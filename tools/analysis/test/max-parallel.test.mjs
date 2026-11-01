@@ -62,8 +62,9 @@ test('x1048576 is 4^(tier - EV) at tier 14 and fits an int; the list ends with t
   assert.equal(4 ** (14 - 4), 1048576);
   assert.ok(4 ** (14 - 4) <= 2147483647);
   const list = load().G.parallelHatch.hatches;
-  assert.equal(list[list.length - 1], 'gtceu:max_parallel_hatch');
-  assert.equal(list[list.length - 2], 'gtceu:opv_parallel_hatch');
+  assert.equal(list[list.length - 1], 'gtceu:max_maxplus_parallel_hatch');
+  assert.equal(list[list.length - 2], 'gtceu:max_parallel_hatch');
+  assert.equal(list[list.length - 3], 'gtceu:opv_parallel_hatch');
   assert.equal(list.filter((id) => id === 'gtceu:max_parallel_hatch').length, 1);
   assert.equal(new Set(list).size, list.length);
 });

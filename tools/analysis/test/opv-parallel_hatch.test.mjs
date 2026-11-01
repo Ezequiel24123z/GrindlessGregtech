@@ -69,7 +69,7 @@ test('x262144 is 4^(tier - EV) at tier 13 and fits an int; the list ends UV, UHV
   assert.ok(4 ** (13 - 4) <= 2147483647);
   const { G } = load();
   const list = G.parallelHatch.hatches;
-  assert.deepEqual(plain(list.slice(-7)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch', 'gtceu:opv_parallel_hatch', 'gtceu:max_parallel_hatch']);
+  assert.deepEqual(plain(list.slice(-8, -1)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch', 'gtceu:opv_parallel_hatch', 'gtceu:max_parallel_hatch']);
   assert.equal(list.filter((id) => id === 'gtceu:opv_parallel_hatch').length, 1);
   assert.equal(new Set(list).size, list.length);
 });

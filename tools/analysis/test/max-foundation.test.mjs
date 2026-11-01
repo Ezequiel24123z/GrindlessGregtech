@@ -86,8 +86,10 @@ test('no script of ours registers a gtceu:max_* id (GTM\'s), except M1\'s parall
   const ph = (id, v) => id === 'gtceu:max_parallel_hatch' && /(^|[\\/])lib[\\/]parallel_hatch\.js$/.test(String(v.file));
   // MAX+ XP-F1: maxplus/foundation.js registers the 1,024 A hatch (the custom builder tier-prefixes its name)
   const xh = (id, v) => id === 'gtceu:max_maxplus_energy_hatch_1024a' && /(^|[\\/])maxplus[\\/]foundation\.js$/.test(String(v.file));
+  // XP-M1: lib/parallel_hatch.js also registers the MAX+ hatch
+  const mh = (id, v) => id === 'gtceu:max_maxplus_parallel_hatch' && /(^|[\\/])lib[\\/]parallel_hatch\.js$/.test(String(v.file));
   for (const reg of [run.registry.items, run.registry.machines]) {
-    for (const [id, v] of reg) if (/^gtceu:max_/.test(id) && !v.seeded && !w(id, v) && !ph(id, v) && !xh(id, v)) bad.push(`${id} (${v.file})`);
+    for (const [id, v] of reg) if (/^gtceu:max_/.test(id) && !v.seeded && !w(id, v) && !ph(id, v) && !xh(id, v) && !mh(id, v)) bad.push(`${id} (${v.file})`);
   }
   assert.deepEqual(bad, []);
   assert.doesNotMatch(code, /'(gtceu:)?max_[a-z0-9_]+'/, 'foundation.js creates no GTM MAX id');

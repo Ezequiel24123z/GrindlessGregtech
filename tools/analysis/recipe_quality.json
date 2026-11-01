@@ -168,6 +168,7 @@
   "grindless:assembly_line/heavy_ion_cyclotron|gtceu:heavy_ion_cyclotron": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/helium3_polariser|gtceu:helium3_polariser": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/hills_slingshot|gtceu:hills_slingshot": ["T-CIRC","T-HULL","T-VOLT"],
+  "grindless:assembly_line/hyperfactory|gtceu:hyperfactory": ["T-CIRC","T-HULL","T-VOLT"],
   "grindless:assembly_line/levitation_melter|gtceu:levitation_melter": ["T-CIRC","T-COMP","T-COUNT","T-HULL"],
   "grindless:assembly_line/megabar_press|gtceu:megabar_press": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/meta_material_loom|gtceu:meta_material_loom": ["T-CIRC","T-HULL","T-VOLT"],

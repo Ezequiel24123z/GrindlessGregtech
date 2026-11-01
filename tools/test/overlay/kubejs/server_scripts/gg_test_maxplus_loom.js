@@ -1,4 +1,4 @@
-// priority: -5301
+// priority: -5314
 // TEST ONLY, XP-H1 (gtceu:meta_material_loom). Command: kubejs custom_command gg_test_maxplus_loom
 // Band ONLY: X 46400-46463, Z 0-63, Y 98-125 of gcyr:black_hole_orbit (Sgr A*; zones.json row maxplus_loom).
 //   T1 (named uncertainty: the loom forms at Sgr A* on one 1,024 A MAX+ hatch and runs c1 at V[MAX] x 4 A):

@@ -70,7 +70,7 @@
   function parallels(ceiling, energy, byInputs) {
     var n = Math.min(ceiling, energy)
     if (byInputs !== null && byInputs !== undefined) n = Math.min(n, byInputs)
-    return n < 1 ? 0 : Math.floor(n)
+    return n < 1 ? 0 : Math.min(Math.floor(n), 2147483647)
   }
 
   // rate per coil step above baseK, never below floor; baseK defaults to Cupronickel

@@ -60,7 +60,7 @@ test('x4096 is 4^(tier - EV) at tier 10; the list ends UV, UHV, UEV', () => {
   assert.equal(4 ** (9 - 4), 1024);
   const { G } = load();
   const list = G.parallelHatch.hatches;
-  assert.deepEqual(plain(list.slice(-7, -4)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch']);
+  assert.deepEqual(plain(list.slice(-8, -5)), ['gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch']);
   assert.equal(new Set(list).size, list.length);
 });
 

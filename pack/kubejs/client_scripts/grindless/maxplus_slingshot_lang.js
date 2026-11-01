@@ -1,4 +1,4 @@
-// priority: 6826
+// priority: 6814
 // Gregtech Grindless - names and tooltips of MAX+'s Hills slingshot (startup_scripts/grindless/maxplus/slingshot.js; package XP-T1):
 //
 //   gtceu.recipe.grindless_<type>.<recipe>   the EMI line of each keyed row of the package: the slingshot's two rows, the older P15 and P16 steps on
