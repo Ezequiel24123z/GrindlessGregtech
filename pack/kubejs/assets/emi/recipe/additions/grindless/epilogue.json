@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:epilogue"],
+  "text": ["emi.grindless.info.epilogue.0"]
+}

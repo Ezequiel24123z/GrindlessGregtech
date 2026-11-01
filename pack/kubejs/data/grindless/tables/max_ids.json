@@ -92,8 +92,7 @@
       "grindless:launched_gc_probe",
       "grindless:nsc_belt_seed",
       "grindless:launched_belt_seed",
-      "grindless:universe_seed",
-      "grindless:max_epilogue",
+      "grindless:epilogue",
       "grindless:horizon_strand_repeater",
       "grindless:silicate_slag",
       "grindless:iron_core_fragment",
@@ -434,7 +433,8 @@
     "names": [
       "max",
       "max-sgra",
-      "max-nsc"
+      "max-nsc",
+      "maxplus"
     ]
   },
   "places": {

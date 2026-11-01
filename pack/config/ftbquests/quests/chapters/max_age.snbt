@@ -627,29 +627,17 @@
 		{
 			dependencies: ["7041B41C388F25C5"]
 			description: [
-				"The mirror shell's last recipe. &oFiction:&r Smolin's cosmological natural selection, named and not claimed: a black hole may be the seed of a new universe. The credits roll on the first one."
-				"The shell stays, and the recipe can run again."
+				"The mirror shell's last recipe stabilises the horizon. &oFiction:&r A rotating black hole's horizon, held still long enough to be measured and sealed in a reference."
+				"The first lock opens MAX+. The shell stays, and the recipe can run again."
 			]
-			icon: "grindless:universe_seed"
-			id: "16AD05621BABDA49"
-			rewards: [{ id: "3983E658CC056C1B", type: "xp", xp: 200 }]
+			icon: "grindless:horizon_lock"
+			id: "3F1C487831920064"
+			rewards: [{ id: "7F8904A75DAEF366", type: "xp", xp: 200 }]
 			shape: "rsquare"
 			size: 1.5d
-			tasks: [{ id: "189316A451817582", item: "grindless:universe_seed", type: "item" }]
-			title: "The Universe Seed"
+			tasks: [{ id: "5FD4AA9BD3E1B8A8", item: "grindless:horizon_lock", type: "item" }]
+			title: "The Horizon Lock"
 			x: 110.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["16AD05621BABDA49"]
-			description: ["The credits hand you this once. It is the end of the book, and nothing more."]
-			icon: "grindless:max_epilogue"
-			id: "7F2B7430426D1314"
-			optional: true
-			rewards: [{ id: "5514F3E1E758A845", type: "xp", xp: 50 }]
-			tasks: [{ id: "73A12F5DC3B3772B", item: "grindless:max_epilogue", type: "item" }]
-			title: "Epilogue"
-			x: 112.5d
 			y: 0.0d
 		}
 	]

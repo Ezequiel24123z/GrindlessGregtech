@@ -6,16 +6,15 @@
 //   gtceu:mirror_shell   33 x 33 x 33 hollow shell of mirror shell segments with stream bundle block rings, the controller at the equator
 //                        of the front face, on two MAX 16 A input hatches and one or two dynamo hatches. Recipe type gtceu:black_hole_bomb:
 //                        circuit 1 the vent (a generator: one seed wave packet, 2^30 EU/t out), circuit 2 the final spin map, circuit 3 the
-//                        last recipe (consumes 2^35 EU/t, makes the universe seed).
+//                        last recipe (consumes 2^35 EU/t, makes the horizon lock and grants the maxplus stage).
 //
 // One controller carries both kinds of row. It is NOT configured as a generator (G.generators.configure would call .generator(true), and
 // GTM then reads the output voltage of a machine that has input hatches: 0). Instead the recipe modifier hands generator rows to
 // G.generators.modifier and returns IDENTITY for consumer rows (no overclock, no parallels; NULL would reject the recipe). Names: client_scripts/grindless/max_shell_lang.js.
 // Textures: tools/assets/Build-MaxShellTextures.ps1. Published for the recipe script: global.grindless.maxShell.
 //
-// Credits: when a run of the last recipe ends, every player within 64 blocks of the controller gets the title and, once, the epilogue
-// item; the first time also the vanilla WIN_GAME event with value 1 (the credits screen). ServerPlayer.wonGame is never set, so the
-// server ignores the client's PERFORM_RESPAWN while the player is alive and nobody is moved or changes game mode.
+// The stage: when a run of the last recipe ends, the world flag grindless_stage_maxplus is set (once; global.grindless.maxShell.stage names
+// it). No credits, title or book: they move to the MAX+ arrival (docs/eras/maxplus.md, package XP-Z1).
 (function () {
   const G = global.grindless
   const Pat = G.patterns
@@ -27,13 +26,15 @@
   const SEGMENT_TEXTURE = 'grindless:block/max/mirror_shell_segment'
   const N = 33
   const MID = 16
-  const NEAR = 64
-  const ENDING = 'universe_seed'
+  const ENDING = 'horizon_lock'
+  const STAGE = 'maxplus'
+  const STAGE_KEY = 'grindless_stage_maxplus'
 
+  MS.stage = { name: STAGE, key: STAGE_KEY }
   MS.machines = [
     {
       name: 'mirror_shell', machine: 'gtceu:mirror_shell', type: 'black_hole_bomb', dataKey: 'grindless_black_hole_bomb',
-      lang: 'Mirror Shell', maxIO: { itemsIn: 6, itemsOut: 3, fluidsIn: 0, fluidsOut: 0 }, casing: SEGMENT, texture: SEGMENT_TEXTURE
+      lang: 'Mirror Shell', maxIO: { itemsIn: 8, itemsOut: 3, fluidsIn: 0, fluidsOut: 0 }, casing: SEGMENT, texture: SEGMENT_TEXTURE
     }
   ]
 
@@ -119,49 +120,24 @@
     }
   }
 
-  var LC = null
-  function lazy() {
-    if (LC === null) {
-      LC = { Packet: Java.loadClass('net.minecraft.network.protocol.game.ClientboundGameEventPacket') }
-    }
-    return LC
-  }
-
   function theEnd(machine) {
     var last = machine.getRecipeLogic().getLastRecipe()
     if (last === null || last === undefined) return false
     return String(last.data.getString('grindless_black_hole_bomb')) === ENDING
   }
 
-  var failed = false
-  function credits(machine) {
+  var GRANTED = false
+  function grantStage(machine) {
     try {
-      if (!theEnd(machine)) return
-      var level = machine.getLevel()
-      var pos = machine.getPos()
-      var server = level.getServer()
-      var near = level.players()
-      for (var i = 0; i < near.size(); i++) {
-        var p = near.get(i)
-        if (p.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) > NEAR * NEAR) continue
-        var name = String(p.getGameProfile().getName())
-        var saved = p.persistentData
-        server.runCommandSilent('title ' + name + ' title {"translate":"grindless.max.ending.title"}')
-        server.runCommandSilent('title ' + name + ' subtitle {"translate":"grindless.max.ending.subtitle"}')
-        if (!saved.getBoolean('grindless_max_epilogue')) {
-          saved.putBoolean('grindless_max_epilogue', true)
-          p.give(Item.of('grindless:max_epilogue'))
-        }
-        if (!saved.getBoolean('grindless_max_credits')) {
-          saved.putBoolean('grindless_max_credits', true)
-          p.connection.send(new (lazy().Packet)(lazy().Packet.WIN_GAME, 1.0))
-        }
+      if (GRANTED || !theEnd(machine)) return
+      var data = machine.getLevel().getServer().persistentData
+      if (!data.getBoolean(STAGE_KEY)) {
+        data.putBoolean(STAGE_KEY, true)
+        console.info(LOG + 'mirror shell: stage ' + STAGE + ' granted')
       }
+      GRANTED = true
     } catch (e) {
-      if (!failed) {
-        failed = true
-        console.error(LOG + 'mirror shell credits failed: ' + e)
-      }
+      console.error(LOG + 'mirror shell stage grant failed: ' + e)
     }
   }
 
@@ -191,7 +167,7 @@
         .regressWhenWaiting(false)
         .recipeModifier(shellModifier(), true)
         .additionalDisplay(G.generators.display({ maxParallels: 1, name: m.name }))
-        .afterWorking(credits)
+        .afterWorking(grantStage)
         .appearanceBlock(function () { return Block.getBlock(m.casing) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
         ["tooltips(net.minecraft.network.chat.Component[])"]([
