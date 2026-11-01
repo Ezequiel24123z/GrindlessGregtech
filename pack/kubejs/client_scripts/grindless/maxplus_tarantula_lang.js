@@ -14,10 +14,10 @@
         ['grindless.machine.tarantula_stellar_lift.tooltip.0', '\u00a77Lifts raw VMS plasma off an R136 star at 30 Doradus. Wears a lift nozzle.', '\u00a77Lifts raw VMS plasma off an R136 star at 30 Doradus. Wears a lift nozzle.'],
         ['gtceu.pair_instability_crucible', 'Pair-Instability Crucible', 'Pair-Instability Crucible'],
         ['block.gtceu.pair_instability_crucible', 'Pair-Instability Crucible', 'Pair-Instability Crucible'],
-        ['grindless.machine.pair_instability_crucible.tooltip.0', '\u00a77Burns confined VMS plasma into a nickel-56 slug and ime ash. Wears a crucible liner.', '\u00a77Burns confined VMS plasma into a nickel-56 slug and ime ash. Wears a crucible liner.'],
+        ['grindless.machine.pair_instability_crucible.tooltip.0', '\u00a77Burns confined VMS plasma into a nickel-56 slug. Wears a crucible liner.', '\u00a77Burns confined VMS plasma into a nickel-56 slug. Wears a crucible liner.'],
         ['gtceu.nickel_56_burner', 'Nickel-56 Burner', 'Nickel-56 Burner'],
         ['block.gtceu.nickel_56_burner', 'Nickel-56 Burner', 'Nickel-56 Burner'],
-        ['grindless.machine.nickel_56_burner.tooltip.0', '\u00a77A generator: the decay chain of a shielded nickel-56 cask feeds a MAX 16 A dynamo hatch.', '\u00a77A generator: the decay chain of a shielded nickel-56 cask feeds a MAX 16 A dynamo hatch.'],
+        ['grindless.machine.nickel_56_burner.tooltip.0', '\u00a77A generator: a shielded nickel-56 cask decays into a MAX 16 A dynamo hatch.', '\u00a77A generator: a shielded nickel-56 cask decays into a MAX 16 A dynamo hatch.'],
 
         ['gtceu.recipe.grindless_tarantula_stellar_lift.raw_vms_plasma', 'Circuit 1: raw VMS plasma lifted off an R136 star at 2^35 EU/t; wears a lift nozzle 1 in 32 (line P6).', 'Circuit 1: raw VMS plasma lifted off an R136 star at 2^35 EU/t; wears a lift nozzle 1 in 32 (line P6).'],
         ['gtceu.recipe.grindless_pair_instability_crucible.ni56_slug', 'Circuit 1: confined VMS plasma burned into a nickel-56 slug and ime ash at 2^35 EU/t; wears a crucible liner 1 in 16 (line P7).', 'Circuit 1: confined VMS plasma burned into a nickel-56 slug and ime ash at 2^35 EU/t; wears a crucible liner 1 in 16 (line P7).'],
