@@ -58,7 +58,7 @@ test('TFLN fab: ion_slicing circuits 1-4, figures and slots', () => {
   assert.deepEqual(inputs(by('ion_slicing', 'ln_on_sin')), ['grindless:lnoi_wafer', 'grindless:sin_coated_wafer']);
   assert.deepEqual(inputs(by('ion_slicing', 'si28_soi')), ['grindless:h_si28_wafer', 'grindless:oxidised_wafer']);
   assert.deepEqual(outputs(by('ion_slicing', 'si28_soi')), ['grindless:si28_soi_wafer', 'grindless:si28_donor_wafer', 'gtceu:hydrogen']);
-  assert.deepEqual(inputs(by('ion_slicing', 'poled_lnoi')), ['grindless:lnoi_wafer']);
+  assert.deepEqual(inputs(by('ion_slicing', 'poled_lnoi')), ['grindless:lnoi_wafer', 'gtceu:gold_foil']);
   assert.deepEqual(inputs(by('ion_slicing', 'eo_microcomb')), ['grindless:annealed_damascene_ring', 'grindless:lnoi_wafer']);
 });
 
