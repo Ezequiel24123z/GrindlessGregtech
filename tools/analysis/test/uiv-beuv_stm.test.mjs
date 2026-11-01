@@ -1,4 +1,4 @@
-// UIV-A5 (docs/eras/uiv.md, machines 5 and 7; lines 11 (to the P:Si die), 13, 14): the BEUV scanner and the STM lithography cell. Static checks only (no T1).
+﻿// UIV-A5 (docs/eras/uiv.md, machines 5 and 7; lines 11 (to the P:Si die), 13, 14): the BEUV scanner and the STM lithography cell. Static checks only (no T1).
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -166,7 +166,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   }
   for (const m of ['beuv_scanner', 'stm_lithography_cell']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
   // OpV-A2's rows (BEUV c4-8, STM c4) and OpV-A3's c9 keep their EMI lines in their own lang files
-  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless', 'opv_field_press_lang.js') + read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js') + read('client_scripts', 'grindless', 'max_imager_lang.js') + read('client_scripts', 'grindless', 'max_horizon_interferometer_lang.js');
+  const opvLang = read('client_scripts', 'grindless', 'opv_circuits_lang.js') + read('client_scripts', 'grindless', 'opv_field_press_lang.js') + read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js') + read('client_scripts', 'grindless', 'max_imager_lang.js') + read('client_scripts', 'grindless', 'max_horizon_interferometer_lang.js') + read('client_scripts', 'grindless', 'max_synchroniser_lang.js');
   for (const t of Object.values(T.types)) {
     if (!t.dataKey) continue;
     for (const r of t.recipes) {
