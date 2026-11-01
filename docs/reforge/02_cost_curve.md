@@ -502,6 +502,6 @@ After the route fix the chain `darmstadtium_rotor` to `uhv_electric_pump` to `ue
 
 ### Notes and risks
 
-- `grindless:rejected_timing_head` has no producer now. Its recovery recipe `rejected_timing_head_recovery` (`ev/extraction_cascade.js` lines 309 to 316, prohibited) is dead. The EMI coverage expectation was regenerated for this one line (`rejected_timing_head` is made only by `emi:info`).
-- `docs/eras/opv.md`, `docs/eras/max.md` and the `tiers/*.json` validators still state the old no-lower-component rule; the integrator owns them.
+- `grindless:rejected_timing_head` has no producer now. Its recovery recipe `rejected_timing_head_recovery` (`ev/extraction_cascade.js` lines 309 to 316, prohibited) is dead. The EMI coverage expectation was regenerated for this one line (`rejected_timing_head` is made only by `emi:info`). *Resolved at merge: the integrator removed the id and its references.*
+- `docs/eras/opv.md`, `docs/eras/max.md` and the `tiers/*.json` validators still state the old no-lower-component rule; the integrator owns them. *Resolved at merge: both era docs state the band E exception.*
 - Proposed DECISIONS line: OpV and MAX core components take the same-kind previous-tier component; the old no-lower-component rule is lifted for them.
