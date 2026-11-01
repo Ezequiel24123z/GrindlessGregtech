@@ -8316,28 +8316,28 @@
 			y: 204.75d
 		}
 		{
-			icon: "grindless:horizon_waveguide"
+			icon: "grindless:cold_horizon_waveguide"
 			id: "534180F98C1FC7E4"
 			shape: "rsquare"
 			size: 1.0d
 			tasks: [
-				{ id: "5F3F09B3A09D5B48", item: "grindless:horizon_waveguide", optional_task: true, type: "item" }
+				{ id: "5F3F09B3A09D5B48", item: "grindless:cold_horizon_waveguide", optional_task: true, type: "item" }
 				{ id: "5CCB3224FD8EB0D3", type: "checkmark" }
 			]
-			title: "Horizon Waveguide"
+			title: "Cold Horizon Waveguide"
 			x: 0.5d
 			y: 206.25d
 		}
 		{
-			icon: "grindless:horizon_conduit"
+			icon: "grindless:cold_horizon_conduit"
 			id: "3FD6889F391ACFD6"
 			shape: "rsquare"
 			size: 1.0d
 			tasks: [
-				{ id: "7271D905EDCC3946", item: "grindless:horizon_conduit", optional_task: true, type: "item" }
+				{ id: "7271D905EDCC3946", item: "grindless:cold_horizon_conduit", optional_task: true, type: "item" }
 				{ id: "75A2ECF9CC26BAA1", type: "checkmark" }
 			]
-			title: "Horizon Conduit"
+			title: "Cold Horizon Conduit"
 			x: 0.5d
 			y: 207.75d
 		}
@@ -8355,31 +8355,44 @@
 			y: 209.25d
 		}
 		{
-			dependencies: ["1FC3C4873104F541", "534180F98C1FC7E4", "3FD6889F391ACFD6", "7880C4E3D1A87C3F"]
-			icon: "gtceu:condensate_assembler"
+			icon: "grindless:he4_dewar"
 			id: "5AE48FDE019FC19E"
+			shape: "rsquare"
+			size: 1.0d
+			tasks: [
+				{ id: "72F35D546A136529", item: "grindless:he4_dewar", optional_task: true, type: "item" }
+				{ id: "7E4108143C1C9D4A", type: "checkmark" }
+			]
+			title: "He4 Dewar"
+			x: 0.5d
+			y: 210.75d
+		}
+		{
+			dependencies: ["1FC3C4873104F541", "534180F98C1FC7E4", "3FD6889F391ACFD6", "7880C4E3D1A87C3F", "5AE48FDE019FC19E"]
+			icon: "gtceu:condensate_assembler"
+			id: "10548567C03E7A50"
 			shape: "gear"
 			size: 1.5d
 			tasks: [
-				{ id: "72F35D546A136529", item: "gtceu:condensate_assembler", optional_task: true, type: "item" }
-				{ id: "7E4108143C1C9D4A", type: "checkmark" }
+				{ id: "1311DBCA951941BD", item: "gtceu:condensate_assembler", optional_task: true, type: "item" }
+				{ id: "575B87A068772A1C", type: "checkmark" }
 			]
 			title: "Condensate Assembler"
 			x: 3.0d
-			y: 207.0d
+			y: 207.75d
 		}
 		{
-			dependencies: ["5AE48FDE019FC19E"]
+			dependencies: ["10548567C03E7A50"]
 			icon: "grindless:horizon_frame_part"
-			id: "10548567C03E7A50"
+			id: "10EF56C85952824E"
 			size: 1.25d
 			tasks: [
-				{ id: "1311DBCA951941BD", item: "grindless:horizon_frame_part", optional_task: true, type: "item" }
-				{ id: "575B87A068772A1C", type: "checkmark" }
+				{ id: "1DE77C193F09CA2B", item: "grindless:horizon_frame_part", optional_task: true, type: "item" }
+				{ id: "1D26F655384C3A25", type: "checkmark" }
 			]
 			title: "Horizon Frame Part"
 			x: 5.5d
-			y: 207.0d
+			y: 207.75d
 		}
 		{
 			icon: "grindless:horizon_frame_part"
@@ -8392,7 +8405,7 @@
 			]
 			title: "Horizon Frame Part"
 			x: 0.5d
-			y: 212.25d
+			y: 213.0d
 		}
 		{
 			icon: "grindless:flux_absorber_casing"
@@ -8405,7 +8418,7 @@
 			]
 			title: "Flux Absorber Casing"
 			x: 0.5d
-			y: 213.75d
+			y: 214.5d
 		}
 		{
 			icon: "grindless:maxplus_field_generator"
@@ -8418,7 +8431,7 @@
 			]
 			title: "Maxplus Field Generator"
 			x: 0.5d
-			y: 215.25d
+			y: 216.0d
 		}
 		{
 			icon: "grindless:kerr_strange_plate"
@@ -8431,7 +8444,7 @@
 			]
 			title: "Kerr Strange Plate"
 			x: 0.5d
-			y: 216.75d
+			y: 217.5d
 		}
 		{
 			dependencies: ["5DE7BEC8BADC30C7", "16FF66386DA48914", "1C539910B503402C", "36E23AA240429EFE"]
@@ -8445,7 +8458,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 214.5d
+			y: 215.25d
 		}
 		{
 			dependencies: ["7B4655F97DE578FE"]
@@ -8458,7 +8471,7 @@
 			]
 			title: "Hyperstargate Ring Block"
 			x: 5.5d
-			y: 214.5d
+			y: 215.25d
 		}
 		{
 			icon: "grindless:horizon_frame_part"
@@ -8471,7 +8484,7 @@
 			]
 			title: "Horizon Frame Part"
 			x: 0.5d
-			y: 219.75d
+			y: 220.5d
 		}
 		{
 			icon: "grindless:chevron_core"
@@ -8484,7 +8497,7 @@
 			]
 			title: "Chevron Core"
 			x: 0.5d
-			y: 221.25d
+			y: 222.0d
 		}
 		{
 			icon: "grindless:maxplus_electric_piston"
@@ -8497,7 +8510,7 @@
 			]
 			title: "Maxplus Electric Piston"
 			x: 0.5d
-			y: 222.75d
+			y: 223.5d
 		}
 		{
 			icon: "grindless:cold_kerr_gyro"
@@ -8507,7 +8520,7 @@
 			tasks: [{ id: "71FAA0ED0FD9B0D7", type: "checkmark" }]
 			title: "Cold Kerr Gyro"
 			x: 0.5d
-			y: 224.25d
+			y: 225.0d
 		}
 		{
 			dependencies: ["3843DD8442E84691", "133320E5B2CA6942", "5C9A36797E61D77C", "1CAD91E096AB1B16"]
@@ -8521,7 +8534,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 222.0d
+			y: 222.75d
 		}
 		{
 			dependencies: ["74EF54B0F689E5B3"]
@@ -8534,7 +8547,7 @@
 			]
 			title: "Hyperstargate Chevron Upgrade"
 			x: 5.5d
-			y: 222.0d
+			y: 222.75d
 		}
 		{
 			icon: "grindless:hyperstargate_ring_block"
@@ -8547,7 +8560,7 @@
 			]
 			title: "Hyperstargate Ring Block"
 			x: 0.5d
-			y: 227.25d
+			y: 228.0d
 		}
 		{
 			icon: "grindless:hyperstargate_chevron_upgrade"
@@ -8560,7 +8573,7 @@
 			]
 			title: "Hyperstargate Chevron Upgrade"
 			x: 0.5d
-			y: 228.75d
+			y: 229.5d
 		}
 		{
 			icon: "grindless:horizon_containment_plate"
@@ -8573,7 +8586,7 @@
 			]
 			title: "Horizon Containment Plate"
 			x: 0.5d
-			y: 230.25d
+			y: 231.0d
 		}
 		{
 			icon: "grindless:horizon_shielding"
@@ -8586,7 +8599,7 @@
 			]
 			title: "Horizon Shielding"
 			x: 0.5d
-			y: 231.75d
+			y: 232.5d
 		}
 		{
 			dependencies: ["7D7F73C70449325A", "5567CA686E577162", "7F8875C29353980A", "18F9572020D5AE08"]
@@ -8600,7 +8613,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 229.5d
+			y: 230.25d
 		}
 		{
 			dependencies: ["579736DEF1CEEDE0"]
@@ -8613,7 +8626,7 @@
 			]
 			title: "Hyperstargate Chevron Block"
 			x: 5.5d
-			y: 229.5d
+			y: 230.25d
 		}
 		{
 			icon: "grindless:hyperstargate_ring_block"
@@ -8626,7 +8639,7 @@
 			]
 			title: "Hyperstargate Ring Block"
 			x: 0.5d
-			y: 234.75d
+			y: 235.5d
 		}
 		{
 			icon: "grindless:hyperstargate_chevron_upgrade"
@@ -8639,7 +8652,7 @@
 			]
 			title: "Hyperstargate Chevron Upgrade"
 			x: 0.5d
-			y: 236.25d
+			y: 237.0d
 		}
 		{
 			icon: "grindless:horizon_lock"
@@ -8652,7 +8665,7 @@
 			]
 			title: "Horizon Lock"
 			x: 0.5d
-			y: 237.75d
+			y: 238.5d
 		}
 		{
 			icon: "grindless:horizon_containment_plate"
@@ -8665,7 +8678,7 @@
 			]
 			title: "Horizon Containment Plate"
 			x: 0.5d
-			y: 239.25d
+			y: 240.0d
 		}
 		{
 			dependencies: ["3A3526FC50BE1D5C", "152B8ABF0443962D", "76ACF4F99CD44947", "34C20095551E2885"]
@@ -8679,7 +8692,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 237.0d
+			y: 237.75d
 		}
 		{
 			dependencies: ["7571760D95F0841B"]
@@ -8692,7 +8705,7 @@
 			]
 			title: "Hyperstargate Locked Chevron"
 			x: 5.5d
-			y: 237.0d
+			y: 237.75d
 		}
 		{
 			icon: "grindless:iris_blade"
@@ -8702,7 +8715,7 @@
 			tasks: [{ id: "3EA7679AD8A5713B", type: "checkmark" }]
 			title: "Iris Blade"
 			x: 0.5d
-			y: 243.0d
+			y: 243.75d
 		}
 		{
 			icon: "grindless:horizon_shielding"
@@ -8715,7 +8728,7 @@
 			]
 			title: "Horizon Shielding"
 			x: 0.5d
-			y: 244.5d
+			y: 245.25d
 		}
 		{
 			icon: "grindless:condensate_field_cell"
@@ -8728,7 +8741,7 @@
 			]
 			title: "Condensate Field Cell"
 			x: 0.5d
-			y: 246.0d
+			y: 246.75d
 		}
 		{
 			dependencies: ["1BD31B3CB428A365", "1FE8840B053CAEF0", "16A260909B217319"]
@@ -8742,7 +8755,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 244.5d
+			y: 245.25d
 		}
 		{
 			dependencies: ["7A0A3872E707D211"]
@@ -8755,7 +8768,7 @@
 			]
 			title: "Horizon Iris"
 			x: 5.5d
-			y: 244.5d
+			y: 245.25d
 		}
 		{
 			icon: "grindless:cold_kerr_toroid"
@@ -8768,7 +8781,7 @@
 			]
 			title: "Cold Kerr Toroid"
 			x: 0.5d
-			y: 249.75d
+			y: 250.5d
 		}
 		{
 			icon: "grindless:maxplus_field_generator"
@@ -8781,7 +8794,7 @@
 			]
 			title: "Maxplus Field Generator"
 			x: 0.5d
-			y: 251.25d
+			y: 252.0d
 		}
 		{
 			icon: "grindless:cold_kerr_fcl"
@@ -8794,7 +8807,7 @@
 			]
 			title: "Cold Kerr FCL"
 			x: 0.5d
-			y: 252.75d
+			y: 253.5d
 		}
 		{
 			icon: "grindless:creative_energy_cell"
@@ -8807,7 +8820,7 @@
 			]
 			title: "Creative Energy Cell"
 			x: 0.5d
-			y: 254.25d
+			y: 255.0d
 		}
 		{
 			dependencies: ["3DB1D4630606210F", "11F2294F180EAF17", "1C7288C450528A83", "1EB9331051FE1244"]
@@ -8821,7 +8834,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 252.0d
+			y: 252.75d
 		}
 		{
 			dependencies: ["3C64DED0B9E12A0C"]
@@ -8832,7 +8845,7 @@
 			tasks: [{ id: "7E86A85519431E2E", type: "checkmark" }]
 			title: "Horizon Capacitor"
 			x: 5.5d
-			y: 252.0d
+			y: 252.75d
 		}
 		{
 			icon: "grindless:hyperstargate_ring_block"
@@ -8845,7 +8858,7 @@
 			]
 			title: "Hyperstargate Ring Block"
 			x: 0.5d
-			y: 257.25d
+			y: 258.0d
 		}
 		{
 			icon: "grindless:resonance_chamber"
@@ -8855,7 +8868,7 @@
 			tasks: [{ id: "5021B38978CB8A5F", type: "checkmark" }]
 			title: "Resonance Chamber"
 			x: 0.5d
-			y: 258.75d
+			y: 259.5d
 		}
 		{
 			icon: "grindless:horizon_conduit"
@@ -8868,7 +8881,7 @@
 			]
 			title: "Horizon Conduit"
 			x: 0.5d
-			y: 260.25d
+			y: 261.0d
 		}
 		{
 			icon: "grindless:creative_energy"
@@ -8881,7 +8894,7 @@
 			]
 			title: "Creative Energy"
 			x: 0.5d
-			y: 261.75d
+			y: 262.5d
 		}
 		{
 			dependencies: ["76C9CE7F25A86B50", "1C93A265D90D9758", "32C2396F3FAD5ECF", "596A58531615E4DD"]
@@ -8895,7 +8908,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 259.5d
+			y: 260.25d
 		}
 		{
 			dependencies: ["764004071D677ECB"]
@@ -8908,7 +8921,7 @@
 			]
 			title: "Hyperstargate Power Unit"
 			x: 5.5d
-			y: 259.5d
+			y: 260.25d
 		}
 		{
 			icon: "grindless:hyperstargate_chevron_block"
@@ -8921,7 +8934,7 @@
 			]
 			title: "Hyperstargate Chevron Block"
 			x: 0.5d
-			y: 264.0d
+			y: 264.75d
 		}
 		{
 			icon: "grindless:hyperstargate_ring_block"
@@ -8934,7 +8947,7 @@
 			]
 			title: "Hyperstargate Ring Block"
 			x: 0.5d
-			y: 265.5d
+			y: 266.25d
 		}
 		{
 			icon: "grindless:horizon_alignment_matrix"
@@ -8944,7 +8957,7 @@
 			tasks: [{ id: "33E70EDCA3596FD0", type: "checkmark" }]
 			title: "Horizon Alignment Matrix"
 			x: 0.5d
-			y: 267.0d
+			y: 267.75d
 		}
 		{
 			icon: "grindless:creative_chest"
@@ -8957,7 +8970,7 @@
 			]
 			title: "Creative Chest"
 			x: 0.5d
-			y: 268.5d
+			y: 269.25d
 		}
 		{
 			icon: "grindless:creative_tank"
@@ -8970,7 +8983,7 @@
 			]
 			title: "Creative Tank"
 			x: 0.5d
-			y: 270.0d
+			y: 270.75d
 		}
 		{
 			dependencies: ["714E660938BEB932", "5C9FB7E54803E38E", "54B1F24C8BFACD10", "52E0486A145B3BA0", "5B34B0760D74B851"]
@@ -8984,7 +8997,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 267.0d
+			y: 267.75d
 		}
 		{
 			dependencies: ["7490FBC05CCD8860"]
@@ -8997,7 +9010,7 @@
 			]
 			title: "Hyperstargate Base"
 			x: 5.5d
-			y: 267.0d
+			y: 267.75d
 		}
 		{
 			icon: "grindless:hyperstargate_ring_block"
@@ -9010,7 +9023,7 @@
 			]
 			title: "Hyperstargate Ring Block"
 			x: 0.5d
-			y: 272.25d
+			y: 273.0d
 		}
 		{
 			icon: "grindless:creative_data_access_hatch"
@@ -9023,7 +9036,7 @@
 			]
 			title: "Creative Data Access Hatch"
 			x: 0.5d
-			y: 273.75d
+			y: 274.5d
 		}
 		{
 			icon: "grindless:horizon_comm_terminal"
@@ -9033,7 +9046,7 @@
 			tasks: [{ id: "19DD02419B1024B2", type: "checkmark" }]
 			title: "Horizon Comm Terminal"
 			x: 0.5d
-			y: 275.25d
+			y: 276.0d
 		}
 		{
 			icon: "grindless:pattern_memory_unit"
@@ -9043,7 +9056,7 @@
 			tasks: [{ id: "3C8A92A32A9BE473", type: "checkmark" }]
 			title: "Pattern Memory Unit"
 			x: 0.5d
-			y: 276.75d
+			y: 277.5d
 		}
 		{
 			dependencies: ["5FEC9B2A36B81D4D", "3C79C0C50E2FDED7", "745693C1FE2AE849", "714CD39B1939AC89"]
@@ -9057,7 +9070,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 274.5d
+			y: 275.25d
 		}
 		{
 			dependencies: ["7D93C838F2427242"]
@@ -9070,7 +9083,7 @@
 			]
 			title: "Hyperstargate Interface"
 			x: 5.5d
-			y: 274.5d
+			y: 275.25d
 		}
 		{
 			icon: "grindless:horizon_cloud_core"
@@ -9568,7 +9581,7 @@
 			]
 			title: "Hyperstargate Ring Block"
 			x: 0.5d
-			y: 280.25d
+			y: 281.0d
 		}
 		{
 			icon: "grindless:horizon_controller_crystal"
@@ -9581,7 +9594,7 @@
 			]
 			title: "Horizon Controller Crystal"
 			x: 0.5d
-			y: 281.75d
+			y: 282.5d
 		}
 		{
 			icon: "grindless:creative_computation_provider"
@@ -9594,7 +9607,7 @@
 			]
 			title: "Creative Computation Provider"
 			x: 0.5d
-			y: 283.25d
+			y: 284.0d
 		}
 		{
 			icon: "grindless:horizon_processor"
@@ -9607,7 +9620,7 @@
 			]
 			title: "Horizon Processor"
 			x: 0.5d
-			y: 284.75d
+			y: 285.5d
 		}
 		{
 			icon: "grindless:hyperstargate_interface"
@@ -9620,7 +9633,7 @@
 			]
 			title: "Hyperstargate Interface"
 			x: 0.5d
-			y: 286.25d
+			y: 287.0d
 		}
 		{
 			dependencies: ["3635B6E69C688041", "3846C2EB8401AA6A", "5D05DA1C6077D95D", "58238D0EAC4F5A95", "1A1D465C87AC576C"]
@@ -9634,7 +9647,7 @@
 			]
 			title: "Hyper Assembly Array"
 			x: 3.0d
-			y: 283.25d
+			y: 284.0d
 		}
 		{
 			dependencies: ["58ACEBA295CFBB76"]
@@ -9647,7 +9660,7 @@
 			]
 			title: "Hyperstargate"
 			x: 5.5d
-			y: 283.25d
+			y: 284.0d
 		}
 		{
 			icon: "grindless:genome_archive"
@@ -9660,7 +9673,7 @@
 			]
 			title: "Genome Archive"
 			x: 0.5d
-			y: 287.75d
+			y: 288.5d
 		}
 		{
 			icon: "grindless:cloud_phase_map"
@@ -9673,7 +9686,7 @@
 			]
 			title: "Cloud Phase Map"
 			x: 0.5d
-			y: 289.25d
+			y: 290.0d
 		}
 		{
 			icon: "grindless:horizon_phase_lock"
@@ -9686,7 +9699,7 @@
 			]
 			title: "Horizon Phase Lock"
 			x: 0.5d
-			y: 290.75d
+			y: 291.5d
 		}
 		{
 			icon: "grindless:jacketed_condensate_cell"
@@ -9699,7 +9712,7 @@
 			]
 			title: "Jacketed Condensate Cell"
 			x: 0.5d
-			y: 292.25d
+			y: 293.0d
 		}
 		{
 			icon: "grindless:horizon_lock"
@@ -9712,7 +9725,7 @@
 			]
 			title: "Horizon Lock"
 			x: 0.5d
-			y: 293.75d
+			y: 294.5d
 		}
 		{
 			dependencies: ["53A5964F746758FC", "7BF77F380EDA3958", "5392ADCEB4D49719", "517FDF12BE198B93", "5D7544850520BF9C"]
@@ -9726,7 +9739,7 @@
 			]
 			title: "Hyperstargate"
 			x: 3.0d
-			y: 290.75d
+			y: 291.5d
 		}
 		{
 			dependencies: ["7D24DE496C26EECC"]
@@ -9739,7 +9752,7 @@
 			]
 			title: "Spent Dial Charge"
 			x: 5.5d
-			y: 290.75d
+			y: 291.5d
 		}
 		{
 			icon: "grindless:spent_dial_charge"
@@ -9752,7 +9765,7 @@
 			]
 			title: "Spent Dial Charge"
 			x: 0.5d
-			y: 296.75d
+			y: 297.5d
 		}
 		{
 			icon: "gtceu:settled_condensate_bucket"
@@ -9765,7 +9778,7 @@
 			]
 			title: "Settled Condensate"
 			x: 0.5d
-			y: 298.25d
+			y: 299.0d
 		}
 		{
 			icon: "gtceu:superfluid_helium_3_bucket"
@@ -9778,7 +9791,7 @@
 			]
 			title: "Superfluid Helium 3"
 			x: 0.5d
-			y: 299.75d
+			y: 300.5d
 		}
 		{
 			dependencies: ["51FF3B8E2315B507", "1C0157C858D11EC8", "374D6CF5B0E7CC52"]
@@ -9792,7 +9805,7 @@
 			]
 			title: "Condensate Refinery"
 			x: 3.0d
-			y: 298.25d
+			y: 299.0d
 		}
 		{
 			dependencies: ["585A17096D3C1292"]
@@ -9805,7 +9818,7 @@
 			]
 			title: "Jacketed Condensate Cell"
 			x: 5.5d
-			y: 298.25d
+			y: 299.0d
 		}
 	]
 	subtitle: ["Condensate and bound matter, stars and streams, cryo parts, the gate tree crafts, components, circuits and the creative cores"]
