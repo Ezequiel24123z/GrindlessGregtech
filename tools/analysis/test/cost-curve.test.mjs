@@ -33,13 +33,24 @@ function recipe(id, { ins = [], fins = [], outs = ['gtceu:mv_machine_hull'], eut
   };
 }
 
-test('ceilScaled rounds up without float noise and caps at an int', () => {
-  assert.equal(rule.ceilScaled(10, 1.1), 11);
-  assert.equal(rule.ceilScaled(3, 2.5), 8);
-  assert.equal(rule.ceilScaled(4, 2.5), 10);
-  assert.equal(rule.ceilScaled(7, 1), 7);
-  assert.equal(rule.ceilScaled(1000, 1.0001), 1001);
-  assert.equal(rule.ceilScaled(2e9, 5), 2147483647);
+test('scaledCount rounds to the nearest count, half up, without float noise, and caps at an int', () => {
+  assert.equal(rule.scaledCount(10, 1.1), 11);
+  assert.equal(rule.scaledCount(10, 1.15), 12, '11.499999999999998 in doubles is 11.5');
+  assert.equal(rule.scaledCount(3, 2.5), 8);
+  assert.equal(rule.scaledCount(4, 2.5), 10);
+  assert.equal(rule.scaledCount(7, 1), 7);
+  assert.equal(rule.scaledCount(1000, 1.0001), 1000);
+  assert.equal(rule.scaledCount(2e9, 5), 2147483647);
+});
+
+test('scaledCount has no cliff at the first factor above 1: a count moves only when its own step is reached, and never shrinks', () => {
+  assert.equal(rule.scaledCount(1, 1.001), 1);
+  assert.equal(rule.scaledCount(1, 1.49), 1);
+  assert.equal(rule.scaledCount(1, 1.5), 2);
+  assert.equal(rule.scaledCount(2, 1.24), 2);
+  assert.equal(rule.scaledCount(2, 1.25), 3);
+  assert.equal(rule.scaledCount(144, 1.001), 144);
+  for (const n of [1, 2, 3, 5, 16, 64, 144, 1000]) for (const f of [1, 1.001, 1.3, 2, 7.77]) assert.ok(rule.scaledCount(n, f) >= n, `${n} x ${f}`);
 });
 
 test('tierOfEut gives the lowest tier whose voltage covers the EU/t', () => {
@@ -164,8 +175,8 @@ test('an enabled committed table applies exactly its committed factors', () => {
     const hull = recipe(`gtceu:assembler/${t.era}_hull`, { ins: [sizedIn('x:plate', 3)], fins: [fluidIn('gtceu:water', 1000)], outs: [`gtceu:${t.era}_machine_hull`] });
     const res = applyToDump(mkDump({ recipes: [hull] }), tables);
     const j = res.recipes.get(hull.id).json;
-    assert.equal(j.inputs.item[0].content.count, rule.ceilScaled(3, t.item), t.era);
-    assert.equal(j.inputs.fluid[0].content.amount, rule.ceilScaled(1000, t.fluid), t.era);
+    assert.equal(j.inputs.item[0].content.count, rule.scaledCount(3, t.item), t.era);
+    assert.equal(j.inputs.fluid[0].content.amount, rule.scaledCount(1000, t.fluid), t.era);
   }
   for (const t of tables.filter((x) => !x.enabled)) {
     const hull = recipe(`gtceu:assembler/${t.era}_hull`, { ins: [sizedIn('x:plate', 3)], outs: [`gtceu:${t.era}_machine_hull`] });
@@ -173,7 +184,7 @@ test('an enabled committed table applies exactly its committed factors', () => {
   }
 });
 
-test('an era with a factor above 1 changes exactly the selected recipes, to ceil(n x f)', () => {
+test('an era with a factor above 1 changes exactly the selected recipes, to round(n x f)', () => {
   const { tables } = loadTables(TABLE_DIR);
   const hull = recipe('gtceu:assembler/mv_hull', { ins: [sizedIn('x:plate', 3)], fins: [fluidIn('gtceu:water', 1000)], outs: ['gtceu:mv_machine_hull'] });
   const unrelated = recipe('gtceu:assembler/unrelated', { ins: [sizedIn('x:plate', 3)], outs: ['x:widget'], eut: 30 });
@@ -235,7 +246,7 @@ test('the static stand-in runs the pack pass: originals and added recipes end up
     for (const [era, id, n] of [['mv', 'gtceu:assembler/mv_hull_gtm', 4], ['hv', 'gtceu:assembler/hv_hull_gtm', 5]]) {
       const t = eraOn(era);
       const got = committed.originalsChanged.get(id);
-      if (t) assert.equal(got.inputs.item[0].content.count, rule.ceilScaled(n, t.item), id);
+      if (t) assert.equal(got.inputs.item[0].content.count, rule.scaledCount(n, t.item), id);
       else assert.equal(got, undefined, id);
     }
 

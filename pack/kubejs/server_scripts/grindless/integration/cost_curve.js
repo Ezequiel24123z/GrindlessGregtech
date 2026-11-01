@@ -2,7 +2,8 @@
 // -----------------------------------------------------------------------------------------------
 // Cost curve (Project Reforge, RF-2A; docs/reforge/02_cost_curve.md): scales the consumed item and fluid inputs of the recipes
 // that make key items, GTM's own and ours, by a factor per era read from data/grindless/tables/cost_curve/<era>.json (mv..max).
-// Outputs, duration, EU/t, chances, tick inputs, programmed circuits and non-consumed inputs never change. Amounts are rounded up.
+// Outputs, duration, EU/t, chances, tick inputs, programmed circuits and non-consumed inputs never change. Amounts are rounded to the nearest whole
+// count, half up (P2-Z; ceil made every count of 1 jump to 2 at the first factor above 1).
 //
 // Landing state: every table has enabled=false and factors 1.0, so the pass reads the tables, logs one line and changes nothing.
 // A later package switches a band on by editing its table; nothing here is hand-edited per recipe.
@@ -19,7 +20,7 @@
 // builder's holders when the event ends, so they go through serialize() + set('inputs'). Priority: the lowest band of the server
 // scripts (tools/analysis/script_order.json), after every script that adds, removes or derives a recipe.
 //
-// Published: global.grindless.costCurve = { eras, ceilScaled, tierOfEut, validateTable, makeSelector, scaleRecipe, stats }.
+// Published: global.grindless.costCurve = { eras, scaledCount, tierOfEut, validateTable, makeSelector, scaleRecipe, stats }.
 //
 // Rhino: var + function declarations only (this Rhino throws "redeclaration of var").
 (function () {
@@ -40,9 +41,13 @@
     return Object.prototype.hasOwnProperty.call(o, k)
   }
 
-  // ceil(n * f) without float noise (10 * 1.1 is 11.000000000000002 in doubles), capped to an int
-  function ceilScaled(n, f) {
-    var v = Math.ceil(Math.round(n * f * 1e6) / 1e6)
+  // round(n * f) (half up) without float noise (10 * 1.15 is 11.499999999999998 in doubles), capped to an int. Rounding to the
+  // nearest whole count, not up, is what removes the quantisation cliff: ceil turned every count of 1 into 2 at f = 1.001, so the
+  // index jumped by about 2x there and no factor fell inside the band; round moves a count of 1 at f = 1.5, a count of 2 at 1.25,
+  // a count of 3 at 1.17 and so on, so the counts of a recipe set cross their steps at different factors and the index follows f.
+  // For f >= 1 the result is never below n, and it never shrinks an input.
+  function scaledCount(n, f) {
+    var v = Math.round(Math.round(n * f * 1e6) / 1e6)
     return v > INT_MAX ? INT_MAX : v
   }
 
@@ -111,7 +116,7 @@
       n = 1
       plain = true
     } else return e
-    var m = ceilScaled(n, f)
+    var m = scaledCount(n, f)
     if (m === n) return e
     var out = copy(e)
     if (plain) out.content = { type: SIZED, count: m, ingredient: { item: c.item } }
@@ -125,7 +130,7 @@
   function scaleFluid(e, f) {
     var c = e && e.content
     if (!c || typeof c !== 'object' || typeof c.amount !== 'number' || !isConsumed(e)) return e
-    var m = ceilScaled(c.amount, f)
+    var m = scaledCount(c.amount, f)
     if (m === c.amount) return e
     var out = copy(e)
     out.content = copy(c)
@@ -410,7 +415,7 @@
   })
 
   G.costCurve = {
-    eras: ERAS, ceilScaled: ceilScaled, tierOfEut: tierOfEut, validateTable: validateTable, makeSelector: makeSelector,
+    eras: ERAS, scaledCount: scaledCount, tierOfEut: tierOfEut, validateTable: validateTable, makeSelector: makeSelector,
     scaleRecipe: scaleRecipe, stats: S
   }
 })()
