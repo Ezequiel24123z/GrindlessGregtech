@@ -3,14 +3,15 @@
 // Runs every startup, server and client script through lib/kubejs_static.mjs (Node `vm`), then checks:
 //   scripts   no script throws while loading or in an event callback (syntax errors included). console.error lines are
 //             reported as a count only: the stand-in does not model the mods' materials, so some are expected.
-//   lang      every en_us key has an es_es key (es_es may have more: GTM names materials in English itself).
-//   registry  every machine, recipe type and grindless: item/block the scripts register has an en_us and es_es name.
+//   lang      counts the en_us keys the scripts add (English is the only language).
+//   english-only  no es_es key, block, column or file anywhere under pack/kubejs (EN-1; the owner's rule: nothing in Spanish).
+//   registry  every machine, recipe type and grindless: item/block the scripts register has an en_us name.
 // Prints one line per check; problems follow (at most 8 per check). Exit 0 = clean, 1 = problems, 2 = tool failure.
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { runPackScripts } from './lib/kubejs_static.mjs';
+import { runPackScripts, spanishFindings } from './lib/kubejs_static.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const i = process.argv.indexOf('--pack');
@@ -52,11 +53,10 @@ report('scripts', thrown.map(describe),
   thrown.length + ' exceptions, ' + consoleErrors + ' console.error (stand-in, informational)');
 
 const en = run.lang.en_us || {};
-const es = run.lang.es_es || {};
-const missingEs = Object.keys(en).filter((k) => !(k in es)).sort();
-report('lang', missingEs.map((k) => 'es_es missing ' + k), Object.keys(en).length + ' en_us keys, ' + missingEs.length + ' without es_es');
+report('lang', [], Object.keys(en).length + ' en_us keys');
+report('english-only', spanishFindings(packDir).map((f) => 'Spanish is not allowed (EN-1): ' + f), 'no es_es text, key, block or file under pack/kubejs');
 
-const named = (keys) => keys.some((k) => k in en) && keys.some((k) => k in es);
+const named = (keys) => keys.some((k) => k in en);
 const unnamed = [];
 for (const m of run.registry.machines.values()) {
   if (!named(['block.' + m.id.replace(':', '.')])) unnamed.push('machine ' + m.id + ' (' + m.file + ')');

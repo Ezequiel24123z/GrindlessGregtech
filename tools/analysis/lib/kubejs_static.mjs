@@ -10,7 +10,7 @@
 //             and fluid inputs/outputs, chances, not-consumed inputs, circuits, EU/t, conditions), crafting (shaped, shapeless, GTM's
 //             shaped), cooking, stonecutting, smithing and event.custom JSON. Handlers of right-click/placement events are recorded
 //             with their item filter (world mechanics).
-//   client    ClientEvents.lang(<language>): the translation keys the pack adds.
+//   client    ClientEvents.lang('en_us'): the translation keys the pack adds.
 // Not modelled by default: the mods' own recipes. event.originalRecipes and forEachRecipe see only the `originals` handed in (none in
 // the Node suite), so recipes the pack derives from them (the refinery, the ore plant...) are absent; GTM's recipes generated from a
 // material's flags are absent too. A native dump (gg_dump.js) is the authority for those; emi-coverage.mjs --dump cross-checks it.
@@ -840,7 +840,7 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
       renameItem: () => {}, renameBlock: () => {},
     }, 'lang ' + language);
   }
-  for (const language of ['en_us', 'es_es']) {
+  for (const language of ['en_us']) {
     const dir = path.join(kubejs, 'assets');
     if (!fs.existsSync(dir)) continue;
     for (const ns of fs.readdirSync(dir)) {
@@ -893,6 +893,30 @@ export const GTM_HIGH_TIER_IDS = ['uev', 'uiv', 'uxv'].flatMap((tier) =>
 export const GTM_HIGH_TIER_COMPONENTS = ['uhv', 'uev', 'uiv', 'uxv', 'opv'].flatMap((tier) =>
   ['electric_motor', 'electric_pump', 'conveyor_module', 'electric_piston', 'robot_arm', 'field_generator', 'emitter', 'sensor', 'fluid_regulator']
     .map((n) => `gtceu:${tier}_${n}`));
+
+/**
+ * English only (EN-1): every file under pack/kubejs whose path or text mentions es_es (a language key, block, column or lang file).
+ * Returns ['relative/path: reason', ...], sorted; empty when the pack is English only.
+ */
+export function spanishFindings(packDir) {
+  const root = path.join(packDir, 'kubejs');
+  const found = [];
+  const walk = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      const rel = path.relative(root, p).split(path.sep).join('/');
+      if (e.isDirectory()) { walk(p); continue; }
+      if (/es_es/i.test(e.name)) { found.push(`${rel}: es_es file name`); continue; }
+      if (!/\.(js|json|mjs|lang|txt|md)$/i.test(e.name)) continue;
+      const lines = fs.readFileSync(p, 'utf8').split('\n');
+      const n = lines.findIndex((l) => /es_es/i.test(l));
+      if (n >= 0) found.push(`${rel}:${n + 1}: es_es`);
+    }
+  };
+  walk(root);
+  return found.sort();
+}
 
 /** The pack's static dump (lib/dump.mjs format) plus what the stand-in learned on the way. */
 export function staticDump(packDir, opts = {}) {
