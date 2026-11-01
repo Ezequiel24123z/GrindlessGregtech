@@ -182,7 +182,19 @@ hash = "14a33e2267c5a5a450319228aa7e6dcd86681978f89c95769bd90e90628c28d6"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/zpm_age.snbt"
-hash = "bb0039af253312881315ad85a374dc13523b1b4bfc7fbefb217c262fd129e40e"
+hash = "35bcad846767d7bbc14c8970c6f7e537aceaa4616c6113e28dee7a3b68d6c91b"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/zpm_circuits.snbt"
+hash = "cd06081557a1ae7d7a7abcf0a6cbd2d133577a481785e9ceb9740609316dca2c"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/zpm_integration.snbt"
+hash = "5171598df51959ff2d73a279d286505903df5523c35e22d510a5f99225529b62"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/zpm_machines.snbt"
+hash = "a6dcb6bc9d181a6b0b1ff956e7c5c7831b592cfb983531ccdd30acae73f59b5e"
 
 [[files]]
 file = "config/ftbquests/quests/data.snbt"
