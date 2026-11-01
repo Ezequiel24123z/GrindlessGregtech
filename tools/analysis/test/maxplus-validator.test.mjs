@@ -212,7 +212,7 @@ test('hyperstargate: machine 17 with its dial type and its recharge row, once XP
   assert.ok(ids.some((i) => /condensate_refinery\/recharge_dial_charge$/.test(i)), 'the recharge row');
   const dial = pack().mp.filter((x) => typeOf(x) === 'hyperstargate_dial');
   assert.equal(dial.length, 1, 'one dial row');
-  assert.ok(/\/dial$/.test(dial[0].i), 'the dial row is named dial');
+  assert.equal(dial[0].i, 'grindless:hyperstargate_dial', 'the dial row (data string "dial")');
 });
 
 // ------------------------------------------------------------------ re-count of docs/eras/maxplus.md
