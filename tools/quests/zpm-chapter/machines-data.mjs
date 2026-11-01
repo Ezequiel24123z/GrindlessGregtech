@@ -68,7 +68,7 @@ export const QUESTS = [
     automate: 'Pipe reactor waste straight in; send radon and capsules out by ME.',
   }, [it('grindless:radium_capsule')]),
   prod('SYN', 'Synroc', 'grindless:synroc_block', ['CLEAN'], 6, 1.5,
-    'Waste you cannot use is cast into a ceramic block that holds it for good. &6Synroc&r is a place to put what is left, not a way to hide it.',
+    'Waste you cannot use is cast into a ceramic block that holds it sealed. &6Synroc&r is a place to put what is left, not a way to hide it.',
     [it('grindless:synroc_block')]),
   gear('AMER', 'actinide_partitioning_plant', 'Actinide Partitioning', ['SYN'], 8, 1.5, {
     for: 'The &6Actinide Partitioning Plant&r splits waste into americium and curium so that very little of it needs burying.',
@@ -135,12 +135,12 @@ export const QUESTS = [
     needs: 'Its controller and archaeal culture for the gel.',
     unlocks: 'Silica aerogel for the cryostat casing and the hulls that need to hold the cold.',
     automate: 'Slow and steady. Stock aerogel by ME.',
-  }, [it('gtceu:silica_aerogel')]),
+  }, [it('grindless:silica_aerogel')]),
   gear('NEUT', 'neutrino_observatory', 'Neutrinos', ['AERO'], 8, 6, {
     for: 'The &6Neutrino Observatory&r waits for particles that pass through the planet and counts the rare one that stops.',
     needs: 'Its controller and the &6Photomultiplier Casing&r.',
     unlocks: 'The Solar Core Survey and, from it, the data the gate to UV asks for.',
-    automate: 'It runs on its own. Collect the survey by ME when it finishes.',
+    automate: 'It needs no tending. Collect the survey by ME when it finishes.',
   }, [it('grindless:photomultiplier_casing')]),
   prod('SURVEY', 'Solar Core Survey', 'grindless:solar_core_survey', ['NEUT'], 10, 6,
     'The neutrino count, written up as a map of the sun\'s core. The gate to UV asks for it.',

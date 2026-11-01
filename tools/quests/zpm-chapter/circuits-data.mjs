@@ -51,7 +51,7 @@ export const QUESTS = [
   },
   {
     key: 'ZC_QWAF', kind: 'wafer', title: 'Quantum Wafer', icon: 'gtceu:qbit_cpu_wafer',
-    deps: ['START'], x: 2, y: 3,
+    deps: ['START'], x: 2, y: -1.5,
     teach: {
       for: 'A &6Qubit CPU Wafer&r is a wafer treated with radon so that its structure can hold a quantum state.',
       needs: 'Radon from the waste retrieval plant, which is why home comes first in this era.',
@@ -64,7 +64,7 @@ export const QUESTS = [
   },
   {
     key: 'ZC_QCHIP', kind: 'wafer', title: 'Quantum Chip', icon: 'gtceu:qbit_cpu_chip',
-    deps: ['ZC_QWAF'], x: 4, y: 3,
+    deps: ['ZC_QWAF'], x: 4, y: -1.5,
     teach: {
       for: 'Cut from the wafer, the &6Qubit CPU Chip&r is the part of a quantum circuit that does the counting.',
       needs: 'A cleanroom and the laser cutting GregTech asks for.',
@@ -77,7 +77,7 @@ export const QUESTS = [
   },
   {
     key: 'ZC_QMAIN', kind: 'machine', title: 'Quantum Mainframe', icon: 'gtceu:quantum_processor_mainframe',
-    deps: ['ZC_QCHIP', 'ZC_ASM'], x: 6, y: 3,
+    deps: ['ZC_QCHIP', 'ZC_CCOMP'], x: 6, y: 0,
     teach: {
       for: 'The &6Quantum Processor Mainframe&r is the biggest circuit ZPM builds, and the one the Mk2 and the research stations lean on.',
       needs: 'Quantum chips and a computer-grade board by the stack, and the ZPM assembler to put them together.',
