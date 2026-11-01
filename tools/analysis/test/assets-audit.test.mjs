@@ -132,6 +132,40 @@ test('evaluateStartup records the calls on builders and the GTM sound entry', ()
   assert.equal(r.recipeType[0].calls[0].args[0].__gtSound, 'FIRE');
 });
 
+test('textures named by built strings (cover renderer, tiered overlay, dormant workable model) are referenced', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'aa-pack-'));
+  const dir = path.join(root, 'pack', 'kubejs', 'startup_scripts', 'grindless', 'lv');
+  const tex = path.join(root, 'pack', 'kubejs', 'assets', 'grindless', 'textures', 'block');
+  for (const d of ['cover', 'machines/hv_hatch', 'multiblock/dormant']) fs.mkdirSync(path.join(tex, ...d.split('/')), { recursive: true });
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'b.js'), [
+    "ForgeModEvents.onGenericEvent('x.Event', 'x.CoverDefinition', function (event) {",
+    "  var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')",
+    "  var CD = Java.loadClass('x.CoverDefinition')",
+    "  new CD(new RL('grindless', 'c'), function () {}, function () {",
+    "    var SCR = Java.loadClass('x.SimpleCoverRenderer'), R = Java.loadClass('net.minecraft.resources.ResourceLocation')",
+    "    return new SCR(new R('grindless', 'block/cover/c_' + 'lv'), new R('grindless', 'block/cover/c_emissive'))",
+    "  })",
+    '})',
+    "GTCEuStartupEvents.registry('gtceu:machine', function (event) {",
+    "  var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')",
+    "  event.create('hatch', 'custom').tiers(6, 7).definition(function (tier, b) {",
+    "    b['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('grindless', 'block/machines/' + (tier === 7 ? 'hv_hatch' : 'lv_hatch')))",
+    "  })",
+    "  if (false) event.create('plant', 'multiblock').workableCasingModel('grindless:block/x', 'grindless:block/multiblock/dormant')",
+    '})',
+  ].join('\n'));
+  const px = png(16, 16, (x, y) => [x * 10, y * 10, 100, 255]);
+  fs.writeFileSync(path.join(tex, 'cover', 'c_lv.png'), px);
+  fs.writeFileSync(path.join(tex, 'cover', 'c_emissive.png'), px);
+  fs.writeFileSync(path.join(tex, 'machines', 'hv_hatch', 'overlay_front.png'), px);
+  fs.writeFileSync(path.join(tex, 'multiblock', 'dormant', 'overlay_front.png'), px);
+  fs.writeFileSync(path.join(tex, 'multiblock', 'dormant', 'overlay_front_active.png'), px);
+  const { rows } = auditTextures({ root, packDir: 'pack' });
+  const orphans = rows.filter((r) => r.categories.includes('orphan')).map((r) => r.path);
+  assert.deepEqual(orphans, []);
+});
+
 test('analyseSamples reports level, peak and a short envelope cycle', () => {
   const rate = 8000, s = new Float32Array(rate * 6);
   for (let i = 0; i < s.length; i++) s[i] = 0.5 * Math.sin(2 * Math.PI * 440 * i / rate) * (0.6 + 0.4 * Math.sin(2 * Math.PI * 2 * i / rate));
