@@ -141,7 +141,8 @@
       "label": "Sgr A* orbit (gate c14): the charts, the shell parts and the belt seed",
       "items": [
         "grindless:sgr_a_spin_map", "grindless:nsc_ephemeris", "grindless:shell_gradient_map", "grindless:final_spin_map", "grindless:launched_gc_probe", "grindless:nsc_belt_seed",
-        "m:gtceu:geroch_winch", "grindless:geroch_drum_casing", "grindless:geroch_canister", "grindless:horizon_tether"
+        "m:gtceu:geroch_winch", "m:gtceu:horizon_interferometer", "grindless:geroch_drum_casing", "grindless:geroch_canister", "grindless:horizon_tether",
+        "grindless:test_mass_enclosure_casing", "grindless:laser_link_casing", "grindless:cloud_phase_map"
       ]
     },
     {

@@ -8,7 +8,8 @@
 //                                  circuit 2 the calibrated oscillator banks (the map is kept), circuit 3 the map again from the used instruments.
 //                                  All three run only at Sgr A* (gcyr:black_hole_orbit).
 //
-// Textures: the faces are a later package (RF-6D). Names: client_scripts/grindless/max_horizon_interferometer_lang.js.
+// Textures: the face is RF-6D's. Until then the overlay is GTM's own implosion compressor face (swap the path to grindless:block/multiblock/horizon_interferometer
+// when RF-6D ships it). Names: client_scripts/grindless/max_horizon_interferometer_lang.js.
 // Published for the recipe script: global.grindless.maxHorizonInterferometer.
 (function () {
   const G = global.grindless
@@ -24,7 +25,7 @@
     {
       name: 'horizon_interferometer', machine: 'gtceu:horizon_interferometer', type: 'horizon_interferometry', dataKey: 'grindless_horizon_interferometry',
       lang: 'Horizon Interferometer', maxIO: { itemsIn: 9, itemsOut: 4, fluidsIn: 0, fluidsOut: 0 }, casing: ENCLOSURE,
-      texture: 'grindless:block/max/test_mass_enclosure_casing',
+      texture: 'grindless:block/max/max_optical_table_casing', // borrowed until RF-6D ships block/max/test_mass_enclosure_casing.png
       width: 21, height: 5, depth: 21,
       pal: { F: ENCLOSURE, A: LINK },
       parts: function () {
@@ -128,7 +129,7 @@
           Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
           Text.translate('gtceu.multiblock.parallelizable.tooltip')
         ])
-        .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
+        .workableCasingModel(m.texture, 'gtceu:block/multiblock/implosion_compressor')
     })
   })
 })()
