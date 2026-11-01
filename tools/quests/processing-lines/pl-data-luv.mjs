@@ -237,7 +237,7 @@ export default {
         }),
         n('pipe', 14, -2.25, I('gtceu:normal_optical_pipe'), 'Optical Pipe', { kind: 'product', from: ['smelter'], sub: 'No silver in it: research, below' }),
         n('whipple', 14, -0.75, I('grindless:whipple_shield_casing'), 'Whipple Shield Casing', {
-          from: ['smelter'], role: 'infrastructure', sub: 'The wake shield\'s hull',
+          kind: 'product', from: ['smelter'], role: 'infrastructure', sub: 'The wake shield\'s hull',
         }),
         n('osm2', 9, 3.75, I('gtceu:osmiridium_dust'), 'Osmiridium Dust', { kind: 'raw' }),
         n('trd', 9, 5.25, I('gtceu:trinium_dust'), 'Trinium Dust', { kind: 'raw' }),
