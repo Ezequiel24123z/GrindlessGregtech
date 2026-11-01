@@ -535,7 +535,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
 
 ### 7. Zero-g crystal grower: `gtceu:zero_g_crystal_grower`, type `gtceu:microgravity_crystal_growth` (any orbit)
 
-- **What it gains:** two benefits, and no more (decision 11).
+- **What it gains:** two benefits, and no more (decision 11). GTM's autoclave, EBF and forge-hammer chip routes are kept: IV crystal processors need chips before LuV (LD-LV3), so the grower folds the autoclave step in orbit.
   - **Speed:** four times faster, 3,000 t instead of 12,000 t. It is the journey's own rule: "in low gravity, crystals grow faster."
   - **Certainty:** 100 %. With no convection there are no striations, so the seed route stops being a 25 % gamble.
 - **Not taken:**
@@ -1551,3 +1551,4 @@ Continues `iv.md`'s list. **Before P2-C (LuV to UV band):** LD-LV2.
 1. **Tetrataenite: gate GTM's ore chain or drop the split?** Default: gate (above). Dropping the split instead keeps GTM's chain, makes the asteroid processor a Mond-only machine and cuts the belt's link between tetrataenite and the PGM concentrate.
 2. **Belt iridium and osmium against Mercury.** Default: keep both, and P2-C prices mode 4 so a run gives at least Mercury's iridium per drill-hour. If it cannot without lowering a cost (DECISIONS.md:697), the owner chooses between Mercury-only Ir/Os from LuV on (mode 4 then gives only Pt, Pd, Rh, Ru) and a belt that is a second, dearer source.
 3. **Should the merged lines become single clusters in the chapter** instead of tagged neighbours? Default: no; the `line` tag keeps the layout and quests. Yes means a larger chart rebuild in Phase 5.
+4. **Crystals: gate GTM's chip routes or fold them?** Answered by evidence (LD-LV3, 2026-11-01): fold. IV crystal processors and the laser engraver need raw chips before the grower exists, so gating breaks IV. Optics is gated (the ZBLAN smelter is the only pipe route); crystals are a fold.

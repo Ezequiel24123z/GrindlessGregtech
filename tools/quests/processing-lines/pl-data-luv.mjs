@@ -300,7 +300,7 @@ export default {
           kind: 'product', role: 'infrastructure', from: ['grower'], sub: 'The detector\'s mirrors, on Ganymede', pending: { B9: { sub: 'Stored for now' } },
         }),
         n('cpu2', 7.25, -0.75, I('gtceu:crystal_cpu'), 'Crystal CPU', {
-          kind: 'product', from: [via('chip', 'gtceu:engraved_crystal_chip')], sub: 'EBF with an emerald plate, then the laser engraver',
+          kind: 'product', from: [via('chip', 'gtceu:engraved_crystal_chip')], keepShort: 'the grower folds GTM\'s autoclave chip step in orbit; GTM\'s route stays because IV crystal processors need chips before LuV, LD-LV3', sub: 'EBF with an emerald plate, then the laser engraver',
         }),
       ],
     },

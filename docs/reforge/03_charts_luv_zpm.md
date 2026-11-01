@@ -35,3 +35,5 @@ Honest result: the new lines and the existing short lines cannot be lengthened b
 | ZPM power, duranium | 2 | Few steps: the quench and the converter are one machine away from raw fluids | Add upstream steps (He-3 loop crossing the Saturn column, foil casting) | zpm recipe files |
 
 Proposed DECISIONS line: LuV/ZPM chart verdicts are real content problems; the content package owns step additions.
+
+LD-LV3 (2026-11-01): LuV optics gated (GTM's optical pipe assembler removed), crystals a fold (`keepShort`), tetrataenite `keepShort`. Asteroid iridium stays a fix row: the parallel-source drop reads only earlier lines' sinks (ingots), a line-audit change left to LD-T3.
