@@ -11,8 +11,8 @@
         ['gtceu.horizon_interferometry', 'Horizon Interferometry', 'Interferometría de horizonte'],
 
         ['grindless.machine.horizon_interferometer.tooltip.0',
-            '\u00a77Three test masses in free fall around Sgr A*: the cloud phase map and the calibrated oscillators.',
-            '\u00a77Tres masas de prueba en caída libre alrededor de Sgr A*: el mapa de fase de la nube y los osciladores calibrados.'],
+            '\u00a77Three free-falling test masses at Sgr A*: the cloud phase map.',
+            '\u00a77Tres masas de prueba en caída libre en Sgr A*: mapa de fase.'],
 
         ['gtceu.recipe.grindless_horizon_interferometry.cloud_phase_map', 'Circuit 1: three reference sensors, three bonded optical benches, three stabilised lasers, twelve FEEP thrusters and two phasemeter boards fly the triangle; the final spin map is kept. The thrusters come back as spent crowns, and most of the used sensors and benches come back too.',
             'Circuito 1: tres sensores de referencia, tres bancos ópticos unidos, tres láseres estabilizados, doce propulsores FEEP y dos placas de fasímetro vuelan el triángulo; el mapa de espín final se conserva. Los propulsores vuelven como coronas gastadas, y la mayoría de los sensores y bancos usados también vuelven.'],

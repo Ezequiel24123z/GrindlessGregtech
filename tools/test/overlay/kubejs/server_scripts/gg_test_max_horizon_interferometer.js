@@ -1,4 +1,3 @@
-// priority: -5500
 // TEST ONLY, MAX-S1 (gtceu:horizon_interferometer). Command: kubejs custom_command gg_test_max_horizon_interferometer
 // Band ONLY: X 40704-40767, Z 0-63, Y 98-115 of gcyr:black_hole_orbit (Sgr A*; zones.json row max_horizon_interferometer).
 //   T1 (named uncertainty: the 21 x 5 x 21 triangle forms at Sgr A* and runs c1 at VA[MAX] = 2,013,265,920 EU/t on two OpV 4 A hatches):
