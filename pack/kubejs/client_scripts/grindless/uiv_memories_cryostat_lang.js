@@ -24,15 +24,15 @@
         ['gtceu.recipe.grindless_nuclear_demagnetisation.mk_module',
             'Circuit 2: the nuclear stage, a cold plate and the dilution mixture make a mK cryostat module; the mixture is returned.'],
         ['gtceu.recipe.grindless_nuclear_demagnetisation.p_si_processor',
-            'Circuit 3: the overgrown P:Si die is characterised at millikelvin; the module is a catalyst.'],
+            'Circuit 3: the overgrown P:Si die is characterised at millikelvin in 500 mB liquid helium; the module is a catalyst.'],
 
         ['grindless.machine.spectral_hole_burner.tooltip.0',
             '\u00a77Burns frequency combs into YSO slabs: six-hour and telecom memory.'],
 
         ['gtceu.recipe.grindless_spectral_hole_burning.six_hour_slab',
-            'Circuit 1: a comb burned into Eu-151:YSO keeps the state for six hours.'],
+            'Circuit 1: a comb burned into Eu-151:YSO keeps the state for six hours; 500 mB superfluid helium is consumed.'],
         ['gtceu.recipe.grindless_spectral_hole_burning.telecom_slab',
-            'Circuit 2: a comb burned into Er:YSO stores light at telecom wavelength.'],
+            'Circuit 2: a comb burned into Er:YSO stores light at telecom wavelength; 500 mB superfluid helium is consumed.'],
         // the crystal furnace rows UIV-A6 appends to tables/crystals.json
         ['gtceu.recipe.grindless_crystal_growth.eu151_yso',
             'Circuit 8: yttrium orthosilicate grown with europium-151 for the six-hour memory.'],

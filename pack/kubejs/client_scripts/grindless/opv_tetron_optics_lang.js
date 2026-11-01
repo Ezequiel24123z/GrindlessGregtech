@@ -46,7 +46,7 @@
         ['gtceu.recipe.grindless_ion_slicing.bonded_tetron_die',
             'Circuit 8: a bumped tetron die is flip-chip bonded to a niobium TSV interposer.'],
         ['gtceu.recipe.grindless_nuclear_demagnetisation.tested_tetron_die',
-            'Circuit 6: a bonded tetron die is parity-tested at millikelvin on the cryostat module (kept).'],
+            'Circuit 6: a bonded tetron die is parity-tested at millikelvin on the cryostat module (kept), in 500 mB liquid helium.'],
         ['gtceu.recipe.grindless_mtj_sputtering.wc_sic_multilayer',
             'Circuit 10: hundreds of WC and SiC layers sputtered in argon; the worn target returns as tungsten carbide.'],
         ['gtceu.recipe.grindless_chemical_vapour_infiltration.superpolished_sic_blank',

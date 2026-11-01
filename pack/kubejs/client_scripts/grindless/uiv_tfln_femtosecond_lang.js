@@ -30,7 +30,7 @@
         ['gtceu.recipe.grindless_ion_slicing.si28_soi',
             'Circuit 2: hydrogen-implanted Si-28 cleaves off a thin layer onto an oxidised wafer; the donor wafer is reused and the hydrogen is released.'],
         ['gtceu.recipe.grindless_ion_slicing.poled_lnoi',
-            'Circuit 3: periodic electric-field poling of an LNOI wafer.'],
+            'Circuit 3: periodic electric-field poling of an LNOI wafer through a gold foil electrode.'],
         ['gtceu.recipe.grindless_ion_slicing.eo_microcomb',
             'Circuit 4: an annealed damascene Si3N4 ring bonded to LNOI makes the electro-optic microcomb.'],
         ['gtceu.recipe.grindless_femtosecond_writing.interposer_blank',

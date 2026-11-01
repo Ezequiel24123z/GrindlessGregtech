@@ -31,7 +31,7 @@
 
     // [key, en] of the line recipes
     ;[
-        ['gtceu.recipe.grindless_nuclear_clock.clock_steer_oscillator', 'Circuit 8: a clock-steering oscillator'],
+        ['gtceu.recipe.grindless_nuclear_clock.clock_steer_oscillator', 'Circuit 8: a clock-steering oscillator, with a UHV circuit'],
         ['gtceu.recipe.grindless_crystal_growth.sapphire_web_wafer', 'Circuit 30: a c-plane sapphire web wafer pulled from the alumina melt'],
         ['gtceu.recipe.grindless_crystal_growth.sapphire_resonator_disc', 'Circuit 31: a sapphire boule for the whispering-gallery resonator disc'],
         ['gtceu.recipe.grindless_beuv_lithography.patterned_vo2_metasurface', 'Circuit 16: the VO2 film exposed with the metasurface pattern'],

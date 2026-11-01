@@ -27,7 +27,7 @@
         ['gtceu.recipe.grindless_proton_polarisation.rf_dissociation',
             'Circuit 1: an RF dissociator splits detritiated H2 into atoms that a sextupole beam polarises; the molecules return.'],
         ['gtceu.recipe.grindless_proton_polarisation.li6h_polarisation',
-            'Circuit 2: dynamic nuclear polarisation of frozen Li-6 hydride.'],
+            'Circuit 2: dynamic nuclear polarisation of frozen Li-6 hydride, cooled by 500 mB liquid helium.'],
         ['gtceu.recipe.grindless_proton_polarisation.nh3_polarisation',
             'Circuit 3: dynamic nuclear polarisation of frozen 15NH3.'],
         // the pyroprocessing cell row UIV-A9 appends to tables/thorium.json
