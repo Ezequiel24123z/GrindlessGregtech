@@ -102,25 +102,56 @@ function New-DrillFace {
     return Finish-Face $c $e $Active
 }
 
-# refinery: a retort window (x4..11, y4..9), a pale vapour column rising; static it holds a dim level
+# Own controller face (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
+}
+
+# refinery: two tubes, nickel pellets falling in one and carbonyl vapour rising in the other
+$RetortFace = @{ Mode = 'chase'; Pal = @{}
+    Ramp = @((Hex '3A3A46'), (Hex '9AA4B4'), (Hex 'C0C8D4'), (Hex 'E0E6F0'), (Hex 'FFFFFF'))
+    Ramp2 = @((Hex '2A3A44'), (Hex '5A8CA8'), (Hex '86B4D0'), (Hex 'B0D4E8'), (Hex 'E0F4FF'))
+    Map = @('.MMMMMMMMMM.', '.D8PD..DabD.', '.DP7D..DbcD.', '.D6PD..DcdD.', '.DP5D..DdeD.', '.D4PD..DefD.', '.DP3D..DfgD.', '.D2PD..DghD.', '.MMMMMMMMMM.', '.EEEEEEEEEE.', '............', '.....ll.....') }
 function New-RetortFace {
     param([int]$Frame, [bool]$Active)
-    $c = New-Bezel; $e = New-Canvas
-    for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    $liquid = Hex '5A5A66'
-    foreach ($x in 5, 6, 7, 8, 9, 10) { Set-Px $c $x 9 $liquid }
-    if ($Active) {
-        $vap = @((Hex 'C8D8E8'), (Hex 'A8BCD0'), (Hex '8CA4BC'))
-        for ($k = 0; $k -lt 5; $k++) {
-            $y = 8 - (($k + $Frame) % 5)
-            $x = 6 + (($k * 2 + $Frame) % 4)
-            Set-Both $c $e $x $y $vap[$k % 3]
-        }
-    }
-    else {
-        foreach ($x in 6, 9) { Set-Px $c $x 8 (Hex '3A3A46') }
-    }
-    return Finish-Face $c $e $Active
+    return New-OwnFace $RetortFace $Frame $Active
 }
 
 foreach ($face in @(@('barnard_core_drill', 'New-DrillFace'), @('carbonyl_refinery', 'New-RetortFace'))) {
