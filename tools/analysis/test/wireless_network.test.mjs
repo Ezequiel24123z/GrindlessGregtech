@@ -1207,7 +1207,7 @@ test('LuV wireless registrations: the startup script registers 8 hatches, a cell
   const N = TABLE.tiers.length;
   const run = packRun();
   const ours = (m) => m.file === STARTUP_REL;
-  const hatches = [...run.registry.machines.values()].filter((m) => /_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(m.id));
+  const hatches = [...run.registry.machines.values()].filter((m) => /_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(m.id) && !TABLE.maxplusHatchAmps.some((a) => m.id.endsWith(`_hatch_${a}a`)));
   assert.equal(hatches.length, N * TABLE.hatchAmps.length * 2);
   assert.ok(hatches.every(ours), 'all of them from lv/wireless_energy.js');
   for (const t of TABLE.tiers) for (const kind of ['energy', 'dynamo']) for (const a of TABLE.hatchAmps) {
