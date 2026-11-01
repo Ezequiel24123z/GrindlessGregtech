@@ -1,8 +1,8 @@
 {
   "era": "uhv",
-  "enabled": false,
-  "item": 1,
-  "fluid": 1,
+  "enabled": true,
+  "item": 1.001,
+  "fluid": 1.001,
   "keys": [
     "extendedfeatures:uhv_universal_circuit",
     "gtceu:baseline_astrometer",
@@ -57,6 +57,8 @@
   ],
   "include": [],
   "exclude": [],
-  "remove": [],
+  "remove": [
+    "gtceu:shaped/uhv_machine_hull"
+  ],
   "override": {}
 }

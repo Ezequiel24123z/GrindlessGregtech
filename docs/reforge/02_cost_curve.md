@@ -99,7 +99,7 @@ MAX has no priceable core (a core component is unreachable), so its factor stays
 | OPV | 24.33 | 270 | 73,559 | 71,526 | 1.03 |
 | MAX | 1.0 | not priceable | | 178,814 | |
 
-All within the 10% tolerance down to UV and at OPV. **UHV to UXV are left at factor 1.0 and are NOT solved.** Checked with the full factor set (`--table --factors`), they predict only 0.5 to 0.8 of the curve (the table's ratios). The solver loop reported a higher index at factor 1 (UHV 2,907) than this check (1,436); the difference is unexplained and was not chased in this package (two measurement paths disagree, so neither is trusted). The Phase 2 UHV+ band packages must re-solve these eras after the lower bands are switched on and reconcile the two paths first. The OPV core is anomalously cheap today (270 against UXV 8,411): 24x here is a symptom of an OPV route that skips earlier chains, to be checked in the OPV band package. MAX+ is documentation only (x5 per era, RF-7A).
+All within the 10% tolerance down to UV and at OPV. **UHV to UXV are left at factor 1.0 and are NOT solved.** Checked with the full factor set (`--table --factors`), they predict only 0.5 to 0.8 of the curve (the table's ratios). The solver loop reported a higher index at factor 1 (UHV 2,907) than this check (1,436); the difference was left unexplained here (two measurement paths disagreed). **Resolved in Band D (P2-D):** the figure does not reproduce, and two structural gaps are fixed; see "Reconciling the two paths". The Phase 2 UHV+ band packages must re-solve these eras after the lower bands are switched on and reconcile the two paths first. The OPV core is anomalously cheap today (270 against UXV 8,411): 24x here is a symptom of an OPV route that skips earlier chains, to be checked in the OPV band package. MAX+ is documentation only (x5 per era, RF-7A).
 
 Predicted capacity overflows at these factors (`capacity-lint --dump <dump> --table <tables> --factors <solved.json>`): errors 138 before, 144 after. **Six new overflows**, all one family: `gtnn:component_assembly_line/conveyor_module_{mv,hv}_{rubber,silicone_rubber,styrene_butadiene_rubber}` (rubber 78,300 mB against a 64,000 mB MV tank; 141,876 against 128,000 at HV; all six exceed their tank). Fix when the MV and HV bands land: `exclude` or `override` those recipes and give the conveyor a rubber route that is not one mega-input (a second tank stage), not a lower factor. New multiblock-only warnings: IV 15, LuV 10, ZPM 8, EV 6, OPV 1.
 
@@ -324,3 +324,73 @@ Every raised LuV, ZPM and UV input has a producer in the T1 dump (reachability a
 - The magnetic-bearing rebaseline (about +16% after LD-LV2) is inside these numbers (the 7b28eac4 dump has LD-LV2).
 - Other-band rows kept in `capacity_known.json`: the UHV-script rows with LuV or ZPM voltage (`uhv/elevator.js`, `uhv/mercury.js`, `uhv/swarm.js` (MX-S2 restart), `tables/antimatter.json`, `tables/proxima_ground.json`) and `uxv/gum_metal_flexspline`; dead rows for Phase 8 as listed in Band B.
 - The cryomodule header comment in `uv/cold.js` still states 72 and 144 mB soldering alloy; the recipes now use ingots.
+
+## Band D (UHV, UEV, UIV) (P2-D)
+
+Tables `uhv.json`, `uev.json` and `uiv.json` are on (bands A to D together). "Before" numbers come from the batch dump `4d2cd154de6d` (bands A to C on). "After" numbers come from the T1 dump of a pack copy of this branch (`/var/lib/grindless/dumps/p2-d`, commit ca341a89; bench run `20261101-121254-server-f78`), reachability tier max: gate 1064/1065 (+1 warning, the optional `gcyr:keycard`), auto 401/401, eras 10/10, verdict PASS.
+
+### Reconciling the two paths
+
+The 2,907 against 1,436 discrepancy of the earlier note **does not reproduce**: the solver-style and the full measurement agree at factor 1 on this dump (UHV 1,135.3, UEV 2,297.4, UIV 3,932.6). Two real structural gaps were found and fixed in `tools/analysis/cost-matrix.mjs`:
+
+1. `withFactors` turns off every table that is not in the factor map. The old solver passed only the eras whose factor was not 1, so a later era at factor 1 and its `remove` list were off in the solver but on in the check. The solver now passes every era (1 included).
+2. The solver tuned an unrounded factor but wrote one rounded to 3 decimals, which can cross a quantisation cliff. It now tunes and writes the same rounded value, and factor 1 is always a candidate (no repeated factors).
+
+`measure` is one exported function used by both paths. The pin test (`cost-matrix-curve.test.mjs`, "--solve predicts what the factor check measures") fixes that the solver's predicted index for an era equals `--table --factors` for the same factors. MV to UV rows are identical before and after the change (same `--table` output).
+
+### Factors and core index (item = fluid)
+
+| Era | Applied | Core index before | after (T1 dump) | Target | After/target | Next factor tried |
+|---|---|---|---|---|---|---|
+| UHV | **1.001** | 1,135 | **2,446** | 1,831 | 1.336 | 1.0: 1,135 (0.620) |
+| UEV | **1.0** | 2,297 | **4,653** | 4,578 | 1.017 | 1.001: 2.184 or 1.070 of target, depending on UHV |
+| UIV | **1.0** | 3,933 | **8,014** | 11,444 | 0.700 | 1.001: 1.589 to 1.626 |
+
+Solved on the batch dump with `--table` (bands A to C already in it); the prediction (2,446, 4,653, 8,014) equals the T1 dump exactly.
+
+**Quantisation cliff (a limit of the mechanism, not a defect):** the pass scales a count with `ceil(n * f)`, so every factor above 1 turns each count of 1 into 2 and the index jumps by about 2x; factors from 1.001 up to the point where counts of 2 become 3 give nearly the same index. No continuous factor lands inside the 10% tolerance for UHV or UIV. The solver therefore keeps, per era, the closer of the two nearest candidates (1.0 and the first factor above it): UHV 1.001, UEV 1.0, UIV 1.0. The all-1 set would give 0.620 / 0.502 / 0.344 of target; UHV 1 / UEV 1 / UIV 1.001 would give 0.62 / 0.50 / 0.79. Eras compound through era-aware pricing, so the choice for one era moves the next. P2-Z re-solves the whole set and may reopen these three. Item and fluid factors are equal (capacity forced no split).
+
+Predicted later eras with this set (batch dump plus `--table`; each is re-solved by its own band, P2-Z last): UXV 22,316 (target 28,610, 0.780), OPV 310 (71,526, 0.004), MAX 2,499 (178,814, 0.014). The OPV and MAX cores are still anomalously cheap (they skip earlier chains), a problem for their own bands.
+
+### Removed bypasses and kept exceptions
+
+- `uhv.json` `remove`: `gtceu:shaped/uhv_machine_hull`. **No bootstrap kept:** the hull comes from `assembler/hull_uhv`, and T1 reachability (gate, auto and eras) passes without the shaped recipe. It is the only core-component crafting-table bypass in band D.
+- UEV and UIV have no core-component crafting-table bypass, and there is no `gtnn:component_assembly_line` recipe in band D, so no `exclude` was needed.
+
+### Capacity: 18 `capacity_known.json` entries emptied
+
+The static ratchet went from 48 to 30 entries (the rest belong to other bands); `capacity-lint` (static) reports ok with 1 warning (`mixer/zblan` fluorine, not a band D row). Dump-mode lint: errors 98 on the batch dump and **77 on the T1 dump**; the cost curve adds 0 overflows (UHV 55 scaled recipes, UEV 0, UIV 0, because UEV and UIV stay at factor 1).
+
+| Entry | Fix |
+|---|---|
+| `uhv/elevator.js` base, support, internal and motor rows; `uhv/mercury.js` `excavator_bucket_drum`; `antimatter.json` `empty_penning_trap`; `proxima_ground.json` `cold_trap_coring_head`; `crystals.json` `iridium_crucible`; `uhv_components.json` UIV and UXV fluid regulators | solder `gtceu:soldering_alloy` 144 mB becomes `gtceu:soldering_alloy_ingot` (the Band C method); lubricant stays the one fluid |
+| `uhv/elevator.js` floor and cable; `uhv/swarm.js` `sodium_potassium_heat_pipe` | two non-solder fluids: the lubricant is dropped (the floor keeps concrete, the cable keeps its 144 mB dope, the heat pipe keeps 250 mB NaK) |
+| `metallic_hydrogen.json` five UIV cable rows | the chanced `tiny_ffkm_dust` output is removed (one item output) |
+| `earth_orbit.json` `ktp_flux` (new, from RF-3P2) | moved to the `mixer` block: a chemical reactor takes two item inputs, the row has three |
+
+### Dropped inputs
+
+Every UHV, UEV and UIV id of `docs/reforge/data/00_dropped_inputs.csv` is gone from the T1 server log. The capacity rows above fixed most of them. The rest were the programmed circuit taking an item slot in a machine with none left (`isotopes.json` `pu244_plating_ampoule`; `superheavy.json` `capsule_liner` and `etched_membrane`; `memories_cryostat.json` `eu151_yso_slabs` and `er_yso_slabs`; `proxima_ground.json` `proxima_organics_hydrolysis`). Fix (the Band B pattern): the script does not emit the circuit when the row already fills the item slots, because the row's own solid identifies it (`uev/isotopes.js`, `uev/superheavy.js`, `uiv/memories_cryostat.js`, `uhv/proxima_ground.js`); the table keeps the circuit number, and `uhv-proxima_ground.test.mjs` pins the one visible change (the reformer row carries no circuit). Setting the circuit to 0 in the tables was tried and reverted: the scripts and the unique-circuit tests require 1 to 32.
+
+Remaining in the log and not band D: `zpm/titan_probes.js` tholin rows, `luv/ganymede.js`, `uv/life.js` (prohibited), `max`, `opv`, `uxv` assembler rows with a second fluid, `zpm/outer_chemistry.js`, `zpm/uranus.js`. `capacity-lint` does not count the programmed circuit as an item slot, which is why it never saw these rows; that is a gap of `lib/capacity.mjs` (prohibited here).
+
+### Routes
+
+The 118 inputs whose count is higher in the T1 dump than in the batch dump each have a producer in the T1 dump (reachability auto 401/401); the exceptions are tags whose members have producers (`gtceu:circuits/{zpm,uv,uhv}`, the `forge:foils/*`, `plates/*`, `frames/*` and `fine_wires/*` tags) and `gtceu:uv_assembler` (crafted by `shaped/uv_assembler`). The comparison also carries drift of the batch dump's merged packages, so the list is an upper bound. No route was missing, so none was added.
+
+| Input family | Route (machine) | Tier |
+|---|---|---|
+| UHV hull, sensor, motor, emitter, conveyor, pump, field generator, robot arm, piston, fluid regulator | `assembler/hull_uhv`, `assembly_line/uhv_*`, `assembler/uhv_fluid_regulator` | UHV |
+| UHV circuits | circuit assembler, assembly line | UHV |
+| europium cable (single to octal), RTAN wire, darmstadtium, tritanium and neutronium parts | `assembler`, `wiremill`, `extruder`, `lathe`, `bender`, `forge_hammer` from ingots | UHV to UEV |
+| `mu_metal_shield`, `srf_cryomodule`, `fused_silica_tube`, `silicon_nitride_film`, `silica_aerogel`, `nbn_coated_sic_plate`, `thruster_pod`, `fibre_bragg_grating`, `bsl4_casing`, `hpge_crystal`, `cvd_diamond_plate` | one machine recipe each (assembler, `srf_cavity`, EBF, chemical reactor, `supercritical_drying`, `mocvd`, `thruster_assembly`, `zone_refining`, `diamond_cvd`) | UHV |
+| gallium arsenide and sapphire wafers, UHPIC and RAM chips | `cutter` from boules, `space_photovoltaics` | UHV |
+| cultures (cladosporium, sporosarcina, chromobacterium, sphingomonas) | `sterile_culture` | UHV |
+
+### Notes and risks
+
+- Single-factor misfit: UHV is 1.34x and UIV 0.70x of target, because of the quantisation cliff; P2-Z re-solves.
+- The lubricant dropped from three rows, and `tiny_ffkm_dust` from the five metallic-hydrogen cable rows, are real recipe changes, not only capacity data.
+- The `capacity-lint` circuit-slot gap above (`lib/capacity.mjs`, prohibited) needs its own package.
+- Rows in the static `capacity_known.json` are other bands.
+- The EMI coverage expectation was regenerated (three lines: `cvd_diamond_plate`, `kh2po4_dust`, `ktp_flux`); the integrator regenerates it again on merge.

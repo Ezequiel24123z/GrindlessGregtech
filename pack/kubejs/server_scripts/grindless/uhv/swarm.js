@@ -109,7 +109,7 @@
       [item(AEROSHELL, 1), item(UHTC, 4), item(SIC, 1), item(BETAVOLTAIC, 2), item(HPGE, 1), item('gtceu:uv_sensor', 1)], [],
       [item(PROBE, 1)], [], UVA, 800, HERE),
     row('sodium_potassium_heat_pipe', 'assembler', null, [item('gtceu:tungsten_steel_small_fluid_pipe', 1), item('gtceu:molybdenum_foil', 2), item('grindless:silica_aerogel', 1), item('grindless:mu_metal_shield', 1)],
-      [fluid('gtceu:sodium_potassium', 250), fluid('gtceu:lubricant', 250)], [item(HEAT_PIPE, 1)], [], ZPM, 200)
+      [fluid('gtceu:sodium_potassium', 250)], [item(HEAT_PIPE, 1)], [], ZPM, 200)
   ]
 
   // UIV-A10 (uiv.md, Matrioshka computer): the Mercury swarm's feed run that carries the two UIV works (31,457,280 EU/t each); 16 x 2,097,152 =

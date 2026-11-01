@@ -38,31 +38,31 @@
           "name": "mh_cable_single", "circuit": 1, "eut": 1966080, "duration": 100,
           "itemsIn": [ { "id": "gtceu:metallic_hydrogen_single_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 1 } ],
           "fluidsIn": [ ],
-          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_single_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 1, "chance": 2500 } ]
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_single_cable", "count": 1 } ]
         },
         {
           "name": "mh_cable_double", "circuit": 2, "eut": 1966080, "duration": 100,
           "itemsIn": [ { "id": "gtceu:metallic_hydrogen_double_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 1 } ],
           "fluidsIn": [ ],
-          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_double_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 1, "chance": 2500 } ]
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_double_cable", "count": 1 } ]
         },
         {
           "name": "mh_cable_quadruple", "circuit": 4, "eut": 1966080, "duration": 100,
           "itemsIn": [ { "id": "gtceu:metallic_hydrogen_quadruple_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 2 } ],
           "fluidsIn": [ ],
-          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_quadruple_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 2, "chance": 2500 } ]
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_quadruple_cable", "count": 1 } ]
         },
         {
           "name": "mh_cable_octal", "circuit": 8, "eut": 1966080, "duration": 100,
           "itemsIn": [ { "id": "gtceu:metallic_hydrogen_octal_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 3 } ],
           "fluidsIn": [ ],
-          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_octal_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 3, "chance": 2500 } ]
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_octal_cable", "count": 1 } ]
         },
         {
           "name": "mh_cable_hex", "circuit": 16, "eut": 1966080, "duration": 100,
           "itemsIn": [ { "id": "gtceu:metallic_hydrogen_hex_wire", "count": 1 }, { "id": "grindless:ffkm_seal", "count": 5 } ],
           "fluidsIn": [ ],
-          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_hex_cable", "count": 1 }, { "id": "gtceu:tiny_ffkm_dust", "count": 5, "chance": 2500 } ]
+          "itemsOut": [ { "id": "gtceu:metallic_hydrogen_hex_cable", "count": 1 } ]
         },
         {
           "name": "lonsdaleite_bearing", "circuit": 5, "eut": 1966080, "duration": 200,
