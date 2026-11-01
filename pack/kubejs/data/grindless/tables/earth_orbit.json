@@ -69,7 +69,7 @@
           "itemsIn": [{ "id": "gtceu:potassium_hydroxide_dust", "count": 1 }], "kept": [], "fluidsIn": [{ "id": "gtceu:phosphoric_acid", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:kh2po4_dust", "count": 1 }], "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }] },
         { "name": "ktp_flux", "circuit": 0, "eut": 122880, "duration": 200,
-          "itemsIn": [{ "id": "grindless:kh2po4_dust", "count": 1 }, { "id": "gtceu:rutile_dust", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsIn": [{ "id": "grindless:kh2po4_dust", "count": 1 }, { "id": "gtceu:rutile_dust", "count": 1 }, { "id": "grindless:cvd_diamond_plate", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:ktp_flux", "count": 2 }], "fluidsOut": [] },
         { "name": "ule_soot", "circuit": 0, "eut": 122880, "duration": 300,
           "itemsIn": [{ "id": "gtca:silicon_tetrachloride_dust", "count": 4 }], "kept": [],

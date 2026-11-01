@@ -16,7 +16,8 @@
           "duration": 48000,
           "itemsIn": [
             { "id": "grindless:plutonium_244_target", "count": 1 },
-            { "id": "grindless:ca48_beam", "count": 1 }
+            { "id": "grindless:ca48_beam", "count": 1 },
+            { "id": "gtceu:superconducting_coil", "count": 1 }
           ],
           "kept": [{ "id": "grindless:nb3sn_srf_cavity", "count": 1 }],
           "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
