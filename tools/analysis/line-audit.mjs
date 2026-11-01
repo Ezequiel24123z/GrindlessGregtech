@@ -412,6 +412,18 @@ export function ownedTypes(line, facts) {
   return line.owned;
 }
 
+// An item of a material that has no vein (`until: never`): its listed forms, or any ore block of it (`material:<id>` entries; the
+// groups list the crushed and purified forms, not the stone-variant ore blocks).
+export function isNoVein(k, never) {
+  if (never.has(k)) return true;
+  for (const e of never) {
+    if (!e.startsWith('material:')) continue;
+    const m = e.slice(9);
+    if (k.endsWith(`${m}_ore`) && /^[a-z0-9_]+:([a-z0-9]+_)*$/.test(k.slice(0, k.length - m.length - 3))) return true;
+  }
+  return false;
+}
+
 // A recipe of the dump that makes `key` without any of the line's intermediates, in fewer steps than the line takes.
 export function skipRoute(line, key, facts, eraCtx = null, x = {}) {
   const lineBase = Math.max(0, ...[...line.raws].map((k) => facts.dOf(k) ?? 0));
@@ -438,9 +450,12 @@ export function skipRoute(line, key, facts, eraCtx = null, x = {}) {
     // the four false positives of RF-3C (ev.md): an ore with no vein, a same-material loop, a parallel source, a fold's chain
     {
       const clo = routeClosure(r, facts);
-      if (x.never && [...clo.keys()].some((k) => x.never.has(k))) continue;
+      if (x.never && [...clo.keys()].some((k) => isNoVein(k, x.never))) continue;
       if ([...clo.keys()].some((k) => mat && materialOf(k) === mat)) continue;
-      if ((x.earlier || []).some((o) => o.products.some((p) => p.res === key) && (o.machines.has(r.type) || ownedTypes(o, facts).ids.has(r.id)))) continue;
+      // a circular route: it needs the key itself (a coloured or tweaked variant is made from the key), so it is no shortcut to it
+      if (clo.has(key)) continue;
+      // a parallel source: an earlier counted line makes the key at any of its nodes, with this recipe's machine or an owned recipe
+      if ((x.earlier || []).some((o) => (o.products.some((p) => p.res === key) || o.inner?.has(key)) && (o.machines.has(r.type) || ownedTypes(o, facts).ids.has(r.id)))) continue;
       if (foldReplaces(line, r, key, facts)) continue;
     }
     if (!best || d < best.depth) best = { id: r.id, type: r.type, depth: d, budget };
@@ -708,7 +723,8 @@ async function main(argv) {
   const keyItems = fs.existsSync(csvPath) ? loadKeyItems(fs.readFileSync(csvPath, 'utf8')) : new Map();
   const startup = scanStartupEras(path.join(REPO, 'pack', 'kubejs', 'startup_scripts', 'grindless'));
   const hidden = path.join(REPO, 'pack', 'kubejs', 'data', 'grindless', 'tables', 'hidden_until.json');
-  const never = new Set(fs.existsSync(hidden) ? (JSON.parse(fs.readFileSync(hidden, 'utf8')).groups || []).filter((g) => g.until === 'never').flatMap((g) => g.items || []) : []);
+  const neverGroups = fs.existsSync(hidden) ? (JSON.parse(fs.readFileSync(hidden, 'utf8')).groups || []).filter((g) => g.until === 'never') : [];
+  const never = new Set(neverGroups.flatMap((g) => [...(g.items || []), ...(g.material ? [`material:${g.material}`] : [])]));
   const infra = new Set([...(idx.dump?.structures?.keys?.() || [])]);
   const rows = auditAll(model, facts, keyItems, { startup, machines: [...idx.machines.values()], never, infra });
   fs.mkdirSync(opt.out, { recursive: true });
