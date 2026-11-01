@@ -24,7 +24,7 @@ const player = (id, over = {}) => ({ id, dim: 'minecraft:overworld', x: 11.5, y:
 test('the script loads and its constants are the horizon_city table', () => {
   assert.ok(E, 'global.grindless.ending');
   assert.equal(E.constants.dimension, TABLE.dimension);
-  assert.deepEqual(E.constants.arrival, { x: TABLE.arrival.x + 0.5, y: TABLE.arrival.y, z: TABLE.arrival.z + 0.5, yaw: TABLE.arrival.yaw, pitch: 0 });
+  assert.deepEqual(JSON.parse(JSON.stringify(E.constants.arrival)), { x: TABLE.arrival.x + 0.5, y: TABLE.arrival.y, z: TABLE.arrival.z + 0.5, yaw: TABLE.arrival.yaw, pitch: 0 });
   assert.equal(E.constants.plaza.template, TABLE.plaza.template);
   assert.deepEqual(Array.from(E.constants.plaza.origin), TABLE.plaza.origin);
   assert.deepEqual(Array.from(E.constants.plaza.size), TABLE.plaza.size);
