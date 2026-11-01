@@ -42,7 +42,7 @@ export default {
           ['plb', I('grindless:ca48_plasma_bunch'), 'Plasma Bunch'],
           ['beam', I('grindless:ca48_beam'), 'Calcium-48 Beam', 'product', { from: ['plb', 'x_cmod'] }],
         ], 'the heavy ion cyclotron'),
-        L('x_cmod', 22.5, -1, 'pl_uv:cmod'),
+        L('x_cmod', 25, 0, 'pl_uv:cmod'),
         // plutonium-244 target, then flerovium atoms (one chain: the target feeds the cyclotron, the membrane the separator)
         ...chain(2, [
           ['pfd', I('gtceu:plutonium_244_dust'), 'Plutonium-244', 'raw'],
@@ -70,7 +70,7 @@ export default {
           ['tna', I('grindless:tennessine_atoms'), 'Tennessine Atoms'],
           ['tns', I('grindless:tennessine_sample'), 'Tennessine Sample', 'product', { from: ['tna', 'x_aer'] }],
         ], 'the UIV atoms'),
-        L('x_aer', 12.5, 9, 'pl_zpm:aer'),
+        L('x_aer', 15, 10, 'pl_zpm:aer'),
         // lithium-6 and potassium-40
         ...chain(12, [
           ['licl', I('gtceu:lithium_chloride_dust'), 'Lithium Chloride', 'raw'],
@@ -174,7 +174,7 @@ export default {
           ['hce', I('grindless:hftacn_heating_element'), 'Heating Element'],
           ['hcb', I('grindless:hftacn_coil_block'), 'Coil Block', 'product', { from: ['hce', 'x_wire'] }],
         ], 'the Mk4 reactor and the stellar forge'),
-        L('x_wire', 10, 19, 'pl_zpm:wire'),
+        L('x_wire', 12.5, 20, 'pl_zpm:wire'),
         // tungsten divertor and Wf/W tile, from the tungsten dust
         ...chain(22, [
           ['tdu', I('gtceu:tungsten_dust'), 'Tungsten Dust', 'raw'],
@@ -217,7 +217,7 @@ export default {
           ['die', I('grindless:snspd_die'), 'SNSPD Die'],
           ['snspd', I('grindless:snspd'), 'SNSPD', 'product', { from: ['die', 'x_pipe'] }],
         ], 'the photonic chip and the pulsar station'),
-        L('x_pipe', 10, -1, 'pl_luv:pipe'),
+        L('x_pipe', 12.5, 0, 'pl_luv:pipe'),
         // photonic chip: its upstream is the silicon nitride chain below
         // hBN
         ...chain(6, [
@@ -228,7 +228,7 @@ export default {
           ['ahf', I('grindless:annealed_hbn_film'), 'Annealed hBN'],
           ['hec', I('grindless:hbn_emitter_chip'), 'Emitter Chip', 'product', { from: ['ahf', 'x_pump'] }],
         ], 'the photonic chip'),
-        L('x_pump', 12.5, 5, 'pl_uv:pump'),
+        L('x_pump', 15, 6, 'pl_uv:pump'),
         // graphene
         ...chain(8, [
           ['cuf', I('gtceu:copper_foil'), 'Copper Foil', 'raw'],
@@ -240,7 +240,7 @@ export default {
           ['eg', I('grindless:encapsulated_graphene'), 'Encapsulated Graphene'],
           ['gm', I('grindless:graphene_modulator'), 'Graphene Modulator', 'product', { from: ['eg', 'x_yb'] }],
         ], 'the photonic chip'),
-        L('x_yb', 17.5, 7, 'pl_uv:fibre'),
+        L('x_yb', 20, 8, 'pl_uv:fibre'),
         // silicon nitride waveguide chip, waveguide circuit and photonic chip, up to the optical computer
         ...chain(10, [
           ['fzb', I('grindless:fz_silicon_boule'), 'Float-Zone Boule', 'raw'],
@@ -280,7 +280,7 @@ export default {
           ['ktw', I('grindless:ktp_wafer'), 'KTP Wafer'],
           ['kte', I('grindless:ktp_electroded_wafer'), 'Electroded Wafer', 'product', { from: ['ktw', 'x_dia'] }],
         ], 'the poled crystal of the SPDC source'),
-        L('x_dia', 10, 15, 'pl_zpm:plate'),
+        L('x_dia', 12.5, 16, 'pl_zpm:plate'),
         // TGG isolator
         ...chain(18, [
           ['tgd', I('gtceu:tgg_dust'), 'TGG Powder', 'raw'],
@@ -290,7 +290,7 @@ export default {
           ['fi', I('grindless:faraday_isolator'), 'Faraday Isolator'],
           ['spd', I('grindless:spdc_source'), 'SPDC Source', 'product', { from: ['fi', 'x_pc'] }],
         ], 'the entanglement station'),
-        L('x_pc', 12.5, 17, 'pl_uv:chip'),
+        L('x_pc', 15, 18, 'pl_uv:chip'),
         // carbon nanotube muscle
         ...chain(20, [
           ['cs', I('grindless:cnt_sock'), 'CNT Sock', 'raw'],
@@ -301,7 +301,7 @@ export default {
           ['cty', I('grindless:cnt_twisted_yarn'), 'Twisted Yarn'],
           ['cm', I('grindless:cnt_coiled_muscle'), 'Coiled Muscle', 'product', { from: ['cty', 'x_sc'] }],
         ], 'the UEV robot arm'),
-        L('x_sc', 15, 19, 'pl_luv:coil'),
+        L('x_sc', 17.5, 20, 'pl_luv:coil'),
         // hollow-core fibre
         ...chain(22, [
           ['fst', I('grindless:fused_silica_tube'), 'Fused Silica Tube', 'raw'],
@@ -329,7 +329,7 @@ export default {
           ['ums', I('grindless:ule_mirrored_spacer'), 'Mirrored Spacer'],
           ['ucv', I('grindless:ule_cavity'), 'ULE Cavity', 'product', { from: ['ums', 'x_mass'] }],
         ], 'the cold-atom calibrations'),
-        L('x_mass', 10, 25, 'pl_luv:mass'),
+        L('x_mass', 12.5, 26, 'pl_luv:mass'),
         // polarised helium-3
         ...chain(4, [
           ['he3', F('gtceu:helium_3_6n'), 'Helium-3, 6N', 'raw', { from: ['xl_he'] }],
