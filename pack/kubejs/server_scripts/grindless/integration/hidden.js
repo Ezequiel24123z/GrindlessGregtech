@@ -13,14 +13,15 @@
 // Hiding = two tags, items and fluids. c:hidden_from_recipe_viewers: EMI 1.1.22 drops the tagged stacks from its index (and the pack's
 // other scripts use it for the addon machines they remove). grindless:hidden_with_recipes:
 // assets/emi/index/stacks/grindless_hidden_with_recipes.json disables it in EMI ("disable"; EMI only reads its data files in the emi
-// namespace), so EMI also drops every recipe with one of them as input, output or catalyst. JEI runs under EMI (EMI's JEMI plugin is JEI's
+// namespace), so EMI also drops every recipe with one of them as input, output or catalyst. Groups with keepRecipes only get the first tag:
+// their recipes stay visible. JEI runs under EMI (EMI's JEMI plugin is JEI's
 // runtime): there is no JEI list to hide from.
 //
 // Priority -100: the recipe handler runs after the scripts that add recipes (the ore plant generates plant recipes for junk ores too;
 // KubeJS keeps added recipes apart from the datapack ones, so they are dropped from event.addedRecipes).
 //
 // Published for the smoke test (tools/test/overlay/kubejs/server_scripts/gg_test_hidden.js) and the recipe dump (info.json):
-//   global.grindless.hidden = { implementedEra, eras, groups, hidden: { groups, items, fluids }, shownBySwitch, isHidden(id), removed: {...} }
+//   global.grindless.hidden = { implementedEra, eras, groups, hidden: { groups, items, fluids, keep }, shownBySwitch, isHidden(id), removed: {...} }
 // implementedEra and eras stay published for the obtainability audit (tools/analysis reads info.hidden.implementedEra).
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
@@ -44,6 +45,7 @@
     tagged: { items: 0, fluids: 0, missing: [] }
   })
   var hiddenSet = {}
+  var keepSet = {}
   H.isHidden = function (id) {
     return hiddenSet[String(id)] === true
   }
@@ -59,6 +61,7 @@
     var groups = table && table.groups ? table.groups : []
     var items = []
     var fluids = []
+    var keep = []
     var remove = []
     var shown = []
     var switches = G.stations && G.stations.switches ? G.stations.switches : null
@@ -77,24 +80,28 @@
       ;(g.items || []).forEach(function (id) {
         items.push(id)
         hiddenSet[id] = true
+        if (g.keepRecipes === true) keepSet[id] = true
       })
       ;(g.fluids || []).forEach(function (id) {
         fluids.push(id)
         hiddenSet[id] = true
+        if (g.keepRecipes === true) keepSet[id] = true
       })
+      if (g.keepRecipes === true) keep.push(g.material)
       ;(g.removeRecipes || []).forEach(function (id) { remove.push(id) })
     })
     H.groups = groups
-    H.hidden = { groups: count, items: items, fluids: fluids }
+    H.hidden = { groups: count, items: items, fluids: fluids, keep: keep }
     H.removeRecipes = remove
     H.shownBySwitch = shown
-    console.info(LOG + 'hiding ' + count + ' of ' + groups.length + ' groups (' + items.length + ' items, ' + fluids.length + ' fluids); ' +
-      remove.length + ' junk recipes to remove' + (shown.length > 0 ? '; shown by a stations switch: ' + shown.join(', ') : ''))
+    console.info(LOG + 'hiding ' + count + ' of ' + groups.length + ' groups (' + items.length + ' items, ' + fluids.length + ' fluids; ' +
+      keep.length + ' keep their recipes in view); ' + remove.length + ' junk recipes to remove' +
+      (shown.length > 0 ? '; shown by a stations switch: ' + shown.join(', ') : ''))
   }
 
   load()
 
-  // both tags for everything hidden
+  // both tags for everything hidden, except the keepRecipes groups: only the index tag
   function tagAll(event, ids, exists, kind) {
     var ok = []
     var missing = []
@@ -102,10 +109,9 @@
       if (exists(id)) ok.push(id)
       else missing.push(id)
     })
-    if (ok.length > 0) {
-      event.add(TAG, ok)
-      event.add(RECIPES_TAG, ok)
-    }
+    var withRecipes = ok.filter(function (id) { return keepSet[id] !== true })
+    if (ok.length > 0) event.add(TAG, ok)
+    if (withRecipes.length > 0) event.add(RECIPES_TAG, withRecipes)
     H.tagged[kind] = ok.length
     H.tagged.missing = H.tagged.missing.concat(missing)
     if (missing.length > 0) console.info(LOG + missing.length + ' hidden ' + kind + ' are not registered (skipped): ' + missing.slice(0, 10).join(', '))
