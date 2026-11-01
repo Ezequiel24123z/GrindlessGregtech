@@ -1,4 +1,4 @@
-﻿import test from 'node:test';
+import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -140,7 +140,7 @@ test('B9 the coilgun: 11 accelerating coil rings between frame-post sections aro
 test('B9 recipe types, keep-everything machines and their controllers', () => {
   const { machines, types, recipes } = harness();
   assert.deepEqual([...types.keys()], ['gravitational_wave_astronomy', 'probe_launch']);
-  assert.deepEqual(call({ calls: types.get('gravitational_wave_astronomy') }, 'setMaxIOSize')[0], [3, 1, 1, 0]);
+  assert.deepEqual(call({ calls: types.get('gravitational_wave_astronomy') }, 'setMaxIOSize')[0], [4, 1, 1, 0]);
   assert.deepEqual(call({ calls: types.get('probe_launch') }, 'setMaxIOSize')[0], [2, 1, 0, 0]);
   for (const name of names) {
     const c = { calls: machines.get(name) };

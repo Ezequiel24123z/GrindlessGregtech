@@ -147,8 +147,8 @@
   }
 
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
-    // circuit + data orb + the Sagittarius A* signal (kept); liquid helium for the cryostats
-    event.create(GY.types.detector).category('multiblock').setEUIO('in').setMaxIOSize(3, 1, 1, 0)
+    // circuit + two data inputs + the Sagittarius A* signal (kept: the Kerr ringdown record takes a probe-data item and a data orb); liquid helium for the cryostats
+    event.create(GY.types.detector).category('multiblock').setEUIO('in').setMaxIOSize(4, 1, 1, 0)
       .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, FillDirection.LEFT_TO_RIGHT)
     // circuit + probe
     event.create(GY.types.launcher).category('multiblock').setEUIO('in').setMaxIOSize(2, 1, 0, 0)
