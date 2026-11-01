@@ -697,3 +697,44 @@ The shared ids of `PACKAGES-IV.md` are registered in `startup_scripts/grindless/
 - **Radiation-proof casing:** GT--'s own IV assembler recipe (6 dense lead plates, a tungsten steel frame and 1,296 mB concrete), unchanged.
 - **Ion-exchange resin:** sulfonated polystyrene (styrene + sulfuric acid). Real acid in-situ leaching uses strong-base anion resins; that could become styrene + chloromethane + dimethylamine if realism matters.
 - **Productive Bees:** the naquadah, osmium and radioactive combs keep no recipe for good. PB's own EBF recipe for the naquadah bee (osmium bee egg + naquadah block) was a dead end; IV-B3 removed it (`integration/productivebees.js`).
+
+## Reforge line design (RF-3S)
+
+Era-design pass (issue #69, 2026-11-01). The rule, the roles and the shared tool package LD-T1 are in `ev.md`, *Reforge line design (RF-3S)*. IV needs no new recipe: every short IV chain is either a piece of one longer line, an older line's branch end, or not a production line. Two "designed, not built" items were chart gaps: the suit and the superconductors are in the dump.
+
+### Classification (IV)
+
+| Cluster: end | Role | Steps | Decision |
+|---|---|---|---|
+| uranium: hydrofluoric acid | production | 4 | keep (fluorite vein → washer → kiln, with LV's acid) |
+| uranium: U-235, U-238 | production | 3 → 8 | **merge** into the fuel cycle |
+| fuel: spent fuel, tritiated heavy water | production | 3 | **merge** into the fuel cycle |
+| plutonium: Pu, MOX, breeder, RTG pellet | production | 3 | **merge** into the fuel cycle (the RTG cell itself is `power`) |
+| radon: quantum star | production | 2 | **merge** as the fuel cycle's branch: U-238 → hot cell c4 → radon → bath with EV's nether star |
+| heavy: tritium, heavy water | production | 5 | keep |
+| venus: water, oxygen, steam | resource + power | 2 | role tags: the acid works is the Venus base's water (`resource`), the heat engine `power` |
+| naquadah: naquadah wafer | production | 7 | keep |
+| iridium: iridium, osmium | production | 4 | keep |
+| mercury: heat-shield brick, thin-film panel | infrastructure | 2 | role tag; their consumers are the helium refrigerator, smelter, quench caster, solar field, detector and wake shield builds and the Jupiter probe |
+| far: outer system chart, Sgr A* signal | research | 2 | role tag |
+| supercon: NbTi ingot | production | 2 → 5 | **lengthen by chart:** pyrochlore → ore plant → GTM's `electrolyzer/decomposition_electrolyzing_pyrochlore` (2 Nb per 11) → mixer → smelting complex |
+| *(design)* SmFeAsO, rhodium-plated palladium | branch ends | 1 | **branch ends** of EV's cascade (`gtceu:mixer/samarium_iron_arsenic_oxide`) and platinum plant (`gtceu:mixer/rhodium_plated_palladium`); drawn in the supercon cluster with `extends` |
+| *(design)* suit | infrastructure | 3 | **built:** `grindless:assembler/gcyr/space_suit_thermal_upgrade_smithing_template` (heat-shielding and insulating fabric, titanium and Kapton K plates; Kapton, para-aramid and PBI come from GCYR's and GTM's reactors). It is equipment, so it leaves the *New process lines* count; no chart needed |
+
+### Redesigns (IV)
+
+- **One fuel cycle, not four short lines.** The doc's *New process lines* already has one "Uranium cycle"; the chart cut it in four. With `line: 'fuelcycle'` on `uranium`, `fuel`, `plutonium` and `radon`, the audit measures: leach field → hot cell c1 (enrichment) → fuel fabrication (pellets, tubes) → fuel fabrication (assembly) → fission reactor → hot cell c3 (reprocessing) → MOX or breeder → reactor again, 8 steps, with branches to the radon line (c4) and the RTG. The hot cell's c1 is a **fold** of GTM's UF₆ chain (`uranium_hexafluoride` → `uranium_hexafluoride_separation` → `enriched_uranium_hexafluoride_separation`, same 1 : 9 split per 30 uraninite), so RF-3C's skip route through GTM's electrolyzer is the chain the fold replaces, not a bypass.
+- **The quantum star is the fuel cycle's branch end,** crossing EV's dome (the nether star) and LV's sulfuric acid line through the leach field. It feeds IV's emitters, sensors and field generators.
+- **Superconductors become one line with two branch ends.** NbTi gets its real upstream (pyrochlore is in the vein table); SmFeAsO and RPP stay one mixer step each, as branch ends of EV lines, which is honest: lengthening a mixer alloy would be padding.
+
+### Packages (IV)
+
+Continues `ev.md`'s list. No IV package changes a recipe, so P2-B does not wait for IV.
+
+| # | Id | Scope | Likely files | Depends on | Tests |
+|---|---|---|---|---|---|
+| 4 | **LD-IV1** IV charts | The *Classification (IV)* tags: `line: 'fuelcycle'` on four clusters, roles on venus, mercury and far, the supercon upstream and the two branch ends with `extends`. No recipe changes. | `tools/quests/processing-lines/pl-data-iv.mjs` | LD-T1 | T0; `pl-check iv` 0 issues; line audit: no IV production line under 4 steps |
+
+### Open questions (IV)
+
+1. **Should the suit's chemistry be charted anyway** (PBI, Kapton K and para-aramid are 2-3 step GTM and GCYR chains)? Default: no, the suit is equipment. Yes adds an `infrastructure` cluster for the quest chapter's teaching (rule 5) with no effect on the count.
