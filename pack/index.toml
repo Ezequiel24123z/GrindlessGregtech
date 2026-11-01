@@ -6,7 +6,7 @@ hash = "a0463347c729753c4176bf4751f2c43b35146a789995c793c4f21b29f3ed0b3a"
 
 [[files]]
 file = "config/ftbquests/quests/chapter_groups.snbt"
-hash = "b54e419d7254898facca9e20693bf9e5d60d5ca3fc5c71aec9a3cd4e5c11d143"
+hash = "6abbc2b72c4a7a98f246e7b6d4212d4799a1223a8762c8cdbbcf47a12640f811"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/applied_energistics.snbt"
