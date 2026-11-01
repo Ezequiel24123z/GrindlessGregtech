@@ -99,7 +99,8 @@
     var recipe = event.recipes.gtceu[rec.type](rec.recipeId)
     rec.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
     rec.kept.forEach(function (x) { recipe.notConsumable(x.count + 'x ' + x.id) })
-    if (rec.circuit > 0) recipe.circuit(rec.circuit)
+    // the cutter holds one item input and a circuit takes it: a slab row is told apart by its slab alone
+    if (rec.circuit > 0 && !(rec.type === 'cutter' && rec.itemsIn.length + rec.kept.length >= 1)) recipe.circuit(rec.circuit)
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
     rec.charge.forEach(function (x) { recipe.notConsumableFluid(Fluid.of(x.id, x.amount)) })
     rec.itemsOut.forEach(function (x) {

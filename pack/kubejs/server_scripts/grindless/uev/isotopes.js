@@ -89,7 +89,8 @@
     var recipe = event.recipes.gtceu[rec.type]('grindless:' + rec.name)
     rec.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
     rec.kept.forEach(function (x) { recipe.notConsumable(x.count + 'x ' + x.id) })
-    recipe.circuit(rec.circuit)
+    // the small reactor holds two item inputs and a circuit takes one: a row with two solids is told apart by its item pair alone
+    if (rec.type !== 'chemical_reactor' || rec.itemsIn.length + rec.kept.length < 2) recipe.circuit(rec.circuit)
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
     rec.charge.forEach(function (x) { recipe.notConsumableFluid(Fluid.of(x.id, x.amount)) })
     rec.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
