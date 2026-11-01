@@ -302,6 +302,7 @@
   ],
   "maxplus": [
    "gtceu:bound_matter_press",
+   "gtceu:condensate_assembler",
    "gtceu:condensate_refinery",
    "gtceu:meta_material_loom"
   ],

@@ -1,4 +1,4 @@
-// priority: -20142
+// priority: -20154
 // Gregtech Grindless - MAX+ power plumbing (package XP-W, docs/eras/maxplus.md 'Hatches', 'Older machines' and line P18):
 //
 //   line P18, the Kerr fault-current limiter, five steps with four crossings:

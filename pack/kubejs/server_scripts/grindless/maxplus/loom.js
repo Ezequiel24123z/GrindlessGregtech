@@ -1,4 +1,4 @@
-// priority: -20128
+// priority: -20144
 // MAX+ machine 11, the meta-material loom, and the older steps of lines T4 to T7 (docs/eras/maxplus.md, machine 11 and 'Lines'; package XP-H1).
 //
 //   T4 horizon shielding   (the existing valence-reduction line's gadolinium oxide) SPS c27 -> gd_hfb2_cermet; press c4 (maxplus/condensate.js) ->

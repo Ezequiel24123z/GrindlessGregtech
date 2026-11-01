@@ -1,4 +1,4 @@
-// priority: -20114
+// priority: -20124
 // MAX+ components (docs/eras/maxplus.md, components, lines C1 to C7; package XP-A2). The older steps of the lines are rows of this file on
 // the older recipe types (OLD below, ids grindless:<type>/<name>, the precedent of maxplus/power.js); the circuits count every MAX+ row the
 // design puts on that machine (maxplus.md, older machines in MAX+) from the table's highest + 1, capped at 32. This file also holds the

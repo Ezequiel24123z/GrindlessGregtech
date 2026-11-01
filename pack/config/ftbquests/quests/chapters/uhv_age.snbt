@@ -167,7 +167,7 @@
 		{
 			dependencies: ["188AE1CE6129054A"]
 			description: ["Mercury gets several times the sunlight Earth does. The surface is vacuum and the day side is a furnace, so the machines there run only in daylight."]
-			icon: "gcyr:mercury"
+			icon: "minecraft:sunflower"
 			id: "79AAE037161EDE29"
 			rewards: [{ id: "1A195C9839E7A63C", type: "xp", xp: 25 }]
 			shape: "circle"

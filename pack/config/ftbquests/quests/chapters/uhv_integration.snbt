@@ -221,7 +221,7 @@
 		{
 			dependencies: ["188AE1CE6129054A"]
 			description: ["The seed for the Mercury bridge is made in Mercury orbit, with the first swarm segment as the catalyst. Once linked, the foundry's output reaches home through ME."]
-			icon: "gcyr:mercury_orbit"
+			icon: "ae2:quantum_ring"
 			id: "555DAA8FBE97E6F1"
 			rewards: [{ id: "7FF1FBD3EC6380EA", type: "xp", xp: 100 }]
 			tasks: [{ id: "53B865DC8B0C2AFF", item: "grindless:swarm_segment", type: "item" }]

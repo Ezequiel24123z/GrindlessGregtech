@@ -154,7 +154,7 @@ export const QUESTS = [
 
   // ------------------------------------------------------------------ AE2
   {
-    key: 'AE_MERC', kind: 'step', title: 'Mercury on AE2', icon: 'gcyr:mercury_orbit',
+    key: 'AE_MERC', kind: 'step', title: 'Mercury on AE2', icon: 'ae2:quantum_ring',
     deps: ['STN7'], x: 2, y: 8,
     desc: [
       'The seed for the Mercury bridge is made in Mercury orbit, with the first swarm segment as the catalyst. Once linked, the foundry\'s output reaches home through ME.',

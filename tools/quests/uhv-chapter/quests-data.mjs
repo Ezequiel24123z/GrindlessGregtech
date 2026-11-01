@@ -145,7 +145,7 @@ export const QUESTS = [
     rewards: [xp(120)],
   },
   {
-    key: 'M_SUN', kind: 'reading', title: 'Under Six Suns', icon: 'gcyr:mercury',
+    key: 'M_SUN', kind: 'reading', title: 'Under Six Suns', icon: 'minecraft:sunflower',
     deps: ['STN7'], x: 10, y: -2,
     desc: [
       'Mercury gets several times the sunlight Earth does. The surface is vacuum and the day side is a furnace, so the machines there run only in daylight.',

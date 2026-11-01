@@ -1,4 +1,4 @@
-// priority: -20065
+// priority: -20074
 // -----------------------------------------------------------------------------------------------
 // MAX-D3 Geroch winch (docs/eras/max.md, machine 6, lines L17 and L20; package MAX-D3). The line steps on older machines are rows marked
 // MAX-D3 in their own tables and scripts; this file holds the machine's two recipes, its controller and the GTM rows of the lines:

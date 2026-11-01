@@ -142,7 +142,9 @@ test('the cryogenic plant: the Kuiper row on the Moon splits the mix into argon,
   assert.deepEqual(rec.j.inputs.fluid.map((f) => [f.content.value[0].fluid, f.content.amount]), [[NOBLE, 1000]]);
   assert.deepEqual(fluidsOut(rec), [['gtceu:argon', 400], ['gtceu:krypton', 400], ['gtceu:xenon', 200]]);
   assert.ok(JSON.stringify(rec.j.recipeConditions || []).includes('gcyr:luna'), 'on the Moon');
-  const cryo = recipes.filter((r) => r.t === 'gtceu:cryogenic_processing').map((r) => r.i.split('/').pop()).sort();
+  // MAX+ rows registered from maxplus/*.js scripts (XP-H3's liquid helium-4, P25) are their own packages' to pin
+  const fromMaxplus = (r) => /maxplus[\\/]/.test(String(run.recipeFiles.get(r.i)));
+  const cryo = recipes.filter((r) => r.t === 'gtceu:cryogenic_processing' && !fromMaxplus(r)).map((r) => r.i.split('/').pop()).sort();
   // UHV-A6 adds the 99.999 % neon row, UHV-B3 the oganesson propellant row, UEV-A2 the nether-air xenon cut
   // UEV-A7 adds the 6N helium-3 and helium-4 ash rows, UEV-B2 the interstellar gas row, UIV-A2 para hydrogen and liquid para hydrogen
   // UIV-B3 adds the 6N neon row; UXV-A2 adds he_6n, krypton from air, the oxygen-burning fuel and the triple-alpha fuel; OpV-A1 adds liquid helium-3; OpV-B3a adds krypton purification, the tritium cold trap and DT fill conditioning
