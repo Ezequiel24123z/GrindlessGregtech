@@ -105,14 +105,16 @@ function harness() {
     recipes.push(entry);
     return builder(entry.calls);
   } });
+  const removed = [];
   const event = {
+    remove: (filter) => removed.push(filter.id),
     recipes: { gtceu },
     custom: (json) => { const e = { json, calls: [] }; customs.push(e); return builder(e.calls); },
     shapeless: (out, ins) => { const e = { out, ins, calls: [] }; shapeless.push(e); return builder(e.calls); },
   };
   serverRecipeHandlers.forEach((cb) => cb(event));
   oreHandlers.forEach((cb) => cb({ add: (id, fn) => { const calls = []; fn(builder(calls)); veinsAdded.push({ id, calls }); } }));
-  return { G, machines, recipes, customs, shapeless, layers, veinsAdded, logs };
+  return { G, machines, recipes, customs, shapeless, layers, veinsAdded, logs, removed };
 }
 const call = (r, method) => r.calls.filter((c) => c[0] === method).map((c) => c.slice(1));
 const only = (r, method) => call(r, method)[0]?.[0];
@@ -219,6 +221,17 @@ test('B5 asteroid processor: Mond on crushed and dust with a CO charge never use
   assert.equal(start(voids, recipe('grindless:asteroid_processing/mond_crushed')), false);
   assert.equal(start(voids, recipe('grindless:asteroid_processing/magnetic_split')), true);
   assert.equal(start({ voids: false }, recipe('grindless:asteroid_processing/mond_crushed')), true);
+});
+
+test('LD-LV2: GTM tetrataenite ore steps past the crushed ore are removed; the magnetic split stays the only crushed-to-dust route', () => {
+  const { removed, recipes } = harness();
+  assert.equal(removed.length, 14);
+  assert.equal(new Set(removed).size, 14);
+  for (const id of removed) assert.match(id, /^gtceu:[a-z_]+\/[a-z_]*tetrataenite/);
+  for (const id of removed) assert.doesNotMatch(id, /ingot|nugget|block|rod|small|tiny/, 'only ore steps are cut');
+  assert.ok(removed.includes('gtceu:macerator/macerate_tetrataenite_crushed_ore_to_dust'));
+  assert.ok(removed.includes('gtceu:thermal_centrifuge/centrifuge_tetrataenite_crushed_ore_to_refined_ore'));
+  assert.ok(byId(recipes, 'asteroid_processing', 'grindless:magnetic_split'), 'the split is kept');
 });
 
 test('B5 optical miner: the boulder needs the sun at run start, Boudouard does not; both on the belt and kept; fresh every run', () => {

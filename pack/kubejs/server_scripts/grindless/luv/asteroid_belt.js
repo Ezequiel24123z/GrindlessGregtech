@@ -57,6 +57,24 @@
       pair: 'grindless:transform/asteroid_entangled_singularity' }
   }
 
+  // GTM's generic tetrataenite ore steps past the crushed ore (RF-3S): the magnetic split is the only crushed-to-dust route
+  B.cut = [
+    'gtceu:ore_washer/wash_tetrataenite_crushed_ore_to_purified_ore',
+    'gtceu:ore_washer/wash_tetrataenite_crushed_ore_to_purified_ore_distilled',
+    'gtceu:ore_washer/wash_tetrataenite_crushed_ore_to_purified_ore_fast',
+    'gtceu:thermal_centrifuge/centrifuge_tetrataenite_crushed_ore_to_refined_ore',
+    'gtceu:thermal_centrifuge/centrifuge_tetrataenite_purified_ore_to_refined_ore',
+    'gtceu:forge_hammer/hammer_tetrataenite_crushed_ore_to_dust',
+    'gtceu:forge_hammer/hammer_tetrataenite_crushed_ore_to_impure_dust',
+    'gtceu:forge_hammer/hammer_tetrataenite_refined_ore_to_dust',
+    'gtceu:macerator/macerate_tetrataenite_crushed_ore_to_dust',
+    'gtceu:macerator/macerate_tetrataenite_crushed_ore_to_impure_dust',
+    'gtceu:macerator/macerate_tetrataenite_refined_ore_to_dust',
+    'gtceu:shapeless/crushed_ore_to_dust_tetrataenite',
+    'gtceu:shapeless/purified_ore_to_dust_tetrataenite',
+    'gtceu:shapeless/centrifuged_ore_to_dust_tetrataenite'
+  ]
+
   function belt(recipe) {
     return G.places.allow(recipe, B.place)
   }
@@ -155,6 +173,11 @@
     return ['grindless:asteroid_processing/mond_crushed', 'grindless:asteroid_processing/magnetic_split', 'grindless:asteroid_processing/mond_dust']
   }
 
+  function cutTetrataenite(event) {
+    B.cut.forEach(function (id) { event.remove({ id: id }) })
+    return []
+  }
+
   function addMiner(event) {
     var R = B.recipes
     belt(event.recipes.gtceu.optical_mining('grindless:c_type_boulder')
@@ -242,7 +265,7 @@
   // one thrown error would stop the recipe handlers of every script that loads after this one
   ServerEvents.recipes(function (event) {
     var made = []
-    var steps = [['drilling', addDrilling], ['samples', addSamples], ['processor', addProcessor], ['miner', addMiner],
+    var steps = [['tetrataenite cut', cutTetrataenite], ['drilling', addDrilling], ['samples', addSamples], ['processor', addProcessor], ['miner', addMiner],
       ['parts', addParts], ['seed', addSeed], ['controllers', addControllers]]
     steps.forEach(function (step) {
       try {
