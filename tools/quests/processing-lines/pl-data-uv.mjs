@@ -137,9 +137,9 @@ const chapter = {
         n('frac', 5, 0, M('gtceu:volatile_ice_fractionator'), 'Volatile Ice Fractionator', {
           kind: 'ours', from: ['sput', 'charon'], desc: 'Each ice boils off at its own temperature.',
         }),
-        n('pn2', 7.5, -3, F('gtceu:nitrogen'), 'Nitrogen', { kind: 'product', role: 'resource', from: ['frac'], end: 'the nitrogen network' }),
-        n('pco', 7.5, -1.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'product', role: 'resource', from: ['frac'], end: 'the syngas plant\'s Pluto shift' }),
-        n('pch4', 7.5, 0, F('gtceu:methane'), 'Methane', { kind: 'product', role: 'resource', from: ['frac'], end: 'the methane pyrolyser' }),
+        n('pn2', 7.5, -3, F('gtceu:nitrogen'), 'Nitrogen', { kind: 'product', from: ['frac'], end: 'the nitrogen network' }),
+        n('pco', 7.5, -1.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'product', from: ['frac'], end: 'the syngas plant\'s Pluto shift' }),
+        n('pch4', 7.5, 0, F('gtceu:methane'), 'Methane', { kind: 'product', from: ['frac'], end: 'the methane pyrolyser' }),
         n('pwater', 7.5, 1.5, F('minecraft:water'), 'Water', { kind: 'product', from: ['frac'], sub: 'The ark drinks it; the rest goes to the shift and the network' }),
         n('pnh3', 7.5, 3, F('gtceu:ammonia'), 'Ammonia', { kind: 'product', from: ['frac'], sub: 'The ark takes it; the nitric acid line too' }),
         n('agar', 7.5, 5, I('gtceu:agar_dust'), 'Agar', { kind: 'raw', sub: 'Seeds the algae culture' }),
@@ -210,8 +210,8 @@ const chapter = {
         n('kwater', 30, 1.5, F('minecraft:water'), 'Water', { kind: 'by', from: ['anneal'], end: 'the network' }),
         n('noble', 30, 3, F('gtceu:kuiper_noble_gas'), 'Kuiper Noble Gas', { kind: 'product', from: ['anneal'], sub: 'Split in the cryogenic plant' }),
         n('kco', 30, 4.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'by', from: ['anneal'], end: 'the syngas plant' }),
-        n('kr', 32.5, 2.25, F('gtceu:krypton'), 'Krypton', {         kind: 'product', role: 'resource', from: ['noble'], end: 'the Hall thruster' }),
-                n('xe', 32.5, 3.75, F('gtceu:xenon'), 'Xenon', { kind: 'product', role: 'resource', from: ['noble'], end: 'the ion thruster' }),
+        n('kr', 32.5, 2.25, F('gtceu:krypton'), 'Krypton', {         kind: 'product', from: ['noble'], end: 'the Hall thruster' }),
+                n('xe', 32.5, 3.75, F('gtceu:xenon'), 'Xenon', { kind: 'product', from: ['noble'], end: 'the ion thruster' }),
         // high-purity germanium
         L('lgedust', 0, 9, 'pl_luv:gedust'),
         n('zrt', 2.5, 9, M('gtceu:zone_refining_tower'), 'Zone Refining Tower', {
