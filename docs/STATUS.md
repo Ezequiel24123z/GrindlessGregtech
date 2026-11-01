@@ -2,8 +2,8 @@
 
 Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Overwrite it at each accepted batch; do not append history.
 
-- **Playable version:** v0.17.0 "MAX" (`docs/releases/v0.17.0.md`; tag `v0.17.0` is `main`). The player channel is `releases` (release `releases-channel`, `Gregtech-Grindless-releases.zip`); `playable` is mirrored to it during the transition.
-- **Integration branch:** `ezequiel24123z-project-reforge`. Every package branches from it and is merged back with `--no-ff` by the integrator; `main` stays at v0.17.0 until v1.0.0.
+- **Playable version:** v1.0.0 "Reforge" (`docs/releases/v1.0.0.md`; tag `v1.0.0`, commit 1b4e9b6f, is `main`, `releases` and `playable`; GitHub release v1.0.0 with the pinned Prism zip). A new world is required. The player channel is `releases` (release `releases-channel`, `Gregtech-Grindless-releases.zip`); `playable` is mirrored to it during the transition.
+- **Integration branch:** `ezequiel24123z-project-reforge`. Every package branches from it and is merged back with `--no-ff` by the integrator; `main` follows the released tags.
 - **Current milestone:** Project Reforge (DECISIONS.md:695), v0.17.0 to v1.0.0 in ten phases: 0 rules and diagnosis, 1 cost tooling, 2 cost rebalance, 3 era and line audit, 4 research, 5 quests, 6 assets and sounds, 7 MAX+ and the Hyperstargate, 8 cleanup, 9 release. No save compatibility (DECISIONS.md:701): v1.0.0 needs a new world.
 - **Done:**
   - Phases 0, 1 and 4.
@@ -54,11 +54,8 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - T2 on the VM, dumps 6775f27e and ebd3ff19: reachability PASS for all 16 tiers (Steam to MAX+); capacity 0 known violations; `gg_test_quests` PASS (every chapter's counts and group, MAX+ included); the hide table regenerated.
 - **In flight:** none.
 
-- **Next:** the owner's go for the player-facing steps. Done already: the tag `v1.0.0` (on 1b4e9b6f; its pack equals the tested candidate f1066a22) and the GitHub release v1.0.0 as a **draft** with its notes and the pinned Prism zip `Gregtech-Grindless-v1.0.0.zip`. Left for the owner, because v1.0.0 needs a new world and the `releases` channel updates players' instances by itself:
-  - publish the release: `gh release edit v1.0.0 --repo Ezequiel24123z/GrindlessGregtech --draft=false --latest`;
-  - `main`: `git push origin v1.0.0^{commit}:refs/heads/main` (a fast-forward from v0.17.0);
-  - the channels: `git push origin v1.0.0^{commit}:refs/heads/releases` and the same for `playable`;
-  - tell players: start a new world (`docs/releases/v1.0.0.md`, *What changes in your game*).- **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
+- **Next:** none queued. Project Reforge is released as v1.0.0. Post-release candidates, each a package only on the owner's word: the Power bands after LuV (RF-5P), the 220 multiblocks without a loop sound of their own, an in-game listen of the flagged loops, and the stale `gtceu` energy-hatch model names in old test overlays (`gg_test_*_s0_parts.js`, test-only).
+- **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open questions for the owner (the defaults stand until answered)
