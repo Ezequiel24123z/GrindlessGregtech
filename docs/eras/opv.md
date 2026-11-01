@@ -180,6 +180,8 @@ Until A4's `gtceu:opv_assembler` exists, assembler rows at OpV voltage run in th
 - `#gtceu:circuits/opv`;
 - OpV voltage.
 
+Since Reforge band E (P2-E, 2026-11-01) seven core components also take the UXV component of their own kind (*Validator*); machines, hatches and controllers keep the rule whole.
+
 It never takes a UXV-or-lower component or circuit as a component, and never runs at UXV voltage. Research items and domain inputs are exempt; C1 checks the rest.
 
 **Controllers (QR ladder; DECISIONS.md:551-567).** Each controller is a GTM `assembly_line` recipe with station research (`data_module`), at VA[OpV] = 503,316,480 EU/t for 2,400 t *(tune)*. The base is:
@@ -946,7 +948,7 @@ C1 writes `tools/analysis/tiers/opv.json` with UXV's rules (uxv.md:848) and thes
   - EU/t > V[UXV] = 134,217,728;
   - at least one `gtceu:opv_*` component;
   - `#gtceu:circuits/opv`, unless it is a GTM component that takes no circuit;
-  - no `grindless:uxv_*`, `gtceu:uxv_*` or lower component, and no lower circuit tag.
+  - no `grindless:uxv_*`, `gtceu:uxv_*` or lower component, and no lower circuit tag. One exception (Reforge band E, P2-E, 2026-11-01): the motor, pump, piston, robot arm, emitter, sensor and field generator each take the UXV component of their own kind, so OpV prices through the earlier chain (the pre-Reforge rule left the OpV core at 310 against 71,526; AGENTS.md principle 2 wins).
 
   Controllers take at least 10 OpV components *(tune)*, hatches at least 1, and basic machines at least 2. Research items are exempt.
 - **2^31:** no recipe EU/t at or above 2^31 except gate rows c11 and c13. No generator writes more than 2^30 per machine.
@@ -1088,7 +1090,7 @@ UXV's *Common to every package* (uxv.md:963-1029) applies with `uxv` replaced by
 - **Ids:** exactly as in this file and `tables/opv_ids.json`. A new cross-package id, or a changed one, is an escalation.
 - **Bootstrap:** as UXV, against the table above.
 - **Invariants, always:**
-  - the OpV component and circuit rule (*Voltages and controllers*): every machine, hatch, basic machine and controller recipe takes the OpV hull, OpV components in GT-like counts, `#gtceu:circuits/opv` and runs above V[UXV]; never a UXV-or-lower component or circuit;
+  - the OpV component and circuit rule (*Voltages and controllers*): every machine, hatch, basic machine and controller recipe takes the OpV hull, OpV components in GT-like counts, `#gtceu:circuits/opv` and runs above V[UXV]; never a UXV-or-lower component or circuit (a core component's own UXV counterpart excepted: band E, *Validator*);
   - no OpV recipe takes a MAX id (`gtceu:max_*`, `sgr_a_chart`) or anything in *Reserve for MAX*; `gtceu:max_machine_casing` is only researched (G1);
   - no home or Cygnus recipe takes an SGR or Terzan 5 product before its substage;
   - chain strand, Ni-64 slab, field-frozen plate and dense positrons only from SGR; antiprotons, strangelet seeds and Kugelblitz cores only from Cygnus; feedstock, casings, seeds and nodes only from Terzan 5;

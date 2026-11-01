@@ -780,7 +780,7 @@ C1 adds `tools/analysis/tiers/max.json` and `-Tier max`. `kubejs_static.mjs:10-1
 - `kubejs_static.mjs:871` `GTM_HIGH_TIER_COMPONENTS` lists uhv-opv; MAX is not added (no `gtceu:max_*` components exist).
 - The component rule (rules :266-289) applies unchanged: controllers ≥8 tier components from ≥3 families and ≥4 tier circuits; hatches and parts ≥2 tier components; highest circuit = tier; `T-HULL`; EU/t ≥ VA[tier]. **Exemptions**, listed in `max.json` with a reason: `gc_relay_probe` (an OpV-stage travel item); `grindless:mirror_shell_segment` and the three casing blocks (casing exemption, as OpV); `gtceu:max_machine_hull` (no circuit, as GTM's hulls).
 - `eraTier` `max: 14`, `complexFloor` `"14": 8` *(tune)*; `max` in process_audit `ERAS` / `TIER_ERA` (F2, integrator).
-- C1 re-counts the as-built era (RF-7A, MX-C1): 14 multiblocks, 57 lines (292 steps), 204 crossings on 71 machines, and checks: no MAX recipe takes an OpV-or-lower component or circuit (the probe excepted); no recipe ≥ 2^31 except c14, c15 and the shell's c3; every generator 1.3-2.5x, with the new wear of MX-S1 to MX-S4; no MAX recipe consumes `grindless:horizon_lock` (c3 makes it; the gene ark and the shell take none); the shell sets the world flag `grindless_stage_maxplus` (startup `max/shell.js`).
+- C1 re-counts the as-built era (RF-7A, MX-C1): 14 multiblocks, 57 lines (292 steps), 204 crossings on 71 machines, and checks: no MAX recipe takes an OpV-or-lower component or circuit (the probe excepted, and each MAX component's own OpV counterpart: Reforge band E, P2-E); no recipe ≥ 2^31 except c14, c15 and the shell's c3; every generator 1.3-2.5x, with the new wear of MX-S1 to MX-S4; no MAX recipe consumes `grindless:horizon_lock` (c3 makes it; the gene ark and the shell take none); the shell sets the world flag `grindless_stage_maxplus` (startup `max/shell.js`).
 
 ## Mods and evidence
 
@@ -899,7 +899,7 @@ OpV's *Common to every package* (opv.md, same heading) applies with `opv` replac
 - **Prohibited, always:** as OpV, plus `tables/max_ids.json` (F1 owns it), every `gtceu:max_*` registration (GTM's), `pack/kubejs/*/grindless/lib/**` (only M1 and P, integrator-run) and every OpV file not named in the contract.
 - **Ids:** exactly as in this file and `tables/max_ids.json`. A new cross-package id, or a changed one, is an escalation. OpV ids are consumed, never redefined.
 - **Invariants, always:**
-  - the MAX component and circuit rule (*Voltages, hull, hatches and controllers*): every MAX machine, hatch and controller recipe takes the MAX hull, MAX components, `#gtceu:circuits/max` and runs at ≥ VA[MAX]; never an OpV-or-lower component or circuit (the probe, the hull and the casings excepted, *Validator*);
+  - the MAX component and circuit rule (*Voltages, hull, hatches and controllers*): every MAX machine, hatch and controller recipe takes the MAX hull, MAX components, `#gtceu:circuits/max` and runs at ≥ VA[MAX]; never an OpV-or-lower component or circuit (the probe, the hull and the casings excepted, *Validator*; since Reforge band E, P2-E, every MAX component also takes the OpV component of its own kind);
   - no recipe EU/t ≥ 2^31 except gate c14, c15 and the shell's c3; long values written as `GTValues.V[GTValues.MAX] * amps` or `GTValues.V[13] * 16`, never a literal;
   - no home recipe takes a Sgr A* or belt product before its substage; horizon strand only from the SGR draw bench; hot flow only at Sgr A*; planetesimals only at the belt;
   - every generator burns a stated fuel at 1.3-2.5x; nothing consumes `universe_seed`;
