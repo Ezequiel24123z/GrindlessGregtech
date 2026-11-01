@@ -25,9 +25,9 @@
 // IV at the earliest (GCYM-style parallel machines, ev.md decision 5), uncraftable today so nothing to raise: Large Cracking
 // Machine (gtceu:cracker), Large Pyrolysis Oven (gtceu:pyrolyse_oven). If the IV wave wants them, their controller follows GTM's
 // GCYM recipes: IV circuits + the IV machine they enlarge + tungsten steel parts.
-// Expanded Assembly Line (gtceu:assembly_line, input order does not matter): craftable since package QR-G0, at LuV, in the normal
-// assembly line, with the LuV wireless data receptor, transmissor and Matrix Data Relay it needs for research data
-// (luv/expanded_assembly_line.js). The ZPM, UV and UHV variants of those parts stay without a recipe.
+// Expanded Assembly Line, Matrix Data Relay (RF-3R, v1.0.0): hidden, no recipe of ours. RF-3B and RF-3J found that the line forms but never
+// starts a recipe and neither machine forms on a dedicated server (DECISIONS, RF-3B). Their LuV receptor and transmissor are hidden with them
+// (tiers/obtain.json, class C); nothing else uses those two parts.
 // Kept: Large Gas Collector (IV recipe: IV circuits, motor, pump and gas collector; air, nether air and ender air, each in its
 // dimension), the universal circuits (assembler, 1 circuit of a tier -> 1 universal circuit in the same #gtceu:circuits/<tier>
 // tag: not a shortcut) and the parts without a recipe (Power Transformer, ZPM-UHV wireless optical hatches, ZPM-UHV data access
@@ -42,7 +42,7 @@
   var REMOVED_TYPES = ['greenhouse_crop_recipes', 'greenhouse_wood_recipes', 'rock_processing_plant', 'chemical_skips',
     'component_disassembly', 'machine_disassembly']
   var REMOVED_CONTROLLERS = ['industrial_greenhouse', 'advanced_conservatory', 'rock_processing_plant', 'synthesis_vessel',
-    'universal_disassembly_machine', 'robust_alloy_materializer']
+    'universal_disassembly_machine', 'robust_alloy_materializer', 'expanded_assembly_line', 'matrix_data_relay']
 
   // the removed controllers that are registered (a config switch can unregister them)
   function controllers() {
