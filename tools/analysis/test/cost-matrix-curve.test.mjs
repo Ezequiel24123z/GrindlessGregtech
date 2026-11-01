@@ -63,7 +63,7 @@ test('the committed tables forced off change nothing, enabled ones apply their f
   const eras = tables.filter((t) => t.enabled && cfg.tiers.includes(t.era));
   assert.equal(committed.res.changed.size, eras.length);
   const idxC = coreIndex(pricedRows(committed.dump, cfg).rows, cfg.tiers);
-  for (const t of eras) assert.ok(Math.abs(idxC.get(t.era).index - rule.scaledCount({ mv: 2, hv: 4 }[t.era], t.item)) < 1e-6, t.era);
+  for (const t of eras) assert.ok(Math.abs(idxC.get(t.era).index - rule.scaledCount({ mv: 2, hv: 4 }[t.era], t.item, 'x:plate')) < 1e-6, t.era);
   const on = curved(dump(), withFactors(tables, { mv: { item: 2.5, fluid: 2.5 } }));
   assert.deepEqual([...on.res.changed.keys()], ['gtceu:assembler/hull_mv']);
   assert.equal(coreIndex(pricedRows(on.dump, cfg).rows, cfg.tiers).get('mv').index, 5);

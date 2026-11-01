@@ -25,7 +25,7 @@ export function loadRule(file = PASS_FILE) {
 }
 
 export const eras = () => [...loadRule().eras];
-export const scaledCount = (n, f) => loadRule().scaledCount(n, f);
+export const scaledCount = (n, f, key) => loadRule().scaledCount(n, f, key);
 
 /** Reads <dir>/<era>.json for every era that has a file. Returns {tables, problems}; an invalid table is a problem and is left out, as the pass does. */
 export function loadTables(dir = TABLE_DIR) {

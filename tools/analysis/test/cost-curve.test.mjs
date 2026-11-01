@@ -33,7 +33,7 @@ function recipe(id, { ins = [], fins = [], outs = ['gtceu:mv_machine_hull'], eut
   };
 }
 
-test('scaledCount rounds to the nearest count, half up, without float noise, and caps at an int', () => {
+test('scaledCount without a key rounds half up, without float noise, and caps at an int', () => {
   assert.equal(rule.scaledCount(10, 1.1), 11);
   assert.equal(rule.scaledCount(10, 1.15), 12, '11.499999999999998 in doubles is 11.5');
   assert.equal(rule.scaledCount(3, 2.5), 8);
@@ -43,14 +43,23 @@ test('scaledCount rounds to the nearest count, half up, without float noise, and
   assert.equal(rule.scaledCount(2e9, 5), 2147483647);
 });
 
-test('scaledCount has no cliff at the first factor above 1: a count moves only when its own step is reached, and never shrinks', () => {
-  assert.equal(rule.scaledCount(1, 1.001), 1);
-  assert.equal(rule.scaledCount(1, 1.49), 1);
-  assert.equal(rule.scaledCount(1, 1.5), 2);
-  assert.equal(rule.scaledCount(2, 1.24), 2);
-  assert.equal(rule.scaledCount(2, 1.25), 3);
-  assert.equal(rule.scaledCount(144, 1.001), 144);
-  for (const n of [1, 2, 3, 5, 16, 64, 144, 1000]) for (const f of [1, 1.001, 1.3, 2, 7.77]) assert.ok(rule.scaledCount(n, f) >= n, `${n} x ${f}`);
+test('scaledCount dithers by key: exact at whole products, never below n, monotone in f, unbiased over keys, no cliff at the first factor above 1', () => {
+  const keys = Array.from({ length: 4000 }, (_, i) => `x:item_${i}`);
+  for (const k of keys.slice(0, 50)) {
+    assert.equal(rule.scaledCount(3, 2, k), 6, 'a whole product needs no dither');
+    assert.equal(rule.scaledCount(5, 1, k), 5);
+    let last = 0;
+    for (let f = 1; f <= 4; f += 0.01) {
+      const m = rule.scaledCount(2, f, k);
+      assert.ok(m >= last && m >= 2 && m <= Math.ceil(2 * f), `${k} f=${f}`);
+      last = m;
+    }
+    assert.equal(rule.scaledCount(2, 1.3, k), rule.scaledCount(2, 1.3, k), 'same key, same result');
+  }
+  const mean = (n, f) => keys.reduce((s, k) => s + rule.scaledCount(n, f, k), 0) / keys.length;
+  assert.ok(Math.abs(mean(1, 1.3) - 1.3) < 0.04, `a count of 1 at 1.3 averages ${mean(1, 1.3)}`);
+  assert.ok(Math.abs(mean(3, 1.2) - 3.6) < 0.06, `a count of 3 at 1.2 averages ${mean(3, 1.2)}`);
+  assert.ok(Math.abs(mean(1, 1.001) - 1.001) < 0.01, 'a count of 1 at 1.001 hardly moves (ceil made it 2)');
 });
 
 test('tierOfEut gives the lowest tier whose voltage covers the EU/t', () => {
@@ -74,12 +83,12 @@ test('scaleRecipe changes consumed inputs only: amounts of items and fluids, nev
     fins: [fluidIn('gtceu:water', 1000), fluidIn('gtceu:lube', 100, { chance: 0 })],
     outs: ['gtceu:mv_machine_hull'],
   });
-  const res = plain(rule.scaleRecipe(plain(r.json), 2.5, 3));
+  const res = plain(rule.scaleRecipe(plain(r.json), 3, 3));
   assert.equal(res.changed, true);
   assert.equal(res.items, 2);
   assert.equal(res.fluids, 1);
   const ins = res.json.inputs.item;
-  assert.equal(ins[0].content.count, 8);
+  assert.equal(ins[0].content.count, 9);
   assert.equal(ins[1].content.count, 2, 'a catalyst (chance 0) stays');
   assert.equal(ins[2].content.count, 4, 'a partial chance stays');
   assert.deepEqual(ins[3], r.json.inputs.item[3], 'a programmed circuit stays');
@@ -175,8 +184,8 @@ test('an enabled committed table applies exactly its committed factors', () => {
     const hull = recipe(`gtceu:assembler/${t.era}_hull`, { ins: [sizedIn('x:plate', 3)], fins: [fluidIn('gtceu:water', 1000)], outs: [`gtceu:${t.era}_machine_hull`] });
     const res = applyToDump(mkDump({ recipes: [hull] }), tables);
     const j = res.recipes.get(hull.id).json;
-    assert.equal(j.inputs.item[0].content.count, rule.scaledCount(3, t.item), t.era);
-    assert.equal(j.inputs.fluid[0].content.amount, rule.scaledCount(1000, t.fluid), t.era);
+    assert.equal(j.inputs.item[0].content.count, rule.scaledCount(3, t.item, 'x:plate'), t.era);
+    assert.equal(j.inputs.fluid[0].content.amount, rule.scaledCount(1000, t.fluid, 'gtceu:water'), t.era);
   }
   for (const t of tables.filter((x) => !x.enabled)) {
     const hull = recipe(`gtceu:assembler/${t.era}_hull`, { ins: [sizedIn('x:plate', 3)], outs: [`gtceu:${t.era}_machine_hull`] });
@@ -184,15 +193,15 @@ test('an enabled committed table applies exactly its committed factors', () => {
   }
 });
 
-test('an era with a factor above 1 changes exactly the selected recipes, to round(n x f)', () => {
+test('an era with a factor above 1 changes exactly the selected recipes, to the dithered n x f', () => {
   const { tables } = loadTables(TABLE_DIR);
   const hull = recipe('gtceu:assembler/mv_hull', { ins: [sizedIn('x:plate', 3)], fins: [fluidIn('gtceu:water', 1000)], outs: ['gtceu:mv_machine_hull'] });
   const unrelated = recipe('gtceu:assembler/unrelated', { ins: [sizedIn('x:plate', 3)], outs: ['x:widget'], eut: 30 });
   const dump = mkDump({ recipes: [hull, unrelated] });
-  const res = applyToDump(dump, withFactors(tables, { mv: { item: 2.5, fluid: 3 } }));
+  const res = applyToDump(dump, withFactors(tables, { mv: { item: 3, fluid: 3 } }));
   assert.deepEqual([...res.changed.keys()], [hull.id]);
   const j = res.recipes.get(hull.id).json;
-  assert.equal(j.inputs.item[0].content.count, 8);
+  assert.equal(j.inputs.item[0].content.count, 9);
   assert.equal(j.inputs.fluid[0].content.amount, 3000);
   assert.equal(res.recipes.get(unrelated.id), dump.recipes.get(unrelated.id));
   assert.equal(res.byEra.mv.changed, 1);
@@ -246,12 +255,12 @@ test('the static stand-in runs the pack pass: originals and added recipes end up
     for (const [era, id, n] of [['mv', 'gtceu:assembler/mv_hull_gtm', 4], ['hv', 'gtceu:assembler/hv_hull_gtm', 5]]) {
       const t = eraOn(era);
       const got = committed.originalsChanged.get(id);
-      if (t) assert.equal(got.inputs.item[0].content.count, rule.scaledCount(n, t.item), id);
+      if (t) assert.equal(got.inputs.item[0].content.count, rule.scaledCount(n, t.item, 'x:plate'), id);
       else assert.equal(got, undefined, id);
     }
 
     // two eras on: the pass and the Node rule agree, recipe by recipe
-    const on = withFactors(real, { mv: { item: 2.5, fluid: 3 }, hv: { item: 4, fluid: 4 } });
+    const on = withFactors(real, { mv: { item: 3, fluid: 3 }, hv: { item: 4, fluid: 4 } });
     writeTables(on);
     const originals = mkOriginals();
     const run = runPackScripts(pack, { originals });
@@ -264,7 +273,7 @@ test('the static stand-in runs the pack pass: originals and added recipes end up
       assert.deepEqual(plain(r.j), want, r.i);
     }
     const ours = run.docs.recipes.recipes.find((r) => r.i.endsWith('mv_hull_ours')).j;
-    assert.equal(ours.inputs.item[0].content.count, 8);
+    assert.equal(ours.inputs.item[0].content.count, 9);
     assert.equal(ours.inputs.item[1].content.count, 3, 'the plain item is wrapped and scaled');
     assert.equal(ours.inputs.item[2].chance, 0, 'the mold stays a catalyst');
     assert.equal(ours.inputs.fluid[0].content.amount, 3000);
@@ -274,7 +283,7 @@ test('the static stand-in runs the pack pass: originals and added recipes end up
     assert.deepEqual([...run.originalsChanged.keys()].sort(), [...expectOrig.changed.keys()].sort());
     assert.deepEqual([...run.originalsChanged.keys()].sort(), ['gtceu:assembler/hv_hull_gtm', 'gtceu:assembler/mv_hull_gtm']);
     for (const [id, j] of run.originalsChanged) assert.deepEqual(plain(j), expectOrig.changed.get(id), id);
-    assert.equal(run.originalsChanged.get('gtceu:assembler/mv_hull_gtm').inputs.item[0].content.count, 10);
+    assert.equal(run.originalsChanged.get('gtceu:assembler/mv_hull_gtm').inputs.item[0].content.count, 12);
     assert.equal(run.originalsChanged.get('gtceu:assembler/hv_hull_gtm').inputs.item[0].content.count, 20);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
