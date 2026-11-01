@@ -107,7 +107,7 @@ function Get-ItemSpec {
     $hue = 250 + ($salt % 50)
     foreach ($f in $FamilyHue) { if ($Name -match $f[0]) { $hue = $f[1] + ($salt % 18) - 9; break } }
     if ($Name -like 'maxplus_*' -or $Name -eq 'horizon_processor') { $hue = 262 + ($salt % 22) }
-    $lum = 0.30 + (($salt >> 3) % 9) / 100.0
+    $lum = 0.30 + (($salt -shr 3) % 9) / 100.0
     $body = ConvertFrom-EraHsl $hue 0.46 $lum
     $accent = ConvertFrom-EraHsl (196 + ($salt % 22)) 0.70 0.60
     if (($salt % 3) -eq 0) { $accent = ConvertFrom-EraHsl (28 + ($salt % 22)) 0.88 0.58 }
