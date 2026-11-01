@@ -52,9 +52,9 @@
       items: ['grindless:pmn_pt_boule'], fluids: [], outs: ['4x grindless:pmn_pt_plate'], eut: LOW, duration: 400 },
     { type: 'assembler', name: 'horizon_actuator_stack', circuit: 25,
       items: ['grindless:electroded_pmn_stack'], fluids: [['gtceu:epoxy', 144]], outs: ['grindless:horizon_actuator_stack'], eut: LOW, duration: 300 },
-    { type: 'assembler', name: 'horizon_machine_casing', circuit: 26,
-      items: ['gtceu:max_machine_casing', '4x grindless:horizon_compressed_plate', 'grindless:insulated_kerr_wire', '2x gtceu:horizon_strand_single_wire', 'grindless:chain_lamina_stack'],
-      fluids: [['gtceu:epoxy', 144], ['gtceu:soldering_alloy', 144]], outs: ['grindless:horizon_machine_casing'], eut: VA_MAX, duration: 200 }
+    { type: 'assembler', name: 'horizon_machine_casing', circuit: 0,
+      items: ['gtceu:max_machine_casing', '4x grindless:horizon_compressed_plate', 'grindless:insulated_kerr_wire', '2x gtceu:horizon_strand_single_wire', 'grindless:chain_lamina_stack', 'grindless:max_sensor'],
+      fluids: [['gtceu:epoxy', 144]], outs: ['grindless:horizon_machine_casing'], eut: VA_MAX, duration: 200 }
   ]
 
   // Rows on the older machines. items/outs: 'Nx id', or [stack, chance in 1/10000]; kept: not consumed; charge: not-consumed fluid;
