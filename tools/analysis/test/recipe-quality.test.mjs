@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { compareBaseline, depthMap, evaluate } from '../lib/recipe_quality.mjs';
+import { compareBaseline, depthMap, evaluate, tierComponent } from '../lib/recipe_quality.mjs';
 import { factsFromPack } from '../recipe-quality.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -67,6 +67,17 @@ test('a trivial crafting-table recipe at EV+ is soso unless it is a same-stem co
   assert.ok(codes(soso, { controllers: [] }).includes('X-SOSO'));
   const pack = forTier('iv', { outputs: ['grindless:iv_widget'], items: [it('grindless:iv_widget_block')] });
   assert.ok(!codes(pack, { controllers: [] }).includes('X-SOSO'));
+});
+
+test('MAX+ components are tier 15: a controller with 8 of them from 3 families passes T-COUNT, MAX components alone do not', () => {
+  assert.deepEqual(tierComponent('grindless:maxplus_electric_motor'), { tier: 15, family: 'electric_motor' });
+  assert.equal(tierComponent('grindless:maxplus_unknown'), null);
+  const n = (id, k) => ({ id, domain: true, n: k });
+  const family = ['conveyor_module', 'robot_arm', 'field_generator', 'sensor'];
+  const ctrl = (items) => forTier('maxplus', { form: 'assembly_line', research: 'station', items });
+  const tcount = (r) => evaluate(facts([r]), { ...cfg, eraTier: { ...cfg.eraTier, maxplus: 15 }, extraControllers: [] }).filter((f) => f.code === 'T-COUNT').length;
+  assert.equal(tcount(ctrl(family.map((f) => n(`grindless:maxplus_${f}`, 2)))), 0);
+  assert.equal(tcount(ctrl(family.map((f) => n(`grindless:max_${f}`, 2)))), 1);
 });
 
 test('baseline ratchet: fresh violations and stale entries both fail', () => {

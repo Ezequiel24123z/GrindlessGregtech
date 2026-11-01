@@ -71,7 +71,7 @@
   MS.probeRecipe = PROBE
 
   var CONTROLLER = { machine: 'gtceu:hills_slingshot', research: 'grindless:ig_relay_probe', casing: 'grindless:horizon_machine_casing',
-    comps: ['2x grindless:max_conveyor_module', '2x grindless:max_robot_arm', '2x grindless:max_field_generator', '2x grindless:max_sensor'],
+    comps: ['2x grindless:maxplus_conveyor_module', '2x grindless:maxplus_robot_arm', '2x grindless:maxplus_field_generator', '2x grindless:maxplus_sensor'],
     plates: ['16x grindless:slingshot_coil_casing', '4x grindless:horizon_compressed_plate'] }
 
   function missingIds(ids, fluids) {
