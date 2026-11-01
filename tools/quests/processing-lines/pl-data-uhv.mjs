@@ -146,7 +146,7 @@ const data = {
           ['tw1', mach('gtceu:zblan_draw_tower'), 'ZBLAN Draw Tower', 'ours', { desc: 'Melts the fluoride batch into a preform in orbit.' }],
           ['pre', I('grindless:zblan_preform'), 'ZBLAN Preform'],
           ['draw', mach('gtceu:zblan_draw_tower'), 'ZBLAN Draw Tower', 'ours', { desc: 'Pulls fibre in microgravity, where the glass does not crystallise.' }],
-          ['zbf', I('grindless:zblan_fibre'), 'ZBLAN Fibre'],
+          ['zbf', I('grindless:zblan_fibre'), 'ZBLAN Fibre', 'product', { keepShort: 'the zirconium fluoride is bought pure from the orbital furnace; a purification stage would be padding' }],
         ], 'the stellar neighbourhood chart; fibre lasers and the cable of the next tier'),
       ],
     },
@@ -225,7 +225,7 @@ const data = {
         n('algc', 10, 7, I('grindless:algae_culture'), 'Algae Culture', { kind: 'raw', sub: 'With agar, from the closed ecosystem' }),
         n('alg', 10, 5, I('grindless:engineered_far_red_algae'), 'Engineered Algae', { kind: 'product', from: ['cass', 'algc'] }),
         n('abr', 12.5, 5, mach('gtceu:algae_bioreactor'), 'Algae Bioreactor', { kind: 'ours', from: ['alg'], desc: 'Feeds the algae carbon dioxide and water in the red light.' }),
-        n('biom', 15, 5, F('gtceu:biomass'), 'Biomass', { kind: 'product', from: ['abr'], end: 'biorefinery fuel, and oxygen for the base\'s air' }),
+        n('biom', 15, 5, F('gtceu:biomass'), 'Biomass', { kind: 'product', role: 'resource', from: ['abr'], end: 'biorefinery fuel, and oxygen for the base\'s air' }),
         // 15 melanin flare shielding
         ...chain(-4.5, [
           ['clado', I('grindless:cladosporium_culture'), 'Cladosporium Culture', 'raw'],
@@ -234,7 +234,7 @@ const data = {
           ['mel', I('grindless:melanin_extract'), 'Melanin Extract'],
           ['comp', I('grindless:melanin_chitosan_composite'), 'Melanin-Chitosan Composite'],
           ['panel', I('grindless:flare_shield_panel'), 'Flare Shield Panel'],
-          ['pbc', I('grindless:proxima_base_casing'), 'Proxima Base Casing'],
+          ['pbc', I('grindless:proxima_base_casing'), 'Proxima Base Casing', 'product', { role: 'infrastructure' }],
         ], 'the base on Proxima b', 9.5),
         // 17 biocement
         n('tail2', 14.5, -7, I('grindless:leached_tailings'), 'Leached Tailings', { kind: 'raw', sub: 'From the biomining heap' }),
@@ -272,7 +272,7 @@ const data = {
           ['hwp1', mach('gtceu:heavy_water_plant'), 'Heavy Water Plant', 'ours', { desc: 'Exchanges deuterium with hydrogen sulfide.' }],
           ['hwc', F('gtceu:heavy_water_concentrate'), 'Heavy Water Concentrate'],
           ['hwp2', mach('gtceu:heavy_water_plant'), 'Heavy Water Plant', 'ours', { desc: 'Finishes the concentrate.' }],
-          ['hw', F('gtceu:heavy_water'), 'Heavy Water'],
+          ['hw', F('gtceu:heavy_water'), 'Heavy Water', 'product', { role: 'resource' }],
         ], 'the fusion fuel line'),
       ],
     },
@@ -296,7 +296,7 @@ const data = {
           ['mg', I('gtceu:magnesium_dust'), 'Magnesium', 'raw', { sub: 'With boron' }],
           ['mgb2', I('gtceu:magnesium_diboride_dust'), 'MgB2 Powder'],
           ['pit', mach('gtceu:powder_in_tube_line'), 'Powder-in-Tube Line', 'ours', { desc: 'Packs the powder in an iron tube and draws it to wire.' }],
-          ['wire', I('gtceu:magnesium_diboride_single_wire'), 'MgB2 Wire'],
+          ['wire', I('gtceu:magnesium_diboride_single_wire'), 'MgB2 Wire', 'product', { role: 'infrastructure' }],
         ], 'cables and the field generators'),
       ],
     },
@@ -308,7 +308,7 @@ const data = {
           ['bz', I('gtceu:diaminoresorcinol_dust'), 'Diaminoresorcinol', 'raw', { sub: 'With terephthalic acid' }],
           ['dope', F('gtceu:pbo_dope'), 'PBO Dope'],
           ['pbop', mach('gtceu:pbo_plant'), 'PBO Plant', 'ours', { desc: 'Spins the dope in polyphosphoric acid, which is recycled.' }],
-          ['fib', I('grindless:pbo_fibre'), 'PBO Fibre'],
+          ['fib', I('grindless:pbo_fibre'), 'PBO Fibre', 'product', { role: 'infrastructure' }],
         ], 'the tether ribbon'),
         // 25 HDEHP extractant
         ...chain(2, [
@@ -326,7 +326,7 @@ const data = {
           ['sps2', mach('gtceu:spark_plasma_sinterer'), 'Spark Plasma Sinterer', 'ours', { desc: 'Sinters four tiles and a tantalum carbide liner into a nozzle.' }],
           ['noz', I('grindless:uhtc_nozzle'), 'UHTC Nozzle'],
           ['thk', mach('gtceu:thruster_works'), 'Thruster Works', 'ours', { desc: 'Mounts the nozzle with an antimatter pellet, power modules and a lifted stage.' }],
-          ['ican', I('grindless:ican_rocket_motor'), 'ICAN Rocket Motor'],
+          ['ican', I('grindless:ican_rocket_motor'), 'ICAN Rocket Motor', 'product', { role: 'travel' }],
         ], 'the probe stages'),
         n('pellet', 10, 9, I('grindless:ican_pellet'), 'ICAN Pellet', { kind: 'raw', sub: 'From the antimatter store' }),
         n('sicm', 10, 7.5, I('grindless:sic_power_module'), 'SiC Power Module', { kind: 'raw', sub: 'Two; from the silicon carbide line' }),

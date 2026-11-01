@@ -203,8 +203,8 @@ const chapter = {
         n('kwater', 30, 1.5, F('minecraft:water'), 'Water', { kind: 'by', from: ['anneal'], end: 'the network' }),
         n('noble', 30, 3, F('gtceu:kuiper_noble_gas'), 'Kuiper Noble Gas', { kind: 'product', from: ['anneal'], sub: 'Split in the cryogenic plant' }),
         n('kco', 30, 4.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'by', from: ['anneal'], end: 'the syngas plant' }),
-        n('kr', 32.5, 2.25, F('gtceu:krypton'), 'Krypton', { kind: 'product', from: ['noble'], end: 'the Hall thruster' }),
-        n('xe', 32.5, 3.75, F('gtceu:xenon'), 'Xenon', { kind: 'product', from: ['noble'], end: 'the ion thruster' }),
+        n('kr', 32.5, 2.25, F('gtceu:krypton'), 'Krypton', { kind: 'product', role: 'travel', from: ['noble'], end: 'the Hall thruster' }),
+        n('xe', 32.5, 3.75, F('gtceu:xenon'), 'Xenon', { kind: 'product', role: 'travel', from: ['noble'], end: 'the ion thruster' }),
         // high-purity germanium
         L('lgedust', 0, 9, 'pl_luv:gedust'),
         n('zrt', 2.5, 9, M('gtceu:zone_refining_tower'), 'Zone Refining Tower', {
@@ -222,7 +222,7 @@ const chapter = {
         n('bnntd', 7.5, 12, I('grindless:bnnt_dust'), 'Nanotube Dust', { kind: 'product', from: ['hbn'], sub: 'Grown in hydrogen' }),
         n('yarn', 10, 12, I('grindless:bnnt_yarn'), 'BNNT Yarn', { kind: 'product', from: ['bnntd'], sub: 'Spun five to one; the boron nitride comes back' }),
         n('winder', 12.5, 12, M('gtceu:cryotank_winder'), 'Cryotank Winder', { kind: 'ours', from: ['yarn'], desc: 'Winds the yarn round an aerogel tank with carbon nanotube yarn and epoxy.' }),
-        n('tank', 15, 12, I('grindless:bnnt_fuel_tank'), 'BNNT Fuel Tank', { kind: 'product', from: ['winder'], end: 'stored: no recipe uses it yet' }),
+        n('tank', 15, 12, I('grindless:bnnt_fuel_tank'), 'BNNT Fuel Tank', { kind: 'product', role: 'travel', from: ['winder'], end: 'built into the Pluto rocket' }),
         // the light sail
         L('lsw', 0, 15, 'pl_mv:wafer'),
         n('wsf', 2.5, 15, M('gtceu:wake_shield_facility'), 'Wake Shield Facility', {
@@ -261,7 +261,7 @@ const chapter = {
           kind: 'ours', from: ['chip', 'nv', 'micro', 'nw'], desc: 'Bonds a photonic chip, a diamond sensor, an americium source and a neutronium wafer into one starchip.',
         }),
         n('schip', 25, 9.75, I('grindless:starchip'), 'Starchip', { kind: 'product', from: ['sfab'] }),
-        n('relay', 27.5, 8.25, I('grindless:relay_seed'), 'Relay Seed', { kind: 'product', from: ['schip'], end: 'launched from the Moon to hold a pulsar for the warp gate' }),
+        n('relay', 27.5, 8.25, I('grindless:relay_seed'), 'Relay Seed', { kind: 'product', role: 'travel', from: ['schip'], end: 'launched from the Moon to hold a pulsar for the warp gate' }),
         n('sailc', 27.5, 10.5, I('grindless:sailcraft'), 'Sailcraft', { kind: 'product', from: ['schip', 'lsail'] }),
         n('pprobe', 27.5, 13.5, I('grindless:precursor_probe'), 'Precursor Probe', { kind: 'product', from: ['rtg', 'pod', 'hpge'], sub: 'Built with a UV sensor and a printed frame' }),
         n('helio', 30, 13.5, I('grindless:heliopause_data'), 'Heliopause Data', { kind: 'product', from: ['pprobe', 'ican'], sub: 'Six thousand ticks at Pluto\'s orbit' }),
