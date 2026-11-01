@@ -200,6 +200,12 @@ test('skip route drops: an ore block of a material with no vein, a circular rout
     rec('clear', 'minecraft:crafting_shaped', ['gtceu:stained'], 'gtceu:plate'),
   ]);
   assert.ok(skipRoute(l, 'gtceu:plate', open));
+  // glass: the clear-glass tweak takes a shard that only breaking glass gives
+  const shard = buildFacts([
+    rec('own', 'gtceu:mine', ['gtceu:ore'], 'minecraft:glass'),
+    rec('clear', 'minecraft:crafting_shaped', ['quark:clear_shard'], 'minecraft:glass'),
+  ]);
+  assert.equal(skipRoute(mkLine('steam', { steps: 4, products: [{ res: 'minecraft:glass' }] }), 'minecraft:glass', shard), null);
   // parallel source: the earlier line makes the key at an inner node, not as its end product
   const par = buildFacts([rec('b', 'gtceu:other', ['gtceu:sand'], 'gtceu:plate')]);
   const earlier = [{ products: [{ res: 'gtceu:ingot' }], inner: new Set(['gtceu:plate']), machines: new Set(['gtceu:other']) }];

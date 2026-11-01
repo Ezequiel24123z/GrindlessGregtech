@@ -412,6 +412,10 @@ export function ownedTypes(line, facts) {
   return line.owned;
 }
 
+// Items that exist only by breaking or tweaking the key, through a loot drop the recipe graph cannot see (Quark's glass shards come
+// from breaking glass; the clear-glass tweak turns them back), so a route through one is circular.
+const DERIVED_FROM = { 'minecraft:glass': new Set(['quark:clear_shard', 'quark:dirty_shard']) };
+
 // An item of a material that has no vein (`until: never`): its listed forms, or any ore block of it (`material:<id>` entries; the
 // groups list the crushed and purified forms, not the stone-variant ore blocks).
 const STONES = '(?:tuff|deepslate|netherrack|end_stone|endstone|blackstone|basalt|granite|red_granite|diorite|andesite|marble|dripstone|sand|red_sand|gravel|stone)';
@@ -454,7 +458,7 @@ export function skipRoute(line, key, facts, eraCtx = null, x = {}) {
       if (x.never && [...clo.keys()].some((k) => isNoVein(k, x.never))) continue;
       if ([...clo.keys()].some((k) => mat && materialOf(k) === mat)) continue;
       // a circular route: it needs the key itself (a coloured or tweaked variant is made from the key), so it is no shortcut to it
-      if (clo.has(key)) continue;
+      if (clo.has(key) || [...(DERIVED_FROM[key] || [])].some((k) => clo.has(k))) continue;
       // a parallel source: an earlier counted line makes the key at any of its nodes, with this recipe's machine or an owned recipe
       if ((x.earlier || []).some((o) => (o.products.some((p) => p.res === key) || o.inner?.has(key)) && (o.machines.has(r.type) || ownedTypes(o, facts).ids.has(r.id)))) continue;
       if (foldReplaces(line, r, key, facts)) continue;
