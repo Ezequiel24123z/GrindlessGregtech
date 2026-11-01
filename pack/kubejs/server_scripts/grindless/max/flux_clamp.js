@@ -43,8 +43,8 @@
   var GTM = [
     // L54 step 6: the cold pump set in its frame with a field coil winding and the tungsten steel casing
     { type: 'assembler', name: 'hts_flux_pump', circuit: 17,
-      items: ['grindless:cold_flux_pump', '2x gtceu:tungsten_steel_plate', '4x gtceu:tungsten_steel_rod', '2x grindless:chain_field_coil', '2x #gtceu:circuits/max'],
-      fluids: [['gtceu:epoxy', 144], [LINE_FLUID, 250]], outs: ['grindless:hts_flux_pump'], eut: LOW, duration: 600 },
+      items: ['grindless:cold_flux_pump', '2x gtceu:tungsten_steel_plate', '4x gtceu:tungsten_steel_rod', '2x gtceu:tungsten_steel_ring', 'gtceu:tungsten_steel_gear', 'gtceu:tungsten_steel_frame', '2x grindless:chain_field_coil', '2x #gtceu:circuits/max'],
+      fluids: [['gtceu:epoxy', 144]], outs: ['grindless:hts_flux_pump'], eut: LOW, duration: 600 },
     // the clamp casing: made at home from OpV parts, so the clamp can be built (no input comes from the clamp's line)
     { type: 'assembler', name: 'clamp_coil_casing', circuit: 18,
       items: ['gtceu:opv_machine_casing', '4x gtceu:tungsten_steel_rod', '2x grindless:chain_field_coil', '2x #gtceu:circuits/max'],
