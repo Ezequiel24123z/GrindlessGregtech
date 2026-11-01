@@ -14,7 +14,7 @@
   var seen = {}
   function guard(key, fn) {
     try { fn(); console.info('[xp-s0] ' + key + ' registered') } catch (e) {
-      if (!seen[key]) { seen[key] = true; console.error('[xp-s0] ' + key + ' failed: ' + e) }
+      if (!seen[key]) { seen[key] = true; console.warn('[xp-s0] ' + key + ' failed: ' + e) }
     }
   }
   if (!ON) return
