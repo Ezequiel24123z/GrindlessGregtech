@@ -202,7 +202,7 @@ export default {
         n('meth', 10, 1.5, F('gtceu:methane'), 'Methane', { kind: 'product', from: ['bay'], extends: 'pl_zpm:qubits', end: 'the carbon and qubit line', sub: 'From a lake sample' }),
         n('ref', 12.5, 0, M('gtceu:tholin_reformer'), 'Tholin Reformer', { kind: 'ours', from: ['tholin'], desc: 'Hydrolyses tholin into nitriles, then builds fibres and diamines from them.' }),
         n('nit', 15, 0, F('gtceu:titan_nitriles'), 'Titan Nitriles', { kind: 'product', from: ['ref'] }),
-        n('zn2', 15, -4.5, I('gtceu:zinc_dust'), 'Zinc', { kind: 'raw', sub: 'A catalyst: it stays' }),
+        n('zn2', 17.5, -4.5, I('gtceu:zinc_dust'), 'Zinc', { kind: 'raw', sub: 'A catalyst: it stays' }),
         n('rice2', 10, -3, F('gtceu:ring_ice'), 'Ring Ice', { kind: 'raw', sub: 'From the Saturn ring harvester' }),
         n('rdist', 12.5, -3, M('gtceu:lv_distillery'), 'Distillery', { kind: 'machine', from: ['rice2'], desc: 'Melts the ring ice into water and ammonia.' }),
         n('amm', 15, -1.5, F('gtceu:ammonia'), 'Ammonia', { kind: 'product', from: ['rdist'], sub: 'From the rings: the LV plant is the other source' }),
