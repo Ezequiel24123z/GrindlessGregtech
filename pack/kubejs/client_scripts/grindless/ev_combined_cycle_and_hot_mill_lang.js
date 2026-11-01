@@ -23,17 +23,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.steam_outputs.no_voiding', 'The steam must leave through its hatch: turn fluid voiding off')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.combined_cycle_plant', 'Planta de ciclo combinado')
-    add('gtceu.combined_cycle', 'Ciclo combinado')
-    add('block.gtceu.hot_strip_mill', 'Tren de laminación en caliente')
-    add('gtceu.hot_rolling', 'Laminación en caliente')
-
-    add('grindless.machine.combined_cycle_plant.tooltip.0', '§7Turbina de gas con caldera de recuperación: energía y vapor.')
-
-    add('grindless.machine.hot_strip_mill.tooltip.0', '§7Lamina lingotes calientes directamente en placas, varillas o láminas.')
-
-    add('grindless.steam_outputs.no_voiding', 'El vapor tiene que salir por su escotilla: desactiva el vaciado de fluidos')
-})

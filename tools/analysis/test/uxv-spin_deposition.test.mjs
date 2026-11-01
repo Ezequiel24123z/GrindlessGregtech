@@ -28,11 +28,11 @@ test('the stand-in runs the UXV-A4 scripts without errors, nothing skipped, no l
   assert.equal(SD.recipes.length, 12 + 4 + 2 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 2 + 1 + 1); // XP-A1 appended MTJ c27 (insulated_kerr_wire) and XP-A3 MTJ c32 (spin_interconnect_wafer); MX-S2 appended MTJ c26 (metallised_metasurface) and PLD c6 (vo2_on_sapphire); MX-S1 appended MTJ c24-25 (coated_test_mass, coated_bench_optics); MX-S3 one PLD row (c7 thick_pump_tape); MAX-E1 appended MTJ c19 (metallised_photocell) and c21 (iridium_coated_shell); MAX-D2 appended MTJ c17-18 (gold_coated_dish, nb_alox_nb_trilayer); MAX-A4 one PLD row (c5 thick_film_fcl_tape); MAX-B3 appended MTJ c22-23 (ar_coated_glass_cell, electroded_aod); MAX-A3 appended MTJ c16 (metallised_diamond); MAX-W one PLD row (c4 thick_rebco_tape); MAX-A1 appended MTJ c13-14 (coated_metalens, nb_coplanar_film); MAX-H1 appended MTJ c20 mram_stack_sic (line 38); OpV-A2 appended MTJ c5-8; OpV-D1 two more (c9 ta_clad_ir_rod, c10 neg_coated_chamber); OpV-B1 two more (c11 tetron_bumps, c12 wc_sic_multilayer)
 });
 
-test('5 items registered by the startup file, named in en_us and es_es', () => {
+test('5 items registered by the startup file, named in en_us', () => {
   for (const n of ITEMS) {
     const it = run.registry.items.get(`grindless:${n}`);
     assert.ok(it && /uxv[\\/]spin_deposition\.js$/.test(String(it.file)), `${n} registered by spin_deposition.js`);
-    for (const lang of ['en_us', 'es_es']) {
+    for (const lang of ['en_us']) {
       assert.ok(run.lang[lang][`item.grindless.${n}`], `${lang} names ${n}`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.0`], `${lang} tooltip ${n}.0`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.1`], `${lang} tooltip ${n}.1`);
@@ -153,7 +153,5 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages and r
   }
   keys.push('gtceu.mtj_sputtering', 'gtceu.pulsed_laser_deposition');
   for (const r of SD.recipes.filter((x) => x.dataKey)) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => /spin_deposition|mtj_sputt|oxide_pld/.test(k)).sort(),
-    Object.keys(run.lang.es_es).filter((k) => /spin_deposition|mtj_sputt|oxide_pld/.test(k)).sort());
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
 });

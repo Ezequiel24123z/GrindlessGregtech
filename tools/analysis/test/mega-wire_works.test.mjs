@@ -1,6 +1,6 @@
 // MEGA-1, the LV Wire Works (startup_scripts/grindless/lv/mega_wire_works.js, server_scripts/grindless/lv/mega_wire_works.js): the
 // pattern through the real helper, the two modes, the modifier chain, the parallel figure at two hatch tiers (the formulas of
-// lib/mega.js), the controller recipe and the names in both languages.
+// lib/mega.js), the controller recipe and the names in en_us.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -156,7 +156,7 @@ test('controller recipe: 4 LV wiremills, 4 LV benders, 4 LV circuits, steel plat
   assert.deepEqual(plain(h.errors), []);
 });
 
-test('the integrator stamped the priority line; the lang file names the machine and its tooltips in en_us and es_es', () => {
+test('the integrator stamped the priority line; the lang file names the machine and its tooltips in en_us', () => {
   for (const [kind, file] of [['startup_scripts', 'lv/mega_wire_works.js'], ['server_scripts', 'lv/mega_wire_works.js']]) {
     assert.ok(/^\/\/ priority: -?\d+\r?\n/.test(read(kind, file)), file);
   }
@@ -166,7 +166,7 @@ test('the integrator stamped the priority line; the lang file names the machine 
     ClientEvents: { lang: (code, cb) => cb({ add: (ns, key, value) => { (store[code] = store[code] || {})[key] = value; } }) },
     console,
   });
-  for (const code of ['en_us', 'es_es']) {
+  for (const code of ['en_us']) {
     assert.ok(store[code], code);
     for (const key of ['block.gtceu.wire_works', 'grindless.machine.wire_works.tooltip.0']) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);

@@ -5,7 +5,7 @@
 //   gtceu.recipe.grindless_<type>.<recipe>   the EMI line of each keyed row of the package: the blender's and the furnace's rows and the T8, T9
 //                                            and T10 steps on machines whose type carries a data key
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. English only: es_es copies en_us.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. English only.
 (function () {
     var T = {
         blender: 'Eight plasmas, 1,000 mB each (stellar, lifted, filtered, very-massive-star, p-process, jet, hot flow) and kerr condensate, blended into 1,000 mB of horizon crystal slurry at V[MAX] x 64 A.',
@@ -43,11 +43,9 @@
         ['gtceu.recipe.grindless_beuv_lithography.horizon_controller_crystal', T.beuv]
     ]
 
-    ;['en_us', 'es_es'].forEach(function (lang) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()

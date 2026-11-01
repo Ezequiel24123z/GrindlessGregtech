@@ -1,5 +1,5 @@
-// TP-T-d: the UHV and UEV multiblock tooltips (docs/quality/recipes.md, Multiblock tooltips): at most 4 entries, every key resolves in both
-// languages, and the facts that left the tooltips live on the controller's EMI info page, whose keys also resolve in both languages.
+// TP-T-d: the UHV and UEV multiblock tooltips (docs/quality/recipes.md, Multiblock tooltips): at most 4 entries, every key resolves in en_us,
+// and the facts that left the tooltips live on the controller's EMI info page, whose keys also resolve in en_us.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -41,26 +41,26 @@ test('every listed controller is registered with at most 4 tooltip entries', () 
   }
 });
 
-test('every tooltip key and every recipe type name resolves in en_us and es_es', () => {
+test('every tooltip key and every recipe type name resolves in en_us', () => {
   for (const name of CONTROLLERS) {
     const m = machines.get(name);
     for (const key of (m.tooltips || []).filter(Boolean)) {
-      for (const l of ['en_us', 'es_es']) assert.ok(run.lang[l][key] !== undefined, `${name}: ${key} missing in ${l}`);
+      for (const l of ['en_us']) assert.ok(run.lang[l][key] !== undefined, `${name}: ${key} missing in ${l}`);
     }
     for (const type of [].concat(m.recipeTypes || []).map((t) => String(t).replace(/^gtceu:/, ''))) {
       if (GTM_TYPES.has(type)) continue;
-      for (const l of ['en_us', 'es_es']) assert.ok(run.lang[l][`gtceu.${type}`] !== undefined, `${name}: gtceu.${type} missing in ${l}`);
+      for (const l of ['en_us']) assert.ok(run.lang[l][`gtceu.${type}`] !== undefined, `${name}: gtceu.${type} missing in ${l}`);
     }
   }
 });
 
-test('every controller has an EMI info page whose keys all resolve in en_us and es_es', () => {
+test('every controller has an EMI info page whose keys all resolve in en_us', () => {
   for (const name of CONTROLLERS) {
     const page = pageOf(name);
     assert.ok(page, `${name}: no EMI info page`);
     assert.ok(page.json.text.length > 0, `${name}: empty page`);
     for (const key of page.json.text) {
-      for (const l of ['en_us', 'es_es']) assert.ok(run.lang[l][key] !== undefined, `${name}: page key ${key} (${page.file}) missing in ${l}`);
+      for (const l of ['en_us']) assert.ok(run.lang[l][key] !== undefined, `${name}: page key ${key} (${page.file}) missing in ${l}`);
     }
   }
 });
@@ -69,7 +69,7 @@ test('tooltip.0 is gray and no controller keeps a tooltip key its array does not
   for (const name of CONTROLLERS) {
     const m = machines.get(name);
     const used = new Set((m.tooltips || []).filter(Boolean));
-    for (const l of ['en_us', 'es_es']) {
+    for (const l of ['en_us']) {
       assert.ok(String(run.lang[l][`grindless.machine.${name}.tooltip.0`]).startsWith('§7'), `${name}: tooltip.0 not gray in ${l}`);
       for (const key of Object.keys(run.lang[l])) {
         if (key.startsWith(`grindless.machine.${name}.tooltip.`)) assert.ok(used.has(key), `${name}: ${key} (${l}) is not used by tooltips(...)`);

@@ -21,16 +21,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.coking_battery.tooltip.0', '§7Cokes coal like the coke oven, but keeps the gas.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.steam_blast_furnace', 'Alto horno de vapor')
-    add('block.gtceu.coking_battery', 'Batería de coque con subproductos')
-    add('gtceu.steelmaking', 'Fabricación de acero')
-    add('gtceu.coking', 'Coquización')
-    add('tag.item.grindless.blast_furnace_fluxes', 'Fundentes de alto horno')
-
-    add('grindless.machine.steam_blast_furnace.tooltip.0', '§7Convierte la mena de hierro directamente en acero, cuatro cargas a la vez.')
-
-    add('grindless.machine.coking_battery.tooltip.0', '§7Coquiza el carbón como el horno de coque, pero se queda el gas.')
-})

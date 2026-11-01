@@ -25,21 +25,3 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.naquadria_containment_casing.0', 'A casing of naquadah alloy and tungsten steel, filled with naquadria. It builds the Naquadria Refinery and the Naquadah Fuel Works.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.naquadria_refinery', 'Refinería de naquadria')
-    add('gtceu.naquadria_refining', 'Refinado de naquadria')
-    add('block.gtceu.naquadah_fuel_works', 'Planta de combustible de naquadah')
-    add('gtceu.naquadah_fuel', 'Combustible de naquadah')
-
-    add('grindless.machine.naquadria_refinery.tooltip.0', '§7Refina solución de naquadria impura en una sola torre.')
-
-    add('grindless.machine.naquadah_fuel_works.tooltip.0', '§7Ejecuta todo el ciclo de combustible de naquadah en una planta.')
-
-    add('gtceu.recipe.grindless_naquadria_refining.naquadria', 'Circuito 1: solución impura de naquadria refinada a naquadria; la carga de ácido sulfúrico nunca se gasta')
-    add('gtceu.recipe.grindless_naquadria_refining.naquadria_waste', 'Circuito 2: residuo de naquadria almacenado separado; el ácido sulfúrico vuelve a la carga')
-    add('gtceu.recipe.grindless_naquadah_fuel.fuel_mix', 'Circuito 1: naquadria mezclada con un reemplazo de cerio y neodimio da combustible líquido de naquadah')
-    add('gtceu.recipe.grindless_naquadah_fuel.fuel_depleted', 'Circuito 2: combustible agotado de vuelta a naquadah, europio y xenón')
-    add('emi.grindless.info.naquadria_containment_casing.0', 'Una carcasa de aleación de naquadah y acero de tungsteno, rellena de naquadria. Construye la Refinería de naquadria y la Planta de combustible de naquadah.')
-})

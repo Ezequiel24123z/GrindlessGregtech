@@ -42,13 +42,13 @@ test('the machine is gtceu:membrane_line with the membrane_rolling type and a 5 
   assert.equal(m.dataKey, 'grindless_membrane_rolling');
 });
 
-test('lang keys of the machine, the type and every recipe exist in en_us and es_es', () => {
+test('lang keys of the machine, the type and every recipe exist in en_us', () => {
   const lang = read('client_scripts/grindless/max_membrane_line_lang.js');
   const keys = [...lang.matchAll(/\['([a-z0-9_.]+)', '/g)].map((m) => m[1]);
   for (const k of ['block.gtceu.membrane_line', 'gtceu.membrane_rolling', 'grindless.machine.membrane_line.tooltip.0',
     'emi.grindless.info.membrane_line.0', 'emi.grindless.info.membrane_line.1']) assert.ok(keys.includes(k), k);
   table.recipes.forEach((r) => assert.ok(keys.includes('gtceu.recipe.grindless_membrane_rolling.' + r.name), r.name));
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
 });
 
 test('the controller recipe is an assembly_line row researching the REBCO-on-PBO web, with MAX components and 4 MAX circuits', () => {

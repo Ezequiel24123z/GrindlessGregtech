@@ -105,14 +105,14 @@ test('the shape, textures and EMI page exist', () => {
   assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'max_winch_geroch_winch.json')));
 });
 
-test('the lang file has en_us and es_es keys in parity', () => {
+test('the lang file has en_us keys', () => {
   const s = read(kube, 'client_scripts', 'grindless', 'max_winch_lang.js');
-  assert.ok(/en_us/.test(s) && /es_es/.test(s));
+  assert.ok(/en_us/.test(s));
   assert.match(s, /block\.gtceu\.geroch_winch/);
   assert.match(s, /gtceu\.geroch_power/);
-  const keys = [...s.matchAll(/^\s+\['([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*'((?:[^'\\]|\\.)*)'\]/gm)];
+  const keys = [...s.matchAll(/^\s+\['([^']+)',\s*'((?:[^'\\]|\\.)*)'\]/gm)];
   assert.ok(keys.length >= 9);
-  for (const k of keys) assert.ok(k[2].length > 0 && k[3].length > 0, k[1]);
+  for (const k of keys) assert.ok(k[2].length > 0, k[1]);
 });
 
 test('the overlay stays in its band, has no second priority line and is registered in zones.json', () => {

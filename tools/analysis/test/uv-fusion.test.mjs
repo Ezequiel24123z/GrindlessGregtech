@@ -202,9 +202,9 @@ test('chamber startup: 13 x 13 x 13 shell with 32 laser module blocks on the bea
   assert.match(src, /SIZE = 13/);
 });
 
-test('chamber lang: both locales name the machine, recipe type, no-voiding reason and spent module', () => {
+test('chamber lang: en_us names the machine, recipe type, no-voiding reason and spent module', () => {
   const src = read('pack/kubejs/client_scripts/grindless/uv_fusion_lang.js');
   for (const k of ['block.gtceu.laser_fusion_chamber', 'gtceu.laser_fusion', 'grindless.machine.laser_fusion_chamber.no_voiding', 'item.grindless.spent_laser_module']) {
-    assert.equal(src.split("'" + k + "'").length - 1, 2, k + ' in en_us and es_es');
+    assert.equal(src.split("'" + k + "'").length - 1, 1, k + ' in en_us');
   }
 });

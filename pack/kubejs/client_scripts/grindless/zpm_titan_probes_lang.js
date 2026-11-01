@@ -19,20 +19,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.tholin_reformer.tooltip.0', '§7Breaks Titan\'s tholins back into chemistry.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.entry_probe_bay', 'Bahía de sondas de entrada')
-    add('block.gtceu.tholin_reformer', 'Reformador de tolinas')
-    add('gtceu.titan_entry', 'Entrada en Titán')
-    add('gtceu.tholin_reforming', 'Reformado de tolinas')
-    add('item.grindless.titan_probe_recording', 'Registro de sonda de Titán')
-    add('material.gtceu.titan_nitriles', 'Mezcla de nitrilos de Titán')
-    add('emi.grindless.info.probe_bay_casing.0', 'Una carcasa blindada con un forro resistente al calor. Construye las paredes, el techo y el suelo de la Bahía de sondas de entrada.')
-    add('tooltip.grindless.titan_probe_recording.0', 'La telemetría de una sonda que cayó a través de la bruma de Titán.')
-    add('tooltip.grindless.titan_probe_recording.1', 'Descífrala en la red de espacio profundo (circuito 4) para obtener un muestreador de lagos.')
-
-    add('grindless.machine.entry_probe_bay.tooltip.0', '§7Lanza sondas a la bruma de Titán.')
-
-    add('grindless.machine.tholin_reformer.tooltip.0', '§7Descompone las tolinas de Titán en productos químicos.')
-})

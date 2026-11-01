@@ -8,7 +8,7 @@
 //     recording stand-ins: the pattern is valid for lib/patterns.js (one controller in the front slice, at most 16 high, parts with
 //     GTM's limits and the parallel hatch), the recipes come out as GTM recipes with the circuit and the charge not consumed, nothing
 //     clashes in GTM's lookup, an unknown id skips its recipe loudly, the controller has its crafting recipe, and every recipe's EMI
-//     line and the controller lines have en_us and es_es text.
+//     line and the controller lines have en_us text.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -302,7 +302,7 @@ test('magnet works recipes: an id the game lacks skips only its recipe, loudly (
   assert.ok(errors.some((e) => /skipped magnetic_bearing/.test(e)));
 });
 
-test('magnet works text: the machine, the type, every recipe\'s EMI line and the charge lines in en_us and es_es', () => {
+test('magnet works text: the machine, the type, every recipe\'s EMI line and the charge lines in en_us', () => {
   const lang = {};
   const sandbox = { ClientEvents: { lang: (l, fn) => fn({ add: (ns, k, v) => { (lang[l] = lang[l] || {})[k] = v; } }) } };
   vm.runInNewContext(fs.readFileSync(SCRIPTS.lang, 'utf8'), sandbox, { filename: 'luv_hts_magnet_works_lang.js' });
@@ -322,9 +322,8 @@ test('magnet works text: the machine, the type, every recipe\'s EMI line and the
     const keys = ['block.gtceu.hts_magnet_works', 'gtceu.magnet_winding', 'grindless.machine.hts_magnet_works.charge.ok',
     'grindless.machine.hts_magnet_works.charge.low', ...[0].map((i) => 'grindless.machine.hts_magnet_works.tooltip.' + i),
     ...TABLE.recipes.map((r) => 'gtceu.recipe.grindless_magnet_winding.' + r.name)];
-  for (const l of ['en_us', 'es_es']) for (const k of keys) assert.ok(lang[l] && lang[l][k], l + ' ' + k);
-  assert.deepEqual(Object.keys(lang.en_us).sort(), Object.keys(lang.es_es).sort());
-  for (const l of ['en_us', 'es_es']) {
+  for (const l of ['en_us']) for (const k of keys) assert.ok(lang[l] && lang[l][k], l + ' ' + k);
+  for (const l of ['en_us']) {
     for (const k of ['grindless.machine.hts_magnet_works.charge.ok', 'grindless.machine.hts_magnet_works.charge.low']) {
       assert.equal((lang[l][k].match(/%s/g) || []).length, 2, l + ' ' + k + ' takes held and needed');
     }

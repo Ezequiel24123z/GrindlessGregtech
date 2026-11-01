@@ -7,101 +7,84 @@
 //   material.gtceu.<fluid>                             spent KOH etchant, photoresin and uncured photoresin
 //   item.grindless.<n>, tooltip.grindless.<n>.0 / .1   the package's own items
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {
-    // [key, en, es]
+    // [key, en]
     var ENTRIES = [
-        ['block.gtceu.tfln_fab', 'TFLN Fab', 'Fábrica de TFLN'],
-        ['block.gtceu.femtosecond_writer', 'Femtosecond Writer', 'Escritor de femtosegundos'],
-        ['gtceu.ion_slicing', 'Ion Slicing', 'Corte iónico'],
-        ['gtceu.femtosecond_writing', 'Femtosecond Writing', 'Escritura de femtosegundos'],
+        ['block.gtceu.tfln_fab', 'TFLN Fab'],
+        ['block.gtceu.femtosecond_writer', 'Femtosecond Writer'],
+        ['gtceu.ion_slicing', 'Ion Slicing'],
+        ['gtceu.femtosecond_writing', 'Femtosecond Writing'],
 
-        ['material.gtceu.spent_koh_etchant', 'Spent KOH Etchant', 'Grabador de KOH agotado'],
-        ['material.gtceu.photoresin', 'Photoresin', 'Fotorresina'],
-        ['material.gtceu.uncured_photoresin', 'Uncured Photoresin', 'Fotorresina sin curar'],
+        ['material.gtceu.spent_koh_etchant', 'Spent KOH Etchant'],
+        ['material.gtceu.photoresin', 'Photoresin'],
+        ['material.gtceu.uncured_photoresin', 'Uncured Photoresin'],
 
         ['grindless.machine.tfln_fab.tooltip.0',
-            '\u00a77Bonds, slices and poles lithium niobate wafers.',
-            '\u00a77Une, corta y polariza obleas de niobato de litio.'],
+            '\u00a77Bonds, slices and poles lithium niobate wafers.'],
         ['grindless.machine.femtosecond_writer.tooltip.0',
-            '\u00a77Writes structures inside glass and metal with a femtosecond laser.',
-            '\u00a77Escribe estructuras dentro de vidrio y metal con un láser de femtosegundos.'],
+            '\u00a77Writes structures inside glass and metal with a femtosecond laser.'],
 
         ['gtceu.recipe.grindless_ion_slicing.ln_on_sin',
-            'Circuit 1: an LNOI film bonded onto a Si3N4-coated wafer.',
-            'Circuito 1: una película LNOI unida a una oblea recubierta de Si3N4.'],
+            'Circuit 1: an LNOI film bonded onto a Si3N4-coated wafer.'],
         ['gtceu.recipe.grindless_ion_slicing.si28_soi',
-            'Circuit 2: hydrogen-implanted Si-28 cleaves off a thin layer onto an oxidised wafer; the donor wafer is reused and the hydrogen is released.',
-            'Circuito 2: el Si-28 implantado con hidrógeno libera una capa fina sobre una oblea oxidada; la oblea donante se reutiliza y el hidrógeno se libera.'],
+            'Circuit 2: hydrogen-implanted Si-28 cleaves off a thin layer onto an oxidised wafer; the donor wafer is reused and the hydrogen is released.'],
         ['gtceu.recipe.grindless_ion_slicing.poled_lnoi',
-            'Circuit 3: periodic electric-field poling of an LNOI wafer.',
-            'Circuito 3: polarización periódica con campo eléctrico de una oblea LNOI.'],
+            'Circuit 3: periodic electric-field poling of an LNOI wafer.'],
         ['gtceu.recipe.grindless_ion_slicing.eo_microcomb',
-            'Circuit 4: an annealed damascene Si3N4 ring bonded to LNOI makes the electro-optic microcomb.',
-            'Circuito 4: un anillo damasceno de Si3N4 recocido unido a LNOI forma el micropeine electroóptico.'],
+            'Circuit 4: an annealed damascene Si3N4 ring bonded to LNOI makes the electro-optic microcomb.'],
         ['gtceu.recipe.grindless_femtosecond_writing.interposer_blank',
-            'Circuit 1: a ULE boule is written with the interposer lines; the ablated glass dust goes back to stock.',
-            'Circuito 1: se escribe un lingote ULE con las líneas del interpositor; el polvo de vidrio ablacionado vuelve al almacén.'],
+            'Circuit 1: a ULE boule is written with the interposer lines; the ablated glass dust goes back to stock.'],
         ['gtceu.recipe.grindless_femtosecond_writing.lattice_2pp',
-            'Circuit 2: two-photon polymerisation of photoresin in a glass plate; the uncured resin is recovered.',
-            'Circuito 2: polimerización de dos fotones de fotorresina en una placa de vidrio; la resina sin curar se recupera.'],
+            'Circuit 2: two-photon polymerisation of photoresin in a glass plate; the uncured resin is recovered.'],
         ['gtceu.recipe.grindless_femtosecond_writing.orifice_plate',
-            'Circuit 3: a rhenium-alloy plate drilled with micro-orifices; the ablated dust goes back to stock.',
-            'Circuito 3: una placa de aleación de renio perforada con microorificios; el polvo ablacionado vuelve al almacén.'],
+            'Circuit 3: a rhenium-alloy plate drilled with micro-orifices; the ablated dust goes back to stock.'],
         ['gtceu.recipe.grindless_femtosecond_writing.crystal_blank',
-            'Circuit 4: voxels written inside a silica storage preform (5D optical storage); the ablated dust goes back to stock.',
-            'Circuito 4: vóxeles escritos dentro de una preforma de sílice de almacenamiento (almacenamiento óptico 5D); el polvo ablacionado vuelve al almacén.'],
+            'Circuit 4: voxels written inside a silica storage preform (5D optical storage); the ablated dust goes back to stock.'],
         ['gtceu.recipe.grindless_photonic_foundry.eo_transceiver',
-            'Circuit 8: platinum electrodes on a thinned LN-on-Si3N4 wafer make the electro-optic transceiver.',
-            'Circuito 8: electrodos de platino sobre una oblea LN sobre Si3N4 adelgazada forman el transceptor electroóptico.'],
+            'Circuit 8: platinum electrodes on a thinned LN-on-Si3N4 wafer make the electro-optic transceiver.'],
         ['gtceu.recipe.grindless_photonic_foundry.glass_interposer',
-            'Circuit 9: the written interposer blank is etched and filled with copper vias.',
-            'Circuito 9: el bloque de interpositor escrito se graba y se rellena con vías de cobre.'],
+            'Circuit 9: the written interposer blank is etched and filled with copper vias.'],
         ['gtceu.recipe.grindless_photonic_foundry.damascene_ring',
-            'Circuit 10: the damascene Si3N4 wafer is polished and annealed into rings; the polishing silica goes back as quartz sand.',
-            'Circuito 10: la oblea damascena de Si3N4 se pule y se recuece en anillos; la sílice del pulido vuelve como arena de cuarzo.'],
+            'Circuit 10: the damascene Si3N4 wafer is polished and annealed into rings; the polishing silica goes back as quartz sand.'],
         ['gtceu.recipe.grindless_photonic_foundry.ppln_waveguide',
-            'Circuit 11: a poled LNOI wafer is etched into periodically poled waveguides.',
-            'Circuito 11: una oblea LNOI polarizada se graba en guías de onda de polarización periódica.'],
+            'Circuit 11: a poled LNOI wafer is etched into periodically poled waveguides.'],
         ['gtceu.recipe.grindless_synchrotron.damascene_trench',
-            'Circuit 7: X-ray lithography cuts deep trenches into an oxidised wafer for damascene Si3N4.',
-            'Circuito 7: la litografía de rayos X abre trincheras profundas en una oblea oxidada para el Si3N4 damasceno.']
+            'Circuit 7: X-ray lithography cuts deep trenches into an oxidised wafer for damascene Si3N4.']
     ]
 
-    // [name, en, es, tooltip 0 en, es, tooltip 1 en, es]
+    // [name, en, tooltip 0 en, tooltip 1 en]
     var ITEMS = [
-        ['ln_on_sin_wafer', 'LN-on-Si3N4 Wafer', 'Oblea LN sobre Si3N4', 'Thin-film lithium niobate on a silicon nitride wafer.', 'Niobato de litio de película delgada sobre una oblea de nitruro de silicio.', 'Thinned in the cutter before it becomes a transceiver.', 'Se adelgaza en la cortadora antes de ser un transceptor.'],
-        ['ln_on_sin_thinned', 'Thinned LN-on-Si3N4 Wafer', 'Oblea LN sobre Si3N4 adelgazada', 'Ground to the final film thickness.', 'Pulida hasta el grosor final de la película.', 'Takes platinum electrodes to make an EO transceiver.', 'Recibe electrodos de platino para formar un transceptor EO.'],
-        ['eo_transceiver', 'EO Transceiver', 'Transceptor EO', 'An electro-optic modulator on thin-film lithium niobate.', 'Un modulador electroóptico sobre niobato de litio de película delgada.', 'Made from a thinned wafer and platinum electrodes.', 'Se hace con una oblea adelgazada y electrodos de platino.'],
-        ['si28_soi_wafer', 'Si-28 SOI Wafer', 'Oblea SOI de Si-28', 'Isotopically pure silicon on insulator.', 'Silicio isotópicamente puro sobre aislante.', 'Only the TFLN fab makes it (circuit 2).', 'Solo la fábrica de TFLN lo fabrica (circuito 2).'],
-        ['si28_donor_wafer', 'Si-28 Donor Wafer', 'Oblea donante de Si-28', 'The wafer left after the thin layer is cleaved off.', 'La oblea que queda tras desprender la capa fina.', 'It can be reimplanted and reused.', 'Se puede reimplantar y reutilizar.'],
-        ['poled_lnoi_wafer', 'Poled LNOI Wafer', 'Oblea LNOI polarizada', 'A lithium niobate wafer with periodic domain inversion.', 'Una oblea de niobato de litio con inversión periódica de dominios.', 'Cut into PPLN waveguides in the photonic foundry.', 'Se corta en guías de onda PPLN en la fundición fotónica.'],
-        ['written_interposer_blank', 'Written Interposer Blank', 'Blanco de interpositor escrito', 'A ULE glass boule with laser-written channels.', 'Un lingote de vidrio ULE con canales escritos con láser.', 'Etched in KOH to open the channels.', 'Se graba en KOH para abrir los canales.'],
-        ['etched_interposer_blank', 'Etched Interposer Blank', 'Blanco de interpositor grabado', 'The written channels opened by KOH.', 'Los canales escritos abiertos con KOH.', 'Filled with copper in the photonic foundry.', 'Se rellena de cobre en la fundición fotónica.'],
-        ['glass_interposer', 'Glass Interposer', 'Interpositor de vidrio', 'A glass substrate with copper through-glass vias.', 'Un sustrato de vidrio con vías de cobre a través del vidrio.', 'Carries the chiplets of the later circuits.', 'Soporta los chiplets de los circuitos posteriores.'],
-        ['trenched_oxide_wafer', 'Trenched Oxide Wafer', 'Oblea de óxido con zanjas', 'An oxidised wafer with ring trenches exposed by X-ray lithography.', 'Una oblea oxidada con zanjas anulares expuestas por litografía de rayos X.', 'Filled with Si3N4 in the chemical reactor.', 'Se rellena de Si3N4 en el reactor químico.'],
-        ['damascene_sin_wafer', 'Damascene Si3N4 Wafer', 'Oblea damascena de Si3N4', 'Trenches filled with silicon nitride.', 'Zanjas rellenas de nitruro de silicio.', 'Polished and annealed into a ring.', 'Se pule y recuece hasta obtener un anillo.'],
-        ['annealed_damascene_ring', 'Annealed Damascene Ring', 'Anillo damasceno recocido', 'A low-loss Si3N4 microring.', 'Un microanillo de Si3N4 de bajas pérdidas.', 'Bonded to LNOI it makes the EO microcomb.', 'Unido a LNOI forma el micropeine EO.'],
-        ['ppln_waveguide', 'PPLN Waveguide', 'Guía de onda PPLN', 'Periodically poled lithium niobate for frequency doubling.', 'Niobato de litio polarizado periódicamente para duplicar frecuencia.', 'Two stages make the positronium cooling laser.', 'Dos etapas forman el láser de enfriamiento de positronio.'],
-        ['shg_486_stage', '486 nm SHG Stage', 'Etapa SHG de 486 nm', 'A frequency-doubling stage fed by a UEV emitter.', 'Una etapa de duplicación de frecuencia alimentada por un emisor UEV.', 'The first half of the positronium cooling laser.', 'La primera mitad del láser de enfriamiento de positronio.'],
-        ['lattice_2pp', '2PP Lattice', 'Retícula 2PP', 'A glass plate with a two-photon-polymerised lattice.', 'Una placa de vidrio con una retícula polimerizada por dos fotones.', 'A micro-structured part for later machines.', 'Una pieza microestructurada para máquinas posteriores.'],
-        ['orifice_plate', 'Orifice Plate', 'Placa de orificios', 'A rhenium-alloy plate with laser-drilled micro-orifices.', 'Una placa de aleación de renio con microorificios perforados con láser.', 'Written in the femtosecond writer (circuit 3).', 'Se escribe en el escritor de femtosegundos (circuito 3).'],
-        ['silica_storage_preform', 'Silica Storage Preform', 'Preforma de sílice de almacenamiento', 'High-purity silica drawn for optical storage.', 'Sílice de alta pureza estirada para almacenamiento óptico.', 'Written with voxels in the femtosecond writer.', 'Se escribe con vóxeles en el escritor de femtosegundos.'],
-        ['written_crystal_blank', 'Written Crystal Blank', 'Blanco de cristal escrito', 'A silica crystal with written voxels.', 'Un cristal de sílice con vóxeles escritos.', 'Read back and verified before annealing.', 'Se lee y verifica antes de recocerlo.'],
-        ['verified_crystal', 'Verified Crystal', 'Cristal verificado', 'A written crystal that passed its read-back.', 'Un cristal escrito que superó la lectura de comprobación.', 'Annealed into a 5D data crystal.', 'Se recuece hasta formar un cristal de datos 5D.']
+        ['ln_on_sin_wafer', 'LN-on-Si3N4 Wafer', 'Thin-film lithium niobate on a silicon nitride wafer.', 'Thinned in the cutter before it becomes a transceiver.'],
+        ['ln_on_sin_thinned', 'Thinned LN-on-Si3N4 Wafer', 'Ground to the final film thickness.', 'Takes platinum electrodes to make an EO transceiver.'],
+        ['eo_transceiver', 'EO Transceiver', 'An electro-optic modulator on thin-film lithium niobate.', 'Made from a thinned wafer and platinum electrodes.'],
+        ['si28_soi_wafer', 'Si-28 SOI Wafer', 'Isotopically pure silicon on insulator.', 'Only the TFLN fab makes it (circuit 2).'],
+        ['si28_donor_wafer', 'Si-28 Donor Wafer', 'The wafer left after the thin layer is cleaved off.', 'It can be reimplanted and reused.'],
+        ['poled_lnoi_wafer', 'Poled LNOI Wafer', 'A lithium niobate wafer with periodic domain inversion.', 'Cut into PPLN waveguides in the photonic foundry.'],
+        ['written_interposer_blank', 'Written Interposer Blank', 'A ULE glass boule with laser-written channels.', 'Etched in KOH to open the channels.'],
+        ['etched_interposer_blank', 'Etched Interposer Blank', 'The written channels opened by KOH.', 'Filled with copper in the photonic foundry.'],
+        ['glass_interposer', 'Glass Interposer', 'A glass substrate with copper through-glass vias.', 'Carries the chiplets of the later circuits.'],
+        ['trenched_oxide_wafer', 'Trenched Oxide Wafer', 'An oxidised wafer with ring trenches exposed by X-ray lithography.', 'Filled with Si3N4 in the chemical reactor.'],
+        ['damascene_sin_wafer', 'Damascene Si3N4 Wafer', 'Trenches filled with silicon nitride.', 'Polished and annealed into a ring.'],
+        ['annealed_damascene_ring', 'Annealed Damascene Ring', 'A low-loss Si3N4 microring.', 'Bonded to LNOI it makes the EO microcomb.'],
+        ['ppln_waveguide', 'PPLN Waveguide', 'Periodically poled lithium niobate for frequency doubling.', 'Two stages make the positronium cooling laser.'],
+        ['shg_486_stage', '486 nm SHG Stage', 'A frequency-doubling stage fed by a UEV emitter.', 'The first half of the positronium cooling laser.'],
+        ['lattice_2pp', '2PP Lattice', 'A glass plate with a two-photon-polymerised lattice.', 'A micro-structured part for later machines.'],
+        ['orifice_plate', 'Orifice Plate', 'A rhenium-alloy plate with laser-drilled micro-orifices.', 'Written in the femtosecond writer (circuit 3).'],
+        ['silica_storage_preform', 'Silica Storage Preform', 'High-purity silica drawn for optical storage.', 'Written with voxels in the femtosecond writer.'],
+        ['written_crystal_blank', 'Written Crystal Blank', 'A silica crystal with written voxels.', 'Read back and verified before annealing.'],
+        ['verified_crystal', 'Verified Crystal', 'A written crystal that passed its read-back.', 'Annealed into a 5D data crystal.']
     ]
 
     ITEMS.forEach(function (i) {
-        ENTRIES.push(['item.grindless.' + i[0], i[1], i[2]])
-        ENTRIES.push(['tooltip.grindless.' + i[0] + '.0', i[3], i[4]])
-        ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[5], i[6]])
+        ENTRIES.push(['item.grindless.' + i[0], i[1]])
+        ENTRIES.push(['tooltip.grindless.' + i[0] + '.0', i[2]])
+        ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[3]])
     })
 
-    ;['en_us', 'es_es'].forEach(function (lang, li) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1 + li])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()

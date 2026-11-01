@@ -1,5 +1,5 @@
 // UEV-M1: the UEV parallel hatch (startup_scripts/grindless/lib/parallel_hatch.js, server_scripts/grindless/uev/parallel_hatch.js): tier 10 = 4^(10-2)
-// = x4096, registered with the UHV one, in the hatch list after it, the recipe one tier up, the names in both languages.
+// = x4096, registered with the UHV one, in the hatch list after it, the recipe one tier up, the names in en_us.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -90,10 +90,10 @@ test('the recipe is an assembly line with station research and fluids, guarded, 
   assert.equal(G.uevParallelHatch.done, true);
 });
 
-test('the names and the tooltip exist in en_us and es_es', () => {
+test('the names and the tooltip exist in en_us', () => {
   const src = read('client_scripts', 'grindless/uev_parallel_hatch_lang.js');
   for (const key of ['block.gtceu.uev_parallel_hatch', 'grindless.machine.uev_parallel_hatch.tooltip']) {
-    assert.equal(src.split(`'${key}'`).length - 1, 2, key);
+    assert.equal(src.split(`'${key}'`).length - 1, 1, key);
   }
   assert.ok(src.includes('4096'));
 });

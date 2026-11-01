@@ -143,14 +143,14 @@ test('the startup script registers both types and machines with the recipe types
   assert.ok(!read('pack/kubejs/server_scripts/grindless/power/generators.js').includes('direct_conversion'));
 });
 
-test('every lang key the startup script uses exists in both languages', () => {
+test('every lang key the startup script uses exists in en_us', () => {
   const lang = read('pack/kubejs/client_scripts/grindless/zpm_fusion_lang.js');
   const keys = [...read(STARTUP).matchAll(/Text\.translate\('([^']+)'\)/g)].map(m => m[1])
     .filter(k => k.startsWith('grindless.machine.plasma_quench_caster') || k.startsWith('grindless.machine.direct_energy_converter'));
   assert.equal(keys.length, 2);
-  for (const k of keys) assert.equal(lang.split("'" + k + "'").length - 1, 2, k);
+  for (const k of keys) assert.equal(lang.split("'" + k + "'").length - 1, 1, k);
   for (const k of ['block.gtceu.plasma_quench_caster', 'gtceu.plasma_quench', 'block.gtceu.direct_energy_converter', 'gtceu.direct_conversion'])
-    assert.equal(lang.split("'" + k + "'").length - 1, 2, k);
+    assert.equal(lang.split("'" + k + "'").length - 1, 1, k);
 });
 
 test('the native fixture stays in band X 20736-20799, Z 0-63, Y 98-112 and has a zones row', () => {

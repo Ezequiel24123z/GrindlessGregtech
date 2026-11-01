@@ -35,11 +35,11 @@ test('the stand-in runs the OpV-B1 scripts without errors, nothing skipped, no l
   assert.equal(TO.recipes.length, 4);
 });
 
-test('the package items are registered by the startup file, named in en_us and es_es, with a texture', () => {
+test('the package items are registered by the startup file, named in en_us, with a texture', () => {
   for (const n of ITEMS) {
     const it = run.registry.items.get(`grindless:${n}`);
     assert.ok(it && /opv[\\/]tetron_optics\.js$/.test(String(it.file)), `${n} registered by tetron_optics.js`);
-    for (const lang of ['en_us', 'es_es']) {
+    for (const lang of ['en_us']) {
       assert.ok(run.lang[lang][`item.grindless.${n}`], `${lang} names ${n}`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.0`], `${lang} tooltip ${n}.0`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.1`], `${lang} tooltip ${n}.1`);
@@ -204,7 +204,7 @@ test('faces, EMI pages and the working sound of every machine', () => {
   assert.deepEqual(plain(TO.machines.map((m) => m.name)), MACHINES);
 });
 
-test('lang parity: every key of both languages, names, tooltips, EMI pages and recipe lines', () => {
+test('lang: every key of en_us, names, tooltips, EMI pages and recipe lines', () => {
   const keys = [];
   for (const m of TO.machines) {
     keys.push(`block.gtceu.${m.name}`, `gtceu.${m.type}`, `grindless.machine.${m.name}.tooltip.0`, `emi.grindless.info.${m.name}.0`, `emi.grindless.info.${m.name}.1`);
@@ -215,7 +215,5 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages and r
     'gtceu.recipe.grindless_chemical_vapour_infiltration.superpolished_sic_blank', 'gtceu.recipe.grindless_chemical_vapour_infiltration.gamma_mirror_strip',
     'gtceu.recipe.grindless_megabar.bent_ge_tile', 'gtceu.recipe.grindless_megabar.bent_ge_rebend', 'gtceu.recipe.grindless_crystal_growth.gaas_laue_tile',
     'gtceu.recipe.grindless_synchrotron.mirror_metrology', 'gtceu.recipe.grindless_synchrotron.laue_frame_alignment');
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  const re = /tetron|gamma_optics|laue|gamma_mirror|gamma_multilayer|sic_blank|wc_sic|metrology_record|wc_sputter|bent_ge|gaas_laue/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
 });

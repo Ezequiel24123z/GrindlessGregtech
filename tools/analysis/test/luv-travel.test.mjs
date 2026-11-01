@@ -212,15 +212,13 @@ test('the travel recipes compose with only registered ids; seeds are made only o
   }
 });
 
-test('names exist in en_us and es_es for the tank, the five planets and the ten dimensions', () => {
-  const lang = read('client_scripts/grindless/luv_travel_lang.js');
-  const [en, es] = lang.split("ClientEvents.lang('es_es'");
+test('names exist in en_us for the tank, the five planets and the ten dimensions', () => {
+  const en = read('client_scripts/grindless/luv_travel_lang.js');
   const keys = ['block.grindless.cryogenic_fuel_tank', 'tooltip.grindless.cryogenic_fuel_tank.0', 'tooltip.grindless.cryogenic_fuel_tank.1'];
   for (const name of NAMES) keys.push(planet(name).translation, 'dimension.grindless.' + name, 'dimension.grindless.' + name + '_orbit');
   for (const key of Object.keys(PLANETS_TABLE.planets)) if (key !== 'earth' && PLANETS_TABLE.planets[key].name && /^(belt|jupiter|io|europa|ganymede)$/.test(key)) keys.push('planet.grindless.' + key);
   for (const k of keys) {
     assert.ok(en.includes(`'${k}'`), `en_us ${k}`);
-    assert.ok(es.includes(`'${k}'`), `es_es ${k}`);
   }
 });
 

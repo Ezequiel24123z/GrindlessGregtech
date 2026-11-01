@@ -169,8 +169,8 @@ test('only from: no other recipe in pack/kubejs produces the B3 key items', () =
   assert.ok(fs.readFileSync(path.join(kube, 'server_scripts', 'grindless', 'zpm', 'observatory.js'), 'utf8').includes('xray_pulse_timed'));
 });
 
-test('lang parity: every EN key has an ES twin, items have two tooltips', () => {
-  assert.ok(lang.includes("['en_us', 'es_es']") && lang.includes('e[1 + li]'));
+test('lang: every EN key is registered, items have two tooltips', () => {
+  assert.ok(lang.includes("ClientEvents.lang('en_us'") && lang.includes('e[1]'));
   assert.ok(lang.includes("'tooltip.grindless.' + i[0] + '.0'") && lang.includes("'tooltip.grindless.' + i[0] + '.1'"));
   for (const name of ['cooled_positron_bunch', 'ps_converter_aerogel', 'ps_in_aerogel', 'laser_cooled_ps', 'ps_bec', 'gamma_laser_cavity', 'c12_hpht_plate', 'c12_004_plate', 'c12_ion_milled_plate', 'gamma_bragg_mirror', 'solid_neon_cone', 'annealed_neon_cone', 'neon_moderator_cartridge']) {
     assert.ok(lang.includes(`'${name}'`), name);

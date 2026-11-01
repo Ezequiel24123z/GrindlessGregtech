@@ -187,7 +187,7 @@ test('"only from" claims: no other table or script builds these outputs', () => 
   }
 });
 
-test('lang: every item, fluid, machine and type named in en_us and es_es, every row has its EMI line', () => {
+test('lang: every item, fluid, machine and type named in en_us, every row has its EMI line', () => {
   assert.equal(itemNames.length, 17);
   assert.equal(fluidIds.length, 6);
   for (const n of itemNames) {
@@ -205,10 +205,10 @@ test('lang: every item, fluid, machine and type named in en_us and es_es, every 
     assert.ok(lang.includes(`'gtceu.${type}'`), type);
     for (const r of t.recipes) if (!/^UXV-B4|^MAX-D3/.test(r._why)) assert.ok(lang.includes(`gtceu.recipe.${t.dataKey}.${r.name}'`), `${type}/${r.name}`);
   }
-  // en_us and es_es: the loop writes both columns; every entry has three columns
+  // en_us: the loop writes the column; every entry has its text
   const entries = [...lang.matchAll(/^\s{8}\['([^']+)',\s*(?:\n\s*)?'/gm)];
   assert.ok(entries.length > 60);
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
   const tex = fs.readFileSync(path.join(root, 'tools', 'assets', 'Build-UIVRx_j1856Textures.ps1'), 'utf8');
   for (const n of itemNames) assert.ok(tex.includes(`'${n}'`), `drawn: ${n}`);
 });

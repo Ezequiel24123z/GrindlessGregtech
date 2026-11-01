@@ -158,14 +158,14 @@ test('controller recipe: 16 ZPM assemblers, 16 ZPM circuit assemblers, 4 ZPM cir
   assert.deepEqual(plain(h.errors), []);
 });
 
-test('the lang file names the machine and its tooltips in en_us and es_es', () => {
+test('the lang file names the machine and its tooltips in en_us', () => {
   const lang = read('client_scripts', 'zpm_mega_assembly_hall_lang.js');
   const store = {};
   vm.runInNewContext(lang, {
     ClientEvents: { lang: (code, cb) => cb({ add: (ns, key, value) => { (store[code] = store[code] || {})[key] = value; } }) },
     console,
   });
-  for (const code of ['en_us', 'es_es']) {
+  for (const code of ['en_us']) {
     assert.ok(store[code], code);
     for (const key of ['block.gtceu.assembly_hall', ...[0].map((i) => 'grindless.machine.assembly_hall.tooltip.' + i)]) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);

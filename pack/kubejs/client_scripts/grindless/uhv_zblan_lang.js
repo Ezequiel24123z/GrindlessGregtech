@@ -24,43 +24,23 @@
             materials: {
                 zirconium_tetrafluoride: 'Zirconium Tetrafluoride'
             }
-        },
-        es_es: {
-            tower: 'Torre de Estirado de ZBLAN',
-            towerType: 'Estirado de ZBLAN',
-            towerTip: '§7Estira vidrio fluorado ZBLAN hasta fibra en microgravedad.',
-            towerSite: 'Solo funciona en órbita terrestre.',
-            towerTips: [
-                'Vidrio de fluoruros que cristaliza si se estira con gravedad: solo en la órbita terrestre. Circuito programado 1: tetrafluoruro de circonio + bario + lantano + aluminio + sodio + cal viva + fluoruro de hidrógeno -> 1 preforma de ZBLAN.',
-                'Circuito 2: 1 preforma de ZBLAN -> 8 bobinas de fibra de ZBLAN.',
-                'Los metales se fluoran en el fundido con fluoruro de hidrógeno; la cal viva atrapa el gas residual como fluorita, que vuelve al horno de fluorita. El hidrógeno y el agua salen como fluidos.',
-                'Necesita una torre de 3 x 11 x 3 de carcasa de sala limpia bajo un techo de armazón de estación (3 o más carcasas entre las partes del suelo), 1 o 2 escotillas de energía, buses y escotillas de entrada y salida.'
-            ],
-            items: {
-                zblan_preform: ['Preforma de ZBLAN', 'Una varilla de vidrio de fluoruros de circonio, bario, lantano, aluminio y sodio, lista para estirar.', 'Se fabrica en la Torre de Estirado de ZBLAN (circuito 1), en la órbita terrestre.']
-            },
-            materials: {
-                zirconium_tetrafluoride: 'Tetrafluoruro de Circonio'
-            }
         }
     }
 
-    Object.keys(TEXT).forEach(function (lang) {
-        ClientEvents.lang(lang, function (event) {
-            var t = TEXT[lang]
-            var add = function (key, value) { event.add('grindless', key, value) }
+    ClientEvents.lang('en_us', function (event) {
+        var t = TEXT.en_us
+        var add = function (key, value) { event.add('grindless', key, value) }
 
-            add('block.gtceu.zblan_draw_tower', t.tower)
-            add('gtceu.zblan_draw', t.towerType)
-            for (var i = 0; i < 4; i++) add('emi.grindless.info.zblan_draw_tower.' + (2 + i), t.towerTips[i])
-            add('grindless.machine.zblan_draw_tower.tooltip.0', t.towerTip)
-            add('grindless.machine.zblan_draw_tower.tooltip.1', t.towerSite)
-            Object.keys(t.items).forEach(function (name) {
-                add('item.grindless.' + name, t.items[name][0])
-                add('tooltip.grindless.' + name + '.0', t.items[name][1])
-                add('tooltip.grindless.' + name + '.1', t.items[name][2])
-            })
-            Object.keys(t.materials).forEach(function (name) { add('material.gtceu.' + name, t.materials[name]) })
+        add('block.gtceu.zblan_draw_tower', t.tower)
+        add('gtceu.zblan_draw', t.towerType)
+        for (var i = 0; i < 4; i++) add('emi.grindless.info.zblan_draw_tower.' + (2 + i), t.towerTips[i])
+        add('grindless.machine.zblan_draw_tower.tooltip.0', t.towerTip)
+        add('grindless.machine.zblan_draw_tower.tooltip.1', t.towerSite)
+        Object.keys(t.items).forEach(function (name) {
+            add('item.grindless.' + name, t.items[name][0])
+            add('tooltip.grindless.' + name + '.0', t.items[name][1])
+            add('tooltip.grindless.' + name + '.1', t.items[name][2])
         })
+        Object.keys(t.materials).forEach(function (name) { add('material.gtceu.' + name, t.materials[name]) })
     })
 })()

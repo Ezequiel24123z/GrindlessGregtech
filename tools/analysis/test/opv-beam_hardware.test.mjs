@@ -118,7 +118,7 @@ test('the cryogenic parts: the helium refrigerator seals the gun and the pickup 
   assert.ok(!HR.recipes.some((p) => /opv/.test(p.name)), 'the freezer rows stay as they were');
 });
 
-test('the rows appended to older tables: the contract\'s circuits, each with an EMI line in en_us and es_es', () => {
+test('the rows appended to older tables: the contract\'s circuits, each with an EMI line in en_us', () => {
   const tables = path.join(pack, 'kubejs', 'data', 'grindless', 'tables');
   const want = {
     'electron_beam.json': [['be_reduction', 24], ['be_window_braze', 25], ['li6h_canning', 26], ['neg_activation', 30], ['pickup_array', 31]],
@@ -137,13 +137,13 @@ test('the rows appended to older tables: the contract\'s circuits, each with an 
     for (const [t, r] of mine) {
       const key = `gtceu.recipe.${t.dataKey}.${r.name}`;
       assert.ok(t.dataKey, `${file}: data key`);
-      for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][key], `${lang} ${key}`);
+      for (const lang of ['en_us']) assert.ok(run.lang[lang][key], `${lang} ${key}`);
     }
   }
 });
 
-test('names: en_us and es_es for every item (two tooltips) and the bred gas', () => {
-  for (const lang of ['en_us', 'es_es']) {
+test('names: en_us for every item (two tooltips) and the bred gas', () => {
+  for (const lang of ['en_us']) {
     for (const id of OPVB.items) {
       const n = id.split(':')[1];
       for (const k of [`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`]) assert.ok(run.lang[lang][k], `${lang} ${k}`);

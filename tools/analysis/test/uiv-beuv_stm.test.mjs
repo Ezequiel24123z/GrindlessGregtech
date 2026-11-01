@@ -152,7 +152,7 @@ test('the older rows exist, each marked UIV-A5', () => {
   assert.match(read('server_scripts', 'grindless', 'zpm', 'qubits.js'), /UIV-A5[\s\S]*?circuit: 6[\s\S]*?h_si28_wafer/);
 });
 
-test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a texture', () => {
+test('lang parity: every ENTRY and ITEM has en_us, every item has a texture', () => {
   const lang = read('client_scripts', 'grindless', 'uiv_beuv_stm_lang.js');
   const itemNames = [...lang.matchAll(/^\s+\['([a-z0-9_]+)', '[^']+', '[^']+', /gm)].map((m) => m[1]);
   const start = read('startup_scripts', 'grindless', 'uiv', 'beuv_stm.js');
@@ -160,7 +160,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   assert.equal(registered.length, 14);
   assert.deepEqual(itemNames.sort(), registered.slice().sort());
   const keys = [...lang.matchAll(/^\s+\['((?:block|gtceu|material|grindless)\.[^']+)',\s*$/gm)].map((m) => m[1]);
-  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
+  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+'\]/gm)].map((m) => m[1]);
   for (const k of ['block.gtceu.beuv_scanner', 'block.gtceu.stm_lithography_cell', 'gtceu.beuv_lithography', 'gtceu.stm_lithography', 'material.gtceu.phosphine']) {
     assert.ok(flat.includes(k), k);
   }

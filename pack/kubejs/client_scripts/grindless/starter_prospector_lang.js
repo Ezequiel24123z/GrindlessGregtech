@@ -9,16 +9,6 @@ ClientEvents.lang('en_us', function (event) {
   event.add('grindless', 'message.grindless.field_prospector.error', 'The survey failed. Check the server KubeJS log for the error.')
 })
 
-ClientEvents.lang('es_es', function (event) {
-  event.add('grindless', 'item.grindless.field_prospector', 'Prospector de campo (HV)')
-  event.add('grindless', 'tooltip.grindless.field_prospector.range', 'Clic derecho: marca vetas hasta a 16 chunks (256 bloques) en X y Z.')
-  event.add('grindless', 'tooltip.grindless.field_prospector.power', 'Escaneo instantáneo. Usos ilimitados, sin recarga ni salida de energía.')
-  event.add('grindless', 'tooltip.grindless.field_prospector.terrain', 'Abre el mapa y activa las vetas. Solo analiza terreno generado; explora más y vuelve a escanear.')
-  event.add('grindless', 'message.grindless.field_prospector.result', 'Se han analizado %s vetas a un máximo de 16 chunks (256 bloques en X y Z). Abre el mapa y activa las vetas. El terreno sin generar no se analiza.')
-  event.add('grindless', 'message.grindless.field_prospector.no_data', 'No hay datos de vetas a un máximo de 16 chunks (256 bloques en X y Z). Explora más y vuelve a escanear; esto no significa que no haya minerales.')
-  event.add('grindless', 'message.grindless.field_prospector.error', 'El escaneo ha fallado. Consulta el error en el registro de KubeJS del servidor.')
-})
-
 ItemEvents.tooltip(function (event) {
   event.addAdvanced('gtceu:prospector.hv', function (item, advanced, text) {
     var tag = item.getNbt()

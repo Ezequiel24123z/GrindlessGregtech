@@ -44,7 +44,7 @@ test('the recompress row returns the boil-off as condensate (no free source: 4 i
   assert.match(server, /name: 'recompress_boil_off'[\s\S]*?items: \['4x grindless:condensate_boil_off'\][\s\S]*?fluidOuts: \[\[KERR, 4000\]\]/);
 });
 
-test('lang: every recipe row has an en_us and es_es entry', () => {
+test('lang: every recipe row has an en_us entry', () => {
   const names = [...server.matchAll(/name: '([a-z_0-9]+)', circuit: \d+, eut: (?:VA_MAX|V_MAX)/g)].map((m) => m[1]);
   assert.equal(names.length, 10);
   // XP-H1's c4 row (line T4) is named in the loom's lang file, XP-H3's c3 row (line T1) in the assembler's
@@ -54,7 +54,7 @@ test('lang: every recipe row has an en_us and es_es entry', () => {
       || (n === 'laminated_containment_core' && assemblerLang.includes(`.${n}'`)), `no lang key for ${n}`);
   }
   assert.ok(lang.includes("'gtceu.condensate_refinery'") && lang.includes("'gtceu.bound_matter_press'"));
-  assert.ok(lang.includes("['en_us', 'es_es']"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });
 

@@ -1,5 +1,5 @@
 // TP-T-b: multiblock tooltips EV to LuV (docs/research/tier-parity.md TP-D5). Every listed controller keeps at most 4 tooltip entries, every
-// key its startup file translates for a tooltip exists in en_us and es_es, and its EMI info page exists and resolves in both languages.
+// key its startup file translates for a tooltip exists in en_us, and its EMI info page exists and resolves.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -19,7 +19,7 @@ const CONTROLLERS = ['algae_bioreactor', 'asteroid_processor', 'atmosphere_proce
   'pressurized_vein_drill', 'regolith_cell', 'sealed_dome', 'smelting_complex', 'tritium_removal_facility', 'venus_acid_works',
   'venus_heat_engine', 'volcanic_intake', 'wake_shield_facility', 'zero_g_crystal_grower'];
 
-// recipe type names that GTM itself ships (en_us only: GTM 7.5.3 has no es_es), so the static lang does not hold them
+// recipe type names that GTM itself ships (en_us only), so the static lang does not hold them
 const GTM_TYPES = new Set(['gtceu.large_chemical_reactor']);
 const TIP_KEY = /Text\.translate\('((?:gtceu\.multiblock\.parallelizable\.tooltip|grindless\.tooltip\.[a-z]+|planet\.grindless\.[a-z_]+|dimension\.grindless\.[a-z_]+|gtceu\.machine\.available_recipe_map_\d\.tooltip|grindless\.machine\.[a-z_]+\.tooltip\.\d+))'/g;
 const MAP_ARGS = /available_recipe_map_\d\.tooltip'((?:\s*,\s*Text\.translate\('[^']+'\))+)/g;
@@ -44,17 +44,15 @@ for (const n of CONTROLLERS) {
     assert.ok(own.length > 0, `${n}: no tooltip key found in its startup file`);
     for (const k of own) {
       if (GTM_TYPES.has(k)) continue;
-      assert.ok(run.lang.en_us[k] !== undefined, `${n}: ${k} missing in en_us`);
-      assert.ok(run.lang.es_es[k] !== undefined, `${n}: ${k} missing in es_es`);
-    }
+      assert.ok(run.lang.en_us[k] !== undefined, `${n}: ${k}       missing in en_us`);
+          }
 
-    assert.ok(fs.existsSync(page(n)), `${n}: EMI info page missing`);
+          assert.ok(fs.existsSync(page(n)), `${n}: EMI info page missing`);
     const json = JSON.parse(fs.readFileSync(page(n), 'utf8'));
     assert.deepEqual(json.stacks, ['item:gtceu:' + n]);
     assert.ok(json.text.length > 0);
     for (const k of json.text) {
-      assert.ok(run.lang.en_us[k] !== undefined, `${n}: page key ${k} missing in en_us`);
-      assert.ok(run.lang.es_es[k] !== undefined, `${n}: page key ${k} missing in es_es`);
-    }
+      assert.ok(run.lang.en_us[k] !== undefined, `${n}: page key ${k}       missing in en_us`);
+          }
   });
 }

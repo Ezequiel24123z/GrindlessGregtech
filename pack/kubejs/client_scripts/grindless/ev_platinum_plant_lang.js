@@ -20,15 +20,3 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.platinum_electrode', 'Platinum on titanium. Goes in the input bus of the Platinum Plant, which needs one for every recipe; it wears out by chance (about 0.1% of the runs). Assemble it from a titanium rod and platinum foil.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.platinum_plant', 'Planta de platino')
-    add('gtceu.pgm_refining', 'Refinado de PGM')
-
-    add('grindless.machine.platinum_plant.tooltip.0', '§7Toda la línea del grupo del platino en una planta.')
-    add('grindless.machine.platinum_plant.no_voiding', 'El circuito 4 guarda todo lo que produce: los metales del platino de los asteroides son demasiado escasos para tirarlos. Desactiva el desecho de salidas.')
-
-    add('item.grindless.platinum_electrode', 'Electrodo de platino')
-    add('tooltip.grindless.platinum_electrode', 'Platino sobre titanio. Va en el bus de entrada de la planta de platino, que pide uno para cada receta; se desgasta por probabilidad (en torno al 0,1 % de las ejecuciones). Se ensambla con una varilla de titanio y lámina fina de platino.')
-})

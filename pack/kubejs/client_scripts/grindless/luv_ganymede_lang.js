@@ -14,16 +14,3 @@ ClientEvents.lang('en_us', function (event) {
   Object.keys(entries).forEach(function (key) { event.add('grindless', key, entries[key]) })
 })
 
-ClientEvents.lang('es_es', function (event) {
-  var entries = {
-    'block.gtceu.gravitational_wave_detector': 'Detector de ondas gravitacionales',
-    'gtceu.gravitational_wave_astronomy': 'Astronomía de ondas gravitacionales',
-    'block.gtceu.coilgun_launcher': 'Lanzador de sondas por bobinas',
-    'gtceu.probe_launch': 'Lanzamiento de sondas',
-    'grindless.machine.gravitational_wave_detector.tooltip.0': '§7Escucha ondas gravitacionales desde Ganímedes.',
-    'grindless.machine.gravitational_wave_detector.no_voiding': 'El detector conserva su catálogo. Desactiva el descarte de objetos.',
-    'grindless.machine.coilgun_launcher.tooltip.0': '§7Lanza sondas espaciales desde Ganímedes.',
-    'grindless.machine.coilgun_launcher.no_voiding': 'El lanzador conserva los datos de las sondas. Desactiva el descarte de objetos.'
-  }
-  Object.keys(entries).forEach(function (key) { event.add('grindless', key, entries[key]) })
-})

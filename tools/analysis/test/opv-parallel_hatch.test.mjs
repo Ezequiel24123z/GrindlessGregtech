@@ -1,5 +1,5 @@
 // OpV-M1: the OpV parallel hatch (startup_scripts/grindless/lib/parallel_hatch.js, server_scripts/grindless/opv/parallel.js): tier 13 = 4^(13-4)
-// = x262144, registered with the UHV, UEV, UIV and UXV ones, in the hatch list after them, the assembly line researched with the UXV hatch, the names in both languages.
+// = x262144, registered with the UHV, UEV, UIV and UXV ones, in the hatch list after them, the assembly line researched with the UXV hatch, the names in en_us.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -132,10 +132,10 @@ test('a missing input or fluid skips the recipe and is reported, never throws', 
   assert.deepEqual(plain(b.G.opvParallelHatch.missing), ['gtceu:superfluid_helium_3']);
 });
 
-test('the names, the tooltip and the info page exist in en_us and es_es', () => {
+test('the names, the tooltip and the info page exist in en_us', () => {
   const src = read('client_scripts', 'grindless/opv_parallel_hatch_lang.js');
   for (const key of ['block.gtceu.opv_parallel_hatch', 'grindless.machine.opv_parallel_hatch.tooltip', 'emi.grindless.info.opv_parallel_hatch.0']) {
-    assert.equal(src.split(`'${key}'`).length - 1, 2, key);
+    assert.equal(src.split(`'${key}'`).length - 1, 1, key);
   }
   assert.ok(src.includes('262144'));
   const info = JSON.parse(fs.readFileSync(path.join(KJS, 'assets/emi/recipe/additions/grindless/opv_parallel_hatch.json'), 'utf8'));

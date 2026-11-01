@@ -1,5 +1,5 @@
 // LuV foundation (package LuV-A1, startup_scripts/grindless/luv/foundation.js): every shared LuV id of docs/eras/luv.md is registered
-// exactly as the design writes it (the other LuV packages use these ids), named in en_us and es_es, drawn, hidden from EMI until the
+// exactly as the design writes it (the other LuV packages use these ids), named in en_us, drawn, hidden from EMI until the
 // package that gives it a route lands (hidden_until.json and tools/analysis/tiers/obtain.json agree), and the sunlight table keeps the
 // as-built factors of the EV and IV solar machines.
 import assert from 'node:assert/strict';
@@ -60,9 +60,9 @@ test('every shared LuV id of the design is registered with the design\'s name, a
   for (const id of ['gtceu:tetrataenite_ingot', 'gtceu:tetrataenite_dust', 'gtceu:meteoric_iron_dust', 'gtceu:zblan_dust']) assert.ok(run.registry.items.has(id), id);
 });
 
-test('names and both tooltip lines in en_us and es_es; materials named', () => {
+test('names and both tooltip lines in en_us; materials named', () => {
   const problems = [];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of ITEMS) for (const k of [`item.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.0`, `tooltip.grindless.${short(id)}.1`]) if (!L[k]) problems.push(`${lang} ${k}`);
     for (const id of BLOCKS) for (const k of [`block.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.0`, `tooltip.grindless.${short(id)}.1`]) if (!L[k]) problems.push(`${lang} ${k}`);

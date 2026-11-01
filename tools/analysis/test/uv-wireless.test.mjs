@@ -2,7 +2,7 @@
 //   - the UV row of tables/wireless_energy.json: tier 8, six of GTM's UV naquadria battery (15,728,640,000 EU, uv-s0.md S0-5), the gravi
 //     star as the link, the cell made in the naquadria magnet works (lv/wireless_energy.js registers the cell, eight hatches and two covers);
 //   - the magnet works' circuit 4 (tables/magnet_works.json): the only recipe of the UV cell, with the helium charge and A8's EnTED wire;
-//   - the UV hatches and covers in the assembler at VA[UV] with the gravi star; en_us and es_es names in GTM's UV colour; the textures;
+//   - the UV hatches and covers in the assembler at VA[UV] with the gravi star; en_us names in GTM's UV colour; the textures;
 //   - the smoke test's band in tools/test/zones.json.
 // The settlement (UV only when every formed tower holds UV cells, the per-window cap) runs in the game: gg_test_uv_wireless.
 import assert from 'node:assert/strict';
@@ -119,10 +119,10 @@ test('the UV hatches and covers: assembler recipes at VA[UV] with the gravi star
   assert.equal(W.rate(UV, 64), 524288 * 64);
 });
 
-test('names and textures: en_us and es_es in GTM\'s UV colour, the EMI line of circuit 4, the five UV textures', () => {
+test('names and textures: en_us names in GTM\'s UV colour, the EMI line of circuit 4, the five UV textures', () => {
   const { lang } = run;
   const keys = HATCHES.map((id) => 'block.' + id.replace(':', '.')).concat(COVERS.map((id) => 'item.' + id.replace(':', '.')));
-  for (const l of ['en_us', 'es_es']) {
+  for (const l of ['en_us']) {
     for (const k of keys) assert.match(String(lang[l][k]), /^\u00a73.*UV/, l + ' ' + k);
     assert.ok(lang[l]['block.grindless.uv_smes_cell'], l + ' names the cell');
     assert.ok(lang[l]['gtceu.recipe.grindless_naquadria_magnets.uv_smes_cell'], l + ': the EMI line of circuit 4');

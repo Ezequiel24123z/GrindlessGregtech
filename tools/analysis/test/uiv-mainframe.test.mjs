@@ -173,7 +173,7 @@ test('every contract id has a real use (temporary EMI exceptions are for these)'
     'grindless:p_si_processor', 'grindless:telecom_memory', 'grindless:pumped_edfa']) assert.ok(used.has(id), id);
 });
 
-test('lang parity: every ITEM and row key has en_us and es_es, every item has a texture', () => {
+test('lang parity: every ITEM and row key has en_us, every item has a texture', () => {
   const lang = read('client_scripts', 'grindless', 'uiv_mainframe_lang.js');
   const itemNames = [...lang.matchAll(/^\s+\['([a-z0-9_]+)', '[^']+', '[^']+', /gm)].map((m) => m[1]);
   const start = read('startup_scripts', 'grindless', 'uiv', 'mainframe.js');
@@ -193,7 +193,7 @@ test('lang parity: every ITEM and row key has en_us and es_es, every item has a 
   assert.equal((entryBlock.match(/^\s+\['(?:gtceu|emi)\./gm) || []).length, want.length);
   for (const n of registered) {
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
-    assert.match(lang, new RegExp(`'${n}', '[^']+', '[^']+', '[^']+', '[^']+', '[^']+', '[^']+'\\]`), n);
+    assert.match(lang, new RegExp(`'${n}', '[^']+', '[^']+', '[^']+'\\]`), n);
   }
   assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'uiv_mainframe_line.json')));
 });

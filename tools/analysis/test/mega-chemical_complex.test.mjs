@@ -330,7 +330,7 @@ test('controller recipe: 4 coil chemical plants, 16 LuV chemical reactors, 4 LuV
   assert.deepEqual(plain(h.errors), []);
 });
 
-test('the lang file names the machine, the recipe type and its tooltips in en_us and es_es', () => {
+test('the lang file names the machine, the recipe type and its tooltips in en_us', () => {
   const lang = read('client_scripts', 'luv_mega_chemical_complex_lang.js');
   const store = {};
   vm.runInNewContext(lang, {
@@ -339,10 +339,9 @@ test('the lang file names the machine, the recipe type and its tooltips in en_us
   });
   const keys = ['block.gtceu.mega_chemical_complex', 'gtceu.mega_chemical_complex'];
   keys.push('grindless.machine.mega_chemical_complex.tooltip.0');
-  for (const code of ['en_us', 'es_es']) {
+  for (const code of ['en_us']) {
     assert.ok(store[code], code);
     for (const key of keys) assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
   }
-  assert.equal(store.en_us['block.gtceu.mega_chemical_complex'], 'Mega Chemical Complex');
-  assert.notEqual(store.es_es['grindless.machine.mega_chemical_complex.tooltip.0'], store.en_us['grindless.machine.mega_chemical_complex.tooltip.0']);
-});
+  assert.equal(store.en_us['block.gtceu.mega_chemical_complex'],   'Mega Chemical Complex');
+  });

@@ -24,7 +24,7 @@ GregTech Modern 7.5.3 pack (Minecraft 1.20.1, Forge): nothing is gathered by han
 
 ## Invariants
 - IDs: our items and blocks `grindless:`; machines and recipe types `gtceu:`.
-- Everything is English only: names and tooltips (`en_us`), quests, docs, comments, tool output, commits. No `es_es` (owner, 2026-11-01): the existing Spanish and the checks that require it go in one cleanup package (EN-1); until it lands, a new key copies its English text into `es_es` so T0 passes.
+- Everything is English only: names and tooltips (`en_us`), quests, docs, comments, tool output, commits. No `es_es` (owner, 2026-11-01): T0 fails on any `es_es` key, block or file under `pack/kubejs` (EN-1's `english-only` check).
 - No save compatibility (nobody has played the pack yet): items, blocks, fluids, dimensions, multiblocks and quests may be removed, renamed, merged or reshaped whenever that makes the pack better. No conversion recipes or shape-change notices; a removed id takes its references with it (recipes, tables, quests, lang, tests).
 - Licences: check `CREDITS.md` first. MIT or LGPL: with attribution. GPL, non-commercial or all rights reserved: ideas only.
 

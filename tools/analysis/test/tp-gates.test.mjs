@@ -136,7 +136,7 @@ test('item counts: crafting counts pattern cells per key, machine recipes the co
 // ---------------------------------------------------------------- tooltip lint (TP-D5)
 
 const ctrl = (o = {}) => ({ id: 'gtceu:works', name: 'works', era: 'uev', entries: 3, ...o });
-const langOf = (en, es = en) => ({ en_us: Object.fromEntries(en.map((t, n) => [`grindless.machine.works.tooltip.${n}`, t])), es_es: Object.fromEntries(es.map((t, n) => [`grindless.machine.works.tooltip.${n}`, t])) });
+const langOf = (en) => ({ en_us: Object.fromEntries(en.map((t, n) => [`grindless.machine.works.tooltip.${n}`, t])) });
 const codes = (c, lang) => lint([c], lang).map((f) => f.code);
 
 test('tooltip lint: a short §7 tooltip.0 and short lines are clean', () => {
@@ -149,23 +149,19 @@ test('tooltip lint: more than 4 entries', () => {
 });
 
 test('tooltip lint: tooltip.0 exists, starts with §7 and has at most 80 visible characters', () => {
-  assert.deepEqual(codes(ctrl(), { en_us: {}, es_es: {} }), ['TT-FIRST', 'TT-FIRST']);
-  assert.deepEqual(codes(ctrl(), langOf(['Makes things.'])), ['TT-FIRST', 'TT-FIRST']);
-  assert.deepEqual(codes(ctrl(), langOf(['§7' + 'x'.repeat(81)])), ['TT-FIRST-LEN', 'TT-FIRST-LEN']);
+  assert.deepEqual(codes(ctrl(), { en_us: {} }), ['TT-FIRST']);
+  assert.deepEqual(codes(ctrl(), langOf(['Makes things.'])), ['TT-FIRST']);
+  assert.deepEqual(codes(ctrl(), langOf(['§7' + 'x'.repeat(81)])), ['TT-FIRST-LEN']);
   assert.deepEqual(codes(ctrl(), langOf(['§7' + 'x'.repeat(78)])), []);
   assert.deepEqual(codes(ctrl(), langOf(['§7§l' + 'x'.repeat(80)])), [], 'formatting codes are not counted');
 });
 
 test('tooltip lint: other lines have at most 60 visible characters', () => {
   assert.deepEqual(codes(ctrl(), langOf(['§7a', '§a' + 'x'.repeat(60)])), []);
-  assert.deepEqual(codes(ctrl(), langOf(['§7a', '§a' + 'x'.repeat(61)], ['§7a', 'ok'])), ['TT-LEN']);
-});
+  assert.deepEqual(codes(ctrl(), langOf(['§7a', '§a' +   'x'.repeat(61)])), ['TT-LEN']);
+  });
 
-test('tooltip lint: en_us and es_es have the same tooltip keys', () => {
-  assert.deepEqual(codes(ctrl(), langOf(['§7a', 'b'], ['§7a'])), ['TT-PARITY']);
-});
-
-test('tooltip lint: controllers come from the registry (multiblocks of ours only) with the array length', () => {
+  test('tooltip lint: controllers come from the registry (multiblocks of ours only) with the array length', () => {
   const m = (id, kind, file, tooltips) => [id, { id, name: id.replace('gtceu:', ''), kind, file, tooltips }];
   const registry = { machines: new Map([
     m('gtceu:a', 'multiblock', 'startup_scripts/grindless/uev/a.js', ['k0', null, 'k2']),

@@ -185,19 +185,18 @@ test('controller recipe: 2 large chemical reactors, 4 HV chemical reactors, 4 HV
   assert.deepEqual(plain(h.errors), []);
 });
 
-test('the lang file names the machine and its tooltips in en_us and es_es', () => {
+test('the lang file names the machine and its tooltips in en_us', () => {
   const lang = read('client_scripts', 'hv_mega_coil_chemical_plant_lang.js');
   const store = {};
   vm.runInNewContext(lang, {
     ClientEvents: { lang: (code, cb) => cb({ add: (ns, key, value) => { (store[code] = store[code] || {})[key] = value; } }) },
     console,
   });
-  for (const code of ['en_us', 'es_es']) {
+  for (const code of ['en_us']) {
     assert.ok(store[code], code);
     for (const key of ['block.gtceu.coil_chemical_plant', 'grindless.machine.coil_chemical_plant.tooltip.0', 'grindless.machine.coil_chemical_plant.tooltip.1']) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
     }
   }
-  assert.equal(store.en_us['block.gtceu.coil_chemical_plant'], 'Coil Chemical Plant');
-  assert.notEqual(store.es_es['grindless.machine.coil_chemical_plant.tooltip.0'], store.en_us['grindless.machine.coil_chemical_plant.tooltip.0']);
-});
+  assert.equal(store.en_us['block.gtceu.coil_chemical_plant'],   'Coil Chemical Plant');
+  });

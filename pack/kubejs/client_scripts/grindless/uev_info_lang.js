@@ -1,7 +1,7 @@
 // priority: 5014
 // Gregtech Grindless - EMI information pages of the UEV era machines and the UEV and UIV hatches (kubejs/assets/emi/recipe/additions/grindless/<id>.json, type emi:info).
 // One page per controller (one per hatch family): what it does, what it is for, what it needs. Their recipes show in EMI under the controller itself.
-// Tooltips live in the uev_*_lang.js files; every key is in en_us and es_es.
+// Tooltips live in the uev_*_lang.js files; every key is in en_us.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
@@ -78,78 +78,3 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.uiv_parallel_hatch.0', "The Insane Parallel Control Hatch lets a machine that takes parallel hatches run up to 16384 copies of a recipe at once, each at its own EU/t.")
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('emi.grindless.info.calutron.0', "El calutrón separa isótopos por masa: el cloruro ionizado recorre una pista de vacío y las cavidades colectoras recogen cada isótopo. Circuito 1: calcio, paso 1 (40 %). 2: calcio, paso 2 (97 %). 3: potasio-40. 4: litio-6. 5: plutonio-244. 6: plutonio-242 para el reactor de alto flujo. Los circuitos 7 a 9 son titanio-50, europio-151 y níquel-58.")
-    add('emi.grindless.info.calutron.1', "Es la única vía al calcio-48, al potasio-40, al litio-6 y al plutonio-244. Se niega a desechar: las corrientes empobrecidas salen como existencias y el plutonio empobrecido vuelve a la línea de MOX.")
-    add('emi.grindless.info.calutron.2', 'El calutrón de Y-12: una pista electromagnética en un tanque de vacío, una bobina superconductora alrededor de la pista y bolsillos colectores. El cloruro ionizado se separa por masa. La única vía al calcio-48, potasio-40, litio-6 y plutonio-244.')
-    add('emi.grindless.info.calutron.3', 'Consume energía. Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-3 buses de salida.')
-
-    add('emi.grindless.info.electron_beam_furnace.0', "El horno de haz de electrones funde el metal gota a gota bajo un cañón de electrones en alto vacío, y las impurezas volátiles se evaporan: pureza 6N. Circuito 1: renio. 2: hafnio. 3: tántalo. 4: niobio (grado RRR). 5: recubrimiento de YSZ sobre un álabe SX. 6: carbono cebolla. Circuitos 7 y 8: el botón de niobio-tántalo y la destilación de estaño.")
-    add('emi.grindless.info.electron_beam_furnace.1', "Es el único que fabrica hafnio, tántalo, niobio y renio 6N. Cada refinado deja un casquete EB, que vuelve a la planta de platino.")
-    add('emi.grindless.info.electron_beam_furnace.2', 'Un crisol bajo un cañón de electrones en vacío intenso: el metal se funde gota a gota y las impurezas volátiles se evaporan, dejando pureza 6N.')
-    add('emi.grindless.info.electron_beam_furnace.3', 'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, una escotilla de entrada opcional. Acepta una escotilla de paralelos.')
-
-    add('emi.grindless.info.entanglement_station.0', "La estación de entrelazamiento entrelaza fotones de una fuente de PPKTP con una memoria de europio y los comprueba con SNSPD. Circuito 1: un nodo repetidor cuántico, en una sola pasada. Solo funciona en órbita terrestre.")
-    add('emi.grindless.info.entanglement_station.1', "Es la única que fabrica nodos repetidores cuánticos. La memoria se mantiene en helio superfluido, que no se gasta.")
-    add('emi.grindless.info.entanglement_station.2', 'Entrelaza fotones de una fuente de PPKTP con una memoria Eu:YSO y los comprueba con SNSPD: el único fabricante de nodos repetidores cuánticos. Solo en órbita terrestre.')
-    add('emi.grindless.info.entanglement_station.3', 'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, una escotilla de entrada opcional. Acepta una escotilla de paralelos.')
-
-    add('emi.grindless.info.heavy_ion_cyclotron.0', "El ciclotrón de iones pesados dispara un haz de calcio-48 contra un blanco de actínido; una cámara de helio recoge el retroceso. Circuito 1: flerovio (plutonio-244). 2: livermorio (curio-248). 3: téneso (rueda de blancos). 4: oganesón (californio-249). 5: moscovio (americio). 6: un haz de xenón sobre lámina de policarbonato. Los circuitos 7 y 8 son las líneas de los elementos 120 y 119.")
-    add('emi.grindless.info.heavy_ion_cyclotron.1', "La cavidad SRF y el helio no se gastan, y el xenón se recupera. Se niega a desechar: los gases de retroceso, el helio y la rueda de blancos activada (a la celda caliente) siempre tienen adónde ir. Los gases pasan al separador de retroceso.")
-
-    add('emi.grindless.info.helium3_polariser.0', "El polarizador de helio-3 alinea los espines nucleares del helio-3 6N por bombeo óptico. Circuito 1: polariza el gas. Circuito 2: mezcla el gas polarizado con deuterio en combustible polarizado. Circuito 3: polariza helio-3 para una era posterior.")
-    add('emi.grindless.info.helium3_polariser.1', "El láser de 1.083 nm es una herramienta: no se consume. El gas despolarizado vuelve a la planta criogénica. El combustible polarizado alimenta el reactor de fusión Mk4.")
-    add('emi.grindless.info.helium3_polariser.2', 'El bombeo óptico a 1.083 nm alinea los espines nucleares del helio-3 6N.')
-
-    add('emi.grindless.info.megabar_press.0', "La prensa de megabares es una prensa de yunques múltiples que comprime la materia por encima del millón de atmósferas. Circuito 1: superhidruro (La,Y)H10 a partir de lámina de La-Y y cargas de amoniaco-borano. Circuito 2: diamante nanomaclado a partir de un pellet de carbono cebolla. Circuito 3: prensado isostático en caliente de un impulsor RHEA impreso. Circuito 4: recocido HPHT de una placa de diamante C-12.")
-    add('emi.grindless.info.megabar_press.1', "El yunque de diamante nanomaclado se desgasta: cada pasada tiene una probabilidad de gastar uno. Una escotilla de salida opcional recoge el hidrógeno que desprende el superhidruro.")
-    add('emi.grindless.info.megabar_press.2', 'Una prensa multiyunque que comprime la materia por encima del millón de atmósferas: fabrica el superhidruro (La,Y)H10 y el diamante nanomaclado.')
-    add('emi.grindless.info.megabar_press.3', 'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, una escotilla de salida opcional (hidrógeno). Acepta una escotilla de paralelos.')
-
-    add('emi.grindless.info.photonic_integration_hall.0', "La sala de integración fotónica une guías de onda, fuentes de puntos cuánticos, detectores y moduladores en un solo chip. Circuito 1: circuito de guía de onda. 2: chip fotónico cuántico. 3: ordenador óptico. Circuitos 4 a 6: núcleo tensorial fotónico, mainframe óptico y repetidor sincronizado con púlsar.")
-    add('emi.grindless.info.photonic_integration_hall.1', "Es el único lugar donde se fabrica el ordenador óptico, y los ordenadores ópticos del reactor de fusión Mk4 y de las máquinas posteriores empiezan aquí.")
-    add('emi.grindless.info.photonic_integration_hall.2', 'Une guías de ondas, fuentes de puntos cuánticos, detectores y moduladores en un solo chip: el único lugar donde se fabrica un ordenador óptico.')
-    add('emi.grindless.info.photonic_integration_hall.3', 'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, una escotilla de entrada opcional. Acepta una escotilla de paralelos.')
-
-    add('emi.grindless.info.quantum_gas_lab.0', "El laboratorio de gas cuántico enfría litio-6 y potasio-40 hasta una mezcla de Fermi degenerada y mide la gravedad con interferometría atómica. Circuito 1: modelo de la ecuación de estado degenerada. 2: estudio gravitatorio de Barnard. 3: calibra el interferómetro con la cavidad ULE. Solo funciona en órbita terrestre.")
-    add('emi.grindless.info.quantum_gas_lab.1', "Los láseres de enfriamiento y la cavidad ULE son herramientas: nunca se consumen.")
-    add('emi.grindless.info.quantum_gas_lab.2', 'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, una escotilla de entrada opcional. Acepta una escotilla de paralelos.')
-
-    add('emi.grindless.info.recoil_separator.0', "El separador de retroceso es un separador lleno de gas: imanes dipolares desvían los átomos de retroceso fuera del haz y una membrana grabada los recoge. Circuitos 1 a 5, como el ciclotrón de iones pesados: un gas de retroceso y una membrana grabada dan un ítem de átomos. Los circuitos 6 y 7 son las líneas de los elementos 120 y 119.")
-    add('emi.grindless.info.recoil_separator.1', "La membrana se gasta y el helio vuelve. Se niega a desechar: el helio y los átomos nunca deben tirarse. Los átomos pasan al laboratorio de química superpesada.")
-
-    add('emi.grindless.info.single_crystal_foundry.0', "La fundición monocristalina cuela piezas monocristalinas en un horno de extracción bajo argón: un solo grano, sin fronteras por donde fluya la fluencia. Circuito 1: álabe SX. 2: impulsor de bomba. 3: rueda de turbina Brayton con ocho álabes SX recubiertos.")
-    add('emi.grindless.info.single_crystal_foundry.1', "Es la única que fabrica esas piezas. El argón nunca se gasta, la mazarota se vuelve a fundir tras triturarla y la escoria va a la planta de platino. Se niega a desechar.")
-    add('emi.grindless.info.single_crystal_foundry.2', 'Circuito 1 álabe SX, 2 impulsor de bomba, 3 rueda de turbina Brayton. La mazarota vuelve a aleación madre en un pulverizador; la escoria va a la planta de platino. El argón nunca se gasta.')
-    add('emi.grindless.info.single_crystal_foundry.3', 'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, una escotilla de entrada, 1-2 buses de salida. Acepta una escotilla de paralelos.')
-
-    add('emi.grindless.info.snspd_foundry.0', "La fundición de SNSPD es un criostato que graba una película de siliciuro de wolframio en un nanohilo y lo empaqueta. Circuito 1: película de WSi. 2: escritura del nanohilo. 3: montaje en guía de onda. 4: enfriado y empaquetado en un SNSPD. Circuito 5: una oblea de uniones Josephson de niobio.")
-    add('emi.grindless.info.snspd_foundry.1', "Es la única que fabrica SNSPD. Necesita la oblea FZ y un chip de guía de ondas de SiN, que vienen de las líneas de fotónica.")
-    add('emi.grindless.info.snspd_foundry.2', 'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, una escotilla de entrada opcional. Acepta una escotilla de paralelos.')
-
-    add('emi.grindless.info.superheavy_chemistry_lab.0', "El laboratorio de química superpesada cuenta, clasifica y sella unos pocos átomos a la vez por cromatografía de gases sobre oro. Circuito 1: átomos de téneso en una cápsula sellada dan una muestra. Circuito 2: átomos de flerovio, livermorio, moscovio y oganesón sobre lámina de oro dan el censo de superpesados. Circuito 3: el censo de los elementos 119 y 120.")
-    add('emi.grindless.info.superheavy_chemistry_lab.1', "La muestra de téneso solo se guarda: ninguna receta la usa. Se niega a desechar: los átomos y las muestras nunca se tiran.")
-
-    add('emi.grindless.info.uev_fusion_reactor.0', "El reactor de fusión Mk4 es un anillo de fusión de nivel 10. Ejecuta tres combustibles, cada uno con un único fluido premezclado: D-He-3 (circuito 1), p-11B (circuito 2) y D-He-3 polarizado (circuito 3). Su búfer de energía supera con mucho el rango de un entero.")
-    add('emi.grindless.info.uev_fusion_reactor.1', "El combustible polarizado da 1,5 veces más plasma. El plasma no se quema para obtener calor: alimenta el conversor directo de energía y se enfría de vuelta a su fluido de combustible.")
-    add('emi.grindless.info.uev_fusion_reactor.2', 'Un anillo de fusión de nivel 10: su búfer de energía supera con mucho el rango de un entero.')
-    add('emi.grindless.info.uev_fusion_reactor.3', 'Ejecuta D-He-3, p-11B y D-He-3 polarizado, cada uno con un único fluido de combustible premezclado.')
-
-    add('emi.grindless.info.vdw_stacker.0', "El apilador VdW coloca cristales bidimensionales unos sobre otros con un brazo de transferencia limpio. Circuito 1: chip emisor de hBN. 2: modulador de grafeno. 3: grafeno entre dos películas de hBN.")
-    add('emi.grindless.info.vdw_stacker.1', "Las películas vienen de las líneas de CVD sobre lámina de cobre. Los chips y moduladores van a la sala de integración fotónica.")
-    add('emi.grindless.info.vdw_stacker.2', 'Apila cristales bidimensionales con un brazo de transferencia limpio: chips de hBN, moduladores de grafeno, grafeno encapsulado en hBN.')
-    add('emi.grindless.info.vdw_stacker.3', 'Las piezas van en la capa inferior: 1-2 escotillas de energía, 1-2 buses de entrada, 1-2 buses de salida, una escotilla de entrada opcional. Acepta una escotilla de paralelos.')
-
-    add('emi.grindless.info.uev_uiv_machine_hull.0', "Los cascos de máquina UEV y UIV son el núcleo sobre el que se construye toda máquina y escotilla de su tier: las escotillas de energía parten de uno. Se fabrican en un ensamblador con la carcasa de máquina, los cables y las placas del tier.")
-    add('emi.grindless.info.uev_uiv_machine_hull.1', "Por sí solo el casco no hace nada; puede ir en un multibloque donde se acepte una pieza de paso.")
-
-    add('emi.grindless.info.uev_uiv_energy_hatch.0', "Las escotillas de energía UEV y UIV llevan EU a un multibloque desde un cable al voltaje de su tier. La normal admite 2 A y la de 16A admite 16 A, así que transporta mucha más potencia por un solo cable. Se fabrican en un ensamblador con el casco de máquina y los cables del tier.")
-    add('emi.grindless.info.uev_uiv_energy_hatch.1', "Un multibloque de este tier las admite en sus ranuras de energía de la capa inferior. Para una escotilla sin cable, mira la escotilla de energía inalámbrica.")
-
-    add('emi.grindless.info.uev_uiv_dynamo_hatch.0', "Las escotillas dinamo UEV y UIV sacan EU de un multibloque generador a un cable al voltaje de su tier. La normal da 2 A y la de 16A da 16 A. Se fabrican en un ensamblador con el casco de máquina y los cables del tier.")
-    add('emi.grindless.info.uev_uiv_dynamo_hatch.1', "Un generador necesita una, o su energía no tiene adónde ir. Para una escotilla sin cable, mira la escotilla dinamo inalámbrica.")
-
-    add('emi.grindless.info.uiv_parallel_hatch.0', "La escotilla de control paralelo demencial deja que una máquina que acepta escotillas de paralelos ejecute hasta 16384 copias de una receta a la vez, cada una con su EU/t.")
-})

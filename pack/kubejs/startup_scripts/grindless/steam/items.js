@@ -6,7 +6,7 @@
 //   grindless:vein_sample_<vein>                            one per vein of data/grindless/tables/veins.json;
 //                                                           put in the drill's input bus it selects the vein
 //                                                           (a non-consumed input of the vein_drilling recipes)
-// Names / tooltips live in assets/grindless/lang/{en_us,es_es}.json.
+// Names / tooltips live in assets/grindless/lang/en_us.json.
 // Textures: item/bronze_drill_bit, item/steel_drill_bit, item/empty_vein_probe, and for the samples two
 // layers: item/vein_sample_frame (untinted) + item/vein_sample_core (tinted with the color of the vein).
 (function () {

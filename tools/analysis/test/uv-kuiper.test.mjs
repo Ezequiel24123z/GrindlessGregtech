@@ -3,7 +3,7 @@
 //   - server_scripts/grindless/uv/kuiper.js: the bay's intercept, the annealer's release, the canister and the interceptor, the crafting;
 //   - server_scripts/grindless/ev/cryogenic_plant.js: the Kuiper row after A1's Triton row, the older rows unchanged;
 //   - Kuiper noble gas only from the annealer, and its krypton reaches the thruster works' Hall thruster;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -169,11 +169,10 @@ test('krypton reaches the thruster works: the Hall thruster takes the krypton th
   assert.ok(fluidsOut(byId(CRYO_ROW)).some(([id]) => id === 'gtceu:krypton'));
 });
 
-test('names: en_us and es_es for the machines, the types and the items', () => {
+test('names: en_us for the machines, the types and the items', () => {
   const lang = read('client_scripts/grindless/uv_kuiper_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['bay:', 'annealer:', 'bayType:', 'annealerType:', 'bayTips:', 'annealerTips:']) assert.ok(part.includes(key), key);
     for (const n of NEW_ITEMS) assert.ok(part.includes(`${n}:`), n);
   }

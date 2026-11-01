@@ -115,10 +115,10 @@ test('tiers 1-11 are untouched', () => {
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uev').capacity, 251658240000);
 });
 
-test('names: en_us and es_es for the UXV hatches, covers, cell and the EMI line of circuit 7', () => {
+test('names: en_us for the UXV hatches, covers, cell and the EMI line of circuit 7', () => {
   const { lang } = run;
   const keys = HATCHES.map((id) => 'block.' + id.replace(':', '.')).concat(COVERS.map((id) => 'item.' + id.replace(':', '.')));
-  for (const l of ['en_us', 'es_es']) {
+  for (const l of ['en_us']) {
     for (const k of keys) assert.match(String(lang[l][k]), /UXV/, l + ' ' + k);
     assert.ok(lang[l]['block.grindless.uxv_smes_cell'], l + ' names the cell');
     assert.ok(lang[l]['gtceu.recipe.grindless_nitride_magnet_synthesis.uxv_smes_cell'], l + ': the EMI line of circuit 7');

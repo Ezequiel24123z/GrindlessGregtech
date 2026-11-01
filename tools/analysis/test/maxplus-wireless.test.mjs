@@ -64,10 +64,10 @@ test('maxplus/wireless.js: two assembly-line rows at VA[MAX] with station resear
   assert.ok(b.duration > a.duration);
 });
 
-test('names: both hatches in the MAX+ lang script, en_us and es_es', () => {
+test('names: both hatches in the MAX+ lang script, en_us only (EN-1)', () => {
   const src = read('client_scripts', 'grindless', 'maxplus_wireless_lang.js');
   assert.match(src, /'en_us'/);
-  assert.match(src, /'es_es'/);
+  assert.doesNotMatch(src, /es_es/);
   assert.match(src, /AMPS = \[1024, 4096\]/);
   const emi = read('assets', 'emi', 'recipe', 'additions', 'grindless', 'wireless_energy_hatch.json');
   for (const id of IDS) assert.ok(emi.includes('item:' + id), id + ' in the EMI entry');

@@ -1,7 +1,7 @@
 // priority: 6514
 // Gregtech Grindless - EMI information page of the Moon multiblock (kubejs/assets/emi/recipe/additions/grindless/<id>.json, type emi:info).
 // One page per controller: what it does, what it is for, what it needs. Its recipes show in EMI under the controller itself.
-// Tooltips live in moon_lang.js; every key is in en_us and es_es.
+// Tooltips live in moon_lang.js; every key is in en_us.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
@@ -13,13 +13,3 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.lunar_drill.5', 'Needs 1 or 2 energy hatches, 1 input bus, 1 or 2 output buses and, for the helium-3, 1 output hatch. The three legs stand on lunar ground.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('emi.grindless.info.lunar_drill.0', "La perforadora lunar es la perforadora de vetas de la Luna y solo funciona allí. La veta lunar de ilmenita da ilmenita (el único titanio), olivino, cromita y hierro, 3,75 menas en bruto por ciclo. El regolito da helio-3, solo de día lunar.")
-    add('emi.grindless.info.lunar_drill.1', "Necesita una broca HV (cerca del 0,5 % de desgaste por ciclo) y una escotilla de salida para el helio-3. Hace tantos ciclos a la vez como permitan sus escotillas de energía (voltaje / 8 EU/t, hasta 32). En el vacío nada arde: lleva baterías cargadas desde la Tierra.")
-    add('emi.grindless.info.lunar_drill.2', 'La perforadora de vetas de la Luna: un módulo de aterrizaje sobre tres patas apoyadas en el regolito, con dos alas solares y una sarta de perforación corta. Solo funciona en la Luna (todas las recetas lunares lo piden).')
-    add('emi.grindless.info.lunar_drill.3', 'Veta lunar de ilmenita: ilmenita (el único titanio), olivino, cromita y hierro, 3,75 menas en bruto por ciclo. Regolito: helio-3, solo de día lunar (las alas lo hornean). Broca HV, cerca del 0,5 % de desgaste por ciclo.')
-    add('emi.grindless.info.lunar_drill.4', 'Hace tantos ciclos a la vez como permitan sus escotillas de energía (voltaje / 8 EU/t, hasta 32). En el vacío nada arde: lleva baterías cargadas de la Tierra y después manda la energía de la Tierra por el puente cuántico de AE2.')
-    add('emi.grindless.info.lunar_drill.5', 'Necesita 1 o 2 escotillas de energía, 1 bus de entrada, 1 o 2 buses de salida y, para el helio-3, 1 escotilla de salida. Las tres patas se apoyan en suelo lunar.')
-})

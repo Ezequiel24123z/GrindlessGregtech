@@ -1,5 +1,5 @@
 // MAX foundation (package MAX-F1, startup_scripts/grindless/max/foundation.js): every shared MAX id of docs/eras/max.md F1 is registered once
-// with en_us and es_es names and there is no recipe. GTM registers every gtceu:max_* id (highTierContent on): tables/max_ids.json lists them and
+// with en_us names and there is no recipe. GTM registers every gtceu:max_* id (highTierContent on): tables/max_ids.json lists them and
 // nothing of ours creates them. The horizon_strand cable is 16 A at V[MAX] with loss 1 (S0-3, never "lossless"). The two tier-14 places are
 // data files published by max/travel.js with two relay_platforms rows; every item and block has its texture.
 import assert from 'node:assert/strict';
@@ -128,10 +128,10 @@ test('tables/max_ids.json lists the 29 MAX ids, every F1 id and the circuits blo
   assert.doesNotMatch(JSON.stringify(table), /"(itemsOut|fluidsOut|recipes)"/, 'an id table, not a recipe table');
 });
 
-test('names and both tooltip lines in en_us and es_es; materials named; es differs from en', () => {
+test('names and both tooltip lines in en_us; materials named', () => {
   const problems = [];
   const keysOf = (id) => [`${BLOCKS.includes(id) ? 'block' : 'item'}.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.0`, `tooltip.grindless.${short(id)}.1`];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of [...ITEMS, ...BLOCKS]) for (const k of keysOf(id)) if (!L[k]) problems.push(`${lang} ${k}`);
     for (const key of MATERIAL_KEYS) {
@@ -140,9 +140,6 @@ test('names and both tooltip lines in en_us and es_es; materials named; es diffe
     }
   }
   assert.deepEqual(problems, []);
-  const en = run.lang.en_us; const es = run.lang.es_es;
-  for (const id of [...ITEMS, ...BLOCKS]) assert.notEqual(es[keysOf(id)[0]], en[keysOf(id)[0]], id);
-  for (const key of MATERIAL_KEYS) assert.notEqual(es[`material.${key.split(':')[0]}.${short(key)}`], en[`material.${key.split(':')[0]}.${short(key)}`], key);
 });
 
 test('the two places load at tier 14: dimension (nsc_belt), planet rows (no air), sky; no other tier-14 planet', () => {
@@ -195,14 +192,13 @@ test('relay_platforms.json: the two MAX rows are appended, one jump each, Sgr A*
   assert.equal(new Set(plat.map((p) => p.jump)).size, plat.length, 'every jump once');
 });
 
-test('the places are named in en_us and es_es (level, dimension, planet)', () => {
-  for (const lang of ['en_us', 'es_es']) {
+test('the places are named in en_us (level, dimension, planet)', () => {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const [k, [, file]] of Object.entries(PLACES)) {
       for (const key of [`level.grindless.${file}`, `dimension.grindless.${file}`, `planet.grindless.${k}`]) assert.ok(L[key], `${lang} ${key}`);
     }
   }
-  for (const [, [, file]] of Object.entries(PLACES)) assert.notEqual(run.lang.es_es[`dimension.grindless.${file}`], run.lang.en_us[`dimension.grindless.${file}`]);
 });
 
 test('every item and block has its texture and the generator draws exactly them', () => {

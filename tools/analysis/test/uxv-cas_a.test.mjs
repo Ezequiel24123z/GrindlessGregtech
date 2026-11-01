@@ -145,10 +145,8 @@ test('lang parity: every key of both languages, names, tooltips, items, EMI page
   for (const r of CA.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   keys.push('gtceu.recipe.grindless_antimatter_storage.positron_stack', 'gtceu.recipe.grindless_calutron_separation.titanium_44', 'gtceu.recipe.grindless_hot_cell.ti44_core_capsule',
     'gtceu.recipe.grindless_hot_cell.ti44_core_decay', 'gtceu.recipe.grindless_xray_pulse_profiling.ti44_map');
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  const re = /ejecta|annihilation|ti44|moderated_ps|titanium_44|positron_stack/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
-  const sounds = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'assets', 'sounds.json'), 'utf8')).sounds || [];
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
+  const sounds =  JSON.parse(fs.readFileSync(path.join(root, 'tools', 'assets', 'sounds.json'), 'utf8')).sounds || [];
   const wiring = kube('startup_scripts', 'grindless', 'sounds.js');
   for (const [type, loop] of [['ejecta_sweeping', 'ejecta_knot_sweeper'], ['annihilation_lasing', 'annihilation_laser_works']]) {
     assert.ok(wiring.includes(`'gtceu:${type}': 'loop_${loop}'`), `${type} wired`);

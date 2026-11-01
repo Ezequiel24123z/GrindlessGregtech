@@ -21,15 +21,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.fluorspar_kiln.no_voiding', 'The scrubber keeps all the hydrofluoric acid: it leaves through the output hatches. Turn fluid voiding off')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.fluorspar_kiln', 'Horno de fluorita')
-    add('gtceu.fluorspar_digestion', 'Digestión de fluorita')
-
-    add('grindless.machine.fluorspar_kiln.tooltip.0', '§7Horno rotatorio que digiere fluorita en ácido fluorhídrico.')
-
-    add('gtceu.recipe.grindless_fluorspar_kiln.hydrofluoric_acid_from_fluorite', 'Una carga: el horno hace hasta 256 a la vez, 64 ticks cada una, sin overclock')
-
-    add('grindless.machine.fluorspar_kiln.no_voiding', 'El lavador guarda todo el ácido fluorhídrico: sale por las escotillas de salida. Desactiva el vaciado de fluidos')
-})

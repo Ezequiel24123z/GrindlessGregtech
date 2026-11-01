@@ -29,23 +29,3 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.reforming_catalyst', 'Platinum on silica. Goes in the input bus of the Catalytic Reformer; used up in about 0.05% of the runs.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.refinery', 'Refinería')
-    add('gtceu.refining', 'Refino')
-
-    add('grindless.machine.refinery.tooltip.0', '§7Un complejo petroquímico: del crudo a combustibles, nafta y gas de refinería.')
-    add('grindless.machine.refinery.tooltip.1', 'Pide un catalizador de hidrotratamiento en el bus.')
-
-    add('block.gtceu.reformer', 'Reformador catalítico')
-    add('gtceu.reforming', 'Reformado')
-
-    add('grindless.machine.reformer.tooltip.0', '§7Convierte nafta desulfurada en benceno, tolueno e hidrógeno.')
-    add('grindless.machine.reformer.tooltip.1', 'Pide un catalizador de reformado en el bus de entrada.')
-
-    add('item.grindless.hydrotreating_catalyst', 'Catalizador de hidrotratamiento')
-    add('tooltip.grindless.hydrotreating_catalyst', 'Cobalto y molibdeno sobre sílice. Va en el bus de entrada de la refinería; se gasta en cerca del 0,05 % de los ciclos.')
-    add('item.grindless.reforming_catalyst', 'Catalizador de reformado')
-    add('tooltip.grindless.reforming_catalyst', 'Platino sobre sílice. Va en el bus de entrada del reformador catalítico; se gasta en cerca del 0,05 % de los ciclos.')
-})

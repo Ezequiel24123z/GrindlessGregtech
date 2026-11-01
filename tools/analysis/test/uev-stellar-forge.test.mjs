@@ -124,10 +124,10 @@ test('the controller recipe: N blast furnaces, coils and circuits, no new type',
   assert.deepEqual(plain(recs[0].inputs), ['8x gtceu:electric_blast_furnace', '16x grindless:hftacn_coil_block', '3x gtceu:uev_field_generator', '3x gtceu:uev_electric_pump', '2x gtceu:uev_sensor', '4x #gtceu:circuits/uev', '2x grindless:ule_cavity', '2x grindless:hftacn_heating_element']);
 });
 
-test('names and tooltips exist in both languages', () => {
+test('names and tooltips exist in en_us', () => {
   const src = fs.readFileSync(path.join(KJS, 'client_scripts', 'grindless', 'uev_stellar_forge_lang.js'), 'utf8');
   for (const key of ['block.gtceu.stellar_forge', 'grindless.machine.stellar_forge.tooltip.0',
     'emi.grindless.info.stellar_forge.0']) {
-    assert.equal(src.split(`'${key}'`).length - 1, 2, key);
+    assert.equal(src.split(`'${key}'`).length - 1, 1, key);
   }
 });

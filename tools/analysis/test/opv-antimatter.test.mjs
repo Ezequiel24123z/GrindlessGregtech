@@ -226,7 +226,7 @@ test('structures: not boring, at least two functional kinds, controller in the f
   }
 });
 
-test('lang parity: every key of both languages, names, tooltips, EMI pages, recipe lines and the items', () => {
+test('lang: every key of en_us, names, tooltips, EMI pages, recipe lines and the items', () => {
   const keys = ['gtceu.antihydrogen_synthesis', 'gtceu.annihilation_power'];
   for (const m of MACHINES) keys.push(`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`, `grindless.machine.${m}.tooltip.1`, `emi.grindless.info.${m}.0`, `emi.grindless.info.${m}.1`);
   keys.push('grindless.machine.annihilation_engine.tooltip.2');
@@ -235,9 +235,8 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages, reci
   }
   for (const i of Object.keys(AM.items)) keys.push(`item.grindless.${i}`, `tooltip.grindless.${i}.0`, `tooltip.grindless.${i}.1`);
   for (const r of AM.recipes) if (r.dataKey) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
   const re = /antihydrogen|annihilation|absorber_tile|hohlraum/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
   assert.match(run.lang.en_us['grindless.machine.annihilation_engine.tooltip.2'], /neutrino/);
   assert.match(run.lang.en_us['grindless.machine.antihydrogen_foundry.tooltip.1'], /5%/);
 });
@@ -367,7 +366,7 @@ test('OpV-B3a: every new row stays below 2^31 EU/t, the new items are registered
     'hopg_blank', 'hopg_plate', 'hopg_offcut', 'w_re_alloy_ingot', 'cm245_fraction', 'w_re_hohlraum', 'boron_10_dust', 'b4c_10_dust', 'gasb_boule', 'gasb_wafer', 'gasb_kerf_dust', 'ingaassb_epi_wafer'];
   for (const n of fresh) {
     assert.ok(AM.items[n], `${n} is registered`);
-    for (const lang of ['en_us', 'es_es']) for (const k of [`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`]) assert.ok(run.lang[lang][k], `${lang} ${k}`);
+    for (const lang of ['en_us']) for (const k of [`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`]) assert.ok(run.lang[lang][k], `${lang} ${k}`);
     assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'grindless', 'textures', 'item', `${n}.png`)), `${n} texture`);
   }
 });

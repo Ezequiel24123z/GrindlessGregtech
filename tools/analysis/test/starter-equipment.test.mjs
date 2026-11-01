@@ -140,7 +140,7 @@ test('Failed surveys notify the player, log the error and still suppress the uns
   assert.equal(s.calls.messages[0][0], 'message.grindless.field_prospector.error');
 });
 
-test('Gift-only tooltip replaces stock range/energy claims and all added text has both translations', () => {
+test('Gift-only tooltip replaces stock range/energy claims and all added text has translations', () => {
   const languages = {};
   let tooltip;
   vm.runInNewContext(fs.readFileSync(new URL('pack/kubejs/client_scripts/grindless/starter_prospector_lang.js', root), 'utf8'), {
@@ -153,7 +153,8 @@ test('Gift-only tooltip replaces stock range/energy claims and all added text ha
     } }); } },
     Text: { translate: (key) => key, aqua: (s) => s, green: (s) => s, gray: (s) => s, darkGray: (s) => s },
   });
-  assert.deepEqual(Object.keys(languages.en_us).sort(), Object.keys(languages.es_es).sort());
+  assert.ok(Object.keys(languages.en_us).length > 0);
+  assert.deepEqual(Object.keys(languages), ['en_us']);
   const lines = ['Gift name', 'Stock range', 'Stock energy'];
   const list = { get: (i) => lines[i], clear: () => { lines.length = 0; }, add: (s) => lines.push(s) };
   tooltip({ getNbt: () => ({ getBoolean: () => false }) }, false, list);

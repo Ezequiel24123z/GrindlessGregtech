@@ -3,7 +3,6 @@
 //
 //   gtceu:advanced_multi_smelter, gtceu:lava_furnace, gtceu:weather_controller   (machine names + tooltips + their messages)
 //   gtceu:weather_control                                                       (recipe type name)
-//   wildcard_pattern:wildcard_pattern                                           (Spanish name only: the mod ships its English one)
 //
 // Same approach as syngas_lang.js: Minecraft merges lang entries from every namespace/script.
 ClientEvents.lang('en_us', event => {
@@ -25,23 +24,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.weather_controller.already_set', 'That weather is already set')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.advanced_multi_smelter', 'Multihorno avanzado')
-    add('grindless.machine.advanced_multi_smelter.tooltip.0', '§7Funde objetos distintos en el mismo ciclo, hasta 64 a la vez.')
-    add('grindless.machine.advanced_multi_smelter.tooltip.1', 'Paralelos por bobina: 4 cuproníquel, 64 desde HSS-G.')
-    add('grindless.machine.advanced_multi_smelter.parallels', 'Paralelos: %s (bobinas a %s K)')
-
-    add('block.gtceu.lava_furnace', 'Horno de lava')
-    add('grindless.machine.lava_furnace.tooltip.0', '§7Un horno calentado con lava, sin escotilla de energía: hasta 8 objetos a la vez.')
-    add('grindless.machine.lava_furnace.no_lava', 'No hay lava suficiente en el hogar')
-
-    add('block.gtceu.weather_controller', 'Controlador del clima')
-    add('gtceu.weather_control', 'Control del clima')
-    add('grindless.machine.weather_controller.tooltip.0', '§7Siembra las nubes: cielo despejado, lluvia o tormenta eléctrica.')
-    add('grindless.machine.weather_controller.tooltip.1', 'Solo funciona en la Tierra.')
-    add('grindless.machine.weather_controller.already_set', 'Ese clima ya está puesto')
-
-    add('item.wildcard_pattern.wildcard_pattern', 'Patrón comodín')
-})

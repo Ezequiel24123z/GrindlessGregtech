@@ -62,7 +62,7 @@ test('no MAX+ id, no UIV hull or UIV-only input', () => {
   }
 });
 
-test('the c3 EMI line has en and es text', () => {
+test('the c3 EMI line has en text', () => {
   assert.match(lang, /grindless_warp_gate\.hold/);
-  assert.match(lang, /'en_us', 'es_es'/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
 });

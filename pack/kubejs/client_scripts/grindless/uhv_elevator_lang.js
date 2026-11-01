@@ -32,56 +32,29 @@
                 trichlorobenzene: 'Trichlorobenzene', dinitrotrichlorobenzene: 'Dinitrotrichlorobenzene', polyphosphoric_acid: 'Polyphosphoric Acid',
                 chlorodinitroresorcinol: 'Chlorodinitroresorcinol', diaminoresorcinol: 'Diaminoresorcinol', terephthalic_acid: 'Terephthalic Acid'
             }
-        },
-        es_es: {
-            plant: 'Planta de PBO', works: 'Taller de Cinta de Amarre',
-            plantType: 'Sintesis de PBO', worksType: 'Cinta de amarre',
-            plantTip: '§7Sintetiza fibra de PBO (Zylon), el polímero más resistente del cable.',
-            worksTip: '§7Trenza el cable del ascensor espacial y construye su trepador.',
-            plantTips: [
-                'Zylon, la fibra polimerica mas resistente: la espina del amarre. Circuito programado 1: triclorobenceno + mezcla nitrante -> dinitrotriclorobenceno + acido sulfurico diluido. Circuito 2: + hidroxido de sodio -> clorodinitrorresorcinol + sal.',
-                'Circuito 3: clorodinitrorresorcinol + hidrogeno + acido clorhidrico, el paladio se conserva -> diaminorresorcinol + agua. Circuito 4: diaminorresorcinol + acido tereftalico + acido polifosforico -> pasta de PBO + acido clorhidrico.',
-                'Circuito 5: 1.000 mB de pasta de PBO + 2.000 mB de agua -> 8 fibras de PBO + acido fosforico, que vuelve a acido polifosforico. El acido clorhidrico alimenta el circuito 3; la sal y los acidos, el electrolizador y la destileria de GTM.',
-                'Necesita carcasa quimicamente inerte de 7 x 5 x 9 con carcasas de tuberia de PTFE y una caja de engranajes de acero de tungsteno (8 o mas carcasas entre las piezas del suelo), 1 o 2 hatches de energia (UHV), buses y hatches de entrada y salida.'
-            ],
-            worksTips: [
-                'Trenza el amarre del ascensor espacial y construye el escalador que sube por el.',
-                'Circuito programado 1: 8 hilos de nanotubos de carbono + 4 hilos de BNNT + 4 fibras de PBO -> 1 segmento de cinta de amarre.',
-                'Circuito 2: 1 oblea epitaxial de InGaAs (el receptor laser) + 2 modulos de potencia de SiC + 2 celdas betavoltaicas -> 1 escalador de amarre.',
-                'Necesita carcasa robusta de acero de tungsteno de 11 x 5 x 5 con cajas de engranajes de acero de tungsteno y un marco de acero de tungsteno (12 o mas carcasas entre las piezas del suelo), 1 o 2 hatches de energia (UHV), buses de entrada y salida.'
-            ],
-            items: {
-                geo_assembled_stage: ['Etapa ensamblada en GEO', 'Una etapa de cohete pesada montada en lo alto del amarre, donde nunca tuvo que salir del pozo gravitatorio a empujones.', 'La hace el Ascensor Espacial (elevacion a GEO); la usa el cohete de nivel 8.']
-            },
-            materials: {
-                trichlorobenzene: 'Triclorobenceno', dinitrotrichlorobenzene: 'Dinitrotriclorobenceno', polyphosphoric_acid: 'Acido polifosforico',
-                chlorodinitroresorcinol: 'Clorodinitrorresorcinol', diaminoresorcinol: 'Diaminorresorcinol', terephthalic_acid: 'Acido tereftalico'
-            }
         }
     }
 
-    Object.keys(TEXT).forEach(function (lang) {
-        ClientEvents.lang(lang, function (event) {
-            var t = TEXT[lang]
-            var add = function (key, value) { event.add('grindless', key, value) }
+    ClientEvents.lang('en_us', function (event) {
+        var t = TEXT.en_us
+        var add = function (key, value) { event.add('grindless', key, value) }
 
-            add('block.gtceu.pbo_plant', t.plant)
-            add('block.gtceu.tether_ribbon_works', t.works)
-            add('gtceu.pbo_synthesis', t.plantType)
-            add('gtceu.tether_ribbon', t.worksType)
-            add('grindless.machine.pbo_plant.tooltip.0', t.plantTip)
-            add('grindless.machine.tether_ribbon_works.tooltip.0', t.worksTip)
-            // the long text moved to the EMI info pages (keys 0 and 1 are in uhv_info_lang.js)
-            for (var i = 0; i < 4; i++) {
-                add('emi.grindless.info.pbo_plant.' + (2 + i), t.plantTips[i])
-                add('emi.grindless.info.tether_ribbon_works.' + (2 + i), t.worksTips[i])
-            }
-            Object.keys(t.items).forEach(function (name) {
-                add('item.grindless.' + name, t.items[name][0])
-                add('tooltip.grindless.' + name + '.0', t.items[name][1])
-                add('tooltip.grindless.' + name + '.1', t.items[name][2])
-            })
-            Object.keys(t.materials).forEach(function (name) { add('material.gtceu.' + name, t.materials[name]) })
+        add('block.gtceu.pbo_plant', t.plant)
+        add('block.gtceu.tether_ribbon_works', t.works)
+        add('gtceu.pbo_synthesis', t.plantType)
+        add('gtceu.tether_ribbon', t.worksType)
+        add('grindless.machine.pbo_plant.tooltip.0', t.plantTip)
+        add('grindless.machine.tether_ribbon_works.tooltip.0', t.worksTip)
+        // the long text moved to the EMI info pages (keys 0 and 1 are in uhv_info_lang.js)
+        for (var i = 0; i < 4; i++) {
+            add('emi.grindless.info.pbo_plant.' + (2 + i), t.plantTips[i])
+            add('emi.grindless.info.tether_ribbon_works.' + (2 + i), t.worksTips[i])
+        }
+        Object.keys(t.items).forEach(function (name) {
+            add('item.grindless.' + name, t.items[name][0])
+            add('tooltip.grindless.' + name + '.0', t.items[name][1])
+            add('tooltip.grindless.' + name + '.1', t.items[name][2])
         })
+        Object.keys(t.materials).forEach(function (name) { add('material.gtceu.' + name, t.materials[name]) })
     })
 })()

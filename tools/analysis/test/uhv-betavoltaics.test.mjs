@@ -171,7 +171,7 @@ test('line 22: CO -> C-12 monoxide (Saturn orbit) -> methanation -> C-12 methane
   assert.deepEqual(Q.recipes.filter((r) => r.type === 'diamond_cvd').map((r) => r.circuit), [1, 2, 3, 4, 7, 8, 9, 10]); // MAX-E1 c10 (collector_diamond_plate); UIV-A10 adds c8 (c12_cvd_plate); MAX-A3 c9 (power_diamond_plate)
 });
 
-test('no UEV input, and every lang key the package needs is written in en_us and es_es', () => {
+test('no UEV input, and every lang key the package needs is written in en_us', () => {
   for (const r of Object.values(T.types).flatMap((t) => t.recipes)) {
     for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   }

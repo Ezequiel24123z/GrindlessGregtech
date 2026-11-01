@@ -30,25 +30,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.steam_ore_washer.tooltip.0', '§7Runs ore washer recipes on steam, eight at a time.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.steam_forge_hammer', 'Martillo de forja de vapor')
-    add('block.gtceu.steam_compressor', 'Compresor de vapor')
-    add('block.gtceu.steam_alloy_smelter', 'Fundición de aleación de vapor')
-    add('block.gtceu.steam_mixer', 'Mezclador de vapor')
-    add('block.gtceu.steam_chemical_bath', 'Baño químico de vapor')
-    add('block.gtceu.steam_ore_washer', 'Lavadora de mineral de vapor')
-
-    add('grindless.machine.steam_forge_hammer.tooltip.0', '§7Corre recetas de martillo de forja con vapor, ocho a la vez.')
-
-    add('grindless.machine.steam_compressor.tooltip.0', '§7Corre recetas de compresor con vapor, ocho a la vez.')
-
-    add('grindless.machine.steam_alloy_smelter.tooltip.0', '§7Corre recetas de fundición de aleación con vapor, ocho a la vez.')
-
-    add('grindless.machine.steam_mixer.tooltip.0', '§7Corre recetas de mezcladora con vapor, ocho a la vez.')
-
-    add('grindless.machine.steam_chemical_bath.tooltip.0', '§7Corre recetas de baño químico con vapor, ocho a la vez.')
-
-    add('grindless.machine.steam_ore_washer.tooltip.0', '§7Corre recetas de lavadora de mena con vapor, ocho a la vez.')
-})

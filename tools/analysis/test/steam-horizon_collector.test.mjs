@@ -101,8 +101,8 @@ test('no recipe outputs the machine or the shard', () => {
   }
 });
 
-test('names in en_us and es_es', () => {
-  for (const lang of ['en_us', 'es_es']) {
+test('names in en_us', () => {
+  for (const lang of ['en_us']) {
     const l = run.lang[lang] || {};
     for (const key of [`block.${MACHINE.replace(':', '.')}`, 'gtceu.horizon_collection', 'item.grindless.horizon_shard',
       'grindless.machine.horizon_collector.tooltip.0', 'grindless.machine.horizon_collector.tooltip.1',

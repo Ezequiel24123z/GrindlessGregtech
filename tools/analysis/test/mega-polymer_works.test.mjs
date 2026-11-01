@@ -1,7 +1,7 @@
 // MEGA-2, the MV Polymer Works (startup_scripts/grindless/mv/mega_polymer_works.js, server_scripts/grindless/mv/mega_polymer_works.js,
 // data/grindless/tables/mega_polymer_works.json): the recipe type, the pattern through the real helper, the modifier chain, the two composed
 // lines checked against the sum of their stage recipes (recomputed here by hand from the stages' numbers), the parallel figure at two hatch
-// tiers (the formulas of lib/mega.js), the controller recipe and the names in both languages.
+// tiers (the formulas of lib/mega.js), the controller recipe and the names in en_us.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -248,19 +248,18 @@ test('controller recipe: 2 MV chemical reactors, 2 MV fluid solidifiers, 2 MV mi
   assert.deepEqual(plain(h.errors), []);
 });
 
-test('the lang file names the machine, the recipe type and its tooltips in en_us and es_es', () => {
+test('the lang file names the machine, the recipe type and its tooltips in en_us', () => {
   const lang = read('client_scripts', 'mv_mega_polymer_works_lang.js');
   const store = {};
   vm.runInNewContext(lang, {
     ClientEvents: { lang: (code, cb) => cb({ add: (ns, key, value) => { (store[code] = store[code] || {})[key] = value; } }) },
     console,
   });
-  for (const code of ['en_us', 'es_es']) {
+  for (const code of ['en_us']) {
     assert.ok(store[code], code);
     for (const key of ['block.gtceu.polymer_works', 'gtceu.polymer_works', 'grindless.machine.polymer_works.tooltip.0']) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
     }
   }
   assert.equal(store.en_us['block.gtceu.polymer_works'], 'Polymer Works');
-  assert.notEqual(store.es_es['grindless.machine.polymer_works.tooltip.0'], store.en_us['grindless.machine.polymer_works.tooltip.0']);
 });

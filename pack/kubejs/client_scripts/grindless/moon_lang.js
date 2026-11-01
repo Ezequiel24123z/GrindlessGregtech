@@ -8,7 +8,7 @@
 //   messages of moon/quantum_bridge.js
 //
 // Kept out of pack/kubejs/assets/grindless/lang/*, like the other *_lang.js scripts: Minecraft merges lang entries from every
-// namespace/script, so ClientEvents.lang works fine wherever it is declared. Quests are English only; names go in en_us and es_es.
+// namespace/script, so ClientEvents.lang works fine wherever it is declared. Quests are English only; names go in en_us.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
@@ -31,30 +31,6 @@ ClientEvents.lang('en_us', event => {
 
     add('planet.grindless.moon', 'the Moon')
     add('message.grindless.quantum_link_earth_pair', 'This singularity was entangled on Earth. A quantum link on %s needs a pair made with a seed from there.')
-})
-
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.lunar_drill', 'Perforadora lunar')
-    add('gtceu.lunar_drilling', 'Perforación lunar')
-    add('grindless.machine.lunar_drill.tooltip.0', '§7La perforadora de vetas de la Luna: ilmenita lunar y helio-3.')
-    add('grindless.machine.lunar_drill.tooltip.1', 'Solo funciona en la Luna.')
-
-    add('item.grindless.vein_sample_ilmenite_moon', 'Muestra de veta de ilmenita lunar')
-    add('item.grindless.vein_sample_regolith_moon', 'Muestra de regolito lunar')
-    add('tooltip.grindless.vein_sample.drill_lunar', 'Ponla en el bus de entrada de la perforadora lunar (broca HV) o de la perforadora trípode EV (broca de titanio), en la Luna. No se gasta.')
-    add('tooltip.grindless.vein_sample.volatiles', 'Da: %s')
-    add('tooltip.grindless.vein_sample.daytime', 'Solo de día lunar: las alas solares de la perforadora hornean el regolito.')
-    add('tooltip.grindless.vein_sample.moon', 'Luna: se hace con una sonda de vetas vacía y dos cosas de la veta traídas a mano en la primera visita.')
-
-    add('item.grindless.lunar_quantum_seed', 'Semilla cuántica lunar')
-    add('tooltip.grindless.lunar_quantum_seed.0', 'La mitad lunar de un par cuántico Tierra-Luna. Solo se hace en la Luna: reactor químico, circuito programado 1 + perla de ender + helio-3.')
-    add('tooltip.grindless.lunar_quantum_seed.1', 'Échala a una explosión con una singularidad de AE2 (la mitad de la Tierra): salen dos singularidades entrelazadas que también unen la Tierra y la Luna.')
-    add('tooltip.grindless.entangled_planet.moon', 'Par Tierra-Luna: un extremo puede estar en la Luna.')
-
-    add('planet.grindless.moon', 'la Luna')
-    add('message.grindless.quantum_link_earth_pair', 'Esta singularidad se entrelazó en la Tierra. Un enlace cuántico en %s necesita un par hecho con una semilla de allí.')
 })
 
 // the Earth-Moon pairs carry grindless_planet in their NBT (server_scripts/grindless/moon/crafting.js)

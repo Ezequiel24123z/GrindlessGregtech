@@ -26,19 +26,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.isr_wellfield.not_end', 'Nothing to leach here: the field only works in the End, on its pitchblende vein')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.isr_wellfield', 'Campo de lixiviación in situ')
-    add('gtceu.in_situ_leaching', 'Lixiviación in situ')
-    add('block.gtceu.fuel_fabrication_plant', 'Planta de fabricación de combustible')
-    add('gtceu.fuel_fabrication', 'Fabricación de combustible')
-
-    add('grindless.machine.isr_wellfield.tooltip.0', '§7Disuelve el uranio del End in situ con pozos de inyección.')
-
-    add('grindless.machine.fuel_fabrication_plant.tooltip.0', '§7Fabrica combustible de uranio: pastillas, vainas y ensamblajes.')
-    add('planet.grindless.end', 'el End')
-
-    add('grindless.machine.isr_wellfield.no_voiding', 'El campo guarda su residuo radiactivo: sale por el bus de salida. Desactiva el vaciado de objetos')
-    add('grindless.machine.isr_wellfield.not_end', 'Aquí no hay nada que lixiviar: el campo solo funciona en el End, sobre su veta de pechblenda')
-})

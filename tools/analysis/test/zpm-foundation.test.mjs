@@ -1,5 +1,5 @@
 // ZPM foundation (package ZPM-F1, startup_scripts/grindless/zpm/foundation.js): every shared ZPM id of docs/eras/zpm.md is registered as
-// the design writes it (the other ZPM packages use these ids), named in en_us and es_es with two tooltip lines, and drawn. Nothing that
+// the design writes it (the other ZPM packages use these ids), named in en_us with two tooltip lines, and drawn. Nothing that
 // waits for spikes S0-1/S0-2 or for the wireless tier is registered here.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -75,21 +75,15 @@ test('the scoop head joins the drill bit tag', () => {
   assert.match(src, /scoop_head: \{ stack: 16, tag: 'grindless:drill_bits' \}/);
 });
 
-test('names and both tooltip lines in en_us and es_es; fluids and buckets named', () => {
+test('names and both tooltip lines in en_us; fluids and buckets named', () => {
   const problems = [];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of ITEMS) for (const k of [`item.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.0`, `tooltip.grindless.${short(id)}.1`]) if (!L[k]) problems.push(`${lang} ${k}`);
     for (const id of BLOCKS) for (const k of [`block.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.0`, `tooltip.grindless.${short(id)}.1`]) if (!L[k]) problems.push(`${lang} ${k}`);
     for (const id of FLUIDS) if (!L[`material.gtceu.${short(id)}`]) problems.push(`${lang} material.gtceu.${short(id)}`);
   }
   assert.deepEqual(problems, []);
-  // the Spanish text is a translation, not a copy of the English one
-  const en = run.lang.en_us; const es = run.lang.es_es;
-  for (const id of [...ITEMS, ...BLOCKS]) {
-    const k = `${ITEMS.includes(id) ? 'item' : 'block'}.grindless.${short(id)}`;
-    assert.notEqual(es[k], en[k], k);
-  }
 });
 
 test('every item and block has its texture', () => {

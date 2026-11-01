@@ -11,7 +11,7 @@
 //                                    Vein Drill like the 22 of veins.json, so they carry the steam tooltip.
 // It also loads the Nether and the extra Overworld vein tables into global.grindless.tables.veins_nether /
 // veins_overworld_extra (the main Overworld one is loaded by lib/tables.js), so startup and server scripts share a single copy.
-// Names / tooltips: client_scripts/grindless/lv_multis_lang.js (en_us / es_es).
+// Names / tooltips: client_scripts/grindless/lv_multis_lang.js (en_us).
 // Textures: item/graphite_electrode (drawn with the machine overlays); the samples reuse the steam ones.
 (function () {
   const G = global.grindless

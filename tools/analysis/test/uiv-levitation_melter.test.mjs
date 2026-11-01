@@ -157,7 +157,7 @@ test('the five older rows exist', () => {
   assert.ok(ids(cvi[2].itemsOut).includes('grindless:densified_w_preform'));
 });
 
-test('every new item has a texture, a name and two tooltips in en_us and es_es', () => {
+test('every new item has a texture, a name and two tooltips in en_us', () => {
   const startup = read('startup_scripts', 'grindless', 'uiv', 'levitation_melter.js');
   const lang = read('client_scripts', 'grindless', 'uiv_levitation_melter_lang.js');
   const names = [...startup.matchAll(/^ {4}([a-z0-9_]+): \{ stack: \d+ \}/gm)].map((m) => m[1]);
@@ -166,11 +166,11 @@ test('every new item has a texture, a name and two tooltips in en_us and es_es',
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
     const row = lang.match(new RegExp(`\\['${n}', ('[^\\n]*)\\]`));
     assert.ok(row, `${n} lang row`);
-    assert.equal(row[1].split(/', '/).length, 6, `${n}: name, es and four tooltip columns`);
+    assert.equal(row[1].split(/', '/).length, 3, `${n}: name and two tooltips`);
   }
-  // every ENTRIES row has en and es
+  // every ENTRIES row has en
   const entries = lang.slice(lang.indexOf('var ENTRIES'), lang.indexOf('var ITEMS'));
-  for (const m of entries.matchAll(/\['([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*'((?:[^'\\]|\\.)*)'\]/g)) assert.ok(m[2] && m[3], m[1]);
+  for (const m of entries.matchAll(/\['([^']+)',\s*'((?:[^'\\]|\\.)*)'\]/g)) assert.ok(m[2], m[1]);
   for (const t of ['block.gtceu.levitation_melter', 'gtceu.levitation_melting', 'grindless.machine.levitation_melter.tooltip.1']) assert.ok(lang.includes(`'${t}'`), t);
   const maxLang = read('client_scripts', 'grindless', 'max_components_lang.js'); // MAX-A2's row names its own EMI line
   const furnaceLang = read('client_scripts', 'grindless', 'max_furnace_lang.js') + read('client_scripts', 'grindless', 'max_horizon_interferometer_lang.js') + read('client_scripts', 'grindless', 'maxplus_condensate_lang.js'); // MX-S1's c22 row, XP-A1's c23 row

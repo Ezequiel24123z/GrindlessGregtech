@@ -100,9 +100,8 @@ test('the F1 ids are un-hidden and their obtain rule is gone', () => {
   assert.ok(!/ZPM \(B5\)/.test(obtain), 'the ZPM-F1 (B5) rule is deleted');
 });
 
-test('every new name and tooltip has en_us and es_es text, and the textures exist', () => {
+test('every new name and tooltip has en_us text, and the textures exist', () => {
   const en = run.lang.en_us || {};
-  const es = run.lang.es_es || {};
   const keys = ['emi.grindless.info.pressure_hull_casing.0'];
   for (const m of MACHINES) {
     keys.push('block.gtceu.' + m, `grindless.machine.${m}.no_voiding`);
@@ -111,8 +110,6 @@ test('every new name and tooltip has en_us and es_es text, and the textures exis
   for (const t of TYPES) keys.push('gtceu.' + t);
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);
-    assert.ok(es[k] && es[k].length > 3, 'es_es ' + k);
-    assert.notEqual(en[k], es[k], 'es_es ' + k + ' is translated');
   }
   for (const m of MACHINES) {
     const dir = path.join(pack, 'kubejs', 'assets', 'grindless', 'textures', 'block', 'multiblock', m);

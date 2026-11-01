@@ -209,15 +209,14 @@ test('the four materials are census_iv.js\'s (two dusts, two radioactive gases);
   assert.match(STARTUP, /^\/\/ priority: -?\d+$/m, 'the integrator stamped the load order (script-order.mjs --write)');
 });
 
-test('lang parity: every new material and row has its name in en_us and es_es; F1 names the three items', () => {
+test('lang parity: every new material and row has its name in en_us; F1 names the three items', () => {
   const need = Object.keys(MATERIALS).map((n) => `material.gtceu.${n}`);
   for (const [, type, name] of MINE) need.push(`gtceu.recipe.${DATAKEY[type]}.${name}`);
-  for (const l of ['en_us', 'es_es']) {
+  for (const l of ['en_us']) {
     for (const k of need) assert.ok(run.lang[l][k], `${l} ${k}`);
     for (const n of ['element_124_recoil', 'element_126_recoil', 'superheavy_census_iv']) {
       assert.ok(run.lang[l][`item.grindless.${n}`] && run.lang[l][`tooltip.grindless.${n}.0`], `${l} ${n}`);
     }
   }
-  for (const k of need) assert.notEqual(run.lang.en_us[k], run.lang.es_es[k], k);
-  assert.match(LANG, /\['en_us', 'es_es'\]/);
+  assert.match(LANG, /ClientEvents\.lang\('en_us'/);
 });

@@ -38,7 +38,7 @@ test('the three items are registered here, with textures, names and tooltips', (
   }
   assert.deepEqual(T.items, ['grindless:relay_seed', 'grindless:launched_relay_seed', 'grindless:ergosphere_probe']);
   const lang = read('client_scripts', 'grindless', 'uiv_travel_lang.js');
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
   for (const id of ['relay_seed', 'launched_relay_seed', 'ergosphere_probe']) assert.ok(lang.includes(`['${id}',`), id);
 });
 
@@ -88,7 +88,7 @@ test('planets.json, orbits.json: three new places, own pair tags; older ids unch
   for (const k of Object.keys(PLACES)) {
     assert.deepEqual(p[k].dimensions, [DIM(k)], k);
     assert.equal(p[k].pairTag, k);
-    assert.ok(p[k].name.en_us && p[k].name.es_es, k);
+    assert.ok(p[k].name.en_us, k);
   }
   const olderTags = Object.entries(p).filter(([k]) => !PLACES[k]).map(([, v]) => v.pairTag);
   for (const k of Object.keys(PLACES)) assert.ok(!olderTags.includes(p[k].pairTag), k + ' pair tag is its own');
@@ -174,7 +174,7 @@ test('the three jump rows, the relay pairs and the platform table', () => {
   assert.equal(plat.ring.machine, 'gtceu:warp_gate');
 });
 
-test('the jump rows have their EMI lines in en_us and es_es', () => {
+test('the jump rows have their EMI lines in en_us', () => {
   const lang = read('client_scripts', 'grindless', 'uiv_travel_lang.js');
   for (const n of ['hold_rx_j1856', 'hold_psr_j0437', 'hold_cygnus_x1']) {
     assert.ok(lang.includes(`'${n}'`), n);

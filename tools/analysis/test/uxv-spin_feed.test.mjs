@@ -30,13 +30,13 @@ test('the stand-in runs the UXV-A2 scripts without errors', () => {
   assert.deepEqual(plain(SF.skipped), []);
 });
 
-test('37 items registered by the startup file, named in en_us and es_es', () => {
+test('37 items registered by the startup file, named in en_us', () => {
   assert.equal(ITEMS.length, 37);
   for (const n of ITEMS) {
     const id = `grindless:${n}`;
     const it = run.registry.items.get(id);
     assert.ok(it && /uxv[\\/]spin_feed\.js$/.test(String(it.file)), `${id} registered by spin_feed.js`);
-    for (const lang of ['en_us', 'es_es']) {
+    for (const lang of ['en_us']) {
       assert.ok(run.lang[lang][`item.grindless.${n}`], `${lang} names ${n}`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.0`], `${lang} tooltip ${n}`);
     }

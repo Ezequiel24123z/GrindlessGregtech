@@ -4,7 +4,7 @@
 //     F1's UEV emitter / sensor, the quantum repeater node as the link, lay superhydride plate and wire;
 //   - withTiers case 10 (startup lv/wireless_energy.js), the window caps (derived, never stored) and the long-sized figures;
 //   - the naquadria magnet works' circuit 6 (tables/magnet_works.json): the only recipe of the UEV cell, four UHV cells;
-//   - the UEV hatches and covers in the assembler; en_us and es_es names in GTM's UEV colour; the textures; the zones row.
+//   - the UEV hatches and covers in the assembler; en_us names in GTM's UEV colour; the textures; the zones row.
 // The settlement itself (64 A hatch, 60 s of a 16 A draw) runs in the game: gg_test_uev_wireless.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -146,10 +146,10 @@ test('tiers below UEV are untouched: ids, capacities and the 9 existing rows', (
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uhv').capacity, 62914560000);
 });
 
-test('names and textures: en_us and es_es in GTM\'s UEV colour, the EMI line of circuit 6, the five UEV textures', () => {
+test('names and textures: en_us in GTM\'s UEV colour, the EMI line of circuit 6, the five UEV textures', () => {
   const { lang } = run;
   const keys = HATCHES.map((id) => 'block.' + id.replace(':', '.')).concat(COVERS.map((id) => 'item.' + id.replace(':', '.')));
-  for (const l of ['en_us', 'es_es']) {
+  for (const l of ['en_us']) {
     for (const k of keys) assert.match(String(lang[l][k]), /^\u00a7a.*UEV/, l + ' ' + k);
     assert.ok(lang[l]['block.grindless.uev_smes_cell'], l + ' names the cell');
     assert.ok(lang[l]['gtceu.recipe.grindless_naquadria_magnets.uev_smes_cell'], l + ': the EMI line of circuit 6');

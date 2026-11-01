@@ -176,7 +176,7 @@ test('recipes: five module assemblers (8 machines, casings, 1 circuit) and the c
   assert.deepEqual(plain(h.errors), []);
 });
 
-test('the lang file names the machine, the modules and the tooltips in en_us and es_es', () => {
+test('the lang file names the machine, the modules and the tooltips in en_us', () => {
   const lang = read('client_scripts', 'uv_mega_factory_lang.js');
   const store = {};
   vm.runInNewContext(lang, {
@@ -185,7 +185,7 @@ test('the lang file names the machine, the modules and the tooltips in en_us and
   });
   const keys = ['block.gtceu.mega_factory', ...[0].map((i) => 'grindless.machine.mega_factory.tooltip.' + i)];
   for (const n of Object.keys(MODULES)) keys.push('block.grindless.' + n, 'tooltip.grindless.' + n + '.0');
-  for (const code of ['en_us', 'es_es']) {
+  for (const code of ['en_us']) {
     for (const key of keys) assert.ok(store[code] && store[code][key], code + ' ' + key);
   }
   assert.equal(store.en_us['block.gtceu.mega_factory'], 'Mega Factory');

@@ -4,29 +4,23 @@
 //   gtceu.recipe.grindless_naquadria_magnets.<name>   magnet works c8 and c10
 //   gtceu.recipe.grindless_magnet_winding.<name>      HTS magnet works c6
 //   gtceu.recipe.grindless_coated_conductor.<name>    coated conductor line c4
-// The item names are in uxv_foundation_lang.js. Names go in en_us and es_es.
+// The item names are in uxv_foundation_lang.js. Names go in en_us.
 (function () {
-    // [key, en, es]
+    // [key, text]
     var ENTRIES = [
         ['gtceu.recipe.grindless_naquadria_magnets.tetrataenite_rotor',
-            'Circuit 8: four tetrataenite laminations are stacked on a tungsten steel shaft and magnetised as the rotor.',
-            'Circuito 8: cuatro láminas de tetrataenita se apilan sobre un eje de acero de wolframio y se magnetizan como rotor.'],
+            'Circuit 8: four tetrataenite laminations are stacked on a tungsten steel shaft and magnetised as the rotor.'],
         ['gtceu.recipe.grindless_naquadria_magnets.multipole_encoder_ring',
-            'Circuit 10: an encoder ring is mounted on a titanium carrier and magnetised in alternating poles.',
-            'Circuito 10: un anillo de codificador se monta en un portador de titanio y se magnetiza con polos alternos.'],
+            'Circuit 10: an encoder ring is mounted on a titanium carrier and magnetised in alternating poles.'],
         ['gtceu.recipe.grindless_magnet_winding.strand_stator',
-            'Circuit 6: pasta strand wire is wound round tetrataenite laminations, potted in epoxy and cold-tested in the helium charge.',
-            'Circuito 6: el hilo de pasta se bobina sobre láminas de tetrataenita, se encapsula en epoxi y se prueba en frío en la carga de helio.'],
+            'Circuit 6: pasta strand wire is wound round tetrataenite laminations, potted in epoxy and cold-tested in the helium charge.'],
         ['gtceu.recipe.grindless_coated_conductor.strand_tape',
-            'Circuit 4: pasta strand wire is flattened and clad with copper foil as the stabiliser.',
-            'Circuito 4: el hilo de pasta se aplana y se reviste con lámina de cobre como estabilizador.']
+            'Circuit 4: pasta strand wire is flattened and clad with copper foil as the stabiliser.']
     ]
 
-    ;['en_us', 'es_es'].forEach(function (lang, li) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1 + li])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()

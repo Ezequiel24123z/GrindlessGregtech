@@ -65,7 +65,7 @@ test('Proxima b keeps every field GCYR ships but the tier (8, already ours) and 
 test('planets, orbits and places list Proxima b; existing dimension ids are unchanged', () => {
   assert.deepEqual(PLANETS.proxima.dimensions, ['gcyr:proxima_centauri_b', ORBIT]);
   assert.equal(PLANETS.proxima.pairTag, 'proxima');
-  assert.ok(PLANETS.proxima.name.en_us && PLANETS.proxima.name.es_es);
+  assert.ok(PLANETS.proxima.name.en_us);
   assert.ok(ORBITS.dimensions.includes(ORBIT));
   assert.ok(ORBITS.dimensions.includes('gcyr:mercury_orbit'));
   assert.equal(ORBITS.dimensions.filter((d) => d === ORBIT).length, 1);
@@ -150,18 +150,17 @@ test('the Mercury orbit route: IV\'s Hermean seed, only in Mercury orbit, the sw
   assert.match(f1, /swarm_segment/);
 });
 
-test('names exist in en_us and es_es; the Hermean seed\'s EMI page has text in both', () => {
-  const [en, es] = read('client_scripts/grindless/uhv_travel_lang.js').split("ClientEvents.lang('es_es'");
+test('names exist in en_us; the Hermean seed\'s EMI page has text', () => {
+  const en = read('client_scripts/grindless/uhv_travel_lang.js');
   for (const k of ['dimension.grindless.proxima_b_orbit', 'planet.grindless.proxima', 'gtceu.recipe.grindless_sky.proxima_day']) {
     assert.ok(en.includes(`'${k}'`), `en_us ${k}`);
-    assert.ok(es.includes(`'${k}'`), `es_es ${k}`);
   }
-  for (const part of [en, es]) {
+  for (const part of [en]) {
     const line = part.split('\n').find((l) => l.includes("'gtceu.recipe.grindless_sky.proxima_day'"));
     assert.equal(line.split('%s').length - 1, 3, 'per panel, panels, total');
   }
   assert.deepEqual(json('assets/emi/recipe/additions/grindless/uhv_travel_hermean_quantum_seed.json'),
     { type: 'emi:info', stacks: ['item:grindless:hermean_quantum_seed'], text: ['emi.grindless.info.hermean_quantum_seed.0'] });
   const info = read('client_scripts/grindless/emi_info_lang.js');
-  assert.equal(info.split("'emi.grindless.info.hermean_quantum_seed.0'").length - 1, 2);
+  assert.equal(info.split("'emi.grindless.info.hermean_quantum_seed.0'")  .length - 1, 1);
 });

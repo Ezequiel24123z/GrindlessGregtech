@@ -32,11 +32,11 @@ test('the stand-in runs the UXV-A5 scripts without errors, nothing skipped, no l
   assert.equal(SL.recipes.length, 12 + 1 + 1 + 1 + 1); // XP-A3 appended racetrack c6 stacked_logic_wafer (Q1 step 5); MAX-B1 vdW c5 graphene_hbn_film (L2); MAX-H1 appended racetrack c3 racetrack_memory_die (line 38); MAX-A2 LPE c4 bi_yig_film (line 31)
 });
 
-test('5 items registered by the startup file, named in en_us and es_es', () => {
+test('5 items registered by the startup file, named in en_us', () => {
   for (const n of ITEMS) {
     const it = run.registry.items.get(`grindless:${n}`);
     assert.ok(it && /uxv[\\/]spin_logic\.js$/.test(String(it.file)), `${n} registered by spin_logic.js`);
-    for (const lang of ['en_us', 'es_es']) {
+    for (const lang of ['en_us']) {
       assert.ok(run.lang[lang][`item.grindless.${n}`], `${lang} names ${n}`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.0`], `${lang} tooltip ${n}.0`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.1`], `${lang} tooltip ${n}.1`);
@@ -188,9 +188,7 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages and r
   }
   keys.push('gtceu.vdw_stacking', 'gtceu.racetrack_patterning', 'gtceu.liquid_phase_epitaxy');
   for (const r of SL.recipes.filter((x) => x.dataKey)) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  const re = /spin_logic|vdw_stacking|racetrack|liquid_phase_epitaxy|yig_lpe/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
 });
 
 test('EMI info pages and sounds exist for every machine and recipe type', () => {

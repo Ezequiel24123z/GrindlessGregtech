@@ -206,9 +206,7 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages and r
   keys.push('gtceu.pasta_extraction', 'gtceu.pasta_sorting', 'gtceu.pasta_drawing', 'gtceu.pasta_lamination', 'gtceu.polar_cap_tapping');
   for (const r of VP.recipes) if (r.dataKey !== '') keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   keys.push('gtceu.recipe.grindless_r_process_decompression.gnocchi_decompression');
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  const re = /pasta_|polar_cap|gnocchi_decompression/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
   const sounds = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'assets', 'sounds.json'), 'utf8')).sounds || [];
   const wiring = kube('startup_scripts', 'grindless', 'sounds.js');
   for (const [type, loop] of [['pasta_extraction', 'pasta_extractor'], ['pasta_sorting', 'pasta_phase_sorter'], ['pasta_drawing', 'pasta_draw_bench'],

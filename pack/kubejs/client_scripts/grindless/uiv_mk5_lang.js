@@ -6,79 +6,68 @@
 //   gtceu.recipe.grindless_<type>.<recipe>                     the EMI line of each recipe with a dataKey, including the older rows UIV-A9 appends
 //   item.grindless.<n>, tooltip.grindless.<n>.0 / .1           the package's own items
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {
-    // [key, en, es]
+    // [key, en]
     var ENTRIES = [
-        ['block.gtceu.polarised_proton_source', 'Polarised Proton Source', 'Fuente de protones polarizados'],
-        ['block.gtceu.uiv_fusion_reactor', 'Mk5 Fusion Reactor', 'Reactor de fusión Mk5'],
-        ['gtceu.proton_polarisation', 'Proton Polarisation', 'Polarización de protones'],
-        ['material.gtceu.detritiated_protium', 'Detritiated Protium', 'Protio sin tritio'],
-        ['material.gtceu.polarised_h_gas', 'Polarised Hydrogen Gas', 'Gas de hidrógeno polarizado'],
-        ['material.gtceu.nitrogen_15_ammonia', 'Nitrogen-15 Ammonia', 'Amoníaco de nitrógeno-15'],
+        ['block.gtceu.polarised_proton_source', 'Polarised Proton Source'],
+        ['block.gtceu.uiv_fusion_reactor', 'Mk5 Fusion Reactor'],
+        ['gtceu.proton_polarisation', 'Proton Polarisation'],
+        ['material.gtceu.detritiated_protium', 'Detritiated Protium'],
+        ['material.gtceu.polarised_h_gas', 'Polarised Hydrogen Gas'],
+        ['material.gtceu.nitrogen_15_ammonia', 'Nitrogen-15 Ammonia'],
 
         ['grindless.machine.polarised_proton_source.tooltip.0',
-            '\u00a77Polarises hydrogen, Li-6 hydride and 15NH3 for the Mk5 fuels.',
-            '\u00a77Polariza hidrógeno, hidruro de Li-6 y 15NH3 para los combustibles Mk5.'],
+            '\u00a77Polarises hydrogen, Li-6 hydride and 15NH3 for the Mk5 fuels.'],
         ['grindless.machine.polarised_proton_source.tooltip.1',
-            'Needs a belt of metallic hydrogen coils.',
-            'Necesita un cinturón de bobinas de hidrógeno metálico.'],
+            'Needs a belt of metallic hydrogen coils.'],
         ['grindless.machine.uiv_fusion_reactor.tooltip.0',
-            '\u00a77A second fusion ring that burns three polarised fuels.',
-            '\u00a77Un segundo anillo de fusión que quema tres combustibles polarizados.'],
+            '\u00a77A second fusion ring that burns three polarised fuels.'],
 
         ['gtceu.recipe.grindless_proton_polarisation.rf_dissociation',
-            'Circuit 1: an RF dissociator splits detritiated H2 into atoms that a sextupole beam polarises; the molecules return.',
-            'Circuito 1: un disociador de RF separa el H2 sin tritio en átomos que un haz sextupolar polariza; las moléculas vuelven.'],
+            'Circuit 1: an RF dissociator splits detritiated H2 into atoms that a sextupole beam polarises; the molecules return.'],
         ['gtceu.recipe.grindless_proton_polarisation.li6h_polarisation',
-            'Circuit 2: dynamic nuclear polarisation of frozen Li-6 hydride.',
-            'Circuito 2: polarización nuclear dinámica del hidruro de Li-6 congelado.'],
+            'Circuit 2: dynamic nuclear polarisation of frozen Li-6 hydride.'],
         ['gtceu.recipe.grindless_proton_polarisation.nh3_polarisation',
-            'Circuit 3: dynamic nuclear polarisation of frozen 15NH3.',
-            'Circuito 3: polarización nuclear dinámica de 15NH3 congelado.'],
+            'Circuit 3: dynamic nuclear polarisation of frozen 15NH3.'],
         // the pyroprocessing cell row UIV-A9 appends to tables/thorium.json
         ['gtceu.recipe.grindless_pyroprocessing.li_sn_eutectic',
-            'Circuit 9: lithium and tin melt into the Li-Sn eutectic of the divertor.',
-            'Circuito 9: litio y estaño se funden en el eutéctico Li-Sn del divertor.'],
+            'Circuit 9: lithium and tin melt into the Li-Sn eutectic of the divertor.'],
         ['emi.grindless.info.uiv_mk5.0',
-            'The proton source polarises hydrogen, Li-6 hydride and 15NH3; pressed into pellets they are mixed with helium into the He-3 + He-3, p + Li-6 and p + N-15 fuels of the Mk5 ring.',
-            'La fuente de protones polariza hidrógeno, hidruro de Li-6 y 15NH3; prensados en gránulos se mezclan con helio en los combustibles He-3 + He-3, p + Li-6 y p + N-15 del anillo Mk5.'],
+            'The proton source polarises hydrogen, Li-6 hydride and 15NH3; pressed into pellets they are mixed with helium into the He-3 + He-3, p + Li-6 and p + N-15 fuels of the Mk5 ring.'],
         ['emi.grindless.info.uiv_mk5.1',
-            'The ring casing is built from the Li-Sn armoured first-wall tile and from the divertor, a stack of Li-Sn wetted capillary meshes. All ash is split into helium, hydrogen, He-3 and carbon-12.',
-            'La carcasa del anillo se construye con la baldosa de primera pared blindada con Li-Sn y con el divertor, una pila de mallas capilares mojadas con Li-Sn. Toda la ceniza se separa en helio, hidrógeno, He-3 y carbono-12.']
+            'The ring casing is built from the Li-Sn armoured first-wall tile and from the divertor, a stack of Li-Sn wetted capillary meshes. All ash is split into helium, hydrogen, He-3 and carbon-12.']
     ]
 
-    // [name, en, es, tooltip 0 en, es, tooltip 1 en, es]
+    // [name, en, tooltip 0 en, tooltip 1 en]
     var ITEMS = [
-        ['li6_hydride', 'Lithium-6 Hydride', 'Hidruro de litio-6', 'Li-6 metal hydrided in hydrogen.', 'Metal de Li-6 hidrurado en hidrógeno.', 'Polarised in the proton source (circuit 2).', 'Se polariza en la fuente de protones (circuito 2).'],
-        ['polarised_li6h', 'Polarised Li-6H', 'Li-6H polarizado', 'Frozen Li-6 hydride with aligned spins.', 'Hidruro de Li-6 congelado con espines alineados.', 'Pressed into pellets.', 'Se prensa en gránulos.'],
-        ['polarised_h_ice', 'Polarised Hydrogen Ice', 'Hielo de hidrógeno polarizado', 'Polarised H frozen in a superfluid helium bath.', 'H polarizado congelado en un baño de helio superfluido.', 'Pressed into pellets.', 'Se prensa en gránulos.'],
-        ['polarised_15nh3_ice', 'Polarised 15NH3 Ice', 'Hielo de 15NH3 polarizado', 'Frozen nitrogen-15 ammonia with aligned proton spins.', 'Amoníaco de nitrógeno-15 congelado con espines de protón alineados.', 'Pressed into pellets.', 'Se prensa en gránulos.'],
-        ['polarised_h_pellet', 'Polarised Hydrogen Pellet', 'Gránulo de hidrógeno polarizado', 'A pellet of polarised hydrogen ice.', 'Un gránulo de hielo de hidrógeno polarizado.', 'Mixed into the p-Li6 and p-N15 fuels.', 'Se mezcla en los combustibles p-Li6 y p-N15.'],
-        ['polarised_li6h_pellet', 'Polarised Li-6H Pellet', 'Gránulo de Li-6H polarizado', 'A pellet of polarised Li-6 hydride.', 'Un gránulo de hidruro de Li-6 polarizado.', 'Mixed into the p-Li6 fuel.', 'Se mezcla en el combustible p-Li6.'],
-        ['polarised_15nh3_pellet', 'Polarised 15NH3 Pellet', 'Gránulo de 15NH3 polarizado', 'A pellet of polarised 15NH3 ice.', 'Un gránulo de hielo de 15NH3 polarizado.', 'Mixed into the p-N15 fuel.', 'Se mezcla en el combustible p-N15.'],
-        ['polarised_he3_cell', 'Polarised He-3 Cell', 'Celda de He-3 polarizado', 'A glass cell that holds polarised helium-3.', 'Una celda de vidrio con helio-3 polarizado.', 'Mixed into the He-3 + He-3 fuel; the glass comes back.', 'Se mezcla en el combustible He-3 + He-3; el vidrio vuelve.'],
-        ['plasma_sprayed_tile', 'Plasma-Sprayed Tile', 'Baldosa proyectada por plasma', 'A W-fibre/RHEA tile quenched in argon plasma.', 'Una baldosa de fibra de W/RHEA templada en plasma de argón.', 'Becomes the first-wall tile.', 'Se convierte en la baldosa de primera pared.'],
-        ['first_wall_tile', 'First-Wall Tile', 'Baldosa de primera pared', 'A tile backed with tungsten steel.', 'Una baldosa reforzada con acero de tungsteno.', 'Armoured with Li-Sn.', 'Se blinda con Li-Sn.'],
-        ['li_sn_armoured_tile', 'Li-Sn Armoured Tile', 'Baldosa blindada con Li-Sn', 'A first-wall tile wetted with liquid Li-Sn.', 'Una baldosa de primera pared mojada con Li-Sn líquido.', 'Builds the UIV fusion casing.', 'Construye la carcasa de fusión UIV.'],
-        ['near_net_w_mesh', 'Near-Net W Mesh', 'Malla de W casi final', 'A printed porous mesh, not yet pressed.', 'Una malla porosa impresa, aún sin prensar.', 'Pressed into the W mesh.', 'Se prensa en la malla de W.'],
-        ['w_mesh', 'W Mesh', 'Malla de W', 'A capillary porous mesh of refractory metal.', 'Una malla porosa capilar de metal refractario.', 'Wetted with Li-Sn.', 'Se moja con Li-Sn.'],
-        ['cps_wetted_mesh', 'Li-Sn Wetted Mesh', 'Malla mojada con Li-Sn', 'A mesh that wicks liquid Li-Sn to the surface.', 'Una malla que lleva Li-Sn líquido a la superficie.', 'Stacked into a divertor cassette.', 'Se apila en un cassette de divertor.'],
-        ['divertor_cassette', 'Divertor Cassette', 'Cassette de divertor', 'Four wetted meshes on tungsten steel plates.', 'Cuatro mallas mojadas sobre placas de acero de tungsteno.', 'Two make a divertor.', 'Dos forman un divertor.'],
-        ['divertor', 'Divertor', 'Divertor', 'A capillary porous system that takes the heat and the ash.', 'Un sistema poroso capilar que absorbe el calor y la ceniza.', 'Builds the UIV fusion casing.', 'Construye la carcasa de fusión UIV.']
+        ['li6_hydride', 'Lithium-6 Hydride', 'Li-6 metal hydrided in hydrogen.', 'Polarised in the proton source (circuit 2).'],
+        ['polarised_li6h', 'Polarised Li-6H', 'Frozen Li-6 hydride with aligned spins.', 'Pressed into pellets.'],
+        ['polarised_h_ice', 'Polarised Hydrogen Ice', 'Polarised H frozen in a superfluid helium bath.', 'Pressed into pellets.'],
+        ['polarised_15nh3_ice', 'Polarised 15NH3 Ice', 'Frozen nitrogen-15 ammonia with aligned proton spins.', 'Pressed into pellets.'],
+        ['polarised_h_pellet', 'Polarised Hydrogen Pellet', 'A pellet of polarised hydrogen ice.', 'Mixed into the p-Li6 and p-N15 fuels.'],
+        ['polarised_li6h_pellet', 'Polarised Li-6H Pellet', 'A pellet of polarised Li-6 hydride.', 'Mixed into the p-Li6 fuel.'],
+        ['polarised_15nh3_pellet', 'Polarised 15NH3 Pellet', 'A pellet of polarised 15NH3 ice.', 'Mixed into the p-N15 fuel.'],
+        ['polarised_he3_cell', 'Polarised He-3 Cell', 'A glass cell that holds polarised helium-3.', 'Mixed into the He-3 + He-3 fuel; the glass comes back.'],
+        ['plasma_sprayed_tile', 'Plasma-Sprayed Tile', 'A W-fibre/RHEA tile quenched in argon plasma.', 'Becomes the first-wall tile.'],
+        ['first_wall_tile', 'First-Wall Tile', 'A tile backed with tungsten steel.', 'Armoured with Li-Sn.'],
+        ['li_sn_armoured_tile', 'Li-Sn Armoured Tile', 'A first-wall tile wetted with liquid Li-Sn.', 'Builds the UIV fusion casing.'],
+        ['near_net_w_mesh', 'Near-Net W Mesh', 'A printed porous mesh, not yet pressed.', 'Pressed into the W mesh.'],
+        ['w_mesh', 'W Mesh', 'A capillary porous mesh of refractory metal.', 'Wetted with Li-Sn.'],
+        ['cps_wetted_mesh', 'Li-Sn Wetted Mesh', 'A mesh that wicks liquid Li-Sn to the surface.', 'Stacked into a divertor cassette.'],
+        ['divertor_cassette', 'Divertor Cassette', 'Four wetted meshes on tungsten steel plates.', 'Two make a divertor.'],
+        ['divertor', 'Divertor', 'A capillary porous system that takes the heat and the ash.', 'Builds the UIV fusion casing.']
     ]
 
     ITEMS.forEach(function (i) {
-        ENTRIES.push(['item.grindless.' + i[0], i[1], i[2]])
-        ENTRIES.push(['tooltip.grindless.' + i[0] + '.0', i[3], i[4]])
-        ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[5], i[6]])
+        ENTRIES.push(['item.grindless.' + i[0], i[1]])
+        ENTRIES.push(['tooltip.grindless.' + i[0] + '.0', i[2]])
+        ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[3]])
     })
 
-    ;['en_us', 'es_es'].forEach(function (lang, li) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1 + li])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()

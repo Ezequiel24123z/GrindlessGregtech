@@ -56,12 +56,12 @@ test('lines: P12, P13 and P24 each chain to the forge inputs; one circuit per ty
   }
 });
 
-test('lang: machine, type, tooltip and every keyed row have an en_us and es_es entry', () => {
+test('lang: machine, type, tooltip and every keyed row have an en_us entry', () => {
   for (const r of plain(MB.forge)) assert.ok(lang.includes(`grindless_blueshift_forge.${r.name}'`), r.name);
   for (const r of plain(MB.rows).filter((x) => x.key)) assert.ok(lang.includes(`.${r.name}'`), `no lang key for ${r.name}`);
   assert.ok(lang.includes("'block.gtceu.blueshift_forge'"));
   assert.ok(lang.includes("'gtceu.blueshift_forge'"));
   assert.ok(lang.includes("'grindless.machine.blueshift_forge.tooltip.0'"));
-  assert.ok(lang.includes("['en_us', 'es_es']"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });

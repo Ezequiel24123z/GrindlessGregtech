@@ -1,7 +1,7 @@
 // UV's cold works (package UV-A4), no game needed. The pack's scripts run in the stand-in of lib/kubejs_static.mjs:
 //   - startup_scripts/grindless/uv/cold.js: two recipe types, two machines with valid 7 x 7 x 9 patterns, five items, two fluids;
 //   - server_scripts/grindless/uv/cold.js: the plant's two rows, the works' four steps, the side steps, the controllers' crafting;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -133,11 +133,10 @@ test('the controllers are assembly lines and the cryomodule block an assembler r
   assert.match(src, /stationResearch/);
 });
 
-test('names: en_us and es_es for both machines, both types, the items and the fluids', () => {
+test('names: en_us for both machines, both types, the items and the fluids', () => {
   const lang = read('client_scripts/grindless/uv_cold_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['plant:', 'works:', 'plantType:', 'worksType:', 'plantTips:', 'worksTips:']) assert.ok(part.includes(key), key);
     for (const n of NEW_ITEMS.concat(MATERIALS)) assert.ok(part.includes(`${n}:`), n);
   }

@@ -102,14 +102,14 @@ test('no hand-set value reaches 2^31 as a literal: the large rows are V[MAX] x 1
   assert.ok(!/\b(2[1-9]\d{8}|[3-9]\d{9}|\d{11,})\b/.test(text), 'a literal at or above 2^31');
 });
 
-test('lang: machine, type, tooltip and every keyed row have an en_us and es_es entry; ASCII only', () => {
+test('lang: machine, type, tooltip and every keyed row have an en_us entry; ASCII only', () => {
   for (const r of rows.filter((x) => x.key)) assert.ok(lang.includes(`${r.key}.${r.name}'`), `no lang key for ${r.type}/${r.name}`);
   for (const m of ['tarantula_stellar_lift', 'pair_instability_crucible', 'nickel_56_burner']) {
     assert.ok(lang.includes(`'block.gtceu.${m}'`), m);
     assert.ok(lang.includes(`'gtceu.${m}'`), m);
     assert.ok(lang.includes(`'grindless.machine.${m}.tooltip.0'`), m);
   }
-  assert.ok(lang.includes("['en_us', 'es_es']"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });
 

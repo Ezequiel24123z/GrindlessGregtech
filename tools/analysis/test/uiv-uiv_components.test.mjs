@@ -131,16 +131,16 @@ test('"only from" claims: no other table or script produces these', () => {
   assert.deepEqual(melts, ['bmg_gate_remelt']);
 });
 
-test('lang parity: every registered item has en_us, es_es, 2 tooltips and a texture', () => {
+test('lang parity: every registered item has en_us, 2 tooltips and a texture', () => {
   const lang = read('client_scripts', 'grindless', 'uiv_uiv_components_lang.js');
-  const rows = [...lang.matchAll(/^\s+\['([a-z0-9_]+)', '((?:[^'\\]|\\.)+)', '((?:[^'\\]|\\.)+)', '(?:[^'\\]|\\.)+', '(?:[^'\\]|\\.)+', '(?:[^'\\]|\\.)+', '(?:[^'\\]|\\.)+'\]/gm)];
+  const rows = [...lang.matchAll(/^\s+\['([a-z0-9_]+)', '((?:[^'\\]|\\.)+)', '((?:[^'\\]|\\.)+)', '(?:[^'\\]|\\.)+'\]/gm)];
   const names = rows.map((m) => m[1]);
   const start = read('startup_scripts', 'grindless', 'uiv', 'uiv_components.js');
   const registered = [...start.matchAll(/^\s+([a-z0-9_]+): \{ stack: \d+ \}/gm)].map((m) => m[1]);
   assert.equal(registered.length, 17);
   assert.deepEqual(names.slice().sort(), registered.slice().sort());
-  for (const m of rows) assert.ok(m[2].length > 0 && m[3].length > 0 && m[2] !== m[3], m[1]);
-  assert.match(lang, /'en_us', 'es_es'/);
+  for (const m of rows) assert.ok(m[2].length > 0 && m[3].length > 0, m[1]);
+  assert.match(lang, /'en_us'/);
   for (const n of registered) {
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
   }

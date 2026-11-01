@@ -180,7 +180,7 @@ test('the byproducts have destinations: arsenic and the LN donor go back, fluori
   assert.ok(inputs(by('electric_blast_furnace', 'gst_target')).includes('gtceu:tellurium_dust'));
 });
 
-test('no UEV input, and every lang key the package needs is written in en_us and es_es', () => {
+test('no UEV input, and every lang key the package needs is written in en_us', () => {
   for (const r of Object.values(T.types).flatMap((t) => t.recipes)) {
     for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   }

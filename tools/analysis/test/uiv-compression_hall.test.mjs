@@ -125,11 +125,11 @@ test('the controller recipe: hull, three UIV part families x3, two mainframes, U
   assert.equal(fluids.length, 3);
 });
 
-test('names, tooltips and the info page exist in both languages', () => {
+test('names, tooltips and the info page exist in en_us', () => {
   const src = fs.readFileSync(path.join(KJS, 'client_scripts', 'grindless', 'uiv_compression_hall_lang.js'), 'utf8');
   const id = 'neutronium_compression_hall';
   for (const key of [`block.gtceu.${id}`, ...[0, 1].map((n) => `grindless.machine.${id}.tooltip.${n}`), `emi.grindless.info.${id}.0`]) {
-    assert.equal(src.split(`'${key}'`).length - 1, 2, key);
+    assert.equal(src.split(`'${key}'`).length - 1, 1, key);
   }
   const emi = JSON.parse(fs.readFileSync(path.join(KJS, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'uiv_compression_hall_info.json'), 'utf8'));
   assert.deepEqual(emi.stacks, [`item:gtceu:${id}`]);

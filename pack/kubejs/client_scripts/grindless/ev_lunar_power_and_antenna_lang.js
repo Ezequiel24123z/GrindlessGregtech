@@ -8,7 +8,7 @@
 // The array's panels are the EV Tripod Drill's Solar Wing Panels (named in ev_tripod_lang.js).
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts: Minecraft merges lang entries from every
-// namespace/script. Quests are English only; names go in en_us and es_es. The lines grindless.generators.* (dynamo capacity, output)
+// namespace/script. Quests are English only; names go in en_us. The lines grindless.generators.* (dynamo capacity, output)
 // come from power_generator_array_lang.js, shared by every generator built with lib/generators.js.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
@@ -30,22 +30,3 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.recipe.grindless_sky.deep_space', 'Sky: lunar night, on the Moon')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.lunar_solar_array', 'Matriz solar lunar')
-    add('block.gtceu.deep_space_antenna', 'Antena de espacio profundo')
-    add('gtceu.lunar_solar', 'Energía solar lunar')
-    add('gtceu.deep_space_tracking', 'Seguimiento de espacio profundo')
-
-    add('grindless.machine.lunar_solar_array.tooltip.0', '§7Paneles solares en la Luna: de la luz directa a EU.')
-    add('grindless.machine.lunar_solar_array.no_sky', 'Ningún panel ve el cielo abierto')
-    add('grindless.machine.lunar_solar_array.panels', 'Paneles bajo el cielo abierto: %s de %s')
-    add('grindless.machine.lunar_solar_array.hint', 'Circuito programado en el bus de entrada: 1 en la Luna, 2 en Marte. Solo funciona de día.')
-
-    add('grindless.machine.deep_space_antenna.tooltip.0', '§7Antena parabólica que escucha Marte y el cielo profundo.')
-
-    add('gtceu.recipe.grindless_sky.lunar_day', 'Día lunar, paneles bajo el cielo abierto (luz solar x1,4): %s EU/t por panel, %s paneles = %s EU/t')
-    add('gtceu.recipe.grindless_sky.martian_day', 'Día marciano, paneles bajo el cielo abierto (luz solar x0,43): %s EU/t por panel, %s paneles = %s EU/t')
-    add('gtceu.recipe.grindless_sky.deep_space', 'Cielo: noche lunar, en la Luna')
-})

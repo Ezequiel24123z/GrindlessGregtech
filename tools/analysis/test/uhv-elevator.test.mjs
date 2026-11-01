@@ -3,7 +3,7 @@
 //     the GEO-assembled stage, six materials;
 //   - server_scripts/grindless/uhv/elevator.js: the plant's five steps, the works' two, line 24's side steps, the blocks of GTCA's
 //     space elevator, its GEO lift and the controllers' crafting;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -156,11 +156,10 @@ test('the GEO lift: climber kept, one ribbon segment worn, the stage out, UHV po
   assert.deepEqual(makers, ['grindless:space_elevator/geo_lift']);
 });
 
-test('names: en_us and es_es for both machines, both types, the stage and the materials', () => {
+test('names: en_us for both machines, both types, the stage and the materials', () => {
   const lang = read('client_scripts/grindless/uhv_elevator_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['plant:', 'works:', 'plantType:', 'worksType:', 'plantTips:', 'worksTips:', 'geo_assembled_stage:']) assert.ok(part.includes(key), key);
     for (const n of MATERIALS) assert.ok(part.includes(`${n}:`), n);
   }

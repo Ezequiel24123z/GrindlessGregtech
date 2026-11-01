@@ -51,14 +51,14 @@ test('older rows: P15 at megabar c14, P16 at photonic foundry c28 and clock lab 
   }
 });
 
-test('lang: machine, type, tooltip and every keyed row have an en_us and es_es entry', () => {
+test('lang: machine, type, tooltip and every keyed row have an en_us entry', () => {
   for (const r of plain(MS.slingshot)) assert.ok(lang.includes(`grindless_hills_slingshot.${r.name}'`), `no lang key for ${r.name}`);
   for (const r of plain(MS.rows).filter((x) => x.key)) assert.ok(lang.includes(`.${r.name}'`), `no lang key for ${r.name}`);
   assert.ok(lang.includes("'block.gtceu.hills_slingshot'"));
   assert.ok(lang.includes("'gtceu.hills_slingshot'"));
   assert.ok(lang.includes("'grindless.machine.hills_slingshot.tooltip.0'"));
   assert.ok(lang.includes('grindless_warp_gate.hold_tarantula'));
-  assert.ok(lang.includes("['en_us', 'es_es']"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });
 

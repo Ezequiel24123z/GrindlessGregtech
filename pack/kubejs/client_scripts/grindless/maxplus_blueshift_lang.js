@@ -4,7 +4,7 @@
 //   gtceu.recipe.grindless_<type>.<recipe>   the EMI line of each keyed row of the package: the forge's row and the P12, P13 and P24 steps on
 //                                            machines whose type carries a data key
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. English only: es_es copies en_us.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. English only.
 (function () {
     var T = {
         forge: 'Circuit 1: enriched molybdenum target hung in a blueshifted photonuclear beam at V[MAX] x 16 A; the tether and the window are each worn 1 run in 32 (line P12).',
@@ -13,7 +13,7 @@
         melter: 'Circuit 24: beryllium pebbles levitation-melted under argon into an ingot (line P24).',
         mtj: 'Circuit 28: beryllium foil sputtered with niobium into a coated window under argon (line P24).'
     }
-    // [key, en]
+    // [key, text]
     var ENTRIES = [
         ['gtceu.blueshift_forge', 'Blueshift Forge'],
         ['block.gtceu.blueshift_forge', 'Blueshift Forge'],
@@ -25,11 +25,9 @@
         ['gtceu.recipe.grindless_mtj_sputtering.coated_be_window', T.mtj]
     ]
 
-    ;['en_us', 'es_es'].forEach(function (lang) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()

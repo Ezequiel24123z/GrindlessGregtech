@@ -369,11 +369,9 @@ test('the controllers are assembly line recipes, not crafting-grid shapes, and n
     assert.deepEqual(hits.map((f) => path.relative(dir, f).replace(/\\/g, '/')), ['grindless/luv/io_orbit.js'], name);
   }
 });
-test('names: en_us and es_es carry the same keys, every key the machines translate', () => {
-  const src = read('kubejs/client_scripts/grindless/luv_io_orbit_lang.js');
-  const [en, es] = src.split("ClientEvents.lang('es_es'");
+test('names: en_us carries every key the machines translate', () => {
+  const en = read('kubejs/client_scripts/grindless/luv_io_orbit_lang.js');
   const keys = (s) => [...s.matchAll(/add\('([^']+)'/g)].map((m) => m[1]).sort();
-  assert.deepEqual(keys(en), keys(es));
   const used = [...read(STARTUP).matchAll(/'(grindless\.machine\.[a-z_.0-9]+)'/g)].map((m) => m[1]);
   for (const k of used) if (!/\.$/.test(k)) assert.ok(keys(en).includes(k), k);
   for (const k of ['block.gtceu.flux_tube_tether', 'block.gtceu.sulfur_iodine_plant', 'gtceu.electrodynamic_tether', 'gtceu.thermochemical_hydrogen']) {

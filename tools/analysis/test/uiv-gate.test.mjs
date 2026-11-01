@@ -74,7 +74,7 @@ test('no UXV hull, no MAX or MAX+ id anywhere in the gate', () => {
   assert.ok(!/uxv_machine_hull|uxv_.*hatch|stargate|creative|black_hole|sagittarius_a|\bmax_|\bopv\b|\bmax\b/i.test(text));
 });
 
-test('the c7 EMI line has en and es text', () => {
+test('the c7 EMI line has en text', () => {
   assert.match(lang, /grindless_warp_gate\.hold_cygnus_ring/);
-  assert.match(lang, /'en_us', 'es_es'/);
+  assert.match(lang, /'en_us'/);
 });

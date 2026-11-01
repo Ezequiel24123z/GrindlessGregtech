@@ -100,9 +100,9 @@ test('nsc_planetesimal is registered with a texture and a name, the shape is 13x
   assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'max_furnace_cluster_light_furnace.json')));
 });
 
-test('the lang file has en_us and es_es keys in parity', () => {
+test('the lang file has en_us keys', () => {
   const s = read(kube, 'client_scripts', 'grindless', 'max_furnace_lang.js');
-  assert.ok(/en_us/.test(s) && /es_es/.test(s));
+  assert.ok(/en_us/.test(s));
   assert.match(s, /cluster_light_furnace/);
   assert.match(s, /nsc_planetesimal/);
 });

@@ -103,13 +103,12 @@ test('older row: the methane pyrolyser takes the spent anodes on circuit 6', () 
   assert.deepEqual(ids(r.itemsIn), [['grindless:spent_graphite_anode', 4]]);
   assert.deepEqual(ids(r.itemsOut), [['gtceu:graphene_dust', 4]]);
 });
-test('en_us and es_es names exist and differ', () => {
+test('en_us names exist', () => {
   for (const m of MACHINES) {
     const k = 'block.gtceu.' + m;
-    assert.ok(run.lang.en_us[k] && run.lang.es_es[k], k);
-    assert.notEqual(run.lang.en_us[k], run.lang.es_es[k]);
+    assert.ok(run.lang.en_us[k], k);
   }
-  TYPES.forEach((t) => assert.ok(run.lang.en_us['gtceu.' + t] && run.lang.es_es['gtceu.' + t], t));
+  TYPES.forEach((t) => assert.ok(run.lang.en_us['gtceu.' + t], t));
 });
 
 test('the texture generator is documented and the controller faces exist', () => {

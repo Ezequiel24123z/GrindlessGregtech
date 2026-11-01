@@ -29,7 +29,7 @@ test('45 controllers are covered', () => assert.equal(new Set(NAMES).size, 45));
 
 test('site names used by the tooltips resolve', () => {
   for (const k of ['planet.grindless.rx_j1856', 'planet.grindless.psr_j0437', 'dimension.grindless.mercury_orbit', 'dimension.grindless.cygnus_x1_orbit', 'dimension.grindless.vela_pulsar_orbit', 'dimension.grindless.cas_a_remnant']) {
-    for (const l of ['en_us', 'es_es']) assert.ok(run.lang[l][k] !== undefined, `${l} ${k}`);
+    for (const l of ['en_us']) assert.ok(run.lang[l][k] !== undefined, `${l} ${k}`);
   }
 });
 
@@ -40,7 +40,7 @@ for (const name of NAMES) {
     const tips = machines.get(name).tooltips;
     assert.ok(Array.isArray(tips) && tips.length >= 1 && tips.length <= 4, `${tips && tips.length} entries`);
     assert.equal(keyOf(tips[0]), `grindless.machine.${name}.tooltip.0`);
-    for (const l of ['en_us', 'es_es']) {
+    for (const l of ['en_us']) {
       assert.ok(String(run.lang[l][`grindless.machine.${name}.tooltip.0`]).startsWith('§7'), `${l} tooltip.0 is gray`);
       assert.ok(visible(run.lang[l][`grindless.machine.${name}.tooltip.0`]) <= 80, `${l} tooltip.0 length`);
       for (const t of tips) {
@@ -56,12 +56,11 @@ for (const name of NAMES) {
       }
     }
     const tipKeys = (l) => Object.keys(run.lang[l]).filter((k) => k.startsWith(`grindless.machine.${name}.tooltip.`));
-    assert.deepEqual(tipKeys('en_us').sort(), tipKeys('es_es').sort());
     for (const k of tipKeys('en_us')) assert.ok(tips.some((t) => keyOf(t) === k), `${k} is used`);
 
     const page = pages.get(`item:gtceu:${name}`);
     assert.ok(page, 'EMI page');
     assert.ok(page.text.length >= 1);
-    for (const k of page.text) for (const l of ['en_us', 'es_es']) assert.ok(run.lang[l][k] !== undefined, `${l} ${k}`);
+    for (const k of page.text) for (const l of ['en_us']) assert.ok(run.lang[l][k] !== undefined, `${l} ${k}`);
   });
 }

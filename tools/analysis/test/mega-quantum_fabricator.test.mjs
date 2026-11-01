@@ -1,6 +1,6 @@
 // MEGA-9, the UHV Quantum Fabricator (startup_scripts/grindless/uhv/mega_quantum_fabricator.js, server_scripts/grindless/uhv/mega_quantum_fabricator.js):
 // the pattern through the real helper, the five modes, the modifier chain (perfect overclock), the parallel figure at the UV and UHV
-// hatch (the formulas of lib/mega.js), the footprint inside the largest GTM cleanroom, the recipes and the names in both languages.
+// hatch (the formulas of lib/mega.js), the footprint inside the largest GTM cleanroom, the recipes and the names in en_us.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -172,14 +172,14 @@ test('recipes: controller from 16 UV assemblers, the hall, hulls, arms, field ge
   assert.deepEqual(plain(h.errors), []);
 });
 
-test('the lang file names the machine, the casing and the tooltips in en_us and es_es', () => {
+test('the lang file names the machine, the casing and the tooltips in en_us', () => {
   const lang = read('client_scripts', 'uhv_mega_quantum_fabricator_lang.js');
   const store = {};
   vm.runInNewContext(lang, {
     ClientEvents: { lang: (code, cb) => cb({ add: (ns, key, value) => { (store[code] = store[code] || {})[key] = value; } }) },
     console,
   });
-  for (const code of ['en_us', 'es_es']) {
+  for (const code of ['en_us']) {
     assert.ok(store[code], code);
     const keys = ['block.gtceu.quantum_fabricator', 'block.grindless.field_ring_casing', 'tooltip.grindless.field_ring_casing.0',
       'grindless.machine.quantum_fabricator.tooltip.0'];

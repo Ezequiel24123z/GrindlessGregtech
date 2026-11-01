@@ -174,7 +174,7 @@ export function previewBlocks(structure) {
 
 /**
  * dump: lib/dump.mjs format (static or native). registry: kubejs_static's registry (what the pack registers). cfg: emi_coverage.json.
- * emi: loadEmiData(). lang: {en_us: {key: text}, es_es: {...}} (translations the pack adds), or null to skip the text check.
+ * emi: loadEmiData(). lang: {en_us: {key: text}} (translations the pack adds), or null to skip the text check.
  */
 export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native = false }) {
   const st = { unresolved: new Set() };
@@ -360,7 +360,7 @@ export function auditEmiCoverage({ dump, registry, cfg, emi, lang = null, native
       } else if (!known(keyOf(s)) && (s.id.startsWith('grindless:') || s.id.startsWith('gtceu:'))) problems.push(`${p.file}: ${keyOf(s)} is not registered`);
     }
     if (lang) {
-      for (const t of p.text) for (const language of ['en_us', 'es_es']) if (!lang[language] || lang[language][t] === undefined) problems.push(`${p.file}: no ${language} text for ${t}`);
+      for (const t of p.text) for (const language of ['en_us']) if (!lang[language] || lang[language][t] === undefined) problems.push(`${p.file}: no ${language} text for ${t}`);
     }
     if (p.type === 'emi:info' && p.text.length === 0) problems.push(`${p.file}: an info page with no text`);
   }

@@ -1,5 +1,5 @@
 // UIV foundation (package UIV-F1, startup_scripts/grindless/uiv/foundation.js): every shared UIV id of docs/eras/uiv.md is registered once
-// with en_us and es_es names, drawn, and the only recipes are the hull and the four hatches, in GTM's assembler at UEV voltage. The hull and
+// with en_us names, drawn, and the only recipes are the hull and the four hatches, in GTM's assembler at UEV voltage. The hull and
 // hatches themselves are uev/foundation.js's builders at a second tier (S0-1 fallback). The ids are pinned (count and every id): a changed id
 // is an escalation (uiv.md, F1).
 import assert from 'node:assert/strict';
@@ -158,10 +158,10 @@ test('the only recipes are the hull and the four hatches, assembled at UEV volta
   assert.match(serverSrc, /console\.error/);
 });
 
-test('names and both tooltip lines in en_us and es_es; materials and machines named', () => {
+test('names and both tooltip lines in en_us; materials and machines named', () => {
   const problems = [];
   const blocks = [...PLAIN_BLOCKS, COIL];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of [...ITEMS, ...blocks]) {
       const kind = ITEMS.includes(id) ? 'item' : 'block';
@@ -174,17 +174,11 @@ test('names and both tooltip lines in en_us and es_es; materials and machines na
     for (const id of MACHINES) if (!L[`block.gtceu.${short(id)}`]) problems.push(`${lang} block.gtceu.${short(id)}`);
   }
   assert.deepEqual(problems, []);
-  const en = run.lang.en_us; const es = run.lang.es_es;
-  for (const id of [...ITEMS, ...blocks]) {
-    for (const k of [`${ITEMS.includes(id) ? 'item' : 'block'}.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.1`]) {
-      assert.notEqual(es[k], en[k], k);
-    }
-  }
 });
 
 test('UEV has no hull or hatch builder any more (GTM names them); our lang rows stay', () => {
   assert.doesNotMatch(uevSrc.replace(/^\s*\/\/.*$/gm, ''), /create\('(machine_hull|energy_)|\.tiers\(|registry\('gtceu:machine'/);
-  for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang]['block.gtceu.uev_machine_hull'], `${lang} keeps UEV's hull name`);
+  for (const lang of ['en_us']) assert.ok(run.lang[lang]['block.gtceu.uev_machine_hull'], `${lang} keeps UEV's hull name`);
 });
 
 test('every item and plain block has its texture', () => {

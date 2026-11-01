@@ -3,7 +3,7 @@
 //     station); no new item or fluid (F1's and UV-A6's ids);
 //   - server_scripts/grindless/uv/detectors.js: the tower's three steps, the station's downlink, the crafting;
 //   - the ZPM qubit fab's circuit 3 row (server_scripts/grindless/zpm/qubits.js): the SNSPD array;
-//   - en_us and es_es text for the machines and types.
+//   - en_us text for the machines and types.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -141,11 +141,10 @@ test('byproduct destinations are written down', () => {
   for (const word of ['hydrochloric acid', 'water', 'germanium dust', 'helium']) assert.match(src, new RegExp(`${word} \\(`, 'i'), word);
 });
 
-test('names: en_us and es_es for both machines and both types', () => {
+test('names: en_us for both machines and both types', () => {
   const lang = read('client_scripts/grindless/uv_detectors_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['tower:', 'station:', 'towerType:', 'stationType:', 'towerTips:', 'stationTips:']) assert.ok(part.includes(key), key);
   }
   for (const k of ['block.gtceu.zone_refining_tower', 'block.gtceu.optical_ground_station', 'gtceu.zone_refining', 'gtceu.optical_downlink',

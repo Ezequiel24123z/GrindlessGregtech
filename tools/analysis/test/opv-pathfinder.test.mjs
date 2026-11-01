@@ -37,14 +37,14 @@ test('gate c12 hold_terzan5: the probe goes in, the launched probe comes out, be
   assert.deepEqual(r.itemsOut.map((i) => [i.id, i.count]), [['grindless:launched_pathfinder', 1]]);
 });
 
-test('the eight intermediates are registered with textures and en_us/es_es names', () => {
+test('the eight intermediates are registered with textures and en_us names', () => {
   for (const n of INTERMEDIATES) {
     const id = `grindless:${n}`;
     assert.equal((run.registry.items.get(id) || {}).file, 'kubejs/startup_scripts/grindless/opv/pathfinder.js', id);
     assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'grindless', 'textures', 'item', `${n}.png`)), `${n}.png`);
     assert.match(lang, new RegExp(`^\\s+${n}: \\['[^']+', '[^']+', `, 'm'), `${n} names`);
   }
-  assert.ok(/en_us/.test(lang) && /es_es/.test(lang));
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
 });
 
 test('the probe line, the kit and the node transmitter produce the F1 ids at OpV voltage', () => {
@@ -89,7 +89,7 @@ test('older rows preserve their assigned circuits, J0437 site and reject destina
   assert.match(cascade, /name: 'rejected_mmic_tile_gallium', mode: 'opv', circuit: 29/);
 });
 
-test('EMI explains the arrival, pending R2/R3 uses and rejects in both languages', () => {
+test('EMI explains the arrival, pending R2/R3 uses and rejects', () => {
   for (const name of ['arrival', 'transmitter']) {
     const page = JSON.parse(fs.readFileSync(path.join(pack, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless', `opv_pathfinder_${name}.json`), 'utf8'));
     assert.equal(page.type, 'emi:info');

@@ -107,12 +107,12 @@ test('L27 step 5: the helium refrigerator row braced_smes_toroid -> cold_smes_to
   }
 });
 
-test('names: the MAX hatches and covers in en_us and es_es', () => {
+test('names: the MAX hatches and covers in en_us', () => {
   const { lang } = run;
   const keys = [];
   for (const kind of ['energy', 'dynamo']) for (const a of WIRELESS.hatchAmps) keys.push(`block.gtceu.max_wireless_${kind}_hatch${a === 2 ? '' : '_' + a + 'a'}`);
   keys.push('item.grindless.max_wireless_energy_cover', 'item.grindless.max_wireless_dynamo_cover');
-  for (const l of ['en_us', 'es_es']) for (const k of keys) assert.match(String(lang[l][k]), /^\u00a7c\u00a7l.*MAX/, l + ' ' + k);
+  for (const l of ['en_us']) for (const k of keys) assert.match(String(lang[l][k]), /^\u00a7c\u00a7l.*MAX/, l + ' ' + k);
   assert.equal(lang.en_us['block.gtceu.max_wireless_energy_hatch_64a'], '\u00a7c\u00a7lMAX 64A Wireless Energy Hatch');
 });
 

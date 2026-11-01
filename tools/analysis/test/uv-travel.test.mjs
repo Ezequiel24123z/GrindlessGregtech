@@ -178,18 +178,17 @@ test('the stations table keeps LuV\'s and ZPM\'s slots and adds Neptune and Plut
   }
 });
 
-test('names exist in en_us and es_es for the planets, dimensions and seeds; the EMI pages have text in both', () => {
+test('names exist in en_us for the planets, dimensions and seeds; the EMI pages have text', () => {
   const lang = read('client_scripts/grindless/uv_travel_lang.js');
-  const [en, es] = lang.split("ClientEvents.lang('es_es'");
+  const en = lang;
   const keys = [];
   for (const name of NAMES) keys.push(planet(name).translation, 'dimension.grindless.' + name, 'dimension.grindless.' + name + '_orbit', 'planet.grindless.' + name);
   for (const t of ['neptunian_quantum_seed', 'plutonian_quantum_seed']) keys.push('item.grindless.' + t, 'tooltip.grindless.' + t);
   for (const k of keys) {
     assert.ok(en.includes(`'${k}'`), `en_us ${k}`);
-    assert.ok(es.includes(`'${k}'`), `es_es ${k}`);
   }
   const info = read('client_scripts/grindless/emi_info_lang.js');
   for (const t of ['neptunian_quantum_seed', 'plutonian_quantum_seed']) {
-    assert.equal(info.split(`'emi.grindless.info.${t}.0'`).length - 1, 2, `${t}: en_us and es_es`);
+    assert.equal(info.split(`'emi.grindless.info.${t}.0'`).length - 1, 1, `${t}: en_us`);
   }
 });

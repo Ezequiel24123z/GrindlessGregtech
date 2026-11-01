@@ -15,17 +15,6 @@
             '§7Dries silica gel with supercritical CO2 into aerogel.'
             ]]
     ]
-    var ES_MACHINES = [
-        ['methane_pyrolyser', 'methane_pyrolysis', 'Pirolizador de metano', 'Pir\u00F3lisis de metano', [
-            '§7Craquea metano en estaño-níquel fundido: hidrógeno y carbono.'
-            ]],
-        ['vent_bioreactor', 'chemosynthesis', 'Biorreactor de fuentes', 'Quimios\u00EDntesis', [
-            '§7Alimenta bacterias de Europa con química de fuentes hidrotermales.'
-            ]],
-        ['aerogel_works', 'supercritical_drying', 'Planta de aerogel', 'Secado supercr\u00EDtico', [
-            '§7Seca gel de sílice con CO2 supercrítico para obtener aerogel.'
-            ]]
-    ]
 
     function addAll(event, machines) {
         var add = function (key, value) { event.add('grindless', key, value) }
@@ -37,5 +26,4 @@
     }
 
     ClientEvents.lang('en_us', function (event) { addAll(event, EN_MACHINES) })
-    ClientEvents.lang('es_es', function (event) { addAll(event, ES_MACHINES) })
 })()

@@ -11,18 +11,18 @@
 //
 // The hatches' names are GTM's (namespace gtceu), the whole name coloured like GTM's energy hatches (§7 LV, §b MV, §6 HV, §5 EV, §9 IV,
 // §d LuV). The tiers follow kubejs/data/grindless/tables/wireless_energy.json (a Node test checks that every row has its names here).
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {
   const SECTION = '\u00a7'
-  // cell: the cell's id path and its name (en_us / es_es) when it is not a capacitor cell
+  // cell: the cell's id path and its name (en_us) when it is not a capacitor cell
   const TIERS = [
     { id: 'lv', name: 'LV', colour: '7' },
     { id: 'mv', name: 'MV', colour: 'b' },
     { id: 'hv', name: 'HV', colour: '6' },
     { id: 'ev', name: 'EV', colour: '5' },
     { id: 'iv', name: 'IV', colour: '9' },
-    { id: 'luv', name: 'LuV', colour: 'd', cell: { path: 'luv_smes_cell', en: 'LuV SMES Cell', es: 'Celda SMES LuV' } },
-    { id: 'zpm', name: 'ZPM', colour: 'c', cell: { path: 'zpm_smes_cell', en: 'ZPM SMES Cell', es: 'Celda SMES ZPM' } }
+    { id: 'luv', name: 'LuV', colour: 'd', cell: { path: 'luv_smes_cell', en: 'LuV SMES Cell' } },
+    { id: 'zpm', name: 'ZPM', colour: 'c', cell: { path: 'zpm_smes_cell', en: 'ZPM SMES Cell' } }
   ]
   const AMPS = [2, 4, 16, 64]
   function suffix(a) { return a === 2 ? '' : '_' + a + 'a' }
@@ -74,49 +74,4 @@
     add('message.grindless.wireless.cover_placed', '%s wireless cover on')
   })
 
-  ClientEvents.lang('es_es', function (event) {
-    var add = function (key, value) { event.add('grindless', key, value) }
-    TIERS.forEach(function (t) {
-      AMPS.forEach(function (a) {
-        var amps = a === 2 ? '' : ' de ' + a + ' A'
-        event.add('gtceu', 'block.gtceu.' + t.id + '_wireless_energy_hatch' + suffix(a), SECTION + t.colour + 'Escotilla de energía inalámbrica ' + t.name + amps)
-        event.add('gtceu', 'block.gtceu.' + t.id + '_wireless_dynamo_hatch' + suffix(a), SECTION + t.colour + 'Escotilla dinamo inalámbrica ' + t.name + amps)
-      })
-      add(cellKey(t), t.cell ? t.cell.es : 'Celda de condensadores ' + t.name)
-      add('item.grindless.' + t.id + '_wireless_energy_cover', SECTION + t.colour + 'Cubierta de energía inalámbrica ' + t.name)
-      add('item.grindless.' + t.id + '_wireless_dynamo_cover', SECTION + t.colour + 'Cubierta dinamo inalámbrica ' + t.name)
-    })
-    event.add('gtceu', 'block.gtceu.wireless_energy_tower', 'Torre de energía inalámbrica')
-    add('grindless.machine.wireless_energy_tower.tooltip.0', '§7El almacén de la red inalámbrica, formado por sus celdas de condensadores.')
-    add('grindless.machine.wireless_energy_tower.tooltip.1', 'Celdas de condensadores de cualquier nivel en 32 huecos.')
-    add('grindless.machine.wireless_energy_tower.cells', 'Celdas de condensadores: %s, la más débil %s: %s EU en esta torre')
-    add('grindless.machine.wireless_energy_tower.no_cells', 'Sin celdas de condensadores: esta torre no guarda nada')
-    add('grindless.machine.wireless_energy_tower.network', 'Red: %s / %s EU, envía a %s (%s torres)')
-    add('grindless.machine.wireless_energy_tower.flow', 'Último segundo: entran %s EU/t, salen %s EU/t')
-    add('tooltip.grindless.capacitor_cell.0', 'Guarda %s EU en una torre de energía inalámbrica')
-    add('tooltip.grindless.capacitor_cell.1', 'Una torre envía EU al nivel de su celda más débil')
-    add('tooltip.grindless.wireless_cell.made_by', 'Se fabrica en: %s')
-    add('grindless.machine.wireless_energy_hatch.tooltip.0', 'Entrada de energía para multibloques, que se llena desde la red inalámbrica cuando el nivel de la red es al menos el de la escotilla.')
-    add('grindless.machine.wireless_dynamo_hatch.tooltip.0', 'Salida de energía para multibloques generadores: todo lo que recibe va a la red inalámbrica (se pierde un 5 %).')
-    add('grindless.machine.wireless.tooltip.network', 'Una sola red para todos los mundos, guardada en torres de energía inalámbrica. Su chunk tiene que estar cargado.')
-    add('grindless.machine.wireless.tooltip.readout', 'Mayús + clic derecho con la mano vacía: la EU y el flujo de la red')
-    add('tooltip.grindless.wireless_energy_cover.0', 'Alimenta desde la red inalámbrica la máquina de un bloque en la que está, si el nivel de la red llega al suyo.')
-    add('tooltip.grindless.wireless_dynamo_cover.0', 'Envía a la red inalámbrica la EU guardada de un generador o de un búfer de baterías (se pierde un 5 %).')
-    add('tooltip.grindless.wireless_cover.rate', '%s: hasta %s EU/t (%s A)')
-    add('tooltip.grindless.wireless_cover.place', 'Clic derecho en un lado de una máquina para ponerla; una palanca la quita.')
-    add('message.grindless.wireless.readout', 'Red inalámbrica (%s): %s / %s EU, entran %s EU/t, salen %s EU/t')
-    add('message.grindless.wireless.no_tower', 'Red inalámbrica: no hay ninguna torre de energía inalámbrica formada, no se mueve nada')
-    add('message.grindless.wireless.above_tier', 'Este bloque %s no recibe nada: la red es %s (su celda de condensadores más débil)')
-    add('message.grindless.wireless.cover_no_machine', 'Las cubiertas inalámbricas van en máquinas de GregTech')
-    add('message.grindless.wireless.cover_no_energy', 'Esta máquina no guarda energía: usa una escotilla inalámbrica en un multibloque')
-    add('message.grindless.wireless.cover_no_input', 'Esta máquina no toma EU')
-    add('message.grindless.wireless.cover_no_output', 'Esta máquina no da EU')
-    add('message.grindless.wireless.cover_too_strong', 'Una cubierta %s es demasiado fuerte para una máquina %s')
-    add('message.grindless.wireless.cover_too_weak', 'Una cubierta %s es demasiado débil para una máquina %s')
-    add('message.grindless.wireless.cover_side_taken', 'Ese lado ya tiene una cubierta')
-    add('message.grindless.wireless.cover_cannot', 'La cubierta no cabe en ese lado')
-    add('message.grindless.wireless.cover_unsupported', 'Las cubiertas inalámbricas no pueden usar el almacén de energía de esta máquina (%s)')
-    add('message.grindless.wireless.fault', 'Este bloque inalámbrico se detuvo tras un error de energía (mira el registro del servidor). Vuelve a ponerlo, o a poner su cubierta, o reinicia el servidor, para reintentarlo')
-    add('message.grindless.wireless.cover_placed', 'Cubierta inalámbrica %s puesta')
-  })
 })()

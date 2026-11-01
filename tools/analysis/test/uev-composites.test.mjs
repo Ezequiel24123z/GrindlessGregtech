@@ -133,9 +133,9 @@ test('the ids F1 registered are reused, never registered again', () => {
   }
 });
 
-test('every package item has en_us and es_es names (one table, two languages)', () => {
+test('every package item has en_us names (one table)', () => {
   const names = [...lang.matchAll(/^\s*\['([a-z0-9_]+)', '[^']+', '[^']+', '/gm)].map((m) => m[1]);
   assert.ok(names.length >= 19, String(names.length));
   for (const n of names) assert.ok(startup.includes(`${n}:`), `${n} is not registered`);
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
 });

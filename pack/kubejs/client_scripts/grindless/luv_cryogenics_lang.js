@@ -33,23 +33,3 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.recipe.grindless_coated_conductor.itbtc_coated_conductor', 'Step 2: a micron of ITBTC laser-deposited on the tape, annealed in oxygen and capped with silver')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.helium_refrigerator', 'Refrigerador de helio')
-    add('gtceu.closed_loop_cooling', 'Refrigeración en circuito cerrado')
-    add('block.gtceu.coated_conductor_line', 'Línea de conductor recubierto')
-    add('gtceu.coated_conductor', 'Conductor recubierto')
-
-    add('grindless.machine.helium_refrigerator.tooltip.0', '§7Enfría lingotes calientes con un circuito cerrado de helio.')
-
-    add('grindless.machine.helium_refrigerator.charge.ok', 'Circuito de helio: %s mB de helio líquido (una carga de %s mB que se queda, y %s mB gastados por receta)')
-    add('grindless.machine.helium_refrigerator.charge.low', 'Circuito de helio: %s mB de helio líquido. Una receta necesita la carga de %s mB más %s mB de reposición en las escotillas de entrada')
-
-    add('gtceu.recipe.grindless_closed_loop', 'Circuito cerrado: se gastan %s mB de helio líquido; la carga de %s mB se queda en la máquina')
-
-    add('grindless.machine.coated_conductor_line.tooltip.0', '§7Fabrica cinta superconductora de segunda generación.')
-
-    add('gtceu.recipe.grindless_coated_conductor.nickel_tungsten_substrate', 'Paso 1: níquel y wolframio, 19 a 1, laminados y recocidos con textura cúbica')
-    add('gtceu.recipe.grindless_coated_conductor.itbtc_coated_conductor', 'Paso 2: una micra de ITBTC depositada por láser sobre la cinta, recocida en oxígeno y cubierta de plata')
-})

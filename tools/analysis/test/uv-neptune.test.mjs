@@ -108,9 +108,8 @@ test('crafting of the two controllers', () => {
   for (const m of Object.keys(MACHINES)) assert.ok(byId('grindless:assembly_line/' + m), m + ' assembly line recipe');
 });
 
-test('every new name and tooltip has en_us and es_es text, and the reused overlays exist', () => {
+test('every new name and tooltip has en_us text, and the reused overlays exist', () => {
   const en = run.lang.en_us || {};
-  const es = run.lang.es_es || {};
   const keys = ['gtceu.triton_plume'];
   for (const m of Object.keys(MACHINES)) {
     keys.push('block.gtceu.' + m, `grindless.machine.${m}.no_voiding`);
@@ -118,8 +117,6 @@ test('every new name and tooltip has en_us and es_es text, and the reused overla
   }
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);
-    assert.ok(es[k] && es[k].length > 3, 'es_es ' + k);
-    assert.notEqual(en[k], es[k], 'es_es ' + k + ' is translated');
   }
   for (const o of ['ice_giant_siphon', 'plume_sampler']) {
     const dir = path.join(pack, 'kubejs', 'assets', 'grindless', 'textures', 'block', 'multiblock', o);

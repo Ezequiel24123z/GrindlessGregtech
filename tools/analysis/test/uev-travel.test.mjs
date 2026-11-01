@@ -29,7 +29,7 @@ test('planets.json: alpha, barnard and sirius; Barnard b shares the Alpha pair; 
   assert.equal(p.sirius.pairTag, 'sirius');
   assert.equal(p.proxima.pairTag, 'proxima');
   for (const k of ['alpha', 'barnard', 'sirius']) {
-    assert.ok(p[k].name.en_us && p[k].name.es_es, k);
+    assert.ok(p[k].name.en_us, k);
   }
 });
 

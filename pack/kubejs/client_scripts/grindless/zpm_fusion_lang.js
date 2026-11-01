@@ -23,21 +23,3 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.recipe.grindless_plasma_quench.darmstadtium_plate', 'Circuit 1: a darmstadtium plate cast under argon')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.plasma_quench_caster', 'Fundidora de temple de plasma')
-    add('gtceu.plasma_quench', 'Temple de plasma')
-    add('block.gtceu.direct_energy_converter', 'Convertidor directo de energía')
-    add('gtceu.direct_conversion', 'Conversión directa de energía')
-
-    add('grindless.machine.plasma_quench_caster.tooltip.0', '§7Cuela los metales fundidos del Mk2 en placa o lámina.')
-
-    add('grindless.machine.direct_energy_converter.tooltip.0', '§7Convierte plasma en electricidad sin turbina.')
-
-    add('gtceu.recipe.grindless_plasma_quench.duranium_plate', 'Circuito 1: una placa de duranio colada bajo argón')
-    add('gtceu.recipe.grindless_plasma_quench.duranium_foil', 'Circuito 2: cuatro láminas de duranio coladas bajo argón')
-    add('gtceu.recipe.grindless_plasma_quench.tritanium_plate', 'Circuito 1: una placa de tritanio colada bajo argón')
-    add('gtceu.recipe.grindless_plasma_quench.tritanium_foil', 'Circuito 2: cuatro láminas de tritanio coladas bajo argón')
-    add('gtceu.recipe.grindless_plasma_quench.darmstadtium_plate', 'Circuito 1: una placa de darmstadtio colada bajo argón')
-})

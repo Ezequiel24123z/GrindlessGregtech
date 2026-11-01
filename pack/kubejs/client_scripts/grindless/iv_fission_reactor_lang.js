@@ -25,19 +25,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.fission_reactor.scram', 'SCRAM: shut down with fuel loaded. It restarts by itself once it has water (and heavy water for circuits 2 and 3), room for the spent fuel and the tritiated heavy water, and the circuit of a core')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.fission_reactor', 'Reactor de fisión')
-    add('gtceu.fission_core', 'Núcleo de fisión')
-
-    add('grindless.machine.fission_reactor.tooltip.0', '§7Hierve agua con núcleos de fisión diseñados para turbinas.')
-
-    add('gtceu.recipe.grindless_core.leu_light_water', 'LEU con agua ligera: un elemento dura %s ciclos de canal (unos %s min en un canal) y da %s G EU')
-    add('gtceu.recipe.grindless_core.leu_heavy_water', 'LEU con agua pesada: un elemento dura %s ciclos de canal (unos %s min en un canal) y da %s G EU; el agua pesada sale tritiada')
-    add('gtceu.recipe.grindless_core.mox_heavy_water', 'MOX con agua pesada: un elemento dura %s ciclos de canal (unos %s min en un canal) y da %s G EU; el agua pesada sale tritiada')
-    add('gtceu.recipe.grindless_core.breeder', 'Reproductor: un elemento dura %s ciclos de canal (unos %s min en un canal) y da %s G EU; el elemento gastado lleva más plutonio del que entró')
-
-    add('grindless.machine.fission_reactor.no_voiding', 'El reactor guarda todo lo que hace: el combustible gastado y el agua pesada tritiada salen por su bus y su escotilla. Desactiva el vaciado')
-    add('grindless.machine.fission_reactor.scram', 'SCRAM: parado con combustible cargado. Arranca solo cuando tiene agua (y agua pesada para los circuitos 2 y 3), sitio para el combustible gastado y el agua pesada tritiada, y el circuito de un núcleo')
-})

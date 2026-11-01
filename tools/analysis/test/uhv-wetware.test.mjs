@@ -234,18 +234,16 @@ test('the controller is an assembly line with station research and no crafting-g
   assert.ok(mine.calls.some((c) => c[0] === 'stationResearch' || c.name === 'stationResearch'), 'station research');
 });
 
-test('names in en_us and es_es, no UEV ids, and the controller overlays exist', () => {
+test('names in en_us, no UEV ids, and the controller overlays exist', () => {
   const languages = {};
   vm.runInNewContext(script('client_scripts', 'uhv_wetware_lang.js'), {
     ClientEvents: { lang(lang, cb) { languages[lang] = {}; cb({ add: (_, key, value) => { languages[lang][key] = value; } }); } },
   });
-  assert.deepEqual(Object.keys(languages.en_us).sort(), Object.keys(languages.es_es).sort());
   const startup = script('startup_scripts', 'uhv/wetware.js');
   const keys = ['block.gtceu.organoid_array', 'gtceu.organoid_computing', 'grindless.machine.organoid_array.no_voiding']
     .concat([...startup.matchAll(/Text\.translate\('([^']+)'\)/g)].map((m) => m[1]));
   for (const k of keys) {
     assert.ok(languages.en_us[k], `en_us ${k}`);
-    assert.ok(languages.es_es[k], `es_es ${k}`);
   }
   const { recipes } = harness();
   for (const r of recipes.filter((x) => x.type !== 'shaped')) {

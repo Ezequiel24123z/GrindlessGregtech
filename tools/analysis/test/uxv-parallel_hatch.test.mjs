@@ -123,10 +123,10 @@ test('a missing input skips the recipe and is reported, never throws', () => {
   assert.equal(G.uxvParallelHatch.done, true);
 });
 
-test('the names, the tooltip and the info page exist in en_us and es_es', () => {
+test('the names, the tooltip and the info page exist in en_us', () => {
   const src = read('client_scripts', 'grindless/uxv_parallel_hatch_lang.js');
   for (const key of ['block.gtceu.uxv_parallel_hatch', 'grindless.machine.uxv_parallel_hatch.tooltip', 'emi.grindless.info.uxv_parallel_hatch.0']) {
-    assert.equal(src.split(`'${key}'`).length - 1, 2, key);
+    assert.equal(src.split(`'${key}'`).length - 1, 1, key);
   }
   assert.ok(src.includes('65536'));
   assert.ok(/^\/\/ priority: \d+/m.test(src), 'the integrator stamps the load priority');

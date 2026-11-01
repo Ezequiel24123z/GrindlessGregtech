@@ -97,9 +97,9 @@ test('the shape is 5 wide, 15 high, 5 deep, and the textures and EMI page exist'
   assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'max_interferometer_atom_interferometer_works.json')));
 });
 
-test('the lang file has en_us and es_es keys in parity', () => {
+test('the lang file has en_us keys', () => {
   const s = read(kube, 'client_scripts', 'grindless', 'max_interferometer_lang.js');
-  assert.ok(/en_us/.test(s) && /es_es/.test(s));
+  assert.ok(/en_us/.test(s));
   assert.match(s, /atom_interferometer_works/);
 });
 

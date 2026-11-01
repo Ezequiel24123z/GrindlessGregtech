@@ -2,7 +2,7 @@
 //   - startup_scripts/grindless/uv/materials.js: three recipe types, three machines with valid patterns, twelve items, two materials;
 //   - server_scripts/grindless/uv/materials.js: the reactor's four steps, the line's three, the printer's rows from
 //     data/grindless/tables/am_powders.json, the side steps, GTM's EnTED wire routes removed, the controllers' crafting;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -198,11 +198,10 @@ test('the controllers are craftable', () => {
   for (const id of Object.values(M.crafting)) assert.ok(ids.includes(id), id);
 });
 
-test('names: en_us and es_es for the machines, the types, the items and the materials', () => {
+test('names: en_us for the machines, the types, the items and the materials', () => {
   const lang = read('client_scripts/grindless/uv_materials_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['reactor:', 'line:', 'printer:', 'reactorType:', 'lineType:', 'printerType:', 'reactorTips:', 'lineTips:', 'printerTips:']) assert.ok(part.includes(key), key);
     for (const n of NEW_ITEMS.concat(MATERIALS)) assert.ok(part.includes(`${n}:`), n);
   }

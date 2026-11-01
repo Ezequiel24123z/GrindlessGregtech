@@ -122,15 +122,14 @@ test('tiers 1-12 are untouched (MAX-W appends the fourteenth row)', () => {
   assert.equal(WIRELESS.tiers.find((r) => r.name === 'uxv').cellMadeBy, 'gtceu:nitride_magnet_works');
 });
 
-test('names: en_us and es_es for the OpV hatches, covers and cell', () => {
+test('names: en_us for the OpV hatches, covers and cell', () => {
   const { lang } = run;
   const keys = HATCHES.map((id) => 'block.' + id.replace(':', '.')).concat(COVERS.map((id) => 'item.' + id.replace(':', '.')));
-  for (const l of ['en_us', 'es_es']) {
+  for (const l of ['en_us']) {
     for (const k of keys) assert.match(String(lang[l][k]), /^\u00a79\u00a7l.*OpV/, l + ' ' + k);
     assert.ok(lang[l]['block.grindless.opv_smes_cell'], l + ' names the cell');
   }
   assert.equal(lang.en_us['block.grindless.opv_smes_cell'], 'OpV SMES Cell');
-  assert.equal(lang.es_es['block.grindless.opv_smes_cell'], 'Celda SMES OpV');
   assert.equal(lang.en_us['block.gtceu.opv_wireless_energy_hatch_64a'], '\u00a79\u00a7lOpV 64A Wireless Energy Hatch');
 });
 

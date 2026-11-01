@@ -84,7 +84,7 @@ test('the older rows: canister chain in the actinide, hot-cell and megabar table
   assert.match(read('server_scripts', 'grindless', 'uv', 'edge.js'), /name: 'correlated_kerr_data', type: 'event_horizon_imaging', circuit: 2/);
 });
 
-test('every item has a texture, a name and two tooltips in en_us and es_es; every machine has three tooltips and an info page', () => {
+test('every item has a texture, a name and two tooltips in en_us; every machine has three tooltips and an info page', () => {
   const names = [...startup.slice(startup.indexOf('CY.items'), startup.indexOf('CY.machines')).matchAll(/^\s{4}(\w+): \{ stack/gm)].map((m) => m[1]);
   assert.equal(names.length, 6);
   for (const n of names) {

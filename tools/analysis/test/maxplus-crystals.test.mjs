@@ -1,5 +1,5 @@
 // XP-H2 (MAX+ multi-plasma blender and horizon crystal furnace, lines T8, T9 and T10): the stand-in run of maxplus/crystals.js, row shape, sites,
-// circuits, the 2.56e8 mB slurry bill (one MAX fluid hatch per core run) and lang parity.
+// circuits, the 2.56e8 mB slurry bill (one MAX fluid hatch per core run) and the English names.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -82,7 +82,7 @@ test('lines: T8, T9 and T10 chain to the blender and the furnace; circuits are u
   }
 });
 
-test('lang: machines, types, tooltips and every keyed row have an en_us and es_es entry', () => {
+test('lang: machines, types, tooltips and every keyed row have an en_us entry (English only, EN-1)', () => {
   for (const r of [...plain(MC.blender), ...plain(MC.furnace), ...plain(MC.rows)].filter((x) => x.key))
     assert.ok(lang.includes(`${r.key}.${r.name}'`), `no lang key for ${r.name}`);
   for (const m of ['multi_plasma_blender', 'horizon_crystal_furnace']) {
@@ -90,6 +90,7 @@ test('lang: machines, types, tooltips and every keyed row have an en_us and es_e
     assert.ok(lang.includes(`'gtceu.${m}'`), m);
     assert.ok(lang.includes(`'grindless.machine.${m}.tooltip.0'`), m);
   }
-  assert.ok(lang.includes("['en_us', 'es_es']"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
+  assert.ok(!lang.includes('es_es'));
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });

@@ -6,7 +6,7 @@
 //   dimension.grindless.<world>                the ten dimensions (GCYR names its own as dimension.gcyr.<world>)
 //   planet.grindless.<key>                     the planet names of moon/quantum_bridge.js's messages (planets.json keys)
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Quests are English only; names go in en_us and es_es.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Quests are English only; names go in en_us.
 ClientEvents.lang('en_us', event => {
     var add = function (key, value) { event.add('grindless', key, value) }
 
@@ -38,33 +38,3 @@ ClientEvents.lang('en_us', event => {
     add('planet.grindless.ganymede', 'Ganymede')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.grindless.cryogenic_fuel_tank', 'Tanque de combustible criogénico')
-    add('tooltip.grindless.cryogenic_fuel_tank.0', 'Un tanque de cohete de nivel 5 con paredes de HSS-S y aislamiento de Kapton: 16.000 mB.')
-    add('tooltip.grindless.cryogenic_fuel_tank.1', 'Motores de élite y solo estos tanques hacen un cohete de nivel 4: el cinturón y las lunas de Júpiter.')
-
-    add('level.grindless.asteroid_belt', 'Cinturón de asteroides')
-    add('level.grindless.jupiter', 'Júpiter')
-    add('level.grindless.io', 'Ío')
-    add('level.grindless.europa', 'Europa')
-    add('level.grindless.ganymede', 'Ganímedes')
-
-    add('dimension.grindless.asteroid_belt', 'Cinturón de asteroides')
-    add('dimension.grindless.asteroid_belt_orbit', 'Órbita del cinturón de asteroides')
-    add('dimension.grindless.jupiter', 'Júpiter')
-    add('dimension.grindless.jupiter_orbit', 'Órbita de Júpiter')
-    add('dimension.grindless.io', 'Ío')
-    add('dimension.grindless.io_orbit', 'Órbita de Ío')
-    add('dimension.grindless.europa', 'Europa')
-    add('dimension.grindless.europa_orbit', 'Órbita de Europa')
-    add('dimension.grindless.ganymede', 'Ganímedes')
-    add('dimension.grindless.ganymede_orbit', 'Órbita de Ganímedes')
-
-    add('planet.grindless.belt', 'el cinturón de asteroides')
-    add('planet.grindless.jupiter', 'Júpiter')
-    add('planet.grindless.io', 'Ío')
-    add('planet.grindless.europa', 'Europa')
-    add('planet.grindless.ganymede', 'Ganímedes')
-})

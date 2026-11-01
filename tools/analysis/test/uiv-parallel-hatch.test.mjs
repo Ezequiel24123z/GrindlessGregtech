@@ -118,10 +118,10 @@ test('the recipe is the UEV one a tier up, guarded, with a stable id', () => {
   assert.equal(G.uivParallelHatch.done, true);
 });
 
-test('the names and the tooltip exist in en_us and es_es', () => {
+test('the names and the tooltip exist in en_us', () => {
   const src = read('client_scripts', 'grindless/uiv_parallel_hatch_lang.js');
   for (const key of ['block.gtceu.uiv_parallel_hatch', 'grindless.machine.uiv_parallel_hatch.tooltip']) {
-    assert.equal(src.split(`'${key}'`).length - 1, 2, key);
+    assert.equal(src.split(`'${key}'`).length - 1, 1, key);
   }
   assert.ok(src.includes('16384'));
 });

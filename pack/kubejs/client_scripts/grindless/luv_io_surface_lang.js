@@ -12,15 +12,3 @@ ClientEvents.lang('en_us', function (event) {
   add('grindless.machine.volcanic_intake.tooltip.0', '§7Generates power from Io\'s volcanic heat.')
   add('grindless.machine.volcanic_intake.off_io', 'No volcanic heat here: the intake only works on Io')
 })
-ClientEvents.lang('es_es', function (event) {
-  function add(k, v) { event.add('grindless', k, v) }
-  add('block.gtceu.fumarole_condenser', 'Condensador de fumarolas')
-  add('block.gtceu.volcanic_intake', 'Toma volcánica')
-  add('gtceu.fumarole_condensing', 'Condensación de fumarolas')
-  add('gtceu.volcanic_heat', 'Calor volcánico')
-  add('grindless.machine.fumarole_condenser.tooltip.0', '§7Condensa los gases volcánicos de Ío en germanio e indio.')
-  add('grindless.machine.fumarole_condenser.no_voiding', 'El condensador guarda lo que produce: desactiva el vaciado')
-  add('grindless.machine.fumarole_condenser.off_io', 'Fuera de Ío: aquí solo funciona la separación (circuito 2)')
-  add('grindless.machine.volcanic_intake.tooltip.0', '§7Genera energía con el calor volcánico de Ío.')
-  add('grindless.machine.volcanic_intake.off_io', 'Aquí no hay calor volcánico: la toma solo funciona en Ío')
-})

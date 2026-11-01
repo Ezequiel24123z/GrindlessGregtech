@@ -132,11 +132,8 @@ test('hold rules: the A8 and tetrataenite rules are gone, and the pending EMI en
   assert.ok(!(emi.pendingRoutes || []).some((p) => /A8 (deletes|writes)/.test(p.reason || '')), 'no route waits for A8');
 });
 
-test('text: the EMI lines of the older rows in en_us and es_es', () => {
+test('text: the EMI lines of the older rows in en_us', () => {
   const keys = ['gtceu.recipe.grindless_naquadria_magnets.tetrataenite_rotor', 'gtceu.recipe.grindless_naquadria_magnets.multipole_encoder_ring',
     'gtceu.recipe.grindless_magnet_winding.strand_stator', 'gtceu.recipe.grindless_coated_conductor.strand_tape'];
-  for (const l of ['en_us', 'es_es']) for (const k of keys) assert.ok(run.lang[l][k], `${l} ${k}`);
-  const en = Object.keys(run.lang.en_us).filter((k) => /^gtceu\.recipe\.grindless_(naquadria_magnets|magnet_winding|coated_conductor)/.test(k)).sort();
-  const es = Object.keys(run.lang.es_es).filter((k) => /^gtceu\.recipe\.grindless_(naquadria_magnets|magnet_winding|coated_conductor)/.test(k)).sort();
-  assert.deepEqual(en, es);
+  for (const l of ['en_us']) for (const k of keys) assert.ok(run.lang[l][k], `${l} ${k}`);
 });

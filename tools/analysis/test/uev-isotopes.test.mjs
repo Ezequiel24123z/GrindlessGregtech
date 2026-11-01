@@ -185,7 +185,7 @@ test('no recipe of the package needs a UEV or UIV-only input', () => {
   for (const r of all) for (const id of inputs(r)) assert.ok(!/\b(uev|uiv|uxv|opv|max)_/.test(id), `${r.name}: ${id}`);
 });
 
-test('names exist in en_us and es_es for the machine, the type, the items, the materials and every calutron recipe', () => {
+test('names exist in en_us for the machine, the type, the items, the materials and every calutron recipe', () => {
   const lang = read('client_scripts', 'grindless', 'uev_isotopes_lang.js') + read('client_scripts', 'grindless', 'max_interferometer_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js') + read('client_scripts', 'grindless', 'max_imager_lang.js') + read('client_scripts', 'grindless', 'maxplus_circuits_lang.js'); // MAX-B2 c16-17 keep their EMI lines in its own file
   const need = ['block.gtceu.calutron', 'gtceu.calutron_separation', 'grindless.machine.calutron.no_voiding'];
   for (const r of CAL) need.push(`gtceu.recipe.grindless_calutron_separation.${r.name}`);
@@ -193,7 +193,7 @@ test('names exist in en_us and es_es for the machine, the type, the items, the m
   const startup = read('startup_scripts', 'grindless', 'uev', 'isotopes.js');
   for (const m of startup.matchAll(/^ {4}(\w+): \{ form: /gm)) need.push(`material.gtceu.${m[1]}`);
   for (const k of need) assert.ok(lang.includes(`'${k}'`) || lang.includes(`'${k.replace(/^(item|material\.gtceu)\.(?:grindless\.)?/, '')}'`), k);
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
 });
 
 test('the new GT materials the tables name are registered by the startup script', () => {

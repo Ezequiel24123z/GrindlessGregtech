@@ -304,7 +304,7 @@ test('NaF and KF return to the kiln: the reductions leave alkali fluoride, which
   assert.ok(outputs(by('chemical_reactor', 'niobium_sodium_reduction')).includes('grindless:alkali_fluoride_dust'));
 });
 
-test('every new item is named and tooltipped in en_us and es_es, and every item the table makes is registered', () => {
+test('every new item is named and tooltipped in en_us, and every item the table makes is registered', () => {
   const items = [...startup.matchAll(/^ {4}(\w+): \{ stack: \d+ \}/gm)].map((m) => m[1]);
   assert.ok(items.length >= 33, `${items.length} items`);
   for (const n of items) assert.ok(lang.includes(`['${n}',`), `lang: ${n}`);

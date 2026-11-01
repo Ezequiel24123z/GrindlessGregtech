@@ -5,7 +5,7 @@
 //     corona, the heat pipe's assembler row, the controllers;
 //   - server_scripts/grindless/uv/starshot.js: the light sail fab's reflector film (circuit 4);
 //   - server_scripts/grindless/ev/cryogenic_plant.js: crude oganesson -> oganesson propellant;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 // Doubt for T1 (gg_test_uhv_swarm): a generator whose catalysts wear into an output, at its final figure. Here: the recipe lookup, the
 // generator rows (EU out, nothing in), the kept segments and the wear (one worn segment per segment burnt, one tank per pod).
 import assert from 'node:assert/strict';
@@ -183,7 +183,7 @@ test('cryogenic plant: crude oganesson -> oganesson propellant, the A8 pod\'s fl
   if (fusion) assert.ok(JSON.stringify(fusion.j.outputs).includes('gtceu:oganesson'));
 });
 
-test('controllers: one assembly line each; lang keys in en_us and es_es', () => {
+test('controllers: one assembly line each; lang keys in en_us', () => {
   assert.deepEqual(SW.crafting,
     ['grindless:assembly_line/swarm_segment_foundry', 'grindless:assembly_line/swarm_control_station', 'grindless:assembly_line/solar_probe_bay']);
   for (const id of SW.crafting) assert.ok(dump(id) || recipes.find((r) => r.i === id), id);
@@ -194,5 +194,5 @@ test('controllers: one assembly line each; lang keys in en_us and es_es', () => 
   for (const k of ['swarm_segment_foundry', 'swarm_control_station', 'solar_probe_bay', 'sodium_potassium_heat_pipe', 'solar_probe']) {
     assert.ok(lang.includes(k), k);
   }
-  assert.ok(lang.includes('en_us') && lang.includes('es_es'));
+  assert.ok(lang.includes('en_us'));
 });

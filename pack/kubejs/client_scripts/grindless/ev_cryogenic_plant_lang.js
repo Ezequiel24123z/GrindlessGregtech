@@ -27,21 +27,3 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.night_sky_radiator.1', 'Twelve make the wings of the Cryogenic Plant. At night, open to the sky, they halve its energy.')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.cryogenic_plant', 'Planta criogénica')
-    add('gtceu.cryogenic_processing', 'Procesado criogénico')
-
-    add('grindless.machine.cryogenic_plant.tooltip.0', '§7Licúa gases: oxígeno, helio y nitrógeno líquidos.')
-
-    add('grindless.machine.cryogenic_plant.sky.night', 'Noche lunar, radiadores abiertos al cielo: el próximo ciclo cuesta la mitad')
-    add('grindless.machine.cryogenic_plant.sky.day', 'El sol está arriba: el próximo ciclo cuesta el precio completo (el del congelador)')
-    add('grindless.machine.cryogenic_plant.sky.covered', 'Es de noche, pero %s radiadores no ven el cielo: el próximo ciclo cuesta el precio completo')
-
-    add('gtceu.recipe.grindless_night_eut', 'Noche lunar, radiadores abiertos al cielo: %s EU/t')
-
-    add('block.grindless.night_sky_radiator', 'Radiador de cielo nocturno')
-    add('tooltip.grindless.night_sky_radiator.0', 'Panel de aluminio con recubrimiento blanco y tubos de calor de amoníaco. Frente a un cielo negro, suelta el calor como luz infrarroja.')
-    add('tooltip.grindless.night_sky_radiator.1', 'Doce forman las alas de la planta criogénica. De noche, abiertos al cielo, reducen su energía a la mitad.')
-})

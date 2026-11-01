@@ -132,15 +132,14 @@ test('the five older rows exist', () => {
   assert.match(oc, /UIV-A2/);
 });
 
-test('the quench is named fiction and en_us / es_es have the same keys', () => {
+test('the quench is named fiction and the lang registers en_us', () => {
   const lang = read('client_scripts', 'grindless', 'uiv_metallic_hydrogen_lang.js');
   assert.match(lang, /Fiction:/);
-  assert.match(lang, /Ficción:/);
   const startup = read('startup_scripts', 'grindless', 'uiv', 'metallic_hydrogen.js');
   for (const n of ['solid_para_h2_target', 'pyrolytic_graphite', 'leached_lonsdaleite', 'lonsdaleite_race', 'lonsdaleite_bearing', 'dac_charge', 'laser_heated_n2_charge', 'quenched_cg_nitrogen']) {
     assert.ok(startup.includes(n), n);
     assert.ok(lang.includes(`'${n}'`), n);
   }
   for (const n of ['mh_quench', 'lonsdaleite_shock', 'cg_nitrogen_shock']) assert.ok(lang.includes(`grindless_ramp_compression.${n}`), n);
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
 });

@@ -3,7 +3,3 @@
 ClientEvents.lang('en_us', function (event) {
   event.add('grindless', 'level.grindless.horizon_city', 'Beyond the Horizon')
 })
-
-ClientEvents.lang('es_es', function (event) {
-  event.add('grindless', 'level.grindless.horizon_city', 'Beyond the Horizon')
-})

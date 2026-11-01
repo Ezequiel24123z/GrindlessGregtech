@@ -16,18 +16,3 @@ ClientEvents.lang('en_us', function (event) {
   Object.keys(entries).forEach(function (key) { event.add('grindless', key, entries[key]) })
 })
 
-ClientEvents.lang('es_es', function (event) {
-  var entries = {
-    'block.gtceu.zero_g_crystal_grower': 'Cultivador de cristales en gravedad cero',
-    'gtceu.microgravity_crystal_growth': 'Crecimiento cristalino en microgravedad',
-    'block.gtceu.hydroponic_ring': 'Anillo hidropónico giratorio',
-    'block.gtceu.organoid_lab': 'Laboratorio de organoides',
-    'gtceu.organoid_assembly': 'Ensamblaje de organoides',
-    'grindless.machine.zero_g_crystal_grower.tooltip.0': '§7Cultiva cristales en órbita, sin gravedad.',
-    'grindless.machine.hydroponic_ring.tooltip.0': '§7Cultiva factor neurotrófico y colágeno vegetal en órbita.',
-    'grindless.machine.hydroponic_ring.no_voiding': 'Conserva la biomasa y el oxígeno para la biofactoría y la estación. Desactiva el descarte de objetos y fluidos.',
-    'grindless.machine.organoid_lab.tooltip.0': '§7Cultiva y ensambla organoides neurales en órbita.',
-    'grindless.machine.organoid_lab.no_voiding': 'El laboratorio conserva sus cultivos y procesadores. Desactiva el descarte de objetos y fluidos.'
-  }
-  Object.keys(entries).forEach(function (key) { event.add('grindless', key, entries[key]) })
-})

@@ -21,7 +21,7 @@ const reg = ({ items = [], fluids = [], machines = [], types = [] } = {}) => ({
   recipeTypes: types.map((t) => ({ id: t, file: file('hv') })),
   materials: [],
   modifiedMaterials: [],
-  lang: { en_us: {}, es_es: {} },
+  lang: { en_us: {} },
 });
 const kinds = (res) => new Set(res.findings.map((f) => f.kind));
 

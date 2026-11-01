@@ -17,7 +17,7 @@ const plain = (x) => JSON.parse(JSON.stringify(x));
 const producers = (id) => recipes.filter((r) => JSON.stringify(r.j.outputs || {}).includes(`"${id}"`));
 const ids = (xs) => (Array.isArray(xs) ? xs : []).map((x) => x.id);
 const mine = (file, type) => json(file).types[type].recipes.filter((r) => (r._why || '').startsWith('UXV-A3'));
-const lang = ['en_us', 'es_es'];
+const lang = ['en_us'];
 
 const ITEMS = ['five_n_cobalt', 'five_n_iron', 'five_n_manganese', 'five_n_silicon', 'five_n_nickel', 'five_n_gallium', 'mu_metal_blend', 'mu_metal_ingot',
   'mu_metal_hot_band', 'annealed_mu_foil', 'mu_metal_shield_can', 'finemet_charge_dust', 'heusler_cast_ingot', 'ni_mn_ga_raw_crystal', 'raw_hbn_crystal',
@@ -32,7 +32,7 @@ test('the stand-in runs the UXV-A3 scripts without errors, nothing skipped', () 
   assert.deepEqual(plain(SR.skipped), []);
 });
 
-test('43 items registered by the startup file, named in en_us and es_es with a tooltip', () => {
+test('43 items registered by the startup file, named in en_us with a tooltip', () => {
   assert.equal(ITEMS.length, 43);
   assert.deepEqual(plain(SR.items), ITEMS.map((n) => `grindless:${n}`));
   for (const n of ITEMS) {
@@ -194,7 +194,7 @@ test('older rows are appended, never edited: the pinned older rows keep their ci
     + n('crystals.json', 'crystal_growth') + n('levitation_melter.json', 'levitation_melting') + n('megabar.json', 'megabar_synthesis') + n('photonics.json', 'photonic_foundry'), 15 + 8 + 1 + 8 + 8 + 1 + 6);
 });
 
-test('lang parity: every new table row has an EMI line in en_us and es_es', () => {
+test('lang: every new table row has an EMI line in en_us', () => {
   const rows = [['electron_beam.json', 'electron_beam_refining', 'grindless_electron_beam'], ['composites.json', 'nitride_magnet_synthesis', 'grindless_nitride_magnet_synthesis'],
     ['composites.json', 'chemical_vapour_infiltration', 'grindless_chemical_vapour_infiltration'], ['crystals.json', 'crystal_growth', 'grindless_crystal_growth'],
     ['levitation_melter.json', 'levitation_melting', 'grindless_levitation_melting'], ['megabar.json', 'megabar_synthesis', 'grindless_megabar'],

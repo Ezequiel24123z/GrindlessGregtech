@@ -1,6 +1,6 @@
 // OpV-M2: the assembly line array (startup_scripts/grindless/opv/assembly_line_array.js, server_scripts/grindless/opv/assembly_line_array.js):
 // the structure through the real helpers (<= 16 tall, one controller, OpV casing <= 50%), the mega chain, the controller recipe's ingredients,
-// the names in both languages, the EMI info page and the test zone.
+// the names in en_us, the EMI info page and the test zone.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -103,12 +103,12 @@ test('the controller recipe: researched with a tetron array, VA[OpV] for 2,400 t
   assert.equal((src.match(/^\s+\['\d*x? ?', /gm) || []).length, 9);
 });
 
-test('names in both languages, the tooltip and the info page; the EMI json points at the controller', () => {
+test('names in en_us, the tooltip and the info page; the EMI json points at the controller', () => {
   const lang = read('client_scripts', 'grindless/opv_assembly_line_array_lang.js');
   for (const key of ['block.gtceu.assembly_line_array', 'grindless.machine.assembly_line_array.tooltip.0', 'emi.grindless.info.assembly_line_array.0', 'emi.grindless.info.assembly_line_array.1']) {
     assert.ok(lang.includes(`'${key}'`), key);
   }
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
   const info = JSON.parse(fs.readFileSync(path.join(KJS, 'assets/emi/recipe/additions/grindless/opv_assembly_line_array_assembly_line_array.json'), 'utf8'));
   assert.equal(info.type, 'emi:info');
   assert.deepEqual(info.stacks, ['item:gtceu:assembly_line_array']);

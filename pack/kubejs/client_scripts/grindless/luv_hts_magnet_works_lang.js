@@ -25,19 +25,3 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.hts_magnet_works.charge.low', 'Liquid helium charge: %s of %s mB. No winding starts without the full charge in an input hatch')
 })
 
-ClientEvents.lang('es_es', event => {
-    var add = function (key, value) { event.add('grindless', key, value) }
-
-    add('block.gtceu.hts_magnet_works', 'Fábrica de imanes HTS')
-    add('gtceu.magnet_winding', 'Bobinado de imanes')
-
-    add('grindless.machine.hts_magnet_works.tooltip.0', '§7Bobina cinta superconductora en imanes de alta temperatura.')
-
-    add('gtceu.recipe.grindless_magnet_winding.hts_coil', 'Circuito 1: una bobina HTS bobinada, probada en frío en la carga de helio')
-    add('gtceu.recipe.grindless_magnet_winding.luv_smes_cell', 'Circuito 2: la celda LuV de la red inalámbrica, una bobina SMES')
-    add('gtceu.recipe.grindless_magnet_winding.coilgun_coil_casing', 'Circuito 3: bobinas de Hg-1223 para el cañón de bobinas, bobinadas y encapsuladas')
-    add('gtceu.recipe.grindless_magnet_winding.magnetic_bearing', 'Circuito 4: un cojinete magnético de tetrataenita')
-
-    add('grindless.machine.hts_magnet_works.charge.ok', 'Carga de helio líquido: %s mB (necesita %s mB, nunca se gasta)')
-    add('grindless.machine.hts_magnet_works.charge.low', 'Carga de helio líquido: %s de %s mB. Ningún bobinado arranca sin la carga completa en una escotilla de entrada')
-})

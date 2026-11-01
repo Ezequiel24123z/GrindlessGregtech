@@ -8,77 +8,59 @@
 //   emi.grindless.info.<machine>.N                     the EMI info pages of the controllers
 //   gtceu.recipe.<dataKey>.<recipe>                    the EMI line of each recipe
 //
-// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us and es_es.
+// Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. Names go in en_us.
 (function () {
-    // [key, en, es]
+    // [key, text]
     var ENTRIES = [
-        ['block.gtceu.accretion_disk_skimmer', 'Accretion Disk Skimmer', 'Écumador del disco de acreción'],
-        ['block.gtceu.frc_former', 'FRC Former', 'Formador de FRC'],
-        ['block.gtceu.bz_dynamo', 'BZ Dynamo', 'Dinamo BZ'],
-        ['gtceu.disk_skimming', 'Disk Skimming', 'Écumado del disco'],
-        ['gtceu.frc_forming', 'FRC Forming', 'Formación de FRC'],
-        ['gtceu.blandford_znajek', 'Blandford-Znajek', 'Blandford-Znajek'],
-        ['item.grindless.strand_coil', 'Strand Coil', 'Bobina de hebra'],
-        ['tooltip.grindless.strand_coil.0', 'An FRC cartridge wound in strand tape.', 'Un cartucho de FRC bobinado con cinta de hebra.'],
-        ['tooltip.grindless.strand_coil.1', 'Made in the naquadria magnet works; two go into a UXV field generator.', 'Se fabrica en la planta de imanes de naquadria; dos entran en un generador de campo UXV.'],
+        ['block.gtceu.accretion_disk_skimmer', 'Accretion Disk Skimmer'],
+        ['block.gtceu.frc_former', 'FRC Former'],
+        ['block.gtceu.bz_dynamo', 'BZ Dynamo'],
+        ['gtceu.disk_skimming', 'Disk Skimming'],
+        ['gtceu.frc_forming', 'FRC Forming'],
+        ['gtceu.blandford_znajek', 'Blandford-Znajek'],
+        ['item.grindless.strand_coil', 'Strand Coil'],
+        ['tooltip.grindless.strand_coil.0', 'An FRC cartridge wound in strand tape.'],
+        ['tooltip.grindless.strand_coil.1', 'Made in the naquadria magnet works; two go into a UXV field generator.'],
 
         ['grindless.machine.accretion_disk_skimmer.tooltip.0',
-            '\u00a77A magnetic scoop that takes plasma from the accretion disk.',
-            '\u00a77Una pala magnética que toma plasma del disco de acreción.'],
+            '\u00a77A magnetic scoop that takes plasma from the accretion disk.'],
         ['grindless.machine.frc_former.tooltip.0',
-            '\u00a77Forms field-reversed plasmoids and flux-loaded plasma.',
-            '\u00a77Forma plasmoides de configuración invertida y plasma cargado de flujo.'],
+            '\u00a77Forms field-reversed plasmoids and flux-loaded plasma.'],
         ['grindless.machine.bz_dynamo.tooltip.0',
-            '\u00a77Power from a black hole\'s spin: the Blandford-Znajek process.',
-            '\u00a77Energía del giro de un agujero negro: el proceso de Blandford-Znajek.'],
+            '\u00a77Power from a black hole\'s spin: the Blandford-Znajek process.'],
         ['grindless.machine.bz_dynamo.tooltip.1',
-            'Dynamo: 2 UIV or 1 UXV 16 A hatch.',
-            'Dinamo: 2 escotillas UIV o 1 UXV de 16 A.'],
+            'Dynamo: 2 UIV or 1 UXV 16 A hatch.'],
 
         ['emi.grindless.info.accretion_disk_skimmer.0',
-            'The disk plasma it takes is the accretion disk\'s own, so the skimmer must stand in Cygnus X-1 orbit. It needs a hydrogen-cooled controller and a metallic hydrogen winding that wears slowly.',
-            'El plasma de disco que toma es el del propio disco de acreción, así que el écumador debe estar en la órbita de Cygnus X-1. Necesita un controlador refrigerado con hidrógeno y un devanado de hidrógeno metálico que se desgasta despacio.'],
+            'The disk plasma it takes is the accretion disk\'s own, so the skimmer must stand in Cygnus X-1 orbit. It needs a hydrogen-cooled controller and a metallic hydrogen winding that wears slowly.'],
         ['emi.grindless.info.accretion_disk_skimmer.1',
-            'Nothing is wasted: the plasma goes to the plasma mass filter, whose filtered disk plasma feeds the FRC former, and from there the cartridges, the field generator and the BZ dynamo\'s fuel.',
-            'No se desperdicia nada: el plasma va al filtro de masa de plasma, cuyo plasma de disco filtrado alimenta el formador de FRC, y de ahí los cartuchos, el generador de campo y el combustible del dinamo BZ.'],
+            'Nothing is wasted: the plasma goes to the plasma mass filter, whose filtered disk plasma feeds the FRC former, and from there the cartridges, the field generator and the BZ dynamo\'s fuel.'],
         ['emi.grindless.info.frc_former.0',
-            'Cartridges are formed in Cygnus X-1 orbit, where the disk plasma is, and carry the field-reversed plasmoid for the rest of the game. Flux loading works anywhere the plasma is carried.',
-            'Los cartuchos se forman en la órbita de Cygnus X-1, donde está el plasma del disco, y llevan el plasmoide de configuración invertida el resto del juego. La carga de flujo funciona en cualquier sitio al que se lleve el plasma.'],
+            'Cartridges are formed in Cygnus X-1 orbit, where the disk plasma is, and carry the field-reversed plasmoid for the rest of the game. Flux loading works anywhere the plasma is carried.'],
         ['emi.grindless.info.frc_former.1',
-            'The cartridge makes the field generator\'s strand coil and shields the trip through Vela\'s wind. The plasma lost in flux loading recombines to 100 mB of hydrogen a run, which goes to stock.',
-            'El cartucho hace la bobina de hebra del generador de campo y protege el viaje por el viento de Vela. El plasma perdido en la carga de flujo se recombina en 100 mB de hidrógeno por ejecución, que va a la reserva.'],
+            'The cartridge makes the field generator\'s strand coil and shields the trip through Vela\'s wind. The plasma lost in flux loading recombines to 100 mB of hydrogen a run, which goes to stock.'],
         ['emi.grindless.info.bz_dynamo.0',
-            'It stands in Cygnus X-1 orbit beside the black hole: field lines threading the horizon carry the spin\'s power out through the jet. Only 400 mB of flux-loaded plasma are needed per 200 t.',
-            'Está en la órbita de Cygnus X-1 junto al agujero negro: las líneas de campo que atraviesan el horizonte sacan la energía del giro por el chorro. Solo hacen falta 400 mB de plasma cargado de flujo cada 200 t.'],
+            'It stands in Cygnus X-1 orbit beside the black hole: field lines threading the horizon carry the spin\'s power out through the jet. Only 400 mB of flux-loaded plasma are needed per 200 t.'],
         ['emi.grindless.info.bz_dynamo.1',
-            'Generous, never free: skimming, filtering and flux loading the 400 mB cost about 1.3e11 EU; one run returns 2.15e11 EU, about 1.6 times the chain. It leaves nothing behind and its power is for the wireless network.',
-            'Generosa, nunca gratis: écumar, filtrar y cargar de flujo los 400 mB cuesta unos 1,3e11 EU; una ejecución devuelve 2,15e11 EU, unas 1,6 veces la cadena. No deja residuos y su energía es para la red inalámbrica.'],
+            'Generous, never free: skimming, filtering and flux loading the 400 mB cost about 1.3e11 EU; one run returns 2.15e11 EU, about 1.6 times the chain. It leaves nothing behind and its power is for the wireless network.'],
         ['emi.grindless.info.bz_dynamo.2',
-            'One run gives 1,073,741,824 EU/t for 200 t, one at a time, through two UIV 16 A dynamo hatches or one UXV 16 A dynamo hatch. The flux-plasma input sits on the front spoke and the dynamo hatches on the outer rim: 1 input bus, 1 input hatch, 1-2 dynamo hatches.',
-            'Una ejecución da 1.073.741.824 EU/t durante 200 t, de una en una, por dos escotillas de dinamo UIV de 16 A o una UXV de 16 A. La entrada de plasma de flujo va en el radio delantero y las escotillas de dinamo en el borde exterior: 1 bus de entrada, 1 escotilla de entrada, 1-2 escotillas de dinamo.'],
+            'One run gives 1,073,741,824 EU/t for 200 t, one at a time, through two UIV 16 A dynamo hatches or one UXV 16 A dynamo hatch. The flux-plasma input sits on the front spoke and the dynamo hatches on the outer rim: 1 input bus, 1 input hatch, 1-2 dynamo hatches.'],
 
         ['gtceu.recipe.grindless_disk_skimming.skim_disk',
-            'Circuit 1: the scoop takes 1,000 mB of the accretion disk\'s plasma; its metallic hydrogen winding wears 5%.',
-            'Circuito 1: la pala toma 1.000 mB del plasma del disco de acreción; su devanado de hidrógeno metálico se desgasta un 5 %.'],
+            'Circuit 1: the scoop takes 1,000 mB of the accretion disk\'s plasma; its metallic hydrogen winding wears 5%.'],
         ['gtceu.recipe.grindless_frc_forming.form_cartridge',
-            'Circuit 1: a theta-pinch on four MH windings (10% worn) traps a field-reversed plasmoid in a cartridge.',
-            'Circuito 1: un theta-pinch sobre cuatro devanados MH (10 % de desgaste) atrapa un plasmoide de configuración invertida en un cartucho.'],
+            'Circuit 1: a theta-pinch on four MH windings (10% worn) traps a field-reversed plasmoid in a cartridge.'],
         ['gtceu.recipe.grindless_frc_forming.load_flux',
-            'Circuit 2: the pinch loads the plasma with flux for the BZ dynamo; the plasma lost recombines to hydrogen.',
-            'Circuito 2: el pinch carga el plasma de flujo para el dinamo BZ; el plasma perdido se recombina en hidrógeno.'],
+            'Circuit 2: the pinch loads the plasma with flux for the BZ dynamo; the plasma lost recombines to hydrogen.'],
         ['gtceu.recipe.grindless_blandford_znajek.spin_down',
-            'Circuit 1: field lines carry the black hole\'s spin out through the jet: 400 mB of flux-loaded plasma, 2^30 EU/t for 200 t.',
-            'Circuito 1: las líneas de campo sacan el giro del agujero negro por el chorro: 400 mB de plasma cargado de flujo, 2^30 EU/t durante 200 t.'],
+            'Circuit 1: field lines carry the black hole\'s spin out through the jet: 400 mB of flux-loaded plasma, 2^30 EU/t for 200 t.'],
         ['gtceu.recipe.grindless_naquadria_magnets.strand_coil',
-            'Circuit 9: four turns of strand tape wind an FRC cartridge on a tungsten steel former; cold-tested in the helium charge.',
-            'Circuito 9: cuatro vueltas de cinta de hebra bobinan un cartucho de FRC sobre un molde de acero de wolframio; probada en frío con la carga de helio.']
+            'Circuit 9: four turns of strand tape wind an FRC cartridge on a tungsten steel former; cold-tested in the helium charge.']
     ]
 
-    ;['en_us', 'es_es'].forEach(function (lang, li) {
-        ClientEvents.lang(lang, function (event) {
-            ENTRIES.forEach(function (e) {
-                event.add('grindless', e[0], e[1 + li])
-            })
+    ClientEvents.lang('en_us', function (event) {
+        ENTRIES.forEach(function (e) {
+            event.add('grindless', e[0], e[1])
         })
     })
 })()

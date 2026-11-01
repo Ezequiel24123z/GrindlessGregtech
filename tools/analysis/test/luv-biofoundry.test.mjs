@@ -116,9 +116,9 @@ test('the composer reads small and tiny dust tags as GTM\'s items (mutagen\'s ti
   assert.equal(C.itemOfTag('forge:dusts/meat'), 'gtceu:meat_dust');
 });
 
-test('every step, the type, the tooltips and the voiding refusal are named in en_us and es_es', () => {
+test('every step, the type, the tooltips and the voiding refusal are named in en_us', () => {
   const problems = [];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     const keys = ['block.gtceu.biofoundry', 'gtceu.sterile_culture', 'grindless.machine.biofoundry.no_voiding',
       ...[0].map((i) => `grindless.machine.biofoundry.tooltip.${i}`),
