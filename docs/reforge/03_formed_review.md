@@ -48,3 +48,5 @@ Verdict: DROP. A recipe run was never observed, in order or reversed, after four
 - `tools/test/overlay/kubejs/server_scripts/gg_test_expanded_assembly_line.js` (RF-3J): in-order run first, controller state and tank/energy readout, client hold. EAL still idle: verdict DROP.
 - Add-on (extendedfeatures 3.0.0): client class in `WirelessOpticalHatch`; no pack fix.
 - Fixture: the first frames after arrival can be sparse; if rerun, shoot one throwaway id first.
+
+Hidden by RF-3R.
