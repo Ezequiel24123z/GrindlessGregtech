@@ -57,7 +57,7 @@ test('magnet works table: one circuit per recipe, the helium charge on all, deci
   assert.deepEqual(coil.itemsOut, [{ id: 'gtceu:superconducting_coil', count: 1 }]);
   // the LuV ones at LuV's VA; the coilgun coil at IV's, the bearing at EV's (luv.md); UIV-A8's bulk GdBCO growth at LuV's, for hours; OpV-A1's and B3a's at UV's
   assert.deepEqual(TABLE.recipes.map((r) => [r.eut, r.duration]), [[30720, 400], [30720, 600], [7680, 200], [1920, 200], [30720, 4800], [1966080, 400],
-    [1966080, 400], [1966080, 600], [1966080, 600], [1966080, 1200], [7864320, 600], [7864320, 600], [7864320, 600], [7864320, 600], [7864320, 600]]); // OpV-B3a's octupole rows, then MAX-W, then MAX-A2, then MAX-A4's fcl_coil, then MX-S3's flux_pump_stator
+    [1966080, 400], [1966080, 600], [1966080, 600], [1966080, 1200], [7864320, 600], [7864320, 600], [7864320, 600], [7864320, 600], [7864320, 600], [536870912, 1200]]); // OpV-B3a's octupole rows, then MAX-W, then MAX-A2, then MAX-A4's fcl_coil, then MX-S3's flux_pump_stator, then XP-A2's kerr_coil_winding
 });
 
 test('magnet works table: the SMES cell is the wireless network\'s LuV cell, made only here', () => {
@@ -320,6 +320,7 @@ test('magnet works text: the machine, the type, every recipe\'s EMI line and the
     vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'max_wireless_lang.js'), 'utf8'), sandbox, { filename: 'max_wireless_lang.js' });
     vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'max_components_lang.js'), 'utf8'), sandbox, { filename: 'max_components_lang.js' }); // MAX-A2
     vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'max_parts_lang.js'), 'utf8'), sandbox, { filename: 'max_parts_lang.js' }); // MAX-A4
+    vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'maxplus_components_lang.js'), 'utf8'), sandbox, { filename: 'maxplus_components_lang.js' }); // XP-A2
     vm.runInNewContext(fs.readFileSync(path.join(KUBEJS, 'client_scripts', 'grindless', 'max_flux_clamp_lang.js'), 'utf8'), sandbox, { filename: 'max_flux_clamp_lang.js' }); // MX-S3
     const keys = ['block.gtceu.hts_magnet_works', 'gtceu.magnet_winding', 'grindless.machine.hts_magnet_works.charge.ok',
     'grindless.machine.hts_magnet_works.charge.low', ...[0].map((i) => 'grindless.machine.hts_magnet_works.tooltip.' + i),
