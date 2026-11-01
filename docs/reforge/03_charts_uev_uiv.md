@@ -59,6 +59,19 @@ All real recipes already existed, so every fix is a chart change in `pl-data-uev
 - **degenerate_eos_model**: Li-6 and K-40 calutron chains meet in one model node; `keepShort` (single recipe use).
 - **cf249_target_wheel, polarised_dhe3_fuel, iron_pentacarbonyl**: kept short with a `keepShort` reason each (branch end; one blend recipe fed by the EV helium-3 link; two-machine mining line).
 
+## UEV fixes (RF-3P2)
+
+Ten recipe rows gain one input from UV or earlier (reach 2+); link nodes `x_*` in `pl-data-uev.mjs`. Costs and times unchanged.
+
+- **ca48_beam**: kept `srf_cryomodule` (UV) in `assembler/ca48_beam`.
+- **tennessine_sample**: `silica_aerogel` x1 (ZPM), `superheavy_chemistry`.
+- **hftacn_coil_block**: `uranium_rhodium_dinaquadide_single_wire` x2 (ZPM).
+- **snspd**: `normal_optical_pipe` (LuV) in `cool_and_package`.
+- **hbn_emitter_chip**: `ingaas_pump_module` (UV); **graphene_modulator**: `ytterbium_fibre` (UV).
+- **ktp_electroded_wafer**: `cvd_diamond_plate` (ZPM); **spdc_source**: `photonic_chip` (UV).
+- **cnt_coiled_muscle**: `superconducting_coil` (LuV); **ule_cavity**: `sapphire_test_mass` (LuV).
+- **fe60_record**, **flerovium_atoms**: `role: 'research'`. **aerogel_tile**, **lay_superhydride_ingot**: `role: 'infrastructure'`.
+
 ## Risks
 
 - Link nodes added to UIV rows are a chart annotation only; row-mode lines (`lN_M` keys) ignore consumed links in the audit.
