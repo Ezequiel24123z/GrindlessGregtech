@@ -465,7 +465,7 @@ test('component thresholds: each of the 14 controllers has at least 4 MAX circui
 
 test('no MAX recipe consumes a MAX+ hook (horizon_lock, GT-- max casing and converter): c3 only makes the lock; the gene ark and the shell take none', () => {
   for (const hook of ['grindless:horizon_lock', 'gtnn:component_assline_casing_max', 'gtmutils:max_64a_energy_converter']) {
-    const keepers = hook === 'grindless:horizon_lock' ? ['grindless:black_hole_bomb/condensate_tap'] : [];
+    const keepers = hook === 'grindless:horizon_lock' ? ['grindless:black_hole_bomb/condensate_tap', 'grindless:warp_gate/hold_tarantula'] : [];
     assert.deepEqual(pack().recs.filter((r) => ins(r).includes(hook)).map((r) => r.i), keepers, hook);
   }
   assert.deepEqual(makers(pack().recs, 'grindless:horizon_lock').map((r) => r.i), ['grindless:black_hole_bomb/horizon_lock']);
