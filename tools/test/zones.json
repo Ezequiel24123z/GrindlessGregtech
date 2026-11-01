@@ -56,7 +56,7 @@
     { "id": "tritium_removal", "x": [12032, 12095], "tests": ["tritium_removal"], "note": "the Moon at Y 198-214 and the Overworld at Y 98-112" },
     { "id": "travel_and_network", "x": [12288, 12351], "tests": ["travel_network"], "note": "the Overworld at Y 98-112 and Venus (gcyr:venus) at Y 198-214" },
     { "id": "mass_production", "x": [12544, 12607], "tests": ["mass_production"], "note": "roof at Y 112" },
-    { "id": "gallery", "x": [12800, 12863], "tests": ["gallery"], "note": "client" },
+    { "id": "gallery", "x": [12800, 12863], "y": [98, 150], "tests": ["gallery"], "note": "client" },
     { "id": "qbc_terminal", "x": [13056, 13119], "tests": ["qbc"], "note": "client. Overworld Y 98-112 (all of Z 0-63, force-loaded while it runs); on the Moon (gcyr:luna) and Mars (gcyr:mars) X 13084-13092, Z 28-36, Y 198-214 (7x7 floor at Y 198); the 1,000+ block case only stands the player on natural ground at X 13088, Z 1104+" },
     { "id": "wireless_energy", "x": [13312, 13375], "tests": ["wireless_energy", "wireless_restart", "wireless_adapters"], "note": "Overworld Y 98-112 and Moon Y 198-214; restart fixtures use unloaded End metadata only, never blocks or chunk loading. Wireless fixtures (and luv_a4) take turns on this band" },
     { "id": "luv_a2", "x": [14848, 14911], "tests": ["luv_a2"], "note": "naquadah mode 2, platinum mode 4, LuV parallel hatch" },
