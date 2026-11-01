@@ -32,6 +32,9 @@
   var EPOXY = 'gtceu:epoxy'
   var LHE = 'gtceu:liquid_helium'
   var TARANTULA = 'grindless:tarantula_orbit'
+  var KERR = 'gtceu:kerr_condensate'
+  var HULL = 'gtceu:max_machine_hull'
+  var SITE = (G.maxTravel && G.maxTravel.places && G.maxTravel.places.sgra ? G.maxTravel.places.sgra.dimension : 'gcyr:black_hole_orbit')
 
   // type, name, circuit (none for item-keyed rows), items in, kept items, fluids in, kept fluids, items out, fluids out, EU/t, ticks, data key
   var ROWS = [
@@ -101,7 +104,7 @@
     // P25
     { type: 'plasma_mass_filtering', name: 'he_rich_fraction', circuit: 7, eut: V_MAX * 2, duration: 600, key: 'grindless_plasma_mass_filtering', dimension: TARANTULA,
       fluids: [['gtceu:raw_vms_plasma', 10000]],
-      outs: [['grindless:stellar_heavy_cut', 1]], fluidOuts: [['gtceu:he_rich_fraction', 5000]] },
+      outs: [], fluidOuts: [['gtceu:he_rich_fraction', 5000], ['gtceu:stellar_heavy_cut', 1000]] },
     { type: 'cryogenic_processing', name: 'liquid_helium_4', eut: 7680, duration: 400,
       fluids: [['gtceu:he_rich_fraction', 2000]], fluidOuts: [['gtceu:liquid_helium_4', 1000]] },
     { type: 'superfluid_helium', name: 'superfluid_helium_4', eut: va(7), duration: 200,
@@ -124,6 +127,32 @@
   MA.rows = ROWS
   MA.coolRows = COOLS
 
+  // the assembler's own rows at Sgr A*: plates, mesh and condensate bath assembled into the four frame-part precursors; the boil-off goes back to the
+  // refinery's c10. Row c4 needs grindless:horizon_frame_part, which XP-F1 has not registered: it is skipped silently until the id exists.
+  var ASM_EUT = V_MAX * 256
+  var ASM_KEY = 'grindless_condensate_assembler'
+  var ASM = [
+    { type: 'condensate_assembler', name: 'horizon_containment_plate', circuit: 1, eut: ASM_EUT, duration: 1200, key: ASM_KEY,
+      items: [['grindless:laminated_containment_core', 32], ['grindless:horizon_compressed_plate', 16], ['grindless:kerr_strange_plate', 8]], fluids: [[KERR, 200000]],
+      outs: [['grindless:horizon_containment_plate', 1], ['grindless:condensate_boil_off', 4]] },
+    { type: 'condensate_assembler', name: 'chevron_core', circuit: 2, eut: ASM_EUT, duration: 1800, key: ASM_KEY,
+      items: [['grindless:zone_plate_wafer', 16], ['grindless:multilayer_xray_mirror', 16], ['grindless:gamma_focus_element', 8], ['grindless:horizon_compressed_plate', 16]], fluids: [[KERR, 300000]],
+      outs: [['grindless:chevron_core', 1], ['grindless:condensate_boil_off', 4]] },
+    { type: 'condensate_assembler', name: 'horizon_mesh', circuit: 3, eut: ASM_EUT, duration: 2400, key: ASM_KEY,
+      items: [['grindless:coated_mesh', 24], ['grindless:kerr_strange_plate', 16], ['grindless:kerr_clad_strand', 16]], fluids: [[KERR, 500000]],
+      outs: [['grindless:horizon_mesh', 1], ['grindless:condensate_boil_off', 6]] },
+    { type: 'condensate_assembler', name: 'horizon_frame_part', circuit: 4, eut: ASM_EUT, duration: 2400, key: ASM_KEY, optional: true,
+      items: [['grindless:horizon_shielding', 4], ['grindless:horizon_waveguide', 4], ['grindless:horizon_conduit', 4], ['grindless:horizon_valve', 4],
+        ['grindless:horizon_mesh', 4], ['grindless:horizon_containment_plate', 4]], fluids: [[KERR, 1000000]],
+      outs: [['grindless:horizon_frame_part', 1], ['grindless:condensate_boil_off', 8]] }
+  ]
+  MA.assembler = ASM
+
+  // research item, then the machine itself on the assembly line (Research Station)
+  var CONTROLLER = { machine: 'gtceu:condensate_assembler', research: 'grindless:horizon_alignment_matrix', casing: 'grindless:horizon_machine_casing',
+    comps: ['2x grindless:max_conveyor_module', '2x grindless:max_robot_arm', '2x grindless:max_field_generator', '2x grindless:max_sensor'],
+    plates: ['4x grindless:horizon_compressed_plate', '4x grindless:kerr_strange_plate'] }
+
   function missingIds(ids, fluids) {
     return ids.filter(function (id, k) { return String(id).charAt(0) !== '#' && ids.indexOf(id) === k && !Item.exists(id) })
       .concat(fluids.filter(function (id, k) { return fluids.indexOf(id) === k && !Fluid.exists(id) }))
@@ -136,7 +165,7 @@
     console.error(LOG + 'skipped ' + name + ': ' + reason)
   }
 
-  function addRow(event, r) {
+  function addRow(event, r, site) {
     var ids = pairs(r, 'items').concat(pairs(r, 'kept'), pairs(r, 'outs'))
     var fluids = pairs(r, 'fluids').concat(pairs(r, 'keptFluids'), pairs(r, 'fluidOuts'))
     var missing = missingIds(ids, fluids)
@@ -151,6 +180,7 @@
     ;(r.fluidOuts || []).forEach(function (x) { b.outputFluids(Fluid.of(x[0], x[1])) })
     if (r.key) b.addDataString(r.key, r.name)
     if (r.dimension) b.dimension(r.dimension)
+    if (site) b.dimension(SITE)
     b.EUt(r.eut).duration(r.duration)
   }
 
@@ -171,13 +201,36 @@
       .EUt(c.eut).duration(c.duration)
   }
 
+  function addAsm(event, r) {
+    var ids = pairs(r, 'items').concat(pairs(r, 'outs'))
+    if (r.optional && missingIds(ids, pairs(r, 'fluids')).length > 0) return
+    addRow(event, r, true)
+  }
+
+  function addController(event) {
+    var c = CONTROLLER
+    var strip = function (s) { return s.replace(/^\d+x /, '') }
+    var ins = [HULL, c.research, c.casing, 'grindless:horizon_processor', c.machine].concat(c.comps.map(strip), c.plates.map(strip))
+    var missing = missingIds(ins, [KERR])
+    if (missing.length > 0) return skip('condensate_assembler controller', 'unknown id(s): ' + missing.join(', '))
+    var a = event.recipes.gtceu.assembly_line('grindless:condensate_assembler')
+    a.itemInputs(HULL, '2x ' + c.casing, '8x grindless:horizon_processor')
+    c.comps.concat(c.plates).forEach(function (s) { a.itemInputs(s) })
+    a.inputFluids(Fluid.of(KERR, 2000))
+    a.itemOutputs(c.machine)
+    a.stationResearch(function (r) { return r.researchStack(Item.of(c.research)).CWUt(64).EUt(VA_MAX) })
+    a.EUt(VA_MAX).duration(4800)
+  }
+
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
     try {
       MA.skipped = []
       ROWS.forEach(function (r) { addRow(event, r) })
       COOLS.forEach(function (c) { addCool(event, c) })
-      console.info(LOG + 'assembler: ' + (ROWS.length + COOLS.length) + ' rows; skipped ' + MA.skipped.length)
+      ASM.forEach(function (r) { addAsm(event, r) })
+      addController(event)
+      console.info(LOG + 'assembler: ' + (ROWS.length + COOLS.length + ASM.length + 1) + ' rows; skipped ' + MA.skipped.length)
     } catch (e) {
       console.error(LOG + 'failed: ' + e)
     }
