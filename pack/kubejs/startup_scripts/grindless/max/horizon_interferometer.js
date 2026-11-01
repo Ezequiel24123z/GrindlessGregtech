@@ -27,7 +27,7 @@
       lang: 'Horizon Interferometer', maxIO: { itemsIn: 9, itemsOut: 4, fluidsIn: 0, fluidsOut: 0 }, casing: ENCLOSURE,
       texture: 'grindless:block/max/max_optical_table_casing', // borrowed until RF-6D ships block/max/test_mass_enclosure_casing.png
       width: 21, height: 5, depth: 21,
-      pal: { F: ENCLOSURE, A: LINK },
+      pal: { F: ENCLOSURE, A: LINK, C: 'gtceu:superconducting_coil', G: 'gtceu:cleanroom_glass' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -71,7 +71,13 @@
     var s = stationAt(x, z)
     if (s !== null) {
       if (y === 0 || y === 4) return 'F'
-      return x === s.x + 1 && z === s.z + 1 ? '#' : 'F'
+      var dx = x - s.x
+      var dz = z - s.z
+      if (dx === 1 && dz === 1) return '#'
+      var corner = dx !== 1 && dz !== 1
+      // optical windows in the middle of each wall at row 2, drag-compensation coils in the corners of rows 1 and 3
+      if (y === 2) return corner ? 'F' : 'G'
+      return corner ? 'C' : 'F'
     }
     if (y === 0) return z === 20 && x >= 3 && x <= 17 ? 'X' : ' '
     if (y === 2 && onArm(x, z)) return 'A'

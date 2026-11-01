@@ -605,9 +605,9 @@
           "fluidsOut": []
         },
         {
-          "_why": "MX-S1 (max.md, L57 step 3, c15): oxygen implanted deep into the float-zone wafer and annealed into the buried oxide layer of the SIMOX SOI wafer",
+          "_why": "MX-S1 (max.md, L57 step 3, c18; the design's c15 is hpge_contacts'): oxygen implanted deep into the float-zone wafer and annealed into the buried oxide layer of the SIMOX SOI wafer",
           "name": "simox_soi_wafer",
-          "circuit": 15,
+          "circuit": 18,
           "eut": 491520,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:fz_wafer", "count": 1 }],
