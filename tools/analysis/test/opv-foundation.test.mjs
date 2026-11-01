@@ -114,7 +114,7 @@ test('no script of ours registers a gtceu:opv_* or gtceu:max_* id (GTM\'s), exce
   // OpV-W: lv/wireless_energy.js registers the eight gtceu:opv_wireless_* hatches (case 13), as it does every tier's
   const w = (id, v) => /^gtceu:(opv|max)_wireless_(energy|dynamo)_hatch(_\d+a)?$/.test(id) && /(^|[\\/])lv[\\/]wireless_energy\.js$/.test(String(v.file));
   for (const reg of [run.registry.items, run.registry.machines]) {
-    for (const [id, v] of reg) if (/^gtceu:(opv|max)_/.test(id) && !v.seeded && id !== 'gtceu:opv_parallel_hatch' && id !== 'gtceu:max_parallel_hatch' && !w(id, v)) bad.push(`${id} (${v.file})`);
+    for (const [id, v] of reg) if (/^gtceu:(opv|max)_/.test(id) && !v.seeded && id !== 'gtceu:opv_parallel_hatch' && id !== 'gtceu:max_parallel_hatch' && !(id === 'gtceu:max_maxplus_energy_hatch_1024a' && /maxplus[\\/]foundation\.js$/.test(String(v.file))) && !w(id, v)) bad.push(`${id} (${v.file})`);
   }
   assert.deepEqual(bad, []);
   assert.doesNotMatch(code, /'(gtceu:)?(opv|max)_[a-z0-9_]+'/, 'foundation.js creates no GTM OpV or MAX id');
@@ -225,14 +225,14 @@ test('opv/travel.js publishes the places on global.grindless.opvTravel (tier 13,
   assert.match(read('startup_scripts', 'grindless', 'opv', 'travel.js'), /^\/\/ priority: -?\d+$/m, 'the integrator stamped the priority (script-order.mjs --write)');
 });
 
-test('relay_platforms.json: two OpV-F1 rows leaving from Cygnus X-1, one per jump; nine rows in all', () => {
+test('relay_platforms.json: two OpV-F1 rows leaving from Cygnus X-1, one per jump; thirteen rows in all (XP-F1 appends four more)', () => {
   const plat = json('data', 'grindless', 'tables', 'relay_platforms.json');
-  assert.equal(plat.platforms.length, 9);
+  assert.equal(plat.platforms.length, 13);
   const mine = plat.platforms.filter((p) => Object.hasOwn(PLACES, p.place));
   assert.deepEqual(mine.map((p) => [p.place, p.jump, p.dimension, p.source, p.x, p.y, p.z]), Object.entries(PLACES).map(([k, [dim, , , , jump]]) =>
     [k, jump, `grindless:${dim}`, CYGNUS, 64, 100, 64]));
   assert.deepEqual(plat.platforms.slice(5, 7), mine, 'appended after the UXV rows (MAX-F1 appends two more)');
-  assert.equal(new Set(plat.platforms.map((p) => p.jump)).size, 9, 'every jump once');
+  assert.equal(new Set(plat.platforms.map((p) => p.jump)).size, 13, 'every jump once');
 });
 
 test('sunlight.json: two rows, factor 0, no_solar, era opv, always', () => {

@@ -49,14 +49,14 @@ test('the nine components, the circuit, the casings and the stand-ins are regist
   for (const id of CASINGS) assert.ok(run.registry.blocks.has(id), `${id} not registered`);
   assert.deepEqual(table.components, COMPONENTS);
   assert.deepEqual(table.casings, CASINGS);
-  assert.deepEqual(got.items.filter((id, i, a) => a.indexOf(id) !== i), [], 'no id twice');
+  assert.deepEqual(Array.from(got.items).filter((id, i, a) => a.indexOf(id) !== i), [], 'no id twice');
 });
 
 test('ids registered elsewhere are read, never created here', () => {
   for (const id of got.existing) {
     assert.ok(!got.items.includes(id) && !got.fluids.includes(id), `${id} is registered here too`);
   }
-  assert.deepEqual(table.existing, got.existing);
+  assert.deepEqual(table.existing, Array.from(got.existing));
 });
 
 test('no creative id and no placeable stand-in', () => {
