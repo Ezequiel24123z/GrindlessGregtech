@@ -143,8 +143,8 @@
   function addSamples(event) {
     var made = []
     beltVeins().forEach(function (vein) {
-      var id = 'grindless:assembler/vein_sample/' + vein.id
-      event.recipes.gtceu.assembler('grindless:vein_sample/' + vein.id)
+      var id = 'grindless:assembly_line/vein_sample/' + vein.id
+      event.recipes.gtceu.assembly_line('grindless:vein_sample/' + vein.id)
         .itemInputs(PROBE, vein.samplePair[0], vein.samplePair[1], 'grindless:stainless_steel_drill_bit', 'grindless:sintered_regolith')
         .inputFluids(Fluid.of('gtceu:distilled_water', 250), Fluid.of('gtceu:lubricant', 100))
         .itemOutputs(vein.sample)

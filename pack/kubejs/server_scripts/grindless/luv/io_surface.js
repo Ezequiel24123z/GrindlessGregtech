@@ -65,7 +65,7 @@
       .chancedInput(t.bundle, t.wearChance, 0)
       .EUt(-t.eut).duration(t.duration), IO.place)
 
-    gt.assembler('grindless:luv/radiation_vault_casing')
+    gt.assembly_line('grindless:luv/radiation_vault_casing')
       .itemInputs('2x gtceu:dense_titanium_plate', '2x gtceu:tantalum_plate', 'gtceu:hsss_frame', '1x grindless:zircaloy_cladding_tube')
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs('2x ' + IO.blocks.vault).EUt(7680).duration(100)

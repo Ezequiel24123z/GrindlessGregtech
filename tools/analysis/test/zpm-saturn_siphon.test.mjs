@@ -91,7 +91,7 @@ test('tools and controllers have crafting or assembler recipes', () => {
   assert.ok(byId('grindless:scoop_head') || recipes.some((r) => /scoop_head/.test(r.i)), 'scoop head recipe');
   assert.ok(recipes.some((r) => /ring_sail_net/.test(r.i)), 'ring sail net recipe');
   for (const m of MACHINES) assert.ok(byId('grindless:assembly_line/' + m), m + ' crafting recipe');
-  assert.ok(byId('grindless:distillery/ring_ice_melt'), 'ring ice has a use');
+  assert.ok(byId('grindless:distillation_tower/ring_ice_melt'), 'ring ice has a use');
 });
 
 test('the F1 ids are un-hidden and their obtain rule is gone', () => {
