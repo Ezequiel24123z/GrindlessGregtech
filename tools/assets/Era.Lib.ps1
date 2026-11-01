@@ -49,14 +49,14 @@ $script:EraStyles = [ordered]@{
     luv   = New-EraStyle @{ Shape = 'mixed'; Wear = 'clean'; Trim = 'bevel'; Panel = 'plate'; LumTarget = 0.48; SatTarget = 0.37; RampSteps = 18; Note = 'good' }
     zpm   = New-EraStyle @{ Shape = 'mixed'; Wear = 'clean'; Trim = 'bevel'; Panel = 'plate'; LumTarget = 0.49; SatTarget = 0.36; RampSteps = 17; Note = 'good; bright and saturated peak' }
 
-    # UV, UHV, UXV: targets for the later parts (Apply stays $false until the part that owns their scripts).
-    uv    = New-EraStyle @{ Shape = 'bevel'; Wear = 'machined'; WearDensity = 0.03; Trim = 'edge-light'; Panel = 'seam'; RampSteps = 8; LumTarget = 0.42; SatTarget = 0.30; Gamma = 0.85; LumLo = 0.02; LumHi = 0.97; SatGain = 1.3; SatLift = 0.04; TintHue = 215; TintSat = 0.16; Note = 'deep, cold metal; richer than today' }
-    uhv   = New-EraStyle @{ Shape = 'bevel'; Wear = 'scorch'; WearDensity = 0.05; Trim = 'edge-light'; Panel = 'seam'; RampSteps = 8; LumTarget = 0.44; SatTarget = 0.32; Gamma = 0.82; LumLo = 0.02; LumHi = 0.97; SatGain = 1.4; SatLift = 0.05; TintHue = 25; TintSat = 0.16; Note = 'heat-treated, bronze-toned' }
-    uxv   = New-EraStyle @{ Shape = 'step'; Wear = 'etched'; WearDensity = 0.04; Trim = 'rim'; Panel = 'grid'; RampSteps = 8; LumTarget = 0.42; SatTarget = 0.30; Gamma = 0.85; LumLo = 0.02; LumHi = 0.97; SatGain = 1.35; SatLift = 0.05; TintHue = 280; TintSat = 0.16; Note = 'violet-tinted etched hardware' }
+    # UV, UHV, UXV: applied by RF-6D-b.
+    uv    = New-EraStyle @{ Apply = $true; Shape = 'bevel'; Wear = 'machined'; WearDensity = 0.03; Trim = 'edge-light'; Panel = 'seam'; RampSteps = 8; LumTarget = 0.42; SatTarget = 0.30; Gamma = 0.85; LumLo = 0.02; LumHi = 0.97; SatGain = 1.3; SatLift = 0.04; TintHue = 215; TintSat = 0.16; Note = 'deep, cold metal; richer than today' }
+    uhv   = New-EraStyle @{ Apply = $true; Shape = 'bevel'; Wear = 'scorch'; WearDensity = 0.05; Trim = 'edge-light'; Panel = 'seam'; RampSteps = 8; LumTarget = 0.44; SatTarget = 0.32; Gamma = 0.82; LumLo = 0.02; LumHi = 0.97; SatGain = 1.4; SatLift = 0.05; TintHue = 25; TintSat = 0.16; Note = 'heat-treated, bronze-toned' }
+    uxv   = New-EraStyle @{ Apply = $true; Shape = 'step'; Wear = 'etched'; WearDensity = 0.04; Trim = 'rim'; Panel = 'grid'; RampSteps = 8; LumTarget = 0.42; SatTarget = 0.30; Gamma = 0.85; LumLo = 0.02; LumHi = 0.97; SatGain = 1.35; SatLift = 0.05; TintHue = 280; TintSat = 0.16; Note = 'violet-tinted etched hardware' }
 
-    # Distinct signatures. UEV and UIV are applied by the later part.
-    uev   = New-EraStyle @{ Shape = 'notch'; Wear = 'scorch'; WearDensity = 0.06; Trim = 'edge-light'; Panel = 'rib'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.36; Gamma = 0.78; LumLo = 0.03; LumHi = 0.97; SatGain = 1.55; SatLift = 0.08; TintHue = 12; TintSat = 0.22; Note = 'ribbed, scorched ember steel' }
-    uiv   = New-EraStyle @{ Shape = 'round'; Wear = 'frost'; WearDensity = 0.07; Trim = 'edge-light'; Panel = 'ring'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.38; Gamma = 0.78; LumLo = 0.03; LumHi = 0.97; SatGain = 1.55; SatLift = 0.08; TintHue = 165; TintSat = 0.22; Note = 'rounded, frosted and cool' }
+    # Distinct signatures. UEV and UIV: applied by RF-6D-b.
+    uev   = New-EraStyle @{ Apply = $true; Shape = 'notch'; Wear = 'scorch'; WearDensity = 0.06; Trim = 'edge-light'; Panel = 'rib'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.36; Gamma = 0.78; LumLo = 0.03; LumHi = 0.97; SatGain = 1.55; SatLift = 0.08; TintHue = 12; TintSat = 0.22; Note = 'ribbed, scorched ember steel' }
+    uiv   = New-EraStyle @{ Apply = $true; Shape = 'round'; Wear = 'frost'; WearDensity = 0.07; Trim = 'edge-light'; Panel = 'ring'; RampSteps = 8; LumTarget = 0.50; SatTarget = 0.38; Gamma = 0.78; LumLo = 0.03; LumHi = 0.97; SatGain = 1.55; SatLift = 0.08; TintHue = 165; TintSat = 0.22; Note = 'rounded, frosted and cool' }
 
     # OpV: polished brass-and-ceramic hardware. Chamfered corners, warm bevel trim, verdigris-free brass speckle, one seam.
     opv   = New-EraStyle @{ Apply = $true; Shape = 'bevel'; Wear = 'brass-speckle'; WearDensity = 0.07; Trim = 'bevel'; Panel = 'seam'; Glint = 0; RampSteps = 10
@@ -234,7 +234,7 @@ function Invoke-EraWear {
     } }
 }
 
-# Panel lines on interior pixels: seam = one line, grid = a row and a column with bright rivets at the row ends, rib / ring left for the UEV and UIV part.
+# Panel lines on interior pixels: seam = one line, grid = a row and a column with bright rivets at the row ends, rib = parallel rows (UEV), ring = a concentric ring (UIV).
 function Invoke-EraPanel {
     param($C, $Style, [int]$Seed)
     if ($Style.Panel -eq 'none') { return }
@@ -245,8 +245,25 @@ function Invoke-EraPanel {
     $isInner = { param($x, $y) (Test-EraOpaque $C $x $y) -and (Get-EraNeighbours $C $x $y) -eq 4 }
     $col = $x0 + 3 + ($Seed % [Math]::Max(1, ($x1 - $x0 - 5)))
     $row = $y0 + 3 + (($Seed -shr 4) % [Math]::Max(1, ($y1 - $y0 - 5)))
+    if ($Style.Panel -eq 'rib') {
+        # UEV: parallel horizontal ribs every third row, the phase picked by the seed
+        $phase = $y0 + 2 + ($Seed % 3)
+        for ($y = $phase; $y -le $y1 - 1; $y += 3) { for ($x = $x0; $x -le $x1; $x++) { if (& $isInner $x $y) { $C.P[$y * $C.W + $x] = EraShade $src[$y * $C.W + $x] 0.80 } } }
+        return
+    }
+    if ($Style.Panel -eq 'ring') {
+        # UIV: one concentric ring around the middle of the silhouette, lit on its upper-left arc
+        $cx = ($x0 + $x1) / 2.0; $cy = ($y0 + $y1) / 2.0
+        $rad = [Math]::Max(2.0, [Math]::Min($x1 - $x0, $y1 - $y0) / 2.0 - 2.0 - ($Seed % 2))
+        for ($y = $y0; $y -le $y1; $y++) { for ($x = $x0; $x -le $x1; $x++) {
+            if (-not (& $isInner $x $y)) { continue }
+            $d = [Math]::Sqrt(($x - $cx) * ($x - $cx) + ($y - $cy) * ($y - $cy))
+            if ([Math]::Abs($d - $rad) -lt 0.6) { $C.P[$y * $C.W + $x] = EraShade $src[$y * $C.W + $x] $(if ($x + $y -lt $cx + $cy) { 1.25 } else { 0.78 }) }
+        } }
+        return
+    }
     $vertical = ($Style.Panel -eq 'seam' -or $Style.Panel -eq 'grid')
-    $horizontal = ($Style.Panel -eq 'grid' -or $Style.Panel -eq 'rib')
+    $horizontal = ($Style.Panel -eq 'grid')
     if ($Style.Panel -eq 'seam' -and ($Seed % 2) -eq 1) { $vertical = $false; $horizontal = $true }
     if ($vertical) { for ($y = $y0; $y -le $y1; $y++) { if (& $isInner $col $y) { $C.P[$y * $C.W + $col] = EraShade $src[$y * $C.W + $col] 0.78 } } }
     if ($horizontal) {
