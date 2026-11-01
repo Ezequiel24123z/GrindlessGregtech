@@ -896,7 +896,7 @@ Chapter **"UHV — Proxima and the Swarm"**: in English, about 56 small-reward q
 | Proxima b | *Eighth Station*, *Landing on Proxima b*, *Rover*, *Under a Red Sun*, *Xenobiochemistry*, *Night-Side Ice*, *Black Fungi*, *Biomining*, *Bricks by Bacteria*, *Far-Red*, *Four Light Years of Baseline*, *Gate to UEV* |
 | Network | *RTAN*, *The UHV Cell*, *The Network Goes UHV* |
 
-- `tools/quests/uhv-chapter/` generates the chapter from a source file (C2); `es_es` titles come with it.
+- `tools/quests/uhv-chapter/` generates the chapter from a source file (C2); The chapter titles come with it, in English.
 - **References:** Star Technology (MIT) and Monifactory (LGPL) space quests, adapted with attribution; GTNH, GT Leisure and GTNH-Intergalactic ideas only for the swarm and the elevator.
 
 ## Gate to UEV
@@ -978,9 +978,9 @@ No new mods.
   - `tables/planets.json` (the Mercury orbit and Proxima pair tags); `tables/stations.json` (two slots);
   - `hidden_until.json` (integrator).
 
-## Save compatibility
+## Registration notes
 
-Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Design facts from it that still hold:
+No save compatibility applies (`AGENTS.md`, Invariants). Design facts that hold:
 
 - **Proxima Centauri b** (`gcyr:proxima_centauri_b`) is tier 8; the override adds an orbit (`grindless:proxima_b_orbit`) and changes nothing on the surface.
 - **Stations:** slots seven and eight append to the six existing ones (B1).
@@ -1063,7 +1063,7 @@ Order: S0-1 first (it fixes F1's list), then S0-2, S0-3 and S0-4 (they fix B1), 
 - **References:** *Our multiblocks* (the audit, `uhv.md:187`) and each machine's *Recipes*; pattern `startup_scripts/grindless/uv/foundation.js` and `tools/analysis/test/uv-foundation.test.mjs`.
 - **Depends on:** S0-1, S0-2 (the motor's id).
 - **Invariants:** no recipe and no machine; ids exactly as in this file (a changed id is an escalation).
-- **Acceptance:** every cross-package id is registered once, with `en_us` and `es_es`, and listed by `emi-coverage.mjs` as expected-unobtained until its package.
+- **Acceptance:** every cross-package id is registered once, with `en_us` names, and listed by `emi-coverage.mjs` as expected-unobtained until its package.
 - **Tests:** T0; `tools/analysis/test/uhv-foundation.test.mjs`. T1: none.
 - **Commits:** 2 (registrations; textures).
 - **Serial:** alone; every other package depends on it.
@@ -1074,7 +1074,7 @@ Order: S0-1 first (it fixes F1's list), then S0-2, S0-3 and S0-4 (they fix B1), 
   - `hidden_until.json`: GTCA's elevator miner, pump and assembler modules (`gtca:space_assembler_mki/ii/iii`) move to `until: uev`, and GTCA's test recipes `gtceu:space_miner/ha` and `gtceu:space_pump/test` are removed; `gtnn:optical_processor` and `gtnn:optical_assembly` move from `never` to `uhv`; UHV's new ids get their substages;
   - `lib/stations.js` changes only if S0-4 failed.
 - **Allowed:** `pack/kubejs/data/grindless/tables/hidden_until.json`; `pack/kubejs/startup_scripts/grindless/lib/stations.js` only after a failed S0-4.
-- **References:** *Only from there, and cuts* (`uhv.md:151`); *Save compatibility*; `docs/eras/uv.md:1222-1231` (UV's F2).
+- **References:** *Only from there, and cuts* (`uhv.md:151`); *Registration notes*; `docs/eras/uv.md:1222-1231` (UV's F2).
 - **Acceptance:** the miner, pump and assembler modules stay hidden in a UHV game; the two GT-- circuits appear at `uhv`; with S0-4 passed, no lib change.
 - **Tests:** T0. T1: none.
 - **Commits:** 1. The integrator runs it; it may overlap wave A.
@@ -1327,7 +1327,7 @@ Wave A packages depend on F1 plus the spikes named. They run two at a time, in t
 
 - **Objective:** one run with every package, all eight stations and the Proxima base loaded, a v0.10.0 save, and the release notes.
 - **Allowed:** `tools/test/overlay/kubejs/server_scripts/gg_test_uhv_c3.js`, its zones row, the release notes file the integrator names.
-- **References:** *Save compatibility*, *Gate to UEV*, *Power* (the gate example); pattern `gg_test_uv_c3.js`.
+- **References:** *Registration notes*, *Gate to UEV*, *Power* (the gate example); pattern `gg_test_uv_c3.js`.
 - **Depends on:** C1, C2 and the integrator's regeneration (index, `hidden_until.json`, chapters, `emi-coverage --expect`).
 - **Acceptance:**
   - the gate example runs (35,320,455 EU/t or more into the bank, 33,554,432 out for 60 s);

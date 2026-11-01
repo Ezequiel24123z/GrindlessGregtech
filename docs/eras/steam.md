@@ -261,7 +261,7 @@ You leave the era once you have steel, an LV steam turbine that generates power 
   - `pack/kubejs/startup_scripts/grindless/steam/horizon_collector.js` (recipe type, machine, shard item);
   - `pack/kubejs/server_scripts/grindless/steam/horizon_collector.js` (the 9 recipes, read from the table);
   - `pack/kubejs/data/grindless/tables/horizon_collector.json`;
-  - `pack/kubejs/client_scripts/grindless/steam_horizon_lang.js` (`en_us` and `es_es`: machine, shard, recipe type, tooltips);
+  - `pack/kubejs/client_scripts/grindless/steam_horizon_lang.js` (`en_us`: machine, shard, recipe type, tooltips);
   - textures and models under `pack/kubejs/assets/grindless/` for the machine face (idle, active) and the shard, drawn by a new `tools/assets/Build-HorizonCollectorTextures.ps1` (`-Credits` prints its rows);
   - `pack/config/ftbquests/quests/chapters/welcome.snbt` (one new quest only);
   - `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js` (`GG_QUESTS_EXPECTED` only, if the linter asks);
@@ -272,8 +272,8 @@ You leave the era once you have steel, an LV steam turbine that generates power 
   - the quest rules in `.github/instructions/quests.instructions.md`; `docs/quests.md` §7 (rewards) and §10 (ids); *Arrival* in `welcome.snbt`.
 - **Machine:** `event.create('horizon_collector', 'simple').tiers(GTValues.LV)`, so the id is `gtceu:lv_horizon_collector`. No crafting recipe for the machine or the shard. The tooltip says it was not built, cannot be made and runs on the solar covers by day.
 - **Recipes:** ids `grindless:horizon_collection/<output>`; LV, 16 EU/t, 1200 ticks; inputs: `grindless:horizon_shard` not consumed (`chancedInput` 0 or `notConsumable`, as GTM 7.5.3 supports) and `circuit(n)`; outputs from the table; no fluids.
-- **Quest:** title *The Horizon Collector*; depends on *Arrival*; a checkmark task; 3 rewards (4 `gtceu:lv_horizon_collector`, 4 `grindless:horizon_shard`, 4 `gtceu:lv_solar_panel`; user-directed 2026-10-29, was 1, 1, 2); 2-4 short lines of lore (the machine was in your pack; nobody built it; it hums like the black hole at the end of the journey; put the two solar covers on it and pick a circuit). New ids, first digit 1-7, unique in the book. It is an explicit exception to the small-reward rule (user-directed); add it to the linter's exception list only if the linter flags it, with the reason.
-- **Invariants:** no existing id changes; no MV or higher tier; nothing generated or shared is edited; English everywhere except the `es_es` names.
+- **Quest:** title *The Horizon Collector*; depends on *Arrival*; a checkmark task; 3 rewards (4 `gtceu:lv_horizon_collector`, 4 `grindless:horizon_shard`, 4 `gtceu:lv_solar_panel`; user-directed 2026-10-29); 2-4 short lines of lore (the machine was in your pack; nobody built it; it hums like the black hole at the end of the journey; put the two solar covers on it and pick a circuit). New ids, first digit 1-7, unique in the book. The reward is proportionate and skips no production line.
+- **Invariants:** no existing id changes; no MV or higher tier; nothing generated or shared is edited; English everywhere.
 - **Acceptance:** the static validator sees the machine, type, item and 9 recipes; the quest lints with 0 errors and 0 warnings; the node test pins the 9 rows (circuit, output, count, 16 EU/t, 1200 t, shard not consumed) and that no recipe outputs the machine or the shard.
 - **Tests:** T0 (`tools/Check-Fast.ps1`). The expected integrator-class failures (EMI coverage and reachability for two items obtainable only from a quest) are reported, not fixed. T1: none (the `simple` builder and GTM's solar cover are proven).
 - **Repairs:** at most 2, then stop with evidence.

@@ -224,7 +224,7 @@ Solar is useless out there. The stations draw from the wireless network, and the
 - Recipes are ZPM ones (122,880 EU/t) unless a composed GTM stage sets another figure.
 - Structures go through the pattern helper and are at most 16 high (the deep space network's dish is the exception to check: 16 is enough with a 15-wide dish *(tune)*).
 - Parts are ME-ready.
-- Names go in `en_us` and `es_es`.
+- Names go in `en_us`.
 - Site rules are `.dimension(...)` allowlists.
 - Machines with a run-start check close it with `lib/fresh_run.js` in `afterWorking`.
 - A machine that takes a not-consumed fluid charge uses IV-A5's `notConsumableFluid`.
@@ -894,7 +894,7 @@ Chapter **"ZPM — The Ringed and Ice Giants"**: in English, about 45 small-rewa
 | Uranus | *Level Six*, *Fourth Station*, *Deep Gas*, *Diamond Rain*, *Past Neptune* |
 | Exit | *Aneutronic* (D + He-3), *Direct Conversion*, *Listening* (DSN), *Kuiper Targets*, *Tritanium*, *Darmstadtium*, *Gate to UV* |
 
-- `tools/quests/` generates the chapter from a source file (C2); `es_es` titles come with it.
+- `tools/quests/` generates the chapter from a source file (C2); The chapter titles come with it, in English.
 - **References:** Star Technology (MIT) and Monifactory (LGPL) space quests, adapted with attribution; GTNH and GT Leisure ideas only.
 
 ## Gate to UV
@@ -960,9 +960,9 @@ No new mods.
 - **Server:** composed recipes (the refinery, the fuel works, the reductor's cascade mode, mode 3); the fusion audit and our D + He-3; the HPCA alternative recipes; the UV hatch's re-registration; the seeds and `sunlight.json` rows; dimension allowlists and `G.noVoiding` where kept.
 - **Data:** `data/grindless/gcyr/planets/*.json` (2); `dimension/` (4) and `dimension_type/` (2); sky renderers (2); `tables/planets.json` (two pair tags); `tables/stations.json` (two slots); `space/airless_weather.js`; `hidden_until.json` (integrator).
 
-## Save compatibility
+## Registration notes
 
-Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Design facts from it that still hold:
+No save compatibility applies (`AGENTS.md`, Invariants). Design facts that hold:
 
 - **Proxima Centauri b is tier 8.** It moved from tier 5 in ZPM.
 - **Stations:** the two proven slots keep their plots and positions (F2); new slots append.
@@ -1021,7 +1021,7 @@ Each contract below lists only what differs from this.
 - **Allowed, always** (`<name>` is the package's file name, given in each contract):
   - `pack/kubejs/startup_scripts/grindless/zpm/<name>.js` (registrations: recipe types, machines through `lib/patterns.js`, generators through `lib/generators.js`);
   - `pack/kubejs/server_scripts/grindless/zpm/<name>.js` (recipes);
-  - `pack/kubejs/client_scripts/grindless/zpm_<name>_lang.js` (`en_us` and `es_es`);
+  - `pack/kubejs/client_scripts/grindless/zpm_<name>_lang.js` (`en_us` names);
   - `pack/kubejs/data/grindless/tables/<name>*.json`, new tables only;
   - `tools/assets/Build-ZPM<Name>Textures.ps1`, its outputs under `pack/kubejs/assets/grindless/textures/**` for its own blocks and items, its models and blockstates, and one appended row and section in `tools/assets/README.md`;
   - `pack/kubejs/assets/emi/recipe/additions/grindless/zpm_<name>_*.json` (EMI info pages; their text goes in the package's own lang file when the contract does not list `emi_info_lang.js`: if the page's text must live in `emi_info_lang.js`, the worker proposes it in the handoff);
@@ -1069,7 +1069,7 @@ Order: S0-1, S0-2 and S0-3 first (they decide the ids B1 fixes), then S0-5, S0-6
 - **References:** this file *Our multiblocks* (the shared blocks and the audit), each machine's *Recipes* line for the ids; pattern `pack/kubejs/startup_scripts/grindless/luv/foundation.js` and `tools/analysis/test/luv-foundation.test.mjs`.
 - **Depends on:** the S0 spikes that fix ids (S0-1, S0-2).
 - **Invariants:** no recipe; no machine; ids exactly as in this file (a changed id is an escalation).
-- **Acceptance:** every id in the machine sections that crosses packages is registered once; `emi-coverage.mjs` lists them as expected-unobtained until their package (the integrator updates `--expect` once per batch); `en_us` and `es_es` for each.
+- **Acceptance:** every id in the machine sections that crosses packages is registered once; `emi-coverage.mjs` lists them as expected-unobtained until their package (the integrator updates `--expect` once per batch); `en_us` names for each.
 - **Tests:** T0; `tools/analysis/test/zpm-foundation.test.mjs` (every listed id registered, names in both languages). T1: none.
 - **Commits:** 2 (registrations; textures).
 - **Serial:** yes, alone. Every other package depends on it.
@@ -1287,16 +1287,16 @@ Every wave B package depends on B1. B2 to B5 run two at a time.
 - **Prohibited (extra):** every `.snbt` under `pack/config/ftbquests/` (the integrator regenerates), `tools/quests/lint-config.json`.
 - **References:** *Quests*; `docs/quests.md` §4–§8, §14, §17, §18; `.github/instructions/quests.instructions.md`.
 - **Depends on:** every A and B package merged (ids final).
-- **Acceptance:** `node tools/quests/lint.mjs` with 0 errors and 0 warnings on the regenerated chapter (restored before the commit); every quest short, English, with a small reward, and none gates a recipe.
+- **Acceptance:** `node tools/quests/lint.mjs` with 0 errors and 0 warnings on the regenerated chapter (restored before the commit); every quest in English, with a proportionate reward that never skips a production line, and none gates a recipe.
 - **Tests:** T0. T1: none (the in-game quest tests are the integrator's T2).
-- **Agent:** implementer (Sonnet); the es_es of machine names is not quest work.
+- **Agent:** implementer (Sonnet); the en_us names of machines are not quest work.
 - **Commits:** 1.
 
 #### C3. Integrated validation
 
 - **Objective:** one run with every package, both new stations and LuV's two loaded, a v0.8.x save, and the release notes.
 - **Allowed:** `tools/test/overlay/kubejs/server_scripts/gg_test_zpm_c3.js`, its zones row, the release notes file the integrator names.
-- **References:** *Save compatibility*, *Gate to UV*; pattern `gg_test_luv_c3.js`.
+- **References:** *Registration notes*, *Gate to UV*; pattern `gg_test_luv_c3.js`.
 - **Depends on:** C1, C2 and the integrator's regeneration (index, `hidden_until.json`, chapters, `emi-coverage --expect`).
 - **Acceptance:** the gate example in *Power* runs (2,207,529 EU/t or more into the bank); a v0.8.x save opens with its stations, network and machines; the validator, the Node suite, `gg_test_recipe_lookup` and the quest tests pass.
 - **Tests:** T0; T2 by the integrator in band 22784.

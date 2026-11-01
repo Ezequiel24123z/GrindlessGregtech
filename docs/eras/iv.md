@@ -346,14 +346,14 @@ Rule 7 of `AGENTS.md`: EV ended with 11 multiblocks of ours, so IV needs about 1
 
 The RTG is a single block and the platinum plant's mode 3 belongs to an EV machine, so neither counts. Seven are added, which makes 15. They come from a design pass on 2026-10-25: the machine catalog, the Leisure ideas (ideas only) and real engineering. Each closes a hole the design already had:
 - deuterium had no source;
-- fluorine was a wall of raw quantity;
+- fluorine was a wall of one raw input with no steps;
 - Venus had no water or oxygen of its own;
 - Mercury had no site parts;
 - the reactor's tritium had no contained route;
 - the family veto blocked the Tungstensteel-bit route to uranium;
 - the fuel cladding made no physical sense.
 
-All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another figure) through the pattern helper, with ME parts and names in `en_us` and `es_es`. Every id was checked against the dump, GTM's source and `pack/kubejs`, with no clash. Figures marked *(tune)* are set when the machine is built.
+All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another figure) through the pattern helper, with ME parts and names in `en_us`. Every id was checked against the dump, GTM's source and `pack/kubejs`, with no clash. Figures marked *(tune)* are set when the machine is built.
 
 | Site | Ours in IV after the raise |
 |---|---|
@@ -446,7 +446,7 @@ All of them are IV recipes (7,680 EU/t unless a composed GTM stage sets another 
 - **What it gains:** the pack's only fluorine route that is not silicate electrolysis.
   - The naquadah plant uses about 40,500 mB of F per 2 naquadah. GT--'s live chain was checked in the dump: 42,000 mB HF in and 1,500 back through `titanium_trifluoride_separation`.
   - Today's sources are electrolyses: mica (19 dust → 2,000 mB F), lepidolite (20 → 2,000), topaz (10 → 1,000), pyrochlore (11 → 1,000) and biotite (22 → 2,000).
-  - That means about 385 mica dust per 2 naquadah, a wall of raw quantity (rule 2). The kiln turns it into a line (decision 10, the fluorine budget).
+  - That means about 385 mica dust per 2 naquadah, a wall of one raw input with no steps (rule 2). The kiln turns it into a line (decision 10, the fluorine budget).
 - **Recipe:**
   - In: 3 fluorite dust (`gcyr:fluorite`, CaF₂) + 1,000 mB sulfuric acid + 2,000 mB water (the quench that turns the anhydrite into gypsum).
   - Out: 2,000 mB HF + 8 gypsum dust (one CaSO₄·2H₂O in GTM's units; GTM's apatite attack gives 8 per 1,000 mB of acid and takes 2,000 mB of water).

@@ -191,7 +191,7 @@ What it gains: it is the only machine that makes the **photographic lunar map** 
 
 1. The map and the ephemerides come from the same observation: it is one night of work, not two.
 2. The Lunar Chart (Draft) is never used up. If the player loses the map, they do not have to go back to steam.
-3. The dome is steel casing and the walls are stone brick: about 30 casings, like the LV greenhouse, so the structure is not a wall of raw quantity.
+3. The dome is steel casing and the walls are stone brick: about 30 casings, like the LV greenhouse, so the structure is not a wall of one raw input.
 4. The slit must be open (air): it is the shape of the observatory, not a cost.
 
 ### Rejected
@@ -288,7 +288,7 @@ No new mod is required: machines, recipe types and models are KubeJS.
 - **Server:** remove by type `ae2:inscriber` and `ae2:charger`, the `ae2:transform` recipes for certus and fluix, and AE2's crafting recipes; also remove `silicon_from_certus_quartz_dust`. Everything is regenerated from `ae2_gt.json` and `mobs.json`.
 - **Tags:** merge `forge:gems/certus_quartz` (GT and AE2 have the same crystal: GT's outputs are switched to AE2's) and add GT's silicon to `forge:silicon`.
 - **Dimensions:** GTM's air is only valid in `overworld`; add gas collector recipes with `.dimension('grindless:void')` and `.dimension('grindless:flat')`, and plains biome in both.
-- **Quests:** the "LV: The First Spark" chapter, 51 quests since the 2026-10-25 voice pass (`docs/quests.md` section 14), with small rewards and no recipe locks.
+- **Quests:** the "LV: The First Spark" chapter, 51 quests since the 2026-10-25 voice pass (`docs/quests.md` section 14), with proportionate rewards that never skip a production line, and no recipe locks.
 - **Tests:** (1) it starts; (2) the four new multiblocks and machines form and process; (3) sand → certus → fluix → processor → controller, and sapphire → Aluminium → MV machine hull.
 
 ## Risks and open questions
