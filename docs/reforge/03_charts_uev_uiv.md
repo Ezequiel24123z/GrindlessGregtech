@@ -47,6 +47,18 @@ Most end products do feed a machine recipe (for example cnt_coiled_muscle -> UEV
 - **C. L14 BEUV mirror**: kept as is. The `assembler/beuv_mirror` cap is the last step of the line, not a bypass: the BEUV scanner's assembly-line research requires `beuv_mirror`, so moving the cap into `beuv_lithography` would make that research circular. The real gap was the chart, which showed only a short chain; it now draws B₄C → SPS → target → MBE → La/B₄C multilayer → LaN barrier → mirror (7 nodes, two UHV machine crossings).
 - Chart: link nodes `x3_brg`, `x4_pbo`, `x23_coil`, `x39_cc`, `x9_cf` (shared by L9 and L32), `x13_comb`, `x38_mass` in `pl-data-uiv.mjs`; `uiv.md` rows and crossings 101 to 110 updated.
 
+## UEV fixes (RF-3P1)
+
+All real recipes already existed, so every fix is a chart change in `pl-data-uev.mjs`; no recipe, table or startup change.
+
+- **flerovium_atoms and plutonium_244_target**: merged into one chain: Pu-244 → oxide → ampoule → target → heavy ion cyclotron → recoil gas → recoil separator (also fed by the etched membrane chain) → atoms.
+- **sx_blade, coated_sx_blade and brayton_turbine_wheel**: merged into one chain: rhenium → 6N Re → master alloy → blade → heat treatment → bond coat (EV platinum link) → EB furnace (also fed by the YSZ ingot chain) → coated blade → single-crystal foundry → wheel (7 steps).
+- **divertor and wf_w_tile**: new upstream stages tungsten dust → ingot → wire → coated wire → fibre preform, then both branch off (5 steps each).
+- **optical_computer**: merged with the SiN waveguide chain (wafer to annealed chip → waveguide circuit → quantum photonic chip → hall).
+- **lay_superhydride_ingot**: the ammonia borane chain feeds the last megabar press in the same chain.
+- **degenerate_eos_model**: Li-6 and K-40 calutron chains meet in one model node; `keepShort` (single recipe use).
+- **cf249_target_wheel, polarised_dhe3_fuel, iron_pentacarbonyl**: kept short with a `keepShort` reason each (branch end; one blend recipe fed by the EV helium-3 link; two-machine mining line).
+
 ## Risks
 
 - Link nodes added to UIV rows are a chart annotation only; row-mode lines (`lN_M` keys) ignore consumed links in the audit.
