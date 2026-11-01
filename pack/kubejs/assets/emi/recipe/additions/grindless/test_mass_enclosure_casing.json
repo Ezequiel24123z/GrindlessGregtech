@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:test_mass_enclosure_casing"],
+  "text": ["emi.grindless.info.test_mass_enclosure_casing.0"]
+}

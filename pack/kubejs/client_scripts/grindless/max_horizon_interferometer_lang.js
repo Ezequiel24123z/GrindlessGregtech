@@ -28,7 +28,12 @@
         ['gtceu.recipe.grindless_crystal_growth.nd_yag_boule', 'Circuit 32: Nd:YAG is pulled from yttrium, aluminium and neodymium in an iridium crucible (31 % wear).',
             'Circuito 32: el Nd:YAG se crece con itrio, aluminio y neodimio en un crisol de iridio (31 % de desgaste).'],
         ['gtceu.recipe.grindless_electron_beam_refining.spent_feep_crown_resinter', 'Circuit 32: four spent FEEP crowns are re-sintered into three porous crowns.',
-            'Circuito 32: cuatro coronas FEEP gastadas se vuelven a sinterizar en tres coronas porosas.']
+            'Circuito 32: cuatro coronas FEEP gastadas se vuelven a sinterizar en tres coronas porosas.'],
+
+        ['emi.grindless.info.test_mass_enclosure_casing.0', 'A structure block: a test mass station of the Horizon Interferometer. Made in the assembler.',
+            'Un bloque de estructura: una estación de masa de prueba del interferómetro de horizonte. Se fabrica en el ensamblador.'],
+        ['emi.grindless.info.laser_link_casing.0', 'A structure block: a laser link arm of the Horizon Interferometer. Made in the assembler.',
+            'Un bloque de estructura: un brazo de enlace láser del interferómetro de horizonte. Se fabrica en el ensamblador.']
     ]
 
     ;['en_us', 'es_es'].forEach(function (lang, li) {
