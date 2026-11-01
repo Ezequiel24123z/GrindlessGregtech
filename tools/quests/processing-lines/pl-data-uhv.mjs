@@ -2,7 +2,7 @@
 // Every UHV package has landed, so nothing is gated. Arrows are checked against a recipe dump by pl-check.mjs (integrator).
 // Each row is one line of docs/eras/uhv.md ("New process lines", numbers in the comments): its feedstock, its machines and
 // its product, with the keys steps that carry the chain. Rows are laid out by chain(), 2.5 columns per step.
-import { I, F, M, n, L } from './pl-lib.mjs';
+import { I, F, M, n, L, via } from './pl-lib.mjs';
 
 // a step is [key, resource, title, kind?, options?]: the first step is raw, machines are 'ours', the rest products
 function chain(y, steps, end, x0 = 0) {
@@ -380,7 +380,7 @@ take('photonics', 'pf', 'lnoi');
 take('life', 'oa', 'chs');
 take('life', 'comp', 'chs');
 take('life', 'pbc', 'bcr');
-take('life', 'panel', 'lnqa');
+take('life', 'panel', via('lnqa', 'gtceu:naquadah_alloy_plate', 'grindless:flare_shield_panel'));
 take('antimatter', 'gate', 'ah', 'clk', 'opg');
 take('ground', 'nmw', 'uvc');
 take('power', 'thw', 'tank');
