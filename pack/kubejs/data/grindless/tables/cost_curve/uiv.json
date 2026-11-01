@@ -1,8 +1,8 @@
 {
   "era": "uiv",
   "enabled": true,
-  "item": 1,
-  "fluid": 1,
+  "item": 1.445,
+  "fluid": 1.445,
   "keys": [
     "extendedfeatures:uiv_universal_circuit",
     "grindless:uiv_conveyor_module",

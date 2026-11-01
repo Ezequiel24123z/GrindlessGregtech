@@ -10,6 +10,7 @@ import vm from 'node:vm';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { runPackScripts } from '../lib/kubejs_static.mjs';
+import { scaledCount } from '../lib/cost_curve.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..', '..', '..');
@@ -190,8 +191,8 @@ test('GT--\'s wetware recipe comes back at LuV voltage with the same energy, its
   assert.equal(added.t, 'gtceu:circuit_assembly_line');
   assert.equal(added.j.tickInputs.eu[0].content, 30720);
   assert.deepEqual(added.j.inputs.item.map((x) => x.content.ingredient.item + ' x' + x.content.count),
-    GTNN_WETWARE.j.inputs.item.map((x) => x.content.ingredient.item + ' x' + Math.ceil(x.content.count * LUV_CURVE.item)), 'the same inputs, in the same order, scaled by the LuV cost curve');
-  assert.deepEqual(added.j.inputs.fluid.map((x) => x.content.value[0].fluid + ' ' + x.content.amount), ['gtceu:soldering_alloy ' + Math.ceil(72 * LUV_CURVE.fluid)]);
+    GTNN_WETWARE.j.inputs.item.map((x) => x.content.ingredient.item + ' x' + scaledCount(x.content.count, LUV_CURVE.item, x.content.ingredient.item)), 'the same inputs, in the same order, scaled by the LuV cost curve');
+  assert.deepEqual(added.j.inputs.fluid.map((x) => x.content.value[0].fluid + ' ' + x.content.amount), ['gtceu:soldering_alloy ' + scaledCount(72, LUV_CURVE.fluid, 'gtceu:soldering_alloy')]);
   assert.deepEqual(added.j.outputs.item.map((x) => x.content.ingredient.item + ' x' + x.content.count), ['gtceu:wetware_processor x32']);
   assert.ok(JSON.stringify(added.j.recipeConditions).includes('1x_gtnn_etched_wetware_processor_base'), 'research id');
   assert.ok(r.removals.some((x) => x.filter.includes(GTNN_WETWARE.i)), 'GT--\'s original removed by id');

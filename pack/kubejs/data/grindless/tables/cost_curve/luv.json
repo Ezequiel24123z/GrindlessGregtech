@@ -1,8 +1,8 @@
 {
   "era": "luv",
   "enabled": true,
-  "item": 2.0,
-  "fluid": 2.0,
+  "item": 1.998,
+  "fluid": 1.998,
   "keys": [
     "extendedfeatures:luv_universal_circuit",
     "gtceu:algae_bioreactor",

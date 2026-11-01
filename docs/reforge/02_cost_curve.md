@@ -505,3 +505,70 @@ After the route fix the chain `darmstadtium_rotor` to `uhv_electric_pump` to `ue
 - `grindless:rejected_timing_head` has no producer now. Its recovery recipe `rejected_timing_head_recovery` (`ev/extraction_cascade.js` lines 309 to 316, prohibited) is dead. The EMI coverage expectation was regenerated for this one line (`rejected_timing_head` is made only by `emi:info`). *Resolved at merge: the integrator removed the id and its references.*
 - `docs/eras/opv.md`, `docs/eras/max.md` and the `tiers/*.json` validators still state the old no-lower-component rule; the integrator owns them. *Resolved at merge: both era docs state the band E exception.*
 - Proposed DECISIONS line: OpV and MAX core components take the same-kind previous-tier component; the old no-lower-component rule is lifted for them.
+
+## P2-Z: the final re-solve, MV to MAX
+
+Package P2-Z (#116). All 13 tables `mv.json` to `max.json` re-solved; the pass `integration/cost_curve.js` has a new count rule. Targets are 3 x 2.5^n as before. Item and fluid factors are equal in every era.
+
+### Why the cliff stayed, and the mechanism
+
+The core index is the geometric mean of nine groups (hull, motor, pump, piston, conveyor, robot arm, emitter, sensor, field generator). Their recipes consume small counts (1 to 4) of lower-era components, so what a factor does to the index is decided by how a count of 1 to 4 turns into a whole number. Index over target, with every lower era at its final factor:
+
+| Count rule | UHV, factor 1.40 to 1.60 | UIV, factor 1.25 to 1.70 |
+|---|---|---|
+| ceil(n x f) (before) | 1.38 up to f 1.50, 1.45 from 1.51: never in band | 3.46 for every f from 1.25: never in band |
+| round half up | 0.66 up to 1.49, 1.33 from 1.50 | 0.39 up to 1.475, 0.89 from 1.50 |
+| dither (now) | 0.94 up to 1.49, 1.06 at 1.50 to 1.54, 1.12 from 1.55 | 0.80 at 1.25, 0.85 to 1.40, 0.98 at 1.45, 1.21 at 1.475, 1.42 from 1.50 |
+
+With ceil, every count of 1 became 2 the moment f passed 1.000, so the index doubled there and no factor sat between. Rounding only moved the step to f = 1.5 (every 1 becomes 2 at once). The new rule, `scaledCount(n, f, key)`: the whole part of n x f, plus 1 when the fraction reaches a fixed threshold in (0, 1] derived from the ingredient id and the count. Every (ingredient, count) pair crosses its step at its own factor, so the index follows f in many small steps: the count averages n x f over all keys, it is exact at whole products, never below n, and monotone in f. The index is still not smooth (UIV jumps from 0.98 at 1.45 to 1.21 at 1.475), but each step is small enough for a factor to land inside 10%. Without a key it is round half up. The solver (`cost-matrix.mjs --solve`) now keeps an in-band candidate when the index is a staircase; before, it picked the plateau maximum, which is the step above the band.
+
+The threshold hash must not use `String.charCodeAt`: the pack's Rhino returns a character from it, the hash was NaN and no input rounded up (the first T1 dump showed every count floored, index 15 to 78% of target). The code of an ASCII character is now looked up in a table. Rhino (run from the pack's rhino jar) and Node agree on `scaledCount`, and `tools/analysis/test/cost-curve.test.mjs` pins the file against `charCodeAt`.
+
+### Factors and indices
+
+Before: the old ceil pass and old tables, on the unscaled dump. After: the committed tables, measured on the T1 server dump (identical to the `--table` prediction to the printed digits).
+
+| Era | Factor before | Factor after | Index before / target | Index after | Target | After / target |
+|---|---:|---:|---:|---:|---:|---:|
+| MV | 1.25 | 1.677 | 0.986 | 2.96 | 3.00 | 0.987 |
+| HV | 2.092 | 2.285 | 1.094 | 7.62 | 7.50 | 1.015 |
+| EV | 3 | 3.266 | 0.874 | 19.0 | 18.8 | 1.016 |
+| IV | 3.191 | 3.322 | 1.034 | 48.0 | 46.9 | 1.023 |
+| LuV | 2 | 1.998 | 0.917 | 107 | 117 | 0.912 |
+| ZPM | 1.5 | 1.77 | 0.949 | 308 | 293 | 1.050 |
+| UV | 2.7 | 2.742 | 1.010 | 738 | 732 | 1.008 |
+| UHV | 1.001 | 1.492 | 1.336 | 1,736 | 1,831 | 0.948 |
+| UEV | 1 | 1.443 | 1.017 | 4,658 | 4,578 | 1.018 |
+| UIV | 1 | 1.445 | 0.700 | 10,385 | 11,444 | 0.907 |
+| UXV | 1 | 1.029 | 0.780 | 27,054 | 28,610 | 0.946 |
+| OpV | 1.001 | 1.427 | 1.200 | 75,016 | 71,526 | 1.049 |
+| MAX | 1 | 1.571 | 0.671 | 181,707 | 178,814 | 1.016 |
+
+Every era is inside 10% (worst: UIV 0.907, LuV 0.912; both within a few percent of the edge, UIV sits just below a step: 1.45 gives 0.98, but it would move UXV, OpV and MAX). The "before" column of ceil is not comparable factor by factor, since the old counts doubled at f > 1.
+
+The pasta wire drawings `pasta_drawing/horizon_wire_drawing` and `pasta_drawing/strand_drawing` (tier UXV by EU/t) are in the `include` list of `uxv.json`, so the factor reaches them.
+
+### Capacity
+
+`capacity-lint` on the baseline dump with the new tables: errors 53 before and 53 after, 0 new overflows in every era (6 new multiblock-only warnings at ZPM). The static lint reports 8 known violations and 1 warning (`mixer/zblan` fluorine, not ours). `capacity_known.json` still has its 8 rows: none comes from the re-solve; each is a static overflow in another era's script, with pinned tests there:
+
+| Row | Source | Overflow |
+|---|---|---|
+| `assembler/gtca/mega_lcr`, `mega_oil_cracking_unit` | `integration/gtca.js` | static overflow of the assembler's slots |
+| `assembler/gtnn/maceration_stack_controller` | `integration/gtnn.js` 71 to 76 | soldering 288 plus lubricant 500 (two fluids) |
+| `assembler/vein_sample/{m,s,c}_type_belt` | vein sample scripts | two fluids |
+| `assembler/luv/radiation_vault_casing` | `luv/io_surface.js` 68 to 71 | soldering 144 plus lubricant 250 |
+| `distillery/ring_ice_melt` | `zpm/saturn_siphon.js` 180 to 183 | two fluid outputs |
+
+The contract allows recipe edits only for capacity errors the re-solve forces, so they are left. Proposed: a small separate package, with the same fixes as above (a fluid becomes its ingot, an extra fluid is dropped) and the tests of those scripts. `docs/STATUS.md` says P2-Z empties the list; it does not.
+
+### The hull outlier
+
+On the T1 dump the UXV hull scores 53,020 against 5,578 (motor) and 5,833 (pump); the OpV hull 95,320 against 5,628 and 11,603; the MAX hull 168,061 against 6,665 and 18,532. It is 9 to 25 times the other components, because the hull comes from the heavy UXV casing chain. It sits in the geometric mean of nine groups, so it lifts the index by tens of percent over the other eight; it is explained and left.
+
+### Evidence, tests, risks
+
+- The first T1 dump (the pass hashing with `charCodeAt`) showed 0 of 3,881 fractional inputs rounded up: that was repair 1 (hash and a pin test); the second dump matches the prediction exactly.
+- One extra bench run was used before the tables were solved: an unscaled baseline dump of the same pack with all 13 tables off (`/var/lib/grindless/dumps/p2-z-base`), because `$GG_DUMP` has bands A to E baked in and would be scaled twice. The T1 dump is `/var/lib/grindless/dumps/p2-z`.
+- Tests that pinned `Math.ceil` counts (`cost-curve.test.mjs`, `cost-matrix-curve.test.mjs`, `luv-biofoundry.test.mjs`) now use `scaledCount` with the ingredient key.
+- Proposed DECISIONS line: scaled cost-curve counts are dithered per ingredient (whole part of n x f plus one when the fraction reaches a fixed per-(id, count) threshold) instead of ceil'd; every era from MV to MAX lands within 10% of 3 x 2.5^n; the solver keeps an in-band candidate on a step.

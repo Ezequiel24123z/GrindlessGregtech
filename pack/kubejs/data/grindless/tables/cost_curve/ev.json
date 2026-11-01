@@ -1,8 +1,8 @@
 {
   "era": "ev",
   "enabled": true,
-  "item": 3,
-  "fluid": 3,
+  "item": 3.266,
+  "fluid": 3.266,
   "keys": [
     "extendedfeatures:ev_universal_circuit",
     "gtceu:atmosphere_processor",

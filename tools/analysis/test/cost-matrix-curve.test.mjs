@@ -1,4 +1,4 @@
-﻿// cost-matrix.mjs --table / --solve on a one-recipe-per-era fixture (RF-2A): the solver finds the factor that puts the core index
+// cost-matrix.mjs --table / --solve on a one-recipe-per-era fixture (RF-2A): the solver finds the factor that puts the core index
 // on the curve, and the predicted index is what the rule gives. T0: local, deterministic.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -63,7 +63,7 @@ test('the committed tables forced off change nothing, enabled ones apply their f
   const eras = tables.filter((t) => t.enabled && cfg.tiers.includes(t.era));
   assert.equal(committed.res.changed.size, eras.length);
   const idxC = coreIndex(pricedRows(committed.dump, cfg).rows, cfg.tiers);
-  for (const t of eras) assert.ok(Math.abs(idxC.get(t.era).index - rule.ceilScaled({ mv: 2, hv: 4 }[t.era], t.item)) < 1e-6, t.era);
+  for (const t of eras) assert.ok(Math.abs(idxC.get(t.era).index - rule.scaledCount({ mv: 2, hv: 4 }[t.era], t.item, 'x:plate')) < 1e-6, t.era);
   const on = curved(dump(), withFactors(tables, { mv: { item: 2.5, fluid: 2.5 } }));
   assert.deepEqual([...on.res.changed.keys()], ['gtceu:assembler/hull_mv']);
   assert.equal(coreIndex(pricedRows(on.dump, cfg).rows, cfg.tiers).get('mv').index, 5);

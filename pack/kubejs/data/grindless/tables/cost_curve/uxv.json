@@ -1,8 +1,8 @@
 {
   "era": "uxv",
   "enabled": true,
-  "item": 1,
-  "fluid": 1,
+  "item": 1.029,
+  "fluid": 1.029,
   "keys": [
     "extendedfeatures:uxv_universal_circuit",
     "grindless:uxv_conveyor_module",
@@ -52,7 +52,10 @@
     "gtnn:spintronic_mainframe",
     "gtnn:supracausal_assembly"
   ],
-  "include": [],
+  "include": [
+    "grindless:pasta_drawing/horizon_wire_drawing",
+    "grindless:pasta_drawing/strand_drawing"
+  ],
   "exclude": [],
   "remove": [],
   "override": {}

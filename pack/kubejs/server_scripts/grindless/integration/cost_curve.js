@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------------------------
 // Cost curve (Project Reforge, RF-2A; docs/reforge/02_cost_curve.md): scales the consumed item and fluid inputs of the recipes
 // that make key items, GTM's own and ours, by a factor per era read from data/grindless/tables/cost_curve/<era>.json (mv..max).
-// Outputs, duration, EU/t, chances, tick inputs, programmed circuits and non-consumed inputs never change. Amounts are rounded up.
+// Outputs, duration, EU/t, chances, tick inputs, programmed circuits and non-consumed inputs never change. A scaled amount is a whole count dithered around n * f (see scaledCount; P2-Z).
 //
 // Landing state: every table has enabled=false and factors 1.0, so the pass reads the tables, logs one line and changes nothing.
 // A later package switches a band on by editing its table; nothing here is hand-edited per recipe.
@@ -19,7 +19,7 @@
 // builder's holders when the event ends, so they go through serialize() + set('inputs'). Priority: the lowest band of the server
 // scripts (tools/analysis/script_order.json), after every script that adds, removes or derives a recipe.
 //
-// Published: global.grindless.costCurve = { eras, ceilScaled, tierOfEut, validateTable, makeSelector, scaleRecipe, stats }.
+// Published: global.grindless.costCurve = { eras, scaledCount, tierOfEut, validateTable, makeSelector, scaleRecipe, stats }.
 //
 // Rhino: var + function declarations only (this Rhino throws "redeclaration of var").
 (function () {
@@ -40,9 +40,30 @@
     return Object.prototype.hasOwnProperty.call(o, k)
   }
 
-  // ceil(n * f) without float noise (10 * 1.1 is 11.000000000000002 in doubles), capped to an int
-  function ceilScaled(n, f) {
-    var v = Math.ceil(Math.round(n * f * 1e6) / 1e6)
+  // A fixed threshold in (0, 1] per key (plain double arithmetic only, so the pack's Rhino and Node give the same bits).
+  // No charCodeAt: the pack's Rhino returns a character from it, not a number, and the hash was NaN (so no input ever rounded
+  // up). The code of a printable ASCII character is its position in this table plus 32, which is what charCodeAt gave in Node.
+  var ASCII = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+
+  function unitOf(key) {
+    var h = 7
+    var s = String(key)
+    for (var i = 0; i < s.length; i++) h = (h * 31 + ASCII.indexOf(s.charAt(i)) + 32) % 2147483647
+    for (var k = 0; k < 3; k++) h = (h * 48271) % 2147483647
+    return (h + 1) / 2147483648
+  }
+
+  // n * f as a whole count, dithered: the whole part of n * f, plus one when the fraction reaches the threshold of `key` (the
+  // ingredient and its count). The count is n * f on average over all keys, whatever f is, and it never shrinks an input. With
+  // ceil every count of 1 became 2 at f = 1.001 (the quantisation cliff: the index doubled there and no factor fell in the
+  // band); with round a whole step of the index at 1.5, 1.25, ... still left whole eras out; with the threshold each key crosses
+  // its step at its own factor, so the index follows f. Without a key it is round half up. Float noise is cut first (10 * 1.15
+  // is 11.499999999999998 in doubles) and the result is capped to an int.
+  function scaledCount(n, f, key) {
+    var x = Math.round(n * f * 1e6) / 1e6
+    var w = Math.floor(x)
+    var u = key === undefined ? 0.5 : unitOf(key + '#' + n)
+    var v = x - w >= u ? w + 1 : w
     return v > INT_MAX ? INT_MAX : v
   }
 
@@ -101,6 +122,19 @@
     return e.chance > 0 && e.chance === max
   }
 
+  // what an input is, for its threshold: the item or tag id, the fluid or tag id, else the JSON text
+  function keyOf(x) {
+    if (x && typeof x === 'object') {
+      if (Array.isArray(x)) return x.length ? keyOf(x[0]) : ''
+      if (typeof x.item === 'string') return x.item
+      if (typeof x.fluid === 'string') return x.fluid
+      if (typeof x.tag === 'string') return '#' + x.tag
+      if (x.ingredient !== undefined) return keyOf(x.ingredient)
+      if (x.value !== undefined) return keyOf(x.value)
+    }
+    return typeof x === 'string' ? x : JSON.stringify(x)
+  }
+
   function scaleItem(e, f) {
     var c = e && e.content
     if (!c || typeof c !== 'object' || !isConsumed(e)) return e
@@ -111,7 +145,7 @@
       n = 1
       plain = true
     } else return e
-    var m = ceilScaled(n, f)
+    var m = scaledCount(n, f, keyOf(c))
     if (m === n) return e
     var out = copy(e)
     if (plain) out.content = { type: SIZED, count: m, ingredient: { item: c.item } }
@@ -125,7 +159,7 @@
   function scaleFluid(e, f) {
     var c = e && e.content
     if (!c || typeof c !== 'object' || typeof c.amount !== 'number' || !isConsumed(e)) return e
-    var m = ceilScaled(c.amount, f)
+    var m = scaledCount(c.amount, f, keyOf(c))
     if (m === c.amount) return e
     var out = copy(e)
     out.content = copy(c)
@@ -410,7 +444,7 @@
   })
 
   G.costCurve = {
-    eras: ERAS, ceilScaled: ceilScaled, tierOfEut: tierOfEut, validateTable: validateTable, makeSelector: makeSelector,
+    eras: ERAS, scaledCount: scaledCount, tierOfEut: tierOfEut, validateTable: validateTable, makeSelector: makeSelector,
     scaleRecipe: scaleRecipe, stats: S
   }
 })()
