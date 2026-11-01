@@ -83,11 +83,11 @@ export const QUESTS = [
   }, [NEG, SHIELD], 200),
   prod('NEGC', 'Negative-Potential Casing', 'grindless:neg_xhv_casing', ['AHF'], 4.5, 3,
     ['The &6Negative-Potential Casing&r holds an extreme vacuum at a voltage that repels what is inside it. The foundry and the decelerator are built of it.']),
-  prod('SHLD', 'Annihilation Shield Casing', 'grindless:annihilation_shield_casing', ['AHF'], 7, 3,
+  prod('SHLD', 'Annihilation Shield Casing', 'grindless:annihilation_shield_casing', ['AHF'], 4.5, 4.5,
     ['The &6Annihilation Shield Casing&r stops gammas, neutrons and charged debris. Every machine that holds antimatter or a black hole is lined with it.']),
-  prod('LYMAN', 'Thorium-229 Lasing Crystal', 'grindless:th229_lasing_crystal', ['NEGC'], 9.5, 3,
+  prod('LYMAN', 'Thorium-229 Lasing Crystal', 'grindless:th229_lasing_crystal', ['NEGC'], 7, 3,
     ['The &6Thorium-229 Lasing Crystal&r makes the Lyman-alpha light that laser-cools antihydrogen. The foundry uses a crystal for a while and then it must be replaced.']),
-  gear('VAULT', 'strangelet_vault', 'Strangelet Vault', ['M_L_VAULT', 'SHLD'], 2, 4.5, {
+  gear('VAULT', 'strangelet_vault', 'Strangelet Vault', ['M_L_VAULT'], 2, 4.5, {
     for: 'The &6Strangelet Vault&r holds strange matter in a frozen field, where it cannot touch ordinary atoms. Any contact would convert them.',
     needs: 'An OpV hull, the field-frozen casing and the annihilation shield casing.',
     unlocks: 'Storage for the strangelet seed and the pasta core sample.',
@@ -142,7 +142,7 @@ export const QUESTS = [
     automate: 'Laminae by ME; plates come out stacked, so chest them for the casing.',
   }, [POWER, it('gtceu:tungsten_steel_frame')], 150),
   prod('FROZEN', 'Field-Frozen Plate', 'grindless:field_frozen_plate', ['PRESS'], 4.5, 18,
-    ['The &6Field-Frozen Plate&r keeps the magnetar field in it for good. Pressed into the &6Field-Frozen Casing&r, it is what the vault, the distiller and the forge are built of.']),
+    ['The &6Field-Frozen Plate&r keeps the magnetar field it was pressed in. Pressed into the &6Field-Frozen Casing&r, it is what the vault, the distiller and the forge are built of.']),
   prod('HE3', 'Superfluid Helium-3 Seal', 'grindless:superfluid_he3_seal', ['FROZEN'], 7, 18,
     ['The &6Superfluid Helium-3 Seal&r closes the cold joint of a frozen-field casing. A magnetar field cracks an ordinary gasket in a few seconds.']),
 
