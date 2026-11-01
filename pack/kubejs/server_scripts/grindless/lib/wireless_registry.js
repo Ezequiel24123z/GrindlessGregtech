@@ -7,6 +7,7 @@
 //
 // Entries (field, NBT type); every copy of an entry keeps this order, so equal entries print the same:
 //   tower:          k 'tower', d dimension, x y z, f formed (byte), c capacity (long), t tier (0 = no cells), n cells
+//   bank:           k 'bank', d, x y z, f formed (byte), n capacitors (XP-H5: a bank's capacity, n x 2^48, passes a safe long, so it is derived)
 //   hatch / dynamo: k, d, x y z, t tier, a amps
 //   cover:          k 'cover', d, x y z, s side, ck 'energy' | 'dynamo', t tier
 // Reading never drops anything. A compound that is not a valid entry stays in the list as { bad: why, tag } (the network skips it and
@@ -24,6 +25,7 @@
   var COMMON = [['k', 's'], ['d', 's'], ['x', 'i'], ['y', 'i'], ['z', 'i']]
   var FIELDS = {
     tower: COMMON.concat([['f', 'b'], ['c', 'l'], ['t', 'i'], ['n', 'i']]),
+    bank: COMMON.concat([['f', 'b'], ['n', 'i']]),
     hatch: COMMON.concat([['t', 'i'], ['a', 'i']]),
     dynamo: COMMON.concat([['t', 'i'], ['a', 'i']]),
     cover: COMMON.concat([['s', 's'], ['ck', 's'], ['t', 'i']])

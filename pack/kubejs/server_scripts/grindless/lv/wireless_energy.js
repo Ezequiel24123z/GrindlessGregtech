@@ -176,6 +176,18 @@
       base.n = info.cells
       return upsert(level.server, base)
     }
+    if (W.bankId && id === W.bankId) {
+      var binfo = bankInfo(machineAt(level, pos))
+      if (binfo.pending) {
+        var bknown = blocks(level.server).filter(function (e) { return !e.bad && e.k === 'bank' && same(e, base.d, base.x, base.y, base.z) })[0]
+        if (bknown) return bknown
+        binfo = { formed: false, capacitors: 0 }
+      }
+      base.k = 'bank'
+      base.f = binfo.formed
+      base.n = binfo.capacitors
+      return upsert(level.server, base)
+    }
     var h = W.hatches[id]
     if (!h) return null
     base.k = h.kind
@@ -287,6 +299,32 @@
     return out
   }
 
+  // ---------------------------------------------------------------- the horizon capacitor bank (XP-H5)
+
+  function bankCapacityOf(n) {
+    return norm(toBig(W.bankCells[0].capacity).multiply(toBig(n)))
+  }
+
+  // a bank's capacitors, read from GTM's formed structure (the same pending rule as a tower's): { formed, capacitors, capacity, atSite }
+  function bankInfo(ctrl) {
+    var out = { formed: false, capacitors: 0, capacity: 0, atSite: false }
+    if (ctrl === null || ctrl === undefined || typeof ctrl.isFormed !== 'function' || !ctrl.isFormed() || !W.bank) return out
+    out.formed = true
+    var ms = ctrl.getMultiblockState()
+    if (ms.cache === null || ms.cache === undefined) {
+      out.pending = true
+      return out
+    }
+    var level = ctrl.getLevel()
+    var it = ms.getCache().iterator()
+    while (it.hasNext()) {
+      if (String(level.getBlock(it.next()).id) === W.bankCells[0].cell) out.capacitors++
+    }
+    out.capacity = out.capacitors > 0 ? bankCapacityOf(out.capacitors) : 0
+    out.atSite = dimensionOf(level) === W.bank.site
+    return out
+  }
+
   // ---------------------------------------------------------------- energy access
   // lib/wireless_adapters.js: the container's exact class picks how EU moves (plain containers through changeEnergy, battery buffers and
   // chargers through their items with GTM's own calls, anything else not at all), and every move is checked against the stored EU.
@@ -364,10 +402,11 @@
     var keep = []
     var changed = false
     var out = { tracked: list.length, loaded: 0, forgotten: 0, faulted: 0, up: false, tier: 0, capacity: 0, stored: 0, in: 0, out: 0, lost: 0,
-      drained: 0, towers: 0, skippedAbove: 0 }
+      drained: 0, towers: 0, skippedAbove: 0, banks: 0, bankCapacity: 0 }
     var deposits = []
     var withdrawals = []
     var towers = []
+    var banks = []
     list.forEach(function (e) {
       // an entry the list could not read is kept as it was and never used
       if (e.bad) { keep.push(e); return }
@@ -376,9 +415,22 @@
       if (level === null || level === undefined || !level.isLoaded(pos)) {
         keep.push(e)
         if (e.k === 'tower') towers.push(e)
+        if (e.k === 'bank') banks.push(e)
         return
       }
       var id = String(level.getBlock(pos).id)
+      if (e.k === 'bank') {
+        if (id !== W.bankId) { changed = true; out.forgotten++; return }
+        var binfo = bankInfo(machineAt(level, pos))
+        if (!binfo.pending && (binfo.formed !== e.f || binfo.capacitors !== e.n)) {
+          e = R.canon({ k: 'bank', d: e.d, x: e.x, y: e.y, z: e.z, f: binfo.formed, n: binfo.capacitors })
+          changed = true
+        }
+        keep.push(e)
+        banks.push(e)
+        out.loaded++
+        return
+      }
       if (e.k === 'tower') {
         if (id !== W.towerId) { changed = true; out.forgotten++; return }
         var info = towerInfo(machineAt(level, pos))
@@ -442,6 +494,13 @@
     })
     out.up = out.towers > 0
     out.tier = out.up ? weakest : 0
+    // XP-H5: formed banks at their site add capacity (at tier 14: they never lower the network's tier); loss, cadence and caps stay as they are
+    banks.forEach(function (b) {
+      if (!b.f || !(b.n > 0) || !W.bank || b.d !== W.bank.site) return
+      out.banks++
+      out.bankCapacity = add(out.bankCapacity, bankCapacityOf(b.n))
+    })
+    out.capacity = add(out.capacity, out.bankCapacity)
     var bank = stored(server)
     var before = bank
     if (out.up) {
@@ -527,10 +586,17 @@
 
   // the network now: { up, tier, capacity, stored, towers, inPerSecond, outPerSecond } (EU over the last second)
   function status(server) {
-    var last = W.last || { up: false, tier: 0, capacity: 0, towers: 0 }
+    var last = W.last || { up: false, tier: 0, capacity: 0, towers: 0, banks: 0, bankCapacity: 0 }
     var sumIn = windowIn.reduce(function (a, b) { return add(a, b) }, 0)
     var sumOut = windowOut.reduce(function (a, b) { return add(a, b) }, 0)
-    return { up: !!last.up, tier: last.tier, capacity: last.capacity, towers: last.towers, stored: stored(server), inPerSecond: sumIn, outPerSecond: sumOut }
+    return { up: !!last.up, tier: last.tier, capacity: last.capacity, towers: last.towers, banks: last.banks || 0, bankCapacity: last.bankCapacity || 0,
+      stored: stored(server), inPerSecond: sumIn, outPerSecond: sumOut }
+  }
+
+  // what the Hyperstargate's dial may draw on (XP-G1): the banks' exact capacity and the exact store
+  function dialCharge(server) {
+    var st = status(server)
+    return { bankCapacity: st.bankCapacity, stored: st.stored }
   }
 
   // ---------------------------------------------------------------- the readout
@@ -568,7 +634,7 @@
   // what a shift-click on this block reads: { tier, withdraws, fault } or null when it is no wireless block
   function readoutTarget(level, pos, side) {
     var id = String(level.getBlock(pos).id)
-    if (id === W.towerId) {
+    if (id === W.towerId || (W.bankId && id === W.bankId)) {
       track(level, pos)
       return { tier: 0, withdraws: false, fault: '' }
     }
@@ -662,7 +728,7 @@
 
   // ---------------------------------------------------------------- tracking
 
-  W.hatchIds.concat(W.maxplusHatchIds, [W.towerId]).forEach(function (id) {
+  W.hatchIds.concat(W.maxplusHatchIds, [W.towerId], W.bankId ? [W.bankId] : []).forEach(function (id) {
     BlockEvents.placed(id, function (event) {
       try {
         // a block placed again starts over: whatever set the old one aside is forgiven
@@ -768,6 +834,8 @@
   W.settle = settle
   W.status = status
   W.towerInfo = towerInfo
+  W.bankInfo = bankInfo
+  W.dialCharge = dialCharge
   W.stored = stored
   W.setStored = setStored
   W.perTick = perTick
