@@ -300,6 +300,10 @@
    "gtceu:rydberg_array_works",
    "gtceu:segment_reclamation_works"
   ],
+  "maxplus": [
+   "gtceu:bound_matter_press",
+   "gtceu:condensate_refinery"
+  ],
   "moon": [
    "gtceu:lunar_drill"
   ],

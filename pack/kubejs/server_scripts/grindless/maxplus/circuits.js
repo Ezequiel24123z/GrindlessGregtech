@@ -1,3 +1,4 @@
+// priority: -20088
 // -----------------------------------------------------------------------------------------------
 // XP-A3 "MAX+ circuits" (docs/eras/maxplus.md, Lines Q1 and Q2 and the processor design): the GTM steps of the two lines, the tag and the join.
 // Every other step is one row of an older machine, marked XP-A3 in its own file:

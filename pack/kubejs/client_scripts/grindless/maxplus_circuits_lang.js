@@ -1,3 +1,4 @@
+// priority: 6832
 // Gregtech Grindless - EMI lines of XP-A3's rows on older machines (MAX+ lines Q1 and Q2 and the horizon processor, package XP-A3):
 //
 //   gtceu.recipe.<dataKey>.<recipe>                    the EMI line of each recipe
