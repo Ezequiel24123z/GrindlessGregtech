@@ -208,7 +208,7 @@ test('skip route drops: an ore block of a material with no vein, a circular rout
   assert.equal(skipRoute(mkLine('steam', { steps: 4, products: [{ res: 'minecraft:glass' }] }), 'minecraft:glass', shard), null);
   // parallel source: the earlier line makes the key at an inner node, not as its end product
   const par = buildFacts([rec('b', 'gtceu:other', ['gtceu:sand'], 'gtceu:plate')]);
-  const earlier = [{ products: [{ res: 'gtceu:ingot' }], inner: new Set(['gtceu:plate']), machines: new Set(['gtceu:other']) }];
+  const earlier = [{ products: [{ res: 'gtceu:ingot' }], inner: new Set(['gtceu:plate']), machines: new Set(['gtceu:other']), raws: new Set(), ours: [], inners: new Set() }];
   assert.ok(skipRoute(l, 'gtceu:plate', par));
   assert.equal(skipRoute(l, 'gtceu:plate', par, null, { earlier }), null);
   assert.ok(skipRoute(l, 'gtceu:plate', par, null, { earlier: [{ ...earlier[0], machines: new Set(['gtceu:else']) }] }));
