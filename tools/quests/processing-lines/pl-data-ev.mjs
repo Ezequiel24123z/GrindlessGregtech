@@ -8,7 +8,7 @@ export default {
   subtitle: 'The Moon runs itself, platinum comes apart at home, and Mars sends tungsten and rare earths.',
   icon: 'gtceu:regolith_cell',
   focus: 'sample',
-  bands: [['moon'], ['kroll', 'platinum'], ['mars', 'tungsten', 'nitric'], ['cascade', 'power', 'dome']],
+  bands: [['moon'], ['kroll', 'platinum'], ['mars', 'tungsten'], ['cascade', 'power', 'dome'], ['nano']],
   clusters: {
     moon: {
       name: 'The lunar base',
@@ -43,7 +43,7 @@ export default {
         n('ln2', 14.5, -0.75, F('gtceu:liquid_nitrogen'), 'Liquid Nitrogen', { from: ['cryo'] }),
         n('lhe', 14.5, 0.5, F('gtceu:liquid_helium'), 'Liquid Helium', { kind: 'by', from: ['cryo'], end: 'IV hot ingots', sub: 'Kept for IV\'s hottest ingots' }),
         n('tiplate', 12.5, -3.5, I('gtceu:titanium_plate'), 'Titanium Plate', { kind: 'product', from: ['ti'], by: ['gtceu:bender'], sub: 'Bender; pistons and frames' }),
-        n('kilnitem', 12.5, 3.25, I('gtceu:fluorspar_kiln'), 'Fluorspar Kiln', { kind: 'product', from: ['brick'], by: ['gtceu:assembler'], sub: 'Assembler; every lunar build stands on the brick' }),
+        n('kilnitem', 12.5, 3.25, I('gtceu:fluorspar_kiln'), 'Fluorspar Kiln', { kind: 'product', role: 'infrastructure', from: ['brick'], by: ['gtceu:assembler'], sub: 'Assembler; every lunar build stands on the brick' }),
         n('tripod2', 16.5, -0.75, M('gtceu:ev_vein_drill'), 'Tripod, Cooled', { kind: 'ret', from: ['ln2'], sub: 'Back to the drill: half again the ore' }),
       ],
     },
@@ -92,7 +92,11 @@ export default {
         n('pd', 6.5, -2, I('gtceu:palladium_dust'), 'Palladium', { from: [via('sludge', 'gtceu:palladium_metal_dust')], end: 'catalysts, alloys', sub: 'Through palladium-rich ammonia' }),
         n('rh', 6.5, -0.75, I('gtceu:rhodium_dust'), 'Rhodium', { from: [via('sludge', 'gtceu:platinum_slag_dust')], end: 'later tiers', sub: 'From the slag' }),
         n('ru', 6.5, 0.5, I('gtceu:ruthenium_dust'), 'Ruthenium', { from: [via('sludge', 'gtceu:platinum_slag_dust')], sub: 'From the slag too' }),
-        n('no2', 6.5, 1.75, F('gtceu:nitrogen_dioxide'), 'Nitrogen Dioxide', { kind: 'by', from: ['sludge'], by: ['gtceu:pgm_refining'], end: 'nitric acid', sub: 'Back to nitric acid' }),
+        n('no2', 6.5, 1.75, F('gtceu:nitrogen_dioxide'), 'Nitrogen Dioxide', { kind: 'by', from: ['sludge'], by: ['gtceu:pgm_refining'], sub: 'Back to nitric acid' }),
+        n('hno3', 8.5, 1.75, F('gtceu:nitric_acid'), 'Nitric Acid', {
+          kind: 'by', from: ['no2'], by: ['gtceu:large_chemical_reactor'], end: 'IV hot cell reprocessing',
+          sub: 'Water and the fumes in a large chemical reactor; the nitric oxide goes round again',
+        }),
         n('cacl2', 6.5, 3, I('gtceu:calcium_chloride_dust'), 'Calcium Chloride', { kind: 'by', from: ['sludge'], by: ['gtceu:pgm_refining'], end: 'salt charge', sub: 'The lunar cell\'s salt charge' }),
         n('sc', 10.5, -0.75, M('gtceu:smelting_complex'), 'Smelting Complex', { from: ['pd', 'rh', 'ru'], sub: 'Heats the dusts to ingots' }),
         n('pdi', 12.5, -2, I('gtceu:palladium_ingot'), 'Palladium Ingot', { from: ['sc'], end: 'data modules, alloys' }),
@@ -104,6 +108,7 @@ export default {
     },
     mars: {
       name: 'Mars: air into fuel',
+      role: 'power',
       nodes: [
         n('water', 0, -0.75, F('minecraft:water'), 'Water', { kind: 'raw', sub: 'From home, over the bridge' }),
         n('rucat2', 0, 0.75, I('grindless:ruthenium_catalyst'), 'Ruthenium Catalyst', { kind: 'raw', sub: 'From the platinum plant' }),
@@ -138,22 +143,14 @@ export default {
         }),
       ],
     },
-    nitric: {
-      name: 'Nitric acid',
-      nodes: [
-        n('n2b', 0, -1.5, F('gtceu:nitrogen'), 'Nitrogen', { kind: 'raw' }),
-        n('h2b', 0, 0, F('gtceu:hydrogen'), 'Hydrogen', { kind: 'raw' }),
-        n('o2d', 0, 1.5, F('gtceu:oxygen'), 'Oxygen', { kind: 'raw' }),
-        n('lcr', 2, 0, M('gtceu:large_chemical_reactor'), 'Large Chemical Reactor', { from: ['n2b', 'h2b', 'o2d'], sub: 'All three at once' }),
-        n('hotcell', 6, 0, M('gtceu:hot_cell'), 'Hot Cell', { from: ['hno3'], sub: 'Reprocesses spent fuel' }),
-        n('no2b', 2, 1.75, F('gtceu:nitrogen_dioxide'), 'Nitrogen Dioxide', { kind: 'raw', sub: 'From the platinum plant' }),
-        n('hno3', 4, 0, F('gtceu:nitric_acid'), 'Nitric Acid', { from: ['lcr', 'no2b'], desc: 'One reactor where GregTech used to want a whole tower. The platinum plant\'s fumes come back as more acid.' }),
-      ],
-    },
     cascade: {
       name: 'Rare earths from Mars',
       nodes: [
-        n('merrillite', 0, -0.75, I('gtceu:merrillite_dust'), 'Merrillite Dust', { kind: 'raw', sub: 'Martian tripod, then any furnace' }),
+        n('sample3', -9, -1.5, I('grindless:vein_sample_merrillite_mars'), 'Martian Merrillite Sample', { kind: 'raw' }),
+        n('bit3', -9, 0, I('grindless:titanium_drill_bit'), 'Titanium Drill Bit', { kind: 'raw' }),
+        n('tripod4', -6.5, -0.75, M('gtceu:ev_vein_drill'), 'EV Tripod Drill', { kind: 'ours', from: ['sample3', 'bit3'], sub: 'On Mars, over the merrillite vein' }),
+        n('rawm', -3.5, -0.75, I('gtceu:raw_merrillite'), 'Raw Merrillite', { from: ['tripod4'], sub: 'Only Mars has it' }),
+        n('merrillite', 0, -0.75, I('gtceu:merrillite_dust'), 'Merrillite Dust', { from: ['rawm'], by: ['gtceu:ore_processing'], sub: 'Ore plant' }),
         n('hcl2', 0, 0.75, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { kind: 'raw' }),
         L('kero', 0, 2.25, 'pl_mv:kero'),
         n('cascade', 2.5, 0.75, M('gtceu:extraction_cascade'), 'Extraction Cascade', {
@@ -170,13 +167,15 @@ export default {
         n('sc2', 9, -2.5, M('gtceu:smelting_complex'), 'Smelting Complex', { from: ['sm'], sub: 'Liquid helium keeps it from oxidising' }),
         n('smi', 11, -2.5, I('gtceu:samarium_ingot'), 'Samarium Ingot', { kind: 'product', from: ['sc2'], sub: 'LuV magnets' }),
         n('sm', 7, -2.5, I('gtceu:samarium_dust'), 'Samarium', { end: 'LuV magnets', from: ['smcl'], by: ['gtceu:electrolyzer'], sub: 'Kept for LuV\'s magnets' }),
-        n('nd', 7, -1.25, I('gtceu:neodymium_dust'), 'Neodymium', { end: 'motor magnets', from: ['ndcl'], by: ['gtceu:electrolyzer'], sub: 'Motor magnets' }),
+        n('nd', 7, -1.25, I('gtceu:neodymium_dust'), 'Neodymium', { from: ['ndcl'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer' }),
+        n('mnd', 10.5, -1, I('gtceu:magnetic_neodymium_dust'), 'Magnetic Neodymium', { kind: 'product', from: ['nd'], by: ['gtceu:polarizer'], end: 'motor magnets', sub: 'Polarizer; the motors\' magnets' }),
         n('re', 7, 0, I('gtceu:rare_earth_dust'), 'Rare Earth', { kind: 'by', from: ['mixed'], by: ['gtceu:electrolyzer'], end: 'GTM centrifuge', sub: 'GregTech\'s centrifuge takes it from here' }),
         n('hclback', 7, 1.25, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid, Back', { kind: 'ret', from: ['dilute'], by: ['gtceu:distillation_tower'], sub: 'Distillation tower, then the leach again' }),
       ],
     },
     power: {
       name: 'Combined cycle',
+      role: 'power',
       nodes: [
         n('methane2', 0, -0.75, F('gtceu:methane'), 'Methane', { kind: 'raw', sub: 'Or any gas turbine fuel' }),
         n('dwater', 0, 0.75, F('gtceu:distilled_water'), 'Distilled Water', { kind: 'raw' }),
@@ -193,7 +192,11 @@ export default {
       name: 'Crops without sky',
       nodes: [
         n('seeds', 0, -0.75, I('minecraft:beetroot_seeds'), 'Seeds', { kind: 'raw', sub: 'Any plant; never used up' }),
-        n('co2', 0, 0.75, F('gtceu:carbon_dioxide'), 'Carbon Dioxide', { kind: 'raw', sub: 'Martian air, or MV\'s test stand exhaust' }),
+        n('aproc', -2.5, 0.75, M('gtceu:atmosphere_processor'), 'Atmosphere Processor', {
+          kind: 'ours', sub: 'Circuit 2, on Mars',
+          desc: 'Circuit 2 only breathes: Martian air in, its carbon dioxide out, with no water and no catalyst.',
+        }),
+        n('co2', 0, 0.75, F('gtceu:carbon_dioxide'), 'Carbon Dioxide', { from: ['aproc'], sub: 'Martian air, or MV\'s test stand exhaust' }),
         n('dome', 2, 0, M('gtceu:sealed_dome'), 'Sealed Dome', {
           kind: 'ours', from: ['seeds', 'co2'],
           desc: 'Grow lights under a glass roof, behind an airlock. The plants turn carbon dioxide into oxygen right through the fourteen-day night.',
@@ -204,6 +207,32 @@ export default {
         n('wmodel', 6, 0.75, I('grindless:creature_model_wither'), 'Wither Model', { kind: 'raw', sub: 'Printed from wither skeleton skulls' }),
         n('sim', 8, 0, M('gtceu:ev_creature_simulator'), 'Creature Simulator', { from: ['biomass', 'wmodel'], sub: 'EV: it eats a lot of biomass' }),
         n('star', 10, 0, I('minecraft:nether_star'), 'Nether Star', { kind: 'product', from: ['sim'], sub: 'Saved for IV' }),
+      ],
+    },
+    nano: {
+      name: 'Nano circuits',
+      nodes: [
+        n('si', 0, -2.25, I('gtceu:silicon_dust'), 'Silicon', { kind: 'raw', sub: '64 for each boule' }),
+        n('phos2', 0, -0.75, I('gtceu:phosphorus_dust'), 'Phosphorus', { kind: 'raw' }),
+        L('gaas', 0, 0.75, 'pl_lv:gaas'),
+        n('n2c', 0, 2.25, F('gtceu:nitrogen'), 'Nitrogen', { kind: 'raw' }),
+        n('boule', 3.5, 0, I('gtceu:phosphorus_boule'), 'Phosphorus Boule', {
+          from: ['si', 'phos2', via('gaas', 'gtceu:small_gallium_arsenide_dust'), 'n2c'], by: ['gtceu:electric_blast_furnace'], sub: 'EBF; the boule grows under nitrogen',
+        }),
+        n('pwafer', 6, 0, I('gtceu:phosphorus_wafer'), 'Phosphorus Wafer', { from: ['boule'], by: ['gtceu:cutter'], sub: 'Cutter, with water: 32 wafers' }),
+        n('norw', 8.5, 0, I('gtceu:nor_memory_wafer'), 'NOR Memory Wafer', { from: ['pwafer'], by: ['gtceu:laser_engraver'], sub: 'Laser engraver, in a cleanroom' }),
+        n('norc', 11, 0, I('gtceu:nor_memory_chip'), 'NOR Memory Chip', { kind: 'product', from: ['norw'], by: ['gtceu:cutter'], end: 'memory circuits', sub: 'Cutter, with water' }),
+        n('cpuw', 5, 2.25, I('gtceu:cpu_wafer'), 'CPU Wafer', { kind: 'raw' }),
+        n('cfib', 5, 3.75, I('gtceu:carbon_fibers'), 'Carbon Fibres', { kind: 'raw', sub: '16 for each wafer' }),
+        n('glow', 5, 5.25, F('gtceu:glowstone'), 'Glowstone', { kind: 'raw', sub: '576 mB' }),
+        n('nreact', 7.5, 3.75, M('gtceu:lv_chemical_reactor'), 'Chemical Reactor', { from: ['cpuw', 'cfib', 'glow'], sub: 'In a cleanroom' }),
+        n('nanow', 10, 3.75, I('gtceu:nano_cpu_wafer'), 'Nano CPU Wafer', { from: ['nreact'] }),
+        n('nanoc', 12, 3.75, I('gtceu:nano_cpu_chip'), 'Nano CPU Chip', { from: ['nanow'], by: ['gtceu:cutter'], sub: 'Cutter, with water' }),
+        n('pcb', 14, 6, I('gtceu:epoxy_printed_circuit_board'), 'Epoxy Circuit Board', { kind: 'raw', sub: 'Epoxy board from the HV line' }),
+        n('nasm', 16, 3.75, M('gtceu:lv_circuit_assembler'), 'Circuit Assembler', { from: ['nanoc', 'pcb'], sub: 'SMD parts and electrum wire, too' }),
+        n('nproc', 18.5, 3.75, I('gtceu:nano_processor'), 'Nano Processor', { kind: 'product', from: ['nasm'], sub: 'EV circuits' }),
+        n('nassembly', 20.5, 3.75, I('gtceu:nano_processor_assembly'), 'Nano Processor Assembly', { kind: 'product', from: ['nproc'], by: ['gtceu:circuit_assembler'], sub: 'With RAM chips' }),
+        n('ncomputer', 22.5, 3.75, I('gtceu:nano_processor_computer'), 'Nano Processor Computer', { kind: 'product', from: ['nassembly'], by: ['gtceu:circuit_assembler'], end: 'IV machines', sub: 'Assembly and more' }),
       ],
     },
   },
