@@ -38,7 +38,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5C6DDC6FFEF5B6E3", xp: 35 }],
   },
   {
-    key: "MV_VANADIUM_STEEL", id: "74057E6BDC378944", title: "Vanadium Steel", icon: "gtceu:vanadium_steel_ingot", deps: ["MV_CHROMIUM_AND_ALUMINIUM"], x: 8, y: -1.5,
+    key: "MV_VANADIUM_STEEL", id: "74057E6BDC378944", title: "Vanadium Steel", icon: "gtceu:vanadium_steel_ingot", deps: ["MV_KANTHAL"], x: 8, y: -1.5,
     desc: [
       "Mostly steel, with a little vanadium and chromium. The cutter's saw blade is made of it, and so is the drill bit that can reach the End veins.",
     ],
@@ -71,22 +71,30 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "1905C6F89AEBEF24", xp: 35 }],
   },
   {
-    key: "MV_ORE_PLANT", id: "3FCAFC1E38DD934C", title: "Ore Plant", icon: "gtceu:ore_plant", shape: "gear", size: 1.75, deps: ["MV_MV_COMPONENTS"], x: 2, y: -3,
-    desc: [
-      "The LV ore line, all of it, in one building: crush, wash, bake and crush again, with every byproduct delivered. It's built from the MV versions of the machines it replaces.",
-      "Same ore and the same energy per ore as the loose machines, about ten fewer machines and no buses in between. A second energy hatch doubles the ores in flight.",
-    ],
-    tasks: [{ type: "item", id: "637CD62AA2052170", item: "gtceu:ore_plant" }],
-    rewards: [{ type: "xp", id: "1B8BF1FB66892FB3", xp: 80 }, { type: "item", id: "44804D8CAFF739EE", item: "minecraft:torch", count: 16 }],
+    key: "MV_ORE_PLANT", id: "3FCAFC1E38DD934C",     title: "Ore Plant", icon: "gtceu:ore_plant", kind: "signature", deps: ["MV_MV_COMPONENTS"], x: 2, y: -3,
+        teach: {
+          for: "The whole LV ore line in one building: crush, wash, bake, crush again.",
+          needs: "MV versions of the machines it replaces.",
+          unlocks: "Every byproduct delivered, with no buses between.",
+          automate: "A second energy hatch doubles the ores in flight.",
+        },
+        desc: [
+          "Same ore, same energy per ore, about ten fewer machines.",
+        ],
+        tasks: [{ type: "item", id: "637CD62AA2052170", item: "gtceu:ore_plant" }],
+        rewards: [{ type: "xp", id: "1B8BF1FB66892FB3", xp: 80 }],
   },
   {
-    key: "MV_MV_VEIN_DRILL", id: "430CFDDFCF9174C1", title: "MV Vein Drill", icon: "gtceu:mv_vein_drill", shape: "gear", size: 1.5, deps: ["MV_MV_COMPONENTS"], x: 6, y: -1.5,
-    desc: [
-      "Same samples as the LV drill, and many more bores: one MV hatch keeps it busier than two LV hatches ever kept the last one.",
-      "Put a vanadium steel bit in the bus and drilling fluid in the tank, and it reaches the End veins too.",
-    ],
-    tasks: [{ type: "item", id: "4672CBD07B794FDE", item: "gtceu:mv_vein_drill" }],
-    rewards: [{ type: "xp", id: "0C4CC380A108D82B", xp: 60 }, { type: "item", id: "7F949ADB2FDB784E", item: "minecraft:torch", count: 16 }],
+    key: "MV_MV_VEIN_DRILL", id: "430CFDDFCF9174C1",     title: "MV Vein Drill", icon: "gtceu:mv_vein_drill", kind: "machine", deps: ["MV_MV_COMPONENTS"], x: 6, y: -1.5,
+        teach: {
+          for: "Many more bores than the LV drill, off the same samples.",
+          needs: "One MV hatch, a bit in the bus, drilling fluid in the tank.",
+          unlocks: "A vanadium steel bit reaches the End veins.",
+          automate: "Feed bits and fluid by bus and pipe.",
+        },
+        desc: [],
+        tasks: [{ type: "item", id: "4672CBD07B794FDE", item: "gtceu:mv_vein_drill" }],
+        rewards: [{ type: "xp", id: "0C4CC380A108D82B", xp: 60 }],
   },
   {
     key: "MV_VANADIUM_STEEL_DRILL_BIT", id: "30D3D68203F455F9", title: "Vanadium Steel Drill Bit", icon: "grindless:vanadium_steel_drill_bit", deps: ["MV_MV_VEIN_DRILL","MV_VANADIUM_STEEL"], x: 10, y: -3,
@@ -123,30 +131,64 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "723753988B299A39", xp: 35 }],
   },
   {
-    key: "MV_SILICON_WAFERS", id: "086C8CD2541ED490", title: "Silicon Wafers", icon: "gtceu:silicon_wafer", deps: ["MV_SILICON_BOULE","MV_MV_CUTTER_AND_LASER"], x: 12, y: 0,
-    desc: [
-      "The cutter slices a boule into a stack of wafers. Handle them gently; there's a long road between a wafer and a working chip.",
-    ],
-    tasks: [{ type: "item", id: "196CF5113D833357", item: "gtceu:silicon_wafer", count: 8 }],
-    rewards: [{ type: "xp", id: "0B53DE86A2D8D40B", xp: 30 }],
-  },
+    key: "MV_SILICON_WAFERS", id: "086C8CD2541ED490",     title: "Silicon Wafers", icon: "gtceu:silicon_wafer", kind: "wafer", deps: ["MV_SILICON_BOULE","MV_MV_CUTTER_AND_LASER"], x: 12, y: 0,
+        teach: {
+          for: "The blank slices every chip starts from.",
+          needs: "A boule and the MV cutter.",
+          unlocks: "ILC, RAM and ULPIC wafers.",
+          automate: "Boules in by bus, wafers out; the cutter runs unattended.",
+        },
+        desc: [],
+        tasks: [{ type: "item", id: "196CF5113D833357", item: "gtceu:silicon_wafer", count: 8 }],
+        rewards: [{ type: "xp", id: "0B53DE86A2D8D40B", xp: 30 }],
+      },
+      {
+        key: "MV_ILC", title: "ILC Wafer and Chip", icon: "gtceu:ilc_chip", kind: "wafer", deps: ["MV_SILICON_WAFERS"], x: 14, y: 0,
+        teach: {
+          for: "The integrated logic chip, a staple of every circuit to HV.",
+          needs: "Silicon wafers, the laser engraver with a red lens, the cutter.",
+          unlocks: "Basic and good integrated circuits.",
+          automate: "Engrave, then cut: two machines on one bus line.",
+        },
+        desc: [],
+        tasks: [{ type: "item", item: "gtceu:ilc_wafer", count: 2 }, { type: "item", item: "gtceu:ilc_chip", count: 8 }],
+        rewards: [{ type: "xp", xp: 35 }],
+      },
+      {
+        key: "MV_RAM", title: "RAM Wafer and Chip", icon: "gtceu:ram_chip", kind: "wafer", deps: ["MV_SILICON_WAFERS"], x: 14, y: -1.5,
+        teach: {
+          for: "Memory for the circuits that think.",
+          needs: "Silicon wafers, the laser engraver with a green lens, the cutter.",
+          unlocks: "Integrated circuits and the ULPIC.",
+          automate: "Same two-machine line as the ILC, with another lens.",
+        },
+        desc: [],
+        tasks: [{ type: "item", item: "gtceu:ram_wafer", count: 2 }, { type: "item", item: "gtceu:ram_chip", count: 8 }],
+        rewards: [{ type: "xp", xp: 35 }],
+      },
+      {
+        key: "MV_ULPIC", title: "ULPIC Wafer and Chip", icon: "gtceu:ulpic_chip", kind: "wafer", deps: ["MV_RAM"], x: 16, y: -1.5,
+        teach: {
+          for: "The ultra-low-power IC, the first chip beyond ILC and RAM.",
+          needs: "Silicon wafers, the laser engraver, the cutter, MV power.",
+          unlocks: "The advanced integrated circuit.",
+          automate: "A third lens on the same engrave and cut line.",
+        },
+        desc: [],
+        tasks: [{ type: "item", item: "gtceu:ulpic_wafer", count: 2 }, { type: "item", item: "gtceu:ulpic_chip", count: 8 }],
+        rewards: [{ type: "xp", xp: 40 }],
+      },
   {
-    key: "MV_ILC_AND_RAM", id: "4A6B8F971E17C847", title: "ILC and RAM", icon: "gtceu:ilc_chip", deps: ["MV_SILICON_WAFERS"], x: 14, y: 0,
-    desc: [
-      "The laser engraver prints a circuit pattern onto the wafer, and the lens colour decides which one: red for ILC, green for RAM. The cutter then dices the printed wafer into chips.",
-      "Both go into every integrated circuit until HV.",
-    ],
-    tasks: [{ type: "item", id: "2CA6F3BD5D88EE26", item: "gtceu:ilc_chip", count: 4 }, { type: "item", id: "25078E469CB4E802", item: "gtceu:ram_chip", count: 4 }],
-    rewards: [{ type: "xp", id: "22837AE7060D658D", xp: 35 }],
-  },
-  {
-    key: "MV_MV_GREENHOUSE", id: "3AE74DC5E01AD916", title: "MV Greenhouse", icon: "gtceu:mv_greenhouse", shape: "gear", size: 1.5, deps: ["MV_MV_COMPONENTS"], x: 4, y: 3,
-    desc: [
-      "Many more crops at once than the LV one, and it takes carbon dioxide on top of the fertilizer: the harvest grows by half, with oxygen back for the blast furnace.",
-      "The logs go to pyrolysis and the crops to the brewery.",
-    ],
-    tasks: [{ type: "item", id: "59AE03D63045757C", item: "gtceu:mv_greenhouse" }],
-    rewards: [{ type: "xp", id: "4251E295C87B7454", xp: 60 }, { type: "item", id: "3F99F7EF4A1613B8", item: "minecraft:wheat_seeds", count: 4 }],
+    key: "MV_MV_GREENHOUSE", id: "3AE74DC5E01AD916",     title: "MV Greenhouse", icon: "gtceu:mv_greenhouse", kind: "machine", deps: ["MV_MV_COMPONENTS"], x: 4, y: 3,
+        teach: {
+          for: "Far more crops than the LV one.",
+          needs: "Fertilizer, plus carbon dioxide for half again the harvest.",
+          unlocks: "Logs for pyrolysis, crops for the brewery, oxygen for the blast furnace.",
+          automate: "Seeds in by bus, harvest out by bus.",
+        },
+        desc: [],
+        tasks: [{ type: "item", id: "59AE03D63045757C", item: "gtceu:mv_greenhouse" }],
+        rewards: [{ type: "xp", id: "4251E295C87B7454", xp: 60 }],
   },
   {
     key: "MV_PYROLYSIS", id: "7168260562812CF8", title: "Pyrolysis", icon: "gtceu:pyrolyse_oven", deps: ["MV_MV_GREENHOUSE"], x: 4, y: 6,
@@ -166,19 +208,28 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "7432D0E71BD682FE", xp: 30 }],
   },
   {
-    key: "MV_BIOREFINERY", id: "62C555A8293900FA", title: "Biorefinery", icon: "gtceu:biorefinery", shape: "gear", size: 1.5, deps: ["MV_METHANOL"], x: 12, y: 6,
-    desc: [
-      "A distillery gets one fraction out per run and the rest never comes out. The &6Biorefinery&r is a column that keeps them all, one hatch per layer.",
-      "It only takes organic feedstock, wood and biomass and the like. Crude oil waits for the distillation tower.",
-    ],
+    key: "MV_BIOREFINERY", id: "62C555A8293900FA",     title: "Biorefinery", icon: "gtceu:biorefinery", kind: "plant", deps: ["MV_METHANOL"], x: 12, y: 6,
+        teach: {
+          for: "A column that keeps every fraction, one hatch per layer.",
+          needs: "Organic feedstock: wood, biomass and the like.",
+          unlocks: "Ethanol for ethylene, and so for plastic.",
+          automate: "Pipe feedstock in, one pipe out per layer.",
+        },
+        desc: [
+          "Crude oil waits for the distillation tower.",
+        ],
     tasks: [{ type: "item", id: "6D666454092B45EE", item: "gtceu:biorefinery" }],
     rewards: [{ type: "xp", id: "36C63C01BD92A0F6", xp: 40 }],
   },
   {
-    key: "MV_MV_FLUID_DRILLING_RIG", id: "1A38798F23E8EA97", title: "MV Fluid Drilling Rig", icon: "gtceu:mv_fluid_drilling_rig", shape: "gear", size: 1.5, deps: ["MV_MV_COMPONENTS"], x: 6, y: 1.5,
-    desc: [
-      "GregTech's rig pumps oil, gas or salt water from the fluid vein under it. Veins never run dry in this pack, and the Flatlands and the Void have oil and gas too, so pick a spot once and leave it there.",
-    ],
+    key: "MV_MV_FLUID_DRILLING_RIG", id: "1A38798F23E8EA97", title: "MV Fluid Drilling Rig",     icon: "gtceu:mv_fluid_drilling_rig", kind: "machine", deps: ["MV_MV_COMPONENTS"], x: 6, y: 1.5,
+        teach: {
+          for: "Pumps oil, gas or salt water from the fluid vein under it.",
+          needs: "Drilling fluid and power.",
+          unlocks: "Diesel, brine and everything downstream.",
+          automate: "Veins never run dry: pick a spot once and pipe it out.",
+        },
+        desc: [],
     tasks: [{ type: "item", id: "0721BC67872504EC", item: "gtceu:mv_fluid_drilling_rig" }],
     rewards: [{ type: "xp", id: "58FE1CD5AD9C17E5", xp: 50 }],
   },
@@ -201,7 +252,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "609D15E06779863F", xp: 30 }],
   },
   {
-    key: "MV_ETHYLENE_AND_PE", id: "0D69D5BBC371A5B7", title: "Ethylene and PE", icon: "gtceu:lv_chemical_reactor", deps: ["MV_BIOREFINERY"], x: 14, y: 3,
+    key: "MV_ETHYLENE_AND_PE", id: "0D69D5BBC371A5B7", title: "Ethylene and PE", icon: "gtceu:lv_chemical_reactor", deps: ["MV_BIOREFINERY"], x: 14, y: 4.5,
     desc: [
       "Ethanol and sulfuric acid give ethylene, and ethylene with air or oxygen gives polyethylene, your first plastic. Transistors and the HV hull are both waiting on it.",
     ],
@@ -209,7 +260,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5946CE65167C48A5", xp: 30 }],
   },
   {
-    key: "MV_PVC", id: "0F6966AED46B5795", title: "PVC", icon: "gtceu:mv_mixer", deps: ["MV_ETHYLENE_AND_PE","MV_BRINE_AND_CHLORINE"], x: 14, y: 4.5,
+    key: "MV_PVC", id: "0F6966AED46B5795", title: "PVC", icon: "gtceu:mv_mixer", deps: ["MV_ETHYLENE_AND_PE","MV_BRINE_AND_CHLORINE"], x: 14, y: 3,
     desc: [
       "Chlorine and ethylene make vinyl chloride, and that polymerizes into PVC. The hazmat suit is mostly PVC.",
     ],
@@ -217,7 +268,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5DE2D5B9164A186F", xp: 30 }],
   },
   {
-    key: "MV_TRANSISTORS_AND_RESISTORS", id: "6A521D8B1437F9E4", title: "Transistors and Resistors", icon: "gtceu:transistor", deps: ["MV_ETHYLENE_AND_PE"], x: 14, y: 1.5,
+    key: "MV_TRANSISTORS_AND_RESISTORS", id: "6A521D8B1437F9E4", title: "Transistors and Resistors", icon: "gtceu:transistor", deps: ["MV_ETHYLENE_AND_PE"], x: 16, y: 1.5,
     desc: [
       "The small parts the integrated circuits eat by the handful. Transistors need silicon and polyethylene, and the plastic only just arrived. The assembler now makes resistors in batches, too.",
     ],
@@ -225,23 +276,43 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "24107FFF763CEE90", xp: 30 }],
   },
   {
-    key: "MV_INTEGRATED_CIRCUITS", id: "1617CBC90D126D2F", title: "Integrated Circuits", icon: "gtceu:good_integrated_circuit", deps: ["MV_ILC_AND_RAM","MV_TRANSISTORS_AND_RESISTORS"], x: 16, y: 0,
-    desc: [
-      "The first circuits with a real chip inside. The basic one counts as an LV circuit and the good one as MV, and the circuit assembler makes both.",
-    ],
-    tasks: [{ type: "item", id: "647511CD759A7CB8", item: "gtceu:basic_integrated_circuit", count: 4 }, { type: "item", id: "7EE54ED2F26F26DA", item: "gtceu:good_integrated_circuit", count: 4 }],
-    rewards: [{ type: "xp", id: "6E0340634B4E4921", xp: 40 }],
-  },
-  {
-    key: "MV_ADVANCED_INTEGRATED_CIRCUIT", id: "49BA4B42FA5DD586", title: "Advanced Integrated Circuit", icon: "gtceu:advanced_integrated_circuit", deps: ["MV_INTEGRATED_CIRCUITS","MV_TRANSISTORS_AND_RESISTORS"], x: 18, y: 0,
-    desc: [
-      "The HV circuit, made on MV power. It wants a bit of everything the chip line makes, and the cleanroom won't build without it.",
-    ],
+    key: "MV_INTEGRATED_CIRCUITS", id: "1617CBC90D126D2F",     title: "Basic Integrated Circuit", icon: "gtceu:basic_integrated_circuit", kind: "circuit", deps: ["MV_ILC","MV_RAM","MV_TRANSISTORS_AND_RESISTORS"], x: 16, y: 0,
+        teach: {
+          for: "The first circuit with a real chip inside, counted as LV.",
+          needs: "ILC and RAM chips, transistors and resistors.",
+          unlocks: "The good integrated circuit.",
+          automate: "The circuit assembler, fed by bus from the chip lines.",
+        },
+        desc: [],
+        tasks: [{ type: "item", id: "647511CD759A7CB8", item: "gtceu:basic_integrated_circuit", count: 8 }],
+        rewards: [{ type: "xp", id: "6E0340634B4E4921", xp: 35 }],
+      },
+      {
+        key: "MV_GOOD_INTEGRATED_CIRCUIT", title: "Good Integrated Circuit", icon: "gtceu:good_integrated_circuit", kind: "circuit", deps: ["MV_INTEGRATED_CIRCUITS"], x: 18, y: 0,
+        teach: {
+          for: "The MV circuit, a step up from basic.",
+          needs: "Basic circuits, ILC and RAM chips, more transistors.",
+          unlocks: "The advanced integrated circuit and the HV hull.",
+          automate: "Same circuit assembler; keep the basics buffered.",
+        },
+        desc: [],
+        tasks: [{ type: "item", item: "gtceu:good_integrated_circuit", count: 8 }],
+        rewards: [{ type: "xp", xp: 40 }],
+      },
+      {
+        key: "MV_ADVANCED_INTEGRATED_CIRCUIT", id: "49BA4B42FA5DD586", title: "Advanced Integrated Circuit", icon: "gtceu:advanced_integrated_circuit", kind: "circuit", deps: ["MV_GOOD_INTEGRATED_CIRCUIT","MV_ULPIC"], x: 20, y: 0,
+        teach: {
+          for: "The HV circuit, made on MV power.",
+          needs: "Good circuits and ULPIC chips.",
+          unlocks: "The cleanroom.",
+          automate: "Circuit assembler on a bus, ULPIC chips stocked.",
+        },
+        desc: [],
     tasks: [{ type: "item", id: "23078925A3CD9598", item: "gtceu:advanced_integrated_circuit", count: 8 }],
     rewards: [{ type: "xp", id: "60E0CBE6799FF623", xp: 50 }],
   },
   {
-    key: "MV_HAZMAT_SUIT", id: "7B6466252E0C044A", title: "Hazmat Suit", icon: "gtceu:hazmat_chestpiece", deps: ["MV_PVC"], x: 14, y: 6,
+    key: "MV_HAZMAT_SUIT", id: "7B6466252E0C044A", title: "Hazmat Suit", icon: "gtceu:hazmat_chestpiece", deps: ["MV_PVC"], x: 14, y: 1.5,
     desc: [
       "GregTech's hazards are on in this pack, and some of what you handle from here on will hurt you. The &6Hazmat Suit&r keeps it off you, with PVC on the outside and an activated carbon filter in the mask.",
       "The carbon comes from pyrolysis with nitrogen in the hatch.",
@@ -250,7 +321,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "66D264C84F214235", xp: 45 }],
   },
   {
-    key: "MV_HV_MACHINE_HULL", id: "01AAEC5F1DC1C5EE", title: "HV Machine Hull", icon: "gtceu:hv_machine_hull", deps: ["MV_ETHYLENE_AND_PE"], x: 18, y: 1.5,
+    key: "MV_HV_MACHINE_HULL", id: "01AAEC5F1DC1C5EE", title: "HV Machine Hull", icon: "gtceu:hv_machine_hull", deps: ["MV_TRANSISTORS_AND_RESISTORS"], x: 18, y: 1.5,
     desc: [
       "Hull number three, in stainless steel with polyethylene trim. Both the furnace and the plastic line have to be running for this one.",
     ],
@@ -266,7 +337,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "1C8DB2E0CEAB0D08", xp: 40 }],
   },
   {
-    key: "MV_AE2_GROWS_UP", id: "63CD92CD1D3FC989", title: "AE2 Grows Up", icon: "ae2:controller", optional: true, deps: ["MV_INTEGRATED_CIRCUITS"], x: 18, y: -1.5,
+    key: "MV_AE2_GROWS_UP", id: "63CD92CD1D3FC989", title: "AE2 Grows Up", icon: "ae2:controller", optional: true, deps: ["MV_RAM"], x: 16, y: -3,
     desc: [
       "Applied Flux, which stores FE in the network, and the wireless pattern terminals both need MV circuits in this pack. Build whichever you'll actually use.",
     ],
@@ -280,14 +351,17 @@ export const QUESTS = [
       "The &6Cleanroom&r closes MV. Past it is HV, and at the end of HV, the Moon.",
     ],
     tasks: [{ type: "item", id: "004271B08D0CFDDF", item: "gtceu:cleanroom" }],
-    rewards: [{ type: "xp", id: "16A43F54CF171ADA", xp: 150 }, { type: "item", id: "7E0A8B43D7625BFF", item: "minecraft:torch", count: 16 }],
+        rewards: [{ type: "xp", id: "16A43F54CF171ADA", xp: 150 }],
   },
   {
-    key: "MV_RADIO_TELESCOPE", id: "1E1E4E32D9532D1A", title: "Radio Telescope", icon: "gtceu:radio_telescope", shape: "gear", size: 1.5, deps: ["MV_MV_COMPONENTS","lv:LV_PHOTOGRAPHIC_LUNAR_MAP","lv:LV_LUNAR_EPHEMERIS"], x: 4, y: -3,
-    desc: [
-      "Radio doesn't mind clouds, so the &6Radio Telescope&r works right through the rain. A thunderstorm is another matter: the lightning drowns out the echo. It still needs the Moon in the sky, so nights only.",
-      "It reads the LV map and ephemeris and never uses them up.",
-    ],
+    key: "MV_RADIO_TELESCOPE", id: "1E1E4E32D9532D1A", title: "Radio Telescope",     icon: "gtceu:radio_telescope", kind: "machine", deps: ["MV_MV_COMPONENTS","lv:LV_PHOTOGRAPHIC_LUNAR_MAP","lv:LV_LUNAR_EPHEMERIS"], x: 4, y: -3,
+        teach: {
+          for: "Radar echoes of the Moon, through rain but not thunderstorms.",
+          needs: "The LV map and ephemeris, never used up, and a night sky.",
+          unlocks: "The lunar landing-site chart.",
+          automate: "It reads the sky by itself; just keep it powered.",
+        },
+        desc: [],
     tasks: [{ type: "item", id: "5A0E7C41B2D93F18", item: "gtceu:radio_telescope" }],
     rewards: [{ type: "xp", id: "1B7C4D2A9E035F61", xp: 40 }],
   },
@@ -325,10 +399,14 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5E0A7D3C1F92B684", xp: 50 }],
   },
   {
-    key: "MV_ENGINE_TEST_STAND", id: "115744A9113F8B38", title: "Engine Test Stand", icon: "gtceu:engine_test_stand", shape: "gear", size: 1.5, deps: ["MV_RP_1"], x: 10, y: 4.5,
-    desc: [
-      "Fires rocket engines while they're bolted to the ground, which is the right order to do things in. Your first rocket's thrusters and its motor both get a burn here before they're allowed to fly.",
-    ],
+    key: "MV_ENGINE_TEST_STAND", id: "115744A9113F8B38", title: "Engine Test Stand",     icon: "gtceu:engine_test_stand", kind: "machine", deps: ["MV_RP_1"], x: 10, y: 4.5,
+        teach: {
+          for: "Fires rocket engines bolted to the ground, before they fly.",
+          needs: "RP-1 and oxygen.",
+          unlocks: "Qualified thrusters, and HV's rocket motor.",
+          automate: "Pipe both fuels in; thrusters go in and out by bus.",
+        },
+        desc: [],
     tasks: [{ type: "item", id: "7D3B0E92A6C41F58", item: "gtceu:engine_test_stand" }],
     rewards: [{ type: "xp", id: "2B6F4C9E8D0A17E3", xp: 60 }],
   },
@@ -422,11 +500,15 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "68EC208C4D9846BA", xp: 50 }],
   },
   {
-    key: "MV_PLASTIC_BY_THE_SHEET", id: "3B42346CE2FA1CC4", title: "Plastic by the Sheet", icon: "gtceu:polymer_works", shape: "gear", size: 1.25, deps: ["MV_ETHYLENE_AND_PE"], x: 16, y: 4.5,
-    desc: [
-      "The &6Polymer Works&r turns raw inputs into polyethylene and rubber sheets in a single recipe, with no chemical reactor, mixer and solidifier chain in between. It runs several at once, up to what your hatch voltage allows.",
-    ],
-    tasks: [{ type: "item", id: "15FEC3AC6D61B5F5", item: "gtceu:polymer_works" }],
-    rewards: [{ type: "xp", id: "3236E3D5ABD0F3DA", xp: 50 }, { type: "item", id: "1CC5EF3BF4664077", item: "gtceu:polyethylene_plate", count: 16 }],
+    key: "MV_PLASTIC_BY_THE_SHEET", id: "3B42346CE2FA1CC4", title: "Plastic by the Sheet",     icon: "gtceu:polymer_works", kind: "plant", deps: ["MV_ETHYLENE_AND_PE"], x: 16, y: 4.5,
+        teach: {
+          for: "Polyethylene and rubber sheets in one recipe, with no reactor chain between.",
+          needs: "The raw inputs, and hatch voltage for the batch size.",
+          unlocks: "Plastic by the sheet for every later build.",
+          automate: "Raw inputs in by pipe and bus, sheets out by bus.",
+        },
+        desc: [],
+        tasks: [{ type: "item", id: "15FEC3AC6D61B5F5", item: "gtceu:polymer_works" }],
+        rewards: [{ type: "xp", id: "3236E3D5ABD0F3DA", xp: 50 }],
   },
 ];
