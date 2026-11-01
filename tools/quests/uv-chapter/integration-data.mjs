@@ -119,7 +119,7 @@ export const QUESTS = [
     key: 'I_U233', kind: 'process', title: 'Back to Uranium-233', icon: 'gtceu:fuel_fabrication_plant',
     deps: ['I_THOR'], x: 4, y: 2,
     teach: {
-      for: "The IV &6Fuel Fabrication Plant&r learns three thorium rows, and a U-233 rod for IV's fission reactor.",
+      for: "The IV &6Fuel Fabrication Plant&r learns three thorium rows, and a uranium rod for IV's fission reactor.",
       needs: 'Thorium dust, oxygen, carbon and nitrogen-15, and the uranium-233 the pyroprocessing cell hands back.',
       unlocks: 'Thorium oxide and nitride assemblies, and a fission reactor that burns what the thorium bred.',
       automate: 'Send the bred metal straight to the plant and the spent rods back to the cell.',

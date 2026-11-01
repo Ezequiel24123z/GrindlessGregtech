@@ -211,7 +211,7 @@ export const QUESTS = [
   },
   {
     key: 'J_SGR', kind: 'milestone', title: 'The Shadow', icon: 'grindless:sgr_a_star_image', size: 1.25,
-    deps: ['J_HELIO'], x: 22, y: -1.5,
+    deps: ['J_CRAFT'], x: 27, y: -1.5,
     desc: [
       'An interferometer the size of a planet is out of reach, so this one is an extrapolation: the &6Sgr A* Image&r is pieced together from many telescopes. It opens the UHV hatch.',
     ],
@@ -240,7 +240,7 @@ export const QUESTS = [
   },
   {
     key: 'J_LAUNCH', kind: 'step', title: 'Starshot', icon: 'grindless:starshot_probe',
-    deps: ['J_HELIO', 'J_CRAFT'], x: 26, y: 0,
+    deps: ['J_CRAFT'], x: 26, y: 0,
     desc: [
       'On the Moon, a whole array of fibre lasers points at one sail and pushes. The heliopause data sets the course, and every launch wears the modules: keep the refurbishing going.',
     ],
