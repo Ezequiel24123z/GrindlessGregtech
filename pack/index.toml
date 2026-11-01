@@ -26,7 +26,7 @@ hash = "76698e7baae2cd11f7a160e067fdb9e8c397339a426e7fd5cd4e9cc792eb0f70"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/hv_age.snbt"
-hash = "013d0e86b326403faa4470230e45c7d5a2ea9a7353885b2f623a8fc14a398208"
+hash = "ef775f61074756046356c32e9c4f103764e0a9b67de2068e19f79d216118a7f9"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/iv_age.snbt"
@@ -110,11 +110,11 @@ hash = "fe0179ea4cd7c4872efde1f9e44a7b0f4d058f1d514a07b9ec1580d8e6182106"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
-hash = "5d4e3aa35805cd4c137c89ec7158b05a5b2a37965700a577a86e1b28a81455a1"
+hash = "54c067626457f71546152ccca8c5273d4cf153816054cefc60f5c4c246164e84"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
-hash = "8d2c6cdba68c88bb93abaf47bc0ce2878939b2c7d66c2b850e2226f510367851"
+hash = "31a735d289e81c0d9935d20722419c3f3ea67091beca5673ed28a93b5aa4a3d2"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/opv_age.snbt"
@@ -17426,7 +17426,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "121d4831d8a636582f16bf1610d5c7bcdd26b48df155bc80b8ed6ca728a1d0bc"
+hash = "5323ac93cfebc82156909509e8c477bdbf5e0ffbfc075baa35f0f8f1bd3ff57d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_city.json"

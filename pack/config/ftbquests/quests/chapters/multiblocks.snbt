@@ -4247,17 +4247,6 @@
 			y: 86.0d
 		}
 		{
-			icon: "gtceu:bound_matter_press"
-			id: "174E22FC37CBD20F"
-			rewards: [{ id: "4CFC296F72BAE36A", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "MAX, Grindless"
-			tasks: [{ id: "3E7FDC93EE15871D", item: "gtceu:bound_matter_press", type: "item" }]
-			x: 6.0d
-			y: 86.0d
-		}
-		{
 			icon: "gtceu:cluster_light_furnace"
 			id: "1D704CC1E3E59FD1"
 			rewards: [{ id: "3592846A88F2DC89", type: "xp", xp: 10 }]
@@ -4265,18 +4254,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "7BFE277379B2CF91", item: "gtceu:cluster_light_furnace", type: "item" }]
-			x: 8.0d
-			y: 86.0d
-		}
-		{
-			icon: "gtceu:condensate_refinery"
-			id: "195DBA7A76DE3894"
-			rewards: [{ id: "4BB04961B17414F7", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.5d
-			subtitle: "MAX, Grindless"
-			tasks: [{ id: "3FCEE49577866653", item: "gtceu:condensate_refinery", type: "item" }]
-			x: 10.0d
+			x: 6.0d
 			y: 86.0d
 		}
 		{
@@ -4287,7 +4265,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "49A3B16EEB7AC18A", item: "gtceu:ergoregion_synchroniser", type: "item" }]
-			x: 12.0d
+			x: 8.0d
 			y: 86.0d
 		}
 		{
@@ -4298,7 +4276,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "1B0CEBA407CB56A9", item: "gtceu:gene_ark", type: "item" }]
-			x: 14.0d
+			x: 10.0d
 			y: 86.0d
 		}
 		{
@@ -4309,7 +4287,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "3806BCE6A8830613", item: "gtceu:geroch_winch", type: "item" }]
-			x: 16.0d
+			x: 12.0d
 			y: 86.0d
 		}
 		{
@@ -4320,7 +4298,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "15C948A598026D2E", item: "gtceu:horizon_flux_clamp", type: "item" }]
-			x: 18.0d
+			x: 14.0d
 			y: 86.0d
 		}
 		{
@@ -4331,7 +4309,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "7E08DB561025D622", item: "gtceu:horizon_interferometer", type: "item" }]
-			x: 20.0d
+			x: 16.0d
 			y: 86.0d
 		}
 		{
@@ -4342,7 +4320,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "2DDDE590AAB9BFD8", item: "gtceu:mass_stream_injector", type: "item" }]
-			x: 22.0d
+			x: 18.0d
 			y: 86.0d
 		}
 		{
@@ -4353,7 +4331,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "5E711DBE4A1696AA", item: "gtceu:membrane_line", type: "item" }]
-			x: 24.0d
+			x: 20.0d
 			y: 86.0d
 		}
 		{
@@ -4364,8 +4342,8 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "1FCFDA582FF00C51", item: "gtceu:mirror_shell", type: "item" }]
-			x: 2.0d
-			y: 88.0d
+			x: 22.0d
+			y: 86.0d
 		}
 		{
 			icon: "gtceu:photon_ring_imager"
@@ -4375,8 +4353,8 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "4A9D341092B09E12", item: "gtceu:photon_ring_imager", type: "item" }]
-			x: 4.0d
-			y: 88.0d
+			x: 24.0d
+			y: 86.0d
 		}
 		{
 			icon: "gtceu:rydberg_array_works"
@@ -4386,7 +4364,7 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "285C699AD4865827", item: "gtceu:rydberg_array_works", type: "item" }]
-			x: 6.0d
+			x: 2.0d
 			y: 88.0d
 		}
 		{
@@ -4397,8 +4375,217 @@
 			size: 1.5d
 			subtitle: "MAX, Grindless"
 			tasks: [{ id: "50CB616DAB71ABDC", item: "gtceu:segment_reclamation_works", type: "item" }]
-			x: 8.0d
+			x: 4.0d
 			y: 88.0d
+		}
+		{
+			icon: "grindless:horizon_machine_casing"
+			id: "1679EC12A2EC3235"
+			shape: "rsquare"
+			size: 1.5d
+			subtitle: "MAX+ multiblocks"
+			tasks: [{ id: "5169E14916784348", type: "checkmark" }]
+			title: "MAX+"
+			x: 0.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:blueshift_forge"
+			id: "548BC9491FF27FE9"
+			rewards: [{ id: "3731FE67EBEAC67D", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "2C1B45C24B397B4D", item: "gtceu:blueshift_forge", type: "item" }]
+			x: 2.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:bound_matter_press"
+			id: "174E22FC37CBD20F"
+			rewards: [{ id: "4CFC296F72BAE36A", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "3E7FDC93EE15871D", item: "gtceu:bound_matter_press", type: "item" }]
+			x: 4.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:condensate_assembler"
+			id: "1DF4CDE39BBFEE46"
+			rewards: [{ id: "1F64286766F95039", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "73925828E4B71102", item: "gtceu:condensate_assembler", type: "item" }]
+			x: 6.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:condensate_refinery"
+			id: "195DBA7A76DE3894"
+			rewards: [{ id: "4BB04961B17414F7", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "3FCEE49577866653", item: "gtceu:condensate_refinery", type: "item" }]
+			x: 8.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:hills_slingshot"
+			id: "4D401FE132B2652B"
+			rewards: [{ id: "6EA778CBDE0FA765", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "7F986B0ADEB86910", item: "gtceu:hills_slingshot", type: "item" }]
+			x: 10.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:horizon_capacitor_bank"
+			id: "25206AA063CF35DB"
+			rewards: [{ id: "497F99D64F678F36", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "270164550650A8D0", item: "gtceu:horizon_capacitor_bank", type: "item" }]
+			x: 12.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:horizon_crystal_furnace"
+			id: "3AB57932B5D5B605"
+			rewards: [{ id: "1B52A92EB412EF26", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "1B76D86EAF153C99", item: "gtceu:horizon_crystal_furnace", type: "item" }]
+			x: 14.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:hyper_assembly_array"
+			id: "297C3F2A52117DEB"
+			rewards: [{ id: "53092E7FF03DEC9E", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "3C511407F32238C7", item: "gtceu:hyper_assembly_array", type: "item" }]
+			x: 16.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:hyperfactory"
+			id: "13557E2F6C5D8C8C"
+			rewards: [{ id: "7B504951457C7452", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "795A57A3646B8A7A", item: "gtceu:hyperfactory", type: "item" }]
+			x: 18.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:hyperstargate"
+			id: "2F36685111CA9CB0"
+			rewards: [{ id: "526F439F557E6E02", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "4527C59F2BD5D525", item: "gtceu:hyperstargate", type: "item" }]
+			x: 20.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:meta_material_loom"
+			id: "4FB122DAAC9F635D"
+			rewards: [{ id: "2BB59CE68ADEF6D1", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "4445A791BC22DEB9", item: "gtceu:meta_material_loom", type: "item" }]
+			x: 22.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:multi_plasma_blender"
+			id: "21DF79D01B3AECAE"
+			rewards: [{ id: "37AC7486E8CFFCEC", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "134419FD8BD69524", item: "gtceu:multi_plasma_blender", type: "item" }]
+			x: 24.0d
+			y: 91.0d
+		}
+		{
+			icon: "gtceu:nickel_56_burner"
+			id: "7531588FDFF466D9"
+			rewards: [{ id: "2674626667BBBE46", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "4E9ACDAB87ECC882", item: "gtceu:nickel_56_burner", type: "item" }]
+			x: 2.0d
+			y: 93.0d
+		}
+		{
+			icon: "gtceu:pair_instability_crucible"
+			id: "567DDF49DB76F99F"
+			rewards: [{ id: "28234BB7CB103CE7", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "48421AB4AE96D548", item: "gtceu:pair_instability_crucible", type: "item" }]
+			x: 4.0d
+			y: 93.0d
+		}
+		{
+			icon: "gtceu:primordial_fusion_torus"
+			id: "1D386ECAB8E03B5D"
+			rewards: [{ id: "3BE3AC1D229566C7", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "6F3A9890DB8AB138", item: "gtceu:primordial_fusion_torus", type: "item" }]
+			x: 6.0d
+			y: 93.0d
+		}
+		{
+			icon: "gtceu:pristine_gas_works"
+			id: "42EB9B85FDDDD3C4"
+			rewards: [{ id: "24A3BC37C5BC2C95", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "49CDDB10D3086282", item: "gtceu:pristine_gas_works", type: "item" }]
+			x: 8.0d
+			y: 93.0d
+		}
+		{
+			icon: "gtceu:tarantula_stellar_lift"
+			id: "2DA6CE839AD16199"
+			rewards: [{ id: "5E913354EC60A9E7", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "7FAD1E7064DF88C1", item: "gtceu:tarantula_stellar_lift", type: "item" }]
+			x: 10.0d
+			y: 93.0d
+		}
+		{
+			icon: "gtceu:void_crystal_fab"
+			id: "52D50E987E4816B7"
+			rewards: [{ id: "10ED6CB51F552723", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "39D28D4CC856C404", item: "gtceu:void_crystal_fab", type: "item" }]
+			x: 12.0d
+			y: 93.0d
 		}
 	]
 	subtitle: ["Every multiblock controller you can build, tier by tier"]
