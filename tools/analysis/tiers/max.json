@@ -150,7 +150,7 @@
       "label": "The belt (gate c15) and the ending",
       "items": [
         "grindless:launched_belt_seed", "grindless:nsc_planetesimal",         "grindless:universe_seed",
-        "m:gtceu:mass_stream_injector", "m:gtceu:mirror_shell", "m:gtceu:accretion_feeder", "m:gtceu:cluster_light_furnace",
+        "m:gtceu:mass_stream_injector", "m:gtceu:mirror_shell", "m:gtceu:accretion_feeder", "m:gtceu:cluster_light_furnace", "m:gtceu:horizon_flux_clamp",
         "grindless:stream_bundle", "grindless:stream_pellet", "grindless:stream_bundle_block", "grindless:stream_turn_casing", "grindless:mirror_shell_segment", "grindless:feeder_coil_casing"
       ]
     }
