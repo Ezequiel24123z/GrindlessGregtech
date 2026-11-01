@@ -99,6 +99,13 @@
   // MAX-B3 L43 (c14): a plate of quartz zone-refined under argon until its OH content is below the cell's absorption budget
   TABLE.push({ name: 'ultrapure_silica_plate', type: 'zone_refining', circuit: 14, itemsIn: [item('gtceu:silicon_dioxide_dust', 8)],
     fluidsIn: [fluid('gtceu:argon', 2000)], itemsOut: [item('grindless:ultrapure_silica_plate', 1)], fluidsOut: [], eut: UVA, duration: 1000 })
+  // MX-S1 L49 (max.md, c15): indium sulfate reduced in hydrogen and zone-refined to 6N indium; the sulfuric acid goes back to the cascade
+  TABLE.push({ name: 'six_n_indium', type: 'zone_refining', circuit: 15, itemsIn: [item('grindless:indium_sulfate', 2)],
+    fluidsIn: [fluid('gtceu:argon', 1000), fluid('gtceu:hydrogen', 3000)], itemsOut: [item('grindless:six_n_indium', 2)],
+    fluidsOut: [fluid('gtceu:sulfuric_acid', 3000)], eut: UVA, duration: 1200 })
+  // MX-S1 L57 (max.md, c16): silicon dust float-zoned under argon into the float-zone rod of the phasemeter wafers
+  TABLE.push({ name: 'fz_silicon_rod', type: 'zone_refining', circuit: 16, itemsIn: [item('gtceu:silicon_dust', 8)],
+    fluidsIn: [fluid('gtceu:argon', 1000)], itemsOut: [item('grindless:fz_silicon_rod', 1)], fluidsOut: [], eut: UVA, duration: 1000 })
 
   D.recipes = TABLE.map(function (t) {
     return {

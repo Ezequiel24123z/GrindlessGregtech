@@ -766,6 +766,13 @@
       itemIn: 'grindless:spent_wolter_module', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000]],
       itemsOut: [['gtceu:iridium_dust', 2]], fluidsOut: [['minecraft:water', 2000]],
       eut: 1920, duration: 300
+    },
+    // MX-S1 row (circuit 21; max.md L47 step 1): platinum dust dissolved in aqua regia and reduced to the platinum sponge of the test masses
+    {
+      name: 'gr_platinum_sponge', circuit: 21,
+      itemIn: 'gtceu:platinum_dust', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:hydrogen', 1000]],
+      itemsOut: [['grindless:gr_platinum_sponge', 1]], fluidsOut: [['minecraft:water', 1000]],
+      eut: 1920, duration: 300
     }
   ]
 

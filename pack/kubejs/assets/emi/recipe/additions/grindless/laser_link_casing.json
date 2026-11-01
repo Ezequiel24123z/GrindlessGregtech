@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:laser_link_casing"],
+  "text": ["emi.grindless.info.laser_link_casing.0"]
+}

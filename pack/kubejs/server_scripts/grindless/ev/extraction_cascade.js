@@ -423,6 +423,15 @@
       itemsOut: [],
       fluidsOut: [{ id: 'gtceu:sn_li_eutectic', amount: 1000 }, { id: KEROSENE, amount: 950 }],
       eut: 1920, duration: 100
+    },
+    // MX-S1 (max.md, L49 step 1, c31; repeat by item inputs): indium dust leached in sulfuric acid to indium sulfate; the hydrogen is the one the zone refiner's reduction consumes
+    {
+      name: 'indium_sulfate', mode: 'max', circuit: 31,
+      itemsIn: [{ id: 'gtceu:indium_dust', count: 2 }],
+      fluidsIn: [{ id: 'gtceu:sulfuric_acid', amount: 3000 }],
+      itemsOut: [{ id: 'grindless:indium_sulfate', count: 2 }],
+      fluidsOut: [{ id: 'gtceu:hydrogen', amount: 3000 }],
+      eut: 1920, duration: 100
     }
   ]
 

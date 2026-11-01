@@ -31,7 +31,8 @@
     "MAX-R1": { "label": "cluster-light furnace", "landedWhen": ["gtceu:cluster_light_furnace"] },
     "MAX-E1": { "label": "accretion feeder", "landedWhen": ["gtceu:accretion_feeder"] },
     "MX-S3": { "label": "horizon flux clamp", "landedWhen": ["gtceu:horizon_flux_clamp"] },
-    "MX-S4": { "label": "segment reclamation works", "landedWhen": ["gtceu:segment_reclamation_works"] }
+    "MX-S4": { "label": "segment reclamation works", "landedWhen": ["gtceu:segment_reclamation_works"] },
+    "MX-S1": { "label": "horizon interferometer", "landedWhen": ["gtceu:horizon_interferometer"] }
   },
   "conditions": {
     "dimension": {
@@ -52,6 +53,7 @@
     { "machine": "gtceu:segment_reclamation_works", "types": ["gtceu:segment_reclamation"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S4" },
     { "machine": "gtceu:accretion_feeder", "types": ["gtceu:accretion_power"], "maxEUt": 8589934592, "needs": ["eu:opv"], "package": "MAX-E1" },
     { "machine": "gtceu:horizon_flux_clamp", "types": ["gtceu:horizon_flux_clamp"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S3" },
+        { "machine": "gtceu:horizon_interferometer", "types": ["gtceu:horizon_interferometry"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S1" },
     { "id": "gtceu:warp_gate@max", "machine": "gtceu:warp_gate", "types": ["gtceu:warp_gate"], "maxEUt": 8589934592,     "needs": ["eu:opv"], "package": "MAX-T1" },
         { "id": "gtceu:assembly_line@max", "machine": "gtceu:assembly_line", "types": ["gtceu:assembly_line"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1", "note": "MAX components run on the OpV hatch pair the same way OpV rows ran on UXV." },
         { "id": "gtceu:assembly_hall@max", "machine": "gtceu:assembly_hall", "types": ["gtceu:assembler", "gtceu:circuit_assembler"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
@@ -143,7 +145,8 @@
       "label": "Sgr A* orbit (gate c14): the charts, the shell parts and the belt seed",
       "items": [
         "grindless:sgr_a_spin_map", "grindless:nsc_ephemeris", "grindless:shell_gradient_map", "grindless:final_spin_map", "grindless:launched_gc_probe", "grindless:nsc_belt_seed",
-        "m:gtceu:geroch_winch", "grindless:geroch_drum_casing", "grindless:geroch_canister", "grindless:horizon_tether"
+        "m:gtceu:geroch_winch", "m:gtceu:horizon_interferometer", "grindless:geroch_drum_casing", "grindless:geroch_canister", "grindless:horizon_tether",
+        "grindless:test_mass_enclosure_casing", "grindless:laser_link_casing", "grindless:cloud_phase_map"
       ]
     },
     {
@@ -276,11 +279,11 @@
     },
     {
       "id": "site-max-sgra",
-      "label": "Site: the imager, winch, injector, mirror shell, accretion feeder and flux clamp only at Sgr A* orbit",
+      "label": "Site: the imager, winch, injector, mirror shell, accretion feeder, flux clamp and horizon interferometer only at Sgr A* orbit",
       "kind": "site",
-      "types": ["gtceu:photon_ring_imaging", "gtceu:geroch_power", "gtceu:mass_stream_injection", "gtceu:black_hole_bomb", "gtceu:accretion_power", "gtceu:horizon_flux_clamp"],
+      "types": ["gtceu:photon_ring_imaging", "gtceu:geroch_power", "gtceu:mass_stream_injection", "gtceu:black_hole_bomb", "gtceu:accretion_power", "gtceu:horizon_flux_clamp", "gtceu:horizon_interferometry"],
       "dimensions": ["gcyr:black_hole_orbit"],
-      "package": ["MAX-D2", "MAX-D3", "MAX-D4", "MAX-G1", "MAX-E1", "MX-S3"]
+      "package": ["MAX-D2", "MAX-D3", "MAX-D4", "MAX-G1", "MAX-E1", "MX-S3", "MX-S1"]
     },
     {
       "id": "site-max-nsc",
