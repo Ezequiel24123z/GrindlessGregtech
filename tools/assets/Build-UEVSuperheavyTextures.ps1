@@ -79,40 +79,72 @@ function New-Bezel {
     return $c
 }
 
-# window x4..11, y4..9. The cyclotron's ring, clockwise from the left.
-$Ring = @(@(4, 7), @(4, 6), @(5, 5), @(6, 4), @(7, 4), @(8, 4), @(9, 4), @(10, 5), @(11, 6), @(11, 7), @(10, 8), @(9, 9), @(8, 9), @(7, 9), @(6, 9), @(5, 8))
+# Own controller faces (RF-6C): a 12x12 map inside a thin steel frame (x1..14, y1..14), the rest transparent.
+# Map letters: L M D E steel, P pit, l run lamp, 0-9 glow cells of ramp 1, a-j glow cells of ramp 2 (the digit or letter is
+# the cell's phase), any other letter is in the spec's Pal. A ramp is the idle colour, then four glow colours.
+# Mode chase: the glow travels with the phase; twinkle: each phase flickers by itself; fill: cells light in phase order.
+$OwnSteel = @{ L = (Hex 'B0B0B0'); M = (Hex '707070'); D = (Hex '404040'); E = (Hex '222222'); P = (Hex '161616') }
+function New-OwnFace {
+    param($Spec, [int]$Frame, [bool]$Active)
+    if ($Spec.Map.Count -ne 12) { throw 'Own face map needs 12 rows' }
+    $rows = @(('.' * 16), ('.' + ('L' * 13) + 'M.'))
+    foreach ($m in $Spec.Map) { if ($m.Length -ne 12) { throw "Own face row '$m' is not 12 wide" }; $rows += ".L${m}E." }
+    $rows += ('.M' + ('E' * 13) + '.'); $rows += ('.' * 16)
+    $c = New-Canvas; $e = New-Canvas
+    for ($y = 0; $y -lt 16; $y++) { for ($x = 0; $x -lt 16; $x++) {
+        $ch = [string]$rows[$y][$x]
+        if ($ch -eq '.') { continue }
+        if ($ch -ceq 'l') {
+            $v = $(if ($Active) { $LampOn } else { $LampOff }); Set-Px $c $x $y $v
+            if ($Active) { Set-Px $e $x $y $v }
+            continue
+        }
+        $ramp = $null; $d = 0
+        if ($ch -cmatch '[0-9]') { $ramp = $Spec.Ramp; $d = [int]$ch }
+        elseif ($ch -cmatch '[a-j]') { $ramp = $Spec.Ramp2; $d = [int][char]$ch - 97 }
+        if ($ramp) {
+            $k = -1
+            if ($Active) {
+                switch ($Spec.Mode) {
+                    'chase' { $k = ($d + $Frame) % 4 }
+                    'twinkle' { $k = (($d * 3 + $Frame * 2) % 5) - 1 }
+                    'fill' { $t = 1 + 2 * $Frame; if ($d -le $t) { $k = [Math]::Max(0, 3 - ($t - $d)) } }
+                }
+            }
+            if ($k -lt 0) { Set-Px $c $x $y $ramp[0] } else { Set-Both $c $e $x $y $ramp[$k + 1] }
+            continue
+        }
+        if ($OwnSteel.ContainsKey($ch)) { Set-Px $c $x $y $OwnSteel[$ch] }
+        elseif ($Spec.Pal -and $Spec.Pal.ContainsKey($ch)) { Set-Px $c $x $y $Spec.Pal[$ch] }
+        else { throw "Own face: no colour for '$ch'" }
+    } }
+    return @{ C = $c; E = $e }
+}
+
+$Own = @{
+    # the cyclotron: two D-shaped dees with the ion spiral in the gap between them
+    heavy_ion_cyclotron = @{ Mode = 'chase'; Pal = @{}
+        Ramp = @((Hex '2C2A44'), (Hex '6C3CC0'), (Hex 'B484F0'), (Hex 'D8B8FF'), (Hex 'F0E0FF')); Ramp2 = @()
+        Map = @('............', '..MMM01MMM..', '.MDDD23DDDM.', 'MDPPP12PPPDM', 'MDPPP23PPPDM', 'MDPPP30PPPDM', 'MDPPP01PPPDM', '.MDDD12DDDM.', '..MMM23MMM..', '............', '............', '.....ll.....') }
+    # the chemistry lab: a copper-heated column with blue gas moving along it and amber deposits on the detector pads
+    superheavy_chemistry_lab = @{ Mode = 'chase'; Pal = @{ k = (Hex 'B06A38'); q = (Hex '8A4E28') }
+        Ramp = @((Hex '4A2A0A'), (Hex 'C96A0A'), (Hex 'FF9E1F'), (Hex 'FFD15A'), (Hex 'FFF0B0'))
+        Ramp2 = @((Hex '1A2A44'), (Hex '2E5C9C'), (Hex '4F86D0'), (Hex '86B4F0'), (Hex 'C8E0FF'))
+        Map = @('kqkqkqkqkqkq', 'qkqkqkqkqkqk', '.DDDDDDDDDD.', '.DabcdefghD.', '.DPPPPPPPPD.', '.DDDDDDDDDD.', '............', '.0.1.2.3.0.1', 'DDDDDDDDDDDD', '............', '............', '.....ll.....') }
+}
 
 function New-Face {
     param([string]$Machine, [int]$Frame, [bool]$Active)
+    if ($Own.ContainsKey($Machine)) { return New-OwnFace $Own[$Machine] $Frame $Active }
     $c = New-Bezel
     $e = New-Canvas
     for ($y = 4; $y -le 9; $y++) { for ($x = 4; $x -le 11; $x++) { Set-Px $c $x $y $Pit } }
-    switch ($Machine) {
-        'heavy_ion_cyclotron' {
-            foreach ($p in $Ring) { Set-Px $c $p[0] $p[1] (Hex '2C2A44') }
-            Set-Px $c 7 6 (Hex '5A5C70'); Set-Px $c 8 7 (Hex '5A5C70')
-            if ($Active) {
-                $beam = @((Hex 'F0E0FF'), (Hex 'B484F0'), (Hex '6C3CC0'))
-                for ($k = 0; $k -lt 3; $k++) { $p = $Ring[($Frame * 4 + $k) % $Ring.Count]; Set-Both $c $e $p[0] $p[1] $beam[$k] }
-            }
-        }
-        'recoil_separator' {
-            for ($x = 4; $x -le 11; $x++) { Set-Px $c $x 6 (Hex '2C3A44'); Set-Px $c $x 7 (Hex '2C3A44') }
-            foreach ($x in @(5, 8, 10)) { Set-Px $c $x 4 (Hex '8A4C4C'); Set-Px $c $x 9 (Hex '4C4C8A') }
-            if ($Active) {
-                $beam = @((Hex 'E0FFFF'), (Hex '78E0F0'), (Hex '3CA8C8'))
-                for ($k = 0; $k -lt 3; $k++) { $x = 4 + (($Frame * 2 + $k) % 8); Set-Both $c $e $x 6 $beam[$k]; Set-Both $c $e $x 7 $beam[$k] }
-            }
-        }
-        default {
-            Set-Rect $c 4 5 8 1 (Hex '6C5A1C')
-            for ($x = 4; $x -le 11; $x += 2) { Set-Rect $c $x 7 1 2 (Hex '2C3A2C') }
-            if ($Active) {
-                Set-Both $c $e (4 + 2 * ($Frame % 4)) 5 (Hex 'FFE070')
-                Set-Both $c $e (5 + 2 * ($Frame % 4)) 5 (Hex 'D8B038')
-                Set-Both $c $e (4 + 2 * ((3 - $Frame) % 4)) 8 (Hex '62FF86')
-            }
-        }
+    # recoil_separator
+    for ($x = 4; $x -le 11; $x++) { Set-Px $c $x 6 (Hex '2C3A44'); Set-Px $c $x 7 (Hex '2C3A44') }
+    foreach ($x in @(5, 8, 10)) { Set-Px $c $x 4 (Hex '8A4C4C'); Set-Px $c $x 9 (Hex '4C4C8A') }
+    if ($Active) {
+        $beam = @((Hex 'E0FFFF'), (Hex '78E0F0'), (Hex '3CA8C8'))
+        for ($k = 0; $k -lt 3; $k++) { $x = 4 + (($Frame * 2 + $k) % 8); Set-Both $c $e $x 6 $beam[$k]; Set-Both $c $e $x 7 $beam[$k] }
     }
     Set-Px $c 7 12 $(if ($Active) { $LampOn } else { $LampOff })
     Set-Px $c 8 12 $(if ($Active) { $LampOn } else { $LampOff })
