@@ -248,6 +248,7 @@ test('recipes: one lookup path each; the intake pays 32,768 EU/t per module from
   assert.equal(32768 * IO.intake.maxModules, 131072);
   assert.equal(Math.round(10000 / (3600 * 20 / 400)), 56);
   const vault = RUN.built.find((r) => r.id === 'grindless:luv/radiation_vault_casing');
+  assert.equal(vault.type, 'gtceu:assembly_line');
   assert.deepEqual(one(vault, 'itemInputs'), ['2x gtceu:dense_titanium_plate', '2x gtceu:tantalum_plate', 'gtceu:hsss_frame', '1x grindless:zircaloy_cladding_tube']);
   assert.deepEqual(one(vault, 'inputFluids'), [{ fluid: 'gtceu:soldering_alloy', amount: 144 }, { fluid: 'gtceu:lubricant', amount: 250 }]);
   const bundle = RUN.built.find((r) => r.id === 'grindless:luv/heat_exchanger_bundle');

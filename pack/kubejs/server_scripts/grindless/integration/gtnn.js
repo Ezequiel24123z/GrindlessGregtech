@@ -70,8 +70,8 @@
     event.remove({ output: STACK })
     event.recipes.gtceu.assembler('grindless:gtnn/maceration_stack_controller')
       .itemInputs('4x #forge:plates/tungsten_steel', '4x gtceu:iv_macerator', '4x #gtceu:circuits/iv', '2x grindless:sintered_regolith',
-        '2x grindless:sintered_regolith')
-      .inputFluids(Fluid.of('gtceu:soldering_alloy', 288), Fluid.of('gtceu:lubricant', 500))
+        '2x grindless:sintered_regolith', '2x gtceu:soldering_alloy_ingot')
+      .inputFluids(Fluid.of('gtceu:lubricant', 500))
       .itemOutputs(STACK)
       .EUt(1920).duration(600)
     return true

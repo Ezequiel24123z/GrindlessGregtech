@@ -171,13 +171,13 @@
     })
   }
 
-  // DISTILLERY: the ring ice's use (rule 3: every product has a destination); water and the ices' ammonia go to the usual chemistry
+  // DISTILLATION TOWER (the distillery holds one fluid output): the ring ice's use (rule 3: every product has a destination); water and the ices' ammonia go to the usual chemistry
   function addMelt(event) {
     if (!Fluid.exists('gtceu:ring_ice') || !Fluid.exists('gtceu:ammonia')) {
       console.error(LOG + 'ring ice melt skipped, unknown fluid')
       return
     }
-    event.recipes.gtceu.distillery('grindless:ring_ice_melt')
+    event.recipes.gtceu.distillation_tower('grindless:ring_ice_melt')
       .inputFluids(Fluid.of('gtceu:ring_ice', 1000)).circuit(1)
       .outputFluids(Fluid.of('minecraft:water', 900), Fluid.of('gtceu:ammonia', 100))
       .EUt(480).duration(100)
