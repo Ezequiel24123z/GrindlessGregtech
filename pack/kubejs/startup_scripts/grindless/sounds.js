@@ -112,7 +112,15 @@
     'gtceu:cluster_light_smelting': 'loop_cluster_light_furnace',
     'gtceu:mass_stream_injection': 'loop_mass_stream_injector',
     'gtceu:black_hole_bomb': 'loop_mirror_shell',
-    'gtceu:accretion_power': 'loop_accretion_feeder'
+    'gtceu:accretion_power': 'loop_accretion_feeder',
+    'gtceu:mercury_solar': 'loop_mercury_solar_field',
+    'gtceu:microgravity_processing': 'loop_microgravity_smelter',
+    'gtceu:wake_epitaxy': 'loop_wake_shield_facility',
+    'gtceu:orbital_solar': 'loop_orbital_solar_station',
+    'gtceu:gravitational_wave_astronomy': 'loop_gravitational_wave_detector',
+    'gtceu:probe_launch': 'loop_coilgun_launcher',
+    'gtceu:microgravity_crystal_growth': 'loop_zero_g_crystal_grower',
+    'gtceu:organoid_assembly': 'loop_organoid_lab'
   }
 
   StartupEvents.registry('sound_event', function (event) {

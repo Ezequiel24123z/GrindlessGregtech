@@ -1050,6 +1050,102 @@
       "volume": 0.65,
       "attenuation": 24,
       "quality": 0, "lowpass": 9000
+    },
+    {
+      "id": "loop_mercury_solar_field",
+      "recipeType": "gtceu:mercury_solar",
+      "prompt": "Seamless looping sound of a sunlit solar thermal field on Mercury: a steady low thermal hum, slow ticking of expanding metal panels and a faint hiss of heat exchangers, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0,
+      "lowpass": 9000
+    },
+    {
+      "id": "loop_microgravity_smelter",
+      "recipeType": "gtceu:microgravity_processing",
+      "prompt": "Seamless looping sound of a containerless orbital smelter: a deep furnace roar, soft electromagnetic levitation hum and slow molten metal crackle, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0,
+      "lowpass": 9000
+    },
+    {
+      "id": "loop_wake_shield_facility",
+      "recipeType": "gtceu:wake_epitaxy",
+      "prompt": "Seamless looping sound of a ultra-vacuum epitaxy chamber: a smooth turbomolecular pump whine, faint vacuum valve clicks and a calm low electrical hum, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0,
+      "lowpass": 9000
+    },
+    {
+      "id": "loop_orbital_solar_station",
+      "recipeType": "gtceu:orbital_solar",
+      "prompt": "Seamless looping sound of a orbital solar power station: a calm steady transformer hum, slow cooling pump pulses and faint electrical crackle, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0,
+      "lowpass": 9000
+    },
+    {
+      "id": "loop_gravitational_wave_detector",
+      "recipeType": "gtceu:gravitational_wave_astronomy",
+      "prompt": "Seamless looping sound of a laser interferometer observatory: a very quiet deep hum, slow low ambient rumble and soft precise electronic pings, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0,
+      "lowpass": 9000
+    },
+    {
+      "id": "loop_coilgun_launcher",
+      "recipeType": "gtceu:probe_launch",
+      "prompt": "Seamless looping sound of a electromagnetic coilgun launch rail: rising capacitor-bank charge whine, rhythmic heavy coil thumps and a deep electrical buzz, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0,
+      "lowpass": 9000
+    },
+    {
+      "id": "loop_zero_g_crystal_grower",
+      "recipeType": "gtceu:microgravity_crystal_growth",
+      "prompt": "Seamless looping sound of a crystal growth furnace: a soft steady furnace hum, gentle fan airflow and slow quiet thermal ticks, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0,
+      "lowpass": 9000
+    },
+    {
+      "id": "loop_organoid_lab",
+      "recipeType": "gtceu:organoid_assembly",
+      "prompt": "Seamless looping sound of a sterile bioreactor laboratory: gentle bubbling incubator, soft peristaltic pump pulses and a faint ventilation hum, no voices, no music",
+      "duration": 6,
+      "loop": true,
+      "promptInfluence": 0.5,
+      "volume": 0.65,
+      "attenuation": 24,
+      "quality": 0,
+      "lowpass": 9000
     }
   ]
 }
