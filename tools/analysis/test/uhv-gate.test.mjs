@@ -87,8 +87,8 @@ test('MAX-T1: c14 hold_sgr_a_probe is 16 A x V[OpV] = 2^33 for 1,200 t at Cygnus
   assert.deepEqual(r.kept, [{ id: 'grindless:sgr_a_chart', count: 1 }]);
   assert.deepEqual(r.itemsOut, [{ id: 'grindless:launched_gc_probe', count: 1 }]);
   assert.ok(r.itemsIn.length + r.kept.length + 1 <= 9);
-  const big = G.types.warp_gate.recipes.filter((x) => x.eut >= 2 ** 31).map((x) => x.circuit).sort((a, b) => a - b);
-  assert.deepEqual(big, [10, 11, 13, 14, 15]);
+  const big = G.types.warp_gate.recipes.filter((x) => x.eut >= 2 ** 31 && x.circuit < 16).map((x) => x.circuit).sort((a, b) => a - b);
+  assert.deepEqual(big, [10, 11, 13, 14, 15], 'MAX+ gates (c16 on) are pinned by their own tests');
   const circuits = G.types.warp_gate.recipes.map((x) => x.circuit);
   assert.equal(new Set(circuits).size, circuits.length);
 });
