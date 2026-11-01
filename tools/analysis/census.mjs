@@ -112,11 +112,13 @@ const wireless = JSON.parse(fs.readFileSync(path.join(pack, 'kubejs', 'data', 'g
 // MAX+ cells stay listed until the MAX+ packages land (docs/reforge/08_cleanup.md U9)
 for (const r of wireless.tiers || []) if (r.cell && !/^grindless:horizon_/.test(r.cell)) scriptUsed.add(r.cell);
 const wirelessCover = (id) => /_wireless_(energy|dynamo)_cover$/.test(id) && reg.machines.has('gtceu:wireless_energy_tower');
+// inert byproducts with no use by design: the tooltip tells the player to void them (AGENTS.md principle 3; docs/reforge/08_cleanup.md U6)
+const voidedByproducts = new Set(['grindless:alkali_sulfate_dust']);
 const structuresText = JSON.stringify(dump.structures || {});
 const unused = [];
 for (const it of reg.items.values()) {
   if (!it.id.startsWith('grindless:')) continue;
-  if (used.has(it.id) || questItems.has(it.id) || machineIds.has(it.id) || scriptUsed.has(it.id) || wirelessCover(it.id) || structuresText.includes('"' + it.id + '"')) continue;
+  if (used.has(it.id) || questItems.has(it.id) || machineIds.has(it.id) || scriptUsed.has(it.id) || voidedByproducts.has(it.id) || wirelessCover(it.id) || structuresText.includes('"' + it.id + '"')) continue;
   unused.push([it.id, startupEra(it.file), it.file]);
 }
 unused.sort((a, b) => eraRank(a[1]) - eraRank(b[1]) || (a[0] < b[0] ? -1 : 1));

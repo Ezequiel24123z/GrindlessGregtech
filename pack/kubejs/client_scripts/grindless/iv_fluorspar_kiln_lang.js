@@ -19,5 +19,9 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.recipe.grindless_fluorspar_kiln.hydrofluoric_acid_from_fluorite', 'One charge: the kiln runs up to 256 at once, 64 ticks each, with no overclock')
 
     add('grindless.machine.fluorspar_kiln.no_voiding', 'The scrubber keeps all the hydrofluoric acid: it leaves through the output hatches. Turn fluid voiding off')
+
+    add('item.grindless.alkali_sulfate_dust', 'Alkali Sulfate Dust')
+    add('tooltip.grindless.alkali_sulfate_dust.0', 'Inert sodium and potassium sulfate.')
+    add('tooltip.grindless.alkali_sulfate_dust.1', 'The kiln\'s harmless leftover: nothing uses it, so void it.')
 })
 
