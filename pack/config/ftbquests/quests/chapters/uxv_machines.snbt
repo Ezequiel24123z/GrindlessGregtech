@@ -1,0 +1,450 @@
+{
+	autofocus_id: "1595ABB6AB097B3E"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "uxv_machines"
+	group: "2FC87731726663DD"
+	icon: "gtceu:uxv_fusion_reactor"
+	id: "373981BA6661EF96"
+	order_index: 2
+	quest_links: [
+		{
+			id: "5F22465DB90E7FA8"
+			linked_quest: "7C3E8D47479787F5"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "52DDB2A7939A0AFE"
+			linked_quest: "7C3E8D47479787F5"
+			x: 0.0d
+			y: 1.5d
+		}
+		{
+			id: "197D96D243AC4312"
+			linked_quest: "7C3E8D47479787F5"
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			id: "3CA128A1F0A84970"
+			linked_quest: "7C3E8D47479787F5"
+			x: 0.0d
+			y: 4.5d
+		}
+		{
+			id: "762A868D14552BBC"
+			linked_quest: "7C3E8D47479787F5"
+			x: 0.0d
+			y: 6.0d
+		}
+		{
+			id: "1CBAAFC973878588"
+			linked_quest: "7C3E8D47479787F5"
+			x: 0.0d
+			y: 7.5d
+		}
+		{
+			id: "52223841A4A61ABC"
+			linked_quest: "7C3E8D47479787F5"
+			x: 0.0d
+			y: 10.0d
+		}
+		{
+			id: "774C431889C11320"
+			linked_quest: "795E541822A26BC7"
+			x: 2.0d
+			y: 13.0d
+		}
+		{
+			id: "3E0058226AC1A461"
+			linked_quest: "586BAF51DA2477E3"
+			x: 0.0d
+			y: 15.0d
+		}
+		{
+			id: "36BCED4635A46F32"
+			linked_quest: "5A539FCEC01451BA"
+			x: 0.0d
+			y: 20.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["7C3E8D47479787F5"]
+			description: ["The &6MTJ Sputter Cluster&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit. A UIV hull, the plascrete shell and the magnetron parts, with sputter targets from the melter. The magnetic tunnel junction die, and through it the MRAM wafer and the racetrack chip. Targets and silicon-28 by ME; the dies come out in a chest."]
+			icon: "gtceu:mtj_sputter_cluster"
+			id: "1595ABB6AB097B3E"
+			rewards: [{ id: "1835656A2A02BB85", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7F3A5AD491D6BAC7", item: "gtceu:mtj_sputter_cluster", type: "item" }
+				{ id: "7153D7373D23E2BD", item: "gtceu:plascrete", type: "item" }
+			]
+			title: "MTJ Sputter Cluster"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1595ABB6AB097B3E"]
+			description: ["The &6Racetrack Fab&r patterns nanowires where magnetic domains slide, in a cleanroom with an electron beam over it. A UIV hull, the plascrete shell and the cleanroom parts, plus MRAM wafers to cut. The racetrack chip, which is the mainframe's storage. Wafers by ME; send chips on to the photonic hall."]
+			icon: "gtceu:racetrack_fab"
+			id: "780482A9BF2D46A1"
+			rewards: [{ id: "7645678A25BE453A", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "379CB9B017C1ADE8", item: "gtceu:racetrack_fab", type: "item" }
+				{ id: "78C8443DD1932DF1", item: "gtceu:plascrete", type: "item" }
+			]
+			title: "Racetrack Fab"
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7C3E8D47479787F5"]
+			description: ["The &6Oxide PLD Chamber&r fires a laser at a ceramic target and grows the plume as a crystal film, one oxide layer after another. A UIV hull, the plascrete shell, a heater under the chamber and a scandate substrate to grow on. The multiferroic films of the MESO logic die. Targets by ME and oxygen by pipe; films are fragile, so keep them in the chamber until the foundry needs them."]
+			icon: "gtceu:oxide_pld_chamber"
+			id: "17F1BEE08FE87731"
+			rewards: [{ id: "74B3E11427024DEE", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7FC1AB20A2F86299", item: "gtceu:oxide_pld_chamber", type: "item" }
+				{ id: "5C75BA5455C94CB6", item: "gtceu:plascrete", type: "item" }
+				{ id: "76B59BF64EA9BED2", item: "gtceu:tritanium_coil_block", type: "item" }
+			]
+			title: "Oxide PLD Chamber"
+			x: 2.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["7C3E8D47479787F5"]
+			description: ["The &6vdW Stacking Cell&r picks single atomic layers with a stamp and presses them into a stack, in a glovebox that is flushed with argon. A UIV hull, the clean casing and a filter column for the argon. The spin-orbit readout of the MESO logic die. Layers by ME; stacks come out one at a time, so run two cells."]
+			icon: "gtceu:vdw_stacking_cell"
+			id: "7E9BF22B379A4CEB"
+			rewards: [{ id: "3785B23E8D650F68", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3E2596FFAC228929", item: "gtceu:vdw_stacking_cell", type: "item" }
+				{ id: "303ABC678F712DA7", item: "gtceu:clean_machine_casing", type: "item" }
+			]
+			title: "vdW Stacking Cell"
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["7C3E8D47479787F5"]
+			description: ["The &6YIG LPE Furnace&r dips a wafer into a molten bath and draws it out coated in a garnet film that carries spin waves almost without loss. A UIV hull, the robust casing, three heater bands and a platinum crucible. The magnonic bus the spintronic mainframe is wired with. Wafers and charge by ME; films take time, so run it in a stack of machines."]
+			icon: "gtceu:yig_lpe_furnace"
+			id: "7486DF37973BED77"
+			rewards: [{ id: "5AEFFDB492571336", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5A6D73BE11783F0A", item: "gtceu:yig_lpe_furnace", type: "item" }
+				{ id: "1571A221A995FDFB", item: "gtceu:robust_machine_casing", type: "item" }
+			]
+			title: "YIG LPE Furnace"
+			x: 2.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["7C3E8D47479787F5"]
+			description: ["The &6SHeQUID Works&r fills two baths of superfluid helium, joins them through an array and seals the pair as a weak link. A UIV hull, the cryostat casing and a supply of superfluid helium. The weak link cell and the gyro the UXV sensor is built from. Helium by pipe; keep the nanoaperture arrays stocked by ME."]
+			icon: "gtceu:shequid_works"
+			id: "7AE0BEC91F59A48B"
+			rewards: [{ id: "52B703A60683FA50", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "17B5F50EB60BAFDD", item: "gtceu:shequid_works", type: "item" }
+				{ id: "58870364B8D50034", item: "grindless:cryostat_casing", type: "item" }
+			]
+			title: "SHeQUID Works"
+			x: 2.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["7C3E8D47479787F5"]
+			description: ["Collide uranium on curium and the two swap nucleons, leaving neutron-rich nuclei near the island of stability. The &6MNT Collider&r stops them in gas and weighs them by flight time. A UIV hull, the high power casing, a long beamline and a gas catcher. Island nuclides, and with them the island chart the OpV research asks for. Targets and ion sources by ME; the yield is a trickle, so send it straight to the chart."]
+			icon: "gtceu:mnt_collider"
+			id: "112452274F3E9096"
+			rewards: [{ id: "73062A763AF5AE20", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "328576CEF538773F", item: "gtceu:mnt_collider", type: "item" }
+				{ id: "7FCA4799590A84A5", item: "gtceu:high_power_casing", type: "item" }
+			]
+			title: "MNT Collider"
+			x: 2.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["7C3E8D47479787F5"]
+			description: ["The black hole already pulls its companion apart. The &6Stellar Elevator&r heats the star's surface where the pull is strongest and catches the stream as plasma. It works at Cygnus X-1 only. A UIV hull, the UXV machine casing and a stack of coil rings, with power for the heating. Stellar plasma, which the mass filter cuts and the condensation tower cools. The plasma goes by pipe to the filter; a tank in between keeps the lift steady."]
+			icon: "gtceu:stellar_elevator"
+			id: "1F198C897B7C73D8"
+			rewards: [{ id: "132D17CCC398E465", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "30E9DF75D366723A", item: "gtceu:stellar_elevator", type: "item" }
+				{ id: "1772800E567F1E1D", item: "gtceu:uxv_machine_casing", type: "item" }
+			]
+			title: "Stellar Elevator"
+			x: 2.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["1F198C897B7C73D8"]
+			description: ["A spinning plasma flings its heavy ions outward. The &6Plasma Mass Filter&r cuts the star into hydrogen, helium, carbon-nitrogen-oxygen and heavy cuts, and cleans disk plasma the same way. A UIV hull, the high power casing and the radial ports. The cuts that feed the Mk6 ring and the condensation tower. One tank per cut, each on its own pipe; the filter does not forgive a mixed line."]
+			icon: "gtceu:plasma_mass_filter"
+			id: "344ECF8428D0E972"
+			rewards: [{ id: "33A27B0F41FAB8AF", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1D91DE28ABFA9088", item: "gtceu:plasma_mass_filter", type: "item" }
+				{ id: "351C9F4D367448E1", item: "gtceu:high_power_casing", type: "item" }
+			]
+			title: "Plasma Mass Filter"
+			x: 4.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["344ECF8428D0E972"]
+			description: ["The gas falling into the hole spins in a disk hot enough to glow in X-rays. The &6Accretion Disk Skimmer&r skims its edge and sends the catch to the mass filter. A UIV hull, the UXV machine casing and a rim of coils round the bowl. Filtered disk plasma, the fuel of the FRC former and the BZ dynamo. Route the catch by pipe to the filter and keep the surplus in a tank."]
+			icon: "gtceu:accretion_disk_skimmer"
+			id: "1887C02641FE7714"
+			rewards: [{ id: "5F1B3C559EA8C45A", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7E9952DE7FF64984", item: "gtceu:accretion_disk_skimmer", type: "item" }
+				{ id: "733253DDA8C281CA", item: "gtceu:uxv_machine_casing", type: "item" }
+			]
+			title: "Accretion Disk Skimmer"
+			x: 7.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["344ECF8428D0E972"]
+			description: ["Cool a star slowly and its metals come out in the order a young solar system makes them. The &6Stellar Condensation Tower&r draws off refractory, metal and silicate condensates, and lets the volatiles out as gas. A UIV hull, the UXV machine casing and a draw-off pipe for every stage. The condensates that rule 3 sends to the heavy cut, and syngas for the plants at home. A chest or tank per draw-off; the volatile gas needs somewhere to go."]
+			icon: "gtceu:stellar_condensation_tower"
+			id: "110D7283172BA400"
+			rewards: [{ id: "778CC442DB2C58E4", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7845A4775B5A634D", item: "gtceu:stellar_condensation_tower", type: "item" }
+				{ id: "3896B93FD6DFDD95", item: "gtceu:uxv_machine_casing", type: "item" }
+			]
+			title: "Stellar Condensation Tower"
+			x: 7.0d
+			y: 11.5d
+		}
+		{
+			dependencies: ["110D7283172BA400"]
+			description: ["The first thing to come out of the tower, and the hardest to melt. The UXV Lines chart shows what it becomes."]
+			icon: "grindless:refractory_condensate"
+			id: "3139714CCC049908"
+			rewards: [{ id: "767E7C5D5EEE5D15", type: "xp", xp: 80 }]
+			tasks: [{ id: "3CEAAB651BEF7351", item: "grindless:refractory_condensate", type: "item" }]
+			title: "Refractory Condensate"
+			x: 9.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["1887C02641FE7714"]
+			description: ["A field-reversed configuration is a smoke ring of plasma that holds its own field. The &6FRC Former&r shoots one into a cartridge and keeps it there. A UIV hull, the high power casing, a formation tube and a capacitor bank. The FRC cartridge: travel to Vela, the field generator and the gate all use one. Disk plasma by pipe; cartridges are consumed, so stock a generous chest."]
+			icon: "gtceu:frc_former"
+			id: "518B1C106BB5136F"
+			rewards: [{ id: "11396B852BA09281", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "133660D591D495A2", item: "gtceu:frc_former", type: "item" }
+				{ id: "1EBCDDE069DDDBC3", item: "gtceu:high_power_casing", type: "item" }
+				{ id: "5B782C13EA8BFF8F", item: "grindless:cryostat_casing", type: "item" }
+			]
+			title: "FRC Former"
+			x: 9.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["518B1C106BB5136F"]
+			description: ["A spinning black hole threaded by a magnetic field drives a current, and the hole slows down to pay for it. The &6BZ Dynamo&r burns flux-loaded plasma that way. A UIV hull, the UXV machine casing and a flux loop inside the torus. Power at Cygnus X-1, with no fuel but the plasma. Feed flux-loaded plasma by pipe and ship the power home over the wireless link."]
+			icon: "gtceu:bz_dynamo"
+			id: "3611A4EAC7D055C3"
+			rewards: [{ id: "1615166934B28465", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "17889A5DB785D254", item: "gtceu:bz_dynamo", type: "item" }
+				{ id: "5BBFE15D6E67C4C8", item: "gtceu:uxv_machine_casing", type: "item" }
+			]
+			title: "BZ Dynamo"
+			x: 12.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["795E541822A26BC7", "344ECF8428D0E972"]
+			description: ["The &6Mk6 Fusion Ring&r burns as a star does: hot CNO, then helium, carbon and oxygen. A direct converter takes the power off each ash, and one burn's ash is quenched into the next one's fuel. A UXV hull, UXV components, the UXV fusion casing, the Mk5 coil and fusion glass. The plasma and burn quests of the integration chapter. Fuel and coolant by pipe; a ring that runs a star's burning stages on demand is fiction, so plan the ash chain first."]
+			icon: "gtceu:uxv_fusion_reactor"
+			id: "5CE1C18D40A0B8E2"
+			rewards: [{ id: "13D1BD31FCFD288E", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5C330717261B2CB1", item: "gtceu:uxv_fusion_reactor", type: "item" }
+				{ id: "504F99CB405FBA6C", item: "grindless:uxv_fusion_casing", type: "item" }
+				{ id: "5255BED4DDC68445", item: "gtceu:fusion_glass", type: "item" }
+			]
+			title: "Mk6 Fusion Ring"
+			x: 4.5d
+			y: 13.0d
+		}
+		{
+			dependencies: ["586BAF51DA2477E3"]
+			description: ["Deep in a neutron star's crust the nuclei melt into rods, sheets and holes that physicists call pasta. A glitch shakes the crust loose, and the &6Pasta Extractor&r times it. A UIV hull, the neutron star site casing and a receiver cage. Raw pasta, the start of every pasta item. Neutronium pellets by ME; wait for a glitch and collect the haul."]
+			icon: "gtceu:pasta_extractor"
+			id: "1C34EDB89AD1F5C9"
+			rewards: [{ id: "1121096DA82C1238", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "184DA14CA333EC3E", item: "gtceu:pasta_extractor", type: "item" }
+				{ id: "138DF982719F160B", item: "grindless:neutron_star_site_casing", type: "item" }
+			]
+			title: "Pasta Extractor"
+			x: 2.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["1C34EDB89AD1F5C9"]
+			description: ["The &6Pasta Phase Sorter&r separates the rods from the sheets inside a cage that keeps each one squeezed. The anti-phase residue goes to the core sample the gate keeps. A UIV hull, the neutron star site casing and five cryostat cage bays. Spaghetti phase for wire and lasagna phase for plate. Raw pasta by ME; send each phase to its own line."]
+			icon: "gtceu:pasta_phase_sorter"
+			id: "353D67B60E559EE1"
+			rewards: [{ id: "75883048E114CE67", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "58C6F95474C92833", item: "gtceu:pasta_phase_sorter", type: "item" }
+				{ id: "345D9E94876CC187", item: "grindless:neutron_star_site_casing", type: "item" }
+				{ id: "1BD7837B7573FCFE", item: "grindless:cryostat_casing", type: "item" }
+			]
+			title: "Pasta Phase Sorter"
+			x: 4.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["353D67B60E559EE1"]
+			description: ["The &6Pasta Draw Bench&r pulls spaghetti phase through aerogel into strand wire, the UXV wire. Pasta as wire is fiction: outside a neutron star it would fly apart at once. A UIV hull, the neutron star site casing and a long, straight bed. Pasta strand wire, which the motor, the field generator and the SMES cell are wound with. Spaghetti phase by ME; wire leaves on a spool, so stock a few."]
+			icon: "gtceu:pasta_draw_bench"
+			id: "7A933F3FF611A461"
+			rewards: [{ id: "56230F56D11FD48C", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "530F7D2774C484EF", item: "gtceu:pasta_draw_bench", type: "item" }
+				{ id: "5FC390036EB5BEB2", item: "grindless:neutron_star_site_casing", type: "item" }
+			]
+			title: "Pasta Draw Bench"
+			x: 7.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["353D67B60E559EE1"]
+			description: ["The &6Pasta Laminator&r presses lasagna phase onto a tungsten-fibre billet as a plate, the plate of the UXV hull and parts. Pasta as plate is fiction, for the same reason as the wire. A UIV hull, the neutron star site casing and a robust platen. Lasagna plate, then the UXV hull. Phase and billets by ME; plates stack up, so send them on."]
+			icon: "gtceu:pasta_laminator"
+			id: "3CCB6C8A5332CADD"
+			rewards: [{ id: "193A8B97013D719C", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "33DF6F56B9115400", item: "gtceu:pasta_laminator", type: "item" }
+				{ id: "564E04C38B269476", item: "grindless:neutron_star_site_casing", type: "item" }
+				{ id: "7E54036D6B84BDB0", item: "gtceu:robust_machine_casing", type: "item" }
+			]
+			title: "Pasta Laminator"
+			x: 7.0d
+			y: 16.5d
+		}
+		{
+			dependencies: ["3CCB6C8A5332CADD"]
+			description: ["The plate every UXV hull and part is cut from."]
+			icon: "grindless:lasagna_plate"
+			id: "34D1D9ED3F6FBC67"
+			rewards: [{ id: "16164FF0FF0A3286", type: "xp", xp: 80 }]
+			tasks: [{ id: "503BA155D586710D", item: "grindless:lasagna_plate", type: "item" }]
+			title: "Lasagna Plate"
+			x: 9.5d
+			y: 16.5d
+		}
+		{
+			dependencies: ["7A933F3FF611A461"]
+			description: ["Above a pulsar's magnetic poles the field tears charges off the surface. The &6Polar Cap Tap&r lowers an electrode into that current and burns through it, at Vela only. A UIV hull, the neutron star site casing and a mast of insulator rings. Power at Vela, for the gate hold and the machines out there. Electrodes by ME; the voltage is real, a way to collect it is not."]
+			icon: "gtceu:polar_cap_tap"
+			id: "50C6BE5A52F4F9A0"
+			rewards: [{ id: "71D74C5B44B540E7", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "30987312A1343006", item: "gtceu:polar_cap_tap", type: "item" }
+				{ id: "536FA95DF771C4F8", item: "grindless:neutron_star_site_casing", type: "item" }
+			]
+			title: "Polar Cap Tap"
+			x: 9.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["5A539FCEC01451BA"]
+			description: ["The star's core was thrown out in clumps still rich in what it made as it died. The &6Ejecta Knot Sweeper&r sweeps them up, behind a shield bow. A UIV hull, the Whipple shield casing and a filter collector. Ejecta knot dust, and titanium-44 from it. Shield weave by ME; the dust comes back by hopper."]
+			icon: "gtceu:ejecta_knot_sweeper"
+			id: "12376A5961A338E7"
+			rewards: [{ id: "56D9BE7C40325044", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "32CE7A9CD71B6B2E", item: "gtceu:ejecta_knot_sweeper", type: "item" }
+				{ id: "1CFA9454DF74F43F", item: "grindless:whipple_shield_casing", type: "item" }
+			]
+			title: "Ejecta Knot Sweeper"
+			x: 2.0d
+			y: 20.0d
+		}
+		{
+			dependencies: ["12376A5961A338E7"]
+			description: ["Slow a core's positrons into positronium, cool it, then let it annihilate all at once into a beam. The &6Annihilation Laser Works&r makes the gamma laser module. A UIV hull, the robust casing as a gamma shield and a Penning trap. The gamma laser module, and the UXV emitter built round it. Titanium-44 cores by ME; the modules are few, so keep them in a chest."]
+			icon: "gtceu:annihilation_laser_works"
+			id: "37FCF1CA912EC06F"
+			rewards: [{ id: "3D80D2BB89E2FB14", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "371ACA9B6E1D5853", item: "gtceu:annihilation_laser_works", type: "item" }
+				{ id: "3D5BB3952F16DA90", item: "gtceu:robust_machine_casing", type: "item" }
+			]
+			title: "Annihilation Laser Works"
+			x: 7.0d
+			y: 20.0d
+		}
+		{
+			dependencies: ["37FCF1CA912EC06F"]
+			description: ["A gamma-ray laser is fiction: nobody has built one. This one goes into the UXV emitter."]
+			icon: "grindless:gamma_laser_module"
+			id: "1E256F6A845C72DE"
+			rewards: [{ id: "3AFF455A942A356F", type: "xp", xp: 80 }]
+			tasks: [{ id: "5A8E57369AFB352C", item: "grindless:gamma_laser_module", type: "item" }]
+			title: "Gamma Laser Module"
+			x: 9.5d
+			y: 20.0d
+		}
+	]
+	subtitle: ["Spin-based fabs at home, then a lifted star, a pulsar's crust and a supernova's ashes: twenty-one machines and a fractionation hall."]
+	title: "UXV: Machines"
+}

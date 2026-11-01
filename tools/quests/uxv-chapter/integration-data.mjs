@@ -106,7 +106,7 @@ export const QUESTS = [
 
   // ------------------------------------------------------------------ the two generators
   {
-    key: 'BZ', kind: 'plant', title: 'Spin Down a Black Hole', icon: 'gtceu:bz_dynamo',
+    key: 'I_BZ', kind: 'plant', title: 'Spin Down a Black Hole', icon: 'gtceu:bz_dynamo',
     deps: ['FRC'], x: 2, y: 3,
     teach: {
       for: 'A spinning black hole threaded by a magnetic field drives a current, and the hole slows to pay for it. The &6BZ Dynamo&r burns &6Flux-Loaded Plasma&r made from an FRC cartridge, at Cygnus X-1 only.',
@@ -117,11 +117,11 @@ export const QUESTS = [
     desc: [
       'The dynamo is fiction: nobody has tapped a black hole\'s spin. The Blandford-Znajek process it is named for is real.',
     ],
-    tasks: [it('gtceu:bz_dynamo'), it('gtceu:flux_loaded_plasma_bucket')],
+    tasks: [it('gtceu:flux_loaded_plasma_bucket')],
     rewards: [xp(250)],
   },
   {
-    key: 'TAP', kind: 'plant', title: 'Tap the Polar Cap', icon: 'gtceu:polar_cap_tap',
+    key: 'I_TAP', kind: 'plant', title: 'Tap the Polar Cap', icon: 'gtceu:polar_cap_tap',
     deps: ['JUMPV'], x: 2, y: 5,
     teach: {
       for: 'Above a pulsar\'s magnetic poles the field tears charges off the surface. The &6Polar Cap Tap&r lowers a &6Lasagna Electrode&r into that current and burns through it, at Vela only.',
@@ -130,7 +130,7 @@ export const QUESTS = [
       automate: 'Electrodes are laminated on the spot; the output rides the wireless network.',
     },
     desc: [],
-    tasks: [it('gtceu:polar_cap_tap'), it('grindless:lasagna_electrode')],
+    tasks: [it('grindless:lasagna_electrode')],
     rewards: [xp(250)],
   },
 

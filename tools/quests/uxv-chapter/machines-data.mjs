@@ -90,55 +90,52 @@ export const QUESTS = [
     unlocks: 'The weak link cell and the gyro the UXV sensor is built from.',
     automate: 'Helium by pipe; keep the nanoaperture arrays stocked by ME.',
   }, [CRYO]),
-  gear('ISLAND', 'mnt_collider', 'MNT Collider', ['M_L_MNT'], 2, 7.5, {
+  gear('MNT', 'mnt_collider', 'MNT Collider', ['M_L_MNT'], 2, 7.5, {
     for: 'Collide uranium on curium and the two swap nucleons, leaving neutron-rich nuclei near the island of stability. The &6MNT Collider&r stops them in gas and weighs them by flight time.',
     needs: 'A UIV hull, the high power casing, a long beamline and a gas catcher.',
     unlocks: 'Island nuclides, and with them the island chart the OpV research asks for.',
     automate: 'Targets and ion sources by ME; the yield is a trickle, so send it straight to the chart.',
   }, [POWER]),
-  prod('ISLC', 'Island Chart', 'grindless:island_chart', ['ISLAND'], 4.5, 7.5, ['The chart of nuclei that outlive their neighbours. The gate keeps one, so make sure it is ready before you hold the gate open.']),
 
   // ------------------------------------------------------------------ Cygnus X-1
-  gear('LIFT', 'stellar_elevator', 'Stellar Elevator', ['M_L_LIFT'], 2, 10, {
+  gear('ELEV', 'stellar_elevator', 'Stellar Elevator', ['M_L_LIFT'], 2, 10, {
     for: 'The black hole already pulls its companion apart. The &6Stellar Elevator&r heats the star\'s surface where the pull is strongest and catches the stream as plasma. It works at Cygnus X-1 only.',
     needs: 'A UIV hull, the UXV machine casing and a stack of coil rings, with power for the heating.',
     unlocks: 'Stellar plasma, which the mass filter cuts and the condensation tower cools.',
     automate: 'The plasma goes by pipe to the filter; a tank in between keeps the lift steady.',
   }, [UXVC], 150),
-  prod('PLAS', 'Stellar Plasma', 'gtceu:stellar_plasma_bucket', ['LIFT'], 2, 11.5, ['A bucket of a star\'s own surface. The UXV Lines chart shows what the cuts feed.']),
-  gear('CUTS', 'plasma_mass_filter', 'Plasma Mass Filter', ['LIFT'], 4.5, 10, {
+  gear('PMF', 'plasma_mass_filter', 'Plasma Mass Filter', ['ELEV'], 4.5, 10, {
     for: 'A spinning plasma flings its heavy ions outward. The &6Plasma Mass Filter&r cuts the star into hydrogen, helium, carbon-nitrogen-oxygen and heavy cuts, and cleans disk plasma the same way.',
     needs: 'A UIV hull, the high power casing and the radial ports.',
     unlocks: 'The cuts that feed the Mk6 ring and the condensation tower.',
     automate: 'One tank per cut, each on its own pipe; the filter does not forgive a mixed line.',
   }, [POWER], 150),
-  gear('DISK', 'accretion_disk_skimmer', 'Accretion Disk Skimmer', ['CUTS'], 7, 10, {
+  gear('SKIM', 'accretion_disk_skimmer', 'Accretion Disk Skimmer', ['PMF'], 7, 10, {
     for: 'The gas falling into the hole spins in a disk hot enough to glow in X-rays. The &6Accretion Disk Skimmer&r skims its edge and sends the catch to the mass filter.',
     needs: 'A UIV hull, the UXV machine casing and a rim of coils round the bowl.',
     unlocks: 'Filtered disk plasma, the fuel of the FRC former and the BZ dynamo.',
     automate: 'Route the catch by pipe to the filter and keep the surplus in a tank.',
   }, [UXVC], 150),
-  gear('TOWER', 'stellar_condensation_tower', 'Stellar Condensation Tower', ['CUTS'], 7, 11.5, {
+  gear('TOWER', 'stellar_condensation_tower', 'Stellar Condensation Tower', ['PMF'], 7, 11.5, {
     for: 'Cool a star slowly and its metals come out in the order a young solar system makes them. The &6Stellar Condensation Tower&r draws off refractory, metal and silicate condensates, and lets the volatiles out as gas.',
     needs: 'A UIV hull, the UXV machine casing and a draw-off pipe for every stage.',
     unlocks: 'The condensates that rule 3 sends to the heavy cut, and syngas for the plants at home.',
     automate: 'A chest or tank per draw-off; the volatile gas needs somewhere to go.',
   }, [UXVC], 150),
   prod('CONDP', 'Refractory Condensate', 'grindless:refractory_condensate', ['TOWER'], 9.5, 11.5, ['The first thing to come out of the tower, and the hardest to melt. The UXV Lines chart shows what it becomes.']),
-  gear('FRC', 'frc_former', 'FRC Former', ['DISK'], 9.5, 10, {
+  gear('FRCF', 'frc_former', 'FRC Former', ['SKIM'], 9.5, 10, {
     for: 'A field-reversed configuration is a smoke ring of plasma that holds its own field. The &6FRC Former&r shoots one into a cartridge and keeps it there.',
     needs: 'A UIV hull, the high power casing, a formation tube and a capacitor bank.',
     unlocks: 'The FRC cartridge: travel to Vela, the field generator and the gate all use one.',
     automate: 'Disk plasma by pipe; cartridges are consumed, so stock a generous chest.',
   }, [POWER, CRYO], 150),
-  prod('CART', 'FRC Cartridge', 'grindless:frc_cartridge', ['FRC'], 9.5, 8.5, ['A plasma ring in a bottle. FRCs are real; one that sits in a cartridge until you need it is fiction.']),
-  gear('BZ', 'bz_dynamo', 'BZ Dynamo', ['FRC'], 12, 10, {
+  gear('BZ', 'bz_dynamo', 'BZ Dynamo', ['FRCF'], 12, 10, {
     for: 'A spinning black hole threaded by a magnetic field drives a current, and the hole slows down to pay for it. The &6BZ Dynamo&r burns flux-loaded plasma that way.',
     needs: 'A UIV hull, the UXV machine casing and a flux loop inside the torus.',
     unlocks: 'Power at Cygnus X-1, with no fuel but the plasma.',
     automate: 'Feed flux-loaded plasma by pipe and ship the power home over the wireless link.',
   }, [UXVC], 200),
-  gear('MK6', 'uxv_fusion_reactor', 'Mk6 Fusion Ring', ['M_L_COMP', 'CUTS'], 4.5, 13, {
+  gear('MK6', 'uxv_fusion_reactor', 'Mk6 Fusion Ring', ['M_L_COMP', 'PMF'], 4.5, 13, {
     for: 'The &6Mk6 Fusion Ring&r burns as a star does: hot CNO, then helium, carbon and oxygen. A direct converter takes the power off each ash, and one burn\'s ash is quenched into the next one\'s fuel.',
     needs: 'A UXV hull, UXV components, the UXV fusion casing, the Mk5 coil and fusion glass.',
     unlocks: 'The plasma and burn quests of the integration chapter.',
@@ -146,26 +143,25 @@ export const QUESTS = [
   }, [it('grindless:uxv_fusion_casing'), it('gtceu:fusion_glass')], 250),
 
   // ------------------------------------------------------------------ Vela
-  gear('PASTA', 'pasta_extractor', 'Pasta Extractor', ['M_L_PASTA'], 2, 15, {
+  gear('PEX', 'pasta_extractor', 'Pasta Extractor', ['M_L_PASTA'], 2, 15, {
     for: 'Deep in a neutron star\'s crust the nuclei melt into rods, sheets and holes that physicists call pasta. A glitch shakes the crust loose, and the &6Pasta Extractor&r times it.',
     needs: 'A UIV hull, the neutron star site casing and a receiver cage.',
     unlocks: 'Raw pasta, the start of every pasta item.',
     automate: 'Neutronium pellets by ME; wait for a glitch and collect the haul.',
   }, [SITE]),
-  prod('RAWP', 'Raw Pasta', 'grindless:raw_pasta', ['PASTA'], 2, 16.5, ['Rods, sheets and holes of nuclear matter, as it comes off the crust.']),
-  gear('PHASE', 'pasta_phase_sorter', 'Pasta Phase Sorter', ['PASTA'], 4.5, 15, {
+  gear('SORT', 'pasta_phase_sorter', 'Pasta Phase Sorter', ['PEX'], 4.5, 15, {
     for: 'The &6Pasta Phase Sorter&r separates the rods from the sheets inside a cage that keeps each one squeezed. The anti-phase residue goes to the core sample the gate keeps.',
     needs: 'A UIV hull, the neutron star site casing and five cryostat cage bays.',
     unlocks: 'Spaghetti phase for wire and lasagna phase for plate.',
     automate: 'Raw pasta by ME; send each phase to its own line.',
   }, [SITE, CRYO]),
-  gear('WIRE', 'pasta_draw_bench', 'Pasta Draw Bench', ['PHASE'], 7, 15, {
+  gear('WIRE', 'pasta_draw_bench', 'Pasta Draw Bench', ['SORT'], 7, 15, {
     for: 'The &6Pasta Draw Bench&r pulls spaghetti phase through aerogel into strand wire, the UXV wire. Pasta as wire is fiction: outside a neutron star it would fly apart at once.',
     needs: 'A UIV hull, the neutron star site casing and a long, straight bed.',
     unlocks: 'Pasta strand wire, which the motor, the field generator and the SMES cell are wound with.',
     automate: 'Spaghetti phase by ME; wire leaves on a spool, so stock a few.',
   }, [SITE]),
-  gear('PLATE', 'pasta_laminator', 'Pasta Laminator', ['PHASE'], 7, 16.5, {
+  gear('PLATE', 'pasta_laminator', 'Pasta Laminator', ['SORT'], 7, 16.5, {
     for: 'The &6Pasta Laminator&r presses lasagna phase onto a tungsten-fibre billet as a plate, the plate of the UXV hull and parts. Pasta as plate is fiction, for the same reason as the wire.',
     needs: 'A UIV hull, the neutron star site casing and a robust platen.',
     unlocks: 'Lasagna plate, then the UXV hull.',
@@ -178,22 +174,15 @@ export const QUESTS = [
     unlocks: 'Power at Vela, for the gate hold and the machines out there.',
     automate: 'Electrodes by ME; the voltage is real, a way to collect it is not.',
   }, [SITE]),
-  gear('HALL', 'stellar_fractionation_hall', 'Stellar Fractionation Hall', ['PLATE'], 9.5, 18, {
-    for: 'The &6Stellar Fractionation Hall&r runs distillation tower and distillery recipes, one mode at a time, with a parallel hatch behind it. Pick the mode in the controller.',
-    needs: 'A UXV hull, UXV components and lasagna plate, with a parallel hatch.',
-    unlocks: 'Distillation at a scale no tower reaches, for the lines that cut heavy fluids.',
-    automate: 'Fluids by pipe; give each mode its own pipe and tank.',
-  }, [UXVC], 250),
 
   // ------------------------------------------------------------------ Cassiopeia A and the laser
-  gear('KNOT', 'ejecta_knot_sweeper', 'Ejecta Knot Sweeper', ['M_L_KNOT'], 2, 20, {
+  gear('SWEEP', 'ejecta_knot_sweeper', 'Ejecta Knot Sweeper', ['M_L_KNOT'], 2, 20, {
     for: 'The star\'s core was thrown out in clumps still rich in what it made as it died. The &6Ejecta Knot Sweeper&r sweeps them up, behind a shield bow.',
     needs: 'A UIV hull, the Whipple shield casing and a filter collector.',
     unlocks: 'Ejecta knot dust, and titanium-44 from it.',
     automate: 'Shield weave by ME; the dust comes back by hopper.',
   }, [it('grindless:whipple_shield_casing')]),
-  prod('KDUST', 'Ejecta Knot Dust', 'grindless:ejecta_knot_dust', ['KNOT'], 4.5, 20, ['Dust from a supernova\'s core, rich in titanium-44. A cascade and a calutron take it out later.']),
-  gear('GLASER', 'annihilation_laser_works', 'Annihilation Laser Works', ['KDUST'], 7, 20, {
+  gear('GLASER', 'annihilation_laser_works', 'Annihilation Laser Works', ['SWEEP'], 7, 20, {
     for: 'Slow a core\'s positrons into positronium, cool it, then let it annihilate all at once into a beam. The &6Annihilation Laser Works&r makes the gamma laser module.',
     needs: 'A UIV hull, the robust casing as a gamma shield and a Penning trap.',
     unlocks: 'The gamma laser module, and the UXV emitter built round it.',

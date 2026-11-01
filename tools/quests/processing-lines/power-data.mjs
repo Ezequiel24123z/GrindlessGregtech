@@ -663,9 +663,9 @@ export default gate({
     uxvStars: {
       name: 'Strange stars (UXV)',
       nodes: [
-        E('eqUxvRing', 0, -1.5, 'uxv_age', '5CE1C18D40A0B8E2'),
-        E('eqUxvBZ', 0, 0, 'uxv_age', '3611A4EAC7D055C3'),
-        E('eqUxvTap', 0, 1.5, 'uxv_age', '50C6BE5A52F4F9A0'),
+        E('eqUxvRing', 0, -1.5, 'uxv_machines', '5CE1C18D40A0B8E2'),
+        E('eqUxvBZ', 0, 0, 'uxv_machines', '3611A4EAC7D055C3'),
+        E('eqUxvTap', 0, 1.5, 'uxv_machines', '50C6BE5A52F4F9A0'),
         n('uxvRing', 2.25, -1.5, M('gtceu:uxv_fusion_reactor'), 'Mk6 Fusion Ring', {
           kind: 'info', tier: 'uxv', from: ['eqUxvRing'], sub: 'A star\'s burning stages, one after another, and a direct converter takes the power off each ash',
           desc: 'Hot CNO, helium, carbon and oxygen: the ash of each burn is quenched into the fuel of the next.',
@@ -815,7 +815,7 @@ export default gate({
           figs: [P.wcell('grindless:uiv_smes_cell', 'UIV SMES', 1006632960000)],
         }),
         // UXV's cell: four UIV cells' worth, wound with pasta strand tape in the nitride magnet works
-        E('eqUxvCell', 0, 12, 'uxv_age', '3F5ABDEF2254EC50'),
+        E('eqUxvCell', 0, 12, 'uxv_integration', '3F5ABDEF2254EC50'),
         n('wuxv', 2.25, 12, I('grindless:uxv_smes_cell'), 'UXV SMES Cell', {
           kind: 'info', from: ['eqUxvCell'], sub: 'Fifteen hundred and thirty-six UV batteries\' worth, wound with pasta strand',
           desc: 'The network jumps to UXV only when every formed tower holds these.',

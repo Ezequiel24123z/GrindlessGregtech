@@ -99,7 +99,10 @@ var GG_QUESTS_EXPECTED = {
   uiv_circuits: [13, 15],
   uiv_machines: [33, 33],
   uiv_integration: [18, 18],
-  uxv_age: [49, 54],
+  uxv_age: [26, 28],
+  uxv_circuits: [16, 23],
+  uxv_machines: [24, 25],
+  uxv_integration: [19, 19],
   opv_age: [52, 57],
   max_age: [52, 52]
 }

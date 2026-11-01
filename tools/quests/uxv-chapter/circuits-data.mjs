@@ -122,7 +122,7 @@ export const QUESTS = [
   q('EMIT', 'step', 'UXV Emitter', 'gtceu:uxv_emitter', ['SENSOR', 'C_L_GLASER'], 9.5, 11, null, [
     'With a gamma laser in hand, the &6UXV Emitter&r can be built. The parallel hatch and the OpV casing both need it.',
   ], [it('gtceu:uxv_emitter')], 250),
-  q('HATCH', 'step', 'UXV Hatches', 'gtceu:uxv_parallel_hatch', ['EMIT'], 12, 11, null, [
-    'The &6UXV Energy Input Hatch&r takes the full UXV voltage. The &6UXV Parallel Hatch&r lets the mega machines run far more recipes at once, and is the most expensive hatch of the era.',
-  ], [it('gtceu:uxv_energy_input_hatch'), it('gtceu:uxv_parallel_hatch')], 200),
+  q('HATCH', 'step', 'UXV Energy Hatch', 'gtceu:uxv_energy_input_hatch', ['EMIT'], 12, 11, null, [
+    'The &6UXV Energy Input Hatch&r takes the full UXV voltage.',
+  ], [it('gtceu:uxv_energy_input_hatch')], 200),
 ];
