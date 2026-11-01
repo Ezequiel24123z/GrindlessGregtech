@@ -101,14 +101,16 @@ export default {
           ['mega', mach('gtceu:megabar_press'), 'Megabar Press', 'ours', { desc: 'Squeezes the pellet between anvils into nanotwinned diamond.' }],
           ['ntd', I('grindless:nanotwinned_diamond'), 'Nanotwinned Diamond'],
           ['anv', I('grindless:nanotwinned_diamond_anvil'), 'Diamond Anvil'],
-          ['mega2', mach('gtceu:megabar_press'), 'Megabar Press', 'ours', { desc: 'Fiction: the real hydride needs over 100 GPa.' }],
-          ['hyd', I('gtceu:lay_superhydride_ingot'), 'Superhydride Ingot', 'product', { from: ['mega2', 'abc'] }],
+          ['mega2', mach('gtceu:megabar_press'), 'Megabar Press', 'ours', { from: ['anv', 'abc'], desc: 'Fiction: the real hydride needs over 100 GPa.' }],
+          ['hyd', I('gtceu:lay_superhydride_ingot'), 'Superhydride Ingot'],
         ], 'the scoop coil'),
         ...chain(2, [
-          ['amc', I('gtceu:ammonium_chloride_dust'), 'Ammonium Chloride', 'raw'],
+          ['bac', I('gtceu:boric_acid_dust'), 'Boric Acid', 'raw'],
+          ['tmb', I('grindless:trimethyl_borate_ampoule'), 'Trimethyl Borate'],
+          ['nbh', I('grindless:sodium_borohydride_dust'), 'Sodium Borohydride'],
           ['abd', I('gtceu:ammonia_borane_dust'), 'Ammonia Borane'],
           ['abc', I('grindless:ammonia_borane_charge'), 'Pressed Charge'],
-        ], null, 7.5),
+        ]),
         // rhenium, the single-crystal blade, the YSZ coat and the turbine wheel
         ...chain(6, [
           ['rhi', I('gtceu:rhenium_ingot'), 'Rhenium Ingot', 'raw'],
