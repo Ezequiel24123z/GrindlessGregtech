@@ -24,7 +24,7 @@
 //
 // MARKERS: GGTEST|gallery|<check>|PASS|FAIL|NOTE|<detail>; one FAIL line per item with a problem; the last line is
 // GGTEST|gallery|DONE.
-// TEST AREA: Overworld band X 12800-12863, Y 98-150 (seven panel rows, 4 panels each), Z 0-15 (cleared and force-loaded while the test runs; floor Y 98, wall Z 2,
+// TEST AREA: Overworld band X 12800-12863, Y 98-185 (twelve panel rows, 4 panels each), Z 0-15 (cleared and force-loaded while the test runs; floor Y 98, wall Z 2,
 // machines Z 3, light blocks Z 4); cleared again at the end, and the player goes back to where it was, in its game mode.
 // var + function everywhere: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
@@ -33,7 +33,7 @@
   var REQ = 'ggTestGalleryRequest'
   var QUIET_MS = 10000
   var LOADED_AT = Date.now()
-  var BAND = { x0: 12800, x1: 12863, y0: 98, y1: 150, z0: 0, z1: 15 }
+  var BAND = { x0: 12800, x1: 12863, y0: 98, y1: 185, z0: 0, z1: 15 }
   var FLOOR_Y = 98
   var WALL_Z = 2
   var MACHINE_Z = 3
@@ -47,7 +47,7 @@
   var PANEL_X0 = 12802
   var PANEL_DX = 15
   var PANELS_PER_ROW = 4
-  var ROW_BASES = [99, 106, 113, 120, 127, 134, 141]
+  var ROW_BASES = [99, 106, 113, 120, 127, 134, 141, 148, 155, 162, 169, 176]
   var WALL_BLOCK = 'minecraft:cyan_concrete'
   var FLOOR_BLOCK = 'minecraft:smooth_stone'
   var LIGHT_BLOCK = 'minecraft:light[level=15]'
