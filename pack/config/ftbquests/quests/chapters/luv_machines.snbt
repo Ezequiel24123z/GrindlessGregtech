@@ -1,0 +1,654 @@
+{
+	autofocus_id: "1368397CE117ECD1"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "luv_machines"
+	group: "1B68BDF66B6D5658"
+	icon: "gtceu:hts_magnet_works"
+	id: "521F2665531F8703"
+	order_index: 2
+	quest_links: [
+		{
+			id: "541CC61FB4A268D4"
+			linked_quest: "7A00F7E4F256E45A"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "713C9F989626ED57"
+			linked_quest: "7A00F7E4F256E45A"
+			x: 0.0d
+			y: 1.5d
+		}
+		{
+			id: "3AC4F7F67EB42ABE"
+			linked_quest: "1F4E8B2F7895A2B7"
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			id: "34052544C94EE3A3"
+			linked_quest: "7585FE5E7EF942A7"
+			x: 0.0d
+			y: 4.5d
+		}
+		{
+			id: "7507900F5DA182E1"
+			linked_quest: "75745AD963ECB5C8"
+			x: 0.0d
+			y: 6.0d
+		}
+		{
+			id: "5D9EB261930B2F5B"
+			linked_quest: "75745AD963ECB5C8"
+			x: 0.0d
+			y: 7.5d
+		}
+		{
+			id: "11DBC41C500F85F8"
+			linked_quest: "75745AD963ECB5C8"
+			x: 0.0d
+			y: 9.0d
+		}
+		{
+			id: "33703167216681B3"
+			linked_quest: "7F943A5682742ECD"
+			x: 0.0d
+			y: 10.5d
+		}
+		{
+			id: "10E212CA5059544E"
+			linked_quest: "7F943A5682742ECD"
+			x: 0.0d
+			y: 12.0d
+		}
+		{
+			id: "37F608F0DBB87B36"
+			linked_quest: "715B44AABDAFBFAE"
+			x: 0.0d
+			y: 13.5d
+		}
+		{
+			id: "1457EFC34DD8951A"
+			linked_quest: "34BE2C5053E7572B"
+			x: 0.0d
+			y: 15.0d
+		}
+		{
+			id: "138307E295805958"
+			linked_quest: "107CFEA9014148F1"
+			x: 0.0d
+			y: 16.5d
+		}
+		{
+			id: "1A97ACCF21F08078"
+			linked_quest: "107CFEA9014148F1"
+			x: 0.0d
+			y: 18.0d
+		}
+		{
+			id: "198E8F5EFB453A89"
+			linked_quest: "3C825200F07FFF67"
+			x: 0.0d
+			y: 19.5d
+		}
+		{
+			id: "32673FA9CA0F5793"
+			linked_quest: "1F4E8B2F7895A2B7"
+			x: 0.0d
+			y: 21.0d
+		}
+		{
+			id: "716586D75CCDFAE3"
+			linked_quest: "3F76BCDB3BBA8FA4"
+			x: 0.0d
+			y: 22.5d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["7A00F7E4F256E45A"]
+			description: ["Every hot ingot in the vacuum freezer throws half its liquid helium away. The &6Helium Refrigerator&r keeps a charge in its own hatch and only tops it up. Liquid nitrogen for the precooling, and an IV vacuum freezer line to relieve. Frozen ingots at a fraction of the helium, and the helium your later cryogenics will want. The nitrogen leaves as gas: pipe it back to the Moon's cryogenic plant and let ME top up the helium."]
+			icon: "gtceu:helium_refrigerator"
+			id: "1368397CE117ECD1"
+			rewards: [
+				{ id: "51143C2CFF164BCA", type: "xp", xp: 80 }
+				{ count: 4, id: "32DEC6633BEFD989", item: "gtceu:liquid_nitrogen_bucket", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1C61E246579AA5DD", item: "gtceu:helium_refrigerator", type: "item" }]
+			title: "Closed Loop"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7A00F7E4F256E45A"]
+			description: ["GregTech's sterile chain normally waits for a ZPM cleanroom. The &6Biofoundry&r is a sealed hall with an airlock and a UV ceiling, and it runs the whole chain at LuV. Meat and bone from your creature simulators to start with, and a lot of patience for what comes after. Collagen, gelatin and agar from nothing alive. Everything after them needs bacteria, and Earth has none you can use. Feed the simulators by ME and let the sludge it hands back go round again."]
+			icon: "gtceu:biofoundry"
+			id: "3B64E8E2A5FD37A0"
+			rewards: [
+				{ id: "3ABC85FC87C82788", type: "xp", xp: 80 }
+				{ count: 16, id: "33AF14918A101674", item: "minecraft:bone", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5DA2D5A6129F14AA", item: "gtceu:biofoundry", type: "item" }
+				{ id: "5110D841416DB276", item: "gtceu:gelatin_dust", type: "item" }
+				{ id: "588877DE57E0E365", item: "gtceu:agar_dust", type: "item" }
+			]
+			title: "Biofoundry"
+			x: 2.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1F4E8B2F7895A2B7"]
+			description: ["The &6Coated Conductor Line&r rolls nickel and Mars tungsten into a textured tape, then lays a film of ITBTC on it with a laser, oxygen and a silver cap. The LuV mixer for the ITBTC dust, and tungsten from the Red Planet. Superconducting tape with no ultra-hot EBF, no helium, and a fraction of the superconductor a cast wire eats. The tape can't be melted back down, so keep a stock and make what the magnet works eats."]
+			icon: "gtceu:coated_conductor_line"
+			id: "3A6139E43FC0C489"
+			rewards: [
+				{ id: "15BD08175D0C400B", type: "xp", xp: 80 }
+				{ count: 16, id: "362792BD9DE36BAA", item: "gtceu:nickel_dust", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "120E1B3D50FBF348", item: "gtceu:coated_conductor_line", type: "item" }]
+			title: "Tape"
+			x: 2.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3A6139E43FC0C489"]
+			description: [
+				"The &6ITBTC Coated Conductor&r is the line you built, finished: a nickel-tungsten ribbon wearing a ceramic film that superconducts at a temperature liquid nitrogen reaches."
+				"Ship it to the magnet works."
+			]
+			icon: "grindless:itbtc_coated_conductor"
+			id: "1D90C22797563D9A"
+			rewards: [{ id: "35877FBCC5CD71DD", type: "xp", xp: 60 }]
+			tasks: [
+				{ id: "3122AC6EB8A05065", item: "grindless:nickel_tungsten_tape", type: "item" }
+				{ id: "7140F7EB4398C2EE", item: "grindless:itbtc_coated_conductor", type: "item" }
+			]
+			title: "Coated and Cut"
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["7585FE5E7EF942A7"]
+			description: ["The &6HTS Magnet Works&r winds tape round a mandrel, soaks it in epoxy and tests it cold before anything leaves the building. Tape from the coated line, epoxy, and a sliver of the trinium GregTech's own coil asks for. The superconducting coil, and with it a fusion ring that LuV can afford. It also winds the network cells, coilgun coils and magnetic bearings. Keep tape and epoxy flowing by ME and the coils stock themselves."]
+			icon: "gtceu:hts_magnet_works"
+			id: "38F8454E1AEB4E72"
+			rewards: [
+				{ id: "1E5784757E175F5D", type: "xp", xp: 120 }
+				{ count: 2, id: "7C80948DC6AE621F", item: "gtceu:epoxy_bucket", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5D111C4051210281", item: "gtceu:hts_magnet_works", type: "item" }
+				{ id: "1A82B4FDD8759FA8", item: "gtceu:superconducting_coil", type: "item" }
+			]
+			title: "Winding"
+			x: 2.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["38F8454E1AEB4E72"]
+			description: [
+				"A &6LuV SMES Cell&r keeps its energy in a superconducting coil's field. The bank only hands out LuV once every formed tower holds LuV cells, so swap them all: one forgotten tower in the corner holds the whole network back."
+				"Until then, two IV wireless hatches on a multiblock still reach LuV."
+			]
+			icon: "grindless:luv_smes_cell"
+			id: "5933ADF51C8949BD"
+			rewards: [{ id: "7376D9A25EC1B869", type: "xp", xp: 120 }]
+			tasks: [
+				{ id: "58A6EF8140058C59", item: "grindless:luv_smes_cell", type: "item" }
+				{ id: "19853885579FA26A", item: "gtceu:luv_wireless_energy_hatch", type: "item" }
+			]
+			title: "The Network Goes LuV"
+			x: 4.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["75745AD963ECB5C8"]
+			description: ["Up here the Sun never sets, and the &6Orbital Solar Station&r makes the most of it: two wings of panels on a truss, and every panel that sees open sky pays. Orbital solar panels and station truss casing, then a LuV wireless dynamo hatch to send the power home. Free power on the network. It burns nothing, so nothing doubles it. Panels never wear out, so build it once and let the network sell the surplus."]
+			icon: "gtceu:orbital_solar_station"
+			id: "3F2030C8DDEDB9FF"
+			rewards: [
+				{ id: "39623E31E54F56E3", type: "xp", xp: 100 }
+				{ count: 2, id: "18F7447DC3B656EE", item: "gcyr:photovoltaic_cell", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7DCDEB7079BC07A6", item: "gtceu:orbital_solar_station", type: "item" }
+				{ id: "32FE0E13005F7F83", item: "grindless:orbital_solar_panel", type: "item" }
+			]
+			title: "Endless Day"
+			x: 2.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["75745AD963ECB5C8"]
+			description: ["On the ground ZBLAN glass crystallizes while it's drawn; up here it stays clear. The &6Microgravity Smelter&r draws it into optical pipe with no silver at all. ZBLAN dust, mixed at home in the Large Mixing Vessel because a normal mixer can't hold that much fluorine. Optical pipe for the research station, Whipple shield casing by foaming metal, and naquadah alloy melted floating in a field. Send ZBLAN up by ME and let the pipe come back down the same way."]
+			icon: "gtceu:microgravity_smelter"
+			id: "121BEE9B7E15DE8C"
+			rewards: [{ id: "3FF36420AFEFE3A2", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "36718AA56A92385A", item: "gtceu:microgravity_smelter", type: "item" }
+				{ id: "135209E83A9A320B", item: "gtceu:zblan_dust", type: "item" }
+			]
+			title: "Fibre from Nothing"
+			x: 2.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["121BEE9B7E15DE8C"]
+			description: ["A strand of ZBLAN with no crystals in it carries light a long way. This is the &6Optical Pipe&r the research station and the HPCA both wire up with."]
+			icon: "gtceu:normal_optical_pipe"
+			id: "3504AC546284B5BC"
+			rewards: [{ id: "71E81738C368F7A0", type: "xp", xp: 60 }]
+			tasks: [{ id: "33A0290EF2E276C2", item: "gtceu:normal_optical_pipe", type: "item" }]
+			title: "Clear Glass"
+			x: 4.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["3504AC546284B5BC"]
+			description: ["A thin skin of foamed metal, spaced from the hull, turns a micrometeorite into harmless vapour. The smelter foams the &6Whipple Shield Casing&r; the wake facility's disc is made of it."]
+			icon: "grindless:whipple_shield_casing"
+			id: "76E167FD4B94F42F"
+			rewards: [{ id: "5469400217EE3AAE", type: "xp", xp: 60 }]
+			tasks: [{ id: "54EA2123B00168F9", item: "grindless:whipple_shield_casing", type: "item" }]
+			title: "Whipple Shield"
+			x: 6.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["76E167FD4B94F42F"]
+			description: ["Behind a disc flying through orbit, the vacuum is emptier than any chamber you could build. The &6Wake Shield Facility&r grows its wafers there. A disc of Whipple shield casing, so the smelter goes first, and the same sources GregTech's own cleanroom asks for. HPIC and UHPIC wafers with half the source and half the time. Give it germanium and it grows solar wafers too. Let ME fill the sources and carry the wafers to the cleanroom."]
+			icon: "gtceu:wake_shield_facility"
+			id: "58EFB73E6DD24BDB"
+			rewards: [
+				{ id: "5917C4380DC0402D", type: "xp", xp: 100 }
+				{ count: 4, id: "3AEEC37901F33633", item: "gtceu:indium_gallium_phosphide_dust", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "54780AE195859BCD", item: "gtceu:wake_shield_facility", type: "item" }]
+			title: "In the Wake"
+			x: 8.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["58EFB73E6DD24BDB"]
+			description: ["The &6UHPIC Wafer&r is the purest slice of silicon the pack makes. Nothing on the ground grows one this clean, and the ZPM chips will be cut from it."]
+			icon: "gtceu:uhpic_wafer"
+			id: "5D20D0252114492B"
+			rewards: [{ id: "5D2ED935CBC7767E", type: "xp", xp: 80 }]
+			tasks: [{ id: "52493E94E20E7A74", item: "gtceu:uhpic_wafer", type: "item" }]
+			title: "Cleaner than Clean"
+			x: 10.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["75745AD963ECB5C8"]
+			description: ["With nothing stirring the melt, a crystal grows without flaws. The &6Zero-G Crystal Grower&r makes raw crystal chips every time instead of now and then. The same dopant GregTech asks for, and sapphire test masses cut from its own boules. The crystal circuit chain in the circuits chapter, much faster. The test masses are for later; EMI says what for. One grower, one ME bus for dopant, and the chips arrive on their own."]
+			icon: "gtceu:zero_g_crystal_grower"
+			id: "18A794C8BAA71D81"
+			rewards: [
+				{ id: "79A3343DDCAA87FC", type: "xp", xp: 100 }
+				{ count: 16, id: "70CB42BE6A87A4A8", item: "gtceu:sapphire_dust", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "36BE5E6C87916B16", item: "gtceu:zero_g_crystal_grower", type: "item" }
+				{ id: "5132B223B09F2DD4", item: "grindless:sapphire_test_mass", type: "item" }
+			]
+			title: "Perfect Crystal"
+			x: 2.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["7F943A5682742ECD"]
+			description: ["The belt's veins answer to one drill: the &6Harpoon Anchor Drill&r, pinned to the rock by harpoons while its HSS-S bit works. Bits and harpoons, which both wear slowly. No drilling fluid: it is vacuum, same as Mercury. Raw meteoric iron and the rest of the belt veins. A lathe and a press keep bits and harpoons in stock by ME."]
+			icon: "gtceu:harpoon_anchor_drill"
+			id: "7C258E5E568EE8F2"
+			rewards: [{ id: "7591EE6013028AF0", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "58ED6E6D577F6699", item: "gtceu:harpoon_anchor_drill", type: "item" }]
+			title: "Harpoon"
+			x: 2.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["7C258E5E568EE8F2"]
+			description: ["The &6HSS-S Drill Bit&r wears down a little with every bore, and the &6Anchor Harpoon&r stays in the rock until you pull it. Keep spares of both."]
+			icon: "grindless:hss_s_drill_bit"
+			id: "5F2EEA315A9E5CB3"
+			rewards: [
+				{ id: "351B287792B112D7", type: "xp", xp: 60 }
+				{ count: 2, id: "36A0522C5471B73C", item: "grindless:anchor_harpoon", type: "item" }
+			]
+			tasks: [
+				{ id: "533C0813A5B92E29", item: "grindless:hss_s_drill_bit", type: "item" }
+				{ id: "5792BD7C26385D0D", item: "grindless:anchor_harpoon", type: "item" }
+			]
+			title: "Bits and Harpoons"
+			x: 4.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["5F2EEA315A9E5CB3"]
+			description: ["The &6Asteroid Processor&r runs the Mond process: carbon monoxide carries the iron and nickel away as gas and leaves the platinum metals behind as a concentrate. Carbon monoxide, which stays in the machine, and meteoric iron from the harpoon drill. The concentrate exists nowhere else, so the processor won't void it. It also pulls tetrataenite apart by magnet. The meteoric iron dust that leaves goes back through Mond; close that loop with ME."]
+			icon: "gtceu:asteroid_processor"
+			id: "5556DFCD2B6DD947"
+			rewards: [
+				{ id: "3E232CC68F44C448", type: "xp", xp: 100 }
+				{ count: 2, id: "162392BFEE00E911", item: "gtceu:carbon_monoxide_bucket", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1C58AD65259FF192", item: "gtceu:asteroid_processor", type: "item" }]
+			title: "Mond"
+			x: 6.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["5556DFCD2B6DD947"]
+			description: ["The &6Rotating Hydroponic Ring&r spins for gravity, keeps the Sun on all the time and seals engineered crops away from the wild. A hub on magnetic bearings of tetrataenite from the processor, wound at the magnet works, and the engineered seeds from home. Neurotrophic factor from the barley and collagen from the tobacco. Neither seed gets eaten. Let ME replant nothing: the ring replants for you. Just drain the factor."]
+			icon: "gtceu:hydroponic_ring"
+			id: "569ED410C9F7ED07"
+			rewards: [
+				{ id: "7BBFDF8C1CE6C8A4", type: "xp", xp: 100 }
+				{ count: 4, id: "5DFAA661A5D85B49", item: "gtceu:carbon_dioxide_bucket", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3030C275B47F38E4", item: "gtceu:hydroponic_ring", type: "item" }]
+			title: "Molecular Farm"
+			x: 8.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["569ED410C9F7ED07"]
+			description: ["The ring turns on &6Magnetic Bearings&r, so nothing touches and nothing wears. Make a few spare ones at the magnet works."]
+			icon: "grindless:magnetic_bearing"
+			id: "564E7FD4BAE63B55"
+			rewards: [{ id: "7499F9157AFA03AF", type: "xp", xp: 60 }]
+			tasks: [{ count: 4L, id: "3AE097BD93E618FF", item: "grindless:magnetic_bearing", type: "item" }]
+			title: "Bearings"
+			x: 10.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["564E7FD4BAE63B55"]
+			description: ["In orbit, neurons grow in three dimensions without a scaffold. The &6Organoid Lab&r turns stem cells, growth medium and the ring's neurotrophic factor into a neural organoid. Stem cells from the biofoundry, and factor from the ring. The neuro processing unit, in the circuits chapter. Nothing else makes one before ZPM. Feed the lab by ME and let the organoids go straight to the assembler."]
+			icon: "gtceu:organoid_lab"
+			id: "7C67E4A7D55ABED5"
+			rewards: [{ id: "1AB884D956CE2276", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "10DDD5BEE2DAB461", item: "gtceu:organoid_lab", type: "item" }]
+			title: "Organoid"
+			x: 12.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["7C67E4A7D55ABED5"]
+			description: ["A &6Neural Organoid&r is living tissue wired up in orbit. It is only as good as the factor and medium that fed it, so check them before blaming the lab."]
+			icon: "grindless:neural_organoid"
+			id: "31DC0512EB49BCD2"
+			rewards: [{ id: "32AFFB47DC78AB47", type: "xp", xp: 80 }]
+			tasks: [{ id: "52BFDE40294BD2AD", item: "grindless:neural_organoid", type: "item" }]
+			title: "Neural Organoid"
+			x: 14.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["7F943A5682742ECD"]
+			description: ["The &6Optical Miner&r bags crumbly carbon-rich boulders and bakes them with mirrors until water, carbon dioxide and a nitrogen-and-phosphorus extract boil off. Capture bags and the Sun on its receiver, and the Sun is faint out here, hence all the mirrors. Chondritic extract for the algae, water for the belt and, through its second recipe, the processor's carbon monoxide. Capture bags are returned empty. Send them back by ME."]
+			icon: "gtceu:optical_miner"
+			id: "1997FB952337C741"
+			rewards: [
+				{ id: "5908F6DB648D4ECB", type: "xp", xp: 100 }
+				{ id: "7F1DFD24E69DF9E1", item: "grindless:capture_bag", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "74AB7FD3082AE1C5", item: "gtceu:optical_miner", type: "item" }
+				{ id: "59B83BAC6052A234", item: "grindless:capture_bag", type: "item" }
+			]
+			title: "Sunlight on a Boulder"
+			x: 2.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["715B44AABDAFBFAE"]
+			description: ["The &6Fumarole Condenser&r sits over a field of vents and catches what the gas drops as it cools: sulfur dioxide, sulfur and a sublimate with germanium in it. Radiation vault casing round it, and the wireless hatch you brought. The only germanium before ZPM, and sulfur concrete, which needs no water. Jovian bases are built from it. Send the gas to the Volcanic Intake next door and ship the rest home."]
+			icon: "gtceu:fumarole_condenser"
+			id: "3448ADF675EDD8E7"
+			rewards: [{ id: "5E7185555C94EB4E", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "73E53DF21AF01002", item: "gtceu:fumarole_condenser", type: "item" }
+				{ id: "599598C93A3EBE41", item: "gtceu:germanium_dust", type: "item" }
+			]
+			title: "Fumarole"
+			x: 2.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["3448ADF675EDD8E7"]
+			description: ["Molten sulfur and Io's own dust cure into &6Sulfur Concrete Casing&r with no water at all. The Cryobot's base is made of it."]
+			icon: "grindless:sulfur_concrete_casing"
+			id: "3A2EA6FB4BE8146C"
+			rewards: [{ id: "1482D2D6190D1BF3", type: "xp", xp: 60 }]
+			tasks: [{ id: "18BAC72C410A3967", item: "grindless:sulfur_concrete_casing", type: "item" }]
+			title: "Sulfur Concrete"
+			x: 4.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["3A2EA6FB4BE8146C"]
+			description: ["The &6Volcanic Intake&r stands on a patera's magma and runs sulfur dioxide through turbines, and the power goes home through the network. Its sulfur dioxide charge, which comes from the condenser next door, and heat exchanger bundles. Power that burns nothing. The bundles erode in hot sulfur and need replacing. Keep spare bundles in an ME chest on Io."]
+			icon: "gtceu:volcanic_intake"
+			id: "5BC4BFE9A199F5A1"
+			rewards: [{ id: "100219E1DF0F24EC", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3163F820D8C80CCC", item: "gtceu:volcanic_intake", type: "item" }]
+			title: "Patera"
+			x: 6.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["5BC4BFE9A199F5A1"]
+			description: ["A &6Heat Exchanger Bundle&r erodes in hot sulfur, a little with every cycle. Swap it before it fails, not after."]
+			icon: "grindless:heat_exchanger_bundle"
+			id: "36BD92C7A422CBA5"
+			rewards: [
+				{ id: "5AC06151D98E379C", type: "xp", xp: 60 }
+				{ id: "716FA2B94D4D9972", item: "grindless:heat_exchanger_bundle", type: "item" }
+			]
+			tasks: [{ id: "586B1A6F21D5F992", item: "grindless:heat_exchanger_bundle", type: "item" }]
+			title: "Exchanger Bundle"
+			x: 8.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["36BD92C7A422CBA5"]
+			description: ["Io orbits inside a ring of plasma that turns with Jupiter, much faster than Io moves. The &6Flux-Tube Tether&r hangs a wire into it from a second station and collects the current. Tether spools and a breath of Mars argon. No ground and no fuel. Power for the fusion ring, from a station in Io orbit. Spools wear out; keep them stocked by ME on the station."]
+			icon: "gtceu:flux_tube_tether"
+			id: "122BA3AB5BF6C0A8"
+			rewards: [{ id: "15051E358546738E", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "544731B00313C131", item: "gtceu:flux_tube_tether", type: "item" }
+				{ id: "375C9CA3408AF5A4", item: "grindless:tether_spool", type: "item" }
+			]
+			title: "Riding the Torus"
+			x: 10.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["122BA3AB5BF6C0A8"]
+			description: ["GregTech's &6Fusion Reactor Mk1&r, built round your own HTS coils. Plenty of LuV energy hatches: every hatch adds to the buffer that pays for a start, and europium needs a big start. Europium, and calcium plasma from magnesium and oxygen as its power recipe. The old transmutations that faked osmium and uranium are gone. Hydrogen from the iodine loop or a tank farm, and let ME carry the output."]
+			icon: "gtceu:luv_fusion_reactor"
+			id: "543F014BB97A45F4"
+			rewards: [{ id: "533D64890831EDCA", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "325918310E498A2C", item: "gtceu:luv_fusion_reactor", type: "item" }
+				{ count: 4L, id: "5A26D33DF72BC1E3", item: "gtceu:superconducting_coil", type: "item" }
+			]
+			title: "Fusion"
+			x: 12.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["34BE2C5053E7572B"]
+			description: ["The &6Cryobot&r melts its way down through the ice, paying out its tether as it sinks. A base of sulfur concrete, so Io comes first, and probes to send down. A living ocean sample, and after that brine by the tank. Probes are single use. Keep them stocked by ME."]
+			icon: "gtceu:cryobot"
+			id: "377C157965B3A560"
+			rewards: [{ id: "77BA838176319E5B", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "74A8951E8BD752F4", item: "gtceu:cryobot", type: "item" }
+				{ id: "1E0E10CDA6C87AA0", item: "grindless:cryobot_probe", type: "item" }
+			]
+			title: "Cryobot"
+			x: 2.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["377C157965B3A560"]
+			description: ["Brine, hydrogen, peroxide and chondritic extract feed the ocean sample in the &6Algae Bioreactor&r, and out come bacteria. The sample from the Cryobot, and the belt's chondritic extract. The only living matter in the pack. The bioreactor refuses to void it. So should you. Every culture is a seed for the next; keep one back."]
+			icon: "gtceu:algae_bioreactor"
+			id: "5B8B17CDA9D43E9A"
+			rewards: [{ id: "345A0915E28B4D98", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3CF3D8F95F3BA36A", item: "gtceu:algae_bioreactor", type: "item" }]
+			title: "Something Alive"
+			x: 4.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["107CFEA9014148F1"]
+			description: ["The &6Gravitational-Wave Detector&r is an L of vacuum tubes buried in packed or blue ice, with your sapphire test masses for mirrors. IV's Sagittarius A* signal in its bus, where it stays. Plain ice won't do for the cover; it melts. A long observing run writes the catalogue: two black holes merging, heard as a rising chirp. Copy the catalogue with a data orb and let ME stock the masses."]
+			icon: "gtceu:gravitational_wave_detector"
+			id: "35A1D103C253B975"
+			rewards: [
+				{ id: "1DFB91A920604CAE", type: "xp", xp: 150 }
+				{ count: 2, id: "11C25DDFC0BBB9AC", item: "gtceu:data_orb", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "71F3EFA8ECC8E395", item: "gtceu:gravitational_wave_detector", type: "item" }
+				{ count: 4L, id: "3EE1921ACF052EFF", item: "grindless:sapphire_test_mass", type: "item" }
+			]
+			title: "Chirp"
+			x: 2.0d
+			y: 16.5d
+		}
+		{
+			dependencies: ["107CFEA9014148F1"]
+			description: ["Out here mercury barium calcium cuprate superconducts on its own, so the magnet works' coils need no cryostat. String them into the barrel of the &6Coilgun Probe Launcher&r. Coilgun coil casing, wound at the magnet works, and a probe to fire. Probes off the moon with no rocket at all: the gas giant and the flyby both start here. Let ME load probes and keep the coil casing in stock."]
+			icon: "gtceu:coilgun_launcher"
+			id: "1770E32F925B4E73"
+			rewards: [{ id: "58DCBF0F3BEC2E99", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7CFFD5635721B996", item: "gtceu:coilgun_launcher", type: "item" }]
+			title: "Coilgun"
+			x: 2.0d
+			y: 18.0d
+		}
+		{
+			dependencies: ["1770E32F925B4E73"]
+			description: ["Each &6Coilgun Coil Casing&r is a ring of superconducting winding, and the barrel is a long row of them. Build it long enough, because speed is length."]
+			icon: "grindless:coilgun_coil_casing"
+			id: "31355CAB056CC9DC"
+			rewards: [{ id: "71C6D9F29001B328", type: "xp", xp: 80 }]
+			tasks: [{ id: "333DDF3EF5D13E7A", item: "grindless:coilgun_coil_casing", type: "item" }]
+			title: "Barrel Casing"
+			x: 4.0d
+			y: 18.0d
+		}
+		{
+			dependencies: ["3C825200F07FFF67"]
+			description: ["Enriched naquadah becomes long rods for GT--'s &6Naquadah Reactor III&r, the fuel-burning half of LuV power. A spent rod isn't rubbish: macerate it and send the dust back to the plant's spent-fuel recipe, which squeezes some enriched naquadah back out. Not all of it, sadly."]
+			icon: "gtnn:luv_naquadah_reactor"
+			id: "3D5EC5039EBDE967"
+			rewards: [{ id: "56651F15A5E42E03", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "3B8544C7C67CEA61", item: "gtnn:luv_naquadah_reactor", type: "item" }
+				{ id: "3AF3F461B1F975EC", item: "gtceu:long_enriched_naquadah_rod", type: "item" }
+			]
+			title: "Reactor III"
+			x: 2.0d
+			y: 19.5d
+		}
+		{
+			dependencies: ["3D5EC5039EBDE967"]
+			description: ["The &6LuV Parallel Hatch&r fits the same slot as the IV one in every plant of ours, the naquadah plant included. Each copy still pays its own power, so it's your energy hatches that decide how many really run, and multi-amp hatches lift that cap."]
+			icon: "gtceu:luv_parallel_hatch"
+			id: "548A6D01CD361BD3"
+			optional: true
+			rewards: [{ id: "5120C35F3DE3D903", type: "xp", xp: 60 }]
+			size: 0.75d
+			tasks: [{ id: "305D8E0FD477DA5A", item: "gtceu:luv_parallel_hatch", type: "item" }]
+			title: "Sixteen at Once"
+			x: 4.0d
+			y: 19.5d
+		}
+		{
+			dependencies: ["1F4E8B2F7895A2B7"]
+			description: ["The &6Mega Chemical Complex&r joins whole lines into one recipe: PTFE, epoxy and para-aramid each go from raw inputs to finished product without a single hand-off. The Coil Chemical Plants you built at HV go into it. Plastics and epoxy in bulk, which the magnet works and the cables both want. One ME input bus per raw material and the line runs itself."]
+			icon: "gtceu:mega_chemical_complex"
+			id: "3A90AC0F5D813B89"
+			rewards: [
+				{ id: "3F7E7EBCE074DC44", type: "xp", xp: 100 }
+				{ count: 8, id: "5FF60EBA8289D2D2", item: "gtceu:polytetrafluoroethylene_ingot", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5FC8A4EEE57F6C4A", item: "gtceu:mega_chemical_complex", type: "item" }]
+			title: "Chemical Complex"
+			x: 2.0d
+			y: 21.0d
+		}
+		{
+			dependencies: ["3F76BCDB3BBA8FA4"]
+			description: [
+				"Each moon gets its own quantum bridge, paired with the quantum seed you made there: the belt, Io, Europa and Ganymede all reach your home network. Keep one ring and one link at home for each."
+				"Anything on those worlds can then ship by ME, the same as on the Moon."
+			]
+			icon: "ae2:quantum_link"
+			id: "191B4A3DE689D533"
+			rewards: [{ id: "7C92722390C1C2A6", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "349F5CD610B0E514", item: "ae2:quantum_link", type: "item" }
+				{ id: "5BB51E88EF20D89A", item: "ae2:quantum_ring", type: "item" }
+			]
+			title: "The Bridge Reaches Out"
+			x: 2.0d
+			y: 22.5d
+		}
+	]
+	subtitle: ["Twenty halls of ours, from the helium refrigerator at home to the coilgun on Ganymede."]
+	title: "LuV: Machines"
+}

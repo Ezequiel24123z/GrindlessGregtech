@@ -150,12 +150,12 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'RTG', title: 'Packed for the Trip', icon: 'grindless:probe_rtg', pkg: ['B1'],
+    key: 'RTG', title: 'Packed for the Trip', icon: 'gtceu:ev_rtg', pkg: ['B1'],
     deps: ['LVL4'], x: 8, y: 1.5,
     desc: [
-      "A &6Probe RTG&r keeps a landing kit warm when the Sun is faint and the wireless link drops. Out past Mars nothing else will, so pack a spare for every world you visit.",
+      "An &6RTG Cell&r keeps a landing kit running when the Sun is faint and the wireless link drops. Out past Mars nothing else will, so pack a spare for every world you visit.",
     ],
-    tasks: [it('grindless:probe_rtg')],
+    tasks: [it('gtceu:ev_rtg')],
     rewards: [xp(60)],
   },
   {
