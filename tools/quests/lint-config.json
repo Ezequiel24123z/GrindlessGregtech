@@ -4,8 +4,17 @@
   "maxVerticalDrop": 3.0,
   "minGap": 0.25,
   "grid": 0.25,
-  "maxWords": 70,
-  "maxLines": 4,
+  "limits": {
+    "_why": "Text limits per chapter role (docs/reforge/05_quest_design.md, section 3.2): quests that teach a new wafer, circuit, process, machine or plant need more room than the journey chapters. A chapter's role is its chapterRoles entry, else its file name suffix.",
+    "default": { "maxWords": 70, "maxLines": 4 },
+    "roles": {
+      "circuits": { "maxWords": 120, "maxLines": 5 },
+      "machines": { "maxWords": 120, "maxLines": 5 },
+      "integration": { "maxWords": 120, "maxLines": 5 },
+      "capstone": { "maxWords": 120, "maxLines": 5 }
+    },
+    "chapterRoles": { "max_horizon": "capstone", "maxplus_creative": "capstone", "maxplus_tree": "capstone", "maxplus_hyperstargate": "capstone" }
+  },
   "maxRewardEntries": 6,
   "direction": { "default": "ltr" },
   "noRewardGroups": { "groups": ["Processing Lines"], "chapters": ["power"], "why": "The processing-line charts and the Power tab are reference: no rewards, nothing to claim (docs/quests.md, sections 17 and 18)." },
