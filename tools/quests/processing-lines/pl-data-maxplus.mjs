@@ -1,6 +1,6 @@
 // pl_maxplus: the MAX+ lines (docs/eras/maxplus.md "Lines") and the Hyperstargate tree, checked against the built tables and a recipe dump by pl-check.mjs.
 // A row is one line: [kind, id, [from...], by?]; kind is i (item), f (fluid), m (machine) or l (a link to an older chart: 'pl_x:key'); from = earlier node indexes.
-// A by flag marks a by-product leaf drawn beside its source. Machines are the mod's own multiblocks; GTM steps are plain item-to-item arrows.
+// A by flag marks a by-product leaf drawn beside its source; a peek flag marks an item still hidden in EMI. Machines are the mod's own multiblocks; GTM steps are plain item-to-item arrows.
 import { I, F, M, L, n } from './pl-lib.mjs';
 
 const ROWS = {
@@ -232,15 +232,15 @@ const ROWS = {
   P19: [
     ["l", "pl_steam:qsand", []],
     ["m", "gtceu:zone_refining_tower", [0]],
-    ["i", "grindless:fused_quartz_sphere_blank", [1]],
-    ["i", "grindless:lapped_quartz_sphere", [2]],
+    ["i", "grindless:fused_quartz_sphere_blank", [1], 0, 1],
+    ["i", "grindless:lapped_quartz_sphere", [2], 0, 1],
     ["m", "gtceu:mtj_sputter_cluster", [3]],
-    ["i", "grindless:nb_coated_sphere", [4]],
+    ["i", "grindless:nb_coated_sphere", [4], 0, 1],
     ["m", "gtceu:shequid_works", [5]],
-    ["i", "grindless:calibrated_gyro", [6]],
+    ["i", "grindless:calibrated_gyro", [6], 0, 1],
     ["f", "fluid:gtceu:helium", [6], 1],
     ["m", "gtceu:shequid_works", [7]],
-    ["i", "grindless:cold_kerr_gyro", [9]],
+    ["i", "grindless:cold_kerr_gyro", [9], 0, 1],
   ],
   P20: [
     ["i", "gtceu:tungsten_steel_plate", []],
@@ -461,44 +461,44 @@ const ROWS = {
   T11: [
     ["i", "grindless:kerr_strange_plate", []],
     ["m", "gtceu:single_crystal_foundry", [0]],
-    ["i", "grindless:oriented_blade_blank", [1]],
+    ["i", "grindless:oriented_blade_blank", [1], 0, 1],
     ["m", "gtceu:megabar_press", [2]],
-    ["i", "grindless:densified_blade", [3]],
-    ["i", "grindless:edged_blade", [4]],
+    ["i", "grindless:densified_blade", [3], 0, 1],
+    ["i", "grindless:edged_blade", [4], 0, 1],
     ["m", "gtceu:electron_beam_furnace", [5]],
-    ["i", "grindless:coated_iris_blade", [6]],
+    ["i", "grindless:coated_iris_blade", [6], 0, 1],
     ["m", "gtceu:hyper_assembly_array", [7]],
-    ["i", "grindless:iris_blade", [8]],
+    ["i", "grindless:iris_blade", [8], 0, 1],
   ],
   T12: [
     ["l", "pl_uiv:l22_9", []],
     ["m", "gtceu:nuclear_clock_lab", [0]],
-    ["i", "grindless:nuclear_clock_reference", [1]],
+    ["i", "grindless:nuclear_clock_reference", [1], 0, 1],
     ["m", "gtceu:photonic_foundry", [2]],
-    ["i", "grindless:optical_frequency_divider", [3]],
+    ["i", "grindless:optical_frequency_divider", [3], 0, 1],
     ["m", "gtceu:tfln_fab", [4]],
-    ["i", "grindless:phase_modulator_chip", [5]],
+    ["i", "grindless:phase_modulator_chip", [5], 0, 1],
     ["m", "gtceu:femtosecond_writer", [6]],
-    ["i", "grindless:inscribed_reference_crystal", [7]],
+    ["i", "grindless:inscribed_reference_crystal", [7], 0, 1],
     ["m", "gtceu:millikelvin_cryostat_works", [8]],
-    ["i", "grindless:cold_reference_assembly", [9]],
+    ["i", "grindless:cold_reference_assembly", [9], 0, 1],
     ["m", "gtceu:hyper_assembly_array", [10]],
-    ["i", "grindless:horizon_alignment_matrix", [11]],
+    ["i", "grindless:horizon_alignment_matrix", [11], 0, 1],
   ],
   T13: [
     ["i", "grindless:sic_tow", []],
     ["m", "gtceu:cvi_furnace", [0]],
-    ["i", "grindless:sic_chamber_flange", [1]],
+    ["i", "grindless:sic_chamber_flange", [1], 0, 1],
     ["f", "fluid:gtceu:hydrochloric_acid", [1], 1],
     ["m", "gtceu:srf_cavity_works", [2]],
-    ["i", "grindless:large_resonance_cell", [4]],
+    ["i", "grindless:large_resonance_cell", [4], 0, 1],
     ["f", "fluid:gtceu:helium", [4], 1],
-    ["i", "grindless:polished_resonance_cell", [5]],
+    ["i", "grindless:polished_resonance_cell", [5], 0, 1],
     ["f", "fluid:gtceu:spent_electropolish_acid", [5], 1],
     ["m", "gtceu:mtj_sputter_cluster", [7]],
-    ["i", "grindless:coated_resonance_cell", [9]],
+    ["i", "grindless:coated_resonance_cell", [9], 0, 1],
     ["m", "gtceu:millikelvin_cryostat_works", [10]],
-    ["i", "grindless:resonance_chamber", [11]],
+    ["i", "grindless:resonance_chamber", [11], 0, 1],
   ],
   T14: [
     ["i", "grindless:kerr_strand_wire", []],
@@ -539,16 +539,16 @@ const ROWS = {
   T17: [
     ["l", "pl_uhv:inpw", []],
     ["m", "gtceu:mocvd_reactor", [0]],
-    ["i", "grindless:inp_1550_laser_die", [1]],
+    ["i", "grindless:inp_1550_laser_die", [1], 0, 1],
     ["f", "fluid:gtceu:hydrogen", [1], 1],
     ["m", "gtceu:fibre_draw_tower", [2]],
-    ["i", "grindless:er_amplifier_fibre", [4]],
+    ["i", "grindless:er_amplifier_fibre", [4], 0, 1],
     ["m", "gtceu:photonic_foundry", [5]],
-    ["i", "grindless:laser_comm_engine", [6]],
+    ["i", "grindless:laser_comm_engine", [6], 0, 1],
     ["i", "grindless:sic_mirror_blank", []],
     ["m", "gtceu:mtj_sputter_cluster", [8]],
-    ["i", "grindless:coated_telescope_optic", [9]],
-    ["i", "grindless:horizon_comm_terminal", [10]],
+    ["i", "grindless:coated_telescope_optic", [9], 0, 1],
+    ["i", "grindless:horizon_comm_terminal", [10], 0, 1],
   ],
   C1: [
     ["i", "grindless:insulated_kerr_wire", []],
@@ -690,13 +690,13 @@ const ROWS = {
   A2: [
     ["i", "grindless:gan_laser_array", []],
     ["m", "gtceu:mocvd_reactor", [0]],
-    ["i", "grindless:laser_array_wafer", [1]],
+    ["i", "grindless:laser_array_wafer", [1], 0, 1],
     ["m", "gtceu:tfln_fab", [2]],
-    ["i", "grindless:ln_modulator_array", [3]],
+    ["i", "grindless:ln_modulator_array", [3], 0, 1],
     ["m", "gtceu:photonic_foundry", [4]],
-    ["i", "grindless:optical_matrix_die", [5]],
+    ["i", "grindless:optical_matrix_die", [5], 0, 1],
     ["m", "gtceu:photonic_integration_hall", [6]],
-    ["i", "grindless:photonic_coprocessor", [7]],
+    ["i", "grindless:photonic_coprocessor", [7], 0, 1],
   ],
   A3: [
     ["l", "pl_uhv:lnb", []],
@@ -704,11 +704,11 @@ const ROWS = {
     ["i", "grindless:fe_ln_boule", [1]],
     ["i", "grindless:holographic_slab", [2]],
     ["m", "gtceu:femtosecond_writer", [3]],
-    ["i", "grindless:addressed_holo_slab", [4]],
+    ["i", "grindless:addressed_holo_slab", [4], 0, 1],
     ["m", "gtceu:spectral_hole_burner", [5]],
-    ["i", "grindless:burned_pattern_crystal", [6]],
+    ["i", "grindless:burned_pattern_crystal", [6], 0, 1],
     ["m", "gtceu:fibre_draw_tower", [7]],
-    ["i", "grindless:pattern_memory_unit", [8]],
+    ["i", "grindless:pattern_memory_unit", [8], 0, 1],
   ],
   K1: [
     ["l", "pl_opv:l37_4", []],
@@ -729,11 +729,11 @@ const ROWS = {
     ["m", "gtceu:void_crystal_fab", [0]],
     ["i", "grindless:void_holographic_block", [1]],
     ["m", "gtceu:femtosecond_writer", [2]],
-    ["i", "grindless:addressed_holo_block", [3]],
+    ["i", "grindless:addressed_holo_block", [3], 0, 1],
     ["m", "gtceu:spectral_hole_burner", [4]],
-    ["i", "grindless:burned_store_block", [5]],
+    ["i", "grindless:burned_store_block", [5], 0, 1],
     ["m", "gtceu:millikelvin_cryostat_works", [6]],
-    ["i", "grindless:bottomless_store_core", [7]],
+    ["i", "grindless:bottomless_store_core", [7], 0, 1],
   ],
   K3: [
     ["l", "pl_zpm:aer", []],
@@ -756,7 +756,7 @@ const ROWS = {
     ["m", "gtceu:photonic_integration_hall", [4]],
     ["i", "grindless:photonic_qpu", [5]],
     ["m", "gtceu:millikelvin_cryostat_works", [6]],
-    ["i", "grindless:horizon_computation_core", [7]],
+    ["i", "grindless:horizon_computation_core", [7], 0, 1],
   ],
 };
 
@@ -916,12 +916,12 @@ function line(num, y) {
     } else { x[i] = 2.5 * col++; dy[i] = 0; }
   });
   const used = new Set(nodes.flatMap(([, , from]) => from));
-  return nodes.map(([t, id, from, by], i) => {
+  return nodes.map(([t, id, from, by, peek], i) => {
     const px = x[i];
     const py = y + dy[i];
     if (t === 'l') return L(key(i), px, py, id);
     const res = t === 'm' ? M(id) : t === 'f' ? F(id.replace(/^fluid:/, '')) : I(id);
-    const opt = { kind: by ? 'by' : t === 'm' ? 'ours' : !from.length ? 'raw' : 'product' };
+    const opt = { kind: by ? 'by' : t === 'm' ? 'ours' : peek ? 'peek' : !from.length ? 'raw' : 'product' };
     if (from.length) opt.from = from.map(key);
     if (by) opt.end = BYEND[shortId(id)] || 'To GTM chemistry';
     else if (!used.has(i)) opt.end = ENDS[num];
