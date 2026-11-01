@@ -66,8 +66,8 @@ test('real tiers (maxplus): extends max, ordered after it, every package declare
   const named = f.machines.filter((m) => !m.id).map((m) => m.machine.replace('gtceu:', ''));
   const known = new Set([...controllers, 'hyperfactory']);
   for (const n of named) assert.ok(known.has(n), `${n} is not a MAX+ controller`);
-  // horizon_capacitor_bank has no recipe type (storage only); the Hyperstargate row lands with XP-G1
-  const expected = controllers.filter((n) => n !== 'horizon_capacitor_bank' && (n !== 'hyperstargate' || hasG1()));
+  // horizon_capacitor_bank has no recipe type (storage only); hyperfactory is the mega family's member, not one of the 17
+  const expected = controllers.filter((n) => n !== 'horizon_capacitor_bank');
   assert.deepEqual(named.filter((n) => n !== 'hyperfactory').sort(), expected.filter((n) => n !== 'hyperfactory').sort(), 'every MAX+ controller with a recipe type is a machine');
   for (const m of f.machines) assert.ok(raw.packages[m.package], `${m.machine}: package ${m.package} is not declared`);
   for (const x of ['ig_relay_probe', 'creative', 'capacitor_bank']) assert.ok(f.note.includes(x), `the note keeps the ${x} exemption`);
@@ -245,7 +245,7 @@ test('re-count: 58 lines (265 steps), 185 crossings on 56 older machines, 17 MAX
   assert.equal(c.machines, 56);
   assert.equal(c.totalMachines, 56);
   assert.equal(IDS().controllers.ids.length, 17, '17 MAX+ machines in the id table');
-  assert.equal(pack().r.registry.machines.size > 0 && [...pack().r.registry.machines].filter(([, m]) => /maxplus[\\/]/.test(m.file || '') && m.kind === 'multiblock').length, hasG1() ? 17 : 16, 'multiblocks registered');
+  assert.equal(pack().r.registry.machines.size > 0 && [...pack().r.registry.machines].filter(([id, m]) => /maxplus[\\/]/.test(m.file || '') && m.kind === 'multiblock' && id !== 'gtceu:hyperfactory').length, hasG1() ? 17 : 16, 'multiblocks registered');
 });
 
 test('docs: the Bootstrap check table has a row per gate and controller group', () => {
