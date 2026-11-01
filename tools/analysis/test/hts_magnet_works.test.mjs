@@ -119,15 +119,15 @@ test('magnet works in EMI: each product is hidden exactly while an input of its 
   const smesRule = rules.find((r) => (r.materials || []).includes('grindless:luv_smes_cell'));
   assert.equal(!!smesRule, !!group('grindless:luv_smes_cell'), 'the SMES cell\'s rule and group go together');
   if (smesRule) assert.equal(group('grindless:luv_smes_cell').reason, smesRule.reason);
-  // the bearing: its recipe takes B5's tetrataenite rods. Tetrataenite is only out of EMI's index until the belt (keepRecipes), so the
-  // bearing and its recipe show now (B4's ring needs the bearing in EMI), with a page that names the route
+  // the bearing: its recipe takes B5's tetrataenite rods, so the rod must stay visible or EMI drops the bearing's only recipe
+  // (B4's ring needs the bearing in EMI). Since LD-LV2 (#77) the tetrataenite group holds only GTM's dead ore forms past the
+  // crushed ore (washed, refined, impure and pure dust), whose recipes it removes; the rod, ingot and dust are not in it.
   assert.equal(hides('grindless:magnetic_bearing'), false);
   const tetrataenite = group('tetrataenite');
   if (tetrataenite) {
-    assert.equal(tetrataenite.keepRecipes, true, 'tetrataenite is only index-hidden, or EMI drops the bearing\'s only recipe');
+    assert.equal(hides('gtceu:tetrataenite_rod'), false, 'the tetrataenite rod stays visible, or EMI drops the bearing\'s only recipe');
     const rule = rules.find((r) => (r.materials || []).includes('tetrataenite'));
-    // UXV-A8 deletes the rule; the integrator regenerates hidden_until.json and the group goes
-    if (rule) assert.equal(rule.keepRecipes, true, 'the obtain rule says keepRecipes too, so a regenerated table keeps it');
+    if (rule && rule.keepRecipes !== undefined) assert.equal(!!tetrataenite.keepRecipes, !!rule.keepRecipes, 'the group follows its obtain rule');
   }
   const bearingPage = JSON.parse(fs.readFileSync(path.join(KUBEJS, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'magnetic_bearing.json'), 'utf8'));
   assert.deepEqual(bearingPage.stacks, ['item:grindless:magnetic_bearing']);
