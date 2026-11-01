@@ -140,23 +140,37 @@ test('validateTable names every problem', () => {
   assert.match(rule.validateTable(table('mv', { override: { a: 'lv' } }), 'mv').join(';'), /override a: lv/);
 });
 
-test('the committed tables land disabled: valid, every factor 1.0, nothing changes (landing state)', () => {
+test('the committed tables are valid; with every table forced to enabled:false the mechanism changes nothing', () => {
   const { tables, problems } = loadTables(TABLE_DIR);
   assert.deepEqual(problems, []);
   assert.deepEqual(tables.map((t) => t.era), plain(rule.eras));
   for (const t of tables) {
-    assert.equal(t.enabled, false, t.era);
-    assert.equal(t.item, 1, t.era);
-    assert.equal(t.fluid, 1, t.era);
+    assert.ok(t.item >= 1 && t.fluid >= 1, `${t.era} factors are at least 1`);
     assert.ok(t.keys.length > 0, `${t.era} lists its key items`);
     assert.ok(!t.keys.some((k) => /^gtceu:(ulv|lv)_/.test(k)), `${t.era} has no ULV or LV key`);
   }
   const hull = recipe('gtceu:assembler/mv_hull', { ins: [sizedIn('x:plate', 3)], fins: [fluidIn('gtceu:water', 1000)], outs: ['gtceu:mv_machine_hull'] });
   const dump = mkDump({ recipes: [hull] });
-  const res = applyToDump(dump, tables);
+  const res = applyToDump(dump, tables.map((t) => ({ ...t, enabled: false })));
   assert.equal(res.changed.size, 0);
   assert.equal(res.removed.size, 0);
   assert.equal(res.recipes.get(hull.id), dump.recipes.get(hull.id));
+});
+
+test('an enabled committed table applies exactly its committed factors', () => {
+  const { tables } = loadTables(TABLE_DIR);
+  const on = tables.filter((t) => t.enabled);
+  for (const t of on) {
+    const hull = recipe(`gtceu:assembler/${t.era}_hull`, { ins: [sizedIn('x:plate', 3)], fins: [fluidIn('gtceu:water', 1000)], outs: [`gtceu:${t.era}_machine_hull`] });
+    const res = applyToDump(mkDump({ recipes: [hull] }), tables);
+    const j = res.recipes.get(hull.id).json;
+    assert.equal(j.inputs.item[0].content.count, rule.ceilScaled(3, t.item), t.era);
+    assert.equal(j.inputs.fluid[0].content.amount, rule.ceilScaled(1000, t.fluid), t.era);
+  }
+  for (const t of tables.filter((x) => !x.enabled)) {
+    const hull = recipe(`gtceu:assembler/${t.era}_hull`, { ins: [sizedIn('x:plate', 3)], outs: [`gtceu:${t.era}_machine_hull`] });
+    assert.equal(applyToDump(mkDump({ recipes: [hull] }), tables).changed.size, 0, t.era);
+  }
 });
 
 test('an era with a factor above 1 changes exactly the selected recipes, to ceil(n x f)', () => {
@@ -205,13 +219,25 @@ test('the static stand-in runs the pack pass: originals and added recipes end up
       { id: 'minecraft:crafting_table', type: 'minecraft:crafting_shaped', json: { type: 'minecraft:crafting_shaped', pattern: ['A'], key: {}, result: { item: 'gtceu:mv_machine_hull' } } },
     ].map((r) => ({ i: r.id, t: r.type, j: plain(r.json) }));
 
-    // landing state: every table disabled, nothing is rewritten
-    writeTables(real);
+    // every table forced off: nothing is rewritten
+    writeTables(real.map((t) => ({ ...t, enabled: false })));
     const off = runPackScripts(pack, { originals: mkOriginals() });
     assert.deepEqual(off.errors, []);
     assert.equal(off.originalsChanged.size, 0);
     const base = off.docs.recipes.recipes.map((r) => ({ id: r.i, json: plain(r.j) }));
     assert.equal(base.length, 2);
+
+    // the committed tables as they are: each enabled era applies its committed item factor to the hull original
+    writeTables(real);
+    const committed = runPackScripts(pack, { originals: mkOriginals() });
+    assert.deepEqual(committed.errors, []);
+    const eraOn = (era) => real.find((t) => t.era === era && t.enabled);
+    for (const [era, id, n] of [['mv', 'gtceu:assembler/mv_hull_gtm', 4], ['hv', 'gtceu:assembler/hv_hull_gtm', 5]]) {
+      const t = eraOn(era);
+      const got = committed.originalsChanged.get(id);
+      if (t) assert.equal(got.inputs.item[0].content.count, rule.ceilScaled(n, t.item), id);
+      else assert.equal(got, undefined, id);
+    }
 
     // two eras on: the pass and the Node rule agree, recipe by recipe
     const on = withFactors(real, { mv: { item: 2.5, fluid: 3 }, hv: { item: 4, fluid: 4 } });

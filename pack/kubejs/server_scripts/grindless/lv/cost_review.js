@@ -1,4 +1,3 @@
-// priority: -19074
 // -----------------------------------------------------------------------------------------------
 // Cost curve band A, LV review (docs/reforge/02_cost_curve.md "Band A"). LV keeps factor 1.0 (no table): only the recipes the
 // matrix showed as incoherent are rebuilt here, by hand, in the GTM style.

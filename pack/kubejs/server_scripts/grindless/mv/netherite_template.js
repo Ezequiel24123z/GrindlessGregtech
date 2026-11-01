@@ -1,4 +1,3 @@
-// priority: -21099
 // -----------------------------------------------------------------------------------------------
 // The netherite upgrade smithing template (cost curve band A, LV review). Vanilla only finds it in bastions and copies it from an
 // existing one, so with nothing to copy the matrix listed the five LV netherite tools as unreachable. A pack where nothing is gathered
