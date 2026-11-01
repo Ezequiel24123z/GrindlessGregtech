@@ -15,7 +15,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - Phase 5:
     - the design (`docs/reforge/05_quest_design.md`, RF-5A);
     - one shared chapter writer (`tools/quests/gen-chapters.mjs`, RF-5L1) and Steam to IV imported to data (RF-5L2);
-    - Welcome, the side tabs and Steam to UXV in the Phase 5 shape: EV, IV and LuV in three chapters each (age, circuits, machines), ZPM to UXV in four (plus integration); chapter groups per era (Early Ages for Steam to HV, then one per era).
+    - Welcome, the side tabs and every era from Steam to MAX in the Phase 5 shape: EV, IV and LuV in three chapters each (age, circuits, machines), ZPM to OpV in four (plus integration), MAX in five (plus `max_horizon`, the capstone); chapter groups per era (Early Ages for Steam to HV, then one per era). Left for Phase 5: the MAX+ chapters (XP-C2a and XP-C2b, after XP-C1) and the optional Power bands after LuV (RF-5P).
   - Phase 6:
     - the audit;
     - the 50 missing textures and the 21 shared controller faces;
@@ -28,32 +28,31 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
     - the MAX+ foundation (XP-F1): the ids table, nine components, the 1,024 A hatch `gtceu:max_maxplus_energy_hatch_1024a`, four creative stand-ins and the four places; the ids without a recipe are hidden (XP-F2);
     - MAX+ build order rows 5 to 9, 16, 17 and 19 (first part): the power plumbing (XP-W, P18 and the 1,024 A hatch recipe), the condensate (XP-A1: the shell's c4, the condensate refinery and the bound-matter press), the horizon processor (XP-A3), the components and the horizon casing (XP-A2, C1 to C7), the AE2 top tier (XP-AE, A1 to A3), the meta-material loom (XP-H1, T4 to T7), the condensate assembler (XP-H3, machine 14; machine 15 waits for the dial's power mechanism) and the Hills slingshot with gate c16 to 30 Doradus (XP-T1, P15, P16). Every MAX+ machine runs on the 1,024 A hatch; the MAX+ components are tier 15 on the quality ladder and the controllers take the design's base (XP-Q).
   - Capacity: no known violation left (CAP-K).
-- **Last accepted integration batch:** Reforge batch 9 (issues #126-#131).
-  - Packages: XP-Q, CAP-K, and the UIV and UXV quest pairs (RF-5Q-UIVa to RF-5Q-UXVb).
+- **Last accepted integration batch:** Reforge batch 10 (issues #132, #133, #135, #136).
+  - Packages: the OpV and MAX quest pairs (RF-5Q-OpVa, RF-5Q-OpVb, MX-C2a, MX-C2b). The key lists went through the integrator before either package of a pair finished, so no key was defined twice.
   - Integrator fixes:
-    - the UXV pair defined eleven keys and eight items twice (the journey's key list never arrived): one owner per key and per item;
-    - UIV's timed pulse profile was defined twice, and the metallic hydrogen cable lost its quest;
-    - CAP-K's ring ice melt on the distillation tower lost the circuit it could not hold.
-  - T0: GitHub Actions on every merge (green at ae46ca19).
-  - T2 on the VM, dump ae46ca19b865 (`/var/lib/grindless/dumps/latest`):
-    - reachability PASS for all 15 tiers, Steam to MAX;
-    - obtain PASS; capacity lint: 0 known violations, 1 warning (UHV's ZBLAN mixer row);
-    - `gg_test_quests` PASS at ae46ca19 (62 chapters, 4,912 quests); quest lint 0 errors, the 6 known layout warnings (1 in `ev_machines`, 5 in `opv_age`).
-  - Earlier batch 8 T1, still current: `gg_test_maxplus_loom`, `gg_test_maxplus_assembler` and `gg_test_maxplus_slingshot` PASS. Gate c16 has not been thrown in game yet; XP-B1's T1 throws it.
+    - the Power tab's OpV cell, MAX winch and MAX feeder links point at the quests that now ask for those items;
+    - MAX's integration chapter asked for controllers the machines and horizon chapters own: its winch and vent quests ask for the tether and the spent wave packet;
+    - the MAX 16 A hatch joined the parts step.
+  - T0: GitHub Actions on every merge (green at b0866f36).
+  - T2 on the VM:
+    - `gg_test_quests` PASS at b0866f36 (69 chapters, 4,967 quests);
+    - quest lint 0 errors, 1 layout warning (`ev_machines`);
+    - every OpV and MAX item resolves in dump ae46ca19b865 (`/var/lib/grindless/dumps/latest`).
+  - Batch 9's T2, still current (no recipe changed since): reachability PASS for all 15 tiers, obtain PASS, capacity lint 0 known violations, 1 warning (UHV's ZBLAN mixer row).
+  - Earlier T1, still current: `gg_test_maxplus_loom`, `gg_test_maxplus_assembler` and `gg_test_maxplus_slingshot` PASS. Gate c16 has not been thrown in game yet; XP-B1's T1 throws it.
 - **In flight** (one nested session per package; no two share a file):
 
 | Package | Issue | Content | Phase |
 |---|---|---|---|
-| RF-5Q-OpVa | #132 | Quests: OpV journey and integration chapters (clears its 5 layout warnings) | 5 |
-| RF-5Q-OpVb | #133 | Quests: OpV circuits and machines chapters | 5 |
-| MX-C2a | #135 | Quests: MAX journey, integration and horizon chapters (machines 11 to 14, the lock) | 5 |
-| MX-C2b | #136 | Quests: MAX circuits and machines chapters | 5 |
 | XP-B1 | #134 | MAX+ at 30 Doradus: the stellar lift, the pair-instability crucible, the nickel-56 burner, P6 to P8, P17, P20, P21; its T1 also throws gate c16 | 7 |
+| XP-T2 | #137 | MAX+ gates c17 to c19: the Magellanic Stream, the M31 nucleus, the Local Group filament | 7 |
+| XP-M1 | #138 | The MAX+ parallel hatch (x4,194,304, reflected per S0-5) and the Hyperfactory; serial on `lib/**` | 7 |
 
 - **Next** (queue; serial where packages share files):
-  - Phase 5: RF-5I3 (the integrator's batch for UHV to MAX, with renders). The owner reviews the renders as they come (the integrator renders them with `tools/quests/render-book.mjs --compare`); they do not block.
-  - Phase 7, `maxplus.md` *Build order*, after XP-B1:
-    - XP-T2 (gates c17 to c19, serial on `gate.json`), XP-B2 to XP-B4, XP-M1, XP-H2, XP-H4, XP-K;
+  - Phase 7, `maxplus.md` *Build order*:
+    - after XP-T2: XP-B2 (the Stream), XP-B3 (Andromeda), XP-B4 (the filament);
+    - then XP-H2 (crystals, after XP-B1 and XP-B3), XP-K (creative items, after XP-B4), XP-H4 (the grid layer);
     - the capacitor bank (machine 15) with XP-W2 and XP-G1, which settle how the dial is fed;
     - XP-Z1, XP-C1 (the `maxplus` era in the era lists, its validator tier, and tier 15's circuits, hull and voltage on the quality ladder), XP-PL, XP-C2a and XP-C2b.
 
@@ -72,7 +71,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **EV to ZPM line design** (RF-3S, `docs/eras/ev.md`): only production lines count toward the guide; keep GTM's one-step nitric folds; gate tetrataenite; keep belt Ir/Os (P2-C: not worse than Mercury); gate the tritium store; ZPM's gap stays named. Defaults as written.
 - **Logs at Steam and LV** (LD-T3): the Horizon Collector makes 960 oak logs a minute at 16 EU/t; the fertilized LV greenhouse makes 72. Keep the collector as the generous start, or cut its log row so the greenhouse is LV's log route? Default: keep (the start is generous by design, `steam.md`); the greenhouse line counts for its other outputs.
 - **Phase 5** (`05_quest_design.md` §6, nine questions): era chapter groups; MAX+ in nine chapters; six roles, not six chapters; longer text for teaching quests; restore the merged wafer and circuit steps; Power after LuV optional; item rewards only from gated lines; Welcome's bread; before captures per batch. Defaults: yes to each, as written.
-- **Phase 5 shape:** the before and after renders of batch 1 (Steam to EV) and of IV to UXV wait for the owner's review. They do not block: the owner asked for autonomous work.
+- **Phase 5 shape:** the before and after renders of every era (Steam to MAX; `tools/quests/render-book.mjs --compare` against the pre-Reforge book) wait for the owner's review. They do not block: the owner asked for autonomous work.
 - **OpV and MAX components** (P2-E): the OpV rule of 2026-10-29 (`opv.md` *Validator*) forbade lower components; P2-E's band E lets each core component take its previous-tier counterpart, as UXV's take UIV's, because the OpV core cost 310 against 71,526. Keep it? Default: yes (AGENTS.md principle 2 wins over pre-Reforge docs; machines, hatches and controllers keep the rule whole).
 - **Save compatibility after v1.0.0?** Default: yes, from v1.0.0 on.
 
