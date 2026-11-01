@@ -98,7 +98,7 @@ export const QUESTS = [
     teach: {
       for: 'Cut from the patterned wafer, the &6Photonic Chip&r moves light instead of electrons and does the work of a wafer of ordinary logic.',
       needs: 'A patterned wafer, silicon nitride film and a cleanroom.',
-      unlocks: 'The wetware mainframe, and the starchip in this chapter.',
+      unlocks: 'The wetware mainframe, and the starchip at the end of this row.',
       automate: 'One wafer, many chips: keep a stock by ME so the assembler never waits.',
     },
     desc: [],
@@ -140,7 +140,7 @@ export const QUESTS = [
     deps: ['START', 'UC_PCHIP', 'SNSPD'], x: 8, y: 3,
     teach: {
       for: 'A photonic chip, a diamond qubit, an americium source and a neutronium wafer become one &6Starchip&r. Mounted on a sail it is a probe about as heavy as a paperclip.',
-      needs: 'The Starchip Fab from the machines chapter, and every part on this chapter\'s light row.',
+      needs: 'The Starchip Fab from the machines chapter, and every part on the light row above.',
       unlocks: 'The sailcraft, and with it the launch and the long coast to Proxima.',
       automate: 'The fab dices in batches and wastes only kerf. Send the chips on by ME to the sail line.',
     },
