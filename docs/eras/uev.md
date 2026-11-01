@@ -712,6 +712,8 @@ Steps are the items between arrows, counted as UHV's. Every line ends in a UEV p
 | 39 | PPKTP: KH₂PO₄ + TiO₂ → KTP flux → KTP crystal (UHV furnace) → wafer → electrode pattern → poled PPKTP → coated → SPDC source | 8 | flux → recycled |
 | 40 | ULE cavity: SiCl₄ + TiCl₄ → flame soot → ULE boule → spacer → mirrored spacer (line 18's mirrors) → optical cavity → vacuum-housed reference | 7 | HCl → cascade |
 
+Chart merges (RF-3P1, `pl-data-uev.mjs`; the recipes are unchanged): the Pu-244 target (2) feeds the flerovium atoms in one chain, with the membrane (6) into the recoil separator; the SX blade (12) runs through the heat treatment and bond coat into the YSZ coating (33) and the turbine wheel; the Wf/W divertor (17) starts at tungsten dust; the SiN chip (21) runs on into the waveguide circuit and the optical computer; ammonia borane (8) is drawn into the superhydride ingot; Li-6 (29) and K-40 (30) meet in one EOS model. Short by design: the Cf-249 wheel, the EOS model, polarised D–He-3 fuel and Barnard iron pentacarbonyl.
+
 **Totals:** 40 lines, 295 steps, an average of 7.4, none under 6.
 
 **Weakest claims:**
