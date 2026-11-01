@@ -16258,7 +16258,7 @@ hash = "0ddae30337f45ef0f4dba70e897dc45b6ccf44bd3c9e9a7b34b7c8b6f19b8494"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_hyperstargate_lang.js"
-hash = "161e9acbe1090c8fff625cf740d259a3d52759b93d4604fd327b9f8e0b2c198b"
+hash = "757c2d4f895d37a4e0c257f63534356d8625948e6f60718ef6f1b50a26e45163"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_loom_lang.js"
