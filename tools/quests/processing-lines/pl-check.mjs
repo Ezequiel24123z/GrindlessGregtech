@@ -43,7 +43,7 @@ if (!dumpDir) {
 const repo = REPO;
 const outFile = opt('--out', null);
 const strict = args.includes('--strict');
-const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max'];
+const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
 // the era EMI shows today: hidden.js's IMPLEMENTED_ERA in this checkout (the dump may come from an earlier switch)
 const hiddenJs = fs.readFileSync(path.join(repo, 'pack', 'kubejs', 'server_scripts', 'grindless', 'integration', 'hidden.js'), 'utf8');
 const implemented = opt('--era', (/const IMPLEMENTED_ERA = '([a-z]+)'/.exec(hiddenJs) || [])[1] || 'ev');
