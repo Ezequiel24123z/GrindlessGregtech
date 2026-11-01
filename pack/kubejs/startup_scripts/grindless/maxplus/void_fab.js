@@ -28,7 +28,7 @@
   MV.machine = {
     name: 'void_crystal_fab', machine: 'gtceu:void_crystal_fab', type: 'void_crystal_fab', dataKey: 'grindless_void_crystal_fab',
     lang: 'Void Crystal Fab', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 2, fluidsOut: 1 }, casing: CASING, texture: 'grindless:block/max/mirror_shell_segment',
-    overlay: 'grindless:block/multiblock/positronium_condensate_lab',
+    overlay: 'grindless:block/multiblock/void_crystal_fab',
     width: 15, height: 15, depth: 15,
     pal: { F: CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
     parts: parts
