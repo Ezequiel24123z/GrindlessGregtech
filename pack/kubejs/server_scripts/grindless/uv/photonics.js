@@ -266,7 +266,7 @@
       fluidsIn: [fluid(TMGA, 250), fluid(ARSINE, 1000)], itemsOut: [item('grindless:gaas_808_pump_bar', 1)],
       fluidsOut: [fluid('gtceu:methane', 750), fluid(ARSINE, 500)], eut: 1966080, duration: 1200 },
     // MX-S1 L56 (max.md, fibre draw c21): ytterbium-doped fibre drawn from the ultrapure silica tube
-    { name: 'yb_doped_fibre', type: 'fibre_draw', circuit: 21, itemsIn: [item('grindless:ultrapure_silica_tube', 1), item('gtceu:ytterbium_dust', 1)],
+    { name: 'yb_doped_fibre', type: 'fibre_draw', circuit: 21, itemsIn: [item('grindless:ultrapure_silica_tube', 1), item('gtceu:ytterbium_oxide_dust', 1)],
       fluidsIn: [fluid('gtceu:argon', 500), fluid(ACRYLATE, 250)], itemsOut: [item('grindless:yb_doped_fibre', 4)], fluidsOut: [], eut: 1966080, duration: 600 }
   ]
 

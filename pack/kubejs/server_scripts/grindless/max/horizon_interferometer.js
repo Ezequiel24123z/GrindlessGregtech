@@ -71,8 +71,8 @@
   var GTM = [
     { type: 'lathe', name: 'au_pt_test_mass', items: ['4x grindless:au_pt_ingot'], fluids: [],
       outs: ['1x grindless:au_pt_test_mass'], eut: LOW, duration: 600 },
-    { type: 'electric_furnace', name: 'zero_expansion_baseplate', items: ['1x grindless:ultrapure_silica_plate'], fluids: [],
-      outs: ['1x grindless:zero_expansion_baseplate'], eut: LOW, duration: 800 },
+    { type: 'assembler', name: 'zero_expansion_baseplate', items: ['1x grindless:ultrapure_silica_plate', '1x gtceu:titanium_dust'],
+      fluids: [['gtceu:oxygen', 1000]], outs: ['1x grindless:zero_expansion_baseplate'], eut: LOW, duration: 800 },
     { type: 'assembler', name: 'hydroxide_bonded_bench', items: ['2x grindless:coated_bench_optics', '1x gtceu:sodium_hydroxide_dust'],
       fluids: [['gtceu:distilled_water', 1000]], outs: ['1x grindless:hydroxide_bonded_bench'], eut: LOW, duration: 400 },
     { type: 'assembler', name: 'wetted_emitter_crown', items: ['1x grindless:porous_tungsten_crown', '1x grindless:six_n_indium'],
