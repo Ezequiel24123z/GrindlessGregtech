@@ -14,8 +14,7 @@ const pack = path.join(root, 'pack');
 const assets = path.join(pack, 'kubejs', 'assets', 'grindless');
 
 const ITEMS = [
-  'uev_electric_motor', 'uev_electric_pump', 'uev_conveyor_module', 'uev_electric_piston', 'uev_robot_arm', 'uev_sensor',
-  'uev_emitter', 'uev_field_generator', 'ca48_beam', 'target_wheel', 'tennessine_sample', 'superheavy_census',
+  'ca48_beam', 'target_wheel', 'tennessine_sample', 'superheavy_census',
   'degenerate_eos_model', 'barnard_gravity_survey', 'quantum_repeater_node', 'pulsar_navigation_chart', 'mass_radius_chart',
   'degenerate_matter', 'degenerate_pellet', 'sx_blade', 'sic_sic_plate', 'wf_w_tile', 'snspd', 'qd_source', 'sdd',
   'lobster_eye_mcp', 'aerogel_tile', 'hollow_core_fibre', 'faraday_isolator', 'bonded_fe16n2_magnet', 'barnard_core_rock',
@@ -63,7 +62,7 @@ test('the stand-in runs the UEV foundation without errors', () => {
 });
 
 test('the id list is pinned: count and every id', () => {
-  assert.equal(ITEMS.length, 31);
+  assert.equal(ITEMS.length, 23);
   assert.equal(PLAIN_BLOCKS.length + 1, 4);
   assert.equal(Object.keys(MATERIALS).length, 25);
   const got = run.global.grindless.uevFoundation;

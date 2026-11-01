@@ -141,8 +141,6 @@ function foundationIds() {
     materials: [...block('MATERIALS').matchAll(/^ {4}'([a-z]+:[a-z0-9_]+)':/gm)].map((m) => m[1]),
   };
 }
-// the grindless: components are retired to GTM's gtceu:uxv_* (highTierContent on, a 1:1 conversion recipe)
-const RETIRED = /^uxv_(electric_motor|electric_pump|conveyor_module|electric_piston|robot_arm|sensor|emitter|field_generator)$/;
 // F1 materials no recipe in the pack makes or reads: the lines use grindless:cofeb_ingot, heusler_ingot, hbn_dust and yig_film_wafer, and
 // obtain.json already holds them as class C rows (UXV-F1); reported, not checked
 const NO_RECIPE = ['gtceu:cofeb', 'gtceu:co2mnsi', 'gtceu:yig', 'gtceu:hbn'];
@@ -152,8 +150,8 @@ test('F1: every item and block is checked in a UXV era group (reachable at its s
   const where = {};
   for (const g of raw.eraItems.filter((x) => UXV_GROUPS.includes(x.id))) for (const it of g.items) (where[it] ??= []).push(g.id);
   const { items, blocks, materials } = foundationIds();
-  assert.equal(items.length + blocks.length + materials.length, 106 + 1 + 37, 'F1 registrations as built');
-  const missing = [...items, ...blocks].filter((n) => !where[RETIRED.test(n) ? `gtceu:${n}` : `grindless:${n}`]);
+  assert.equal(items.length + blocks.length + materials.length, 98 + 1 + 37, 'F1 registrations as built');
+  const missing = [...items, ...blocks].filter((n) => !where[`grindless:${n}`]);
   assert.deepEqual(missing, []);
   const keysOf = (k) => {
     const [ns, n] = k.split(':');

@@ -7,8 +7,7 @@
 //   The UIV hull and the four hatches (2 A and 16 A, input and output) are GTM's gtceu:uiv_* ids (highTierContent on, TP-S0F). They are NOT created here. Their recipes are in server_scripts/grindless/uiv/foundation.js. gtceu:uiv_machine_casing is GTM's;
 //   its recipe is UEV's gate (server_scripts/grindless/uev/gate.js).
 //
-//   Components (grindless:, Monifactory's Post_UV_Components.js pattern, LGPL, credited): uiv_electric_piston (A2), uiv_conveyor_module (A3),
-//     uiv_sensor (A7), uiv_electric_motor, uiv_electric_pump, uiv_robot_arm (A8), uiv_field_generator (B2), uiv_emitter (B3).
+//   Components: GTM's own gtceu:uiv_* (highTierContent on); the grindless: copies were removed in Reforge.
 //   Items made by one package and used by another (ids not spelled in uiv.md are chosen here and canonical, DECISIONS UHV-F1):
 //     ti50_oven_charge, element_119_recoil, element_120_recoil, superheavy_census_ii, u238_flash_target   superheavy
 //     mh_winding, h_si28_wafer, p_si_die, eo_microcomb, telecom_memory, mk_cryostat_module, data_crystal_5d,
@@ -32,14 +31,6 @@
 
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
   const ITEMS = {
-    uiv_electric_motor: { stack: 64 },
-    uiv_electric_pump: { stack: 64 },
-    uiv_conveyor_module: { stack: 64 },
-    uiv_electric_piston: { stack: 64 },
-    uiv_robot_arm: { stack: 64 },
-    uiv_sensor: { stack: 64 },
-    uiv_emitter: { stack: 64 },
-    uiv_field_generator: { stack: 64 },
     ti50_oven_charge: { stack: 16 },
     element_119_recoil: { stack: 16 },
     element_120_recoil: { stack: 16 },

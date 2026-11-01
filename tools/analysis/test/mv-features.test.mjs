@@ -193,28 +193,28 @@ test('vein targets: requireItem skips veins with no item in the table (other mod
 test('world with fromVeins.requireRecipe: a set-aside vein (registered sample, no drilling recipe) gives no ore on the trip', () => {
   const veins = [
     { id: 'gtceu:bauxite_vein_end', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:bauxite', 'gtceu:ilmenite'] },
-    { id: 'gtceu:scheelite_vein', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:scheelite', 'gtceu:tungstate'] },
+    { id: 'gtceu:wolframite_vein', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:wolframite', 'gtceu:tungstate'] },
   ];
   const recipes = [
     gt('t:drill_end', 'gtceu:vein_drilling', { ins: [gi('grindless:vein_sample_bauxite_end', 1, 0)], outs: [gi('gtceu:raw_bauxite')] }),
     // the set-aside sample only converts into an empty probe
-    shapeless('t:probe_from_scheelite', [{ item: 'grindless:vein_sample_scheelite' }], 'grindless:empty_vein_probe'),
+    shapeless('t:probe_from_wolframite', [{ item: 'grindless:vein_sample_wolframite' }], 'grindless:empty_vein_probe'),
   ];
   const world = (from) => [{ id: 'end-ores', mode: 'manual', bootstrap: true, template: 'gtceu:raw_{m}', materials: [], fromVeins: { dimensions: ['minecraft:the_end'], ...from } }];
   const cfg = (from) => ({
     tier: 'end', unconditionalTypes: ['minecraft:crafting_shapeless'], world: world(from),
-    targets: [{ id: 'bauxite', item: 'gtceu:raw_bauxite' }, { id: 'ilmenite', item: 'gtceu:raw_ilmenite' }, { id: 'scheelite', item: 'gtceu:raw_scheelite' }],
+    targets: [{ id: 'bauxite', item: 'gtceu:raw_bauxite' }, { id: 'ilmenite', item: 'gtceu:raw_ilmenite' }, { id: 'wolframite', item: 'gtceu:raw_wolframite' }],
     autoTargets: [],
   });
   const dump = mkDump({
     recipes, veins,
-    items: ['gtceu:raw_bauxite', 'gtceu:raw_ilmenite', 'gtceu:raw_scheelite', 'gtceu:raw_tungstate', 'grindless:vein_sample_bauxite_end', 'grindless:vein_sample_scheelite'],
+    items: ['gtceu:raw_bauxite', 'gtceu:raw_ilmenite', 'gtceu:raw_wolframite', 'gtceu:raw_tungstate', 'grindless:vein_sample_bauxite_end', 'grindless:vein_sample_wolframite'],
   });
-  // with requireItem the hidden sample still counts the scheelite vein
-  assert.deepEqual(verdicts(run(dump, cfg({ requireItem: 'grindless:vein_sample_{id}' })).out.gate), { bauxite: 'PASS', ilmenite: 'PASS', scheelite: 'PASS' });
-  // with requireRecipe only veins with a drilling recipe count: bauxite's (with its ilmenite) does, scheelite's doesn't
+  // with requireItem the hidden sample still counts the wolframite vein
+  assert.deepEqual(verdicts(run(dump, cfg({ requireItem: 'grindless:vein_sample_{id}' })).out.gate), { bauxite: 'PASS', ilmenite: 'PASS', wolframite: 'PASS' });
+  // with requireRecipe only veins with a drilling recipe count: bauxite's (with its ilmenite) does, wolframite's doesn't
   const r = run(dump, cfg({ requireRecipe: { type: 'gtceu:vein_drilling', input: 'grindless:vein_sample_{id}' } }));
-  assert.deepEqual(verdicts(r.out.gate), { bauxite: 'PASS', ilmenite: 'PASS', scheelite: 'FAIL' });
+  assert.deepEqual(verdicts(r.out.gate), { bauxite: 'PASS', ilmenite: 'PASS', wolframite: 'FAIL' });
 });
 
 // ---------------------------------------------------------------- reason a deposit blocks

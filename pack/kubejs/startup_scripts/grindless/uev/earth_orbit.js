@@ -8,7 +8,7 @@
 //                                gravity survey (atom interferometer on Barnard core rock), 3 calibrate the interferometer against the ULE cavity.
 //   gtceu:entanglement_station   type gtceu:entanglement_distribution: circuit 1 the quantum repeater node.
 //
-// Voltage: UHV. New ids: the items below; the F1 ids (uev_robot_arm, degenerate_eos_model, barnard_gravity_survey, quantum_repeater_node,
+// Voltage: UHV. New ids: the items below; the F1 ids (degenerate_eos_model, barnard_gravity_survey, quantum_repeater_node,
 // lobster_eye_mcp, hollow_core_fibre, faraday_isolator) are not registered again.
 // Geometry (lib/patterns.js): 5 wide x 5 high x 7 deep, hollow shells. Textures: tools/assets/Build-UEVEarthOrbitTextures.ps1.
 // Names: client_scripts/grindless/uev_earth_orbit_lang.js. Published for the recipe script: global.grindless.uevEarthOrbit.

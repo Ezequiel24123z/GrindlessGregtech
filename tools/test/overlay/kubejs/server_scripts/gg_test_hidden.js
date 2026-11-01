@@ -86,10 +86,8 @@
       ' / ' + itemHidden('gtca:scrap') + ' / ' + fluidHidden('gtceu:molten_stainless_steel') + ' / ' + itemHidden('gtceu:terbium_dust') + ' / ' +
       itemHidden('gtca:samarium_terbium_mixture_dust') + ', raw U-235 (no vein) ' + itemHidden('gtceu:raw_uranium_235'))
     var withRecipes = ['gcyr:gps_satellite', 'gtceu:damascus_steel_ingot', 'gtca:scrap'].filter(function (id) { return itemHidden(id, RECIPES_TAG) })
-    var legacy = 'grindless:vein_sample_scheelite'
-    check('tag_recipes', withRecipes.length === 3 && fluidHidden('gtceu:plutonium_based_liquid_fuel', RECIPES_TAG) && itemHidden(legacy) && !itemHidden(legacy, RECIPES_TAG),
-      'in #' + RECIPES_TAG + ': ' + withRecipes.join(', ') + ', fluid plutonium fuel ' + fluidHidden('gtceu:plutonium_based_liquid_fuel', RECIPES_TAG) + '; old scheelite sample: #' +
-      TAG + ' ' + itemHidden(legacy) + ', #' + RECIPES_TAG + ' ' + itemHidden(legacy, RECIPES_TAG) + ' (its conversion stays in view)')
+    check('tag_recipes', withRecipes.length === 3 && fluidHidden('gtceu:plutonium_based_liquid_fuel', RECIPES_TAG),
+      'in #' + RECIPES_TAG + ': ' + withRecipes.join(', ') + ', fluid plutonium fuel ' + fluidHidden('gtceu:plutonium_based_liquid_fuel', RECIPES_TAG))
     // perlite (LV source), the Moon (HV: titanium, ilmenite, its ground and helium-3), Mars (EV) and IV (the End's uranium, Venus, Mercury)
     // are obtainable: never hidden
     var visible = ['gtceu:perlite_dust', 'gtceu:obsidian_dust', 'gtceu:basalt_dust', 'gtceu:lv_sifter', 'gtceu:stainless_steel_ingot',
@@ -116,7 +114,7 @@
     var still = gone.filter(function (id) { return hasRecipe(server, id) })
     check('removed', still.length === 0, still.length === 0 ? 'gone: ' + gone.join(', ') : 'still there: ' + still.join(', '))
 
-    var keep = ['grindless:crafting/empty_vein_probe_from_vein_sample_scheelite', 'gtnn:assembly_line/circuit_assembly_line']
+    var keep = ['gtnn:assembly_line/circuit_assembly_line']
     var lost = keep.filter(function (id) { return !hasRecipe(server, id) })
     check('kept', lost.length === 0, lost.length === 0 ? 'still there: ' + keep.join(', ') : 'missing: ' + lost.join(', '))
 

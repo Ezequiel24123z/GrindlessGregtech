@@ -292,7 +292,7 @@ test('world with fromVeins.requireItem: only veins with a sample in the table gi
   const veins = [
     { id: 'gtceu:bauxite_vein_end', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:bauxite', 'gtceu:ilmenite'] },
     { id: 'gtceu:naquadah_vein', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:naquadah'] },
-    { id: 'gtceu:scheelite_vein', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:scheelite'] },
+    { id: 'gtceu:wolframite_vein', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtceu:wolframite'] },
     { id: 'gtceu:zirconium_vein', layer: 'endstone', dims: ['minecraft:the_end'], mats: ['gtca:red_zircon', 'gtceu:endstone'] },
     { id: 'gtceu:iron_vein', layer: 'stone', dims: ['minecraft:overworld'], mats: ['gtceu:hematite'] },
   ];
@@ -305,7 +305,7 @@ test('world with fromVeins.requireItem: only veins with a sample in the table gi
     targets: [
       { id: 'bauxite', item: 'gtceu:raw_bauxite' },
       { id: 'ilmenite', item: 'gtceu:raw_ilmenite' },
-      { id: 'scheelite', item: 'gtceu:raw_scheelite' },
+      { id: 'wolframite', item: 'gtceu:raw_wolframite' },
       { id: 'zircon', item: 'gtca:raw_red_zircon' },
       { id: 'naquadah', item: 'gtceu:raw_naquadah' },
       { id: 'hematite', item: 'gtceu:raw_hematite' },
@@ -315,13 +315,13 @@ test('world with fromVeins.requireItem: only veins with a sample in the table gi
   const dump = mkDump({
     veins,
     items: [
-      'gtceu:raw_bauxite', 'gtceu:raw_ilmenite', 'gtceu:raw_scheelite', 'gtceu:raw_naquadah', 'gtceu:raw_hematite', 'gtca:raw_red_zircon',
-      'grindless:vein_sample_bauxite_end', 'grindless:vein_sample_scheelite', 'grindless:vein_sample_zirconium',
+      'gtceu:raw_bauxite', 'gtceu:raw_ilmenite', 'gtceu:raw_wolframite', 'gtceu:raw_naquadah', 'gtceu:raw_hematite', 'gtca:raw_red_zircon',
+      'grindless:vein_sample_bauxite_end', 'grindless:vein_sample_wolframite', 'grindless:vein_sample_zirconium',
     ],
   });
   const r = run(dump, cfg);
   // the ore of an addon material (gtca:red_zircon) lives in the addon's namespace (gtca:raw_red_zircon)
   assert.deepEqual(verdicts(r.out.gate), {
-    bauxite: 'PASS', ilmenite: 'PASS', scheelite: 'PASS', zircon: 'PASS', naquadah: 'FAIL', hematite: 'FAIL',
+    bauxite: 'PASS', ilmenite: 'PASS', wolframite: 'PASS', zircon: 'PASS', naquadah: 'FAIL', hematite: 'FAIL',
   });
 });
