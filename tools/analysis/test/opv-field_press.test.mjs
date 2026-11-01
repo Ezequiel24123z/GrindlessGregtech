@@ -197,7 +197,7 @@ test('structure: not boring, frame and coil, controller in the front slice, 16 r
   assert.ok(s.slices[s.slices.length - 1].some((row) => row.includes('S')), 'the controller is in the front slice');
 });
 
-test('lang parity: names, the short tooltip, items, EMI pages and recipe lines in both languages; EMI file and textures', () => {
+test('lang: names, the short tooltip, items, EMI pages and recipe lines in en_us; EMI file and textures', () => {
   const keys = ['gtceu.field_freezing', 'block.gtceu.field_frozen_press', 'grindless.machine.field_frozen_press.tooltip.0', 'emi.grindless.info.field_frozen_press.0',
     'emi.grindless.info.field_frozen_press.1', 'gtceu.recipe.grindless_electron_beam.field_can', 'gtceu.recipe.grindless_electron_beam.field_can_remelt'];
   for (const i of FP.items) {
@@ -206,15 +206,15 @@ test('lang parity: names, the short tooltip, items, EMI pages and recipe lines i
   }
   for (const r of FP.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   for (const [dk, name] of LINE45) if (dk) keys.push(`gtceu.recipe.${dk}.${name}`);
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  for (const lang of ['en_us', 'es_es']) {
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
+  for (const lang of ['en_us']) {
     const tip = run.lang[lang]['grindless.machine.field_frozen_press.tooltip.0'];
     assert.ok(tip.startsWith('\u00a77') && tip.length <= 84, `${lang}: one short line`);
   }
   const lang = kube('client_scripts', 'grindless', 'opv_field_press_lang.js');
   const mine = [...lang.matchAll(/\['([a-z0-9_]+\.[a-z0-9_.]+)',/g)].map((m) => m[1]);
   assert.ok(mine.length >= 42, `${mine.length} keys`);
-  for (const k of mine) assert.ok(run.lang.en_us[k] && run.lang.es_es[k], `${k} in both languages`);
+  for (const k of mine) assert.ok(run.lang.en_us[k], `${k} in en_us`);
   assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless', 'opv_field_press_field_frozen_press.json')), 'EMI info file');
   assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'grindless', 'textures', 'block', 'multiblock', 'field_frozen_press', 'overlay_front_active.png')), 'texture');
 });

@@ -174,7 +174,7 @@ test('"only from" claims for the cryostat chain', () => {
   }
 });
 
-test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a texture', () => {
+test('lang parity: every ENTRY and ITEM has en_us, every item has a texture', () => {
   const lang = read('client_scripts', 'grindless', 'uiv_memories_cryostat_lang.js');
   const itemNames = [...lang.matchAll(/^\s+\['([a-z0-9_]+)', '[^']+', '[^']+', /gm)].map((m) => m[1]);
   const start = read('startup_scripts', 'grindless', 'uiv', 'memories_cryostat.js');
@@ -184,11 +184,11 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   const keys = [...lang.matchAll(/^\s+\['((?:block|gtceu|material|grindless)\.[^']+)',\s*$/gm)].map((m) => m[1]);
   // OpV-A1's c4-5 keys live in its own lang file, one flat line each
   const opvA1 = read('client_scripts', 'grindless', 'opv_components_lang.js');
-  for (const m of opvA1.matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+', '[^']+'\]/gm)) keys.push(m[1]);
+  for (const m of opvA1.matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+'\]/gm)) keys.push(m[1]);
   const opvLang = read('client_scripts', 'grindless', 'opv_antimatter_lang.js');
   keys.push(...[...opvLang.matchAll(/\['(gtceu\.recipe\.[^']+)'/g)].map((m) => m[1]));
-  for (const m of (read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'maxplus_circuits_lang.js') + read('client_scripts', 'grindless', 'max_components_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js') + read('client_scripts', 'grindless', 'max_imager_lang.js') + read('client_scripts', 'grindless', 'max_shell_lang.js')).matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+', '[^']+'\]/gm)) keys.push(m[1]);
-  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
+  for (const m of (read('client_scripts', 'grindless', 'max_circuits_lang.js') + read('client_scripts', 'grindless', 'maxplus_circuits_lang.js') + read('client_scripts', 'grindless', 'max_components_lang.js') + read('client_scripts', 'grindless', 'max_rydberg_lang.js') + read('client_scripts', 'grindless', 'max_imager_lang.js') + read('client_scripts', 'grindless', 'max_shell_lang.js')).matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+'\]/gm)) keys.push(m[1]);
+  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+'\]/gm)].map((m) => m[1]);
   for (const k of ['block.gtceu.spectral_hole_burner', 'gtceu.spectral_hole_burning', 'block.gtceu.millikelvin_cryostat_works', 'gtceu.nuclear_demagnetisation', 'material.gtceu.he3_he4_mixture', 'material.gtceu.erbium_chloride_solution']) assert.ok(flat.includes(k), k);
   for (const n of ['eu151_yso', 'er_yso']) assert.ok(keys.includes(`gtceu.recipe.grindless_crystal_growth.${n}`), n);
   for (const m of ['spectral_hole_burner', 'millikelvin_cryostat_works']) for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);

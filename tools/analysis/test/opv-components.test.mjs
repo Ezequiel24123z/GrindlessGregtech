@@ -139,8 +139,8 @@ test('the OpV-A1 rows on older machines are in the recipe docs', () => {
   assert.ok(gum && /^OpV-A1/.test(gum._why), 'am_powders gum_metal row');
 });
 
-test('text: every OpV-A1 item and material has its name in en_us and es_es, and every item two tooltip lines', () => {
-  for (const l of ['en_us', 'es_es']) {
+test('text: every OpV-A1 item and material has its name in en_us, and every item two tooltip lines', () => {
+  for (const l of ['en_us']) {
     for (const id of OPVC.items) {
       const n = id.replace('grindless:', '');
       for (const k of [`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`]) assert.ok(run.lang[l][k], `${l} ${k}`);

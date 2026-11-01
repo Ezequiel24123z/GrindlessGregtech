@@ -176,16 +176,16 @@ test('only from: no other script in pack/kubejs produces the hall', () => {
   assert.deepEqual(hits, []);
 });
 
-test('names, tooltips and the info page exist in en_us and es_es; the EMI page points at them', () => {
+test('names, tooltips and the info page exist in en_us; the EMI page points at them', () => {
   const src = fs.readFileSync(path.join(KJS, 'client_scripts/grindless/uxv_stellar_fractionation_hall_lang.js'), 'utf8');
   const keys = ['block.gtceu.stellar_fractionation_hall', 0].map((k) => (typeof k === 'number' ? 'grindless.machine.stellar_fractionation_hall.tooltip.' + k : k))
     .concat([0, 1, 2, 3].map((i) => 'emi.grindless.info.stellar_fractionation_hall.' + i));
   for (const key of keys) assert.equal(src.split(`'${key}'`).length - 1, 1, key);
-  // each entry is [key, en, es]: both strings exist and differ
-  const entries = [...src.matchAll(/\['([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*'((?:[^'\\]|\\.)*)'\]/g)];
+  // each entry is [key, text]: the string exists
+  const entries = [...src.matchAll(/\['([^']+)',\s*'((?:[^'\\]|\\.)*)'\]/g)];
   assert.equal(entries.length, keys.length);
-  for (const [, k, en, es] of entries) assert.ok(en.length > 0 && es.length > 0 && en !== es, k);
-  assert.ok(src.includes("['en_us', 'es_es']"));
+  for (const [, k, en] of entries) assert.ok(en.length > 0, k);
+  assert.ok(src.includes("ClientEvents.lang('en_us'"));
   const info = JSON.parse(fs.readFileSync(path.join(KJS, 'assets/emi/recipe/additions/grindless/stellar_fractionation_hall.json'), 'utf8'));
   assert.deepEqual(info.stacks, ['item:gtceu:stellar_fractionation_hall']);
   assert.deepEqual(info.text, [0, 1, 2, 3].map((i) => 'emi.grindless.info.stellar_fractionation_hall.' + i));

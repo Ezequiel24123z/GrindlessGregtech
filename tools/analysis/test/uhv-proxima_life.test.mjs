@@ -3,7 +3,7 @@
 //   - startup_scripts/grindless/uhv/proxima_life.js: five recipe types and machines, fifteen items, two liquids;
 //   - server_scripts/grindless/uhv/proxima_life.js: data/grindless/tables/proxima_life.json's rows and the five controllers;
 //   - the older rows: LuV's biofoundry circuits 11-16 (biofoundry.json) and the algae bioreactor's far-red row (luv/europa.js);
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 // Proof reuse (docs/eras/uhv.md, Common): the dimension allowlist (lib/places.js), lib/patterns.js and the table-driven machines are
 // proven; this checks the recipe lookup and the Proxima and Earth allowlists. T1: none.
 import assert from 'node:assert/strict';
@@ -203,7 +203,7 @@ test('older rows: the biofoundry\'s xeno steps 11-16 and the algae bioreactor\'s
     assert.deepEqual(circuitOf(d), [r.circuit], r.name);
     assert.ok(has(outs(d), `grindless:${r.name}`), r.name);
     assert.ok(r.eut <= VA_UHV && r.itemsIn.length + 1 <= 5 && r.fluidsIn.length <= 2, r.name);
-    for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][`gtceu.recipe.grindless_biofoundry.${r.name}`], `${lang} ${r.name}`);
+    for (const lang of ['en_us']) assert.ok(run.lang[lang][`gtceu.recipe.grindless_biofoundry.${r.name}`], `${lang} ${r.name}`);
     // the biofoundry is each culture's only maker
     assert.deepEqual(recipes.filter((x) => has(outs(x), `grindless:${r.name}`)).map((x) => x.i), [d.i], r.name);
   }
@@ -221,7 +221,7 @@ test('older rows: the biofoundry\'s xeno steps 11-16 and the algae bioreactor\'s
   assert.deepEqual(recipes.filter((x) => has(ins(x), 'grindless:engineered_far_red_algae')).map((x) => x.i), [farRed.i]);
 });
 
-test('no UEV input, and every lang key the package needs is written in en_us and es_es', () => {
+test('no UEV input, and every lang key the package needs is written in en_us', () => {
   for (const r of rows()) for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   const keys = [];
   for (const [key, [, type]] of Object.entries(MACHINES)) {
@@ -231,6 +231,6 @@ test('no UEV input, and every lang key the package needs is written in en_us and
   for (const r of rows()) if (r.dataKey) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   for (const n of Object.keys(PL.items)) keys.push(`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`);
   for (const n of Object.keys(PL.materials)) keys.push(`material.gtceu.${n}`);
-  for (const lang of ['en_us', 'es_es']) for (const k of keys) assert.ok(run.lang[lang] && run.lang[lang][k], `${lang}: ${k}`);
+  for (const lang of ['en_us']) for (const k of keys) assert.ok(run.lang[lang] && run.lang[lang][k], `${lang}: ${k}`);
   for (const k of keys) assert.notEqual(run.lang.en_us[k], undefined);
 });

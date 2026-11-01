@@ -220,7 +220,6 @@ test('no UEV input, and every lang key and texture the package needs', () => {
   for (const m of ['sic_device_fab', 'solar_array_fab']) keys.push(`grindless.machine.${m}.tooltip.0`);
   for (const name of Object.keys(PD.items)) keys.push(`item.grindless.${name}`, `tooltip.grindless.${name}.0`, `tooltip.grindless.${name}.1`);
   for (const k of keys) assert.ok(lang.includes(`'${k}'`), k);
-  assert.ok(lang.includes("'es_es'") || lang.includes('es_es'));
   const tex = path.join(kube, 'assets', 'grindless', 'textures');
   for (const name of Object.keys(PD.items)) assert.ok(fs.existsSync(path.join(tex, 'item', `${name}.png`)), name);
   for (const m of ['sic_device_fab', 'solar_array_fab']) {

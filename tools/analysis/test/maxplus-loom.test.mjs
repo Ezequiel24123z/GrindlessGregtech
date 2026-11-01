@@ -46,11 +46,11 @@ test('older rows: unique circuit per type, at most 32', () => {
   }
 });
 
-test('lang: loom names and every keyed row have an en_us and es_es entry', () => {
+test('lang: loom names and every keyed row have an en_us entry', () => {
   for (const n of ['horizon_shielding', 'horizon_waveguide', 'horizon_conduit', 'horizon_valve_body']) assert.ok(lang.includes(`.${n}'`), `no lang key for ${n}`);
   assert.ok(lang.includes("'gtceu.meta_material_loom'"));
   assert.ok(lang.includes("'grindless.machine.meta_material_loom.tooltip.0'"));
-  assert.ok(lang.includes("['en_us', 'es_es']"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });
 

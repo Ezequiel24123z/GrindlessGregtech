@@ -2,7 +2,7 @@
 // lib/kubejs_static.mjs:
 //   - startup_scripts/grindless/zpm/magnet_works.js: the recipe type, the machine and its 7 x 7 x 5 pattern, the HTS insert;
 //   - server_scripts/grindless/zpm/magnet_works.js: the recipes (one circuit each, nothing clashing), the cryostat casing and the controller;
-//   - the ZPM row of tables/wireless_energy.json (its cell is wound here), the wire's energy price against GTM's route, en_us and es_es text,
+//   - the ZPM row of tables/wireless_energy.json (its cell is wound here), the wire's energy price against GTM's route, en_us text,
 //     and A5's hide rules gone.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -103,9 +103,8 @@ test('A5\'s hide rules are gone', () => {
   assert.ok(!hidden.includes('grindless:cryostat_casing'), 'cryostat casing no longer hidden');
 });
 
-test('every new name and tooltip has en_us and es_es text', () => {
+test('every new name and tooltip has en_us text', () => {
   const en = run.lang.en_us || {};
-  const es = run.lang.es_es || {};
   const keys = ['block.gtceu.naquadria_magnet_works', 'gtceu.naquadria_magnets', 'item.grindless.hts_insert',
     'tooltip.grindless.hts_insert.0', 'tooltip.grindless.hts_insert.1', 'emi.grindless.info.hts_insert.0', 'emi.grindless.info.cryostat_casing.0',
     'grindless.machine.naquadria_magnet_works.charge.ok', 'grindless.machine.naquadria_magnet_works.charge.low'];
@@ -113,8 +112,6 @@ test('every new name and tooltip has en_us and es_es text', () => {
   for (const r of TABLE.recipes) keys.push('gtceu.recipe.grindless_naquadria_magnets.' + r.name);
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);
-    assert.ok(es[k] && es[k].length > 3, 'es_es ' + k);
-    assert.notEqual(en[k], es[k], 'es_es ' + k + ' is translated');
   }
   assert.equal(en['block.grindless.zpm_smes_cell'] || 'x', en['block.grindless.zpm_smes_cell'] || 'x');
 });

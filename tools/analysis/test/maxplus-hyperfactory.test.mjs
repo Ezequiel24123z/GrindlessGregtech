@@ -115,13 +115,13 @@ test('an unknown id skips a recipe instead of throwing', () => {
   assert.deepEqual(h.errors.filter((e) => /failed/.test(e)), []);
 });
 
-test('names in both languages, with \\u escapes', () => {
+test('names in en_us, with \\u escapes', () => {
   const src = read('client_scripts', '../../client_scripts/grindless/maxplus_hyperfactory_lang.js'.replace('../../client_scripts/grindless/', ''));
   const keys = [...src.matchAll(/^\s*\['([^']+)', '((?:[^'\\]|\\.)*)'\]/gm)];
   const names = keys.map((k) => k[1]);
   for (const k of ['block.gtceu.hyperfactory', 'block.gtceu.max_maxplus_parallel_hatch', 'grindless.machine.hyperfactory.tooltip.0', 'grindless.machine.maxplus_parallel_hatch.tooltip', 'emi.grindless.info.max_maxplus_parallel_hatch.0']) assert.ok(names.includes(k), k);
   assert.ok(keys.every((k) => k[2]), 'every key has text');
-  assert.match(src, /\['en_us', 'es_es'\]/);
+  assert.match(src, /ClientEvents\.lang\('en_us'/);
   assert.ok(!/[^\x00-\x7f]/.test(src), 'ASCII only');
 });
 

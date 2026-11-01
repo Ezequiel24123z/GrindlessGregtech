@@ -165,7 +165,7 @@ test('exotic matter comes only from the Casimir array\'s harvest, with the nucle
   const emi = JSON.parse(fs.readFileSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'uhv_antimatter_casimir_fiction.json'), 'utf8'));
   assert.ok(emi.stacks.includes('item:gtceu:casimir_array') && emi.stacks.includes('item:grindless:exotic_matter_cell'));
   for (const k of emi.text) assert.equal(LANG.split(`'${k}'`).length - 1, 1, k);
-  assert.ok(/Fiction:/.test(LANG) && /Ficción:/.test(LANG), 'the fiction is labelled in both languages');
+  assert.ok(/Fiction:/.test(LANG), 'the fiction is labelled');
 });
 
 test('line 27\'s older rows: synchrotron c5 sodium-22, the magnesium target, the cryogenic plant\'s 99.999 % neon', () => {
@@ -200,7 +200,7 @@ test('the controllers are assembly lines with station research, each reading a d
   assert.equal(new Set(research).size, research.length, research.join('\n'));
 });
 
-test('no UEV input; every item has a texture; every lang key is written in en_us and es_es', () => {
+test('no UEV input; every item has a texture; every lang key is written in en_us', () => {
   const rows = Object.values(T.types).flatMap((t) => t.recipes);
   for (const r of rows) for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   const items = [...STARTUP.matchAll(/^ {4}([a-z0-9_]+): \{ stack: \d+ \}/gm)].map((m) => m[1]);
@@ -223,7 +223,7 @@ test('no UEV input; every item has a texture; every lang key is written in en_us
   for (const k of ['gtceu.recipe.grindless_synchrotron.sodium_22', 'gtceu.recipe.grindless_antimatter_storage.antihydrogen', 'material.gtceu.high_purity_neon']) {
     assert.ok(LANG.includes(`'${k}'`), k);
   }
-  // each entry is [key, en, es]: three strings
+  // each entry is [key, en]
   const entries = LANG.slice(LANG.indexOf('var ENTRIES = ['), LANG.indexOf(']\n\n    ;['));
   for (const m of entries.matchAll(/\['([a-z0-9_.]+)',/g)) assert.ok(m[1].length > 0);
 });

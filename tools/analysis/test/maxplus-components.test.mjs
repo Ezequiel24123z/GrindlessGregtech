@@ -64,7 +64,7 @@ test('ids are type-prefixed and the helium refrigerator row is registered as pow
   assert.match(src, /name: 'kerr_field_coil', input: 'grindless:impregnated_kerr_coil'/);
 });
 
-test('every older custom-type row with a data key has its EMI line in en_us and es_es', () => {
+test('every older custom-type row with a data key has its EMI line in en_us', () => {
   for (const [type, name] of OLD) {
     const key = /dataKey: '(grindless_[a-z_]+)'/.exec(rowOf(name));
     if (!key) continue;

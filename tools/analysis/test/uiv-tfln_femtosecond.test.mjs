@@ -160,7 +160,7 @@ function findType(obj, key) {
   return null;
 }
 
-test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a texture', () => {
+test('lang parity: every ENTRY and ITEM has en_us, every item has a texture', () => {
   const lang = read('client_scripts', 'grindless', 'uiv_tfln_femtosecond_lang.js');
   const itemNames = [...lang.matchAll(/^\s+\['([a-z0-9_]+)', '[^']+', '[^']+', '/gm)].map((m) => m[1]);
   const start = read('startup_scripts', 'grindless', 'uiv', 'tfln_femtosecond.js');
@@ -168,10 +168,10 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   assert.equal(registered.length, 19);
   assert.deepEqual(itemNames.sort(), registered.slice().sort());
   const keys = [...lang.matchAll(/^\s+\['((?:block|gtceu|material|grindless)\.[^']+)',\s*$/gm)].map((m) => m[1]);
-  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
+  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+'\]/gm)].map((m) => m[1]);
   // OpV-A1: the flexspline_teeth row's EMI line lives in opv_components_lang.js.
   const opvA1 = read('client_scripts', 'grindless', 'opv_components_lang.js');
-  for (const m of opvA1.matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+', '[^']+'\]/gm)) keys.push(m[1]);
+  for (const m of opvA1.matchAll(/^\s+\['(gtceu\.recipe\.[^']+)', '[^']+'\]/gm)) keys.push(m[1]);
   for (const k of [
     'block.gtceu.tfln_fab', 'block.gtceu.femtosecond_writer', 'gtceu.ion_slicing', 'gtceu.femtosecond_writing',
     'material.gtceu.spent_koh_etchant', 'material.gtceu.photoresin', 'material.gtceu.uncured_photoresin'

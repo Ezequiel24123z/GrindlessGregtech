@@ -3,7 +3,7 @@
 //     15 x 15 x 3 laser sail launcher), three carriers and three gases; F1's ids reused;
 //   - server_scripts/grindless/uv/starshot.js: the sail's three steps in Earth orbit, the starchip and sail-chip, the launch on the Moon,
 //     the GTM rows that feed the line, the crafting;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -155,7 +155,7 @@ test('gases: silane, xenon difluoride and silicon tetrafluoride each have one ma
   }
 });
 
-test('names: en_us and es_es for every new machine, type, item and material', () => {
+test('names: en_us for every new machine, type, item and material', () => {
   const lang = read('client_scripts/grindless/uv_starshot_lang.js');
   const keys = [];
   for (const [m, t] of Object.entries(MACHINES)) {
@@ -169,5 +169,5 @@ test('names: en_us and es_es for every new machine, type, item and material', ()
   for (const id of ['silane', 'xenon_difluoride', 'silicon_tetrafluoride']) keys.push('material.gtceu.' + id);
   for (const k of keys) assert.equal(lang.split(`['${k}',`).length, 2, k);
   assert.equal((lang.match(/^\s+\['/gm) || []).length, keys.length, 'one entry per key');
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
 });

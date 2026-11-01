@@ -2,7 +2,7 @@
 // scripts run in the stand-in of lib/kubejs_static.mjs:
 //   - startup_scripts/grindless/uhv/proxima_ground.js: two recipe types and machines, three items, two blocks;
 //   - server_scripts/grindless/uhv/proxima_ground.js: data/grindless/tables/proxima_ground.json's rows and the two controllers;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 // Proof reuse (docs/eras/uhv.md, Common): the dimension allowlist (lib/places.js), lib/patterns.js and the table-driven machines are
 // proven; this checks the recipe lookup, the Proxima allowlist, the night-side biome condition and the bootstrap. T1: none.
 import assert from 'node:assert/strict';
@@ -280,7 +280,7 @@ test('controllers: assembly lines with station research, UHV hull and circuits, 
   }
 });
 
-test('no UEV input, and every lang key the package needs is written in en_us and es_es', () => {
+test('no UEV input, and every lang key the package needs is written in en_us', () => {
   for (const r of rows()) for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   const keys = [];
   for (const [key, [, type]] of Object.entries(MACHINES)) {
@@ -290,5 +290,5 @@ test('no UEV input, and every lang key the package needs is written in en_us and
   for (const r of rows()) if (r.dataKey) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   for (const n of Object.keys(PG.items)) keys.push(`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`);
   for (const n of Object.keys(PG.blocks)) keys.push(`block.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`);
-  for (const lang of ['en_us', 'es_es']) for (const k of keys) assert.ok(run.lang[lang] && run.lang[lang][k], `${lang}: ${k}`);
+  for (const lang of ['en_us']) for (const k of keys) assert.ok(run.lang[lang] && run.lang[lang][k], `${lang}: ${k}`);
 });

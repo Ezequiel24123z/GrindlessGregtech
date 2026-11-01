@@ -2,7 +2,7 @@
 //   - startup_scripts/grindless/uv/life.js: one item (the algae culture), two recipe types, two machines (11 x 9 x 11 ark biosphere,
 //     7 x 7 x 7 neural culture vat);
 //   - server_scripts/grindless/uv/life.js: the ark's cycle, seed and inoculation, the vat's two batches, the crafting;
-//   - en_us and es_es text for the machines, types and the item.
+//   - en_us text for the machines, types and the item.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -137,11 +137,10 @@ test('byproduct destinations are written down', () => {
   for (const word of ['oxygen', 'raw growth medium', 'biomass', 'failed cultures']) assert.match(src, new RegExp(`//\\s+${word} .*-> `, 'i'), word);
 });
 
-test('names: en_us and es_es for both machines, both types and the item', () => {
+test('names: en_us for both machines, both types and the item', () => {
   const lang = read('client_scripts/grindless/uv_life_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['ark:', 'vat:', 'arkType:', 'vatType:', 'algae:', 'algaeTip:', 'arkTips:', 'vatTips:']) assert.ok(part.includes(key), key);
   }
   for (const k of ['block.gtceu.ark_biosphere', 'block.gtceu.neural_culture_vat', 'gtceu.closed_ecosystem', 'gtceu.neural_culture',

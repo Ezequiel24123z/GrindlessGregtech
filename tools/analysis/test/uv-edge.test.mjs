@@ -2,7 +2,7 @@
 //   - startup_scripts/grindless/uv/edge.js: two recipe types, two machines with valid patterns, the precursor probe, F1's ids untouched;
 //   - server_scripts/grindless/uv/edge.js: the bay's heliopause data, the interferometer's Sgr A* image, the probe, the crafting;
 //   - GTM's UHV energy hatch re-added under its own id with every input (a second run with a stand-in original);
-//   - the heliopause data and the image come only from Pluto orbit; en_us and es_es text for everything new.
+//   - the heliopause data and the image come only from Pluto orbit; en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -165,11 +165,10 @@ test('the UHV energy hatch with a stand-in original: same id, every input, outpu
   assert.ok(r2.docs.recipes.recipes.some((r) => r.i === HATCH), 're-added under its own id');
 });
 
-test('names: en_us and es_es for the machines, the types and the probe', () => {
+test('names: en_us for the machines, the types and the probe', () => {
   const lang = read('client_scripts/grindless/uv_edge_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['bay:', 'interferometer:', 'bayType:', 'interferometerType:', 'bayTips:', 'interferometerTips:', 'precursor_probe:']) {
       assert.ok(part.includes(key), key);
     }

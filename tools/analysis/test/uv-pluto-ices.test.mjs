@@ -137,9 +137,8 @@ test('the six older syngas rows are unchanged: circuits 1-4, no dimension, steam
   assert.equal(recipes.filter((r) => r.t === 'gtceu:syngas').length, 10); // UIV-A10 adds c12_methanation (circuit 7), UXV-B2 volatile_reform (circuit 8)
 });
 
-test('every new name and tooltip has en_us and es_es text, and the textures exist', () => {
+test('every new name and tooltip has en_us text, and the textures exist', () => {
   const en = run.lang.en_us || {};
-  const es = run.lang.es_es || {};
   const keys = ['gtceu.penetrator_probe', 'gtceu.ice_fractionation', 'item.grindless.penetrator_probe',
     'tooltip.grindless.penetrator_probe.0', 'tooltip.grindless.penetrator_probe.1'];
   for (const m of Object.keys(MACHINES)) {
@@ -148,8 +147,6 @@ test('every new name and tooltip has en_us and es_es text, and the textures exis
   }
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);
-    assert.ok(es[k] && es[k].length > 3, 'es_es ' + k);
-    assert.notEqual(en[k], es[k], 'es_es ' + k + ' is translated');
   }
   const tex = path.join(pack, 'kubejs', 'assets', 'grindless', 'textures');
   assert.ok(fs.existsSync(path.join(tex, 'item', 'penetrator_probe.png')));

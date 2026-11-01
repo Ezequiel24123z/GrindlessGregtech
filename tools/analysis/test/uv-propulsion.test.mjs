@@ -2,7 +2,7 @@
 //   - startup_scripts/grindless/uv/propulsion.js: two recipe types, two machines with valid patterns, eight items, F1's tank untouched;
 //   - server_scripts/grindless/uv/propulsion.js: the winder's tier 11 tank, the works' ion / Hall / pod steps, the side parts, the
 //     controllers' crafting;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -142,11 +142,10 @@ test('the controllers are craftable', () => {
   for (const id of Object.values(P.crafting)) assert.ok(ids.includes(id), id);
 });
 
-test('names: en_us and es_es for the machines, the types and the items', () => {
+test('names: en_us for the machines, the types and the items', () => {
   const lang = read('client_scripts/grindless/uv_propulsion_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['winder:', 'works:', 'winderType:', 'worksType:', 'winderTips:', 'worksTips:']) assert.ok(part.includes(key), key);
     for (const n of NEW_ITEMS) assert.ok(part.includes(`${n}:`), n);
   }

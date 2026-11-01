@@ -1316,13 +1316,13 @@ test('LuV wireless ids: every id of the table\'s rows, the LuV row first, is GTM
   }
 });
 
-test('LuV wireless names and textures: en_us and es_es for every LuV block and item (GTM\'s LuV colour), and the textures they point at', () => {
+test('LuV wireless names and textures: en_us for every LuV block and item (GTM\'s LuV colour), and the textures they point at', () => {
   const { lang } = packRun();
   const ids = [];
   for (const kind of ['energy', 'dynamo']) for (const a of TABLE.hatchAmps) ids.push(`block.gtceu.luv_wireless_${kind}_hatch${a === 2 ? '' : '_' + a + 'a'}`);
   ids.push('item.grindless.luv_wireless_energy_cover', 'item.grindless.luv_wireless_dynamo_cover');
-  for (const l of ['en_us', 'es_es']) {
-    for (const k of ids) assert.match(String(lang[l][k]), /^\u00a7dLuV |\u00a7d.* LuV( de \d+ A)?$/, l + ' ' + k);
+  for (const l of ['en_us']) {
+    for (const k of ids) assert.match(String(lang[l][k]), /^\u00a7dLuV /, l + ' ' + k);
     assert.ok(lang[l]['block.grindless.luv_smes_cell'], l + ' names the SMES cell');
     assert.ok(lang[l]['tooltip.grindless.wireless_cell.made_by'], l + ': the made-by tooltip');
     assert.ok(lang[l]['emi.grindless.info.capacitor_cells.2'], l + ': the EMI page\'s SMES line');

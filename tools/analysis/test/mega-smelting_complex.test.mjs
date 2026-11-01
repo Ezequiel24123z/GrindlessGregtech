@@ -2,7 +2,7 @@
 // data/grindless/tables/mega_smelting_complex.json): the recipe type, the pattern through the real helper, the modifier chain (coil parallel,
 // GTM's EBF overclock, batch), composed lines checked against the sum of their two stage recipes (recomputed here by hand from the stages'
 // numbers, which are copied from the bench dump), ebf_temp and the circuit carried, the skipped hot ingots, the parallel figure at two coil
-// tiers (the formulas of lib/mega.js), the controller recipe and the names in both languages.
+// tiers (the formulas of lib/mega.js), the controller recipe and the names in en_us.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -308,19 +308,18 @@ test('controller recipe: 4 electric blast furnaces, 4 vacuum freezers, 4 IV circ
   assert.ok(r.eut > 0 && r.duration > 0);
 });
 
-test('the lang file names the machine, the recipe type and its tooltips in en_us and es_es', () => {
+test('the lang file names the machine, the recipe type and its tooltips in en_us', () => {
   const lang = read('client_scripts', 'iv_mega_smelting_complex_lang.js');
   const store = {};
   vm.runInNewContext(lang, {
     ClientEvents: { lang: (code, cb) => cb({ add: (ns, key, value) => { (store[code] = store[code] || {})[key] = value; } }) },
     console,
   });
-  for (const code of ['en_us', 'es_es']) {
+  for (const code of ['en_us']) {
     assert.ok(store[code], code);
     for (const key of ['block.gtceu.smelting_complex', 'gtceu.smelting_complex', 'grindless.machine.smelting_complex.tooltip.0']) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
     }
   }
   assert.equal(store.en_us['block.gtceu.smelting_complex'], 'Smelting Complex');
-  assert.notEqual(store.es_es['grindless.machine.smelting_complex.tooltip.0'], store.en_us['grindless.machine.smelting_complex.tooltip.0']);
 });

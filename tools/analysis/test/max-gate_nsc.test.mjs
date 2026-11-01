@@ -80,11 +80,11 @@ test('every id is registered (F1 or earlier) and max-nsc is a tier-model substag
     'grindless:max_robot_arm', 'grindless:max_sensor', 'max-nsc']) assert.ok(text.includes(`"${id}"`), id);
 });
 
-test('lang parity: the c15 row line in en_us and es_es', () => {
-  assert.match(lang, /\['en_us', 'es_es'\]\.forEach/);
+test('lang: the c15 row line in en_us', () => {
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
   const key = 'gtceu.recipe.grindless_warp_gate.hold_nsc_belt';
   const at = lang.indexOf(`['${key}'`);
   assert.ok(at > 0, key);
   const entry = lang.slice(at, lang.indexOf("']", at) + 2);
-  assert.equal((entry.match(/'[^']*'|"[^"]*"/g) || []).length, 3, 'key, en and es');
+  assert.equal((entry.match(/'[^']*'|"[^"]*"/g) || []).length, 2, 'key and en');
 });

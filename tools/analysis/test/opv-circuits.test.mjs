@@ -91,13 +91,13 @@ test('the stand-in runs the OpV-A2 scripts without errors and skips nothing', ()
   assert.deepEqual(plain(OC.fridgeRecipes), ['grindless:closed_loop_cooling/opv_cryo_cmos_die_test', 'grindless:closed_loop_cooling/opv_nb_tsv_interposer_test']);
 });
 
-test('28 items and 2 fluids registered by the startup file, named in both languages, each with a texture', () => {
+test('28 items and 2 fluids registered by the startup file, named in en_us, each with a texture', () => {
   assert.equal(OC.items.length, 28);
   for (const id of OC.items) {
     const it = run.registry.items.get(id);
     assert.ok(it && /opv[\\/]circuits\.js$/.test(String(it.file)), `${id} registered by opv/circuits.js`);
     const n = id.split(':')[1];
-    for (const lang of ['en_us', 'es_es']) {
+    for (const lang of ['en_us']) {
       for (const k of [`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`]) assert.ok(run.lang[lang][k], `${lang} ${k}`);
     }
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), `${n}.png`);
@@ -106,7 +106,7 @@ test('28 items and 2 fluids registered by the startup file, named in both langua
   for (const id of OC.fluids) {
     const f = run.registry.fluids.get(id);
     assert.ok(f && /opv[\\/]circuits\.js$/.test(String(f.file)), `${id} registered by opv/circuits.js`);
-    for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][`material.gtceu.${id.split(':')[1]}`], `${lang} names ${id}`);
+    for (const lang of ['en_us']) assert.ok(run.lang[lang][`material.gtceu.${id.split(':')[1]}`], `${lang} names ${id}`);
   }
 });
 
@@ -147,11 +147,11 @@ test('the table rows: marked OpV-A2, on the circuits the package uses, and no ot
   }
 });
 
-test('every data-keyed row has its EMI line in both languages', () => {
+test('every data-keyed row has its EMI line in en_us', () => {
   for (const [, type, name] of TABLE_ROWS) {
     if (!DATA_KEYED.includes(type)) continue;
     const k = `gtceu.recipe.grindless_${type}.${name}`;
-    for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} ${k}`);
+    for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} ${k}`);
   }
 });
 

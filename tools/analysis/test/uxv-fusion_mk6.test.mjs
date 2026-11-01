@@ -168,17 +168,17 @@ test('the Mk6 ring: the table is read, every id of every row has no other spelli
   assert.deepEqual(Object.keys(MK6.fluids).sort(), ['gtceu:carbon_burning_ash', 'gtceu:helium_burning_ash', 'gtceu:oxygen_burning_ash']);
 });
 
-test('lang parity: every key in en_us and es_es, the machine tooltips and each info page', () => {
+test('lang: every key in en_us, the machine tooltips and each info page', () => {
   const lang = read(LANG);
   const keys = [...lang.matchAll(/^\s*\['([^']+)',/gm)].map((m) => m[1]);
   assert.ok(keys.length >= 12);
-  assert.equal((lang.match(/'es_es'/g) || []).length, 1);
+  assert.equal((lang.match(/ClientEvents\.lang\(/g) || []).length, 1);
   for (const k of ['block.gtceu.uxv_fusion_reactor', 'material.gtceu.helium_burning_ash', 'material.gtceu.carbon_burning_ash', 'material.gtceu.oxygen_burning_ash']) assert.ok(keys.includes(k), k);
   for (let i = 0; i < 1; i++) assert.ok(keys.includes(`grindless.machine.uxv_fusion_reactor.tooltip.${i}`), String(i));
   const start = read(STARTUP);
   for (let i = 0; i < 1; i++) assert.ok(start.includes(`grindless.machine.uxv_fusion_reactor.tooltip.${i}`));
-  // each entry has en and es
-  for (const m of lang.matchAll(/\['([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*'((?:[^'\\]|\\.)*)'\]/g)) assert.ok(m[2].length > 0 && m[3].length > 0 && m[2] !== m[3] || /^(block|material)/.test(m[1]), m[1]);
+  // each entry has a key and its en_us text
+  for (const m of lang.matchAll(/\['([^']+)',\s*'((?:[^'\\]|\\.)*)'\]/g)) assert.ok(m[2].length > 0, m[1]);
   const pages = { uxv_fusion_reactor: 4, uxv_fusion_casing: 1, si28_ash: 1, uxv_fusion_stock: 1 };
   for (const [page, n] of Object.entries(pages)) {
     const j = JSON.parse(read(`pack/kubejs/assets/emi/recipe/additions/grindless/${page}.json`));

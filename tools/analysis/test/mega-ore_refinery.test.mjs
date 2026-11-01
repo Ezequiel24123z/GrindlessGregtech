@@ -1,7 +1,7 @@
 // MEGA-4, the EV Ore Refinery (startup_scripts/grindless/ev/mega_ore_refinery.js, server_scripts/grindless/ev/mega_ore_refinery.js,
 // data/grindless/tables/mega_ore_refinery.json): the recipe type, the pattern through the real helper, the modifier chain, composed ore lines
 // checked against the sum of their four stage recipes (recomputed here by hand from the stages' numbers), the skipped ores, the parallel figure
-// at two hatch tiers (the formulas of lib/mega.js), the controller recipe and the names in both languages.
+// at two hatch tiers (the formulas of lib/mega.js), the controller recipe and the names in en_us.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -268,19 +268,18 @@ test('controller recipe: 4 EV macerators, 4 EV ore washers, 4 EV thermal centrif
   assert.ok(r.eut > 0 && r.duration > 0);
 });
 
-test('the lang file names the machine, the recipe type and its tooltips in en_us and es_es', () => {
+test('the lang file names the machine, the recipe type and its tooltips in en_us', () => {
   const lang = read('client_scripts', 'ev_mega_ore_refinery_lang.js');
   const store = {};
   vm.runInNewContext(lang, {
     ClientEvents: { lang: (code, cb) => cb({ add: (ns, key, value) => { (store[code] = store[code] || {})[key] = value; } }) },
     console,
   });
-  for (const code of ['en_us', 'es_es']) {
+  for (const code of ['en_us']) {
     assert.ok(store[code], code);
     for (const key of ['block.gtceu.ore_refinery', 'gtceu.ore_refinery', 'grindless.machine.ore_refinery.tooltip.0']) {
       assert.ok(store[code][key] && store[code][key].length > 0, code + ' ' + key);
     }
   }
   assert.equal(store.en_us['block.gtceu.ore_refinery'], 'Ore Refinery');
-  assert.notEqual(store.es_es['grindless.machine.ore_refinery.tooltip.0'], store.en_us['grindless.machine.ore_refinery.tooltip.0']);
 });

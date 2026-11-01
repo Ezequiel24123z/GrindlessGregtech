@@ -48,13 +48,13 @@ test('older rows: unique circuit per type, at most 32', () => {
   }
 });
 
-test('lang: machine names and every keyed row have an en_us and es_es entry', () => {
+test('lang: machine names and every keyed row have an en_us entry', () => {
   for (const r of plain(MA.assembler)) assert.ok(lang.includes(`grindless_condensate_assembler.${r.name}'`), `no lang key for ${r.name}`);
   for (const r of plain(MA.rows).filter((x) => x.key)) assert.ok(lang.includes(`.${r.name}'`), `no lang key for ${r.name}`);
   assert.ok(lang.includes("'block.gtceu.condensate_assembler'"));
   assert.ok(lang.includes("'gtceu.condensate_assembler'"));
   assert.ok(lang.includes("'grindless.machine.condensate_assembler.tooltip.0'"));
-  assert.ok(lang.includes("['en_us', 'es_es']"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });
 

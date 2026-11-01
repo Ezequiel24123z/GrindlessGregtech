@@ -111,17 +111,17 @@ test('the shape, textures and EMI pages exist', () => {
   assert.ok(fs.existsSync(path.join(emi, 'max_feeder_feeder_coil_casing.json')));
 });
 
-test('the lang file has en_us and es_es keys in parity, for the machine, the EMI pages and every recipe line', () => {
+test('the lang file has en_us keys, for the machine, the EMI pages and every recipe line', () => {
   const s = read(kube, 'client_scripts', 'grindless', 'max_feeder_lang.js');
-  assert.ok(/en_us/.test(s) && /es_es/.test(s));
+  assert.ok(/en_us/.test(s));
   for (const k of ['block.gtceu.accretion_feeder', 'gtceu.accretion_power', 'grindless.machine.accretion_feeder.tooltip.0',
     'emi.grindless.info.accretion_feeder.0', 'emi.grindless.info.accretion_feeder.1', 'emi.grindless.info.feeder_coil_casing.0',
     'gtceu.recipe.grindless_accretion_power.slag_pellet_burn', 'gtceu.recipe.grindless_space_photovoltaics.panel_rework']) {
     assert.ok(s.includes(`'${k}'`), k);
   }
-  const keys = [...s.matchAll(/^\s+\['([^']+)',\s*'((?:[^'\\]|\\.)*)',\s*'((?:[^'\\]|\\.)*)'\]/gm)];
+  const keys = [...s.matchAll(/^\s+\['([^']+)',\s*'((?:[^'\\]|\\.)*)'\]/gm)];
   assert.ok(keys.length >= 15);
-  for (const k of keys) assert.ok(k[2].length > 0 && k[3].length > 0, k[1]);
+  for (const k of keys) assert.ok(k[2].length > 0, k[1]);
 });
 
 test('the overlay stays in its band, has no second priority line and is registered in zones.json', () => {

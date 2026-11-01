@@ -300,12 +300,10 @@ test('structures: spheres, not boring, three functional kinds, controller in the
   }
 });
 
-test('lang parity: names, tooltips, EMI pages, items and recipe lines in both languages', () => {
+test('lang: names, tooltips, EMI pages, items and recipe lines in en_us', () => {
   const keys = ['gtceu.kugelblitz_forming', 'gtceu.hawking_power', 'emi.grindless.info.hawking_drive.0', 'emi.grindless.info.hawking_drive.1'];
   for (const m of MACHINES) keys.push(`block.gtceu.${m}`, `grindless.machine.${m}.tooltip.0`, `emi.grindless.info.${m}.0`, `emi.grindless.info.${m}.1`);
   for (const i of ['gamma_pump_charge', 'kugelblitz_seed', 'evaporated_core_shell']) keys.push(`item.grindless.${i}`, `tooltip.grindless.${i}.0`, `tooltip.grindless.${i}.1`);
   for (const r of KB.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  const re = /kugelblitz|hawking|gamma_pump|evaporated_core/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
 });

@@ -55,13 +55,13 @@ test('EMI never shows GTM\'s electric furnace recipes: such a route needs a page
   assert.deepEqual(res.viaPagesOnly, ['t:brick']);
 });
 
-test('an info page is both a recipe and a use of every stack on it (EmiInfoRecipe), tags expanded; its text must exist in en_us and es_es', () => {
+test('an info page is both a recipe and a use of every stack on it (EmiInfoRecipe), tags expanded; its text must exist in en_us', () => {
   const dump = mkDump({ items: ['t:key', 't:sample_a', 't:sample_b'], tagsItem: { 't:samples': ['t:sample_a', 't:sample_b'] } });
   const emi = { ...noEmi, pages: [page('keys.json', ['item:t:key', '#item:t:samples'], ['emi.t.keys.0'])] };
-  const lang = { en_us: { 'emi.t.keys.0': 'x' }, es_es: {} };
+  const lang = { en_us: {} };
   const res = audit({ dump, registry: reg({ items: ['t:key', 't:sample_a', 't:sample_b'] }), emi, lang });
   assert.deepEqual(res.gaps, []);
-  assert.deepEqual(res.problems, ['keys.json: no es_es text for emi.t.keys.0']);
+  assert.deepEqual(res.problems, ['keys.json: no en_us text for emi.t.keys.0']);
 });
 
 test('a disabled stack (assets/emi/index/stacks) drops every recipe it is in; an index-hidden item is listed as hidden', () => {

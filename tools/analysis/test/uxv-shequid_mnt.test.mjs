@@ -27,11 +27,11 @@ test('the stand-in runs the UXV-A6 scripts without errors, nothing skipped, no l
   assert.equal(SM.recipes.length, 7 + 2 + 1); // MAX-A2 appended c5 balanced_composite_billet and c7 calibrated_superleak (lines 10 and 41); MAX-B2 c6 shequid_rotation_ref (line 4)
 });
 
-test('2 items registered by the startup file, named in en_us and es_es', () => {
+test('2 items registered by the startup file, named in en_us', () => {
   for (const n of ITEMS) {
     const it = run.registry.items.get(`grindless:${n}`);
     assert.ok(it && /uxv[\\/]shequid_mnt\.js$/.test(String(it.file)), `${n} registered by shequid_mnt.js`);
-    for (const lang of ['en_us', 'es_es']) {
+    for (const lang of ['en_us']) {
       assert.ok(run.lang[lang][`item.grindless.${n}`], `${lang} names ${n}`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.0`], `${lang} tooltip ${n}.0`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.1`], `${lang} tooltip ${n}.1`);
@@ -156,7 +156,5 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages and r
   }
   keys.push('gtceu.shequid_assembly', 'gtceu.multinucleon_transfer', 'gtceu.recipe.grindless_synchrotron.u238_beam_charge');
   for (const r of SM.recipes.filter((x) => x.dataKey)) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  const re = /shequid|mnt_|multinucleon|weak_link|u238_beam/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
 });

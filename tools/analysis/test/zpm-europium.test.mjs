@@ -5,7 +5,7 @@
 //     ticks at ZPM's VA, atoms and mass balanced), the controller's crafting recipe, nothing clashing in GTM's lookup, and GTCA's
 //     europium-giving froth reactor replaced by one without europium (decision: europium only through the reductor);
 //   - server_scripts/grindless/ev/extraction_cascade.js: circuit 5 (ZPM mode) beside circuits 1 and 2, no lookup clash;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -157,9 +157,8 @@ test('the cascade has circuit 5 (ZPM mode) beside circuits 1 and 2 with no looku
   // c30-32 repeat (MAX-A2, MAX-H1, MAX-B1) with other item inputs: the keyset is the circuit plus the items\n  assert.equal(new Set(rows.map((r) => r.circuit + '|' + r.itemsIn.map((x) => x.id).sort().join(','))).size, rows.length);
 });
 
-test('every new name and tooltip has en_us and es_es text', () => {
+test('every new name and tooltip has en_us text', () => {
   const en = run.lang.en_us || {};
-  const es = run.lang.es_es || {};
   const keys = [
     'block.gtceu.europium_reductor', 'gtceu.valence_reduction',
     ...[0].map((i) => `grindless.machine.europium_reductor.tooltip.${i}`),
@@ -168,13 +167,10 @@ test('every new name and tooltip has en_us and es_es text', () => {
   ];
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);
-    assert.ok(es[k] && es[k].length > 3, 'es_es ' + k);
-    assert.notEqual(en[k], es[k], 'es_es ' + k + ' is translated');
   }
   for (const m of ['europium_sulfate', 'europium_oxide', 'zinc_sulfate', 'lanthanum_oxide']) {
-    for (const form of ['', 'small_', 'tiny_']) assert.ok(es[`item.gtceu.${form}${m}_dust`], `es_es ${form}${m}_dust`);
+    for (const form of ['', 'small_', 'tiny_']) assert.ok(en[`item.gtceu.${form}${m}_dust`], `en_us ${form}${m}_dust`);
   }
-  assert.equal(Object.keys(es).filter((k) => /europium_reductor|valence_reduction/.test(k)).length, Object.keys(en).filter((k) => /europium_reductor|valence_reduction/.test(k)).length);
 });
 
 test('the texture generator is documented and its three PNGs exist', () => {

@@ -4,7 +4,7 @@
 //   - server_scripts/grindless/uhv/propulsion.js: the sinterer's three steps, line 26's side steps (zirconia from red zircon, B4C, ZrB2,
 //     the blend), the controller's crafting, the motor's loot table and tool tag;
 //   - server_scripts/grindless/uv/propulsion.js: the thruster works' two UHV rows (the ICAN motor on the GEO-assembled stage, the pod);
-//   - en_us and es_es text, the motor's blockstate and models.
+//   - en_us text, the motor's blockstate and models.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -185,11 +185,10 @@ test('the controller is an assembly line: UHV hull, UHV pistons, UHV circuits, t
   for (const id of ['gtceu:uhv_machine_hull', 'gtceu:uhv_electric_piston', 'gtceu:circuits/uhv', 'gtceu:tritanium', '"research"']) assert.ok(j.includes(id), id);
 });
 
-test('names: en_us and es_es for the machine, its type, the items, the motor and the materials', () => {
+test('names: en_us for the machine, its type, the items, the motor and the materials', () => {
   const lang = read('client_scripts/grindless/uhv_propulsion_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['sinterer:', 'sinterType:', 'sintererTips:', 'motor:', 'tantalum_carbide_liner:', 'oganesson_propellant_pod:',
       'boron_carbide:', 'uhtc_blend:']) assert.ok(part.includes(key), key);
   }

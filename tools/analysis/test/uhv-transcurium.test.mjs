@@ -168,7 +168,7 @@ test('the hot cell\'s mode 7 makes the nickel-62 targets for the reactor; modes 
   assert.ok(inputs(by(IRR, 'nickel_target')).includes('grindless:nickel_62_target'));
 });
 
-test('no UEV input, and every lang key the recipes need is written in en_us and es_es', () => {
+test('no UEV input, and every lang key the recipes need is written in en_us', () => {
   const rows = Object.values(T.types).flatMap((t) => t.recipes).concat(FAB.fabrication, PYRO.types.pyroprocessing.recipes);
   for (const r of rows) for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   // UIV-B2's rows (es254_extraction) carry their EMI line in uiv_rx_j1856_lang.js

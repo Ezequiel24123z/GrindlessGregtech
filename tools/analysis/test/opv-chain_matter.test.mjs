@@ -40,7 +40,7 @@ test('the stand-in runs chain_matter.js, vela_pasta.js, elevator.js and bulge_re
   assert.deepEqual(plain(run.global.grindless.opvBulgeRelay.skipped), []);
 });
 
-test('8 items registered by opv/chain_matter.js, named and tooltipped in en_us and es_es, each with its texture', () => {
+test('8 items registered by opv/chain_matter.js, named and tooltipped in en_us, each with its texture', () => {
   const C = plain(run.global.grindless.opvChainMatter);
   assert.deepEqual([...C.items].sort(), ITEMS.map((n) => `grindless:${n}`).sort());
   assert.equal(C.site, SGR);
@@ -49,7 +49,7 @@ test('8 items registered by opv/chain_matter.js, named and tooltipped in en_us a
   for (const n of ITEMS) {
     const it = run.registry.items.get(`grindless:${n}`);
     assert.ok(it && /opv[\\/]chain_matter\.js$/.test(String(it.file)), `${n} registered by chain_matter.js`);
-    for (const lang of ['en_us', 'es_es']) {
+    for (const lang of ['en_us']) {
       assert.ok(run.lang[lang][`item.grindless.${n}`], `${lang} names ${n}`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.0`], `${lang} tooltip ${n}.0`);
       assert.ok(run.lang[lang][`tooltip.grindless.${n}.1`], `${lang} tooltip ${n}.1`);
@@ -164,10 +164,10 @@ test('every new item has exactly its one maker; every one but the two hand-offs 
   assert.ok(consumers('grindless:chain_lamina_stack').includes('grindless:assembly_line/opv_machine_hull'), 'the hull takes the stack');
 });
 
-test('EMI lines: every OpV-A0 row named in both languages', () => {
+test('EMI lines: every OpV-A0 row named in en_us', () => {
   for (const r of mine()) {
     const key = `gtceu.recipe.${table.types[r.type].dataKey}.${r.name}`;
-    for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][key], `${lang} has ${key}`);
+    for (const lang of ['en_us']) assert.ok(run.lang[lang][key], `${lang} has ${key}`);
   }
 });
 

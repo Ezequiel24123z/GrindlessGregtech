@@ -190,19 +190,18 @@ test('no UIV circuit hides a UIV row behind the UEV hatch name; no row names the
   }
 });
 
-test('lang: every new item, material and recipe line is in en_us and es_es, and every item has two tooltips', () => {
+test('lang: every new item, material and recipe line is in en_us, and every item has two tooltips', () => {
   const src = text('client_scripts', 'grindless', 'uiv_isotopes_lang.js');
-  const items = [...src.matchAll(/\['item', '([a-z0-9_]+)',\r?\n\s+\[([^\]]*)\],\r?\n\s+\[([^\]]*)\]\]/g)];
+  const items = [...src.matchAll(/\['item', '([a-z0-9_]+)',\r?\n\s+\[([^\]]*)\]\]/g)];
   assert.equal(items.length, 4);
-  for (const [, n, en, es] of items) {
+  for (const [, n, en] of items) {
     assert.equal(en.split("', '").length, 3, n);
-    assert.equal(es.split("', '").length, 3, n);
   }
   const reg = text('startup_scripts', 'grindless', 'uiv', 'isotopes.js');
   for (const n of ['cf249_target_wheel', 'ni58_ti_multilayer', 'neutron_supermirror', 'neutron_guide']) assert.ok(reg.includes(n) && src.includes(`'${n}'`), n);
   for (const n of ['titanium_tetrachloride_ice', 'titanium_50_chloride', 'titanium_50_sponge', 'nickel_chloride', 'nickel_58_chloride', 'lithium_6_metal', 'element_120_recoil_gas']) {
     assert.ok(reg.includes(`${n}:`) && src.includes(`['${n}',`), n);
   }
-  const lines = [...src.matchAll(/\['(gtceu\.recipe\.[a-z0-9_.]+)',\r?\n\s+'[^\r\n]+',\r?\n\s+'[^\r\n]+'\]/g)];
+  const lines = [...src.matchAll(/\['(gtceu\.recipe\.[a-z0-9_.]+)',\r?\n\s+'[^\r\n]+'\]/g)];
   assert.equal(lines.length, 10);
 });

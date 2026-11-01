@@ -156,15 +156,15 @@ test('"only from": nothing else in pack/kubejs produces the bulge chart or the a
   assert.equal(outs(matJson).length, 0);
 });
 
-test('lang parity: every key in en_us and es_es', () => {
+test('lang: every key in en_us', () => {
   const keys = ['gtceu.recipe.grindless_warp_gate.hold_galactic_bulge', 'gtceu.recipe.grindless_matrioshka_computing.arm_chart',
     'emi.grindless.info.uxv_gate_stock.0'];
-  assert.match(lang, /\['en_us', 'es_es'\]\.forEach/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
   for (const k of keys) {
     const at = lang.indexOf(`['${k}'`);
     assert.ok(at > 0, k);
     const entry = lang.slice(at, lang.indexOf("']", at) + 2);
-    assert.equal((entry.match(/'[^']*'|"[^"]*"/g) || []).length, 3, `${k} needs key, en and es`);
+    assert.equal((entry.match(/'[^']*'|"[^"]*"/g) || []).length, 2, `${k} needs key and en_us text`);
   }
   assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'uxv_gate_stock.json')));
 });

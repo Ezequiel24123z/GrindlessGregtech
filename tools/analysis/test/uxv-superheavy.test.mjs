@@ -171,9 +171,9 @@ test('only from: each A1 product has no other producer in the pack', () => {
   }
 });
 
-test('lang parity: every key in en_us and es_es, every item and gas named, EMI info present', () => {
+test('lang: every key in en_us, every item and gas named, EMI info present', () => {
   const lang = text('client_scripts', 'grindless', 'uxv_superheavy_lang.js');
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
   for (const n of ['element_121_atoms', 'element_122_atoms', 'fm257_plated_blank', 'cm248_plated_blank']) {
     assert.ok(lang.includes(`'${n}'`), n);
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
@@ -183,7 +183,7 @@ test('lang parity: every key in en_us and es_es, every item and gas named, EMI i
   for (const key of ['fermium_257', 'tungsten_184', 'element_121', 'element_122', 'element_121_atoms', 'element_122_atoms', 'element_121_catch', 'element_122_catch', 'census_iii', 'fm257_plating', 'cm248_plating']) {
     assert.ok(lang.includes(`.${key}'`), key);
   }
-  const entries = [...lang.matchAll(/^ {8}\['([a-z0-9_.]+)',\r?\n\s+'([^\r\n]+)',\r?\n\s+'([^\r\n]+)'\]/gm)];
+  const entries = [...lang.matchAll(/^ {8}\['([a-z0-9_.]+)',\r?\n\s+'([^\r\n]+)'\]/gm)];
   assert.ok(entries.length >= 12);
   const info = JSON.parse(text('assets', 'emi', 'recipe', 'additions', 'grindless', 'uxv_superheavy_stock.json'));
   assert.equal(info.type, 'emi:info');

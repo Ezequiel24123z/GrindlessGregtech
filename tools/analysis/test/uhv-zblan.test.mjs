@@ -2,7 +2,7 @@
 //   - startup_scripts/grindless/uhv/zblan.js: one recipe type, one machine (3 x 11 x 3 tower), the preform, zirconium tetrafluoride;
 //   - server_scripts/grindless/uhv/zblan.js: the tower's two steps (Earth orbit only), line 31's ZrF4 row, the controller;
 //   - IV's fluorspar kiln (iv/fluorspar_kiln.js), where the captured HF goes back;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 // Proof reuse (docs/eras/uhv.md, Common): the dimension allowlist and lib/patterns.js are proven; this checks the recipe lookup and
 // that the tower's recipes carry orbits.json's Earth orbit and nothing else.
 import assert from 'node:assert/strict';
@@ -136,11 +136,10 @@ test('controller: assembly line, UHV hull + 3 UHV motors + UHV circuits + statio
   for (const id of ['gtceu:uhv_machine_hull', 'gtceu:uhv_electric_motor', 'gtceu:circuits/uhv', 'gtceu:tritanium', '"research"']) assert.ok(text.includes(id), id);
 });
 
-test('names: en_us and es_es for the machine, the type, the preform and ZrF4', () => {
+test('names: en_us for the machine, the type, the preform and ZrF4', () => {
   const lang = read('client_scripts/grindless/uhv_zblan_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) for (const key of ['tower:', 'towerType:', 'towerTips:', 'zblan_preform:', 'zirconium_tetrafluoride:']) assert.ok(part.includes(key), key);
+  const en = lang;
+  for (const part of [en]) for (const key of ['tower:', 'towerType:', 'towerTips:', 'zblan_preform:', 'zirconium_tetrafluoride:']) assert.ok(part.includes(key), key);
   for (const k of ['block.gtceu.zblan_draw_tower', 'gtceu.zblan_draw', 'grindless.machine.zblan_draw_tower.tooltip.', 'material.gtceu.']) assert.ok(lang.includes(`'${k}`), k);
   assert.match(lang, /i < 4/);
 });

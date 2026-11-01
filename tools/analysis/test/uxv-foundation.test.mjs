@@ -1,5 +1,5 @@
 // UXV foundation (package UXV-F1, startup_scripts/grindless/uxv/foundation.js): every shared UXV id of docs/eras/uxv.md F1 is registered once
-// with en_us and es_es names and drawn, and there is no recipe. The hull and hatches are uev/foundation.js's builders at a third tier
+// with en_us names and drawn, and there is no recipe. The hull and hatches are uev/foundation.js's builders at a third tier
 // (S0-1). The ids are pinned (count and every id): a changed id is an escalation (uxv.md, F1).
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -107,7 +107,7 @@ test('every shared UXV id is registered once by this script, and nothing of an o
 
 test('no hull or hatch builder in UEV any more; our lang rows name all three tiers', () => {
   assert.doesNotMatch(uevSrc.replace(/^\s*\/\/.*$/gm, ''), /create\('(machine_hull|energy_)|\.tiers\(|registry\('gtceu:machine'/);
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     for (const k of ['uev_machine_hull', 'uiv_machine_hull', 'uxv_machine_hull']) assert.ok(run.lang[lang][`block.gtceu.${k}`], `${lang} names ${k}`);
   }
   assert.equal(run.lang.en_us['block.gtceu.uxv_energy_input_hatch'], 'UXV Energy Hatch');
@@ -127,9 +127,9 @@ test('the strand is a 4 A cable at V[UXV] with no loss; W-184 has a wire form; n
   assert.match(src, /^\/\/ priority:/m, 'the integrator (UXV-F2) stamped the load order');
 });
 
-test('names and both tooltip lines in en_us and es_es; materials and machines named', () => {
+test('names and both tooltip lines in en_us; materials and machines named', () => {
   const problems = [];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of [...ITEMS, ...BLOCKS]) {
       const kind = ITEMS.includes(id) ? 'item' : 'block';
@@ -142,12 +142,6 @@ test('names and both tooltip lines in en_us and es_es; materials and machines na
     for (const id of MACHINES) if (!L[`block.gtceu.${short(id)}`]) problems.push(`${lang} block.gtceu.${short(id)}`);
   }
   assert.deepEqual(problems, []);
-  const en = run.lang.en_us; const es = run.lang.es_es;
-  for (const id of [...ITEMS, ...BLOCKS]) {
-    for (const k of [`${ITEMS.includes(id) ? 'item' : 'block'}.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.0`, `tooltip.grindless.${short(id)}.1`]) {
-      assert.notEqual(es[k], en[k], k);
-    }
-  }
 });
 
 test('every item and the casing has its texture', () => {

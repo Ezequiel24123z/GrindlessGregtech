@@ -5,10 +5,9 @@
 //
 // Rules, per controller <id> (the machine's name, lang keys grindless.machine.<id>.tooltip.N):
 //   TT-COUNT  the startup tooltips(...) array has at most 4 entries (read from the static stand-in's registry, which records the call)
-//   TT-FIRST  tooltip.0 exists in en_us and es_es and starts with §7
+//   TT-FIRST  tooltip.0 exists in en_us and starts with §7
 //   TT-FIRST-LEN  tooltip.0 is at most 80 visible characters (formatting codes stripped)
 //   TT-LEN    every other tooltip.N is at most 60 visible characters
-//   TT-PARITY en_us and es_es have the same tooltip keys
 // The lang values are the stand-in's (it runs ClientEvents.lang, the same lang check-static.mjs reads). Ratchet: tooltip_lint.json
 // "baseline" lists today's violations (controller id -> codes); T0 fails on a new one and on a fixed one still listed.
 // Exit code: 0 clean, 1 new or stale entries, 2 tool failure.
@@ -40,14 +39,14 @@ const tipKeys = (lang, name) => {
   return Object.keys(lang || {}).map((k) => re.exec(k)).filter(Boolean).map((m) => Number(m[1])).sort((a, b) => a - b);
 };
 
-/** controllers from controllersOf; lang {en_us, es_es}. Returns [{id, era, code, detail}], sorted. */
+/** controllers from controllersOf; lang {en_us}. Returns [{id, era, code, detail}], sorted. */
 export function lint(controllers, lang) {
   const out = [];
   for (const c of controllers) {
     const add = (code, detail) => out.push({ id: c.id, era: c.era, code, detail });
     if (c.entries !== null && c.entries > LIMITS.entries) add('TT-COUNT', `${c.entries} entries, at most ${LIMITS.entries}`);
-    const keys = { en_us: tipKeys(lang.en_us, c.name), es_es: tipKeys(lang.es_es, c.name) };
-    for (const l of ['en_us', 'es_es']) {
+    const keys = { en_us: tipKeys(lang.en_us, c.name) };
+    for (const l of ['en_us']) {
       const first = (lang[l] || {})[`grindless.machine.${c.name}.tooltip.0`];
       if (first === undefined) add('TT-FIRST', `${l} tooltip.0 missing`);
       else {
@@ -60,7 +59,6 @@ export function lint(controllers, lang) {
         if (visible(text) > LIMITS.other) add('TT-LEN', `${l} tooltip.${n} has ${visible(text)} chars, at most ${LIMITS.other}`);
       }
     }
-    if (keys.en_us.join() !== keys.es_es.join()) add('TT-PARITY', `en_us tooltip keys [${keys.en_us}] differ from es_es [${keys.es_es}]`);
   }
   return out.sort((a, b) => a.id.localeCompare(b.id) || a.code.localeCompare(b.code));
 }

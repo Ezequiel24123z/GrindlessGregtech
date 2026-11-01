@@ -91,13 +91,10 @@ for (const it of reg.items.values()) {
 unused.sort((a, b) => eraRank(a[1]) - eraRank(b[1]) || (a[0] < b[0] ? -1 : 1));
 csv('00_unused_items.csv', ['id', 'era', 'file'], unused);
 
-// lang gaps: our keys in en_us only or es_es only
+// lang gaps: our items and blocks with no en_us name
 const lang = run.lang instanceof Map ? Object.fromEntries(run.lang) : (run.lang || {});
 const en = new Set(Object.keys(lang.en_us || {}));
-const es = new Set(Object.keys(lang.es_es || {}));
 const langGaps = [];
-for (const k of en) if (!es.has(k)) langGaps.push([k, 'missing es_es']);
-for (const k of es) if (!en.has(k)) langGaps.push([k, 'missing en_us']);
 const nameKey = (ns, id, kind) => `${kind}.${ns}.${id}`;
 for (const it of reg.items.values()) {
   const [ns, id] = it.id.split(':');

@@ -4,8 +4,7 @@
 //      draws nothing for a missing file, so a missing overlay silently leaves bare casing. A controller's grindless:block/multiblock/<x>
 //      needs overlay_front.png and overlay_front_active.png; a single-block machine's grindless:block/machines/<x>, at least one
 //      overlay_<face>.png. Every multiblock sets such a model, our base casing textures exist, and every animated strip has its .mcmeta;
-//   2. every en_us key of our lang files (pack/kubejs/client_scripts/grindless/*_lang.js and pack/kubejs/assets/*/lang/en_us.json) has
-//      an es_es entry in them.
+//   2. our lang files (pack/kubejs/client_scripts/grindless/*_lang.js and pack/kubejs/assets/*/lang/en_us.json) carry en_us entries.
 // The scripts run in a node:vm sandbox in which every KubeJS or GTM binding is a stand-in that records the calls made on it, so overlay
 // paths built in loops ('grindless:block/multiblock/' + m.id) and lang keys added through helpers are read as the game reads them.
 import test from 'node:test';
@@ -91,7 +90,7 @@ function evaluateScripts() {
   const builders = [];
   const registries = [];
   const langs = [];
-  const entries = { en_us: new Map(), es_es: new Map() };
+  const entries = { en_us: new Map() };
   let currentFile = '';
   // a tiered builder ('simple', 'generator') sets its model inside .definition((tier, builder) => ...): run it on the same builder
   const onCall = (owner, method, args) => {
@@ -275,19 +274,16 @@ test('every animated overlay strip of ours has its .mcmeta', () => {
   assert.deepEqual(problems, [], problems.join('\n'));
 });
 
-test('every en_us key of our lang files has an es_es entry', () => {
+test('our lang files carry en_us keys', () => {
   const { entries } = evaluated();
   const en = new Map(entries.en_us);
-  const es = new Map(entries.es_es);
   for (const ns of fs.readdirSync(ASSETS)) {
     const dir = path.join(ASSETS, ns, 'lang');
-    for (const [lang, map] of [['en_us', en], ['es_es', es]]) {
+    for (const [lang, map] of [['en_us', en]]) {
       const file = path.join(dir, `${lang}.json`);
       if (!fs.existsSync(file)) continue;
       for (const [k, v] of Object.entries(JSON.parse(fs.readFileSync(file, 'utf8')))) if (!map.has(k)) map.set(k, { value: v, file: rel(file) });
     }
   }
   assert.ok(en.size >= 500, `only ${en.size} en_us keys found: the sandbox missed lang entries`);
-  const missing = [...en.entries()].filter(([k]) => !es.has(k)).map(([k, v]) => `${k} (${v.file})`).sort();
-  assert.deepEqual(missing, [], `en_us keys without an es_es entry:\n  ${missing.join('\n  ')}`);
 });

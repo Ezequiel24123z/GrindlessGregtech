@@ -1,5 +1,5 @@
 // ZPM-A8 (methane pyrolyser, vent bioreactor, aerogel works), no game needed: startup_scripts/grindless/zpm/outer_chemistry.js and
-// server_scripts/grindless/zpm/outer_chemistry.js (five recipes, three crafting recipes) and the en_us / es_es text.
+// server_scripts/grindless/zpm/outer_chemistry.js (five recipes, three crafting recipes) and the en_us text.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -78,13 +78,12 @@ test('bacteria are consumed once, the bath and the culture are not consumed, GTM
   assert.ok(!JSON.stringify(run.removals).includes('raw_growth_medium'));
 });
 
-test('en_us and es_es names exist and differ', () => {
+test('en_us names exist', () => {
   for (const m of MACHINES) {
     const k = 'block.gtceu.' + m;
-    assert.ok(run.lang.en_us[k] && run.lang.es_es[k], k);
-    assert.notEqual(run.lang.en_us[k], run.lang.es_es[k]);
+    assert.ok(run.lang.en_us[k], k);
   }
-  TYPES.forEach((t) => assert.ok(run.lang.en_us['gtceu.' + t] && run.lang.es_es['gtceu.' + t], t));
+  TYPES.forEach((t) => assert.ok(run.lang.en_us['gtceu.' + t], t));
 });
 
 test('textures exist and the generator is documented', () => {

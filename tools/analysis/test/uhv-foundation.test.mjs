@@ -1,5 +1,5 @@
 // UHV foundation (package UHV-F1, startup_scripts/grindless/uhv/foundation.js): every shared UHV id of docs/eras/uhv.md is registered
-// once, as the design writes it (the other UHV packages use these ids), named in en_us and es_es with two tooltip lines, and drawn.
+// once, as the design writes it (the other UHV packages use these ids), named in en_us with two tooltip lines, and drawn.
 // Materials GTM, GTCA or an older era already have, the ICAN motor (A8), the wireless tier (A9), planets, orbits and the
 // intermediates one package uses alone are not registered here.
 import assert from 'node:assert/strict';
@@ -110,9 +110,9 @@ test('the id table global.grindless.uhvFoundation is published', () => {
   assert.match(src, /UHVF\.ids\[key\]/);
 });
 
-test('names and both tooltip lines in en_us and es_es; materials named', () => {
+test('names and both tooltip lines in en_us; materials named', () => {
   const problems = [];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of [...ITEMS, ...BLOCKS]) {
       const kind = ITEMS.includes(id) ? 'item' : 'block';
@@ -121,13 +121,6 @@ test('names and both tooltip lines in en_us and es_es; materials named', () => {
     for (const name of Object.keys(MATERIALS)) if (!L[`material.gtceu.${name}`]) problems.push(`${lang} material.gtceu.${name}`);
   }
   assert.deepEqual(problems, []);
-  // the Spanish text is a translation, not a copy of the English one
-  const en = run.lang.en_us; const es = run.lang.es_es;
-  for (const id of [...ITEMS, ...BLOCKS]) {
-    for (const k of [`${ITEMS.includes(id) ? 'item' : 'block'}.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.1`]) {
-      assert.notEqual(es[k], en[k], k);
-    }
-  }
 });
 
 test('every item and block has its texture', () => {

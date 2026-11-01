@@ -1,5 +1,5 @@
 // OpV foundation (package OpV-F1, startup_scripts/grindless/opv/foundation.js): every shared OpV id of docs/eras/opv.md F1 is registered
-// once with en_us and es_es names, and there is no recipe. GTM registers every gtceu:opv_* and gtceu:max_* id (highTierContent on, TP-S0F;
+// once with en_us names, and there is no recipe. GTM registers every gtceu:opv_* and gtceu:max_* id (highTierContent on, TP-S0F;
 // OpV-S0-1): tables/opv_ids.json lists them and nothing of ours creates them. The ids are pinned (count and every id): a changed id is an
 // escalation (opv.md, F1). The two tier-13 places (S0-3, S0-8) are data files published by opv/travel.js, with two relay_platforms rows
 // leaving from Cygnus X-1 and two sunlight rows; every item and block has its texture.
@@ -155,9 +155,9 @@ test('tables/opv_ids.json lists the 91 GTM OpV ids, the 29 MAX ids and every F1 
   assert.doesNotMatch(JSON.stringify(table), /"(itemsOut|fluidsOut|recipes)"/, 'an id table, not a recipe table');
 });
 
-test('names and both tooltip lines in en_us and es_es; materials named', () => {
+test('names and both tooltip lines in en_us; materials named', () => {
   const problems = [];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of [...ITEMS, ...BLOCKS]) {
       const kind = ITEMS.includes(id) ? 'item' : 'block';
@@ -169,13 +169,6 @@ test('names and both tooltip lines in en_us and es_es; materials named', () => {
     }
   }
   assert.deepEqual(problems, []);
-  const en = run.lang.en_us; const es = run.lang.es_es;
-  for (const id of [...ITEMS, ...BLOCKS]) {
-    for (const k of [`${ITEMS.includes(id) ? 'item' : 'block'}.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.0`, `tooltip.grindless.${short(id)}.1`]) {
-      assert.notEqual(es[k], en[k], k);
-    }
-  }
-  for (const key of Object.keys(MATERIALS)) assert.notEqual(es[`material.${key.split(':')[0]}.${short(key)}`], en[`material.${key.split(':')[0]}.${short(key)}`], key);
 });
 
 // ---------------------------------------------------------------- the places (S0-3, S0-8) and the textures
@@ -249,17 +242,14 @@ test('sunlight.json: two rows, factor 0, no_solar, era opv, always', () => {
   assert.equal(Object.values(d).filter((s) => s.era === 'opv').length, 2);
 });
 
-test('the places are named in en_us and es_es (level, dimension, planet)', () => {
-  for (const lang of ['en_us', 'es_es']) {
+test('the places are named in en_us (level, dimension, planet)', () => {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const [k, [dim]] of Object.entries(PLACES)) {
       for (const key of [`level.grindless.${dim}`, `dimension.grindless.${dim}`, `planet.grindless.${k}`]) assert.ok(L[key], `${lang} ${key}`);
     }
   }
-  assert.equal(run.lang.en_us['dimension.grindless.sgr1806_orbit'], 'SGR 1806-20 Orbit');
-  assert.equal(run.lang.es_es['dimension.grindless.sgr1806_orbit'], 'Órbita de SGR 1806-20');
-  assert.notEqual(run.lang.es_es['dimension.grindless.terzan5_core'], run.lang.en_us['dimension.grindless.terzan5_core']);
-});
+  assert.equal(run.lang.en_us['dimension.grindless.sgr1806_orbit'],   'SGR 1806-20 Orbit');});
 
 test('every F1 item and block has its texture (tools/assets/Build-OpVFoundationTextures.ps1)', () => {
   const tex = path.join(kube, 'assets', 'grindless', 'textures');

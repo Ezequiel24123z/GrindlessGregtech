@@ -98,9 +98,9 @@ test('the shape, textures and EMI page exist', () => {
   assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'max_imager_photon_ring_imager.json')));
 });
 
-test('the lang file has en_us and es_es keys in parity', () => {
+test('the lang file has en_us keys', () => {
   const s = read(kube, 'client_scripts', 'grindless', 'max_imager_lang.js');
-  assert.ok(/en_us/.test(s) && /es_es/.test(s));
+  assert.ok(/en_us/.test(s));
   assert.match(s, /block\.gtceu\.photon_ring_imager/);
   assert.match(s, /gtceu\.photon_ring_imaging/);
   for (const [, type, name] of OLDER) assert.ok(s.includes(`.${name}'`), name);

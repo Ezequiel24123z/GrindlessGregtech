@@ -91,12 +91,12 @@ test('the shape, textures and EMI page exist', () => {
   assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'max_genome_archiving_gene_ark.json')));
 });
 
-test('the lang file has en_us and es_es keys in parity', () => {
+test('the lang file has en_us keys', () => {
   const s = read(kube, 'client_scripts', 'grindless', 'max_gene_ark_lang.js');
-  assert.ok(/en_us/.test(s) && /es_es/.test(s));
+  assert.ok(/en_us/.test(s));
   assert.match(s, /block\.gtceu\.gene_ark/);
   assert.match(s, /gtceu\.genome_archiving/);
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     assert.ok(run.lang[lang]['block.gtceu.gene_ark'], lang);
     assert.ok(run.lang[lang]['gtceu.genome_archiving'], lang);
   }

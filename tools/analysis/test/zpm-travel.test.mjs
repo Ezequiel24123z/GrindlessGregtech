@@ -172,16 +172,15 @@ test('the stations table lists the Saturn and Uranus slots; sunlight has their r
   assert.equal(SUNLIGHT.dimensions['grindless:uranus_orbit'].factor, 0.0038);
 });
 
-test('names exist in en_us and es_es for the planets, dimensions, tanks and seeds', () => {
+test('names exist in en_us for the planets, dimensions, tanks and seeds', () => {
   const lang = read('client_scripts/grindless/zpm_travel_lang.js');
-  const [en, es] = lang.split("ClientEvents.lang('es_es'");
+  const en = lang;
   const keys = [];
   for (const name of NAMES) keys.push(planet(name).translation, 'dimension.grindless.' + name, 'dimension.grindless.' + name + '_orbit', 'planet.grindless.' + name);
   for (const t of ['naquadah_fuel_tank', 'aerogel_fuel_tank']) keys.push('block.grindless.' + t);
   for (const t of ['saturnian_quantum_seed', 'uranian_quantum_seed']) keys.push('item.grindless.' + t);
   for (const k of keys) {
     assert.ok(en.includes(`'${k}'`), `en_us ${k}`);
-    assert.ok(es.includes(`'${k}'`), `es_es ${k}`);
   }
 });
 

@@ -200,7 +200,7 @@ test('controllers: UIV hull, 2 UIV parts and 2 optical mainframes', () => {
   assert.match(src, /name: 'uiv_fusion_reactor', parts: \['gtceu:uiv_electric_piston', 'gtceu:uiv_field_generator', 'gtceu:uiv_electric_pump'\], research: 'grindless:divertor'/);
 });
 
-test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a texture', () => {
+test('lang parity: every ENTRY and ITEM has en_us, every item has a texture', () => {
   const lang = read('client_scripts', 'grindless', 'uiv_mk5_lang.js');
   const itemNames = [...lang.matchAll(/^\s+\['([a-z0-9_]+)', '[^']+', '[^']+', /gm)].map((m) => m[1]);
   const start = read('startup_scripts', 'grindless', 'uiv', 'mk5.js');
@@ -208,7 +208,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
   assert.equal(registered.length, 16);
   assert.deepEqual(itemNames.sort(), registered.slice().sort());
   const keys = [...lang.matchAll(/^\s+\['((?:block|gtceu|material|grindless|emi)\.[^']+)',\s*$/gm)].map((m) => m[1]);
-  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)', '[^']+', '[^']+'\]/gm)].map((m) => m[1]);
+  const flat = [...lang.matchAll(/^\s+\['((?:block|gtceu|material)\.[^']+)',   '[^']+'\]/gm)].map((m) => m[1]);
   for (const k of ['block.gtceu.polarised_proton_source', 'block.gtceu.uiv_fusion_reactor', 'gtceu.proton_polarisation', 'material.gtceu.detritiated_protium', 'material.gtceu.polarised_h_gas', 'material.gtceu.nitrogen_15_ammonia']) assert.ok(flat.includes(k), k);
   assert.ok(keys.includes('gtceu.recipe.grindless_pyroprocessing.li_sn_eutectic'));
   for (const m of ['polarised_proton_source', 'uiv_fusion_reactor']) for (let i = 0; i < (m === 'polarised_proton_source' ? 2 : 1); i++) assert.ok(keys.includes(`grindless.machine.${m}.tooltip.${i}`), `${m} ${i}`);
@@ -217,7 +217,7 @@ test('lang parity: every ENTRY and ITEM has en_us and es_es, every item has a te
     if (!t.dataKey) continue;
     for (const r of t.recipes) assert.ok(keys.includes(`gtceu.recipe.${t.dataKey}.${r.name}`), `${t.dataKey}.${r.name}`);
   }
-  assert.equal((lang.match(/'es_es'/g) || []).length, 1);
+  assert.equal((lang.match(/ClientEvents\.lang\('en_us'/g) || []).length, 1);
   for (const n of registered) assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), n);
   for (const m of ['polarised_proton_source', 'uiv_fusion_reactor']) {
     for (const f of ['overlay_front.png', 'overlay_front_active.png', 'overlay_front_active_emissive.png']) {

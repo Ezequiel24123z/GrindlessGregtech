@@ -2,7 +2,7 @@
 //   - startup_scripts/grindless/uhv/mercury.js: two recipe types, two machines (9 x 5 x 3 excavator, 9 x 9 x 5 furnace), seven items;
 //   - server_scripts/grindless/uhv/mercury.js: the excavator's dig, the furnace's three steps, the side rows, the controllers;
 //   - server_scripts/grindless/uv/materials.js: line 20's MgB2 powder-in-tube row (circuit 5);
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 // Proof reuse (docs/eras/uhv.md, Common): IV's Mercury daylight rule (iv/mercury.js, .daytime(false)) and lib/patterns.js are proven;
 // this checks the recipe lookup and that every furnace recipe carries Mercury and the day-side condition.
 import assert from 'node:assert/strict';
@@ -185,11 +185,10 @@ test('controllers: assembly lines with station research, UHV hull + 3 UHV part f
   }
 });
 
-test('names: en_us and es_es for both machines, both types and every item', () => {
+test('names: en_us for both machines, both types and every item', () => {
   const lang = read('client_scripts/grindless/uhv_mercury_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['regolith_excavator:', 'solar_vapour_furnace:', 'tips:', 'type:'].concat(HM.items.map((id) => id.split(':')[1] + ':'))) {
       assert.ok(part.includes(key), key);
     }

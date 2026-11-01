@@ -126,10 +126,9 @@ test('shapes match 9x9x9 and 7x7x13, keep NEG liners and pass the structure rubr
   }
 });
 
-test('all new names, containment tooltips and EMI pages have matching English and Spanish keys', () => {
+test('all new names, containment tooltips and EMI pages have en_us keys', () => {
   const localKeys = Object.keys(run.lang.en_us).filter((k) => /strangelet|fireball_distillate|lead_208|pb208_ion_source|opv_exotic_matter/.test(k));
-  assert.deepEqual(localKeys.sort(), Object.keys(run.lang.es_es).filter((k) => /strangelet|fireball_distillate|lead_208|pb208_ion_source|opv_exotic_matter/.test(k)).sort());
-  for (const k of localKeys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang}: ${k}`);
+  for (const k of localKeys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang}: ${k}`);
   assert.match(run.lang.en_us['grindless.machine.strangelet_distiller.tooltip.1'], /negative residue.*Cygnus X-1/);
   assert.match(run.lang.en_us['emi.grindless.info.strangelet_vault.1'], /Witten.*hypothesis.*named fiction/);
   assert.match(run.lang.en_us['emi.grindless.info.opv_exotic_matter_stock.0'], /OpV-D3.*G1.*MAX/);

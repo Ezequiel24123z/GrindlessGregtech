@@ -111,10 +111,9 @@ test('the older rows exist', () => {
   assert.ok(inputs(by('nanodiamond_cleaning', 'chemical_reactor')).includes('grindless:nanodiamond_dust'));
 });
 
-test('the quench is named fiction and en_us / es_es have the same keys', () => {
+test('the quench is named fiction', () => {
   const lang = read('client_scripts', 'grindless', 'uev_megabar_lang.js');
   assert.match(lang, /Fiction:/);
-  assert.match(lang, /Ficción:/);
   const startup = fs.readFileSync(path.join(kube, 'startup_scripts', 'grindless', 'uev', 'megabar.js'), 'utf8');
   for (const n of ['la_y_foil', 'nanotwinned_diamond_anvil', 'nanodiamond_pellet']) {
     assert.ok(new RegExp(`\\b${n}:`).test(startup), n);

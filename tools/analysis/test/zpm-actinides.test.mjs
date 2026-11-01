@@ -3,7 +3,7 @@
 //   - startup_scripts/grindless/zpm/actinides.js: two recipe types, two machines with valid patterns, two GT materials;
 //   - server_scripts/grindless/zpm/actinides.js: the five recipes (one circuit each, nothing clashing), the lanthanide nitrate route to the
 //     cascade, the two crafting recipes;
-//   - en_us and es_es text for everything new; A4's hide rules are gone.
+//   - en_us text; A4's hide rules are gone.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -117,9 +117,8 @@ test('crafting recipes use ZPM parts, and the two plants differ by an ingredient
   }
 });
 
-test('every new name and tooltip has en_us and es_es text', () => {
+test('every new name and tooltip has en_us text', () => {
   const en = run.lang.en_us || {};
-  const es = run.lang.es_es || {};
   const keys = [];
   for (const m of ['waste_retrieval_plant', 'actinide_partitioning_plant']) {
     keys.push('block.gtceu.' + m, `grindless.machine.${m}.no_voiding`);
@@ -128,7 +127,5 @@ test('every new name and tooltip has en_us and es_es text', () => {
   keys.push('gtceu.waste_retrieval', 'gtceu.actinide_partitioning', 'material.gtceu.minor_actinide_strip', 'material.gtceu.lanthanide_nitrate');
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);
-    assert.ok(es[k] && es[k].length > 3, 'es_es ' + k);
-    assert.notEqual(en[k], es[k], 'es_es ' + k + ' is translated');
   }
 });

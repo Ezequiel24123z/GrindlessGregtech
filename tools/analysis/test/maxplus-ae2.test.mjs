@@ -67,7 +67,7 @@ test('every row with a data key has an EMI line in both languages', () => {
   for (const r of rows.filter((x) => new RegExp(`name: '${x.name}'[^\\n]*key:`).test(rowSrc))) {
     assert.ok(lang.includes(`.${r.name}'`), r.name);
   }
-  assert.ok(lang.includes("'en_us', 'es_es'"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
 });
 
 test('MEGA Cells top tier asks for the A products and the lower tiers keep their recipes', () => {

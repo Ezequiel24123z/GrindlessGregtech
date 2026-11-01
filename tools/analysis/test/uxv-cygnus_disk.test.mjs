@@ -161,8 +161,6 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages, reci
   }
   keys.push('gtceu.disk_skimming', 'gtceu.frc_forming', 'gtceu.blandford_znajek');
   for (const r of CD.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  const re = /accretion_disk_skimmer|frc_former|bz_dynamo|disk_skimming|frc_forming|blandford_znajek|strand_coil/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
   for (const m of MACHINES) assert.match(run.lang.en_us[`emi.grindless.info.${m}.0`], /Cygnus X-1/, `${m}'s page names Cygnus X-1`);
 });

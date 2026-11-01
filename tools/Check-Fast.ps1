@@ -5,11 +5,11 @@ T0: the local, deterministic precheck. No Minecraft, no SSH, no network. Run it 
 .DESCRIPTION
 Runs, in this order (each one's full output goes to -OutDir\<check>.log, ignored by git):
   static    tools\analysis\check-static.mjs: every KubeJS script loads and runs its callbacks in Node (syntax errors included),
-            en_us -> es_es lang parity, and every registered machine, recipe type and grindless: item has both names.
+            the en_us lang keys, no es_es anywhere under pack\kubejs (English only), and every registered machine, recipe type and grindless: item has a name.
   quests    tools\quests\lint.mjs on the whole book (errors fail; warnings are counted).
   zones     tools\test\Get-GGTestZone.ps1 -Validate (no overlapping test bands, listed tests exist).
   order     tools\analysis\script-order.mjs --check: every script's `// priority:` header follows the deterministic load order (unstamped = notice).
-  tooltips  tools\analysis\tooltip-lint.mjs: every multiblock controller's tooltips (count, length, es_es parity) against tooltip_lint.json.
+  tooltips  tools\analysis\tooltip-lint.mjs: every multiblock controller's tooltips (count, length) against tooltip_lint.json.
   capacity  tools\analysis\capacity-lint.mjs: every recipe fits its machine's item slots and fluid tanks (capacity_snapshot.json, capacity_known.json).
   analysis  tools\analysis\test\run.mjs, the Node suite (about 70 s; the slowest check).
 Prints one line per check and at most 30 lines in total. Exit 0 = PASS, 1 = a check failed, 2 = tool failure (no Node).

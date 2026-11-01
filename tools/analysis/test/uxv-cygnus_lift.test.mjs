@@ -163,9 +163,7 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages and r
   }
   keys.push('gtceu.star_lifting', 'gtceu.plasma_mass_filtering', 'gtceu.stellar_condensation');
   for (const r of CL.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  const re = /stellar_elevator|plasma_mass_filter|stellar_condensation|star_lifting/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
   for (const m of MACHINES) {
     assert.match(run.lang.en_us[`emi.grindless.info.${m}.0`], /Cygnus X-1/, `${m}'s page names Cygnus X-1`);
   }

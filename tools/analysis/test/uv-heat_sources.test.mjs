@@ -3,7 +3,7 @@
 //   - server_scripts/grindless/uv/heat_sources.js: the five works recipes (one circuit each, nothing clashing), the C-C aeroshell row,
 //     the controller's crafting recipe;
 //   - server_scripts/grindless/iv/travel_network.js: the RTG cell burns the curium RTG pellet for 3x the plutonium pellet's time;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -104,10 +104,10 @@ test('IV\'s RTG cell burns the curium pellet for 3x the plutonium pellet\'s time
   assert.match(src, /radioisotope_decay\(R\.builderId\)[^;]*?\.duration\(R\.duration\)/s);
 });
 
-test('names: en_us and es_es for the machine, the type and each item, no accents lost', () => {
+test('names: en_us for the machine, the type and each item', () => {
   const lang = read('client_scripts/grindless/uv_heat_sources_lang.js');
-  const [en, es] = lang.split("ClientEvents.lang('es_es'");
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['block.gtceu.heat_source_works', 'gtceu.heat_source', 'grindless.machine.heat_source_works.no_voiding']) assert.ok(part.includes(`'${key}'`), key);
     for (let i = 0; i < 1; i++) assert.ok(part.includes(`heat_source_works.tooltip.${i}'`), 'tooltip ' + i);
     for (const n of NEW_ITEMS) for (const key of [`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`]) assert.ok(part.includes(`'${key}'`), key);

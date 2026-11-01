@@ -113,9 +113,7 @@ test('lang parity: names, tooltips, item, EMI page and recipe lines; sound and E
     'item.grindless.unsealed_positron_cell', 'tooltip.grindless.unsealed_positron_cell.0', 'tooltip.grindless.unsealed_positron_cell.1'];
   for (const r of PC.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   keys.push('gtceu.recipe.grindless_positron_accumulation.seed_plasma', 'gtceu.recipe.grindless_electron_beam.positron_cell_seal');
-  for (const k of keys) for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  const re = /magnetic_pair|unsealed_positron_cell/;
-  assert.deepEqual(Object.keys(run.lang.en_us).filter((k) => re.test(k)).sort(), Object.keys(run.lang.es_es).filter((k) => re.test(k)).sort());
+  for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
 
   assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'emi', 'recipe', 'additions', 'grindless', `opv_pair_converter_${MACHINE}.json`)), 'EMI info file');
   assert.ok(fs.existsSync(path.join(pack, 'kubejs', 'assets', 'grindless', 'textures', 'block', 'multiblock', MACHINE, 'overlay_front_active.png')), 'texture');

@@ -164,9 +164,9 @@ test('relay_platforms.json: two UXV-B1 rows with the UIV-B1 kit, one per jump, l
   for (const p of mine) assert.ok(rows.some((r) => r.name === p.jump), p.place);
 });
 
-test('lang parity (en_us and es_es), the jump rows and the two info pages naming their place', () => {
+test('lang (en_us), the jump rows and the two info pages naming their place', () => {
   const lang = read('client_scripts', 'grindless', 'uxv_kerr_sling_lang.js');
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
   for (const n of ['hold_vela_pulsar', 'hold_cas_a']) assert.ok(lang.includes(`'${n}'`), n);
   assert.ok(lang.includes("'ergosphere_probing', 'relay_seed'"));
   for (const [dim, k] of [['vela_pulsar_orbit', 'vela_pulsar'], ['cas_a_remnant', 'cas_a']]) {

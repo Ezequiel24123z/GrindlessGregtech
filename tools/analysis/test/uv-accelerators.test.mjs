@@ -76,7 +76,7 @@ test('every byproduct has a destination: activated target, hydrogen, helium, tri
   assert.ok(server.includes('diluted sulfuric acid ->'));
 });
 
-test('every new item has a texture, en_us and es_es names, and the F1 ids are used, never registered again', () => {
+test('every new item has a texture, en_us names, and the F1 ids are used, never registered again', () => {
   const lang = read('client_scripts', 'grindless', 'uv_accelerators_lang.js');
   const items = [...startup.matchAll(/^ {4}([a-z0-9_]+): \{ stack: \d+ \}/gm)].map((m) => m[1]);
   assert.equal(items.length, 13);

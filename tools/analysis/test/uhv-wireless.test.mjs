@@ -4,7 +4,7 @@
 //     uhv-s0.md S0-5), two UV emitters / sensors (GTM has no UHV ones), our nuclear clock (A2) as the link, neutronium and RTAN wire;
 //   - the naquadria magnet works' circuit 5 (tables/magnet_works.json): the only recipe of the UHV cell, four UV cells and RTAN wire;
 //   - the powder-in-tube line's RTAN row (circuit 4): RTAN dust in a silver sheath, GTM's mass and at least GTM's EU per wire;
-//   - the UHV hatches and covers in the assembler with the clock; en_us and es_es names in GTM's UHV colour; the textures; the zones row.
+//   - the UHV hatches and covers in the assembler with the clock; en_us names in GTM's UHV colour; the textures; the zones row.
 // The settlement (UHV only when every formed tower holds UHV cells, the per-window cap with tier 9 hatches) runs in the game:
 // gg_test_uhv_wireless.
 import assert from 'node:assert/strict';
@@ -152,10 +152,10 @@ test('the UHV hatches and covers: assembler recipes at VA[UHV] with the nuclear 
   assert.equal(W.rate(UHV, 64), 2097152 * 64);
 });
 
-test('names and textures: en_us and es_es in GTM\'s UHV colour, the EMI line of circuit 5, the five UHV textures', () => {
+test('names and textures: en_us in GTM\'s UHV colour, the EMI line of circuit 5, the five UHV textures', () => {
   const { lang } = run;
   const keys = HATCHES.map((id) => 'block.' + id.replace(':', '.')).concat(COVERS.map((id) => 'item.' + id.replace(':', '.')));
-  for (const l of ['en_us', 'es_es']) {
+  for (const l of ['en_us']) {
     for (const k of keys) assert.match(String(lang[l][k]), /^\u00a74.*UHV/, l + ' ' + k);
     assert.ok(lang[l]['block.grindless.uhv_smes_cell'], l + ' names the cell');
     assert.ok(lang[l]['gtceu.recipe.grindless_naquadria_magnets.uhv_smes_cell'], l + ': the EMI line of circuit 5');

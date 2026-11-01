@@ -119,11 +119,11 @@ test('the shape, textures and EMI page exist; one controller carries both kinds 
   assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'max_black_hole_bomb_mirror_shell.json')));
 });
 
-test('the lang file has en_us and es_es keys in parity', () => {
+test('the lang file has en_us keys', () => {
   const keys = ['block.gtceu.mirror_shell', 'gtceu.black_hole_bomb', 'grindless.machine.mirror_shell.tooltip.0',
     'emi.grindless.info.mirror_shell.0', 'emi.grindless.info.mirror_shell.1', 'emi.grindless.info.mirror_shell.2'];
   for (const n of ['vent_wave_packet', 'final_spin_map', 'horizon_lock']) keys.push(`gtceu.recipe.grindless_black_hole_bomb.${n}`);
-  for (const lang of ['en_us', 'es_es']) for (const k of keys) assert.ok(run.lang[lang][k], `${lang} ${k}`);
+  for (const lang of ['en_us']) for (const k of keys) assert.ok(run.lang[lang][k], `${lang} ${k}`);
 });
 
 test('the ending: c3 grants maxplus once through the world flag; no credits, no book, no title', () => {

@@ -3,7 +3,7 @@
 //     cabinet), nine items, four fluids;
 //   - server_scripts/grindless/uv/photonics.js: the tower's four steps, the reactor's six, the side steps, the crafting;
 //   - the extraction cascade's ytterbium strip (ev/extraction_cascade.js), the only source of ytterbium oxide;
-//   - en_us and es_es text for everything new.
+//   - en_us text for everything new.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -136,11 +136,10 @@ test('side steps: arsine, acrylate, GaAs and sapphire boules and wafers, the gra
   for (const r of P.side.filter((x) => x.type === 'electric_blast_furnace')) assert.ok(r.temp > 0, r.name);
 });
 
-test('names: en_us and es_es for both machines, both types, the items and the fluids', () => {
+test('names: en_us for both machines, both types, the items and the fluids', () => {
   const lang = read('client_scripts/grindless/uv_photonics_lang.js');
-  const [en, es] = lang.split('es_es: {');
-  assert.ok(es, 'es_es block');
-  for (const part of [en, es]) {
+  const en = lang;
+  for (const part of [en]) {
     for (const key of ['tower:', 'reactor:', 'towerType:', 'reactorType:', 'towerTips:', 'reactorTips:']) assert.ok(part.includes(key), key);
     for (const n of NEW_ITEMS.concat(FLUIDS, ['ytterbium_oxide'])) assert.ok(part.includes(`${n}:`), n);
   }

@@ -165,19 +165,18 @@ test('controller lines: OpV hull, components, circuits (4 and 8), research item;
   assert.ok(!s.includes('event.custom'), 'every recipe goes through the builder');
 });
 
-test('names, items, info pages and lang exist in en_us and es_es', () => {
+test('names, items, info pages and lang exist in en_us', () => {
   for (const m of MACHINES) {
     const k = 'block.gtceu.' + m;
-    assert.ok(run.lang.en_us[k] && run.lang.es_es[k], k);
-    assert.notEqual(run.lang.en_us[k], run.lang.es_es[k]);
+    assert.ok(run.lang.en_us[k], k);
     for (const n of [0, 1]) {
       const info = `emi.grindless.info.${m}.${n}`;
-      assert.ok(run.lang.en_us[info] && run.lang.es_es[info], info);
+      assert.ok(run.lang.en_us[info], info);
     }
   }
-  TYPES.forEach((t) => assert.ok(run.lang.en_us['gtceu.' + t] && run.lang.es_es['gtceu.' + t], t));
+  TYPES.forEach((t) => assert.ok(run.lang.en_us['gtceu.' + t], t));
   for (const it of ['si_ribbon', 'pv_collector_film']) {
-    for (const k of [`item.grindless.${it}`, `tooltip.grindless.${it}.0`, `tooltip.grindless.${it}.1`]) assert.ok(run.lang.en_us[k] && run.lang.es_es[k], k);
+    for (const k of [`item.grindless.${it}`, `tooltip.grindless.${it}.0`, `tooltip.grindless.${it}.1`]) assert.ok(run.lang.en_us[k], k);
   }
   for (const r of BC_ROWS) assert.ok(run.lang.en_us[`gtceu.recipe.${r.dataKey}.${r.name}`], r.name);
   assert.ok(run.lang.en_us['gtceu.recipe.grindless_replication_refining.spent_node_recovery']);

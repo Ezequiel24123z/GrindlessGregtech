@@ -167,7 +167,7 @@ test('the older rows exist, each marked UIV-A10', () => {
   assert.match(read('server_scripts', 'grindless', 'hv', 'syngas_plant.js'), /c12_methanation/);
 });
 
-test('lang: every item, block and machine named in en_us and es_es, every older row has its EMI line', () => {
+test('lang: every item, block and machine named in en_us, every older row has its EMI line', () => {
   assert.ok(itemNames.length >= 28 && blockNames.length === 5);
   for (const n of itemNames.concat(blockNames)) assert.ok(lang.includes(`['${n}', `), `lang entry for ${n}`);
   for (const m of ['matrioshka_computer', 'droplet_radiator_works']) {

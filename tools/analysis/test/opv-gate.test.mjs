@@ -125,14 +125,14 @@ test('"only from": nothing else in pack/kubejs produces the Sgr A* chart', () =>
   assert.equal(outs.length, 1);
 });
 
-test('lang parity: every key in en_us and es_es, and the EMI info page exists', () => {
+test('lang: every key in en_us, and the EMI info page exists', () => {
   const keys = ['gtceu.recipe.grindless_warp_gate.hold_sgr_a', 'emi.grindless.info.opv_gate_stock.0'];
-  assert.match(lang, /\['en_us', 'es_es'\]\.forEach/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
   for (const k of keys) {
     const at = lang.indexOf(`['${k}'`);
     assert.ok(at > 0, k);
     const entry = lang.slice(at, lang.indexOf("']", at) + 2);
-    assert.equal((entry.match(/'[^']*'|"[^"]*"/g) || []).length, 3, `${k} needs key, en and es`);
+    assert.equal((entry.match(/'[^']*'|"[^"]*"/g) || []).length, 2, `${k} needs key and en`);
   }
   const page = JSON.parse(fs.readFileSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'opv_gate_stock.json'), 'utf8'));
   assert.deepEqual(page.stacks, ['item:grindless:sgr_a_chart']);

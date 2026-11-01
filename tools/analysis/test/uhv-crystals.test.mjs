@@ -186,7 +186,7 @@ test('the furnace refuses voiding; the package registers only its own four items
   }
 });
 
-test('no UEV input, and every lang key is written in en_us and es_es', () => {
+test('no UEV input, and every lang key is written in en_us', () => {
   const rows = Object.values(T.types).flatMap((t) => t.recipes);
   for (const r of rows) for (const id of inputs(r).concat(outputs(r))) assert.ok(!/(^|[:_/])uev(_|$)/.test(id.split(':')[1] || ''), `${r.name}: ${id}`);
   const keys = [];
@@ -199,8 +199,8 @@ test('no UEV input, and every lang key is written in en_us and es_es', () => {
   for (const n of ['vuv_frequency_comb', 'vuv_caf2_optic', 'iridium_crucible', 'worn_iridium_crucible']) keys.push(`item.grindless.${n}`, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`);
   const str = "'(?:[^'\\\\]|\\\\.)+'";
   for (const k of keys) {
-    // [key, en, es]: two non-empty strings follow the key
-    const re = new RegExp(`\\['${k.replace(/\./g, '\\.')}',\\s*${str},\\s*${str}\\]`);
+    // [key, en]: one non-empty string follows the key
+    const re = new RegExp(`\\['${k.replace(/\./g, '\\.')}',\\s*${str}\\]`);
     assert.ok(re.test(lang), k);
   }
 });

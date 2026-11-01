@@ -1,5 +1,5 @@
 // UV foundation (package UV-F1, startup_scripts/grindless/uv/foundation.js): every shared UV id of docs/eras/uv.md's F1 list is registered
-// once, as the design writes it (the other UV packages use these ids), named in en_us and es_es with two tooltip lines, and drawn. GTM's own
+// once, as the design writes it (the other UV packages use these ids), named in en_us with two tooltip lines, and drawn. GTM's own
 // materials, wireless hatches and covers, planets, orbits, dimensions and station items are not registered here.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -104,9 +104,9 @@ test('the BNNT fuel tank is a tier 11 gcyr:fuel_tank (S0-1); uranium_233 and ars
   assert.match(mod, /ensureSet\(PropertyKey\.INGOT, true\)/);
 });
 
-test('names and both tooltip lines in en_us and es_es; materials named', () => {
+test('names and both tooltip lines in en_us; materials named', () => {
   const problems = [];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of [...ITEMS, ...BLOCKS]) {
       const kind = ITEMS.includes(id) ? 'item' : 'block';
@@ -115,12 +115,6 @@ test('names and both tooltip lines in en_us and es_es; materials named', () => {
     for (const name of Object.keys(MATERIALS)) if (!L[`material.gtceu.${name}`]) problems.push(`${lang} material.gtceu.${name}`);
   }
   assert.deepEqual(problems, []);
-  // the Spanish text is a translation, not a copy of the English one (a few names are the same word in both)
-  const en = run.lang.en_us; const es = run.lang.es_es;
-  for (const id of [...ITEMS, ...BLOCKS]) {
-    const k = `${ITEMS.includes(id) ? 'item' : 'block'}.grindless.${short(id)}`;
-    assert.notEqual(es[`tooltip.grindless.${short(id)}.1`], en[`tooltip.grindless.${short(id)}.1`], k);
-  }
 });
 
 test('every item and block has its texture', () => {

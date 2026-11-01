@@ -1,5 +1,5 @@
 // UEV foundation (package UEV-F1, startup_scripts/grindless/uev/foundation.js): every shared UEV id of docs/eras/uev.md is registered
-// once with en_us and es_es names, drawn, and the only recipes are the machine casing, the hull and the four hatches, in GTM's
+// once with en_us names, drawn, and the only recipes are the machine casing, the hull and the four hatches, in GTM's
 // assembler at UHV voltage. The ids are pinned (count and every id): a changed id is an escalation (uev.md, F1).
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -140,10 +140,10 @@ test('the only recipes are the casing, the hull and the four hatches, assembled 
   assert.equal(serverSrc.match(/event\.remove\(/g).length, 1);
 });
 
-test('names and both tooltip lines in en_us and es_es; materials and machines named', () => {
+test('names and both tooltip lines in en_us; materials and machines named', () => {
   const problems = [];
   const blocks = [...PLAIN_BLOCKS, COIL];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of [...ITEMS, ...blocks]) {
       const kind = ITEMS.includes(id) ? 'item' : 'block';
@@ -153,12 +153,6 @@ test('names and both tooltip lines in en_us and es_es; materials and machines na
     for (const id of MACHINES) if (!L[`block.gtceu.${short(id)}`]) problems.push(`${lang} block.gtceu.${short(id)}`);
   }
   assert.deepEqual(problems, []);
-  const en = run.lang.en_us; const es = run.lang.es_es;
-  for (const id of [...ITEMS, ...blocks]) {
-    for (const k of [`${ITEMS.includes(id) ? 'item' : 'block'}.grindless.${short(id)}`, `tooltip.grindless.${short(id)}.1`]) {
-      assert.notEqual(es[k], en[k], k);
-    }
-  }
 });
 
 test('every item and plain block has its texture', () => {

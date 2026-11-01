@@ -84,9 +84,9 @@ test('the shape, textures and EMI page exist', () => {
   assert.ok(fs.existsSync(path.join(kube, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'max_injector_mass_stream_injector.json')));
 });
 
-test('the lang file has en_us and es_es keys in parity', () => {
+test('the lang file has en_us keys', () => {
   const s = read(kube, 'client_scripts', 'grindless', 'max_injector_lang.js');
-  assert.ok(/en_us/.test(s) && /es_es/.test(s));
+  assert.ok(/en_us/.test(s));
   assert.match(s, /block\.gtceu\.mass_stream_injector/);
   assert.match(s, /gtceu\.mass_stream_injection/);
   assert.match(s, /grindless_megabar\.pellet_press/);

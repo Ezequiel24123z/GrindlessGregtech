@@ -128,7 +128,7 @@ test('the three machines register their types and shell with an output hatch for
   assert.match(startup, /output_hatch/);
 });
 
-test('every item has a name, tooltips in en_us and es_es form, and a texture; the scoop tooltip says the yield is fiction', () => {
+test('every item has a name, tooltips in en_us, and a texture; the scoop tooltip says the yield is fiction', () => {
   const names = [...startup.matchAll(/(\w+): \{ stack: \d+ \}/g)].map((m) => m[1]);
   assert.equal(names.length, 14);
   for (const n of names) {
@@ -136,8 +136,7 @@ test('every item has a name, tooltips in en_us and es_es form, and a texture; th
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), `texture ${n}`);
   }
   assert.match(lang, /named fiction/);
-  assert.match(lang, /ficción declarada/);
-  assert.match(lang, /\['en_us', 'es_es'\]/);
+  assert.match(lang, /ClientEvents\.lang\('en_us'/);
   // later packages' rows (UIV-A7: repeater_discipline) carry their EMI line in their own lang script
   const lines = lang + read(path.join(kube, 'client_scripts', 'grindless', 'uiv_mainframe_lang.js'));
   for (const r of mine.filter((x) => OWN_TYPES.includes(x.type))) {

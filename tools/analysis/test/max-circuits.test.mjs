@@ -132,9 +132,9 @@ test('every MAX-A1 row is at most VA[MAX] = 2013265920 EU/t (max.md:161)', () =>
   }
 });
 
-test('every data-keyed row has its EMI line in both languages', () => {
+test('every data-keyed row has its EMI line in en_us', () => {
   for (const [, type, name] of TABLE_ROWS) {
     const k = `gtceu.recipe.grindless_${type}.${name}`;
-    for (const lang of ['en_us', 'es_es']) assert.ok(run.lang[lang][k], `${lang} ${k}`);
+    for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} ${k}`);
   }
 });

@@ -1,5 +1,5 @@
 // MAX+ foundation (package XP-F1, startup_scripts/grindless/maxplus/foundation.js and travel.js): every shared MAX+ id of docs/eras/maxplus.md F1 is
-// registered once with en_us and es_es names, the four tier-14 places are data files with a relay_platforms row each, the 1,024 A hatch is an input
+// registered once with en_us names, the four tier-14 places are data files with a relay_platforms row each, the 1,024 A hatch is an input
 // EnergyHatchPartMachine and no creative id (gtceu:creative_*, ae2:, appflux) is ever registered.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -96,9 +96,9 @@ test('the four places: planet rows at tier 14, relay rows and the travel global'
   assert.equal(travel.tier, 14);
 });
 
-test('names in en_us and es_es for every id and place; es differs from en for plain words', () => {
+test('names in en_us for every id and place', () => {
   const problems = [];
-  for (const lang of ['en_us', 'es_es']) {
+  for (const lang of ['en_us']) {
     const L = run.lang[lang] || {};
     for (const id of got.items) if (!L['item.grindless.' + short(id)]) problems.push(`${lang} item ${id}`);
     for (const id of got.blocks) if (!L['block.grindless.' + short(id)]) problems.push(`${lang} block ${id}`);
@@ -107,8 +107,7 @@ test('names in en_us and es_es for every id and place; es differs from en for pl
     for (const [, [dim]] of Object.entries(PLACES)) for (const k of ['level', 'dimension']) if (!L[`${k}.grindless.${short(dim)}`]) problems.push(`${lang} ${k} ${dim}`);
   }
   assert.deepEqual(problems, []);
-  const en = run.lang.en_us; const es = run.lang.es_es;
-  assert.notEqual(es['item.grindless.maxplus_electric_motor'], en['item.grindless.maxplus_electric_motor']);
+  const en = run.lang.en_us;
   assert.equal(en['item.grindless.maxplus_electric_motor'], 'MAX+ Electric Motor');
 });
 

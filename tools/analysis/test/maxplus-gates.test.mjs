@@ -69,9 +69,9 @@ test('SITES: the four MAX+ places join the orbits, and the two site keys exist',
   assert.ok(gateJs.includes("SITES.m31_nucleus_orbit = ['grindless:m31_nucleus_orbit']"));
 });
 
-test('lang: one en_us and es_es line per row, ASCII only', () => {
+test('lang: one en_us line per row, ASCII only', () => {
   for (const w of WANT) assert.ok(lang.includes(`'gtceu.recipe.grindless_warp_gate.${w.name}'`), `no lang key for ${w.name}`);
-  assert.ok(lang.includes("['en_us', 'es_es']"));
+  assert.ok(lang.includes("ClientEvents.lang('en_us'"));
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });
 

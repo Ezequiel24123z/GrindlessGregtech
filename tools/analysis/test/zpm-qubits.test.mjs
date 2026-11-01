@@ -1,6 +1,6 @@
 // ZPM's qubit chain (package ZPM-A6), no game needed: startup_scripts/grindless/zpm/qubits.js (three recipe types, three machines, five
 // items), server_scripts/grindless/zpm/qubits.js (the six chain recipes, the Si-28 boule and wafer, our two alternative HPCA recipes, the
-// crafting recipes), the hot cell's circuit 5 row and en_us / es_es text.
+// crafting recipes), the hot cell's circuit 5 row and en_us text.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -131,16 +131,13 @@ test('the three controllers have crafting recipes from ZPM parts', () => {
   }
 });
 
-test('every new name and tooltip has en_us and es_es text, translated', () => {
+test('every new name and tooltip has en_us text', () => {
   const en = run.lang.en_us || {};
-  const es = run.lang.es_es || {};
   const keys = [];
   MACHINES.forEach((m, i) => { keys.push('block.gtceu.' + m, 'gtceu.' + TYPES[i]); [0].forEach((n) => keys.push(`grindless.machine.${m}.tooltip.${n}`)); });
   ITEMS.forEach((n) => keys.push('item.grindless.' + n, `tooltip.grindless.${n}.0`, `tooltip.grindless.${n}.1`));
   for (const k of keys) {
     assert.ok(en[k] && en[k].length > 3, 'en_us ' + k);
-    assert.ok(es[k] && es[k].length > 3, 'es_es ' + k);
-    assert.notEqual(en[k], es[k], 'es_es ' + k + ' is translated');
   }
 });
 
