@@ -1,4 +1,4 @@
-﻿// MAX foundation (package MAX-F1, startup_scripts/grindless/max/foundation.js): every shared MAX id of docs/eras/max.md F1 is registered once
+// MAX foundation (package MAX-F1, startup_scripts/grindless/max/foundation.js): every shared MAX id of docs/eras/max.md F1 is registered once
 // with en_us and es_es names and there is no recipe. GTM registers every gtceu:max_* id (highTierContent on): tables/max_ids.json lists them and
 // nothing of ours creates them. The horizon_strand cable is 16 A at V[MAX] with loss 1 (S0-3, never "lossless"). The two tier-14 places are
 // data files published by max/travel.js with two relay_platforms rows; every item and block has its texture.
