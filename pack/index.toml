@@ -85,8 +85,28 @@ file = "config/ftbquests/quests/chapters/maxplus_age_2.snbt"
 hash = "7d62d5a23a11351e1b0d9edef23a03b9fb0a1328a88e523373103b46c5cc7bdd"
 
 [[files]]
+file = "config/ftbquests/quests/chapters/maxplus_age_3.snbt"
+hash = "427a0f906d0906ecace2a21471f99a125884a26da937c25007276879c91a0198"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/maxplus_circuits.snbt"
+hash = "eb101e1c52cbf2d9bedb7baa3f285aa18e23718bf4a103ece7b211bba96d0366"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/maxplus_creative.snbt"
+hash = "9f14215d3c4280aaa3639105b328345c803801e67af075a3610b861bd03c2b27"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/maxplus_hyperstargate.snbt"
+hash = "d184140d167201377892ed5e47eb3d7784e848561e94c5ce8da65dc0c57a5ce8"
+
+[[files]]
 file = "config/ftbquests/quests/chapters/maxplus_integration.snbt"
 hash = "13a82b6c00c498b2e4a9fbade070420f6d5d8fec153fd2fb4535fd3eb5502eb1"
+
+[[files]]
+file = "config/ftbquests/quests/chapters/maxplus_machines.snbt"
+hash = "fe0179ea4cd7c4872efde1f9e44a7b0f4d058f1d514a07b9ec1580d8e6182106"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"

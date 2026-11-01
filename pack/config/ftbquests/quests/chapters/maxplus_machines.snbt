@@ -1,0 +1,403 @@
+{
+	autofocus_id: "3DC03C5D536BC546"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "maxplus_machines"
+	group: "7921472BE13FC86D"
+	icon: "gtceu:hyperfactory"
+	id: "1FE65A4519A5CDDF"
+	order_index: 4
+	quest_links: [
+		{
+			id: "3810F094123ECD34"
+			linked_quest: "1EBBE33BC966BE23"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "77A825D67B99E3A7"
+			linked_quest: "1E02DD0C6E528775"
+			x: 0.0d
+			y: 4.5d
+		}
+		{
+			id: "1909F6DECE4A10F0"
+			linked_quest: "3C5683E2C308B18E"
+			x: 0.0d
+			y: 6.5d
+		}
+		{
+			id: "542D1B4A554A7588"
+			linked_quest: "3E745B1C8AB9F567"
+			x: 0.0d
+			y: 8.0d
+		}
+		{
+			id: "7B08B4FA8F522FBA"
+			linked_quest: "13C38AC31B1221D5"
+			x: 0.0d
+			y: 10.0d
+		}
+		{
+			id: "36895E5D3CC8B9ED"
+			linked_quest: "161B334AA960BA09"
+			x: 0.0d
+			y: 12.0d
+		}
+		{
+			id: "5E50274A435BB753"
+			linked_quest: "3232ED493BE40B9D"
+			x: 0.0d
+			y: 15.5d
+		}
+		{
+			id: "3F83201C89376702"
+			linked_quest: "36E166925A329E17"
+			x: 0.0d
+			y: 17.5d
+		}
+		{
+			id: "7E8C5D294CF91A5E"
+			linked_quest: "5DFE1272DB6130B6"
+			x: 0.0d
+			y: 19.5d
+		}
+		{
+			id: "1DF029CACCB2C47B"
+			linked_quest: "164DF010E9BE6259"
+			x: 0.0d
+			y: 21.0d
+		}
+		{
+			id: "7DF606FCF7B4DC0F"
+			linked_quest: "7C245280AB59052C"
+			x: 0.0d
+			y: 23.0d
+		}
+		{
+			id: "7DBC7D53465E40E9"
+			linked_quest: "5851F26D0448CBBB"
+			x: 0.0d
+			y: 24.5d
+		}
+		{
+			id: "3D0B1AA1D3A0D7AB"
+			linked_quest: "3DB85D84F44BA706"
+			x: 0.0d
+			y: 26.0d
+		}
+		{
+			id: "14976BBF41BD6958"
+			linked_quest: "57131618A8A6EBF3"
+			x: 0.0d
+			y: 28.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["1EBBE33BC966BE23"]
+			description: ["The only machine that handles &6Kerr Condensate&r. It settles the fluid and binds older exotic matter into it: strange matter, neutronium, degenerate billets, strand cladding and the cells the components use. The MAX hull, a shell of condensate vessel casing round a superfluid core, and condensate from the mirror shell. Every bound material, and the strand that makes the MAX+ cable. Its boil-off goes back into the first recipe, and spent cells go to the helium plant, so nothing is vented."]
+			icon: "gtceu:condensate_refinery"
+			id: "3DC03C5D536BC546"
+			rewards: [{ id: "1FC00FB7B9A86E54", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "52F9C989A8C7426E", item: "gtceu:condensate_refinery", type: "item" }
+				{ id: "7FD3206E71E471AA", item: "grindless:condensate_vessel_casing", type: "item" }
+			]
+			title: "Condensate Refinery"
+			x: 2.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3DC03C5D536BC546"]
+			description: ["Its fourth recipe clads a strand of strange matter in condensate. It is the start of the cable line, which the circuits chapter finishes at the wire."]
+			icon: "grindless:kerr_clad_strand"
+			id: "5A7BA6549A3327C6"
+			rewards: [{ id: "325FDB2FADA0EF1A", type: "xp", xp: 100 }]
+			tasks: [{ id: "12A4D9A57DF8139F", item: "grindless:kerr_clad_strand", type: "item" }]
+			title: "Strand Cladding"
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3DC03C5D536BC546"]
+			description: ["Condensate will not travel loose, so the helium plant jackets it in a cell. This is the form in which it leaves the shell."]
+			icon: "grindless:jacketed_condensate_cell"
+			id: "394F32923B8B8A39"
+			rewards: [{ id: "341141E62846A28F", type: "xp", xp: 100 }]
+			tasks: [{ id: "10E5A59E4A9ABD98", item: "grindless:jacketed_condensate_cell", type: "item" }]
+			title: "Jacketed Condensate Cell"
+			x: 5.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["3DC03C5D536BC546"]
+			description: ["Neutronium pellets, pressed at a megabar, are bound into the fluid here. The press then turns the ingot into the plate that half the era is built from."]
+			icon: "grindless:bound_neutronium_ingot"
+			id: "1070580FADAC9107"
+			rewards: [{ id: "75B1426237B11846", type: "xp", xp: 100 }]
+			tasks: [{ id: "55E5A3795192F0AD", item: "grindless:bound_neutronium_ingot", type: "item" }]
+			title: "Bound Neutronium Ingot"
+			x: 5.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1E02DD0C6E528775"]
+			description: ["The only place a plate can be pressed under the shell's field. The &6Bound-Matter Press&r makes the compressed plate, and a laminate, in numbers no other machine can reach. The MAX hull, a block of bound press casing, and bound ingots from the refinery. Parts and wear are explained in the casing's tooltip. Horizon compressed plate by the ten thousand, and graded laminate for shielding. Feed ingots by ME and send the plates onward on a belt; the press flash goes back to its own input."]
+			icon: "gtceu:bound_matter_press"
+			id: "19E22CAE70354C74"
+			rewards: [{ id: "3040B25014CABD08", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7DFCCBDE769E2E2F", item: "gtceu:bound_matter_press", type: "item" }
+				{ id: "1EC31D7E9E0EC743", item: "grindless:bound_press_casing", type: "item" }
+			]
+			title: "Bound-Matter Press"
+			x: 2.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["19E22CAE70354C74"]
+			description: ["A ceramic cermet pressed in layers, the second use of the press. It is the first piece of the shielding that the loom weaves later."]
+			icon: "grindless:graded_horizon_laminate"
+			id: "3F3FF58351EDB8DB"
+			rewards: [{ id: "341A30F3C1D2394F", type: "xp", xp: 100 }]
+			tasks: [{ id: "5D5D7CAA3F98EEBB", item: "grindless:graded_horizon_laminate", type: "item" }]
+			title: "Graded Laminate"
+			x: 5.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["3C5683E2C308B18E", "3E745B1C8AB9F567"]
+			description: ["Out of the Galaxy without a rocket. It binds a probe to a counterweight, then drops the pair on a plunging orbit past the hole. The tide splits them, and the probe leaves at speed. The MAX hull, a capture ring of slingshot coil casing, a counterweight and a probe, and a full wireless hatch. The launched probe, and with it every gate that leaves the Galaxy. One counterweight per launch. The weight falls into the hole, so make them in bulk."]
+			icon: "gtceu:hills_slingshot"
+			id: "5C6CD9758C5ECD8E"
+			rewards: [{ id: "35123FE49B98DB77", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "3E895C36C995CAC4", item: "gtceu:hills_slingshot", type: "item" }
+				{ id: "1F19AD4CF6FAFAA2", item: "grindless:slingshot_coil_casing", type: "item" }
+			]
+			title: "Hills Slingshot"
+			x: 2.5d
+			y: 7.25d
+		}
+		{
+			dependencies: ["13C38AC31B1221D5"]
+			description: ["Magnetic fields heat a star's outer layers and funnel them off. At the very massive stars of R136 the lift reaches core plasma that no smaller star shows. The MAX hull, a tower of lift nozzle casing, nozzles, and a full wireless hatch at the Tarantula. The plasma that the crucible burns, and a helium-rich fraction. Its nozzle wears one in thirty-two runs. Keep a pattern for spare nozzles."]
+			icon: "gtceu:tarantula_stellar_lift"
+			id: "15F0160069BFFC67"
+			rewards: [{ id: "346E27C15B8FEDF9", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3662D2573F79E368", item: "gtceu:tarantula_stellar_lift", type: "item" }
+				{ id: "119DB64B0C91A051", item: "grindless:lift_nozzle_casing", type: "item" }
+			]
+			title: "Tarantula Stellar Lift"
+			x: 2.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["15F0160069BFFC67"]
+			description: ["The nozzle sits in the hottest part of the lift and wears out. A spare in the bus is a lift that never stops."]
+			icon: "grindless:vms_lift_nozzle"
+			id: "384B7591D0DEE491"
+			rewards: [{ id: "79817ACB64D48C9D", type: "xp", xp: 100 }]
+			tasks: [{ id: "129699563ED05A17", item: "grindless:vms_lift_nozzle", type: "item" }]
+			title: "Lift Nozzle"
+			x: 5.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["161B334AA960BA09"]
+			description: ["Stars above about 140 solar masses end by making nickel-56 in bulk. The crucible forces that burn on lifted plasma in a magnetic pinch. The MAX hull, a sphere of crucible liner casing, confined plasma, and liner spares. Nickel-56 slugs, the fuel of the burner, and a silicon-rich ash. The ash is not waste: it goes to the 30 Doradus separation row. The liner wears one in sixteen runs."]
+			icon: "gtceu:pair_instability_crucible"
+			id: "54CF2F2C523D9619"
+			rewards: [{ id: "706C993277C401A7", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "52C97EECC715E131", item: "gtceu:pair_instability_crucible", type: "item" }
+				{ id: "7DDEA395B8478741", item: "grindless:crucible_liner_casing", type: "item" }
+			]
+			title: "Pair-Instability Crucible"
+			x: 2.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["54CF2F2C523D9619"]
+			description: ["Silicon, sulfur, calcium and argon come out of the pinch with the nickel. A separation row takes them back, so the crucible makes no waste."]
+			icon: "grindless:ime_ash"
+			id: "7714777E1C8EF7F2"
+			rewards: [{ id: "15F1D3DD8FEE47D5", type: "xp", xp: 100 }]
+			tasks: [{ id: "7E86D63D234C73E0", item: "grindless:ime_ash", type: "item" }]
+			title: "Intermediate-Mass Ash"
+			x: 5.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["54CF2F2C523D9619"]
+			description: ["The liner takes the whole pinch. It wears quickly, so a spare belongs in every chest the crucible draws from."]
+			icon: "grindless:crucible_liner"
+			id: "31F7B42913E1EC19"
+			rewards: [{ id: "381E4725434E9C25", type: "xp", xp: 100 }]
+			tasks: [{ id: "5AD5913009305E46", item: "grindless:crucible_liner", type: "item" }]
+			title: "Crucible Liner"
+			x: 5.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["3232ED493BE40B9D"]
+			description: ["A supernova glows on the decay of nickel-56 into cobalt, then iron. The burner turns that heat into power through supercritical carbon dioxide, in two recipes. The MAX hull, atomic casing and coils, and shielded casks of nickel-56 from the crucible. A generator of the era. The network lesson is the integration chapter's. A cask is used twice and comes out as iron. Loop it to the hot cell."]
+			icon: "gtceu:nickel_56_burner"
+			id: "599D0970AE701F01"
+			rewards: [{ id: "3799A00AD1ABBE64", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7FCAF09F54D695F0", item: "gtceu:nickel_56_burner", type: "item" }]
+			title: "Nickel-56 Burner"
+			x: 2.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["599D0970AE701F01"]
+			description: ["After two decays the cask holds iron-56. The hot cell takes it apart and gives the iron back."]
+			icon: "grindless:spent_fe56_cask"
+			id: "326768002226073D"
+			rewards: [{ id: "3506A32E5ED9D7BD", type: "xp", xp: 100 }]
+			tasks: [{ id: "31A8E2CC7B49ECA7", item: "grindless:spent_fe56_cask", type: "item" }]
+			title: "Spent Iron Cask"
+			x: 5.0d
+			y: 15.5d
+		}
+		{
+			dependencies: ["36E166925A329E17"]
+			description: ["The Stream's gas has a tenth of solar metals, with deuterium close to the Big Bang value. A magnetic scoop gathers it as the &6Pristine Gas&r the works refines. The MAX hull, atomic casing and coils in a ring, and a magnetic scoop module. Primordial deuterium and pristine helium-3, the fuel of the torus. The protium it leaves goes to the home hydrogen line by AE2."]
+			icon: "gtceu:pristine_gas_works"
+			id: "16EBA71D0DE35B6E"
+			rewards: [{ id: "15C6733CC6A46866", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "302847534A5B0929", item: "gtceu:pristine_gas_works", type: "item" }]
+			title: "Pristine Gas Works"
+			x: 2.5d
+			y: 17.5d
+		}
+		{
+			dependencies: ["16EBA71D0DE35B6E"]
+			description: ["A cold coil on a long arm. It gathers the gas, and without one the works makes nothing."]
+			icon: "grindless:magnetic_scoop_module"
+			id: "39E7AED162176BD5"
+			rewards: [{ id: "7B2CADD7D1A5515A", type: "xp", xp: 100 }]
+			tasks: [{ id: "367D522937A3F60B", item: "grindless:magnetic_scoop_module", type: "item" }]
+			title: "Magnetic Scoop Module"
+			x: 5.0d
+			y: 17.5d
+		}
+		{
+			dependencies: ["5DFE1272DB6130B6", "164DF010E9BE6259"]
+			description: ["Deuterium and helium-3 fuse with few neutrons, and a direct converter catches their charged products. It is a generator of ours, not a GTM fusion tier. The MAX hull, a torus of atomic casing, deuterium and helium-3 together, a beam injector and a converter stack. A second generator of the era. How it feeds the network is in the integration chapter. Both fuels arrive by pipe from the works; each runs 2,400 ticks."]
+			icon: "gtceu:primordial_fusion_torus"
+			id: "5DE3FE0F732840CC"
+			rewards: [{ id: "14EBF160CDACDD63", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3E9EFFCD73123160", item: "gtceu:primordial_fusion_torus", type: "item" }]
+			title: "Primordial Fusion Torus"
+			x: 2.5d
+			y: 20.25d
+		}
+		{
+			dependencies: ["5DE3FE0F732840CC"]
+			description: ["It heats the fuel to ignition and wears one in sixty-four runs."]
+			icon: "grindless:neutral_beam_injector"
+			id: "3A94112D7B78FC78"
+			rewards: [{ id: "5BE12A186919C4B0", type: "xp", xp: 100 }]
+			tasks: [{ id: "3315AC8C409705AD", item: "grindless:neutral_beam_injector", type: "item" }]
+			title: "Neutral Beam Injector"
+			x: 5.0d
+			y: 19.5d
+		}
+		{
+			dependencies: ["5DE3FE0F732840CC"]
+			description: ["The stack turns the charged products of the fusion straight into current. It wears one in a hundred and twenty-eight runs."]
+			icon: "grindless:direct_converter_stack"
+			id: "3BD80291F79AD42F"
+			rewards: [{ id: "522F251BE9625CC0", type: "xp", xp: 100 }]
+			tasks: [{ id: "16FA749F10C1E7DD", item: "grindless:direct_converter_stack", type: "item" }]
+			title: "Direct Converter Stack"
+			x: 5.0d
+			y: 21.0d
+		}
+		{
+			dependencies: ["7C245280AB59052C", "5851F26D0448CBBB"]
+			description: ["Light falling to a factory held near a horizon arrives blueshifted, as gamma rays. The forge uses that bath for photonuclear reactions that make the rare isotopes. The MAX hull, horizon casing in a tower over a tether well, a deep tether and a molybdenum target. Photonuclear isotopes, which no other machine can make. The tether and window wear one in thirty-two runs; keep spares."]
+			icon: "gtceu:blueshift_forge"
+			id: "7D19550CD975EC8E"
+			rewards: [{ id: "772096B08BD7544C", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7D7807BE134E2993", item: "gtceu:blueshift_forge", type: "item" }]
+			title: "Blueshift Forge"
+			x: 2.5d
+			y: 23.75d
+		}
+		{
+			dependencies: ["7D19550CD975EC8E"]
+			description: ["The target takes the gamma bath and comes out as a mix of isotopes. Enrich it from older stock; the forge only irradiates."]
+			icon: "grindless:enriched_mo_target"
+			id: "72B3053974CD5861"
+			rewards: [{ id: "3915FDCE4B6DEC01", type: "xp", xp: 100 }]
+			tasks: [{ id: "50FE49B5881B501C", item: "grindless:enriched_mo_target", type: "item" }]
+			title: "Enriched Molybdenum Target"
+			x: 5.0d
+			y: 23.75d
+		}
+		{
+			dependencies: ["3DB85D84F44BA706"]
+			description: ["The emptiest place in the pack has no dust and no heat to spoil a crystal. The fab grows diamond there, and holds the holographic block that the creative store needs. The MAX hull, an open frame of horizon casing, and seed plates cut at home. Void-grown diamond and the engineered lattice that ends the stage. Seed plates and blocks travel by chest. Run it by pattern."]
+			icon: "gtceu:void_crystal_fab"
+			id: "5B3696F485C80207"
+			rewards: [{ id: "5D4CDDBD56D00529", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "17AC26674B114B40", item: "gtceu:void_crystal_fab", type: "item" }]
+			title: "Void Crystal Fab"
+			x: 2.5d
+			y: 26.0d
+		}
+		{
+			dependencies: ["57131618A8A6EBF3"]
+			description: ["Four meta-materials in one machine: shielding, waveguide, conduit and valve. It weaves them from bound plates, strand and condensate, several steps in one. The MAX hull, horizon casing, plates from the press, and no pump or regulator: the loom uses its own valve. About 380,000 of each meta-material for the gate, and the valves for pumps. Run four recipes at once and give each its own output bus."]
+			icon: "gtceu:meta_material_loom"
+			id: "5B058893FFF286CB"
+			rewards: [{ id: "5A5A19E9EB022D32", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "31A3B12D83E0E1B0", item: "gtceu:meta_material_loom", type: "item" }]
+			title: "Meta-Material Loom"
+			x: 2.5d
+			y: 28.0d
+		}
+		{
+			dependencies: ["57131618A8A6EBF3"]
+			description: ["The top of the mega family. It runs assembler, circuit assembler, assembly line, forming press and laser engraver at four thousand times a hatch's parallel. The MAX hull, horizon casing, the MAX+ parallel hatch and a pattern bus for every recipe it should take. The millions of parts the tree and the gate need. It is a convenience, not a step. Feed it by ME and let the parallels do the counting."]
+			icon: "gtceu:hyperfactory"
+			id: "3F5559CA9966BC46"
+			rewards: [{ id: "7036A46A96F79D36", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "56F0124C8516482B", item: "gtceu:hyperfactory", type: "item" }]
+			title: "Hyperfactory"
+			x: 2.5d
+			y: 30.0d
+		}
+	]
+	subtitle: ["From a refinery for bound matter to a slingshot, a stellar lift, a fusion torus and the Hyperfactory."]
+	title: "MAX+: Machines"
+}

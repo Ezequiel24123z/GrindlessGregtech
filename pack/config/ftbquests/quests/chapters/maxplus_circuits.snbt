@@ -1,0 +1,259 @@
+{
+	autofocus_id: "57A1D900439A0E96"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "maxplus_circuits"
+	group: "7921472BE13FC86D"
+	icon: "grindless:horizon_processor"
+	id: "5DDE1E4AE5279373"
+	order_index: 3
+	quest_links: [
+		{
+			id: "79BE90513FACD6CB"
+			linked_quest: "1009AE6C6D8D0887"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "1CC0E14F866B6C05"
+			linked_quest: "5A7BA6549A3327C6"
+			x: 0.0d
+			y: 1.5d
+		}
+		{
+			id: "1675011A8CCA5720"
+			linked_quest: "178016B5CE2D0AEB"
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			id: "3909BE291CDB79B8"
+			linked_quest: "58703D79C623CDC4"
+			x: 0.0d
+			y: 4.5d
+		}
+		{
+			id: "7D9103F9FD441A9E"
+			linked_quest: "509174F635683E4B"
+			x: 0.0d
+			y: 6.5d
+		}
+		{
+			id: "7308D4136013A0A1"
+			linked_quest: "1EBBE33BC966BE23"
+			x: 0.0d
+			y: 12.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["5A7BA6549A3327C6"]
+			description: ["The refinery clads the strand; a pasta draw bench then pulls it into &6Kerr Strand Wire&r. This wire is the MAX+ cable, and it carries the coils and the casing. The line stops at the wire: later steps coat it, braid it and wind it."]
+			icon: "grindless:kerr_strand_wire"
+			id: "18A230554D5B4FC6"
+			rewards: [{ id: "1E227578A3D966E5", type: "xp", xp: 120 }]
+			tasks: [{ id: "3D58E817CA487210", item: "grindless:kerr_strand_wire", type: "item" }]
+			title: "Kerr Strand Wire"
+			x: 2.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["18A230554D5B4FC6", "178016B5CE2D0AEB"]
+			description: ["There is no MAX+ hull block. Machines use the MAX &6Machine Hull&r with the &6Horizon Machine Casing&r, which is MAX casing, four compressed plates and strand cable. Every MAX+ controller asks for two casings."]
+			icon: "grindless:horizon_machine_casing"
+			id: "159278064022A915"
+			rewards: [{ id: "3411500BC9CE4166", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "7338B68D91CF0DEA", item: "gtceu:max_machine_hull", type: "item" }
+				{ id: "75915DD1EFCCFC9B", item: "grindless:horizon_machine_casing", type: "item" }
+			]
+			title: "The MAX+ Hull"
+			x: 4.5d
+			y: 2.25d
+		}
+		{
+			dependencies: ["18A230554D5B4FC6", "58703D79C623CDC4"]
+			description: [
+				"The &6MAX+ Electric Motor&r joins two &6Kerr Field Coils&r, a &6Bound-Matter Rotor&r and a MAX motor, on the assembly line at the top voltage. The coil is a five-step line on strand wire; the rotor is a four-step line on the degenerate billet."
+				"The two cores come first, each ending in a single part. The motor then uses its MAX counterpart, so the older line stays running."
+			]
+			icon: "grindless:maxplus_electric_motor"
+			id: "3903A4805EF9F835"
+			rewards: [{ id: "309273D49E53759D", type: "xp", xp: 200 }]
+			tasks: [
+				{ id: "3A94046E60A11A5B", item: "grindless:kerr_field_coil", type: "item" }
+				{ id: "70EDF89B598F0137", item: "grindless:bound_matter_rotor", type: "item" }
+				{ id: "19A960FEC02E5966", item: "grindless:maxplus_electric_motor", type: "item" }
+			]
+			title: "Motor and Its Cores"
+			x: 4.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["3903A4805EF9F835"]
+			description: ["A motor with a stack of shape-changing crystal, grown, cut, electroded and stacked. The &6Horizon Actuator Stack&r is the core and the &6MAX+ Electric Piston&r the part."]
+			icon: "grindless:maxplus_electric_piston"
+			id: "3D308B47D352F639"
+			rewards: [{ id: "7B99AA31E9B39D4E", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "58E79FA48A9FCC1F", item: "grindless:horizon_actuator_stack", type: "item" }
+				{ id: "5E5293719299E447", item: "grindless:maxplus_electric_piston", type: "item" }
+			]
+			title: "Piston and Actuator"
+			x: 7.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["3903A4805EF9F835", "509174F635683E4B"]
+			description: ["Pump and regulator both take the &6Horizon Valve&r that the loom makes, so they wait for the meta-materials. The pump is a motor and a rotor; the &6Fluid Regulator&r adds a second valve and two processors."]
+			icon: "grindless:maxplus_electric_pump"
+			id: "7CD5F2277CBA9ED8"
+			rewards: [{ id: "556D44F921EDA4DE", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "34142630FE4929C2", item: "grindless:maxplus_electric_pump", type: "item" }
+				{ id: "38EDEAC0A34FE188", item: "grindless:maxplus_fluid_regulator", type: "item" }
+			]
+			title: "Pump and Regulator"
+			x: 4.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["3903A4805EF9F835"]
+			description: ["The &6Horizon Belt&r is a braided web of strand wire, primed, coated and finished on the membrane line. Two motors carry it as the &6MAX+ Conveyor Module&r."]
+			icon: "grindless:maxplus_conveyor_module"
+			id: "17F2DC42E6204BE4"
+			rewards: [{ id: "7ADFC33CF9532F64", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "10C4B6426F1B4D08", item: "grindless:horizon_belt", type: "item" }
+				{ id: "33667A766B5977E3", item: "grindless:maxplus_conveyor_module", type: "item" }
+			]
+			title: "Conveyor Module"
+			x: 7.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["1009AE6C6D8D0887"]
+			description: ["A silicon-28 wafer, spin-stacked on a racetrack fab and cut to size. The &6Horizon Logic Die&r is the logic half of the horizon processor. The calutron for pure silicon-28, crystal growth, the beam-ultraviolet scanner and the racetrack fab, six steps in all. The horizon processor, which asks for two dies. Stock the boules by ME; the cutter returns dies by chest, so give it a buffer."]
+			icon: "grindless:horizon_logic_die"
+			id: "11FC82811D7ACCC9"
+			rewards: [{ id: "74AE48784F372322", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "545BD96CF3D7AABB", item: "grindless:horizon_logic_die", type: "item" }]
+			title: "Horizon Logic Die"
+			x: 2.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["1009AE6C6D8D0887"]
+			description: ["The board that joins the dies with light, written by a femtosecond laser and chilled in the cryostat. The &6Horizon Interposer&r carries the waveguides between them. Thin-film lithium niobate, the femtosecond writer, molecular-beam epitaxy for the piezo layer and the millikelvin cryostat. The horizon processor, one interposer per circuit. Keep one chest per interposer step; the cryostat is the slow one."]
+			icon: "grindless:horizon_interposer"
+			id: "10AB32F3FA89A75D"
+			rewards: [{ id: "7CEEF9FB21DA5C33", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7B1D4C5384B4A3E5", item: "grindless:horizon_interposer", type: "item" }]
+			title: "Horizon Interposer"
+			x: 2.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["11FC82811D7ACCC9", "10AB32F3FA89A75D", "1EBBE33BC966BE23"]
+			description: ["The circuit above the top of the ladder. The &6Horizon Processor&r joins two logic dies, an interposer, a quantum memory node, a Rydberg logic array, two mainframes and condensate. The UEV photonic integration hall at the top voltage, and one of every older part, with kerr condensate from the shell. Every MAX+ component and controller. A controller asks for eight; the Hyperstargate asks for sixteen. Six inputs on six chests; a missing one stalls the hall, so alarm on the stock."]
+			icon: "grindless:horizon_processor"
+			id: "57A1D900439A0E96"
+			rewards: [{ id: "5CB8D0382045510D", type: "xp", xp: 400 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1CA890CE0637C5E6", item: "grindless:horizon_processor", type: "item" }]
+			title: "Horizon Processor"
+			x: 5.0d
+			y: 9.75d
+		}
+		{
+			dependencies: ["57A1D900439A0E96"]
+			description: [
+				"Every MAX+ controller is built on the assembly line: one MAX hull from the hull quest, two Horizon Machine Casings, eight processors, kerr condensate, at least eight components from three families, and the inputs of its own domain."
+				"The components are listed here; the domain inputs are in the machine's own quest."
+			]
+			icon: "gtceu:max_machine_hull"
+			id: "566C9BAE45239FBD"
+			rewards: [{ id: "7D7CEC23A9C69D99", type: "xp", xp: 100 }]
+			tasks: [{ id: "53D55BE81422CC05", type: "checkmark" }]
+			title: "The Controller Recipe"
+			x: 7.5d
+			y: 9.75d
+		}
+		{
+			dependencies: ["57A1D900439A0E96"]
+			description: ["A photonic engine, a MAX emitter and two processors. The &6Horizon Photonic Engine&r is a five-step line from diamond plate to foundry; the &6MAX+ Emitter&r is the part it feeds."]
+			icon: "grindless:maxplus_emitter"
+			id: "182B1EBF7BAC54DC"
+			rewards: [{ id: "5573B67B039C38F6", type: "xp", xp: 200 }]
+			tasks: [
+				{ id: "1623A39191AA89C1", item: "grindless:horizon_photonic_engine", type: "item" }
+				{ id: "16C76E2E7547D41A", item: "grindless:maxplus_emitter", type: "item" }
+			]
+			title: "Emitter and Photonic Engine"
+			x: 7.5d
+			y: 8.25d
+		}
+		{
+			dependencies: ["57A1D900439A0E96"]
+			description: ["Single-photon detectors on a wafer, read out, cut and chilled make the &6Horizon Phase Sensor Core&r. With a MAX sensor and two processors it becomes the &6MAX+ Sensor&r."]
+			icon: "grindless:maxplus_sensor"
+			id: "176B1407EC0411CA"
+			rewards: [{ id: "5B8B9040A8BAF91F", type: "xp", xp: 200 }]
+			tasks: [
+				{ id: "55E153F3E556C000", item: "grindless:horizon_phase_sensor_core", type: "item" }
+				{ id: "7A8CB4FCA12F7CBC", item: "grindless:maxplus_sensor", type: "item" }
+			]
+			title: "Sensor and Phase Core"
+			x: 7.5d
+			y: 11.25d
+		}
+		{
+			dependencies: ["57A1D900439A0E96"]
+			description: ["Two motors, a piston and two processors make the &6MAX+ Robot Arm&r. It has no core line of its own, so it is the first part that needs the motor, the piston and the processor together."]
+			icon: "grindless:maxplus_robot_arm"
+			id: "7101ADEBBFBBCF7E"
+			rewards: [{ id: "36D2BD1E7B542413", type: "xp", xp: 150 }]
+			tasks: [{ id: "5BDC56DFD7FC0422", item: "grindless:maxplus_robot_arm", type: "item" }]
+			title: "Robot Arm"
+			x: 7.5d
+			y: 12.75d
+		}
+		{
+			dependencies: ["182B1EBF7BAC54DC", "3D308B47D352F639"]
+			description: ["The last component: an emitter, two Kerr Field Coils and a &6Condensate Field Cell&r. The cell is a five-step line that loads a niobium cavity with condensate in the refinery and seals it cold. The &6MAX+ Field Generator&r is what the big machines ask for most."]
+			icon: "grindless:maxplus_field_generator"
+			id: "7C39F07E2A604F56"
+			rewards: [{ id: "1BD840E517634B05", type: "xp", xp: 250 }]
+			tasks: [
+				{ id: "3D01844387A93977", item: "grindless:condensate_field_cell", type: "item" }
+				{ id: "58658E254AC9E151", item: "grindless:maxplus_field_generator", type: "item" }
+			]
+			title: "Field Generator"
+			x: 9.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["159278064022A915"]
+			description: ["MAX+ has no hatches of its own. Rows take GTM's &6MAX Energy Input Hatches&r, buses and fluid hatches, two of them at the top voltage, in bulk. The wireless versions draw on the network instead, as the integration chapter shows."]
+			icon: "gtceu:max_energy_input_hatch_16a"
+			id: "5AA1AD64540F0976"
+			rewards: [{ id: "51745AAEE5289AC4", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "53DEB27E92454EDA", item: "gtceu:max_energy_input_hatch_16a", type: "item" }
+				{ id: "7FB5C73F18EE038B", item: "gtceu:max_input_bus", type: "item" }
+				{ id: "167DC3DF6DCD1917", item: "gtceu:max_output_bus", type: "item" }
+				{ id: "7FB69D1FE24A03F1", item: "gtceu:max_input_hatch_9x", type: "item" }
+			]
+			title: "MAX Hatches in Bulk"
+			x: 7.0d
+			y: 0.75d
+		}
+	]
+	subtitle: ["A cable of strand, nine components and the one circuit above the top: the horizon processor."]
+	title: "MAX+: Circuits"
+}

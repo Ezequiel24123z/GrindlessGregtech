@@ -1,0 +1,130 @@
+{
+	autofocus_id: "33060566637CFD75"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "maxplus_creative"
+	group: "7921472BE13FC86D"
+	icon: "grindless:creative_energy"
+	id: "30894EF0DFFCC223"
+	order_index: 6
+	quest_links: [
+		{
+			id: "5EA71EB5840BA1BF"
+			linked_quest: "10DD8299AF9EC63A"
+			x: 0.0d
+			y: 0.0d
+		}
+	]
+	quests: [
+		{
+			dependencies: ["10DD8299AF9EC63A"]
+			description: [
+				"The creative items of this pack are parts, not toys. Set one down outside creative mode and the game cancels it with a message. A creative cell is refused by drives for the same reason."
+				"They make nothing and store nothing for you. They exist to be crafted, carried to the gate and consumed there."
+			]
+			icon: "grindless:creative_chest"
+			id: "33060566637CFD75"
+			rewards: [{ id: "7AE73B8ACC44AF8C", type: "xp", xp: 50 }]
+			tasks: [{ id: "50FE301104DCF31B", type: "checkmark" }]
+			title: "Ingredients Only"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["33060566637CFD75"]
+			description: ["Each creative item starts from its own core: cloud, store, tank and computation. They come from their own lines, so they are the slow part."]
+			icon: "grindless:horizon_cloud_core"
+			id: "7861A4838AA691E0"
+			rewards: [{ id: "11005F149702E1C6", type: "xp", xp: 500 }]
+			tasks: [
+				{ id: "3BA3512C219F9D72", item: "grindless:horizon_cloud_core", type: "item" }
+				{ id: "1DDF15A354C1FCE3", item: "grindless:bottomless_store_core", type: "item" }
+				{ id: "11F48827B8EF9123", item: "grindless:bottomless_tank_core", type: "item" }
+				{ id: "72A38DB23C0F4682", item: "grindless:horizon_computation_core", type: "item" }
+			]
+			title: "The Four Cores"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7861A4838AA691E0"]
+			description: ["The &6Creative Energy&r block is a power unit's heart. It never runs as a source, because energy from nothing would end the pack's power chain. A cloud core and the hyper assembly array, plus a mountain of field coils, processors and condensate. The gate's power units. One array row per block. Keep a stock in AE2 before the gate needs it."]
+			icon: "grindless:creative_energy"
+			id: "5728EF86F3A5CEC8"
+			rewards: [{ id: "35966643E4EC6820", type: "xp", xp: 800 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 4L, id: "7672A10CFC1A9DD4", item: "grindless:creative_energy", type: "item" }]
+			title: "Creative Energy"
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["7861A4838AA691E0"]
+			description: ["The &6Creative Energy Cell&r sits inside every horizon capacitor, as one of its parts. Drives will not take it. A cloud core and the array. A tenth of the cost of a creative block, and a great deal more of them. The capacitors of the bank. Queue it with the capacitor patterns so the bank never waits on it."]
+			icon: "grindless:creative_energy_cell"
+			id: "7F5C17CDC57C856A"
+			rewards: [{ id: "7C14159AEBEA9331", type: "xp", xp: 800 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 40L, id: "75C14EDD4D3B561E", item: "grindless:creative_energy_cell", type: "item" }]
+			title: "Creative Energy Cell"
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7861A4838AA691E0"]
+			description: ["The &6Creative Chest&r goes into the gate's base. Placed anywhere else it would void your logistics, so it is cancelled. A store core and the array. The gate's base. One craft, once. Do not forget to leave it in the network."]
+			icon: "grindless:creative_chest"
+			id: "53FB48846C0DAA1F"
+			rewards: [{ id: "7581190E1CFC31B2", type: "xp", xp: 800 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "10723BF81A670805", item: "grindless:creative_chest", type: "item" }]
+			title: "Creative Chest"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7861A4838AA691E0"]
+			description: ["The &6Creative Tank&r is the base's other half. It is a part, and it is never a fluid source. A tank core and the array. The gate's base. Order it beside the chest so the base is built in one pass."]
+			icon: "grindless:creative_tank"
+			id: "5B139BF4DB98D0B2"
+			rewards: [{ id: "7F2E8634D4B022BC", type: "xp", xp: 800 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "75DC11C7BF3BA895", item: "grindless:creative_tank", type: "item" }]
+			title: "Creative Tank"
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7861A4838AA691E0"]
+			description: ["The &6Creative Computation Provider&r gives the controller all the thinking the dial asks for. Outside the gate it does nothing. A computation core and the array. The gate's controller. One craft, queued after the computation line is running."]
+			icon: "grindless:creative_computation_provider"
+			id: "7F59412E666363A0"
+			rewards: [{ id: "348E2163C79B81EA", type: "xp", xp: 800 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5DE2D618DEB8B7B1", item: "grindless:creative_computation_provider", type: "item" }]
+			title: "Creative Computation Provider"
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["7F59412E666363A0"]
+			description: ["The &6Creative Data Access Hatch&r is the interface's data store: every recipe the gate asks for, always available. A computation core, the array and a pile of pattern memory from the AE2 line. The gate's interface. Craft it after the provider, from the same stock of cores."]
+			icon: "grindless:creative_data_access_hatch"
+			id: "7C27F7DFC9858171"
+			rewards: [{ id: "3BB68F43C660A7F1", type: "xp", xp: 800 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5981D3043DAAF297", item: "grindless:creative_data_access_hatch", type: "item" }]
+			title: "Creative Data Access Hatch"
+			x: 8.0d
+			y: 4.0d
+		}
+	]
+	subtitle: ["Six creative blocks, crafted at enormous cost and used up as ingredients of the gate. None of them will ever run."]
+	title: "MAX+: Creative Items"
+}
