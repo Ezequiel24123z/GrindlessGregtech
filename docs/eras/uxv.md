@@ -810,7 +810,7 @@ Counted by UIV's method: as-built upstream rows count (cascade, platinum plant, 
 
 ## Quests
 
-Short, in English, each with a small reward. They never block a recipe (rule 5). C2 builds them (`tools/quests/uxv-chapter/`, `pl-data-uxv.mjs`).
+In English, each with a proportionate reward that never skips a production line. They never block a recipe (rule 5). C2 builds them (`tools/quests/uxv-chapter/`, `pl-data-uxv.mjs`).
 
 | Part | Quests | Ends with |
 |---|---|---|
@@ -884,9 +884,9 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 **Server:** `server_scripts/grindless/uxv/*.js`; older-era rows in their own files (*Older machines*).
 **Data:** `data/gcyr/gcyr/planets/` and the solar system files S0-3 names, `tables/relay_platforms.json` (two rows), `tables/sunlight.json`, `tables/wireless_energy.json`, `tables/fusion_mk6.json` (new), and the older tables each contract names (*Build order*).
 
-## Save compatibility
+## Registration notes
 
-Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Technical facts from it that still hold:
+No save compatibility applies (`AGENTS.md`, Invariants). Technical facts that hold:
 
 - **New dimension ids:** `grindless:vela_pulsar_orbit`, `grindless:cas_a_remnant`; `grindless:cygnus_x1_orbit` is UIV's.
 - `highTierContent` stays off in the shipped `gtceu.yaml`: turning it on would make GTM register the same `gtceu:uxv_*` ids as ours (S0-1).
@@ -923,7 +923,7 @@ Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing her
 | **20 new loops** (sound budget; about 2.0 MB for 55 loops now) | pack size about +0.7 MB | the Starter settings (6 s, `-q 0`); the integrator generates once per batch; open question 15 |
 | **Shared `sounds.js` and `tools/assets/sounds.json`** written by every multiblock package | one-line merge conflicts | each package appends its rows at the end; pairs never touch the same row; the integrator resolves at merge |
 | **BZ chain energy** (pre-existing, *(tune)*): skimmer, filter c2 and FRC c2 cost about 10x the EU the BZ dynamo returns at the draft numbers | the Cygnus generator loses energy, which is useless rather than free | B3 tunes so the chain returns more than it costs (product rule 8: generous, never free) and states the balance on the dynamo's info page; open question 17 |
-| **Process honesty amounts** (ballast, backings, buffer gases) | inputs too cheap or too dear | all *(tune)*; they add steps of complexity, never raw quantity |
+| **Process honesty amounts** (ballast, backings, buffer gases) | inputs too cheap or too dear | all *(tune)*; they add steps of complexity and set the quantity |
 
 ### Bootstrap check (UEV-C1 lesson, DECISIONS.md:516-517)
 
@@ -974,7 +974,7 @@ UIV's *Common to every package* (uiv.md:981-1018) applies with `uiv` replaced by
   - A package never edits `tools/analysis/emi_runtime_known.json` (the integrator's ratchet) or any baseline (`structure_quality`, `recipe_quality`, `process_audit`, `emi_coverage`), except to delete entries it resolves.
   - The gates judge UXV only once the integrator has added tier 12 (*Decisions proposed*, F2); until then a package also runs them with `--era uxv` and reads the findings by hand.
 - **Info pages and loops (QR):**
-  - Every multiblock of the package ships an EMI info page in its own `client_scripts/grindless/uxv_<name>_lang.js`, with keys `emi.grindless.info.<machine>.<n>` in en_us and es_es. The page says what the machine does, its recipe types and modes, where it must stand (site rows: the source of their matter), what its byproducts become, and what it unlocks.
+  - Every multiblock of the package ships an EMI info page in its own `client_scripts/grindless/uxv_<name>_lang.js`, with keys `emi.grindless.info.<machine>.<n>` in en_us. The page says what the machine does, its recipe types and modes, where it must stand (site rows: the source of their matter), what its byproducts become, and what it unlocks.
   - Every item of ours with no consumer yet (the OpV-bound ids in *Reserve for OpV*, the `stock` outputs) gets an info page in the producing package's lang file that names its use or "stock for OpV".
   - Every new recipe type has a working loop `loop_<machine>`, listed below; the Mk6 and M2 keep GTM's sounds.
 
@@ -1120,7 +1120,7 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
   - the UEV and UIV hulls and hatches keep their ids, labels and recipes;
   - ids exactly as here.
 - **Acceptance:**
-  - every id registered once, with `en_us` and `es_es`;
+  - every id registered once, with `en_us` names;
   - `emi-coverage.mjs` lists each as expected-unobtained until its package;
   - the UXV hull and hatches appear in EMI with a UXV label.
 - **Tests:** T0; `tools/analysis/test/uxv-foundation.test.mjs`. T1: none (S0-1 is the proof).
@@ -1137,7 +1137,7 @@ Order: S0-1 first (it fixes F1's list); S0-3, S0-9 and S0-10 (they fix B1); then
   - `script_order.json`: a band for `uxv/` and one for each older file in *Older machines* that gets a row reading a UXV id;
   - the QR gates learn tier 12 (*Decisions proposed*): `uxv` 12 in `TIER_NAMES` and `TIER_PREFIX` (`tools/analysis/lib/recipe_quality.mjs`), `eraTier` `uxv: 12` and `complexFloor` `"12": 9.5` in `tools/analysis/recipe_quality.json`, `uxv` in process_audit's `ERAS` and `TIER_ERA`.
 - **Allowed:** `hidden_until.json`, `tools/analysis/tiers/obtain.json`, `script_order.json`, `server_scripts/grindless/uxv/cuts.js` (new), the three gate files named above (tier entries only), and a tag file only after a failed S0-5.
-- **References:** *Only from there and cuts*; *Save compatibility*; UIV's F2 (uiv.md:1092-1105); DECISIONS.md:528.
+- **References:** *Only from there and cuts*; *Registration notes*; UIV's F2 (uiv.md:1092-1105); DECISIONS.md:528.
 - **Acceptance:** the mainframe appears at `uxv`, in the same release as A5's row; no lib change.
 - **Tests:** T0. T1: none.
 - **Commits:** 1. The integrator runs it; it may overlap W.
@@ -1604,7 +1604,6 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
 #### C3. Integration and release (integrator)
 
 - **Objective:**
-  - reopen a v0.14.0 save (*Save compatibility*);
   - T2 batch, then T3 (client legs one per run);
   - `hidden_until.json` final; STATUS, DECISIONS and CREDITS lines; index; v0.15.0.
 - **Depends on:** C1, C2.

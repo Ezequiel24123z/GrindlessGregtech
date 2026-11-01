@@ -788,7 +788,7 @@ Crossings (RF-3P2): nine lines gain one real input from UV or earlier, never low
 
 ## Quests
 
-Short, in English, each with a small reward. They never block a recipe (rule 5). C2 builds them (`tools/quests/uev-chapter/`, `pl-data-uev.mjs`).
+In English, each with a proportionate reward that never skips a production line. They never block a recipe (rule 5). C2 builds them (`tools/quests/uev-chapter/`, `pl-data-uev.mjs`).
 
 | Part | Quests | Ends with |
 |---|---|---|
@@ -869,15 +869,15 @@ Short, in English, each with a small reward. They never block a recipe (rule 5).
 
   `gtceu:uev_machine_casing` already exists with no recipe (UHV S0); F1 gives it one.
 - **S0-1** registers these with the config off, dumps the registry delta and checks for no clash with GTM's own names. If KubeJS cannot make a tiered energy hatch, the fallback is ON with mass hiding; S0-1 records the id count it adds, and the orchestrator decides.
-- **Id collision:** if the config were turned on later, GTM would register the same `gtceu:uev_*` ids. The pack locks the config (*Save compatibility*).
+- **Id collision:** if the config were turned on later, GTM would register the same `gtceu:uev_*` ids. The pack locks the config (*Registration notes*).
 
 **Startup:** `uev/foundation.js` (F1), one file per package, `lv/wireless_energy.js` (W), `lib/mega.js` (M), DFD motors in `uev/travel.js` (B1); their thruster works rows in `server_scripts/grindless/uv/propulsion.js`.
 **Server:** `server_scripts/grindless/uev/*.js`; older-era rows in their own files (*Older machines*).
 **Data:** `data/gcyr/gcyr/planets/` (and the solar system files S0-3 names), `tables/stations.json`, `tables/sunlight.json`, `tables/wireless_energy.json`, `tables/hot_cell.json`, `tables/magnet_works.json`, `tables/crystals.json`, `tables/fusion_mk4.json` (new).
 
-## Save compatibility
+## Registration notes
 
-Dropped 2026-10-31 (Project Reforge): nobody has played the pack, so nothing here is kept for saves (`AGENTS.md`, Invariants). Technical facts from it that still hold:
+No save compatibility applies (`AGENTS.md`, Invariants). Technical facts that hold:
 
 - **New dimension ids:** `grindless:alpha_centauri_orbit`, `grindless:barnard_b`, `grindless:sirius_b_orbit`.
 - `highTierContent` stays off and is written into the shipped `gtceu.yaml`: turning it on would make GTM register the same `gtceu:uev_*` ids as ours (S0-1 records the exact list).
@@ -1010,7 +1010,7 @@ Order:
   - ids exactly as in this file (a changed id is an escalation);
   - the `gtceu:uev_*` ids are exactly those S0-1 recorded.
 - **Acceptance:**
-  - every cross-package id is registered once, with `en_us` and `es_es`;
+  - every cross-package id is registered once, with `en_us` names;
   - `emi-coverage.mjs` lists every id as expected-unobtained until its package;
   - the hull recipe runs in GTM's assembler at UHV voltage.
 - **Tests:** T0; `tools/analysis/test/uev-foundation.test.mjs`. T1: none (the hull and hatch forming is S0-1's proof).
@@ -1027,7 +1027,7 @@ Order:
   - `tools/analysis/script_order.json`: a band for `uev/` and one for each older-file row that reads a UEV id;
   - `lib/stations.js` changes only if S0-4 failed.
 - **Allowed:** `pack/kubejs/data/grindless/tables/hidden_until.json`, `tools/analysis/script_order.json`, and `pack/kubejs/startup_scripts/grindless/lib/stations.js` only after a failed S0-4.
-- **References:** *Only from there, and cuts*; *Save compatibility*; UHV's F2 (`docs/eras/uhv.md:1071-1080`).
+- **References:** *Only from there, and cuts*; *Registration notes*; UHV's F2 (`docs/eras/uhv.md:1071-1080`).
 - **Acceptance:**
   - the optical computer appears at `uev`, and the mainframe stays hidden;
   - with S0-4 passed, there is no lib change.
@@ -1509,7 +1509,7 @@ Wave A packages depend on F1 and on the spikes named. They run two at a time, in
   - a v0.11.0 save;
   - the release notes.
 - **Allowed:** `tools/test/overlay/kubejs/server_scripts/gg_test_uev_c3.js`, its zones row, and the release notes file the integrator names.
-- **References:** *Save compatibility*, *Gate to UIV*, *Power* (the gate example); pattern `gg_test_uhv_c3.js`.
+- **References:** *Registration notes*, *Gate to UIV*, *Power* (the gate example); pattern `gg_test_uhv_c3.js`.
 - **Depends on:** C1, C2 and the integrator's regeneration (index, `hidden_until.json`, chapters, `emi-coverage --expect`, script order).
 - **Acceptance:**
   - the gate example runs: at least 141,281,819 EU/t in, 160,876,846 into the bank, and 134,217,728 out for 60 s;

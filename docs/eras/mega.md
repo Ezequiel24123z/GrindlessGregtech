@@ -192,7 +192,7 @@ The user's "parallelised LCR that scales with the coil and is better in general"
 - **Chain:** `coilParallel(cap 64)` → coil discount (`eutMultiplier`) → `OC_PERFECT_SUBTICK` → `BATCH_MODE` (S-M1).
 - **Controller:** 8 HV large chemical reactors' worth: 2 `gtceu:large_chemical_reactor` controllers + 4 HV chemical reactors + 4 HV circuits + PTFE plates + 4 Kanthal coils.
 - **Gating:** at HV only Cupronickel and Kanthal are practical (4 and 8 parallels); 16+ needs Nichrome (EV) and 64 needs HSS-G. The machine grows with the player's coils, so HV gets a modest version without a separate machine.
-- **GTCA's `gtca:mega_lcr`:** it becomes strictly worse than this. Open question for the user: keep it (no harm, IV) or hide it in EMI. Decided: kept (MEGA-3); since 2026-10-31 hiding it would need no 1:1 conversion (no save compatibility, `AGENTS.md`).
+- **GTCA's `gtca:mega_lcr`:** it becomes strictly worse than this. Open question for the user: keep it (no harm, IV) or hide it in EMI. Decided: kept (MEGA-3). Hiding it needs no conversion (no save compatibility, `AGENTS.md`).
 
 ### 4.6 EV: Ore Refinery (`gtceu:ore_refinery`)
 
@@ -256,7 +256,7 @@ The user's "parallelised LCR that scales with the coil and is better in general"
 - **Rule 3 (byproducts):** composed recipes are the line's sum (`compose.js`), so every byproduct still leaves the machine.
 - **Rule 4:** each era gains one mega with a real gain (section 4.2), on top of the era's own multiblocks.
 - **Rule 6 (GTM wins):** the chemical machines keep GTM's LCR rules (perfect OC, batch, recipe set); the coil discount uses GTM's EBF rate; the hatch uses GTM's formula.
-- **Rule 7:** the user's request overrode "Steam to HV only get small additions" for this family; since 2026-10-31 rule 7 lets any era be reworked, so no override is needed. Megas are not counted in era quotas (`docs/research/complexity.md:23`).
+- **Rule 7:** any era may be reworked, so this family needs no override. Megas are not counted in era quotas (`docs/research/complexity.md:23`).
 - **Rule 8 (power generous, never free):** every copy pays full EU/t; the only discount is GTM's coil rate with a floor; perfect OC is energy-neutral; nothing generates.
 - **`docs/research/leisure.md:293` (parallels capped at 64):** kept for LV to IV (ceilings 8, 16, 64, 64, 64). From LuV the ceiling is energy-bound only (proposed DECISIONS line): the user asked for enormous parallels and energy makes them honest.
 - **Saves:** none since 2026-10-31 (`AGENTS.md`, Invariants): ids may be removed or renamed, and `gtca:mega_lcr` (kept) would need no 1:1 conversion if hidden.
@@ -268,7 +268,7 @@ The user's "parallelised LCR that scales with the coil and is better in general"
 3. No parallel hatch before IV (GTM's own first tier).
 4. Controllers cost 8 to 12 of the era's machines plus circuits; structures need the era's casing in bulk.
 5. Unlock after the era's core line: each controller recipe sits behind the machine it replaces and, for MV and up, the line it composes.
-6. Quests: one per machine, small reward, never a gate (rule 5).
+6. Quests: one per machine, a proportionate reward that skips no production line, never a gate (rule 5).
 
 ---
 
@@ -307,7 +307,7 @@ UHV's *Common to every package* (`docs/eras/uhv.md:1017-1033`) applies with thes
 
 ### 6.4 Machine packages
 
-Each: objective = section 4.x; acceptance = the controller forms in its `patterns.js` structure, its controller recipe takes N replaced machines, the recipe lookup finds each type, the parallel figure matches the formula at two coil or hatch tiers, names in `en_us` and `es_es`, one quest row proposed in the handoff; tests = T0 + `mega-<name>.test.mjs`; T1 only where named; commits 2 (machine and recipes; textures and lang).
+Each: objective = section 4.x; acceptance = the controller forms in its `patterns.js` structure, its controller recipe takes N replaced machines, the recipe lookup finds each type, the parallel figure matches the formula at two coil or hatch tiers, names in `en_us`, one quest row proposed in the handoff; tests = T0 + `mega-<name>.test.mjs`; T1 only where named; commits 2 (machine and recipes; textures and lang).
 
 | Package | Machine | References | Extra allowed | Depends on | T1 |
 |---|---|---|---|---|---|
@@ -346,7 +346,7 @@ At most two workers at once; one bench JVM.
 
 ### 7.1 DECISIONS (for the integrator)
 
-- `<date> · Mega family (docs/eras/mega.md): the user's request (translated: "huge multiblocks with enormous parallels or dedicated functions, also from LV") overrides rule 7's "Steam to HV only get small additions" for this family. One mega per era from LV to UHV; they are parallel or composed versions, counted apart from era quotas. LV to HV stay modest: ceilings 8/16/64, energy-bound, controllers made of the machines they replace, no parallel hatch before IV.`
+- `<date> · Mega family (docs/eras/mega.md): the user's request (translated: "huge multiblocks with enormous parallels or dedicated functions, also from LV") overrides nothing for this family. One mega per era from LV to UHV; they are parallel or composed versions, counted apart from era quotas. LV to HV stay modest: ceilings 8/16/64, energy-bound, controllers made of the machines they replace, no parallel hatch before IV.`
 - `<date> · Mega parallels: leisure.md:293's ≤64 cap holds up to IV. From LuV the mega family is bounded by energy only (each copy pays full EU/t through ParallelLogic), by the user's request. The only discount is GTM's coil rate (×0.95 per step, floor ×0.80) on the chemical megas.`
 - `<date> · Coil Chemical Plant (HV) and Mega Chemical Complex (LuV) keep GTM's LCR rules (perfect subtick OC, batch, every LCR and chemical reactor recipe) and add coil parallels and the coil discount; GTCA's mega_lcr (non-perfect OC, no parallels) is <kept | hidden with a 1:1 conversion> (the user's decision).`
 - `<date> · Postgame direction (the user's decision, revises 2026-10-24's "creative ending left out" for the postgame only): after the MAX ending (the mirror shell over Sgr A*, unchanged) comes a MAX+ postgame with intergalactic travel, fantastic materials, processes and lines, and creative items as a GTNH-style trial by fire (absurdly massive quantities of each component, like GTNH's Stargate). The absolute final goal is the Hyper Stargate, built from the creative items, more complex and demanding than GTNH's Stargate, supported by mega multiblocks and AE2 additions. Rule 2's "no quantity walls" does not apply to the creative items. Designed in its own era doc, far in the future.`
