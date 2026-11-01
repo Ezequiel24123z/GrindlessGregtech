@@ -12281,10 +12281,6 @@ file = "kubejs/assets/grindless/textures/item/max_sensor.png"
 hash = "da0b9214538fcb06fbed0a0a3f65ab242d4ccdcb7fe0b137cd4e082993cbcc56"
 
 [[files]]
-file = "kubejs/assets/grindless/textures/item/max_smes_cell.png"
-hash = "9e90d8555362b4c6a8f4bf5f292d2f7eeab86e54b276bc4a619b009e3d9b9f0b"
-
-[[files]]
 file = "kubejs/assets/grindless/textures/item/max_srf_cavity.png"
 hash = "614ab62c032fb150e67b0a1d4b2c6cc95d8563a68f32d71ac8faf0e4a5e13170"
 
@@ -15209,76 +15205,12 @@ file = "kubejs/assets/grindless/textures/item/u238_ion_source.png"
 hash = "3fd9f5d67423a32e75d7ef58784c8bff34c1df8e1d8e424f985023c044bafacd"
 
 [[files]]
-file = "kubejs/assets/grindless/textures/item/uev_conveyor_module.png"
-hash = "441629c930c9a37b56451ed9319187fcbb0a1636d82f64767687e86bd2d067c0"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uev_electric_motor.png"
-hash = "ac7ed66634585d38b1daee2a27cec2266ed575bd6ab57b3c1300b44dde798ba4"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uev_electric_piston.png"
-hash = "2d16929d1c7760c52e0749e9ab4d6aca302583e2d7ad5e68c52a622f650fe90a"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uev_electric_pump.png"
-hash = "68209dbd7580bc91a69f7367dce4105998c4823bea89e59b68c68b9a9851feb0"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uev_emitter.png"
-hash = "f66b1489c7a26e5b576635e4d29d69bd281903f5f7f7f5b7ef3a7a62af9117f9"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uev_field_generator.png"
-hash = "14cdbb8941c8746af149c906f29955ae1f8752a4272b5fe8332431f5e92a874e"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uev_robot_arm.png"
-hash = "102e0d647a8fdec35980caec142f6f22ecf908e8776ec97eac2f400f6958c7a3"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uev_sensor.png"
-hash = "cbf5600d19e999a1a860aef3393ff040e278bb9d6658c8b5c30eba39fec4154e"
-
-[[files]]
 file = "kubejs/assets/grindless/textures/item/uhtc_nozzle.png"
 hash = "485a425b396de0465f4f9456304f0050eca5e908f0efeb1c3caacbb5d66e39f8"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/uhtc_tile.png"
 hash = "fd8221f9d8b8dd9938f4f07da9859d8ee5cb9c0de4d5f45b316c90c159310e1b"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uiv_conveyor_module.png"
-hash = "8a71c08fac72aea7e5ad086f4b4f84a5d47107975707a1835362ad7d02432b1c"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uiv_electric_motor.png"
-hash = "2c49a250b9a40cd29d5e788939a7bf89edd974d70e3a217af91b7c12bdd3cc50"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uiv_electric_piston.png"
-hash = "f54178f3127382dbac0c9f56060989d6780017daf8fc991c9a4249c2c752e58c"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uiv_electric_pump.png"
-hash = "c043f586eb624951d030cf7a55b78ba55f630c983bc7bf52b82725b454d2131e"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uiv_emitter.png"
-hash = "ee2dec2644ef636b4298d41f13d62b03e542e740baf4278d83d326d6c95f949d"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uiv_field_generator.png"
-hash = "de5eb1dd6b87bbd697ac0c44757d4a7a4b037ae432f67da5cf312091483b4ef1"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uiv_robot_arm.png"
-hash = "2e079f1423aec3f9773553e5d2d0d981dbd8c965777e20ee78bc6ccbe98a6278"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uiv_sensor.png"
-hash = "dbe77bdb1cc6bc611deba95d3916d18bd7eda63d4c1e3502029e3b41aa41cb35"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/ule_boule.png"
@@ -15363,38 +15295,6 @@ hash = "9a19283406d97dfdce91b20934feb506bc228ff8271ad149dac57fe79d3ec8a1"
 [[files]]
 file = "kubejs/assets/grindless/textures/item/uv_led_die.png"
 hash = "b23acf2ead0dec36ce5cfa72900eb4c54082a2b7fcbac55eaaccaf27335cbac8"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uxv_conveyor_module.png"
-hash = "a63df1ef51eb15f69de5a722df4e395627baa066ac25009f2ed9573efb1cab99"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uxv_electric_motor.png"
-hash = "ef070c4cd26e5cdb0491adfac15e6d6bfd2a85954af3e3f8c52df88095fb67dc"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uxv_electric_piston.png"
-hash = "0110adeff554cf41d1b9e871c51e6b5efd98aa43198c0e4046f2dd4dc1fb62cf"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uxv_electric_pump.png"
-hash = "25815ac04d934ffde50bb0c4f230fba0400813cb2672e7860ddd20ab56900fe3"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uxv_emitter.png"
-hash = "13d00b6d5879896b8a8021169f75acf5a3e98feb26a278fe964314d6c568ea6b"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uxv_field_generator.png"
-hash = "32aeeacdf88b3a498e2004d4caef385562fd1e02e07397edf2dfbd3a7d158640"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uxv_robot_arm.png"
-hash = "1790e615efb51e31d90ad662addd54381e7743c3be95535f9b7c995cb30d1d23"
-
-[[files]]
-file = "kubejs/assets/grindless/textures/item/uxv_sensor.png"
-hash = "21a7e99ba51847a159c8d792ea0d743358c517892610344af0d7a4ed2df99108"
 
 [[files]]
 file = "kubejs/assets/grindless/textures/item/uxv_strain_wave_gear.png"
