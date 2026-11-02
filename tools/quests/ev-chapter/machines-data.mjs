@@ -14,24 +14,15 @@ export const CHAPTER = {
   autofocus: "TRP",
   title: "EV: Machines",
   subtitle: ["Eleven halls of ours, and the rules that let them run on two worlds."],
+  section: { name: "EV: Machines", origin: { x: 0, y: 0 }, heading: { key: "H_MACHINES", x: 1, y: -4.5, deps: ["LB"], icon: "gtceu:regolith_cell" } },
 };
 
-export const LINKS = [
-  { key: "M_L_LB", ref: "LB", x: 0, y: -3 },
-  { key: "M_L_HE", ref: "HE", x: 0, y: -6 },
-  { key: "M_L_BRK", ref: "BRK", x: 0, y: 0 },
-  { key: "M_L_MP", ref: "MP", x: 0, y: 1.5 },
-  { key: "M_L_TI", ref: "TI", x: 0, y: 3 },
-  { key: "M_L_MSEED", ref: "MSEED", x: 6, y: -6 },
-  { key: "M_L_MTR", ref: "MTR", x: 6, y: -7.5 },
-  { key: "M_L_PT", ref: "PT", x: 0, y: 6 },
-  { key: "M_L_EVH", ref: "EVH", x: 0, y: 7.5 },
-];
+export const LINKS = [];
 
 export const QUESTS = [
   {
     key: "TRP", id: "5107982325BE34B7", kind: "machine", title: "EV Tripod Drill", icon: "gtceu:ev_vein_drill",
-    deps: ["MP"], x: 2, y: 1.5,
+    deps: ["MP"], x: 10, y: -1.5,
     teach: {
       for: "The lunar drill was a visitor; the &6EV Tripod Drill&r moves in, on titanium legs with a solar wing on each side.",
       needs: "It is crafted from the old lunar drill, and titanium bits off an EV lathe: a full cycle can wear out one per bore.",
@@ -44,7 +35,7 @@ export const QUESTS = [
   },
   {
     key: "DRY", id: "321540F2528D14FA", title: "Drilling Dry", icon: "gtceu:raw_ilmenite",
-    deps: ["TRP"], x: 4, y: 1.5,
+    deps: ["TRP"], x: 12, y: -1.5,
     desc: [
       "There's no water up here, so there's no drilling mud either, and a dry bit wears out fast. By day the solar wings cover half the bill; at night Earth pays all of it over the bridge.",
       "Swap an output bus for an ME Output Bus and the ilmenite ships itself home.",
@@ -54,9 +45,9 @@ export const QUESTS = [
   },
   {
     key: "CELL", id: "5BEACE3F7A414F40", kind: "machine", title: "Regolith Cell", icon: "gtceu:regolith_cell",
-    deps: ["BRK", "X:70F4075BAF69DA99"], x: 2, y: 0,
+    deps: ["BRK", "X:70F4075BAF69DA99"], x: 8, y: -3,
     teach: {
-      for: "The &6Regolith Cell&r cooks moon dirt until it gives up oxygen and metal, and it only works up here.",
+      for: "The &6Regolith Cell&r cooks moon dirt until it gives up oxygen and metal.",
       needs: "A hall of sintered brick around a crucible ringed with nichrome coils, and a platinum electrode in the input bus as its anode.",
       unlocks: "Circuit 1 releases solar wind gases, circuit 2 gives oxygen and iron, and on circuit 3 it bakes bricks faster than a furnace.",
       automate: "Give each gas its own output hatch, or let one ME output hatch take the lot.",
@@ -67,7 +58,7 @@ export const QUESTS = [
   },
   {
     key: "BRO", id: "320CD85A4C8D87D5", title: "Oxygen from Rock", icon: "gtceu:oxygen_bucket",
-    deps: ["CELL"], x: 4, y: 0,
+    deps: ["CELL"], x: 10, y: -3,
     desc: [
       "On circuit 2 the cell melts regolith and runs current through it. Oxygen bubbles off the platinum anode, and iron and silicon settle out.",
       "That oxygen fills your suit and feeds the cryogenic plant.",
@@ -77,7 +68,7 @@ export const QUESTS = [
   },
   {
     key: "TWC", id: "33176DE8937B3BEE", title: "Titanium without Chlorine", icon: "grindless:molten_salt_charge",
-    deps: ["BRO", "DRY"], x: 6, y: 0,
+    deps: ["BRO", "DRY"], x: 12, y: -3,
     desc: [
       "Ilmenite dust in molten calcium chloride, current through it, and the oxygen leaves for the anode while the titanium stays behind. Same energy as the long way, and no chlorine at all.",
       "It runs on circuit 2 with the &6Molten Salt Charge&r in the bus, and the charge never gets used up. The platinum plant has calcium chloride to spare.",
@@ -87,7 +78,7 @@ export const QUESTS = [
   },
   {
     key: "ORER", kind: "machine", title: "Ore Refinery", icon: "gtceu:ore_refinery",
-    deps: ["TI"], x: 2, y: 3,
+    deps: ["TI"], x: 6, y: 3,
     teach: {
       for: "The &6Ore Refinery&r takes raw ore through the macerator, the washer, the thermal centrifuge and the sifter in a single recipe.",
       needs: "Plain water for the washer, and a steady stream of raw ore.",
@@ -100,7 +91,7 @@ export const QUESTS = [
   },
   {
     key: "HSM", id: "7637A9813DB73D6B", kind: "machine", title: "Hot Strip Mill", icon: "gtceu:hot_strip_mill",
-    deps: ["ORER"], x: 4, y: 3,
+    deps: ["ORER"], x: 6, y: 6,
     teach: {
       for: "The &6Hot Strip Mill&r rolls a hot ingot straight into plates, rods or foil, skipping the freezer and the bender.",
       needs: "A circuit that picks the shape, and cooling water that comes out as steam, so give it a turbine to go to.",
@@ -113,7 +104,7 @@ export const QUESTS = [
   },
   {
     key: "PP", id: "1F70EF41E5F8ED95", kind: "signature", title: "Platinum Plant", icon: "gtceu:platinum_plant",
-    deps: ["HSM", "X:004525B795119B1B"], x: 6, y: 3,
+    deps: ["HSM", "X:004525B795119B1B"], x: 10, y: 6,
     teach: {
       for: "The platinum line is about forty recipes across a dozen machines; the &6Platinum Plant&r packs it into one hall, loops and all.",
       needs: "Nitration mixture and ammonium chloride flowing first, and an electrode that wears out rarely: after the first one, made from End platinum, the plant pays for its own.",
@@ -126,7 +117,7 @@ export const QUESTS = [
   },
   {
     key: "CRY", id: "79EE0C54F2D89358", kind: "machine", title: "Cryogenic Plant", icon: "gtceu:cryogenic_plant",
-    deps: ["CELL"], x: 4, y: -1.5,
+    deps: ["CELL"], x: 9, y: -7.5,
     teach: {
       for: "The &6Cryogenic Plant&r liquefies gases at night for half the vacuum freezer's energy, and only runs on the Moon.",
       needs: "A frostproof tower on sintered brick with a wing of &6Night-Sky Radiators&r on each side. Keep the radiators uncovered.",
@@ -139,7 +130,7 @@ export const QUESTS = [
   },
   {
     key: "LN2", id: "71F33D9D6D486DFE", title: "Liquid Nitrogen", icon: "gtceu:liquid_nitrogen_bucket",
-    deps: ["CRY"], x: 6, y: -1.5,
+    deps: ["CRY"], x: 9, y: -9,
     desc: [
       "GregTech never liquefied nitrogen, but the cryogenic plant does. Check the tooltip of every pipe and tank it goes through, since not all of them like cryogenic fluids.",
       "In the tripod's input hatch it keeps the bit cold: more ore, much less wear. Let the hatch run low and the tripod drills dry.",
@@ -149,7 +140,7 @@ export const QUESTS = [
   },
   {
     key: "LOX", id: "587829FDC7BAB863", title: "Liquid Oxygen", icon: "gtceu:liquid_oxygen_bucket",
-    deps: ["CRY"], x: 8, y: -1.5,
+    deps: ["CRY"], x: 11, y: -7.5,
     desc: [
       "The cell's oxygen becomes &6Liquid Oxygen&r here, as fast as in the freezer and at half the energy once the sun's down. The controller tells you what the next run will cost.",
       "Start a stockpile of liquid oxygen and liquid helium: IV's extreme engines want the first, its hottest ingots the second.",
@@ -168,7 +159,7 @@ export const QUESTS = [
   },
   {
     key: "LSA", id: "734B97375A3121C4", kind: "machine", title: "Lunar Solar Array", icon: "gtceu:lunar_solar_array",
-    deps: ["CELL"], x: 4, y: -3,
+    deps: ["CELL"], x: 10, y: -4.5,
     teach: {
       for: "The &6Lunar Solar Array&r is rows of wing panels on titanium posts over sintered brick. With circuit 1 in its input bus, every panel that sees open sky pays out by day.",
       needs: "Wing panels, a clear sky and brick footings.",
@@ -181,7 +172,7 @@ export const QUESTS = [
   },
   {
     key: "CCP", id: "1DD071239194961D", kind: "machine", title: "Combined-Cycle Plant", icon: "gtceu:combined_cycle_plant",
-    deps: ["VAC"], x: 4, y: -4.5,
+    deps: ["VAC"], x: 2, y: -6,
     teach: {
       for: "A gas turbine throws its exhaust away while it's still hot. The &6Combined-Cycle Plant&r sends it through a boiler instead, so the same fuel also spins a &6Large Steam Turbine&r.",
       needs: "A large gas turbine controller and distilled water. It needs no rotor.",
@@ -194,11 +185,11 @@ export const QUESTS = [
   },
   {
     key: "DOME", id: "56820468F118D3EA", kind: "machine", title: "Sealed Dome", icon: "gtceu:sealed_dome",
-    deps: ["LSA"], x: 6, y: -4.5,
+    deps: ["LSA"], x: 10, y: -6,
     teach: {
       for: "The &6Sealed Dome&r is a greenhouse that brings its own soil and makes a sky out of lamps.",
-      needs: "Water and carbon dioxide. Mars supplies the carbon dioxide from its air; up here it has to come from home.",
-      unlocks: "On circuit 5 (Moon) or 6 (Mars) it grows crops and breathes out oxygen.",
+      needs: "Water and carbon dioxide. Circuit 5 runs on carbon dioxide you ship in, anywhere; Mars supplies its own from the air.",
+      unlocks: "On circuit 5 (any world) or 6 (Mars only) it grows crops and breathes out oxygen.",
       automate: "Water and gas by hatch, harvest by output bus.",
     },
     desc: [],
@@ -207,7 +198,7 @@ export const QUESTS = [
   },
   {
     key: "DSA", id: "5940CA99055BAF42", kind: "machine", title: "Deep Space Antenna", icon: "gtceu:deep_space_antenna",
-    deps: ["LSA", "X:5C4613715A82BDBF"], x: 8, y: -3,
+    deps: ["LSA", "X:5C4613715A82BDBF"], x: 12, y: -4.5,
     teach: {
       for: "With Earth's noise blocked by 3,474 km of rock, the &6Deep Space Antenna&r hears a steady hiss from Sagittarius. You will go there. Mars first.",
       needs: "Night on the Moon and your landing-site chart, which calibrates the dish.",
@@ -220,9 +211,9 @@ export const QUESTS = [
   },
   {
     key: "BR", id: "366AB48E5BF50431", title: "Earth-Moon Bridge", icon: "ae2:quantum_link", shape: "gear", size: 1.25,
-    deps: ["HE"], x: 2, y: -6,
+    deps: ["HE"], x: 4, y: -4.5,
     desc: [
-      "The Earth-Moon bridge starts with a &6Lunar Quantum Seed&r, made in a chemical reactor up here from an ender pearl and helium-3. An ordinary singularity pair won't do: a lunar quantum chamber spits it out.",
+      "The Earth-Moon bridge starts with a &6Lunar Quantum Seed&r, made in a chemical reactor from an ender pearl and helium-3, anywhere. An ordinary singularity pair won't do: a lunar quantum chamber spits it out.",
       "One half goes in a chamber at home, one here, and both ends stay chunk-loaded.",
     ],
     tasks: [it("grindless:lunar_quantum_seed", 1, "76B12CF105EBB9FF"), it("ae2:quantum_entangled_singularity", 2, "7D3865E8AB3A4A6D"), it("ae2:quantum_link", 2, "105F48A9288461CC"), it("ae2:quantum_ring", 16, "318D644FC6DE61F3")],
@@ -230,7 +221,7 @@ export const QUESTS = [
   },
   {
     key: "PE", id: "42BF2F77456F8773", title: "Power from Earth", icon: "eup2p:eu_p2p_tunnel",
-    deps: ["BR"], x: 4, y: -7.5,
+    deps: ["BR"], x: 6, y: -4.5,
     desc: [
       "Two &6EU P2P Tunnels&r on one frequency, one on a cable at home and one on a hatch up here, and the power plant on Earth runs the Moon.",
       "The tunnels pass whatever voltage you feed them, so match it to the hatch at the far end. AE2 charges a small toll in AE energy for the delivery.",
@@ -240,9 +231,9 @@ export const QUESTS = [
   },
   {
     key: "SP", id: "38AA0491A1AFD8C9", title: "A Second Pair, No Rocket", icon: "grindless:lunar_quantum_seed",
-    deps: ["BR"], x: 4, y: -6,
+    deps: ["BR"], x: 5, y: -3,
     desc: [
-      "Once the first bridge is up, the Moon can make its own seeds in a chemical reactor up here, with ender pearls sent from home and helium-3 from the drill or the cell.",
+      "A chemical reactor makes a seed anywhere, so once the first bridge is up the Moon can make its own, with ender pearls sent from home and helium-3 from the drill or the cell.",
       "The seed travels home over the bridge, the explosion happens there, and one half travels back. Nobody has to fly.",
     ],
     tasks: [it("grindless:lunar_quantum_seed", 1, "11691B6B87A0E83E"), it("ae2:quantum_link", 2, "1BCF50880C918E54"), it("ae2:quantum_ring", 16, "172A4B25DF6871FF")],
@@ -250,7 +241,7 @@ export const QUESTS = [
   },
   {
     key: "EMB", id: "53893FAB153254B8", title: "Earth-Mars Bridge", icon: "ae2:quantum_ring", shape: "gear", size: 1.25,
-    deps: ["MSEED"], x: 8, y: -6,
+    deps: ["MSEED"], x: 19, y: -6.75,
     desc: [
       "Blow the seed up with a singularity at home, then send one half to Mars. The Martian end needs no power of its own; once linked, it runs on the home network.",
       "Chunk-load both ends, same as the Moon.",
@@ -260,7 +251,7 @@ export const QUESTS = [
   },
   {
     key: "ATM", id: "58BBEC58FB5953BD", kind: "machine", title: "Atmosphere Processor", icon: "gtceu:atmosphere_processor",
-    deps: ["EMB"], x: 10, y: -6,
+    deps: ["EMB"], x: 22, y: -6.75,
     teach: {
       for: "The &6Atmosphere Processor&r breathes Martian air, splits water and joins the hydrogen to the carbon dioxide: three machines in one, and it only runs on Mars.",
       needs: "Water sent from home and a ruthenium catalyst. Save the Martian ice for IV.",
@@ -273,7 +264,7 @@ export const QUESTS = [
   },
   {
     key: "MTH", id: "76CC753087EAD9F0", title: "Methalox", icon: "gtceu:methalox_bucket",
-    deps: ["ATM"], x: 12, y: -6,
+    deps: ["ATM"], x: 28, y: -6,
     desc: [
       "Methane and oxygen from the EV mixer make &6Methalox&r, a fuel that brings its own oxygen, so it burns in any gas turbine on Mars or the Moon.",
       "It costs more energy to make than it gives back, so treat it as a battery, not a power plant.",
@@ -283,7 +274,7 @@ export const QUESTS = [
   },
   {
     key: "CAS", id: "3FCCD81DE98DA9EF", kind: "machine", title: "Extraction Cascade", icon: "gtceu:extraction_cascade",
-    deps: ["MTR"], x: 8, y: -7.5,
+    deps: ["MTR"], x: 20, y: -1.5,
     teach: {
       for: "Merrillite is a phosphate, and no electrolyzer will split it. The &6Extraction Cascade&r leaches it in hydrochloric acid and then pulls the rare earths apart with kerosene, one stage at a time.",
       needs: "Merrillite dust, hydrochloric acid and kerosene.",
@@ -296,7 +287,7 @@ export const QUESTS = [
   },
   {
     key: "EVHATCH", id: "147B753858CA98F8", title: "EV Hatches", icon: "gtceu:ev_energy_input_hatch",
-    deps: ["PT"], x: 2, y: 6,
+    deps: ["PT"], x: 14, y: 4.5,
     desc: [
       "Real &6EV Energy Hatches&r need two things you only get late: fine platinum wire for the &6Extreme Voltage Coil&r, and MPIC chips.",
       "The chips come from a phosphorus boule that grows slowly in the blast furnace, so start one early. Dynamo hatches are built the same way.",
@@ -306,7 +297,7 @@ export const QUESTS = [
   },
   {
     key: "TWOH", title: "Two Hatches Will Do", icon: "gtceu:hv_energy_input_hatch", shape: "circle", size: 0.75,
-    deps: ["EVH"], x: 2, y: 7.5,
+    deps: ["EVH"], x: 8, y: -1.5,
     desc: [
       "EV energy hatches come much later, and until then two HV energy hatches on a multiblock run EV recipes just fine.",
       "Build the halls now and swap the hatches when the chips arrive.",

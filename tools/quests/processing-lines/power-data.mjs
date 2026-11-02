@@ -641,9 +641,9 @@ export default gate({
     uivStars: {
       name: 'Dead stars (UIV)',
       nodes: [
-        E('eqUivRing', 0, -1.5, 'uiv_machines', '72D797E3DDE7ED0E'),
-        E('eqUivVault', 0, 0, 'uiv_machines', '7AB8B56ED4A5C759'),
-        E('eqUivPenrose', 0, 1.5, 'uiv_machines', '773D4D794D1EA7A1'),
+        E('eqUivRing', 0, -1.5, 'uiv_age', '72D797E3DDE7ED0E'),
+        E('eqUivVault', 0, 0, 'uiv_age', '7AB8B56ED4A5C759'),
+        E('eqUivPenrose', 0, 1.5, 'uiv_age', '773D4D794D1EA7A1'),
         n('uivRing', 2.25, -1.5, M('gtceu:uiv_fusion_reactor'), 'Mk5 Fusion Ring', {
           kind: 'info', tier: 'uiv', from: ['eqUivRing'], sub: 'Three polarised fuels, and a direct converter takes the power off the ash',
           desc: 'Each fuel is its own recipe on the ring, and the ash of one is the feed of another.',
@@ -801,14 +801,14 @@ export default gate({
           figs: [P.wcell('grindless:uhv_smes_cell', 'UHV SMES', 62914560000)],
         }),
         // UEV's cell: four UHV cells' worth, with the quantum repeater keeping the network in step
-        E('eqUevCell', 0, 8, 'uev_integration', '5304F9E360A95261'),
+        E('eqUevCell', 0, 8, 'uev_age', '5304F9E360A95261'),
         n('wuev', 2.25, 8, I('grindless:uev_smes_cell'), 'UEV SMES Cell', {
           kind: 'info', from: ['eqUevCell'], sub: 'Ninety-six UV batteries\' worth, the UEV wireless hatches work with it',
           desc: 'The network jumps to UEV only when every formed tower holds these.',
           figs: [P.wcell('grindless:uev_smes_cell', 'UEV SMES', 251658240000)],
         }),
         // UIV's cell: four UEV cells' worth
-        E('eqUivCell', 0, 10, 'uiv_integration', '5FB006B879741A02'),
+        E('eqUivCell', 0, 10, 'uiv_age', '5FB006B879741A02'),
         n('wuiv', 2.25, 10, I('grindless:uiv_smes_cell'), 'UIV SMES Cell', {
           kind: 'info', from: ['eqUivCell'], sub: 'Three hundred and eighty-four UV batteries\' worth, wound in metallic hydrogen',
           desc: 'The network jumps to UIV only when every formed tower holds these.',

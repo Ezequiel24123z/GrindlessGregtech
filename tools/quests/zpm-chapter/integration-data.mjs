@@ -7,7 +7,10 @@ const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.integration,
   filename: 'zpm_integration',
   era: 'zpm',
   role: 'integration',
@@ -200,3 +203,4 @@ export const QUESTS = [
     rewards: [xp(60)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

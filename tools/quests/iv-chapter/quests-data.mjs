@@ -10,6 +10,7 @@ export const CHAPTER = {
   autofocus: "IV_INNER_PLANETS",
   title: "IV: Inner Planets",
   subtitle: ["Split the atom at home, then go where it's hot: Venus for naquadah, Mercury for iridium and osmium."],
+  section: { name: "Journey", origin: { x: 0, y: 0 } },
 };
 
 export const QUESTS = [
@@ -23,7 +24,7 @@ export const QUESTS = [
     rewards: [xp(50)],
   },
   {
-    key: "IV_FLUORITE_VEIN", id: "5C008907C9055459", title: "Fluorite Vein", icon: "grindless:vein_sample_fluorite", deps: ["IV_INNER_PLANETS"], x: 2, y: -1.5,
+    key: "IV_FLUORITE_VEIN", id: "5C008907C9055459", title: "Fluorite Vein", icon: "grindless:vein_sample_fluorite", deps: ["IV_INNER_PLANETS"], x: 1.25, y: 1.5,
     desc: [
       "A new Overworld vein of fluorite, barite, galena and sphalerite grows only in freshly generated chunks. Time to go somewhere you've never been.",
       "Raw fluorite and raw barite make a &6Fluorite Vein Sample&r, and any vein drill takes it.",
@@ -32,7 +33,7 @@ export const QUESTS = [
     rewards: [xp(40), it("gcyr:raw_fluorite", 8)],
   },
   {
-    key: "IV_PITCHBLENDE", id: "77B6F588980A4B1C", title: "Pitchblende", icon: "grindless:vein_sample_pitchblende_end", deps: ["IV_INNER_PLANETS"], x: 2, y: -3,
+    key: "IV_PITCHBLENDE", id: "77B6F588980A4B1C", title: "Pitchblende", icon: "grindless:vein_sample_pitchblende_end", deps: ["IV_INNER_PLANETS"], x: 1.75, y: -0.25,
     desc: [
       "The End's pitchblende vein has been there all along, and no drill will touch it: you'll dissolve the uranium right out of the rock.",
       "Raw pitchblende and raw uraninite make an &6End Pitchblende Vein Sample&r.",
@@ -41,7 +42,7 @@ export const QUESTS = [
     rewards: [xp(40)],
   },
   {
-    key: "IV_ENRICHMENT", id: "174353B4F6C61A79", title: "Enrichment", icon: "gtceu:uranium_235_dust", deps: ["IV_HOT_CELL", "IV_FLUORSPAR_KILN", "IV_IN_SITU_LEACH_FIELD"], x: 4, y: 0,
+    key: "IV_ENRICHMENT", id: "174353B4F6C61A79", title: "Enrichment", icon: "gtceu:uranium_235_dust", deps: ["IV_HOT_CELL", "IV_FLUORSPAR_KILN", "IV_IN_SITU_LEACH_FIELD"], x: 7.25, y: 0.25,
     desc: [
       "Circuit 1 turns uraninite and hydrofluoric acid into &6Uranium 235&r and a pile of uranium 238. Keep the 238: pellets, radon and later MOX all want it.",
     ],
@@ -49,7 +50,7 @@ export const QUESTS = [
     rewards: [xp(60)],
   },
   {
-    key: "IV_QUANTUM_STAR", id: "7136B78C360303F9", title: "Quantum Star", icon: "gtceu:quantum_star", deps: ["IV_ENRICHMENT", "X:73D14393C00DE14D"], x: 6, y: 0,
+    key: "IV_QUANTUM_STAR", id: "7136B78C360303F9", title: "Quantum Star", icon: "gtceu:quantum_star", deps: ["IV_ENRICHMENT", "X:73D14393C00DE14D"], x: 11.75, y: 0.25,
     desc: [
       "Circuit 4 blows air over uranium 238 for radon, with no plutonium needed. A Nether Star soaked in radon becomes a &6Quantum Star&r, and an Ender Eye becomes the Quantum Eye that EV sensors and emitters have waited for.",
     ],
@@ -57,7 +58,7 @@ export const QUESTS = [
     rewards: [xp(60)],
   },
   {
-    key: "IV_LEU_FUEL", id: "77E9A2979A7161D3", title: "LEU Fuel", icon: "grindless:leu_fuel_assembly", deps: ["IV_FUEL_FABRICATION_PLANT", "hv:HV_END_VEINS"], x: 8, y: -1.5,
+    key: "IV_LEU_FUEL", id: "77E9A2979A7161D3", title: "LEU Fuel", icon: "grindless:leu_fuel_assembly", deps: ["IV_FUEL_FABRICATION_PLANT", "hv:HV_END_VEINS"], x: 19, y: 0.75,
     desc: [
       "An &6LEU Fuel Assembly&r is enriched uranium pressed into pellets and sealed in Zircaloy tubes with a breath of helium. The zirconium comes from the End's zircon, with a pinch of tin.",
     ],
@@ -65,7 +66,7 @@ export const QUESTS = [
     rewards: [xp(60)],
   },
   {
-    key: "IV_FIRST_CRITICALITY", id: "72139ED6F4E46D37", title: "First Criticality", icon: "gtceu:ev_energy_output_hatch_16a", deps: ["IV_FISSION_REACTOR", "IV_LEU_FUEL"], x: 10, y: 0,
+    key: "IV_FIRST_CRITICALITY", id: "72139ED6F4E46D37", title: "First Criticality", icon: "gtceu:ev_energy_output_hatch_16a", deps: ["IV_LEU_FUEL"], x: 22.75, y: 0.25,
     desc: [
       "Load an LEU assembly with circuit 1, give it water, and the reactor wakes up. Each assembly in the bus runs another channel, up to four.",
       "Until iridium, the &6EV 16A Dynamo Hatch&r is the biggest it can feed.",
@@ -74,7 +75,7 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: "IV_REPROCESSING", id: "7E266AE6DB3351F7", title: "Reprocessing", icon: "gtceu:plutonium_dust", deps: ["IV_FIRST_CRITICALITY"], x: 12, y: -1.5,
+    key: "IV_REPROCESSING", id: "7E266AE6DB3351F7", title: "Reprocessing", icon: "gtceu:plutonium_dust", deps: ["IV_FIRST_CRITICALITY"], x: 24.75, y: 0.5,
     desc: [
       "A spent assembly still holds uranium and the plutonium it bred. The hot cell's circuit 3 dissolves it in nitric acid and hands back both. The waste is glassed and kept.",
     ],
@@ -82,7 +83,7 @@ export const QUESTS = [
     rewards: [xp(60)],
   },
   {
-    key: "IV_RTG_PELLETS", id: "1D931CB1451E8B5A", title: "RTG Pellets", icon: "grindless:rtg_pellet", deps: ["IV_REPROCESSING"], x: 14, y: -1.5,
+    key: "IV_RTG_PELLETS", id: "1D931CB1451E8B5A", title: "RTG Pellets", icon: "grindless:rtg_pellet", deps: ["IV_REPROCESSING"], x: 26.5, y: 0,
     desc: [
       "Plutonium oxide sealed in platinum and rhodium foil stays warm on its own. The hot cell's circuit 2 makes an &6RTG Pellet&r, as close to a pocket sun as GregTech allows.",
     ],
@@ -90,7 +91,7 @@ export const QUESTS = [
     rewards: [xp(40)],
   },
   {
-    key: "IV_HEAVY_WATER", id: "3513B00E50D7C58B", title: "Heavy Water", icon: "gtceu:heavy_water_bucket", deps: ["IV_HEAVY_WATER_PLANT", "X:148A0854C671B0AC"], x: 12, y: 1.5,
+    key: "IV_HEAVY_WATER", id: "3513B00E50D7C58B", title: "Heavy Water", icon: "gtceu:heavy_water_bucket", deps: ["IV_HEAVY_WATER_PLANT", "X:148A0854C671B0AC"], x: 26.75, y: -1.25,
     desc: [
       "Circuit 1 makes a concentrate from ice and steam, and circuit 2 finishes it into &6Heavy Water&r. Any steam works, and the combined-cycle plant has plenty it isn't allowed to throw away.",
     ],
@@ -98,7 +99,7 @@ export const QUESTS = [
     rewards: [xp(50)],
   },
   {
-    key: "IV_HEAVY_WATER_CORE", id: "373CBFB746FCAD51", title: "Heavy-Water Core", icon: "gtceu:tritiated_heavy_water_bucket", deps: ["IV_FIRST_CRITICALITY", "IV_HEAVY_WATER"], x: 14, y: 0,
+    key: "IV_HEAVY_WATER_CORE", id: "373CBFB746FCAD51", title: "Heavy-Water Core", icon: "gtceu:tritiated_heavy_water_bucket", deps: ["IV_HEAVY_WATER"], x: 30, y: 0.25,
     desc: [
       "Heavy water slows neutrons without eating them, and on circuit 2 the same assembly gives twice the power. It comes out as &6Tritiated Heavy Water&r, and the reactor never vents it. Give it a tank.",
     ],
@@ -106,7 +107,7 @@ export const QUESTS = [
     rewards: [xp(60)],
   },
   {
-    key: "IV_TRITIUM", id: "7FD8A4969E497C3A", title: "Tritium", icon: "gtceu:tritium_bucket", deps: ["IV_TRITIUM_REMOVAL_FACILITY", "IV_HEAVY_WATER"], x: 16, y: 1.5,
+    key: "IV_TRITIUM", id: "7FD8A4969E497C3A", title: "Tritium", icon: "gtceu:tritium_bucket", deps: ["IV_TRITIUM_REMOVAL_FACILITY"], x: 35.75, y: -0.75,
     desc: [
       "The only &6Tritium&r in the pack comes out of the Moon's cold box. Nothing uses it yet, but fusion will. Store every drop.",
     ],
@@ -114,7 +115,7 @@ export const QUESTS = [
     rewards: [xp(50)],
   },
   {
-    key: "IV_INNER_PLANETS_CHART", id: "539716A235672461", title: "Inner Planets Chart", icon: "grindless:inner_planets_chart", deps: ["IV_TRITIUM_REMOVAL_FACILITY", "X:319C39AD99B5E4A8"], x: 16, y: 0,
+    key: "IV_INNER_PLANETS_CHART", id: "539716A235672461", title: "Inner Planets Chart", icon: "grindless:inner_planets_chart", deps: ["IV_TRITIUM_REMOVAL_FACILITY", "X:319C39AD99B5E4A8"], x: 38.25, y: 0,
     desc: [
       "Give the far-side antenna a second EV energy hatch, the trick the tritium facility runs on. At night, with the Mars chart calibrating the dish, it writes the &6Inner Planets Chart&r onto a data stick.",
       "Copy it anyway: charts end up in the wrong chest.",
@@ -123,7 +124,7 @@ export const QUESTS = [
     rewards: [xp(60), it("gtceu:data_stick", 2)],
   },
   {
-    key: "IV_ELITE_ROCKET_THERMAL_SUIT", id: "5A378E5CFD8DFF82", title: "Elite Rocket, Thermal Suit", icon: "gcyr:elite_rocket_motor", deps: ["IV_INNER_PLANETS_CHART"], x: 18, y: 0,
+    key: "IV_ELITE_ROCKET_THERMAL_SUIT", id: "5A378E5CFD8DFF82", title: "Elite Rocket, Thermal Suit", icon: "gcyr:elite_rocket_motor", deps: ["IV_INNER_PLANETS_CHART"], x: 42.25, y: 0.25,
     desc: [
       "Venus and Mercury want a level 3 rocket, and GCYR averages the parts, so one leftover advanced motor keeps you at level 2. The IV assembler makes the &6elite parts&r with the chart.",
       "Each suit piece gets the thermal upgrade and a heat shielding fabric: do all four.",
@@ -132,7 +133,7 @@ export const QUESTS = [
     rewards: [xp(100), it("gcyr:heat_shielding_fabric", 4)],
   },
   {
-    key: "IV_UNDER_THE_CLOUDS", id: "5693331C34A5A291", title: "Under the Clouds", icon: "gcyr:venus_rock", shape: "rsquare", size: 1.25, deps: ["IV_ELITE_ROCKET_THERMAL_SUIT"], x: 20, y: -3,
+    key: "IV_UNDER_THE_CLOUDS", id: "5693331C34A5A291", title: "Under the Clouds", icon: "gcyr:venus_rock", shape: "rsquare", size: 1.25, deps: ["IV_ELITE_ROCKET_THERMAL_SUIT"], x: 44.75, y: -0.25,
     desc: [
       "Ninety bar of carbon dioxide, sulfuric acid clouds and ground hot enough to melt lead. Nothing burns here, so land with an RTG cell or charged batteries.",
       "Bring ender pearls, helium-3 and a waystone for the ride home.",
@@ -141,7 +142,7 @@ export const QUESTS = [
     rewards: [xp(150), it("grindless:empty_vein_probe", 3)],
   },
   {
-    key: "IV_VENUSIAN_REGOLITH", id: "1B1714A8E0124C58", title: "Venusian Regolith", icon: "gcyr:venusian_regolith", deps: ["IV_UNDER_THE_CLOUDS"], x: 22, y: -3,
+    key: "IV_VENUSIAN_REGOLITH", id: "1B1714A8E0124C58", title: "Venusian Regolith", icon: "gcyr:venusian_regolith", deps: ["IV_UNDER_THE_CLOUDS"], x: 46.25, y: -1.5,
     desc: [
       "&6Venusian Regolith&r is the ground every Venus machine stands on, and it falls like sand, so build on something solid.",
     ],
@@ -149,7 +150,7 @@ export const QUESTS = [
     rewards: [xp(40)],
   },
   {
-    key: "IV_NAQUADAH_SAMPLE", id: "7FCCB79E1561AAAB", title: "Naquadah Sample", icon: "grindless:vein_sample_naquadah_venus", deps: ["IV_UNDER_THE_CLOUDS"], x: 22, y: -4.5,
+    key: "IV_NAQUADAH_SAMPLE", id: "7FCCB79E1561AAAB", title: "Naquadah Sample", icon: "grindless:vein_sample_naquadah_venus", deps: ["IV_UNDER_THE_CLOUDS"], x: 48.5, y: -1,
     desc: [
       "Naquadah sits deep under Venus's lava seas, with some plutonium mixed in. Dig down for raw naquadah and raw plutonium and pack a &6Venusian Naquadah Vein Sample&r.",
     ],
@@ -157,15 +158,15 @@ export const QUESTS = [
     rewards: [xp(40)],
   },
   {
-    key: "IV_A_SEED_FROM_VENUS", id: "71E4B392A6D559D9", title: "A Seed from Venus", icon: "grindless:venusian_quantum_seed", deps: ["IV_VENUSIAN_REGOLITH"], x: 24, y: -3,
+    key: "IV_A_SEED_FROM_VENUS", id: "71E4B392A6D559D9", title: "A Seed from Venus", icon: "grindless:venusian_quantum_seed", deps: ["IV_VENUSIAN_REGOLITH"], x: 48.5, y: -4.25,
     desc: [
-      "Ender pearls and helium-3 from home, sealed under Venusian regolith in a chemical reactor, make a &6Venusian Quantum Seed&r, and only here. Blow it up with a singularity back home for the Venus bridge's pair.",
+      "Ender pearls and helium-3 from home, sealed under Venusian regolith in a chemical reactor, make a &6Venusian Quantum Seed&r. The reactor can stand anywhere once the regolith is shipped. Blow it up with a singularity back home for the Venus bridge's pair.",
     ],
     tasks: [it("grindless:venusian_quantum_seed")],
     rewards: [xp(40), it("minecraft:ender_pearl", 2)],
   },
   {
-    key: "IV_RAW_NAQUADAH", id: "77FF1E1CF59D10BC", title: "Raw Naquadah", icon: "gtceu:raw_naquadah", deps: ["IV_PRESSURIZED_VEIN_DRILL"], x: 24, y: -4.5,
+    key: "IV_RAW_NAQUADAH", id: "77FF1E1CF59D10BC", title: "Raw Naquadah", icon: "gtceu:raw_naquadah", deps: ["IV_PRESSURIZED_VEIN_DRILL"], x: 53.5, y: -1,
     desc: [
       "&6Raw Naquadah&r comes from the bottom of Venus and nowhere else, with a little plutonium on the side. Through the ore plant it becomes naquadah oxide, and a little comes out enriched: that's LuV's business.",
     ],
@@ -173,7 +174,7 @@ export const QUESTS = [
     rewards: [xp(60), it("gtceu:antimony_trioxide_dust", 8)],
   },
   {
-    key: "IV_NAQUADAH_INGOT", id: "571EB64508F2FF8E", title: "Naquadah Ingot", icon: "gtceu:naquadah_ingot", deps: ["IV_NAQUADAH_PLANT"], x: 26, y: -4.5,
+    key: "IV_NAQUADAH_INGOT", id: "571EB64508F2FF8E", title: "Naquadah Ingot", icon: "gtceu:naquadah_ingot", deps: ["IV_NAQUADAH_PLANT"], x: 60.25, y: -0.75,
     desc: [
       "Naquadah only melts in a blast furnace with HSS-G coils, and the hot ingot wants liquid helium in the vacuum freezer. The &6Naquadah Ingot&r is where the quantum wafers start.",
       "The plant's titanium is the one exception to the Moon's monopoly.",
@@ -182,7 +183,7 @@ export const QUESTS = [
     rewards: [xp(80)],
   },
   {
-    key: "IV_DAY_OF_FIRE", id: "55613604E4C62B5F", title: "Day of Fire", icon: "gcyr:mercury_rock", shape: "rsquare", size: 1.25, deps: ["IV_ELITE_ROCKET_THERMAL_SUIT"], x: 20, y: 0,
+    key: "IV_DAY_OF_FIRE", id: "55613604E4C62B5F", title: "Day of Fire", icon: "gcyr:mercury_rock", shape: "rsquare", size: 1.25, deps: ["IV_ELITE_ROCKET_THERMAL_SUIT"], x: 43.75, y: 1.25,
     desc: [
       "Mercury keeps Earth's clock: a scorching day and a cold, dark night. There's no air and nothing burns, so an RTG cell or charged batteries keep the first base going until the sun returns.",
       "Bring a waystone and an empty vein probe.",
@@ -191,15 +192,15 @@ export const QUESTS = [
     rewards: [xp(150), it("grindless:empty_vein_probe", 3)],
   },
   {
-    key: "IV_A_SEED_FROM_MERCURY", id: "19D2E454A31BDFC2", title: "A Seed from Mercury", icon: "grindless:hermean_quantum_seed", deps: ["IV_DAY_OF_FIRE"], x: 22, y: -1.5,
+    key: "IV_A_SEED_FROM_MERCURY", id: "19D2E454A31BDFC2", title: "A Seed from Mercury", icon: "grindless:hermean_quantum_seed", deps: ["IV_DAY_OF_FIRE"], x: 44.5, y: 3,
     desc: [
-      "Hermean regolith dust, a chemical reactor and the same trick make the &6Hermean Quantum Seed&r, only on Mercury. Its pair is the Mercury bridge.",
+      "Hermean regolith dust, a chemical reactor and the same trick make the &6Hermean Quantum Seed&r in any world, once the dust is shipped. Its pair is the Mercury bridge.",
     ],
     tasks: [it("grindless:hermean_quantum_seed")],
     rewards: [xp(40), it("minecraft:ender_pearl", 2)],
   },
   {
-    key: "IV_HEAT_SHIELD_BRICKS", id: "15320440D70D86A7", title: "Heat-Shield Bricks", icon: "grindless:hermean_heat_shield_brick", deps: ["IV_MERCURY_SOLAR_WORKS"], x: 24, y: 0,
+    key: "IV_HEAT_SHIELD_BRICKS", id: "15320440D70D86A7", title: "Heat-Shield Bricks", icon: "grindless:hermean_heat_shield_brick", deps: ["IV_MERCURY_SOLAR_WORKS"], x: 50.25, y: 1,
     desc: [
       "Mercury's own dust, baked under the mirrors, makes &6Hermean Heat-Shield Bricks&r. The drill, the solar field and the interferometer all stand on them.",
     ],
@@ -207,7 +208,7 @@ export const QUESTS = [
     rewards: [xp(40)],
   },
   {
-    key: "IV_IRIDOSMINE", id: "147AC69C089D11C2", title: "Iridosmine", icon: "gtceu:raw_iridosmine", deps: ["IV_MERCURY_VEIN_DRILL"], x: 26, y: 0,
+    key: "IV_IRIDOSMINE", id: "147AC69C089D11C2", title: "Iridosmine", icon: "gtceu:raw_iridosmine", deps: ["IV_MERCURY_VEIN_DRILL"], x: 57.75, y: 1.25,
     desc: [
       "&6Raw Iridosmine&r is grains of native iridium and osmium in Mercury's dark crust, and the only iridium and osmium in the system. It won't melt in a furnace or split in an electrolyzer.",
     ],
@@ -215,7 +216,7 @@ export const QUESTS = [
     rewards: [xp(60)],
   },
   {
-    key: "IV_IRIDIUM_AND_OSMIUM", id: "72E1760292CBF88F", title: "Iridium and Osmium", icon: "gtceu:iridium_dust", deps: ["IV_IRIDOSMINE", "X:1F70EF41E5F8ED95"], x: 28, y: 0,
+    key: "IV_IRIDIUM_AND_OSMIUM", id: "72E1760292CBF88F", title: "Iridium and Osmium", icon: "gtceu:iridium_dust", deps: ["IV_IRIDOSMINE", "X:1F70EF41E5F8ED95"], x: 59, y: 0.25,
     desc: [
       "The ore plant turns raw iridosmine into dust, and the platinum plant on circuit 3 runs the whole chain until &6Iridium&r and &6Osmium&r come out.",
       "Iridium is what IV hatches were waiting for, and osmium only melts at LuV voltage.",
@@ -224,7 +225,7 @@ export const QUESTS = [
     rewards: [xp(80), it("grindless:platinum_electrode", 1)],
   },
   {
-    key: "IV_ASSEMBLY_LINE", id: "3CF7A4745035119A", title: "Assembly Line", icon: "gtceu:assembly_line", shape: "gear", size: 1.25, deps: ["IV_IRIDIUM_AND_OSMIUM"], x: 30, y: 0,
+    key: "IV_ASSEMBLY_LINE", id: "3CF7A4745035119A", title: "Assembly Line", icon: "gtceu:assembly_line", shape: "gear", size: 1.25, deps: ["IV_IRIDIUM_AND_OSMIUM"], x: 61.75, y: 0,
     desc: [
       "The &6Assembly Line&r builds what no single machine can, reading its input buses in order, one ingredient each. Its casings want IV sensors, emitters and ruridit gears, which is why it waits for iridium.",
       "For the LuV motor, an EV scanner reads an IV motor onto a data stick that lives in a data access hatch on the line.",
@@ -233,7 +234,7 @@ export const QUESTS = [
     rewards: [xp(100), it("gtceu:ulv_input_bus", 4)],
   },
   {
-    key: "IV_FED_BY_THE_NETWORK", id: "305FCC7C554A03CC", title: "Fed by the Network", icon: "gtceu:luv_electric_motor", deps: ["IV_ASSEMBLY_LINE"], x: 32, y: 0,
+    key: "IV_FED_BY_THE_NETWORK", id: "305FCC7C554A03CC", title: "Fed by the Network", icon: "gtceu:luv_electric_motor", deps: ["IV_ASSEMBLY_LINE"], x: 66, y: 1.25,
     desc: [
       "Put an AE2 export bus under every input bus, each set to its ingredient, and the fluids into their own hatches in the same order.",
       "The &6LuV Electric Motor&r comes out of an ME output bus, and nobody crafted it by hand.",
@@ -242,7 +243,7 @@ export const QUESTS = [
     rewards: [xp(120), it("ae2:speed_card", 2)],
   },
   {
-    key: "IV_OUTER_SYSTEM_CHART", id: "18E80E32AB01B8F6", title: "Outer System Chart", icon: "grindless:outer_system_chart", deps: ["IV_INTERFEROMETER"], x: 32, y: -1.5,
+    key: "IV_OUTER_SYSTEM_CHART", id: "18E80E32AB01B8F6", title: "Outer System Chart", icon: "grindless:outer_system_chart", deps: ["IV_INTERFEROMETER"], x: 66.75, y: 2.75,
     desc: [
       "The Moon's antenna records the sky at night onto a data orb, and the recording travels to Mercury. With the Inner Planets Chart in its bus, the interferometer writes the &6Outer System Chart&r of the belt and Jupiter's moons.",
     ],
@@ -250,7 +251,7 @@ export const QUESTS = [
     rewards: [xp(80)],
   },
   {
-    key: "IV_SAGITTARIUS_A", id: "5EC977A2B65C7030", title: "Sagittarius A*", icon: "grindless:sagittarius_a_star_signal", deps: ["IV_OUTER_SYSTEM_CHART"], x: 34, y: -3,
+    key: "IV_SAGITTARIUS_A", id: "5EC977A2B65C7030", title: "Sagittarius A*", icon: "grindless:sagittarius_a_star_signal", deps: ["IV_OUTER_SYSTEM_CHART"], x: 68.75, y: 2.75,
     desc: [
       "The hiss the Moon's antenna picked up from Sagittarius finally has an address: one faint, steady point at the centre of the galaxy. The &6Sagittarius A* Signal&r is a long way off, and you're going anyway.",
     ],
@@ -258,7 +259,7 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
   {
-    key: "IV_GATE_TO_LUV", id: "77B4DDD47050E3C7", title: "Gate to LuV", icon: "gtceu:luv_machine_hull", shape: "diamond", size: 1.75, deps: ["IV_OUTER_SYSTEM_CHART", "IV_FED_BY_THE_NETWORK"], x: 34, y: 0,
+    key: "IV_GATE_TO_LUV", id: "77B4DDD47050E3C7", title: "Gate to LuV", icon: "gtceu:luv_machine_hull", shape: "diamond", size: 1.75, deps: ["IV_OUTER_SYSTEM_CHART", "IV_FED_BY_THE_NETWORK"], x: 67.75, y: 1,
     desc: [
       "Rhodium plated palladium, niobium titanium cable and PTFE make the &6LuV Machine Hull&r, and yes, it's another hull.",
       "Venus's naquadah and Mercury's iridium got you here, and the new chart points further out still.",

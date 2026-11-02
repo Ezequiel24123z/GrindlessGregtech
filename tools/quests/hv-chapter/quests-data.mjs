@@ -5,6 +5,7 @@ export const CHAPTER = {
   order: 3,
   icon: "gtceu:refinery",
   autofocus: "HV_HV_FACTORY",
+  section: { name: 'HV: Moonshot', origin: { x: 0, y: 0 } },
   title: "HV: Moonshot",
   subtitle: ["Crude oil becomes chemistry, and the chemistry becomes a rocket to the Moon."],
 };
@@ -387,13 +388,13 @@ export const QUESTS = [
     key: "HV_NICHROME", id: "70F4075BAF69DA99", title: "Nichrome", icon: "gtceu:nichrome_ingot", deps: ["HV_VACUUM_FREEZER"], x: 14, y: 3,
     desc: [
       "&6Nichrome&r needs more power than one HV energy hatch gives, so the blast furnace gets two, and the hot ingot goes through the freezer.",
-      "EV turns it into coils: the regolith cell on the Moon and tungsten's furnace both want them.",
+      "EV turns it into coils: the regolith cell and tungsten's furnace both want them.",
     ],
     tasks: [{ type: "item", id: "7FEDE320D91D5B65", item: "gtceu:nichrome_ingot", count: 4 }],
     rewards: [{ type: "xp", id: "5B177DB0EA38B7DC", xp: 40 }],
   },
   {
-    key: "HV_GT_DRUMS", id: "471A024EBFCA8459", title: "GT Drums", icon: "gtceu:stainless_steel_drum", deps: ["mv:MV_STAINLESS_STEEL"], x: 10, y: -3,
+    key: "HV_GT_DRUMS", id: "471A024EBFCA8459", title: "GT Drums", icon: "gtceu:stainless_steel_drum", deps: ["mv:MV_STAINLESS_STEEL","HV_STAINLESS_STEEL_DRILL_BIT"], x: 8, y: -6,
     desc: [
       "A &6Stainless Steel Drum&r holds a lot of fluid and keeps it when you pick it up. It's also the liner inside the rocket's overwrapped tanks, so make a few extra.",
     ],
@@ -420,5 +421,14 @@ export const QUESTS = [
         desc: [],
         tasks: [{ type: "item", id: "332A714483469ADA", item: "gtceu:coil_chemical_plant" }],
         rewards: [{ type: "xp", id: "5ADAE012D2D4306D", xp: 60 }],
+  },
+  {
+    key: "HV_NANOMUSCLE_SUIT", id: "3C71A9D5E04B8F26", title: "NanoMuscle Suit", icon: "gtceu:nanomuscle_chestplate", deps: ["HV_SPACE_SUIT"], x: 22, y: -3,
+    desc: [
+      "The &6NanoMuscle Chestplate&r is eight carbon fibre plates around an &6Energy Crystal&r. It holds 6.4M EU.",
+      "Charged, it lets you &6fly like in creative&r: 175 EU/t while flying, nothing on the ground, about 30 minutes per charge. It warns you at 10%. Recharge it in a charger or battery buffer. The advanced version adds the jetpack.",
+    ],
+    tasks: [{ type: "item", id: "6D2E8B4107A35C91", item: "gtceu:nanomuscle_chestplate" }],
+    rewards: [{ type: "xp", id: "1F5A07C3B9E24D68", xp: 60 }],
   },
 ];

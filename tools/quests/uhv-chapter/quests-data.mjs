@@ -10,6 +10,7 @@ const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
 export const CHAPTER = {
+  section: { name: 'Gate to UEV', origin: { x: 0, y: 0 } },
   era: 'uhv',
   role: 'age',
   order: 0,
@@ -148,7 +149,7 @@ export const QUESTS = [
     key: 'M_SUN', kind: 'reading', title: 'Under Six Suns', icon: 'minecraft:sunflower',
     deps: ['STN7'], x: 10, y: -2,
     desc: [
-      'Mercury gets several times the sunlight Earth does. The surface is vacuum and the day side is a furnace, so the machines there run only in daylight.',
+      'Mercury gets several times the sunlight Earth does. The surface is vacuum and the day side is a furnace, so the solar vapour furnace there runs only in daylight.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],

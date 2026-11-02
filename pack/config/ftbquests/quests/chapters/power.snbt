@@ -2177,7 +2177,7 @@
 			icon: "grindless:lv_capacitor_cell"
 			id: "16ABFBB249BDC07B"
 			size: 1.0d
-			subtitle: "The weakest cell in any tower sets the network's voltage"
+			subtitle: "The strongest cell in any tower sets the network's voltage"
 			tasks: [
 				{ id: "5F647B421B89C6F2", item: "grindless:lv_capacitor_cell", optional_task: true, type: "item" }
 				{ id: "5E46CBD3C716378C", type: "checkmark" }
@@ -2367,7 +2367,7 @@
 		{
 			dependencies: ["1A64E503878275AE"]
 			description: [
-				"Above the network's voltage it gets nothing; shift-right-click it with an empty hand to see why."
+				"Fed whenever the network's voltage is at least its own, so one MAX cell feeds every tier; shift-right-click it with an empty hand to see the network."
 				"Comes in 2, 4, 16 and 64 A, LV to MAX."
 			]
 			icon: "gtceu:lv_wireless_energy_hatch"

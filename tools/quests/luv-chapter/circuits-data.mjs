@@ -5,7 +5,10 @@ const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 const ri = (item, count) => ({ type: 'item', item, count });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.circuits,
   filename: 'luv_circuits',
   era: 'luv',
   role: 'circuits',
@@ -180,4 +183,18 @@ export const QUESTS = [
     tasks: [it('gtceu:data_orb')],
     rewards: [xp(150), ri('gtceu:data_orb', 2)],
   },
+  {
+    key: 'QTSUIT', kind: 'process', title: 'QuarkTech Suit', icon: 'gtceu:quarktech_chestplate',
+    deps: ['CASM'], x: 10, y: 1.5,
+    teach: {
+      for: 'The &6QuarkTech Suit&r holds 100M EU. A charged chestplate flies like creative: 2,500 EU/t while flying, nothing on the ground, about 33 minutes per charge.',
+      needs: 'Assembler recipes. The chestplate takes LuV circuits, a lapotronic orb, IV emitters and a field generator.',
+      unlocks: 'Flight on your own power. The advanced chestplate (ZPM circuit) adds the jetpack.',
+      automate: 'Recharge in a charger or battery buffer.',
+    },
+    desc: [],
+    tasks: [it('gtceu:quarktech_chestplate')],
+    rewards: [xp(200)],
+  },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

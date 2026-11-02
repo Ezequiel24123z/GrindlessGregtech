@@ -13,17 +13,15 @@ export const CHAPTER = {
   autofocus: "ECA",
   title: "EV: Circuits",
   subtitle: ["Phosphorus, patience and the first circuits that need a cleanroom twice."],
+  section: { name: "EV: Circuits", origin: { x: 0, y: 0 }, heading: { key: "H_CIRCUITS", x: 11, y: 2.25, deps: ["MP"], icon: "gtceu:nano_processor" } },
 };
 
-export const LINKS = [
-  { key: "C_L_MP", ref: "MP", x: 0, y: 0 },
-  { key: "C_L_TI", ref: "TI", x: 0, y: 1.5 },
-];
+export const LINKS = [];
 
 export const QUESTS = [
   {
     key: "ECA", kind: "machine", title: "EV Circuit Assembler", icon: "gtceu:ev_circuit_assembler",
-    deps: ["MP"], x: 2, y: 0,
+    deps: ["MP"], x: 19, y: 1.5,
     teach: {
       for: "The &6EV Circuit Assembler&r builds the nano circuits, which the HV assembler cannot.",
       needs: "It asks for Microprocessor Mainframes, the micro line's last circuit, and an HV emitter, since the EV one waits for IV.",
@@ -36,7 +34,7 @@ export const QUESTS = [
   },
   {
     key: "NCPU", kind: "wafer", title: "Nano CPU Wafer", icon: "gtceu:nano_cpu_wafer",
-    deps: ["ECA"], x: 2, y: -1.5,
+    deps: ["ECA"], x: 22, y: 1.5,
     teach: {
       for: "A CPU wafer treated in an EV chemical reactor becomes a &6Nano CPU Wafer&r, and the laser engraver cuts it into chips.",
       needs: "A working cleanroom, carbon fibers and the HV wafer line behind you.",
@@ -49,7 +47,7 @@ export const QUESTS = [
   },
   {
     key: "PHOS", kind: "process", title: "Phosphorus Boule", icon: "gtceu:phosphorus_boule",
-    deps: ["TI"], x: 2, y: 1.5,
+    deps: ["ECA"], x: 19, y: 4.5,
     teach: {
       for: "A phosphorus boule grows slowly in the blast furnace and is sliced into wafers.",
       needs: "Patience: the boule takes its time, so start one before you need the chips.",
@@ -62,7 +60,7 @@ export const QUESTS = [
   },
   {
     key: "MPIC", kind: "wafer", title: "MPIC Chips", icon: "gtceu:mpic_chip",
-    deps: ["PHOS"], x: 4, y: 1.5,
+    deps: ["PHOS"], x: 24, y: 6,
     teach: {
       for: "The phosphorus wafer becomes an &6MPIC Wafer&r and the engraver cuts the &6MPIC Chips&r out of it.",
       needs: "A laser engraver and the right lens.",
@@ -75,7 +73,7 @@ export const QUESTS = [
   },
   {
     key: "NOR", kind: "wafer", title: "NOR Memory", icon: "gtceu:nor_memory_chip",
-    deps: ["MPIC"], x: 6, y: 1.5,
+    deps: ["MPIC"], x: 26, y: 6,
     teach: {
       for: "&6NOR Memory&r is the same boule engraved with a pink lens, which is a different chip from the same slice of rock.",
       needs: "The pink glass lens and a free engraver.",
@@ -88,7 +86,7 @@ export const QUESTS = [
   },
   {
     key: "SMD", title: "SMD Diodes", icon: "gtceu:smd_diode",
-    deps: ["NOR"], x: 8, y: 1.5,
+    deps: ["NOR"], x: 27, y: 7.5,
     desc: [
       "The &6SMD Diode&r wants fine platinum wire, so the platinum plant comes before it. Past that it is another cleanroom assembler recipe.",
       "The supercomputer wants plenty. Put it on a repeating pattern.",
@@ -98,7 +96,7 @@ export const QUESTS = [
   },
   {
     key: "NP", kind: "circuit", title: "Nanoprocessor", icon: "gtceu:nano_processor",
-    deps: ["ECA", "NCPU"], x: 4, y: 0,
+    deps: ["ECA", "NCPU"], x: 22, y: 3,
     teach: {
       for: "The &6Nanoprocessor&r is the nano line's HV circuit, and only the EV circuit assembler can put one together.",
       needs: "Nano CPU chips, carbon fibers and the usual SMD parts.",
@@ -111,7 +109,7 @@ export const QUESTS = [
   },
   {
     key: "NPA", kind: "circuit", title: "Nanoprocessor Assembly", icon: "gtceu:nano_processor_assembly",
-    deps: ["NP"], x: 6, y: 0,
+    deps: ["NP"], x: 25, y: 4.5,
     teach: {
       for: "The &6Nanoprocessor Assembly&r is the nano line's EV circuit, built on an epoxy board.",
       needs: "Nanoprocessors and the epoxy line from HV, which still has work to do.",
@@ -124,7 +122,7 @@ export const QUESTS = [
   },
   {
     key: "NPC", kind: "circuit", title: "Nanoprocessor Supercomputer", icon: "gtceu:nano_processor_computer",
-    deps: ["NPA", "NOR", "SMD"], x: 8, y: 0,
+    deps: ["NPA", "NOR", "SMD"], x: 27, y: 4.5,
     teach: {
       for: "The &6Nanoprocessor Supercomputer&r is the IV circuit and the real wall of EV.",
       needs: "Assemblies, NOR memory and SMD diodes, which means the platinum plant and the slow boule.",
@@ -137,7 +135,7 @@ export const QUESTS = [
   },
   {
     key: "NPM", kind: "signature", title: "Nanoprocessor Mainframe", icon: "gtceu:nano_processor_mainframe",
-    deps: ["NPC"], x: 10, y: 0,
+    deps: ["NPC"], x: 30, y: 7.5,
     teach: {
       for: "The &6Nanoprocessor Mainframe&r closes the nano ladder.",
       needs: "Supercomputers, and the same cleanroom discipline, at a larger scale.",

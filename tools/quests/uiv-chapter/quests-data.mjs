@@ -11,6 +11,7 @@ const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
 export const CHAPTER = {
+  section: { name: 'Gate to UXV', origin: { x: 0, y: 0 } },
   order: 0,
   icon: 'gtceu:uiv_machine_casing',
   autofocus: 'START',
@@ -52,7 +53,7 @@ export const QUESTS = [
     key: 'J_LIGHT', kind: 'reading', title: 'Computers of Light', icon: 'gtceu:beuv_scanner',
     deps: ['J_HOME'], x: 5, y: 2,
     desc: [
-      'A crystal that keeps data for ever, a scanner for a shorter wavelength and a chip cold enough to think. They end in the optical mainframe the gate asks for.',
+      'A crystal that keeps data for ever, a scanner for a shorter wavelength and a chip cold enough to think. They end in the optical mainframe, the UIV circuit.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -72,7 +73,7 @@ export const QUESTS = [
     key: 'J_MERC', kind: 'step', title: 'Mercury Orbit', icon: 'gtceu:matrioshka_computer',
     deps: ['J_HOME'], x: 7.5, y: 0,
     desc: [
-      'The planet nearest the Sun gets nine times Earth\'s light. Park in &6Mercury&r orbit: the Matrioshka computer and its radiators are built here.',
+      'The planet nearest the Sun gets nine times Earth\'s light. Park in &6Mercury&r orbit: the Matrioshka computer writes its charts here.',
     ],
     tasks: [dim('gcyr:mercury_orbit')],
     rewards: [xp(200)],
@@ -120,7 +121,7 @@ export const QUESTS = [
     key: 'R_STAR', kind: 'reading', title: 'A Star Gone Out', icon: 'gtceu:crust_lift',
     deps: ['JUMP1'], x: 17.5, y: -2,
     desc: [
-      'A neutron star packs a Sun into a ball a few miles wide. Its crust is the thinnest skin of matter anywhere, and everything this orbit makes comes from it. The crust lift and the neutronium pellet are fiction, and say so.',
+      'A neutron star packs a Sun into a ball a few miles wide. Its crust is the thinnest skin of matter anywhere, and the crust lift takes its matter from it. The crust lift and the neutronium pellet are fiction, and say so.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -271,7 +272,7 @@ export const QUESTS = [
     key: 'STORE', kind: 'step', title: 'Stored Proof', icon: 'grindless:neutronium_pellet',
     deps: ['HOLD'], x: 40, y: 0,
     desc: [
-      'Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four optical mainframes in the store. The gate looks for them before it opens further.',
+      'Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four UIV circuits in the store. The gate looks for them before it opens further.',
     ],
     tasks: [
       it('grindless:neutronium_pellet'), it('grindless:superheavy_census_ii'), it('grindless:ns_eos_chart'),

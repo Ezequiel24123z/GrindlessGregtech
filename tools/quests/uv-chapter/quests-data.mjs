@@ -8,7 +8,10 @@ const dim = (dimension) => ({ type: 'dimension', dimension });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.quests,
   era: 'uv',
   role: 'age',
   order: 0,
@@ -281,3 +284,4 @@ export const QUESTS = [
     rewards: [xp(300)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

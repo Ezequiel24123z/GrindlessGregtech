@@ -6,7 +6,7 @@
   "grid": 0.25,
   "eraChapters": {
     "_why": "One chapter per era (QB-0, docs/quests.md section 4b). enabled lists the era chapters (<era>_age) already rebuilt as one connected chapter: they get the connectivity rule (one start, everything reachable through dependencies inside the chapter) instead of root and isolated, and bridgeMaxEdge: a forward line between two sections may be up to that long (maxEdge still holds for every other line; through-node, crossing, overlap and backward stay on). QB-1 to QB-4 add their era here when its data passes. lint.mjs --merged-eras tries every era chapter as if listed.",
-    "enabled": ["maxplus_age", "uxv_age", "opv_age", "max_age"],
+    "enabled": ["steam_age", "lv_age", "mv_age", "hv_age", "ev_age", "iv_age", "luv_age", "zpm_age", "uv_age", "uhv_age", "uev_age", "uiv_age", "uxv_age", "opv_age", "max_age", "maxplus_age"],
     "bridgeMaxEdge": 14.0
   },
   "limits": {
@@ -22,7 +22,7 @@
     "chapterRoles": {
       "steam_age": "era", "lv_age": "era", "mv_age": "era", "hv_age": "era", "ev_age": "era", "iv_age": "era", "luv_age": "era", "zpm_age": "era",
       "uv_age": "era", "uhv_age": "era", "uev_age": "era", "uiv_age": "era", "uxv_age": "era", "opv_age": "era", "max_age": "era", "maxplus_age": "era",
-      "max_horizon": "capstone", "maxplus_creative": "capstone", "maxplus_tree": "capstone", "maxplus_hyperstargate": "capstone"
+      "max_horizon": "capstone"
     }
   },
   "maxRewardEntries": 6,

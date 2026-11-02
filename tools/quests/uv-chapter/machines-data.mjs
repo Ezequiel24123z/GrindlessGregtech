@@ -4,7 +4,10 @@
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.machines,
   filename: 'uv_machines',
   era: 'uv',
   role: 'machines',
@@ -323,3 +326,4 @@ export const QUESTS = [
     automate: 'Catalogue and data by ME; it needs no other input.',
   }, [it(TRUSS), it(HULL), it('gtceu:advanced_computer_casing')], 150),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

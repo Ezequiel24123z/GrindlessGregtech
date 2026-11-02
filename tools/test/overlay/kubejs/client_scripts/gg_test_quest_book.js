@@ -55,8 +55,7 @@
   SHOTS.push({ name: 'gg_book_power_top', chapter: 'power', x: 16, y: 6 }, { name: 'gg_book_power_iv', chapter: 'power', x: 12, y: 43 },
     { name: 'gg_book_power_grid', chapter: 'power', x: 16, y: 65 })
   // MAX+ (the release candidate's last era): three chapters and its processing chart, centred on their middles
-  SHOTS.push({ name: 'gg_book_maxplus_age_1', chapter: 'maxplus_age_1' }, { name: 'gg_book_maxplus_hyperstargate', chapter: 'maxplus_hyperstargate' },
-    { name: 'gg_book_maxplus_circuits', chapter: 'maxplus_circuits' }, { name: 'gg_book_pl_maxplus', chapter: 'pl_maxplus' })
+  SHOTS.push({ name: 'gg_book_maxplus_age', chapter: 'maxplus_age' }, { name: 'gg_book_pl_maxplus', chapter: 'pl_maxplus' })
   var c = { holding: false, since: 0, errors: 0, ageField: null, gaveUp: false, tipDone: '', book: null }
 
   function val(key) {

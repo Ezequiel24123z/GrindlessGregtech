@@ -1,4 +1,4 @@
-// Quest data for maxplus_age_3 ("MAX+: The Hyperstargate"), stage III's journey: the tree's products at Sgr A*, the grid crafts at home,
+// Quest data for maxplus_age_3 ("MAX+: The Hyperstargate"), stage III's journey: the tree's products, the grid crafts at home,
 // the gate formed, the dial and the arrival (docs/reforge/05_quest_design.md; docs/eras/maxplus.md, "Route" 11 to 13, "The Hyperstargate", "The ending").
 // This chapter follows the items. The machines of the tree and the gate's parts are taught in maxplus_hyperstargate (HG_*), the creative items
 // in maxplus_creative (CR_*), and the wireless store in maxplus_integration.
@@ -17,12 +17,13 @@ export const CHAPTER = {
   order: 2,
   icon: 'gtceu:hyperstargate',
   autofocus: 'STAGE3',
+  section: { name: 'Stage III: Back to the Hole', origin: { x: 46, y: 0 } },
   title: 'MAX+: The Hyperstargate',
-  subtitle: ['A tree of plasma, crystal and condensate at the black hole, a great many parts at home and one ring that opens for a single crossing.'],
+  subtitle: ['A tree of plasma, crystal and condensate that grows anywhere, a great many parts at home and one ring at the black hole that opens for a single crossing.'],
 };
 
 export const QUESTS = [
-  // ------------------------------------------------------------------ the tree at Sgr A*
+  // ------------------------------------------------------------------ the tree
   {
     key: 'STAGE3', kind: 'start', title: 'Stage III Begins', icon: 'gtceu:hyperstargate',
     deps: ['STAGE2_END'], x: 0, y: 0,
@@ -36,7 +37,7 @@ export const QUESTS = [
     key: 'S3_SITE', kind: 'reading', title: 'Back to the Hole', icon: 'grindless:horizon_lock',
     deps: ['STAGE3'], x: 2, y: 0,
     desc: [
-      'The gate goes up where the shell holds the horizon still, at Sgr A* orbit. The tree that feeds it grows there too, beside the shell.',
+      'The gate goes up where the shell holds the horizon still, at Sgr A* orbit. The tree that feeds it needs no such place: its machines run anywhere, so grow it at home.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -52,7 +53,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_SLURRY', kind: 'step', title: 'Horizon Crystal Slurry', icon: 'gtceu:horizon_crystal_slurry_bucket',
-    deps: ['S3_TREE'], x: 6, y: -4,
+    deps: ['S3_TREE'], x: 8.5, y: -3,
     desc: [
       'One plasma from every place you have worked, blended into a single bucket. It is the only slurry there is.',
     ],
@@ -61,7 +62,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_CORE', kind: 'step', title: 'Core Crystals', icon: 'grindless:horizon_core_crystal',
-    deps: ['S3_SLURRY'], x: 8, y: -5,
+    deps: ['S3_SLURRY'], x: 10, y: -3.5,
     desc: [
       'The gate\'s power units want a crowd of them. Each one takes a slurry hatch to itself.',
     ],
@@ -70,7 +71,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_CTRL', kind: 'step', title: 'Controller Crystal', icon: 'grindless:horizon_controller_crystal',
-    deps: ['S3_SLURRY'], x: 8, y: -3,
+    deps: ['S3_SLURRY'], x: 12.5, y: -2,
     desc: [
       'One flawless crystal for the gate\'s controller. It grows slowly, so start it early.',
     ],
@@ -79,16 +80,16 @@ export const QUESTS = [
   },
   {
     key: 'S3_CAPS', kind: 'step', title: 'Capacitors for the Bank', icon: 'grindless:horizon_capacitor',
-    deps: ['S3_TREE'], x: 6, y: -2,
+    deps: ['S3_TREE'], x: 7.5, y: -1.5,
     desc: [
-      'Each capacitor holds a slice of the dial\'s charge. The bank is a ring of them, and it only counts at Sgr A* orbit.',
+      'Each capacitor holds a slice of the dial\'s charge. The bank is a ring of them, built into the gate at Sgr A* orbit.',
     ],
     tasks: [it('grindless:horizon_capacitor', 40)],
     rewards: [xp(400)],
   },
   {
     key: 'S3_PLATE', kind: 'step', title: 'Containment Plates', icon: 'grindless:horizon_containment_plate',
-    deps: ['S3_TREE'], x: 6, y: 0,
+    deps: ['S3_TREE'], x: 9, y: -1,
     desc: [
       'A plate of bound condensate, pressed until it stops leaking light. The gate eats them by the thousand.',
     ],
@@ -97,7 +98,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_CHEV', kind: 'step', title: 'Chevron Cores', icon: 'grindless:chevron_core',
-    deps: ['S3_TREE'], x: 6, y: 2,
+    deps: ['S3_TREE'], x: 7, y: 0,
     desc: [
       'The small knot of field that makes a chevron a chevron. Ring blocks and upgrades both carry some.',
     ],
@@ -106,7 +107,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_MESH', kind: 'step', title: 'Horizon Mesh', icon: 'grindless:horizon_mesh',
-    deps: ['S3_TREE'], x: 6, y: 4,
+    deps: ['S3_TREE'], x: 9, y: 1,
     desc: [
       'A woven sheet that holds the frame parts together. The assembler is the only place it comes from.',
     ],
@@ -115,7 +116,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_FRAME', kind: 'step', title: 'Frame Parts', icon: 'grindless:horizon_frame_part',
-    deps: ['S3_PLATE', 'S3_MESH', 'S3_CHEV'], x: 8, y: 3,
+    deps: ['S3_PLATE', 'S3_MESH', 'S3_CHEV'], x: 10.5, y: -0.5,
     desc: [
       'The loom\'s four meta-materials, a mesh and plates, assembled into the part that every ring block is made of.',
     ],
@@ -126,7 +127,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ home
   {
     key: 'S3_HOME', kind: 'reading', title: 'The Grid at Home', icon: 'gtceu:hyper_assembly_array',
-    deps: ['S3_CTRL', 'S3_CAPS', 'S3_FRAME'], x: 10, y: 0,
+    deps: ['S3_CTRL', 'S3_CAPS', 'S3_FRAME'], x: 14.5, y: -1.5,
     desc: [
       'Back home the hyper assembly array does the rest: a grid for every part, and a great many of those. Feed it from AE2 and let the patterns do the counting.',
     ],
@@ -135,7 +136,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_COMP', kind: 'step', title: 'Compressed Plates', icon: 'grindless:horizon_compressed_plate',
-    deps: ['S3_HOME'], x: 12, y: -2,
+    deps: ['S3_HOME'], x: 16, y: -3,
     desc: [
       'Upgrades and ring blocks use them most, and the iris blades use them too.',
     ],
@@ -144,7 +145,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_FIELD', kind: 'step', title: 'Field Generators', icon: 'grindless:maxplus_field_generator',
-    deps: ['S3_HOME'], x: 12, y: 0,
+    deps: ['S3_HOME'], x: 17.5, y: -2,
     desc: [
       'A field generator sits inside nearly every part of the gate. Build the line once and leave it running.',
     ],
@@ -153,7 +154,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_PROC', kind: 'step', title: 'Horizon Processors', icon: 'grindless:horizon_processor',
-    deps: ['S3_HOME'], x: 12, y: 2,
+    deps: ['S3_HOME'], x: 19, y: -1.5,
     desc: [
       'Frame parts and plates take them in bulk, which makes this the biggest circuit order of the pack. Plan the Hyperfactory\'s bus before you start.',
     ],
@@ -162,7 +163,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_ARCH', kind: 'step', title: 'The Archive and the Map', icon: 'grindless:genome_archive',
-    deps: ['S3_GATE'], x: 16, y: -2,
+    deps: ['S3_GATE'], x: 21, y: -0.5,
     desc: [
       'The &6Genome Archive&r is the one thing that crosses with you. The &6Cloud Phase Map&r from the interferometer tells the dial where to aim.',
     ],
@@ -171,7 +172,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_LOCKS', kind: 'step', title: 'Locks and Cells for the Dial', icon: 'grindless:jacketed_condensate_cell',
-    deps: ['S3_GATE'], x: 16, y: 2,
+    deps: ['S3_GATE'], x: 22, y: -2,
     desc: [
       'A crowd of phase locks and a crate of jacketed cells go into every opening. Most of the cells come back, and the locks come back from the synchroniser.',
     ],
@@ -182,7 +183,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate, the dial, the arrival
   {
     key: 'S3_GATE', kind: 'milestone', title: 'The Gate Stands', icon: 'gtceu:hyperstargate',
-    deps: ['S3_COMP', 'S3_FIELD',     'S3_PROC', 'HG_MACH'], x: 14, y: 0,
+    deps: ['S3_COMP', 'S3_FIELD',     'S3_PROC', 'HG_MACH'], x: 20.5, y: -2,
     desc: [
           'The ring is closed, the base is lit and the controller holds its kept lock. It looks like nothing so much as a very large door. Check it off once it has formed.',
     ],
@@ -191,7 +192,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_DIAL', kind: 'step', title: 'Run the Dial', icon: 'grindless:spent_dial_charge',
-    deps: ['S3_ARCH', 'S3_LOCKS'], x: 18, y: 0,
+    deps: ['S3_ARCH', 'S3_LOCKS'], x: 22.5, y: -0.5,
     desc: [
       'Start the dial once. The ring opens, the banks drain and the refinery gets a spent charge to recharge for the next time.',
     ],
@@ -200,7 +201,7 @@ export const QUESTS = [
   },
   {
     key: 'ARRIVAL', kind: 'exit', title: 'Beyond the Horizon', icon: 'grindless:genome_archive',
-    deps: ['S3_DIAL'], x: 20, y: 0,
+    deps: ['S3_DIAL'], x: 24.5, y: -0.5,
     desc: [
       'Step into the ring while it is open. One player crosses per opening.',
     ],

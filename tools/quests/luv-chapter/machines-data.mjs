@@ -6,7 +6,10 @@ const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 const ri = (item, count) => ({ type: 'item', item, count });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.machines,
   filename: 'luv_machines',
   era: 'luv',
   role: 'machines',
@@ -104,8 +107,8 @@ export const QUESTS = [
     key: 'NETL', title: 'The Network Goes LuV', icon: 'grindless:luv_smes_cell',
     deps: ['WIND'], x: 4, y: 4.5,
     desc: [
-      "A &6LuV SMES Cell&r keeps its energy in a superconducting coil's field. The bank only hands out LuV once every formed tower holds LuV cells, so swap them all: one forgotten tower in the corner holds the whole network back.",
-      'Until then, two IV wireless hatches on a multiblock still reach LuV.',
+      "A &6LuV SMES Cell&r keeps its energy in a superconducting coil's field.       The network runs at the voltage of its strongest cell, so one LuV cell in any formed tower lifts the whole bank to LuV.",
+            'Your LuV wireless hatches then draw at LuV anywhere the network reaches.',
     ],
     tasks: [it('grindless:luv_smes_cell'), it('gtceu:luv_wireless_energy_hatch')],
     rewards: [xp(120)],
@@ -304,7 +307,7 @@ export const QUESTS = [
     key: 'FUMQ', title: 'Sulfur Concrete', icon: 'grindless:sulfur_concrete_casing', pkg: ['B1', 'B6'],
     deps: ['FUM'], x: 4, y: 13.5,
     desc: [
-      "Molten sulfur and Io's own dust cure into &6Sulfur Concrete Casing&r with no water at all. The Cryobot's base is made of it.",
+      "Molten sulfur and Io's own dust cure into &6Sulfur Concrete Casing&r with no water at all, in any mixer. The Cryobot's base is made of it.",
     ],
     tasks: [it('grindless:sulfur_concrete_casing')],
     rewards: [xp(60)],
@@ -378,7 +381,7 @@ export const QUESTS = [
     deps: ['EUR'], x: 2, y: 15,
     teach: {
       for: 'The &6Cryobot&r melts its way down through the ice, paying out its tether as it sinks.',
-      needs: 'A base of sulfur concrete, so Io comes first, and probes to send down.',
+      needs: 'A base of sulfur concrete, and probes to send down.',
       unlocks: 'A living ocean sample, and after that brine by the tank.',
       automate: 'Probes are single use. Keep them stocked by ME.',
     },
@@ -471,10 +474,11 @@ export const QUESTS = [
     key: 'AE2L', title: 'The Bridge Reaches Out', icon: 'ae2:quantum_link',
     deps: ['LVL4'], x: 2, y: 22.5,
     desc: [
-      "Each moon gets its own quantum bridge, paired with the quantum seed you made there: the belt, Io, Europa and Ganymede all reach your home network. Keep one ring and one link at home for each.",
+      "Each moon gets its own quantum bridge, paired with its quantum seed: the belt, Io, Europa and Ganymede all reach your home network. Keep one ring and one link at home for each.",
       'Anything on those worlds can then ship by ME, the same as on the Moon.',
     ],
     tasks: [it('ae2:quantum_link'), it('ae2:quantum_ring')],
     rewards: [xp(100)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

@@ -14,14 +14,10 @@ export const CHAPTER = {
   autofocus: "LB",
   title: "EV: Lunar Base",
   subtitle: ["The Moon learns to run without you, and then a rocket points at Mars."],
+  section: { name: "EV: Lunar Base", origin: { x: 0, y: 0 } },
 };
 
-export const LINKS = [
-  { key: "L_DSA", ref: "DSA", x: 12, y: -3 },
-  { key: "L_CAS", ref: "CAS", x: 20, y: -3 },
-  { key: "L_PP", ref: "PP", x: 12, y: 3 },
-  { key: "L_NPC", ref: "NPC", x: 26, y: 1.5 },
-];
+export const LINKS = [];
 
 export const QUESTS = [
   {
@@ -67,7 +63,7 @@ export const QUESTS = [
     deps: ["TI"], x: 8, y: 0,
     desc: [
       "Your first lunar titanium goes into the &6EV Machine Hull&r.",
-      "Machines of EV size need circuits the nano line makes, and the halls of the Moon base each have their own gear in the other two chapters.",
+      "Machines of EV size need circuits the nano line makes, and the halls of the Moon base each have their own gear in the sections beside the journey.",
     ],
     tasks: [it("gtceu:ev_machine_hull", 1, "13B7784B22044D02")],
     rewards: [xp(40, "6DE5A471269B3A5D")],
@@ -97,7 +93,7 @@ export const QUESTS = [
     deps: ["LD"], x: 6, y: -1.5,
     desc: [
       "Cobblestone from the drill, or any lunar stone you dig up, grinds into &6Lunar Regolith Dust&r in any macerator.",
-      "An electric furnace bakes that into &6Sintered Regolith Bricks&r, but only up here: at home the furnace just stares at it. Nearly the whole Moon base stands on these bricks.",
+      "An electric furnace bakes that into &6Sintered Regolith Bricks&r, slowly, and it works anywhere once you have the dust. Nearly the whole Moon base stands on these bricks.",
     ],
     tasks: [it("gtceu:lunar_regolith_dust", 1, "35C7DD57A884640E"), it("grindless:sintered_regolith", 16, "7504084A6B44AD55")],
     rewards: [xp(35, "12E9B79D096C02EA"), ri("gtceu:lunar_regolith_dust", 16, "3AB895BCA0F1FF7D")],
@@ -215,7 +211,7 @@ export const QUESTS = [
     key: "MSEED", id: "5301384885D78BAC", title: "A Seed from Mars", icon: "grindless:martian_quantum_seed",
     deps: ["SMP"], x: 18, y: -1.5,
     desc: [
-      "Rare-earth ions are what real quantum memories store their states in, so merrillite gets the job here. A chemical reactor makes the &6Martian Quantum Seed&r from merrillite dust, an ender pearl and helium-3, and only on Mars.",
+      "Rare-earth ions are what real quantum memories store their states in, so merrillite gets the job here. A chemical reactor makes the &6Martian Quantum Seed&r from merrillite dust, an ender pearl and helium-3. The recipe works in any chemical reactor, so the dust can ship home.",
       "Raw merrillite becomes dust in a plain furnace, which still works here.",
     ],
     tasks: [it("grindless:martian_quantum_seed", 1, "13C945C4547889F7")],
@@ -233,7 +229,7 @@ export const QUESTS = [
   },
   {
     key: "ICE", id: "148A0854C671B0AC", title: "Deuterium-Rich Ice", icon: "gtceu:raw_deuterium_rich_ice", size: 0.75, optional: true,
-    deps: ["MTR"], x: 20, y: -1.5,
+    deps: ["MTR"], x: 22, y: -1.5,
     desc: [
       "Mars lost most of its water to space, but the heavy kind tended to stay, so this ice holds about five times Earth's deuterium. Nothing uses it yet. Store it, because IV turns it into heavy water.",
     ],
