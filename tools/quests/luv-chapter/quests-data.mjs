@@ -156,7 +156,7 @@ export const QUESTS = [
     key: 'RTG', title: 'Packed for the Trip', icon: 'gtceu:ev_rtg', pkg: ['B1'],
     deps: ['LVL4'], x: 8, y: 1.5,
     desc: [
-      "An &6RTG Cell&r keeps a landing kit running when the Sun is faint and the wireless link drops. Out past Mars nothing else will, so pack a spare for every world you visit.",
+      "An &6RTG Cell&r keeps a landing kit running when the Sun is faint and the wireless link drops. Past Mars there is no air for ordinary fuel, so pack a spare for every world you visit.",
     ],
     tasks: [it('gtceu:ev_rtg')],
     rewards: [xp(60)],
@@ -310,7 +310,7 @@ export const QUESTS = [
     deps: ['FUSION'], x: 18, y: 1.5,
     fallback: { unless: ['B1', 'B6'], x: 6, y: 1.5, deps: ['FUSION'] },
     desc: [
-      "Mars's neodymium and plain hydrogen go in, &6Europium&r comes out, and nothing else in the pack makes it. It leaves the ring as a very hot liquid, not a plasma, so pipe it accordingly. The ZPM motor wants a lot of it as fine wire.",
+      "Mars's neodymium and plain hydrogen go in, &6Europium&r comes out. For now this fusion route is the way to make it. It leaves the ring as a very hot liquid, not a plasma, so pipe it accordingly. A metallothermic reduction in ZPM makes it from oxide later. The ZPM motor wants a lot of it as fine wire.",
     ],
     tasks: [it('gtceu:europium_ingot')],
     rewards: [xp(100)],

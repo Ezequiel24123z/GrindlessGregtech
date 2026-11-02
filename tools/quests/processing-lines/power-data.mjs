@@ -698,7 +698,7 @@ export default gate({
         }),
         n('maxShell', 2.25, 1.5, M('gtceu:mirror_shell'), 'Mirror Shell', {
           kind: 'info', tier: 'max', from: ['eqMaxShell'], sub: 'One seed wave packet, amplified by the shell\'s mirrors, vents its energy into the grid',
-          desc: 'The last machine of the pack; it vents 2^30 EU/t for 4,800 ticks from one seed wave packet.',
+          desc: 'The MAX black-hole generator; it vents 2^30 EU/t for 4,800 ticks from one seed wave packet.',
         }),
       ],
     },
@@ -790,49 +790,49 @@ export default gate({
         L('hmw', 0, 2.25, 'pl_luv:mw', { pkg: 'A4' }),
         n('wsmes', 2.25, 2.25, I('grindless:luv_smes_cell'), 'LuV SMES Cell', {
           kind: 'info', pkg: 'A4', from: ['eqSMES', 'hmw'], sub: 'LuV\'s cell is a superconducting coil, wound rather than assembled',
-          desc: 'The network jumps to LuV only when every formed tower holds these. Until then, a multiblock with two IV wireless energy hatches reaches LuV the usual GregTech way.',
+          desc: 'The network jumps to LuV as soon as any one formed tower holds one of these. Until then, a multiblock with two IV wireless energy hatches reaches LuV the usual GregTech way.',
           figs: [P.wcell('grindless:luv_smes_cell', 'LuV SMES', 983040000)],
         }),
         // UHV's cell: 24 UV naquadria batteries' worth (GTM's tier-9 battery is Long.MAX_VALUE), wound in the naquadria magnet works
         E('eqUhvCell', 0, 6, 'uhv_age', '5E6B4DEB712EECBE'),
         n('wuhv', 2.25, 6, I('grindless:uhv_smes_cell'), 'UHV SMES Cell', {
           kind: 'info', from: ['eqUhvCell'], sub: 'Twenty-four UV batteries\' worth, wound with RTAN wire',
-          desc: 'The network jumps to UHV only when every formed tower holds these; the nuclear clock keeps it in step.',
+          desc: 'The network jumps to UHV as soon as any one formed tower holds one of these; the nuclear clock keeps it in step.',
           figs: [P.wcell('grindless:uhv_smes_cell', 'UHV SMES', 62914560000)],
         }),
         // UEV's cell: four UHV cells' worth, with the quantum repeater keeping the network in step
         E('eqUevCell', 0, 8, 'uev_age', '5304F9E360A95261'),
         n('wuev', 2.25, 8, I('grindless:uev_smes_cell'), 'UEV SMES Cell', {
           kind: 'info', from: ['eqUevCell'], sub: 'Ninety-six UV batteries\' worth, the UEV wireless hatches work with it',
-          desc: 'The network jumps to UEV only when every formed tower holds these.',
+          desc: 'The network jumps to UEV as soon as any one formed tower holds one of these.',
           figs: [P.wcell('grindless:uev_smes_cell', 'UEV SMES', 251658240000)],
         }),
         // UIV's cell: four UEV cells' worth
         E('eqUivCell', 0, 10, 'uiv_age', '5FB006B879741A02'),
         n('wuiv', 2.25, 10, I('grindless:uiv_smes_cell'), 'UIV SMES Cell', {
           kind: 'info', from: ['eqUivCell'], sub: 'Three hundred and eighty-four UV batteries\' worth, wound in metallic hydrogen',
-          desc: 'The network jumps to UIV only when every formed tower holds these.',
+          desc: 'The network jumps to UIV as soon as any one formed tower holds one of these.',
           figs: [P.wcell('grindless:uiv_smes_cell', 'UIV SMES', 1006632960000)],
         }),
         // UXV's cell: four UIV cells' worth, wound with pasta strand tape in the nitride magnet works
         E('eqUxvCell', 0, 12, 'uxv_age', '3F5ABDEF2254EC50'),
         n('wuxv', 2.25, 12, I('grindless:uxv_smes_cell'), 'UXV SMES Cell', {
           kind: 'info', from: ['eqUxvCell'], sub: 'Fifteen hundred and thirty-six UV batteries\' worth, wound with pasta strand',
-          desc: 'The network jumps to UXV only when every formed tower holds these.',
+          desc: 'The network jumps to UXV as soon as any one formed tower holds one of these.',
           figs: [P.wcell('grindless:uxv_smes_cell', 'UXV SMES', 4026531840000)],
         }),
         // OpV's cell: four UXV cells' worth
         E('eqOpvCell', 0, 14, 'opv_age', '1D5A8A7451FF4E70'),
         n('wopv', 2.25, 14, I('grindless:opv_smes_cell'), 'OpV SMES Cell', {
           kind: 'info', from: ['eqOpvCell'], sub: 'Six thousand one hundred and forty-four UV batteries\' worth',
-          desc: 'The network jumps to OpV only when every formed tower holds these. Case 13 caps the buffer at the voltage times the amps times ten: 2 A holds 10,737,418,240 EU and 64 A holds 343,597,383,680 EU.',
+          desc: 'The network jumps to OpV as soon as any one formed tower holds one of these. Case 13 caps the buffer at the voltage times the amps times ten: 2 A holds 10,737,418,240 EU and 64 A holds 343,597,383,680 EU.',
           figs: [P.wcell('grindless:opv_smes_cell', 'OpV SMES', 16106127360000)],
         }),
         // MAX's cell: four OpV cells' worth
         E('eqMaxCell', 0, 16, 'max_age', '586558AD36EEC6F4'),
         n('wmax', 2.25, 16, I('grindless:max_smes_cell'), 'MAX SMES Cell', {
           kind: 'info', from: ['eqMaxCell'], sub: 'Twenty-four thousand five hundred and seventy-six UV batteries\' worth',
-          desc: 'The network jumps to MAX only when every formed tower holds these. The mirror shell\'s last recipe draws from it, so charge it first.',
+          desc: 'The network jumps to MAX as soon as any one formed tower holds one of these. The mirror shell\'s last recipe draws from it, so charge it first.',
           figs: [P.wcell('grindless:max_smes_cell', 'MAX SMES', 64424509440000)],
         }),
         n('wdynH', 6.75, -2.25, I('gtceu:lv_wireless_dynamo_hatch'), 'Wireless Dynamo Hatch', {

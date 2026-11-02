@@ -162,7 +162,7 @@ export const QUESTS = [
   gear('HPGE', 'zone_refining_tower', 'Zone Refining Tower', ['M_L_DET'], 2, 9, {
     for: 'The &6Zone Refining Tower&r sweeps germanium\'s impurities to the ends of a bar, over and over, until it is purer than almost anything you make.',
     needs: 'Its controller and clean room casing; eight RF coils ring the tower.',
-    unlocks: 'The HPGe crystal in the circuits chapter.',
+    unlocks: 'The HPGe crystal, further along this chapter.',
     automate: 'Germanium bars in and crystals out by ME; the tower runs for a long time per bar.',
   }, [it(CLEAN)]),
   gear('PROX', 'optical_ground_station', 'Optical Ground Station', ['HPGE'], 4, 9, {
@@ -186,7 +186,7 @@ export const QUESTS = [
     for: 'The &6Powder-in-Tube Line&r packs a wire powder into a silver sheath and draws it down, turning one ingot of material into four.',
     needs: 'Its controller and UV casing, a drawing bench and a furnace coil.',
     unlocks: 'EnTED wire for the UV network.',
-    automate: 'Silver sheath is kept: loop it back by ME.',
+    automate: 'Each billet eats one silver tube; the wire step returns silver dust. Remelt it into tubes and keep them stocked.',
   }, [it(UVC)]),
   prod('P_BILLET', 'Powder Billet', 'grindless:pit_billet', ['PIT'], 8, 10.5,
     'A drawn &6PIT Billet&r is a sheath filled with powder, ready to be rolled into wire.',
@@ -196,7 +196,7 @@ export const QUESTS = [
     for: 'The &6Powder Bed Printer&r melts atomised metal powder layer by layer into parts that no machine tool could cut.',
     needs: 'Its controller, UV casing and a heated bed under an argon blanket.',
     unlocks: 'Thruster chambers, array mounts and probe frames.',
-    automate: 'Powder and argon are kept; stock the printed parts by ME.',
+    automate: 'Printing consumes most of its powder, and atomising loses a little argon. Keep both stocked and store the parts by ME.',
   }, [it(UVC)]),
   prod('P_PRINT', 'Printed Probe Frame', 'grindless:printed_probe_frame', ['PRINT'], 4, 12,
     'The &6Printed Probe Frame&r is the lightest rigid thing you build; the probe hangs from it.',
@@ -229,7 +229,7 @@ export const QUESTS = [
   gear('NEURO', 'neural_culture_vat', 'Neural Culture Vat', ['ARK'], 4, 15, {
     for: 'The &6Neural Culture Vat&r grows stem cells and neuro processing units in a single run.',
     needs: 'Its controller, plascrete, filter casing hoods and robust casing for the bioprinter.',
-    unlocks: 'The wetware computer in the circuits chapter.',
+    unlocks: 'The wetware computer, further along this chapter.',
     automate: 'Media and stem cells by ME; the vat ships the units out.',
   }, [it('gtceu:plascrete')]),
 
@@ -246,7 +246,7 @@ export const QUESTS = [
   gear('SCFAB', 'starchip_fab', 'Starchip Fab', ['P_SAIL'], 6, 16.5, {
     for: 'The &6Starchip Fab&r bonds and dices a photonic chip, a qubit and a source into a probe that weighs a gram.',
     needs: 'Its controller, clean room casing and a filter hood; kerf is voidable.',
-    unlocks: 'The starchip in the circuits chapter.',
+    unlocks: 'The starchip, further along this chapter.',
     automate: 'Parts by ME; dicing waste goes to a void.',
   }, [it(CLEAN)]),
   gear('LAUNCH', 'laser_sail_launcher', 'Laser Sail Launcher', ['SCFAB'], 8, 16.5, {

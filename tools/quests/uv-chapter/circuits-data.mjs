@@ -29,26 +29,13 @@ export const LINKS = [
 export const QUESTS = [
   // ------------------------------------------------------------------ the assembler and the ladder
   {
-    key: 'UC_ASM', kind: 'machine', title: 'UV Circuit Assembler', icon: 'gtceu:uv_circuit_assembler',
-    deps: ['START'], x: 2, y: 0,
-    teach: {
-      for: 'The &6UV Circuit Assembler&r is the first assembler that can build the circuits UV machines are made of.',
-      needs: 'UV components for its hull, the cleanroom you already run, and the ZPM circuits that feed it.',
-      unlocks: 'The wetware computer and mainframe on this row, and every controller of this era.',
-      automate: 'Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns.',
-    },
-    desc: [],
-    tasks: [it('gtceu:uv_circuit_assembler')],
-    rewards: [xp(100)],
-  },
-  {
     key: 'UC_WCOMP', kind: 'circuit', title: 'Wetware Computer', icon: 'gtceu:wetware_processor_computer',
-    deps: ['UC_ASM'], x: 4, y: 0,
+    deps: ['START'], x: 4, y: 0,
     teach: {
-      for: 'Neuro processing units on a larger board make the &6Wetware Processor Computer&r, the first UV circuit.',
-      needs: 'Several neuro processing units for each, the UV assembler, and the vat that grows them in the machines chapter.',
-      unlocks: 'UV hulls and the controllers of this era that ask for a circuit.',
-      automate: 'Neuro processing units come out of the vat by ME; let the assembler draw them on demand.',
+      for: 'The &6Wetware Processor Computer&r is the first UV circuit, and the assembly line is the only machine that builds it. It is made from wetware processor assemblies, which come from the ZPM assembler.',
+      needs: 'Several wetware processor assemblies, wetware boards, RAM and NOR chips, and an assembly line with ZPM hatches.',
+      unlocks: 'The wetware mainframe, and through it the UV assembler.',
+      automate: 'Assemblies come from the ZPM line by ME; the assembly line draws them on demand.',
     },
     desc: [],
     tasks: [it('gtceu:wetware_processor_computer')],
@@ -56,16 +43,55 @@ export const QUESTS = [
   },
   {
     key: 'UC_MAIN', kind: 'circuit', title: 'Wetware Mainframe', icon: 'gtceu:wetware_processor_mainframe',
-    deps: ['UC_WCOMP', 'UC_PCHIP'], x: 6, y: 0,
+    deps: ['UC_WCOMP'], x: 6, y: 0,
     teach: {
-      for: 'The &6Wetware Processor Mainframe&r is the biggest circuit UV builds, and the one the UHV hulls and the research stations lean on.',
-      needs: 'Wetware computers and photonic chips by the stack, and the UV assembler to put them together.',
-      unlocks: 'UV machine hulls and the hatches that open the gate to UHV.',
+      for: 'The &6Wetware Processor Mainframe&r is a UHV-tier circuit, and the UV assembler is built around it. It comes out of the assembly line, not out of a circuit assembler.',
+      needs: 'Wetware computers, tritanium frames and advanced SMD parts by the stack, and an assembly line with UV hatches. Photonic chips play no part in it.',
+      unlocks: 'The UV circuit assembler, and the UHV hulls after it.',
       automate: 'Make it from stocked parts; ME keeps the mainframes in a dedicated chest.',
     },
     desc: [],
     tasks: [it('gtceu:wetware_processor_mainframe')],
     rewards: [xp(180)],
+  },
+  {
+    key: 'UC_ASM', kind: 'machine', title: 'UV Circuit Assembler', icon: 'gtceu:uv_circuit_assembler',
+    deps: ['UC_MAIN'], x: 2, y: 0,
+    teach: {
+      for: 'The &6UV Circuit Assembler&r builds the circuits UV machines are made of, and it is the only place the wetware processor is made from Highly Advanced SoCs.',
+      needs: 'UV components for its hull, the cleanroom you already run, and a UHV-tier circuit: the Wetware Processor Mainframe, or a UHV universal circuit.',
+      unlocks: 'Wetware processors from Highly Advanced SoCs, and the circuits the controllers of this era ask for.',
+      automate: 'Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns.',
+    },
+    desc: [],
+    tasks: [it('gtceu:wetware_processor_mainframe'), it('gtceu:uv_circuit_assembler')],
+    rewards: [xp(100)],
+  },
+  {
+    key: 'UC_NBOULE', kind: 'process', title: 'Neutronium Boule', icon: 'gtceu:neutronium_boule',
+    deps: ['START'], x: 2, y: -1.5,
+    teach: {
+      for: 'Neutronium, silicon and gallium arsenide grow into a &6Neutronium Boule&r in a blast furnace under xenon. The cutter slices it into &6Neutronium Wafers&r.',
+      needs: 'Neutronium ingots, silicon blocks, xenon, a blast furnace that reaches the temperature, and a cutter with lubricant or water.',
+      unlocks: 'The Highly Advanced SoC wafer, and the neutronium wafer the Starchip is cut from.',
+      automate: 'The boule is slow and one boule yields a great many wafers. Keep one growing and stock the wafers by ME.',
+    },
+    desc: [],
+    tasks: [it('gtceu:neutronium_boule'), it('gtceu:neutronium_wafer')],
+    rewards: [xp(80)],
+  },
+  {
+    key: 'UC_HASOC', kind: 'wafer', title: 'Highly Advanced SoC', icon: 'gtceu:highly_advanced_soc_wafer',
+    deps: ['UC_NBOULE', 'UC_ASM'], x: 4, y: -1.5,
+    teach: {
+      for: 'A neutronium wafer under a black lens becomes the &6Highly Advanced SoC Wafer&r, and the cutter turns it into &6Highly Advanced SoCs&r.',
+      needs: 'A neutronium wafer, a black lens, a laser engraver, a cutter with lubricant or water, and a cleanroom.',
+      unlocks: 'Wetware processors in the UV assembler, with neuro processing units.',
+      automate: 'A wafer in, chips out. Send the chips on by ME to the UV assembler.',
+    },
+    desc: [],
+    tasks: [it('gtceu:highly_advanced_soc_wafer'), it('gtceu:highly_advanced_soc')],
+    rewards: [xp(100)],
   },
 
   // ------------------------------------------------------------------ light: the photonic chip
@@ -87,7 +113,7 @@ export const QUESTS = [
     deps: ['UC_XMASK'], x: 4, y: 1.5,
     teach: {
       for: 'A wafer coated in resist, exposed to the synchrotron through the mask and developed is a &6Patterned Wafer&r.',
-      needs: 'The Synchrotron from the machines chapter, a mask, and PMMA-coated wafers.',
+      needs: 'The Synchrotron from earlier in this chapter, a mask, and PMMA-coated wafers.',
       unlocks: 'The photonic chip.',
       automate: 'Coating and developing run in plain machines by ME; only the exposure waits for the beam.',
     },
@@ -101,7 +127,7 @@ export const QUESTS = [
     teach: {
       for: 'Cut from the patterned wafer, the &6Photonic Chip&r moves light instead of electrons and does the work of a wafer of ordinary logic.',
       needs: 'A patterned wafer, silicon nitride film and a cleanroom.',
-      unlocks: 'The wetware mainframe, and the starchip at the end of this row.',
+      unlocks: 'The starchip at the end of this row. No wetware circuit needs it.',
       automate: 'One wafer, many chips: keep a stock by ME so the assembler never waits.',
     },
     desc: [],
@@ -115,7 +141,7 @@ export const QUESTS = [
     deps: ['START'], x: 2, y: 3,
     teach: {
       for: 'The &6HPGe Crystal&r is germanium refined past thirteen nines. It is the detector eye that probes and the interferometer carry.',
-      needs: 'Germanium tetrachloride from the photonics line and the zone refining tower from the machines chapter.',
+      needs: 'Germanium tetrachloride from the photonics line and the zone refining tower from earlier in this chapter.',
       unlocks: 'The SNSPD array beside it and the detector parts of the Starshot.',
       automate: 'The tower is slow; keep its feed topped up by ME and stock the crystals.',
     },
@@ -143,7 +169,7 @@ export const QUESTS = [
     deps: ['START', 'UC_PCHIP', 'SNSPD'], x: 8, y: 3,
     teach: {
       for: 'A photonic chip, a diamond qubit, an americium source and a neutronium wafer become one &6Starchip&r. Mounted on a sail it is a probe about as heavy as a paperclip.',
-      needs: 'The Starchip Fab from the machines chapter, and every part on the light row above.',
+      needs: 'The Starchip Fab from earlier in this chapter, and every part on the light row above.',
       unlocks: 'The sailcraft, and with it the launch and the long coast to Proxima.',
       automate: 'The fab dices in batches and wastes only kerf. Send the chips on by ME to the sail line.',
     },

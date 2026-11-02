@@ -18,7 +18,7 @@ export const CHAPTER = {
   icon: 'grindless:pluto_kuiper_chart',
   autofocus: 'START',
   title: 'UV: Pluto and the Edge',
-  subtitle: ['Neptune, Pluto, the heliopause and a sail to the next star. The plants and circuits that get you there are in the chapters beside this one.'],
+  subtitle: ['Neptune, Pluto, the heliopause and a sail to the next star. The plants and circuits that get you there are in this chapter too.'],
 };
 
 export const LINKS = [];
@@ -30,7 +30,7 @@ export const QUESTS = [
     deps: ['X:78B5C3A48F753C53'], x: 0, y: 0,
     desc: [
       'The &6Pluto-Kuiper Chart&r points past Neptune, and the &6Multimessenger Catalogue&r points at the middle of the galaxy. UV goes after both.',
-      'Home first: the machines and circuits chapters build the plants, and this one records where they take you.',
+      'Home first: the machines and circuits build the plants, and this branch records where they take you.',
     ],
     tasks: [it('grindless:pluto_kuiper_chart'), it('grindless:multimessenger_catalogue')],
     rewards: [xp(50)],

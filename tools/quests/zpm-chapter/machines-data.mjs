@@ -53,7 +53,7 @@ export const QUESTS = [
   gear('FUEL', 'naquadah_fuel_works', 'Fuel Works', ['NAQD'], 4, 0, {
     for: 'The &6Naquadah Fuel Works&r turns naquadria into the fuel that the integration plants burn.',
     needs: 'The same containment casing as the refinery, plus its controller.',
-    unlocks: 'Fuel for the large reactors in the integration chapter.',
+    unlocks: 'Fuel for the large reactors later in this chapter.',
     automate: 'A fuel line off the refinery by pipe; buffer it in a tank so the reactors never starve.',
   }, [it('grindless:naquadria_containment_casing')]),
 
@@ -83,7 +83,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ wire and plasma
   gear('WIRE', 'naquadria_magnet_works', 'Magnet Works', ['START'], 2, 3, {
     for: 'The &6Naquadria Magnet Works&r winds the superconducting wire and insert the fusion hall and the large coils need.',
-    needs: 'Its controller, naquadria and the cryostat casing from the circuits chapter.',
+    needs: 'Its controller, naquadria and the cryostat casing from this chapter's circuits.',
     unlocks: 'Uranium rhodium dinaquadide wire, and the insert for the next hall.',
     automate: 'Slow and cold: keep the cryostat topped up and let it run beside the refinery.',
   }, [it('gtceu:uranium_rhodium_dinaquadide_single_wire')]),
@@ -101,7 +101,7 @@ export const QUESTS = [
   gear('GRAPH', 'methane_pyrolyser', 'Pyrolysis', ['START'], 2, 4.5, {
     for: 'The &6Methane Pyrolyser&r cracks methane into graphene and hydrogen, with the carbon coming out as a sheet.',
     needs: 'Its controller and methane from the gas network.',
-    unlocks: 'Graphene for the diamond lattice and for the circuits chapter.',
+    unlocks: 'Graphene for the diamond lattice and for the circuits further on.',
     automate: 'Methane by pipe; keep the hydrogen moving so it never blocks.',
   }, [it('gtceu:graphene_dust')]),
   gear('DIAM', 'diamond_lattice_fab', 'Diamond Lattice', ['GRAPH'], 4, 4.5, {
@@ -113,13 +113,13 @@ export const QUESTS = [
   gear('IMPL', 'ion_implanter', 'Ion Implanter', ['DIAM'], 6, 4.5, {
     for: 'The &6Ion Implanter&r fires single atoms into a wafer or plate and places them where a qubit has to sit.',
     needs: 'Its controller, a cleanroom and silicon-28 or doped diamond.',
-    unlocks: 'The donor qubit wafer and the NV diamond chip of the circuits chapter.',
+    unlocks: 'The donor qubit wafer and the NV diamond chip, further along.',
     automate: 'One batch at a time: feed by ME and queue the output.',
   }, [it('grindless:donor_qubit_wafer')]),
   gear('QUBIT', 'qubit_fab', 'Qubit Fab', ['IMPL'], 8, 4.5, {
     for: 'The &6Qubit Fab&r assembles qubits into an array under cryogenic conditions.',
     needs: 'Its controller and the &6Cryostat Casing&r.',
-    unlocks: 'The qubit array that the circuits chapter uses.',
+    unlocks: 'The qubit array that the circuits further on use.',
     automate: 'Keep the cryostat topped up and send the arrays on by ME.',
   }, [it('grindless:cryostat_casing')], 150),
 
@@ -181,7 +181,7 @@ export const QUESTS = [
   gear('HE3', 'isotope_column', 'Helium-3', ['SCOOP'], 4, 10.5, {
     for: 'The &6Isotope Column&r separates helium-3 from the gas the siphon brings up.',
     needs: 'Its controller and a stream of Saturn gas.',
-    unlocks: 'Helium-3 for the aneutronic route in the integration chapter and the cold of the cryostat.',
+    unlocks: 'Helium-3 for the aneutronic route later in this chapter and the cold of the cryostat.',
     automate: 'Run the column continuously; bucket or pipe the helium-3 off.',
   }, [it('gtceu:helium_3_bucket')]),
   gear('TITAN', 'entry_probe_bay', 'Titan', ['HE3'], 6, 10.5, {

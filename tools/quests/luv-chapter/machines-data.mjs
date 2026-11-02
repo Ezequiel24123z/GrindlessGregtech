@@ -176,7 +176,7 @@ export const QUESTS = [
     key: 'WAKEQ', title: 'Cleaner than Clean', icon: 'gtceu:uhpic_wafer', pkg: ['S03'],
     deps: ['WAKE'], x: 10, y: 7.5,
     desc: [
-      'The &6UHPIC Wafer&r is the purest slice of silicon the pack makes. Nothing on the ground grows one this clean, and the ZPM chips will be cut from it.',
+      'The &6UHPIC Wafer&r is the purest slice of silicon the pack makes. The wake shield grows it from less naquadah and indium phosphide per wafer than a cleanroom reactor needs, and the ZPM chips will be cut from it.',
     ],
     tasks: [it('gtceu:uhpic_wafer')],
     rewards: [xp(80)],
@@ -187,7 +187,7 @@ export const QUESTS = [
     teach: {
       for: 'With nothing stirring the melt, a crystal grows without flaws. The &6Zero-G Crystal Grower&r makes raw crystal chips every time instead of now and then.',
       needs: 'The same dopant GregTech asks for, and sapphire test masses cut from its own boules.',
-      unlocks: 'The crystal circuit chain in the circuits chapter, much faster. The test masses are for later; EMI says what for.',
+      unlocks: 'The crystal circuit chain, much faster. The test masses are for later; EMI says what for.',
       automate: 'One grower, one ME bus for dopant, and the chips arrive on their own.',
     },
     desc: [],
@@ -216,7 +216,7 @@ export const QUESTS = [
       'The &6HSS-S Drill Bit&r wears down a little with every bore, and the &6Anchor Harpoon&r stays in the rock until you pull it. Keep spares of both.',
     ],
     tasks: [it('grindless:hss_s_drill_bit'), it('grindless:anchor_harpoon')],
-    rewards: [xp(60), ri('grindless:anchor_harpoon', 2)],
+    rewards: [xp(60)],
   },
   {
     key: 'MOND', kind: 'machine', title: 'Mond', icon: 'gtceu:asteroid_processor', pkg: ['B1', 'B5'],
@@ -259,7 +259,7 @@ export const QUESTS = [
     teach: {
       for: 'In orbit, neurons grow in three dimensions without a scaffold. The &6Organoid Lab&r turns stem cells, growth medium and the ring\'s neurotrophic factor into a neural organoid.',
       needs: 'Stem cells from the biofoundry, and factor from the ring.',
-      unlocks: 'The neuro processing unit, in the circuits chapter. Nothing else makes one before ZPM.',
+      unlocks: 'The neuro processing unit, further along this chapter. Nothing else makes one before ZPM.',
       automate: 'Feed the lab by ME and let the organoids go straight to the assembler.',
     },
     desc: [],
@@ -286,7 +286,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it('gtceu:optical_miner'), it('grindless:capture_bag')],
-    rewards: [xp(100), ri('grindless:capture_bag', 1)],
+    rewards: [xp(100)],
   },
 
   // ------------------------------------------------------------------ Io and Io orbit
@@ -332,7 +332,7 @@ export const QUESTS = [
       "A &6Heat Exchanger Bundle&r erodes in hot sulfur, a little with every cycle. Swap it before it fails, not after.",
     ],
     tasks: [it('grindless:heat_exchanger_bundle')],
-    rewards: [xp(60), ri('grindless:heat_exchanger_bundle', 1)],
+    rewards: [xp(60)],
   },
   {
     key: 'TORUS', kind: 'machine', title: 'Riding the Torus', icon: 'gtceu:flux_tube_tether', pkg: ['B1', 'B7T'], slot: 'io-orbit',
@@ -413,7 +413,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it('gtceu:gravitational_wave_detector'), it('grindless:sapphire_test_mass', 4)],
-    rewards: [xp(150), ri('gtceu:data_orb', 2)],
+    rewards: [xp(150)],
   },
   {
     key: 'COIL', kind: 'machine', title: 'Coilgun', icon: 'gtceu:coilgun_launcher', pkg: ['B1', 'B9'],
