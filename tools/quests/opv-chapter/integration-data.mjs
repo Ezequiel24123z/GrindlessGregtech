@@ -110,8 +110,8 @@ export const QUESTS = [
     key: 'I_PAR', kind: 'process', title: 'Parallel Control', icon: 'gtceu:opv_parallel_hatch',
     deps: ['START'], x: 2, y: 8,
     teach: {
-      for: 'The &6OpV Parallel Hatch&r lets a machine run an enormous number of copies of one recipe at once, the widest hatch yet.',
-      needs: 'A machine with a parallel slot, and power for every copy: each pays its own EU/t.',
+      for: 'The &6Overpowered Parallel Control Hatch&r lets a machine that takes parallel hatches run up to 262,144 copies of one recipe at once, each at its own EU/t: the widest hatch yet.',
+      needs: 'An OpV hull, field generators, robot arms, sensors, OpV circuits and tetron arrays on the assembly line, cooled with superfluid helium-3 and researched on the Extreme hatch. Then power for every copy.',
       unlocks: 'The assembly line array at full width.',
       automate: 'Give the machine a bus wide enough for the copies it will run.',
     },

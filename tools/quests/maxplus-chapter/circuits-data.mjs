@@ -98,7 +98,7 @@ export const QUESTS = [
     'The last component: a MAX+ emitter, Kerr Field Coils, MAX field generators and a &6Condensate Field Cell&r. The cell is a five-step line that loads a niobium cavity with condensate in the refinery and seals it cold. The &6MAX+ Field Generator&r is what the big machines ask for most.',
   ], [it('grindless:condensate_field_cell'), it('grindless:maxplus_field_generator')], 250),
   q('CI_HATCH', 'step', 'MAX Hatches in Bulk', 'gtceu:max_energy_input_hatch_16a', ['CI_HULL'], 15.5, 4, null, [
-    'MAX+ adds a 1,024 A energy hatch, built on the MAX hull, and wireless energy hatches of 1,024 A and 4,096 A. Everything else takes GTM\'s &6MAX Energy Input Hatches&r, buses and fluid hatches in bulk. The wireless versions draw on the network instead, as the Integration section shows.',
+    'MAX+ adds a 1,024 A energy hatch, built on the MAX hull, and wireless energy hatches of 1,024 A and 4,096 A. Everything else takes GTM\'s &6MAX Energy Hatches&r, buses and fluid hatches in bulk. The wireless versions draw on the network instead, as the Integration section shows.',
   ], [it('gtceu:max_energy_input_hatch_16a'), it('gtceu:max_input_bus'), it('gtceu:max_output_bus'), it('gtceu:max_input_hatch_9x')], 150),
 ];
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

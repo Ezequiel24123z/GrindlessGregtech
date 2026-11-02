@@ -243,6 +243,7 @@ export const QUESTS = [
     deps: ['TI44', 'PHASE'], x: 20, y: 0,
     desc: [
       'The Matrioshka computing array puts the elevator log, the Vela glitch record, the titanium-44 map and the Cygnus radio record together into the &6Arm Chart&r: our arm of the galaxy, mapped toward the centre.',
+      'The glitch record is read on Ganymede, where the gravitational-wave array listens against the Vela glitch timing the observatory decodes.',
     ],
     tasks: [it('grindless:arm_chart')],
     rewards: [xp(300)],

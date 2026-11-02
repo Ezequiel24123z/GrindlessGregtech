@@ -73,7 +73,7 @@ export const QUESTS = [
 
   // ------------------------------------------------------------------ hull-side parts, hatches, assemblers
   q('COMP', 'step', 'OpV Components', 'gtceu:opv_electric_motor', ['C_L_HULL', 'DRIVE'], 4.5, 6, null, [
-    'The &6OpV Electric Motor&r runs on a superconducting winding in a cooled housing, and the &6OpV Electric Pump&r moves fluid with a travelling field. The piston and conveyor run on composite rods and lamina stacks, the robot arm turns on the harmonic drive, and the emitter, sensor and field generator close the set with the fluid regulator.',
+    'The &6OpV Electric Motor&r turns chain composite rods inside a chain field coil, a trained REBCO pancake wound with chain strand, and is charged with superfluid helium-3. The &6OpV Electric Pump&r spins a chain composite rotor behind superfluid helium-3 seals, and the conveyor drives a chain mesh belt. The piston runs on rods and lamina stacks, the robot arm turns on the harmonic drive, and the emitter and sensor carry the Th-229 lasing crystal and the Compton crystal on a cryo optical link. The field generator and the fluid regulator close the set.',
   ], [
     it('gtceu:opv_electric_motor'), it('gtceu:opv_electric_pump'), it('gtceu:opv_electric_piston'), it('gtceu:opv_conveyor_module'),
     it('gtceu:opv_robot_arm'), it('gtceu:opv_emitter'), it('gtceu:opv_field_generator'), it('gtceu:opv_fluid_regulator'),

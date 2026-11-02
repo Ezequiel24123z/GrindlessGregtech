@@ -111,7 +111,7 @@ export const QUESTS = [
     'The &6UXV Machine Hull&r is the first thing Vela\'s lasagna plate goes into, with the UXV casing, a UXV voltage coil, a Ga2O3 power die and a UXV sensor. The UXV hatches and buses are built on it.',
   ], [it('gtceu:uxv_machine_hull')], 200),
   q('COMP', 'step', 'UXV Components', 'gtceu:uxv_electric_motor', ['HULL'], 4.5, 11, null, [
-    'The &6UXV Electric Motor&r is wound with pasta strand round a meteorite-iron rotor, and the &6UXV Electric Pump&r pushes liquid metal with a moving field. The piston and the conveyor move by metals that change shape in a magnetic field, the robot arm turns on a gear with no backlash, and the field generator projects from a plasma ring that holds its own field.',
+    'The &6UXV Electric Motor&r is wound with pasta strand stators and metallic hydrogen windings round a meteorite-iron rotor, and the &6UXV Electric Pump&r pushes liquid metal with a moving field. The piston and the conveyor move by metals that change shape in a magnetic field, the robot arm turns on a gear with no backlash, and the field generator projects from a plasma ring that holds its own field.',
   ], [
     it('gtceu:uxv_electric_motor'), it('gtceu:uxv_electric_pump'), it('gtceu:uxv_electric_piston'), it('gtceu:uxv_conveyor_module'),
     it('gtceu:uxv_robot_arm'), it('gtceu:uxv_field_generator'),

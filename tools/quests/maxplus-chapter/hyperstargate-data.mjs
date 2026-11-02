@@ -175,7 +175,7 @@ export const QUESTS = [
     key: 'HG_STRUCT', kind: 'reading', title: 'The Structure', icon: 'grindless:hyperstargate_ring_block',
     deps: ['HG_IRIS', 'HG_IFACE', 'HG_LOCKED', 'HG_BASE'], x: 13, y: 5.5,
     desc: [
-      'The ring stands 41 by 43 by 9 at Sgr A* orbit: 151 ring blocks and 9 locked chevrons on the ring, with the iris, the base and 4 power units in the base row.',
+      'The ring stands 41 by 43 by 9 at Sgr A* orbit: 151 ring blocks and 9 locked chevrons on the ring. The base row holds the iris, the base, 4 power units and a 4,096 A wireless MAX+ hatch: the dial draws its power through that hatch from the network store, which only the capacitor banks make large enough.',
     ],
     tasks: [ck()],
     rewards: [xp(100)],
@@ -185,7 +185,7 @@ export const QUESTS = [
     deps: ['HG_STRUCT'], x: 14.5, y: 2,
     teach: {
       for: 'The &6Hyperstargate&r is the pack\'s last multiblock. It forms round a dial at Sgr A* orbit and opens a ring into the final dimension.',
-      needs: 'The controller recipe is crafted at the black hole orbit, from ring blocks, a controller crystal, a creative computation provider, MAX+ circuits and the interface. The structure then needs the ring, the iris, the base and four power units, with a horizon lock kept in the controller.',
+      needs: 'The controller recipe is crafted at the black hole orbit, from ring blocks, a controller crystal, a creative computation provider, MAX+ circuits and the interface. The structure then needs the ring, the iris, the base, four power units and the 4,096 A wireless hatch, with a horizon lock kept in the controller.',
       unlocks: 'The dial.',
       automate: 'Nothing here is a production line. Build it once and keep the banks charged.',
     },

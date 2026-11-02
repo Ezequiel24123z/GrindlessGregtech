@@ -142,8 +142,8 @@ export const QUESTS = [
     key: 'PAR', kind: 'process', title: 'Parallel Control', icon: 'gtceu:uxv_parallel_hatch',
     deps: ['START'], x: 2, y: 8,
     teach: {
-      for: 'The &6UXV Parallel Hatch&r lets a mega machine run an enormous number of copies of one recipe at once. It is the most expensive hatch of the era.',
-      needs: 'A machine with a parallel slot, and the power for every copy: each pays its own EU/t.',
+      for: 'The &6Extreme Parallel Control Hatch&r lets a machine that takes parallel hatches run up to 65,536 copies of one recipe at once, each at its own EU/t. It is the most expensive hatch of the era.',
+      needs: 'A UXV hull, UXV circuits, a field generator, an emitter, metallic hydrogen cable, RHEA plates and FFKM seals on the assembly line, researched on the Insane hatch. Then power for every copy.',
       unlocks: 'The stellar fractionation hall at full width.',
       automate: 'Give the machine a bus wide enough for the copies it will run.',
     },
@@ -183,13 +183,13 @@ export const QUESTS = [
     key: 'NETUXV', kind: 'process', title: 'The Network Goes UXV', icon: 'gtceu:uxv_wireless_energy_hatch',
     deps: ['CELL'], x: 4, y: 10,
     teach: {
-      for: 'Move your towers onto &6UXV SMES Cells&r and the wireless network carries UXV to every platform, Cygnus X-1, Vela and Cassiopeia A included.',
+      for: 'Move your towers onto &6UXV SMES Cells&r and the wireless network carries UXV to every platform, Cygnus X-1, Vela and Cassiopeia A included. The &6Pasta Strand Repeater&r, pasta strand wire on a pulsar-timed repeater and an MTJ die, links the wireless hatches and goes into the 2 A UXV dynamo hatch.',
       needs: 'One formed tower holding a UXV cell: the network runs at its strongest cell, so until then it stays at UIV.',
       unlocks: 'The wireless hatches at UXV.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
     desc: [],
-    tasks: [it('gtceu:uxv_wireless_energy_hatch'), it('gtceu:uxv_wireless_dynamo_hatch')],
+    tasks: [it('gtceu:uxv_wireless_energy_hatch'), it('gtceu:uxv_wireless_dynamo_hatch'), it('grindless:pasta_strand_repeater')],
     rewards: [xp(200)],
   },
   {
