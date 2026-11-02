@@ -3,7 +3,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "hv_age"
-	group: "4FEA27882E3DB25B"
+	group: "3F021F40CD26BF57"
 	icon: "gtceu:refinery"
 	id: "7CD2454BDDCF0DD6"
 	order_index: 3
@@ -540,7 +540,7 @@
 			dependencies: ["53D1CE971F63D842"]
 			description: [
 				"&6Nichrome&r needs more power than one HV energy hatch gives, so the blast furnace gets two, and the hot ingot goes through the freezer."
-				"EV turns it into coils: the regolith cell on the Moon and tungsten's furnace both want them."
+				"EV turns it into coils: the regolith cell and tungsten's furnace both want them."
 			]
 			icon: "gtceu:nichrome_ingot"
 			id: "70F4075BAF69DA99"
@@ -551,15 +551,15 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["24DEACCFA4DCD216"]
+			dependencies: ["24DEACCFA4DCD216", "2CD2C8EF5A408796"]
 			description: ["A &6Stainless Steel Drum&r holds a lot of fluid and keeps it when you pick it up. It's also the liner inside the rocket's overwrapped tanks, so make a few extra."]
 			icon: "gtceu:stainless_steel_drum"
 			id: "471A024EBFCA8459"
 			rewards: [{ id: "6707FD083533EF59", type: "xp", xp: 30 }]
 			tasks: [{ id: "336736F34B2A70B0", item: "gtceu:stainless_steel_drum", type: "item" }]
 			title: "GT Drums"
-			x: 10.0d
-			y: -3.0d
+			x: 8.0d
+			y: -6.0d
 		}
 		{
 			dependencies: ["53336232501835EE", "5B595A919C80BFC0"]
@@ -587,6 +587,20 @@
 			title: "Coil Chemical Plant"
 			x: 12.0d
 			y: 1.5d
+		}
+		{
+			dependencies: ["5615E54AF782990A"]
+			description: [
+				"The &6NanoMuscle Chestplate&r is eight carbon fibre plates around an &6Energy Crystal&r. It holds 6.4M EU."
+				"Charged, it lets you &6fly like in creative&r: 175 EU/t while flying, nothing on the ground, about 30 minutes per charge. It warns you at 10%. Recharge it in a charger or battery buffer. The advanced version adds the jetpack."
+			]
+			icon: "gtceu:nanomuscle_chestplate"
+			id: "3C71A9D5E04B8F26"
+			rewards: [{ id: "1F5A07C3B9E24D68", type: "xp", xp: 60 }]
+			tasks: [{ id: "6D2E8B4107A35C91", item: "gtceu:nanomuscle_chestplate", type: "item" }]
+			title: "NanoMuscle Suit"
+			x: 22.0d
+			y: -3.0d
 		}
 	]
 	subtitle: ["Crude oil becomes chemistry, and the chemistry becomes a rocket to the Moon."]
