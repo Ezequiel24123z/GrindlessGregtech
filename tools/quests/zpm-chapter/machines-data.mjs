@@ -146,7 +146,7 @@ export const QUESTS = [
     automate: 'It needs no tending. Collect the survey by ME when it finishes.',
   }, [it('grindless:photomultiplier_casing')]),
   prod('SURVEY', 'Solar Core Survey', 'grindless:solar_core_survey', ['NEUT'], 10, 6,
-    'The neutrino count, written up as a map of the sun\'s core, is what the &6Solar Core Survey&r is for: it is the proof of work the gate to UV asks for. It is made from the neutrino detector''s readings in the survey line, so keep the detector fed and running. Nothing else uses it, so make one and hand it in. Detector output reaches the line by ME, so the whole run can be left unattended.',
+    'The neutrino count, written up as a map of the sun\'s core, is what the &6Solar Core Survey&r is for: it is the proof of work the gate to UV asks for. It is made from the neutrino detector\'s readings in the survey line, so keep the detector fed and running. Nothing else uses it, so make one and hand it in. Detector output reaches the line by ME, so the whole run can be left unattended.',
     [it('grindless:solar_core_survey')], 120),
 
   // ------------------------------------------------------------------ Saturn

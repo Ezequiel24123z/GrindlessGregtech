@@ -140,7 +140,7 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'J_SIM', kind: 'step', title: 'Saturn''s Interior', icon: 'grindless:saturn_interior_model',
+    key: 'J_SIM', kind: 'step', title: 'Saturn\'s Interior', icon: 'grindless:saturn_interior_model',
     deps: ['J_CART'], x: 10, y: 0,
     desc: [
       'The rings ring like a bell when something hits them. Listen long enough and you get a &6Saturn Interior Model&r, and from it a &6Uranus Transfer Chart&r.',
