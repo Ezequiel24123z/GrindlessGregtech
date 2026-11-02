@@ -14,31 +14,15 @@ hash = "bdc77acda90cb38472bc6c2559b7e647439b49af77a7c67b8c601eaa8448aa8e"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/ev_age.snbt"
-hash = "eabef46c0169880d436370868de55f68068d1699a4bd94e18c5e245efe7f1f55"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/ev_circuits.snbt"
-hash = "9beb35ea6ba51814d95b74cf95e64e1e7b9d8759a78d0bc85e107ed4683d2beb"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/ev_machines.snbt"
-hash = "76698e7baae2cd11f7a160e067fdb9e8c397339a426e7fd5cd4e9cc792eb0f70"
+hash = "bc60ac70634eac8afa20b805cf574b3e396a14195ff10c4fc55c9b102de6c770"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/hv_age.snbt"
-hash = "ef775f61074756046356c32e9c4f103764e0a9b67de2068e19f79d216118a7f9"
+hash = "3d6f1a00afb682630c8473a8643d30c43072346e84443bcc3e912d35ed40930a"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/iv_age.snbt"
-hash = "2a0da910e77c7e8fc8fa06aa51bc4d48321bbad08a623a5c43cb5e760391a9e3"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/iv_circuits.snbt"
-hash = "5be9dcd46cfc246cd10305a489d59e55bcf4f4f8e4d610f8dc5c0d53752841b9"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/iv_machines.snbt"
-hash = "46a20c9f263ddbdc7a2ed2aba90eb3b61081cee024d09d4d2a44ba67e98c7a50"
+hash = "26f2809c06950fbd4225dde29c39ac4a4025e8af1be6cc4d319033f8f16f279b"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/luv_age.snbt"
@@ -54,7 +38,7 @@ hash = "1f955129301858f56ce160383a6aa134ebf65cb2f83671ce987bb4c6fd8a9446"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/lv_age.snbt"
-hash = "96474c0fb88f5b2a78589626554f6970cd76e411eb47711f175e953d87df9dd6"
+hash = "fc9c88ab9c521b954f5dc51578c8dcaaca9ef4d3513437c4550913e87d529c42"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/max_age.snbt"
@@ -86,7 +70,7 @@ hash = "54c067626457f71546152ccca8c5273d4cf153816054cefc60f5c4c246164e84"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
-hash = "31a735d289e81c0d9935d20722419c3f3ea67091beca5673ed28a93b5aa4a3d2"
+hash = "c4e3a3466d51ce27c1c38c72ac9313c5d7838c82723e7cc9da1e847451c3b92c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/opv_age.snbt"
@@ -174,7 +158,7 @@ hash = "a96c71823cb07d73b461b5f267741f28e97f09ecc599b9c1d7b80ed3481bf99d"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/steam_age.snbt"
-hash = "a2dfbefa1f8fac7bdd5029da66aa3d6999c4a677ad66abfe9e44e4704579ee57"
+hash = "8390aa2e6e63c97bbfe23905d30d2f10c3e1f75e2051fee17eba37f1c07c1647"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/storage.snbt"
@@ -186,51 +170,15 @@ hash = "0ee7b8c399b8327c36dce2359cccec2ddf82c7a4a52058049d618c4e9cbe19dc"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uev_age.snbt"
-hash = "e6250c2ebb7f62851a683afc79ab3f7a1c4bf5ef37f585a31a6b12d72b23014a"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uev_circuits.snbt"
-hash = "3d73663c4f0c1ee7a05c88499040817285932c51fef6ceb97b6d9de09059d195"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uev_integration.snbt"
-hash = "3f515b42af0342ad9df3b92ef25c1f5758eae52a02c1bd6a2c6e417a74a3da80"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uev_machines.snbt"
-hash = "a516364aea1f6297eac7cd7efed3bc7e717c5b1a8b05776c25ee602a1e9907ec"
+hash = "1bba695781e7bfd0d3460da26487f285a637944712f69365ae0ef3cf8a0d7529"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uhv_age.snbt"
-hash = "e02fafc0bed0ea35b5799006846ec2077602a68327e9a75b3dd7cf5a85cd1cf9"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uhv_circuits.snbt"
-hash = "fbd2b85597b0ab229e696ff5c3ea6dae2cb945388e079828535446cd8342f28c"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uhv_integration.snbt"
-hash = "7aa66159722f336e284f0fe21ebdff1835da51cf66139cec5a03400eacb7ebe2"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uhv_machines.snbt"
-hash = "ab39969b0d29a697eede9a33fb7e4f374e58c3b37169de2f142fa76ccde74e1c"
+hash = "6bfad8869dee1ddcba9154b9063bfd1989c07294b6423496b965b6753629e3cd"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uiv_age.snbt"
-hash = "86a12be8c0ccffad357ad3f026625e636a0a6b72bd91390302c72483b73e0344"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uiv_circuits.snbt"
-hash = "74155297f0349e82c51f48f3ce91c0d18d0c9b9d0f2775ba329ca56fce96c2a1"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uiv_integration.snbt"
-hash = "894469cef72fb33565ae9714de5845779984599c1e11a90c85ab8c9b19cbabc8"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uiv_machines.snbt"
-hash = "1f8e6fd34b5754614c918c8f042ddb4fd096b3260ef5b33d916cc4257aa1e09e"
+hash = "dc2bceb31bfe8bf562c05f6ffe7cf43817aa1d14a27c9a2f87e40e598af4dfc4"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uv_age.snbt"
