@@ -1208,7 +1208,7 @@ const cluster = (name, nums) => {
     const hi = Math.max(...ns.map((nd) => nd.y));
     const shift = cursor - lo;
     for (const nd of line(num, shift, x0)) out.push(nd);
-    cursor += hi - lo + 4;
+    cursor += hi - lo + 2.5;
   }
   return { name, nodes: out };
 };
