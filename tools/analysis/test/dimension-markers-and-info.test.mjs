@@ -50,17 +50,17 @@ test('no two items or blocks of ours share an English name', () => {
   for (const [k, v] of Object.entries(enUs())) {
     const m = /^(?:item|block)\.grindless\.([a-z0-9_]+)$/.exec(k);
     if (!m) continue;
-    if (!byName.has(v)) byName.set(v, []);
-    byName.get(v).push(m[1]);
+    if (!byName.has(v)) byName.set(v, new Set());
+    byName.get(v).add(m[1]);
   }
-  const dup = [...byName].filter(([, ids]) => ids.length > 1).map(([n, ids]) => `${n}: ${ids.join(', ')}`);
+  const dup = [...byName].filter(([, ids]) => ids.size > 1).map(([n, ids]) => [n, [...ids]]).map(([n, ids]) => `${n}: ${ids.join(', ')}`);
   assert.deepEqual(dup, [], 'give each id its own name');
 });
 
 test('the data-info key check finds a missing note and accepts a present one', () => {
   const recipes = [
-    { i: 'x/present', t: 'gtceu:fluorspar_kiln', j: { data: { grindless_fluorspar_kiln: 'hf_from_alkali_fluoride' } } },
-    { i: 'x/absent', t: 'gtceu:fluorspar_kiln', j: { data: { grindless_fluorspar_kiln: 'no_such_recipe_zz' } } },
+    { i: 'x/present',     t: 'gtceu:fluorspar_digestion', j: { data: { grindless_fluorspar_kiln: 'hf_from_alkali_fluoride' } } },
+        { i: 'x/absent', t: 'gtceu:fluorspar_digestion', j: { data: { grindless_fluorspar_kiln: 'no_such_recipe_zz' } } },
   ];
   const r = unresolvedDataInfoKeys({ packDir: PACK, recipes, lang: enUs() });
   assert.ok(r.evaluations >= 2 && r.errors === 0);
