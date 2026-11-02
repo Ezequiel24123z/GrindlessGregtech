@@ -138,7 +138,7 @@ test('rhenium: dust, ingot and the pellet come only from Barnard b rows, in orde
   assert.deepEqual(ids(by('electric_blast_furnace', 'rhenium_ingot').itemsOut), ['gtceu:rhenium_ingot']);
   assert.equal(by('electric_blast_furnace', 'rhenium_ingot').temp, 2700);
   assert.deepEqual(ids(by('electric_blast_furnace', 'rhenium_ingot').itemsIn), ['grindless:rhenium_pellet']);
-  for (const r of all().filter((x) => ids(x.itemsOut).some((i) => i.startsWith('gtceu:rhenium')))) assert.equal(r.site, undefined, r.name);
+  for (const r of all().filter((x) => ids(x.itemsOut).some((i) => i.startsWith('gtceu:rhenium')))) assert.equal(r.site, r.name === 'rhenium_ingot' ? undefined : 'barnard_b', r.name);
   // the electron beam consumes exactly what this chain ends in
   assert.match(JSON.stringify(table('electron_beam.json')), /gtceu:rhenium_ingot/);
 });

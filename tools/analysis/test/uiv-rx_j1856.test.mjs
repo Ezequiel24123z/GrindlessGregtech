@@ -60,7 +60,7 @@ test('names unique, EU/t and duration positive, circuits unique per type (0 only
 
 test('only the crust lift is locked to grindless:rx_j1856_orbit (site: true); the other rows run anywhere at UIV voltage', () => {
   for (const type of ['crust_lifting', 'neutron_drip_separation', 'neutronium_caging', 'r_process_decompression', 'decay_heat']) {
-    for (const r of T.types[type].recipes) assert.equal(r.site, true, `${type}/${r.name}`);
+    for (const r of T.types[type].recipes) assert.equal(r.site, type === 'crust_lifting' ? true : undefined, `${type}/${r.name}`); // only the crust lift uses the place
   }
   for (const r of T.types.assembler.recipes) assert.ok(!r.site, r.name);
   assert.match(server, /recipe\.dimension\(RX\.site/);
