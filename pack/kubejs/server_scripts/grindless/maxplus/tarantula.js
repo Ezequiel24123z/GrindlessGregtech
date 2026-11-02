@@ -193,7 +193,7 @@
       ROWS.forEach(function (r) { addRow(event, r) })
       COOLS.forEach(function (c) { addCool(event, c) })
       CONTROLLERS.forEach(function (c) {
-        var items = ['1x ' + HULL, '2x ' + c.casing, '8x grindless:horizon_processor', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
+        var items = ['1x ' + HULL, '2x ' + c.casing, '8x #gtceu:circuits/maxplus', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
         addAssemblyLine(event, c.name, c, items, [[KERR, 2000]], c.machine, c.research, 64, 4800)
       })
       console.info(LOG + (ROWS.length + COOLS.length + CONTROLLERS.length) + ' rows; skipped ' + MT.skipped.length)

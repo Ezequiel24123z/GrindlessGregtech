@@ -142,7 +142,7 @@
       ROWS.forEach(function (r) { addRow(event, r) })
       FORGE.forEach(function (r) { addRow(event, r) })
       var c = CONTROLLER
-      var items = ['1x ' + HULL, '2x ' + c.casing, '8x grindless:horizon_processor', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
+      var items = ['1x ' + HULL, '2x ' + c.casing, '8x #gtceu:circuits/maxplus', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
       addAssemblyLine(event, 'blueshift_forge', c, items, [[KERR, 2000]], c.machine, c.research, 64, 4800)
       console.info(LOG + (ROWS.length + FORGE.length + 1) + ' rows; skipped ' + MB.skipped.length)
     } catch (e) {
