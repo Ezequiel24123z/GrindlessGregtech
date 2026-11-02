@@ -140,7 +140,7 @@ test('allowlists: the rover bay, greenhouse, plant and vat run only on Proxima b
   for (const r of rows()) {
     const d = dump(`grindless:${r.type}/${r.name}`);
     const m = Object.values(MACHINES).find((x) => x[1] === r.type);
-    const OPEN = ['extremophile', 'pigment', 'radioprotectant', 'infrared_pigment', 'chitosan', 'lysate'];
+    const OPEN = ['extremophile', 'pigment', 'radioprotectant', 'infrared_pigment', 'chitosan', 'lysate', 'receive', 'isolate', 'transplanted_minimal_cell'];
     if (!m || OPEN.includes(r.name)) {
       assert.equal(r.site, undefined, r.name);
       assert.deepEqual(dimsOf(d), [], r.name);
