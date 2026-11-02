@@ -1,3 +1,4 @@
+// priority: -10336
 // Gregtech Grindless - T1 fixture of the per-team wireless network (B13-WTEAM, #235; TEST-ONLY overlay: copied over the instance on the test
 // PC, never shipped with the pack): server_scripts/grindless/lib/teams.js, lib/wireless_registry.js and lv/wireless_energy.js, against the
 // real FTB Teams and FTB Chunks of the pack, and GTM's covers and hatches.
