@@ -82,7 +82,7 @@
       } else {
         list.add(Text.translate('grindless.machine.horizon_capacitor_bank.capacitors', String(info.capacitors), W.fmt(info.capacity)))
       }
-      var st = W.status(level.getServer())
+      var st = W.status(level.getServer(), typeof W.teamAt === 'function' ? W.teamAt(level, controller.getPos()) : undefined)
       list.add(Text.translate('grindless.machine.horizon_capacitor_bank.network', String(st.banks), W.fmt(st.bankCapacity), W.fmt(st.stored)))
     } catch (e) {
       // display only
