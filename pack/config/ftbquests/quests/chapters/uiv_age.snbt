@@ -181,8 +181,8 @@
 				{ id: "3B9F051A93467905", item: "grindless:superheavy_census_ii", type: "item" }
 			]
 			title: "Census II"
-			x: 20.0d
-			y: 2.0d
+			x: 35.0d
+			y: 9.5d
 		}
 		{
 			dependencies: ["1A781FD07AF49721"]
@@ -192,8 +192,8 @@
 			rewards: [{ id: "789CAAB84BD0C8B7", type: "xp", xp: 200 }]
 			tasks: [{ id: "5A3A79B88B9907F6", item: "grindless:element_120_recoil", type: "item" }]
 			title: "Element 120"
-			x: 17.5d
-			y: 2.0d
+			x: 22.0d
+			y: 9.5d
 		}
 		{
 			dependencies: ["11F139AEE6C06EAA"]
@@ -337,7 +337,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["162EE3C9E5DE3F97"]
+			dependencies: ["162EE3C9E5DE3F97", "7722F5C4A39F92D7"]
 			description: ["Put a neutronium pellet, Census II, the equation of state chart, a half-sled and four UIV circuits of any kind in the gate's store. The hold in the next quest needs all of them at once and uses up the pellet."]
 			icon: "grindless:neutronium_pellet"
 			id: "1724E39CDD53C2A2"
@@ -428,7 +428,7 @@
 			y: 17.5d
 		}
 		{
-			dependencies: ["17C0F46C21B9CD13"]
+			dependencies: ["54AF39C42293C4E7"]
 			description: ["The &6UIV Energy Hatch&r and &6UIV Dynamo Hatch&r are assembly line recipes on two UIV hulls, with metallic hydrogen cable, RHEA plates and FFKM seals. &6Metallic Hydrogen Single Cable&r carries the power. Two UIV machine hulls, three metallic hydrogen cables, six RHEA plates, six FFKM seals, three UIV circuits of any kind, three UIV sensors and a UIV motor. Every UIV machine that takes power from a hatch. Craft hatches and cable by ME in small batches; each machine takes one."]
 			icon: "gtceu:uiv_energy_input_hatch"
 			id: "3D4BC3A7590B186D"
@@ -440,7 +440,7 @@
 			]
 			title: "UIV Hatches and Cable"
 			x: 25.0d
-			y: 16.0d
+			y: 19.0d
 		}
 		{
 			dependencies: ["32309B41A96F01BE"]
@@ -1194,7 +1194,7 @@
 			y: 27.25d
 		}
 		{
-			dependencies: ["57862F697D22D7F2"]
+			dependencies: ["57862F697D22D7F2", "54AF39C42293C4E7"]
 			description: ["The &6Mk5 Fusion Reactor&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches. Two UIV hulls, UIV components, UIV circuits, the UIV fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches. The three polarised burns, and the direct energy converter that turns plasma into power. Build the fuel plant before you light the ring; helium-3 and protons return to their lines."]
 			icon: "gtceu:uiv_fusion_reactor"
 			id: "72D797E3DDE7ED0E"
@@ -1207,7 +1207,7 @@
 				{ id: "7CDEE0EEBF355CAF", item: "grindless:metallic_hydrogen_coil_block", type: "item" }
 			]
 			title: "Mk5 Fusion Reactor"
-			x: 10.5d
+			x: 15.5d
 			y: 25.5d
 		}
 		{

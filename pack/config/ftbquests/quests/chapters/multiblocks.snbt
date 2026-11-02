@@ -4544,6 +4544,17 @@
 			y: 93.0d
 		}
 		{
+			icon: "gtceu:polarized_fusion_stellarator"
+			id: "6BC79FD06866A612"
+			rewards: [{ id: "2D5C59E432386E61", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "MAX+, Grindless"
+			tasks: [{ id: "5DBC4FD9E85F4F06", item: "gtceu:polarized_fusion_stellarator", type: "item" }]
+			x: 6.0d
+			y: 93.0d
+		}
+		{
 			icon: "gtceu:primordial_fusion_torus"
 			id: "1D386ECAB8E03B5D"
 			rewards: [{ id: "3BE3AC1D229566C7", type: "xp", xp: 10 }]
@@ -4551,7 +4562,7 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "6F3A9890DB8AB138", item: "gtceu:primordial_fusion_torus", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 93.0d
 		}
 		{
@@ -4562,7 +4573,7 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "49CDDB10D3086282", item: "gtceu:pristine_gas_works", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 93.0d
 		}
 		{
@@ -4573,7 +4584,7 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "7FAD1E7064DF88C1", item: "gtceu:tarantula_stellar_lift", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 93.0d
 		}
 		{
@@ -4584,7 +4595,7 @@
 			size: 1.5d
 			subtitle: "MAX+, Grindless"
 			tasks: [{ id: "39D28D4CC856C404", item: "gtceu:void_crystal_fab", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 93.0d
 		}
 	]

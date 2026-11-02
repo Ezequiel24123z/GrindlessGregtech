@@ -2023,6 +2023,14 @@
     0
    ]
   },
+  "gtceu:polarized_fusion": {
+   "io": [
+    5,
+    0,
+    1,
+    2
+   ]
+  },
   "gtceu:polarizer": {
    "io": [
     1,
@@ -10055,6 +10063,7 @@
   "gtceu:plasma_quench",
   "gtceu:plume_sampling",
   "gtceu:polar_cap_tapping",
+  "gtceu:polarized_fusion",
   "gtceu:polarizer",
   "gtceu:polymer_works",
   "gtceu:polymerizer",
