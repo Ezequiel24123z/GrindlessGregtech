@@ -1549,9 +1549,11 @@
       "exceptRecipes": [
         "grindless:ergosphere_probing/sled_hull",
         "grindless:ergosphere_probing/split_sled",
-        "grindless:ergosphere_probing/refit_sled"
+        "grindless:ergosphere_probing/refit_sled",
+        "grindless:penrose_extraction/payload_penrose"
       ],
-      "package": "B4"
+      "package": "B4",
+      "note": "payload_penrose is MAX's older-machine row at Sgr A* orbit (max.json site-cygnus)."
     },
     {
       "id": "gate-uxv-casing",
