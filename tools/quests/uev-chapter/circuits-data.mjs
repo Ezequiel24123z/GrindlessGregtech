@@ -50,7 +50,7 @@ export const QUESTS = [
   ], 100),
   q('HATCH', 'step', 'UEV Hatches', 'gtceu:uev_energy_input_hatch', ['PARTS'], 7, -5, {
     for: 'The &6UEV Energy Input Hatch&r is an assembly line recipe on the UEV hull: it feeds a UEV machine its power.',
-    needs: 'A UEV machine hull, UV voltage coils, UEV field generators, UEV circuits and helium plasma.',
+    needs: 'A UEV machine hull, lanthanum superhydride cable, Faraday isolators, an ULE cavity, UV voltage coils, three UEV field generators, UEV circuits and helium plasma.',
     unlocks: 'Every UEV machine that takes power from a hatch.',
     automate: 'Craft a few by ME; each machine takes one.',
   }, [it('gtceu:uev_energy_input_hatch')], 100),
