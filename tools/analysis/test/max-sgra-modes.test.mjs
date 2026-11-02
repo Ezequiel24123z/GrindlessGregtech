@@ -51,7 +51,8 @@ test('circuits: the contract numbers, each taken once in its type', () => {
 });
 
 test('every Sgr A* row carries the string site; the home rows carry none', () => {
-  for (const r of [...L16, row('matrioshka.json', 'droplet_radiator_assembly', 'shell_droplet_radiator'), row('cygnus.json', 'penrose_extraction', 'payload_penrose'),
+  assert.equal(row('matrioshka.json', 'droplet_radiator_assembly', 'shell_droplet_radiator').site, undefined);
+  for (const r of [...L16, row('cygnus.json', 'penrose_extraction', 'payload_penrose'),
     row('sirius.json', 'degenerate_harvesting', 'degenerate_slug')]) {
     assert.equal(r.site, SITE, r.name);
   }

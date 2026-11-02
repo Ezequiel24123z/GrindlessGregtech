@@ -94,7 +94,7 @@ test('every row is Vela-locked (OpV-A0\'s, MAX-A0\'s and XP-A1\'s rows SGR-locke
     assert.ok(JSON.stringify(find(`grindless:${r.type}/${r.name}`).j.recipeConditions || []).includes(site(r)), `${r.name} carries the dimension lock`);
   }
   const c = rec('neutronium_caging', 'cage_part_pressing');
-  assert.deepEqual([c.circuit, c.site, c.eut, c.duration], [0, 'grindless:rx_j1856_orbit', 31457280, 2400]);
+  assert.deepEqual([c.circuit, c.site, c.eut, c.duration], [0, undefined, 31457280, 2400]);
   assert.deepEqual(ids(c.itemsIn), [['grindless:neutronium_pellet', 1], ['grindless:mh_winding', 1]]);
   assert.deepEqual(ids(c.itemsOut), [['grindless:cage_part', 1]]);
   assert.ok(find('grindless:neutronium_caging/cage_part_pressing'));
@@ -152,7 +152,7 @@ test('older rows: DSN circuit 6, Ganymede GW circuit 3, decompressor circuit 3 (
   const d = JSON.parse(fs.readFileSync(path.join(pack, 'kubejs', 'data', 'grindless', 'tables', 'rx_j1856.json'), 'utf8')).types.r_process_decompression.recipes;
   assert.deepEqual(d.map((r) => r.circuit), [1, 2, 3]);
   const g = d[2];
-  assert.deepEqual([g.name, g.eut, g.duration, g.site], ['gnocchi_decompression', 31457280, 1600, true]);
+  assert.deepEqual([g.name, g.eut, g.duration, g.site], ['gnocchi_decompression', 31457280, 1600, undefined]);
   assert.deepEqual(g.itemsIn, [{ id: 'grindless:gnocchi_fragment', count: 1 }]);
   assert.deepEqual(g.itemsOut.map((x) => [x.id, x.count]), [['grindless:r_process_ash', 2], ['grindless:fission_fragments', 1]]);
   assert.equal(g.fluidsIn[0].amount, 4000);
