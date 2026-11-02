@@ -274,8 +274,7 @@
       "recipes": [
         {
           "_why": "machine 16's cage part: UIV's cage machine closes a pellet in an mh winding (no circuit: its circuits 1 and 2 are taken)",
-          "name": "cage_part_pressing", "circuit": 0, "eut": 31457280, "duration": 2400, "site": "grindless:rx_j1856_orbit",
-          "itemsIn": [
+          "name": "cage_part_pressing", "circuit": 0, "eut": 31457280, "duration": 2400, "itemsIn": [
             { "id": "grindless:neutronium_pellet", "count": 1 },
             { "id": "grindless:mh_winding", "count": 1 }
           ],

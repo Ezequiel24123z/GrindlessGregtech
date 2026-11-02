@@ -136,11 +136,12 @@ test('F1\'s casings: one assembler recipe each, 2 a craft, the only maker, so al
   for (const m of Object.values(PL.machines)) assert.ok(['grindless:bsl4_casing', 'grindless:hangar_casing'].includes(m.casing), m.name);
 });
 
-test('allowlists: the rover bay, greenhouse, plant and vat run only on Proxima b; the receiving facility only on Earth; GTM rows anywhere', () => {
+test('allowlists: the rover bay, greenhouse, plant and vat run only on Proxima b; the receiving facility on Earth and the rows that need no place run anywhere', () => {
   for (const r of rows()) {
     const d = dump(`grindless:${r.type}/${r.name}`);
     const m = Object.values(MACHINES).find((x) => x[1] === r.type);
-    if (!m) {
+    const OPEN = ['extremophile', 'pigment', 'radioprotectant', 'infrared_pigment', 'chitosan', 'lysate'];
+    if (!m || OPEN.includes(r.name)) {
       assert.equal(r.site, undefined, r.name);
       assert.deepEqual(dimsOf(d), [], r.name);
       continue;

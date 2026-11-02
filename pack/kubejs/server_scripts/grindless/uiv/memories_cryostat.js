@@ -183,7 +183,7 @@
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
       b.itemInputs(HULL)
       b.itemInputs('2x ' + d.part)
-      b.itemInputs('2x ' + COMPUTER)
+      b.itemInputs('2x #gtceu:circuits/uev')
       // UEV circuits: these machines make the optical mainframe's parts, and the mainframe is the first UIV circuit
       b.itemInputs('4x #gtceu:circuits/uev')
       d.domain.forEach(function (s) { b.itemInputs(s) })

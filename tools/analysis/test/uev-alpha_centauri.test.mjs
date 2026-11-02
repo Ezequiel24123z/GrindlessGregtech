@@ -44,7 +44,10 @@ test('every recipe has a unique name, positive EU/t and duration; circuits are u
 });
 
 test('the dimension allowlist: the three own types are flagged and the script applies the Alpha Centauri orbit', () => {
-  for (const type of OWN_TYPES) assert.equal(T.types[type].dimension, true, type);
+  for (const type of ['nebula_collection', 'pulsar_timing']) assert.equal(T.types[type].dimension, true, type);
+  // a recipe keeps the orbit only when it uses the place: the dust lab is open and two pulsar rows opt out with dimension false
+  assert.ok(!T.types.interstellar_dust_analysis.dimension);
+  assert.deepEqual(mine.filter((r) => r.dimension === false).map((r) => `${r.type}/${r.name}`).sort(), ['pulsar_timing/pulsar_navigation_chart', 'pulsar_timing/repeater_discipline']);
   for (const [type, t] of Object.entries(T.types)) if (!OWN_TYPES.includes(type)) assert.ok(!t.dimension, `${type} is a plain GTM type`);
   assert.match(server, /'grindless:alpha_centauri_orbit'/);
   assert.match(server, /\.dimension\(SITE\)/);

@@ -48,7 +48,7 @@
   var UEV_HOLD = { name: 'hold', circuit: 3, eut: 134217728, duration: 1200, site: 'sirius_b_orbit',
     itemsIn: [],
     kept: [{ id: 'grindless:tennessine_sample', count: 1 }, { id: 'grindless:degenerate_pellet', count: 1 },
-      { id: 'grindless:degenerate_eos_model', count: 1 }, { id: 'gtnn:optical_computer', count: 4 }],
+      { id: 'grindless:degenerate_eos_model', count: 1 }, { id: '#gtceu:circuits/uev', count: 4 }],
     itemsOut: [] }
   var VA_UV = 491520
   var VA_UHV = 1966080

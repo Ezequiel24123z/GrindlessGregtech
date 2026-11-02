@@ -138,7 +138,7 @@ test('the Mercury orbit route: IV\'s Hermean seed, only in Mercury orbit, the sw
   assert.deepEqual(r.G.uhvTravel.done, ['grindless:chemical_reactor/hermean_quantum_seed_orbit']);
   const seed = r.built.find((b) => b.id === 'grindless:hermean_quantum_seed_orbit');
   assert.equal(seed.type, 'gtceu:chemical_reactor');
-  assert.deepEqual(calls(seed, 'dimension'), [['gcyr:mercury_orbit']]);
+  assert.deepEqual(calls(seed, 'dimension'), [], 'the seed needs no place');
   assert.deepEqual(calls(seed, 'itemInputs'), [['#forge:ender_pearls']]);
   assert.deepEqual(calls(seed, 'notConsumable'), [['grindless:swarm_segment']]);
   assert.deepEqual(calls(seed, 'inputFluids'), [[{ fluid: 'gtceu:helium_3', amount: 250 }]]);

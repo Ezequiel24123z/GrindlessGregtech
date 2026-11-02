@@ -35,7 +35,9 @@ test('names unique per type, EU/t and duration positive, circuits unique per typ
 });
 
 test('dimension allowlist: every row is Barnard b only, and the server script locks it with G.places', () => {
-  for (const r of all()) assert.equal(r.site, 'barnard_b', `${r.type}/${r.name}`);
+  // only the rows that use the place keep it: the carbonyl bloom and the rhenium chain are made anywhere
+  const OPEN = ['bloom_carbonyl', 'rhenium_pellet', 'rhenium_ingot'];
+  for (const r of all()) assert.equal(r.site, OPEN.includes(r.name) ? undefined : 'barnard_b', `${r.type}/${r.name}`);
   const srv = read('server_scripts', 'grindless', 'uev', 'barnard.js');
   assert.match(srv, /G\.places\.allow\(recipe, rec\.site\)/);
   assert.match(srv, /SITES = \['barnard_b'\]/);
@@ -136,7 +138,7 @@ test('rhenium: dust, ingot and the pellet come only from Barnard b rows, in orde
   assert.deepEqual(ids(by('electric_blast_furnace', 'rhenium_ingot').itemsOut), ['gtceu:rhenium_ingot']);
   assert.equal(by('electric_blast_furnace', 'rhenium_ingot').temp, 2700);
   assert.deepEqual(ids(by('electric_blast_furnace', 'rhenium_ingot').itemsIn), ['grindless:rhenium_pellet']);
-  for (const r of all().filter((x) => ids(x.itemsOut).some((i) => i.startsWith('gtceu:rhenium')))) assert.equal(r.site, 'barnard_b', r.name);
+  for (const r of all().filter((x) => ids(x.itemsOut).some((i) => i.startsWith('gtceu:rhenium')))) assert.equal(r.site, r.name === 'rhenium_ingot' ? undefined : 'barnard_b', r.name);
   // the electron beam consumes exactly what this chain ends in
   assert.match(JSON.stringify(table('electron_beam.json')), /gtceu:rhenium_ingot/);
 });

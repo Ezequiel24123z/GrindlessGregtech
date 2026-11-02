@@ -12,8 +12,7 @@
           "itemsOut": [ { "id": "grindless:kerr_probe_data", "count": 1 } ]
         },
         {
-          "name": "split_sled", "circuit": 2, "eut": 31457280, "duration": 1200, "site": true,
-          "_why": "UIV-B4 line 35: a sled hull is loaded with a charge and a compacted waste canister as ballast; the Penrose engine splits the charge in flight.",
+          "name": "split_sled", "circuit": 2, "eut": 31457280, "duration": 1200, "_why": "UIV-B4 line 35: a sled hull is loaded with a charge and a compacted waste canister as ballast; the Penrose engine splits the charge in flight.",
           "itemsIn": [
             { "id": "grindless:compacted_waste_canister", "count": 1 },
             { "id": "grindless:sled_charge", "count": 1 },
@@ -22,8 +21,7 @@
           "itemsOut": [ { "id": "grindless:split_charge_sled", "count": 1 } ]
         },
         {
-          "name": "refit_sled", "circuit": 3, "eut": 31457280, "duration": 800, "site": true,
-          "_why": "UIV-B4 line 35, the refit loop: the half-sled the engine recovers is reloaded with a fresh canister and charge. The hull is reused; only the charge and the ballast are new.",
+          "name": "refit_sled", "circuit": 3, "eut": 31457280, "duration": 800, "_why": "UIV-B4 line 35, the refit loop: the half-sled the engine recovers is reloaded with a fresh canister and charge. The hull is reused; only the charge and the ballast are new.",
           "itemsIn": [
             { "id": "grindless:recovered_half_sled", "count": 1 },
             { "id": "grindless:compacted_waste_canister", "count": 1 },
@@ -32,8 +30,7 @@
           "itemsOut": [ { "id": "grindless:split_charge_sled", "count": 1 } ]
         },
         {
-          "name": "sled_hull", "circuit": 4, "eut": 7864320, "duration": 400, "site": true,
-          "_why": "UIV-B4 line 35: the sled hull, plated on the bay's rail (a far-machine row: a plain assembler row would fall under the C-COMPLEX floor). The plates are carried out; nothing here is gathered.",
+          "name": "sled_hull", "circuit": 4, "eut": 7864320, "duration": 400, "_why": "UIV-B4 line 35: the sled hull, plated on the bay's rail (a far-machine row: a plain assembler row would fall under the C-COMPLEX floor). The plates are carried out; nothing here is gathered.",
           "itemsIn": [
             { "id": "gtceu:rhea_plate", "count": 4 },
             { "id": "gtceu:tungsten_steel_plate", "count": 2 }
