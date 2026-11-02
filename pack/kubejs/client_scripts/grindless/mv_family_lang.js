@@ -23,7 +23,7 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.polysilicon.1', 'Melted into every silicon boule in the electric blast furnace.')
     add('material.gtceu.crude_trichlorosilane', 'Crude Trichlorosilane')
     add('material.gtceu.trichlorosilane', 'Trichlorosilane')
-    add('material.gtceu.silicon_tetrachloride_bottoms', 'Silicon Tetrachloride Bottoms')
+    add('material.gtceu.siemens_feed', 'Siemens Feed Gas')
     add('tooltip.grindless.vanadium_steel_drill_bit', 'Wears out by chance: about 1% of the runs, 0.5% with drilling fluid. Only the MV Vein Drill takes it.')
 })
 
