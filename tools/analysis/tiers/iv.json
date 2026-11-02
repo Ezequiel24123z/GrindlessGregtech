@@ -895,7 +895,7 @@
     { "id": "bit-tungsten-steel", "label": "Tungsten steel drill bit (IV lathe: the IV drills' bit)", "item": "grindless:tungsten_steel_drill_bit" },
 
     { "id": "naquadah-with-rocket", "label": "Raw naquadah (one trip to Venus)", "item": "gtceu:raw_naquadah" },
-    { "id": "naquadah-without-venus", "label": "Without the trip to Venus there's no naquadah (no End vein, no bee)", "item": "gtceu:raw_naquadah", "without": ["synthetic:inner-trip"], "expect": "unreachable" },
+    { "id": "naquadah-without-venus", "label": "Without the trip to Venus there's no naquadah (no End vein)", "item": "gtceu:raw_naquadah", "without": ["synthetic:inner-trip"], "expect": "unreachable" },
     { "id": "drill-pressurized", "label": "Pressurized vein drill (ours, Venus and Mars)", "item": "gtceu:pressurized_vein_drill" },
     { "id": "drill-pressurized-formed", "label": "Pressurized drill formed (Venusian regolith pad)", "item": "m:gtceu:pressurized_vein_drill" },
     { "id": "recipe-pressurized-naquadah", "label": "Pressurized drill: Venus's naquadah vein (distilled water -> steam)", "kind": "recipe", "recipe": "grindless:vein_drilling/iv/pressurized_naquadah_venus_tungsten_steel" },
@@ -959,7 +959,7 @@
     { "id": "naquadah-plant", "label": "Naquadah plant (ours, IV-B3: IV hull, IV chemical reactor, mixer and centrifuge, IV pumps, IV circuits)", "item": "gtceu:naquadah_plant" },
     { "id": "naquadah-plant-formed", "label": "Naquadah plant formed (two EV hatches give IV voltage before Mercury)", "item": "m:gtceu:naquadah_plant" },
     { "id": "recipe-naquadah-plant", "label": "Naquadah plant circuit 1: Venus's naquadah oxide -> naquadah dust (GT--'s line in one pass, the Pu-Be source holding the neutron window)", "kind": "recipe", "recipe": "grindless:naquadah_refining/naquadah" },
-    { "id": "naquadah-dust-only-plant", "label": "Naquadah dust only comes from the naquadah plant (GT--'s neutron activator is LuV; no bee, no End vein)", "item": "gtceu:naquadah_dust", "without": ["operate:gtceu:naquadah_plant*"], "expect": "unreachable" },
+    { "id": "naquadah-dust-only-plant", "label": "Naquadah dust only comes from the naquadah plant (GT--'s neutron activator is LuV; no End vein)", "item": "gtceu:naquadah_dust", "without": ["operate:gtceu:naquadah_plant*"], "expect": "unreachable" },
     { "id": "naquadah-dust-without-venus", "label": "Without the trip to Venus there's no naquadah dust", "item": "gtceu:naquadah_dust", "without": ["synthetic:inner-trip"], "expect": "unreachable" },
     { "id": "neutron-activator-not-in-iv", "label": "GT--'s neutron activator waits for LuV: its two quark cores are precision assembly at 30,720 EU/t, which only GCYM's large assembler runs, on exactly one energy hatch (IV's naquadah comes from IV-B3's plant)", "item": "gtnn:neutron_activator", "expect": "unreachable" },
     { "id": "naquadah-mode2-on-iv-hatches", "label": "LuV-A2's mode 2 runs once IV hatches exist: two IV hatches give the naquadah plant LuV voltage (30,720 EU/t)", "kind": "recipe", "recipe": "grindless:naquadah_refining/enriched_naquadah", "package": "A2" },
@@ -974,10 +974,10 @@
     { "id": "site-end-leach", "label": "Site: every recipe of the leach field only runs in the End", "kind": "site", "types": ["gtceu:in_situ_leaching"], "dimensions": ["minecraft:the_end"] },
     { "id": "site-moon-iv", "label": "Site: the tritium removal facility only runs on the Moon", "kind": "site", "types": ["gtceu:detritiation"], "dimensions": ["gcyr:luna"] },
     { "id": "site-venus-machines", "label": "Site machines: every recipe of the Venus heat engine and the acid works only runs on Venus", "kind": "site", "types": ["gtceu:venus_heat", "gtceu:acid_cracking"], "dimensions": ["gcyr:venus"] },
-    { "id": "site-venus-recipes", "label": "Site: the pressurized drill's Venus vein, the Venus gas collector recipes, the regolith hammer and the Venusian seed only run on Venus", "kind": "site", "recipe": ["grindless:vein_drilling/iv/pressurized_*_venus_*", "grindless:gas_collector/venus_*", "grindless:forge_hammer/venusian_regolith", "grindless:chemical_reactor/venusian_quantum_seed"], "dimensions": ["gcyr:venus"] },
+    { "id": "site-venus-recipes", "label": "Site: the pressurized drill's Venus vein, the Venus gas collector recipes, only run on Venus", "kind": "site", "recipe": ["grindless:vein_drilling/iv/pressurized_*_venus_*", "grindless:gas_collector/venus_*"], "dimensions": ["gcyr:venus"] },
     { "id": "site-pressurized", "label": "Site: the pressurized drill's recipes only run on Venus or Mars", "kind": "site", "recipe": ["grindless:vein_drilling/iv/pressurized_*"], "dimensions": ["gcyr:venus", "gcyr:mars"] },
     { "id": "site-mercury-machines", "label": "Site machines: every recipe of the solar works, the solar field and the interferometer only runs on Mercury", "kind": "site", "types": ["gtceu:solar_processing", "gtceu:mercury_solar", "gtceu:interferometry"], "dimensions": ["gcyr:mercury"] },
-    { "id": "site-mercury-recipes", "label": "Site: the Mercury drill's recipes and the Hermean seed only run on Mercury", "kind": "site", "recipe": ["grindless:vein_drilling/iv/mercury_*", "grindless:chemical_reactor/hermean_quantum_seed"], "dimensions": ["gcyr:mercury"] }
+    { "id": "site-mercury-recipes", "label": "Site: the Mercury drill's recipes only run on Mercury", "kind": "site", "recipe": ["grindless:vein_drilling/iv/mercury_*"], "dimensions": ["gcyr:mercury"] }
   ],
   "targetsFromVeins": [
     {
@@ -1080,7 +1080,7 @@
       "items": ["*naquadah*"],
       "exclude": ["*naquadria*", "gtnn:*_naquadah_reactor", "gtceu:naquadah_plant", "m:gtceu:naquadah_plant*"],
       "onlyFrom": ["venus"],
-      "note": "Decision 4: naquadah comes only from Venus's deep vein (grindless:naquadah_vein_venus); GTM's End vein no longer generates and the naquadah bee and comb have no recipe. Its alloys' decompositions only give back what went in. IV-B3's naquadah plant (its controller and formed keys carry the name) is built from IV parts at home: it is not naquadah."
+      "note": "Decision 4: naquadah comes only from Venus's deep vein (grindless:naquadah_vein_venus); GTM's End vein no longer generates. Its alloys' decompositions only give back what went in. IV-B3's naquadah plant (its controller and formed keys carry the name) is built from IV parts at home: it is not naquadah."
     },
     {
       "id": "iridium-osmium",

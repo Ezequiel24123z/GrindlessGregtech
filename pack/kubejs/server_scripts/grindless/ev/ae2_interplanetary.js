@@ -4,9 +4,8 @@
 // startup_scripts/grindless/ev/ae2_interplanetary.js). AE2 itself is not changed: every piece below is stock AE2, stock GTM or the
 // HV pairs of moon/crafting.js and moon/quantum_bridge.js.
 //
-//   Earth-Mars pair          the Martian half is made on Mars, the way the lunar one is made on the Moon (moon/crafting.js):
-//     Martian Quantum Seed   CHEMICAL REACTOR only on Mars (.dimension: the first dimension of planets.mars in data/grindless/tables/
-//                            planets.json, gcyr:mars): 1 merrillite dust + 1 ender pearl + 250 mB helium-3 -> 1, 480 EU/t, 10 s, the
+//   Earth-Mars pair          the Martian half is made from Martian merrillite, the way the lunar one is made from lunar helium-3 (moon/crafting.js):
+//     Martian Quantum Seed   CHEMICAL REACTOR, anywhere (its inputs are shipped, so no dimension condition): 1 merrillite dust + 1 ender pearl + 250 mB helium-3 -> 1, 480 EU/t, 10 s, the
 //                            HV numbers of the lunar seed. Merrillite is the rare-earth phosphate only Mars has (ev/foundation.js);
 //                            rare-earth ions in a crystal are what real quantum memories hold their states in. It is the first
 //                            ingredient so that the lunar recipe (ender pearl + helium-3) is not a prefix of this one (GTM's lookup
@@ -18,7 +17,7 @@
 //                            The Martian half links with no AE2 power of its own: AE2's QuantumCluster#isActive does not ask for
 //                            power, and once linked both halves are one grid that runs on the home network's energy cells.
 //   lunar halves by the base the Lunar Quantum Seed keeps its HV recipe (moon/crafting.js: chemical reactor on the Moon, ender pearl +
-//                            250 mB helium-3). In EV the base makes it without anyone travelling: a chemical reactor on the Moon fed by
+//                            250 mB helium-3). In EV the base makes it without anyone travelling: a chemical reactor fed by
 //                            the network (ender pearls from home, helium-3 from the drill's regolith vein or the regolith cell) sends
 //                            each new seed home over the first bridge.
 //   power over the bridge    no recipe of ours: FE P2P tunnels (ae2:fe_p2p_tunnel) over the bridge between two GTM 16 A EV energy
@@ -65,7 +64,6 @@
       console.error('[grindless/ev] Earth-Mars pair skipped: planets.json has no mars pairTag or dimension')
       return
     }
-    var dimension = mars.dimensions[0]
     var missing = [ids.marsSeed, ids.merrilliteDust, ids.singularity, ids.entangled, 'minecraft:ender_pearl'].filter(function (id) { return !Item.exists(id) })
     if (!Fluid.exists(ids.helium3)) missing.push(ids.helium3)
     if (missing.length > 0) {
@@ -73,12 +71,11 @@
       return
     }
 
-    // ---- the Martian half of an Earth-Mars pair, only on Mars
+    // ---- the Martian half of an Earth-Mars pair
     event.recipes.gtceu.chemical_reactor('grindless:martian_quantum_seed')
       .itemInputs(ids.merrilliteDust, '#forge:ender_pearls')
       .inputFluids(Fluid.of(ids.helium3, 250))
       .itemOutputs(ids.marsSeed)
-      .dimension(dimension)
       .EUt(480)
       .duration(200)
 
@@ -92,7 +89,7 @@
       result: { item: ids.entangled, count: 2, nbt: nbt }
     }).id(AI.recipes.marsPair)
 
-    console.info('[grindless/ev] AE2 interplanetary: Martian quantum seed (only in ' + dimension + '), Earth-Mars pair (' +
+    console.info('[grindless/ev] AE2 interplanetary: Martian quantum seed, Earth-Mars pair (' +
       PAIR_NBT_KEY + ': ' + mars.pairTag + ')')
   }
 })()

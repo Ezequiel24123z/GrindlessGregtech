@@ -29,7 +29,7 @@
 //     venus_carbon_dioxide  circuit 4, below the cloud base (pos_y -64..239): 10,000 mB of carbon dioxide, 1,024 EU/t for 200 ticks
 //     venus_sulfuric_acid   circuit 5, in the clouds (pos_y 240..319): 10,000 mB of sulfuric acid, 1,024 EU/t for 200 ticks
 //   gtceu:forge_hammer grindless:forge_hammer/venusian_regolith: 1 Venus cobblestone (the drill's stone) -> 1 Venusian regolith (the
-//     site casing), at GTM's cobblestone-to-gravel numbers (16 EU/t, 10 ticks), only on Venus.
+//     site casing), at GTM's cobblestone-to-gravel numbers (16 EU/t, 10 ticks), anywhere: the cobblestone is shipped.
 //   assembler: the three controllers, each with soldering alloy, a fluid and domain items.
 //     Pressurized Vein Drill  EV Tripod Drill + IV hull + 2 IV motors + IV pump + 2 IV circuits + 2 PTFE plates (inert against acid)
 //     Venus Heat Engine       IV hull + Heliostat Tower + Large Steam Turbine + 2 IV pumps + 4 IV circuits
@@ -242,7 +242,6 @@
     event.recipes.gtceu.forge_hammer('grindless:' + C.name)
       .itemInputs('1x ' + C.input)
       .itemOutputs('1x ' + C.output)
-      .dimension(String(T.site.dimension))
       .EUt(Number(C.eut))
       .duration(Number(C.duration))
     out.casing = 'grindless:forge_hammer/' + C.name

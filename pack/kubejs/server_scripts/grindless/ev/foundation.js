@@ -5,9 +5,8 @@
 //   lunar regolith dust   MACERATOR, anywhere: 1 lunar stone, cobbled lunar stone (the stone the Lunar Drill and the EV tripod bring
 //                         up), lunar mare regolith or lunar sand -> 1 gtceu:lunar_regolith_dust, with GTM's numbers for stone (2 EU/t,
 //                         98 ticks). GCYR's moon blocks had no maceration at all.
-//   sintered regolith     ELECTRIC FURNACE, only on the Moon (.dimension: the Moon of data/grindless/tables/veins_moon.json, like every
-//                         lunar recipe): 4 lunar regolith dust -> 1 grindless:sintered_regolith, 120 EU/t, 20 s. It is the slow first
-//                         source; the regolith cell (another package) sinters faster under the same condition.
+//   sintered regolith     ELECTRIC FURNACE, anywhere (the regolith is shipped): 4 lunar regolith dust -> 1 grindless:sintered_regolith, 120 EU/t, 20 s. It is the slow first
+//                         source; the regolith cell (another package) sinters faster.
 //   methalox              MIXER, EV: 1,000 mB methane + 2,000 mB oxygen -> 3,000 mB gtceu:methalox. CH4 + 2 O2 is the stoichiometric
 //                         ratio (O/F 4.0 by mass; methalox rocket engines such as Raptor run a little fuel-rich, about 3.6). 1,920 EU/t
 //                         for 1 s: 12.8 EU per mB, against the 224 EU of a mB of methane in a gas turbine (GTM's value, doubled by
@@ -44,11 +43,6 @@
     return ids.filter(function (id) { return !Item.exists(id) })
   }
 
-  function moonDimension() {
-    var table = G.tables && G.tables.veins_moon
-    return table && table.dimension ? table.dimension : 'gcyr:luna'
-  }
-
   // one thrown error would stop the recipe handlers of every script that loads after this one
   ServerEvents.recipes(function (event) {
     try {
@@ -79,16 +73,15 @@
       })
       added.push('lunar regolith x' + MOON_BLOCKS.length)
 
-      // ---- the sintered brick, only on the Moon
+      // ---- the sintered brick
       if (!Item.exists(ids.sinteredRegolith)) {
         console.error('[grindless/ev] sintered regolith recipe skipped, unknown item ' + ids.sinteredRegolith)
       } else {
         event.recipes.gtceu.electric_furnace('grindless:sintered_regolith')
           .itemInputs('4x ' + ids.regolithDust)
           .itemOutputs(ids.sinteredRegolith)
-          .dimension(moonDimension())
           .EUt(120).duration(400)
-        added.push('sintered regolith (only in ' + moonDimension() + ')')
+        added.push('sintered regolith')
       }
     }
 
