@@ -2,9 +2,11 @@
 // (docs/reforge/05_quest_design.md; docs/eras/maxplus.md, "Creative items").
 // They are ingredients only: not placeable and no source of anything. The array itself is taught in maxplus_hyperstargate (HG_ARRAY).
 // Counts follow the gate: 4 creative energy (one per power unit), one creative energy cell in hand (40 are used, one per capacitor; the item stacks to 1), 1 of each of the rest.
-// The row starts at a link to the stage's grid quest. Positions: columns every 2, rows every 2.
+// The row starts at a link to the stage's grid quest. Positions and dependencies: layout.mjs.
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
+
+import { SECTIONS, place } from './layout.mjs';
 
 export const CHAPTER = {
   filename: 'maxplus_creative',
@@ -13,7 +15,7 @@ export const CHAPTER = {
   order: 6,
   icon: 'grindless:creative_energy',
   autofocus: 'CR_RULE',
-  section: { name: 'Creative Items', origin: { x: 61.5, y: -1 }, heading: { key: 'H_CREATIVE', x: 0, y: 0, deps: ['S3_HOME'], icon: 'grindless:creative_energy', desc: ['The four cores and the six creative stand-ins: ingredients of the gate that can never be placed.'] } },
+  section: SECTIONS.creative,
   title: 'MAX+: Creative Items',
   subtitle: ['Six creative blocks, crafted at enormous cost and used up as ingredients of the gate. None of them will ever run.'],
 };
@@ -50,7 +52,7 @@ export const QUESTS = [
     deps: ['CR_CORES'], x: 4, y: 3,
     teach: {
       for: 'The &6Creative Energy Source (Ingredient)&r is a power unit\'s heart. It never runs as a source, because energy from nothing would end the pack\'s power chain.',
-      needs: 'A cloud core and the hyper assembly array, plus a mountain of field coils, processors and condensate.',
+      needs: 'A cloud core and the hyper assembly array, plus a mountain of field coils, MAX+ circuits and condensate.',
       unlocks: 'The gate\'s power units.',
       automate: 'One array row per block. Keep a stock in AE2 before the gate needs it.',
     },
@@ -124,3 +126,4 @@ export const QUESTS = [
     rewards: [xp(800)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

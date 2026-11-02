@@ -5,10 +5,12 @@
 // Fixed keys (other chapters link to them): HG_MACH.
 // Numbers follow startup_scripts/grindless/maxplus/hyperstargate.js: 41 x 43 x 9, 151 ring blocks and 9 locked chevrons on the ring,
 // 4 power units, the iris and the base in the base row. The crossing is XP-Z1b's; no quest gives the epilogue or rolls the credits.
-// Positions: machines in a column at x = 2, parts at x = 4 to 8, rows every 2 or 3.
+// Positions and dependencies: layout.mjs.
 const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
+
+import { SECTIONS, place } from './layout.mjs';
 
 export const CHAPTER = {
   filename: 'maxplus_hyperstargate',
@@ -17,7 +19,7 @@ export const CHAPTER = {
   order: 8,
   icon: 'gtceu:hyperstargate',
   autofocus: 'TR_BLEND',
-  section: { name: 'Building the Gate', origin: { x: 51.5, y: 2 }, heading: { key: 'H_GATE', x: 0, y: 0, deps: ['S3_TREE'], icon: 'gtceu:hyperstargate', desc: ['The machines of the tree and the parts of the gate: ring blocks, upgrades, chevrons, power units, the base and the controller, then the dial.'] } },
+  section: SECTIONS.hyperstargate,
   title: 'MAX+: Building the Gate',
   subtitle: ['Six machines, eight kinds of part, one dial and a ring that opens for one crossing at a time.'],
 };
@@ -153,7 +155,7 @@ export const QUESTS = [
     key: 'HG_LOCKED', kind: 'step', title: 'Locked Chevrons', icon: 'grindless:hyperstargate_locked_chevron',
     deps: ['HG_RING', 'HG_UPG'], x: 11.5, y: 6,
     desc: [
-      'Made like a chevron block, from ring blocks, upgrades and meta-materials, with a horizon lock and a crowd of horizon processors sealed in. Nine of them go on the ring, and the dial recognises them by the lock.',
+      'Made like a chevron block, from ring blocks, upgrades and meta-materials, with a horizon lock and a crowd of MAX+ circuits sealed in. Nine of them go on the ring, and the dial recognises them by the lock.',
     ],
     tasks: [it('grindless:hyperstargate_locked_chevron', 9)],
     rewards: [xp(600)],
@@ -162,7 +164,7 @@ export const QUESTS = [
     key: 'HG_BASE', kind: 'step', title: 'The Base', icon: 'grindless:hyperstargate_base',
     deps: ['HG_CHEVB', 'HG_UPG'], x: 11, y: 7.5,
     desc: [
-      'Chevron blocks, ring blocks, upgrades, horizon processors and field generators. It is the heaviest single craft of the pack.',
+      'Chevron blocks, ring blocks, upgrades, MAX+ circuits and field generators, with the creative chest and tank. It is the heaviest single craft of the pack.',
     ],
     tasks: [it('grindless:hyperstargate_base')],
     rewards: [xp(800)],
@@ -183,7 +185,7 @@ export const QUESTS = [
     deps: ['HG_STRUCT'], x: 14.5, y: 2,
     teach: {
       for: 'The &6Hyperstargate&r is the pack\'s last multiblock. It forms round a dial at Sgr A* orbit and opens a ring into the final dimension.',
-      needs: 'The controller recipe is crafted at the black hole orbit, from ring blocks, a controller crystal, a creative computation provider, horizon processors and the interface. The structure then needs the ring, the iris, the base and four power units, with a horizon lock kept in the controller.',
+      needs: 'The controller recipe is crafted at the black hole orbit, from ring blocks, a controller crystal, a creative computation provider, MAX+ circuits and the interface. The structure then needs the ring, the iris, the base and four power units, with a horizon lock kept in the controller.',
       unlocks: 'The dial.',
       automate: 'Nothing here is a production line. Build it once and keep the banks charged.',
     },
@@ -192,17 +194,17 @@ export const QUESTS = [
     rewards: [xp(1000)],
   },
   {
-    key: 'HG_DIAL', kind: 'process', title: 'The Dial', icon: 'grindless:horizon_lock',
+    key: 'HG_DIAL', kind: 'reading', title: 'The Dial', icon: 'grindless:horizon_lock',
     deps: ['HG_MACH'], x: 16, y: 2,
     teach: {
-      for: 'The dial recipe opens the ring for 1,200 ticks. It eats the archive, the phase map, 16 phase locks and 64 jacketed cells. The &6Horizon Lock&r in the controller is kept.',
-      needs: 'The full charge in the banks: 2^43 EU/t for the whole opening. The dial will not start on a charge it cannot finish.',
+      for: 'The dial opens the ring for a minute. It eats the genome archive, the cloud phase map, a stack of phase locks and a crate of jacketed cells, and keeps the &6Horizon Lock&r in the controller.',
+      needs: 'The full charge in the capacitor banks for the whole opening; EMI shows the draw. The dial will not start on a charge it cannot finish.',
       unlocks: 'The crossing, and a spent charge to recharge.',
       automate: 'Stock every input and keep the banks full. The next opening costs the same.',
     },
     desc: [],
-    tasks: [it('grindless:horizon_lock')],
-    rewards: [xp(1000)],
+    tasks: [ck()],
+    rewards: [xp(100)],
   },
   {
     key: 'HG_RECHARGE', kind: 'reading', title: 'Recharging the Dial', icon: 'grindless:spent_dial_charge',
@@ -223,3 +225,4 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

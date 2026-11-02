@@ -3,10 +3,12 @@
 // "Power", "AE2").
 // Every row starts at an I_L_* link to a stage quest; the age chapters do not link back.
 // The parallel hatch (PAR) teaches scale at the machine level. The Hyperfactory and the circuits are in XP-C2b's chapters.
-// Positions: rows every 3, columns every 2.
+// Positions and dependencies: layout.mjs.
 const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
+
+import { SECTIONS, place } from './layout.mjs';
 
 export const CHAPTER = {
   filename: 'maxplus_integration',
@@ -15,7 +17,7 @@ export const CHAPTER = {
   order: 5,
   icon: 'gtceu:max_wireless_dynamo_hatch_16a',
   autofocus: 'OM_SHELL',
-  section: { name: 'Older Machines, Power and AE2', origin: { x: 0, y: 1.5 }, heading: { key: 'H_INTEGRATION', x: 0, y: 0, deps: ['START'], icon: 'gtceu:max_wireless_dynamo_hatch_16a', desc: ['What the older machines become at MAX+ scale, the power from nickel-56 and fusion, and the AE2 grid that holds the plan.'] } },
+  section: SECTIONS.integration,
   title: 'MAX+: Integration',
   subtitle: ['Older machines at MAX+ scale, power from nickel-56 and fusion, and the grid that holds the plan.'],
 };
@@ -142,8 +144,8 @@ export const QUESTS = [
     key: 'OM_OLD', kind: 'machine', title: 'Home Rows: ZPM Down to EV', icon: 'gtceu:hts_magnet_works',
     deps: ['OM_UHV'], x: 4.5, y: 5,
     teach: {
-      for: 'The older rows still make parts MAX+ needs: the diamond lattice fab makes the photonic plate, the HTS magnet works winds the SMES toroid and the fault-current coil, the coated conductor line draws tapes, and the helium refrigerator chills toroids, coils and conduits. The implanter, aerogel works, hot cell, extraction cascade, cryogenic plant and hot strip mill take smaller parts.',
-      needs: 'The ten controllers: diamond fab, implanter, aerogel works, coated conductor line, HTS magnet works, helium refrigerator, hot cell, extraction cascade, cryogenic plant and hot strip mill.',
+      for: 'The older rows still make parts MAX+ needs: the diamond lattice fab makes the photonic plate, the HTS magnet works winds the SMES toroid and the fault-current coil, the coated conductor line draws tapes, and the helium refrigerator chills toroids, coils and conduits. The implanter, aerogel works, hot cell, rare earth extraction cascade, cryogenic plant and hot strip mill take smaller parts.',
+      needs: 'The ten controllers: diamond fab, implanter, aerogel works, coated conductor line, HTS magnet works, helium refrigerator, hot cell, rare earth extraction cascade, cryogenic plant and hot strip mill.',
       unlocks: 'Conductors, aerogel, and a cold chain for the stage.',
       automate: 'Give each its own chest on the network.',
     },
@@ -157,33 +159,33 @@ export const QUESTS = [
     key: 'PW_NI', kind: 'plant', title: 'Power from Nickel-56', icon: 'grindless:co56_cask',
     deps: ['CASK'], x: 24.5, y: -8.5,
     teach: {
-      for: 'The burner takes a shielded nickel-56 cask and returns a cobalt-56 cask, then a spent iron-56 cask. Heat becomes steam, and steam becomes EU on the platform.',
-      needs: 'Casks from the crucible, and a dynamo hatch on the platform.',
-      unlocks: 'The platform\'s own power and the way to send it home.',
-      automate: 'Casks move by belt; send spent ones back home as scrap.',
+      for: 'The burner takes a shielded nickel-56 cask and returns a cobalt-56 cask, then burns that again into a spent iron-56 cask. Each decay is heat, and the heat becomes EU wherever the burner stands: it is not tied to the Tarantula.',
+      needs: 'Casks from the crucible, and a dynamo hatch on the burner.',
+      unlocks: 'The era\'s first power plant, and the way to send its power to the network.',
+      automate: 'Casks move by belt; run the cobalt casks through a second time before they go to the hot cell.',
     },
     desc: [],
-    tasks: [it('grindless:co56_cask'), it('grindless:spent_fe56_cask')],
+    tasks: [it('grindless:co56_cask')],
     rewards: [xp(150)],
   },
   {
-    key: 'PW_TORUS', kind: 'plant', title: 'Power from Fusion Fuel', icon: 'gtceu:primordial_deuterium_bucket',
+    key: 'PW_TORUS', kind: 'plant', title: 'Power from Fusion Fuel', icon: 'gtceu:helium_4_ash_bucket',
     deps: ['PD'], x: 24.5, y: -6,
     teach: {
-      for: 'Primordial deuterium and pristine helium-3 fuel a torus on the platform. The fusion reactions are not new; the fuel comes from the Stream.',
-      needs: 'Both fuels in bulk, and a torus.',
-      unlocks: 'A second source for the platform\'s network.',
-      automate: 'The fuels travel in separate pipes.',
+      for: 'Primordial deuterium and pristine helium-3 burn in the torus, and the converter stack turns their charged products straight into EU. The torus runs only in the Stream, where its fuel comes from.',
+      needs: 'Both fuels in bulk, and a formed torus with its injector and stack.',
+      unlocks: 'A second source for the network.',
+      automate: 'The fuels travel in separate pipes. The helium-4 ash and the hydrogen that come out go home to the gas lines.',
     },
     desc: [],
-    tasks: [it('gtceu:primordial_deuterium_bucket'), it('gtceu:pristine_helium_3_bucket')],
+    tasks: [it('gtceu:helium_4_ash_bucket')],
     rewards: [xp(150)],
   },
   {
     key: 'PW_DYN', kind: 'machine', title: 'Wireless Dynamo', icon: 'gtceu:max_wireless_dynamo_hatch_16a',
     deps: ['PW_NI', 'PW_TORUS'], x: 28, y: -8.5,
     teach: {
-      for: 'A wireless dynamo hatch feeds the network from the platform. A fraction is lost on the way, so build more than you need.',
+      for: 'A wireless dynamo hatch feeds the network from each plant, wherever it stands. A fraction is lost on the way, so build more than you need.',
       needs: 'The &6wireless dynamo hatch&r, on every plant.',
       unlocks: 'The network at home.',
       automate: 'Power flows without a cable, but not without cost.',
@@ -260,3 +262,4 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

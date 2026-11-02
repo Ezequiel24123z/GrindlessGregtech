@@ -4,11 +4,13 @@
 // in maxplus_creative (CR_*), and the wireless store in maxplus_integration.
 // Fixed keys: STAGE3 (depends on STAGE2_END of XP-C2a), ARRIVAL.
 // ARRIVAL is a dimension task on grindless:horizon_city and gives nothing. XP-Z1b gives the epilogue and rolls the credits; no quest does.
-// Positions: columns every 2, rows every 2 along y = 0; the tree's products stand in two columns at x = 6 and 8.
+// Positions and dependencies: layout.mjs.
 const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const dim = (dimension) => ({ type: 'dimension', dimension });
 const xp = (n) => ({ type: 'xp', xp: n });
+
+import { SECTIONS, place } from './layout.mjs';
 
 export const CHAPTER = {
   filename: 'maxplus_age_3',
@@ -17,7 +19,7 @@ export const CHAPTER = {
   order: 2,
   icon: 'gtceu:hyperstargate',
   autofocus: 'STAGE3',
-  section: { name: 'Stage III: Back to the Hole', origin: { x: 46, y: 0 } },
+  section: SECTIONS.age3,
   title: 'MAX+: The Hyperstargate',
   subtitle: ['A tree of plasma, crystal and condensate that grows anywhere, a great many parts at home and one ring at the black hole that opens for a single crossing.'],
 };
@@ -55,7 +57,7 @@ export const QUESTS = [
     key: 'S3_SLURRY', kind: 'step', title: 'Horizon Crystal Slurry', icon: 'gtceu:horizon_crystal_slurry_bucket',
     deps: ['S3_TREE'], x: 8.5, y: -3,
     desc: [
-      'One plasma from every place you have worked, blended into a single bucket. It is the only slurry there is.',
+      'The &6Multi-Plasma Blender&r takes one plasma from every place you have worked and blends them into a single bucket. It is the only slurry there is.',
     ],
     tasks: [it('gtceu:horizon_crystal_slurry_bucket')],
     rewards: [xp(300)],
@@ -82,7 +84,7 @@ export const QUESTS = [
     key: 'S3_CAPS', kind: 'step', title: 'Capacitors for the Bank', icon: 'grindless:horizon_capacitor',
     deps: ['S3_HOME', 'CR_CELL'], x: 19.5, y: 0.5,
     desc: [
-      'Each capacitor holds a slice of the dial\'s charge. The bank is a ring of them, built into the gate at Sgr A* orbit.',
+      'Each capacitor holds a slice of the dial\'s charge, and each one swallows a creative energy cell. The bank is a ring of them, a store of its own that counts only at Sgr A* orbit.',
     ],
     tasks: [it('grindless:horizon_capacitor', 40)],
     rewards: [xp(400)],
@@ -91,7 +93,7 @@ export const QUESTS = [
     key: 'S3_PLATE', kind: 'step', title: 'Containment Plates', icon: 'grindless:horizon_containment_plate',
     deps: ['S3_TREE'], x: 9, y: -1,
     desc: [
-      'A plate of bound condensate, pressed until it stops leaking light. The gate eats them in great numbers; a stack in hand proves the line, and the rest stay in AE2.',
+      'The condensate assembler wraps a pressed containment core in compressed and strange plates. The gate eats them in great numbers; a stack in hand proves the line, and the rest stay in AE2.',
     ],
     tasks: [it('grindless:horizon_containment_plate', 64)],
     rewards: [xp(400)],
@@ -109,7 +111,7 @@ export const QUESTS = [
     key: 'S3_MESH', kind: 'step', title: 'Horizon Mesh', icon: 'grindless:horizon_mesh',
     deps: ['S3_TREE'], x: 9, y: 1,
     desc: [
-      'A woven sheet that holds the frame parts together. The assembler is the only place it comes from.',
+      'A woven sheet that holds the frame parts together. The condensate assembler is the only place it comes from.',
     ],
     tasks: [it('grindless:horizon_mesh')],
     rewards: [xp(300)],
@@ -156,7 +158,7 @@ export const QUESTS = [
     key: 'S3_PROC', kind: 'step', title: 'Horizon Processors', icon: 'grindless:horizon_processor',
     deps: ['S3_HOME'], x: 19, y: -1.5,
     desc: [
-      'The gate\'s controller, its base and its locked chevrons take them, and so do many machines of the pack, which makes this the biggest circuit order of the pack. A stack in hand proves the line; the rest stay in AE2, so plan the Hyperfactory\'s bus before you start.',
+      'The gate\'s controller, its base, its locked chevrons and the creative items take MAX+ circuits by the dozen, and the &6Horizon Processor&r is the one MAX+ circuit you make. A stack in hand proves the line; the rest stay in AE2, so plan the Hyperfactory\'s bus before you start.',
     ],
     tasks: [it('grindless:horizon_processor', 64)],
     rewards: [xp(600)],
@@ -183,11 +185,11 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate, the dial, the arrival
   {
     key: 'S3_GATE', kind: 'milestone', title: 'The Gate Stands', icon: 'gtceu:hyperstargate',
-    deps: ['S3_COMP', 'S3_FIELD',     'S3_PROC', 'S3_CAPS', 'HG_MACH'], x: 20.5, y: -2,
+    deps: ['S3_COMP', 'S3_FIELD', 'S3_PROC', 'S3_CAPS', 'HG_MACH'], x: 20.5, y: -2,
     desc: [
-          'The ring is closed, the base is lit and the controller holds its kept lock. It looks like nothing so much as a very large door. Check it off once it has formed.',
+      'The ring is closed, the base is lit and the controller holds its kept lock. It looks like nothing so much as a very large door. Check it off once it has formed.',
     ],
-        tasks: [ck()],
+    tasks: [ck()],
     rewards: [xp(1000)],
   },
   {
@@ -209,3 +211,4 @@ export const QUESTS = [
     rewards: [],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));
