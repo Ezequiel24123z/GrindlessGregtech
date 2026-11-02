@@ -41,7 +41,8 @@ test('the belt harvest and processor rows, and the GTM steps, exist', () => {
   for (const id of ['debris_harvesting/nsc_planetesimal_harvest', 'asteroid_processing/iron_core_fragment']) {
     const r = find(`grindless:${id}`);
     assert.ok(r, id);
-    assert.match(JSON.stringify(r.j), /nsc_belt/, id);
+    if (id === 'debris_harvesting/nsc_planetesimal_harvest') assert.match(JSON.stringify(r.j), /nsc_belt/, id);
+    else assert.doesNotMatch(JSON.stringify(r.j), /nsc_belt/, `${id} works shipped planetesimals anywhere`);
   }
   assert.match(JSON.stringify(find('grindless:debris_harvesting/nsc_planetesimal_harvest').j), /nsc_planetesimal/);
   for (const id of ['segment_truss', 'ta_hf_c_powder', 'tetrataenite_concentrate', 'cold_pressed_tetrataenite']) {

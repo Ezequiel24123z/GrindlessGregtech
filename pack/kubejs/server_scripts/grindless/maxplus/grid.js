@@ -16,7 +16,6 @@
   var V_MAX = Number(GTValues.V[14])
   var KERR = 'gtceu:kerr_condensate'
   var HULL = 'gtceu:max_machine_hull'
-  var SITE = (G.maxTravel && G.maxTravel.places && G.maxTravel.places.sgra ? G.maxTravel.places.sgra.dimension : 'gcyr:black_hole_orbit')
 
   // research item (made before the array exists), then the machine on the assembly line; the comm terminal is the stage II domain input
   var CONTROLLER = { machine: 'gtceu:hyper_assembly_array', research: 'grindless:cold_reference_assembly', casing: 'grindless:horizon_machine_casing',
@@ -44,7 +43,6 @@
     r.fluids.forEach(function (x) { b.inputFluids(Fluid.of(x[0], x[1])) })
     b.itemOutputs(r.out[1] + 'x ' + r.out[0])
     b.addDataString(GRID.machine.dataKey, r.name)
-    b.dimension(SITE)
     b.EUt(V_MAX * r.amps).duration(r.duration)
   }
 

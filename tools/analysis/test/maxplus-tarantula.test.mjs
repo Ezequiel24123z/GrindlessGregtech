@@ -113,11 +113,12 @@ test('lang: machine, type, tooltip and every keyed row have an en_us entry; ASCI
   assert.ok(!/[^\x00-\x7f]/.test(lang), 'non-ASCII characters must be \\u escapes');
 });
 
-test('older rows carry 30 Doradus; the casings and nothing else do not', () => {
+test('only the lift row carries 30 Doradus; every other row processes shipped inputs and runs anywhere', () => {
   const text = read(kube, 'server_scripts', 'grindless', 'maxplus', 'tarantula.js');
   assert.ok(/TARANTULA = 'grindless:tarantula_orbit'/.test(text));
-  assert.ok(/if \(r\.site !== false\) b\.dimension\(TARANTULA\)/.test(text));
-  assert.deepEqual(rows.filter((r) => r.site === false).map((r) => r.name), ['lift_nozzle_casing', 'crucible_liner_casing']);
+  assert.ok(/if \(r\.site === true\) b\.dimension\(TARANTULA\)/.test(text));
+  assert.deepEqual(rows.filter((r) => r.site === true).map((r) => r.name), ['raw_vms_plasma']);
+  assert.ok(!/\.dimension\(TARANTULA\)\s*\n\s*\.EUt/.test(text), 'the cooling row carries no site');
 });
 
 test('the zone row exists and does not overlap another', () => {

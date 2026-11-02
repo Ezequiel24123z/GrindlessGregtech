@@ -25,7 +25,6 @@
 
   var VA_MAX = Number(GTValues.VA[14])
   var LOW = 7864320
-  var SITE = (G.maxTravel && G.maxTravel.places && G.maxTravel.places.sgra ? G.maxTravel.places.sgra.dimension : 'gcyr:black_hole_orbit')
   var SETTLED = 'gtceu:settled_condensate'
   var CIRCUIT = '#gtceu:circuits/max'
 
@@ -41,7 +40,7 @@
       items: ['grindless:wear_coated_rotor', '2x gtceu:tungsten_steel_plate'], fluids: [], outs: ['grindless:bound_matter_rotor'], eut: LOW, duration: 300 },
     { type: 'cutter', name: 'readout_die', circuit: 0,
       items: ['grindless:readout_wafer'], fluids: [], outs: ['4x grindless:readout_die'], eut: LOW, duration: 300 },
-    { type: 'condensate_refinery', name: 'condensate_loaded_cavity', circuit: 7, dimension: SITE,
+    { type: 'condensate_refinery', name: 'condensate_loaded_cavity', circuit: 7,
       items: ['grindless:nb_coated_cavity'], fluids: [[SETTLED, 8000]], outs: ['grindless:condensate_loaded_cavity'], eut: VA_MAX, duration: 900,
       dataKey: 'grindless_condensate_refinery' },
     { type: 'canner', name: 'sealed_field_cavity', circuit: 0,

@@ -37,7 +37,7 @@ test('machine rows: unique circuits per type, run at Sgr A*, never above V[MAX] 
     assert.ok(Number(circuit) >= 1 && Number(circuit) <= 32);
     assert.match(eut, /^(VA_MAX|V_MAX( \* (2|4|8|16))?)$/);
   }
-  assert.match(server, /b\.dimension\(SITE\)/);
+  assert.doesNotMatch(server, /b\.dimension\(/);
 });
 
 test('the recompress row returns the boil-off as condensate (no free source: 4 in, 4,000 mB out)', () => {

@@ -27,7 +27,6 @@
   var OPV = 503316480
   var CYGNUS = 'grindless:cygnus_x1_orbit'
   var SGR1806 = 'grindless:sgr1806_orbit'
-  var SGRA = (G.maxTravel && G.maxTravel.places && G.maxTravel.places.sgra ? G.maxTravel.places.sgra.dimension : 'gcyr:black_hole_orbit')
   var VOID = (G.maxPlusTravel && G.maxPlusTravel.places && G.maxPlusTravel.places.void ? G.maxPlusTravel.places.void.dimension : 'grindless:local_group_filament')
   var SETTLED = 'gtceu:settled_condensate'
   var HE3 = 'gtceu:superfluid_helium_3'
@@ -44,15 +43,15 @@
     { type: 'magnetic_pair_production', name: 'pair_confined_cage', circuit: 3, eut: OPV, duration: 2400, key: 'grindless_magnetic_pair_production', dim: SGR1806,
       items: [['grindless:strange_cage_lining', 2], ['grindless:caged_ni_chain', 32], ['grindless:horizon_tether', 32]], fluids: [['gtceu:hot_pair_plasma', 64000]],
       outs: [['grindless:pair_confined_cage', 1]] },
-    { type: 'condensate_refinery', name: 'cloud_loaded_cage', circuit: 8, eut: V_MAX * 16, duration: 2400, key: 'grindless_condensate_refinery', dim: SGRA,
+    { type: 'condensate_refinery', name: 'cloud_loaded_cage', circuit: 8, eut: V_MAX * 16, duration: 2400, key: 'grindless_condensate_refinery',
       items: [['grindless:pair_confined_cage', 2], ['grindless:horizon_tether', 64]], fluids: [[SETTLED, 64000]],
       outs: [['grindless:cloud_loaded_cage', 1], ['grindless:condensate_boil_off', 8]] },
     { type: 'nuclear_demagnetisation', name: 'horizon_cloud_core', circuit: 32, eut: va(14), duration: 2400, key: 'grindless_nuclear_demagnetisation',
-      items: [['grindless:cloud_loaded_cage', 2], ['grindless:horizon_core_crystal', 4], ['grindless:horizon_shard', 16]], fluids: [[HE3, 32000]],
+      items: [['grindless:cloud_loaded_cage', 2], ['grindless:horizon_core_crystal', 4]], keep: [['grindless:horizon_shard', 1]], fluids: [[HE3, 32000]],
       outs: [['grindless:horizon_cloud_core', 1]] },
     // K2
     { type: 'void_crystal_fab', name: 'void_holographic_block', circuit: 2, eut: va(14), duration: 2400, key: 'grindless_void_crystal_fab', dim: VOID,
-      items: [['grindless:void_crystal_lattice', 16], ['grindless:void_grown_diamond', 32], ['grindless:horizon_shard', 16]], fluids: [[HE3, 16000]],
+      items: [['grindless:void_crystal_lattice', 16], ['grindless:void_grown_diamond', 32]], keep: [['grindless:horizon_shard', 1]], fluids: [[HE3, 16000]],
       outs: [['grindless:void_holographic_block', 1]] },
     { type: 'femtosecond_writing', name: 'addressed_holo_block', circuit: 23, eut: va(14), duration: 2400, key: 'grindless_femtosecond_writing',
       items: [['grindless:void_holographic_block', 2], ['grindless:laser_array_wafer', 16], ['grindless:holographic_slab', 16]], fluids: [['gtceu:argon', 16000]],
@@ -70,7 +69,7 @@
     { type: 'shequid_assembly', name: 'superfluid_reservoir_core', circuit: 13, eut: va(13), duration: 2400, key: 'grindless_shequid_assembly',
       items: [['grindless:condensate_aerogel', 16], ['grindless:aerogel_superleak_plug', 16], ['grindless:superfluid_he3_seal', 8]], fluids: [[HE3, 64000]],
       outs: [['grindless:superfluid_reservoir_core', 1]] },
-    { type: 'condensate_refinery', name: 'condensate_wetted_core', circuit: 9, eut: V_MAX * 16, duration: 2400, key: 'grindless_condensate_refinery', dim: SGRA,
+    { type: 'condensate_refinery', name: 'condensate_wetted_core', circuit: 9, eut: V_MAX * 16, duration: 2400, key: 'grindless_condensate_refinery',
       items: [['grindless:superfluid_reservoir_core', 2], ['grindless:metal_condensate', 32]], fluids: [[SETTLED, 64000]],
       outs: [['grindless:condensate_wetted_core', 1], ['grindless:condensate_boil_off', 8]] },
     { type: 'shequid_assembly', name: 'bottomless_tank_core', circuit: 14, eut: va(13), duration: 2400, key: 'grindless_shequid_assembly',
@@ -106,12 +105,13 @@
   }
 
   function addRow(event, r) {
-    var ids = pairs(r, 'items').concat(pairs(r, 'outs'))
+    var ids = pairs(r, 'items').concat(pairs(r, 'keep'), pairs(r, 'outs'))
     var fluids = pairs(r, 'fluids').concat(pairs(r, 'fluidOuts'))
     var missing = missingIds(ids, fluids)
     if (missing.length > 0) return skip(r.type + '/' + r.name, 'unknown id(s): ' + missing.join(', '))
     var b = event.recipes.gtceu[r.type]('grindless:' + r.name)
     ;(r.items || []).forEach(function (x) { b.itemInputs(x[1] + 'x ' + x[0]) })
+    ;(r.keep || []).forEach(function (x) { b.notConsumable(x[1] + 'x ' + x[0]) })
     b.circuit(r.circuit)
     ;(r.fluids || []).forEach(function (x) { b.inputFluids(Fluid.of(x[0], x[1])) })
     ;(r.outs || []).forEach(function (x) { b.itemOutputs(x[1] + 'x ' + x[0]) })

@@ -16,7 +16,6 @@ const MC = run.global.grindless.maxPlusCrystals;
 const plain = (x) => JSON.parse(JSON.stringify(x));
 const read = (...p) => fs.readFileSync(path.join(...p), 'utf8');
 const lang = read(kube, 'client_scripts', 'grindless', 'maxplus_crystals_lang.js');
-const SGRA = 'gcyr:black_hole_orbit';
 
 test('the stand-in runs the scripts without errors and skips nothing', () => {
   const mine = run.errors.filter((e) => /maxplus[\\/]crystals|maxplus_crystals/.test(String(e.file)));
@@ -28,7 +27,7 @@ test('the stand-in runs the scripts without errors and skips nothing', () => {
   assert.deepEqual(plain(MC.controllers).map((c) => c.name), ['multi_plasma_blender', 'horizon_crystal_furnace']);
 });
 
-test('blender row: eight fluids of 1,000 mB make 1,000 mB of slurry at V[MAX] x 64 A for 100 t at Sgr A*', () => {
+test('blender row: eight fluids of 1,000 mB make 1,000 mB of slurry at V[MAX] x 64 A for 100 t, with no site', () => {
   const [b] = plain(MC.blender);
   assert.equal(b.fluids.length, 8);
   assert.equal(new Set(b.fluids.map((f) => f[0])).size, 8);
@@ -36,7 +35,7 @@ test('blender row: eight fluids of 1,000 mB make 1,000 mB of slurry at V[MAX] x 
   assert.deepEqual(b.fluidOuts, [['gtceu:horizon_crystal_slurry', 1000]]);
   assert.equal(b.eut, 2 ** 37);
   assert.equal(b.duration, 100);
-  assert.equal(b.dimension, SGRA);
+  assert.equal(b.dimension, undefined);
   assert.equal(b.items, undefined);
 });
 
@@ -47,7 +46,7 @@ test('furnace rows: c1 core and c2 controller boule at V[MAX] x 256 A for 2,400 
   for (const r of [core, ctrl]) {
     assert.equal(r.eut, 2 ** 39);
     assert.equal(r.duration, 2400);
-    assert.equal(r.dimension, SGRA);
+    assert.equal(r.dimension, undefined);
     assert.ok(r.fluids.some((f) => f[0] === 'gtceu:kerr_condensate'), 'heat from condensate');
     assert.ok(r.items.some((i) => i[0] === 'grindless:kerr_strange_plate'), 'P3 lines the crucible');
   }
@@ -57,10 +56,9 @@ test('furnace rows: c1 core and c2 controller boule at V[MAX] x 256 A for 2,400 
   for (const r of [core, ctrl]) for (const f of r.fluids) assert.ok(f[1] <= 4096000, f[0] + ' ' + f[1] + ' mB fits one MAX hatch');
 });
 
-test('older rows keep their sites: the elevator and the filter are bound to Cygnus X-1, the refinery to Sgr A*, the rest are home rows', () => {
+test('older rows keep a site only where they use the place: the elevator is bound to Cygnus X-1; the rest run anywhere', () => {
   for (const r of plain(MC.rows)) {
-    if (r.type === 'star_lifting' || r.type === 'plasma_mass_filtering') assert.equal(r.dimension, 'grindless:cygnus_x1_orbit', r.name);
-    else if (r.type === 'condensate_refinery') assert.equal(r.dimension, SGRA, r.name);
+    if (r.type === 'star_lifting') assert.equal(r.dimension, 'grindless:cygnus_x1_orbit', r.name);
     else assert.equal(r.dimension, undefined, r.name);
   }
 });

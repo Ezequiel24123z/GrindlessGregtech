@@ -31,10 +31,8 @@
   var V_MAX = Number(GTValues.V[14])
   var EPOXY = 'gtceu:epoxy'
   var LHE = 'gtceu:liquid_helium'
-  var TARANTULA = 'grindless:tarantula_orbit'
   var KERR = 'gtceu:kerr_condensate'
   var HULL = 'gtceu:max_machine_hull'
-  var SITE = (G.maxTravel && G.maxTravel.places && G.maxTravel.places.sgra ? G.maxTravel.places.sgra.dimension : 'gcyr:black_hole_orbit')
 
   // type, name, circuit (none for item-keyed rows), items in, kept items, fluids in, kept fluids, items out, fluids out, EU/t, ticks, data key
   var ROWS = [
@@ -102,7 +100,7 @@
       items: [['grindless:coated_truss_billet', 1]], kept: [['gtceu:rod_extruder_mold', 1]],
       outs: [['grindless:horizon_frame_truss', 2]] },
     // P25
-    { type: 'plasma_mass_filtering', name: 'he_rich_fraction', circuit: 7, eut: V_MAX, duration: 600, key: 'grindless_plasma_mass_filtering', dimension: TARANTULA,
+    { type: 'plasma_mass_filtering', name: 'he_rich_fraction', circuit: 7, eut: V_MAX, duration: 600, key: 'grindless_plasma_mass_filtering',
       fluids: [['gtceu:raw_vms_plasma', 10000]],
       outs: [], fluidOuts: [['gtceu:he_rich_fraction', 5000], ['gtceu:stellar_heavy_cut', 1000]] },
     { type: 'cryogenic_processing', name: 'liquid_helium_4', eut: 7680, duration: 400, dimension: 'gcyr:luna',
@@ -165,7 +163,7 @@
     console.error(LOG + 'skipped ' + name + ': ' + reason)
   }
 
-  function addRow(event, r, site) {
+  function addRow(event, r) {
     var ids = pairs(r, 'items').concat(pairs(r, 'kept'), pairs(r, 'outs'))
     var fluids = pairs(r, 'fluids').concat(pairs(r, 'keptFluids'), pairs(r, 'fluidOuts'))
     var missing = missingIds(ids, fluids)
@@ -180,7 +178,6 @@
     ;(r.fluidOuts || []).forEach(function (x) { b.outputFluids(Fluid.of(x[0], x[1])) })
     if (r.key) b.addDataString(r.key, r.name)
     if (r.dimension) b.dimension(r.dimension)
-    if (site) b.dimension(SITE)
     b.EUt(r.eut).duration(r.duration)
   }
 
@@ -204,7 +201,7 @@
   function addAsm(event, r) {
     var ids = pairs(r, 'items').concat(pairs(r, 'outs'))
     if (r.optional && missingIds(ids, pairs(r, 'fluids')).length > 0) return
-    addRow(event, r, true)
+    addRow(event, r)
   }
 
   function addController(event) {

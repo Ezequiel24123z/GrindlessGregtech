@@ -25,7 +25,6 @@
   var VA_MAX = Number(GTValues.VA[14])
   var V_MAX = Number(GTValues.V[14])
   var LOW = 7864320
-  var SITE = (G.maxTravel && G.maxTravel.places && G.maxTravel.places.sgra ? G.maxTravel.places.sgra.dimension : 'gcyr:black_hole_orbit')
   var CIRCUIT = '#gtceu:circuits/max'
   var HULL = 'gtceu:max_machine_hull'
   var KERR = 'gtceu:kerr_condensate'
@@ -116,7 +115,6 @@
         r.fluids.forEach(function (f) { b.inputFluids(Fluid.of(f[0], f[1])) })
         r.outs.forEach(function (s) { b.itemOutputs(s) })
         r.fluidOuts.forEach(function (f) { b.outputFluids(Fluid.of(f[0], f[1])) })
-        b.dimension(SITE)
         b.addDataString(r.key, r.name)
         b.EUt(r.eut).duration(r.duration)
         MC.recipes.push('grindless:' + r.type + '/' + r.name)

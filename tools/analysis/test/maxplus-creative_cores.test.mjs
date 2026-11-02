@@ -37,14 +37,22 @@ test('each line chains: every step takes the previous step product', () => {
   }
 });
 
-test('site machines carry their site; home machines carry none', () => {
+test('site machines carry their site; home machines and the refinery carry none', () => {
   const site = {
     kugelblitz_forming: 'grindless:cygnus_x1_orbit',
     magnetic_pair_production: 'grindless:sgr1806_orbit',
-    condensate_refinery: 'gcyr:black_hole_orbit',
     void_crystal_fab: 'grindless:local_group_filament'
   };
   for (const r of rows) assert.equal(r.dim, site[r.type], `${r.type}/${r.name}`);
+});
+
+test('the horizon shard is a one-item catalyst in the two core rows that need it, never consumed', () => {
+  const need = rows.filter((r) => (r.keep || []).some((x) => x[0] === 'grindless:horizon_shard'));
+  assert.deepEqual(need.map((r) => r.name).sort(), ['horizon_cloud_core', 'void_holographic_block']);
+  for (const r of need) {
+    assert.deepEqual(r.keep, [['grindless:horizon_shard', 1]], r.name);
+    assert.ok(!r.items.some((x) => x[0] === 'grindless:horizon_shard'), `${r.name} consumes the shard`);
+  }
 });
 
 test('one circuit per type, except the cryostat, whose rows differ by item inputs', () => {
