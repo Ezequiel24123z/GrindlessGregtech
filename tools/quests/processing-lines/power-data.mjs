@@ -95,7 +95,7 @@ export default gate({
     ['ivFission', 'ivVenus', 'ivMercury', 'ivSolar'],
     ['luvNaq', 'luvSolar', 'luvFusion'],
     ['luvIo', 'luvTether', 'luvSI'],
-    ['zpmNaq', 'zpmMk2'],
+    ['zpmMk2', 'zpmNaq'],
     ['uvThorium', 'uvLaser', 'uvMuon', 'uvMk3'],
     ['uhvSwarm', 'laterDyson', 'uivStars', 'uxvStars'],
     ['opvAnnihilation', 'opvStars'],
