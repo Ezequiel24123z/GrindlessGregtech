@@ -24,17 +24,17 @@ export const QUESTS = [
     key: 'START', kind: 'start', title: 'Several Stars', icon: 'gtceu:uev_machine_hull',
     deps: ['X:7C44999E6D4544D4'], x: 0, y: 0,
     desc: [
-      'The &6Stellar Neighbourhood Chart&r gave you the &6UEV Machine Hull&r. One star is not enough now: three more are within reach of a drive.',
+      'The &6Stellar Neighbourhood Chart&r is the research for the &6UEV Machine Casing&r line, and two casings are the body of the &6UEV Machine Hull&r. The hull also takes three UEV sensors and three UEV circuits, so the parts and the optical computer come first. One star is not enough now: three more are within reach of a drive.',
       'Home first: isotopes, pressure, light and a new fusion reactor. Then Alpha Centauri and Barnard b, and last a white dwarf.',
     ],
-    tasks: [it('gtceu:uev_machine_hull'), it('grindless:stellar_neighbourhood_chart')],
+    tasks: [ck()],
     rewards: [xp(50)],
   },
   {
     key: 'J_HOME', kind: 'reading', title: 'Home First', icon: 'gtceu:uev_machine_hull',
     deps: ['START'], x: 2, y: 0,
     desc: [
-      'Most of UEV is built at home. The drives, the stations and the gate all need what the four home lanes make, so the machine tabs come before the rockets.',
+      'Most of UEV is built at home. The drives, the stations and the gate all need what the four home lanes make, so build those machines before the rockets.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -79,9 +79,9 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the drives
   {
     key: 'MK1', kind: 'step', title: 'Drive Mk1', icon: 'grindless:dfd_mk1_motor',
-    deps: ['J_HOME'], x: 4, y: 0,
+    deps: ['J_HOME', 'PARTS', 'I_DFD'], x: 4, y: 0,
     desc: [
-      'The &6DFD Mk1 Motor&r is made at home: its antenna is a UEV emitter. It carries a level 9 rocket to the next star and needs nothing from abroad.',
+      'The &6Direct Fusion Drive Mk1&r is made at home in the Thruster Works from Wf/W tiles, SiC/SiC plates, HfTaCN ingots, D-He3 fuel mix and a UEV emitter for its antenna. It carries a level 9 rocket to the next star and needs nothing from abroad.',
     ],
     tasks: [it('grindless:dfd_mk1_motor')],
     rewards: [xp(150)],
@@ -126,9 +126,9 @@ export const QUESTS = [
   },
   {
     key: 'A_CHART', kind: 'step', title: 'The Course to Sirius', icon: 'grindless:pulsar_navigation_chart',
-    deps: ['A_GAS'], x: 12, y: -2,
+    deps: ['A_GAS', 'PULS'], x: 12, y: -2,
     desc: [
-      'Pulsars tick like clocks, and three of them fix your place. The &6Pulsar Navigation Chart&r gives the course to the white dwarf and is research for the UIV casing.',
+      'Pulsars tick like clocks, and three of them fix your place. The Pulsar Timing Station turns its timing data and the dust lab\'s iron-60 record into the &6Pulsar Navigation Chart&r. The chart gives the course to the white dwarf, is a catalyst of the gate\'s first holds at Sirius B, and is the research for the UIV casing line.',
     ],
     tasks: [it('grindless:pulsar_navigation_chart')],
     rewards: [xp(150)],
@@ -166,9 +166,9 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Mk2 and Sirius B
   {
     key: 'MK2', kind: 'step', title: 'Drive Mk2', icon: 'grindless:dfd_mk2_motor',
-    deps: ['A_CHART', 'B_CORE'], x: 14, y: 0,
+    deps: ['A_CHART', 'B_CORE', 'SXB', 'MAGP'], x: 14, y: 0,
     desc: [
-      'The Mk2 drive takes the UEV motor and a Brayton turbine wheel cast as single crystals. It is the drive for a level 10 rocket.',
+      'The Mk2 drive is a Mk1 motor with a UEV motor, eight bonded iron nitride magnets and a Brayton turbine wheel cast as single crystals. It is the drive for a level 10 rocket.',
     ],
     tasks: [it('grindless:dfd_mk2_motor'), it('grindless:brayton_turbine_wheel')],
     rewards: [xp(250)],
@@ -211,9 +211,9 @@ export const QUESTS = [
   },
   {
     key: 'S_PELLET', kind: 'step', title: 'A White Dwarf in a Bottle', icon: 'grindless:degenerate_pellet',
-    deps: ['SIRIUS'], x: 20, y: 0,
+    deps: ['SIRIUS', 'PEL'], x: 20, y: 0,
     desc: [
-      'A sealed &6Degenerate Pellet&r is a fuel that never runs out in your lifetime. The gate\'s load is run on it.',
+      'A sealed &6Degenerate Pellet&r is a fuel that never runs out in your lifetime. The Containment Works presses it from degenerate matter and an exotic matter cell, and the gate\'s hold is run on it.',
     ],
     tasks: [it('grindless:degenerate_pellet')],
     rewards: [xp(250)],
@@ -222,20 +222,21 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate
   {
     key: 'WARP', kind: 'step', title: 'The Gate at UEV', icon: 'gtceu:warp_gate',
-    deps: ['S_PELLET'], x: 22, y: 0,
+    deps: ['S_PELLET', 'NETUEV'], x: 22, y: 0,
     desc: [
-      'The warp gate was built for UHV. At the UEV load it draws sixteen amps of UEV and runs on a circuit 3 program. Your fuel is in the pellets and your power is in the cell.',
+      'The Warp Gate was built for UHV. At the UEV load it runs on a circuit 3 program and takes its power from the UEV wireless network. Your fuel is in the pellets and your power is in the cell.',
     ],
     tasks: [it('gtceu:warp_gate')],
     rewards: [xp(250)],
   },
   {
     key: 'HOLD', kind: 'exit', title: 'Gate to UIV', icon: 'gtceu:warp_gate',
-    deps: ['WARP'], x: 24, y: 0,
+    deps: ['WARP', 'TENS', 'EOS'], x: 24, y: 0,
     desc: [
-      'Hold the warp gate open at the UEV load for sixty seconds in Sirius B orbit, then tick this box. The gate\'s casing is never a reward: it is a product of the run.',
+      'Hold the Warp Gate open at the UEV load in Sirius B orbit. Its input takes a tennessine sample, a degenerate pellet, a degenerate EOS model, four UEV circuits of any kind and circuit 3. The hold makes nothing: you tick this box when it has run.',
+      'The next casing is built apart: the UIV Machine Casing line is researched with the Pulsar Navigation Chart and takes UEV casings, field generators and emitters.',
     ],
     tasks: [ck()],
-    rewards: [xp(300)],
+    rewards: [xp(100)],
   },
 ];

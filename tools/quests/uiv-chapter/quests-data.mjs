@@ -25,17 +25,17 @@ export const QUESTS = [
     key: 'START', kind: 'start', title: 'Dead Stars', icon: 'gtceu:uiv_machine_hull',
     deps: ['X:5316E435F8496672'], x: 0, y: 0,
     desc: [
-      'The warp gate left you the &6UIV Machine Hull&r and a stack of casings. The stars you can reach now are the ones that already died: a neutron star, a pulsar and a black hole.',
+      'The stars you can reach now are the ones that already died: a neutron star, a pulsar and a black hole. The &6UIV Machine Casing&r is the first step: the assembly line joins 2 UEV casings, 2 UEV field generators, 4 UEV emitters and 2 UEV circuits, and the Pulsar Navigation Chart from the UEV gate is its research.',
       'Home first. Nothing out there is built without metallic hydrogen and a very hard alloy.',
     ],
-    tasks: [it('gtceu:uiv_machine_hull'), it('gtceu:uiv_machine_casing')],
+    tasks: [it('gtceu:uiv_machine_casing')],
     rewards: [xp(50)],
   },
   {
     key: 'J_HOME', kind: 'reading', title: 'Home First', icon: 'gtceu:uiv_machine_hull',
     deps: ['START'], x: 2.5, y: 0,
     desc: [
-      'Most of UIV is built at home. The jumps, the stations and the gate all need what three home lanes make, so the machine tabs come before the rockets.',
+      'Most of UIV is built at home. The jumps, the stations and the gate all need what three home lanes make, so the home machines come before the rockets.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -130,25 +130,25 @@ export const QUESTS = [
     key: 'N_PELLET', kind: 'step', title: 'Neutronium Pellet', icon: 'grindless:neutronium_pellet',
     deps: ['JUMP1'], x: 17.5, y: 0,
     desc: [
-      'A spoonful of neutron matter held at ordinary pressure by a field is fiction: it is not the neutronium of the other mods. A &6Neutronium Pellet&r goes in the stored proof at the gate.',
+      'A spoonful of neutron matter held at ordinary pressure by a field is fiction: it is not the neutronium of the other mods. A &6Neutronium Pellet&r is kept for the stored proof and used up when the gate is held open.',
     ],
     tasks: [it('grindless:neutronium_pellet')],
     rewards: [xp(300)],
   },
   {
     key: 'R_CENSUS', kind: 'step', title: 'Census II', icon: 'grindless:superheavy_census_ii',
-    deps: ['JUMP1'], x: 17.5, y: 2,
+    deps: ['E120'], x: 20, y: 2,
     desc: [
-      'Neutrons leaking out of the crust build the heavy elements, as in a kilonova. The &6Element 119 Recoil&r and &6Census II&r are the proof that the chain made new atoms.',
+      'Neutrons leaking out of the crust build the heavy elements, as in a kilonova. The &6Element 119 Recoil Record&r and the &6Element 120 Recoil Record&r from the quest before go with a sealed capsule into &6Superheavy Census II&r, the proof that the chain made new atoms.',
     ],
     tasks: [it('grindless:element_119_recoil'), it('grindless:superheavy_census_ii')],
     rewards: [xp(300)],
   },
   {
     key: 'E120', kind: 'step', title: 'Element 120', icon: 'grindless:element_120_recoil',
-    deps: ['R_CENSUS'], x: 20, y: 2,
+    deps: ['JUMP1'], x: 17.5, y: 2,
     desc: [
-      'A titanium beam on a californium wheel leaves a few atoms of something new. The &6Element 120 Recoil&r is one more entry for the census. Real element 120 has never been made, so this one is a recipe and a hope.',
+      'A titanium beam on a californium wheel leaves a few atoms of something new. The &6Element 120 Recoil Record&r is one of the two entries Census II needs. Real element 120 has never been made, so this one is a recipe and a hope.',
     ],
     tasks: [it('grindless:element_120_recoil')],
     rewards: [xp(200)],
@@ -195,7 +195,7 @@ export const QUESTS = [
     key: 'EOS', kind: 'step', title: 'Equation of State', icon: 'grindless:ns_eos_chart',
     deps: ['P_TIMED'], x: 25, y: 0,
     desc: [
-      'Pulse profiles go into the Matrioshka, and the &6Neutron Star EOS Chart&r comes out. It tells you how hard a star pushes back. The computer decides on a long run.',
+      'Pulse profiles go into the Matrioshka, and the &6Neutron-Star EOS Chart&r comes out. It tells you how hard a star pushes back. The computer decides on a long run.',
     ],
     tasks: [it('grindless:ns_eos_chart')],
     rewards: [xp(250)],
@@ -249,9 +249,9 @@ export const QUESTS = [
   },
   {
     key: 'C_HALF', kind: 'step', title: 'Half a Sled Back', icon: 'grindless:recovered_half_sled',
-    deps: ['SLED'], x: 35, y: 2,
+    deps: ['SLED', 'KERR'], x: 35, y: 2,
     desc: [
-      'Drop a sled into the ergosphere and it splits: one half falls in, the other comes out with more energy than it took. The &6Recovered Half-Sled&r goes back to the bay for a refit.',
+      'Drop a sled into the ergosphere (the Penrose extraction needs the Kerr Chart) and it splits: one half falls in, the other comes out with more energy than it took. The &6Recovered Half-Sled&r goes back to the bay for a refit.',
     ],
     tasks: [it('grindless:recovered_half_sled')],
     rewards: [xp(300)],
@@ -260,32 +260,31 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate
   {
     key: 'HOLD', kind: 'exit', title: 'Open the Cygnus Gate', icon: 'gtceu:warp_gate',
-    deps: ['KERR', 'C_HALF'], x: 37.5, y: 0,
+    deps: ['STORE'], x: 40, y: 0,
     desc: [
-      'Hold the warp gate open at the UIV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Take care of your power first: the Penrose engine is the cheaper way to pay for it, not the only one.',
-      'The gate\'s casing is never a reward: it is a product of the run.',
+      'Run the warp gate\'s Cygnus hold in Cygnus X-1 orbit: it lasts 60 seconds and takes the stored proof. The gate leaves no item, so tick this box when it ends. Plan your power first: the Penrose engine is the cheaper way to pay for it, not the only one.',
     ],
     tasks: [ck()],
-    rewards: [xp(300)],
+    rewards: [xp(25)],
   },
   {
     key: 'STORE', kind: 'step', title: 'Stored Proof', icon: 'grindless:neutronium_pellet',
-    deps: ['HOLD'], x: 40, y: 0,
+    deps: ['C_HALF', 'R_CENSUS'], x: 37.5, y: 0,
     desc: [
-      'Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four UIV circuits of any kind in the store. The gate looks for them before it opens further, and the hold uses up the pellet.',
+      'Put a neutronium pellet, Census II, the equation of state chart, a half-sled and four UIV circuits of any kind in the gate\'s store. The hold in the next quest needs all of them at once and uses up the pellet.',
     ],
     tasks: [
       it('grindless:neutronium_pellet'), it('grindless:superheavy_census_ii'), it('grindless:ns_eos_chart'),
       it('grindless:recovered_half_sled'),
       { type: 'item', id: '36CBAFCCE90931F0', snbt: '{\n\t\t\t\tcount: 4L\n\t\t\t\tid: "36CBAFCCE90931F0"\n\t\t\t\titem: {\n\t\t\t\t\tCount: 1b\n\t\t\t\t\tid: "itemfilters:tag"\n\t\t\t\t\ttag: { value: "gtceu:circuits/uiv" }\n\t\t\t\t}\n\t\t\t\ttitle: "Any UIV Circuit"\n\t\t\t\ttype: "item"\n\t\t\t}' },
     ],
-    rewards: [xp(300)],
+    rewards: [xp(600)],
   },
   {
     key: 'UXV', kind: 'step', title: 'Gate to UXV', icon: 'gtceu:uxv_machine_casing', size: 1.5,
-    deps: ['STORE'], x: 42.5, y: 0,
+    deps: ['HOLD'], x: 42.5, y: 0,
     desc: [
-      'The &6Kerr Chart&r is the research for the UXV machine casing. Build it and the next voltage is open.',
+      'The &6Kerr Chart&r is the research for the UXV machine casing: the assembly line joins 2 UIV casings, 2 UIV field generators, 4 UIV emitters and 2 UIV circuits. Build it and the next voltage is open.',
     ],
     tasks: [it('gtceu:uxv_machine_casing'), it('grindless:kerr_chart')],
     rewards: [xp(400)],

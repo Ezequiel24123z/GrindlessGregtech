@@ -67,12 +67,12 @@ export const QUESTS = [
     rewards: [xp(250)],
   },
   {
-    key: 'I_DEC', kind: 'process', title: 'Written Final', icon: 'gtceu:direct_energy_converter',
+    key: 'I_DEC', kind: 'process', title: 'Plasma to Current', icon: 'gtceu:direct_energy_converter',
     deps: ['I_FUS3'], x: 10, y: 15.25,
     teach: {
-      for: 'The &6Direct Energy Converter&r takes the three Mk5 plasmas as new rows. Its output is written final, so no generator array doubles it.',
+      for: 'The &6Direct Energy Converter&r takes the three Mk5 plasmas as new recipes. Its output is final: a generator array does not double it.',
       needs: 'The converter from ZPM and a plasma line for each burn.',
-      unlocks: 'The Mk5 figures on the Power tab.',
+      unlocks: 'Mk5 power for the hatches and the wireless network.',
       automate: 'Plasma by pipe from the ring; keep the converter\'s hatches free of anything else.',
     },
     desc: [],
@@ -85,7 +85,7 @@ export const QUESTS = [
     key: 'PARH', kind: 'process', title: 'Parallel Control', icon: 'gtceu:uiv_parallel_hatch',
     deps: ['H_POWER'], x: 3, y: -2.75,
     teach: {
-      for: 'The &6UIV Parallel Control Hatch&r lets a mega machine run more copies of a recipe at once than the UEV one. Energy is still the limit: every copy pays its own EU/t.',
+      for: 'The &6Insane Parallel Control Hatch&r lets a mega machine run more copies of a recipe at once than the UEV one. Energy is still the limit: every copy pays its own EU/t.',
       needs: 'A machine with a parallel slot and the power for every copy.',
       unlocks: 'Wide runs on the Neutronium Compression Hall and the other mega machines.',
       automate: 'Feed the machine a bus wide enough for the copies it runs.',
@@ -98,13 +98,13 @@ export const QUESTS = [
     key: 'CELL', kind: 'machine', title: 'The UIV Cell', icon: 'grindless:uiv_smes_cell',
     deps: ['H_POWER'], x: 3, y: -0.75,
     teach: {
-      for: 'The &6UIV SMES Cell&r holds four times what the UEV cell does, in metallic hydrogen windings.',
-      needs: 'The nitride magnet works from UEV and a pulsar-timed repeater to keep the network in step.',
+      for: 'The &6UIV SMES Cell&r holds four times what the UEV cell does, in metallic hydrogen wire.',
+      needs: 'The Nitride Magnet Works from UEV: four UEV SMES cells, metallic hydrogen single wire and helium.',
       unlocks: 'The UIV wireless tier.',
       automate: 'Nothing to feed. Size the towers for your busiest hour.',
     },
     desc: [],
-    tasks: [it('grindless:uiv_smes_cell'), it('grindless:pulsar_timed_repeater')],
+    tasks: [it('grindless:uiv_smes_cell')],
     rewards: [xp(200)],
   },
   {
@@ -112,19 +112,19 @@ export const QUESTS = [
     deps: ['CELL'], x: 5, y: -0.75,
     teach: {
       for: 'Move your towers onto &6UIV SMES Cells&r and the wireless network carries UIV to every station, out to the black hole.',
-      needs: 'One formed tower holding a UIV cell: the network runs at its strongest cell, so until then it stays at UEV.',
+      needs: 'One formed tower holding a UIV cell: the network runs at its strongest cell, so until then it stays at UEV. Each wireless hatch also takes a &6Pulsar-Timed Repeater&r (photonic integration hall) to keep the network in step.',
       unlocks: 'The wireless hatches at UIV, and the gate\'s load for UXV.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
     desc: [],
-    tasks: [it('gtceu:uiv_wireless_energy_hatch'), it('gtceu:uiv_wireless_dynamo_hatch')],
+    tasks: [it('grindless:pulsar_timed_repeater'), it('gtceu:uiv_wireless_energy_hatch'), it('gtceu:uiv_wireless_dynamo_hatch')],
     rewards: [xp(200)],
   },
   {
     key: 'I_GATELOAD', kind: 'milestone', title: 'Sixteen Amps of UIV', icon: 'gtceu:uiv_wireless_energy_hatch',
     deps: ['NETUIV'], x: 7, y: -0.75,
     desc: [
-      'The gate to UXV needs 536,870,912 EU/t for sixty seconds, and the bank loses five per cent on the way in. Two Mk5 rings and a Penrose engine close the sum; four rings do it without the engine. The Power tab shows each source.',
+      'The gate to UXV holds for sixty seconds at a very high UIV load, and the bank loses five per cent on the way in. Two Mk5 rings and a Penrose engine close the sum; four rings do it without the engine. Tick this box once your bank and rings can carry it.',
     ],
     tasks: [ck()],
     rewards: [xp(100)],
@@ -146,7 +146,7 @@ export const QUESTS = [
     key: 'I_OM_METAL', kind: 'process', title: 'Melts, Powders and Fibres', icon: 'gtceu:hot_strip_mill',
     deps: ['H_POWER'], x: 3, y: 1.25,
     teach: {
-      for: 'The &6Hot Strip Mill&r, &6Powder Bed Printer&r, &6Electron-Beam Furnace&r, &6Plasma Quench Caster&r, &6Megabar Press&r and &6CVI Furnace&r each take a mode: a canned RHEA slab, an impeller, refined niobium and tin, a sprayed first wall, compacted canisters and a tungsten fibre preform.',
+      for: 'The &6Hot Strip Mill&r, &6Powder Bed Printer&r, &6Electron Beam Furnace&r, &6Plasma Quench Caster&r, &6Megabar Press&r and &6CVI Furnace&r each take a mode: a canned RHEA slab, an impeller, refined niobium and tin, a sprayed first wall, compacted canisters and a tungsten fibre preform.',
       needs: 'The controllers you already own and the new alloys.',
       unlocks: 'The RHEA parts, the Mk5 first wall and the sleds.',
       automate: 'Slabs and preforms by bus; recycle the powder that is not sintered.',
@@ -162,7 +162,7 @@ export const QUESTS = [
     key: 'I_OM_CHEM', kind: 'process', title: 'Separations and Syngas', icon: 'gtceu:extraction_cascade',
     deps: ['H_ROWS'], x: 3.5, y: 4.25,
     teach: {
-      for: 'The &6Extraction Cascade&r, &6Platinum Plant&r, &6Syngas Plant&r, &6Methane Pyrolyser&r, &6Europium Reductor&r, &6Aerogel Works&r and &6Fluorspar Kiln&r take a new mode each: niobium split, r-process ash cuts, methanation of fusion ash, shock graphite, rare-earth oxides, positronium aerogel and thorium fluoride.',
+      for: 'The &6Rare Earth Extraction Cascade&r, &6Platinum Plant&r, &6Syngas and Shift Plant&r, &6Methane Pyrolyser&r, &6Europium Reductor&r, &6Aerogel Works&r and &6Fluorspar Kiln&r take a new mode each: niobium split, r-process ash cuts, methanation of fusion ash, shock graphite, rare-earth oxides, positronium aerogel and thorium fluoride.',
       needs: 'The controllers you own and the ash from the fusion burns.',
       unlocks: 'The platinum-group cut, the carbon for diamond and the lanthanides.',
       automate: 'Each plant hands its product on by pipe; send the spent ash back to its plant.',
@@ -178,7 +178,7 @@ export const QUESTS = [
     key: 'I_OM_ISO', kind: 'process', title: 'Heavy Water and Cold Helium', icon: 'gtceu:superfluid_helium_plant',
     deps: ['H_ROWS'], x: 3.5, y: 6.25,
     teach: {
-      for: 'The &6Cryogenic Plant&r, &6Heavy Water Plant&r, &6Tritium Removal Facility&r, &6Superfluid Helium Plant&r, &6Calutron&r and &6Pyroprocessing Cell&r take a mode each: para hydrogen, depleted protium, a polish, a solid target, new isotopes and titanium sponge.',
+      for: 'The &6Cryogenic Plant&r, &6Heavy-Water Plant&r, &6Tritium Removal Facility&r, &6Superfluid Helium Plant&r, &6Calutron&r and &6Pyroprocessing Cell&r take a mode each: para hydrogen, depleted protium, a polish, a solid target, new isotopes and titanium sponge.',
       needs: 'The older controllers and the isotope feeds.',
       unlocks: 'The polarised fuels, the titanium-50 bullet and the cold targets.',
       automate: 'Isotopes by bus; return the helium ash to the plant.',
@@ -194,7 +194,7 @@ export const QUESTS = [
     key: 'I_OM_NUC', kind: 'process', title: 'Heavier Cuts', icon: 'gtceu:hot_cell',
     deps: ['H_NUC'], x: 3, y: -44.5,
     teach: {
-      for: 'The &6Fuel Fabrication Plant&r, &6Hot Cell&r, &6Actinide Partitioning Plant&r, &6Transuranium Facility&r, &6Waste Retrieval Plant&r, &6Heavy-Ion Cyclotron&r, &6Recoil Separator&r and &6Superheavy Chemistry Lab&r take new rows: zirconium and flash targets, canisters, einsteinium cuts, synroc and the elements 119 and 120.',
+      for: 'The &6Fuel Fabrication Plant&r, &6Hot Cell&r, &6Actinide Partitioning Plant&r, &6Transuranium Facility&r, &6Waste Retrieval Plant&r, &6Heavy Ion Cyclotron&r, &6Recoil Separator&r and &6Superheavy Chemistry Lab&r take new rows: zirconium and flash targets, canisters, einsteinium cuts, synroc and the elements 119 and 120.',
       needs: 'The UEV superheavy chain and the hot-cell feeds.',
       unlocks: 'The californium wheel, census II and the sled canisters.',
       automate: 'Targets and cuts move by bus; the waste canisters go to the sled line.',
