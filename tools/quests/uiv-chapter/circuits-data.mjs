@@ -47,7 +47,7 @@ export const QUESTS = [
     unlocks: 'The UIV hatches and the controllers of this era.',
     automate: 'Boards and chips come from the cleanroom by ME; stock what it returns.',
   }, [it('gtceu:uiv_circuit_assembler')], 150),
-  q('HATCH', 'step', 'UIV Hatches and Cable', 'gtceu:uiv_energy_input_hatch', ['PUMP'], 21, 5.75, {
+  q('HATCH', 'step', 'UIV Hatches and Cable', 'gtceu:uiv_energy_input_hatch', ['HULL'], 21, 8.75, {
     for: 'The &6UIV Energy Hatch&r and &6UIV Dynamo Hatch&r are assembly line recipes on two UIV hulls, with metallic hydrogen cable, RHEA plates and FFKM seals. &6Metallic Hydrogen Single Cable&r carries the power.',
     needs: 'Two UIV machine hulls, three metallic hydrogen cables, six RHEA plates, six FFKM seals, three UIV circuits of any kind, three UIV sensors and a UIV motor.',
     unlocks: 'Every UIV machine that takes power from a hatch.',
