@@ -48,7 +48,7 @@ ClientEvents.lang('en_us', event => {
 
     add('emi.grindless.info.wireless_energy_tower.0', "The Wireless Energy Tower is the store of the wireless network. It has no recipes: its 32 slots take capacitor cells of any tier, and every formed tower adds what its cells hold to the network, which is shared by every world.")
     add('emi.grindless.info.wireless_energy_tower.1', "Wireless dynamo hatches and covers put EU in; wireless energy hatches and covers at or below the network's tier (its strongest cell) take it out. With no tower formed, nothing moves. Swapping a cell unforms the tower; the stored EU stays.")
-    add('emi.grindless.info.wireless_energy_tower.2', 'The store of the wireless network: one network for every world. Each formed tower adds what its capacitor cells hold, and towers add up.')
+    add('emi.grindless.info.wireless_energy_tower.2', 'The store of the wireless network: one network per FTB team, for every world. Each formed tower adds what its capacitor cells hold to its team\'s store, and a team\'s towers add up.')
     add('emi.grindless.info.wireless_energy_tower.3', 'Its 32 cell slots take capacitor cells of any tier, or its steel casing for an empty slot. The network sends EU out at the tier of the strongest cell in any formed tower: one MAX cell feeds every hatch and cover of every tier.')
     add('emi.grindless.info.wireless_energy_tower.4', 'Wireless dynamo hatches and covers put EU in (5% is lost on the way in); wireless energy hatches and covers at or below the network\'s tier take it out. With no tower formed, nothing moves.')
     add('emi.grindless.info.wireless_energy_tower.5', 'Swapping a cell unforms the tower; the stored EU stays in the network. No hatches: everything comes and goes wirelessly.')
