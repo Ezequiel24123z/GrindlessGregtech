@@ -2945,7 +2945,7 @@
         "m:gtceu:baseline_astrometer",
         "m:gtceu:sample_receiving_facility",
         "m:gtceu:organoid_array",
-        "m:gtceu:warp_gate",
+        "m:gtceu:warp_gate@uhv",
         "grindless:proxima_flora_sample",
         "grindless:proxima_ice_core",
         "grindless:chitosan_scaffold",
