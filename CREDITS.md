@@ -10,6 +10,8 @@ The pack does not redistribute mods: packwiz downloads them from their official 
 | KubeJS, Rhino | Latvian / KubeJS-Mods | LGPL-3.0 | Pack scripts. |
 | FTB Quests, Library, Teams | FTB | Author's licence | Quest book. |
 | Wildcard Pattern 0.1.2 | LeoDreamer (github.com/LeoDreamer2004/Wildcard-Pattern) | MIT | Mod from its GitHub release; our assembler recipe. |
+| packwiz-installer-bootstrap 0.0.3 | packwiz (github.com/packwiz/packwiz-installer-bootstrap) | MIT | Shipped in the Prism instance zip with its full licence text (tools/prism/packwiz-installer-bootstrap.LICENSE.txt); pinned by digest. AF-H #214. |
+| packwiz | packwiz (github.com/packwiz/packwiz) | MIT | Builds the pack index (tools/Get-Packwiz.ps1, pinned by build and digest); not shipped. AF-H #214. |
 | Gregtech Terminals 6.8.5 (gtceuterminal) | Bgame (github.com/BgameXl/gtceu-terminal-addon) | MIT | Installed mod. The Hologram Projector calls its public `BlockPatternReflection` to read GTM's pattern grid; no code copied. |
 
 ## Ideas and processes
