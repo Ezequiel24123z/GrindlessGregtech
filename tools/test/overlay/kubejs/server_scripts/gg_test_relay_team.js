@@ -1,4 +1,4 @@
-// priority: -8502
+// priority: -7005
 // TEST ONLY, FIX-RELAY (#255; lib/relay_platforms.js). Command: kubejs custom_command gg_test_relay_team. Band: the Overworld, X 49920-49983, Z 0-63,
 // Y 98-112 (a jump ring controller at X 49975, Y 100, Z 40; the platform it queues is placed with a test row at X 49950, Z 10).
 // Doubt it settles: the team a relay platform's hatches are tracked under is the team of the player standing in the ring that ran the jump.
