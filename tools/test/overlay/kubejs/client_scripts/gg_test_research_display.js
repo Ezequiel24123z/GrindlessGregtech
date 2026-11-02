@@ -83,7 +83,7 @@
         }
       }
     Java.loadClass('net.minecraft.FileUtil').createDirectoriesSafe('kubejs/exported')
-    JsonIO.write(OUT, JsonParser.parseString(JSON.stringify(all)))
+    JsonIO.write(OUT, JsonParser.parseString(JSON.stringify({ recipes: all })))
     log('dump', 'PASS', total + ' recipes in ' + cats.size() + ' categories -> ' + OUT)
   }
 
