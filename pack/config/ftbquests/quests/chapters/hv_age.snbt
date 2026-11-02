@@ -85,7 +85,7 @@
 		{
 			dependencies: ["5B595A919C80BFC0"]
 			description: [
-				"The greenhouse at HV size: more bores per run. Fertilizer and carbon dioxide. Plant stock for the chemistry ahead. Seeds in, harvest out, both by bus."
+				"The greenhouse at HV size: more plants grown and harvested per run. Fertilizer and carbon dioxide. Plant stock for the chemistry ahead. Seeds in, harvest out, both by bus."
 				"HV needs no more wood than MV: its carbon comes up as crude oil."
 			]
 			icon: "gtceu:hv_greenhouse"

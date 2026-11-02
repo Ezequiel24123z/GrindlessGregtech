@@ -48,6 +48,7 @@ const LAYOUT = {
   LIVING: [26.5, -8.5, null],
   WASM: [29, -8, null],
   DBANK: [17.5, -7, null],
+  BLANKORB: [16, -6.5, null],
   HPCA: [19, -7, null],
   RSTN: [20.5, -8, null],
   ORB: [23.5, -8, null],

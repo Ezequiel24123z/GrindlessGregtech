@@ -36,7 +36,7 @@ export const QUESTS = [
     key: "NCPU", kind: "wafer", title: "Nano CPU Wafer", icon: "gtceu:nano_cpu_wafer",
     deps: ["ECA"], x: 22, y: 1.5,
     teach: {
-      for: "A CPU wafer treated in an EV chemical reactor becomes a &6Nano CPU Wafer&r, and the laser engraver cuts it into chips.",
+      for: "A CPU wafer treated in an EV chemical reactor becomes a &6Nano CPU Wafer&r,       and a cutter in the cleanroom slices it into chips.",
       needs: "A working cleanroom, carbon fibers and the HV wafer line behind you.",
       unlocks: "The nanoprocessor, and with it the whole nano ladder.",
       automate: "Cleanroom hatches take wafers from the ME network and return chips to it.",
@@ -62,10 +62,10 @@ export const QUESTS = [
     key: "MPIC", kind: "wafer", title: "MPIC Chips", icon: "gtceu:mpic_chip",
     deps: ["PHOS"], x: 24, y: 6,
     teach: {
-      for: "The phosphorus wafer becomes an &6MPIC Wafer&r and the engraver cuts the &6MPIC Chips&r out of it.",
-      needs: "A laser engraver and the right lens.",
+      for: "The phosphorus wafer becomes an &6MPIC Wafer&r       and a cutter slices the &6MPIC Chips&r out of it.",
+            needs: "A cutter in a working cleanroom.",
       unlocks: "Real EV energy and dynamo hatches.",
-      automate: "A wafer in, chips out. Let ME feed the engraver and store the chips.",
+      automate: "A wafer in, chips out. Let ME feed the cutter and store the chips.",
     },
     desc: [],
     tasks: [it("gtceu:mpic_wafer", 1), it("gtceu:mpic_chip", 1)],

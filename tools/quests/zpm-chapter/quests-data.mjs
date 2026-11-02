@@ -32,7 +32,7 @@ export const QUESTS = [
     deps: ['X:1753F1FE9C989F6C'], x: 0, y: 0,
     desc: [
       'The &6Saturn Transfer Chart&r from the Jovian flyby points at rings, a hazy moon and two ice giants. Nothing out there is walkable, so the trip starts in orbit and stays there.',
-      'The other ZPM chapters hold the machines, the circuits and the power. This one keeps the trip.',
+      'The machines, circuits and power for ZPM sit in the later quests. This branch keeps the trip.',
     ],
     tasks: [ck()],
     rewards: [xp(50)],
@@ -51,9 +51,9 @@ export const QUESTS = [
     key: 'LVL5', kind: 'step', title: 'Level Five', icon: 'grindless:naquadah_fuel_tank',
     deps: ['J_SUN'], x: 4, y: 0,
     desc: [
-      'A &6Naquadah Fuel Tank&r and a &6Saturnian Quantum Seed&r are what the rocket to Saturn needs.',
+      'A &6Naquadah Fuel Tank&r is what the rocket to Saturn needs. Everything else out there is made on the spot, in orbit.',
     ],
-    tasks: [it('grindless:naquadah_fuel_tank'), it('grindless:saturnian_quantum_seed')],
+    tasks: [it('grindless:naquadah_fuel_tank')],
     rewards: [xp(100)],
   },
   {
@@ -89,9 +89,9 @@ export const QUESTS = [
     key: 'J_RICE', kind: 'step', title: 'Ring Ice', icon: 'grindless:ring_ice_sample',
     deps: ['STN3'], x: 8, y: -1.5,
     desc: [
-      'Nobody mines a ring by hand. A net sweeps through it and brings back a &6Ring Ice Sample&r, and the samples are the start of everything the rings teach you.',
+      'Nobody mines a ring by hand. A net sweeps through it and brings back a &6Ring Ice Sample&r. A chemical reactor in orbit turns one, with an ender pearl and helium-3, into the &6Saturnian Quantum Seed&r, your half of the Saturn link.',
     ],
-    tasks: [it('grindless:ring_ice_sample')],
+    tasks: [it('grindless:ring_ice_sample'), it('grindless:saturnian_quantum_seed')],
     rewards: [xp(100)],
   },
   {
@@ -154,9 +154,9 @@ export const QUESTS = [
     key: 'LVL6', kind: 'step', title: 'Level Six', icon: 'grindless:aerogel_fuel_tank',
     deps: ['J_SIM'], x: 12, y: 0,
     desc: [
-      'The next tank is built round aerogel, and the &6Uranian Quantum Seed&r comes from the new chart. Bring plenty of fuel: nothing out there refuels you.',
+      'The next tank is built round aerogel. Bring plenty of fuel: nothing out there refuels you.',
     ],
-    tasks: [it('grindless:aerogel_fuel_tank'), it('grindless:uranian_quantum_seed')],
+    tasks: [it('grindless:aerogel_fuel_tank')],
     rewards: [xp(120)],
   },
   {
@@ -172,7 +172,7 @@ export const QUESTS = [
     key: 'J_URA', kind: 'reading', title: 'Tipped Over', icon: 'grindless:uranian_quantum_seed', size: 0.75,
     deps: ['STN4'], x: 14, y: 1.5,
     desc: [
-      "Uranus rolls round the Sun on its side, so a day there lasts decades. The station doesn't care, but the chart did, which is why it took a seed of its own.",
+      "Uranus rolls round the Sun on its side, so its poles see years of daylight, then years of dark. The station doesn't care, but the chart did, which is why it took a seed of its own.",
     ],
     tasks: [ck()],
     rewards: [xp(40)],
@@ -181,9 +181,9 @@ export const QUESTS = [
     key: 'J_ICE', kind: 'step', title: 'Deep Gas', icon: 'grindless:ice_giant_atmosphere_sample',
     deps: ['STN4'], x: 16, y: 0,
     desc: [
-      'Under a hull rated for it, a siphon reaches far deeper than the one at Saturn. What it brings up includes an &6Ice Giant Atmosphere Sample&r.',
+      'Under a hull rated for it, a siphon reaches far deeper than the one at Saturn. What it brings up includes an &6Ice Giant Atmosphere Sample&r, which a chemical reactor in orbit turns into the &6Uranian Quantum Seed&r.',
     ],
-    tasks: [it('grindless:ice_giant_atmosphere_sample')],
+    tasks: [it('grindless:ice_giant_atmosphere_sample'), it('grindless:uranian_quantum_seed')],
     rewards: [xp(120)],
   },
   {
@@ -199,7 +199,7 @@ export const QUESTS = [
     key: 'J_TRI', kind: 'reading', title: 'Where the Carbon Goes', icon: 'grindless:cvd_diamond_plate', size: 0.75,
     deps: ['J_DIA'], x: 18, y: -1.5,
     desc: [
-      'The seed sits at the head of the qubit line: diamond plate, implanted wafer, cold fab. The circuits chapter walks you through it.',
+      'The seed sits at the head of the qubit line: diamond plate, implanted wafer, cold fab. The circuits that follow walk you through it.',
     ],
     tasks: [ck()],
     rewards: [xp(40)],
