@@ -17,7 +17,7 @@
     {"id":"gtceu:carbon_burning_ash","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:direct_conversion"],"used":["gtceu:plasma_quench"]},
     {"id":"gtceu:carbon_burning_ash_plasma","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:fusion_reactor"],"used":["gtceu:direct_conversion"]},
     {"id":"gtceu:carbon_burning_fuel","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:electron_beam_refining"],"used":["gtceu:fusion_reactor"]},
-    {"id":"gtceu:chlorodifluoromethane","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor"],"used":["gtceu:chemical_reactor"]},
+    {"id":"gtceu:chlorodifluoromethane","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor"],"used":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"]},
     {"id":"gtceu:clarified_xeno_lysate","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:xenobiochemistry"],"used":["gtceu:xenobiochemistry"]},
     {"id":"gtceu:cno_ash_plasma","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:fusion_reactor"],"used":["gtceu:direct_conversion"]},
     {"id":"gtceu:cold_dt_fill","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:cryogenic_processing"],"used":["gtceu:fuel_fabrication"]},
