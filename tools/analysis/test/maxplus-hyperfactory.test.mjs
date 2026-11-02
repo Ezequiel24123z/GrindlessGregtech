@@ -83,8 +83,10 @@ test('the MAX+ hatch is a second tier-14 create, reflected to 4,194,304, and is 
   h.registry.filter(([t]) => t === 'gtceu:machine').forEach(([, cb]) => cb({ create: (n) => { names.push(n); return bb; } }));
   assert.ok(names.includes('maxplus_parallel_hatch'));
   const src = read('startup_scripts', 'lib/parallel_hatch.js');
-  assert.match(src, /setInt\(hatch, 4194304\)/);
+  assert.match(src, /MAXPLUS_PARALLEL = 4194304/);
+  assert.match(src, /forceParallel\(hatch, MAXPLUS_PARALLEL\)/);
   assert.equal(4 ** 11, 4194304);
+  assert.equal(h.G.parallelHatch.maxplusParallel, 4194304);
   const list = h.G.parallelHatch.hatches;
   assert.equal(list.filter((i) => i === 'gtceu:max_maxplus_parallel_hatch').length, 1);
 });

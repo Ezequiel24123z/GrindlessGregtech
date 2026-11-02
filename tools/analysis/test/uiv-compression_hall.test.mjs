@@ -135,11 +135,13 @@ test('names, tooltips and the info page exist in en_us', () => {
   assert.deepEqual(emi.stacks, [`item:gtceu:${id}`]);
 });
 
-// UXV-M1 adds tier 12 to lib/parallel_hatch.js (uxv-parallel_hatch.test.mjs pins it), so only lib/mega.js stays pinned here
-test('lib/mega.js is untouched', () => {
+// AF-K2 (M8-11) adds one hatchParallel() hook to lib/mega.js; the rest of the file stays as it was
+test('lib/mega.js only gained the MAX+ hatch hook', () => {
   let base = null;
   try { base = execFileSync('git', ['rev-parse', '--verify', '-q', '998bc073^{commit}'], { cwd: ROOT, encoding: 'utf8' }).trim(); } catch (e) { base = null; }
   if (!base) return;
-  const diff = execFileSync('git', ['diff', '--name-only', base, '--', 'pack/kubejs/startup_scripts/grindless/lib/mega.js'], { cwd: ROOT, encoding: 'utf8' }).trim();
-  assert.equal(diff, '');
+  const diff = execFileSync('git', ['diff', '--numstat', base, '--', 'pack/kubejs/startup_scripts/grindless/lib/mega.js'], { cwd: ROOT, encoding: 'utf8' }).trim();
+  if (!diff) return;
+  const [add, del] = diff.split(/\s+/).map(Number);
+  assert.ok(add <= 4 && del <= 1, `mega.js changed by +${add}/-${del}`);
 });
