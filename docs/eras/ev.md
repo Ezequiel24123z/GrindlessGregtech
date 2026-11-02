@@ -34,7 +34,7 @@ All of this arrives already done in the end-of-HV version:
 
 ## The Moon base
 
-In EV the Moon goes from a place you visit to a factory that runs on its own. Its machines only produce there: all their recipes carry `.dimension('gcyr:luna')`, and their structures require sintered regolith brick, which is only made on the Moon. They can be built elsewhere, but they will not work.
+In EV the Moon goes from a place you visit to a factory that runs on its own. Recipes that use the place itself (the cryogenic plant's cold and vacuum, the solar array's light, the antenna, the lunar veins) carry `.dimension('gcyr:luna')`. Recipes of shippable inputs (the regolith cell, the sintered regolith brick, the seeds, the dome's lunar mode) carry none: they run anywhere (SITE-A, owner rule of 2026-11-02).
 
 ### Moon rules
 
@@ -57,7 +57,7 @@ AE2 is the backbone between planets (the user's decision), and improving it is a
   - Earth covers the lunar night, and the daytime solar surplus flows home.
 - **Trunk:** an ME P2P pair uses 1 of the bridge's 32 channels and carries 32.
 - **Pairs without travel.** The base builds the lunar half of each new pair itself (with a cell part; it matches the HV recipe), so the network grows on its own.
-- **Mars.** The first Earth–Mars pair comes at the end of the era. Its Martian half is the Martian Quantum Seed (`grindless:martian_quantum_seed`), which is made only on Mars: chemical reactor, merrillite dust + ender pearl + 250 mB helium-3. AE2's ritual then marks the pair for Mars. No charged energy cell is needed: AE2 links quantum bridges without power, and the linked halves run on home's energy.
+- **Mars.** The first Earth–Mars pair comes at the end of the era. Its Martian half is the Martian Quantum Seed (`grindless:martian_quantum_seed`), which is made anywhere: chemical reactor, merrillite dust + ender pearl + 250 mB helium-3. AE2's ritual then marks the pair for Mars. No charged energy cell is needed: AE2 links quantum bridges without power, and the linked halves run on home's energy.
 - **Goal of the era:** a second Earth–Moon pair built by the base, a trunk of 64 channels or more, 32,768 EU/t crossing, and the Mars pair.
 
 ## Mars, end of EV
@@ -120,7 +120,7 @@ Built on 2026-10-25 (run `b1-ev-tripod-2`, on the Moon).
 
 What it gains: **recipes that do not exist on Earth.** Oxygen on a world with no air, Titanium without chlorine or magnesium, and the brick the whole Moon base is built from.
 
-- **Recipe type:** `gtceu:regolith_processing` (no id clash), every recipe with `.dimension('gcyr:luna')` (read from `veins_moon.json`), 1,920 EU/t, no parallels. Ids `grindless:regolith_processing/ev/<name>`. The circuit picks the mode, so no mode veto is needed:
+- **Recipe type:** `gtceu:regolith_processing` (no id clash), no dimension condition (shippable inputs, SITE-A), 1,920 EU/t, no parallels. Ids `grindless:regolith_processing/ev/<name>`. The circuit picks the mode, so no mode veto is needed:
 
   | Circuit | Recipe | In | Out | Ticks |
   |---|---|---|---|---|
@@ -260,7 +260,7 @@ What it gains: **several steps in one, and energy back.** Hot ingots go straight
 What it gains: **crops where there is no sky, no soil and no air.** LED panels grow plants through the 14-day lunar night, and the plants turn CO₂ into O₂. The idea comes from Leisure's large greenhouse (no sky needed) and the catalog's sealed lunar dome. The physics is real: BIOS-3 and Lunar Palace 1.
 
 - **Recipe type:** `gtceu:greenhouse`, the family's own type. It was checked on 2026-10-25 (run `b8-sealed-dome-2`, on the Moon): neither the type nor any of its old recipes checks sky, daytime or dimension.
-  - **Programmed circuit 5 (Moon) or 6 (Mars) is the sealed mode,** off-world only. Each plant + 100 mB water + 200 mB CO₂ (Moon, circuit 5, `.dimension('gcyr:luna')`), or water alone (Mars, circuit 6, `.dimension('gcyr:mars')`, CO₂ from the air), gives ×3 the base output + 100 mB O₂, at 8 EU/t for 200 ticks. That is the HV greenhouse's best yield, with LEDs and no fertilizer. There are two recipes per plant (86 in all), because the Mars one has no CO₂ input. Each site has its own circuit so that neither recipe's ingredients are a prefix of the other's in GTM's lookup.
+  - **Programmed circuit 5 (Moon) or 6 (Mars) is the sealed mode.** Each plant + 100 mB water + 200 mB CO₂ (lunar mode, circuit 5, no dimension: shipped CO2), or water alone (Mars, circuit 6, `.dimension('gcyr:mars')`, CO₂ from the air), gives ×3 the base output + 100 mB O₂, at 8 EU/t for 200 ticks. That is the HV greenhouse's best yield, with LEDs and no fertilizer. There are two recipes per plant (86 in all), because the Mars one has no CO₂ input. Each site has its own circuit so that neither recipe's ingredients are a prefix of the other's in GTM's lookup.
   - Circuits 0–4 work as in the HV greenhouse (circuit 4 is the fertilizer + CO₂ variant). The cap is 64 runs.
   - Lower greenhouses never run the sealed recipes, which have `/ev/` ids and need circuit 5 or 6.
 - **CO₂:** on Mars, it comes straight from the outside air, like the gas collector. On the Moon, it comes from home through the bridge. Home sources include the engine test stand's exhaust (MV), which gives that CO₂ a destination two eras later.
@@ -354,7 +354,7 @@ New rules in `tools/analysis/tiers/ev.json`:
     - GTM's red granite loses its 0.25% uranium dust in the macerator.
     - The other ores with a uraninite byproduct (uraninite, pitchblende, plutonium) are radioactive themselves and held back until IV.
 - **EV in two substages.** The validator splits the era into *Moon* and *Mars*: nothing on the way to Mars can require Tungsten, Samarium or Deuterium.
-- **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`. The fuel recipes carry the five air dimensions (ORed; the validator ORs them too since 2026-10-25, `lib/model.mjs`).
+- **Site machines.** Every recipe for the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`. The fuel recipes carry the five air dimensions (ORed; the validator ORs them too since 2026-10-25, `lib/model.mjs`).
 - **Implemented (C1, 2026-10-25).** `tools/analysis/tiers/ev.json` extends `hv`.
   - `eraOrder` goes `hv`, `ev`, `ev-mars`, `iv`. The Mars trip is the synthetic `mars-trip`: the advanced tank and motor, which need the antenna's chart.
   - Exclusivity: titanium and helium-3 only from the Moon; tungsten, merrillite, samarium, the deuterium-rich ice and deuterium only from Mars. Uranium, radon and the quantum eye are real FAIL checks.

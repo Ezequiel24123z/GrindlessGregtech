@@ -15,7 +15,7 @@ ClientEvents.lang('en_us', event => {
 
     add('grindless.machine.regolith_cell.tooltip.0', '§7Processes lunar regolith into its gases and minerals.')
 
-    add('tooltip.grindless.platinum_electrode.regolith_cell', 'Also the anode of the Regolith Cell\'s electrolysis, on the Moon.')
+    add('tooltip.grindless.platinum_electrode.regolith_cell', 'Also the anode of the Regolith Cell\'s electrolysis.')
 })
 
 ItemEvents.tooltip(event => {
