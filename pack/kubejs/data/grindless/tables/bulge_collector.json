@@ -4,8 +4,8 @@
     "collector_node_assembly": {
       "dataKey": "grindless_collector_node_assembly",
       "recipes": [
-        { "name": "node_si_ribbon", "circuit": 1, "eut": 268435456, "duration": 400,
-          "itemsIn": [{ "id": "grindless:si_alloy_powder", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
+        { "name": "node_si_ribbon", "circuit": 1, "eut": 268435456, "duration": 400, "_why": "The ribbon for PV film is boron-doped as it grows (integrator, 2026-11-02: the step had lost its site and was a one-input rename).",
+          "itemsIn": [{ "id": "grindless:si_alloy_powder", "count": 2 }, { "id": "gtceu:small_boron_dust", "count": 1 }], "kept": [], "wear": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:si_ribbon", "count": 2 }], "fluidsOut": [] },
         { "name": "node_pv_film", "circuit": 2, "eut": 268435456, "duration": 400,
           "itemsIn": [{ "id": "grindless:si_ribbon", "count": 2 }, { "id": "grindless:silicate_debris_fraction", "count": 1 }], "kept": [], "wear": [], "fluidsIn": [],

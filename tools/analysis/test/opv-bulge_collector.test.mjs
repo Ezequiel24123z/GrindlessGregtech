@@ -95,7 +95,7 @@ test('node works c1-c4: ribbon, film, node, deployed pack; 268,435,456 EU/t, onl
   const t = BC_ROWS.filter((r) => r.type === 'collector_node_assembly');
   assert.deepEqual(plain(t.map((r) => r.circuit)), [1, 2, 3, 4]);
   for (const r of t) assert.deepEqual([r.eut, (r.site || undefined), r.duration], [2 * V_UXV, r.name === 'node_pack_deploy' ? SITE : undefined, 400], r.name);
-  assert.deepEqual(ids(rec('node_si_ribbon').itemsIn), [['grindless:si_alloy_powder', 2]]);
+  assert.deepEqual(ids(rec('node_si_ribbon').itemsIn), [['grindless:si_alloy_powder', 2], ['gtceu:small_boron_dust', 1]]);
   assert.deepEqual(ids(rec('node_si_ribbon').itemsOut), [['grindless:si_ribbon', 2]]);
   assert.deepEqual(ids(rec('node_pv_film').itemsIn), [['grindless:si_ribbon', 2], ['grindless:silicate_debris_fraction', 1]]);
   assert.deepEqual(ids(rec('node_pv_film').itemsOut), [['grindless:pv_collector_film', 1]]);
