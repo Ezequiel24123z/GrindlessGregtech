@@ -98,7 +98,7 @@ export const QUESTS = [
     key: 'I_AE2', kind: 'milestone', title: 'AE2 at the Centre', icon: 'ae2:controller',
     deps: ['GATE14'], x: 2, y: 5,
     desc: [
-      'AE2 has no new tier at MAX. Every platform round the hole comes with an AE2 controller and a drive of its own, so a network starts there the moment you arrive.',
+      'AE2 has no new tier at MAX. Every relay platform comes with an AE2 controller and a drive of its own, so a network starts there the moment you arrive.',
     ],
     tasks: [ck()],
     rewards: [xp(50)],
