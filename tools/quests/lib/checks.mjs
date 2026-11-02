@@ -95,6 +95,12 @@ function allowedLongEdge(cfg, from, to) {
   return (cfg.allowLongEdges || []).some((e) => (e.from === from.id && e.to === to.id) || (Array.isArray(e) && e[0] === from.id && e[1] === to.id));
 }
 
+// lint-config allowLayout: [{ from, to, kinds: ['crossing', 'through-node'], why }]. A real dependency whose line cannot avoid a crossing
+// or a node in the layout keeps its line: real dependencies come before a clean drawing (owner, 2026-11-02). No kinds = both.
+export function allowedLayout(cfg, from, to, kind) {
+  return (cfg.allowLayout || []).some((e) => e.from === from.id && e.to === to.id && (!Array.isArray(e.kinds) || e.kinds.includes(kind)));
+}
+
 export function checkBook(book, cfg, options = {}) {
   const findings = [];
   const add = (level, rule, chapter, quest, message, other) => findings.push({ level, rule, chapter: chapter ? chapter.filename : '', quest: quest ? quest.id : '', questTitle: quest ? questLabel(quest) : '', other: other ? other.id : '', message });
@@ -225,7 +231,7 @@ export function checkBook(book, cfg, options = {}) {
       const tooLong = e.length > (cfg.maxEdge ?? 4.6) + EPS && !to.hideDependencyLines && !allowedLongEdge(cfg, from, to);
       // a forward line between two sections of a merged era chapter may be longer (eraChapters.bridgeMaxEdge)
       if (tooLong && !(isMerged && d > EPS && e.length <= bridgeMax + EPS)) add('error', 'long-edge', ch, to, `line from "${questLabel(from)}" is ${e.length.toFixed(2)} cells long (max ${cfg.maxEdge}${isMerged ? ', ' + bridgeMax + ' for a forward line between sections' : ''})`, from);
-      if (!to.hideDependencyLines) {
+      if (!to.hideDependencyLines && !allowedLayout(cfg, from, to, 'through-node')) {
         for (const o of ch.quests) {
           if (o === from || o === to) continue;
           const h = half(o) * 0.9;
@@ -238,6 +244,7 @@ export function checkBook(book, cfg, options = {}) {
         const a = edges[i], b = edges[j];
         if (a.from === b.from || a.from === b.to || a.to === b.from || a.to === b.to) continue;
         if (a.to.hideDependencyLines || b.to.hideDependencyLines) continue;
+        if (allowedLayout(cfg, a.from, a.to, 'crossing') || allowedLayout(cfg, b.from, b.to, 'crossing')) continue;
         if (segIntersect(center(a.from), center(a.to), center(b.from), center(b.to))) add('warn', 'crossing', ch, a.to, `line "${questLabel(a.from)}" -> "${questLabel(a.to)}" crosses "${questLabel(b.from)}" -> "${questLabel(b.to)}"`, b.to);
       }
     }
