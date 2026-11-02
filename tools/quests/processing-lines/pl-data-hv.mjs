@@ -33,7 +33,7 @@ export default {
         n('rh', 20, 0, I('gtceu:rhodium_dust'), 'Rhodium', { from: ['repre', 'hcl3'], by: ['gtceu:chemical_reactor'], sub: 'Chemical reactor; chlorine and ammonia leave' }),
         n('ptfoil', 22, 1.5, I('gtceu:platinum_foil'), 'Platinum Foil', { kind: 'raw', sub: 'From the platinum plant' }),
         n('gauze', 24, 0, I('grindless:platinum_rhodium_gauze'), 'Platinum-Rhodium Gauze', {
-          kind: 'product', from: [via('rh', 'gtceu:rhodium_foil'), 'ptfoil'], by: ['gtceu:assembler'], end: 'nitric acid from ammonia', sub: 'Assembler',
+          kind: 'product', from: [via('rh', 'gtceu:rhodium_ingot', 'gtceu:rhodium_foil'), 'ptfoil'], by: ['gtceu:assembler'], end: 'nitric acid from ammonia', sub: 'Assembler',
           desc: 'The catalyst the large chemical reactor burns ammonia over to make nitric acid.',
         }),
       ],
