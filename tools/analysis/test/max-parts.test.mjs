@@ -30,7 +30,7 @@ test('the rows cover every gtceu:max_* part of the OpV id list except hull, casi
   assert.deepEqual(plain(have), want);
 });
 
-test('every row meets the hatch rule: MAX hull (but the battery), at least 2 MAX components, MAX circuits, a horizon strand cable', () => {
+test('every row meets the hatch rule: MAX hull (but the battery and the amperage steps), at least 2 MAX components, MAX circuits, a horizon strand cable', () => {
   assert.equal(table.hull, 'gtceu:max_machine_hull');
   assert.equal(table.circuits.id, '#gtceu:circuits/max');
   assert.ok(table.circuits.count >= 2);
@@ -43,8 +43,12 @@ test('every row meets the hatch rule: MAX hull (but the battery), at least 2 MAX
     const total = r.components.reduce((n, c) => n + c.count, 0);
     assert.ok(total >= 2, r.machine + ' has at least 2 components');
     for (const c of r.components) assert.ok(ids.includes(c.id), c.id + ' is registered by F1');
-    if (r.machine === 'gtceu:max_battery') assert.equal(r.hull, false);
+    // AF-CC (M2-03): the battery and the amperage steps take no hull; a step takes two hatches of the step below
+    const below = { '_4a': '', '_16a': '_4a', '_64a': '_16a' };
+    const step = /^gtceu:max_(energy|substation)_(input|output)_hatch(_4a|_16a|_64a)$/.exec(r.machine);
+    if (r.machine === 'gtceu:max_battery' || step) assert.equal(r.hull, false, r.machine);
     else assert.notEqual(r.hull, false);
+    if (step) assert.ok(r.components.some((c) => c.id === `gtceu:max_energy_${step[2]}_hatch${below[step[3]]}` && c.count === 2), r.machine + ' takes 2 of the step below');
   }
 });
 

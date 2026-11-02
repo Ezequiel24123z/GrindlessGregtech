@@ -4,7 +4,10 @@
 //   UHV basic machines   GTM generates a recipe for the UHV machines that need no component (hull, furnace, arc furnace, alloy smelter...) and none
 //                        for the rest, whose UV recipe takes components. Ours is GTM's UV shape with the UHV hull, UHV components and circuits,
 //                        europium cable and neutronium plate (the materials of GTM's own UHV hull and arc furnace). Shaped crafting (ids grindless:crafting/<out>).
-//   UHV laser hatches    GTM's UEV assembler shape (diamond lens, emitter or sensor, pump, cable; 1/2/4 of each and a circuit), at VA[UHV].
+//   UHV laser hatches    GTM's UEV assembler shape (diamond lens, emitter or sensor, pump, cable; 1/2/4 of each and a circuit), at VA[UHV]; the same
+//                        shape replaces GTM's UEV-OpV laser hatches, which take red alloy cable (AF-CC, M2-04), with the tier's own cable.
+//   item buses, energy converters   GTM's UEV-OpV buses (a wooden chest) and UEV-UXV converters (red alloy cable) are remade from the tier's hull,
+//                        conveyor, sensor or emitter and cable (AF-CC, M2-04: tools/analysis/placeholder-check.mjs finds the LV-grade rows).
 //   4x/9x hatches        GTM stops at UHV; UEV-UXV follow its shape (the tier's input or output hatch under a quadruple or nonuple neutronium pipe).
 //   quantum chest/tank   GTM stops at UHV; UEV-UXV follow its UHV shape with the tier's hull, field generator, pump and circuits.
 //   UXV circuit assembler and scanner   GTM's recipes take an OpV circuit nothing makes: removed, remade with #gtceu:circuits/uxv.
@@ -82,6 +85,9 @@
     if (name === 'circ') return '#gtceu:circuits/' + tier
     if (name === 'cable') return PROFILES[tier].cable
     if (COMPONENT[name]) return 'gtceu:' + tier + '_' + COMPONENT[name]
+    // AF-CC (M2-04): above UHV the wooden chest and the iron bars of GTM's shapes are the tier's output bus and neutronium rods
+    if (tier !== 'uhv' && name === 'chest') return 'gtceu:' + tier + '_output_bus'
+    if (tier !== 'uhv' && name === 'bars') return '#forge:rods/neutronium'
     return FIXED[name]
   }
 
@@ -144,16 +150,44 @@
     })
   }
 
-  // GTM's laser hatch recipe (assembler): hull, lens, emitter (source) or sensor (target), pump and cables, programmed circuit
-  function addLasers(event) {
+  // GTM's laser hatch recipe (assembler): hull, lens, emitter (source) or sensor (target), pump and cables, programmed circuit. GTM has none at
+  // UHV; from UEV to OpV its own take red alloy cables (M2-04): those are removed and remade with the tier's own cable family
+  function addLasers(event, tier) {
     var LINES = [{ a: '256a', n: 1, cable: 'single', circuit: 1, duration: 300 }, { a: '1024a', n: 2, cable: 'double', circuit: 2, duration: 600 },
       { a: '4096a', n: 4, cable: 'quadruple', circuit: 3, duration: 1200 }]
     LINES.forEach(function (l) {
       ;['source', 'target'].forEach(function (side) {
-        var name = 'uhv_' + l.a + '_laser_' + side + '_hatch'
-        var part = 'gtceu:uhv_' + (side === 'source' ? 'emitter' : 'sensor')
-        line(event, 'uhv', name, 'gtceu:' + name, [['gtceu:uhv_machine_hull', 1], ['#forge:lenses/diamond', l.n], [part, l.n],
-          ['gtceu:uhv_electric_pump', l.n], ['gtceu:europium_' + l.cable + '_cable', 4], ['#gtceu:circuits/uhv', l.circuit]])
+        var name = tier + '_' + l.a + '_laser_' + side + '_hatch'
+        var part = 'gtceu:' + tier + '_' + (side === 'source' ? 'emitter' : 'sensor')
+        var cable = tier === 'uhv' ? 'gtceu:europium_' + l.cable + '_cable' : 'gtceu:' + FAMILY[tier] + '_' + l.cable + '_cable'
+        if (tier !== 'uhv') {
+          event.remove({ id: 'gtceu:assembler/' + name })
+          if (l.a === '4096a' && side === 'source') event.remove({ id: 'gtceu:assembler/' + tier + '_4096a_laser_output_hatch' })
+        }
+        line(event, tier, name, 'gtceu:' + name, [['gtceu:' + tier + '_machine_hull', 1], ['#forge:lenses/diamond', l.n], [part, l.n],
+          ['gtceu:' + tier + '_electric_pump', l.n], [cable, 4], ['#gtceu:circuits/' + tier, l.circuit]])
+      })
+    })
+  }
+
+  // AF-CC (M2-04): GTM's UEV-OpV item buses take a wooden chest; ours take the tier's conveyor and a sensor (input) or emitter (output), like MAX's
+  function addBuses(event) {
+    ;['uev', 'uiv', 'uxv', 'opv'].forEach(function (tier) {
+      ;[['input', 'import', 'sensor'], ['output', 'export', 'emitter']].forEach(function (b) {
+        event.remove({ type: 'gtceu:assembler', output: 'gtceu:' + tier + '_' + b[0] + '_bus' })
+        line(event, tier, tier + '_' + b[0] + '_bus', 'gtceu:' + tier + '_' + b[0] + '_bus', [[hullOf(tier), 1], ['gtceu:' + tier + '_conveyor_module', 1],
+          ['gtceu:' + tier + '_' + b[2], 1]])
+      })
+    })
+  }
+
+  // AF-CC (M2-04): GTM's UEV-UXV energy converters are crafted from red alloy cable; ours take the tier's cable of the converter's size and two sensors
+  function addConverters(event) {
+    ;['uev', 'uiv', 'uxv'].forEach(function (tier) {
+      ;[['1a', 'single'], ['4a', 'quad'], ['8a', 'octal'], ['16a', 'hex']].forEach(function (c) {
+        var name = tier + '_' + c[0] + '_energy_converter'
+        event.remove({ id: 'gtceu:shaped/' + name })
+        line(event, tier, name, 'gtceu:' + name, [[hullOf(tier), 1], [cableOf(tier, c[1]), 2], ['gtceu:' + tier + '_sensor', 2]])
       })
     })
   }
@@ -184,7 +218,7 @@
   }
 
   // AF-E2 (M2-03, M2-04): every wired power part above UHV is chained from the tier's own parts, never from lead, iron and red alloy.
-  //   4 A = 2 x 1 A + the tier's quadruple cable and plates; 16 A (foundation.js, still a hull line) is left for a follow-up; 64 A = 2 x 16 A + hex cable.
+  //   4 A = 2 x 1 A + the tier's quadruple cable and plates; 16 A = 2 x 4 A (uev, uiv, uxv foundation.js; AF-CC); 64 A = 2 x 16 A + hex cable.
   var FAMILY = { uev: 'lay_superhydride', uiv: 'metallic_hydrogen', uxv: 'pasta_strand', opv: 'chain_strand' }
   var SIZE = { single: 'single', double: 'double', quad: 'quadruple', octal: 'octal', hex: 'hex' }
   function cableOf(tier, size) { return 'gtceu:' + FAMILY[tier] + '_' + SIZE[size] + '_cable' }
@@ -240,7 +274,9 @@
     addMachines(event, 'uhv', UHV_MACHINES)
     ;['uev', 'uiv', 'uxv'].forEach(function (tier) { addMachines(event, tier, ALL_MACHINES) })
     addEnergy(event)
-    addLasers(event)
+    ;['uhv', 'uev', 'uiv', 'uxv', 'opv'].forEach(function (tier) { addLasers(event, tier) })
+    addBuses(event)
+    addConverters(event)
     addHatches(event)
     addStorage(event)
     console.info(LOG + 'high_tier_machines: ' + HM.recipes.length + ' recipes; skipped ' + HM.skipped.length)

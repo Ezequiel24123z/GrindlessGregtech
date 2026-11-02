@@ -146,10 +146,11 @@ test('the only recipes are the hull and the four hatches, assembled at UEV volta
   assert.ok(hullIn.includes('gtceu:uiv_machine_casing'));
   assert.match(hullIn, /metallic_hydrogen_single_cable/);
   assert.ok(hullIn.includes('gtceu:rhea_plate'));
-  // 2 A hatches take single cables, 16 A hatches quadruple cables, each with its own circuit
+  // 2 A hatches take single cables, 16 A hatches two 4 A hatches and octal cables (AF-CC, M2-03), each with its own circuit
   const cable = (n) => JSON.stringify(mine.find((r) => new RegExp(n + '$').test(r.i)).j.inputs.item);
   assert.match(cable('uiv_energy_input_hatch'), /metallic_hydrogen_single_cable/);
-  assert.match(cable('uiv_energy_output_hatch_16a'), /metallic_hydrogen_quadruple_cable/);
+  assert.match(cable('uiv_energy_output_hatch_16a'), /metallic_hydrogen_octal_cable/);
+  assert.match(cable('uiv_energy_output_hatch_16a'), /gtceu:uiv_energy_output_hatch_4a/);
   assert.match(serverSrc, /UEV_EUT = 8388608/);
   assert.doesNotMatch(serverSrc, /uiv_machine_casing'\)|removeRecipe/, 'the casing recipe is UEV\'s gate');
   // GTM's duplicate hull and 16 A hatch recipes are removed by id (TP-S0F)
