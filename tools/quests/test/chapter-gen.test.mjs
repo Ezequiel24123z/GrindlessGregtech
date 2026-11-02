@@ -219,10 +219,3 @@ test('connectivity: one start, everything reachable inside the chapter', () => {
   assert.ok(lintEv(crossOnly).some((f) => /second start/.test(f.message)));
 });
 
-  assert.equal(isEraChapter('ev_circuits'), false);
-  assert.equal(isMergedEra({ eraChapters: { enabled: [] } }, 'ev_age', {}), false);
-  assert.equal(isMergedEra({ eraChapters: { enabled: ['ev_age'] } }, 'ev_age', {}), true);
-  assert.equal(isMergedEra({}, 'ev_age', { mergedEras: true }), true);
-  assert.equal(isMergedEra({}, 'lv_misc', { mergedEras: true }), false);
-});
-
