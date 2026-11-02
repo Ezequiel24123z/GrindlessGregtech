@@ -50,7 +50,8 @@
     'sco2_turbine_module scoop_coil scoop_web sealed_field_cavity sealed_liner shielded_absorber shielded_ni56_cask si28_boule si28_feed sic_chamber_flange sic_nozzle_former ' +
     'sic_waveguide_tube six_n_caesium snspd_array_die spent_fe56_cask spin_interconnect_wafer stabilised_kerr_wire stacked_logic_wafer strange_alloy_charge strange_cage_lining ' +
     'superfluid_reservoir_core sx_turbine_blade tbc_coated_blade thick_conduit_tape thick_kerr_fcl_tape thorium_nav_clock turbine_disc vms_lift_nozzle void_crystal_lattice ' +
-    'void_grown_diamond void_holographic_block wear_coated_rotor zone_plate_wafer').split(' ')
+    'void_grown_diamond void_holographic_block wear_coated_rotor zone_plate_wafer ' +
+    'frozen_spin_hd polarized_hd_pellet').split(' ')
 
   var ITEMS = {}
   COMPONENTS.concat(LINE_ITEMS, CIRCUITS).forEach(function (name) { ITEMS[name] = { stack: 64 } })
@@ -65,7 +66,7 @@
   MXP.controllers = ['gtceu:condensate_refinery', 'gtceu:bound_matter_press', 'gtceu:hills_slingshot', 'gtceu:tarantula_stellar_lift',
     'gtceu:pair_instability_crucible', 'gtceu:nickel_56_burner', 'gtceu:pristine_gas_works', 'gtceu:primordial_fusion_torus', 'gtceu:blueshift_forge',
     'gtceu:void_crystal_fab', 'gtceu:meta_material_loom', 'gtceu:multi_plasma_blender', 'gtceu:horizon_crystal_furnace', 'gtceu:condensate_assembler',
-    'gtceu:horizon_capacitor_bank', 'gtceu:hyper_assembly_array', 'gtceu:hyperstargate']
+    'gtceu:horizon_capacitor_bank', 'gtceu:hyper_assembly_array', 'gtceu:hyperstargate', 'gtceu:polarized_fusion_stellarator']
 
   var GAS = 'gas'
   var LIQ = 'liquid'
@@ -92,7 +93,10 @@
     liquid_pristine_hydrogen: [LIQ, 0xC0E0FF, 'H(pr)'],
     molten_kerr_strange: [LIQ, 0x8040C0, 'KsM'],
     horizon_crystal_slurry: [LIQ, 0x203060, 'Hz(sl)'],
-    ime_leach_fractions: [LIQ, 0xB0A070, 'IME(l)']
+    ime_leach_fractions: [LIQ, 0xB0A070, 'IME(l)'],
+    hd_equilibrium_mix: [GAS, 0xA8C0F0, 'HD(eq)'],
+    pure_hd: [LIQ, 0xB8D0FF, 'HD'],
+    polarized_helium_3: [GAS, 0xF0FCFF, '3He(pol)']
   }
 
   var HATCH = 'maxplus_energy_hatch_1024a'
