@@ -1136,7 +1136,18 @@ function line(num, y) {
   const x = [];
   const dy = [];
   const slot = {};
-  let col = 0;
+  // main nodes sit in the column of their longest chain, and bare inputs just before their first consumer
+  const depth = [];
+  nodes.forEach(([t, , from, by], i) => {
+    if (t === 'x' || by) return;
+    depth[i] = from.length ? Math.max(...from.map((f) => (depth[f] ?? 0) + 1)) : 0;
+  });
+  nodes.forEach(([t, , from, by], i) => {
+    if (t === 'x' || by || from.length) return;
+    const users = nodes.map((r, j) => (r[2].includes(i) && !r[3] && r[0] !== 'x' ? depth[j] : null)).filter((d) => d !== null);
+    if (users.length) depth[i] = Math.max(0, Math.min(...users) - 1);
+  });
+  const seen = {};
   nodes.forEach(([t, , from, by], i) => {
     if (t === 'x') return;
     if (by) {
@@ -1145,7 +1156,11 @@ function line(num, y) {
       if (k > BY_Y.length) throw new Error(`${num}: too many by-products on node ${s}`);
       x[i] = x[s] + 1.25;
       dy[i] = BY_Y[k - 1];
-    } else { x[i] = 2.5 * col++; dy[i] = 0; }
+    } else {
+      const k = (seen[depth[i]] = (seen[depth[i]] || 0) + 1) - 1;
+      x[i] = 2.5 * depth[i];
+      dy[i] = k === 0 ? 0 : (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 1.5;
+    }
   });
   const used = new Set(nodes.flatMap(([, , from]) => from));
   return nodes.map(([t, id, from, by, peek], i) => {
