@@ -333,6 +333,7 @@
 		}
 		{
 			dependencies: ["5807DC537AFBD8BF"]
+			description: ["The &6UEV Parts&r are the emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor of this era. Every UEV controller, hatch and the UEV hull are built from them; there is no UEV rotor holder. The UHV part of the same kind (two for the emitter and sensor) with the rare films and cooled metals each recipe asks for; the field generator takes three UEV emitters and three UEV sensors. They are made in assemblers. The UEV hatches, the UEV hull and the controllers of this era. Stock each part by ME; a controller draws several of the same kind."]
 			icon: "gtceu:uev_emitter"
 			id: "3E4117575EE79C34"
 			rewards: [{ id: "1BF069F34D9673A8", type: "xp", xp: 100 }]
@@ -344,7 +345,7 @@
 				{ id: "1AC97E1F1EAB08C2", item: "gtceu:uev_conveyor_module", type: "item" }
 				{ id: "74B1E4061FECA7A4", item: "gtceu:uev_electric_pump", type: "item" }
 				{ id: "1707BBF0BFD4CD6B", item: "gtceu:uev_electric_piston", type: "item" }
-				{ id: "3BF0821819AE0ACB", item: "gtceu:uev_rotor_holder", type: "item" }
+				{ id: "3706D0C9567F581D", item: "gtceu:uev_electric_motor", type: "item" }
 			]
 			title: "UEV Parts"
 			x: 8.5d
@@ -352,6 +353,7 @@
 		}
 		{
 			dependencies: ["3E4117575EE79C34"]
+			description: ["The &6UEV Energy Input Hatch&r is an assembly line recipe on the UEV hull: it feeds a UEV machine its power. A UEV machine hull, lanthanum superhydride cable, Faraday isolators, an ULE cavity, UV voltage coils, three UEV field generators, UEV circuits and helium plasma. Every UEV machine that takes power from a hatch. Craft a few by ME; each machine takes one."]
 			icon: "gtceu:uev_energy_input_hatch"
 			id: "58C1564694482EBE"
 			rewards: [{ id: "534BE26FD27D8060", type: "xp", xp: 100 }]

@@ -340,7 +340,7 @@
 		}
 		{
 			dependencies: ["58ADF60AC2BD2DD7"]
-			description: ["Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four UIV circuits in the store. The gate looks for them before it opens further."]
+			description: ["Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four UIV circuits of any kind in the store. The gate looks for them before it opens further, and the hold uses up the pellet."]
 			icon: "grindless:neutronium_pellet"
 			id: "1724E39CDD53C2A2"
 			rewards: [{ id: "5FA246B7981D85E4", type: "xp", xp: 300 }]
@@ -349,7 +349,17 @@
 				{ id: "1153A2B225D2307E", item: "grindless:superheavy_census_ii", type: "item" }
 				{ id: "739C938489F02D10", item: "grindless:ns_eos_chart", type: "item" }
 				{ id: "3C42246EBD6F3CED", item: "grindless:recovered_half_sled", type: "item" }
-				{ count: 4L, id: "36CBAFCCE90931F0", item: "gtnn:optical_mainframe", type: "item" }
+				{
+								count: 4L
+								id: "36CBAFCCE90931F0"
+								item: {
+									Count: 1b
+									id: "itemfilters:tag"
+									tag: { value: "gtceu:circuits/uiv" }
+								}
+								title: "Any UIV Circuit"
+								type: "item"
+							}
 			]
 			title: "Stored Proof"
 			x: 40.0d
@@ -401,6 +411,7 @@
 		}
 		{
 			dependencies: ["5F0ADBEB1F3839D6"]
+			description: ["The &6UIV Parts&r are the emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor of this era. The UIV hull, the hatches and every controller past them are built from these. The UEV part of the same kind (two for the motor), made in assemblers. The motor also takes a UIV circuit, metallic hydrogen cable, an MH winding and superconducting coils. The UIV hatches and the controllers of this era. Stock each part by ME; a controller draws several of the same kind."]
 			icon: "gtceu:uiv_electric_pump"
 			id: "17C0F46C21B9CD13"
 			rewards: [{ id: "366424FA6A7C7F5A", type: "xp", xp: 120 }]
@@ -420,6 +431,7 @@
 		}
 		{
 			dependencies: ["17C0F46C21B9CD13"]
+			description: ["The &6UIV Energy Input Hatch&r is an assembly line recipe on two UIV hulls, with three UIV sensors and a UIV motor. &6Metallic Hydrogen Cable&r carries the power; it is also the cable of the hull itself, which takes RHEA plate and FFKM seals. Two UIV machine hulls, metallic hydrogen cable, RHEA plates, UIV circuits, FFKM seals, three UIV sensors and a UIV motor. Every UIV machine that takes power from a hatch. Craft hatches and cable by ME in small batches; each machine takes one."]
 			icon: "gtceu:uiv_energy_input_hatch"
 			id: "3D4BC3A7590B186D"
 			rewards: [{ id: "5F3A576C2576D7CD", type: "xp", xp: 100 }]

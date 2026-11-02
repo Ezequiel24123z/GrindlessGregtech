@@ -120,12 +120,12 @@ export const QUESTS = [
     rewards: [xp(200)],
   },
   {
-    key: 'PAR', kind: 'step', title: 'Parallel Hatch', icon: 'gtceu:uv_parallel_hatch',
+    key: 'PAR', kind: 'step', title: 'Parallel Hatch', icon: 'gtceu:uhv_parallel_hatch',
     deps: ['NETUHV'], x: 7, y: -0.75,
     desc: [
-      'There is no UHV parallel hatch. The &6UV Parallel Hatch&r is the top of the line, and one more machine of the same kind is the only other way to go wider.',
+      'The &6UHV Parallel Hatch&r runs a machine on 1,024 recipes at once. It is an assembly line recipe on a UHV hull with a UHV sensor and emitter, four UHV circuits, fibre laser modules, SRF cavities and mu-metal shields.',
     ],
-    tasks: [it('gtceu:uv_parallel_hatch')],
+    tasks: [it('gtceu:uhv_parallel_hatch')],
     rewards: [xp(60)],
   },
   {
