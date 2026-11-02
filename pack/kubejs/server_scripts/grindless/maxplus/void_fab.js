@@ -90,7 +90,7 @@
       ROWS.forEach(function (r) { addRow(event, r) })
       FAB.forEach(function (r) { addRow(event, r) })
       var c = CONTROLLER
-      var items = ['1x ' + HULL, '2x ' + c.casing, '8x grindless:horizon_processor', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
+      var items = ['1x ' + HULL, '2x ' + c.casing, '8x #gtceu:circuits/maxplus', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
       addAssemblyLine(event, 'void_crystal_fab', c, items, [[KERR, 2000]], c.machine, c.research, 64, 4800)
       console.info(LOG + (ROWS.length + FAB.length + 1) + ' rows; skipped ' + MV.skipped.length)
     } catch (e) {

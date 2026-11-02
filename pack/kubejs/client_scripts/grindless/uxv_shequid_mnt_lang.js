@@ -58,6 +58,11 @@
         ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[3]])
     })
 
+    ENTRIES.push(['gtceu.recipe.grindless_shequid_assembly.superfluid_reservoir_core',
+        'Circuit 13: 16 condensate aerogel, 16 superleak plugs and 8 He-3 seals in 64000 mB of He-3 make 1 superfluid reservoir core'])
+    ENTRIES.push(['gtceu.recipe.grindless_shequid_assembly.bottomless_tank_core',
+        'Circuit 14: 2 condensate wetted cores, 16 superfluid valves and 8 aerogel fuel tanks in 64000 mB of He-3 make 1 bottomless tank core'])
+
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {
             event.add('grindless', e[0], e[1])

@@ -121,7 +121,7 @@
       SLING.forEach(function (r) { addRow(event, r, true) })
       addAssemblyLine(event, 'ig_relay_probe', PROBE, PROBE.items, PROBE.fluids, PROBE.out, PROBE.research, PROBE.cwut, PROBE.duration)
       var c = CONTROLLER
-      var items = ['1x ' + HULL, '2x ' + c.casing, '8x grindless:horizon_processor', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
+      var items = ['1x ' + HULL, '2x ' + c.casing, '8x #gtceu:circuits/maxplus', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
       addAssemblyLine(event, 'hills_slingshot', c, items, [[KERR, 2000]], c.machine, c.research, 64, 4800)
       console.info(LOG + (ROWS.length + SLING.length + 2) + ' rows; skipped ' + MS.skipped.length)
     } catch (e) {

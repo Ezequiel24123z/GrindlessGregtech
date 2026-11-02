@@ -6,12 +6,12 @@ T0: the local, deterministic precheck. No Minecraft, no SSH, no network. Run it 
 Runs, in this order (each one's full output goes to -OutDir\<check>.log, ignored by git):
   static    tools\analysis\check-static.mjs: every KubeJS script loads and runs its callbacks in Node (syntax errors included),
             the en_us lang keys, no es_es anywhere under pack\kubejs (English only), and every registered machine, recipe type and grindless: item has a name.
-  quests    tools\quests\lint.mjs on the whole book (errors fail; warnings are counted).
+  quests    tools\quests\lint.mjs --strict on the whole book (errors and warnings fail; justified exceptions live in lint-config.json).
   zones     tools\test\Get-GGTestZone.ps1 -Validate (no overlapping test bands, listed tests exist).
   order     tools\analysis\script-order.mjs --check: every script's `// priority:` header follows the deterministic load order (unstamped = notice).
   tooltips  tools\analysis\tooltip-lint.mjs: every multiblock controller's tooltips (count, length) against tooltip_lint.json.
   capacity  tools\analysis\capacity-lint.mjs: every recipe fits its machine's item slots and fluid tanks (capacity_snapshot.json, capacity_known.json).
-  analysis  tools\analysis\test\run.mjs, the Node suite (about 70 s; the slowest check).
+  analysis  tools\analysis\test\run.mjs, the Node suite: tools\analysis\test and tools\quests\test (about 130 s in Actions; the slowest check, see docs\testing\ci.md).
 Prints one line per check and at most 30 lines in total. Exit 0 = PASS, 1 = a check failed, 2 = tool failure (no Node).
 
 .PARAMETER Skip     Checks to leave out, e.g. -Skip analysis for a quick loop (the package's final T0 runs all of them).
@@ -82,9 +82,9 @@ try {
         $results += $r
     }
     if ($Skip -notcontains 'quests') {
-        $r = Invoke-Check 'quests' { & $node 'tools/quests/lint.mjs' }
+        $r = Invoke-Check 'quests' { & $node 'tools/quests/lint.mjs' '--strict' }
         $r | Add-Member Info (@($r.Out | Where-Object { $_ -match '^total:' }) -join '' -replace '^total:\s*', '')
-        $r | Add-Member Detail @($r.Out | Where-Object { $_ -match '^\s+ERROR|^lint failed' })
+        $r | Add-Member Detail @($r.Out | Where-Object { $_ -match '^\s+(ERROR|WARN)\s|^lint failed' })
         $results += $r
     }
     if ($Skip -notcontains 'zones') {

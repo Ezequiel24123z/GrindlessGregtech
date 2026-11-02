@@ -286,37 +286,30 @@
 			y: 7.5d
 		}
 		{
-			dependencies: ["357A03FF61BCC69C"]
-			description: ["The &6UHV Circuit Assembler&r is the first assembler that can put together the circuits UHV machines are made of. A UHV hull, UV components and the cleanroom you already run; the UV circuits keep feeding it. The optical assembly and the wetware mainframe on the rows below, and every controller of this era. Boards and chips arrive from the cleanroom by ME; keep a stock of what it returns."]
-			icon: "gtceu:uhv_circuit_assembler"
-			id: "1DEA3F88969A67A0"
-			rewards: [{ id: "1A03282D60659D1E", type: "xp", xp: 150 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [{ id: "3C832B3A67C41A44", item: "gtceu:uhv_circuit_assembler", type: "item" }]
-			title: "UHV Circuit Assembler"
-			x: 8.0d
-			y: 3.5d
-		}
-		{
-			dependencies: ["1DEA3F88969A67A0"]
-			description: ["GTM adds a UHV hull and UHV hatches but no UHV arm, sensor or emitter, so every UHV controller is built from UV parts and UHV circuits. The UV robot arms, sensors and emitters you already make, and the UHV circuits made here. The controllers of the machines chapter, in the order it lists them. Stock each UV part by ME; the assembler draws two of the kind a controller asks for."]
-			icon: "gtceu:uv_robot_arm"
+			dependencies: ["5EF940CA680ECC5C"]
+			description: ["The eight &6UHV Components&r (emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor) are what every UHV controller, the UHV circuit assembler and the parallel hatch are built from. Each is an assembly line recipe on top of its UV part, the motor goes into most of the others. The UV component of the same kind, neutronium, naquadria and europium cable; the emitter, sensor, field generator and arm also take UHV circuits, the mainframes made above. The UHV circuit assembler, which takes an arm, an emitter and two conveyors, and the controllers of the machines chapter. Stock each UHV component by ME: a controller draws up to five of the same kind."]
+			icon: "gtceu:uhv_robot_arm"
 			id: "53B449FCC14AE4EC"
 			rewards: [{ id: "51EE4491697A7129", type: "xp", xp: 100 }]
 			shape: "hexagon"
 			size: 1.0d
 			tasks: [
-				{ id: "3FE7D7AC2A4184F9", item: "gtceu:uv_robot_arm", type: "item" }
-				{ id: "520288A5A5E42702", item: "gtceu:uv_sensor", type: "item" }
-				{ id: "5354C11D2A6FD726", item: "gtceu:uv_emitter", type: "item" }
+				{ id: "51AAB1C86F9BD2C6", item: "gtceu:uhv_emitter", type: "item" }
+				{ id: "711BEAED4F0C4E64", item: "gtceu:uhv_sensor", type: "item" }
+				{ id: "13DAE23470E09EC6", item: "gtceu:uhv_field_generator", type: "item" }
+				{ id: "7F864547F212F8DD", item: "gtceu:uhv_robot_arm", type: "item" }
+				{ id: "52CF7F0C8D793E2F", item: "gtceu:uhv_conveyor_module", type: "item" }
+				{ id: "7B0CED2023795268", item: "gtceu:uhv_electric_pump", type: "item" }
+				{ id: "358742ED4891F896", item: "gtceu:uhv_electric_piston", type: "item" }
+				{ id: "1AE64EE53ED4E538", item: "gtceu:uhv_electric_motor", type: "item" }
 			]
-			title: "UV Parts for UHV Controllers"
-			x: 10.0d
-			y: 3.5d
+			title: "UHV Components"
+			x: 20.0d
+			y: 6.5d
 		}
 		{
 			dependencies: ["5EF940CA680ECC5C"]
+			description: ["The &6UHV Machine Hull&r is the frame of every UHV hatch and of the UHV circuit assembler. It is made in an assembler from two UHV machine casings, polybenzimidazole and europium cable; it takes no circuit. Two UHV machine casings, polybenzimidazole and europium cable. The UHV circuit assembler and the UHV hatches. Craft a few at a time by ME; each hatch and machine takes one."]
 			icon: "gtceu:uhv_machine_hull"
 			id: "5829C4310B9C88A2"
 			rewards: [{ id: "1A437D0DA5EF1494", type: "xp", xp: 120 }]
@@ -326,8 +319,21 @@
 			y: 8.5d
 		}
 		{
+			dependencies: ["53B449FCC14AE4EC", "5829C4310B9C88A2"]
+			description: ["The &6UHV Circuit Assembler&r is the first assembler that can put together the circuits UHV machines are made of. A UHV hull, a UHV robot arm, a UHV emitter, two UHV conveyor modules, two UHV circuits (the mainframes made on this page), europium cable and the UV circuit assembler it upgrades. The circuit rows of the eras above, and every controller of this era that asks for it. Boards and chips arrive from the cleanroom by ME; keep a stock of what it returns."]
+			icon: "gtceu:uhv_circuit_assembler"
+			id: "1DEA3F88969A67A0"
+			rewards: [{ id: "1A03282D60659D1E", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3C832B3A67C41A44", item: "gtceu:uhv_circuit_assembler", type: "item" }]
+			title: "UHV Circuit Assembler"
+			x: 22.0d
+			y: 8.5d
+		}
+		{
 			dependencies: ["357A03FF61BCC69C"]
-			description: ["A &6Lithium Niobate Wafer&r is cut from a boule pulled out of a melt. It bends light with an electric field, so a chip can modulate a beam. A boule from the crystal growth furnace, and a cleanroom to cut and polish it. The thin-film wafer next to it, and through it the optical processor. The crucible is reused; keep boules and cut wafers in a stocked chest by ME."]
+			description: ["A &6Lithium Niobate Wafer&r is cut from a boule pulled out of a melt. It bends light with an electric field, so a chip can modulate a beam. A boule from the crystal growth furnace, and a cleanroom to cut and polish it. The LNOI wafer next to it, and through it the optical processor. The crucible is reused; keep boules and cut wafers in a stocked chest by ME."]
 			icon: "grindless:lithium_niobate_wafer"
 			id: "5EEE3C1532815682"
 			rewards: [{ id: "302C197B378C3009", type: "xp", xp: 100 }]
@@ -340,20 +346,20 @@
 		}
 		{
 			dependencies: ["5EEE3C1532815682"]
-			description: ["Bond a thin lithium niobate film onto an insulating layer and you have the &6LNOI&r wafer, the stage light is guided on. A lithium niobate wafer, silicon nitride film and the cleanroom. The optical processor, which is cut from it. Bonding runs in plain machines by ME; keep spare wafers for the foundry."]
-			icon: "grindless:ln_on_insulator_plus"
+			description: ["Bond a thin lithium niobate film onto silicon and you have the &6LNOI Wafer&r, the stage light is guided on. A helium implant splits the film off a lithium niobate wafer, and the photonic foundry bonds it. A lithium niobate wafer cut with a helium implant (the ion implantation recipe), a silicon wafer, quicklime, ultrapure water, oxygen and hydrofluoric acid, in the photonic foundry. The lithium niobate wafer comes back. The phase-change die and the optical processor, which takes three LNOI wafers. Keep the implanted wafers, silicon wafers and quicklime stocked by ME and the acid and water piped; stock the LNOI wafers for the foundry."]
+			icon: "grindless:lnoi_wafer"
 			id: "337220D20FD9CC58"
 			rewards: [{ id: "1B142E48CA1A15CB", type: "xp", xp: 120 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "7687DBB69885E1C8", item: "grindless:ln_on_insulator_plus", type: "item" }]
+			tasks: [{ id: "7E6367A82D94D859", item: "grindless:lnoi_wafer", type: "item" }]
 			title: "Lithium Niobate on Insulator"
 			x: 10.0d
 			y: 5.5d
 		}
 		{
 			dependencies: ["337220D20FD9CC58"]
-			description: ["A chalcogenide film flips between glass and crystal when a laser says so, and the &6Photonic Die&r keeps a bit of light in that state. The photonic foundry, an LNOI wafer and the phase-change film. The optical processor and the memory node of the photonic line. The foundry fills a stack of dies per wafer; send them on by ME."]
+			description: ["A chalcogenide film flips between glass and crystal when a laser says so, and the &6Photonic Die&r keeps a bit of light in that state. The photonic foundry: one LNOI wafer and a GST target per batch, with argon and ultrapure water. Eight dies come out, and a spent target. The optical processor, which takes six. The foundry fills a stack of dies per wafer; send them on by ME and recycle the spent target."]
 			icon: "grindless:pcm_photonic_die"
 			id: "1EBB75CF8CF72E85"
 			rewards: [{ id: "57D123494496A216", type: "xp", xp: 120 }]
@@ -365,8 +371,21 @@
 			y: 5.5d
 		}
 		{
-			dependencies: ["1EBB75CF8CF72E85", "34795C9D86BC364D", "7DB98960A4C2D2E8"]
-			description: ["A processor that thinks in light and runs cold: the &6Optical Processor&r is the circuit that comes after the wetware computer. An LNOI wafer, phase-change dies, a quantum cascade laser, a memory chip and a UHV circuit, all in the photonic foundry. The optical assembly and, through it, the mainframes of the organoid array. Foundry inputs by ME; processors go into their own chest, one stack per assembly."]
+			dependencies: ["337220D20FD9CC58"]
+			description: ["A &6Thin-Film Lithium Niobate Modulator&r switches a beam with a voltage. One LNOI wafer is cut into sixteen of them, and the optical processor needs ten per batch. The photonic foundry: one LNOI wafer, ultrapure water and a circuit program. The optical processor. One wafer fills a stack of modulators: stock them by ME and send them to the foundry that makes processors."]
+			icon: "grindless:thin_film_ln_modulator"
+			id: "78442C1D1F08AEFD"
+			rewards: [{ id: "7F7B45DE8CB049A8", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "52D815ADC23C5568", item: "grindless:thin_film_ln_modulator", type: "item" }]
+			title: "Thin-Film Modulators"
+			x: 14.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1EBB75CF8CF72E85", "34795C9D86BC364D", "78442C1D1F08AEFD"]
+			description: ["A processor that thinks in light and runs cold: the &6Optical Processor&r is the circuit that comes after the wetware computer. In the photonic foundry: three LNOI wafers, six phase-change dies, three quantum cascade lasers, ten thin-film lithium niobate modulators, ultrapure water and a circuit program. Two processors come out. The optical assembly, which takes three processors. Foundry inputs by ME; processors go into their own chest, one stack per assembly."]
 			icon: "gtnn:optical_processor"
 			id: "74E5CDD1317012FB"
 			rewards: [{ id: "3E4D2C78AEF40DD6", type: "xp", xp: 180 }]
@@ -378,8 +397,8 @@
 			y: 5.5d
 		}
 		{
-			dependencies: ["74E5CDD1317012FB"]
-			description: ["Optical processors on an optical board with capacitors and diodes make the &6Optical Assembly&r, the largest circuit this era builds. Optical processors, the UHV circuit assembler and optical SMD parts. The wetware mainframe, whose recipe in the organoid array asks for one. One assembly per mainframe batch: keep a small stock by ME and never more."]
+			dependencies: ["74E5CDD1317012FB", "7DB98960A4C2D2E8"]
+			description: ["Optical processors and quantum memory chips make the &6Optical Assembly&r, the largest circuit this era builds. In the photonic foundry: three optical processors, three quantum memory chips and ultrapure water. The wetware mainframe, whose recipe in the organoid array asks for two. Two assemblies per mainframe batch: keep a small stock by ME and never more."]
 			icon: "gtnn:optical_assembly"
 			id: "18F76220739031F7"
 			rewards: [{ id: "7E16A892A92D78E3", type: "xp", xp: 200 }]
@@ -457,7 +476,7 @@
 		}
 		{
 			dependencies: ["104D06696418C335", "18F76220739031F7"]
-			description: ["The &6Wetware Processor Mainframe&r is the UHV circuit. The organoid array makes four at once from organoid processors, neurons and an optical assembly. Four organoid processors, neuro processing units, an SiC power module and an optical assembly for each batch. Every UHV controller, and the hull of this era. Run the array in batches of four by ME and keep a dedicated mainframe chest."]
+			description: ["The &6Wetware Processor Mainframe&r is the UHV circuit. The organoid array makes four at once from organoid processors, neuro processing units and optical assemblies. Per batch of four: six organoid processors, six neuro processing units, two SiC power modules and two optical assemblies. Every UHV controller, the UHV components and the UHV circuit assembler. Run the array in batches of four by ME and keep a dedicated mainframe chest."]
 			icon: "gtceu:wetware_processor_mainframe"
 			id: "5EF940CA680ECC5C"
 			rewards: [{ id: "7E1ABB63C063E9A2", type: "xp", xp: 220 }]
@@ -595,11 +614,11 @@
 		}
 		{
 			dependencies: ["3B594BE1402C7B55"]
-			description: ["There is no UHV parallel hatch. The &6UV Parallel Hatch&r is the top of the line, and one more machine of the same kind is the only other way to go wider."]
-			icon: "gtceu:uv_parallel_hatch"
+			description: ["The &6UHV Parallel Hatch&r runs a machine on 1,024 recipes at once. It is an assembly line recipe on a UHV hull with a UHV sensor and emitter, four UHV circuits, fibre laser modules, SRF cavities and mu-metal shields."]
+			icon: "gtceu:uhv_parallel_hatch"
 			id: "32E554E77D7298BA"
 			rewards: [{ id: "7C3C911F3C4092B6", type: "xp", xp: 60 }]
-			tasks: [{ id: "74B755A21A7ACD91", item: "gtceu:uv_parallel_hatch", type: "item" }]
+			tasks: [{ id: "3B06AB8789839DB2", item: "gtceu:uhv_parallel_hatch", type: "item" }]
 			title: "Parallel Hatch"
 			x: 14.0d
 			y: 41.0d

@@ -1,5 +1,6 @@
 // Deterministic KubeJS script order.
 //   node tools/analysis/script-order.mjs [--check] [--strict]   verify the stamped `// priority:` headers (default)
+//   --pack <dir> (with --check, --write, --print): use that pack directory (a copy) instead of pack/; only it is written.
 //   node tools/analysis/script-order.mjs --write                 stamp/repair the headers (integrator only)
 //   node tools/analysis/script-order.mjs --print <side>          expected load order of startup_scripts|server_scripts|client_scripts
 //
@@ -145,10 +146,11 @@ export function loadBands(root) {
 }
 
 // Files of one side: relative path (from the kubejs root, e.g. server_scripts/grindless/x.js) -> [absolute paths]
-export function collect(root, side) {
+// packDir: an explicit pack directory (a copy) that replaces <root>/pack; the overlay still comes from <root>.
+export function collect(root, side, packDir = null) {
   const map = new Map();
   for (const r of ROOTS) {
-    const base = path.join(root, r, side);
+    const base = packDir && r === ROOTS[0] ? path.join(packDir, 'kubejs', side) : path.join(root, r, side);
     if (!fs.existsSync(base)) continue;
     const walk = (dir, rel) => {
       for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -165,8 +167,8 @@ export function collect(root, side) {
   return map;
 }
 
-export function plan(root, side, bands) {
-  const files = collect(root, side);
+export function plan(root, side, bands, packDir = null) {
+  const files = collect(root, side, packDir);
   const order = intendedOrder([...files.keys()].map((f) => f.slice(side.length + 1)), bandsFor(bands, side)).map((f) => `${side}/${f}`);
   return order.map((rel) => {
     const text = fs.readFileSync(files.get(rel)[0].abs, 'utf8');
@@ -180,13 +182,13 @@ function bandsFor(bands, side) {
   return out;
 }
 
-export function check(root, { strict = false } = {}) {
+export function check(root, { strict = false, packDir = null } = {}) {
   const bands = loadBands(root);
   const errors = [], notices = [];
   let total = 0;
   const known = new Set();
   for (const side of SIDES) {
-    const items = plan(root, side, bands);
+    const items = plan(root, side, bands, packDir);
     total += items.length;
     items.forEach((it) => known.add(it.rel));
     let prev = null;
@@ -213,15 +215,17 @@ export function check(root, { strict = false } = {}) {
   return { errors, notices, total };
 }
 
-export function write(root) {
+// With packDir only that pack's files are written: the source checkout's overlay stays untouched.
+export function write(root, { packDir = null } = {}) {
   const bands = loadBands(root);
   let changed = 0;
   for (const side of SIDES) {
-    const items = plan(root, side, bands);
+    const items = plan(root, side, bands, packDir);
     const values = assign(items.map((it) => it.value));
     items.forEach((it, i) => {
       if (it.value === values[i]) return;
-      for (const loc of it.locs) {
+      const locs = it.locs.filter((loc) => !packDir || loc.root === ROOTS[0]);
+      for (const loc of locs) {
         const text = fs.readFileSync(loc.abs, 'utf8');
         const eol = text.includes('\r\n') ? '\r\n' : '\n';
         const first = text.split(/\r?\n/, 1)[0];
@@ -229,7 +233,7 @@ export function write(root) {
         const rest = /^\/\/\s*priority\s*[:=]?\s*-?\w*\s*$/.test(first) ? text.slice(first.length) : eol + text;
         fs.writeFileSync(loc.abs, line + rest);
       }
-      changed++;
+      if (locs.length) changed++;
     });
   }
   return changed;
@@ -237,20 +241,22 @@ export function write(root) {
 
 function main(argv) {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+  const pi = argv.indexOf('--pack');
+  const packDir = pi >= 0 && argv[pi + 1] ? path.resolve(argv[pi + 1]) : null;
   const i = argv.indexOf('--print');
   if (i >= 0) {
     const bands = loadBands(root);
-    for (const it of plan(root, argv[i + 1], bands)) console.log(it.rel);
+    for (const it of plan(root, argv[i + 1], bands, packDir)) console.log(it.rel);
     return 0;
   }
   if (argv.includes('--write')) {
-    const n = write(root);
-    const r = check(root);
+    const n = write(root, { packDir });
+    const r = check(root, { packDir });
     console.log(`script-order: stamped ${n} script(s)`);
     r.errors.slice(0, 20).forEach((e) => console.log(`FAIL ${e}`));
     return r.errors.length ? 1 : 0;
   }
-  const r = check(root, { strict: argv.includes('--strict') });
+  const r = check(root, { strict: argv.includes('--strict'), packDir });
   r.notices.forEach((n) => console.log(`NOTICE ${n}`));
   r.errors.slice(0, 25).forEach((e) => console.log(`FAIL ${e}`));
   if (r.errors.length > 25) console.log(`FAIL ... and ${r.errors.length - 25} more`);

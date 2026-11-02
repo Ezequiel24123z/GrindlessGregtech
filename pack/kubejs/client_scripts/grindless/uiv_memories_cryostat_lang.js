@@ -64,6 +64,15 @@
         ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[3]])
     })
 
+    ENTRIES.push(['gtceu.recipe.grindless_spectral_hole_burning.burned_store_block',
+        'Circuit 28: 2 addressed holo blocks and 16 burned memory crystals in 32000 mB of helium make 1 burned store block'])
+    ENTRIES.push(['gtceu.recipe.grindless_nuclear_demagnetisation.horizon_cloud_core',
+        'Circuit 32: 2 cloud-loaded cages and 4 horizon core crystals in 32000 mB of He-3 superfluid make 1 horizon cloud core; a horizon shard stays in the bus'])
+    ENTRIES.push(['gtceu.recipe.grindless_nuclear_demagnetisation.bottomless_store_core',
+        'Circuit 32: 2 burned store blocks, 8 horizon logic wafers and 16 horizon strand preforms in 32000 mB of He-3 make 1 bottomless store core'])
+    ENTRIES.push(['gtceu.recipe.grindless_nuclear_demagnetisation.horizon_computation_core',
+        'Circuit 32: 2 photonic QPUs, 8 horizon interposers and 4 horizon alignment matrices in 32000 mB of He-3 make 1 horizon computation core'])
+
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {
             event.add('grindless', e[0], e[1])

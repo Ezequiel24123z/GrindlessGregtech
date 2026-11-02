@@ -32,7 +32,7 @@ test('the MAX row: tier 14, 24,576 UV naquadria batteries (four OpV cells), the 
   assert.equal(max.capacity, max.referenceCount * 2621440000);
   assert.equal(max.capacity, 4 * WIRELESS.tiers.find((r) => r.name === 'opv').capacity, 'four OpV cells\' worth');
   assert.ok(Number.isSafeInteger(max.capacity) && Number.isSafeInteger(max.capacity * 3));
-  assert.equal(max.cellMadeBy, 'gtceu:max_assembler');
+  assert.equal(max.cellMadeBy, 'gtceu:assembly_hall', 'GTM has no max_assembler: the assembly hall runs the assembler rows');
   assert.deepEqual([max.emitter, max.sensor, max.signalParts, max.link, max.wire],
     ['grindless:max_emitter', 'grindless:max_sensor', 1, 'grindless:horizon_strand_repeater', 'horizon_strand']);
   assert.deepEqual(WIRELESS.tiers.map((r) => r.tier), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);

@@ -8,7 +8,7 @@
     // [key, text]
     var ENTRIES = [
         ['gtceu.recipe.grindless_warp_gate.hold_nsc_belt',
-            'Hold the Sgr A* ring open for a minute at 2^33 EU/t: the belt seed, aimed by the ephemeris it carries, is thrown and leaves launched; the platform in the nuclear star cluster unfolds on arrival']
+            'Hold the Sgr A* ring open for a minute at 2^33 EU/t: the belt seed, aimed by its ephemeris, is thrown and leaves launched; the nuclear star cluster platform unfolds on arrival']
     ]
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {

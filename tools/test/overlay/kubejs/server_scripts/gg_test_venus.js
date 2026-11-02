@@ -384,10 +384,27 @@
     var eu = euOf(r)
     var conds = conditionsOf(r)
     var count = recipesOfType('gtceu:venus_heat').length
-    var ok = eu.out && eu.eut === 8192 && Number(r.duration) === 400 && fluidText(fluidsIn(r)) === '200 distilled_water' &&
-      fluidText(fluidsOut(r)) === '32000 steam' && conds.length === 1 && conds[0].type === 'dimension' && conds[0].dimension === VENUS && count === 1
-    check('engine_recipe', ok, ENGINE_ID + ': ' + fluidText(fluidsIn(r)) + ' -> ' + (eu.out ? '' : 'IN ') + eu.eut + ' EU/t x ' + r.duration + ' t (' +
-      (eu.eut * Number(r.duration)) + ' EU) + ' + fluidText(fluidsOut(r)) + ', conditions ' + JSON.stringify(conds) + ', ' + count + ' recipe(s) of the type')
+    // the table's cycle is split into equal runs that fit the engine's 16,000 mB steam tank: same EU/t, same ratios, same totals
+    var E = VN().data.heatEngine
+    var tank = 16000
+    var split = Math.max(1, Math.ceil(Number(E.steam.amount) / tank))
+    var water = Number(E.water.amount) / split
+    var steam = Number(E.steam.amount) / split
+    var ticks = Number(E.duration) / split
+    var fin = fluidsIn(r)
+    var fout = fluidsOut(r)
+    var problems = []
+    if (split < 1 || split !== Math.round(split) || water !== Math.round(water) || ticks !== Math.round(ticks)) problems.push('split ' + split + ' is not exact')
+    if (fin.length !== 1 || fin[0].amount !== water || fin[0].id !== String(E.water.id)) problems.push('water ' + fluidText(fin) + ', wanted ' + water)
+    if (fout.length !== 1 || fout[0].amount !== steam || fout[0].id !== String(E.steam.id)) problems.push('steam ' + fluidText(fout) + ', wanted ' + steam)
+    if (fout.length === 1 && fout[0].amount > tank) problems.push('a run makes more steam than the ' + tank + ' mB tank')
+    if (Number(r.duration) !== ticks) problems.push('duration ' + r.duration + ', wanted ' + ticks)
+    if (!eu.out || eu.eut !== Number(E.eut) || eu.eut !== 8192) problems.push('EU/t ' + eu.eut + (eu.out ? '' : ' (consumed)') + ', wanted 8192 generated')
+    if (fin.length === 1 && fout.length === 1 && fout[0].amount * Number(E.water.amount) !== fin[0].amount * Number(E.steam.amount)) problems.push('steam/water ratio changed')
+    if (fout.length === 1 && fout[0].amount * split !== Number(E.steam.amount)) problems.push('the ' + split + ' runs do not add up to the cycle')
+    if (conds.length !== 1 || conds[0].type !== 'dimension' || conds[0].dimension !== VENUS || count !== 1) problems.push('conditions ' + JSON.stringify(conds) + ', ' + count + ' recipe(s) of the type')
+    check('engine_recipe', problems.length === 0, ENGINE_ID + ': ' + fluidText(fin) + ' -> ' + (eu.out ? '' : 'IN ') + eu.eut + ' EU/t x ' + r.duration + ' t (' +
+      (eu.eut * Number(r.duration)) + ' EU) + ' + fluidText(fout) + ' (cycle split in ' + split + ')' + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
   }
 
   // per 1,000 mB of sulfuric acid, GTM's sulfuric_acid_from_trioxide and sulfur_trioxide run backwards
@@ -508,10 +525,21 @@
         problems.push(w[0] + ' missing')
         return
       }
-      var out = String(r.getResultItem(S.server.registryAccess()).getId())
+      // GT recipes: GTRecipe#getResultItem and getIngredients are empty, so read the item capabilities
+      var outs = asArray(lazy().RecipeHelper.getOutputItems(r)).map(function (st) { return itemIdOf(st) })
+      var out = outs.length === 1 ? outs[0] : outs.join('+')
       var ids = {}
-      asArray(r.getIngredients()).forEach(function (ing) {
-        asArray(ing.getItemIds()).forEach(function (id) { ids[String(id)] = true })
+      asArray(lazy().RecipeHelper.getInputItems(r)).forEach(function (st) { ids[itemIdOf(st)] = true })
+      asArray(r.getInputContents(lazy().ItemCap)).forEach(function (c) {
+        var re = /"item":"([^"]+)"/g
+        var m = null
+        var json = ''
+        try {
+          json = String(c.content.toJson())
+        } catch (e) {
+          json = ''
+        }
+        while ((m = re.exec(json)) !== null) ids[m[1]] = true
       })
       var missing = w[2].filter(function (id) { return !ids[id] })
       if (out !== w[1]) problems.push(w[0] + ' makes ' + out)

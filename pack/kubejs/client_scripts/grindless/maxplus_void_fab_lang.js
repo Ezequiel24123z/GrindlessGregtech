@@ -14,6 +14,9 @@
         ['gtceu.recipe.grindless_femtosecond_writing.void_crystal_lattice', 'Circuit 13: NV-engineered diamond written into a void crystal lattice under helium (line P14).']
     ]
 
+    ENTRIES.push(['gtceu.recipe.grindless_void_crystal_fab.void_holographic_block',
+        'Circuit 2, in the void: 16 void crystal lattices and 32 void-grown diamonds under He-3 make 1 void holographic block; a horizon shard stays in the bus'])
+
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {
             event.add('grindless', e[0], e[1])
