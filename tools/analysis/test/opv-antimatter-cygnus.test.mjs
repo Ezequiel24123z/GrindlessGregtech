@@ -19,7 +19,7 @@ test('B3b startup and recipe handlers have no package errors', () => {
   assert.equal(A.recipes.length, 5);
   assert.equal(A.controllers.length, 3);
 });
-test('exact design beam yields, EU/t and durations; all steps stay at Cygnus', () => {
+test('exact design beam yields, EU/t and durations; only the jet is tied to Cygnus', () => {
   const expected = [
     ['jet_beam_extraction', 'jet_proton_beam', 1, 268435456, 200, 'jet_proton_beam', 1000],
     ['jet_beam_extraction', 'flux_boosted_jet_beam', 2, 503316480, 200, 'jet_proton_beam', 2000],
@@ -31,7 +31,7 @@ test('exact design beam yields, EU/t and durations; all steps stay at Cygnus', (
     const row = A.recipes.find(r => r.type === type && r.name === name);
     assert.deepEqual([row.circuit, row.eut, row.duration], [circuit, eut, duration]);
     if (fluid) assert.deepEqual(plain(row.fluidsOut), [{ id: `gtceu:${fluid}`, amount }]);
-    assert.ok(JSON.stringify(get(type, name).j.recipeConditions).includes(site), name);
+    assert.equal(JSON.stringify(get(type, name).j.recipeConditions || []).includes(site), type === 'jet_beam_extraction', name);
   }
   assert.deepEqual(plain(A.recipes[1].fluidsIn), [{ id: 'gtceu:flux_loaded_plasma', amount: 100 }]);
   assert.deepEqual(plain(A.recipes[2].fluidsIn), [{ id: 'gtceu:jet_proton_beam', amount: 4000 }]);
@@ -82,14 +82,14 @@ test('names, short tooltips, EMI guidance and new ids exist in en_us', () => {
     assert.ok(run.lang[lang][`emi.grindless.info.${m.name}.0`]);
   }
 });
-test('line 30 stacks eight cold cells at Cygnus on free c6; 90% traps return', () => {
+test('line 30 stacks eight cold cells anywhere on free c6; 90% traps return', () => {
   const row = A.trap;
   assert.deepEqual([row.circuit, row.eut, row.duration], [6, 268435456, 400]);
   assert.deepEqual(plain(row.itemsIn), ['8x grindless:cold_antiproton_cell']);
   assert.deepEqual(plain(row.kept), ['grindless:octupole_trap_magnet']);
   assert.deepEqual(plain(row.chancedOut), [{ id: 'grindless:empty_penning_trap', count: 8, chance: 9000 }]);
   const r = get('antimatter_storage', 'antiproton_stack_opv');
-  assert.ok(JSON.stringify(r.j.recipeConditions).includes(site));
+  assert.ok(!JSON.stringify(r.j.recipeConditions || []).includes(site));
   assert.ok(get('antimatter_storage', 'positron_stack'), 'existing UXV c5 stays intact');
   const producers = recipes.filter(r => JSON.stringify(r.j.outputs || {}).includes('"grindless:antiproton_stack_opv"'));
   assert.deepEqual(producers.map(r => r.i), ['grindless:antimatter_storage/antiproton_stack_opv']);

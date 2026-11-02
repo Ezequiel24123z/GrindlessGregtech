@@ -64,7 +64,7 @@ test('arm chart: four records plus the circuit (c4) fit the widened Matrioshka t
   assert.match(arm._why, /^UXV-B6:/);
   assert.equal(arm.circuit, 4);
   assert.equal(arm.eut, 31457280);
-  assert.equal(arm.site, true);
+  assert.ok(!arm.site);
   assert.deepEqual(arm.itemsIn.map((i) => i.id).sort(), [
     'grindless:cygnus_vlbi_record', 'grindless:elevator_log', 'grindless:ti44_map', 'grindless:vela_glitch_record']);
   assert.deepEqual(arm.itemsOut, [{ id: 'grindless:arm_chart', count: 1 }]);

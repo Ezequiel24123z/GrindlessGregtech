@@ -161,12 +161,12 @@ test('the stand-in runs the OpV-D3 scripts without errors, nothing skipped, no l
   assert.equal(KB.recipes.length, 8); // MAX-G1 adds write_seed_wave_packet (c6)
 });
 
-test('forge circuits 1-5 with their EU/t and ticks, all locked to Cygnus X-1', () => {
+test('forge circuits 1-5 with their EU/t and ticks, no site', () => {
   const want = { charge_gamma_pump: [1, 503316480, 800], focus_kugelblitz_seed: [2, 503316480, 2400], condense_kugelblitz_core: [3, 503316480, 2400], forge_hawking_drive: [4, 268435456, 1200], recondense_core_from_shell: [5, 503316480, 2400], write_seed_wave_packet: [6, 503316480, 2400] };
   for (const [n, v] of Object.entries(want)) {
     const r = rec('kugelblitz_forming', n);
-    assert.deepEqual([r.circuit, r.eut, r.duration, r.site, r.generator], [...v, true, false], n);
-    assert.ok(JSON.stringify(find(`grindless:kugelblitz_forming/${n}`).j.recipeConditions || []).includes(SITE), n);
+    assert.deepEqual([r.circuit, r.eut, r.duration, (r.site || undefined), r.generator], [...v, undefined, false], n);
+    assert.ok(!JSON.stringify(find(`grindless:kugelblitz_forming/${n}`).j.recipeConditions || []).includes(SITE), n);
   }
 });
 
@@ -199,7 +199,7 @@ test('core, drive and the shell route', () => {
 
 test('collector: generator rows at 2^30 and 2^29 EU/t, core wear 1/64 and 1/32, tile 1/8, one run', () => {
   const c1 = rec('hawking_power', 'feed_exotic_matter');
-  assert.deepEqual([c1.circuit, c1.eut, c1.site, c1.generator], [1, 2 ** 30, true, true]);
+  assert.deepEqual([c1.circuit, c1.eut, (c1.site || undefined), c1.generator], [1, 2 ** 30, undefined, true]);
   assert.deepEqual(plain(c1.itemsIn), [{ id: 'grindless:stable_exotic_matter', count: 1 }]);
   assert.deepEqual(plain(wear(c1, 'grindless:kugelblitz_core').chance), [1, 64]);
   assert.deepEqual(plain(wear(c1, 'grindless:gamma_absorber_tile').chance), [1, 8]);
@@ -210,7 +210,7 @@ test('collector: generator rows at 2^30 and 2^29 EU/t, core wear 1/64 and 1/32, 
   for (const n of ['feed_exotic_matter', 'feed_stellar_plasma']) {
     const d = find(`grindless:hawking_power/${n}`);
     assert.ok(d && JSON.stringify(d.j.tickOutputs || {}).includes('eu'), n);
-    assert.ok(JSON.stringify(d.j.recipeConditions || []).includes(SITE), n);
+    assert.ok(!JSON.stringify(d.j.recipeConditions || []).includes(SITE), n);
     assert.ok(KB.custom.includes(`grindless:hawking_power/${n}`), n);
     const r = rec('hawking_power', n);
     const tile = r.itemsOut.find((x) => x.id === 'grindless:activated_absorber_tile');

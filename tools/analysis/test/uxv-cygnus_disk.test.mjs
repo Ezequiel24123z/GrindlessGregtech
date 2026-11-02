@@ -40,7 +40,7 @@ test('skimmer: circuit 1 skim, a wearing MH winding (5%) -> 1,000 mB disk plasma
 
 test('former: c1 cartridge (500 mB filtered disk plasma + 4 windings at 10%), c2 flux loading (400 mB flux-loaded plasma + 100 mB hydrogen back)', () => {
   const c1 = rec('frc_forming', 'form_cartridge');
-  assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, 134217728, 1600, true]);
+  assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, 134217728, 1600, false]);
   assert.deepEqual(plain(c1.wear), [{ id: 'grindless:mh_winding', count: 4, chance: 1000 }]);
   assert.equal(fl(c1, 'fluidsIn', 'gtceu:filtered_disk_plasma').amount, 500);
   assert.deepEqual(plain(c1.itemsOut), [{ id: 'grindless:frc_cartridge', count: 1 }]);
@@ -49,7 +49,7 @@ test('former: c1 cartridge (500 mB filtered disk plasma + 4 windings at 10%), c2
   assert.equal(fl(c2, 'fluidsIn', 'gtceu:filtered_disk_plasma').amount, 500);
   assert.equal(fl(c2, 'fluidsOut', 'gtceu:flux_loaded_plasma').amount, 400);
   assert.equal(fl(c2, 'fluidsOut', 'gtceu:hydrogen').amount, 100, 'the plasma that is not loaded recombines to hydrogen: mass in = mass out');
-  assert.ok(JSON.stringify(find('grindless:frc_forming/form_cartridge').j.recipeConditions || []).includes(SITE));
+  assert.ok(!JSON.stringify(find('grindless:frc_forming/form_cartridge').j.recipeConditions || []).includes(SITE));
 });
 
 test('BZ dynamo: a generator, 2^30 EU/t for 200 t from 400 mB flux-loaded plasma, one run, at Cygnus X-1; the chain returns more than it costs', () => {
@@ -162,5 +162,5 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages, reci
   keys.push('gtceu.disk_skimming', 'gtceu.frc_forming', 'gtceu.blandford_znajek');
   for (const r of CD.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
-  for (const m of MACHINES) assert.match(run.lang.en_us[`emi.grindless.info.${m}.0`], /Cygnus X-1/, `${m}'s page names Cygnus X-1`);
+  for (const m of MACHINES) assert.match(run.lang.en_us[`emi.grindless.info.${m}.0`], /Cygnus X-1|anywhere/, `${m}'s page names Cygnus X-1`);
 });

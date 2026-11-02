@@ -43,7 +43,7 @@ test('extractor c1: the timing record kept, a pellet worn at 10%, raw pasta; 134
 
 test('sorter c1 (raw pasta, cage part kept -> four outputs) and c2 (16 residues + a cage part -> core sample)', () => {
   const c1 = rec('pasta_sorting', 'phase_sorting');
-  assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, 67108864, 1200, SITE]);
+  assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, 67108864, 1200, '']);
   assert.deepEqual(ids(c1.kept), [['grindless:cage_part', 1]]);
   assert.deepEqual(ids(c1.itemsOut).map((x) => x[0]), ['grindless:spaghetti_phase', 'grindless:lasagna_phase', 'grindless:gnocchi_fragment', 'grindless:anti_phase_residue']);
   const c2 = rec('pasta_sorting', 'core_sample');
@@ -54,7 +54,7 @@ test('sorter c1 (raw pasta, cage part kept -> four outputs) and c2 (16 residues 
 
 test('draw bench: spaghetti + aerogel (cage part kept) -> 8 strand wire; laminator c1 -> 4 plates, c2 -> electrode', () => {
   const d = rec('pasta_drawing', 'strand_drawing');
-  assert.deepEqual([d.circuit, d.eut, d.duration, d.site], [1, 134217728, 1200, SITE]);
+  assert.deepEqual([d.circuit, d.eut, d.duration, d.site], [1, 134217728, 1200, '']);
   assert.deepEqual(ids(d.itemsOut), [['gtceu:pasta_strand_single_wire', 8]]);
   assert.deepEqual(ids(d.itemsIn).map((x) => x[0]), ['grindless:spaghetti_phase', 'grindless:silica_aerogel']);
   const p = rec('pasta_lamination', 'plate_pressing');
@@ -88,10 +88,12 @@ test('every row is Vela-locked (OpV-A0\'s, MAX-A0\'s and XP-A1\'s rows SGR-locke
     'chain_wire_drawing', 'chain_lamina', 'chain_lamina_stack', 'chain_mesh_weave', 'horizon_strand_preform', 'horizon_wire_drawing', 'horizon_ingot_drawing',
     'kerr_strand_drawing']);
   for (const r of VP.recipes.filter((x) => x.type !== 'neutronium_caging')) {
-    const site = (x) => (sgr.has(x.name) ? 'grindless:sgr1806_orbit' : SITE);
+    const open = new Set(['phase_sorting', 'core_sample', 'chain_caging', 'ni_chain_caging', 'lattice_caging', 'strand_drawing', 'chain_strand_drawing', 'chain_wire_drawing',
+      'horizon_wire_drawing', 'horizon_ingot_drawing', 'kerr_strand_drawing', 'plate_pressing', 'lasagna_electrode', 'chain_mesh_weave']);
+    const site = (x) => (open.has(x.name) ? '' : sgr.has(x.name) ? 'grindless:sgr1806_orbit' : SITE);
     assert.equal(r.site, site(r), r.name);
     assert.ok(r.itemsIn.length + r.kept.length + r.wear.length + r.fluidsIn.length > 0, r.name);
-    assert.ok(JSON.stringify(find(`grindless:${r.type}/${r.name}`).j.recipeConditions || []).includes(site(r)), `${r.name} carries the dimension lock`);
+    assert.ok(JSON.stringify(find(`grindless:${r.type}/${r.name}`).j.recipeConditions || []).includes(site(r) || 'no-dimension-expected-xyz') === !!site(r), `${r.name} carries the dimension lock`);
   }
   const c = rec('neutronium_caging', 'cage_part_pressing');
   assert.deepEqual([c.circuit, c.site, c.eut, c.duration], [0, 'grindless:rx_j1856_orbit', 31457280, 2400]);
