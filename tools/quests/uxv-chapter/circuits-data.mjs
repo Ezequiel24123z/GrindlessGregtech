@@ -114,7 +114,7 @@ export const QUESTS = [
     'The &6UXV Electric Motor&r is wound with pasta strand round a meteorite-iron rotor, and the &6UXV Electric Pump&r pushes liquid metal with a moving field. The piston and the conveyor move by metals that change shape in a magnetic field, the robot arm turns on a gear with no backlash, and the field generator projects from a plasma ring that holds its own field.',
   ], [
     it('gtceu:uxv_electric_motor'), it('gtceu:uxv_electric_pump'), it('gtceu:uxv_electric_piston'), it('gtceu:uxv_conveyor_module'),
-    it('gtceu:uxv_robot_arm'), it('gtceu:uxv_field_generator'), it('gtceu:uxv_rotor_holder'),
+    it('gtceu:uxv_robot_arm'), it('gtceu:uxv_field_generator'),
   ], 200),
   q('CH_ASM', 'machine', 'UXV Circuit Assembler', 'gtceu:uxv_circuit_assembler', ['COMP'], 7, 11, {
     for: 'The &6UXV Circuit Assembler&r is the assembler that works at the voltage of the mainframe, for everything below it that still wants a board.',
