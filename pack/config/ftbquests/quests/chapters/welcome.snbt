@@ -60,10 +60,7 @@
 					item: {
 						Count: 1b
 						id: "gtceu:prospector.hv"
-						tag: {
-							display: { Name: '{"translate":"item.grindless.field_prospector"}' }
-							grindless_starter_prospector: 1b
-						}
+						tag: { Charge: 1600000L }
 					}
 					type: "item"
 				}
@@ -169,7 +166,7 @@
 			dependencies: ["3BB2DAC36CB01A7B"]
 			description: [
 				"No vanilla ores spawn here. GregTech veins mix several metals, and a raw ore's EMI page shows its vein and depth."
-				"Claim Arrival's &6Field Prospector&r. Right-click to mark veins within sixteen chunks, without charging. Open your map and enable Ore Veins. It surveys generated terrain, not unexplored ground. Surface rocks still tell you what's underneath."
+				"Claim Arrival's &6HV Prospector&r, a normal GregTech prospector delivered fully charged. Right-click to open its map: it scans the chunks around you, spends energy while open, and shows ore veins and fluid deposits on the grid. Sneak and right-click to switch between ore and fluid modes. Recharge it in an HV charger. Surface rocks still tell you what's underneath."
 			]
 			icon: "gtceu:prospector.hv"
 			id: "345C4D73090CB5E2"
