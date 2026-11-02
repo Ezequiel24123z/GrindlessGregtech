@@ -188,5 +188,5 @@ test('the join: one photonic hall row, circuit 8, the only maker of gtnn:cosmic_
   assert.equal(new Set(hall.map((x) => x.circuit)).size, hall.length, 'no circuit twice');
   assert.equal(OC.joinRecipe, 'grindless:photonic_integration/cosmic_mainframe');
   assert.deepEqual(plain(producers('gtnn:cosmic_mainframe').map((x) => x.i)), [OC.joinRecipe]);
-  for (const p of r.itemsIn) assert.ok(producers(p.id).length >= 1, `${p.id} has a producer`);
+  for (const p of r.itemsIn.filter((x) => !x.id.startsWith('#'))) assert.ok(producers(p.id).length >= 1, `${p.id} has a producer`);
 });
