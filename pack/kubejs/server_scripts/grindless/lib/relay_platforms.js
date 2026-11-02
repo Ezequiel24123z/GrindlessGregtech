@@ -1,3 +1,4 @@
+// priority: -17474
 // AF-1 (issue #203): the relay places. One placer for every row of tables/relay_platforms.json (the UIV rows and the rows with a source), the
 // queue that turns a completed jump into its platform, and the relay coordinates the warp gate's transit (server uhv/gate.js) reads.
 //
