@@ -83,7 +83,7 @@
   // The PSR J0437 machines (uiv/shapes.js): a magnetic torus, a trap hall, an undulator. Built in the machine registry callback: shapes.js may
   // load after this file. The floor row (X) takes the parts.
   function spec(m) {
-    return G.uivShapes.build(Pat, m.name, m.casing, m.parts.map(function (p) { return Pat.part(p[0], { min: p[1], max: p[2] }) }))
+    return G.uivShapes.build(Pat, m.name, m.casing, m.parts.map(function (p) { return Pat.part(p[0], { min: p[1], max: p[2] }) }).concat([G.parallelHatch.part()]))
   }
 
   // one EMI line per recipe, read from its data

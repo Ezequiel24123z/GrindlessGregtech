@@ -98,7 +98,7 @@
   // The RX J1856 machines (uiv/shapes.js): shaft, separator hall, cage, ziggurat, vault. Built in the machine registry callback: shapes.js
   // may load after this file. The floor row (X) takes the parts.
   function spec(m) {
-    return G.uivShapes.build(Pat, m.name, m.casing, m.parts.map(function (p) { return Pat.part(p[0], { min: p[1], max: p[2] }) }))
+    return G.uivShapes.build(Pat, m.name, m.casing, m.parts.map(function (p) { return Pat.part(p[0], { min: p[1], max: p[2] }) }).concat(m.generator ? [] : [G.parallelHatch.part()]))
   }
 
   // one EMI line per recipe, read from its data

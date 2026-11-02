@@ -92,6 +92,7 @@
   function body(m) {
     var options = [Pat.block(BRICK, { min: m.minBricks })]
     Object.keys(m.parts).forEach(function (ability) { options.push(Pat.part(ability, m.parts[ability])) })
+    options.push(G.parallelHatch.part())
     return Pat.oneOf.apply(null, options)
   }
 

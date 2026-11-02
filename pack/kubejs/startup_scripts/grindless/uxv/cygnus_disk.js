@@ -149,9 +149,10 @@
       if (rr < 4) return dz === -3 ? 'X' : 'P'
       if (rr > 8) return 'X'
     }
-    var ang = Math.atan2(dz, dx) / (Math.PI / 6)
-    var near = Math.abs(ang - Math.round(ang))
-    if (near < 0.16 && Math.abs(y - 3) !== 3) return 'Q'
+    // integer spoke test: the Rhino Math.atan2/Math.round angle test vanished in game (static model and dump disagreed)
+    var adx = Math.abs(dx)
+    var adz = Math.abs(dz)
+    if ((adx === 0 || adz === 0 || adx === adz) && Math.abs(y - 3) !== 3) return 'Q'
     return 'F'
   }
 

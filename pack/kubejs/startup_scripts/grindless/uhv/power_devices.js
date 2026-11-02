@@ -157,14 +157,16 @@
     Pat.part('input_hatch', { min: 1, max: 3 }),
     Pat.part('output_bus', { min: 1, max: 1 }),
     Pat.part('output_hatch', { min: 1, max: 1 }),
-    Pat.part('energy_input', { min: 1, max: 2 })
+    Pat.part('energy_input', { min: 1, max: 2 }),
+    G.parallelHatch.part()
   ])
   PD.machines.arrays.spec = specOf(PD.machines.arrays, CLEAN, STABLE, 'stainless_steel', arraysInner, [
     Pat.part('input_bus', { min: 1, max: 3 }),
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 3 }),
     Pat.part('output_hatch', { min: 1, max: 1 }),
-    Pat.part('energy_input', { min: 1, max: 2 })
+    Pat.part('energy_input', { min: 1, max: 2 }),
+    G.parallelHatch.part()
   ])
 
   // one EMI line per recipe, read from its data: what the circuit does

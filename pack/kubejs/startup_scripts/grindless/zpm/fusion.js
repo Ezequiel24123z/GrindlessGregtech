@@ -51,7 +51,7 @@
   F.casterIO = { itemsIn: 1, itemsOut: 1, fluidsIn: 2, fluidsOut: 2 }
   // fluids in: the plasma; out: the cooled gas or molten tin
   F.converterIO = { itemsIn: 0, itemsOut: 0, fluidsIn: 1, fluidsOut: 1 }
-  F.casterParts = { energy_input: { min: 1, max: 2 }, input_hatch: { min: 1, max: 3 }, output_hatch: { min: 1, max: 3 }, output_bus: { min: 1, max: 2 } }
+  F.casterParts = { energy_input: { min: 1, max: 2 }, input_bus: { min: 0, max: 1 }, input_hatch: { min: 1, max: 3 }, output_hatch: { min: 1, max: 3 }, output_bus: { min: 1, max: 2 } }
   F.converterParts = { energy_output: { min: 1, max: 4 }, input_hatch: { min: 1, max: 2 }, output_hatch: { min: 1, max: 2 } }
 
   // ---------------------------------------------------------------- patterns (slices back -> front, rows bottom -> top)
@@ -95,6 +95,7 @@
       X: Pat.oneOf(
         Pat.block(TUNGSTENSTEEL, { min: 14 }),
         Pat.part('energy_input', F.casterParts.energy_input),
+        Pat.part('input_bus', F.casterParts.input_bus),
         Pat.part('input_hatch', F.casterParts.input_hatch),
         Pat.part('output_hatch', F.casterParts.output_hatch),
         Pat.part('output_bus', F.casterParts.output_bus),

@@ -58,7 +58,7 @@
 
   // ---------------------------------------------------------------- the siphon: 7 wide, 7 deep, 13 high
   // rows bottom -> top: 0 floor, 1-11 the walls around the scoop bay and the winch, 12 the roof
-  const SIPHON_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 3 } }
+  const SIPHON_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 0, max: 1 }, output_hatch: { min: 1, max: 3 } }
   // QR-S4: a deep-drawing siphon. Frame posts at the corners, laminated glass bands at rows 3-4 and 8-9, a pipe band at row 6, a hull roof with
   // a pipe cross, and the frame winch up the middle to its gearbox.
   function siphonSlice(z) {

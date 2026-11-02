@@ -83,6 +83,7 @@
   function cells(casing, min, abilities) {
     var options = [Pat.block(casing, { min: min })]
     abilities.forEach(function (a) { options.push(Pat.part(a, P.parts[a])) })
+    options.push(G.parallelHatch.part())
     return Pat.oneOf.apply(null, options)
   }
 
