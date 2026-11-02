@@ -63,7 +63,7 @@ export const QUESTS = [
     deps: ["TI"], x: 8, y: 0,
     desc: [
       "Your first lunar titanium goes into the &6EV Machine Hull&r.",
-      "Machines of EV size need circuits the nano line makes, and the halls of the Moon base each have their own gear in the sections of this chapter.",
+      "Machines of EV size need circuits the nano line makes, and the halls of the Moon base each have their own gear in the sections beside the journey.",
     ],
     tasks: [it("gtceu:ev_machine_hull", 1, "13B7784B22044D02")],
     rewards: [xp(40, "6DE5A471269B3A5D")],
