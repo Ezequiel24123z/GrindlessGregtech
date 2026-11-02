@@ -48,6 +48,7 @@
   "include": [],
   "exclude": [],
   "remove": [
+    "gtceu:shaped/casing_iv",
     "gtceu:shaped/conveyor_module_iv_silicone_rubber",
     "gtceu:shaped/conveyor_module_iv_styrene_butadiene_rubber",
     "gtceu:shaped/electric_motor_iv",

@@ -64,6 +64,7 @@
   "include": [],
   "exclude": [],
   "remove": [
+    "gtceu:shaped/casing_uv",
     "gtceu:shaped/uv_machine_hull"
   ],
   "override": {},

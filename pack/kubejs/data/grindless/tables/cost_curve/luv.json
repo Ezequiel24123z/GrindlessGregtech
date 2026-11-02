@@ -53,6 +53,7 @@
   "include": [],
   "exclude": [],
   "remove": [
+    "gtceu:shaped/casing_luv",
     "gtceu:shaped/luv_machine_hull"
   ],
   "override": {},

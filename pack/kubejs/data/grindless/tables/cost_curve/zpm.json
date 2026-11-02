@@ -60,6 +60,7 @@
   "include": [],
   "exclude": [],
   "remove": [
+    "gtceu:shaped/casing_zpm",
     "gtceu:shaped/zpm_machine_hull"
   ],
   "override": {},
