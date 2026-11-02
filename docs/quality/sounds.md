@@ -26,7 +26,7 @@ The generator downloads a pinned portable ffmpeg (7.1.1 essentials, SHA-256 chec
 
 ## Budget and quality rules
 
-- Each `.ogg` at most 100 KB (enforced by the test): 8 s mono at `-q 1` is 47-63 KB. Pack budget for sounds: 2 MB (about 30 loops).
+- Each `.ogg` at most 100 KB (enforced by the test): 8 s mono at `-q 1` is 47-63 KB. Pack budget for sounds: 2 MB was the original target (about 30 loops) and was passed long ago; it is now 8 MB for the 186 loops (SND-1).
 - Loop length 8 s, never over 12 s. Prompts: "seamless looping", no voices, no music.
 - Volume 0.6-0.7, attenuation 24-32 blocks for big multiblocks (default 16).
 - Only the signature multiblock of a line gets a loop; no loops for small machines.
@@ -82,4 +82,8 @@ See the handoff for the run id: the client log must show no `Unable to play unkn
 
 Every loop is mastered offline (skipped when the Vorbis tag `GG_MASTER=1` is present; `-Master -Force` redoes unmastered sources only, so restore originals from git first). Steps: mono decode, optional spec `lowpass` (Hz; 6000 or lower is applied twice; 9000 for new generated loops, 3500-6000 for harsh ones), 150 ms equal-power tail-to-head crossfade (file is 0.15 s shorter), gain to about -24 dBFS RMS with peak at most -3 dBFS (tanh soft clip when the gain would exceed the peak allowance), 3 ms edge fades, libvorbis at the row quality. The T0 gate (`tools/analysis/test/sounds.test.mjs`) requires for every indexed event: .ogg present, mono, at most 12 s, within the size budget, RMS -33..-20 dBFS, peak at most -2 dBFS (it decodes all files, about 2 min).
 
-Status: 106 events, 0 missing, 0 silent machines (8 recipe types added to `WIRING`). Generation of the 36 missing events and 8 new machine loops used about 2,700 credits on the Starter plan (cap 9,000). Residual audit flags (seam, start/end level) are intrinsic to the sources; judge by ear at release.
+### SND-1 status (own loops for the unique machines)
+
+80 loops added (8 s, `-q 1`, lowpass 9000, 38-78 KB), about 6,400 credits of 8,000 on the Starter plan (13,210 of 40,000 used after). Tier 1, all with their own recipe type: MAX+ (16 types, the Hyperstargate included), MAX's four (horizon interferometry, ergoregion synchronisation, horizon flux clamp, segment reclamation) and 20 UIV types. Tier 2: 14 UEV, 12 UHV, 3 UV, 5 ZPM and 5 OpV types (accelerator-driven, antimatter storage, muon fusion, nebula collection, calutron, nuclear clock, bulge collection, self replication and the like). Left without a loop: the horizon capacitor bank (`dummy` type), the Hyperfactory and the neutronium compression hall (GTM base types `compressor`, `implosion_compressor`), `uiv_fusion_reactor` and the UEV/UXV fusion reactors (GTM's `fusion_reactor`), UXV and the lower-era remainder of tier 2 (budget). Pack total: 186 loops, 7.9 MB.
+
+Status before SND-1: 106 events, 0 missing, 0 silent machines (8 recipe types added to `WIRING`). Generation of the 36 missing events and 8 new machine loops used about 2,700 credits on the Starter plan (cap 9,000). Residual audit flags (seam, start/end level) are intrinsic to the sources; judge by ear at release.
