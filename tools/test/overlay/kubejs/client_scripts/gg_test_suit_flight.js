@@ -7,7 +7,8 @@
 //   fly   with 'mayfly' and off the ground, sets 'flying' on the local player and syncs it (LocalPlayer#onUpdateAbilities);
 //   land  holds the sneak key so the flying player descends; on touching the ground Minecraft clears 'flying', then the key is
 //         released.
-// It answers in 'ack' and reports what the client sees ('cFlying', 'cMayfly', 'cGround', 'cY'). It also keeps mc-runtime-test in
+// It answers in 'ack' and reports what the client sees ('cFlying', 'cMayfly', 'cGround', 'cY', 'cScreen': the open screen or
+// 'none'; the server half starts only once the world-join screen is gone). It also keeps mc-runtime-test in
 // the world: it quits at tickCount 100 with no screen open, so the player's age is lowered while the test runs.
 // var + function: this Rhino throws "redeclaration of var" for const/let in functions that run more than once.
 ;(function () {
@@ -19,9 +20,14 @@
   function val(k) { var v = S.get(k); return v === null || v === undefined ? '' : String(v) }
   function y(p) { return Number(p.getY()).toFixed(2) }
   function sneak(mc, on) {
-    if (c.sneaking === on) return
-    mc.options.keyShift.setDown(on)
-    c.sneaking = on
+    // Pressed again every tick: a screen opening or closing resets every key to its physical state (KeyMapping.setAll).
+    if (on) {
+      mc.options.keyShift.setDown(true)
+      c.sneaking = true
+    } else if (c.sneaking) {
+      mc.options.keyShift.setDown(false)
+      c.sneaking = false
+    }
   }
   function reply(token, text) {
     c.done = token
@@ -76,10 +82,12 @@
       if (Number(p.age) >= 80) p.age = 20
       serve(mc, p)
       var ab = p.getAbilities()
+      var scr = mc.screen
       S.put('cFlying', String(!!ab.flying))
       S.put('cMayfly', String(!!ab.mayfly))
       S.put('cGround', String(!!p.onGround()))
       S.put('cY', y(p))
+      S.put('cScreen', scr === null || scr === undefined ? 'none' : String(scr))
     } catch (e) {
       if (c.errors++ < 5) console.info('GGTEST|suit_flight|client_script|FAIL|' + String(e).replace(/\|/g, '/'))
     }

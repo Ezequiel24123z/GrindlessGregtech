@@ -129,7 +129,9 @@
       mode(p, 'survival')
       bare(p)
     } },
-    { until: function (p) { return p.onGround() && !p.isCreative() }, max: 200, f: function (p, ok, n) {
+    // The client must be in the world, not behind the world-join screen: closing a screen resets the keys the landings hold.
+    { until: function (p) { return p.onGround() && !p.isCreative() && cval('cScreen') === 'none' }, max: 600, f: function (p, ok, n) {
+      var standing = !!p.onGround()
       st.mem.dim = String(p.getLevel().getDimension())
       st.mem.x = Number(p.getX())
       st.mem.y = Number(p.getY())
@@ -137,10 +139,11 @@
       var top = Number(p.getLevel().getHeight(Heightmap.MOTION_BLOCKING, Math.floor(st.mem.x), Math.floor(st.mem.z)))
       st.mem.liftY = Math.max(st.mem.y, top) + LIFT
       cmd(p, 'effect give ' + who(p) + ' minecraft:slow_falling 600 0 true')
-      log('start', 'NOTE', (ok ? 'standing' : 'not on the ground after ' + n + ' ticks') + ' at ' + f2(st.mem.x) + ' ' + f2(st.mem.y) + ' ' + f2(st.mem.z) +
-        ' in ' + st.mem.dim + '; the column is clear from y ' + top + ', flights hang at y ' + f2(st.mem.liftY) + ' (' + f2(st.mem.liftY - top) +
-        ' blocks of air below); difficulty ' + st.mem.diff + ', peaceful while the test runs')
-      check('survival_start', ok && !p.isCreative() && !mayfly(p), 'mayfly ' + mayfly(p) + ', on the ground ' + ok)
+      log('start', 'NOTE', (standing ? 'standing' : 'not on the ground') + ' at ' + f2(st.mem.x) + ' ' + f2(st.mem.y) + ' ' + f2(st.mem.z) +
+        ' in ' + st.mem.dim + ' after ' + n + ' ticks, client screen ' + (cval('cScreen') || 'unknown') + '; the column is clear from y ' + top +
+        ', flights hang at y ' + f2(st.mem.liftY) + ' (' + f2(st.mem.liftY - top) + ' blocks of air below); difficulty ' + st.mem.diff +
+        ', peaceful while the test runs')
+      check('survival_start', standing && !p.isCreative() && !mayfly(p), 'mayfly ' + mayfly(p) + ', on the ground ' + standing)
       // Evidence: NANO-1's lift, the player's own /tp
       var y0 = Number(p.getY())
       var r = safe(function () { return p.runCommandSilent('tp @s ~ ~' + LIFT + ' ~') })
