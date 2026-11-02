@@ -20,7 +20,7 @@
     'gtceu:clean_machine_casing', 'grindless:vanadium_steel_drill_bit', 'grindless:stainless_steel_drill_bit', 'grindless:empty_vein_probe']
   HV.craftingParts = PARTS
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('hv/family_crafting', function (event) {
     var missing = PARTS.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error('[grindless/hv] HV controller recipes skipped, unknown item(s): ' + missing.join(', '))

@@ -16,7 +16,7 @@
 // gone; nothing else referred to them.
 //
 // Rhino: var + function in every callback (this event runs again on every /reload).
-ServerEvents.recipes(function (event) {
+global.grindless.recipes('dimensions_resources', function (event) {
     var found = 0
     event.forEachRecipe({ id: 'gtceu:gas_collector/air' }, function (r) {
         r.dimension('grindless:void')

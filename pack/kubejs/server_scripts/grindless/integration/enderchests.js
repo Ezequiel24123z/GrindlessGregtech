@@ -11,7 +11,7 @@
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/enderchests', function (event) {
     var PLATE = { tag: 'forge:plates/aluminium' }
     var CIRCUIT = { tag: 'gtceu:circuits/mv' }
     var PEARL = { tag: 'forge:ender_pearls' }

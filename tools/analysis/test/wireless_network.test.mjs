@@ -591,7 +591,7 @@ function jvm(opts = {}) {
     BlockEvents: { rightClicked() {}, placed() {}, broken() {} },
   };
   sandbox.global = kubejsGlobal();
-  sandbox.global.grindless = { readJsonTable: (p) => JSON.parse(fs.readFileSync(path.join(PACK, p), 'utf8')) };
+  sandbox.global.grindless = { recipes: (n, fn) => sandbox.ServerEvents.recipes(fn), readJsonTable: (p) => JSON.parse(fs.readFileSync(path.join(PACK, p), 'utf8')) };
   vm.createContext(sandbox);
   // KubeJS's Rhino (2001) answers String#charCodeAt with a java.lang.Character (NativeString, Id_charCodeAt: `return c`): arithmetic
   // makes it NaN (ScriptRuntime#toNumber of a non-JS object), String() gives the character back. Patched on this realm's own

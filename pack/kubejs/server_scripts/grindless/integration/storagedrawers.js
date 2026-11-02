@@ -9,7 +9,7 @@
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/storagedrawers', function (event) {
     var swap = function (r, fromTag, toTag) {
       var key = r.json.getAsJsonObject('key')
       var names = key.keySet().toArray()

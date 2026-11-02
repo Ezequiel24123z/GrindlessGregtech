@@ -50,7 +50,7 @@
       .filter(function (id) { return Item.exists(id) })
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/extendedfeatures', function (event) {
     var removed = 0
     REMOVED_TYPES.forEach(function (name) {
       var type = 'extendedfeatures:' + name

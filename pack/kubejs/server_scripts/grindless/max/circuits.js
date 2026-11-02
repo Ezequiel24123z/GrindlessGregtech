@@ -28,7 +28,7 @@
       out: 'grindless:tweezer_array_die' }
   ]
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('max/circuits', function (event) {
     ROWS.forEach(function (r) {
       var missing = [r.input, r.lens, r.out].filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {

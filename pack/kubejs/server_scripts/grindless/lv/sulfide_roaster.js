@@ -94,7 +94,7 @@
   LVC.roaster.neededItems = NEEDED_ITEMS
   LVC.roaster.neededFluids = NEEDED_FLUIDS
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('lv/sulfide_roaster', function (event) {
     var missing = NEEDED_ITEMS.filter(function (id) { return !Item.exists(id) })
       .concat(NEEDED_FLUIDS.filter(function (id) { return !Fluid.exists(id) }))
     if (missing.length > 0) {

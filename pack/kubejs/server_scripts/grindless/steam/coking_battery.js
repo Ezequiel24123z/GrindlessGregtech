@@ -56,7 +56,7 @@
     hatchRecipe: 'grindless:crafting/ulv_output_hatch'
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('steam/coking_battery', function (event) {
     if (!Fluid.exists(COAL_GAS) || !Fluid.exists(CREOSOTE)) {
       console.error('[grindless/steam] coking recipe skipped: coal gas or creosote is not a registered fluid')
       return

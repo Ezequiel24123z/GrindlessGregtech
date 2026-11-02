@@ -17,7 +17,7 @@
 (function () {
   const G = global.grindless
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('steam/crafting', function (event) {
     // ---- wear parts and probe
     event.recipes.gtceu.shaped('2x grindless:bronze_drill_bit', ['PfP', 'PRP', ' R '], {
       P: '#forge:plates/bronze',

@@ -50,7 +50,8 @@ export function runServerScripts({ packRoot, scripts, recipes, startup = [], ite
     patterns: patternStubs(),
     parallelHatch: { part: () => ({ kind: 'part', ability: 'parallel_hatch' }), modifier: (next) => next, overclock: () => null },
     noVoiding: { modifier: (o, next) => next, beforeWorking: () => () => true },
-  };
+    recipes: (name, fn) => sandbox.ServerEvents.recipes(fn),
+  }
   const noop = () => {};
   // startup-only event groups, stubbed: any handler (registry, materialModification...) is accepted and never runs here
   const events = () => new Proxy({}, { get: () => noop });

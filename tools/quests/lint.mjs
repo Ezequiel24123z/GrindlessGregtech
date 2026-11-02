@@ -165,6 +165,7 @@ function main() {
     }
     const dups = findings.filter((f) => f.rule === 'dup-id' && !book.chapters.some((c) => c.filename === f.chapter));
     for (const f of dups) console.log(`  ERROR dup-id ${f.message}`);
+    for (const f of findings.filter((x) => x.rule === 'unused-waiver')) console.log(`  WARN  unused-waiver ${f.message}`);
   }
   if (!options.items) console.log('note: item ids not checked here (pass --items <items.json> from a gg_dump run; gg_test_quests checks them in game)');
   console.log(`total: ${errors.length} errors, ${warns.length} warnings`);

@@ -25,7 +25,7 @@
   const PAIR_NBT_KEY = 'grindless_planet'
   MOON.pair = { seed: SEED, nbtKey: PAIR_NBT_KEY, transformId: 'grindless:transform/lunar_entangled_singularity' }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('moon/crafting', function (event) {
     var hv = MOON.lunarBit()
 
     var parts = ['gtceu:hv_machine_hull', 'gtceu:hv_electric_motor', 'gtceu:hv_sensor', 'minecraft:daylight_detector', 'grindless:empty_vein_probe']

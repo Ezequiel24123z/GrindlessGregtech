@@ -15,7 +15,8 @@
 // `const`/`let` declaration inside a function body that gets invoked again, so every local below
 // is declared with `var` on purpose (see server_scripts/grindless/dimensions.js for the same rule).
 
-const FIRST_LOGIN_PD_KEY = 'grindless_got_quest_book'
+;(function () {
+var FIRST_LOGIN_PD_KEY = 'grindless_got_quest_book'
 
 PlayerEvents.loggedIn(function (event) {
     var player = event.player
@@ -26,7 +27,8 @@ PlayerEvents.loggedIn(function (event) {
     player.give('ftbquests:book')
 })
 
-ServerEvents.recipes(function (event) {
+global.grindless.recipes('quest_book', function (event) {
     event.shapeless('ftbquests:book', ['minecraft:paper', '#minecraft:planks'])
         .id('grindless:quest_book_recovery')
 })
+})()

@@ -24,7 +24,7 @@
   ]
   OW.rows = ROWS
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('opv/wireless', function (event) {
     var eut = Number(GTValues.VA[OPV])
     ROWS.forEach(function (r) {
       var ids = r.items.map(function (s) { return s.replace(/^\d+x /, '') }).concat([r.out])

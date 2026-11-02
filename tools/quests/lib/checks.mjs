@@ -91,18 +91,40 @@ export function textLimits(cfg, filename) {
   };
 }
 
+// waivers that actually suppressed a finding, per config object (a waiver is asked about only when a finding would otherwise appear)
+const usedWaivers = new WeakMap();
+function markUsed(cfg, e) {
+  if (!usedWaivers.has(cfg)) usedWaivers.set(cfg, new Set());
+  usedWaivers.get(cfg).add(e);
+}
+
 function allowedLongEdge(cfg, from, to) {
-  return (cfg.allowLongEdges || []).some((e) => (e.from === from.id && e.to === to.id) || (Array.isArray(e) && e[0] === from.id && e[1] === to.id));
+  const hit = (cfg.allowLongEdges || []).find((e) => (e.from === from.id && e.to === to.id) || (Array.isArray(e) && e[0] === from.id && e[1] === to.id));
+  if (hit) markUsed(cfg, hit);
+  return !!hit;
+}
+
+// allowLayout and allowLongEdges entries that suppressed nothing in the checkBook run before this call
+export function unusedWaivers(cfg) {
+  const used = usedWaivers.get(cfg) || new Set();
+  const out = [];
+  for (const key of ['allowLayout', 'allowLongEdges']) {
+    for (const e of cfg[key] || []) if (!used.has(e)) out.push({ list: key, from: Array.isArray(e) ? e[0] : e.from, to: Array.isArray(e) ? e[1] : e.to });
+  }
+  return out;
 }
 
 // lint-config allowLayout: [{ from, to, kinds: ['crossing', 'through-node'], why }]. A real dependency whose line cannot avoid a crossing
 // or a node in the layout keeps its line: real dependencies come before a clean drawing (owner, 2026-11-02). No kinds = both.
 export function allowedLayout(cfg, from, to, kind) {
-  return (cfg.allowLayout || []).some((e) => e.from === from.id && e.to === to.id && (!Array.isArray(e.kinds) || e.kinds.includes(kind)));
+  const hit = (cfg.allowLayout || []).find((e) => e.from === from.id && e.to === to.id && (!Array.isArray(e.kinds) || e.kinds.includes(kind)));
+  if (hit) markUsed(cfg, hit);
+  return !!hit;
 }
 
 export function checkBook(book, cfg, options = {}) {
   const findings = [];
+  usedWaivers.delete(cfg);
   const add = (level, rule, chapter, quest, message, other) => findings.push({ level, rule, chapter: chapter ? chapter.filename : '', quest: quest ? quest.id : '', questTitle: quest ? questLabel(quest) : '', other: other ? other.id : '', message });
   const only = options.chapters && options.chapters.length ? new Set(options.chapters) : null;
   const inScope = (ch) => !only || only.has(ch.filename);
@@ -256,11 +278,15 @@ export function checkBook(book, cfg, options = {}) {
       const tooLong = e.length > (cfg.maxEdge ?? 4.6) + EPS && !to.hideDependencyLines && !allowedLongEdge(cfg, from, to);
       // a forward line between two sections of a merged era chapter may be longer (eraChapters.bridgeMaxEdge)
       if (tooLong && !(isMerged && d > EPS && e.length <= bridgeMax + EPS)) add('error', 'long-edge', ch, to, `line from "${questLabel(from)}" is ${e.length.toFixed(2)} cells long (max ${cfg.maxEdge}${isMerged ? ', ' + bridgeMax + ' for a forward line between sections' : ''})`, from);
-      if (!to.hideDependencyLines && !allowedLayout(cfg, from, to, 'through-node')) {
+      if (!to.hideDependencyLines) {
+        const under = [];
         for (const o of ch.quests) {
           if (o === from || o === to) continue;
           const h = half(o) * 0.9;
-          if (segHitsBox(center(from), center(to), { x0: o.x - h, x1: o.x + h, y0: o.y - h, y1: o.y + h })) add('warn', 'through-node', ch, to, `line from "${questLabel(from)}" runs under "${questLabel(o)}"`, o);
+          if (segHitsBox(center(from), center(to), { x0: o.x - h, x1: o.x + h, y0: o.y - h, y1: o.y + h })) under.push(o);
+        }
+        if (under.length && !allowedLayout(cfg, from, to, 'through-node')) {
+          for (const o of under) add('warn', 'through-node', ch, to, `line from "${questLabel(from)}" runs under "${questLabel(o)}"`, o);
         }
       }
     }
@@ -269,8 +295,9 @@ export function checkBook(book, cfg, options = {}) {
         const a = edges[i], b = edges[j];
         if (a.from === b.from || a.from === b.to || a.to === b.from || a.to === b.to) continue;
         if (a.to.hideDependencyLines || b.to.hideDependencyLines) continue;
+        if (!segIntersect(center(a.from), center(a.to), center(b.from), center(b.to))) continue;
         if (allowedLayout(cfg, a.from, a.to, 'crossing') || allowedLayout(cfg, b.from, b.to, 'crossing')) continue;
-        if (segIntersect(center(a.from), center(a.to), center(b.from), center(b.to))) add('warn', 'crossing', ch, a.to, `line "${questLabel(a.from)}" -> "${questLabel(a.to)}" crosses "${questLabel(b.from)}" -> "${questLabel(b.to)}"`, b.to);
+        add('warn', 'crossing', ch, a.to, `line "${questLabel(a.from)}" -> "${questLabel(a.to)}" crosses "${questLabel(b.from)}" -> "${questLabel(b.to)}"`, b.to);
       }
     }
     for (const c of cross) add('info', 'cross-chapter', ch, c.to, `depends on "${questLabel(c.from)}" in chapter ${c.from.chapter.filename}`, c.from);
@@ -338,6 +365,9 @@ export function checkBook(book, cfg, options = {}) {
       if (seenTitles.has(t)) add(classLevel('same-title'), 'same-title', ch, q, `same title as another quest of the chapter ("${stripCodes(q.title).trim()}")`, seenTitles.get(t));
       else seenTitles.set(t, q);
     }
+  }
+  if (!only) {
+    for (const w of unusedWaivers(cfg)) add('warn', 'unused-waiver', null, null, `${w.list} entry ${w.from} -> ${w.to} suppresses nothing: remove it from lint-config.json`);
   }
   return findings;
 }

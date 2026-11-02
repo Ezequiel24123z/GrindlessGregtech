@@ -7,6 +7,7 @@
 // width (client font, GTRecipeTypeUI#getJEISize), or '' (draws nothing). GTRecipeTypeUI#getPropertyHeightShift counts one text line per info
 // function, so the page grows with MAX_LINES per original; what does not fit in MAX_LINES lines ends with "...".
 // The pack's lint (tools/analysis/recipe-info-length.test.mjs) keeps our en_us texts under that cap.
+;(function () {
 var GG_INFO_MAX_LINES = 8
 var GG_INFO_FALLBACK_CHARS = 26
 var GG_INFO_AIR_KEY = 'grindless_air'
@@ -166,3 +167,4 @@ if (Platform.isClientEnvironment()) {
     }
   })
 }
+})()

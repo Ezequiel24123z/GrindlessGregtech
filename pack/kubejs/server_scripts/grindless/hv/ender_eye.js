@@ -29,7 +29,7 @@
     bathEut: 120
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('hv/ender_eye', function (event) {
     event.remove({ id: HV.enderEye.removed })
     event.remove({ id: HV.enderEye.bath })
     event.recipes.gtceu.chemical_bath('gtceu:eye_of_ender')

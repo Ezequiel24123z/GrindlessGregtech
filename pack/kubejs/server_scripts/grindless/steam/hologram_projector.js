@@ -787,7 +787,7 @@
   })
 
   // ---------------------------------------------------------------- recipe (Steam Age: bronze, glass, redstone; a screwdriver)
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('steam/hologram_projector', function (event) {
     event.recipes.gtceu.shaped(ITEM, [' G ', 'TRT', 'PdP'], {
       G: '#forge:glass',
       T: 'minecraft:redstone_torch',

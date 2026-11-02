@@ -295,6 +295,7 @@ test('ironfurnaces.js removes the FE augments, the heater and the Million furnac
     Item: { exists: () => true },
     console: { info: () => {} }
   };
+  ctx.global = { grindless: { recipes: (n, fn) => ctx.ServerEvents.recipes(fn) } };
   vm.createContext(ctx);
   vm.runInContext(fs.readFileSync(IF_SCRIPT, 'utf8'), ctx, { filename: IF_SCRIPT });
   recipes({ forEachRecipe: () => {}, remove: (f) => removed.push(f) });

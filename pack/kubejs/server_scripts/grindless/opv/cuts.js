@@ -2,7 +2,7 @@
 // OpV cuts (OpV-F2, docs/eras/opv.md "Only from there and cuts"): GTM's recipes for the OpV components, hull, energy and dynamo
 // hatches, parallel hatch and basic machines; every MAX recipe but the battery's; the chain strand's generic wiremill, extruder, bender,
 // cable assembler, macerator and arc furnace rows; and GT--'s cosmic mainframe and SMDs (S0-4: GT-- registers no recipe for them,
-// so those filters find none and stay as a guard). gtceu:max_battery is kept: GTM makes it at UHV and the released UHV battery cell
+// so those filters remove nothing today; they are live code that only acts if a GT-- version adds such a recipe). gtceu:max_battery is kept: GTM makes it at UHV and the released UHV battery cell
 // is built from it. Removals spare our own recipes (not mod grindless), so no load-order band is needed.
 ;(function () {
   var LOG = '[grindless] '

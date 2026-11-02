@@ -1,7 +1,7 @@
 // priority: -18724
 (function () {
   var G = global.grindless
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('luv/orbital_solar', function (event) {
     var A = G.orbitalSolar
     var factor = G.sunlight.factor(G.orbits.earth)
     if (!(factor > 0)) throw new Error('[grindless/orbital_solar] Earth orbit sunlight missing')

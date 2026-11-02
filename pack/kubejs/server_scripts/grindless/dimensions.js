@@ -285,7 +285,7 @@ function onEndKeyClicked(event) {
 
 // ---------------------------------------------------------------- cheap recovery recipes
 
-ServerEvents.recipes(function (event) { addKeyRecipes(event) })
+global.grindless.recipes('dimensions', function (event) { addKeyRecipes(event) })
 
 function addKeyRecipes(event) {
     event.shapeless('grindless:void_key', ['minecraft:flint', 'minecraft:stick', 'minecraft:glass'])

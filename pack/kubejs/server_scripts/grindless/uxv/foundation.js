@@ -5,7 +5,7 @@
 // Ids: startup_scripts/grindless/uxv/foundation.js (the builders are uev/foundation.js's).
 // Published in global.grindless.uxvFoundation: .recipes (the ids made), .skipped.
 // Rhino: var + function inside every callback that runs more than once.
-ServerEvents.recipes(function (event) {
+global.grindless.recipes('uxv/foundation', function (event) {
   var LOG = '[grindless/uxv] '
   var G = global.grindless || (global.grindless = {})
   var UF = G.uxvFoundation || (G.uxvFoundation = {})

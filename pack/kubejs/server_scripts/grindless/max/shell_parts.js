@@ -32,7 +32,7 @@
       fluids: [['gtceu:soldering_alloy', 288]], out: 'grindless:segment_controller' }
   ]
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('max/shell_parts', function (event) {
     ROWS.forEach(function (r) {
       var ids = r.items.map(function (s) { return s.replace(/^\d+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([r.out])
       var missing = ids.filter(function (id) { return !Item.exists(id) }).concat(r.fluids.map(function (f) { return f[0] }).filter(function (id) { return !Fluid.exists(id) }))

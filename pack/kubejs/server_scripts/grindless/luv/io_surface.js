@@ -26,7 +26,7 @@
     duration: 414
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('luv/io_surface', function (event) {
     var gt = event.recipes.gtceu
     var ge = IO.germanite
     event.remove({ id: ge.removed })

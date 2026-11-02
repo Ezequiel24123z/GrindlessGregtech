@@ -5,7 +5,7 @@
 // by hand needs a route: an MV assembler makes one from 7 diamonds, a netherrack and a netherite scrap (ancient debris, the nether
 // drill's material), so the netherite tools and the copy recipe both have a source.
 (function () {
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('mv/netherite_template', function (event) {
     var needed = ['minecraft:netherite_upgrade_smithing_template', 'minecraft:diamond', 'minecraft:netherrack', 'minecraft:netherite_scrap']
     var missing = needed.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {

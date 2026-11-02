@@ -17,7 +17,7 @@
     'gtceu:frostproof_machine_casing', 'grindless:steel_drill_bit', 'grindless:vanadium_steel_drill_bit']
   MV.craftingParts = PARTS
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('mv/family_crafting', function (event) {
     var missing = PARTS.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error('[grindless/mv] MV controller recipes skipped, unknown item(s): ' + missing.join(', '))

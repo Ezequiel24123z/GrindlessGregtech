@@ -57,7 +57,7 @@
     })
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('mv/family_greenhouse', function (event) {
     var missingFluids = [WATER, CO2, O2].filter(function (id) { return !Fluid.exists(id) })
     if (missingFluids.length > 0 || !Item.exists(FERTILIZER)) {
       console.error('[grindless/mv] greenhouse CO2 variants skipped, unknown id(s): ' +

@@ -36,7 +36,7 @@
     '4x gtceu:small_lanthanum_dust', '3x gtceu:small_aluminium_dust', '20x gtceu:small_sodium_dust'],
     fluorine: 73250, output: 25 }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('luv/orbital_industry', function (event) {
     PIPE_RECYCLING.concat(PIPE_GATE).forEach(function (id) { event.remove({ id: id }) })
     recipes.forEach(function (r) {
       var builder = event.recipes.gtceu[r.type]('grindless:' + r.name)

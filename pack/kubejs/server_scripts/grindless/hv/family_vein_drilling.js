@@ -116,7 +116,7 @@
     if (chance >= 1) recipe.chancedOutput('1x ' + item, Math.min(chance, 9999), 0)
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('hv/family_vein_drilling', function (event) {
     HV.checkTables().forEach(function (problem) {
       console.error('[grindless/hv] End vein table: ' + problem)
     })

@@ -63,7 +63,7 @@
     leach.EUt(drilling.eut).duration(drilling.duration)
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('mv/family_vein_drilling', function (event) {
     var drilling = LV.drilling
     var bit = drilling && drilling.bits ? drilling.bits.vanadium_steel : null
     if (!bit) {

@@ -15,7 +15,7 @@
     plant: { circuit: 1, eut: 30, duration: 400, water: 1000, acid: 2000, iodine: 8, hydrogen: 2000, oxygen: 1000 }
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('luv/io_orbit', function (event) {
     var gt = event.recipes.gtceu
     if (IOO.tether.active) {
       var t = R.tether
