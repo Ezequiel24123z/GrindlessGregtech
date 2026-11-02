@@ -10,6 +10,7 @@ const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
 export const CHAPTER = {
+  section: { name: 'Gate to UIV', origin: { x: 0, y: 0 } },
   order: 0,
   icon: 'gtceu:uev_machine_casing',
   autofocus: 'START',

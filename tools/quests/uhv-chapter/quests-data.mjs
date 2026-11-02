@@ -10,6 +10,7 @@ const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
 export const CHAPTER = {
+  section: { name: 'Gate to UEV', origin: { x: 0, y: 0 } },
   era: 'uhv',
   role: 'age',
   order: 0,

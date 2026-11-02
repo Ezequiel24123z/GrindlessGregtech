@@ -11,6 +11,9 @@ const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
 export const CHAPTER = {
+  section: { name: 'UHV Integration', origin: { x: 7, y: 41.75 }, heading: { key: 'H_POWER', x: 0, y: 0, deps: ['H_HEAT'], icon: 'grindless:sic_power_module', desc: [
+      'The cell, the network and the fabricator at the UHV tier.',
+    ] } },
   filename: 'uhv_integration',
   era: 'uhv',
   role: 'integration',
@@ -21,26 +24,13 @@ export const CHAPTER = {
   subtitle: ['Silicon carbide power, a swarm round the Sun, the network at UHV, one machine doing five jobs, older machines with new tricks and two more stations on AE2.'],
 };
 
-export const LINKS = [
-  { key: 'I_L_PW', ref: 'START', x: 0, y: 0 },
-  { key: 'I_L_SW', ref: 'STN7', x: 0, y: 2 },
-  { key: 'I_L_NET', ref: 'START', x: 0, y: 4 },
-  { key: 'I_L_QF', ref: 'START', x: 0, y: 6 },
-  { key: 'I_L_AE1', ref: 'STN7', x: 0, y: 8 },
-  { key: 'I_L_AE2', ref: 'STEP', x: 0, y: 10 },
-  { key: 'I_L_OM1', ref: 'START', x: 0, y: 12 },
-  { key: 'I_L_OM2', ref: 'START', x: 0, y: 14 },
-  { key: 'I_L_OM3', ref: 'START', x: 0, y: 16 },
-  { key: 'I_L_OM4', ref: 'START', x: 0, y: 18 },
-  { key: 'I_L_OM5', ref: 'START', x: 0, y: 20 },
-  { key: 'I_L_OM6', ref: 'START', x: 0, y: 22 },
-];
+export const LINKS = [];
 
 export const QUESTS = [
   // ------------------------------------------------------------------ power devices and RTAN
   {
     key: 'I_PWRDEV', kind: 'process', title: 'Power Devices', icon: 'grindless:sic_power_module',
-    deps: ['START'], x: 2, y: 0,
+    deps: ['H_POWER'], x: 3, y: -2.75,
     teach: {
       for: 'Silicon carbide takes more heat and volts than silicon, and the &6SiC Power Module&r is what the swarm\'s control gear is built from. An inverted metamorphic array stacks a junction for every colour of light.',
       needs: 'The SiC device fab and the solar array fab, both from the machines tab, and ultrapure water for the wafers.',
@@ -53,7 +43,7 @@ export const QUESTS = [
   },
   {
     key: 'RTAN', kind: 'process', title: 'RTAN', icon: 'gtceu:platinum_plant',
-    deps: ['I_PWRDEV'], x: 4, y: 0,
+    deps: ['I_PWRDEV'], x: 5, y: -2.75,
     teach: {
       for: 'The &6Platinum Plant&r turns the biomining liquor into salts, and the ruthenium, iridium and americium end up as the alloy that carries the highest currents yet: RTAN wire.',
       needs: 'Proxima leach liquor from the biomining heap, and a long afternoon on the platinum plant.',
@@ -68,7 +58,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the swarm
   {
     key: 'SWARM', kind: 'plant', title: 'The Swarm', icon: 'gtceu:swarm_control_station',
-    deps: ['STN7'], x: 2, y: 2,
+    deps: ['H_MERCURY'], x: 7, y: -51.25,
     teach: {
       for: 'The &6Swarm Control Station&r steers a cloud of segments round the Sun and sends the power down as a beam. Two stations feed one bank, and the bank loses a little on the way.',
       needs: 'Swarm segments from the foundry in Mercury orbit, and the station in the orbit itself.',
@@ -81,7 +71,7 @@ export const QUESTS = [
   },
   {
     key: 'CORONA', kind: 'process', title: 'Coronal Map', icon: 'grindless:coronal_field_map',
-    deps: ['SWARM'], x: 4, y: 2,
+    deps: ['SWARM'], x: 9, y: -51.25,
     teach: {
       for: 'A probe that dips into the corona comes back with the &6Coronal Field Map&r. The swarm points itself with it.',
       needs: 'The solar probe bay in Mercury orbit, and a probe for every run.',
@@ -94,7 +84,7 @@ export const QUESTS = [
   },
   {
     key: 'KARD', kind: 'milestone', title: 'Kardashev II', icon: 'gtceu:swarm_control_station',
-    deps: ['CORONA'], x: 6, y: 2,
+    deps: ['CORONA'], x: 11, y: -51.25,
     desc: [
       'A civilisation that uses all the power of its star is a type II on the Kardashev scale. You have a swarm, so you are on the way. It is only on the way.',
     ],
@@ -105,7 +95,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the network and the fabricator
   {
     key: 'CELL', kind: 'machine', title: 'The UHV Cell', icon: 'grindless:uhv_smes_cell',
-    deps: ['START'], x: 2, y: 4,
+    deps: ['H_POWER'], x: 3, y: -0.75,
     teach: {
       for: 'The &6UHV SMES Cell&r holds a huge store of EU, and the nuclear clock keeps it in step with the network.',
       needs: 'The naquadria magnet works, and the nuclear clock for the sync.',
@@ -118,7 +108,7 @@ export const QUESTS = [
   },
   {
     key: 'NETUHV', kind: 'machine', title: 'The Network Goes UHV', icon: 'gtceu:uhv_wireless_energy_hatch',
-    deps: ['CELL'], x: 4, y: 4,
+    deps: ['CELL'], x: 5, y: -0.75,
     teach: {
       for: 'Move your towers onto &6UHV SMES Cells&r and the wireless network carries UHV, out to the stations and now to Mercury and Proxima.',
       needs: 'Every formed tower holding UHV cells: until then the network stays at UV.',
@@ -131,7 +121,7 @@ export const QUESTS = [
   },
   {
     key: 'PAR', kind: 'step', title: 'Parallel Hatch', icon: 'gtceu:uv_parallel_hatch',
-    deps: ['NETUHV'], x: 6, y: 4,
+    deps: ['NETUHV'], x: 7, y: -0.75,
     desc: [
       'There is no UHV parallel hatch. The &6UV Parallel Hatch&r is the top of the line, and one more machine of the same kind is the only other way to go wider.',
     ],
@@ -140,7 +130,7 @@ export const QUESTS = [
   },
   {
     key: 'QFAB', kind: 'machine', title: 'Quantum Fabricator', icon: 'gtceu:quantum_fabricator',
-    deps: ['START'], x: 2, y: 6,
+    deps: ['H_POWER'], x: 3, y: 1.25,
     teach: {
       for: 'The &6Quantum Fabricator&r does the work of the assembler, circuit assembler, forming press, laser engraver and cutter in one cleanroom machine. A parallel hatch multiplies it, and it overclocks perfectly.',
       needs: 'A cleanroom, UHV power, a parallel hatch and every older recipe\'s inputs on one bus.',
@@ -155,7 +145,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ AE2
   {
     key: 'AE_MERC', kind: 'step', title: 'Mercury on AE2', icon: 'ae2:quantum_ring',
-    deps: ['STN7'], x: 2, y: 8,
+    deps: ['H_MERCURY'], x: 7, y: -49.25,
     desc: [
       'The seed for the Mercury bridge is made in Mercury orbit, with the first swarm segment as the catalyst. Once linked, the foundry\'s output reaches home through ME.',
     ],
@@ -164,7 +154,7 @@ export const QUESTS = [
   },
   {
     key: 'AE_PROX', kind: 'step', title: 'Proxima b on AE2', icon: 'grindless:proxima_gate_seed',
-    deps: ['STEP'], x: 2, y: 10,
+    deps: ['H_PROXIMA'], x: 18, y: -45.75,
     desc: [
       'Proxima b has no bridge of its own: only the gate makes the &6Proxima Gate Seed&r, and the first flora sample is its catalyst. Samples then arrive through ME, never by hand.',
     ],
@@ -175,7 +165,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ older machines
   {
     key: 'OM_ISO', kind: 'process', title: 'Isotope Chemistry', icon: 'gtceu:fuel_fabrication_plant',
-    deps: ['START'], x: 2, y: 12,
+    deps: ['H_ROWS'], x: 3.5, y: 4.25,
     teach: {
       for: 'The &6Fuel Fabrication Plant&r, the &6Hot Cell&r and the &6Pyroprocessing Cell&r take on the heavier isotopes: new fuels, new reprocessing, nothing new to build.',
       needs: 'Berkelium and californium from the reactor, and the hot cell\'s shielding.',
@@ -188,7 +178,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_LIQ', kind: 'process', title: 'Proxima Liquors', icon: 'gtceu:heavy_water_plant',
-    deps: ['START'], x: 2, y: 14,
+    deps: ['H_ROWS'], x: 3.5, y: 6.25,
     teach: {
       for: 'Heavy water, platinum salts and rare-earth liquors from Proxima b go through the &6Platinum Plant&r, &6Heavy Water Plant&r, &6Extraction Cascade&r, &6Regolith Cell&r and &6Lunar Solar Array&r. Each machine learns a new input.',
       needs: 'Proxima leach liquors, and the arrays tuned to the red.',
@@ -204,7 +194,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_LIFE', kind: 'process', title: 'Life at Home', icon: 'gtceu:biofoundry',
-    deps: ['START'], x: 2, y: 16,
+    deps: ['H_ROWS'], x: 3.5, y: 8.25,
     teach: {
       for: 'The &6Biofoundry&r, &6Organoid Lab&r and &6Algae Bioreactor&r grow new strains: neural tissue on a scaffold, and an algae that feeds on red light.',
       needs: 'Gene cassettes, the far-red strain, and sealed rooms.',
@@ -217,7 +207,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_CRYS', kind: 'process', title: 'Crystals and Chips', icon: 'gtceu:ion_implanter',
-    deps: ['START'], x: 2, y: 18,
+    deps: ['H_ROWS'], x: 3.5, y: 10.25,
     teach: {
       for: 'The &6Ion Implanter&r, &6Isotope Column&r, &6MOCVD Reactor&r, &6Synchrotron&r, &6Antimatter Trap&r, &6Powder-in-Tube Line&r and &6Diamond Lattice Fab&r each take a new mode in UHV, for wafers and cells at the next purity.',
       needs: 'The UV versions of each, and the new isotopes.',
@@ -233,7 +223,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_THR', kind: 'process', title: 'Thrusters and Sails', icon: 'gtceu:thruster_works',
-    deps: ['START'], x: 2, y: 20,
+    deps: ['H_THRUST'], x: 4, y: 13.25,
     teach: {
       for: 'The &6Thruster Works&r, &6Light Sail Fab&r and &6Cryogenic Plant&r make the motors and sails for the trip, with oganesson as the propellant.',
       needs: 'Oganesson from the cryogenic plant, and film from the aluminium line.',
@@ -246,7 +236,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_CHEM', kind: 'process', title: 'Chemistry Rows', icon: 'gtceu:large_chemical_reactor',
-    deps: ['START'], x: 2, y: 22,
+    deps: ['H_THRUST'], x: 4, y: 15.25,
     teach: {
       for: 'The &6Large Chemical Reactor&r takes the era\'s new rows: solvents, propellant chemistry and the sulfide route.',
       needs: 'The raw materials from the Proxima liquors and the isotopes.',
@@ -261,7 +251,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ propellant
   {
     key: 'NOBLE', kind: 'process', title: 'Noble Thrust', icon: 'grindless:oganesson_propellant_pod',
-    deps: ['OM_THR'], x: 4, y: 20,
+    deps: ['OM_THR'], x: 6, y: 13.25,
     teach: {
       for: 'Oganesson is the heaviest noble gas and the best propellant a thruster could ask for. The &6Oganesson Propellant Pod&r packs it for the ICAN motor.',
       needs: 'Oganesson from the cryogenic plant.',
@@ -273,5 +263,23 @@ export const QUESTS = [
     ],
     tasks: [it('grindless:oganesson_propellant_pod')],
     rewards: [xp(200)],
+  },
+  {
+    key: 'H_ROWS', kind: 'reading', title: 'Rows of Chemistry', icon: 'gtceu:fuel_fabrication_plant',
+    deps: ['H_POWER'], x: 0.5, y: 8,
+    desc: [
+      'Isotopes, liquors, life and crystals at industrial scale.',
+    ],
+    tasks: [{ type: 'checkmark' }],
+    rewards: [],
+  },
+  {
+    key: 'H_THRUST', kind: 'reading', title: 'Thrust and Reagents', icon: 'gtceu:thruster_works',
+    deps: ['H_ROWS'], x: 1, y: 15,
+    desc: [
+      'Thrusters, sails and the last chemistry rows.',
+    ],
+    tasks: [{ type: 'checkmark' }],
+    rewards: [],
   },
 ];
