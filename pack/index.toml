@@ -16530,7 +16530,7 @@ hash = "41a264a42ddb246693db28253839a89c657d257ad035c1c7c3c7d44676a024e3"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_stream_lang.js"
-hash = "ec1184bf729d9103c0bc48a3f61dec5ae8bb2ff8928a1b6bea6375880cf7c5e6"
+hash = "f8d7dc7514a8402bc1ac306e75acdcb5a8548d7a1b1af4959741e137beaaf61f"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/maxplus_tarantula_lang.js"
@@ -18710,7 +18710,7 @@ hash = "121f78d0469fb6ae4154af4012b11a39b98cb871100dd3b2c292ba14b550d728"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/stream.js"
-hash = "32cd77b0f72e3be7feb850157d9de8338bc8f4169c7e7f28a9ded200782a3290"
+hash = "dedb6ef10cd66524f54c142fa7c4c7eb232b2e75808d8c35023cdb86e84f42ff"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/tarantula.js"
@@ -19750,7 +19750,7 @@ hash = "9175f8c8c53e430e9a8e4d59c7916c74990f9210f2b711d29aa3051657c46f5a"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/stream.js"
-hash = "72cb16758fdacfed246a08037b26a5a541a5a9e3355d10aa06c210114aee1fda"
+hash = "b51adb866c0addb71385a27f7d26ecd4c1640fa5554fdb89abdd84ecdce61341"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/maxplus/tarantula.js"
