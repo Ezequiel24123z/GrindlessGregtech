@@ -63,9 +63,14 @@
   ],
   "override": {},
   "keyFactor": {
-    "gtceu:iv_energy_input_hatch": 1.528,
-    "gtceu:iv_energy_input_hatch_4a": 1.147,
-    "gtceu:iv_machine_casing": 1.55
+    "gtceu:crystal_processor": 1.157,
+    "gtceu:iv_conveyor_module": 1.844,
+    "gtceu:iv_electric_piston": 1.45,
+    "gtceu:iv_energy_input_hatch": 1.299,
+    "gtceu:iv_energy_input_hatch_4a": 1.255,
+    "gtceu:iv_machine_casing": 2.311,
+    "gtceu:iv_machine_hull": 1.144,
+    "gtceu:iv_robot_arm": 1.345
   },
   "pin": {
     "gtceu:*_machine_hull": {

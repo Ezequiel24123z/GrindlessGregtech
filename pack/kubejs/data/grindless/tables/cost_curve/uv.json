@@ -69,19 +69,14 @@
   ],
   "override": {},
   "keyFactor": {
-    "gtceu:ark_biosphere": 1.103,
-    "gtceu:powder_in_tube_line": 1.805,
-    "gtceu:superfluid_helium_plant": 1.103,
-    "gtceu:uv_emitter": 2.307,
-    "gtceu:uv_energy_input_hatch": 1.441,
-    "gtceu:uv_energy_input_hatch_16a": 2.041,
-    "gtceu:uv_energy_input_hatch_4a": 1.812,
-    "gtceu:uv_field_generator": 1.069,
+    "gtceu:uv_emitter": 1.382,
+    "gtceu:uv_energy_input_hatch": 1.588,
+    "gtceu:uv_energy_input_hatch_16a": 1.912,
+    "gtceu:uv_energy_input_hatch_4a": 1.698,
     "gtceu:uv_machine_casing": 2.917,
     "gtceu:uv_machine_hull": 2.917,
-    "gtceu:uv_robot_arm": 1.201,
-    "gtceu:uv_sensor": 2.305,
-    "gtnn:optical_processor": 2.69
+    "gtceu:uv_sensor": 1.382,
+    "gtnn:optical_processor": 2.318
   },
   "pin": {
     "gtceu:*_machine_hull": {

@@ -59,7 +59,13 @@
     "gtceu:shaped/sensor_ev"
   ],
   "override": {},
-  "keyFactor": {},
+  "keyFactor": {
+    "gtceu:ev_conveyor_module": 2.089,
+    "gtceu:ev_electric_motor": 1.396,
+    "gtceu:ev_electric_piston": 1.496,
+    "gtceu:ev_machine_hull": 2.449,
+    "gtceu:ev_robot_arm": 1.554
+  },
   "pin": {
     "gtceu:*_machine_hull": {
       "gtceu:*_machine_casing": 1

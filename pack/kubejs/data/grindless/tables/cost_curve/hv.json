@@ -52,13 +52,18 @@
   ],
   "override": {},
   "keyFactor": {
-    "gtceu:hv_energy_input_hatch": 2.712,
+    "gtceu:hv_conveyor_module": 1.972,
+    "gtceu:hv_electric_motor": 1.124,
+    "gtceu:hv_electric_piston": 2.058,
+    "gtceu:hv_energy_input_hatch": 3.501,
     "gtceu:hv_greenhouse": 3.501,
     "gtceu:hv_machine_casing": 3.501,
-    "gtceu:hv_machine_hull": 3.44,
+    "gtceu:hv_machine_hull": 3.501,
+    "gtceu:hv_robot_arm": 1.994,
     "gtceu:hv_vein_drill": 3.501,
-    "gtceu:nano_processor": 1.095,
-    "gtceu:reformer": 1.116
+    "gtceu:nano_processor": 1.207,
+    "gtceu:reformer": 2.547,
+    "gtceu:syngas_plant": 1.125
   },
   "pin": {
     "gtceu:*_machine_hull": {
