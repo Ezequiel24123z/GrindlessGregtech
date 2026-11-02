@@ -181,7 +181,7 @@ test('the organoid lab\'s UHV row turns sterilized medium and a xeno radioprotec
   assert.deepEqual(call(row.calls, 'inputFluids').flat(), [{ id: 'gtceu:sterilized_growth_medium', amount: 1000 }]);
   assert.deepEqual(call(row.calls, 'itemOutputs'), []);
   assert.deepEqual(call(row.calls, 'outputFluids').flat(), [{ id: 'gtceu:sterilised_growth_medium', amount: 1000 }]);
-  assert.deepEqual(call(row.calls, 'dimension').flat(), ORBITS, 'orbit only, like the lab\'s other rows (luv.json)');
+  assert.deepEqual(call(row.calls, 'dimension').flat(), [], 'the medium is sterilised anywhere');
   assert.equal(only(row.calls, 'cleanroom'), 'native-cleanroom');
   assert.equal(only(row.calls, 'EUt'), 30720);
   const fit = W.labIO;

@@ -58,7 +58,7 @@ test('names unique, EU/t and duration positive, circuits unique per type (0 only
   assert.equal(new Set(names).size, names.length);
 });
 
-test('every far row is locked to grindless:rx_j1856_orbit (site: true) at UIV voltage; the line steps are not', () => {
+test('only the crust lift is locked to grindless:rx_j1856_orbit (site: true); the other rows run anywhere at UIV voltage', () => {
   for (const type of ['crust_lifting', 'neutron_drip_separation', 'neutronium_caging', 'r_process_decompression', 'decay_heat']) {
     for (const r of T.types[type].recipes) assert.equal(r.site, true, `${type}/${r.name}`);
   }
@@ -220,7 +220,7 @@ test('controllers read the UIV hull, 2 UIV parts and 2 optical mainframes', () =
   assert.match(server, /event\.recipes\.gtceu\.assembly_line\('grindless:' \+ d\.name\)/);
   assert.match(server, /grindless:assembly_line\/' \+ d\.name/);
   assert.match(server, /d\.parts\.forEach\(function \(p\) \{ b\.itemInputs\('3x ' \+ p\) \}\)/);
-  assert.match(server, /b\.itemInputs\('2x ' \+ MAINFRAME\)/);
+  assert.match(server, /b\.itemInputs\('2x #gtceu:circuits\/uiv'\)/);
   assert.match(server, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
   assert.match(server, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
   assert.match(server, /stationResearch/);

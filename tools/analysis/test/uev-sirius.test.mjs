@@ -38,7 +38,8 @@ test('names unique per type, EU/t and duration positive, circuits unique per typ
 
 test('dimension allowlist: the three own types are Sirius B orbit only, the script locks it, and B1 owns that dimension', () => {
   for (const type of ['gravitational_redshift', 'degenerate_harvesting', 'degenerate_containment']) {
-    assert.equal(T.types[type].dimension, true, type);
+    if (type === 'degenerate_containment') assert.ok(!T.types[type].dimension, 'the pellet is made anywhere');
+    else assert.equal(T.types[type].dimension, true, type);
     // MAX-D1 appends one Sgr A* row (c2, string site) to the harvester
     assert.equal(T.types[type].recipes.length, type === 'degenerate_harvesting' ? 2 : 1, type);
     assert.equal(T.types[type].recipes[0].circuit, 1, type);

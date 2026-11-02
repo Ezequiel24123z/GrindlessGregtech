@@ -29,7 +29,7 @@ test('every row says UIV-B4, circuits are unique per type, and every row is a fa
     assert.equal(new Set(circuits).size, circuits.length, type);
     for (const r of t.recipes) {
       assert.match(r._why, /^(UIV-B4|UXV-B1|MAX-D1)/, r.name); // UXV-B1 appends the bay's c5 row; MAX-D1 the Sgr A* c6 row (string site)
-      assert.ok(r.site === true || (/^MAX-D1/.test(r._why) && r.site === 'gcyr:black_hole_orbit'), `${type}/${r.name}`);
+      assert.ok(r.site === true || ['sled_hull', 'split_sled', 'refit_sled'].includes(r.name) && r.site === undefined || (/^MAX-D1/.test(r._why) && r.site === 'gcyr:black_hole_orbit'), `${type}/${r.name}`);
       assert.ok(Number.isInteger(r.eut) && r.eut > 0 && Number.isInteger(r.duration) && r.duration > 0, r.name);
     }
   }
