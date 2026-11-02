@@ -76,7 +76,7 @@ var GG_QUESTS_EXPECTED = {
   uv_age: [105, 111],
   uhv_age: [114, 119],
   uev_age: [104, 111],
-  uiv_age: [107, 115],
+  uiv_age: [107, 117],
   uxv_age: [89, 98],
   opv_age: [84, 94],
   max_age: [84, 94],

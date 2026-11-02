@@ -139,7 +139,7 @@ export const QUESTS = [
   },
   {
     key: 'R_CENSUS', kind: 'step', title: 'Census II', icon: 'grindless:superheavy_census_ii',
-    deps: ['E120'], x: 20, y: 2,
+    deps: ['E120'], x: 35, y: 9.5,
     desc: [
       'Neutrons leaking out of the crust build the heavy elements, as in a kilonova. The &6Element 119 Recoil Record&r and the &6Element 120 Recoil Record&r from the quest before go with a sealed capsule into &6Superheavy Census II&r, the proof that the chain made new atoms.',
     ],
@@ -148,7 +148,7 @@ export const QUESTS = [
   },
   {
     key: 'E120', kind: 'step', title: 'Element 120', icon: 'grindless:element_120_recoil',
-    deps: ['JUMP1'], x: 17.5, y: 2,
+    deps: ['JUMP1'], x: 22, y: 9.5,
     desc: [
       'A titanium beam on a californium wheel leaves a few atoms of something new. The &6Element 120 Recoil Record&r is one of the two entries Census II needs. Real element 120 has never been made, so this one is a recipe and a hope.',
     ],
@@ -271,7 +271,7 @@ export const QUESTS = [
   },
   {
     key: 'STORE', kind: 'step', title: 'Stored Proof', icon: 'grindless:neutronium_pellet',
-    deps: ['C_HALF'], x: 37.5, y: 0,
+    deps: ['C_HALF', 'R_CENSUS'], x: 37.5, y: 0,
     desc: [
       'Put a neutronium pellet, Census II, the equation of state chart, a half-sled and four UIV circuits of any kind in the gate\'s store. The hold in the next quest needs all of them at once and uses up the pellet.',
     ],
