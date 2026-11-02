@@ -1129,7 +1129,7 @@ const TAGS = {
 };
 
 // one line at row y: main nodes at 2.5 columns per step, by-products beside their source
-function line(num, y) {
+function line(num, y, x0 = 0) {
   const nodes = ROWS[num];
   // an 'x' row is an alias for a node of an earlier row (its key is the id): the line continues from that node
   const key = (i) => (nodes[i][0] === 'x' ? nodes[i][1] : `${num.toLowerCase()}_${i}`);
@@ -1159,8 +1159,8 @@ function line(num, y) {
       dy[i] = BY_Y[k - 1];
     } else {
       const k = (seen[depth[i]] = (seen[depth[i]] || 0) + 1) - 1;
-      x[i] = 2.5 * depth[i];
-      dy[i] = k === 0 ? 0 : (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 2;
+      x[i] = x0 + 2.5 * depth[i];
+      dy[i] = k === 0 ? 0 : (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 2.25;
     }
   });
   const used = new Set(nodes.flatMap(([, , from]) => from));
@@ -1199,11 +1199,13 @@ const cluster = (name, nums) => {
   let cursor = 0;
   const out = [];
   for (const num of nums) {
-    const ns = line(num, 0);
+    const alias = ROWS[num].find((r) => r[0] === 'x');
+    const x0 = alias ? (out.find((nd) => nd.key === alias[1])?.x ?? 0) : 0;
+    const ns = line(num, 0, x0);
     const lo = Math.min(...ns.map((nd) => nd.y));
     const hi = Math.max(...ns.map((nd) => nd.y));
     const shift = cursor - lo;
-    for (const nd of line(num, shift)) out.push(nd);
+    for (const nd of line(num, shift, x0)) out.push(nd);
     cursor += hi - lo + 4;
   }
   return { name, nodes: out };
