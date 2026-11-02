@@ -3,12 +3,25 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "uxv_age"
-	group: "2FC87731726663DD"
+	group: "3F021F40CD26BF57"
 	icon: "gtceu:uxv_machine_casing"
 	id: "5A3F1380F484E77B"
 	order_index: 0
 	quest_links: [ ]
 	quests: [
+		{
+			dependencies: ["7C3E8D47479787F5"]
+			description: ["The road of the era, from the first step to the gate that leads on. Everything else hangs from it."]
+			icon: "minecraft:writable_book"
+			id: "78B28FCF40BA6381"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "73961997F930D991", type: "checkmark" }]
+			title: "The Journey"
+			x: 2.5d
+			y: 0.0d
+		}
 		{
 			dependencies: ["1433B6EB4860DF3C"]
 			description: [
@@ -26,7 +39,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["7C3E8D47479787F5"]
+			dependencies: ["78B28FCF40BA6381"]
 			description: ["Magnets a few atoms thick make memory that keeps its bits with the power off, and a sensor made of superfluid feels the Earth turn. They lead to the spintronic mainframe, the UXV circuit. The machine and circuit tabs have the lanes."]
 			icon: "gtnn:spintronic_mainframe"
 			id: "3B0561CB951B62B9"
@@ -35,11 +48,11 @@
 			size: 0.75d
 			tasks: [{ id: "1FE5768C3885F799", type: "checkmark" }]
 			title: "Logic From Spin"
-			x: 2.0d
-			y: -4.0d
+			x: 5.0d
+			y: -3.0d
 		}
 		{
-			dependencies: ["7C3E8D47479787F5"]
+			dependencies: ["78B28FCF40BA6381"]
 			description: ["The Mk6 ring burns as a massive star does: hydrogen, helium, carbon and oxygen, one after another, each fed by the ash of the last. A ring that runs these stages on demand is fiction; the stages are real."]
 			icon: "gtceu:uxv_fusion_reactor"
 			id: "14DD94C79F301330"
@@ -48,11 +61,11 @@
 			size: 0.75d
 			tasks: [{ id: "3BBC9242BDE1371E", type: "checkmark" }]
 			title: "A Star's Whole Life"
-			x: 2.0d
-			y: -2.0d
+			x: 5.0d
+			y: -4.0d
 		}
 		{
-			dependencies: ["7C3E8D47479787F5"]
+			dependencies: ["78B28FCF40BA6381"]
 			description: ["Fermium and einsteinium targets and a beam of titanium reach elements 121 and 122. They last moments, so the chemistry is built around speed. Census III and the island chart close the lane, and the gate keeps both."]
 			icon: "gtceu:heavy_ion_cyclotron"
 			id: "71359F03B137FB0B"
@@ -61,8 +74,8 @@
 			size: 0.75d
 			tasks: [{ id: "7D5D4F7D1B2A77C6", type: "checkmark" }]
 			title: "Past the Last Element"
-			x: 2.0d
-			y: 4.0d
+			x: 12.5d
+			y: -4.5d
 		}
 		{
 			dependencies: ["71359F03B137FB0B"]
@@ -72,8 +85,8 @@
 			rewards: [{ id: "378B5E4D50DA47A9", type: "xp", xp: 150 }]
 			tasks: [{ id: "5378BF521AB70593", item: "grindless:fm257_target", type: "item" }]
 			title: "Fermium-257 Target"
-			x: 4.0d
-			y: 4.0d
+			x: 17.5d
+			y: -4.5d
 		}
 		{
 			dependencies: ["7F876A1037924C13"]
@@ -83,8 +96,8 @@
 			rewards: [{ id: "50A46B3D1F665B91", type: "xp", xp: 150 }]
 			tasks: [{ id: "581D4124E328D8A0", item: "grindless:es254_target", type: "item" }]
 			title: "Einsteinium-254 Target"
-			x: 4.0d
-			y: 6.0d
+			x: 20.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["345D3A6AE9F52B89"]
@@ -94,11 +107,11 @@
 			rewards: [{ id: "5172D8694C05FADB", type: "xp", xp: 200 }]
 			tasks: [{ id: "73381898FF54CFCB", item: "grindless:element_121_recoil", type: "item" }]
 			title: "Element 121"
-			x: 6.0d
-			y: 6.0d
+			x: 22.5d
+			y: -4.5d
 		}
 		{
-			dependencies: ["7F876A1037924C13", "75CFD23128DE819C"]
+			dependencies: ["75CFD23128DE819C"]
 			description: ["The same beam on the fermium target makes element 122. With both atoms in hand, the superheavy lab writes &6Census III&r, which the gate keeps."]
 			icon: "grindless:superheavy_census_iii"
 			id: "5EB2A04DCE181C6C"
@@ -108,8 +121,8 @@
 				{ id: "5278C0C815FA9208", item: "grindless:superheavy_census_iii", type: "item" }
 			]
 			title: "Element 122"
-			x: 6.0d
-			y: 4.0d
+			x: 25.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["5EB2A04DCE181C6C"]
@@ -122,18 +135,18 @@
 				{ id: "7DA854D50204BB5F", item: "grindless:island_chart", type: "item" }
 			]
 			title: "Island Chart"
-			x: 8.0d
-			y: 4.0d
+			x: 27.5d
+			y: -4.5d
 		}
 		{
-			dependencies: ["7C3E8D47479787F5"]
+			dependencies: ["78B28FCF40BA6381"]
 			description: ["Back at Cygnus X-1 the black hole already pulls its companion apart. The stellar elevator heats the surface where the pull is strongest and catches the stream as &6Stellar Plasma&r. It works here and nowhere else."]
 			icon: "gtceu:stellar_plasma_bucket"
 			id: "195AB2A8BFFE1A97"
 			rewards: [{ id: "388598F7D415F760", type: "xp", xp: 200 }]
 			tasks: [{ id: "5046C0D10A438081", item: "gtceu:stellar_plasma_bucket", type: "item" }]
 			title: "Lift the Star"
-			x: 2.0d
+			x: 5.0d
 			y: 0.0d
 		}
 		{
@@ -144,8 +157,8 @@
 			rewards: [{ id: "7D1448966778CAF0", type: "xp", xp: 200 }]
 			tasks: [{ id: "1C88E209F77FF225", item: "gtceu:stellar_cno_cut_bucket", type: "item" }]
 			title: "Stellar Cuts"
-			x: 4.0d
-			y: 0.0d
+			x: 7.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["1D6EA5E7B47D1D45"]
@@ -155,8 +168,8 @@
 			rewards: [{ id: "12FE5E79478614E4", type: "xp", xp: 200 }]
 			tasks: [{ id: "389537BC8CAD930A", item: "gtceu:filtered_disk_plasma_bucket", type: "item" }]
 			title: "Skim the Disk"
-			x: 6.0d
-			y: 0.0d
+			x: 10.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["1F3DBB6C9063CBDB"]
@@ -169,8 +182,8 @@
 			rewards: [{ id: "5FC5D87A2989C502", type: "xp", xp: 200 }]
 			tasks: [{ id: "5201D12D70F5B07A", item: "grindless:frc_cartridge", type: "item" }]
 			title: "FRC Cartridge"
-			x: 8.0d
-			y: 0.0d
+			x: 12.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["3A4C403FED5649E0"]
@@ -183,8 +196,8 @@
 			rewards: [{ id: "7E5A2171BC288563", type: "xp", xp: 200 }]
 			tasks: [{ id: "7B7F5A1A5F192B01", item: "grindless:launched_relay_seed", type: "item" }]
 			title: "The Kerr Sling"
-			x: 10.0d
-			y: 0.0d
+			x: 15.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["5D9EECDCAB8F0156"]
@@ -197,8 +210,8 @@
 			rewards: [{ id: "1B3C125E0A4A0819", type: "xp", xp: 200 }]
 			tasks: [{ id: "74777C367B47A23F", item: "grindless:cnt_whipple_shield", type: "item" }]
 			title: "Whipple Shield"
-			x: 12.0d
-			y: -2.0d
+			x: 17.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["5D9EECDCAB8F0156"]
@@ -211,8 +224,8 @@
 			rewards: [{ id: "5B4704B46BA18FC8", type: "xp", xp: 300 }]
 			tasks: [{ dimension: "grindless:vela_pulsar_orbit", id: "3E86065FBFD39A5F", type: "dimension" }]
 			title: "Vela Pulsar"
-			x: 12.0d
-			y: 0.0d
+			x: 17.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["586BAF51DA2477E3"]
@@ -222,8 +235,8 @@
 			rewards: [{ id: "1FE208E9444ADFE1", type: "xp", xp: 250 }]
 			tasks: [{ id: "7A3E936C23703BE1", item: "grindless:raw_pasta", type: "item" }]
 			title: "Raw Pasta"
-			x: 14.0d
-			y: 0.0d
+			x: 22.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["33D08C69A1A4AF87"]
@@ -236,8 +249,8 @@
 				{ id: "71334617363E174F", item: "grindless:lasagna_phase", type: "item" }
 			]
 			title: "Caged Phases"
-			x: 16.0d
-			y: 0.0d
+			x: 25.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["1367407C3410944C"]
@@ -249,8 +262,8 @@
 			size: 0.75d
 			tasks: [{ id: "79E42C5D98AB437F", type: "checkmark" }]
 			title: "Pasta as Cable"
-			x: 16.0d
-			y: 2.0d
+			x: 27.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["58EDB9BA0BF842AF"]
@@ -260,8 +273,8 @@
 			rewards: [{ id: "114ED1E43E3AC5FC", type: "xp", xp: 300 }]
 			tasks: [{ dimension: "grindless:cas_a_remnant", id: "30A986BDE2DD3F5F", type: "dimension" }]
 			title: "Cassiopeia A"
-			x: 14.0d
-			y: -2.0d
+			x: 20.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["5A539FCEC01451BA"]
@@ -271,8 +284,8 @@
 			rewards: [{ id: "14C7498610F3B608", type: "xp", xp: 250 }]
 			tasks: [{ id: "3E0AC299C40CEA39", item: "grindless:ejecta_knot_dust", type: "item" }]
 			title: "Knot Dust"
-			x: 16.0d
-			y: -2.0d
+			x: 22.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["74AAE7464DB346C0"]
@@ -282,8 +295,8 @@
 			rewards: [{ id: "783547992C6C3D7D", type: "xp", xp: 200 }]
 			tasks: [{ id: "5FA00BF1D3337E18", item: "grindless:ti44_core", type: "item" }]
 			title: "Titanium-44 Core"
-			x: 18.0d
-			y: -2.0d
+			x: 25.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["17623833C3E320FE", "1367407C3410944C"]
@@ -293,14 +306,14 @@
 			rewards: [{ id: "58C44B087C376411", type: "xp", xp: 300 }]
 			tasks: [{ id: "5F17D96620A152C3", item: "grindless:arm_chart", type: "item" }]
 			title: "Arm Chart"
-			x: 20.0d
-			y: 0.0d
+			x: 27.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["1351A1703766CFB3"]
 			description: [
 				"Hold the warp gate open at the full UXV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Take care of your power first: the BZ dynamo with polar cap taps, or the Mk6 through the converter."
-				"The gate burns an FRC cartridge and keeps census III, the island chart, the arm chart, a pasta core sample and spintronic mainframes in its store."
+				"The gate burns an FRC cartridge and keeps census III, the island chart, the arm chart, a pasta core sample and UXV-tier circuit tags in its store."
 			]
 			icon: "gtceu:warp_gate"
 			id: "5B7D80D05C71F861"
@@ -309,8 +322,8 @@
 			size: 1.25d
 			tasks: [{ id: "33EF140B320839EC", type: "checkmark" }]
 			title: "Open the Bulge Gate"
-			x: 22.0d
-			y: 0.0d
+			x: 30.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["5B7D80D05C71F861"]
@@ -320,8 +333,8 @@
 			rewards: [{ id: "5F6ED52C77A903F3", type: "xp", xp: 150 }]
 			tasks: [{ id: "3D40587E02E27C43", item: "grindless:bulge_chart", type: "item" }]
 			title: "Chart the Bulge"
-			x: 24.0d
-			y: 0.0d
+			x: 32.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["12FAC9CC1F7D8215"]
@@ -333,8 +346,934 @@
 			size: 1.75d
 			tasks: [{ id: "3D02E4B50E814A30", item: "gtceu:opv_machine_casing", type: "item" }]
 			title: "Gate to OpV"
-			x: 26.0d
-			y: 0.0d
+			x: 35.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["78B28FCF40BA6381"]
+			description: ["The wafers, chips and circuits of the era, from the first wafer to the mainframe, and the parts built from them."]
+			icon: "minecraft:writable_book"
+			id: "75CB408277AF9075"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "15265895EF281783", type: "checkmark" }]
+			title: "Circuits"
+			x: 5.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["77ECA9A3DDFB480D"]
+			description: ["Cobalt, iron and boron melted in the levitation melter, atomised, printed and pressed into a bonded &6CoFeB Target&r. The magnesia, Heusler and SAF targets come the same way."]
+			icon: "grindless:cofeb_target"
+			id: "5A5BA6B9228A4383"
+			rewards: [{ id: "184989028EF88168", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "7E0B29BF824D6628", item: "grindless:cofeb_ingot", type: "item" }
+				{ id: "17F658071C44D8AF", item: "grindless:cofeb_target", type: "item" }
+			]
+			title: "CoFeB Target"
+			x: 15.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5A5BA6B9228A4383", "1595ABB6AB097B3E"]
+			description: ["Two magnets with an insulator a few atoms thick between them: current tunnels through more easily when they point the same way. A wafer of them, cut up, gives the &6MTJ Die&r. The MTJ sputter cluster, a CoFeB target and a magnesia target, on silicon-28. The MRAM wafer, the scandate substrate and the racetrack chip. Targets wear out, so stock them by ME and send dies on to the foundry."]
+			icon: "grindless:mtj_die"
+			id: "7A0AB21F31B7820B"
+			rewards: [{ id: "5F77A2DE046B6BE8", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "169FAB1A0BAC3061", item: "grindless:mtj_die", type: "item" }]
+			title: "Magnetic Tunnel Junction Die"
+			x: 17.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["7A0AB21F31B7820B"]
+			description: ["The same junctions in a grid make memory that keeps its bits with the power off. The &6MRAM Wafer&r is sputtered, annealed and etched. The MTJ sputter cluster, the photonic foundry and a Heusler target. The racetrack chip, which stacks memory into tracks. Dies and targets by ME; keep a few wafers waiting for the racetrack fab."]
+			icon: "grindless:mram_wafer"
+			id: "3B4ABEFD993C5FE7"
+			rewards: [{ id: "56D11ACBBADAA1EC", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3F6717F34E6F2A02", item: "grindless:mram_wafer", type: "item" }]
+			title: "MRAM Wafer"
+			x: 20.0d
+			y: 11.5d
+		}
+		{
+			dependencies: ["7A0AB21F31B7820B"]
+			description: ["Oxide films only grow well on a crystal whose spacing matches theirs. Dysprosium scandate is grown as a boule, sliced, polished and annealed into a &6DyScO3 Substrate&r. The crystal growth furnace from UHV, then slicing, polishing and an anneal. The MESO logic die, whose films need this crystal underneath. Boules are slow, so run two furnaces and stock substrates in a chest."]
+			icon: "grindless:dysco3_substrate"
+			id: "3044F5740EC5319D"
+			rewards: [{ id: "37470CF7D9117F23", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3FB1CCB0BD50E23D", item: "grindless:dysco3_substrate", type: "item" }]
+			title: "Scandate Substrate"
+			x: 20.0d
+			y: 13.0d
+		}
+		{
+			dependencies: ["3B4ABEFD993C5FE7", "780482A9BF2D46A1"]
+			description: ["Push magnetic domains along a nanowire with current pulses and read them as they pass a head. The &6Racetrack Chip&r is the memory of the mainframe. The racetrack fab, an MRAM wafer and a SAF track wafer. The spintronic mainframe, as its storage. Wafers by ME; the fab returns chips in a chest, so stock a few."]
+			icon: "grindless:racetrack_chip"
+			id: "33E470E07FDCB9C9"
+			rewards: [{ id: "7F25BC2DB3F1FB4E", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3C41E39CEEAB7668", item: "grindless:racetrack_chip", type: "item" }]
+			title: "Racetrack Chip"
+			x: 22.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3044F5740EC5319D", "17F1BEE08FE87731"]
+			description: ["A multiferroic film flips a magnet with voltage instead of current, and a spin-orbit stack reads it back. Joined in the photonic foundry they make the &6MESO Logic Die&r. The oxide PLD chamber, the vdW stacking cell, a scandate substrate and the photonic foundry. The spintronic mainframe, as its logic. Substrates by ME; send the dies on as soon as they come out of the foundry."]
+			icon: "grindless:meso_logic_die"
+			id: "528E7523EDB83CC3"
+			rewards: [{ id: "19F673989FBFE430", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5F8DE2F1358366D2", item: "grindless:meso_logic_die", type: "item" }]
+			title: "MESO Logic Die"
+			x: 22.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["33E470E07FDCB9C9", "528E7523EDB83CC3", "7486DF37973BED77"]
+			description: ["Spin waves in a garnet film carry signals between the chips with almost no heat. Logic, memory and that bus together are the &6Spintronic Mainframe&r, the UXV circuit. The photonic integration hall, a racetrack chip, a MESO logic die and a magnonic bus from the YIG furnace. The sensor, the controller of every machine past the hull, and the hatches and parts that go with them. One of each part per mainframe: keep a dedicated chest, never a big stock."]
+			icon: "gtnn:spintronic_mainframe"
+			id: "72D835B7C533F4A5"
+			rewards: [{ id: "56300952C8BAFC35", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "36D8C64E88D967FC", item: "gtnn:spintronic_mainframe", type: "item" }]
+			title: "Spintronic Mainframe"
+			x: 25.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["75CB408277AF9075"]
+			description: ["A silicon nitride membrane drilled with thousands of holes, each narrower than a virus, by the electron beam furnace. Superfluid helium leaks through the &6Nanoaperture Array&r in step, as one quantum object."]
+			icon: "grindless:nanoaperture_array"
+			id: "5562CBB4F6304BB1"
+			rewards: [{ id: "5656D7361817B272", type: "xp", xp: 100 }]
+			tasks: [{ id: "7EC448ED8DB5EA53", item: "grindless:nanoaperture_array", type: "item" }]
+			title: "Nanoaperture Array"
+			x: 10.0d
+			y: 15.5d
+		}
+		{
+			dependencies: ["5562CBB4F6304BB1", "7AE0BEC91F59A48B"]
+			description: ["Two baths of superfluid helium joined by the array oscillate at a frequency set by the pressure across it. The &6Weak Link Cell&r is that pair, filled and sealed. The SHeQUID works, a nanoaperture array and superfluid helium. The SHeQUID gyro, which closes two of them into a loop. Helium by pipe; cells come out sealed, so send them straight on."]
+			icon: "grindless:weak_link_cell"
+			id: "1E406BA02A37205D"
+			rewards: [{ id: "7615F33772CCE588", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5DA4F3874226E985", item: "grindless:weak_link_cell", type: "item" }]
+			title: "Weak Link Cell"
+			x: 12.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["1E406BA02A37205D"]
+			description: ["Two weak links in a loop make an interferometer for superfluid, and it feels the rotation of the Earth. The &6SHeQUID Gyro&r is real physics. The SHeQUID works and two weak link cells. The UXV sensor. Cells arrive by ME; one gyro goes into each sensor."]
+			icon: "grindless:shequid_gyro"
+			id: "37DA616C29C996F0"
+			rewards: [{ id: "7353C1E0DEE070E3", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "725EB4799D1D41A9", item: "grindless:shequid_gyro", type: "item" }]
+			title: "SHeQUID Gyro"
+			x: 15.0d
+			y: 18.0d
+		}
+		{
+			dependencies: ["37DA616C29C996F0"]
+			description: ["The &6UXV Sensor&r feels rotation with superfluid and magnetic fields with diamond. The emitter, both new generators and most controllers need one. A SHeQUID gyro, the UXV hull and a spintronic mainframe, on the assembly line. The UXV emitter and the controllers of the Cygnus, Vela and Cassiopeia machines. Gyros by ME in matched counts; keep sensors in a small stock."]
+			icon: "gtceu:uxv_sensor"
+			id: "103E024FEAF25DDC"
+			rewards: [{ id: "195F84FA1ECDA9B1", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "539FFF875D152F3C", item: "gtceu:uxv_sensor", type: "item" }]
+			title: "UXV Sensor"
+			x: 17.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["586BAF51DA2477E3"]
+			description: ["The &6UXV Machine Hull&r is the first thing Vela's lasagna plate goes into. The UXV hatches and buses are built on it."]
+			icon: "gtceu:uxv_machine_hull"
+			id: "3BB0A93D15E3A2D3"
+			rewards: [{ id: "5A674D4B87D5B74F", type: "xp", xp: 200 }]
+			tasks: [{ id: "3AFD3095A3D2A6A7", item: "gtceu:uxv_machine_hull", type: "item" }]
+			title: "UXV Machine Hull"
+			x: 20.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["3BB0A93D15E3A2D3"]
+			description: ["The &6UXV Electric Motor&r is wound with pasta strand round a meteorite-iron rotor, and the &6UXV Electric Pump&r pushes liquid metal with a moving field. The piston and the conveyor move by metals that change shape in a magnetic field, the robot arm turns on a gear with no backlash, and the field generator projects from a plasma ring that holds its own field."]
+			icon: "gtceu:uxv_electric_motor"
+			id: "795E541822A26BC7"
+			rewards: [{ id: "58CB8EF35A95FF71", type: "xp", xp: 200 }]
+			tasks: [
+				{ id: "3110BAE92ABD1A13", item: "gtceu:uxv_electric_motor", type: "item" }
+				{ id: "571BE1FD19B39568", item: "gtceu:uxv_electric_pump", type: "item" }
+				{ id: "30E135BF5379EBDE", item: "gtceu:uxv_electric_piston", type: "item" }
+				{ id: "13721A0B14F115EE", item: "gtceu:uxv_conveyor_module", type: "item" }
+				{ id: "35958CB7A5F49B19", item: "gtceu:uxv_robot_arm", type: "item" }
+				{ id: "1DB17EFAA51AE3AB", item: "gtceu:uxv_field_generator", type: "item" }
+				{ id: "1E6D429DE8E5DC34", item: "gtceu:uxv_rotor_holder", type: "item" }
+			]
+			title: "UXV Components"
+			x: 22.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["795E541822A26BC7"]
+			description: ["The &6UXV Circuit Assembler&r is the assembler that works at the voltage of the mainframe, for everything below it that still wants a board. A UXV hull and the UXV components, with the cleanroom you already run. Faster circuit rows at UXV voltage; the mainframe itself still comes from the photonic hall. Boards and chips by ME; keep a small stock of what it returns."]
+			icon: "gtceu:uxv_circuit_assembler"
+			id: "19524CCC00377A52"
+			rewards: [{ id: "705E5DD5DE2AA7A6", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "125E963E8CFADECE", item: "gtceu:uxv_circuit_assembler", type: "item" }]
+			title: "UXV Circuit Assembler"
+			x: 27.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["103E024FEAF25DDC", "37FCF1CA912EC06F"]
+			description: ["With a gamma laser in hand, the &6UXV Emitter&r can be built. The parallel hatch and the OpV casing both need it."]
+			icon: "gtceu:uxv_emitter"
+			id: "567A7CE091E678B6"
+			rewards: [{ id: "70C7F98B85259420", type: "xp", xp: 250 }]
+			tasks: [{ id: "39790D59FAA213DA", item: "gtceu:uxv_emitter", type: "item" }]
+			title: "UXV Emitter"
+			x: 20.0d
+			y: 18.0d
+		}
+		{
+			dependencies: ["567A7CE091E678B6"]
+			description: ["The &6UXV Energy Input Hatch&r takes the full UXV voltage."]
+			icon: "gtceu:uxv_energy_input_hatch"
+			id: "3E0AF625714AD8D6"
+			rewards: [{ id: "57885FB68C9EBCF7", type: "xp", xp: 200 }]
+			tasks: [{ id: "7CEE5FC8B78C80E0", item: "gtceu:uxv_energy_input_hatch", type: "item" }]
+			title: "UXV Energy Hatch"
+			x: 22.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["78B28FCF40BA6381"]
+			description: ["Power, networks and processes that tie this era to the lines you already run."]
+			icon: "minecraft:writable_book"
+			id: "14B0B5EA38F22432"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "16CDBBB8397BFFB8", type: "checkmark" }]
+			title: "Integration"
+			x: 5.0d
+			y: -11.5d
+		}
+		{
+			dependencies: ["14DD94C79F301330"]
+			description: ["The first burn of the &6Mk6 Fusion Ring&r runs on the stellar hydrogen and CNO cuts and gives CNO ash plasma, which the converter takes as current. A formed Mk6 ring on UXV hatches and both cuts from Cygnus X-1. The ring refuses a run when its start energy is above what it stores. Power for the gate and the fuel of the next burn. Cuts arrive over AE2 from the filter; the ash goes straight to the converter."]
+			icon: "gtceu:cno_ash_plasma_bucket"
+			id: "7B79626CA22F70D0"
+			rewards: [{ id: "7C4F2045F1A34DAA", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "76FCBE2DBD2CF30B", item: "gtceu:cno_ash_plasma_bucket", type: "item" }]
+			title: "Hot CNO"
+			x: 7.5d
+			y: -9.0d
+		}
+		{
+			dependencies: ["7B79626CA22F70D0"]
+			description: ["Three helium nuclei make carbon, and carbon takes a fourth to make oxygen. The ring burns helium fuel made from the stellar helium cut and the first burn's ash. Helium fuel from the cryogenic plant, and the same ring and converter as before. Carbon-12 and oxygen-16, the fuels of the next two burns. Send the carbon and oxygen to their own lines. Both are fuel, not waste."]
+			icon: "gtceu:helium_burning_ash_plasma_bucket"
+			id: "7884A0887B1AEAF8"
+			rewards: [{ id: "5A063CAF977A16D5", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5DEB7122722E6FF3", item: "gtceu:helium_burning_ash_plasma_bucket", type: "item" }]
+			title: "Triple Alpha"
+			x: 10.0d
+			y: -10.0d
+		}
+		{
+			dependencies: ["7884A0887B1AEAF8"]
+			description: ["The third burn lights carbon vapour from the electron beam furnace and leaves neon, sodium and magnesium once the converter is done. Carbon-12 vapour on a bus, and a quench caster to catch the ash. Ordinary neon, sodium and magnesium for stock. Ash goes to storage; nothing in it is dangerous."]
+			icon: "gtceu:carbon_burning_ash_plasma_bucket"
+			id: "58CBCB43698A8853"
+			rewards: [{ id: "15BC98CD6BFF4289", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "527015E16C32AE3C", item: "gtceu:carbon_burning_ash_plasma_bucket", type: "item" }]
+			title: "Carbon Burning"
+			x: 12.5d
+			y: -10.0d
+		}
+		{
+			dependencies: ["58CBCB43698A8853"]
+			description: ["The fourth burn is the last stage the ring runs. Its ash leaves silicon, sulfur and phosphorus once the converter and the quench caster are done with it. Liquefied oxygen-16 from the cryogenic plant, and a ring that has survived the stages before. Silicon-28 for the next era and the biggest plasma payout of the ring. Keep oxygen on its own line from the plant, and send the silicon to storage."]
+			icon: "gtceu:oxygen_burning_ash_plasma_bucket"
+			id: "556B77B76C999DD0"
+			rewards: [{ id: "3B9EFB22B1DC4A2D", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "57D0C572D5862A62", item: "gtceu:oxygen_burning_ash_plasma_bucket", type: "item" }]
+			title: "Oxygen Burning"
+			x: 15.0d
+			y: -10.0d
+		}
+		{
+			dependencies: ["556B77B76C999DD0"]
+			description: ["The &6Direct Energy Converter&r takes four Mk6 plasmas and returns current plus ash, and the &6Plasma Quench Caster&r splits that ash into stock. Both are older machines with new rows. The plasma buckets of the four burns. The converter's output is written final, so no generator array doubles it. The Mk6 figures on the Power tab. Plasma by pipe from the ring; leave the converter's hatches free of anything else."]
+			icon: "gtceu:direct_energy_converter"
+			id: "1CB676F7EAC74DA9"
+			rewards: [{ id: "3C6DF5E366D1C4D7", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1301D119C95C248A", item: "gtceu:direct_energy_converter", type: "item" }
+				{ id: "5B53E1B7AB1CCC13", item: "gtceu:plasma_quench_caster", type: "item" }
+			]
+			title: "Ash Into Power"
+			x: 17.5d
+			y: -10.0d
+		}
+		{
+			dependencies: ["3A4C403FED5649E0"]
+			description: [
+				"A spinning black hole threaded by a magnetic field drives a current, and the hole slows to pay for it. The &6BZ Dynamo&r burns &6Flux-Loaded Plasma&r made from an FRC cartridge, at Cygnus X-1 only. Flux-loaded plasma from the FRC former and a UXV dynamo hatch. It works in orbit at Cygnus X-1 and nowhere else. The largest single source of the era, a good part of the gate's draw. Cartridges and plasma come from the same line at Cygnus; the power rides the wireless network home."
+				"The dynamo is fiction: nobody has tapped a black hole's spin. The Blandford-Znajek process it is named for is real."
+			]
+			icon: "gtceu:bz_dynamo"
+			id: "35B76894EE56CE9E"
+			rewards: [{ id: "30C86D8351CE8C6B", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "16BC00FB573790F3", item: "gtceu:flux_loaded_plasma_bucket", type: "item" }]
+			title: "Spin Down a Black Hole"
+			x: 15.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["586BAF51DA2477E3"]
+			description: ["Above a pulsar's magnetic poles the field tears charges off the surface. The &6Polar Cap Tap&r lowers a &6Lasagna Electrode&r into that current and burns through it, at Vela only. A fresh electrode for each run, and a place on the Vela platform. It has no sunlight to spare and does not need any. The second source of the gate's draw, and one that costs no fuel but the electrode. Electrodes are laminated on the spot; the output rides the wireless network."]
+			icon: "gtceu:polar_cap_tap"
+			id: "3CB2242D767833B2"
+			rewards: [{ id: "5B10434E6FAEC481", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "14B612B31A5BD25A", item: "grindless:lasagna_electrode", type: "item" }]
+			title: "Tap the Polar Cap"
+			x: 20.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["14B0B5EA38F22432"]
+			description: ["The &6UXV Parallel Hatch&r lets a mega machine run an enormous number of copies of one recipe at once. It is the most expensive hatch of the era. A machine with a parallel slot, and the power for every copy: each pays its own EU/t. The stellar fractionation hall at full width. Give the machine a bus wide enough for the copies it will run."]
+			icon: "gtceu:uxv_parallel_hatch"
+			id: "5B064A6634A46338"
+			rewards: [{ id: "331AA67E06D12EDC", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5E837776ED089223", item: "gtceu:uxv_parallel_hatch", type: "item" }]
+			title: "Parallel Control"
+			x: 10.0d
+			y: -11.5d
+		}
+		{
+			dependencies: ["5B064A6634A46338"]
+			description: ["The &6Stellar Fractionation Hall&r runs distillation tower and distillery recipes, one mode at a time, and is the UXV member of the mega family. A parallel hatch behind it and the power for its width. Pick the mode in the controller. Every distillation line of the pack on a single machine. One input bus per fluid, one output hatch per cut."]
+			icon: "gtceu:stellar_fractionation_hall"
+			id: "3CDE309DC5358AFF"
+			rewards: [{ id: "717A052ED52E0FEC", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5ABF9A5753B9AE7F", item: "gtceu:stellar_fractionation_hall", type: "item" }]
+			title: "Stellar Fractionation Hall"
+			x: 12.5d
+			y: -11.5d
+		}
+		{
+			dependencies: ["14B0B5EA38F22432"]
+			description: ["The nitride magnet works winds the &6UXV SMES Cell&r with pasta strand. It is the largest store in the pack. Strand tape and lasagna plate from Vela, and the nitride magnet works from UEV. The UXV wireless tier. Nothing to feed. Size the towers for your busiest hour."]
+			icon: "grindless:uxv_smes_cell"
+			id: "3F5ABDEF2254EC50"
+			rewards: [{ id: "1E7EFD50A6261DA8", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3F72A32DFC24D6F2", item: "grindless:uxv_smes_cell", type: "item" }]
+			title: "The UXV Cell"
+			x: 7.5d
+			y: -13.5d
+		}
+		{
+			dependencies: ["3F5ABDEF2254EC50"]
+			description: ["Move your towers onto &6UXV SMES Cells&r and the wireless network carries UXV to every platform, Cygnus X-1, Vela and Cassiopeia A included. Every formed tower holding UXV cells. Until then the network stays at UIV. The wireless hatches at UXV, and the gate's load at Cygnus X-1. Add cells when the network dips at your busiest hour."]
+			icon: "gtceu:uxv_wireless_energy_hatch"
+			id: "13386736693D927A"
+			rewards: [{ id: "5CF66D4F358430AC", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "3CC6036C7C92605C", item: "gtceu:uxv_wireless_energy_hatch", type: "item" }
+				{ id: "53588EB6E5331C42", item: "gtceu:uxv_wireless_dynamo_hatch", type: "item" }
+			]
+			title: "The Network Goes UXV"
+			x: 10.0d
+			y: -13.5d
+		}
+		{
+			dependencies: ["13386736693D927A"]
+			description: ["The gate to OpV draws 2,147,483,648 EU/t for sixty seconds. One BZ dynamo and two polar cap taps on the wireless network cover it, or the Mk6 through the converter. The Power tab shows each source."]
+			icon: "gtceu:uxv_wireless_energy_hatch"
+			id: "151A6D1089A0C953"
+			rewards: [{ id: "5CA3FDF5A8919FB8", type: "xp", xp: 100 }]
+			shape: "rsquare"
+			size: 1.25d
+			tasks: [{ id: "14C4D63011B4FAF9", type: "checkmark" }]
+			title: "Sixteen Amps of UXV"
+			x: 12.5d
+			y: -13.5d
+		}
+		{
+			dependencies: ["14B0B5EA38F22432"]
+			description: ["The &6Cryogenic Plant&r, &6Extraction Cascade&r, &6Platinum Plant&r, &6Hot Strip Mill&r, &6Syngas Plant&r and &6Fluorspar Kiln&r each take a new mode: stellar helium and oxygen fuels, knot dust and flux dross, sputter-grade platinum, foils and laminations, platform syngas and fluorine. The controllers you already own, and cuts and dust from the stars. The Mk6 fuels, the titanium-44 line and the targets of the spintronic lane. Each plant hands its product on by pipe. Return the nitrogen and the water."]
+			icon: "gtceu:cryogenic_plant"
+			id: "175BA546E30279E1"
+			rewards: [{ id: "597AE1215C20F5B2", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1B7FD54D191E0C33", item: "gtceu:cryogenic_plant", type: "item" }
+				{ id: "3ED2B691680937EF", item: "gtceu:extraction_cascade", type: "item" }
+				{ id: "3F7890088B4DA6F4", item: "gtceu:platinum_plant", type: "item" }
+				{ id: "34CD6D3E378CF429", item: "gtceu:hot_strip_mill", type: "item" }
+				{ id: "59A9A0D1C59EF94C", item: "gtceu:syngas_plant", type: "item" }
+				{ id: "70126973B9CCFCA0", item: "gtceu:fluorspar_kiln", type: "item" }
+			]
+			title: "Separations and Strip"
+			x: 7.5d
+			y: -12.0d
+		}
+		{
+			dependencies: ["71359F03B137FB0B"]
+			description: ["The &6Fuel Fabrication Plant&r, &6Hot Cell&r, &6Actinide Partitioning Plant&r, &6Waste Retrieval Plant&r and &6Transuranium Facility&r take an ion-source charge, a sealed core, new fragments, recovered curium and plated targets. The reactors you already own and the debris of the heavy-ion lanes. The feed of the collider and the targets of element 121 and 122. Targets and cuts move by bus; the spent core gives back its calcium."]
+			icon: "gtceu:hot_cell"
+			id: "569494D2E35E9052"
+			rewards: [{ id: "3BF51FE89AC2A363", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "19E255393E446892", item: "gtceu:fuel_fabrication_plant", type: "item" }
+				{ id: "328E67D24144E21B", item: "gtceu:hot_cell", type: "item" }
+				{ id: "737E5E9121645444", item: "gtceu:actinide_partitioning_plant", type: "item" }
+				{ id: "3972483C7A38E154", item: "gtceu:waste_retrieval_plant", type: "item" }
+				{ id: "380FCBC417EE91CE", item: "gtceu:transuranium_facility", type: "item" }
+			]
+			title: "Heavier Cuts"
+			x: 15.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["3B0561CB951B62B9"]
+			description: ["The &6HTS Magnet Works&r, &6Coated Conductor Line&r, &6Naquadria Magnet Works&r, &6Nitride Magnet Works&r and &6Powder Bed Printer&r each take a row for the era: strand stators, strand tape, rotors, field anneals and sputter targets. The UEV and older controllers, and strand wire from Vela for the first two. The motor, the conveyor, the field generator and every spintronic target. Targets by bus; give back the copper backing plates of spent ones."]
+			icon: "gtceu:hts_magnet_works"
+			id: "1B53D239437E75AD"
+			rewards: [{ id: "7687D7E0B463E6C7", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "54547CC6DB37C640", item: "gtceu:hts_magnet_works", type: "item" }
+				{ id: "3F869C5551FB137D", item: "gtceu:coated_conductor_line", type: "item" }
+				{ id: "39B816399FB57976", item: "gtceu:naquadria_magnet_works", type: "item" }
+				{ id: "195C06E93D828B9B", item: "gtceu:nitride_magnet_works", type: "item" }
+				{ id: "76BFDF61905FA736", item: "gtceu:powder_bed_printer", type: "item" }
+			]
+			title: "Strands, Rotors and Targets"
+			x: 7.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["3B0561CB951B62B9"]
+			description: ["The &6Ion Implanter&r, &6MOCVD Reactor&r, &6Zone Refining Tower&r, &6Synchrotron&r, &6Crystal Growth Furnace&r and &6Photonic Foundry&r take rows for oxide crystals, etched stacks, seven-nines tellurium and germanium, a charged beam and the MESO die. The UV and UHV controllers you already own, and the new purities. The substrates, the spintronic dies and the mainframe's inputs. Boules and films by bus; recycle what the tower rejects."]
+			icon: "gtceu:photonic_foundry"
+			id: "117C9D11A0595525"
+			rewards: [{ id: "796D76DE46513BCB", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "539D8AA7C17729D1", item: "gtceu:ion_implanter", type: "item" }
+				{ id: "1C5E60134AE413BB", item: "gtceu:mocvd_reactor", type: "item" }
+				{ id: "196945864ED98DF0", item: "gtceu:zone_refining_tower", type: "item" }
+				{ id: "77C2A6C377548558", item: "gtceu:synchrotron", type: "item" }
+				{ id: "71425EF3E52CC66A", item: "gtceu:crystal_growth_furnace", type: "item" }
+				{ id: "72F25BDF213AD852", item: "gtceu:photonic_foundry", type: "item" }
+			]
+			title: "Films and Crystals"
+			x: 7.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["71359F03B137FB0B"]
+			description: ["The &6Calutron&r, &6Heavy Ion Cyclotron&r, &6Recoil Separator&r, &6Superheavy Chemistry Lab&r, &6Electron Beam Furnace&r, &6Megabar Press&r, &6CVI Furnace&r and &6Photonic Integration Hall&r each take a UXV row: targets, elements 121 and 122, pure metals, boron nitride, a tungsten preform and the spintronic mainframe. The UEV controllers you already own. Census III, the Mk6 casing and the mainframe. Recoils and targets by bus. The spent beam is an output, so route it."]
+			icon: "gtceu:calutron"
+			id: "589836F061B0E3A8"
+			rewards: [{ id: "55C4F93B8B098243", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "11EDB0279C1A3C99", item: "gtceu:calutron", type: "item" }
+				{ id: "3936416CC9903A55", item: "gtceu:heavy_ion_cyclotron", type: "item" }
+				{ id: "5492AED8B1EB3EF5", item: "gtceu:recoil_separator", type: "item" }
+				{ id: "3325C919EADB7CFD", item: "gtceu:superheavy_chemistry_lab", type: "item" }
+				{ id: "7CCA7D2AFC3C4CCC", item: "gtceu:electron_beam_furnace", type: "item" }
+				{ id: "1538DEC832C9689D", item: "gtceu:megabar_press", type: "item" }
+				{ id: "378FE9023A33E8BB", item: "gtceu:cvi_furnace", type: "item" }
+				{ id: "58D882A9249E6C5D", item: "gtceu:photonic_integration_hall", type: "item" }
+			]
+			title: "Heavy Ions and Beams"
+			x: 15.0d
+			y: -5.5d
+		}
+		{
+			dependencies: ["1351A1703766CFB3"]
+			description: ["The &6Gravitational Wave Detector&r, &6Deep Space Network&r, &6Event Horizon Interferometer&r and &6X-Ray Pulse Profiler&r each take a row that writes one record, and the &6Matrioshka Computer&r joins the four into the arm chart. The controllers from LuV to UIV, and samples from Vela and Cassiopeia A. The arm chart and, with it, the gate to OpV. Records are data orbs: hand them to the computer through a bus."]
+			icon: "gtceu:matrioshka_computer"
+			id: "1D61298813416D07"
+			rewards: [{ id: "7E3843DD1C004713", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "3F11AB34A86165D4", item: "gtceu:gravitational_wave_detector", type: "item" }
+				{ id: "3073810975CD6EE7", item: "gtceu:deep_space_network", type: "item" }
+				{ id: "71283D9B568CA040", item: "gtceu:event_horizon_interferometer", type: "item" }
+				{ id: "1C1BF2B0C43690D2", item: "gtceu:xray_pulse_profiler", type: "item" }
+				{ id: "39C6441879748AE7", item: "gtceu:matrioshka_computer", type: "item" }
+			]
+			title: "Records for the Arm Chart"
+			x: 30.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["5D9EECDCAB8F0156"]
+			description: ["The &6Ergosphere Probe Bay&r slings a relay seed, the &6Neutronium Cage&r makes a cage for each pasta phase, and the &6Warp Gate&r takes two new destinations and a heavier hold. The &6Antimatter Trap&r, &6Tether Ribbon Works&r, &6Europium Reductor&r, &6R-Process Decompressor&r and &6Levitation Melter&r take their own rows. Every controller from earlier eras, and the seed and shield from the sling. The two jumps, caged phases, positron stacks, Whipple shields and the spintronic melts. Seeds, shields and cages ride the relay between sites."]
+			icon: "gtceu:ergosphere_probe_bay"
+			id: "1E1EC4C589AD0CA0"
+			rewards: [{ id: "528A86ECD6144A22", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1D18863968FFE8E6", item: "gtceu:ergosphere_probe_bay", type: "item" }
+				{ id: "1DD0DC815642E389", item: "gtceu:neutronium_cage", type: "item" }
+				{ id: "37436684B1CAB158", item: "gtceu:warp_gate", type: "item" }
+				{ id: "7F3437B233F91A44", item: "gtceu:antimatter_trap", type: "item" }
+				{ id: "5CAC4C7811B0C8A8", item: "gtceu:tether_ribbon_works", type: "item" }
+				{ id: "153880EBA6CDE043", item: "gtceu:europium_reductor", type: "item" }
+				{ id: "1463AD45911A8059", item: "gtceu:r_process_decompressor", type: "item" }
+				{ id: "19D8AFF24163019C", item: "gtceu:levitation_melter", type: "item" }
+			]
+			title: "Sling, Cage and Gate"
+			x: 17.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["78B28FCF40BA6381"]
+			description: ["The machines of the era and the first steps that put each one to work."]
+			icon: "minecraft:writable_book"
+			id: "77ECA9A3DDFB480D"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "7FE0F44DE0656327", type: "checkmark" }]
+			title: "Machines"
+			x: 7.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["77ECA9A3DDFB480D"]
+			description: ["The &6MTJ Sputter Cluster&r lays magnetic layers a few atoms thick, with a magnesia barrier between them that nothing older can deposit. A UIV hull, the plascrete shell and the magnetron parts, with sputter targets from the melter. The magnetic tunnel junction die, and through it the MRAM wafer and the racetrack chip. Targets and silicon-28 by ME; the dies come out in a chest."]
+			icon: "gtceu:mtj_sputter_cluster"
+			id: "1595ABB6AB097B3E"
+			rewards: [{ id: "1835656A2A02BB85", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7F3A5AD491D6BAC7", item: "gtceu:mtj_sputter_cluster", type: "item" }
+				{ id: "7153D7373D23E2BD", item: "gtceu:plascrete", type: "item" }
+			]
+			title: "MTJ Sputter Cluster"
+			x: 15.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["1595ABB6AB097B3E"]
+			description: ["The &6Racetrack Fab&r patterns nanowires where magnetic domains slide, in a cleanroom with an electron beam over it. A UIV hull, the plascrete shell and the cleanroom parts, plus MRAM wafers to cut. The racetrack chip, which is the mainframe's storage. Wafers by ME; send chips on to the photonic hall."]
+			icon: "gtceu:racetrack_fab"
+			id: "780482A9BF2D46A1"
+			rewards: [{ id: "7645678A25BE453A", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "379CB9B017C1ADE8", item: "gtceu:racetrack_fab", type: "item" }
+				{ id: "78C8443DD1932DF1", item: "gtceu:plascrete", type: "item" }
+			]
+			title: "Racetrack Fab"
+			x: 17.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["77ECA9A3DDFB480D"]
+			description: ["The &6Oxide PLD Chamber&r fires a laser at a ceramic target and grows the plume as a crystal film, one oxide layer after another. A UIV hull, the plascrete shell, a heater under the chamber and a scandate substrate to grow on. The multiferroic films of the MESO logic die. Targets by ME and oxygen by pipe; films are fragile, so keep them in the chamber until the foundry needs them."]
+			icon: "gtceu:oxide_pld_chamber"
+			id: "17F1BEE08FE87731"
+			rewards: [{ id: "74B3E11427024DEE", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7FC1AB20A2F86299", item: "gtceu:oxide_pld_chamber", type: "item" }
+				{ id: "5C75BA5455C94CB6", item: "gtceu:plascrete", type: "item" }
+				{ id: "76B59BF64EA9BED2", item: "gtceu:tritanium_coil_block", type: "item" }
+			]
+			title: "Oxide PLD Chamber"
+			x: 17.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["77ECA9A3DDFB480D"]
+			description: ["The &6vdW Stacking Cell&r picks single atomic layers with a stamp and presses them into a stack, in a glovebox that is flushed with argon. A UIV hull, the clean casing and a filter column for the argon. The spin-orbit readout of the MESO logic die. Layers by ME; stacks come out one at a time, so run two cells."]
+			icon: "gtceu:vdw_stacking_cell"
+			id: "7E9BF22B379A4CEB"
+			rewards: [{ id: "3785B23E8D650F68", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3E2596FFAC228929", item: "gtceu:vdw_stacking_cell", type: "item" }
+				{ id: "303ABC678F712DA7", item: "gtceu:clean_machine_casing", type: "item" }
+			]
+			title: "vdW Stacking Cell"
+			x: 12.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["77ECA9A3DDFB480D"]
+			description: ["The &6YIG LPE Furnace&r dips a wafer into a molten bath and draws it out coated in a garnet film that carries spin waves almost without loss. A UIV hull, the robust casing, three heater bands and a platinum crucible. The magnonic bus the spintronic mainframe is wired with. Wafers and charge by ME; films take time, so run it in a stack of machines."]
+			icon: "gtceu:yig_lpe_furnace"
+			id: "7486DF37973BED77"
+			rewards: [{ id: "5AEFFDB492571336", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5A6D73BE11783F0A", item: "gtceu:yig_lpe_furnace", type: "item" }
+				{ id: "1571A221A995FDFB", item: "gtceu:robust_machine_casing", type: "item" }
+			]
+			title: "YIG LPE Furnace"
+			x: 17.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["77ECA9A3DDFB480D"]
+			description: ["The &6SHeQUID Works&r fills two baths of superfluid helium, joins them through an array and seals the pair as a weak link. A UIV hull, the cryostat casing and a supply of superfluid helium. The weak link cell and the gyro the UXV sensor is built from. Helium by pipe; keep the nanoaperture arrays stocked by ME."]
+			icon: "gtceu:shequid_works"
+			id: "7AE0BEC91F59A48B"
+			rewards: [{ id: "52B703A60683FA50", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "17B5F50EB60BAFDD", item: "gtceu:shequid_works", type: "item" }
+				{ id: "58870364B8D50034", item: "grindless:cryostat_casing", type: "item" }
+			]
+			title: "SHeQUID Works"
+			x: 10.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["77ECA9A3DDFB480D"]
+			description: ["Collide uranium on curium and the two swap nucleons, leaving neutron-rich nuclei near the island of stability. The &6MNT Collider&r stops them in gas and weighs them by flight time. A UIV hull, the high power casing, a long beamline and a gas catcher. Island nuclides, and with them the island chart the OpV research asks for. Targets and ion sources by ME; the yield is a trickle, so send it straight to the chart."]
+			icon: "gtceu:mnt_collider"
+			id: "112452274F3E9096"
+			rewards: [{ id: "73062A763AF5AE20", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "328576CEF538773F", item: "gtceu:mnt_collider", type: "item" }
+				{ id: "7FCA4799590A84A5", item: "gtceu:high_power_casing", type: "item" }
+			]
+			title: "MNT Collider"
+			x: 10.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["77ECA9A3DDFB480D"]
+			description: ["The black hole already pulls its companion apart. The &6Stellar Elevator&r heats the star's surface where the pull is strongest and catches the stream as plasma. It works at Cygnus X-1 only. A UIV hull, the UXV machine casing and a stack of coil rings, with power for the heating. Stellar plasma, which the mass filter cuts and the condensation tower cools. The plasma goes by pipe to the filter; a tank in between keeps the lift steady."]
+			icon: "gtceu:stellar_elevator"
+			id: "1F198C897B7C73D8"
+			rewards: [{ id: "132D17CCC398E465", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "30E9DF75D366723A", item: "gtceu:stellar_elevator", type: "item" }
+				{ id: "1772800E567F1E1D", item: "gtceu:uxv_machine_casing", type: "item" }
+			]
+			title: "Stellar Elevator"
+			x: 15.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["1F198C897B7C73D8"]
+			description: ["A spinning plasma flings its heavy ions outward. The &6Plasma Mass Filter&r cuts the star into hydrogen, helium, carbon-nitrogen-oxygen and heavy cuts, and cleans disk plasma the same way. A UIV hull, the high power casing and the radial ports. The cuts that feed the Mk6 ring and the condensation tower. One tank per cut, each on its own pipe; the filter does not forgive a mixed line."]
+			icon: "gtceu:plasma_mass_filter"
+			id: "344ECF8428D0E972"
+			rewards: [{ id: "33A27B0F41FAB8AF", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1D91DE28ABFA9088", item: "gtceu:plasma_mass_filter", type: "item" }
+				{ id: "351C9F4D367448E1", item: "gtceu:high_power_casing", type: "item" }
+			]
+			title: "Plasma Mass Filter"
+			x: 20.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["344ECF8428D0E972"]
+			description: ["The gas falling into the hole spins in a disk hot enough to glow in X-rays. The &6Accretion Disk Skimmer&r skims its edge and sends the catch to the mass filter. A UIV hull, the UXV machine casing and a rim of coils round the bowl. Filtered disk plasma, the fuel of the FRC former and the BZ dynamo. Route the catch by pipe to the filter and keep the surplus in a tank."]
+			icon: "gtceu:accretion_disk_skimmer"
+			id: "1887C02641FE7714"
+			rewards: [{ id: "5F1B3C559EA8C45A", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7E9952DE7FF64984", item: "gtceu:accretion_disk_skimmer", type: "item" }
+				{ id: "733253DDA8C281CA", item: "gtceu:uxv_machine_casing", type: "item" }
+			]
+			title: "Accretion Disk Skimmer"
+			x: 27.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["344ECF8428D0E972"]
+			description: ["Cool a star slowly and its metals come out in the order a young solar system makes them. The &6Stellar Condensation Tower&r draws off refractory, metal and silicate condensates, and lets the volatiles out as gas. A UIV hull, the UXV machine casing and a draw-off pipe for every stage. The condensates that rule 3 sends to the heavy cut, and syngas for the plants at home. A chest or tank per draw-off; the volatile gas needs somewhere to go."]
+			icon: "gtceu:stellar_condensation_tower"
+			id: "110D7283172BA400"
+			rewards: [{ id: "778CC442DB2C58E4", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7845A4775B5A634D", item: "gtceu:stellar_condensation_tower", type: "item" }
+				{ id: "3896B93FD6DFDD95", item: "gtceu:uxv_machine_casing", type: "item" }
+			]
+			title: "Stellar Condensation Tower"
+			x: 22.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["110D7283172BA400"]
+			description: ["The first thing to come out of the tower, and the hardest to melt. The UXV Lines chart shows what it becomes."]
+			icon: "grindless:refractory_condensate"
+			id: "3139714CCC049908"
+			rewards: [{ id: "767E7C5D5EEE5D15", type: "xp", xp: 80 }]
+			tasks: [{ id: "3CEAAB651BEF7351", item: "grindless:refractory_condensate", type: "item" }]
+			title: "Refractory Condensate"
+			x: 25.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["1887C02641FE7714"]
+			description: ["A field-reversed configuration is a smoke ring of plasma that holds its own field. The &6FRC Former&r shoots one into a cartridge and keeps it there. A UIV hull, the high power casing, a formation tube and a capacitor bank. The FRC cartridge: travel to Vela, the field generator and the gate all use one. Disk plasma by pipe; cartridges are consumed, so stock a generous chest."]
+			icon: "gtceu:frc_former"
+			id: "518B1C106BB5136F"
+			rewards: [{ id: "11396B852BA09281", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "133660D591D495A2", item: "gtceu:frc_former", type: "item" }
+				{ id: "1EBCDDE069DDDBC3", item: "gtceu:high_power_casing", type: "item" }
+				{ id: "5B782C13EA8BFF8F", item: "grindless:cryostat_casing", type: "item" }
+			]
+			title: "FRC Former"
+			x: 30.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["518B1C106BB5136F"]
+			description: ["A spinning black hole threaded by a magnetic field drives a current, and the hole slows down to pay for it. The &6BZ Dynamo&r burns flux-loaded plasma that way. A UIV hull, the UXV machine casing and a flux loop inside the torus. Power at Cygnus X-1, with no fuel but the plasma. Feed flux-loaded plasma by pipe and ship the power home over the wireless link."]
+			icon: "gtceu:bz_dynamo"
+			id: "3611A4EAC7D055C3"
+			rewards: [{ id: "1615166934B28465", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "17889A5DB785D254", item: "gtceu:bz_dynamo", type: "item" }
+				{ id: "5BBFE15D6E67C4C8", item: "gtceu:uxv_machine_casing", type: "item" }
+			]
+			title: "BZ Dynamo"
+			x: 32.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["795E541822A26BC7", "344ECF8428D0E972"]
+			description: ["The &6Mk6 Fusion Ring&r burns as a star does: hot CNO, then helium, carbon and oxygen. A direct converter takes the power off each ash, and one burn's ash is quenched into the next one's fuel. A UXV hull, UXV components, the UXV fusion casing, the Mk5 coil and fusion glass. The plasma and burn quests of the integration chapter. Fuel and coolant by pipe; a ring that runs a star's burning stages on demand is fiction, so plan the ash chain first."]
+			icon: "gtceu:uxv_fusion_reactor"
+			id: "5CE1C18D40A0B8E2"
+			rewards: [{ id: "13D1BD31FCFD288E", type: "xp", xp: 250 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5C330717261B2CB1", item: "gtceu:uxv_fusion_reactor", type: "item" }
+				{ id: "504F99CB405FBA6C", item: "grindless:uxv_fusion_casing", type: "item" }
+				{ id: "5255BED4DDC68445", item: "gtceu:fusion_glass", type: "item" }
+			]
+			title: "Mk6 Fusion Ring"
+			x: 25.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["586BAF51DA2477E3"]
+			description: ["Deep in a neutron star's crust the nuclei melt into rods, sheets and holes that physicists call pasta. A glitch shakes the crust loose, and the &6Pasta Extractor&r times it. A UIV hull, the neutron star site casing and a receiver cage. Raw pasta, the start of every pasta item. Neutronium pellets by ME; wait for a glitch and collect the haul."]
+			icon: "gtceu:pasta_extractor"
+			id: "1C34EDB89AD1F5C9"
+			rewards: [{ id: "1121096DA82C1238", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "184DA14CA333EC3E", item: "gtceu:pasta_extractor", type: "item" }
+				{ id: "138DF982719F160B", item: "grindless:neutron_star_site_casing", type: "item" }
+			]
+			title: "Pasta Extractor"
+			x: 20.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["1C34EDB89AD1F5C9"]
+			description: ["The &6Pasta Phase Sorter&r separates the rods from the sheets inside a cage that keeps each one squeezed. The anti-phase residue goes to the core sample the gate keeps. A UIV hull, the neutron star site casing and five cryostat cage bays. Spaghetti phase for wire and lasagna phase for plate. Raw pasta by ME; send each phase to its own line."]
+			icon: "gtceu:pasta_phase_sorter"
+			id: "353D67B60E559EE1"
+			rewards: [{ id: "75883048E114CE67", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "58C6F95474C92833", item: "gtceu:pasta_phase_sorter", type: "item" }
+				{ id: "345D9E94876CC187", item: "grindless:neutron_star_site_casing", type: "item" }
+				{ id: "1BD7837B7573FCFE", item: "grindless:cryostat_casing", type: "item" }
+			]
+			title: "Pasta Phase Sorter"
+			x: 22.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["353D67B60E559EE1"]
+			description: ["The &6Pasta Draw Bench&r pulls spaghetti phase through aerogel into strand wire, the UXV wire. Pasta as wire is fiction: outside a neutron star it would fly apart at once. A UIV hull, the neutron star site casing and a long, straight bed. Pasta strand wire, which the motor, the field generator and the SMES cell are wound with. Spaghetti phase by ME; wire leaves on a spool, so stock a few."]
+			icon: "gtceu:pasta_draw_bench"
+			id: "7A933F3FF611A461"
+			rewards: [{ id: "56230F56D11FD48C", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "530F7D2774C484EF", item: "gtceu:pasta_draw_bench", type: "item" }
+				{ id: "5FC390036EB5BEB2", item: "grindless:neutron_star_site_casing", type: "item" }
+			]
+			title: "Pasta Draw Bench"
+			x: 25.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["353D67B60E559EE1"]
+			description: ["The &6Pasta Laminator&r presses lasagna phase onto a tungsten-fibre billet as a plate, the plate of the UXV hull and parts. Pasta as plate is fiction, for the same reason as the wire. A UIV hull, the neutron star site casing and a robust platen. Lasagna plate, then the UXV hull. Phase and billets by ME; plates stack up, so send them on."]
+			icon: "gtceu:pasta_laminator"
+			id: "3CCB6C8A5332CADD"
+			rewards: [{ id: "193A8B97013D719C", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "33DF6F56B9115400", item: "gtceu:pasta_laminator", type: "item" }
+				{ id: "564E04C38B269476", item: "grindless:neutron_star_site_casing", type: "item" }
+				{ id: "7E54036D6B84BDB0", item: "gtceu:robust_machine_casing", type: "item" }
+			]
+			title: "Pasta Laminator"
+			x: 25.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["3CCB6C8A5332CADD"]
+			description: ["The plate every UXV hull and part is cut from."]
+			icon: "grindless:lasagna_plate"
+			id: "34D1D9ED3F6FBC67"
+			rewards: [{ id: "16164FF0FF0A3286", type: "xp", xp: 80 }]
+			tasks: [{ id: "503BA155D586710D", item: "grindless:lasagna_plate", type: "item" }]
+			title: "Lasagna Plate"
+			x: 27.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["7A933F3FF611A461"]
+			description: ["Above a pulsar's magnetic poles the field tears charges off the surface. The &6Polar Cap Tap&r lowers an electrode into that current and burns through it, at Vela only. A UIV hull, the neutron star site casing and a mast of insulator rings. Power at Vela, for the gate hold and the machines out there. Electrodes by ME; the voltage is real, a way to collect it is not."]
+			icon: "gtceu:polar_cap_tap"
+			id: "50C6BE5A52F4F9A0"
+			rewards: [{ id: "71D74C5B44B540E7", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "30987312A1343006", item: "gtceu:polar_cap_tap", type: "item" }
+				{ id: "536FA95DF771C4F8", item: "grindless:neutron_star_site_casing", type: "item" }
+			]
+			title: "Polar Cap Tap"
+			x: 27.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["77ECA9A3DDFB480D"]
+			description: ["The star's core was thrown out in clumps still rich in what it made as it died. The &6Ejecta Knot Sweeper&r sweeps them up, behind a shield bow. A UIV hull, the Whipple shield casing and a filter collector. Ejecta knot dust, and titanium-44 from it. Shield weave by ME; the dust comes back by hopper."]
+			icon: "gtceu:ejecta_knot_sweeper"
+			id: "12376A5961A338E7"
+			rewards: [{ id: "56D9BE7C40325044", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "32CE7A9CD71B6B2E", item: "gtceu:ejecta_knot_sweeper", type: "item" }
+				{ id: "1CFA9454DF74F43F", item: "grindless:whipple_shield_casing", type: "item" }
+			]
+			title: "Ejecta Knot Sweeper"
+			x: 12.5d
+			y: 14.0d
+		}
+		{
+			dependencies: ["12376A5961A338E7"]
+			description: ["Slow a core's positrons into positronium, cool it, then let it annihilate all at once into a beam. The &6Annihilation Laser Works&r makes the gamma laser module. A UIV hull, the robust casing as a gamma shield and a Penning trap. The gamma laser module, and the UXV emitter built round it. Titanium-44 cores by ME; the modules are few, so keep them in a chest."]
+			icon: "gtceu:annihilation_laser_works"
+			id: "37FCF1CA912EC06F"
+			rewards: [{ id: "3D80D2BB89E2FB14", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "371ACA9B6E1D5853", item: "gtceu:annihilation_laser_works", type: "item" }
+				{ id: "3D5BB3952F16DA90", item: "gtceu:robust_machine_casing", type: "item" }
+			]
+			title: "Annihilation Laser Works"
+			x: 15.0d
+			y: 16.0d
+		}
+		{
+			dependencies: ["37FCF1CA912EC06F"]
+			description: ["A gamma-ray laser is fiction: nobody has built one. This one goes into the UXV emitter."]
+			icon: "grindless:gamma_laser_module"
+			id: "1E256F6A845C72DE"
+			rewards: [{ id: "3AFF455A942A356F", type: "xp", xp: 80 }]
+			tasks: [{ id: "5A8E57369AFB352C", item: "grindless:gamma_laser_module", type: "item" }]
+			title: "Gamma Laser Module"
+			x: 20.0d
+			y: 16.0d
 		}
 	]
 	subtitle: ["Logic that runs on spin, and three strange places: a black hole's companion star, a pulsar's crust and a supernova's ashes."]
