@@ -110,11 +110,11 @@
     }
   ]
 
-  // UEV-A3: a plate spalled to nanodiamond grit under hydrogen, the feed of the megabar line (data/grindless/tables/megabar.json);
-  // circuit 7: UHV betavoltaics owns this type's circuits 5 and 6
+  // UEV-A3: 4 plates spalled to 4 nanodiamond grit under hydrogen (one plate, one dust: no diamond from nothing), the feed of the megabar line
+  // (data/grindless/tables/megabar.json); circuit 7: UHV betavoltaics owns this type's circuits 5 and 6
   TABLE.push({
     name: 'nanodiamond', type: 'diamond_cvd', circuit: 7,
-    itemsIn: [{ id: PLATE, count: 1 }], notConsumedItems: [],
+    itemsIn: [{ id: PLATE, count: 4 }], notConsumedItems: [],
     fluidsIn: [{ id: 'gtceu:hydrogen', amount: 2000 }],
     itemsOut: [{ id: 'grindless:nanodiamond_dust', count: 4 }], fluidsOut: [{ id: 'gtceu:hydrogen', amount: 1500 }],
     eut: ZPM_VA, duration: 400

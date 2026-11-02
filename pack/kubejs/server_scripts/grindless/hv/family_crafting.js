@@ -49,6 +49,12 @@
         P: '#forge:plates/stainless_steel',
         R: '#forge:rods/stainless_steel'
       }).id('grindless:crafting/stainless_steel_drill_bit')
+
+      event.recipes.gtceu.alloy_smelter('grindless:stainless_steel_drill_bit')
+        .itemInputs('4x #forge:plates/stainless_steel', '2x #forge:rods/stainless_steel')
+        .itemOutputs('2x grindless:stainless_steel_drill_bit')
+        .EUt(480)
+        .duration(200)
     }
 
     // ---- End vein samples

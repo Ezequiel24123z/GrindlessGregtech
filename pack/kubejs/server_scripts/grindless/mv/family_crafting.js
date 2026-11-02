@@ -48,5 +48,11 @@
       P: '#forge:plates/vanadium_steel',
       R: '#forge:rods/vanadium_steel'
     }).id('grindless:crafting/vanadium_steel_drill_bit')
+
+    event.recipes.gtceu.alloy_smelter('grindless:vanadium_steel_drill_bit')
+      .itemInputs('4x #forge:plates/vanadium_steel', '2x #forge:rods/vanadium_steel')
+      .itemOutputs('2x grindless:vanadium_steel_drill_bit')
+      .EUt(120)
+      .duration(200)
   })
 })()

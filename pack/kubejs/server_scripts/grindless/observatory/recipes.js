@@ -12,7 +12,7 @@
 //                            120 EU/t, 600 ticks. Night (the Moon is up) and no thunderstorm (thunder level under 0.2); rain is fine.
 //   gtceu:assembler          (LV)  2 glass plates + 1 small pile of silver dust (the emulsion) -> 2 photographic plates, 16 EU/t, 100 t
 //   crafting (copies)        draft + paper + coal dust -> 2 drafts; map + photographic plate -> 2 maps (a contact print);
-//                            ephemeris + paper + coal dust -> 2; landing chart + paper + coal dust -> 2
+//                            landing chart + paper + coal dust -> 2 (the ephemeris is not copied: the telescope's recipe consumes one)
 // Every observation recipe carries the data key grindless_sky (steam, optical, radio): the EMI line of its type spells the sky rule out.
 // No inflated times and no chance: an observation is 30 s and always gives its chart. Published for the test:
 // global.grindless.observatory.recipes.
@@ -31,7 +31,7 @@
     landing: 'grindless:radio_astronomy/lunar_landing_chart',
     plate: 'grindless:assembler/photographic_plate',
     copies: ['grindless:crafting/lunar_chart_draft_copy', 'grindless:crafting/lunar_map_copy',
-      'grindless:crafting/lunar_ephemeris_copy', 'grindless:crafting/lunar_landing_chart_copy'],
+      'grindless:crafting/lunar_landing_chart_copy'],
     // what the test checks: the sky rule of each observation (GTM condition type -> reverse flag, plus the pos_y range)
     sky: {
       draft: { night: true, rain: 0.2, posY: [100, 319] },
@@ -95,10 +95,9 @@
       // ---- copies: the original + a blank -> two
       event.shapeless('2x ' + I.draft, [I.draft, PAPER, INK]).id('grindless:crafting/lunar_chart_draft_copy')
       event.shapeless('2x ' + I.map, [I.map, I.plate]).id('grindless:crafting/lunar_map_copy')
-      event.shapeless('2x ' + I.ephemeris, [I.ephemeris, PAPER, INK]).id('grindless:crafting/lunar_ephemeris_copy')
       event.shapeless('2x ' + I.landing, [I.landing, PAPER, INK]).id('grindless:crafting/lunar_landing_chart_copy')
 
-      console.info(LOG + 'observations (draft, map + ephemeris, landing chart), photographic plate and 4 copy recipes added')
+      console.info(LOG + 'observations (draft, map + ephemeris, landing chart), photographic plate and 3 copy recipes added')
     } catch (e) {
       console.error(LOG + 'observatory recipes failed: ' + e)
     }

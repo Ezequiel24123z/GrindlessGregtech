@@ -11,6 +11,11 @@
 // versions (GTM's SimpleGeneratorMachine just parallelizes the unmodified recipe up to the machine's voltage), so
 // they get the boost for free, with no separate list.
 //
+// Known exception (M6-05, documented GTNN rounding): GT--'s rocket engine computes duration * efficiency / 100 with integer
+// truncation, and the efficiency depends on the engine's tier (80% EV, 70% IV, 60% LuV), which a recipe cannot see. For the
+// 2-3 tick fuels, doubling 3 -> 6 gives floor(6*.6)=3 effective ticks against floor(3*.6)=1, a 3x boost instead of 2x.
+// The pack keeps it: it only applies to the shortest rocket fuels at the top engine tiers and fuel use stays paid in full.
+//
 // Recipes are matched by TYPE and then filtered by shape, not by trusting every recipe of that type to be a
 // generator: gcyr:dyson_controller mixes true power-out recipes (tickOutputs.eu, the sphere beaming power down) with
 // EU-eating build/repair recipes of the same type (tickInputs.eu), so each recipe is read back and only a tickOutputs.eu
@@ -352,6 +357,11 @@
     })
     Object.keys(site.perType).forEach(function (t) { site.conditioned += site.perType[t] })
     addNewFuels(event, site)
+
+    // M6-01: distilled water -> steam in an electric heater (30 EU/t x 30 t for 960 mB) was far cheaper than the steam
+    // turbine's own electrical value (640 mB = 32 EU/t x 40 t after the doubling), a closed loop that made EU from
+    // nothing. Steam comes from boilers; the electric route is gone.
+    event.remove({ id: 'gtceu:fluid_heater/heat_distilled_to_steam' })
 
     POWER.generators = report
     POWER.siteReport = site
