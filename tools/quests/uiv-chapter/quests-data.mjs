@@ -272,11 +272,12 @@ export const QUESTS = [
     key: 'STORE', kind: 'step', title: 'Stored Proof', icon: 'grindless:neutronium_pellet',
     deps: ['HOLD'], x: 40, y: 0,
     desc: [
-      'Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four UIV circuits in the store. The gate looks for them before it opens further.',
+      'Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four UIV circuits of any kind in the store. The gate looks for them before it opens further, and the hold uses up the pellet.',
     ],
     tasks: [
       it('grindless:neutronium_pellet'), it('grindless:superheavy_census_ii'), it('grindless:ns_eos_chart'),
-      it('grindless:recovered_half_sled'), it('gtnn:optical_mainframe', 4),
+      it('grindless:recovered_half_sled'),
+      { type: 'item', id: '36CBAFCCE90931F0', snbt: '{\n\t\t\t\tcount: 4L\n\t\t\t\tid: "36CBAFCCE90931F0"\n\t\t\t\titem: {\n\t\t\t\t\tCount: 1b\n\t\t\t\t\tid: "itemfilters:tag"\n\t\t\t\t\ttag: { value: "gtceu:circuits/uiv" }\n\t\t\t\t}\n\t\t\t\ttitle: "Any UIV Circuit"\n\t\t\t\ttype: "item"\n\t\t\t}' },
     ],
     rewards: [xp(300)],
   },

@@ -39,11 +39,21 @@ export const QUESTS = [
     unlocks: 'The optical computer on the rows below, and the controller of every machine past the UEV hull.',
     automate: 'Boards and chips arrive from the cleanroom by ME; keep a small stock of what it returns.',
   }, [it('gtceu:uev_circuit_assembler')], 150),
-  q('PARTS', 'step', 'UEV Parts', 'gtceu:uev_emitter', ['CH_ASM'], 5, -5, {}, [
+  q('PARTS', 'step', 'UEV Parts', 'gtceu:uev_emitter', ['CH_ASM'], 5, -5, {
+    for: 'The &6UEV Parts&r are the emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor of this era. Every UEV controller, hatch and the UEV hull are built from them; there is no UEV rotor holder.',
+    needs: 'The UHV part of the same kind (two for the emitter and sensor) with the rare films and cooled metals each recipe asks for; the field generator takes three UEV emitters and three UEV sensors. They are made in assemblers.',
+    unlocks: 'The UEV hatches, the UEV hull and the controllers of this era.',
+    automate: 'Stock each part by ME; a controller draws several of the same kind.',
+  }, [
     it('gtceu:uev_emitter'), it('gtceu:uev_sensor'), it('gtceu:uev_field_generator'), it('gtceu:uev_robot_arm'), it('gtceu:uev_conveyor_module'),
-    it('gtceu:uev_electric_pump'), it('gtceu:uev_electric_piston'), it('gtceu:uev_rotor_holder'),
+    it('gtceu:uev_electric_pump'), it('gtceu:uev_electric_piston'), it('gtceu:uev_electric_motor'),
   ], 100),
-  q('HATCH', 'step', 'UEV Hatches', 'gtceu:uev_energy_input_hatch', ['PARTS'], 7, -5, {}, [it('gtceu:uev_energy_input_hatch')], 100),
+  q('HATCH', 'step', 'UEV Hatches', 'gtceu:uev_energy_input_hatch', ['PARTS'], 7, -5, {
+    for: 'The &6UEV Energy Input Hatch&r is an assembly line recipe on the UEV hull: it feeds a UEV machine its power.',
+    needs: 'A UEV machine hull, UV voltage coils, UEV field generators, UEV circuits and helium plasma.',
+    unlocks: 'Every UEV machine that takes power from a hatch.',
+    automate: 'Craft a few by ME; each machine takes one.',
+  }, [it('gtceu:uev_energy_input_hatch')], 100),
 
   // ------------------------------------------------------------------ light: wafer, chip, circuit, computer
   q('CH_LNOI', 'wafer', 'Lithium Niobate on Insulator', 'grindless:lnoi_wafer', ['H_CIRC'], 3, -3, {

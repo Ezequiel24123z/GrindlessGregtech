@@ -38,11 +38,21 @@ export const QUESTS = [
     unlocks: 'The parts and hatches on the next two quests, and every controller past the UIV hull.',
     automate: 'Boards and chips come from the cleanroom by ME; stock what it returns.',
   }, [it('gtceu:uiv_circuit_assembler')], 150),
-  q('PUMP', 'step', 'UIV Parts', 'gtceu:uiv_electric_pump', ['CH_ASM'], 5.5, -1.75, {}, [
+  q('PUMP', 'step', 'UIV Parts', 'gtceu:uiv_electric_pump', ['CH_ASM'], 5.5, -1.75, {
+    for: 'The &6UIV Parts&r are the emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor of this era. The UIV hull, the hatches and every controller past them are built from these.',
+    needs: 'The UEV part of the same kind (two for the motor), made in assemblers. The motor also takes a UIV circuit, metallic hydrogen cable, an MH winding and superconducting coils.',
+    unlocks: 'The UIV hatches and the controllers of this era.',
+    automate: 'Stock each part by ME; a controller draws several of the same kind.',
+  }, [
     it('gtceu:uiv_emitter'), it('gtceu:uiv_sensor'), it('gtceu:uiv_field_generator'), it('gtceu:uiv_robot_arm'), it('gtceu:uiv_conveyor_module'),
     it('gtceu:uiv_electric_pump'), it('gtceu:uiv_electric_piston'), it('gtceu:uiv_electric_motor'),
   ], 120),
-  q('HATCH', 'step', 'UIV Hatches and Cable', 'gtceu:uiv_energy_input_hatch', ['PUMP'], 8, -1.75, {}, [it('gtceu:uiv_energy_input_hatch'), it('gtceu:uiv_energy_output_hatch'), it('gtceu:metallic_hydrogen_single_cable')], 100),
+  q('HATCH', 'step', 'UIV Hatches and Cable', 'gtceu:uiv_energy_input_hatch', ['PUMP'], 8, -1.75, {
+    for: 'The &6UIV Energy Input Hatch&r is an assembly line recipe on two UIV hulls, with three UIV sensors and a UIV motor. &6Metallic Hydrogen Cable&r carries the power; it is also the cable of the hull itself, which takes RHEA plate and FFKM seals.',
+    needs: 'Two UIV machine hulls, metallic hydrogen cable, RHEA plates, UIV circuits, FFKM seals, three UIV sensors and a UIV motor.',
+    unlocks: 'Every UIV machine that takes power from a hatch.',
+    automate: 'Craft hatches and cable by ME in small batches; each machine takes one.',
+  }, [it('gtceu:uiv_energy_input_hatch'), it('gtceu:uiv_energy_output_hatch'), it('gtceu:metallic_hydrogen_single_cable')], 100),
 
   // ------------------------------------------------------------------ light on a wafer
   q('CH_LNSIN', 'wafer', 'Lithium Niobate on Nitride', 'grindless:ln_on_sin_wafer', ['H_CIRC'], 3, 0.25, {
