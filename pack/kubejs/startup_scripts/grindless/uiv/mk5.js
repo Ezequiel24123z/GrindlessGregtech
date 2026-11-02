@@ -81,7 +81,8 @@
       Pat.part('output_bus', { min: 1, max: 2 }),
       Pat.part('input_hatch', { min: 0, max: 1 }),
       Pat.part('output_hatch', { min: 0, max: 2 }),
-      Pat.part('energy_input', { min: 1, max: 2 })
+      Pat.part('energy_input', { min: 1, max: 2 }),
+      G.parallelHatch.part()
     ])
   }
 
@@ -186,8 +187,7 @@
       .pattern(function (def) { return Pat.build(def, r.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.uiv_fusion_reactor.tooltip.0'),
-        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + r.type)),
-        Text.translate('gtceu.multiblock.parallelizable.tooltip')
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + r.type))
       ])
       .workableCasingModel(CASING_TEXTURE, 'grindless:block/multiblock/uiv_fusion_reactor')
   })

@@ -42,7 +42,7 @@
   D.stationType = 'gtceu:' + STATION_TYPE
   // tower: items in 2 (germanium and the circuit), out 2 (crystal + impure ends); fluids in 3 (GeCl4, water, hydrogen; chlorine in c1),
   // out 2 (HCl and water; GeCl4 in c1). Station: items in 2 (probe, SNSPD array), out 1; fluids in 1, out 1
-  D.towerIO = { itemsIn: 2, itemsOut: 2, fluidsIn: 3, fluidsOut: 2 }
+  D.towerIO = { itemsIn: 3, itemsOut: 2, fluidsIn: 3, fluidsOut: 2 }
   D.stationIO = { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }
   D.towerParts = {
     energy_input: { min: 1, max: 2 },

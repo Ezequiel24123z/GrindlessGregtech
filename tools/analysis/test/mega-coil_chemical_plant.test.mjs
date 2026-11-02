@@ -116,7 +116,7 @@ test('structure: 5 x 6 x 7, one controller, 121 casing cells, 16 frames, 5 pipe 
   assert.equal(lim(2).max, 2);
   assert.equal(lim(3).max, 2, 'input buses');
   assert.equal(lim(4).max, 2, 'output buses');
-  assert.equal(lim(5).max, 4, 'fluid input hatches');
+  assert.equal(lim(5).max, 5, 'fluid input hatches');
   assert.equal(lim(6).max, 4, 'fluid output hatches');
   const maxParts = d.symbols.X.options.slice(1).reduce((n, o) => n + (o.limits.exact || o.limits.max), 0);
   assert.equal(121 - maxParts, lim(0).min, 'the casing minimum is the cells minus the most parts');

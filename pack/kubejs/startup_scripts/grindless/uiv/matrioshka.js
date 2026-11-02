@@ -93,7 +93,8 @@
     var parts = [
       Pat.part('input_bus', { min: 1, max: 2 }),
       Pat.part('output_bus', { min: 1, max: 2 }),
-      Pat.part('energy_input', { min: 1, max: 2 })
+      Pat.part('energy_input', { min: 1, max: 2 }),
+      G.parallelHatch.part()
     ]
     if (m.maxIO.fluidsIn > 0) parts.push(Pat.part('input_hatch', { min: 0, max: 1 }))
     return G.uivShapes.build(Pat, m.name, m.casing, parts)

@@ -44,10 +44,10 @@ test('registration: two recipe types, two machines, the stage and six materials;
   }
 });
 
-test('patterns: plant 7 x 5 x 9, works 11 x 5 x 5, one controller, GTM part limits; the works takes no hatches', () => {
+test('patterns: plant 7 x 5 x 9, works 11 x 5 x 5, one controller, GTM part limits; the parallel hatch is optional (max 1)', () => {
   for (const [id, depth, height, width, casing, abilities] of [
-    ['gtceu:pbo_plant', 9, 5, 7, 'gtceu:inert_machine_casing', ['energy_input', 'input_bus', 'input_hatch', 'output_bus', 'output_hatch']],
-    ['gtceu:tether_ribbon_works', 5, 5, 11, 'gtceu:robust_machine_casing', ['energy_input', 'input_bus', 'output_bus']]
+    ['gtceu:pbo_plant', 9, 5, 7, 'gtceu:inert_machine_casing', ['energy_input', 'input_bus', 'input_hatch', 'output_bus', 'output_hatch', 'parallel_hatch']],
+    ['gtceu:tether_ribbon_works', 5, 5, 11, 'gtceu:robust_machine_casing', ['energy_input', 'input_bus', 'output_bus', 'parallel_hatch']]
   ]) {
     const s = run.docs.structures.structures[id];
     assert.ok(s, id + ' described');
@@ -57,7 +57,7 @@ test('patterns: plant 7 x 5 x 9, works 11 x 5 x 5, one controller, GTM part limi
     for (const sl of s.slices) for (const r of sl) for (const c of r) assert.ok(s.symbols[c], `${id} symbol ${c}`);
     const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
     assert.deepEqual(Object.keys(lim).sort(), abilities.slice().sort(), id);
-    for (const a of abilities) assert.deepEqual(lim[a], { min: 1, max: 2 }, `${id} ${a}`);
+    for (const a of abilities) assert.deepEqual(lim[a], a === 'parallel_hatch' ? { max: 1, preview: 1 } : { min: 1, max: 2 }, `${id} ${a}`);
     assert.ok(s.symbols.X.options.some((o) => o.kind === 'blocks' && o.blocks.includes(casing)), id + ' casing');
   }
 });

@@ -175,14 +175,16 @@
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 1 }),
     Pat.part('output_hatch', { min: 1, max: 1 }),
-    Pat.part('energy_input', { min: 1, max: 2 })
+    Pat.part('energy_input', { min: 1, max: 2 }),
+    G.parallelHatch.part()
   ])
   PH.machines.foundry.spec = specOf(PH.machines.foundry, foundryInner, [
     Pat.part('input_bus', { min: 1, max: 3 }),
     Pat.part('input_hatch', { min: 1, max: 3 }),
     Pat.part('output_bus', { min: 1, max: 2 }),
     Pat.part('output_hatch', { min: 1, max: 1 }),
-    Pat.part('energy_input', { min: 1, max: 2 })
+    Pat.part('energy_input', { min: 1, max: 2 }),
+    G.parallelHatch.part()
   ])
 
   // one EMI line per recipe, read from its data: what the circuit does
@@ -247,7 +249,7 @@
       .langValue(reactor.lang)
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(reactor.type)
-      .recipeModifier(G.noVoiding.modifier({ which: 'items', reason: PH.reactorNoVoiding, name: 'MBE reactor' }, G.parallelHatch.overclock), true)
+      .recipeModifier(G.noVoiding.modifier({ which: 'items', reason: PH.reactorNoVoiding, name: 'MBE reactor' }, G.parallelHatch.modifier(G.parallelHatch.overclock)), true)
       .beforeWorking(G.noVoiding.beforeWorking({ which: 'items', reason: PH.reactorNoVoiding, name: 'MBE reactor' }))
       .appearanceBlock(function () { return Block.getBlock(UV_CASING) })
       .pattern(function (def) { return Pat.build(def, reactor.spec) })

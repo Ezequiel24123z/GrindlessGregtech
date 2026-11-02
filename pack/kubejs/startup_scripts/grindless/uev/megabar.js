@@ -91,8 +91,10 @@
       parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
+        Pat.part('input_hatch', { min: 0, max: 1 }),
         Pat.part('output_hatch', { min: 0, max: 1 }),
-        Pat.part('energy_input', { min: 1, max: 2 })
+        Pat.part('energy_input', { min: 1, max: 2 }),
+        G.parallelHatch.part()
       ]
     })
   }

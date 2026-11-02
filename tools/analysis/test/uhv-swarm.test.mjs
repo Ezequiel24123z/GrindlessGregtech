@@ -90,14 +90,14 @@ const count = (s, ch) => s.slices.flat().join('').split('').filter((c) => c === 
 
 test('patterns: 9 x 7 x 9 foundry, 11 x 5 x 11 station (energy out), 7 x 5 x 7 bay, all on a truss deck', () => {
   const fo = shape('gtceu:swarm_segment_foundry', 9, 9, 7);
-  assert.deepEqual(partsOf(fo), ['energy_input', 'input_bus', 'output_bus']);
+  assert.deepEqual(partsOf(fo), ['energy_input', 'input_bus', 'output_bus', 'parallel_hatch']);
   assert.equal(count(fo, 'A'), 1, 'one assembly head');
   const st = shape('gtceu:swarm_control_station', 11, 11, 5);
   assert.deepEqual(partsOf(st), ['energy_output', 'input_bus', 'input_hatch', 'output_bus']);
   assert.equal(count(st, 'C'), 3, 'the formation computer');
   assert.ok(count(st, 'R') > 20, 'the receiver array');
   const ba = shape('gtceu:solar_probe_bay', 7, 7, 5);
-  assert.deepEqual(partsOf(ba), ['energy_input', 'input_bus', 'output_bus']);
+  assert.deepEqual(partsOf(ba), ['energy_input', 'input_bus', 'output_bus', 'parallel_hatch']);
   for (const s of [fo, st, ba]) {
     assert.ok(s.symbols.X.options.some((o) => o.kind === 'blocks' && o.blocks.includes('grindless:station_truss_casing')), 'truss deck');
   }

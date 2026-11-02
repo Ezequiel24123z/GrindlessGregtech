@@ -97,11 +97,13 @@
         ['tooltips(net.minecraft.network.chat.Component[])'](({
           microgravity_smelter: [
             Text.translate('grindless.machine.microgravity_smelter.tooltip.0'),
-            Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.microgravity_processing'))
+            Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.microgravity_processing')),
+            Text.translate('gtceu.multiblock.parallelizable.tooltip')
           ],
           wake_shield_facility: [
             Text.translate('grindless.machine.wake_shield_facility.tooltip.0'),
-            Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.wake_epitaxy'))
+            Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.wake_epitaxy')),
+            Text.translate('gtceu.multiblock.parallelizable.tooltip')
           ]
         })[m.name])
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
