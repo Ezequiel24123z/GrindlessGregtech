@@ -1990,9 +1990,14 @@
       "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
     },
     {
+      "id": "gtceu:warp_gate@uhv",
       "machine": "gtceu:warp_gate",
       "types": [
         "gtceu:warp_gate"
+      ],
+      "onlyRecipes": [
+        "grindless:warp_gate/open",
+        "grindless:warp_gate/sustain"
       ],
       "maxEUt": 33554432,
       "needs": [
@@ -2861,7 +2866,6 @@
         "grindless:proxima_ice_core",
         "grindless:proxima_regolith_survey",
         "grindless:cold_trap_regolith",
-        "grindless:americium_micro_source",
         "grindless:infrared_pigment",
         "grindless:chitosan_scaffold",
         "grindless:melanised_biomass",
