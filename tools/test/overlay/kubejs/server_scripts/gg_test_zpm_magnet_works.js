@@ -196,7 +196,7 @@
       notes.push(p.recipeId + ' ' + live.duration + ' t x ' + eut + ' EU/t')
     })
     var have = recipeCount(TYPE_ID)
-    check('recipes', have === mw.recipes.length && bad.length === 0, TYPE_ID + '=' + have + ' ; ' + notes.join(' ; ') + (bad.length > 0 ? ' | problems: ' + bad.join(' ; ') : ''))
+    check('recipes', have >= mw.recipes.length && bad.length === 0, TYPE_ID + '=' + have + ' live (this publisher owns ' + mw.recipes.length + '; later eras add rows to the type) ; ' + notes.join(' ; ') + (bad.length > 0 ? ' | problems: ' + bad.join(' ; ') : ''))
     if (mw.skipped.length > 0) check('skipped', false, JSON.stringify(mw.skipped))
     check('clashes', mw.clashes.length === 0, mw.clashes.length === 0 ? 'no recipe\'s ingredients are a subset of another\'s (one recipe per lookup path)' : mw.clashes.join(', '))
 
@@ -204,8 +204,8 @@
     var cr = liveRecipe(mw.craftingRecipe)
     if (cr === null) craftBad.push(mw.craftingRecipe + ' missing')
     else {
-      var res = cr.getResultItem(S.server.registryAccess())
-      if (String(res.getId()) !== MACHINE_ID) craftBad.push(mw.craftingRecipe + ' gives ' + res.getId())
+      var cio = liveIO(cr)
+      if (ids(cio.itemsOut) !== MACHINE_ID) craftBad.push(mw.craftingRecipe + ' gives ' + ids(cio.itemsOut))
     }
     var kr = liveRecipe(mw.casingRecipe)
     if (kr === null) craftBad.push(mw.casingRecipe + ' missing')
