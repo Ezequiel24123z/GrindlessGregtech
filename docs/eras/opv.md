@@ -1240,7 +1240,7 @@ Order: S0-1 and S0-2 first (they gate F1 and G1), then 3, 7, 8, then the rest. T
 - **Allowed (extra):** those two older files (1 case, 1 row); pinned tests `uev-wireless`, `uiv-wireless`, `uxv-wireless` (`.test.mjs`).
 - **References:** *Power*; `lv/wireless_energy.js:294-305`; `tables/wireless_energy.json:5`; uxv.md W (:1145); S0-6.
 - **Depends on:** F1, S0-6. Its recipes read A0's wire, A1's emitter and sensor, A2's die and A3's field generator: pendingRoutes naming A0, A1, A2 and A3.
-- **Invariants:** no new mechanism beyond the case; 5% in-loss as built; the network tier is the lowest cell's.
+- **Invariants:** no new mechanism beyond the case; 5% in-loss as built; the network tier is the strongest cell's.
 - **Acceptance:** the OpV hatches, covers and cell exist; their recipes follow the component rule and appear once their inputs land.
 - **QR:** tooltip rule for the tower is unchanged (not ours to restyle); the cell's info page states its capacity.
 - **Tests:** T0. T1: `gg_test_opv_wireless`, band assigned by integrator. Doubt: a 64 A OpV wireless hatch draws 2^35 EU/t for one tick from a case 13 network with every buffer long.

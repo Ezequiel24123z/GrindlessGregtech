@@ -20,14 +20,12 @@
 //                       EBF with two LV wireless energy hatches, an LV macerator with an LV energy cover, an MV wireless energy hatch)
 //     NO_TOWER          before any tower: the generator array runs, its dynamo hatch backs up, nothing reaches the network, the readout
 //                       (a fake player's shift-click on the dynamo hatch) says no tower
-//     TOWERS            tower A (4 LV cells) and tower B (2 MV cells) form; the network adds them: 7,920,000 EU, tier LV (the weakest
-//                       cell of every tower); the controller's lines
+//     TOWERS            tower A (4 LV cells) and tower B (2 MV cells) form; the network adds them: 7,920,000 EU, tier MV (the strongest
+//                       cell in any tower); the controller's lines
 //     RUN_*             with exact EU: the 64 A dynamo hatch puts 19/20 of what it gives into the network (the generator array makes
 //                       512 EU/t: its steam pays it), the dynamo cover drains a charged battery buffer at 95%, the Moon's EBF runs
 //                       on its wireless hatches (120 EU/t of recipe progress, all from the network), the Moon's macerator runs on its
-//                       cover, the MV hatch gets nothing (the network is LV; its readout says so), and the store's balance is in - out.
-//                       A settlement between tower B forming and tower A forming sees tower B alone (MV) and rightly fills the MV
-//                       hatch: that fill is reported (the network it saw must be 1 tower, MV) and emptied before the run
+//                       cover, the MV hatch is filled (the network is MV, its strongest cell: no weakest-cell gate; its readout is the plain one), and the store's balance is in - out.
 //     UNLOADED          the whole Overworld band unloaded (a chunk next to a force-loaded one stays loaded), the Moon running: both
 //                       towers still count (recorded), the far buffer's cover pauses; RESUMED: loaded again, the towers form again and
 //                       the cover takes EU again
@@ -39,7 +37,7 @@
 //                       the event is cancelled, one is left; the shift-click readout on it; GTM's removeCover gives the item back
 //     PLACE_BREAK       the fake player places an LV wireless energy hatch (the item's useOn: BlockEvents.placed tracks it) and breaks
 //                       it (ServerPlayerGameMode#destroyBlock: BlockEvents.broken forgets it)
-//     SAVE_RELOAD       save-all flush, the saved kubejs_persistent_data.nbt read back (NBTIO): the list and the store as they were;
+//     STRONGEST (WL-1)  after SAVE_RELOAD: a tower of mixed cells (an LV and a MAX cell) forms next to the others: its tier\n//                       is its strongest cell (MAX), the network's is MAX, and a new LV hatch and a new MAX hatch on the Moon are both filled\n//     SAVE_RELOAD       save-all flush, the saved kubejs_persistent_data.nbt read back (NBTIO): the list and the store as they were;
 //                       both keys dropped and merged back from the file (KubeJS's own load path): the network is the same
 // TEST AREA: this test force-loads, clears and builds ONLY its band in each dimension (AGENTS.md: tests run at the same time in one server),
 // and clears and releases it at the end, with its persistent data keys.
@@ -75,12 +73,18 @@
   var EBF = { x: 13316, z: 6 }
   var MOON_MAC = { x: 13326, z: 4 }
   var MV_HATCH = { x: 13332, z: 4 }
+  // WL-1: one more tower on the Overworld (an LV and a MAX cell), a new LV hatch and a new MAX hatch on the Moon
+  var TOWER_D = { x: 13352, z: 36 }
+  var LV_HATCH2 = { x: 13340, z: 4 }
+  var MAX_HATCH = { x: 13346, z: 4 }
 
   var LV_CELL = 'grindless:lv_capacitor_cell'
   var MV_CELL = 'grindless:mv_capacitor_cell'
+  var MAX_CELL = 'grindless:max_smes_cell'
   var DYNAMO_64A = 'gtceu:lv_wireless_dynamo_hatch_64a'
   var HATCH_LV = 'gtceu:lv_wireless_energy_hatch'
   var HATCH_MV = 'gtceu:mv_wireless_energy_hatch'
+  var HATCH_MAX = 'gtceu:max_wireless_energy_hatch'
   var ARRAY_ID = 'gtceu:generator_array'
   var STEAM = 'gtceu:steam'
   var BUFFER = 'gtceu:lv_battery_buffer_4x'
@@ -649,9 +653,9 @@
     var lines = new (lazy().AL)()
     try { ctrl.getDefinition().getAdditionalDisplay().accept(ctrl, lines) } catch (e) { lines.add(Text.of('display failed: ' + e)) }
     var texts = asArray(lines).map(function (c) { return String(c.getString()) })
-    check('TOWERS', a.formed && b.formed && a.cells === 4 && a.tier === 1 && b.cells === 2 && b.tier === 2 && st.up && st.capacity === want && st.tier === 1 && st.towers === 2,
+    check('TOWERS', a.formed && b.formed && a.cells === 4 && a.tier === 1 && b.cells === 2 && b.tier === 2 && st.up && st.capacity === want && st.tier === 2 && st.towers === 2,
       'tower A ' + JSON.stringify(a) + '; tower B ' + JSON.stringify(b) + '; the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' (want 4 x 720,000 + 2 x 2,520,000 = ' + want +
-      '), tier ' + st.tier + ' (the weakest cell: LV); tower A\'s controller lines [' + texts.join(' / ') + ']')
+      '), tier ' + st.tier + ' (the strongest cell: MV); tower A\'s controller lines [' + texts.join(' / ') + ']')
   }
 
   // the EU a run in progress still owes (a generator) or will still use: its EU/t x the ticks it has left; 0 when no run is on
@@ -691,20 +695,8 @@
       macWork: 0,
       mvMax: 0
     }
-    // a settlement between tower B forming and tower A forming had an MV network (tower B alone) and rightly filled the MV hatch: that
-    // fill is reported, then emptied, so the run measures the LV network only
-    var held = stored(S.mvHatch)
-    if (held > 0) S.mvHatch.energyContainer.changeEnergy(-held)
-    S.run.mvBefore = held
-    S.run.mvPre = S.mvPre || null
+    // the network is MV from the first settlement (tower B alone, then both towers): the MV hatch is filled during the run
     S.run.mvFlow = JSON.parse(JSON.stringify(flowOf(MOON, MV_HATCH, MY)))
-  }
-
-  // while the towers form: the first settlement that fills the MV hatch, with the network that settlement saw
-  function watchMvBeforeRun() {
-    if (S.mvPre || stored(S.mvHatch) <= 0) return
-    var last = W().last || { tier: 0, towers: 0 }
-    S.mvPre = { at: S.t - S.phaseAt, held: stored(S.mvHatch), tier: Number(last.tier), towers: Number(last.towers) }
   }
 
   function countItem(handler, id) {
@@ -795,16 +787,12 @@
     check('RUN_MOON_COVER', R.macWork > 0 && dust > 0 && macUsed === byRuns && macEut > 0,
       'on the Moon the LV macerator worked ' + R.macWork + ' ticks on its LV energy cover: ' + dust + ' iron dust (' + macEut + ' EU/t x ' + macDuration + ' ticks each, progress ' +
       R.macProgress + ' -> ' + macProgress + ') = ' + byRuns + ' EU; the cover put ' + macFilled + ' EU in, its buffer went ' + R.mac + ' -> ' + stored(S.moonMac) + ': ' + macUsed + ' EU used')
-    // the MV hatch: nothing, the network is LV; anything it got before the run came from a settlement that saw tower B (MV) alone
+    // the MV hatch: filled, the network is MV (its strongest cell); no hatch is above it and the readout is the plain one
     var readout = shiftClick(MOON, MV_HATCH.x, MY, MV_HATCH.z, L.Direction.UP)
     var mvRunFilled = flowOf(MOON, MV_HATCH, MY).filled - R.mvFlow.filled
-    var pre = R.mvPre
-    var preOk = R.mvBefore === 0 || (pre !== null && pre.tier === 2 && pre.towers === 1)
-    check('RUN_TIER_GATE', R.mvMax === 0 && stored(S.mvHatch) === 0 && mvRunFilled === 0 && preOk && w.last.skippedAbove > 0 &&
-      readout === 'message.grindless.wireless.above_tier [MV, LV]',
-      'the MV wireless energy hatch on the Moon held at most ' + R.mvMax + ' EU and was filled ' + mvRunFilled + ' EU while the network was LV (skipped above the tier each settlement: ' +
-      w.last.skippedAbove + '); before the run it held ' + R.mvBefore + ' EU' + (pre ? ' (filled ' + pre.held + ' EU ' + pre.at + ' ticks after the towers were placed, by a settlement whose network was ' +
-      pre.towers + ' tower(s), tier ' + pre.tier + ': tower B formed before tower A; emptied at the run\'s start)' : '') + '; readout: ' + readout)
+    check('RUN_STRONGEST_TIER', R.mvMax > 0 && mvRunFilled > 0 && w.last.skippedAbove === 0 && Number(w.last.tier) === 2 && readout.indexOf('message.grindless.wireless.readout') === 0,
+      'the MV wireless energy hatch on the Moon held at most ' + R.mvMax + ' EU and was filled ' + mvRunFilled + ' EU while the network was MV, the strongest cell of tower A (LV) and tower B (MV) (skipped above the tier: ' +
+      w.last.skippedAbove + ', tier ' + w.last.tier + '); readout: ' + readout)
   }
 
   // the Overworld band unloaded (every chunk of it: a chunk next to a force-loaded one stays loaded), the Moon still running: both towers
@@ -840,7 +828,7 @@
       var f = flowOf(EARTH, FAR_BUFFER, EY, 'up')
       var ebf = flowOf(MOON, { x: EBF.x, z: EBF.z + 2 }, MY).filled
       var entries = w.tracked(S.server).filter(function (e) { return e.k === 'tower' }).map(function (e) { return JSON.stringify(e) })
-      check('UNLOADED', st.towers === 2 && st.capacity === 4 * 720000 + 2 * 2520000 && st.tier === 1 && f.filled === U.flowUnloaded.filled && ebf > U.ebfFilled,
+      check('UNLOADED', st.towers === 2 && st.capacity === 4 * 720000 + 2 * 2520000 && st.tier === 2 && f.filled === U.flowUnloaded.filled && ebf > U.ebfFilled,
         'with the Overworld band unloaded for ' + (S.t - U.unloadedAt) + ' ticks: the network still counts ' + st.towers + ' towers, ' + st.capacity + ' EU, tier ' + st.tier +
         ' (recorded: ' + entries.join(' ; ') + '); the far buffer\'s cover got nothing (filled ' + U.flowUnloaded.filled + ' -> ' + f.filled + '); the Moon\'s EBF hatch kept drawing (' +
         U.ebfFilled + ' -> ' + ebf + ')')
@@ -890,8 +878,8 @@
         var b2 = w.towerInfo(ctrlB)
         var want = 4 * 720000 + 2 * 2520000
         var ps = U.pendingStore
-        check('RESUMED', f2.filled > U.flowLoaded.filled && charge > U.charge && st2.towers === 2 && st2.capacity === want && st2.tier === 1 && a2.cells === 4 &&
-          b2.cells === 2 && (!ps || (ps.towers === 2 && ps.capacity === want && ps.tier === 1)),
+        check('RESUMED', f2.filled > U.flowLoaded.filled && charge > U.charge && st2.towers === 2 && st2.capacity === want && st2.tier === 2 && a2.cells === 4 &&
+          b2.cells === 2 && (!ps || (ps.towers === 2 && ps.capacity === want && ps.tier === 2)),
           'loaded again: the towers and the array checked again by GTM ' + (U.loadedAt - U.reloadAt) + ' ticks after the reload' +
           (U.sawPending ? ' (until then the network kept their recorded cells: ' + (ps ? ps.towers + ' towers, ' + ps.capacity + ' EU, tier ' + ps.tier : 'no settlement read') + ')' : '') +
           '; read again: tower A ' + a2.cells + ' cells, tower B ' + b2.cells + ', the network ' + st2.towers + ' towers, ' + st2.capacity + ' EU, tier ' + st2.tier +
@@ -964,14 +952,12 @@
     var U = Sw.unformed
     var flows = (w.totals.in - Sw.totals.in) - (w.totals.out - Sw.totals.out)
     var kept = w.stored(S.server) - Sw.store === flows
-    // from the run's start (both towers formed, LV) to the swap
-    var lvFilled = Sw.mvFlow0.filled - S.run.mvFlow.filled
     check('SWAP', U.towers === 1 && U.capacity === 2 * 2520000 && U.tier === 2 && kept && info.cells === 4 && info.tier === 2 && st.towers === 2 && st.capacity === want &&
-      st.tier === 2 && mvFlow.filled > Sw.mvFlow.filled && stored(S.mvHatch) > 0 && lvFilled === 0,
+      st.tier === 2 && mvFlow.filled > Sw.mvFlow.filled && stored(S.mvHatch) > 0,
       'breaking the cells unformed tower A: the network was tower B alone (' + U.towers + ' tower, ' + U.capacity + ' EU, tier ' + U.tier + '), the store ' + Sw.store + ' -> ' +
       U.store + ' EU; MV cells placed: formed again in ' + (Sw.reformedAt - Sw.placedAt) + ' ticks with ' + JSON.stringify(info) + '; the network: ' + st.towers + ' towers, ' +
       st.capacity + ' EU (want ' + want + '), tier ' + st.tier + '; the store moved only by its flows (' + Sw.store + ' -> ' + w.stored(S.server) + ', in - out ' + flows + '): ' +
-      kept + '; the MV hatch on the Moon (nothing while the network was LV: ' + lvFilled + ') emptied at the re-form and filled again: ' + Sw.mvFlow.filled + ' -> ' +
+      kept + '; the MV hatch on the Moon, emptied at the re-form and filled again: ' + Sw.mvFlow.filled + ' -> ' +
       mvFlow.filled + ', holds ' + stored(S.mvHatch))
     Sw.done = true
   }
@@ -1056,6 +1042,33 @@
       'a fake player placed an LV wireless energy hatch against the click macerator (useOn -> ' + res + ', the block ' + placed + '): tracked ' + afterPlace +
       ' time(s) (BlockEvents.placed); it broke it (ServerPlayerGameMode#destroyBlock -> ' + broke + (gm ? '' : ', no gameMode field') + ', now ' + gone + '): tracked ' +
       afterBreak + ' (BlockEvents.broken)')
+  }
+
+    // WL-1: a tower of an LV and a MAX cell: the tower and the network are MAX (the strongest cell), and an LV and a MAX hatch are both filled
+  function startStrongest() {
+    var failed = []
+    var d = placeTower(EARTH, TOWER_D, [LV_CELL, MAX_CELL])
+    failed = failed.concat(d.failed)
+    setblock(MOON, LV_HATCH2.x, MY, LV_HATCH2.z, HATCH_LV + '[facing=north]', failed)
+    setblock(MOON, MAX_HATCH.x, MY, MAX_HATCH.z, HATCH_MAX + '[facing=north]', failed)
+    var w = W()
+    S.towerD = w.track(S.earth, bp(TOWER_D.x, EY, TOWER_D.z))
+    w.track(S.moon, bp(LV_HATCH2.x, MY, LV_HATCH2.z))
+    w.track(S.moon, bp(MAX_HATCH.x, MY, MAX_HATCH.z))
+    S.strongest = { at: S.t, failed: failed }
+  }
+
+  function reportStrongest() {
+    var w = W()
+    var d = w.towerInfo(machineAt(EARTH, TOWER_D.x, EY, TOWER_D.z))
+    var st = w.settle(S.server)
+    var lvH = machineAt(MOON, LV_HATCH2.x, MY, LV_HATCH2.z)
+    var maxH = machineAt(MOON, MAX_HATCH.x, MY, MAX_HATCH.z)
+    var lvEU = stored(lvH)
+    var maxEU = stored(maxH)
+    check('STRONGEST_TIER', S.strongest.failed.length === 0 && d.formed && d.cells === 2 && d.tier === 14 && st.tier === 14 && w.last.skippedAbove === 0 && lvEU > 0 && maxEU > 0,
+      'a tower of an LV and a MAX cell: ' + JSON.stringify(d) + '; the network tier ' + st.tier + ' (want 14, MAX); skipped above the tier ' + w.last.skippedAbove +
+      '; the new LV hatch holds ' + lvEU + ' EU and the new MAX hatch ' + maxEU + ' EU (both must be filled)' + (S.strongest.failed.length ? ' FAILED ' + S.strongest.failed.join('; ') : ''))
   }
 
   // save-all flush, the file read back, the keys dropped and merged back from it
@@ -1192,6 +1205,14 @@
     if (S.phase === 'save') {
       if (since >= 60) {
         guarded('SAVE_RELOAD', reportSave)
+        startStrongest()
+        phase('strongest')
+      }
+      return
+    }
+    if (S.phase === 'strongest') {
+      if (since >= 160) {
+        guarded('STRONGEST_TIER', reportStrongest)
         phase('end')
       }
     }
@@ -1203,7 +1224,6 @@
     try {
       if (S.arrayP && S.arrayP.input && S.earth.isLoaded(bp(ARRAY.x, EY, ARRAY.z))) feedSteam()
       if (S.phase === 'no_tower' && String(S.arrayP.ctrl.getRecipeLogic().getStatus()) === 'WORKING') S.noTower.work++
-      if (S.phase === 'towers') watchMvBeforeRun()
       if (S.phase === 'run') measureRun()
       if (S.phase === 'cap') measureCap()
       if (S.t % 5 === 0 && S.phase !== 'end') step()

@@ -8,7 +8,7 @@
 //   gtceu:wireless_energy_tower                 the store: a multiblock of ours (LV, lib/patterns.js), 3 x 3 x 8. Its 32 cell slots take
 //                                               capacitor cells of any tier (or its casing, an empty slot); a formed tower adds the
 //                                               capacity of its cells to the network, and several towers add up. The network's tier
-//                                               is the lowest tier among the cells of every formed tower (the idea of GTM 7.5.3's Power
+//                                               is the strongest cell in any formed tower (the idea of GTM 7.5.3's Power
 //                                               Substation, cells read from the formed structure, and of GTNH's Lapotronic
 //                                               Supercapacitor, both LGPL-3.0; nothing copied). No machine part: energy comes in and
 //                                               goes out wirelessly. GTM's dummy recipe type, like GTM's own substation.

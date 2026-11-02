@@ -92,7 +92,7 @@ IV leaves, as built:
 - **Power:**
   - fission at 131,072 EU/t per full heavy-water reactor;
   - the RTG cell `gtceu:ev_rtg` (2,048 EU/t; a pellet an hour);
-  - from v0.7.x, **the global wireless network**, LV to IV. It has one server-wide bank, a tower whose weakest cell sets the output tier, wireless energy and dynamo hatches at 2, 4, 16 and 64 A, covers for single blocks, and a 5 % loss on entry.
+  - from v0.7.x, **the global wireless network**, LV to IV. It has one server-wide bank, a tower whose strongest cell sets the output tier, wireless energy and dynamo hatches at 2, 4, 16 and 64 A, covers for single blocks, and a 5 % loss on entry.
 - **Hot cell:** xenon from reprocessing, Pu-241, radon (Quantum Stars) and RTG pellets.
 - **Other plants:**
   - the fluorspar kiln (HF and F₂);
@@ -1131,7 +1131,7 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
 - **How it flows:**
   - Generators put their EU into the global network: multiblocks through wireless dynamo hatches, single blocks (reactor III, RTG cells) through wireless dynamo covers. The network takes 5 % on entry.
   - Every base draws through wireless energy hatches and covers, in any dimension.
-  - The output tier is the lowest cell tier among the formed towers.
+  - The output tier is the strongest cell tier among the formed towers (WL-1, 2026-11-02: a MAX cell feeds every hatch and cover).
   - EU P2P over AE2 stays as the alternative (a 2.5 % toll).
 - **The LuV tier** (package A4, with the wireless package's own mechanism):
   - LuV wireless energy and dynamo hatches at 2, 4, 16 and 64 A (`gtceu:luv_wireless_energy_hatch` and `gtceu:luv_wireless_dynamo_hatch`, with `_4a`, `_16a` and `_64a`) and LuV covers (`grindless:luv_wireless_energy_cover` and `grindless:luv_wireless_dynamo_cover`);
