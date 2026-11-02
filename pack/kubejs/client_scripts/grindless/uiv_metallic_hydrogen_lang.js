@@ -25,7 +25,7 @@
             'Circuit 7: a metallic hydrogen winding, 16 wires round tungsten plates (UIV-A2).'],
 
         ['gtceu.recipe.grindless_ramp_compression.mh_quench',
-            'Fiction: real metallic hydrogen needs about 400 GPa and reverts on release; here the pulser quenches it so the rod survives at one atmosphere. The hydrogen shards go back to the cryogenic plant.'],
+            'Fiction: real metallic hydrogen needs about 400 GPa and reverts on release; here the pulser quenches it so the rod survives. The hydrogen shards go back to the cryogenic plant.'],
         ['gtceu.recipe.grindless_ramp_compression.lonsdaleite_shock',
             'Shock-compressed pyrolytic graphite turns into hexagonal diamond; the unconverted graphite goes back to stock.'],
         ['gtceu.recipe.grindless_ramp_compression.cg_nitrogen_shock',

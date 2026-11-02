@@ -22,7 +22,8 @@
 //                  (GTM ORs the dimension conditions of one recipe, DimensionCondition.isOr, so reversed ones cannot say "not the Moon and
 //                  not Mars"), so it is dead on the Moon, on Mars and in orbit. A fuel that carries its own oxidizer (methalox, the
 //                  rocket fuels: the table's burnAnywhere) gets none and burns anywhere, in the plant too. In order:
-//                    - the gas turbine recipe has dimension conditions: they are copied as they are (generators.js put them there, or the
+//                    - the gas turbine recipe has dimension conditions: they are copied as they are, and so is its air flag
+//                      (data grindless_air, which makes the recipe list show the air line; generators.js put both there, or the
 //                      recipe was placed on purpose);
 //                    - it has none and the fuel is in burnAnywhere: none;
 //                    - it has none otherwise (a fuel some script added after generators.js without them): global.grindless.power.
@@ -265,6 +266,7 @@
       steam: steam,
       water: Math.ceil(steam / STEAM_PER_WATER),
       site: where.site,
+      air: where.site === 'copied' && Number((j.data || {}).grindless_air) > 0,
       dims: where.dims
     }
   }
@@ -301,7 +303,10 @@
       b.inputFluids(Fluid.of(DISTILLED_WATER, p.water))
       b.outputFluids(Fluid.of(STEAM, p.steam))
       if (p.site === 'air') G.power.burnsInAir(b)
-      else p.dims.forEach(function (d) { b.dimension(d.dimension, d.reverse) })
+      else {
+        p.dims.forEach(function (d) { b.dimension(d.dimension, d.reverse) })
+        if (p.air) b.addData('grindless_air', 1)
+      }
       b.EUt(-p.eut).duration(p.duration)
       added.push(p)
     })

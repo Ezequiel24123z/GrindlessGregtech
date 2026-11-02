@@ -15,9 +15,9 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.electron_beam_furnace.2', 'A hearth under an electron gun in hard vacuum: the metal is melted drop by drop and the volatile impurities boil off, leaving 6N purity.')
     add('emi.grindless.info.electron_beam_furnace.3', 'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses, an optional input hatch. Accepts a parallel hatch.')
 
-    add('emi.grindless.info.entanglement_station.0', "The Entanglement Station entangles photons from a PPKTP source with a europium memory and checks them with SNSPDs. Circuit 1: a quantum repeater node, in one pass. It works only in Earth orbit.")
+    add('emi.grindless.info.entanglement_station.0', "The Entanglement Station entangles photons from a PPKTP source with a europium memory and checks them with SNSPDs. Circuit 1: a quantum repeater node, in one pass.")
     add('emi.grindless.info.entanglement_station.1', "It is the only maker of quantum repeater nodes. The memory is held in superfluid helium, which is not used up.")
-    add('emi.grindless.info.entanglement_station.2', 'Entangles photons from a PPKTP source with an Eu:YSO memory and checks them with SNSPDs: the only maker of quantum repeater nodes. Earth orbit only.')
+    add('emi.grindless.info.entanglement_station.2', 'Entangles photons from a PPKTP source with an Eu:YSO memory and checks them with SNSPDs: the only maker of quantum repeater nodes.')
     add('emi.grindless.info.entanglement_station.3', 'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 output buses, an optional input hatch. Accepts a parallel hatch.')
 
     add('emi.grindless.info.heavy_ion_cyclotron.0', "The Heavy Ion Cyclotron fires a calcium-48 beam at an actinide target; a helium chamber takes the recoil. Circuit 1: flerovium (plutonium-244). 2: livermorium (curium-248). 3: tennessine (target wheel). 4: oganesson (californium-249). 5: moscovium (americium). 6: a xenon beam on polycarbonate foil. Circuits 7 and 8 are the element 120 and 119 lines.")
