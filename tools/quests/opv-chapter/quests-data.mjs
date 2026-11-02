@@ -38,7 +38,7 @@ export const QUESTS = [
     key: 'LOOK', kind: 'reading', title: 'The Way In', icon: 'gtceu:opv_machine_casing',
     deps: ['START'], x: 2, y: 0,
     desc: [
-      'Three places lie ahead: a magnetar for chain matter, Cygnus X-1 for the jet and a black hole\'s beam, and a globular cluster for probes. The machine and circuit tabs hold the parts, and the integration tab holds the power.',
+      'Three places lie ahead: a magnetar for chain matter, Cygnus X-1 for the jet and a black hole\'s beam, and a globular cluster for probes.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -56,7 +56,7 @@ export const QUESTS = [
     key: 'LAUNCH', kind: 'step', title: 'Seed Away', icon: 'grindless:launched_bulge_seed',
     deps: ['RELAY'], x: 6, y: 0,
     desc: [
-      'The warp gate throws the seed across the dark between the arm and the bulge. Nothing comes back, and that is the idea.',
+      'The warp gate throws the seed across the dark between the arm and the bulge. The launched seed is spent at the final gate.',
       'The gate is fiction. The magsail braking it uses is real physics.',
     ],
     tasks: [it('grindless:launched_bulge_seed')],
@@ -292,7 +292,7 @@ export const QUESTS = [
     key: 'MAX', kind: 'exit', title: 'Gate to MAX', icon: 'gtceu:max_machine_casing',
     deps: ['CENSUS3'], x: 36, y: 0,
     desc: [
-      'The Sagittarius A* chart is not on any shelf yet. When your power is ready, the warp gate waits for the Kugelblitz core, the light census, the stable exotic matter, a tetron array, census IV, the bulge chart and OpV-tier circuit tags.',
+      'The Sagittarius A* chart is not on any shelf yet. When your power is ready, the warp gate waits for the Kugelblitz core, the launched bulge seed, the light census, the stable exotic matter, a tetron array, census IV, the bulge chart and OpV-tier circuit tags.',
       'It writes the chart and researches the &6MAX Machine Casing&r. Charge your SMES bank first.',
     ],
     tasks: [it('gtceu:max_machine_casing')],

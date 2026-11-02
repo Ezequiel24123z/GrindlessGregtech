@@ -32,35 +32,35 @@ export const QUESTS = [
     desc: [
       'The Stream and the Tarantula are running. Andromeda is next, then the dark between the galaxies. Both gates start from places you already own.',
     ],
-    tasks: [it('grindless:optical_nav_core')],
+    tasks: [ck()],
     rewards: [xp(100)],
   },
   {
     key: 'NAV18', kind: 'step', title: 'A Course for Andromeda', icon: 'grindless:optical_nav_core',
     deps: ['STAGE2'], x: 2, y: 0,
     desc: [
-      'The gate to Andromeda is built at 30 Doradus. Its probe gets a navigation core cut for a nucleus that is coming toward us, and so for a different sky.',
+      'The gate to Andromeda is built at 30 Doradus. Its probe gets a navigation core cut for a nucleus that is coming toward us, and so for a different sky. It is the same item as before: if you hold one, that is all this step needs.',
     ],
-    tasks: [it('grindless:optical_nav_core')],
+    tasks: [ck()],
     rewards: [xp(200)],
   },
   {
-    key: 'PROBE18', kind: 'step', title: 'Probe for M31', icon: 'grindless:launched_ig_probe',
+    key: 'PROBE18', kind: 'step', title: 'Probe for M31', icon: 'grindless:ig_relay_probe',
     deps: ['NAV18'], x: 4, y: 0,
     desc: [
-      'The same relay probe as before, launched from a different gate. It is a long way, so check the lock is in the shell.',
+      'Build another intergalactic relay probe, the same recipe as before. The gate\'s hold at the Tarantula takes the finished probe, so keep it unlaunched. Check this off once it is in hand.',
     ],
-    tasks: [it('grindless:ig_relay_probe'), it('grindless:launched_ig_probe')],
+    tasks: [ck()],
     rewards: [xp(200)],
   },
   {
     key: 'M31', kind: 'step', title: 'The Nucleus of M31', icon: 'grindless:launched_ig_probe',
     deps: ['PROBE18'], x: 6, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'The gate opens on the nucleus of Andromeda, bathed in gamma light. Nothing is rewarded for the gate itself.',
+      'The gate opens on the nucleus of Andromeda, bathed in gamma light.',
     ],
     tasks: [dim('grindless:m31_nucleus_orbit')],
-    rewards: [xp(250)],
+    rewards: [],
   },
   {
     key: 'J_M31', kind: 'reading', title: 'The Platform at M31', icon: 'gtceu:blueshift_forge',
@@ -103,28 +103,28 @@ export const QUESTS = [
     key: 'NAV19', kind: 'step', title: 'A Course for the Filament', icon: 'grindless:optical_nav_core',
     deps: ['J_M31'], x: 10, y: 0,
     desc: [
-      'The last gate leaves from M31 and aims at the thin web of gas between the galaxies. Its navigation core is cut for a sky with almost nothing in it.',
+      'The last gate leaves from M31 and aims at the thin web of gas between the galaxies. Its navigation core is cut for a sky with almost nothing in it; it is the same item as before.',
     ],
-    tasks: [it('grindless:optical_nav_core')],
+    tasks: [ck()],
     rewards: [xp(250)],
   },
   {
-    key: 'PROBE19', kind: 'step', title: 'Probe for the Filament', icon: 'grindless:launched_ig_probe',
+    key: 'PROBE19', kind: 'step', title: 'Probe for the Filament', icon: 'grindless:ig_relay_probe',
     deps: ['NAV19'], x: 12, y: 0,
     desc: [
-      'One more probe, launched from Andromeda this time. The platform here builds the gate; you carry the controller.',
+      'One more intergalactic relay probe, kept unlaunched: the gate\'s hold at M31 takes it. The platform here builds the gate; you carry the controller. Check this off once the probe is in hand.',
     ],
-    tasks: [it('grindless:ig_relay_probe'), it('grindless:launched_ig_probe')],
+    tasks: [ck()],
     rewards: [xp(250)],
   },
   {
     key: 'VOID', kind: 'step', title: 'The Local Group Filament', icon: 'grindless:void_grown_diamond',
     deps: ['PROBE19'], x: 14, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'Almost nothing here: cold, clean and dark. Nothing is rewarded for the gate itself.',
+      'Almost nothing here: cold, clean and dark.',
     ],
     tasks: [dim('grindless:local_group_filament')],
-    rewards: [xp(250)],
+    rewards: [],
   },
   {
     key: 'J_VOID', kind: 'reading', title: 'The Platform in the Dark', icon: 'gtceu:void_crystal_fab',
@@ -163,7 +163,7 @@ export const QUESTS = [
     key: 'SCALE', kind: 'reading', title: 'Scale', icon: 'gtceu:hyperfactory',
     deps: ['J_VOID'], x: 18, y: 0,
     desc: [
-      'The stage after this one wants millions of parts, and no one builds millions by hand. A bigger factory, a wider hatch and a grid that can hold the plan are coming. The tabs for machines and integration have them.',
+      'The stage after this one wants millions of parts, and no one builds millions by hand. A bigger factory, a wider hatch and a grid that can hold the plan are coming. The Machines and Integration sections of this chapter have them.',
     ],
     tasks: [ck()],
     rewards: [xp(50)],

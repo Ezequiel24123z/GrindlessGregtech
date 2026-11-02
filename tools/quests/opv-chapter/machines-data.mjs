@@ -65,7 +65,7 @@ export const QUESTS = [
   gear('TFAB', 'tetron_fab', 'Tetron Fab', ['M_L_TFAB'], 2, 0, {
     for: 'The &6Tetron Fab&r grows two nanowires, bonds a superconducting backbone between them and tests the parity of the pair. Nothing older builds a qubit that is read that way.',
     needs: 'An OpV hull, the plascrete shell, cleanroom glass and a superconducting coil, with silicon-28 wafers to work on.',
-    unlocks: 'The tetron die and the tetron array, which opv_age asks for as a product.',
+    unlocks: 'The tetron die and the tetron array, which the chain parts need.',
     automate: 'Wafers and metals by ME; failed dies come out in their own output, so route them back to the start.',
   }, [PLASCRETE, CGLASS, COIL], 150),
   prod('GATED', 'Gated 2DEG Wafer', 'grindless:gated_2deg_wafer', ['TFAB'], 4.5, 0,
@@ -81,7 +81,7 @@ export const QUESTS = [
   gear('AHF', 'antihydrogen_foundry', 'Antihydrogen Foundry', ['M_L_AHF'], 2, 3, {
     for: 'The &6Antihydrogen Foundry&r merges antiprotons and positrons in a trap, cools the atoms with a laser and freezes them into a cell. It is the first neutral antimatter in the pack.',
     needs: 'An OpV hull, the negative-potential casing and the annihilation shield casing, with antiprotons and positrons from SGR 1806-20.',
-    unlocks: 'The antihydrogen cell that opv_age asks for, and the strangelet vault.',
+    unlocks: 'The antihydrogen cell, and the strangelet vault.',
     automate: 'Antiprotons and positrons by the beam lines; cells are the product to chest.',
   }, [NEG, SHIELD], 200),
   prod('NEGC', 'Negative-Potential Casing', 'grindless:neg_xhv_casing', ['AHF'], 4.5, 3,
@@ -121,7 +121,7 @@ export const QUESTS = [
   gear('SDIST', 'strangelet_distiller', 'Strangelet Distiller', ['COOLER'], 2, 12, {
     for: 'The &6Strangelet Distiller&r boils the strangeness out of a lead-208 fireball and catches it as a droplet seed, catalysed by a pasta core sample.',
     needs: 'An OpV hull, the field-frozen casing and fusion glass.',
-    unlocks: 'The strangelet seed that opv_age asks for, and the exotic matter after it.',
+    unlocks: 'The strangelet seed, and the exotic matter after it.',
     automate: 'Beam and sample by ME; seeds go straight to the vault.',
   }, [FROZENC, FGLASS], 200),
   gear('KFORGE', 'kugelblitz_forge', 'Kugelblitz Forge', ['SDIST'], 2, 13.5, {
@@ -153,7 +153,7 @@ export const QUESTS = [
   gear('HARV', 'debris_harvester', 'Debris Harvester', ['M_L_HARV'], 2, 21, {
     for: 'The &6Debris Harvester&r collects and sorts the debris of the core into metal and silicate, so the cluster feeds the probe with nothing from home.',
     needs: 'An OpV hull, the robust casing and a steel gearbox.',
-    unlocks: 'The bulge debris that opv_age asks for, and the refinery behind it.',
+    unlocks: 'The bulge debris, and the refinery behind it.',
     automate: 'Run it continuously and split the output by item filter into metal and silicate.',
   }, [ROBUST, it('gtceu:steel_gearbox')], 150),
   gear('REFINE', 'replication_refinery', 'Replication Refinery', ['HARV'], 2, 22.5, {
@@ -165,7 +165,7 @@ export const QUESTS = [
   gear('NODEW', 'collector_node_works', 'Collector Node Works', ['REFINE'], 4.5, 22.5, {
     for: 'The &6Collector Node Works&r turns local silicon into thin photovoltaic nodes and packs them onto a seed, four at a time.',
     needs: 'An OpV hull, cleanroom glass, plascrete and assembly line grating.',
-    unlocks: 'The deployed node pack that opv_age asks for, and the bulge collector in the power chapter.',
+    unlocks: 'The deployed node pack, and the bulge collector.',
     automate: 'Silicon from the harvester line; one pack per seed, so send them straight out.',
   }, [CGLASS, PLASCRETE, GRATING]),
   gear('FOUNDRY', 'von_neumann_foundry', 'Von Neumann Foundry', ['REFINE'], 2, 24, {

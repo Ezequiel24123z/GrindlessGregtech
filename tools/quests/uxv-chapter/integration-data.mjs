@@ -98,8 +98,8 @@ export const QUESTS = [
     deps: ['MK6C4'], x: 10, y: 0,
     teach: {
       for: 'The &6Direct Energy Converter&r takes four Mk6 plasmas and returns current plus ash, and the &6Plasma Quench Caster&r splits that ash into stock. Both are older machines with new rows.',
-      needs: 'The plasma buckets of the four burns. The converter\'s output is written final, so no generator array doubles it.',
-      unlocks: 'The Mk6 figures on the Power tab.',
+      needs: 'The plasma buckets of the four burns.       The converter\'s output is not doubled by a generator array.',
+            unlocks: 'Current from the Mk6 burns, and ash for stock.',
       automate: 'Plasma by pipe from the ring; leave the converter\'s hatches free of anything else.',
     },
     desc: [],
@@ -170,8 +170,8 @@ export const QUESTS = [
     key: 'CELL', kind: 'machine', title: 'The UXV Cell', icon: 'grindless:uxv_smes_cell',
     deps: ['START'], x: 2, y: 10,
     teach: {
-      for: 'The nitride magnet works winds the &6UXV SMES Cell&r with pasta strand. It is the largest store in the pack.',
-      needs: 'Strand tape and lasagna plate from Vela, and the nitride magnet works from UEV.',
+      for: 'The nitride magnet works winds the &6UXV SMES Cell&r       from four UIV cells, strand tape and superfluid helium.',
+            needs: 'Four UIV SMES Cells, strand tape, superfluid helium and a UXV-tier circuit, in the nitride magnet works.',
       unlocks: 'The UXV wireless tier.',
       automate: 'Nothing to feed. Size the towers for your busiest hour.',
     },
@@ -184,8 +184,8 @@ export const QUESTS = [
     deps: ['CELL'], x: 4, y: 10,
     teach: {
       for: 'Move your towers onto &6UXV SMES Cells&r and the wireless network carries UXV to every platform, Cygnus X-1, Vela and Cassiopeia A included.',
-      needs: 'Every formed tower holding UXV cells. Until then the network stays at UIV.',
-      unlocks: 'The wireless hatches at UXV, and the gate\'s load at Cygnus X-1.',
+      needs: '      One formed tower holding a UXV cell: the network runs at its strongest cell, so until then it stays at UIV.',
+            unlocks: 'The wireless hatches at UXV.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
     desc: [],
@@ -196,7 +196,7 @@ export const QUESTS = [
     key: 'I_GATELOAD', kind: 'milestone', title: 'Sixteen Amps of UXV', icon: 'gtceu:uxv_wireless_energy_hatch',
     deps: ['NETUXV'], x: 6, y: 10,
     desc: [
-      'The gate to OpV draws 2,147,483,648 EU/t for sixty seconds. One BZ dynamo and two polar cap taps on the wireless network cover it, or the Mk6 through the converter. The Power tab shows each source.',
+      'The gate to OpV draws 2,147,483,648 EU/t for sixty seconds. One BZ dynamo and two polar cap taps on the wireless network cover it, or two BZ dynamos, or four taps. The Mk6 converter gives far less and does not cover it. Check your sources, then tick this box.',
     ],
     tasks: [ck()],
     rewards: [xp(100)],

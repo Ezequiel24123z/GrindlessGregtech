@@ -38,7 +38,7 @@ export const QUESTS = [
     key: 'J_SPIN', kind: 'reading', title: 'Logic From Spin', icon: 'gtnn:spintronic_mainframe',
     deps: ['START'], x: 2, y: -4,
     desc: [
-      'Magnets a few atoms thick make memory that keeps its bits with the power off, and a sensor made of superfluid feels the Earth turn. They lead to the spintronic mainframe, the UXV circuit. The machine and circuit tabs have the lanes.',
+      'Magnets a few atoms thick make memory that keeps its bits with the power off, and a sensor made of superfluid feels the Earth turn. They lead to the spintronic mainframe, the UXV circuit.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -241,7 +241,7 @@ export const QUESTS = [
     key: 'ARM', kind: 'step', title: 'Arm Chart', icon: 'grindless:arm_chart',
     deps: ['TI44', 'PHASE'], x: 20, y: 0,
     desc: [
-      'The Matrioshka in Mercury orbit puts the elevator log, the Vela glitch record, the titanium-44 map and the Cygnus radio record together into the &6Arm Chart&r: our arm of the galaxy, mapped toward the centre.',
+      'The Matrioshka computing array puts the elevator log, the Vela glitch record, the titanium-44 map and the Cygnus radio record together into the &6Arm Chart&r: our arm of the galaxy, mapped toward the centre.',
     ],
     tasks: [it('grindless:arm_chart')],
     rewards: [xp(300)],
@@ -250,11 +250,11 @@ export const QUESTS = [
     key: 'HOLD', kind: 'milestone', title: 'Open the Bulge Gate', icon: 'gtceu:warp_gate',
     deps: ['ARM'], x: 22, y: 0,
     desc: [
-      'Hold the warp gate open at the full UXV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Take care of your power first: the BZ dynamo with polar cap taps, or the Mk6 through the converter.',
-      'The gate burns an FRC cartridge and keeps census III, the island chart, the arm chart, a pasta core sample and UXV-tier circuit tags in its store.',
+      '      Hold the warp gate open at the full UXV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Plan your power first: one BZ dynamo with two polar cap taps covers it.',
+            'The gate burns an FRC cartridge and keeps census III, the island chart, the arm chart, a pasta core sample and UXV-tier circuits in its store.',
     ],
     tasks: [ck()],
-    rewards: [xp(300)],
+          rewards: [],
   },
   {
     key: 'BULGE', kind: 'step', title: 'Chart the Bulge', icon: 'grindless:bulge_chart',
@@ -263,7 +263,7 @@ export const QUESTS = [
       'Through the open gate the seed looks at the crowded centre of the galaxy. The run gives the &6Bulge Chart&r.',
     ],
     tasks: [it('grindless:bulge_chart')],
-    rewards: [xp(150)],
+    rewards: [xp(450)],
   },
   {
     key: 'OPV', kind: 'exit', title: 'Gate to OpV', icon: 'gtceu:opv_machine_casing',

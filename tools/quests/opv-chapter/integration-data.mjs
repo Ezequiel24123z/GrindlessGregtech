@@ -99,7 +99,7 @@ export const QUESTS = [
     key: 'I_K3', kind: 'milestone', title: 'Kardashev III', icon: 'grindless:bulge_light_census',
     deps: ['I_BULGE'], x: 4, y: 5,
     desc: [
-      'A civilisation that uses the light of a whole galaxy\'s stars is Kardashev III. The pack asks for three proofs: the census from the sixty-four node run, a wireless network fed from home, Cygnus and Terzan 5 at once, and the gate\'s hold. The Power tab shows each source.',
+      'A civilisation that uses the light of a whole galaxy\'s stars is Kardashev III. The pack asks for three proofs: the census from the sixty-four node run, a wireless network fed from home, Cygnus and Terzan 5 at once, and the gate\'s hold. Check each source, then tick this box.',
     ],
     tasks: [ck()],
     rewards: [xp(150)],
@@ -149,9 +149,9 @@ export const QUESTS = [
     key: 'I_NET', kind: 'process', title: 'The Network Goes OpV', icon: 'gtceu:opv_wireless_energy_hatch',
     deps: ['I_CELL'], x: 4, y: 10,
     teach: {
-      for: 'Move your towers onto &6OpV SMES Cells&r and the wireless network carries OpV to every platform, the magnetar and the cluster included. The chain strand repeater keeps it in step across the bulge.',
-      needs: 'Every formed tower holding OpV cells. Until then the network stays at UXV.',
-      unlocks: 'The wireless hatches at OpV, and the gate\'s load at Cygnus X-1.',
+      for: 'Move your towers onto &6OpV SMES Cells&r and the wireless network carries OpV to every platform, the magnetar and the cluster included.       The chain strand repeater goes into the wireless hatches.',
+            needs: 'One formed tower holding an OpV cell: the network runs at its strongest cell, so until then it stays at UXV.',
+            unlocks: 'The wireless hatches at OpV.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
     desc: [],
@@ -162,7 +162,7 @@ export const QUESTS = [
     key: 'I_GATELOAD', kind: 'milestone', title: 'Eight Sources', icon: 'gtceu:opv_wireless_energy_hatch',
     deps: ['I_NET', 'I_K3'], x: 6, y: 7.5,
     desc: [
-      'The gate to MAX holds the largest load yet for sixty seconds. Eight of the big sources on the wireless network cover it, for example two engines, two collectors and a pair of bulge collectors beside the older dynamos and taps. Check each source on the Power tab, then tick this box.',
+      'The gate to MAX holds the largest load yet for sixty seconds. Eight of the big sources on the wireless network cover it, for example two engines, two collectors and a pair of bulge collectors beside the older dynamos and taps. Check each source, then tick this box.',
     ],
     tasks: [ck()],
     rewards: [xp(150)],

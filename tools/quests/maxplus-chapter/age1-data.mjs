@@ -105,7 +105,7 @@ export const QUESTS = [
     key: 'PROBE', kind: 'step', title: 'Intergalactic Relay Probe', icon: 'grindless:ig_relay_probe',
     deps: ['CW'], x: 8, y: 0,
     desc: [
-      'The old galactic-centre probe will not leave the Galaxy. This one carries a Hawking drive and its own navigation. The circuits tab says how it gets its brains.',
+      'The old galactic-centre probe will not leave the Galaxy. This one carries a Hawking drive and its own navigation. The Circuits section of this chapter says how it gets its brains.',
     ],
     tasks: [it('grindless:probe_seed'), it('grindless:hawking_drive'), it('grindless:ig_relay_probe')],
     rewards: [xp(200)],
@@ -123,7 +123,7 @@ export const QUESTS = [
     key: 'LAUNCH', kind: 'step', title: 'Probe Away', icon: 'grindless:launched_ig_probe',
     deps: ['PAIR'], x: 12, y: 0,
     desc: [
-      'The probe is on its way. The gate catches it at the far end, timed against the still horizon, so the lock has to be in the shell when it fires.',
+      'The probe is on its way. The gate catches it at the far end, timed against the still horizon, and the gate\'s hold takes a Horizon Lock as a catalyst.',
     ],
     tasks: [it('grindless:launched_ig_probe')],
     rewards: [xp(150)],
@@ -132,10 +132,10 @@ export const QUESTS = [
     key: 'LMC', kind: 'step', title: '30 Doradus', icon: 'grindless:launched_ig_probe',
     deps: ['LAUNCH'], x: 14, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'The gate opens in the Tarantula Nebula, beside the heaviest stars known. Nothing is rewarded for the gate itself.',
+      '      The gate opens in the Tarantula Nebula, beside the heaviest stars known.',
     ],
     tasks: [dim('grindless:tarantula_orbit')],
-    rewards: [xp(200)],
+          rewards: [],
   },
 
   // ------------------------------------------------------------------ the Tarantula
@@ -150,10 +150,10 @@ export const QUESTS = [
   },
   {
     key: 'RAW', kind: 'process', title: 'Plasma from the Heaviest Stars', icon: 'gtceu:confined_vms_plasma_bucket',
-    deps: ['J_TAR'], x: 18, y: -5,
+    deps: ['J_TAR', 'MA_LIFT'], x: 18, y: -5,
     teach: {
-      for: 'The &6stellar lift&r draws plasma from R136\'s very massive stars; a filter and a former turn it into confined core plasma.',
-      needs: 'A nozzle coil for the lift, and a platform here: the plasma stays where it is made.',
+      for: 'The &6stellar lift&r draws raw plasma from R136\'s very massive stars, and only here at the Tarantula. A filter and a former, which run anywhere, turn it into confined core plasma.',
+      needs: 'A nozzle coil for the lift, and the lift itself at this platform; the filter and former can stand at home.',
       unlocks: 'Nickel-56, and the platform\'s first power.',
       automate: 'The wind never stops, so the lift never starves.',
     },
@@ -163,12 +163,12 @@ export const QUESTS = [
   },
   {
     key: 'NI56', kind: 'process', title: 'Nickel-56', icon: 'grindless:ni56_slug',
-    deps: ['RAW'], x: 20, y: -6.5,
+    deps: ['MA_CRUC'], x: 20, y: -6.5,
     teach: {
       for: 'The &6pair-instability crucible&r burns the core plasma into nickel-56 slugs and ash from the star\'s heavier half.',
       needs: 'A liner for the crucible, and confined plasma in bulk.',
       unlocks: 'The nickel-56 cask, and the burner that eats it.',
-      automate: 'The ash goes home to the older lines. Do not let it pile up.',
+      automate: 'The ash goes home to the older lines. Do not let it pile up. The crucible can run anywhere.',
     },
     desc: [],
     tasks: [it('grindless:ni56_slug'), it('grindless:ime_ash')],
@@ -198,10 +198,10 @@ export const QUESTS = [
     key: 'STREAM', kind: 'step', title: 'The Magellanic Stream', icon: 'gtceu:pristine_gas_bucket',
     deps: ['NAV17'], x: 20, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'A river of gas torn from the Clouds, older than any star here. Nothing is rewarded for the gate itself.',
+      '      A river of gas torn from the Clouds, older than any star here.',
     ],
     tasks: [dim('grindless:magellanic_stream')],
-    rewards: [xp(200)],
+          rewards: [],
   },
   {
     key: 'J_STR', kind: 'reading', title: 'The Platform in the Stream', icon: 'gtceu:pristine_gas_works',
@@ -214,7 +214,7 @@ export const QUESTS = [
   },
   {
     key: 'PD', kind: 'process', title: 'Primordial Deuterium', icon: 'gtceu:primordial_deuterium_bucket',
-    deps: ['J_STR'], x: 23, y: -3.5,
+    deps: ['J_STR', 'MA_GAS'], x: 23, y: -3.5,
     teach: {
       for: 'Deuterium from the first minutes of the universe, left in the Stream\'s gas. The works sweeps it up, a tower fractionates it and a calutron picks the heavy half.',
       needs: 'The gas works here, then the cryogenic plant and the calutron.',
@@ -227,7 +227,7 @@ export const QUESTS = [
   },
   {
     key: 'PHE3', kind: 'process', title: 'Pristine Helium-3', icon: 'gtceu:pristine_helium_3_bucket',
-    deps: ['J_STR'], x: 21.5, y: -3.5,
+    deps: ['J_STR', 'MA_GAS'], x: 21.5, y: -3.5,
     teach: {
       for: 'Helium-3 from the same gas. The superfluid plant lets helium-4 flow through its leak and keeps the lighter isotope behind.',
       needs: 'The plant at home, and a calutron to finish.',

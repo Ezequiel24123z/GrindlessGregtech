@@ -15,7 +15,7 @@ export const CHAPTER = {
   order: 4,
   icon: 'gtceu:hyperfactory',
   autofocus: 'MA_REF',
-  section: { name: 'Machines of MAX+', origin: { x: 2, y: 1.5 }, heading: { key: 'H_MACHINES', x: 0, y: 0, deps: ['TAP'], icon: 'gtceu:hyperfactory' } },
+  section: { name: 'Machines of MAX+', origin: { x: 2, y: 1.5 }, heading: { key: 'H_MACHINES', x: 0, y: 0, deps: ['TAP'], icon: 'gtceu:hyperfactory', desc: ['The machines of the era, in the order you meet them, each with the first products it makes.'] } },
   title: 'MAX+: Machines',
   subtitle: ['From a refinery for bound matter to a slingshot, a stellar lift, a fusion torus and the Hyperfactory.'],
 };
@@ -59,7 +59,7 @@ export const QUESTS = [
     automate: 'Its boil-off goes back into the first recipe, and spent cells go to the helium plant, so nothing is vented.',
   }, [it('grindless:condensate_vessel_casing')]),
   prod('MA_CLAD', 'Strand Cladding', 'grindless:kerr_clad_strand', ['MA_REF'], 11, 4.5, [
-    'Its fourth recipe clads a strand of strange matter in condensate. It is the start of the cable line, which the circuits chapter finishes at the wire.',
+    'Its fourth recipe clads a strand of strange matter in condensate. It is the start of the cable line, which the Circuits section of this chapter finishes at the wire.',
   ]),
   prod('MA_CELL', 'Jacketed Condensate Cell', 'grindless:jacketed_condensate_cell', ['MA_REF'], 7, 2, [
     'Condensate will not travel loose, so the helium plant jackets it in a cell. This is the form in which it leaves the shell.',
@@ -101,7 +101,7 @@ export const QUESTS = [
     for: 'Stars above about 140 solar masses end by making nickel-56 in bulk. The crucible forces that burn on lifted plasma in a magnetic pinch.',
     needs: 'The MAX hull, a sphere of crucible liner casing, confined plasma, and liner spares.',
     unlocks: 'Nickel-56 slugs, the fuel of the burner, and a silicon-rich ash.',
-    automate: 'The ash is not waste: it goes to the 30 Doradus separation row. The liner wears one in sixteen runs.',
+    automate: 'The ash is not waste: it goes to a separation row, which can run anywhere. The liner wears one in sixteen runs.',
   }, [it('grindless:crucible_liner_casing')]),
   prod('MA_ASH', 'Intermediate-Mass Ash', 'grindless:ime_ash', ['MA_CRUC'], 17.5, -5, [
     'Silicon, sulfur, calcium and argon come out of the pinch with the nickel. A separation row takes them back, so the crucible makes no waste.',
@@ -114,7 +114,7 @@ export const QUESTS = [
   gear('MA_BURN', 'nickel_56_burner', 'Nickel-56 Burner', ['MA_L_CASK'], 19.5, -10, {
     for: 'A supernova glows on the decay of nickel-56 into cobalt, then iron. The burner turns that heat into power through supercritical carbon dioxide, in two recipes.',
     needs: 'The MAX hull, atomic casing and coils, and shielded casks of nickel-56 from the crucible.',
-    unlocks: 'A generator of the era. The network lesson is the integration chapter\'s.',
+    unlocks: 'A generator of the era. How it feeds the network is in the Integration section.',
     automate: 'A cask is used twice and comes out as iron. Loop it to the hot cell.',
   }),
   prod('MA_FE', 'Spent Iron Cask', 'grindless:spent_fe56_cask', ['MA_BURN'], 21, -10, [
@@ -134,7 +134,7 @@ export const QUESTS = [
   gear('MA_TORUS', 'primordial_fusion_torus', 'Primordial Fusion Torus', ['MA_L_PD', 'MA_L_PHE3'], 21, -6.5, {
     for: 'Deuterium and helium-3 fuse with few neutrons, and a direct converter catches their charged products. It is a generator of ours, not a GTM fusion tier.',
     needs: 'The MAX hull, a torus of atomic casing, deuterium and helium-3 together, a beam injector and a converter stack.',
-    unlocks: 'A second generator of the era. How it feeds the network is in the integration chapter.',
+    unlocks: 'A second generator of the era. How it feeds the network is in the Integration section.',
     automate: 'Both fuels arrive by pipe from the works; each runs 2,400 ticks.',
   }),
   prod('MA_NBI', 'Neutral Beam Injector', 'grindless:neutral_beam_injector', ['MA_TORUS'], 21, -8, [
@@ -163,11 +163,11 @@ export const QUESTS = [
   gear('MA_LOOM', 'meta_material_loom', 'Meta-Material Loom', ['MA_L_SCALE'], 41, 0.5, {
     for: 'Four meta-materials in one machine: shielding, waveguide, conduit and valve. It weaves them from bound plates, strand and condensate, several steps in one.',
     needs: 'The MAX hull, horizon casing, plates from the press, and no pump or regulator: the loom uses its own valve.',
-    unlocks: 'About 380,000 of each meta-material for the gate, and the valves for pumps.',
+    unlocks: 'A great many of each meta-material for the gate, and the valves for pumps.',
     automate: 'Run four recipes at once and give each its own output bus.',
   }, []),
   gear('MA_HYPER', 'hyperfactory', 'Hyperfactory', ['MA_L_SCALE'], 39.5, 1.5, {
-    for: 'The top of the mega family. It runs assembler, circuit assembler, assembly line, forming press and laser engraver at four thousand times a hatch\'s parallel.',
+    for: 'The top of the mega family. It runs assembler, circuit assembler, assembly line, forming press and laser engraver at a far wider parallel than a single hatch gives.',
     needs: 'The MAX hull, horizon casing, the MAX+ parallel hatch and a pattern bus for every recipe it should take.',
     unlocks: 'The millions of parts the tree and the gate need. It is a convenience, not a step.',
     automate: 'Feed it by ME and let the parallels do the counting.',

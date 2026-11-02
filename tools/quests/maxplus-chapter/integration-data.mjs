@@ -15,7 +15,7 @@ export const CHAPTER = {
   order: 5,
   icon: 'gtceu:max_wireless_dynamo_hatch_16a',
   autofocus: 'OM_SHELL',
-  section: { name: 'Older Machines, Power and AE2', origin: { x: 0, y: 1.5 }, heading: { key: 'H_INTEGRATION', x: 0, y: 0, deps: ['START'], icon: 'gtceu:max_wireless_dynamo_hatch_16a' } },
+  section: { name: 'Older Machines, Power and AE2', origin: { x: 0, y: 1.5 }, heading: { key: 'H_INTEGRATION', x: 0, y: 0, deps: ['START'], icon: 'gtceu:max_wireless_dynamo_hatch_16a', desc: ['What the older machines become at MAX+ scale, the power from nickel-56 and fusion, and the AE2 grid that holds the plan.'] } },
   title: 'MAX+: Integration',
   subtitle: ['Older machines at MAX+ scale, power from nickel-56 and fusion, and the grid that holds the plan.'],
 };
@@ -72,11 +72,11 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'OM_DOR', kind: 'machine', title: 'At 30 Doradus', icon: 'gtceu:plasma_mass_filter',
+    key: 'OM_DOR', kind: 'machine', title: 'The Plasma Pair', icon: 'gtceu:plasma_mass_filter',
     deps: ['LMC'], x: 17, y: 0,
     teach: {
-      for: 'The plasma mass filter and the FRC former turn the lift\'s raw wind into confined plasma, the same way at this scale as before.',
-      needs: 'Both controllers, on the platform at 30 Doradus.',
+          for: 'The plasma mass filter and the FRC former turn the lift\'s raw plasma into confined plasma, the same way at this scale as before. Neither is tied to a place: only the lift is.',
+          needs: 'Both controllers, anywhere you like.',
       unlocks: 'Nickel-56 and every plasma line after it.',
       automate: 'The filter\'s waste leaves in its own pipe.',
     },
@@ -90,8 +90,8 @@ export const QUESTS = [
     key: 'OM_UXV', kind: 'machine', title: 'Home Rows: UXV', icon: 'gtceu:pasta_draw_bench',
     deps: ['START'], x: 1, y: 1.5,
     teach: {
-      for: 'The UXV row\'s controllers at home: draw bench, sputter cluster, PLD chamber, shequid works, racetrack fab and stellar elevator.',
-      needs: 'All six controllers.',
+      for: 'The UXV controllers at home, and the MAX+ row each one takes: the MTJ cluster, oxide PLD chamber and racetrack fab make coated tapes, x-ray mirrors and the logic and storage dies; the stellar elevator loads the ribbon of the deep horizon tether. The draw bench and the shequid works join those lines.',
+      needs: 'All six controllers: draw bench, sputter cluster, PLD chamber, shequid works, racetrack fab and stellar elevator.',
       unlocks: 'The ribbon, tether and conduit lines of stage II.',
       automate: 'They share one hub; lay it out once.',
     },
@@ -103,8 +103,8 @@ export const QUESTS = [
     key: 'OM_UIV', kind: 'machine', title: 'Home Rows: UIV', icon: 'gtceu:levitation_melter',
     deps: ['OM_UXV'], x: 1, y: 3,
     teach: {
-      for: 'The UIV row: drip separator, levitation melter, TFLN fab, femtosecond writer, BEUV scanner, mK cryostat and the spectral hole burner.',
-      needs: 'All seven controllers.',
+      for: 'The UIV controllers at home, and the MAX+ row each one takes: the millikelvin cryostat chills the waveguide, resonance chamber, field cell and core crystal; the femtosecond writer inscribes crystals and interposer waveguides; the BEUV scanner patterns wafers for the chevron cores and the controller crystal; the TFLN fab makes the modulator chips; the levitation melter melts the strange alloy; the spectral hole burner burns the store block.',
+      needs: 'All seven controllers: drip separator, levitation melter, TFLN fab, femtosecond writer, BEUV scanner, mK cryostat and spectral hole burner.',
       unlocks: 'Lattices, waveguides, and the stage\'s precise parts.',
       automate: 'The cryostat wants the cold plant next to it.',
     },
@@ -116,8 +116,8 @@ export const QUESTS = [
     key: 'OM_UEV', kind: 'machine', title: 'Home Rows: UEV', icon: 'gtceu:calutron',
     deps: ['OM_UIV'], x: 1.5, y: 4.5,
     teach: {
-      for: 'The UEV row: megabar press, degenerate harvester, calutron, CVI furnace, single-crystal foundry, nitride magnet works, SNSPD foundry and stellar forge.',
-      needs: 'All eight controllers.',
+      for: 'The UEV controllers at home, and the MAX+ row each one takes: the calutron makes the silicon-28 feed of the logic die, the stellar forge makes the plasma of the crystal slurry, the CVI furnace makes waveguide tubes and chamber flanges, the nitride magnet works braces the SMES toroid and the SNSPD foundry makes the phase sensor die.',
+      needs: 'All eight controllers: megabar press, degenerate harvester, calutron, CVI furnace, single-crystal foundry, nitride magnet works, SNSPD foundry and stellar forge.',
       unlocks: 'The calutron\'s isotopes, which both stages ask for.',
       automate: 'The calutron is the slow one; build several.',
     },
@@ -129,8 +129,8 @@ export const QUESTS = [
     key: 'OM_UHV', kind: 'machine', title: 'Home Rows: UHV and UV', icon: 'gtceu:superfluid_helium_plant',
     deps: ['OM_UEV'], x: 3, y: 5,
     teach: {
-      for: 'The UHV row (PBO plant, crystal furnace, photonic foundry, MBE reactor, ribbon works) and the UV row (helium plant, SRF works, zone tower, MOCVD, fibre tower).',
-      needs: 'All ten controllers.',
+      for: 'The UHV and UV controllers at home, and the MAX+ row each one takes: the crystal growth furnace grows seed plates and boules, the photonic foundry makes the frequency divider and the photonic engine, the MBE reactor grows the piezo layer, the MOCVD reactor the laser arrays, the SRF works the resonance cells and cavities, and the ribbon works draws the tether ribbon.',
+      needs: 'All ten controllers: PBO plant, crystal growth furnace, photonic foundry, MBE reactor, ribbon works, helium plant, SRF works, zone tower, MOCVD and fibre tower.',
       unlocks: 'The superfluid helium and fibres that the stream and the dark both ask for.',
       automate: 'Helium returns by the same pipe that fed it.',
     },
@@ -142,8 +142,8 @@ export const QUESTS = [
     key: 'OM_OLD', kind: 'machine', title: 'Home Rows: ZPM Down to EV', icon: 'gtceu:hts_magnet_works',
     deps: ['OM_UHV'], x: 4.5, y: 5,
     teach: {
-      for: 'The older rows still make parts MAX+ needs: diamond fab, implanter, aerogel works, coated conductor line, HTS magnet works, helium refrigerator, hot cell, extraction cascade, cryogenic plant and hot strip mill.',
-      needs: 'The ten controllers, set up for many lanes.',
+      for: 'The older rows still make parts MAX+ needs: the diamond lattice fab makes the photonic plate, the HTS magnet works winds the SMES toroid and the fault-current coil, the coated conductor line draws tapes, and the helium refrigerator chills toroids, coils and conduits. The implanter, aerogel works, hot cell, extraction cascade, cryogenic plant and hot strip mill take smaller parts.',
+      needs: 'The ten controllers: diamond fab, implanter, aerogel works, coated conductor line, HTS magnet works, helium refrigerator, hot cell, extraction cascade, cryogenic plant and hot strip mill.',
       unlocks: 'Conductors, aerogel, and a cold chain for the stage.',
       automate: 'Give each its own chest on the network.',
     },
@@ -212,7 +212,7 @@ export const QUESTS = [
     deps: ['SCALE'], x: 40, y: 1,
     teach: {
       for: 'The 256M cell component and a horizon storage die make cells that hold the stage\'s item and fluid counts.',
-      needs: 'The &6Horizon Storage Die&r from the circuits tab, and the 256M component.',
+      needs: 'The &6Horizon Storage Die&r from the Circuits section of this chapter, and the 256M component.',
       unlocks: 'Storage that does not run out at a million of anything.',
       automate: 'One cell type per network; fluids get their own.',
     },
@@ -239,7 +239,7 @@ export const QUESTS = [
     teach: {
       for: 'The assembler matrix keeps hundreds of patterns in one block, and two pattern providers push them out. A pattern memory unit holds the plan.',
       needs: 'The matrix crafter, frame and walls, an extended provider, an expanded provider and the memory unit.',
-      unlocks: 'Autocrafting of every item in the tab.',
+      unlocks: 'Autocrafting of every item in this chapter.',
       automate: 'Group patterns by line, and name them.',
     },
     desc: [],

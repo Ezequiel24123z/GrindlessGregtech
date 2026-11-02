@@ -14,7 +14,7 @@ export const CHAPTER = {
   order: 3,
   icon: 'grindless:horizon_processor',
   autofocus: 'CI_PROC',
-  section: { name: 'Circuits and Components', origin: { x: 3, y: 2 }, heading: { key: 'H_CIRCUITS', x: 0, y: 0, deps: ['TAP'], icon: 'grindless:horizon_processor' } },
+  section: { name: 'Circuits and Components', origin: { x: 3, y: 2 }, heading: { key: 'H_CIRCUITS', x: 0, y: 0, deps: ['TAP'], icon: 'grindless:horizon_processor', desc: ['The strand cable, the hull and casing, the nine components and the horizon processor, the one circuit above the top of the ladder.'] } },
   title: 'MAX+: Circuits',
   subtitle: ['A cable of strand, nine components and the one circuit above the top: the horizon processor.'],
 };
@@ -42,10 +42,10 @@ export const QUESTS = [
     'The refinery clads the strand; a pasta draw bench then pulls it into &6Kerr Strand Wire&r. This wire is the MAX+ cable, and it carries the coils and the casing. The line stops at the wire: later steps coat it, braid it and wind it.',
   ], [it('grindless:kerr_strand_wire')], 120),
   q('CI_HULL', 'step', 'The MAX+ Hull', 'grindless:horizon_machine_casing', ['CI_WIRE', 'CI_L_BN'], 14, 4, null, [
-    'There is no MAX+ hull block. Machines use the MAX &6Machine Hull&r with the &6Horizon Machine Casing&r, which is MAX casing, four compressed plates and strand cable. Every MAX+ controller asks for two casings.',
+    'There is no MAX+ hull block. Machines use the MAX &6Machine Hull&r with the &6Horizon Machine Casing&r, which is built from MAX casing, compressed plates and strand cable. MAX+ controllers take these casings.',
   ], [it('gtceu:max_machine_hull'), it('grindless:horizon_machine_casing')], 150),
   q('CI_MOTOR', 'step', 'Motor and Its Cores', 'grindless:maxplus_electric_motor', ['CI_WIRE', 'CI_L_BDEG'], 26.5, 4.5, null, [
-    'The &6MAX+ Electric Motor&r joins two &6Kerr Field Coils&r, a &6Bound-Matter Rotor&r and a MAX motor, on the assembly line at the top voltage. The coil is a five-step line on strand wire; the rotor is a four-step line on the degenerate billet.',
+    'The &6MAX+ Electric Motor&r joins &6Kerr Field Coils&r, a &6Bound-Matter Rotor&r and a MAX motor, on the assembly line at the top voltage. The coil is a long line on strand wire; the rotor is a line on the degenerate billet.',
     'The two cores come first, each ending in a single part. The motor then uses its MAX counterpart, so the older line stays running.',
   ], [it('grindless:kerr_field_coil'), it('grindless:bound_matter_rotor'), it('grindless:maxplus_electric_motor')], 200),
   q('CI_PISTON', 'step', 'Piston and Actuator', 'grindless:maxplus_electric_piston', ['CI_MOTOR'], 26.5, 6, null, [
@@ -72,13 +72,13 @@ export const QUESTS = [
     automate: 'Keep one chest per interposer step; the cryostat is the slow one.',
   }, [], [it('grindless:horizon_interposer')], 250),
   q('CI_PROC', 'circuit', 'Horizon Processor', 'grindless:horizon_processor', ['CI_DIE', 'CI_INTERP'], 7, 6, {
-    for: 'The circuit above the top of the ladder. The &6Horizon Processor&r joins two logic dies, an interposer, a quantum memory node, a Rydberg logic array, two mainframes and condensate.',
+    for: 'The circuit above the top of the ladder. The &6Horizon Processor&r joins two logic dies, an interposer, a quantum memory node, a Rydberg logic array, MAX-tier circuits and condensate.',
     needs: 'The UEV photonic integration hall at the top voltage, and one of every older part, with kerr condensate from the shell.',
-    unlocks: 'Every MAX+ component and controller. A controller asks for eight; the Hyperstargate asks for sixteen.',
-    automate: 'Six inputs on six chests; a missing one stalls the hall, so alarm on the stock.',
+    unlocks: 'Every MAX+ component and controller. The Hyperstargate asks for sixteen of them.',
+    automate: 'Keep every input in its own chest; a missing one stalls the hall, so alarm on the stock.',
   }, [], [it('grindless:horizon_processor')], 400),
   q('CI_CTRL', 'step', 'The Controller Recipe', 'gtceu:max_machine_hull', ['CI_PROC'], 7, 7.5, null, [
-    'Every MAX+ controller is built on the assembly line: one MAX hull from the hull quest, two Horizon Machine Casings, eight processors, kerr condensate, at least eight components from three families, and the inputs of its own domain.',
+    'Every MAX+ controller is built on the assembly line: a MAX hull from the hull quest, Horizon Machine Casings, horizon processors, kerr condensate, components from several families, and the inputs of its own domain.',
     'The components are listed here; the domain inputs are in the machine\'s own quest.',
   ], [ck()], 100),
 
@@ -90,12 +90,12 @@ export const QUESTS = [
     'Single-photon detectors on a wafer, read out, cut and chilled make the &6Horizon Phase Sensor Core&r. With a MAX sensor and two processors it becomes the &6MAX+ Sensor&r.',
   ], [it('grindless:horizon_phase_sensor_core'), it('grindless:maxplus_sensor')], 200),
   q('CI_ARM', 'step', 'Robot Arm', 'grindless:maxplus_robot_arm', ['CI_PROC'], 8.5, 5.5, null, [
-    'Two motors, a piston and two processors make the &6MAX+ Robot Arm&r. It has no core line of its own, so it is the first part that needs the motor, the piston and the processor together.',
+    'Motors, a piston and processors make the &6MAX+ Robot Arm&r. It has no core line of its own, so it is the first part that needs the motor, the piston and the processor together.',
   ], [it('grindless:maxplus_robot_arm')], 150),
   q('CI_FIELD', 'step', 'Field Generator', 'grindless:maxplus_field_generator', ['CI_EMIT', 'CI_PISTON'], 26.5, 7.5, null, [
     'The last component: an emitter, two Kerr Field Coils and a &6Condensate Field Cell&r. The cell is a five-step line that loads a niobium cavity with condensate in the refinery and seals it cold. The &6MAX+ Field Generator&r is what the big machines ask for most.',
   ], [it('grindless:condensate_field_cell'), it('grindless:maxplus_field_generator')], 250),
   q('CI_HATCH', 'step', 'MAX Hatches in Bulk', 'gtceu:max_energy_input_hatch_16a', ['CI_HULL'], 15.5, 4, null, [
-    'MAX+ has no hatches of its own. Rows take GTM\'s &6MAX Energy Input Hatches&r, buses and fluid hatches, two of them at the top voltage, in bulk. The wireless versions draw on the network instead, as the integration chapter shows.',
+    'MAX+ adds a 1,024 A energy hatch, built on the MAX hull, and wireless energy hatches of 1,024 A and 4,096 A. Everything else takes GTM\'s &6MAX Energy Input Hatches&r, buses and fluid hatches in bulk. The wireless versions draw on the network instead, as the Integration section shows.',
   ], [it('gtceu:max_energy_input_hatch_16a'), it('gtceu:max_input_bus'), it('gtceu:max_output_bus'), it('gtceu:max_input_hatch_9x')], 150),
 ];

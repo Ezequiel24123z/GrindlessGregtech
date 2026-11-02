@@ -98,10 +98,10 @@ export const QUESTS = [
     automate: 'It works one image at a time, so give it its own array supply and leave it.',
   }, [it('grindless:max_srf_cavity')]),
   gear('M_WINCH', 'geroch_winch', 'Geroch Winch', ['M_L_WINCH'], 2.5, 7.5, {
-    for: 'A tether dropped over the horizon and wound on a drum. The &6Geroch Winch&r takes power from the hole\'s spin, and wears its tether as it works.',
-    needs: 'The MAX hull, a tall tower of drum casing over a tether well, and spare tethers.',
+    for: 'A tether dropped over the horizon and wound on a drum. The &6Geroch Winch&r takes power from the hole\'s spin; each run uses up a canister and wears the tether.',
+    needs: 'The MAX hull, a tall tower of drum casing over a tether well, and a canister and a tether for each run.',
     unlocks: 'The first power the galactic centre gives back.',
-    automate: 'Tethers wear out, so keep a pattern provider on them.',
+    automate: 'Canisters and tethers run out, so keep a pattern provider on them.',
   }, [DRUM], 150),
   gear('M_INJ', 'mass_stream_injector', 'Mass Stream Injector', ['M_L_INJ'], 2.5, 9, {
     for: 'It shapes hot flow into streams, and the streams into bundles. The &6Mass Stream Injector&r holds a shell up with moving mass.',
@@ -125,7 +125,7 @@ export const QUESTS = [
   ]),
   gear('M_FEED', 'accretion_feeder', 'Accretion Feeder', ['M_SLAG'], 7.5, 11, {
     for: 'Slag spiralling into a hole gives back more of its mass as light than anything else in the pack. The &6Accretion Feeder&r catches that light and turns it into power.',
-    needs: 'The MAX hull, a ring of feeder coil casing with collector panels, and slag pellets from the furnace.',
+    needs: 'The MAX hull, a ring of feeder coil casing with collector panels, and slag pellets from the furnace. The burn itself runs at the black hole orbit, not in the belt.',
     unlocks: 'The biggest generator of the era, and a use for the slag.',
     automate: 'It wears its panels and modules as it works: rework them in the solar array fab and the assembler.',
   }, [COIL], 150),

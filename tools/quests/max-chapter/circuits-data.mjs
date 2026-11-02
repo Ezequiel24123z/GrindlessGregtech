@@ -39,26 +39,26 @@ const q = (key, kind, title, icon, deps, x, y, teach, desc, tasks, xpN) => ({
 export const QUESTS = [
   // ------------------------------------------------------------------ the ladder: chip, die, interposer, mainframe
   q('C_CHIP', 'wafer', 'Squeezed-Light Chip', 'grindless:squeezed_light_chip', ['C_L_PHOT'], 2.5, 0, {
-    for: 'Light squeezed until its noise drops below what any ordinary beam can reach. The &6Squeezed-Light Chip&r is the part that makes MAX emitters and the mainframe sharp.',
-    needs: 'The crystals and the femtosecond writer from the older photonic lines, with a cleanroom that stays cold.',
-    unlocks: 'The tweezer die, the MAX emitter and the mainframe.',
-    automate: 'Crystals by ME; chips are small, so stock a few and send the rest on.',
+    for: 'Light squeezed until its noise drops below what any ordinary beam can reach. The &6Squeezed-Light Chip&r goes into the mainframe, and the MAX emitter is built around it. It is one of three parts the mainframe needs, and they can be made in any order.',
+    needs: 'The SNSPD fabrication line, with a bonded pump-laser die, an SNSPD, gold dust and superfluid helium.',
+    unlocks: 'The mainframe and the MAX emitter.',
+    automate: 'Feed the fabrication line by ME; chips are small, so stock a few and send the rest on.',
   }, [], [it('grindless:squeezed_light_chip')], 120),
-  q('C_DIE', 'wafer', 'Tweezer Array Die', 'grindless:tweezer_array_die', ['C_CHIP'], 5, 0, {
-    for: 'Single atoms held in beams of light, one by one, on a die. The &6Tweezer Array Die&r is the logic the mainframe reads its qubits from.',
-    needs: 'A laser engraver for the last step, a squeezed-light chip and a calibrated lens.',
-    unlocks: 'The interposer and the Rydberg array works, which is researched from it.',
-    automate: 'Lenses and chips by ME in matched counts; the engraver returns dies in a chest.',
+  q('C_DIE', 'wafer', 'Tweezer Array Die', 'grindless:tweezer_array_die', ['H_MAX_CIRCUITS'], 5, 0, {
+    for: 'Single atoms held in beams of light, one by one, on a die. The &6Tweezer Array Die&r is the logic the mainframe reads its qubits from. It does not depend on the chip or the interposer.',
+    needs: 'A laser engraver, a calibrated lens and a purple glass lens.',
+    unlocks: 'The mainframe, and the Rydberg array works, which is researched from it.',
+    automate: 'Lenses by ME in matched counts; the engraver returns dies in a chest.',
   }, [], [it('grindless:tweezer_array_die')], 120),
-  q('C_INTERP', 'circuit', 'Cryo Photonic Interposer', 'grindless:cryo_photonic_interposer', ['C_DIE'], 7.5, 0, {
-    for: 'The board that joins the chips at millikelvin. The &6Cryo Photonic Interposer&r carries light between them without heating either.',
-    needs: 'A cold line: the helium refrigerator and a vacuum, with a die and a chip to bond.',
-    unlocks: 'The mainframe, which takes one of each part.',
-    automate: 'Keep one of each part per mainframe in a dedicated chest; a big stock gains nothing.',
+  q('C_INTERP', 'circuit', 'Cryo Photonic Interposer', 'grindless:cryo_photonic_interposer', ['H_MAX_CIRCUITS'], 7.5, 0, {
+    for: 'The board that joins the chips at millikelvin. The &6Cryo Photonic Interposer&r carries light between them without heating either. It is made on its own, not from the chip or the die.',
+    needs: 'The nuclear demagnetisation line, with a transducer wafer, a millikelvin cryostat module and helium-3/helium-4 mixture.',
+    unlocks: 'The mainframe.',
+    automate: 'Keep a few of each part per mainframe in a dedicated chest; a big stock gains nothing.',
   }, [], [it('grindless:cryo_photonic_interposer')], 150),
-  q('C_MAINF', 'circuit', 'Supracausal Mainframe', 'gtnn:supracausal_mainframe', ['C_INTERP'], 10, 0, {
-    for: 'The only circuit of MAX, and the last one the pack has. The &6Supracausal Mainframe&r joins two chips, two dies and an interposer with OpV circuits and a tetron array.',
-    needs: 'The photonic integration hall from UEV, superfluid helium-3 and a full set of the three parts.',
+  q('C_MAINF', 'circuit', 'Supracausal Mainframe', 'gtnn:supracausal_mainframe', ['C_CHIP', 'C_DIE', 'C_INTERP'], 10, 0, {
+    for: 'The only circuit of MAX, and the last one the pack has. The &6Supracausal Mainframe&r joins the chip, the die and the interposer with OpV-tier circuits and a tetron array.',
+    needs: 'The photonic integration hall from UEV, superfluid helium-3 and a stock of the three parts.',
     unlocks: 'Every MAX component, hatch and controller.',
     automate: 'Three part lines into one hall: give each its own chest so one slow line never starves the others.',
   }, [], [it('gtnn:supracausal_mainframe')], 250),
@@ -83,7 +83,7 @@ export const QUESTS = [
     'A squeezed-light chip behind an optical isolator, so the light goes out and nothing comes back. The &6MAX Emitter&r goes into the field generator and most controllers.',
   ], [it('grindless:max_emitter')], 100),
   q('C_ARM', 'step', 'Robot Arm', 'grindless:max_robot_arm', ['C_MOTOR'], 15, 1.5, null, [
-    'Two motors, a piston and a circuit: the &6MAX Robot Arm&r. It is also what the belt seed and the Rydberg works are built around.',
+    'Motors, a piston and a circuit: the &6MAX Robot Arm&r. It is also what the belt seed and the Rydberg works are built around.',
   ], [it('grindless:max_robot_arm')], 100),
 
   // ------------------------------------------------------------------ components that wait for a home machine
@@ -94,10 +94,10 @@ export const QUESTS = [
     'A belt that carries the load on a film one atom thick. The &6MAX Conveyor Module&r needs the membrane line, and the buses need the conveyor.',
   ], [it('grindless:max_conveyor_module')], 120),
   q('C_FIELD', 'step', 'Field Generator', 'grindless:max_field_generator', ['C_L_FIELD'], 15, 6, null, [
-    'The part that bends space: an emitter, two field coils, a superconducting membrane and a pinch of stable exotic matter. The &6MAX Field Generator&r is the last component and the one every big machine asks for most.',
+    'The part that bends space: an emitter, field coils, superconducting membranes, stable exotic matter and regulators. The &6MAX Field Generator&r is the last component and the one every big machine asks for most.',
   ], [it('grindless:max_field_generator')], 150),
   q('C_PARTS', 'step', 'MAX Parts and Hatches', 'gtceu:max_energy_input_hatch', ['C_SENS', 'C_CONV'], 17.5, 3, null, [
-    'The &6MAX Energy Input Hatch&r, its &616 A&r version, the &6MAX Input Bus&r and the &6MAX Battery&r are built on the MAX hull. With them in place the OpV pair you have been using can retire; the big rows at Sgr A* run on two 16 A hatches.',
+    'The &6MAX Energy Input Hatch&r, its &616 A&r version, the &6MAX Input Bus&r and the &6MAX Battery&r are assembly-line recipes built on the MAX hull, with MAX sensors and circuits. With them in place the OpV pair you have been using can retire.',
   ], [it('gtceu:max_energy_input_hatch'), it('gtceu:max_energy_input_hatch_16a'), it('gtceu:max_input_bus'), it('gtceu:max_battery')], 150),
 ];
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

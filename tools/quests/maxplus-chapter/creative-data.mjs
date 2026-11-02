@@ -13,7 +13,7 @@ export const CHAPTER = {
   order: 6,
   icon: 'grindless:creative_energy',
   autofocus: 'CR_RULE',
-  section: { name: 'Creative Items', origin: { x: 61.5, y: -1 }, heading: { key: 'H_CREATIVE', x: 0, y: 0, deps: ['S3_HOME'], icon: 'grindless:creative_energy' } },
+  section: { name: 'Creative Items', origin: { x: 61.5, y: -1 }, heading: { key: 'H_CREATIVE', x: 0, y: 0, deps: ['S3_HOME'], icon: 'grindless:creative_energy', desc: ['The four cores and the six creative stand-ins: ingredients of the gate that can never be placed.'] } },
   title: 'MAX+: Creative Items',
   subtitle: ['Six creative blocks, crafted at enormous cost and used up as ingredients of the gate. None of them will ever run.'],
 };
@@ -49,7 +49,7 @@ export const QUESTS = [
     key: 'CR_ENERGY', kind: 'process', title: 'Creative Energy', icon: 'grindless:creative_energy',
     deps: ['CR_CORES'], x: 4, y: 3,
     teach: {
-      for: 'The &6Creative Energy&r block is a power unit\'s heart. It never runs as a source, because energy from nothing would end the pack\'s power chain.',
+      for: 'The &6Creative Energy Source (Ingredient)&r is a power unit\'s heart. It never runs as a source, because energy from nothing would end the pack\'s power chain.',
       needs: 'A cloud core and the hyper assembly array, plus a mountain of field coils, processors and condensate.',
       unlocks: 'The gate\'s power units.',
       automate: 'One array row per block. Keep a stock in AE2 before the gate needs it.',
@@ -62,7 +62,7 @@ export const QUESTS = [
     key: 'CR_CELL', kind: 'process', title: 'Creative Energy Cell', icon: 'grindless:creative_energy_cell',
     deps: ['CR_CORES'], x: 1, y: 1.5,
     teach: {
-      for: 'The &6Creative Energy Cell&r sits inside every horizon capacitor, as one of its parts. Drives will not take it.',
+      for: 'The &6Creative Energy Cell (Ingredient)&r sits inside every horizon capacitor, as one of its parts. Drives will not take it.',
       needs: 'A cloud core and the array. A tenth of the cost of a creative block, and one for every capacitor of the bank. A cell holds one item to the stack, so a single cell in hand proves the craft.',
       unlocks: 'The capacitors of the bank.',
       automate: 'Queue it with the capacitor patterns so the bank never waits on it.',
@@ -75,7 +75,7 @@ export const QUESTS = [
     key: 'CR_CHEST', kind: 'process', title: 'Creative Chest', icon: 'grindless:creative_chest',
     deps: ['CR_CORES'], x: 2.5, y: 2,
     teach: {
-      for: 'The &6Creative Chest&r goes into the gate\'s base. Placed anywhere else it would void your logistics, so it is cancelled.',
+      for: 'The &6Creative Chest (Ingredient)&r goes into the gate\'s base. Placed anywhere else it would void your logistics, so it is cancelled.',
       needs: 'A store core and the array.',
       unlocks: 'The gate\'s base.',
       automate: 'One craft, once. Do not forget to leave it in the network.',
@@ -88,7 +88,7 @@ export const QUESTS = [
     key: 'CR_TANK', kind: 'process', title: 'Creative Tank', icon: 'grindless:creative_tank',
     deps: ['CR_CORES'], x: 2.5, y: 3.5,
     teach: {
-      for: 'The &6Creative Tank&r is the base\'s other half. It is a part, and it is never a fluid source.',
+      for: 'The &6Creative Tank (Ingredient)&r is the base\'s other half. It is a part, and it is never a fluid source.',
       needs: 'A tank core and the array.',
       unlocks: 'The gate\'s base.',
       automate: 'Order it beside the chest so the base is built in one pass.',
@@ -101,7 +101,7 @@ export const QUESTS = [
     key: 'CR_COMP', kind: 'process', title: 'Creative Computation Provider', icon: 'grindless:creative_computation_provider',
     deps: ['CR_CORES'], x: 1, y: 4.5,
     teach: {
-      for: 'The &6Creative Computation Provider&r gives the controller all the thinking the dial asks for. Outside the gate it does nothing.',
+      for: 'The &6Creative Computation Provider (Ingredient)&r gives the controller all the thinking the dial asks for. Outside the gate it does nothing.',
       needs: 'A computation core and the array.',
       unlocks: 'The gate\'s controller.',
       automate: 'One craft, queued after the computation line is running.',
@@ -114,7 +114,7 @@ export const QUESTS = [
     key: 'CR_DATA', kind: 'process', title: 'Creative Data Access Hatch', icon: 'grindless:creative_data_access_hatch',
     deps: ['CR_COMP'], x: 2.5, y: 5,
     teach: {
-      for: 'The &6Creative Data Access Hatch&r is the interface\'s data store: every recipe the gate asks for, always available.',
+      for: 'The &6Creative Data Access Hatch (Ingredient)&r is the interface\'s data store: every recipe the gate asks for, always available.',
       needs: 'A computation core, the array and a pile of pattern memory from the AE2 line.',
       unlocks: 'The gate\'s interface.',
       automate: 'Craft it after the provider, from the same stock of cores.',

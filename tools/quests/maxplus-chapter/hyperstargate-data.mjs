@@ -17,7 +17,7 @@ export const CHAPTER = {
   order: 8,
   icon: 'gtceu:hyperstargate',
   autofocus: 'TR_BLEND',
-  section: { name: 'Building the Gate', origin: { x: 51.5, y: 2 }, heading: { key: 'H_GATE', x: 0, y: 0, deps: ['S3_TREE'], icon: 'gtceu:hyperstargate' } },
+  section: { name: 'Building the Gate', origin: { x: 51.5, y: 2 }, heading: { key: 'H_GATE', x: 0, y: 0, deps: ['S3_TREE'], icon: 'gtceu:hyperstargate', desc: ['The machines of the tree and the parts of the gate: ring blocks, upgrades, chevrons, power units, the base and the controller, then the dial.'] } },
   title: 'MAX+: Building the Gate',
   subtitle: ['Six machines, eight kinds of part, one dial and a ring that opens for one crossing at a time.'],
 };
@@ -108,9 +108,9 @@ export const QUESTS = [
     key: 'HG_RING', kind: 'step', title: 'Ring Blocks', icon: 'grindless:hyperstargate_ring_block',
     deps: ['TR_ARRAY'], x: 10, y: 4.5,
     desc: [
-      'The ring is made of them, and so are the base, the power units and the controller. Make far more than the ring itself needs.',
+      'The ring is made of them, and so are the chevron blocks, the base, the power units, the interface and the controller. Make far more than the ring itself needs.',
     ],
-    tasks: [it('grindless:hyperstargate_ring_block', 528)],
+    tasks: [it('grindless:hyperstargate_ring_block', 519)],
     rewards: [xp(500)],
   },
   {
@@ -135,25 +135,25 @@ export const QUESTS = [
     key: 'HG_CHEVB', kind: 'step', title: 'Chevron Blocks', icon: 'grindless:hyperstargate_chevron_block',
     deps: ['HG_RING', 'HG_UPG'], x: 10, y: 6,
     desc: [
-      'A ring block, a stack of upgrades and a crowd of meta-materials. Most go into the base, nine to the ring.',
+      'Four ring blocks, nine upgrades and a crowd of meta-materials. The base takes all of them, and the locked chevrons are built from the same parts, not from these.',
     ],
-    tasks: [it('grindless:hyperstargate_chevron_block', 36)],
+    tasks: [it('grindless:hyperstargate_chevron_block', 27)],
     rewards: [xp(600)],
   },
   {
     key: 'HG_IFACE', kind: 'step', title: 'Interface', icon: 'grindless:hyperstargate_interface',
     deps: ['HG_POWER', 'HG_RING'], x: 11.5, y: 4.5,
     desc: [
-          'The controller\'s window to the network, wired to the power units. It wants pattern memory and a creative data hatch.',
+          'The controller\'s window to the network. It is built from ring blocks.',
     ],
     tasks: [it('grindless:hyperstargate_interface')],
     rewards: [xp(500)],
   },
   {
     key: 'HG_LOCKED', kind: 'step', title: 'Locked Chevrons', icon: 'grindless:hyperstargate_locked_chevron',
-    deps: ['HG_CHEVB'], x: 11.5, y: 6,
+    deps: ['HG_RING', 'HG_UPG'], x: 11.5, y: 6,
     desc: [
-      'A chevron block with a horizon lock sealed in. Nine of them go on the ring, and the dial recognises them by it.',
+      'Made like a chevron block, from ring blocks, upgrades and meta-materials, with a horizon lock and a crowd of horizon processors sealed in. Nine of them go on the ring, and the dial recognises them by the lock.',
     ],
     tasks: [it('grindless:hyperstargate_locked_chevron', 9)],
     rewards: [xp(600)],
@@ -162,7 +162,7 @@ export const QUESTS = [
     key: 'HG_BASE', kind: 'step', title: 'The Base', icon: 'grindless:hyperstargate_base',
     deps: ['HG_CHEVB', 'HG_UPG'], x: 11, y: 7.5,
     desc: [
-      'Chevron blocks, ring blocks, upgrades, a creative chest and tank and the couplers for the four power units. It is the heaviest single craft of the pack.',
+      'Chevron blocks, ring blocks, upgrades, horizon processors and field generators. It is the heaviest single craft of the pack.',
     ],
     tasks: [it('grindless:hyperstargate_base')],
     rewards: [xp(800)],
@@ -183,7 +183,7 @@ export const QUESTS = [
     deps: ['HG_STRUCT'], x: 14.5, y: 2,
     teach: {
       for: 'The &6Hyperstargate&r is the pack\'s last multiblock. It forms round a dial at Sgr A* orbit and opens a ring into the final dimension.',
-      needs: 'The ring, the iris, the base, four power units and the interface, with a horizon lock kept in the controller.',
+      needs: 'The controller recipe is crafted at the black hole orbit, from ring blocks, a controller crystal, a creative computation provider, horizon processors and the interface. The structure then needs the ring, the iris, the base and four power units, with a horizon lock kept in the controller.',
       unlocks: 'The dial.',
       automate: 'Nothing here is a production line. Build it once and keep the banks charged.',
     },
@@ -208,7 +208,7 @@ export const QUESTS = [
     key: 'HG_RECHARGE', kind: 'reading', title: 'Recharging the Dial', icon: 'grindless:spent_dial_charge',
     deps: ['HG_DIAL'], x: 17.5, y: 1,
     desc: [
-      'The dial returns a spent charge. The condensate refinery recharges it, and 48 of the 64 cells come back for the next opening. Phase locks go back to the synchroniser as usual.',
+      'The dial returns a spent charge. The condensate refinery recharges it, and 48 of the 64 cells come back for the next opening. The phase locks are used up: each opening needs sixteen new ones.',
     ],
     tasks: [ck()],
     rewards: [xp(100)],

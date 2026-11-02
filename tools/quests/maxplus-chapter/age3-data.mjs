@@ -37,7 +37,7 @@ export const QUESTS = [
     key: 'S3_SITE', kind: 'reading', title: 'Back to the Hole', icon: 'grindless:horizon_lock',
     deps: ['STAGE3'], x: 2, y: 0,
     desc: [
-      'The gate goes up where the shell holds the horizon still, at Sgr A* orbit. The tree that feeds it needs no such place: its machines run anywhere, so grow it at home.',
+      'The gate goes up where the shell holds the horizon still, at Sgr A* orbit, and the controller recipe is crafted there too. The tree that feeds it needs no such place: its machines run anywhere, so grow it at home.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -64,7 +64,7 @@ export const QUESTS = [
     key: 'S3_CORE', kind: 'step', title: 'Core Crystals', icon: 'grindless:horizon_core_crystal',
     deps: ['S3_SLURRY'], x: 10, y: -3.5,
     desc: [
-      'The gate\'s power units want a crowd of them. Each one takes a slurry hatch to itself.',
+      'Core crystals are cut from inscribed crystals in the nuclear demagnetisation line, with liquid helium. The gate\'s parts want a crowd of them.',
     ],
     tasks: [it('grindless:horizon_core_crystal', 64)],
     rewards: [xp(400)],
@@ -80,7 +80,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_CAPS', kind: 'step', title: 'Capacitors for the Bank', icon: 'grindless:horizon_capacitor',
-    deps: ['S3_TREE'], x: 7.5, y: -1.5,
+    deps: ['S3_HOME', 'CR_CELL'], x: 16, y: -0.5,
     desc: [
       'Each capacitor holds a slice of the dial\'s charge. The bank is a ring of them, built into the gate at Sgr A* orbit.',
     ],
@@ -127,7 +127,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ home
   {
     key: 'S3_HOME', kind: 'reading', title: 'The Grid at Home', icon: 'gtceu:hyper_assembly_array',
-    deps: ['S3_CTRL', 'S3_CAPS', 'S3_FRAME'], x: 14.5, y: -1.5,
+    deps: ['S3_CTRL', 'S3_FRAME'], x: 14.5, y: -1.5,
     desc: [
       'Back home the hyper assembly array does the rest: a grid for every part, and a great many of those. Feed it from AE2 and let the patterns do the counting.',
     ],
@@ -138,7 +138,7 @@ export const QUESTS = [
     key: 'S3_COMP', kind: 'step', title: 'Compressed Plates', icon: 'grindless:horizon_compressed_plate',
     deps: ['S3_HOME'], x: 16, y: -3,
     desc: [
-      'Upgrades and ring blocks use them most, and the iris blades use them too. A stack in hand proves the line; the rest stay in AE2.',
+      'Upgrades and ring blocks use them most. A stack in hand proves the line; the rest stay in AE2.',
     ],
     tasks: [it('grindless:horizon_compressed_plate', 64)],
     rewards: [xp(500)],
@@ -156,7 +156,7 @@ export const QUESTS = [
     key: 'S3_PROC', kind: 'step', title: 'Horizon Processors', icon: 'grindless:horizon_processor',
     deps: ['S3_HOME'], x: 19, y: -1.5,
     desc: [
-      'Frame parts and plates take them in bulk, which makes this the biggest circuit order of the pack. A stack in hand proves the line; the rest stay in AE2, so plan the Hyperfactory\'s bus before you start.',
+      'The gate\'s controller, its base and its locked chevrons take them, and so do many machines of the pack, which makes this the biggest circuit order of the pack. A stack in hand proves the line; the rest stay in AE2, so plan the Hyperfactory\'s bus before you start.',
     ],
     tasks: [it('grindless:horizon_processor', 64)],
     rewards: [xp(600)],
@@ -174,7 +174,7 @@ export const QUESTS = [
     key: 'S3_LOCKS', kind: 'step', title: 'Locks and Cells for the Dial', icon: 'grindless:jacketed_condensate_cell',
     deps: ['S3_GATE'], x: 22, y: -2,
     desc: [
-      'A crowd of phase locks and a crate of jacketed cells go into every opening. Most of the cells come back, and the locks come back from the synchroniser.',
+      'Every opening uses up sixteen phase locks and a crate of jacketed cells. The locks are gone for good; the refinery recharges the spent charge into most of the cells again.',
     ],
     tasks: [it('grindless:horizon_phase_lock', 16), it('grindless:jacketed_condensate_cell', 64)],
     rewards: [xp(500)],
@@ -183,7 +183,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate, the dial, the arrival
   {
     key: 'S3_GATE', kind: 'milestone', title: 'The Gate Stands', icon: 'gtceu:hyperstargate',
-    deps: ['S3_COMP', 'S3_FIELD',     'S3_PROC', 'HG_MACH'], x: 20.5, y: -2,
+    deps: ['S3_COMP', 'S3_FIELD',     'S3_PROC', 'S3_CAPS', 'HG_MACH'], x: 20.5, y: -2,
     desc: [
           'The ring is closed, the base is lit and the controller holds its kept lock. It looks like nothing so much as a very large door. Check it off once it has formed.',
     ],
