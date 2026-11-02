@@ -447,7 +447,9 @@ export function buildCostTree(o) {
     return { key, total, steps };
   };
 
-  const result = { tree, tables, treeThreshold: thr, treeNodes: nodeCount,
+  const result = {
+    name: o.name || 'Total',
+    summary, consistency, tree, tables, treeThreshold: thr, treeNodes: nodeCount,
     items: crafted, bases, creative, types, eras,
     branches: branches.map((b) => ({ label: b.label, recipe: b.recipe ? b.recipe.id : null, ownEu: b.own.eu, entries: b.entries.length })),
     checks: {
