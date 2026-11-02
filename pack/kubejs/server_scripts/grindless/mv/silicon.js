@@ -106,6 +106,6 @@
       if (edits > 0) SI.boules.push(id)
       else missing3.push(id)
     })
-    if (missing3.length > 0) console.error('[grindless/mv] boules not edited: ' + missing3.join(', '))
+    if (missing3.length > 0) console.warn('[grindless/mv] boules NOT edited: ' + missing3.join(', '))
     console.info('[grindless/mv] polysilicon boules rebuilt: ' + SI.boules.length + ' of ' + BOULES.length)  })
 })()
