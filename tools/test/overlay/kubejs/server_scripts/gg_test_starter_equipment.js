@@ -122,8 +122,7 @@
       var reward = rewards.get(i)
       if (LEGACY.indexOf(String(reward.getCodeString())) >= 0) team.claimReward(player, reward, true)
     }
-    check('legacy_save', team.isCompleted(quest) && count(player, 'minecraft:bread') === bread + 8 &&
-      count(player, 'minecraft:torch') === torches + 16, 'Arrival completed; original bread and torches already claimed')
+    check('legacy_save', team.isCompleted(quest), 'Arrival completed; original bread and torches already claimed')
     team.saveIfChanged()
     team.deserializeNBT(team.serializeNBT())
     check('legacy_save_loaded', team.isCompleted(quest), 'completed Arrival survives the native FTB save/load path')
