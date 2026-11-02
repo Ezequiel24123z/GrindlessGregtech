@@ -3,7 +3,33 @@ import { Graph } from './engine.mjs';
 import { fluidKey, normalizeRecipe } from './normalize.mjs';
 import { applyPackages } from './packages.mjs';
 import { abilityMaxCount, structureSelectors } from './structure.mjs';
+
+const IO_LABEL = { itemIn: 'input bus', fluidIn: 'input hatch', itemOut: 'output bus', fluidOut: 'output hatch' };
+// The I/O abilities a recipe needs. A programmed circuit alone doesn't need a bus (GTM sets it in the controller).
+function ioNeeds(n) {
+  const need = new Set();
+  for (const i of n.inputs) {
+    if (i.kind === 'fluid') need.add('fluidIn');
+    else if (i.kind === 'item' && !(i.alts.length === 1 && i.alts[0] === 'gtceu:programmed_circuit')) need.add('itemIn');
+  }
+  for (const o of n.outputs) {
+    if (o.key.startsWith('research:')) continue;
+    need.add(o.key.startsWith('fluid:') ? 'fluidOut' : 'itemOut');
+  }
+  return [...need];
+}
 import { asArray, makeGlobMatcher } from './util.mjs';
+
+// A water source block in a pattern is the free vanilla pool the machine sits in (renewable, no item to craft): it is not a part.
+const POOL_BLOCKS = new Set(['minecraft:water']);
+function bucketedFluidBlocks(desc) {
+  const symbols = {};
+  for (const [ch, s] of Object.entries(desc.symbols || {})) {
+    if (s && s.kind === 'blocks' && (s.blocks || []).length > 0 && s.blocks.every((b) => POOL_BLOCKS.has(b))) symbols[ch] = { kind: 'any' };
+    else symbols[ch] = s;
+  }
+  return { ...desc, symbols };
+}
 
 export function prepareConfig(raw) {
   const cfg = { ...raw };
@@ -160,7 +186,7 @@ export function buildModel(dump, rawCfg0) {
   const warnings = [...pk.warnings];
   const st = { unresolved: new Set() };
   const stats = {
-    recipes: dump.recipes.size, ignoredByType: {}, deadByType: {}, emptyIngredient: 0, badIngredient: 0,
+    recipes: dump.recipes.size, ignoredByType: {}, deadByType: {}, unmodelledConditions: {}, emptyIngredient: 0, badIngredient: 0,
     templateMissing: 0, rules: 0, structureMachines: 0, structureMachineIds: [], rolledMachines: [], veinTargets: 0, veinsWithoutItem: [],
     partsNotRequired: [], packages: pk.packages, generatedResearch: 0,
   };
@@ -410,9 +436,11 @@ export function buildModel(dump, rawCfg0) {
         hatches = 1;
       }
       if (typeof e0.energy.voltage !== 'number') warnings.push(`${id}: energy.voltage must be a number (the hatch's voltage)`);
-      const maxEUt = hatches >= 2 ? e0.energy.voltage * 4 : e0.energy.voltage;
+      const amperage = e0.energy.amperage === undefined ? 1 : Number(e0.energy.amperage);
+      if (!(amperage >= 1)) warnings.push(`${id}: energy.amperage must be a number of at least 1`);
+      const maxEUt = (hatches >= 2 ? e0.energy.voltage * 4 : e0.energy.voltage) * (amperage >= 1 ? amperage : 1);
       e = { ...e0, maxEUt };
-      stats.rolledMachines.push({ machine: id, hatches, voltage: e0.energy.voltage, maxEUt });
+      stats.rolledMachines.push({ machine: id, hatches, voltage: e0.energy.voltage, amperage, maxEUt });
     }
     // coilTemp: an EBF's coil temperature. GTM adds 100 K per voltage step above MV
     // (GTRecipeModifiers.ebfOverclock) and rejects recipes whose ebf_temp is higher.
@@ -477,9 +505,12 @@ export function buildModel(dump, rawCfg0) {
       if (desc) {
         // the machine's `partAbilities` (e.g. requiring the MV hatch) overrides the tier's key by key
         const abilityItems = e.partAbilities ? { ...cfg.partAbilities, ...e.partAbilities } : cfg.partAbilities;
-        const sd = structureSelectors(desc, abilityItems, (i) => dump.items.size === 0 || dump.items.has(i));
+        const sd = structureSelectors(bucketedFluidBlocks(desc), abilityItems, (i) => dump.items.size === 0 || dump.items.has(i));
         for (const p of sd.problems) warnings.push(`${id}: ${p}`);
         partSels = sd.selectors;
+        // I/O abilities the pattern offers (M4-02): a recipe whose items or fluids need an ability the pattern lacks can't run here
+        const has = (...abs) => abs.some((a) => abilityMaxCount(desc, a) > 0);
+        e.ioHave = { itemIn: has('input_bus', 'steam_input_bus'), fluidIn: has('input_hatch'), itemOut: has('output_bus', 'steam_output_bus'), fluidOut: has('output_hatch') };
         // requireAbilities (IV, 2026-10-25): a variant built WITH an optional part its real pattern offers (a plant of ours formed with
         // the IV parallel hatch); the pattern must have a cell for it
         for (const ab of asArray(e.requireAbilities)) {
@@ -542,10 +573,15 @@ export function buildModel(dump, rawCfg0) {
       const euOk = (e) => (e.maxEUt === undefined ? Infinity : e.maxEUt) >= n.eut;
       const tempOk = (e) => e.maxTemp === undefined || n.temp === undefined || e.maxTemp >= n.temp;
       const tierOk = (e) => tierAllows(e, n.id);
-      const cands = all.filter((e) => euOk(e) && tempOk(e) && tierOk(e));
+      const need = ioNeeds(n);
+      const ioMissing = (e) => (e.ioHave ? need.filter((k) => !e.ioHave[k]) : []);
+      const ioOk = (e) => ioMissing(e).length === 0;
+      const cands = all.filter((e) => euOk(e) && tempOk(e) && tierOk(e) && ioOk(e));
       let lbl = `machine for ${n.type}`;
       if (cands.length === 0) {
-        if (all.length === 0) lbl = `there's no machine for ${n.type} in this tier`;
+        const ioBlocked = all.find((e) => euOk(e) && tempOk(e) && tierOk(e) && !ioOk(e));
+        if (ioBlocked) lbl = `${ioBlocked.id || ioBlocked.machine}'s pattern has no ${ioMissing(ioBlocked).map((k) => IO_LABEL[k]).join(' or ')} this recipe needs`;
+        else if (all.length === 0) lbl = `there's no machine for ${n.type} in this tier`;
         else if (all.some((e) => euOk(e) && tempOk(e) && (e.onlyRecipesMatch || e.exceptRecipesMatch))) lbl = `no ${n.type} machine of this tier takes ${n.id} (the family's veto: its tier folders and the machines' recipe allowlists)`;
         else if (all.some((e) => euOk(e) && tempOk(e))) lbl = `no ${n.type} machine of this tier runs the recipes filed under ${recipeTierOf(n.id)}/ (the family's tier veto)`;
         else if (all.some(euOk)) lbl = `no ${n.type} machine reaches ${n.temp} K (this tier's coils)`;
@@ -589,7 +625,19 @@ export function buildModel(dump, rawCfg0) {
     for (const c of n.conditions) {
       if (dimGroup.includes(c)) continue;
       const rule = cfg.conditions[c.type] || cfg.conditions['*'];
-      if (!rule || rule.ignore || c.reverse === true) continue;
+      // Fail closed: a condition type with no rule is an unmodelled gate, never a free pass. Only an explicit `ignore` (with a
+      // reason in the tier config) skips a condition.
+      if (!rule) {
+        stats.unmodelledConditions[c.type] = (stats.unmodelledConditions[c.type] || 0) + 1;
+        slots.push(slotOf([], false, `unmodelled condition ${c.type}`, 'cond'));
+        continue;
+      }
+      if (rule.ignore) continue;
+      // A reversed condition ("not X") is only skipped by an `ignore` rule; otherwise the model can't prove it holds.
+      if (c.reverse === true) {
+        slots.push(slotOf([], false, `reversed condition ${c.type} is not modelled`, 'cond'));
+        continue;
+      }
       if (rule.researchKeys) {
         // GTM's assembly line research (ResearchCondition; with machines.enableResearch the line's data access hatch only offers
         // the recipes its data sticks name): met once the research exists, the research:<id> key a scanner recipe's data stick
@@ -616,6 +664,11 @@ export function buildModel(dump, rawCfg0) {
         // a numeric condition with a cap in this tier (e.g. the EBF's coil temperature): above it, the recipe doesn't apply
         const value = Number(c[rule.field]);
         if (value > rule.max) slots.push(slotOf([], false, `${c.type} ${value} (this tier reaches ${rule.max})`, 'cond'));
+      } else if (rule.keyFrom) {
+        // a place-bound condition met by a key a tier rule (a trip) produces: <prefix>:<field value> (the biome the rocket reaches)
+        const value = c[rule.keyFrom.field];
+        if (typeof value !== 'string' || value === '') slots.push(slotOf([], false, `condition ${c.type} with no ${rule.keyFrom.field}`, 'cond'));
+        else slots.push(slotOf([`${rule.keyFrom.prefix}:${value}`], true, `${c.type} ${value}`, 'cond'));
       } else if (rule.fluidsFrom) {
         for (const f of asArray(c[rule.fluidsFrom])) {
           slots.push(slotOf(resolve('fluid:' + f, `condition ${c.type}`), true, `next to ${f}`, 'cond'));

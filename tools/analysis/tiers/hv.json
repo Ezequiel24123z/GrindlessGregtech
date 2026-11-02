@@ -590,7 +590,7 @@
     { "id": "hv-moon", "label": "What HV makes for the Moon: the lunar drill's controller", "items": ["gtceu:lunar_drill"] },
     { "id": "hv-drill", "label": "What the HV drill needs: the bit and the samples for its recipes", "inputsOf": ["grindless:vein_drilling/hv/*"] },
     { "id": "hv-refinery", "label": "What the refinery and the reformer need", "inputsOf": ["grindless:refining/hv/*", "grindless:reforming/hv/*"] },
-    { "id": "hv-plant-gas-synthesis", "label": "What the syngas plant needs: the feedstock, the shift catalyst and the fluids", "inputsOf": ["grindless:syngas/hv/*"], "items": ["grindless:shift_catalyst"] },
+    { "id": "hv-plant-gas-synthesis", "label": "What the syngas plant needs: the feedstock, the shift catalyst and the fluids", "inputsOf": ["grindless:syngas/hv/co_rich", "grindless:syngas/hv/gasify_carbon", "grindless:syngas/hv/gasify_heavy_fuel", "grindless:syngas/hv/hydrogen_carbon", "grindless:syngas/hv/hydrogen_heavy_fuel", "grindless:syngas/hv/methanol_syngas", "grindless:syngas/hv/pluto_shift", "grindless:syngas/hv/shift"], "items": ["grindless:shift_catalyst"], "note": "Listed by id: the glob also caught UIV's c12_methanation and UXV's volatile_reform, rows of later eras (M1-05)." },
     {
       "id": "hv-bit-stainless",
       "label": "Stainless steel drill bit (the HV bit, no titanium)",

@@ -1503,7 +1503,8 @@
         "grindless:tarantula_orbit",
         "grindless:magellanic_stream",
         "grindless:m31_nucleus_orbit",
-        "grindless:local_group_filament"
+        "grindless:local_group_filament",
+        "gcyr:black_hole_orbit"
       ],
       "package": "B5",
       "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV ends to open and sustain (uhv/gate.js:36), as uxv.json; XP-T2 adds the four MAX+ places. UHV's target checks that open and sustain name every end."
@@ -1583,7 +1584,11 @@
       "dimensions": [
         "grindless:sirius_b_orbit"
       ],
-      "package": "B4"
+      "exceptRecipes": [
+        "grindless:degenerate_harvesting/degenerate_slug"
+      ],
+      "package": "B4",
+      "note": "The slug row is MAX's: it runs at the Sgr A* platform (sirius.json, site gcyr:black_hole_orbit), where its input is made."
     },
     {
       "id": "gate-uiv-casing",
@@ -1790,7 +1795,6 @@
       "id": "uev-alpha-outputs",
       "era": "uev-alpha",
       "label": "Alpha Centauri AB and what comes home from it",
-      "optional": true,
       "items": [
         "m:gtceu:nebula_collector",
         "m:gtceu:interstellar_dust_lab",
@@ -1809,7 +1813,6 @@
       "id": "uev-barnard-outputs",
       "era": "uev-barnard",
       "label": "Barnard b and what comes home from it",
-      "optional": true,
       "items": [
         "m:gtceu:barnard_core_drill",
         "m:gtceu:carbonyl_refinery",
@@ -1825,7 +1828,6 @@
       "id": "uev-sirius-outputs",
       "era": "uev-sirius",
       "label": "Sirius B and what comes home from it",
-      "optional": true,
       "items": [
         "m:gtceu:white_dwarf_spectrograph",
         "m:gtceu:degenerate_harvester",
@@ -1840,7 +1842,6 @@
       "id": "output-uev",
       "era": "uiv",
       "label": "The gate's own output",
-      "optional": true,
       "items": [
         "gtceu:uiv_machine_casing"
       ]

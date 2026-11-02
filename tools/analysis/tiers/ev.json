@@ -342,7 +342,7 @@
     { "id": "recipe-cascade-leach", "label": "Cascade, circuit 1: merrillite + HCl -> chloride solution", "kind": "recipe", "recipe": "grindless:solvent_extraction/ev/merrillite_leach" },
     { "id": "recipe-cascade-extraction", "label": "Cascade, circuit 2: solution + kerosene + HCl -> samarium, neodymium and mixed chlorides", "kind": "recipe", "recipe": "grindless:solvent_extraction/ev/rare_earth_extraction" },
     { "id": "samarium", "label": "Samarium dust (cascade -> samarium chloride -> GTM's electrolyzer)", "item": "gtceu:samarium_dust" },
-    { "id": "chlorides-only-cascade", "label": "The rare-earth chlorides only come from the cascade (merrillite has no decomposition)", "item": "gtceu:samarium_chloride_dust", "without": ["operate:gtceu:extraction_cascade"], "expect": "unreachable" },
+    { "id": "chlorides-only-cascade", "label": "The rare-earth chlorides only come from the cascade (merrillite has no decomposition)", "item": "gtceu:samarium_chloride_dust", "without": ["operate:gtceu:extraction_cascade", "operate:gtceu:extraction_cascade@luv2"], "expect": "unreachable" },
 
     { "id": "nether-star", "label": "Nether Star (the wither in the EV creature simulator; saved for IV)", "kind": "recipe", "recipe": "grindless:creature_simulation/wither/*", "output": "minecraft:nether_star" },
 

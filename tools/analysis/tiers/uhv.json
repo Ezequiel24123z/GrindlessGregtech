@@ -1990,9 +1990,14 @@
       "note": "Before the jump (uhv.md, the wireless tier): two UV hatches give UHV voltage (GTM 7.5.3's two-hatch rule), so the UHV recipes run on the UV grid until the UHV cells."
     },
     {
+      "id": "gtceu:warp_gate@uhv",
       "machine": "gtceu:warp_gate",
       "types": [
         "gtceu:warp_gate"
+      ],
+      "onlyRecipes": [
+        "grindless:warp_gate/open",
+        "grindless:warp_gate/sustain"
       ],
       "maxEUt": 33554432,
       "needs": [
@@ -2249,9 +2254,11 @@
       ],
       "produces": [
         "dim:${place:proxima_b}",
-        "dim:${orbit:proxima_b}"
+        "dim:${orbit:proxima_b}",
+        "biome:gcyr:proxima_centauri_b_star_side",
+        "biome:gcyr:proxima_centauri_b_opp_side"
       ],
-      "note": "The level 8 rocket (A8, B1): the ICAN motor (GCYR motor tier 6) and the tier 11 BNNT tank; reaches Proxima b and its orbit (the eighth station)."
+      "note": "The level 8 rocket (A8, B1): the ICAN motor (GCYR motor tier 6) and the tier 11 BNNT tank; reaches Proxima b and its orbit (the eighth station) and both its biomes (the biome condition of the B5 and cold-trap rows)."
     },
     {
       "id": "nether-trip",
@@ -2499,7 +2506,8 @@
         "grindless:tarantula_orbit",
         "grindless:magellanic_stream",
         "grindless:m31_nucleus_orbit",
-        "grindless:local_group_filament"
+        "grindless:local_group_filament",
+        "gcyr:black_hole_orbit"
       ],
       "exceptRecipes": [
         "grindless:warp_gate/hold*"
@@ -2859,7 +2867,6 @@
         "grindless:proxima_ice_core",
         "grindless:proxima_regolith_survey",
         "grindless:cold_trap_regolith",
-        "grindless:americium_micro_source",
         "grindless:infrared_pigment",
         "grindless:chitosan_scaffold",
         "grindless:melanised_biomass",
@@ -2912,7 +2919,6 @@
       "id": "uhv-mercury-outputs",
       "era": "uhv-mercury",
       "label": "Mercury's ground and orbit",
-      "optional": true,
       "items": [
         "m:gtceu:regolith_excavator",
         "m:gtceu:solar_vapour_furnace",
@@ -2930,7 +2936,6 @@
       "id": "uhv-proxima-outputs",
       "era": "uhv-proxima",
       "label": "Proxima b, its orbit, and what comes home from it",
-      "optional": true,
       "items": [
         "m:gtceu:xenoflora_rover_bay",
         "m:gtceu:xenobotany_greenhouse",
@@ -2941,7 +2946,7 @@
         "m:gtceu:baseline_astrometer",
         "m:gtceu:sample_receiving_facility",
         "m:gtceu:organoid_array",
-        "m:gtceu:warp_gate",
+        "m:gtceu:warp_gate@uhv",
         "grindless:proxima_flora_sample",
         "grindless:proxima_ice_core",
         "grindless:chitosan_scaffold",
@@ -2960,7 +2965,6 @@
       "items": [
         "gtceu:uev_machine_casing"
       ],
-      "optional": true,
       "note": "UEV starts with the gate's output; UHV may not need it."
     },
     {

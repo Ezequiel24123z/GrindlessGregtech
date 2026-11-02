@@ -47,7 +47,7 @@ export function buildEraContext({ startup = new Map(), own = new Set(), machines
   for (const m of machines) {
     for (const t of m.types || []) {
       if (!m.mb) { single.add(t); continue; }
-      if (m.id === t && !own.has(m.id)) native.add(t);
+      if (!own.has(m.id)) native.add(t);
       if (!mbOfType.has(t)) mbOfType.set(t, []);
       mbOfType.get(t).push(m.id);
     }
