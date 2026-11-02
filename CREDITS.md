@@ -2,6 +2,8 @@
 
 The pack does not redistribute mods: packwiz downloads them from their official source (Modrinth, CurseForge or the author's Maven repository). Each mod keeps its licence.
 
+The pack's own files are released under the MIT License ([LICENSE](LICENSE)). The material below keeps the licence listed for it.
+
 ## Base
 
 | What | Author | Licence | Use |

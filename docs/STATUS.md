@@ -3,7 +3,7 @@
 Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Overwrite it at each accepted batch; do not append history.
 
 - **Playable version:** v1.2.0 (`docs/releases/v1.2.0.md`: the mega audit's fixes; tag `v1.2.0` is `main`, `releases` and `playable`; GitHub releases with the pinned Prism zips). v1.0.0 needed a new world; v1.0.1, v1.1.0 and v1.2.0 keep it (no id removed or renamed; a Mirror Shell built in v1.1.0 needs its window-ring coils swapped for feeder coil casings). The player channel is `releases` (release `releases-channel`, `Gregtech-Grindless-releases.zip`); `playable` is mirrored to it during the transition.
-- **Integration branch:** `ezequiel24123z-project-reforge`. Every package branches from it and is merged back with `--no-ff` by the integrator; `main` follows the released tags.
+- **Integration branch:** `ezequiel24123z-project-reforge`. Every package branches from it and is merged back with `--no-ff` by the integrator; `main` follows the released tags; documentation-only commits may move it ahead, and its `pack/` always equals the latest release.
 - **Current milestone:** Project Reforge, done: released as v1.0.0 on 2026-11-01 (DECISIONS.md:695), v0.17.0 to v1.0.0 in ten phases: 0 rules and diagnosis, 1 cost tooling, 2 cost rebalance, 3 era and line audit, 4 research, 5 quests, 6 assets and sounds, 7 MAX+ and the Hyperstargate, 8 cleanup, 9 release. No save compatibility (DECISIONS.md:701): v1.0.0 needs a new world.
 - **Done:**
   - Phases 0, 1 and 4.
@@ -48,13 +48,14 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - T2 on the VM: the final dump da2631c7e320 (with the lookup export) has the batch dump's recipe ids and pack recipes; reachability PASS for all 16 tiers (MAX+ gate 1,100/1,100); the obtain pass, process audit, data-info keys and structure quality report nothing new; book lint 0/0; charts 3,836 arrows, 0 failing; cost-matrix --check shows only the seven casing-chain steps (exec-20261102-144356-2450514, exec-20261102-145054-2462792). Every server fixture of the batch passes in strict summaries, restart legs included, and the forming sweep forms 310 of 310 (run ids in `docs/releases/v1.2.0.md`).
   - T3 on the VM's client, on the release candidate: the client suite with the EMI audit PASS (8 known gaps; vm-20261102-145617-0f104a4c-2463398); quest book 26/26 with 20 screenshots (vm-20261102-150622-0f104a4c-2464620); starter equipment 60/60 (vm-20261102-151120-0f104a4c-2465356); server `gg_test_quests` and `gg_test_hidden` 50/50 (vm-20261102-151603-0f104a4c-2466141).
 - **In flight:** none.
+- **After v1.2.0** (public face, 2026-11-02): the README and `docs/README.md` rewritten for players with screenshots, the MIT licence, a bug report form, the session notes and migration map removed from the tree, the release notes rewritten, and the Copilot co-author lines removed from the whole history (`main` moved ahead of the tag; `pack/` unchanged).
 
-- **Next:** the owner's decisions in #230 (the defaults stand until answered), then its follow-ups: the UEV and UIV layout re-solve, M1-07 (dating places from planets.json), recycling yields, an active-block check, the recipe guard's partial-try gap.
+- **Next:** the owner's answers on #230 make the next batch: the Hyperstargate's plates down to about 10x GTNH, a denser MAX+ power plant, and a per-team wireless network and Hyperstargate dial (FTB Teams). Then the follow-ups: the cost gate accepting the seven owner-accepted steps, the UEV and UIV layout re-solve, M1-07 (dating places from planets.json), recycling yields, an active-block check, the recipe guard's partial-try gap. Publishing on CurseForge waits for the owner (#231).
 - **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
 ## Open questions for the owner (the defaults stand until answered)
-- **The mega audit's decisions** (#230): principle 7 after UV, the Hyperstargate against the 10x GTNH target, the casing chain, MAX+ power density, multiplayer, the pack licence, M2-15, M5b-25, the steel boiler's 7.111x, art and sound, the Mirror Shell's ring block. Defaults as written there.
+- **The mega audit's decisions** (#230), answered by the owner on 2026-11-02: MIT licence; worlds may break when needed; no casing chain; the Hyperstargate's plates to about 10x; a denser MAX+ plant; per-team multiplayer; the minor defaults stand. Still open: principle 7 after UV (UV has 32 progression multiblocks and MAX 14, against a guide of about x1.35 per era).
 - **Hand recipes:** remove the crafting-table recipes of the core components from MV up? A 3x3 grid cannot scale, so they bypass the curve. Default: yes (done for MV to UV; the MV and HV hulls stay as the bootstrap).
 - **Art:** commission the genuine-art list (`06_assets_audit.md` section 8), or use generators only? Default: generators only.
 - **Era style:** does the OpV and MAX look of RF-6D (brighter, more saturated, speckled) work? Default: yes; RF-6D-b extended it to UV to UXV.
@@ -65,13 +66,13 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **Phase 5** (`05_quest_design.md` §6, nine questions): era chapter groups; MAX+ in nine chapters; six roles, not six chapters; longer text for teaching quests; restore the merged wafer and circuit steps; Power after LuV optional; item rewards only from gated lines; Welcome's bread; before captures per batch. Defaults: yes to each, as written.
 - **Phase 5 shape:** the before and after renders of every era (Steam to MAX; `tools/quests/render-book.mjs --compare` against the pre-Reforge book) wait for the owner's review. They do not block: the owner asked for autonomous work.
 - **OpV and MAX components** (P2-E): the OpV rule of 2026-10-29 (`opv.md` *Validator*) forbade lower components; P2-E's band E lets each core component take its previous-tier counterpart, as UXV's take UIV's, because the OpV core cost 310 against 71,526. Keep it? Default: yes (AGENTS.md principle 2 wins over pre-Reforge docs; machines, hatches and controllers keep the rule whole).
-- **Save compatibility after v1.0.0?** Default: yes, from v1.0.0 on.
+- **Save compatibility after v1.0.0?** Answered (owner, 2026-11-02): no guarantee. A release may break worlds when a change needs it, and its notes say so.
 
 ## Open blockers and known issues
 - **Cost:**
   - LuV (0.912) and UIV (0.907) sit near the lower edge of the 10% band; changing one era's factor means re-solving every era above it. The OpV and UXV hulls are outliers (9 to 25 times their peers), explained in `02_cost_curve.md`, not fixed.
   - Some routes multiply matter: ash separation fed by diamond CVD and diamond electrolysis, and blue topaz ore at ZPM and later (`02_cost_curve.md`).
-  - Seven steps climb less than x1.3 at the x8 cap (machine casing HV and UV; hull MV, HV, EV and UV; 1 A hatch HV): the casing chain (#230).
+  - Seven steps climb less than x1.3 at the x8 cap (machine casing HV and UV; hull MV, HV, EV and UV; 1 A hatch HV). The owner accepted them as they are (2026-11-02, no casing chain); the gate still lists them until it learns to accept them.
 - **Recycling:** GTM's recycling yields of about 700 crafted items differ from boot to boot (GTM picks one of an item's recipes; 727, 723 and 644 rows between three dumps of nearly the same code); each matches a real recipe (#230).
 - **Active blocks:** GTM 7.5.3 relights a working multiblock's active blocks one nested structure check per block when it breaks; keep them in the low hundreds per structure (the largest left is 264, the annihilation engine).
 - **Capacity:** no known violation (`tools/analysis/capacity_known.json` is empty since CAP-K); one warning: UHV's ZBLAN mixer row takes 73,250 mB of fluorine, more than a singleblock mixer holds (the large mixer runs it). The lint does not count programmed circuits, so it cannot see a circuit on a multiblock with no item input.
@@ -111,4 +112,4 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - the validator: `tools/analysis/README.md`;
   - the bench and the VM: `tools/test/README.md`, `docs/testing/` (`usage.md` for `gg-vm-exec.sh`);
   - textures and sounds: `tools/assets/README.md`.
-- **History** (not read by default): `docs/sessions/`, `docs/migration/`.
+- **History:** the git log. The old session notes (`docs/sessions/`) and the AGENTS.md migration map (`docs/migration/`) left the tree on 2026-11-02 and stay in history.

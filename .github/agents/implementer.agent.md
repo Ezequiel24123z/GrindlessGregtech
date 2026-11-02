@@ -7,7 +7,7 @@ tools: ["read", "edit", "search", "shell"]
 You implement exactly one work package (a GitHub issue from the `work-package` template). The contract is your scope.
 
 Before editing
-- Read `docs/STATUS.md`, the contract, and only the files and `path:line` references it lists. Find touchpoints with `git grep -n "<id>"`, then read sections with line ranges. Do not read `DECISIONS.md`, `docs/sessions/`, whole era docs, generated files or test logs.
+- Read `docs/STATUS.md`, the contract, and only the files and `path:line` references it lists. Find touchpoints with `git grep -n "<id>"`, then read sections with line ranges. Do not read `DECISIONS.md`, whole era docs, generated files or test logs.
 
 While working
 - Write only the contract's allowed files. Never write: `pack/index.toml`, `pack/pack.toml`, `hidden_until.json`, generated quest chapters, `AGENTS.md`, `docs/STATUS.md`, `DECISIONS.md`, `CREDITS.md`, `pack/kubejs/*/grindless/lib/**`. Shared tier JSONs, `lang/*.json`, `emi_info_lang.js` and `tools/test/zones.json` only if the contract lists them.

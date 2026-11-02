@@ -1,5 +1,5 @@
-name: Work package
-description: One package of Grindless work for one agent session (contract; AGENTS.md "Work packages").
+name: Work package (maintainers)
+description: Maintainers only. One bounded package of work (see AGENTS.md, "Work packages").
 title: "[PKG <id>] <objective>"
 labels: ["work-package"]
 body:

@@ -1,0 +1,37 @@
+name: Bug report
+description: Something in the pack crashes, does not work, or does not match its quest or EMI page.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting. One problem per issue, please.
+  - type: input
+    id: version
+    attributes:
+      label: Pack version
+      description: For example 1.2.0. If you are not sure, write the date of your last update.
+    validations:
+      required: true
+  - type: dropdown
+    id: setup
+    attributes:
+      label: How do you play?
+      options:
+        - Prism Launcher, releases channel
+        - Prism Launcher, pinned version
+        - Dedicated server
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected and what happened instead. The names of the machines, recipes or quests involved help a lot.
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Attach logs/latest.log, and the file from crash-reports/ if the game crashed, or paste the relevant part.

@@ -3,7 +3,7 @@
 GregTech Modern 7.5.3 pack (Minecraft 1.20.1, Forge): nothing is gathered by hand.
 
 ## Context
-- Start with `docs/STATUS.md`. Do not read `DECISIONS.md`, `docs/sessions/`, `docs/migration/` or whole `docs/eras/*.md` by default; open one section (`git grep -n`) only when the work package cites it.
+- Start with `docs/STATUS.md`. Do not read `DECISIONS.md` or whole `docs/eras/*.md` by default; open one section (`git grep -n`) only when the work package cites it.
 - Never read: `pack/index.toml`, `hidden_until.json`, textures, test logs, `**/out/`, `**/.work/`.
 - Scoped rules load by path: `.github/instructions/{kubejs,tests,quests,release,assets}.instructions.md`.
 - Docs written before Project Reforge (2026-10-31) may still state old rules: no raw quantity, short quests with small rewards, only small additions up to HV, save compatibility. Where they conflict, this file wins.

@@ -1,169 +1,102 @@
 # Gregtech Grindless
 
-GregTech progression pack for Minecraft 1.20.1 (Forge) on GregTech Modern 7.5.3. Its rule is simple: **nothing needed for progression is gathered by hand**. Starting in the Steam Age, resources are produced automatically through increasingly complex GregTech processing lines and multiblocks. Difficulty comes first from steps, conditions and coordinating industry, and from MV on key recipes cost a lot too; recipe times are never inflated.
+A GregTech Modern 7.5.3 modpack for Minecraft 1.20.1 (Forge). You only gather by hand at the very start. After that, everything you need comes out of machines you build and automate, from a steam-powered drill on Earth to a stargate at the edge of the Local Group.
 
-The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon, Mars, the inner planets, Jupiter's and Saturn's moons, the edge of the Solar System, nearby stars, neutron stars and black holes, the galactic bulge, in MAX Sagittarius A* at the Galactic Centre and, in MAX+, other galaxies and the Hyperstargate, which ends the pack.
+| ![Steam vein drill](docs/images/steam-vein-drill.jpg) | ![Warp gate](docs/images/warp-gate.jpg) | ![Stellar forge](docs/images/stellar-forge.jpg) |
+|:---:|:---:|:---:|
+| Steam vein drill (Steam Age) | Warp gate (UHV) | Stellar forge (UEV) |
 
-**v1.0.0 needed a new world** (worlds from v0.17.0 or older do not work); v1.0.1, v1.1.0 and v1.2.0 keep a v1.0.0 world.
+## What the pack is like
 
-**At a glance:** Minecraft 1.20.1 · Forge 47.4.28 · GregTech Modern 7.5.3 · 223 mods · 16 eras playable (Steam to MAX+) · English only.
+You start on Earth with the Horizon Collector, a slow machine that makes the basic materials, and a bit of mining by hand. By the end of the Steam Age, vein drills and greenhouses have taken over, and from then on every resource has an automated source.
 
-**Contents:** [Design rules](#design-rules) · [Current status](#current-status) · [Tier by tier](#tier-by-tier) · [Our multiblocks](#our-multiblocks) · [Multiblocks from other mods](#multiblocks-from-other-mods) · [Ideas from other modpacks](#ideas-from-other-modpacks) · [Other mods](#other-mods) · [Quests](#quests) · [Known issues](#known-issues) · [How to play](#how-to-play-prism-launcher) · [For developers](#for-developers)
+Each tier brings longer processing lines, new multiblocks and, from HV on, a new place to go: the Moon and Mars, the rest of the Solar System, nearby stars, neutron stars and black holes, Sagittarius A* at the centre of the Milky Way and, at the very end, other galaxies.
 
-## Design rules
+The difficulty comes from length and from lines that depend on each other, not from waiting. From MV on, important recipes cost a lot more with every tier, but recipe times are never stretched and every input can be automated. Power is generous: boilers make eight times the steam and generators twice the EU per unit of fuel, but nothing produces energy out of nothing.
 
-- **No hand gathering.** Hand mining only starts the game. The Horizon Collector you start with slowly makes the basics; from the Steam Age on, vein drills, greenhouses, simulators and harvesters supply everything.
-- **Complexity first, and real cost.** Eras get harder through more steps, conditions, multiblocks and lines that cross each other. From MV on, amounts climb steeply too: key recipes and final items cost a lot of items and fluids. Every input stays automatable, and recipe times are never inflated in place of cost.
-- **Honest byproducts.** Every byproduct goes somewhere: inert ones can be voided, dangerous ones must be contained, and future uses are stated.
-- **Multiblocks that pay off.** Every era has multiblocks of ours that gain something: speed, throughput, a recipe impossible at small scale, or several steps in one.
-- **Generous power, never free.** Boilers make ×8 steam and generators ×2 EU per fuel (GregTech Leisure style). Later eras keep that with better fuels and more complex plants; nothing makes energy from nothing.
-- **Quests that teach.** Quests are in English and never block recipes. Advanced eras get longer chapters that teach every new wafer, circuit generation, process and multiblock. Rewards are proportionate and never skip a production line.
-- **Huge and deeply industrial.** Pointless complexity goes; meaningful complexity stays.
-- **GregTech Modern wins** whenever these rules conflict with it.
+Along the way you will find:
 
-## Current status
+- 310 multiblocks made for this pack, each with an EMI page that explains what it does, on top of GregTech Modern's own machines.
+- A quest book with one chapter per tier that introduces new materials, circuits and machines as they appear, plus a flowchart of every processing line.
+- Rockets from Gregicality Rocketry in the first space tiers, then orbital stations, probes, warp gates and relays further out.
+- Applied Energistics 2 as the logistics backbone, with quantum bridges between planets, and a wireless EU network shared by every dimension.
 
-The current version is **v1.2.0**. It spans the Steam Age through MAX+, from Earth to the Hyperstargate. v1.0.0 was the result of Project Reforge, v1.0.1 gave 80 more machines their own sounds, v1.1.0 answered the first round of play feedback (one quest chapter per era, places only where a recipe really uses them, any circuit of the tier, GregTech's own prospector, creative flight with the electric suits), and v1.2.0 fixes what a full audit of the pack found: relay travel from UIV on, a completable MAX+ chapter, truthful quests, circuits and costs that climb every tier, and multiblocks that run what they advertise.
+The pack is in English.
 
-| Progress | Status |
-|---|---|
-| Steam Age–MAX | Reworked in `v1.0.0`: costs that climb steeply per era from MV, an audited set of process lines, a bigger MAX, a rebuilt quest book, textures and sounds. |
-| MAX+ | New in `v1.0.0`: three stages out of the Galaxy and the Local Group, four new places, 17 multiblocks, 58 lines, and the Hyperstargate. The ending moved here from MAX. |
+## Tiers
 
-See the [v1.2.0 release notes](docs/releases/v1.2.0.md) for this version, the [v1.0.0 notes](docs/releases/v1.0.0.md) for the full list of Project Reforge and the [v0.17.0 notes](docs/releases/v0.17.0.md) for the release before it. The [journey guide](docs/journey.md) describes the progression.
-
-## Tier by tier
-
-Each era sends you somewhere new for a resource that only exists there, and each one ends at a gate that needs the era's main line running. The number after the highlights is how many multiblocks of ours the era adds. Detailed designs are in [`docs/eras/`](docs/eras/).
-
-| Tier | Where you go | What the era is about | Some of our multiblocks |
-|---|---|---|---|
-| **Steam** | Earth | Coke, bricks, bronze, boilers and steel. Steam vein drills and greenhouses end hand mining before you leave. | Steam vein drill, steam greenhouse, coking battery, steam blast furnace, large steam machines (16) |
-| **LV** | The Nether | The first electric factory: small chemistry, centrifuging, ore washing and circuits. AE2 unlocks in full, and a global wireless EU network opens. | Wireless energy tower, generator array, heliostat tower, submerged arc furnace, sulfide roaster, wire works (9) |
-| **MV** | The End | Polymers, fuels, silicon wafers and renewable carbon; lines start to cross. One multiblock replaces ten loose machines. | Ore plant, biorefinery, polymer works, four universal factories, advanced multi smelter, weather controller (13) |
-| **HV** | The Moon | Oil refining, cracking and plastics; cleanroom and EV circuits; titanium exists only on the Moon. Ends with the first rocket. | Refinery, reformer, syngas plant, coil chemical plant, engine test stand, composite autoclave, lunar drill (9) |
-| **EV** | Moon base, Mars | Titanium, platinum and fine chemistry. The Moon base runs on its own; ME hatches connect multiblocks to AE2; nano circuits. | Platinum plant, regolith cell, cryogenic plant, lunar solar array, sealed dome, atmosphere processor, combined-cycle plant (12) |
-| **IV** | Venus, Mercury | Nuclear power by design (uranium from the End), naquadah, iridium and osmium, and an assembly line fed by AE2. | Fission reactor, hot cell, fuel fabrication plant, heavy water plant, naquadah plant, Venus heat engine, Mercury solar field (16) |
-| **LuV** | Earth orbit, asteroid belt, Io, Europa, Ganymede | Cryogenics and superconducting tape, asteroid metals, and Europa's life turned into wetware. GTM's first fusion reactor makes europium. | Helium refrigerator, coated conductor line, asteroid processor, cryobot, organoid lab, orbital solar station (21) |
-| **ZPM** | Saturn, Titan, Enceladus, Uranus | Naquadria, fusion Mk2 and the large naquadah reactor. Every outer base is an orbital station; samples come up by probe and siphon. | Gas giant siphon, ring harvester, tholin reformer, naquadria refinery, direct energy converter, qubit fab (28) |
-| **UV** | Neptune, Triton, Pluto, the Kuiper Belt | Accelerators and isotopes, fusion Mk3, and a laser-sail probe sent to Proxima Centauri. | Synchrotron, accelerator-driven reactor, muon fusion cell, laser fusion chamber, laser sail launcher, mega factory (32) |
-| **UHV** | Proxima Centauri b, Mercury orbit | Kardashev II: a Dyson swarm around the Sun, a warp gate to Proxima, the space elevator, a nuclear clock and photonic circuits. | Swarm segment foundry, swarm control station, warp gate, high-flux reactor, nuclear clock lab, quantum fabricator (32) |
-| **UEV** | Alpha Centauri A and B, Barnard b, Sirius B | Superheavy elements, megabar matter, single-photon optics, the optical computer and our fusion Mk4. | Calutron, heavy-ion cyclotron, megabar press, photonic integration hall, stellar forge, UEV fusion reactor (26) |
-| **UIV** | RX J1856 neutron star, PSR J0437 pulsar, Cygnus X-1 | Reached through the warp gate. Metallic hydrogen, refractory alloys, the optical mainframe, fusion Mk5 and energy from a black hole's spin. | Penrose engine, Matrioshka computer, neutronium compression hall, ramp-compression pulser, levitation melter (23) |
-| **UXV** | Cygnus X-1 again, Vela pulsar, Cassiopeia A | Star lifting, accretion-disk plasma, nuclear pasta, spintronics and fusion Mk6. | Stellar elevator, accretion disk skimmer, plasma mass filter, pasta extractor, Blandford–Znajek dynamo (22) |
-| **OpV** | Cygnus X-1 orbit, magnetar SGR 1806-20, Terzan 5 core | Antimatter for power and tools, strangelets, the Kugelblitz forge, chain matter and von Neumann replication. | Annihilation engine, antiproton decelerator, strangelet vault, Kugelblitz forge, Hawking collector, field-frozen press (19) |
-| **MAX** | Sagittarius A* orbit, the NSC belt | Kardashev III at the Galactic Centre, ending with a mirror shell that stabilises the central black hole's horizon. | Rydberg array works, photon ring imager, Geroch winch, mass stream injector, accretion feeder, horizon interferometer, mirror shell (14) |
-| **MAX+** | 30 Doradus, the Magellanic Stream, M31's nucleus, the Local Group filament | Out of the Galaxy by slingshot and warp gate, scale beyond MAX, and the Hyperstargate, the pack's final project. | Hills slingshot, pair-instability crucible, blueshift forge, void crystal fab, Hyperfactory, Hyperstargate (17) |
-
-## Our multiblocks
-
-Every machine in this section is ours, built with KubeJS on GregTech Modern (machine ids use the `gtceu:` namespace, parts and items `grindless:`). Every one has an EMI info page that explains what it does. The complete list by era is in [`gg_test_form_sweep_ids.json`](tools/test/overlay/kubejs/config/gg_test_form_sweep_ids.json).
-
-- **Resource production.** Vein drills from steam to IV (Steam, LV, MV, HV, EV, the lunar drill, Venus's pressurised drill and Mercury's drill) mine the vein a sample marks, indefinitely; drill bits wear out. Greenhouses run from steam to HV, then become the sealed dome on the Moon and Mars, the hydroponic ring in orbit and the xenobotany greenhouse on Proxima b. Each later destination has its own harvester: harpoon anchor drill, gas and ice giant siphons, ring harvester, regolith excavator, Barnard core drill, crust lift and more.
-- **Steam families.** Small steam multiblocks with 8 parallels (alloy smelter, compressor, forge hammer, mixer, chemical bath, ore washer) and large steam machines with 64 parallels (macerator, centrifuge, ore washer, chemical bath, thermal centrifuge).
-- **Plants that turn a line into one machine.** The ore plant (MV), biorefinery (MV), refinery and reformer (HV), platinum plant (EV), rare-earth extraction cascade (EV) and naquadah plant (IV) run a whole processing line with its loops closed inside.
-- **Mega family.** Quality-of-life multiblocks with energy-bound parallels and batch mode:
-
-  | Tier | Machine | What it gains |
-  |---|---|---|
-  | LV | Wire works | Wiremill and bender throughput |
-  | MV | Polymer works | Ethylene to polyethylene sheet, three steps in one |
-  | HV | Coil chemical plant | Large chemical reactor with coil-scaled parallels and perfect overclock |
-  | EV | Ore refinery | Four ore-processing steps in one |
-  | IV | Smelting complex | EBF and vacuum freezer in one, no hot ingots to move |
-  | LuV | Mega chemical complex | The massive chemical reactor |
-  | ZPM | Assembly hall | Bulk assembler and circuit assembler |
-  | UV | Mega factory | Modular factory: each module adds recipe types |
-  | UHV | Quantum fabricator | Assembler, circuit assembler, press, engraver and cutter with perfect overclock |
-
-  The MV universal factories (assembly, mixing, processing and separation) and the advanced multi smelter belong to the same idea. Our parallel hatches continue GTM's IV–UV ones from UHV to UXV.
-- **Power.** The generator array (up to 16 LV generators), heliostat tower, lunar solar array, combined-cycle plant, fission reactor, Venus heat engine, Mercury solar field, orbital solar station, direct energy converter, Dyson swarm and Penrose engine, plus fusion reactors Mk4–Mk6 after GTM's Mk1–Mk3. The wireless energy tower stores EU for one network shared by every dimension, with tiered wireless hatches.
-- **Exploration and space.** The observatory family (steam observatory, optical observatory, radio telescope) and later antennas and telescopes (deep space antenna, interferometer, Kuiper survey telescope, gravitational wave detector and others) produce the charts that unlock each destination. The engine test stand and composite autoclave build the first rocket; probe bays, orbital stations and the warp gate take over later.
-
-## Multiblocks from other mods
-
-These are other mods' machines, used as they are. Every addon was audited against the era designs: anything that processes cheaper than GregTech in its era, or skips one of our plants, was removed or moved to a later tier ([`server_scripts/grindless/integration/`](pack/kubejs/server_scripts/grindless/integration/)).
-
-| Source | Multiblocks | Tier in this pack |
+| Tier | Where you go | What happens |
 |---|---|---|
-| GregTech Modern | EBF, vacuum freezer, cleanroom, cracker, distillation tower, large boilers and turbines, large chemical reactor (HV), assembly line (IV), fusion reactors Mk1–Mk3 | Original tiers; fusion at LuV, ZPM and UV |
-| GCYM (part of GregTech Modern) | Large machines; mega blast furnace and mega vacuum freezer | Large machines at IV (large mixer at LuV); mega ones at ZPM |
-| GT Community Additions | Mega Chemical Reactor, Mega Oil Cracking Unit; Thermal Reactor; IsaMill and Flotation Cell Regulator; Space Elevator | Megas at IV; Thermal Reactor at EV; froth line with ZPM parts; Space Elevator at UHV with our recipes |
-| GT-- | Chemical plant, rocket engines, neutron activator, Maceration Stack, circuit assembly line, large naquadah reactor | MV, EV, IV, IV, LuV, ZPM |
-| GTM Extended Features | Large Gas Collector, Expanded Assembly Line | IV, LuV |
-| Gregicality Rocketry | Rockets, space suits, space stations, and the Moon, Mars, Venus, Mercury and Proxima Centauri b | First rocket in HV; we rebuilt motors, tanks and charts per tier and added the other destinations |
+| Steam | Earth | Coke, bricks, bronze and steel. Steam drills and greenhouses replace hand mining. |
+| LV | The Nether | The first electric factory, AE2 and the wireless EU network. |
+| MV | The End | Polymers, fuels and silicon wafers. Production lines start to cross. |
+| HV | The Moon | Oil refining, plastics, cleanroom circuits and the first rocket. |
+| EV | Moon base, Mars | Titanium, platinum and fine chemistry. |
+| IV | Venus, Mercury | Fission power, naquadah, iridium and osmium. |
+| LuV | Earth orbit, the asteroid belt, Io, Europa, Ganymede | Cryogenics, superconductors and the first fusion reactor. |
+| ZPM | Saturn, Uranus and their moons | Naquadria, the second fusion reactor and orbital stations. |
+| UV | Neptune, Triton, Pluto, the Kuiper Belt | Particle accelerators, isotopes and a laser-sail probe to Proxima Centauri. |
+| UHV | Proxima Centauri b, Mercury orbit | A Dyson swarm, a warp gate and photonic circuits. |
+| UEV | Alpha Centauri, Barnard b, Sirius B | Superheavy elements, megabar matter and optical computing. |
+| UIV | A neutron star, a pulsar, Cygnus X-1 | Metallic hydrogen and power from a black hole's spin. |
+| UXV | Cygnus X-1, the Vela pulsar, Cassiopeia A | Star lifting, nuclear pasta and spintronics. |
+| OpV | A magnetar, the core of Terzan 5 | Antimatter, strangelets and self-replicating machines. |
+| MAX | Sagittarius A*, the nuclear star cluster | Industry at the galactic centre, ending with a mirror shell around the black hole. |
+| MAX+ | 30 Doradus, the Magellanic Stream, M31, the Local Group filament | Leaving the Milky Way and building the Hyperstargate, the end of the pack. |
 
-Removed because they skipped lines or made energy from nothing: GTCA's green house, recyclers and scrap boxes, polymerizer, industrial coke oven, steam pressurizer, chemical generators and extreme heat exchanger; Extended Features' industrial greenhouse, advanced conservatory, rock processing plant, synthesis vessel, universal disassembly machine and robust alloy materializer. Their items are hidden in EMI.
+The design notes for each tier are in [docs/eras](docs/eras/), and [docs/journey.md](docs/journey.md) walks through the whole progression.
 
-## Ideas from other modpacks
+## Installing
 
-Many of our machines start from an idea seen in another pack and are rebuilt here to fit our rules. Sources, licences and exactly what was taken are in [CREDITS.md](CREDITS.md).
+The pack is distributed as an instance for [Prism Launcher](https://prismlauncher.org/) that keeps itself up to date.
 
-| Modpack | What we built from it |
-|---|---|
-| GregTech Leisure | Boilers ×8 and generators ×2; small and large steam multiblocks; generator array; universal factories; advanced multi smelter; lava furnace; weather controller; HV cleaning maintenance hatch |
-| Star Technology | Drill bits that wear by chance; controllers built from the machines they replace; AE2 made with GT machines; CO₂ greenhouses; steam blast furnace; observatories and charts; Processing Lines quest tab; mega factory modules; stellar forge |
-| GTNH | Refinery as a petrochemical complex; platinum and naquadah plants; global wireless EU network and tower; combined-cycle plant; helium refrigerator; AE2-fed assembly line; hologram projector |
-| Monifactory, Nomifactory | Vein samples that are not used up; fertiliser chosen by circuit; creature simulator; UEV–UXV components |
-| Supersymmetry | Syngas plant; by-product coke battery; rare-earth extraction cascade; engine test stand; composite autoclave; solar foundry |
-| Gregicality Science | Catalytic reformer; sulfide roaster with a contact acid plant |
-| TerraFirmaGreg | Heliostat tower; lunar solar array |
-| GTMoreOreProcessing, GTE2 | Ore plant; one vein table for all tiers |
+1. Download `Gregtech-Grindless-releases.zip` from the [releases channel](https://github.com/Ezequiel24123z/GrindlessGregtech/releases/tag/releases-channel).
+2. In Prism Launcher, choose Add Instance, then Import, and select the zip.
+3. Launch it. The first start downloads about 400 MB of mods.
 
-## Other mods
+The instance uses Minecraft 1.20.1, Forge 47.4.28 and Java 17, and is set to use up to 10 GB of memory. Leave the Minecraft and Forge versions as they are.
 
-The pack has 223 mods ([`pack/mods/`](pack/mods/)). Besides the GregTech addons above:
+Each time you launch, the instance checks for a newer tested version and updates the pack files. Your saves are not touched, but back up any world you care about before an update; FTB Backups 2 also keeps copies in the instance's `backups` folder. Worlds started on v1.0.0 or later have carried over to every update so far, but an update may need a new world when there is no other way to make a change. Its release notes will say so. Worlds from v0.17.0 or earlier do not work.
 
-- **Storage and logistics:** Applied Energistics 2 with ExtendedAE, MEGA Cells, AppFlux and wireless terminals; Sophisticated Storage and Backpacks, Functional Storage, Storage Drawers, Laser IO, Pipez and Modular Routers. AE2 is also the interplanetary backbone: quantum bridges and EU over P2P tunnels.
-- **Travel and teams:** Waystones, FTB Chunks, Teams and Essentials, Xaero's maps, and Ender Chests and Tanks that work across planets.
-- **Extras:** Farmer's Delight, Quark, Supplementaries and decorative mods; world generation from Biomes O' Plenty, YUNG's and several structure mods.
-- **Interface:** EMI as the recipe viewer (with GregTech multiblock previews), Jade and FTB Quests.
+<details>
+<summary>Pinned versions, older instances and manual setup</summary>
 
-## Quests
+Every release on GitHub also has a zip pinned to that version, for example `Gregtech-Grindless-v1.2.0.zip`. A pinned instance never updates.
 
-FTB Quests guides the whole journey: Welcome and Workshop chapters, one chapter per era (Steam Age to MAX+, in one Progression group; every quest of an era connects back to its single start, in sections with a heading quest each), a Processing Lines flowchart for each era, and chapters for Multiblocks, Power, Storage, Applied Energistics and Travel and Teams. Quest design is described in [`docs/quests.md`](docs/quests.md).
-
-## Known issues
-
-- The Expanded Assembly Line and the Matrix Data Relay (Extended Features add-on) are hidden: the Expanded Assembly Line formed but never started a recipe in tests, and neither forms on a dedicated server. Nothing in progression needs them.
-- GCYR's configured low gravity is not applied in game.
-
-## How to play (Prism Launcher)
-
-**Releases channel (recommended).** It updates by itself.
-
-1. Download `Gregtech-Grindless-releases.zip` from the [releases channel release](https://github.com/Ezequiel24123z/GrindlessGregtech/releases/tag/releases-channel).
-2. In Prism: *Add instance → Import → choose the zip*.
-3. Launch it. The first time, it downloads about 400 MB of mods.
-
-Before each launch, the instance updates from the `releases` branch, which only moves to tested versions. FTB Backups 2 makes copies of the world in the instance's `backups` folder.
-
-### Updating
-
-Keep using the **same Prism instance**. Once a tested release reaches `releases`, close Minecraft and launch that instance again: packwiz updates the managed pack files, not your `saves` folder. There is no need to import another zip for each pack release.
-
-**Start a new world for v1.0.0.** It removes, renames and reshapes items, blocks, fluids, dimensions, multiblocks and quests, so a world from v0.17.0 or older breaks. Do not update an old world.
-
-**Versioned release zips are different.** An instance imported from `Gregtech-Grindless-v0.14.0.zip`, for example, is pinned to that tag and does not automatically follow later releases. To switch it to the releases channel without moving the world, close Minecraft, open *Edit instance → Settings → Custom commands*, and change the existing pre-launch command to:
+To move a pinned or older instance to the releases channel without touching its worlds, close Minecraft, open Edit Instance, then Settings, then Custom commands, and set the pre-launch command to:
 
 ```
 "$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/releases/pack/pack.toml
 ```
 
-This is a one-time change; the release zips already include the bootstrap jar. The same change moves an instance from the older channel names: a command ending in `/playable/pack/pack.toml` (still updated during the transition) or `/jugable/pack/pack.toml` (that branch no longer exists, so the instance stops updating until changed). To stay pinned instead, keep the same instance and replace only the version tag in its existing command when choosing a newer release.
+Instances that point at `/playable/` still update for now. The old `/jugable/` branch is gone, so those instances need this change to keep updating.
 
-Before updating a world you care about, make a fresh backup of its folder under `saves`, with Minecraft closed. FTB Backups 2's periodic copies are useful, but the updater does not itself guarantee a fresh pre-update backup. Do not downgrade an updated world; restore a matching world backup and pack version instead.
+To set up an instance by hand, create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17, put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) in its `minecraft` folder and use the command above. Replace `releases` with a version tag such as `v1.2.0` to stay on one version.
 
-These are **pack updates on Minecraft 1.20.1**, not Minecraft-version migrations: do not independently change Minecraft or Forge in Prism's version settings.
+Never open an updated world with an older version of the pack. Restore a backup instead.
 
-### Setting up a fixed version manually
+</details>
 
-Create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17. Put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) in the instance's `minecraft` folder. Then, in *Edit instance → Settings → Custom commands*, set this as the pre-launch command to stay on `v0.14.0`:
+## Known issues
 
-```
-"$INST_JAVA" -jar packwiz-installer-bootstrap.jar https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/v0.14.0/pack/pack.toml
-```
+- A Mirror Shell built before v1.2.0 stays unformed until the coils around its windows are replaced with feeder coil casings. The multiblock page in EMI shows where they go.
+- The Expanded Assembly Line and the Matrix Data Relay from GTM Extended Features are hidden. They did not run or form reliably, and nothing in the pack needs them.
+- Gregicality Rocketry's low gravity setting has no effect in game.
 
-## For developers
+If you find a bug, please open an [issue](https://github.com/Ezequiel24123z/GrindlessGregtech/issues) with the pack version and your `logs/latest.log`.
 
-Read [AGENTS.md](AGENTS.md) and [docs/STATUS.md](docs/STATUS.md) before contributing. Scoped rules are in `.github/instructions/`. The [testing guide](docs/testing/README.md) explains the test bench; design and integration references are in `docs/`. Decisions are in [DECISIONS.md](DECISIONS.md), and credits and licenses are in [CREDITS.md](CREDITS.md).
+## Credits
+
+The pack is built on GregTech Modern and its addons (GT Community Additions, GT--, GTM Extended Features and Gregicality Rocketry), KubeJS, FTB Quests, Applied Energistics 2 and more than 200 other mods, all listed in [pack/mods](pack/mods/). The mods are downloaded from their official pages when the instance updates, and each one keeps its own licence.
+
+Many of the machines started as ideas from other GregTech packs and were rebuilt to fit this one: GregTech Leisure, Star Technology, GTNH, Monifactory, Nomifactory, Supersymmetry, Gregicality Science and TerraFirmaGreg among them. [CREDITS.md](CREDITS.md) lists what came from where.
+
+Some addon machines were removed or moved to a later tier because they skipped a processing line or produced free energy. Their items are hidden in EMI.
+
+## License
+
+The pack's own files (scripts, quests, configs, textures, sounds, tools and documentation) are released under the [MIT License](LICENSE). The mods are not part of this repository and each keeps its own licence, as does any third-party material listed in [CREDITS.md](CREDITS.md).
+
+## Working on the pack
+
+The pack is defined with [packwiz](https://github.com/packwiz/packwiz) in [pack](pack/). Most of the content lives in the KubeJS scripts under [pack/kubejs](pack/kubejs/) and the quest files under [pack/config/ftbquests](pack/config/ftbquests/). [tools](tools/) has the generators, the validators and the test bench, and [docs](docs/) has the design notes; [docs/README.md](docs/README.md) explains what is where.
