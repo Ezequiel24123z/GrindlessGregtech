@@ -70,7 +70,7 @@ for (const name of BASE) {
     const c = controller(name);
     assert.equal(c.items.get('gtceu:max_machine_hull'), 1, 'MAX hull');
     assert.equal(c.items.get('grindless:horizon_machine_casing'), 2, '2 horizon_machine_casing');
-    assert.equal(c.items.get('grindless:horizon_processor'), 8, '8 horizon_processor');
+    assert.equal(c.items.get('#gtceu:circuits/maxplus'), 8, '8 horizon_processor (the tag)');
     assert.ok(c.fluids.some((f) => /kerr_condensate/.test(f.text) && f.amount === 2000), '2,000 mB kerr_condensate');
     assert.ok(count(c.items) >= 8, `at least 8 MAX+ components (has ${count(c.items)})`);
     assert.ok(familiesOf(c.items).size >= 3, `at least 3 families (has ${[...familiesOf(c.items)]})`);

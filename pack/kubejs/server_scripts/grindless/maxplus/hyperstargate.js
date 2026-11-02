@@ -64,7 +64,7 @@
   ServerEvents.recipes(function (event) {
     guarded(CONTROLLER.name, CONTROLLER.items.map(function (x) { return x[0] }).concat(['gtceu:hyperstargate']), [KERR], function () {
       var b = event.recipes.gtceu.hyper_assembly_array('grindless:' + CONTROLLER.name)
-      CONTROLLER.items.forEach(function (x) { b.itemInputs(x[1] + 'x ' + x[0]) })
+      CONTROLLER.items.forEach(function (x) { b.itemInputs(x[1] + 'x ' + (x[0] === 'grindless:horizon_processor' ? '#gtceu:circuits/maxplus' : x[0])) })
       b.circuit(CONTROLLER.circuit)
       b.inputFluids(Fluid.of(KERR, CONTROLLER.kerr))
       b.itemOutputs('1x gtceu:hyperstargate')

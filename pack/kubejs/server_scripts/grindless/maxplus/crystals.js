@@ -152,7 +152,7 @@
       BLEND.forEach(function (r) { addRow(event, r) })
       FURNACE.forEach(function (r) { addRow(event, r) })
       CONTROLLERS.forEach(function (c) {
-        var items = ['1x ' + HULL, '2x ' + c.casing, '8x grindless:horizon_processor', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
+        var items = ['1x ' + HULL, '2x ' + c.casing, '8x #gtceu:circuits/maxplus', '4x #gtceu:circuits/max'].concat(c.comps, c.plates)
         addAssemblyLine(event, c, items, [[KERR, 2000]])
       })
       console.info(LOG + (ROWS.length + BLEND.length + FURNACE.length + CONTROLLERS.length) + ' rows; skipped ' + MC.skipped.length)

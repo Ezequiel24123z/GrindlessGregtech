@@ -99,7 +99,7 @@ test('controllers: at least 8 maxplus_* components from 3 families and 4 horizon
       assert.ok(has(/stream_bundle$/) >= 4, `${n}: 4 stream_bundle`);
       continue;
     }
-    assert.ok(has(/^grindless:horizon_processor$/) >= 4, `${n}: 4 horizon_processor`);
+    assert.ok(has(/^#gtceu:circuits\/maxplus$/) >= 4, `${n}: 4 horizon_processor`);
     const comps = (row.j.inputs?.item || []).map(itemId).filter((x) => /^grindless:maxplus_/.test(x));
     const total = (row.j.inputs?.item || []).filter((x) => /^grindless:maxplus_/.test(itemId(x))).reduce((s, x) => s + cnt(x), 0);
     assert.ok(total >= 8, `${n}: ${total} maxplus components`);

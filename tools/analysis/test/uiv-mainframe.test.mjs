@@ -73,7 +73,7 @@ test('hall rows: circuits 4-6 after the three UEV rows, within the hall slots (8
   }
   assert.deepEqual(inputs(rc[3]), ['grindless:beuv_driver_asic', 'grindless:quantum_photonic_chip', 'grindless:thin_film_ln_modulator']);
   assert.deepEqual(outputs(rc[3]), ['grindless:photonic_tensor_core']);
-  assert.deepEqual(inputs(rc[4]), ['grindless:crossbar_on_interposer', 'grindless:six_hour_memory', 'grindless:p_si_processor', 'grindless:photonic_tensor_core', 'gtnn:optical_assembly']);
+  assert.deepEqual(inputs(rc[4]), ['grindless:crossbar_on_interposer', 'grindless:six_hour_memory', 'grindless:p_si_processor', 'grindless:photonic_tensor_core', 'gtnn:optical_assembly', '#gtceu:circuits/uev']);
   assert.deepEqual(outputs(rc[4]), ['gtnn:optical_mainframe']);
   assert.deepEqual(inputs(rc[5]), ['grindless:eo_transceiver', 'grindless:telecom_memory', 'grindless:pumped_edfa', 'grindless:disciplined_clock_core']);
   assert.deepEqual(outputs(rc[5]), ['grindless:pulsar_timed_repeater']);
