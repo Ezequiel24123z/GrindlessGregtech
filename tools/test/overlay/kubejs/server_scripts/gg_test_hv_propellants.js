@@ -21,7 +21,7 @@
   var DIM = 'minecraft:overworld'
   var PLANT = 'gtnn:exxonmobil_chemical_plant'
   var HV_HATCH = 'gtceu:hv_energy_input_hatch'
-  var IN_HATCH = 'gtceu:ulv_input_hatch'
+  var IN_HATCH = 'gtceu:hv_input_hatch'
   var NEED_HATCHES = 3
   var STAGE_SLACK = 1500
 
@@ -213,10 +213,14 @@
     var tried = 0
     var seen = {}
     var base = false
+    var ids = {}
+    var onWall = 0
+    S.cut.cells.forEach(function (c) { ids[c.id] = (ids[c.id] || 0) + 1; if (faceOf(S.cut, c) !== null) onWall++ })
+    note('probe_cells', S.cut.cells.length + ' cells, ' + onWall + ' on a side wall; ' + JSON.stringify(ids).replace(/gtceu:|gtnn:/g, ''))
     try { base = ctrl.checkPatternWithLock() === true } catch (e0) { base = false }
     S.cut.cells.forEach(function (c) {
       var face = faceOf(S.cut, c)
-      if (c.id.indexOf('casing') < 0 || face === null) return
+      if (face === null || c === S.cut.ctrl) return
       var p = worldPos(c)
       putHatch(p, face)
       tried++
