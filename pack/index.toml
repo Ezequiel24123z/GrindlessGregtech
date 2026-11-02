@@ -16657,10 +16657,6 @@ file = "kubejs/client_scripts/grindless/power_info_lang.js"
 hash = "e1098afd08471b3215eebb9b67ffd09f0d772fbe2ee58c7376ad436cc43fe792"
 
 [[files]]
-file = "kubejs/client_scripts/grindless/recipe_info_fit.js"
-hash = "1e6e9503f7bcc9884445afde4ae5641791a7217e2c8880765f815c2f6565b6fd"
-
-[[files]]
 file = "kubejs/client_scripts/grindless/space_lang.js"
 hash = "f1762d4233591b3baf96ff1498b2228056e31bbac47300792687ab00e28f458f"
 
@@ -19398,7 +19394,7 @@ hash = "1a93bb656b4b7602d9f7756b3cd4e6ae240f343bc687bfc909ca1a4254d50bf3"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/integration/recipe_info_wrap.js"
-hash = "aa7fd1042f986e77ff340241021247b1d6838b763a4496b53d4da866a2b36672"
+hash = "99f619991ebd33e76427f36f22e5346c80e0fb8469ec417e29c9d5987f19a3f6"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/integration/sophisticatedstorage_tiers.js"
