@@ -170,9 +170,8 @@
       if (m.generator) {
         // lib/generators.js: .generator(true), .regressWhenWaiting(false), the dynamo-limited modifier and the controller lines (one run at a time)
         builder = G.generators.configure(builder, { maxParallels: 1, name: m.name })
-      } else if (m.maxParallels > 1) {
-        builder = builder.recipeModifier(parallelRuns(m.maxParallels), true)
       } else {
+        builder = builder.recipeModifier(parallelRuns(m.maxParallels), true)
       }
       builder
         .langValue(m.lang)
