@@ -4,9 +4,12 @@
 // Each gear asks for the controller and the casings that are new in this era; hull, components and circuits belong to maxplus_circuits, line intermediates to
 // the charts, so the product quests ask only for what the machine exists to make or for the parts it wears. The two generators are taught as machines here;
 // how they feed the wireless network is maxplus_integration's (PW_NI, PW_TORUS). Each gear hangs from the journey key that first needs it, never from a quest its
-// own machine produces. All keys are new (prefix MA_).
+// own machine produces; a machine built from a part (nozzle, liner, scoop, injector, converter) hangs from that part. Positions and dependencies: layout.mjs.
+// All keys are new (prefix MA_).
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
+
+import { SECTIONS, place } from './layout.mjs';
 
 export const CHAPTER = {
   filename: 'maxplus_machines',
@@ -15,7 +18,7 @@ export const CHAPTER = {
   order: 4,
   icon: 'gtceu:hyperfactory',
   autofocus: 'MA_REF',
-  section: { name: 'Machines of MAX+', origin: { x: 2, y: 1.5 }, heading: { key: 'H_MACHINES', x: 0, y: 0, deps: ['TAP'], icon: 'gtceu:hyperfactory' } },
+  section: SECTIONS.machines,
   title: 'MAX+: Machines',
   subtitle: ['From a refinery for bound matter to a slingshot, a stellar lift, a fusion torus and the Hyperfactory.'],
 };
@@ -59,7 +62,7 @@ export const QUESTS = [
     automate: 'Its boil-off goes back into the first recipe, and spent cells go to the helium plant, so nothing is vented.',
   }, [it('grindless:condensate_vessel_casing')]),
   prod('MA_CLAD', 'Strand Cladding', 'grindless:kerr_clad_strand', ['MA_REF'], 11, 4.5, [
-    'Its fourth recipe clads a strand of strange matter in condensate. It is the start of the cable line, which the circuits chapter finishes at the wire.',
+    'Its fourth recipe clads a strand of strange matter in condensate. It is the start of the cable line, which the Circuits section finishes at the wire.',
   ]),
   prod('MA_CELL', 'Jacketed Condensate Cell', 'grindless:jacketed_condensate_cell', ['MA_REF'], 7, 2, [
     'Condensate will not travel loose, so the helium plant jackets it in a cell. This is the form in which it leaves the shell.',
@@ -82,7 +85,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the slingshot, the signature machine
   gear('MA_SLING', 'hills_slingshot', 'Hills Slingshot', ['PROBE'], 8.5, 0, {
     for: 'Out of the Galaxy without a rocket. It binds a probe to a counterweight, then drops the pair on a plunging orbit past the hole. The tide splits them, and the probe leaves at speed.',
-    needs: 'The MAX hull, a capture ring of slingshot coil casing, a counterweight and a probe, and a full wireless hatch.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits and components, and a capture ring of slingshot coil casing wound round counterweight cores. It works only at Sgr A* orbit.',
     unlocks: 'The launched probe, and with it every gate that leaves the Galaxy.',
     automate: 'One counterweight per launch. The weight falls into the hole, so make them in bulk.',
   }, [it('grindless:slingshot_coil_casing')], 250, 'signature'),
@@ -90,31 +93,31 @@ export const QUESTS = [
   // ------------------------------------------------------------------ 30 Doradus
   gear('MA_LIFT', 'tarantula_stellar_lift', 'Tarantula Stellar Lift', ['MA_L_LMC'], 12, 0.5, {
     for: 'Magnetic fields heat a star\'s outer layers and funnel them off. At the very massive stars of R136 the lift reaches core plasma that no smaller star shows.',
-    needs: 'The MAX hull, a tower of lift nozzle casing, nozzles, and a full wireless hatch at the Tarantula.',
-    unlocks: 'The plasma that the crucible burns, and a helium-rich fraction.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits and components, lift nozzles and a tower of lift nozzle casing. It lifts only at the Tarantula.',
+    unlocks: 'The raw plasma that the filter and former refine for the crucible.',
     automate: 'Its nozzle wears one in thirty-two runs. Keep a pattern for spare nozzles.',
   }, [it('grindless:lift_nozzle_casing')]),
   prod('MA_NOZ', 'Lift Nozzle', 'grindless:vms_lift_nozzle', ['MA_LIFT'], 13.5, 0.5, [
-    'The nozzle sits in the hottest part of the lift and wears out. A spare in the bus is a lift that never stops.',
+    'The nozzle sits in the hottest part of the lift and wears out. The lift\'s controller and its casing are built with nozzles too, so make them first; a spare in the bus is a lift that never stops.',
   ]),
   gear('MA_CRUC', 'pair_instability_crucible', 'Pair-Instability Crucible', ['MA_L_RAW'], 17.5, -6.5, {
     for: 'Stars above about 140 solar masses end by making nickel-56 in bulk. The crucible forces that burn on lifted plasma in a magnetic pinch.',
-    needs: 'The MAX hull, a sphere of crucible liner casing, confined plasma, and liner spares.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits and components, liners and a sphere of crucible liner casing; then confined plasma to burn.',
     unlocks: 'Nickel-56 slugs, the fuel of the burner, and a silicon-rich ash.',
-    automate: 'The ash is not waste: it goes to the 30 Doradus separation row. The liner wears one in sixteen runs.',
+    automate: 'The ash is not waste: it goes to a separation row, which can run anywhere. The liner wears one in sixteen runs.',
   }, [it('grindless:crucible_liner_casing')]),
   prod('MA_ASH', 'Intermediate-Mass Ash', 'grindless:ime_ash', ['MA_CRUC'], 17.5, -5, [
     'Silicon, sulfur, calcium and argon come out of the pinch with the nickel. A separation row takes them back, so the crucible makes no waste.',
   ]),
   prod('MA_LINER', 'Crucible Liner', 'grindless:crucible_liner', ['MA_CRUC'], 19, -6.5, [
-    'The liner takes the whole pinch. It wears quickly, so a spare belongs in every chest the crucible draws from.',
+    'The liner takes the whole pinch. The crucible\'s controller and casing are built with liners too, and they wear quickly, so a spare belongs in every chest the crucible draws from.',
   ]),
 
   // ------------------------------------------------------------------ the nickel-56 burner
   gear('MA_BURN', 'nickel_56_burner', 'Nickel-56 Burner', ['MA_L_CASK'], 19.5, -10, {
     for: 'A supernova glows on the decay of nickel-56 into cobalt, then iron. The burner turns that heat into power through supercritical carbon dioxide, in two recipes.',
-    needs: 'The MAX hull, atomic casing and coils, and shielded casks of nickel-56 from the crucible.',
-    unlocks: 'A generator of the era. The network lesson is the integration chapter\'s.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits and components, a supercritical CO2 turbine module, and shielded casks of nickel-56 from the crucible.',
+    unlocks: 'A generator of the era. How it feeds the network is in the Integration section.',
     automate: 'A cask is used twice and comes out as iron. Loop it to the hot cell.',
   }),
   prod('MA_FE', 'Spent Iron Cask', 'grindless:spent_fe56_cask', ['MA_BURN'], 21, -10, [
@@ -124,30 +127,30 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the Magellanic Stream
   gear('MA_GAS', 'pristine_gas_works', 'Pristine Gas Works', ['MA_L_STREAM'], 20, -3.5, {
     for: 'The Stream\'s gas has a tenth of solar metals, with deuterium close to the Big Bang value. A magnetic scoop gathers it as the &6Pristine Gas&r the works refines.',
-    needs: 'The MAX hull, atomic casing and coils in a ring, and a magnetic scoop module.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits and components, and magnetic scoop modules. It sweeps only in the Stream.',
     unlocks: 'Primordial deuterium and pristine helium-3, the fuel of the torus.',
-    automate: 'The protium it leaves goes to the home hydrogen line by AE2.',
+    automate: 'The hydrogen the tower strips out goes back to your hydrogen lines by AE2.',
   }),
   prod('MA_SCOOP', 'Magnetic Scoop Module', 'grindless:magnetic_scoop_module', ['MA_GAS'], 21.5, -3.5, [
-    'A cold coil on a long arm. It gathers the gas, and without one the works makes nothing.',
+    'A cold coil on a long arm. It gathers the gas: the works is built with one, and every sweep wears a little of it.',
   ]),
-  gear('MA_TORUS', 'primordial_fusion_torus', 'Primordial Fusion Torus', ['MA_L_PD', 'MA_L_PHE3'], 21, -6.5, {
+  gear('MA_TORUS', 'primordial_fusion_torus', 'Primordial Fusion Torus', ['MA_L_PD', 'MA_L_PHE3'], 24, -6.5, {
     for: 'Deuterium and helium-3 fuse with few neutrons, and a direct converter catches their charged products. It is a generator of ours, not a GTM fusion tier.',
-    needs: 'The MAX hull, a torus of atomic casing, deuterium and helium-3 together, a beam injector and a converter stack.',
-    unlocks: 'A second generator of the era. How it feeds the network is in the integration chapter.',
-    automate: 'Both fuels arrive by pipe from the works; each runs 2,400 ticks.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits and components, a beam injector and a converter stack; then deuterium and helium-3 together.',
+    unlocks: 'A second generator of the era. How it feeds the network is in the Integration section.',
+    automate: 'It burns only in the Stream. Pipe both fuels in from their lines.',
   }),
-  prod('MA_NBI', 'Neutral Beam Injector', 'grindless:neutral_beam_injector', ['MA_TORUS'], 21, -8, [
-    'It heats the fuel to ignition and wears one in sixty-four runs.',
+  prod('MA_NBI', 'Neutral Beam Injector', 'grindless:neutral_beam_injector', ['MA_TORUS'], 24, -8, [
+    'A beam of neutral deuterium heats the fuel to ignition. The torus is built with one, and it wears one in sixty-four runs.',
   ]),
-  prod('MA_DCS', 'Direct Converter Stack', 'grindless:direct_converter_stack', ['MA_TORUS'], 22.5, -6.5, [
-    'The stack turns the charged products of the fusion straight into current. It wears one in a hundred and twenty-eight runs.',
+  prod('MA_DCS', 'Direct Converter Stack', 'grindless:direct_converter_stack', ['MA_TORUS'], 25.5, -6.5, [
+    'The stack turns the charged products of deuterium and helium-3 straight into current. The torus is built with one, and it wears one in a hundred and twenty-eight runs.',
   ]),
 
   // ------------------------------------------------------------------ M31, the filament and home
   gear('MA_FORGE', 'blueshift_forge', 'Blueshift Forge', ['TETHER'], 30, 0, {
     for: 'Light falling to a factory held near a horizon arrives blueshifted, as gamma rays. The forge uses that bath for photonuclear reactions that make the rare isotopes.',
-    needs: 'The MAX hull, horizon casing in a tower over a tether well, a deep tether and a molybdenum target.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits and components, and compressed plates; then a deep tether and molybdenum targets to run it. It works only at the M31 nucleus.',
     unlocks: 'Photonuclear isotopes, which no other machine can make.',
     automate: 'The tether and window wear one in thirty-two runs; keep spares.',
   }, [], 150),
@@ -156,20 +159,21 @@ export const QUESTS = [
   ]),
   gear('MA_FAB', 'void_crystal_fab', 'Void Crystal Fab', ['MA_L_VOID'], 34, 0.5, {
     for: 'The emptiest place in the pack has no dust and no heat to spoil a crystal. The fab grows diamond there, and holds the holographic block that the creative store needs.',
-    needs: 'The MAX hull, an open frame of horizon casing, and seed plates cut at home.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits and components, and seed plates cut at home. It grows only in the filament.',
     unlocks: 'Void-grown diamond and the engineered lattice that ends the stage.',
     automate: 'Seed plates and blocks travel by chest. Run it by pattern.',
   }, []),
   gear('MA_LOOM', 'meta_material_loom', 'Meta-Material Loom', ['MA_L_SCALE'], 41, 0.5, {
-    for: 'Four meta-materials in one machine: shielding, waveguide, conduit and valve. It weaves them from bound plates, strand and condensate, several steps in one.',
-    needs: 'The MAX hull, horizon casing, plates from the press, and no pump or regulator: the loom uses its own valve.',
-    unlocks: 'About 380,000 of each meta-material for the gate, and the valves for pumps.',
+    for: 'Four meta-materials in one machine: shielding, waveguide, conduit and the valve body. It weaves them from bound plates, strand and condensate, several steps in one.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits, motors, pistons, arms and conveyors, and no pump or regulator, since those wait for the loom\'s own valves.',
+    unlocks: 'A great many of each meta-material for the gate, and the valve bodies for the pumps.',
     automate: 'Run four recipes at once and give each its own output bus.',
   }, []),
   gear('MA_HYPER', 'hyperfactory', 'Hyperfactory', ['MA_L_SCALE'], 39.5, 1.5, {
-    for: 'The top of the mega family. It runs assembler, circuit assembler, assembly line, forming press and laser engraver at four thousand times a hatch\'s parallel.',
-    needs: 'The MAX hull, horizon casing, the MAX+ parallel hatch and a pattern bus for every recipe it should take.',
+    for: 'The top of the mega family. It runs assembler, circuit assembler, assembly line, forming press and laser engraver at a far wider parallel than a single hatch gives.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits, components and a MAX parallel hatch for the controller. In the structure, a parallel hatch (the MAX+ one gives the most) and the 1,024 A MAX+ energy hatch.',
     unlocks: 'The millions of parts the tree and the gate need. It is a convenience, not a step.',
     automate: 'Feed it by ME and let the parallels do the counting.',
   }, [], 250),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

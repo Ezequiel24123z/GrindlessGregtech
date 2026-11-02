@@ -38,25 +38,25 @@ const q = (key, kind, title, icon, deps, x, y, teach, desc, tasks, xpN) => ({
 
 export const QUESTS = [
   // ------------------------------------------------------------------ cryogenic logic: wafer, chip, parts, mainframe
-  q('SOI', 'wafer', 'Silicon-28 SOI Wafer', 'grindless:si28_soi_wafer', ['C_L_SOI'], 2, 0, {
-    for: 'Natural silicon carries a few percent of silicon-29, whose nuclear spin disturbs a cold qubit. Purified silicon-28 on an insulating layer gives the &6Silicon-28 SOI Wafer&r that every cold chip is cut from.',
+  q('SOI', 'wafer', 'Si-28 SOI Wafer', 'grindless:si28_soi_wafer', ['C_L_SOI'], 2, 0, {
+    for: 'Natural silicon carries a few percent of silicon-29, whose nuclear spin disturbs a cold qubit. Purified silicon-28 on an insulating layer gives the &6Si-28 SOI Wafer&r that every cold chip is cut from.',
     needs: 'Silicon-28 from the centrifuge cascade, an oxide layer and the wafer bonder you already run.',
     unlocks: 'The cryo-CMOS wafer and the tetron chain.',
     automate: 'Keep a chest of wafers behind the bonder, since every later chip row draws from it.',
   }, [], [it('grindless:si28_soi_wafer')], 120),
-  q('CMOS', 'wafer', 'Cryo-CMOS Wafer', 'grindless:cryo_cmos_metal_wafer', ['SOI'], 4.5, 0, {
-    for: 'Ordinary transistors stop working well near absolute zero, so the doping and the metal are tuned for the cold. The &6Cryo-CMOS Wafer&r is exposed, implanted and metallised in that order, and cut into dies.',
+  q('CMOS', 'wafer', 'Metallised Cryo-CMOS Wafer', 'grindless:cryo_cmos_metal_wafer', ['SOI'], 4.5, 0, {
+    for: 'Ordinary transistors stop working well near absolute zero, so the doping and the metal are tuned for the cold. The &6Metallised Cryo-CMOS Wafer&r is exposed, implanted and metallised in that order, and cut into dies.',
     needs: 'The lithography and implant lines of the age, and a silicon-28 wafer.',
     unlocks: 'The cryo-CMOS die, the logic of the cosmic mainframe.',
     automate: 'Stage by stage in one line, with the cut dies sent straight to the mainframe row.',
   }, [], [it('grindless:cryo_cmos_metal_wafer'), it('grindless:cryo_cmos_die')], 150),
   q('LINK', 'step', 'Cryogenic Links', 'grindless:cryo_optical_link', ['CMOS'], 7, 0, null, [
-    'A niobium interposer carries the signals through the die, a HEMT amplifier lifts them out of the noise, and an optical link takes them out of the cold without carrying heat in. The &6Niobium TSV Interposer&r, the &6HEMT Amplifier&r and the &6Cryo Optical Link&r are all ordinary assembler work once the dies exist.',
+    'A niobium interposer carries the signals through the die, a HEMT amplifier lifts them out of the noise, and an optical link takes them out of the cold without carrying heat in. The &6Nb TSV Interposer&r is tested cold in the helium refrigerator, the &6HEMT Amplifier&r is cut from its wafer and the &6Cryo Optical Link&r is drawn on the fibre tower.',
   ], [it('grindless:nb_tsv_interposer'), it('grindless:hemt_amplifier'), it('grindless:cryo_optical_link')], 120),
   q('COSMIC', 'circuit', 'Cosmic Mainframe', 'gtnn:cosmic_mainframe', ['LINK'], 9.5, 0, {
     for: 'A cryo-CMOS die, a niobium interposer, an amplifier and an optical link, all joined in one cold package. The &6Cosmic Mainframe&r is the OpV circuit.',
-    needs: 'The cryo-CMOS die and the three parts of the row before it, on the assembly line.',
-    unlocks: 'The OpV sensor and the controller of every machine past the hull.',
+    needs: 'The cryo-CMOS die and the three parts of the row before it, in the photonic integration hall.',
+    unlocks: 'Every recipe that asks for OpV circuits: the sensor, the hatches and every OpV controller.',
     automate: 'One of each part per mainframe, so keep a dedicated chest and never a big stock.',
   }, [], [it('gtnn:cosmic_mainframe')], 250),
 
@@ -66,20 +66,20 @@ export const QUESTS = [
   ], [it('grindless:opv_harmonic_drive')], 100),
   q('SENSOR', 'circuit', 'OpV Sensor', 'gtceu:opv_sensor', ['COSMIC'], 12, 0, {
     for: 'The &6OpV Sensor&r measures what the detectors of the age need to see: single photons, charge and spin. The emitter, the field generator and many controllers use one.',
-    needs: 'A cosmic mainframe, the OpV hull and the assembly line.',
-    unlocks: 'The OpV emitter and the controllers that watch a beam.',
+    needs: 'An HPGE Compton crystal, a chain lamina stack, a cryo optical link, chain strand cable, a UXV sensor and OpV circuits, in an assembler.',
+    unlocks: 'The energy input hatches, the annihilation shield casing and the controllers that watch a beam.',
     automate: 'Mainframes by ME in matched counts; keep sensors in a small stock.',
   }, [], [it('gtceu:opv_sensor')], 200),
 
   // ------------------------------------------------------------------ hull-side parts, hatches, assemblers
   q('COMP', 'step', 'OpV Components', 'gtceu:opv_electric_motor', ['C_L_HULL', 'DRIVE'], 4.5, 6, null, [
-    'The &6OpV Electric Motor&r runs on a superconducting winding in a cooled housing, and the &6OpV Electric Pump&r moves fluid with a travelling field. The piston and conveyor run on composite rods and lamina stacks, the robot arm turns on the harmonic drive, and the emitter, sensor and field generator close the set with the fluid regulator.',
+    'The &6OpV Electric Motor&r turns chain composite rods inside a chain field coil, a trained REBCO pancake wound with chain strand, and is charged with superfluid helium-3. The &6OpV Electric Pump&r spins a chain composite rotor behind superfluid helium-3 seals, and the conveyor drives a chain mesh belt. The piston runs on rods and lamina stacks, the robot arm turns on the harmonic drive, and the emitter and sensor carry the Th-229 lasing crystal and the Compton crystal on a cryo optical link. The field generator and the fluid regulator close the set.',
   ], [
     it('gtceu:opv_electric_motor'), it('gtceu:opv_electric_pump'), it('gtceu:opv_electric_piston'), it('gtceu:opv_conveyor_module'),
     it('gtceu:opv_robot_arm'), it('gtceu:opv_emitter'), it('gtceu:opv_field_generator'), it('gtceu:opv_fluid_regulator'),
   ], 200),
   q('HATCH', 'step', 'OpV Energy Hatches', 'gtceu:opv_energy_input_hatch', ['COMP'], 7, 6, null, [
-    'The &6OpV Energy Hatch&r takes power in or gives it back, as a single, four or sixteen amp hatch. The beam lines and the engines of the age are wired to them.',
+    'The &6OpV Energy Hatch&r takes power in or gives it back, as a single, four or sixteen amp hatch. Each is built with an AlN power die and a field-frozen plate. The beam lines and the engines of the age are wired to them.',
   ], [it('gtceu:opv_energy_input_hatch'), it('gtceu:opv_energy_output_hatch')], 150),
   q('ASM', 'machine', 'OpV Assembler', 'gtceu:opv_assembler', ['HATCH'], 9.5, 6, {
     for: 'The &6OpV Assembler&r is the single-block assembler at the voltage of the age, for every part that does not need a line.',

@@ -61,9 +61,9 @@
   },
   "allowLayout": [
     { "from": "5A539FCEC01451BA", "to": "12376A5961A338E7", "kinds": ["through-node"], "why": "UXV: the Ejecta Knot Sweeper really needs the Cassiopeia A jump; its line runs past the Caged Phases lane of the Vela branch." },
-    { "from": "7B1E66BC13548877", "to": "7B82C6325DA8F876", "kinds": ["through-node"], "why": "OpV: the Jet Beam Line really needs the return to Cygnus X-1; its line runs under the Beam Window." },
     { "from": "38F0C34A187A7746", "to": "71CAE992CEC101E3", "kinds": ["through-node"], "why": "OpV: the Annihilation Engine burns Antihydrogen Ice; its line runs under the OpV Hull." },
-    { "from": "51C0DDF70D599BE7", "to": "7808A81BF8AA169E", "kinds": ["through-node"], "why": "OpV: the Kugelblitz Core needs Stable Exotic Matter and Antihydrogen Ice; the exotic line runs under the ice." }
+    { "from": "51C0DDF70D599BE7", "to": "7808A81BF8AA169E", "kinds": ["through-node"], "why": "OpV: the Kugelblitz Core needs Stable Exotic Matter and Antihydrogen Ice; the exotic line runs under the ice." },
+    { "from": "33A2D7F5523AA48A", "to": "5B12B68A0DD8886C", "kinds": ["through-node"], "why": "MAX+: Locked Chevrons and Chevron Blocks are both built from Ring Blocks and Chevron Upgrades, and both lead on to The Structure (Chevron Blocks through The Base). Two quests with the same two parents and a common descendant to their right have no left-to-right drawing without a line through a node or a crossing, so the Chevron Upgrades line to Locked Chevrons runs under Chevron Blocks (AF-Q2b)." }
   ],
   "allowLongEdges": [
     { "from": "576E522130567846", "to": "38F0C34A187A7746", "why": "OpV: the Lyman-alpha Laser branch rejoins the antimatter spine at the Antihydrogen Foundry (docs/eras/opv.md); the laser is a side input, not a step in the line." },

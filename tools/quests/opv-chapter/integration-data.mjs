@@ -99,10 +99,10 @@ export const QUESTS = [
     key: 'I_K3', kind: 'milestone', title: 'Kardashev III', icon: 'grindless:bulge_light_census',
     deps: ['I_BULGE'], x: 4, y: 5,
     desc: [
-      'A civilisation that uses the light of a whole galaxy\'s stars is Kardashev III. The pack asks for three proofs: the census from the sixty-four node run, a wireless network fed from home, Cygnus and Terzan 5 at once, and the gate\'s hold. The Power tab shows each source.',
+      'A civilisation that uses the light of a whole galaxy\'s stars is Kardashev III. The Bulge Light Census is your proof, and the gate to MAX keeps it in store. Tick this once the census is in hand.',
     ],
     tasks: [ck()],
-    rewards: [xp(150)],
+    rewards: [xp(25)],
   },
 
   // ------------------------------------------------------------------ hatch, array, cell and network
@@ -110,8 +110,8 @@ export const QUESTS = [
     key: 'I_PAR', kind: 'process', title: 'Parallel Control', icon: 'gtceu:opv_parallel_hatch',
     deps: ['START'], x: 2, y: 8,
     teach: {
-      for: 'The &6OpV Parallel Hatch&r lets a machine run an enormous number of copies of one recipe at once, the widest hatch yet.',
-      needs: 'A machine with a parallel slot, and power for every copy: each pays its own EU/t.',
+      for: 'The &6Overpowered Parallel Control Hatch&r lets a machine that takes parallel hatches run up to 262,144 copies of one recipe at once, each at its own EU/t: the widest hatch yet.',
+      needs: 'An OpV hull, field generators, robot arms, sensors, OpV circuits and tetron arrays on the assembly line, cooled with superfluid helium-3 and researched on the Extreme hatch. Then power for every copy.',
       unlocks: 'The assembly line array at full width.',
       automate: 'Give the machine a bus wide enough for the copies it will run.',
     },
@@ -149,9 +149,9 @@ export const QUESTS = [
     key: 'I_NET', kind: 'process', title: 'The Network Goes OpV', icon: 'gtceu:opv_wireless_energy_hatch',
     deps: ['I_CELL'], x: 4, y: 10,
     teach: {
-      for: 'Move your towers onto &6OpV SMES Cells&r and the wireless network carries OpV to every platform, the magnetar and the cluster included. The chain strand repeater keeps it in step across the bulge.',
-      needs: 'Every formed tower holding OpV cells. Until then the network stays at UXV.',
-      unlocks: 'The wireless hatches at OpV, and the gate\'s load at Cygnus X-1.',
+      for: 'Move your towers onto &6OpV SMES Cells&r and the wireless network carries OpV to every platform, the magnetar and the cluster included. The chain strand repeater goes into the wireless hatches.',
+            needs: 'One formed tower holding an OpV cell: the network runs at its strongest cell, so until then it stays at UXV.',
+            unlocks: 'The wireless hatches at OpV.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
     desc: [],
@@ -162,10 +162,10 @@ export const QUESTS = [
     key: 'I_GATELOAD', kind: 'milestone', title: 'Eight Sources', icon: 'gtceu:opv_wireless_energy_hatch',
     deps: ['I_NET', 'I_K3'], x: 6, y: 7.5,
     desc: [
-      'The gate to MAX holds the largest load yet for sixty seconds. Eight of the big sources on the wireless network cover it, for example two engines, two collectors and a pair of bulge collectors beside the older dynamos and taps. Check each source on the Power tab, then tick this box.',
+      'The gate to MAX holds the largest load yet for a minute; EMI shows the draw. Add up what your engines, collectors and older generators feed the wireless network, keep a charged OpV cell behind them, then tick this box.',
     ],
     tasks: [ck()],
-    rewards: [xp(150)],
+    rewards: [xp(25)],
   },
 
   // ------------------------------------------------------------------ older machines
@@ -173,7 +173,7 @@ export const QUESTS = [
     key: 'I_OM_EV', kind: 'process', title: 'Cold and Strip', icon: 'gtceu:cryogenic_plant',
     deps: ['START'], x: 2, y: 13,
     teach: {
-      for: 'The &6Cryogenic Plant&r, &6Extraction Cascade&r, &6Hot Strip Mill&r and &6Platinum Plant&r each take a new mode: liquid helium-3 and tests at 77 K, germanium and silicon chlorides, beryllium foil and iridium of five nines.',
+      for: 'The &6Cryogenic Plant&r, &6Rare Earth Extraction Cascade&r, &6Hot Strip Mill&r and &6Platinum Plant&r each take a new mode: liquid helium-3 and tests at 77 K, germanium and silicon chlorides, beryllium foil and iridium of five nines.',
       needs: 'The controllers you already own, and the cuts and dust from the stars.',
       unlocks: 'The tetron cryostat, the beam window and the iridium target.',
       automate: 'Each plant hands its product on by pipe. Return the nitrogen and the water.',
@@ -186,7 +186,7 @@ export const QUESTS = [
     key: 'I_OM_NUC', kind: 'process', title: 'Heavier Cuts', icon: 'gtceu:hot_cell',
     deps: ['DEBRIS'], x: 2, y: 15,
     teach: {
-      for: 'The &6Hot Cell&r, &6Fluorspar Kiln&r, &6Fuel Fabrication Plant&r, &6Tritium Removal&r, &6Actinide Partitioning Plant&r and &6Methane Pyrolyser&r take rows for spent tiles and targets, thorium and beryllium fluorides, the ACMF pellet, spent shields, curium and pyrolytic graphite.',
+      for: 'The &6Hot Cell&r, &6Fluorspar Kiln&r, &6Fuel Fabrication Plant&r, &6Tritium Removal Facility&r, &6Actinide Partitioning Plant&r and &6Methane Pyrolyser&r take rows for spent tiles and targets, thorium and beryllium fluorides, the ACMF pellet, spent shields, curium and pyrolytic graphite.',
       needs: 'The reactors and plants you already own and the spent parts of the new lines.',
       unlocks: 'The pellet, the shield tiles and the graphite anodes.',
       automate: 'Spent parts return by bus. Nothing in the tailings is dangerous once sorted.',
@@ -250,7 +250,7 @@ export const QUESTS = [
     key: 'I_OM_CHIP', kind: 'process', title: 'Cryostat and Bonding', icon: 'gtceu:millikelvin_cryostat_works',
     deps: ['TETRON'], x: 2, y: 23,
     teach: {
-      for: 'The &6Millikelvin Cryostat&r, &6Femtosecond Writer&r, &6TFLN Fab&r, &6BEUV Scanner&r, &6STM Lithography Cell&r, &6SNSPD Foundry&r, &6Levitation Melter&r and &6Photonic Integration Hall&r take rows for superfluid helium-3, tetron tests, smart cuts, six masks and the cosmic mainframe join.',
+      for: 'The &6Millikelvin Cryostat Works&r, &6Femtosecond Writer&r, &6TFLN Fab&r, &6BEUV Scanner&r, &6STM Lithography Cell&r, &6SNSPD Foundry&r, &6Levitation Melter&r and &6Photonic Integration Hall&r take rows for superfluid helium-3, tetron tests, smart cuts, six masks and the cosmic mainframe join.',
       needs: 'The UIV and UEV controllers you already own, and silicon-28 from the implanter.',
       unlocks: 'The tetron array, the bonded die and the cosmic mainframe.',
       automate: 'Dies and wafers by bus. Failed tetron dies go back through the cascade for indium and niobium.',
@@ -283,7 +283,7 @@ export const QUESTS = [
     key: 'I_OM_PASTA', kind: 'process', title: 'Pasta Gains a Magnetar', icon: 'gtceu:pasta_extractor',
     deps: ['J_SGR'], x: 2, y: 27,
     teach: {
-      for: 'The &6Pasta Extractor&r, &6Pasta Phase Sorter&r, &6Draw Bench&r and &6Laminator&r, built for the pulsar, take a magnetar site and rows for chain crust, caged phases, chain strand and lamina. The &6MTJ Sputter Cluster&r takes eight films.',
+      for: 'The &6Pasta Extractor&r, &6Pasta Phase Sorter&r, &6Pasta Draw Bench&r and &6Pasta Laminator&r, built for the pulsar, take a magnetar site and rows for chain crust, caged phases, chain strand and lamina. The &6MTJ Sputter Cluster&r takes eight films.',
       needs: 'The UXV controllers you already own, and a platform at the magnetar.',
       unlocks: 'Chain strand, the hull plates and every sputtered film of the circuit lines.',
       automate: 'Cages return from the sorter. Targets arrive by bus.',

@@ -3,10 +3,12 @@
 // "Power", "AE2").
 // Every row starts at an I_L_* link to a stage quest; the age chapters do not link back.
 // The parallel hatch (PAR) teaches scale at the machine level. The Hyperfactory and the circuits are in XP-C2b's chapters.
-// Positions: rows every 3, columns every 2.
+// Positions and dependencies: layout.mjs.
 const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
+
+import { SECTIONS, place } from './layout.mjs';
 
 export const CHAPTER = {
   filename: 'maxplus_integration',
@@ -15,7 +17,7 @@ export const CHAPTER = {
   order: 5,
   icon: 'gtceu:max_wireless_dynamo_hatch_16a',
   autofocus: 'OM_SHELL',
-  section: { name: 'Older Machines, Power and AE2', origin: { x: 0, y: 1.5 }, heading: { key: 'H_INTEGRATION', x: 0, y: 0, deps: ['START'], icon: 'gtceu:max_wireless_dynamo_hatch_16a' } },
+  section: SECTIONS.integration,
   title: 'MAX+: Integration',
   subtitle: ['Older machines at MAX+ scale, power from nickel-56 and fusion, and the grid that holds the plan.'],
 };
@@ -72,11 +74,11 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'OM_DOR', kind: 'machine', title: 'At 30 Doradus', icon: 'gtceu:plasma_mass_filter',
+    key: 'OM_DOR', kind: 'machine', title: 'The Plasma Pair', icon: 'gtceu:plasma_mass_filter',
     deps: ['LMC'], x: 17, y: 0,
     teach: {
-      for: 'The plasma mass filter and the FRC former turn the lift\'s raw wind into confined plasma, the same way at this scale as before.',
-      needs: 'Both controllers, on the platform at 30 Doradus.',
+          for: 'The plasma mass filter and the FRC former turn the lift\'s raw plasma into confined plasma, the same way at this scale as before. Neither is tied to a place: only the lift is.',
+          needs: 'Both controllers, anywhere you like.',
       unlocks: 'Nickel-56 and every plasma line after it.',
       automate: 'The filter\'s waste leaves in its own pipe.',
     },
@@ -90,8 +92,8 @@ export const QUESTS = [
     key: 'OM_UXV', kind: 'machine', title: 'Home Rows: UXV', icon: 'gtceu:pasta_draw_bench',
     deps: ['START'], x: 1, y: 1.5,
     teach: {
-      for: 'The UXV row\'s controllers at home: draw bench, sputter cluster, PLD chamber, shequid works, racetrack fab and stellar elevator.',
-      needs: 'All six controllers.',
+      for: 'The UXV controllers at home, and the MAX+ row each one takes: the MTJ cluster, oxide PLD chamber and racetrack fab make coated tapes, x-ray mirrors and the logic and storage dies; the stellar elevator loads the ribbon of the deep horizon tether. The draw bench and the shequid works join those lines.',
+      needs: 'All six controllers: draw bench, sputter cluster, PLD chamber, shequid works, racetrack fab and stellar elevator.',
       unlocks: 'The ribbon, tether and conduit lines of stage II.',
       automate: 'They share one hub; lay it out once.',
     },
@@ -103,8 +105,8 @@ export const QUESTS = [
     key: 'OM_UIV', kind: 'machine', title: 'Home Rows: UIV', icon: 'gtceu:levitation_melter',
     deps: ['OM_UXV'], x: 1, y: 3,
     teach: {
-      for: 'The UIV row: drip separator, levitation melter, TFLN fab, femtosecond writer, BEUV scanner, mK cryostat and the spectral hole burner.',
-      needs: 'All seven controllers.',
+      for: 'The UIV controllers at home, and the MAX+ row each one takes: the millikelvin cryostat chills the waveguide, resonance chamber, field cell and core crystal; the femtosecond writer inscribes crystals and interposer waveguides; the BEUV scanner patterns wafers for the chevron cores and the controller crystal; the TFLN fab makes the modulator chips; the levitation melter melts the strange alloy; the spectral hole burner burns the store block.',
+      needs: 'All seven controllers: drip separator, levitation melter, TFLN fab, femtosecond writer, BEUV scanner, mK cryostat and spectral hole burner.',
       unlocks: 'Lattices, waveguides, and the stage\'s precise parts.',
       automate: 'The cryostat wants the cold plant next to it.',
     },
@@ -116,8 +118,8 @@ export const QUESTS = [
     key: 'OM_UEV', kind: 'machine', title: 'Home Rows: UEV', icon: 'gtceu:calutron',
     deps: ['OM_UIV'], x: 1.5, y: 4.5,
     teach: {
-      for: 'The UEV row: megabar press, degenerate harvester, calutron, CVI furnace, single-crystal foundry, nitride magnet works, SNSPD foundry and stellar forge.',
-      needs: 'All eight controllers.',
+      for: 'The UEV controllers at home, and the MAX+ row each one takes: the calutron makes the silicon-28 feed of the logic die, the stellar forge makes the plasma of the crystal slurry, the CVI furnace makes waveguide tubes and chamber flanges, the nitride magnet works braces the SMES toroid and the SNSPD foundry makes the phase sensor die.',
+      needs: 'All eight controllers: megabar press, degenerate harvester, calutron, CVI furnace, single-crystal foundry, nitride magnet works, SNSPD foundry and stellar forge.',
       unlocks: 'The calutron\'s isotopes, which both stages ask for.',
       automate: 'The calutron is the slow one; build several.',
     },
@@ -129,8 +131,8 @@ export const QUESTS = [
     key: 'OM_UHV', kind: 'machine', title: 'Home Rows: UHV and UV', icon: 'gtceu:superfluid_helium_plant',
     deps: ['OM_UEV'], x: 3, y: 5,
     teach: {
-      for: 'The UHV row (PBO plant, crystal furnace, photonic foundry, MBE reactor, ribbon works) and the UV row (helium plant, SRF works, zone tower, MOCVD, fibre tower).',
-      needs: 'All ten controllers.',
+      for: 'The UHV and UV controllers at home, and the MAX+ row each one takes: the crystal growth furnace grows seed plates and boules, the photonic foundry makes the frequency divider and the photonic engine, the MBE reactor grows the piezo layer, the MOCVD reactor the laser arrays, the SRF works the resonance cells and cavities, and the ribbon works draws the tether ribbon.',
+      needs: 'All ten controllers: PBO plant, crystal growth furnace, photonic foundry, MBE reactor, ribbon works, helium plant, SRF works, zone tower, MOCVD and fibre tower.',
       unlocks: 'The superfluid helium and fibres that the stream and the dark both ask for.',
       automate: 'Helium returns by the same pipe that fed it.',
     },
@@ -142,8 +144,8 @@ export const QUESTS = [
     key: 'OM_OLD', kind: 'machine', title: 'Home Rows: ZPM Down to EV', icon: 'gtceu:hts_magnet_works',
     deps: ['OM_UHV'], x: 4.5, y: 5,
     teach: {
-      for: 'The older rows still make parts MAX+ needs: diamond fab, implanter, aerogel works, coated conductor line, HTS magnet works, helium refrigerator, hot cell, extraction cascade, cryogenic plant and hot strip mill.',
-      needs: 'The ten controllers, set up for many lanes.',
+      for: 'The older rows still make parts MAX+ needs: the diamond lattice fab makes the photonic plate, the HTS magnet works winds the SMES toroid and the fault-current coil, the coated conductor line draws tapes, and the helium refrigerator chills toroids, coils and conduits. The implanter, aerogel works, hot cell, rare earth extraction cascade, cryogenic plant and hot strip mill take smaller parts.',
+      needs: 'The ten controllers: diamond fab, implanter, aerogel works, coated conductor line, HTS magnet works, helium refrigerator, hot cell, rare earth extraction cascade, cryogenic plant and hot strip mill.',
       unlocks: 'Conductors, aerogel, and a cold chain for the stage.',
       automate: 'Give each its own chest on the network.',
     },
@@ -157,34 +159,34 @@ export const QUESTS = [
     key: 'PW_NI', kind: 'plant', title: 'Power from Nickel-56', icon: 'grindless:co56_cask',
     deps: ['CASK'], x: 24.5, y: -8.5,
     teach: {
-      for: 'The burner takes a shielded nickel-56 cask and returns a cobalt-56 cask, then a spent iron-56 cask. Heat becomes steam, and steam becomes EU on the platform.',
-      needs: 'Casks from the crucible, and a dynamo hatch on the platform.',
-      unlocks: 'The platform\'s own power and the way to send it home.',
-      automate: 'Casks move by belt; send spent ones back home as scrap.',
+      for: 'The burner takes a shielded nickel-56 cask and returns a cobalt-56 cask, then burns that again into a spent iron-56 cask. Each decay is heat, and the heat becomes EU wherever the burner stands: it is not tied to the Tarantula.',
+      needs: 'Casks from the crucible, and a dynamo hatch on the burner.',
+      unlocks: 'The era\'s first power plant, and the way to send its power to the network.',
+      automate: 'Casks move by belt; run the cobalt casks through a second time before they go to the hot cell.',
     },
     desc: [],
-    tasks: [it('grindless:co56_cask'), it('grindless:spent_fe56_cask')],
+    tasks: [it('grindless:co56_cask')],
     rewards: [xp(150)],
   },
   {
-    key: 'PW_TORUS', kind: 'plant', title: 'Power from Fusion Fuel', icon: 'gtceu:primordial_deuterium_bucket',
-    deps: ['PD'], x: 24.5, y: -5,
+    key: 'PW_TORUS', kind: 'plant', title: 'Power from Fusion Fuel', icon: 'gtceu:helium_4_ash_bucket',
+    deps: ['PD'], x: 24.5, y: -6,
     teach: {
-      for: 'Primordial deuterium and pristine helium-3 fuel a torus on the platform. The fusion reactions are not new; the fuel comes from the Stream.',
-      needs: 'Both fuels in bulk, and a torus.',
-      unlocks: 'A second source for the platform\'s network.',
-      automate: 'The fuels travel in separate pipes.',
+      for: 'Primordial deuterium and pristine helium-3 burn in the torus, and the converter stack turns their charged products straight into EU. The torus runs only in the Stream, where its fuel comes from.',
+      needs: 'Both fuels in bulk, and a formed torus with its injector and stack.',
+      unlocks: 'A second source for the network.',
+      automate: 'The fuels travel in separate pipes. The helium-4 ash and the hydrogen that come out go home to the gas lines.',
     },
     desc: [],
-    tasks: [it('gtceu:primordial_deuterium_bucket'), it('gtceu:pristine_helium_3_bucket')],
+    tasks: [it('gtceu:helium_4_ash_bucket')],
     rewards: [xp(150)],
   },
   {
     key: 'PW_DYN', kind: 'machine', title: 'Wireless Dynamo', icon: 'gtceu:max_wireless_dynamo_hatch_16a',
-    deps: ['PW_NI', 'PW_TORUS'], x: 26, y: -7,
+    deps: ['PW_NI', 'PW_TORUS'], x: 28, y: -8.5,
     teach: {
-      for: 'A wireless dynamo hatch feeds the network from the platform. A fraction is lost on the way, so build more than you need.',
-      needs: 'The &6wireless dynamo hatch&r, on every plant.',
+      for: 'A wireless dynamo hatch feeds the network from each plant, wherever it stands. A fraction is lost on the way, so build more than you need.',
+      needs: 'A MAX wireless dynamo hatch on every plant.',
       unlocks: 'The network at home.',
       automate: 'Power flows without a cable, but not without cost.',
     },
@@ -194,7 +196,7 @@ export const QUESTS = [
   },
   {
     key: 'PW_STORE', kind: 'machine', title: 'A Store That Holds It', icon: 'grindless:max_smes_cell',
-    deps: ['PW_DYN'], x: 27.5, y: -7,
+    deps: ['PW_DYN'], x: 29.5, y: -8.5,
     teach: {
       for: 'Wireless energy hatches draw from the network, and a MAX+ store smooths out the dips between plants.',
       needs: 'The 4096-amp and 1024-amp wireless hatches, the MAX+ hatch and an SMES cell.',
@@ -212,7 +214,7 @@ export const QUESTS = [
     deps: ['SCALE'], x: 40, y: 1,
     teach: {
       for: 'The 256M cell component and a horizon storage die make cells that hold the stage\'s item and fluid counts.',
-      needs: 'The &6Horizon Storage Die&r from the circuits tab, and the 256M component.',
+      needs: 'The &6Horizon Storage Die&r from the Circuits section, and the 256M component.',
       unlocks: 'Storage that does not run out at a million of anything.',
       automate: 'One cell type per network; fluids get their own.',
     },
@@ -239,7 +241,7 @@ export const QUESTS = [
     teach: {
       for: 'The assembler matrix keeps hundreds of patterns in one block, and two pattern providers push them out. A pattern memory unit holds the plan.',
       needs: 'The matrix crafter, frame and walls, an extended provider, an expanded provider and the memory unit.',
-      unlocks: 'Autocrafting of every item in the tab.',
+      unlocks: 'Autocrafting of every item of the era.',
       automate: 'Group patterns by line, and name them.',
     },
     desc: [],
@@ -251,7 +253,7 @@ export const QUESTS = [
     deps: ['SCALE'], x: 41, y: 3,
     teach: {
       for: 'The MAX+ parallel hatch lets one machine run a very large batch at once. It does not make a recipe faster; it makes the plan fit.',
-      needs: 'The &6parallel hatch&r, on a controller that accepts it.',
+      needs: 'The &6MAX+ Parallel Control Hatch&r, on a controller that accepts it.',
       unlocks: 'The scale of the final stage.',
       automate: 'A batch needs its inputs together, so size the buffer for it.',
     },
@@ -260,3 +262,4 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

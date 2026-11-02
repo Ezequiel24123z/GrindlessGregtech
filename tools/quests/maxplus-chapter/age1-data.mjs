@@ -7,13 +7,17 @@
 // Keys for XP-C2b to hang from: TAP (condensate), SETTLED (condensate refinery), BN (bound-matter press), KS (kerr strange alloy),
 // BDEG (bound degenerate billet), CW (counterweight), PROBE (relay probe), PAIR (slingshot), LAUNCH, RAW (stellar lift), NI56 (crucible),
 // CASK (nickel-56 cask and burner), NAV17, PD (gas works and torus), PHE3 (primordial helium-3).
-// START depends on max:LOCK. No link to pl_maxplus yet (XP-PL). Travel uses the relay platforms; the platform chest holds the substage book.
-// Gate quests never reward the gate product: each is a dimension task and gives XP only.
-// Positions: columns every 2, rows every 2 along y = 0.
+// START depends on max:LOCK. No link to pl_maxplus yet (XP-PL). Travel (AF-1, server lib/relay_platforms.js): a completed jump places its place's
+// relay platform once and leaves the place's Relay Coordinates in the jump ring's output bus; a holding ring with them in its input bus carries a
+// player standing in it there, and the platform's paused ring wakes for one hold to carry them home.
+// Gate quests never reward the gate product: each arrival is a dimension task and gives XP only; the course and probe steps are checkmarks.
+// Positions and dependencies: layout.mjs.
 const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const dim = (dimension) => ({ type: 'dimension', dimension });
 const xp = (n) => ({ type: 'xp', xp: n });
+
+import { SECTIONS, place } from './layout.mjs';
 
 export const CHAPTER = {
   filename: 'maxplus_age_1',
@@ -22,7 +26,7 @@ export const CHAPTER = {
   order: 0,
   icon: 'grindless:horizon_lock',
   autofocus: 'START',
-  section: { name: 'Stage I: Out of the Galaxy', origin: { x: 0, y: 0 } },
+  section: SECTIONS.age1,
   title: 'MAX+: Beyond the Galaxy',
   subtitle: ['A kept lock that taps the stilled horizon, a slingshot past the Galaxy\'s rim, the Tarantula Nebula and the Magellanic Stream.'],
 };
@@ -34,6 +38,7 @@ export const QUESTS = [
     deps: ['max:LOCK'], x: 0, y: 0,
     desc: [
       'The last recipe of MAX left you a &6Horizon Lock&r. It is no ticket home: the shell keeps it as a catalyst, and every tap of the horizon from here on wants one.',
+      'Make more as you go. The gate that leaves the Galaxy keeps one, every locked chevron of the last gate swallows one, and its dial keeps another.',
       '&oFiction:&r a horizon held still, and a lock that holds it. The Galaxy ends at the next gate.',
     ],
     tasks: [it('grindless:horizon_lock')],
@@ -76,9 +81,9 @@ export const QUESTS = [
     key: 'BN', kind: 'step', title: 'Horizon-Bound Neutronium', icon: 'grindless:horizon_compressed_plate',
     deps: ['SETTLED'], x: 13, y: 4,
     desc: [
-      'Neutronium bound into an ingot, then pressed. The &6Horizon Compressed Plate&r is the densest plate in the pack, and only the bound-matter press makes it.',
+      'The refinery\'s bound ingots, pressed. The &6Horizon Compressed Plate&r is the densest plate in the pack, and only the bound-matter press makes it.',
     ],
-    tasks: [it('grindless:bound_neutronium_ingot'), it('grindless:horizon_compressed_plate')],
+    tasks: [it('grindless:horizon_compressed_plate')],
     rewards: [xp(150)],
   },
   {
@@ -96,16 +101,25 @@ export const QUESTS = [
     key: 'CW', kind: 'step', title: 'Slingshot Counterweight', icon: 'grindless:canned_counterweight',
     deps: ['SETTLED'], x: 6, y: 0,
     desc: [
-      'A canned counterweight of dense planetesimal core. The black hole keeps it, which is the honest ending for anything that heavy.',
+      'A canned counterweight of dense planetesimal core. The black hole keeps it, which is the honest ending for anything that heavy. The slingshot\'s coil casing is wound round the same core.',
     ],
     tasks: [it('grindless:dense_counterweight_core'), it('grindless:canned_counterweight')],
     rewards: [xp(150)],
   },
   {
+    key: 'NAVCORE', kind: 'step', title: 'Optical Nav Core', icon: 'grindless:optical_nav_core',
+    deps: ['SETTLED'], x: 6, y: -1.5,
+    desc: [
+      'An intergalactic probe steers by an &6Optical Nav Core&r, built in the photonic foundry round a thorium nuclear clock. Every probe swallows one whole, so each gate you open from here costs another.',
+    ],
+    tasks: [it('grindless:optical_nav_core')],
+    rewards: [xp(200)],
+  },
+  {
     key: 'PROBE', kind: 'step', title: 'Intergalactic Relay Probe', icon: 'grindless:ig_relay_probe',
     deps: ['CW'], x: 8, y: 0,
     desc: [
-      'The old galactic-centre probe will not leave the Galaxy. This one carries a Hawking drive and its own navigation. The circuits tab says how it gets its brains.',
+      'The old galactic-centre probe will not leave the Galaxy. This one carries a Hawking drive, the navigation core, and MAX+ sensors and arms from the Circuits section.',
     ],
     tasks: [it('grindless:probe_seed'), it('grindless:hawking_drive'), it('grindless:ig_relay_probe')],
     rewards: [xp(200)],
@@ -114,7 +128,7 @@ export const QUESTS = [
     key: 'PAIR', kind: 'step', title: 'A Bound Pair', icon: 'grindless:bound_probe_pair',
     deps: ['PROBE'], x: 10, y: 0,
     desc: [
-      'Probe and counterweight go in together. The hole\'s tide splits them, keeps one and throws the other out of the Galaxy.',
+      'Probe and counterweight go into the slingshot together, at Sgr A* orbit, the only place it runs. The hole\'s tide splits them, keeps one and throws the other out of the Galaxy.',
     ],
     tasks: [it('grindless:bound_probe_pair')],
     rewards: [xp(150)],
@@ -123,7 +137,7 @@ export const QUESTS = [
     key: 'LAUNCH', kind: 'step', title: 'Probe Away', icon: 'grindless:launched_ig_probe',
     deps: ['PAIR'], x: 12, y: 0,
     desc: [
-      'The probe is on its way. The gate catches it at the far end, timed against the still horizon, so the lock has to be in the shell when it fires.',
+      'The probe is on its way. The warp gate at Sgr A* catches it at the far end: its hold burns the launched probe and keeps a Horizon Lock as a catalyst.',
     ],
     tasks: [it('grindless:launched_ig_probe')],
     rewards: [xp(150)],
@@ -132,10 +146,10 @@ export const QUESTS = [
     key: 'LMC', kind: 'step', title: '30 Doradus', icon: 'grindless:launched_ig_probe',
     deps: ['LAUNCH'], x: 14, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'The gate opens in the Tarantula Nebula, beside the heaviest stars known. Nothing is rewarded for the gate itself.',
+      'When that hold completes, a platform appears in the Tarantula Nebula, beside the heaviest stars known, and the ring\'s output bus gets its &6Relay Coordinates&r. Put them in the input bus of a ring that is holding, stand inside and it carries you there.',
     ],
     tasks: [dim('grindless:tarantula_orbit')],
-    rewards: [xp(200)],
+    rewards: [xp(250)],
   },
 
   // ------------------------------------------------------------------ the Tarantula
@@ -143,18 +157,18 @@ export const QUESTS = [
     key: 'J_TAR', kind: 'reading', title: 'The Platform at 30 Doradus', icon: 'gtceu:tarantula_stellar_lift',
     deps: ['LMC'], x: 16, y: 0,
     desc: [
-      'A platform with a ring for the network, a deck and a chest holding the book for this place. Everything else you carry in.',
+      'A warp ring on a floor, a wireless hatch pair and an AE2 controller with a drive. Everything else you carry in. The ring waits paused with cells of its own: step out of it and back in, and it wakes for one hold, paid by those cells and the network\'s power, and carries you home.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
   },
   {
     key: 'RAW', kind: 'process', title: 'Plasma from the Heaviest Stars', icon: 'gtceu:confined_vms_plasma_bucket',
-    deps: ['J_TAR'], x: 18, y: -5,
+    deps: ['J_TAR', 'MA_LIFT'], x: 18, y: -5,
     teach: {
-      for: 'The &6stellar lift&r draws plasma from R136\'s very massive stars; a filter and a former turn it into confined core plasma.',
-      needs: 'A nozzle coil for the lift, and a platform here: the plasma stays where it is made.',
-      unlocks: 'Nickel-56, and the platform\'s first power.',
+      for: 'The &6Tarantula Stellar Lift&r draws raw plasma from R136\'s very massive stars, and only here at the Tarantula. A filter and a former, which run anywhere, turn it into confined core plasma.',
+      needs: 'Lift nozzles and the lift itself at this platform. The plasma mass filter and the FRC former can stand at home.',
+      unlocks: 'Nickel-56 and the burner that eats it.',
       automate: 'The wind never stops, so the lift never starves.',
     },
     desc: [],
@@ -163,15 +177,15 @@ export const QUESTS = [
   },
   {
     key: 'NI56', kind: 'process', title: 'Nickel-56', icon: 'grindless:ni56_slug',
-    deps: ['RAW'], x: 20, y: -6.5,
+    deps: ['MA_CRUC'], x: 20, y: -6.5,
     teach: {
       for: 'The &6pair-instability crucible&r burns the core plasma into nickel-56 slugs and ash from the star\'s heavier half.',
       needs: 'A liner for the crucible, and confined plasma in bulk.',
       unlocks: 'The nickel-56 cask, and the burner that eats it.',
-      automate: 'The ash goes home to the older lines. Do not let it pile up.',
+      automate: 'The ash goes home to the older lines. Do not let it pile up. The crucible can run anywhere.',
     },
     desc: [],
-    tasks: [it('grindless:ni56_slug'), it('grindless:ime_ash')],
+    tasks: [it('grindless:ni56_slug')],
     rewards: [xp(150)],
   },
   {
@@ -189,36 +203,36 @@ export const QUESTS = [
     key: 'NAV17', kind: 'step', title: 'A Course for the Stream', icon: 'grindless:optical_nav_core',
     deps: ['J_TAR'], x: 18, y: 0,
     desc: [
-      'The next gate is built here, at 30 Doradus. It throws a probe with a navigation core of its own, pointed at the Magellanic Stream.',
+      'The gate to the Magellanic Stream leaves from the ring here at 30 Doradus. Its hold takes a whole intergalactic relay probe, unlaunched, with a fresh navigation core inside. Check this off once that probe is in hand.',
     ],
-    tasks: [it('grindless:optical_nav_core')],
-    rewards: [xp(200)],
+    tasks: [ck()],
+    rewards: [xp(50)],
   },
   {
     key: 'STREAM', kind: 'step', title: 'The Magellanic Stream', icon: 'gtceu:pristine_gas_bucket',
     deps: ['NAV17'], x: 20, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'A river of gas torn from the Clouds, older than any star here. Nothing is rewarded for the gate itself.',
+      'When that hold completes, a platform appears in the Magellanic Stream, a river of gas torn from the Clouds and older than any star here. The ring at 30 Doradus gets its &6Relay Coordinates&r: ride there as before.',
     ],
     tasks: [dim('grindless:magellanic_stream')],
-    rewards: [xp(200)],
+    rewards: [xp(250)],
   },
   {
     key: 'J_STR', kind: 'reading', title: 'The Platform in the Stream', icon: 'gtceu:pristine_gas_works',
     deps: ['STREAM'], x: 20.5, y: -2,
     desc: [
-      'Gas this pristine has never been inside a star. A magnetic scoop sweeps it up, and what it holds is worth carrying home.',
+      'Gas this pristine has never been inside a star. A magnetic scoop sweeps it up, and what it holds is worth carrying home. The platform\'s ring takes you back the same way: step out of it and back in.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
   },
   {
     key: 'PD', kind: 'process', title: 'Primordial Deuterium', icon: 'gtceu:primordial_deuterium_bucket',
-    deps: ['J_STR'], x: 23, y: -3.5,
+    deps: ['J_STR', 'MA_GAS'], x: 23, y: -3.5,
     teach: {
-      for: 'Deuterium from the first minutes of the universe, left in the Stream\'s gas. The works sweeps it up, a tower fractionates it and a calutron picks the heavy half.',
-      needs: 'The gas works here, then the cryogenic plant and the calutron.',
-      unlocks: 'The fusion torus, and the next stage\'s isotopes.',
+      for: 'Deuterium from the first minutes of the universe, left in the Stream\'s gas. The works sweeps the gas up; a cold plant, a tower and a calutron pick out the heavy half.',
+      needs: 'The gas works here. Then the cryogenic plant on the Moon, which liquefies the gas, a distillation tower and the calutron.',
+      unlocks: 'Fuel for the fusion torus, and the beam injector that heats it.',
       automate: 'The gas never runs out. The calutron sets the pace.',
     },
     desc: [],
@@ -227,15 +241,16 @@ export const QUESTS = [
   },
   {
     key: 'PHE3', kind: 'process', title: 'Pristine Helium-3', icon: 'gtceu:pristine_helium_3_bucket',
-    deps: ['J_STR'], x: 21.5, y: -3.5,
+    deps: ['J_STR', 'MA_GAS'], x: 24.5, y: -3.5,
     teach: {
       for: 'Helium-3 from the same gas. The superfluid plant lets helium-4 flow through its leak and keeps the lighter isotope behind.',
-      needs: 'The plant at home, and a calutron to finish.',
-      unlocks: 'The fusion torus, with the deuterium.',
-      automate: 'Send the helium-4 back out; the condensate side wants it.',
+      needs: 'The helium the Moon\'s cryogenic plant splits off, the superfluid helium plant, a distillation tower and a calutron to finish.',
+      unlocks: 'The other half of the torus\'s fuel, and the converter stack that catches its charged products.',
+      automate: 'Send the leftover helium back into your helium lines.',
     },
     desc: [],
     tasks: [it('gtceu:pristine_helium_bucket'), it('gtceu:he3_enriched_helium_bucket'), it('gtceu:crude_helium_3_bucket'), it('gtceu:pristine_helium_3_bucket')],
     rewards: [xp(200)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));
