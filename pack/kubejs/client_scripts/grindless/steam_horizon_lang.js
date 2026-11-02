@@ -15,7 +15,7 @@
 
     event.add('grindless', 'item.grindless.horizon_shard', 'Horizon Shard')
     event.add('grindless', 'tooltip.grindless.horizon_shard', 'It hums at a pitch you feel more than hear.')
-    event.add('grindless', 'tooltip.grindless.horizon_shard.use', 'Put it in the Horizon Collector. It is never used up and cannot be made.')
+    event.add('grindless', 'tooltip.grindless.horizon_shard.use', 'Put it in the Horizon Collector (it is never used up) or keep it in a creative core recipe. At MAX+ the creative cores need one. Made on the mirror shell at Sgr A* from 2 seed wave packets, a final spin map and 4 horizon phase locks.')
   })
 
 })()

@@ -4,14 +4,16 @@
 // Band ONLY: X 37824-37887, Z 0-63, Y 98-115, in grindless:cygnus_x1_orbit. The far platform is kerr_sling.js's (grindless:sgr1806_orbit at
 // 64,100,64); this test only drops its chunk tickets. Leg 1 keeps its blocks and tickets for leg 2 (persistent data ggTestOpvBulgeRelay), which
 // removes them before DONE.
-// Doubt: the c11 throw survives a restart. The gate keeps its runs only in memory; bulge_relay.js keeps the c11 run in persistent data and gives it
-// back once on the next boot, so kerr_sling.js still places the SGR 1806-20 platform when the run has lasted its time.
-//   leg 1  static_*  the c11 row, the seed and hull recipes, the chain strand wire (16 A at V[OpV], no loss)
+// Doubt: the c11 throw survives a restart. AF-1 (#203): GTM keeps the running recipe across a restart, and the gate's afterWorking queues the
+// completed jump in persistent data (lib/relay_platforms.js, grindless_relay_due); the one placer serves the queue and places the SGR 1806-20
+// platform. bulge_relay.js keeps nothing of the run any more.
+//   leg 1  static_*  the c11 row, the seed and hull recipes, the chain strand wire (16 A at V[OpV], no loss), the placer's row for the jump
 //          formed    one warp gate with two UXV 16 A energy hatches and UXV buses forms in Cygnus X-1's orbit
 //          hold      the gate runs grindless:warp_gate/hold_sgr1806 at 2,147,483,648 EU/t, the seed is spent and the bulge chart is not
-//          kept      bulge_relay.js keeps the run (opvBulgeHold); 1,500 ticks into the 2,400 there is no platform yet; PHASE1
-//   leg 2  the gate still holds the c11 recipe after the restart, bulge_relay.js gave the run back, the platform is placed and its far ring formed,
-//          the hold is released, the launched seed reaches the output bus and the bulge chart stays in the input bus.
+//          kept      nothing is queued and no c11 copy is kept; 1,500 ticks into the 2,400 there is no platform yet; PHASE1
+//   leg 2  the gate still holds the c11 recipe after the restart, the completed jump is queued and served, the platform is placed and its far
+//          ring formed, the queue is drained, the launched seed and the relay coordinates reach the output bus and the bulge chart stays in the
+//          input bus.
 // Not covered here: the four UXV pasta machines running the chain rows at SGR (gg_test_opv_chain_matter, same band, in grindless:sgr1806_orbit).
 (function () {
   var REQUEST = 'ggTestOpvBulgeRelayRequest'
@@ -184,6 +186,10 @@
     try { out.push('bus ' + contents(at(S.pos.bus).getInventory())) } catch (x) { out.push('bus: ' + x) }
     return out.join(' ; ')
   }
+  // the placer's queue holds a jump of the SGR 1806-20 place
+  function queued() {
+    return S.G.relayPlatforms.due(S.server).some(function (e) { return String(e.p) === 'sgr1806' })
+  }
   function lastId() {
     var r = S.ctrl.getRecipeLogic().getLastRecipe()
     return r ? String(r.id) : 'none'
@@ -193,7 +199,11 @@
   function statics() {
     var WG = S.G.warpGate
     var B = S.G.opvBulgeRelay
-    if (!check('static_published', !!WG && !!WG.recipes && !!B, 'global.grindless.warpGate and opvBulgeRelay')) throw new Error('not published')
+    var R = S.G.relayPlatforms
+    if (!check('static_published', !!WG && !!WG.recipes && !!B && !!R, 'global.grindless.warpGate, opvBulgeRelay and relayPlatforms')) throw new Error('not published')
+    var prow = R.rowOfJump('hold_sgr1806')
+    check('static_placer_row', !!prow && prow.place === 'sgr1806' && prow.dimension === FAR && prow.source === SOURCE && typeof R.step === 'function' &&
+      typeof WG.onFinished === 'function', JSON.stringify(prow || null))
     var row = WG.recipes.filter(function (r) { return r.name === 'hold_sgr1806' })[0]
     check('static_hold_row', !!row && row.circuit === 11 && row.eut === EUT && row.duration === DURATION && row.site === 'cygnus_x1_orbit' &&
       row.itemsIn.length === 1 && row.itemsIn[0].id === SEED && row.kept.length === 1 && row.kept[0].id === CHART && row.itemsOut.length === 1 &&
@@ -213,8 +223,8 @@
       } else detail = 'no wire property on ' + m
     } catch (e) { detail = String(e) }
     check('static_chain_strand', ok, detail)
-    check('static_fresh_world', !S.server.persistentData.contains(PLATFORM_KEY) && !S.server.persistentData.contains('opvBulgeHold'),
-      'no SGR platform and no kept c11 run before the test')
+    check('static_fresh_world', !S.server.persistentData.contains(PLATFORM_KEY) && !queued(),
+      'no SGR platform and no queued jump before the test')
   }
   function load() {
     var ctrl = at(ORIGIN)
@@ -261,14 +271,9 @@
     }
     if (S.phase === 'kept') {
       var data = S.server.persistentData
-      if (data.contains('opvBulgeHold')) {
-        var v = String(data.getString('opvBulgeHold'))
-        check('hold_kept', v.indexOf(GATE_KEY + '|') === 0, 'opvBulgeHold = ' + v)
-        phase('run')
-      } else if (elapsed > 100) {
-        check('hold_kept', false, 'no opvBulgeHold ' + elapsed + ' ticks into the run; gates ' + JSON.stringify(Object.keys(S.G.warpGate.gates)))
-        finish()
-      }
+      check('hold_not_queued', !queued() && !data.contains('opvBulgeHold') && S.G.opvBulgeRelay.hold === undefined,
+        'a running jump queues nothing and bulge_relay.js keeps no copy of it; queue ' + JSON.stringify(S.G.relayPlatforms.due(S.server)))
+      phase('run')
       return
     }
     if (S.phase === 'run') {
@@ -303,14 +308,13 @@
   function step2() {
     var elapsed = S.tick - S.phaseAt
     fill()
-    var B = S.G.opvBulgeRelay
+    var R = S.G.relayPlatforms
     if (S.phase === 'restored') {
-      if (B.restored) {
-        check('last_recipe_kept', lastId() === HOLD, 'the gate\'s last recipe after the restart: ' + lastId())
-        check('run_given_back', String(B.restored).indexOf(GATE_KEY + '|') === 0, 'opvBulgeRelay.restored = ' + B.restored)
+      if (lastId() === HOLD && String(S.ctrl.getRecipeLogic().getStatus()) === 'WORKING') {
+        check('run_kept', true, 'the gate still runs ' + HOLD + ' after the restart')
         phase('platform')
       } else if (elapsed > 200) {
-        check('run_given_back', false, 'nothing given back; opvBulgeHold ' + S.server.persistentData.getString('opvBulgeHold') + '; last ' + lastId())
+        check('run_kept', false, 'status ' + S.ctrl.getRecipeLogic().getStatus() + ', last ' + lastId())
         finish()
       }
       return
@@ -323,8 +327,7 @@
         check('platform_row', row === FAR + '@' + FARO.x + ',' + FARO.y + ',' + FARO.z, PLATFORM_KEY + ' = ' + row)
         var m = atIn(S.server.getLevel(FAR), FARO)
         check('platform_ring_formed', !!m && m.isFormed(), 'far ring in ' + FAR + ': ' + (m ? 'formed ' + m.isFormed() : 'no controller block entity'))
-        check('hold_released', !S.server.persistentData.contains('opvBulgeHold') && B.hold === null, 'opvBulgeHold ' +
-          S.server.persistentData.getString('opvBulgeHold') + ', hold ' + JSON.stringify(B.hold))
+        check('queue_drained', !queued(), 'the placer served the queued jump: ' + JSON.stringify(R.due(S.server)))
         phase('output')
       } else if (elapsed > DURATION) {
         check('platform_row', false, 'no ' + PLATFORM_KEY + ' after ' + elapsed + ' ticks; ' + why())
@@ -333,9 +336,16 @@
       return
     }
     if (S.phase === 'output') {
-      var out = contents(at(S.pos.out).getInventory())
+      var outInv = at(S.pos.out).getInventory()
+      var out = contents(outInv)
       if (out.indexOf(LAUNCHED + 'x1') >= 0) {
         check('launched_output', true, 'output bus ' + out)
+        var named = false
+        for (var i = 0; i < outInv.getSlots(); i++) {
+          var ring = R.coordinatesOf(outInv.getStackInSlot(i))
+          if (ring && ring.dim === FAR && ring.x === FARO.x && ring.y === FARO.y && ring.z === FARO.z) named = true
+        }
+        check('coordinates_output', named, 'relay coordinates of ' + FAR + ' ' + key(FARO) + ' in the output bus: ' + out)
         var bus = contents(at(S.pos.bus).getInventory())
         check('chart_kept', bus.indexOf(CHART + 'x1') >= 0 && bus.indexOf(SEED) < 0, 'input bus ' + bus)
         finish()
