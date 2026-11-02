@@ -179,9 +179,9 @@
       "kind": "site",
       "types": ["gtceu:gravitational_redshift", "gtceu:degenerate_harvesting", "gtceu:degenerate_containment"],
       "dimensions": ["grindless:sirius_b_orbit"],
-      "exceptRecipes": ["grindless:degenerate_harvesting/degenerate_slug"],
+      "exceptRecipes": ["grindless:degenerate_harvesting/degenerate_slug", "grindless:degenerate_containment/degenerate_pellet"],
       "package": "B4",
-      "note": "degenerate_slug is MAX's older-machine row at Sgr A* orbit."
+      "note": "degenerate_slug is MAX's older-machine row at Sgr A* orbit. SITE-C (2026-11-02): the containment works' pellet row presses shipped matter and runs anywhere."
     },
     {
       "id": "site-mercury-matrioshka",
@@ -189,9 +189,9 @@
       "kind": "site",
       "types": ["gtceu:matrioshka_computing", "gtceu:droplet_radiator_assembly"],
       "dimensions": ["gcyr:mercury_orbit"],
-      "exceptRecipes": ["grindless:droplet_radiator_assembly/shell_droplet_radiator"],
+      "exceptRecipes": ["grindless:droplet_radiator_assembly/shell_droplet_radiator", "grindless:matrioshka_computing/arm_chart", "grindless:droplet_radiator_assembly/tpv_tile"],
       "package": "A10",
-      "note": "shell_droplet_radiator is MAX's older-machine row at Sgr A* orbit."
+      "note": "SITE-C (2026-11-02): the shell droplet radiator, the arm chart and the TPV tile work shipped inputs and run anywhere; the computing rows use Mercury-orbit starlight."
     },
     {
       "id": "site-cygnus",
@@ -199,9 +199,9 @@
       "kind": "site",
       "types": ["gtceu:ergosphere_probing", "gtceu:penrose_extraction"],
       "dimensions": ["grindless:cygnus_x1_orbit"],
-      "exceptRecipes": ["grindless:penrose_extraction/payload_penrose"],
+      "exceptRecipes": ["grindless:penrose_extraction/payload_penrose", "grindless:ergosphere_probing/split_sled", "grindless:ergosphere_probing/refit_sled", "grindless:ergosphere_probing/sled_hull"],
       "package": "B4",
-      "note": "payload_penrose is MAX's older-machine row at Sgr A* orbit."
+      "note": "payload_penrose is MAX's older-machine row at Sgr A* orbit. SITE-C/D (2026-11-02): the probe bay's sled rows build and refit shipped sleds and run anywhere."
     },
     {
       "id": "site-warp-gate",
@@ -237,6 +237,9 @@
       "types": ["gtceu:star_lifting", "gtceu:plasma_mass_filtering", "gtceu:stellar_condensation", "gtceu:disk_skimming", "gtceu:frc_forming", "gtceu:blandford_znajek"],
       "dimensions": ["grindless:cygnus_x1_orbit"],
       "exceptRecipes": [
+        "grindless:frc_forming/form_cartridge",
+        "grindless:star_lifting/proof_load_ribbon",
+        "grindless:plasma_mass_filtering/stellar_cuts",
         "grindless:frc_forming/load_flux",
         "grindless:plasma_mass_filtering/disk_filter",
         "grindless:disk_skimming/skim_hot_flow",
@@ -302,27 +305,24 @@
       "kind": "site",
       "types": ["gtceu:swarm_segment", "gtceu:degenerate_harvesting", "gtceu:droplet_radiator_assembly", "gtceu:penrose_extraction", "gtceu:disk_skimming", "gtceu:frc_forming", "gtceu:blandford_znajek", "gtceu:plasma_mass_filtering"],
       "recipe": [
-        "grindless:swarm_segment/mirror_shell_segment",
         "grindless:degenerate_harvesting/degenerate_slug",
-        "grindless:droplet_radiator_assembly/shell_droplet_radiator",
         "grindless:penrose_extraction/payload_penrose",
         "grindless:disk_skimming/skim_hot_flow",
-        "grindless:frc_forming/load_flux_frc",
         "grindless:blandford_znajek/frc_spin_down",
-        "grindless:plasma_mass_filtering/hot_flow_filter",
         "grindless:plasma_mass_filtering/cooled_exhaust_return",
         "grindless:plasma_mass_filtering/reconnection_plasmoid_return"
       ],
       "dimensions": ["gcyr:black_hole_orbit"],
       "exact": true,
-      "package": ["MAX-D1", "MAX-H1", "MX-S3"]
+      "package": ["MAX-D1", "MAX-H1", "MX-S3"],
+      "note": "SITE-C/D/E (2026-11-02): the mirror shell segment, the shell droplet radiator, the flux FRC load and the hot flow filter work shipped inputs and run anywhere."
     },
     {
       "id": "site-max-horizon-strand",
-      "label": "Site: the horizon strand preform and wire drawing only at SGR 1806-20 orbit (the SGR draw bench)",
+      "label": "Site: the horizon strand preform only at SGR 1806-20 orbit (the SGR draw bench); the wire and ingot drawing run anywhere",
       "kind": "site",
       "types": ["gtceu:pasta_drawing"],
-      "recipe": ["grindless:pasta_drawing/horizon_strand_preform", "grindless:pasta_drawing/horizon_wire_drawing", "grindless:pasta_drawing/horizon_ingot_drawing"],
+      "recipe": ["grindless:pasta_drawing/horizon_strand_preform"],
       "dimensions": ["grindless:sgr1806_orbit"],
       "exact": true,
       "package": "MAX-A0"

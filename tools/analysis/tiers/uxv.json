@@ -1653,7 +1653,10 @@
       ],
       "exceptRecipes": [
         "grindless:xray_pulse_profiling/ti44_map",
-        "grindless:positronium_condensation/gamma_laser_cavity"
+        "grindless:positronium_condensation/gamma_laser_cavity",
+        "grindless:xray_pulse_profiling/pulsar_navigation_solution",
+        "grindless:positronium_condensation/ps_in_aerogel",
+        "grindless:positronium_condensation/laser_cooled_ps"
       ],
       "package": "B3",
       "note": "UXV-B5's older mode (knot dust -> ti44_map, docs/eras/uxv.md:545) carries no dimension condition, as built: the profiler's controller is carried home. Its input is Cas A knot dust, so the row is held to uxv-cas-a by the cas-a resource either way."

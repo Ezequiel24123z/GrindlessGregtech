@@ -1499,7 +1499,11 @@
       "dimensions": [
         "gcyr:mercury_orbit"
       ],
-      "package": "A10"
+      "exceptRecipes": [
+        "grindless:matrioshka_computing/arm_chart"
+      ],
+      "package": "A10",
+      "note": "SITE-C (2026-11-02): the arm chart row computes from shipped charts and runs anywhere; the computing rows use Mercury-orbit starlight."
     },
     {
       "id": "site-rx",
@@ -1529,7 +1533,8 @@
         "grindless:xray_pulse_profiling/ti44_map",
         "grindless:xray_pulse_profiling/pulsar_navigation_solution",
         "grindless:positronium_condensation/ps_in_aerogel",
-        "grindless:positronium_condensation/laser_cooled_ps"
+        "grindless:positronium_condensation/laser_cooled_ps",
+        "grindless:positronium_condensation/gamma_laser_cavity"
       ],
       "package": "B3",
       "note": "TP-V, as uxv.json's site-j0437: the dump holds UXV-B5's older-mode row (tables/j0437.json:55, knot dust -> ti44_map) with no dimension condition, as built (the profiler's controller is carried home); its input is Cas A knot dust, so UXV's checks hold it to uxv-cas-a."
