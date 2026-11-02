@@ -6,8 +6,7 @@
 //                         coils, under a tempered glass roof; runs the new gtceu:regolith_processing
 //
 // What it wins: RECIPES THAT DO NOT EXIST ON EARTH. Oxygen on a world with no air, titanium without chlorine, magnesium or carbon, and
-// the brick the whole Moon base is built from. Every recipe carries the Moon's dimension condition (server_scripts/grindless/ev/
-// regolith_cell.js): the cell forms anywhere, but it only works on the Moon. The programmed circuit picks the mode:
+// the brick the whole Moon base is built from. The recipes carry no dimension condition: the regolith and ilmenite are shipped, so the cell works anywhere. The programmed circuit picks the mode:
 //   1  volatiles     lunar regolith dust heated until it gives up its solar wind: hydrogen, helium, nitrogen and a pinch of helium-3
 //                    (the trace of water is vented: inert)
 //   2  electrolysis  molten regolith electrolysis (NASA and MIT's MRE) with a platinum anode: oxygen, silicon and iron. With ilmenite

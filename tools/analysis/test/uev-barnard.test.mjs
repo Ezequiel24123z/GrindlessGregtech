@@ -114,16 +114,16 @@ test('the HV syngas plant has the CO-rich row at circuit 6 (C + CO2 -> 2 CO)', (
   assert.match(s, /SYN\.recipes\.concat\(SYN\.orbitRecipes, SYN\.uevRecipes(?:, SYN\.uivRecipes)?(?:, SYN\.uxvRecipes)?\)/);
 });
 
-test('the EV platinum plant has the Barnard residue row at circuit 9, locked to Barnard b, no voiding', () => {
+test('the EV platinum plant has the Barnard residue row at circuit 9, no site, no voiding', () => {
   const s = read('server_scripts', 'grindless', 'ev', 'platinum_plant.js');
   const row = /name: 'barnard_residue'[\s\S]*?\n\s*\}/.exec(s);
   assert.ok(row, 'row');
   assert.match(row[0], /circuit: 9/);
-  assert.match(row[0], /site: 'barnard_b'/);
+  assert.doesNotMatch(row[0], /site:/);
   assert.match(row[0], /grindless:barnard_residue/);
   assert.match(row[0], /grindless:crude_ammonium_perrhenate/);
   for (const m of ['osmium', 'iridium', 'platinum']) assert.match(row[0], new RegExp(`gtceu:${m}_dust`));
-  assert.match(s, /global\.grindless\.places\.allow\(recipe, r\.site\)/);
+  assert.doesNotMatch(s, /places\.allow\(recipe, r\.site\)/);
 });
 
 test('rhenium: dust, ingot and the pellet come only from Barnard b rows, in order', () => {

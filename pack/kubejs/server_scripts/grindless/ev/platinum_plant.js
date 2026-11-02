@@ -609,8 +609,8 @@
     },
     {
       // UEV-B3 (circuit 9): the Barnard residue of the carbonyl refinery (Re, Os, Ir, Pt, W) digested in aqua regia; the platinum metals and the
-      // tungsten come out as dust, the rhenium as crude ammonium perrhenate (line 10 goes on in tables/barnard.json). Barnard b only.
-      name: 'barnard_residue', circuit: 9, site: 'barnard_b',
+      // tungsten come out as dust, the rhenium as crude ammonium perrhenate (line 10 goes on in tables/barnard.json).
+      name: 'barnard_residue', circuit: 9,
       itemIn: 'grindless:barnard_residue', fluidsIn: [['gtceu:hydrochloric_acid', 3000], ['gtceu:nitric_acid', 1000], ['gtceu:ammonia', 1000]],
       itemsOut: [['gtceu:osmium_dust', 1], ['gtceu:iridium_dust', 1], ['gtceu:platinum_dust', 1], ['gtceu:tungsten_dust', 1],
         ['grindless:crude_ammonium_perrhenate', 1]],
@@ -635,7 +635,6 @@
       r.itemsOut.forEach(function (o) { recipe.itemOutputs(o[1] + 'x ' + o[0]) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
       recipe.EUt(r.eut).duration(r.duration)
-      if (r.site && global.grindless.places) global.grindless.places.allow(recipe, r.site)
       recipe.addDataBool(KEEP_KEY, true)
     })
   }
@@ -756,7 +755,7 @@
       eut: 1920, duration: 300
     },
     {
-      name: 'iridium_sponge', circuit: 19, site: 'grindless:nsc_belt',
+      name: 'iridium_sponge', circuit: 19,
       itemIn: 'grindless:pgm_residue', fluidsIn: [['gtceu:hydrochloric_acid', 2000], ['gtceu:hydrogen', 1000]],
       itemsOut: [['grindless:iridium_sponge', 1]], fluidsOut: [['minecraft:water', 1000]],
       eut: 1920, duration: 300
@@ -792,7 +791,6 @@
       r.itemsOut.forEach(function (o) { recipe.itemOutputs(o[1] + 'x ' + o[0]) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
       recipe.EUt(r.eut).duration(r.duration)
-      if (r.site) recipe.dimension(r.site)
       recipe.addDataBool(KEEP_KEY, true)
     })
   }

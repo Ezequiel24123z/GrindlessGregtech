@@ -12,7 +12,7 @@ ClientEvents.lang('en_us', event => {
 
     add('block.grindless.sintered_regolith', 'Sintered Regolith Bricks')
     add('tooltip.grindless.sintered_regolith.0', 'Lunar regolith fused into hard, glassy bricks. Every structure of the Moon base stands on them.')
-    add('tooltip.grindless.sintered_regolith.1', 'Made only on the Moon: an electric furnace bakes 4 lunar regolith dust into one block.')
+    add('tooltip.grindless.sintered_regolith.1', 'Made anywhere: an electric furnace bakes 4 lunar regolith dust into one block.')
 
     add('item.grindless.molten_salt_charge', 'Molten Salt Charge')
     add('tooltip.grindless.molten_salt_charge.0', 'A titanium crucible of calcium chloride with a titanium cathode basket. In the Regolith Cell the salt melts, and the ilmenite in the basket gives up its oxygen and leaves titanium: no chlorine, no magnesium.')
@@ -31,7 +31,7 @@ ClientEvents.lang('en_us', event => {
     add('material.gtceu.methalox', 'Methalox')
     add('grindless.fluid.liquid_nitrogen', 'Liquid Nitrogen')
 
-    add('tooltip.grindless.lunar_regolith_dust', 'Ground lunar soil: basalt, glass beads and a little solar-wind gas. On the Moon it sinters into bricks.')
+    add('tooltip.grindless.lunar_regolith_dust', 'Ground lunar soil: basalt, glass beads and a little solar-wind gas. It sinters into bricks.')
     add('tooltip.grindless.merrillite', 'The phosphate that carries the rare earths of Mars. Only the extraction cascade splits it into samarium, neodymium and the rest.')
 })
 

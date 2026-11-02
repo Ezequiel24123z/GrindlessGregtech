@@ -489,7 +489,7 @@
     var ins = asArray(lazy().RecipeHelper.getInputItems(r)).map(function (st) { return st.getCount() + 'x' + itemIdOf(st) })
     var outs = asArray(lazy().RecipeHelper.getOutputItems(r)).map(function (st) { return st.getCount() + 'x' + itemIdOf(st) })
     var conds = conditionsOf(r)
-    var ok = ins.join(',') === '1x' + STONE_VENUS && outs.join(',') === '1x' + REGOLITH && conds.length === 1 && conds[0].dimension === VENUS &&
+    var ok = ins.join(',') === '1x' + STONE_VENUS && outs.join(',') === '1x' + REGOLITH && conds.length === 0 &&
       euOf(r).eut === euOf(g).eut && Number(r.duration) === Number(g.duration)
     check('casing_recipe', ok, CASING_ID + ': ' + ins.join(',') + ' -> ' + outs.join(',') + ' at ' + euOf(r).eut + ' EU/t x ' + r.duration + ' t (GTM\'s gravel: ' +
       euOf(g).eut + ' x ' + g.duration + '), conditions ' + JSON.stringify(conds))

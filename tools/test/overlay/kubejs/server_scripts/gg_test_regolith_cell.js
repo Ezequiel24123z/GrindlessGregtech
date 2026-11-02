@@ -332,7 +332,7 @@
       var fins = contents(live.getInputContents(fc))
       if (fins.length > 0) problems.push(name + ' live has ' + fins.length + ' fluid input(s)')
       var dims = dimensionsOf(live)
-      if (dims.length !== 1 || dims[0] !== LUNA) problems.push(name + ' dimension conditions: ' + (dims.join(', ') || 'none'))
+      if (dims.length !== 0) problems.push(name + ' has dimension conditions (shippable inputs, none expected): ' + (dims.join(', ') || 'none'))
     })
     check(SCOPE, 'recipes', problems.length === 0, 'ids=' + global.grindless.regolithCell.recipes.map(function (p) { return p.recipeId }).join(',') +
       ' (each with its inputs, chances, circuit, outputs, ticks, EU/t and the ' + LUNA + ' condition)' +

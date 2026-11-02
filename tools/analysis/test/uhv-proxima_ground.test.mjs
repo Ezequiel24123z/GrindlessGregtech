@@ -251,9 +251,9 @@ test('the older machines\' Proxima rows: each in the dump on a circuit its type 
   assert.equal(prox.charge, true);
   assert.deepEqual(prox.energy.map((s) => s.stage), ['exchange']);
   assert.ok(!has(ins(d.heavy), 'gtceu:steam'));
-  // the cascade takes the REE liquor; the regolith cell takes the tailings on the Moon with its anode, giving silica, iron and oxygen
+  // the cascade takes the REE liquor; the regolith cell takes the tailings, anywhere, with its anode, giving silica, iron and oxygen
   assert.ok(has(ins(d.cascade), 'gtceu:proxima_ree_liquor'));
-  assert.equal(dimsOf(d.regolith).length, 1);
+  assert.equal(dimsOf(d.regolith).length, 0);
   assert.deepEqual(dimsOf(d.regolith), dimsOf(dump('grindless:regolith_processing/ev/regolith_electrolysis')));
   const tail = d.regolith.j.inputs.item.find((i) => JSON.stringify(i).includes('"grindless:leached_tailings"'));
   assert.equal(tail.content.count, 16);

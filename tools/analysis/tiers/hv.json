@@ -541,7 +541,7 @@
       "label": "titanium (lunar ilmenite)",
       "items": ["gtceu:*titanium*", "gtca:*titanium*", "fluid:gtceu:*titanium*", "fluid:gtca:*titanium*", "gtceu:*ilmenite*", "gtceu:*rutile*"],
       "onlyFrom": ["moon"],
-      "note": "Decisions of 2026-10-24: titanium arrives in EV and only comes from the Moon; HV goes without titanium (machines, hulls, drill bits, multiblocks, rocket and suit, all stainless steel). Covers everything that is titanium, ilmenite or rutile: also titanium alloys and tools with a titanium head. Exclusivity (v0.5.0): without the Moon none of those keys are reached (out go the End's ilmenite, bauxite's rutile, GTM's metal mix ilmenite and Productive Bees' titanium honeycombs)."
+      "note": "Decisions of 2026-10-24: titanium arrives in EV and only comes from the Moon; HV goes without titanium (machines, hulls, drill bits, multiblocks, rocket and suit, all stainless steel). Covers everything that is titanium, ilmenite or rutile: also titanium alloys and tools with a titanium head. Exclusivity (v0.5.0): without the Moon none of those keys are reached (out go the End's ilmenite, bauxite's rutile and GTM's metal mix ilmenite)."
     },
     {
       "id": "helium-3",
