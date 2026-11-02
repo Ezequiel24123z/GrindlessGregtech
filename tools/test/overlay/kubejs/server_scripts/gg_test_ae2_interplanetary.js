@@ -431,6 +431,11 @@
     return grid !== null && grid !== undefined && !!grid.getEnergyService().isNetworkPowered()
   }
 
+  function earthBooted() {
+    var qbe = S.earth.getBlockEntity(bp(LINK.x, EY, LINK.z))
+    return qbe !== null && qbe.isFormed() && powered(gridOf(qbe))
+  }
+
   // the AE energy left in the network: the two dense cells hold all of it (nothing injects power, so AE2's own grid buffer stays empty)
   function cellsEnergy() {
     var total = 0
@@ -687,8 +692,10 @@
   function step(elapsed) {
     var since = elapsed - S.phaseAt
     if (S.phase === 'built') {
-      // the bridges form and the Earth network boots (AE2 only calls a network powered after 30 ticks with power)
+      // the bridges form and the Earth network boots (AE2 only calls a network powered after 30 ticks with power); on a loaded server the
+      // force-loaded chunks can take longer to tick, so wait for the Earth bridge to be formed and powered, for up to 400 ticks
       if (since < 60) return
+      if (since < 400 && !earthBooted()) return
       S.phase = startLink() ? 'linking' : 'end'
       S.phaseAt = elapsed
       return
