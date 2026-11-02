@@ -2,8 +2,8 @@
 // D1-KROLL (docs/eras/lines-steam-hv.md, H4; owner decision D-2: titanium stays lunar). The Kroll line at HV, on the lunar ilmenite:
 //   1. rutile_from_ilmenite (GTM, unchanged)          ilmenite + carbon -> rutile + wrought iron (steel)
 //   2. chlorination (this script, replaces GTM's)     rutile + 2 C + 4,000 Cl2 -> 1,250 crude TiCl4 + 2,000 CO   (480 EU/t, 400 t, as GTM)
-//   3. distillery (new)                               1,250 crude -> 1,000 TiCl4 + 250 salt water. The bottoms are the real impurities, VOCl3 and
-//                                                     SiCl4, quenched in brine; the salt water goes to brine electrolysis (chlorine and sodium)
+//   3. distillery (new)                               1,250 crude -> 1,000 TiCl4 + 1 silica dust. The bottoms are the real impurities, VOCl3 and
+//                                                     SiCl4; the distillery has one fluid output, so they leave hydrolysed as silica (glass, silicon)
 //   4. titanium_from_tetrachloride (GTM, unchanged)   TiCl4 + 2 Mg -> hot titanium + 6 MgCl2, the vacuum freezer cools it
 //   + magnesium loop (new): 3 MgCl2 -> Mg + 4,000 Cl2 in the electrolyzer (GTM's own sodium route salt_from_magnesium_chloride stays, same 3 -> 1);
 //     the chlorine goes back to step 2, the surplus chlorine to every other chlorine consumer.
@@ -16,8 +16,8 @@
 
   ServerEvents.recipes(function (event) {
     try {
-      var missingItems = ['gtceu:carbon_dust', 'gtceu:rutile_dust', 'gtceu:magnesium_chloride_dust', 'gtceu:magnesium_dust'].filter(function (id) { return !Item.exists(id) })
-      var missingFluids = [CRUDE, TICL4, 'gtceu:chlorine', 'gtceu:carbon_monoxide', 'gtceu:salt_water'].filter(function (id) { return !Fluid.exists(id) })
+      var missingItems = ['gtceu:silicon_dioxide_dust', 'gtceu:carbon_dust', 'gtceu:rutile_dust', 'gtceu:magnesium_chloride_dust', 'gtceu:magnesium_dust'].filter(function (id) { return !Item.exists(id) })
+      var missingFluids = [CRUDE, TICL4, 'gtceu:chlorine', 'gtceu:carbon_monoxide'].filter(function (id) { return !Fluid.exists(id) })
       if (missingItems.length > 0 || missingFluids.length > 0) {
         console.error(LOG + 'skipped, unknown id(s): ' + missingItems.concat(missingFluids).join(', '))
         return
@@ -37,7 +37,8 @@
       event.recipes.gtceu.distillery('grindless:kroll_crude_tetrachloride')
         .circuit(1)
         .inputFluids(Fluid.of(CRUDE, 1250))
-        .outputFluids(Fluid.of(TICL4, 1000), Fluid.of('gtceu:salt_water', 250))
+        .itemOutputs('1x gtceu:silicon_dioxide_dust')
+        .outputFluids(Fluid.of(TICL4, 1000))
         .EUt(120).duration(100)
 
       event.recipes.gtceu.electrolyzer('grindless:magnesium_chloride_electrolysis')
