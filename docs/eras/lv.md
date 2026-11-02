@@ -9,10 +9,10 @@ You enter with what steam leaves you: an LV steam turbine (`gtceu:lv_steam_turbi
 The Wireless Energy Tower (`gtceu:wireless_energy_tower`) opens a single EU network for the whole server at LV, across dimensions. It stores energy; it generates none. AE2 and ordinary cables remain alternatives.
 
 - The tower has 32 cell slots. Each takes a capacitor cell or the tower's casing. Cells hold six reference batteries: LV 720,000 EU, MV 2,520,000, HV 10,800,000, EV 61,440,000 and IV 245,760,000. A full LV tower holds 23,040,000 EU.
-- Formed towers add their capacities. The weakest cell across every formed tower sets the network's output tier; replace every lower-tier cell to raise it. Without a formed tower containing a cell, producers back up and nothing moves.
+- Formed towers add their capacities. The strongest cell in any formed tower sets the network's output tier, and every hatch and cover at or below it is fed: one MAX cell feeds every tier (WL-1). Without a formed tower containing a cell, producers back up and nothing moves.
 - Wireless energy and dynamo hatches come in 2, 4, 16 and 64 A, LV-IV. Dynamos deposit; energy hatches withdraw. The generator array can feed a 64 A LV wireless dynamo hatch while an EBF on the Moon draws through two LV wireless energy hatches.
 - Wireless covers move 2 A of their tier on supported GTM single-block machines. Energy covers also charge chargers and battery buffers; dynamo covers drain generators and battery buffers. Right-click a side other than the front. Converters, multiblock controllers, creative containers and unknown mod containers refuse covers rather than use an unsafe fallback.
-- Entry loses 5%; withdrawal loses nothing. Settlement happens every 10 ticks. Inputs have no tier ceiling, but an energy hatch or cover above the network's tier receives nothing.
+- Entry loses 5%; withdrawal loses nothing. Settlement happens every 10 ticks. Inputs have no tier ceiling, and an energy hatch or cover receives EU whenever a formed tower holds a cell of its tier or higher (the network's tier is its strongest cell).
 - Shift-right-click a tower, wireless hatch or covered machine with an empty hand for its readout. Unloaded endpoints wait; unloaded towers retain their recorded cells. Breaking a tower does not delete the global stored EU; deposits pause if it exceeds the remaining capacity.
 
 This is infrastructure, not another processing line, and does not redo LV's progression-multiblock target. Recipes, capacities, amperages and settlement settings come from `tables/wireless_energy.json`.

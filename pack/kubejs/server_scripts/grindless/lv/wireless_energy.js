@@ -11,8 +11,8 @@
 //   - a formed tower adds the capacity of its capacitor cells (read from the formed structure, MultiblockState#getCache), and several
 //     towers add up. An unloaded tower keeps counting (what it had the last time it was loaded is recorded); a broken or unformed one
 //     stops. With no formed tower with cells the network does nothing: producers back up and the readout says "no tower".
-//   - the network's tier is the lowest tier among the cells of every formed tower: wireless energy hatches and covers above it get
-//     nothing (their readout says why); energy going in is not tier-limited. Swapping a cell unforms its tower (GTM's own structure
+//   - the network's tier is the strongest cell in any formed tower (a formed horizon bank at its site counts as tier 14, MAX): every wireless
+//     energy hatch and cover at or below it is fed, so a MAX cell feeds every tier (their readout says why when one is above it); energy going in is not tier-limited. Swapping a cell unforms its tower (GTM's own structure
 //     check); the stored EU stays, and if it is above the new capacity deposits stop until it drains. Nothing is destroyed.
 // The loss: 5% on the way in. A dynamo hatch or cover that gives X EU puts 19/20 X in the network; X is taken in whole multiples of 20
 // EU (the rest waits in the hatch for the next settlement) so the store gets whole EU.
@@ -277,7 +277,7 @@
 
   // ---------------------------------------------------------------- towers
 
-  // a tower's cells, read from GTM's formed structure: { formed, cells, capacity, tier (the weakest, 0 = none), byTier }. pending: the
+  // a tower's cells, read from GTM's formed structure: { formed, cells, capacity, tier (the strongest, 0 = none), byTier }. pending: the
   // controller was loaded formed (GTM saves isFormed) but has not checked its structure again yet (its MultiblockState has no cache
   // until GTM's async check, about a second after the load): its cells are unknown, so the recorded ones still count
   function towerInfo(ctrl) {
@@ -291,16 +291,16 @@
     }
     var level = ctrl.getLevel()
     var it = ms.getCache().iterator()
-    var weakest = 99
+    var best = 0
     while (it.hasNext()) {
       var cell = W.cells[String(level.getBlock(it.next()).id)]
       if (!cell) continue
       out.cells++
       out.capacity += cell.capacity
-      if (cell.tier < weakest) weakest = cell.tier
+      if (cell.tier > best) best = cell.tier
       out.byTier[cell.tier] = (out.byTier[cell.tier] || 0) + 1
     }
-    out.tier = out.cells > 0 ? weakest : 0
+    out.tier = out.cells > 0 ? best : 0
     return out
   }
 
@@ -490,20 +490,21 @@
     if (changed) saveBlocks(server, keep)
 
     // the network: the formed towers with cells
-    var weakest = 99
+    var best = 0
     towers.forEach(function (t) {
       if (!t.f || !(t.n > 0)) return
       out.towers++
       out.capacity = add(out.capacity, t.c)
-      if (t.t < weakest) weakest = t.t
+      if (t.t > best) best = t.t
     })
     out.up = out.towers > 0
-    out.tier = out.up ? weakest : 0
-    // XP-H5: formed banks at their site add capacity (at tier 14: they never lower the network's tier); loss, cadence and caps stay as they are
+    out.tier = out.up ? best : 0
+    // XP-H5: formed banks at their site add capacity (a bank counts as tier 14: it raises the network's tier to MAX); loss, cadence and caps stay as they are
     banks.forEach(function (b) {
       if (!b.f || !(b.n > 0) || !W.bank || b.d !== W.bank.site) return
       out.banks++
       out.bankCapacity = add(out.bankCapacity, bankCapacityOf(b.n))
+      if (out.up) out.tier = 14
     })
     out.capacity = add(out.capacity, out.bankCapacity)
     var bank = stored(server)

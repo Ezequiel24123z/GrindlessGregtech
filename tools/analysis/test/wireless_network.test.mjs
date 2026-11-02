@@ -1369,7 +1369,7 @@ const cells = (n, id) => Array.from({ length: n }, () => id);
 const IV_CELL = 'grindless:iv_capacitor_cell';
 const IV_EU = 245760000;
 
-test('LuV wireless jump: LuV only when every formed tower holds LuV cells; above the network\'s tier a LuV hatch gets nothing, IV ones are filled', () => {
+test('LuV wireless network (WL-1): the network runs at its strongest cell, so one LuV tower feeds LuV and IV hatches; without it a LuV hatch gets nothing', () => {
   const { W, errors } = jvm();
   const w = luvWorld();
   const server = serverOf(w);
@@ -1382,53 +1382,45 @@ test('LuV wireless jump: LuV only when every formed tower holds LuV cells; above
   for (const x of [LX + 16, LX + 18, LX + 20]) assert.ok(W.track(w.earth, new Pos(x, 100, 40)), 'hatch at ' + x);
   W.paused = true;
   W.setStored(server, 10000000000);
-  // two towers: the SMES one and an IV one; the network is IV (the weakest cell of every formed tower)
+  // two towers: the SMES one and an IV one; the network is LuV (the strongest cell of any formed tower)
   const st = W.settle(server);
   assert.equal(st.up, true);
   assert.equal(st.towers, 2);
-  assert.equal(st.tier, 5);
+  assert.equal(st.tier, LUV);
   assert.equal(st.capacity, 32 * SMES_EU + 4 * IV_EU);
-  assert.equal(st.skippedAbove, 1, 'the LuV hatch is above the network\'s tier');
-  assert.equal(luv2.energyContainer.getEnergyStored(), 0, 'and gets nothing');
+  assert.equal(st.skippedAbove, 0, 'no hatch is above the network\'s tier');
+  assert.equal(luv2.energyContainer.getEnergyStored(), 655360, 'the LuV 2 A hatch filled: V x 2 x 10 ticks');
   assert.equal(iv2.energyContainer.getEnergyStored(), 163840, 'the IV 2 A hatch filled: V x 2 x 10 ticks (its rated amperage per window)');
   assert.equal(iv64.energyContainer.getEnergyStored(), 5242880, 'the IV 64 A hatch filled: V x 64 x 10 ticks');
-  assert.equal(st.out, 163840 + 5242880);
+  assert.equal(st.out, 655360 + 163840 + 5242880);
   assert.equal(W.stored(server), 10000000000 - st.out);
+  assert.equal(W.readout(server, LUV, true).key, 'message.grindless.wireless.readout');
+  assert.equal(W.readout(server, 5, true).key, 'message.grindless.wireless.readout');
+  // a mixed tower: one IV cell among the SMES cells and the tower (so the network) stays LuV, its strongest cell
+  const at = smesTower.at[5];
+  w.earth.put(at.x, at.y, at.z, IV_CELL);
+  const mixed = W.settle(server);
+  assert.equal(mixed.tier, LUV);
+  assert.equal(mixed.capacity, 31 * SMES_EU + IV_EU + 4 * IV_EU);
+  const entry = W.tracked(server).find((e) => e.k === 'tower' && e.n === 32);
+  assert.deepEqual([entry.t, entry.n, entry.c], [LUV, 32, 31 * SMES_EU + IV_EU], 'the recorded tower follows its strongest cell');
+  w.earth.put(at.x, at.y, at.z, SMES);
+  // the SMES tower broken: the network falls to IV and the LuV hatch gets nothing, its readout says why
+  luv2.energyContainer.setEnergyStored(0);
+  w.earth.blocks.delete(LX + ',100,0');
+  w.earth.machines.delete(LX + ',100,0');
+  const down = W.settle(server);
+  assert.equal(down.forgotten, 1, 'the broken tower is forgotten');
+  assert.equal(down.towers, 1);
+  assert.equal(down.tier, 5);
+  assert.equal(down.skippedAbove, 1, 'the LuV hatch is above the network\'s tier');
+  assert.equal(luv2.energyContainer.getEnergyStored(), 0, 'and gets nothing');
   const above = W.readout(server, LUV, true);
   assert.equal(above.key, 'message.grindless.wireless.above_tier');
   assert.deepEqual(plain(above.args), ['LuV', 'IV'], 'its readout says why, in GTM\'s names');
-  assert.equal(W.readout(server, 5, true).key, 'message.grindless.wireless.readout');
-  // the IV tower broken: the network jumps to LuV and the LuV hatch is filled
-  w.earth.blocks.delete((LX + 8) + ',100,0');
-  w.earth.machines.delete((LX + 8) + ',100,0');
-  const jump = W.settle(server);
-  assert.equal(jump.forgotten, 1, 'the broken tower is forgotten');
-  assert.equal(jump.towers, 1);
-  assert.equal(jump.tier, LUV);
-  assert.equal(jump.capacity, 32 * SMES_EU, '31,457,280,000 EU: past an int');
-  assert.equal(jump.skippedAbove, 0);
-  assert.equal(luv2.energyContainer.getEnergyStored(), 655360, 'the LuV 2 A hatch filled: V x 2 x 10 ticks');
-  assert.equal(jump.out, 655360 + (262144 - 163840) + (8388608 - 5242880), 'and the IV hatches top up their buffers');
-  const reading = W.readout(server, LUV, true);
-  assert.equal(reading.key, 'message.grindless.wireless.readout');
-  assert.equal(reading.args[0], 'LuV');
-  // a mixed tower: one IV cell among the SMES cells and the tower (so the network) is IV again; replaced, LuV
-  luv2.energyContainer.setEnergyStored(0);
-  w.earth.put(smesTower.at[5].x, smesTower.at[5].y, smesTower.at[5].z, IV_CELL);
-  const mixed = W.settle(server);
-  assert.equal(mixed.tier, 5);
-  assert.equal(mixed.capacity, 31 * SMES_EU + IV_EU);
-  assert.equal(luv2.energyContainer.getEnergyStored(), 0);
-  const entry = W.tracked(server).find((e) => e.k === 'tower');
-  assert.deepEqual([entry.t, entry.n, entry.c], [5, 32, 31 * SMES_EU + IV_EU], 'the recorded tower follows its weakest cell');
-  w.earth.put(smesTower.at[5].x, smesTower.at[5].y, smesTower.at[5].z, SMES);
-  const back = W.settle(server);
-  assert.equal(back.tier, LUV);
-  assert.equal(luv2.energyContainer.getEnergyStored(), 655360);
   assert.deepEqual(plain(Object.keys(W.faults)), []);
   assert.deepEqual(errors, []);
 });
-
 test('LuV wireless dynamo: a 64 A LuV dynamo hatch puts 19/20 of what it gives into the network, in whole multiples of 20 EU', () => {
   const { W, errors } = jvm();
   const w = luvWorld();

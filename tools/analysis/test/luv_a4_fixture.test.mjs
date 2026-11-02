@@ -983,7 +983,7 @@ test('the whole fixture passes in a simulated server: every check, the band left
   assert.match(two, /12288000 EU given to the machine, want 12288000/);
   assert.match(lines.find((l) => l.startsWith('GGTEST|luv_a4|MULTI_AMP|PASS')), /getOverclockVoltage 524288 \(want 524288: 1048576 EU\/t of V x A folded by EnergyContainerList.calculateVoltageAmperage to 524288 V x 2 A\)/);
   assert.match(lines.find((l) => l.startsWith('GGTEST|luv_a4|SMES_overclock|')), /at 491520 EU\/t x 150 t .* as predicted true/);
-  assert.match(lines.find((l) => l.startsWith('GGTEST|luv_a4|JUMP|PASS')), /readout message\.grindless\.wireless\.above_tier \[LuV, IV\]/);
+  assert.match(lines.find((l) => l.startsWith('GGTEST|luv_a4|JUMP|PASS')), /network up true, 2 towers, 2949120000 EU, tier 6 \(want 6/);
 });
 
 test('without its turn on the wireless network it fails TURN in 120 s, every check says it was not reached, and it still ends with DONE', () => {

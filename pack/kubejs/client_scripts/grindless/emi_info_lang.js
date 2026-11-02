@@ -17,12 +17,12 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.travel_keys.1', 'Right-click it again there to go back to where you were. From one of these dimensions you can hop straight to another. A key is never used up.')
 
     add('emi.grindless.info.wireless_covers.0', 'Right-click the side of a single-block GregTech machine with a wireless cover to put it on. A crowbar takes it off and gives it back.')
-    add('emi.grindless.info.wireless_covers.1', 'An energy cover goes on a machine of its tier or higher and feeds it from the wireless energy network, up to 2 A, while the network\'s tier is at least the cover\'s. A dynamo cover goes on a generator or battery buffer of its tier or lower and sends its stored EU into the network; 5% is lost on the way in.')
+    add('emi.grindless.info.wireless_covers.1', 'An energy cover goes on a machine of its tier or higher and feeds it from the wireless energy network, up to 2 A, while a formed tower holds a cell of the cover\'s tier or higher (a MAX cell feeds every tier). A dynamo cover goes on a generator or battery buffer of its tier or lower and sends its stored EU into the network; 5% is lost on the way in.')
     add('emi.grindless.info.wireless_covers.2', 'The network\'s energy is stored in Wireless Energy Towers. Shift + right-click a covered machine with an empty hand to read the network.')
 
 
     add('emi.grindless.info.capacitor_cells.0', 'Capacitor cells are the storage of the Wireless Energy Tower: its 32 cell slots take cells of any tier (the tower\'s casing fills an empty slot), and every formed tower adds the capacity of its cells to the wireless energy network.')
-    add('emi.grindless.info.capacitor_cells.1', 'The network sends EU out at the tier of the weakest cell in any formed tower. Swapping a cell unforms its tower; the stored EU stays.')
+    add('emi.grindless.info.capacitor_cells.1', 'The network sends EU out at the tier of the strongest cell in any formed tower, so one MAX cell feeds every tier. Swapping a cell unforms its tower; the stored EU stays.')
     add('emi.grindless.info.capacitor_cells.2', 'Most cells come from the assembler. The LuV cell is a superconducting magnetic energy storage (SMES) coil, wound and cold-tested in the HTS Magnet Works; the ZPM and UV cells come from the Naquadria Magnet Works.')
 
     add('emi.grindless.info.jovian_atmosphere_survey.0', 'Written on Ganymede by the Coilgun Probe Launcher (circuit 1): a Jupiter entry probe falls into the clouds and radios hydrogen, helium and the helium-3 ratio back, as Galileo\'s probe did in 1995.')

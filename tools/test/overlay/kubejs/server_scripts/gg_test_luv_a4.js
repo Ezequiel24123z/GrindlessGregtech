@@ -40,8 +40,8 @@
 //     SMES          c2 runs once on those hatches and makes one grindless:luv_smes_cell, its inputs consumed, the charge kept (GTM's
 //                   overclock reads getOverclockVoltage: the run is expected at 150 t x 491,520 EU/t, two non-perfect overclocks; a NOTE
 //                   compares, the PASS does not depend on it)
-//     JUMP          tower B (2 LuV SMES cells) beside tower A: the network is IV, a LuV wireless energy hatch gets nothing and its readout
-//                   is message.grindless.wireless.above_tier [LuV, IV] (GTM's tier names, W.tierLabels); tower A's cells broken: the
+//     JUMP          tower B (2 LuV SMES cells) beside tower A (IV cells): the network is LuV, its strongest cell (WL-1), a LuV wireless energy hatch is filled
+//                   and its readout is the plain one; tower A's cells broken: the
 //                   network is LuV, its capacity tower
 //                   B's cells (W.cells), the LuV hatch is filled; two LuV wireless hatches on the magnet works: getMaxVoltage 131,072
 //     LUV_COVERS    after the jump: a LuV energy cover runs a LuV macerator from the network; a LuV dynamo cover drains a charged LuV
@@ -237,10 +237,6 @@
     return String((w.tierLabels && w.tierLabels[tier]) || String(w.tierNames[tier] || '?').toUpperCase())
   }
 
-  // what a LuV hatch's readout says while the network is IV
-  function aboveTierReadout() {
-    return 'message.grindless.wireless.above_tier [' + tierLabel(LUV) + ', ' + tierLabel(IV) + ']'
-  }
 
   function rl(id) { return new (lazy().RL)(id) }
   function bp(x, y, z) { return new (lazy().BlockPos)(x, y, z) }
@@ -1416,6 +1412,10 @@
     var st = W().settle(S.server)
     S.jump = { at: S.t, stage: 'breaking', before: { up: st.up, tier: st.tier, towers: st.towers, capacity: st.capacity, skippedAbove: st.skippedAbove },
       luvMax: S.luvMax, luvFilled0: flowAt(EARTH, LUV_HATCH).filled, readout: shiftClick(EARTH, LUV_HATCH), breakFailed: '' }
+    // the hatch is full from the strongest-cell network: emptied, so the test sees it filled again after tower A is gone
+    var heldNow = storedIn(machineAt(EARTH, LUV_HATCH))
+    if (heldNow > 0) machineAt(EARTH, LUV_HATCH).energyContainer.changeEnergy(-heldNow)
+    S.jump.luvFilled0 = flowAt(EARTH, LUV_HATCH).filled
     var failed = []
     breakTowerA(S.L, failed)
     if (failed.length > 0) S.jump.breakFailed = failed.join('; ')
@@ -1465,12 +1465,12 @@
     var held = storedIn(machineAt(EARTH, LUV_HATCH))
     var b = Jm.before
     var a = Jm.after || {}
-    var before = b.up && b.tier === IV && b.towers === 2 && Jm.luvMax === 0 && Jm.luvFilled0 === S.luvFlow0 && Jm.readout === aboveTierReadout()
+    var before = b.up && b.tier === LUV && b.towers === 2 && b.skippedAbove === 0 && Jm.luvMax > 0 && Jm.luvFilled0 > S.luvFlow0 && Jm.readout.indexOf('message.grindless.wireless.readout') === 0
     var after = !Jm.stuck && Jm.breakFailed === '' && a.up === true && a.tier === LUV && a.towers === 1 && a.capacity === wantCap && f.filled > Jm.luvFilled0 && held > 0
     var mw = Jm.swap === 'formed' && Jm.mwMaxV === V(LUV + 1) && sameIds(Jm.mwParts || [], [S.L.luvHatch, S.L.luvHatch])
     check('JUMP', before && after && mw,
-      'before: the network up ' + b.up + ', ' + b.towers + ' towers, ' + b.capacity + ' EU, tier ' + b.tier + ' (want ' + IV + '; ' + b.skippedAbove + ' blocks above it skipped); the ' +
-      short(S.L.luvHatch) + ' held at most ' + Jm.luvMax + ' EU and was filled ' + (Jm.luvFilled0 - S.luvFlow0) + ' EU since the network started; its readout ' +
+      'before: the network up ' + b.up + ', ' + b.towers + ' towers, ' + b.capacity + ' EU, tier ' + b.tier + ' (want ' + LUV + '; ' + b.skippedAbove + ' blocks above it skipped); the ' +
+      short(S.L.luvHatch) + ' held at most ' + Jm.luvMax + ' EU and was filled ' + (Jm.luvFilled0 - S.luvFlow0) + ' EU since the network started (must be filled: the network is LuV, its strongest cell); its readout ' +
       Jm.readout + '. Tower A\'s ' + TOWER_A_CELLS + ' cells broken' +
       (Jm.breakFailed ? ' (FAILED ' + Jm.breakFailed + ')' : '') + (Jm.stuck ? ' but ' + Jm.stuck : '') + ': the network up ' + a.up + ', ' + a.towers + ' tower, ' + a.capacity +
       ' EU (want ' + TOWER_B_CELLS + ' x ' + (cell ? cell.capacity : '?') + ' = ' + wantCap + '), tier ' + a.tier + ' (want ' + LUV + '); in ' + (S.t - Jm.turnedAt) +
