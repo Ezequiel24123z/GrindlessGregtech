@@ -326,6 +326,7 @@ test('coilTemp: each EBF variant carries its coil; GTM adds 100 K per voltage ti
   ];
   const cfg = {
     tier: 'coils',
+    conditions: { ebf_temp: { ignore: true } },
     machines: [
       { id: 't:ebf@cupro', machine: 't:ebf_machine', types: ['t:ebf'], energy: { voltage: 32, hatches: 2 }, coilTemp: 1800 },
       { id: 't:ebf@kanthal', machine: 't:ebf_machine', types: ['t:ebf'], energy: { voltage: 128, hatches: 2 }, coilTemp: 2700 },
