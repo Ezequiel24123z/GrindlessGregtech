@@ -77,6 +77,42 @@ Never open an updated world with an older version of the pack. Restore a backup 
 
 </details>
 
+## Run a server
+
+A dedicated server needs Java 17, Minecraft 1.20.1 and Forge 47.4.28 (the versions in [pack/pack.toml](pack/pack.toml)). The commands below are for Linux or macOS; on Windows use the same `java` commands in PowerShell.
+
+1. Install the Forge server in an empty folder:
+
+```
+mkdir grindless-server && cd grindless-server
+curl -fLO https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.28/forge-1.20.1-47.4.28-installer.jar
+java -jar forge-1.20.1-47.4.28-installer.jar --installServer
+```
+
+2. Install the pack in server mode. This skips the client-only mods:
+
+```
+curl -fLO https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar
+java -jar packwiz-installer-bootstrap.jar -g -s server https://raw.githubusercontent.com/Ezequiel24123z/GrindlessGregtech/releases/pack/pack.toml
+```
+
+3. Accept the [Minecraft EULA](https://aka.ms/MinecraftEULA) and set the memory. Give the server 8 GB or more:
+
+```
+echo eula=true > eula.txt
+echo -Xms8G -Xmx8G >> user_jvm_args.txt
+```
+
+4. Start it:
+
+```
+./run.sh nogui
+```
+
+The first boot builds the world and takes several minutes. Teams, wireless energy and travel are handled by the pack's own mods and scripts, so they need nothing extra on the server. Players join with the same pack version as the server.
+
+To move to a new version, stop the server, back up the `world` folder, and run the packwiz command from step 2 again. Replace `releases` in the URL with a version tag such as `v1.3.0` to stay on one version. Never start an updated world with an older version of the pack.
+
 ## Known issues
 
 - In a world from v1.2.0, the wireless network starts again with an empty store after the update to v1.3.0, and the Hyperstargate forgets who has crossed.
