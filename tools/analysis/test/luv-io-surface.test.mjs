@@ -1,4 +1,4 @@
-﻿// LuV B6, Io's surface: the fumarole condenser and the volcanic intake (startup_scripts/grindless/luv/io_surface.js and
+// LuV B6, Io's surface: the fumarole condenser and the volcanic intake (startup_scripts/grindless/luv/io_surface.js and
 // server_scripts/grindless/luv/io_surface.js). Pins every id against a native registry snapshot (fixtures/luv-b6-registry-ids.json)
 // and A1's registrations, Io's id to the places table, the patterns' shape and radiation vault rule, the module count of the intake in
 // all four facings, the recipes' lookup keys and the generator contract (no regress, no fuel doubling, a fresh start every run).
@@ -69,7 +69,7 @@ test('Io is read only from the places table', () => {
   for (const f of [STARTUP, SERVER]) assert.doesNotMatch(read(f), /grindless:io['"]/, f);
   const onIo = RUN.built.filter((r) => calls(r, 'dimension').length > 0);
   assert.deepEqual(onIo.map((r) => r.id).sort(),
-    ['grindless:collect', 'grindless:patera', 'grindless:sulfur_concrete_basalt', 'grindless:sulfur_concrete_black_sand']);
+    ['grindless:collect', 'grindless:patera']);
   for (const r of onIo) assert.deepEqual(calls(r, 'dimension'), [[PLACES.surfaces.io]], r.id);
 });
 
@@ -238,6 +238,7 @@ test('recipes: one lookup path each; the intake pays 32,768 EU/t per module from
   assert.deepEqual(one(c['grindless:separate'], 'notConsumableFluid'), [{ fluid: 'gtceu:hydrochloric_acid', amount: 1000 }]);
   assert.deepEqual(calls(c['grindless:separate'], 'dimension'), []);
   assert.deepEqual(one(c['grindless:separate'], 'itemOutputs'), ['2x gtceu:germanium_dust', '1x gtceu:indium_dust']);
+  for (const n of ['basalt', 'black_sand']) assert.deepEqual(calls(c[`grindless:sulfur_concrete_${n}`], 'dimension'), [], 'the concrete runs anywhere');
   for (const n of ['basalt', 'black_sand']) assert.deepEqual(one(c[`grindless:sulfur_concrete_${n}`], 'circuit'), [3]);
   const [heat] = byType['gtceu:volcanic_heat'];
   assert.equal(byType['gtceu:volcanic_heat'].length, 1);

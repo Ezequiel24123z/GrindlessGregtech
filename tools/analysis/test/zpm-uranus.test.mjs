@@ -67,7 +67,8 @@ test('the machine recipes: Uranus orbit only, one circuit per type slot, ZPM VA,
     seen.add(p.type + p.circuit);
     assert.equal(p.eut, 122880);
     assert.ok(Number.isInteger(p.duration) && p.duration > 0);
-    if (p.dim) assert.match(JSON.stringify(r.j), new RegExp(p.dim), p.name + ' is dimension-locked');
+    if (p.type === 'slurry_separation' || p.type === 'cryogenic_isotope_separation') assert.doesNotMatch(JSON.stringify(r.j), /_orbit/, p.name + ' runs anywhere');
+    else if (p.dim) assert.match(JSON.stringify(r.j), new RegExp(p.dim), p.name + ' is dimension-locked');
   }
 });
 

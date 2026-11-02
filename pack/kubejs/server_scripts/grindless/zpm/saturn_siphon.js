@@ -123,7 +123,8 @@
       r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f.id, f.amount)) })
       r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f.id, f.amount)) })
-      recipe.dimension(ORBIT).EUt(r.eut).duration(r.duration)
+      if (r.type !== 'cryogenic_isotope_separation') recipe.dimension(ORBIT)
+      recipe.EUt(r.eut).duration(r.duration)
     })
     console.info(LOG + 'saturn siphon recipes added: ' + (SS.recipes.length - SS.skipped.length))
   }

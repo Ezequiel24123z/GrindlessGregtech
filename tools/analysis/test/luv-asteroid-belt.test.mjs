@@ -250,7 +250,8 @@ test('B5 optical miner: the boulder needs the sun at run start, Boudouard does n
   assert.deepEqual({ ...only(boud, 'inputFluids') }, { id: 'gtceu:carbon_dioxide', amount: 1000 });
   assert.deepEqual({ ...only(boud, 'outputFluids') }, { id: 'gtceu:carbon_monoxide', amount: 2000 });
   assert.equal(only(boud, 'EUt'), 480);
-  for (const r of [boulder, boud]) assert.deepEqual(call(r, 'dimension').flat(), ['grindless:asteroid_belt']);
+  assert.deepEqual(call(boulder, 'dimension').flat(), ['grindless:asteroid_belt']);
+  assert.equal(call(boud, 'dimension').length, 0, 'Boudouard takes shipped inputs and runs anywhere');
   assert.deepEqual(call(boulder, 'addDataString')[0], ['grindless_optical_sun', 'boulder']);
   assert.equal(G.asteroidBelt.miner.needsSun(recipe('grindless:optical_mining/c_type_boulder')), true);
   assert.equal(G.asteroidBelt.miner.needsSun(recipe('grindless:optical_mining/boudouard')), false);
@@ -275,11 +276,11 @@ test('B5 parts, the belt-only casing and seed, the AE2 pair and the controllers'
       ['8x gcyr:para_aramid_foil', '4x gcyr:kapton_k_plate', '2x gtceu:titanium_rod', '2x grindless:hermean_heat_shield_brick', '2x grindless:platinum_gauze']);
   const casing = byId(recipes, 'alloy_smelter', 'grindless:asteroid_regolith_casing');
   assert.deepEqual(call(casing, 'itemInputs')[0], ['4x minecraft:tuff', '1x gtceu:titanium_dust']);
-  assert.deepEqual(call(casing, 'dimension').flat(), ['grindless:asteroid_belt']);
+  assert.equal(call(casing, 'dimension').length, 0, 'tuff and titanium are shipped');
   const seed = byId(recipes, 'chemical_reactor', 'grindless:asteroid_quantum_seed');
   assert.deepEqual(call(seed, 'itemInputs')[0], ['gtceu:raw_meteoric_iron', '#forge:ender_pearls']);
   assert.deepEqual({ ...only(seed, 'inputFluids') }, { id: 'gtceu:helium_3', amount: 250 });
-  assert.deepEqual(call(seed, 'dimension').flat(), ['grindless:asteroid_belt']);
+  assert.equal(call(seed, 'dimension').length, 0, 'the seed takes shipped inputs');
   assert.equal(only(seed, 'EUt'), 480);
   assert.equal(customs.length, 1);
   assert.equal(customs[0].json.result.nbt.grindless_planet, 'belt');

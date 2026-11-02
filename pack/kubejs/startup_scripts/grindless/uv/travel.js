@@ -9,7 +9,7 @@
 // GCYR 0.2.9 works a rocket's level out as floor((motor tier + tank tier) / 2), the weakest averaged; elite motors are tier 3.
 // Proxima Centauri b stays rocket_tier 8 and has no orbit: nothing in the pack reaches it.
 //
-// The orbit seeds (the far halves of the Earth-Neptune and Earth-Pluto AE2 pairs, made only in those orbits):
+// The orbit seeds (the far halves of the Earth-Neptune and Earth-Pluto AE2 pairs, made anywhere (shipped inputs)):
 //   grindless:neptunian_quantum_seed    in Neptune orbit, with the deep siphon's Neptune helium as the catalyst
 //   grindless:plutonian_quantum_seed    in Pluto orbit, with the penetrator's Sputnik ice core as the catalyst
 // The stations are tables/stations.json `more` slots five and six (lib/stations.js). Recipes: server_scripts/grindless/uv/travel.js.

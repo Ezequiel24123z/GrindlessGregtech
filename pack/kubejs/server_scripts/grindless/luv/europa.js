@@ -58,7 +58,7 @@
       .inputFluids(Fluid.of('minecraft:water', 1000), Fluid.of('gtceu:carbon_dioxide', 500))
       .outputFluids(Fluid.of('gtceu:biomass', 250), Fluid.of('gtceu:oxygen', 400))
       .EUt(480).duration(400)
-    onEuropa(event.recipes.gtceu.bioreactor('grindless:luv/europan_culture'))
+    event.recipes.gtceu.bioreactor('grindless:luv/europan_culture')
       .circuit(2)
       .itemInputs('grindless:chondritic_extract')
       .notConsumable('grindless:europan_ocean_sample')

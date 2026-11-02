@@ -11,11 +11,11 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.accelerator_driven_reactor.3', 'One thorium oxide assembly burns for 12,000 ticks; a nitride one for 16,000. The lead-bismuth charge is never used up; the target\'s polonium-210 stays in the output hatch. Four SRF cryomodules in the back wall carry the beam.')
     add('emi.grindless.info.accelerator_driven_reactor.4', 'The spent assembly goes to the pyroprocessing cell. Parts go in the bottom layer: 1-4 energy output hatches, an input bus, an input hatch, an output bus, an output hatch.')
 
-    add('emi.grindless.info.amorphous_ice_annealer.0', "The Amorphous Ice Annealer warms a planetesimal sample into water, carbon monoxide, nitrogen and Kuiper noble gas. It only works in Pluto orbit.")
+    add('emi.grindless.info.amorphous_ice_annealer.0', "The Amorphous Ice Annealer warms a planetesimal sample into water, carbon monoxide, nitrogen and Kuiper noble gas. It works anywhere.")
     add('emi.grindless.info.amorphous_ice_annealer.1', "It has no output bus: the inert dust stays in the machine.")
     add('emi.grindless.info.amorphous_ice_annealer.2', 'Amorphous ice that never warmed above 40 K holds argon, krypton and xenon; warmed through its crystallisation at about 140 K, it lets them go in one pulse.')
     add('emi.grindless.info.amorphous_ice_annealer.3', 'Circuit 1: 1 planetesimal sample -> 4,000 mB water + 1,000 mB carbon monoxide + 500 mB nitrogen + 250 mB Kuiper noble gas. The refractory dust (inert silicates and carbon) is voided.')
-    add('emi.grindless.info.amorphous_ice_annealer.4', 'Pluto orbit only. The only maker of the Kuiper noble gas: the cryogenic plant splits it into argon, krypton and xenon for the thruster works. Carbon monoxide goes to the syngas plant.')
+    add('emi.grindless.info.amorphous_ice_annealer.4', 'Works anywhere. The only maker of the Kuiper noble gas: the cryogenic plant splits it into argon, krypton and xenon for the thruster works. Carbon monoxide goes to the syngas plant.')
     add('emi.grindless.info.amorphous_ice_annealer.5', 'Needs 5 x 5 x 7 station truss casing (8 or more among the parts), cryostat casing (the warming stage), tungsten steel pipe casing (the gas manifold), 1 or 2 energy hatches (UV), input buses and 1 to 4 output hatches.')
 
     add('emi.grindless.info.antimatter_trap.0', "The Antimatter Trap works with antiprotons. Circuit 1: stacks 4 cartridges into a charged trap. Circuit 2: ICAN pellets from the trap, uranium dust and deuterium-tritium. Circuit 3: antihydrogen cartridge. Circuit 4: positronium condensate.")
@@ -128,7 +128,7 @@ ClientEvents.lang('en_us', event => {
 
     add('emi.grindless.info.penetrator_probe_bay.0', "The Penetrator Probe Bay fires a penetrator probe at a moon. Circuit 1: Sputnik core. Circuit 2: Charon core. It only works in Pluto orbit.")
     add('emi.grindless.info.penetrator_probe_bay.1', "Nothing is voided; the cores go to the Volatile Ice Fractionator.")
-    add('emi.grindless.info.penetrator_probe_bay.2', 'Drops a penetrator into Sputnik Planitia or onto Charon and catches the core it sends up. The Triton ice core (kept) calibrates it for Kuiper ices. Only works in Pluto orbit.')
+    add('emi.grindless.info.penetrator_probe_bay.2', 'Drops a penetrator into Sputnik Planitia or onto Charon and catches the core it sends up. The Triton ice core (kept) calibrates it for Kuiper ices. Works anywhere.')
     add('emi.grindless.info.penetrator_probe_bay.3', 'Circuit 1: 1 penetrator probe -> 1 Sputnik ice core. Circuit 2: 1 penetrator probe -> 1 Charon core. 491,520 EU/t (UV), 200 t.')
     add('emi.grindless.info.penetrator_probe_bay.4', 'Needs: 1 or 2 energy hatches (UV), 1 or 2 input buses, 1 or 2 output buses, and 14 or more station truss casings in the floor. A titanium probe rail runs up the middle to the canister catcher (tungstensteel gearbox).')
 
@@ -199,9 +199,9 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.triton_geyser_sampler.3', 'Circuit 1: 1 aerogel cartridge -> 8,000 mB Triton nitrogen + 1 tholin. Circuit 2: 1 aerogel cartridge -> 1 Triton ice core + 2,000 mB Triton nitrogen. 491,520 EU/t (UV), 200 t.')
     add('emi.grindless.info.triton_geyser_sampler.4', 'Needs: 1 or 2 energy hatches (UV), 1 or 2 input buses, 1 or 2 output buses, 1 or 2 output hatches, and 14 or more station truss casings in the floor. A titanium launch rail runs through the middle.')
 
-    add('emi.grindless.info.volatile_ice_fractionator.0', "The Volatile Ice Fractionator separates cores. Circuit 1: Sputnik core into tholin, nitrogen, carbon monoxide and methane. Circuit 2: Charon core into silica, water and ammonia. It only works in Pluto orbit.")
+    add('emi.grindless.info.volatile_ice_fractionator.0', "The Volatile Ice Fractionator separates cores. Circuit 1: Sputnik core into tholin, nitrogen, carbon monoxide and methane. Circuit 2: Charon core into silica, water and ammonia. It works anywhere.")
     add('emi.grindless.info.volatile_ice_fractionator.1', "Nothing is voided.")
-    add('emi.grindless.info.volatile_ice_fractionator.2', 'Warms a core step by step on a cold finger: each ice sublimes at its own temperature (nitrogen, then carbon monoxide, then methane). Only works in Pluto orbit.')
+    add('emi.grindless.info.volatile_ice_fractionator.2', 'Warms a core step by step on a cold finger: each ice sublimes at its own temperature (nitrogen, then carbon monoxide, then methane). Works anywhere.')
     add('emi.grindless.info.volatile_ice_fractionator.3', 'Circuit 1: 1 Sputnik ice core -> 16,000 mB nitrogen + 2,000 mB carbon monoxide + 1,000 mB methane + 1 tholin. Circuit 2: 1 Charon core -> 8,000 mB water + 2,000 mB ammonia + 1 silicon dioxide dust. 122,880 EU/t (ZPM), 600 t.')
     add('emi.grindless.info.volatile_ice_fractionator.4', 'Needs: 1 or 2 energy hatches (UV), 1 or 2 input buses, 1 or 2 output buses, 1 to 3 output hatches, and 14 or more station truss casings in the floor. The stepped cold finger (steel pipe casings, titanium frames) stands in the middle.')
 

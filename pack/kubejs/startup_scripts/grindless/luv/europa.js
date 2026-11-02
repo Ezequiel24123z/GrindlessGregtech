@@ -12,7 +12,7 @@
 //                            in beforeWorking). GTM's overclock, no parallel.
 //   gtceu:algae_bioreactor   GREENHOUSE FAMILY, step 5. Type gtceu:bioreactor: three 1x1x10 laminated-glass photobioreactor tubes with GT
 //                            lamps between them, on a 5x5x3 sealed sulfur-concrete base with a vault roof. Algae anywhere; the
-//                            Europan culture (gtceu:bacteria) only on Europa. Refuses voiding: the bacteria are the only living matter.
+//                            Europan culture (gtceu:bacteria) anywhere. Refuses voiding: the bacteria are the only living matter.
 //
 //   gtceu:magnesium_sulfate  dust, MgSO4 (Mg 1, S 1, O 4): the Europan brine's centrifuge gives it, and GTM's own decomposition electrolysis
 //                            (6 dust -> magnesium + sulfur + 4,000 mB oxygen) takes it apart.

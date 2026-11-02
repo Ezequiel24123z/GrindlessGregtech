@@ -100,7 +100,7 @@
       r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f.id, f.amount)) })
       r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f.id, f.amount)) })
-      if (r.orbit) recipe.dimension(ORBIT)
+      if (r.orbit && r.type !== 'tholin_reforming') recipe.dimension(ORBIT)
       recipe.EUt(r.eut).duration(r.duration)
     })
     console.info(LOG + 'titan probe recipes added: ' + (ZT.recipes.length - ZT.skipped.length))

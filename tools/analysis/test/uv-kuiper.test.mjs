@@ -95,7 +95,7 @@ test('the bay: interceptor + chart kept, circuit 1, Pluto orbit -> sample + cani
   assert.ok(JSON.stringify(rec.j.recipeConditions || []).includes(ORBIT), 'dimension condition');
 });
 
-test('the annealer: sample, circuit 1, Pluto orbit -> water, CO, nitrogen and the Kuiper noble gas, VA[ZPM] x 800 t', () => {
+test('the annealer: sample, circuit 1, anywhere -> water, CO, nitrogen and the Kuiper noble gas, VA[ZPM] x 800 t', () => {
   const r = row('planetesimal_annealing');
   assert.equal(r.type, 'ice_annealing');
   assert.deepEqual(r.itemsIn, [{ id: SAMPLE, count: 1 }]);
@@ -107,7 +107,7 @@ test('the annealer: sample, circuit 1, Pluto orbit -> water, CO, nitrogen and th
   const rec = byId(r.recipeId);
   assert.ok(rec, r.recipeId);
   assert.deepEqual(circuitOf(rec), [1]);
-  assert.ok(JSON.stringify(rec.j.recipeConditions || []).includes(ORBIT), 'dimension condition');
+  assert.ok(JSON.stringify(rec.j.recipeConditions || []).includes(ORBIT) === false, 'the annealer works anywhere');
 });
 
 test('the planetesimal sample comes only from the bay, the Kuiper noble gas only from the annealer', () => {

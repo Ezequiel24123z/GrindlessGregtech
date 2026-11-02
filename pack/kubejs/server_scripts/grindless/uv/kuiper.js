@@ -61,7 +61,7 @@
   function publish(r) {
     return {
       name: r.name, type: r.type, recipeId: 'grindless:' + r.type + '/' + r.name, circuit: r.circuit, itemsIn: r.itemsIn,
-      notConsumed: r.notConsumed, fluidsIn: r.fluidsIn, itemsOut: r.itemsOut, fluidsOut: r.fluidsOut, orbit: r.type !== 'assembler',
+      notConsumed: r.notConsumed, fluidsIn: r.fluidsIn, itemsOut: r.itemsOut, fluidsOut: r.fluidsOut, orbit: r.type === 'kuiper_intercept',
       eut: r.eut, duration: r.duration
     }
   }

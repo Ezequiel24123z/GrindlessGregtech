@@ -100,7 +100,7 @@
       recipe.circuit(r.circuit)
       r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f.id, f.amount)) })
-      recipe.dimension(r.dim)
+      if (r.type === 'penetrator_probe') recipe.dimension(r.dim)
       recipe.EUt(r.eut).duration(r.duration)
     })
     console.info(LOG + 'pluto ices recipes added: ' + (P.recipes.length - P.skipped.length))

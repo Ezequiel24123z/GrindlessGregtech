@@ -3,7 +3,7 @@
 // UV travel (package UV-B1, docs/eras/uv.md "Bridges and first arrivals", "AE2").
 // Registrations and the rocket rule: startup_scripts/grindless/uv/travel.js.
 //
-//   The far halves of the Earth-Neptune and Earth-Pluto AE2 pairs, made only in those orbits (ZPM's rule: chemical reactor 480 EU/t x 10 s,
+//   The far halves of the Earth-Neptune and Earth-Pluto AE2 pairs, made anywhere (shipped inputs) (ZPM's rule: chemical reactor 480 EU/t x 10 s,
 //   an ender pearl + 250 mB helium-3, with the orbit's dimension condition), each with the place's first automated product as the
 //   catalyst, so a pair follows the first siphon or penetrator run; then AE2's explosion ritual marks the pair with planets.json's pairTag.
 //     grindless:neptunian_quantum_seed    1,000 mB Neptune helium (not consumed; the deep siphon's), in Neptune orbit
@@ -70,7 +70,6 @@
       if (s.catalyst) recipe.notConsumable(s.catalyst)
       if (s.catalystFluid) recipe.notConsumableFluid(Fluid.of(s.catalystFluid, s.catalystAmount))
       recipe.itemOutputs(s.seed)
-        .dimension(s.orbit)
         .EUt(S.eut)
         .duration(S.duration)
 

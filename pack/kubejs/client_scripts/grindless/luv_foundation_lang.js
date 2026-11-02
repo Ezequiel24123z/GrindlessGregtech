@@ -100,7 +100,7 @@ ClientEvents.lang('en_us', event => {
     // ---- Io
     add('item.grindless.ionian_quantum_seed', 'Ionian Quantum Seed')
     add('tooltip.grindless.ionian_quantum_seed.0', 'Io\'s half of an Earth-Io quantum pair, grown from Io\'s brimstone.')
-    add('tooltip.grindless.ionian_quantum_seed.1', 'Made only on Io. Its pair also works in the Io-orbit station.')
+    add('tooltip.grindless.ionian_quantum_seed.1', 'Made in a chemical reactor. Its pair also works in the Io-orbit station.')
 
     add('item.grindless.ionian_sublimate', 'Ionian Sublimate')
     add('tooltip.grindless.ionian_sublimate.0', 'The crust that volcanic gas leaves as it cools: chlorides of germanium, indium and other rare metals.')
@@ -120,12 +120,12 @@ ClientEvents.lang('en_us', event => {
 
     add('block.grindless.sulfur_concrete_casing', 'Sulfur Concrete Casing')
     add('tooltip.grindless.sulfur_concrete_casing.0', 'Rock bound with molten sulfur instead of cement: it needs no water, so it sets where water can\'t.')
-    add('tooltip.grindless.sulfur_concrete_casing.1', 'Made only on Io, by the fumarole condenser. Every Jovian base is built with it.')
+    add('tooltip.grindless.sulfur_concrete_casing.1', 'Made by the fumarole condenser, anywhere. Every Jovian base is built with it.')
 
     // ---- Europa
     add('item.grindless.europan_quantum_seed', 'Europan Quantum Seed')
     add('tooltip.grindless.europan_quantum_seed.0', 'Europa\'s half of an Earth-Europa quantum pair, grown from Europa\'s blue ice.')
-    add('tooltip.grindless.europan_quantum_seed.1', 'Made only on Europa. Blow it up with a singularity to make the entangled pair.')
+    add('tooltip.grindless.europan_quantum_seed.1', 'Made in a chemical reactor. Blow it up with a singularity to make the entangled pair.')
 
     add('item.grindless.cryobot_probe', 'Cryobot Probe')
     add('tooltip.grindless.cryobot_probe.0', 'A melt probe that sinks through kilometres of ice on its own heat, paying out its tether.')

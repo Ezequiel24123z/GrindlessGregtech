@@ -61,7 +61,7 @@ test('the seven recipes: one circuit per type slot, ZPM VA, whole numbers, Earth
     assert.deepEqual(circuitOf(r), [p.circuit]);
     assert.equal(p.eut, 122880);
     assert.ok(Number.isInteger(p.duration) && p.duration > 0);
-    assert.equal(/overworld_orbit/.test(JSON.stringify(r.j)), p.type === 'kuiper_survey' || p.name === 'j0437_pulse_timed', p.name + ' dimension');
+    assert.equal(/overworld_orbit/.test(JSON.stringify(r.j)), p.type === 'kuiper_survey', p.name + ' dimension');
   }
 });
 

@@ -68,7 +68,8 @@ test('the Neptune rows: Neptune orbit only, one circuit per type slot, UV VA; th
     assert.equal(r.t, 'gtceu:' + p.type);
     assert.deepEqual(circuitOf(r), [p.circuit]);
     assert.ok(Number.isInteger(p.duration) && p.duration > 0);
-    assert.match(JSON.stringify(r.j), new RegExp(p.dim), p.name + ' is dimension-locked');
+    if (p.type === 'cryogenic_isotope_separation') assert.doesNotMatch(JSON.stringify(r.j), /_orbit/, p.name + ' runs anywhere');
+    else assert.match(JSON.stringify(r.j), new RegExp(p.dim), p.name + ' is dimension-locked');
     if (p.dim === ORBIT) assert.equal(p.eut, 491520);
     if (p.type === 'ice_giant_siphon') assert.ok(p.recipeId.startsWith('grindless:' + NE.siphonPrefix), p.name + ' carries the deep-siphon prefix');
   }

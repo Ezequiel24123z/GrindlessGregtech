@@ -91,7 +91,8 @@
       r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f.id, f.amount)) })
       r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f.id, f.amount)) })
-      recipe.dimension(ORBIT).EUt(r.eut).duration(r.duration)
+      if (r.type !== 'kronoseismology') recipe.dimension(ORBIT)
+      recipe.EUt(r.eut).duration(r.duration)
     })
     console.info(LOG + 'saturn science recipes added: ' + (SC.recipes.length - SC.skipped.length))
   }
