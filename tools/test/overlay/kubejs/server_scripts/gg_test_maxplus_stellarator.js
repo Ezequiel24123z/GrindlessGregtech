@@ -7,7 +7,7 @@
 //                 not once for the multiplied stack (0 or 64 would mean the wear of the real row is all or nothing)
 //     parallels   the real row c1 with fuel for 80 runs starts 64: 2^40 EU/t out, 256 pellets and 64,000 mB of polarized helium-3 taken, the rest left
 //     steady      from the first working tick the hatches plus what the settlements took rise by exactly 2^40 EU every tick
-//     gain        every whole settlement after the first drains exactly 2^40 x 10 EU and puts 19/20 of it into the store; the store equals the sum
+//     gain        once every hatch is full each settlement drains exactly 2^40 x 10 EU and puts 19/20 of it into the store; the store equals the sum
 //                 of the settlements' deposits as exact digits (BigInteger) and the saved tag's digits equal the store
 //     one_hatch   a second stellarator with one dynamo hatch starts 8 runs: 2^37 EU/t, 32 pellets, 8,000 mB
 // It takes its turn on the wireless network with the other wireless fixtures (ggTestWirelessQueue), pauses the timed settlements while it runs
@@ -44,7 +44,7 @@
   var OUT_EUT = 1099511627776
   var ONE_EUT = 137438953472
   var SETTLE = 10
-  var MEASURE_TICKS = 100
+  var MEASURE_TICKS = 400
 
   var S = null
   var C = null
@@ -189,7 +189,7 @@
     var w = W()
     var pd = S.server.persistentData
     S.savedKeys = {}
-    ;[w.blocksKey, w.storeKey, w.legacyKey].forEach(function (k) {
+    ;[w.blocksKey, w.storeKey, w.storesKey, w.legacyKey].forEach(function (k) {
       if (k === undefined || k === null) return
       var t = pd.get(k)
       S.savedKeys[k] = t === null || t === undefined ? null : t.copy()
@@ -350,9 +350,10 @@
     u.dyn = partsLike(m, /max_wireless_dynamo_hatch_64a/)
     return !!u.bus && !!u.fin && u.fout.length === 2 && u.dyn.length === u.expectDyn
   }
-  function feedMain(u) {
+  // the chanced wear inputs must all be present for every parallel run, so the bus holds one wear part per run it may start
+  function feedMain(u, runs) {
     var list = [[CIRCUIT, 1, '{Configuration:1}']].concat(stacksOf(PELLET, 320))
-    WEAR.forEach(function (id) { list.push([id, 8]) })
+    WEAR.forEach(function (id) { list.push([id, runs]) })
     setBus(u.bus, list)
     fill(u.fin, HE3, 80000)
   }
@@ -383,6 +384,7 @@
       var ok = grab(u)
       check('formed', ok, 'stellarator A formed: class ' + u.m.getClass().getSimpleName() + ', dynamo hatches ' + u.dyn.length + ', output hatches ' + u.fout.length + ', parts ' + array(u.m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
+      note('CAPACITY', 'output hatch tanks ' + u.fout.map(function (h) { return Number(h.tank.getTankCapacity(0)) }).join(',') + ' mB, input hatch ' + Number(u.fin.tank.getTankCapacity(0))       + ' mB')
       // the wear fixture: 100 poppies, 100 torchflowers, circuit 2
       setBus(u.bus, [[CIRCUIT, 1, '{Configuration:2}'], [POPPY, 64], [POPPY, 36], [CHANCED, 64], [CHANCED, 36]])
       u.last = u.m.getRecipeLogic().getLastRecipe()
@@ -412,7 +414,7 @@
       if (st !== 'WORKING' || S.tick - u.t0 > 100) {
         emptyHatches(u)
         w.setStored(S.server, bi('0'))
-        feedMain(u)
+        feedMain(u, RUNS)
         u.last = u.m.getRecipeLogic().getLastRecipe()
         u.t0 = S.tick
         u.phase = 'main'
@@ -425,7 +427,7 @@
         var eut = eutOf(r)
         var pellets = countIn(u.bus, PELLET)
         var he3 = tankMb(u.fin)
-        var worn = WEAR.map(function (id) { return 8 - countIn(u.bus, id) })
+        var worn = WEAR.map(function (id) { return RUNS - countIn(u.bus, id) })
         note('main_measured', 'recipe ' + String(r.id) + ', EU/t ' + eut + ', pellets left ' + pellets + ', helium-3 left ' + he3 + ' mB, wear parts taken ' + worn.join('/'))
         check('parallels', eut === OUT_EUT && pellets === 320 - 4 * RUNS && he3 === 80000 - 1000 * RUNS,
           'the real row started with EU/t ' + eut + ' (want 2^40 = ' + OUT_EUT + '), pellets left ' + pellets + ' (want ' + (320 - 4 * RUNS) + '), helium-3 left ' + he3 + ' (want ' + (80000 - 1000 * RUNS) + ')')
@@ -475,14 +477,18 @@
 
   function evaluateGain(u) {
     var w = W()
-    var want = String(Math.floor(OUT_EUT * SETTLE))
-    var whole = u.settlements.slice(1)
-    var off = whole.filter(function (x) {
-      return x.drained !== OUT_EUT * SETTLE || x.in * 20 !== x.drained * 19 || x.out !== 0 || x.delta !== String(x.in) || !x.up || x.faulted !== 0
-    })
+    var full = OUT_EUT * SETTLE
+    // the generator fills the dynamo hatches in order, so the settlements drain more each time until every hatch is full: that warm-up is measured, not judged
+    var firstFull = -1
+    u.settlements.forEach(function (x, i) { if (firstFull < 0 && x.drained === full) firstFull = i })
+    var whole = firstFull < 0 ? [] : u.settlements.slice(firstFull)
+    var off = u.settlements.filter(function (x) {
+      return x.in * 20 !== x.drained * 19 || x.out !== 0 || x.delta !== String(x.in) || !x.up || x.faulted !== 0
+    }).concat(whole.filter(function (x) { return x.drained !== full }))
+    var want = String(full)
     check('steady', u.steady >= MEASURE_TICKS - 5 && u.bad.length === 0, u.steady + ' of ' + (MEASURE_TICKS - 1) + ' ticks rose by exactly 2^40 = ' + OUT_EUT + '; off: ' + u.bad.slice(0, 4).join(', '))
     check('gain', whole.length >= 8 && off.length === 0,
-      u.settlements.length + ' settlements: drained ' + u.settlements.map(function (x) { return x.drained }).join(',') + ' (want ' + want + ' each after the first), deposits ' +
+      u.settlements.length + ' settlements, every hatch full from settlement ' + firstFull + ': drained ' + u.settlements.map(function (x) { return x.drained }).join(',') + ' (want ' + want + ' each from then on), deposits ' +
       u.settlements.map(function (x) { return x.in }).join(',') + ', store deltas ' + u.settlements.map(function (x) { return x.delta }).join(',') + '; out of line ' + off.length)
     var sum = bi('0')
     u.settlements.forEach(function (x) { sum = sum.add(bi(String(x.in))).subtract(bi(String(x.out))) })
@@ -502,7 +508,7 @@
       return
     }
     if (u.phase === 'go') {
-      feedMain(u)
+      feedMain(u, 8)
       u.last = u.m.getRecipeLogic().getLastRecipe()
       u.t0 = S.tick
       u.phase = 'main'
