@@ -77,7 +77,7 @@ function ioPack({ abilities, ins = [gi('t:in')], fins = [], outs = [gi('t:out')]
     tier: 'lv',
     eraOrder: ['steam', 'lv'],
     partAbilities: { input_bus: ['t:ibus'], input_hatch: ['t:ihatch'], output_bus: ['t:obus'], output_hatch: ['t:ohatch'] },
-    world: [{ id: 'earth', mode: 'manual', bootstrap: true, items: ['t:in', 't:m', 't:casing', 't:ibus', 't:ihatch', 't:obus', 't:ohatch'] }],
+    world: [{ id: 'earth', mode: 'manual', bootstrap: true, items: ['t:in', 't:m', 't:casing', 't:ibus', 't:ihatch', 't:obus', 't:ohatch', 'fluid:t:fin'] }],
     machines: [{ machine: 't:m', types: ['t:type'], maxEUt: 32, partsFromStructure: true }],
     targets: [{ id: 'out', item: 't:out' }, { id: 'fout', item: 'fluid:t:fout' }],
   };

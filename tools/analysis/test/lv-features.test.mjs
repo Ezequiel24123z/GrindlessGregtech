@@ -455,9 +455,11 @@ test('numeric condition with a cap (ebf_temp): a recipe that needs more temperat
   assert.deepEqual(verdicts(r.out.gate), { low: 'PASS', high: 'FAIL', hot: 'FAIL' });
   assert.match(linesOf(r.out.gate, 'high'), /ebf_temp 2273 \(this tier reaches 1800\)/);
   assert.match(linesOf(r.out.gate, 'hot'), /no t:ebf machine accepts 480 EU\/t/);
-  // without the condition rule, temperature is ignored
-  const loose = run(mkDump({ recipes, items: ['t:ebf_machine', 't:dust'] }), { ...cfg, conditions: {} });
+  // an explicit ignore rule skips the temperature (no rule at all would be an unmodelled gate: it fails closed)
+  const loose = run(mkDump({ recipes, items: ['t:ebf_machine', 't:dust'] }), { ...cfg, conditions: { ebf_temp: { ignore: true } } });
   assert.equal(loose.out.gate.find((x) => x.target.id === 'high').verdict, 'PASS');
+  const unruled = run(mkDump({ recipes, items: ['t:ebf_machine', 't:dust'] }), { ...cfg, conditions: {} });
+  assert.equal(unruled.out.gate.find((x) => x.target.id === 'high').verdict, 'FAIL');
 });
 
 test('verbose / explain also hang the derivation off recipe-type targets that give PASS', () => {
@@ -526,13 +528,18 @@ test('energy: the hatches the pattern allows come from the pack\'s structure (ex
   const structure = (limits) => ({
     'gtceu:arc': {
       id: 'gtceu:arc',
-      slices: [['XSX']],
-      symbols: { S: { kind: 'controller' }, X: { kind: 'oneOf', options: [{ kind: 'blocks', blocks: ['t:casing'] }, { kind: 'part', ability: 'energy_input', limits }] } },
+      slices: [['XSXIO']],
+      symbols: {
+        S: { kind: 'controller' },
+        X: { kind: 'oneOf', options: [{ kind: 'blocks', blocks: ['t:casing'] }, { kind: 'part', ability: 'energy_input', limits }] },
+        I: { kind: 'part', ability: 'input_bus', limits: { min: 1, max: 1 } },
+        O: { kind: 'part', ability: 'output_bus', limits: { min: 1, max: 1 } },
+      },
     },
   });
   const cfg = {
     tier: 'energy-structure',
-    partAbilities: { energy_input: ['t:hatch'] },
+    partAbilities: { energy_input: ['t:hatch'], input_bus: ['t:hatch'], output_bus: ['t:hatch'] },
     machines: [{ machine: 'gtceu:arc', types: ['t:arc'], energy: { voltage: 32 }, partsFromStructure: true }],
     world: [{ id: 'w', mode: 'manual', bootstrap: true, items: ['gtceu:arc', 't:dust', 't:casing', 't:hatch'] }],
     targets: [{ id: 'glass', item: 't:glass' }],
