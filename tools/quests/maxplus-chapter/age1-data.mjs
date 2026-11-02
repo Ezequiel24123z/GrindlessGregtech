@@ -107,10 +107,10 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
   {
-    key: 'NAVCORE', kind: 'step', title: 'Optical Navigation Core', icon: 'grindless:optical_nav_core',
+    key: 'NAVCORE', kind: 'step', title: 'Optical Nav Core', icon: 'grindless:optical_nav_core',
     deps: ['SETTLED'], x: 6, y: -1.5,
     desc: [
-      'An intergalactic probe steers by an &6Optical Navigation Core&r, built in the photonic foundry round a thorium nuclear clock. Every probe swallows one whole, so each gate you open from here costs another.',
+      'An intergalactic probe steers by an &6Optical Nav Core&r, built in the photonic foundry round a thorium nuclear clock. Every probe swallows one whole, so each gate you open from here costs another.',
     ],
     tasks: [it('grindless:optical_nav_core')],
     rewards: [xp(200)],
@@ -166,7 +166,7 @@ export const QUESTS = [
     key: 'RAW', kind: 'process', title: 'Plasma from the Heaviest Stars', icon: 'gtceu:confined_vms_plasma_bucket',
     deps: ['J_TAR', 'MA_LIFT'], x: 18, y: -5,
     teach: {
-      for: 'The &6stellar lift&r draws raw plasma from R136\'s very massive stars, and only here at the Tarantula. A filter and a former, which run anywhere, turn it into confined core plasma.',
+      for: 'The &6Tarantula Stellar Lift&r draws raw plasma from R136\'s very massive stars, and only here at the Tarantula. A filter and a former, which run anywhere, turn it into confined core plasma.',
       needs: 'Lift nozzles and the lift itself at this platform. The plasma mass filter and the FRC former can stand at home.',
       unlocks: 'Nickel-56 and the burner that eats it.',
       automate: 'The wind never stops, so the lift never starves.',

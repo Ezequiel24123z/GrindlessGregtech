@@ -49,13 +49,13 @@ export const QUESTS = [
   q('MTJD', 'wafer', 'Magnetic Tunnel Junction Die', 'grindless:mtj_die', ['TARGET', 'C_L_MTJ'], 4.5, 3, {
     for: 'Two magnets with an insulator a few atoms thick between them: current tunnels through more easily when they point the same way. A wafer of them, cut up, gives the &6MTJ Die&r.',
     needs: 'The MTJ sputter cluster, a CoFeB target and a magnesia target, on silicon-28.',
-    unlocks: 'The MRAM wafer, the scandate substrate and the racetrack chip.',
+    unlocks: 'The racetrack chip, the SHeQUID gyro and the mainframe itself, and later the UXV sensor, emitter and hatches.',
     automate: 'Targets wear out, so stock them by ME and send dies on to the foundry.',
   }, [], [it('grindless:mtj_die')], 120),
   q('MRAM', 'wafer', 'MRAM Wafer', 'grindless:mram_wafer', ['MTJD'], 7, 3, {
     for: 'The same junctions in a grid make memory that keeps its bits with the power off. The &6MRAM Wafer&r is sputtered, annealed and etched.',
     needs: 'The MTJ sputter cluster, the photonic foundry and a Heusler target.',
-    unlocks: 'The racetrack chip, which stacks memory into tracks.',
+    unlocks: 'The spintronic mainframe, which takes the wafer whole as its fast memory.',
     automate: 'Dies and targets by ME; keep a few wafers waiting for the racetrack fab.',
   }, [], [it('grindless:mram_wafer')], 120),
   q('DSO', 'wafer', 'Scandate Substrate', 'grindless:dysco3_substrate', ['MTJD'], 7, 4.5, {
@@ -66,7 +66,7 @@ export const QUESTS = [
   }, [], [it('grindless:dysco3_substrate')], 120),
   q('RACED', 'circuit', 'Racetrack Chip', 'grindless:racetrack_chip', ['MRAM', 'C_L_RACE'], 9.5, 3, {
     for: 'Push magnetic domains along a nanowire with current pulses and read them as they pass a head. The &6Racetrack Chip&r is the memory of the mainframe.',
-    needs: 'The racetrack fab, an MRAM wafer and a SAF track wafer.',
+    needs: 'The racetrack fab, an MTJ die and a patterned SAF track wafer.',
     unlocks: 'The spintronic mainframe, as its storage.',
     automate: 'Wafers by ME; the fab returns chips in a chest, so stock a few.',
   }, [], [it('grindless:racetrack_chip')], 150),
@@ -78,8 +78,8 @@ export const QUESTS = [
   }, [], [it('grindless:meso_logic_die')], 150),
   q('MAINF', 'circuit', 'Spintronic Mainframe', 'gtnn:spintronic_mainframe', ['RACED', 'MESOD', 'C_L_YIG'], 12, 3.75, {
     for: 'Spin waves in a garnet film carry signals between the chips with almost no heat. Logic, memory and that bus together are the &6Spintronic Mainframe&r, the UXV circuit.',
-    needs: 'The photonic integration hall, a racetrack chip, a MESO logic die and a magnonic bus from the YIG furnace.',
-    unlocks: 'The sensor, the controller of every machine past the hull, and the hatches and parts that go with them.',
+    needs: 'The photonic integration hall, a racetrack chip, a MESO logic die, an MRAM wafer, an MTJ die, a shielded interposer and a magnonic bus from the YIG furnace.',
+    unlocks: 'The UXV hull, emitter and hatches, the OpV casing and the controller of every UXV machine. They take any UXV circuit.',
     automate: 'One of each part per mainframe: keep a dedicated chest, never a big stock.',
   }, [], [it('gtnn:spintronic_mainframe')], 250),
 
@@ -101,14 +101,14 @@ export const QUESTS = [
   }, [], [it('grindless:shequid_gyro')], 150),
   q('SENSOR', 'circuit', 'UXV Sensor', 'gtceu:uxv_sensor', ['GYRO'], 9.5, 8, {
     for: 'The &6UXV Sensor&r feels rotation with superfluid and magnetic fields with diamond. The emitter, both new generators and most controllers need one.',
-    needs: 'A SHeQUID gyro, the UXV hull and a spintronic mainframe, on the assembly line.',
-    unlocks: 'The UXV emitter and the controllers of the Cygnus, Vela and Cassiopeia machines.',
+    needs: 'A SHeQUID gyro, an NV diamond chip, an MTJ die and a UIV sensor, with UIV circuits, on the assembly line.',
+    unlocks: 'The UXV hull and emitter, and the controllers of the Cygnus, Vela and Cassiopeia machines.',
     automate: 'Gyros by ME in matched counts; keep sensors in a small stock.',
   }, [], [it('gtceu:uxv_sensor')], 200),
 
   // ------------------------------------------------------------------ hull, components, assembler, emitter, hatches
   q('HULL', 'step', 'UXV Machine Hull', 'gtceu:uxv_machine_hull', ['C_L_VELA'], 2, 11, null, [
-    'The &6UXV Machine Hull&r is the first thing Vela\'s lasagna plate goes into. The UXV hatches and buses are built on it.',
+    'The &6UXV Machine Hull&r is the first thing Vela\'s lasagna plate goes into, with the UXV casing, a UXV voltage coil, a Ga2O3 power die and a UXV sensor. The UXV hatches and buses are built on it.',
   ], [it('gtceu:uxv_machine_hull')], 200),
   q('COMP', 'step', 'UXV Components', 'gtceu:uxv_electric_motor', ['HULL'], 4.5, 11, null, [
     'The &6UXV Electric Motor&r is wound with pasta strand round a meteorite-iron rotor, and the &6UXV Electric Pump&r pushes liquid metal with a moving field. The piston and the conveyor move by metals that change shape in a magnetic field, the robot arm turns on a gear with no backlash, and the field generator projects from a plasma ring that holds its own field.',

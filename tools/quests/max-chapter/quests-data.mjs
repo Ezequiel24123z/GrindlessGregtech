@@ -75,7 +75,7 @@ export const QUESTS = [
     key: 'PROBE', kind: 'step', title: 'Relay Probe', icon: 'grindless:gc_relay_probe',
     deps: ['SGRCHART'], x: 10, y: 0,
     desc: [
-      'A relay probe for the Galactic Centre. It is an assembly-line recipe researched at the Hawking drive, and it takes metal feedstock, so make that first. Nothing comes back from it: it is thrown from the Cygnus X-1 gate, and the gate takes it in.',
+      'A relay probe for the Galactic Centre. It is an assembly-line recipe researched at the Hawking drive, and it takes metal feedstock, so make that first. The ring at Cygnus X-1 throws it, with the Sagittarius A* chart kept in its store.',
     ],
     tasks: [it('grindless:gc_relay_probe')],
     rewards: [xp(150)],
@@ -84,7 +84,7 @@ export const QUESTS = [
     key: 'LAUNCH', kind: 'step', title: 'Probe Away', icon: 'grindless:launched_gc_probe',
     deps: ['PROBE'], x: 12, y: 0,
     desc: [
-      'The launched probe crosses twenty-six thousand light years. The gate does the rest.',
+      'When the hold completes, the launched probe comes back out of the ring, a platform appears at Sagittarius A*, and the ring\'s output bus gets its &6Relay Coordinates&r. Keep the launched probe: the gate to the belt spends it.',
     ],
     tasks: [it('grindless:launched_gc_probe')],
     rewards: [xp(100)],
@@ -93,10 +93,10 @@ export const QUESTS = [
     key: 'GATE14', kind: 'step', title: 'Black Hole Orbit', icon: 'gtceu:max_machine_casing',
     deps: ['LAUNCH'], x: 14, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'The warp gate opens on the orbit of Sagittarius A*.       Machines for the orbit start here.',
+      'Put the coordinates in the input bus of a ring that is holding and stand inside: it carries you to the orbit of Sagittarius A*. Step out of the platform\'s ring and back in to come home. Machines for the orbit start here.',
     ],
     tasks: [dim('gcyr:black_hole_orbit')],
-          rewards: [xp(25)],
+    rewards: [xp(150)],
   },
 
   // ------------------------------------------------------------------ Sagittarius A*
@@ -131,7 +131,7 @@ export const QUESTS = [
     key: 'J_WARP', kind: 'step', title: 'The Gate at the Hole', icon: 'gtceu:warp_gate',
     deps: ['EPHEM'], x: 22, y: 0,
     desc: [
-      'The warp gate takes a heavier load here. Build the &6Warp Gate&r at the orbit so the belt seed has somewhere to leave from.',
+      'The platform\'s ring is a full warp gate, but it is your way home. Build a second &6Warp Gate&r at the orbit for the holds that leave from here: the belt seed\'s now, and the one that leaves the Galaxy later.',
     ],
     tasks: [it('gtceu:warp_gate')],
     rewards: [xp(100)],
@@ -140,7 +140,7 @@ export const QUESTS = [
     key: 'NSCSEED', kind: 'step', title: 'Belt Seed', icon: 'grindless:nsc_belt_seed',
     deps: ['J_WARP'], x: 24, y: 0,
     desc: [
-      'A seed for a belt of planetesimals at the centre. It is an assembly-line recipe researched with the cluster ephemeris, and it takes metal feedstock. The gate takes it in.',
+      'A seed for a belt of planetesimals at the centre. It is an assembly-line recipe researched with the cluster ephemeris, and it takes metal feedstock. The gate\'s hold here takes it with the launched probe.',
     ],
     tasks: [it('grindless:nsc_belt_seed')],
     rewards: [xp(150)],
@@ -149,7 +149,7 @@ export const QUESTS = [
     key: 'J_LAUNCH', kind: 'reading', title: 'Seed Away', icon: 'grindless:nsc_belt_seed',
     deps: ['NSCSEED'], x: 26, y: 0,
     desc: [
-      'The gate slings the seed toward the cluster; what was thrown does not come back. When it arrives, the gate can follow it.',
+      'The hold burns the seed and the launched probe, and nothing comes back. When it completes, a platform appears in the belt and the ring\'s output bus gets its &6Relay Coordinates&r.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -160,10 +160,10 @@ export const QUESTS = [
     key: 'GATE15', kind: 'step', title: 'The Belt Opens', icon: 'gtceu:max_machine_casing',
     deps: ['J_LAUNCH'], x: 28, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'The warp gate opens on the nuclear star cluster belt. &oFiction:&r a belt of planetesimals the pack makes up for the centre.',
+      'Ride the coordinates there as before, and the platform\'s ring brings you back. &oFiction:&r a belt of planetesimals the pack makes up for the centre.',
     ],
     tasks: [dim('grindless:nsc_belt')],
-    rewards: [xp(25)],
+    rewards: [xp(150)],
   },
   {
     key: 'J_BELT', kind: 'reading', title: 'Rock to Shell', icon: 'grindless:nsc_planetesimal',
@@ -178,7 +178,7 @@ export const QUESTS = [
     key: 'J_PLANET', kind: 'step', title: 'Planetesimal', icon: 'grindless:nsc_planetesimal',
     deps: ['J_BELT'], x: 32, y: 0,
     desc: [
-      'A &6NSC Planetesimal&r from the belt, caught at the cluster. It is the raw rock of the segments.',
+      'A &6NSC Planetesimal&r from the belt. The debris harvester catches it, and only here in the belt. It is the raw rock of the segments.',
     ],
     tasks: [it('grindless:nsc_planetesimal')],
     rewards: [xp(100)],

@@ -44,17 +44,17 @@ export const QUESTS = [
     'The refinery clads the strand; a pasta draw bench then pulls it into &6Kerr Strand Wire&r. This wire is the MAX+ cable, and it carries the coils and the casing. The line stops at the wire: later steps coat it, braid it and wind it.',
   ], [it('grindless:kerr_strand_wire')], 120),
   q('CI_HULL', 'step', 'The MAX+ Hull', 'grindless:horizon_machine_casing', ['CI_WIRE', 'CI_L_BN'], 14, 4, null, [
-    'There is no MAX+ hull block. Machines use the MAX &6Machine Hull&r with the &6Horizon Machine Casing&r, which is built from MAX casing, compressed plates, kerr and strand wire and a MAX sensor. MAX+ controllers take these casings.',
+    'There is no MAX+ hull block. Machines use the &6MAX Machine Hull&r with the &6Horizon Machine Casing&r, which is built from MAX casing, compressed plates, kerr and strand wire and a MAX sensor. MAX+ controllers take these casings.',
   ], [it('gtceu:max_machine_hull'), it('grindless:horizon_machine_casing')], 150),
   q('CI_MOTOR', 'step', 'Motor and Its Cores', 'grindless:maxplus_electric_motor', ['CI_WIRE', 'CI_L_BDEG'], 26.5, 4.5, null, [
-    'The &6MAX+ Electric Motor&r joins &6Kerr Field Coils&r, a &6Bound-Matter Rotor&r and a MAX motor, on the assembly line at the top voltage. The coil is a long line on strand wire; the rotor is a line on the degenerate billet.',
+    'The &6MAX+ Electric Motor&r joins &6Kerr Field Coils&r, a &6Bound Matter Rotor&r and a MAX motor, on the assembly line at the top voltage. The coil is a long line on strand wire; the rotor is a line on the degenerate billet.',
     'The two cores come first, each ending in a single part. The motor then uses its MAX counterpart, so the older line stays running.',
   ], [it('grindless:kerr_field_coil'), it('grindless:bound_matter_rotor'), it('grindless:maxplus_electric_motor')], 200),
   q('CI_PISTON', 'step', 'Piston and Actuator', 'grindless:maxplus_electric_piston', ['CI_MOTOR'], 26.5, 6, null, [
     'A motor with a stack of shape-changing crystal, grown, cut, electroded and stacked, and a MAX piston. The &6Horizon Actuator Stack&r is the core and the &6MAX+ Electric Piston&r the part.',
   ], [it('grindless:horizon_actuator_stack'), it('grindless:maxplus_electric_piston')], 150),
   q('CI_PUMP', 'step', 'Pump and Regulator', 'grindless:maxplus_electric_pump', ['CI_MOTOR', 'CI_L_META'], 40.5, 4.5, null, [
-    'Pump and regulator both take the &6Horizon Valve&r, whose body the loom weaves, so they wait for the meta-materials. The pump is a motor, a rotor and a MAX pump; the &6Fluid Regulator&r is a MAX+ pump with a second valve, MAX+ circuits and a MAX regulator.',
+    'Pump and regulator both take the &6Horizon Valve&r, whose body the loom weaves, so they wait for the meta-materials. The pump is a motor, a rotor and a MAX pump; the &6MAX+ Fluid Regulator&r is a MAX+ pump with a second valve, MAX+ circuits and a MAX regulator.',
   ], [it('grindless:maxplus_electric_pump'), it('grindless:maxplus_fluid_regulator')], 150),
   q('CI_BELT', 'step', 'Conveyor Module', 'grindless:maxplus_conveyor_module', ['CI_MOTOR'], 28, 4, null, [
     'The &6Horizon Belt&r is a braided web of strand wire, primed, coated and finished on the membrane line. MAX+ motors and MAX conveyor modules carry it as the &6MAX+ Conveyor Module&r.',

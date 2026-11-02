@@ -186,7 +186,7 @@ export const QUESTS = [
     deps: ['PW_NI', 'PW_TORUS'], x: 28, y: -8.5,
     teach: {
       for: 'A wireless dynamo hatch feeds the network from each plant, wherever it stands. A fraction is lost on the way, so build more than you need.',
-      needs: 'The &6wireless dynamo hatch&r, on every plant.',
+      needs: 'A MAX wireless dynamo hatch on every plant.',
       unlocks: 'The network at home.',
       automate: 'Power flows without a cable, but not without cost.',
     },
@@ -253,7 +253,7 @@ export const QUESTS = [
     deps: ['SCALE'], x: 41, y: 3,
     teach: {
       for: 'The MAX+ parallel hatch lets one machine run a very large batch at once. It does not make a recipe faster; it makes the plan fit.',
-      needs: 'The &6parallel hatch&r, on a controller that accepts it.',
+      needs: 'The &6MAX+ Parallel Control Hatch&r, on a controller that accepts it.',
       unlocks: 'The scale of the final stage.',
       automate: 'A batch needs its inputs together, so size the buffer for it.',
     },

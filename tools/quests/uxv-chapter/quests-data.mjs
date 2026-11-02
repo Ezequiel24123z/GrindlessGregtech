@@ -28,7 +28,7 @@ export const QUESTS = [
     key: 'START', kind: 'start', title: 'Spin and Strange Stars', icon: 'gtceu:uxv_machine_casing',
     deps: ['X:1433B6EB4860DF3C'], x: 0, y: 0,
     desc: [
-      'The Kerr chart gave you the &6UXV Machine Casing&r. The hull waits for parts nobody has made yet.',
+      'The &6UXV Machine Casing&r is an assembly-line recipe researched with the Kerr chart. The hull waits for parts nobody has made yet.',
       'Home builds logic that runs on electron spin. Out there, Cygnus X-1\'s companion is lifted, a pulsar\'s crust is mined and a supernova\'s ashes are swept.',
     ],
     tasks: [it('gtceu:uxv_machine_casing')],
@@ -74,7 +74,7 @@ export const QUESTS = [
     key: 'ES254', kind: 'step', title: 'Einsteinium-254 Target', icon: 'grindless:es254_target',
     deps: ['FM257'], x: 4, y: 6,
     desc: [
-      'Einsteinium-254 is extracted from its solution and set into a target wheel. The &6Es-254 Target&r is the heavier half of element 121.',
+      'Einsteinium-254 is extracted from its solution and set into a target wheel. The &6Einsteinium-254 Target Wheel&r is the heavier half of element 121.',
     ],
     tasks: [it('grindless:es254_target')],
     rewards: [xp(150)],
@@ -92,7 +92,7 @@ export const QUESTS = [
     key: 'E122', kind: 'step', title: 'Element 122', icon: 'grindless:superheavy_census_iii',
     deps: ['FM257', 'E121'], x: 6, y: 4,
     desc: [
-      'The same beam on the fermium target makes element 122. With both atoms in hand, the superheavy lab writes &6Census III&r, which the gate keeps.',
+      'The same beam on the fermium target makes element 122. With both atoms in hand, the superheavy lab writes &6Superheavy Census III&r, which the gate keeps.',
     ],
     tasks: [it('grindless:element_122_recoil'), it('grindless:superheavy_census_iii')],
     rewards: [xp(250)],
@@ -121,7 +121,7 @@ export const QUESTS = [
     key: 'CUTS', kind: 'step', title: 'Stellar Cuts', icon: 'gtceu:stellar_cno_cut_bucket',
     deps: ['LIFT'], x: 4, y: 0,
     desc: [
-      'A spinning plasma flings its heavy ions outward. The plasma mass filter cuts the star into hydrogen, helium, carbon-nitrogen-oxygen and heavy cuts. Take the &6CNO cut&r home for the Mk6 and send the heavy one to the condensation tower.',
+      'A spinning plasma flings its heavy ions outward. The plasma mass filter cuts the star into hydrogen, helium, carbon-nitrogen-oxygen and heavy cuts. Take the &6Stellar CNO Cut&r home for the Mk6 and send the heavy one to the condensation tower.',
     ],
     tasks: [it('gtceu:stellar_cno_cut_bucket')],
     rewards: [xp(200)],
@@ -151,7 +151,7 @@ export const QUESTS = [
     key: 'SEED', kind: 'step', title: 'The Kerr Sling', icon: 'grindless:launched_relay_seed',
     deps: ['FRC'], x: 10, y: 0,
     desc: [
-      'Swing a relay seed through the ergosphere and it leaves with some of the hole\'s spin. The ergosphere probe bay launches it as a &6Launched Relay Seed&r.',
+      'Swing a relay seed through the ergosphere and it leaves with some of the hole\'s spin. The ergosphere probe bay launches it as a &6Launched Relay Seed&r. The laser sail on the Moon launches the same seed, and either one opens the way.',
       'The sling is fiction: nothing survives that close a pass, and no seed is this fast.',
     ],
     tasks: [it('grindless:launched_relay_seed')],
@@ -173,7 +173,8 @@ export const QUESTS = [
     key: 'JUMPV', kind: 'step', title: 'Vela Pulsar', icon: 'grindless:vela_glitch_timing',
     deps: ['SEED'], x: 12, y: 0,
     desc: [
-      'The first jump. A seed slung from Cygnus X-1 opens a ring at the Vela pulsar, a neutron star that spins eleven times a second and now and then speeds up.',
+      'The first jump. The ring at Cygnus X-1 holds a launched seed and an FRC cartridge, and when the hold completes a platform appears at the Vela pulsar, a neutron star that spins eleven times a second and now and then speeds up.',
+      'The ring\'s output bus gets the platform\'s &6Relay Coordinates&r. Put them in the input bus of a ring that is holding and stand inside to ride there; step out of the platform\'s ring and back in to come home.',
       'The jump is fiction, as every jump is. The pulsar and its glitches are real.',
     ],
     tasks: [dim('grindless:vela_pulsar_orbit')],
@@ -212,7 +213,7 @@ export const QUESTS = [
     key: 'JUMPC', kind: 'step', title: 'Cassiopeia A', icon: 'grindless:ejecta_knot_dust',
     deps: ['WHIPPLE'], x: 14, y: -2,
     desc: [
-      'The second jump: a shielded seed rides into one of the youngest supernova remnants in the galaxy and opens a ring among its ejecta. The jump is fiction; the remnant is real.',
+      'The second jump: the Cygnus ring holds a launched seed behind a Whipple shield, and when the hold completes a platform appears among the ejecta of one of the youngest supernova remnants in the galaxy. Ride its &6Relay Coordinates&r there as before. The jump is fiction; the remnant is real.',
     ],
     tasks: [dim('grindless:cas_a_remnant')],
     rewards: [xp(300)],
@@ -250,11 +251,11 @@ export const QUESTS = [
     key: 'HOLD', kind: 'milestone', title: 'Open the Bulge Gate', icon: 'gtceu:warp_gate',
     deps: ['ARM'], x: 22, y: 0,
     desc: [
-      '      Hold the warp gate open at the full UXV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Plan your power first: one BZ dynamo with two polar cap taps covers it.',
-            'The gate burns an FRC cartridge and keeps census III, the island chart, the arm chart, a pasta core sample and UXV-tier circuits in its store.',
+      'Hold the warp gate open at the full UXV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Plan your power first: a BZ dynamo and two polar cap taps come close, and a charged UXV cell covers the rest.',
+      'The gate burns an FRC cartridge and keeps census III, the island chart, the arm chart, a pasta core sample and UXV-tier circuits in its store.',
     ],
     tasks: [ck()],
-          rewards: [],
+    rewards: [],
   },
   {
     key: 'BULGE', kind: 'step', title: 'Chart the Bulge', icon: 'grindless:bulge_chart',

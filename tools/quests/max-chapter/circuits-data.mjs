@@ -38,8 +38,8 @@ const q = (key, kind, title, icon, deps, x, y, teach, desc, tasks, xpN) => ({
 
 export const QUESTS = [
   // ------------------------------------------------------------------ the ladder: chip, die, interposer, mainframe
-  q('C_CHIP', 'wafer', 'Squeezed-Light Chip', 'grindless:squeezed_light_chip', ['C_L_PHOT'], 2.5, 0, {
-    for: 'Light squeezed until its noise drops below what any ordinary beam can reach. The &6Squeezed-Light Chip&r goes into the mainframe, and the MAX emitter is built around it. It is one of three parts the mainframe needs, and they can be made in any order.',
+  q('C_CHIP', 'wafer', 'Squeezed Light Chip', 'grindless:squeezed_light_chip', ['C_L_PHOT'], 2.5, 0, {
+    for: 'Light squeezed until its noise drops below what any ordinary beam can reach. The &6Squeezed Light Chip&r goes into the mainframe, and the MAX emitter is built around it. It is one of three parts the mainframe needs, and they can be made in any order.',
     needs: 'The SNSPD fabrication line, with a bonded pump-laser die, an SNSPD, gold dust and superfluid helium.',
     unlocks: 'The mainframe and the MAX emitter.',
     automate: 'Feed the fabrication line by ME; chips are small, so stock a few and send the rest on.',
@@ -97,7 +97,7 @@ export const QUESTS = [
     'The part that bends space: an emitter, field coils, superconducting membranes, stable exotic matter and regulators. The &6MAX Field Generator&r is the last component and the one every big machine asks for most.',
   ], [it('grindless:max_field_generator')], 150),
   q('C_PARTS', 'step', 'MAX Parts and Hatches', 'gtceu:max_energy_input_hatch', ['C_SENS', 'C_CONV'], 17.5, 3, null, [
-    'The &6MAX Energy Input Hatch&r, its &616 A&r version, the &6MAX Input Bus&r and the &6MAX Battery&r are assembly-line recipes built on the MAX hull, with MAX sensors and circuits. With them in place the OpV pair you have been using can retire.',
+    'The &6MAX Energy Input Hatch&r, its 16 A version, the &6MAX Input Bus&r and the &6MAX Battery&r are assembly-line recipes built on the MAX hull, with MAX sensors and circuits. With them in place the OpV pair you have been using can retire.',
   ], [it('gtceu:max_energy_input_hatch'), it('gtceu:max_energy_input_hatch_16a'), it('gtceu:max_input_bus'), it('gtceu:max_battery')], 150),
 ];
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

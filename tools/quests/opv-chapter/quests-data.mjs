@@ -28,7 +28,7 @@ export const QUESTS = [
     key: 'START', kind: 'start', title: 'The Galactic Bulge', icon: 'gtceu:opv_machine_casing',
     deps: ['X:3D7C8C36A2896D4E'], x: 0, y: 0,
     desc: [
-      'The Superheavy chart gave you the &6OpV Machine Casing&r. The hull waits for parts nobody has made yet.',
+      'The &6OpV Machine Casing&r is an assembly-line recipe researched with the Bulge Chart. The hull waits for parts nobody has made yet.',
       'The bulge is crowded and very old. Terzan 5 is a fossil of the early galaxy, and Sagittarius A* sits at its centre.',
     ],
     tasks: [it('gtceu:opv_machine_casing')],
@@ -56,7 +56,7 @@ export const QUESTS = [
     key: 'LAUNCH', kind: 'step', title: 'Seed Away', icon: 'grindless:launched_bulge_seed',
     deps: ['RELAY'], x: 6, y: 0,
     desc: [
-      'The warp gate throws the seed across the dark between the arm and the bulge. The launched seed is spent at the final gate.',
+      'The ring at Cygnus X-1 holds the relay seed, with the Bulge Chart kept in its store, and throws it across the dark between the arm and the bulge. The launched seed comes back out of the ring; keep it, because the final gate spends it.',
       'The gate is fiction. The magsail braking it uses is real physics.',
     ],
     tasks: [it('grindless:launched_bulge_seed')],
@@ -66,19 +66,20 @@ export const QUESTS = [
     key: 'J_SGR', kind: 'step', title: 'SGR 1806-20', icon: 'grindless:launched_bulge_seed',
     deps: ['LAUNCH'], x: 8, y: -2,
     desc: [
-      'The seed unfolds a platform in orbit around a magnetar. Its field is about a thousand trillion times Earth\'s, strong enough to bend atoms into chains. Chain matter, field-frozen plate and positron cells come from here and nowhere else.',
+      'When the hold completes, a platform appears in orbit round a magnetar, and the ring\'s output bus gets its &6Relay Coordinates&r: put them in a holding ring and stand inside to ride there, and step out of the platform\'s ring and back in to come home.',
+      'The field here is about a thousand trillion times Earth\'s, strong enough to bend atoms into chains. Chain matter, field-frozen plate and positron cells come from here and nowhere else.',
     ],
     tasks: [dim('grindless:sgr1806_orbit')],
     rewards: [xp(200)],
   },
   {
-    key: 'BCHART', kind: 'step', title: 'Bulge Chart', icon: 'grindless:bulge_chart',
+    key: 'BCHART', kind: 'reading', title: 'Bulge Chart', icon: 'grindless:bulge_chart',
     deps: ['LAUNCH'], x: 8, y: 0,
     desc: [
-      'The first image from the bulge. It shows where the debris, the nodes and the old stars are, and the gate keeps it.',
+      'The &6Bulge Chart&r you wrote at the last gate is already in hand. It is the research for the OpV casing, and the ring keeps it in store for every hold that leaves for the bulge, so leave it there. Tick this once it is in the ring.',
     ],
-    tasks: [it('grindless:bulge_chart')],
-    rewards: [xp(100)],
+    tasks: [ck()],
+    rewards: [xp(25)],
   },
 
   // ------------------------------------------------------------------ SGR 1806-20
@@ -122,7 +123,7 @@ export const QUESTS = [
     key: 'POS', kind: 'step', title: 'Dense Positron Cell', icon: 'grindless:dense_positron_cell',
     deps: ['CABLE'], x: 14, y: -2,
     desc: [
-      'A magnetar\'s field is strong enough to turn gamma rays into pairs of electrons and positrons. A magnetic converter here seals the positrons into a &6Dense Positron Cell&r, and the antihydrogen line needs it.',
+      'A magnetar\'s field is strong enough to turn gamma rays into pairs of electrons and positrons. The magnetic pair converter here catches the positrons in a trap cell, and the electron beam furnace seals it into a &6Dense Positron Cell&r. The antihydrogen line needs it.',
     ],
     tasks: [it('grindless:dense_positron_cell')],
     rewards: [xp(150)],
@@ -144,7 +145,7 @@ export const QUESTS = [
     key: 'J_CYG', kind: 'step', title: 'Back to Cygnus X-1', icon: 'gtceu:annihilation_engine',
     deps: ['BCHART'], x: 10, y: 0,
     desc: [
-      'The black hole\'s companion is still there, and now the platform serves a different job. The beams, the antimatter and the Kugelblitz are made here.',
+      'Back at Cygnus X-1, only the jet itself has to be tapped here: the jet beam line works at this orbit. The spallation station, the decelerator, the antihydrogen foundry and the Kugelblitz forge behind it can stand at home.',
     ],
     tasks: [dim('grindless:cygnus_x1_orbit')],
     rewards: [xp(100)],
@@ -153,7 +154,7 @@ export const QUESTS = [
     key: 'WINDOW', kind: 'step', title: 'Beam Window', icon: 'grindless:be_beam_window',
     deps: ['J_CYG'], x: 12, y: 0,
     desc: [
-      'A thin beryllium foil lets the proton beam out and keeps the vacuum in. Brazed and tested, it is the &6Beam Window&r.',
+      'A thin beryllium foil lets the proton beam out and keeps the vacuum in. Brazed and tested, it is the &6Beryllium Beam Window&r.',
     ],
     tasks: [it('grindless:be_beam_window')],
     rewards: [xp(100)],
@@ -162,7 +163,7 @@ export const QUESTS = [
     key: 'STACK', kind: 'step', title: 'Antiproton Stack', icon: 'grindless:antiproton_stack_opv',
     deps: ['WINDOW'], x: 14, y: 0,
     desc: [
-      'Protons strike an iridium target, and a decelerator slows what comes out until a trap can hold it. The trap stacks the antiprotons into an &6Antiproton Stack&r. Half of them are lost to annihilation, so handle the stack with care.',
+      'Protons strike an iridium target, and a decelerator slows what comes out until a trap can hold it. The trap stacks the antiprotons into an &6OpV Antiproton Stack&r. Half of them are lost to annihilation, so handle the stack with care.',
     ],
     tasks: [it('grindless:antiproton_stack_opv')],
     rewards: [xp(200)],
@@ -227,7 +228,7 @@ export const QUESTS = [
     key: 'PATH', kind: 'step', title: 'The Pathfinder', icon: 'grindless:launched_pathfinder',
     deps: ['HAWK', 'CENSUS4'], x: 22, y: 0,
     desc: [
-      'A probe with a tetron array, an XNAV unit and a Hawking drive brakes into the cluster by itself. The gate throws it, and it opens a ring at the other end.',
+      'A probe with a tetron array, an XNAV unit and a Hawking drive brakes into the cluster by itself. The Cygnus ring holds it and throws it; when the hold completes, a platform appears in the core of Terzan 5 and the ring\'s output bus gets its &6Relay Coordinates&r.',
     ],
     tasks: [it('grindless:launched_pathfinder')],
     rewards: [xp(250)],
@@ -236,7 +237,7 @@ export const QUESTS = [
     key: 'J_TERZ', kind: 'step', title: 'Terzan 5', icon: 'grindless:probe_seed',
     deps: ['PATH'], x: 24, y: 0,
     desc: [
-      'Terzan 5 is a globular cluster, a ball of very old stars packed tight at the galaxy\'s centre. Its core is the last place before Sagittarius A*. Debris, metal and starlight are all here.',
+      'Ride the coordinates there as before. Terzan 5 is a globular cluster, a ball of very old stars packed tight at the galaxy\'s centre. Its core is the last place before Sagittarius A*. Debris, metal and starlight are all here.',
     ],
     tasks: [dim('grindless:terzan5_core')],
     rewards: [xp(300)],
@@ -254,7 +255,7 @@ export const QUESTS = [
     key: 'PSEED', kind: 'step', title: 'Probe Seed', icon: 'grindless:probe_seed',
     deps: ['DEBRIS'], x: 28, y: 0,
     desc: [
-      'A probe that copies itself. Terzan 5 supplies the metal, and a kit from home supplies what the cluster cannot. Self-replication is fiction here; a real one is far away.',
+      'A probe that copies itself. The von Neumann foundry builds it from metal feedstock, a sinter casing and a kit from home that supplies what the cluster cannot. Self-replication is fiction here; a real one is far away.',
     ],
     tasks: [it('grindless:probe_seed')],
     rewards: [xp(250)],
@@ -263,7 +264,7 @@ export const QUESTS = [
     key: 'SINTER', kind: 'step', title: 'Sinter Casing', icon: 'grindless:cluster_sinter_casing',
     deps: ['PSEED'], x: 30, y: 0,
     desc: [
-      'Every copy needs a shell. The refinery sinters cluster silicate into a &6Cluster Sinter Casing&r, and no copy leaves without one.',
+      'Every copy needs a shell. The replication refinery sinters cluster silicon into a &6Cluster Sinter Casing&r: the foundry is built with them, and no copy leaves without one.',
     ],
     tasks: [it('grindless:cluster_sinter_casing')],
     rewards: [xp(200)],

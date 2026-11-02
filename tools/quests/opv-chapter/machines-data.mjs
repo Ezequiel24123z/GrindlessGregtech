@@ -72,40 +72,40 @@ export const QUESTS = [
     ['The &6Gated 2DEG Wafer&r is a layered wafer whose electron sheet is switched by a gate. The tetron fab builds its nanowires from it.']),
   gear('GOPT', 'gamma_optics_works', 'Gamma Optics Works', ['M_L_GOPT'], 2, 1.5, {
     for: 'The &6Gamma Optics Works&r focuses gamma rays by Laue lensing, which nothing older can do. Gamma light of this energy only bends in a crystal.',
-    needs: 'An OpV hull, the high power casing and laminated glass, and a Compton crystal to bend the beam.',
-    unlocks: 'The gamma beam that the antihydrogen foundry and the absorber tiles need.',
-    automate: 'Crystals by ME; they wear slowly, so a small stock is enough.',
+    needs: 'An OpV hull, the high power casing and laminated glass, and a Th-229 lasing crystal in the controller.',
+    unlocks: 'The Laue lens, the gamma multilayer mirror and the gamma focus element. The lens and the mirror focus the Kugelblitz seed, and the mirror goes on into the Hawking drive and the MAX casing.',
+    automate: 'Run each optic on its own circuit and keep a small stock of all three.',
   }, [POWER, LGLASS], 150),
-  prod('LAUE', 'Compton Crystal', 'grindless:hpge_compton_crystal', ['GOPT'], 4.5, 1.5,
-    ['The &6HPGE Compton Crystal&r is germanium grown pure enough to be a detector and a lens at once. The works wears one out slowly.']),
+  prod('LAUE', 'HPGE Compton Crystal', 'grindless:hpge_compton_crystal', ['GOPT'], 4.5, 1.5,
+    ['The &6HPGE Compton Crystal&r is germanium pure enough to count single gamma rays, cooled in a closed helium loop. It is the eye of the OpV sensor.']),
   gear('AHF', 'antihydrogen_foundry', 'Antihydrogen Foundry', ['M_L_AHF'], 2, 3, {
     for: 'The &6Antihydrogen Foundry&r merges antiprotons and positrons in a trap, cools the atoms with a laser and freezes them into a cell. It is the first neutral antimatter in the pack.',
-    needs: 'An OpV hull, the negative-potential casing and the annihilation shield casing, with antiprotons and positrons from SGR 1806-20.',
-    unlocks: 'The antihydrogen cell, and the strangelet vault.',
+    needs: 'An OpV hull, the NEG XHV casing and the annihilation shield casing, a levitation trap cell and a Lyman-alpha laser, then antiprotons and positrons to work on.',
+    unlocks: 'The antihydrogen ice cell, which the Kugelblitz core and the annihilation engine need.',
     automate: 'Antiprotons and positrons by the beam lines; cells are the product to chest.',
   }, [NEG, SHIELD], 200),
-  prod('NEGC', 'Negative-Potential Casing', 'grindless:neg_xhv_casing', ['AHF'], 4.5, 3,
-    ['The &6Negative-Potential Casing&r holds an extreme vacuum at a voltage that repels what is inside it. The foundry and the decelerator are built of it.']),
+  prod('NEGC', 'NEG XHV Casing', 'grindless:neg_xhv_casing', ['AHF'], 4.5, 3,
+    ['The &6NEG XHV Casing&r is lined with a non-evaporable getter that soaks up the last stray gas and holds an extreme-high vacuum. The foundry and the decelerator are built of it.']),
   prod('SHLD', 'Annihilation Shield Casing', 'grindless:annihilation_shield_casing', ['AHF'], 4.5, 4.5,
     ['The &6Annihilation Shield Casing&r stops gammas, neutrons and charged debris. Every machine that holds antimatter or a black hole is lined with it.']),
-  prod('LYMAN', 'Thorium-229 Lasing Crystal', 'grindless:th229_lasing_crystal', ['NEGC'], 7, 3,
-    ['The &6Thorium-229 Lasing Crystal&r makes the Lyman-alpha light that laser-cools antihydrogen. The foundry uses a crystal for a while and then it must be replaced.']),
+  prod('LYMAN', 'Th-229 Lasing Crystal', 'grindless:th229_lasing_crystal', ['NEGC'], 7, 3,
+    ['The &6Th-229 Lasing Crystal&r is a thorium-doped crystal checked against the nuclear clock until it lases on the nucleus itself. The OpV emitter and the gamma optics works are built with one. The light that cools antihydrogen comes from a separate Lyman-alpha laser.']),
   gear('VAULT', 'strangelet_vault', 'Strangelet Vault', ['M_L_VAULT'], 2, 4.5, {
-    for: 'The &6Strangelet Vault&r holds strange matter in a frozen field, where it cannot touch ordinary atoms. Any contact would convert them.',
-    needs: 'An OpV hull, the field-frozen casing and the annihilation shield casing.',
-    unlocks: 'Storage for the strangelet seed and the pasta core sample.',
+    for: 'The &6Strangelet Vault&r grows a strangelet seed inside a frozen field, where it cannot touch ordinary atoms, and feeds it until it is stable exotic matter. It also lines the cages and foils that strange matter needs.',
+    needs: 'An OpV hull, the field-frozen casing and the annihilation shield casing, then seeds from the distiller and field-frozen plate.',
+    unlocks: 'Stable exotic matter, which the Kugelblitz core and the gate to MAX need.',
     automate: 'Seeds go in by hatch and out by hatch; never keep them outside the vault.',
   }, [FROZENC, SHIELD], 150),
 
   // ------------------------------------------------------------------ Cygnus X-1: beam, target, cooling, black hole
   gear('JET', 'jet_beam_line', 'Jet Beam Line', ['M_L_JET'], 2, 7.5, {
     for: 'The &6Jet Beam Line&r draws protons from the base of the Cygnus X-1 jet and bunches them on superconducting cavities into a beam no Earth injector can reach.',
-    needs: 'An OpV hull, the high power casing and the superconducting RF cryomodule blocks.',
+    needs: 'An OpV hull, the high power casing and SRF cryomodule blocks, with a chain field coil, an FRC cartridge and a field-frozen plate in the controller. Only its jet extraction is tied to Cygnus X-1.',
     unlocks: 'The proton beam for the spallation station, and through it every antiproton.',
     automate: 'Power and coolant by pipe; the beam is continuous, so give it a dedicated supply.',
   }, [POWER, SRFB], 200),
   prod('SRF', 'SRF Cryomodule Block', 'grindless:srf_cryomodule_block', ['JET'], 4.5, 7.5,
-    ['The &6SRF Cryomodule Block&r is a niobium cavity in its own cryostat, which accelerates the beam with very little loss.']),
+    ['The &6SRF Cryomodule Block&r is a niobium cavity in its own cryostat, which accelerates a beam with very little loss. The jet beam line and the antiproton decelerator are built of them, so make them first.']),
   gear('SPALL', 'spallation_target_station', 'Spallation Target Station', ['JET'], 2, 9, {
     for: 'The &6Spallation Target Station&r hits an iridium target with the beam, collects the antiprotons with a magnetic horn and breeds tritium in the shield.',
     needs: 'An OpV hull and the annihilation shield casing, with the beam line in front of it.',
@@ -134,20 +134,20 @@ export const QUESTS = [
   // ------------------------------------------------------------------ SGR 1806-20: a magnetar press
   gear('MPC', 'magnetic_pair_converter', 'Magnetic Pair Converter', ['M_L_MPC'], 2, 16.5, {
     for: 'The &6Magnetic Pair Converter&r turns gammas into electron and positron pairs inside the magnetar field, seeded by a positron plasma from home. Only a field this strong allows it.',
-    needs: 'An OpV hull and the field-frozen casing, with gamma light and a rotating-wall positron plasma.',
-    unlocks: 'The dense positron cell, which only this machine makes.',
-    automate: 'Seed plasma by hatch; the cells go straight to the antihydrogen foundry.',
+    needs: 'An OpV hull, the field-frozen casing and field-frozen plate from the press, a gamma laser and a chain field coil, then gamma light and a rotating-wall positron plasma.',
+    unlocks: 'Unsealed positron cells, which the electron beam furnace seals into dense positron cells.',
+    automate: 'Seed plasma by hatch; send the cells to the furnace and on to the antihydrogen foundry.',
   }, [FROZENC]),
   gear('PRESS', 'field_frozen_press', 'Field-Frozen Press', ['MPC'], 2, 18, {
     for: 'The &6Field-Frozen Press&r presses chain-matter laminae in the magnetar field so that the field stays frozen in the billet.',
     needs: 'An OpV hull, the high power casing and a tungsten steel frame, with laminae from the chain-matter line.',
-    unlocks: 'The field-frozen plate and, from it, the field-frozen casing.',
+    unlocks: 'The field-frozen plate and, from it, the field-frozen casing that the pair converter, the vault, the distiller and the forge are built of.',
     automate: 'Laminae by ME; plates come out stacked, so chest them for the casing.',
   }, [POWER, it('gtceu:tungsten_steel_frame')], 150),
   prod('FROZEN', 'Field-Frozen Plate', 'grindless:field_frozen_plate', ['PRESS'], 4.5, 18,
     ['The &6Field-Frozen Plate&r keeps the magnetar field it was pressed in. Pressed into the &6Field-Frozen Casing&r, it is what the vault, the distiller and the forge are built of.']),
-  prod('HE3', 'Superfluid Helium-3 Seal', 'grindless:superfluid_he3_seal', ['FROZEN'], 7, 18,
-    ['The &6Superfluid Helium-3 Seal&r closes the cold joint of a frozen-field casing. A magnetar field cracks an ordinary gasket in a few seconds.']),
+  prod('HE3', 'Superfluid He-3 Seal', 'grindless:superfluid_he3_seal', ['FROZEN'], 7, 18,
+    ['The &6Superfluid He-3 Seal&r keeps a superfluid from creeping past a moving shaft. The OpV pump and fluid regulator are built with it, and so, later, is the MAX pump.']),
 
   // ------------------------------------------------------------------ Terzan 5: a self-copying probe
   gear('HARV', 'debris_harvester', 'Debris Harvester', ['M_L_HARV'], 2, 21, {
@@ -170,9 +170,9 @@ export const QUESTS = [
   }, [CGLASS, PLASCRETE, GRATING]),
   gear('FOUNDRY', 'von_neumann_foundry', 'Von Neumann Foundry', ['REFINE'], 2, 24, {
     for: 'The &6Von Neumann Foundry&r builds a probe that builds a copy of itself, from feedstock and parts made on the spot. Once a seed is here, the cluster feeds its own growth.',
-    needs: 'An OpV hull, the robust casing and assembly line grating, with feedstock from the refinery.',
-    unlocks: 'The self-copying probe and the mega-family of the age.',
-    automate: 'Every input comes from the cluster by belt, so build it last and wire it to the rest.',
+    needs: 'An OpV hull, the robust casing and assembly line grating, with cluster sinter casings, a tetron array and an XNAV unit in the controller, and feedstock from the refinery.',
+    unlocks: 'The self-copying probe seed.',
+    automate: 'Every input comes from the cluster by belt, so wire it to the refinery.',
   }, [ROBUST, GRATING], 250),
 ];
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

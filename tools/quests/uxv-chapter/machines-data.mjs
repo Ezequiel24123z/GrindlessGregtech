@@ -138,8 +138,8 @@ export const QUESTS = [
     unlocks: 'Power at Cygnus X-1, with no fuel but the plasma.',
     automate: 'Feed flux-loaded plasma by pipe and ship the power home over the wireless link.',
   }, [UXVC], 200),
-  gear('MK6', 'uxv_fusion_reactor', 'Mk6 Fusion Ring', ['M_L_COMP', 'PMF'], 4.5, 13, {
-    for: 'The &6Mk6 Fusion Ring&r burns as a star does: hot CNO, then helium, carbon and oxygen. A direct converter takes the power off each ash, and one burn\'s ash is quenched into the next one\'s fuel.',
+  gear('MK6', 'uxv_fusion_reactor', 'Mk6 Fusion Reactor', ['M_L_COMP', 'PMF'], 4.5, 13, {
+    for: 'The &6Mk6 Fusion Reactor&r burns as a star does: hot CNO, then helium, carbon and oxygen. A direct converter takes the power off each ash, and one burn\'s ash is quenched into the next one\'s fuel.',
     needs: 'A UXV hull, UXV components, the UXV fusion casing, the Mk5 coil and fusion glass.',
     unlocks: 'The plasma and burn quests that follow.',
     automate: 'Fuel and coolant by pipe; a ring that runs a star\'s burning stages on demand is fiction, so plan the ash chain first.',

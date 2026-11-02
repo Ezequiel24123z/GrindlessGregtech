@@ -98,7 +98,7 @@ export const QUESTS = [
     key: 'I_AE2', kind: 'milestone', title: 'AE2 at the Centre', icon: 'ae2:controller',
     deps: ['GATE14'], x: 2, y: 5,
     desc: [
-      'AE2 has no new tier at MAX. The far rings of the platforms around the hole seed a network of their own, and the wireless network carries it home.',
+      'AE2 has no new tier at MAX. Every platform round the hole comes with an AE2 controller and a drive of its own, so a network starts there the moment you arrive.',
     ],
     tasks: [ck()],
     rewards: [xp(50)],
@@ -124,7 +124,7 @@ export const QUESTS = [
     teach: {
       for: 'The &6Penrose Engine&r drops a payload into the ergosphere and collects more energy than it spent. The excess comes from the rotation of the hole.',
       needs: 'A formed engine and payloads from the payload line.',
-      unlocks: 'A big, steady supply of MAX power for the platforms.',
+      unlocks: 'A big, steady supply of MAX power for the network.',
       automate: 'One payload per cycle by bus; the spent casing goes back to the line.',
     },
     desc: [],
