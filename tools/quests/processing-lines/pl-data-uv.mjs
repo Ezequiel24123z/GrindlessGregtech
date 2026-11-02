@@ -161,7 +161,7 @@ const chapter = {
       name: 'Americium and neutronium',
       nodes: [
         n('pu', 0, -0.75, F('gtceu:plutonium_241'), 'Molten Plutonium-241', { kind: 'raw', sub: 'From IV\'s fission reactor' }),
-        n('h2', 0, 0.75, F('gtceu:hydrogen'), 'Hydrogen', { kind: 'raw' }),
+        L('h2', 0, 0.75, 'pl_hv:hydrogen'),
         n('mk3', 2.5, 0, M('gtceu:uv_fusion_reactor', 'gtceu:fusion_reactor'), 'Fusion Reactor Mk3', {
           kind: 'ours', from: ['pu', 'h2'], desc: 'Fuses plutonium-241 with hydrogen into americium plasma.',
         }),
@@ -174,11 +174,9 @@ const chapter = {
         n('mk3b', 12.5, 0.75, M('gtceu:uv_fusion_reactor', 'gtceu:fusion_reactor'), 'Fusion Reactor Mk3', {
           kind: 'ours', from: ['amf', 'naq'], desc: 'Fuses americium with naquadria into neutronium.',
         }),
-        n('neut', 15, 0.75, F('gtceu:neutronium'), 'Molten Neutronium', { kind: 'product', from: ['mk3b'], sub: 'Cast in the fluid solidifier' }),
-        n('cast', 17.5, 0.75, M('gtceu:ev_fluid_solidifier', 'gtceu:fluid_solidifier'), 'Fluid Solidifier', { kind: 'machine', from: ['neut'], desc: 'Casts the neutronium into an ingot.' }),
-        n('nging', 20, 0.75, I('gtceu:neutronium_ingot'), 'Neutronium Ingot', { kind: 'product', from: ['cast'] }),
+        n('neut', 15, 0.75, F('gtceu:neutronium'), 'Molten Neutronium', { kind: 'product', from: ['mk3b'], sub: 'Into the gravi star' }),
         n('qstar', 20, 2.25, I('gtceu:quantum_star'), 'Quantum Star', { kind: 'raw' }),
-        n('acl', 22.5, 1.5, M('gtceu:iv_autoclave', 'gtceu:autoclave'), 'Autoclave', { kind: 'machine', from: ['nging', 'qstar'], desc: 'Grows a gravi star around a quantum star.' }),
+        n('acl', 22.5, 1.5, M('gtceu:iv_autoclave', 'gtceu:autoclave'), 'Autoclave', { kind: 'machine', from: ['neut', 'qstar'], desc: 'Grows a gravi star around a quantum star.' }),
         n('gravi', 25, 1.5, I('gtceu:gravi_star'), 'Gravi Star', { kind: 'product', from: ['acl'], end: 'the UIV fusion reactor' }),
       ],
     },    ented: {
