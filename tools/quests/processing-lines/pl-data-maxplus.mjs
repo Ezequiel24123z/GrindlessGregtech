@@ -1202,7 +1202,7 @@ const cluster = (name, nums) => {
   const out = [];
   for (const num of nums) {
     const alias = ROWS[num].find((r) => r[0] === 'x');
-    const x0 = alias ? ((out.find((nd) => nd.key === alias[1]) ?? line(alias[1].split('_')[0].toUpperCase(), 0).find((nd) => nd.key === alias[1]))?.x ?? 0) : 0;
+    const x0 = alias ? (((out.find((nd) => nd.key === alias[1]) ?? line(alias[1].split('_')[0].toUpperCase(), 0).find((nd) => nd.key === alias[1]))?.x ?? 1.25) - 1.25) : 0;
     const ns = line(num, 0, x0);
     const lo = Math.min(...ns.map((nd) => nd.y));
     const hi = Math.max(...ns.map((nd) => nd.y));
