@@ -371,12 +371,13 @@ function makeWorld(store) {
 }
 
 // one boot: a fresh global (a restart loses it) round the world's persistent data; `gate` also loads the server gate.js (the transit)
-function boot(w, { gate = false } = {}) {
+function boot(w, { gate = false, teams = null } = {}) {
   const ticks = [];
   const logs = [];
   const G = { grindless: { warpGate: WG0, structures: run.global.grindless.structures, patterns: run.global.grindless.patterns,
     readJsonTable: () => JSON.parse(JSON.stringify(PLAT)),
-    wireless: { track: (level, p) => { w.tracked.push(`${level.dimension}|${p.x}|${p.y}|${p.z}`); return { k: 'hatch' }; } } } };
+    teams: teams || undefined,
+    wireless: { track: (level, p, who) => { w.tracked.push(`${level.dimension}|${p.x}|${p.y}|${p.z}`); (w.trackedFor ||= []).push(who); return { k: 'hatch' }; } } } };
   const ctx = vm.createContext({
     global: G,
     console: { info: (s) => logs.push(String(s)), error: (s) => logs.push('ERROR ' + s), log: (s) => logs.push(String(s)), warn: (s) => logs.push('WARN ' + s) },
@@ -433,7 +434,7 @@ test('AF-1: a completed jump survives a restart in the queue, then places its pl
   const { ctl, bout } = jumpRing(w);
   const b1 = boot(w);
   WG0.onFinished(ctl, 'grindless:warp_gate/hold_rx_j1856');
-  assert.deepEqual(JSON.parse(store.grindless_relay_due), [{ p: 'rx_j1856', r: HOME_RING }]);
+  assert.deepEqual(JSON.parse(store.grindless_relay_due), [{ p: 'rx_j1856', r: HOME_RING, t: 'server' }]);
   WG0.onFinished(ctl, 'grindless:warp_gate/sustain');
   assert.equal(JSON.parse(store.grindless_relay_due).length, 1, 'a sustain queues nothing');
   assert.equal(w.cmds.length, 0, 'nothing placed in the machine tick');
@@ -472,6 +473,27 @@ test('AF-1: a completed jump survives a restart in the queue, then places its pl
   assert.equal(w.cmds.length, n, 'nothing placed again');
   assert.deepEqual(plain(b2.R.coordinatesOf(bout.inv.s[1])), FAR_RING);
   assert.ok(!Object.hasOwn(store, 'grindless_relay_due'));
+});
+
+test('B13-DIAL: the platform hatches are tracked under the team of the ring that ran the jump, kept in the queue across a restart; no owner is the server team', () => {
+  const store = {};
+  const w = makeWorld(store);
+  const { ctl } = jumpRing(w);
+  const owned = { ofMachine: (m) => (m === ctl ? 'teamA' : 'server') };
+  boot(w, { teams: owned });
+  WG0.onFinished(ctl, 'grindless:warp_gate/hold_rx_j1856');
+  assert.equal(JSON.parse(store.grindless_relay_due)[0].t, 'teamA');
+  const b2 = boot(w);
+  b2.tick(10);
+  assert.deepEqual(errorsOf(b2), []);
+  assert.deepEqual(w.trackedFor, ['teamA', 'teamA'], 'the energy hatch and the dynamo hatch, both the owner\'s team');
+  const s2 = {};
+  const w2 = makeWorld(s2);
+  const r2 = jumpRing(w2);
+  const b3 = boot(w2, { teams: { ofMachine: () => 'server' } });
+  WG0.onFinished(r2.ctl, 'grindless:warp_gate/hold_rx_j1856');
+  b3.tick(10);
+  assert.deepEqual(w2.trackedFor, ['server', 'server'], 'a ring with no owner builds a server platform');
 });
 
 test('AF-1: a source row is placed by the same placer with its uxv mark; a full bus drops the coordinates in front of the ring; a failure is retried', () => {

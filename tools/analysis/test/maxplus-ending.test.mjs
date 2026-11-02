@@ -47,34 +47,91 @@ test('an open gate admits a player inside its box, not one outside, in another d
   assert.equal(E.claim(gates, [player('low', { y: 50 })], rec), null);
 });
 
-test('one player per run: once used, the same run admits no one, not even after a pause or restart; a new dial (run counter) admits again', () => {
+test('one dial admits the whole team: each member crosses once per run, another team is refused, a new dial admits the team again', () => {
   const rec = {};
   const key = E.gateKey(gate(true));
-  E.update([gate(true)], rec);
-  const first = E.claim([gate(true)], [player('a'), player('b')], rec);
+  const g = (run = 1) => ({ ...gate(true, 0, run), team: 'T1' });
+  E.update([g()], rec);
+  assert.equal(rec[key].team, 'T1', 'the gate\'s team is its controller owner\'s');
+  const crowd = [player('a', { team: 'T1' }), player('b', { team: 'T1' }), player('x', { team: 'T2' })];
+  const first = E.claim([g()], crowd, rec);
   assert.equal(first.id, 'a');
-  rec[first.key].used = true;
-  assert.equal(E.claim([gate(true)], [player('b')], rec), null);
-  assert.equal(E.update([gate(true)], rec), false, 'still the same run');
-  assert.equal(rec[key].run, 1);
-  assert.equal(E.update([gate(false)], rec), true, 'closing (a pause) is recorded');
-  assert.equal(E.update([gate(true)], rec), true, 'resuming reopens the record');
-  assert.equal(rec[key].run, 1, 'a resume is not a new run');
-  assert.equal(rec[key].used, true, 'a resume keeps the used flag: one crossing per dial');
-  assert.equal(E.claim([gate(true)], [player('b')], rec), null);
-  assert.equal(E.update([gate(true, 0, 2)], rec), true, 'a new recipe start is a new run');
-  assert.equal(rec[key].run, 2);
-  assert.equal(rec[key].used, false);
-  assert.equal(E.claim([gate(true, 0, 2)], [player('b')], rec).id, 'b');
+  E.cross(rec, first.key, first.id, first.team);
+  const second = E.claim([g()], crowd, rec);
+  assert.equal(second.id, 'b', 'a second member of the team crosses in the same run');
+  E.cross(rec, second.key, second.id, second.team);
+  assert.deepEqual(Array.from(rec[key].used), ['a', 'b']);
+  assert.equal(E.claim([g()], crowd, rec), null, 'both members have crossed; the other team is never admitted');
+  assert.equal(E.claim([g()], [player('x', { team: 'T2' })], rec), null, 'a player of another team is refused');
+  assert.equal(E.update([g()], rec), false, 'still the same run');
+  assert.equal(E.update([g(2)], rec), true, 'a new dial is a new run');
+  assert.deepEqual(Array.from(rec[key].used), []);
+  assert.equal(E.claim([g(2)], [player('a', { team: 'T1' })], rec).id, 'a', 'the team crosses again');
+  assert.equal(E.claim([g(2)], [player('x', { team: 'T2' })], rec), null, 'still refused');
 });
-test('records survive a JSON round trip (the persisted form) and each gate has its own run', () => {
+
+test('a solo player crosses once per run, as a team of one', () => {
   const rec = {};
-  E.update([gate(true, 0), gate(true, 50)], rec);
-  rec[E.gateKey(gate(true, 0))].used = true;
+  E.update([gate(true)], rec);
+  const first = E.claim([gate(true)], [player('solo')], rec);
+  assert.equal(first.id, 'solo');
+  assert.equal(first.team, 'solo', 'no team: the player is a team of one');
+  E.cross(rec, first.key, first.id, first.team);
+  assert.equal(E.claim([gate(true)], [player('solo')], rec), null);
+  E.update([gate(true, 0, 2)], rec);
+  assert.equal(E.claim([gate(true, 0, 2)], [player('solo')], rec).id, 'solo');
+});
+
+test('a gate whose controller has no owner takes the team of the first player who crosses', () => {
+  const rec = {};
+  const g = (run = 1) => ({ ...gate(true, 0, run), team: 'server' });
+  E.update([g()], rec);
+  assert.equal(rec[E.gateKey(g())].team, '', 'no team until someone crosses');
+  const first = E.claim([g()], [player('a', { team: 'T1' }), player('x', { team: 'T2' })], rec);
+  assert.equal(first.id, 'a');
+  assert.equal(E.update([g()], rec), false, 'the update does not undo it');
+  E.cross(rec, first.key, first.id, first.team);
+  assert.equal(rec[first.key].team, 'T1');
+  assert.equal(E.update([g()], rec), false, 'a server-owned gate keeps the first crosser\'s team');
+  assert.equal(E.claim([g()], [player('x', { team: 'T2' })], rec), null);
+  assert.equal(E.claim([g()], [player('b', { team: 'T1' })], rec).id, 'b');
+  E.update([g(2)], rec);
+  assert.equal(rec[first.key].team, '', 'a new run clears the first crosser\'s team');
+  assert.equal(E.claim([g(2)], [player('x', { team: 'T2' })], rec).id, 'x');
+});
+
+test('a pause and resume keeps the run\'s crossings; a vanished gate closes the record', () => {
+  const rec = {};
+  const key = E.gateKey(gate(true));
+  const g = (open = true, run = 1) => ({ ...gate(open, 0, run), team: 'T1' });
+  E.update([g()], rec);
+  E.cross(rec, key, 'a', 'T1');
+  assert.equal(E.update([g(false)], rec), true, 'closing (a pause) is recorded');
+  assert.equal(E.update([g()], rec), true, 'resuming reopens the record');
+  assert.equal(rec[key].run, 1, 'a resume is not a new run');
+  assert.deepEqual(Array.from(rec[key].used), ['a'], 'a resume keeps who crossed');
+  assert.equal(E.claim([g()], [player('a', { team: 'T1' })], rec), null);
+  assert.equal(E.claim([g()], [player('b', { team: 'T1' })], rec).id, 'b');
+});
+
+test('records survive a JSON round trip (the persisted form) and each gate has its own run and team', () => {
+  const rec = {};
+  const g = (x) => ({ ...gate(true, x), team: 'T' + x });
+  E.update([g(0), g(50)], rec);
+  E.cross(rec, E.gateKey(g(0)), 'a', 'T0');
   const back = JSON.parse(JSON.stringify(rec));
-  assert.equal(E.claim([gate(true, 0)], [player('a')], back), null, 'a restart does not reopen a used opening');
-  assert.equal(E.claim([gate(true, 50)], [player('a')], back).id, 'a', 'the other gate is its own opening');
-  assert.equal(E.update([gate(true, 0), gate(true, 50)], back), false, 'an opening that was open before the restart is the same run');
+  assert.equal(E.claim([g(0)], [player('a', { team: 'T0' })], back), null, 'a restart does not let the same player cross again');
+  assert.equal(E.claim([g(0)], [player('b', { team: 'T0' })], back).id, 'b', 'a teammate still can');
+  assert.equal(E.claim([g(50)], [player('a', { team: 'T50' })], back).id, 'a', 'the other gate is its own opening and team');
+  assert.equal(E.update([g(0), g(50)], back), false, 'an opening that was open before the restart is the same run');
+});
+
+test('a record from before per-team dials (a boolean used, no team) becomes a fresh list', () => {
+  const key = E.gateKey(gate(true));
+  const rec = { [key]: { run: 1, open: true, used: true } };
+  E.update([{ ...gate(true), team: 'T1' }], rec);
+  assert.deepEqual(Array.from(rec[key].used), []);
+  assert.equal(rec[key].team, 'T1');
 });
 
 test('a gate that vanishes from the list while open is closed in the record', () => {
@@ -109,6 +166,20 @@ test('the lang has the title, subtitle and six pages that read as the design tex
   const doc = fs.readFileSync(path.join(root, 'docs', 'eras', 'maxplus.md'), 'utf8');
   const text = /\*\*The ending text\*\*[^\n]*\n\n> ([^\n]+)/.exec(doc)[1];
   assert.equal(pages.join(' '), text);
+});
+
+test('B13-DIAL source: the gate entry carries the owner\'s team, the dial and the bank display read that team\'s store, the relay hatches are tracked under a team', () => {
+  const hs = read('startup_scripts', 'grindless', 'maxplus', 'hyperstargate.js');
+  assert.match(hs, /team: teamOf\(m\)/);
+  assert.match(hs, /dialCharge\(level\.getServer\(\), teamOf\(machine\)\)/);
+  assert.match(hs, /dialCharge\(level\.getServer\(\), teamOf\(controller\)\)/);
+  assert.doesNotMatch(hs, /dialCharge\(level\.getServer\(\)\)/);
+  const bank = read('startup_scripts', 'grindless', 'maxplus', 'capacitor_bank.js');
+  assert.match(bank, /teamOfBank\(/);
+  assert.doesNotMatch(bank, /W\.status\(level\.getServer\(\)\)/);
+  const relay = read('server_scripts', 'grindless', 'lib', 'relay_platforms.js');
+  assert.match(relay, /W\.track\(level, blockPos\(p\), team \? String\(team\) : 'server'\)/);
+  assert.match(relay, /teamOfRing\(machine\)/);
 });
 
 test('the pack registers no Spanish and the gated fixtures are off by default', () => {
