@@ -13,11 +13,20 @@ GregTech Modern 7.5.3 pack (Minecraft 1.20.1, Forge): nothing is gathered by han
 2. Difficulty comes first from complexity (steps, conditions, multiblocks, crossing lines), and quantity is also high and expensive, for items and fluids alike, above all in key recipes and final items. Up to LV, costs are only reviewed (incoherent or absurdly cheap recipes get fixed); MV to MAX scale steeply per era; MAX+ goes far beyond MAX. Every input stays automatable, and recipe times are never inflated in place of cost.
 3. Every byproduct has an honest destination: inert ones may be voided, dangerous ones contained, future uses stated. No silly recipes.
 4. Each era has at least one of our multiblocks that gains something: speed, throughput, a recipe impossible at small scale, or several steps in one.
-5. Quests are in English and never block recipes. Advanced eras get longer, more numerous chapters (Star Technology and GTNH style) that teach every new wafer, circuit generation, process and multiblock: what it is for, how it is made, what it needs, what it unlocks and how to automate it. Rewards are proportionate and never skip a production line.
+5. Quests are in English and never block recipes. Each era is one chapter, however large (owner, 2026-11-02). Every quest in it is reachable from its single start through real dependencies, with nothing loose. Advanced eras get longer chapters (Star Technology and GTNH style) that teach every new wafer, circuit generation, process and multiblock: what it is for, how it is made, what it needs, what it unlocks and how to automate it. Rewards are proportionate and never skip a production line.
 6. Where these rules conflict with GTM 7.5.3, GTM wins.
 7. Each era is clearly bigger: about x1.35 progression multiblocks per era from EV (EV 11, IV 15, LuV 20, ZPM 27, UV ~36). From UV on, growth is much faster, above all in process lines: as a guide, new lines and crossings with lines two or more eras back grow about x1.5 per era (ZPM 14 and 13, so UV about 21 and 20). These figures are guidance, not quotas: never pad to hit them. Each line is a real chain of at least 4 steps. Convenience versions do not count. Any era, Steam included, may be reworked when that makes the pack better (`docs/research/complexity.md`).
 8. Power is generous, never free: boilers x8 steam, generators x2 EU per fuel (GregTech Leisure style); later eras keep it with the same or better fuels and more complex plants. No energy from nothing.
 9. The pack stays huge and deeply industrial: remove pointless complexity, never meaningful complexity.
+10. A recipe needs a dimension only when it uses that place (owner, 2026-11-02):
+    - its ground, air, ice or fields;
+    - its microgravity, heat, light or radiation;
+    - a gravity well or phenomenon;
+    - air for combustion;
+    - or it is a launch, gate or relay there.
+
+    Anything made from shippable inputs is made anywhere: the Venusian Quantum Seed anywhere, the Hyperstargate at the black hole.
+11. Every recipe accepts any circuit of its tier (`#gtceu:circuits/<tier>`, universal circuits included) (owner, 2026-11-02). Only a circuit's own chain and research name a specific circuit.
 
 ## Map
 `pack/kubejs/startup_scripts/grindless/<era>/` registrations; `server_scripts/grindless/<era>/`, `integration/` recipes; `data/grindless/tables/` tables; `client_scripts/grindless/*_lang.js` names; `pack/config/ftbquests/` quests; `tools/test/` bench; `tools/analysis/` validator; `tools/quests/`, `tools/assets/` generators; `docs/eras/` design.
