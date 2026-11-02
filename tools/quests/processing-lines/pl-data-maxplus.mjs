@@ -196,26 +196,30 @@ const ROWS = {
     ["i", "grindless:kugelblitz_core", []],
     ["m", "gtceu:kugelblitz_forge", [3]],
     ["i", "grindless:hawking_drive", [4]],
-    ["i", "grindless:nuclear_clock", []],
+    ["i", "grindless:thorium_caf2_crystal", []],
     ["m", "gtceu:nuclear_clock_lab", [6]],
-    ["i", "grindless:thorium_nav_clock", [7]],
-    ["m", "gtceu:photonic_foundry", [8]],
-    ["i", "grindless:optical_nav_core", [9]],
-    ["i", "grindless:ig_relay_probe", [2, 5, 10]],
+    ["i", "grindless:nuclear_clock", [7]],
+    ["m", "gtceu:nuclear_clock_lab", [8]],
+    ["i", "grindless:thorium_nav_clock", [9]],
+    ["m", "gtceu:photonic_foundry", [10]],
+    ["i", "grindless:optical_nav_core", [11]],
+    ["i", "grindless:ig_relay_probe", [2, 5, 12]],
   ],
   P17: [
+    ["i", "gtceu:hastelloy_x_ingot", []],
+    ["m", "gtceu:bender", [0]],
+    ["i", "gtceu:hastelloy_x_plate", [1]],
+    ["m", "gtceu:single_crystal_foundry", [2]],
+    ["i", "grindless:sx_turbine_blade", [3]],
+    ["m", "gtceu:electron_beam_furnace", [4]],
+    ["i", "grindless:tbc_coated_blade", [5]],
     ["i", "gtceu:hastelloy_x_plate", []],
-    ["m", "gtceu:single_crystal_foundry", [0]],
-    ["i", "grindless:sx_turbine_blade", [1]],
-    ["m", "gtceu:electron_beam_furnace", [2]],
-    ["i", "grindless:tbc_coated_blade", [3]],
-    ["i", "gtceu:hastelloy_x_plate", []],
-    ["m", "gtceu:spark_plasma_sinterer", [5]],
-    ["i", "grindless:turbine_disc", [6]],
+    ["m", "gtceu:spark_plasma_sinterer", [7]],
+    ["i", "grindless:turbine_disc", [8]],
     ["i", "gtceu:stainless_steel_plate", []],
-    ["m", "gtceu:hot_strip_mill", [8]],
-    ["i", "grindless:pche_recuperator_foil", [9]],
-    ["i", "grindless:sco2_turbine_module", [4, 7, 10]],
+    ["m", "gtceu:hot_strip_mill", [10]],
+    ["i", "grindless:pche_recuperator_foil", [11]],
+    ["i", "grindless:sco2_turbine_module", [6, 9, 12]],
   ],
   P18: [
     ["i", "gtceu:hastelloy_c_276_plate", []],
@@ -323,18 +327,20 @@ const ROWS = {
     ["i", "gtceu:gadolinium_oxide_dust", []],
     ["m", "gtceu:hot_cell", [0]],
     ["i", "grindless:gd_absorber_tile", [1]],
-    ["i", "grindless:gd_hfb2_cermet", []],
+    ["i", "grindless:hafnium_sponge", []],
     ["m", "gtceu:spark_plasma_sinterer", [3]],
-    ["i", "grindless:graded_z_billet", [4]],
-    ["m", "gtceu:bound_matter_press", [2, 5]],
-    ["i", "grindless:laminated_containment_core", [6]],
-    ["f", "fluid:gtceu:kerr_condensate", [6], 1],
-    ["m", "gtceu:condensate_assembler", [7]],
-    ["i", "grindless:horizon_containment_plate", [9]],
-    ["i", "grindless:condensate_boil_off", [9], 1],
+    ["i", "grindless:gd_hfb2_cermet", [4]],
+    ["m", "gtceu:spark_plasma_sinterer", [5]],
+    ["i", "grindless:graded_z_billet", [6]],
+    ["m", "gtceu:bound_matter_press", [2, 7]],
+    ["i", "grindless:laminated_containment_core", [8]],
+    ["f", "fluid:gtceu:kerr_condensate", [8], 1],
+    ["m", "gtceu:condensate_assembler", [9]],
+    ["i", "grindless:horizon_containment_plate", [11]],
+    ["i", "grindless:condensate_boil_off", [11], 1],
   ],
   T2: [
-    ["i", "grindless:gd_absorber_tile", []],
+    ["x", "t1_2", []],
     ["m", "gtceu:beuv_scanner", [0]],
     ["i", "grindless:zone_plate_wafer", [1]],
     ["m", "gtceu:mtj_sputter_cluster", [2]],
@@ -1125,12 +1131,14 @@ const TAGS = {
 // one line at row y: main nodes at 2.5 columns per step, by-products beside their source
 function line(num, y) {
   const nodes = ROWS[num];
-  const key = (i) => `${num.toLowerCase()}_${i}`;
+  // an 'x' row is an alias for a node of an earlier row (its key is the id): the line continues from that node
+  const key = (i) => (nodes[i][0] === 'x' ? nodes[i][1] : `${num.toLowerCase()}_${i}`);
   const x = [];
   const dy = [];
   const slot = {};
   let col = 0;
-  nodes.forEach(([, , from, by], i) => {
+  nodes.forEach(([t, , from, by], i) => {
+    if (t === 'x') return;
     if (by) {
       const s = from[0];
       const k = (slot[s] = (slot[s] || 0) + 1);
@@ -1141,6 +1149,7 @@ function line(num, y) {
   });
   const used = new Set(nodes.flatMap(([, , from]) => from));
   return nodes.map(([t, id, from, by, peek], i) => {
+    if (t === 'x') return null;
     const px = x[i];
     const py = y + dy[i];
     if (t === 'l') return L(key(i), px, py, id);
@@ -1150,7 +1159,7 @@ function line(num, y) {
     if (by) opt.end = BYEND[shortId(id)] || 'To GTM chemistry';
     else if (!used.has(i)) opt.end = ENDS[num];
     return n(key(i), px, py, res, title(id), opt);
-  });
+  }).filter(Boolean);
 }
 
 // a tree row: the recipe's inputs stacked at x 0, the machine at 2.5 and the product at 5
