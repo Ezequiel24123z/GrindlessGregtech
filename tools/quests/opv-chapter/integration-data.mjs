@@ -9,7 +9,10 @@ const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.integration,
   filename: 'opv_integration',
   era: 'opv',
   role: 'integration',
@@ -43,7 +46,7 @@ export const QUESTS = [
     deps: ['ANTIH'], x: 2, y: 0,
     teach: {
       for: 'Matter and antimatter turned entirely into energy. The &6Annihilation Engine&r burns antihydrogen ice or an ACMF pellet with an antiproton stack. Gamma rays stop in &6Gamma Absorber Tiles&r, and a wall of &6TPV Panels&r turns the heat into current.',
-      needs: 'The engine, a ring of absorber tiles and a TPV wall, at home only, with OpV dynamo hatches. About half the energy leaves as neutrinos and is lost.',
+      needs: 'The engine, a ring of absorber tiles and a TPV wall, with OpV dynamo hatches. About half the energy leaves as neutrinos and is lost.',
       unlocks: 'The largest source at home, and a share of the gate\'s draw.',
       automate: 'Ice and stacks arrive by bus. Worn tiles go back to the hot cell for their metal.',
     },
@@ -293,3 +296,4 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

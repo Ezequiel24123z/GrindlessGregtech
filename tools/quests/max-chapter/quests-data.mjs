@@ -13,7 +13,10 @@ const ck = () => ({ type: 'checkmark' });
 const dim = (dimension) => ({ type: 'dimension', dimension });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.quests,
   order: 0,
   icon: 'gtceu:max_machine_casing',
   autofocus: 'START',
@@ -146,7 +149,7 @@ export const QUESTS = [
     key: 'J_LAUNCH', kind: 'reading', title: 'Seed Away', icon: 'grindless:nsc_belt_seed',
     deps: ['NSCSEED'], x: 26, y: 0,
     desc: [
-      'The gate slings the seed toward the cluster and keeps nothing: what was thrown does not come back. When it arrives, the gate can follow it.',
+      'The gate slings the seed toward the cluster and keeps its tier-tagged mainframes; what was thrown does not come back. When it arrives, the gate can follow it.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -199,3 +202,4 @@ export const QUESTS = [
     rewards: [xp(200)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

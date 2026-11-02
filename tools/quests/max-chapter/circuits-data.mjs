@@ -7,7 +7,10 @@
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.circuits,
   filename: 'max_circuits',
   era: 'max',
   role: 'circuits',
@@ -97,3 +100,4 @@ export const QUESTS = [
     'The &6MAX Energy Input Hatch&r, its &616 A&r version, the &6MAX Input Bus&r and the &6MAX Battery&r are built on the MAX hull. With them in place the OpV pair you have been using can retire; the big rows at Sgr A* run on two 16 A hatches.',
   ], [it('gtceu:max_energy_input_hatch'), it('gtceu:max_energy_input_hatch_16a'), it('gtceu:max_input_bus'), it('gtceu:max_battery')], 150),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

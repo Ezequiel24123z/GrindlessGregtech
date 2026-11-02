@@ -9,7 +9,10 @@
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.machines,
   filename: 'opv_machines',
   era: 'opv',
   role: 'machines',
@@ -172,3 +175,4 @@ export const QUESTS = [
     automate: 'Every input comes from the cluster by belt, so build it last and wire it to the rest.',
   }, [ROBUST, GRATING], 250),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

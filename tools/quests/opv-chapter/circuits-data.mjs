@@ -8,7 +8,10 @@
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.circuits,
   filename: 'opv_circuits',
   era: 'opv',
   role: 'circuits',
@@ -91,3 +94,4 @@ export const QUESTS = [
     automate: 'Boards and chips by ME; keep a small stock of what it returns.',
   }, [], [it('gtceu:opv_circuit_assembler')], 120),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

@@ -7,7 +7,10 @@
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.machines,
   filename: 'max_machines',
   era: 'max',
   role: 'machines',
@@ -127,3 +130,4 @@ export const QUESTS = [
     automate: 'It wears its panels and modules as it works: rework them in the solar array fab and the assembler.',
   }, [COIL], 150),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));
