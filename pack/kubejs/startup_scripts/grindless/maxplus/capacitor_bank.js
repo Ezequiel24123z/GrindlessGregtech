@@ -66,6 +66,16 @@
   }
 
   // the controller's lines: the bank's capacitors and why it does or does not count, then the network (server side only)
+
+  // the team whose store the bank's lines read (B13-DIAL, #238): the team the network tracks the bank for, else its machine owner's team (a bank
+  // not tracked yet), else none (the server network)
+  function teamOfBank(W, level, controller) {
+    var tracked = typeof W.teamAt === 'function' ? W.teamAt(level, controller.getPos()) : undefined
+    if (tracked !== undefined) return tracked
+    var T = G.teams
+    var owner = T && typeof T.ofMachine === 'function' ? String(T.ofMachine(controller)) : 'server'
+    return owner === 'server' ? undefined : owner
+  }
   function bankDisplay(controller, list) {
     try {
       if (!controller.isFormed()) return
@@ -82,7 +92,7 @@
       } else {
         list.add(Text.translate('grindless.machine.horizon_capacitor_bank.capacitors', String(info.capacitors), W.fmt(info.capacity)))
       }
-      var st = W.status(level.getServer(), typeof W.teamAt === 'function' ? W.teamAt(level, controller.getPos()) : undefined)
+      var st = W.status(level.getServer(), teamOfBank(W, level, controller))
       list.add(Text.translate('grindless.machine.horizon_capacitor_bank.network', String(st.banks), W.fmt(st.bankCapacity), W.fmt(st.stored)))
     } catch (e) {
       // display only
