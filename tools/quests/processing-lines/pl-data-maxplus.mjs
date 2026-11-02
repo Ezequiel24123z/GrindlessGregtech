@@ -335,6 +335,7 @@ const ROWS = {
     ["f", "fluid:gtceu:polarized_helium_3", [7]],
   ],
   T1: [
+    ["i", "gtceu:gadolinium_oxide_dust", []],
     ["m", "gtceu:hot_cell", [0]],
     ["i", "grindless:gd_absorber_tile", [1]],
     ["i", "grindless:hafnium_sponge", []],

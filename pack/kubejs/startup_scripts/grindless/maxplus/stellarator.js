@@ -34,12 +34,16 @@
   var FRAMES = 20
   var RING = 10
 
-  // x left to right, y bottom to top, z back to front. The floor carries the 15 part cells at the front edge; the walls are casing with glass bands;
+  // x left to right, y bottom to top, z back to front. The floor carries the 15 part cells at the front edge; the walls are casing with glass bands and
+  // the roof has a glass skylight ring above the vessel;
   // the vessel is a ring of atomic casing at mid height and 20 coil frames stand round it, one coil shell cell deep
   function stellaratorCell(x, y, z) {
     var m = MS.machine
     if (y === 0) return z === m.depth - 1 && Math.abs(x - 15) <= 7 ? 'X' : 'F'
-    if (y === m.height - 1) return 'F'
+    if (y === m.height - 1) {
+      var cr = Math.sqrt((x - 15) * (x - 15) + (z - 15) * (z - 15))
+      return cr >= 5.5 && cr <= 13.5 ? 'L' : 'F'
+    }
     if (x === 0 || x === m.width - 1 || z === 0 || z === m.depth - 1) {
       var along = x === 0 || x === m.width - 1 ? z : x
       return y >= 3 && y <= 7 && along >= 3 && along <= 27 && along % 4 !== 1 ? 'L' : 'F'
