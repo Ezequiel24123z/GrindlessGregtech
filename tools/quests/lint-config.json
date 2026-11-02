@@ -6,24 +6,29 @@
   "grid": 0.25,
   "eraChapters": {
     "_why": "One chapter per era (QB-0, docs/quests.md section 4b). enabled lists the era chapters (<era>_age) already rebuilt as one connected chapter: they get the connectivity rule (one start, everything reachable through dependencies inside the chapter) instead of root and isolated, and bridgeMaxEdge: a forward line between two sections may be up to that long (maxEdge still holds for every other line; through-node, crossing, overlap and backward stay on). QB-1 to QB-4 add their era here when its data passes. lint.mjs --merged-eras tries every era chapter as if listed.",
-    "enabled": [],
+    "enabled": ["maxplus_age"],
     "bridgeMaxEdge": 14.0
   },
   "limits": {
-    "_why": "Text limits per chapter role (docs/reforge/05_quest_design.md, section 3.2): quests that teach a new wafer, circuit, process, machine or plant need more room than the journey chapters. A chapter's role is its chapterRoles entry, else its file name suffix.",
+    "_why": "Text limits per chapter role (docs/reforge/05_quest_design.md, section 3.2): quests that teach a new wafer, circuit, process, machine or plant need more room than the journey chapters. A chapter's role is its chapterRoles entry, else its file name suffix. Since QB-0 each era is one chapter (<era>_age) holding its circuits, machines and integration sections, so every era chapter has the role era, the room those sections had (owner, 2026-11-02: chapters may be massive; AGENTS.md principle 5).",
     "default": { "maxWords": 70, "maxLines": 4 },
     "roles": {
       "circuits": { "maxWords": 120, "maxLines": 5 },
       "machines": { "maxWords": 120, "maxLines": 5 },
       "integration": { "maxWords": 120, "maxLines": 5 },
-      "capstone": { "maxWords": 120, "maxLines": 5 }
+      "capstone": { "maxWords": 120, "maxLines": 5 },
+      "era": { "maxWords": 120, "maxLines": 5 }
     },
-    "chapterRoles": { "max_horizon": "capstone", "maxplus_creative": "capstone", "maxplus_tree": "capstone", "maxplus_hyperstargate": "capstone" }
+    "chapterRoles": {
+      "steam_age": "era", "lv_age": "era", "mv_age": "era", "hv_age": "era", "ev_age": "era", "iv_age": "era", "luv_age": "era", "zpm_age": "era",
+      "uv_age": "era", "uhv_age": "era", "uev_age": "era", "uiv_age": "era", "uxv_age": "era", "opv_age": "era", "max_age": "era", "maxplus_age": "era",
+      "max_horizon": "capstone", "maxplus_creative": "capstone", "maxplus_tree": "capstone", "maxplus_hyperstargate": "capstone"
+    }
   },
   "maxRewardEntries": 6,
   "direction": { "default": "ltr" },
   "noRewardGroups": { "groups": ["Processing Lines"], "chapters": ["power"], "why": "The processing-line charts and the Power tab are reference: no rewards, nothing to claim (docs/quests.md, sections 17 and 18)." },
-  "noRewardQuests": { "ids": ["7CC0C382D16D561D"], "why": "Beyond the Horizon (maxplus_age_3, key ARRIVAL), the book's last quest: entering grindless:horizon_city gives nothing (docs/eras/maxplus.md, Quests); the arrival itself gives the credits and the epilogue (maxplus/ending.js)." },
+  "noRewardQuests": { "ids": ["7CC0C382D16D561D"], "why": "Beyond the Horizon (maxplus_age, key ARRIVAL), the book's last quest: entering grindless:horizon_city gives nothing (docs/eras/maxplus.md, Quests); the arrival itself gives the credits and the epilogue (maxplus/ending.js)." },
   "allowRoots": {
     "_why_pl": "Processing Lines (pl_*): every line starts from its own raw inputs, so a chart has one starting point per input. The charts are reference only: no quest outside the group depends on them (docs/quests.md, section 17).",
     "_why_power": "Power: every generator starts from its own fuel, so the tab has one starting point per fuel and per generator that burns nothing. It is reference only: no quest outside it depends on it (docs/quests.md, section 18).",

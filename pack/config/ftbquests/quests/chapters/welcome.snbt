@@ -165,8 +165,8 @@
 		{
 			dependencies: ["3BB2DAC36CB01A7B"]
 			description: [
-				"No vanilla ores spawn here. GregTech veins mix several metals, and a raw ore's EMI page shows its vein and depth."
-				"Claim Arrival's &6HV Prospector&r, a normal GregTech prospector delivered fully charged. Right-click to open its map: it scans the chunks around you, spends energy while open, and shows ore veins and fluid deposits on the grid. Sneak and right-click to switch between ore and fluid modes. Recharge it in an HV charger. Surface rocks still tell you what's underneath."
+				"No vanilla ores spawn here. GregTech veins mix several metals; a raw ore's EMI page shows its vein and depth."
+				"Arrival's &6HV Prospector&r is a normal GregTech prospector, fully charged. Right-click to open its map: it shows the ore veins and fluid deposits of the chunks around you and spends energy while open. Sneak and right-click to switch modes. Recharge it in an HV charger."
 			]
 			icon: "gtceu:prospector.hv"
 			id: "345C4D73090CB5E2"
