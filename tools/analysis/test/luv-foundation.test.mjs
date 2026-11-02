@@ -96,7 +96,10 @@ test('the forms LuV needs of existing GT materials: germanium plate and dense ti
   const hidden = readJson('pack/kubejs/data/grindless/tables/hidden_until.json');
   const ids = new Set(hidden.groups.flatMap((g) => g.items));
   for (const id of ['gtceu:germanium_plate', 'gtceu:dense_titanium_plate', 'gtceu:germanium_ingot', 'gtceu:titanium_plate']) assert.ok(!ids.has(id), `${id} is hidden`);
-  assert.ok(!hidden.groups.some((g) => g.material === 'germanium' || g.material === 'titanium'));
+  // titanium has no vein, so only its ore forms are hidden (until never; their last source left with Productive Bees, 2026-11-02)
+  for (const g of hidden.groups.filter((x) => x.material === 'germanium' || x.material === 'titanium')) {
+    for (const id of g.items) assert.match(id, /^gtceu:(crushed_|purified_|refined_|raw_|impure_|pure_)/, `${id}: only ore forms of ${g.material} may be hidden`);
+  }
 });
 
 test('hidden until its package lands: hidden_until.json and the obtain rules list the same A1 groups', () => {
