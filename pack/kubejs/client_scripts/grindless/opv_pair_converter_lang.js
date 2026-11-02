@@ -27,7 +27,7 @@
         ['tooltip.grindless.unsealed_positron_cell.1', 'Sealed with a fresh getter in the electron beam furnace (circuit 23).'],
 
         ['emi.grindless.info.magnetic_pair_converter.0',
-            'The seed plasma is UHV-A6\'s accumulator packed under a magnetar\'s field (circuit 5, positron accumulator): the converter runs only at SGR 1806-20 orbit. The gamma laser module times the field\'s pulse and wears out one run in sixteen; what the trap misses condenses back as an empty Penning trap nine times in ten.'],
+            'The seed plasma is UHV-A6\'s accumulator packed under a magnetar\'s field (circuit 5, positron accumulator): the seed plasma boils only at SGR 1806-20 orbit. The gamma laser module times the field\'s pulse and wears out one run in sixteen; what the trap misses condenses back as an empty Penning trap nine times in ten.'],
         ['emi.grindless.info.magnetic_pair_converter.2',
             'SGR 1806-20 has no absorber tile: the escaping electrons and the split gamma photons have no item here and are not voided into one, they simply leave the frame with the field\'s own losses.'],
         ['emi.grindless.info.magnetic_pair_converter.1',

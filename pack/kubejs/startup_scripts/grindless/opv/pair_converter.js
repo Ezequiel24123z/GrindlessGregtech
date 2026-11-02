@@ -116,8 +116,7 @@
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('grindless.machine.' + m.name + '.tooltip.1'),
-          Text.translate('grindless.machine.' + m.name + '.tooltip.2'),
-          Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.sgr1806_orbit'))
+          Text.translate('grindless.machine.' + m.name + '.tooltip.2')
         ])
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
     })

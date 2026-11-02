@@ -24,7 +24,6 @@
         },
         {
           "name": "dispose_negative_strangelets", "circuit": 3, "eut": 268435456, "duration": 400,
-          "site": "grindless:cygnus_x1_orbit",
           "itemsIn": [{"id": "grindless:negative_strangelet_residue", "count": 1}],
           "disposal": true
         }

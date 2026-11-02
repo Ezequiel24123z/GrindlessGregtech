@@ -175,8 +175,7 @@
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
-          Text.translate('gtceu.multiblock.parallelizable.tooltip'),
-          Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.terzan5_core'))
+          Text.translate('gtceu.multiblock.parallelizable.tooltip')
         ])
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
     })

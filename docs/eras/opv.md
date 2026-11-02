@@ -45,7 +45,7 @@ The owner's directive (2026-10-29) shapes the whole era:
 2. **The relay to SGR 1806−20.** A new warp gate mode c11, at Cygnus orbit on two UXV 16 A hatches (16 A x V[UXV] = 2^31, proven by UXV-S0), throws a `bulge_relay_seed`. The seed is made only from UXV parts: a pasta-strand magsail, a SHeQUID gyro and an FRC cartridge. It brakes on the bulge's interstellar medium with its magsail (Zubrin & Andrews 1991, JSR 28:197) and unfolds the SGR platform. This is UIV-B1's relay mechanism (DECISIONS.md:498); `grindless:sgr1806_orbit` opens as substage `opv-sgr`.
 3. **Chain matter.** At SGR, new modes of UXV's four pasta machines skim the magnetar's outer crust. Its Fe-56 and Ni-62/64 layers are real (Chamel & Haensel 2008, LRR 11:10); its chain structure in B ≫ B_q is real (Lai 2001, RMP 73:629), and keeping it outside the field is named fiction. The modes cage the crust in `grindless:cage_part`, draw `gtceu:chain_strand` wire and laminate `chain_lamina_stack`. The OpV hull is `gtceu:opv_machine_hull` = opv casing + chain strand cable + lamina stack. No OpV multiblock is needed yet: the hull and the first controllers run on GTM's assembly line with UXV 4 A hatches (4 x V[UXV] = V[OpV]).
 4. **Components and circuits.** The nine OpV component cores (lines 4-10) and the cosmic mainframe (an assembly joined on UEV's photonic integration hall from the parts of lines 13-16; lines 11-18 make the dies) come from new modes of older machines and chain matter only. The field-frozen press (machine 13, at SGR) makes `field_frozen_plate`; with the AlN power die (line 45) it gives the OpV energy hatches. The basic single-block machines follow.
-5. **Home and Cygnus.** At home: tetron arrays, gamma optics, the antihydrogen foundry, the strangelet vault and the annihilation engine. At Cygnus orbit: the jet beam line, antiproton source and decelerator, the strangelet distiller, the Kugelblitz forge and the Hawking collector. At SGR: the magnetic pair converter, the only maker of dense positron cells.
+5. **Where machines run.** Anywhere: tetron arrays, gamma optics, the antihydrogen foundry, the strangelet vault, the annihilation engine, the antiproton source and decelerator, the strangelet distiller, the Kugelblitz forge and the Hawking collector (shipped inputs only, so no place is needed). At Cygnus orbit: only the jet beam line (it takes the jet). At SGR: the magnetic pair converter, the only maker of dense positron cells.
 6. **Terzan 5.** Warp gate c12 throws a home-made `pathfinder_probe` (tetron array, XNAV unit, SHeQUID gyro, a Hawking drive) into the cluster. The pathfinder brakes on its Hawking drive, because globular clusters are too gas-poor for a magsail (Freire 2001, ApJL 557:L105), and opens `opv-terzan5`. There the debris harvester, the replication refinery and the von Neumann foundry turn debris into seeds. Every seed copy costs metal feedstock, sinter casing and a home-made vitamin kit. Each seed carries collector nodes into the swarm, whose light feeds the bulge collector.
 7. **The MAX gate.** Warp gate c13 holds 2^33 EU/t on two OpV 16 A hatches for 1,200 t *(tune)*. It consumes a Kugelblitz core and keeps the bulge light census, stable exotic matter, a tetron array, the superheavy census IV, the bulge chart and four cosmic mainframes. It writes `grindless:sgr_a_chart`, researches `gtceu:max_machine_casing` and grants `max`.
 
@@ -81,9 +81,9 @@ UXV ids reused here are only consumed or kept, never redefined. The UXV changes 
 Site rules (the UIV-B1 SITES table; every far-place machine refuses to form elsewhere, and its T1 forms it at its site):
 
 - **SGR orbit:** vacuum, orbit gravity *(S0-8)*. A magnetar's surface field is about 2 x 10^15 G (Kouveliotou 1998). Machines 12 and 13, and the four pasta machines' SGR modes (c3-c5), need that field. Chain matter, field-frozen billets and pair cascades are made only there; what leaves is frozen plate, wire and sealed cells.
-- **Cygnus X-1 orbit:** as UXV. Machines 6-11 are site-locked: the jet, the disk plasma and the place where a failed Kugelblitz seed is dumped are all there. A failed seed releases about 10^17 J as it evaporates; it is thrown into the hole, and the forge never runs at home.
+- **Cygnus X-1 orbit:** as UXV. Only the jet row and the disk-plasma synchrotron row are site-locked (SITE-D, owner rule: a condition stays only if the recipe uses the place). The forge, the antiproton line and the Hawking collector run anywhere. A failed Kugelblitz seed releases about 10^17 J as it evaporates and is lost.
 - **Terzan 5 core:** a debris-strewn body in the cluster core *(named fiction; the cluster, its populations and its pulsars are real)*. Gravity is low and there is no atmosphere *(S0-8)*. Machines 14-18 are site-locked. Real globular-cluster cores are gas-poor (Freire 2001), so a magsail cannot brake there; this is why c12 needs a Hawking drive.
-- **Home:** machines 1-5 and every component and circuit row. The annihilation engine runs only at home *(design choice: the TPV and absorber chain is home's and the engine's gammas need its shielding)*.
+- **Home:** machines 1-5 and every component and circuit row. The annihilation engine runs anywhere, still only through OpV dynamo hatches.
 
 ## Bridges and first arrivals
 
@@ -1411,7 +1411,7 @@ Every multiblock contract below shares this acceptance: the controller follows t
 - **Allowed (extra):** the rows above in their files; pinned tests `uiv-memories_cryostat`, `uev-isotopes`, `uev-composites`, `uev-electron_beam`, `uhv-crystals`, `uhv-photonics`, `uhv-propulsion`, `uv-accelerators`, `zpm-actinides`, `zpm-outer_chemistry`, `iv-features`, `ev-features`.
 - **References:** *3*, *5*-*8*; lines 26-28, 30-33; *Power*.
 - **Depends on:** D1, E1.
-- **Invariants:** the engine runs only at home (open question 12) with OpV dynamo hatches (1 A for c1, 4 A for c2); antiprotons only from Cygnus.
+- **Invariants:** the engine runs anywhere (open question 12, closed by SITE-D) with OpV dynamo hatches (1 A for c1, 4 A for c2); antiprotons only from the jet line.
 - **Pending:** deletes D1's and E1's entries naming B3. pendingUses: `gamma_absorber_tile` → D3.
 - **Acceptance:** as the wave; C1's balance for both engine rows is in 1.3-2.5x.
 - **Tests:** T0. T1: `gg_test_opv_annihilation`, band assigned by integrator. Doubt: engine c2 writes 2^30 EU/t into a 4 A OpV dynamo hatch as long for 1,200 t and wears the tile; machines 6-8 form at Cygnus.
@@ -1440,7 +1440,7 @@ Every multiblock contract below shares this acceptance: the controller follows t
 - **Allowed (extra):** none beyond *Common*.
 - **References:** *10*, *11*; line 37; *Power*; *Reserve for MAX*.
 - **Depends on:** B1, B3, D2, E1, UXV-B5.
-- **Invariants:** no rotation, superradiance, amplification or Sgr A* id (C1 checks); `kugelblitz_core` only at Cygnus.
+- **Invariants:** no rotation, superradiance, amplification or Sgr A* id (C1 checks); `kugelblitz_core` made by the forge anywhere.
 - **Pending:** deletes B1's, B3's, D2's (`stable_exotic_matter` → D3), E1's and A3's (`field_frozen_plate`) entries naming D3. pendingUses: `hawking_drive` → R1; `kugelblitz_core` → G1.
 - **Acceptance:** as the wave; the tooltip states the hole does not spin.
 - **Tests:** T0. T1: `gg_test_opv_kugelblitz`, band assigned by integrator. Doubt: both machines form at Cygnus, and collector c1 writes 2^30 EU/t as long while the core wears 1/64 per run.
@@ -1614,6 +1614,6 @@ Pairs that share a file (A1 ∥ A2, B3 ∥ D2) append rows to different circuits
 9. **Split B3 into home and Cygnus packages?** **Default: no**, one package with four commits; split only if the first T1 fails twice.
 10. **52 quests?** **Default: yes** *(tune)*.
 11. **The vitamin kit's contents?** **Default: `tetron_array` + `xnav_unit` + 2 robot arms + `hemt_amplifier`.**
-12. **The annihilation engine only at home?** **Default: yes**; antiprotons travel as stacks.
+12. **The annihilation engine only at home?** **Closed (SITE-D): no, it runs anywhere**; antiprotons travel as stacks.
 13. **`annihilation_shield_casing` owned by B3?** **Default: yes** (D3 reads it after B3).
 14. **Gate c12 without an FRC cartridge?** **Default: yes**; the Hawking drive is the consumable.

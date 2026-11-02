@@ -16,7 +16,7 @@
         ['grindless.machine.collector_node_works.tooltip.0',
             '\u00a77Makes collector nodes and packs them with a probe seed.'],
         ['emi.grindless.info.collector_node_works.0',
-            'The works runs only at Terzan 5 core. Circuits 1 and 2 draw Si alloy powder into ribbon and lay it on a silicate fraction as a PV film; circuit 3 joins two films, a node power transmitter and a cluster casing into a collector node.'],
+            'Only node deployment needs Terzan 5 core. Circuits 1 and 2 draw Si alloy powder into ribbon and lay it on a silicate fraction as a PV film; circuit 3 joins two films, a node power transmitter and a cluster casing into a collector node.'],
         ['emi.grindless.info.collector_node_works.1',
             'Circuit 4 packs four nodes and one probe seed into a deployed node pack. The pack is used up by the bulge collector; the spent nodes come back as Si alloy powder in the replication refinery (circuit 7), half of what they held.'],
 

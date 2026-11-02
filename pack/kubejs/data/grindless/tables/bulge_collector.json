@@ -4,13 +4,13 @@
     "collector_node_assembly": {
       "dataKey": "grindless_collector_node_assembly",
       "recipes": [
-        { "name": "node_si_ribbon", "circuit": 1, "eut": 268435456, "duration": 400, "site": true,
+        { "name": "node_si_ribbon", "circuit": 1, "eut": 268435456, "duration": 400,
           "itemsIn": [{ "id": "grindless:si_alloy_powder", "count": 2 }], "kept": [], "wear": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:si_ribbon", "count": 2 }], "fluidsOut": [] },
-        { "name": "node_pv_film", "circuit": 2, "eut": 268435456, "duration": 400, "site": true,
+        { "name": "node_pv_film", "circuit": 2, "eut": 268435456, "duration": 400,
           "itemsIn": [{ "id": "grindless:si_ribbon", "count": 2 }, { "id": "grindless:silicate_debris_fraction", "count": 1 }], "kept": [], "wear": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:pv_collector_film", "count": 1 }], "fluidsOut": [] },
-        { "name": "collector_node_assembly", "circuit": 3, "eut": 268435456, "duration": 400, "site": true,
+        { "name": "collector_node_assembly", "circuit": 3, "eut": 268435456, "duration": 400,
           "itemsIn": [{ "id": "grindless:pv_collector_film", "count": 2 }, { "id": "grindless:node_power_transmitter", "count": 1 }, { "id": "grindless:cluster_sinter_casing", "count": 1 }],
           "kept": [], "wear": [], "fluidsIn": [],
           "itemsOut": [{ "id": "grindless:collector_node", "count": 1 }], "fluidsOut": [] },

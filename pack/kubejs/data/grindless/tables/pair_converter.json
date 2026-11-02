@@ -17,7 +17,7 @@
         },
         {
           "_why": "machine 12 c2: the hot pair plasma is loaded back into an empty trap and let cool; what comes out is the unsealed cell the UEV electron beam furnace later seals with a fresh getter (tables/electron_beam.json c23).",
-          "name": "seal_positron_cell", "circuit": 2, "eut": 268435456, "duration": 800, "site": true,
+          "name": "seal_positron_cell", "circuit": 2, "eut": 268435456, "duration": 800,
           "itemsIn": [{ "id": "grindless:empty_penning_trap", "count": 1 }],
           "kept": [],
           "wear": [],
