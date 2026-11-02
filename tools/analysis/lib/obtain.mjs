@@ -37,7 +37,8 @@ function rawOreIds(dump, material) {
   return any.sort();
 }
 
-/** Raw ore derived for buildModel: the audit's world, every registered machine, recipe types with no GT machine
+/**
+ * Config derived for buildModel: the audit's world, every registered machine, recipe types with no GT machine
  * (crafting table, furnace, other mods) with no condition, conditions ignored except dimension (dim:<id> key),
  * each fluid's buckets.
  */
@@ -97,7 +98,9 @@ export function obtainConfig(dump, raw) {
   }
 
   const extraFacts = reach.map((d) => 'dim:' + d);
-  const nbtTyped = asArray(ob.nbtTyped); with no GT machine: made by hand or with another mod's block (obtainable); GT's types need their machine
+  const nbtTyped = asArray(ob.nbtTyped);
+
+  // 5) recipe types with no GT machine: made by hand or with another mod's block (obtainable); GT's types need their machine
   const aliases = raw.typeAliases || {};
   const gtTypes = new Set(dump.recipeTypes.keys());
   const freeTypes = new Set(asArray(raw.unconditionalTypes));
