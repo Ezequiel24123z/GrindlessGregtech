@@ -54,7 +54,8 @@ function describeOptions(cfg) {
     `Base resources: ${list(b.items)} (items); unproduced items ${list(b.unproducedItems)}; unproduced fluids ${list(b.unproducedFluids)}.`,
     `Weights: ${(b.weights || []).map((w) => `${w.match} = ${w.weight}`).join('; ') || 'all 1'}. Free resources (weight 0): ${list(b.free)}.`,
     'The tree follows the solver: ONE recipe per item (the cheapest), tag inputs take the cheapest alternative, non-consumed inputs and circuits cost nothing.',
-    'Creative stand-ins (<code>grindless:creative_*</code>, <code>gtceu:creative_*</code>) are free base resources: counted in the creative total, priced at 0.',
+    'Creative items are crafted by MAX+ (hyper_assembly_array/creative_*): they are priced through their recipes and expanded like any part, and counted in the creative total.',
+    'FINDING: grindless:horizon_shard is never craftable (4 come from the Welcome quest); it is an assumed base here. SITE-E makes it a non-consumed catalyst in the two creative-core rows.',
     `Assumed base (no recipe in the dump makes them): ${ASSUMED_BASE.join(', ')}, free.`,
     'The dial branch counts one dial run and its inputs; the recharge loop (spent dial charge) is not included.',
   ];
@@ -69,9 +70,6 @@ function main() {
   if (!specs.length) throw new Error('give --preset or at least one --target');
 
   const cfg = JSON.parse(fs.readFileSync(path.join(here, 'cost_matrix.json'), 'utf8'));
-  // Creative stand-ins have no recipe by design: they are base resources here, free (a count, not a cost), so the recipes that take them price.
-  cfg.base.items = [...(cfg.base.items || []), 'grindless:creative_*', 'gtceu:creative_*'];
-  cfg.base.free = [...(cfg.base.free || []), 'grindless:creative_*', 'gtceu:creative_*'];
   // No recipe in the dump makes these; the Hyperstargate base needs them, so they are assumed obtainable (see the handoff).
   const assumed = args.assumeBase || ASSUMED_BASE;
   cfg.base.items.push(...assumed);
@@ -116,7 +114,7 @@ function main() {
 
   const comparison = preset ? compareRows(res, preset) : [];
   const S = res.summary;
-  console.log(`${res.name}: crafts ${Math.round(S.crafts)}, EU ${S.eu.toExponential(3)}, types ${S.recipeTypes}, items ${S.distinctItems} (${S.craftedItems} crafted, ${S.baseItems} base), creative ${S.creativeItems}`);
+  console.log(`${res.name}: parts crafted ${Math.round(S.partsCrafted)}, all runs ${Math.round(S.crafts)}, EU ${S.eu.toExponential(3)}, types ${S.recipeTypes}, items ${S.distinctItems} (${S.craftedItems} crafted, ${S.baseItems} base), creative ${S.creativeItems}`);
   console.log(`consistency ${res.consistency.ok ? 'ok' : 'MISMATCH'}; unreachable ${res.checks.unreachable.length}; cycles ${res.checks.cycles.length}; problems ${res.checks.problems.length}; solver ${res.checks.solver.converged ? 'converged' : 'NOT converged'}`);
   for (const c of comparison) console.log(`  ${c.flag ? '!' : ' '} ${c.id.padEnd(10)} ${String(c.value === null ? '-' : Number(c.value.toPrecision(4))).padStart(12)} docs ${c.docs}${c.gap === null ? '' : ` (${(100 * c.gap).toFixed(1)}%)`}`);
   for (const p of res.checks.problems.slice(0, 10)) console.log(`  problem: ${p}`);

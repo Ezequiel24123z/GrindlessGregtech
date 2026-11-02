@@ -90,7 +90,7 @@ function groups(){
  bars('types',D.types.slice(0,22),f,function(r){return short(r.name)})}
 function setSub(s){sub=s;[].forEach.call(document.querySelectorAll('#sub button'),function(b){b.className=b.getAttribute('data-s')==s?'on':''});groups()}
 function init(){
- var S=D.summary,cards=[['Crafts (runs)',fmt(S.crafts)],['EU',fmt(S.eu)],['Machine time (ticks, summed)',fmt(S.timeTicks)],['Recipe types',fmt(S.recipeTypes)],
+ var S=D.summary,cards=[['Parts crafted (runs, no material forms or fluids)',fmt(S.partsCrafted)],['All runs (mB-scale batches dominate)',fmt(S.crafts)],['EU',fmt(S.eu)],['Machine time (ticks, summed)',fmt(S.timeTicks)],['Recipe types',fmt(S.recipeTypes)],
   ['Distinct items',fmt(S.distinctItems)+' ('+fmt(S.craftedItems)+' crafted)'],['Base resources',fmt(S.baseItems)+' kinds'],['Base units',fmt(S.baseUnits)],['Creative items',fmt(S.creativeItems)]];
  $('cards').innerHTML=cards.map(function(c){return '<div class="card"><b>'+c[1]+'</b><span>'+c[0]+'</span></div>'}).join('');
  var C=D.consistency;$('cons').innerHTML='Root of the tree vs the summary: base '+fmt(C.base.tree)+' / '+fmt(C.base.summary)+', EU '+fmt(C.eu.tree)+' / '+fmt(C.eu.summary)+', crafts '+fmt(C.crafts.tree)+' / '+fmt(C.crafts.summary)+' — <b class="'+(C.ok?'ok':'bad')+'">'+(C.ok?'they match':'MISMATCH')+'</b>';

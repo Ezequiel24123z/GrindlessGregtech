@@ -142,6 +142,15 @@ export function cheapestOf(model, candidates) {
  *   targets: [{label, kind:'item'|'recipe', key, entries?: [{key, qty}]}]   (an item target has entries; a recipe target a recipe id)
  *   name, eraOf(recipe) -> era name, machineOf(type) -> string, isCreative(key), maxNodes
  */
+const MATERIAL_SUFFIX = /_(ingot|dust|nugget|plate|dense_plate|foil|wire|rod|ring|round|gear|bolt|screw|spring|gem|lens|crushed_ore|ore)$/;
+const MATERIAL_PREFIX = /^(crushed|purified|refined|centrifuged|impure|pure)_/;
+/** A material form (ingot, dust, plate, wire...) or a fluid: not a "part" for the headline count. */
+export function isMaterialForm(key) {
+  if (key.startsWith('fluid:')) return true;
+  const path = key.slice(key.indexOf(':') + 1);
+  return MATERIAL_SUFFIX.test(path) || MATERIAL_PREFIX.test(path);
+}
+
 export function buildCostTree(o) {
   const { model, weight, recipes, targets } = o;
   const fluidUnitMb = o.fluidUnitMb || 1000;
@@ -350,7 +359,12 @@ export function buildCostTree(o) {
   const types = [...typeStats.values()].sort((a, b) => b.crafts - a.crafts || (a.name < b.name ? -1 : 1));
   const eras = [...eraStats.values()].sort((a, b) => b.crafts - a.crafts || (a.name < b.name ? -1 : 1));
   const creative = itemRows.filter((r) => r.creative && r.count > 0).map((r) => ({ key: r.key, count: r.count })).sort((a, b) => (a.key < b.key ? -1 : 1));
+  const partsCrafted = crafted.reduce((s, r) => {
+    const main = byId.get(r.recipe)?.outputs[0]?.key;
+    return main && !isMaterialForm(main) ? s + r.runs : s;
+  }, 0) + branches.reduce((s, b) => s + (b.recipe && b.recipe.outputs[0] && !isMaterialForm(b.recipe.outputs[0].key) ? b.own.crafts : 0), 0);
   const summary = {
+    partsCrafted,
     crafts: totals.crafts, eu: totals.eu, timeTicks: totals.time, baseUnits: totals.base,
     recipeTypes: types.length, distinctItems: itemRows.length, craftedItems: crafted.length, baseItems: bases.length,
     creativeItems: creative.reduce((s, c) => s + c.count, 0),
