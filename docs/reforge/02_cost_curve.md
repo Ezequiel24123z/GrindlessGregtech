@@ -278,7 +278,7 @@ Single-producer inputs (SMD wraps, crystal chips, kanthal coils, catalyst mixes,
 
 ## Band C (LuV, ZPM, UV) (P2-C)
 
-Tables `luv.json`, `zpm.json` and `uv.json` are on (bands A, B and C together). "Before" numbers come from the batch dump of 7b28eac4 (`7b28eac45ec6`: LD-LV2, LD-ZP2, MX-S1/S3/S4, RF-3Q, RF-3R; bands A and B applied). "After" numbers come from the T1 dump of a pack copy of this branch (`/var/lib/grindless/dumps/p2-c`, commit 35f8ce22), reachability tier max: gate 1063/1065 (+1 warning), auto 401/401, eras 10/10. The gate FAIL is `Site: the stellar elevator ... only at Cygnus X-1` (`grindless:plasma_mass_filtering/reconnection_plasmoid_return` also runs in `gcyr:black_hole_orbit`), a MAX recipe outside this package.
+Tables `luv.json`, `zpm.json` and `uv.json` are on (bands A, B and C together). "Before" numbers come from the batch dump of 7b28eac4 (`7b28eac45ec6`: LD-LV2, LD-ZP2, MX-S1/S3/S4, RF-3Q, RF-3R; bands A and B applied). "After" numbers come from the T1 dump of a pack copy of this branch (`/var/lib/grindless/dumps/p2-c`, commit 59023fa1), reachability tier max: gate 1063/1065 (+1 warning), auto 401/401, eras 10/10. The gate FAIL is `Site: the stellar elevator ... only at Cygnus X-1` (`grindless:plasma_mass_filtering/reconnection_plasmoid_return` also runs in `gcyr:black_hole_orbit`), a MAX recipe outside this package.
 
 ### Factors and core index (item = fluid)
 
@@ -327,7 +327,7 @@ Every raised LuV, ZPM and UV input has a producer in the T1 dump (reachability a
 
 ## Band D (UHV, UEV, UIV) (P2-D)
 
-Tables `uhv.json`, `uev.json` and `uiv.json` are on (bands A to D together). "Before" numbers come from the batch dump `4d2cd154de6d` (bands A to C on). "After" numbers come from the T1 dump of a pack copy of this branch (`/var/lib/grindless/dumps/p2-d`, commit ca341a89; bench run `20261101-121254-server-f78`), reachability tier max: gate 1064/1065 (+1 warning, the optional `gcyr:keycard`), auto 401/401, eras 10/10, verdict PASS.
+Tables `uhv.json`, `uev.json` and `uiv.json` are on (bands A to D together). "Before" numbers come from the batch dump `4d2cd154de6d` (bands A to C on). "After" numbers come from the T1 dump of a pack copy of this branch (`/var/lib/grindless/dumps/p2-d`, commit e837601f; bench run `20261101-121254-server-f78`), reachability tier max: gate 1064/1065 (+1 warning, the optional `gcyr:keycard`), auto 401/401, eras 10/10, verdict PASS.
 
 ### Reconciling the two paths
 

@@ -1,6 +1,6 @@
 # UIV S0: spikes
 
-Bench results for UIV-S0 (S0-8 is not here: folded into UIV-M1's T1). Base: v0.12.0 candidate (`a64c33dd`). All runs on the Linux VM; run ids are
+Bench results for UIV-S0 (S0-8 is not here: folded into UIV-M1's T1). Base: v0.12.0 candidate (`7c20bf3f`). All runs on the Linux VM; run ids are
 directories under the session's `test-runs\`. Throwaway ids are `gtceu:gg_uiv_s0_*`; UIV ids were registered in the overlay only, with
 `highTierContent` off (`pack/config/gtceu.yaml` untouched). KubeJS errors from our scripts in the enabled runs: 0.
 

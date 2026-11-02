@@ -2,11 +2,11 @@
 
 Package RF-5A (#97), Project Reforge Phase 5, 2026-11-01. This document decides the shape of the v1.0.0 quest book, era by era, and cuts Phase 5 into work packages. It changes no chapter and no generator. Every Phase 5 package reads its row in section 5, the era's row in section 2, and the rules of section 3; nothing else here is required reading.
 
-Sources: `AGENTS.md` rules 5 and 7; `docs/quests.md` (sections cited by number); `docs/research/quest-books.md` sections 3 to 8; each era doc's *Quests*, *Our multiblocks* (MAX and MAX+: *Machines*), *Older machines, new modes*, *Power*, *AE2* and *New process lines* sections; the generators in `tools/quests/`; the quest lint of the integration branch at `7f0e8473` (run on the VM, below).
+Sources: `AGENTS.md` rules 5 and 7; `docs/quests.md` (sections cited by number); `docs/research/quest-books.md` sections 3 to 8; each era doc's *Quests*, *Our multiblocks* (MAX and MAX+: *Machines*), *Older machines, new modes*, *Power*, *AE2* and *New process lines* sections; the generators in `tools/quests/`; the quest lint of the integration branch at `c4aee05a` (run on the VM, below).
 
 ## 1. Inventory
 
-Counts are from `node tools/quests/lint.mjs` on the VM at `7f0e8473` (run `exec-20261101-103742-1756400`, 0 errors, 10 warnings); they match `GG_QUESTS_EXPECTED` (`tools/test/overlay/kubejs/server_scripts/gg_test_quests.js:62-103`). "Hand" = the SNBT is the source, edited by hand. "Gen" = a generator in `tools/quests/` writes it from data.
+Counts are from `node tools/quests/lint.mjs` on the VM at `c4aee05a` (run `exec-20261101-103742-1756400`, 0 errors, 10 warnings); they match `GG_QUESTS_EXPECTED` (`tools/test/overlay/kubejs/server_scripts/gg_test_quests.js:62-103`). "Hand" = the SNBT is the source, edited by hand. "Gen" = a generator in `tools/quests/` writes it from data.
 
 ### 1.1 Progression and Welcome
 

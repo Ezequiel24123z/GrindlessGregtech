@@ -48,7 +48,7 @@ The MAX voltage is V[MAX] = 2,147,483,648 (2^31), a `long` (GTValues.java:60-61)
 
 ## Inherited, as built
 
-| Inherited | From | State at 8c765141 |
+| Inherited | From | State at f24515b5 |
 |---|---|---|
 | Warp gate (`gtceu:warp_gate`, uhv/gate.js:40), `tables/gate.json` c1-10 (c10 at 2,147,483,648 EU/t, a long in JSON) | UHV-UXV | merged |
 | Gate c11-c13, `sgr_a_chart`, `max` grant, `gtceu:max_machine_casing` research | OpV-A0, R1, G1 | to come (opv.md) |

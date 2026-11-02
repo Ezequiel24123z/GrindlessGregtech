@@ -51,7 +51,7 @@ The owner's directive (2026-10-29) shapes the whole era:
 
 ## Inherited, as built
 
-| Inherited | From | State at eb9568fc |
+| Inherited | From | State at 30ac384a |
 |---|---|---|
 | Warp gate (`gtceu:warp_gate`, uhv/gate.js:40), c10, `bulge_chart` (uxv/foundation.js:134), the `opv` grant | UXV-B6 | to come (design: uxv.md:830-846) |
 | Pasta extractor, phase sorter, draw bench, laminator (uxv/vela_pasta.js:41, :49, :57, :65), `lasagna_plate`, `pasta_core_sample` | UXV-B4 | merged |

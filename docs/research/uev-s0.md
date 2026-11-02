@@ -1,6 +1,6 @@
 # UEV S0: spikes
 
-Bench results for UEV-S0 (S0-10 is not here: it runs after MEGA). Base: v0.11.0 content (fb4ce5d). All runs on the Linux VM; run ids are
+Bench results for UEV-S0 (S0-10 is not here: it runs after MEGA). Base: v0.11.0 content (0e228421). All runs on the Linux VM; run ids are
 directories under the session's `test-runs\`. Throwaway ids are `gtceu:gg_uev_s0_*`; every UEV id was registered in the overlay only, with
 `highTierContent` off (`pack/config/gtceu.yaml` untouched).
 

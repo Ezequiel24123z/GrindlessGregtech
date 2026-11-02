@@ -2,7 +2,7 @@
 
 Diagnosis only: no gameplay change, nothing under `pack/` touched. Judged against the owner's NEW philosophy (Reforge brief): costs go up (quantity high and expensive, items and fluids; LV review only, MV to MAX full rebalance, every input automatable, no inflated times); quests longer and more numerous in advanced eras and each era teaches its wafers, circuits, processes and multiblocks; the pack stays huge and industrial (remove pointless complexity, never meaningful); no manual grind, every byproduct has an honest destination; no save-compatibility rules.
 
-**Evidence base.** Baseline dump `v0.17.0-max` (run 20261031-224215-server-5aa, commit 63fd5d16, MAX reachability PASS: gate 1063/1064 +1 warning, auto 401/401, eras 10/10). Existing audits were rerun on it (obtain pass, recipe-cycles, recipe-quality, process-audit, structure-quality, emi-coverage, quest lint); no new bench dump. New: `tools/analysis/census.mjs` (counts and the lists below). Full lists live in `docs/reforge/data/00_*.csv|json`; this file cites them instead of repeating them.
+**Evidence base.** Baseline dump `v0.17.0-max` (run 20261031-224215-server-5aa, commit 66b956d7, MAX reachability PASS: gate 1063/1064 +1 warning, auto 401/401, eras 10/10). Existing audits were rerun on it (obtain pass, recipe-cycles, recipe-quality, process-audit, structure-quality, emi-coverage, quest lint); no new bench dump. New: `tools/analysis/census.mjs` (counts and the lists below). Full lists live in `docs/reforge/data/00_*.csv|json`; this file cites them instead of repeating them.
 Command: `node tools/analysis/census.mjs --dump <dump> --errors <run/kubejs-errors.txt>`.
 
 ## 1. Counts per era

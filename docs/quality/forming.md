@@ -8,7 +8,7 @@ Proof that every multiblock our startup scripts register forms from the first sh
 - Timing: the whole sweep takes about 48 s in-game, about 216 s wall including boot. One `gg_test_form_sweep_all` run fits the 600 s budget; no chunking needed (`next=` cursor exists anyway).
 - Conditional multiblocks: none found. Our scripts have no dimension or cleanroom forming conditions (those are recipe-level only), so there are no NOTE rows.
 
-## Result (main 2e54da00 + this branch)
+## Result (main c2413a5d + this branch)
 Run `20261029-040717-server`: **234 PASS, 0 FAIL, 0 NOTE** (`DONE|failures=0 ids=234`).
 All pass via an explicit `checkPatternWithLock()` + `onStructureFormed()` call; the previews match the patterns.
 

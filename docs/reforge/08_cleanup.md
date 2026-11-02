@@ -1,6 +1,6 @@
 # Phase 8: cleanup triage
 
-Input for Phase 8 (Project Reforge). Every finding of the census, the process audit, the recipe-quality audit and the assets audit, plus the Phase 8 items of `docs/reforge/00_diagnosis.md` (3.2 and 3.5), is classed as **D** (real defect), **FP** (tool false positive) or **I** (intentional). All tool output was produced on the VM at base `e31bed6` (written under `/tmp/p8`, not in the repo). XP-G1 (#152), XP-Z1b and XP-C1 were in flight, so MAX+ rows are marked **P** (pending: re-run after those land) instead of being classed.
+Input for Phase 8 (Project Reforge). Every finding of the census, the process audit, the recipe-quality audit and the assets audit, plus the Phase 8 items of `docs/reforge/00_diagnosis.md` (3.2 and 3.5), is classed as **D** (real defect), **FP** (tool false positive) or **I** (intentional). All tool output was produced on the VM at base `28da530c` (written under `/tmp/p8`, not in the repo). XP-G1 (#152), XP-Z1b and XP-C1 were in flight, so MAX+ rows are marked **P** (pending: re-run after those land) instead of being classed.
 
 Counts are of tool rows. Where a row group is classed as a whole, the count is approximate (`~`).
 

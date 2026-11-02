@@ -71,13 +71,13 @@ missing inventory and render proof. Default, global/server and home-PC caps rema
 ### Current integration blocker and native result
 
 The single approved exclusive 8G run, `20261029-021359-client-a24`, used the candidate rebased onto
-`e5fb301c`. All VM slot locks were absent before launch; `-Slots 1` held the existing exclusive semaphore.
+`d96a88a7`. All VM slot locks were absent before launch; `-Slots 1` held the existing exclusive semaphore.
 The runner records `Xmx=8G`, an 1,800-second ceiling and a 12,288 MB process-scope cap. It completed
 after 212 native seconds with **no OOM or stack-mutation messages**. Player search was not changed.
 
 The strengthened audit correctly **fails** on a different global preview failure introduced by the
 integrated structures package: `pack/kubejs/startup_scripts/grindless/zpm/outer_chemistry.js:113`
-passes `Pat.frame(['tungstensteel'])` (commit `d69ed138`). This is the only such quoted frame-material
+passes `Pat.frame(['tungstensteel'])` (commit `e6572212`). This is the only such quoted frame-material
 call in the pack. The frame helper rejects it at `lib/patterns.js:145`; its generic error factory is at
 line 63. Native `latest.log:11235` reports `unknown GT material: tungstensteel` and aborts GTM before
 processing displays/workstations. Do not mask the error, disable previews, or add an arbitrary material
@@ -183,7 +183,7 @@ caps remain 4G. Neither the shipped EMI search configuration nor its features ar
 
 Authority: run `20261029-021359-client-a24`, report `gg-emi-coverage-report-2`.
 
-**Global blocker: resolved.** The B0 frame-material abort was fixed (`37621ded`), and run
+**Global blocker: resolved.** The B0 frame-material abort was fixed (`3e28e914`), and run
 `20261029-025512-client` (8G) loaded the GTM plugin and rendered the MEGA preview. Its remaining gaps were
 13 workstations and 38 previews of addon machines hidden through `grindless:hidden_with_recipes` (now exempt),
 9 visible multiblocks with no preview display, 3 noUse items, 1 route (the actinide plant, a lookup collision
