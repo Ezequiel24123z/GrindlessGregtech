@@ -8,7 +8,7 @@
 //
 // The join is the UEV photonic integration hall's c14 (tables/photonics_uev.json): 2 horizon logic dies + the horizon interposer + a quantum
 // memory node + a Rydberg logic array + 2 supracausal mainframes + 1,000 mB Kerr condensate -> grindless:horizon_processor, the only member
-// of #grindless:circuits/maxplus.
+// of #gtceu:circuits/maxplus (GTM has no tag above MAX; every MAX+ hardware recipe takes this tag).
 //
 // Published: global.grindless.maxplusCircuits.recipes, .skipped, .joinRecipe, .joinOutput, .tag.
 // Rhino: var + function inside every callback that runs more than once.
@@ -20,7 +20,7 @@
   MC.skipped = []
   MC.joinRecipe = 'grindless:photonic_integration/horizon_processor'
   MC.joinOutput = 'grindless:horizon_processor'
-  MC.tag = 'grindless:circuits/maxplus'
+  MC.tag = 'gtceu:circuits/maxplus'
 
   var ROWS = [
     { name: 'horizon_logic_die', eut: 536870912, duration: 1200, input: 'grindless:stacked_logic_wafer', out: 'grindless:horizon_logic_die', count: 2 },

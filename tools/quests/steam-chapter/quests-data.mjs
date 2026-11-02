@@ -385,7 +385,7 @@ export const QUESTS = [
         teach: {
           for: "It keeps one vein sending up raw ore for as long as steam lasts.",
           needs: "A vein sample, bronze drill bits and steam; your steam miner sits inside it.",
-          unlocks: "Every ore in the pack, with no pickaxe.",
+          unlocks: "Raw ore from the veins the Steam drill can reach, with no pickaxe. Deeper veins need a later drill.",
           automate: "Bits and steam fed by hatch, ore taken out by bus. One drill per vein.",
         },
         desc: [

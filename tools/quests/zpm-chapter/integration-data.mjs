@@ -34,14 +34,40 @@ export const QUESTS = [
     key: 'EXC', kind: 'step', title: 'Excited', icon: 'gtceu:radon_bucket', size: 0.75,
     deps: ['START'], x: 2, y: 0,
     desc: [
-      "Fuel only gets worth burning once the Mk2 has excited it with radon. That's a big start for a small amount, so in practice the Mk2 comes before the reactor.",
+      "Fuel only gets worth burning once the Mk2 has excited it with radon. That's a big start for a small amount, so the order is the network, then the Mk2, then the reactor.",
     ],
     tasks: [ck()],
     rewards: [xp(30)],
   },
   {
-    key: 'BIG', kind: 'plant', title: 'The Big Reactor', icon: 'gtnn:large_naquadah_reactor', shape: 'gear', size: 1.5,
+    key: 'NETZ', kind: 'machine', title: 'The Network Goes ZPM', icon: 'grindless:zpm_smes_cell', shape: 'rsquare', size: 1.25,
     deps: ['EXC'], x: 4, y: 0,
+    teach: {
+      for: 'A &6ZPM SMES cell&r and a wireless hatch put another tier on the network. Sunlight is a rumour at Saturn, so everything out there draws from it.',
+      needs: 'The cold room that winds the wire, and enough cells to carry the Mk2 start.',
+      unlocks: 'The Mk2 next, and stations at Saturn and Uranus that run on power made at home.',
+      automate: 'Nothing to feed: size the cells for your busiest hour and add more when it dips.',
+    },
+    desc: [],
+    tasks: [it('grindless:zpm_smes_cell'), it('gtceu:zpm_wireless_energy_hatch')],
+    rewards: [xp(100)],
+  },
+  {
+    key: 'MK2', kind: 'machine', title: 'Second Ring', icon: 'gtceu:zpm_fusion_reactor', shape: 'gear', size: 1.5,
+    deps: ['NETZ'], x: 6, y: 0,
+    teach: {
+      for: 'The &6Fusion Reactor Mk2&r makes duranium, excites fuel and runs the aneutronic burn. Its start is huge, so give it plenty of ZPM hatches.',
+      needs: 'Four ZPM energy hatches on the network, and gallium and radon for the first batches.',
+      unlocks: 'Duranium and excited fuel for the large reactor, and the metals UV asks for early.',
+      automate: 'Feed it from tanks by pipe, and keep the hatches topped from the network.',
+    },
+    desc: [],
+    tasks: [it('gtceu:zpm_fusion_reactor'), it('gtceu:zpm_energy_input_hatch', 4), it('gtceu:duranium_ingot')],
+    rewards: [xp(150)],
+  },
+  {
+    key: 'BIG', kind: 'plant', title: 'The Big Reactor', icon: 'gtnn:large_naquadah_reactor', shape: 'gear', size: 1.5,
+    deps: ['MK2'], x: 8, y: 0,
     teach: {
       for: "GT--'s &6Large Naquadah Reactor&r burns excited fuel and is the era's main plant. Duranium frames are part of its price.",
       needs: 'Excited fuel from the Mk2, and a fuel works ready to take the spent fuel back.',
@@ -53,34 +79,8 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
   {
-    key: 'NETZ', kind: 'machine', title: 'The Network Goes ZPM', icon: 'grindless:zpm_smes_cell', shape: 'rsquare', size: 1.25,
-    deps: ['BIG'], x: 6, y: 0,
-    teach: {
-      for: 'A &6ZPM SMES cell&r and a wireless hatch put another tier on the network. Sunlight is a rumour at Saturn, so everything out there draws from it.',
-      needs: 'The cold room that winds the wire, and a reactor worth storing.',
-      unlocks: 'Stations at Saturn and Uranus that run on power made at home.',
-      automate: 'Nothing to feed: size the cells for your busiest hour and add more when it dips.',
-    },
-    desc: [],
-    tasks: [it('grindless:zpm_smes_cell'), it('gtceu:zpm_wireless_energy_hatch')],
-    rewards: [xp(100)],
-  },
-  {
-    key: 'MK2', kind: 'machine', title: 'Second Ring', icon: 'gtceu:zpm_fusion_reactor', shape: 'gear', size: 1.5,
-    deps: ['NETZ'], x: 8, y: 0,
-    teach: {
-      for: 'The &6Fusion Reactor Mk2&r makes duranium, excites fuel and runs the aneutronic burn. Its start is huge, so give it plenty of ZPM hatches.',
-      needs: 'Four ZPM energy hatches on the network, and gallium and radon for the first batches.',
-      unlocks: 'Duranium, excited fuel, and the metals UV asks for early.',
-      automate: 'Feed it from tanks by pipe, and keep the hatches topped from the network.',
-    },
-    desc: [],
-    tasks: [it('gtceu:zpm_fusion_reactor'), it('gtceu:zpm_energy_input_hatch', 4), it('gtceu:duranium_ingot')],
-    rewards: [xp(150)],
-  },
-  {
     key: 'SIXTYFOUR', kind: 'machine', title: 'Sixty-Four at Once', icon: 'gtceu:zpm_parallel_hatch', size: 0.75, optional: true,
-    deps: ['MK2'], x: 10, y: 0,
+    deps: ['MK2'], x: 8, y: 1.5,
     teach: {
       for: 'The &6ZPM Parallel Hatch&r runs one machine on far more at a time. Worth a few for any line that keeps backing up.',
       needs: 'A machine that accepts one, and the power to match what it now eats.',

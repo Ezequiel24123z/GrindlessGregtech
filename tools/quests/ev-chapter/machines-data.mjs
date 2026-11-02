@@ -31,7 +31,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("grindless:titanium_drill_bit", 16, "31582C1C38CC314C"), it("grindless:solar_wing_panel", 18, "123430355F4FAED8"), it("gtceu:ev_vein_drill", 1, "1C53BF2915922005")],
-    rewards: [xp(100, "7D0D9D1EEC42BBEB"), ri("grindless:titanium_drill_bit", 8, "7C99B717F081DB18")],
+    rewards: [xp(100, "7D0D9D1EEC42BBEB")],
   },
   {
     key: "DRY", id: "321540F2528D14FA", title: "Drilling Dry", icon: "gtceu:raw_ilmenite",
@@ -54,7 +54,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("gtceu:regolith_cell", 1, "3955EAB8FBFF6100")],
-    rewards: [xp(80, "138B6A7977750137"), ri("grindless:platinum_electrode", 1, "55ADFF45989716A6")],
+    rewards: [xp(80, "138B6A7977750137")],
   },
   {
     key: "BRO", id: "320CD85A4C8D87D5", title: "Oxygen from Rock", icon: "gtceu:oxygen_bucket",
@@ -113,7 +113,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("grindless:platinum_electrode", 1, "593E46F6C0670998"), it("gtceu:platinum_plant", 1, "1B3F08EE9C03B6B0")],
-    rewards: [xp(100, "3EACE716001AFAEB"), ri("grindless:platinum_electrode", 1, "1E92FF3E0CABF2CA")],
+    rewards: [xp(100, "3EACE716001AFAEB")],
   },
   {
     key: "CRY", id: "79EE0C54F2D89358", kind: "machine", title: "Cryogenic Plant", icon: "gtceu:cryogenic_plant",
@@ -126,7 +126,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("grindless:night_sky_radiator", 12, "3F869B2BB13436B0"), it("gtceu:cryogenic_plant", 1, "58324638CAF43E78")],
-    rewards: [xp(80, "12ED220DB70AD3CF"), ri("grindless:night_sky_radiator", 2, "1E34767BB12D9536")],
+    rewards: [xp(80, "12ED220DB70AD3CF")],
   },
   {
     key: "LN2", id: "71F33D9D6D486DFE", title: "Liquid Nitrogen", icon: "gtceu:liquid_nitrogen_bucket",
@@ -168,7 +168,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("gtceu:lunar_solar_array", 1, "32C9AF4491B411D4")],
-    rewards: [xp(80, "75E155745FD05519"), ri("grindless:solar_wing_panel", 3, "1D1C45A97E81AA5B")],
+    rewards: [xp(80, "75E155745FD05519")],
   },
   {
     key: "CCP", id: "1DD071239194961D", kind: "machine", title: "Combined-Cycle Plant", icon: "gtceu:combined_cycle_plant",
@@ -260,7 +260,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("gtceu:atmosphere_processor", 1, "78097613D42E5A43")],
-    rewards: [xp(80, "7A0B13C332E8056B"), ri("grindless:ruthenium_catalyst", 1, "7CFB02E1A78ECD9E")],
+    rewards: [xp(80, "7A0B13C332E8056B")],
   },
   {
     key: "MTH", id: "76CC753087EAD9F0", title: "Methalox", icon: "gtceu:methalox_bucket",

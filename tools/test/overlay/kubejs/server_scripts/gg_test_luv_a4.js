@@ -738,9 +738,11 @@
     var L = lazy()
     var type = L.GTRegistries.RECIPE_TYPES.get(rl(TYPE))
     var live = type === null || type === undefined ? -1 : asArray(S.server.getRecipeManager().getAllRecipesFor(type)).length
-    // later eras add rows to the table (UIV-A8: seeded_gdbco_growth c5): every published recipe is live, and nothing else
-    var publishedCount = (MW.recipes || []).length
-    if (live !== publishedCount) problems.push(live + ' live ' + TYPE + ' recipes (want ' + publishedCount + ', the published table)')
+    // later eras add rows to this type from their own publishers (MAX+ windings): every row this publisher owns is live; the type may hold more
+    var owned = MW.recipes || []
+    var notLive = owned.filter(function (p) { return liveRecipe(p.recipeId) === null }).map(function (p) { return p.recipeId })
+    if (notLive.length > 0) problems.push('published but not live: ' + notLive.join(', '))
+    if (live < owned.length) problems.push(live + ' live ' + TYPE + ' recipes, fewer than the ' + owned.length + ' this publisher owns')
     var crafting = MW.craftingRecipe || 'grindless:assembly_line/hts_magnet_works'
     if (crafting !== 'grindless:assembly_line/hts_magnet_works' || liveRecipe(crafting) === null) problems.push('the controller recipe ' + crafting + ' is missing')
     check('mw_recipes', problems.length === 0, lines.join(' ; ') + '; every one keeps ' + charge.amount + ' mB ' + short(charge.id) + ' at chance 0; ' + live +

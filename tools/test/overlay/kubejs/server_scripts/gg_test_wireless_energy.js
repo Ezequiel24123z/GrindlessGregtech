@@ -331,7 +331,22 @@
       if (by) {
         madeElsewhere.push(id + ' by ' + by)
         if (made !== 0) bad.push(id + ' has ' + made + ' assembler recipe(s) but is made by ' + by)
-        if (!L.GTRegistries.MACHINES.get(rl(by))) bad.push(id + ': no machine ' + by)
+        var maker = L.GTRegistries.MACHINES.get(rl(by))
+        if (!maker) bad.push(id + ': no machine ' + by)
+        else {
+          var found = 0
+          var runs = []
+          try {
+            asArray(maker.getRecipeTypes()).forEach(function (t) {
+              runs.push(String(t.registryName))
+              asArray(S.server.getRecipeManager().getAllRecipesFor(t)).forEach(function (r) {
+                if (asArray(L.RecipeHelper.getOutputItems(r)).some(function (st) { return String(Java.loadClass('net.minecraftforge.registries.ForgeRegistries').ITEMS.getKey(st.getItem())) === id })) found++
+              })
+            })
+          } catch (e) { bad.push(id + ': ' + by + ' recipes unreadable: ' + e) }
+          if (found < 1) bad.push(id + ': no live recipe of ' + by + ' (' + runs.join(',') + ') makes it')
+          else madeElsewhere.push(id + ' recipe in ' + runs.join(','))
+        }
       } else {
         cellRecipes += made
         if (made !== 1) bad.push(id + ' has ' + made + ' assembler recipes')

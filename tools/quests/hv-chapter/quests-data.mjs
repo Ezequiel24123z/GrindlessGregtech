@@ -59,7 +59,7 @@ export const QUESTS = [
   {
     key: "HV_HV_GREENHOUSE", id: "3C06724477E3E0BB", title: "HV Greenhouse",     icon: "gtceu:hv_greenhouse", kind: "machine", deps: ["HV_HV_COMPONENTS"], x: 2, y: -1.5,
         teach: {
-          for: "The greenhouse at HV size: more bores per run.",
+          for: "The greenhouse at HV size: more plants grown and harvested per run.",
           needs: "Fertilizer and carbon dioxide.",
           unlocks: "Plant stock for the chemistry ahead.",
           automate: "Seeds in, harvest out, both by bus.",

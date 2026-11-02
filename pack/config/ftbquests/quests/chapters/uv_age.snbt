@@ -26,7 +26,7 @@
 			dependencies: ["78B5C3A48F753C53"]
 			description: [
 				"The &6Pluto-Kuiper Chart&r points past Neptune, and the &6Multimessenger Catalogue&r points at the middle of the galaxy. UV goes after both."
-				"Home first: the machines and circuits chapters build the plants, and this one records where they take you."
+				"Home first: the machines and circuits build the plants, and this branch records where they take you."
 			]
 			icon: "grindless:pluto_kuiper_chart"
 			id: "7D5E30D919EC171F"
@@ -382,20 +382,7 @@
 		}
 		{
 			dependencies: ["135F36C81C412CD0"]
-			description: ["The &6UV Circuit Assembler&r is the first assembler that can build the circuits UV machines are made of. UV components for its hull, the cleanroom you already run, and the ZPM circuits that feed it. The wetware computer and mainframe on this row, and every controller of this era. Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns."]
-			icon: "gtceu:uv_circuit_assembler"
-			id: "1BC78E04FCA4A428"
-			rewards: [{ id: "382E6FFF6483B722", type: "xp", xp: 100 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [{ id: "5657C0E0BC2972AA", item: "gtceu:uv_circuit_assembler", type: "item" }]
-			title: "UV Circuit Assembler"
-			x: 5.5d
-			y: -9.0d
-		}
-		{
-			dependencies: ["1BC78E04FCA4A428"]
-			description: ["Neuro processing units on a larger board make the &6Wetware Processor Computer&r, the first UV circuit. Several neuro processing units for each, the UV assembler, and the vat that grows them in the machines chapter. UV hulls and the controllers of this era that ask for a circuit. Neuro processing units come out of the vat by ME; let the assembler draw them on demand."]
+			description: ["The &6Wetware Processor Computer&r is the first UV circuit, and the assembly line is the only machine that builds it. It is made from wetware processor assemblies, which come from the ZPM assembler. Several wetware processor assemblies, wetware boards, RAM and NOR chips, and an assembly line with ZPM hatches. The wetware mainframe, and through it the UV assembler. Assemblies come from the ZPM line by ME; the assembly line draws them on demand."]
 			icon: "gtceu:wetware_processor_computer"
 			id: "37FC04290594CC34"
 			rewards: [{ id: "55D88910E2A426ED", type: "xp", xp: 120 }]
@@ -403,12 +390,12 @@
 			size: 1.0d
 			tasks: [{ id: "7FEB8328EDD9FE61", item: "gtceu:wetware_processor_computer", type: "item" }]
 			title: "Wetware Computer"
-			x: 7.0d
-			y: -10.0d
+			x: 4.5d
+			y: -9.5d
 		}
 		{
-			dependencies: ["37FC04290594CC34", "34BCB5D648DF0A10"]
-			description: ["The &6Wetware Processor Mainframe&r is the biggest circuit UV builds, and the one the UHV hulls and the research stations lean on. Wetware computers and photonic chips by the stack, and the UV assembler to put them together. UV machine hulls and the hatches that open the gate to UHV. Make it from stocked parts; ME keeps the mainframes in a dedicated chest."]
+			dependencies: ["37FC04290594CC34"]
+			description: ["The &6Wetware Processor Mainframe&r is a UHV-tier circuit, and the UV assembler is built around it. It comes out of the assembly line, not out of a circuit assembler. Wetware computers, tritanium frames and advanced SMD parts by the stack, and an assembly line with UV hatches. Photonic chips play no part in it. The UV circuit assembler, and the UHV hulls after it. Make it from stocked parts; ME keeps the mainframes in a dedicated chest."]
 			icon: "gtceu:wetware_processor_mainframe"
 			id: "3D8568FCB24941A1"
 			rewards: [{ id: "1206428CBE865E89", type: "xp", xp: 180 }]
@@ -416,8 +403,56 @@
 			size: 1.0d
 			tasks: [{ id: "37798CC6FECFE514", item: "gtceu:wetware_processor_mainframe", type: "item" }]
 			title: "Wetware Mainframe"
+			x: 7.0d
+			y: -9.5d
+		}
+		{
+			dependencies: ["3D8568FCB24941A1"]
+			description: ["The &6UV Circuit Assembler&r builds the circuits UV machines are made of, and it is the only place the wetware processor is made from Highly Advanced SoCs. UV components for its hull, the cleanroom you already run, and a UHV-tier circuit: the Wetware Processor Mainframe, or a UHV universal circuit. Wetware processors from Highly Advanced SoCs, and the circuits the controllers of this era ask for. Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns."]
+			icon: "gtceu:uv_circuit_assembler"
+			id: "1BC78E04FCA4A428"
+			rewards: [{ id: "382E6FFF6483B722", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5078A520D111FF76", item: "gtceu:wetware_processor_mainframe", type: "item" }
+				{ id: "5214933A7E49F976", item: "gtceu:uv_circuit_assembler", type: "item" }
+			]
+			title: "UV Circuit Assembler"
 			x: 9.5d
-			y: -9.0d
+			y: -9.5d
+		}
+		{
+			dependencies: ["135F36C81C412CD0"]
+			description: ["Neutronium, silicon and gallium arsenide grow into a &6Neutronium Boule&r in a blast furnace under xenon. The cutter slices it into &6Neutronium Wafers&r. Neutronium ingots, silicon blocks, xenon, a blast furnace that reaches the temperature, and a cutter with lubricant or water. The Highly Advanced SoC wafer, and the neutronium wafer the Starchip is cut from. The boule is slow and one boule yields a great many wafers. Keep one growing and stock the wafers by ME."]
+			icon: "gtceu:neutronium_boule"
+			id: "347BB93B6A76E068"
+			rewards: [{ id: "5F9FE9C40E36C9D4", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "150733A6AE184D1A", item: "gtceu:neutronium_boule", type: "item" }
+				{ id: "565D718E5B6D0CB8", item: "gtceu:neutronium_wafer", type: "item" }
+			]
+			title: "Neutronium Boule"
+			x: 4.0d
+			y: -11.0d
+		}
+		{
+			dependencies: ["347BB93B6A76E068", "1BC78E04FCA4A428"]
+			description: ["A neutronium wafer under a black lens becomes the &6Highly Advanced SoC Wafer&r, and the cutter turns it into &6Highly Advanced SoCs&r. A neutronium wafer, a black lens, a laser engraver, a cutter with lubricant or water, and a cleanroom. Wetware processors in the UV assembler, with neuro processing units. A wafer in, chips out. Send the chips on by ME to the UV assembler."]
+			icon: "gtceu:highly_advanced_soc_wafer"
+			id: "12D99BDAC8BA7ECD"
+			rewards: [{ id: "517E070ABB97ADA2", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "59DFF3239AC22A02", item: "gtceu:highly_advanced_soc_wafer", type: "item" }
+				{ id: "16476460D59C0345", item: "gtceu:highly_advanced_soc", type: "item" }
+			]
+			title: "Highly Advanced SoC"
+			x: 11.5d
+			y: -11.0d
 		}
 		{
 			dependencies: ["135F36C81C412CD0"]
@@ -434,7 +469,7 @@
 		}
 		{
 			dependencies: ["5AC599C3AF5DFDE9"]
-			description: ["A wafer coated in resist, exposed to the synchrotron through the mask and developed is a &6Patterned Wafer&r. The Synchrotron from the machines chapter, a mask, and PMMA-coated wafers. The photonic chip. Coating and developing run in plain machines by ME; only the exposure waits for the beam."]
+			description: ["A wafer coated in resist, exposed to the synchrotron through the mask and developed is a &6Patterned Wafer&r. The Synchrotron from further up, a mask, and PMMA-coated wafers. The photonic chip. Coating and developing run in plain machines by ME; only the exposure waits for the beam."]
 			icon: "grindless:patterned_wafer"
 			id: "1162AE7DDCC8105B"
 			rewards: [{ id: "1A0A958B3C1ABFDD", type: "xp", xp: 100 }]
@@ -447,7 +482,7 @@
 		}
 		{
 			dependencies: ["1162AE7DDCC8105B"]
-			description: ["Cut from the patterned wafer, the &6Photonic Chip&r moves light instead of electrons and does the work of a wafer of ordinary logic. A patterned wafer, silicon nitride film and a cleanroom. The wetware mainframe, and the starchip at the end of this row. One wafer, many chips: keep a stock by ME so the assembler never waits."]
+			description: ["Cut from the patterned wafer, the &6Photonic Chip&r moves light instead of electrons and does the work of a wafer of ordinary logic. A patterned wafer, silicon nitride film and a cleanroom. The starchip at the end of this row. No wetware circuit needs it. One wafer, many chips: keep a stock by ME so the assembler never waits."]
 			icon: "grindless:photonic_chip"
 			id: "34BCB5D648DF0A10"
 			rewards: [{ id: "3BB32BA23EC5774C", type: "xp", xp: 120 }]
@@ -460,7 +495,7 @@
 		}
 		{
 			dependencies: ["135F36C81C412CD0"]
-			description: ["The &6HPGe Crystal&r is germanium refined past thirteen nines. It is the detector eye that probes and the interferometer carry. Germanium tetrachloride from the photonics line and the zone refining tower from the machines chapter. The SNSPD array beside it and the detector parts of the Starshot. The tower is slow; keep its feed topped up by ME and stock the crystals."]
+			description: ["The &6HPGe Crystal&r is germanium refined past thirteen nines. It is the detector eye that probes and the interferometer carry. Germanium tetrachloride from the photonics line and the zone refining tower from further up. The SNSPD array beside it and the detector parts of the Starshot. The tower is slow; keep its feed topped up by ME and stock the crystals."]
 			icon: "grindless:hpge_crystal"
 			id: "55E637B2C7F65A5B"
 			rewards: [{ id: "7A16811DCCDADD90", type: "xp", xp: 100 }]
@@ -486,7 +521,7 @@
 		}
 		{
 			dependencies: ["7D5E30D919EC171F", "34BCB5D648DF0A10", "10808A5F2A0FCB35"]
-			description: ["A photonic chip, a diamond qubit, an americium source and a neutronium wafer become one &6Starchip&r. Mounted on a sail it is a probe about as heavy as a paperclip. The Starchip Fab from the machines chapter, and every part on the light row above. The sailcraft, and with it the launch and the long coast to Proxima. The fab dices in batches and wastes only kerf. Send the chips on by ME to the sail line."]
+			description: ["A photonic chip, a diamond qubit, an americium source and a neutronium wafer become one &6Starchip&r. Mounted on a sail it is a probe about as heavy as a paperclip. The Starchip Fab from further up, and every part on the light row above. The sailcraft, and with it the launch and the long coast to Proxima. The fab dices in batches and wastes only kerf. Send the chips on by ME to the sail line."]
 			icon: "grindless:starchip"
 			id: "5CBBEA07EE6F6329"
 			rewards: [{ id: "7A505A39F1D1F270", type: "xp", xp: 150 }]
@@ -600,7 +635,7 @@
 		}
 		{
 			dependencies: ["7A0170CCCE44944D"]
-			description: ["Thorium assemblies feed the accelerator-driven reactor: about six an hour, four and a half on nitride. IV's stored thorium and its live output decide how many reactors run. The reactor from the machines chapter, and assemblies from the fuel fabrication plant. The biggest steady power of the era, with fission products as the only waste. Spent assemblies go to the pyroprocessing cell and come back as fuel: close the loop before you scale."]
+			description: ["Thorium assemblies feed the accelerator-driven reactor: about six an hour, four and a half on nitride. IV's stored thorium and its live output decide how many reactors run. The reactor from further up, and assemblies from the fuel fabrication plant. The biggest steady power of the era, with fission products as the only waste. Spent assemblies go to the pyroprocessing cell and come back as fuel: close the loop before you scale."]
 			icon: "grindless:thorium_oxide_fuel_assembly"
 			id: "325BE1C42B45620C"
 			rewards: [{ id: "3645ADD2CF1C4971", type: "xp", xp: 100 }]
@@ -632,7 +667,7 @@
 		}
 		{
 			dependencies: ["7A0170CCCE44944D"]
-			description: ["A &6Muon Fusion Cell&r burns liquid deuterium and tritium, and its lithium blanket breeds most of the tritium back. The rest is IV's tritium removal facility's work. The cell from the machines chapter, deuterium and tritium by pipe, and a linac behind it. Power with no fission and almost no waste. The cell is an extrapolation: real muons are lost too soon. Watch the make-up tritium: when the facility lags, the cell starves."]
+			description: ["A &6Muon Fusion Cell&r burns liquid deuterium and tritium, and its lithium blanket breeds most of the tritium back. The rest is IV's tritium removal facility's work. The cell from further up, deuterium and tritium by pipe, and a linac behind it. Power with no fission and almost no waste. The cell is an extrapolation: real muons are lost too soon. Watch the make-up tritium: when the facility lags, the cell starves."]
 			icon: "grindless:lithium_breeder_blanket"
 			id: "1832088E3A8ADB56"
 			rewards: [{ id: "57362C2A00CBB09B", type: "xp", xp: 100 }]
@@ -648,7 +683,7 @@
 		}
 		{
 			dependencies: ["561A6287570BE65F"]
-			description: ["The &6Laser Fusion Chamber&r burns one fuel capsule per shot, about 180 an hour, and helium-4 is the only exhaust. Capsules from the lattice fab, and fibre laser modules that wear by about two percent a shot. The largest single plant of the era, and a reason to scale the lattice fab. The fab's throughput is the cap by design: store capsules in ME and keep spare modules."]
+			description: ["The &6Laser Fusion Chamber&r burns one fuel capsule per shot. Lead-boron capsules take 400 ticks, about 180 an hour; deuterium and helium-3 capsules take 600, about 120 an hour, and also give off hydrogen. Capsules from the lattice fab, and fibre laser modules that wear by about two percent a shot. The largest single plant of the era, and a reason to scale the lattice fab. The fab's throughput is the cap by design: store capsules in ME and keep spare modules."]
 			icon: "gtceu:laser_fusion_chamber"
 			id: "1CFA41A19DF007BF"
 			rewards: [{ id: "7F93037C91621B29", type: "xp", xp: 100 }]
@@ -1033,7 +1068,7 @@
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
-			description: ["The &6Zone Refining Tower&r sweeps germanium's impurities to the ends of a bar, over and over, until it is purer than almost anything you make. Its controller and clean room casing; eight RF coils ring the tower. The HPGe crystal in the circuits chapter. Germanium bars in and crystals out by ME; the tower runs for a long time per bar."]
+			description: ["The &6Zone Refining Tower&r sweeps germanium's impurities to the ends of a bar, over and over, until it is purer than almost anything you make. Its controller and clean room casing; eight RF coils ring the tower. The HPGe crystal, further along. Germanium bars in and crystals out by ME; the tower runs for a long time per bar."]
 			icon: "gtceu:zone_refining_tower"
 			id: "1ADBEF1F47053EC9"
 			rewards: [{ id: "1C883F1697D2369F", type: "xp", xp: 120 }]
@@ -1096,7 +1131,7 @@
 		}
 		{
 			dependencies: ["3E5A326AEACCF50A"]
-			description: ["The &6Powder-in-Tube Line&r packs a wire powder into a silver sheath and draws it down, turning one ingot of material into four. Its controller and UV casing, a drawing bench and a furnace coil. EnTED wire for the UV network. Silver sheath is kept: loop it back by ME."]
+			description: ["The &6Powder-in-Tube Line&r packs a wire powder into a silver sheath and draws it down, turning one ingot of material into four. Its controller and UV casing, a drawing bench and a furnace coil. EnTED wire for the UV network. Each billet eats one silver tube; the wire step returns silver dust. Remelt it into tubes and keep them stocked."]
 			icon: "gtceu:powder_in_tube_line"
 			id: "1682DED202B72CC5"
 			rewards: [{ id: "7C90A2D8E0B2EC85", type: "xp", xp: 120 }]
@@ -1126,7 +1161,7 @@
 		}
 		{
 			dependencies: ["16D1550DF465D570"]
-			description: ["The &6Powder Bed Printer&r melts atomised metal powder layer by layer into parts that no machine tool could cut. Its controller, UV casing and a heated bed under an argon blanket. Thruster chambers, array mounts and probe frames. Powder and argon are kept; stock the printed parts by ME."]
+			description: ["The &6Powder Bed Printer&r melts atomised metal powder layer by layer into parts that no machine tool could cut. Its controller, UV casing and a heated bed under an argon blanket. Thruster chambers, array mounts and probe frames. Printing consumes most of its powder, and atomising loses a little argon. Keep both stocked and store the parts by ME."]
 			icon: "gtceu:powder_bed_printer"
 			id: "1CC82013F8BF2D9B"
 			rewards: [{ id: "7ED6E0AE66B3AF04", type: "xp", xp: 120 }]
@@ -1216,7 +1251,7 @@
 		}
 		{
 			dependencies: ["59F34562582255AD"]
-			description: ["The &6Neural Culture Vat&r grows stem cells and neuro processing units in a single run. Its controller, plascrete, filter casing hoods and robust casing for the bioprinter. The wetware computer in the circuits chapter. Media and stem cells by ME; the vat ships the units out."]
+			description: ["The &6Neural Culture Vat&r grows stem cells and neuro processing units in a single run. Its controller, plascrete, filter casing hoods and robust casing for the bioprinter. The wetware computer, further along. Media and stem cells by ME; the vat ships the units out."]
 			icon: "gtceu:neural_culture_vat"
 			id: "350003D221C6A101"
 			rewards: [{ id: "100A666BEF0EB154", type: "xp", xp: 120 }]
@@ -1259,7 +1294,7 @@
 		}
 		{
 			dependencies: ["3AB434D5A69FAF2B"]
-			description: ["The &6Starchip Fab&r bonds and dices a photonic chip, a qubit and a source into a probe that weighs a gram. Its controller, clean room casing and a filter hood; kerf is voidable. The starchip in the circuits chapter. Parts by ME; dicing waste goes to a void."]
+			description: ["The &6Starchip Fab&r bonds and dices a photonic chip, a qubit and a source into a probe that weighs a gram. Its controller, clean room casing and a filter hood; kerf is voidable. The starchip, further along. Parts by ME; dicing waste goes to a void."]
 			icon: "gtceu:starchip_fab"
 			id: "3D0F0BDA824B2E7B"
 			rewards: [{ id: "1ED124D179A7777A", type: "xp", xp: 120 }]
@@ -1474,6 +1509,6 @@
 			y: 9.5d
 		}
 	]
-	subtitle: ["Neptune, Pluto, the heliopause and a sail to the next star. The plants and circuits that get you there are in the chapters beside this one."]
+	subtitle: ["Neptune, Pluto, the heliopause and a sail to the next star. The plants and circuits that get you there are here too."]
 	title: "UV: Pluto and the Edge"
 }
