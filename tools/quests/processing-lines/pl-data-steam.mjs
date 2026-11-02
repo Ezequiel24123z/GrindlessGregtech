@@ -14,45 +14,45 @@ export default {
     ironworks: {
       name: 'Ironworks: ore to Bessemer steel',
       nodes: [
-        n('coal', 0, -3, I('minecraft:coal'), 'Coal', { kind: 'raw', desc: 'All the steel of the steam age starts as a lump of coal.' }),
-        n('oven', 2, -4.5, M('gtceu:coke_oven'), 'Coke Oven', {
+        n('coal', 0, -1.5, I('minecraft:coal'), 'Coal', { kind: 'raw', desc: 'All the steel of the steam age starts as a lump of coal.' }),
+        n('oven', 2, 0, M('gtceu:coke_oven'), 'Coke Oven', {
           from: ['coal'], sub: 'Coke and creosote; logs give charcoal',
           desc: 'The old faithful. One coal at a time, and the gas goes up the chimney.',
         }),
-        n('battery', 2, -1.5, M('gtceu:coking_battery'), 'Coke Battery', {
+        n('battery', 2, -3, M('gtceu:coking_battery'), 'Coke Battery', {
           kind: 'ours', from: ['coal'],
           desc: ['Three chambers that coke like six ovens and keep the gas the oven loses.', 'It runs on steam and stops if the gas has nowhere to go.'],
         }),
-        n('coke', 4, -3, I('gtceu:coke_gem'), 'Coke', { from: ['oven', 'battery'], sub: 'Fuel and reducing agent of the steelworks' }),
-        n('creosote', 4, -6, F('gtceu:creosote'), 'Creosote', { from: ['battery'], sub: 'Both ovens make it' }),
-        n('coalgas', 4, 0, F('gtceu:coal_gas'), 'Coal Gas', {
+        n('coke', 4, -1.5, I('gtceu:coke_gem'), 'Coke', { from: ['oven', 'battery'], sub: 'Fuel and reducing agent of the steelworks' }),
+        n('creosote', 4, -4.5, F('gtceu:creosote'), 'Creosote', { from: ['battery'], sub: 'Both ovens make it' }),
+        n('coalgas', 4, -3, F('gtceu:coal_gas'), 'Coal Gas', {
           kind: 'by', from: ['battery'], end: 'tanks until LV',
           desc: 'Flammable and poisonous, so it goes in a tank. LV burns it in the gas turbine or splits it in the distillery.',
         }),
-        n('planks', 6, -6.5, I('gtceu:treated_wood_planks'), 'Treated Planks', { kind: 'dest', from: ['creosote'], sub: 'Planks soaked in creosote' }),
-        n('boiler', 6, -5, M('gtceu:lp_steam_liquid_boiler'), 'Liquid Boiler', { from: ['creosote'], sub: 'Creosote is boiler fuel' }),
-        n('sample', 4, 3, I('grindless:vein_sample_iron'), 'Iron Vein Sample', { kind: 'raw', sub: 'A probe on the iron vein', desc: 'Two raw ores from the iron vein and an empty probe make it. After that nobody swings a pickaxe at iron again.' }),
-        n('bit', 4, 4.5, I('grindless:bronze_drill_bit'), 'Bronze Drill Bit', { kind: 'raw', sub: 'Wears out now and then' }),
-        n('drill', 6, 3.75, M('gtceu:steam_vein_drill'), 'Steam Vein Drill', {
+        n('planks', 6, -5.5, I('gtceu:treated_wood_planks'), 'Treated Planks', { kind: 'dest', from: ['creosote'], sub: 'Planks soaked in creosote' }),
+        n('boiler', 6, -3.5, M('gtceu:lp_steam_liquid_boiler'), 'Liquid Boiler', { from: ['creosote'], sub: 'Creosote is boiler fuel' }),
+        n('sample', 0, 2, I('grindless:vein_sample_iron'), 'Iron Vein Sample', { kind: 'raw', sub: 'A probe on the iron vein', desc: 'Two raw ores from the iron vein and an empty probe make it. After that nobody swings a pickaxe at iron again.' }),
+        n('bit', 0, 3.5, I('grindless:bronze_drill_bit'), 'Bronze Drill Bit', { kind: 'raw', sub: 'Wears out now and then' }),
+        n('drill', 2, 2.75, M('gtceu:steam_vein_drill'), 'Steam Vein Drill', {
           kind: 'ours', from: ['sample', 'bit'],
           desc: 'It drills the vein the sample names, forever, wherever you build it. The bit wears out; the sample never does.',
         }),
-        n('cobble', 8, 5.25, I('minecraft:cobblestone'), 'Cobblestone', { kind: 'by', from: ['drill'], end: 'inert', sub: 'Inert: void it, or crush it later' }),
-        n('raw', 8, 3.75, I('gtceu:raw_goethite'), 'Raw Goethite, Forever', { from: ['drill'], sub: 'With the vein\'s other ores' }),
-        n('icrushed', 10, 3.75, I('gtceu:crushed_goethite_ore'), 'Crushed Goethite', { from: ['raw'], sub: 'Macerator', by: ['gtceu:macerator'] }),
-        n('ipurified', 12, 3.75, I('gtceu:purified_goethite_ore'), 'Purified Goethite', { from: ['icrushed'], sub: 'Ore washer', by: ['gtceu:ore_washer'] }),
-        n('cokedust', 10, -1.5, I('gtceu:coke_dust'), 'Coke Dust', { from: ['coke'], sub: 'Ground in a mortar' }),
-        n('sinter', 14, 2, I('grindless:iron_sinter'), 'Iron Sinter', {
+        n('cobble', 4, 4.5, I('minecraft:cobblestone'), 'Cobblestone', { kind: 'by', from: ['drill'], end: 'inert', sub: 'Inert: void it, or crush it later' }),
+        n('raw', 4, 2.75, I('gtceu:raw_goethite'), 'Raw Goethite, Forever', { from: ['drill'], sub: 'With the vein\'s other ores' }),
+        n('icrushed', 6, 3.5, I('gtceu:crushed_goethite_ore'), 'Crushed Goethite', { from: ['raw'], sub: 'Macerator', by: ['gtceu:macerator'] }),
+        n('ipurified', 8, 3.5, I('gtceu:purified_goethite_ore'), 'Purified Goethite', { from: ['icrushed'], sub: 'Ore washer', by: ['gtceu:ore_washer'] }),
+        n('cokedust', 6, 0.5, I('gtceu:coke_dust'), 'Coke Dust', { from: ['coke'], sub: 'Ground in a mortar' }),
+        n('sinter', 8, 1.5, I('grindless:iron_sinter'), 'Iron Sinter', {
           from: ['ipurified', 'cokedust'], sub: 'Alloy smelter', by: ['gtceu:alloy_smelter'],
           desc: 'Purified ore and coke dust baked into lumps the furnace can swallow. Any iron ore sinters the same way.',
         }),
-        n('calcite', 14, -1, I('gtceu:calcite_dust'), 'Calcite', { kind: 'raw', sub: 'The flux: raw, dust or block' }),
-        n('pig', 16, 1, I('grindless:pig_iron'), 'Pig Iron', {
+        n('calcite', 8.5, -3, I('gtceu:calcite_dust'), 'Calcite', { kind: 'raw', sub: 'The flux: raw, dust or block' }),
+        n('pig', 8.5, -1, I('grindless:pig_iron'), 'Pig Iron', {
           from: ['sinter', 'coke', 'calcite'], sub: 'Steam blast furnace', by: ['gtceu:steelmaking'],
           desc: 'Sinter, coke and flux in the steam blast furnace: four loads at once, and it drinks a lot of steam for the favour.',
         }),
-        n('steel', 18, 1, I('gtceu:steel_ingot'), 'Steel', { kind: 'product', from: ['pig'], sub: 'Bessemer blow, same furnace', by: ['gtceu:steelmaking'] }),
-        n('ash', 18, 2.5, I('gtceu:ash_dust'), 'Ash', {
+        n('steel', 10.5, -1, I('gtceu:steel_ingot'), 'Steel', { kind: 'product', from: ['pig'], sub: 'Bessemer blow, same furnace', by: ['gtceu:steelmaking'] }),
+        n('ash', 10.5, 0.5, I('gtceu:ash_dust'), 'Ash', {
           kind: 'by', from: ['pig'], end: 'inert slag; LV fertilizer',
           desc: 'Lime from the flux and ash from the coke. Void it, or keep it: LV mixes it into fertilizer.',
         }),

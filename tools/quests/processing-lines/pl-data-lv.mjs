@@ -37,13 +37,13 @@ export default {
         n('turbine', 14, 0, M('gtceu:lv_steam_turbine'), 'Steam Turbine', { from: ['steam'] }),
         n('salt', 12, -3, I('gtceu:salt_dust'), 'Salt', { kind: 'raw' }),
         n('cr', 14, -2.25, M('gtceu:lv_chemical_reactor'), 'Chemical Reactor', { from: ['acid', 'salt'], sub: 'The salt cake process' }),
-        n('bisulfate', 16, -3, I('gtceu:sodium_bisulfate_dust'), 'Sodium Bisulfate', { from: ['cr'] }),
+        n('bisulfate', 16, -4, I('gtceu:sodium_bisulfate_dust'), 'Sodium Bisulfate', { from: ['cr'] }),
         n('hcl', 16, -1.5, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { from: ['cr'] }),
-        n('persulfate', 18, -3, F('gtceu:sodium_persulfate'), 'Sodium Persulfate', {
+        n('persulfate', 18, -4, F('gtceu:sodium_persulfate'), 'Sodium Persulfate', {
           from: ['bisulfate'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer',
           desc: 'Etches circuit boards and washes a few stubborn ores. You will want more than you think.',
         }),
-        n('h2', 18, -4.5, F('gtceu:hydrogen'), 'Hydrogen', {
+        n('h2', 18, -2.5, F('gtceu:hydrogen'), 'Hydrogen', {
           kind: 'by', from: ['bisulfate', 'hcl'], end: 'tank, MV methanol',
           desc: 'Both reactions leave hydrogen behind. It burns, so tank it: MV turns it into methanol.',
         }),
@@ -59,15 +59,15 @@ export default {
           from: [via('gaas', 'gtceu:small_gallium_arsenide_dust')], sub: 'Assembler',
           desc: 'A pinch of gallium arsenide per diode, and the good circuits of LV are open.',
         }),
-        n('galena', 6, 6, I('gtceu:galena_dust'), 'Galena Dust', { kind: 'raw', sub: 'Roasted for silver' }),
-        n('silveringot', 12, 5, I('gtceu:silver_ingot'), 'Silver', { from: [via('galena', 'gtceu:silver_nugget')], sub: 'The roaster and a furnace' }),
-        n('lead', 12, 7, I('gtceu:lead_dust'), 'Lead', { kind: 'dest', from: ['galena'], sub: 'Galena\'s other half: solder and batteries' }),
-        n('sfoil', 18, 5, I('gtceu:silver_foil'), 'Silver Foil', { from: ['silveringot'], sub: 'Bender' }),
-        n('pcbase', 18, 3, I('gtceu:phenolic_circuit_board'), 'Phenolic Board', { kind: 'raw', sub: 'Wood dust and glue' }),
-        n('board', 22, 0.5, I('gtceu:phenolic_printed_circuit_board'), 'Etched Board', {
+        n('galena', 9, 5.5, I('gtceu:galena_dust'), 'Galena Dust', { kind: 'raw', sub: 'Roasted for silver' }),
+        n('silveringot', 13, 5, I('gtceu:silver_ingot'), 'Silver', { from: [via('galena', 'gtceu:silver_nugget')], sub: 'The roaster and a furnace' }),
+        n('lead', 13, 7, I('gtceu:lead_dust'), 'Lead', { kind: 'dest', from: ['galena'], sub: 'Galena\'s other half: solder and batteries' }),
+        n('sfoil', 17, 3, I('gtceu:silver_foil'), 'Silver Foil', { from: ['silveringot'], sub: 'Bender' }),
+        n('pcbase', 18, 0.5, I('gtceu:phenolic_circuit_board'), 'Phenolic Board', { kind: 'raw', sub: 'Wood dust and glue' }),
+        n('board', 21, 0, I('gtceu:phenolic_printed_circuit_board'), 'Etched Board', {
           from: ['persulfate', 'fecl3', 'sfoil', 'pcbase'], by: ['gtceu:chemical_reactor'], sub: 'Persulfate or iron chloride etch',
         }),
-        n('circuit', 26, -2, I('gtceu:good_electronic_circuit'), 'Good Electronic Circuit', {
+        n('circuit', 25, -1, I('gtceu:good_electronic_circuit'), 'Good Electronic Circuit', {
           kind: 'product', from: ['diode', 'board'], sub: 'Circuit assembler',
           desc: 'Two etched boards, four basic circuits and three diodes: the MV gate asks for eight of these.',
         }),
@@ -84,7 +84,7 @@ export default {
         n('coaltar', 8, -1.5, F('gtceu:coal_tar'), 'Coal Tar', { kind: 'by', from: ['distillery'], end: 'distillery again', sub: 'Distil it again: creosote, phenol, naphthalene' }),
         n('cokedust2', 8, 3, I('gtceu:coke_dust'), 'Coke Dust', { kind: 'by', from: ['distillery'], end: 'sinter in the ironworks', sub: 'Carbon for the sinter' }),
         n('ammonia', 8, 0, F('gtceu:ammonia'), 'Ammonia', { from: ['distillery'], sub: 'Coke-oven ammonia, before Haber' }),
-        n('o2c', 8, 1.5, F('gtceu:oxygen'), 'Oxygen', { kind: 'raw', sub: 'Gas collector and centrifuge' }),
+        n('o2c', 10, 2.25, F('gtceu:oxygen'), 'Oxygen', { kind: 'raw', sub: 'Gas collector and centrifuge' }),
         n('no', 10, 0.75, F('gtceu:nitric_oxide'), 'Nitric Oxide', { from: ['ammonia', 'o2c'], by: ['gtceu:chemical_reactor'], sub: 'Ostwald oxidation' }),
         n('no2', 12, 0.75, F('gtceu:nitrogen_dioxide'), 'Nitrogen Dioxide', { from: ['no', 'o2c'], by: ['gtceu:chemical_reactor'], sub: 'More oxygen' }),
         n('hno3', 14, 0.75, F('gtceu:nitric_acid'), 'Nitric Acid', {
@@ -92,11 +92,11 @@ export default {
           desc: 'GregTech\'s long way to nitric acid. Later lines need it by the bucket.',
         }),
         n('ag', 14, 3, I('gtceu:silver_dust'), 'Silver Dust', { kind: 'raw', sub: 'From the sulfide roaster\'s galena' }),
-        n('agno3', 16, 1.5, I('gtceu:silver_nitrate_dust'), 'Silver Nitrate', { from: ['hno3', 'ag'], by: ['gtceu:chemical_reactor'], sub: 'Dissolving silver' }),
-        n('nacl', 16, 3.5, I('gtceu:salt_dust'), 'Salt', { kind: 'raw' }),
-        n('agcl', 18, 2.25, I('gtceu:silver_chloride_dust'), 'Silver Chloride', { from: ['agno3', 'nacl'], by: ['gtceu:chemical_reactor'], sub: 'Precipitation' }),
-        n('nano3', 18, 4, I('gtceu:sodium_nitrate_dust'), 'Sodium Nitrate', { kind: 'by', from: ['agno3', 'nacl'], end: 'stored for the HV rhodium step', sub: 'A real fertilizer too' }),
-        n('glue', 18, 0.75, F('gtceu:glue'), 'Glue', { kind: 'raw', sub: 'Impure gelatin' }),
+        n('agno3', 16, 2.25, I('gtceu:silver_nitrate_dust'), 'Silver Nitrate', { from: ['hno3', 'ag'], by: ['gtceu:chemical_reactor'], sub: 'Dissolving silver' }),
+        n('nacl', 18, 2.25, I('gtceu:salt_dust'), 'Salt', { kind: 'raw' }),
+        n('agcl', 18, 0.75, I('gtceu:silver_chloride_dust'), 'Silver Chloride', { from: ['agno3', 'nacl'], by: ['gtceu:chemical_reactor'], sub: 'Precipitation' }),
+        n('nano3', 18, 3.75, I('gtceu:sodium_nitrate_dust'), 'Sodium Nitrate', { kind: 'by', from: ['agno3', 'nacl'], end: 'stored for the HV rhodium step', sub: 'A real fertilizer too' }),
+        n('glue', 20, 0, F('gtceu:glue'), 'Glue', { kind: 'raw', sub: 'Impure gelatin' }),
         n('emulsion', 20, 1.5, F('gtceu:photographic_emulsion'), 'Photographic Emulsion', { from: ['agcl', 'glue'], by: ['gtceu:mixer'], sub: 'Mixer' }),
         n('pane', 20, 3, I('gtceu:glass_plate'), 'Glass Plate', { kind: 'raw' }),
         n('plate', 22, 2.25, I('grindless:photographic_plate'), 'Photographic Plate', { from: ['emulsion', 'pane'], by: ['gtceu:assembler'], sub: 'Plate coating' }),
