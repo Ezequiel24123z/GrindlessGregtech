@@ -182,7 +182,7 @@ export const QUESTS = [
   },
   {
     key: 'QTSUIT', kind: 'process', title: 'QuarkTech Suit', icon: 'gtceu:quarktech_chestplate',
-    deps: ['CASM'], x: 10, y: 3,
+    deps: ['CASM'], x: 8, y: 3,
     teach: {
       for: 'The &6QuarkTech Suit&r holds 100M EU. A charged chestplate flies like creative: 2,500 EU/t while flying, nothing on the ground, about 33 minutes per charge.',
       needs: 'Assembler recipes. The chestplate takes LuV circuits, a lapotronic orb, IV emitters and a field generator.',
