@@ -90,8 +90,8 @@
 			rewards: [{ id: "4B46EE2BDF08B7EB", type: "xp", xp: 10 }]
 			tasks: [{ id: "4DFF1C89F8BEEEC4", type: "checkmark" }]
 			title: "FTB Ultimine"
-			x: -10.0d
-			y: 1.5d
+			x: -7.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["7A5D031021239B63"]
@@ -104,8 +104,8 @@
 			rewards: [{ id: "5A7E1C3D9B02F846", type: "xp", xp: 10 }]
 			tasks: [{ id: "4C4F2A6E1D39B057", item: "toolbelt:belt", type: "item" }]
 			title: "Tool Belt"
-			x: -8.75d
-			y: 3.0d
+			x: -10.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["7A5D031021239B63"]
@@ -251,8 +251,8 @@
 			rewards: [{ id: "633FE2B58378B2AF", type: "xp", xp: 10 }]
 			tasks: [{ id: "313F04CB4A468B7F", item: "itemcollectors:basic_collector", type: "item" }]
 			title: "Item Collectors"
-			x: -7.5d
-			y: 4.0d
+			x: -8.75d
+			y: 4.5d
 		}
 	]
 	subtitle: ["Tools that save the clicks"]
