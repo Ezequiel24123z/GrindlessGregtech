@@ -77,19 +77,9 @@ var GG_QUESTS_EXPECTED = {
   uhv_age: [112, 115],
   uev_age: [100, 105],
   uiv_age: [104, 108],
-  uxv_age: [26, 28],
-  uxv_circuits: [16, 23],
-  uxv_machines: [24, 25],
-  uxv_integration: [19, 19],
-  opv_age: [29, 34],
-  opv_circuits: [10, 11],
-  opv_machines: [23, 23],
-  opv_integration: [18, 21],
-  max_age: [19, 19],
-  max_circuits: [14, 15],
-  max_machines: [15, 16],
-  max_integration: [14, 14],
-  max_horizon: [17, 21],
+  uxv_age: [89, 98],
+  opv_age: [84, 92],
+  max_age: [84, 90],
   maxplus_age: [144, 167]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)

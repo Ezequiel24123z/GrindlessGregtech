@@ -21,8 +21,7 @@
     },
     "chapterRoles": {
       "steam_age": "era", "lv_age": "era", "mv_age": "era", "hv_age": "era", "ev_age": "era", "iv_age": "era", "luv_age": "era", "zpm_age": "era",
-      "uv_age": "era", "uhv_age": "era", "uev_age": "era", "uiv_age": "era", "uxv_age": "era", "opv_age": "era", "max_age": "era", "maxplus_age": "era",
-      "max_horizon": "capstone"
+      "uv_age": "era", "uhv_age": "era", "uev_age": "era", "uiv_age": "era", "uxv_age": "era", "opv_age": "era", "max_age": "era", "maxplus_age": "era"
     }
   },
   "maxRewardEntries": 6,

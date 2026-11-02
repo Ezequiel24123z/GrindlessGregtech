@@ -663,9 +663,9 @@ export default gate({
     uxvStars: {
       name: 'Strange stars (UXV)',
       nodes: [
-        E('eqUxvRing', 0, -1.5, 'uxv_machines', '5CE1C18D40A0B8E2'),
-        E('eqUxvBZ', 0, 0, 'uxv_machines', '3611A4EAC7D055C3'),
-        E('eqUxvTap', 0, 1.5, 'uxv_machines', '50C6BE5A52F4F9A0'),
+        E('eqUxvRing', 0, -1.5, 'uxv_age', '5CE1C18D40A0B8E2'),
+        E('eqUxvBZ', 0, 0, 'uxv_age', '3611A4EAC7D055C3'),
+        E('eqUxvTap', 0, 1.5, 'uxv_age', '50C6BE5A52F4F9A0'),
         n('uxvRing', 2.25, -1.5, M('gtceu:uxv_fusion_reactor'), 'Mk6 Fusion Ring', {
           kind: 'info', tier: 'uxv', from: ['eqUxvRing'], sub: 'A star\'s burning stages, one after another, and a direct converter takes the power off each ash',
           desc: 'Hot CNO, helium, carbon and oxygen: the ash of each burn is quenched into the fuel of the next.',
@@ -685,9 +685,9 @@ export default gate({
     maxStars: {
       name: 'The Galactic Centre (MAX)',
       nodes: [
-        E('eqMaxWinch', 0, -1.5, 'max_machines', '110860BEED613414'),
-        E('eqMaxFeeder', 0, 0, 'max_machines', '700822AA57C7AE85'),
-        E('eqMaxShell', 0, 1.5, 'max_horizon', '3AD1F00AD8DB5003'),
+        E('eqMaxWinch', 0, -1.5, 'max_age', '110860BEED613414'),
+        E('eqMaxFeeder', 0, 0, 'max_age', '700822AA57C7AE85'),
+        E('eqMaxShell', 0, 1.5, 'max_age', '3AD1F00AD8DB5003'),
         n('maxWinch', 2.25, -1.5, M('gtceu:geroch_winch'), 'Geroch Winch', {
           kind: 'info', tier: 'max', from: ['eqMaxWinch'], sub: 'A tether lowered into the ergosphere pulls power out of Sgr A* as the hole slows',
           desc: 'It runs at Sgr A* only, and wears a horizon tether as it works.',
@@ -815,21 +815,21 @@ export default gate({
           figs: [P.wcell('grindless:uiv_smes_cell', 'UIV SMES', 1006632960000)],
         }),
         // UXV's cell: four UIV cells' worth, wound with pasta strand tape in the nitride magnet works
-        E('eqUxvCell', 0, 12, 'uxv_integration', '3F5ABDEF2254EC50'),
+        E('eqUxvCell', 0, 12, 'uxv_age', '3F5ABDEF2254EC50'),
         n('wuxv', 2.25, 12, I('grindless:uxv_smes_cell'), 'UXV SMES Cell', {
           kind: 'info', from: ['eqUxvCell'], sub: 'Fifteen hundred and thirty-six UV batteries\' worth, wound with pasta strand',
           desc: 'The network jumps to UXV only when every formed tower holds these.',
           figs: [P.wcell('grindless:uxv_smes_cell', 'UXV SMES', 4026531840000)],
         }),
         // OpV's cell: four UXV cells' worth
-        E('eqOpvCell', 0, 14, 'opv_integration', '1D5A8A7451FF4E70'),
+        E('eqOpvCell', 0, 14, 'opv_age', '1D5A8A7451FF4E70'),
         n('wopv', 2.25, 14, I('grindless:opv_smes_cell'), 'OpV SMES Cell', {
           kind: 'info', from: ['eqOpvCell'], sub: 'Six thousand one hundred and forty-four UV batteries\' worth',
           desc: 'The network jumps to OpV only when every formed tower holds these. Case 13 caps the buffer at the voltage times the amps times ten: 2 A holds 10,737,418,240 EU and 64 A holds 343,597,383,680 EU.',
           figs: [P.wcell('grindless:opv_smes_cell', 'OpV SMES', 16106127360000)],
         }),
         // MAX's cell: four OpV cells' worth
-        E('eqMaxCell', 0, 16, 'max_integration', '586558AD36EEC6F4'),
+        E('eqMaxCell', 0, 16, 'max_age', '586558AD36EEC6F4'),
         n('wmax', 2.25, 16, I('grindless:max_smes_cell'), 'MAX SMES Cell', {
           kind: 'info', from: ['eqMaxCell'], sub: 'Twenty-four thousand five hundred and seventy-six UV batteries\' worth',
           desc: 'The network jumps to MAX only when every formed tower holds these. The mirror shell\'s last recipe draws from it, so charge it first.',
