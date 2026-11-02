@@ -52,7 +52,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.join(here, '..', '..');
 const BEGIN = '<!-- cost-matrix:begin -->';
 const END = '<!-- cost-matrix:end -->';
-const USAGE = 'usage: node tools/analysis/cost-matrix.mjs --dump <dir> --out <dir> [--compare <old.csv>] [--config <file>] [--check]\n       node tools/analysis/cost-matrix.mjs --dump <dir> (--table <dir> [--factors <solved.json>] | --solve [--table <dir>] [--era <list>] | --write-tables <dir>) [--out <dir>] [--compare <old.csv>]'; tools/analysis/cost-matrix.mjs --dump <dir> (--table <dir> [--factors <solved.json>] | --solve [--table <dir>] [--era <list>] | --write-tables <dir>) [--out <dir>] [--compare <old.csv>]';
+const USAGE = 'usage: node tools/analysis/cost-matrix.mjs --dump <dir> --out <dir> [--compare <old.csv>] [--config <file>] [--check]\n       node tools/analysis/cost-matrix.mjs --dump <dir> (--table <dir> [--factors <solved.json>] | --solve [--table <dir>] [--era <list>] | --write-tables <dir>) [--out <dir>] [--compare <old.csv>]';
 
 function parseArgs(argv) {
   const a = { config: path.join(here, 'cost_matrix.json') };
