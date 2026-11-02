@@ -1136,17 +1136,18 @@ function line(num, y) {
   const x = [];
   const dy = [];
   const slot = {};
-  // main nodes sit in the column of their longest chain, and bare inputs just before their first consumer
+  // main nodes sit in the column of their longest chain, pulled as late as their first consumer allows
   const depth = [];
   nodes.forEach(([t, , from, by], i) => {
     if (t === 'x' || by) return;
     depth[i] = from.length ? Math.max(...from.map((f) => (depth[f] ?? 0) + 1)) : 0;
   });
-  nodes.forEach(([t, , from, by], i) => {
-    if (t === 'x' || by || from.length) return;
+  for (let i = nodes.length - 1; i >= 0; i--) {
+    const [t, , , by] = nodes[i];
+    if (t === 'x' || by) continue;
     const users = nodes.map((r, j) => (r[2].includes(i) && !r[3] && r[0] !== 'x' ? depth[j] : null)).filter((d) => d !== null);
-    if (users.length) depth[i] = Math.max(0, Math.min(...users) - 1);
-  });
+    if (users.length) depth[i] = Math.max(depth[i], Math.min(...users) - 1);
+  }
   const seen = {};
   nodes.forEach(([t, , from, by], i) => {
     if (t === 'x') return;
@@ -1159,7 +1160,7 @@ function line(num, y) {
     } else {
       const k = (seen[depth[i]] = (seen[depth[i]] || 0) + 1) - 1;
       x[i] = 2.5 * depth[i];
-      dy[i] = k === 0 ? 0 : (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 1.5;
+      dy[i] = k === 0 ? 0 : (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 2;
     }
   });
   const used = new Set(nodes.flatMap(([, , from]) => from));
@@ -1192,7 +1193,21 @@ function tree(num, y) {
     return n(key(i), px, py, res, title(id), opt);
   });
 }
-const cluster = (name, nums) => ({ name, nodes: nums.flatMap((num, i) => (TREE.has(num) ? tree(num, 7.5 * i) : line(num, 6 * i))) });
+const cluster = (name, nums) => {
+  if (nums.every((num) => TREE.has(num))) return { name, nodes: nums.flatMap((num, i) => tree(num, 7.5 * i)) };
+  // each line gets the height its stacked columns need
+  let cursor = 0;
+  const out = [];
+  for (const num of nums) {
+    const ns = line(num, 0);
+    const lo = Math.min(...ns.map((nd) => nd.y));
+    const hi = Math.max(...ns.map((nd) => nd.y));
+    const shift = cursor - lo;
+    for (const nd of line(num, shift)) out.push(nd);
+    cursor += hi - lo + 4;
+  }
+  return { name, nodes: out };
+};
 
 export default {
   file: 'pl_maxplus',
