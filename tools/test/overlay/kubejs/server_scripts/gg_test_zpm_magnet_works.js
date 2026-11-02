@@ -516,8 +516,16 @@
     S.t = elapsed
     var m = S.machine
     if (S.towerAt === null && elapsed >= 100) {
-      try { towerReport() } catch (e) { check('TOWER', false, 'exception: ' + e) }
-      S.towerAt = elapsed
+      // poll until the tower is formed and the network is up; only the deadline reports a failure
+      var ready = false
+      try {
+        var info = W().towerInfo(machineAt(TOWER))
+        ready = !!info.formed && !!W().settle(S.server).up
+      } catch (e) { ready = false }
+      if (ready || elapsed >= 400) {
+        try { towerReport() } catch (e) { check('TOWER', false, 'exception: ' + e) }
+        S.towerAt = elapsed
+      }
     }
     if (m !== null && m.phase !== 'done') {
       try {

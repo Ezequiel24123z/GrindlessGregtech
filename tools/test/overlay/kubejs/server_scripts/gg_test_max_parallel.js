@@ -26,7 +26,7 @@
   var PROBE = 'minecraft:pink_tulip'
   var COIL = 'grindless:hftacn_coil_block'
   var ENERGY16 = 'gtceu:opv_energy_input_hatch_16a'
-  var RECIPE = 'grindless:assembly_line/opv_parallel_hatch'
+  var RECIPE = 'grindless:assembly_line/max_parallel_hatch'
   var PROBE_EUT = 64
   var DISCOUNT_FLOOR = 0.80
   var CEILING = 256 * 1048576
@@ -47,9 +47,9 @@
 
   ServerEvents.recipes(function (event) {
     try {
-      event.recipes.gtceu.electric_blast_furnace('gg_test_opv:ph_probe').notConsumable('1x ' + PROBE).blastFurnaceTemp(9000).duration(40).EUt(PROBE_EUT)
+      event.recipes.gtceu.electric_blast_furnace('gg_test_max:ph_probe').notConsumable('1x ' + PROBE).blastFurnaceTemp(9000).duration(40).EUt(PROBE_EUT)
     } catch (e) {
-      console.error('[gg_test opv_parallel_hatch] could not add the test recipe: ' + errText(e))
+      console.error('[gg_test max_parallel_hatch] could not add the test recipe: ' + errText(e))
     }
   })
 
@@ -220,8 +220,16 @@
     check('registered', have.length === 6 && times === 1, 'registered: ' + have.join(', ') + '; ' + HATCH + ' in the hatch list ' + times + ' time(s) (expected 1)')
     var H = global.grindless.maxParallelHatch || {}
     var found = false
-    try { found = S.server.getRecipeManager().byKey(new RL(RECIPE)).isPresent() } catch (e) { note('recipe_lookup', errText(e)) }
-    check('recipe', found && H.done === true && String(H.missing) === '', RECIPE + ' in the recipe manager: ' + found + '; max/parallel.js done ' + H.done + ', missing [' + H.missing + ']')
+    var madeOut = ''
+    try {
+      var rec = S.server.getRecipeManager().byKey(new RL(RECIPE))
+      found = rec.isPresent()
+      if (found) {
+        var Reg = Java.loadClass('net.minecraftforge.registries.ForgeRegistries')
+        madeOut = array(classes().RecipeHelper.getOutputItems(rec.get())).map(function (st) { return String(Reg.ITEMS.getKey(st.getItem())) + ' x' + st.getCount() }).join(',')
+      }
+    } catch (e) { note('recipe_lookup', errText(e)) }
+    check('recipe', found && H.recipeId === RECIPE && madeOut === HATCH + ' x1' && H.done === true && String(H.missing) === '', RECIPE + ' in the recipe manager: ' + found + ' making ' + madeOut + '; max/parallel.js publishes ' + H.recipeId + ', done ' + H.done + ', missing [' + H.missing + ']')
     PROBES.forEach(function (p) { put(p.x, 100, 5, p.id + '[facing=north]') })
     S.hatchTick = 40
     try { S.forge = { phase: 'forming', started: S.tick, pos: placeForge(CX, CY, 40) } } catch (e) { check('forge_build', false, errText(e)); S.forge = null }

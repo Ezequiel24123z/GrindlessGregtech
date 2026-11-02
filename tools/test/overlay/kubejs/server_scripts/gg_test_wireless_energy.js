@@ -331,7 +331,13 @@
       if (by) {
         madeElsewhere.push(id + ' by ' + by)
         if (made !== 0) bad.push(id + ' has ' + made + ' assembler recipe(s) but is made by ' + by)
-        if (!L.GTRegistries.MACHINES.get(rl(by))) bad.push(id + ': no machine ' + by)
+        var maker = L.GTRegistries.MACHINES.get(rl(by))
+        if (!maker) bad.push(id + ': no machine ' + by)
+        else {
+          var makes = []
+          try { makes = asArray(maker.getRecipeTypes()).map(function (t) { return String(t.registryName) }) } catch (e) { bad.push(id + ': ' + by + ' recipe types unreadable: ' + e) }
+          if (makes.indexOf('gtceu:assembler') < 0) bad.push(id + ': ' + by + ' does not run gtceu:assembler (runs ' + makes.join(',') + ')')
+        }
       } else {
         cellRecipes += made
         if (made !== 1) bad.push(id + ' has ' + made + ' assembler recipes')
