@@ -33,10 +33,10 @@
     return e
   }
   function bare(p) { p.setItemSlot(Slot.CHEST, Item.of('minecraft:air')) }
-  // Flying is reset on the ground, so lift the player first and bring them back down before it ends.
+  // Flying is reset on the ground: lift the player a step earlier (slow falling), and bring them down before flight ends.
+  function lift(p) { p.runCommandSilent('tp @s ~ ~40 ~'); p.runCommandSilent('effect give @s minecraft:slow_falling 120 0 true') }
   function fly(p, on) {
-    if (on) p.runCommandSilent('tp @s ~ ~40 ~')
-    else p.runCommandSilent('tp @s ~ ~-40 ~')
+    if (!on) p.runCommandSilent('tp @s ~ ~-40 ~')
     var ab = p.getAbilities(); ab.flying = on; p.onUpdateAbilities()
   }
   function mayfly(p) { return !!p.getAbilities().mayfly }
@@ -56,6 +56,7 @@
     { d: 15, f: function (p) {
       check('nano_grants', mayfly(p) && marked(p), 'mayfly ' + mayfly(p) + ' marker ' + marked(p))
       st.mem.c0 = Number(elec(p).getCharge())
+      lift(p)
     } },
     { d: 20, f: function (p) {
       check('ground_no_drain', Number(elec(p).getCharge()) === st.mem.c0, 'charge ' + elec(p).getCharge() + ' vs ' + st.mem.c0)
@@ -78,6 +79,7 @@
     { d: 10, f: function (p) {
       check('remove_ends', !mayfly(p) && !flying(p) && !marked(p), 'mayfly ' + mayfly(p) + ' flying ' + flying(p) + ' marker ' + marked(p))
       equip(p, 'gtceu:nanomuscle_chestplate', 2000)
+      lift(p)
     } },
     { d: 10, f: function (p) {
       check('low_grants', mayfly(p), 'mayfly with 2000 EU ' + mayfly(p))
@@ -108,6 +110,7 @@
       var t = chest(p).getNbt()
       if (t === null || t === undefined) { chest(p).setNbt({}) ; t = chest(p).getNbt() }
       t.putBoolean('enabled', true)
+      lift(p)
     } },
     { d: 15, f: function (p) {
       check('quark_grants', mayfly(p) && marked(p), 'mayfly ' + mayfly(p) + ' marker ' + marked(p))
