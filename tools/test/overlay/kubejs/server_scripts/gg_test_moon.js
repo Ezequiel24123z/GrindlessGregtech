@@ -1247,7 +1247,9 @@
   // on its north face, two cables south to a flat quantum bridge, and an ME drive (one item cell, one fluid cell) west of it.
   var EARTH_BRIDGE = { qx: 2850, qy: 100, qz: 2, link: { x: 2851, y: 100, z: 3 }, cell: { x: 2849, y: 100, z: 3 }, bus: { x: 2853, y: 100, z: 3 },
     gen: { x: 2854, y: 100, z: 3 } }
-  var RITUAL = { x: 2870, y: 101, z: 12 }
+  // in chunk 178 (X 2848-2863): with no player online the bench's force-loaded band does not tick entities, and chunk 179 does not even
+  // list them, so neither the TNT nor the direct TransformLogic call below would see a pair there (vm-20261102-140925 and -141453)
+  var RITUAL = { x: 2860, y: 101, z: 12 }
 
   function qnbCells(x0, y, z0) {
     var out = []
