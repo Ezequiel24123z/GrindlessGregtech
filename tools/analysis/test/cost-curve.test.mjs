@@ -122,13 +122,13 @@ test('selection: the era is the key item the recipe makes; include falls back to
     table('ev', { enabled: false, item: 1, fluid: 1 }),
   ]);
   const hull = recipe('gtceu:assembler/h', { outs: ['gtceu:mv_machine_hull'], eut: 2000 });
-  assert.deepEqual(plain(sel.select(hull.id, hull.json)), { era: 'mv', via: 'key', enabled: true, item: 2, fluid: 2 });
+  assert.deepEqual(plain(sel.select(hull.id, hull.json)), { era: 'mv', via: 'key', enabled: true, item: 2, fluid: 2, keyFactor: 1, pin: null });
   const wire = recipe('gtceu:assembler/w', { outs: ['gtceu:tin_wire'] });
   assert.equal(sel.select(wire.id, wire.json).era, 'mv', 'a glob key');
   const other = recipe('gtceu:assembler/other', { outs: ['x:thing'], eut: 400 });
   assert.equal(sel.select(other.id, other.json), null, 'not a key item, not included');
   const inc = recipe('gtceu:assembler/tier_one', { outs: ['x:thing'], eut: 400 });
-  assert.deepEqual(plain(sel.select(inc.id, inc.json)), { era: 'hv', via: 'include', enabled: true, item: 2, fluid: 2 });
+  assert.deepEqual(plain(sel.select(inc.id, inc.json)), { era: 'hv', via: 'include', enabled: true, item: 2, fluid: 2, keyFactor: 1, pin: null });
   const incLow = recipe('gtceu:assembler/tier_low', { outs: ['x:thing'], eut: 30 });
   assert.equal(sel.select(incLow.id, incLow.json), null, 'include never reaches below MV');
   const skip = recipe('gtceu:assembler/skip_hull', { outs: ['gtceu:hv_machine_hull'] });
@@ -154,6 +154,47 @@ test('selection: the era is the key item the recipe makes; include falls back to
 test('remove ids apply only for an enabled table', () => {
   assert.deepEqual(plain(rule.makeSelector([table('mv', { remove: ['a:b'] })]).removeIds), ['a:b']);
   assert.deepEqual(plain(rule.makeSelector([table('mv', { enabled: false, remove: ['a:b'] })]).removeIds), []);
+});
+
+test('keyFactor multiplies the era factors of one key; an exact id wins over a glob; other keys keep the era factor', () => {
+  const sel = rule.makeSelector([table('mv', {
+    keys: ['gtceu:mv_machine_hull', 'gtceu:mv_machine_casing', 'gtceu:mv_emitter'],
+    keyFactor: { 'gtceu:mv_*': 1.5, 'gtceu:mv_machine_casing': 4 },
+  })]);
+  const at = (out) => plain(sel.select('gtceu:assembler/x', recipe('gtceu:assembler/x', { outs: [out] }).json));
+  assert.equal(at('gtceu:mv_machine_casing').item, 8, 'exact id: 2 x 4');
+  assert.equal(at('gtceu:mv_machine_casing').fluid, 8);
+  assert.equal(at('gtceu:mv_emitter').item, 3, 'glob: 2 x 1.5');
+  assert.equal(at('gtceu:mv_emitter').keyFactor, 1.5);
+  const r = recipe('gtceu:assembler/casing', { ins: [sizedIn('x:plate', 8)], fins: [fluidIn('gtceu:water', 100)], outs: ['gtceu:mv_machine_casing'] });
+  const res = applyToRecipes([r], [table('mv', { keys: ['gtceu:mv_machine_casing'], keyFactor: { 'gtceu:mv_machine_casing': 4 } })]);
+  const j = res.changed.get(r.id);
+  assert.equal(j.inputs.item[0].content.count, 64);
+  assert.equal(j.inputs.fluid[0].content.amount, 800);
+});
+
+test('pin holds a container input at its count (never scaled), raises a ladder step to it, and leaves other inputs to the factor', () => {
+  const pin = { 'gtceu:*_machine_hull': { 'gtceu:*_machine_casing': 1 }, 'gtceu:*_energy_input_hatch_4a': { 'gtceu:*_energy_input_hatch': 2 } };
+  const tables = [table('ev', { item: 3, fluid: 3, keys: ['gtceu:ev_machine_hull', 'gtceu:ev_energy_input_hatch_4a'], pin })];
+  const hull = recipe('gtceu:assembler/hull_ev', { ins: [sizedIn('gtceu:ev_machine_casing', 1), sizedIn('x:cable', 2)], outs: ['gtceu:ev_machine_hull'] });
+  const hatch = recipe('gtceu:assembler/energy_hatch_4a_ev', { ins: [{ content: { item: 'gtceu:ev_energy_input_hatch' }, chance: 10000, maxChance: 10000, tierChanceBoost: 0 }, sizedIn('x:wire', 2)], outs: ['gtceu:ev_energy_input_hatch_4a'] });
+  const res = applyToRecipes([hull, hatch], tables);
+  const h = res.changed.get(hull.id).inputs.item;
+  assert.equal(h[0].content.count, 1, 'one casing per hull');
+  assert.equal(h[1].content.count, 6, 'the cables carry the factor');
+  const a = res.changed.get(hatch.id).inputs.item;
+  assert.deepEqual(a[0].content, { type: 'gtceu:sized', count: 2, ingredient: { item: 'gtceu:ev_energy_input_hatch' } }, '4 A = 2 x 1 A');
+  assert.equal(a[1].content.count, 6);
+  const same = recipe('gtceu:assembler/hull_ev_2', { ins: [sizedIn('gtceu:ev_machine_casing', 1)], outs: ['gtceu:ev_machine_hull'] });
+  assert.equal(applyToRecipes([same], tables).changed.size, 0, 'a pinned input at its count is no change');
+});
+
+test('validateTable checks keyFactor and pin', () => {
+  assert.deepEqual(plain(rule.validateTable(table('mv', { keyFactor: { 'a:b': 2 }, pin: { 'a:*': { 'b:*': 2 } } }), 'mv')), []);
+  assert.match(rule.validateTable(table('mv', { keyFactor: [] }), 'mv').join(';'), /keyFactor must be an object/);
+  assert.match(rule.validateTable(table('mv', { keyFactor: { 'a:b': 0.5 } }), 'mv').join(';'), /keyFactor a:b must be/);
+  assert.match(rule.validateTable(table('mv', { pin: { 'a:b': 2 } }), 'mv').join(';'), /pin a:b must be an object/);
+  assert.match(rule.validateTable(table('mv', { pin: { 'a:b': { 'c:d': 1.5 } } }), 'mv').join(';'), /pin a:b c:d must be a whole count/);
 });
 
 test('validateTable names every problem', () => {
@@ -191,8 +232,9 @@ test('an enabled committed table applies exactly its committed factors', () => {
     const hull = recipe(`gtceu:assembler/${t.era}_hull`, { ins: [sizedIn('x:plate', 3)], fins: [fluidIn('gtceu:water', 1000)], outs: [`gtceu:${t.era}_machine_hull`] });
     const res = applyToDump(mkDump({ recipes: [hull] }), tables);
     const j = res.recipes.get(hull.id).json;
-    assert.equal(j.inputs.item[0].content.count, rule.scaledCount(3, t.item, 'x:plate'), t.era);
-    assert.equal(j.inputs.fluid[0].content.amount, rule.scaledCount(1000, t.fluid, 'gtceu:water'), t.era);
+    const k = (t.keyFactor && t.keyFactor[`gtceu:${t.era}_machine_hull`]) || 1;
+    assert.equal(j.inputs.item[0].content.count, rule.scaledCount(3, t.item * k, 'x:plate'), t.era);
+    assert.equal(j.inputs.fluid[0].content.amount, rule.scaledCount(1000, t.fluid * k, 'gtceu:water'), t.era);
   }
   for (const t of tables.filter((x) => !x.enabled)) {
     const hull = recipe(`gtceu:assembler/${t.era}_hull`, { ins: [sizedIn('x:plate', 3)], outs: [`gtceu:${t.era}_machine_hull`] });
@@ -208,8 +250,9 @@ test('an era with a factor above 1 changes exactly the selected recipes, to the 
   const res = applyToDump(dump, withFactors(tables, { mv: { item: 3, fluid: 3 } }));
   assert.deepEqual([...res.changed.keys()], [hull.id]);
   const j = res.recipes.get(hull.id).json;
-  assert.equal(j.inputs.item[0].content.count, 9);
-  assert.equal(j.inputs.fluid[0].content.amount, 3000);
+  const k = (tables.find((t) => t.era === 'mv').keyFactor || {})['gtceu:mv_machine_hull'] || 1;
+  assert.equal(j.inputs.item[0].content.count, rule.scaledCount(3, 3 * k, 'x:plate'));
+  assert.equal(j.inputs.fluid[0].content.amount, rule.scaledCount(1000, 3 * k, 'gtceu:water'));
   assert.equal(res.recipes.get(unrelated.id), dump.recipes.get(unrelated.id));
   assert.equal(res.byEra.mv.changed, 1);
 });

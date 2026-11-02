@@ -49,7 +49,7 @@ export function loadTables(dir = TABLE_DIR) {
   return { tables, problems };
 }
 
-/** A copy of the tables with a different switch and factors: byEra {era: {item, fluid}} turns those eras on, the rest off. */
+/** A copy of the tables with a different switch and factors: byEra {era: {item, fluid}} turns those eras on, the rest off. keyFactor and pin are kept. */
 export function withFactors(tables, byEra) {
   return tables.map((t) => {
     const f = byEra[t.era];
@@ -83,7 +83,7 @@ export function applyToRecipes(recipes, tables) {
     selected.push({ id, era: s.era, via: s.via, enabled: s.enabled });
     if (!s.enabled) continue;
     e.selected++;
-    const r = rule.scaleRecipe(json, s.item, s.fluid);
+    const r = rule.scaleRecipe(json, s.item, s.fluid, s.pin);
     if (!r.changed) continue;
     e.changed++;
     e.items += r.items;
