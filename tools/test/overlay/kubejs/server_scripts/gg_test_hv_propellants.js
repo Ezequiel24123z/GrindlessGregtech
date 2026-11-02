@@ -163,20 +163,30 @@
     }
     var ctrlPos = null
     var swapped = 0
-    // the preview carries one input hatch and the cycle needs three fluids at once: the commonest casing block on the two
-    // side walls gives up EXTRA_HATCHES cells to input hatches (a player adds them the same way)
+    // the preview carries one input hatch and the cycle needs three fluids at once: the commonest casing block on the
+    // faces (edges and corners left alone) gives up EXTRA_HATCHES cells to input hatches (a player adds them the same way)
+    function faceOf(c) {
+      var inX = c.x >= 1 && c.x <= cut.w - 2
+      var inY = c.y >= 1 && c.y <= cut.h - 2
+      var inZ = c.z >= 1 && c.z <= cut.d - 2
+      if (inY && inZ && c.x === 0) return 'west'
+      if (inY && inZ && c.x === cut.w - 1) return 'east'
+      if (inY && inX && c.z === 0) return 'north'
+      if (inY && inX && c.z === cut.d - 1) return 'south'
+      return null
+    }
     var counts = {}
-    cut.cells.forEach(function (c) { counts[c.id] = (counts[c.id] || 0) + 1 })
-    var casing = Object.keys(counts).filter(function (id) { return id.indexOf('hatch') < 0 && id.indexOf('bus') < 0 && id !== PLANT })
-      .sort(function (a, b) { return counts[b] - counts[a] })[0]
+    cut.cells.forEach(function (c) {
+      if (c.id.indexOf('casing') >= 0 && faceOf(c)) counts[c.id] = (counts[c.id] || 0) + 1
+    })
+    var casing = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a] })[0]
     var extra = {}
     var picked = 0
     cut.cells.forEach(function (c) {
-      if (picked >= EXTRA_HATCHES || c.id !== casing || c.y < 1 || c.y > cut.h - 2 || c.z < 1 || c.z > cut.d - 2) return
-      if (c.x === 0 || c.x === cut.w - 1) {
-        extra[c.x + ',' + c.y + ',' + c.z] = c.x === 0 ? 'west' : 'east'
-        picked++
-      }
+      var face = faceOf(c)
+      if (picked >= EXTRA_HATCHES || c.id !== casing || !face) return
+      extra[c.x + ',' + c.y + ',' + c.z] = face
+      picked++
     })
     cut.cells.forEach(function (c) {
       var p = pos(ORIGIN.x + c.x, ORIGIN.y + c.y, ORIGIN.z + c.z)
