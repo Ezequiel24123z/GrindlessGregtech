@@ -165,7 +165,7 @@ export const QUESTS = [
     key: 'BELT', title: 'The Belt', icon: 'grindless:asteroid_quantum_seed', pkg: ['B1'],
     deps: ['LVL4'], x: 10, y: -1.5,
     desc: [
-      "A floor of rubble with boulders hanging over it, and metal that fell out of the sky. Raw meteoric iron dug on the spot goes into the &6Asteroid Quantum Seed&r, made there in a chemical reactor, and the AE2 bridge reaches the belt.",
+      "A floor of rubble with boulders hanging over it, and metal that fell out of the sky. Raw meteoric iron goes into the &6Asteroid Quantum Seed&r in a chemical reactor, wherever you like, and that seed pairs the AE2 bridge that reaches the belt.",
     ],
     tasks: [dim('grindless:asteroid_belt'), it('grindless:asteroid_quantum_seed')],
     rewards: [xp(100)],
@@ -183,7 +183,7 @@ export const QUESTS = [
     key: 'CHON', title: 'Chondrite Extract', icon: 'grindless:chondritic_extract', pkg: ['B1', 'B5'],
     deps: ['BELT'], x: 12, y: -3,
     desc: [
-      "&6Chondritic Extract&r is what the optical miner boils off a carbon-rich boulder: nitrogen, phosphorus and a bit of everything else the algae like. It's the belt's gift to the bioreactor on Europa.",
+      "&6Chondritic Extract&r is what the optical miner boils off a carbon-rich boulder: nitrogen, phosphorus and a bit of everything else the algae like. It's the belt's gift to the algae bioreactor.",
     ],
     tasks: [it('grindless:chondritic_extract')],
     rewards: [xp(80)],
@@ -213,7 +213,7 @@ export const QUESTS = [
     deps: ['LVL4'], x: 10, y: 0,
     desc: [
       "Io sits in Jupiter's radiation, and electronics there die young. Every machine on Io, on Europa and in Io's orbit carries &6Radiation Vault Casing&r: titanium, then tantalum, like Juno's vault. You'll be fine in the suit. The machines won't.",
-      'Brimstone dug on the spot makes the Ionian quantum seed.',
+      'Brimstone makes the Ionian quantum seed, in any chemical reactor.',
     ],
     tasks: [dim('grindless:io'), it('grindless:radiation_vault_casing'), it('grindless:ionian_quantum_seed')],
     rewards: [xp(100)],
@@ -224,7 +224,7 @@ export const QUESTS = [
     key: 'EUR', title: 'Under the Ice', icon: 'grindless:europan_quantum_seed', pkg: ['B1'],
     deps: ['LVL4'], x: 10, y: 1.5,
     desc: [
-      "Europa is a shell of ice over an ocean nobody has ever seen. Blue ice dug on the spot makes the &6Europan Quantum Seed&r, and the AE2 bridge reaches the lid of that ocean.",
+      "Europa is a shell of ice over an ocean nobody has ever seen. Blue ice makes the &6Europan Quantum Seed&r in any chemical reactor, and the AE2 bridge it pairs reaches the lid of that ocean.",
     ],
     tasks: [dim('grindless:europa'), it('grindless:europan_quantum_seed')],
     rewards: [xp(100)],
@@ -262,7 +262,7 @@ export const QUESTS = [
     key: 'GANY', title: 'Quiet Moon', icon: 'grindless:ganymedean_quantum_seed', pkg: ['B1'],
     deps: ['LVL4'], x: 10, y: 3,
     desc: [
-      "Ganymede has no quakes, its own magnetic field and ice deep enough to bury things in. It's also cold enough that an old HV superconductor works with no cryostat at all. Tuff dug on the spot makes the &6Ganymedean Quantum Seed&r.",
+      "Ganymede has no quakes, its own magnetic field and ice deep enough to bury things in. It's also cold enough that an old HV superconductor works with no cryostat at all. Tuff makes the &6Ganymedean Quantum Seed&r in any chemical reactor.",
     ],
     tasks: [dim('grindless:ganymede'), it('grindless:ganymedean_quantum_seed')],
     rewards: [xp(100)],

@@ -81,8 +81,8 @@ export const QUESTS = [
     key: 'NETUV', kind: 'machine', title: 'The Network Goes UV', icon: 'grindless:uv_smes_cell',
     deps: ['GRAVI'], x: 10, y: 0,
     teach: {
-      for: 'Move your towers onto &6UV SMES Cells&r and the wireless network carries UV. The new hatches draw from it wherever the network reaches, out to the stations too.',
-      needs: 'The gravi star as the link, and every formed tower holding UV cells: until then the network stays at ZPM.',
+      for: 'The network runs at its strongest cell, so one &6UV SMES Cell&r makes it carry UV. The new hatches draw from it wherever the network reaches, out to the stations too.',
+      needs: 'The gravi star as the link, and at least one UV cell in a formed tower: until then the network stays at ZPM.',
       unlocks: 'Stations at Neptune and Pluto that run on power made at home.',
       automate: 'Nothing to feed: size the cells for your busiest hour and add more when it dips.',
     },
