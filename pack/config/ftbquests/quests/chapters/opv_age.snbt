@@ -40,7 +40,7 @@
 		}
 		{
 			dependencies: ["1A9EE7510BD6DBFC"]
-			description: ["Three places lie ahead: a magnetar for chain matter, Cygnus X-1 for antimatter and the Kugelblitz, and a globular cluster for probes. The machine and circuit tabs hold the parts, and the integration tab holds the power."]
+			description: ["Three places lie ahead: a magnetar for chain matter, Cygnus X-1 for the jet and a black hole's beam, and a globular cluster for probes. The machine and circuit tabs hold the parts, and the integration tab holds the power."]
 			icon: "gtceu:opv_machine_casing"
 			id: "1184DDEA5D8984CC"
 			rewards: [{ id: "3DFCF46951DE4A55", type: "xp", xp: 25 }]
@@ -556,7 +556,7 @@
 		{
 			dependencies: ["7808A81BF8AA169E", "71CAE992CEC101E3"]
 			description: [
-				"A black hole radiates as it shrinks. The &6Hawking Collector&r takes the power and leaves the shell, burning stable exotic matter or stellar plasma and wearing the core a little each run. A Kugelblitz core and a place at Cygnus X-1, with OpV dynamo hatches. It works nowhere else. The strongest single source of the era, and the second leg of the gate's supply. Exotic matter and plasma come from their own lines at Cygnus. The power rides the wireless network home."
+				"A black hole radiates as it shrinks. The &6Hawking Collector&r takes the power and leaves the shell, burning stable exotic matter or stellar plasma and wearing the core a little each run. A Kugelblitz core and OpV dynamo hatches. The strongest single source of the era, and the second leg of the gate's supply. Exotic matter and plasma come from their own lines. The power rides the wireless network home."
 				"Evaporation is real physics. A black hole you can feed on demand is fiction."
 			]
 			icon: "gtceu:hawking_collector"
@@ -787,7 +787,7 @@
 		}
 		{
 			dependencies: ["125A9489212645EA"]
-			description: ["The &6Antimatter Trap&r, &6Positron Accumulator&r, &6SRF Cavity Works&r, &6Nuclear Clock Lab&r, &6X-Ray Pulse Profiler&r, &6PBO Plant&r and &6Warp Gate&r each take a row: antiproton stacking, seed plasma, RRR niobium, a thorium lock, an XNAV calibration, chain braid and the three OpV gates. The controllers you already own, and the cold antiprotons from Cygnus. Stacks, the pathfinder, the chain cable and the gates to the places and to MAX. Stacks and cells ride the relay between sites."]
+			description: ["The &6Antimatter Trap&r, &6Positron Accumulator&r, &6SRF Cavity Works&r, &6Nuclear Clock Lab&r, &6X-Ray Pulse Profiler&r, &6PBO Plant&r and &6Warp Gate&r each take a row: antiproton stacking, seed plasma, RRR niobium, a thorium lock, an XNAV calibration, chain braid and the three OpV gates. The controllers you already own, and the cold antiprotons. Stacks, the pathfinder, the chain cable and the gates to the places and to MAX. Stacks and cells ride the relay between sites."]
 			icon: "gtceu:antimatter_trap"
 			id: "53C90ABA70688F62"
 			rewards: [{ id: "1BD101B33FA38D42", type: "xp", xp: 150 }]
@@ -897,7 +897,7 @@
 		}
 		{
 			dependencies: ["32D17A8DE6EDF4A0"]
-			description: ["The &6Antihydrogen Foundry&r merges antiprotons and positrons in a trap, cools the atoms with a laser and freezes them into a cell. It is the first neutral antimatter in the pack. An OpV hull, the negative-potential casing and the annihilation shield casing, with antiprotons from Cygnus and positrons from SGR 1806-20. The antihydrogen cell that opv_age asks for, and the strangelet vault. Antiprotons and positrons by the beam lines; cells are the product to chest."]
+			description: ["The &6Antihydrogen Foundry&r merges antiprotons and positrons in a trap, cools the atoms with a laser and freezes them into a cell. It is the first neutral antimatter in the pack. An OpV hull, the negative-potential casing and the annihilation shield casing, with antiprotons and positrons from SGR 1806-20. The antihydrogen cell that opv_age asks for, and the strangelet vault. Antiprotons and positrons by the beam lines; cells are the product to chest."]
 			icon: "gtceu:antihydrogen_foundry"
 			id: "597A9984A1B74479"
 			rewards: [{ id: "1D0E3BF3B30AB3B6", type: "xp", xp: 200 }]
