@@ -1,12 +1,13 @@
 // Shape quality of the pack's multiblocks (rubric: docs/quality/structures.md).
 //   node tools/analysis/structure-quality.mjs [--dump <dir> | --static] [--top N] [--json] [--check] [--write-baseline]
+//   node tools/analysis/structure-quality.mjs --diff-static --dump <dir>   (T2: fails when Node and the game build a structure differently)
 // Source: a server dump's structures.json (--dump, default: the dir in tools/analysis/out/latest.txt) or the pack's scripts run
 // in Node (--static, what T0 uses). --check compares with tools/analysis/structure_quality.json and fails (exit 1) only on
 // new or worsened violations. --write-baseline rewrites that file (integrator, when a redesign lands).
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { analyzeAll, baselineEntry, compare, renderReport } from './lib/structure_quality.mjs';
+import { analyzeAll, baselineEntry, compare, diffStructures, renderReport } from './lib/structure_quality.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, '..', '..');
@@ -27,6 +28,15 @@ export async function loadStructures(argv) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  if (args.includes('--diff-static')) {
+    if (!opt('--dump')) { console.error('--diff-static needs --dump <dir>'); process.exit(2); }
+    const dumpDocs = await loadStructures(['--dump', opt('--dump')]);
+    const staticDocs = await loadStructures(['--static']);
+    const diffs = diffStructures(staticDocs, dumpDocs);
+    console.log(`structure-quality: ${diffs.length} structure(s) differ between the static run and the dump`);
+    diffs.slice(0, 20).forEach((p) => console.log('  ' + p));
+    process.exit(diffs.length ? 1 : 0);
+  }
   const structures = await loadStructures(args);
   const analysis = analyzeAll(structures, packDir);
   if (args.includes('--write-baseline')) {
