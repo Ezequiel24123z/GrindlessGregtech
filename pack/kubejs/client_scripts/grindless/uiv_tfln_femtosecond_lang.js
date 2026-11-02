@@ -82,6 +82,11 @@
         ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[3]])
     })
 
+    ENTRIES.push(['gtceu.recipe.grindless_femtosecond_writing.addressed_holo_block',
+        'Circuit 23: 2 void holographic blocks, 16 laser array wafers and 16 holographic slabs in 16000 mB of argon make 1 addressed holo block; 12800 mB of argon come back'])
+    ENTRIES.push(['gtceu.recipe.grindless_ion_slicing.photonic_qpu_wafer',
+        'Circuit 21: 64 electronic grade silicon and 32 LN-on-insulator+ sliced under 32000 mB of helium make 2 photonic QPU wafers; 25600 mB of helium come back'])
+
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {
             event.add('grindless', e[0], e[1])

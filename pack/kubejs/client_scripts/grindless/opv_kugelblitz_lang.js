@@ -65,6 +65,9 @@
             'Circuit 2: stellar plasma feeds the core at half power, which wears 1/32 (an absorber tile 1/8); the spent core returns as a shell.']
     ]
 
+    ENTRIES.push(['gtceu.recipe.grindless_kugelblitz_forming.caged_kugelblitz',
+        'Circuit 7, Cygnus X-1: 16 Kugelblitz seeds and 8 cores, 32 caged nickel chains, 64 horizon tethers and 16 fed strangelets make 1 caged Kugelblitz'])
+
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {
             event.add('grindless', e[0], e[1])

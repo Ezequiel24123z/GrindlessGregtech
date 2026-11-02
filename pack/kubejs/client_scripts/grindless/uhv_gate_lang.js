@@ -30,6 +30,11 @@
             'A structure block: a neutronium ring segment wound with MgB2 wire to hold the exotic matter field, made in the Assembler (circuit 6). It builds the Warp Gate\'s 15x15x3 ring, once in Earth orbit and once in Proxima b\'s orbit.']
     ]
 
+    ENTRIES.push(['gtceu.recipe.grindless_warp_gate.hold_sgr1806',
+        'Circuit 11, Cygnus X-1: 2^31 EU/t for 2 minutes throws the bulge relay seed to SGR 1806-20; the bulge chart stays in the bus'])
+    ENTRIES.push(['gtceu.recipe.grindless_warp_gate.hold_terzan5',
+        'Circuit 12, Cygnus X-1: 2^30 EU/t for 2 minutes throws the pathfinder probe to Terzan 5; the probe is the whole cost'])
+
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {
             event.add('grindless', e[0], e[1])
