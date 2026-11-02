@@ -11,8 +11,9 @@
 //                      impregnated_nozzle; closed-loop cooling -> vms_lift_nozzle
 //   P21 crucible liner CVI c18 -> infiltrated_liner; electron beam -> sealed_liner; megabar c15 -> densified_liner; lathe -> crucible_liner
 //
-// Circuits: the first free one of each older machine type in line-id order (item-keyed rows have none). Every row of an older machine carries the
-// 30 Doradus dimension (grindless:tarantula_orbit); the three machines of this package run only there. Casings: assembler c29 and c30.
+// Circuits: the first free one of each older machine type in line-id order (item-keyed rows have none). Only the lift's row carries the
+// 30 Doradus dimension (grindless:tarantula_orbit), as it takes plasma off the R136 star; every other row processes shipped inputs and runs
+// anywhere (SITE-E, owner 2026-11-02). Casings: assembler c29 and c30.
 // Published for the tests: global.grindless.maxPlusTarantula { rows, cools, controllers, skipped }.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
@@ -87,14 +88,14 @@
     { type: 'lathe', name: 'crucible_liner', eut: va(7), duration: 400,
       items: [['grindless:densified_liner', 1]], outs: [['grindless:crucible_liner', 1]] },
     // casings (the machines' blocks)
-    { type: 'assembler', name: 'lift_nozzle_casing', circuit: 29, eut: va(12), duration: 300, site: false,
+    { type: 'assembler', name: 'lift_nozzle_casing', circuit: 29, eut: va(12), duration: 300,
       items: [['grindless:vms_lift_nozzle', 1], ['gtceu:hastelloy_x_plate', 8], ['gtceu:titanium_plate', 4]], fluids: [['gtceu:soldering_alloy', 1152]],
       outs: [['grindless:lift_nozzle_casing', 2]] },
-    { type: 'assembler', name: 'crucible_liner_casing', circuit: 30, eut: va(12), duration: 300, site: false,
+    { type: 'assembler', name: 'crucible_liner_casing', circuit: 30, eut: va(12), duration: 300,
       items: [['grindless:crucible_liner', 1], ['gtceu:tungsten_steel_plate', 8], ['gtceu:iridium_plate', 4]], fluids: [['gtceu:soldering_alloy', 1152]],
       outs: [['grindless:crucible_liner_casing', 2]] },
     // the machines' own rows (V[MAX] x 16 = 2^35 EU/t in; the burner makes 2^34 and 2^33 EU/t)
-    { type: 'tarantula_stellar_lift', name: 'raw_vms_plasma', circuit: 1, eut: M_EUT, duration: 2400, key: LIFT_KEY, machine: true,
+    { type: 'tarantula_stellar_lift', name: 'raw_vms_plasma', circuit: 1, eut: M_EUT, duration: 2400, key: LIFT_KEY, machine: true, site: true,
       wear: [['grindless:vms_lift_nozzle', 312]], fluidOuts: [['gtceu:raw_vms_plasma', 160000]] },
     { type: 'pair_instability_crucible', name: 'ni56_slug', circuit: 1, eut: M_EUT, duration: 1200, key: CRUCIBLE_KEY, machine: true,
       wear: [['grindless:crucible_liner', 625]], fluids: [['gtceu:confined_vms_plasma', 16000]],
@@ -152,7 +153,7 @@
     ;(r.fluidOuts || []).forEach(function (x) { b.outputFluids(Fluid.of(x[0], x[1])) })
     if (r.key) b.addDataString(r.key, r.name)
     if (r.temp) b.blastFurnaceTemp(r.temp)
-    if (r.site !== false) b.dimension(TARANTULA)
+    if (r.site === true) b.dimension(TARANTULA)
     b.EUt(r.eut).duration(r.duration)
   }
 
@@ -170,7 +171,6 @@
       .itemOutputs('1x ' + c.output)
       .outputFluids(Fluid.of(cfg.precoolOut.id, cfg.precoolOut.amount))
       .addDataString(dataKey, 'grindless:closed_loop_cooling/' + c.name)
-      .dimension(TARANTULA)
       .EUt(c.eut).duration(c.duration)
   }
 

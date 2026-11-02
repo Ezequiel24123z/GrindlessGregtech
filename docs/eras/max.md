@@ -437,7 +437,7 @@ Format as in opv.md: what it gains, recipes, byproducts, structure (QR), crossin
 
 **Source.** Tchekhovskoy 2011; Dexter 2020; Ripperda 2022; EHT 2024; Coombs 2019.
 
-### 14. Segment reclamation works (Sgr A* orbit; RF-7A)
+### 14. Segment reclamation works (runs anywhere since SITE-E; RF-7A)
 
 **Gains.** Rule 3 at rule 2 quantities: the vent ablates segments, and each segment holds eight expensive line products. The works strips them where they fail, in one structure: it cold-strips the membrane, drains the Sn-Li droplet loop, pulls the Er3Ni regenerator out of the cryocooler, demagnetises and lifts the tetrataenite coupler, cuts out the electronics and sorts the truss. Nothing older can open a cold superconducting segment; before RF-7A only the truss came back.
 
@@ -709,7 +709,7 @@ Each step is a real transformation (≥4 per line). Cr counts crossings with UXV
 | L34 | Cu(111) growth foil | extraction cascade (SX-EW) → `cathode_copper`; hot strip mill (EV, ev/combined_cycle_and_hot_mill.js:237) → `rolled_cu_foil`; single crystal foundry → `cu111_foil`; GTM chemical bath → `electropolished_cu111_foil` (→ L2 vdW step) | 4 | 3 | B1 |
 | L35 | Magnetostrictive stack (Engdahl 2000) | extraction cascade → `tb_dy_oxide`; levitation melter → `terfenol_ingot`; single crystal foundry → `oriented_terfenol_rod`; GTM cutter → `laminated_terfenol_stack` (→ piston) | 4 | 3 | A2 |
 | L36 | Ta-Hf-C hearth liner (Cedillos-Barraza 2016) | extraction cascade → `hafnium_tantalum_oxide`; GTM chemical reactor (carbothermal) → `ta_hf_c_powder`; SPS → `ta_hf_c_billet`; CVI → `sealed_hearth_liner` (→ furnace controller, c5) | 4 | 3 | R1 |
-| L37 | Tetrataenite coupler (Lewis 2014, J Phys Condens Matter 26:064213) | asteroid processor c5 (max/furnace.js, at the belt) → `iron_core_fragment`; LuV helium refrigerator row (luv/helium_refrigerator.js:348, decision 114) → `cryo_milled_core`; GTM electromagnetic separator → `tetrataenite_concentrate`; GTM compressor (cold, never melted) → `cold_pressed_tetrataenite`; nitride works → `halbach_segment_coupler` (→ segment) | 5 | 3 | R1 |
+| L37 | Tetrataenite coupler (Lewis 2014, J Phys Condens Matter 26:064213) | asteroid processor c5 (max/furnace.js, anywhere since SITE-E) → `iron_core_fragment`; LuV helium refrigerator row (luv/helium_refrigerator.js:348, decision 114) → `cryo_milled_core`; GTM electromagnetic separator → `tetrataenite_concentrate`; GTM compressor (cold, never melted) → `cold_pressed_tetrataenite`; nitride works → `halbach_segment_coupler` (→ segment) | 5 | 3 | R1 |
 | L38 | Segment controller | crystal growth (PVT SiC) → `sic_substrate_wafer`; SiC device fab → `sic_cmos_wafer`; MTJ → `mram_stack_wafer`; racetrack fab (UXV, uxv/spin_logic.js:63) → `racetrack_memory_die`; GTM assembler → `segment_controller` (→ segment) | 5 | 4 | H1 |
 | L39 | SC fault-current limiter (Noe and Steurer 2007, SUST 20:R15) | GTM bender (high-resistivity Hastelloy C-276, the limiting shunt) → `fcl_substrate_strip`; coated conductor → `fcl_tape`; oxide PLD → `thick_film_fcl_tape`; HTS works → `fcl_coil`; He refrigerator → `cold_fcl_module` (→ substation hatches, converters) | 5 | 4 | A4 |
 | L40 | UV fibre harness (Russell 2003, Science 299:358) | GTM chemical reactor (SiCl4 flame hydrolysis) → `synthetic_silica_soot`; zone refining → `ultrapure_silica_tube`; fibre draw → `hollow_core_fibre`; femto → `endcapped_hc_fibre`; GTM assembler → `uv_fibre_harness` (→ Rydberg c1) | 5 | 3 | B3 |

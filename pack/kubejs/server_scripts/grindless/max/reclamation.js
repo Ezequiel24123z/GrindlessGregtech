@@ -28,7 +28,6 @@
   var CONTROLLER = 'gtceu:segment_reclamation_works'
   var RESEARCH = 'grindless:ablated_shell_segment'
   var HULL = 'gtceu:max_machine_hull'
-  var SITE = 'gcyr:black_hole_orbit'
   var CASING = 'grindless:reclamation_bay_casing'
 
   // c1: one segment in, the seven streams out (the truss is the segment's own metal, the rest is what the segment carried)
@@ -96,7 +95,6 @@
         b.circuit(C1.circuit)
         b.itemInputs(C1.items.map(function (id) { return '1x ' + id }))
         b.itemOutputs(C1.outs.map(function (id) { return '1x ' + id }))
-        b.dimension(SITE)
         b.addDataString('grindless_segment_reclamation', C1.name)
         b.EUt(VA_MAX).duration(C1.duration)
         MR.recipes.push('grindless:segment_reclamation/' + C1.name)

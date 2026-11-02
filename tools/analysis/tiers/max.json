@@ -247,10 +247,11 @@
         "grindless:plasma_mass_filtering/reconnection_plasmoid_return",
         "grindless:plasma_mass_filtering/he_rich_fraction",
         "grindless:plasma_mass_filtering/vms_core_plasma",
+        "grindless:plasma_mass_filtering/filtered_stellar_plasma",
         "grindless:frc_forming/confined_vms_plasma"
       ],
       "package": ["B2", "B3"],
-      "note": "As built (see uxv.json). The six MAX rows (hot flow skim, flux-loaded FRC, spin-down, hot-flow filter, cooled exhaust return, and MX-S3's reconnection plasmoid return) are MAX's older-machine rows at Sgr A* orbit (site-max-sgra-older-rows). he_rich_fraction is MAX+ P25's row at 30 Doradus (XP-H3, grindless:tarantula_orbit; maxplus.md Older machines), and vms_core_plasma and confined_vms_plasma XP-B1's P6 rows there; XP-C1's maxplus tier checks the MAX+ sites."
+      "note": "As built (see uxv.json). The six MAX rows (hot flow skim, flux-loaded FRC, spin-down, hot-flow filter, cooled exhaust return, and MX-S3's reconnection plasmoid return) are MAX's older-machine rows at Sgr A* orbit (site-max-sgra-older-rows). The MAX+ plasma-filter and FRC rows (he_rich_fraction, vms_core_plasma, filtered_stellar_plasma, confined_vms_plasma) work shipped plasma and carry no site (SITE-E, owner 2026-11-02)."
     },
     {
       "id": "site-vela",
@@ -344,14 +345,6 @@
       "dimensions": ["grindless:nsc_belt"],
       "exact": true,
       "package": "MAX-R1"
-    },
-    {
-      "id": "site-max-reclamation",
-      "label": "Site: the segment reclamation works only at Sgr A* orbit (the ablated segment is a shell part)",
-      "kind": "site",
-      "types": ["gtceu:segment_reclamation"],
-      "dimensions": ["gcyr:black_hole_orbit"],
-      "package": "MX-S4"
     },
     {
       "id": "gate-hold-sgr-a-probe",

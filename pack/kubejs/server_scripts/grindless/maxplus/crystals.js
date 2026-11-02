@@ -29,7 +29,6 @@
   var V_MAX = Number(GTValues.V[14])
   var KERR = 'gtceu:kerr_condensate'
   var HULL = 'gtceu:max_machine_hull'
-  var SGRA = (G.maxTravel && G.maxTravel.places && G.maxTravel.places.sgra ? G.maxTravel.places.sgra.dimension : 'gcyr:black_hole_orbit')
   var CYGNUS = 'grindless:cygnus_x1_orbit'
   var SLURRY = 'gtceu:horizon_crystal_slurry'
   var MOLTEN = 'gtceu:molten_kerr_strange'
@@ -40,14 +39,14 @@
     { type: 'star_lifting', name: 'lifted_stellar_plasma', circuit: 5, eut: va(12), duration: 1200, key: 'grindless_star_lifting', dimension: CYGNUS,
       fluids: [['gtceu:stellar_plasma', 16000]],
       fluidOuts: [['gtceu:lifted_stellar_plasma', 12000], ['gtceu:hydrogen', 4000]] },
-    { type: 'plasma_mass_filtering', name: 'filtered_stellar_plasma', circuit: 8, eut: V_MAX, duration: 600, key: 'grindless_plasma_mass_filtering', dimension: CYGNUS,
+    { type: 'plasma_mass_filtering', name: 'filtered_stellar_plasma', circuit: 8, eut: V_MAX, duration: 600, key: 'grindless_plasma_mass_filtering',
       fluids: [['gtceu:lifted_stellar_plasma', 12000]],
       fluidOuts: [['gtceu:filtered_stellar_plasma', 8000], ['gtceu:helium', 4000]] },
     // T9
     { type: 'crystal_growth', name: 'sapphire_seed_plate', circuit: 32, eut: va(12), duration: 2400, key: 'grindless_crystal_growth',
       items: [['gtceu:sapphire_plate', 2], ['grindless:iridium_crucible', 1]], fluids: [['gtceu:argon', 1000]],
       outs: [['grindless:sapphire_seed_plate', 2], ['grindless:worn_iridium_crucible', 1]] },
-    { type: 'condensate_refinery', name: 'condensate_doped_dust', circuit: 6, eut: VA_MAX, duration: 600, key: 'grindless_condensate_refinery', dimension: SGRA,
+    { type: 'condensate_refinery', name: 'condensate_doped_dust', circuit: 6, eut: VA_MAX, duration: 600, key: 'grindless_condensate_refinery',
       items: [['gtceu:sapphire_dust', 16]], fluids: [['gtceu:settled_condensate', 4000]],
       outs: [['grindless:condensate_doped_dust', 16]] },
     { type: 'femtosecond_writing', name: 'inscribed_core_crystal', circuit: 22, eut: va(13), duration: 1500, key: 'grindless_femtosecond_writing',
@@ -71,7 +70,7 @@
 
   // the blender: one plasma from each place the pack has worked, plus hot flow and kerr condensate (V[MAX] x 64 A, 100 t)
   var BLEND = [
-    { type: 'multi_plasma_blender', name: 'horizon_crystal_slurry', eut: V_MAX * 64, duration: 100, key: 'grindless_multi_plasma_blender', dimension: SGRA,
+    { type: 'multi_plasma_blender', name: 'horizon_crystal_slurry', eut: V_MAX * 64, duration: 100, key: 'grindless_multi_plasma_blender',
       fluids: [['gtceu:stellar_plasma', 1000], ['gtceu:lifted_stellar_plasma', 1000], ['gtceu:filtered_stellar_plasma', 1000],
         ['gtceu:confined_vms_plasma', 1000], ['gtceu:p_process_plasma', 1000], ['gtceu:jet_proton_beam', 1000],
         ['gtceu:hot_flow_plasma', 1000], [KERR, 1000]],
@@ -82,11 +81,11 @@
   // the furnace (V[MAX] x 256 A, 2,400 t): 4,000,000 mB of slurry per core crystal, 1,000,000 mB per controller crystal (each fits one MAX
   // fluid hatch, 4,096,000 mB); P3's plate lines the crucible
   var FURNACE = [
-    { type: 'horizon_crystal_furnace', name: 'core_crystal_boule', circuit: 1, eut: V_MAX * 256, duration: 2400, key: 'grindless_horizon_crystal_furnace', dimension: SGRA,
+    { type: 'horizon_crystal_furnace', name: 'core_crystal_boule', circuit: 1, eut: V_MAX * 256, duration: 2400, key: 'grindless_horizon_crystal_furnace',
       items: [['grindless:sapphire_seed_plate', 1], ['grindless:condensate_doped_dust', 64], ['grindless:kerr_strange_plate', 4]],
       fluids: [[SLURRY, 4000000], [KERR, 100000]],
       outs: [['grindless:core_crystal_boule', 1]] },
-    { type: 'horizon_crystal_furnace', name: 'controller_crystal_boule', circuit: 2, eut: V_MAX * 256, duration: 2400, key: 'grindless_horizon_crystal_furnace', dimension: SGRA,
+    { type: 'horizon_crystal_furnace', name: 'controller_crystal_boule', circuit: 2, eut: V_MAX * 256, duration: 2400, key: 'grindless_horizon_crystal_furnace',
       items: [['grindless:controller_seed', 1], ['grindless:condensate_doped_dust', 64], ['grindless:kerr_strange_plate', 4]],
       fluids: [[SLURRY, 1000000], [KERR, 100000]],
       outs: [['grindless:controller_crystal_boule', 1]] }

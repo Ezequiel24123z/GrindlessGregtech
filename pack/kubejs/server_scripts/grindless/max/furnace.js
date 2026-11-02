@@ -37,10 +37,10 @@
     { name: 'hearth_relining', circuit: 5, duration: 600, items: ['1x ' + LINER], outs: ['2x gtceu:tantalum_dust'] }
   ]
 
-  // belt rows of older machines, all at the NSC belt
+  // belt rows of older machines: the harvest uses the belt itself, the processing row works shipped planetesimals anywhere
   var BELT = [
     { type: 'debris_harvesting', name: 'nsc_planetesimal_harvest', circuit: 3, kept: ['gtceu:opv_sensor'], items: [],
-      outs: ['8x grindless:nsc_planetesimal'], eut: OPV_HARVEST, duration: 400 },
+      outs: ['8x grindless:nsc_planetesimal'], eut: OPV_HARVEST, duration: 400, site: true },
     { type: 'asteroid_processing', name: 'iron_core_fragment', circuit: 5, kept: [], items: ['4x grindless:nsc_planetesimal'],
       outs: ['1x grindless:iron_core_fragment', '2x grindless:silicate_slag'], eut: 1966080, duration: 1200 }
   ]
@@ -113,7 +113,7 @@
         r.items.forEach(function (s) { b.itemInputs(s) })
         r.kept.forEach(function (s) { b.notConsumable(s) })
         r.outs.forEach(function (s) { b.itemOutputs(s) })
-        b.dimension(SITE)
+        if (r.site) b.dimension(SITE)
         b.EUt(r.eut).duration(r.duration)
         MF.recipes.push('grindless:' + r.type + '/' + r.name)
       } catch (e) {

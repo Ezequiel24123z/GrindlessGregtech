@@ -90,7 +90,6 @@
       r.inputFluids(Fluid.of('gtceu:settled_condensate', RECHARGE.fluid), Fluid.of('gtceu:superfluid_helium_3', RECHARGE.fluid))
       r.itemOutputs(RECHARGE.cells + 'x ' + CELL)
       r.addDataString('grindless_condensate_refinery', RECHARGE.name)
-      r.dimension(SITE)
       r.EUt(V_MAX * RECHARGE.amps).duration(RECHARGE.duration)
     })
   })
