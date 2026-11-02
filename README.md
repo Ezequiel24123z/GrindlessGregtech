@@ -4,7 +4,7 @@ GregTech progression pack for Minecraft 1.20.1 (Forge) on GregTech Modern 7.5.3.
 
 The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon, Mars, the inner planets, Jupiter's and Saturn's moons, the edge of the Solar System, nearby stars, neutron stars and black holes, the galactic bulge, in MAX Sagittarius A* at the Galactic Centre and, in MAX+, other galaxies and the Hyperstargate, which ends the pack.
 
-**v1.0.0 needed a new world** (worlds from v0.17.0 or older do not work); v1.0.1 and v1.1.0 keep a v1.0.0 world.
+**v1.0.0 needed a new world** (worlds from v0.17.0 or older do not work); v1.0.1, v1.1.0 and v1.2.0 keep a v1.0.0 world.
 
 **At a glance:** Minecraft 1.20.1 · Forge 47.4.28 · GregTech Modern 7.5.3 · 223 mods · 16 eras playable (Steam to MAX+) · English only.
 
@@ -23,14 +23,14 @@ The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon
 
 ## Current status
 
-The current version is **v1.1.0**. It spans the Steam Age through MAX+, from Earth to the Hyperstargate. v1.0.0 was the result of Project Reforge, v1.0.1 gave 80 more machines their own sounds, and v1.1.0 answers the first round of play feedback: one quest chapter per era, places only where a recipe really uses them, any circuit of the tier, GregTech's own prospector and creative flight with the electric suits.
+The current version is **v1.2.0**. It spans the Steam Age through MAX+, from Earth to the Hyperstargate. v1.0.0 was the result of Project Reforge, v1.0.1 gave 80 more machines their own sounds, v1.1.0 answered the first round of play feedback (one quest chapter per era, places only where a recipe really uses them, any circuit of the tier, GregTech's own prospector, creative flight with the electric suits), and v1.2.0 fixes what a full audit of the pack found: relay travel from UIV on, a completable MAX+ chapter, truthful quests, circuits and costs that climb every tier, and multiblocks that run what they advertise.
 
 | Progress | Status |
 |---|---|
 | Steam Age–MAX | Reworked in `v1.0.0`: costs that climb steeply per era from MV, an audited set of process lines, a bigger MAX, a rebuilt quest book, textures and sounds. |
 | MAX+ | New in `v1.0.0`: three stages out of the Galaxy and the Local Group, four new places, 17 multiblocks, 58 lines, and the Hyperstargate. The ending moved here from MAX. |
 
-See the [v1.1.0 release notes](docs/releases/v1.1.0.md) for this version, the [v1.0.0 notes](docs/releases/v1.0.0.md) for the full list of Project Reforge and the [v0.17.0 notes](docs/releases/v0.17.0.md) for the release before it. The [journey guide](docs/journey.md) describes the progression.
+See the [v1.2.0 release notes](docs/releases/v1.2.0.md) for this version, the [v1.0.0 notes](docs/releases/v1.0.0.md) for the full list of Project Reforge and the [v0.17.0 notes](docs/releases/v0.17.0.md) for the release before it. The [journey guide](docs/journey.md) describes the progression.
 
 ## Tier by tier
 
