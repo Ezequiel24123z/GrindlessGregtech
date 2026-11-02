@@ -33,7 +33,12 @@
     return e
   }
   function bare(p) { p.setItemSlot(Slot.CHEST, Item.of('minecraft:air')) }
-  function fly(p, on) { var ab = p.getAbilities(); ab.flying = on; p.onUpdateAbilities() }
+  // Flying is reset on the ground, so lift the player first and bring them back down before it ends.
+  function fly(p, on) {
+    if (on) p.runCommandSilent('tp @s ~ ~40 ~')
+    else p.runCommandSilent('tp @s ~ ~-40 ~')
+    var ab = p.getAbilities(); ab.flying = on; p.onUpdateAbilities()
+  }
   function mayfly(p) { return !!p.getAbilities().mayfly }
   function flying(p) { return !!p.getAbilities().flying }
   function marked(p) { return !!p.getPersistentData().getBoolean('gg_suit_flight') }
@@ -67,7 +72,7 @@
     } },
     { d: 25, f: function (p) {
       check('landed_no_drain', Number(elec(p).getCharge()) === st.mem.c2, 'charge ' + elec(p).getCharge() + ' vs ' + st.mem.c2)
-      fly(p, true)
+      var ab0 = p.getAbilities(); ab0.flying = true; p.onUpdateAbilities()
       bare(p)
     } },
     { d: 10, f: function (p) {
@@ -80,6 +85,7 @@
     } },
     { d: 60, f: function (p) {
       check('dry_ends', !mayfly(p) && !flying(p) && !marked(p), 'mayfly ' + mayfly(p) + ' charge ' + elec(p).getCharge())
+      p.runCommandSilent('tp @s ~ ~-40 ~')
       bare(p)
       mode(p, 'creative')
     } },
