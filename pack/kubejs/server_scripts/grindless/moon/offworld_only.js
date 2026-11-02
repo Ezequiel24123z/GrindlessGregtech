@@ -4,7 +4,7 @@
 // Moon; tungsten, samarium and deuterium only from Mars. data/grindless/tables/offworld_only.json lists every Earth source the pack
 // had (the Moon's at v0.4.0, Mars' at v0.5.4 with wave B) and what happens to it:
 //   strip    the recipe is removed and added back with GTM's builder (same inputs, chances, energy and time), without the listed item
-//            or fluid outputs; new id grindless:<type>/offworld_only/<old path>
+//            or fluid outputs; new id grindless:<type>/offworld_only/<old path>; an optional eut raises its power (a tier gate)
 //   remove   the recipe goes away (its only product was a resource of another world)
 // The ore byproducts are changed at startup (startup_scripts/grindless/moon/earth_byproducts.js), the End bauxite vein loses its
 // ilmenite and the End its scheelite vein (moon/worldgen.js, data/grindless/tables/veins_end.json). The smoke test (gg_test_moon.js)
@@ -41,7 +41,7 @@
     return null
   }
 
-  function rebuild(event, json, newId, dropItems, dropFluids) {
+  function rebuild(event, json, newId, dropItems, dropFluids, euOverride) {
     var known = ['type', 'duration', 'category', 'tickInputs', 'inputs', 'outputs', 'data']
     var extra = Object.keys(json).filter(function (k) { return known.indexOf(k) < 0 })
     if (extra.length > 0) throw new Error('unsupported fields ' + extra.join(','))
@@ -87,7 +87,7 @@
       if (typeof data[k] === 'number') b.addData(k, data[k])
       else b.addDataString(k, String(data[k]))
     })
-    b.EUt(eu).duration(json.duration)
+    b.EUt(euOverride || eu).duration(json.duration)
     return dropped
   }
 
@@ -112,7 +112,7 @@
       var path = s.recipe.split(':')[1].replace(/^[^\/]+\//, '')
       var newId = 'grindless:offworld_only/' + path
       try {
-        var dropped = rebuild(event, captured[0], newId, s.outputs || [], s.fluids || [])
+        var dropped = rebuild(event, captured[0], newId, s.outputs || [], s.fluids || [], s.eut)
         var want = (s.outputs || []).concat(s.fluids || [])
         var notFound = want.filter(function (id) { return dropped.indexOf(id) < 0 })
         event.remove({ id: s.recipe })

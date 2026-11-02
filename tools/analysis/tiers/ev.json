@@ -464,6 +464,13 @@
       "note": "veins_mars.json's merrillite vein (docs/eras/ev.md, \"What only Mars gives\"): it only comes from Mars and only the extraction cascade splits it."
     },
     {
+      "id": "rare-earths-ev",
+      "era": "ev",
+      "label": "cerium, lanthanum and yttrium (from EV)",
+      "items": ["gtceu:cerium_*", "gtceu:lanthanum_*", "gtceu:yttrium_*", "gtceu:*_cerium_*", "gtceu:*_lanthanum_*", "gtceu:*_yttrium_*"],
+      "note": "Owner decision D-3 (2026-11-02): rare earths stay at EV, and native neodymium stays at HV. GTM's rare_earth_separation row (Earth, minus its samarium) gave cerium, lanthanum and yttrium from the Steam era on the large steam centrifuge at 20 EU/t; offworld_only.json retiers it to 1,920 EU/t (EV)."
+    },
+    {
       "id": "samarium",
       "era": "ev-mars",
       "label": "samarium (the cascade, from Martian merrillite)",
