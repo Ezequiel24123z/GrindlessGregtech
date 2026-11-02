@@ -18370,7 +18370,7 @@ hash = "87e1d078df51b094714056a0694e3b535719597ff30945dcfd1a6cb9aaac14d3"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/suit_flight.js"
-hash = "ea0e78b61a2010c7895a73f9f3e2a1a955bb8f750b3abb6868c6d5803a48fa23"
+hash = "dfe8e04b1f19f0bf8bed99a2b13388c7fe836e5fa4f819c1e2784948d7cb0c56"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/tag_leaks.js"
