@@ -240,11 +240,11 @@ It already runs at HV: the EV gate's titanium is made on Earth from the lunar il
 1. Lunar drill (ours, the Moon): ilmenite.
 2. EBF 1,700 K, 480 EU/t (`rutile_from_ilmenite`): ilmenite + carbon → rutile + wrought iron (synthetic rutile).
 3. Chemical reactor, 480 EU/t (`titanium_tetrachloride`): rutile + 2 C + 4 Cl2 → crude TiCl4 + 2 CO (output becomes crude, new fluid).
-4. Distillery (new): crude TiCl4 → TiCl4 + bottoms (VOCl3 and SiCl4, the real impurities: to chlorine recovery as salt water).
+4. Distillery (new, `grindless:kroll_crude_tetrachloride`, 120 EU/t): 1,250 mB crude TiCl4 → 1,000 mB TiCl4 + silica dust (the bottoms; in real plants VOCl3 and SiCl4, but a distillery has one fluid output, so the residue leaves as a solid).
 5. EBF 2,141 K (`titanium_from_tetrachloride`): TiCl4 + 2 Mg → hot titanium + MgCl2; the vacuum freezer cools it (not a counted step).
 
-- Magnesium loop: MgCl2 → electrolyzer → Mg + Cl2 (new: GTM has only `salt_from_magnesium_chloride`, MgCl2 reduced by sodium, which stays as the alternative). Real Kroll plants electrolyse their MgCl2; the chlorine goes back to step 3. The loop adds no length.
-- Byproducts: CO → methanol or M1's formate; wrought iron → steel; bottoms → salt water.
+- Magnesium loop: 3 MgCl2 → electrolyzer → Mg + 2,000 mB Cl2 (`grindless:magnesium_chloride_electrolysis`; GTM has only `salt_from_magnesium_chloride`, MgCl2 reduced by sodium, which stays as the alternative). The reduction's 6 MgCl2 per titanium give back 2 Mg and the 4,000 mB Cl2 of step 3, as in real Kroll plants. The loop adds no length.
+- Byproducts: CO → methanol or M1's formate; wrought iron → steel; silica dust (bottoms) → glass or silicon.
 
 ### H5 PTFE through R22 (7), H6 SBR (6), H7 Gasoline (5), H8 Nichrome (4)
 
