@@ -891,7 +891,7 @@
 		}
 		{
 			dependencies: ["11FC82811D7ACCC9", "10AB32F3FA89A75D"]
-			description: ["The circuit above the ladder. The &6Horizon Processor&r joins two logic dies, an interposer, a memory node, a logic array, two mainframes and condensate. The UEV photonic integration hall, one of every older part and kerr condensate. Every MAX+ component and controller. A controller asks for eight; the Hyperstargate asks for sixteen. One chest per input; a missing one stalls the hall."]
+			description: ["The circuit above the top of the ladder. The &6Horizon Processor&r joins two logic dies, an interposer, a quantum memory node, a Rydberg logic array, two mainframes and condensate. The UEV photonic integration hall at the top voltage, and one of every older part, with kerr condensate from the shell. Every MAX+ component and controller. A controller asks for eight; the Hyperstargate asks for sixteen. Six inputs on six chests; a missing one stalls the hall, so alarm on the stock."]
 			icon: "grindless:horizon_processor"
 			id: "57A1D900439A0E96"
 			rewards: [{ id: "5CB8D0382045510D", type: "xp", xp: 400 }]
@@ -1158,7 +1158,7 @@
 		}
 		{
 			dependencies: ["19F92230E8321753"]
-			description: ["The &6Horizon Capacitor Bank&r is a ring of capacitors that adds its capacity to your network. It stores and never makes energy. The dial starts only when the banks hold a full dial of charge. Capacitors in a ring, at Sgr A* orbit. Generators fill it; some charge is lost on the way in. The dial. Charge it long before the dial."]
+			description: ["The &6Horizon Capacitor Bank&r is a ring of capacitors that adds its capacity to your network. It stores; it never makes energy. The dial only starts when the formed banks hold at least one dial of charge. Capacitors in a ring, at Sgr A* orbit only. The network's generators fill it, and some charge is lost on the way in. The dial. Charge it long before the dial. A big plant refills it in minutes, a small one in days."]
 			icon: "gtceu:horizon_capacitor_bank"
 			id: "3BFE22DD06FBAD6D"
 			rewards: [{ id: "362B9EC1F7DE9580", type: "xp", xp: 300 }]
@@ -1298,7 +1298,7 @@
 		}
 		{
 			dependencies: ["1F0228D86B5ACECC"]
-			description: ["The dial opens the ring for 1,200 ticks. It eats the archive, the phase map, 16 phase locks and 64 jacketed cells; the &6Horizon Lock&r is kept. The full charge in the banks: 2^43 EU/t for the whole opening. The crossing, and a spent charge to recharge. Stock every input and keep the banks full. The next opening costs the same."]
+			description: ["The dial recipe opens the ring for 1,200 ticks. It eats the archive, the phase map, 16 phase locks and 64 jacketed cells. The &6Horizon Lock&r in the controller is kept. The full charge in the banks: 2^43 EU/t for the whole opening. The dial will not start on a charge it cannot finish. The crossing, and a spent charge to recharge. Stock every input and keep the banks full. The next opening costs the same."]
 			icon: "grindless:horizon_lock"
 			id: "1E8E8FFC77B67321"
 			rewards: [{ id: "7ED6A82CF0FCCB74", type: "xp", xp: 1000 }]
@@ -1670,7 +1670,7 @@
 		}
 		{
 			dependencies: ["1EBBE33BC966BE23"]
-			description: ["The only machine that handles &6Kerr Condensate&r. It settles the fluid and binds older exotic matter into it. It runs anywhere. The MAX hull, a shell of condensate vessel casing round a superfluid core, and condensate. Every bound material, and the strand that makes the MAX+ cable. Its boil-off goes back into the first recipe, and spent cells go to the helium plant, so nothing is vented."]
+			description: ["The only machine that handles &6Kerr Condensate&r. It settles the fluid and binds older exotic matter into it: strange matter, neutronium, degenerate billets, strand cladding and the cells the components use. It runs anywhere. The MAX hull, a shell of condensate vessel casing round a superfluid core, and condensate from the mirror shell. Every bound material, and the strand that makes the MAX+ cable. Its boil-off goes back into the first recipe, and spent cells go to the helium plant, so nothing is vented."]
 			icon: "gtceu:condensate_refinery"
 			id: "3DC03C5D536BC546"
 			rewards: [{ id: "1FC00FB7B9A86E54", type: "xp", xp: 150 }]
@@ -1719,7 +1719,7 @@
 		}
 		{
 			dependencies: ["1E02DD0C6E528775"]
-			description: ["The &6Bound-Matter Press&r makes the compressed plate, and a laminate, in numbers no other machine can reach. It runs anywhere. The MAX hull, a block of bound press casing, and bound ingots from the refinery. Compressed plate by the ten thousand, and laminate. Feed ingots by ME and send the plates onward."]
+			description: ["The &6Bound-Matter Press&r makes the compressed plate, and a laminate, in numbers no other machine can reach. It runs anywhere. The MAX hull, a block of bound press casing, and bound ingots from the refinery. Parts and wear are explained in the casing's tooltip. Horizon compressed plate by the ten thousand, and graded laminate for shielding. Feed ingots by ME and send the plates onward on a belt; the press flash goes back to its own input."]
 			icon: "gtceu:bound_matter_press"
 			id: "19E22CAE70354C74"
 			rewards: [{ id: "3040B25014CABD08", type: "xp", xp: 150 }]
@@ -1746,7 +1746,7 @@
 		}
 		{
 			dependencies: ["3E745B1C8AB9F567"]
-			description: ["Out of the Galaxy without a rocket. It drops a probe and a counterweight past the hole; the tide splits them and the probe leaves at speed. The MAX hull, a capture ring of slingshot coil casing, a counterweight and a probe, and a full wireless hatch. The launched probe, and with it every gate that leaves the Galaxy. One counterweight per launch; make them in bulk."]
+			description: ["Out of the Galaxy without a rocket. It binds a probe to a counterweight, then drops the pair on a plunging orbit past the hole. The tide splits them, and the probe leaves at speed. The MAX hull, a capture ring of slingshot coil casing, a counterweight and a probe, and a full wireless hatch. The launched probe, and with it every gate that leaves the Galaxy. One counterweight per launch. The weight falls into the hole, so make them in bulk."]
 			icon: "gtceu:hills_slingshot"
 			id: "5C6CD9758C5ECD8E"
 			rewards: [{ id: "35123FE49B98DB77", type: "xp", xp: 250 }]
@@ -1875,7 +1875,7 @@
 		}
 		{
 			dependencies: ["5DFE1272DB6130B6", "164DF010E9BE6259"]
-			description: ["Deuterium and helium-3 fuse with few neutrons, and a direct converter catches their charged products. It is a generator of ours, not a GTM fusion tier. The MAX hull, a torus of atomic casing, deuterium and helium-3 together, a beam injector and a converter stack. A second generator of the era. Both fuels arrive by pipe from the works; each runs 2,400 ticks."]
+			description: ["Deuterium and helium-3 fuse with few neutrons, and a direct converter catches their charged products. It is a generator of ours, not a GTM fusion tier. The MAX hull, a torus of atomic casing, deuterium and helium-3 together, a beam injector and a converter stack. A second generator of the era. How it feeds the network is in the integration chapter. Both fuels arrive by pipe from the works; each runs 2,400 ticks."]
 			icon: "gtceu:primordial_fusion_torus"
 			id: "5DE3FE0F732840CC"
 			rewards: [{ id: "14EBF160CDACDD63", type: "xp", xp: 150 }]
@@ -1960,7 +1960,7 @@
 		}
 		{
 			dependencies: ["57131618A8A6EBF3"]
-			description: ["The top of the mega family. It runs assembler, circuit assembler, assembly line, forming press and laser engraver at four thousand times a hatch's parallel. The MAX hull, horizon casing, the MAX+ parallel hatch and a pattern bus for every recipe it should take. The millions of parts the gate needs. Feed it by ME and let the parallels do the counting."]
+			description: ["The top of the mega family. It runs assembler, circuit assembler, assembly line, forming press and laser engraver at four thousand times a hatch's parallel. The MAX hull, horizon casing, the MAX+ parallel hatch and a pattern bus for every recipe it should take. The millions of parts the tree and the gate need. It is a convenience, not a step. Feed it by ME and let the parallels do the counting."]
 			icon: "gtceu:hyperfactory"
 			id: "3F5559CA9966BC46"
 			rewards: [{ id: "7036A46A96F79D36", type: "xp", xp: 250 }]
@@ -1973,5 +1973,5 @@
 		}
 	]
 	subtitle: ["A kept lock that taps the stilled horizon, a slingshot past the Galaxy's rim, the Tarantula Nebula and the Magellanic Stream."]
-	title: "MAX+: Out of the Galaxy"
+	title: "MAX+: Beyond the Galaxy"
 }
