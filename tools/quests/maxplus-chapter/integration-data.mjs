@@ -168,7 +168,7 @@ export const QUESTS = [
   },
   {
     key: 'PW_TORUS', kind: 'plant', title: 'Power from Fusion Fuel', icon: 'gtceu:primordial_deuterium_bucket',
-    deps: ['PD'], x: 26, y: -3.5,
+    deps: ['PD'], x: 24.5, y: -6,
     teach: {
       for: 'Primordial deuterium and pristine helium-3 fuel a torus on the platform. The fusion reactions are not new; the fuel comes from the Stream.',
       needs: 'Both fuels in bulk, and a torus.',
@@ -181,7 +181,7 @@ export const QUESTS = [
   },
   {
     key: 'PW_DYN', kind: 'machine', title: 'Wireless Dynamo', icon: 'gtceu:max_wireless_dynamo_hatch_16a',
-    deps: ['PW_NI', 'PW_TORUS'], x: 26, y: -7,
+    deps: ['PW_NI', 'PW_TORUS'], x: 28, y: -8.5,
     teach: {
       for: 'A wireless dynamo hatch feeds the network from the platform. A fraction is lost on the way, so build more than you need.',
       needs: 'The &6wireless dynamo hatch&r, on every plant.',
@@ -194,7 +194,7 @@ export const QUESTS = [
   },
   {
     key: 'PW_STORE', kind: 'machine', title: 'A Store That Holds It', icon: 'grindless:max_smes_cell',
-    deps: ['PW_DYN'], x: 27.5, y: -7,
+    deps: ['PW_DYN'], x: 29.5, y: -8.5,
     teach: {
       for: 'Wireless energy hatches draw from the network, and a MAX+ store smooths out the dips between plants.',
       needs: 'The 4096-amp and 1024-amp wireless hatches, the MAX+ hatch and an SMES cell.',
