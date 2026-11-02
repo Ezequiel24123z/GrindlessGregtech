@@ -288,8 +288,8 @@
 		{
 			dependencies: ["376295DE4FA3B31E"]
 			description: [
-				"A second road to steel that takes iron ore straight from the drill. Bricks, steel, coke, and calcite from the lapis vein. Steel at a pace the primitive furnaces cannot match. Ore, coke and calcite by conveyor, steam from the boiler hall."
-				"One of these out-produces half a dozen primitive furnaces, and it drinks steam to do it."
+				"The furnace that runs the whole iron line: what you feed it picks the mode, sinter into pig iron, pig iron into steel. Bricks, steel, coke, and calcite from the lapis vein. Pig iron and Bessemer steel, at a pace the primitive furnaces cannot match. Sinter, pig iron, coke and calcite by conveyor, steam from the boiler hall."
+				"Raw ore no longer goes in. The next four quests follow the iron from the washer to the steel."
 			]
 			icon: "gtceu:steam_blast_furnace"
 			id: "4B8E2D6A1F9C3057"
@@ -299,6 +299,70 @@
 			tasks: [{ id: "7C1A4E9D2B6F3081", item: "gtceu:steam_blast_furnace", type: "item" }]
 			title: "Steam Blast Furnace"
 			x: 12.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["4B8E2D6A1F9C3057"]
+			description: [
+				"Iron ore is ground and washed first, so the sinter plant gets clean feed. Iron ore from the drill, the steam macerator and an ore washer. Purified ore for the sinter plant. Drill, macerator and washer in a row on one conveyor."
+				"Hematite, goethite or magnetite all work."
+			]
+			icon: "gtceu:purified_hematite_ore"
+			id: "3A5C7E1B9D204F68"
+			rewards: [{ id: "5C7E9A3D1F4B2068", type: "xp", xp: 20 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "4B6D8F2C0E315A79", item: "gtceu:purified_hematite_ore", type: "item" }]
+			title: "Washed Iron Ore"
+			x: 14.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["3A5C7E1B9D204F68"]
+			description: [
+				"Fine ore won't survive a blast furnace, so it is baked into hard lumps first. Purified iron ore, coke dust and calcite, in the steam blast furnace. Feed for the pig iron run. Ore, coke and calcite by bus; sinter leaves by bus."
+				"Sinter is the furnace's first mode."
+			]
+			icon: "grindless:iron_sinter"
+			id: "2C4E6A8B1D3F5079"
+			rewards: [{ id: "7A9C1E3B5D2F4068", type: "xp", xp: 25 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "6D8F1B3A5C7E2094", item: "grindless:iron_sinter", type: "item" }]
+			title: "Iron Sinter"
+			x: 16.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["2C4E6A8B1D3F5079"]
+			description: [
+				"Sinter smelted with coke gives brittle, carbon-heavy iron, the stuff steel is made from. Sinter, coke and calcite, and steam for the blast furnace. Bessemer steel. Run the same furnace in a loop, or give pig iron its own; the input picks the mode."
+				"The ash it leaves behind has a use later on, so keep it."
+			]
+			icon: "grindless:pig_iron"
+			id: "1D3F5B7A9C2E4086"
+			rewards: [{ id: "6F1B3D5A7C9E2048", type: "xp", xp: 25 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "0E2A4C6B8D1F3597", item: "grindless:pig_iron", type: "item" }]
+			title: "Pig Iron"
+			x: 18.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1D3F5B7A9C2E4086"]
+			description: [
+				"Blowing air through molten pig iron burns the carbon out and leaves steel. Pig iron and steam, in the same steam blast furnace. Every steel recipe from here on. Pig iron in by bus, ingots out by bus, steam from the boiler hall."
+				"Ore can't skip the pig iron stage any more."
+			]
+			icon: "gtceu:steel_ingot"
+			id: "4F6A8C1B3D5E7092"
+			rewards: [{ id: "1B3D5F7A9C2E4068", type: "xp", xp: 30 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5A7C9E1B3D2F4086", item: "gtceu:steel_ingot", type: "item" }]
+			title: "Bessemer Steel"
+			x: 20.0d
 			y: 1.5d
 		}
 		{
@@ -330,7 +394,7 @@
 		}
 		{
 			dependencies: ["376295DE4FA3B31E"]
-			description: ["Steel goes into the high-pressure steam machines, the casting molds and the steel drill bit, and it stays in your recipes from then on. Leave a blast furnace running and let the ingots pile up."]
+			description: ["Steel goes into the high-pressure steam machines, the casting molds and the steel drill bit, and it stays in your recipes from then on. The Bessemer run feeds this stack; leave it going and let the ingots pile up."]
 			icon: "gtceu:steel_ingot"
 			id: "33AF6A368B3587E0"
 			rewards: [{ id: "57EE27EA8875AE38", type: "xp", xp: 40 }]
