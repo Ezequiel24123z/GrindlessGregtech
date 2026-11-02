@@ -479,6 +479,12 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
   function baseContext() {
     const ctx = {
       global: global_, console: console_, JsonIO: jsonIO, Java, GTValues, Item, Ingredient, Fluid,
+      // GTRecipeTypes.get(name).setMaxIOSize(...) widens a registered type after creation (lv/multis.js, orbital_biology.js, europa.js)
+      GTRecipeTypes: { get: (n) => {
+        const id = String(n).includes(':') ? String(n) : 'gtceu:' + n;
+        const entry = registry.recipeTypes.get(id);
+        return recorder({ setMaxIOSize: (p, a) => { if (entry) entry.maxIO = a.slice(0, 4).map((x) => Number(x) || 0); } });
+      } },
       Text: makeText(), Component: makeText(), Utils: any, NBT: any, Platform: { isLoaded: () => true, getMods: () => any, isClientEnvironment: () => false },
     };
     for (const g of EVENT_GROUPS) ctx[g] = eventGroup(g);
