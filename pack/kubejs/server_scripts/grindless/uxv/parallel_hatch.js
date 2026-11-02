@@ -2,7 +2,7 @@
 // Gregtech Grindless - the UXV parallel hatch's recipe (package UXV-M1; the hatch is registered in startup_scripts/grindless/lib/parallel_hatch.js).
 //
 //   gtceu:uxv_parallel_hatch (Extreme Parallel Control Hatch, up to 65536 copies of a recipe) -> grindless:assembly_line/uxv_parallel_hatch
-//   The UIV hatch's shape one tier up, an assembly line behind station research on the UIV hatch itself: a UXV hull, 4 spintronic mainframes,
+//   The UIV hatch's shape one tier up, an assembly line behind station research on the UIV hatch itself: a UXV hull, 4 UXV circuits (#gtceu:circuits/uxv),
 //   a UXV field generator and emitter (UXV-F1), double metallic hydrogen cables, rhea plate and FFKM seals, with 1,000 mB of filtered disk
 //   plasma, soldering alloy and lubricant. Every input is made by a later UXV package (B4, B5, A5, B3); C1 checks reachability.
 //   GTM has no recipe for it, so nothing is removed.
