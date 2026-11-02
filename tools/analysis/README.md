@@ -163,6 +163,20 @@ node tools\analysis\cost-matrix.mjs --dump <dump dir> --solve [--table <dir>] [-
 - **Outputs**: `docs/reforge/01_cost_matrix.csv` and `.md`; a re-run refreshes only the generated part between the `<!-- cost-matrix:begin/end -->` markers. Debug aids that write nothing: `--why <ids>` (what blocks an unreachable item) and `--trace <ids>` (the chosen chain with per-unit costs).
 - **Limits**: era-to-era ratios are more dependable than absolute scores. Absolute scores are a lower bound: a chain that multiplies matter without closing a loop (ash separation, tiny-dust splitting) is used whenever it wins, so review such recipes and exclude genuine amplifiers through `excludeRecipes` before calibrating. An item with no route to base resources is listed as unreachable, not priced.
 
+## Cost tree (`cost-tree.mjs`)
+
+The cost of one target, as a tree and a self-contained HTML page (inline JS and SVG, no network). It reuses the cost matrix's solver and `cost_matrix.json`, so it prices the same way (one chosen recipe per item), and expands the chosen recipes with quantities. A target is an item, a multiblock controller (the blocks of its formed structure are included) or `recipe:<id>`.
+
+```
+node tools/analysis/cost-tree.mjs --dump <dump dir> --preset hyperstargate --html out.html [--json out.json]
+node tools/analysis/cost-tree.mjs --dump <dump dir> --target "Label=item[+item*n]" [--target ...] --name X --html out.html [--max-nodes 5000]
+```
+
+- **Page**: summary cards; a zoomable icicle sized by base units, EU or crafts; top base resources and fluids; crafts or EU by era and recipe type; the comparison table; checks; the options used.
+- **Preset `hyperstargate`**: the build, the capacitor bank and one dial, compared with `docs/eras/maxplus.md` (gaps over 20% flagged), the GTNH baseline and the 10x target.
+- **Checks**: tree root equals the summary, unreachable items, cut cycles, alternative routes within 10%, recipes that serve several items (each pays the whole run, so those runs count once per item).
+- Dump-based: run it on the VM (`gg-vm-exec.sh`), never on the workstation.
+
 ## Line audit (`line-audit.mjs`)
 
 Measures every process line of the Processing Lines charts (`tools/quests/processing-lines/pl-data-<era>.mjs`; design lines, see below) against a dump and gives it a verdict (keep, fix, merge, remove) for Reforge Phase 3 (`docs/reforge/03_line_audit.md`). About 3 seconds, no Minecraft:
