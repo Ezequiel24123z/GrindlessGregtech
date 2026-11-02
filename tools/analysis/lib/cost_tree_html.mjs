@@ -30,8 +30,8 @@ var D=window.__D;
 function $(id){return document.getElementById(id)}
 function fmt(n){if(n===null||n===undefined||isNaN(n))return '-';var a=Math.abs(n);
  if(a>=1e15)return n.toExponential(2).replace('e+','e');
- var u=[[1e12,'T'],[1e9,'G'],[1e6,'M'],[1e4,'k']];
- for(var i=0;i<u.length;i++)if(a>=u[i][0])return (n/u[i][0]).toFixed(2)+u[i][1];
+ var u=[[1e12,1e12,'T'],[1e9,1e9,'G'],[1e6,1e6,'M'],[1e4,1e3,'k']];
+ for(var i=0;i<u.length;i++)if(a>=u[i][0])return (n/u[i][1]).toFixed(2)+u[i][2];
  if(a>=100||Math.abs(n-Math.round(n))<1e-9)return Math.round(n).toLocaleString('en-US');
  return n.toFixed(a>=1?2:4)}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
