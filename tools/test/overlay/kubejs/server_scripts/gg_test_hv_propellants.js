@@ -23,6 +23,7 @@
   var HV_HATCH = 'gtceu:hv_energy_input_hatch'
   var IN_HATCH = 'gtceu:hv_input_hatch'
   var CATALYST_HATCH = 'gtnn:catalyst_hatch'
+  var OUT_HATCH = 'gtceu:hv_output_hatch'
   var NEED_HATCHES = 3
   var STAGE_SLACK = 1500
 
@@ -488,12 +489,13 @@
         // the preview forms with one fluid input hatch: find the wall cells that take more of them
         var found = probe(ctrl, IN_HATCH)
         var cat = probe(ctrl, CATALYST_HATCH)
+        var outs = probe(ctrl, OUT_HATCH)
         var keys = Object.keys(found.accepted)
         var catKeys = Object.keys(cat.accepted)
         var cap = 0
         try { cap = Number(P.hatchIn[0].tank.getTankCapacity(0)) } catch (e) { cap = -1 }
         note('probe', 'unchanged preview matches ' + found.base + '; ' + keys.length + ' of ' + found.tried + ' open-side casing cells accept an HV input hatch (' + JSON.stringify(found.seen) + '), ' +
-          catKeys.length + ' accept a catalyst hatch (' + JSON.stringify(cat.seen) + '); first ' + keys.slice(0, 3).join(' | ') + '; preview input hatches ' + P.hatchIn.length + ', one HV hatch holds ' + cap + ' mB')
+          catKeys.length + ' accept a catalyst hatch, ' + Object.keys(outs.accepted).length + ' an HV output hatch; first ' + keys.slice(0, 3).join(' | ') + '; preview input hatches ' + P.hatchIn.length + ', one HV hatch holds ' + cap + ' mB')
         var need = NEED_HATCHES - 1
         if (keys.length < need || catKeys.length < 1) {
           check('input_hatches', false, 'the plant accepts ' + keys.length + ' extra HV input hatches and ' + catKeys.length + ' catalyst hatches; the cycle needs ' + NEED_HATCHES + ' fluid inputs and a catalyst hatch')
@@ -506,6 +508,9 @@
         keys.slice(0, need).forEach(function (k) { S.extra[k] = found.accepted[k] })
         var catKey = catKeys.filter(function (k) { return !S.extra[k] })[0]
         if (catKey) S.extra[catKey] = cat.accepted[catKey]
+        // the peroxide recipe makes two fluids (peroxide and EAQ), so a second output hatch is needed
+        var outKey = Object.keys(outs.accepted).filter(function (k) { return !S.extra[k] })[0]
+        if (outKey) S.extra[outKey] = outs.accepted[outKey]
         S.phase = 'shape'
         S.shapeIx--
         return
