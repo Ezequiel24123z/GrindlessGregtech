@@ -3,6 +3,21 @@ import { Graph } from './engine.mjs';
 import { fluidKey, normalizeRecipe } from './normalize.mjs';
 import { applyPackages } from './packages.mjs';
 import { abilityMaxCount, structureSelectors } from './structure.mjs';
+
+const IO_LABEL = { itemIn: 'input bus', fluidIn: 'input hatch', itemOut: 'output bus', fluidOut: 'output hatch' };
+// The I/O abilities a recipe needs. A programmed circuit alone doesn't need a bus (GTM sets it in the controller).
+function ioNeeds(n) {
+  const need = new Set();
+  for (const i of n.inputs) {
+    if (i.kind === 'fluid') need.add('fluidIn');
+    else if (i.kind === 'item' && !(i.alts.length === 1 && i.alts[0] === 'gtceu:programmed_circuit')) need.add('itemIn');
+  }
+  for (const o of n.outputs) {
+    if (o.key.startsWith('research:')) continue;
+    need.add(o.key.startsWith('fluid:') ? 'fluidOut' : 'itemOut');
+  }
+  return [...need];
+}
 import { asArray, makeGlobMatcher } from './util.mjs';
 
 export function prepareConfig(raw) {
@@ -482,6 +497,9 @@ export function buildModel(dump, rawCfg0) {
         const sd = structureSelectors(desc, abilityItems, (i) => dump.items.size === 0 || dump.items.has(i));
         for (const p of sd.problems) warnings.push(`${id}: ${p}`);
         partSels = sd.selectors;
+        // I/O abilities the pattern offers (M4-02): a recipe whose items or fluids need an ability the pattern lacks can't run here
+        const has = (...abs) => abs.some((a) => abilityMaxCount(desc, a) > 0);
+        e.ioHave = { itemIn: has('input_bus', 'steam_input_bus'), fluidIn: has('input_hatch'), itemOut: has('output_bus', 'steam_output_bus'), fluidOut: has('output_hatch') };
         // requireAbilities (IV, 2026-10-25): a variant built WITH an optional part its real pattern offers (a plant of ours formed with
         // the IV parallel hatch); the pattern must have a cell for it
         for (const ab of asArray(e.requireAbilities)) {
@@ -544,10 +562,15 @@ export function buildModel(dump, rawCfg0) {
       const euOk = (e) => (e.maxEUt === undefined ? Infinity : e.maxEUt) >= n.eut;
       const tempOk = (e) => e.maxTemp === undefined || n.temp === undefined || e.maxTemp >= n.temp;
       const tierOk = (e) => tierAllows(e, n.id);
-      const cands = all.filter((e) => euOk(e) && tempOk(e) && tierOk(e));
+      const need = ioNeeds(n);
+      const ioMissing = (e) => (e.ioHave ? need.filter((k) => !e.ioHave[k]) : []);
+      const ioOk = (e) => ioMissing(e).length === 0;
+      const cands = all.filter((e) => euOk(e) && tempOk(e) && tierOk(e) && ioOk(e));
       let lbl = `machine for ${n.type}`;
       if (cands.length === 0) {
-        if (all.length === 0) lbl = `there's no machine for ${n.type} in this tier`;
+        const ioBlocked = all.find((e) => euOk(e) && tempOk(e) && tierOk(e) && !ioOk(e));
+        if (ioBlocked) lbl = `${ioBlocked.id || ioBlocked.machine}'s pattern has no ${ioMissing(ioBlocked).map((k) => IO_LABEL[k]).join(' or ')} this recipe needs`;
+        else if (all.length === 0) lbl = `there's no machine for ${n.type} in this tier`;
         else if (all.some((e) => euOk(e) && tempOk(e) && (e.onlyRecipesMatch || e.exceptRecipesMatch))) lbl = `no ${n.type} machine of this tier takes ${n.id} (the family's veto: its tier folders and the machines' recipe allowlists)`;
         else if (all.some((e) => euOk(e) && tempOk(e))) lbl = `no ${n.type} machine of this tier runs the recipes filed under ${recipeTierOf(n.id)}/ (the family's tier veto)`;
         else if (all.some(euOk)) lbl = `no ${n.type} machine reaches ${n.temp} K (this tier's coils)`;
