@@ -47,7 +47,7 @@
   }
 
   function ingredient(ing, withTooltip) {
-    var list = ing.getEmiStacks()
+    var list = new (Java.loadClass('java.util.ArrayList'))(ing.getEmiStacks())
     if (list.size() === 0) return { id: '<empty>', n: 0 }
     var s = describe(list.get(0), withTooltip)
     if (list.size() > 1) s.alt = list.size()
@@ -72,9 +72,9 @@
           var r = recipes.get(ri)
           var rec = { id: String(r.getId()), cat: cid, in: [], out: [] }
           try {
-            var ins = r.getInputs()
+            var ins = new ArrayList(r.getInputs())
             for (var ii = 0; ii < ins.size() && ii < 12; ii++) rec.in.push(ingredient(ins.get(ii), tip))
-            var outs = r.getOutputs()
+            var outs = new ArrayList(r.getOutputs())
             for (var oi = 0; oi < outs.size() && oi < 12; oi++) rec.out.push(describe(outs.get(oi), tip))
           } catch (e) {
             rec.error = String(e)
