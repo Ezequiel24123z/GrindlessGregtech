@@ -23,8 +23,8 @@
   UG.skipped = []
 
   function addCasing(event) {
-    var inputs = ['2x gtceu:uxv_machine_casing', '2x gtceu:uxv_field_generator', '4x gtceu:uxv_emitter', '2x gtnn:spintronic_mainframe']
-    var missing = [CASING, CHART].concat(inputs.map(function (s) { return s.substring(s.indexOf(' ') + 1) }))
+    var inputs = ['2x gtceu:uxv_machine_casing', '2x gtceu:uxv_field_generator', '4x gtceu:uxv_emitter', '2x #gtceu:circuits/uxv']
+    var missing = [CASING, CHART].concat(inputs.map(function (s) { return s.substring(s.indexOf(' ') + 1) }).filter(function (s) { return s.charAt(0) !== '#' }))
       .filter(function (x) { return !Item.exists(x) })
     if (!Fluid.exists('gtceu:soldering_alloy')) missing.push('gtceu:soldering_alloy')
     if (missing.length > 0) throw new Error('unknown: ' + missing.join(', '))

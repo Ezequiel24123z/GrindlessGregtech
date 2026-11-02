@@ -126,7 +126,7 @@ test('the OpV casing: bulge chart research, UXV parts only, EU/t >= VA[UXV]', ()
   assert.match(code, /stationResearch\(function \(r\) \{ return r\.researchStack\(Item\.of\(CHART\)\)/);
   assert.match(code, /var VA_UXV = 125829120/);
   assert.ok(VA_UXV >= 125829120);
-  for (const t of ['uxv_machine_casing', 'uxv_field_generator', 'uxv_emitter', 'gtnn:spintronic_mainframe']) assert.ok(code.includes(t), t);
+  for (const t of ['uxv_machine_casing', 'uxv_field_generator', 'uxv_emitter', '#gtceu:circuits/uxv']) assert.ok(code.includes(t), t);
   assert.ok(!/\b(opv|max)_(machine_hull|input|output|energy)/.test(code), 'no OpV hull or hatch');
   assert.ok(!/console\.error/.test(code));
   for (const f of [server, startup]) assert.match(f, /^\/\/ priority: -?\d+\r?\n/, 'the integrator stamped the load order');

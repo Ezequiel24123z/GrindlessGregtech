@@ -1,7 +1,7 @@
 // priority: -6600
 // -----------------------------------------------------------------------------------------------
 // OpV's antimatter (docs/eras/opv.md, machines 3 and 5-8, lines 26-28 and 30-33; package OpV-B3): the antihydrogen foundry and the annihilation
-// engine at home, the jet beam line, spallation target station and antiproton decelerator at Cygnus X-1 orbit, their recipe types and the items
+// engine at home, the jet beam line at Cygnus X-1 orbit, the spallation target station and antiproton decelerator anywhere, their recipe types and the items
 // and fluids of the lines. The recipes come from data/grindless/tables/antimatter_opv.json (server_scripts/grindless/opv/antimatter.js). Every
 // other id is F1's (opv/foundation.js).
 //

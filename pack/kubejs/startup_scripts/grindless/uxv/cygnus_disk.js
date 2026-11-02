@@ -5,10 +5,10 @@
 // (server_scripts/grindless/uxv/cygnus_disk.js). Every other id is F1's (uxv/foundation.js).
 //
 //   gtceu:accretion_disk_skimmer   15 x 7 x 15 scoop dish, UXV. Recipe type gtceu:disk_skimming (circuit 1 skim); locked to the Cygnus X-1 orbit.
-//   gtceu:frc_former               7 x 7 x 21 linear theta-pinch, UXV. Recipe type gtceu:frc_forming (circuit 1 cartridge, locked to the orbit;
+//   gtceu:frc_former               7 x 7 x 21 linear theta-pinch, UXV. Recipe type gtceu:frc_forming (circuit 1 cartridge, runs anywhere;
 //                                  2 flux loading).
 //   gtceu:bz_dynamo                19 x 7 x 19 torus round a jet column, UXV. Recipe type gtceu:blandford_znajek, a GENERATOR written at its
-//                                  final figure (2^30 EU/t through two UIV 16 A dynamo hatches), one run at a time, locked to the orbit. It is
+//                                  final figure (2^30 EU/t through two UIV 16 A dynamo hatches), one run at a time, locked to the orbit (the skimmer's hot-flow row too). It is
 //                                  not in power/generators.js.
 //   grindless:strand_coil          the cartridge held in strand tape (ZPM magnet works c9, B3's older row); only the field generator uses it.
 //

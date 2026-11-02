@@ -32,7 +32,7 @@
     ['emi.grindless.info.strangelet_vault.1',
       'Never void tailings: the IV hot cell stores them until they become inert lead dust. Stable exotic matter feeds the Kugelblitz chain (OpV-D3) and the MAX gate proof (G1); keep extra stock for MAX. Stable strange matter is Witten\'s 1984 hypothesis, not an observed industrial material: surviving seeds and the industrial yield are named fiction.'],
     ['emi.grindless.info.strangelet_distiller.0',
-      'Works only at Cygnus X-1 orbit. The UEV calutron separates Pb-208, a chemical reactor seals the ion source, and the heavy-ion cyclotron makes its beam cell. Synchrotron c9 strikes 1,000 mB of local disk plasma with that cell at 503,316,480 EU/t for 1,200 ticks. Its fireball distillate must be processed here, not transported to another site.'],
+      'The distiller runs anywhere; only the fireball is made at Cygnus X-1 orbit. The UEV calutron separates Pb-208, a chemical reactor seals the ion source, and the heavy-ion cyclotron makes its beam cell. Synchrotron c9 strikes 1,000 mB of local disk plasma with that cell at 503,316,480 EU/t for 1,200 ticks. Carry the fireball distillate to any distiller.'],
     ['emi.grindless.info.strangelet_distiller.1',
       'Strangeness distillation (Greiner, Koch and Stoecker, 1987) leaves a droplet as kaons decay. Circuit 2 catches a positive seed with a pasta core catalyst (nominal wear 1/32, GTM chance 3.12%) and gives contained negative residue at 20%. Circuit 3 throws only that residue into Cygnus X-1: the pack\'s sole deliberate material-disposal row. Other recipes refuse output voiding. Negative strangelets would convert ordinary matter; surviving industrial seeds are named fiction.'],
     ['emi.grindless.info.opv_exotic_matter_stock.0',

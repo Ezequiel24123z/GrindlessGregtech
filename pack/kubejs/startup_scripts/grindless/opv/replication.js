@@ -10,7 +10,7 @@
 //   gtceu:replication_refinery    9 x 9 x 9 clean two-cell plant, OpV. Type gtceu:replication_refining (Mond carbonyl cell + FFC salt bath).
 //   gtceu:von_neumann_foundry    11 x 11 x 11 gantry hall, OpV. Type gtceu:self_replication (c1 and c2: a probe copies itself).
 //
-// All three are locked to Terzan 5 core and run on two UXV 4 A energy hatches or OpV hatches. Textures: tools/assets/Build-OpVReplicationTextures.ps1.
+// Only the debris harvester is locked to Terzan 5 core; all three run on two UXV 4 A energy hatches or OpV hatches. Textures: tools/assets/Build-OpVReplicationTextures.ps1.
 // Names: client_scripts/grindless/opv_replication_lang.js. Published for the recipe script: global.grindless.replication.
 (function () {
   const G = global.grindless

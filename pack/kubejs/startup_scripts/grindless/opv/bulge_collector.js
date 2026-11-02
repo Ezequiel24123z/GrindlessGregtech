@@ -9,7 +9,7 @@
 //   gtceu:bulge_collector        13 x 7 x 13 dish hall, OpV, a GENERATOR on one OpV 4 A dynamo hatch. Type gtceu:bulge_light_collection
 //                                (c1 / c2 / c3: 1, 4, 16 packs -> 2^26, 2^28, 2^30 EU/t for one shared duration; the packs are consumed).
 //
-// Both are locked to Terzan 5 core. Textures: tools/assets/Build-OpVBulgeCollectorTextures.ps1. Names: client_scripts/grindless/opv_bulge_collector_lang.js.
+// The collector and the node deploy row are locked to Terzan 5 core; the rest runs anywhere. Textures: tools/assets/Build-OpVBulgeCollectorTextures.ps1. Names: client_scripts/grindless/opv_bulge_collector_lang.js.
 // Published for the recipe script: global.grindless.bulgeCollector.
 (function () {
   const G = global.grindless

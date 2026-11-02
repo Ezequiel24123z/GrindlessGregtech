@@ -7,7 +7,7 @@
 //   gtceu:stellar_elevator             11 x 11 x 25 funnel and boom, UXV (two UIV energy hatches). Recipe type gtceu:star_lifting
 //                                      (circuit 1 lift, 2 elevator log); the lift is locked to the Cygnus X-1 orbit.
 //   gtceu:plasma_mass_filter           9 x 9 x 15 octagonal solenoid, UXV. Recipe type gtceu:plasma_mass_filtering (circuit 1 stellar cuts,
-//                                      2 disk plasma); c1 is locked to the Cygnus X-1 orbit.
+//                                      2 disk plasma); both run anywhere.
 //   gtceu:stellar_condensation_tower   7 x 7 x 23 seven-stage column, UXV. Recipe type gtceu:stellar_condensation (circuit 1 condense);
 //                                      locked to the Cygnus X-1 orbit.
 //

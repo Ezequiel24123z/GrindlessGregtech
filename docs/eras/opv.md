@@ -1274,7 +1274,7 @@ Order: S0-1 and S0-2 first (they gate F1 and G1), then 3, 7, 8, then the rest. T
 - **Allowed (extra):** `tables/gate.json` (1 row); `tables/vela_pasta.json` (11 rows, the site list); the PBO rows in `uhv/elevator.js` (1 row); the cage rows in `uiv/rx_j1856.js` (1 row); pinned tests `uxv-vela_pasta`, `uiv-rx_j1856`, `uhv-elevator`, `uhv-gate`.
 - **References:** *Bridges and first arrivals*; *Places and site rules*; lines 1-2; uxv.md B1 (Kerr sling); `uhv/gate.js:30-34, :90-97`; DECISIONS.md:498; S0-7, S0-12.
 - **Depends on:** F1, F2, UXV-B6 (c10, `bulge_chart`, the `opv` stage), S0-7, S0-12.
-- **Invariants:** no OpV component in A0; chain matter only at SGR; c11 and c13 are the only rows at or above 2^31.
+- **Invariants:** no OpV component in A0; the chain matter extractions and laminator rows only at SGR (caging, drawing and weaving run anywhere); c11 and c13 are the only rows at or above 2^31.
 - **Pending:** `chain_mesh_weave` → A1 and `caged_ni_chain` → B2 (pendingUses); the hull's He-3 → A1 (pendingRoutes).
 - **Acceptance:** the seed launches from Cygnus, the hold places the SGR platform and grants `opv-sgr`; the strand cable carries 16 A x V[OpV] with zero loss (or S0-7's fallback); the hull exists, hidden until A1.
 - **Tests:** T0. T1: `gg_test_opv_bulge_relay`, band assigned by integrator. Doubt: the four UXV pasta machines form and run the new rows at SGR, and the hold survives `@restart` (S0-12 proved a bare row; UXV-B1 proved the sling from Cygnus).

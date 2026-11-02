@@ -1652,7 +1652,8 @@
         "grindless:psr_j0437_orbit"
       ],
       "exceptRecipes": [
-        "grindless:xray_pulse_profiling/ti44_map"
+        "grindless:xray_pulse_profiling/ti44_map",
+        "grindless:positronium_condensation/gamma_laser_cavity"
       ],
       "package": "B3",
       "note": "UXV-B5's older mode (knot dust -> ti44_map, docs/eras/uxv.md:545) carries no dimension condition, as built: the profiler's controller is carried home. Its input is Cas A knot dust, so the row is held to uxv-cas-a by the cas-a resource either way."
@@ -1674,6 +1675,11 @@
       ],
       "exceptRecipes": [
         "grindless:frc_forming/load_flux",
+        "grindless:frc_forming/form_cartridge",
+        "grindless:frc_forming/load_flux_frc",
+        "grindless:plasma_mass_filtering/stellar_cuts",
+        "grindless:plasma_mass_filtering/hot_flow_filter",
+        "grindless:star_lifting/proof_load_ribbon",
         "grindless:plasma_mass_filtering/disk_filter",
         "grindless:plasma_mass_filtering/vms_core_plasma",
         "grindless:frc_forming/confined_vms_plasma"
@@ -1686,13 +1692,10 @@
     },
     {
       "id": "site-vela",
-      "label": "Site: the pasta extractor, phase sorter, draw bench, laminator and polar cap tap only at Vela pulsar orbit",
+      "label": "Site: the pasta extractor and polar cap tap only at Vela pulsar orbit (the sorter, draw bench and laminator run anywhere)",
       "kind": "site",
       "types": [
         "gtceu:pasta_extraction",
-        "gtceu:pasta_sorting",
-        "gtceu:pasta_drawing",
-        "gtceu:pasta_lamination",
         "gtceu:polar_cap_tapping"
       ],
       "dimensions": [
@@ -1701,41 +1704,25 @@
       "exceptRecipes": [
         "grindless:pasta_extraction/chain_crust",
         "grindless:pasta_extraction/ni_chain",
-        "grindless:pasta_extraction/chain_lattice",
-        "grindless:pasta_sorting/chain_caging",
-        "grindless:pasta_sorting/ni_chain_caging",
-        "grindless:pasta_sorting/lattice_caging",
-        "grindless:pasta_drawing/chain_strand_drawing",
-        "grindless:pasta_drawing/chain_wire_drawing",
-        "grindless:pasta_lamination/chain_lamina",
-        "grindless:pasta_lamination/chain_lamina_stack",
-        "grindless:pasta_lamination/chain_mesh_weave"
+        "grindless:pasta_extraction/chain_lattice"
       ],
       "package": "B4",
       "note": "OpV-A0's chain matter modes (c3-c5) of the four pasta machines run at SGR 1806-20 orbit instead (docs/eras/opv.md:70, :83): site-sgr-chain-matter holds them there."
     },
     {
       "id": "site-sgr-chain-matter",
-      "label": "Site: the pasta machines' chain matter modes (OpV-A0) only at SGR 1806-20 orbit",
+      "label": "Site: the chain matter extractions and laminator rows (OpV-A0) only at SGR 1806-20 orbit",
       "kind": "site",
       "types": [
         "gtceu:pasta_extraction",
-        "gtceu:pasta_sorting",
-        "gtceu:pasta_drawing",
         "gtceu:pasta_lamination"
       ],
       "recipe": [
         "grindless:pasta_extraction/chain_crust",
         "grindless:pasta_extraction/ni_chain",
         "grindless:pasta_extraction/chain_lattice",
-        "grindless:pasta_sorting/chain_caging",
-        "grindless:pasta_sorting/ni_chain_caging",
-        "grindless:pasta_sorting/lattice_caging",
-        "grindless:pasta_drawing/chain_strand_drawing",
-        "grindless:pasta_drawing/chain_wire_drawing",
         "grindless:pasta_lamination/chain_lamina",
-        "grindless:pasta_lamination/chain_lamina_stack",
-        "grindless:pasta_lamination/chain_mesh_weave"
+        "grindless:pasta_lamination/chain_lamina_stack"
       ],
       "dimensions": [
         "grindless:sgr1806_orbit"

@@ -21,7 +21,7 @@
   }
   var pages = {
     jet_beam_line: [
-      'At Cygnus X-1 orbit, jet beam extraction bunches protons on an SRF cavity. A beam window wears about once per 32 runs. Flux-loaded plasma doubles the beam yield. The beam must be processed here.',
+      'At Cygnus X-1 orbit, jet beam extraction bunches protons on an SRF cavity. A beam window wears about once per 32 runs. Flux-loaded plasma doubles the beam yield. Carry the beam to the later machines anywhere.',
       'Feeds the spallation target station and the antiproton line. Jet electrons are dumped back into the black hole; they are not a recoverable item.'
     ],
     spallation_target_station: [
