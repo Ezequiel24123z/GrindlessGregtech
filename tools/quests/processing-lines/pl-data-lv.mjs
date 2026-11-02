@@ -1,72 +1,121 @@
 // pl_lv: the LV lines. Positions are relative to each cluster (pl-model.mjs places the clusters).
+// L1 etched boards and diodes to the MV circuit (9), L2 coke-oven ammonia to the photographic plate (10), L3 sapphire to aluminium (4),
+// L4 drilling fluid (4). The short chains below them (air, arc, heliostat, fertilizer, creatures) are not lines.
 import { I, F, M, n, L, via } from './pl-lib.mjs';
 
 export default {
   file: 'pl_lv',
   order: 1,
   title: 'LV Lines',
-  subtitle: 'Sulfur becomes acid, air becomes gases, sapphire becomes aluminium, and the arc furnace makes silicon for AE2.',
+  subtitle: 'Pyrite becomes acid and etched boards, coal gas becomes nitric acid and photographic plates, and sapphire becomes aluminium.',
   icon: 'gtceu:sulfide_roaster',
-  focus: 'collector',
-  bands: [['acid', 'roaster'], ['salt', 'aluminium', 'diodes'], ['arc', 'heliostat'], ['drillfluid', 'coalgas', 'fertilizer'], ['observatory', 'creatures']],
+  focus: 'pdrill',
+  bands: [['etched'], ['photo'], ['air', 'aluminium'], ['arc', 'heliostat'], ['drillfluid', 'fertilizer', 'creatures']],
   clusters: {
-    acid: {
-      name: 'Sulfuric acid from sulfur',
+    etched: {
+      name: 'Etched boards and diodes to the MV circuit',
       nodes: [
-        n('collector', 0, 0, M('gtceu:lv_gas_collector'), 'Gas Collector', { sub: 'Breathes in the Overworld' }),
-        n('air', 2, 0, F('gtceu:air'), 'Air', { from: ['collector'] }),
-        n('o2', 4, -0.75, F('gtceu:oxygen'), 'Oxygen', { from: ['air'], sub: 'Centrifuge', by: ['gtceu:centrifuge'] }),
-        n('n2', 4, 0.75, F('gtceu:nitrogen'), 'Nitrogen', { kind: 'by', from: ['air'], by: ['gtceu:centrifuge'], end: 'EBF, MV pyrolysis', sub: 'Aluminium in the EBF; MV pyrolysis runs faster with it' }),
-        n('sulfur', 4, -2.25, I('gtceu:sulfur_dust'), 'Sulfur', { kind: 'raw', sub: 'The Nether, or realgar in the centrifuge' }),
-        n('so2', 6, -1.5, F('gtceu:sulfur_dioxide'), 'Sulfur Dioxide', { from: ['sulfur', 'o2'], sub: 'Chemical reactor' }),
-        n('so3', 8, -1.5, F('gtceu:sulfur_trioxide'), 'Sulfur Trioxide', { from: ['so2'], sub: 'More oxygen' }),
-        n('acid', 10, -1.5, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', {
-          kind: 'product', from: ['so3'], sub: 'Add water',
-          desc: 'GregTech\'s long way round: three reactors and a lot of oxygen. The sulfide roaster next door does it in one go.',
+        n('csample', 0, -1.5, I('grindless:vein_sample_copper'), 'Copper Vein Sample', { kind: 'raw', sub: 'The copper vein also holds pyrite' }),
+        n('cbit', 0, 0, I('grindless:bronze_drill_bit'), 'Bronze Drill Bit', { kind: 'raw', sub: 'Wears out now and then' }),
+        n('pdrill', 2, -0.75, M('gtceu:lv_vein_drill'), 'LV Vein Drill', {
+          kind: 'ours', from: ['csample', 'cbit'],
+          desc: 'The copper vein hands back raw pyrite among other ores, for as long as the drill runs.',
         }),
-      ],
-    },
-    roaster: {
-      name: 'Acid from ore',
-      nodes: [
-        n('pyrite', 0, -1.5, I('gtceu:pyrite_dust'), 'Pyrite Dust', { kind: 'raw' }),
-        n('galena', 0, 0, I('gtceu:galena_dust'), 'Galena Dust', { kind: 'raw', sub: 'Sphalerite, stibnite and tetrahedrite work too' }),
-        n('air2', 0, 1.5, F('gtceu:air'), 'Air', { kind: 'raw', sub: 'Gas collector' }),
-        n('vanadium', 0, 3, I('gtceu:vanadium_dust'), 'Vanadium', { kind: 'raw', sub: 'Centrifuged vanadium magnetite' }),
-        n('diatomite', 0, 4.5, I('gtceu:diatomite_dust'), 'Diatomite', { kind: 'raw' }),
-        n('catalyst', 2, 3.75, I('grindless:contact_catalyst'), 'Contact Catalyst', { from: ['vanadium', 'diatomite'], sub: 'Mixer; wears out now and then' }),
-        n('roaster', 4, 0.75, M('gtceu:sulfide_roaster'), 'Sulfide Roaster', {
-          kind: 'ours', from: ['pyrite', 'galena', 'air2', 'catalyst'],
+        n('rawpyr', 4, -0.75, I('gtceu:raw_pyrite'), 'Raw Pyrite', { from: ['pdrill'] }),
+        n('pyrite', 6, -0.75, I('gtceu:pyrite_dust'), 'Pyrite Dust', { from: [via('rawpyr', 'gtceu:crushed_pyrite_ore', 'gtceu:purified_pyrite_ore')], sub: 'Macerator, washer, centrifuge' }),
+        n('air2', 6, 1, F('gtceu:air'), 'Air', { kind: 'raw', sub: 'Gas collector' }),
+        n('vanadium', 6, 2.5, I('gtceu:vanadium_dust'), 'Vanadium', { kind: 'raw', sub: 'Centrifuged vanadium magnetite' }),
+        n('diatomite', 6, 4, I('gtceu:diatomite_dust'), 'Diatomite', { kind: 'raw' }),
+        n('catalyst', 8, 3.25, I('grindless:contact_catalyst'), 'Contact Catalyst', { from: ['vanadium', 'diatomite'], sub: 'Mixer; wears out now and then' }),
+        n('roaster', 10, 0.5, M('gtceu:sulfide_roaster'), 'Sulfide Roaster', {
+          kind: 'ours', from: ['pyrite', 'air2', 'catalyst'],
           desc: ['Roasts sulfide ore in air and turns the fumes straight into acid, with steam on the side.', 'What the EBF does with bottled oxygen, it does with air and one machine.'],
         }),
-        n('acid2', 6.5, -2.25, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', { kind: 'product', from: ['roaster'] }),
-        n('steam', 6.5, -0.75, F('gtceu:steam'), 'Steam', { from: ['roaster'], sub: 'Heat you would otherwise lose' }),
-        n('hematite', 6.5, 0.75, I('gtceu:hematite_dust'), 'Hematite', { kind: 'by', from: ['roaster'], end: 'smelts to iron', sub: 'From pyrite: smelt it for iron' }),
-        n('massicot', 6.5, 2.25, I('gtceu:massicot_dust'), 'Massicot', { from: ['roaster'], sub: 'From galena' }),
-        n('silver', 6.5, 3.75, I('gtceu:silver_nugget'), 'Silver Nugget', { from: ['roaster'], sub: 'Also from galena' }),
-        n('turbine', 8.5, -0.75, M('gtceu:lv_steam_turbine'), 'Steam Turbine', { from: ['steam'] }),
-        n('lead', 8.5, 2.25, I('gtceu:lead_dust'), 'Lead', { kind: 'dest', from: ['massicot'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer' }),
-        n('silveringot', 8.5, 3.75, I('gtceu:silver_ingot'), 'Silver', { kind: 'dest', from: ['silver'], sub: 'Mirrors and photographic plates' }),
-      ],
-    },
-    salt: {
-      name: 'Salt, persulfate and iron chloride',
-      nodes: [
-        n('acid3', 0, -0.75, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', { kind: 'raw', sub: 'Either acid line' }),
-        n('salt', 0, 0.75, I('gtceu:salt_dust'), 'Salt', { kind: 'raw' }),
-        n('cr', 2, 0, M('gtceu:lv_chemical_reactor'), 'Chemical Reactor', { from: ['acid3', 'salt'] }),
-        n('bisulfate', 4, -0.75, I('gtceu:sodium_bisulfate_dust'), 'Sodium Bisulfate', { from: ['cr'] }),
-        n('hcl', 4, 0.75, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { from: ['cr'] }),
-        n('persulfate', 6, -1.5, F('gtceu:sodium_persulfate'), 'Sodium Persulfate', {
-          kind: 'product', from: ['bisulfate'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer',
+        n('acid', 12, -1.5, F('gtceu:sulfuric_acid'), 'Sulfuric Acid', { from: ['roaster'], sub: 'Roasting contact acid plant' }),
+        n('steam', 12, 0, F('gtceu:steam'), 'Steam', { from: ['roaster'], sub: 'Heat you would otherwise lose' }),
+        n('hematite', 12, 1.5, I('gtceu:hematite_dust'), 'Hematite', { kind: 'by', from: ['roaster'], end: 'smelts to iron', sub: 'From pyrite: smelt it for iron' }),
+        n('turbine', 14, 0, M('gtceu:lv_steam_turbine'), 'Steam Turbine', { from: ['steam'] }),
+        n('salt', 12, -3, I('gtceu:salt_dust'), 'Salt', { kind: 'raw' }),
+        n('cr', 14, -2.25, M('gtceu:lv_chemical_reactor'), 'Chemical Reactor', { from: ['acid', 'salt'], sub: 'The salt cake process' }),
+        n('bisulfate', 16, -3, I('gtceu:sodium_bisulfate_dust'), 'Sodium Bisulfate', { from: ['cr'] }),
+        n('hcl', 16, -1.5, F('gtceu:hydrochloric_acid'), 'Hydrochloric Acid', { from: ['cr'] }),
+        n('persulfate', 18, -3, F('gtceu:sodium_persulfate'), 'Sodium Persulfate', {
+          from: ['bisulfate'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer',
           desc: 'Etches circuit boards and washes a few stubborn ores. You will want more than you think.',
         }),
-        n('h2', 6, 0, F('gtceu:hydrogen'), 'Hydrogen', {
+        n('h2', 18, -4.5, F('gtceu:hydrogen'), 'Hydrogen', {
           kind: 'by', from: ['bisulfate', 'hcl'], end: 'tank, MV methanol',
           desc: 'Both reactions leave hydrogen behind. It burns, so tank it: MV turns it into methanol.',
         }),
-        n('iron', 4, 2.25, I('gtceu:iron_dust'), 'Iron Dust', { kind: 'raw' }),
-        n('fecl3', 6, 1.5, F('gtceu:iron_iii_chloride'), 'Iron III Chloride', { kind: 'product', from: ['hcl', 'iron'], sub: 'The other board etchant' }),
+        n('iron', 16, 0, I('gtceu:iron_dust'), 'Iron Dust', { kind: 'raw' }),
+        n('fecl3', 18, -1, F('gtceu:iron_iii_chloride'), 'Iron III Chloride', { from: ['hcl', 'iron'], sub: 'The other board etchant' }),
+        n('bauxite', 18, -6, I('gtceu:crushed_bauxite_ore'), 'Crushed Bauxite', { kind: 'raw', sub: 'Gallium hides in it' }),
+        n('gallium', 20, -4.5, I('gtceu:gallium_dust'), 'Gallium', { from: ['persulfate', 'bauxite'], by: ['gtceu:chemical_bath'], sub: 'Chemical bath, a little at a time' }),
+        n('realgar', 20, -7, I('gtceu:realgar_dust'), 'Realgar Dust', { kind: 'raw' }),
+        n('arsenic', 22, -7, I('gtceu:arsenic_dust'), 'Arsenic', { from: ['realgar'], by: ['gtceu:centrifuge'], sub: 'Centrifuge' }),
+        n('sulfur2', 22, -8.5, I('gtceu:sulfur_dust'), 'Sulfur', { kind: 'by', from: ['realgar'], by: ['gtceu:centrifuge'], end: 'acid, rubber', sub: 'Acid and rubber' }),
+        n('gaas', 22, -5, I('gtceu:gallium_arsenide_dust'), 'Gallium Arsenide', { from: ['gallium', 'arsenic'], sub: 'Mixer' }),
+        n('diode', 24, -5, I('gtceu:diode'), 'Diode', {
+          from: [via('gaas', 'gtceu:small_gallium_arsenide_dust')], sub: 'Assembler',
+          desc: 'A pinch of gallium arsenide per diode, and the good circuits of LV are open.',
+        }),
+        n('galena', 6, 6, I('gtceu:galena_dust'), 'Galena Dust', { kind: 'raw', sub: 'Roasted for silver' }),
+        n('silveringot', 12, 5, I('gtceu:silver_ingot'), 'Silver', { from: ['galena'], sub: 'The roaster and a furnace' }),
+        n('sfoil', 18, 5, I('gtceu:silver_foil'), 'Silver Foil', { from: ['silveringot'], sub: 'Bender' }),
+        n('pcbase', 18, 3, I('gtceu:phenolic_circuit_board'), 'Phenolic Board', { kind: 'raw', sub: 'Wood dust and glue' }),
+        n('board', 22, 0.5, I('gtceu:phenolic_printed_circuit_board'), 'Etched Board', {
+          from: ['persulfate', 'fecl3', 'sfoil', 'pcbase'], by: ['gtceu:chemical_reactor'], sub: 'Persulfate or iron chloride etch',
+        }),
+        n('circuit', 26, -2, I('gtceu:good_electronic_circuit'), 'Good Electronic Circuit', {
+          kind: 'product', from: ['diode', 'board'], sub: 'Circuit assembler',
+          desc: 'Two etched boards, four basic circuits and three diodes: the MV gate asks for eight of these.',
+        }),
+      ],
+    },
+    photo: {
+      name: 'Coke-oven ammonia to the photographic plate',
+      nodes: [
+        n('coal', 0, 0, I('minecraft:coal'), 'Coal', { kind: 'raw' }),
+        n('battery', 2, 0, M('gtceu:coking_battery'), 'Coke Battery', { kind: 'ours', from: ['coal'], sub: 'Coke, creosote and coal gas' }),
+        n('coalgas', 4, 0, F('gtceu:coal_gas'), 'Coal Gas', { from: ['battery'] }),
+        n('gasturbine', 6, -2.25, M('gtceu:lv_gas_turbine'), 'Gas Turbine', { from: ['coalgas'], sub: 'Burns it for power' }),
+        n('distillery', 6, 0, M('gtceu:lv_distillery'), 'Distillery', { from: ['coalgas'], sub: 'One fraction per circuit' }),
+        n('coaltar', 8, -1.5, F('gtceu:coal_tar'), 'Coal Tar', { kind: 'by', from: ['distillery'], end: 'distillery again', sub: 'Distil it again: creosote, phenol, naphthalene' }),
+        n('cokedust2', 8, 3, I('gtceu:coke_dust'), 'Coke Dust', { kind: 'by', from: ['distillery'], end: 'sinter in the ironworks', sub: 'Carbon for the sinter' }),
+        n('ammonia', 8, 0, F('gtceu:ammonia'), 'Ammonia', { from: ['distillery'], sub: 'Coke-oven ammonia, before Haber' }),
+        n('o2c', 8, 1.5, F('gtceu:oxygen'), 'Oxygen', { kind: 'raw', sub: 'Gas collector and centrifuge' }),
+        n('no', 10, 0.75, F('gtceu:nitric_oxide'), 'Nitric Oxide', { from: ['ammonia', 'o2c'], by: ['gtceu:chemical_reactor'], sub: 'Ostwald oxidation' }),
+        n('no2', 12, 0.75, F('gtceu:nitrogen_dioxide'), 'Nitrogen Dioxide', { from: ['no', 'o2c'], by: ['gtceu:chemical_reactor'], sub: 'More oxygen' }),
+        n('hno3', 14, 0.75, F('gtceu:nitric_acid'), 'Nitric Acid', {
+          from: ['no2'], by: ['gtceu:chemical_reactor'], sub: 'Absorbed in water; the NO loops back',
+          desc: 'GregTech\'s long way to nitric acid. Later lines need it by the bucket.',
+        }),
+        n('ag', 14, 3, I('gtceu:silver_dust'), 'Silver Dust', { kind: 'raw', sub: 'From the sulfide roaster\'s galena' }),
+        n('agno3', 16, 1.5, I('gtceu:silver_nitrate_dust'), 'Silver Nitrate', { from: ['hno3', 'ag'], by: ['gtceu:chemical_reactor'], sub: 'Dissolving silver' }),
+        n('nacl', 16, 3.5, I('gtceu:salt_dust'), 'Salt', { kind: 'raw' }),
+        n('agcl', 18, 2.25, I('gtceu:silver_chloride_dust'), 'Silver Chloride', { from: ['agno3', 'nacl'], by: ['gtceu:chemical_reactor'], sub: 'Precipitation' }),
+        n('nano3', 18, 4, I('gtceu:sodium_nitrate_dust'), 'Sodium Nitrate', { kind: 'by', from: ['agno3', 'nacl'], end: 'stored for the HV rhodium step', sub: 'A real fertilizer too' }),
+        n('glue', 18, 0.75, F('gtceu:glue'), 'Glue', { kind: 'raw', sub: 'Impure gelatin' }),
+        n('emulsion', 20, 1.5, F('gtceu:photographic_emulsion'), 'Photographic Emulsion', { from: ['agcl', 'glue'], by: ['gtceu:mixer'], sub: 'Mixer' }),
+        n('pane', 20, 3, I('gtceu:glass_plate'), 'Glass Plate', { kind: 'raw' }),
+        n('plate', 22, 2.25, I('grindless:photographic_plate'), 'Photographic Plate', { from: ['emulsion', 'pane'], by: ['gtceu:assembler'], sub: 'Plate coating' }),
+        n('chart', 22, 0, I('grindless:lunar_chart_draft'), 'Lunar Chart (Draft)', { kind: 'raw', sub: 'Drawn by the steam age\'s observatory', desc: 'It\'s never used up. Copy it by hand if you want a spare.' }),
+        n('paper', 22, 4, I('minecraft:paper'), 'Paper', { kind: 'raw' }),
+        n('optical', 24, 2, M('gtceu:optical_observatory'), 'Optical Observatory', {
+          kind: 'ours', from: ['chart', 'paper', 'plate'],
+          desc: 'Long exposures on clear nights, at any height. The steam age\'s chart guides it and stays in one piece.',
+        }),
+        n('map', 26, 1, I('grindless:lunar_map'), 'Photographic Lunar Map', { kind: 'product', from: ['optical'] }),
+        n('ephemeris', 26, 3, I('grindless:lunar_ephemeris'), 'Lunar Ephemeris', { kind: 'by', from: ['optical'], end: 'rocket chip, radio telescope', sub: 'Where the Moon will be' }),
+      ],
+    },
+    air: {
+      name: 'Air from the gas collector',
+      nodes: [
+        n('collector', 0, 0, M('gtceu:lv_gas_collector'), 'Gas Collector', { sub: 'Breathes in the Overworld' }),
+        n('air', 2, 0, F('gtceu:air'), 'Air', { from: ['collector'] }),
+        n('o2', 4, -0.75, F('gtceu:oxygen'), 'Oxygen', { kind: 'product', from: ['air'], sub: 'Centrifuge', by: ['gtceu:centrifuge'] }),
+        n('n2', 4, 0.75, F('gtceu:nitrogen'), 'Nitrogen', { kind: 'by', from: ['air'], by: ['gtceu:centrifuge'], end: 'EBF, MV pyrolysis', sub: 'Aluminium in the EBF; MV pyrolysis runs faster with it' }),
       ],
     },
     aluminium: {
@@ -84,21 +133,6 @@ export default {
         n('mvhull', 16, -0.75, I('gtceu:mv_machine_hull'), 'MV Machine Hull', {
           kind: 'product', from: ['alplate', 'mvcasing'],
           desc: 'The whole point of the sapphire. Every MV machine starts here.',
-        }),
-      ],
-    },
-    diodes: {
-      name: 'Gallium arsenide',
-      nodes: [
-        n('sphalerite', 0, -0.75, I('gtceu:sphalerite_dust'), 'Sphalerite Dust', { kind: 'raw' }),
-        n('realgar', 0, 0.75, I('gtceu:realgar_dust'), 'Realgar Dust', { kind: 'raw' }),
-        n('gallium', 2, -0.75, I('gtceu:gallium_dust'), 'Gallium', { from: ['sphalerite'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer, a little at a time' }),
-        n('arsenic', 2, 0.75, I('gtceu:arsenic_dust'), 'Arsenic', { from: ['realgar'], by: ['gtceu:centrifuge'], sub: 'Centrifuge' }),
-        n('sulfur2', 2, 2.25, I('gtceu:sulfur_dust'), 'Sulfur', { kind: 'by', from: ['realgar'], by: ['gtceu:centrifuge'], end: 'acid, rubber', sub: 'Acid and rubber' }),
-        n('gaas', 4, 0, I('gtceu:gallium_arsenide_dust'), 'Gallium Arsenide', { from: ['gallium', 'arsenic'], sub: 'Mixer' }),
-        n('diode', 6, 0, I('gtceu:diode'), 'Diode', {
-          kind: 'product', from: [via('gaas', 'gtceu:small_gallium_arsenide_dust')], sub: 'Assembler',
-          desc: 'A pinch of gallium arsenide per diode, and the good circuits of LV are open.',
         }),
       ],
     },
@@ -161,17 +195,6 @@ export default {
         n('stonedust2', 10.5, 0.75, I('gtceu:stone_dust'), 'Stone Dust, Back In', { kind: 'ret', from: ['cobble2'], by: ['gtceu:macerator'], recycle: true, sub: 'Macerator, then the mixer again' }),
       ],
     },
-    coalgas: {
-      name: 'Coal gas',
-      nodes: [
-        L('coalgas', 0, 0, 'pl_steam:coalgas'),
-        n('gasturbine', 2, -1.5, M('gtceu:lv_gas_turbine'), 'Gas Turbine', { from: ['coalgas'], sub: 'Burns it for power' }),
-        n('distillery', 2, 1.5, M('gtceu:lv_distillery'), 'Distillery', { from: ['coalgas'], sub: 'One fraction per circuit' }),
-        n('coaltar', 4, 0.75, F('gtceu:coal_tar'), 'Coal Tar', { kind: 'product', from: ['distillery'], end: 'distillery again', sub: 'Distil it again: creosote, phenol, naphthalene' }),
-        n('ammonia', 4, 2.25, F('gtceu:ammonia'), 'Ammonia', { kind: 'product', from: ['distillery'], end: 'nitric oxide', sub: 'Burnt with oxygen, it starts nitric acid' }),
-        n('cokedust2', 4, 3.75, I('gtceu:coke_dust'), 'Coke Dust', { kind: 'by', from: ['distillery'], end: 'arc furnace', sub: 'The arc furnace\'s carbon' }),
-      ],
-    },
     fertilizer: {
       name: 'Ash becomes fertilizer',
       nodes: [
@@ -184,22 +207,6 @@ export default {
           desc: 'Twice the steam greenhouse, and fertilizer doubles it again. The steam age\'s slag ends up as wood.',
         }),
         n('logs', 6, 1.5, I('minecraft:oak_log'), 'Logs', { kind: 'product', from: ['gh'] }),
-      ],
-    },
-    observatory: {
-      name: 'The photographic Moon',
-      nodes: [
-        L('chart', 0, -0.75, 'pl_steam:chart'),
-        n('paper', 2, -1.5, I('minecraft:paper'), 'Paper', { kind: 'raw' }),
-        n('pane', 0, 0.75, I('gtceu:glass_plate'), 'Glass Plate', { kind: 'raw' }),
-        n('silverdust', 0, 2.25, I('gtceu:small_silver_dust'), 'Small Pile of Silver Dust', { kind: 'raw', sub: 'The emulsion' }),
-        n('plate', 2, 1.5, I('grindless:photographic_plate'), 'Photographic Plate', { from: ['pane', 'silverdust'], sub: 'Assembler' }),
-        n('optical', 4, 0, M('gtceu:optical_observatory'), 'Optical Observatory', {
-          kind: 'ours', from: ['chart', 'paper', 'plate'],
-          desc: 'Long exposures on clear nights, at any height. The steam age\'s chart guides it and stays in one piece.',
-        }),
-        n('map', 6, -0.75, I('grindless:lunar_map'), 'Photographic Lunar Map', { kind: 'product', from: ['optical'] }),
-        n('ephemeris', 6, 0.75, I('grindless:lunar_ephemeris'), 'Lunar Ephemeris', { kind: 'product', from: ['optical'], sub: 'Where the Moon will be' }),
       ],
     },
     creatures: {
