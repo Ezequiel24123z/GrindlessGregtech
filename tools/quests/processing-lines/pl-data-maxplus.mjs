@@ -1101,8 +1101,7 @@ const BYEND = {
 
 const title = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '').split('_').map((w) => (w.length <= 3 && /^(sic|pbo|tfln|mtj|snspd|beuv|frc|bz|fcl|smes|yig|hbn|ybco|rebco|aod|lna|utc|inp|hemt|sis|uv|cvi|ppln|eu|yso|teo2|sn|li|cu111|mram|srf|he|gr|npro|nd|yag|simox|soi|fpga|feep|gaas|nb3sn|yb|led|vo2|pmn|pt|fe|ni|sr|co2|sco2|bec|nsc|ime|pgm|hts|gd)$/.test(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
 const shortId = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '');
-const BY_Y = [1.5, -1.5, 2.75, -2.75];
-const TREE = new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19']);
+const TREE =  new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19']);
 
 // A gate-grid craft is one step: it is the branch end of the line that makes its main input.
 const ext = (cl) => ({ extends: cl });
@@ -1135,7 +1134,6 @@ function line(num, y, x0 = 0) {
   const key = (i) => (nodes[i][0] === 'x' ? nodes[i][1] : `${num.toLowerCase()}_${i}`);
   const x = [];
   const dy = [];
-  const slot = {};
   // main nodes sit in the column of their longest chain, pulled as late as their first consumer allows
   const depth = [];
   nodes.forEach(([t, , from, by], i) => {
@@ -1149,19 +1147,22 @@ function line(num, y, x0 = 0) {
     if (users.length) depth[i] = Math.max(depth[i], Math.min(...users) - 1);
   }
   const seen = {};
+  nodes.forEach(([t, , , by], i) => {
+    if (t === 'x' || by) return;
+    const k = (seen[depth[i]] = (seen[depth[i]] || 0) + 1) - 1;
+    x[i] = x0 + 2.5 * depth[i];
+    dy[i] = k === 0 ? 0 : (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 2.25;
+  });
+  // a by-product takes the nearest free spot beside its source
+  const free = (px, py) => x.every((ox, j) => ox === undefined || Math.max(Math.abs(ox - px), Math.abs(dy[j] - py)) >= 2.1);
   nodes.forEach(([t, , from, by], i) => {
-    if (t === 'x') return;
-    if (by) {
-      const s = from[0];
-      const k = (slot[s] = (slot[s] || 0) + 1);
-      if (k > BY_Y.length) throw new Error(`${num}: too many by-products on node ${s}`);
-      x[i] = x[s] + 1.25;
-      dy[i] = BY_Y[k - 1];
-    } else {
-      const k = (seen[depth[i]] = (seen[depth[i]] || 0) + 1) - 1;
-      x[i] = x0 + 2.5 * depth[i];
-      dy[i] = k === 0 ? 0 : (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 2.25;
-    }
+    if (t === 'x' || !by) return;
+    const s = from[0];
+    x[i] = x[s] + 1.25;
+    const cand = [1.5, -1.5, 2.75, -2.75, 4, -4, 5.25, -5.25, 6.5, -6.5, 7.75, -7.75];
+    const pick = cand.find((c) => free(x[i], dy[s] + c));
+    if (pick === undefined) throw new Error(`${num}: no room for by-product ${i}`);
+    dy[i] = dy[s] + pick;
   });
   const used = new Set(nodes.flatMap(([, , from]) => from));
   return nodes.map(([t, id, from, by, peek], i) => {
