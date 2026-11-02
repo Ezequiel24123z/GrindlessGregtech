@@ -212,7 +212,7 @@ Format as in max.md, shortened: gains, recipes, byproducts, structure, crossings
 
 ### 7. Pristine gas works (Magellanic Stream)
 
-**Gains.** The Stream's gas has a tenth of solar metallicity (Fox 2013): the closest thing to primordial gas in reach, with deuterium close to its Big Bang abundance (D/H about 2.5e-5; Cooke 2018, ApJ 855:102) and helium-3 never cycled through stars. A magnetic scoop (P23) gathers it. **Recipes.** c1 → `pristine_gas` (P9, P10), V[MAX] x 4 A, 2,400 t. **Byproducts.** Protium → GTM hydrogen (AE2 to home). **Structure.** 25 x 7 x 25 scoop ring. **Crossings.** P9, P10, P23. **Source.** Fox 2013, 2014; Cooke 2018.
+**Gains.** The Stream's gas has a tenth of solar metallicity (Fox 2013): the closest thing to primordial gas in reach, with deuterium close to its Big Bang abundance (D/H about 2.5e-5; Cooke 2018, ApJ 855:102) and helium-3 never cycled through stars. A magnetic scoop (P23) gathers it. **Recipes.** c1 → `pristine_gas` (P9, P10), V[MAX] x 4 A per run, 2,400 t; **up to 64 runs at once** (B14-GAS, like the stellarator, never shorter runs): each run keeps its EU/t, duration, inputs, outputs and chanced wear (rolled per run), 64 runs draw 2^39 EU/t on one 1,024 A MAX+ hatch (2^41), and fewer start when the hatches, the inputs or the output room run short. **Byproducts.** Protium → GTM hydrogen (AE2 to home). **Structure.** 25 x 7 x 25 scoop ring. **Crossings.** P9, P10, P23. **Source.** Fox 2013, 2014; Cooke 2018.
 
 ### 8. Primordial fusion torus (Magellanic Stream, generator)
 
@@ -333,9 +333,9 @@ Net, d1 and d2 turn 500 mB of deuterium and 500 mB of hydrogen into 1,000 mB of 
 | | Gross | Through the 5% loss | Net of the fuel chain's own draw |
 |---|---|---|---|
 | Today (torus) | 2^39 / 2^34 = 32 | ceil(32 / 0.95) = 34 | 2^39 / (0.95 x 2^34 − 2^33) = 71.1 → 72 tori + 72 gas works |
-| Stellarator at 64 runs | 2^40 / 2^39 = 2 consumers per plant | 0.95 x 2^40 = 1.9 x 2^39 | fuel chain 64 x 26,055,421,132,800 / 3,600 = 0.843 x 2^39 EU/t, so 1.9 − 0.843 = **1.06 x 2^39: one stellarator per consumer**, fed by 43 gas works (64 x 2,400 / 3,600 = 42.7) and 43 concurrent d3 runs (the cryostat works takes a parallel hatch) |
+| Stellarator at 64 runs | 2^40 / 2^39 = 2 consumers per plant | 0.95 x 2^40 = 1.9 x 2^39 | fuel chain 64 x 26,055,421,132,800 / 3,600 = 0.843 x 2^39 EU/t, so 1.9 − 0.843 = **1.06 x 2^39: one stellarator per consumer**, fed by **one gas works** (64 runs of 2,400 t make 64 / 2,400 = 0.0267 runs a tick, the stellarator eats 64 / 3,600 = 0.0178: 1.5x the need) and 43 concurrent d3 runs (the cryostat works takes a parallel hatch) |
 
-The gas works stay one run each; the fuel bill falls from 72 to 43 works per consumer through the better fuel alone. Whether the works should also run in parallel is a separate owner decision, outside this machine. Recharge: one stellarator refills the bank for one dial in 10,105 ticks gross (8.4 minutes), 18,157 ticks (15.1 minutes) net of its fuel chain.
+The gas works runs up to 64 recipes at once (B14-GAS, owner 2026-11-02, answer 4a: several recipes at once like the stellarator, recipes never shortened): 43 identical plants were duplication, not depth. Each run costs what it did (2^33 EU/t for 2,400 t), so 64 runs draw 2^39 EU/t and the fuel bill in EU is unchanged; only the number of buildings falls, from 43 to one. The torus stays one run. Recharge: one stellarator refills the bank for one dial in 10,105 ticks gross (8.4 minutes), 18,157 ticks (15.1 minutes) net of its fuel chain.
 
 **Structure.** 31 x 11 x 31, a hall of `grindless:horizon_machine_casing` with `gtceu:laminated_glass` bands; inside, a vessel ring of `gtceu:atomic_casing` threaded by 20 modular coil frames of `gtceu:superconducting_coil`, at most 192 coils (*Active blocks*, DECISIONS 2026-11-02). Floor front edge: 15 part cells: input bus 1-2, input hatch 1-2, output hatch 1-2, dynamo hatch 1-8. Controller face: the torus's art until a texture package draws its own.
 
@@ -343,7 +343,7 @@ The gas works stay one run each; the fuel bill falls from 72 to 43 works per con
 
 **Crossings.** P26 (millikelvin cryostat works, photonic foundry), P9, P10, P11, P17, P22.
 
-**Quests** (MAX+ chapter, under the torus): what it is (polarized D-He3 in a stellarator, 1.5x the torus's EU per fuel); how it is made (the controller consumes a torus); what it needs (P26: pellets from HD ice polarized at millikelvin, helium-3 pumped by laser; the three worn parts); what it unlocks (one plant per 2^39 consumer, a dial recharge in about 8 minutes); how to automate it (pellets and helium-3 by AE2 from home, no site; more dynamo hatches give more runs, up to 8 x 64 A for 64; the 43 gas works it eats). One line chart, P26, in pl_maxplus.
+**Quests** (MAX+ chapter, under the torus): what it is (polarized D-He3 in a stellarator, 1.5x the torus's EU per fuel); how it is made (the controller consumes a torus); what it needs (P26: pellets from HD ice polarized at millikelvin, helium-3 pumped by laser; the three worn parts); what it unlocks (one plant per 2^39 consumer, a dial recharge in about 8 minutes); how to automate it (pellets and helium-3 by AE2 from home, no site; more dynamo hatches give more runs, up to 8 x 64 A for 64; the one gas works that feeds it, at 64 runs). One line chart, P26, in pl_maxplus.
 
 **Risks.** Parallel generators on a MAX+ type are proven only at one run (S0-4; the T1 below). Chanced wear under 64 parallels must cost about 1 part per 64 runs, not 0 or 64. The torus keeps its Stream site, which rule 10 no longer asks of a fusion plant; that is the torus's own question.
 
