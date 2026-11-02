@@ -16129,6 +16129,10 @@ file = "kubejs/client_scripts/grindless/ae2_lang.js"
 hash = "d3872721c4ace59c847fabe6204fe84d323b657bfafc0bccfd201191eaa1d79a"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/dimension_markers_lang.js"
+hash = "8d125da5dac91fc310f0d97a0d534785264cf2b7ad2f4422e70834f13ab1593c"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/dimensions_lang.js"
 hash = "4ac523f4d5f15fb2b4e3025912d19e51d43d48697fac284d55524bbf7835b180"
 
@@ -16690,11 +16694,15 @@ hash = "997b7175f27983cf99f41be9bc889fe533e9fbf69ea715a72161166e3e917d98"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/power_info_lang.js"
-hash = "c03196ce2eab98f6c71629c93abfcb7dba3ce11493fb9995ca4902803b1cbb84"
+hash = "e1098afd08471b3215eebb9b67ffd09f0d772fbe2ee58c7376ad436cc43fe792"
+
+[[files]]
+file = "kubejs/client_scripts/grindless/recipe_info_fit.js"
+hash = "1e6e9503f7bcc9884445afde4ae5641791a7217e2c8880765f815c2f6565b6fd"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/space_lang.js"
-hash = "c465a1bd724c2e7e01bc093ee17537f5397edbca681a89558d80fc0a8e139227"
+hash = "f1762d4233591b3baf96ff1498b2228056e31bbac47300792687ab00e28f458f"
 
 [[files]]
 file = "kubejs/client_scripts/grindless/steam_content_lang.js"
@@ -18882,7 +18890,7 @@ hash = "bd87a4f9e4c42677f1432d65a14d867773d84676e7ac887e04bb57a991a091c0"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/power/generators.js"
-hash = "2ca3a654cce1fb098d8320f6fbac91a1abdd47cb6e64d943711f970bdbb45479"
+hash = "c9a425399afe837d7a273b6df101618afb46d24b9647135ac38b6f6e3543f95d"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/quest_book.js"
@@ -19423,6 +19431,14 @@ hash = "b54313d02b0cf53decd6eebc1a433dcf8ca5653c2e8268a2ab89d0c406b1702e"
 [[files]]
 file = "kubejs/startup_scripts/grindless/hv/syngas_plant.js"
 hash = "5c15850df5ba122be21df31b494426a8172d9db4631a16a486fefc6489c02f10"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/integration/dimension_markers.js"
+hash = "1a93bb656b4b7602d9f7756b3cd4e6ae240f343bc687bfc909ca1a4254d50bf3"
+
+[[files]]
+file = "kubejs/startup_scripts/grindless/integration/recipe_info_wrap.js"
+hash = "aa7fd1042f986e77ff340241021247b1d6838b763a4496b53d4da866a2b36672"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/integration/sophisticatedstorage_tiers.js"

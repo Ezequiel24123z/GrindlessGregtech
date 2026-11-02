@@ -1,3 +1,4 @@
+// priority: -2233
 // Gregtech Grindless - EMI-1: dimension markers
 //
 // GTM 7.5.3 draws a recipe's dimension condition as the dimension's DimensionMarker (GTRegistries.DIMENSION_MARKERS). A dimension with no

@@ -1,3 +1,4 @@
+// priority: 11150
 // Gregtech Grindless - EMI-1: names of the dimension markers (startup_scripts/grindless/integration/dimension_markers.js) and the air line
 ClientEvents.lang('en_us', event => {
   var names = {

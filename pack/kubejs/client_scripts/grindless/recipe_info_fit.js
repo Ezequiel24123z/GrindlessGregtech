@@ -1,3 +1,4 @@
+// priority: 5634
 // Gregtech Grindless - EMI-1: once EMI and the recipes are loaded, fit each recipe type's info box to the text its recipes really have
 // (global.ggInfoFit, startup_scripts/grindless/integration/recipe_info_wrap.js). One pass per game session.
 ;(function () {

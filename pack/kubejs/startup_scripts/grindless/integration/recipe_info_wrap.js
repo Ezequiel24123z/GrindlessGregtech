@@ -1,3 +1,4 @@
+// priority: -2266
 // Gregtech Grindless - EMI-1: recipe info text wrapped inside the EMI box, and the "needs air" line
 //
 // GTM 7.5.3 (GTRecipeWidget) draws every GTRecipeType#getDataInfos() function as one unwrapped label, so a long line runs past the recipe
