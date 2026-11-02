@@ -407,7 +407,7 @@ Controllers: GTM 7.5.3 registers a UHV hull and UHV hatches but, with `highTierC
 - **What it gains:** Proxima b's life comes to Earth only through a BSL-4 facility with a planetary-protection protocol, the one NASA and ESA designed for Mars Sample Return. It characterises what the rover brings and releases strains, genes and sterilised extracts.
 - **Recipes:**
   - c1 receive: 1 Proxima flora sample + 1,000 mB hydrogen peroxide vapour → 1 sterilised flora extract + 1 `grindless:xeno_genome_data`;
-  - c2 isolate: 1 Proxima flora sample → 1 `grindless:characterised_xeno_strain` (the greenhouse's catalyst; one sample, many crops);
+  - c2 isolate: 1 Proxima flora sample + 1,000 mB of sterilised growth medium → 1 `grindless:characterised_xeno_strain` (the greenhouse's catalyst; one sample, many crops; made anywhere since #197 M3-01, so the medium makes it a real culture step, AF-V2);
   - c3 extremophile: 1 night-side ice core → 1 sterilised ice organics extract.
 - **Byproducts:** autoclaved waste → incinerated in the facility *(contained)*.
 - **Structure:** 9×5×9 BSL-4 casing (new, F1) with an airlock train.

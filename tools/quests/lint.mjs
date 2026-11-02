@@ -19,6 +19,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadBook } from './lib/book.mjs';
 import { checkBook, chapterEdges, questLabel, recipeOutputIds, stripCodes } from './lib/checks.mjs';
+import { STATIONS, MODE as STATIONS_MODE } from './luv-stations.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, '..', '..');
@@ -60,9 +61,12 @@ function readTags(file) {
 }
 
 // hidden_until.json (pack/kubejs/data/grindless/tables): every item of every group is hidden from the recipe viewers or never obtainable.
+// hidden_until.json as the game applies it (integration/hidden.js): a group with `unless` is shown while that switch of
+// lib/stations.js is on, so its items are not hidden for the shipped stations table
 function readHidden(file) {
   const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
-  return new Set((raw.groups || []).flatMap((g) => g.items || []));
+  const switches = { stations: STATIONS.enabled === true, tether: STATIONS_MODE === 'tether', sulfur_iodine: STATIONS_MODE === 'sulfur_iodine' };
+  return new Set((raw.groups || []).filter((g) => !(typeof g.unless === 'string' && switches[g.unless] === true)).flatMap((g) => g.items || []));
 }
 
 // recipes.json of a gg_dump: { recipes: [ '{"i":id,"t":type,"j":{...}}' ] }
