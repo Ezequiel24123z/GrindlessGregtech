@@ -23,7 +23,7 @@ export const CHAPTER = {
   icon: 'grindless:horizon_lock',
   autofocus: 'START',
   section: { name: 'Stage I: Out of the Galaxy', origin: { x: 0, y: 0 } },
-  title: 'MAX+: Out of the Galaxy',
+  title: 'MAX+: Beyond the Galaxy',
   subtitle: ['A kept lock that taps the stilled horizon, a slingshot past the Galaxy\'s rim, the Tarantula Nebula and the Magellanic Stream.'],
 };
 

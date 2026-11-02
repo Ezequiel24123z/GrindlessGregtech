@@ -53,8 +53,8 @@ const prod = (key, title, icon, deps, x, y, desc, xpN = 100) => ({
 export const QUESTS = [
   // ------------------------------------------------------------------ the condensate refinery
   gear('MA_REF', 'condensate_refinery', 'Condensate Refinery', ['MA_L_TAP'], 7, 3.5, {
-    for: 'The only machine that handles &6Kerr Condensate&r. It settles the fluid and binds older exotic matter into it. It runs anywhere.',
-    needs: 'The MAX hull, a shell of condensate vessel casing round a superfluid core, and condensate.',
+    for: 'The only machine that handles &6Kerr Condensate&r. It settles the fluid and binds older exotic matter into it: strange matter, neutronium, degenerate billets, strand cladding and the cells the components use. It runs anywhere.',
+    needs: 'The MAX hull, a shell of condensate vessel casing round a superfluid core, and condensate from the mirror shell.',
     unlocks: 'Every bound material, and the strand that makes the MAX+ cable.',
     automate: 'Its boil-off goes back into the first recipe, and spent cells go to the helium plant, so nothing is vented.',
   }, [it('grindless:condensate_vessel_casing')]),
@@ -71,9 +71,9 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the bound-matter press
   gear('MA_PRESS', 'bound_matter_press', 'Bound-Matter Press', ['MA_L_SETTLED'], 3.5, 0, {
     for: 'The &6Bound-Matter Press&r makes the compressed plate, and a laminate, in numbers no other machine can reach. It runs anywhere.',
-    needs: 'The MAX hull, a block of bound press casing, and bound ingots from the refinery.',
-    unlocks: 'Compressed plate by the ten thousand, and laminate.',
-    automate: 'Feed ingots by ME and send the plates onward.',
+    needs: 'The MAX hull, a block of bound press casing, and bound ingots from the refinery. Parts and wear are explained in the casing's tooltip.',
+    unlocks: 'Horizon compressed plate by the ten thousand, and graded laminate for shielding.',
+    automate: 'Feed ingots by ME and send the plates onward on a belt; the press flash goes back to its own input.',
   }, [it('grindless:bound_press_casing')]),
   prod('MA_LAM', 'Graded Laminate', 'grindless:graded_horizon_laminate', ['MA_PRESS'], 5, 0.5, [
     'A ceramic cermet pressed in layers, the second use of the press. It is the first piece of the shielding that the loom weaves later.',
@@ -81,10 +81,10 @@ export const QUESTS = [
 
   // ------------------------------------------------------------------ the slingshot, the signature machine
   gear('MA_SLING', 'hills_slingshot', 'Hills Slingshot', ['PROBE'], 8.5, 0, {
-    for: 'Out of the Galaxy without a rocket. It drops a probe and a counterweight past the hole; the tide splits them and the probe leaves at speed.',
+    for: 'Out of the Galaxy without a rocket. It binds a probe to a counterweight, then drops the pair on a plunging orbit past the hole. The tide splits them, and the probe leaves at speed.',
     needs: 'The MAX hull, a capture ring of slingshot coil casing, a counterweight and a probe, and a full wireless hatch.',
     unlocks: 'The launched probe, and with it every gate that leaves the Galaxy.',
-    automate: 'One counterweight per launch; make them in bulk.',
+    automate: 'One counterweight per launch. The weight falls into the hole, so make them in bulk.',
   }, [it('grindless:slingshot_coil_casing')], 250, 'signature'),
 
   // ------------------------------------------------------------------ 30 Doradus
@@ -134,7 +134,7 @@ export const QUESTS = [
   gear('MA_TORUS', 'primordial_fusion_torus', 'Primordial Fusion Torus', ['MA_L_PD', 'MA_L_PHE3'], 21, -6.5, {
     for: 'Deuterium and helium-3 fuse with few neutrons, and a direct converter catches their charged products. It is a generator of ours, not a GTM fusion tier.',
     needs: 'The MAX hull, a torus of atomic casing, deuterium and helium-3 together, a beam injector and a converter stack.',
-    unlocks: 'A second generator of the era.',
+    unlocks: 'A second generator of the era. How it feeds the network is in the integration chapter.',
     automate: 'Both fuels arrive by pipe from the works; each runs 2,400 ticks.',
   }),
   prod('MA_NBI', 'Neutral Beam Injector', 'grindless:neutral_beam_injector', ['MA_TORUS'], 21, -8, [
@@ -169,7 +169,7 @@ export const QUESTS = [
   gear('MA_HYPER', 'hyperfactory', 'Hyperfactory', ['MA_L_SCALE'], 39.5, 1.5, {
     for: 'The top of the mega family. It runs assembler, circuit assembler, assembly line, forming press and laser engraver at four thousand times a hatch\'s parallel.',
     needs: 'The MAX hull, horizon casing, the MAX+ parallel hatch and a pattern bus for every recipe it should take.',
-    unlocks: 'The millions of parts the gate needs.',
+    unlocks: 'The millions of parts the tree and the gate need. It is a convenience, not a step.',
     automate: 'Feed it by ME and let the parallels do the counting.',
   }, [], 250),
 ];

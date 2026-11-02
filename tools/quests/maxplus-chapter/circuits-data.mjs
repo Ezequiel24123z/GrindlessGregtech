@@ -72,10 +72,10 @@ export const QUESTS = [
     automate: 'Keep one chest per interposer step; the cryostat is the slow one.',
   }, [], [it('grindless:horizon_interposer')], 250),
   q('CI_PROC', 'circuit', 'Horizon Processor', 'grindless:horizon_processor', ['CI_DIE', 'CI_INTERP'], 7, 6, {
-    for: 'The circuit above the ladder. The &6Horizon Processor&r joins two logic dies, an interposer, a memory node, a logic array, two mainframes and condensate.',
-    needs: 'The UEV photonic integration hall, one of every older part and kerr condensate.',
+    for: 'The circuit above the top of the ladder. The &6Horizon Processor&r joins two logic dies, an interposer, a quantum memory node, a Rydberg logic array, two mainframes and condensate.',
+    needs: 'The UEV photonic integration hall at the top voltage, and one of every older part, with kerr condensate from the shell.',
     unlocks: 'Every MAX+ component and controller. A controller asks for eight; the Hyperstargate asks for sixteen.',
-    automate: 'One chest per input; a missing one stalls the hall.',
+    automate: 'Six inputs on six chests; a missing one stalls the hall, so alarm on the stock.',
   }, [], [it('grindless:horizon_processor')], 400),
   q('CI_CTRL', 'step', 'The Controller Recipe', 'gtceu:max_machine_hull', ['CI_PROC'], 7, 7.5, null, [
     'Every MAX+ controller is built on the assembly line: one MAX hull from the hull quest, two Horizon Machine Casings, eight processors, kerr condensate, at least eight components from three families, and the inputs of its own domain.',
