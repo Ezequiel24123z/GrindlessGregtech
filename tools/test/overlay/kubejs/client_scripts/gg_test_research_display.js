@@ -67,6 +67,7 @@
         var cid = String(cat.getId())
         var tip = TOOLTIP_CATEGORIES.indexOf(cid) >= 0
         var recipes = new ArrayList(rm['getRecipes(dev.emi.emi.api.recipe.EmiRecipeCategory)'](cat))
+        console.info(T + 'category|' + cid + '|' + recipes.size())
         for (var ri = 0; ri < recipes.size(); ri++) {
           var r = recipes.get(ri)
           var rec = { id: String(r.getId()), cat: cid, in: [], out: [] }
@@ -79,6 +80,7 @@
             rec.error = String(e)
           }
           all.push(rec)
+          if (tip) console.info(T + 'recipe|' + JSON.stringify(rec))
           total++
         }
       }
