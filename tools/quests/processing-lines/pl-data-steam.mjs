@@ -41,7 +41,7 @@ export default {
         n('raw', 8, 3.75, I('gtceu:raw_goethite'), 'Raw Goethite, Forever', { from: ['drill'], sub: 'With the vein\'s other ores' }),
         n('icrushed', 10, 3.75, I('gtceu:crushed_goethite_ore'), 'Crushed Goethite', { from: ['raw'], sub: 'Macerator', by: ['gtceu:macerator'] }),
         n('ipurified', 12, 3.75, I('gtceu:purified_goethite_ore'), 'Purified Goethite', { from: ['icrushed'], sub: 'Ore washer', by: ['gtceu:ore_washer'] }),
-        n('cokedust', 10, -1.5, I('gtceu:coke_dust'), 'Coke Dust', { from: ['coke'], sub: 'Macerator', by: ['gtceu:macerator'] }),
+        n('cokedust', 10, -1.5, I('gtceu:coke_dust'), 'Coke Dust', { from: ['coke'], sub: 'Ground in a mortar' }),
         n('sinter', 14, 2, I('grindless:iron_sinter'), 'Iron Sinter', {
           from: ['ipurified', 'cokedust'], sub: 'Alloy smelter', by: ['gtceu:alloy_smelter'],
           desc: 'Purified ore and coke dust baked into lumps the furnace can swallow. Any iron ore sinters the same way.',

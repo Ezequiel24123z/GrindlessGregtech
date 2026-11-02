@@ -30,7 +30,7 @@ export default {
         n('pdmetal', 12, 1.5, I('gtceu:palladium_metal_dust'), 'Palladium Metal Dust', { from: ['sludge'], by: ['gtceu:centrifuge'], sub: 'The same centrifuge run' }),
         n('aqua', 12, -2.25, F('gtceu:aqua_regia'), 'Aqua Regia', { kind: 'raw', sub: 'Mixer: nitric and hydrochloric acid' }),
         n('conc', 14, -0.75, F('gtceu:concentrated_platinum'), 'Concentrated Platinum', { from: ['pmetal', 'aqua'], sub: 'Chemical reactor' }),
-        n('slag', 14, -2.25, I('gtceu:platinum_slag_dust'), 'Platinum Slag', { kind: 'by', from: ['conc'], end: 'rhodium at HV', sub: 'Stored: HV leaches the rhodium out' }),
+        n('slag', 14, -2.25, I('gtceu:platinum_slag_dust'), 'Platinum Slag', { kind: 'by', from: ['pmetal', 'aqua'], end: 'rhodium at HV', sub: 'Stored: HV leaches the rhodium out' }),
         n('nh4cl', 14, 0.75, F('gtceu:ammonium_chloride'), 'Ammonium Chloride', { kind: 'raw' }),
         n('richamm', 16, 0, F('gtceu:palladium_rich_ammonia'), 'Palladium-Rich Ammonia', {
           from: ['conc', 'nh4cl'], sub: 'Chemical reactor, MV scale',
@@ -98,8 +98,7 @@ export default {
     fuels: {
       name: 'Crude oil to RP-1 and the first static fire',
       nodes: [
-        n('rig', 0, 0, M('gtceu:mv_fluid_drilling_rig'), 'Fluid Drilling Rig', { kind: 'ours', sub: 'MV fluid drilling rig', desc: 'GregTech\'s own drilling rig, on a deposit that never runs dry.' }),
-        n('oil', 2, 0, F('gtceu:oil'), 'Crude Oil', { from: ['rig'] }),
+        n('oil', 2, 0, F('gtceu:oil'), 'Crude Oil', { kind: 'raw', sub: 'MV fluid drilling rig', desc: 'GregTech\'s own drilling rig, on a deposit that never runs dry.' }),
         n('dist', 4, 0, M('gtceu:mv_distillery'), 'Distillery', { from: ['oil'], sub: 'One fraction per circuit' }),
         n('slight', 6, -0.75, F('gtceu:sulfuric_light_fuel'), 'Sulfuric Light Fuel', { from: ['dist'] }),
         n('sheavy', 6, 0.75, F('gtceu:sulfuric_heavy_fuel'), 'Sulfuric Heavy Fuel', { from: ['dist'] }),
