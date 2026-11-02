@@ -65,7 +65,7 @@
   function publish(r) {
     return {
       name: r.name, type: r.type, recipeId: 'grindless:' + r.type + '/' + r.name, circuit: r.circuit, itemsIn: r.itemsIn,
-      notConsumed: r.notConsumed, itemsOut: r.itemsOut, orbit: r.type !== 'assembler', eut: r.eut, amps: r.amps, duration: r.duration
+      notConsumed: r.notConsumed, itemsOut: r.itemsOut, orbit: r.type !== 'assembler' && r.name !== 'correlated_kerr_data', eut: r.eut, amps: r.amps, duration: r.duration
     }
   }
 

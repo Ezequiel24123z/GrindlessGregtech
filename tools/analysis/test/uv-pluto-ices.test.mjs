@@ -61,7 +61,7 @@ test('the patterns: one controller in the front slice, uniform size, a symbol fo
   assert.ok(fr.symbols.X.options.some((o) => o.ability === 'output_hatch'), 'the fractionator has output hatches');
 });
 
-test('the Pluto rows: Pluto orbit only, one circuit per type slot, the Triton ice core kept in the bay', () => {
+test('the Pluto rows: the penetrator in Pluto orbit, the fractionation anywhere, one circuit per type slot, the Triton ice core kept in the bay', () => {
   assert.deepEqual(PI.recipes.map((p) => `${p.type}:${p.circuit}`).sort(),
     ['ice_fractionation:1', 'ice_fractionation:2', 'penetrator_probe:1', 'penetrator_probe:2']);
   for (const p of PI.recipes) {
@@ -70,13 +70,14 @@ test('the Pluto rows: Pluto orbit only, one circuit per type slot, the Triton ic
     assert.equal(r.t, 'gtceu:' + p.type);
     assert.deepEqual(circuitOf(r), [p.circuit]);
     assert.equal(p.dim, ORBIT);
-    assert.match(JSON.stringify(r.j), /grindless:pluto_orbit/, p.name + ' is dimension-locked');
+    if (p.type === 'penetrator_probe') assert.match(JSON.stringify(r.j), /grindless:pluto_orbit/, p.name + ' is dimension-locked');
+    else assert.doesNotMatch(JSON.stringify(r.j), /_orbit/, p.name + ' runs anywhere');
     if (p.type === 'penetrator_probe') {
       assert.deepEqual(p.notConsumed, ['grindless:triton_ice_core']);
       assert.deepEqual(p.itemsIn, [{ id: 'grindless:penetrator_probe', count: 1 }]);
     }
   }
-  for (const t of Object.values(MACHINES)) {
+  for (const t of ['penetrator_probe']) {
     const all = recipes.filter((r) => r.t === 'gtceu:' + t);
     assert.ok(all.every((r) => /grindless:pluto_orbit/.test(JSON.stringify(r.j))), t + ': every row of the type is Pluto orbit');
   }

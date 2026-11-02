@@ -18,15 +18,15 @@
 //                        magnetic_split c2: 16 crushed tetrataenite -> 12 tetrataenite dust + 4 meteoric iron dust, 1,920 EU/t x 200 t
 //                        mond_dust      c3: the same Mond as c1 from 16 meteoric iron dust (what GTM's ore line and the magnetic split
 //                                       leave; meteoric iron has no other use)
-//   optical miner      gtceu:optical_mining, the belt only:
+//   optical miner      gtceu:optical_mining (the boulder only on the belt; the Boudouard anywhere):
 //                        c_type_boulder c1: a capture bag (used up at 5 % a run) -> 4,000 mB water + 1,000 mB CO2 + 2 carbon dust + 1
 //                                       chondritic extract, 1,920 EU/t x 1,200 t; only in full sun (the startup's run-start check)
 //                        boudouard      c2: 1,000 mB CO2 + 1 carbon dust -> 2,000 mB CO, 480 EU/t x 200 t: the processor's CO charge
 //   parts              LuV lathe: long HSS-S rod -> HSS-S drill bit (30,720 EU/t x 200 t, like IV's bit one tier up); IV assembler:
 //                      2 HSS-S rods + a tungsten carbide plate -> 2 anchor harpoons; IV assembler: 8 para-aramid foils + 4 Kapton K plates
-//                      + 2 titanium rods -> 1 capture bag; alloy smelter on the belt only: 4 tuff (what the drill brings up) + 1 titanium
+//                      + 2 titanium rods -> 1 capture bag; alloy smelter, anywhere: 4 tuff (what the drill brings up) + 1 titanium
 //                      dust -> 2 asteroid regolith casings.
-//   the belt's seed    the far half of the Earth-belt AE2 pair (the IV travel network's rule): chemical reactor on the belt, raw meteoric
+//   the belt's seed    the far half of the Earth-belt AE2 pair (the IV travel network's rule): chemical reactor, anywhere, raw meteoric
 //                      iron + an ender pearl + 250 mB helium-3 -> asteroid quantum seed, 480 EU/t x 200 t; AE2's explosion ritual marks
 //                      the pair with planets.json's pairTag 'belt'.
 //   controllers        GTM shaped, LuV hull and 4 LuV circuits each.
@@ -187,11 +187,11 @@
       .outputFluids(Fluid.of('minecraft:water', R.boulder.water), Fluid.of(CO2, R.boulder.co2))
       .addDataString(B.miner.sunKey, 'boulder'))
       .EUt(R.boulder.eut).duration(R.boulder.duration)
-    belt(event.recipes.gtceu.optical_mining('grindless:boudouard')
+    event.recipes.gtceu.optical_mining('grindless:boudouard')
       .circuit(2)
       .itemInputs(R.boudouard.carbon + 'x gtceu:carbon_dust')
       .inputFluids(Fluid.of(CO2, R.boudouard.co2))
-      .outputFluids(Fluid.of(CO, R.boudouard.co)))
+      .outputFluids(Fluid.of(CO, R.boudouard.co))
       .EUt(R.boudouard.eut).duration(R.boudouard.duration)
     return ['grindless:optical_mining/c_type_boulder', 'grindless:optical_mining/boudouard']
   }
@@ -213,9 +213,9 @@
       .inputFluids(Fluid.of('gtceu:soldering_alloy', 144), Fluid.of('gtceu:lubricant', 250))
       .itemOutputs('1x ' + R.boulder.bag)
       .EUt(R.bag.eut).duration(R.bag.duration)
-    belt(event.recipes.gtceu.alloy_smelter('grindless:asteroid_regolith_casing')
+    event.recipes.gtceu.alloy_smelter('grindless:asteroid_regolith_casing')
       .itemInputs(R.casing.count + 'x ' + R.casing.stone, '1x ' + R.casing.binder)
-      .itemOutputs(R.casing.out + 'x grindless:asteroid_regolith_casing'))
+      .itemOutputs(R.casing.out + 'x grindless:asteroid_regolith_casing')
       .EUt(R.casing.eut).duration(R.casing.duration)
     return ['grindless:lathe/hss_s_drill_bit', 'grindless:assembly_line/anchor_harpoon', 'grindless:assembly_line/capture_bag',
       'grindless:alloy_smelter/asteroid_regolith_casing']
@@ -230,10 +230,10 @@
       console.error(LOG + 'belt seed skipped, unknown: ' + bad.join(', '))
       return []
     }
-    belt(event.recipes.gtceu.chemical_reactor('grindless:asteroid_quantum_seed')
+    event.recipes.gtceu.chemical_reactor('grindless:asteroid_quantum_seed')
       .itemInputs(S.local, '#forge:ender_pearls')
       .inputFluids(Fluid.of('gtceu:helium_3', S.helium3))
-      .itemOutputs(seed))
+      .itemOutputs(seed)
       .EUt(S.eut).duration(S.duration)
     event.custom({
       type: 'ae2:transform',

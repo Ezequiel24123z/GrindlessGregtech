@@ -117,15 +117,15 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.qubit_fab.3', 'The 4,000 mB helium charge is never used up; only 10 mB of Saturn\'s helium per run is. 122,880 EU/t. The arrays replace circuits in the HPCA components\' alternative recipes.')
     add('emi.grindless.info.qubit_fab.4', 'Needs, in the floor: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 output buses, 1 to 3 input hatches, 1 or 2 output hatches, and 20 or more cryostat casings among them.')
 
-    add('emi.grindless.info.plume_sampler.0', "The Plume Sampler flies an aerogel cartridge through Enceladus's plume and gives Enceladus brine, silica nanograins and hydrogen. It works only in Saturn orbit.")
+    add('emi.grindless.info.plume_sampler.0', "The Plume Sampler flies an aerogel cartridge through Enceladus's plume and gives Enceladus brine, silica nanograins and hydrogen. It works anywhere.")
     add('emi.grindless.info.plume_sampler.1', "The cartridge is used up. It needs probe bay casings and keeps its grains and brine: disable voiding. The grains make aerogel, and aerogel makes more cartridges.")
-    add('emi.grindless.info.plume_sampler.2', 'Flies an aerogel capture cartridge through Enceladus\'s plume, as Cassini did in 2015. Only works in Saturn orbit.')
+    add('emi.grindless.info.plume_sampler.2', 'Flies an aerogel capture cartridge through Enceladus\'s plume, as Cassini did in 2015. Works anywhere.')
     add('emi.grindless.info.plume_sampler.3', '1 aerogel cartridge (used up) -> 2,000 mB Enceladus brine + 4 silica nanograins + 250 mB hydrogen. 122,880 EU/t (ZPM), 400 t. The grains make aerogel, and aerogel makes more cartridges.')
     add('emi.grindless.info.plume_sampler.4', 'Needs: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 output buses, 1 to 3 output hatches, and 14 or more probe bay casings in the floor and the first ring. The capture boom stands in the middle.')
 
     add('emi.grindless.info.ring_seismometer.0', "The Ring Seismometer reads Saturn's interior from its ring waves. Circuit 1: a data orb, the Saturn transfer chart and liquid helium give the Saturn interior model. Circuit 2: the model and a data orb give the Uranus transfer chart.")
-    add('emi.grindless.info.ring_seismometer.1', "It works only in Saturn orbit, keeps its data (disable voiding) and needs station truss casings. The chart and the model are kept, not used up.")
-    add('emi.grindless.info.ring_seismometer.2', 'Reads Saturn\'s interior from the waves its oscillations raise in the C ring. Only works in Saturn orbit.')
+    add('emi.grindless.info.ring_seismometer.1', "It works anywhere, keeps its data (disable voiding) and needs station truss casings. The chart and the model are kept, not used up.")
+    add('emi.grindless.info.ring_seismometer.2', 'Reads Saturn\'s interior from the waves its oscillations raise in the C ring. Works anywhere.')
     add('emi.grindless.info.ring_seismometer.3', 'Circuit 1: a data orb + the Saturn transfer chart (kept) + 100 mB liquid helium -> the Saturn interior model. Circuit 2: the interior model (kept) + a data orb -> the Uranus transfer chart. 122,880 EU/t (ZPM), 600 t.')
     add('emi.grindless.info.ring_seismometer.4', 'Needs: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 input hatches, 1 or 2 output buses, and 10 or more station truss casings in the floor. The photometer column stands in the middle.')
 
@@ -135,9 +135,9 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.gas_giant_siphon.3', 'Circuit 1: 16,000 mB hydrogen + 10,000 mB Saturn helium. Circuit 2: 2,000 mB methane + 500 mB ammonia. 122,880 EU/t (ZPM), 100 t.')
     add('emi.grindless.info.gas_giant_siphon.4', 'Needs: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 to 3 output hatches, and 12 or more station truss casings in the floor and the first ring. The tether winch stands in the middle.')
 
-    add('emi.grindless.info.isotope_column.0', "The Isotope Column is a cryogenic column. Circuit 1: Saturn helium gives helium-3. Circuit 2: hydrogen gives deuterium. It works only in Saturn orbit.")
+    add('emi.grindless.info.isotope_column.0', "The Isotope Column is a cryogenic column. Circuit 1: Saturn helium gives helium-3. Circuit 2: hydrogen gives deuterium. It works anywhere.")
     add('emi.grindless.info.isotope_column.1', "It needs frostproof casings in the floor. With Uranus it is the bulk source of both isotopes; the Moon's helium-3 trickle is untouched.")
-    add('emi.grindless.info.isotope_column.2', 'A cryogenic column. Only works in Saturn orbit. Circuit 1: 10,000 mB Saturn helium -> 20 mB helium-3 + 9,980 mB helium.')
+    add('emi.grindless.info.isotope_column.2', 'A cryogenic column. Works anywhere. Circuit 1: 10,000 mB Saturn helium -> 20 mB helium-3 + 9,980 mB helium.')
     add('emi.grindless.info.isotope_column.3', 'Circuit 2: 16,000 mB hydrogen -> 50 mB deuterium + 15,950 mB hydrogen. The bulk source of both isotopes, with Uranus. The Moon\'s helium-3 trickle is untouched.')
     add('emi.grindless.info.isotope_column.4', 'Needs: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 input hatches, 1 to 3 output hatches, and 8 or more frostproof casings in the floor.')
 
@@ -154,8 +154,8 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.entry_probe_bay.4', 'Needs: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 input hatches, 1 or 2 output buses, 1 to 3 output hatches, and 12 or more probe bay casings in the floor. A titanium frame rail runs down the middle.')
 
     add('emi.grindless.info.tholin_reformer.0', "The Tholin Reformer breaks Titan's haze organics into chemistry. Circuit 1: tholin and water give nitrile mix. Circuit 2: nitrile mix gives carbon fibres and ammonia. Circuit 3: nitrile mix, ammonia and zinc dust give diaminobenzidine.")
-    add('emi.grindless.info.tholin_reformer.1', "It works only in Saturn orbit and needs station truss casings. The hydrogen cyanide never leaves the column and the zinc is not used up.")
-    add('emi.grindless.info.tholin_reformer.2', 'A PTFE column that breaks the haze organics back into chemistry. Only works in Saturn orbit. Circuit 1: 4 tholin + 1,000 mB water -> 1,000 mB nitrile mix.')
+    add('emi.grindless.info.tholin_reformer.1', "It works anywhere and needs station truss casings. The hydrogen cyanide never leaves the column and the zinc is not used up.")
+    add('emi.grindless.info.tholin_reformer.2', 'A PTFE column that breaks the haze organics back into chemistry. Works anywhere. Circuit 1: 4 tholin + 1,000 mB water -> 1,000 mB nitrile mix.')
     add('emi.grindless.info.tholin_reformer.3', 'Circuit 2: nitrile mix -> 8 carbon fibres + 500 mB ammonia. Circuit 3: nitrile mix + 2,000 mB ammonia + zinc dust (not used up) -> 1,000 mB diaminobenzidine. The hydrogen cyanide never leaves the column. 122,880 EU/t (ZPM).')
     add('emi.grindless.info.tholin_reformer.4', 'Needs: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 input hatches, 1 or 2 output buses, 1 or 2 output hatches, and 8 or more station truss casings in the deck.')
 
@@ -166,8 +166,8 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.ice_giant_siphon.4', 'Needs: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 to 3 output hatches, and 14 or more pressure hull casings in the floor and the walls. The tether winch stands in the middle.')
 
     add('emi.grindless.info.slurry_separator.0', "The Slurry Separator decompresses diamond slurry with hydrogen sulfide into diamond dust, an ice giant diamond seed, sulfur, ammonia and water.")
-    add('emi.grindless.info.slurry_separator.1', "It works only in Uranus orbit and needs pressure hull casings. It keeps its diamonds and seeds: disable voiding. The slurry comes from the Ice-Giant Siphon.")
-    add('emi.grindless.info.slurry_separator.2', 'Decompresses diamond slurry in a cascade of cyclones. Only works in Uranus orbit.')
+    add('emi.grindless.info.slurry_separator.1', "It works anywhere and needs pressure hull casings. It keeps its diamonds and seeds: disable voiding. The slurry comes from the Ice-Giant Siphon.")
+    add('emi.grindless.info.slurry_separator.2', 'Decompresses diamond slurry in a cascade of cyclones. Works anywhere.')
     add('emi.grindless.info.slurry_separator.3', '2,000 mB diamond slurry + 500 mB hydrogen sulfide -> 4 diamond dust + 1 ice giant diamond seed + 1 sulfur dust + 500 mB ammonia + 500 mB water. 122,880 EU/t (ZPM), 300 t.')
     add('emi.grindless.info.slurry_separator.4', 'Needs: 1 or 2 energy hatches (ZPM), 1 or 2 input buses, 1 or 2 input hatches, 1 or 2 output buses, 1 or 2 output hatches, and 10 or more pressure hull casings. A tungstensteel pipe casing column stands in the middle.')
 

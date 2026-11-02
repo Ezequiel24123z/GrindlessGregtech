@@ -9,7 +9,7 @@
 //   grindless:aerogel_fuel_tank    gcyr:fuel_tank, tier 9; elite motors + only these tanks = level 6 (Uranus).
 // Saturn is rocket_tier 5, Uranus 6 and Proxima Centauri b 8 (data/gcyr/gcyr/planets/proxima_centauri_b.json).
 //
-// The orbit seeds (the far halves of the Earth-Saturn and Earth-Uranus AE2 pairs, made only in those orbits):
+// The orbit seeds (the far halves of the Earth-Saturn and Earth-Uranus AE2 pairs, made anywhere (shipped inputs)):
 //   grindless:saturnian_quantum_seed   a ring ice sample, in Saturn orbit
 //   grindless:uranian_quantum_seed     an ice-giant atmosphere sample, in Uranus orbit
 //

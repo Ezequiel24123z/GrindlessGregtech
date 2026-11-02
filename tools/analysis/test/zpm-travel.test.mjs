@@ -152,7 +152,7 @@ test('the tank recipes and the AE2 seeds compose with registered ids; each seed 
   for (const s of T.recipes.seeds) {
     const r = built.find((b) => b.id === s.builderId);
     assert.equal(r.type, 'gtceu:chemical_reactor');
-    assert.deepEqual(calls(r, 'dimension'), [[PLANETS_TABLE.planets[s.planet].dimensions[1]]], `${s.seed}: only in its orbit`);
+    assert.deepEqual(calls(r, 'dimension'), [], `${s.seed}: shipped inputs, no site`);
     assert.deepEqual(calls(r, 'itemInputs'), [[want[s.planet], '#forge:ender_pearls']]);
     assert.deepEqual(calls(r, 'inputFluids'), [[{ fluid: 'gtceu:helium_3', amount: 250 }]]);
     const pair = built.find((b) => b.id === s.pair);

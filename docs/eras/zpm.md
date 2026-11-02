@@ -120,7 +120,7 @@ All-orbit is a decision (decision 1), not a GCYR limit. Saturn and Uranus have n
 
 | Site | Rule |
 |---|---|
-| Saturn orbit | machines 18–24 run only in `grindless:saturn_orbit` (`.dimension(...)` allowlists); the station truss casing |
+| Saturn orbit | the machines that use the place (siphons, ring harvesting, plume sampling) run only in `grindless:saturn_orbit`; recipes that only convert shipped inputs run anywhere; the station truss casing |
 | Uranus orbit | machines 25–27 run only in `grindless:uranus_orbit`; the station truss casing, plus a pressure hull casing on the siphon and separator |
 | Earth orbit | machine 17 only in `gcyr:overworld_orbit` |
 | Earth | machines 1–16 only in `minecraft:overworld` |

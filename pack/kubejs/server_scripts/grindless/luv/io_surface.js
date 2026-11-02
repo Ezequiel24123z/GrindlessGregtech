@@ -8,7 +8,7 @@
   var R = IO.recipes = {
     collect: { circuit: 1, eut: 7680, duration: 400, so2: 4000, sulfur: 8, sublimate: 1, onIo: true },
     separate: { circuit: 2, eut: 7680, duration: 200, sublimate: 4, hydrogen: 2000, hcl: 1000, germanium: 2, indium: 1, water: 1000 },
-    concrete: { circuit: 3, eut: 1920, duration: 200, sulfur: 8, rock: 8, casings: 8, onIo: true,
+    concrete: { circuit: 3, eut: 1920, duration: 200, sulfur: 8, rock: 8, casings: 8,
       rocks: { basalt: 'minecraft:basalt', black_sand: 'biomesoplenty:black_sand' } },
     intake: { circuit: 1, eut: 32768, duration: 400, so2: 4000, onIo: true,
       // one bundle about every hour per module: 3,600 s / 20 s = 180 runs, 10,000 / 180 = 56
@@ -51,11 +51,11 @@
 
     var k = R.concrete
     Object.keys(k.rocks).forEach(function (name) {
-      G.places.allow(gt[IO.condenser.type]('grindless:sulfur_concrete_' + name)
+      gt[IO.condenser.type]('grindless:sulfur_concrete_' + name)
         .circuit(k.circuit)
         .itemInputs(k.sulfur + 'x gtceu:sulfur_dust', k.rock + 'x ' + k.rocks[name])
         .itemOutputs(k.casings + 'x ' + IO.blocks.concrete)
-        .EUt(k.eut).duration(k.duration), IO.place)
+        .EUt(k.eut).duration(k.duration)
     })
 
     var t = R.intake

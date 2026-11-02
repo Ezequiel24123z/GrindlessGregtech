@@ -67,7 +67,8 @@ test('the six recipes: Saturn orbit only, one circuit per type slot, ZPM VA, who
     seen.add(p.type + p.circuit);
     assert.equal(p.eut, 122880);
     assert.ok(Number.isInteger(p.duration) && p.duration > 0);
-    assert.match(JSON.stringify(r.j), /grindless:saturn_orbit/, p.name + ' is dimension-locked');
+    if (p.type === 'cryogenic_isotope_separation') assert.doesNotMatch(JSON.stringify(r.j), /saturn_orbit/, 'the separation of shipped gas runs anywhere');
+    else assert.match(JSON.stringify(r.j), /grindless:saturn_orbit/, p.name + ' is dimension-locked');
   }
 });
 

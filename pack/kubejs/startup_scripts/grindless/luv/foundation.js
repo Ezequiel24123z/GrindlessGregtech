@@ -41,8 +41,8 @@
 //     radiation_vault_casing    graded-Z vault (2 dense titanium + 2 tantalum plates + an HSS-S frame -> 2, 7,680 EU/t x 100 t (tune));
 //                               every pattern on Io, Europa and in Io orbit carries it
 //     whipple_shield_casing     the microgravity smelter's foam bumper (B3)
-//     asteroid_regolith_casing  sintered belt rubble, made only on the belt (B5)
-//     sulfur_concrete_casing    the fumarole condenser's concrete, made only on Io (B6)
+//     asteroid_regolith_casing  sintered belt rubble, made anywhere (B5)
+//     sulfur_concrete_casing    the fumarole condenser's concrete, made anywhere (B6)
 //     orbital_solar_panel       the orbital solar station's panel (B2): a thin slab like the Mercury thin-film panel
 //     magnetic_bearing          tetrataenite magnet bearing from the HTS magnet works (A4); the ring's hub (B4)
 //     coilgun_coil_casing       Hg-1223 coil from the HTS magnet works (A4); the coilgun's barrel (B9)

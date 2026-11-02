@@ -124,10 +124,11 @@
         console.error(LOG + 'Earth-' + s.planet + ' pair skipped, unknown: ' + missing.join(', '))
         return
       }
-      G.places.allow(event.recipes.gtceu.chemical_reactor(s.builderId)
+      // no dimension condition: the local input already comes from the place (SITE-B, owner 2026-11-02)
+      event.recipes.gtceu.chemical_reactor(s.builderId)
         .itemInputs(s.local, '#forge:ender_pearls')
         .inputFluids(Fluid.of(S.helium3, S.helium3Amount))
-        .itemOutputs(s.seed), s.place)
+        .itemOutputs(s.seed)
         .EUt(S.eut)
         .duration(S.duration)
 

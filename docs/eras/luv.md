@@ -101,7 +101,7 @@ IV leaves, as built:
 - **Travel** (IV-B5):
   - elite tank and motor (12 B a tank; a trip is 14 B, so two tanks);
   - the thermal template (four for a suit);
-  - the far halves made on site: chemical reactor, local regolith + ender pearl + 250 mB helium-3, 480 EU/t × 10 s;
+  - the far halves made anywhere (shipped inputs, no site): chemical reactor, local regolith + ender pearl + 250 mB helium-3, 480 EU/t × 10 s;
   - the Outer System Chart and the Sagittarius A* signal (interferometer).
 
 ## The belt and Jupiter's moons
@@ -131,8 +131,8 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are final
 |---|---|---|---|---|---|---|
 | Rules | vacuum, 3 K, no night, 0 g | vacuum, micrometeoroids | no water, no combustion, radiation, heat only from lava | radiation (plasma torus), 3 K | radiation, ice, the ocean 20 km down | 110 K (Hg-1223 superconducts by itself), seismically quiet |
 | Site power | orbital solar station | the wireless network; RTG cells | volcanic intake | flux-tube tether | the wireless network | the wireless network |
-| Only from there | — (it makes things) | asteroid metals; chondritic extract | germanium; sulfur concrete | — | living matter | — |
-| Made there | — | asteroid regolith casing | sulfur concrete casing | — | — | — |
+| Only from there | — (it makes things) | asteroid metals; chondritic extract | germanium | — | living matter | — |
+| Made there | — | — | — | — | — | — |
 
 - **Travel:**
   - level 4 = elite motors and only cryogenic tanks (GCYR: floor((weakest motor tier 3 + weakest tank tier 5) / 2)); one elite tank drops the rocket to level 3;
@@ -174,9 +174,9 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are final
 | Place | Pair tag | Far half (made only there, chemical reactor 480 EU/t × 10 s, + ender pearl + 250 mB helium-3) | Local input, mined by hand |
 |---|---|---|---|
 | Belt | `belt` | `grindless:asteroid_quantum_seed` | raw meteoric iron (the M-type sample) |
-| Io | `io` | `grindless:ionian_quantum_seed` | Biomes O' Plenty brimstone, with `.dimension('grindless:io')` |
-| Europa | `europa` | `grindless:europan_quantum_seed` | blue ice, with `.dimension('grindless:europa')` |
-| Ganymede | `ganymede` | `grindless:ganymedean_quantum_seed` | tuff, with `.dimension('grindless:ganymede')` |
+| Io | `io` | `grindless:ionian_quantum_seed` | Biomes O' Plenty brimstone (no dimension condition: the inputs are shipped) |
+| Europa | `europa` | `grindless:europan_quantum_seed` | blue ice (no dimension condition) |
+| Ganymede | `ganymede` | `grindless:ganymedean_quantum_seed` | tuff (no dimension condition) |
 
 - **`tables/planets.json`** gets five entries (`belt`, `jupiter`, `io`, `europa`, `ganymede`), each with its world and its orbit.
   - Io orbit belongs to `io`, so an Io pair also works in the Io-orbit station.
@@ -225,7 +225,7 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are final
     - bacterial sludge and stem cells (two machines each) take the bacteria;
     - the three enriched sludges and the crystal chip from sludge take the sludge;
     - mutagen takes the enriched sludge.
-- **Germanium only from Io** (GTCA's froth stays ZPM). **Sulfur concrete only on Io.**
+- **Germanium only from Io** (GTCA's froth stays ZPM). Sulfur concrete is cast anywhere (sulfur and rock are shipped).
   - GTCA's Nether germanite (drilled since LV) keeps its electrolysis without the germanium (`grindless:electrolyzer/germanite`, B6): nothing before LuV asks for germanium; the dump's only other user is UV's quantum alloy.
 - **The neuro processing unit at LuV only from the organoid lab.**
   - GTM's `circuit_assembler/neuro_processor` (80,000 EU/t) stays a ZPM-voltage recipe. From LuV the biofoundry makes its stem cells and sterile medium, so every machine that could run it on LuV power was checked (spike S0-4, GT-- 1.3.10 bytecode):
@@ -272,7 +272,7 @@ Five GCYR entries (datapack JSON, no Java) and ten dimensions. The ids are final
 - station truss casing (titanium frame + 4 aluminium plates → 2, 1,920 EU/t × 100 t *(tune)*);
 - radiation vault casing (2 dense titanium + 2 tantalum plates + an HSS-S frame → 2, 7,680 EU/t × 100 t *(tune)*);
 - Whipple shield casing (machine 6);
-- asteroid regolith casing (belt rubble, only on the belt *(tune)*);
+- asteroid regolith casing (belt rubble, made anywhere *(tune)*);
 - sulfur concrete casing (machine 14);
 - orbital solar panel (machine 5);
 - magnetic bearing and coilgun coil casing (machine 3);
@@ -683,7 +683,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   - 7 × 8 × 7: a 5 × 6 pad of regolith casing, four HSS-S harpoon legs, a 3 × 3 × 3 body with the Whipple casing on its back face, a titanium derrick over a tungstensteel drill string.
   - The veins sit at Y 20–200 *(tune after S0-1)*, weights 40 / 30 / 20. The vein drilling type takes three item inputs (sample, bit, harpoon).
   - The bit: LuV lathe, a long HSS-S rod, 30,720 EU/t × 200 t. The harpoons: IV assembler, 2 HSS-S rods + a tungsten carbide plate → 2.
-  - The regolith casing: alloy smelter on the belt only, 4 tuff (the drill's stone) + 1 titanium dust → 2.
+  - The regolith casing: alloy smelter anywhere, 4 tuff (the drill's stone) + 1 titanium dust → 2.
   - The belt's seed: chemical reactor on the belt, raw meteoric iron + ender pearl + 250 mB helium-3; `planets.json` gets `belt`.
 
 ### 12. Asteroid processor: `gtceu:asteroid_processor`, type `gtceu:asteroid_processing` (anywhere; built at the belt base)
@@ -755,7 +755,7 @@ Every recipe has a programmed circuit (c*n*) or an input that no other recipe of
   1. **Collect** (circuit 1, the lookup key, as the lunar array's circuit is): over a fumarole field (3 `biomesoplenty:brimstone_fumarole` blocks in the floor of the pattern) → 4,000 mB SO₂ + 8 sulfur dust + 1 `grindless:ionian_sublimate`, 7,680 EU/t × 400 t *(tune)*.
   2. **Separate** (circuit 2): 4 Ionian sublimate + 2,000 mB hydrogen, with an HCl charge (1,000 mB, not consumed) → 2 germanium dust + 1 indium dust + 1,000 mB water *(tune)*.
      - Real: GeCl₄ is distilled off, hydrolysed back to HCl and GeO₂, and the oxide is reduced with hydrogen.
-  3. **Sulfur concrete** (circuit 3): 8 sulfur dust + 8 Ionian rock (Biomes O' Plenty's black sand or basalt) → 8 `grindless:sulfur_concrete_casing`, 1,920 EU/t × 200 t, only on Io *(tune)*.
+  3. **Sulfur concrete** (circuit 3): 8 sulfur dust + 8 Ionian rock (Biomes O' Plenty's black sand or basalt) → 8 `grindless:sulfur_concrete_casing`, 1,920 EU/t × 200 t, anywhere *(tune)*.
      - Sulfur concrete needs no water, which makes it the leading building material for in-situ use on the Moon and Mars. On the icy moons, water-based concrete can't cure.
 - **Byproducts** (the condenser refuses voiding, `G.noVoiding` in both places):
   - SO₂ fills the volcanic intake's charge, and the rest goes home over the Io pair to sulfuric acid (GTM's contact line, the LV acid plant's chemistry).
@@ -909,12 +909,12 @@ This plant takes slot 16 only if spike S0-3 shows that a second station can't be
   - The brine's surplus: a centrifuge splits 1,000 mB into 1,000 mB water, 6 magnesium sulfate (`gtceu:magnesium_sulfate`, new) and 2 salt dust; GTM's generated electrolysis splits both.
   - Controller: shaped, LuV hull + 2 LuV pumps + LuV sensor + 4 LuV circuits + a tungstensteel gearbox (the drum), so it never matches the zero-g grower's grid. Probe: assembler, melt head + RTG pellet + LuV sensor + 8 optical fibres (the tether) + 4 HSS-S plates, 7,680 EU/t × 600 t. Melt head: 4 tungsten carbide + 2 HSS-S plates + an IV pump, 7,680 EU/t × 400 t.
 
-### 18. Algae bioreactor: `gtceu:algae_bioreactor`, type `gtceu:bioreactor` (greenhouse step 5; the culture only on Europa)
+### 18. Algae bioreactor: `gtceu:algae_bioreactor`, type `gtceu:bioreactor` (greenhouse step 5; the culture anywhere)
 
 - **What it gains:** living matter.
 - **Recipes:**
   1. **Algae** (circuit 1, anywhere): 1,000 mB water + 500 mB CO₂ → 250 mB biomass + 400 mB O₂, 480 EU/t × 400 t *(tune)*, under LED lamps with no sky. It is the air and the biomass of the bases where no crop grows. Real: Chlorella and Spirulina photobioreactors, ESA's MELiSSA loop.
-  2. **Europan culture** (circuit 2, only on Europa): 1,000 mB Europan brine + 250 mB H₂O₂ + 500 mB hydrogen + 1 `grindless:chondritic_extract` + the Europan ocean sample (not consumed) → 1,000 mB `gtceu:bacteria` + 100 mB biomass, 1,920 EU/t × 600 t *(tune)*.
+  2. **Europan culture** (circuit 2, anywhere): 1,000 mB Europan brine + 250 mB H₂O₂ + 500 mB hydrogen + 1 `grindless:chondritic_extract` + the Europan ocean sample (not consumed) → 1,000 mB `gtceu:bacteria` + 100 mB biomass, 1,920 EU/t × 600 t *(tune)*.
      - The culture is chemosynthetic. It lives on hydrogen and on oxidants, the leading hypothesis for life in Europa's ocean (Hand and Chyba, 2007; Vance, 2016).
      - The oxidant comes from GTM's own `chemical_reactor/hydrogen_peroxide` (2,000 mB H₂ + 2,000 mB O₂ → 1,000 mB, 240 EU/t × 3,000 t).
      - The nitrogen and phosphorus come from the belt's optical miner: Europa's ocean is thought to be short of both, and carbonaceous-chondrite extracts feed microbes (Mautner, 2002).
@@ -1324,7 +1324,7 @@ The ten-minute run of every base, untouched, lives only in the bench's integrati
 - **Asteroid metals and the chondritic extract only from the belt.** Iridium and osmium only off Earth: Mercury or the belt.
 - **Living matter only from Europa:** `gtceu:bacteria` comes only from the algae bioreactor's Europa recipe once B8 lands; everything downstream follows.
 - **The NPU at LuV only from the organoid lab.** Wetware processors come from one LuV energy hatch on GT--'s circuit assembly line (its wetware recipe re-registered at 30,720 EU/t, the same energy). GTM's ZPM circuit assembler counts as ZPM, and our Universal Assembly Factory refuses GTM's NPU recipe unless one hatch reaches ZPM.
-- **Germanium and sulfur concrete only from Io.** Europium only from the Mk1.
+- **Germanium only from Io.** Europium only from the Mk1.
 - **Trinium only from mode 2** (Venus naquadah, or spent rods).
 - **The Mk1:** no osmium or uranium from fusion; duranium only from the Mk2 (a 200 M EU start).
 - **No optical-pipe recycling.**

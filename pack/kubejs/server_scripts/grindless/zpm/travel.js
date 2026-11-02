@@ -7,7 +7,7 @@
 //                                            pump, the Saturn transfer chart as the catalyst -> 1 naquadah tank
 //   grindless:assembler/aerogel_fuel_tank    ZPM assembler, 122,880 EU/t x 600 t: the naquadah tank + 8 silica aerogel + 4 carbon nanotube yarn
 //                                            + a ZPM electric pump, the Uranus transfer chart as the catalyst -> 1 aerogel tank
-//   The far halves of the Earth-Saturn and Earth-Uranus AE2 pairs, made only in those orbits (LuV's rule: chemical reactor 480 EU/t x 10 s,
+//   The far halves of the Earth-Saturn and Earth-Uranus AE2 pairs, made anywhere (shipped inputs) (LuV's rule: chemical reactor 480 EU/t x 10 s,
 //   the local input + an ender pearl + 250 mB helium-3, with the orbit's dimension condition), and AE2's explosion ritual that marks the
 //   pair with planets.json's pairTag.
 //     grindless:saturnian_quantum_seed    a ring ice sample, in Saturn orbit
@@ -108,7 +108,6 @@
         .itemInputs(s.local, '#forge:ender_pearls')
         .inputFluids(Fluid.of(S.helium3, S.helium3Amount))
         .itemOutputs(s.seed)
-        .dimension(s.orbit)
         .EUt(S.eut)
         .duration(S.duration)
 

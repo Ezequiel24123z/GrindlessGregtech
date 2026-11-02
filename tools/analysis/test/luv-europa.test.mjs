@@ -1,4 +1,4 @@
-﻿// LuV-B8 (docs/eras/luv.md, machines 17 and 18): the cryobot and the algae bioreactor (startup_scripts/grindless/luv/europa.js and its
+// LuV-B8 (docs/eras/luv.md, machines 17 and 18): the cryobot and the algae bioreactor (startup_scripts/grindless/luv/europa.js and its
 // server script), Europa's brine and its processing, and the bacteria cut. The pack's scripts run in the static stand-in
 // (lib/kubejs_static.mjs). Every id the recipes and patterns name is pinned to a native registry (power-quests-1): the stand-in accepts
 // any id, so a naming guess would only fail in game.
@@ -106,7 +106,7 @@ test('the bioreactor: algae anywhere, the Europan culture only on Europa, the on
     { id: 'gtceu:hydrogen', amount: 500 }]);
   assert.deepEqual(culture.fluidsOut, [{ id: 'gtceu:bacteria', amount: 1000 }, { id: 'gtceu:biomass', amount: 100 }]);
   assert.equal(culture.eut, 1920);
-  assert.deepEqual(culture.dims, [E.surface]);
+  assert.deepEqual(culture.dims, [], 'the culture takes shipped brine and extract: no site');
   assert.deepEqual(culture.other, [], 'no sterile cleanroom: the culture is the replacement GTM\'s cut recipe lacked at LuV');
   const io = plain(E.bioreactorIO);
   for (const id of ['grindless:bioreactor/luv/algae', 'grindless:bioreactor/luv/europan_culture']) {

@@ -5,7 +5,7 @@
 //   gtceu:fumarole_condenser  type gtceu:fumarole_condensing. A 5x5x2 vault housing over a 3x3 fumarole field (three
 //                             biomesoplenty:brimstone_fumarole in the floor, under the column) and a 3x3 column of four condenser zones,
 //                             hot to cold: robust tungstensteel, clean stainless steel, aluminium frames, frostproof casing. Circuit 1
-//                             collects (only on Io), 2 separates the sublimate (anywhere), 3 casts sulfur concrete (only on Io). It keeps
+//                             collects (only on Io), 2 separates the sublimate (anywhere), 3 casts sulfur concrete (anywhere: sulfur and rock are shipped). It keeps
 //                             everything it makes (lib/no_voiding.js in the modifier and in beforeWorking) and takes the parallel hatch.
 //   gtceu:volcanic_intake     generator type gtceu:volcanic_heat. A 3x3 hot plate on magma, a 5x5x10 heat-exchanger tower of sulfur
 //                             concrete with a vault room at its foot, radiator fins on top and four 3x3x3 titanium turbine module slots.

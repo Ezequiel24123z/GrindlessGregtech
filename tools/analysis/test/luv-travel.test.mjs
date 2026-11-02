@@ -200,7 +200,7 @@ test('the travel recipes compose with only registered ids; seeds are made only o
   for (const s of T.recipes.seeds) {
     const r = built.find((b) => b.id === s.builderId);
     assert.equal(r.type, 'gtceu:chemical_reactor');
-    assert.deepEqual(calls(r, 'dimension'), [[PLACES[s.place]]], `${s.seed}: only on ${s.place}`);
+    assert.deepEqual(calls(r, 'dimension'), [], `${s.seed}: shipped inputs, no site`);
     assert.deepEqual(calls(r, 'itemInputs'), [[want[s.planet], '#forge:ender_pearls']]);
     assert.deepEqual(calls(r, 'inputFluids'), [[{ fluid: 'gtceu:helium_3', amount: 250 }]]);
     assert.deepEqual(calls(r, 'EUt'), [[480]]);
