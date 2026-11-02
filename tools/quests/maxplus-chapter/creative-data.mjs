@@ -13,6 +13,7 @@ export const CHAPTER = {
   order: 6,
   icon: 'grindless:creative_energy',
   autofocus: 'CR_RULE',
+  section: { name: 'Creative Items', origin: { x: 61.5, y: -1 }, heading: { key: 'H_CREATIVE', x: 0, y: 0, deps: ['S3_HOME'], icon: 'grindless:creative_energy' } },
   title: 'MAX+: Creative Items',
   subtitle: ['Six creative blocks, crafted at enormous cost and used up as ingredients of the gate. None of them will ever run.'],
 };
@@ -24,7 +25,7 @@ export const LINKS = [
 export const QUESTS = [
   {
     key: 'CR_RULE', kind: 'step', title: 'Ingredients Only', icon: 'grindless:creative_chest',
-    deps: ['S3_HOME'], x: 2, y: 0,
+    deps: ['S3_HOME'], x: -0.5, y: 1.5,
     desc: [
       'The creative items of this pack are parts, not toys. Set one down outside creative mode and the game cancels it with a message. A creative cell is refused by drives for the same reason.',
       'They make nothing and store nothing for you. They exist to be crafted, carried to the gate and consumed there.',
@@ -34,7 +35,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_CORES', kind: 'step', title: 'The Four Cores', icon: 'grindless:horizon_cloud_core',
-    deps: ['CR_RULE'], x: 4, y: 0,
+    deps: ['CR_RULE'], x: 1, y: 3,
     desc: [
       'Each creative item starts from its own core: cloud, store, tank and computation. They come from their own lines, so they are the slow part.',
     ],
@@ -46,7 +47,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_ENERGY', kind: 'process', title: 'Creative Energy', icon: 'grindless:creative_energy',
-    deps: ['CR_CORES'], x: 6, y: -4,
+    deps: ['CR_CORES'], x: 4, y: 3,
     teach: {
       for: 'The &6Creative Energy&r block is a power unit\'s heart. It never runs as a source, because energy from nothing would end the pack\'s power chain.',
       needs: 'A cloud core and the hyper assembly array, plus a mountain of field coils, processors and condensate.',
@@ -59,7 +60,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_CELL', kind: 'process', title: 'Creative Energy Cell', icon: 'grindless:creative_energy_cell',
-    deps: ['CR_CORES'], x: 6, y: -2,
+    deps: ['CR_CORES'], x: 1, y: 1.5,
     teach: {
       for: 'The &6Creative Energy Cell&r sits inside every horizon capacitor, as one of its parts. Drives will not take it.',
       needs: 'A cloud core and the array. A tenth of the cost of a creative block, and a great deal more of them.',
@@ -72,7 +73,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_CHEST', kind: 'process', title: 'Creative Chest', icon: 'grindless:creative_chest',
-    deps: ['CR_CORES'], x: 6, y: 0,
+    deps: ['CR_CORES'], x: 2.5, y: 2,
     teach: {
       for: 'The &6Creative Chest&r goes into the gate\'s base. Placed anywhere else it would void your logistics, so it is cancelled.',
       needs: 'A store core and the array.',
@@ -85,7 +86,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_TANK', kind: 'process', title: 'Creative Tank', icon: 'grindless:creative_tank',
-    deps: ['CR_CORES'], x: 6, y: 2,
+    deps: ['CR_CORES'], x: 2.5, y: 3.5,
     teach: {
       for: 'The &6Creative Tank&r is the base\'s other half. It is a part, and it is never a fluid source.',
       needs: 'A tank core and the array.',
@@ -98,7 +99,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_COMP', kind: 'process', title: 'Creative Computation Provider', icon: 'grindless:creative_computation_provider',
-    deps: ['CR_CORES'], x: 6, y: 4,
+    deps: ['CR_CORES'], x: 1, y: 4.5,
     teach: {
       for: 'The &6Creative Computation Provider&r gives the controller all the thinking the dial asks for. Outside the gate it does nothing.',
       needs: 'A computation core and the array.',
@@ -111,7 +112,7 @@ export const QUESTS = [
   },
   {
     key: 'CR_DATA', kind: 'process', title: 'Creative Data Access Hatch', icon: 'grindless:creative_data_access_hatch',
-    deps: ['CR_COMP'], x: 8, y: 4,
+    deps: ['CR_COMP'], x: 2.5, y: 5,
     teach: {
       for: 'The &6Creative Data Access Hatch&r is the interface\'s data store: every recipe the gate asks for, always available.',
       needs: 'A computation core, the array and a pile of pattern memory from the AE2 line.',

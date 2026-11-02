@@ -15,6 +15,7 @@ export const CHAPTER = {
   order: 5,
   icon: 'gtceu:max_wireless_dynamo_hatch_16a',
   autofocus: 'OM_SHELL',
+  section: { name: 'Older Machines, Power and AE2', origin: { x: 0, y: 1.5 }, heading: { key: 'H_INTEGRATION', x: 0, y: 0, deps: ['START'], icon: 'gtceu:max_wireless_dynamo_hatch_16a' } },
   title: 'MAX+: Integration',
   subtitle: ['Older machines at MAX+ scale, power from nickel-56 and fusion, and the grid that holds the plan.'],
 };
@@ -33,7 +34,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ older machines at the shell
   {
     key: 'OM_SHELL', kind: 'machine', title: 'The Shell and Its Tenants', icon: 'gtceu:mirror_shell',
-    deps: ['START'], x: 2, y: 0,
+    deps: ['START'], x: 2.5, y: 2,
     teach: {
       for: 'The &6Mirror Shell&r is the one place the horizon is tapped; the old c4 row sits in its shadow and feeds it.',
       needs: 'The shell and the c4 machines of the hole row.',
@@ -46,7 +47,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_OPV', kind: 'machine', title: 'The Hole Row: Forges and Vaults', icon: 'gtceu:kugelblitz_forge',
-    deps: ['OM_SHELL'], x: 4, y: 0,
+    deps: ['OM_SHELL'], x: 4, y: 2,
     teach: {
       for: 'The Kugelblitz forge, strangelet vault, debris harvester and replication refinery were the last of the hole row. At this scale they feed packets, strange matter, debris and copies.',
       needs: 'The four controllers.',
@@ -59,7 +60,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_OPV2', kind: 'machine', title: 'The Hole Row: Beams and Pairs', icon: 'gtceu:jet_beam_line',
-    deps: ['OM_OPV'], x: 6, y: 0,
+    deps: ['OM_OPV'], x: 4, y: 3.5,
     teach: {
       for: 'The jet beam line, gamma optics works and magnetic pair converter shape the light and matter the shell needs.',
       needs: 'The three controllers.',
@@ -72,7 +73,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_DOR', kind: 'machine', title: 'At 30 Doradus', icon: 'gtceu:plasma_mass_filter',
-    deps: ['LMC'], x: 2, y: 3,
+    deps: ['LMC'], x: 17, y: 0,
     teach: {
       for: 'The plasma mass filter and the FRC former turn the lift\'s raw wind into confined plasma, the same way at this scale as before.',
       needs: 'Both controllers, on the platform at 30 Doradus.',
@@ -87,7 +88,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ home rows
   {
     key: 'OM_UXV', kind: 'machine', title: 'Home Rows: UXV', icon: 'gtceu:pasta_draw_bench',
-    deps: ['START'], x: 2, y: 6,
+    deps: ['START'], x: 1, y: 1.5,
     teach: {
       for: 'The UXV row\'s controllers at home: draw bench, sputter cluster, PLD chamber, shequid works, racetrack fab and stellar elevator.',
       needs: 'All six controllers.',
@@ -100,7 +101,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_UIV', kind: 'machine', title: 'Home Rows: UIV', icon: 'gtceu:levitation_melter',
-    deps: ['OM_UXV'], x: 4, y: 6,
+    deps: ['OM_UXV'], x: 1, y: 3,
     teach: {
       for: 'The UIV row: drip separator, levitation melter, TFLN fab, femtosecond writer, BEUV scanner, mK cryostat and the spectral hole burner.',
       needs: 'All seven controllers.',
@@ -113,7 +114,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_UEV', kind: 'machine', title: 'Home Rows: UEV', icon: 'gtceu:calutron',
-    deps: ['OM_UIV'], x: 6, y: 6,
+    deps: ['OM_UIV'], x: 1.5, y: 4.5,
     teach: {
       for: 'The UEV row: megabar press, degenerate harvester, calutron, CVI furnace, single-crystal foundry, nitride magnet works, SNSPD foundry and stellar forge.',
       needs: 'All eight controllers.',
@@ -126,7 +127,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_UHV', kind: 'machine', title: 'Home Rows: UHV and UV', icon: 'gtceu:superfluid_helium_plant',
-    deps: ['OM_UEV'], x: 8, y: 6,
+    deps: ['OM_UEV'], x: 3, y: 5,
     teach: {
       for: 'The UHV row (PBO plant, crystal furnace, photonic foundry, MBE reactor, ribbon works) and the UV row (helium plant, SRF works, zone tower, MOCVD, fibre tower).',
       needs: 'All ten controllers.',
@@ -139,7 +140,7 @@ export const QUESTS = [
   },
   {
     key: 'OM_OLD', kind: 'machine', title: 'Home Rows: ZPM Down to EV', icon: 'gtceu:hts_magnet_works',
-    deps: ['OM_UHV'], x: 10, y: 6,
+    deps: ['OM_UHV'], x: 4.5, y: 5,
     teach: {
       for: 'The older rows still make parts MAX+ needs: diamond fab, implanter, aerogel works, coated conductor line, HTS magnet works, helium refrigerator, hot cell, extraction cascade, cryogenic plant and hot strip mill.',
       needs: 'The ten controllers, set up for many lanes.',
@@ -154,7 +155,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ power
   {
     key: 'PW_NI', kind: 'plant', title: 'Power from Nickel-56', icon: 'grindless:co56_cask',
-    deps: ['CASK'], x: 2, y: 9,
+    deps: ['CASK'], x: 24.5, y: -8.5,
     teach: {
       for: 'The burner takes a shielded nickel-56 cask and returns a cobalt-56 cask, then a spent iron-56 cask. Heat becomes steam, and steam becomes EU on the platform.',
       needs: 'Casks from the crucible, and a dynamo hatch on the platform.',
@@ -167,7 +168,7 @@ export const QUESTS = [
   },
   {
     key: 'PW_TORUS', kind: 'plant', title: 'Power from Fusion Fuel', icon: 'gtceu:primordial_deuterium_bucket',
-    deps: ['PD'], x: 2, y: 12,
+    deps: ['PD'], x: 24.5, y: -5,
     teach: {
       for: 'Primordial deuterium and pristine helium-3 fuel a torus on the platform. The fusion reactions are not new; the fuel comes from the Stream.',
       needs: 'Both fuels in bulk, and a torus.',
@@ -180,7 +181,7 @@ export const QUESTS = [
   },
   {
     key: 'PW_DYN', kind: 'machine', title: 'Wireless Dynamo', icon: 'gtceu:max_wireless_dynamo_hatch_16a',
-    deps: ['PW_NI', 'PW_TORUS'], x: 4, y: 10.5,
+    deps: ['PW_NI', 'PW_TORUS'], x: 26, y: -7,
     teach: {
       for: 'A wireless dynamo hatch feeds the network from the platform. A fraction is lost on the way, so build more than you need.',
       needs: 'The &6wireless dynamo hatch&r, on every plant.',
@@ -193,7 +194,7 @@ export const QUESTS = [
   },
   {
     key: 'PW_STORE', kind: 'machine', title: 'A Store That Holds It', icon: 'grindless:max_smes_cell',
-    deps: ['PW_DYN'], x: 6, y: 10.5,
+    deps: ['PW_DYN'], x: 27.5, y: -7,
     teach: {
       for: 'Wireless energy hatches draw from the network, and a MAX+ store smooths out the dips between plants.',
       needs: 'The 4096-amp and 1024-amp wireless hatches, the MAX+ hatch and an SMES cell.',
@@ -208,7 +209,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ AE2
   {
     key: 'AE_A1', kind: 'process', title: '256M Storage', icon: 'megacells:item_storage_cell_256m',
-    deps: ['SCALE'], x: 2, y: 15,
+    deps: ['SCALE'], x: 40, y: 1,
     teach: {
       for: 'The 256M cell component and a horizon storage die make cells that hold the stage\'s item and fluid counts.',
       needs: 'The &6Horizon Storage Die&r from the circuits tab, and the 256M component.',
@@ -221,7 +222,7 @@ export const QUESTS = [
   },
   {
     key: 'AE_A2', kind: 'process', title: 'Crafting at a Billion', icon: 'megacells:256m_crafting_storage',
-    deps: ['AE_A1'], x: 4, y: 15,
+    deps: ['AE_A1'], x: 40.5, y: 4.5,
     teach: {
       for: 'A crafting CPU of 256M storage, with enough accelerators and a photonic coprocessor, can plan a job of a billion items without losing track.',
       needs: 'The crafting storage, the accelerators and the &6Photonic Coprocessor&r.',
@@ -234,7 +235,7 @@ export const QUESTS = [
   },
   {
     key: 'AE_A3', kind: 'process', title: 'Patterns by the Thousand', icon: 'expatternprovider:assembler_matrix_crafter',
-    deps: ['AE_A2'], x: 6, y: 15,
+    deps: ['AE_A2'], x: 42, y: 4.5,
     teach: {
       for: 'The assembler matrix keeps hundreds of patterns in one block, and two pattern providers push them out. A pattern memory unit holds the plan.',
       needs: 'The matrix crafter, frame and walls, an extended provider, an expanded provider and the memory unit.',
@@ -247,7 +248,7 @@ export const QUESTS = [
   },
   {
     key: 'PAR', kind: 'machine', title: 'The Parallel Hatch', icon: 'gtceu:max_maxplus_parallel_hatch',
-    deps: ['SCALE'], x: 2, y: 18,
+    deps: ['SCALE'], x: 41, y: 3,
     teach: {
       for: 'The MAX+ parallel hatch lets one machine run a very large batch at once. It does not make a recipe faster; it makes the plan fit.',
       needs: 'The &6parallel hatch&r, on a controller that accepts it.',
