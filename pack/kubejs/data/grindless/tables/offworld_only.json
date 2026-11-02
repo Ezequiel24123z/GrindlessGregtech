@@ -12,7 +12,7 @@
       "dimension": "gcyr:luna",
       "watched": {
         "items": ["gtceu:titanium_dust", "gtceu:small_titanium_dust", "gtceu:tiny_titanium_dust", "gtceu:rutile_dust", "gtceu:small_rutile_dust", "gtceu:tiny_rutile_dust", "gtceu:ilmenite_dust", "gtceu:small_ilmenite_dust", "gtceu:tiny_ilmenite_dust", "gtceu:raw_ilmenite", "gtceu:raw_titanium", "gtceu:raw_rutile", "gtceu:titanium_ingot"],
-        "fluids": ["gtceu:helium_3", "gtceu:titanium_tetrachloride", "gtceu:titanium"],
+        "fluids": ["gtceu:helium_3", "gtceu:titanium_tetrachloride", "gtceu:crude_titanium_tetrachloride", "gtceu:titanium"],
         "inputPattern": "titan|rutile|ilmenite|helium_3"
       }
     },

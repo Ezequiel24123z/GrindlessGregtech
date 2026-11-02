@@ -25,6 +25,7 @@
     {"id":"gtceu:confined_vms_plasma","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:frc_forming"],"used":["gtceu:multi_plasma_blender","gtceu:pair_instability_crucible"]},
     {"id":"gtceu:cooled_exhaust","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:blandford_znajek","gtceu:mass_stream_injection"],"used":["gtceu:plasma_mass_filtering"]},
     {"id":"gtceu:crude_helium_3","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:distillation_tower"],"used":["gtceu:calutron_separation"]},
+    {"id":"gtceu:crude_titanium_tetrachloride","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["gtceu:distillery"]},
     {"id":"gtceu:crude_trichlorosilane","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor"],"used":["gtceu:distillery"]},
     {"id":"gtceu:curium_californium_nitrate","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:transuranium_processing"],"used":["gtceu:actinide_partitioning"]},
     {"id":"gtceu:curium_nitrate","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:actinide_partitioning","gtceu:chemical_reactor"],"used":["gtceu:actinide_partitioning","gtceu:chemical_reactor"]},
