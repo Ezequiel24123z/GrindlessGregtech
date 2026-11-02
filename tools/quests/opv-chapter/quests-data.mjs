@@ -11,7 +11,10 @@ const dim = (dimension) => ({ type: 'dimension', dimension });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.quests,
   order: 0,
   icon: 'gtceu:opv_machine_casing',
   autofocus: 'START',
@@ -35,7 +38,7 @@ export const QUESTS = [
     key: 'LOOK', kind: 'reading', title: 'The Way In', icon: 'gtceu:opv_machine_casing',
     deps: ['START'], x: 2, y: 0,
     desc: [
-      'Three places lie ahead: a magnetar for chain matter, Cygnus X-1 for antimatter and the Kugelblitz, and a globular cluster for probes. The machine and circuit tabs hold the parts, and the integration tab holds the power.',
+      'Three places lie ahead: a magnetar for chain matter, Cygnus X-1 for the jet and a black hole\'s beam, and a globular cluster for probes. The machine and circuit tabs hold the parts, and the integration tab holds the power.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -289,10 +292,11 @@ export const QUESTS = [
     key: 'MAX', kind: 'exit', title: 'Gate to MAX', icon: 'gtceu:max_machine_casing',
     deps: ['CENSUS3'], x: 36, y: 0,
     desc: [
-      'The Sagittarius A* chart is not on any shelf yet. When your power is ready, the warp gate waits for the Kugelblitz core, the light census, the stable exotic matter, a tetron array, census IV, the bulge chart and cosmic mainframes.',
+      'The Sagittarius A* chart is not on any shelf yet. When your power is ready, the warp gate waits for the Kugelblitz core, the light census, the stable exotic matter, a tetron array, census IV, the bulge chart and OpV-tier circuit tags.',
       'It writes the chart and researches the &6MAX Machine Casing&r. Charge your SMES bank first.',
     ],
     tasks: [it('gtceu:max_machine_casing')],
     rewards: [xp(400)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

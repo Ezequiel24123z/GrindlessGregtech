@@ -11,7 +11,10 @@ const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.horizon,
   filename: 'max_horizon',
   era: 'max',
   role: 'horizon',
@@ -210,3 +213,4 @@ export const QUESTS = [
     rewards: [xp(200)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

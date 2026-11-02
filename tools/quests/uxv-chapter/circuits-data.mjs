@@ -7,7 +7,10 @@
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.circuits,
   filename: 'uxv_circuits',
   era: 'uxv',
   role: 'circuits',
@@ -126,3 +129,4 @@ export const QUESTS = [
     'The &6UXV Energy Input Hatch&r takes the full UXV voltage.',
   ], [it('gtceu:uxv_energy_input_hatch')], 200),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

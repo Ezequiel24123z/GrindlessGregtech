@@ -11,7 +11,10 @@ const dim = (dimension) => ({ type: 'dimension', dimension });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.quests,
   order: 0,
   icon: 'gtceu:uxv_machine_casing',
   autofocus: 'START',
@@ -248,7 +251,7 @@ export const QUESTS = [
     deps: ['ARM'], x: 22, y: 0,
     desc: [
       'Hold the warp gate open at the full UXV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Take care of your power first: the BZ dynamo with polar cap taps, or the Mk6 through the converter.',
-      'The gate burns an FRC cartridge and keeps census III, the island chart, the arm chart, a pasta core sample and spintronic mainframes in its store.',
+      'The gate burns an FRC cartridge and keeps census III, the island chart, the arm chart, a pasta core sample and UXV-tier circuit tags in its store.',
     ],
     tasks: [ck()],
     rewards: [xp(300)],
@@ -272,3 +275,4 @@ export const QUESTS = [
     rewards: [xp(400)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

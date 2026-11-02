@@ -7,7 +7,10 @@
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.machines,
   filename: 'uxv_machines',
   era: 'uxv',
   role: 'machines',
@@ -190,3 +193,4 @@ export const QUESTS = [
   }, [ROBUST]),
   prod('GAMMA', 'Gamma Laser Module', 'grindless:gamma_laser_module', ['GLASER'], 9.5, 20, ['A gamma-ray laser is fiction: nobody has built one. This one goes into the UXV emitter.']),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

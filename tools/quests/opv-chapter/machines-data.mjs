@@ -9,7 +9,10 @@
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.machines,
   filename: 'opv_machines',
   era: 'opv',
   role: 'machines',
@@ -17,7 +20,7 @@ export const CHAPTER = {
   icon: 'gtceu:kugelblitz_forge',
   autofocus: 'TFAB',
   title: 'OpV: Machines',
-  subtitle: ['Qubits and antimatter at home, a black hole made of light at Cygnus X-1, a magnetar press and a self-copying probe: fifteen machines.'],
+  subtitle: ['Qubits and antimatter at home, a black hole made of light, a magnetar press and a self-copying probe: fifteen machines.'],
 };
 
 export const LINKS = [
@@ -77,7 +80,7 @@ export const QUESTS = [
     ['The &6HPGE Compton Crystal&r is germanium grown pure enough to be a detector and a lens at once. The works wears one out slowly.']),
   gear('AHF', 'antihydrogen_foundry', 'Antihydrogen Foundry', ['M_L_AHF'], 2, 3, {
     for: 'The &6Antihydrogen Foundry&r merges antiprotons and positrons in a trap, cools the atoms with a laser and freezes them into a cell. It is the first neutral antimatter in the pack.',
-    needs: 'An OpV hull, the negative-potential casing and the annihilation shield casing, with antiprotons from Cygnus and positrons from SGR 1806-20.',
+    needs: 'An OpV hull, the negative-potential casing and the annihilation shield casing, with antiprotons and positrons from SGR 1806-20.',
     unlocks: 'The antihydrogen cell that opv_age asks for, and the strangelet vault.',
     automate: 'Antiprotons and positrons by the beam lines; cells are the product to chest.',
   }, [NEG, SHIELD], 200),
@@ -172,3 +175,4 @@ export const QUESTS = [
     automate: 'Every input comes from the cluster by belt, so build it last and wire it to the rest.',
   }, [ROBUST, GRATING], 250),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

@@ -3,12 +3,25 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "max_age"
-	group: "14CC251BB70F88DF"
+	group: "3F021F40CD26BF57"
 	icon: "gtceu:max_machine_casing"
 	id: "3B8CF180B26E4F1F"
 	order_index: 0
 	quest_links: [ ]
 	quests: [
+		{
+			dependencies: ["1F08060BC8BCA682"]
+			description: ["The road of the era, from the first step to the gate that leads on. Everything else hangs from it."]
+			icon: "minecraft:writable_book"
+			id: "39410922EEDADAC9"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "33509C73F154A3AE", type: "checkmark" }]
+			title: "The Journey"
+			x: 2.5d
+			y: 0.0d
+		}
 		{
 			dependencies: ["3E3C190F1A77EB6D"]
 			description: [
@@ -26,15 +39,15 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["1F08060BC8BCA682"]
+			dependencies: ["39410922EEDADAC9"]
 			description: ["The &6MAX Machine Hull&r is the first thing every MAX machine needs."]
 			icon: "gtceu:max_machine_hull"
 			id: "568C8D9230CD9FBB"
 			rewards: [{ id: "342E014AAF57F6D8", type: "xp", xp: 100 }]
 			tasks: [{ id: "5BDB44D9B4603C9A", item: "gtceu:max_machine_hull", type: "item" }]
 			title: "MAX Hull"
-			x: 2.0d
-			y: 0.0d
+			x: 5.0d
+			y: -6.0d
 		}
 		{
 			dependencies: ["568C8D9230CD9FBB"]
@@ -46,8 +59,8 @@
 			size: 0.75d
 			tasks: [{ id: "3029FDC03B5EEC8A", type: "checkmark" }]
 			title: "The Way In"
-			x: 4.0d
-			y: 0.0d
+			x: 7.5d
+			y: -6.0d
 		}
 		{
 			dependencies: ["5246FF455E6244E1"]
@@ -57,8 +70,8 @@
 			rewards: [{ id: "5674052E38E6CDDA", type: "xp", xp: 100 }]
 			tasks: [{ id: "790E1B881334D74C", item: "gtceu:horizon_strand_single_cable", type: "item" }]
 			title: "Horizon Strand"
-			x: 6.0d
-			y: 0.0d
+			x: 10.0d
+			y: -6.0d
 		}
 		{
 			dependencies: ["32D24E3C2D028686"]
@@ -68,8 +81,8 @@
 			rewards: [{ id: "1E045491248F45C8", type: "xp", xp: 100 }]
 			tasks: [{ id: "71AEE6573B23E80E", item: "grindless:sgr_a_chart", type: "item" }]
 			title: "Sagittarius A* Chart"
-			x: 8.0d
-			y: 0.0d
+			x: 12.5d
+			y: -8.0d
 		}
 		{
 			dependencies: ["115B5942935339A3"]
@@ -79,8 +92,8 @@
 			rewards: [{ id: "7A6EB62D4EA7DF82", type: "xp", xp: 150 }]
 			tasks: [{ id: "54C6E2CA51BD23FE", item: "grindless:gc_relay_probe", type: "item" }]
 			title: "Relay Probe"
-			x: 10.0d
-			y: 0.0d
+			x: 15.0d
+			y: -8.0d
 		}
 		{
 			dependencies: ["5DC7C7B13F7805BC"]
@@ -90,8 +103,8 @@
 			rewards: [{ id: "772A9C8FC5CD2C9B", type: "xp", xp: 100 }]
 			tasks: [{ id: "783052C947721D7F", item: "grindless:launched_gc_probe", type: "item" }]
 			title: "Probe Away"
-			x: 12.0d
-			y: 0.0d
+			x: 17.5d
+			y: -8.0d
 		}
 		{
 			dependencies: ["7C344D24CFB4563A"]
@@ -103,8 +116,8 @@
 			size: 1.5d
 			tasks: [{ dimension: "gcyr:black_hole_orbit", id: "5233BDFEF9BBCBFE", type: "dimension" }]
 			title: "Black Hole Orbit"
-			x: 14.0d
-			y: 0.0d
+			x: 20.0d
+			y: -8.0d
 		}
 		{
 			dependencies: ["33DDC08F5E410B5F"]
@@ -116,8 +129,8 @@
 			size: 0.75d
 			tasks: [{ id: "75ACECB056405620", type: "checkmark" }]
 			title: "Platforms at the Hole"
-			x: 16.0d
-			y: 0.0d
+			x: 22.5d
+			y: -10.5d
 		}
 		{
 			dependencies: ["7EE6563957A33CEE"]
@@ -127,8 +140,8 @@
 			rewards: [{ id: "5FE984F793A7843A", type: "xp", xp: 100 }]
 			tasks: [{ id: "1E8C69ED96B38D98", item: "grindless:sgr_a_spin_map", type: "item" }]
 			title: "Spin Map"
-			x: 18.0d
-			y: 0.0d
+			x: 25.0d
+			y: -10.5d
 		}
 		{
 			dependencies: ["348A116DE7098B29"]
@@ -138,8 +151,8 @@
 			rewards: [{ id: "5E1DB5D815CD3781", type: "xp", xp: 100 }]
 			tasks: [{ id: "5525743C8D75CE61", item: "grindless:nsc_ephemeris", type: "item" }]
 			title: "Cluster Ephemeris"
-			x: 20.0d
-			y: 0.0d
+			x: 27.5d
+			y: -10.5d
 		}
 		{
 			dependencies: ["305F48FF31D86B06"]
@@ -149,8 +162,8 @@
 			rewards: [{ id: "7BE4C06CBD19CBB1", type: "xp", xp: 100 }]
 			tasks: [{ id: "7776F0AD64262EF0", item: "gtceu:warp_gate", type: "item" }]
 			title: "The Gate at the Hole"
-			x: 22.0d
-			y: 0.0d
+			x: 30.0d
+			y: -11.5d
 		}
 		{
 			dependencies: ["17C4E15C613E47BA"]
@@ -160,12 +173,12 @@
 			rewards: [{ id: "7C7F356F6F55002E", type: "xp", xp: 150 }]
 			tasks: [{ id: "114A6372BBBA6B53", item: "grindless:nsc_belt_seed", type: "item" }]
 			title: "Belt Seed"
-			x: 24.0d
-			y: 0.0d
+			x: 32.5d
+			y: -10.5d
 		}
 		{
 			dependencies: ["7C7742F4DAA892DC"]
-			description: ["The gate slings the seed toward the cluster and keeps nothing: what was thrown does not come back. When it arrives, the gate can follow it."]
+			description: ["The gate slings the seed toward the cluster and keeps its tier-tagged mainframes; what was thrown does not come back. When it arrives, the gate can follow it."]
 			icon: "grindless:nsc_belt_seed"
 			id: "3CF361CADD9C095D"
 			rewards: [{ id: "1A4BB59D6A783D95", type: "xp", xp: 25 }]
@@ -173,8 +186,8 @@
 			size: 0.75d
 			tasks: [{ id: "56C4F8C6FCFCE11D", type: "checkmark" }]
 			title: "Seed Away"
-			x: 26.0d
-			y: 0.0d
+			x: 35.0d
+			y: -10.5d
 		}
 		{
 			dependencies: ["3CF361CADD9C095D"]
@@ -186,8 +199,8 @@
 			size: 1.5d
 			tasks: [{ dimension: "grindless:nsc_belt", id: "592CCC58A19626B3", type: "dimension" }]
 			title: "The Belt Opens"
-			x: 28.0d
-			y: 0.0d
+			x: 37.5d
+			y: -10.0d
 		}
 		{
 			dependencies: ["71D59C41930835BE"]
@@ -199,8 +212,8 @@
 			size: 0.75d
 			tasks: [{ id: "14ECC065D0F1C84E", type: "checkmark" }]
 			title: "Rock to Shell"
-			x: 30.0d
-			y: 0.0d
+			x: 40.0d
+			y: -10.0d
 		}
 		{
 			dependencies: ["1EC68CC3E26DF86B"]
@@ -210,8 +223,8 @@
 			rewards: [{ id: "3ECF0A08663B1400", type: "xp", xp: 100 }]
 			tasks: [{ id: "5811B2A0478AAEA0", item: "grindless:nsc_planetesimal", type: "item" }]
 			title: "Planetesimal"
-			x: 32.0d
-			y: 0.0d
+			x: 42.5d
+			y: -10.0d
 		}
 		{
 			dependencies: ["545B9E9D69F38F72"]
@@ -221,8 +234,8 @@
 			rewards: [{ id: "5FACFFE1A2C69601", type: "xp", xp: 100 }]
 			tasks: [{ id: "7E701B8958DA40D3", item: "grindless:metal_feedstock", type: "item" }]
 			title: "Metal Feedstock"
-			x: 34.0d
-			y: 0.0d
+			x: 45.0d
+			y: -10.0d
 		}
 		{
 			dependencies: ["73F533AC440AACF3"]
@@ -234,8 +247,852 @@
 			size: 1.75d
 			tasks: [{ id: "12C938B8EEF4447E", type: "checkmark" }]
 			title: "To the Horizon"
-			x: 36.0d
+			x: 47.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["39410922EEDADAC9"]
+			description: ["The wafers, chips and circuits of the era, from the first wafer to the mainframe, and the parts built from them."]
+			icon: "minecraft:writable_book"
+			id: "7DA50832A003A040"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "3680B1B30BBEC695", type: "checkmark" }]
+			title: "Circuits"
+			x: 10.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["7DA50832A003A040"]
+			description: ["Light squeezed until its noise drops below what any ordinary beam can reach. The &6Squeezed-Light Chip&r is the part that makes MAX emitters and the mainframe sharp. The crystals and the femtosecond writer from the older photonic lines, with a cleanroom that stays cold. The tweezer die, the MAX emitter and the mainframe. Crystals by ME; chips are small, so stock a few and send the rest on."]
+			icon: "grindless:squeezed_light_chip"
+			id: "5910FF92CEC15A2E"
+			rewards: [{ id: "113B65BEADB549B4", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "1DB6B458168FE556", item: "grindless:squeezed_light_chip", type: "item" }]
+			title: "Squeezed-Light Chip"
+			x: 12.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["5910FF92CEC15A2E"]
+			description: ["Single atoms held in beams of light, one by one, on a die. The &6Tweezer Array Die&r is the logic the mainframe reads its qubits from. A laser engraver for the last step, a squeezed-light chip and a calibrated lens. The interposer and the Rydberg array works, which is researched from it. Lenses and chips by ME in matched counts; the engraver returns dies in a chest."]
+			icon: "grindless:tweezer_array_die"
+			id: "17CBBAAEADB21164"
+			rewards: [{ id: "5FC4C428E07A8BBA", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7FDED9EDDD366B8E", item: "grindless:tweezer_array_die", type: "item" }]
+			title: "Tweezer Array Die"
+			x: 15.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["17CBBAAEADB21164"]
+			description: ["The board that joins the chips at millikelvin. The &6Cryo Photonic Interposer&r carries light between them without heating either. A cold line: the helium refrigerator and a vacuum, with a die and a chip to bond. The mainframe, which takes one of each part. Keep one of each part per mainframe in a dedicated chest; a big stock gains nothing."]
+			icon: "grindless:cryo_photonic_interposer"
+			id: "18F41DE9388D684D"
+			rewards: [{ id: "30CD7A6501005BD9", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5C233FAA3A69F48D", item: "grindless:cryo_photonic_interposer", type: "item" }]
+			title: "Cryo Photonic Interposer"
+			x: 17.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["18F41DE9388D684D"]
+			description: ["The only circuit of MAX, and the last one the pack has. The &6Supracausal Mainframe&r joins two chips, two dies and an interposer with OpV circuits and a tetron array. The photonic integration hall from UEV, superfluid helium-3 and a full set of the three parts. Every MAX component, hatch and controller. Three part lines into one hall: give each its own chest so one slow line never starves the others."]
+			icon: "gtnn:supracausal_mainframe"
+			id: "3BEE68D81D2C0817"
+			rewards: [{ id: "3F96CF74225A6C7E", type: "xp", xp: 250 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "13AC629C7C67ED7B", item: "gtnn:supracausal_mainframe", type: "item" }]
+			title: "Supracausal Mainframe"
+			x: 22.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["3BEE68D81D2C0817"]
+			description: ["MAX has no assembler of its own, so MAX parts are put together in the &6Assembly Hall&r. It takes many parts at once and does the work of a whole row of assemblers. The hall controller and two OpV hatches that give it MAX voltage, because MAX hatches do not exist yet. Every MAX component, and later the hatches that replace the OpV pair. Parts by ME; the hall hands back one kind at a time, so a pattern provider per component keeps it busy."]
+			icon: "gtceu:assembly_hall"
+			id: "34FED870BAF8944F"
+			rewards: [{ id: "30FF56E65BF22E96", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7768C56441CEB741", item: "gtceu:assembly_hall", type: "item" }]
+			title: "The Assembly Hall"
+			x: 25.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["34FED870BAF8944F"]
+			description: ["MAX motors wind strand cable round a bearing that floats without touching anything, and the piston is a motor with a harmonic drive and a stack of shape-changing metal. The older motors will not do here."]
+			icon: "grindless:max_electric_motor"
+			id: "1E1DCCA995ABBA6C"
+			rewards: [{ id: "55C419ADEC17517D", type: "xp", xp: 100 }]
+			tasks: [
+				{ id: "72FE9231B0F93961", item: "grindless:max_electric_motor", type: "item" }
+				{ id: "32E4CED7A3567894", item: "grindless:max_electric_piston", type: "item" }
+			]
+			title: "Motors and Pistons"
+			x: 27.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["1E1DCCA995ABBA6C"]
+			description: ["The &6MAX Electric Pump&r is a motor with a rotor and a superfluid seal. Nothing leaks past it, which is the point."]
+			icon: "grindless:max_electric_pump"
+			id: "343CB9FB8854A4CA"
+			rewards: [{ id: "5F55ADB167D1F5F7", type: "xp", xp: 100 }]
+			tasks: [{ id: "1F7AC72324ED09A2", item: "grindless:max_electric_pump", type: "item" }]
+			title: "Pump"
+			x: 32.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["343CB9FB8854A4CA"]
+			description: ["The &6MAX Fluid Regulator&r adds a superfluid valve and a tetron array to the pump, so it can meter a flow nobody can see."]
+			icon: "grindless:max_fluid_regulator"
+			id: "323F3AD3182A3174"
+			rewards: [{ id: "59B99A9A813B4888", type: "xp", xp: 100 }]
+			tasks: [{ id: "7065F3002E28EA13", item: "grindless:max_fluid_regulator", type: "item" }]
+			title: "Fluid Regulator"
+			x: 35.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["34FED870BAF8944F"]
+			description: ["A squeezed-light chip behind an optical isolator, so the light goes out and nothing comes back. The &6MAX Emitter&r goes into the field generator and most controllers."]
+			icon: "grindless:max_emitter"
+			id: "1474BC43B0215EB5"
+			rewards: [{ id: "19679F8DE781C09B", type: "xp", xp: 100 }]
+			tasks: [{ id: "19F620BA2657589A", item: "grindless:max_emitter", type: "item" }]
+			title: "Emitter"
+			x: 27.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1E1DCCA995ABBA6C"]
+			description: ["Two motors, a piston and a circuit: the &6MAX Robot Arm&r. It is also what the belt seed and the Rydberg works are built around."]
+			icon: "grindless:max_robot_arm"
+			id: "5E0E8820A0ECD4C2"
+			rewards: [{ id: "55206BAC67F2D78E", type: "xp", xp: 100 }]
+			tasks: [{ id: "54EE4A0DDFD0EA36", item: "grindless:max_robot_arm", type: "item" }]
+			title: "Robot Arm"
+			x: 30.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["18197070E4168342"]
+			description: ["The &6MAX Sensor&r reads gravity from atoms, so it waits for the atom interferometer works to make the gradiometer. Until then, every MAX machine that wants one waits too."]
+			icon: "grindless:max_sensor"
+			id: "14F8810FFFD16F9C"
+			rewards: [{ id: "5EF24D3053494F2A", type: "xp", xp: 120 }]
+			tasks: [{ id: "1DC0F611B6A04C80", item: "grindless:max_sensor", type: "item" }]
+			title: "Sensor"
+			x: 22.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["3FC8F0795380E0E2"]
+			description: ["A belt that carries the load on a film one atom thick. The &6MAX Conveyor Module&r needs the membrane line, and the buses need the conveyor."]
+			icon: "grindless:max_conveyor_module"
+			id: "389ED54791286682"
+			rewards: [{ id: "5B23EFF10DE69E16", type: "xp", xp: 120 }]
+			tasks: [{ id: "5E4AAF8CFD7A30D9", item: "grindless:max_conveyor_module", type: "item" }]
+			title: "Conveyor Module"
+			x: 22.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["3FC8F0795380E0E2"]
+			description: ["The part that bends space: an emitter, two field coils, a superconducting membrane and a pinch of stable exotic matter. The &6MAX Field Generator&r is the last component and the one every big machine asks for most."]
+			icon: "grindless:max_field_generator"
+			id: "7FDC7DC697D09839"
+			rewards: [{ id: "32CBC11FF4BFA1DE", type: "xp", xp: 150 }]
+			tasks: [{ id: "37B25007E07E59FA", item: "grindless:max_field_generator", type: "item" }]
+			title: "Field Generator"
+			x: 22.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["14F8810FFFD16F9C", "389ED54791286682"]
+			description: ["The &6MAX Energy Input Hatch&r, its &616 A&r version, the &6MAX Input Bus&r and the &6MAX Battery&r are built on the MAX hull. With them in place the OpV pair you have been using can retire; the big rows at Sgr A* run on two 16 A hatches."]
+			icon: "gtceu:max_energy_input_hatch"
+			id: "5F47DE9BFA3F4C62"
+			rewards: [{ id: "1586F0A123C68BE3", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "5E71376FD54CBE46", item: "gtceu:max_energy_input_hatch", type: "item" }
+				{ id: "162F1C751ADE5AF4", item: "gtceu:max_energy_input_hatch_16a", type: "item" }
+				{ id: "7A759BCB606DBC0A", item: "gtceu:max_input_bus", type: "item" }
+				{ id: "18CD5CA0B99D570F", item: "gtceu:max_battery", type: "item" }
+			]
+			title: "MAX Parts and Hatches"
+			x: 25.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["39410922EEDADAC9"]
+			description: ["The last climb: the shell around the hole, its segments and the lock that opens the way on."]
+			icon: "minecraft:writable_book"
+			id: "54438368E82F1FE4"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "761BC4E798547118", type: "checkmark" }]
+			title: "The Horizon"
+			x: 5.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["35EE95AAB58E189A"]
+			description: ["The &6Shell Gradient Map&r shows where on the shell the field is steepest, so the first segments go where they are needed."]
+			icon: "grindless:shell_gradient_map"
+			id: "3B9E83D6E75352E8"
+			rewards: [{ id: "3C01001204125396", type: "xp", xp: 100 }]
+			tasks: [{ id: "16BA58ECE287250C", item: "grindless:shell_gradient_map", type: "item" }]
+			title: "Shell Gradient Map"
+			x: 50.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["3B9E83D6E75352E8"]
+			description: ["A cooler the size of a house keeps the shell below the temperature of the sky. The &6Shell Cryocooler&r goes into the shell's hull before the first segment."]
+			icon: "grindless:shell_cryocooler"
+			id: "327C37975E5EFBA1"
+			rewards: [{ id: "589B059470B692EF", type: "xp", xp: 100 }]
+			tasks: [{ id: "526B6361E8BAEA77", item: "grindless:shell_cryocooler", type: "item" }]
+			title: "Shell Cryocooler"
+			x: 52.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["327C37975E5EFBA1"]
+			description: ["The &6Mirror Shell&r wraps the black hole in mirrors and sends its light back in. &oFiction:&r a shell like this cannot be built; the hole and its light are real. It is the largest structure in the pack. Thirty-three cubes of clear space around the hole, the gradient map and the cryocooler, and a wireless network that holds the load. The segments, the four horizon machines and the last recipe. Segments leave the line on a belt; plan the bus before you place the controller."]
+			icon: "gtceu:mirror_shell"
+			id: "3AD1F00AD8DB5003"
+			rewards: [{ id: "16DE76451B228310", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7B2B9B3553212E55", item: "gtceu:mirror_shell", type: "item" }]
+			title: "Mirror Shell"
+			x: 55.0d
+			y: 18.5d
+		}
+		{
+			dependencies: ["3AD1F00AD8DB5003"]
+			description: ["The first quarter of the shell is up. The tether lines hold."]
+			icon: "grindless:mirror_shell_segment"
+			id: "719DCF42891758DC"
+			rewards: [{ id: "5307F22096320918", type: "xp", xp: 100 }]
+			tasks: [{ count: 871L, id: "76FC8B1EDE525FD6", item: "grindless:mirror_shell_segment", type: "item" }]
+			title: "A Quarter of the Shell"
+			x: 57.5d
+			y: 18.5d
+		}
+		{
+			dependencies: ["719DCF42891758DC"]
+			description: ["Half the segments are cut. Charge the cryocoolers."]
+			icon: "grindless:mirror_shell_segment"
+			id: "5B3098B8ADC224F9"
+			rewards: [{ id: "558CB855926E940D", type: "xp", xp: 100 }]
+			tasks: [{ count: 1742L, id: "3403C91E134EA106", item: "grindless:mirror_shell_segment", type: "item" }]
+			title: "Half the Shell"
+			x: 60.0d
+			y: 18.5d
+		}
+		{
+			dependencies: ["5B3098B8ADC224F9"]
+			description: ["Three quarters of the segments are cut. The light starts to come back."]
+			icon: "grindless:mirror_shell_segment"
+			id: "38EC1422CD925532"
+			rewards: [{ id: "11B52A0A417A783F", type: "xp", xp: 100 }]
+			tasks: [{ count: 2612L, id: "71C14ACE8A1E8305", item: "grindless:mirror_shell_segment", type: "item" }]
+			title: "Three Quarters"
+			x: 62.5d
+			y: 18.5d
+		}
+		{
+			dependencies: ["38EC1422CD925532"]
+			description: ["Every segment is cut. The shell closes."]
+			icon: "grindless:mirror_shell_segment"
+			id: "764F18E0B5749AFE"
+			rewards: [{ id: "102D8F36795CFA36", type: "xp", xp: 150 }]
+			tasks: [{ count: 3483L, id: "775AAC634B14C153", item: "grindless:mirror_shell_segment", type: "item" }]
+			title: "The Shell Is Closed"
+			x: 65.0d
+			y: 18.5d
+		}
+		{
+			dependencies: ["764F18E0B5749AFE"]
+			description: ["The &6Horizon Interferometer&r reads the light that the closed shell returns and maps the cloud of phases around the hole. Its second mode calibrates oscillators against that map. A closed shell that has run its first recipe, and the casings and parts new to this machine. The cloud phase map and the calibrated oscillator bank of the last recipe. Maps and banks leave by bus; keep the oscillators on their own line."]
+			icon: "gtceu:horizon_interferometer"
+			id: "75EEF916B1DD0828"
+			rewards: [{ id: "383CF33D745FFAEF", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "325C66A59E6138DF", item: "gtceu:horizon_interferometer", type: "item" }]
+			title: "Horizon Interferometer"
+			x: 67.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["75EEF916B1DD0828"]
+			description: ["The &6Cloud Phase Map&r holds the phase of the light at every point of the shell. The &6Calibrated Oscillator Bank&r keeps a clock against it. The last recipe wants both."]
+			icon: "grindless:cloud_phase_map"
+			id: "16ADDEF6DC1ACB82"
+			rewards: [{ id: "5DE838EFC4B30EED", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "1079DB1085B71DFF", item: "grindless:cloud_phase_map", type: "item" }
+				{ id: "35B9521ABCEF1413", item: "grindless:calibrated_oscillator_bank", type: "item" }
+			]
+			title: "Cloud Phase Map"
+			x: 70.0d
+			y: 16.0d
+		}
+		{
+			dependencies: ["764F18E0B5749AFE"]
+			description: ["The &6Ergoregion Synchroniser&r locks a clock to the spin of the hole. &oFiction:&r the hole is held still long enough to be measured. The second mode relocks a spent lock so it can be used again. The oscillator bank, a closed shell and the casings and parts new to this machine. The horizon phase lock of the last recipe. Send each spent lock back in by bus; it never leaves the line."]
+			icon: "gtceu:ergoregion_synchroniser"
+			id: "5D21090FD9E824F1"
+			rewards: [{ id: "73241DDB5BBF2ECB", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "59259858DE51362D", item: "gtceu:ergoregion_synchroniser", type: "item" }]
+			title: "Ergoregion Synchroniser"
+			x: 67.5d
+			y: 16.5d
+		}
+		{
+			dependencies: ["5D21090FD9E824F1"]
+			description: ["A &6Horizon Phase Lock&r holds a clock to the spin of the hole. It wears out, and a spent one goes back to the synchroniser."]
+			icon: "grindless:horizon_phase_lock"
+			id: "18AE595B2EF8F7C7"
+			rewards: [{ id: "1CAEFE231027349C", type: "xp", xp: 150 }]
+			tasks: [{ id: "579C1829D2BF024A", item: "grindless:horizon_phase_lock", type: "item" }]
+			title: "Horizon Phase Lock"
+			x: 70.0d
+			y: 17.5d
+		}
+		{
+			dependencies: ["764F18E0B5749AFE"]
+			description: ["A packet of waves tuned to the shell. One of them runs the shell vent for a long while."]
+			icon: "grindless:seed_wave_packet"
+			id: "7041B41C388F25C5"
+			rewards: [{ id: "32153E7EB770C4DB", type: "xp", xp: 100 }]
+			tasks: [{ id: "3DB3F5F18B6FE5EE", item: "grindless:seed_wave_packet", type: "item" }]
+			title: "Seed Wave Packet"
+			x: 67.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["764F18E0B5749AFE"]
+			description: ["The &6Horizon Flux Clamp&r winds the field of the shell into a winding and, in its second mode, catches a plasmoid thrown by a reconnecting field line. A closed shell and the casings and parts new to this machine. The winding that the last recipe needs, and a plasmoid for the lines that use one. Windings leave by bus. A plasmoid is a hot output, so contain it and route it."]
+			icon: "gtceu:horizon_flux_clamp"
+			id: "5BBEA47C3F10AEA4"
+			rewards: [{ id: "76F6A06DFA435DB4", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "799901A5095E9F5A", item: "gtceu:horizon_flux_clamp", type: "item" }]
+			title: "Horizon Flux Clamp"
+			x: 67.5d
+			y: 19.5d
+		}
+		{
+			dependencies: ["5BBEA47C3F10AEA4"]
+			description: ["The &6Horizon Flux Clamp&r winding goes into the last recipe. The &6Reconnection Plasmoid&r is its second product, and it has a use of its own."]
+			icon: "grindless:horizon_flux_clamp"
+			id: "33667F1FBE737A99"
+			rewards: [{ id: "7B3E4BDA85F98BBA", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "1F7898B1D84265F4", item: "grindless:horizon_flux_clamp", type: "item" }
+				{ id: "52D277A1525E58EC", item: "grindless:reconnection_plasmoid", type: "item" }
+			]
+			title: "Flux Clamp Winding"
+			x: 70.0d
+			y: 19.0d
+		}
+		{
+			dependencies: ["764F18E0B5749AFE"]
+			description: ["The &6Segment Reclamation Works&r strips an ablated shell segment into scrap streams. Nothing the shell wears out is thrown away. Ablated segments from the shell, and the casings and parts new to this machine. Scrap that goes back into the segment, cooler and coupler lines. Each scrap stream goes to its own line by bus."]
+			icon: "gtceu:segment_reclamation_works"
+			id: "334E895BAA59F8B7"
+			rewards: [{ id: "3DDD080B7BD7743C", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7006FC4032258E6F", item: "gtceu:segment_reclamation_works", type: "item" }]
+			title: "Segment Reclamation Works"
+			x: 67.5d
+			y: 21.0d
+		}
+		{
+			dependencies: ["334E895BAA59F8B7"]
+			description: ["Shell scrap, membrane scrap, cooler scrap, coupler scrap and electronics scrap each go back to the line that made the part."]
+			icon: "grindless:mirror_shell_scrap"
+			id: "16D2B78551A9DB50"
+			rewards: [{ id: "31B4BED505E85B6E", type: "xp", xp: 150 }]
+			tasks: [
+				{ id: "3960C18E232652DD", item: "grindless:mirror_shell_scrap", type: "item" }
+				{ id: "19F136BBD7206AC3", item: "grindless:stripped_membrane_scrap", type: "item" }
+				{ id: "11C4FC31E43CB72A", item: "grindless:cryocooler_scrap", type: "item" }
+				{ id: "160C4AFAAD7F7886", item: "grindless:coupler_scrap", type: "item" }
+				{ id: "73F783EBDCA05136", item: "grindless:segment_electronics_scrap", type: "item" }
+			]
+			title: "Scrap Back to the Lines"
+			x: 70.0d
+			y: 20.5d
+		}
+		{
+			dependencies: ["7041B41C388F25C5", "16ADDEF6DC1ACB82", "18AE595B2EF8F7C7", "33667F1FBE737A99", "16D2B78551A9DB50"]
+			description: [
+				"The shell's last recipe holds the horizon still. &oFiction:&r a rotating black hole's horizon, held long enough to be measured and sealed in a reference."
+				"The first lock opens MAX+. The shell stays, and the recipe can run again."
+			]
+			icon: "grindless:horizon_lock"
+			id: "3F1C487831920064"
+			rewards: [{ id: "7F8904A75DAEF366", type: "xp", xp: 200 }]
+			shape: "diamond"
+			size: 1.75d
+			tasks: [{ id: "5FD4AA9BD3E1B8A8", item: "grindless:horizon_lock", type: "item" }]
+			title: "The Horizon Lock"
+			x: 72.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["39410922EEDADAC9"]
+			description: ["Power, networks and processes that tie this era to the lines you already run."]
+			icon: "minecraft:writable_book"
+			id: "5FD613EAED3F564B"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "56856C165C1DD463", type: "checkmark" }]
+			title: "Integration"
+			x: 5.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["32D24E3C2D028686"]
+			description: ["The &6Horizon Strand Repeater&r keeps the wireless network in step across the galaxy. Without one in each tower the MAX tier cannot reach the platforms at the centre. Horizon strand from the way in, and the assembly hall on two OpV hatches. The MAX cell and the MAX wireless tier. Nothing to feed: build the repeaters once and add one per new tower."]
+			icon: "grindless:horizon_strand_repeater"
+			id: "1B14456734D691CA"
+			rewards: [{ id: "1F65A4F29D932823", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1F50C451C8209025", item: "grindless:horizon_strand_repeater", type: "item" }]
+			title: "Strand Repeater"
+			x: 12.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["1B14456734D691CA"]
+			description: ["The &6MAX SMES Cell&r is the store of the last tier. The last recipe of the shell draws from the wireless network, and this cell is what lets a tower hold that load. A repeater for each tower, and strand from the way in. The MAX wireless hatches and the shell's last recipe. Nothing to feed. Size the towers for your busiest hour."]
+			icon: "grindless:max_smes_cell"
+			id: "586558AD36EEC6F4"
+			rewards: [{ id: "3E097F99F8E85CB1", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3C6C288DA65A5FC2", item: "grindless:max_smes_cell", type: "item" }]
+			title: "The MAX Cell"
+			x: 15.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["586558AD36EEC6F4"]
+			description: ["Move your towers onto &6MAX SMES Cells&r and the wireless network carries MAX to every platform, the black hole orbit and the belt included. Every formed tower holding MAX cells. Until then the network stays at the tier below. The MAX wireless hatches, and the load of the shell and its machines. Add cells when the network dips at your busiest hour."]
+			icon: "gtceu:max_wireless_energy_hatch"
+			id: "1B62C1279BB0415F"
+			rewards: [{ id: "734628D4DEC748A7", type: "xp", xp: 200 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1103D67371DA1028", item: "gtceu:max_wireless_energy_hatch", type: "item" }
+				{ id: "745067A598835901", item: "gtceu:max_wireless_dynamo_hatch", type: "item" }
+			]
+			title: "The Network Goes MAX"
+			x: 17.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["5FD613EAED3F564B"]
+			description: ["The &6MAX Parallel Hatch&r is the widest in the pack. Behind it a mega machine runs a whole hall of recipes at once. A mega machine that takes parallel hatches, and the power for the width you ask for. Every mega machine of the pack at its full width. Feed it by wide buses and watch the network, since the load grows with the width."]
+			icon: "gtceu:max_parallel_hatch"
+			id: "3443B6F290684B46"
+			rewards: [{ id: "12BE61280C48CC3E", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "79F944DF014AEC5A", item: "gtceu:max_parallel_hatch", type: "item" }]
+			title: "The MAX Parallel Hatch"
+			x: 7.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["33DDC08F5E410B5F"]
+			description: ["AE2 has no new tier at MAX. The far rings of the platforms around the hole seed a network of their own, and the wireless network carries it home."]
+			icon: "ae2:controller"
+			id: "36D6484248E3C605"
+			rewards: [{ id: "78401C2FB4EBB1D4", type: "xp", xp: 50 }]
+			shape: "rsquare"
+			size: 1.25d
+			tasks: [{ id: "5936627BCE03C58E", type: "checkmark" }]
+			title: "AE2 at the Centre"
+			x: 22.5d
+			y: -9.0d
+		}
+		{
+			dependencies: ["348A116DE7098B29"]
+			description: ["The &6Geroch Winch&r lowers a tether over the horizon and takes power from the spin of the hole. It wears its tether as it works. A formed winch at the black hole orbit and a stock of tethers. The first MAX power that is not a fuel. Spare tethers arrive over AE2; a worn one goes back to its line."]
+			icon: "gtceu:geroch_winch"
+			id: "51FFBC5A2B05B2CA"
+			rewards: [{ id: "3594E213E47CBE1B", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5E47BD4C13DAF44D", item: "grindless:horizon_tether", type: "item" }]
+			title: "Power From the Spin"
+			x: 32.5d
+			y: -8.5d
+		}
+		{
+			dependencies: ["51FFBC5A2B05B2CA"]
+			description: ["The &6Penrose Engine&r drops a payload into the ergosphere and collects more energy than it spent. The excess comes from the rotation of the hole. A formed engine and payloads from the payload line. A big, steady supply of MAX power for the platforms. One payload per cycle by bus; the spent casing goes back to the line."]
+			icon: "gtceu:penrose_engine"
+			id: "7AEEF7B6A57C9C2F"
+			rewards: [{ id: "36B8EC02DB7779C8", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "70C9D7DE9B1AA42B", item: "gtceu:penrose_engine", type: "item" }
+				{ id: "7758449AE46EDC8F", item: "grindless:max_penrose_payload", type: "item" }
+			]
+			title: "The Penrose Engine"
+			x: 35.0d
+			y: -8.5d
+		}
+		{
+			dependencies: ["7AEEF7B6A57C9C2F"]
+			description: ["Once the &6Mirror Shell&r is up it has a power mode of its own, the vent, which lets back out part of the light the shell returned to the hole. A closed shell and a seed wave packet to start it. Power drawn from the shell instead of fuel, for as long as the packet lasts. Packets arrive by bus; watch the network at the start of each one."]
+			icon: "gtceu:mirror_shell"
+			id: "766DF39BA6B1F04B"
+			rewards: [{ id: "7D443B3FFBDB9DA9", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3F75F91B83771163", item: "grindless:spent_wave_packet", type: "item" }]
+			title: "The Shell Vent"
+			x: 37.5d
+			y: -8.5d
+		}
+		{
+			dependencies: ["33DDC08F5E410B5F"]
+			description: ["The &6Accretion Disk Skimmer&r, &6Plasma Mass Filter&r, &6FRC Former&r and &6BZ Dynamo&r each take a mode that works on matter from the disc: hot flow, filtered flow, flux-loaded plasma and a dynamo fed by it. The UXV controllers you already own, and the hot flow from the black hole orbit. The fuels and feeds of the machines of the era. Flow by pipe from the orbit; send filtered cuts to their own lines."]
+			icon: "gtceu:accretion_disk_skimmer"
+			id: "13E6AE6FF32324EA"
+			rewards: [{ id: "5E62E0C09FF5ABDE", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5199EED90A953356", item: "gtceu:accretion_disk_skimmer", type: "item" }
+				{ id: "791C7468C86322D9", item: "gtceu:plasma_mass_filter", type: "item" }
+				{ id: "37FA81C1B419A0AA", item: "gtceu:frc_former", type: "item" }
+				{ id: "71F0B0C0620E4DCD", item: "gtceu:bz_dynamo", type: "item" }
+			]
+			title: "Disc and Plasma"
+			x: 22.5d
+			y: -7.0d
+		}
+		{
+			dependencies: ["33DDC08F5E410B5F"]
+			description: ["The &6Droplet Radiator Works&r and &6Femtosecond Writer&r each take a MAX mode: nozzle plates for the shell radiator, and writes on the new die. The UIV controllers you already own. The shell radiator and the MAX die. Plates by bus; return what the writer rejects."]
+			icon: "gtceu:femtosecond_writer"
+			id: "76DCCA9EC423CC9E"
+			rewards: [{ id: "7945EBF0B5F413F0", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7F27923BF2DB16BB", item: "gtceu:droplet_radiator_works", type: "item" }
+				{ id: "5AD9314FCED03C6B", item: "gtceu:femtosecond_writer", type: "item" }
+			]
+			title: "Radiators and Writers"
+			x: 27.5d
+			y: -7.0d
+		}
+		{
+			dependencies: ["5FD613EAED3F564B"]
+			description: ["The &6Megabar Press&r and &6Degenerate Harvester&r each take a MAX row: the press shapes the heavy plates of the shell and the harvester gathers degenerate matter for the engine's slug. The UEV controllers you already own and matter from the orbit. The plates of the shell and the slug of the Penrose payload. Matter and plates by bus. The spent slug is an output, so route it."]
+			icon: "gtceu:degenerate_harvester"
+			id: "5489EFFC1AA7E360"
+			rewards: [{ id: "560573A101E3989F", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "781506391F745E05", item: "gtceu:megabar_press", type: "item" }
+				{ id: "357099CDDB5C7D32", item: "gtceu:degenerate_harvester", type: "item" }
+			]
+			title: "Press and Harvest"
+			x: 10.0d
+			y: 6.5d
+		}
+		{
+			dependencies: ["5FD613EAED3F564B"]
+			description: ["The &6Spark Plasma Sinterer&r takes a row that sinters the cores of the shell segments. The UHV controller you already own and the powders of the belt. The segment cores. Powders by bus; the cores go straight to the segment line."]
+			icon: "gtceu:spark_plasma_sinterer"
+			id: "179AD382D4871413"
+			rewards: [{ id: "3B9CBBF04931AFC3", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "74A6221BDF92FA9C", item: "gtceu:spark_plasma_sinterer", type: "item" }]
+			title: "Sinter the Segments"
+			x: 7.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["348A116DE7098B29"]
+			description: ["The &6SRF Cavity Works&r takes a row for the cavities of the drivers and the coil. Fiction: the drivers and the coil are built at the scale of the solar system. The UV controller you already own and the niobium of the platforms. The driver modules and the coil. Cavities by bus; a rejected one goes back to the melt."]
+			icon: "gtceu:srf_cavity_works"
+			id: "118F1A3968FC4666"
+			rewards: [{ id: "7B2CDD835EBD8F6A", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "74CE152954DC8C45", item: "gtceu:srf_cavity_works", type: "item" }]
+			title: "Cavities for the Drivers"
+			x: 27.5d
+			y: -12.0d
+		}
+		{
+			dependencies: ["305F48FF31D86B06"]
+			description: ["The &6Extraction Cascade&r takes a row that sorts belt rock into its metals before the furnace takes it. The EV controller you already own and rock from the belt. The metal feedstock of the segments. Rock in by bus; each metal leaves on its own line."]
+			icon: "gtceu:extraction_cascade"
+			id: "55A4165DF8CEC24B"
+			rewards: [{ id: "1155FD6B4932DB0D", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "193EBEF715488E94", item: "gtceu:extraction_cascade", type: "item" }]
+			title: "Cascade of the Belt"
+			x: 30.0d
+			y: -10.0d
+		}
+		{
+			dependencies: ["39410922EEDADAC9"]
+			description: ["The machines of the era and the first steps that put each one to work."]
+			icon: "minecraft:writable_book"
+			id: "796D2CDBFAF7CCFF"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "1B5B21BF9A656F4A", type: "checkmark" }]
+			title: "Machines"
+			x: 12.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["796D2CDBFAF7CCFF"]
+			description: ["Hundreds of atoms held in light, swollen to a thousand times their size and made to compute together. The &6Rydberg Array Works&r makes the logic that the imager, the ark and the shell run on. The MAX hull, the optical table casing on atomic casing, a vacuum chamber of strand coils and a tweezer die as research. The Rydberg logic array, which the ark, the imager and the mirror shell all consume. A spent array comes back to be refurbished, so loop it home instead of binning it."]
+			icon: "gtceu:rydberg_array_works"
+			id: "15D5206E38FE152C"
+			rewards: [{ id: "71F3B23D6378C3D4", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "191FD887DE92A665", item: "gtceu:rydberg_array_works", type: "item" }
+				{ id: "501EC86C6B7DE245", item: "grindless:max_optical_table_casing", type: "item" }
+			]
+			title: "Rydberg Array Works"
+			x: 15.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["15D5206E38FE152C"]
+			description: ["The first array is the hard one. After that, every spent array goes back into the works."]
+			icon: "grindless:rydberg_logic_array"
+			id: "187F0BA64323CC4D"
+			rewards: [{ id: "3705E57B154B2122", type: "xp", xp: 80 }]
+			tasks: [{ id: "5700418CFB9EF2B9", item: "grindless:rydberg_logic_array", type: "item" }]
+			title: "Rydberg Logic Array"
+			x: 25.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["796D2CDBFAF7CCFF"]
+			description: ["Matter waves on an optical table, split and joined again to weigh gravity itself. The &6Atom Interferometer Works&r makes the gradiometer behind the MAX sensor. The MAX hull and the optical table casing, a tall drop tower with a magnetic shield, and a space of its own, because every footstep shows up as noise. The matter-wave gradiometer, so the MAX sensor, and with it the controllers that want one. Run it from a pattern provider; the gradiometer is the only thing it makes, so a single chest does it."]
+			icon: "gtceu:atom_interferometer_works"
+			id: "18197070E4168342"
+			rewards: [{ id: "1FD4916E59DC8DE4", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "372F1564FE7FE580", item: "gtceu:atom_interferometer_works", type: "item" }
+				{ id: "380F3DD8D1781A4C", item: "grindless:max_optical_table_casing", type: "item" }
+			]
+			title: "Atom Interferometer Works"
+			x: 17.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["18197070E4168342"]
+			description: ["It measures how steeply gravity falls from one atom to the next. The MAX sensor and the mass stream injector both want one."]
+			icon: "grindless:matter_wave_gradiometer"
+			id: "5C3E06AA80AB6FA5"
+			rewards: [{ id: "3E1414B35D769605", type: "xp", xp: 80 }]
+			tasks: [{ id: "1ADE9C829C547922", item: "grindless:matter_wave_gradiometer", type: "item" }]
+			title: "Matter-Wave Gradiometer"
+			x: 20.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["796D2CDBFAF7CCFF"]
+			description: ["A film one atom thick, rolled, grown and chilled along a long line. The &6Membrane Line&r makes the superconducting membrane that no older machine can. The MAX hull and a long run of roller casings through a CVD zone and a cold zone, with room for the length. The superconducting membrane, the conveyor module, the field generator and the hatches that move fluids. The line is long but quiet: feed it by ME and send the membrane to the ark and the hall."]
+			icon: "gtceu:membrane_line"
+			id: "3FC8F0795380E0E2"
+			rewards: [{ id: "7EA2EE0810C94BD3", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5CC2A65DA79BB1EE", item: "gtceu:membrane_line", type: "item" }
+				{ id: "30F9C29BD06654CA", item: "grindless:membrane_roller_casing", type: "item" }
+			]
+			title: "Membrane Line"
+			x: 20.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["3FC8F0795380E0E2"]
+			description: ["A skin that carries current with no loss. It shows up in the conveyor, the field generator and the hatches, so make it early."]
+			icon: "grindless:superconducting_membrane"
+			id: "373D406AA533F310"
+			rewards: [{ id: "11762D65DD8EF9D6", type: "xp", xp: 80 }]
+			tasks: [{ id: "14E24150467067E5", item: "grindless:superconducting_membrane", type: "item" }]
+			title: "Superconducting Membrane"
+			x: 25.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["187F0BA64323CC4D", "373D406AA533F310"]
+			description: ["A library of every genome the pack has met, written to crystal in a sealed cold vault. The &6Gene Ark&r makes the genome archive that goes into the last seed. The MAX hull, a sterilising filter casing vault with a cryogenic core, a Rydberg logic array and a superconducting membrane. The genome archive, which the later gates and MAX+ count on. Genomes arrive by ME; one archive is enough, so cap it."]
+			icon: "gtceu:gene_ark"
+			id: "77428218C6DD16A7"
+			rewards: [{ id: "3C665EF9B591A0A2", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5BC142BB55DB415D", item: "gtceu:gene_ark", type: "item" }]
+			title: "Gene Ark"
+			x: 27.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["77428218C6DD16A7"]
+			description: ["What is written there is what the new universe remembers."]
+			icon: "grindless:genome_archive"
+			id: "5A94EB5921E6E09A"
+			rewards: [{ id: "55812DFFDC074197", type: "xp", xp: 80 }]
+			tasks: [{ id: "1D453EDF84B7E8AB", item: "grindless:genome_archive", type: "item" }]
+			title: "Genome Archive"
+			x: 30.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["33DDC08F5E410B5F"]
+			description: ["It looks at the light that has gone round the hole, and from the ring it reads the spin and charts the cluster. The &6Photon Ring Imager&r is the eye of the whole era. The MAX hull, a ring of dish panels on a truss and a cold core of receivers, built in orbit around Sagittarius A*, with a Rydberg logic array. The spin map and the cluster ephemeris, both on the journey. It works one image at a time, so give it its own array supply and leave it."]
+			icon: "gtceu:photon_ring_imager"
+			id: "38957F897FD4B1D2"
+			rewards: [{ id: "16F3D4B7760A17A4", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "17159025961C40D2", item: "gtceu:photon_ring_imager", type: "item" }
+				{ id: "3B0A0FFA59ED99D3", item: "grindless:max_srf_cavity", type: "item" }
+			]
+			title: "Photon Ring Imager"
+			x: 25.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["33DDC08F5E410B5F"]
+			description: ["A tether dropped over the horizon and wound on a drum. The &6Geroch Winch&r takes power from the hole's spin, and wears its tether as it works. The MAX hull, a tall tower of drum casing over a tether well, and spare tethers. The first power the galactic centre gives back. Tethers wear out, so keep a pattern provider on them."]
+			icon: "gtceu:geroch_winch"
+			id: "110860BEED613414"
+			rewards: [{ id: "54C2F1DBAE7BC73C", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "749A97CBDBB43D9D", item: "gtceu:geroch_winch", type: "item" }
+				{ id: "5219A537BCC87714", item: "grindless:geroch_drum_casing", type: "item" }
+			]
+			title: "Geroch Winch"
+			x: 27.5d
+			y: -9.0d
+		}
+		{
+			dependencies: ["33DDC08F5E410B5F"]
+			description: ["It shapes hot flow into streams, and the streams into bundles. The &6Mass Stream Injector&r holds a shell up with moving mass. The MAX hull, a ring of stream-turn casing round a pellet accelerator, and a matter-wave gradiometer from the atom works at home. The stream bundle, which the mirror shell is built round. Pellets by ME; bundles come out in a chest and go straight to the shell."]
+			icon: "gtceu:mass_stream_injector"
+			id: "53636F954A3A7FC5"
+			rewards: [{ id: "3ED9716592A6BDB8", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "59859201F927DD25", item: "gtceu:mass_stream_injector", type: "item" }
+				{ id: "5C5D3E3560AF4B77", item: "grindless:stream_turn_casing", type: "item" }
+			]
+			title: "Mass Stream Injector"
+			x: 22.5d
+			y: -5.5d
+		}
+		{
+			dependencies: ["53636F954A3A7FC5"]
+			description: ["Bound to be laid in rings round the shell. Ask for them as the segments go up."]
+			icon: "grindless:stream_bundle"
+			id: "3D0AE7FBA92319CB"
+			rewards: [{ id: "324DA15E6617906D", type: "xp", xp: 80 }]
+			tasks: [{ id: "1E7B3F3B53E8E605", item: "grindless:stream_bundle", type: "item" }]
+			title: "Stream Bundle"
+			x: 25.0d
+			y: -5.5d
+		}
+		{
+			dependencies: ["71D59C41930835BE"]
+			description: ["It melts belt rock with the concentrated light of the cluster, and heats, separates and casts in one structure. The &6Cluster-Light Furnace&r is the only source of segment truss and stream pellets in quantity. The MAX hull, a bowl of albedo panels over a sinter hearth, built in the belt itself. The silicate slag the feeder burns, and the truss and pellets for the shell. The hearth lining wears, so keep spares; its slag and its volatiles each have somewhere to go."]
+			icon: "gtceu:cluster_light_furnace"
+			id: "1BF40431DAEF20FB"
+			rewards: [{ id: "1EC1B6C316569CDB", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1C830E048DD9A4B1", item: "gtceu:cluster_light_furnace", type: "item" }
+				{ id: "7E6C59379AB78DB7", item: "grindless:cluster_sinter_casing", type: "item" }
+			]
+			title: "Cluster-Light Furnace"
+			x: 40.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["1BF40431DAEF20FB"]
+			description: ["What is left of the rock once the iron is out. It is not wasted: it goes to the feeder."]
+			icon: "grindless:silicate_slag"
+			id: "5D95EF63D1BEB59B"
+			rewards: [{ id: "7C96407501148827", type: "xp", xp: 80 }]
+			tasks: [{ id: "12E213F3427931F6", item: "grindless:silicate_slag", type: "item" }]
+			title: "Silicate Slag"
+			x: 42.5d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5D95EF63D1BEB59B"]
+			description: ["Slag spiralling into a hole gives back more of its mass as light than anything else in the pack. The &6Accretion Feeder&r catches that light and turns it into power. The MAX hull, a ring of feeder coil casing with collector panels, and slag pellets from the furnace. The biggest generator of the era, and a use for the slag. It wears its panels and modules as it works: rework them in the solar array fab and the assembler."]
+			icon: "gtceu:accretion_feeder"
+			id: "700822AA57C7AE85"
+			rewards: [{ id: "139AD29C3DE765CC", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1EFF1CCFF2C3C087", item: "gtceu:accretion_feeder", type: "item" }
+				{ id: "1EE538EDC6A2241B", item: "grindless:feeder_coil_casing", type: "item" }
+			]
+			title: "Accretion Feeder"
+			x: 45.0d
+			y: -8.0d
 		}
 	]
 	subtitle: ["A probe to Sagittarius A*, a platform on the black hole's orbit and a belt of planetesimals: the way to the last recipe."]

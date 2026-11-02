@@ -9,7 +9,10 @@ const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.integration,
   filename: 'opv_integration',
   era: 'opv',
   role: 'integration',
@@ -43,7 +46,7 @@ export const QUESTS = [
     deps: ['ANTIH'], x: 2, y: 0,
     teach: {
       for: 'Matter and antimatter turned entirely into energy. The &6Annihilation Engine&r burns antihydrogen ice or an ACMF pellet with an antiproton stack. Gamma rays stop in &6Gamma Absorber Tiles&r, and a wall of &6TPV Panels&r turns the heat into current.',
-      needs: 'The engine, a ring of absorber tiles and a TPV wall, at home only, with OpV dynamo hatches. About half the energy leaves as neutrinos and is lost.',
+      needs: 'The engine, a ring of absorber tiles and a TPV wall, with OpV dynamo hatches. About half the energy leaves as neutrinos and is lost.',
       unlocks: 'The largest source at home, and a share of the gate\'s draw.',
       automate: 'Ice and stacks arrive by bus. Worn tiles go back to the hot cell for their metal.',
     },
@@ -69,9 +72,9 @@ export const QUESTS = [
     deps: ['KCORE', 'I_ENGINE'], x: 2, y: 3,
     teach: {
       for: 'A black hole radiates as it shrinks. The &6Hawking Collector&r takes the power and leaves the shell, burning stable exotic matter or stellar plasma and wearing the core a little each run.',
-      needs: 'A Kugelblitz core and a place at Cygnus X-1, with OpV dynamo hatches. It works nowhere else.',
+      needs: 'A Kugelblitz core and OpV dynamo hatches.',
       unlocks: 'The strongest single source of the era, and the second leg of the gate\'s supply.',
-      automate: 'Exotic matter and plasma come from their own lines at Cygnus. The power rides the wireless network home.',
+      automate: 'Exotic matter and plasma come from their own lines. The power rides the wireless network home.',
     },
     desc: [
       'Evaporation is real physics. A black hole you can feed on demand is fiction.',
@@ -265,7 +268,7 @@ export const QUESTS = [
     deps: ['STACK'], x: 2, y: 25,
     teach: {
       for: 'The &6Antimatter Trap&r, &6Positron Accumulator&r, &6SRF Cavity Works&r, &6Nuclear Clock Lab&r, &6X-Ray Pulse Profiler&r, &6PBO Plant&r and &6Warp Gate&r each take a row: antiproton stacking, seed plasma, RRR niobium, a thorium lock, an XNAV calibration, chain braid and the three OpV gates.',
-      needs: 'The controllers you already own, and the cold antiprotons from Cygnus.',
+      needs: 'The controllers you already own, and the cold antiprotons.',
       unlocks: 'Stacks, the pathfinder, the chain cable and the gates to the places and to MAX.',
       automate: 'Stacks and cells ride the relay between sites.',
     },
@@ -293,3 +296,4 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

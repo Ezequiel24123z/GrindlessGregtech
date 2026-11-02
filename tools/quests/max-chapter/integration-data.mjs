@@ -9,7 +9,10 @@ const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.integration,
   filename: 'max_integration',
   era: 'max',
   role: 'integration',
@@ -224,3 +227,4 @@ export const QUESTS = [
     rewards: [xp(120)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));
