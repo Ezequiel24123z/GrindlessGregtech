@@ -114,6 +114,62 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "2F874B0D92C4AD22", xp: 25 }],
   },
   {
+    key: "MV_PLATINUM_SLUDGE", id: "3F5B7D9A1C2E4086", title: "Platinum Group Sludge", icon: "gtceu:platinum_group_sludge_dust", kind: "process", deps: ["MV_VANADIUM_STEEL_DRILL_BIT"], x: 10, y: -4.5,
+    teach: {
+      for: "Nickel and pentlandite veins carry the platinum group. Leaching and centrifuging leave a sludge of it.",
+      needs: "Pentlandite from the vein drill, sulfuric acid, the ore line and a centrifuge.",
+      unlocks: "Aqua regia dissolution.",
+      automate: "Drill, macerator, washer and leach in one line; sludge out by bus.",
+    },
+    desc: [
+      "This is where the platinum line starts.",
+    ],
+    tasks: [{ type: "item", id: "4A6C8E1B3D5F7092", item: "gtceu:platinum_group_sludge_dust" }],
+    rewards: [{ type: "xp", id: "5B7D9F1A3C2E4086", xp: 30 }],
+  },
+  {
+    key: "MV_AQUA_REGIA", id: "6C8E1A3B5D7F2094", title: "Aqua Regia", icon: "gtceu:aqua_regia_bucket", kind: "process", deps: ["MV_PLATINUM_SLUDGE"], x: 12, y: -4.5,
+    teach: {
+      for: "Nitric and hydrochloric acid together dissolve platinum, which neither does alone.",
+      needs: "Nitric acid from the LV line, hydrochloric acid and the sludge.",
+      unlocks: "Platinum and palladium salts.",
+      automate: "Both acids piped from tanks; leach liquor out by pipe.",
+    },
+    desc: [
+      "Store it only in acid-proof tanks.",
+    ],
+    tasks: [{ type: "item", id: "7D9F2B4A6C8E1035", item: "gtceu:aqua_regia_bucket" }],
+    rewards: [{ type: "xp", id: "7ED4D0785CE4164B", xp: 30 }],
+  },
+  {
+    key: "MV_PLATINUM_SALT", id: "4D9BFAC8F46827EE", title: "Platinum Salt", icon: "gtceu:platinum_salt_dust", kind: "process", deps: ["MV_AQUA_REGIA"], x: 14, y: -4.5,
+    teach: {
+      for: "Ammonium chloride precipitates the platinum out of the solution as a salt.",
+      needs: "The dissolved platinum and ammonium chloride, in a reactor.",
+      unlocks: "Platinum metal, and the palladium left in the liquor.",
+      automate: "Liquor by pipe, ammonium chloride by bus, salt out by bus.",
+    },
+    desc: [
+      "The slag left over is kept for the HV platinum chapter.",
+    ],
+    tasks: [{ type: "item", id: "1A3C5E7B9D2F4068", item: "gtceu:platinum_salt_dust" }],
+    rewards: [{ type: "xp", id: "2B4D6F8A1C3E5079", xp: 30 }],
+  },
+  {
+    key: "MV_PALLADIUM_AND_PLATINUM", id: "3C5E7A9B1D6F4082", title: "Platinum and Palladium", icon: "gtceu:platinum_metal_dust", kind: "process", deps: ["MV_PLATINUM_SALT"], x: 16, y: -4.5,
+    teach: {
+      for: "The salts are reduced to metal: platinum by heat, palladium from its ammine salt with formate.",
+      needs: "Platinum salt, the palladium liquor and formic acid or formate.",
+      unlocks: "Platinum catalysts for later chemistry.",
+      automate: "Salts by bus, reductant by pipe, metal dust out by bus.",
+    },
+    desc: [
+      "Nothing in this line skips a step.",
+    ],
+    tasks: [{ type: "item", id: "4D6F8B2A1C3E5097", item: "gtceu:platinum_metal_dust" }, { type: "item", id: "5E7A9C2B1D4F6038", item: "gtceu:palladium_metal_dust" }],
+    rewards: [{ type: "xp", id: "6F8B1D4A3C5E7029", xp: 35 }],
+  },
+  {
     key: "MV_SILICON_INGOT", id: "7C7BAECAD00C19E7", title: "Silicon Ingot", icon: "gtceu:silicon_ingot", deps: ["MV_KANTHAL"], x: 8, y: 0,
     desc: [
       "This is GregTech's own silicon. Silicon dioxide and carbon go into a blast furnace that only gets hot enough with Kanthal coils, and the ingot comes out hot and needs a dip in the chemical bath.",
@@ -123,12 +179,26 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "141E1BFA68E4415F", xp: 30 }],
   },
   {
-    key: "MV_SILICON_BOULE", id: "12A688D7F923740B", title: "Silicon Boule", icon: "gtceu:silicon_boule", deps: ["MV_SILICON_INGOT"], x: 10, y: 0,
+    key: "MV_SILICON_BOULE", id: "12A688D7F923740B", title: "Silicon Boule", icon: "gtceu:silicon_boule", deps: ["MV_SILICON_INGOT","MV_POLYSILICON"], x: 10, y: 0,
     desc: [
-      "Back into the furnace with silicon dust and a pinch of gallium arsenide, and out comes a &6Silicon Boule&r, one big single crystal. All your chips for a long while start as slices of one of these.",
+      "Polysilicon goes into the furnace with a pinch of gallium arsenide, and out comes a &6Silicon Boule&r, one big single crystal. All your chips for a long while start as slices of one of these.",
     ],
     tasks: [{ type: "item", id: "314055A0A7D0B4DA", item: "gtceu:silicon_boule" }],
     rewards: [{ type: "xp", id: "723753988B299A39", xp: 35 }],
+  },
+  {
+    key: "MV_POLYSILICON", id: "3C5E7A9B1D4F2086", title: "Siemens Polysilicon", icon: "grindless:polysilicon", kind: "process", deps: ["MV_SILICON_INGOT"], x: 10, y: 1.5,
+    teach: {
+      for: "Boules need purer silicon than the ingot. Hydrochloric acid turns silicon into trichlorosilane, distillation cleans it, and the Siemens process deposits it back as polysilicon.",
+      needs: "Silicon, hydrochloric acid and hydrogen; the cupronickel blast furnace for the deposit.",
+      unlocks: "Silicon boules.",
+      automate: "Gas and distillation lines by pipe; polysilicon out by bus.",
+    },
+    desc: [
+      "Silicon dust no longer goes into a boule.",
+    ],
+    tasks: [{ type: "item", id: "55DF3631A3A38AF7", item: "grindless:polysilicon" }],
+    rewards: [{ type: "xp", id: "5E7A9C1B3D2F4068", xp: 35 }],
   },
   {
     key: "MV_SILICON_WAFERS", id: "086C8CD2541ED490",     title: "Silicon Wafers", icon: "gtceu:silicon_wafer", kind: "wafer", deps: ["MV_SILICON_BOULE","MV_MV_CUTTER_AND_LASER"], x: 12, y: 0,
@@ -246,10 +316,38 @@ export const QUESTS = [
     key: "MV_BRINE_AND_CHLORINE", id: "498077C9A58D9578", title: "Brine and Chlorine", icon: "gtceu:lv_electrolyzer", deps: ["MV_MV_FLUID_DRILLING_RIG"], x: 10, y: 3,
     desc: [
       "Salt water comes from the rig if your base sits over an ocean; anywhere else, salt and water in the mixer do the job. The electrolyzer splits it into sodium hydroxide, chlorine and hydrogen.",
-      "The chlorine goes into PVC and the hydrogen into methanol.",
+      "The chlorine goes into 1,2-dichloroethane and the hydrogen into methanol.",
     ],
     tasks: [{ type: "checkmark", id: "2061C5FD9F9B9C7B" }],
     rewards: [{ type: "xp", id: "609D15E06779863F", xp: 30 }],
+  },
+  {
+    key: "MV_DICHLOROETHANE", id: "75D2882DC43B48B4", title: "Dichloroethane", icon: "gtceu:dichloroethane_bucket", kind: "process", deps: ["MV_BRINE_AND_CHLORINE"], x: 12, y: 3,
+    teach: {
+      for: "Chlorine and ethylene combine into 1,2-dichloroethane, the first half of PVC.",
+      needs: "Chlorine from the brine line and ethylene from the biorefinery.",
+      unlocks: "Vinyl chloride, by cracking.",
+      automate: "Both gases by pipe into one reactor, liquid out by pipe.",
+    },
+    desc: [
+      "Chlorine no longer goes straight into vinyl chloride.",
+    ],
+    tasks: [{ type: "item", id: "7A9C1E3B5D2F4086", item: "gtceu:dichloroethane_bucket" }],
+    rewards: [{ type: "xp", id: "2A91E82D8F25EB6C", xp: 30 }],
+  },
+  {
+    key: "MV_VINYL_CHLORIDE", id: "412605CA790945C0", title: "Vinyl Chloride", icon: "gtceu:lv_chemical_reactor", kind: "process", deps: ["MV_DICHLOROETHANE"], x: 12, y: 1.5,
+    teach: {
+      for: "Heat cracks dichloroethane into vinyl chloride and hydrogen chloride.",
+      needs: "Dichloroethane and a heated reactor.",
+      unlocks: "PVC, and the hydrogen chloride goes back to the silicon line.",
+      automate: "Return the acid by pipe to the polysilicon plant.",
+    },
+    desc: [
+      "A gas, so keep it piped and tanked.",
+    ],
+    tasks: [{ type: "checkmark", id: "78C3E2C622C30C78" }],
+    rewards: [{ type: "xp", id: "2E4A6C8B1D3F5097", xp: 30 }],
   },
   {
     key: "MV_ETHYLENE_AND_PE", id: "0D69D5BBC371A5B7", title: "Ethylene and PE", icon: "gtceu:lv_chemical_reactor", deps: ["MV_BIOREFINERY"], x: 14, y: 4.5,
@@ -260,9 +358,9 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5946CE65167C48A5", xp: 30 }],
   },
   {
-    key: "MV_PVC", id: "0F6966AED46B5795", title: "PVC", icon: "gtceu:mv_mixer", deps: ["MV_ETHYLENE_AND_PE","MV_BRINE_AND_CHLORINE"], x: 14, y: 3,
+    key: "MV_PVC", id: "0F6966AED46B5795", title: "PVC", icon: "gtceu:mv_mixer",     deps: ["MV_ETHYLENE_AND_PE","MV_VINYL_CHLORIDE"], x: 14, y: 3,
     desc: [
-      "Chlorine and ethylene make vinyl chloride, and that polymerizes into PVC. The hazmat suit is mostly PVC.",
+          "Vinyl chloride polymerizes into PVC. The hazmat suit is mostly PVC.",
     ],
     tasks: [{ type: "checkmark", id: "3C0D1AB8A4AB4406" }],
     rewards: [{ type: "xp", id: "5DE2D5B9164A186F", xp: 30 }],

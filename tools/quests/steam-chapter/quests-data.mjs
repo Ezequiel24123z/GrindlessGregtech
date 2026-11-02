@@ -172,16 +172,72 @@ export const QUESTS = [
   {
     key: "STEAM_STEAM_BLAST_FURNACE", id: "4B8E2D6A1F9C3057", title: "Steam Blast Furnace",     icon: "gtceu:steam_blast_furnace", kind: "machine", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 12, y: 1.5,
         teach: {
-          for: "A second road to steel that takes iron ore straight from the drill.",
+          for: "The furnace that runs the whole iron line: what you feed it picks the mode, sinter into pig iron, pig iron into steel.",
           needs: "Bricks, steel, coke, and calcite from the lapis vein.",
-          unlocks: "Steel at a pace the primitive furnaces cannot match.",
-          automate: "Ore, coke and calcite by conveyor, steam from the boiler hall.",
+          unlocks: "Pig iron and Bessemer steel, at a pace the primitive furnaces cannot match.",
+          automate: "Sinter, pig iron, coke and calcite by conveyor, steam from the boiler hall.",
         },
         desc: [
-          "One of these out-produces half a dozen primitive furnaces, and it drinks steam to do it.",
+          "Raw ore no longer goes in. The next four quests follow the iron from the washer to the steel.",
         ],
     tasks: [{ type: "item", id: "7C1A4E9D2B6F3081", item: "gtceu:steam_blast_furnace" }],
     rewards: [{ type: "xp", id: "5D9B3F7A1C2E6048", xp: 40 }],
+  },
+  {
+    key: "STEAM_IRON_WASHING", id: "3A5C7E1B9D204F68", title: "Washed Iron Ore", icon: "gtceu:purified_hematite_ore", kind: "process", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 14, y: -1.5,
+    teach: {
+      for: "Iron ore is ground and washed first, so the sinter plant gets clean feed.",
+      needs: "Iron ore from the drill, the steam macerator and an ore washer.",
+      unlocks: "Purified ore for the sinter plant.",
+      automate: "Drill, macerator and washer in a row on one conveyor.",
+    },
+    desc: [
+      "Hematite, goethite or magnetite all work.",
+    ],
+    tasks: [{ type: "item", id: "4B6D8F2C0E315A79", item: "gtceu:purified_hematite_ore" }],
+    rewards: [{ type: "xp", id: "5C7E9A3D1F4B2068", xp: 20 }],
+  },
+  {
+    key: "STEAM_IRON_SINTER", id: "2C4E6A8B1D3F5079", title: "Iron Sinter", icon: "grindless:iron_sinter", kind: "process", deps: ["STEAM_IRON_WASHING"], x: 15.25, y: -1.5,
+    teach: {
+      for: "Fine ore won't survive a blast furnace, so it is baked into hard lumps first.",
+      needs: "Purified iron ore, coke dust and calcite, in the steam blast furnace.",
+      unlocks: "Feed for the pig iron run.",
+      automate: "Ore, coke and calcite by bus; sinter leaves by bus.",
+    },
+    desc: [
+      "Sinter is the furnace's first mode.",
+    ],
+    tasks: [{ type: "item", id: "6D8F1B3A5C7E2094", item: "grindless:iron_sinter" }],
+    rewards: [{ type: "xp", id: "7A9C1E3B5D2F4068", xp: 25 }],
+  },
+  {
+    key: "STEAM_PIG_IRON", id: "1D3F5B7A9C2E4086", title: "Pig Iron", icon: "grindless:pig_iron", kind: "process", deps: ["STEAM_IRON_SINTER"], x: 16.5, y: -1.5,
+    teach: {
+      for: "Sinter smelted with coke gives brittle, carbon-heavy iron, the stuff steel is made from.",
+      needs: "Sinter, coke and calcite, and steam for the blast furnace.",
+      unlocks: "Bessemer steel.",
+      automate: "Run the same furnace in a loop, or give pig iron its own; the input picks the mode.",
+    },
+    desc: [
+      "The ash it leaves behind has a use later on, so keep it.",
+    ],
+    tasks: [{ type: "item", id: "0E2A4C6B8D1F3597", item: "grindless:pig_iron" }],
+    rewards: [{ type: "xp", id: "6F1B3D5A7C9E2048", xp: 25 }],
+  },
+  {
+    key: "STEAM_BESSEMER_STEEL", id: "4F6A8C1B3D5E7092", title: "Bessemer Steel", icon: "gtceu:steel_ingot", kind: "process", deps: ["STEAM_PIG_IRON"], x: 17.75, y: -1.5,
+    teach: {
+      for: "Blowing air through molten pig iron burns the carbon out and leaves steel.",
+      needs: "Pig iron and steam, in the same steam blast furnace.",
+      unlocks: "Every steel recipe from here on.",
+      automate: "Pig iron in by bus, ingots out by bus, steam from the boiler hall.",
+    },
+    desc: [
+      "Ore can't skip the pig iron stage any more.",
+    ],
+    tasks: [{ type: "item", id: "5A7C9E1B3D2F4086", item: "gtceu:steel_ingot" }],
+    rewards: [{ type: "xp", id: "1B3D5F7A9C2E4068", xp: 30 }],
   },
   {
     key: "STEAM_CLOCKWORK_OBSERVATORY", id: "1253203E620BE055", title: "Clockwork Observatory",     icon: "gtceu:steam_observatory", kind: "machine", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 12, y: -3,
@@ -208,7 +264,7 @@ export const QUESTS = [
   {
     key: "STEAM_STEEL", id: "33AF6A368B3587E0", title: "Steel", icon: "gtceu:steel_ingot", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 14, y: 0,
     desc: [
-      "Steel goes into the high-pressure steam machines, the casting molds and the steel drill bit, and it stays in your recipes from then on. Leave a blast furnace running and let the ingots pile up.",
+      "Steel goes into the high-pressure steam machines, the casting molds and the steel drill bit, and it stays in your recipes from then on. The Bessemer run feeds this stack; leave it going and let the ingots pile up.",
     ],
     tasks: [{ type: "item", id: "2CA3C60C99A47B84", item: "gtceu:steel_ingot", count: 16 }],
     rewards: [{ type: "xp", id: "57EE27EA8875AE38", xp: 40 }],

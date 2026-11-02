@@ -392,15 +392,119 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "68887B95D69575F2", xp: 120 }],
   },
   {
-    key: "LV_PHOTOGRAPHIC_PLATES", id: "365B9E86E3AA4894", title: "Photographic Plates", icon: "grindless:photographic_plate", deps: ["LV_MACERATOR"], x: 6, y: -4.5,
+    key: "LV_AMMONIA", id: "2E4A6C8B1D3F5170", title: "Ammonia", icon: "gtceu:ammonia_bucket", kind: "process", deps: ["LV_MACERATOR"], x: 4, y: -6,
+    teach: {
+      for: "The nitrogen side of the plate line: coal gas gives ammonia, and ammonia becomes nitric acid.",
+      needs: "Coal gas from a coke oven, run through the distillery and the reactor.",
+      unlocks: "Nitric oxide, then nitric acid.",
+      automate: "Coal gas by pipe; ammonia piped to the oxidation reactor.",
+    },
     desc: [
-      "Glass with a silver emulsion, made in the assembler. The optical observatory exposes them to the Moon, and this time the Moon draws itself.",
+      "Photographic plates start further back than you'd think.",
+    ],
+    tasks: [{ type: "item", id: "3B5D7F1A9C2E4608", item: "gtceu:ammonia_bucket" }],
+    rewards: [{ type: "xp", id: "4C6E8A1B3D5F7092", xp: 20 }],
+  },
+  {
+    key: "LV_NITRIC_OXIDE", id: "5D7F1B3A9C2E4806", title: "Nitric Oxide", icon: "gtceu:nitric_oxide_bucket", kind: "process", deps: ["LV_AMMONIA"], x: 6, y: -6,
+    teach: {
+      for: "Ammonia burned over a catalyst gives nitric oxide.",
+      needs: "Ammonia and oxygen from the gas collector, in a chemical reactor.",
+      unlocks: "Nitrogen dioxide.",
+      automate: "Ammonia and oxygen by pipe, gas out by pipe.",
+    },
+    desc: [
+      "A gas, so a tank and a pipe.",
+    ],
+    tasks: [{ type: "item", id: "6E8A1C3B5D7F2094", item: "gtceu:nitric_oxide_bucket" }],
+    rewards: [{ type: "xp", id: "7F1B3D5A9C2E4068", xp: 20 }],
+  },
+  {
+    key: "LV_NITROGEN_DIOXIDE", id: "1A3C5E7B9D2F4086", title: "Nitrogen Dioxide", icon: "gtceu:nitrogen_dioxide_bucket", kind: "process", deps: ["LV_NITRIC_OXIDE"], x: 8, y: -6,
+    teach: {
+      for: "Nitric oxide takes up more oxygen and turns brown.",
+      needs: "Nitric oxide and oxygen.",
+      unlocks: "Nitric acid, when it meets water.",
+      automate: "Pipe both gases in; the reactor does the rest.",
+    },
+    desc: [
+      "Keep it contained, it's nasty.",
+    ],
+    tasks: [{ type: "item", id: "2B4D6F8A1C3E5097", item: "gtceu:nitrogen_dioxide_bucket" }],
+    rewards: [{ type: "xp", id: "3C5E7A9B1D2F4068", xp: 20 }],
+  },
+  {
+    key: "LV_NITRIC_ACID", id: "4D6F8B1A3C5E7092", title: "Nitric Acid", icon: "gtceu:nitric_acid_bucket", kind: "process", deps: ["LV_NITROGEN_DIOXIDE"], x: 10, y: -6,
+    teach: {
+      for: "The acid that dissolves silver, and later the metals of the platinum group.",
+      needs: "Nitrogen dioxide and water.",
+      unlocks: "Silver nitrate here, and aqua regia in MV.",
+      automate: "Keep a tank of it on the pipe network; both lines draw from it.",
+    },
+    desc: [
+      "Don't store it in anything that isn't made for acid.",
+    ],
+    tasks: [{ type: "item", id: "5E7A9C1B3D2F4086", item: "gtceu:nitric_acid_bucket" }],
+    rewards: [{ type: "xp", id: "6F8B1D3A5C7E2094", xp: 25 }],
+  },
+  {
+    key: "LV_SILVER_NITRATE", id: "7A9C1E3B5D4F2068", title: "Silver Nitrate", icon: "gtceu:silver_nitrate_dust", kind: "process", deps: ["LV_NITRIC_ACID"], x: 12, y: -6,
+    teach: {
+      for: "Silver in nitric acid becomes a salt that light can work on.",
+      needs: "Nitric acid and silver, from the galena roaster.",
+      unlocks: "Silver chloride.",
+      automate: "Silver by bus, acid by pipe, crystals out by bus.",
+    },
+    desc: [
+      "Plain silver dust no longer makes a plate.",
+    ],
+    tasks: [{ type: "item", id: "465D741C205950BD", item: "gtceu:silver_nitrate_dust" }],
+    rewards: [{ type: "xp", id: "2D0BF2B4848716C0", xp: 25 }],
+  },
+  {
+    key: "LV_SILVER_CHLORIDE", id: "6B8D1F3A5C7E4092", title: "Silver Chloride", icon: "gtceu:silver_chloride_dust", kind: "process", deps: ["LV_SILVER_NITRATE"], x: 14, y: -6,
+    teach: {
+      for: "Silver nitrate and chloride swap partners, and the silver chloride drops out as a powder.",
+      needs: "Silver nitrate and a chloride, such as hydrochloric acid.",
+      unlocks: "The emulsion.",
+      automate: "Both by pipe and bus, powder out by bus.",
+    },
+    desc: [
+      "This is the light-sensitive part of the plate.",
+    ],
+    tasks: [{ type: "item", id: "7C9E2A4B6D8F1035", item: "gtceu:silver_chloride_dust" }],
+    rewards: [{ type: "xp", id: "3D5F7B9A1C2E4068", xp: 25 }],
+  },
+  {
+    key: "LV_PHOTOGRAPHIC_EMULSION", id: "4E6A8C1B3D5F7092", title: "Photographic Emulsion", icon: "gtceu:photographic_emulsion_bucket", kind: "process", deps: ["LV_SILVER_CHLORIDE"], x: 16, y: -6,
+    teach: {
+      for: "Silver chloride held in glue, thin enough to coat glass.",
+      needs: "Silver chloride and glue, in the mixer.",
+      unlocks: "Photographic plates.",
+      automate: "Glue by pipe, powder by bus, emulsion by pipe to the assembler.",
+    },
+    desc: [
+      "Glue comes from the same animal and plant leftovers as before.",
+    ],
+    tasks: [{ type: "item", id: "5F7B9D1A3C2E4086", item: "gtceu:photographic_emulsion_bucket" }],
+    rewards: [{ type: "xp", id: "6A8C1E3B5D7F2094", xp: 25 }],
+  },
+  {
+    key: "LV_PHOTOGRAPHIC_PLATES", id: "365B9E86E3AA4894", title: "Photographic Plates", icon: "grindless:photographic_plate", kind: "process", deps: ["LV_PHOTOGRAPHIC_EMULSION"], x: 18, y: -6,
+    teach: {
+      for: "Glass coated with the emulsion: the film the Moon is recorded on.",
+      needs: "Glass and the emulsion, in the assembler.",
+      unlocks: "The optical observatory.",
+      automate: "Glass by bus, emulsion by pipe, plates out by bus.",
+    },
+    desc: [
+      "Silver dust alone is gone from this recipe.",
     ],
     tasks: [{ type: "item", id: "396D2C12CB2C436B", item: "grindless:photographic_plate" }],
     rewards: [{ type: "xp", id: "5422CC6BEE374C8F", xp: 30 }],
   },
   {
-    key: "LV_OPTICAL_OBSERVATORY", id: "3D32B4FC8AEE49CE", title: "Optical Observatory",     icon: "gtceu:optical_observatory", kind: "machine", deps: ["LV_PHOTOGRAPHIC_PLATES","steam:STEAM_LUNAR_CHART_DRAFT"], x: 8, y: -4.5,
+    key: "LV_OPTICAL_OBSERVATORY", id: "3D32B4FC8AEE49CE", title: "Optical Observatory",     icon: "gtceu:optical_observatory", kind: "machine", deps: ["LV_PHOTOGRAPHIC_PLATES","steam:STEAM_LUNAR_CHART_DRAFT"], x: 18, y: -4.5,
         teach: {
           for: "A refractor in a dome that tracks the Moon for long plate exposures.",
           needs: "Photographic plates and your steam-age draft chart, which it reads and hands back.",
@@ -414,7 +518,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "72DE2BE97D294BA3", xp: 60 }],
   },
   {
-    key: "LV_PHOTOGRAPHIC_LUNAR_MAP", id: "101BAA038F0ACAA6", title: "Photographic Lunar Map", icon: "grindless:lunar_map", deps: ["LV_OPTICAL_OBSERVATORY"], x: 10, y: -4.5,
+    key: "LV_PHOTOGRAPHIC_LUNAR_MAP", id: "101BAA038F0ACAA6", title: "Photographic Lunar Map", icon: "grindless:lunar_map", deps: ["LV_OPTICAL_OBSERVATORY"], x: 20, y: -4.5,
     desc: [
       "The plates come back with crater chains, cracks and long shadows along the terminator, and for the first time you can tell flat ground from rough. The same run gives you the ephemeris too.",
     ],
@@ -422,7 +526,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "763B0BB08C2440D6", xp: 40 }],
   },
   {
-    key: "LV_LUNAR_EPHEMERIS", id: "1EEB24C2AB3EF4B0", title: "Lunar Ephemeris", icon: "grindless:lunar_ephemeris", deps: ["LV_PHOTOGRAPHIC_LUNAR_MAP"], x: 12, y: -4.5,
+    key: "LV_LUNAR_EPHEMERIS", id: "1EEB24C2AB3EF4B0", title: "Lunar Ephemeris", icon: "grindless:lunar_ephemeris", deps: ["LV_PHOTOGRAPHIC_LUNAR_MAP"], x: 22, y: -4.5,
     desc: [
       "Tables of where the Moon will be on any night, worked out from the same plates as the map. The radio telescope in MV reads both and never uses them up.",
     ],
@@ -451,6 +555,34 @@ export const QUESTS = [
         ],
     tasks: [{ type: "item", id: "5B51E7ED80874170", item: "gtceu:sulfide_roaster" }],
     rewards: [{ type: "xp", id: "6A1E3C0D9B2F4E58", xp: 35 }],
+  },
+  {
+    key: "LV_SODIUM_PERSULFATE", id: "427041EFB45AE2E6", title: "Sodium Persulfate", icon: "gtceu:sodium_persulfate_bucket", kind: "process", deps: ["LV_SULFIDE_ROASTER"], x: 14, y: 4.5,
+    teach: {
+      for: "Sulfuric acid makes bisulfate, and electrolysis turns that into the etching bath for circuit boards.",
+      needs: "Sulfuric acid, salt, a reactor and an electrolyzer.",
+      unlocks: "Etched boards, and the gallium bath.",
+      automate: "Acid and salt in by pipe and bus, bath out by pipe.",
+    },
+    desc: [
+      "Boards are etched in it, with silver foil for the traces.",
+    ],
+    tasks: [{ type: "item", id: "286C9327A8DABC2C", item: "gtceu:sodium_persulfate_bucket" }],
+    rewards: [{ type: "xp", id: "1F3B5D7A9C2E4068", xp: 25 }],
+  },
+  {
+    key: "LV_GALLIUM_ARSENIDE", id: "2A4C6E8B1D3F5097", title: "Gallium Arsenide", icon: "gtceu:gallium_arsenide_dust", kind: "process", deps: ["LV_MIXER"], x: 12, y: 4.5,
+    teach: {
+      for: "The semiconductor behind diodes, and the dopant every silicon boule needs.",
+      needs: "Gallium recovered from the sulfide byproducts, and arsenic, in the mixer.",
+      unlocks: "Diodes here, and boules in MV.",
+      automate: "Both dusts by bus, crystal out by bus.",
+    },
+    desc: [
+      "Make plenty; MV spends it faster than it looks.",
+    ],
+    tasks: [{ type: "item", id: "3B5D7F9A1C2E4086", item: "gtceu:gallium_arsenide_dust" }],
+    rewards: [{ type: "xp",     id: "5D7F9B1A3C2E4086", xp: 25 }],
   },
   {
     key: "LV_SILVER_FROM_GALENA", id: "2B7D9F41C0E83A65", title: "Silver from Galena", icon: "gtceu:silver_nugget", deps: ["LV_SULFIDE_ROASTER"], x: 16, y: 3,
