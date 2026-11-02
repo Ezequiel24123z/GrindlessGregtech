@@ -121,6 +121,8 @@ const LAYOUT = {
   MA_NBI: [27.25, -1.75, ['PD']],
   MA_DCS: [27.25, -3.25, ['PHE3']],
   MA_TORUS: [28.75, -2.5, ['MA_NBI', 'MA_DCS']],
+  MA_STEL: [30.25, -1.5, ['MA_TORUS']],
+  MA_PELLET: [31.75, -1.5, ['MA_STEL']],
   MA_FORGE: [32, 1.5, ['TETHER']],
   MA_TARGET: [33.5, 1.5, ['MA_FORGE']],
   MA_FAB: [37, 2.25, ['VOID']],

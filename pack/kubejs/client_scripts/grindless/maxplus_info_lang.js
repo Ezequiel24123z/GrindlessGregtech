@@ -45,6 +45,11 @@
         ['emi.grindless.info.primordial_fusion_torus.1',
             'It is a KubeJS generator multiblock, not a GTM fusion tier. Its fuel costs a gas works run, so the power is generous but not free. It runs only at the Magellanic Stream.'],
 
+        ['emi.grindless.info.polarized_fusion_stellarator.0',
+            'A generator that burns spin-polarized fuel: HD pellets and polarized helium-3 (line P26) fuse with about 1.5 times the energy per fuel of the torus, up to 64 runs at once. Its dynamo hatches set the limit: eight 64 A wireless dynamo hatches carry all 64 runs, 2^40 EU/t.'],
+        ['emi.grindless.info.polarized_fusion_stellarator.1',
+            'The neutral beam injector, the direct converter stack and the sCO2 turbine module wear. The ash goes to the cryogenic plant, the hydrogen back to the HD line. It runs anywhere: the fuel ships.'],
+
         ['emi.grindless.info.blueshift_forge.0',
             'Hangs a target in the blueshifted light of the M31 nucleus: near the horizon the bulge\'s light arrives as MeV gamma rays, a photon bath for photonuclear reactions. An enriched molybdenum target comes out as the photonuclear mix of the p-process.'],
         ['emi.grindless.info.blueshift_forge.1',

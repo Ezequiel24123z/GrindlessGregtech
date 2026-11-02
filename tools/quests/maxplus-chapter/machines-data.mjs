@@ -146,6 +146,15 @@ export const QUESTS = [
   prod('MA_DCS', 'Direct Converter Stack', 'grindless:direct_converter_stack', ['MA_TORUS'], 25.5, -6.5, [
     'The stack turns the charged products of deuterium and helium-3 straight into current. The torus is built with one, and it wears one in a hundred and twenty-eight runs.',
   ]),
+  gear('MA_STEL', 'polarized_fusion_stellarator', 'Polarized Fusion Stellarator', ['MA_TORUS'], 25.5, -8, {
+    for: 'Deuterium and helium-3 with aligned spins fuse with about one and a half times the torus\'s energy per fuel. This generator of ours runs up to sixty-four runs at once.',
+    needs: 'The MAX hull with horizon casings, MAX+ circuits and components, and a whole primordial fusion torus, which the controller consumes, plus turbine modules, converter stacks and beam injectors; then P26 fuel.',
+    unlocks: 'One plant for a consumer of 2^39 EU/t: eight 64 A wireless dynamo hatches give 2^40 EU/t. How it feeds the network is in the Integration section.',
+    automate: 'Send pellets and polarized helium-3 from home by AE2; the plant runs anywhere. More dynamo hatches give more runs, up to eight for sixty-four. Keep spares of the three worn parts.',
+  }),
+  prod('MA_PELLET', 'Polarized HD Pellet', 'grindless:polarized_hd_pellet', ['MA_STEL'], 27, -8, [
+    'Pure HD is polarized by brute force at millikelvin in the cryostat works, then extruded into pellets. Four pellets and a bucket of polarized helium-3, which the photonic foundry pumps by laser from line P10\'s helium-3, make one run.',
+  ]),
 
   // ------------------------------------------------------------------ M31, the filament and home
   gear('MA_FORGE', 'blueshift_forge', 'Blueshift Forge', ['TETHER'], 30, 0, {
