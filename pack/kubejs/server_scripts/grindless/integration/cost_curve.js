@@ -14,6 +14,15 @@
 //      a selected recipe to another era; any table's `exclude` globs drop it;
 //   3. a table that is not enabled leaves its recipes untouched; `remove` (recipe ids, only of enabled tables) deletes a bypass.
 //
+// Per-key steepness (AF-CC, mega audit #202 M2-07/M2-16): the era factor is one number for the whole era, but the key series (hull,
+// casing, hatches, each component, the cheapest circuit, the controllers) start from materials of very different cost, so one factor
+// leaves some steps flat or falling. Two optional fields of a table act on its selected recipes, by the recipe's primary output:
+//   keyFactor {glob: k}            the item and fluid factors of that output's recipes are the era's times k (k >= 1; exact id first,
+//                                  then the first glob in table order). Solved per key so that every series climbs (cost-matrix --check).
+//   pin {glob: {inputGlob: count}} the matching consumed input is exactly `count` and never scaled: the container of a container
+//                                  key (one casing per hull, one hull per hatch) and the amperage ladder (2 of the hatch one step below,
+//                                  wired and wireless; M2-03).
+//
 // Mechanism (KubeJS 2001 / GTM 7.5.3, evidence in the document): originals, GTM's included, are edited in place (r.json.add + save()),
 // which skips the lossy GT component round trip; added recipes are not visited by forEachRecipe and their JSON is rebuilt from the
 // builder's holders when the event ends, so they go through serialize() + set('inputs'). Priority: the lowest band of the server
@@ -135,7 +144,14 @@
     return typeof x === 'string' ? x : JSON.stringify(x)
   }
 
-  function scaleItem(e, f) {
+  // the count of a pinned input (pin: [{re, count}]), else undefined
+  function pinOf(pin, key) {
+    if (!pin) return undefined
+    for (var i = 0; i < pin.length; i++) if (pin[i].re.test(key)) return pin[i].count
+    return undefined
+  }
+
+  function scaleItem(e, f, pin) {
     var c = e && e.content
     if (!c || typeof c !== 'object' || !isConsumed(e)) return e
     var n
@@ -145,7 +161,8 @@
       n = 1
       plain = true
     } else return e
-    var m = scaledCount(n, f, keyOf(c))
+    var p = pinOf(pin, keyOf(c))
+    var m = p !== undefined ? p : scaledCount(n, f, keyOf(c))
     if (m === n) return e
     var out = copy(e)
     if (plain) out.content = { type: SIZED, count: m, ingredient: { item: c.item } }
@@ -167,14 +184,14 @@
     return out
   }
 
-  /** The recipe with its consumed inputs scaled: {json, changed, items, fluids}. Pure: `json` is never modified. */
-  function scaleRecipe(json, itemFactor, fluidFactor) {
+  /** The recipe with its consumed inputs scaled (`pin`: optional [{re, count}] of item inputs held at a count): {json, changed, items, fluids}. Pure: `json` is never modified. */
+  function scaleRecipe(json, itemFactor, fluidFactor, pin) {
     var inputs = copy(json.inputs)
     var items = 0
     var fluids = 0
     if (Array.isArray(inputs.item)) {
       inputs.item = inputs.item.map(function (e) {
-        var s = scaleItem(e, itemFactor)
+        var s = scaleItem(e, itemFactor, pin)
         if (s !== e) items++
         return s
       })
@@ -215,7 +232,50 @@
         if (v !== 'none' && ERAS.indexOf(v) < 0) p.push('override ' + g + ': ' + v + ' is not an era or none')
       })
     }
+    if (t.keyFactor !== undefined) {
+      if (!isMap(t.keyFactor)) p.push('keyFactor must be an object {glob: factor}')
+      else {
+        Object.keys(t.keyFactor).forEach(function (g) {
+          var k = t.keyFactor[g]
+          if (typeof k !== 'number' || !(k >= 1) || k > 1e6) p.push('keyFactor ' + g + ' must be a number from 1 to 1e6')
+        })
+      }
+    }
+    if (t.pin !== undefined) {
+      if (!isMap(t.pin)) p.push('pin must be an object {glob: {inputGlob: count}}')
+      else {
+        Object.keys(t.pin).forEach(function (g) {
+          var m = t.pin[g]
+          if (!isMap(m)) p.push('pin ' + g + ' must be an object {inputGlob: count}')
+          else {
+            Object.keys(m).forEach(function (ig) {
+              var n = m[ig]
+              if (typeof n !== 'number' || !(n >= 1) || n % 1 !== 0 || n > 64) p.push('pin ' + g + ' ' + ig + ' must be a whole count from 1 to 64')
+            })
+          }
+        })
+      }
+    }
     return p
+  }
+
+  function isMap(o) {
+    return !!o && typeof o === 'object' && !Array.isArray(o)
+  }
+
+  // the first entry of `list` [{re, v}] whose glob matches `out`, an exact id before any glob; null when none
+  function firstOf(list, out) {
+    if (out === null) return null
+    var hit = null
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].exact === out) return list[i].v
+      if (hit === null && list[i].re.test(out)) hit = list[i].v
+    }
+    return hit
+  }
+
+  function compiled(map, value) {
+    return Object.keys(map || {}).map(function (g) { return { exact: g.indexOf('*') < 0 ? g : null, re: globToRe(g), v: value(map[g]) } })
   }
 
   /** The one selection rule over validated tables (one per era at most): select(id, json) and apply(id, json). */
@@ -227,6 +287,7 @@
     var excludeRes = []
     var overrides = []
     var removeIds = []
+    var perEra = {}
     ERAS.forEach(function (era) {
       var t = null
       tables.forEach(function (x) {
@@ -234,6 +295,12 @@
       })
       if (!t) return
       byEra[era] = t
+      perEra[era] = {
+        keyFactor: compiled(t.keyFactor, function (k) { return k }),
+        pin: compiled(t.pin, function (m) {
+          return Object.keys(m).map(function (ig) { return { re: globToRe(ig), count: m[ig] } })
+        })
+      }
       t.keys.forEach(function (k) {
         if (k.indexOf('*') >= 0) keyGlobs.push({ re: globToRe(k), era: era })
         else if (!has(exactKey, k)) exactKey[k] = era
@@ -273,13 +340,19 @@
       }
       var t = has(byEra, era) ? byEra[era] : null
       if (t === null) return null
-      return { era: era, via: via, enabled: t.enabled === true, item: t.item, fluid: t.fluid }
+      var k = firstOf(perEra[era].keyFactor, out)
+      if (k === null) k = 1
+      var pin = firstOf(perEra[era].pin, out)
+      return {
+        era: era, via: via, enabled: t.enabled === true, item: t.item * k, fluid: t.fluid * k, keyFactor: k,
+        pin: pin && pin.length ? pin : null
+      }
     }
 
     function apply(id, json, type) {
       var sel = select(id, json, type)
       if (sel === null || !sel.enabled) return null
-      var r = scaleRecipe(json, sel.item, sel.fluid)
+      var r = scaleRecipe(json, sel.item, sel.fluid, sel.pin)
       r.era = sel.era
       r.via = sel.via
       return r

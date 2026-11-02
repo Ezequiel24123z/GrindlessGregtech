@@ -70,10 +70,11 @@
   // the ring (15) comes after the UEV hull (UEV hull, two UEV parts of UEV-A6, two optical computers from the photonic hall)
   function addControllers(event) {
     // QR-R6: both are assembly lines with station research, an era fluid and domain inputs of the Wf/W and SiC/SiC first-wall line
+    // AF-CC (M2-05): the polariser is built before the UEV hull, so like a UHV controller (3 UHV component families x 3)
     var C = '4x #gtceu:circuits/uev'
     var defs = [
       { machine: table.polariser.machine, name: 'helium3_polariser', research: 'grindless:laser_1083nm', era: 'gtceu:neutronium', eut: 491520,
-        ins: ['gtceu:uhv_machine_hull', '2x gtceu:uv_emitter', '4x #gtceu:circuits/uhv', 'grindless:laser_1083nm', '2x grindless:wf_w_tile', 'grindless:sic_sic_plate'] },
+        ins: ['gtceu:uhv_machine_hull', '3x gtceu:uhv_emitter', '3x gtceu:uhv_sensor', '3x gtceu:uhv_electric_pump', '4x #gtceu:circuits/uhv', 'grindless:laser_1083nm', '2x grindless:wf_w_tile', 'grindless:sic_sic_plate'] },
       { machine: table.ring.machine, name: 'uev_fusion_reactor', research: table.polariser.machine, era: 'gtceu:tritanium', eut: 7864320,
         ins: ['gtceu:uev_machine_hull', '3x gtceu:uev_emitter', '3x gtceu:uev_sensor', '3x gtceu:uev_field_generator', '2x #gtceu:circuits/uev', C, 'grindless:uev_fusion_casing', 'grindless:hftacn_coil_block', 'grindless:wf_w_tile'] }
     ]

@@ -14,12 +14,16 @@
     "gtceu:hv_electric_pump",
     "gtceu:hv_emitter",
     "gtceu:hv_energy_input_hatch",
+    "gtceu:hv_energy_output_hatch",
     "gtceu:hv_field_generator",
     "gtceu:hv_greenhouse",
+    "gtceu:hv_machine_casing",
     "gtceu:hv_machine_hull",
     "gtceu:hv_robot_arm",
     "gtceu:hv_sensor",
     "gtceu:hv_vein_drill",
+    "gtceu:hv_wireless_dynamo_hatch*",
+    "gtceu:hv_wireless_energy_hatch*",
     "gtceu:lunar_drill",
     "gtceu:mercury_barium_calcium_cuprate_single_wire",
     "gtceu:micro_processor_assembly",
@@ -31,6 +35,7 @@
   "include": [],
   "exclude": [],
   "remove": [
+    "gtceu:shaped/casing_hv",
     "gtceu:shaped/conveyor_module_hv_rubber",
     "gtceu:shaped/conveyor_module_hv_silicone_rubber",
     "gtceu:shaped/conveyor_module_hv_styrene_butadiene_rubber",
@@ -45,5 +50,66 @@
     "gtceu:shaped/robot_arm_hv",
     "gtceu:shaped/sensor_hv"
   ],
-  "override": {}
+  "override": {},
+  "keyFactor": {
+    "gtceu:hv_conveyor_module": 1.972,
+    "gtceu:hv_electric_motor": 1.124,
+    "gtceu:hv_electric_piston": 2.058,
+    "gtceu:hv_energy_input_hatch": 3.501,
+    "gtceu:hv_greenhouse": 3.501,
+    "gtceu:hv_machine_casing": 3.501,
+    "gtceu:hv_machine_hull": 3.501,
+    "gtceu:hv_robot_arm": 1.994,
+    "gtceu:hv_vein_drill": 3.501,
+    "gtceu:nano_processor": 1.207,
+    "gtceu:reformer": 2.547,
+    "gtceu:syngas_plant": 1.125
+  },
+  "pin": {
+    "gtceu:*_machine_hull": {
+      "gtceu:*_machine_casing": 1
+    },
+    "gtceu:*_energy_input_hatch": {
+      "gtceu:*_machine_hull": 1
+    },
+    "gtceu:*_energy_output_hatch": {
+      "gtceu:*_machine_hull": 1
+    },
+    "gtceu:*_energy_input_hatch_4a": {
+      "gtceu:*_energy_input_hatch": 2
+    },
+    "gtceu:*_energy_output_hatch_4a": {
+      "gtceu:*_energy_output_hatch": 2
+    },
+    "gtceu:*_energy_input_hatch_16a": {
+      "gtceu:*_energy_input_hatch_4a": 2
+    },
+    "gtceu:*_energy_output_hatch_16a": {
+      "gtceu:*_energy_output_hatch_4a": 2
+    },
+    "gtceu:*_wireless_energy_hatch": {
+      "gtceu:*_energy_input_hatch": 1
+    },
+    "gtceu:*_wireless_dynamo_hatch": {
+      "gtceu:*_energy_output_hatch": 1
+    },
+    "gtceu:*_wireless_energy_hatch_4a": {
+      "gtceu:*_wireless_energy_hatch": 2
+    },
+    "gtceu:*_wireless_dynamo_hatch_4a": {
+      "gtceu:*_wireless_dynamo_hatch": 2
+    },
+    "gtceu:*_wireless_energy_hatch_16a": {
+      "gtceu:*_wireless_energy_hatch_4a": 2
+    },
+    "gtceu:*_wireless_dynamo_hatch_16a": {
+      "gtceu:*_wireless_dynamo_hatch_4a": 2
+    },
+    "gtceu:*_wireless_energy_hatch_64a": {
+      "gtceu:*_wireless_energy_hatch_16a": 2
+    },
+    "gtceu:*_wireless_dynamo_hatch_64a": {
+      "gtceu:*_wireless_dynamo_hatch_16a": 2
+    }
+  }
 }

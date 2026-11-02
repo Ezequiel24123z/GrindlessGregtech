@@ -44,7 +44,7 @@ ServerEvents.recipes(function (event) {
     UF.recipes.push('grindless:assembly_line/uxv_machine_hull')
   }
 
-  // the 2 A hatches take two strands of pasta wire, the 16 A ones four; each hatch adds one distinct piece (die, repeater, rhea plate, aerogel) so no two recipes share an ingredient set
+  // the 2 A hatches take two strands of pasta wire; each hatch adds one distinct piece (die, repeater, rhea plate, aerogel) so no two recipes share an ingredient set
   function hatch(name, wires, plates, duration, extra) {
     var ids = ['gtceu:uxv_machine_hull', 'gtceu:pasta_strand_single_wire', 'grindless:lasagna_plate', 'gtceu:uxv_sensor', 'grindless:ffkm_seal',
       'grindless:uxv_voltage_coil', 'grindless:ga2o3_power_die', 'gtceu:' + name]
@@ -68,10 +68,34 @@ ServerEvents.recipes(function (event) {
     UF.recipes.push('grindless:assembly_line/' + name)
   }
 
+  // AF-CC (M2-03): the 16 A hatch is two 4 A hatches (integration/high_tier_machines.js) with the tier's octal cable and plates, and the
+  // piece that keeps the two recipes apart
+  function hatch16(name, below, extra) {
+    var ids = [below, 'gtceu:pasta_strand_octal_cable', 'grindless:lasagna_plate', 'gtceu:uxv_sensor', 'grindless:ffkm_seal',
+      'grindless:uxv_voltage_coil', 'grindless:ga2o3_power_die', 'gtceu:' + name, extra]
+    var m = missingOf(ids, FLUIDS)
+    if (m.length > 0) return skip(name, m)
+    var b = event.recipes.gtceu.assembly_line('grindless:' + name)
+    b.itemInputs('2x ' + below)
+    b.itemInputs('2x gtceu:pasta_strand_octal_cable')
+    b.itemInputs('4x grindless:lasagna_plate')
+    b.itemInputs('2x grindless:uxv_voltage_coil')
+    b.itemInputs('2x grindless:ga2o3_power_die')
+    b.itemInputs('2x #gtceu:circuits/uxv')
+    b.itemInputs('4x grindless:ffkm_seal')
+    b.itemInputs('2x gtceu:uxv_sensor')
+    b.itemInputs('1x ' + extra)
+    b.inputFluids(Fluid.of('gtceu:filtered_disk_plasma', 1000), Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000))
+    b.itemOutputs('gtceu:' + name)
+    b.stationResearch(function (r) { return r.researchStack(Item.of(below)).CWUt(64).EUt(7864320) })
+    b.EUt(EUT).duration(1000)
+    UF.recipes.push('grindless:assembly_line/' + name)
+  }
+
   hatch('uxv_energy_input_hatch', 2, 2, 500, 'grindless:mtj_die')
   hatch('uxv_energy_output_hatch', 2, 2, 500, 'grindless:pasta_strand_repeater')
-  hatch('uxv_energy_input_hatch_16a', 4, 4, 1000, 'gtceu:rhea_plate')
-  hatch('uxv_energy_output_hatch_16a', 4, 4, 1000, 'grindless:silica_aerogel')
+  hatch16('uxv_energy_input_hatch_16a', 'gtceu:uxv_energy_input_hatch_4a', 'gtceu:rhea_plate')
+  hatch16('uxv_energy_output_hatch_16a', 'gtceu:uxv_energy_output_hatch_4a', 'grindless:silica_aerogel')
 
   // highTierContent is on (TP-S0F): GTM's own hull and 16 A hatch recipes for gtceu:uxv_* would be a second way to make them
   ;['shaped/uxv_machine_hull', 'assembler/energy_hatch_16a_uxv', 'assembler/dynamo_hatch_16a_uxv'].forEach(function (id) {

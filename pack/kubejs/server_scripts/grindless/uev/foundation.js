@@ -36,12 +36,14 @@ ServerEvents.recipes(function (event) {
     ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:ule_cavity', '2x gtceu:trinium_spring', '2x gtceu:uev_field_generator', '2x #gtceu:circuits/uev'],
     'gtceu:uev_energy_output_hatch')
 
-  line('uev_energy_input_hatch_16a', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity', '4x gtceu:uv_voltage_coil', '4x gtceu:uev_field_generator', '4x #gtceu:circuits/uev'],
+  // AF-CC (M2-03): the 16 A hatch is two 4 A hatches (integration/high_tier_machines.js: two 2 A hatches each) with the tier's octal cable,
+  // plates and the coils (input) or springs (output) that keep the two recipes apart
+  line('uev_energy_input_hatch_16a', 'gtceu:uev_energy_input_hatch_4a',
+    ['2x gtceu:uev_energy_input_hatch_4a', '2x gtceu:lay_superhydride_octal_cable', '6x #forge:plates/neutronium', '4x grindless:faraday_isolator', '2x grindless:ule_cavity', '4x gtceu:uv_voltage_coil', '2x gtceu:uev_field_generator', '4x #gtceu:circuits/uev'],
     'gtceu:uev_energy_input_hatch_16a')
 
-  line('uev_energy_output_hatch_16a', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity', '4x gtceu:trinium_spring', '4x gtceu:uev_field_generator', '4x #gtceu:circuits/uev'],
+  line('uev_energy_output_hatch_16a', 'gtceu:uev_energy_output_hatch_4a',
+    ['2x gtceu:uev_energy_output_hatch_4a', '2x gtceu:lay_superhydride_octal_cable', '6x #forge:plates/neutronium', '4x grindless:faraday_isolator', '2x grindless:ule_cavity', '4x gtceu:trinium_spring', '2x gtceu:uev_field_generator', '4x #gtceu:circuits/uev'],
     'gtceu:uev_energy_output_hatch_16a')
 
   // highTierContent is on (TP-S0F): GTM's own hull and 16 A hatch recipes for gtceu:uev_* would be a second way to make them

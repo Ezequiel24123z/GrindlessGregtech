@@ -46,6 +46,20 @@ const source = {
   type: 'gtceu:rock_breaker',
   json: { type: 'gtceu:rock_breaker', duration: 20, inputs: {}, outputs: { item: [{ content: { type: 'gtceu:sized', count: 1, ingredient: { item: 'x:plate' } }, chance: 10000, maxChance: 10000, tierChanceBoost: 0 }], fluid: [] }, tickInputs: { eu: [{ content: 8, chance: 10000, maxChance: 10000, tierChanceBoost: 0 }] }, tickOutputs: { eu: [] }, recipeConditions: [] },
 };
+// the solver finds the era factors; the per-key factors (AF-CC) are solved on top of them, so its fixture tables carry none
+let eraOnlyDir = null;
+function eraOnlyTables() {
+  if (eraOnlyDir) return eraOnlyDir;
+  eraOnlyDir = fs.mkdtempSync(path.join(os.tmpdir(), 'gg-cc-era-'));
+  for (const f of fs.readdirSync(TABLE_DIR)) {
+    const t = JSON.parse(fs.readFileSync(path.join(TABLE_DIR, f), 'utf8'));
+    delete t.keyFactor;
+    fs.writeFileSync(path.join(eraOnlyDir, f), JSON.stringify(t));
+  }
+  process.on('exit', () => fs.rmSync(eraOnlyDir, { recursive: true, force: true }));
+  return eraOnlyDir;
+}
+
 const dump = () => mkDump({ recipes: [source, hull('mv', 2, 0, 30), hull('hv', 4, 0, 120)], items: ['gtceu:mv_machine_hull', 'gtceu:hv_machine_hull'] });
 
 test('the core index of a one-group era is the key item score', () => {
@@ -63,10 +77,12 @@ test('the committed tables forced off change nothing, enabled ones apply their f
   const eras = tables.filter((t) => t.enabled && cfg.tiers.includes(t.era));
   assert.equal(committed.res.changed.size, eras.length);
   const idxC = coreIndex(pricedRows(committed.dump, cfg).rows, cfg.tiers);
-  for (const t of eras) assert.ok(Math.abs(idxC.get(t.era).index - rule.scaledCount({ mv: 2, hv: 4 }[t.era], t.item, 'x:plate')) < 1e-6, t.era);
+  // the hull's own key factor (AF-CC) multiplies the era's
+  const kOf = (era) => (tables.find((t) => t.era === era).keyFactor || {})[`gtceu:${era}_machine_hull`] || 1;
+  for (const t of eras) assert.ok(Math.abs(idxC.get(t.era).index - rule.scaledCount({ mv: 2, hv: 4 }[t.era], t.item * kOf(t.era), 'x:plate')) < 1e-6, t.era);
   const on = curved(dump(), withFactors(tables, { mv: { item: 2.5, fluid: 2.5 } }));
   assert.deepEqual([...on.res.changed.keys()], ['gtceu:assembler/hull_mv']);
-  assert.equal(coreIndex(pricedRows(on.dump, cfg).rows, cfg.tiers).get('mv').index, 5);
+  assert.equal(coreIndex(pricedRows(on.dump, cfg).rows, cfg.tiers).get('mv').index, rule.scaledCount(2, 2.5 * kOf('mv'), 'x:plate'));
 });
 
 test('--solve: factors that put each era on 3 x 2.5^n, MV first, within the tolerance', () => {
@@ -74,7 +90,7 @@ test('--solve: factors that put each era on 3 x 2.5^n, MV first, within the tole
   console.log = () => {};
   let res;
   try {
-    res = solveFactors({ table: TABLE_DIR }, cfg, dump());
+    res = solveFactors({ table: eraOnlyTables() }, cfg, dump());
   } finally {
     console.log = log;
   }
@@ -87,7 +103,7 @@ test('--solve: factors that put each era on 3 x 2.5^n, MV first, within the tole
 test('--solve predicts what the factor check measures: a later era\'s remove list applies to an earlier era in both', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'gg-cc-'));
   try {
-    for (const f of fs.readdirSync(TABLE_DIR)) fs.copyFileSync(path.join(TABLE_DIR, f), path.join(dir, f));
+    for (const f of fs.readdirSync(eraOnlyTables())) fs.copyFileSync(path.join(eraOnlyTables(), f), path.join(dir, f));
     const hvT = JSON.parse(fs.readFileSync(path.join(dir, 'hv.json'), 'utf8'));
     hvT.remove = ['gtceu:assembler/bypass_mv'];
     fs.writeFileSync(path.join(dir, 'hv.json'), JSON.stringify(hvT));

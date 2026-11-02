@@ -13,7 +13,7 @@ ServerEvents.recipes(function (event) {
     return null
   }
   var SINGLE = firstExisting(['grindless:metallic_hydrogen_single_cable', 'gtceu:metallic_hydrogen_single_cable'])
-  var QUADRUPLE = firstExisting(['grindless:metallic_hydrogen_quadruple_cable', 'gtceu:metallic_hydrogen_quadruple_cable'])
+  var OCTAL = firstExisting(['grindless:metallic_hydrogen_octal_cable', 'gtceu:metallic_hydrogen_octal_cable'])
   var PLATE = firstExisting(['gtceu:rhea_plate'])
   var CASING = firstExisting(['gtceu:uiv_machine_casing'])
   var HULL = firstExisting(['gtceu:uiv_machine_hull'])
@@ -36,7 +36,7 @@ ServerEvents.recipes(function (event) {
     hb.EUt(UEV_EUT).duration(250)
   }
 
-  // 2 A hatches take two single cables, the 16 A ones two quadruple cables; each is its own assembly line with its own research
+  // 2 A hatches take two single cables; each is its own assembly line with its own research
   function hatch(name, cable, research, plateCount, duration) {
     if (HULL == null || cable == null || !Item.exists(research) || !Item.exists('grindless:ffkm_seal')) {
       skip(name, HULL == null ? 'gtceu:uiv_machine_hull' : cable == null ? 'metallic hydrogen cable' : research)
@@ -56,10 +56,30 @@ ServerEvents.recipes(function (event) {
     b.EUt(UEV_EUT).duration(duration * 5)
   }
 
+  // AF-CC (M2-03): the 16 A hatch is two 4 A hatches (integration/high_tier_machines.js) with the tier's octal cable and plates
+  function hatch16(name, below, cable, research) {
+    if (cable == null || !Item.exists(below) || !Item.exists(research) || !Item.exists('grindless:ffkm_seal')) {
+      skip(name, cable == null ? 'metallic hydrogen octal cable' : !Item.exists(below) ? below : research)
+      return
+    }
+    var b = event.recipes.gtceu.assembly_line('grindless:' + name)
+    b.itemInputs('2x ' + below)
+    b.itemInputs('2x ' + cable)
+    b.itemInputs('8x ' + PLATE)
+    b.itemInputs('2x #gtceu:circuits/uiv')
+    b.itemInputs('4x grindless:ffkm_seal')
+    b.itemInputs('2x gtceu:uiv_sensor')
+    b.itemInputs(research)
+    b.inputFluids(Fluid.of('gtceu:soldering_alloy', 1152), Fluid.of('gtceu:lubricant', 1000), Fluid.of('gtceu:neutronium', 288))
+    b.itemOutputs('gtceu:' + name)
+    b.stationResearch(function (r) { return r.researchStack(Item.of(research)).CWUt(64).EUt(7864320) })
+    b.EUt(UEV_EUT).duration(1000)
+  }
+
   hatch('uiv_energy_input_hatch', SINGLE, 'gtceu:uiv_electric_motor', 4, 100)
   hatch('uiv_energy_output_hatch', SINGLE, 'gtceu:uiv_electric_pump', 4, 100)
-  hatch('uiv_energy_input_hatch_16a', QUADRUPLE, 'gtceu:uiv_robot_arm', 8, 200)
-  hatch('uiv_energy_output_hatch_16a', QUADRUPLE, 'gtceu:uiv_conveyor_module', 8, 200)
+  hatch16('uiv_energy_input_hatch_16a', 'gtceu:uiv_energy_input_hatch_4a', OCTAL, 'gtceu:uiv_robot_arm')
+  hatch16('uiv_energy_output_hatch_16a', 'gtceu:uiv_energy_output_hatch_4a', OCTAL, 'gtceu:uiv_conveyor_module')
 
   // highTierContent is on (TP-S0F): GTM's own hull and 16 A hatch recipes for gtceu:uiv_* would be a second way to make them
   ;['shaped/uiv_machine_hull', 'assembler/energy_hatch_16a_uiv', 'assembler/dynamo_hatch_16a_uiv'].forEach(function (id) {

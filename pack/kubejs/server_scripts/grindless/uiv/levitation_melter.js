@@ -9,7 +9,7 @@
 //   gtceu:mixer, electrolyzer, chemical_reactor, electric_blast_furnace, assembler   the steps GTM can run (the master alloy, the BeO
 //                              electrolysis, the Nb2O5 reduction, the RHEA homogenisation, the coil block, the sled charge and the UIV conveyor).
 //   gtceu:hot_rolling          the RHEA slab to plate (circuit 4; EV's generated rows use 1 to 3); the hot strip mill's own type.
-//   assembly_line              the controller: UEV hull + 2 UEV electric pistons + 2 optical computers + UEV circuits + 3 line items, with soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/levitation_melter.
+//   assembly_line              the controller: UEV hull + 3 UEV component families x 3 (AF-CC) + UEV circuits + 3 line items, with soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/levitation_melter.
 //
 // Lookup safety: a recipe whose ingredients are a subset of another's of its type can hide it; checked at load (a clash is an error).
 // Published for the smoke test: global.grindless.levitationMelter.recipes, .skipped, .clashes, .controllerRecipes.
@@ -183,7 +183,10 @@
     }
     var b = event.recipes.gtceu.assembly_line('grindless:levitation_melter')
     b.itemInputs(HULL)
-    b.itemInputs('2x ' + PISTON)
+    // AF-CC (M4-10): 3 UEV component families x 3 (it took 2 pistons and cost a sixth of a typical UIV controller)
+    b.itemInputs('3x ' + PISTON)
+    b.itemInputs('3x gtceu:uev_electric_pump')
+    b.itemInputs('3x gtceu:uev_emitter')
     b.itemInputs('2x #gtceu:circuits/uev')
     b.itemInputs('4x #gtceu:circuits/uev')
     domain.forEach(function (s) { b.itemInputs(s) })

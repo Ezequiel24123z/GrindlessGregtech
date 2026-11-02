@@ -176,21 +176,24 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var MOTOR = 'gtceu:uv_electric_motor'
-    var PUMP = 'gtceu:uv_electric_pump'
-    var ARM = 'gtceu:uv_robot_arm'
-    var EMITTER = 'gtceu:uv_emitter'
     var C = '4x #gtceu:circuits/uhv'
+    // AF-CC (M2-05): built before the UEV hull, so like a UHV controller: 3 UHV component families x 3 (they were UV parts, cheaper than every UHV controller)
+    var MOTOR = '3x gtceu:uhv_electric_motor'
+    var PUMP = '3x gtceu:uhv_electric_pump'
+    var ARM = '3x gtceu:uhv_robot_arm'
+    var EMITTER = '3x gtceu:uhv_emitter'
+    var CONVEYOR = '3x gtceu:uhv_conveyor_module'
+    var SENSOR = '3x gtceu:uhv_sensor'
     // QR-R6: assembly line with station research (the previous machine of the line), the era fluid and domain inputs of the line
     var defs = [
       // the works runs on Barnard b's carbonyl iron, but it's built before Barnard b (the SiC line and the UEV hull come after it):
       // its controller takes the line's HfTaC retort lining, not the iron powder (QR, 2026-10-29)
       { machine: CO.machines.works.machine, name: 'nitride_magnet_works', research: 'grindless:tantalum_pentoxide_dust', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + MOTOR, C, '2x grindless:hftac_dust', 'grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] },
+        ins: [HULL, MOTOR, PUMP, ARM, C, '2x grindless:hftac_dust', 'grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] },
       { machine: CO.machines.fibre.machine, name: 'sic_fibre_plant', research: CO.machines.works.machine, era: 'gtceu:tritanium',
-        ins: [HULL, PUMP, ARM, C, '2x grindless:polycarbosilane_dust', 'grindless:hftac_dust', 'grindless:ffkm_seal'] },
+        ins: [HULL, PUMP, ARM, CONVEYOR, C, '2x grindless:polycarbosilane_dust', 'grindless:hftac_dust', 'grindless:ffkm_seal'] },
       { machine: CO.machines.cvi.machine, name: 'cvi_furnace', research: CO.machines.fibre.machine, era: 'gtceu:neutronium',
-        ins: [HULL, PUMP, EMITTER, C, 'grindless:sic_fibre_preform', 'grindless:w_fibre_preform', 'grindless:ffkm_seal'] }
+        ins: [HULL, PUMP, EMITTER, SENSOR, C, 'grindless:sic_fibre_preform', 'grindless:w_fibre_preform', 'grindless:ffkm_seal'] }
     ]
     CO.controllerRecipes = []
     defs.forEach(function (d) {

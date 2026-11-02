@@ -19,12 +19,16 @@
     "gtceu:mv_electric_pump",
     "gtceu:mv_emitter",
     "gtceu:mv_energy_input_hatch",
+    "gtceu:mv_energy_output_hatch",
     "gtceu:mv_field_generator",
     "gtceu:mv_greenhouse",
+    "gtceu:mv_machine_casing",
     "gtceu:mv_machine_hull",
     "gtceu:mv_robot_arm",
     "gtceu:mv_sensor",
     "gtceu:mv_vein_drill",
+    "gtceu:mv_wireless_dynamo_hatch*",
+    "gtceu:mv_wireless_energy_hatch*",
     "gtceu:ore_plant",
     "gtceu:polymer_works",
     "gtceu:radio_telescope",
@@ -37,19 +41,87 @@
   "include": [],
   "exclude": [],
   "remove": [
+    "gtceu:shaped/casing_mv",
     "gtceu:shaped/conveyor_module_mv_rubber",
     "gtceu:shaped/conveyor_module_mv_silicone_rubber",
     "gtceu:shaped/conveyor_module_mv_styrene_butadiene_rubber",
+    "gtceu:shaped/dynamo_hatch_mv",
     "gtceu:shaped/electric_motor_mv",
     "gtceu:shaped/electric_piston_mv",
     "gtceu:shaped/electric_pump_mv_rubber",
     "gtceu:shaped/electric_pump_mv_silicone_rubber",
     "gtceu:shaped/electric_pump_mv_styrene_butadiene_rubber",
     "gtceu:shaped/emitter_mv",
+    "gtceu:shaped/energy_hatch_mv",
     "gtceu:shaped/field_generator_mv",
     "gtceu:shaped/mv_machine_hull",
     "gtceu:shaped/robot_arm_mv",
     "gtceu:shaped/sensor_mv"
   ],
-  "override": {}
+  "override": {},
+  "keyFactor": {
+    "gtceu:advanced_multi_smelter": 1.418,
+    "gtceu:lava_furnace": 1.06,
+    "gtceu:mv_conveyor_module": 2.032,
+    "gtceu:mv_electric_motor": 1.669,
+    "gtceu:mv_electric_piston": 2.746,
+    "gtceu:mv_electric_pump": 1.421,
+    "gtceu:mv_energy_input_hatch": 4.087,
+    "gtceu:mv_greenhouse": 3.914,
+    "gtceu:mv_machine_casing": 2.685,
+    "gtceu:mv_machine_hull": 4.77,
+    "gtceu:mv_robot_arm": 1.425,
+    "gtceu:mv_vein_drill": 4.77,
+    "gtceu:radio_telescope": 1.291,
+    "gtceu:universal_mixing_factory": 1.098,
+    "gtceu:universal_separation_factory": 1.05,
+    "gtceu:weather_controller": 1.859
+  },
+  "pin": {
+    "gtceu:*_machine_hull": {
+      "gtceu:*_machine_casing": 1
+    },
+    "gtceu:*_energy_input_hatch": {
+      "gtceu:*_machine_hull": 1
+    },
+    "gtceu:*_energy_output_hatch": {
+      "gtceu:*_machine_hull": 1
+    },
+    "gtceu:*_energy_input_hatch_4a": {
+      "gtceu:*_energy_input_hatch": 2
+    },
+    "gtceu:*_energy_output_hatch_4a": {
+      "gtceu:*_energy_output_hatch": 2
+    },
+    "gtceu:*_energy_input_hatch_16a": {
+      "gtceu:*_energy_input_hatch_4a": 2
+    },
+    "gtceu:*_energy_output_hatch_16a": {
+      "gtceu:*_energy_output_hatch_4a": 2
+    },
+    "gtceu:*_wireless_energy_hatch": {
+      "gtceu:*_energy_input_hatch": 1
+    },
+    "gtceu:*_wireless_dynamo_hatch": {
+      "gtceu:*_energy_output_hatch": 1
+    },
+    "gtceu:*_wireless_energy_hatch_4a": {
+      "gtceu:*_wireless_energy_hatch": 2
+    },
+    "gtceu:*_wireless_dynamo_hatch_4a": {
+      "gtceu:*_wireless_dynamo_hatch": 2
+    },
+    "gtceu:*_wireless_energy_hatch_16a": {
+      "gtceu:*_wireless_energy_hatch_4a": 2
+    },
+    "gtceu:*_wireless_dynamo_hatch_16a": {
+      "gtceu:*_wireless_dynamo_hatch_4a": 2
+    },
+    "gtceu:*_wireless_energy_hatch_64a": {
+      "gtceu:*_wireless_energy_hatch_16a": 2
+    },
+    "gtceu:*_wireless_dynamo_hatch_64a": {
+      "gtceu:*_wireless_dynamo_hatch_16a": 2
+    }
+  }
 }

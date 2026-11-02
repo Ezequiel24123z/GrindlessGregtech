@@ -9,7 +9,7 @@
 //                            quench as fiction). Ids grindless:ramp_compression/<name>.
 //   gtceu:wiremill, assembler, chemical_reactor, laser_engraver   the line steps GTM can run (ids grindless:<type>/<name>): MH wire, the
 //                            FFKM cable, the lonsdaleite race, bearing and UIV piston, the DAC charge and the quenched cg-N.
-//   assembly_line            the controller: UEV hull + 2 UEV electric pistons + 2 optical computers + UEV circuits + 3 line items, with soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/ramp_compression_pulser.
+//   assembly_line            the controller: UEV hull + 3 UEV component families x 3 (AF-CC) + UEV circuits + 3 line items, with soldering alloy, lubricant and neutronium, behind station research, grindless:assembly_line/ramp_compression_pulser.
 //   removals                 GTM's wiremill and extruder routes to MH single wire (the table's wiremill row replaces them) and every
 //                            GTM assembler cable covering of MH wire: the cable gets one route, FFKM seals.
 //
@@ -179,7 +179,10 @@
     }
     var b = event.recipes.gtceu.assembly_line('grindless:ramp_compression_pulser')
     b.itemInputs(HULL)
-    b.itemInputs('2x ' + PISTON)
+    // AF-CC (M4-10): 3 UEV component families x 3 (it took 2 pistons and cost a fifth of a typical UIV controller)
+    b.itemInputs('3x ' + PISTON)
+    b.itemInputs('3x gtceu:uev_electric_motor')
+    b.itemInputs('3x gtceu:uev_electric_pump')
     b.itemInputs('2x #gtceu:circuits/uev')
     b.itemInputs('4x #gtceu:circuits/uev')
     domain.forEach(function (s) { b.itemInputs(s) })
