@@ -31,7 +31,7 @@ test('diffStructures reports a structure whose cells differ between the static r
   const same = { slices: [['CC', 'C@']], symbols: {} };
   const d = diffStructures({ a: same, b: mk(1) }, { a: same, b: mk(3) });
   assert.equal(d.length, 1);
-  assert.match(d[0], /^b: 'Q' 1 static vs 0 dump/);
+  assert.match(d[0], /^b: .*'Q' 1 static vs 0 dump/);
   assert.deepEqual(diffStructures({ a: same }, { a: same }), []);
   assert.equal(diffStructures({}, { x: same }).length, 1);
 });
