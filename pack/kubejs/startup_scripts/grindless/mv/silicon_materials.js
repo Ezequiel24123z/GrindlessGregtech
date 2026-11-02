@@ -24,7 +24,7 @@
     crude: 'gtceu:crude_trichlorosilane',
     trichlorosilane: 'gtceu:trichlorosilane',
     feed: 'gtceu:siemens_feed',
-    bottoms: 'gtca:silicon_tetrachloride_dust'
+    bottoms: 'grindless:chlorosilane_bottoms'
   }
 
   StartupEvents.registry('item', function (event) {
@@ -33,6 +33,10 @@
       .maxStackSize(64)
     item.tooltip(Text.gray(Text.translate('tooltip.grindless.polysilicon.0')))
     item.tooltip(Text.darkGray(Text.translate('tooltip.grindless.polysilicon.1')))
+    event.create('grindless:chlorosilane_bottoms')
+      .texture('grindless:item/chlorosilane_bottoms')
+      .maxStackSize(64)
+      .tooltip(Text.gray(Text.translate('tooltip.grindless.chlorosilane_bottoms.0')))
   })
 
   GTCEuStartupEvents.registry('gtceu:material', function (event) {

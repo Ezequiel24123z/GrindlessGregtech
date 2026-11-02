@@ -19,6 +19,8 @@ ClientEvents.lang('en_us', event => {
 
     add('item.grindless.vanadium_steel_drill_bit', 'Vanadium Steel Drill Bit')
     add('item.grindless.polysilicon', 'Polysilicon')
+    add('item.grindless.chlorosilane_bottoms', 'Chlorosilane Bottoms')
+    add('tooltip.grindless.chlorosilane_bottoms.0', 'Silicon tetrachloride-rich residue of trichlorosilane distillation; hydrogenated back to crude trichlorosilane.')
     add('tooltip.grindless.polysilicon.0', 'Electronic-grade silicon deposited on hot rods from trichlorosilane (Siemens process).')
     add('tooltip.grindless.polysilicon.1', 'Melted into every silicon boule in the electric blast furnace.')
     add('material.gtceu.crude_trichlorosilane', 'Crude Trichlorosilane')

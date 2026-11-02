@@ -8,7 +8,7 @@
 //   bottoms loop        chemical reactor, 30 EU/t   3 bottoms + silicon + 2 H2 -> 4 crude (3 SiCl4 + Si + 2 H2 -> 4 HSiCl3)
 //   feed gas            mixer, 30 EU/t              trichlorosilane + H2 -> Siemens feed gas (the EBF has one fluid input)
 //   Siemens CVD         EBF cupronickel, 1,800 K    feed gas -> polysilicon + 3 HCl (the HCl goes back to the first step)
-//   The bottoms are gtca's silicon tetrachloride dust, which the pack already uses.
+//   The bottoms are our chlorosilane bottoms (mostly SiCl4), kept apart from gtca's own silicon tetrachloride dust.
 //
 // Every GTM boule recipe (silicon, phosphorus, naquadah, neutronium) takes polysilicon where it took silicon: dust 1:1, silicon block as 9
 // polysilicon (the silicon boule is written out with GTM's own numbers so EMI shows it; the other three are rebuilt from GTM's recipe at load). Nothing else of the silicon dust changes.
