@@ -26,7 +26,7 @@ test('real tiers (uiv): four substages in order after UEV, siblings, ids from th
   assert.equal(uivFile().extends, 'uev');
   const at = (e) => raw.eraOrder.indexOf(e);
   for (const [a, b] of [['uev-sirius', 'uiv'], ['uiv', 'uiv-rxj1856'], ['uiv', 'uiv-j0437'], ['uiv-rxj1856', 'uiv-cygnus'], ['uiv-j0437', 'uiv-cygnus'], ['uiv-cygnus', 'uxv']]) assert.ok(at(a) >= 0 && at(a) < at(b), `${a} before ${b}`);
-  assert.deepEqual(raw.eraSiblings.at(-1), ['uiv-rxj1856', 'uiv-j0437']);
+  assert.ok(!raw.eraSiblings.some((g) => g.includes('uiv-rxj1856') && g.includes('uiv-j0437')), 'rxj1856 and j0437 are not siblings: each gate is a real dependency');
   const res = byId(raw.eraResources);
   assert.equal(res.rxj1856.era, 'uiv-rxj1856');
   assert.equal(res.j0437.era, 'uiv-j0437');

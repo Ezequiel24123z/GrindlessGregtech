@@ -48,9 +48,12 @@ test('a dimension-locked source or recipe counts from the era that reaches the d
 
 test('a type only our multiblock runs belongs to the era of that multiblock; a singleblock keeps it voltage-limited', () => {
   const machines = [{ id: 'x:big', types: ['x:big_type'], mb: true }, { id: 'x:small', types: ['x:small_type'] }, { id: 'x:big2', types: ['x:small_type'], mb: true }];
-  const ctx = buildEraContext({ startup: new Map([['x:big', 5], ['x:big2', 5]]), machines });
+  const ctx = buildEraContext({ startup: new Map([['x:big', 5], ['x:big2', 5]]), own: new Set(['x:big', 'x:big2']), machines });
   assert.equal(recipeEra({ eut: 30, type: 'x:big_type', conditions: [] }, ctx), 5);
   assert.equal(recipeEra({ eut: 120, type: 'x:small_type', conditions: [] }, ctx), eraIdx('mv'));
+  // M2-02 (a): a type that a multiblock of GTM's own (not ours) runs is limited by voltage only, whatever the multiblock's id
+  const native = buildEraContext({ startup: new Map([['gtceu:fusion_reactor_1', 5]]), machines: [{ id: 'gtceu:fusion_reactor_1', types: ['gtceu:fusion_reactor'], mb: true }] });
+  assert.equal(recipeEra({ eut: 30, type: 'gtceu:fusion_reactor', conditions: [] }, native), eraIdx('lv'));
 });
 
 test('items nothing ever gives the player (class C) are not key items; unreachable keys are priced by a later era and flagged', () => {

@@ -126,7 +126,7 @@
   }
 
   function spec(m) {
-    var o = { w: m.width, h: m.height, d: m.depth, pal: {}, parts: m.parts.map(function (p) { return Pat.part(p[0], { min: p[1], max: p[2] }) }) }
+    var o = { w: m.width, h: m.height, d: m.depth, pal: {}, parts: m.parts.map(function (p) { return Pat.part(p[0], { min: p[1], max: p[2] }) }).concat(m.generator ? [] : [G.parallelHatch.part()]) }
     Object.keys(PAL).forEach(function (k) { o.pal[k] = PAL[k] })
     o.pal.F = m.casing
     o.fn = m.name === 'penrose_engine' ? engineFn() : bayFn()

@@ -33,7 +33,7 @@
     {
       name: 'magnetic_pair_converter', machine: 'gtceu:magnetic_pair_converter', type: 'magnetic_pair_production',
       dataKey: 'grindless_magnetic_pair_production', lang: 'Magnetic Pair Converter',
-      maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }, width: 9, height: 9, depth: 9, casing: CASING, texture: CASING_TEXTURE,
+      maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }, width: 9, height: 9, depth: 9, casing: CASING, texture: CASING_TEXTURE,
       pal: { F: CASING, Q: 'tungsten_steel', C: COIL, L: GLASS },
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 1 }), Pat.part('input_hatch', { min: 1, max: 1 }),

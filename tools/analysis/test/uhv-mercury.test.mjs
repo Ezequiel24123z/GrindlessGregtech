@@ -72,7 +72,7 @@ const count = (s, ch) => s.slices.flat().join('').split('').filter((c) => c === 
 test('excavator pattern: 9 x 5 x 3, heat-shield brick chassis, two drums on frame arms, GTM part limits', () => {
   const s = shape('gtceu:regolith_excavator', 9, 5, 3);
   const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
-  assert.deepEqual(Object.keys(lim).sort(), ['energy_input', 'input_bus', 'output_bus']);
+  assert.deepEqual(Object.keys(lim).sort(), ['energy_input', 'input_bus', 'output_bus', 'parallel_hatch']);
   assert.ok(s.symbols.X.options.some((o) => o.kind === 'blocks' && o.blocks.includes('grindless:hermean_heat_shield_brick')), 'chassis brick');
   const gear = blockSymbols(s, 'gtceu:tungstensteel_gearbox');
   assert.equal(gear.length, 1);
@@ -82,7 +82,7 @@ test('excavator pattern: 9 x 5 x 3, heat-shield brick chassis, two drums on fram
 test('furnace pattern: 9 x 9 x 5, ten heliostats, condenser plates, firebox receiver, an output hatch for the Na-K', () => {
   const s = shape('gtceu:solar_vapour_furnace', 9, 9, 5);
   const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
-  assert.deepEqual(Object.keys(lim).sort(), ['energy_input', 'input_bus', 'output_bus', 'output_hatch']);
+  assert.deepEqual(Object.keys(lim).sort(), ['energy_input', 'input_bus', 'output_bus', 'output_hatch', 'parallel_hatch']);
   assert.equal(count(s, blockSymbols(s, 'grindless:heliostat_mirror')[0]), 10, 'mirrors');
   assert.ok(count(s, blockSymbols(s, 'grindless:night_sky_radiator')[0]) >= 6, 'condenser plates');
   assert.equal(count(s, blockSymbols(s, 'gtceu:tungstensteel_firebox_casing')[0]), 25, '5 x 5 receiver');

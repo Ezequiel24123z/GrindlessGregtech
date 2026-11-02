@@ -126,11 +126,9 @@ test('the lang file has en_us keys', () => {
   for (const lang of ['en_us']) for (const k of keys) assert.ok(run.lang[lang][k], `${lang} ${k}`);
 });
 
-test('the ending: c3 grants maxplus once through the world flag; no credits, no book, no title', () => {
+test('the ending: the shell grants nothing (the maxplus ending script owns the stage); no credits, no book, no title', () => {
   const s = read(kube, 'startup_scripts', 'grindless', 'max', 'shell.js');
-  assert.match(s, /grindless_stage_maxplus/);
-  assert.match(s, /\.afterWorking\(grantStage\)/);
-  assert.match(s, /ENDING = 'horizon_lock'/);
+  assert.doesNotMatch(s, /grindless_stage_maxplus|grantStage/);
   const code = s.split('\n').filter((l) => !/^\s*\/\//.test(l)).join('\n');
   assert.doesNotMatch(code, /WIN_GAME|max_epilogue|universe_seed|wonGame|setTitle|ending\.title/);
 });

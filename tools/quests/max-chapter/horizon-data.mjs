@@ -35,7 +35,7 @@ export const QUESTS = [
     key: 'GRAD', kind: 'step', title: 'Shell Gradient Map', icon: 'grindless:shell_gradient_map',
     deps: ['J_EXIT'], x: 2, y: 0,
     desc: [
-      'The &6Shell Gradient Map&r shows where on the shell the field is steepest, so the first segments go where they are needed.',
+      'The &6Shell Gradient Map&r shows where on the shell the field is steepest, so the first segments go where they are needed. Once the shell stands, its second recipe joins this map to the spin map into the final spin map that the last recipe wants.',
     ],
     tasks: [it('grindless:shell_gradient_map')],
     rewards: [xp(100)],
@@ -44,7 +44,7 @@ export const QUESTS = [
     key: 'CRYO', kind: 'step', title: 'Shell Cryocooler', icon: 'grindless:shell_cryocooler',
     deps: ['GRAD'], x: 4, y: 0,
     desc: [
-      'A cooler the size of a house keeps the shell below the temperature of the sky. The &6Shell Cryocooler&r goes into the shell\'s hull before the first segment.',
+      'A cooler the size of a house keeps the shell below the temperature of the sky. The &6Shell Cryocooler&r goes into the shell\'s controller and into every segment, so it is made by the thousand.',
     ],
     tasks: [it('grindless:shell_cryocooler')],
     rewards: [xp(100)],
@@ -54,7 +54,7 @@ export const QUESTS = [
     deps: ['CRYO'], x: 6, y: 0,
     teach: {
       for: 'The &6Mirror Shell&r wraps the black hole in mirrors and sends its light back in. &oFiction:&r a shell like this cannot be built; the hole and its light are real. It is the largest structure in the pack.',
-      needs: 'Thirty-three cubes of clear space around the hole, the gradient map and the cryocooler, and a wireless network that holds the load.',
+      needs: 'A hollow box of mirror shell segments thirty-three blocks a side at Sgr A* orbit, ringed twice with stream bundle blocks and set with glass windows and superconducting coils, with two MAX 16 A input hatches and a dynamo hatch round the controller. Every segment is a swarm-segment craft with a cooler of its own.',
       unlocks: 'The segments, the four horizon machines and the last recipe.',
       automate: 'Segments leave the line on a belt; plan the bus before you place the controller.',
     },
@@ -66,7 +66,7 @@ export const QUESTS = [
     key: 'SEG1', kind: 'step', title: 'A Quarter of the Shell', icon: 'grindless:mirror_shell_segment',
     deps: ['SHELL'], x: 8, y: 0,
     desc: [
-      'The first quarter of the shell is up. The tether lines hold.',
+      'About a quarter of the shell\'s segments are cut. The tether lines hold.',
     ],
     tasks: [it('grindless:mirror_shell_segment', 871)],
     rewards: [xp(100)],
@@ -84,18 +84,18 @@ export const QUESTS = [
     key: 'SEG3', kind: 'step', title: 'Three Quarters', icon: 'grindless:mirror_shell_segment',
     deps: ['SEG2'], x: 12, y: 0,
     desc: [
-      'Three quarters of the segments are cut. The light starts to come back.',
+      'Three quarters of the segments are cut and most of them are set in the frame. That is more than any inventory can hold, so check this off once the frame is that far along.',
     ],
-    tasks: [it('grindless:mirror_shell_segment', 2612)],
+    tasks: [ck()],
     rewards: [xp(100)],
   },
   {
     key: 'SEG4', kind: 'step', title: 'The Shell Is Closed', icon: 'grindless:mirror_shell_segment',
     deps: ['SEG3'], x: 14, y: 0,
     desc: [
-      'Every segment is cut. The shell closes.',
+      'Every segment is set and the last gap in the frame is closed. Check it off once the controller says the shell has formed.',
     ],
-    tasks: [it('grindless:mirror_shell_segment', 3483)],
+    tasks: [ck()],
     rewards: [xp(150)],
   },
 

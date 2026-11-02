@@ -37,7 +37,7 @@
       casing: HEAT, texture: HEAT_TEXTURE, minCasings: 4,
       width: 3, depth: 3, height: 12,
       // items in: the circuit; out: graphene or yarn; fluids in: methane and the bath (tin, nickel); out: hydrogen
-      maxIO: { itemsIn: 1, itemsOut: 1, fluidsIn: 3, fluidsOut: 1 }
+      maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 3, fluidsOut: 1 }
     },
     bioreactor: {
       name: 'vent_bioreactor', machine: 'gtceu:vent_bioreactor', type: 'chemosynthesis', lang: 'Vent Bioreactor',
@@ -51,7 +51,7 @@
       casing: STABLE, texture: STABLE_TEXTURE, minCasings: 12,
       width: 5, depth: 5, height: 5,
       // items in: nanograins; out: aerogel; fluids in: ethanol and the CO2 charge; out: the ethanol
-      maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 }
+      maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 }
     }
   }
 

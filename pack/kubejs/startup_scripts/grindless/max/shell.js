@@ -12,9 +12,6 @@
 // GTM then reads the output voltage of a machine that has input hatches: 0). Instead the recipe modifier hands generator rows to
 // G.generators.modifier and returns IDENTITY for consumer rows (no overclock, no parallels; NULL would reject the recipe). Names: client_scripts/grindless/max_shell_lang.js.
 // Textures: tools/assets/Build-MaxShellTextures.ps1. Published for the recipe script: global.grindless.maxShell.
-//
-// The stage: when a run of the last recipe ends, the world flag grindless_stage_maxplus is set (once; global.grindless.maxShell.stage names
-// it). No credits, title or book: they move to the MAX+ arrival (docs/eras/maxplus.md, package XP-Z1).
 (function () {
   const G = global.grindless
   const Pat = G.patterns
@@ -26,11 +23,7 @@
   const SEGMENT_TEXTURE = 'grindless:block/max/mirror_shell_segment'
   const N = 33
   const MID = 16
-  const ENDING = 'horizon_lock'
-  const STAGE = 'maxplus'
-  const STAGE_KEY = 'grindless_stage_maxplus'
 
-  MS.stage = { name: STAGE, key: STAGE_KEY }
   MS.machines = [
     {
       name: 'mirror_shell', machine: 'gtceu:mirror_shell', type: 'black_hole_bomb', dataKey: 'grindless_black_hole_bomb',
@@ -122,27 +115,6 @@
     }
   }
 
-  function theEnd(machine) {
-    var last = machine.getRecipeLogic().getLastRecipe()
-    if (last === null || last === undefined) return false
-    return String(last.data.getString('grindless_black_hole_bomb')) === ENDING
-  }
-
-  var GRANTED = false
-  function grantStage(machine) {
-    try {
-      if (GRANTED || !theEnd(machine)) return
-      var data = machine.getLevel().getServer().persistentData
-      if (!data.getBoolean(STAGE_KEY)) {
-        data.putBoolean(STAGE_KEY, true)
-        console.info(LOG + 'mirror shell: stage ' + STAGE + ' granted')
-      }
-      GRANTED = true
-    } catch (e) {
-      console.error(LOG + 'mirror shell stage grant failed: ' + e)
-    }
-  }
-
   GTCEuStartupEvents.registry('gtceu:recipe_type', function (event) {
     MS.machines.forEach(function (m) {
       event.create(m.type)
@@ -169,7 +141,6 @@
         .regressWhenWaiting(false)
         .recipeModifier(shellModifier(), true)
         .additionalDisplay(G.generators.display({ maxParallels: 1, name: m.name }))
-        .afterWorking(grantStage)
         .appearanceBlock(function () { return Block.getBlock(m.casing) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
         ["tooltips(net.minecraft.network.chat.Component[])"]([

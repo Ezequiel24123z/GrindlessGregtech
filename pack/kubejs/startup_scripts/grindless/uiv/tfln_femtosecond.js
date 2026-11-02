@@ -64,7 +64,7 @@
     {
       name: 'femtosecond_writer', machine: 'gtceu:femtosecond_writer', type: 'femtosecond_writing', dataKey: 'grindless_femtosecond_writing',
       lang: 'Femtosecond Writer',
-      maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
+      maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
       width: 5, height: 5, depth: 7, casing: UEV, texture: UEV_TEXTURE
     }
   ]
@@ -77,7 +77,8 @@
       Pat.part('output_bus', { min: 1, max: 2 }),
       Pat.part('input_hatch', { min: 0, max: 1 }),
       Pat.part('output_hatch', { min: 0, max: 1 }),
-      Pat.part('energy_input', { min: 1, max: 2 })
+      Pat.part('energy_input', { min: 1, max: 2 }),
+      G.parallelHatch.part()
     ])
   }
 

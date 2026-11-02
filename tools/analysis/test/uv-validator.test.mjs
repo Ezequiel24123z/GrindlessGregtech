@@ -171,7 +171,7 @@ test('real pack: the three UV generators are written at final figures and stay o
 });
 
 test('planted: a doubled generator fails (its type added to TYPES, or its figure written x2)', () => {
-  const src = fs.readFileSync(GENERATORS_JS, 'utf8').replace("'gcyr:dyson_controller'", "'gcyr:dyson_controller', 'gtceu:laser_fusion'");
+  const src = fs.readFileSync(GENERATORS_JS, 'utf8').replace("'gtceu:rocket_engine'", "'gtceu:rocket_engine', 'gtceu:laser_fusion'");
   const p1 = generatorProblems(uv().synthetic, doubledTypes(src), tableFigures());
   assert.deepEqual(p1, ['gtceu:laser_fusion is in generators.js TYPES: its recipes would be doubled']);
   const figures = tableFigures();

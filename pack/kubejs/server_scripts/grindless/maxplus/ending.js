@@ -28,7 +28,8 @@
   }
   E.gateKey = gateKey
 
-  // rec[key] = { run, open, used }: one record per gate. A new opening (closed -> open) starts a new run and clears `used`.
+  // rec[key] = { run, open, used }: one record per gate. A run is the gate's recipe-start counter (g.run, kept in the world's persistent data by
+  // the startup script), so a pause and resume or a restart of the same dial is the same run and a new dial is a new one: it clears `used`.
   E.update = function (gates, rec) {
     var changed = false
     var seen = {}
@@ -36,12 +37,16 @@
       if (!g.open || !g.box) return
       var k = gateKey(g)
       seen[k] = true
+      var run = Number(g.run) || 0
       var r = rec[k]
-      if (!r) r = rec[k] = { run: 0, open: false, used: false }
-      if (!r.open) {
-        r.run++
-        r.open = true
+      if (!r) r = rec[k] = { run: run, open: false, used: false }
+      if (r.run !== run) {
+        r.run = run
         r.used = false
+        changed = true
+      }
+      if (!r.open) {
+        r.open = true
         changed = true
       }
     })
@@ -53,7 +58,6 @@
     })
     return changed
   }
-
   E.inside = function (box, x, y, z) {
     return x >= box.minX && x < box.maxX + 1 && y >= box.minY && y < box.maxY + 1 && z >= box.minZ && z < box.maxZ + 1
   }
@@ -90,12 +94,23 @@
     return String(typeof d === 'function' ? level.dimension().location() : d)
   }
 
+  // one compound per gate under K_GATES: { run, open, used } (the v1.1.0 single JSON string is read once and rewritten)
   function loadRec(server) {
     if (rec !== null) return
     rec = {}
     try {
-      var raw = String(server.persistentData.getString(K_GATES) || '')
-      if (raw.length > 0) rec = JSON.parse(raw)
+      var pd = server.persistentData
+      if (pd.contains(K_GATES, 8)) {
+        var raw = String(pd.getString(K_GATES) || '')
+        if (raw.length > 0) rec = JSON.parse(raw)
+      } else {
+        var tag = pd.getCompound(K_GATES)
+        var keys = tag.getAllKeys().toArray()
+        for (var i = 0; i < keys.length; i++) {
+          var c = tag.getCompound(String(keys[i]))
+          rec[String(keys[i])] = { run: Number(c.getInt('run')), open: c.getBoolean('open'), used: c.getBoolean('used') }
+        }
+      }
     } catch (e) {
       console.error(LOG + 'gate records unreadable, starting empty: ' + e)
     }
@@ -105,13 +120,20 @@
   }
 
   function saveRec(server) {
+    var CompoundTag = Java.loadClass('net.minecraft.nbt.CompoundTag')
+    var tag = new CompoundTag()
     recOpen = false
     Object.keys(rec).forEach(function (k) {
       if (rec[k].open) recOpen = true
+      var c = new CompoundTag()
+      c.putInt('run', rec[k].run)
+      c.putBoolean('open', rec[k].open === true)
+      c.putBoolean('used', rec[k].used === true)
+      tag.put(k, c)
     })
-    server.persistentData.putString(K_GATES, JSON.stringify(rec))
+    server.persistentData.remove(K_GATES)
+    server.persistentData.put(K_GATES, tag)
   }
-
   function players(server) {
     var list = server.getPlayerList().getPlayers()
     var out = []

@@ -471,14 +471,9 @@ test('no MAX recipe consumes a MAX+ hook (horizon_lock, GT-- max casing and conv
   assert.deepEqual(makers(pack().recs, 'grindless:horizon_lock').map((r) => r.i), ['grindless:black_hole_bomb/horizon_lock']);
 });
 
-test('the maxplus stage grant: the shell sets the world flag grindless_stage_maxplus once, after a run of c3 (startup max/shell.js)', () => {
+test('the maxplus stage grant: the shell no longer sets a flag nobody reads (AF-K2); the ending script owns the stage', () => {
   const s = STARTUP_SRC()['shell.js'];
-  assert.match(s, /STAGE = 'maxplus'/);
-  assert.match(s, /STAGE_KEY = 'grindless_stage_maxplus'/);
-  assert.match(s, /ENDING = 'horizon_lock'/);
-  assert.match(s, /if \(!data\.getBoolean\(STAGE_KEY\)\)/);
-  assert.match(s, /data\.putBoolean\(STAGE_KEY, true\)/);
-  assert.match(s, /\.afterWorking\(grantStage\)/);
+  assert.doesNotMatch(s, /grindless_stage_maxplus|STAGE_KEY|grantStage/);
 });
 
 test('partSorter: no MAX multiblock takes ordered inputs, so none needs one (vacuously total)', () => {

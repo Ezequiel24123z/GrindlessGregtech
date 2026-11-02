@@ -77,7 +77,7 @@
   HM.machine = MILL
   HM.recipeType = 'gtceu:hot_rolling'
   // items in: the hot ingot and the programmed circuit; out: the product. Fluids: water in, steam out
-  HM.maxIO = { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }
+  HM.maxIO = { itemsIn: 3, itemsOut: 1, fluidsIn: 1, fluidsOut: 1 }
   HM.parts = { input_bus: { exact: 1 }, output_bus: { exact: 1 }, input_hatch: { exact: 1 }, output_hatch: { exact: 1 }, energy_input: { min: 1, max: 2 } }
 
   // ---------------------------------------------------------------- patterns

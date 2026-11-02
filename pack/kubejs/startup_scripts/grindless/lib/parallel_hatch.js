@@ -48,6 +48,42 @@
     return typeof machine.getParallelHatch === 'function' && machine.getParallelHatch().isPresent()
   }
 
+  // GTM clamps setCurrentParallel (and its screen) to the tier's maximum, so the MAX+ hatch's x4,194,304 is written to the private field.
+  // A missing field (a GTM update renamed it) is an error in the log, never a silent plain MAX hatch.
+  const MAXPLUS_ID = 'gtceu:max_maxplus_parallel_hatch'
+  const MAXPLUS_PARALLEL = 4194304
+  var fieldFailed = false
+
+  function forceParallel(hatch, value) {
+    for (var k = hatch.getClass(); k !== null; k = k.getSuperclass()) {
+      var f = null
+      try { f = k.getDeclaredField('currentParallel') } catch (e) { f = null }
+      if (f !== null) {
+        f.setAccessible(true)
+        f.setInt(hatch, value)
+        return true
+      }
+    }
+    if (!fieldFailed) {
+      fieldFailed = true
+      console.error(LOG + 'ParallelHatchPartMachine has no currentParallel field: the MAX+ hatch is a plain MAX hatch (x1,048,576)')
+    }
+    return false
+  }
+
+  // called whenever a formed hatch's parallel is read (lib/mega.js hatchParallel): any edit or clamp is undone, so a reload and a screen press keep x4,194,304
+  function keepMaxplus(hatch) {
+    try {
+      if (String(hatch.getDefinition().getId()) !== MAXPLUS_ID) return
+      if (Number(hatch.getCurrentParallel()) !== MAXPLUS_PARALLEL) forceParallel(hatch, MAXPLUS_PARALLEL)
+    } catch (e) {
+      if (!fieldFailed) {
+        fieldFailed = true
+        console.error(LOG + 'MAX+ hatch check failed: ' + e)
+      }
+    }
+  }
+
   function overclock(machine, recipe) {
     return GTRecipeModifiers.OC_NON_PERFECT.getModifier(machine, recipe)
   }
@@ -106,15 +142,7 @@
       .tiers(14)
       .machine(function (holder, tier, tankScaling) {
         var hatch = new PHPM(holder, tier)
-        for (var k = hatch.getClass(); k !== null; k = k.getSuperclass()) {
-          var f = null
-          try { f = k.getDeclaredField('currentParallel') } catch (e) { f = null }
-          if (f !== null) {
-            f.setAccessible(true)
-            f.setInt(hatch, 4194304)
-            break
-          }
-        }
+        forceParallel(hatch, MAXPLUS_PARALLEL)
         return hatch
       })
       .definition(function (tier, builder) {
@@ -137,6 +165,8 @@
     // the IV hatch (x4, IV-B6's recipe); GTM's LuV, ZPM and UV ones (x16, x64, x256) fit the same cell; ours at UHV (x1024, MEGA-0b)
     hatches: ['gtceu:iv_parallel_hatch', 'gtceu:luv_parallel_hatch', 'gtceu:zpm_parallel_hatch', 'gtceu:uv_parallel_hatch', 'gtceu:uhv_parallel_hatch', 'gtceu:uev_parallel_hatch', 'gtceu:uiv_parallel_hatch', 'gtceu:uxv_parallel_hatch', 'gtceu:opv_parallel_hatch', 'gtceu:max_parallel_hatch', 'gtceu:max_maxplus_parallel_hatch'],
     part: part,
+    maxplusParallel: MAXPLUS_PARALLEL,
+    keepMaxplus: keepMaxplus,
     hasHatch: hasHatch,
     modifier: modifier,
     overclock: overclock,

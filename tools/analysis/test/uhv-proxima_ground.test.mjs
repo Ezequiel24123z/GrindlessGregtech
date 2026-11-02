@@ -125,8 +125,8 @@ test('recipe lookup: unique names and circuits, no subsets inside a type, every 
     const d = dump(id);
     assert.ok(d, id);
     assert.equal(PG.recipes.find((x) => x.type === r.type && x.name === r.name).recipeId, id);
-    // the reformer holds one item input, the circuit would take it: that row is told apart by its solid alone and carries no circuit
-    assert.deepEqual(circuitOf(d), r.circuit > 0 && r.type !== 'tholin_reforming' ? [r.circuit] : [], id);
+    // the reformer now holds two item inputs (AF-M), so the hydrolysis row carries its circuit
+    assert.deepEqual(circuitOf(d), r.circuit > 0 ? [r.circuit] : [], id);
     assert.ok(Number.isInteger(r.eut) && r.eut > 0 && r.eut <= VA_UHV && Number.isInteger(r.duration) && r.duration > 0, id);
     if (r.dataKey) assert.equal(PG.recipes.find((x) => x.recipeId === id).dataKey, r.dataKey, id + ' data key');
   }
@@ -215,7 +215,7 @@ test('the older machines\' Proxima rows: each in the dump on a circuit its type 
   for (const [k, [id, c]] of Object.entries(ROWS)) {
     d[k] = dump(id);
     assert.ok(d[k], id);
-    assert.deepEqual(circuitOf(d[k]), k === 'tholin' ? [] : [c], id);
+    assert.deepEqual(circuitOf(d[k]), [c], id);
     if (k === 'tholin') continue;
     // the regolith cell's circuit 2 is its electrolysis mode: three feeds, one per row, so the lookup still sees one recipe each
     const same = recipes.filter((r) => r.t === d[k].t && r.i !== id && circuitOf(r).includes(c));
@@ -235,7 +235,7 @@ test('the older machines\' Proxima rows: each in the dump on a circuit its type 
   assert.equal(T.types.pgm_refining.keep, true);
   assert.ok(read('server_scripts/grindless/uhv/proxima_ground.js').includes('recipe.addDataBool('));
   assert.ok(!read('server_scripts/grindless/ev/platinum_plant.js').includes('proxima'), 'the plant\'s own script is untouched');
-  // the tholin reformer: io [1, 1, 2, 1] like its own circuit 1 hydrolysis (the circuit does not take its one item slot), in Saturn orbit
+  // the tholin reformer: io [2, 1, 2, 1] (the circuit takes the second item slot), in Saturn orbit
   const reformer = plain(run.global.grindless.zpmTitanProbes).machines.find((m) => m.type === 'tholin_reforming').io;
   const [ti, tf, to, tfo] = slots(d.tholin);
   assert.ok(ti <= reformer[0] && tf <= reformer[1] && to <= reformer[2] && tfo <= reformer[3], 'reformer slots ' + reformer);

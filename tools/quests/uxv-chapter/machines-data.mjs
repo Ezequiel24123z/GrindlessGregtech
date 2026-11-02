@@ -122,7 +122,7 @@ export const QUESTS = [
   gear('TOWER', 'stellar_condensation_tower', 'Stellar Condensation Tower', ['PMF'], 7, 11.5, {
     for: 'Cool a star slowly and its metals come out in the order a young solar system makes them. The &6Stellar Condensation Tower&r draws off refractory, metal and silicate condensates, and lets the volatiles out as gas.',
     needs: 'A UIV hull, the UXV machine casing and a draw-off pipe for every stage.',
-    unlocks: 'The condensates that rule 3 sends to the heavy cut, and syngas for the plants at home.',
+    unlocks: 'The condensates that go to the heavy cut, and syngas for the plants at home.',
     automate: 'A chest or tank per draw-off; the volatile gas needs somewhere to go.',
   }, [UXVC], 150),
   prod('CONDP', 'Refractory Condensate', 'grindless:refractory_condensate', ['TOWER'], 9.5, 11.5, ['The first thing to come out of the tower, and the hardest to melt. The UXV Lines chart shows what it becomes.']),
@@ -138,10 +138,10 @@ export const QUESTS = [
     unlocks: 'Power at Cygnus X-1, with no fuel but the plasma.',
     automate: 'Feed flux-loaded plasma by pipe and ship the power home over the wireless link.',
   }, [UXVC], 200),
-  gear('MK6', 'uxv_fusion_reactor', 'Mk6 Fusion Ring', ['M_L_COMP', 'PMF'], 4.5, 13, {
-    for: 'The &6Mk6 Fusion Ring&r burns as a star does: hot CNO, then helium, carbon and oxygen. A direct converter takes the power off each ash, and one burn\'s ash is quenched into the next one\'s fuel.',
+  gear('MK6', 'uxv_fusion_reactor', 'Mk6 Fusion Reactor', ['M_L_COMP', 'PMF'], 4.5, 13, {
+    for: 'The &6Mk6 Fusion Reactor&r burns as a star does: hot CNO, then helium, carbon and oxygen. A direct converter takes the power off each ash, and one burn\'s ash is quenched into the next one\'s fuel.',
     needs: 'A UXV hull, UXV components, the UXV fusion casing, the Mk5 coil and fusion glass.',
-    unlocks: 'The plasma and burn quests of the integration chapter.',
+    unlocks: 'The plasma and burn quests that follow.',
     automate: 'Fuel and coolant by pipe; a ring that runs a star\'s burning stages on demand is fiction, so plan the ash chain first.',
   }, [it('grindless:uxv_fusion_casing'), it('gtceu:fusion_glass')], 250),
 

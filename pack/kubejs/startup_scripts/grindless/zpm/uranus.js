@@ -39,12 +39,12 @@
   // A hollow shell: row 0 the floor (ports or casing), the top row the roof, the walls between, the controller at the middle of the front wall's
   // first row; centre(x, z, y) says what stands inside (' ' for air).
   function shellSlice(w, d, h, z, centre) {
-    const rows = []
-    for (let y = 0; y < h; y++) {
-      let row = ''
-      for (let x = 0; x < w; x++) {
+    var rows = []
+    for (var y = 0; y < h; y++) {
+      var row = ''
+      for (var x = 0; x < w; x++) {
         var edge = x === 0 || x === w - 1 || z === 0 || z === d - 1
-        let c = ' '
+        var c = ' '
         if (y === 0) c = 'X'
         else if (y === h - 1) c = 'C'
         else if (edge) c = z === d - 1 && y === 1 ? (x === (w - 1) / 2 ? 'S' : 'X') : 'C'
@@ -58,7 +58,7 @@
 
   // ---------------------------------------------------------------- the siphon: 7 wide, 7 deep, 13 high
   // rows bottom -> top: 0 floor, 1-11 the walls around the scoop bay and the winch, 12 the roof
-  const SIPHON_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 3 } }
+  const SIPHON_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 0, max: 1 }, output_hatch: { min: 1, max: 3 } }
   // QR-S4: a deep-drawing siphon. Frame posts at the corners, laminated glass bands at rows 3-4 and 8-9, a pipe band at row 6, a hull roof with
   // a pipe cross, and the frame winch up the middle to its gearbox.
   function siphonSlice(z) {
@@ -181,7 +181,7 @@
 
   // [items in, items out, fluids in, fluids out]
   UR.machines = [
-    { name: 'ice_giant_siphon', title: 'Ice-Giant Siphon', type: 'ice_giant_siphon', io: [3, 1, 0, 2], spec: SIPHON, parts: SIPHON_PARTS,
+    { name: 'ice_giant_siphon', title: 'Ice-Giant Siphon', type: 'ice_giant_siphon', io: [4, 1, 0, 2], spec: SIPHON, parts: SIPHON_PARTS,
       casing: HULL, texture: HULL_TEXTURE },
     { name: 'slurry_separator', title: 'Slurry Separator', type: 'slurry_separation', io: [1, 3, 2, 2], spec: SEPARATOR, parts: SEPARATOR_PARTS,
       casing: HULL, texture: HULL_TEXTURE },
@@ -218,7 +218,7 @@
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     UR.machines.forEach(function (m) {
       Pat.register('gtceu:' + m.name, m.spec)
-      const tips = [
+      var tips = [
         Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + String(m.type).replace('gtceu:', '')))
       ]

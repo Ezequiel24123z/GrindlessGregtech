@@ -5,7 +5,7 @@
     "byproducts: startup_scripts/grindless/moon/earth_byproducts.js sets these ore byproducts (GTCEuStartupEvents.materialModification, after GTM and every addon). GTM builds the ore chains from them (macerator, ore washer, thermal centrifuge, chemical bath, sifter) and the MV Ore Plant reads those chains, so neither gives rutile or ilmenite any more. aluminium was bauxite, bauxite, ilmenite, rutile; bauxite was grossular, rutile, gallium. The replacements are real companions of bauxite: its iron oxide (hematite, the red of red mud) and gallium. thorium (the Nether's beryllium vein) was uraninite, lead: the uraninite opened the uranium chain, radon and the quantum eye before IV (radioactives are an IV resource, docs/eras/ev.md); now lead (the end of thorium's decay chain) and rare earth (thorium minerals sit in rare-earth ores such as monazite). The other ores with a uraninite byproduct (uraninite, pitchblende, plutonium) are radioactive themselves and held back until IV.",
     "strip: server_scripts/grindless/moon/offworld_only.js removes these recipes and adds them back with GTM's builder, the same inputs, chances, energy and time, without the listed outputs. The new id is grindless:<type>/offworld_only/<old path>. Destinations of what is left: unchanged. (Greate's copies of GT recipes follow: integration/greate.js only keeps copies of GT recipes that are loaded and unchanged.) A plant that composes these recipes reads them without the same outputs: the EV platinum plant (server_scripts/grindless/ev/platinum_plant.js) applies every strip entry of its stages when it reads them.",
     "remove: recipes whose only purpose is a resource of another world. They go away.",
-    "watched: worlds.<world>.watched is what the smoke tests (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js; Mercury's also gg_test_naquadah_plant.js) look for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern; heavy water, tritiated or concentrated too, carries the Martian deuterium; from LuV the asteroid belt's grindless:asteroid_pgm_concentrate carries iridium and osmium, the platinum plant's mode 4), except recipes that only run off Earth (a dimension condition of another world), recycling, and the late lines named in allowedLate."
+    "watched: worlds.<world>.watched is what the smoke tests (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js; Mercury's also gg_test_naquadah_plant.js) look for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern; heavy water, tritiated or concentrated too, carries the Martian deuterium; from LuV the asteroid belt's grindless:asteroid_pgm_concentrate carries iridium and osmium, the platinum plant's mode 4; Barnard b's ammonium perrhenate carries rhenium, so its reduction runs anywhere after AF-E2), except recipes that only run off Earth (a dimension condition of another world), recycling, and the late lines named in allowedLate."
   ],
   "worlds": {
     "moon": {
@@ -37,7 +37,7 @@
       "watched": {
         "items": ["gtceu:rhenium_dust", "gtceu:small_rhenium_dust", "gtceu:tiny_rhenium_dust", "gtceu:rhenium_ingot", "gtceu:raw_rhenium"],
         "fluids": ["gtceu:rhenium"],
-        "inputPattern": "rhenium"
+        "inputPattern": "rhenium|perrhenat"
       }
     }
   },

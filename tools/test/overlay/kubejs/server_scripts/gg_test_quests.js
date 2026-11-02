@@ -78,9 +78,9 @@ var GG_QUESTS_EXPECTED = {
   uev_age: [104, 111],
   uiv_age: [107, 115],
   uxv_age: [89, 98],
-  opv_age: [84, 92],
-  max_age: [84, 90],
-  maxplus_age: [144, 167]
+  opv_age: [84, 94],
+  max_age: [84, 94],
+  maxplus_age: [145, 171]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
 var GG_UNGROUPED = { welcome: true }

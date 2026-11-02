@@ -262,7 +262,8 @@
       .pattern(function (def) { return Pat.build(def, CONDENSER_SPEC) })
       ['tooltips(net.minecraft.network.chat.Component[])']([
         Text.translate('grindless.machine.fumarole_condenser.tooltip.0'),
-        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.fumarole_condensing'))
+        Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.fumarole_condensing')),
+Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
       .workableCasingModel('grindless:block/luv/radiation_vault_casing', 'grindless:block/multiblock/fumarole_condenser')
 

@@ -165,13 +165,15 @@
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 1 }),
     Pat.part('output_bus', { min: 1, max: 1 }),
-    Pat.part('energy_input', { min: 1, max: 2 })
+    Pat.part('energy_input', { min: 1, max: 2 }),
+    G.parallelHatch.part()
   ])
   CR.machines.furnace.spec = specOf(CR.machines.furnace, furnaceInner, [
     Pat.part('input_bus', { min: 1, max: 2 }),
     Pat.part('input_hatch', { min: 1, max: 2 }),
     Pat.part('output_bus', { min: 1, max: 2 }),
-    Pat.part('energy_input', { min: 1, max: 2 })
+    Pat.part('energy_input', { min: 1, max: 2 }),
+    G.parallelHatch.part()
   ])
 
   // one EMI line per recipe, read from its data: what the circuit does
@@ -250,7 +252,7 @@
       .langValue(furnace.lang)
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(furnace.type)
-      .recipeModifier(G.noVoiding.modifier({ which: 'items', reason: CR.furnaceNoVoiding, name: 'crystal growth furnace' }, G.parallelHatch.overclock), true)
+      .recipeModifier(G.noVoiding.modifier({ which: 'items', reason: CR.furnaceNoVoiding, name: 'crystal growth furnace' }, G.parallelHatch.modifier(G.parallelHatch.overclock)), true)
       .beforeWorking(G.noVoiding.beforeWorking({ which: 'items', reason: CR.furnaceNoVoiding, name: 'crystal growth furnace' }))
       .appearanceBlock(function () { return Block.getBlock(ROBUST) })
       .pattern(function (def) { return Pat.build(def, furnace.spec) })

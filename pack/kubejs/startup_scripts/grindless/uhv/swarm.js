@@ -106,6 +106,7 @@
   function body(m) {
     var options = [Pat.block(TRUSS, { min: m.minTruss })]
     Object.keys(m.parts).forEach(function (ability) { options.push(Pat.part(ability, m.parts[ability])) })
+    if (!m.generator) options.push(G.parallelHatch.part())
     return Pat.oneOf.apply(null, options)
   }
 

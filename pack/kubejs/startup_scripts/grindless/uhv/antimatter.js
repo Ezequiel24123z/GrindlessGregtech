@@ -154,7 +154,8 @@
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('input_hatch', { min: 1, max: 1 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
-        Pat.part('output_hatch', { min: 1, max: 1 })
+        Pat.part('output_hatch', { min: 1, max: 1 }),
+        G.parallelHatch.part()
       ])),
       F: Pat.block(UV_CASING),
       Q: Pat.frame(['tungsten_steel']),
@@ -175,7 +176,8 @@
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('input_hatch', { min: 1, max: 1 }),
         Pat.part('output_bus', { min: 1, max: 1 }),
-        Pat.part('output_hatch', { min: 1, max: 1 })
+        Pat.part('output_hatch', { min: 1, max: 1 }),
+        G.parallelHatch.part()
       ])),
       F: Pat.block(TRUSS),
       Q: Pat.frame(['stainless_steel']),
@@ -259,7 +261,7 @@
       .langValue(acc.lang)
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(acc.type)
-      .recipeModifier(G.noVoiding.modifier(accOpts, G.parallelHatch.overclock), true)
+      .recipeModifier(G.noVoiding.modifier(accOpts, G.parallelHatch.modifier(G.parallelHatch.overclock)), true)
       .beforeWorking(G.noVoiding.beforeWorking(accOpts))
       .appearanceBlock(function () { return Block.getBlock(UV_CASING) })
       .pattern(function (def) { return Pat.build(def, acc.spec) })

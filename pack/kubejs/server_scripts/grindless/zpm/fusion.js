@@ -76,7 +76,10 @@
       var start = json.data ? Number(json.data.eu_to_start) : 0
       if (eut <= table.mk2.maxEUt && start <= table.mk2.maxStart) report.unaudited.push(id + ' (' + eut + ' EU/t, ' + start + ' EU start)')
     })
-    table.recipes.forEach(function (r) { if (r.fate === 'keep' && !live[r.id]) report.missing.push(r.id) })
+    // LuV removes and re-adds its moved recipes in its own event pass, so forEachRecipe does not list them here: they are live (global.grindless.fusion.rebuilt)
+    var rebuilt = {}
+    ;((G.fusion && G.fusion.rebuilt) || []).forEach(function (id) { rebuilt[String(id)] = true })
+    table.recipes.forEach(function (r) { if (r.fate === 'keep' && !live[r.id] && !rebuilt[r.id]) report.missing.push(r.id) })
     return report
   }
 

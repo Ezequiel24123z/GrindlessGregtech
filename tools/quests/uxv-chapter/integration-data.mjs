@@ -45,9 +45,9 @@ export const QUESTS = [
     key: 'FUSC1', kind: 'process', title: 'Hot CNO', icon: 'gtceu:cno_ash_plasma_bucket',
     deps: ['J_FUSION'], x: 2, y: 0,
     teach: {
-      for: 'The first burn of the &6Mk6 Fusion Ring&r runs on the stellar hydrogen and CNO cuts and gives CNO ash plasma, which the converter takes as current.',
+      for: 'The first burn of the &6Mk6 Fusion Reactor&r runs on the stellar hydrogen and CNO cuts and gives CNO ash plasma, which the converter takes as current.',
       needs: 'A formed Mk6 ring on UXV hatches and both cuts from Cygnus X-1. The ring refuses a run when its start energy is above what it stores.',
-      unlocks: 'Power for the gate and the fuel of the next burn.',
+      unlocks: 'Current for the gate, and a little CNO cut back from the converter for the next run.',
       automate: 'Cuts arrive over AE2 from the filter; the ash goes straight to the converter.',
     },
     desc: [],
@@ -58,8 +58,8 @@ export const QUESTS = [
     key: 'FUSC2', kind: 'process', title: 'Triple Alpha', icon: 'gtceu:helium_burning_ash_plasma_bucket',
     deps: ['FUSC1'], x: 4, y: 0,
     teach: {
-      for: 'Three helium nuclei make carbon, and carbon takes a fourth to make oxygen. The ring burns helium fuel made from the stellar helium cut and the first burn\'s ash.',
-      needs: 'Helium fuel from the cryogenic plant, and the same ring and converter as before.',
+      for: 'Three helium nuclei make carbon, and carbon takes a fourth to make oxygen. The ring burns triple-alpha fuel, which the cryogenic plant on the Moon makes from the stellar helium cut.',
+      needs: 'Triple-alpha fuel from the Moon\'s cryogenic plant, and the same ring and converter as before.',
       unlocks: 'Carbon-12 and oxygen-16, the fuels of the next two burns.',
       automate: 'Send the carbon and oxygen to their own lines. Both are fuel, not waste.',
     },
@@ -72,7 +72,7 @@ export const QUESTS = [
     deps: ['FUSC2'], x: 6, y: 0,
     teach: {
       for: 'The third burn lights carbon vapour from the electron beam furnace and leaves neon, sodium and magnesium once the converter is done.',
-      needs: 'Carbon-12 vapour on a bus, and a quench caster to catch the ash.',
+      needs: 'Carbon-12 vapour by pipe, and a quench caster to catch the ash.',
       unlocks: 'Ordinary neon, sodium and magnesium for stock.',
       automate: 'Ash goes to storage; nothing in it is dangerous.',
     },
@@ -85,7 +85,7 @@ export const QUESTS = [
     deps: ['FUSC3'], x: 8, y: 0,
     teach: {
       for: 'The fourth burn is the last stage the ring runs. Its ash leaves silicon, sulfur and phosphorus once the converter and the quench caster are done with it.',
-      needs: 'Liquefied oxygen-16 from the cryogenic plant, and a ring that has survived the stages before.',
+      needs: 'Oxygen-16 fuel, liquefied by the cryogenic plant on the Moon, and a ring that has survived the stages before.',
       unlocks: 'Silicon-28 for the next era and the biggest plasma payout of the ring.',
       automate: 'Keep oxygen on its own line from the plant, and send the silicon to storage.',
     },
@@ -98,8 +98,8 @@ export const QUESTS = [
     deps: ['MK6C4'], x: 10, y: 0,
     teach: {
       for: 'The &6Direct Energy Converter&r takes four Mk6 plasmas and returns current plus ash, and the &6Plasma Quench Caster&r splits that ash into stock. Both are older machines with new rows.',
-      needs: 'The plasma buckets of the four burns. The converter\'s output is written final, so no generator array doubles it.',
-      unlocks: 'The Mk6 figures on the Power tab.',
+      needs: 'The plasma buckets of the four burns. The converter\'s output is not doubled by a generator array.',
+      unlocks: 'Current from the Mk6 burns, and ash for stock.',
       automate: 'Plasma by pipe from the ring; leave the converter\'s hatches free of anything else.',
     },
     desc: [],
@@ -112,8 +112,8 @@ export const QUESTS = [
     key: 'I_BZ', kind: 'plant', title: 'Spin Down a Black Hole', icon: 'gtceu:bz_dynamo',
     deps: ['FRC'], x: 2, y: 3,
     teach: {
-      for: 'A spinning black hole threaded by a magnetic field drives a current, and the hole slows to pay for it. The &6BZ Dynamo&r burns &6Flux-Loaded Plasma&r made from an FRC cartridge, at Cygnus X-1 only.',
-      needs: 'Flux-loaded plasma from the FRC former and a UXV dynamo hatch. It works in orbit at Cygnus X-1 and nowhere else.',
+      for: 'A spinning black hole threaded by a magnetic field drives a current, and the hole slows to pay for it. The &6BZ Dynamo&r burns flux-loaded plasma, which the FRC former makes from filtered disk plasma, at Cygnus X-1 only.',
+      needs: 'Flux-loaded plasma from the FRC former and a 16 A UXV dynamo hatch. It works in orbit at Cygnus X-1 and nowhere else.',
       unlocks: 'The largest single source of the era, a good part of the gate\'s draw.',
       automate: 'Cartridges and plasma come from the same line at Cygnus; the power rides the wireless network home.',
     },
@@ -142,8 +142,8 @@ export const QUESTS = [
     key: 'PAR', kind: 'process', title: 'Parallel Control', icon: 'gtceu:uxv_parallel_hatch',
     deps: ['START'], x: 2, y: 8,
     teach: {
-      for: 'The &6UXV Parallel Hatch&r lets a mega machine run an enormous number of copies of one recipe at once. It is the most expensive hatch of the era.',
-      needs: 'A machine with a parallel slot, and the power for every copy: each pays its own EU/t.',
+      for: 'The &6Extreme Parallel Control Hatch&r lets a machine that takes parallel hatches run up to 65,536 copies of one recipe at once, each at its own EU/t. It is the most expensive hatch of the era.',
+      needs: 'A UXV hull, UXV circuits, a field generator, an emitter, metallic hydrogen cable, RHEA plates and FFKM seals on the assembly line, researched on the Insane hatch. Then power for every copy.',
       unlocks: 'The stellar fractionation hall at full width.',
       automate: 'Give the machine a bus wide enough for the copies it will run.',
     },
@@ -170,8 +170,8 @@ export const QUESTS = [
     key: 'CELL', kind: 'machine', title: 'The UXV Cell', icon: 'grindless:uxv_smes_cell',
     deps: ['START'], x: 2, y: 10,
     teach: {
-      for: 'The nitride magnet works winds the &6UXV SMES Cell&r with pasta strand. It is the largest store in the pack.',
-      needs: 'Strand tape and lasagna plate from Vela, and the nitride magnet works from UEV.',
+      for: 'The nitride magnet works winds the &6UXV SMES Cell&r from four UIV cells, strand tape and superfluid helium.',
+      needs: 'Four UIV SMES Cells, strand tape, superfluid helium and a UXV-tier circuit, in the nitride magnet works.',
       unlocks: 'The UXV wireless tier.',
       automate: 'Nothing to feed. Size the towers for your busiest hour.',
     },
@@ -183,23 +183,23 @@ export const QUESTS = [
     key: 'NETUXV', kind: 'process', title: 'The Network Goes UXV', icon: 'gtceu:uxv_wireless_energy_hatch',
     deps: ['CELL'], x: 4, y: 10,
     teach: {
-      for: 'Move your towers onto &6UXV SMES Cells&r and the wireless network carries UXV to every platform, Cygnus X-1, Vela and Cassiopeia A included.',
-      needs: 'Every formed tower holding UXV cells. Until then the network stays at UIV.',
-      unlocks: 'The wireless hatches at UXV, and the gate\'s load at Cygnus X-1.',
+      for: 'Move your towers onto &6UXV SMES Cells&r and the wireless network carries UXV to every platform, Cygnus X-1, Vela and Cassiopeia A included. The &6Pasta Strand Repeater&r, pasta strand wire on a pulsar-timed repeater and an MTJ die, links the wireless hatches and goes into the 2 A UXV dynamo hatch.',
+      needs: 'One formed tower holding a UXV cell: the network runs at its strongest cell, so until then it stays at UIV.',
+      unlocks: 'The wireless hatches at UXV.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
     desc: [],
-    tasks: [it('gtceu:uxv_wireless_energy_hatch'), it('gtceu:uxv_wireless_dynamo_hatch')],
+    tasks: [it('gtceu:uxv_wireless_energy_hatch'), it('gtceu:uxv_wireless_dynamo_hatch'), it('grindless:pasta_strand_repeater')],
     rewards: [xp(200)],
   },
   {
     key: 'I_GATELOAD', kind: 'milestone', title: 'Sixteen Amps of UXV', icon: 'gtceu:uxv_wireless_energy_hatch',
     deps: ['NETUXV'], x: 6, y: 10,
     desc: [
-      'The gate to OpV draws 2,147,483,648 EU/t for sixty seconds. One BZ dynamo and two polar cap taps on the wireless network cover it, or the Mk6 through the converter. The Power tab shows each source.',
+      'The gate to OpV holds the full UXV load for a minute; EMI shows the draw. A BZ dynamo and two polar cap taps make about that much before the network takes its cut, so add a source or let a charged UXV cell carry the rest. Tick this box once your sources are in place.',
     ],
     tasks: [ck()],
-    rewards: [xp(100)],
+    rewards: [xp(25)],
   },
 
   // ------------------------------------------------------------------ older machines
@@ -207,7 +207,7 @@ export const QUESTS = [
     key: 'I_OM_EV', kind: 'process', title: 'Separations and Strip', icon: 'gtceu:cryogenic_plant',
     deps: ['START'], x: 2, y: 13,
     teach: {
-      for: 'The &6Cryogenic Plant&r, &6Extraction Cascade&r, &6Platinum Plant&r, &6Hot Strip Mill&r, &6Syngas Plant&r and &6Fluorspar Kiln&r each take a new mode: stellar helium and oxygen fuels, knot dust and flux dross, sputter-grade platinum, foils and laminations, platform syngas and fluorine.',
+      for: 'The &6Cryogenic Plant&r, &6Rare Earth Extraction Cascade&r, &6Platinum Plant&r, &6Hot Strip Mill&r, &6Syngas and Shift Plant&r and &6Fluorspar Kiln&r each take a new mode: stellar helium and oxygen fuels, knot dust and flux dross, sputter-grade platinum, foils and laminations, platform syngas and fluorine.',
       needs: 'The controllers you already own, and cuts and dust from the stars.',
       unlocks: 'The Mk6 fuels, the titanium-44 line and the targets of the spintronic lane.',
       automate: 'Each plant hands its product on by pipe. Return the nitrogen and the water.',

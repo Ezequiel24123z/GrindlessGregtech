@@ -66,7 +66,7 @@ test('MAX-A2 aerogel_superleak_plug is keyed by silylated_alcogel alone: no othe
   assert.ok(dry.filter((r) => r.circuit === 0).length === 3 && dry.filter((r) => r.circuit > 0).map((r) => r.circuit).join() === '5,6');
   assert.ok(dry.every((r) => r.itemsIn.length + (r.circuit > 0 ? 1 : 0) <= 3), 'at most 3 item slots (aerogel maxIO.itemsIn)');
   const startup = fs.readFileSync(path.join(root, 'pack/kubejs/startup_scripts/grindless/zpm/outer_chemistry.js'), 'utf8');
-  assert.match(startup, /maxIO: \{ itemsIn: 3, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 \}/);
+  assert.match(startup, /maxIO: \{ itemsIn: 4, itemsOut: 1, fluidsIn: 2, fluidsOut: 1 \}/);
 });
 
 test('bacteria are consumed once, the bath and the culture are not consumed, GTM mixer recipe stays', () => {

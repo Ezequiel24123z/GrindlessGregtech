@@ -5,12 +5,14 @@
 // Fixed keys (other chapters link to them): STAGE2, M31, VOID, STAGE2_END.
 // Keys for XP-C2b to hang from: PNUC (photonuclear isotopes, blueshift forge), TETHER (deep horizon tether), VDIA (void crystal fab),
 // SCALE (scale, Hyperfactory and the hatch), META_A and META_B (meta-material loom).
-// Gate quests never reward the gate product: each is a dimension task and gives XP only.
-// Positions: columns every 2, rows every 2 along y = 0.
+// Gate quests never reward the gate product: each arrival is a dimension task and gives XP only; the course and probe steps are checkmarks.
+// Positions and dependencies: layout.mjs.
 const it = (item, count) => ({ type: 'item', item, count });
 const ck = () => ({ type: 'checkmark' });
 const dim = (dimension) => ({ type: 'dimension', dimension });
 const xp = (n) => ({ type: 'xp', xp: n });
+
+import { SECTIONS, place } from './layout.mjs';
 
 export const CHAPTER = {
   filename: 'maxplus_age_2',
@@ -19,7 +21,7 @@ export const CHAPTER = {
   order: 1,
   icon: 'grindless:optical_nav_core',
   autofocus: 'STAGE2',
-  section: { name: 'Stage II: The Local Group', origin: { x: 22, y: 0 } },
+  section: SECTIONS.age2,
   title: 'MAX+: The Local Group',
   subtitle: ['A probe to Andromeda, another to the dark between the galaxies and the first meta-materials of the loom.'],
 };
@@ -30,34 +32,34 @@ export const QUESTS = [
     key: 'STAGE2', kind: 'start', title: 'Stage II Begins', icon: 'grindless:optical_nav_core',
     deps: ['STREAM'], x: 0, y: 0,
     desc: [
-      'The Stream and the Tarantula are running. Andromeda is next, then the dark between the galaxies. Both gates start from places you already own.',
+      'The Stream and the Tarantula are running. Andromeda is next, then the dark between the galaxies. The gate to Andromeda leaves from 30 Doradus, and the one to the dark leaves from Andromeda.',
     ],
-    tasks: [it('grindless:optical_nav_core')],
+    tasks: [ck()],
     rewards: [xp(100)],
   },
   {
     key: 'NAV18', kind: 'step', title: 'A Course for Andromeda', icon: 'grindless:optical_nav_core',
     deps: ['STAGE2'], x: 2, y: 0,
     desc: [
-      'The gate to Andromeda is built at 30 Doradus. Its probe gets a navigation core cut for a nucleus that is coming toward us, and so for a different sky.',
+      'The gate to Andromeda is built at 30 Doradus. Its probe gets a navigation core cut for a nucleus that is coming toward us, and so for a different sky. It is the same item as before: if you hold one, that is all this step needs.',
     ],
-    tasks: [it('grindless:optical_nav_core')],
-    rewards: [xp(200)],
+    tasks: [ck()],
+    rewards: [xp(50)],
   },
   {
-    key: 'PROBE18', kind: 'step', title: 'Probe for M31', icon: 'grindless:launched_ig_probe',
+    key: 'PROBE18', kind: 'step', title: 'Probe for M31', icon: 'grindless:ig_relay_probe',
     deps: ['NAV18'], x: 4, y: 0,
     desc: [
-      'The same relay probe as before, launched from a different gate. It is a long way, so check the lock is in the shell.',
+      'Build another intergalactic relay probe, the same recipe as before. The gate\'s hold at the Tarantula takes the finished probe, so keep it unlaunched. Check this off once it is in hand.',
     ],
-    tasks: [it('grindless:ig_relay_probe'), it('grindless:launched_ig_probe')],
-    rewards: [xp(200)],
+    tasks: [ck()],
+    rewards: [xp(50)],
   },
   {
     key: 'M31', kind: 'step', title: 'The Nucleus of M31', icon: 'grindless:launched_ig_probe',
     deps: ['PROBE18'], x: 6, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'The gate opens on the nucleus of Andromeda, bathed in gamma light. Nothing is rewarded for the gate itself.',
+      'When that hold completes, a platform appears at the nucleus of Andromeda, bathed in gamma light, and the ring at 30 Doradus gets its &6Relay Coordinates&r. Ride there as before; step out of the platform\'s ring and back in to come home.',
     ],
     tasks: [dim('grindless:m31_nucleus_orbit')],
     rewards: [xp(250)],
@@ -76,7 +78,7 @@ export const QUESTS = [
     deps: ['J_M31'], x: 8.5, y: 1.5,
     teach: {
       for: 'The &6Deep Horizon Tether&r holds the blueshift forge at the right depth in the nucleus\'s pull. Too shallow and it burns; too deep and it never comes back.',
-      needs: 'Kerr ribbon from the strand line, condensate for the coating, and a stellar elevator for the proof load.',
+      needs: 'Kerr ribbon from the strand line, condensate for the coating, and the stellar elevator at Cygnus X-1 for the proof load.',
       unlocks: 'The blueshift forge\'s photonuclear recipes.',
       automate: 'Build the tether once per forge.',
     },
@@ -88,8 +90,8 @@ export const QUESTS = [
     key: 'PNUC', kind: 'process', title: 'Photonuclear Isotopes', icon: 'gtceu:photonuclear_mix_bucket',
     deps: ['J_M31'], x: 8, y: -1.5,
     teach: {
-      for: 'In the nucleus\'s photon bath a target is cracked into a mix of rare isotopes; the stellar forge then burns the mix into p-process plasma.',
-      needs: 'The forge on its tether, and a calutron\'s enriched targets from home.',
+      for: 'In the nucleus\'s photon bath the &6Blueshift Forge&r cracks molybdenum targets into a mix of rare isotopes. Back home the mix is concentrated and melted with helium into p-process plasma in a blast furnace.',
+      needs: 'The forge on its tether here, and enriched targets from a calutron at home.',
       unlocks: 'Plasmas for stage III\'s tree.',
       automate: 'Targets in, isotopes out, and the light is free.',
     },
@@ -103,25 +105,25 @@ export const QUESTS = [
     key: 'NAV19', kind: 'step', title: 'A Course for the Filament', icon: 'grindless:optical_nav_core',
     deps: ['J_M31'], x: 10, y: 0,
     desc: [
-      'The last gate leaves from M31 and aims at the thin web of gas between the galaxies. Its navigation core is cut for a sky with almost nothing in it.',
+      'The last gate leaves from M31 and aims at the thin web of gas between the galaxies. Its navigation core is cut for a sky with almost nothing in it; it is the same item as before.',
     ],
-    tasks: [it('grindless:optical_nav_core')],
-    rewards: [xp(250)],
+    tasks: [ck()],
+    rewards: [xp(50)],
   },
   {
-    key: 'PROBE19', kind: 'step', title: 'Probe for the Filament', icon: 'grindless:launched_ig_probe',
+    key: 'PROBE19', kind: 'step', title: 'Probe for the Filament', icon: 'grindless:ig_relay_probe',
     deps: ['NAV19'], x: 12, y: 0,
     desc: [
-      'One more probe, launched from Andromeda this time. The platform here builds the gate; you carry the controller.',
+      'One more intergalactic relay probe, kept unlaunched: the hold of the ring on the M31 platform takes it. Check this off once the probe is in hand.',
     ],
-    tasks: [it('grindless:ig_relay_probe'), it('grindless:launched_ig_probe')],
-    rewards: [xp(250)],
+    tasks: [ck()],
+    rewards: [xp(50)],
   },
   {
     key: 'VOID', kind: 'step', title: 'The Local Group Filament', icon: 'grindless:void_grown_diamond',
     deps: ['PROBE19'], x: 14, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'Almost nothing here: cold, clean and dark. Nothing is rewarded for the gate itself.',
+      'When that hold completes, a platform appears in the filament between the galaxies, and the M31 ring gets its &6Relay Coordinates&r. Almost nothing out there: cold, clean and dark.',
     ],
     tasks: [dim('grindless:local_group_filament')],
     rewards: [xp(250)],
@@ -163,7 +165,7 @@ export const QUESTS = [
     key: 'SCALE', kind: 'reading', title: 'Scale', icon: 'gtceu:hyperfactory',
     deps: ['J_VOID'], x: 18, y: 0,
     desc: [
-      'The stage after this one wants millions of parts, and no one builds millions by hand. A bigger factory, a wider hatch and a grid that can hold the plan are coming. The tabs for machines and integration have them.',
+      'The stage after this one wants millions of parts, and no one builds millions by hand. A bigger factory, a wider hatch and a grid that can hold the plan are coming. The Machines and Integration sections have them.',
     ],
     tasks: [ck()],
     rewards: [xp(50)],
@@ -188,7 +190,7 @@ export const QUESTS = [
       for: 'The loom\'s other two weaves: a conduit for current and a valve that lets only helium through.',
       needs: 'Coated tape from the HTS line, and the aerogel works for the superleak plug.',
       unlocks: 'The tree\'s plumbing and wiring.',
-      automate: 'The valve wants a cryostat of its own.',
+      automate: 'The valve body comes off the loom and the shequid works finishes it in liquid helium.',
     },
     desc: [],
     tasks: [it('grindless:cold_horizon_conduit'), it('grindless:horizon_valve')],
@@ -204,3 +206,4 @@ export const QUESTS = [
     rewards: [xp(300)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

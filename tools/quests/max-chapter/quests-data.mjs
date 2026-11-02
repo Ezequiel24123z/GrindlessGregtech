@@ -29,7 +29,7 @@ export const QUESTS = [
     key: 'START', kind: 'start', title: 'The Galactic Centre', icon: 'gtceu:max_machine_casing',
     deps: ['X:3E3C190F1A77EB6D'], x: 0, y: 0,
     desc: [
-      'The warp gate gave you the &6MAX Machine Casing&r. The hull waits for parts nobody has made yet.',
+      'You hold the &6MAX Machine Casing&r. It is an assembly-line recipe, researched with the Sagittarius A* chart that the OpV warp gate wrote. The hull needs horizon strand cable, so the strand comes first.',
       'Sagittarius A* is four million suns folded into a point. Everything here is a way to reach it, feed it and use it.',
     ],
     tasks: [it('gtceu:max_machine_casing')],
@@ -39,7 +39,7 @@ export const QUESTS = [
     key: 'HULL', kind: 'step', title: 'MAX Hull', icon: 'gtceu:max_machine_hull',
     deps: ['START'], x: 2, y: 0,
     desc: [
-      'The &6MAX Machine Hull&r is the first thing every MAX machine needs.',
+      'The &6MAX Machine Hull&r is the first thing every MAX machine needs. It is an assembly-line recipe from MAX casings, horizon strand cable and chain lamina stacks.',
     ],
     tasks: [it('gtceu:max_machine_hull')],
     rewards: [xp(100)],
@@ -48,7 +48,7 @@ export const QUESTS = [
     key: 'LOOK', kind: 'reading', title: 'The Way In', icon: 'gtceu:max_machine_hull',
     deps: ['HULL'], x: 4, y: 0,
     desc: [
-      'Four ways lead out of the hull: the strand, the circuits and components, the home machines, and the probe to Sagittarius A*. This one follows the probe. The machine and circuit tabs have the rest.',
+      'Four ways lead out of the hull: the strand, the circuits and components, the home machines, and the probe to Sagittarius A*. This one follows the probe. The Machines, Circuits and Integration sections have the rest.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -57,7 +57,7 @@ export const QUESTS = [
     key: 'STRAND', kind: 'step', title: 'Horizon Strand', icon: 'gtceu:horizon_strand_single_cable',
     deps: ['LOOK'], x: 6, y: 0,
     desc: [
-      'A strand of matter that never crosses the horizon. &oFiction:&r a cable that carries MAX power, with no real counterpart.',
+      'A strand of matter that never crosses the horizon. &oFiction:&r a cable that carries MAX power, with no real counterpart. The hull and the repeater both need it. The strand preform is drawn at SGR 1806-20.',
     ],
     tasks: [it('gtceu:horizon_strand_single_cable')],
     rewards: [xp(100)],
@@ -75,7 +75,7 @@ export const QUESTS = [
     key: 'PROBE', kind: 'step', title: 'Relay Probe', icon: 'grindless:gc_relay_probe',
     deps: ['SGRCHART'], x: 10, y: 0,
     desc: [
-      'A relay probe for the Galactic Centre. Nothing comes back from it: the gate to the black hole orbit takes it in.',
+      'A relay probe for the Galactic Centre. It is an assembly-line recipe researched at the Hawking drive, and it takes metal feedstock, so make that first. The ring at Cygnus X-1 throws it, with the Sagittarius A* chart kept in its store.',
     ],
     tasks: [it('grindless:gc_relay_probe')],
     rewards: [xp(150)],
@@ -84,7 +84,7 @@ export const QUESTS = [
     key: 'LAUNCH', kind: 'step', title: 'Probe Away', icon: 'grindless:launched_gc_probe',
     deps: ['PROBE'], x: 12, y: 0,
     desc: [
-      'The launched probe crosses twenty-six thousand light years. The gate does the rest.',
+      'When the hold completes, the launched probe comes back out of the ring, a platform appears at Sagittarius A*, and the ring\'s output bus gets its &6Relay Coordinates&r. Keep the launched probe: the gate to the belt spends it.',
     ],
     tasks: [it('grindless:launched_gc_probe')],
     rewards: [xp(100)],
@@ -93,10 +93,10 @@ export const QUESTS = [
     key: 'GATE14', kind: 'step', title: 'Black Hole Orbit', icon: 'gtceu:max_machine_casing',
     deps: ['LAUNCH'], x: 14, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'The warp gate opens on the orbit of Sagittarius A*. Machines for the orbit start here. Nothing is rewarded for the gate itself.',
+      'Put the coordinates in the input bus of a ring that is holding and stand inside: it carries you to the orbit of Sagittarius A*. Step out of the platform\'s ring and back in to come home. Machines for the orbit start here.',
     ],
     tasks: [dim('gcyr:black_hole_orbit')],
-    rewards: [xp(100)],
+    rewards: [xp(150)],
   },
 
   // ------------------------------------------------------------------ Sagittarius A*
@@ -104,7 +104,7 @@ export const QUESTS = [
     key: 'J_SGRA', kind: 'reading', title: 'Platforms at the Hole', icon: 'grindless:sgr_a_star_image',
     deps: ['GATE14'], x: 16, y: 0,
     desc: [
-      'The platforms hang at the orbit of Sagittarius A*, in the light of the disc. Imaging, spin and the belt are worked from here; the machines for each are in the machine tab.',
+      'The platforms hang at the orbit of Sagittarius A*, in the light of the disc. Imaging, spin and the belt are worked from here; the machines for each are in the Machines section.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -131,7 +131,7 @@ export const QUESTS = [
     key: 'J_WARP', kind: 'step', title: 'The Gate at the Hole', icon: 'gtceu:warp_gate',
     deps: ['EPHEM'], x: 22, y: 0,
     desc: [
-      'The warp gate takes a heavier load here. Build the &6Warp Gate&r at the orbit so the belt seed has somewhere to leave from.',
+      'The platform\'s ring is a full warp gate, but it is your way home. Build a second &6Warp Gate&r at the orbit for the holds that leave from here: the belt seed\'s now, and the one that leaves the Galaxy later.',
     ],
     tasks: [it('gtceu:warp_gate')],
     rewards: [xp(100)],
@@ -140,7 +140,7 @@ export const QUESTS = [
     key: 'NSCSEED', kind: 'step', title: 'Belt Seed', icon: 'grindless:nsc_belt_seed',
     deps: ['J_WARP'], x: 24, y: 0,
     desc: [
-      'A seed for a belt of planetesimals at the centre. The belt gate takes it in; nothing is rewarded for the gate itself.',
+      'A seed for a belt of planetesimals at the centre. It is an assembly-line recipe researched with the cluster ephemeris, and it takes metal feedstock. The gate\'s hold here takes it with the launched probe.',
     ],
     tasks: [it('grindless:nsc_belt_seed')],
     rewards: [xp(150)],
@@ -149,7 +149,7 @@ export const QUESTS = [
     key: 'J_LAUNCH', kind: 'reading', title: 'Seed Away', icon: 'grindless:nsc_belt_seed',
     deps: ['NSCSEED'], x: 26, y: 0,
     desc: [
-      'The gate slings the seed toward the cluster and keeps its tier-tagged mainframes; what was thrown does not come back. When it arrives, the gate can follow it.',
+      'The hold burns the seed and the launched probe, and nothing comes back. When it completes, a platform appears in the belt and the ring\'s output bus gets its &6Relay Coordinates&r.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -160,16 +160,16 @@ export const QUESTS = [
     key: 'GATE15', kind: 'step', title: 'The Belt Opens', icon: 'gtceu:max_machine_casing',
     deps: ['J_LAUNCH'], x: 28, y: 0, shape: 'rsquare', size: 1.5,
     desc: [
-      'The warp gate opens on the nuclear star cluster belt. &oFiction:&r a belt of planetesimals the pack makes up for the centre.',
+      'Ride the coordinates there as before, and the platform\'s ring brings you back. &oFiction:&r a belt of planetesimals the pack makes up for the centre.',
     ],
     tasks: [dim('grindless:nsc_belt')],
-    rewards: [xp(100)],
+    rewards: [xp(150)],
   },
   {
     key: 'J_BELT', kind: 'reading', title: 'Rock to Shell', icon: 'grindless:nsc_planetesimal',
     deps: ['GATE15'], x: 30, y: 0,
     desc: [
-      'The belt is the shell\'s quarry. Rock is melted, cut and rolled into segments, and what is left goes to the feeder. The machine tab has each step.',
+      'The belt is the shell\'s quarry. Rock is melted and cut into truss billets for the segments. The Machines section has each step.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -178,7 +178,7 @@ export const QUESTS = [
     key: 'J_PLANET', kind: 'step', title: 'Planetesimal', icon: 'grindless:nsc_planetesimal',
     deps: ['J_BELT'], x: 32, y: 0,
     desc: [
-      'A &6Planetesimal&r from the belt, caught at the cluster. It is the raw rock of the segments.',
+      'A &6NSC Planetesimal&r from the belt. The debris harvester catches it, and only here in the belt. It is the raw rock of the segments.',
     ],
     tasks: [it('grindless:nsc_planetesimal')],
     rewards: [xp(100)],
@@ -187,7 +187,7 @@ export const QUESTS = [
     key: 'J_FEED', kind: 'step', title: 'Metal Feedstock', icon: 'grindless:metal_feedstock',
     deps: ['J_PLANET'], x: 34, y: 0,
     desc: [
-      'Belt rock, melted and sorted, gives &6Metal Feedstock&r for the segment trusses. Every segment starts here.',
+      '&6Metal Feedstock&r is sintered in the replication refinery from carbonyl iron-nickel. Both relay probes and the belt seed take it, so make it before the probe.',
     ],
     tasks: [it('grindless:metal_feedstock')],
     rewards: [xp(100)],
@@ -196,7 +196,7 @@ export const QUESTS = [
     key: 'J_EXIT', kind: 'exit', title: 'To the Horizon', icon: 'gtceu:mirror_shell',
     deps: ['J_FEED'], x: 36, y: 0,
     desc: [
-      'The belt feeds the shell. The shell, the four horizon machines and the last recipe wait in the next chapter.',
+      'The belt feeds the shell. The shell, the four horizon machines and the last recipe wait in The Horizon section.',
     ],
     tasks: [ck()],
     rewards: [xp(200)],

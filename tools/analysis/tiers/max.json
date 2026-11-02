@@ -42,28 +42,28 @@
     }
   },
   "machines": [
-    { "machine": "gtceu:rydberg_array_works", "types": ["gtceu:rydberg_assembly"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B3" },
-    { "machine": "gtceu:atom_interferometer_works", "types": ["gtceu:atom_interferometry"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B2" },
-    { "machine": "gtceu:membrane_line", "types": ["gtceu:membrane_rolling"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B1" },
-    { "machine": "gtceu:gene_ark", "types": ["gtceu:genome_archiving"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B4" },
-    { "machine": "gtceu:photon_ring_imager", "types": ["gtceu:photon_ring_imaging"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-D2" },
-    { "machine": "gtceu:geroch_winch", "types": ["gtceu:geroch_power"], "maxEUt": 8589934592, "needs": ["eu:opv"], "package": "MAX-D3" },
-    { "machine": "gtceu:mass_stream_injector", "types": ["gtceu:mass_stream_injection"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-D4" },
-    { "machine": "gtceu:mirror_shell", "types": ["gtceu:black_hole_bomb"], "maxEUt": 34359738368, "needs": ["eu:opv"], "package": "MAX-G1" },
-    { "machine": "gtceu:cluster_light_furnace", "types": ["gtceu:cluster_light_smelting"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-R1" },
-    { "machine": "gtceu:segment_reclamation_works", "types": ["gtceu:segment_reclamation"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S4" },
-    { "machine": "gtceu:accretion_feeder", "types": ["gtceu:accretion_power"], "maxEUt": 8589934592, "needs": ["eu:opv"], "package": "MAX-E1" },
-    { "machine": "gtceu:horizon_flux_clamp", "types": ["gtceu:horizon_flux_clamp"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S3" },
-        { "machine": "gtceu:horizon_interferometer", "types": ["gtceu:horizon_interferometry"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S1" },
-    { "machine": "gtceu:ergoregion_synchroniser", "types": ["gtceu:ergoregion_synchronisation"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S2" },
-    { "id": "gtceu:warp_gate@max", "machine": "gtceu:warp_gate", "types": ["gtceu:warp_gate"], "maxEUt": 8589934592,     "needs": ["eu:opv"], "package": "MAX-T1" },
+    {"partsFromStructure":true, "machine": "gtceu:rydberg_array_works", "types": ["gtceu:rydberg_assembly"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B3" },
+    {"partsFromStructure":true, "machine": "gtceu:atom_interferometer_works", "types": ["gtceu:atom_interferometry"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B2" },
+    {"partsFromStructure":true, "machine": "gtceu:membrane_line", "types": ["gtceu:membrane_rolling"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B1" },
+    {"partsFromStructure":true, "machine": "gtceu:gene_ark", "types": ["gtceu:genome_archiving"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-B4" },
+    {"partsFromStructure":true, "machine": "gtceu:photon_ring_imager", "types": ["gtceu:photon_ring_imaging"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-D2" },
+    {"partsFromStructure":true, "machine": "gtceu:geroch_winch", "types": ["gtceu:geroch_power"], "maxEUt": 8589934592, "needs": ["eu:opv"], "package": "MAX-D3" },
+    {"partsFromStructure":true, "machine": "gtceu:mass_stream_injector", "types": ["gtceu:mass_stream_injection"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-D4" },
+    {"partsFromStructure":true, "machine": "gtceu:mirror_shell", "types": ["gtceu:black_hole_bomb"], "maxEUt": 34359738368, "needs": ["eu:opv"], "package": "MAX-G1" },
+    {"partsFromStructure":true, "machine": "gtceu:cluster_light_furnace", "types": ["gtceu:cluster_light_smelting"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-R1" },
+    {"partsFromStructure":true, "machine": "gtceu:segment_reclamation_works", "types": ["gtceu:segment_reclamation"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S4" },
+    {"partsFromStructure":true, "machine": "gtceu:accretion_feeder", "types": ["gtceu:accretion_power"], "maxEUt": 8589934592, "needs": ["eu:opv"], "package": "MAX-E1" },
+    {"partsFromStructure":true, "machine": "gtceu:horizon_flux_clamp", "types": ["gtceu:horizon_flux_clamp"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S3" },
+        {"partsFromStructure":true, "machine": "gtceu:horizon_interferometer", "types": ["gtceu:horizon_interferometry"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S1" },
+    {"partsFromStructure":true, "machine": "gtceu:ergoregion_synchroniser", "types": ["gtceu:ergoregion_synchronisation"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:opv"], "package": "MX-S2" },
+    {"partsFromStructure":true, "id": "gtceu:warp_gate@max", "machine": "gtceu:warp_gate", "types": ["gtceu:warp_gate"], "maxEUt": 8589934592,     "needs": ["eu:opv"], "package": "MAX-T1" },
         { "id": "gtceu:assembly_line@max", "machine": "gtceu:assembly_line", "types": ["gtceu:assembly_line"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1", "note": "MAX components run on the OpV hatch pair the same way OpV rows ran on UXV." },
-        { "id": "gtceu:assembly_hall@max", "machine": "gtceu:assembly_hall", "types": ["gtceu:assembler", "gtceu:circuit_assembler"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
-        { "id": "gtceu:photonic_integration_hall@max", "machine": "gtceu:photonic_integration_hall", "types": ["gtceu:photonic_integration"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
-        { "id": "gtceu:swarm_segment_foundry@max", "machine": "gtceu:swarm_segment_foundry", "types": ["gtceu:swarm_segment"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-H1", "note": "Makes mirror_shell_segment at Sgr A* orbit (T-VOLT exemption in recipe_quality.json)." },
-    { "id": "gtceu:helium_refrigerator@max", "machine": "gtceu:helium_refrigerator", "types": ["gtceu:closed_loop_cooling"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
-    { "id": "gtceu:asteroid_processor@max", "machine": "gtceu:asteroid_processor", "types": ["gtceu:asteroid_processing"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
-    { "id": "gtceu:accretion_disk_skimmer@max", "machine": "gtceu:accretion_disk_skimmer", "types": ["gtceu:disk_skimming"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" }
+        {"partsFromStructure":true, "id": "gtceu:assembly_hall@max", "machine": "gtceu:assembly_hall", "types": ["gtceu:assembler", "gtceu:circuit_assembler"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
+        {"partsFromStructure":true, "id": "gtceu:photonic_integration_hall@max", "machine": "gtceu:photonic_integration_hall", "types": ["gtceu:photonic_integration"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
+        {"partsFromStructure":true, "id": "gtceu:swarm_segment_foundry@max", "machine": "gtceu:swarm_segment_foundry", "types": ["gtceu:swarm_segment"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-H1", "note": "Makes mirror_shell_segment at Sgr A* orbit (T-VOLT exemption in recipe_quality.json)." },
+    {"partsFromStructure":true, "id": "gtceu:helium_refrigerator@max", "machine": "gtceu:helium_refrigerator", "types": ["gtceu:closed_loop_cooling"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
+    {"partsFromStructure":true, "id": "gtceu:asteroid_processor@max", "machine": "gtceu:asteroid_processor", "types": ["gtceu:asteroid_processing"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" },
+    {"partsFromStructure":true, "id": "gtceu:accretion_disk_skimmer@max", "machine": "gtceu:accretion_disk_skimmer", "types": ["gtceu:disk_skimming"], "energy": { "voltage": 1073741824, "hatches": 2 }, "needs": ["eu:opv"], "package": "MAX-F1" }
       ],
   "machinesFromRegistry": [
     {
@@ -109,7 +109,6 @@
         "grindless:sgr_a_spin_map",
         "grindless:nsc_ephemeris",
         "grindless:shell_gradient_map",
-        "grindless:final_spin_map",
         "grindless:nsc_belt_seed",
         "grindless:launched_gc_probe",
         "fluid:gtceu:hot_flow_plasma",
@@ -146,9 +145,9 @@
       "era": "max-sgra",
       "label": "Sgr A* orbit (gate c14): the charts, the shell parts and the belt seed",
       "items": [
-        "grindless:sgr_a_spin_map", "grindless:nsc_ephemeris", "grindless:shell_gradient_map", "grindless:final_spin_map", "grindless:launched_gc_probe", "grindless:nsc_belt_seed",
+        "grindless:sgr_a_spin_map", "grindless:nsc_ephemeris", "grindless:shell_gradient_map", "grindless:launched_gc_probe", "grindless:nsc_belt_seed",
         "m:gtceu:geroch_winch", "m:gtceu:horizon_interferometer", "m:gtceu:ergoregion_synchroniser", "grindless:driver_ring_casing", "grindless:geroch_drum_casing", "grindless:geroch_canister", "grindless:horizon_tether",
-        "grindless:test_mass_enclosure_casing", "grindless:laser_link_casing", "grindless:cloud_phase_map"
+        "grindless:test_mass_enclosure_casing", "grindless:laser_link_casing"
       ]
     },
     {
@@ -156,7 +155,7 @@
       "era": "max-nsc",
       "label": "The belt (gate c15) and the ending",
       "items": [
-        "grindless:nsc_planetesimal", "grindless:horizon_lock",
+        "grindless:nsc_planetesimal", "grindless:horizon_lock", "grindless:final_spin_map", "grindless:cloud_phase_map",
         "m:gtceu:mass_stream_injector", "m:gtceu:mirror_shell", "m:gtceu:accretion_feeder", "m:gtceu:cluster_light_furnace", "m:gtceu:horizon_flux_clamp", "m:gtceu:segment_reclamation_works",
         "grindless:stream_bundle", "grindless:stream_pellet", "grindless:stream_bundle_block", "grindless:stream_turn_casing", "grindless:mirror_shell_segment", "grindless:feeder_coil_casing"
       ]
