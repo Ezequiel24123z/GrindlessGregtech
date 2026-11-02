@@ -9,7 +9,7 @@ const chapter = {
   subtitle: 'Thorium and nitrogen-15, superfluid helium, laser fusion fuel and fibre lasers, the ices of Pluto and closed life, EnTED wire, and the Starshot programme with the Kuiper belt.',
   icon: 'gtceu:pyroprocessing_cell',
   focus: 'pyro',
-  bands: [['thorium', 'beams'], ['pluto', 'ented'], ['starshot']],
+  bands: [['thorium', 'beams'], ['pluto', 'ented'], ['americium'], ['starshot']],
   clusters: {
     thorium: {
       name: 'Thorium, uranium-233 and nitrogen-15',
@@ -100,7 +100,7 @@ const chapter = {
         n('chamber', 26, -1.5, M('gtceu:laser_fusion_chamber'), 'Laser Fusion Chamber', {
           kind: 'ours', from: ['pb11', 'dhe3', 'laser'], desc: 'Fires a ring of fibre lasers at one capsule a shot. The lasers wear.',
         }),
-        n('alpha', 28.5, -2.25, F('gtceu:helium'), 'Helium', { kind: 'by', from: ['chamber'], end: 'the network: nothing is vented' }),
+        n('alpha', 28.5, -2.25, F('gtceu:helium'), 'Helium', { kind: 'product', from: ['chamber'], end: 'the network: nothing is vented' }),
         n('spentL', 28.5, -0.75, I('grindless:spent_laser_module'), 'Spent Laser Module', { kind: 'ret', from: ['chamber'], sub: 'Refurbished in the fibre draw tower' }),
         // fibre lasers
         n('preform', 16, 6, I('grindless:yb_doped_preform'), 'Doped Preform', { kind: 'raw', sub: 'Ytterbium glass laid inside a tube' }),
@@ -157,7 +157,26 @@ const chapter = {
         n('npu', 20, 3, I('gtceu:neuro_processing_unit'), 'Neuro Processing Unit', { kind: 'product', from: ['stem'], end: 'the wetware circuit line' }),
       ],
     },
-    ented: {
+    americium: {
+      name: 'Americium and neutronium',
+      nodes: [
+        n('pu', 0, -0.75, I('gtceu:plutonium_241_dust'), 'Plutonium-241', { kind: 'raw', sub: 'From IV\'s fission reactor' }),
+        n('h2', 0, 0.75, F('gtceu:hydrogen'), 'Hydrogen', { kind: 'raw' }),
+        n('mk3', 2.5, 0, M('gtceu:uv_fusion_reactor', 'gtceu:fusion_reactor'), 'Fusion Reactor Mk3', {
+          kind: 'ours', from: ['pu', 'h2'], desc: 'Fuses plutonium-241 with hydrogen into americium plasma.',
+        }),
+        n('aplasma', 5, 0, F('gtceu:americium_plasma'), 'Americium Plasma', { kind: 'product', from: ['mk3'] }),
+        n('pturb', 7.5, 0, M('gtceu:plasma_large_turbine', 'gtceu:plasma_generator'), 'Large Plasma Turbine', {
+          kind: 'ours', from: ['aplasma'], desc: 'Burns the plasma down to molten americium; its power goes to the network.',
+        }),
+        n('amf', 10, 0, F('gtceu:americium'), 'Molten Americium', { kind: 'product', from: ['pturb'] }),
+        n('naq', 10, 1.5, F('gtceu:naquadria'), 'Naquadria', { kind: 'raw' }),
+        n('mk3b', 12.5, 0.75, M('gtceu:uv_fusion_reactor', 'gtceu:fusion_reactor'), 'Fusion Reactor Mk3', {
+          kind: 'ours', from: ['amf', 'naq'], desc: 'Fuses americium with naquadria into neutronium.',
+        }),
+        n('neut', 15, 0.75, F('gtceu:neutronium'), 'Molten Neutronium', { kind: 'product', from: ['mk3b'], end: 'the UIV fusion reactor and the gravi star' }),
+      ],
+    },    ented: {
       name: 'EnTED wire',
       nodes: [
         L('lenq', 0, -0.75, 'pl_luv:enq'),
@@ -210,8 +229,8 @@ const chapter = {
         n('kwater', 30, 1.5, F('minecraft:water'), 'Water', { kind: 'by', from: ['anneal'], end: 'the network' }),
         n('noble', 30, 3, F('gtceu:kuiper_noble_gas'), 'Kuiper Noble Gas', { kind: 'product', from: ['anneal'], sub: 'Split in the cryogenic plant' }),
         n('kco', 30, 4.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'by', from: ['anneal'], end: 'the syngas plant' }),
-        n('kr', 32.5, 2.25, F('gtceu:krypton'), 'Krypton', {         kind: 'by', from: ['noble'], end: 'the Hall thruster' }),
-                n('xe', 32.5, 3.75, F('gtceu:xenon'), 'Xenon', { kind: 'by', from: ['noble'], end: 'the ion thruster' }),
+        n('kr', 32.5, 2.25, F('gtceu:krypton'), 'Krypton', { kind: 'product', from: ['noble'], end: 'the Hall thruster' }),
+        n('xe', 32.5, 3.75, F('gtceu:xenon'), 'Xenon', { kind: 'product', from: ['noble'], end: 'the ion thruster' }),
         // high-purity germanium
         L('lgedust', 0, 9, 'pl_luv:gedust'),
         n('zrt', 2.5, 9, M('gtceu:zone_refining_tower'), 'Zone Refining Tower', {
@@ -252,7 +271,8 @@ const chapter = {
         n('boule', 5, 18, I('grindless:sapphire_boule'), 'Sapphire Boule', { kind: 'product', from: ['sebf'] }),
         n('swafer', 7.5, 18, I('grindless:sapphire_wafer'), 'Sapphire Wafer', { kind: 'product', from: ['boule'], sub: 'Cut with lubricant' }),
         n('nbnw', 10, 18, I('grindless:nbn_film_wafer'), 'Niobium Nitride Film Wafer', { kind: 'product', from: ['swafer'], sub: 'Grown in the MOCVD reactor' }),
-        n('snspd', 12.5, 18, I('grindless:snspd_array'), 'SNSPD Array', { kind: 'product', from: ['nbnw'], sub: 'Cooled in the qubit fab; the downlink and the ground station take it' }),
+        n('qfab', 11.25, 18, M('gtceu:qubit_fab', 'gtceu:qubit_fabrication'), 'Qubit Fab', { kind: 'ours', from: ['nbnw'], desc: 'Cools the film into a nanowire detector array.' }),
+        n('snspd', 12.5, 18, I('grindless:snspd_array'), 'SNSPD Array', { kind: 'product', from: ['qfab'], sub: 'Cooled in the qubit fab; the downlink and the ground station take it' }),
         // synchrotron light and antimatter
         n('wafer', 0, 21, I('grindless:pmma_coated_wafer'), 'PMMA Wafer', { kind: 'raw', sub: 'Exposed through the X-ray mask' }),
         n('proton', 0, 22.5, I('gtca:proton'), 'Protons', { kind: 'raw', sub: 'From the COMET' }),
@@ -278,9 +298,11 @@ const chapter = {
         n('sailc', 27.5, 10.5, I('grindless:sailcraft'), 'Sailcraft', { kind: 'product', from: ['schip', 'lsail'] }),
         n('pprobe', 27.5, 13.5, I('grindless:precursor_probe'), 'Precursor Probe', { kind: 'product', from: ['rtg', 'pod', 'hpge'], sub: 'Built with a UV sensor and a printed frame' }),
         n('helio', 30, 13.5, I('grindless:heliopause_data'), 'Heliopause Data', { kind: 'product', from: ['pprobe', 'ican'], sub: 'Six thousand ticks at Pluto\'s orbit' }),
-        n('launch', 32.5, 12, I('grindless:starshot_probe'), 'Starshot Probe', { kind: 'product', from: ['sailc', 'helio', 'laser'], sub: 'Launched from the Moon' }),
+        n('lsl', 31, 12, M('gtceu:laser_sail_launcher', 'gtceu:laser_sail_launch'), 'Laser Sail Launcher', { kind: 'ours', from: ['sailc', 'helio', 'laser'], desc: 'Fires the fibre lasers at the sail from the Moon.' }),
+        n('launch', 32.5, 12, I('grindless:starshot_probe'), 'Starshot Probe', { kind: 'product', from: ['lsl'], sub: 'Launched from the Moon' }),
         n('spentS', 35, 10.5, I('grindless:spent_laser_module'), 'Spent Laser Module', { kind: 'ret', from: ['sailc'], sub: 'Refurbished in the fibre draw tower' }),
-        n('data', 35, 12, I('grindless:proxima_approach_data'), 'Proxima Approach Data', { kind: 'product', from: ['launch', 'snspd'], end: 'the Proxima rover survey and the warp gate' }),
+        n('gs', 33.5, 10.5, M('gtceu:optical_ground_station', 'gtceu:optical_downlink'), 'Optical Ground Station', { kind: 'ours', from: ['launch', 'snspd'], desc: 'Receives the probe over a superfluid-helium-cooled detector.' }),
+        n('data', 35, 12, I('grindless:proxima_approach_data'), 'Proxima Approach Data', { kind: 'product', from: ['gs'], end: 'the Proxima rover survey and the warp gate' }),
       ],
     },
   },
@@ -309,12 +331,12 @@ const TOGETHER = {
   tank: [14.5, 18], lsw: [-9.25, 12.25], wsf: [-7, 11], sepi: [-4.5, 10.75],
   lsf: [-1, 11.25], film: [2, 9.5], pat: [4.75, 9.75], lsail: [6, 12],
   sb: [9, -4.25], sebf: [13.5, -2.25], boule: [17, 0.5], swafer: [19.75, 2.5],
-  nbnw: [20.5, 7.25], snspd: [21.25, 5.25], wafer: [1.25, 7], proton: [2, 8.25],
+  nbnw: [20.5, 7.25], qfab: [23.5, 7.5], snspd: [24.5, 4.75], lsl: [18.5, 10.25], gs: [26.75, 8.75], wafer: [1.25, 7], proton: [2, 8.25],
   sync: [3.75, 5.5], exposed: [4.25, 3], chip: [6.25, 2.25], cart: [6.25, 9],
   trap: [8.75, 8.5], aptrap: [12.5, 9.5], ican: [14.75, 13], nv: [8.75, 1.25],
   nw: [6.75, 3.75], sfab: [10.75, 2], schip: [15.25, 3.75], relay: [18, 4.5],
-  sailc: [17, 7.5], pprobe: [15.5, 14.5], helio: [16.5, 13], launch: [20.25, 10.25],
-  spentS: [19.25, 4.5], data: [23.25, 6.25], laserB: [12.25, 3.75], laserC: [15.5, 11.25],
+  sailc: [17, 7.5], pprobe: [15.5, 14.5], helio: [16.5, 13], launch: [22, 10.5],
+  spentS: [19.25, 4.5], data: [30, 7], laserB: [12.25, 3.75], laserC: [15.5, 11.25],
   microC: [8, 5], rtgC: [11.5, 11.75], podC: [11.75, 14], hpgeC: [13.75, 16],
   lsailC: [14, 5.25],
 };
@@ -342,7 +364,7 @@ feed(parts, 'near', 'laser', 'laserB');
 probe.push(copy('laser', 'laserC', 'Made in the fibre laser line'), copy('micro', 'microC', 'Sealed in the heat source works'),
   copy('rtg', 'rtgC', 'Built in the heat source works'), copy('pod', 'podC', 'Fitted in the thruster works'),
   copy('hpge', 'hpgeC', 'Grown in the zone refining tower'), copy('lsail', 'lsailC', 'Released in the light sail fab'));
-feed(probe, 'launch', 'laser', 'laserC');
+feed(probe, 'lsl', 'laser', 'laserC');
 feed(probe, 'sailc', 'lsail', 'lsailC');
 feed(probe, 'sfab', 'micro', 'microC');
 feed(probe, 'pprobe', 'rtg', 'rtgC');
@@ -358,6 +380,6 @@ delete chapter.clusters.cold;
 chapter.clusters.starshot = { name: 'Superfluid helium, laser fusion fuel and fibre lasers', line: 'starshot', nodes: fusion };
 chapter.clusters.parts = { name: 'Heat sources, printed thrusters, the Kuiper belt, germanium, boron nitride and the light sail', line: 'starshot', nodes: parts };
 chapter.clusters.probe = { name: 'Detectors, antimatter, and the Starshot probe', line: 'starshot', nodes: probe };
-chapter.bands = [['thorium', 'beams'], ['pluto', 'ented'], ['starshot', 'parts', 'probe']];
+chapter.bands = [['thorium', 'beams'], ['pluto', 'ented'], ['americium'], ['starshot', 'parts', 'probe']];
 
 export default chapter;
