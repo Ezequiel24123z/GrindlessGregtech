@@ -26,7 +26,7 @@
 
   var UNITS = [
     { id: 'loom', machine: 'gtceu:meta_material_loom', cx: 46432, minEut: Number(GTValues.V[14]),
-      items: [['grindless:graded_horizon_laminate', 8], ['grindless:horizon_compressed_plate', 4]], fluid: ['gtceu:kerr_condensate', 4000], circuit: 1, out: 'grindless:horizon_shielding', outMin: 1 }
+      items: [['grindless:graded_horizon_laminate', 8], ['grindless:horizon_compressed_plate', 1]], fluid: ['gtceu:kerr_condensate', 4000], circuit: 1, out: 'grindless:horizon_shielding', outMin: 1 }
   ]
 
   var IDS = [
