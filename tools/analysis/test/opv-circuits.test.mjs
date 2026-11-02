@@ -182,7 +182,7 @@ test('the join: one photonic hall row, circuit 8, the only maker of gtnn:cosmic_
   const r = hall.find((x) => x.name === 'cosmic_mainframe');
   assert.ok(r);
   assert.equal(r.circuit, 8);
-  assert.deepEqual(r.itemsIn.map((x) => x.id), ['grindless:cryo_cmos_die', 'grindless:nb_tsv_interposer', 'grindless:cryo_optical_link', 'grindless:hemt_amplifier']);
+  assert.deepEqual(r.itemsIn.map((x) => x.id), ['grindless:cryo_cmos_die', 'grindless:nb_tsv_interposer', 'grindless:cryo_optical_link', 'grindless:hemt_amplifier', '#gtceu:circuits/uxv']);
   assert.ok(r.itemsIn.length + 1 <= 8 && r.itemsOut.length <= 2, 'within the hall slots');
   assert.deepEqual(r.itemsOut, [{ id: 'gtnn:cosmic_mainframe', count: 1 }]);
   assert.equal(new Set(hall.map((x) => x.circuit)).size, hall.length, 'no circuit twice');

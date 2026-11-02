@@ -146,11 +146,10 @@ test('the array grows organoids on Earth and makes 4 wetware mainframes per run 
   assert.deepEqual(plain(W.clashes), []);
   const array = recipes.filter((r) => r.type === 'organoid_computing');
   assert.deepEqual(array.map((r) => r.args[0]), ['grindless:organoid', 'grindless:mainframe']);
-  for (const r of array) {
-    assert.deepEqual(call(r.calls, 'dimension'), [['minecraft:overworld']], `${r.args[0]}: Earth only`);
-    assert.equal(only(r.calls, 'EUt'), 1966080);
-  }
+  for (const r of array) assert.equal(only(r.calls, 'EUt'), 1966080);
   const [organoid, mainframe] = array;
+  assert.deepEqual(call(organoid.calls, 'dimension'), [['minecraft:overworld']], 'the culture is Earth-only');
+  assert.deepEqual(call(mainframe.calls, 'dimension'), [], 'the mainframe step uses no place (rule 10)');
   assert.equal(only(organoid.calls, 'circuit'), 1);
   assert.deepEqual(call(organoid.calls, 'itemInputs').flat(), ['4x gtceu:stem_cells', '1x grindless:chitosan_scaffold']);
   assert.deepEqual(call(organoid.calls, 'inputFluids').flat(), [{ id: 'gtceu:ultrapure_water', amount: 1000 }, { id: 'gtceu:sterilised_growth_medium', amount: 1000 }]);
