@@ -1,3 +1,4 @@
+// priority: -5156
 // TEST ONLY, B13-DIAL (#238; gtceu:hyperstargate, one dial per team). Commands: kubejs custom_command gg_test_maxplus_dial (leg 1), then, after an
 // `@restart`, kubejs custom_command gg_test_maxplus_dial_2 (leg 2).
 // Band ONLY: X 49152-49215, Z 0-63, Y 98-160 of gcyr:black_hole_orbit (Sgr A*) (zones.json row maxplus_dial). No startup overlay.
