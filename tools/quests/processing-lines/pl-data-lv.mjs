@@ -61,6 +61,7 @@ export default {
         }),
         n('galena', 6, 6, I('gtceu:galena_dust'), 'Galena Dust', { kind: 'raw', sub: 'Roasted for silver' }),
         n('silveringot', 12, 5, I('gtceu:silver_ingot'), 'Silver', { from: ['galena'], sub: 'The roaster and a furnace' }),
+        n('lead', 12, 7, I('gtceu:lead_dust'), 'Lead', { kind: 'dest', from: ['galena'], sub: 'Galena\'s other half: solder and batteries' }),
         n('sfoil', 18, 5, I('gtceu:silver_foil'), 'Silver Foil', { from: ['silveringot'], sub: 'Bender' }),
         n('pcbase', 18, 3, I('gtceu:phenolic_circuit_board'), 'Phenolic Board', { kind: 'raw', sub: 'Wood dust and glue' }),
         n('board', 22, 0.5, I('gtceu:phenolic_printed_circuit_board'), 'Etched Board', {
