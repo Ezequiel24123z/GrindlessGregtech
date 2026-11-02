@@ -78,6 +78,7 @@ const LAYOUT = {
   PATERA: [15, 6, null],
   PATQ: [16.5, 6, null],
   TORUS: [18, 6.5, null],
+  IODINE: [17, 8, null],
   FUSION: [18.5, 8, null],
   CRYO: [16.5, 4, null],
   ALIVE: [18.5, 4.5, null],
