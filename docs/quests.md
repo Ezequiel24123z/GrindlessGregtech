@@ -122,15 +122,13 @@ The grid is FTB Quests' grid: one square = one unit of `x`/`y`.
 
 ### Starter equipment
 
-Arrival gives a diamond pickaxe, axe, shovel and hoe with Efficiency V, a Field Prospector (HV), a stack of bread and the original torches. These are ordinary FTB item rewards, not login grants. The neutronium toolbox stays where it was.
+Arrival gives a diamond pickaxe, axe, shovel and hoe with Efficiency V, a fully charged HV Prospector, a stack of bread and the original torches. These are ordinary FTB item rewards, not login grants. The neutronium toolbox stays where it was.
 
 The bread comes as two rewards (8 under `21A6FB493B3D6DA8`, then 56), left over from keeping old worlds claimable. There are no saves to protect, so Phase 5 may merge them. Arrival is an explicit exception to the reward-count limit.
 
-The gifted `gtceu:prospector.hv` carries `grindless_starter_prospector: 1b`. Its right-click queries GTM 7.5.3's saved vein cache and calls its public `prospectByDepositName` once per matching deposit type; GTM sends its native ore-discovery packets to the installed map integrations. This avoids KubeJS's blocked network classes without bypassing the class filter. Open the map and enable **Ore Veins**. The query includes vein centres within **256 blocks in both X and Z**, inclusive, relative to the player's block position: a square with a real 16-chunk reach in every cardinal direction, not a 16-chunk-wide display. Results are delivered immediately, with a half-second cooldown between uses. No EU is spent, even with zero charge; no infinite-charge flag or electric capability is changed. Native HV tools cannot export charge, and crafted prospectors remain unchanged.
+The gifted prospector is an ordinary `gtceu:prospector.hv` with `Charge: 1600000` (full, 1.6 MEU), and Grindless adds no scripts, tags or names to it. It works as in GregTech 1.12.2 through GTM 7.5.3's own prospecting GUI: right-click opens the map window, which scans the 7x7 chunks around you (radius 4), one chunk per tick, and draws ore veins and fluid deposits on the grid; sneak and right-click cycles ore and fluid modes. The overlay also feeds the installed map mod's **Ore Veins** layer.
 
-This is a **survey of generated terrain**, including saved veins whose chunks are currently unloaded. It does not generate or load chunks, predict ungenerated deposits, scan stray placed ore blocks, or replace the normal prospector's fluid modes. Empty results say there is no cached survey data, not that the ground has no ores. Results are native ore-overlay markers, not automatically created waypoints. GTM persists both its server vein metadata and the discovered client map data.
-
-Why not enlarge the native scanner window: GTM 7.5.3's `ProspectorScannerBehavior#createUI` fixes it at 332x200, while a radius of 16 needs a 528-pixel-wide map and makes the sidebar width negative. Its `ProspectingMapWidget` also calls `getChunk` and scans every block in 1,089 chunks, one chunk per tick. The existing `ServerCache#getNearbyVeins` / `SPacketProspectOre` path already provides the safe, immediate survey and native map markers; there is no custom worldgen, energy implementation or compiled compatibility mod. See `CREDITS.md` for the pinned source.
+The GUI drains 32 EU per tick while open and closes when the charge runs out, so a full charge allows about 1,000 quick scans. Recharge it in an HV charger or battery buffer. A scan reads generated terrain and does not predict ungenerated ground.
 
 ### Unbreakable tools: how it is done
 
