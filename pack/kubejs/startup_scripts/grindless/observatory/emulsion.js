@@ -1,3 +1,4 @@
+// priority: -6350
 // -----------------------------------------------------------------------------------------------
 // Silver halide emulsion of the photographic plate (docs/eras/lines-steam-hv.md, line L2). GTM 7.5.3, GT-- and GTCA register none of these:
 //   gtceu:silver_nitrate_dust, gtceu:silver_chloride_dust, fluid gtceu:photographic_emulsion.

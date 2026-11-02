@@ -6,8 +6,10 @@
 // naquadah plant (iv/naquadah_plant.js).
 //
 // What it does, for a plan { stages: [recipe ids], given: { key: amount }, linked: [keys] }:
-//   1. gather(event, ids, opts) reads the stage recipes from ServerEvents.recipes' ORIGINAL recipes (their JSON), so the numbers are the
-//      ones of the loaded pack, never typed by hand. A GT recipe gives its EU/t (tickInputs.eu), duration and item and fluid contents
+//   1. gather(event, ids, opts) reads the stage recipes LIVE from ServerEvents.recipes: the original recipes plus the ones scripts added, without the
+//      removed ones, each added or edited recipe serialized first (their JSON). So the numbers are the ones of the pack as the scripts leave
+//      it, never typed by hand. Every user runs in band -200 (tools/analysis/script_order.json), after every script that adds, removes or
+//      edits a recipe. A wanted stage that a script removed comes back as { id, error: 'removed by a script' }. A GT recipe gives its EU/t (tickInputs.eu), duration and item and fluid contents
 //      (the programmed circuit is left out; a chanced input or output counts as chance / maxChance of one run). A vanilla smelting recipe
 //      (minecraft:smelting) is read as GTM's electric furnace runs it (GTRecipeType#toGTrecipe: the cooking time as duration, at the
 //      furnace's EU/t, which the caller reads from GTM and passes as opts.furnaceEUt).
@@ -198,16 +200,23 @@
     return { id: id, eut: eut, duration: duration, v: v }
   }
 
-  // every wanted stage, by recipe id, from the event's original recipes: { steps: { id: stage or { id, error } }, read: parsed ones }
+  // every wanted stage, by recipe id, as the scripts that ran before leave it (original and added recipes, removed ones skipped, an
+  // added or edited recipe serialized first): { steps: { id: stage or { id, error } }, read: parsed ones }
   function gather(event, ids, opts) {
     var steps = {}
     var wanted = {}
     ids.forEach(function (id) { wanted[String(id)] = true })
     var read = 0
-    event.originalRecipes.values().forEach(function (r) {
+    var removed = {}
+    function take(r, added) {
       var id = recipeId(r)
       if (wanted[id] !== true) return
+      if (r.removed) {
+        removed[id] = true
+        return
+      }
       try {
+        if (added || r.hasChanged()) r.serialize()
         if (r.json === null || r.json === undefined) return
         var j = JSON.parse(String(r.json))
         if (opts && typeof opts.patch === 'function') j = opts.patch(id, j) || j
@@ -217,6 +226,11 @@
       } catch (e) {
         steps[id] = { id: id, error: 'unreadable recipe: ' + e }
       }
+    }
+    event.originalRecipes.values().forEach(function (r) { take(r, false) })
+    event.addedRecipes.forEach(function (r) { take(r, true) })
+    Object.keys(removed).forEach(function (id) {
+      if (steps[id] === undefined) steps[id] = { id: id, error: 'removed by a script' }
     })
     return { steps: steps, read: read }
   }
