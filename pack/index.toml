@@ -17722,7 +17722,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "a3e5adfc93d2972f7ab41d96233f93ad40508e6de6f89cc5d4ef617942f98310"
+hash = "e27ae77c669d50526829613b637882fa40975cd3c662b013af71c83c1d1e283f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_city.json"
