@@ -571,13 +571,13 @@ export default gate({
     zpmMk2: {
       name: 'Fusion Reactor Mk2',
       nodes: [
-        E('eqMk2', 0, -0.75, 'zpm_age', '38199670D4113E48'),
-        E('eqDec', 0, 0.75, 'zpm_age', '7E64F29B6EE66B09'),
-        n('zpmFusion', 2.25, -0.75, M('gtceu:zpm_fusion_reactor'), 'Fusion Reactor Mk2', {
+        E('eqMk2', 2.25, 0, 'zpm_age', '38199670D4113E48'),
+        E('eqDec', 2.25, 1.5, 'zpm_age', '7E64F29B6EE66B09'),
+        n('zpmFusion', 4.5, -1.5, M('gtceu:zpm_fusion_reactor'), 'Fusion Reactor Mk2', {
           kind: 'info', tier: 'zpm', from: ['eqMk2'], sub: 'Deuterium and helium-3 from Saturn; the plasma goes to a turbine or the converter',
           desc: 'Helium-3 fusion needs no tritium. Its plasma is worth more in the direct energy converter than in a turbine.',
         }),
-        n('zpmConv', 2.25, 0.75, I('gtceu:direct_energy_converter'), 'Direct Energy Converter', {
+        n('zpmConv', 4.5, 1.5, I('gtceu:direct_energy_converter'), 'Direct Energy Converter', {
           kind: 'info', tier: 'zpm', from: ['eqDec'], sub: 'Takes the charge off the plasma with no turbine',
           desc: 'The cooled gas comes back out, so only the heat is lost.',
         }),
