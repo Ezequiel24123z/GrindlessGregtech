@@ -72,7 +72,7 @@ export const QUESTS = [
     deps: ['S3_TREE'], x: -1.5, y: -3.5,
     teach: {
       for: 'The &6Horizon Capacitor Bank&r is a ring of capacitors that adds its capacity to your network. It stores; it never makes energy. The dial only starts when the formed banks hold at least one dial of charge.',
-      needs: 'Capacitors in a ring, at Sgr A* orbit only. The network's generators fill it, and some charge is lost on the way in.',
+      needs: 'Capacitors in a ring, at Sgr A* orbit only. The network\'s generators fill it, and some charge is lost on the way in.',
       unlocks: 'The dial.',
       automate: 'Charge it long before the dial. A big plant refills it in minutes, a small one in days.',
     },

@@ -71,7 +71,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the bound-matter press
   gear('MA_PRESS', 'bound_matter_press', 'Bound-Matter Press', ['MA_L_SETTLED'], 3.5, 0, {
     for: 'The &6Bound-Matter Press&r makes the compressed plate, and a laminate, in numbers no other machine can reach. It runs anywhere.',
-    needs: 'The MAX hull, a block of bound press casing, and bound ingots from the refinery. Parts and wear are explained in the casing's tooltip.',
+    needs: 'The MAX hull, a block of bound press casing, and bound ingots from the refinery. Parts and wear are explained in the casing\'s tooltip.',
     unlocks: 'Horizon compressed plate by the ten thousand, and graded laminate for shielding.',
     automate: 'Feed ingots by ME and send the plates onward on a belt; the press flash goes back to its own input.',
   }, [it('grindless:bound_press_casing')]),
