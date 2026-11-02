@@ -19,7 +19,7 @@ export const CHAPTER = {
 export const QUESTS = [
   {
     key: "IV_HOT_CELL", id: "30D78F6EB49AF27B", kind: "machine", title: "Hot Cell", icon: "gtceu:hot_cell",
-    deps: ["IV_H_MACHINES", "IV_FUEL_FABRICATION_PLANT"], x: 5.5, y: -1.5,
+    deps: ["IV_FUEL_FABRICATION_PLANT"], x: 5.5, y: -1.5,
     teach: {
       for: "The &6Hot Cell&r is where uranium stops being something you carry around.",
       needs: "Its controller, which takes a Zircaloy cladding tube pressed at the Fuel Fabrication Plant, and Radiation-Proof Machine Casing, lead-heavy blocks from the IV assembler, set in concrete.",
@@ -45,7 +45,7 @@ export const QUESTS = [
   },
   {
     key: "IV_FUEL_FABRICATION_PLANT", id: "77A25AB4BB859C79", kind: "machine", title: "Fuel Fabrication Plant", icon: "gtceu:fuel_fabrication_plant",
-    deps: ["IV_FISSION_REACTOR"], x: 17.25, y: 0.75,
+    deps: ["IV_H_MACHINES"], x: 4, y: -3,
     teach: {
       for: "Real fuel is pellets in metal tubes, pressed, sintered and sealed with helium, and the &6Fuel Fabrication Plant&r does the whole line.",
       needs: "Its controller, built around an IV assembler. Maybe make two.",
