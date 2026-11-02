@@ -54,10 +54,10 @@
       items: ['8x grindless:kerr_strange_ingot'], fluids: [], outs: ['4x grindless:kerr_strange_plate'], fluidOuts: [[KERR, 2000]] },
     // XP-H1 (line T4 step 3, c4): horizon plate and Gd-HfB2 cermet pressed into the graded laminate the loom's c1 weaves
     { type: 'bound_matter_press', key: 'grindless_bound_matter_press', name: 'graded_horizon_laminate', circuit: 4, eut: V_MAX * 16, duration: 1200,
-      items: ['4x grindless:horizon_compressed_plate', '4x grindless:gd_hfb2_cermet'], fluids: [], outs: ['2x grindless:graded_horizon_laminate'], fluidOuts: [[KERR, 2000]] },
+      items: ['4x grindless:gd_hfb2_cermet'], kept: ['grindless:horizon_compressed_plate'], fluids: [], outs: ['2x grindless:graded_horizon_laminate'], fluidOuts: [[KERR, 2000]] },
     // XP-H3 (line T1 step 3, c3): the Gd absorber tile and graded Z billet pressed into the laminated core the assembler's c1 uses
     { type: 'bound_matter_press', key: 'grindless_bound_matter_press', name: 'laminated_containment_core', circuit: 3, eut: V_MAX * 16, duration: 1200,
-      items: ['4x grindless:horizon_compressed_plate', '4x grindless:gd_absorber_tile', '2x grindless:graded_z_billet'], fluids: [], outs: ['2x grindless:laminated_containment_core'], fluidOuts: [[KERR, 2000]] }
+      items: ['4x grindless:gd_absorber_tile', '2x grindless:graded_z_billet'], kept: ['grindless:horizon_compressed_plate'], fluids: [], outs: ['2x grindless:laminated_containment_core'], fluidOuts: [[KERR, 2000]] }
   ]
 
   // GTM rows at home: the empty cell shell and the two casings (no input comes from the machines' own lines)
@@ -104,7 +104,7 @@
   ServerEvents.recipes(function (event) {
     ROWS.forEach(function (r) {
       try {
-        var missing = missingOf(r.items.concat(r.outs), fluidIds(r.fluids).concat(fluidIds(r.fluidOuts)))
+        var missing = missingOf(r.items.concat(r.kept || [], r.outs), fluidIds(r.fluids).concat(fluidIds(r.fluidOuts)))
         if (missing.length > 0) {
           skip(r.type + '/' + r.name, missing)
           return
@@ -112,6 +112,7 @@
         var b = event.recipes.gtceu[r.type]('grindless:' + r.name)
         b.circuit(r.circuit)
         r.items.forEach(function (s) { b.itemInputs(s) })
+        ;(r.kept || []).forEach(function (s) { b.notConsumable(s) })
         r.fluids.forEach(function (f) { b.inputFluids(Fluid.of(f[0], f[1])) })
         r.outs.forEach(function (s) { b.itemOutputs(s) })
         r.fluidOuts.forEach(function (f) { b.outputFluids(Fluid.of(f[0], f[1])) })

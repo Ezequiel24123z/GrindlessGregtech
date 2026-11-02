@@ -27,7 +27,7 @@
 
   var UNITS = [
     { id: 'assembler', machine: 'gtceu:condensate_assembler', cx: 46496, minEut: Number(GTValues.V[14]) * 256,
-      items: [['grindless:laminated_containment_core', 32], ['grindless:horizon_compressed_plate', 16], ['grindless:kerr_strange_plate', 8]], fluid: ['gtceu:kerr_condensate', 200000], circuit: 1, out: 'grindless:horizon_containment_plate', outMin: 1 }
+      items: [['grindless:laminated_containment_core', 32], ['grindless:horizon_compressed_plate', 1], ['grindless:kerr_strange_plate', 8]], fluid: ['gtceu:kerr_condensate', 200000], circuit: 1, out: 'grindless:horizon_containment_plate', outMin: 1 }
   ]
 
   var IDS = [

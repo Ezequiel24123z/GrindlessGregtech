@@ -131,10 +131,10 @@
   var ASM_KEY = 'grindless_condensate_assembler'
   var ASM = [
     { type: 'condensate_assembler', name: 'horizon_containment_plate', circuit: 1, eut: ASM_EUT, duration: 1200, key: ASM_KEY,
-      items: [['grindless:laminated_containment_core', 32], ['grindless:horizon_compressed_plate', 16], ['grindless:kerr_strange_plate', 8]], fluids: [[KERR, 200000]],
+      items: [['grindless:laminated_containment_core', 32], ['grindless:kerr_strange_plate', 8]], kept: [['grindless:horizon_compressed_plate', 1]], fluids: [[KERR, 200000]],
       outs: [['grindless:horizon_containment_plate', 1], ['grindless:condensate_boil_off', 4]] },
     { type: 'condensate_assembler', name: 'chevron_core', circuit: 2, eut: ASM_EUT, duration: 1800, key: ASM_KEY,
-      items: [['grindless:zone_plate_wafer', 16], ['grindless:multilayer_xray_mirror', 16], ['grindless:gamma_focus_element', 8], ['grindless:horizon_compressed_plate', 16]], fluids: [[KERR, 300000]],
+      items: [['grindless:zone_plate_wafer', 16], ['grindless:multilayer_xray_mirror', 16], ['grindless:gamma_focus_element', 8]], kept: [['grindless:horizon_compressed_plate', 1]], fluids: [[KERR, 300000]],
       outs: [['grindless:chevron_core', 1], ['grindless:condensate_boil_off', 4]] },
     { type: 'condensate_assembler', name: 'horizon_mesh', circuit: 3, eut: ASM_EUT, duration: 2400, key: ASM_KEY,
       items: [['grindless:coated_mesh', 24], ['grindless:kerr_strange_plate', 16], ['grindless:kerr_clad_strand', 16]], fluids: [[KERR, 500000]],

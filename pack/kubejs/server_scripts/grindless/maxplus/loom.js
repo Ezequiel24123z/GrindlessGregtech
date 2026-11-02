@@ -82,16 +82,16 @@
   // the loom's own rows: bound plates, Kerr strand and condensate woven into the four meta-materials; the boil-off goes back to the refinery's c10
   var LOOM = [
     { type: 'meta_material_loom', name: 'horizon_shielding', circuit: 1, eut: LOOM_EUT, duration: 600, key: 'grindless_meta_material_loom',
-      items: [['grindless:graded_horizon_laminate', 8], ['grindless:horizon_compressed_plate', 4]], fluids: [[KERR, 2000]],
+      items: [['grindless:graded_horizon_laminate', 8]], kept: [['grindless:horizon_compressed_plate', 1]], fluids: [[KERR, 2000]],
       outs: [['grindless:horizon_shielding', 1], ['grindless:condensate_boil_off', 2]] },
     { type: 'meta_material_loom', name: 'horizon_waveguide', circuit: 2, eut: LOOM_EUT, duration: 600, key: 'grindless_meta_material_loom',
       items: [['grindless:nb_lined_tube', 4], ['grindless:kerr_strand_wire', 8], ['grindless:kerr_strange_plate', 4]], fluids: [[KERR, 4000]],
       outs: [['grindless:horizon_waveguide', 1], ['grindless:condensate_boil_off', 2]] },
     { type: 'meta_material_loom', name: 'horizon_conduit', circuit: 3, eut: LOOM_EUT, duration: 600, key: 'grindless_meta_material_loom',
-      items: [['grindless:cabled_conductor', 4], ['grindless:kerr_braid_sleeve', 4], ['grindless:horizon_compressed_plate', 4]], fluids: [[KERR, 4000]],
+      items: [['grindless:cabled_conductor', 4], ['grindless:kerr_braid_sleeve', 4]], kept: [['grindless:horizon_compressed_plate', 1]], fluids: [[KERR, 4000]],
       outs: [['grindless:horizon_conduit', 1], ['grindless:condensate_boil_off', 2]] },
     { type: 'meta_material_loom', name: 'horizon_valve_body', circuit: 4, eut: LOOM_EUT, duration: 600, key: 'grindless_meta_material_loom',
-      items: [['grindless:calibrated_condensate_leak', 4], ['grindless:kerr_strange_plate', 8], ['grindless:horizon_compressed_plate', 4]], fluids: [[KERR, 4000]],
+      items: [['grindless:calibrated_condensate_leak', 4], ['grindless:kerr_strange_plate', 8]], kept: [['grindless:horizon_compressed_plate', 1]], fluids: [[KERR, 4000]],
       outs: [['grindless:horizon_valve_body', 1], ['grindless:condensate_boil_off', 2]] }
   ]
 
