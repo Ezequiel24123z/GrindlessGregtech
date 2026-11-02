@@ -20,6 +20,16 @@ function ioNeeds(n) {
 }
 import { asArray, makeGlobMatcher } from './util.mjs';
 
+// A pattern block that is a fluid source (a pool the machine sits in) is placed with its bucket: there is no such item.
+const FLUID_BUCKETS = { 'minecraft:water': 'minecraft:water_bucket', 'minecraft:lava': 'minecraft:lava_bucket' };
+function bucketedFluidBlocks(desc) {
+  const symbols = {};
+  for (const [ch, s] of Object.entries(desc.symbols || {})) {
+    symbols[ch] = s && s.kind === 'blocks' ? { ...s, blocks: (s.blocks || []).map((b) => FLUID_BUCKETS[b] || b) } : s;
+  }
+  return { ...desc, symbols };
+}
+
 export function prepareConfig(raw) {
   const cfg = { ...raw };
   cfg.unconditionalTypes = new Set(raw.unconditionalTypes || []);
@@ -494,7 +504,7 @@ export function buildModel(dump, rawCfg0) {
       if (desc) {
         // the machine's `partAbilities` (e.g. requiring the MV hatch) overrides the tier's key by key
         const abilityItems = e.partAbilities ? { ...cfg.partAbilities, ...e.partAbilities } : cfg.partAbilities;
-        const sd = structureSelectors(desc, abilityItems, (i) => dump.items.size === 0 || dump.items.has(i));
+        const sd = structureSelectors(bucketedFluidBlocks(desc), abilityItems, (i) => dump.items.size === 0 || dump.items.has(i));
         for (const p of sd.problems) warnings.push(`${id}: ${p}`);
         partSels = sd.selectors;
         // I/O abilities the pattern offers (M4-02): a recipe whose items or fluids need an ability the pattern lacks can't run here
