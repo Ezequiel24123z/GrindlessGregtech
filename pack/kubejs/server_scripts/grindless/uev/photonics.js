@@ -193,13 +193,15 @@
     var HULL = 'gtceu:uhv_machine_hull'
     var C = '4x #gtceu:circuits/uhv'
     // QR-R6: assembly line with station research (a component, then the previous machine), the era fluid and domain inputs of the line
+    // AF-CC (M2-05): built before the UEV hull, so like a UHV controller: 3 UHV component families x 3 (they took 2 UV parts and cost less
+    // than every UHV controller)
     var defs = [
-      { machine: UP.machines.snspd.machine, name: UP.machines.snspd.name, part: 'gtceu:uv_sensor', research: 'grindless:sdd', era: 'gtceu:neutronium',
-        ins: [HULL, '2x gtceu:uv_sensor', C, 'grindless:fz_silicon_wafer', 'grindless:annealed_sin_chip', 'grindless:sdd'] },
-      { machine: UP.machines.stacker.machine, name: UP.machines.stacker.name, part: 'gtceu:uv_robot_arm', research: UP.machines.snspd.machine, era: 'gtceu:tritanium',
-        ins: [HULL, '2x gtceu:uv_robot_arm', C, '2x grindless:annealed_hbn_film', 'grindless:graphene_film', 'grindless:hbn_film'] },
-      { machine: UP.machines.hall.machine, name: UP.machines.hall.name, part: 'gtceu:uv_emitter', research: UP.machines.stacker.machine, era: 'gtceu:neutronium',
-        ins: [HULL, '2x gtceu:uv_emitter', C, 'grindless:qd_source', 'grindless:graphene_modulator', 'grindless:annealed_sin_chip'] }
+      { machine: UP.machines.snspd.machine, name: UP.machines.snspd.name, part: 'gtceu:uhv_sensor', research: 'grindless:sdd', era: 'gtceu:neutronium',
+        ins: [HULL, '3x gtceu:uhv_sensor', '3x gtceu:uhv_emitter', '3x gtceu:uhv_electric_pump', C, 'grindless:fz_silicon_wafer', 'grindless:annealed_sin_chip', 'grindless:sdd'] },
+      { machine: UP.machines.stacker.machine, name: UP.machines.stacker.name, part: 'gtceu:uhv_robot_arm', research: UP.machines.snspd.machine, era: 'gtceu:tritanium',
+        ins: [HULL, '3x gtceu:uhv_robot_arm', '3x gtceu:uhv_conveyor_module', '3x gtceu:uhv_electric_piston', C, '2x grindless:annealed_hbn_film', 'grindless:graphene_film', 'grindless:hbn_film'] },
+      { machine: UP.machines.hall.machine, name: UP.machines.hall.name, part: 'gtceu:uhv_emitter', research: UP.machines.stacker.machine, era: 'gtceu:neutronium',
+        ins: [HULL, '3x gtceu:uhv_emitter', '3x gtceu:uhv_sensor', '3x gtceu:uhv_electric_motor', C, 'grindless:qd_source', 'grindless:graphene_modulator', 'grindless:annealed_sin_chip'] }
     ]
     UP.controllerRecipes = []
     defs.forEach(function (d) {
