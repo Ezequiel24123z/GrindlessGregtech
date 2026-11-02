@@ -439,11 +439,35 @@
       : 'no ' + st.out[0] + ' after ' + (S.tick - S.stageStart) + ' ticks; output ' + JSON.stringify(got) + '; casing tier ' + tierOf(S.ctrl) + '; failures=' + failureText(S.ctrl))
     if (!ok) {
       note('stage_' + st.name + '_state', 'inputs ' + JSON.stringify(fluidsIn(S.P.hatchIn)) + '; bus ' + S.P.busIn.map(function (b) { return String(b.getInventory().getStackInSlot(0)) }).join(',') + '; catalyst hatches ' + S.P.catalyst.length + '; recipe status ' + (function () { try { return String(S.ctrl.getRecipeLogic().getStatus()) } catch (e) { return 'unreadable' } })())
+      diagnose(st)
       S.stage = STAGES.length; finish(); return true
     }
     // the next stage starts from what this one made: move the product into the carried pool
     S.carried = { id: st.out[0], amount: takeFluid(S.P.hatchOut, st.out[0], st.out[1]) }
     return true
+  }
+
+  // why a stage did not start: the plant's own answers for the stage's recipe
+  function diagnose(st) {
+    var ids = { eaq: 'ethyl_anthra_quinone', eahq: 'ethyl_anthra_hydro_quinone', peroxide: 'hydrogen_peroxide_air', hydrazine: 'hydrazine' }
+    var found = S.server.getRecipeManager().byKey(new (classes().RL)('gtceu:chemical_plant/' + ids[st.name]))
+    if (!found.isPresent()) { note('diag', 'recipe not found'); return }
+    var r = found.get()
+    var logic = S.ctrl.getRecipeLogic()
+    var tries = {
+      match: function () { var m = r.matchRecipe(S.ctrl); return String(m.isSuccess()) + ' ' + String(m.reason()) },
+      conditions: function () { var m = r.checkConditions(logic); return String(m.isSuccess()) + ' ' + String(m.reason()) },
+      tickMatch: function () { var m = r.matchTickRecipe(S.ctrl); return String(m.isSuccess()) + ' ' + String(m.reason()) },
+      found: function () { var x = S.ctrl.getRecipeType().getLookup().findRecipe(S.ctrl); return x ? String(x.id) : 'none' },
+      tier: function () { return String(S.ctrl.getTier()) + ' maxV ' + String(S.ctrl.getMaxVoltage ? S.ctrl.getMaxVoltage() : '?') },
+      eut: function () { return String(r.getInputEUt()) },
+      outHatches: function () { return S.P.hatchOut.map(function (h) { return idOf(h) + ' ' + JSON.stringify(fluidsIn([h])) }).join(', ') }
+    }
+    Object.keys(tries).forEach(function (k) {
+      var v
+      try { v = tries[k]() } catch (e) { v = 'threw ' + String(e).substring(0, 150) }
+      note('diag_' + k, v)
+    })
   }
 
   // a stage's 'prev' fluid is the earlier stage's product: it is moved, not conjured, up to what that stage made
