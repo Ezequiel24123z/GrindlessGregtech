@@ -33,7 +33,7 @@ test('conditions: an explicit ignore (type or wildcard) lets the recipe through'
 });
 
 test('conditions: a reversed condition is not modelled unless ignored', () => {
-  const conditions = { weird_gate: { unsupported: true } };
+  const conditions = { weird_gate: { needs: 't:rocket' } };
   assert.equal(verdicts(condPack({ conds: [{ type: 'weird_gate' }], conditions }).out.gate).out, 'PASS');
   assert.equal(verdicts(condPack({ conds: [{ type: 'weird_gate', reverse: true }], conditions }).out.gate).out, 'FAIL');
   assert.equal(verdicts(condPack({ conds: [{ type: 'weird_gate', reverse: true }], conditions: { weird_gate: { ignore: true } } }).out.gate).out, 'PASS');
@@ -70,8 +70,8 @@ test('energy.amperage multiplies the machine\'s EU/t ceiling and is recorded in 
 
 function ioPack({ abilities, ins = [gi('t:in')], fins = [], outs = [gi('t:out')], fouts = [] }) {
   const symbols = { S: { kind: 'controller' }, C: { kind: 'blocks', blocks: ['t:casing'] } };
-  abilities.forEach((a, i) => { symbols['P' + i] = { kind: 'part', ability: a, limits: { min: 1, max: 1 } }; });
-  const structures = { 't:m': { id: 't:m', slices: [['S' + abilities.map((_, i) => 'P' + i).join('') + 'C']], symbols } };
+  abilities.forEach((a, i) => { symbols['abcd'[i]] = { kind: 'part', ability: a, limits: { min: 1, max: 1 } }; });
+  const structures = { 't:m': { id: 't:m', slices: [['S' + abilities.map((_, i) => 'abcd'[i]).join('') + 'C']], symbols } };
   const recipes = [gt('t:r', 't:type', { ins, fins, outs, fouts, eut: 8 })];
   const cfg = {
     tier: 'lv',
