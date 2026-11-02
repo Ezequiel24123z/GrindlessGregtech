@@ -1,4 +1,4 @@
-﻿// Quest data for opv_age ("OpV: The Galactic Bulge"), the journey chapter: the bulge relay, SGR 1806-20, Cygnus X-1 again, Terzan 5 and the gate
+// Quest data for opv_age ("OpV: The Galactic Bulge"), the journey chapter: the bulge relay, SGR 1806-20, Cygnus X-1 again, Terzan 5 and the gate
 // (docs/reforge/05_quest_design.md, sections 2 and 3.2; docs/eras/opv.md, "Route", "Places and site rules", "Quests", "Gate to MAX").
 // The era's machines, circuits, wafers and components are in opv_machines and opv_circuits (RF-5Q-OpVb); the power plants, the parallel hatch,
 // the network and the older machines' new modes are in opv_integration. A quest that asked for a machine and its product stays here as a product
