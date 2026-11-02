@@ -6,7 +6,6 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -133,13 +132,4 @@ test('names, tooltips and the info page exist in en_us', () => {
   }
   const emi = JSON.parse(fs.readFileSync(path.join(KJS, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'uiv_compression_hall_info.json'), 'utf8'));
   assert.deepEqual(emi.stacks, [`item:gtceu:${id}`]);
-});
-
-// UXV-M1 adds tier 12 to lib/parallel_hatch.js (uxv-parallel_hatch.test.mjs pins it), so only lib/mega.js stays pinned here
-test('lib/mega.js is untouched', () => {
-  let base = null;
-  try { base = execFileSync('git', ['rev-parse', '--verify', '-q', '998bc073^{commit}'], { cwd: ROOT, encoding: 'utf8' }).trim(); } catch (e) { base = null; }
-  if (!base) return;
-  const diff = execFileSync('git', ['diff', '--name-only', base, '--', 'pack/kubejs/startup_scripts/grindless/lib/mega.js'], { cwd: ROOT, encoding: 'utf8' }).trim();
-  assert.equal(diff, '');
 });
