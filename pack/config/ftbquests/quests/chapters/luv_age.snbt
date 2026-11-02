@@ -755,10 +755,7 @@
 			description: ["Up here the Sun never sets, and the &6Orbital Solar Station&r makes the most of it: two wings of panels on a truss, and every panel that sees open sky pays. Orbital solar panels and station truss casing, then a LuV wireless dynamo hatch to send the power home. Free power on the network. It burns nothing, so nothing doubles it. Panels never wear out, so build it once and let the network sell the surplus."]
 			icon: "gtceu:orbital_solar_station"
 			id: "3F2030C8DDEDB9FF"
-			rewards: [
-				{ id: "39623E31E54F56E3", type: "xp", xp: 100 }
-				{ count: 2, id: "18F7447DC3B656EE", item: "gcyr:photovoltaic_cell", type: "item" }
-			]
+			rewards: [{ id: "39623E31E54F56E3", type: "xp", xp: 140 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
@@ -854,7 +851,7 @@
 			y: -3.0d
 		}
 		{
-			dependencies: ["7F943A5682742ECD"]
+			dependencies: ["7F943A5682742ECD", "564E7FD4BAE63B55"]
 			description: ["The belt's veins answer to one drill: the &6Harpoon Anchor Drill&r, pinned to the rock by harpoons while its HSS-S bit works. Bits and harpoons, which both wear slowly. No drilling fluid: it is vacuum, same as Mercury. Raw meteoric iron and the rest of the belt veins. A lathe and a press keep bits and harpoons in stock by ME."]
 			icon: "gtceu:harpoon_anchor_drill"
 			id: "7C258E5E568EE8F2"
@@ -897,7 +894,7 @@
 			y: -2.0d
 		}
 		{
-			dependencies: ["5556DFCD2B6DD947"]
+			dependencies: ["5556DFCD2B6DD947", "564E7FD4BAE63B55"]
 			description: ["The &6Rotating Hydroponic Ring&r spins for gravity, keeps the Sun on all the time and seals engineered crops away from the wild. A hub on magnetic bearings of tetrataenite from the processor, wound at the magnet works, and the engineered seeds from home. Neurotrophic factor from the barley and collagen from the tobacco. Neither seed gets eaten. Let ME replant nothing: the ring replants for you. Just drain the factor."]
 			icon: "gtceu:hydroponic_ring"
 			id: "569ED410C9F7ED07"
@@ -913,18 +910,18 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["569ED410C9F7ED07"]
-			description: ["The ring turns on &6Magnetic Bearings&r, so nothing touches and nothing wears. Make a few spare ones at the magnet works."]
+			dependencies: ["7F943A5682742ECD"]
+			description: ["&6Magnetic Bearings&r let a shaft turn with nothing touching, so nothing wears. The harpoon drill and the asteroid processor each take two, and the hydroponic ring later turns on them too. Make them at the magnet works."]
 			icon: "grindless:magnetic_bearing"
 			id: "564E7FD4BAE63B55"
 			rewards: [{ id: "7499F9157AFA03AF", type: "xp", xp: 60 }]
 			tasks: [{ count: 4L, id: "3AE097BD93E618FF", item: "grindless:magnetic_bearing", type: "item" }]
 			title: "Bearings"
-			x: 21.0d
-			y: -1.5d
+			x: 12.0d
+			y: -3.5d
 		}
 		{
-			dependencies: ["564E7FD4BAE63B55"]
+			dependencies: ["569ED410C9F7ED07"]
 			description: ["In orbit, neurons grow in three dimensions without a scaffold. The &6Organoid Lab&r turns stem cells, growth medium and the ring's neurotrophic factor into a neural organoid. Stem cells from the biofoundry, and factor from the ring. The neuro processing unit, further along. Nothing else makes one before ZPM. Feed the lab by ME and let the organoids go straight to the assembler."]
 			icon: "gtceu:organoid_lab"
 			id: "7C67E4A7D55ABED5"
