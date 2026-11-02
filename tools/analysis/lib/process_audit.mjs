@@ -104,27 +104,55 @@ function structureBlocks(dump) {
   return out;
 }
 
-/** ["grindless:x", ...] named in the ES5 loot tables / quests, to separate "given by a quest" from "never obtainable". */
-export function questMentions(packDir) {
+/**
+ * Items the quests really give: the `item` rewards of every quest file (config/ftbquests). A task, an icon, a description or a
+ * data table that merely names an item is not a way to get it. Returns a Set of ids.
+ */
+export function questRewards(packDir) {
   const out = new Set();
   const walk = (dir) => {
     if (!fs.existsSync(dir)) return;
     for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
       const p = path.join(dir, e.name);
       if (e.isDirectory()) walk(p);
-      else if (/\.(snbt|json)$/.test(e.name)) for (const m of fs.readFileSync(p, 'utf8').matchAll(/\b(grindless:[a-z0-9_]+)/g)) out.add(m[1]);
+      else if (/\.snbt$/.test(e.name)) for (const id of rewardItems(fs.readFileSync(p, 'utf8'))) out.add(id);
     }
   };
   walk(path.join(packDir, 'config', 'ftbquests'));
-  walk(path.join(packDir, 'kubejs', 'data'));
   return out;
+}
+
+/** The ids of `type: "item"` entries inside every `rewards: [ ... ]` list of an SNBT text (bracket-balanced, strings skipped). */
+export function rewardItems(text) {
+  const ids = [];
+  const re = /\brewards\s*:\s*\[/g;
+  let m;
+  while ((m = re.exec(text))) {
+    let depth = 1;
+    let i = re.lastIndex;
+    const start = i;
+    while (i < text.length && depth > 0) {
+      const c = text[i];
+      if (c === '"') { i++; while (i < text.length && text[i] !== '"') i += text[i] === '\\' ? 2 : 1; } else if (c === '[') depth++;
+      else if (c === ']') depth--;
+      i++;
+    }
+    const body = text.slice(start, i - 1);
+    for (const entry of body.matchAll(/\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/g)) {
+      if (!/\btype\s*:\s*"item"/.test(entry[0])) continue;
+      const id = /\bitem\s*:\s*(?:\{[^{}]*?\bid\s*:\s*)?"([a-z0-9_.-]+:[a-z0-9_/.-]+)"/.exec(entry[0]);
+      if (id) ids.push(id[1]);
+    }
+    re.lastIndex = i;
+  }
+  return ids;
 }
 
 /**
  * The audit. Inputs: dump (lib/dump.mjs), registry (cached stand-in registry), cfg (process_audit.json options and
- * emi_coverage.json's endProducts via `endProducts`), emi (loadEmiData), packDir, quests (a Set from questMentions).
+ * emi_coverage.json's endProducts via `endProducts`), emi (loadEmiData), packDir, rewards (a Set from questRewards).
  */
-export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], disabled: [] }, endProducts = {}, pendingUses = [], worldItems = new Set(), quests = new Set(), packDir = 'pack' }) {
+export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], disabled: [] }, endProducts = {}, pendingUses = [], worldItems = new Set(), rewards = new Set(), packDir = 'pack' }) {
   const st = { unresolved: new Set() };
   const gtTypes = new Set([...dump.recipeTypes.keys()]);
   const ctx = { tags: dump.tags, st, cfg: { typeAliases: {}, toolTagSet: new Set() }, gtTypes };
@@ -174,6 +202,7 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
   };
 
   const findings = [];
+  const nearTrivial = [];
   const add = (kind, id, era, file, detail, extra) => findings.push({ kind, id, era: era || 'unknown', file: file || null, detail, ...extra });
   const eraOfItem = (key, info) => eraOfFile(info && info.file) || null;
 
@@ -193,13 +222,13 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
     const local = k.split(':')[1];
     const hidden = !s.fluid && hiddenIndex.has(k);
     if (/_bucket$/.test(k) || /^fluid:[^:]+:flowing_/.test(k)) continue;
-    const given = (/_ore$/.test(k) && veinMat(local)) || worldItems.has(k) || quests.has(k) || (s.fluid && worldItems.has(k.slice(FLUID.length))) || veinFluids.has(k);
+    const given = (/_ore$/.test(k) && veinMat(local)) || worldItems.has(k) || rewards.has(k) || (s.fluid && worldItems.has(k.slice(FLUID.length))) || veinFluids.has(k);
     if (!hidden) {
       if (prod.length === 0 && !given && !s.fluid) add('uncraftable', k, era, file, 'no recipe makes it and no world, loot or quest source is known');
       else if (prod.length === 0 && s.fluid && !given) add('uncraftable', k, era, file, 'no recipe makes this fluid');
       const used = cons.length > 0 || structBlocks.has(k) || pageStacks.has(k) || endItems.has(k) || endGlob(k) || laterUse.has(k) || (!s.fluid && PLACED_OR_WORN.test(local));
       const onlyBy = prod.length > 0 && prod.every((p) => p.byproduct);
-      if (!used && !given) {
+      if (!used && (!given || onlyBy)) {
         if (onlyBy) add('byproduct_no_destination', k, era, file, `only a byproduct of ${prod.slice(0, 3).map((p) => p.id).join(', ')}; nothing consumes, voids or explains it`);
         else if (prod.length > 0) add('no_use', k, era, file, `made by ${prod.slice(0, 3).map((p) => p.id).join(', ')} but nothing consumes it and no page states its use`);
       }
@@ -214,6 +243,15 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
       const outs = rec.n.outputs;
       if (!(rec.n.euOut > 0) && ins.length === 1 && outs.length === 1 && ins[0].alts.length === 1 && ins[0].count === outs[0].count && outs[0].chance >= 1 && ins[0].alts[0] !== k && rec.n.shape !== 'shaped' && rec.n.conditions.length === 0 && (ours.items.has(ins[0].alts[0]) || ours.fluids.has(ins[0].alts[0]))) {
         add('trivial_step', k, era, file, `only made by ${prod[0].id}: ${ins[0].alts[0]} x${ins[0].count} -> ${k} x${outs[0].count}, one trivial step`);
+      } else if (!(rec.n.euOut > 0) && outs.length === 1 && outs[0].chance >= 1 && rec.n.shape !== 'shaped' && rec.n.conditions.length === 0) {
+        // report only (M2-15): N of one item of ours -> N, plus other inputs worth under nearTrivialShare of the main one
+        const qty = (i) => (i.alts[0].startsWith(FLUID) ? i.count / 1000 : i.count);
+        const main = ins.filter((i) => i.alts.length === 1 && i.alts[0] !== k && i.count === outs[0].count && (ours.items.has(i.alts[0]) || ours.fluids.has(i.alts[0])))[0];
+        const others = main ? ins.filter((i) => i !== main) : [];
+        const share = main ? others.reduce((n, i) => n + qty(i), 0) / qty(main) : 1;
+        if (main && others.length > 0 && share < (cfg.nearTrivialShare || 0.05)) {
+          nearTrivial.push({ id: k, era, recipe: prod[0].id, main: main.alts[0], count: main.count, share: Math.round(share * 1000) / 1000 });
+        }
       }
     }
   }
@@ -240,7 +278,7 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
     if (m.types.length > 0 && m.types.every((t) => emptyTypes.has(t))) {
       add('machine_empty_type', m.id, era, file, `every recipe type (${m.types.join(', ')}) has 0 recipes`, { ours: !!reg });
     }
-    if (!m.mb && m.tier > 0 && m.types.length > 0 && craftProducers(m.id).length === 0 && !worldItems.has(m.id) && !quests.has(m.id)) {
+    if (!m.mb && m.tier > 0 && m.types.length > 0 && craftProducers(m.id).length === 0 && !worldItems.has(m.id) && !rewards.has(m.id)) {
       add('machine_no_craft', m.id, era, file, 'single machine with recipe types and no recipe that crafts it', { ours: !!reg });
     }
   }
@@ -302,7 +340,7 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
   findings.sort((a, b) => (a.kind < b.kind ? -1 : a.kind > b.kind ? 1 : a.id < b.id ? -1 : 1));
   for (const f of findings) f.key = f.kind + '|' + f.id;
   const counts = Object.fromEntries(KINDS.map((k) => [k, findings.filter((f) => f.kind === k).length]));
-  return { findings, counts, ours: { items: ours.items.size, fluids: ours.fluids.size, machines: ours.machines.size }, emptyTypes: [...emptyTypes].sort(), typeCount };
+  return { findings, nearTrivial, counts, ours: { items: ours.items.size, fluids: ours.fluids.size, machines: ours.machines.size }, emptyTypes: [...emptyTypes].sort(), typeCount };
 }
 
 /** Findings not in the baseline ({keys: [...]}). */
@@ -316,6 +354,7 @@ export function renderAuditText(res, baseline = null, limit = 8) {
   const lines = [`Process audit: ${res.ours.items} items, ${res.ours.fluids} fluids, ${res.ours.machines} machines of ours; ${res.findings.length} findings`];
   for (const k of KINDS) lines.push(`  ${k.padEnd(26)} ${res.counts[k]}`);
   if (baseline) lines.push(`${fresh.length} new against the baseline`);
+  if (res.nearTrivial) lines.push(`near-trivial steps (report only, never fails): ${res.nearTrivial.length}`);
   for (const f of fresh.slice(0, limit)) lines.push(`  NEW ${f.key}: ${f.detail}`);
   return lines.join('\n');
 }

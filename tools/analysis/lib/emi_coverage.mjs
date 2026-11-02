@@ -554,6 +554,18 @@ export function knownGaps(doc) {
   return out;
 }
 
+/** Entries `next` has that `prev` lacks, per kind: {kind: [entry]} (empty kinds omitted). A known-gap rewrite must never grow. */
+export function knownGrowth(prev, next) {
+  const a = knownGaps(prev);
+  const b = knownGaps(next);
+  const out = {};
+  for (const k of KNOWN_GAP_KINDS) {
+    const add = b[k].filter((x) => !a[k].includes(x));
+    if (add.length) out[k] = add;
+  }
+  return out;
+}
+
 /**
  * The known-gap file from a native report (gg_emi_coverage_report.json): what the run found missing, minus machines whose info page
  * the pack now has. Machine ids only for workstations; routes as the fixture prints them ("<id> made in <category>").

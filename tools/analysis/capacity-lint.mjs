@@ -51,6 +51,8 @@ export function diffKnown(errors, known) {
   const k = known.violations || {};
   return { fresh: Object.keys(errors).filter((id) => !(id in k)).sort(), stale: Object.keys(k).filter((id) => !(id in errors)).sort() };
 }
+/** Errors a rewrite would add to the known list (a rewrite may only shrink it). */
+export const knownGrowthIds = (errors, known) => diffKnown(errors, known).fresh;
 
 /** The largest consumed item count or fluid amount of a recipe json (what decides whether it overflows a slot or tank). */
 function biggestInput(json) {
@@ -125,7 +127,16 @@ function main(argv) {
   const { dump } = staticDump(pack);
   const res = lintRecipes([...dump.recipes.values()], snap);
   if (argv.includes('--write-known')) {
-    writeJson(KNOWN_FILE, { note: 'Today\'s capacity errors (recipe id -> reason). May only shrink; fix the recipe, then rerun --write-known.', violations: res.errors });
+    const known0 =  fs.existsSync(KNOWN_FILE) ? readJson(KNOWN_FILE) : { violations: {} };
+    const grownIds = knownGrowthIds(res.errors, known0);
+    const seedAt = argv.indexOf('--seed-known');
+    const seedReason = seedAt >= 0 ? String(argv[seedAt + 1] || '').trim() : '';
+    if (grownIds.length && !seedReason) {
+      console.log(`refused: --write-known would ADD ${grownIds.length} violation(s); it may only shrink (fix the recipe, or pass --seed-known "<reason>"):`);
+      for (const id of grownIds.slice(0, 15)) console.log(`  + ${id}: ${res.errors[id]}`);
+      process.exit(1);
+    }
+    writeJson(KNOWN_FILE, { note: 'Today\'s capacity errors (recipe id -> reason). May only shrink; fix the recipe, then rerun --write-known.', violations: res.errors, ...(grownIds.length ? { seeded: [...(known0.seeded || []), { reason: seedReason, added: grownIds }] } : known0.seeded ? { seeded: known0.seeded } : {}) });
     console.log(`ok capacity: known list written (${Object.keys(res.errors).length})`);
     return 0;
   }

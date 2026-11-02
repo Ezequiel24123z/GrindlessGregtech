@@ -7,7 +7,8 @@
 //                            LIVE recipes: the EBF run (dusts, the gas of a gas variant -> hot ingot + byproducts) joined to the vacuum freezer
 //                            recipe that cools that hot ingot (the hot ingot is the linked key, the batch is one EBF run; the coolant goes in and
 //                            comes back as the freezer's return gas). The hot ingot never leaves; every other input and output of both stages
-//                            stays and the energy is the SUM of both (family rule 7), spent at the table's maxEUt (IV, 8192 EU/t).
+//                            stays and the energy is the SUM of both (family rule 7), spent at max(the table's maxEUt (IV, 8192 EU/t), the EBF run's own
+//                            EU/t): a UV or UEV blast is a UV or UEV recipe here too, never a long IV one.
 //                            Carried from the stages (compose leaves them out): the EBF's programmed circuit and ebf_temp (the coil gate of GTM's
 //                            EBF rule, so the gas and no-gas variants never clash in the lookup) and the freezer's non-consumed casting mold.
 //   The set is capped at EBF recipes whose freezer stage exists live: the count and every skipped hot ingot are printed at every load.
@@ -301,7 +302,15 @@
         return
       }
       var cooled = Object.keys(vf.v).filter(function (k) { return k.indexOf('i:') === 0 && k !== e.hot && vf.v[k] > 0 }).sort()
-      var rec = C.contents(composed, { maxEut: table.maxEut, itemOrder: cooled.length > 0 ? [cooled[0].substring(2)] : [] })
+      // the complex never runs a blast recipe below the furnace's own EU/t: time does not stand in for voltage
+      var floorEut = Math.max(table.maxEut, Number(ebf.eut) || 0)
+      var rec = C.contents(composed, { maxEut: floorEut, itemOrder: cooled.length > 0 ? [cooled[0].substring(2)] : [] })
+      if (Number(ebf.eut) > 0 && rec.eut < ebf.eut) {
+        rec.eut = ebf.eut
+        rec.duration = Math.max(1, Math.ceil(rec.energy / rec.eut - 1e-9))
+        rec.energy = rec.eut * rec.duration
+      }
+      rec.floorEut = floorEut
       var j = raw[e.id]
       rec.name = name
       rec.hot = e.hot.substring(2)

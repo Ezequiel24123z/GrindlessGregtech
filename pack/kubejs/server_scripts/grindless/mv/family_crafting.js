@@ -48,5 +48,18 @@
       P: '#forge:plates/vanadium_steel',
       R: '#forge:rods/vanadium_steel'
     }).id('grindless:crafting/vanadium_steel_drill_bit')
+
+    // M2-09: GTM's shaped MV hull (1 casing) is removed in cost_curve/mv.json; this one is at the scaled count, no plastic
+    event.recipes.gtceu.shaped('gtceu:mv_machine_hull', ['LHL', 'CHC', ' C '], {
+      L: '#forge:plates/aluminium',
+      H: 'gtceu:mv_machine_casing',
+      C: 'gtceu:copper_single_cable'
+    }).id('grindless:crafting/mv_machine_hull')
+
+    event.recipes.gtceu.alloy_smelter('grindless:vanadium_steel_drill_bit')
+      .itemInputs('4x #forge:plates/vanadium_steel', '2x #forge:rods/vanadium_steel')
+      .itemOutputs('2x grindless:vanadium_steel_drill_bit')
+      .EUt(120)
+      .duration(200)
   })
 })()

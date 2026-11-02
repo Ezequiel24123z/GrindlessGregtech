@@ -137,11 +137,11 @@ test('recipe lookup: unique names and circuits, no subsets inside a type, every 
   for (const r of rows().filter((x) => GTM.includes(x.type) && !UNKEYED.includes(x.name))) assert.ok(inputs(r).some((i) => i.startsWith('grindless:')), r.name);
 });
 
-test('allowlists: the drill on Proxima b\'s night side only, the heap on Proxima b only, the reformer row in Saturn orbit, the rest anywhere', () => {
+test('allowlists: the drill on Proxima b\'s night side only, the heap on Proxima b only, the leaches, biocement and reformer (shipped inputs) anywhere', () => {
   for (const r of rows()) {
     const d = dump(idOf(r));
-    const proxima = OURS.includes(r.type) && r.name !== 'lunar_biocement';
-    const site = proxima ? 'proxima_b' : r.type === 'tholin_reforming' ? 'saturn_orbit' : undefined;
+    const proxima = OURS.includes(r.type) && !['lunar_biocement', 'pgm_leach', 'ree_leach', 'biocement'].includes(r.name);
+    const site = proxima ? 'proxima_b' : undefined;
     assert.equal(r.site, site, r.name);
     assert.deepEqual(dimsOf(d), site ? SITE_DIMS[site] : [], idOf(r));
     const biomes = condsOf(d, 'biome').map((c) => (c.args || [])[0]);

@@ -43,7 +43,7 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.lunar_map.1', 'From the Optical Observatory. The Radio Telescope reads it without using it up. Copy: map + photographic plate.')
     add('item.grindless.lunar_ephemeris', 'Lunar Ephemeris')
     add('tooltip.grindless.lunar_ephemeris.0', 'Tables of where the Moon will stand, night after night. With them a dish finds the Moon without seeing it.')
-    add('tooltip.grindless.lunar_ephemeris.1', 'From the Optical Observatory, with the map. The Radio Telescope reads it without using it up. Copy: ephemeris + paper + coal dust.')
+    add('tooltip.grindless.lunar_ephemeris.1', 'From the Optical Observatory, with the map. The Radio Telescope reads it without using it up, so one is enough.')
     add('item.grindless.lunar_landing_chart', 'Lunar Landing-Site Chart')
     add('tooltip.grindless.lunar_landing_chart.0', 'Radar echoes over the photographic map: smooth mare, boulder fields, steep crater walls. One ellipse on a flat sea is circled in red.')
     add('tooltip.grindless.lunar_landing_chart.1', 'From the Radio Telescope: the landing site of the first trip to the Moon. Copy: chart + paper + coal dust.')

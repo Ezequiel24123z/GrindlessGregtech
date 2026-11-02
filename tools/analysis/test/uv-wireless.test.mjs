@@ -26,8 +26,8 @@ const CELL = 'grindless:uv_smes_cell';
 const CELL_EU = 15728640000;
 const UV = 8;
 const UV_VA = 491520;
-// the static runner stands V in for VA (tools/analysis/lib/kubejs_static.mjs:381): GTM's VA[UV] 491,520 is checked in game (T1)
-const STUB_VA_UV = 524288;
+// the static runner models GTValues.VA exactly (M9-06)
+const STUB_VA_UV = 491520;
 const MACHINE = 'gtceu:naquadria_magnet_works';
 const ENTED = 'gtceu:enriched_naquadah_trinium_europium_duranide_single_wire';
 const HATCHES = [];

@@ -31,10 +31,13 @@ test('capacity: 73.25 B of fluorine does not fit a LuV mixer tank (the bug that 
   assert.equal(checkRecipe(rec('gtceu:mixer', 30720, { fluid: [fl('gtceu:fluorine', 64000)] }), snap).level, 'ok');
 });
 
-test('capacity: a sized ingredient spans slots and the circuit is not counted', () => {
+test('capacity: a sized ingredient spans slots and the circuit takes one of the type\'s item inputs (M9-07)', () => {
   const six = [1, 2, 3, 4, 5, 6].map((n) => it('a:i' + n, 64));
   const circuit = { content: { type: 'gtceu:circuit', configuration: 1 } };
-  assert.equal(checkRecipe(rec('gtceu:mixer', 30720, { item: [...six, circuit] }), snap).level, 'ok');
+  assert.equal(checkRecipe(rec('gtceu:mixer', 30720, { item: [...six.slice(0, 5), circuit] }), snap).level, 'ok');
+  const over = checkRecipe(rec('gtceu:mixer', 30720, { item: [...six, circuit] }), snap);
+  assert.equal(over.level, 'error');
+  assert.match(over.reasons.join(), /7 item inputs \(1 circuit\) > type max 6/);
   assert.equal(checkRecipe(rec('gtceu:mixer', 30720, { item: [it('a:i', 6 * 64 + 1)] }), snap).level, 'error');
 });
 
