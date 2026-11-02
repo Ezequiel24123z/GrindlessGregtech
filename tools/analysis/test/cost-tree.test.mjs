@@ -45,6 +45,15 @@ test('runs, quantities and the root equal the summary', () => {
   assert.equal(res.checks.unreachable.length, 0);
 });
 
+test('chain prints the multiplier at each step down to a base', () => {
+  const c = make().chain('ore');
+  assert.equal(c.total, 8);
+  assert.deepEqual(c.steps.map((s) => s.key), ['gear', 'plate', 'ingot', 'ore']);
+  assert.deepEqual(c.steps.map((s) => s.q), [2, 8, 16, 8]);
+  assert.deepEqual(c.steps.map((s) => s.mult), [2, 4, 2, 0.5]);
+  assert.equal(c.steps[3].share, 1);
+});
+
 test('a recipe target counts its own run once and picks the inputs', () => {
   const res = make({ targets: [{ label: 'Dial', kind: 'recipe', key: 'dial' }] });
   assert.equal(res.branchEu.Dial, 1000);
