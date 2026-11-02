@@ -3,12 +3,25 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "uv_age"
-	group: "274E9C2B08DCD170"
+	group: "3F021F40CD26BF57"
 	icon: "grindless:pluto_kuiper_chart"
 	id: "3B0B0A09EAE09EEB"
 	order_index: 0
 	quest_links: [ ]
 	quests: [
+		{
+			dependencies: ["7D5E30D919EC171F"]
+			description: ["The road of the era, from the first step to the gate that leads on. Everything else here hangs from it."]
+			icon: "minecraft:writable_book"
+			id: "18F7DE571DE8210C"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "502021AA3999691B", type: "checkmark" }]
+			title: "The Journey"
+			x: 3.0d
+			y: -4.5d
+		}
 		{
 			dependencies: ["78B5C3A48F753C53"]
 			description: [
@@ -38,8 +51,8 @@
 			size: 0.75d
 			tasks: [{ id: "33D695EE830B91E2", type: "checkmark" }]
 			title: "The Long Dark"
-			x: 2.0d
-			y: 0.0d
+			x: 3.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["7D5E30D919EC171F"]
@@ -50,7 +63,7 @@
 			tasks: [{ id: "172B8E3390AF6342", item: "grindless:srf_cryomodule", type: "item" }]
 			title: "Cryomodule"
 			x: 2.0d
-			y: -1.5d
+			y: 2.0d
 		}
 		{
 			dependencies: ["1CF3C7EC4F724FAB"]
@@ -62,7 +75,7 @@
 			size: 1.25d
 			tasks: [{ dimension: "grindless:neptune_orbit", id: "1D6F35D3303ACEF9", type: "dimension" }]
 			title: "Fifth Station"
-			x: 4.0d
+			x: 15.0d
 			y: 0.0d
 		}
 		{
@@ -76,8 +89,8 @@
 			size: 0.75d
 			tasks: [{ id: "5280B24F5234B659", type: "checkmark" }]
 			title: "Winds of Neptune"
-			x: 6.0d
-			y: 1.5d
+			x: 17.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["1AA12DFECDEFD309"]
@@ -87,8 +100,8 @@
 			rewards: [{ id: "5E01D9A3FE24A5C3", type: "xp", xp: 100 }]
 			tasks: [{ id: "522FAF3630357BC4", item: "grindless:neptunian_quantum_seed", type: "item" }]
 			title: "Deep Neptune"
-			x: 6.0d
-			y: 0.0d
+			x: 18.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["1AA12DFECDEFD309"]
@@ -98,8 +111,8 @@
 			rewards: [{ id: "34B5B94B92940F59", type: "xp", xp: 100 }]
 			tasks: [{ id: "5A394F6A407CF77A", item: "grindless:triton_ice_core", type: "item" }]
 			title: "Triton"
-			x: 6.0d
-			y: -1.5d
+			x: 16.5d
+			y: 2.0d
 		}
 		{
 			dependencies: ["56E5B02FDDF0BC16"]
@@ -111,8 +124,8 @@
 			size: 0.75d
 			tasks: [{ id: "3D4D63D9D1C07D1C", type: "checkmark" }]
 			title: "Superleak"
-			x: 8.0d
-			y: 1.5d
+			x: 19.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["56E5B02FDDF0BC16", "39B2DA139D15F729"]
@@ -122,8 +135,8 @@
 			rewards: [{ id: "341C64CAC6858136", type: "xp", xp: 120 }]
 			tasks: [{ id: "56FD3E401FA48B76", item: "grindless:bnnt_fuel_tank", type: "item" }]
 			title: "Level Seven"
-			x: 8.0d
-			y: 0.0d
+			x: 19.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["384F072F5A9C68C5"]
@@ -135,7 +148,7 @@
 			size: 0.75d
 			tasks: [{ id: "71E48C6672F41A30", type: "checkmark" }]
 			title: "One Way Fuel"
-			x: 10.0d
+			x: 20.5d
 			y: 1.5d
 		}
 		{
@@ -148,8 +161,8 @@
 			size: 1.25d
 			tasks: [{ dimension: "grindless:pluto_orbit", id: "5359A20C6924BA52", type: "dimension" }]
 			title: "Sixth Station"
-			x: 10.0d
-			y: 0.0d
+			x: 21.0d
+			y: 5.0d
 		}
 		{
 			dependencies: ["309F1CA9C2FE71C9"]
@@ -161,8 +174,8 @@
 			size: 0.75d
 			tasks: [{ id: "7FD26935936BFDF5", type: "checkmark" }]
 			title: "The Heart of Pluto"
-			x: 12.0d
-			y: 1.5d
+			x: 23.5d
+			y: 5.5d
 		}
 		{
 			dependencies: ["309F1CA9C2FE71C9"]
@@ -175,8 +188,8 @@
 				{ id: "7A2904A7F0E6DDE1", item: "grindless:plutonian_quantum_seed", type: "item" }
 			]
 			title: "Sputnik Core"
-			x: 12.0d
-			y: 0.0d
+			x: 23.5d
+			y: 2.5d
 		}
 		{
 			dependencies: ["532BD235B8BD480D"]
@@ -186,8 +199,8 @@
 			rewards: [{ id: "3BBDCC23C4077937", type: "xp", xp: 100 }]
 			tasks: [{ id: "75B40C60F5998F55", item: "grindless:charon_core", type: "item" }]
 			title: "Charon"
-			x: 14.0d
-			y: 1.5d
+			x: 28.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["532BD235B8BD480D"]
@@ -199,8 +212,8 @@
 			size: 0.75d
 			tasks: [{ id: "527676BA1A0DDAF4", type: "checkmark" }]
 			title: "Ices Apart"
-			x: 14.0d
-			y: 0.0d
+			x: 25.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["3C6A1EFD6D4E4A5C"]
@@ -210,7 +223,7 @@
 			rewards: [{ id: "767EBE9A6983C9A6", type: "xp", xp: 120 }]
 			tasks: [{ id: "1426A3131DD89B98", item: "grindless:planetesimal_sample", type: "item" }]
 			title: "Planetesimal"
-			x: 16.0d
+			x: 27.5d
 			y: 0.0d
 		}
 		{
@@ -223,8 +236,8 @@
 			size: 0.75d
 			tasks: [{ id: "5253BE2F9FF8DC15", type: "checkmark" }]
 			title: "Noble Gas"
-			x: 18.0d
-			y: 1.5d
+			x: 29.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["58FBA751AA68D97F"]
@@ -237,8 +250,8 @@
 				{ id: "5F58202C086518A0", item: "gtceu:xenon_bucket", type: "item" }
 			]
 			title: "Thruster Gas"
-			x: 20.0d
-			y: 1.5d
+			x: 31.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["5443B4BF3D09D99E"]
@@ -248,7 +261,7 @@
 			rewards: [{ id: "3706E9B22AA0005B", type: "xp", xp: 120 }]
 			tasks: [{ id: "77E7DBE25F6971ED", item: "grindless:thruster_pod", type: "item" }]
 			title: "Thruster Pod"
-			x: 18.0d
+			x: 29.5d
 			y: 0.0d
 		}
 		{
@@ -259,8 +272,8 @@
 			rewards: [{ id: "71C480124C04ACE0", type: "xp", xp: 150 }]
 			tasks: [{ id: "58EE2B3FE1A3C4BD", item: "grindless:heliopause_data", type: "item" }]
 			title: "The Heliopause"
-			x: 20.0d
-			y: 0.0d
+			x: 31.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["54D323DCC3423433"]
@@ -272,8 +285,8 @@
 			size: 1.25d
 			tasks: [{ id: "3AA71F82A20BA297", item: "grindless:sgr_a_star_image", type: "item" }]
 			title: "The Shadow"
-			x: 27.0d
-			y: -1.5d
+			x: 37.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["332CC4FD00C435F0"]
@@ -283,8 +296,8 @@
 			rewards: [{ id: "569D5ADD806A35EE", type: "xp", xp: 120 }]
 			tasks: [{ id: "1602D5A6215B0141", item: "grindless:light_sail", type: "item" }]
 			title: "The Sail"
-			x: 22.0d
-			y: 0.0d
+			x: 33.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["3C44B521C564CB61"]
@@ -294,8 +307,8 @@
 			rewards: [{ id: "3F8AC658DDB1DA60", type: "xp", xp: 120 }]
 			tasks: [{ id: "7F9CEA6B7A575A99", item: "grindless:sailcraft", type: "item" }]
 			title: "Sailcraft"
-			x: 24.0d
-			y: 0.0d
+			x: 34.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["54D323DCC3423433"]
@@ -305,8 +318,8 @@
 			rewards: [{ id: "34F6D61189838896", type: "xp", xp: 200 }]
 			tasks: [{ id: "39DC14414A4279DD", item: "grindless:starshot_probe", type: "item" }]
 			title: "Starshot"
-			x: 26.0d
-			y: 0.0d
+			x: 36.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["393D800CED26F9C1"]
@@ -318,8 +331,8 @@
 			size: 1.25d
 			tasks: [{ id: "76F62ABDE4DAEC91", item: "grindless:proxima_approach_data", type: "item" }]
 			title: "Light from Proxima"
-			x: 28.0d
-			y: 0.0d
+			x: 37.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["7192C8527301DC08"]
@@ -331,8 +344,8 @@
 			size: 0.75d
 			tasks: [{ id: "1DA6928F379CEF0B", type: "checkmark" }]
 			title: "What Comes Next"
-			x: 30.0d
-			y: 1.5d
+			x: 39.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["7192C8527301DC08", "39792D192AD44A70"]
@@ -351,8 +364,1114 @@
 				{ id: "1D2A2C58F29DA649", item: "gtceu:uranium_233_ingot", type: "item" }
 			]
 			title: "Gate to UHV"
-			x: 30.0d
-			y: 0.0d
+			x: 39.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["7D5E30D919EC171F"]
+			description: ["The wafers, chips and circuits of the era, from the first assembler to the mainframe, and the parts built from them."]
+			icon: "minecraft:writable_book"
+			id: "135F36C81C412CD0"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "5E25BA1D3CCE6D78", type: "checkmark" }]
+			title: "Circuits"
+			x: 2.5d
+			y: -7.0d
+		}
+		{
+			dependencies: ["135F36C81C412CD0"]
+			description: ["The &6UV Circuit Assembler&r is the first assembler that can build the circuits UV machines are made of. UV components for its hull, the cleanroom you already run, and the ZPM circuits that feed it. The wetware computer and mainframe on this row, and every controller of this era. Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns."]
+			icon: "gtceu:uv_circuit_assembler"
+			id: "1BC78E04FCA4A428"
+			rewards: [{ id: "382E6FFF6483B722", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5657C0E0BC2972AA", item: "gtceu:uv_circuit_assembler", type: "item" }]
+			title: "UV Circuit Assembler"
+			x: 5.5d
+			y: -9.0d
+		}
+		{
+			dependencies: ["1BC78E04FCA4A428"]
+			description: ["Neuro processing units on a larger board make the &6Wetware Processor Computer&r, the first UV circuit. Several neuro processing units for each, the UV assembler, and the vat that grows them in the machines chapter. UV hulls and the controllers of this era that ask for a circuit. Neuro processing units come out of the vat by ME; let the assembler draw them on demand."]
+			icon: "gtceu:wetware_processor_computer"
+			id: "37FC04290594CC34"
+			rewards: [{ id: "55D88910E2A426ED", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7FEB8328EDD9FE61", item: "gtceu:wetware_processor_computer", type: "item" }]
+			title: "Wetware Computer"
+			x: 7.0d
+			y: -10.0d
+		}
+		{
+			dependencies: ["37FC04290594CC34", "34BCB5D648DF0A10"]
+			description: ["The &6Wetware Processor Mainframe&r is the biggest circuit UV builds, and the one the UHV hulls and the research stations lean on. Wetware computers and photonic chips by the stack, and the UV assembler to put them together. UV machine hulls and the hatches that open the gate to UHV. Make it from stocked parts; ME keeps the mainframes in a dedicated chest."]
+			icon: "gtceu:wetware_processor_mainframe"
+			id: "3D8568FCB24941A1"
+			rewards: [{ id: "1206428CBE865E89", type: "xp", xp: 180 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "37798CC6FECFE514", item: "gtceu:wetware_processor_mainframe", type: "item" }]
+			title: "Wetware Mainframe"
+			x: 9.5d
+			y: -9.0d
+		}
+		{
+			dependencies: ["135F36C81C412CD0"]
+			description: ["An &6X-ray Mask&r is the stencil the synchrotron exposes a wafer through. Its lines are far finer than any lens can print. A cleanroom, the lithography you already run, and a gold absorber pattern on a thin membrane. The patterned wafer, and through it the photonic chip. A mask is not consumed in one exposure. Keep a few spares by ME and let the exposures draw them."]
+			icon: "grindless:x_ray_mask"
+			id: "5AC599C3AF5DFDE9"
+			rewards: [{ id: "3CF81790EE66902C", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5B14431F93E4F8DC", item: "grindless:x_ray_mask", type: "item" }]
+			title: "X-ray Mask"
+			x: 4.0d
+			y: -7.0d
+		}
+		{
+			dependencies: ["5AC599C3AF5DFDE9"]
+			description: ["A wafer coated in resist, exposed to the synchrotron through the mask and developed is a &6Patterned Wafer&r. The Synchrotron from the machines chapter, a mask, and PMMA-coated wafers. The photonic chip. Coating and developing run in plain machines by ME; only the exposure waits for the beam."]
+			icon: "grindless:patterned_wafer"
+			id: "1162AE7DDCC8105B"
+			rewards: [{ id: "1A0A958B3C1ABFDD", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "76ABC0C58C4DCAFB", item: "grindless:patterned_wafer", type: "item" }]
+			title: "Patterned Wafer"
+			x: 6.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["1162AE7DDCC8105B"]
+			description: ["Cut from the patterned wafer, the &6Photonic Chip&r moves light instead of electrons and does the work of a wafer of ordinary logic. A patterned wafer, silicon nitride film and a cleanroom. The wetware mainframe, and the starchip at the end of this row. One wafer, many chips: keep a stock by ME so the assembler never waits."]
+			icon: "grindless:photonic_chip"
+			id: "34BCB5D648DF0A10"
+			rewards: [{ id: "3BB32BA23EC5774C", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "12414E450AD9070D", item: "grindless:photonic_chip", type: "item" }]
+			title: "Photonic Chip"
+			x: 8.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["135F36C81C412CD0"]
+			description: ["The &6HPGe Crystal&r is germanium refined past thirteen nines. It is the detector eye that probes and the interferometer carry. Germanium tetrachloride from the photonics line and the zone refining tower from the machines chapter. The SNSPD array beside it and the detector parts of the Starshot. The tower is slow; keep its feed topped up by ME and stock the crystals."]
+			icon: "grindless:hpge_crystal"
+			id: "55E637B2C7F65A5B"
+			rewards: [{ id: "7A16811DCCDADD90", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "3BB16E54C3F97654", item: "grindless:hpge_crystal", type: "item" }]
+			title: "High-Purity Germanium"
+			x: 4.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["55E637B2C7F65A5B"]
+			description: ["A superconducting nanowire turns resistive the moment a single photon lands on it. The &6SNSPD Array&r is a grid of them on a niobium nitride film. An NbN-coated wafer from the MOCVD reactor, and the qubit fab with its helium-3 fridge. The optical ground station, the one reader of the Starshot. Tested arrays come out of the fab one wafer at a time; stock them by ME."]
+			icon: "grindless:snspd_array"
+			id: "10808A5F2A0FCB35"
+			rewards: [{ id: "3379B6946A8AD65A", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "527C2EA5EECE407F", item: "grindless:snspd_array", type: "item" }]
+			title: "Counting Photons"
+			x: 8.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["7D5E30D919EC171F", "34BCB5D648DF0A10", "10808A5F2A0FCB35"]
+			description: ["A photonic chip, a diamond qubit, an americium source and a neutronium wafer become one &6Starchip&r. Mounted on a sail it is a probe about as heavy as a paperclip. The Starchip Fab from the machines chapter, and every part on the light row above. The sailcraft, and with it the launch and the long coast to Proxima. The fab dices in batches and wastes only kerf. Send the chips on by ME to the sail line."]
+			icon: "grindless:starchip"
+			id: "5CBBEA07EE6F6329"
+			rewards: [{ id: "7A505A39F1D1F270", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "754FC32002488365", item: "grindless:starchip", type: "item" }
+				{ id: "3719F2BE65E6056C", item: "grindless:sailcraft", type: "item" }
+			]
+			title: "Starchip"
+			x: 10.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["7D5E30D919EC171F"]
+			description: ["Power, networks and processes that tie this era to the lines you already run."]
+			icon: "minecraft:writable_book"
+			id: "7A0170CCCE44944D"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "5D5D1837A4053106", type: "checkmark" }]
+			title: "Integration"
+			x: 11.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["7A0170CCCE44944D"]
+			description: ["The &6Fusion Reactor Mk3&r is a bigger ring that lights plasmas the Mk2 cannot start. Sixteen UV energy hatches on the network for a 640 M start, and four wetware mainframes in the build. Americium, neutronium and the UV wireless tier. Feed it from tanks by pipe, and keep the hatches topped from the network."]
+			icon: "gtceu:uv_fusion_reactor"
+			id: "387E0EB82EC57EC4"
+			rewards: [{ id: "7550E299F6AA9BF7", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "313782F9B227EE2A", item: "gtceu:uv_fusion_reactor", type: "item" }
+				{ count: 16L, id: "3B0627B445897187", item: "gtceu:uv_energy_input_hatch", type: "item" }
+			]
+			title: "Third Ring"
+			x: 14.0d
+			y: 8.5d
+		}
+		{
+			dependencies: ["387E0EB82EC57EC4"]
+			description: ["Plutonium-241 and hydrogen fuse into &6Americium&r plasma, and a plasma turbine turns the heat into power on the way out. Plutonium-241 from IV, and a turbine on the Mk3's plasma output. Neutronium, and the americium the next ring also asks for. The cooled metal goes straight back in: pipe the plasma out, the ingots to ME."]
+			icon: "gtceu:americium_plasma_bucket"
+			id: "1571312A32D970D7"
+			rewards: [{ id: "7F51C3DD1A0D7214", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7875CF04280E9C7E", item: "gtceu:plutonium_241_ingot", type: "item" }
+				{ id: "14CAEF48058CDE87", item: "gtceu:americium_plasma_bucket", type: "item" }
+				{ id: "7809ADDE1AF6E23F", item: "gtceu:americium_ingot", type: "item" }
+			]
+			title: "Americium Loop"
+			x: 17.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["1571312A32D970D7"]
+			description: ["Americium and naquadria start the hottest burn the Mk3 runs, and &6Neutronium&r comes out. It's the densest metal you'll handle, and UV's parts are full of it."]
+			icon: "gtceu:neutronium_ingot"
+			id: "55CB97D57C8A08CC"
+			rewards: [{ id: "70C196EA59435A90", type: "xp", xp: 120 }]
+			tasks: [{ id: "53316533B06855FA", item: "gtceu:neutronium_ingot", type: "item" }]
+			title: "Neutronium"
+			x: 19.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["55CB97D57C8A08CC"]
+			description: ["A &6Gravi Star&r is a nether star wrapped in neutronium. It's the link the UV wireless network is built on."]
+			icon: "gtceu:gravi_star"
+			id: "500C872278B8AD2E"
+			rewards: [{ id: "3A6EFF49DF3D03AE", type: "xp", xp: 100 }]
+			tasks: [{ id: "19D3CA291D15FB7B", item: "gtceu:gravi_star", type: "item" }]
+			title: "Gravi Star"
+			x: 22.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["500C872278B8AD2E"]
+			description: ["The network runs at its strongest cell, so one &6UV SMES Cell&r makes it carry UV. The new hatches draw from it wherever the network reaches, out to the stations too. The gravi star as the link, and at least one UV cell in a formed tower: until then the network stays at ZPM. Stations at Neptune and Pluto that run on power made at home. Nothing to feed: size the cells for your busiest hour and add more when it dips."]
+			icon: "grindless:uv_smes_cell"
+			id: "51C58090D6955D24"
+			rewards: [{ id: "548E502447EB461D", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5AA057F72E0CFE2B", item: "grindless:uv_smes_cell", type: "item" }
+				{ id: "583ABDC4A76B4838", item: "gtceu:uv_wireless_energy_hatch", type: "item" }
+			]
+			title: "The Network Goes UV"
+			x: 23.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["51C58090D6955D24"]
+			description: ["The &6UV Parallel Hatch&r runs far more recipes side by side in the plants that take one. The big generators and the single-shot probe bays do not. A machine that accepts one, and power to match: full parallel is a network job. Throughput without another hall. Bigger batches need bigger input buffers: check that your pipes keep up."]
+			icon: "gtceu:uv_parallel_hatch"
+			id: "5E51E4390B4AA17B"
+			optional: true
+			rewards: [{ id: "33BC2ED115597C13", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 0.75d
+			tasks: [{ id: "3DD5BB1FA54BFE98", item: "gtceu:uv_parallel_hatch", type: "item" }]
+			title: "Wider Still"
+			x: 26.0d
+			y: 17.0d
+		}
+		{
+			dependencies: ["7A0170CCCE44944D"]
+			description: ["Thorium assemblies feed the accelerator-driven reactor: about six an hour, four and a half on nitride. IV's stored thorium and its live output decide how many reactors run. The reactor from the machines chapter, and assemblies from the fuel fabrication plant. The biggest steady power of the era, with fission products as the only waste. Spent assemblies go to the pyroprocessing cell and come back as fuel: close the loop before you scale."]
+			icon: "grindless:thorium_oxide_fuel_assembly"
+			id: "325BE1C42B45620C"
+			rewards: [{ id: "3645ADD2CF1C4971", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1DDDEDFBBA214F57", item: "gtceu:accelerator_driven_reactor", type: "item" }
+				{ id: "70A6F1EB0185CF93", type: "checkmark" }
+			]
+			title: "The Thorium Burn"
+			x: 13.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["325BE1C42B45620C"]
+			description: ["The IV &6Fuel Fabrication Plant&r learns three thorium rows, and a uranium rod for IV's fission reactor. Thorium dust, oxygen, carbon and nitrogen-15, and the uranium-233 the pyroprocessing cell hands back. Thorium oxide and nitride assemblies, and a fission reactor that burns what the thorium bred. Send the bred metal straight to the plant and the spent rods back to the cell."]
+			icon: "gtceu:fuel_fabrication_plant"
+			id: "1FEBAAE91287085C"
+			rewards: [{ id: "53F98BFAD5289ADE", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1E9985A62FA45B79", item: "gtceu:fuel_fabrication_plant", type: "item" }
+				{ id: "3F46B97EEA41BC9F", item: "gtceu:uranium_233_ingot", type: "item" }
+			]
+			title: "Back to Uranium-233"
+			x: 15.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["7A0170CCCE44944D"]
+			description: ["A &6Muon Fusion Cell&r burns liquid deuterium and tritium, and its lithium blanket breeds most of the tritium back. The rest is IV's tritium removal facility's work. The cell from the machines chapter, deuterium and tritium by pipe, and a linac behind it. Power with no fission and almost no waste. The cell is an extrapolation: real muons are lost too soon. Watch the make-up tritium: when the facility lags, the cell starves."]
+			icon: "grindless:lithium_breeder_blanket"
+			id: "1832088E3A8ADB56"
+			rewards: [{ id: "57362C2A00CBB09B", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "30AB064A0C464C2E", item: "gtceu:muon_fusion_cell", type: "item" }
+				{ id: "3F5CEC270E667895", type: "checkmark" }
+			]
+			title: "Tritium Comes Back"
+			x: 13.0d
+			y: 6.5d
+		}
+		{
+			dependencies: ["561A6287570BE65F"]
+			description: ["The &6Laser Fusion Chamber&r burns one fuel capsule per shot, about 180 an hour, and helium-4 is the only exhaust. Capsules from the lattice fab, and fibre laser modules that wear by about two percent a shot. The largest single plant of the era, and a reason to scale the lattice fab. The fab's throughput is the cap by design: store capsules in ME and keep spare modules."]
+			icon: "gtceu:laser_fusion_chamber"
+			id: "1CFA41A19DF007BF"
+			rewards: [{ id: "7F93037C91621B29", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "3EBA6C90D9BE7E2B", item: "gtceu:laser_fusion_chamber", type: "item" }
+				{ id: "52A73C0328622A07", type: "checkmark" }
+			]
+			title: "A Capsule a Shot"
+			x: 22.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["7A0170CCCE44944D"]
+			description: ["The IV &6Hot Cell&r learns a boron mode: four boron trifluoride in, one boron-11 trifluoride and a little boron-10 out. Boron trifluoride from the centrifuges and the next free circuit in the cell. Decaborane for the capsules, and boron-10 for the nanotube reactor. The fluorine leaves as acid the rest of your chemistry takes: pipe the boron-10 on."]
+			icon: "gtceu:hot_cell"
+			id: "168DB3651CB5C124"
+			rewards: [{ id: "538EACE58A418FA6", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7495A18DB52383BF", item: "gtceu:hot_cell", type: "item" }
+				{ id: "5777843390CAFC97", item: "gtceu:boron_11_trifluoride_bucket", type: "item" }
+			]
+			title: "Boron-11"
+			x: 17.0d
+			y: 15.5d
+		}
+		{
+			dependencies: ["168DB3651CB5C124"]
+			description: ["The ZPM &6Diamond Lattice Fab&r grows a fuel capsule round decaborane, or round deuterium and helium-3 for the other burn. Decaborane from the hot cell, or deuterium and helium-3 from Neptune, plus the new circuits in the fab. Every shot of the laser chamber. Every shot spends one: automate the capsules first and let ME hold a day's worth."]
+			icon: "grindless:pb11_capsule"
+			id: "561A6287570BE65F"
+			rewards: [{ id: "5F596B4504419CD5", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5123EB03EA75E9E8", item: "gtceu:diamond_lattice_fab", type: "item" }
+				{ id: "354A374C5F8303B7", item: "grindless:pb11_capsule", type: "item" }
+				{ id: "7E41CAE2CA63C3B1", item: "grindless:d_he3_capsule", type: "item" }
+			]
+			title: "Diamond Capsules"
+			x: 19.0d
+			y: 14.5d
+		}
+		{
+			dependencies: ["561A6287570BE65F"]
+			description: ["The EV &6Cryogenic Plant&r splits nitric oxide into nitrogen-15 and nitrogen-14 oxide, and Kuiper noble gas into argon, krypton and xenon. Nitric oxide from Triton's nitrogen, and the two UV rows in the plant. Thorium nitride, which breeds better, and the krypton for the thrusters. The pyroprocessing cell hands the nitrogen back: loop it to the plant."]
+			icon: "gtceu:cryogenic_plant"
+			id: "19B2FBC6EE88BA08"
+			rewards: [{ id: "39ECA7B65AB79318", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1651C60F11617C68", item: "gtceu:cryogenic_plant", type: "item" }
+				{ id: "3227C58A62A6B19E", item: "gtceu:nitrogen_15_bucket", type: "item" }
+			]
+			title: "Nitrogen-15"
+			x: 21.0d
+			y: 17.0d
+		}
+		{
+			dependencies: ["19B2FBC6EE88BA08"]
+			description: ["The EV &6Extraction Cascade&r strips ytterbium oxide out of the mixed rare-earth chloride and sends the chloride back. Mixed rare-earth chloride from the monazite line, and the next free circuit in the cascade. The fibre draw tower and every laser built on its fibre. Loop the chloride back to the monazite line and send the oxide to ME."]
+			icon: "gtceu:extraction_cascade"
+			id: "501B3E34C390183C"
+			rewards: [{ id: "5CC18BC661065F6B", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "33277DB67DC64334", item: "gtceu:extraction_cascade", type: "item" }
+				{ id: "517C7A6414FA4CD9", item: "gtceu:ytterbium_oxide_dust", type: "item" }
+			]
+			title: "Ytterbium Strip"
+			x: 23.0d
+			y: 17.5d
+		}
+		{
+			dependencies: ["501B3E34C390183C"]
+			description: ["The HV &6Composite Autoclave&r bakes carbon fibre and pitch into a &6Carbon-Carbon Aeroshell&r, the skin a probe needs where a heat shield melts. Carbon fibre from ZPM's tholin reformer and pitch, and the next free circuit in the autoclave. The thruster works and the probes that fly to the heliopause. Shells are bulky: let ME hold them and the probe bays pull what they need."]
+			icon: "grindless:carbon_carbon_aeroshell"
+			id: "5628CEEA5E0ADD03"
+			rewards: [{ id: "3A7D283E6319EE71", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "3E23BF3D73D60176", item: "gtceu:composite_autoclave", type: "item" }
+				{ id: "36067D46D190C7E9", item: "grindless:carbon_carbon_aeroshell", type: "item" }
+			]
+			title: "Carbon Shell"
+			x: 24.5d
+			y: 17.5d
+		}
+		{
+			dependencies: ["1AA12DFECDEFD309"]
+			description: ["Neptune orbit gets its own &6AE2 pair&r, so what the station makes goes home and what it needs comes out. Power doesn't need it: the wireless network already carries that."]
+			icon: "grindless:station_truss_casing"
+			id: "756406F70D5B33F4"
+			rewards: [{ id: "38C06798F0727E32", type: "xp", xp: 80 }]
+			tasks: [{ id: "18293B578B4D2293", type: "checkmark" }]
+			title: "Neptune on the Network"
+			x: 17.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["756406F70D5B33F4", "309F1CA9C2FE71C9"]
+			description: ["Same again at Pluto orbit. Both stations send hydrogen, helium, nitrogen and noble gases by the tankful, so fluid cells and extra coprocessors matter more than item storage. Chunk-load them both: the far machines only run while their chunks are loaded."]
+			icon: "grindless:station_truss_casing"
+			id: "54E3E2B4FA4B5586"
+			rewards: [{ id: "3EA94D8B23C84B9C", type: "xp", xp: 80 }]
+			tasks: [{ id: "5FD6C3EC8E5BA777", type: "checkmark" }]
+			title: "Pluto on the Network"
+			x: 23.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7D5E30D919EC171F"]
+			description: ["The machines of the era and the first steps that put each one to work."]
+			icon: "minecraft:writable_book"
+			id: "16D1550DF465D570"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "1FF5FA78B7E6826E", type: "checkmark" }]
+			title: "Machines"
+			x: 0.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Pyroprocessing Cell&r takes spent thorium fuel apart in molten salt and gives back uranium-233 and nitrogen-15. Its controller and the &6Radiation-Proof Casing&r that contains the salt. Uranium-233 for fuel rods, and nitrogen-15 for the nitride fuel. Feed spent fuel by ME and loop the salt in its own tank; never let it run dry."]
+			icon: "gtceu:pyroprocessing_cell"
+			id: "7F5AFF284AB79EA8"
+			rewards: [{ id: "39000AE6494F0929", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "531FE7704905C32C", item: "gtceu:pyroprocessing_cell", type: "item" }
+				{ id: "179B61ED1414FD7A", item: "gtnn:radiation_proof_machine_casing", type: "item" }
+			]
+			title: "Pyroprocessing"
+			x: 3.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["7F5AFF284AB79EA8"]
+			description: ["The &6Accelerator-Driven Reactor&r burns the thorium you stored at IV, kept subcritical by a proton beam. Power from it stops the moment the beam does. Its controller, UV machine casing, superconducting coils and the &6SRF Cryomodule Block&r that holds the beam cold. Thorium as a generator, and the fuel assemblies the cell recycles. Fuel assemblies by ME from the fabrication plant; spent ones go straight back to the cell."]
+			icon: "gtceu:accelerator_driven_reactor"
+			id: "531F95CE48EB6C79"
+			rewards: [{ id: "5C3E4CA800187BD9", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "734B95D163FFD5AA", item: "gtceu:accelerator_driven_reactor", type: "item" }
+				{ id: "72AEDF31493FD4C1", item: "gtceu:uv_machine_casing", type: "item" }
+				{ id: "5DB291BEEDD887D9", item: "grindless:srf_cryomodule_block", type: "item" }
+			]
+			title: "Accelerator-Driven Reactor"
+			x: 5.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["531F95CE48EB6C79"]
+			description: ["The cell's uranium-233 becomes a &6U-233 Fuel Rod&r for the fission reactor you built at IV. Thorium fuel closes its own loop."]
+			icon: "grindless:u233_fuel_rod"
+			id: "5899817CE39B0BF5"
+			rewards: [{ id: "3AA7DA53481B041C", type: "xp", xp: 80 }]
+			tasks: [{ id: "7A639BB24F369F20", item: "grindless:u233_fuel_rod", type: "item" }]
+			title: "Uranium-233 Rod"
+			x: 6.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Heat Source Works&r presses and sinters curium-244 into the pellets a probe carries in place of sunlight. Its controller and radiation-proof casing; the curium comes from the ZPM partitioning plant. The probe RTG and the americium micro source. Curium moves in sealed pipes and buses only; send the pellets on by ME."]
+			icon: "gtceu:heat_source_works"
+			id: "1EB1FB2B94059E74"
+			rewards: [{ id: "318C035F61FA79DC", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3BEE7EB70A91F743", item: "gtceu:heat_source_works", type: "item" }
+				{ id: "52AF675894612034", item: "gtnn:radiation_proof_machine_casing", type: "item" }
+			]
+			title: "Heat Source Works"
+			x: 2.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["1EB1FB2B94059E74"]
+			description: ["A &6Curium-244 Pellet&r gives off heat for years. Wrapped in a &6GPHS Module&r it is the only power a probe has past Neptune."]
+			icon: "grindless:curium_244_pellet"
+			id: "713DCC29A0BF2749"
+			rewards: [{ id: "7C7A72E131D63A39", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "1CAA616EEF5C3B1B", item: "grindless:curium_244_pellet", type: "item" }
+				{ id: "5C06792F9A16A063", item: "grindless:gphs_module", type: "item" }
+			]
+			title: "Curium Heat"
+			x: 4.0d
+			y: 6.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Laser Fusion Chamber&r fuses a proton and boron-11 into three alpha particles. No neutrons, and the output is helium-4. Its controller, UV casing and the &6Laser Module Block&r ring that focuses the beams. Aneutronic power from boron capsules. Capsules arrive by ME and the helium goes back to the compressor loop."]
+			icon: "gtceu:laser_fusion_chamber"
+			id: "11FAD777A18E748F"
+			rewards: [{ id: "759D9CC318C4ABE4", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5CA0F69E4887CBE0", item: "gtceu:laser_fusion_chamber", type: "item" }
+				{ id: "32376DFCE35F3BB1", item: "gtceu:uv_machine_casing", type: "item" }
+				{ id: "584EC4FC124C035B", item: "grindless:laser_module_block", type: "item" }
+			]
+			title: "Laser Fusion Chamber"
+			x: 6.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["598B196C669CA9B5"]
+			description: ["The &6Muon Fusion Cell&r makes cold fusion with muons as the catalyst: deuterium and tritium fuse close to room temperature. Its controller, the cryostat casing and the &6SRF Cryomodule Block&r that drives the muon channel. A second fusion generator that needs no plasma. Keep a deuterium-tritium tank on a pipe and let the helium out by ME."]
+			icon: "gtceu:muon_fusion_cell"
+			id: "1225702AF9F2A2E4"
+			rewards: [{ id: "7BBCFA27ABA6914E", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "79AC5E9ADB0ECE07", item: "gtceu:muon_fusion_cell", type: "item" }
+				{ id: "3A42B04451BB2798", item: "grindless:cryostat_casing", type: "item" }
+				{ id: "7FB86716C4ABEA64", item: "grindless:srf_cryomodule_block", type: "item" }
+			]
+			title: "Muon Fusion Cell"
+			x: 11.0d
+			y: 8.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Superfluid Helium Plant&r cools helium below its lambda point, where it flows without friction, and splits Neptune's helium with a superleak. Its controller, the &6Cryostat Casing&r and the stainless gearboxes that run the cold compressors. Helium II for the cryomodules and the cavity works. Gas arrives by pipe; stock helium II in a dedicated tank."]
+			icon: "gtceu:superfluid_helium_plant"
+			id: "50932D647CEF0A54"
+			rewards: [{ id: "3A5B4438597AD1F7", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5DB04F970177D45A", item: "gtceu:superfluid_helium_plant", type: "item" }
+				{ id: "5025515AE5D2D6DC", item: "grindless:cryostat_casing", type: "item" }
+			]
+			title: "Superfluid Helium"
+			x: 3.5d
+			y: 9.5d
+		}
+		{
+			dependencies: ["50932D647CEF0A54"]
+			description: ["The &6SRF Cavity Works&r forms, polishes and anneals niobium into cavities that carry a beam with almost no loss. Its controller and clean room casing; niobium sheet and helium II run through it. Cavities for the cryomodule, the accelerators and the synchrotron. Niobium and acid are loops. Take cavities out by ME and keep the scrap going back."]
+			icon: "gtceu:srf_cavity_works"
+			id: "375D70399F1951D2"
+			rewards: [{ id: "7F016E2F2D84DADE", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "705A82674604C042", item: "gtceu:srf_cavity_works", type: "item" }
+				{ id: "5ABC99C2B00854CD", item: "gtceu:clean_machine_casing", type: "item" }
+			]
+			title: "Cavity Works"
+			x: 6.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["375D70399F1951D2"]
+			description: ["A finished &6SRF Cavity&r is niobium cut to a few microns of surface roughness. Every beam machine of this era sits on a pair of them."]
+			icon: "grindless:srf_cavity"
+			id: "598B196C669CA9B5"
+			rewards: [{ id: "151F080E9C6C1576", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "1AF7B2BAD7D93E37", item: "grindless:srf_cavity", type: "item" }
+				{ id: "3A67FB2AF2177469", item: "grindless:mu_metal_shield", type: "item" }
+			]
+			title: "Niobium Cavity"
+			x: 8.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["Bend a beam round a ring and it shines X-rays. The &6Synchrotron&r prints through an X-ray mask and makes the antiprotons the trap stores. Its controller, UV casing and the &6SRF Cryomodule Block&r; the target is activated and has to be contained. Patterned wafers for the photonic chip, and antiprotons. Run it off a stock of masks and wafers by ME; the target goes out sealed."]
+			icon: "gtceu:synchrotron"
+			id: "3496B9631FC03AC3"
+			rewards: [{ id: "73F7CB102ECBB71D", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3BACA311AAB9ACB4", item: "gtceu:synchrotron", type: "item" }
+				{ id: "18914A95F26AF529", item: "gtceu:uv_machine_casing", type: "item" }
+				{ id: "151AC7AA5C51EAC8", item: "grindless:srf_cryomodule_block", type: "item" }
+			]
+			title: "Synchrotron"
+			x: 5.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["3496B9631FC03AC3"]
+			description: ["Protons on a tungsten target throw off a trickle of antiprotons. An &6Antiproton Cartridge&r is the only way to carry them out of the ring."]
+			icon: "grindless:antiproton_cartridge"
+			id: "38256BC657C245CD"
+			rewards: [{ id: "7DB5000D69D87501", type: "xp", xp: 80 }]
+			tasks: [{ id: "7F2DCF0E47129095", item: "grindless:antiproton_cartridge", type: "item" }]
+			title: "Antiproton Cartridge"
+			x: 8.0d
+			y: 9.5d
+		}
+		{
+			dependencies: ["38256BC657C245CD"]
+			description: ["The &6Antimatter Trap&r holds antiprotons in a magnetic bottle in Earth orbit, far from anything they could touch. Its controller and the &6Station Truss Casing&r of an orbital build. ICAN pellets for the sail and the launch. Hand cartridges to the trap by ME; never stack more than one trap on a hatch."]
+			icon: "gtceu:antimatter_trap"
+			id: "16371CCBBF6B0622"
+			rewards: [{ id: "1FF1D25A751F653C", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "33FA101E84F51F28", item: "gtceu:antimatter_trap", type: "item" }
+				{ id: "151D1B5FF2B8B921", item: "grindless:station_truss_casing", type: "item" }
+			]
+			title: "Antimatter Trap"
+			x: 9.5d
+			y: 9.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Fibre Draw Tower&r pulls a preform of ytterbium-doped glass into optical fibre, and winds it into a fibre laser module. Its controller, clean room casing, PTFE pipe and a heatproof draw furnace. The laser modules for the fusion chamber and the sail launcher. A chlorine loop cleans the preform; keep it sealed and stock the fibre by ME."]
+			icon: "gtceu:fibre_draw_tower"
+			id: "33CBE187D3DF4EA8"
+			rewards: [{ id: "340D8B303B909940", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7052083D5408A302", item: "gtceu:fibre_draw_tower", type: "item" }
+				{ id: "31651AA9F4CA8612", item: "gtceu:clean_machine_casing", type: "item" }
+			]
+			title: "Fibre Draw Tower"
+			x: 5.0d
+			y: 11.5d
+		}
+		{
+			dependencies: ["33CBE187D3DF4EA8"]
+			description: ["A length of fibre with a Bragg grating at each end is a laser. The &6Fibre Laser Module&r is what the big chambers fire."]
+			icon: "grindless:fibre_laser_module"
+			id: "51F3CB52EBEB3BCB"
+			rewards: [{ id: "56B4C30A70CF7509", type: "xp", xp: 80 }]
+			tasks: [{ id: "1EA6CADF664FD09D", item: "grindless:fibre_laser_module", type: "item" }]
+			title: "Fibre Laser Module"
+			x: 8.0d
+			y: 11.5d
+		}
+		{
+			dependencies: ["51F3CB52EBEB3BCB"]
+			description: ["The &6MOCVD Reactor&r grows compound semiconductors one atomic layer at a time: pump diodes for the fibre, and a niobium nitride film. Its controller, clean room casing, an inert casing for the gas cabinet and a filter hood. InGaAs pump diodes and the SNSPD film. Arsenic is contained; keep the scrubber supplied and the diodes going out by ME."]
+			icon: "gtceu:mocvd_reactor"
+			id: "3D71CDF674EF3302"
+			rewards: [{ id: "71C9A097B98E6CC3", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "33CC90ED047DEB79", item: "gtceu:mocvd_reactor", type: "item" }
+				{ id: "323B70DCDE4C50F9", item: "gtceu:clean_machine_casing", type: "item" }
+				{ id: "364A7A6804C28042", item: "gtceu:inert_machine_casing", type: "item" }
+			]
+			title: "MOCVD Reactor"
+			x: 10.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3D71CDF674EF3302"]
+			description: ["Diode bars stacked in a cooled mount make the &6InGaAs Pump Module&r that lights the fibre laser."]
+			icon: "grindless:ingaas_pump_module"
+			id: "346C198E81F5FA85"
+			rewards: [{ id: "15A975F189427D96", type: "xp", xp: 80 }]
+			tasks: [{ id: "70951C01EEF6B329", item: "grindless:ingaas_pump_module", type: "item" }]
+			title: "Pump Diode Module"
+			x: 12.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Zone Refining Tower&r sweeps germanium's impurities to the ends of a bar, over and over, until it is purer than almost anything you make. Its controller and clean room casing; eight RF coils ring the tower. The HPGe crystal in the circuits chapter. Germanium bars in and crystals out by ME; the tower runs for a long time per bar."]
+			icon: "gtceu:zone_refining_tower"
+			id: "1ADBEF1F47053EC9"
+			rewards: [{ id: "1C883F1697D2369F", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7C0F424069AE78EE", item: "gtceu:zone_refining_tower", type: "item" }
+				{ id: "1BCE898F913010CB", item: "gtceu:clean_machine_casing", type: "item" }
+			]
+			title: "Zone Refining Tower"
+			x: 4.0d
+			y: 13.0d
+		}
+		{
+			dependencies: ["1ADBEF1F47053EC9"]
+			description: ["The &6Optical Ground Station&r is the only reader of the Starshot: a primary mirror, adaptive optics and a photon counter. Its controller, UV casing, aluminium mirror blocks, computer casings for the optics bench and an SNSPD array. The Proxima approach data. Nothing to automate: it waits for the probe. Keep it powered and chunk-loaded."]
+			icon: "gtceu:optical_ground_station"
+			id: "5D40D7F4F07C52B6"
+			rewards: [{ id: "36C021FC939B4DE5", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3DE63636D2508532", item: "gtceu:optical_ground_station", type: "item" }
+				{ id: "3CD446B1EABD8A5F", item: "gtceu:uv_machine_casing", type: "item" }
+				{ id: "34A4B8D9300D4855", item: "gtceu:computer_casing", type: "item" }
+			]
+			title: "Optical Ground Station"
+			x: 5.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Boron Nitride Reactor&r grows hexagonal BN and boron nitride nanotubes, a fibre stronger than carbon that shrugs off neutrons. Its controller, UV casing, naquadah coils and a PTFE pipe run. BNNT yarn for the tank and the probe frames. Boron-10 comes from the hot cell; send the yarn on by ME."]
+			icon: "gtceu:boron_nitride_reactor"
+			id: "37B93B08FCFF08DA"
+			rewards: [{ id: "5AE77E610961C458", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "724959B8E5DCC24F", item: "gtceu:boron_nitride_reactor", type: "item" }
+				{ id: "1A5A4DC542D26628", item: "gtceu:uv_machine_casing", type: "item" }
+			]
+			title: "Boron Nitride Reactor"
+			x: 7.0d
+			y: 13.0d
+		}
+		{
+			dependencies: ["37B93B08FCFF08DA"]
+			description: ["Spin the tubes and you get &6BNNT Yarn&r: light, strong and transparent to neutrons."]
+			icon: "grindless:bnnt_yarn"
+			id: "3E5A326AEACCF50A"
+			rewards: [{ id: "5B77C236091ED375", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "3FF00B5E97DCDCFF", item: "grindless:bnnt_yarn", type: "item" }
+				{ id: "115D1CE589407BD8", item: "grindless:hbn_dust", type: "item" }
+			]
+			title: "BNNT Yarn"
+			x: 8.5d
+			y: 13.0d
+		}
+		{
+			dependencies: ["3E5A326AEACCF50A"]
+			description: ["The &6Powder-in-Tube Line&r packs a wire powder into a silver sheath and draws it down, turning one ingot of material into four. Its controller and UV casing, a drawing bench and a furnace coil. EnTED wire for the UV network. Silver sheath is kept: loop it back by ME."]
+			icon: "gtceu:powder_in_tube_line"
+			id: "1682DED202B72CC5"
+			rewards: [{ id: "7C90A2D8E0B2EC85", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "56D40CDE650591EA", item: "gtceu:powder_in_tube_line", type: "item" }
+				{ id: "5039ED5323998051", item: "gtceu:uv_machine_casing", type: "item" }
+			]
+			title: "Powder-in-Tube Line"
+			x: 10.0d
+			y: 13.0d
+		}
+		{
+			dependencies: ["1682DED202B72CC5"]
+			description: ["A drawn &6PIT Billet&r is a sheath filled with powder, ready to be rolled into wire."]
+			icon: "grindless:pit_billet"
+			id: "1352F5938C0B0298"
+			rewards: [{ id: "38E49737526E364E", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "547F6DEFB61BC71F", item: "grindless:pit_billet", type: "item" }
+				{ id: "33CA9827EF18E6EE", item: "grindless:silver_tube", type: "item" }
+			]
+			title: "Powder Billet"
+			x: 11.5d
+			y: 13.0d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Powder Bed Printer&r melts atomised metal powder layer by layer into parts that no machine tool could cut. Its controller, UV casing and a heated bed under an argon blanket. Thruster chambers, array mounts and probe frames. Powder and argon are kept; stock the printed parts by ME."]
+			icon: "gtceu:powder_bed_printer"
+			id: "1CC82013F8BF2D9B"
+			rewards: [{ id: "7ED6E0AE66B3AF04", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "36BEB5C5C133CDF3", item: "gtceu:powder_bed_printer", type: "item" }
+				{ id: "1C808105601C6D4B", item: "gtceu:uv_machine_casing", type: "item" }
+			]
+			title: "Powder Bed Printer"
+			x: 5.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["1CC82013F8BF2D9B"]
+			description: ["The &6Printed Probe Frame&r is the lightest rigid thing you build; the probe hangs from it."]
+			icon: "grindless:printed_probe_frame"
+			id: "1ACAD1676B56BFC3"
+			rewards: [{ id: "58CDFDA1D1DD9503", type: "xp", xp: 80 }]
+			tasks: [{ id: "1AA67A07BA194382", item: "grindless:printed_probe_frame", type: "item" }]
+			title: "Printed Probe Frame"
+			x: 7.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["1ACAD1676B56BFC3"]
+			description: ["The &6Cryotank Winder&r winds BNNT yarn round a liner into the tier 11 tank that level 7 rockets need. Its controller and UV casing; the resin trim is voidable. The level 7 fuel tank. Yarn and liners by ME; trim goes to a void."]
+			icon: "gtceu:cryotank_winder"
+			id: "7BC2C74CC4129019"
+			rewards: [{ id: "53901BA266CED66E", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1B77ED5E0ECFCC1C", item: "gtceu:cryotank_winder", type: "item" }
+				{ id: "1BAE79C07C32A17A", item: "gtceu:uv_machine_casing", type: "item" }
+			]
+			title: "Cryotank Winder"
+			x: 9.0d
+			y: 15.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Thruster Works&r builds gridded ion and Hall thrusters that run on xenon and krypton instead of burning anything. Its controller, UV casing, a frostproof column and PTFE pipe. The thruster pod and the probe's long burn. Noble gas comes from the cryogenic plant by pipe; stock thrusters by ME."]
+			icon: "gtceu:thruster_works"
+			id: "56276A4A85BCF379"
+			rewards: [{ id: "56212C0D3E658A57", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5706261529788541", item: "gtceu:thruster_works", type: "item" }
+				{ id: "5D647D977A36F37E", item: "gtceu:uv_machine_casing", type: "item" }
+			]
+			title: "Thruster Works"
+			x: 1.5d
+			y: 14.0d
+		}
+		{
+			dependencies: ["56276A4A85BCF379"]
+			description: ["Two kinds of thruster, one gas: the &6Ion Thruster&r for a long cruise and the &6Hall Thruster&r for a quick correction."]
+			icon: "grindless:ion_thruster"
+			id: "5D390F57DD62EDF8"
+			rewards: [{ id: "59760EFCCECB9281", type: "xp", xp: 80 }]
+			tasks: [
+				{ id: "579E269327BA3FF3", item: "grindless:ion_thruster", type: "item" }
+				{ id: "13DDCB5F49935B73", item: "grindless:hall_thruster", type: "item" }
+			]
+			title: "Ion Thrusters"
+			x: 3.5d
+			y: 16.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Ark Biosphere&r is a closed ecosystem fed by Pluto's ices. It is the first greenhouse that keeps its own air. Its controller, a UV casing floor, glass walls and an anaerobic core of inert casing. The stem cells and feedstock the vat uses. Ice by ME from Pluto; the ark recycles the rest itself."]
+			icon: "gtceu:ark_biosphere"
+			id: "59F34562582255AD"
+			rewards: [{ id: "5ECBAF07ABC6A1B2", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1F4F149923F0AD40", item: "gtceu:ark_biosphere", type: "item" }
+				{ id: "5994D85F080E7CEA", item: "gtceu:uv_machine_casing", type: "item" }
+				{ id: "54299180013D6B8C", item: "gtceu:inert_machine_casing", type: "item" }
+			]
+			title: "The Ark"
+			x: 3.0d
+			y: 14.5d
+		}
+		{
+			dependencies: ["59F34562582255AD"]
+			description: ["The &6Neural Culture Vat&r grows stem cells and neuro processing units in a single run. Its controller, plascrete, filter casing hoods and robust casing for the bioprinter. The wetware computer in the circuits chapter. Media and stem cells by ME; the vat ships the units out."]
+			icon: "gtceu:neural_culture_vat"
+			id: "350003D221C6A101"
+			rewards: [{ id: "100A666BEF0EB154", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3519193C9DCFA278", item: "gtceu:neural_culture_vat", type: "item" }
+				{ id: "769DCD55F55EDB6F", item: "gtceu:plascrete", type: "item" }
+			]
+			title: "Neural Culture Vat"
+			x: 5.0d
+			y: 16.5d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Light Sail Fab&r deposits a film a hundred nanometres thick on a carrier, then lifts it free as a sail. Its controller, the station truss casing, a Whipple shield and a tungsten heater. The sail every probe hangs from. Xenon and silicon tetrafluoride are kept: loop them; sails go out by ME."]
+			icon: "gtceu:light_sail_fab"
+			id: "7E77EFDBCC3B4374"
+			rewards: [{ id: "7ABC6BB3BC68E871", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5B875D7270B07C9E", item: "gtceu:light_sail_fab", type: "item" }
+				{ id: "746CA7407285CA5A", item: "grindless:station_truss_casing", type: "item" }
+			]
+			title: "Light Sail Fab"
+			x: 1.0d
+			y: 16.0d
+		}
+		{
+			dependencies: ["7E77EFDBCC3B4374"]
+			description: ["A &6Light Sail&r weighs almost nothing and reflects almost everything."]
+			icon: "grindless:light_sail"
+			id: "3AB434D5A69FAF2B"
+			rewards: [{ id: "3FB536BDD9DFD03B", type: "xp", xp: 80 }]
+			tasks: [{ id: "7CEB583A4EB7C29B", item: "grindless:light_sail", type: "item" }]
+			title: "Light Sail"
+			x: 3.5d
+			y: 19.0d
+		}
+		{
+			dependencies: ["3AB434D5A69FAF2B"]
+			description: ["The &6Starchip Fab&r bonds and dices a photonic chip, a qubit and a source into a probe that weighs a gram. Its controller, clean room casing and a filter hood; kerf is voidable. The starchip in the circuits chapter. Parts by ME; dicing waste goes to a void."]
+			icon: "gtceu:starchip_fab"
+			id: "3D0F0BDA824B2E7B"
+			rewards: [{ id: "1ED124D179A7777A", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7B9A8E65D3D42EE1", item: "gtceu:starchip_fab", type: "item" }
+				{ id: "5A789706E36BA627", item: "gtceu:clean_machine_casing", type: "item" }
+			]
+			title: "Starchip Fab"
+			x: 5.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["3D0F0BDA824B2E7B"]
+			description: ["The &6Laser Sail Launcher&r on the Moon pushes the sail with a beam of light until it leaves the Solar System. Its controller, UV casing and a ring of &6Laser Module Blocks&r. The probe in flight, and the data it sends home. One launch at a time; power it from the network and keep the probes stocked."]
+			icon: "gtceu:laser_sail_launcher"
+			id: "1AC40B9509A5D9E4"
+			rewards: [{ id: "5BF163ACB042919C", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3DA1D360CD6447FE", item: "gtceu:laser_sail_launcher", type: "item" }
+				{ id: "7BE505E68FE46C8D", item: "gtceu:uv_machine_casing", type: "item" }
+				{ id: "30838FE821EE6835", item: "grindless:laser_module_block", type: "item" }
+			]
+			title: "Laser Sail Launcher"
+			x: 7.0d
+			y: 17.0d
+		}
+		{
+			dependencies: ["16D1550DF465D570"]
+			description: ["The &6Mega Factory&r has sockets, and each takes a module that adds its own recipe types. Every installed module drinks PCB coolant. Its controller, a shell of UV casing, naquadah coils and the modules you mean to run. Separation, forming, cutting, mixing and heat in a single frame. Keep a PCB coolant tank on a pipe; the modules share it."]
+			icon: "gtceu:mega_factory"
+			id: "1A2F724B54F17B1E"
+			rewards: [{ id: "7094975ADD1BB9B1", type: "xp", xp: 200 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5859EA0AFFFAF02C", item: "gtceu:mega_factory", type: "item" }
+				{ id: "5C73AA99C83AEC60", item: "gtceu:uv_machine_casing", type: "item" }
+			]
+			title: "Mega Factory"
+			x: 2.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["1AA12DFECDEFD309"]
+			description: ["The &6Neptune Deep Siphon&r drops a scoop through the methane deck for hydrogen rich in deuterium, and helium with a trace of helium-3. Its controller and the station truss casing; at least fourteen casings among its floor cells. The helium for the superleak and the Neptunian quantum seed. Pipe the gas home through the seed; no hand work."]
+			icon: "gtceu:neptune_deep_siphon"
+			id: "7D3D51F478AD6842"
+			rewards: [{ id: "75B8668ED9F126E9", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3E0EFFF0D98874A2", item: "gtceu:neptune_deep_siphon", type: "item" }
+				{ id: "530092AEFD075822", item: "grindless:station_truss_casing", type: "item" }
+			]
+			title: "Deep Neptune"
+			x: 17.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["7D3D51F478AD6842"]
+			description: ["The &6Triton Geyser Sampler&r flies through the plumes of nitrogen ice that Triton throws, and brings back an ice core. Its controller, the station truss casing and a probe hangar of titanium frames. Triton nitrogen, and the ice core that grows the next seed. A cartridge per run by ME; collect the core and the nitrogen from the hatches."]
+			icon: "gtceu:triton_geyser_sampler"
+			id: "762C4669D260B0F2"
+			rewards: [{ id: "14EA255000E13815", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "504BC07CD4CDC3A5", item: "gtceu:triton_geyser_sampler", type: "item" }
+				{ id: "14E4722BB571B705", item: "grindless:station_truss_casing", type: "item" }
+			]
+			title: "Triton's Geysers"
+			x: 19.0d
+			y: 8.5d
+		}
+		{
+			dependencies: ["762C4669D260B0F2"]
+			description: ["A &6Triton Ice Core&r is the catalyst the Pluto penetrator drills with."]
+			icon: "grindless:triton_ice_core"
+			id: "76C00CDEFC09A52F"
+			rewards: [{ id: "74EE7036CCFF3E79", type: "xp", xp: 80 }]
+			tasks: [{ id: "1696BFC8E3F38BCD", item: "grindless:triton_ice_core", type: "item" }]
+			title: "Triton Ice Core"
+			x: 20.5d
+			y: 8.5d
+		}
+		{
+			dependencies: ["309F1CA9C2FE71C9"]
+			description: ["The &6Penetrator Probe Bay&r drops a probe that melts its way into the glacier of Sputnik Planitia and sends a core up. Its controller, the station truss casing and a pressure hull casing. The Sputnik ice core and the Plutonian quantum seed. Probes by ME; the bay returns the core in the same pass."]
+			icon: "gtceu:penetrator_probe_bay"
+			id: "7532E9F54B57BF70"
+			rewards: [{ id: "1649E5FAC20F6FA6", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "70D7C4ED40A032CF", item: "gtceu:penetrator_probe_bay", type: "item" }
+				{ id: "3888C7D0E4CAF592", item: "grindless:station_truss_casing", type: "item" }
+				{ id: "31B6FD0B24CFA6A3", item: "grindless:pressure_hull_casing", type: "item" }
+			]
+			title: "Into the Heart"
+			x: 24.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["7532E9F54B57BF70"]
+			description: ["The &6Sputnik Ice Core&r is a column of nitrogen ice from the glacier, still layered the way it formed."]
+			icon: "grindless:sputnik_ice_core"
+			id: "5D202249DE11C108"
+			rewards: [{ id: "152139C9E6F82ADC", type: "xp", xp: 80 }]
+			tasks: [{ id: "7A7841FB95B1CE4A", item: "grindless:sputnik_ice_core", type: "item" }]
+			title: "Sputnik Ice Core"
+			x: 26.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["5D202249DE11C108"]
+			description: ["The &6Volatile Ice Fractionator&r warms a core a few kelvin at a time and collects each ice as it turns to gas. Its controller, the station truss casing and a frostproof column. Nitrogen, methane and carbon monoxide at their sources. Cores in by ME; each gas has its own hatch and tank."]
+			icon: "gtceu:volatile_ice_fractionator"
+			id: "11689C4D9A9ABF77"
+			rewards: [{ id: "5DF7243CAAE3C87A", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "343B21497302CF70", item: "gtceu:volatile_ice_fractionator", type: "item" }
+				{ id: "16ED74AA2D96D858", item: "grindless:station_truss_casing", type: "item" }
+				{ id: "7F327C9338A63D79", item: "gtceu:frostproof_machine_casing", type: "item" }
+			]
+			title: "Ices Apart"
+			x: 29.0d
+			y: 8.5d
+		}
+		{
+			dependencies: ["309F1CA9C2FE71C9"]
+			description: ["The &6Kuiper Interceptor Bay&r launches a probe at a Kuiper belt object and brings a sample back. Its controller, the station truss casing and the probe hangar rail. The planetesimal sample. Probes by ME; the sample comes out in a canister."]
+			icon: "gtceu:kuiper_interceptor_bay"
+			id: "1F125850043BA593"
+			rewards: [{ id: "71B1692CA99E1E54", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7E520225DA4A11AB", item: "gtceu:kuiper_interceptor_bay", type: "item" }
+				{ id: "3F0103BF5EF9138B", item: "grindless:station_truss_casing", type: "item" }
+			]
+			title: "Arrokoth's Kin"
+			x: 23.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1F125850043BA593"]
+			description: ["A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed."]
+			icon: "grindless:planetesimal_sample"
+			id: "3D26AB0B36F9CEB1"
+			rewards: [{ id: "3568332CA756123D", type: "xp", xp: 80 }]
+			tasks: [{ id: "5FC9F0CFF93FC518", item: "grindless:planetesimal_sample", type: "item" }]
+			title: "Planetesimal Sample"
+			x: 25.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["3D26AB0B36F9CEB1"]
+			description: ["The &6Amorphous Ice Annealer&r warms a sample through its crystallisation at about 140 K, and the trapped noble gases escape. Its controller, the station truss casing, a cryostat and a gas manifold. Argon, krypton and xenon for the thrusters. Samples by ME; the dust is voidable."]
+			icon: "gtceu:amorphous_ice_annealer"
+			id: "3B735C4FE7902BB1"
+			rewards: [{ id: "39FF6A173566C47C", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1366BA23D31B5DDA", item: "gtceu:amorphous_ice_annealer", type: "item" }
+				{ id: "3EBCC9B912178762", item: "grindless:station_truss_casing", type: "item" }
+				{ id: "5EE052F8F5E38909", item: "grindless:cryostat_casing", type: "item" }
+			]
+			title: "Trapped Since the Beginning"
+			x: 27.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["309F1CA9C2FE71C9"]
+			description: ["The &6Precursor Probe Bay&r sends a probe ahead along a rail to the edge of the Sun's wind, and listens to what it finds. Its controller, the station truss casing, a pressure hull casing and a computer casing relay. The heliopause data. Probes by ME; the data is one item per flight."]
+			icon: "gtceu:precursor_probe_bay"
+			id: "75BE44AC4E14F680"
+			rewards: [{ id: "17216760A7FAC65E", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7FAD2188CA83A589", item: "gtceu:precursor_probe_bay", type: "item" }
+				{ id: "7380C59755BCE113", item: "grindless:station_truss_casing", type: "item" }
+				{ id: "5E2577A7B3E37D52", item: "grindless:pressure_hull_casing", type: "item" }
+			]
+			title: "Heliopause"
+			x: 24.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["75BE44AC4E14F680"]
+			description: ["The &6Event Horizon Interferometer&r combines dishes across the Solar System into one telescope, aimed at the black hole at the galaxy's centre. Its controller, the station truss casing, a pressure hull casing, a dish and a maser clock. The Sgr A* image, the end of the Pluto row. Catalogue and data by ME; it needs no other input."]
+			icon: "gtceu:event_horizon_interferometer"
+			id: "1DE611D0B4511CCC"
+			rewards: [{ id: "70C16DEE0301219C", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "5E266ED5E1D6EFFC", item: "gtceu:event_horizon_interferometer", type: "item" }
+				{ id: "5462CFB227CB1999", item: "grindless:station_truss_casing", type: "item" }
+				{ id: "1034BC7E8B46F45A", item: "grindless:pressure_hull_casing", type: "item" }
+				{ id: "70B79C0CD01DB443", item: "gtceu:advanced_computer_casing", type: "item" }
+			]
+			title: "The Shadow"
+			x: 26.0d
+			y: 9.5d
 		}
 	]
 	subtitle: ["Neptune, Pluto, the heliopause and a sail to the next star. The plants and circuits that get you there are in the chapters beside this one."]

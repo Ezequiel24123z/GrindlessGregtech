@@ -3,12 +3,25 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "zpm_age"
-	group: "4E32EDFD57B398F2"
+	group: "3F021F40CD26BF57"
 	icon: "grindless:saturn_transfer_chart"
 	id: "5BA25622CE14713A"
 	order_index: 0
 	quest_links: [ ]
 	quests: [
+		{
+			dependencies: ["7B0EFFD4E295AFAD"]
+			description: ["The road of the era, from the first step to the gate that leads on. Everything else here hangs from it."]
+			icon: "minecraft:writable_book"
+			id: "35B2275E821B40AC"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "3D4BAC9EAD99297F", type: "checkmark" }]
+			title: "The Journey"
+			x: 2.5d
+			y: -2.0d
+		}
 		{
 			dependencies: ["1753F1FE9C989F6C"]
 			description: [
@@ -38,8 +51,8 @@
 			size: 0.75d
 			tasks: [{ id: "133B2FE4AAA569C2", type: "checkmark" }]
 			title: "Thin Sunlight"
-			x: 2.0d
-			y: 0.0d
+			x: 6.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["760580173FC8670D"]
@@ -52,8 +65,8 @@
 				{ id: "33606149899472DC", item: "grindless:saturnian_quantum_seed", type: "item" }
 			]
 			title: "Level Five"
-			x: 4.0d
-			y: 0.0d
+			x: 8.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["7B7F696C0E4DF709"]
@@ -65,8 +78,8 @@
 			size: 1.25d
 			tasks: [{ dimension: "grindless:saturn_orbit", id: "150CF4881DA5FB8F", type: "dimension" }]
 			title: "Third Station"
-			x: 6.0d
-			y: 0.0d
+			x: 12.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["3CBBA765447C908A"]
@@ -79,8 +92,8 @@
 			size: 0.75d
 			tasks: [{ id: "76D8BE65E7769F3D", type: "checkmark" }]
 			title: "Keep the Lights On"
-			x: 6.0d
-			y: 1.5d
+			x: 14.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["3CBBA765447C908A"]
@@ -92,8 +105,8 @@
 			size: 0.75d
 			tasks: [{ id: "1937E6B76DA1DA83", type: "checkmark" }]
 			title: "The Salty Moon"
-			x: 8.0d
-			y: -3.0d
+			x: 14.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["3CBBA765447C908A"]
@@ -103,8 +116,8 @@
 			rewards: [{ id: "5A019FB8D83F8FC5", type: "xp", xp: 100 }]
 			tasks: [{ id: "12EAC45737D9063B", item: "grindless:ring_ice_sample", type: "item" }]
 			title: "Ring Ice"
-			x: 8.0d
-			y: -1.5d
+			x: 15.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["1DC36D16DBF0BC03"]
@@ -114,8 +127,8 @@
 			rewards: [{ id: "37A70C23AF76CDA4", type: "xp", xp: 100 }]
 			tasks: [{ id: "5EE17B5AD57FCC6E", item: "grindless:titan_probe_recording", type: "item" }]
 			title: "Titan's Haze"
-			x: 10.0d
-			y: -1.5d
+			x: 17.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["3F6D11BF4C2EAF0B"]
@@ -125,8 +138,8 @@
 			rewards: [{ id: "114DEA61DA308FC4", type: "xp", xp: 100 }]
 			tasks: [{ id: "71735701E16A7CEE", item: "grindless:tholin", type: "item" }]
 			title: "Tholins"
-			x: 12.0d
-			y: -1.5d
+			x: 19.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["160D1EB11990217E"]
@@ -138,8 +151,8 @@
 			size: 0.75d
 			tasks: [{ id: "50D70059F9342925", type: "checkmark" }]
 			title: "Organics Everywhere"
-			x: 14.0d
-			y: -1.5d
+			x: 21.5d
+			y: -2.5d
 		}
 		{
 			dependencies: ["3CBBA765447C908A"]
@@ -149,8 +162,8 @@
 			rewards: [{ id: "56285F5A56C1CC39", type: "xp", xp: 100 }]
 			tasks: [{ id: "3FB81464EEE78B0D", item: "gtceu:helium_3_bucket", type: "item" }]
 			title: "Saturn's Helium"
-			x: 8.0d
-			y: 1.5d
+			x: 14.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["3CBBA765447C908A"]
@@ -160,8 +173,8 @@
 			rewards: [{ id: "7C28252B1E12F9AC", type: "xp", xp: 100 }]
 			tasks: [{ id: "1416F63CBF33A86B", item: "grindless:aerogel_cartridge", type: "item" }]
 			title: "Aerogel, Flown"
-			x: 8.0d
-			y: 0.0d
+			x: 16.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["51DE1101E3742508"]
@@ -174,8 +187,8 @@
 				{ id: "5A6E0172E53CC5D3", item: "grindless:uranus_transfer_chart", type: "item" }
 			]
 			title: "Ring Song"
-			x: 10.0d
-			y: 0.0d
+			x: 17.5d
+			y: 2.0d
 		}
 		{
 			dependencies: ["5934DC53BB683C7F"]
@@ -188,8 +201,8 @@
 				{ id: "74AC49F8FE952A35", item: "grindless:uranian_quantum_seed", type: "item" }
 			]
 			title: "Level Six"
-			x: 12.0d
-			y: 0.0d
+			x: 20.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["3F7C9D7577EC9E61"]
@@ -201,8 +214,8 @@
 			size: 1.25d
 			tasks: [{ dimension: "grindless:uranus_orbit", id: "567006E8CEB1684F", type: "dimension" }]
 			title: "Fourth Station"
-			x: 14.0d
-			y: 0.0d
+			x: 23.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["53764AAB65F5DEA2"]
@@ -214,8 +227,8 @@
 			size: 0.75d
 			tasks: [{ id: "590A6C86E8625EC4", type: "checkmark" }]
 			title: "Tipped Over"
-			x: 14.0d
-			y: 1.5d
+			x: 24.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["53764AAB65F5DEA2"]
@@ -225,8 +238,8 @@
 			rewards: [{ id: "3158DF01B93F4A2B", type: "xp", xp: 120 }]
 			tasks: [{ id: "1A27932001992774", item: "grindless:ice_giant_atmosphere_sample", type: "item" }]
 			title: "Deep Gas"
-			x: 16.0d
-			y: 0.0d
+			x: 25.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["53764AAB65F5DEA2"]
@@ -236,7 +249,7 @@
 			rewards: [{ id: "5D57EB71DF8D1859", type: "xp", xp: 120 }]
 			tasks: [{ id: "545CA38A055DB1AA", item: "grindless:ice_giant_diamond_seed", type: "item" }]
 			title: "Diamond Rain"
-			x: 16.0d
+			x: 24.5d
 			y: -1.5d
 		}
 		{
@@ -249,8 +262,8 @@
 			size: 0.75d
 			tasks: [{ id: "75027D4D76A85FF5", type: "checkmark" }]
 			title: "Where the Carbon Goes"
-			x: 18.0d
-			y: -1.5d
+			x: 27.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["3F41824BAF2F1DC7"]
@@ -260,8 +273,8 @@
 			rewards: [{ id: "1D6E7FE259D4A650", type: "xp", xp: 120 }]
 			tasks: [{ id: "193B2DB8A6C5A3D3", item: "grindless:neptune_flyby_probe", type: "item" }]
 			title: "Past Neptune"
-			x: 18.0d
-			y: 0.0d
+			x: 27.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["73AF7DB38F9A4A8E"]
@@ -271,8 +284,8 @@
 			rewards: [{ id: "3510D8CB7E2711E0", type: "xp", xp: 100 }]
 			tasks: [{ id: "53DC69CDB06D836C", item: "grindless:neptune_probe_recording", type: "item" }]
 			title: "The Recording"
-			x: 20.0d
-			y: 0.0d
+			x: 29.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["78B3344DD560D1A1"]
@@ -282,8 +295,8 @@
 			rewards: [{ id: "3B5EA7D79C758B3F", type: "xp", xp: 120 }]
 			tasks: [{ id: "1682E990B8BDEE8A", item: "grindless:multimessenger_catalogue", type: "item" }]
 			title: "Many Messengers"
-			x: 20.0d
-			y: 1.5d
+			x: 31.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["78B3344DD560D1A1"]
@@ -293,8 +306,8 @@
 			rewards: [{ id: "3F9F9779B36A2607", type: "xp", xp: 120 }]
 			tasks: [{ id: "56169FD0D8A2D2E1", item: "grindless:neptune_flyby_data", type: "item" }]
 			title: "Flyby Data"
-			x: 22.0d
-			y: 0.0d
+			x: 32.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["30909014FE32F697"]
@@ -304,8 +317,8 @@
 			rewards: [{ id: "1840569730D5167C", type: "xp", xp: 120 }]
 			tasks: [{ id: "1CD73F11A1863AFF", item: "grindless:kuiper_target_list", type: "item" }]
 			title: "Kuiper Targets"
-			x: 24.0d
-			y: 0.0d
+			x: 33.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["14961D670920ACD5"]
@@ -315,8 +328,8 @@
 			rewards: [{ id: "5E56CEB01207DD34", type: "xp", xp: 100 }]
 			tasks: [{ id: "7D1AE192B17C2FBD", item: "grindless:solar_core_survey", type: "item" }]
 			title: "The Sun From Inside"
-			x: 26.0d
-			y: 1.5d
+			x: 35.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["14961D670920ACD5"]
@@ -328,8 +341,8 @@
 			size: 1.25d
 			tasks: [{ id: "5C4D8ECE7C121843", item: "grindless:pluto_kuiper_chart", type: "item" }]
 			title: "The Pluto Chart"
-			x: 26.0d
-			y: 0.0d
+			x: 36.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["5B2519B70D6E0738"]
@@ -341,8 +354,8 @@
 			size: 0.75d
 			tasks: [{ id: "59C5544CAB152763", type: "checkmark" }]
 			title: "What UV Keeps"
-			x: 26.0d
-			y: -1.5d
+			x: 38.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["5B2519B70D6E0738", "3B3A8E96594DFFE2"]
@@ -359,8 +372,933 @@
 				{ id: "5FE036806705D56D", item: "grindless:solar_core_survey", type: "item" }
 			]
 			title: "Gate to UV"
+			x: 37.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["7B0EFFD4E295AFAD"]
+			description: ["The wafers, chips and circuits of the era, from the first assembler to the mainframe, and the parts built from them."]
+			icon: "minecraft:writable_book"
+			id: "7A980F3B74DBF079"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "15FA928A6CD3DAD0", type: "checkmark" }]
+			title: "Circuits"
+			x: 2.0d
+			y: -7.0d
+		}
+		{
+			dependencies: ["7A980F3B74DBF079"]
+			description: ["The &6ZPM Circuit Assembler&r is the first assembler that can build the circuits ZPM machines are made of. ZPM components for its hull, a cleanroom you already run, and the LuV circuits that feed it. The crystal computer and the quantum mainframe below, and every controller of this era. Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns."]
+			icon: "gtceu:zpm_circuit_assembler"
+			id: "77DE04F713EEBE61"
+			rewards: [{ id: "5FC15E60BB7CE99E", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "136C049EB81F6601", item: "gtceu:zpm_circuit_assembler", type: "item" }]
+			title: "ZPM Circuit Assembler"
+			x: 3.5d
+			y: -10.5d
+		}
+		{
+			dependencies: ["77DE04F713EEBE61"]
+			description: ["Crystal processor assemblies on a larger board make the &6Crystal Processor Computer&r, the first ZPM circuit. Several crystal assemblies for each, the ZPM assembler, and research from the station you built at LuV. ZPM hulls and the controllers of this era that ask for a circuit. Crystal assemblies come from the LuV line by ME; let the ZPM assembler draw them on demand."]
+			icon: "gtceu:crystal_processor_computer"
+			id: "1D98852F1AB675C2"
+			rewards: [{ id: "17A9CB0334DE9233", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "556DBC5E786C7517", item: "gtceu:crystal_processor_computer", type: "item" }]
+			title: "Crystal Computer"
+			x: 5.5d
+			y: -10.5d
+		}
+		{
+			dependencies: ["7A980F3B74DBF079"]
+			description: ["A &6Qubit CPU Wafer&r is a wafer treated with radon so that its structure can hold a quantum state. Radon from the waste retrieval plant, which is why home comes first in this era. The qubit CPU chip, and through it the quantum mainframe. Radon is a loop: take it from the plant by ME and let the reactor return the rest."]
+			icon: "gtceu:qbit_cpu_wafer"
+			id: "1000B35476B6FAC2"
+			rewards: [{ id: "1B15AB89BB048686", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5A3F22E0F4B329C2", item: "gtceu:qbit_cpu_wafer", type: "item" }]
+			title: "Quantum Wafer"
+			x: 4.0d
+			y: -9.0d
+		}
+		{
+			dependencies: ["1000B35476B6FAC2"]
+			description: ["Cut from the wafer, the &6Qubit CPU Chip&r is the part of a quantum circuit that does the counting. A cleanroom and the laser cutting GregTech asks for. The quantum mainframe. One wafer, many chips: keep a stock by ME so the assembler never waits."]
+			icon: "gtceu:qbit_cpu_chip"
+			id: "154A85EE43809FA1"
+			rewards: [{ id: "79F1DA7C1CA9D838", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "355FAD82857C0EBB", item: "gtceu:qbit_cpu_chip", type: "item" }]
+			title: "Quantum Chip"
+			x: 5.5d
+			y: -9.0d
+		}
+		{
+			dependencies: ["154A85EE43809FA1", "1D98852F1AB675C2"]
+			description: ["The &6Quantum Processor Mainframe&r is the biggest circuit ZPM builds, and the one the Mk2 and the research stations lean on. Quantum chips and a computer-grade board by the stack, and the ZPM assembler to put them together. ZPM machine hulls and the hatches that open the gate to UV. Make it in the assembly line from stocked parts; ME keeps the mainframes in a dedicated chest."]
+			icon: "gtceu:quantum_processor_mainframe"
+			id: "5353B2E6D14E53D3"
+			rewards: [{ id: "31FA823ACF23F80F", type: "xp", xp: 180 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "79E221DF204A5F8D", item: "gtceu:quantum_processor_mainframe", type: "item" }]
+			title: "Quantum Mainframe"
+			x: 8.0d
+			y: -9.5d
+		}
+		{
+			dependencies: ["7A980F3B74DBF079"]
+			description: ["Isotopically pure silicon is grown as a &6Silicon-28 Boule&r and cut into wafers. Ordinary silicon has too much magnetic noise for what comes next. Silicon-28 from the hot cell, an EBF for the boule and a cutter. The boule is the slow part. Donor qubits, and the silicon the qubit fab asks for. The hot cell runs all day. Send its silicon to the EBF by ME and stock the wafers."]
+			icon: "grindless:silicon_28_wafer"
+			id: "5D07EB0A82EEE479"
+			rewards: [{ id: "5D72DCF3F381B59F", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5A39D0FF474899EA", item: "grindless:silicon_28_boule", type: "item" }
+				{ id: "7742C9FE252CCFBD", item: "grindless:silicon_28_wafer", type: "item" }
+			]
+			title: "Silicon-28"
+			x: 3.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["5D07EB0A82EEE479"]
+			description: ["A single phosphorus atom in spin-free silicon holds a quantum state. The &6Donor Qubit Wafer&r is a silicon-28 wafer with them placed one at a time. The ion implanter, silicon-28 wafers and phosphorus. The qubit array, by the donor route. Implantation is slow, so run several implanters and let ME collect the wafers."]
+			icon: "grindless:donor_qubit_wafer"
+			id: "1D7FE3922B3DBF22"
+			rewards: [{ id: "16561E6518BA9165", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "394DF0F6F19CC29B", item: "grindless:donor_qubit_wafer", type: "item" }]
+			title: "Donor Qubits"
+			x: 5.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["7A980F3B74DBF079"]
+			description: ["A nitrogen atom next to a gap in diamond is a qubit that works warm. The &6NV Diamond Chip&r is a doped diamond plate with them placed in it. Nitrogen-doped plates from the diamond lattice fab, then the ion implanter. The qubit array, by the slower diamond route. The doped plate is the slow step; give the fab its own nitrogen feed."]
+			icon: "grindless:nv_diamond_chip"
+			id: "5F0C09AC946B3ECA"
+			rewards: [{ id: "3F118BCA0B5E4A1F", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "5E012EA6434CDC82", item: "grindless:nitrogen_doped_cvd_plate", type: "item" }
+				{ id: "5E94DFBC293D0FAA", item: "grindless:nv_diamond_chip", type: "item" }
+			]
+			title: "NV Diamond"
+			x: 4.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["1D7FE3922B3DBF22", "5F0C09AC946B3ECA"]
+			description: ["Qubits only hold their state when almost nothing is moving. The &6Cryostat Casing&r keeps the fab that cold. Aerogel and gold-plated copper for the casing, and a helium-3 and helium-4 mixture to run the cold. The qubit fab, and every cryogenic hall that comes after. The mixture is not consumed: top it up with a little helium-3 by ME."]
+			icon: "grindless:cryostat_casing"
+			id: "119B62380F5F76FC"
+			rewards: [{ id: "1FAA0F12448553D4", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "7B831BE9E559C9AB", item: "grindless:cryostat_casing", type: "item" }]
+			title: "Millikelvin"
+			x: 6.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["119B62380F5F76FC"]
+			description: ["A &6Qubit Array&r stands in for a stack of circuits in the computation parts our alternative recipes build. Donor wafers or NV chips, and the cold charge the qubit fab runs on. The computation components for the research station, at a fraction of the circuits. Keep a stock by ME; the fab is slow and the components draw them by the handful."]
+			icon: "grindless:qubit_array"
+			id: "5E3D46F05A5DC030"
+			rewards: [{ id: "75301C117C95228C", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "366588EA5B3BDB21", item: "grindless:qubit_array", type: "item" }]
+			title: "Qubit Array"
+			x: 8.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["5E3D46F05A5DC030"]
+			description: [
+				"One qubit array does the work of four circuits in an &6HPCA Computation Component&r, and two replace the advanced component's four UV circuits. Fewer parts, harder to make."
+				"The ZPM Lines chart shows the line."
+			]
+			icon: "gtceu:hpca_computation_component"
+			id: "18E2CD33AE83DC33"
+			rewards: [{ id: "1A9DB5E4BD1A672C", type: "xp", xp: 120 }]
+			tasks: [
+				{ id: "39777E31C2074D44", item: "gtceu:hpca_computation_component", type: "item" }
+				{ id: "1B0262BDE8CF6B78", item: "gtceu:hpca_advanced_computation_component", type: "item" }
+			]
+			title: "Computation from Qubits"
+			x: 10.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["7B0EFFD4E295AFAD"]
+			description: ["Power, networks and processes that tie this era to the lines you already run."]
+			icon: "minecraft:writable_book"
+			id: "5741B1B194B47EB5"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "7BE80F262B773041", type: "checkmark" }]
+			title: "Integration"
+			x: 2.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["5741B1B194B47EB5"]
+			description: ["Fuel only gets worth burning once the Mk2 has excited it with radon. That's a big start for a small amount, so in practice the Mk2 comes before the reactor."]
+			icon: "gtceu:radon_bucket"
+			id: "5331DFDEAD7A36A2"
+			rewards: [{ id: "5D6F6C796DAB4E2C", type: "xp", xp: 30 }]
+			size: 0.75d
+			tasks: [{ id: "1354C757B5C50938", type: "checkmark" }]
+			title: "Excited"
+			x: 5.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["5331DFDEAD7A36A2"]
+			description: ["GT--'s &6Large Naquadah Reactor&r burns excited fuel and is the era's main plant. Duranium frames are part of its price. Excited fuel from the Mk2, and a fuel works ready to take the spent fuel back. Power on a scale ZPM's machines expect, with a fuel loop that never leaves the base. Pipe spent fuel straight back to the fuel works and let ME top up the radon."]
+			icon: "gtnn:large_naquadah_reactor"
+			id: "54B43A225E11111F"
+			rewards: [{ id: "36B2389775956097", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1900BFBD83C15B01", item: "gtnn:large_naquadah_reactor", type: "item" }
+				{ id: "3349030F79E58618", item: "gtceu:duranium_frame", type: "item" }
+			]
+			title: "The Big Reactor"
+			x: 7.0d
+			y: 16.0d
+		}
+		{
+			dependencies: ["54B43A225E11111F"]
+			description: ["A &6ZPM SMES cell&r and a wireless hatch put another tier on the network. Sunlight is a rumour at Saturn, so everything out there draws from it. The cold room that winds the wire, and a reactor worth storing. Stations at Saturn and Uranus that run on power made at home. Nothing to feed: size the cells for your busiest hour and add more when it dips."]
+			icon: "grindless:zpm_smes_cell"
+			id: "57720D544EAFA2F9"
+			rewards: [{ id: "3BD20C011F89364F", type: "xp", xp: 100 }]
+			shape: "rsquare"
+			size: 1.25d
+			tasks: [
+				{ id: "1B058F6328DC468F", item: "grindless:zpm_smes_cell", type: "item" }
+				{ id: "3CD3FF55887D41DB", item: "gtceu:zpm_wireless_energy_hatch", type: "item" }
+			]
+			title: "The Network Goes ZPM"
+			x: 9.0d
+			y: 16.0d
+		}
+		{
+			dependencies: ["57720D544EAFA2F9"]
+			description: ["The &6Fusion Reactor Mk2&r makes duranium, excites fuel and runs the aneutronic burn. Its start is huge, so give it plenty of ZPM hatches. Four ZPM energy hatches on the network, and gallium and radon for the first batches. Duranium, excited fuel, and the metals UV asks for early. Feed it from tanks by pipe, and keep the hatches topped from the network."]
+			icon: "gtceu:zpm_fusion_reactor"
+			id: "38199670D4113E48"
+			rewards: [{ id: "1014D26A05E4BDFE", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "7DACEF768CD1D437", item: "gtceu:zpm_fusion_reactor", type: "item" }
+				{ count: 4L, id: "3FEBA19E1E2F33E5", item: "gtceu:zpm_energy_input_hatch", type: "item" }
+				{ id: "39D334A75BD56C7E", item: "gtceu:duranium_ingot", type: "item" }
+			]
+			title: "Second Ring"
+			x: 10.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["38199670D4113E48"]
+			description: ["The &6ZPM Parallel Hatch&r runs one machine on far more at a time. Worth a few for any line that keeps backing up. A machine that accepts one, and the power to match what it now eats. Throughput without another hall. Larger batches mean larger input buffers: check your pipes can keep up."]
+			icon: "gtceu:zpm_parallel_hatch"
+			id: "7BA0FD9FFFA13BFC"
+			optional: true
+			rewards: [{ id: "5A92D1CD5DF49A74", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 0.75d
+			tasks: [{ id: "5F30DE5872812640", item: "gtceu:zpm_parallel_hatch", type: "item" }]
+			title: "Sixty-Four at Once"
+			x: 13.0d
+			y: 17.0d
+		}
+		{
+			dependencies: ["3CBBA765447C908A"]
+			description: ["Deuterium and helium-3 fuse into helium with almost no stray neutrons. It runs on the Mk2 only, and it's the clean way to turn Saturn's gas into power. Helium-3 and deuterium from the isotope column, and a Mk2 that's already running. Power from Saturn that needs no reactor waste. Send the helium-3 home by the pair and let ME keep the Mk2 stocked."]
+			icon: "gtceu:helium_3_bucket"
+			id: "728E2D977FC3D3C5"
+			rewards: [{ id: "118FCFD058C13B9E", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "3F8ED1D3F8195AAB", item: "gtceu:zpm_fusion_reactor", type: "item" }
+				{ id: "1F7E480BD8256AC3", item: "gtceu:helium_3_bucket", type: "item" }
+			]
+			title: "Aneutronic"
+			x: 14.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["728E2D977FC3D3C5"]
+			description: ["The &6Direct Energy Converter&r takes charge straight off the plasma, with no turbine in between. The cooled gas goes back, so nothing is lost but heat. Helium plasma from the Mk2, and a hatch to carry the output. The cleanest power of the era, and the best use of Saturn. Return the cooled gas to the isotope column and the loop closes."]
+			icon: "gtceu:direct_energy_converter"
+			id: "7E64F29B6EE66B09"
+			rewards: [{ id: "7BBC2F2FE62A8776", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5E1D2C03F378C17A", item: "gtceu:direct_energy_converter", type: "item" }]
+			title: "Direct Conversion"
+			x: 15.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["5741B1B194B47EB5"]
+			description: ["The IV &6Naquadah Plant&r learns a third mode: the leftover solution from the refinery becomes enriched naquadah dust, and the acid comes back. Enriched naquadah solution from the naquadria refinery, and the right circuit in the plant. Starts for the Mk2 and fuel for the reactor, from what used to be waste. Pipe the solution in, the acid back to the refinery, and the dust to ME."]
+			icon: "gtceu:naquadah_plant"
+			id: "510963E4F6E67A64"
+			rewards: [{ id: "55C924A4FD6FA669", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "3FD5F0200F8771B3", item: "gtceu:naquadah_plant", type: "item" }
+				{ id: "55B9886310BDD8F4", type: "checkmark" }
+			]
+			title: "Mode Three"
+			x: 4.0d
+			y: 17.5d
+		}
+		{
+			dependencies: ["510963E4F6E67A64"]
+			description: ["The EV &6Extraction Cascade&r takes monazite froth in its ZPM mode and hands back a rare-earth chloride with europium in it. Froth from the monazite line and the ZPM circuit, nothing new to build. The europium reductor, without waiting on fusion. Feed it froth by pipe and send the chloride on to the reductor."]
+			icon: "gtceu:extraction_cascade"
+			id: "74BD973EDBE9553A"
+			rewards: [{ id: "3E47BE9283BD58BF", type: "xp", xp: 80 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "37EE179ABBCA85FB", item: "gtceu:extraction_cascade", type: "item" }
+				{ id: "1C2091372D901945", type: "checkmark" }
+			]
+			title: "Cascade, Reloaded"
+			x: 6.5d
+			y: 18.0d
+		}
+		{
+			dependencies: ["74BD973EDBE9553A"]
+			description: ["The IV &6Hot Cell&r gets a silicon-28 mode: silicon and hydrofluoric acid in, the pure isotope out, the rest looped back. Silicon, hydrofluoric acid and the uranium centrifuges the hot cell already feeds. Silicon-28 for the ion implanter, and so for the qubit arrays. The spare silicon and acid return on their own: just keep both tanks topped."]
+			icon: "grindless:silicon_28_dust"
+			id: "7C205CBF99A79EFB"
+			rewards: [{ id: "133A15B6C99C70E5", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "75612C3F659E8836", item: "gtceu:hot_cell", type: "item" }
+				{ id: "32FC196BDBE2F252", item: "grindless:silicon_28_dust", type: "item" }
+			]
+			title: "Silicon-28, Slowly"
+			x: 8.5d
+			y: 21.5d
+		}
+		{
+			dependencies: ["7C205CBF99A79EFB"]
+			description: ["The HV &6Composite Autoclave&r bakes carbon fibre and resin into a &6PICA Heat Shield&r, the skin a probe needs to survive a haze. Carbon fibre and phenolic resin, and the circuit for its new mode. Entry probes for Titan and flyby probes past Neptune. Shields are bulky: store them in ME and let the probe bays pull what they need."]
+			icon: "grindless:pica_heat_shield"
+			id: "3691190A2A0269EB"
+			rewards: [{ id: "13E08D0C06B67475", type: "xp", xp: 100 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "19E0558B5EDB405E", item: "gtceu:composite_autoclave", type: "item" }
+				{ id: "3A4DD2F3663D2984", item: "grindless:pica_heat_shield", type: "item" }
+			]
+			title: "Ablator"
+			x: 10.0d
+			y: 21.5d
+		}
+		{
+			dependencies: ["53764AAB65F5DEA2"]
+			description: ["Saturn orbit gets its own &6AE2 pair&r, so what the station makes goes home and what it needs comes out. Power doesn't need it: the wireless network already carries that."]
+			icon: "grindless:station_truss_casing"
+			id: "790FB7432F6FAD9B"
+			rewards: [{ id: "3C7BD877E29F4C3D", type: "xp", xp: 80 }]
+			tasks: [{ id: "597BB91D22E337A8", type: "checkmark" }]
+			title: "Saturn on the Network"
+			x: 24.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["790FB7432F6FAD9B"]
+			description: ["Same again at Uranus orbit. Chunk-load both stations, because the far machines only run while their chunks are loaded."]
+			icon: "grindless:station_truss_casing"
+			id: "15AF271EF7362D27"
+			rewards: [{ id: "1E8ED6905978BAC7", type: "xp", xp: 80 }]
+			tasks: [{ id: "54B211C960237C7F", type: "checkmark" }]
+			title: "Uranus on the Network"
+			x: 26.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["15AF271EF7362D27"]
+			description: ["The stations send hydrogen, helium and methane by the tankful. Fluid cells and extra coprocessors matter far more here than item storage."]
+			icon: "gtceu:gas_giant_siphon"
+			id: "1CE31E326760EFF3"
+			optional: true
+			rewards: [{ id: "30B84A68D440F3E0", type: "xp", xp: 60 }]
+			size: 0.75d
+			tasks: [{ id: "7A067E6E13E2DDB3", type: "checkmark" }]
+			title: "Fluids in Bulk"
+			x: 27.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["7B0EFFD4E295AFAD"]
+			description: ["The machines of the era and the first steps that put each one to work."]
+			icon: "minecraft:writable_book"
+			id: "1CDA67742969FBD5"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "782E8283D3B1E779", type: "checkmark" }]
+			title: "Machines"
+			x: 5.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["1CDA67742969FBD5"]
+			description: ["The &6Naquadria Refinery&r pushes naquadah past the point it was stable. What comes out is denser, hotter and far more dangerous. Its controller, and the &6Naquadria Containment Casing&r that keeps the dust from escaping. Naquadria for the fuel works and the magnet works. Feed it naquadah by ME and send the naquadria dust on; never let the output back up."]
+			icon: "gtceu:naquadria_refinery"
+			id: "32D2F83CE86E19AF"
+			rewards: [{ id: "131E17A76C4C8B78", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "55E21277D9A464BC", item: "gtceu:naquadria_refinery", type: "item" }
+				{ id: "3DD689077D0AF1F6", item: "grindless:naquadria_containment_casing", type: "item" }
+			]
+			title: "Naquadria"
+			x: 6.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["32D2F83CE86E19AF"]
+			description: ["The &6Naquadah Fuel Works&r turns naquadria into the fuel that the integration plants burn. The same containment casing as the refinery, plus its controller. Fuel for the large reactors in the integration chapter. A fuel line off the refinery by pipe; buffer it in a tank so the reactors never starve."]
+			icon: "gtceu:naquadah_fuel_works"
+			id: "372A1C15CAD94A3D"
+			rewards: [{ id: "36BACFC12B031878", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "369225326A0C150E", item: "gtceu:naquadah_fuel_works", type: "item" }
+				{ id: "3341DD643E8A4676", item: "grindless:naquadria_containment_casing", type: "item" }
+			]
+			title: "Fuel Works"
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1CDA67742969FBD5"]
+			description: ["The &6Europium Reductor&r pulls europium out of rare-earth ore with a reducing bath that nothing smaller can run. Its controller and heat-proof coils; europium dust is the product. Europium for the ZPM wire and the hulls. One reductor feeds the whole base. Stock the dust by ME."]
+			icon: "gtceu:europium_reductor"
+			id: "783B3D8BCDE41DB7"
+			rewards: [{ id: "71D803E89598469F", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "12FF6C5A81D9C73B", item: "gtceu:europium_reductor", type: "item" }
+				{ id: "3ABF17274C0EDFF1", item: "gtceu:europium_dust", type: "item" }
+			]
+			title: "Europium"
+			x: 8.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["783B3D8BCDE41DB7"]
+			description: ["The &6Waste Retrieval Plant&r digs what the reactors leave behind back out of its storage and sorts it. Its controller and the radiation vault; it also hands back a &6Radium Capsule&r. Radon for the quantum wafer, and the stock that feeds the partitioning plant. Pipe reactor waste straight in; send radon and capsules out by ME."]
+			icon: "gtceu:waste_retrieval_plant"
+			id: "7842367875A86D7D"
+			rewards: [{ id: "70333973B75B2708", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "73761016998B19F3", item: "gtceu:waste_retrieval_plant", type: "item" }
+				{ id: "7EDB7CD4E16E95CE", item: "grindless:radium_capsule", type: "item" }
+			]
+			title: "Waste Retrieval"
+			x: 10.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["7842367875A86D7D"]
+			description: ["Waste you cannot use is cast into a ceramic block that holds it sealed. &6Synroc&r is a place to put what is left, not a way to hide it."]
+			icon: "grindless:synroc_block"
+			id: "18D00DD290192BBF"
+			rewards: [{ id: "175D843B4A946890", type: "xp", xp: 80 }]
+			tasks: [{ id: "3398486368861082", item: "grindless:synroc_block", type: "item" }]
+			title: "Synroc"
+			x: 12.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["18D00DD290192BBF"]
+			description: ["The &6Actinide Partitioning Plant&r splits waste into americium and curium so that very little of it needs burying. Its controller and the americium and curium it makes; the synroc you already cast takes the rest. Americium for the ZPM hulls and curium for the magnet works. Run it off the Waste Retrieval Plant by pipe and conveyor."]
+			icon: "gtceu:actinide_partitioning_plant"
+			id: "71F8D25601FD13DC"
+			rewards: [{ id: "19C54AC1F336B92A", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "16B9D908D535693A", item: "gtceu:actinide_partitioning_plant", type: "item" }
+				{ id: "7F3CA8CBFEA8DACD", item: "gtceu:americium_dust", type: "item" }
+				{ id: "5D1671164B540A5A", item: "grindless:curium_oxide", type: "item" }
+			]
+			title: "Actinide Partitioning"
+			x: 14.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["1CDA67742969FBD5"]
+			description: ["The &6Naquadria Magnet Works&r winds the superconducting wire and insert the fusion hall and the large coils need. Its controller, naquadria and the cryostat casing from the circuits chapter. Uranium rhodium dinaquadide wire, and the insert for the next hall. Slow and cold: keep the cryostat topped up and let it run beside the refinery."]
+			icon: "gtceu:naquadria_magnet_works"
+			id: "1E01844B88F24C23"
+			rewards: [{ id: "5C536CBAA400CCB2", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "52848600E203664B", item: "gtceu:naquadria_magnet_works", type: "item" }
+				{ id: "540E94A70B2FA2BE", item: "gtceu:uranium_rhodium_dinaquadide_single_wire", type: "item" }
+			]
+			title: "Magnet Works"
+			x: 7.0d
+			y: 8.5d
+		}
+		{
+			dependencies: ["1E01844B88F24C23"]
+			description: ["The &6Plasma Quench Caster&r drops plasma straight into a mould, so the metal never has time to cool in a way you did not choose. Its controller and a plasma supply; no new casing. Casting directly from plasma at the speed the Mk2 can feed. Plasma by pipe from the fusion hall, ingots out by conveyor."]
+			icon: "gtceu:plasma_quench_caster"
+			id: "1CADDA82F9A7F5A7"
+			rewards: [{ id: "759397A18AD8C163", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "1ED4B41E6916E51C", item: "gtceu:plasma_quench_caster", type: "item" }]
+			title: "Plasma Quench"
+			x: 8.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["1CADDA82F9A7F5A7"]
+			description: ["A high-temperature superconductor insert, wound by the magnet works and set into a coil block. It carries current with no loss."]
+			icon: "grindless:hts_insert"
+			id: "3F6117F6B2C380DC"
+			rewards: [{ id: "353520BBCF2F928A", type: "xp", xp: 80 }]
+			tasks: [{ id: "59E26C973FE54A72", item: "grindless:hts_insert", type: "item" }]
+			title: "HTS Insert"
+			x: 11.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["1CDA67742969FBD5"]
+			description: ["The &6Methane Pyrolyser&r cracks methane into graphene and hydrogen, with the carbon coming out as a sheet. Its controller and methane from the gas network. Graphene for the diamond lattice and for the circuits chapter. Methane by pipe; keep the hydrogen moving so it never blocks."]
+			icon: "gtceu:methane_pyrolyser"
+			id: "375C05ABC626E037"
+			rewards: [{ id: "7DD936739291AC4F", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7D289EB5051DD675", item: "gtceu:methane_pyrolyser", type: "item" }
+				{ id: "7ED667EB5DD1FFFB", item: "gtceu:graphene_dust", type: "item" }
+			]
+			title: "Pyrolysis"
+			x: 12.5d
+			y: 9.5d
+		}
+		{
+			dependencies: ["375C05ABC626E037"]
+			description: ["The &6Diamond Lattice Fab&r grows a flawless diamond plate from graphene, layer by layer. Its controller and graphene; the plate is the product. The NV diamond chip and the ion implanter. Slow by design: run two or three side by side."]
+			icon: "gtceu:diamond_lattice_fab"
+			id: "57B256A0532B609A"
+			rewards: [{ id: "71A2E98ED4104367", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "33E86CC8982E9EEC", item: "gtceu:diamond_lattice_fab", type: "item" }
+				{ id: "1243FA8351B31FE7", item: "grindless:cvd_diamond_plate", type: "item" }
+			]
+			title: "Diamond Lattice"
+			x: 14.0d
+			y: 9.5d
+		}
+		{
+			dependencies: ["57B256A0532B609A"]
+			description: ["The &6Ion Implanter&r fires single atoms into a wafer or plate and places them where a qubit has to sit. Its controller, a cleanroom and silicon-28 or doped diamond. The donor qubit wafer and the NV diamond chip of the circuits chapter. One batch at a time: feed by ME and queue the output."]
+			icon: "gtceu:ion_implanter"
+			id: "74C7DC8E103131DB"
+			rewards: [{ id: "113AF4BC0C22E6E1", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1377CD6770697ACB", item: "gtceu:ion_implanter", type: "item" }
+				{ id: "7AAF53BE2354BC5B", item: "grindless:donor_qubit_wafer", type: "item" }
+			]
+			title: "Ion Implanter"
+			x: 15.5d
+			y: 9.5d
+		}
+		{
+			dependencies: ["74C7DC8E103131DB"]
+			description: ["The &6Qubit Fab&r assembles qubits into an array under cryogenic conditions. Its controller and the &6Cryostat Casing&r. The qubit array that the circuits chapter uses. Keep the cryostat topped up and send the arrays on by ME."]
+			icon: "gtceu:qubit_fab"
+			id: "32049634C73ABDE1"
+			rewards: [{ id: "52EA48C2FB46B4F1", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7E76CA6055B80B5E", item: "gtceu:qubit_fab", type: "item" }
+				{ id: "184E4ED215AB0FC9", item: "grindless:cryostat_casing", type: "item" }
+			]
+			title: "Qubit Fab"
+			x: 18.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["1CDA67742969FBD5"]
+			description: ["The &6Vent Bioreactor&r grows microbes that live by deep-sea heat and feed on what the vents give off. Its controller and the heat-resistant culture it grows. Archaeal culture for aerogel, and the organics for later lines. The culture is not consumed in small runs; keep a seed batch alive in ME."]
+			icon: "gtceu:vent_bioreactor"
+			id: "5018E9B05AD69E21"
+			rewards: [{ id: "1E06586620A019AF", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7F5EDE9F49A0DBB9", item: "gtceu:vent_bioreactor", type: "item" }]
+			title: "Vent Life"
+			x: 7.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["5018E9B05AD69E21"]
+			description: ["A culture that thrives where nothing else survives. It is the biology behind the aerogel recipes."]
+			icon: "grindless:archaeal_culture"
+			id: "37F864D2D349BD17"
+			rewards: [{ id: "1180ECF4D8FB7160", type: "xp", xp: 80 }]
+			tasks: [{ id: "3F7D1DF15452CAD0", item: "grindless:archaeal_culture", type: "item" }]
+			title: "Archaea"
+			x: 10.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["37F864D2D349BD17"]
+			description: ["The &6Aerogel Works&r dries silica gel so slowly that it stays as a foam that is almost all air. Its controller and archaeal culture for the gel. Silica aerogel for the cryostat casing and the hulls that need to hold the cold. Slow and steady. Stock aerogel by ME."]
+			icon: "gtceu:aerogel_works"
+			id: "50A2AC5A9FDD98C5"
+			rewards: [{ id: "5FC1A4ECD19D99F4", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1C3D7CE8E1C70A4B", item: "gtceu:aerogel_works", type: "item" }
+				{ id: "54620AD904445E3B", item: "grindless:silica_aerogel", type: "item" }
+			]
+			title: "Aerogel"
+			x: 13.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["50A2AC5A9FDD98C5"]
+			description: ["The &6Neutrino Observatory&r waits for particles that pass through the planet and counts the rare one that stops. Its controller and the &6Photomultiplier Casing&r. The Solar Core Survey and, from it, the data the gate to UV asks for. It needs no tending. Collect the survey by ME when it finishes."]
+			icon: "gtceu:neutrino_observatory"
+			id: "54B3C436DF487119"
+			rewards: [{ id: "73359B29DD498ED3", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1C89F537FB2519D0", item: "gtceu:neutrino_observatory", type: "item" }
+				{ id: "1CA9E8F2CFFE2525", item: "grindless:photomultiplier_casing", type: "item" }
+			]
+			title: "Neutrinos"
+			x: 15.0d
+			y: 11.5d
+		}
+		{
+			dependencies: ["54B3C436DF487119"]
+			description: ["The neutrino count, written up as a map of the sun's core. The gate to UV asks for it."]
+			icon: "grindless:solar_core_survey"
+			id: "5E45678B3B8A8A65"
+			rewards: [{ id: "3757A265E0E550EE", type: "xp", xp: 120 }]
+			tasks: [{ id: "75F745E87DB91E92", item: "grindless:solar_core_survey", type: "item" }]
+			title: "Solar Core Survey"
+			x: 17.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["3CBBA765447C908A"]
+			description: ["The &6Ring Harvester&r sails through Saturn's rings and nets the ice, which is not the same as the ice at home. Its controller, the &6Station Truss Casing&r you already know, and a net for the sail. Ring ice samples for the plume sampler and the seismometer. A station-side buffer holds the ice; ME takes it home."]
+			icon: "gtceu:ring_harvester"
+			id: "19FA6D9CF0EE02C7"
+			rewards: [{ id: "5CF688405C2A9B72", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "75E4D210EDC14021", item: "gtceu:ring_harvester", type: "item" }
+				{ id: "745270EA3D0A5720", item: "grindless:ring_sail_net", type: "item" }
+				{ id: "3ED316456037D44A", item: "grindless:ring_ice_sample", type: "item" }
+			]
+			title: "Ring Ice"
+			x: 16.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["19FA6D9CF0EE02C7"]
+			description: ["The &6Plume Sampler&r flies through the geysers of an icy moon and catches what comes out. Its controller and the &6Probe Bay Casing&r. The aerogel cartridge, the seismometer's other input. Probes are launched, not driven: stock them by ME."]
+			icon: "gtceu:plume_sampler"
+			id: "5330AC3948DAA01C"
+			rewards: [{ id: "59D110DD5792601D", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "118FD82E395EECEA", item: "gtceu:plume_sampler", type: "item" }
+				{ id: "3EE6DC9F9F47CD8A", item: "grindless:probe_bay_casing", type: "item" }
+			]
+			title: "Plumes"
+			x: 18.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["5330AC3948DAA01C"]
+			description: ["A sample sealed in aerogel so that it reaches home unchanged."]
+			icon: "grindless:aerogel_cartridge"
+			id: "386669836DB882A5"
+			rewards: [{ id: "5C137F145CD5F90F", type: "xp", xp: 80 }]
+			tasks: [{ id: "594FFD8FE69FD9BC", item: "grindless:aerogel_cartridge", type: "item" }]
+			title: "Aerogel Cartridge"
+			x: 20.0d
+			y: 6.5d
+		}
+		{
+			dependencies: ["386669836DB882A5"]
+			description: ["The &6Ring Seismometer&r listens to the rings ring: tiny quakes in Saturn that tell you what is inside. Its controller, ring ice and cartridges, and the interior model it writes. The Saturn interior model and the Uranus transfer chart that leads onward. It listens for a long time. Leave it be."]
+			icon: "gtceu:ring_seismometer"
+			id: "32AF9CEF63EB677A"
+			rewards: [{ id: "554B3230DA4BB183", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "54281A6610F69243", item: "gtceu:ring_seismometer", type: "item" }
+				{ id: "361B5511110C4E19", item: "grindless:saturn_interior_model", type: "item" }
+				{ id: "501B757DD6404D21", item: "grindless:uranus_transfer_chart", type: "item" }
+			]
+			title: "Ring Song"
+			x: 22.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["3CBBA765447C908A"]
+			description: ["The &6Gas Giant Siphon&r lowers a scoop into the clouds and brings up gas from a planet that has no ground. Its controller and a &6Scoop Head&r for the clouds. Helium-3 for the clean fusion route, and hydrogen in bulk. Gas by pipe into a buffer tank; the head is worn and replaced."]
+			icon: "gtceu:gas_giant_siphon"
+			id: "578143AE95F4EB8D"
+			rewards: [{ id: "1B8746FC90A470EC", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7F8FF6963AD46047", item: "gtceu:gas_giant_siphon", type: "item" }
+				{ id: "38CAB2F038120FF0", item: "grindless:scoop_head", type: "item" }
+			]
+			title: "Siphon"
+			x: 13.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["578143AE95F4EB8D"]
+			description: ["The &6Isotope Column&r separates helium-3 from the gas the siphon brings up. Its controller and a stream of Saturn gas. Helium-3 for the aneutronic route in the integration chapter and the cold of the cryostat. Run the column continuously; bucket or pipe the helium-3 off."]
+			icon: "gtceu:isotope_column"
+			id: "13DF11331D65FE28"
+			rewards: [{ id: "5FA4622C1A460EA5", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "364D535FA7B5FB6D", item: "gtceu:isotope_column", type: "item" }
+				{ id: "163E9F6FDACFE465", item: "gtceu:helium_3_bucket", type: "item" }
+			]
+			title: "Helium-3"
+			x: 17.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["13DF11331D65FE28"]
+			description: ["The &6Entry Probe Bay&r drops a probe through Titan's haze and records the way down. Its controller, the &6Probe Bay Casing&r and a titan entry probe. The recording the tholin reformer starts from. Probes are single use; build them by the dozen."]
+			icon: "gtceu:entry_probe_bay"
+			id: "73BBBB6062106F00"
+			rewards: [{ id: "7A25F765E0078A10", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "347BA511CB79BF9B", item: "gtceu:entry_probe_bay", type: "item" }
+				{ id: "565AEE848552A9CF", item: "grindless:probe_bay_casing", type: "item" }
+				{ id: "32275F4A25DB29F7", item: "grindless:titan_entry_probe", type: "item" }
+			]
+			title: "Titan"
+			x: 19.0d
+			y: 8.5d
+		}
+		{
+			dependencies: ["73BBBB6062106F00"]
+			description: ["What the probe saw as it fell, stored as a recording."]
+			icon: "grindless:titan_probe_recording"
+			id: "14A8433C85449724"
+			rewards: [{ id: "1182BDBFFD4628C0", type: "xp", xp: 80 }]
+			tasks: [{ id: "3D2C1CB4D4F4D2C6", item: "grindless:titan_probe_recording", type: "item" }]
+			title: "Titan Recording"
+			x: 21.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["14A8433C85449724"]
+			description: ["The &6Tholin Reformer&r turns the haze of Titan into tholin, a tar that is rich in carbon and nitrogen. Its controller and the recording from Titan. Tholin for the organics of the lines ahead. Feed from ME; the haze is a loop you keep."]
+			icon: "gtceu:tholin_reformer"
+			id: "36524835522A60A5"
+			rewards: [{ id: "566F289FD725CD64", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7975CE7772CFEF01", item: "gtceu:tholin_reformer", type: "item" }
+				{ id: "57A318CBE45A3F3D", item: "grindless:tholin", type: "item" }
+			]
+			title: "Tholins"
+			x: 23.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["53764AAB65F5DEA2"]
+			description: ["The &6Ice Giant Siphon&r reaches deeper than the Saturn one, under a hull rated for the pressure. Its controller, the &6Pressure Hull Casing&r and the atmosphere sample it brings up. Ice giant gases, and the diamond seed in the next quest. Gas by pipe into tanks; the hull is a one-time cost."]
+			icon: "gtceu:ice_giant_siphon"
+			id: "554FD6C632D87ADB"
+			rewards: [{ id: "51A82BB16CB48C21", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "1336E191014A23E5", item: "gtceu:ice_giant_siphon", type: "item" }
+				{ id: "718F869D6B372A83", item: "grindless:pressure_hull_casing", type: "item" }
+				{ id: "5E90702FDE2DA465", item: "grindless:ice_giant_atmosphere_sample", type: "item" }
+			]
+			title: "Deep Gas"
+			x: 25.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["554FD6C632D87ADB"]
+			description: ["The &6Slurry Separator&r filters the diamond slurry that forms where carbon is squeezed. Its controller and the &6Pressure Hull Casing&r. The ice giant diamond seed. It filters constantly. Let ME collect the seeds."]
+			icon: "gtceu:slurry_separator"
+			id: "186259C7F1818558"
+			rewards: [{ id: "32C50832A67F673F", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "3499571BE390855E", item: "gtceu:slurry_separator", type: "item" }
+				{ id: "7F1BAC18128806CD", item: "grindless:pressure_hull_casing", type: "item" }
+			]
+			title: "Diamond Rain"
 			x: 28.0d
-			y: 0.0d
+			y: 9.5d
+		}
+		{
+			dependencies: ["186259C7F1818558"]
+			description: ["A seed that grows a flawless plate in the lattice fab. It gives a better qubit plate than anything from home."]
+			icon: "grindless:ice_giant_diamond_seed"
+			id: "55BFDE438A0240EB"
+			rewards: [{ id: "16FC4E7C7653F6D2", type: "xp", xp: 80 }]
+			tasks: [{ id: "37CC328CEB11386D", item: "grindless:ice_giant_diamond_seed", type: "item" }]
+			title: "Diamond Seed"
+			x: 30.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["554FD6C632D87ADB"]
+			description: ["The &6Flyby Probe Bay&r launches probes that pass Neptune and Triton and never stop. Its controller, the &6Probe Bay Casing&r and a Neptune flyby probe. The data the Deep Space Network decodes, and the Pluto chart that leads out. Probes are one-way. Build a stock."]
+			icon: "gtceu:flyby_probe_bay"
+			id: "72B6F5C97902310C"
+			rewards: [{ id: "7D73B7D61A4DF7F0", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "100067B46B0EDC53", item: "gtceu:flyby_probe_bay", type: "item" }
+				{ id: "34894182854E8E67", item: "grindless:probe_bay_casing", type: "item" }
+				{ id: "7A0241581441211F", item: "grindless:neptune_flyby_probe", type: "item" }
+			]
+			title: "Past Neptune"
+			x: 27.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["1CDA67742969FBD5"]
+			description: ["The &6Deep Space Network&r decodes what the probes send home. Its controller, the recordings and the &6Multimessenger Catalogue&r it makes. Flyby data, and the target list the Kuiper telescope uses. Feed recordings by ME; the network works without being watched."]
+			icon: "gtceu:deep_space_network"
+			id: "7566E1539187E10C"
+			rewards: [{ id: "5C52F543E5E004D8", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "198EB250ED50E96A", item: "gtceu:deep_space_network", type: "item" }
+				{ id: "1C396CF0985DA961", item: "grindless:multimessenger_catalogue", type: "item" }
+				{ id: "7730CDADD3FF58B1", item: "grindless:neptune_flyby_data", type: "item" }
+			]
+			title: "Listening"
+			x: 7.0d
+			y: 14.0d
+		}
+		{
+			dependencies: ["7566E1539187E10C"]
+			description: ["The &6Kuiper Survey Telescope&r sees the small icy worlds beyond Neptune. Its controller, in Earth orbit, and the target list it produces. The Pluto-Kuiper Chart the next era starts from. It surveys all by itself; collect the chart when it is done."]
+			icon: "gtceu:kuiper_survey_telescope"
+			id: "32E94420EE8BE7BD"
+			rewards: [{ id: "129A569BC5DC3F78", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "74C272BB5D402E36", item: "gtceu:kuiper_survey_telescope", type: "item" }
+				{ id: "17C82639B2CFDCBA", item: "grindless:kuiper_target_list", type: "item" }
+				{ id: "137288F6B23DA8B4", item: "grindless:pluto_kuiper_chart", type: "item" }
+			]
+			title: "Kuiper Targets"
+			x: 9.5d
+			y: 14.0d
+		}
+		{
+			dependencies: ["1CDA67742969FBD5"]
+			description: ["Titanium and duranium fuse into &6Tritanium&r in the Mk2. It is a UV metal, made here first."]
+			icon: "gtceu:tritanium_ingot"
+			id: "7431D3D54AC9A142"
+			rewards: [{ id: "53F5634B3871D39B", type: "xp", xp: 100 }]
+			tasks: [{ id: "555E766B6667FAE3", item: "gtceu:tritanium_ingot", type: "item" }]
+			title: "Tritanium"
+			x: 7.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["7431D3D54AC9A142"]
+			description: ["Arsenic and ruthenium make &6Darmstadtium&r in the same reactor. Another UV metal you will need early."]
+			icon: "gtceu:darmstadtium_ingot"
+			id: "3D0152B3D0D3DF99"
+			rewards: [{ id: "7B5469AAD4B33388", type: "xp", xp: 100 }]
+			tasks: [{ id: "186EABC836236E71", item: "gtceu:darmstadtium_ingot", type: "item" }]
+			title: "Darmstadtium"
+			x: 9.0d
+			y: 12.5d
+		}
+		{
+			dependencies: ["3D0152B3D0D3DF99"]
+			description: ["The &6Assembly Hall&r runs assembler and circuit assembler recipes in parallel. Its controller, in a cleanroom; the circuit assembler recipes want molten tin on top. Mass production of the machines of this era. Feed it by ME and let the hall fill the output chests."]
+			icon: "gtceu:assembly_hall"
+			id: "7B30871B5D49A6B3"
+			rewards: [{ id: "590A13406BA7CC08", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "313A1AFECD42BE67", item: "gtceu:assembly_hall", type: "item" }]
+			title: "Assembly Hall"
+			x: 11.0d
+			y: 12.0d
 		}
 	]
 	subtitle: ["A third and fourth station in orbit, then Saturn, its rings and the ice giants, and a chart to the Kuiper Belt."]
