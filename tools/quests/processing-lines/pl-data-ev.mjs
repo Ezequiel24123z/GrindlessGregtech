@@ -48,23 +48,9 @@ export default {
       ],
     },
     kroll: {
-      name: 'Titanium the long way',
+      name: 'Titanium from the Kroll line, rolled hot',
       nodes: [
-        n('ilm2', 0, 0, I('gtceu:ilmenite_dust'), 'Ilmenite Dust', { kind: 'raw', sub: 'Lunar, down the bridge' }),
-        n('carbon', 0, 1.5, I('gtceu:carbon_dust'), 'Carbon Dust', { kind: 'raw' }),
-        n('ebf', 2, 0.75, M('gtceu:electric_blast_furnace'), 'Electric Blast Furnace', { from: ['ilm2', 'carbon'] }),
-        n('rutile', 4, 0, I('gtceu:rutile_dust'), 'Rutile', { from: ['ebf'] }),
-        n('wiron', 4, 1.5, I('gtceu:wrought_iron_ingot'), 'Wrought Iron', { kind: 'by', from: ['ebf'], end: 'steel', sub: 'The iron in the ilmenite' }),
-        L('cl2', 4, -1.5, 'pl_mv:cl2'),
-        n('ticl4', 6, 0, F('gtceu:titanium_tetrachloride'), 'Titanium Tetrachloride', { from: ['rutile', 'cl2'], sub: 'Chemical reactor, with carbon' }),
-        n('co', 6, 1.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'by', from: ['rutile'], end: 'methanol or a tank', sub: 'Toxic: methanol, or a tank' }),
-        n('mg', 6, -1.5, I('gtceu:magnesium_dust'), 'Magnesium', { kind: 'raw' }),
-        n('hotti', 8, 0, I('gtceu:hot_titanium_ingot'), 'Hot Titanium Ingot', {
-          from: ['ticl4', 'mg'], sub: 'The EBF again',
-          desc: 'The Kroll process: magnesium strips the chlorine off. The regolith cell does the same job in one step, but only on the Moon.',
-        }),
-        n('mgcl2', 8, 1.5, I('gtceu:magnesium_chloride_dust'), 'Magnesium Chloride', { from: ['ticl4'] }),
-        n('mgback', 10, 1.5, I('gtceu:magnesium_dust'), 'Magnesium, Back', { kind: 'ret', from: ['mgcl2'], by: ['gtceu:chemical_reactor'], sub: 'Sodium takes the chlorine; the salt goes back to the electrolyzer' }),
+        L('hotti', 8, 0, 'pl_hv:hotti'),
         n('mill', 10, -2.25, M('gtceu:hot_strip_mill'), 'Hot Strip Mill', {
           kind: 'ours', from: ['hotti'],
           desc: 'Rolls the ingot while it still glows, so the freezer and the bender sit this one out. The cooling water leaves as steam.',
@@ -77,7 +63,9 @@ export default {
     },
     platinum: {
       name: 'The platinum plant',
+      line: 'platline',
       nodes: [
+        L('rhline', 10.5, 0.75, 'pl_hv:rh'),
         n('crushed', -2, 0, I('gtceu:crushed_pentlandite_ore'), 'Crushed Pentlandite', { kind: 'raw', sub: 'Or crushed chalcopyrite' }),
         n('ore', 0, 0, I('gtceu:purified_pentlandite_ore'), 'Purified Pentlandite', { from: ['crushed'], by: ['gtceu:ore_washer'], sub: 'Ore washer' }),
         n('electrode2', 0, 1.5, I('grindless:platinum_electrode'), 'Platinum Electrode', { kind: 'raw', sub: 'The first ones use End platinum' }),
@@ -98,7 +86,7 @@ export default {
           sub: 'Water and the fumes in a large chemical reactor; the nitric oxide goes round again',
         }),
         n('cacl2', 6.5, 3, I('gtceu:calcium_chloride_dust'), 'Calcium Chloride', { kind: 'by', from: ['sludge'], by: ['gtceu:pgm_refining'], end: 'salt charge', sub: 'The lunar cell\'s salt charge' }),
-        n('sc', 10.5, -0.75, M('gtceu:smelting_complex'), 'Smelting Complex', { from: ['pd', 'rh', 'ru'], sub: 'Heats the dusts to ingots' }),
+        n('sc', 10.5, -0.75, M('gtceu:smelting_complex'), 'Smelting Complex', { from: ['pd', 'rh', 'ru', 'rhline'], sub: 'Heats the dusts to ingots' }),
         n('pdi', 12.5, -2, I('gtceu:palladium_ingot'), 'Palladium Ingot', { from: ['sc'], end: 'data modules, alloys' }),
         n('rhi', 12.5, -0.75, I('gtceu:rhodium_ingot'), 'Rhodium Ingot', { from: ['sc'], end: 'later tiers' }),
         n('rui', 12.5, 0.5, I('gtceu:ruthenium_ingot'), 'Ruthenium Ingot', { from: ['sc'], end: 'later tiers' }),
@@ -214,7 +202,7 @@ export default {
     nano: {
       name: 'Nano circuits',
       nodes: [
-        n('si', 0, -2.25, I('gtceu:silicon_dust'), 'Silicon', { kind: 'raw', sub: '64 for each boule' }),
+        n('si', 0, -2.25, I('grindless:polysilicon'), 'Polysilicon', { kind: 'raw', sub: '64 for each boule' }),
         n('phos2', 0, -0.75, I('gtceu:phosphorus_dust'), 'Phosphorus', { kind: 'raw' }),
         L('gaas', 0, 0.75, 'pl_lv:gaas'),
         n('n2c', 0, 2.25, F('gtceu:nitrogen'), 'Nitrogen', { kind: 'raw' }),
