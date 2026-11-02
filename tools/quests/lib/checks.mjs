@@ -1,8 +1,17 @@
 // Checks shared by lint.mjs (text report) and export.mjs (data for the preview renderer).
 // Every finding: { level: 'error' | 'warn' | 'info', rule, chapter, quest?, other?, message }.
 import { collectItemIds } from './book.mjs';
+import { ERAS } from './chapter-gen.mjs';
 
 const EPS = 0.01;
+
+// An era chapter is <era>_age (QB-0: one chapter per era). It gets the merged-chapter rules (connectivity, section bridges) when
+// lint-config.json eraChapters.enabled lists it, or for every era chapter with options.mergedEras (lint.mjs --merged-eras, the dry merge).
+export const isEraChapter = (filename) => ERAS.some((e) => filename === `${e}_age`);
+export function isMergedEra(cfg, filename, options = {}) {
+  if (!isEraChapter(filename)) return false;
+  return Boolean(options.mergedEras) || ((cfg.eraChapters && cfg.eraChapters.enabled) || []).includes(filename);
+}
 
 export function stripCodes(s) {
   return String(s ?? '').replace(/[&§][0-9a-fk-orA-FK-OR]/g, '').replace(/\{@pagebreak\}/g, '');
@@ -131,6 +140,8 @@ export function checkBook(book, cfg, options = {}) {
     if (ch.parseError) { add('error', 'parse', ch, null, ch.parseError); continue; }
     if (!ch.title) add('error', 'chapter-title', ch, null, 'chapter has no title (FTB Quests 2001.4 shows "Unnamed")');
     const dir = (cfg.direction && (cfg.direction[ch.filename] || cfg.direction.default)) || 'ltr';
+    const isMerged = isMergedEra(cfg, ch.filename, options);
+    const bridgeMax = isMerged ? ((cfg.eraChapters && cfg.eraChapters.bridgeMaxEdge) ?? 14) : 0;
     const along = (p) => (dir === 'ttb' ? p.y : p.x);
     const across = (p) => (dir === 'ttb' ? p.x : p.y);
     const roots = ch.quests.filter((q) => q.deps.length === 0);
@@ -140,12 +151,37 @@ export function checkBook(book, cfg, options = {}) {
     const dependents = new Map();
     for (const q of ch.quests) for (const d of q.deps) { if (!dependents.has(d)) dependents.set(d, []); dependents.get(d).push(q); }
 
-    if (ch.quests.length > 0 && roots.length === 0) add('info', 'root', ch, null, 'no quest without dependencies: the chapter starts from another chapter');
-    const sortedRoots = [...roots].sort((a, b) => along(a) - along(b) || across(a) - across(b));
-    sortedRoots.slice(1).forEach((q) => { if (!allowRoots.has(q.id)) add('error', 'root', ch, q, `second starting point: "${questLabel(q)}" has no dependency (the chapter starts at "${questLabel(sortedRoots[0])}")`); });
+    if (isMerged) {
+      // QB-0: one start, everything reachable through dependencies inside the chapter (supersedes root and isolated here)
+      const inChapter = (q) => q.deps.map((d) => book.questById.get(d)).filter((p) => p && p.chapter === ch);
+      const starts = ch.quests.filter((q) => inChapter(q).length === 0).sort((a, b) => along(a) - along(b) || across(a) - across(b));
+      if (ch.quests.length > 0 && starts.length === 0) add('error', 'connectivity', ch, null, 'no start: every quest depends on another quest of the chapter (a cycle)');
+      starts.slice(1).forEach((q) => add('error', 'connectivity', ch, q, `second start: "${questLabel(q)}" has no dependency inside the chapter` + (q.deps.length ? ' (a dependency on another chapter does not connect it)' : '') + ` (the chapter starts at "${questLabel(starts[0])}")`));
+      const reach = (from) => {
+        const seen = new Set();
+        const stack = [...from];
+        while (stack.length) {
+          const q = stack.pop();
+          if (seen.has(q.id)) continue;
+          seen.add(q.id);
+          for (const n of dependents.get(q.id) || []) stack.push(n);
+        }
+        return seen;
+      };
+      const fromMain = reach(starts.slice(0, 1));
+      const fromAny = reach(starts);
+      for (const q of ch.quests) {
+        if (fromMain.has(q.id) || (starts.length > 1 && fromAny.has(q.id))) continue;
+        add('error', 'connectivity', ch, q, `unreachable: no chain of dependencies inside the chapter leads from "${questLabel(starts[0])}" to it`);
+      }
+    } else {
+      if (ch.quests.length > 0 && roots.length === 0) add('info', 'root', ch, null, 'no quest without dependencies: the chapter starts from another chapter');
+      const sortedRoots = [...roots].sort((a, b) => along(a) - along(b) || across(a) - across(b));
+      sortedRoots.slice(1).forEach((q) => { if (!allowRoots.has(q.id)) add('error', 'root', ch, q, `second starting point: "${questLabel(q)}" has no dependency (the chapter starts at "${questLabel(sortedRoots[0])}")`); });
+    }
 
     for (const q of ch.quests) {
-      if (q.deps.length === 0 && !(dependents.get(q.id) || []).length && ch.quests.length > 1 && !allowIsolated.has(q.id)) add('error', 'isolated', ch, q, 'floating quest: nothing leads to it and nothing hangs from it');
+      if (!isMerged && q.deps.length === 0 && !(dependents.get(q.id) || []).length && ch.quests.length > 1 && !allowIsolated.has(q.id)) add('error', 'isolated', ch, q, 'floating quest: nothing leads to it and nothing hangs from it');
       for (const d of q.deps) {
         if (d === q.id) add('error', 'self-dep', ch, q, 'depends on itself');
         else if (!book.questById.has(d)) add('error', 'missing-dep', ch, q, `depends on unknown quest id ${d}`);
@@ -186,7 +222,9 @@ export function checkBook(book, cfg, options = {}) {
       const d = along(to) - along(from);
       if (d < -EPS) add('error', 'backward', ch, to, `depends on "${questLabel(from)}", which sits after it in the reading direction (${dir})`, from);
       else if (Math.abs(d) <= EPS && Math.abs(across(to) - across(from)) > (cfg.maxVerticalDrop ?? 3) + EPS) add('warn', 'vertical-long', ch, to, `hangs ${Math.abs(across(to) - across(from)).toFixed(2)} cells straight below/above "${questLabel(from)}"`, from);
-      if (e.length > (cfg.maxEdge ?? 4.6) + EPS && !to.hideDependencyLines && !allowedLongEdge(cfg, from, to)) add('error', 'long-edge', ch, to, `line from "${questLabel(from)}" is ${e.length.toFixed(2)} cells long (max ${cfg.maxEdge})`, from);
+      const tooLong = e.length > (cfg.maxEdge ?? 4.6) + EPS && !to.hideDependencyLines && !allowedLongEdge(cfg, from, to);
+      // a forward line between two sections of a merged era chapter may be longer (eraChapters.bridgeMaxEdge)
+      if (tooLong && !(isMerged && d > EPS && e.length <= bridgeMax + EPS)) add('error', 'long-edge', ch, to, `line from "${questLabel(from)}" is ${e.length.toFixed(2)} cells long (max ${cfg.maxEdge}${isMerged ? ', ' + bridgeMax + ' for a forward line between sections' : ''})`, from);
       if (!to.hideDependencyLines) {
         for (const o of ch.quests) {
           if (o === from || o === to) continue;

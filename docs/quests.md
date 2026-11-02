@@ -96,6 +96,19 @@ The grid is FTB Quests' grid: one square = one unit of `x`/`y`.
 - The chapter's **`autofocus_id`** points to its first quest, so the book opens there.
 - The chapter's **`subtitle`**: one line with the step of the journey (section 9).
 
+## 4b. One chapter per era (QB-0)
+
+Owner, 2026-11-02: "Cada tier debe ser una sola pestaña/capitulo, no 6 capitulos bajo una pestaña" and "todas las quests deben estar interconectadas de manera logica y no tener cosas sueltas por ahi". Chapters may be as big as they need to be; what they may not have is loose quests.
+
+- **One chapter per era**: `<era>_age` (Steam to MAX+), in the single group **Progression**. The old per-era groups are gone; `chapter_groups.snbt` has Progression, Quality of Life and Processing Lines, written by `gen-chapters.mjs` (`lib/groups.mjs`).
+- **Sections.** Every data file of an era (`quests-data.mjs`, `circuits-data.mjs`, `age1-data.mjs`, ...) becomes a section of that one chapter. `CHAPTER.section = { name, origin: { x, y }, heading? }` places it: its `x`/`y` are offsets from `origin`. Without a `section`, the generator puts the file to the right of the previous sections with a gap of 8 squares. The chapter's id, title, icon, subtitle and autofocus come from the main data file (`quests-data.mjs`, else the file whose `CHAPTER.filename` is `<era>_age`, else the lowest `order`). `CHAPTER.filename` is ignored; the maxplus chapter is `maxplus_age`.
+- **Section titles.** `heading: { key, x, y, deps?, icon?, desc? }` adds a `reading` quest (circle, checkmark task, no reward) that names the section in the map. It is an ordinary quest and takes part in the connectivity rule.
+- **Same-era quest links** (`LINKS` pointing into the same era) are dropped: everything is already in one chapter. Links to other eras stay.
+- **Connectivity rule** (`connectivity`, error). Counting only dependencies inside the chapter, exactly one quest has none (the start), and every other quest is reachable from it. A dependency on another chapter does not connect a quest. In merged era chapters this replaces `root` and `isolated` (so `allowRoots` and `allowIsolated` do not apply to them).
+- **Section bridges.** A forward line between two sections may be up to `eraChapters.bridgeMaxEdge` (14) squares long; the other limits (backward, vertical, crossings, lines through quests, overlap) stay.
+- **Switching on.** `lint-config.json` `eraChapters.enabled` lists the chapters under the new rules; `lint.mjs --merged-eras` applies them to every `<era>_age`. The integrator fills `enabled` as the data is regenerated.
+- **Dry merge.** `node tools/quests/gen-chapters.mjs --dry-merge [--era ev,luv]` copies the book to a temp folder, replaces each era by its merged chapter, lints it with `--merged-eras` and prints per era the quests, dropped links and findings by rule. It writes nothing in the pack.
+
 ## 5. Dependencies
 
 - **A dependency is a real requirement:** without that quest's item, this one cannot be done. The only other valid reason is the **assembly order of a single machine** (probe → sample → drill; tubes → resistors and plates → red alloy → circuit).
@@ -205,7 +218,7 @@ node tools\quests\fix-ids.mjs [--chapter lv_age] [--write] [--map]
 powershell -File tools\quests\Render-QuestPreview.ps1 -Chapter steam_age -OutDir <folder> [-Prefix after-]
 
 # Generated chapters: edit the data, then regenerate (the SNBT comes out with the same ids)
-node tools\quests\gen-chapters.mjs [--era ev,luv] [--pending] [--every-package --out <dir>]   # every era chapter (Steam to MAX) from its quests-data.mjs (section 14); LuV keeps only the landed packages
+node tools\quests\gen-chapters.mjs [--era ev,luv] [--pending] [--every-package --out <dir>] [--dry-merge]   # every era chapter (Steam to MAX), one <era>_age each, from its data files (section 4b); LuV keeps only the landed packages
 powershell -File tools\quests\processing-lines\run.ps1 -Dump <kubejs-exported> -Write [-Preview]   # Processing Lines and Power (sections 17 and 18)
 ```
 

@@ -49,15 +49,11 @@ function landedSets(json) {
 
 // luv_age, then pl_luv and power linked against that luv_age
 function drawMode(name, json) {
-  // the three LuV chapters together: the Torus and Iodine quests live in luv_machines
+  // the three LuV chapters are one luv_age now: the Torus and Iodine quests live in it
   const dir = path.join(work, name);
   fs.mkdirSync(dir, { recursive: true });
-  const parts = ['luv_age', 'luv_circuits', 'luv_machines'].map((ch) => {
-    const snbt = run([luvGen, '--chapter', ch, '--out', '-'], json);
-    fs.writeFileSync(path.join(dir, `${ch}.snbt`), snbt);
-    return snbt;
-  });
-  const luv = parts.join('\n');
+  const luv = run([luvGen, '--chapter', 'luv_age', '--out', '-'], json);
+  fs.writeFileSync(path.join(dir, 'luv_age.snbt'), luv);
   const out = run([plGen, '--print', '--only', 'pl_luv,power'], json, { GG_QUESTS_ERA_DIR: dir });
   const chapters = {};
   for (const part of out.split(/(?=^\{\n\tautofocus_id)/m)) {

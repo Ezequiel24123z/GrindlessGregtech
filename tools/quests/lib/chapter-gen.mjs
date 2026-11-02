@@ -5,8 +5,14 @@
 // Ids: sha256('c2-<era>-quests|' + key), high bit cleared, first digit 1-7 (docs/quests.md, section 10); a pinned `id` wins.
 // Package gate (from luv-chapter): `pkg`, `LANDED`, `fallback`, `slot` work in every era (see buildWorld).
 //
-// A data file exports CHAPTER, QUESTS and, optionally, LINKS, PACKAGES, LANDED, ALL_STATE:
-//   CHAPTER { filename?, era?, title, subtitle, icon, autofocus, order, group?, id? }
+// A data file exports CHAPTER, QUESTS and, optionally, LINKS, PACKAGES, LANDED, ALL_STATE.
+// CHAPTER { era?, title, subtitle, icon, autofocus, order, group?, id?, section? } is read from the era's main data file
+// (quests-data.mjs) for the era chapter; every other data file only needs CHAPTER.section.
+//   CHAPTER.section { name, origin: { x, y }, heading?: { key, x, y, deps?, icon?, desc? } }
+//     name     the section's title (the heading quest's title)
+//     origin   where the file's (0, 0) lands in the era chapter; without one the section goes to the right of the sections before it
+//     heading  optional: adds a `reading` quest titled `name` at (x, y) (relative to origin), depending on `deps` (keys of the era)
+// Every data file of an era renders into ONE chapter, <era>_age. A link whose ref is a quest of the same era is dropped.
 //   LINKS   [{ key, ref, x, y, shape?, size? }]  quest links shown in this chapter; ref is a key of the era, '<era>:KEY' or 'X:<hex>'
 //   QUESTS  [{ key, kind?, title, icon, x, y, deps, teach?, desc, tasks, rewards, id?, shape?, size?, optional?, pkg?, fallback?,
 //              slot?, adjust?, raw? }]
@@ -81,22 +87,52 @@ export function buildWorld(eraMods, { allPackages = false } = {}) {
   return world;
 }
 
+const AUTO_GAP = 8;
+
+// The module whose CHAPTER describes the era chapter (title, icon, order, autofocus, id, group): quests-data.mjs, else the one
+// whose filename is <era>_age, else the lowest order.
+function mainModule(era, mods) {
+  const byName = mods.find((m) => path.basename(m.file) === 'quests-data.mjs');
+  if (byName) return byName;
+  const byFile = mods.find((m) => m.CHAPTER.filename === `${era}_age`);
+  if (byFile) return byFile;
+  return [...mods].sort((a, b) => (a.CHAPTER.order ?? 0) - (b.CHAPTER.order ?? 0))[0];
+}
+
+// CHAPTER.section.heading { key, x, y, deps?, icon?, desc? }: the section's title as a `reading` quest (FTB Quests 2001.4 has no
+// text decoration), wired into the graph through its deps like any other quest.
+function headingQuest(era, sec) {
+  const h = sec.heading;
+  if (!h.key) throw new Error(`${era}: section "${sec.name}" heading needs a key`);
+  return {
+    key: h.key, kind: 'reading', title: sec.name, icon: h.icon || 'minecraft:writable_book', x: h.x, y: h.y, deps: h.deps || [],
+    desc: h.desc || [], tasks: [{ type: 'checkmark' }], rewards: [],
+  };
+}
+
 function prepareEra(era, mods, allPackages) {
   const packages = [...new Set(mods.flatMap((m) => m.PACKAGES || []))];
   const landedList = [...new Set(mods.flatMap((m) => m.LANDED || []))];
   const allState = [...new Set(mods.flatMap((m) => m.ALL_STATE || []))];
   for (const p of landedList) if (!packages.includes(p)) throw new Error(`${era}: LANDED names unknown package ${p}`);
   const landed = new Set(allPackages && allState.length ? allState : landedList);
-  const e = { era, mods, byKey: new Map(), quests: [], slots: new Map(), chapters: [], linkKeys: new Set() };
+  const filename = `${era}_age`;
+  const main = mainModule(era, mods);
+  // one chapter per era: every data file is a section of it (docs/quests.md, section 4b)
+  const chapter = { mod: main, filename, quests: [], links: [] };
+  const e = { era, mods, main, byKey: new Map(), quests: [], slots: new Map(), chapters: [chapter], chapter, sections: [], linkKeys: new Set(), droppedLinks: [] };
+  let rightEdge = 0;
 
   for (const mod of mods) {
     const ch = mod.CHAPTER;
-    const filename = ch.filename || (path.basename(mod.file) === 'quests-data.mjs' ? `${era}_age` : null);
-    if (!filename) throw new Error(`${mod.file}: CHAPTER.filename is required`);
-    if (ch.era && ch.era !== era) throw new Error(`${filename}: CHAPTER.era "${ch.era}" is not the folder's era "${era}"`);
-    const chapter = { mod, filename, quests: [] };
-    e.chapters.push(chapter);
-    for (const q of mod.QUESTS) {
+    if (ch.era && ch.era !== era) throw new Error(`${mod.file}: CHAPTER.era "${ch.era}" is not the folder's era "${era}"`);
+    const sec = ch.section || {};
+    const section = { mod, file: path.basename(mod.file), name: sec.name || null, quests: [], placed: sec.origin ? 'declared' : 'auto' };
+    e.sections.push(section);
+    const heading = sec.heading ? headingQuest(era, sec) : null;
+    const ownQuests = heading ? [heading, ...mod.QUESTS] : mod.QUESTS;
+    const first = e.quests.length;
+    for (const q of ownQuests) {
       if (e.byKey.has(q.key)) throw new Error(`${era}: duplicate quest key ${q.key}`);
       const kind = q.kind === undefined ? null : q.kind;
       if (kind !== null && !KINDS[kind]) throw new Error(`${q.key}: unknown kind "${kind}"`);
@@ -114,10 +150,24 @@ function prepareEra(era, mods, allPackages) {
       c.px = fb ? fb.x : q.x;
       c.py = fb ? fb.y : q.y;
       c.pdeps = fb ? fb.deps : q.deps;
+      c.section = section;
       e.byKey.set(q.key, c);
       e.quests.push(c);
       chapter.quests.push(c);
+      section.quests.push(c);
     }
+    // origin: declared, else the section goes to the right of the sections before it (a data file that has no section yet)
+    const mine = e.quests.slice(first);
+    const xs = mine.flatMap((c) => [c.q.x, ...(c.q.fallback ? [c.q.fallback.x] : [])]);
+    const lo = xs.length ? Math.min(...xs) : 0;
+    const hi = xs.length ? Math.max(...xs) : 0;
+    section.origin = sec.origin ? { x: sec.origin.x, y: sec.origin.y } : { x: first === 0 ? 0 : Math.ceil(rightEdge + AUTO_GAP - lo), y: 0 };
+    rightEdge = Math.max(rightEdge, section.origin.x + hi);
+    for (const c of mine) {
+      c.px += section.origin.x;
+      c.py += section.origin.y;
+    }
+    section.links = mod.LINKS || [];
   }
   for (const c of e.quests.filter((c) => c.on && c.q.slot)) {
     if (e.slots.has(c.q.slot)) throw new Error(`${c.key} and ${e.slots.get(c.q.slot)} share slot ${c.q.slot}: only one of them can land`);
@@ -165,13 +215,15 @@ function resolveEra(world, e) {
     c.depIds = [...new Set(c.pdeps.flatMap((d) => resolveRef(world, e.era, d)))];
     if (c.pdeps.length && !c.depIds.length) throw new Error(`${c.key} would float: none of its dependencies has landed`);
   }
-  for (const chapter of e.chapters) {
-    chapter.links = [];
-    for (const l of chapter.mod.LINKS) {
+  // quest links: a link to a quest of this same era is dropped (the quest is in this chapter now); links to other eras stay
+  const sameEra = (ref) => { const m = /^([a-z0-9]+):(.+)$/.exec(ref); return !m ? !ref.startsWith('X:') : m[1] === e.era; };
+  for (const section of e.sections) {
+    for (const l of section.links) {
       if (e.linkKeys.has(l.key) || e.byKey.has(l.key)) throw new Error(`${e.era}: duplicate key ${l.key}`);
       e.linkKeys.add(l.key);
+      if (sameEra(l.ref)) { e.droppedLinks.push({ key: l.key, ref: l.ref, file: section.file }); continue; }
       const target = resolveRef(world, e.era, l.ref);
-      if (target.length) chapter.links.push({ ...l, id: l.id || newId(e.era, 'link|' + l.key), target: target[0] });
+      if (target.length) e.chapter.links.push({ ...l, x: l.x + section.origin.x, y: l.y + section.origin.y, id: l.id || newId(e.era, 'link|' + l.key), target: target[0] });
     }
   }
 }
@@ -220,6 +272,7 @@ function reward(r, where) {
   return compound(withRaw(f, r.raw, where));
 }
 function list(key, items, indent) {
+  if (items.length === 0) return key + ': [ ]';
   if (items.length === 1 && !items[0].includes('\n')) return key + ': [' + items[0] + ']';
   return key + ': [\n' + items.map((s) => s.split('\n').map((l) => indent + '\t' + l).join('\n')).join('\n') + '\n' + indent + ']';
 }

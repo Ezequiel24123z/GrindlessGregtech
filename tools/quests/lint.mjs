@@ -2,7 +2,10 @@
 // Quest book linter for Gregtech Grindless (FTB Quests SNBT). Rules: docs/quests.md, section "Tools".
 //
 //   node tools/quests/lint.mjs [--book <dir>] [--chapter <name>[,<name>...]] [--items <items.json>] [--tags <tags.json>]
-//                              [--config <file>] [--json <out.json>] [--export <out.json>] [--strict] [--quiet]
+//                              [--config <file>] [--json <out.json>] [--export <out.json>] [--strict] [--quiet] [--merged-eras]
+//
+// --merged-eras applies the one-chapter-per-era rules (connectivity, section bridges) to every <era>_age chapter, as if each were
+// listed in lint-config.json eraChapters.enabled.
 //
 // --items / --tags take the gg_dump exports (kubejs-exported/items.json and tags.json of a test run) and turn on the
 // item id and item tag checks; the server test gg_test_quests does the same check inside the game.
@@ -29,6 +32,7 @@ function parseArgs(argv) {
     else if (k === '--json') a.json = next();
     else if (k === '--export') a.export = next();
     else if (k === '--strict') a.strict = true;
+    else if (k === '--merged-eras') a.mergedEras = true;
     else if (k === '--quiet') a.quiet = true;
     else if (k === '--help' || k === '-h') a.help = true;
     else throw new Error('unknown argument ' + k);
@@ -114,7 +118,7 @@ function main() {
   const bookDir = path.resolve(args.book || path.join(repo, 'pack', 'config', 'ftbquests', 'quests'));
   const cfg = JSON.parse(fs.readFileSync(args.config || path.join(here, 'lint-config.json'), 'utf8'));
   const book = loadBook(bookDir);
-  const options = { chapters: args.chapters };
+  const options = { chapters: args.chapters, mergedEras: args.mergedEras };
   if (args.items) options.items = readItems(args.items);
   if (args.tags) options.tags = readTags(args.tags);
   const findings = checkBook(book, cfg, options);
