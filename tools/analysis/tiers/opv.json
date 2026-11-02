@@ -760,6 +760,28 @@
   ],
   "targets": [
     {
+      "id": "site-sgr-chain-matter",
+      "label": "Site: the chain matter extractions and laminator rows (OpV-A0) only at SGR 1806-20 orbit",
+      "kind": "site",
+      "types": [
+        "gtceu:pasta_extraction",
+        "gtceu:pasta_lamination"
+      ],
+      "recipe": [
+        "grindless:pasta_extraction/chain_crust",
+        "grindless:pasta_extraction/ni_chain",
+        "grindless:pasta_extraction/chain_lattice",
+        "grindless:pasta_lamination/chain_lamina",
+        "grindless:pasta_lamination/chain_lamina_stack"
+      ],
+      "dimensions": [
+        "grindless:sgr1806_orbit"
+      ],
+      "exact": true,
+      "package": "B4",
+      "note": "OpV-A0 rows (uxv/vela_pasta.js, older rows under the DECISIONS.md placement rule, opv.md:70): recipe.dimension(sgr1806_orbit) only. Checked from OpV, the era that owns the rows (M1-06)."
+    },
+    {
       "id": "tetron_fab-products-only-tetron_fab",
       "label": "The tetron fab products only from the tetron fab",
       "anyOf": [
