@@ -132,6 +132,6 @@ Write-Host "wrote $($written.Count) textures to $OutRoot"
 if ($Credits) {
     Write-Host ''
     foreach ($rel in $written) {
-        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generated with tools/assets/$ScriptName (procedural pixel art, original) by the pathfinder agent (OpV-R1) | the pack's licence (pending; proposed CC BY-SA 4.0) |")
+        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generated with tools/assets/$ScriptName (procedural pixel art, original) by the pathfinder agent (OpV-R1) | the pack's licence (MIT) |")
     }
 }

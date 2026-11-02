@@ -124,7 +124,7 @@ foreach ($rel in $written) { Write-Host "  $rel" }
 if ($Credits) {
     Write-Host ''
     foreach ($rel in $written) {
-        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generated with tools/assets/$ScriptName (procedural pixel art, original; the routines of Build-WirelessEnergyTextures.ps1) by the wireless agent (UV-A9) | the pack's licence (pending; proposed CC BY-SA 4.0) |")
+        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generated with tools/assets/$ScriptName (procedural pixel art, original; the routines of Build-WirelessEnergyTextures.ps1) by the wireless agent (UV-A9) | the pack's licence (MIT) |")
     }
 }
 if ($problems -gt 0) { exit 1 }
