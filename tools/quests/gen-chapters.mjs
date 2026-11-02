@@ -7,11 +7,14 @@
 //   --chapter        only these chapters, by file name (without .snbt)
 //   --out <dir>      write there instead of the book; "-" prints one chapter on stdout and its counts on stderr
 //   --every-package  pretend every package of a gated era has landed (the draft of the finished chapter; use with --out)
+//   --dry-merge      lint the book as if every era were one merged <era>_age chapter (temp copy, writes nothing); prints counts per era
 //   --pending        print the quests left out by the package gate and the ids they wait for, by package
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ERAS, loadEras, buildWorld, renderWorld, countsLine, pendingReport } from './lib/chapter-gen.mjs';
+import { writeGroups } from './lib/groups.mjs';
+import { dryMerge, formatReport } from './lib/dry-merge.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, '..', '..');
@@ -27,7 +30,7 @@ function opt(name) {
 }
 const list = (s) => (s ? s.split(',').map((x) => x.trim()).filter(Boolean) : null);
 
-const known = new Set(['--era', '--chapter', '--out', '--every-package', '--pending']);
+const known = new Set(['--era', '--chapter', '--out', '--every-package', '--pending', '--dry-merge']);
 for (const a of args) {
   if (a.startsWith('--') && !known.has(a)) {
     console.error(`unknown option ${a}\nusage: node tools/quests/gen-chapters.mjs [--era ev,luv] [--chapter luv_age] [--out <dir>|-] [--every-package] [--pending]`);
@@ -50,6 +53,13 @@ if (chapterArg) {
   chapters = chapters.filter((c) => chapterArg.includes(c.filename));
 }
 
+if (flag('--dry-merge')) {
+  const cfg = JSON.parse(fs.readFileSync(path.join(here, 'lint-config.json'), 'utf8'));
+  const report = dryMerge({ eraMods, bookRoot: path.dirname(book), cfg, eras: eraArg });
+  for (const line of formatReport(report)) console.log(line);
+  process.exit(0);
+}
+
 if (flag('--pending')) {
   for (const era of eraArg || [...world.eras.keys()]) for (const line of pendingReport(world, era)) console.log(line);
 }
@@ -65,5 +75,9 @@ if (outArg === '-') {
     const file = path.join(dir, ch.filename + '.snbt');
     fs.writeFileSync(file, ch.text, { encoding: 'utf8' });
     console.log(`wrote ${file}: ${countsLine(ch.counts)}`);
+  }
+  if (!outArg && !eraArg && !chapterArg) {
+    writeGroups(path.join(path.dirname(book), 'chapter_groups.snbt'));
+    console.log('wrote chapter_groups.snbt');
   }
 }

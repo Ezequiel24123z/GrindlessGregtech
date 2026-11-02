@@ -3,37 +3,35 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-// The Progression group: the era chapters' group before Phase 5 (kept as the fallback for a chapter with no era).
+// QB-0: every era is one chapter, and all of them share one group, in era order (the per-era groups are retired).
+// Ids are sha256('c2-group|' + title) with the first digit in 1-7 (docs/quests.md section 10).
 export const PROGRESSION_GROUP = { id: '3F021F40CD26BF57', title: 'Progression' };
+export const QOL_GROUP = { id: '7C6BF927E205E2F4', title: 'Quality of Life' };
+export const PL_GROUP = { id: '3027186E3042DDFB', title: 'Processing Lines' };
 
-// Phase 5 groups (docs/reforge/05_quest_design.md section 2.2, open question 1): Steam to HV share "Early Ages", every era
-// from EV on has its own group. Ids are sha256('c2-group|' + title) with the first digit in 1-7 (docs/quests.md section 10).
-export const ERA_GROUPS = {
-  steam: { id: '4FEA27882E3DB25B', title: 'Early Ages' },
-  lv: { id: '4FEA27882E3DB25B', title: 'Early Ages' },
-  mv: { id: '4FEA27882E3DB25B', title: 'Early Ages' },
-  hv: { id: '4FEA27882E3DB25B', title: 'Early Ages' },
-  ev: { id: '56FB7B66CDAC1140', title: 'EV' },
-  iv: { id: '20206D3FAD4A2FFF', title: 'IV' },
-  luv: { id: '1B68BDF66B6D5658', title: 'LuV' },
-  zpm: { id: '4E32EDFD57B398F2', title: 'ZPM' },
-  uv: { id: '274E9C2B08DCD170', title: 'UV' },
-  uhv: { id: '5588266FE7D27583', title: 'UHV' },
-  uev: { id: '1D2C127632B5B46E', title: 'UEV' },
-  uiv: { id: '26251651D4D8EF21', title: 'UIV' },
-  uxv: { id: '2FC87731726663DD', title: 'UXV' },
-  opv: { id: '41398BEC88C216FF', title: 'OpV' },
-  max: { id: '14CC251BB70F88DF', title: 'MAX' },
-  maxplus: { id: '7921472BE13FC86D', title: 'MAX+' },
-};
+// chapter_groups.snbt, in order: the era chapters, the quality-of-life tabs, the Processing Lines charts
+export const BOOK_GROUPS = [PROGRESSION_GROUP, QOL_GROUP, PL_GROUP];
 
 const HEX16 = /^[0-9A-F]{16}$/;
 
-// The group id of an era chapter: its pinned `group` (CHAPTER.group), else its era's group, else Progression.
+// The group id of an era chapter: its pinned `group` (CHAPTER.group), else Progression.
 export function eraGroupId(chapter) {
-  const id = chapter.group !== undefined ? chapter.group : (ERA_GROUPS[chapter.era] || PROGRESSION_GROUP).id;
+  const id = chapter.group !== undefined ? chapter.group : PROGRESSION_GROUP.id;
   if (!HEX16.test(id)) throw new Error(`${chapter.filename}: group "${id}" is not 16 uppercase hex digits`);
   return id;
+}
+
+// The text of chapter_groups.snbt
+export function renderGroups(groups = BOOK_GROUPS) {
+  return '{\n\tchapter_groups: [\n' + groups.map((g) => `\t\t{ id: "${g.id}", title: "${g.title}" }\n`).join('') + '\t]\n}\n';
+}
+
+// Rewrites chapter_groups.snbt from BOOK_GROUPS. Returns whether the file changed.
+export function writeGroups(file, groups = BOOK_GROUPS) {
+  const text = renderGroups(groups);
+  if (fs.existsSync(file) && fs.readFileSync(file, 'utf8') === text) return false;
+  fs.writeFileSync(file, text);
+  return true;
 }
 
 // A group's id by its title in <bookDir>/chapter_groups.snbt. `own` lists groups the generators own ({ title: id }): those need

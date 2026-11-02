@@ -1,8 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { buildWorld, renderWorld, newId, descriptionOf, KINDS } from '../lib/chapter-gen.mjs';
-import { eraGroupId, PROGRESSION_GROUP, ERA_GROUPS } from '../lib/groups.mjs';
+import { eraGroupId, PROGRESSION_GROUP, BOOK_GROUPS, renderGroups } from '../lib/groups.mjs';
+import { isEraChapter, isMergedEra, checkBook } from '../lib/checks.mjs';
+import { loadBook } from '../lib/book.mjs';
 import { parse } from '../lib/snbt.mjs';
 
 const it = (item, count) => ({ type: 'item', item, count });
@@ -90,7 +95,7 @@ test('links resolve by key, by era and by X:, and are written in the chapter', (
   const idA = newId('tst', 'A');
   const idF = newId('luv', 'FUSION');
   assert.ok(t.includes(`dependencies: ["${idA}", "${idF}"]`));
-  assert.ok(t.includes(`linked_quest: "${idA}"`) && t.includes('linked_quest: "1234567890ABCDEF"'));
+  assert.ok(t.includes(`linked_quest: "1234567890ABCDEF"`) && !t.includes(`linked_quest: "${idA}"`));
   assert.ok(t.includes('shape: "circle"') && t.includes('size: 0.5d'));
   assert.ok(!t.includes('quest_links: [ ]'));
   assert.throws(() => render({ tst: [mod([quest('A', { deps: ['nope:A'] })])] }), /not loaded/);
@@ -133,14 +138,84 @@ test('raw fields pass through and cannot shadow modelled ones', () => {
   assert.throws(() => text([quest('A', { raw: { title: '"x"' } })]), /collides/);
 });
 
-test('group ids: pinned group wins, else the era group, else Progression', () => {
+test('group ids: pinned group wins, else Progression (one group for every era)', () => {
   assert.equal(eraGroupId({ filename: 'x' }), PROGRESSION_GROUP.id);
-  assert.equal(eraGroupId({ filename: 'x', era: 'tst' }), PROGRESSION_GROUP.id);
+  assert.equal(eraGroupId({ filename: 'x', era: 'ev' }), PROGRESSION_GROUP.id);
   assert.equal(eraGroupId({ filename: 'x', group: '7C6BF927E205E2F4' }), '7C6BF927E205E2F4');
   assert.equal(eraGroupId({ filename: 'x', era: 'ev', group: '7C6BF927E205E2F4' }), '7C6BF927E205E2F4');
-  for (const era of ['steam', 'lv', 'mv', 'hv']) assert.equal(eraGroupId({ filename: 'x', era }), ERA_GROUPS.steam.id, era);
-  assert.equal(eraGroupId({ filename: 'x', era: 'ev' }), ERA_GROUPS.ev.id);
-  assert.equal(new Set(Object.values(ERA_GROUPS).map((g) => g.id)).size, 13);
-  for (const g of Object.values(ERA_GROUPS)) assert.match(g.id, /^[1-7][0-9A-F]{15}$/, g.title);
+  assert.deepEqual(BOOK_GROUPS.map((g) => g.title), ['Progression', 'Quality of Life', 'Processing Lines']);
+  for (const g of BOOK_GROUPS) assert.match(g.id, /^[1-7][0-9A-F]{15}$/, g.title);
   assert.throws(() => eraGroupId({ filename: 'x', group: 'abc' }), /16 uppercase hex/);
+  const rendered = renderGroups();
+  assert.equal(parse(rendered).chapter_groups.length, 3);
 });
+
+const sec = (file, name, origin, quests, extra = {}) => ({ file, CHAPTER: chapter({ section: { name, origin, ...(extra.heading ? { heading: extra.heading } : {}) } }), QUESTS: quests, LINKS: extra.LINKS || [] });
+
+test('an era is one chapter <era>_age made of sections placed at their origin', () => {
+  const main = sec('quests-data.mjs', 'Main', { x: 0, y: 0 }, [quest('A'), quest('B', { deps: ['A'], x: 2 })]);
+  const side = sec('circuits-data.mjs', 'Circuits', { x: 10, y: 5 }, [quest('C', { x: 1, y: 1, deps: ['B'] })]);
+  const out = render({ tst: [main, side] });
+  assert.equal(out.length, 1);
+  assert.equal(out[0].filename, 'tst_age');
+  assert.equal(out[0].counts.quests, 3);
+  const t = out[0].text;
+  assert.ok(t.includes('x: 11.0d') && t.includes('y: 6.0d'));
+  assert.ok(t.includes(`dependencies: ["${newId('tst', 'B')}"]`));
+});
+
+test('a section without an origin goes to the right of the previous ones', () => {
+  const main = sec('quests-data.mjs', 'Main', { x: 0, y: 0 }, [quest('A', { x: 0 }), quest('B', { deps: ['A'], x: 3 })]);
+  const other = { file: 'age1-data.mjs', CHAPTER: chapter(), QUESTS: [quest('C', { x: 0, deps: ['B'] })], LINKS: [] };
+  const t = render({ tst: [main, other] })[0].text;
+  const xs = [...t.matchAll(/^\t\t\tx: (-?[\d.]+)d/gm)].map((m) => Number(m[1]));
+  assert.ok(Math.max(...xs) >= 3 + 8, `gap after the first section: ${xs}`);
+});
+
+test('a section heading is a reading quest with a checkmark and no rewards', () => {
+  const heading = { key: 'HEAD', x: 0, y: -2, desc: ['Start here.'] };
+  const main = sec('quests-data.mjs', 'Main', { x: 0, y: 0 }, [quest('A')]);
+  const side = sec('circuits-data.mjs', 'Circuits', { x: 10, y: 0 }, [quest('C', { deps: ['A'] })], { heading });
+  const t = render({ tst: [main, side] })[0].text;
+  assert.ok(t.includes('title: "Circuits"'));
+  assert.ok(t.includes('shape: "circle"'));
+});
+
+test('same-era quest links are dropped, other-era links stay', () => {
+  const tst = [mod([quest('A'), quest('B', { deps: ['A'] })], { LINKS: [{ key: 'L1', ref: 'A', x: 2, y: 2 }, { key: 'L2', ref: 'tst:B', x: 3, y: 2 }] })];
+  const world = buildWorld(new Map([['tst', tst]]));
+  assert.equal(world.eras.get('tst').droppedLinks.length, 2);
+  assert.ok(renderWorld(world, ['tst'])[0].text.includes('quest_links: [ ]'));
+});
+
+test('which chapters get the merged-era rules', () => {
+  assert.equal(isEraChapter('ev_age'), true);
+  assert.equal(isEraChapter('ev_circuits'), false);
+  assert.equal(isMergedEra({ eraChapters: { enabled: [] } }, 'ev_age', {}), false);
+  assert.equal(isMergedEra({ eraChapters: { enabled: ['ev_age'] } }, 'ev_age', {}), true);
+  assert.equal(isMergedEra({}, 'ev_age', { mergedEras: true }), true);
+  assert.equal(isMergedEra({}, 'lv_misc', { mergedEras: true }), false);
+});
+
+const lintEv = (quests, cfgExtra = {}) => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'gg-qb0-'));
+  try {
+    fs.mkdirSync(path.join(dir, 'chapters'));
+    const [ch] = render({ ev: [mod(quests, { CHAPTER: { filename: 'ev_age' } })] }, {}, 'ev');
+    fs.writeFileSync(path.join(dir, 'chapters', 'ev_age.snbt'), ch.text);
+    fs.writeFileSync(path.join(dir, 'chapter_groups.snbt'), renderGroups());
+    return checkBook(loadBook(dir), { eraChapters: { enabled: [], bridgeMaxEdge: 14 }, ...cfgExtra }, { mergedEras: true }).filter((f) => f.rule === 'connectivity');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+};
+
+test('connectivity: one start, everything reachable inside the chapter', () => {
+  const ok = [quest('A', { deps: [] }), quest('B', { deps: ['A'], x: 2 }), quest('C', { deps: ['B'], x: 4 })];
+  assert.equal(lintEv(ok).length, 0);
+  const second = [...ok, quest('D', { deps: [], x: 2, y: 3 })];
+  assert.ok(lintEv(second).some((f) => /second start/.test(f.message)));
+  const crossOnly = [...ok, quest('D', { deps: ['X:2897E3EB8159710C'], x: 2, y: 3 })];
+  assert.ok(lintEv(crossOnly).some((f) => /second start/.test(f.message)));
+});
+

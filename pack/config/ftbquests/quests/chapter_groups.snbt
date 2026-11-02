@@ -1,18 +1,6 @@
 {
 	chapter_groups: [
-		{ id: "4FEA27882E3DB25B", title: "Early Ages" }
-		{ id: "56FB7B66CDAC1140", title: "EV" }
-		{ id: "20206D3FAD4A2FFF", title: "IV" }
-		{ id: "1B68BDF66B6D5658", title: "LuV" }
-		{ id: "4E32EDFD57B398F2", title: "ZPM" }
-		{ id: "274E9C2B08DCD170", title: "UV" }
-		{ id: "5588266FE7D27583", title: "UHV" }
-		{ id: "1D2C127632B5B46E", title: "UEV" }
-		{ id: "26251651D4D8EF21", title: "UIV" }
-		{ id: "2FC87731726663DD", title: "UXV" }
-		{ id: "41398BEC88C216FF", title: "OpV" }
-		{ id: "14CC251BB70F88DF", title: "MAX" }
-		{ id: "7921472BE13FC86D", title: "MAX+" }
+		{ id: "3F021F40CD26BF57", title: "Progression" }
 		{ id: "7C6BF927E205E2F4", title: "Quality of Life" }
 		{ id: "3027186E3042DDFB", title: "Processing Lines" }
 	]
