@@ -2,11 +2,11 @@
 {
  "note": "Recipes with more entries on a side than their recipe type lays out (M8-04). May only shrink: fix the layout or the recipe, then rerun check-static.mjs --write-baselines.",
  "violations": {
-  "grindless:chemical_bath/coated_absorber_sheet": "gtceu:chemical_bath: 2 item inputs > layout 1",,
-  "grindless:chemical_bath/bound_coated_ribbon": "gtceu:chemical_bath: 2 item inputs > layout 1",,
-  "grindless:chemical_bath/stabilised_kerr_wire": "gtceu:chemical_bath: 2 item inputs > layout 1",,
-  "grindless:chemical_bath/primed_kerr_web": "gtceu:chemical_bath: 2 item inputs > layout 1",,
-  "grindless:chemical_bath/polished_resonance_cell": "gtceu:chemical_bath: 2 item inputs > layout 1",,
+  "grindless:chemical_bath/coated_absorber_sheet": "gtceu:chemical_bath: 2 item inputs > layout 1",
+  "grindless:chemical_bath/bound_coated_ribbon": "gtceu:chemical_bath: 2 item inputs > layout 1",
+  "grindless:chemical_bath/stabilised_kerr_wire": "gtceu:chemical_bath: 2 item inputs > layout 1",
+  "grindless:chemical_bath/primed_kerr_web": "gtceu:chemical_bath: 2 item inputs > layout 1",
+  "grindless:chemical_bath/polished_resonance_cell": "gtceu:chemical_bath: 2 item inputs > layout 1",
   "grindless:chemical_bath/polished_waveguide_tube": "gtceu:chemical_bath: 2 item inputs > layout 1"
  },
  "seeded": [

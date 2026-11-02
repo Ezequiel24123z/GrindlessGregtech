@@ -1,11 +1,11 @@
 {
  "note": "Today's capacity errors (recipe id -> reason). May only shrink; fix the recipe, then rerun --write-known.",
  "violations": {
-  "grindless:chemical_bath/coated_absorber_sheet": "2 item inputs (1 circuit) > type max 1",,
-  "grindless:chemical_bath/bound_coated_ribbon": "2 item inputs (1 circuit) > type max 1",,
-  "grindless:chemical_bath/stabilised_kerr_wire": "2 item inputs (1 circuit) > type max 1",,
-  "grindless:chemical_bath/primed_kerr_web": "2 item inputs (1 circuit) > type max 1",,
-  "grindless:chemical_bath/polished_resonance_cell": "2 item inputs (1 circuit) > type max 1",,
+  "grindless:chemical_bath/coated_absorber_sheet": "2 item inputs (1 circuit) > type max 1",
+  "grindless:chemical_bath/bound_coated_ribbon": "2 item inputs (1 circuit) > type max 1",
+  "grindless:chemical_bath/stabilised_kerr_wire": "2 item inputs (1 circuit) > type max 1",
+  "grindless:chemical_bath/primed_kerr_web": "2 item inputs (1 circuit) > type max 1",
+  "grindless:chemical_bath/polished_resonance_cell": "2 item inputs (1 circuit) > type max 1",
   "grindless:chemical_bath/polished_waveguide_tube": "2 item inputs (1 circuit) > type max 1"
  },
  "seeded": [
