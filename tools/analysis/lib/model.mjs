@@ -20,12 +20,13 @@ function ioNeeds(n) {
 }
 import { asArray, makeGlobMatcher } from './util.mjs';
 
-// A pattern block that is a fluid source (a pool the machine sits in) is placed with its bucket: there is no such item.
-const FLUID_BUCKETS = { 'minecraft:water': 'minecraft:water_bucket', 'minecraft:lava': 'minecraft:lava_bucket' };
+// A water source block in a pattern is the free vanilla pool the machine sits in (renewable, no item to craft): it is not a part.
+const POOL_BLOCKS = new Set(['minecraft:water']);
 function bucketedFluidBlocks(desc) {
   const symbols = {};
   for (const [ch, s] of Object.entries(desc.symbols || {})) {
-    symbols[ch] = s && s.kind === 'blocks' ? { ...s, blocks: (s.blocks || []).map((b) => FLUID_BUCKETS[b] || b) } : s;
+    if (s && s.kind === 'blocks' && (s.blocks || []).length > 0 && s.blocks.every((b) => POOL_BLOCKS.has(b))) symbols[ch] = { kind: 'any' };
+    else symbols[ch] = s;
   }
   return { ...desc, symbols };
 }
