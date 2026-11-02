@@ -298,12 +298,18 @@
     }
     if (u.phase === 'output') {
       var gas = 0
-      u.out.forEach(function (h) { if (String(h.tank.getFluidInTank(0).getFluid()).indexOf('pristine_gas') >= 0) gas += tankMb(h) })
+      var seen = []
+      u.out.forEach(function (h) {
+        var fs = h.tank.getFluidInTank(0)
+        var fid = fs.isEmpty() ? 'empty' : String(classes().Registries.FLUIDS.getKey(fs.getFluid()))
+        seen.push(fid + ' ' + tankMb(h))
+        if (fid === GAS) gas += tankMb(h)
+      })
       if (gas >= RUNS * GAS_PER_RUN) {
         check('output', gas === RUNS * GAS_PER_RUN, 'output hatches hold ' + gas + ' mB of pristine gas (want ' + (RUNS * GAS_PER_RUN) + ')')
         u.phase = 'done'
       } else if (waited > 200) {
-        check('output', false, 'output hatches hold ' + gas + ' mB of pristine gas after 200 ticks (want ' + (RUNS * GAS_PER_RUN) + '); reasons ' + reasons(u.m))
+        check('output', false, 'output hatches hold ' + gas + ' mB of pristine gas after 200 ticks (want ' + (RUNS * GAS_PER_RUN) + '); tanks ' + seen.join(', ') + '; status ' + String(rlg.getStatus()) + ', progress ' + rlg.getProgress() + '/' + rlg.getDuration() + '; reasons ' + reasons(u.m))
         u.phase = 'done'
       }
     }
