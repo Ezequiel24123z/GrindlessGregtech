@@ -166,7 +166,7 @@
 		}
 		{
 			dependencies: ["188AE1CE6129054A"]
-			description: ["Mercury gets several times the sunlight Earth does. The surface is vacuum and the day side is a furnace, so the machines there run only in daylight."]
+			description: ["Mercury gets several times the sunlight Earth does. The surface is vacuum and the day side is a furnace, so the solar vapour furnace there runs only in daylight."]
 			icon: "minecraft:sunflower"
 			id: "79AAE037161EDE29"
 			rewards: [{ id: "1A195C9839E7A63C", type: "xp", xp: 25 }]
@@ -579,7 +579,7 @@
 		}
 		{
 			dependencies: ["5E6B4DEB712EECBE"]
-			description: ["Move your towers onto &6UHV SMES Cells&r and the wireless network carries UHV, out to the stations and now to Mercury and Proxima. Every formed tower holding UHV cells: until then the network stays at UV. Stations that run on power made at home, and the wireless hatches and covers at UHV. Add cells when the network dips at your busiest hour."]
+			description: ["Move your towers onto &6UHV SMES Cells&r and the wireless network carries UHV, out to the stations and now to Mercury and Proxima. One formed tower holding a UHV cell: the network runs at its strongest cell, so until then it stays at UV. Stations that run on power made at home, and the wireless hatches and covers at UHV. Add cells when the network dips at your busiest hour."]
 			icon: "gtceu:uhv_wireless_energy_hatch"
 			id: "3B594BE1402C7B55"
 			rewards: [{ id: "758A54F40ABB6F18", type: "xp", xp: 200 }]
@@ -619,7 +619,7 @@
 		}
 		{
 			dependencies: ["1338B882BFAB5DF8"]
-			description: ["The seed for the Mercury bridge is made in Mercury orbit, with the first swarm segment as the catalyst. Once linked, the foundry's output reaches home through ME."]
+			description: ["The seed for the Mercury bridge is made with the first swarm segment as the catalyst, and it needs no place. Once linked, the foundry's output reaches home through ME."]
 			icon: "ae2:quantum_ring"
 			id: "555DAA8FBE97E6F1"
 			rewards: [{ id: "7FF1FBD3EC6380EA", type: "xp", xp: 100 }]

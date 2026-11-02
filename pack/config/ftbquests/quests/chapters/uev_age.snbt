@@ -119,7 +119,7 @@
 		}
 		{
 			dependencies: ["7AAAC4DF44923FD1"]
-			description: ["Park in orbit round &6Alpha Centauri&r A and B and build station nine. Every machine of the star lives in that orbit."]
+			description: ["Park in orbit round &6Alpha Centauri&r A and B and build station nine. The nebula collector and the pulsar timing survey need that orbit."]
 			icon: "gtceu:uev_machine_casing"
 			id: "52CC6BA393B05B31"
 			rewards: [{ id: "1368A7C1A248EE7F", type: "xp", xp: 200 }]
@@ -143,7 +143,7 @@
 		}
 		{
 			dependencies: ["52CC6BA393B05B31"]
-			description: ["The orbit holds gas and dust between the stars, and the collectors and the dust lab work it. Real interstellar gas is a few atoms in a cubic metre; the yield here is a game number."]
+			description: ["The orbit holds gas and dust between the stars. The collector works the gas and the dust lab studies the grains. Real interstellar gas is a few atoms in a cubic metre; the yield here is a game number."]
 			icon: "gtceu:nebula_collector"
 			id: "5FB0F9524805A6FD"
 			rewards: [{ id: "550724CB38758170", type: "xp", xp: 25 }]
@@ -194,7 +194,7 @@
 		}
 		{
 			dependencies: ["545210E1EB9C1D44"]
-			description: ["Barnard b is mostly iron, with nickel, cobalt and a rhenium-rich residue. The &6Barnard Core Rock&r is what the carbonyl route starts from, and the rhenium goes home for the Mk2 drive."]
+			description: ["Barnard b is mostly iron, with nickel, cobalt and a rhenium-rich residue. The &6Barnard Core Rock&r is what the carbonyl route starts from. The platinum plant at home turns the residue into a crude rhenium salt, and the rhenium rows run here for the Mk2 drive."]
 			icon: "grindless:barnard_core_rock"
 			id: "7B9833873D5CD02A"
 			rewards: [{ id: "79244E1C84435DBF", type: "xp", xp: 150 }]
@@ -320,7 +320,7 @@
 		}
 		{
 			dependencies: ["572E0C57B385B5AF"]
-			description: ["The &6UEV Circuit Assembler&r is the first assembler that can put together the optical computers that UEV machines are built around. A UEV hull and UEV components, and the cleanroom you already run. The optical computer on the rows below, and the controller of every machine past the UEV hull. Boards and chips arrive from the cleanroom by ME; keep a small stock of what it returns."]
+			description: ["The &6UEV Circuit Assembler&r is the first assembler that can put together the UEV circuits that UEV machines are built around. A UEV hull and UEV components, and the cleanroom you already run. The optical computer on the rows below, and the controller of every machine past the UEV hull. Boards and chips arrive from the cleanroom by ME; keep a small stock of what it returns."]
 			icon: "gtceu:uev_circuit_assembler"
 			id: "5807DC537AFBD8BF"
 			rewards: [{ id: "586EE1D2583A0E65", type: "xp", xp: 150 }]
@@ -482,7 +482,7 @@
 		}
 		{
 			dependencies: ["572E0C57B385B5AF"]
-			description: ["Two photons entangled over a distance let a network stay in step. A &6Quantum Repeater Node&r keeps one end of the link. The entanglement station in Earth orbit, an Eu:YSO memory crystal, quantum dots, SNSPDs and hollow-core fibre. The UEV wireless link, and the cell that the quantum repeater keeps in step. Ship the parts to orbit by ME and bring the nodes back; one node is worth a long run."]
+			description: ["Two photons entangled over a distance let a network stay in step. A &6Quantum Repeater Node&r keeps one end of the link. The entanglement station, an Eu:YSO memory crystal, quantum dots, SNSPDs and hollow-core fibre. The UEV wireless link, and the cell that the quantum repeater keeps in step. Parts by ME and nodes back by ME; one node is worth a long run."]
 			icon: "grindless:quantum_repeater_node"
 			id: "7B8852855265F1E3"
 			rewards: [{ id: "7C1CF223384BD91B", type: "xp", xp: 180 }]
@@ -576,7 +576,7 @@
 		}
 		{
 			dependencies: ["5304F9E360A95261"]
-			description: ["Move your towers onto &6UEV SMES Cells&r and the wireless network carries UEV to every station, out to Alpha Centauri and beyond. Every formed tower holding UEV cells: until then the network stays at UHV. The wireless hatches at UEV, and the gate's load at Sirius B. Add cells when the network dips at your busiest hour."]
+			description: ["Move your towers onto &6UEV SMES Cells&r and the wireless network carries UEV to every station, out to Alpha Centauri and beyond. One formed tower holding a UEV cell: the network runs at its strongest cell, so until then it stays at UHV. The wireless hatches at UEV, and the gate's load at Sirius B. Add cells when the network dips at your busiest hour."]
 			icon: "gtceu:uev_wireless_energy_hatch"
 			id: "31927D93FA5DAFEE"
 			rewards: [{ id: "704008987819AD6D", type: "xp", xp: 200 }]
@@ -1070,7 +1070,7 @@
 		}
 		{
 			dependencies: ["76EFA041DAC4B333"]
-			description: ["The &6Stellar Forge&r is a furnace that holds a fragment of a star. A UEV hull, two UEV components, two optical computers and the HfTaCN coil block. The hottest recipes in the pack, which the Mk4 plasma line runs on. Fuel and heat sinks by ME; plan for the byproducts before you start."]
+			description: ["The &6Stellar Forge&r is a furnace that holds a fragment of a star. A UEV hull, two UEV components, two UEV circuits and the HfTaCN coil block. The hottest recipes in the pack, which the Mk4 plasma line runs on. Fuel and heat sinks by ME; plan for the byproducts before you start."]
 			icon: "gtceu:stellar_forge"
 			id: "3875C96B236BA596"
 			rewards: [{ id: "5D071458EA723917", type: "xp", xp: 150 }]
@@ -1162,7 +1162,7 @@
 		}
 		{
 			dependencies: ["15578A4882F50B8B"]
-			description: ["The &6Mk4 Fusion Reactor&r is a ring that burns polarised helium-3 and deuterium into the most energy a reactor makes. A UEV hull, two UEV components, two optical computers, the UEV fusion casing and the HfTaCN coil block. The plasma and burn quests in the integration chapter. Fuel and coolant by pipe; build the plant before you light it."]
+			description: ["The &6Mk4 Fusion Reactor&r is a ring that burns polarised helium-3 and deuterium into the most energy a reactor makes. A UEV hull, two UEV components, two UEV circuits, the UEV fusion casing and the HfTaCN coil block. The plasma and burn quests in the integration chapter. Fuel and coolant by pipe; build the plant before you light it."]
 			icon: "gtceu:uev_fusion_reactor"
 			id: "3C4381FD6FA32403"
 			rewards: [{ id: "1EB7C44FBD8DC722", type: "xp", xp: 180 }]
@@ -1206,7 +1206,7 @@
 		}
 		{
 			dependencies: ["147A35DB262693FF"]
-			description: ["The &6Entanglement Station&r in Earth orbit ties two photons together across a distance. A UEV hull, two UEV components, two optical computers and the photonic casing. The quantum repeater node in the circuits chapter. Ship the parts to orbit by ME and bring the nodes back."]
+			description: ["The &6Entanglement Station&r ties two photons together across a distance. A UEV hull, two UEV components, two UEV circuits and the photonic casing. The quantum repeater node in the circuits chapter. Parts by ME; send the nodes on by ME."]
 			icon: "gtceu:entanglement_station"
 			id: "5D8B9A9839432298"
 			rewards: [{ id: "5B16504A2B469DC1", type: "xp", xp: 150 }]
@@ -1222,7 +1222,7 @@
 		}
 		{
 			dependencies: ["1299B0A10283C57E"]
-			description: ["The &6Nebula Collector&r gathers gas from a nebula and sorts it by element. A UEV hull, two UEV components, two optical computers and the photonic casing. Gas streams that the Alpha Centauri lines consume. Run it on a pipe loop to the plant and send the surplus to a tank."]
+			description: ["The &6Nebula Collector&r gathers gas from a nebula and sorts it by element. A UEV hull, two UEV components, two UEV circuits and the photonic casing. Gas streams that the Alpha Centauri lines consume. Run it on a pipe loop to the plant and send the surplus to a tank."]
 			icon: "gtceu:nebula_collector"
 			id: "35EB2F3BC6F8AEB8"
 			rewards: [{ id: "17921AAF6FF4A96E", type: "xp", xp: 150 }]
@@ -1238,7 +1238,7 @@
 		}
 		{
 			dependencies: ["1299B0A10283C57E"]
-			description: ["The &6Interstellar Dust Lab&r studies grains of dust that formed around other stars. A UEV hull, two UEV components, two optical computers and the photonic casing. The iron-60 record and the dust data the star charts use. Dust by ME; log the records and store the rest."]
+			description: ["The &6Interstellar Dust Lab&r studies grains of dust that formed around other stars. A UEV hull, two UEV components, two UEV circuits and the photonic casing. The iron-60 record and the dust data the star charts use. Dust by ME; log the records and store the rest."]
 			icon: "gtceu:interstellar_dust_lab"
 			id: "58D016D6E9BAFE59"
 			rewards: [{ id: "3039FB2C6B9D067B", type: "xp", xp: 150 }]
@@ -1254,7 +1254,7 @@
 		}
 		{
 			dependencies: ["1299B0A10283C57E"]
-			description: ["The &6Pulsar Timing Station&r keeps time with a pulsar and finds the way by it. A UEV hull, two UEV components, two optical computers and the photonic casing. The pulsar navigation chart that the way to Sirius B needs. The station asks for little by ME; keep a stock of charts for the gate."]
+			description: ["The &6Pulsar Timing Station&r keeps time with a pulsar and finds the way by it. A UEV hull, two UEV components, two UEV circuits and the photonic casing. The pulsar navigation chart that the way to Sirius B needs. The station asks for little by ME; keep a stock of charts for the gate."]
 			icon: "gtceu:pulsar_timing_station"
 			id: "530544BFDCF5D75E"
 			rewards: [{ id: "33EE8AC91B0EC6F0", type: "xp", xp: 150 }]
@@ -1270,7 +1270,7 @@
 		}
 		{
 			dependencies: ["32730EE4F1B2A321"]
-			description: ["The &6Carbonyl Refinery&r turns iron and carbon monoxide into a liquid and back, leaving a very pure metal. A UEV hull, two UEV components, two optical computers and the inert casing. Iron pentacarbonyl and pure iron, for the nitride magnets. Contain the carbon monoxide; keep the loop sealed and vented to a scrubber."]
+			description: ["The &6Carbonyl Refinery&r turns iron and carbon monoxide into a liquid and back, leaving a very pure metal. A UEV hull, two UEV components, two UEV circuits and the inert casing. Iron pentacarbonyl and pure iron, for the nitride magnets. Contain the carbon monoxide; keep the loop sealed and vented to a scrubber."]
 			icon: "gtceu:carbonyl_refinery"
 			id: "3664E92DBC4A97AB"
 			rewards: [{ id: "1F78323E49E5E7A6", type: "xp", xp: 150 }]
@@ -1297,7 +1297,7 @@
 		}
 		{
 			dependencies: ["120B4D6B667EAF26"]
-			description: ["The &6White Dwarf Spectrograph&r reads a dead star's light and from it the mass and radius. A UEV hull, two UEV components, two optical computers and the photonic casing. The mass-radius chart and the degenerate harvester. The station asks for little by ME; keep a stock of charts."]
+			description: ["The &6White Dwarf Spectrograph&r reads a dead star's light and from it the mass and radius. A UEV hull, two UEV components, two UEV circuits and the photonic casing. The mass-radius chart and the degenerate harvester. The station asks for little by ME; keep a stock of charts."]
 			icon: "gtceu:white_dwarf_spectrograph"
 			id: "565457BFBC2B7232"
 			rewards: [{ id: "147D8ECF0980A518", type: "xp", xp: 150 }]
@@ -1313,7 +1313,7 @@
 		}
 		{
 			dependencies: ["565457BFBC2B7232"]
-			description: ["The &6Degenerate Harvester&r takes matter from a white dwarf, in which atoms are crushed together. A UEV hull, two UEV components, two optical computers and the degenerate containment casing. Degenerate matter, which the containment works bottles. Put the plant behind a safe containment loop; never route this matter by plain pipe."]
+			description: ["The &6Degenerate Harvester&r takes matter from a white dwarf, in which atoms are crushed together. A UEV hull, two UEV components, two UEV circuits and the degenerate containment casing. Degenerate matter, which the containment works bottles. Put the plant behind a safe containment loop; never route this matter by plain pipe."]
 			icon: "gtceu:degenerate_harvester"
 			id: "3970BC63BB8C9A9F"
 			rewards: [{ id: "745528F2ED9D2076", type: "xp", xp: 150 }]
@@ -1329,7 +1329,7 @@
 		}
 		{
 			dependencies: ["3970BC63BB8C9A9F"]
-			description: ["The &6Containment Works&r bottles degenerate matter into a pellet that can be carried safely. A UEV hull, two UEV components, two optical computers and the degenerate containment casing. The degenerate pellet, the last item the gate at UEV asks for. Feed the matter from the harvester by hatch; ship pellets by ME."]
+			description: ["The &6Containment Works&r bottles degenerate matter into a pellet that can be carried safely. A UEV hull, two UEV components, two UEV circuits and the degenerate containment casing. The degenerate pellet, the last item the gate at UEV asks for. Feed the matter from the harvester by hatch; ship pellets by ME."]
 			icon: "gtceu:containment_works"
 			id: "7F1047B6CDE89AFA"
 			rewards: [{ id: "33801BB8BE900B1E", type: "xp", xp: 150 }]

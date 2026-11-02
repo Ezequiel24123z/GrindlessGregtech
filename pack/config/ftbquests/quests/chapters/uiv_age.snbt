@@ -56,7 +56,7 @@
 		}
 		{
 			dependencies: ["5DFADD2C1B09AF2E"]
-			description: ["A crystal that keeps data for ever, a scanner for a shorter wavelength and a chip cold enough to think. They end in the optical mainframe the gate asks for."]
+			description: ["A crystal that keeps data for ever, a scanner for a shorter wavelength and a chip cold enough to think. They end in the optical mainframe, the UIV circuit."]
 			icon: "gtceu:beuv_scanner"
 			id: "3544A39EF6B5C5FF"
 			rewards: [{ id: "1264530A4D37F249", type: "xp", xp: 25 }]
@@ -82,7 +82,7 @@
 		}
 		{
 			dependencies: ["5DFADD2C1B09AF2E"]
-			description: ["The planet nearest the Sun gets nine times Earth's light. Park in &6Mercury&r orbit: the Matrioshka computer and its radiators are built here."]
+			description: ["The planet nearest the Sun gets nine times Earth's light. Park in &6Mercury&r orbit: the Matrioshka computer writes its charts here."]
 			icon: "gtceu:matrioshka_computer"
 			id: "1BFA42734E29F4A9"
 			rewards: [{ id: "30CE1918F42F5658", type: "xp", xp: 200 }]
@@ -147,7 +147,7 @@
 		}
 		{
 			dependencies: ["1A781FD07AF49721"]
-			description: ["A neutron star packs a Sun into a ball a few miles wide. Its crust is the thinnest skin of matter anywhere, and everything this orbit makes comes from it. The crust lift and the neutronium pellet are fiction, and say so."]
+			description: ["A neutron star packs a Sun into a ball a few miles wide. Its crust is the thinnest skin of matter anywhere, and the crust lift takes its matter from it. The crust lift and the neutronium pellet are fiction, and say so."]
 			icon: "gtceu:crust_lift"
 			id: "5C19AB7DCF02FFCB"
 			rewards: [{ id: "386981FDAA188ACB", type: "xp", xp: 25 }]
@@ -340,7 +340,7 @@
 		}
 		{
 			dependencies: ["58ADF60AC2BD2DD7"]
-			description: ["Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four optical mainframes in the store. The gate looks for them before it opens further."]
+			description: ["Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four UIV circuits in the store. The gate looks for them before it opens further."]
 			icon: "grindless:neutronium_pellet"
 			id: "1724E39CDD53C2A2"
 			rewards: [{ id: "5FA246B7981D85E4", type: "xp", xp: 300 }]
@@ -674,7 +674,7 @@
 		}
 		{
 			dependencies: ["5FB006B879741A02"]
-			description: ["Move your towers onto &6UIV SMES Cells&r and the wireless network carries UIV to every station, out to the black hole. Every formed tower holding UIV cells: until then the network stays at UEV. The wireless hatches at UIV, and the gate's load for UXV. Add cells when the network dips at your busiest hour."]
+			description: ["Move your towers onto &6UIV SMES Cells&r and the wireless network carries UIV to every station, out to the black hole. One formed tower holding a UIV cell: the network runs at its strongest cell, so until then it stays at UEV. The wireless hatches at UIV, and the gate's load for UXV. Add cells when the network dips at your busiest hour."]
 			icon: "gtceu:uiv_wireless_energy_hatch"
 			id: "7099122F58BD069C"
 			rewards: [{ id: "38CA6305A7C48B92", type: "xp", xp: 200 }]
@@ -703,7 +703,7 @@
 		}
 		{
 			dependencies: ["3DA510039E5F310C"]
-			description: ["The &6Matrioshka Computer&r is the only place the charts of this era are written: the equation of state, the navigation solution and the Kerr chart. It runs for a long time on a lot of power, so give it its own tower and a quiet bus. Tick this box once it has made a chart."]
+			description: ["The &6Matrioshka Computer&r is the only place the UIV research is written, and it makes the equation of state chart and the Kerr chart. It runs for a long time on a lot of power, so give it its own tower and a quiet bus. Tick this box once it has made a chart."]
 			icon: "gtceu:matrioshka_computer"
 			id: "581334FA6F7174C9"
 			rewards: [{ id: "1A4E557BE2CFF94E", type: "xp", xp: 100 }]
@@ -1150,7 +1150,7 @@
 		}
 		{
 			dependencies: ["57862F697D22D7F2"]
-			description: ["The &6Mk5 Fusion Ring&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches. A UIV hull, UIV components, optical mainframes, the Mk5 fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches. The three polarised burns, and the direct energy converter that turns plasma into power. Build the fuel plant before you light the ring; helium-3 and protons return to their lines."]
+			description: ["The &6Mk5 Fusion Ring&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches. A UIV hull, UIV components, UIV circuits, the Mk5 fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches. The three polarised burns, and the direct energy converter that turns plasma into power. Build the fuel plant before you light the ring; helium-3 and protons return to their lines."]
 			icon: "gtceu:uiv_fusion_reactor"
 			id: "72D797E3DDE7ED0E"
 			rewards: [{ id: "1FC1422722F775DB", type: "xp", xp: 250 }]
@@ -1167,7 +1167,7 @@
 		}
 		{
 			dependencies: ["50ED516A490F0DF7"]
-			description: ["A computer built in shells, in nine times Earth's sunlight, running logic that makes barely any heat. The &6Matrioshka Computer&r is where UIV research is written. A UIV hull, UIV components, optical mainframes and the UIV casing, in Mercury orbit. Verified writes, the Kerr and equation of state charts, and the radiators that carry its heat. Logic tiles are among the longest builds here: stock them by ME and send the waste heat to the radiators."]
+			description: ["A computer built in shells, in nine times Earth's sunlight, running logic that makes barely any heat. The &6Matrioshka Computer&r is where UIV research is written. A UIV hull, UIV components, UIV circuits and the UIV casing. Its chart and research rows run in Mercury orbit. Verified writes, the Kerr and equation of state charts, and the radiators that carry its heat. Logic tiles are among the longest builds here: stock them by ME and send the waste heat to the radiators."]
 			icon: "gtceu:matrioshka_computer"
 			id: "7E2EF99503F9DB02"
 			rewards: [{ id: "79DC492E9F485905", type: "xp", xp: 250 }]
@@ -1183,7 +1183,7 @@
 		}
 		{
 			dependencies: ["7E2EF99503F9DB02"]
-			description: ["Heat has nowhere to go in space but out. Liquid tin droplets falling in free fall carry it away, which only works in orbit. The &6Droplet Radiator Works&r builds the modules. A UIV hull, UIV components and the UIV casing; the modules are assembled in Mercury orbit. Radiator modules, and the TPV tiles of the Matrioshka shell. Tin overflow returns to stock; ship modules down by ME."]
+			description: ["Heat has nowhere to go in space but out. Liquid tin droplets falling in free fall carry it away, which only works in orbit. The &6Droplet Radiator Works&r builds the modules. A UIV hull, UIV components and the UIV casing; the modules need no particular place. Radiator modules, and the TPV tiles of the Matrioshka shell. Tin overflow returns to stock; ship modules down by ME."]
 			icon: "gtceu:droplet_radiator_works"
 			id: "582C5EF34B1CF2D0"
 			rewards: [{ id: "1DCB16BA2FB047FA", type: "xp", xp: 200 }]
