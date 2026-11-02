@@ -6,7 +6,7 @@ const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
 export const CHAPTER = {
-  section: { name: 'UEV Machines', origin: { x: 4, y: 24.5 }, heading: { key: 'H_NUC', x: 0, y: 0, deps: ['H_CIRC'], icon: 'gtceu:calutron', desc: [
+  section: { name: 'UEV Machines', origin: { x: 4, y: 24.5 }, heading: { key: 'H_NUC', x: 6.25, y: -31, deps: ['J_HOME'], icon: 'gtceu:calutron', desc: [
       'Heavy isotopes, megabar presses and magnets.',
       'The machines of this age start here.',
     ] } },
@@ -43,83 +43,83 @@ const PHOTO = it('grindless:photonic_casing');
 
 export const QUESTS = [
   // ------------------------------------------------------------------ isotopes and superheavy elements
-  gear('CAL', 'calutron', 'Calutron', ['H_NUC'], 3, -3, {
+  gear('CAL', 'calutron', 'Calutron', ['H_NUC'], 9.75, -40.5, {
     for: 'The &6Calutron&r bends a beam of ions in a magnet, and each isotope lands in its own cup.',
     needs: 'Two UHV hulls, three UV sensors, three UV field generators, three SRF cryomodules, a Nb3Sn cavity, two zircaloy tubes, any UHV circuit and the stable casing.',
     unlocks: 'Calcium-48 and plutonium-244, the bullet and the target of every superheavy run.',
     automate: 'Feed the ore dust by ME and send each isotope to its own chest; the rest returns for another pass.',
   }, [STABLE]),
-  prod('CA48', 'Calcium-48', 'gtceu:calcium_48_dust', ['CAL'], 5.5, -6, ['The rare isotope that a superheavy run fires. The UEV Lines chart shows how much one run uses.']),
-  prod('PU', 'Plutonium-244', 'gtceu:plutonium_244_dust', ['CAL'], 5.5, -4.5, ['The heavy target the beam hits. Keep a stock of it before the cyclotron.']),
-  gear('HIC', 'heavy_ion_cyclotron', 'Heavy Ion Cyclotron', ['CAL'], 5.5, -3, {
+  prod('CA48', 'Calcium-48', 'gtceu:calcium_48_dust', ['CAL'], 11, -42.25, ['The rare isotope that a superheavy run fires. The UEV Lines chart shows how much one run uses.']),
+  prod('PU', 'Plutonium-244', 'gtceu:plutonium_244_dust', ['CAL'], 13.25, -41.5, ['The heavy target the beam hits. Keep a stock of it before the cyclotron.']),
+  gear('HIC', 'heavy_ion_cyclotron', 'Heavy Ion Cyclotron', ['CAL'], 14, -39.25, {
     for: 'The &6Heavy Ion Cyclotron&r accelerates calcium-48 until it can fuse with a plutonium target.',
     needs: 'Two UHV hulls, three UV sensors, three UV field generators, a Nb3Sn cavity, a target wheel, calcium-48 beam charges, any UHV circuit and the stable casing; the Calutron is its research.',
     unlocks: 'Atoms of flerovium and heavier, which the recoil separator catches.',
     automate: 'Beam and target arrive by ME; the output is a few atoms, so route it straight to the separator.',
   }, [STABLE]),
-  gear('REC', 'recoil_separator', 'Recoil Separator', ['HIC'], 8, -3, {
+  gear('REC', 'recoil_separator', 'Recoil Separator', ['HIC'], 20.5, -39.5, {
     for: 'The &6Recoil Separator&r picks the few new atoms out of the beam, in the milliseconds they live.',
     needs: 'Two UHV hulls, three UV sensors, three UV field generators, a Nb3Sn cavity, three etched membranes, two ion-tracked foils, any UHV circuit and the stable casing; the Heavy Ion Cyclotron is its research.',
     unlocks: 'Counted superheavy atoms, ready for the chemistry lab.',
     automate: 'Link it to the cyclotron by pipe and hatch; sort the atoms by element.',
   }, [STABLE]),
-  gear('SHL', 'superheavy_chemistry_lab', 'Superheavy Chemistry Lab', ['REC'], 10.5, -3, {
+  gear('SHL', 'superheavy_chemistry_lab', 'Superheavy Chemistry Lab', ['REC'], 25, -40, {
     for: 'The &6Superheavy Chemistry Lab&r studies a handful of atoms before they decay.',
     needs: 'Two UHV hulls, three UV sensors, three UV field generators, three sealed capsules, a polycarbonate foil, an etched membrane, any UHV circuit and the stable casing; the Recoil Separator is its research.',
         unlocks: 'The tennessine sample and the superheavy census, which the Warp Gate hold and the later lines ask for.',
     automate: 'Atoms come by hatch from the separator; log the results, then discard the decayed rest.',
   }, [STABLE]),
-  prod('CEN', 'Superheavy Census', 'grindless:superheavy_census', ['SHL'], 13, -4.5, ['A record of what the lab learned. The UEV Lines chart shows where it is spent.']),
+  prod('CEN', 'Superheavy Census', 'grindless:superheavy_census', ['SHL'], 27.75, -41.5, ['A record of what the lab learned. The UEV Lines chart shows where it is spent.']),
 
   // ------------------------------------------------------------------ pressure
-  gear('MEGA', 'megabar_press', 'Megabar Press', ['H_NUC'], 3, -1, {
+  gear('MEGA', 'megabar_press', 'Megabar Press', ['H_NUC'], 10, -32.25, {
     for: 'The &6Megabar Press&r squeezes a sample between diamond anvils to a million atmospheres.',
     needs: 'Two UHV hulls, two UV pistons, three LaY foils, three ammonia borane charges, a nanodiamond pellet, any UHV circuit and the robust casing.',
     unlocks: 'Superhydrides, which hold their superconducting state under pressure.',
     automate: 'Feed samples and nanotwinned diamond by ME; anvils wear, so keep spares.',
   }, [ROBUST]),
-  prod('HYD', 'Squeeze a Hydride', 'gtceu:lay_superhydride_ingot', ['MEGA'], 5.5, -1, ['A lanthanum superhydride, pressed in the megabar press. The UEV Lines chart shows what it feeds.']),
+  prod('HYD', 'Squeeze a Hydride', 'gtceu:lay_superhydride_ingot', ['MEGA'], 12, -32.75, ['A lanthanum superhydride, pressed in the megabar press. The UEV Lines chart shows what it feeds.']),
 
   // ------------------------------------------------------------------ electron beam and single crystals
-  gear('EBF', 'electron_beam_furnace', 'Electron Beam Furnace', ['H_NUC'], 3, 1, {
+  gear('EBF', 'electron_beam_furnace', 'Electron Beam Furnace', ['H_NUC'], 11, -37.75, {
       for: 'The &6Electron Beam Furnace&r melts metal in a vacuum with a beam, so it comes out purer than a coil could make it.',
       needs: 'Two UHV hulls, three UV emitters, three SRF cryomodules, six SRF cavities, two near-net neutronium gears, any UHV circuit and the clean casing.',
     unlocks: 'Six-nines hafnium and tantalum for the single-crystal foundry.',
     automate: 'Feed bars by ME; the vacuum pump has a hatch of its own.',
   }, [CLEAN]),
-  gear('SX', 'single_crystal_foundry', 'Single-Crystal Foundry', ['EBF'], 5.5, 1, {
+  gear('SX', 'single_crystal_foundry', 'Single-Crystal Foundry', ['EBF'], 19.75, -36.75, {
     for: 'The &6Single-Crystal Foundry&r pulls a metal blade as one grain, with no boundaries to fail.',
     needs: 'Two UHV hulls, three UV robot arms, an SRF cryomodule, three SRF cavities, six neutronium gears, any UHV circuit and the heatproof casing; the pure metal comes from the Electron Beam Furnace.',
     unlocks: 'The single-crystal blade: a turbine wheel of these survives a hot core.',
     automate: 'Pure metal by ME; keep a stock of blanks and send blades on by ME.',
   }, [HEAT]),
-  prod('SXB', 'Single-Crystal Blade', 'grindless:sx_blade', ['SX'], 8, 1, ['A blade grown as a single grain. The UEV Lines chart shows how a turbine wheel is built from it.']),
+  prod('SXB', 'Single-Crystal Blade', 'grindless:sx_blade', ['SX'], 24.75, -33.25, ['A blade grown as a single grain. The UEV Lines chart shows how a turbine wheel is built from it.']),
 
   // ------------------------------------------------------------------ magnets
-  gear('MAG', 'nitride_magnet_works', 'Nitride Magnet Works', ['H_NUC'], 3, 3, {
+  gear('MAG', 'nitride_magnet_works', 'Nitride Magnet Works', ['H_NUC'], 13.5, -36.25, {
     for: 'The &6Nitride Magnet Works&r makes a magnet of iron and nitrogen, stronger than any rare earth.',
     needs: 'Two UHV hulls, three UV motors, three HfTaC-N dusts, an FFKM seal, a Ta2O5 dust, any UHV circuit and the heatproof casing.',
     unlocks: 'Bonded magnets for the UEV motor and the Mk2 drive.',
     automate: 'Iron and nitrogen come by ME and pipe; bonding runs on a timer.',
   }, [HEAT]),
-  prod('MAGP', 'Bonded Magnet', 'grindless:bonded_fe16n2_magnet', ['MAG'], 5.5, 3, ['An iron nitride magnet in a bonded body, ready for a motor. The UEV Lines chart shows which ones need it.']),
+  prod('MAGP', 'Bonded Magnet', 'grindless:bonded_fe16n2_magnet', ['MAG'], 23.5, -32, ['An iron nitride magnet in a bonded body, ready for a motor. The UEV Lines chart shows which ones need it.']),
 
   // ------------------------------------------------------------------ composites
-  gear('FIBRE', 'sic_fibre_plant', 'SiC Fibre Plant', ['H_FIBRE'], 3.5, 6, {
+  gear('FIBRE', 'sic_fibre_plant', 'SiC Fibre Plant', ['H_FIBRE'], 11, -13, {
     for: 'The &6SiC Fibre Plant&r spins silicon carbide into a fibre as strong as steel and a quarter of the weight.',
     needs: 'Two UHV hulls, two UV pumps, a UV robot arm, three polycarbosilane dusts, a HfTaC dust, an FFKM seal, any UHV circuit and the clean casing; the Nitride Magnet Works is its research.',
     unlocks: 'Fibre for the SiC composite plates that the CVI furnace infiltrates.',
     automate: 'Feed the precursor by pipe; fibre rolls out by ME.',
   }, [CLEAN]),
-  prod('FIBP', 'SiC Fibre', 'grindless:sic_fibre', ['FIBRE'], 6, 7.5, ['A spool of silicon carbide fibre. Keep a stock for the furnace.']),
-  gear('CVI', 'cvi_furnace', 'CVI Furnace', ['FIBRE'], 6, 6, {
+  prod('FIBP', 'SiC Fibre', 'grindless:sic_fibre', ['FIBRE'], 14.75, -12.25, ['A spool of silicon carbide fibre. Keep a stock for the furnace.']),
+  gear('CVI', 'cvi_furnace', 'CVI Furnace', ['FIBRE'], 16.5, -13.75, {
     for: 'The &6CVI Furnace&r fills a woven preform with gas that deposits carbide in the gaps.',
     needs: 'Two UHV hulls, two UV pumps, a UV emitter, two SiC preforms, two tungsten preforms, an FFKM seal, any UHV circuit and the heatproof casing; the SiC Fibre Plant is its research.',
     unlocks: 'SiC composite plates, and the HfTaCN coil that the stellar forge uses.',
     automate: 'Preforms arrive by ME; the cycle is long, so run several furnaces.',
   }, [HEAT]),
-  prod('COIL', 'HfTaCN Coil', 'grindless:hftacn_coil_block', ['CVI'], 8.5, 6, ['The hottest coil in the pack. The UEV Lines chart shows what it gives.']),
-  gear('FORGE', 'stellar_forge', 'Stellar Forge', ['COIL'], 11, 6, {
+  prod('COIL', 'HfTaCN Coil', 'grindless:hftacn_coil_block', ['CVI'], 18.5, -12.75, ['The hottest coil in the pack. The UEV Lines chart shows what it gives.']),
+  gear('FORGE', 'stellar_forge', 'Stellar Forge', ['COIL', 'HULL'], 19.5, -14.75, {
     for: 'The &6Stellar Forge&r is a furnace that holds a fragment of a star.',
       needs: 'A UEV hull, eleven electric blast furnaces, twenty-three HfTaCN coil blocks, four UEV field generators, five UEV pumps, three UEV sensors, three ULE cavities, three HfTaCN heating elements and any UEV circuit.',
     unlocks: 'The hottest recipes in the pack, which the Mk4 plasma line runs on.',
@@ -127,19 +127,19 @@ export const QUESTS = [
     }, [], 150),
 
   // ------------------------------------------------------------------ photonics
-  gear('SNSPD', 'snspd_foundry', 'SNSPD Foundry', ['H_FIBRE'], 3.5, 9.5, {
+  gear('SNSPD', 'snspd_foundry', 'SNSPD Foundry', ['CH_SIN'], 7, -20.25, {
     for: 'The &6SNSPD Foundry&r grows a nanowire detector that counts single photons.',
       needs: 'Two UHV hulls, three UV sensors, a float-zone silicon wafer, two SiN Waveguide Chips, a silicon drift detector, any UHV circuit and the photonic casing.',
       unlocks: 'The single-photon detector, which the UEV sensor, the quantum photonic chip and the repeater node take.',
       automate: 'Wafers and chips by ME and superfluid helium by pipe for the cold stage; send finished detectors on by ME.',
   }, [PHOTO]),
-    gear('VDW', 'vdw_stacker', 'Van der Waals Stacker', ['SNSPD'], 6, 11, {
+    gear('VDW', 'vdw_stacker', 'Van der Waals Stacker', ['SNSPD'], 9.75, -22.5, {
     for: 'The &6Van der Waals Stacker&r lays one atomic film on another, in the order the design asks for.',
       needs: 'Two UHV hulls, three UV robot arms, hBN films, a graphene film, any UHV circuit and the photonic casing.',
     unlocks: 'The graphene modulator and the hBN emitter chip.',
     automate: 'Films by ME; the stacker returns finished chips in a chest.',
   }, [PHOTO]),
-  gear('PHOT', 'photonic_integration_hall', 'Photonic Integration Hall', ['SNSPD', 'VDW'], 8.5, 10.5, {
+  gear('PHOT', 'photonic_integration_hall', 'Photonic Integration Hall', ['SNSPD', 'VDW', 'CH_GRM', 'CH_QD', 'CH_SIN'], 12.75, -17.75, {
     for: 'The &6Photonic Integration Hall&r bonds waveguides, sources and detectors into one optical chip.',
       needs: 'Two UHV hulls, three UV emitters, a quantum dot source, a graphene modulator, two SiN Waveguide Chips, any UHV circuit and the photonic casing; the Van der Waals Stacker is its research.',
     unlocks: 'The waveguide circuit, the quantum photonic chip and the optical computer.',
@@ -147,14 +147,14 @@ export const QUESTS = [
   }, [PHOTO, it('gtceu:laminated_glass')], 150),
 
   // ------------------------------------------------------------------ fusion
-  gear('POL', 'helium3_polariser', 'Helium-3 Polariser', ['H_FIBRE'], 3.5, 13, {
+  gear('POL', 'helium3_polariser', 'Helium-3 Polariser', ['H_FIBRE'], 15, -10.25, {
     for: 'The &6Helium-3 Polariser&r aligns the spin of each nucleus, so more of them fuse.',
     needs: 'Two UHV hulls, three UV emitters, two 1083 nm lasers, three Wf/W tiles, a SiC/SiC plate, any UHV circuit and the clean casing.',
     unlocks: 'Polarised helium-3, the fuel of the Mk4 ring.',
     automate: 'Helium-3 by pipe; keep the polarised stock sealed and ready.',
   }, [CLEAN]),
-  prod('HE3', 'Polarised Helium-3', 'gtceu:polarised_helium_3_bucket', ['POL'], 6, 14.5, ['A bucket of polarised helium-3. Fusion at Mk4 starts from this.']),
-  gear('MK4', 'uev_fusion_reactor', 'Mk4 Fusion Reactor', ['POL'], 6, 13, {
+  prod('HE3', 'Polarised Helium-3', 'gtceu:polarised_helium_3_bucket', ['POL'], 18, -9.75, ['A bucket of polarised helium-3. Fusion at Mk4 starts from this.']),
+  gear('MK4', 'uev_fusion_reactor', 'Mk4 Fusion Reactor', ['POL', 'COIL', 'HULL'], 24.5, -15, {
     for: 'The &6Mk4 Fusion Reactor&r is a ring that burns polarised helium-3 and deuterium into the most energy a reactor makes.',
       needs: 'A UEV hull, five UEV emitters, four UEV sensors, four UEV field generators, any UEV circuit, two UEV fusion casings, two HfTaCN coil blocks and a Wf/W tile; the Helium-3 Polariser is its research.',
       unlocks: 'The plasma and burn quests that follow it.',
@@ -162,15 +162,15 @@ export const QUESTS = [
     }, [it('grindless:uev_fusion_casing')], 180),
 
   // ------------------------------------------------------------------ quantum gases and entanglement
-  gear('QGL', 'quantum_gas_lab', 'Quantum Gas Lab', ['COOL'], 3.5, 16.5, {
+  gear('QGL', 'quantum_gas_lab', 'Quantum Gas Lab', ['COOL'], 21.75, -9.75, {
     for: 'The &6Quantum Gas Lab&r holds a cloud of atoms a millionth of a degree above zero.',
       needs: 'Two UHV hulls, three UV sensors, a lithium and a potassium cooling laser, an ULE cavity, any UHV circuit and the photonic casing; the atom interferometer is its research.',
       unlocks: 'The degenerate EOS model, and cold atoms for the entanglement station.',
     automate: 'Atoms by hatch and lasers by ME; the lab is slow and small, so run two.',
   }, [PHOTO]),
-    prod('COOL', 'Cooling Lasers', 'grindless:li_cooling_laser', ['H_FIBRE'], 1.5, 16.5, ['The lithium and potassium cooling lasers come from a fibre draw run on a UEV emitter, lithium-6 and potassium-40. The Quantum Gas Lab needs both.']),
-    prod('EOS', 'Degenerate EOS Model', 'grindless:degenerate_eos_model', ['QGL'], 6, 18, ['Computed in the Quantum Gas Lab in Earth orbit from the lithium and potassium isotope dusts, the two cooling lasers and helium. The Degenerate Harvester and the Warp Gate hold both consume one.'], 100),
-    gear('ENT', 'entanglement_station', 'Entanglement Station', ['QGL'], 8.5, 16.5, {
+    prod('COOL', 'Cooling Lasers', 'grindless:li_cooling_laser', ['H_FIBRE'], 11.75, -8.25, ['The lithium and potassium cooling lasers come from a fibre draw run on a UEV emitter, lithium-6 and potassium-40. The Quantum Gas Lab needs both.']),
+    prod('EOS', 'Degenerate EOS Model', 'grindless:degenerate_eos_model', ['QGL'], 28, -17, ['Computed in the Quantum Gas Lab in Earth orbit from the lithium and potassium isotope dusts, the two cooling lasers and helium. The Degenerate Harvester and the Warp Gate hold both consume one.'], 100),
+    gear('ENT', 'entanglement_station', 'Entanglement Station', ['QGL'], 27.25, -13.25, {
       for: 'The &6Entanglement Station&r ties two photons together across a distance.',
       needs: 'Two UHV hulls, three UV emitters, two SPDC sources, two hollow-core fibres, an SNSPD, any UHV circuit and the photonic casing; the Quantum Gas Lab is its research.',
       unlocks: 'The quantum repeater node, which the wireless hatches take.',
@@ -178,19 +178,19 @@ export const QUESTS = [
     }, [PHOTO], 150),
 
   // ------------------------------------------------------------------ Alpha Centauri
-  gear('NEB', 'nebula_collector', 'Nebula Collector', ['H_ALPHA'], 8, -36, {
+  gear('NEB', 'nebula_collector', 'Nebula Collector', ['H_ALPHA'], 21.25, -29.5, {
     for: 'The &6Nebula Collector&r gathers gas from a nebula and sorts it by element.',
       needs: 'A UEV hull, five UEV pumps, four UEV sensors, three UEV emitters, three scoop coils, three aerogel tiles, any UEV circuit and the photonic casing.',
       unlocks: 'Gas streams that the Alpha Centauri lines consume, and the Interstellar Dust Lab.',
     automate: 'Run it on a pipe loop to the plant and send the surplus to a tank.',
   }, [PHOTO], 150),
-    gear('DUST', 'interstellar_dust_lab', 'Interstellar Dust Lab', ['NEB'], 10.5, -36, {
+    gear('DUST', 'interstellar_dust_lab', 'Interstellar Dust Lab', ['NEB'], 22.75, -29.5, {
     for: 'The &6Interstellar Dust Lab&r studies grains of dust that formed around other stars.',
       needs: 'A UEV hull, five UEV robot arms, five UEV pumps, three UEV sensors, three aerogel tiles, a TEOS flask, any UEV circuit and the photonic casing; the Nebula Collector is its research.',
       unlocks: 'The iron-60 record and the dust data the star charts use, and the Pulsar Timing Station.',
     automate: 'Dust by ME; log the records and store the rest.',
   }, [PHOTO], 150),
-    gear('PULS', 'pulsar_timing_station', 'Pulsar Timing Station', ['DUST'], 13, -36, {
+    gear('PULS', 'pulsar_timing_station', 'Pulsar Timing Station', ['DUST'], 23.5, -28, {
     for: 'The &6Pulsar Timing Station&r keeps time with a pulsar and finds the way by it.',
       needs: 'A UEV hull, five UEV emitters, four UEV sensors, three UEV robot arms, two lobster-eye MCPs, three silicon drift detectors, two nuclear clocks, any UEV circuit and the photonic casing; the Interstellar Dust Lab is its research.',
       unlocks: 'The Pulsar Navigation Chart, which the way to Sirius B and the UIV casing line need.',
@@ -198,39 +198,39 @@ export const QUESTS = [
   }, [PHOTO], 150),
 
   // ------------------------------------------------------------------ Barnard b
-  gear('MOND', 'carbonyl_refinery', 'Carbonyl Refinery', ['H_BARN'], 7.5, -20, {
+  gear('MOND', 'carbonyl_refinery', 'Carbonyl Refinery', ['H_BARN', 'HULL'], 25.5, -20.75, {
     for: 'The &6Carbonyl Refinery&r turns iron and carbon monoxide into a liquid and back, leaving a very pure metal.',
       needs: 'A UEV hull, five UEV pumps, four fluid regulators, three UEV pistons, three FFKM seals, a Ta2O5 dust, any UEV circuit and the inert casing; the Barnard core drill is its research.',
     unlocks: 'Iron pentacarbonyl and pure iron, for the nitride magnets.',
     automate: 'Contain the carbon monoxide; keep the loop sealed and vented to a scrubber.',
   }, [it('gtceu:inert_machine_casing')], 150),
-  prod('IPC', 'Iron Pentacarbonyl', 'gtceu:iron_pentacarbonyl_bucket', ['MOND'], 10, -20, ['The carrier that purifies Barnard iron. Handle it as a toxic fluid.']),
+  prod('IPC', 'Iron Pentacarbonyl', 'gtceu:iron_pentacarbonyl_bucket', ['MOND'], 27.75, -21.75, ['The carrier that purifies Barnard iron. Handle it as a toxic fluid.']),
 
   // ------------------------------------------------------------------ Sirius B
-  gear('SPEC', 'white_dwarf_spectrograph', 'White Dwarf Spectrograph', ['H_SIRIUS'], 18, -32, {
+  gear('SPEC', 'white_dwarf_spectrograph', 'White Dwarf Spectrograph', ['H_SIRIUS', 'HULL'], 30.75, -22.5, {
     for: 'The &6White Dwarf Spectrograph&r reads a dead star\'s light and from it the mass and radius.',
       needs: 'A UEV hull, four UEV sensors, five UEV emitters, three UEV pumps, an ULE cavity, three SNSPDs, two nuclear clocks, any UEV circuit and the photonic casing.',
       unlocks: 'The mass-radius chart, made in Sirius B orbit, and the Degenerate Harvester.',
     automate: 'The station asks for little by ME; keep a stock of charts.',
   }, [PHOTO], 150),
-    gear('DEG', 'degenerate_harvester', 'Degenerate Harvester', ['SPEC'], 20.5, -32, {
+    gear('DEG', 'degenerate_harvester', 'Degenerate Harvester', ['SPEC', 'EOS'], 33.25, -24, {
     for: 'The &6Degenerate Harvester&r takes matter from a white dwarf, in which atoms are crushed together.',
       needs: 'A UEV hull, five UEV robot arms, five UEV pumps, three UEV sensors, a degenerate EOS model, a mass-radius chart, two hollow-core fibres, any UEV circuit and the degenerate containment casing; the spectrograph is its research.',
       unlocks: 'Degenerate matter, made in Sirius B orbit, which the Containment Works bottles.',
     automate: 'Put the plant behind a safe containment loop; never route this matter by plain pipe.',
   }, [it('grindless:degenerate_containment_casing')], 150),
-  gear('PEL', 'containment_works', 'Containment Works', ['DEG'], 23, -32, {
+  gear('PEL', 'containment_works', 'Containment Works', ['DEG'], 35.25, -25.25, {
     for: 'The &6Containment Works&r bottles degenerate matter into a pellet that can be carried safely.',
       needs: 'A UEV hull, five UEV emitters, five UEV pumps, three fluid regulators, two Faraday isolators, two SPDC sources, any UEV circuit and the degenerate containment casing; the Degenerate Harvester is its research.',
       unlocks: 'The degenerate pellet, which the UEV field generator and the Warp Gate hold take.',
       automate: 'Feed the matter from the harvester by hatch and an exotic matter cell by ME; ship pellets by ME.',
     }, [], 150),
-    { key: 'PELP', kind: 'step', title: 'Degenerate Pellet', icon: 'grindless:degenerate_pellet', deps: ['PEL'], x: 25.5, y: -32,
+    { key: 'PELP', kind: 'step', title: 'Degenerate Pellet', icon: 'grindless:degenerate_pellet', deps: ['PEL'], x: 39, y: -26.25,
       desc: ['The pellet is taught in &6A White Dwarf in a Bottle&r; tick this once the Containment Works runs.'], tasks: [{ type: 'checkmark' }], rewards: [xp(20)] },
-    prod('TENS', 'Tennessine Sample', 'grindless:tennessine_sample', ['SHL'], 13, -3, ['Counted tennessine atoms sealed in a capsule with aerogel, made in the Superheavy Chemistry Lab. The Warp Gate hold takes one and keeps it stored.'], 100),
+    prod('TENS', 'Tennessine Sample', 'grindless:tennessine_sample', ['SHL'], 36.25, -32, ['Counted tennessine atoms sealed in a capsule with aerogel, made in the Superheavy Chemistry Lab. The Warp Gate hold takes one and keeps it stored.'], 100),
   {
     key: 'H_ALPHA', kind: 'reading', title: 'Work at Alpha Centauri', icon: 'gtceu:nebula_collector',
-    deps: ['ALPHA'], x: 5, y: -33.25,
+    deps: ['ALPHA'], x: 19.5, y: -29.25,
     desc: [
       'What the first other star gives.',
       'Nebula gas, dust and the pulsar clock.',
@@ -240,7 +240,7 @@ export const QUESTS = [
   },
   {
     key: 'H_SIRIUS', kind: 'reading', title: 'Work at Sirius B', icon: 'gtceu:white_dwarf_spectrograph',
-    deps: ['SIRIUS'], x: 15, y: -33.25,
+    deps: ['SIRIUS'], x: 30, y: -24.5,
     desc: [
       'The white dwarf and its degenerate gas.',
       'The spectrograph, the gas and the pellet.',
@@ -250,7 +250,7 @@ export const QUESTS = [
   },
   {
     key: 'H_BARN', kind: 'reading', title: 'Work at Barnard b', icon: 'gtceu:carbonyl_refinery',
-    deps: ['BARN'], x: 4.5, y: -18.25,
+    deps: ['BARN'], x: 19.75, y: -20.25,
     desc: [
       'The iron world and its carbonyl.',
       'The Mond line and the link to the network.',
@@ -260,7 +260,7 @@ export const QUESTS = [
   },
   {
     key: 'H_FIBRE', kind: 'reading', title: 'Fibre and Quantum Lines', icon: 'gtceu:sic_fibre_plant',
-    deps: ['H_NUC'], x: 0.5, y: 12,
+    deps: ['J_HOME'], x: 2.75, y: -15.25,
     desc: [
       'Fibre, detectors, polarisers and the quantum gas line.',
     ],
