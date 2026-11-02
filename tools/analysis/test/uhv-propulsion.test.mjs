@@ -87,8 +87,8 @@ test('pattern: 5 x 5 x 7, one controller in the front slice, every symbol define
   assert.ok(s.slices[s.slices.length - 1].join('').includes('S'), 'controller in the front slice');
   for (const c of all) assert.ok(s.symbols[c], `symbol ${c}`);
   const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
-  assert.deepEqual(Object.keys(lim).sort(), ['energy_input', 'input_bus', 'output_bus']);
-  for (const a of Object.keys(lim)) assert.deepEqual(lim[a], { min: 1, max: 2 }, a);
+  assert.deepEqual(Object.keys(lim).sort(), ['energy_input', 'input_bus', 'output_bus', 'parallel_hatch']);
+  for (const a of Object.keys(lim)) assert.deepEqual(lim[a], a === 'parallel_hatch' ? { max: 1, preview: 1 } : { min: 1, max: 2 }, a);
   assert.ok(s.symbols.X.options.some((o) => o.kind === 'blocks' && o.blocks.includes('gtceu:robust_machine_casing')), 'casing');
 });
 
