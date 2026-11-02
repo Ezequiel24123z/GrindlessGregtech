@@ -424,9 +424,8 @@ export const QUESTS = [
   {
     key: "HV_NANOMUSCLE_SUIT", id: "3C71A9D5E04B8F26", title: "NanoMuscle Suit", icon: "gtceu:nanomuscle_chestplate", deps: ["HV_SPACE_SUIT"], x: 22, y: -3,
     desc: [
-      "The &6NanoMuscle Chestplate&r is eight carbon fibre plates around an &6Energy Crystal&r (autoclaved from energium); the helmet, leggings and boots are separate recipes. It holds 6.4M EU, absorbs damage and gives night vision and step assist from the matching pieces.",
-      "Charged, the chestplate also lets you &6fly like in creative&r: 175 EU/t while flying, nothing on the ground, about 30 minutes per full charge. You get a warning at 10%, and flight ends when it runs dry. Recharge it in a charger or a battery buffer.",
-      "The advanced version, made later from the suit, an advanced jetpack and IV circuits, adds the jetpack on top.",
+      "The &6NanoMuscle Chestplate&r is eight carbon fibre plates around an &6Energy Crystal&r. It holds 6.4M EU.",
+      "Charged, it lets you &6fly like in creative&r: 175 EU/t while flying, nothing on the ground, about 30 minutes per charge. It warns you at 10%. Recharge it in a charger or battery buffer. The advanced version adds the jetpack.",
     ],
     tasks: [{ type: "item", id: "6D2E8B4107A35C91", item: "gtceu:nanomuscle_chestplate" }],
     rewards: [{ type: "xp", id: "1F5A07C3B9E24D68", xp: 60 }],
