@@ -372,8 +372,9 @@
       var d = describeRecipe(plate)
       if (String(plate.recipeType.registryName) !== 'gtceu:assembler' || d.eut > 32 || !hasItem(d.outs, PLATE) ||
         !(hasItem(d.ins, 'gtceu:glass_plate') || hasItem(d.ins, 'forge:plates/glass')) ||
-        !(hasItem(d.ins, 'gtceu:small_silver_dust') || hasItem(d.ins, 'forge:small_dusts/silver'))) {
-        bad.push(R.plate + ' is not glass plates + small silver dust -> plates in an LV assembler')
+        hasItem(d.ins, 'gtceu:small_silver_dust') || hasItem(d.ins, 'forge:small_dusts/silver') ||
+        !gtContents(plate, lazy().FluidCap, false).some(function (c) { return c.text.indexOf('gtceu:photographic_emulsion') >= 0 })) {
+        bad.push(R.plate + ' is not glass plates + photographic emulsion -> plates in an LV assembler')
       }
     }
     var pairs = [[DRAFT, R.copies && R.copies[0]], [MAP, R.copies && R.copies[1]], [EPHEMERIS, R.copies && R.copies[2]],

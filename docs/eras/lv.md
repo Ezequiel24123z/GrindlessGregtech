@@ -179,7 +179,7 @@ What it gains: it is the only machine that makes the **photographic lunar map** 
 
 - **Recipe type:** `gtceu:astrophotography` (`startup_scripts/grindless/observatory/machines.js`, recipes in `server_scripts/grindless/observatory/recipes.js`).
 - **Recipe:** the Lunar Chart (Draft), which is never used up (it is the chart you navigate by) + 4 Photographic Plates + 2 paper → 1 Photographic Lunar Map + 1 Lunar Ephemeris. 30 EU/t and 600 ticks (30 s).
-- **Photographic Plate** (`grindless:photographic_plate`): LV assembler, 2 Glass Panes + 1 small pile of Silver Dust (the emulsion) → 2 plates, 16 EU/t and 100 ticks. The silver comes from the galena vein or the roaster.
+- **Photographic Plate** (`grindless:photographic_plate`): LV assembler, 2 Glass Panes + 250 mB Photographic Emulsion → 2 plates, 16 EU/t and 100 ticks. The emulsion is line L2 (`docs/eras/lines-steam-hv.md`): LV chemical reactor, 30 EU/t, Ag + 2 HNO3 → Silver Nitrate + NO2 + water (the NO2 returns to nitric acid absorption, the water is voided); Silver Nitrate + salt → Silver Chloride + sodium nitrate (stored: rhodium nitrate step, fertilizer); LV mixer, 30 EU/t, Silver Chloride + 1,000 mB glue (impure gelatin) → 1,000 mB emulsion. One silver dust makes 8 plates. The silver comes from the galena vein or the roaster, the nitric acid from coke-oven ammonia.
 - **Conditions:** at night with a clear sky, at any height (long exposures beat the haze). If it rains partway through, it waits and keeps its progress.
 - **Structure** (5 × 6 × 5):
   - a floor ring of Solid Steel Machine Casing with the parts: 1 or 2 energy hatches, an input bus and an output bus;
