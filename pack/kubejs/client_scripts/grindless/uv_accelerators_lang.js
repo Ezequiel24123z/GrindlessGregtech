@@ -66,7 +66,7 @@
         ['item.grindless.silicon_nitride_film', 'Silicon Nitride Film'],
         ['tooltip.grindless.silicon_nitride_film.0', 'A thin, stiff membrane grown from silicon and ammonia.'],
         ['tooltip.grindless.silicon_nitride_film.1', 'The mask\'s membrane and the photonic chip\'s waveguides.'],
-        ['item.grindless.tungsten_target', 'Tungsten Target'],
+        ['item.grindless.tungsten_target', 'Tungsten Beam Target'],
         ['tooltip.grindless.tungsten_target.0', 'A water-cooled tungsten block brazed to copper.'],
         ['tooltip.grindless.tungsten_target.1', 'Wears 2 % a run in the synchrotron (circuit 4).'],
         ['item.grindless.activated_tungsten_target', 'Activated Tungsten Target'],
