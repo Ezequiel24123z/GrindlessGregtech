@@ -2,7 +2,7 @@
   "_comment": [
     "UEV-A8 (docs/eras/uev.md, machines 16 and 17, lines 31, 32, 34, 36, 39 and 40), read by server_scripts/grindless/uev/earth_orbit.js.",
     "types.<type>.recipes: name, circuit, eut, duration, itemsIn [{id,count,chance?}], kept [same, never consumed], fluidsIn [{id,amount}], charge [fluid not consumed], itemsOut, fluidsOut.",
-    "chance is out of 10000 (omitted = always). circuit 0 = none (GTM's own types only). 'dimension': true makes every recipe of the type carry the Earth-orbit dimension.",
+    "chance is out of 10000 (omitted = always). circuit 0 = none (GTM's own types only). 'dimension': true makes every recipe of the type carry the Earth-orbit dimension; a recipe's own 'dimension' (true or false) overrides it (the gravity survey only reads shipped rock and runs anywhere).",
     "'temp' is the blast furnace temperature of the type. The older machines' rows of these lines are in uv/photonics.js (fibre_draw 6-8), uhv/crystals.js + crystals.json (crystal_growth 6-7) and zpm/outer_chemistry.js (methane_pyrolysis 3).",
     "Nothing is voided: every spent reagent leaves as a fluid or dust with a user (chlorine, water, salt, hydrogen, iron, recycled kerf)."
   ],
@@ -15,7 +15,7 @@
           "kept": [{ "id": "grindless:li_cooling_laser", "count": 1 }, { "id": "grindless:k_cooling_laser", "count": 1 }],
           "fluidsIn": [], "charge": [{ "id": "gtceu:helium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:degenerate_eos_model", "count": 1 }], "fluidsOut": [] },
-        { "name": "barnard_gravity_survey", "circuit": 2, "eut": 1966080, "duration": 1200,
+        { "name": "barnard_gravity_survey", "dimension": false, "circuit": 2, "eut": 1966080, "duration": 1200,
           "itemsIn": [{ "id": "grindless:calibrated_gravimeter", "count": 1 }, { "id": "grindless:barnard_core_rock", "count": 4 }],
           "kept": [], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:barnard_gravity_survey", "count": 1 }], "fluidsOut": [] },
@@ -35,7 +35,7 @@
       ]
     },
     "entanglement_distribution": {
-      "dataKey": "grindless_entanglement_distribution", "dimension": true,
+      "dataKey": "grindless_entanglement_distribution",
       "recipes": [
         { "name": "quantum_repeater_node", "circuit": 1, "eut": 3932160, "duration": 1200,
           "itemsIn": [{ "id": "grindless:spdc_source", "count": 1 }, { "id": "grindless:eu_yso_boule", "count": 1 }, { "id": "grindless:qd_source", "count": 1 },

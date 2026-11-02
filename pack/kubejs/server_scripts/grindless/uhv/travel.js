@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------------------------
 // UHV travel (package UHV-B1, docs/eras/uhv.md "Bridges and first arrivals", "AE2"). The places: startup_scripts/grindless/uhv/travel.js.
 //
-//   The Mercury orbit seed, ZPM's pattern (chemical reactor 480 EU/t x 10 s, an ender pearl + 250 mB helium-3, only in the orbit):
+//   The Mercury orbit seed, ZPM's pattern (chemical reactor 480 EU/t x 10 s, an ender pearl + 250 mB helium-3, no place needed):
 //   the station's own route to IV's Hermean quantum seed (grindless:hermean_quantum_seed, the existing mercury pairTag, which
 //   planets.json already gives Mercury orbit), with the swarm's first segment (grindless:swarm_segment, UHV-F1; made by B3's
 //   foundry) as the catalyst, not used up. IV's explosion ritual (grindless:transform/hermean_entangled_singularity) turns either
@@ -59,7 +59,6 @@
         .notConsumable(s.catalyst)
         .inputFluids(Fluid.of(S.helium3, S.helium3Amount))
         .itemOutputs(s.seed)
-        .dimension(s.orbit)
         .EUt(S.eut)
         .duration(S.duration)
       added.push(s.id)

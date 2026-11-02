@@ -4,8 +4,8 @@
 // startup_scripts/grindless/uev/alpha_centauri.js; docs/eras/uev.md, machines 18, 19 and 20, lines 26 and 37; package UEV-B2), generated at
 // every server load from data/grindless/tables/alpha_centauri.json, plus the recipes of the three controllers.
 //
-//   gtceu:nebula_collection / interstellar_dust_analysis / pulsar_timing   one recipe per table entry, id grindless:<type>/<name>, Alpha
-//                          Centauri orbit only (recipe.dimension(grindless:alpha_centauri_orbit), the pattern of uev/earth_orbit.js); the
+//   gtceu:nebula_collection / interstellar_dust_analysis / pulsar_timing   one recipe per table entry, id grindless:<type>/<name>. Only what
+//                          uses the place keeps Alpha Centauri orbit (recipe.dimension(grindless:alpha_centauri_orbit)): the collector and the timing survey; the
 //                          programmed circuit picks the recipe; every recipe carries the data key of its type = <name> (its EMI line).
 //                          The scoop coil of the collector and the clock and sensor of the other two are kept inputs: never consumed.
 //   gtceu:chemical_reactor, mixer, autoclave, distillation_tower, electrolyzer, assembler   the line steps GTM can run (circuit 0).
@@ -58,7 +58,7 @@
           return { id: String(f.id), amount: Number(f.amount) }
         }
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, dataKey: def.dataKey ? String(def.dataKey) : '',
-          dimension: def.dimension === true,
+          dimension: r.dimension === undefined ? def.dimension === true : r.dimension === true,
           itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack), fluidsIn: list(r.fluidsIn).map(fluid), charge: list(r.charge).map(fluid),
           itemsOut: list(r.itemsOut).map(stack), fluidsOut: list(r.fluidsOut).map(fluid) }
         if (bad || (rec.itemsOut.length === 0 && rec.fluidsOut.length === 0) || (rec.itemsIn.length === 0 && rec.fluidsIn.length === 0)) {

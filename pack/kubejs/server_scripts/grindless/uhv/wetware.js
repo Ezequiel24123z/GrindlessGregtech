@@ -62,7 +62,7 @@
     { name: 'mainframe', type: 'organoid_computing', circuit: 2, site: 'earth', cleanroom: false,
       itemsIn: [item(ORGANOID, 4), item(NPU, 4), item(SIC, 1), item(OPTICAL, 1)], fluidsIn: [],
       itemsOut: [item(MAINFRAME, 4)], fluidsOut: [], eut: UHV, duration: 600 },
-    { name: 'uhv/sterilised_growth_medium', type: 'organoid_assembly', circuit: 3, site: 'orbit', cleanroom: true,
+    { name: 'uhv/sterilised_growth_medium', type: 'organoid_assembly', circuit: 3, site: '', cleanroom: true,
       itemsIn: [item(RADIOPROTECTANT, 1)], fluidsIn: [fluid(STERILIZED, 1000)],
       itemsOut: [], fluidsOut: [fluid(STERILISED, 1000)], eut: LUV, duration: 600 }
   ]

@@ -2468,10 +2468,14 @@
       "dimensions": [
         "${orbit:earth}"
       ],
+      "exceptRecipes": [
+        "grindless:casimir_cavity/strip_stack"
+      ],
       "package": [
         "A10",
         "A6"
-      ]
+      ],
+      "note": "Only what uses the place keeps the condition: the strip row works shipped worn stacks and runs anywhere (SITE-C)."
     },
     {
       "id": "site-warp-gate",
@@ -2530,6 +2534,14 @@
       ],
       "dimensions": [
         "${place:proxima_b}"
+      ],
+      "exceptRecipes": [
+        "grindless:biomining/lunar_biocement",
+        "grindless:xenobotany/pigment",
+        "grindless:xenobiochemistry/radioprotectant",
+        "grindless:xenobiochemistry/infrared_pigment",
+        "grindless:xenobiochemistry/chitosan",
+        "grindless:xenobiochemistry/lysate"
       ],
       "package": [
         "B4",

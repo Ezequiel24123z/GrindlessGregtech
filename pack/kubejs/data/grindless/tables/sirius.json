@@ -31,7 +31,6 @@
     },
     "degenerate_containment": {
       "dataKey": "grindless_degenerate_containment",
-      "dimension": true,
       "recipes": [
         { "name": "degenerate_pellet", "circuit": 1, "eut": 7864320, "duration": 4800,
           "itemsIn": [{ "id": "grindless:degenerate_matter", "count": 1 }, { "id": "grindless:exotic_matter_cell", "count": 1 }],

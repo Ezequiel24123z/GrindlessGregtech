@@ -1526,34 +1526,39 @@
     },
     {
       "id": "site-uev-earth-orbit",
-      "label": "Site: the quantum gas lab and the entanglement station only in Earth orbit",
+      "label": "Site: the quantum gas lab only in Earth orbit (the gravity survey only reads shipped rock and runs anywhere)",
       "kind": "site",
       "types": [
-        "gtceu:quantum_degenerate_gas",
-        "gtceu:entanglement_distribution"
+        "gtceu:quantum_degenerate_gas"
       ],
       "dimensions": [
         "${orbit:earth}"
+      ],
+      "exceptRecipes": [
+        "grindless:quantum_degenerate_gas/barnard_gravity_survey"
       ],
       "package": "A8"
     },
     {
       "id": "site-alpha-orbit",
-      "label": "Site: the nebula collector, the dust lab and the pulsar station only at Alpha Centauri AB's orbit",
+      "label": "Site: the nebula collector and the pulsar timing survey only at Alpha Centauri AB's orbit",
       "kind": "site",
       "types": [
         "gtceu:nebula_collection",
-        "gtceu:interstellar_dust_analysis",
         "gtceu:pulsar_timing"
       ],
       "dimensions": [
         "grindless:alpha_centauri_orbit"
       ],
+      "exceptRecipes": [
+        "grindless:pulsar_timing/pulsar_navigation_chart",
+        "grindless:pulsar_timing/repeater_discipline"
+      ],
       "package": "B2"
     },
     {
       "id": "site-barnard",
-      "label": "Site: the core drill and the carbonyl refinery only on Barnard b",
+      "label": "Site: the core drill and the Mond carbonyl step only on Barnard b",
       "kind": "site",
       "types": [
         "gtceu:barnard_core_drilling",
@@ -1562,16 +1567,18 @@
       "dimensions": [
         "${place:barnard_b}"
       ],
+      "exceptRecipes": [
+        "grindless:carbonyl_refining/bloom_carbonyl"
+      ],
       "package": "B3"
     },
     {
       "id": "site-sirius-orbit",
-      "label": "Site: the spectrograph, the harvester and the containment works only at Sirius B's orbit",
+      "label": "Site: the spectrograph and the harvester only at Sirius B's orbit",
       "kind": "site",
       "types": [
         "gtceu:gravitational_redshift",
-        "gtceu:degenerate_harvesting",
-        "gtceu:degenerate_containment"
+        "gtceu:degenerate_harvesting"
       ],
       "dimensions": [
         "grindless:sirius_b_orbit"
