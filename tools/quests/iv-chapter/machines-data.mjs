@@ -13,27 +13,13 @@ export const CHAPTER = {
   autofocus: "IV_HOT_CELL",
   title: "IV: Machines",
   subtitle: ["Reactors, drills, mirrors and the parts that let them talk to the network."],
+  section: { name: "Machines", origin: { x: 0, y: 0 }, heading: { key: "IV_H_MACHINES", x: 2.5, y: -2, deps: ["IV_INNER_PLANETS"], icon: "gtceu:hot_cell" } },
 };
-
-export const LINKS = [
-  { key: "M_L_IV_INNER_PLANETS", ref: "IV_INNER_PLANETS", x: 0, y: 0 },
-  { key: "M_L_IV_FLUORITE_VEIN", ref: "IV_FLUORITE_VEIN", x: 0, y: 1.5 },
-  { key: "M_L_IV_PITCHBLENDE", ref: "IV_PITCHBLENDE", x: 0, y: 3 },
-  { key: "M_L_IV_FIRST_CRITICALITY", ref: "IV_FIRST_CRITICALITY", x: 0, y: 4.5 },
-  { key: "M_L_IV_RTG_PELLETS", ref: "IV_RTG_PELLETS", x: 0, y: 6 },
-  { key: "M_L_IV_UNDER_THE_CLOUDS", ref: "IV_UNDER_THE_CLOUDS", x: 0, y: 7.5 },
-  { key: "M_L_IV_NAQUADAH_SAMPLE", ref: "IV_NAQUADAH_SAMPLE", x: 0, y: 9 },
-  { key: "M_L_IV_RAW_NAQUADAH", ref: "IV_RAW_NAQUADAH", x: 0, y: 10.5 },
-  { key: "M_L_IV_DAY_OF_FIRE", ref: "IV_DAY_OF_FIRE", x: 0, y: 12 },
-  { key: "M_L_IV_HEAT_SHIELD_BRICKS", ref: "IV_HEAT_SHIELD_BRICKS", x: 0, y: 13.5 },
-  { key: "M_L_IV_IRIDIUM_AND_OSMIUM", ref: "IV_IRIDIUM_AND_OSMIUM", x: 0, y: 15 },
-  { key: "M_L_IV_A_SEED_FROM_VENUS", ref: "IV_A_SEED_FROM_VENUS", x: 0, y: 16.5 },
-];
 
 export const QUESTS = [
   {
     key: "IV_HOT_CELL", id: "30D78F6EB49AF27B", kind: "machine", title: "Hot Cell", icon: "gtceu:hot_cell",
-    deps: ["IV_INNER_PLANETS"], x: 2, y: 0,
+    deps: ["IV_H_MACHINES"], x: 5.5, y: -1.5,
     teach: {
       for: "The &6Hot Cell&r is where uranium stops being something you carry around.",
       needs: "Its controller and Radiation-Proof Machine Casing, lead-heavy blocks from the IV assembler, set in concrete.",
@@ -46,7 +32,7 @@ export const QUESTS = [
   },
   {
     key: "IV_FISSION_REACTOR", id: "774234968F1BEB95", kind: "signature", title: "Fission Reactor", icon: "gtceu:fission_reactor",
-    deps: ["IV_HOT_CELL", "IV_QUANTUM_STAR", "X:72022B0ECDC3668B"], x: 4, y: 0,
+    deps: ["IV_QUANTUM_STAR", "X:72022B0ECDC3668B"], x: 14.5, y: -0.25,
     teach: {
       for: "The &6Fission Reactor&r runs uranium in four channels, with water through the core and a turbine hall out front.",
       needs: "An IV field generator, which wants a Quantum Star and samarium wire, and the controller.",
@@ -59,7 +45,7 @@ export const QUESTS = [
   },
   {
     key: "IV_FUEL_FABRICATION_PLANT", id: "77A25AB4BB859C79", kind: "machine", title: "Fuel Fabrication Plant", icon: "gtceu:fuel_fabrication_plant",
-    deps: ["IV_FISSION_REACTOR", "IV_ENRICHMENT"], x: 6, y: 0,
+    deps: ["IV_FISSION_REACTOR"], x: 17.25, y: 0.75,
     teach: {
       for: "Real fuel is pellets in metal tubes, pressed, sintered and sealed with helium, and the &6Fuel Fabrication Plant&r does the whole line.",
       needs: "Its controller, built around an IV assembler. Maybe make two.",
@@ -72,7 +58,7 @@ export const QUESTS = [
   },
   {
     key: "IV_FLUORSPAR_KILN", id: "5EE3EB2547415591", kind: "machine", title: "Fluorspar Kiln", icon: "gtceu:fluorspar_kiln",
-    deps: ["IV_FLUORITE_VEIN"], x: 2, y: 1.5,
+    deps: ["IV_FLUORITE_VEIN"], x: 3, y: 1.25,
     teach: {
       for: "Fluorite and sulfuric acid go in the cold end of the &6Fluorspar Kiln&r, and hydrofluoric acid comes out of the scrubber at the hot one.",
       needs: "Its controller and a first charge of hydrofluoric acid to prove it works.",
@@ -85,7 +71,7 @@ export const QUESTS = [
   },
   {
     key: "IV_IN_SITU_LEACH_FIELD", id: "5FD0B9548159D199", kind: "machine", title: "In-Situ Leach Field", icon: "gtceu:isr_wellfield",
-    deps: ["IV_PITCHBLENDE"], x: 2, y: 3,
+    deps: ["IV_PITCHBLENDE"], x: 5.25, y: 0,
     teach: {
       for: "Four wells push acid into the rock, one pulls the uranium back up, and resin in the header house catches it. The &6In-Situ Leach Field&r only works in the End.",
       needs: "Its controller, ion-exchange resin, and the five wells, which you do dig yourself.",
@@ -98,7 +84,7 @@ export const QUESTS = [
   },
   {
     key: "IV_HEAVY_WATER_PLANT", id: "5A1DBDF9E739CEF2", kind: "machine", title: "Heavy-Water Plant", icon: "gtceu:heavy_water_plant",
-    deps: ["IV_FIRST_CRITICALITY"], x: 2, y: 4.5,
+    deps: ["IV_FIRST_CRITICALITY"], x: 25, y: -1,
     teach: {
       for: "The &6Heavy-Water Plant&r squeezes heavy water out of Martian ice with two towers and a hydrogen sulfide loop.",
       needs: "Its controller, built around a distillation tower.",
@@ -111,7 +97,7 @@ export const QUESTS = [
   },
   {
     key: "IV_TRITIUM_REMOVAL_FACILITY", id: "32FD8F32DC829A03", kind: "machine", title: "Tritium Removal Facility", icon: "gtceu:tritium_removal_facility",
-    deps: ["IV_HEAVY_WATER_PLANT", "IV_HEAVY_WATER_CORE", "X:79EE0C54F2D89358"], x: 4, y: 4.5,
+    deps: ["IV_HEAVY_WATER_CORE", "X:79EE0C54F2D89358"], x: 34, y: 0,
     teach: {
       for: "On the Moon, a cold box between two exchange columns pulls the tritium out and hands the heavy water back. The &6Tritium Removal Facility&r is built from a cryogenic plant controller.",
       needs: "Its controller and a deuterium charge that is never drained.",
@@ -124,7 +110,7 @@ export const QUESTS = [
   },
   {
     key: "IV_RTG_CELL", id: "503863FFACA225A8", title: "RTG Cell", icon: "gtceu:ev_rtg",
-    deps: ["IV_RTG_PELLETS"], x: 2, y: 6,
+    deps: ["IV_RTG_PELLETS"], x: 27.75, y: 0,
     desc: [
       "The &6RTG Cell&r is a pellet behind lead with a thermopile and some fins, and it works on every world, day and night, because it burns nothing.",
       "Each pellet lasts about an hour of running, and its EV power starts the first bases on Venus and Mercury.",
@@ -134,7 +120,7 @@ export const QUESTS = [
   },
   {
     key: "IV_VENUS_ACID_WORKS", id: "534239273A7CA7FC", kind: "machine", title: "Venus Acid Works", icon: "gtceu:venus_acid_works",
-    deps: ["IV_UNDER_THE_CLOUDS", "X:74BC8201D518D3BA"], x: 2, y: 7.5,
+    deps: ["IV_UNDER_THE_CLOUDS", "X:74BC8201D518D3BA"], x: 46.75, y: 0.25,
     teach: {
       for: "A gas collector above the cloud base fills up with the clouds' sulfuric acid, and the &6Venus Acid Works&r cracks it over a hot gauze.",
       needs: "Its controller and platinum gauze.",
@@ -147,7 +133,7 @@ export const QUESTS = [
   },
   {
     key: "IV_VENUS_HEAT_ENGINE", id: "5669D88DE37D633F", kind: "machine", title: "Venus Heat Engine", icon: "gtceu:venus_heat_engine",
-    deps: ["IV_VENUS_ACID_WORKS"], x: 4, y: 7.5,
+    deps: ["IV_VENUS_ACID_WORKS"], x: 50.75, y: -0.5,
     teach: {
       for: "No fuel burns here, but the ground is a furnace. A hot plate and a tall radiator run the &6Venus Heat Engine&r on a trickle of distilled water.",
       needs: "Its controller, built from a Heliostat Tower and a Large Steam Turbine.",
@@ -160,7 +146,7 @@ export const QUESTS = [
   },
   {
     key: "IV_PRESSURIZED_VEIN_DRILL", id: "7DCDEF4DEDB8B607", kind: "machine", title: "Pressurized Vein Drill", icon: "gtceu:pressurized_vein_drill",
-    deps: ["IV_NAQUADAH_SAMPLE", "IV_VENUSIAN_REGOLITH", "X:5107982325BE34B7"], x: 2, y: 9,
+    deps: ["IV_NAQUADAH_SAMPLE", "IV_VENUSIAN_REGOLITH", "X:5107982325BE34B7"], x: 50.25, y: -2.25,
     teach: {
       for: "The &6Pressurized Vein Drill&r is an EV Tripod Drill rebuilt for ninety bar, with filters for the dust and water to carry off the heat.",
       needs: "Its controller and tungsten steel drill bits from the IV lathe.",
@@ -173,7 +159,7 @@ export const QUESTS = [
   },
   {
     key: "IV_NAQUADAH_PLANT", id: "14C75CDBACADEE5A", kind: "machine", title: "Naquadah Plant", icon: "gtceu:naquadah_plant",
-    deps: ["IV_RAW_NAQUADAH", "mv:MV_ORE_PLANT"], x: 2, y: 10.5,
+    deps: ["IV_RAW_NAQUADAH", "mv:MV_ORE_PLANT"], x: 56.5, y: -1,
     teach: {
       for: "The activator only makes naquadah while its neutron energy sits in a narrow window. The &6Naquadah Plant&r holds it with a Pu-Be source from the hot cell and brews its superacid inside.",
       needs: "Its controller, a Pu-Be source and inert casing. Two EV hatches run it until Mercury's iridium.",
@@ -186,7 +172,7 @@ export const QUESTS = [
   },
   {
     key: "IV_MERCURY_SOLAR_WORKS", id: "32D53F1384080352", kind: "machine", title: "Mercury Solar Works", icon: "gtceu:mercury_solar_works",
-    deps: ["IV_DAY_OF_FIRE"], x: 2, y: 12,
+    deps: ["IV_DAY_OF_FIRE"], x: 46.25, y: 2.25,
     teach: {
       for: "Eight heliostat mirrors stand around a focal furnace on a pad of smelted Mercury rock, and the &6Mercury Solar Works&r pays a quarter of the power when the sun is on the receiver.",
       needs: "Its controller, built from a Heliostat Tower, an IV electric furnace and an IV assembler, and the mirrors.",
@@ -199,7 +185,7 @@ export const QUESTS = [
   },
   {
     key: "IV_MERCURY_SOLAR_FIELD", id: "1BADC15A1CDF6CF1", kind: "machine", title: "Mercury Solar Field", icon: "gtceu:mercury_solar_field",
-    deps: ["IV_MERCURY_SOLAR_WORKS", "IV_HEAT_SHIELD_BRICKS", "X:734B97375A3121C4"], x: 4, y: 12,
+    deps: ["IV_HEAT_SHIELD_BRICKS", "X:734B97375A3121C4"], x: 53, y: 0.5,
     teach: {
       for: "The works evaporates gallium arsenide onto silicon in free vacuum, and that is a thin-film panel. The &6Mercury Solar Field&r is built from a Lunar Solar Array.",
       needs: "Its controller and thin-film panels.",
@@ -212,7 +198,7 @@ export const QUESTS = [
   },
   {
     key: "IV_MERCURY_VEIN_DRILL", id: "171D167E3CB497BB", kind: "machine", title: "Mercury Vein Drill", icon: "gtceu:mercury_vein_drill",
-    deps: ["IV_HEAT_SHIELD_BRICKS", "X:5107982325BE34B7"], x: 2, y: 13.5,
+    deps: ["IV_HEAT_SHIELD_BRICKS", "X:5107982325BE34B7"], x: 54.25, y: 2,
     teach: {
       for: "The &6Mercury Vein Drill&r is an EV Tripod Drill under a brick sunshade.",
       needs: "Its controller and an iridosmine vein sample.",
@@ -225,7 +211,7 @@ export const QUESTS = [
   },
   {
     key: "IV_IV_HATCHES", title: "IV Hatches", icon: "gtceu:iv_energy_input_hatch",
-    deps: ["IV_IRIDIUM_AND_OSMIUM"], x: 2, y: 15,
+    deps: ["IV_IRIDIUM_AND_OSMIUM"], x: 60.25, y: 1.25,
     desc: [
       "Iridium is what IV energy and dynamo hatches were waiting for. Until now two EV hatches ran any IV multiblock; from here one IV hatch does the same job with half the wiring.",
       "Swap them in at your own pace. Nothing breaks if you don't.",
@@ -235,7 +221,7 @@ export const QUESTS = [
   },
   {
     key: "IV_INTERFEROMETER", id: "5EB98498505C969F", kind: "machine", title: "Interferometer", icon: "gtceu:interferometer",
-    deps: ["IV_IV_HATCHES", "X:5940CA99055BAF42"], x: 4, y: 15,
+    deps: ["IV_IV_HATCHES", "X:5940CA99055BAF42"], x: 63.5, y: 2.25,
     teach: {
       for: "The &6Interferometer&r is three dishes on Mercury listening as one, with a baseline that reaches back to the Moon.",
       needs: "Its controller, built around a spare Deep Space Antenna. Its IV sensors and emitters take iridium and Quantum Stars.",
@@ -248,7 +234,7 @@ export const QUESTS = [
   },
   {
     key: "IV_PARALLEL_HATCH", id: "14E966D3D6D326FE", title: "Parallel Hatch", icon: "gtceu:iv_parallel_hatch",
-    deps: ["IV_IV_HATCHES"], x: 4, y: 16.5,
+    deps: ["IV_IV_HATCHES"], x: 61.25, y: 2.75,
     desc: [
       "An &6Elite Parallel Control Hatch&r runs up to four copies of a recipe at once, in GCYM's machines and in the hot cell and the fuel, heavy-water, naquadah and platinum plants.",
       "Each copy pays full price, so four copies of an IV recipe want two IV energy hatches. The naquadah and platinum plants also want a Pu-Be source or electrode per copy.",
@@ -258,7 +244,7 @@ export const QUESTS = [
   },
   {
     key: "IV_SMELT_AND_FREEZE_IN", id: "14682D455D2C4F7C", kind: "machine", title: "Smelting Complex", icon: "gtceu:smelting_complex",
-    deps: ["IV_INNER_PLANETS"], x: 2, y: -1.5,
+    deps: ["IV_H_MACHINES"], x: 3.25, y: -0.75,
     teach: {
       for: "The &6Smelting Complex&r runs the blast furnace and the vacuum freezer as one recipe, so a hot ingot never has to be carried between machines.",
       needs: "Its controller. EMI shows which ingots it takes.",
@@ -271,7 +257,7 @@ export const QUESTS = [
   },
   {
     key: "IV_AE2_BRIDGE", title: "Network Across Worlds", icon: "ae2:quantum_ring",
-    deps: ["IV_A_SEED_FROM_VENUS"], x: 2, y: 16.5,
+    deps: ["IV_A_SEED_FROM_VENUS"], x: 48.5, y: -2.5,
     desc: [
       "A quantum ring and a link chamber at home and the seed's twin on Venus give you a pair, and the ME network crosses worlds. Do the same on Mercury with its own seed.",
       "Power travels over EU P2P as EU, with 16 A IV hatches at each end carrying 131,072 EU/t. AE2 takes a 2.5% toll.",

@@ -3,7 +3,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "iv_age"
-	group: "20206D3FAD4A2FFF"
+	group: "3F021F40CD26BF57"
 	icon: "gtceu:fission_reactor"
 	id: "10A73E7D249CDD67"
 	order_index: 0
@@ -42,8 +42,8 @@
 				{ count: 16L, id: "583703A49C7DBA0F", item: "gcyr:raw_fluorite", type: "item" }
 			]
 			title: "Fluorite Vein"
-			x: 2.0d
-			y: -1.5d
+			x: 1.25d
+			y: 1.5d
 		}
 		{
 			dependencies: ["3FB9EA4152DCD1D3"]
@@ -56,8 +56,8 @@
 			rewards: [{ id: "739C30C5CE599847", type: "xp", xp: 40 }]
 			tasks: [{ id: "19AB93F372BD9A47", item: "grindless:vein_sample_pitchblende_end", type: "item" }]
 			title: "Pitchblende"
-			x: 2.0d
-			y: -3.0d
+			x: 1.75d
+			y: -0.25d
 		}
 		{
 			dependencies: ["30D78F6EB49AF27B", "5EE3EB2547415591", "5FD0B9548159D199"]
@@ -70,8 +70,8 @@
 				{ id: "38392F3AE4653455", item: "gtceu:uranium_dust", type: "item" }
 			]
 			title: "Enrichment"
-			x: 4.0d
-			y: 0.0d
+			x: 7.25d
+			y: 0.25d
 		}
 		{
 			dependencies: ["174353B4F6C61A79", "73D14393C00DE14D"]
@@ -85,8 +85,8 @@
 				{ id: "1A5E855343EA8498", item: "gtceu:quantum_star", type: "item" }
 			]
 			title: "Quantum Star"
-			x: 6.0d
-			y: 0.0d
+			x: 11.75d
+			y: 0.25d
 		}
 		{
 			dependencies: ["77A25AB4BB859C79", "004525B795119B1B"]
@@ -100,11 +100,11 @@
 				{ id: "7281E00B9067CE57", item: "grindless:leu_fuel_assembly", type: "item" }
 			]
 			title: "LEU Fuel"
-			x: 8.0d
-			y: -1.5d
+			x: 19.0d
+			y: 0.75d
 		}
 		{
-			dependencies: ["774234968F1BEB95", "77E9A2979A7161D3"]
+			dependencies: ["77E9A2979A7161D3"]
 			description: [
 				"Load an LEU assembly with circuit 1, give it water, and the reactor wakes up. Each assembly in the bus runs another channel, up to four."
 				"Until iridium, the &6EV 16A Dynamo Hatch&r is the biggest it can feed."
@@ -114,8 +114,8 @@
 			rewards: [{ id: "70EFADC968E5524D", type: "xp", xp: 100 }]
 			tasks: [{ id: "3102FF4B3B016F74", item: "gtceu:ev_energy_output_hatch_16a", type: "item" }]
 			title: "First Criticality"
-			x: 10.0d
-			y: 0.0d
+			x: 22.75d
+			y: 0.25d
 		}
 		{
 			dependencies: ["72139ED6F4E46D37"]
@@ -128,8 +128,8 @@
 				{ id: "75F19FD4BDF5C81B", item: "gtceu:plutonium_dust", type: "item" }
 			]
 			title: "Reprocessing"
-			x: 12.0d
-			y: -1.5d
+			x: 24.75d
+			y: 0.5d
 		}
 		{
 			dependencies: ["7E266AE6DB3351F7"]
@@ -139,8 +139,8 @@
 			rewards: [{ id: "511FE1829CF060D6", type: "xp", xp: 40 }]
 			tasks: [{ id: "3EF26E5D2D8E6061", item: "grindless:rtg_pellet", type: "item" }]
 			title: "RTG Pellets"
-			x: 14.0d
-			y: -1.5d
+			x: 26.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["5A1DBDF9E739CEF2", "148A0854C671B0AC"]
@@ -154,30 +154,30 @@
 				{ id: "57CFA81B077D2E0F", item: "gtceu:heavy_water_bucket", type: "item" }
 			]
 			title: "Heavy Water"
-			x: 12.0d
-			y: 1.5d
+			x: 26.75d
+			y: -1.25d
 		}
 		{
-			dependencies: ["72139ED6F4E46D37", "3513B00E50D7C58B"]
+			dependencies: ["3513B00E50D7C58B"]
 			description: ["Heavy water slows neutrons without eating them, and on circuit 2 the same assembly gives twice the power. It comes out as &6Tritiated Heavy Water&r, and the reactor never vents it. Give it a tank."]
 			icon: "gtceu:tritiated_heavy_water_bucket"
 			id: "373CBFB746FCAD51"
 			rewards: [{ id: "162D082435062EDF", type: "xp", xp: 60 }]
 			tasks: [{ id: "16DA7918FCD9E533", item: "gtceu:tritiated_heavy_water_bucket", type: "item" }]
 			title: "Heavy-Water Core"
-			x: 14.0d
-			y: 0.0d
+			x: 30.0d
+			y: 0.25d
 		}
 		{
-			dependencies: ["32FD8F32DC829A03", "3513B00E50D7C58B"]
+			dependencies: ["32FD8F32DC829A03"]
 			description: ["The only &6Tritium&r in the pack comes out of the Moon's cold box. Nothing uses it yet, but fusion will. Store every drop."]
 			icon: "gtceu:tritium_bucket"
 			id: "7FD8A4969E497C3A"
 			rewards: [{ id: "3B21B47B216D4D85", type: "xp", xp: 50 }]
 			tasks: [{ id: "347DBF9E7F2B5056", item: "gtceu:tritium_bucket", type: "item" }]
 			title: "Tritium"
-			x: 16.0d
-			y: 1.5d
+			x: 35.75d
+			y: -0.75d
 		}
 		{
 			dependencies: ["32FD8F32DC829A03", "319C39AD99B5E4A8"]
@@ -193,7 +193,7 @@
 			]
 			tasks: [{ id: "1CF37816E91A9296", item: "grindless:inner_planets_chart", type: "item" }]
 			title: "Inner Planets Chart"
-			x: 16.0d
+			x: 38.25d
 			y: 0.0d
 		}
 		{
@@ -214,8 +214,8 @@
 				{ count: 4L, id: "7E1E95FAFE03DFA2", item: "gcyr:space_suit_thermal_upgrade_smithing_template", type: "item" }
 			]
 			title: "Elite Rocket, Thermal Suit"
-			x: 18.0d
-			y: 0.0d
+			x: 42.25d
+			y: 0.25d
 		}
 		{
 			dependencies: ["5A378E5CFD8DFF82"]
@@ -233,8 +233,8 @@
 			size: 1.25d
 			tasks: [{ dimension: "gcyr:venus", id: "5E365014BAEAF5F0", type: "dimension" }]
 			title: "Under the Clouds"
-			x: 20.0d
-			y: -3.0d
+			x: 44.75d
+			y: -0.25d
 		}
 		{
 			dependencies: ["5693331C34A5A291"]
@@ -244,8 +244,8 @@
 			rewards: [{ id: "390D38D3DFE71CBD", type: "xp", xp: 40 }]
 			tasks: [{ count: 19L, id: "184D75659ED99654", item: "gcyr:venusian_regolith", type: "item" }]
 			title: "Venusian Regolith"
-			x: 22.0d
-			y: -3.0d
+			x: 46.25d
+			y: -1.5d
 		}
 		{
 			dependencies: ["5693331C34A5A291"]
@@ -255,12 +255,12 @@
 			rewards: [{ id: "73F640881F971060", type: "xp", xp: 40 }]
 			tasks: [{ id: "3D81B5B553020DF0", item: "grindless:vein_sample_naquadah_venus", type: "item" }]
 			title: "Naquadah Sample"
-			x: 22.0d
-			y: -4.5d
+			x: 48.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["1B1714A8E0124C58"]
-			description: ["Ender pearls and helium-3 from home, sealed under Venusian regolith in a chemical reactor, make a &6Venusian Quantum Seed&r, and only here. Blow it up with a singularity back home for the Venus bridge's pair."]
+			description: ["Ender pearls and helium-3 from home, sealed under Venusian regolith in a chemical reactor, make a &6Venusian Quantum Seed&r. The reactor can stand anywhere once the regolith is shipped. Blow it up with a singularity back home for the Venus bridge's pair."]
 			icon: "grindless:venusian_quantum_seed"
 			id: "71E4B392A6D559D9"
 			rewards: [
@@ -269,8 +269,8 @@
 			]
 			tasks: [{ id: "35690738DF2186E5", item: "grindless:venusian_quantum_seed", type: "item" }]
 			title: "A Seed from Venus"
-			x: 24.0d
-			y: -3.0d
+			x: 48.5d
+			y: -4.25d
 		}
 		{
 			dependencies: ["7DCDEF4DEDB8B607"]
@@ -283,8 +283,8 @@
 			]
 			tasks: [{ count: 16L, id: "1091B7AF02939654", item: "gtceu:raw_naquadah", type: "item" }]
 			title: "Raw Naquadah"
-			x: 24.0d
-			y: -4.5d
+			x: 53.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["14C75CDBACADEE5A"]
@@ -297,8 +297,8 @@
 			rewards: [{ id: "337070202ACD1313", type: "xp", xp: 80 }]
 			tasks: [{ id: "560686501BC57429", item: "gtceu:naquadah_ingot", type: "item" }]
 			title: "Naquadah Ingot"
-			x: 26.0d
-			y: -4.5d
+			x: 60.25d
+			y: -0.75d
 		}
 		{
 			dependencies: ["5A378E5CFD8DFF82"]
@@ -316,12 +316,12 @@
 			size: 1.25d
 			tasks: [{ dimension: "gcyr:mercury", id: "57EC63F2E652FC1C", type: "dimension" }]
 			title: "Day of Fire"
-			x: 20.0d
-			y: 0.0d
+			x: 43.75d
+			y: 1.25d
 		}
 		{
 			dependencies: ["55613604E4C62B5F"]
-			description: ["Hermean regolith dust, a chemical reactor and the same trick make the &6Hermean Quantum Seed&r, only on Mercury. Its pair is the Mercury bridge."]
+			description: ["Hermean regolith dust, a chemical reactor and the same trick make the &6Hermean Quantum Seed&r in any world, once the dust is shipped. Its pair is the Mercury bridge."]
 			icon: "grindless:hermean_quantum_seed"
 			id: "19D2E454A31BDFC2"
 			rewards: [
@@ -330,8 +330,8 @@
 			]
 			tasks: [{ id: "77AF3D00C5E588DA", item: "grindless:hermean_quantum_seed", type: "item" }]
 			title: "A Seed from Mercury"
-			x: 22.0d
-			y: -1.5d
+			x: 44.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["32D53F1384080352"]
@@ -341,8 +341,8 @@
 			rewards: [{ id: "5D64EFAC9B20ED7C", type: "xp", xp: 40 }]
 			tasks: [{ count: 16L, id: "3BB99174F5AD4EC1", item: "grindless:hermean_heat_shield_brick", type: "item" }]
 			title: "Heat-Shield Bricks"
-			x: 24.0d
-			y: 0.0d
+			x: 50.25d
+			y: 1.0d
 		}
 		{
 			dependencies: ["171D167E3CB497BB"]
@@ -352,8 +352,8 @@
 			rewards: [{ id: "53E77433AED5AF91", type: "xp", xp: 60 }]
 			tasks: [{ count: 16L, id: "1BE18208A8D37D68", item: "gtceu:raw_iridosmine", type: "item" }]
 			title: "Iridosmine"
-			x: 26.0d
-			y: 0.0d
+			x: 57.75d
+			y: 1.25d
 		}
 		{
 			dependencies: ["147AC69C089D11C2", "1F70EF41E5F8ED95"]
@@ -373,8 +373,8 @@
 				{ id: "354AC66ED3579F29", item: "gtceu:osmium_dust", type: "item" }
 			]
 			title: "Iridium and Osmium"
-			x: 28.0d
-			y: 0.0d
+			x: 59.0d
+			y: 0.25d
 		}
 		{
 			dependencies: ["72E1760292CBF88F"]
@@ -395,7 +395,7 @@
 				{ id: "15130DE2D5A51FB6", item: "gtceu:assembly_line", type: "item" }
 			]
 			title: "Assembly Line"
-			x: 30.0d
+			x: 61.75d
 			y: 0.0d
 		}
 		{
@@ -412,8 +412,8 @@
 			]
 			tasks: [{ id: "77F397D9FFD039BA", item: "gtceu:luv_electric_motor", type: "item" }]
 			title: "Fed by the Network"
-			x: 32.0d
-			y: 0.0d
+			x: 66.0d
+			y: 1.25d
 		}
 		{
 			dependencies: ["5EB98498505C969F"]
@@ -426,8 +426,8 @@
 				{ id: "170DD4D8567A8030", item: "grindless:outer_system_chart", type: "item" }
 			]
 			title: "Outer System Chart"
-			x: 32.0d
-			y: -1.5d
+			x: 66.75d
+			y: 2.75d
 		}
 		{
 			dependencies: ["18E80E32AB01B8F6"]
@@ -437,8 +437,8 @@
 			rewards: [{ id: "774D93C481898591", type: "xp", xp: 150 }]
 			tasks: [{ id: "1AAEB14578BC22FC", item: "grindless:sagittarius_a_star_signal", type: "item" }]
 			title: "Sagittarius A*"
-			x: 34.0d
-			y: -3.0d
+			x: 68.75d
+			y: 2.75d
 		}
 		{
 			dependencies: ["18E80E32AB01B8F6", "305FCC7C554A03CC"]
@@ -457,8 +457,529 @@
 				{ id: "1A5AEC03B954F82D", item: "grindless:outer_system_chart", type: "item" }
 			]
 			title: "Gate to LuV"
+			x: 67.75d
+			y: 1.0d
+		}
+		{
+			dependencies: ["3CF7A4745035119A"]
+			icon: "gtceu:quantum_processor"
+			id: "5BBE143E97647099"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "59B8B273E37B658B", type: "checkmark" }]
+			title: "Circuits"
+			x: 64.25d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5BBE143E97647099"]
+			description: ["The &6IV Circuit Assembler&r builds the quantum circuits, which the EV assembler cannot. Nanoprocessor Supercomputers, the EV line's last circuit, and the machine itself. Every quantum circuit, from the processor to the mainframe. Feed boards and chips by ME, and keep a standing stock of supercomputers."]
+			icon: "gtceu:iv_circuit_assembler"
+			id: "15744347C03FF420"
+			rewards: [{ id: "3E87A43B00351FBD", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ count: 2L, id: "7881831A854DDA70", item: "gtceu:nano_processor_computer", type: "item" }
+				{ id: "15F6048FF3651AEC", item: "gtceu:iv_circuit_assembler", type: "item" }
+			]
+			title: "IV Circuit Assembler"
+			x: 67.25d
+			y: -0.75d
+		}
+		{
+			dependencies: ["15744347C03FF420"]
+			description: ["The &6IV Laser Engraver&r etches the quantum wafers with lenses the EV engraver cannot hold. An IV laser engraver and a cutter beside it, both in the cleanroom. The SoC, QBit and HPIC wafers. Wafers in from the network, chips out. Give each lens its own engraver."]
+			icon: "gtceu:iv_laser_engraver"
+			id: "331B6A580FDEF235"
+			rewards: [{ id: "1CA491898740A4B6", type: "xp", xp: 60 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "35C8C113EFAC00B9", item: "gtceu:iv_laser_engraver", type: "item" }
+				{ id: "7687D18B7B8C0E3A", item: "gtceu:iv_cutter", type: "item" }
+			]
+			title: "IV Laser Engraver"
+			x: 69.5d
+			y: 0.75d
+		}
+		{
+			dependencies: ["331B6A580FDEF235"]
+			description: ["The &6Circuit Assembly Line&r builds quantum circuits in bulk, with several inputs at once. Its controller, plus the same boards and chips the single assembler uses. Quantum circuits at the rate the IV hulls and the next era demand. Every slot fed from the network. Stock first, then run."]
+			icon: "gtnn:circuit_assembly_line"
+			id: "32D0BFCCDAD998A3"
+			rewards: [{ id: "5A109EBA78FEBA29", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "34CC912702F00278", item: "gtnn:circuit_assembly_line", type: "item" }]
+			title: "Circuit Assembly Line"
+			x: 71.0d
+			y: 0.75d
+		}
+		{
+			dependencies: ["571EB64508F2FF8E"]
+			description: ["Naquadah grows into a boule in the blast furnace, and the cutter slices it into &6Naquadah Wafers&r. Naquadah from Venus and a blast furnace that reaches the temperature. The SoC, QBit and HPIC wafers. Keep a boule always growing and let the cutter feed the wafer line."]
+			icon: "gtceu:naquadah_boule"
+			id: "5D4FA5EF247AD4CF"
+			rewards: [{ id: "7CCA0F7486821158", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "1A2E0BBF42B07578", item: "gtceu:naquadah_boule", type: "item" }
+				{ id: "70BF3BF706AAA503", item: "gtceu:naquadah_wafer", type: "item" }
+			]
+			title: "Naquadah Boule"
+			x: 64.25d
+			y: -1.25d
+		}
+		{
+			dependencies: ["5D4FA5EF247AD4CF"]
+			description: ["A naquadah wafer, engraved, becomes the &6SoC Wafer&r and the cutter turns it into &6SoCs&r. The IV laser engraver and a cleanroom. The quantum processor. A wafer in, chips out. Let ME feed the engraver and store the chips."]
+			icon: "gtceu:soc_wafer"
+			id: "11004E2A89BF9FDD"
+			rewards: [{ id: "54A3267D88379BC3", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "7C6F0D1942F2E96C", item: "gtceu:soc_wafer", type: "item" }
+				{ id: "7F224B00EE166AFC", item: "gtceu:soc", type: "item" }
+			]
+			title: "SoC Wafer"
+			x: 66.5d
+			y: -2.25d
+		}
+		{
+			dependencies: ["11004E2A89BF9FDD"]
+			description: ["The &6QBit CPU Wafer&r is a CPU wafer treated with radon, and its chips go into every quantum assembly. Radon from the air line and a chemical reactor that can take it. The quantum assembly and the supercomputer. Radon by pipe, wafers by ME. Keep a spare tank of radon."]
+			icon: "gtceu:qbit_cpu_wafer"
+			id: "3C9031CEC5BD66A0"
+			rewards: [{ id: "7FBF87A64351AA2A", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "365FF9A654DFBEAF", item: "gtceu:qbit_cpu_wafer", type: "item" }
+				{ id: "7FA98CC5526432F4", item: "gtceu:qbit_cpu_chip", type: "item" }
+			]
+			title: "QBit CPU Wafer"
+			x: 70.25d
+			y: -2.25d
+		}
+		{
+			dependencies: ["3C9031CEC5BD66A0"]
+			description: ["The &6HPIC Wafer&r carries the high-power chips that every IV energy part asks for. A large chemical reactor, or the epitaxy route if you have built it. The supercomputer and the IV hatches. Two routes, one wafer. Pick the one your cleanroom can feed and stock chips."]
+			icon: "gtceu:hpic_wafer"
+			id: "3D0388842F00E792"
+			rewards: [{ id: "7EAC883A5BA2042B", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [
+				{ id: "3D42B7E169C94FF2", item: "gtceu:hpic_wafer", type: "item" }
+				{ id: "5F3D39DE4E44D7C8", item: "gtceu:hpic_chip", type: "item" }
+			]
+			title: "HPIC Wafer"
+			x: 71.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["15744347C03FF420", "11004E2A89BF9FDD"]
+			description: ["The &6Quantum Processor&r is the quantum line's EV circuit, and it needs a SoC to exist. SoCs, and the IV assembler or the assembly line. The assembly, and every IV machine that wants circuits. Run it from the assembler's own pattern, with SoCs delivered by ME."]
+			icon: "gtceu:quantum_processor"
+			id: "367F69A30A29D598"
+			rewards: [{ id: "714063FCF3E807DB", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ count: 2L, id: "5BD2A7BF1F266933", item: "gtceu:quantum_processor", type: "item" }]
+			title: "Quantum Processor"
+			x: 68.75d
+			y: -0.75d
+		}
+		{
+			dependencies: ["367F69A30A29D598", "3C9031CEC5BD66A0"]
+			description: ["The &6Quantum Processor Assembly&r is the quantum line's IV circuit. Quantum processors and QBit chips. The computer, and the IV machines that ask for assemblies. Processors and QBit chips come from the network; the assembler repeats."]
+			icon: "gtceu:quantum_processor_assembly"
+			id: "380BC31148B70ADC"
+			rewards: [{ id: "3C6C8523BAD74808", type: "xp", xp: 70 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "770D0653A861E305", item: "gtceu:quantum_processor_assembly", type: "item" }]
+			title: "Quantum Assembly"
+			x: 73.0d
+			y: 0.25d
+		}
+		{
+			dependencies: ["380BC31148B70ADC", "3D0388842F00E792"]
+			description: ["The &6Quantum Processor Computer&r is the quantum line's LuV circuit and the real wall of IV. Assemblies and HPIC chips, which means the whole wafer row behind it. The LuV machine hull, and the mainframe after it. Stock every input in the network first. This recipe is the one that stalls."]
+			icon: "gtceu:quantum_processor_computer"
+			id: "54D1F497552CE148"
+			rewards: [{ id: "71D3CBBD014A0D16", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5F7531D64C1BFC7F", item: "gtceu:quantum_processor_computer", type: "item" }]
+			title: "Quantum Processor Computer"
+			x: 75.25d
+			y: 0.0d
+		}
+		{
+			dependencies: ["54D1F497552CE148"]
+			description: ["The &6Quantum Processor Mainframe&r closes the quantum ladder. Computers, and the same cleanroom discipline at a larger scale. Nothing in IV asks for it. Later eras do. A dedicated assembler line and a standing stock of computers."]
+			icon: "gtceu:quantum_processor_mainframe"
+			id: "7FB0A0FD3F271048"
+			rewards: [{ id: "36D03088A92EFA8C", type: "xp", xp: 120 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [{ id: "122FF36BCD81AE02", item: "gtceu:quantum_processor_mainframe", type: "item" }]
+			title: "Quantum Processor Mainframe"
+			x: 76.75d
+			y: 0.25d
+		}
+		{
+			dependencies: ["3FB9EA4152DCD1D3"]
+			icon: "gtceu:hot_cell"
+			id: "13366823FB3362E0"
+			rewards: [ ]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "1E40E1AC6252DBD7", type: "checkmark" }]
+			title: "Machines"
+			x: 2.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["13366823FB3362E0"]
+			description: ["The &6Hot Cell&r is where uranium stops being something you carry around. Its controller and Radiation-Proof Machine Casing, lead-heavy blocks from the IV assembler, set in concrete. Enrichment, fuel, reprocessing and every radioactive step after it. It rides in and out on buses, and the programmed circuit picks the job."]
+			icon: "gtceu:hot_cell"
+			id: "30D78F6EB49AF27B"
+			rewards: [{ id: "3C46C7FFD0C53F21", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ count: 54L, id: "5528E2682AB7F12D", item: "gtnn:radiation_proof_machine_casing", type: "item" }
+				{ id: "35EE0358EE97682E", item: "gtceu:hot_cell", type: "item" }
+			]
+			title: "Hot Cell"
+			x: 5.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["7136B78C360303F9", "72022B0ECDC3668B"]
+			description: ["The &6Fission Reactor&r runs uranium in four channels, with water through the core and a turbine hall out front. An IV field generator, which wants a Quantum Star and samarium wire, and the controller. Power for every IV base, and for Venus and Mercury through the bridge. If the water or the room for spent fuel runs out, it shuts down instead of melting."]
+			icon: "gtceu:fission_reactor"
+			id: "774234968F1BEB95"
+			rewards: [
+				{ id: "7837873709B67E12", type: "xp", xp: 150 }
+				{ count: 16, id: "73D11D557B864FB1", item: "gtceu:light_concrete", type: "item" }
+			]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1C0E68813DD24342", item: "gtceu:iv_field_generator", type: "item" }
+				{ id: "7FEE2B4465DBE543", item: "gtceu:fission_reactor", type: "item" }
+			]
+			title: "Fission Reactor"
+			x: 14.5d
+			y: -0.25d
+		}
+		{
+			dependencies: ["774234968F1BEB95"]
+			description: ["Real fuel is pellets in metal tubes, pressed, sintered and sealed with helium, and the &6Fuel Fabrication Plant&r does the whole line. Its controller, built around an IV assembler. Maybe make two. LEU, MOX and breeder assemblies. The circuit picks the step. Feed it from the hot cell by ME."]
+			icon: "gtceu:fuel_fabrication_plant"
+			id: "77A25AB4BB859C79"
+			rewards: [{ id: "7895990414FDEF05", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "78E3104B5A5427BA", item: "gtceu:fuel_fabrication_plant", type: "item" }]
+			title: "Fuel Fabrication Plant"
+			x: 17.25d
+			y: 0.75d
+		}
+		{
+			dependencies: ["5C008907C9055459"]
+			description: ["Fluorite and sulfuric acid go in the cold end of the &6Fluorspar Kiln&r, and hydrofluoric acid comes out of the scrubber at the hot one. Its controller and a first charge of hydrofluoric acid to prove it works. The fluorine for enrichment, with no mountain of mica to grind. It runs lots of charges at once instead of overclocking, and its gypsum goes into concrete."]
+			icon: "gtceu:fluorspar_kiln"
+			id: "5EE3EB2547415591"
+			rewards: [
+				{ id: "1C3D5BA319101532", type: "xp", xp: 80 }
+				{ count: 6, id: "7D1377FF515C5FF6", item: "gcyr:fluorite_dust", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "100FC0C7A997BA6A", item: "gtceu:fluorspar_kiln", type: "item" }
+				{ id: "7058A238BCD1547D", item: "gtceu:hydrofluoric_acid_bucket", type: "item" }
+			]
+			title: "Fluorspar Kiln"
+			x: 3.0d
+			y: 1.25d
+		}
+		{
+			dependencies: ["77B6F588980A4B1C"]
+			description: ["Four wells push acid into the rock, one pulls the uranium back up, and resin in the header house catches it. The &6In-Situ Leach Field&r only works in the End. Its controller, ion-exchange resin, and the five wells, which you do dig yourself. Uraninite, and with it enrichment. The sample is never used up and the resin wears slowly. Waste goes into storage."]
+			icon: "gtceu:isr_wellfield"
+			id: "5FD0B9548159D199"
+			rewards: [
+				{ id: "149CFF6CA016D569", type: "xp", xp: 80 }
+				{ count: 2, id: "3E1DEACB8F0950E4", item: "grindless:ion_exchange_resin", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ count: 4L, id: "145EB8F6C8FA1CE7", item: "grindless:ion_exchange_resin", type: "item" }
+				{ id: "728859161ED9D148", item: "gtceu:isr_wellfield", type: "item" }
+				{ count: 30L, id: "79E8F6CCA799617C", item: "gtceu:uraninite_dust", type: "item" }
+			]
+			title: "In-Situ Leach Field"
+			x: 5.25d
+			y: 0.0d
+		}
+		{
+			dependencies: ["72139ED6F4E46D37"]
+			description: ["The &6Heavy-Water Plant&r squeezes heavy water out of Martian ice with two towers and a hydrogen sulfide loop. Its controller, built around a distillation tower. Heavy water, the heavy-water core and deuterium. The hydrogen sulfide only circulates, so one fill lasts forever."]
+			icon: "gtceu:heavy_water_plant"
+			id: "5A1DBDF9E739CEF2"
+			rewards: [{ id: "5F8C266CF793BE87", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "10DA8F0D9F79521C", item: "gtceu:heavy_water_plant", type: "item" }]
+			title: "Heavy-Water Plant"
+			x: 25.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["373CBFB746FCAD51", "79EE0C54F2D89358"]
+			description: ["On the Moon, a cold box between two exchange columns pulls the tritium out and hands the heavy water back. The &6Tritium Removal Facility&r is built from a cryogenic plant controller. Its controller and a deuterium charge that is never drained. The only tritium in the pack, and the Inner Planets Chart. Run it at night with every radiator open to the sky and it costs half."]
+			icon: "gtceu:tritium_removal_facility"
+			id: "32FD8F32DC829A03"
+			rewards: [
+				{ id: "17FAB180D4483A10", type: "xp", xp: 80 }
+				{ count: 2, id: "3A0E2A68E6891965", item: "grindless:night_sky_radiator", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "7189AAE4EC2E25D7", item: "gtceu:tritium_removal_facility", type: "item" }]
+			title: "Tritium Removal Facility"
 			x: 34.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["1D931CB1451E8B5A"]
+			description: [
+				"The &6RTG Cell&r is a pellet behind lead with a thermopile and some fins, and it works on every world, day and night, because it burns nothing."
+				"Each pellet lasts about an hour of running, and its EV power starts the first bases on Venus and Mercury."
+			]
+			icon: "gtceu:ev_rtg"
+			id: "503863FFACA225A8"
+			rewards: [
+				{ id: "3C923ADDA8C8C6ED", type: "xp", xp: 60 }
+				{ id: "3E169E7FAB7FA098", item: "grindless:rtg_pellet", type: "item" }
+			]
+			tasks: [{ id: "3F60C55B76B5440E", item: "gtceu:ev_rtg", type: "item" }]
+			title: "RTG Cell"
+			x: 27.75d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5693331C34A5A291", "74BC8201D518D3BA"]
+			description: ["A gas collector above the cloud base fills up with the clouds' sulfuric acid, and the &6Venus Acid Works&r cracks it over a hot gauze. Its controller and platinum gauze. Distilled water and oxygen for every Venus base. Circuit 1 lets the sulfur dioxide back into the sky; circuit 2 keeps it for chemistry at home."]
+			icon: "gtceu:venus_acid_works"
+			id: "534239273A7CA7FC"
+			rewards: [
+				{ id: "572134865D4A4664", type: "xp", xp: 80 }
+				{ id: "39A21633DE3FA56B", item: "grindless:platinum_gauze", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ count: 2L, id: "1287751A6EB4FFF6", item: "grindless:platinum_gauze", type: "item" }
+				{ id: "36F87FDE80673760", item: "gtceu:venus_acid_works", type: "item" }
+			]
+			title: "Venus Acid Works"
+			x: 46.75d
+			y: 0.25d
+		}
+		{
+			dependencies: ["534239273A7CA7FC"]
+			description: ["No fuel burns here, but the ground is a furnace. A hot plate and a tall radiator run the &6Venus Heat Engine&r on a trickle of distilled water. Its controller, built from a Heliostat Tower and a Large Steam Turbine. Venus power with nothing to burn. It is always noon on Venus. Let the surplus go home over the bridge."]
+			icon: "gtceu:venus_heat_engine"
+			id: "5669D88DE37D633F"
+			rewards: [{ id: "1502AD29A55FFF56", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "5D53479A80F0DEEA", item: "gtceu:venus_heat_engine", type: "item" }]
+			title: "Venus Heat Engine"
+			x: 50.75d
+			y: -0.5d
+		}
+		{
+			dependencies: ["7FCCB79E1561AAAB", "1B1714A8E0124C58", "5107982325BE34B7"]
+			description: ["The &6Pressurized Vein Drill&r is an EV Tripod Drill rebuilt for ninety bar, with filters for the dust and water to carry off the heat. Its controller and tungsten steel drill bits from the IV lathe. Venus's naquadah and Mars's three veins. On Venus each run drinks distilled water and breathes out steam."]
+			icon: "gtceu:pressurized_vein_drill"
+			id: "7DCDEF4DEDB8B607"
+			rewards: [
+				{ id: "11595F8291C955B4", type: "xp", xp: 100 }
+				{ count: 8, id: "1CBE905D455497E0", item: "grindless:tungsten_steel_drill_bit", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ count: 16L, id: "1D9C22B784E469D1", item: "grindless:tungsten_steel_drill_bit", type: "item" }
+				{ id: "7E3C0B4D43F671A7", item: "gtceu:pressurized_vein_drill", type: "item" }
+			]
+			title: "Pressurized Vein Drill"
+			x: 50.25d
+			y: -2.25d
+		}
+		{
+			dependencies: ["77FF1E1CF59D10BC", "3FCAFC1E38DD934C"]
+			description: ["The activator only makes naquadah while its neutron energy sits in a narrow window. The &6Naquadah Plant&r holds it with a Pu-Be source from the hot cell and brews its superacid inside. Its controller, a Pu-Be source and inert casing. Two EV hatches run it until Mercury's iridium. Naquadah dust, and the ingot that starts the quantum wafers. Outside the window you only get radioactive waste. Keep a source in the bus."]
+			icon: "gtceu:naquadah_plant"
+			id: "14C75CDBACADEE5A"
+			rewards: [{ id: "1B5C80164B36B0BF", type: "xp", xp: 100 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "7EAD321802CCD64B", item: "grindless:pube_neutron_source", type: "item" }
+				{ count: 16L, id: "761A7754A0B0B958", item: "gtceu:inert_machine_casing", type: "item" }
+				{ id: "1436D6F3F1D96574", item: "gtceu:naquadah_plant", type: "item" }
+			]
+			title: "Naquadah Plant"
+			x: 56.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["55613604E4C62B5F"]
+			description: ["Eight heliostat mirrors stand around a focal furnace on a pad of smelted Mercury rock, and the &6Mercury Solar Works&r pays a quarter of the power when the sun is on the receiver. Its controller, built from a Heliostat Tower, an IV electric furnace and an IV assembler, and the mirrors. Heat-shield bricks and the thin-film panels. Every mirror needs open sky. Run it by day."]
+			icon: "gtceu:mercury_solar_works"
+			id: "32D53F1384080352"
+			rewards: [
+				{ id: "5C5208A2A067F190", type: "xp", xp: 80 }
+				{ count: 2, id: "72C1615DEEF7B2D3", item: "grindless:heliostat_mirror", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ count: 8L, id: "787D29A202C69193", item: "grindless:heliostat_mirror", type: "item" }
+				{ id: "7A3550A4E4D7A9CE", item: "gtceu:mercury_solar_works", type: "item" }
+			]
+			title: "Mercury Solar Works"
+			x: 46.25d
+			y: 2.25d
+		}
+		{
+			dependencies: ["15320440D70D86A7", "734B97375A3121C4"]
+			description: ["The works evaporates gallium arsenide onto silicon in free vacuum, and that is a thin-film panel. The &6Mercury Solar Field&r is built from a Lunar Solar Array. Its controller and thin-film panels. Solar power for Mercury by day. It works by day only, with programmed circuit 1 in its bus. At night the RTG cell or the bridge carries the base."]
+			icon: "gtceu:mercury_solar_field"
+			id: "1BADC15A1CDF6CF1"
+			rewards: [{ id: "15A41AF73BDDE980", type: "xp", xp: 80 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ count: 36L, id: "3EED1EA726C178E9", item: "grindless:hermean_thin_film_panel", type: "item" }
+				{ id: "56F6690958962969", item: "gtceu:mercury_solar_field", type: "item" }
+			]
+			title: "Mercury Solar Field"
+			x: 53.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["15320440D70D86A7", "5107982325BE34B7"]
+			description: ["The &6Mercury Vein Drill&r is an EV Tripod Drill under a brick sunshade. Its controller and an iridosmine vein sample. Raw iridosmine, the only iridium and osmium in the system. By day it only drills with liquid nitrogen from the Moon. At night it drills dry and the bit wears faster."]
+			icon: "gtceu:mercury_vein_drill"
+			id: "171D167E3CB497BB"
+			rewards: [
+				{ id: "33FB4BF44D9D5A19", type: "xp", xp: 100 }
+				{ count: 8, id: "71062E2E71570990", item: "grindless:tungsten_steel_drill_bit", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [
+				{ id: "32CC310BCEB8F732", item: "grindless:vein_sample_iridosmine_mercury", type: "item" }
+				{ id: "7D3CC20D12EC6E79", item: "gtceu:mercury_vein_drill", type: "item" }
+			]
+			title: "Mercury Vein Drill"
+			x: 54.25d
+			y: 2.0d
+		}
+		{
+			dependencies: ["72E1760292CBF88F"]
+			description: [
+				"Iridium is what IV energy and dynamo hatches were waiting for. Until now two EV hatches ran any IV multiblock; from here one IV hatch does the same job with half the wiring."
+				"Swap them in at your own pace. Nothing breaks if you don't."
+			]
+			icon: "gtceu:iv_energy_input_hatch"
+			id: "1CA4E08CA2FFA8E6"
+			rewards: [{ id: "509DF1CDCB67F68C", type: "xp", xp: 60 }]
+			tasks: [
+				{ count: 2L, id: "318D086DCEE35FAE", item: "gtceu:iv_energy_input_hatch", type: "item" }
+				{ id: "5B0CB55AEBE68A17", item: "gtceu:iv_energy_output_hatch", type: "item" }
+			]
+			title: "IV Hatches"
+			x: 60.25d
+			y: 1.25d
+		}
+		{
+			dependencies: ["1CA4E08CA2FFA8E6", "5940CA99055BAF42"]
+			description: ["The &6Interferometer&r is three dishes on Mercury listening as one, with a baseline that reaches back to the Moon. Its controller, built around a spare Deep Space Antenna. Its IV sensors and emitters take iridium and Quantum Stars. The Outer System Chart. It only listens at night."]
+			icon: "gtceu:interferometer"
+			id: "5EB98498505C969F"
+			rewards: [
+				{ id: "1B28D3E12EE03372", type: "xp", xp: 100 }
+				{ count: 2, id: "33058DA4D8F551EE", item: "gtceu:data_orb", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "538A915139D19F46", item: "gtceu:interferometer", type: "item" }]
+			title: "Interferometer"
+			x: 63.5d
+			y: 2.25d
+		}
+		{
+			dependencies: ["1CA4E08CA2FFA8E6"]
+			description: [
+				"An &6Elite Parallel Control Hatch&r runs up to four copies of a recipe at once, in GCYM's machines and in the hot cell and the fuel, heavy-water, naquadah and platinum plants."
+				"Each copy pays full price, so four copies of an IV recipe want two IV energy hatches. The naquadah and platinum plants also want a Pu-Be source or electrode per copy."
+			]
+			icon: "gtceu:iv_parallel_hatch"
+			id: "14E966D3D6D326FE"
+			rewards: [{ id: "7CC65CD197D3836C", type: "xp", xp: 60 }]
+			tasks: [{ id: "57C7416223D5E0C7", item: "gtceu:iv_parallel_hatch", type: "item" }]
+			title: "Parallel Hatch"
+			x: 61.25d
+			y: 2.75d
+		}
+		{
+			dependencies: ["13366823FB3362E0"]
+			description: ["The &6Smelting Complex&r runs the blast furnace and the vacuum freezer as one recipe, so a hot ingot never has to be carried between machines. Its controller. EMI shows which ingots it takes. Every blast-furnace metal that wants a freezer next. Feed it dust and fluids by ME, and let the ingots go straight to storage."]
+			icon: "gtceu:smelting_complex"
+			id: "14682D455D2C4F7C"
+			rewards: [
+				{ id: "52B8203B59E741DD", type: "xp", xp: 80 }
+				{ count: 16, id: "1985410D948A065C", item: "gtceu:steel_ingot", type: "item" }
+			]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3BA9AEBF2A6DBAF3", item: "gtceu:smelting_complex", type: "item" }]
+			title: "Smelting Complex"
+			x: 3.25d
+			y: -0.75d
+		}
+		{
+			dependencies: ["71E4B392A6D559D9"]
+			description: [
+				"A quantum ring and a link chamber at home and the seed's twin on Venus give you a pair, and the ME network crosses worlds. Do the same on Mercury with its own seed."
+				"Power travels over EU P2P as EU, with 16 A IV hatches at each end carrying 131,072 EU/t. AE2 takes a 2.5% toll."
+			]
+			icon: "ae2:quantum_ring"
+			id: "11672E9A925C2B92"
+			rewards: [{ id: "3D0E90763432C049", type: "xp", xp: 100 }]
+			tasks: [
+				{ count: 8L, id: "73F6B9FF7AB598CB", item: "ae2:quantum_ring", type: "item" }
+				{ id: "7ED10E2041417C4D", item: "ae2:quantum_link", type: "item" }
+				{ count: 2L, id: "38EBE38827C561D0", item: "ae2:me_p2p_tunnel", type: "item" }
+			]
+			title: "Network Across Worlds"
+			x: 48.5d
+			y: -2.5d
 		}
 	]
 	subtitle: ["Split the atom at home, then go where it's hot: Venus for naquadah, Mercury for iridium and osmium."]

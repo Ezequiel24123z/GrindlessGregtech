@@ -5,6 +5,7 @@ export const CHAPTER = {
   order: 3,
   icon: "gtceu:refinery",
   autofocus: "HV_HV_FACTORY",
+  section: { name: 'HV: Moonshot', origin: { x: 0, y: 0 } },
   title: "HV: Moonshot",
   subtitle: ["Crude oil becomes chemistry, and the chemistry becomes a rocket to the Moon."],
 };
@@ -387,13 +388,13 @@ export const QUESTS = [
     key: "HV_NICHROME", id: "70F4075BAF69DA99", title: "Nichrome", icon: "gtceu:nichrome_ingot", deps: ["HV_VACUUM_FREEZER"], x: 14, y: 3,
     desc: [
       "&6Nichrome&r needs more power than one HV energy hatch gives, so the blast furnace gets two, and the hot ingot goes through the freezer.",
-      "EV turns it into coils: the regolith cell on the Moon and tungsten's furnace both want them.",
+      "EV turns it into coils: the regolith cell and tungsten's furnace both want them.",
     ],
     tasks: [{ type: "item", id: "7FEDE320D91D5B65", item: "gtceu:nichrome_ingot", count: 4 }],
     rewards: [{ type: "xp", id: "5B177DB0EA38B7DC", xp: 40 }],
   },
   {
-    key: "HV_GT_DRUMS", id: "471A024EBFCA8459", title: "GT Drums", icon: "gtceu:stainless_steel_drum", deps: ["mv:MV_STAINLESS_STEEL"], x: 10, y: -3,
+    key: "HV_GT_DRUMS", id: "471A024EBFCA8459", title: "GT Drums", icon: "gtceu:stainless_steel_drum", deps: ["mv:MV_STAINLESS_STEEL","HV_STAINLESS_STEEL_DRILL_BIT"], x: 8, y: -6,
     desc: [
       "A &6Stainless Steel Drum&r holds a lot of fluid and keeps it when you pick it up. It's also the liner inside the rocket's overwrapped tanks, so make a few extra.",
     ],

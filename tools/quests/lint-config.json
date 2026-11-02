@@ -6,7 +6,7 @@
   "grid": 0.25,
   "eraChapters": {
     "_why": "One chapter per era (QB-0, docs/quests.md section 4b). enabled lists the era chapters (<era>_age) already rebuilt as one connected chapter: they get the connectivity rule (one start, everything reachable through dependencies inside the chapter) instead of root and isolated, and bridgeMaxEdge: a forward line between two sections may be up to that long (maxEdge still holds for every other line; through-node, crossing, overlap and backward stay on). QB-1 to QB-4 add their era here when its data passes. lint.mjs --merged-eras tries every era chapter as if listed.",
-    "enabled": ["maxplus_age", "uhv_age", "uev_age", "uiv_age"],
+    "enabled": ["steam_age", "lv_age", "mv_age", "hv_age", "ev_age", "iv_age", "uhv_age", "uev_age", "uiv_age", "maxplus_age"],
     "bridgeMaxEdge": 14.0
   },
   "limits": {
