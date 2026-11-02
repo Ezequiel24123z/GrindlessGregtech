@@ -2,7 +2,7 @@
   "_source": "Our own table: the recipes of UEV's Barnard b (docs/eras/uev.md, machines 21 and 22; lines 10 and 15; package UEV-B3). Real practice behind each step: coring rigs on metal-rich crust, the Mond process (Vale's Clydach refinery: nickel carbonyl; BASF's carbonyl iron powder), aqua regia digestion of platinum-group residues, and the recovery of rhenium as ammonium perrhenate, recrystallised and reduced with hydrogen (Rheniumnickel, Climax Molybdenum plants).",
   "_how_it_is_used": [
     "Read by server_scripts/grindless/uev/barnard.js at every server load. Each entry becomes one recipe of its type, id grindless:<type>/<name> (GTM's builder puts the type in front); carbonyl_refining carries the data key of the type = <name> (the EMI line). barnard_core_drilling is the drill's own type (data key grindless_barnard_core_drilling).",
-    "site 'barnard_b': the recipe runs only on grindless:barnard_b (G.places). Every recipe of this table has it: Barnard rock, the carbonyls and every rhenium producer (offworld_only.json's 'barnard' row watches gtceu:rhenium*) are Barnard b's.",
+    "site 'barnard_b': the recipe runs only on grindless:barnard_b (G.places). Only the drill's two recipes have it (the place is used: its rock). The carbonyl refinery, the perrhenate steps and every rhenium producer are portable (they work on shipped inputs; offworld_only.json's 'barnard' row watches gtceu:rhenium*).",
     "items in and out: { id, count, chance? } (chance in 1/10,000; below 10,000 a chanced input or output of 1); kept: items not used up; fluid lists: { id, amount } in mB.",
     "One recipe per lookup path: the circuit is the step on carbonyl_refining; the drill's two recipes differ by the survey (kept) against the circuit; no recipe of a type takes a subset of another's ingredients (checked at load; the pilot core's circuit 1 keeps it apart from the survey recipe).",
     "Bootstrap: the drill's survey (A8, tables/earth_orbit.json: grindless:barnard_gravity_survey, circuit 2) is made from 4 Barnard core rock, and the rock comes from this drill. So circuit 1 of the drill, with the bit only, cores a small pilot (2 rock, no survey, programmed circuit 1); with the survey the drill cores 8 rock a run (the survey is kept) and needs no circuit. Both wear the bit 5 % a run.",
@@ -47,7 +47,6 @@
         {
           "name": "mond",
           "circuit": 1,
-          "site": "barnard_b",
           "eut": 1966080,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:barnard_core_rock", "count": 1 }],
@@ -79,7 +78,6 @@
         {
           "name": "perrhenate_recrystallise",
           "circuit": 0,
-          "site": "barnard_b",
           "eut": 1920,
           "duration": 200,
           "itemsIn": [{ "id": "grindless:crude_ammonium_perrhenate", "count": 2 }],
@@ -94,7 +92,6 @@
         {
           "name": "perrhenate_reduction",
           "circuit": 0,
-          "site": "barnard_b",
           "eut": 1920,
           "duration": 300,
           "itemsIn": [{ "id": "grindless:ammonium_perrhenate", "count": 1 }],

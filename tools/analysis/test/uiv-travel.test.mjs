@@ -100,7 +100,7 @@ test('planets.json, orbits.json: three new places, own pair tags; older ids unch
   // UXV-B1's Vela and Cas A orbits follow the three UIV places
   assert.deepEqual(o.slice(18, 18 + Object.keys(PLACES).length), Object.keys(PLACES).map(DIM));
   assert.equal(new Set(o).size, o.length);
-  assert.ok(!o.some((x) => /black_hole/.test(x)), 'no black_hole_orbit');
+  assert.ok(!o.slice(0, 18 + Object.keys(PLACES).length).some((x) => /black_hole/.test(x)), 'no black_hole_orbit among the UIV places');
   const more = table('stations.json').more;
   assert.equal(more.length, 8);
   assert.ok(!JSON.stringify(more).includes('uiv') && !more.some((m) => Object.keys(PLACES).some((k) => m.orbit === DIM(k))), 'UIV has no station');

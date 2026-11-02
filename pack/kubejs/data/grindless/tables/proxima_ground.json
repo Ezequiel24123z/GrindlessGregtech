@@ -39,7 +39,6 @@
         {
           "name": "pgm_leach",
           "circuit": 1,
-          "site": "proxima_b",
           "eut": 122880,
           "duration": 600,
           "itemsIn": [{ "id": "grindless:cold_trap_regolith", "count": 16 }],
@@ -51,7 +50,6 @@
         {
           "name": "ree_leach",
           "circuit": 2,
-          "site": "proxima_b",
           "eut": 122880,
           "duration": 600,
           "itemsIn": [{ "id": "grindless:cold_trap_regolith", "count": 16 }],
@@ -63,7 +61,6 @@
         {
           "name": "biocement",
           "circuit": 3,
-          "site": "proxima_b",
           "eut": 122880,
           "duration": 400,
           "itemsIn": [
@@ -222,7 +219,6 @@
         {
           "name": "proxima_organics_hydrolysis",
           "circuit": 4,
-          "site": "saturn_orbit",
           "eut": 122880,
           "duration": 200,
           "itemsIn": [{ "id": "grindless:sterilised_ice_organics", "count": 4 }],

@@ -25,6 +25,12 @@
     "grindless:vela_pulsar_orbit",
     "grindless:cas_a_remnant",
     "grindless:sgr1806_orbit",
-    "grindless:terzan5_core"
+    "grindless:terzan5_core",
+    "gcyr:black_hole_orbit",
+    "grindless:nsc_belt",
+    "grindless:tarantula_orbit",
+    "grindless:magellanic_stream",
+    "grindless:m31_nucleus_orbit",
+    "grindless:local_group_filament"
   ]
 }
