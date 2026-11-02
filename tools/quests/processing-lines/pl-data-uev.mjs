@@ -183,8 +183,7 @@ export default {
           ['tsw', I('gtceu:tungsten_single_wire'), 'Tungsten Wire'],
           ['cww', I('grindless:coated_w_wire'), 'Coated Wire'],
           ['wfp', I('grindless:w_fibre_preform'), 'Fibre Preform'],
-          ['div', I('grindless:divertor'), 'Divertor'],
-        ], 'the UIV fusion casing'),
+        ]),
         n('wft', 12.5, 24, I('grindless:wf_w_tile'), 'Wf/W Tile', { kind: 'product', from: ['wfp'], end: 'the Mk4 fusion casing' }),
         // niobium cavities
         ...chain(28, [
@@ -371,6 +370,14 @@ export default {
           ['age', I('grindless:silica_aged_gel'), 'Aged Gel'],
           ['aer2', I('grindless:aerogel_tile'), 'Aerogel Tile', 'product', { role: 'infrastructure' }],
         ], 'the nebula collector'),
+        // Sirius B pellet and the relay seed (the starchip is the UV line's)
+        n('dmat', 0, 10, I('grindless:degenerate_matter'), 'Degenerate Matter', { kind: 'raw' }),
+        n('cell', 0, 11.5, I('grindless:exotic_matter_cell'), 'Exotic Matter Cell', { kind: 'raw' }),
+        n('cw', 2.5, 10.75, mach('gtceu:containment_works'), 'Containment Works', { kind: 'ours', from: ['dmat', 'cell'], desc: 'Holds the degenerate matter in a stasis field as a pellet.' }),
+        n('dpel', 5, 10.75, I('grindless:degenerate_pellet'), 'Degenerate Pellet', { kind: 'product', from: ['cw'] }),
+        L('x_schip', 5, 12.5, 'pl_uv:schip'),
+        n('sfab', 7.5, 11.5, mach('gtceu:starchip_fab'), 'Starchip Fab', { kind: 'ours', from: ['dpel', 'x_schip', 'cell'], desc: 'Seats the pellet and a starchip in one relay seed.' }),
+        n('relay', 10, 11.5, I('grindless:relay_seed'), 'Relay Seed', { kind: 'product', role: 'travel', from: ['sfab'], end: 'launched from the Moon to hold a pulsar for the warp gate' }),
       ],
     },
   },

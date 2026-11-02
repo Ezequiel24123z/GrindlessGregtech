@@ -44,19 +44,6 @@ export const QUESTS = [
     rewards: [xp(60)],
   },
   {
-    key: "IVCAL", kind: "machine", title: "Circuit Assembly Line", icon: "gtnn:circuit_assembly_line",
-    deps: ["IVLE"], x: 71, y: 0.75,
-    teach: {
-      for: "The &6Circuit Assembly Line&r builds quantum circuits in bulk, with several inputs at once.",
-      needs: "Its controller, plus the same boards and chips the single assembler uses. Its recipe draws LuV-tier power, so it is the bridge into the next era: finish the IV circuits, then build it once LuV power is up.",
-      unlocks: "Quantum circuits at the rate the IV hulls and the next era demand.",
-      automate: "Every slot fed from the network. Stock first, then run.",
-    },
-    desc: [],
-    tasks: [it("gtnn:circuit_assembly_line", 1)],
-    rewards: [xp(80)],
-  },
-  {
     key: "IVNB", kind: "process", title: "Naquadah Boule", icon: "gtceu:naquadah_boule",
     deps: ["IV_NAQUADAH_INGOT"], x: 64.25, y: -1.25,
     teach: {
