@@ -123,9 +123,9 @@
 
   // [items in, items out, fluids in, fluids out]
   ZT.machines = [
-    { name: 'entry_probe_bay', title: 'Entry Probe Bay', type: 'titan_entry', io: [2, 2, 2, 2], spec: BAY_SPEC, parts: BAY_PARTS,
+    { name: 'entry_probe_bay', title: 'Entry Probe Bay', type: 'titan_entry', io: [3, 2, 2, 2], spec: BAY_SPEC, parts: BAY_PARTS,
       casing: BAY, texture: BAY_TEXTURE, tooltips: 3 },
-    { name: 'tholin_reformer', title: 'Tholin Reformer', type: 'tholin_reforming', io: [1, 1, 2, 1], spec: REFORMER_SPEC, parts: REFORMER_PARTS,
+    { name: 'tholin_reformer', title: 'Tholin Reformer', type: 'tholin_reforming', io: [2, 1, 2, 1], spec: REFORMER_SPEC, parts: REFORMER_PARTS,
       casing: INERT, texture: INERT_TEXTURE, tooltips: 3 }
   ]
 

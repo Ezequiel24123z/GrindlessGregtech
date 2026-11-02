@@ -181,7 +181,7 @@
 
   // [items in, items out, fluids in, fluids out]
   UR.machines = [
-    { name: 'ice_giant_siphon', title: 'Ice-Giant Siphon', type: 'ice_giant_siphon', io: [3, 1, 0, 2], spec: SIPHON, parts: SIPHON_PARTS,
+    { name: 'ice_giant_siphon', title: 'Ice-Giant Siphon', type: 'ice_giant_siphon', io: [4, 1, 0, 2], spec: SIPHON, parts: SIPHON_PARTS,
       casing: HULL, texture: HULL_TEXTURE },
     { name: 'slurry_separator', title: 'Slurry Separator', type: 'slurry_separation', io: [1, 3, 2, 2], spec: SEPARATOR, parts: SEPARATOR_PARTS,
       casing: HULL, texture: HULL_TEXTURE },
