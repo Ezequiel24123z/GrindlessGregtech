@@ -1169,6 +1169,31 @@
       "note": "M2 (mega family, not counted): the stellar fractionation hall."
     },
     {
+      "id": "gtceu:photonic_integration_hall@uxv",
+      "machine": "gtceu:photonic_integration_hall",
+      "types": [
+        "gtceu:photonic_integration"
+      ],
+      "maxEUt": 125829120,
+      "needs": [
+        "eu:uiv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uiv_energy_input_hatch",
+          "gtceu:uiv_energy_input_hatch_4a",
+          "gtceu:uiv_energy_input_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch",
+          "gtceu:uiv_wireless_energy_hatch_4a",
+          "gtceu:uiv_wireless_energy_hatch_16a",
+          "gtceu:uiv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "AF-V2",
+      "note": "UXV mainframes at 125,829,120 EU/t (AF-C): the hall on UIV hatches in pairs, as @uiv."
+    },
+    {
       "id": "gtceu:warp_gate@uxv",
       "machine": "gtceu:warp_gate",
       "types": [

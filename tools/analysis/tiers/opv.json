@@ -466,6 +466,31 @@
       ]
     },
     {
+      "id": "gtceu:photonic_integration_hall@opv",
+      "machine": "gtceu:photonic_integration_hall",
+      "types": [
+        "gtceu:photonic_integration"
+      ],
+      "maxEUt": 503316480,
+      "needs": [
+        "eu:uxv"
+      ],
+      "partsFromStructure": true,
+      "partAbilities": {
+        "energy_input": [
+          "gtceu:uxv_energy_input_hatch",
+          "gtceu:uxv_energy_input_hatch_4a",
+          "gtceu:uxv_energy_input_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch",
+          "gtceu:uxv_wireless_energy_hatch_4a",
+          "gtceu:uxv_wireless_energy_hatch_16a",
+          "gtceu:uxv_wireless_energy_hatch_64a"
+        ]
+      },
+      "package": "AF-V2",
+      "note": "OpV mainframes at 503,316,480 EU/t (AF-C): the hall on UXV hatches in pairs, as uiv.json's @uiv."
+    },
+    {
       "partsFromStructure": true,
       "id": "gtceu:warp_gate@opv",
       "machine": "gtceu:warp_gate",
