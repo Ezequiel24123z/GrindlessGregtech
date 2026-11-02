@@ -174,10 +174,11 @@ const chapter = {
         n('mk3b', 12.5, 0.75, M('gtceu:uv_fusion_reactor', 'gtceu:fusion_reactor'), 'Fusion Reactor Mk3', {
           kind: 'ours', from: ['amf', 'naq'], desc: 'Fuses americium with naquadria into neutronium.',
         }),
-        n('neut', 15, 0.75, F('gtceu:neutronium'), 'Molten Neutronium', { kind: 'product', from: ['mk3b'], sub: 'Into the gravi star' }),
-        n('qstar', 20, 2.25, I('gtceu:quantum_star'), 'Quantum Star', { kind: 'raw' }),
-        n('acl', 22.5, 1.5, M('gtceu:iv_autoclave', 'gtceu:autoclave'), 'Autoclave', { kind: 'machine', from: ['neut', 'qstar'], desc: 'Grows a gravi star around a quantum star.' }),
-        n('gravi', 25, 1.5, I('gtceu:gravi_star'), 'Gravi Star', { kind: 'product', from: ['acl'], end: 'the UIV fusion reactor' }),
+        n('neut', 17.5, 0.75, F('gtceu:neutronium'), 'Molten Neutronium', { kind: 'product', from: ['mk3b'], sub: 'Into the gravi star' }),
+
+        n('qstar', 18.5, 2.75, I('gtceu:quantum_star'), 'Quantum Star', { kind: 'raw' }),
+        n('acl', 21.5, 1.5, M('gtceu:iv_autoclave', 'gtceu:autoclave'), 'Autoclave', { kind: 'machine', from: ['neut', 'qstar'], desc: 'Grows a gravi star around a quantum star.' }),
+        n('gravi', 24, 1.5, I('gtceu:gravi_star'), 'Gravi Star', { kind: 'product', from: ['acl'], end: 'the UIV fusion reactor' }),
       ],
     },    ented: {
       name: 'EnTED wire',
@@ -318,7 +319,7 @@ const TOGETHER = {
   nh: [5.75, 22], siphon: [5.25, 23.75], nhyd: [7.25, 22.75], d2: [9.5, 21.5], plant: [6.25, 20.25], sf: [6.75, 18.5],
   conc: [8.25, 19.5], he3: [9.75, 19], cmod: [7.25, 17], boron: [7.25, 15.25], b11: [8.75, 16], b10: [8.75, 14.75],
   deca: [11, 15.25], hf: [9.5, 17.25], dplate: [11.5, 17.25], zhe3: [11.5, 20.25], pb11: [12.5, 15.75], dhe3: [12, 18.75],
-  chamber: [14.25, 15.25], alpha: [15.75, 17.25], spentL: [14.75, 16.75], preform: [9.5, 13], tower: [11, 13.25],
+  chamber: [14.25, 15.25], alpha: [17, 18.5], spentL: [17.25, 16.25], preform: [9.5, 13], tower: [11, 13.25],
   fibre: [11.5, 11.5], epi: [7.75, 4.75], mocvd: [9.25, 4.75], arsine: [9.75, 3.25], epiw: [11, 5], pump: [12.25, 6.75],
   laser: [13.75, 10.5], cmox: [7, 7.5], am: [7.25, 10.25], hs: [9, 10.75],
   pellet: [12.75, 10.25], gphs: [15.75, 11], rtg: [18.25, 14.75], micro: [11.25, 9],
@@ -331,7 +332,7 @@ const TOGETHER = {
   tank: [14.5, 18], lsw: [-9.25, 12.25], wsf: [-7, 11], sepi: [-4.5, 10.75],
   lsf: [-1, 11.25], film: [2, 9.5], pat: [4.75, 9.75], lsail: [6, 12],
   sb: [9, -4.25], sebf: [13.5, -2.25], boule: [17, 0.5], swafer: [19.75, 2.5],
-  nbnw: [20.5, 7.25], qfab: [23.5, 7.5], snspd: [24.5, 4.75], lsl: [18.5, 10.25], gs: [26.75, 8.75], wafer: [1.25, 7], proton: [2, 8.25],
+  nbnw: [20.5, 7.25], qfab: [23.5, 7.5], snspd: [24.5, 4.75], lsl: [18.5, 10.25], gs: [26.25, 9.25], wafer: [1.25, 7], proton: [2, 8.25],
   sync: [3.75, 5.5], exposed: [4.25, 3], chip: [6.25, 2.25], cart: [6.25, 9],
   trap: [8.75, 8.5], aptrap: [12.5, 9.5], ican: [14.75, 13], nv: [8.75, 1.25],
   nw: [6.75, 3.75], sfab: [10.75, 2], schip: [15.25, 3.75], relay: [18, 4.5],
