@@ -187,6 +187,7 @@
     }
   ],
   "machines": [
+    {"machine":"gtceu:quantum_fabricator","types":["gtceu:assembler","gtceu:circuit_assembler","gtceu:forming_press","gtceu:laser_engraver","gtceu:cutter"],"energy":{"voltage":2097152},"needs":["eu:uhv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:uhv_energy_input_hatch","gtceu:uhv_energy_input_hatch_4a","gtceu:uhv_energy_input_hatch_16a","gtceu:uhv_wireless_energy_hatch","gtceu:uhv_wireless_energy_hatch_4a","gtceu:uhv_wireless_energy_hatch_16a","gtceu:uhv_wireless_energy_hatch_64a"]},"package":"A1b-04","note":"Our UHV Quantum Fabricator (mega machine), modelled by A1b-04."},
     {
       "machine": "gtceu:high_flux_reactor",
       "types": [

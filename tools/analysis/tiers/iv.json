@@ -66,7 +66,12 @@
     { "prefix": "gtnn:iv_dehydrator", "maxEUt": 8192, "needs": ["eu:iv"], "note": "GT--'s dehydrator stays in the pack (integration/gtnn.js); LuV-A2's mode 2 remakes its gold trifluoride through bromine trifluoride, and the bromine comes from gtceu:dehydrator/wet_bromine" }
   ],
 
+  "partAbilities": {
+    "data_access": ["gtceu:data_access_hatch", "gtceu:advanced_data_access_hatch"]
+  },
+
   "machines": [
+    {"machine":"gtceu:smelting_complex","types":["gtceu:smelting_complex"],"energy":{"voltage":8192},"needs":["eu:iv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:iv_energy_input_hatch","gtceu:iv_energy_input_hatch_4a","gtceu:iv_energy_input_hatch_16a","gtceu:iv_wireless_energy_hatch","gtceu:iv_wireless_energy_hatch_4a","gtceu:iv_wireless_energy_hatch_16a","gtceu:iv_wireless_energy_hatch_64a","gtceu:luv_energy_input_hatch","gtceu:luv_energy_input_hatch_4a","gtceu:luv_energy_input_hatch_16a","gtceu:luv_wireless_energy_hatch","gtceu:luv_wireless_energy_hatch_4a","gtceu:luv_wireless_energy_hatch_16a","gtceu:luv_wireless_energy_hatch_64a"]},"package":"A1b-04","note":"Our IV Smelting Complex (mega machine), modelled by A1b-04."},
     { "machine": "gtceu:iv_transformer_1a", "types": [], "note": "IV -> LuV transformer (1 A)." },
     { "machine": "gtceu:iv_transformer_2a", "types": [], "note": "IV -> LuV transformer (2 A)." },
     { "machine": "gtceu:iv_transformer_4a", "types": [], "note": "IV -> LuV transformer (4 A -> 1 A): the gate to LuV." },

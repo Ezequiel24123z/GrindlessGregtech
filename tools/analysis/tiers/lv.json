@@ -44,6 +44,7 @@
   ],
 
   "machines": [
+    {"machine":"gtceu:wire_works","types":["gtceu:wiremill","gtceu:bender"],"energy":{"voltage":32},"needs":["eu:lv"],"partsFromStructure":true,"partAbilities":{"energy_input":["gtceu:lv_energy_input_hatch","gtceu:lv_energy_input_hatch_4a","gtceu:lv_energy_input_hatch_16a","gtceu:mv_energy_input_hatch","gtceu:mv_energy_input_hatch_4a","gtceu:mv_energy_input_hatch_16a"]},"package":"A1b-04","note":"Our LV Wire Works (mega machine): on the validator since A1b-04, which found no mega machine modelled."},
     {
       "machine": "gtceu:lv_vein_drill",
       "types": ["gtceu:vein_drilling"],

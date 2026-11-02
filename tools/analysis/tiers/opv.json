@@ -336,6 +336,23 @@
       "package": "A4"
     },
     {
+      "partsFromStructure": true,
+      "id": "gtceu:assembly_line_array@opv",
+      "machine": "gtceu:assembly_line_array",
+      "types": [
+        "gtceu:assembly_line"
+      ],
+      "energy": {
+        "voltage": 134217728,
+        "hatches": 2
+      },
+      "needs": [
+        "eu:uxv"
+      ],
+      "package": "A1b-06",
+      "note": "The assembly line array (GTCA-style array of assembly lines), modelled at OpV like the line itself; its recipes were unchecked before A1b-06."
+    },
+    {
       "id": "gtceu:assembly_line@opv",
       "machine": "gtceu:assembly_line",
       "types": [

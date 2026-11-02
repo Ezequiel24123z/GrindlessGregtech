@@ -4,7 +4,7 @@
   "extends": "max",
   "inheritTargets": true,
   "note": "MAX+ validator (XP-C1), modelled on max.json. Rows run at 2^31 (V[MAX]) to 2^39 EU/t; only the Hyperstargate dial goes to V[MAX] x 4096 A. Exemptions: horizon_capacitor_bank has no recipe type (storage only); ig_relay_probe is a travel item; casings and structure blocks are not products; the creative items are made only by hyper_assembly_array. Places: tarantula_orbit, magellanic_stream, m31_nucleus_orbit, local_group_filament (gates c16 to c19).",
-  "eraOrder": ["max", "maxplus"],
+  "eraOrder": ["max", "maxplus", "maxplus-tarantula", "maxplus-stream", "maxplus-m31", "maxplus-void"],
   "packages": {
     "condensate_assembler": { "label": "condensate_assembler", "landedWhen": ["gtceu:condensate_assembler"] },
     "blueshift_forge": { "label": "blueshift_forge", "landedWhen": ["gtceu:blueshift_forge"] },
@@ -82,12 +82,29 @@
       "note": "The four Local Group places are in no orbit or place table: a recipe valid there needs the dim: key of gates c16 to c19 (the jump synthetics below)."
     }
   },
-  "world": [
+  "eraResources": [
+    { "id": "tarantula-res", "era": "maxplus-tarantula", "label": "30 Doradus orbit and what comes home", "dimensions": ["grindless:tarantula_orbit"], "items": ["fluid:gtceu:raw_vms_plasma", "fluid:gtceu:vms_core_plasma", "grindless:ni56_slug", "grindless:ime_ash"] },
+    { "id": "stream-res", "era": "maxplus-stream", "label": "The Magellanic Stream and what comes home", "dimensions": ["grindless:magellanic_stream"], "items": ["fluid:gtceu:pristine_gas", "fluid:gtceu:primordial_deuterium", "fluid:gtceu:pristine_helium_3"] },
+    { "id": "m31-res", "era": "maxplus-m31", "label": "The M31 nucleus orbit and what comes home", "dimensions": ["grindless:m31_nucleus_orbit"], "items": ["fluid:gtceu:photonuclear_mix", "fluid:gtceu:p_process_plasma"] },
+    { "id": "filament-res", "era": "maxplus-void", "label": "The Local Group filament and what comes home", "dimensions": ["grindless:local_group_filament"], "items": ["grindless:void_grown_diamond", "grindless:void_holographic_block"] }
+  ],
+  "eraItems": [
+    { "id": "max-home", "exclude": ["gtceu:max_maxplus_energy_hatch_1024a", "gtceu:max_maxplus_parallel_hatch", "gtceu:max_wireless_energy_hatch_1024a", "gtceu:max_wireless_energy_hatch_4096a"] },
     {
-      "id": "horizon-shard",
-      "mode": "manual",
-      "items": ["grindless:horizon_shard"],
-      "note": "The catalyst of the creative cores (K1 to K4) has no recipe and no source in the pack yet (finding M1-02, an owner decision). Until it has one this stand-in marks it as found by hand, so the MAX+ gate proves everything else."
+      "id": "maxplus-items",
+      "era": "maxplus",
+      "label": "MAX+ stage I: the components, the hatches, the relay probe and the far controllers",
+      "items": [
+        "grindless:maxplus_conveyor_module", "grindless:maxplus_electric_motor", "grindless:maxplus_electric_piston", "grindless:maxplus_electric_pump", "grindless:maxplus_emitter", "grindless:maxplus_field_generator", "grindless:maxplus_fluid_regulator", "grindless:maxplus_robot_arm", "grindless:maxplus_sensor",
+        "gtceu:max_maxplus_energy_hatch_1024a", "gtceu:max_maxplus_parallel_hatch", "grindless:ig_relay_probe",
+        "m:gtceu:tarantula_stellar_lift", "m:gtceu:pair_instability_crucible", "m:gtceu:nickel_56_burner", "m:gtceu:pristine_gas_works", "m:gtceu:primordial_fusion_torus", "m:gtceu:blueshift_forge", "m:gtceu:void_crystal_fab"
+      ]
+    },
+    {
+      "id": "maxplus-void-items",
+      "era": "maxplus-void",
+      "label": "MAX+ end of stage II: the loom, the condensate assembler, the hyper assembly array and the hyperfactory",
+      "items": ["m:gtceu:meta_material_loom", "m:gtceu:condensate_assembler", "m:gtceu:hyper_assembly_array", "m:gtceu:hyperfactory"]
     }
   ],
   "synthetic": [
@@ -139,6 +156,7 @@
     { "id": "k4-horizon-computation-core", "label": "K4: the horizon computation core", "item": "grindless:horizon_computation_core", "package": "XP-K" }
   ],
   "targets": [
+    { "id": "gate-horizon-shard", "label": "Gate: the Horizon Shard (black_hole_bomb c5 at Sgr A*)", "item": "grindless:horizon_shard", "package": "A1b-08" },
     { "id": "mxp-condensate-assembler", "label": "MAX+ controller: condensate assembler", "item": "gtceu:condensate_assembler", "package": "condensate_assembler" },
     { "id": "mxp-blueshift-forge", "label": "MAX+ controller: blueshift forge", "item": "gtceu:blueshift_forge", "package": "blueshift_forge" },
     { "id": "mxp-condensate-refinery", "label": "MAX+ controller: condensate refinery", "item": "gtceu:condensate_refinery", "package": "condensate_refinery" },
