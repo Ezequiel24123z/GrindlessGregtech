@@ -9,13 +9,15 @@
 //                             posts, a fusion-glass window band and a superconducting coil band), with six
 //                             modulator mounts (UHV casing, where the thin-film lithium niobate modulators sit) on its top row. c1
 //                             opens the gate and makes the Proxima gate seed; c2 holds it open for a minute: while it runs, a player
-//                             standing in the ring is carried to the other ring (the transit lives in server_scripts/.../gate.js;
-//                             beforeWorking below records each run). Items do not cross: they go by AE2.
+//                             standing in the ring is carried to the ring a relay coordinates stick in its input bus names, else to
+//                             the other holding ring (the transit lives in server_scripts/.../gate.js; beforeWorking below records each
+//                             ring, afterWorking hands each completed run to lib/relay_platforms.js). Items do not cross: they go by AE2.
 //   gtceu:baseline_astrometer type gtceu:baseline_astrometry (observatory step 9). 9 x 9 x 9: a station truss deck with a pipe cross, a frame mast on a
 //                             gearbox dish drive and a stepped fusion-glass mirror dish, braced by four corner posts. Proxima b's orbit only: the chart is made where the baseline is.
 //
 // Geometry (lib/patterns.js: slices back -> front, rows bottom -> top; S is the controller on the front face).
-// Published: global.grindless.warpGate (.machines, .gates (runs recorded by beforeWorking), .order, .ids).
+// Published: global.grindless.warpGate (.machines, .gates (the rings, see "The rings"), .order, .ids, .ringKey, .ringOf, .saveRing, .forgetRing,
+// .loadRings, .finishRun; .onFinished is set by server lib/relay_platforms.js).
 (function () {
   const G = global.grindless
   const Pat = G.patterns
@@ -173,34 +175,110 @@
     }
   }
 
-  // The gate records every run as it starts; the transit tick (server script) reads these. A run is the sustain row when its id ends
-  // in /sustain; it lasts until the game time `until`.
+  // The rings (AF-1). Every gate that starts a run is a ring the transit knows: WG.gates (key dim|x|y|z) is this boot's copy, and the world's
+  // persistent data keeps the positions (RINGS_KEY, "dim|x|y|z|fx|fz" entries joined by ';'), because GTM resumes a running recipe after a
+  // restart without calling beforeWorking. `sustain` and `until` describe the run that started last; nothing decides on them: whether a ring
+  // holds is read from the machine itself (server uhv/gate.js, transit).
+  var RINGS_KEY = 'grindless_warp_rings'
+  var STEPS = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] }
+  WG.ringsKey = RINGS_KEY
+
+  function ringKey(dim, x, y, z) {
+    return dim + '|' + x + '|' + y + '|' + z
+  }
+
+  // the ring of a gate controller: dimension, controller position and front direction (fx, fz), or null when its front is not horizontal
+  function ringOf(machine) {
+    var level = machine.getLevel()
+    var pos = machine.getPos()
+    var f = String(machine.getFrontFacing()).toLowerCase()
+    var step = STEPS[f]
+    if (!step) return null
+    var d = level.dimension
+    var dim = String(typeof d === 'function' ? level.dimension().location() : d)
+    return { dim: dim, x: Number(pos.getX()), y: Number(pos.getY()), z: Number(pos.getZ()), fx: step[0], fz: step[1] }
+  }
+
+  function savedRings(server) {
+    var data = server && server.persistentData
+    if (!data || !data.contains(RINGS_KEY)) return []
+    return String(data.getString(RINGS_KEY)).split(';').filter(function (s) { return s.split('|').length === 6 })
+  }
+
+  // keeps a ring's position in persistent data (once; a ring turned round replaces its old entry)
+  function saveRing(server, rec) {
+    var data = server && server.persistentData
+    if (!data) return
+    var key = ringKey(rec.dim, rec.x, rec.y, rec.z)
+    var entry = key + '|' + rec.fx + '|' + rec.fz
+    var list = savedRings(server)
+    if (list.indexOf(entry) >= 0) return
+    list = list.filter(function (s) { return s.split('|').slice(0, 4).join('|') !== key })
+    list.push(entry)
+    data.putString(RINGS_KEY, list.join(';'))
+  }
+
+  function forgetRing(server, key) {
+    delete WG.gates[key]
+    var data = server && server.persistentData
+    if (!data) return
+    var list = savedRings(server)
+    var kept = list.filter(function (s) { return s.split('|').slice(0, 4).join('|') !== key })
+    if (kept.length !== list.length) data.putString(RINGS_KEY, kept.join(';'))
+  }
+
+  // a new world (or the first tick after a restart): WG.gates becomes the saved rings
+  function loadRings(server) {
+    WG.gates = {}
+    savedRings(server).forEach(function (s) {
+      var p = s.split('|')
+      WG.gates[ringKey(p[0], p[1], p[2], p[3])] = { dim: p[0], x: Number(p[1]), y: Number(p[2]), z: Number(p[3]), fx: Number(p[4]), fz: Number(p[5]),
+        sustain: false, until: 0 }
+    })
+    return WG.gates
+  }
+
+  WG.ringKey = ringKey
+  WG.ringOf = ringOf
+  WG.saveRing = saveRing
+  WG.forgetRing = forgetRing
+  WG.loadRings = loadRings
+
+  // beforeWorking: the gate records every run as it starts. A run is the sustain row when its id ends in /sustain.
   function recordRun(machine, recipe) {
     try {
-      var level = machine.getLevel()
-      var pos = machine.getPos()
-      var f = String(machine.getFrontFacing()).toLowerCase()
-      var steps = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] }
-      var step = steps[f]
-      if (!step) {
-        console.error(LOG + 'warp gate: front facing "' + f + '" is not horizontal; run not recorded')
+      var ring = ringOf(machine)
+      if (!ring) {
+        console.error(LOG + 'warp gate: front facing "' + String(machine.getFrontFacing()) + '" is not horizontal; run not recorded')
         return true
       }
       var id = String(recipe.id)
-      var duration = Number(recipe.duration)
-      var d = level.dimension
-      var dim = String(typeof d === 'function' ? level.dimension().location() : d)
-      WG.gates[dim + '|' + pos.getX() + '|' + pos.getY() + '|' + pos.getZ()] = {
-        dim: dim, x: pos.getX(), y: pos.getY(), z: pos.getZ(),
-        fx: step[0], fz: step[1],
-        sustain: id.indexOf('/sustain') >= 0,
-        until: Number(level.getTime()) + duration
-      }
+      ring.sustain = id.indexOf('/sustain') >= 0
+      ring.until = Number(machine.getLevel().getTime()) + Number(recipe.duration)
+      WG.gates[ringKey(ring.dim, ring.x, ring.y, ring.z)] = ring
+      saveRing(machine.getLevel().getServer(), ring)
     } catch (e) {
       console.error(LOG + 'warp gate: could not record a run: ' + e)
     }
     return true
   }
+
+  // afterWorking: GTM calls it when a run completes and also when one is interrupted (RecipeLogic#interruptRecipe), before it resets the
+  // progress. Only a run that reached its full duration counts, so a paused, starved or broken jump never pays out. WG.onFinished
+  // (server lib/relay_platforms.js) gets the completed run's recipe id.
+  function finishRun(machine) {
+    try {
+      var logic = machine.getRecipeLogic()
+      var last = logic.getLastRecipe()
+      if (last === null || last === undefined) return
+      var duration = Number(logic.getDuration())
+      if (!(duration > 0) || Number(logic.getProgress()) < duration) return
+      if (typeof WG.onFinished === 'function') WG.onFinished(machine, String(last.id))
+    } catch (e) {
+      console.error(LOG + 'warp gate: after a run: ' + e)
+    }
+  }
+  WG.finishRun = finishRun
 
   // ---------------------------------------------------------------- recipe types
 
@@ -242,7 +320,10 @@
         .recipeModifier(G.parallelHatch.modifier(k === 'gate' ? gateOverclock : G.parallelHatch.overclock))
         .appearanceBlock(function () { return Block.getBlock(m.casing) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
-      if (k === 'gate') b = b.beforeWorking(function (machine, recipe) { return recordRun(machine, recipe) })
+      if (k === 'gate') {
+        b = b.beforeWorking(function (machine, recipe) { return recordRun(machine, recipe) })
+          .afterWorking(function (machine) { finishRun(machine) })
+      }
       b["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
         Text.translate('grindless.machine.' + m.name + '.tooltip.1'),
