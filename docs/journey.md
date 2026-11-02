@@ -99,7 +99,7 @@ Today HV opens the End and, with the Moon, it would open two places. Proposal: *
   - Materials, fluids and power: AE2, with the quantum bridge between planets built with one half at each end.
   - The interplanetary AE2 network improves with each era.
   - Ender chests, tanks and other ender items work between planets with no limit (the user, 2026-10-24: they are a quality-of-life mod precisely for that). AE2 is the industrial backbone, not the only route.
-- **What comes from a planet does not exist on Earth.** The recipe validator checks this for every resource, including bees, byproducts and addons.
+- **What comes from a planet does not exist on Earth.** The recipe validator checks this for every resource, including byproducts and addons.
 
 ## From visiting to dominating
 
@@ -244,7 +244,7 @@ In English. Each era tells the step that brings you closer to the center of the 
    - Ender chests and tanks don't cross to another planet. *Changed by the user the same day: ender items work on all planets, with no limit.*
 8. **Quests.**
    - One tab per era (Steam Age → MAX) that tells the journey.
-   - Separate tabs for the quality-of-life mods: storage, AE2 and addons, Productive Bees, Create/Greate if they stay, Waystones/FTB…
+   - Separate tabs for the quality-of-life mods: storage, AE2 and addons, Create/Greate if they stay, Waystones/FTB…
    - Quests are reused from packs whose license allows it; otherwise they are written from scratch.
    - All in English.
 9. **Post-UHV.** First, reuse what exists in external packs, Gregicality and older packs whose license allows it (textures and code included). Creating it from scratch is the last resort.

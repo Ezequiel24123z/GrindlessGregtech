@@ -6,7 +6,7 @@
 //                   the others, so nothing of one may need a resource of another.
 //   eraResources[]  what each era brings: {id, era, label, items?, exclude?, dimensions?, onlyFrom?, note}
 //     items         globs over item and fluid keys (`fluid:gtceu:titanium`): those keys are removed from EVERY source
-//                   (no recipe gives them, even though the recipe still gives the rest; no world fact; no vein, bee,
+//                   (no recipe gives them, even though the recipe still gives the rest; no world fact; no vein
 //                   or addon recipe). This way, whatever is of that material counts, wherever it comes from.
 //     dimensions    removes the world sources gathered there (the `world` entry's `origin`, or its `fromVeins`
 //                   dimensions) and the recipes only valid there (dimension condition).
@@ -28,7 +28,7 @@ import { blockedRoots, blockedTree, derivationTree, describeRule, makeRootCost, 
 import { asArray, makeGlobMatcher } from './util.mjs';
 
 // keys that aren't material (machines, energy, dead slots, dimension keys, research...): a resource never removes them. NBT outputs the
-// normalizer doesn't reduce (Productive Bees' configurable honeycombs) stay as non-string keys: they don't count either.
+// normalizer doesn't reduce stay as non-string keys: they don't count either.
 const SPECIAL = /^(m|run|eu|ae|dead|cond|dim|research):/;
 const isName = (n) => typeof n === 'string';
 const INPUT_ROLES = new Set(['item', 'fluid', 'tool', 'die']);

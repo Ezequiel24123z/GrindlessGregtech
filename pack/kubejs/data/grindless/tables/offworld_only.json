@@ -5,13 +5,11 @@
     "byproducts: startup_scripts/grindless/moon/earth_byproducts.js sets these ore byproducts (GTCEuStartupEvents.materialModification, after GTM and every addon). GTM builds the ore chains from them (macerator, ore washer, thermal centrifuge, chemical bath, sifter) and the MV Ore Plant reads those chains, so neither gives rutile or ilmenite any more. aluminium was bauxite, bauxite, ilmenite, rutile; bauxite was grossular, rutile, gallium. The replacements are real companions of bauxite: its iron oxide (hematite, the red of red mud) and gallium. thorium (the Nether's beryllium vein) was uraninite, lead: the uraninite opened the uranium chain, radon and the quantum eye before IV (radioactives are an IV resource, docs/eras/ev.md); now lead (the end of thorium's decay chain) and rare earth (thorium minerals sit in rare-earth ores such as monazite). The other ores with a uraninite byproduct (uraninite, pitchblende, plutonium) are radioactive themselves and held back until IV.",
     "strip: server_scripts/grindless/moon/offworld_only.js removes these recipes and adds them back with GTM's builder, the same inputs, chances, energy and time, without the listed outputs. The new id is grindless:<type>/offworld_only/<old path>. Destinations of what is left: unchanged. (Greate's copies of GT recipes follow: integration/greate.js only keeps copies of GT recipes that are loaded and unchanged.) A plant that composes these recipes reads them without the same outputs: the EV platinum plant (server_scripts/grindless/ev/platinum_plant.js) applies every strip entry of its stages when it reads them.",
     "remove: recipes whose only purpose is a resource of another world. They go away.",
-    "combs: worlds.<world>.combs are Productive Bees combs whose GT centrifuge recipe (integration/productivebees.js) only runs in worlds.<world>.dimension: the bees can live on Earth, but their titanium only comes out on the Moon and their tungsten only on Mars. Mercury has none: the osmium comb has no recipe for good, and the iridium comb none either (integration/productivebees.js, item 7).",
     "watched: worlds.<world>.watched is what the smoke tests (tools/test/overlay/kubejs/server_scripts/gg_test_moon.js; Mercury's also gg_test_naquadah_plant.js) look for. Every stripped recipe must be gone and its replacement must exist without the outputs, and no recipe of the loaded pack may give a watched output from inputs that hold none (inputPattern; heavy water, tritiated or concentrated too, carries the Martian deuterium; from LuV the asteroid belt's grindless:asteroid_pgm_concentrate carries iridium and osmium, the platinum plant's mode 4), except recipes that only run off Earth (a dimension condition of another world), recycling, and the late lines named in allowedLate."
   ],
   "worlds": {
     "moon": {
       "dimension": "gcyr:luna",
-      "combs": ["ilmenite", "titanium"],
       "watched": {
         "items": ["gtceu:titanium_dust", "gtceu:small_titanium_dust", "gtceu:tiny_titanium_dust", "gtceu:rutile_dust", "gtceu:small_rutile_dust", "gtceu:tiny_rutile_dust", "gtceu:ilmenite_dust", "gtceu:small_ilmenite_dust", "gtceu:tiny_ilmenite_dust", "gtceu:raw_ilmenite", "gtceu:raw_titanium", "gtceu:raw_rutile", "gtceu:titanium_ingot"],
         "fluids": ["gtceu:helium_3", "gtceu:titanium_tetrachloride", "gtceu:titanium"],
@@ -20,7 +18,6 @@
     },
     "mars": {
       "dimension": "gcyr:mars",
-      "combs": ["tungsten", "scheelite", "tungstate"],
       "watched": {
         "items": ["gtceu:tungsten_dust", "gtceu:small_tungsten_dust", "gtceu:tiny_tungsten_dust", "gtceu:raw_tungsten", "gtceu:tungsten_ingot", "gtceu:scheelite_dust", "gtceu:small_scheelite_dust", "gtceu:tiny_scheelite_dust", "gtceu:raw_scheelite", "gtceu:tungstate_dust", "gtceu:small_tungstate_dust", "gtceu:tiny_tungstate_dust", "gtceu:raw_tungstate", "gtceu:samarium_dust", "gtceu:small_samarium_dust", "gtceu:tiny_samarium_dust", "gtceu:samarium_ingot"],
         "fluids": ["gtceu:deuterium", "gtceu:tungsten", "gtceu:samarium"],
@@ -29,7 +26,6 @@
     },
     "mercury": {
       "dimension": "gcyr:mercury",
-      "combs": [],
       "watched": {
         "items": ["gtceu:rarest_metal_mixture_dust", "gtceu:small_rarest_metal_mixture_dust", "gtceu:tiny_rarest_metal_mixture_dust", "gtceu:iridium_metal_residue_dust", "gtceu:small_iridium_metal_residue_dust", "gtceu:tiny_iridium_metal_residue_dust", "gtceu:iridium_dust", "gtceu:small_iridium_dust", "gtceu:tiny_iridium_dust", "gtceu:iridium_ingot", "gtceu:raw_iridium", "gtceu:osmium_dust", "gtceu:small_osmium_dust", "gtceu:tiny_osmium_dust", "gtceu:osmium_ingot", "gtceu:raw_osmium", "gtceu:iridosmine_dust", "gtceu:raw_iridosmine"],
         "fluids": ["gtceu:osmium_tetroxide", "gtceu:iridium", "gtceu:osmium"],
@@ -38,7 +34,6 @@
     },
     "barnard": {
       "dimension": "grindless:barnard_b",
-      "combs": [],
       "watched": {
         "items": ["gtceu:rhenium_dust", "gtceu:small_rhenium_dust", "gtceu:tiny_rhenium_dust", "gtceu:rhenium_ingot", "gtceu:raw_rhenium"],
         "fluids": ["gtceu:rhenium"],

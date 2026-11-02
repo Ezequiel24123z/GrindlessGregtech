@@ -28,7 +28,7 @@ Method (also in the script header): things registered take the era of their star
 | max | 260 | 7 | 5 | 10 | 0 | 138 | 53 | 467 |
 | places (moon, mars, observatory, launch_road, power, dimensions) | 20 | 0 | 0 | 7 | 0 | 32 | n/a | n/a |
 
-Other quest chapters: welcome 16, storage 21, applied_energistics 19, productive_bees 12, travel_and_teams 16, workshop 17, power 116, multiblocks 364 (659 in all). Totals registered: 1,722 items (1,599 `grindless:` in the dump), 184 fluids, 427 machines (288 multiblock, 133 custom, 5 simple, 1 generator); 288 structures, 353 recipe types, 1,794 machine ids, 66 veins, 8 fluid veins.
+Other quest chapters: welcome 16, storage 21, applied_energistics 19, travel_and_teams 16, workshop 17, power 116, multiblocks 364 (647 in all). Totals registered: 1,722 items (1,599 `grindless:` in the dump), 184 fluids, 427 machines (288 multiblock, 133 custom, 5 simple, 1 generator); 288 structures, 353 recipe types, 1,794 machine ids, 66 veins, 8 fluid veins.
 
 What the table says: items and fluids grow steeply from UV (about 100 to 260 per era) while recipes per era stay flat (about 140 to 400): content is wide, recipes are not deep. Multiblock registrations peak at UV/UHV (32) and fall to 10 at MAX. Age-chapter quests are flat (33 to 58 per era, no growth); line quests do grow (63 at steam to 467 at MAX) but are mechanical (see 5).
 

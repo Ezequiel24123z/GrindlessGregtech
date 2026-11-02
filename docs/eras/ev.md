@@ -344,7 +344,7 @@ New rules in `tools/analysis/tiers/ev.json`:
 
 - **Titanium only from the Moon.** Nothing outside the lunar chain yields Ilmenite, Rutile, TiCl₄ or Titanium. Leaks to cut: the Ilmenite from `bauxite_vein_end` (it stays in v0.4.1 and is removed when the Moon arrives) and the Rutile from `bauxite_sludge_centrifuge` (decided), the ore byproducts of bauxite (Rutile) and of Aluminium (Ilmenite, Rutile), and a new one, the Ilmenite (5.75%) from `metal_mixture_separation`. No other GTM ore yields them (checked). The Titanium from naquadah (Venus, IV) does not break the rule: it comes later and is not from Earth.
 - **Tungsten only from Mars.** Scheelite and Tungstate, only in `veins_mars.json`: the End vein (decided) and GCYR's Venus vein are removed. No GTM ore yields Tungsten as a byproduct (checked); review GT-- and GTCA.
-- **Helium-3 from the Moon; Samarium and Deuterium from Mars.** Removed from Earth: `helium_separation` and the He-3 from Nether air (with HV's Moon). On 2026-10-25 also the Samarium (above) and the Deuterium: `hydrogen_separation` is removed, and both ender air recipes (the HV centrifuge and the IV distillation) lose their deuterium. Tungsten from bees only comes out on Mars (`offworld_only.json` `worlds.mars.combs`).
+- **Helium-3 from the Moon; Samarium and Deuterium from Mars.** Removed from Earth: `helium_separation` and the He-3 from Nether air (with HV's Moon). On 2026-10-25 also the Samarium (above) and the Deuterium: `hydrogen_separation` is removed, and both ender air recipes (the HV centrifuge and the IV distillation) lose their deuterium.
   - **Verified on the v0.5.4 + wave B dump:** only tritium separation and fusion (LuV) use deuterium, so nothing has a source until IV's heavy water from the Martian ice. Tungsten from GTCA's thermal reactor (grossular froth, 30,720 EU/t) is a LuV line (`allowedLate`); alloy decompositions only give back what went in.
   - `gg_test_moon.js` now scans for each world: `earth_mars` and `bees_mars`.
 - **Nothing in EV requires anything from IV.** No Tungsten before Mars (the tier 2 rocket, the suit, the tripod and its bit, the antenna and the Martian half go without it), no radioactives or Quantum Eyes (EV sensors, emitters and field generator stay in IV; the EV creature simulator, the antenna and GTM's EV circuit assembler, which the nano circuits of the gate need, take HV ones), no IV circuits, no naquadah, Iridium or Osmium.
@@ -352,7 +352,6 @@ New rules in `tools/analysis/tiers/ev.json`:
     - GTM's thorium ore (the Nether's beryllium vein) gave uraninite, which opened uranium, radon and the quantum eye from LV on. It now gives lead and rare earth (`offworld_only.json`, "byproducts").
     - Liquid ender air (IV voltage, which two EV hatches reach) loses its radon along with its deuterium.
     - GTM's red granite loses its 0.25% uranium dust in the macerator.
-    - Productive Bees' IV combs (radioactive, osmium, naquadah) get no recipe until IV: two EV hatches run any 7,680 EU/t recipe, and two of those bees breed from Earth bees.
     - The other ores with a uraninite byproduct (uraninite, pitchblende, plutonium) are radioactive themselves and held back until IV.
 - **EV in two substages.** The validator splits the era into *Moon* and *Mars*: nothing on the way to Mars can require Tungsten, Samarium or Deuterium.
 - **Site machines.** Every recipe for the cell, the cryogenic plant, the solar array, the antenna and the lunar veins carries `.dimension('gcyr:luna')`; those for the processor and the Martian veins carry `.dimension('gcyr:mars')`. The fuel recipes carry the five air dimensions (ORed; the validator ORs them too since 2026-10-25, `lib/model.mjs`).
@@ -365,7 +364,7 @@ New rules in `tools/analysis/tiers/ev.json`:
     - every fuel (4,094 recipes, B7's included) in the five air dimensions. Seven self-oxidized or lava fuels run anywhere.
   - Gate to IV: the IV hull, nano computer, RTM coil, IV motor and IV pump. EV energy is sustained by the solar array alone and by the combined-cycle plant alone.
   - In IV, not EV: GTM's EV emitter, sensor, field generator, laser engraver and scanner, the large miner, and GTM's HV field generator and world accelerator (quantum eye). In `ev-mars`: the HV fluid drilling rig (tungsten carbide).
-  - Not modeled in the tiers: Productive Bees (the obtain audit sees its combs and bees) and Leisure's universal factories. An IV-voltage recipe (7,680 EU/t) is EV content wherever a multiblock with two EV hatches can run its type: that's how the IV combs were found.
+  - Not modeled in the tiers: Leisure's universal factories. An IV-voltage recipe (7,680 EU/t) is EV content wherever a multiblock with two EV hatches can run its type.
   - Final dump `c1-ev-validator-4`, gate / auto / eras:
 
     | Tier | Gate | Auto | Eras |

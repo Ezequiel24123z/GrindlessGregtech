@@ -35,7 +35,6 @@ Counts are from `node tools/quests/lint.mjs` on the VM at `7f0e8473` (run `exec-
 |---|---|---:|---:|---|
 | `storage` | hand | 21 | 21 | Chests, backpacks, drawers, Sophisticated, ender chests and tanks, drums and crates |
 | `applied_energistics` | hand | 19 | 19 | From LV's *ME Network Access*: powering the network, wireless terminals, GT's ME hatches, the addons |
-| `productive_bees` | hand | 12 | 14 | Bees and their combs |
 | `travel_and_teams` | hand | 16 | 15 | Hang glider, waystones and scrolls; teams, homes, claims, chunk loading |
 | `workshop` | hand | 17 | 16 | Building aids, logistics mods, GT aids |
 | `power` | gen `processing-lines/power-data.mjs` | 116 | 127 | Generation, fuels, storage and the wireless network, Steam to LuV; one Dyson peek row; nothing for ZPM and later |

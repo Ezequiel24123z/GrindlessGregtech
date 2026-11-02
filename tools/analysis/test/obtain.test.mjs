@@ -1,4 +1,4 @@
-// Obtain audit (--pass obtain, lib/obtain.mjs): world sources, machines of any tier, bees, groups by
+// Obtain audit (--pass obtain, lib/obtain.mjs): world sources, machines of any tier, groups by
 // material, A/B/C classification, hints, reports and the CLI. A mini pack with everything the audit tells apart.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,13 +12,7 @@ import { itemKey, nbtType, parseItemIngredient } from '../lib/normalize.mjs';
 import { loadTierConfig } from '../lib/config.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const COMB = 'productivebees:configurable_honeycomb';
-const EGG = 'productivebees:spawn_egg_configurable_bee';
-/** GT input/output with NBT (Productive Bees' honeycombs and eggs); the NBT goes as text, same as in the dump. */
-const gnbt = (item, nbt, count = 1) => ({
-  content: { type: 'gtceu:sized', count, ingredient: { type: 'forge:nbt', item, nbt } }, chance: 10000, maxChance: 10000, tierChanceBoost: 0,
-});
-const bee = (id, type, json) => ({ id, type, json: { type, ...json } });
+const COMB = 'test:typed_item';
 const machine = (id, tier, types, mb = false) => ({ id, tier, types, ...(mb ? { mb: 1 } : {}) });
 const stick = { S: { item: 'minecraft:stick' } };
 
@@ -38,6 +32,8 @@ function pack({ drillRecipe = true, extraRecipes = [], classes, tagsItem = {}, t
     gt('t:mac_hot', 'gtceu:macerator', { ins: [gi('gtceu:alpha_dust')], outs: [gi('gtceu:hot_dust')], eut: 600 }),
     gt('t:big', 'gtceu:big_smelting', { ins: [gi('gtceu:alpha_dust')], outs: [gi('gtceu:big_dust')], eut: 100000 }),
     gt('t:lost', 'gtceu:lost_type', { ins: [gi('gtceu:alpha_dust')], outs: [gi('gtceu:omega_dust')] }),
+    gt('t:lost_eps', 'gtceu:lost_type', { ins: [gi('gtceu:alpha_dust')], outs: [gi('gtceu:epsilon_dust')] }),
+    gt('t:iota', 'gtceu:mixer', { ins: [gi('gtceu:epsilon_dust')], outs: [gi('gtceu:iota_dust')] }),
     // perlite: only packs itself; its electrolysis gives obsidian dust (which also comes from grinding obsidian)
     shaped('t:perlite_pack', ['SSS', 'SSS', 'SSS'], { S: { item: 'gtceu:small_perlite_dust' } }, 'gtceu:perlite_dust'),
     shaped('t:perlite_unpack', ['P'], { P: { item: 'gtceu:perlite_dust' } }, 'gtceu:small_perlite_dust', 4),
@@ -47,23 +43,11 @@ function pack({ drillRecipe = true, extraRecipes = [], classes, tagsItem = {}, t
     // dimensions: the Nether is reachable; the Moon is in a later era
     gt('t:air_nether', 'gtceu:gas_collector', { fouts: [gf('gtceu:nether_air')], conditions: [{ type: 'dimension', dimension: 'minecraft:the_nether' }] }),
     gt('t:air_moon', 'gtceu:gas_collector', { fouts: [gf('gtceu:moon_air')], conditions: [{ type: 'dimension', dimension: 'gcyr:luna' }] }),
-    // bees: iron comes from converting the vanilla bee; its egg + iron gives the gold egg (incubator and back)
-    bee('t:conv_iron', 'productivebees:bee_conversion', { source: 'minecraft:bee', result: 'productivebees:iron', item: { item: 'minecraft:iron_block' } }),
-    bee('t:hive_iron', 'productivebees:advanced_beehive', { ingredient: 'productivebees:iron', results: [{ item: { type: 'forge:nbt', item: COMB, nbt: { EntityTag: { type: 'productivebees:iron' } } } }] }),
-    bee('t:hive_gold', 'productivebees:advanced_beehive', { ingredient: 'productivebees:gold', results: [{ item: { item: COMB } }] }),
-    bee('t:hive_naq', 'productivebees:advanced_beehive', { ingredient: 'productivebees:naq', results: [{ item: { type: 'forge:nbt', item: COMB, nbt: { EntityTag: { type: 'productivebees:naq' } } } }] }),
-    gt('t:egg_gold', 'gtceu:chemical_reactor', { ins: [gnbt(EGG, '{"EntityTag": {"type": "productivebees:iron"}}'), gi('minecraft:iron_block')], outs: [gnbt(EGG, '{"EntityTag": {"type": "productivebees:gold"}}')] }),
-    gt('t:comb_iron', 'gtceu:centrifuge', { ins: [gnbt(COMB, '{EntityTag:{type:"productivebees:iron"}}')], outs: [gi('gtceu:delta_dust')] }),
-    gt('t:comb_gold', 'gtceu:centrifuge', { ins: [gnbt(COMB, '{EntityTag:{type:"productivebees:gold"}}')], outs: [gi('gtceu:zeta_dust')] }),
-    gt('t:comb_naq', 'gtceu:centrifuge', { ins: [gnbt(COMB, '{EntityTag:{type:"productivebees:naq"}}')], outs: [gi('gtceu:epsilon_dust')] }),
-    gt('t:iota', 'gtceu:mixer', { ins: [gi('gtceu:epsilon_dust')], outs: [gi('gtceu:iota_dust')] }),
-    // an egg with no NBT isn't a world fact (notFree)
-    gt('t:eta', 'gtceu:chemical_reactor', { ins: [gi(EGG)], outs: [gi('gtceu:eta_dust')] }),
     ...extraRecipes,
   ];
   const items = [
-    'minecraft:stick', 'minecraft:obsidian', 'minecraft:iron_block', 'minecraft:egg', 'minecraft:bucket', 'productivebees:wax', COMB,
-    'productivebees:configurable_comb', EGG, 'gtceu:raw_beta', 'gtceu:raw_gamma', 'gtceu:raw_theta', 'gtceu:lost_machine',
+    'minecraft:stick', 'minecraft:obsidian', 'minecraft:iron_block', 'minecraft:egg',     'minecraft:bucket', COMB,
+        'gtceu:raw_beta', 'gtceu:raw_gamma', 'gtceu:raw_theta', 'gtceu:lost_machine',
     'gtceu:industrial_alpha_casing', 'gtceu:oil_bucket', 'gtceu:salt_water_bucket', 'gtceu:creative_tank', 'grindless:vein_sample_b',
     'gtceu:stone_alpha_ore', ...(extra.items || []),
   ];
@@ -135,15 +119,6 @@ test('obtain: registry machines capped at their tier; multiblocks uncapped; no c
   assert.ok(nv.has('gtceu:hot_dust'), '600 EU/t doesn\'t fit in an LV machine');
   assert.ok(!nv.has('gtceu:big_dust'), 'the multiblock runs any EU/t');
   assert.ok(nv.has('gtceu:omega_dust') && nv.has('gtceu:lost_machine'), 'a machine type with no recipe doesn\'t run');
-});
-
-test('obtain: bees (conversion, hive with a honeycomb per type, incubator egg) and eggs that aren\'t facts', () => {
-  const res = runObtain(pack().dump, pack().cfg, { unlocks: false });
-  const nv = never(res);
-  assert.ok(!nv.has('gtceu:delta_dust'), 'iron honeycomb: bee converted from vanilla');
-  assert.ok(!nv.has('gtceu:zeta_dust'), 'gold honeycomb: iron egg (incubator) -> gold egg -> bee -> honeycomb');
-  assert.ok(nv.has('gtceu:epsilon_dust'), 'the naq bee has no source: its honeycomb doesn\'t come out');
-  assert.ok(nv.has('gtceu:eta_dust'), 'a generation egg isn\'t a world fact');
 });
 
 test('obtain: groups by material (combined forms, standalone machines and parts, loose forms)', () => {
@@ -400,9 +375,9 @@ test('obtain: the reachable Moon with its drill (requireRecipe in a list) and a 
 });
 
 test('normalize: NBT by type (object, SNBT, JSON) only for the listed items', () => {
-  assert.equal(nbtType({ EntityTag: { type: 'productivebees:iron' } }), 'productivebees:iron');
-  assert.equal(nbtType('{EntityTag:{type:"productivebees:iron"}}'), 'productivebees:iron');
-  assert.equal(nbtType('{"EntityTag": {"type": "productivebees:iron"}}'), 'productivebees:iron');
+  assert.equal(nbtType({ EntityTag: { type: 'x:iron' } }), 'x:iron');
+  assert.equal(nbtType('{EntityTag:{type:"x:iron"}}'), 'x:iron');
+  assert.equal(nbtType('{"EntityTag": {"type": "x:iron"}}'), 'x:iron');
   const typed = new Set([COMB]);
   assert.equal(itemKey(COMB, { EntityTag: { type: 'x:y' } }, typed), `${COMB}#x:y`);
   assert.equal(itemKey(COMB, { EntityTag: { type: 'x:y' } }, null), COMB, 'without the list, as always');
