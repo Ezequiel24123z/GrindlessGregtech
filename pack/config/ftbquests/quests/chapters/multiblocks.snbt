@@ -3730,6 +3730,17 @@
 			y: 73.0d
 		}
 		{
+			icon: "gtnn:neutron_activator"
+			id: "2445731692C89B49"
+			rewards: [{ id: "2343350B51AD3894", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.25d
+			subtitle: "UIV, GT--"
+			tasks: [{ id: "7E933A4932485653", item: "gtnn:neutron_activator", type: "item" }]
+			x: 24.0d
+			y: 73.0d
+		}
+		{
 			icon: "gtceu:uxv_machine_hull"
 			id: "303257B615D51E10"
 			shape: "rsquare"
