@@ -192,7 +192,7 @@ Format as in max.md, shortened: gains, recipes, byproducts, structure, crossings
 
 ### 2. Bound-matter press (Sgr A\* orbit)
 
-**Gains.** GTNH's superdense plates come from a black-hole containment field; ours come from the only place with a stationary horizon: condensate-bound ingots pressed under the shell's field. Only source of `horizon_compressed_plate` (10,000-20,000 needed). **Recipes.** c1 bound neutronium → plate (P2); c2 strange plate (P3); c3 containment core (T1); c4 graded laminate (T4); V[MAX] x 16 A, 1,200 t. **Byproducts.** Press flash → c1 feed. **Structure.** 13 x 13 x 13 press of `grindless:bound_press_casing`. **Crossings.** P2, P3, T1, T4. **Risks.** Pack fiction; GTNH is ideas only. **Source.** docs/research/gtnh-stargate.md 3.3 (the role, not the numbers).
+**Gains.** GTNH's superdense plates come from a black-hole containment field; ours come from the only place with a stationary horizon: condensate-bound ingots pressed under the shell's field. Only source of `horizon_compressed_plate` (about 157,000 needed through the whole tree; the plate also serves as the non-consumed die of the core and laminate rows). **Recipes.** c1 bound neutronium → plate (P2); c2 strange plate (P3); c3 containment core (T1); c4 graded laminate (T4); V[MAX] x 16 A, 1,200 t. **Byproducts.** Press flash → c1 feed. **Structure.** 13 x 13 x 13 press of `grindless:bound_press_casing`. **Crossings.** P2, P3, T1, T4. **Risks.** Pack fiction; GTNH is ideas only. **Source.** docs/research/gtnh-stargate.md 3.3 (the role, not the numbers).
 
 ### 3. Hills slingshot (Sgr A\* orbit)
 
@@ -438,7 +438,7 @@ Recomputed from the *Lines* table by machine name (RF-7A; the integrator re-sums
 | Item | Count | Target (about 10x GTNH) |
 |---|---|---|
 | Horizon frame part | 13,440 (ring 528 x 20 + upgrades 360 x 8) | 10,000-14,000 |
-| Horizon compressed plate | 15,744 (upgrades 8,640 + ring 4,224 + iris blades 2,880) | 10,000-20,000 |
+| Horizon compressed plate | about 157,000 counted through the whole tree (grid rows 15,744: upgrades 8,640 + ring 4,224 + iris blades 2,880; plus chevron cores 12 each, conduits 1 and valve bodies 1 each; the press and loom dies for cores, laminate, containment plates and shielding are not consumed) | about 157,000 (10x GTNH's 15.7k; owner, 2026-11-02) |
 | MAX+ field generator | 4,192 | 4,000-4,500 |
 | Horizon containment plate | about 6,000 | about 6,000 (GTNH 601) |
 | Horizon processor (direct, through parts) | about 155,000 (8 per frame part, 8 per plate) | 100,000-200,000 |
