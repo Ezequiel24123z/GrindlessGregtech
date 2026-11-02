@@ -190,7 +190,7 @@ Draw-Overlay-Section 'Steam Vein Drill (controller face)' 'steam_vein_drill'
 Draw-Overlay-Section 'Steam Greenhouse (controller face)' 'steam_greenhouse'
 
 # ---------------------------------------------------------------- items
-$itemNames = @('bronze_drill_bit', 'steel_drill_bit', 'empty_vein_probe', 'void_key', 'flat_key')
+$itemNames = @('bronze_drill_bit', 'steel_drill_bit', 'empty_vein_probe', 'void_key', 'flat_key', 'iron_sinter', 'pig_iron')
 Draw-Label 'Items  -  item/*.png   (x8 on dark | 2x and 1x on a vanilla slot)' $margin $y $true
 $y += $labelH + 4
 $x = $margin

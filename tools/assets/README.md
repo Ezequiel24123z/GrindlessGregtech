@@ -155,6 +155,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamPrev
 | `item/vein_sample_frame.png` | Layer 0, no tint: the same probe with a transparent interior. |
 | `item/vein_sample_core.png` | Layer 1, grays only, so the game tints it with the color of each vein. It does not overwrite any pixel of layer 0. |
 | `item/void_key.png`, `item/flat_key.png` | Void Key (dark metal, star-shaped bit) and Flat Key (bit with layers of grass, dirt and stone). |
+| `item/iron_sinter.png`, `item/pig_iron.png` | The ironworks line of the Steam Blast Furnace (`-Only ironworks`): a porous clinkered lump of sinter (brown ramp with coke specks) and a cast pig of iron (gray-blue ramp, rough top, sand-mould nubs underneath). |
 
 The overlays follow GTM's casing convention: transparent background, details only on the overlay, `_active` animated as a vertical strip and `_emissive` with only the pixels that glow. If `overlay_front_paused` is missing, GTM uses `overlay_front`.
 
