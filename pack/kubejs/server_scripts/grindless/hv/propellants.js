@@ -4,6 +4,9 @@
 //   Hydrogen peroxide comes only from the anthraquinone cycle in GT--'s chemical plant (EAQ -> EAHQ -> H2O2, then hydrazine):
 //   GTM's two direct reactors for it are removed. Unsymmetrical dimethylhydrazine (UDMH) comes only from dimethylamine +
 //   monochloramine: the methanol route is removed. Rocket fuel is mixed only from Aerozine 50 and dinitrogen tetroxide.
+//   GT--'s plant runs a recipe only up to the tier of its machine casings, and sits idle with no failure reason above it: the 480 EU/t
+//   peroxide and hydrazine stages need HV machine casings, not the MV ones its aluminium preview draws (the plant's tooltip says so:
+//   client_scripts/grindless/hv_propellants_lang.js; gg_test_hv_propellants runs the cycle on that HV build).
 //
 //   removed (reactor and large reactor)   chemical_reactor/hydrogen_peroxide, chemical_reactor/dimethylhydrazine_from_methanol
 //   removed (mixer)                       mixer/rocket_fuel_from_oxygen, mixer/rocket_fuel_from_dinitrogen_tetroxide
