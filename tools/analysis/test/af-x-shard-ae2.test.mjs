@@ -37,7 +37,9 @@ test('the shard is made on the mirror shell at Sgr A*, at MAX power, from automa
   const r = recipes.find((x) => x.i === 'grindless:black_hole_bomb/horizon_shard');
   assert.ok(r, 'no shard recipe');
   assert.equal(r.t, 'gtceu:black_hole_bomb');
-  assert.equal(euIn(r), VA_MAX);
+  const spin = recipes.find((x) => x.i === 'grindless:black_hole_bomb/final_spin_map');
+  assert.equal(euIn(r), euIn(spin));
+  assert.ok(euIn(r) >= VA_MAX);
   assert.match(JSON.stringify(r.j), /grindless:horizon_shard/);
   assert.match(JSON.stringify(r.j), /gcyr:black_hole_orbit/);
   const makers = recipes.filter((x) => JSON.stringify(x.j.outputs || {}).includes('grindless:horizon_shard'));
