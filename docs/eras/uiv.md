@@ -907,7 +907,7 @@ In English, each with a proportionate reward that never skips a production line.
   - it is at `uiv`;
   - GT--'s own recipe for it stays removed.
 - **The Mk5's plasmas only from the Mk5. The Mk5, its DEC rows, the Penrose engine and the decay heat vault are written final and not in `power/generators.js`'s list.**
-- **Place-only items** as in *Only from there*: crust, drip neutrons, neutronium pellets, r-process mix and capsules from RX J1856 orbit; pair plasma, positronium, the gamma cavity, profiles and the navigation solution from PSR J0437 orbit; Kerr data and half-sleds from Cygnus X-1 orbit; Matrioshka writes from Mercury orbit. The EOS and Kerr charts are Mercury products held to the substage of their inputs (`uiv-j0437`, `uiv-cygnus`).
+- **Place-only items** as in *Only from there*: only the crust lift needs RX J1856 orbit (drip neutrons, pellets, the r-process mix and capsules are made anywhere); pair plasma, the gamma cavity and profiles from PSR J0437 orbit (positronium and the navigation solution are made anywhere); Kerr data and half-sleds from Cygnus X-1 orbit; Matrioshka writes from Mercury orbit (TPV tiles and radiator modules are made anywhere). The EOS and Kerr charts are Mercury products held to the substage of their inputs (`uiv-j0437`, `uiv-cygnus`).
 - **Four substages:**
   - `uiv` (Earth and Mercury orbit);
   - `uiv-rxj1856` and `uiv-j0437` (in parallel, after the first jump);
