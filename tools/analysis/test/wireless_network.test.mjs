@@ -1755,7 +1755,7 @@ test('wireless per team: the teams helper maps players, UUIDs and machines to te
       getTeamForPlayer: (p) => optional(teamOf[p.getUUID()] || null),
       getTeamForPlayerID: (u) => optional(teamOf[u] || null),
     }) }) },
-    'net.minecraftforge.common.util.FakePlayer': { class: { isInstance: (p) => !!p.fake } },
+    'net.minecraftforge.common.util.FakePlayer': { [Symbol.hasInstance]: (p) => !!p.fake },
     'dev.ftb.mods.ftbchunks.api.FTBChunksAPI': { api: () => ({ isManagerLoaded: () => true, getManager: () => ({
       getChunk: (c) => (c.pos.x === 1 ? { getTeamData: () => ({ getTeam: () => ({ getId: () => 'claimer' }) }) } : null),
       shouldPreventInteraction: (p) => p.getUUID() === 'uuid-x',

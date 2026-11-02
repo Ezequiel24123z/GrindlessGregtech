@@ -696,7 +696,7 @@ function jvm({ server = true, fixture = true } = {}) {
     'net.minecraft.world.item.ItemStack': { EMPTY },
     'net.minecraft.core.registries.BuiltInRegistries': { BLOCK: { getKey: (b) => b.id, containsKey: (rl) => sim.blockIds.has(rl.id) } },
     'net.minecraftforge.common.util.FakePlayerFactory': { getMinecraft: (level) => sim.fakePlayer(level) },
-    'net.minecraftforge.common.util.FakePlayer': { class: { isInstance: () => true } },
+    'net.minecraftforge.common.util.FakePlayer': { [Symbol.hasInstance]: () => true },
     'dev.ftb.mods.ftbteams.api.FTBTeamsAPI': { api: () => ({ isManagerLoaded: () => false }) },
     'dev.ftb.mods.ftbchunks.api.FTBChunksAPI': { api: () => ({ isManagerLoaded: () => false }) },
     'net.minecraftforge.common.ForgeHooks': { onRightClickBlock: (fp, hand, pos, hit) => sim.click(fp, hand, pos, hit) },

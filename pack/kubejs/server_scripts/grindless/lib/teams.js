@@ -63,17 +63,22 @@
   // a fake player (a machine, a script, a mod's automation) acts for nobody, so it has no team of its own
   function isFake(player) {
     try {
-      return Java.loadClass('net.minecraftforge.common.util.FakePlayer').class.isInstance(player)
+      return player instanceof Java.loadClass('net.minecraftforge.common.util.FakePlayer')
     } catch (e) {
       warnOnce('fake player check failed', e)
       return false
     }
   }
 
+  // KubeJS names the getter getUuid; the plain Java name is the fallback
+  function uuidOfPlayer(player) {
+    return typeof player.getUuid === 'function' ? player.getUuid() : player.getUUID()
+  }
+
   // the team of a player, or SERVER for a fake player and for none
   function ofPlayer(player) {
     if (player === null || player === undefined) return SERVER
-    if (injected && injected.teamOfPlayer) return injected.teamOfPlayer(player) || text(player.getUUID())
+    if (injected && injected.teamOfPlayer) return injected.teamOfPlayer(player) || text(uuidOfPlayer(player))
     if (isFake(player)) return SERVER
     var tm = teamManager()
     var id = null
@@ -84,7 +89,7 @@
         warnOnce('team lookup by player failed', e)
       }
     }
-    return id || text(player.getUUID())
+    return id || text(uuidOfPlayer(player))
   }
 
   // the team of the player GTM recorded as a machine's owner when it was placed, or SERVER when it has none
