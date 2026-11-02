@@ -304,7 +304,8 @@
     check('mars_pair_recipes', problems.length === 0, (problems.length > 0 ? 'problems: ' + problems.join('; ') + ' | ' : '') + detail)
   }
 
-  // the base makes the lunar half with the HV recipe: nothing in it asks for a player, only the Moon, at HV power
+  // the base makes the lunar half with the HV recipe: nothing in it asks for a player or a place (SITE-A, 2026-11-02: the seed is made
+  // anywhere from shipped regolith), at HV power
   function checkLunarSeedByBase() {
     var AI = ids()
     var seed = byId(AI.recipes.lunarSeed)
@@ -314,10 +315,10 @@
     }
     var c = conditionsOf(seed)
     var eut = eutOf(seed)
-    var ok = c.kinds.length === 1 && c.dims.length === 1 && c.dims[0].dim === LUNA && !c.dims[0].reverse && eut <= 512
+    var ok = c.kinds.length === 0 && c.dims.length === 0 && eut <= 512
     var t = gtText(seed)
     check('lunar_seed_by_base', ok, AI.recipes.lunarSeed + ': ' + t.inItems + ' + ' + t.inFluids + ', ' + eut + ' EU/t, conditions ' + c.kinds.join(',') +
-      ' ' + JSON.stringify(c.dims) + ' (any chemical reactor on the Moon fed by the network runs it)')
+      ' ' + JSON.stringify(c.dims) + ' (want none: any chemical reactor fed by the network runs it, the base included)')
     var large = byId('grindless:large_chemical_reactor/lunar_quantum_seed')
     note('lunar_seed_large_reactor', large !== null ? 'GTM also copied it to the large chemical reactor (grindless:large_chemical_reactor/lunar_quantum_seed)' :
       'no large chemical reactor copy: the base uses a single chemical reactor')
