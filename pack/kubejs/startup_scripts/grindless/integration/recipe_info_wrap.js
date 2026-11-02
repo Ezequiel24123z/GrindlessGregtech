@@ -142,7 +142,9 @@ global.ggInfoFit = function (recipeManager) {
     var before = size.height
     var cut = 0
     groups.forEach(function (g, gi) { cut += g.cap - need[gi] })
-    size.height = before - cut * 10 + (withMarker ? 30 : 0)
+    var heightField = size.getClass().getDeclaredField('height')
+    heightField.setAccessible(true)
+    heightField.setInt(size, before - cut * 10 + (withMarker ? 30 : 0))
     fitted++
     console.info('[grindless/integration] info box ' + id + ': ' + before + ' -> ' + type.getRecipeUI().getJEISize().height + ' (lines ' + need.join('/') + (withMarker ? ', marker' : '') + ')')
   })
