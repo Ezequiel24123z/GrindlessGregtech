@@ -124,6 +124,7 @@
   POWER.siteTable = SITE_TABLE
   POWER.burnsInAir = function (builder) {
     SITE.airDimensions.forEach(function (d) { builder.dimension(d) })
+    builder.addData('grindless_air', 1)
     return builder
   }
 
@@ -204,6 +205,7 @@
       else { var str = String(data[k]); calls.push(function (b) { b.addDataString(k, str) }) }
     })
     ;(dims || []).forEach(function (d) { calls.push(function (b) { b.dimension(d) }) })
+    if ((dims || []).length > 0) calls.push(function (b) { b.addData('grindless_air', 1) })
     // a generator recipe stores its output as a positive tickOutputs.eu; the builder takes EU/t signed (negative = output)
     return { calls: calls, eu: -eu, duration: json.duration * FACTOR }
   }
@@ -250,6 +252,8 @@
       }
       try {
         SITE.airDimensions.forEach(function (d) { r.dimension(d) })
+        // display only (the "needs air" EMI line); the recipe works without it
+        try { if (!r.json.has('data')) r.json.add('data', JsonIO.toObject({ grindless_air: 1 })) } catch (e3) { /* line missing in EMI only */ }
         n++
       } catch (e2) {
         site.failed.push(id + ' (' + e2 + ')')
