@@ -154,18 +154,19 @@
     return m ? m[1] : 'north'
   }
 
-  // the outward face of a cell on a side wall (edges, corners, top and bottom left alone), or null
+  // a horizontal face of a cell that opens to empty space in the preview (a side of the structure), or null
   function faceOf(cut, c) {
-    var inX = c.x >= 1 && c.x <= cut.w - 2
-    var inY = c.y >= 1 && c.y <= cut.h - 2
-    var inZ = c.z >= 1 && c.z <= cut.d - 2
-    if (inY && inZ && c.x === 0) return 'west'
-    if (inY && inZ && c.x === cut.w - 1) return 'east'
-    if (inY && inX && c.z === 0) return 'north'
-    if (inY && inX && c.z === cut.d - 1) return 'south'
+    if (!cut.occ) {
+      cut.occ = {}
+      cut.cells.forEach(function (o) { cut.occ[o.x + ',' + o.y + ',' + o.z] = true })
+    }
+    var sides = [['west', -1, 0], ['east', 1, 0], ['north', 0, -1], ['south', 0, 1]]
+    for (var i = 0; i < sides.length; i++) {
+      var s = sides[i]
+      if (!cut.occ[(c.x + s[1]) + ',' + c.y + ',' + (c.z + s[2])]) return s[0]
+    }
     return null
-  }
-  function keyOf(c) { return c.x + ',' + c.y + ',' + c.z }
+  }  function keyOf(c) { return c.x + ',' + c.y + ',' + c.z }
   function worldPos(c) { return pos(ORIGIN.x + c.x, ORIGIN.y + c.y, ORIGIN.z + c.z) }
   function putHatch(p, face) {
     command('setblock ' + p.getX() + ' ' + p.getY() + ' ' + p.getZ() + ' ' + IN_HATCH + '[facing=' + face + '] replace')
@@ -216,11 +217,11 @@
     var ids = {}
     var onWall = 0
     S.cut.cells.forEach(function (c) { ids[c.id] = (ids[c.id] || 0) + 1; if (faceOf(S.cut, c) !== null) onWall++ })
-    note('probe_cells', S.cut.cells.length + ' cells, ' + onWall + ' on a side wall; ' + JSON.stringify(ids).replace(/gtceu:|gtnn:/g, ''))
+    note('probe_cells', S.cut.cells.length + ' cells, ' + onWall + ' with an open side; ' + JSON.stringify(ids).replace(/gtceu:|gtnn:/g, ''))
     try { base = ctrl.checkPatternWithLock() === true } catch (e0) { base = false }
     S.cut.cells.forEach(function (c) {
       var face = faceOf(S.cut, c)
-      if (face === null || c === S.cut.ctrl) return
+      if (face === null || c === S.cut.ctrl || c.id.indexOf('casing') < 0) return
       var p = worldPos(c)
       putHatch(p, face)
       tried++
