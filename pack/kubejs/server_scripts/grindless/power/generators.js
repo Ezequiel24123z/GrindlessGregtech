@@ -361,7 +361,9 @@
     // M6-01: distilled water -> steam in an electric heater (30 EU/t x 30 t for 960 mB) was far cheaper than the steam
     // turbine's own electrical value (640 mB = 32 EU/t x 40 t after the doubling), a closed loop that made EU from
     // nothing. Steam comes from boilers; the electric route is gone.
+    // heat_water_to_steam (6 mB water -> 960 mB steam, 900 EU) is the same loop with free water: removed too.
     event.remove({ id: 'gtceu:fluid_heater/heat_distilled_to_steam' })
+    event.remove({ id: 'gtceu:fluid_heater/heat_water_to_steam' })
 
     POWER.generators = report
     POWER.siteReport = site

@@ -9,12 +9,16 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const src = fs.readFileSync(path.join(ROOT, 'pack/kubejs/server_scripts/grindless/power/generators.js'), 'utf8');
 
-test('the electric water -> steam heater recipe is removed', () => {
-  assert.match(src, /event\.remove\(\{ id: 'gtceu:fluid_heater\/heat_distilled_to_steam' \}\)/);
-});
+const HEATERS = [
+  ['gtceu:fluid_heater/heat_water_to_steam', 960, 30, 30],
+  ['gtceu:fluid_heater/heat_distilled_to_steam', 960, 30, 30],
+];
+const TURBINE_EU_PER_MB = (32 * 20 * 2) / 640; // best case: doubled duration, no efficiency loss
 
-test('the base figures would have looped (the reason for the removal)', () => {
-  const heaterEuPerMbSteam = (30 * 30) / 960;
-  const turbineEuPerMbSteam = (32 * 20 * 2) / 640;
-  assert.ok(turbineEuPerMbSteam > heaterEuPerMbSteam);
-});
+for (const [id, mb, eut, ticks] of HEATERS) {
+  test(id + ' costs less than the turbine returns, so it must be removed', () => {
+    assert.ok((eut * ticks) / mb < TURBINE_EU_PER_MB, 'the loop would gain EU');
+    const re = new RegExp("event\\.remove\\(\\{ id: '" + id.replace(/[/.]/g, '\\$&') + "' \\}\\)");
+    assert.match(src, re);
+  });
+}
