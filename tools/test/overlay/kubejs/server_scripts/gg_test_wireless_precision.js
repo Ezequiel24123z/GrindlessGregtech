@@ -1,4 +1,4 @@
-// priority: -10124
+// priority: -10274
 // Gregtech Grindless - AF-W: can the wireless adapter read a Java long above 2^53 exactly in this Rhino? (TEST-ONLY overlay.)
 // No world: the check calls the same Java methods the adapter reads (long getters) on known values.
 //
