@@ -179,6 +179,11 @@ export const QUESTS = [
   }, [SITE]),
 
   // ------------------------------------------------------------------ Cassiopeia A and the laser
+  {
+    key: 'H_UXV_KNOT', kind: 'reading', title: 'Ejecta Knots', icon: 'minecraft:writable_book', deps: ['JUMPC'], x: 0, y: 0,
+    desc: ['The jump to Cassiopeia A leads to the star\'s thrown-out core. Its clumps are what the sweeper below gathers.'],
+    tasks: [{ type: 'checkmark' }], rewards: [],
+  },
   gear('SWEEP', 'ejecta_knot_sweeper', 'Ejecta Knot Sweeper', ['M_L_KNOT'], 2, 20, {
     for: 'The star\'s core was thrown out in clumps still rich in what it made as it died. The &6Ejecta Knot Sweeper&r sweeps them up, behind a shield bow.',
     needs: 'A UIV hull, the Whipple shield casing and a filter collector.',

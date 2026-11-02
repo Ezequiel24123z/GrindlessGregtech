@@ -38,7 +38,7 @@ export const QUESTS = [
     key: 'LOOK', kind: 'reading', title: 'The Way In', icon: 'gtceu:opv_machine_casing',
     deps: ['START'], x: 2, y: 0,
     desc: [
-      'Three places lie ahead: a magnetar for chain matter, Cygnus X-1 for antimatter and the Kugelblitz, and a globular cluster for probes. The machine and circuit tabs hold the parts, and the integration tab holds the power.',
+      'Three places lie ahead: a magnetar for chain matter, Cygnus X-1 for the jet and a black hole's beam, and a globular cluster for probes. The machine and circuit tabs hold the parts, and the integration tab holds the power.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],

@@ -72,9 +72,9 @@ export const QUESTS = [
     deps: ['KCORE', 'I_ENGINE'], x: 2, y: 3,
     teach: {
       for: 'A black hole radiates as it shrinks. The &6Hawking Collector&r takes the power and leaves the shell, burning stable exotic matter or stellar plasma and wearing the core a little each run.',
-      needs: 'A Kugelblitz core and a place at Cygnus X-1, with OpV dynamo hatches. It works nowhere else.',
+      needs: 'A Kugelblitz core and OpV dynamo hatches.',
       unlocks: 'The strongest single source of the era, and the second leg of the gate\'s supply.',
-      automate: 'Exotic matter and plasma come from their own lines at Cygnus. The power rides the wireless network home.',
+      automate: 'Exotic matter and plasma come from their own lines. The power rides the wireless network home.',
     },
     desc: [
       'Evaporation is real physics. A black hole you can feed on demand is fiction.',
@@ -268,7 +268,7 @@ export const QUESTS = [
     deps: ['STACK'], x: 2, y: 25,
     teach: {
       for: 'The &6Antimatter Trap&r, &6Positron Accumulator&r, &6SRF Cavity Works&r, &6Nuclear Clock Lab&r, &6X-Ray Pulse Profiler&r, &6PBO Plant&r and &6Warp Gate&r each take a row: antiproton stacking, seed plasma, RRR niobium, a thorium lock, an XNAV calibration, chain braid and the three OpV gates.',
-      needs: 'The controllers you already own, and the cold antiprotons from Cygnus.',
+      needs: 'The controllers you already own, and the cold antiprotons.',
       unlocks: 'Stacks, the pathfinder, the chain cable and the gates to the places and to MAX.',
       automate: 'Stacks and cells ride the relay between sites.',
     },
