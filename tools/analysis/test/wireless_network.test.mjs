@@ -1,8 +1,8 @@
 // Static contracts of the wireless energy network's two libraries, no game needed:
 //   - server_scripts/grindless/lib/wireless_registry.js: the list of blocks as an NBT list of compounds. Run against stand-ins of
 //     Minecraft's CompoundTag / ListTag and a writer of NbtIo's binary format with DataOutput#writeUTF's 65,535-byte limit: the old single
-//     JSON string fails past ~700 covers, the list of compounds writes and reads back thousands; legacy strings are converted and kept;
-//     nothing unreadable is dropped.
+//     JSON string fails past ~700 covers, the list of compounds writes and reads back thousands; the pre-v1.0.0 single
+//     string is no longer converted (kept aside, never read); nothing unreadable is dropped.
 //   - server_scripts/grindless/lib/wireless_adapters.js: how EU moves into and out of a machine, picked by the energy container's exact
 //     class. Run against stand-ins that copy GTM 7.5.3's code: NotifiableEnergyContainer#changeEnergy, ElectricItem#charge/discharge,
 //     FeCompat#insertEu, and ChargerMachine / BatteryBufferMachine's EnergyBatteryTrait (item-backed getEnergyStored, the inherited
@@ -202,42 +202,19 @@ test('wireless registry: the old JSON string cannot be saved past ~700 covers; t
   assert.equal(JSON.stringify(back.list), JSON.stringify(list.concat([tower, hatch, dynamo].map(R.canon))));
 });
 
-test('wireless registry: a list in the old string format is converted once, and the string kept aside', () => {
-  const entries = [tower, hatch, cover(1)];
-  const pd = new CompoundTag();
-  pd.putString('grindless_wireless_blocks', JSON.stringify(entries));
-  const r = R.read(pd, 'grindless_wireless_blocks', 'grindless_wireless_blocks_legacy');
-  assert.equal(r.migrated, true);
-  assert.equal(r.backup, 'grindless_wireless_blocks_legacy');
-  assert.equal(pd.getString('grindless_wireless_blocks_legacy'), JSON.stringify(entries));
-  assert.equal(pd.getTagType('grindless_wireless_blocks'), 9);
-  assert.deepEqual(plain(r.list), plain(entries.map(R.canon)));
-  assert.match(r.notes.join(' '), /converted 3 entries/);
-  const again = R.read(pd, 'grindless_wireless_blocks', 'grindless_wireless_blocks_legacy');
-  assert.equal(again.migrated, false, 'converted only once');
-  assert.deepEqual(plain(again.list), plain(entries.map(R.canon)));
-});
-
-test('wireless registry: nothing unreadable is dropped (a bad JSON string, a bad entry, a stray tag)', () => {
-  // an unparseable old string: kept under the backup key (a second backup does not overwrite the first), the list starts empty
+test('wireless registry: nothing unreadable is dropped (a string under the key, a stray tag)', () => {
+  // a string under the key (the pre-v1.0.0 format is no longer converted): kept under the backup key (a second backup does not overwrite
+  // the first), the list starts empty
   const pd = new CompoundTag();
   pd.putString('grindless_wireless_blocks_legacy', 'an older backup');
-  pd.putString('grindless_wireless_blocks', '[{"k":"cover",');
+  pd.putString('grindless_wireless_blocks', JSON.stringify([cover(1)]));
   const r = R.read(pd, 'grindless_wireless_blocks', 'grindless_wireless_blocks_legacy');
   assert.equal(r.backup, 'grindless_wireless_blocks_legacy_2');
   assert.equal(pd.getString('grindless_wireless_blocks_legacy'), 'an older backup');
-  assert.equal(pd.getString('grindless_wireless_blocks_legacy_2'), '[{"k":"cover",');
+  assert.equal(pd.getString('grindless_wireless_blocks_legacy_2'), JSON.stringify([cover(1)]));
   assert.deepEqual(plain(r.list), []);
-  assert.match(r.notes.join(' '), /could not be parsed/);
-  // an old entry that is not valid stays, as a bad entry, and is written back
-  const pd2 = new CompoundTag();
-  pd2.putString('grindless_wireless_blocks', JSON.stringify([cover(1), { k: 'cover', d: 'x' }]));
-  const r2 = R.read(pd2, 'grindless_wireless_blocks', 'grindless_wireless_blocks_legacy');
-  assert.equal(r2.list.length, 2);
-  assert.ok(r2.list[1].bad);
-  const saved = R.write(r2.list);
-  assert.equal(saved.size(), 2);
-  assert.equal(saved.getCompound(1).getString('json'), JSON.stringify({ k: 'cover', d: 'x' }));
+  assert.match(r.notes.join(' '), /NBT type 8/);
+  assert.doesNotMatch(r.notes.join(' '), /converted/);
   // a compound that is not an entry stays as it was
   const odd = new CompoundTag();
   odd.putString('k', 'cover');
@@ -875,7 +852,8 @@ test('wireless settlement: a list past the old 64 KiB limit and a non-zero store
   assert.equal(fsh.filled, 1024, 'the lone hatch filled again, once');
   assert.equal(sh.energyContainer.getEnergyStored(), 1024);
   assert.equal(W2.stored(server2), saved.bank + W2.totals.in - W2.totals.out, 'the store balances: the saved store + in - out since the start');
-  assert.equal(W2.totals.settlements, 20);
+  // a list this long is a job of several ticks (W.slice entries each): a job that overruns its period delays the next, so fewer than 20 finish
+  assert.ok(W2.totals.settlements >= 5 && W2.totals.settlements <= 20, String(W2.totals.settlements));
   assert.equal(JSON.stringify(W2.tracked(server2)), json, 'nothing forgotten, nothing added');
   assert.deepEqual(plain(Object.keys(W2.faults)), []);
   assert.deepEqual(jvm2.errors, []);
@@ -1058,11 +1036,10 @@ test('the native wireless tests (adapters, then the restart\'s two phases) pass 
   if (process.env.GG_SHOW_SIM) console.log(all.join('\n'));
   assert.deepEqual(all.filter((l) => /\|(FAIL|ERROR)(\||$)/.test(l)), []);
   const passed = (scope, name) => all.some((l) => l.startsWith('GGTEST|' + scope + '|' + name + '|PASS'));
-  for (const name of ['LEGACY', 'PLACED', 'CLASSIFY', 'CHARGER_OLD_PATH', 'CHARGER_EMPTY', 'CHARGER_PARTIAL', 'CHARGER_NEAR_FULL', 'CHARGER_DISABLED',
+  for (const name of ['PLACED', 'CLASSIFY', 'CHARGER_OLD_PATH', 'CHARGER_EMPTY', 'CHARGER_PARTIAL', 'CHARGER_NEAR_FULL', 'CHARGER_DISABLED',
     'BUFFER_FILL', 'BUFFER_DRAIN', 'BANK']) assert.ok(passed('wireless_adapters', name), 'adapters ' + name);
   for (const name of ['PLACED', 'BEFORE', 'SYNTHETIC', 'SAVED', 'RESTORED', 'AUTOMATIC']) assert.ok(passed('wireless_restart', name), 'restart ' + name);
-  // the only errors logged: the legacy check's deliberate conversion
-  assert.ok(j1.errors.length > 0 && j1.errors.every((e) => /the list of wireless blocks/.test(e)), j1.errors.join(' / '));
+  assert.deepEqual(j1.errors, []);
   assert.deepEqual(j2.errors, []);
   // left clean: no machine in either band, no key of the network or the test, the force-loading released
   assert.equal(sim.levels['minecraft:overworld'].machines.size + sim.levels['gcyr:luna'].machines.size, 0);
@@ -1532,4 +1509,87 @@ test('LuV wireless: a 32-SMES-cell tower\'s capacity (past an int) and a store p
   assert.deepEqual([st.up, st.tier, st.capacity, st.towers], [true, LUV, 31457280000, 1]);
   assert.equal(j2.W.stored(server2), 30000000000);
   assert.deepEqual(j1.errors.concat(j2.errors), []);
+});
+
+// M8-13: the settlement is a job of W.slice entries per tick, not one walk of the whole list
+function bigNetwork(n, store = 1e9) {
+  const jv = jvm();
+  const w = world();
+  const server = serverOf(w);
+  assert.ok(jv.W.track(w.earth, new Pos(13316, 100, 20)));
+  const row = [];
+  for (let i = 0; i < n; i++) {
+    const m = i % 2 ? buffer(0) : charger(0);
+    const pos = new Pos(20000 + i, 100, 4);
+    w.earth.put(pos.x, 100, 4, i % 2 ? 'gtceu:lv_battery_buffer_4x' : 'gtceu:lv_charger_4x', m);
+    assert.equal(jv.W.placeCover(w.earth, pos, SIDE.up, item('grindless:lv_wireless_energy_cover'), null).ok, true);
+    row.push(m);
+  }
+  jv.W.setStored(server, store);
+  let reads = 0;
+  const gb = w.earth.getBlock.bind(w.earth);
+  w.earth.getBlock = (pos) => { reads++; return gb(pos); };
+  return { jv, w, server, row, reads: () => reads, reset: () => { reads = 0; } };
+}
+
+test('wireless settlement (M8-13): a large network is settled in slices of at most W.slice entries per tick, to the same result as one whole settlement', () => {
+  const N = 800;
+  const whole = bigNetwork(N);
+  whole.jv.W.paused = true;
+  whole.reset();
+  const st = whole.jv.W.settle(whole.server);
+  const wholeReads = whole.reads();
+  assert.ok(wholeReads >= N, 'the whole settlement reads every entry in one tick: ' + wholeReads);
+  whole.jv.W.paused = false;
+
+  const sliced = bigNetwork(N);
+  const W = sliced.jv.W;
+  assert.equal(W.slice, 400);
+  let max = 0;
+  let busy = 0;
+  for (let t = 1; t < W.settleTicks; t++) sliced.jv.run(sliced.server, 1);
+  for (let t = 0; t < W.settleTicks; t++) {
+    sliced.reset();
+    sliced.jv.run(sliced.server, 1);
+    const r = sliced.reads();
+    if (r) busy++;
+    max = Math.max(max, r);
+  }
+  assert.ok(busy > 1, 'the job spans several ticks: ' + busy);
+  assert.ok(max * 2 <= wholeReads + 2 * W.slice, 'the busiest tick (' + max + ' reads) is a fraction of the whole walk (' + wholeReads + ')');
+  assert.ok(max <= 2 * W.slice, 'at most about W.slice entries per tick: ' + max);
+
+  const sums = (x) => x.row.map(sum);
+  assert.deepEqual(sums(sliced), sums(whole), 'every item holds exactly what the whole settlement gave it');
+  assert.equal(W.stored(sliced.server), whole.jv.W.stored(whole.server), 'the store ends identical');
+  assert.ok(st.out > 0 && st.faulted === 0);
+  assert.deepEqual(sliced.jv.errors.concat(whole.jv.errors), []);
+});
+
+test('wireless settlement (M8-13 + M6-03): a short store is shared from the frozen opening budget across slices, as in one whole settlement', () => {
+  const N = 800;
+  const whole = bigNetwork(N, 3000);
+  whole.jv.W.paused = true;
+  whole.jv.W.settle(whole.server);
+  whole.jv.W.paused = false;
+  const sliced = bigNetwork(N, 3000);
+  const W = sliced.jv.W;
+  for (let t = 1; t < W.settleTicks; t++) sliced.jv.run(sliced.server, 1);
+  for (let t = 0; t < W.settleTicks; t++) sliced.jv.run(sliced.server, 1);
+  assert.deepEqual(sliced.row.map(sum), whole.row.map(sum), 'every item holds what the whole settlement gave it');
+  assert.equal(W.stored(sliced.server), whole.jv.W.stored(whole.server));
+  assert.deepEqual(sliced.jv.errors.concat(whole.jv.errors), []);
+});
+
+test('wireless settlement (M8-13): a cell swapped in place still sets the tier of the next job; a faulting machine is isolated', () => {
+  const n = bigNetwork(10);
+  const W = n.jv.W;
+  W.paused = true;
+  assert.equal(W.settle(n.server).tier, 1);
+  [101, 102, 103, 104].forEach((y) => n.w.earth.put(13316, y, 21, 'grindless:iv_capacitor_cell'));
+  assert.equal(W.settle(n.server).tier, 5, 'the strongest cell, swapped in place');
+  n.row[0].getChargerInventory = () => { throw new Error('boom'); };
+  const st = W.settle(n.server);
+  assert.ok(st.faulted >= 1, 'the broken machine is counted, not fatal');
+  assert.equal(st.up, true);
 });
