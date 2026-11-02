@@ -33,6 +33,7 @@ function parseArgs(argv) {
     else if (k === '--json') a.json = v();
     else if (k === '--max-nodes') a.maxNodes = Number(v());
     else if (k === '--explain') a.explain = v().split(',');
+    else if (k === '--verbose') a.verbose = true;
     else if (k === '--explain-out') a.explainOut = v();
     else if (k === '--assume-base') a.assumeBase = v().split(',');
     else if (k === '--as-base') a.asBase = v().split(',');
@@ -130,9 +131,9 @@ function main() {
       const ex = res.chain(k);
       lines.push(`== ${k}: ${rf(ex.total)} in the whole expansion`);
       ex.steps.forEach((s, i) => {
-        const pad = '  '.repeat(i);
+        const pad = String(i).padStart(2) + ' ';
         lines.push(`${pad}${s.key} q=${rf(s.q)} (x${rf(s.mult)} from ${s.via}) [${(100 * s.share).toFixed(1)}% of the total]${s.recipe ? ` runs=${rf(s.runs)} via ${s.recipe}` : ''}`);
-        if (s.recipe) lines.push(`${pad}  ${s.inputs.join(' + ')} -> ${s.outputs.join(' + ')}`);
+        if (s.recipe && args.verbose) lines.push(`${pad}  ${s.inputs.join(' + ')} -> ${s.outputs.join(' + ')}`);
       });
     }
     res.explain = lines;
