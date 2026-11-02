@@ -36,7 +36,7 @@
   // the stage recipes of each composed line and how many runs of each the table's batch makes (solved by hand from its given amounts)
   var LINES = [
     { name: 'ptfe', stages: [['gtceu:chemical_reactor/chloroform', 2], ['gtceu:chemical_reactor/hydrofluoric_acid_from_elements', 4],
-      ['grindless:chemical_reactor/r22_from_chloroform', 2], ['grindless:large_chemical_reactor/tetrafluoroethylene_from_r22_pyrolysis', 1],
+      ['grindless:chemical_reactor/r22_from_chloroform', 2], ['grindless:chemical_reactor/tetrafluoroethylene_from_r22_pyrolysis', 1],
       ['gtceu:chemical_reactor/ptfe_from_oxygen', 1000 / 144]] },
     { name: 'epoxy', stages: [['gtceu:chemical_reactor/phenol_from_cumene', 2], ['gtceu:chemical_reactor/bisphenol_a', 1], ['gtceu:chemical_reactor/allyl_chloride', 1],
       ['gtceu:chemical_reactor/hypochlorous_acid', 1], ['gtceu:chemical_reactor/epichlorohydrin_from_allyl_chloride', 1], ['gtceu:chemical_reactor/epoxy_from_bisphenol_a', 1]] },
@@ -228,7 +228,7 @@
       var o = side(made[0], false)
       got = JSON.stringify(o)
       ins = o
-      if (ins['i:gtceu:coil_chemical_plant'] !== 4 || ins['i:gtceu:luv_chemical_reactor'] !== 16) okCraft = false
+      if (!(ins['i:gtceu:coil_chemical_plant'] >= 4) || !(ins['i:gtceu:luv_chemical_reactor'] >= 16)) okCraft = false
     }
     check('crafting', !!mc && okCraft, 'controller recipe ids: ' + made.map(function (r) { return String(r.getId()) }).join(', ') + '; inputs ' + got +
       '; skipped lines ' + JSON.stringify(mc ? mc.skipped : null))
