@@ -24,5 +24,7 @@
     }
     event.forEachRecipe({ id: 'storagedrawers:iron_storage_upgrade' }, function (r) { swap(r, 'forge:ingots/iron', 'forge:plates/steel') })
     event.forEachRecipe({ id: 'storagedrawers:gold_storage_upgrade' }, function (r) { swap(r, 'forge:ingots/gold', 'forge:plates/aluminium') })
+    // its only input is #cofh_core:crafting/locks, a tag with no members in this mod set: an impossible recipe
+    event.remove({ id: 'storagedrawers:personal_key_cofh' })
   })
 })()

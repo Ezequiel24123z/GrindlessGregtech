@@ -41,6 +41,7 @@
     "gtceu:shaped/electric_pump_hv_styrene_butadiene_rubber",
     "gtceu:shaped/emitter_hv",
     "gtceu:shaped/field_generator_hv",
+    "gtceu:shaped/hv_machine_hull",
     "gtceu:shaped/robot_arm_hv",
     "gtceu:shaped/sensor_hv"
   ],

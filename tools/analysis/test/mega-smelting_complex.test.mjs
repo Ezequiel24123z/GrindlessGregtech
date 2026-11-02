@@ -193,8 +193,8 @@ test('composed lines equal the sum of their two stage recipes: black bronze with
 
   const check = (rec, sum) => {
     assert.ok(Math.abs(rec.sourceEnergy - sum) < 1e-3, `${rec.name} sourceEnergy ${rec.sourceEnergy} vs ${sum}`);
-    assert.ok(rec.eut > 0 && rec.eut <= 8192, rec.name);
-    assert.equal(rec.duration, Math.ceil(sum / 8192), rec.name);
+    assert.ok(rec.eut > 0 && rec.eut <= rec.floorEut, rec.name);
+    assert.equal(rec.duration, Math.ceil(sum / rec.floorEut), rec.name);
     assert.ok(rec.eut * rec.duration >= sum - 1e-6, rec.name);
     assert.ok(rec.eut * rec.duration - sum < rec.duration, rec.name);
     assert.equal(rec.recipeId, 'grindless:smelting_complex/' + rec.name);
@@ -252,6 +252,24 @@ test('composed lines equal the sum of their two stage recipes: black bronze with
   assert.ok(b.itemInputs.includes('1x gtceu:europium_dust'));
   assert.deepEqual(plain(built['grindless:blast_molded'].notConsumable), ['1x gtceu:ingot_casting_mold']);
   assert.deepEqual(plain(h.G.megaSmeltingComplex.clashes), [], 'gas and no-gas variants never clash');
+});
+
+test('a blast above IV runs at the furnace EU/t, never as a long IV recipe', () => {
+  const stages = {
+    ...STAGES,
+    'gtceu:electric_blast_furnace/blast_uv_alloy': ebf(9000, 8750, 7864320, { item: [tag('forge:dusts/uv_alloy', 1), circuit(1)] }, { item: [item('gtceu:hot_uv_alloy_ingot', 1)] }),
+    'gtceu:vacuum_freezer/cool_hot_uv_alloy_ingot': freezer(500, 7680, { item: [tag('forge:hot_ingots/uv_alloy', 1)] }, { item: [item('gtceu:uv_alloy_ingot', 1)] }),
+  };
+  const h = harness(stages);
+  runRecipes(h);
+  const uv = h.G.megaSmeltingComplex.recipes.find((r) => r.name === 'blast_uv_alloy');
+  assert.ok(uv, 'composed');
+  assert.ok(uv.eut >= 7864320, 'at least the furnace EU/t: ' + uv.eut);
+  assert.ok(uv.duration < 9000, 'about the furnace time: ' + uv.duration);
+  for (const rec of h.G.megaSmeltingComplex.recipes) {
+    const furnace = STAGES[rec.ebf] ? STAGES[rec.ebf].tickInputs.eu[0].content : stages[rec.ebf].tickInputs.eu[0].content;
+    assert.ok(rec.eut >= Math.min(furnace, 8192) && rec.eut >= (furnace > 8192 ? furnace : 0), rec.name);
+  }
 });
 
 test('a hot ingot with no live freezer is skipped and said; a non-hot recipe is ignored', () => {
