@@ -34,9 +34,9 @@
         })
       })
       STRAND_CABLES.filter(known).forEach(function (id) { removals.push({ type: 'gtceu:assembler', output: id, not: NOT_OURS }) })
-      var found = 0
-      removals.forEach(function (f) { found += Number(event.countRecipes(f)) })
-      removals.forEach(function (f) { event.remove(f) })
+      // one OR list: a filter at a time was one pass over every recipe each (about 17 s of reload here)
+      var found = Number(event.findRecipeIds(removals).size())
+      event.remove(removals)
       console.info(LOG + 'max cuts: removed ' + found + ' recipe matches (GT-- supracausal family and wrap circuit, generic horizon strand rows)')
     } catch (e) {
       console.error(LOG + 'max cuts failed: ' + e)

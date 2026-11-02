@@ -46,6 +46,9 @@
             'Circuit 2: the hot pair plasma is loaded into an empty Penning trap and cooled into an unsealed positron cell.']
     ]
 
+    ENTRIES.push(['gtceu.recipe.grindless_magnetic_pair_production.pair_confined_cage',
+        'Circuit 3, SGR 1806 orbit: 2 strange cage linings, 32 caged nickel chains and 32 horizon tethers hold 64000 mB of hot pair plasma: 1 pair-confined cage'])
+
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {
             event.add('grindless', e[0], e[1])

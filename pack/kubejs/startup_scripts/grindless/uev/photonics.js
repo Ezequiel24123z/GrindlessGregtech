@@ -69,7 +69,7 @@
       lang: 'SNSPD Foundry',
       casing: PHOTONIC, texture: PHOTONIC_TEXTURE, sound: 'ARC',
       // items in: the wafer or die, one part, the circuit; out: the wafer or the detector; fluids in: argon, resist or superfluid helium
-      maxIO: { itemsIn: 4, itemsOut: 1, fluidsIn: 2, fluidsOut: 0 },
+      maxIO: { itemsIn: 5, itemsOut: 1, fluidsIn: 2, fluidsOut: 0 },
       width: 5, height: 5, depth: 7
     },
     stacker: {
@@ -156,7 +156,8 @@
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('input_hatch', { min: 0, max: 1 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
-        Pat.part('energy_input', { min: 1, max: 2 })
+        Pat.part('energy_input', { min: 1, max: 2 }),
+        G.parallelHatch.part()
       ]
     })
   }

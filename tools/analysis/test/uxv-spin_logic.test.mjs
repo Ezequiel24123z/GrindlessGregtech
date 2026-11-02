@@ -124,7 +124,7 @@ test('the mainframe: one photonic hall row, circuit 7, the only maker of gtnn:sp
   assert.ok(last);
   assert.equal(last.circuit, 7);
   assert.match(last._why, /UXV-A5/);
-  assert.deepEqual(last.itemsIn.map((x) => x.id), ['grindless:meso_logic_die', 'grindless:racetrack_chip', 'grindless:mram_wafer', 'grindless:magnonic_bus', 'grindless:mtj_die', 'grindless:shielded_interposer']);
+  assert.deepEqual(last.itemsIn.map((x) => x.id), ['grindless:meso_logic_die', 'grindless:racetrack_chip', 'grindless:mram_wafer', 'grindless:magnonic_bus', 'grindless:mtj_die', 'grindless:shielded_interposer', '#gtceu:circuits/uiv']);
   assert.ok(last.itemsIn.length + 1 <= 8);
   assert.deepEqual(last.itemsOut, [{ id: 'gtnn:spintronic_mainframe', count: 1 }]);
   assert.equal(new Set(hall.map((r) => r.circuit)).size, hall.length, 'no circuit twice');

@@ -70,7 +70,8 @@
       Pat.part('input_bus', Z.parts.input_bus),
       Pat.part('input_hatch', Z.parts.input_hatch),
       Pat.part('output_bus', Z.parts.output_bus),
-      Pat.part('output_hatch', Z.parts.output_hatch)
+      Pat.part('output_hatch', Z.parts.output_hatch),
+      G.parallelHatch.part()
     )
   }
 

@@ -205,6 +205,40 @@ if ($Strict -and $verdict -eq 'PASS') {
     if ($warnedN -gt 0) { $strictReasons += "$warnedN WARN stage(s)" }
     if ($errTotal -gt 0) { $strictReasons += "$errTotal non-allowlisted ERROR line(s)" }
     if ($kjsErrTotal -gt 0) { $strictReasons += "$kjsErrTotal KubeJS error(s)" }
+    # A passing run must prove that its declared checks ran. Utility runs (gg_dump*, gg_gallery*) are exempt by name; a client-only run is judged by its stages.
+    $cmds = @(); if ($req -and $req.commands) { $cmds = @($req.commands | ForEach-Object { ([string]$_) -split ';;' } | Where-Object { $_.Trim() }) }
+    $utility = ($cmds.Count -gt 0) -and (@($cmds | Where-Object { $_ -notmatch '\bgg_(dump|gallery)' }).Count -eq 0)
+    $suiteName = ''; if ($req) { $suiteName = [string]$req.suite }
+    if (-not $utility -and $suiteName -ne 'client') {
+        if ($ggPassN -eq 0) { $strictReasons += 'zero GGTEST PASS checks' }
+        $tags = @()
+        if ($req -and $req.waitForLog) {
+            foreach ($w in @($req.waitForLog)) {
+                $m = [regex]::Match(([string]$w -replace '@@\d+$', ''), '^GGTEST\\?\|([A-Za-z0-9_]+)\\?\|')
+                if ($m.Success) { $tags += $m.Groups[1].Value }
+            }
+        }
+        foreach ($tag in ($tags | Select-Object -Unique)) {
+            $hit = @($ggLines | Where-Object { $_.StartsWith($tag + '|') -and $_ -match '(^|\|)PASS(\b|$)' })
+            if ($hit.Count -eq 0) { $strictReasons += "declared check set '$tag' has no PASS line" }
+        }
+    }
+    if ($req -and $suiteName -ne 'client') {
+        $have = @($allStages | ForEach-Object { [string]$_.name })
+        $need = @('boot', 'shutdown')
+        if (@($req.commands).Count -gt 0) { $need += 'commands' }
+        if (@($req.waitForLog).Count -gt 0) { $need += 'wait-markers' }
+        foreach ($n in $need) { if ($have -notcontains $n) { $strictReasons += "declared stage '$n' missing" } }
+    }
+    # A canonical dump without GTM's recipe-lookup export (lookup_unreachable.json) proves nothing about reachability: incomplete, not PASS.
+    $dumpRun = @($cmds | Where-Object { $_ -match '\bgg_dump' }).Count -gt 0
+    if ($dumpRun -and $suiteName -ne 'client') {
+        $lookupSeen = $false
+        foreach ($side in $sides) {
+            foreach ($f in (Files (J $resDir "$side\kubejs-exported") 'lookup_unreachable.json' $true)) { $lookupSeen = $true }
+        }
+        if (-not $lookupSeen) { $strictReasons += 'dump without lookup_unreachable.json (run gg_test_recipe_lookup in the same server run): proof incomplete' }
+    }
     if ($strictReasons.Count -gt 0) { $verdict = 'FAIL' }
 }
 

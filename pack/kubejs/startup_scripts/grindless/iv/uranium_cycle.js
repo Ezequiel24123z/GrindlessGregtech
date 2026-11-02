@@ -129,7 +129,7 @@
     }
   }
 
-  const PLANT_PARTS = { input_bus: { min: 1, max: 3 }, output_bus: { min: 1, max: 2 }, input_hatch: { min: 1, max: 4 }, energy_input: { min: 1, max: 2 } }
+  const PLANT_PARTS = { input_bus: { min: 1, max: 3 }, output_bus: { min: 1, max: 2 }, output_hatch: { min: 0, max: 1 }, input_hatch: { min: 1, max: 4 }, energy_input: { min: 1, max: 2 } }
 
   const PLANT_SPEC = {
     slices: [
@@ -160,6 +160,7 @@
         Pat.block(LINE, { min: 6 }),
         Pat.part('input_bus', PLANT_PARTS.input_bus),
         Pat.part('output_bus', PLANT_PARTS.output_bus),
+        Pat.part('output_hatch', PLANT_PARTS.output_hatch),
         Pat.part('input_hatch', PLANT_PARTS.input_hatch),
         Pat.part('energy_input', PLANT_PARTS.energy_input),
         G.parallelHatch.part()

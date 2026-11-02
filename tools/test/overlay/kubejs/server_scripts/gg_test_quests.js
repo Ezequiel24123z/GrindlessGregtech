@@ -61,7 +61,7 @@ function dumpToolbox() {
 // in the book. Update both numbers when a chapter changes (node tools/quests/lint.mjs prints them per chapter).
 var GG_QUESTS_EXPECTED = {
   storage: [21, 21],
-  applied_energistics: [19, 19],
+  applied_energistics: [19, 20],
   travel_and_teams: [16, 15],
   workshop: [17, 16],
   welcome: [16, 15],
@@ -70,13 +70,13 @@ var GG_QUESTS_EXPECTED = {
   mv_age: [52, 63],
   hv_age: [42, 52],
   ev_age: [65, 76],
-  iv_age: [63, 83],
-  luv_age: [81, 87],
-  zpm_age: [93, 96],
-  uv_age: [103, 109],
-  uhv_age: [112, 115],
-  uev_age: [100, 105],
-  uiv_age: [104, 108],
+  iv_age: [64, 82],
+  luv_age: [82, 88],
+  zpm_age: [93, 95],
+  uv_age: [105, 111],
+  uhv_age: [114, 119],
+  uev_age: [104, 111],
+  uiv_age: [107, 115],
   uxv_age: [89, 98],
   opv_age: [84, 92],
   max_age: [84, 90],
@@ -109,9 +109,9 @@ GG_QUESTS_EXPECTED.multiblocks = [416, 0]
 // LuV is one chapter (luv_age); the stations-off modes' merged count is not recorded yet: regenerate in that mode and record it here.
 var GG_QUESTS_LUV_MODES = {
   pending: { pl_luv: [198, 197], power: [113, 124] },
-  tether: { luv_age: [81, 87], pl_luv: [201, 199], power: [116, 127] },
+  tether: { luv_age: [82, 88], pl_luv: [201, 199], power: [116, 127] },
   sulfur_iodine_stations_off: { pl_luv: [204, 202], power: [116, 126] },
-  sulfur_iodine_stations_on: { luv_age: [81, 87], pl_luv: [204, 202], power: [116, 127] }
+  sulfur_iodine_stations_on: { luv_age: [82, 88], pl_luv: [204, 202], power: [116, 127] }
 }
 ;(function () {
   var st = global.grindless && global.grindless.stations

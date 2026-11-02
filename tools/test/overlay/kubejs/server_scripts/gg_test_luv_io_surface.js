@@ -394,13 +394,29 @@
       c.setEnergyStored(0)
     }
   }
+  // runs the pattern checker itself (not a tick delay) and returns the result plus why it rejected
+  function patternRejects(f) {
+    if (!f) return { rejected: false, why: 'no controller' }
+    var formed = false
+    try { formed = f.isFormed() || f.checkPatternWithLock() === true } catch (e) { return { rejected: false, why: 'pattern check threw: ' + e } }
+    var err = null
+    try { err = f.getMultiblockState().error } catch (e) { err = null }
+    var why = 'no error recorded'
+    if (err !== null && err !== undefined) {
+      why = String(err)
+      try { why += ' @ ' + String(err.getPos()) } catch (e) { }
+    }
+    return { rejected: !formed && !f.isFormed() && err !== null && err !== undefined, why: why }
+  }
   function negatives() {
     var C = S.ow.condenser
     var T = S.ow.intake
     var cf = at(C.site, C.origin)
     var tf = at(T.site, T.origin)
-    check('condenser_needs_fumaroles', cf && !cf.isFormed(), '100 ticks with ' + BRIMSTONE + ' in one fumarole cell: not formed')
-    check('intake_needs_magma', tf && !tf.isFormed(), '100 ticks with ' + BASALT + ' in one magma cell: not formed')
+    var cr = patternRejects(cf)
+    var tr = patternRejects(tf)
+    check('condenser_needs_fumaroles', cr.rejected, 'pattern check run with ' + BRIMSTONE + ' in one fumarole cell: rejected (' + cr.why + '); the same structure forms once the cell is swapped (condenser_ow positive control)')
+    check('intake_needs_magma', tr.rejected, 'pattern check run with ' + BASALT + ' in one magma cell: rejected (' + tr.why + '); the same structure forms once the cell is swapped (intake_ow positive control)')
     put(C.site, C.swapped, S.IO.blocks.fumarole, false)
     put(T.site, T.swapped, S.IO.blocks.magma, false)
   }

@@ -16,7 +16,7 @@
 // Structure (5 wide x 6 high x 7 deep, lib/patterns.js): PTFE inert casing shell with steel frame posts at the corners of both end walls and a glass window band in each; five PTFE pipe casings down the core; two full
 // rings of 8 heating coils (16) in the 2nd and 4th core slices; tempered glass windows in the three slices between. The controller
 // sits in the middle of the front wall, one row above the floor. Parts go in any casing cell: 1 maintenance, 1 or 2 energy hatches,
-// up to 4 fluid input and 4 fluid output hatches, up to 2 input buses and 2 output buses.
+// up to 5 fluid input (GTM's 5-fluid high octane gasoline) and 4 fluid output hatches, up to 2 input buses and 2 output buses.
 //
 // Textures: overlay dir grindless:block/multiblock/coil_chemical_plant (tools/assets/Build-MegaCoilChemicalPlantTextures.ps1). Names /
 // tooltips: client_scripts/grindless/hv_mega_coil_chemical_plant_lang.js. Controller recipe: server_scripts/grindless/hv/mega_coil_chemical_plant.js.
@@ -33,7 +33,7 @@
   const GLASS = 'gtceu:tempered_glass'
   const MAX_PARALLELS = 64
   const DISCOUNT = { rate: 0.95, floor: 0.80, baseK: 1800 }
-  const HATCHES = { energy: [1, 2], inputBus: 2, outputBus: 2, inputHatch: 4, outputHatch: 4 }
+  const HATCHES = { energy: [1, 2], inputBus: 2, outputBus: 2, inputHatch: 5, outputHatch: 4 }
 
   // slices back -> front, rows bottom -> top; 121 casing-or-part cells, 16 steel frames, 27 glass, 5 pipe casings, 16 coils, 24 air, the controller
   const WALL = ['XXXXX', 'FXXXF', 'FGGGF', 'FGGGF', 'FXXXF', 'XXXXX']
@@ -48,9 +48,9 @@
     ],
     symbols: {
       S: Pat.controller(),
-      // 121 cells: at most 15 are parts (1 + 2 + 2 + 2 + 4 + 4), the rest PTFE casing
+      // 121 cells: at most 16 are parts (1 + 2 + 2 + 2 + 5 + 4), the rest PTFE casing
       X: Pat.oneOf(
-        Pat.block(CASING, { min: 106 }),
+        Pat.block(CASING, { min: 105 }),
         Pat.part('maintenance', { exact: 1 }),
         Pat.part('energy_input', { min: HATCHES.energy[0], max: HATCHES.energy[1] }),
         Pat.part('input_bus', { max: HATCHES.inputBus }),

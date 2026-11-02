@@ -305,7 +305,7 @@
   },
   "gtceu:beuv_lithography": {
    "io": [
-    4,
+    5,
     2,
     1,
     0
@@ -937,7 +937,7 @@
   },
   "gtceu:femtosecond_writing": {
    "io": [
-    3,
+    4,
     2,
     1,
     1
@@ -1185,7 +1185,7 @@
   },
   "gtceu:hills_slingshot": {
    "io": [
-    2,
+    3,
     1,
     0,
     0
@@ -1241,7 +1241,7 @@
   },
   "gtceu:hot_rolling": {
    "io": [
-    2,
+    3,
     1,
     1,
     1
@@ -1281,7 +1281,7 @@
   },
   "gtceu:ice_giant_siphon": {
    "io": [
-    3,
+    4,
     1,
     0,
     2
@@ -1513,7 +1513,7 @@
   },
   "gtceu:magnetic_pair_production": {
    "io": [
-    3,
+    4,
     1,
     1,
     1
@@ -1577,7 +1577,7 @@
   },
   "gtceu:methane_pyrolysis": {
    "io": [
-    1,
+    2,
     1,
     3,
     1
@@ -1777,7 +1777,7 @@
   },
   "gtceu:nuclear_demagnetisation": {
    "io": [
-    3,
+    4,
     1,
     1,
     1
@@ -2441,7 +2441,7 @@
   },
   "gtceu:snspd_fabrication": {
    "io": [
-    4,
+    5,
     1,
     2,
     0
@@ -2537,7 +2537,7 @@
   },
   "gtceu:spectral_hole_burning": {
    "io": [
-    2,
+    3,
     1,
     1,
     0
@@ -2673,7 +2673,7 @@
   },
   "gtceu:supercritical_drying": {
    "io": [
-    3,
+    4,
     1,
     2,
     1
@@ -2777,7 +2777,7 @@
   },
   "gtceu:tholin_reforming": {
    "io": [
-    1,
+    2,
     1,
     2,
     1
@@ -2793,7 +2793,7 @@
   },
   "gtceu:titan_entry": {
    "io": [
-    2,
+    3,
     2,
     2,
     2
@@ -2985,7 +2985,7 @@
   },
   "gtceu:zone_refining": {
    "io": [
-    2,
+    3,
     2,
     3,
     2

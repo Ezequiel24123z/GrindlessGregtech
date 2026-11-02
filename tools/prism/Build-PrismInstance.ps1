@@ -14,6 +14,7 @@ $ErrorActionPreference = 'Stop'
 $repo = 'Ezequiel24123z/GrindlessGregtech'
 $packUrl = "https://raw.githubusercontent.com/$repo/$Channel/pack/pack.toml"
 $bootUrl = 'https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar'
+$bootSha256 = 'A8FBB24DC604278E97F4688E82D3D91A318B98EFC08D5DBFCBCBCAB6443D116C'
 $pinned = $Channel -match '^v\d'
 $name = if ($pinned) { "Gregtech Grindless $Channel" } else { 'Gregtech Grindless' }
 $folder = if ($pinned) { "GregtechGrindless-$Channel" } else { 'GregtechGrindless' }
@@ -56,9 +57,12 @@ $pack = [ordered]@{
 }
 [IO.File]::WriteAllText((Join-Path $inst 'mmc-pack.json'), ($pack | ConvertTo-Json -Depth 6), $utf8)
 
-Invoke-WebRequest -UseBasicParsing -Uri $bootUrl -OutFile (Join-Path $mc 'packwiz-installer-bootstrap.jar')
-$notice = "packwiz-installer-bootstrap.jar: https://github.com/packwiz/packwiz-installer-bootstrap (MIT License, Copyright (c) packwiz contributors).`r`n"
-[IO.File]::WriteAllText((Join-Path $mc 'packwiz-installer-bootstrap.NOTICE.txt'), $notice, $utf8)
+$bootJar = Join-Path $mc 'packwiz-installer-bootstrap.jar'
+Invoke-WebRequest -UseBasicParsing -Uri $bootUrl -OutFile $bootJar
+$got = (Get-FileHash $bootJar -Algorithm SHA256).Hash
+if ($got -ne $bootSha256) { throw "packwiz-installer-bootstrap.jar digest mismatch: expected $bootSha256, got $got" }
+# The MIT licence text must travel with the jar (the notice alone does not satisfy it).
+Copy-Item (Join-Path $PSScriptRoot 'packwiz-installer-bootstrap.LICENSE.txt') (Join-Path $mc 'packwiz-installer-bootstrap.LICENSE.txt')
 
 New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
 $zip = Join-Path $OutDir "Gregtech-Grindless-$Channel.zip"

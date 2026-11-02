@@ -7,15 +7,16 @@
 //     -WaitForLog 'GGTEST\|max_wireless\|DONE@@180'
 //
 // It takes its turn on the wireless network with the other wireless fixtures (the queue `ggTestWirelessQueue` in `global`), pauses the timed
-// settlements while it runs and settles by hand, and puts the network's persistent data back at the end. The cell's recipe waits on A2, so
-// the network's energy is set directly (W.setStored).
+// settlements while it runs and settles by hand, and puts the network's persistent data back at the end. The network's energy is set
+// directly (W.setStored).
 //
 // The doubt it settles (docs/eras/max.md W; S0-5): a 64 A MAX wireless hatch draws 2^37 EU/t (64 A x V[MAX] = 137,438,953,472) for one tick
 // from a case 14 network, every buffer a long with no int wrap; the cap is 1,374,389,534,720 EU per 10-tick settlement. If any CAP/DRAW line
 // fails, the S0-5 fallback applies (the 64 A hatch is dropped, 16 A is the top amperage).
-//   max_wireless|registration  the eight MAX hatches and two covers exist; W.cells: tier 14, 64,424,509,440,000 EU, made by gtceu:max_assembler
+//   max_wireless|registration  the eight MAX hatches and two covers exist; W.cells: tier 14, 64,424,509,440,000 EU, made by gtceu:assembly_hall
 //   max_wireless|recipes       the L27 rows are in the recipe manager (smes_buffered_tape, thick_rebco_tape, smes_toroid_winding,
-//                              braced_smes_toroid, cold_smes_toroid); the cell and repeater recipes exist at VA[MAX] or are reported pending
+//                              braced_smes_toroid, cold_smes_toroid); the cell and repeater assembler recipes are both required, each read back
+//                              (type, output, VA[MAX] EU/t, duration, inputs); the maker runs the assembler type
 //   max_wireless|PLACED        a tower with one MAX cell, a MAX 2 A, 16 A and 64 A wireless energy hatch
 //   max_wireless|STORED        the network is set to 3 x 64,424,509,440,000 EU and reports the same figure back (a long all the way)
 //   max_wireless|CAP           on a settlement each MAX hatch gets exactly V[MAX] x amps x the settlement's ticks (W.rate; 64 A: 1,374,389,534,720)
@@ -46,7 +47,7 @@
   var MAXT = 14
   var CELL_ID = 'grindless:max_smes_cell'
   var CELL_EU = 64424509440000
-  var MADE_BY = 'gtceu:max_assembler'
+  var MADE_BY = 'gtceu:assembly_hall'
   var DRAW = 137438953472
   var MAX_IDS = ['gtceu:max_wireless_energy_hatch', 'gtceu:max_wireless_energy_hatch_4a', 'gtceu:max_wireless_energy_hatch_16a', 'gtceu:max_wireless_energy_hatch_64a',
     'gtceu:max_wireless_dynamo_hatch', 'gtceu:max_wireless_dynamo_hatch_4a', 'gtceu:max_wireless_dynamo_hatch_16a', 'gtceu:max_wireless_dynamo_hatch_64a',
@@ -140,11 +141,48 @@
     })
     var notes = []
     var mw = global.grindless.maxWireless
+    var RH = Java.loadClass('com.gregtechceu.gtceu.api.recipe.RecipeHelper')
+    var ItemCap = Java.loadClass('com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability').CAP
+    var vaMax = Number(GTValues.VA[MAXT])
+    if (!mw || !mw.rows || mw.rows.length !== 2) bad.push('global.grindless.maxWireless.rows is missing or not the two MAX routes')
+    // both routes are required: no "pending" allowance survives A2. Each is read back from the live recipe, not only looked up
     ;['grindless:assembler/horizon_strand_repeater', 'grindless:assembler/max_smes_cell'].forEach(function (id) {
       var r = liveRecipe(id)
-      if (r === null) notes.push(id + ' pending (' + (mw && mw.pendingRoutes ? mw.pendingRoutes.join(',') : 'no pendingRoutes list') + ')')
-      else notes.push(id + ' live at ' + Number(r.duration) + ' t')
+      if (r === null) {
+        bad.push(id + ' is not in the recipe manager')
+        return
+      }
+      var row = mw && mw.rows ? mw.rows.filter(function (x) { return 'grindless:assembler/' + x.name === id })[0] : null
+      if (!row) {
+        bad.push(id + ' has no row in global.grindless.maxWireless.rows')
+        return
+      }
+      var type = String(r.recipeType.registryName)
+      var outs = []
+      var Reg = Java.loadClass('net.minecraftforge.registries.ForgeRegistries')
+      asArray(RH.getOutputItems(r)).forEach(function (st) { outs.push(String(Reg.ITEMS.getKey(st.getItem())) + ' x' + st.getCount()) })
+      var eut = Number(RH.getRealEUt(r).getTotalEU())
+      var json = ''
+      asArray(r.getInputContents(ItemCap)).forEach(function (c) { json += String(c.content.toJson()) })
+      var missing = row.items.map(function (s) { return s.replace(/^\d+x /, '') }).filter(function (item) { return json.indexOf('"' + item + '"') < 0 })
+      if (type !== 'gtceu:assembler') bad.push(id + ' is a ' + type + ' recipe')
+      if (outs.join(',') !== row.out + ' x1') bad.push(id + ' makes ' + outs.join(','))
+      if (eut !== vaMax) bad.push(id + ' costs ' + eut + ' EU/t, VA[MAX] is ' + vaMax)
+      if (Number(r.duration) !== row.duration) bad.push(id + ' takes ' + r.duration + ' t, wanted ' + row.duration)
+      if (missing.length > 0) bad.push(id + ' lacks input(s) ' + missing.join(','))
+      notes.push(id + ' live: ' + type + ', ' + outs.join(',') + ', ' + eut + ' EU/t x ' + r.duration + ' t')
     })
+    if (mw && mw.pendingRoutes && mw.pendingRoutes.length > 0) bad.push('pendingRoutes is not empty: ' + mw.pendingRoutes.join(','))
+    // the cell's maker runs the assembler type (GTM has no max_assembler; the assembly hall does)
+    var maker = GTRegistries.MACHINES.get(new ResourceLocation(MADE_BY))
+    var makerTypes = []
+    if (maker) {
+      var arr = maker.getRecipeTypes()
+      for (var i = 0; i < arr.length; i++) makerTypes.push(String(arr[i].registryName))
+    }
+    if (!maker) bad.push('no machine ' + MADE_BY)
+    else if (makerTypes.indexOf('gtceu:assembler') < 0) bad.push(MADE_BY + ' runs ' + makerTypes.join(',') + ', not gtceu:assembler')
+    notes.push(MADE_BY + ' runs ' + makerTypes.join(','))
     check('recipes', bad.length === 0, notes.join(' ; ') + (bad.length > 0 ? ' | problems: ' + bad.join(' ; ') : ''))
   }
 

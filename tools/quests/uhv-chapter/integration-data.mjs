@@ -33,7 +33,7 @@ export const QUESTS = [
     deps: ['H_POWER'], x: 3, y: -2.75,
     teach: {
       for: 'Silicon carbide takes more heat and volts than silicon, and the &6SiC Power Module&r is what the swarm\'s control gear is built from. An inverted metamorphic array stacks a junction for every colour of light.',
-      needs: 'The SiC device fab and the solar array fab, both from the machines tab, and ultrapure water for the wafers.',
+      needs: 'The SiC device fab and the solar array fab, both from the machines chapter, and ultrapure water for the wafers.',
       unlocks: 'Swarm segments and the UHV power gear.',
       automate: 'Boules and wafers move by bus; keep the ultrapure water on its own pipe.',
     },
@@ -61,12 +61,12 @@ export const QUESTS = [
     deps: ['H_MERCURY'], x: 7, y: -51.25,
     teach: {
       for: 'The &6Swarm Control Station&r steers a cloud of segments round the Sun and sends the power down as a beam. Two stations feed one bank, and the bank loses a little on the way.',
-      needs: 'Swarm segments from the foundry in Mercury orbit, and the station in the orbit itself.',
-      unlocks: 'UHV power without fuel, and the swarm half of the gate to UEV.',
-      automate: 'Segments ride the Mercury AE2 pair; worn ones go back to the foundry as scrap.',
+      needs: 'Swarm segments from the foundry and oganesson propellant pods, with the station in Mercury orbit itself.',
+      unlocks: 'UHV power, and the swarm half of the gate to UEV. Each run burns pods and a segment.',
+      automate: 'Segments and pods ride the Mercury AE2 pair; worn segments and empty propellant tanks come back out of each run.',
     },
     desc: [],
-    tasks: [it('gtceu:swarm_control_station'), it('grindless:swarm_segment')],
+    tasks: [it('gtceu:swarm_control_station')],
     rewards: [xp(200)],
   },
   {
@@ -97,8 +97,8 @@ export const QUESTS = [
     key: 'CELL', kind: 'machine', title: 'The UHV Cell', icon: 'grindless:uhv_smes_cell',
     deps: ['H_POWER'], x: 3, y: -0.75,
     teach: {
-      for: 'The &6UHV SMES Cell&r holds a huge store of EU, and the nuclear clock keeps it in step with the network.',
-      needs: 'The naquadria magnet works, and the nuclear clock for the sync.',
+      for: 'The &6UHV SMES Cell&r holds a huge store of EU and is the cell the UHV wireless network is built on.',
+      needs: 'In the naquadria magnet works: four UV SMES cells, RTAN wire, neutronium plates and liquid helium.',
       unlocks: 'The UHV wireless tier.',
       automate: 'Nothing to feed. Size the towers for your busiest hour.',
     },
@@ -111,7 +111,7 @@ export const QUESTS = [
     deps: ['CELL'], x: 5, y: -0.75,
     teach: {
       for: 'Move your towers onto &6UHV SMES Cells&r and the wireless network carries UHV, out to the stations and now to Mercury and Proxima.',
-      needs: 'One formed tower holding a UHV cell: the network runs at its strongest cell, so until then it stays at UV.',
+      needs: 'One formed tower holding a UHV cell: the network runs at its strongest cell, so until then it stays at UV. Each wireless hatch and cover takes a nuclear clock.',
       unlocks: 'Stations that run on power made at home, and the wireless hatches and covers at UHV.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
@@ -120,12 +120,12 @@ export const QUESTS = [
     rewards: [xp(200)],
   },
   {
-    key: 'PAR', kind: 'step', title: 'Parallel Hatch', icon: 'gtceu:uv_parallel_hatch',
+    key: 'PAR', kind: 'step', title: 'Parallel Hatch', icon: 'gtceu:uhv_parallel_hatch',
     deps: ['NETUHV'], x: 7, y: -0.75,
     desc: [
-      'There is no UHV parallel hatch. The &6UV Parallel Hatch&r is the top of the line, and one more machine of the same kind is the only other way to go wider.',
+      'The &6UHV Parallel Hatch&r runs a machine on 1,024 recipes at once. It is an assembly line recipe on a UHV hull with a UHV sensor and emitter, four UHV circuits, fibre laser modules, SRF cavities and mu-metal shields.',
     ],
-    tasks: [it('gtceu:uv_parallel_hatch')],
+    tasks: [it('gtceu:uhv_parallel_hatch')],
     rewards: [xp(60)],
   },
   {
@@ -156,7 +156,7 @@ export const QUESTS = [
     key: 'AE_PROX', kind: 'step', title: 'Proxima b on AE2', icon: 'grindless:proxima_gate_seed',
     deps: ['H_PROXIMA'], x: 18, y: -45.75,
     desc: [
-      'Proxima b has no bridge of its own: only the gate makes the &6Proxima Gate Seed&r, and the first flora sample is its catalyst. Samples then arrive through ME, never by hand.',
+      'Proxima b has no bridge of its own: only the gate makes the &6Proxima Gate Seed&r, and its catalysts are the approach data, the nuclear clock and the organoid processor. Samples then arrive through ME, never by hand.',
     ],
     tasks: [it('grindless:proxima_gate_seed')],
     rewards: [xp(100)],
@@ -180,7 +180,7 @@ export const QUESTS = [
     key: 'OM_LIQ', kind: 'process', title: 'Proxima Liquors', icon: 'gtceu:heavy_water_plant',
     deps: ['H_ROWS'], x: 3.5, y: 6.25,
     teach: {
-      for: 'Heavy water, platinum salts and rare-earth liquors from Proxima b go through the &6Platinum Plant&r, &6Heavy Water Plant&r, &6Extraction Cascade&r, &6Regolith Cell&r and &6Lunar Solar Array&r. Each machine learns a new input.',
+      for: 'Heavy water, platinum salts and rare-earth liquors from Proxima b go through the &6Platinum Plant&r, &6Heavy-Water Plant&r, &6Rare Earth Extraction Cascade&r, &6Regolith Cell&r and &6Lunar Solar Array&r. Each machine learns a new input.',
       needs: 'Proxima leach liquors, and the arrays tuned to the red.',
       unlocks: 'RTAN, UHV catalysts and the base\'s power.',
       automate: 'Liquors arrive over the Proxima AE2 pair; each plant hands its output on.',
@@ -227,7 +227,7 @@ export const QUESTS = [
     teach: {
       for: 'The &6Thruster Works&r, &6Light Sail Fab&r and &6Cryogenic Plant&r make the motors and sails for the trip, with oganesson as the propellant.',
       needs: 'Oganesson from the cryogenic plant, and film from the aluminium line.',
-      unlocks: 'The ICAN motor\'s pods and the sails.',
+      unlocks: 'The pods the swarm burns, and the sails.',
       automate: 'Pods and sails to ME; keep oganesson in its own tank.',
     },
     desc: [],
@@ -253,13 +253,13 @@ export const QUESTS = [
     key: 'NOBLE', kind: 'process', title: 'Noble Thrust', icon: 'grindless:oganesson_propellant_pod',
     deps: ['OM_THR'], x: 6, y: 13.25,
     teach: {
-      for: 'Oganesson is the heaviest noble gas and the best propellant a thruster could ask for. The &6Oganesson Propellant Pod&r packs it for the ICAN motor.',
+      for: 'Oganesson is the heaviest noble gas and the best propellant a thruster could ask for. The &6Oganesson Propellant Pod&r       packs it for the Dyson swarm, whose runs burn it.',
       needs: 'Oganesson from the cryogenic plant.',
-      unlocks: 'The motor and the sails\' pods.',
+            unlocks: 'The propellant the swarm burns.',
       automate: 'One pod line off the cryogenic plant, kept in its own tank.',
     },
     desc: [
-      'Real oganesson lasts milliseconds and only a few atoms exist. GregTech Modern treats it as a stable gas, and the pack goes along.',
+      'Real oganesson lasts milliseconds and only a few atoms exist. GregTech Modern treats it as a stable gas, so here it is one.',
     ],
     tasks: [it('grindless:oganesson_propellant_pod')],
     rewards: [xp(200)],

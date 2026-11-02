@@ -35,7 +35,6 @@
         {
           "name": "receive",
           "circuit": 1,
-          "site": "earth",
           "eut": 491520,
           "duration": 600,
           "itemsIn": [{ "id": "grindless:proxima_flora_sample", "count": 1 }],
@@ -47,7 +46,6 @@
         {
           "name": "isolate",
           "circuit": 2,
-          "site": "earth",
           "eut": 491520,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:proxima_flora_sample", "count": 1 }],
@@ -173,7 +171,6 @@
           "_why": "MAX-B4 (max.md, L28 step 3, c5): the recipient culture takes up the synthetic genome in sterile medium and becomes the transplanted minimal cell (Lartigue 2007)",
           "name": "transplanted_minimal_cell",
           "circuit": 5,
-          "site": "proxima_b",
           "eut": 491520,
           "duration": 600,
           "itemsIn": [{ "id": "grindless:recipient_mycoplasma_culture", "count": 1 }],

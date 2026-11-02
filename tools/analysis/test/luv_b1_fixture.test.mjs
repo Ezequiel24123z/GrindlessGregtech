@@ -301,6 +301,7 @@ function simulate(opts = {}) {
     'net.minecraft.core.BlockPos': Pos,
     'net.minecraft.resources.ResourceLocation': RL,
     'java.util.ArrayList': AL,
+    'java.lang.Long': { toString: (v) => String(v) },
     'net.minecraft.world.phys.AABB': AABB,
     'net.minecraft.core.Direction': { NORTH: 'north' },
     'net.minecraft.world.entity.item.ItemEntity': ItemEntity,

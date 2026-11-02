@@ -117,7 +117,8 @@
         Pat.part('input_hatch', { min: 1, max: 1 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
         Pat.part('output_hatch', { min: 1, max: 1 }),
-        Pat.part('energy_input', { min: 1, max: 2 })
+        Pat.part('energy_input', { min: 1, max: 2 }),
+        G.parallelHatch.part()
       ],
       fn: G.uevShapes.tower({
         w: 7, d: 7, baseH: 3, th: 10, inset: 1, band: 3, bandChar: 'P',
@@ -135,7 +136,8 @@
       X: Pat.oneOf(Pat.block(ROBUST),
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
-        Pat.part('energy_input', { min: 1, max: 2 })),
+        Pat.part('energy_input', { min: 1, max: 2 }),
+        G.parallelHatch.part()),
       F: Pat.frame(['tungsten_steel']),
       T: Pat.block(TUNGSTEN_PIPE),
       D: Pat.block(GEARBOX)

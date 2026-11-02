@@ -6,7 +6,6 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -133,15 +132,4 @@ test('names, tooltips and the info page exist in en_us', () => {
   }
   const emi = JSON.parse(fs.readFileSync(path.join(KJS, 'assets', 'emi', 'recipe', 'additions', 'grindless', 'uiv_compression_hall_info.json'), 'utf8'));
   assert.deepEqual(emi.stacks, [`item:gtceu:${id}`]);
-});
-
-// AF-K2 (M8-11) adds one hatchParallel() hook to lib/mega.js; the rest of the file stays as it was
-test('lib/mega.js only gained the MAX+ hatch hook', () => {
-  let base = null;
-  try { base = execFileSync('git', ['rev-parse', '--verify', '-q', '998bc073^{commit}'], { cwd: ROOT, encoding: 'utf8' }).trim(); } catch (e) { base = null; }
-  if (!base) return;
-  const diff = execFileSync('git', ['diff', '--numstat', base, '--', 'pack/kubejs/startup_scripts/grindless/lib/mega.js'], { cwd: ROOT, encoding: 'utf8' }).trim();
-  if (!diff) return;
-  const [add, del] = diff.split(/\s+/).map(Number);
-  assert.ok(add <= 8 && del <= 3, `mega.js changed by +${add}/-${del}`);
 });

@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { measure, solveFactors, pricedRows, coreIndex, curved, fixShapedCounts, priceDump, keyCandidates } from '../cost-matrix.mjs';
+import { measure, solveFactors, pricedRows, coreIndex, curved, fixShapedCounts, priceDump, keyCandidates, gateViolations } from '../cost-matrix.mjs';
 import { loadRule, loadTables, withFactors, TABLE_DIR } from '../lib/cost_curve.mjs';
 import { mkDump } from './helpers.mjs';
 
@@ -141,4 +141,41 @@ test('circuits.skip drops matching tag members from the key items', () => {
   const d = mkDump({ items: ['gtnn:a', 'gtceu:b'], tagsItem: { 'forge:circuits/mv': ['gtnn:a', 'gtceu:b'] } });
   const c = { ...cfg, tiers: ['mv'], groups: {}, circuits: { tagPrefix: 'forge:circuits/', skip: ['gtnn:*'] } };
   assert.deepEqual(keyCandidates(c, d).slots.map((s) => s.present[0]), ['gtceu:b']);
+});
+
+test('the committed circuits.skip drops only the never-obtainable circuit, not a live gtnn one', () => {
+  assert.deepEqual(realCfg.circuits.skip, ['extendedfeatures:opv_universal_circuit']);
+  const d = mkDump({ items: ['gtnn:a', 'extendedfeatures:opv_universal_circuit'], tagsItem: { 'forge:circuits/mv': ['gtnn:a', 'extendedfeatures:opv_universal_circuit'] } });
+  const c = { ...realCfg, tiers: ['mv'], groups: {}, circuits: { tagPrefix: 'forge:circuits/', skip: realCfg.circuits.skip } };
+  assert.deepEqual(keyCandidates(c, d).slots.map((s) => s.present[0]), ['gtnn:a']);
+});
+
+test('base: water is free before LuV, and raw_* is base only when no recipe makes it', () => {
+  const rawMade = {
+    id: 'x:make_raw', type: 'gtceu:assembler',
+    json: { ...hull('mv', 2, 0, 30).json, outputs: { item: [{ content: { type: 'gtceu:sized', count: 1, ingredient: { item: 'x:raw_zinc' } }, chance: 10000, maxChance: 10000, tierChanceBoost: 0 }], fluid: [] } },
+  };
+  const d = mkDump({ recipes: [source, rawMade, hull('mv', 2, 0, 30)], items: ['x:raw_zinc', 'x:raw_tin', 'gtceu:mv_machine_hull'], fluids: ['minecraft:water'] });
+  const { isBase } = priceDump(d, cfg).model;
+  assert.equal(isBase('fluid:minecraft:water'), true);
+  assert.equal(isBase('x:raw_tin'), true, 'no recipe makes it');
+  assert.equal(isBase('x:raw_zinc'), false, 'a recipe makes it');
+});
+
+test('gateViolations: a step under the ratio fails, one at the ratio passes, and steps up to LV are not gated', () => {
+  const tiers = ['ulv', 'lv', 'mv', 'hv'];
+  const series = new Map([
+    ['good', new Map([['lv', 10], ['mv', 13], ['hv', 17]])],
+    ['flat', new Map([['lv', 10], ['mv', 12], ['hv', 15]])],
+    ['early', new Map([['ulv', 10], ['lv', 11], ['mv', 15], ['hv', 20]])],
+  ]);
+  const v = gateViolations(series, tiers, { minRatio: 1.3, series: ['good', 'flat', 'early', 'absent'] });
+  assert.deepEqual(v.map((x) => `${x.series}:${x.from}>${x.era}`), ['flat:lv>mv', 'flat:mv>hv']);
+  assert.deepEqual(gateViolations(series, tiers, null), []);
+});
+
+test('the committed gate names the key-item series and a ratio above 1', () => {
+  assert.ok(realCfg.outliers.gate.minRatio > 1);
+  assert.ok(realCfg.outliers.gate.series.includes('hull') && realCfg.outliers.gate.series.includes('machine_casing'));
+  assert.deepEqual(realCfg.groups.machine_casing, ['gtceu:${t}_machine_casing']);
 });

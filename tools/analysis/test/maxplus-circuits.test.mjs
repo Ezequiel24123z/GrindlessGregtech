@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
@@ -60,7 +61,7 @@ test('the horizon processor joins on the hall at VA[MAX]', () => {
   assert.equal(r.eut, VA_MAX);
   assert.deepEqual(r.itemsIn.map((x) => [x.id, x.count]), [
     ['grindless:horizon_logic_die', 2], ['grindless:horizon_interposer', 1], ['grindless:quantum_memory_node', 1],
-    ['grindless:rydberg_logic_array', 1], ['gtnn:supracausal_mainframe', 2]]);
+    ['grindless:rydberg_logic_array', 1], ['#gtceu:circuits/max', 2]]);
   assert.deepEqual(r.fluidsIn, [{ id: 'gtceu:kerr_condensate', amount: 1000 }]);
 });
 
@@ -73,8 +74,42 @@ test('no duplicate lookup in the tables that gained rows', () => {
   }
 });
 
-test('circuits.js writes the two cutter steps and the tag', () => {
-  const s = fs.readFileSync(path.join(kube, 'server_scripts', 'grindless', 'maxplus', 'circuits.js'), 'utf8');
-  for (const n of ['horizon_logic_die', 'interposer_die']) assert.ok(s.includes(`name: '${n}'`), n);
-  assert.ok(s.includes("'grindless:circuits/maxplus'") && s.includes('event.recipes.gtceu.cutter'));
+test('the mainframe rows climb: each takes 2 circuits of the previous tier and runs at its own tier VA (M2-01)', () => {
+  const rows = table('photonics_uev').types.photonic_integration.recipes;
+  const want = { optical_mainframe: ['uev', 31457280], spintronic_mainframe: ['uiv', 125829120], cosmic_mainframe: ['uxv', 503316480], supracausal_mainframe: ['opv', VA_MAX] };
+  for (const [name, [prev, eut]] of Object.entries(want)) {
+    const r = rows.find((x) => x.name === name);
+    assert.ok(r, name);
+    assert.equal(r.eut, eut, `${name} eut`);
+    const tag = r.itemsIn.find((x) => x.id === `#gtceu:circuits/${prev}`);
+    assert.ok(tag && tag.count >= 2, `${name} takes #gtceu:circuits/${prev}`);
+  }
+});
+
+function runCircuits() {
+  const dir = path.join(kube, 'server_scripts', 'grindless', 'maxplus');
+  const tags = [];
+  const context = vm.createContext({
+    global: {}, console: { info() {}, error() {} },
+    Item: { exists: () => true }, Fluid: { of: (id, amount) => ({ id, amount }) },
+    ServerEvents: { recipes() {}, tags(_type, fn) { fn({ add: (tag, id) => tags.push([tag, id]) }); } },
+  });
+  vm.runInContext(fs.readFileSync(path.join(dir, 'circuits.js'), 'utf8'), context);
+  return tags;
+}
+
+test('the real tag gtceu:circuits/maxplus holds the horizon processor (M3-02)', () => {
+  assert.deepEqual(runCircuits(), [['gtceu:circuits/maxplus', 'grindless:horizon_processor']]);
+});
+
+test('no maxplus script names the horizon processor as a literal recipe ingredient', () => {
+  const dir = path.join(kube, 'server_scripts', 'grindless', 'maxplus');
+  const bad = [];
+  for (const f of fs.readdirSync(dir)) {
+    const s = fs.readFileSync(path.join(dir, f), 'utf8');
+    if (/['"]\d+x grindless:horizon_processor['"]/.test(s)) bad.push(f);
+  }
+  assert.deepEqual(bad, []);
+  const circuits = fs.readFileSync(path.join(dir, 'circuits.js'), 'utf8');
+  assert.ok(circuits.includes("MC.tag = 'gtceu:circuits/maxplus'") && circuits.includes('event.recipes.gtceu.cutter'));
 });

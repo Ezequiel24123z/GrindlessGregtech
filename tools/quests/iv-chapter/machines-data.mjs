@@ -106,7 +106,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("gtceu:tritium_removal_facility", 1)],
-    rewards: [xp(80), it("grindless:night_sky_radiator", 2)],
+    rewards: [xp(80)],
   },
   {
     key: "IV_RTG_CELL", id: "503863FFACA225A8", title: "RTG Cell", icon: "gtceu:ev_rtg",
@@ -116,7 +116,7 @@ export const QUESTS = [
       "Each pellet lasts about an hour of running, and its EV power starts the first bases on Venus and Mercury.",
     ],
     tasks: [it("gtceu:ev_rtg", 1)],
-    rewards: [xp(60), it("grindless:rtg_pellet", 1)],
+    rewards: [xp(60)],
   },
   {
     key: "IV_VENUS_ACID_WORKS", id: "534239273A7CA7FC", kind: "machine", title: "Venus Acid Works", icon: "gtceu:venus_acid_works",
@@ -129,7 +129,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("grindless:platinum_gauze", 2), it("gtceu:venus_acid_works", 1)],
-    rewards: [xp(80), it("grindless:platinum_gauze", 1)],
+    rewards: [xp(80)],
   },
   {
     key: "IV_VENUS_HEAT_ENGINE", id: "5669D88DE37D633F", kind: "machine", title: "Venus Heat Engine", icon: "gtceu:venus_heat_engine",
@@ -155,7 +155,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("grindless:tungsten_steel_drill_bit", 16), it("gtceu:pressurized_vein_drill", 1)],
-    rewards: [xp(100), it("grindless:tungsten_steel_drill_bit", 8)],
+        rewards: [xp(100)],
   },
   {
     key: "IV_NAQUADAH_PLANT", id: "14C75CDBACADEE5A", kind: "machine", title: "Naquadah Plant", icon: "gtceu:naquadah_plant",
@@ -181,7 +181,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("grindless:heliostat_mirror", 8), it("gtceu:mercury_solar_works", 1)],
-    rewards: [xp(80), it("grindless:heliostat_mirror", 2)],
+    rewards: [xp(80)],
   },
   {
     key: "IV_MERCURY_SOLAR_FIELD", id: "1BADC15A1CDF6CF1", kind: "machine", title: "Mercury Solar Field", icon: "gtceu:mercury_solar_field",
@@ -207,7 +207,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("grindless:vein_sample_iridosmine_mercury", 1), it("gtceu:mercury_vein_drill", 1)],
-    rewards: [xp(100), it("grindless:tungsten_steel_drill_bit", 8)],
+        rewards: [xp(100)],
   },
   {
     key: "IV_IV_HATCHES", title: "IV Hatches", icon: "gtceu:iv_energy_input_hatch",
@@ -230,7 +230,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("gtceu:interferometer", 1)],
-    rewards: [xp(100), it("gtceu:data_orb", 2)],
+    rewards: [xp(100)],
   },
   {
     key: "IV_PARALLEL_HATCH", id: "14E966D3D6D326FE", title: "Parallel Hatch", icon: "gtceu:iv_parallel_hatch",

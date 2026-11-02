@@ -15,7 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadDump } from './lib/dump.mjs';
 import { staticDump } from './lib/kubejs_static.mjs';
-import { auditEmiCoverage, fixtureExpectations, knownFromReport, loadEmiData, renderCoverageText, renderExpectations } from './lib/emi_coverage.mjs';
+import { auditEmiCoverage, fixtureExpectations, knownFromReport, knownGrowth, loadEmiData, renderCoverageText, renderExpectations } from './lib/emi_coverage.mjs';
 import { readJson } from './lib/util.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -52,6 +52,7 @@ function main(argv) {
     else if (a === '--config') opt.config = path.resolve(argv[++i]);
     else if (a === '--expect') opt.expect = argv[i + 1] && !argv[i + 1].startsWith('--') ? path.resolve(argv[++i]) : DEFAULT_EXPECT;
     else if (a === '--known-from') opt.knownFrom = path.resolve(argv[++i]);
+    else if (a === '--seed-known') opt.seedKnown = String(argv[++i] || '').trim();
     else if (a === '--quiet') opt.quiet = true;
     else {
       process.stderr.write(`unknown option ${a}\n`);
@@ -63,8 +64,20 @@ function main(argv) {
   else process.stdout.write(`EMI coverage: ${res.counts.audited} audited, ${res.gaps.length} gaps, ${res.problems.length} problems\n`);
   if (opt.json) fs.writeFileSync(opt.json, JSON.stringify(res, null, 2));
   if (opt.knownFrom) {
-    res.runtimeKnown = knownFromReport(readJson(opt.knownFrom), res);
-    fs.writeFileSync(DEFAULT_KNOWN, JSON.stringify(res.runtimeKnown, null, 2) + '\n');
+    const next = knownFromReport(readJson(opt.knownFrom), res);
+    const prev = fs.existsSync(DEFAULT_KNOWN) ? readJson(DEFAULT_KNOWN) : null;
+    const grown = knownGrowth(prev, next);
+    const nGrown = Object.values(grown).reduce((s, l) => s + l.length, 0);
+    if (nGrown && !opt.seedKnown) {
+      process.stderr.write(`refused: --known-from would ADD ${nGrown} known gap(s) (it may only shrink; fix them or pass --seed-known "<reason>"):\n`);
+      for (const [k, l] of Object.entries(grown)) for (const x of l.slice(0, 15)) process.stderr.write(`  + ${k}: ${x}\n`);
+      process.exit(1);
+    }
+    res.runtimeKnown = next;
+    const doc = { ...next };
+    if (nGrown) doc.seeded = [...((prev && prev.seeded) || []), { reason: opt.seedKnown, added: grown }];
+    else if (prev && prev.seeded) doc.seeded = prev.seeded;
+    fs.writeFileSync(DEFAULT_KNOWN, JSON.stringify(doc, null, 2) + '\n');
     const n = Object.values(res.runtimeKnown).reduce((s, l) => s + l.length, 0);
     process.stdout.write(`wrote ${path.relative(process.cwd(), DEFAULT_KNOWN)} (${n} known runtime gaps; regenerate --expect)\n`);
   }

@@ -51,7 +51,7 @@
   BS.machines = [
     {
       name: 'beuv_scanner', machine: 'gtceu:beuv_scanner', type: 'beuv_lithography', dataKey: 'grindless_beuv_lithography', lang: 'BEUV Scanner',
-      maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 },
+      maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 },
       width: 9, height: 5, depth: 7, casing: PHOTONIC, texture: PHOTONIC_TEXTURE
     },
     {
@@ -70,7 +70,8 @@
       Pat.part('output_bus', { min: 1, max: 2 }),
       Pat.part('input_hatch', { min: 0, max: 1 }),
       Pat.part('output_hatch', { min: 0, max: 1 }),
-      Pat.part('energy_input', { min: 1, max: 2 })
+      Pat.part('energy_input', { min: 1, max: 2 }),
+      G.parallelHatch.part()
     ])
   }
 

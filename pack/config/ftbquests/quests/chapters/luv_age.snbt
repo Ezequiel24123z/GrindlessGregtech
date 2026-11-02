@@ -195,7 +195,7 @@
 		}
 		{
 			dependencies: ["3F76BCDB3BBA8FA4"]
-			description: ["An &6RTG Cell&r keeps a landing kit running when the Sun is faint and the wireless link drops. Out past Mars nothing else will, so pack a spare for every world you visit."]
+			description: ["An &6RTG Cell&r keeps a landing kit running when the Sun is faint and the wireless link drops. Past Mars there is no air for ordinary fuel, so pack a spare for every world you visit."]
 			icon: "gtceu:ev_rtg"
 			id: "10F783A41A37140A"
 			rewards: [{ id: "7549970953447ACA", type: "xp", xp: 60 }]
@@ -400,7 +400,7 @@
 		}
 		{
 			dependencies: ["543F014BB97A45F4"]
-			description: ["Mars's neodymium and plain hydrogen go in, &6Europium&r comes out, and nothing else in the pack makes it. It leaves the ring as a very hot liquid, not a plasma, so pipe it accordingly. The ZPM motor wants a lot of it as fine wire."]
+			description: ["Mars's neodymium and plain hydrogen go in, &6Europium&r comes out. For now this fusion route is the way to make it. It leaves the ring as a very hot liquid, not a plasma, so pipe it accordingly. A metallothermic reduction in ZPM makes it from oxide later. The ZPM motor wants a lot of it as fine wire."]
 			icon: "gtceu:europium_ingot"
 			id: "1531C1737C6BE31B"
 			rewards: [{ id: "78D7DB85185F24E8", type: "xp", xp: 100 }]
@@ -456,7 +456,7 @@
 		}
 		{
 			dependencies: ["158C3F87DFD585EC"]
-			description: ["A raw crystal chip is a flawless crystal sliced thin, and engraved it becomes the &6Engraved Crystal Chip&r. Chips from the Zero-G Crystal Grower, the same dopant GregTech asks for, and a laser engraver. The crystal CPU and SoC, and with them every circuit up to the wetware. The grower runs all day. Send its raw chips to the engraver by ME and stock the result."]
+			description: ["A raw crystal chip is a flawless crystal sliced thin, and baked with a gem plate and helium it becomes the &6Engraved Crystal Chip&r. Raw chips from the Zero-G Crystal Grower, an olivine or emerald plate, helium, and an electric blast furnace. The crystal CPU, and with it the crystal processor and the wetware circuits. The grower runs all day. Send its raw chips to the furnace by ME and stock the result."]
 			icon: "gtceu:raw_crystal_chip"
 			id: "5303863EE466805C"
 			rewards: [{ id: "78E53F8E4EAF7085", type: "xp", xp: 60 }]
@@ -472,23 +472,20 @@
 		}
 		{
 			dependencies: ["5303863EE466805C"]
-			description: ["The engraved crystal chip becomes a &6Crystal CPU&r, and its sibling the crystal SoC. A cleanroom and the lasers GregTech asks for. The grown chips are a faster route, not a different one. The crystal processor now, and the wetware circuits after it. A chip in, a CPU out. Let ME feed the engraver."]
+			description: ["A laser engraver and a lime lens turn the engraved crystal chip into a &6Crystal CPU&r. A cleanroom and a laser engraver. The crystal SoC is a later step that needs ZPM voltage. The crystal processor now, and the wetware circuits after it. A chip in, a CPU out. Let ME feed the engraver."]
 			icon: "gtceu:crystal_cpu"
 			id: "7B9C044203A16AAC"
 			rewards: [{ id: "3E4BC207B021CACD", type: "xp", xp: 60 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [
-				{ id: "74742A732829DC1F", item: "gtceu:crystal_cpu", type: "item" }
-				{ id: "5C7420777DC1F99E", item: "gtceu:crystal_soc", type: "item" }
-			]
+			tasks: [{ id: "74742A732829DC1F", item: "gtceu:crystal_cpu", type: "item" }]
 			title: "Crystal CPU"
 			x: 21.5d
 			y: -9.5d
 		}
 		{
 			dependencies: ["7B9C044203A16AAC"]
-			description: ["The LuV assembler puts a crystal CPU and a crystal SoC together into a &6Crystal Processor&r. Circuit boards, the CPU and SoC, and plenty of cables. The crystal assembly, and the LuV machine hulls and components that ask for it. Keep a stock by ME so the component lines never wait."]
+			description: ["The LuV assembler puts crystal CPUs and nano CPU chips together into a &6Crystal Processor&r. A crystal SoC route exists too, at ZPM voltage. Circuit boards, crystal CPUs, nano CPU chips, advanced SMDs and plenty of cables. The crystal assembly, and the LuV machine hulls and components that ask for it. Keep a stock by ME so the component lines never wait."]
 			icon: "gtceu:crystal_processor"
 			id: "54F8FE564819F368"
 			rewards: [{ id: "55272A5600F7FD8B", type: "xp", xp: 80 }]
@@ -556,6 +553,19 @@
 		}
 		{
 			dependencies: ["3504AC546284B5BC"]
+			description: ["A blank &6Data Orb&r is the storage the bank and the research station both need. Circuit assembler work with epoxy boards, circuits, RAM and platinum wire. The data bank, and later the orb that research is written onto. Keep a stock of blank orbs on the network."]
+			icon: "gtceu:data_orb"
+			id: "346720E37C5EF08F"
+			rewards: [{ id: "1A67335F924FA7B2", type: "xp", xp: 60 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5DCF49A8C08D004A", item: "gtceu:data_orb", type: "item" }]
+			title: "Blank Data Orb"
+			x: 16.0d
+			y: -6.5d
+		}
+		{
+			dependencies: ["346720E37C5EF08F"]
 			description: ["The &6Data Bank&r stores every orb and stick of research in one hall. Computer casings, and the same computer racks the research station will want. Research, and the saved patterns that ZPM and later machines ask for. Let ME carry orbs in and out so you never swap them by hand."]
 			icon: "gtceu:data_bank"
 			id: "3B2010A931E1A4D8"
@@ -595,7 +605,7 @@
 		}
 		{
 			dependencies: ["113C8087627608BC"]
-			description: ["The first orb worth writing is the ZPM energy hatch's research. The large mixer on two LuV hatches for the wiring, and the europium that went into the station's ZPM motors. The ZPM energy hatch, and so the gate to the next era. Copy orbs rather than rewriting them; the station keeps the original."]
+			description: ["A blank orb written with the ZPM energy hatch's research is the first one worth keeping. The large mixer on two LuV hatches for the wiring, and the europium that went into the station's ZPM motors. The ZPM energy hatch, and so the gate to the next era. Copy orbs rather than rewriting them; the station keeps the original."]
 			icon: "gtceu:data_orb"
 			id: "32CEA916CCFD8B21"
 			rewards: [
@@ -605,7 +615,7 @@
 			shape: "hexagon"
 			size: 1.0d
 			tasks: [{ id: "55AB18DEB93C02CE", item: "gtceu:data_orb", type: "item" }]
-			title: "First Data Orb"
+			title: "First Research Orb"
 			x: 23.5d
 			y: -8.0d
 		}
@@ -815,7 +825,7 @@
 		}
 		{
 			dependencies: ["58EFB73E6DD24BDB"]
-			description: ["The &6UHPIC Wafer&r is the purest slice of silicon the pack makes. Nothing on the ground grows one this clean, and the ZPM chips will be cut from it."]
+			description: ["The &6UHPIC Wafer&r is the purest slice of silicon the pack makes. The wake shield grows it from less naquadah and indium phosphide per wafer than a cleanroom reactor needs, and the ZPM chips will be cut from it."]
 			icon: "gtceu:uhpic_wafer"
 			id: "5D20D0252114492B"
 			rewards: [{ id: "5D2ED935CBC7767E", type: "xp", xp: 80 }]
@@ -826,7 +836,7 @@
 		}
 		{
 			dependencies: ["75745AD963ECB5C8"]
-			description: ["With nothing stirring the melt, a crystal grows without flaws. The &6Zero-G Crystal Grower&r makes raw crystal chips every time instead of now and then. The same dopant GregTech asks for, and sapphire test masses cut from its own boules. The crystal circuit chain in the circuits chapter, much faster. The test masses are for later; EMI says what for. One grower, one ME bus for dopant, and the chips arrive on their own."]
+			description: ["With nothing stirring the melt, a crystal grows without flaws. The &6Zero-G Crystal Grower&r makes raw crystal chips every time instead of now and then. The same dopant GregTech asks for, and sapphire test masses cut from its own boules. The crystal circuit chain, much faster. The test masses are for later; EMI says what for. One grower, one ME bus for dopant, and the chips arrive on their own."]
 			icon: "gtceu:zero_g_crystal_grower"
 			id: "18A794C8BAA71D81"
 			rewards: [
@@ -861,10 +871,7 @@
 			description: ["The &6HSS-S Drill Bit&r wears down a little with every bore, and the &6Anchor Harpoon&r stays in the rock until you pull it. Keep spares of both."]
 			icon: "grindless:hss_s_drill_bit"
 			id: "5F2EEA315A9E5CB3"
-			rewards: [
-				{ id: "351B287792B112D7", type: "xp", xp: 60 }
-				{ count: 2, id: "36A0522C5471B73C", item: "grindless:anchor_harpoon", type: "item" }
-			]
+			rewards: [{ id: "351B287792B112D7", type: "xp", xp: 60 }]
 			tasks: [
 				{ id: "533C0813A5B92E29", item: "grindless:hss_s_drill_bit", type: "item" }
 				{ id: "5792BD7C26385D0D", item: "grindless:anchor_harpoon", type: "item" }
@@ -918,7 +925,7 @@
 		}
 		{
 			dependencies: ["564E7FD4BAE63B55"]
-			description: ["In orbit, neurons grow in three dimensions without a scaffold. The &6Organoid Lab&r turns stem cells, growth medium and the ring's neurotrophic factor into a neural organoid. Stem cells from the biofoundry, and factor from the ring. The neuro processing unit, in the circuits chapter. Nothing else makes one before ZPM. Feed the lab by ME and let the organoids go straight to the assembler."]
+			description: ["In orbit, neurons grow in three dimensions without a scaffold. The &6Organoid Lab&r turns stem cells, growth medium and the ring's neurotrophic factor into a neural organoid. Stem cells from the biofoundry, and factor from the ring. The neuro processing unit, further along. Nothing else makes one before ZPM. Feed the lab by ME and let the organoids go straight to the assembler."]
 			icon: "gtceu:organoid_lab"
 			id: "7C67E4A7D55ABED5"
 			rewards: [{ id: "1AB884D956CE2276", type: "xp", xp: 120 }]
@@ -945,10 +952,7 @@
 			description: ["The &6Optical Miner&r bags crumbly carbon-rich boulders and bakes them with mirrors until water, carbon dioxide and a nitrogen-and-phosphorus extract boil off. Capture bags and the Sun on its receiver, and the Sun is faint out here, hence all the mirrors. Chondritic extract for the algae, water for the belt and, through its second recipe, the processor's carbon monoxide. Capture bags are returned empty. Send them back by ME."]
 			icon: "gtceu:optical_miner"
 			id: "1997FB952337C741"
-			rewards: [
-				{ id: "5908F6DB648D4ECB", type: "xp", xp: 100 }
-				{ id: "7F1DFD24E69DF9E1", item: "grindless:capture_bag", type: "item" }
-			]
+			rewards: [{ id: "5908F6DB648D4ECB", type: "xp", xp: 100 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
@@ -1004,10 +1008,7 @@
 			description: ["A &6Heat Exchanger Bundle&r erodes in hot sulfur, a little with every cycle. Swap it before it fails, not after."]
 			icon: "grindless:heat_exchanger_bundle"
 			id: "36BD92C7A422CBA5"
-			rewards: [
-				{ id: "5AC06151D98E379C", type: "xp", xp: 60 }
-				{ id: "716FA2B94D4D9972", item: "grindless:heat_exchanger_bundle", type: "item" }
-			]
+			rewards: [{ id: "5AC06151D98E379C", type: "xp", xp: 60 }]
 			tasks: [{ id: "586B1A6F21D5F992", item: "grindless:heat_exchanger_bundle", type: "item" }]
 			title: "Exchanger Bundle"
 			x: 16.5d
@@ -1079,10 +1080,7 @@
 			description: ["The &6Gravitational-Wave Detector&r is an L of vacuum tubes buried in packed or blue ice, with your sapphire test masses for mirrors. IV's Sagittarius A* signal in its bus, where it stays. Plain ice won't do for the cover; it melts. A long observing run writes the catalogue: two black holes merging, heard as a rising chirp. Copy the catalogue with a data orb and let ME stock the masses."]
 			icon: "gtceu:gravitational_wave_detector"
 			id: "35A1D103C253B975"
-			rewards: [
-				{ id: "1DFB91A920604CAE", type: "xp", xp: 150 }
-				{ count: 2, id: "11C25DDFC0BBB9AC", item: "gtceu:data_orb", type: "item" }
-			]
+			rewards: [{ id: "1DFB91A920604CAE", type: "xp", xp: 150 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [

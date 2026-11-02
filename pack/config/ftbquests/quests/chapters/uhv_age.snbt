@@ -30,7 +30,7 @@
 		}
 		{
 			dependencies: ["7547756221DFC688"]
-			description: ["Most of UHV is built at home: isotopes, light, silicon carbide, life. The gate and the stations need all of it, so the machine tabs come before the rockets."]
+			description: ["Most of UHV is built at home: isotopes, light, silicon carbide, life. The gate and the stations need all of it, so the machines chapters come before the rockets."]
 			icon: "gtceu:uhv_machine_hull"
 			id: "7B1B3520DA69C5CF"
 			rewards: [{ id: "53D90EEEA849ABAD", type: "xp", xp: 25 }]
@@ -104,7 +104,7 @@
 		}
 		{
 			dependencies: ["1F6A7661A3F34B33"]
-			description: ["An antimatter-catalysed fission motor behind a heat-proof nozzle. The &6ICAN Rocket Motor&r is the engine that makes a four-year trip possible at all."]
+			description: ["An antimatter-catalysed fission motor behind a heat-proof nozzle. The &6ICAN Rocket Motor&r, built in the thruster assembly from an ICAN pellet, a UHTC nozzle, two SiC power modules and a stage, is the engine of the level 8 rocket."]
 			icon: "grindless:ican_rocket_motor"
 			id: "5E37EDBD4D78FD91"
 			rewards: [{ id: "3B1BE6F3961BB36E", type: "xp", xp: 150 }]
@@ -114,17 +114,28 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["1F6A7661A3F34B33"]
-			description: ["The &6Warp Gate&r is a ring built at both ends: one in Earth orbit, one at Proxima b. A first run opens it, a second holds it open. Exotic matter and antihydrogen cartridges for the opening, and the warp gate casing. The second station and the base at Proxima b. Antihydrogen and exotic matter by pipe and bus from their own lines; the shells come back after each run."]
-			icon: "gtceu:warp_gate"
-			id: "53A07A3FD419957D"
-			rewards: [{ id: "13D9DC95FA10AF87", type: "xp", xp: 250 }]
+			dependencies: ["5E37EDBD4D78FD91"]
+			description: ["The level 8 rocket carries its fuel in the &6BNNT Fuel Tank&r: an aerogel tank wound in boron nitride and carbon nanotube yarn, light and tight enough for the trip. The cryotank winder: an aerogel fuel tank, 16 BNNT yarn, 16 carbon nanotube yarn, 4 hexagonal boron nitride dust, epoxy, the Pluto-Kuiper chart and circuit program 1. The level 8 rocket, built with the ICAN motor, which reaches Proxima b. Yarns and aerogel tanks by ME; the winder takes a long time per tank, so run several."]
+			icon: "grindless:bnnt_fuel_tank"
+			id: "7BBD85168C76A7BF"
+			rewards: [{ id: "759C42A6A16B409F", type: "xp", xp: 150 }]
 			shape: "gear"
 			size: 1.25d
-			tasks: [
-				{ id: "121B29CE3E4CFED7", item: "gtceu:warp_gate", type: "item" }
-				{ id: "57D009CA74D7C80B", item: "grindless:warp_gate_casing", type: "item" }
+			tasks: [{ id: "303D77A5F08956F9", item: "grindless:bnnt_fuel_tank", type: "item" }]
+			title: "The Long-Haul Tank"
+			x: 10.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1F6A7661A3F34B33"]
+			description: [
+				"The &6Warp Gate&r is a ring built at both ends: one in Earth orbit, one at Proxima b. Opening it takes four exotic matter cells, four antihydrogen cartridges, the approach data, a nuclear clock and an organoid processor; one exotic matter cell per run keeps it open. Build the gate itself in the machines chapter."
+				"Antihydrogen and exotic matter come from their own lines; the empty cartridges come back after each run."
 			]
+			icon: "gtceu:warp_gate"
+			id: "53A07A3FD419957D"
+			rewards: [{ id: "13D9DC95FA10AF87", type: "xp", xp: 50 }]
+			tasks: [{ id: "3CA8E59CFDDAB411", type: "checkmark" }]
 			title: "The Gate Opens"
 			x: 8.0d
 			y: 0.0d
@@ -144,7 +155,7 @@
 		}
 		{
 			dependencies: ["53A07A3FD419957D"]
-			description: ["Players cross only while both ends hold. Items go over the AE2 pair the &6Proxima Gate Seed&r makes, so nobody has to carry a stack of plates."]
+			description: ["A holding ring carries a player standing in it to the ring named by the Relay Coordinates in its input bus. With no coordinates it sends them to the first other holding ring, as Earth and Proxima b do. Items go over the AE2 pair the &6Proxima Gate Seed&r makes, so nobody has to carry a stack of plates."]
 			icon: "grindless:proxima_gate_seed"
 			id: "773081F576E0FF0C"
 			rewards: [{ id: "338F95708DA5F3F1", type: "xp", xp: 200 }]
@@ -254,10 +265,10 @@
 		}
 		{
 			dependencies: ["198E84EB67959EFD"]
-			description: ["The &6Stellar Neighbourhood Chart&r is the research for the UEV machine casing, and the hull comes with it. Keep the gate and the swarm running: UEV asks for both."]
+			description: ["The &6Stellar Neighbourhood Chart&r is the research for the assembly line that builds the &6UEV Machine Casing&r; the UEV hull has its own research. Keep the gate and the swarm running: UEV asks for both."]
 			icon: "gtceu:uev_machine_casing"
 			id: "7C44999E6D4544D4"
-			rewards: [{ id: "7A2EC01C0F46175B", type: "xp", xp: 300 }]
+			rewards: [{ id: "7A2EC01C0F46175B", type: "xp", xp: 100 }]
 			shape: "diamond"
 			size: 1.75d
 			tasks: [
@@ -286,37 +297,30 @@
 			y: 7.5d
 		}
 		{
-			dependencies: ["357A03FF61BCC69C"]
-			description: ["The &6UHV Circuit Assembler&r is the first assembler that can put together the circuits UHV machines are made of. A UHV hull, UV components and the cleanroom you already run; the UV circuits keep feeding it. The optical assembly and the wetware mainframe on the rows below, and every controller of this era. Boards and chips arrive from the cleanroom by ME; keep a stock of what it returns."]
-			icon: "gtceu:uhv_circuit_assembler"
-			id: "1DEA3F88969A67A0"
-			rewards: [{ id: "1A03282D60659D1E", type: "xp", xp: 150 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [{ id: "3C832B3A67C41A44", item: "gtceu:uhv_circuit_assembler", type: "item" }]
-			title: "UHV Circuit Assembler"
-			x: 8.0d
-			y: 3.5d
-		}
-		{
-			dependencies: ["1DEA3F88969A67A0"]
-			description: ["GTM adds a UHV hull and UHV hatches but no UHV arm, sensor or emitter, so every UHV controller is built from UV parts and UHV circuits. The UV robot arms, sensors and emitters you already make, and the UHV circuits made here. The controllers of the machines chapter, in the order it lists them. Stock each UV part by ME; the assembler draws two of the kind a controller asks for."]
-			icon: "gtceu:uv_robot_arm"
+			dependencies: ["5EF940CA680ECC5C"]
+			description: ["The eight &6UHV Components&r (emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor) are what every UHV controller, the UHV circuit assembler and the parallel hatch are built from. Each is an assembly line recipe on top of its UV part, the motor goes into most of the others. The UV component of the same kind, neutronium, naquadria and europium cable; the emitter, sensor, field generator and arm also take UHV circuits, the mainframes made above. The UHV circuit assembler, which takes an arm, an emitter and two conveyors, and the controllers of the machines chapter. Stock each UHV component by ME: a controller draws up to five of the same kind."]
+			icon: "gtceu:uhv_robot_arm"
 			id: "53B449FCC14AE4EC"
 			rewards: [{ id: "51EE4491697A7129", type: "xp", xp: 100 }]
 			shape: "hexagon"
 			size: 1.0d
 			tasks: [
-				{ id: "3FE7D7AC2A4184F9", item: "gtceu:uv_robot_arm", type: "item" }
-				{ id: "520288A5A5E42702", item: "gtceu:uv_sensor", type: "item" }
-				{ id: "5354C11D2A6FD726", item: "gtceu:uv_emitter", type: "item" }
+				{ id: "51AAB1C86F9BD2C6", item: "gtceu:uhv_emitter", type: "item" }
+				{ id: "711BEAED4F0C4E64", item: "gtceu:uhv_sensor", type: "item" }
+				{ id: "13DAE23470E09EC6", item: "gtceu:uhv_field_generator", type: "item" }
+				{ id: "7F864547F212F8DD", item: "gtceu:uhv_robot_arm", type: "item" }
+				{ id: "52CF7F0C8D793E2F", item: "gtceu:uhv_conveyor_module", type: "item" }
+				{ id: "7B0CED2023795268", item: "gtceu:uhv_electric_pump", type: "item" }
+				{ id: "358742ED4891F896", item: "gtceu:uhv_electric_piston", type: "item" }
+				{ id: "1AE64EE53ED4E538", item: "gtceu:uhv_electric_motor", type: "item" }
 			]
-			title: "UV Parts for UHV Controllers"
-			x: 10.0d
-			y: 3.5d
+			title: "UHV Components"
+			x: 20.0d
+			y: 6.5d
 		}
 		{
 			dependencies: ["5EF940CA680ECC5C"]
+			description: ["The &6UHV Machine Hull&r is the frame of every UHV hatch and of the UHV circuit assembler. It is made in an assembler from two UHV machine casings, polybenzimidazole and europium cable; it takes no circuit. Two UHV machine casings, polybenzimidazole and europium cable. The UHV circuit assembler and the UHV hatches. Craft a few at a time by ME; each hatch and machine takes one."]
 			icon: "gtceu:uhv_machine_hull"
 			id: "5829C4310B9C88A2"
 			rewards: [{ id: "1A437D0DA5EF1494", type: "xp", xp: 120 }]
@@ -326,8 +330,21 @@
 			y: 8.5d
 		}
 		{
+			dependencies: ["53B449FCC14AE4EC", "5829C4310B9C88A2"]
+			description: ["The &6UHV Circuit Assembler&r is the first assembler that can put together the circuits UHV machines are made of. A UHV hull, a UHV robot arm, a UHV emitter, two UHV conveyor modules, two UHV circuits (the mainframes made on this page), europium cable and the UV circuit assembler it upgrades. The circuit rows of the eras above, and every controller of this era that asks for it. Boards and chips arrive from the cleanroom by ME; keep a stock of what it returns."]
+			icon: "gtceu:uhv_circuit_assembler"
+			id: "1DEA3F88969A67A0"
+			rewards: [{ id: "1A03282D60659D1E", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "3C832B3A67C41A44", item: "gtceu:uhv_circuit_assembler", type: "item" }]
+			title: "UHV Circuit Assembler"
+			x: 22.0d
+			y: 8.5d
+		}
+		{
 			dependencies: ["357A03FF61BCC69C"]
-			description: ["A &6Lithium Niobate Wafer&r is cut from a boule pulled out of a melt. It bends light with an electric field, so a chip can modulate a beam. A boule from the crystal growth furnace, and a cleanroom to cut and polish it. The thin-film wafer next to it, and through it the optical processor. The crucible is reused; keep boules and cut wafers in a stocked chest by ME."]
+			description: ["A &6Lithium Niobate Wafer&r is cut from a boule pulled out of a melt. It bends light with an electric field, so a chip can modulate a beam. A boule from the crystal growth furnace, and a cleanroom to cut and polish it. The LNOI wafer next to it, and through it the optical processor. The crucible is reused; keep boules and cut wafers in a stocked chest by ME."]
 			icon: "grindless:lithium_niobate_wafer"
 			id: "5EEE3C1532815682"
 			rewards: [{ id: "302C197B378C3009", type: "xp", xp: 100 }]
@@ -340,20 +357,20 @@
 		}
 		{
 			dependencies: ["5EEE3C1532815682"]
-			description: ["Bond a thin lithium niobate film onto an insulating layer and you have the &6LNOI&r wafer, the stage light is guided on. A lithium niobate wafer, silicon nitride film and the cleanroom. The optical processor, which is cut from it. Bonding runs in plain machines by ME; keep spare wafers for the foundry."]
-			icon: "grindless:ln_on_insulator_plus"
+			description: ["Bond a thin lithium niobate film onto silicon and you have the &6LNOI Wafer&r, the stage light is guided on. A helium implant splits the film off a lithium niobate wafer, and the photonic foundry bonds it. A lithium niobate wafer cut with a helium implant (the ion implantation recipe), a silicon wafer, quicklime, ultrapure water, oxygen and hydrofluoric acid, in the photonic foundry. The lithium niobate wafer comes back. The phase-change die and the optical processor, which takes three LNOI wafers. Keep the implanted wafers, silicon wafers and quicklime stocked by ME and the acid and water piped; stock the LNOI wafers for the foundry."]
+			icon: "grindless:lnoi_wafer"
 			id: "337220D20FD9CC58"
 			rewards: [{ id: "1B142E48CA1A15CB", type: "xp", xp: 120 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "7687DBB69885E1C8", item: "grindless:ln_on_insulator_plus", type: "item" }]
+			tasks: [{ id: "7E6367A82D94D859", item: "grindless:lnoi_wafer", type: "item" }]
 			title: "Lithium Niobate on Insulator"
 			x: 10.0d
 			y: 5.5d
 		}
 		{
 			dependencies: ["337220D20FD9CC58"]
-			description: ["A chalcogenide film flips between glass and crystal when a laser says so, and the &6Photonic Die&r keeps a bit of light in that state. The photonic foundry, an LNOI wafer and the phase-change film. The optical processor and the memory node of the photonic line. The foundry fills a stack of dies per wafer; send them on by ME."]
+			description: ["A chalcogenide film flips between glass and crystal when a laser says so, and the &6Photonic Die&r keeps a bit of light in that state. The photonic foundry: one LNOI wafer and a GST target per batch, with argon and ultrapure water. Eight dies come out, and a spent target. The optical processor, which takes six. The foundry fills a stack of dies per wafer; send them on by ME and recycle the spent target."]
 			icon: "grindless:pcm_photonic_die"
 			id: "1EBB75CF8CF72E85"
 			rewards: [{ id: "57D123494496A216", type: "xp", xp: 120 }]
@@ -365,8 +382,21 @@
 			y: 5.5d
 		}
 		{
-			dependencies: ["1EBB75CF8CF72E85", "34795C9D86BC364D", "7DB98960A4C2D2E8"]
-			description: ["A processor that thinks in light and runs cold: the &6Optical Processor&r is the circuit that comes after the wetware computer. An LNOI wafer, phase-change dies, a quantum cascade laser, a memory chip and a UHV circuit, all in the photonic foundry. The optical assembly and, through it, the mainframes of the organoid array. Foundry inputs by ME; processors go into their own chest, one stack per assembly."]
+			dependencies: ["337220D20FD9CC58"]
+			description: ["A &6Thin-Film Lithium Niobate Modulator&r switches a beam with a voltage. One LNOI wafer is cut into sixteen of them, and the optical processor needs ten per batch. The photonic foundry: one LNOI wafer, ultrapure water and a circuit program. The optical processor. One wafer fills a stack of modulators: stock them by ME and send them to the foundry that makes processors."]
+			icon: "grindless:thin_film_ln_modulator"
+			id: "78442C1D1F08AEFD"
+			rewards: [{ id: "7F7B45DE8CB049A8", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "52D815ADC23C5568", item: "grindless:thin_film_ln_modulator", type: "item" }]
+			title: "Thin-Film Modulators"
+			x: 14.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1EBB75CF8CF72E85", "34795C9D86BC364D", "78442C1D1F08AEFD"]
+			description: ["A processor that thinks in light and runs cold: the &6Optical Processor&r is the light half of the optical assembly that goes into the wetware mainframe. In the photonic foundry: three LNOI wafers, six phase-change dies, three quantum cascade lasers, ten thin-film lithium niobate modulators, ultrapure water and a circuit program. Two processors come out. The optical assembly, which takes three processors. Foundry inputs by ME; processors go into their own chest, one stack per assembly."]
 			icon: "gtnn:optical_processor"
 			id: "74E5CDD1317012FB"
 			rewards: [{ id: "3E4D2C78AEF40DD6", type: "xp", xp: 180 }]
@@ -378,8 +408,8 @@
 			y: 5.5d
 		}
 		{
-			dependencies: ["74E5CDD1317012FB"]
-			description: ["Optical processors on an optical board with capacitors and diodes make the &6Optical Assembly&r, the largest circuit this era builds. Optical processors, the UHV circuit assembler and optical SMD parts. The wetware mainframe, whose recipe in the organoid array asks for one. One assembly per mainframe batch: keep a small stock by ME and never more."]
+			dependencies: ["74E5CDD1317012FB", "7DB98960A4C2D2E8"]
+			description: ["Optical processors and quantum memory chips make the &6Optical Assembly&r, the largest circuit this era builds. In the photonic foundry: three optical processors, three quantum memory chips and ultrapure water. The wetware mainframe, whose recipe in the organoid array asks for two. Two assemblies per mainframe batch: keep a small stock by ME and never more."]
 			icon: "gtnn:optical_assembly"
 			id: "18F76220739031F7"
 			rewards: [{ id: "7E16A892A92D78E3", type: "xp", xp: 200 }]
@@ -392,7 +422,7 @@
 		}
 		{
 			dependencies: ["357A03FF61BCC69C"]
-			description: ["An &6InP Wafer&r is the substrate a mid-infrared laser is grown on. Its lattice matches the layers the molecular beam reactor lays down. An InP boule from the crystal growth furnace, indium and red phosphorus, and the cleanroom. The quantum cascade laser next to it. The boule is slow. Keep indium and phosphorus topped up by ME and stock the wafers."]
+			description: ["An &6Indium Phosphide Wafer&r is the substrate a mid-infrared laser is grown on. Its lattice matches the layers the molecular beam reactor lays down. An InP boule from the crystal growth furnace, indium and red phosphorus, and the cleanroom. The quantum cascade laser next to it. The boule is slow. Keep indium and phosphorus topped up by ME and stock the wafers."]
 			icon: "grindless:inp_wafer"
 			id: "5432C6DC48ECC9A5"
 			rewards: [{ id: "5B4F99C30AA8F734", type: "xp", xp: 100 }]
@@ -405,7 +435,7 @@
 		}
 		{
 			dependencies: ["5432C6DC48ECC9A5"]
-			description: ["An electron falls down a staircase of thin layers and gives up a photon at every step. The &6Quantum Cascade Laser&r is hundreds of those layers on InP. The MBE reactor, an InP wafer and arsenic, which is contained. The optical processor, and the sensors of the astrometer and the swarm. Contain the arsenic loop; stock lasers by ME."]
+			description: ["An electron falls down a staircase of thin layers and gives up a photon at every step. The &6Quantum Cascade Laser&r is hundreds of those layers on InP. The MBE reactor: a quantum cascade superlattice wafer and gold dust make eight lasers. Arsenic is contained. The optical processor, and the sensors of the astrometer and the swarm. Contain the arsenic loop; stock lasers by ME."]
 			icon: "grindless:quantum_cascade_laser"
 			id: "34795C9D86BC364D"
 			rewards: [{ id: "1C75B01990D303EC", type: "xp", xp: 120 }]
@@ -431,7 +461,7 @@
 		}
 		{
 			dependencies: ["7CE22CED63CCF1E9"]
-			description: ["A slab cut from the boule and patterned in the photonic foundry becomes a &6Quantum Memory Chip&r that holds light as an excitation. An Eu:YSO boule and the photonic foundry. The optical processor. One boule cuts several slabs; send chips on by ME."]
+			description: ["A slab cut from the boule and patterned in the photonic foundry becomes a &6Quantum Memory Chip&r that holds light as an excitation. An Eu:YSO boule and the photonic foundry: one boule and ultrapure water make four chips. The optical assembly, which takes three. One boule cuts several slabs; send chips on by ME."]
 			icon: "grindless:quantum_memory_chip"
 			id: "7DB98960A4C2D2E8"
 			rewards: [{ id: "18D536D634351D78", type: "xp", xp: 120 }]
@@ -444,7 +474,7 @@
 		}
 		{
 			dependencies: ["357A03FF61BCC69C"]
-			description: ["Neurons grown on a chitosan scaffold in ultrapure water make an &6Organoid Processor&r, tissue that learns on a board. The organoid array, stem cells from UV's vat, a scaffold, ultrapure water and sterile growth medium. The wetware mainframe, four organoids at a time. Medium and water by pipe; a tissue line fed by ME runs without a hand."]
+			description: ["Neurons grown on a chitosan scaffold in ultrapure water make an &6Organoid Processor&r, tissue that learns on a board. The organoid array, stem cells from UV's vat, a scaffold, ultrapure water and sterile growth medium. It runs only in the Overworld. The wetware mainframe, four organoids at a time. Medium and water by pipe; a tissue line fed by ME runs without a hand."]
 			icon: "grindless:organoid_processor"
 			id: "104D06696418C335"
 			rewards: [{ id: "1425D7B94CCEED26", type: "xp", xp: 120 }]
@@ -457,7 +487,7 @@
 		}
 		{
 			dependencies: ["104D06696418C335", "18F76220739031F7"]
-			description: ["The &6Wetware Processor Mainframe&r is the UHV circuit. The organoid array makes four at once from organoid processors, neurons and an optical assembly. Four organoid processors, neuro processing units, an SiC power module and an optical assembly for each batch. Every UHV controller, and the hull of this era. Run the array in batches of four by ME and keep a dedicated mainframe chest."]
+			description: ["The &6Wetware Processor Mainframe&r is the UHV circuit. The organoid array makes four at once from organoid processors, neuro processing units and optical assemblies. Per batch of four: six organoid processors, six neuro processing units, two SiC power modules and two optical assemblies. Like the organoid, it runs only in the Overworld. Every UHV controller, the UHV components and the UHV circuit assembler. Run the array in batches of four by ME and keep a dedicated mainframe chest."]
 			icon: "gtceu:wetware_processor_mainframe"
 			id: "5EF940CA680ECC5C"
 			rewards: [{ id: "7E1ABB63C063E9A2", type: "xp", xp: 220 }]
@@ -483,7 +513,7 @@
 		}
 		{
 			dependencies: ["105E4880E4ADC4FD"]
-			description: ["Silicon carbide takes more heat and volts than silicon, and the &6SiC Power Module&r is what the swarm's control gear is built from. An inverted metamorphic array stacks a junction for every colour of light. The SiC device fab and the solar array fab, both from the machines tab, and ultrapure water for the wafers. Swarm segments and the UHV power gear. Boules and wafers move by bus; keep the ultrapure water on its own pipe."]
+			description: ["Silicon carbide takes more heat and volts than silicon, and the &6SiC Power Module&r is what the swarm's control gear is built from. An inverted metamorphic array stacks a junction for every colour of light. The SiC device fab and the solar array fab, both from the machines chapter, and ultrapure water for the wafers. Swarm segments and the UHV power gear. Boules and wafers move by bus; keep the ultrapure water on its own pipe."]
 			icon: "grindless:sic_power_module"
 			id: "5777F10880908743"
 			rewards: [{ id: "3A939E13B316928C", type: "xp", xp: 120 }]
@@ -517,16 +547,13 @@
 		}
 		{
 			dependencies: ["1338B882BFAB5DF8"]
-			description: ["The &6Swarm Control Station&r steers a cloud of segments round the Sun and sends the power down as a beam. Two stations feed one bank, and the bank loses a little on the way. Swarm segments from the foundry in Mercury orbit, and the station in the orbit itself. UHV power without fuel, and the swarm half of the gate to UEV. Segments ride the Mercury AE2 pair; worn ones go back to the foundry as scrap."]
+			description: ["The &6Swarm Control Station&r steers a cloud of segments round the Sun and sends the power down as a beam. Two stations feed one bank, and the bank loses a little on the way. Swarm segments from the foundry and oganesson propellant pods, with the station in Mercury orbit itself. UHV power, and the swarm half of the gate to UEV. Each run burns pods and a segment. Segments and pods ride the Mercury AE2 pair; worn segments and empty propellant tanks come back out of each run."]
 			icon: "gtceu:swarm_control_station"
 			id: "7AAE7008AA466590"
 			rewards: [{ id: "163E8662FE869F6E", type: "xp", xp: 200 }]
 			shape: "gear"
 			size: 1.25d
-			tasks: [
-				{ id: "105E5722D91D5E94", item: "gtceu:swarm_control_station", type: "item" }
-				{ id: "38C26A13EB4BDEF0", item: "grindless:swarm_segment", type: "item" }
-			]
+			tasks: [{ id: "105E5722D91D5E94", item: "gtceu:swarm_control_station", type: "item" }]
 			title: "The Swarm"
 			x: 14.0d
 			y: -9.5d
@@ -563,7 +590,7 @@
 		}
 		{
 			dependencies: ["105E4880E4ADC4FD"]
-			description: ["The &6UHV SMES Cell&r holds a huge store of EU, and the nuclear clock keeps it in step with the network. The naquadria magnet works, and the nuclear clock for the sync. The UHV wireless tier. Nothing to feed. Size the towers for your busiest hour."]
+			description: ["The &6UHV SMES Cell&r holds a huge store of EU and is the cell the UHV wireless network is built on. In the naquadria magnet works: four UV SMES cells, RTAN wire, neutronium plates and liquid helium. The UHV wireless tier. Nothing to feed. Size the towers for your busiest hour."]
 			icon: "grindless:uhv_smes_cell"
 			id: "5E6B4DEB712EECBE"
 			rewards: [{ id: "3CE50DA47EC8E899", type: "xp", xp: 200 }]
@@ -579,7 +606,7 @@
 		}
 		{
 			dependencies: ["5E6B4DEB712EECBE"]
-			description: ["Move your towers onto &6UHV SMES Cells&r and the wireless network carries UHV, out to the stations and now to Mercury and Proxima. One formed tower holding a UHV cell: the network runs at its strongest cell, so until then it stays at UV. Stations that run on power made at home, and the wireless hatches and covers at UHV. Add cells when the network dips at your busiest hour."]
+			description: ["Move your towers onto &6UHV SMES Cells&r and the wireless network carries UHV, out to the stations and now to Mercury and Proxima. One formed tower holding a UHV cell: the network runs at its strongest cell, so until then it stays at UV. Each wireless hatch and cover takes a nuclear clock. Stations that run on power made at home, and the wireless hatches and covers at UHV. Add cells when the network dips at your busiest hour."]
 			icon: "gtceu:uhv_wireless_energy_hatch"
 			id: "3B594BE1402C7B55"
 			rewards: [{ id: "758A54F40ABB6F18", type: "xp", xp: 200 }]
@@ -595,11 +622,11 @@
 		}
 		{
 			dependencies: ["3B594BE1402C7B55"]
-			description: ["There is no UHV parallel hatch. The &6UV Parallel Hatch&r is the top of the line, and one more machine of the same kind is the only other way to go wider."]
-			icon: "gtceu:uv_parallel_hatch"
+			description: ["The &6UHV Parallel Hatch&r runs a machine on 1,024 recipes at once. It is an assembly line recipe on a UHV hull with a UHV sensor and emitter, four UHV circuits, fibre laser modules, SRF cavities and mu-metal shields."]
+			icon: "gtceu:uhv_parallel_hatch"
 			id: "32E554E77D7298BA"
 			rewards: [{ id: "7C3C911F3C4092B6", type: "xp", xp: 60 }]
-			tasks: [{ id: "74B755A21A7ACD91", item: "gtceu:uv_parallel_hatch", type: "item" }]
+			tasks: [{ id: "3B06AB8789839DB2", item: "gtceu:uhv_parallel_hatch", type: "item" }]
 			title: "Parallel Hatch"
 			x: 14.0d
 			y: 41.0d
@@ -630,7 +657,7 @@
 		}
 		{
 			dependencies: ["53952D3743F151DD"]
-			description: ["Proxima b has no bridge of its own: only the gate makes the &6Proxima Gate Seed&r, and the first flora sample is its catalyst. Samples then arrive through ME, never by hand."]
+			description: ["Proxima b has no bridge of its own: only the gate makes the &6Proxima Gate Seed&r, and its catalysts are the approach data, the nuclear clock and the organoid processor. Samples then arrive through ME, never by hand."]
 			icon: "grindless:proxima_gate_seed"
 			id: "533F887480ED2BCA"
 			rewards: [{ id: "599BF2A3F82EEE46", type: "xp", xp: 100 }]
@@ -659,7 +686,7 @@
 		}
 		{
 			dependencies: ["5FD574B523467EFF"]
-			description: ["Heavy water, platinum salts and rare-earth liquors from Proxima b go through the &6Platinum Plant&r, &6Heavy Water Plant&r, &6Extraction Cascade&r, &6Regolith Cell&r and &6Lunar Solar Array&r. Each machine learns a new input. Proxima leach liquors, and the arrays tuned to the red. RTAN, UHV catalysts and the base's power. Liquors arrive over the Proxima AE2 pair; each plant hands its output on."]
+			description: ["Heavy water, platinum salts and rare-earth liquors from Proxima b go through the &6Platinum Plant&r, &6Heavy-Water Plant&r, &6Rare Earth Extraction Cascade&r, &6Regolith Cell&r and &6Lunar Solar Array&r. Each machine learns a new input. Proxima leach liquors, and the arrays tuned to the red. RTAN, UHV catalysts and the base's power. Liquors arrive over the Proxima AE2 pair; each plant hands its output on."]
 			icon: "gtceu:heavy_water_plant"
 			id: "7F6C236A1EA2F118"
 			rewards: [{ id: "374ADDEBCB73B958", type: "xp", xp: 100 }]
@@ -717,7 +744,7 @@
 		}
 		{
 			dependencies: ["50C29964A89D9B46"]
-			description: ["The &6Thruster Works&r, &6Light Sail Fab&r and &6Cryogenic Plant&r make the motors and sails for the trip, with oganesson as the propellant. Oganesson from the cryogenic plant, and film from the aluminium line. The ICAN motor's pods and the sails. Pods and sails to ME; keep oganesson in its own tank."]
+			description: ["The &6Thruster Works&r, &6Light Sail Fab&r and &6Cryogenic Plant&r make the motors and sails for the trip, with oganesson as the propellant. Oganesson from the cryogenic plant, and film from the aluminium line. The pods the swarm burns, and the sails. Pods and sails to ME; keep oganesson in its own tank."]
 			icon: "gtceu:thruster_works"
 			id: "166C0A74107A1EF3"
 			rewards: [{ id: "3D0B9F74CD0D8410", type: "xp", xp: 100 }]
@@ -748,8 +775,8 @@
 		{
 			dependencies: ["166C0A74107A1EF3"]
 			description: [
-				"Oganesson is the heaviest noble gas and the best propellant a thruster could ask for. The &6Oganesson Propellant Pod&r packs it for the ICAN motor. Oganesson from the cryogenic plant. The motor and the sails' pods. One pod line off the cryogenic plant, kept in its own tank."
-				"Real oganesson lasts milliseconds and only a few atoms exist. GregTech Modern treats it as a stable gas, and the pack goes along."
+				"Oganesson is the heaviest noble gas and the best propellant a thruster could ask for. The &6Oganesson Propellant Pod&r       packs it for the Dyson swarm, whose runs burn it. Oganesson from the cryogenic plant. The propellant the swarm burns. One pod line off the cryogenic plant, kept in its own tank."
+				"Real oganesson lasts milliseconds and only a few atoms exist. GregTech Modern treats it as a stable gas, so here it is one."
 			]
 			icon: "grindless:oganesson_propellant_pod"
 			id: "5388F974D6992B80"
@@ -823,7 +850,7 @@
 		}
 		{
 			dependencies: ["17FFD22B68F2339B"]
-			description: ["The &6Transuranium Facility&r separates the irradiated targets into berkelium and californium. Its controller, radiation-proof casing and tungstensteel pipe casing. Berkelium-249 and the californium-252 source the clock lab and the gate ask for. Keep the targets in sealed buses; leftovers go to the partitioning plant."]
+			description: ["The &6Transuranium Facility&r separates the irradiated targets into berkelium and californium. Its controller, radiation-proof casing and tungstensteel pipe casing. Berkelium-249 and the californium-252 source that cold-trap drilling and YBCO irradiation use as a catalyst. Keep the targets in sealed buses; leftovers go to the partitioning plant."]
 			icon: "gtceu:transuranium_facility"
 			id: "36C7A1B9DB6512D7"
 			rewards: [{ id: "12243468CFF9573A", type: "xp", xp: 120 }]
@@ -840,7 +867,7 @@
 		}
 		{
 			dependencies: ["36C7A1B9DB6512D7"]
-			description: ["One more neutron capture and berkelium becomes &6Californium-252&r, a source that emits neutrons by itself. It starts the reactors that cannot start alone."]
+			description: ["One more neutron capture and berkelium becomes &6Californium-252&r, a source that emits neutrons by itself. It is the catalyst of cold-trap drilling and of YBCO irradiation, and it is not used up."]
 			icon: "grindless:californium_252_source"
 			id: "7365DAF24CBF4955"
 			rewards: [{ id: "3CCD239C7E71855D", type: "xp", xp: 120 }]
@@ -1198,7 +1225,7 @@
 				{ id: "5AAAF642B721EA7D", item: "grindless:warp_gate_casing", type: "item" }
 				{ id: "5F19B47C7782A13A", item: "grindless:field_ring_casing", type: "item" }
 			]
-			title: "The Gate Opens"
+			title: "The Warp Gate"
 			x: 15.5d
 			y: 36.0d
 		}
@@ -1329,7 +1356,7 @@
 				{ id: "186C12C033D565B5", item: "gtceu:uhv_machine_hull", type: "item" }
 				{ id: "5BBE558A3500A881", item: "grindless:station_truss_casing", type: "item" }
 			]
-			title: "The Swarm"
+			title: "Swarm Control Station"
 			x: 20.0d
 			y: -13.0d
 		}
@@ -1346,7 +1373,7 @@
 				{ id: "5E501F93CDE6CD6C", item: "gtceu:heatproof_machine_casing", type: "item" }
 				{ id: "54737A46EBD06500", item: "grindless:station_truss_casing", type: "item" }
 			]
-			title: "Coronal Map"
+			title: "Solar Probe Bay"
 			x: 22.0d
 			y: -13.0d
 		}
@@ -1366,7 +1393,7 @@
 		}
 		{
 			dependencies: ["75B0EF109062BCC1"]
-			description: ["The &6Sample Receiving Facility&r opens canisters from another world in a sealed, level-four lab. Its controller and the sealed-lab &6BSL Casing&r. Safe handling of every alien sample. Canisters by ME; nothing leaves unsterilised."]
+			description: ["The &6Sample Receiving Facility&r opens canisters from another world in a sealed, level-four lab. Its controller and the sealed-lab &6BSL-4&r walls. Safe handling of every alien sample. Canisters by ME; nothing leaves unsterilised."]
 			icon: "gtceu:sample_receiving_facility"
 			id: "3B842B6DA3F17B57"
 			rewards: [{ id: "3A1B46EC1F8E90FC", type: "xp", xp: 120 }]
@@ -1472,7 +1499,7 @@
 				{ id: "55CBB406DA64A346", item: "grindless:proxima_base_casing", type: "item" }
 				{ id: "3279B069A5FB37F0", item: "gtceu:clean_machine_casing", type: "item" }
 			]
-			title: "Four Light Years of Baseline"
+			title: "Baseline Astrometer"
 			x: 25.0d
 			y: -8.0d
 		}

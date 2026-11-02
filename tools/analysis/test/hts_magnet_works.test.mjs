@@ -32,11 +32,9 @@ const SCRIPTS = {
   server: path.join(KUBEJS, 'server_scripts', 'grindless', 'luv', 'hts_magnet_works.js'),
   lang: path.join(KUBEJS, 'client_scripts', 'grindless', 'luv_hts_magnet_works_lang.js'),
 };
-// a GTM 7.5.3 registry dump of the pack (gg_dump.js), when the session that made it left it on this machine
-const DUMP_ITEMS = [
-  process.env.GG_DUMP_ITEMS,
-  'C:/Users/EzequielC/.copilot/session-state/52ba6327-e548-48e7-aa57-41c2373d41c2/files/test-runs/power-quests-1/results/server/kubejs-exported/items.json',
-].filter(Boolean).find((p) => fs.existsSync(p));
+// a GTM 7.5.3 registry dump of the pack (gg_dump.js): GG_DUMP is the directory (gg-vm-exec.sh sets it to dumps/latest)
+const GG_DUMP = process.env.GG_DUMP || '';
+const DUMP_ITEMS = GG_DUMP && fs.existsSync(path.join(GG_DUMP, 'items.json')) ? path.join(GG_DUMP, 'items.json') : null;
 
 // ---------------------------------------------------------------- the table
 
@@ -92,17 +90,28 @@ test('magnet works table: every id is GTM\'s or one LuV\'s design names', () => 
   assert.deepEqual(a1, ['gtceu:tetrataenite_rod']);
   const foundation = fs.readFileSync(path.join(KUBEJS, 'startup_scripts', 'grindless', 'luv', 'foundation.js'), 'utf8');
   assert.match(foundation, /event\.create\(LUVF\.materials\.tetrataenite\)[\s\S]*?GENERATE_ROD/, 'A1 gives tetrataenite its rod');
-  if (!DUMP_ITEMS) return;
+  const startup = fs.readFileSync(SCRIPTS.startup, 'utf8');
+  for (const id of PATTERN_IDS.slice(0, 4)) assert.ok(startup.includes("'" + id + "'"), id + ' is the pattern\'s');
+  assert.ok(startup.includes("const FRAME = 'tungsten_steel'"));
+});
+
+// native-backed: GG_DUMP names the dump directory (the VM sets it). Unset is an explicit skip; set but unusable is a failure.
+const PATTERN_IDS = ['gtceu:frostproof_machine_casing', 'gtceu:stainless_steel_gearbox', 'gtceu:ptfe_pipe_casing', 'gtceu:laminated_glass',
+  'gtceu:tungsten_steel_frame', 'gtceu:luv_machine_hull', 'gtceu:luv_electric_motor', 'gtceu:luv_sensor', 'gtceu:superconducting_coil'];
+test('magnet works table: every gtceu id exists in the native dump (GG_DUMP)', { skip: GG_DUMP ? false : 'GG_DUMP is not set: no native dump to check against' }, () => {
+  assert.ok(DUMP_ITEMS, 'GG_DUMP=' + GG_DUMP + ' has no items.json');
+  const items = new Set();
+  const fluids = new Set([TABLE.charge.id]);
+  for (const r of LUV_ROWS) {
+    [...r.itemsIn, ...r.itemsOut].forEach((x) => items.add(x.id));
+    r.fluidsIn.forEach((x) => fluids.add(x.id));
+  }
+  const a1 = [...items, ...fluids].filter((x) => /^gtceu:tetrataenite_/.test(x));
   // GTM 7.5.3's own ids, exactly as the native dump lists them (a fluid by its fluid id, not its bucket): the table's and the pattern's
   const dump = JSON.parse(fs.readFileSync(DUMP_ITEMS, 'utf8'));
   const knownItems = new Set(dump.items);
   const knownFluids = new Set(dump.fluids);
-  const pattern = ['gtceu:frostproof_machine_casing', 'gtceu:stainless_steel_gearbox', 'gtceu:ptfe_pipe_casing', 'gtceu:laminated_glass',
-    'gtceu:tungsten_steel_frame', 'gtceu:luv_machine_hull', 'gtceu:luv_electric_motor', 'gtceu:luv_sensor', 'gtceu:superconducting_coil'];
-  const startup = fs.readFileSync(SCRIPTS.startup, 'utf8');
-  for (const id of pattern.slice(0, 4)) assert.ok(startup.includes("'" + id + "'"), id + ' is the pattern\'s');
-  assert.ok(startup.includes("const FRAME = 'tungsten_steel'"));
-  const missingItems = [...items, ...pattern].filter((id) => id.startsWith('gtceu:') && !a1.includes(id) && !knownItems.has(id));
+  const missingItems = [...items, ...PATTERN_IDS].filter((id) => id.startsWith('gtceu:') && !a1.includes(id) && !knownItems.has(id));
   const missingFluids = [...fluids].filter((id) => !knownFluids.has(id));
   assert.deepEqual(missingItems, [], 'GTM 7.5.3 item ids absent from the dump ' + DUMP_ITEMS);
   assert.deepEqual(missingFluids, [], 'GTM 7.5.3 fluid ids absent from the dump ' + DUMP_ITEMS);

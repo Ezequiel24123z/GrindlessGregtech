@@ -89,7 +89,7 @@
 
   // ---------------------------------------------------------------- the deep siphon: 7 wide, 7 deep, 15 high
   // rows bottom -> top: 0 floor, 1-13 the walls around the scoop bay and the winch (two blocks longer than ZPM's), 14 the roof
-  const SIPHON_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_hatch: { min: 1, max: 3 } }
+  const SIPHON_PARTS = { energy_input: { min: 1, max: 2 }, input_bus: { min: 1, max: 2 }, output_bus: { min: 0, max: 1 }, output_hatch: { min: 1, max: 3 } }
   const SIPHON = {
     slices: [0, 1, 2, 3, 4, 5, 6].map(function (z) {
       return shellSlice(7, 7, 15, z, function (x, zz, y) { return x === 3 && zz === 3 ? (y === 13 ? 'D' : 'F') : ' ' }, siphonWall)

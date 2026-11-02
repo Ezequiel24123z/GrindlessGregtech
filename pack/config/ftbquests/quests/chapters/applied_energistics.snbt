@@ -299,7 +299,7 @@
 			y: 4.5d
 		}
 		{
-			dependencies: ["38EE187ED07F2279"]
+			dependencies: ["38EE187ED07F2279", "5BBE143E97647099"]
 			description: [
 				"Past 256k, &6MEGA Cells&r take over, and everything they add grows from the Accumulation Processor. That one comes out of the circuit assembler with an IV circuit, so MEGA waits for IV."
 			]
@@ -318,7 +318,7 @@
 		{
 			dependencies: ["3312ACABB4B4739F"]
 			description: [
-				"The network leaves Earth in EV, over quantum bridges. The catch is the singularity pair: each planet's half comes from a seed made on that planet, so the Moon's bridge starts with a chemical reactor on the Moon."
+				"The network leaves Earth in EV, over quantum bridges. The catch is the singularity pair: each planet's half is a seed made from that planet's own sample, then processed anywhere. The Moon's seed is plain helium-3, an ender pearl and a circuit in a chemical reactor, so make it at home and carry it across."
 			]
 			icon: "ae2:quantum_ring"
 			id: "6DB0D0C11BE35CD7"

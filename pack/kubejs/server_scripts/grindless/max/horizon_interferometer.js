@@ -1,4 +1,4 @@
-// priority: -19912
+// priority: -19908
 // -----------------------------------------------------------------------------------------------
 // MAX horizon interferometer (docs/eras/max.md, machine 11, lines L47, L48, L49, L56 and L57; package MX-S1). The line steps on older machines
 // are rows marked MX-S1 in their own tables and scripts; this file holds the machine's three recipes, its controller, the two casing crafts and

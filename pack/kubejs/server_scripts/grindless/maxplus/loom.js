@@ -160,7 +160,7 @@
     var missing = missingIds(ins.concat([c.machine]), [KERR])
     if (missing.length > 0) return skip('meta_material_loom controller', 'unknown id(s): ' + missing.join(', '))
     var a = event.recipes.gtceu.assembly_line('grindless:meta_material_loom')
-    a.itemInputs(HULL, '2x ' + c.casing, '8x grindless:horizon_processor', '4x ' + CIRCUIT)
+    a.itemInputs(HULL, '2x ' + c.casing, '8x #gtceu:circuits/maxplus', '4x ' + CIRCUIT)
     c.comps.forEach(function (s) { a.itemInputs(s) })
     a.inputFluids(Fluid.of(KERR, 2000))
     a.itemOutputs(c.machine)

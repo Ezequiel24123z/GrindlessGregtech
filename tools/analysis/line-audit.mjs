@@ -21,8 +21,11 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(here, '..', '..');
 
 export const ERAS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
-// AGENTS.md:18: progression multiblocks x1.35 per era from EV, and about x1.5 lines per era from UV (guide, not quota)
+// AGENTS.md principle 7. GUIDE counts progression multiblocks per era, not lines; LINE_GUIDE and CROSSING_GUIDE are the guide
+// for new real production lines and for crossings two or more eras back (docs/research/complexity.md:97), the metric of this audit.
 export const GUIDE = { ev: 11, iv: 15, luv: 20, zpm: 27, uv: 36 };
+export const LINE_GUIDE = { zpm: 14, uv: 21 };
+export const CROSSING_GUIDE = { zpm: 13, uv: 20 };
 export const REAL_STEPS = 4;
 const NOISE_TYPE = /recycling|decomposition/;
 const NOISE_ID = /\/uncraft|_recycling|\/unpack|decompress|decomposition_|packer\/package_|_dust_assembling_|cool_hot_|\/compress|\/pack_|_to_dust_/;
@@ -704,11 +707,12 @@ export function toCsv(rows) {
 }
 
 export function eraSummary(rows) {
-  const per = new Map(ERAS.map((e) => [e, { lines: 0, real: 0, crossings: 0, content: 0, keep: 0, fix: 0, merge: 0, remove: 0, prod: 0, role: 0, branch: 0, fold: 0 }]));
+  const per = new Map(ERAS.map((e) => [e, { lines: 0, real: 0, crossings: 0, deep: 0, content: 0, keep: 0, fix: 0, merge: 0, remove: 0, prod: 0, role: 0, branch: 0, fold: 0 }]));
   for (const r of rows) {
     const s = per.get(r.line.era);
     const kind = r.kind || 'production';
     s.lines++; if (r.real && kind === 'production') s.real++; s.crossings += r.line.crossings.length; s.content += (r.line.content || []).length;
+    if (r.real && kind === 'production') s.deep += [...r.line.crossings, ...(r.line.content || [])].filter((c) => c.back >= 2).length;
     if (s[r.verdict] !== undefined) s[r.verdict]++;
     s[kind === 'production' ? 'prod' : kind]++;
   }
@@ -756,12 +760,12 @@ async function main(argv) {
   fs.writeFileSync(path.join(opt.out, '03_design_lines.csv'), cnt.join('\n') + '\n');
   fs.writeFileSync(path.join(opt.out, '03_missing_lines.csv'), miss.join('\n') + '\n');
   const rep = new Map(reports.map((r) => [r.era, r]));
-  console.log('era    design chart real | missing (count / named, in dump)  planned | cross content  keep fix merge remove  prod role branch fold   guide');
+  console.log('era    design chart real | missing (count / named, in dump)  planned | cross content  keep fix merge remove  prod role branch fold   lines/guide deep/guide');
   for (const [e, s] of per) {
     if (!s.lines) continue;
     const r = rep.get(e);
     const d = r ? `${String(r.design).padStart(6)} ${String(r.chart).padStart(5)} ${String(s.real).padStart(4)} | ${String(r.missingByCount).padStart(7)} / ${String(r.missing.length).padStart(2)}, ${String(r.missing.filter((m) => m.dump).length).padStart(2)}  ${String(r.planned || '').padStart(14)}` : `${''.padStart(6)} ${String(s.lines).padStart(5)} ${String(s.real).padStart(4)} | ${''.padStart(25)}`;
-    console.log(`${e.padEnd(6)} ${d} | ${String(s.crossings).padStart(5)} ${String(s.content).padStart(7)}  ${String(s.keep).padStart(4)} ${String(s.fix).padStart(3)} ${String(s.merge).padStart(5)}     ${String(s.remove).padStart(6)}  ${String(s.prod).padStart(4)} ${String(s.role).padStart(4)} ${String(s.branch).padStart(6)} ${String(s.fold).padStart(4)}   ${GUIDE[e] ?? ''}`);
+    console.log(`${e.padEnd(6)} ${d} | ${String(s.crossings).padStart(5)} ${String(s.content).padStart(7)}  ${String(s.keep).padStart(4)} ${String(s.fix).padStart(3)} ${String(s.merge).padStart(5)}     ${String(s.remove).padStart(6)}  ${String(s.prod).padStart(4)} ${String(s.role).padStart(4)} ${String(s.branch).padStart(6)} ${String(s.fold).padStart(4)}   ${s.real}/${LINE_GUIDE[e] ?? '-'}  ${s.deep}/${CROSSING_GUIDE[e] ?? '-'}`);
   }
       for (const r of rows) {
         if (r.line.keepShort && r.kind === 'production') console.log(`keepShort ${r.line.id}: ${r.line.keepShort}`);

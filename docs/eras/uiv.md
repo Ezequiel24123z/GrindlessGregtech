@@ -1500,6 +1500,12 @@ Wave B opens after every wave A package has merged, and after UEV's B1 (the Siri
   - the relays seed AE2 at both platforms.
 - **Tests:** T0; T1: `gg_test_uiv_travel` in the band assigned by integrator. Doubt: a platform placed in an unvisited tier 11 datapack dimension, and the jump rows at the Sirius B relay.
 - **Commits:** 3: the seed, probe and launch; the datapack and sunlight; the gate rows and platforms.
+- **As built (AF-1, issue #203, after audit M8):**
+  - one placer for all 13 rows, `server_scripts/grindless/lib/relay_platforms.js`; `uiv/travel.js` and `uxv/kerr_sling.js` keep only their publications. It places every structure symbol, frame posts included, plus a floor under the ring and its kit;
+  - a jump places its platform only when it completes: the gate's `afterWorking` (startup `uhv/gate.js`) queues the place in persistent data, so a restart loses nothing and a paused or starved jump pays nothing out. Once per world (`uivPlatform_<place>`, `uxvPlatform_<place>`);
+  - each completed jump leaves that place's Relay Coordinates (a GTM data stick with NBT) in the jump ring's output bus. A holding ring (c2, WORKING) with coordinates in its input bus carries a player standing in it there, paid by its own sustain. Without coordinates it pairs with another holding ring, the first by key;
+  - the platform ring is placed with circuit 2, 8 cells and the coordinates of the ring that sent the jump. Its wireless hatches are tracked by the network, and it starts paused. A player who steps into it wakes it for one hold and rides home;
+  - ring positions and the "just carried" flag are persistent (`grindless_warp_rings`, the player's `grindlessWarpMoved`); whether a ring holds is read from the machine.
 - **Serial:** alone.
 
 #### B2. RX J1856.5−3754: crust, neutronium and the r-process

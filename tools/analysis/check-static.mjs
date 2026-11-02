@@ -1,8 +1,10 @@
 // T0 static check of the pack's KubeJS scripts, used by tools/Check-Fast.ps1. No Minecraft, no network.
 //   node tools/analysis/check-static.mjs [--pack <dir>]
 // Runs every startup, server and client script through lib/kubejs_static.mjs (Node `vm`), then checks:
-//   scripts   no script throws while loading or in an event callback (syntax errors included). console.error lines are
-//             reported as a count only: the stand-in does not model the mods' materials, so some are expected.
+//   scripts   no script throws while loading or in an event callback (syntax errors included).
+//   console-error  console.error lines the stand-in logs are a ratchet against console_error_known.json (M9-20): new or stale fails.
+//   layout    no recipe has more entries on a side than its type lays out (M8-04), against layout_known.json (shrink-only).
+//             --write-baselines drops fixed entries; --seed-baselines "<reason>" is the only way to add (recorded in the file).
 //   lang      counts the en_us keys the scripts add (English is the only language).
 //   english-only  no es_es key, block, column or file anywhere under pack/kubejs (EN-1; the owner's rule: nothing in Spanish).
 //   scope     no new top-level declaration in a script and no new const/let in a callback (lib/scope_rules.mjs, AF-K2 M8-15); the\n//             ones that exist are counted per file in scope_baseline.json, which only shrinks: a count above it fails.\n//             --scope-baseline prints the current counts as that file's JSON.\n//   registry  every machine, recipe type and grindless: item/block the scripts register has an en_us name.
@@ -13,8 +15,11 @@ import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { runPackScripts, spanishFindings } from './lib/kubejs_static.mjs';
 import { scopeFindings } from './lib/scope_rules.mjs';
+import { layoutOverflows, ratchetDiff } from './lib/capacity.mjs';
 
-const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const here = path.dirname(fileURLToPath(import.meta.url));
+const recipeId = (r) => String(r.i);
+const repo = path.resolve(here, '..', '..');
 const i = process.argv.indexOf('--pack');
 const packDir = i > 0 ? path.resolve(process.argv[i + 1]) : path.join(repo, 'pack');
 const MAX = 8;
@@ -71,7 +76,60 @@ const describe = (e) => {
   return e.file + ' [' + e.stage + '] ' + String(e.message).slice(0, 160);
 };
 report('scripts', thrown.map(describe),
-  thrown.length + ' exceptions, ' + consoleErrors + ' console.error (stand-in, informational)');
+  thrown.length + ' exceptions, ' + consoleErrors + ' console.error (baselined in console_error_known.json)');
+
+// M9-20: console.error lines from the stand-in are a ratchet, not a count. Each distinct "file: message" is known (a stand-in limitation
+// named in the baseline) or it fails; a known line that stopped appearing is stale and fails too, so the list can only shrink.
+const consoleKey = (e) => (e.file + ': ' + String(e.message)).slice(0, 220);
+const consoleKnownFile = path.join(here, 'console_error_known.json');
+const consoleKnown = fs.existsSync(consoleKnownFile) ? JSON.parse(fs.readFileSync(consoleKnownFile, 'utf8')) : { known: {} };
+const consoleNow = {};
+for (const e of run.errors.filter((x) => x.stage === 'console.error')) consoleNow[consoleKey(e)] = (consoleNow[consoleKey(e)] || 0) + 1;
+const cd = ratchetDiff(Object.keys(consoleNow), Object.keys(consoleKnown.known || {}));
+const consoleProblems = [
+  ...cd.fresh.map((k) => 'new console.error: ' + k),
+  ...cd.stale.map((k) => 'stale (no longer logged; remove it from console_error_known.json): ' + k),
+  ...Object.keys(consoleNow).filter((k) => k in (consoleKnown.known || {}) && consoleNow[k] > (consoleKnown.known[k].count || 1)).map((k) => 'console.error repeated more often than baselined: ' + k),
+];
+report('console-error', consoleProblems, Object.keys(consoleNow).length + ' distinct, ' + cd.fresh.length + ' new');
+
+// M8-04: no recipe may have more entries on a side than its type lays out. Our types' layouts come from setMaxIOSize in the scripts
+// (recorded by the stand-in); GTM's from the bench's capacity snapshot. Known overflows are baselined in layout_known.json (shrink-only).
+const snapFile = path.join(here, 'capacity_snapshot.json');
+const snapTypes = fs.existsSync(snapFile) ? JSON.parse(fs.readFileSync(snapFile, 'utf8')).types || {} : {};
+const layoutOf = (typeId) => {
+  const mine = run.registry.recipeTypes.get(typeId);
+  if (mine && mine.maxIO && mine.maxIO.length === 4) return mine.maxIO;
+  const snap = snapTypes[typeId];
+  return snap && snap.io ? snap.io : null;
+};
+const staticRecipes = (run.docs.recipes.recipes || []).map((r) => ({ id: recipeId(r), type: r.t, json: r.j }));
+const overflow = layoutOverflows(staticRecipes, layoutOf);
+const layoutKnownFile = path.join(here, 'layout_known.json');
+const layoutKnown = fs.existsSync(layoutKnownFile) ? JSON.parse(fs.readFileSync(layoutKnownFile, 'utf8')) : { violations: {} };
+const ld = ratchetDiff(Object.keys(overflow), Object.keys(layoutKnown.violations || {}));
+report('layout', [
+  ...ld.fresh.map((k) => 'over the type layout: ' + k + ' (' + overflow[k] + ')'),
+  ...ld.stale.map((k) => 'stale (fixed; remove it from layout_known.json): ' + k),
+], Object.keys(overflow).length + ' over the layout, ' + ld.fresh.length + ' new');
+const writeBaselines = process.argv.includes('--write-baselines');
+const seedAt = process.argv.indexOf('--seed-baselines');
+const seedReason = seedAt > 0 ? String(process.argv[seedAt + 1] || '').trim() : '';
+if (writeBaselines || seedAt > 0) {
+  // shrink-only (M9-09): a rewrite may drop stale entries, never add new ones; adding is --seed-baselines "<reason>", recorded in the file.
+  if ((cd.fresh.length || ld.fresh.length) && !seedReason) {
+    console.log(lines.join('\n'));
+    console.log('refused: --write-baselines would add entries; fix them or pass --seed-baselines "<reason>"');
+    process.exit(1);
+  }
+  const keep = (known, now) => Object.fromEntries(Object.keys(now).map((k) => [k, (known[k]) || null]));
+  const seededAdd = [...cd.fresh, ...ld.fresh];
+  const withSeed = (doc, prev) => (seededAdd.length ? { ...doc, seeded: [...(prev.seeded || []), { reason: seedReason, added: seededAdd }] } : prev.seeded ? { ...doc, seeded: prev.seeded } : doc);
+  fs.writeFileSync(layoutKnownFile, JSON.stringify(withSeed({ note: 'Recipes with more entries on a side than their recipe type lays out (M8-04). May only shrink: fix the layout or the recipe, then rerun check-static.mjs --write-baselines.', violations: overflow }, layoutKnown), null, 1) + '\n');
+  const knownOut = {};
+  for (const [k, n] of Object.entries(consoleNow)) knownOut[k] = { count: n, why: (consoleKnown.known && consoleKnown.known[k] && consoleKnown.known[k].why) || seedReason };
+  fs.writeFileSync(consoleKnownFile, JSON.stringify(withSeed({ note: 'console.error lines the KubeJS stand-in logs ("file: message" -> count and why). May only shrink: fix the cause, then rerun check-static.mjs --write-baselines.', known: knownOut }, consoleKnown), null, 1) + '\n');
+}
 
 const en = run.lang.en_us || {};
 report('lang', [], Object.keys(en).length + ' en_us keys');

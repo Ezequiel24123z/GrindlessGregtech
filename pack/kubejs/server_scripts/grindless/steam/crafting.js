@@ -29,6 +29,19 @@
       R: '#forge:rods/steel'
     }).id('grindless:crafting/steel_drill_bit')
 
+    // the wear parts are consumed by the drills (M1-10), so a machine makes them too: same cost as the crafting table
+    event.recipes.gtceu.alloy_smelter('grindless:bronze_drill_bit')
+      .itemInputs('4x #forge:plates/bronze', '2x #forge:rods/bronze')
+      .itemOutputs('2x grindless:bronze_drill_bit')
+      .EUt(16)
+      .duration(200)
+
+    event.recipes.gtceu.alloy_smelter('grindless:steel_drill_bit')
+      .itemInputs('4x #forge:plates/steel', '2x #forge:rods/steel')
+      .itemOutputs('2x grindless:steel_drill_bit')
+      .EUt(16)
+      .duration(200)
+
     event.recipes.gtceu.shaped('grindless:empty_vein_probe', ['PGP', ' P '], {
       P: '#forge:plates/bronze',
       G: '#forge:glass'

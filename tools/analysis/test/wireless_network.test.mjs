@@ -504,6 +504,46 @@ test('wireless adapters: plain containers move exactly through changeEnergy, and
   assert.equal(good.getCharge(), 1000);
 });
 
+// AF-W (#200 M6-02): a stored figure past 2^53 is read by its digits (the game's deps.exact is Long.toString); BigInt stands for a long
+class BigContainer {
+  constructor(capacity, stored) { this.cap = BigInt(capacity); this.val = BigInt(stored); }
+  getClass() { return cls(PLAIN); }
+  getEnergyStored() { return this.val; }
+  getEnergyCapacity() { return this.cap; }
+  changeEnergy(add) {
+    const old = this.val;
+    let now = this.cap - old < BigInt(add) ? this.cap : old + BigInt(add);
+    if (now < 0n) now = 0n;
+    this.val = now;
+    return Number(now - old);
+  }
+}
+
+test('wireless adapters: one EU is moved and measured exactly on a battery whose stored energy is past 2^53', () => {
+  const exactAd = A.create({ ...deps, exact: (v) => String(v) });
+  const base = 2n ** 53n + 1n;
+  const c = new BigContainer(2n ** 62n, base);
+  const a = exactAd.classify({ energyContainer: c });
+  assert.equal(exactAd.fill(a, 1, TICKS), 1);
+  assert.equal(c.val, base + 1n);
+  assert.equal(exactAd.fill(a, 1, TICKS), 1);
+  assert.equal(exactAd.drain(a, 1, TICKS), 1);
+  assert.equal(c.val, base + 1n);
+  assert.equal(exactAd.room(a, 640, TICKS), 640);
+  const nearFull = new BigContainer(2n ** 62n, 2n ** 62n - 5n);
+  assert.equal(exactAd.room(exactAd.classify({ energyContainer: nearFull }), 640, TICKS), 5, 'the room is exact next to a huge capacity');
+  assert.equal(exactAd.fill(exactAd.classify({ energyContainer: nearFull }), 640, TICKS), 5);
+  // a liar is still caught by one EU at that size
+  const liar = new BigContainer(2n ** 62n, base);
+  liar.changeEnergy = function (add) { this.val += BigInt(add) - 1n; return add; };
+  assert.throws(() => exactAd.fill(exactAd.classify({ energyContainer: liar }), 10, TICKS), (e) => e.measured === 9);
+  // an unreadable balance is refused before anything moves
+  const odd = new BigContainer(1000, 0);
+  odd.getEnergyStored = () => 'NaN';
+  assert.throws(() => exactAd.fill(exactAd.classify({ energyContainer: odd }), 10, TICKS), /not a whole number/);
+  assert.equal(odd.val, 0n);
+});
+
 // ---------------------------------------------------------------- the settlement itself (lv/wireless_energy.js), in a stand-in world
 // One "JVM": the startup script's object (its registrations are stubs; only its data runs), the two libraries and the server script,
 // in one sandbox with the game's classes replaced by the stand-ins above. A second jvm() on the same world and a persistent-data
@@ -551,6 +591,7 @@ function jvm(opts = {}) {
     'com.gregtechceu.gtceu.utils.GTUtil': { getTierByVoltage: (v) => { let t = 0; while (t < V.length - 1 && V[t] < v) t++; return t; } },
     'com.gregtechceu.gtceu.utils.FormattingUtil': { formatNumbers: (n) => String(n) },
     'java.util.UUID': {},
+    'java.lang.Long': { toString: (v) => String(v) },
     'com.gregtechceu.gtceu.api.capability.GTCapabilityHelper': { getElectricItem: (s) => s.e || null, getForgeEnergyItem: (s) => s.fe || null },
     'com.gregtechceu.gtceu.api.capability.compat.FeCompat': { insertEu },
     'com.gregtechceu.gtceu.config.ConfigHolder': { INSTANCE: { compat: { energy: { nativeEUToFE: true } } } },
@@ -1159,11 +1200,14 @@ const BATTERY_EU = {
 };
 const SMES = 'grindless:luv_smes_cell';
 const SMES_EU = 983040000;
-// a GTM 7.5.3 registry dump of the pack (gg_dump.js), when the session that made it left it on this machine
-const DUMP_DIR = [
-  process.env.GG_DUMP_DIR,
-  'C:/Users/EzequielC/.copilot/session-state/52ba6327-e548-48e7-aa57-41c2373d41c2/files/test-runs/power-quests-1/results/server/kubejs-exported',
-].filter(Boolean).find((p) => fs.existsSync(path.join(p, 'items.json')));
+// a GTM 7.5.3 registry dump of the pack (gg_dump.js): GG_DUMP_DIR, or a bench result's kubejs-exported folder under tools/test/.work
+const dumpCandidates = [process.env.GG_DUMP_DIR];
+const WORK = path.join(ROOT, 'tools', 'test', '.work');
+if (fs.existsSync(WORK)) {
+  for (const d of fs.readdirSync(WORK)) dumpCandidates.push(path.join(WORK, d, 'kubejs-exported'), path.join(WORK, d, 'results', 'server', 'kubejs-exported'));
+}
+const DUMP_DIR = dumpCandidates.filter(Boolean).find((p) => fs.existsSync(path.join(p, 'items.json')));
+if (!DUMP_DIR) console.log('wireless_network: no registry dump found (set GG_DUMP_DIR); the dump-backed checks are skipped');
 const dumpJson = (name) => JSON.parse(fs.readFileSync(path.join(DUMP_DIR, name), 'utf8'));
 const STARTUP_REL = 'kubejs/startup_scripts/grindless/lv/wireless_energy.js';
 let staticRun = null;
@@ -1399,12 +1443,14 @@ test('LuV wireless network (WL-1): the network runs at its strongest cell, so on
   // a mixed tower: one IV cell among the SMES cells and the tower (so the network) stays LuV, its strongest cell
   const at = smesTower.at[5];
   w.earth.put(at.x, at.y, at.z, IV_CELL);
+  W.dropInfoCache();
   const mixed = W.settle(server);
   assert.equal(mixed.tier, LUV);
   assert.equal(mixed.capacity, 31 * SMES_EU + IV_EU + 4 * IV_EU);
   const entry = W.tracked(server).find((e) => e.k === 'tower' && e.n === 32);
   assert.deepEqual([entry.t, entry.n, entry.c], [LUV, 32, 31 * SMES_EU + IV_EU], 'the recorded tower follows its strongest cell');
   w.earth.put(at.x, at.y, at.z, SMES);
+  W.dropInfoCache();
   // the SMES tower broken: the network falls to IV and the LuV hatch gets nothing, its readout says why
   luv2.energyContainer.setEnergyStored(0);
   w.earth.blocks.delete(LX + ',100,0');

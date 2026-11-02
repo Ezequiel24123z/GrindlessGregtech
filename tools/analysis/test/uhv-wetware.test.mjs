@@ -146,11 +146,10 @@ test('the array grows organoids on Earth and makes 4 wetware mainframes per run 
   assert.deepEqual(plain(W.clashes), []);
   const array = recipes.filter((r) => r.type === 'organoid_computing');
   assert.deepEqual(array.map((r) => r.args[0]), ['grindless:organoid', 'grindless:mainframe']);
-  for (const r of array) {
-    assert.deepEqual(call(r.calls, 'dimension'), [['minecraft:overworld']], `${r.args[0]}: Earth only`);
-    assert.equal(only(r.calls, 'EUt'), 1966080);
-  }
+  for (const r of array) assert.equal(only(r.calls, 'EUt'), 1966080);
   const [organoid, mainframe] = array;
+  assert.deepEqual(call(organoid.calls, 'dimension'), [['minecraft:overworld']], 'the culture is Earth-only');
+  assert.deepEqual(call(mainframe.calls, 'dimension'), [], 'the mainframe step uses no place (rule 10)');
   assert.equal(only(organoid.calls, 'circuit'), 1);
   assert.deepEqual(call(organoid.calls, 'itemInputs').flat(), ['4x gtceu:stem_cells', '1x grindless:chitosan_scaffold']);
   assert.deepEqual(call(organoid.calls, 'inputFluids').flat(), [{ id: 'gtceu:ultrapure_water', amount: 1000 }, { id: 'gtceu:sterilised_growth_medium', amount: 1000 }]);
@@ -161,7 +160,9 @@ test('the array grows organoids on Earth and makes 4 wetware mainframes per run 
   assert.ok(ins.includes('4x grindless:organoid_processor'));
   assert.ok(ins.includes('4x gtceu:neuro_processing_unit'));
   assert.ok(ins.includes('1x grindless:sic_power_module'));
-  assert.ok(ins.some((s) => /optical_assembly$/.test(strip(s))));
+  // M2-06/M3-03: it takes UHV circuits by tag, at least as many as it makes (the cost curve scales inputs up, never outputs)
+  assert.ok(ins.includes('4x #gtceu:circuits/uhv'));
+  assert.ok(!ins.some((s) => /optical_assembly$/.test(strip(s))));
   const out = call(mainframe.calls, 'itemOutputs').flat();
   assert.deepEqual(out.map(strip), ['gtceu:wetware_processor_mainframe']);
   assert.equal(count(out[0]), 4);
@@ -170,7 +171,7 @@ test('the array grows organoids on Earth and makes 4 wetware mainframes per run 
     'grindless:organoid_assembly/uhv/sterilised_growth_medium']);
 });
 
-test('the organoid lab\'s UHV row turns sterilized medium and a xeno radioprotectant into sterilised medium, in orbit, clean', () => {
+test('the organoid lab\'s UHV row turns sterilized medium and a xeno radioprotectant into sterilised medium, clean, with no dimension', () => {
   const { W, recipes } = harness();
   const lab = recipes.filter((r) => r.type === 'organoid_assembly');
   assert.equal(lab.length, 4, 'LuV\'s two rows + this one + MAX-B4\'s organoid_genome_extract');
@@ -181,7 +182,7 @@ test('the organoid lab\'s UHV row turns sterilized medium and a xeno radioprotec
   assert.deepEqual(call(row.calls, 'inputFluids').flat(), [{ id: 'gtceu:sterilized_growth_medium', amount: 1000 }]);
   assert.deepEqual(call(row.calls, 'itemOutputs'), []);
   assert.deepEqual(call(row.calls, 'outputFluids').flat(), [{ id: 'gtceu:sterilised_growth_medium', amount: 1000 }]);
-  assert.deepEqual(call(row.calls, 'dimension').flat(), ORBITS, 'orbit only, like the lab\'s other rows (luv.json)');
+  assert.deepEqual(call(row.calls, 'dimension'), [], 'a medium treatment needs no place (rule 10)');
   assert.equal(only(row.calls, 'cleanroom'), 'native-cleanroom');
   assert.equal(only(row.calls, 'EUt'), 30720);
   const fit = W.labIO;

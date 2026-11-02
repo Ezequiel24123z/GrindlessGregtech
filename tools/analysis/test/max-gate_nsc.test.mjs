@@ -66,12 +66,11 @@ test('hand-off: the belt platform row is matched by the c15 name only, from the 
   assert.notEqual(sgra.source, row.source, 'two sources: the poll must serve both');
 });
 
-test('kerr_sling polls every source place with its own rows and keeps each pending jump with its source', () => {
-  assert.match(sling, /sources\.forEach\(function \(src\) \{ pollSource\(server, t, mine, src\) \}\)/);
-  assert.match(sling, /String\(r\.source\) === source/);
-  assert.ok(!/mine\[0\]/.test(sling), 'no row is taken as the only source');
-  assert.match(sling, /until: rec\.until, source: source/);
-  assert.match(sling, /p\.source !== source \|\| now < p\.until/);
+test('the shared placer (AF-1) matches a completed jump to its row by name, whatever its source place; kerr_sling polls nothing', () => {
+  const lib = read('server_scripts', 'grindless', 'lib', 'relay_platforms.js');
+  assert.match(lib, /String\(r\.jump\) === String\(name\)/);
+  assert.match(lib, /return \(row\.source \? 'uxvPlatform_' : 'uivPlatform_'\) \+ row\.place/);
+  assert.ok(!/pollSource|mine\[0\]|ServerEvents\.tick/.test(sling), 'no second poller');
 });
 
 test('every id is registered (F1 or earlier) and max-nsc is a tier-model substage', () => {

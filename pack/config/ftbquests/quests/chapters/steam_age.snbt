@@ -601,7 +601,7 @@
 		{
 			dependencies: ["4B2FCEC042219588", "54FC9D8B7F999601"]
 			description: [
-				"It keeps one vein sending up raw ore for as long as steam lasts. A vein sample, bronze drill bits and steam; your steam miner sits inside it. Every ore in the pack, with no pickaxe. Bits and steam fed by hatch, ore taken out by bus. One drill per vein."
+				"It keeps one vein sending up raw ore for as long as steam lasts. A vein sample, bronze drill bits and steam; your steam miner sits inside it. Raw ore from the veins the Steam drill can reach, with no pickaxe. Deeper veins need a later drill. Bits and steam fed by hatch, ore taken out by bus. One drill per vein."
 				"This is the deal the pack runs on."
 			]
 			icon: "gtceu:steam_vein_drill"

@@ -1,4 +1,43 @@
 {
  "note": "Today's capacity errors (recipe id -> reason). May only shrink; fix the recipe, then rerun --write-known.",
- "violations": {}
+ "violations": {
+  "grindless:chemical_bath/coated_absorber_sheet": "2 item inputs (1 circuit) > type max 1",
+  "grindless:chemical_bath/bound_coated_ribbon": "2 item inputs (1 circuit) > type max 1",
+  "grindless:chemical_bath/stabilised_kerr_wire": "2 item inputs (1 circuit) > type max 1",
+  "grindless:chemical_bath/primed_kerr_web": "2 item inputs (1 circuit) > type max 1",
+  "grindless:chemical_bath/polished_resonance_cell": "2 item inputs (1 circuit) > type max 1",
+  "grindless:chemical_bath/polished_waveguide_tube": "2 item inputs (1 circuit) > type max 1"
+ },
+ "seeded": [
+  {
+   "reason": "AF-A1: circuits now count against the type's item inputs (M9-07); these 25 recipes overflow and AF-M 210 fixes the layouts",
+   "added": [
+    "grindless:beuv_lithography/patterned_engine_wafer",
+    "grindless:chemical_bath/bound_coated_ribbon",
+    "grindless:chemical_bath/coated_absorber_sheet",
+    "grindless:chemical_bath/polished_resonance_cell",
+    "grindless:chemical_bath/polished_waveguide_tube",
+    "grindless:chemical_bath/primed_kerr_web",
+    "grindless:chemical_bath/stabilised_kerr_wire",
+    "grindless:femtosecond_writing/addressed_holo_block",
+    "grindless:hills_slingshot/bound_probe_pair",
+    "grindless:hot_rolling/laminated_absorber_sheet",
+    "grindless:ice_giant_siphon/atmosphere_sample",
+    "grindless:magnetic_pair_production/pair_confined_cage",
+    "grindless:methane_pyrolysis/spent_anode_graphene",
+    "grindless:nuclear_demagnetisation/bottomless_store_core",
+    "grindless:nuclear_demagnetisation/cold_reference_assembly",
+    "grindless:nuclear_demagnetisation/cold_snspd_module",
+    "grindless:nuclear_demagnetisation/horizon_cloud_core",
+    "grindless:nuclear_demagnetisation/horizon_computation_core",
+    "grindless:snspd_fabrication/detector_layer_wafer",
+    "grindless:spectral_hole_burning/burned_store_block",
+    "grindless:supercritical_drying/condensate_aerogel",
+    "grindless:tholin_reforming/nitrile_diaminobenzidine",
+    "grindless:tholin_reforming/tholin_hydrolysis",
+    "grindless:titan_entry/lake_sampling",
+    "grindless:zone_refining/fused_quartz_sphere_blank"
+   ]
+  }
+ ]
 }

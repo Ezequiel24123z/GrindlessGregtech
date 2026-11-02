@@ -10,6 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runPackScripts } from './lib/kubejs_static.mjs';
 import { loadDump } from './lib/dump.mjs';
+import { parseCapacityWarning } from './lib/capacity.mjs';
 import { auditTextures } from './assets-audit.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -175,16 +176,20 @@ csv('00_duplicate_recipes.csv', ['recipeIds'], dups.map((v) => [v.join(' ')]));
 
 // dropped ingredients ("Trying to add more inputs/outputs than RecipeType can support") from the server log
 const dropped = [];
+const logCoverage = { supplied: !!errFile, readable: false, linesChecked: 0 };
 if (errFile && fs.existsSync(errFile)) {
+  logCoverage.readable = true;
   for (const line of fs.readFileSync(errFile, 'utf8').split(/\r?\n/)) {
-    if (!/more (inputs|outputs).*than RecipeType can support/i.test(line)) continue;
-    const m = /([a-z_]+:[a-z0-9_\/.]+).*?(item|fluid)(Inputs|Outputs).*?(\d+)/i.exec(line) || [];
-    dropped.push([line.replace(/^.*?\]\s*/, '').slice(0, 220), m[1] || '', recipeEra.get(m[1]) || '']);
+    logCoverage.linesChecked++;
+    const w = parseCapacityWarning(line);
+    if (!w) continue;
+    dropped.push([line.replace(/^.*?\]\s*/, '').slice(0, 220), w.recipe, recipeEra.get(w.recipe) || '']);
   }
   csv('00_dropped_inputs.csv', ['message', 'recipe', 'era'], dropped);
 }
+console.log(logCoverage.readable ? `capacity warnings: ${dropped.length} in ${logCoverage.linesChecked} log lines` : `capacity warnings: NOT CHECKED (${errFile ? 'log file missing: ' + errFile : 'no --errors log supplied'})`);
 
-const summary = { eras: [...ERAS.filter((e) => census[e]), ...Object.keys(census).filter((e) => !ERAS.includes(e)).sort()].map((e) => ({ era: e, ...census[e] })), totals: { unusedItems: unused.length, langGaps: langGaps.length, assetGaps: assetGaps.length, questRefProblems: refRows.length, duplicateRecipeGroups: dups.length, droppedInputWarnings: dropped.length } };
+const summary = { eras: [...ERAS.filter((e) => census[e]), ...Object.keys(census).filter((e) => !ERAS.includes(e)).sort()].map((e) => ({ era: e, ...census[e] })), totals: { unusedItems: unused.length, langGaps: langGaps.length, assetGaps: assetGaps.length, questRefProblems: refRows.length, duplicateRecipeGroups: dups.length, droppedInputWarnings: dropped.length, capacityLog: logCoverage } };
 fs.writeFileSync(path.join(outDir, '00_census.json'), JSON.stringify(summary, null, 1) + '\n');
 console.log(JSON.stringify(summary.totals));
 const byEra = (rows, i) => rows.reduce((o, r) => { o[r[i]] = (o[r[i]] || 0) + 1; return o; }, {});

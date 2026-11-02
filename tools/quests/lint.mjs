@@ -3,6 +3,10 @@
 //
 //   node tools/quests/lint.mjs [--book <dir>] [--chapter <name>[,<name>...]] [--items <items.json>] [--tags <tags.json>]
 //                              [--config <file>] [--json <out.json>] [--export <out.json>] [--strict] [--quiet] [--merged-eras]
+//                              [--hidden <hidden_until.json>] [--recipes <recipes.json>] [--new-classes]
+//
+// --new-classes lists the AF-A2 classes (creative-reward, count-stack, same-title, empty-description, task-hidden, task-no-recipe) as
+// warnings; without it each class has the level of lint-config.json classLevels (default info: not counted).
 //
 // --merged-eras applies the one-chapter-per-era rules (connectivity, section bridges) to every <era>_age chapter, as if each were
 // listed in lint-config.json eraChapters.enabled.
@@ -14,7 +18,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadBook } from './lib/book.mjs';
-import { checkBook, chapterEdges, questLabel, stripCodes } from './lib/checks.mjs';
+import { checkBook, chapterEdges, questLabel, recipeOutputIds, stripCodes } from './lib/checks.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, '..', '..');
@@ -28,6 +32,9 @@ function parseArgs(argv) {
     else if (k === '--chapter') a.chapters.push(...next().split(',').filter(Boolean));
     else if (k === '--items') a.items = next();
     else if (k === '--tags') a.tags = next();
+    else if (k === '--hidden') a.hidden = next();
+    else if (k === '--recipes') a.recipes = next();
+    else if (k === '--new-classes') a.newClasses = true;
     else if (k === '--config') a.config = next();
     else if (k === '--json') a.json = next();
     else if (k === '--export') a.export = next();
@@ -50,6 +57,18 @@ function readTags(file) {
   const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
   const map = raw.item || raw;
   return new Set(Object.keys(map).filter((k) => Array.isArray(map[k]) && map[k].length > 0));
+}
+
+// hidden_until.json (pack/kubejs/data/grindless/tables): every item of every group is hidden from the recipe viewers or never obtainable.
+function readHidden(file) {
+  const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
+  return new Set((raw.groups || []).flatMap((g) => g.items || []));
+}
+
+// recipes.json of a gg_dump: { recipes: [ '{"i":id,"t":type,"j":{...}}' ] }
+function readRecipeOutputs(file) {
+  const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
+  return recipeOutputIds((raw.recipes || []).map((r) => (typeof r === 'string' ? JSON.parse(r) : r).j));
 }
 
 function exportModel(book, findings, chapters) {
@@ -121,6 +140,9 @@ function main() {
   const options = { chapters: args.chapters, mergedEras: args.mergedEras };
   if (args.items) options.items = readItems(args.items);
   if (args.tags) options.tags = readTags(args.tags);
+  if (args.hidden) options.hidden = readHidden(args.hidden);
+  if (args.recipes) options.recipeOutputs = readRecipeOutputs(args.recipes);
+  options.newClasses = args.newClasses;
   const findings = checkBook(book, cfg, options);
   const errors = findings.filter((f) => f.level === 'error');
   const warns = findings.filter((f) => f.level === 'warn');

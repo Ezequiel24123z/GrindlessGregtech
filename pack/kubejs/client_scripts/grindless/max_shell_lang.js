@@ -19,6 +19,7 @@
         ['gtceu.recipe.grindless_black_hole_bomb.vent_wave_packet', 'Circuit 1: a seed wave packet grows between the mirrors and is vented as 2^30 EU/t; the spent packet is inert.'],
         ['gtceu.recipe.grindless_black_hole_bomb.final_spin_map', 'Circuit 2: the Sgr A* spin map and the shell gradient map are joined into the final spin map.'],
         ['gtceu.recipe.grindless_black_hole_bomb.horizon_lock', 'Circuit 3: the last recipe of MAX. 2^35 EU/t on two MAX 16 A hatches; the structure stays and the first lock opens MAX+.'],
+        ['gtceu.recipe.grindless_black_hole_bomb.horizon_shard', 'Circuit 5: two seed wave packets, the final spin map and four horizon phase locks fold one Horizon Shard out of the horizon at MAX power.'],
         ['gtceu.recipe.grindless_nuclear_clock.thorium_clock_reference', 'Circuit 6: a thorium-229 sample and a VUV optic are read against the nuclear clock (kept) into a frequency reference.'],
         ['gtceu.recipe.grindless_nuclear_demagnetisation.cooled_cavity_mode', 'Circuit 10: a polished SRF cavity is cooled in the mK module and its mode characterised (the module and He-3/He-4 mixture are kept).'],
         ['gtceu.recipe.grindless_kugelblitz_forming.write_seed_wave_packet', 'Circuit 6: at Cygnus X-1 a Kugelblitz seed pumps a cooled cavity mode into a seed wave packet.']

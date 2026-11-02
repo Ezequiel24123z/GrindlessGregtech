@@ -13,9 +13,8 @@
         { type: 'gtceu:wiremill', output: WIRE + 'single_wire', not: { mod: 'grindless' } },
         { type: 'gtceu:extruder', output: WIRE + 'single_wire', not: { mod: 'grindless' } }
       ]
-      var found = 0
-      removals.forEach(function (f) { found += Number(event.countRecipes(f)) })
-      removals.forEach(function (f) { event.remove(f) })
+      var found = Number(event.findRecipeIds(removals).size())
+      event.remove(removals)
       console.info(LOG + 'uxv cuts: removed ' + found + ' recipes (GT-- spintronic mainframe, generic pasta_strand wire)')
     } catch (e) {
       console.error(LOG + 'uxv cuts failed: ' + e)

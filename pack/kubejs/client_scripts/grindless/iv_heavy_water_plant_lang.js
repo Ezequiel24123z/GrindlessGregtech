@@ -18,6 +18,7 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.heavy_water_plant.tooltip.0', '§7A Girdler sulfide plant that enriches heavy water.')
 
     add('gtceu.recipe.grindless_isotope_exchange.martian_ice_exchange', 'Mode 1: Girdler sulfide exchange. The H2S charge stays in its hatch')
+    add('gtceu.recipe.grindless_isotope_exchange.protium_draw_off', 'Draw-off: 1000 mB of distilled water split into 2000 mB of protium and 1000 mB of oxygen')
     add('gtceu.recipe.grindless_isotope_exchange.concentrate_finishing', 'Mode 2: the vacuum column turns the concentrate into heavy water')
     add('gtceu.recipe.grindless_isotope_exchange.proxima_water_exchange', 'Mode 3: Proxima b\'s water, already melted, four times the deuterium of Martian ice')
 
