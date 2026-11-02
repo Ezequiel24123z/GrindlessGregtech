@@ -79,7 +79,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the drives
   {
     key: 'MK1', kind: 'step', title: 'Drive Mk1', icon: 'grindless:dfd_mk1_motor',
-    deps: ['J_HOME', 'PARTS', 'I_DFD'], x: 4, y: 0,
+    deps: ['J_HOME'], x: 4, y: 0,
     desc: [
       'The &6Direct Fusion Drive Mk1&r is made at home in the Thruster Works from Wf/W tiles, SiC/SiC plates, HfTaCN ingots, D-He3 fuel mix and a UEV emitter for its antenna. It carries a level 9 rocket to the next star and needs nothing from abroad.',
     ],
@@ -126,7 +126,7 @@ export const QUESTS = [
   },
   {
     key: 'A_CHART', kind: 'step', title: 'The Course to Sirius', icon: 'grindless:pulsar_navigation_chart',
-    deps: ['A_GAS', 'PULS'], x: 12, y: -2,
+    deps: ['A_GAS'], x: 12, y: -2,
     desc: [
       'Pulsars tick like clocks, and three of them fix your place. The Pulsar Timing Station turns its timing data and the dust lab\'s iron-60 record into the &6Pulsar Navigation Chart&r. The chart gives the course to the white dwarf, is a catalyst of the gate\'s first holds at Sirius B, and is the research for the UIV casing line.',
     ],
@@ -166,7 +166,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Mk2 and Sirius B
   {
     key: 'MK2', kind: 'step', title: 'Drive Mk2', icon: 'grindless:dfd_mk2_motor',
-    deps: ['A_CHART', 'B_CORE', 'SXB', 'MAGP'], x: 14, y: 0,
+    deps: ['A_CHART', 'B_CORE'], x: 14, y: 0,
     desc: [
       'The Mk2 drive is a Mk1 motor with a UEV motor, eight bonded iron nitride magnets and a Brayton turbine wheel cast as single crystals. It is the drive for a level 10 rocket.',
     ],
@@ -211,7 +211,7 @@ export const QUESTS = [
   },
   {
     key: 'S_PELLET', kind: 'step', title: 'A White Dwarf in a Bottle', icon: 'grindless:degenerate_pellet',
-    deps: ['SIRIUS', 'PEL'], x: 20, y: 0,
+    deps: ['SIRIUS'], x: 20, y: 0,
     desc: [
       'A sealed &6Degenerate Pellet&r is a fuel that never runs out in your lifetime. The Containment Works presses it from degenerate matter and an exotic matter cell, and the gate\'s hold is run on it.',
     ],
@@ -222,7 +222,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the gate
   {
     key: 'WARP', kind: 'step', title: 'The Gate at UEV', icon: 'gtceu:warp_gate',
-    deps: ['S_PELLET', 'NETUEV'], x: 22, y: 0,
+    deps: ['S_PELLET'], x: 22, y: 0,
     desc: [
       'The Warp Gate was built for UHV. At the UEV load it runs on a circuit 3 program and takes its power from the UEV wireless network. Your fuel is in the pellets and your power is in the cell.',
     ],
@@ -231,7 +231,7 @@ export const QUESTS = [
   },
   {
     key: 'HOLD', kind: 'exit', title: 'Gate to UIV', icon: 'gtceu:warp_gate',
-    deps: ['WARP', 'TENS', 'EOS'], x: 24, y: 0,
+    deps: ['WARP'], x: 24, y: 0,
     desc: [
       'Hold the Warp Gate open at the UEV load in Sirius B orbit. Its input takes a tennessine sample, a degenerate pellet, a degenerate EOS model, four UEV circuits of any kind and circuit 3. The hold makes nothing: you tick this box when it has run.',
       'The next casing is built apart: the UIV Machine Casing line is researched with the Pulsar Navigation Chart and takes UEV casings, field generators and emitters.',

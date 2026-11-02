@@ -101,6 +101,7 @@ export const QUESTS = [
     deps: ['TPV'], x: 12.5, y: 0,
     desc: [
       'The three stars are hundreds of light years away and no drive crosses that. A seed rides the warp gate along the chart, one jump to each place, and the orbit is real only in the game.',
+      'A completed jump places that star\'s relay platform once per world and leaves &6Relay Coordinates&r, a data stick, in the jump ring\'s output bus. Put them in the input bus of a sustaining ring and a player standing in it rides there.',
     ],
     tasks: [ck()],
     rewards: [xp(50)],
@@ -111,7 +112,8 @@ export const QUESTS = [
     key: 'JUMP1', kind: 'step', title: 'RX J1856.5-3754', icon: 'grindless:neutron_star_site_casing',
     deps: ['J_JUMP'], x: 15, y: 0,
     desc: [
-      'The first jump. A seed carries a probe to a lone neutron star and opens a ring there.',
+      'The first jump. A seed carries a probe to a lone neutron star and opens a ring there. The jump leaves its Relay Coordinates in the jump ring\'s output bus.',
+      'At the platform, step out and back in: the paused ring wakes for one sustain, paid by its stocked cells and the network\'s EU, and carries you home.',
       'The jump is fiction, as every jump is. The star, a cold X-ray emitter, is real.',
     ],
     tasks: [dim('grindless:rx_j1856_orbit')],
@@ -159,7 +161,7 @@ export const QUESTS = [
     key: 'JUMP2', kind: 'step', title: 'PSR J0437-4715', icon: 'grindless:rad_hard_controller',
     deps: ['N_PELLET'], x: 20, y: 0,
     desc: [
-      'The second jump: a pulsar close enough to time. A seed rides there on a course worked out with the neutron star, and the jump is fiction here too.',
+      'The second jump: a pulsar close enough to time. A seed rides there on a course worked out with the neutron star, and the jump is fiction here too. Its Relay Coordinates come out in the jump ring\'s output bus.',
     ],
     tasks: [dim('grindless:psr_j0437_orbit')],
     rewards: [xp(250)],
@@ -215,7 +217,7 @@ export const QUESTS = [
     key: 'JUMP3', kind: 'step', title: 'Cygnus X-1', icon: 'grindless:probe_bay_casing',
     deps: ['NAV', 'GAMMA'], x: 30, y: 0,
     desc: [
-      'The last jump: a black hole of many Suns, spinning fast enough to matter. The jump is fiction, and the black hole is real.',
+      'The last jump: a black hole of many Suns, spinning fast enough to matter. The jump is fiction, and the black hole is real. Its Relay Coordinates come out in the jump ring\'s output bus.',
     ],
     tasks: [dim('grindless:cygnus_x1_orbit')],
     rewards: [xp(300)],

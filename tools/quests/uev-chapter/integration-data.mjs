@@ -70,7 +70,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ hatch, cell and network
   {
     key: 'PARH', kind: 'process', title: 'Parallel Control', icon: 'gtceu:uev_parallel_hatch',
-    deps: ['H_POWER', 'HULL', 'PARTS'], x: 3, y: -2.75,
+    deps: ['H_POWER'], x: 3, y: -2.75,
     teach: {
       for: 'The &6Ultimate Parallel Control Hatch&r lets a mega machine run up to 4,096 copies of a recipe at once. Energy is still the limit: every copy pays its own EU/t.',
       needs: 'A UEV hull, a UEV sensor, two UEV emitters, four UEV circuits of any kind, two superhydride double cables and a neutronium gear, on an assembly line researched with the UEV emitter.',
@@ -83,7 +83,7 @@ export const QUESTS = [
   },
   {
     key: 'CELL', kind: 'machine', title: 'The UEV Cell', icon: 'grindless:uev_smes_cell',
-    deps: ['H_POWER', 'I_OM_DEC'], x: 3, y: -0.75,
+    deps: ['H_POWER'], x: 3, y: -0.75,
     teach: {
       for: 'The &6UEV SMES Cell&r stores the power of the UEV wireless network.',
       needs: 'Four UHV SMES cells, sixteen lanthanum superhydride wires, eight plates and liquid helium, made in the Naquadria Magnet Works.',
@@ -96,7 +96,7 @@ export const QUESTS = [
   },
   {
     key: 'NETUEV', kind: 'process', title: 'The Network Goes UEV', icon: 'gtceu:uev_wireless_energy_hatch',
-    deps: ['CELL', 'CH_REP', 'HATCH'], x: 5, y: -0.75,
+    deps: ['CELL'], x: 5, y: -0.75,
     teach: {
       for: 'Move your towers onto &6UEV SMES Cells&r and the wireless network carries UEV to every station, out to Alpha Centauri and beyond.',
       needs: 'A UEV Energy Hatch, a UEV sensor, two UEV circuits of any kind and a quantum repeater node for each wireless hatch, and one formed tower holding a UEV cell: the network runs at its strongest cell, so until then it stays at UHV. The repeater node also goes into the wireless covers.',

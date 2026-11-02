@@ -139,7 +139,7 @@ export const QUESTS = [
     key: 'STEP', kind: 'step', title: 'Step Through', icon: 'grindless:proxima_gate_seed',
     deps: ['GATEOPEN'], x: 10, y: 0,
     desc: [
-      'Players cross only while both ends hold. Items go over the AE2 pair the &6Proxima Gate Seed&r makes, so nobody has to carry a stack of plates.',
+      'A holding ring carries a player standing in it to the ring named by the Relay Coordinates in its input bus. With no coordinates it sends them to the first other holding ring, as Earth and Proxima b do. Items go over the AE2 pair the &6Proxima Gate Seed&r makes, so nobody has to carry a stack of plates.',
     ],
     tasks: [it('grindless:proxima_gate_seed')],
     rewards: [xp(200)],

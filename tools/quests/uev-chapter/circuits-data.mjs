@@ -33,13 +33,13 @@ const q = (key, kind, title, icon, deps, x, y, teach, tasks, xpN) => ({
 
 export const QUESTS = [
   // ------------------------------------------------------------------ the assembler and the moving parts
-  q('CH_ASM', 'machine', 'UEV Circuit Assembler', 'gtceu:uev_circuit_assembler', ['HULL'], 9, -6.5, {
+  q('CH_ASM', 'machine', 'UEV Circuit Assembler', 'gtceu:uev_circuit_assembler', ['HULL'], 15, -1.5, {
     for: 'The &6UEV Circuit Assembler&r is the assembler that builds the circuits of the next tier and the controllers around them.',
     needs: 'A UEV hull, a UEV robot arm, emitter and conveyor module, red alloy cable and one circuit, in a shaped crafting recipe.',
     unlocks: 'Circuit assembly at this tier.',
     automate: 'Boards and chips arrive from the cleanroom by ME; keep a small stock of what it returns.',
   }, [it('gtceu:uev_circuit_assembler')], 150),
-  q('PARTS', 'step', 'UEV Parts', 'gtceu:uev_emitter', ['CH_SNS', 'CH_GRM'], 5, -5, {
+  q('PARTS', 'step', 'UEV Parts', 'gtceu:uev_emitter', ['CH_GRM'], 9, 2, {
     for: 'The &6UEV Parts&r are the emitter, sensor, robot arm, conveyor module, pump, piston and motor of this era. Every UEV machine, hatch and the UEV hull are built from them.',
     needs: 'The UHV part of the same kind (two for the emitter and sensor) with SNSPDs, quantum dot sources, graphene modulator, graphene and boron nitride films and six-nines metals; the motor takes bonded magnets, superhydride cable, SiC/SiC plates and FFKM seals. They are made in assemblers.',
     unlocks: 'The UEV field generator, the UEV hull and the UEV machines.',
@@ -48,19 +48,19 @@ export const QUESTS = [
     it('gtceu:uev_emitter'), it('gtceu:uev_sensor'), it('gtceu:uev_robot_arm'), it('gtceu:uev_conveyor_module'),
     it('gtceu:uev_electric_pump'), it('gtceu:uev_electric_piston'), it('gtceu:uev_electric_motor'),
   ], 100),
-  q('FIELD', 'step', 'UEV Field Generator', 'gtceu:uev_field_generator', ['PARTS', 'S_PELLET', 'SX'], 7, -6.5, {
+  q('FIELD', 'step', 'UEV Field Generator', 'gtceu:uev_field_generator', ['PARTS'], 11, 3, {
     for: 'The &6UEV Field Generator&r holds the plasma and the gate\'s fields. It is the first part that needs a degenerate pellet.',
     needs: 'A UHV field generator, two degenerate pellets, two single-crystal pump impellers, three UEV emitters and three UEV sensors.',
     unlocks: 'The UEV Energy Hatch, the Stellar Forge and the Mk4 fusion reactor.',
     automate: 'Pellets and impellers by ME; stock a few, since the hatch takes three.',
   }, [it('gtceu:uev_field_generator')], 120),
-  q('HULL', 'step', 'UEV Machine Hull', 'gtceu:uev_machine_hull', ['PARTS', 'FIRST'], 7, -5, {
+  q('HULL', 'step', 'UEV Machine Hull', 'gtceu:uev_machine_hull', ['PARTS', 'FIRST'], 13, 0, {
     for: 'The &6UEV Machine Hull&r is the body of every UEV machine and hatch. Its assembly line is researched with the UEV Machine Casing.',
     needs: 'Two UEV Machine Casings, three lanthanum superhydride single cables, six SiC/SiC plates, three Faraday isolators, three ULE cavities, three UEV sensors and three UEV circuits of any kind.',
     unlocks: 'The UEV Circuit Assembler, the UEV hatches and every machine built on a UEV hull.',
     automate: 'Casings and parts by ME; hulls are made one at a time, so keep a chest of them.',
   }, [it('gtceu:uev_machine_hull')], 150),
-  q('HATCH', 'step', 'UEV Hatches', 'gtceu:uev_energy_input_hatch', ['HULL', 'FIELD'], 9, -5, {
+  q('HATCH', 'step', 'UEV Hatches', 'gtceu:uev_energy_input_hatch', ['HULL', 'FIELD'], 15, 1.5, {
     for: 'The &6UEV Energy Hatch&r is an assembly line recipe on the UEV hull: it feeds a UEV machine its power.',
     needs: 'A UEV Machine Hull, three lanthanum superhydride cables, three Faraday isolators, an ULE cavity, three UV voltage coils, three UEV field generators and three UEV circuits of any kind.',
     unlocks: 'Every UEV machine that takes power from a hatch, and the wireless hatch.',
@@ -80,7 +80,7 @@ export const QUESTS = [
     unlocks: 'The waveguide circuit, which joins it to the LNOI wafer.',
     automate: 'The anneal is slow, so run two foundries; keep chips in a stocked chest by ME.',
   }, [it('grindless:annealed_sin_chip')], 100),
-  q('CH_WG', 'circuit', 'Waveguide Circuit', 'grindless:waveguide_circuit',   ['CH_LNOI', 'CH_SIN', 'PHOT'], 6, -2.25, {
+  q('CH_WG', 'circuit', 'Waveguide Circuit', 'grindless:waveguide_circuit',   ['CH_LNOI', 'CH_SIN'], 6, -2.25, {
       for: 'An SiN Waveguide Chip bonded to an LNOI wafer is a &6Waveguide Circuit&r: light goes in, is steered and switched, and comes out.',
       needs: 'The Photonic Integration Hall, one SiN Waveguide Chip, one LNOI wafer and a circuit 1 program.',
     unlocks: 'The quantum photonic chip, which puts sources and detectors on it.',
@@ -94,19 +94,19 @@ export const QUESTS = [
     unlocks: 'The quantum dot source, mounted and ready for the chip.',
     automate: 'Contain the arsenic loop; keep wafers by ME and cut one source per chip.',
   }, [it('grindless:inas_qd_wafer'), it('grindless:qd_source')], 120),
-  q('CH_SNS', 'circuit', 'Single-Photon Detector', 'grindless:snspd', ['CH_QD', 'SNSPD'], 5, 0, {
+  q('CH_SNS', 'circuit', 'Single-Photon Detector', 'grindless:snspd', ['CH_QD'], 5, 0, {
     for: 'A tungsten silicide nanowire cooled to near zero fires when a single photon lands on it: the &6SNSPD&r.',
     needs: 'The SNSPD Foundry, a WSi wafer and superfluid helium to cool and package it.',
     unlocks: 'The quantum photonic chip, and the entanglement station\'s repeater.',
     automate: 'Helium by pipe; stock packaged detectors by ME, one per chip and one per repeater.',
   }, [it('grindless:snspd')], 120),
-  q('CH_HBN', 'circuit', 'Single-Photon Emitter', 'grindless:hbn_emitter_chip', ['VDW'], 3, 1.5, {
+  q('CH_HBN', 'circuit', 'Single-Photon Emitter', 'grindless:hbn_emitter_chip', ['H_CIRC'], 3, 1.5, {
     for: 'A defect in a layer of hexagonal boron nitride gives off photons one by one: the &6hBN Emitter Chip&r.',
     needs: 'The van der Waals stacker, CVD boron nitride film and a cleanroom.',
     unlocks: 'The quantum photonic chip, as its second light source.',
     automate: 'Film by ME; the stacker returns chips in a chest, stock a few.',
   }, [it('grindless:hbn_emitter_chip')], 120),
-  q('CH_GRM', 'circuit', 'Graphene Modulator', 'grindless:graphene_modulator', ['VDW'], 5, 1.5, {
+  q('CH_GRM', 'circuit', 'Graphene Modulator', 'grindless:graphene_modulator', ['CH_QD'], 5, 1.5, {
     for: 'Graphene between two films of boron nitride changes how much light passes when a voltage is applied: the &6Graphene Modulator&r.',
     needs: 'The van der Waals stacker, graphene film and hBN film.',
     unlocks: 'The quantum photonic chip.',
@@ -128,7 +128,7 @@ export const QUESTS = [
   }, [it('gtnn:optical_computer')], 220),
 
   // ------------------------------------------------------------------ the repeater
-  q('CH_REP', 'circuit', 'Quantum Repeater Node', 'grindless:quantum_repeater_node',   ['ENT'], 3, 3.5, {
+  q('CH_REP', 'circuit', 'Quantum Repeater Node', 'grindless:quantum_repeater_node',   ['H_CIRC'], 3, 3.5, {
     for: 'Two photons entangled over a distance let a network stay in step. A &6Quantum Repeater Node&r keeps one end of the link.',
       needs: 'The Entanglement Station, an SPDC source, an Eu:YSO memory crystal, a quantum dot source, two SNSPDs, two hollow-core fibres and superfluid helium.',
       unlocks: 'The UEV wireless energy hatch and the wireless covers, which each take one node.',
