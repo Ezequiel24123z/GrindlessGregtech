@@ -1,16 +1,17 @@
 // Process audit CLI (lib/process_audit.mjs): what of ours is uncraftable, useless, unexplained or dishonest.
 //
-//   node tools/analysis/process-audit.mjs [--dump <dir>] [--registry <file>] [--json out.json] [--write-baseline] [--quiet]
+//   node tools/analysis/process-audit.mjs [--dump <dir>] [--registry <file>] [--json out.json] [--write-baseline] [--seed-baseline "<reason>"] [--quiet]
 //   node tools/analysis/process-audit.mjs --make-registry [file]    (runs the static KubeJS stand-in, about 6 minutes, and caches its registry)
 //
 // --dump defaults to the line in tools/analysis/out/latest.txt; --registry to tools/analysis/out/registry.json (gitignored).
-// Exit code: 0 no new findings against tools/analysis/process_audit.json, 1 new findings, 2 tool failure or missing inputs.
+// Exit code: 0 no new or stale findings against tools/analysis/process_audit.json, 1 new or stale findings, 2 tool failure or missing inputs.
+// --write-baseline only removes fixed keys (it refuses new findings); --seed-baseline "<reason>" is the explicit way to add.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadDump } from './lib/dump.mjs';
 import { loadEmiData } from './lib/emi_coverage.mjs';
-import { auditProcesses, newFindings, questMentions, renderAuditText } from './lib/process_audit.mjs';
+import { auditProcesses, newFindings, questRewards, renderAuditText } from './lib/process_audit.mjs';
 import { readJson } from './lib/util.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -48,18 +49,50 @@ export function runAudit({ dumpDir, registryFile = DEFAULT_REGISTRY, pack = DEFA
   const cfg = fs.existsSync(DEFAULT_BASELINE) ? readJson(DEFAULT_BASELINE).options || {} : {};
   const coverage = readJson(path.join(here, 'emi_coverage.json'));
   const endProducts = coverage.endProducts || {};
-  const res = auditProcesses({ dump, registry, cfg, emi: loadEmiData(pack), endProducts, pendingUses: coverage.pendingUses || [], worldItems: worldItemsOf(), quests: questMentions(pack), packDir: pack });
+  const res = auditProcesses({ dump, registry, cfg, emi: loadEmiData(pack), endProducts, pendingUses: coverage.pendingUses || [], worldItems: worldItemsOf(), rewards: questRewards(pack), packDir: pack });
   return { res, dump, registry };
 }
 
+/**
+ * The baseline after `--write-baseline` (only shrinks: a finding absent from the old keys and pending lists is refused, so a new
+ * defect cannot be baselined by regeneration) or `--seed-baseline "<reason>"` (the explicit, reasoned way to add; the reason is
+ * kept in the file). Returns the new document, or {error}.
+ */
+export function rewriteBaseline(res, baseline, seedReason = null) {
+  const old = new Set([...(baseline.keys || []), ...(baseline.pending || [])]);
+  const added = res.findings.filter((f) => !old.has(f.key)).map((f) => f.key);
+  if (added.length > 0 && !seedReason) {
+    return { error: `refused: ${added.length} findings are new against the baseline (it only shrinks), e.g. ${added.slice(0, 5).join(', ')}. Fix them; an owner-approved seeding uses --seed-baseline "<reason>".` };
+  }
+  const now = new Set(res.findings.map((f) => f.key));
+  const doc = {
+    format: 'gg-process-audit-1',
+    _comment: 'Findings of tools/analysis/process-audit.mjs known when P8-A refreshed it; the audit fails on keys listed in neither list and on listed keys that no longer occur. The list only shrinks: remove a key when its finding is fixed (--write-baseline); adding needs --seed-baseline "<reason>". pending: findings of packages still in flight. options.ignore: globs of ids the audit skips.',
+    options: baseline.options || { ignore: [] },
+    counts: res.counts,
+    keys: [...(baseline.keys || []).filter((k) => now.has(k)), ...added].sort(),
+    pending: (baseline.pending || []).filter((k) => now.has(k)),
+  };
+  if (added.length > 0) doc.seeded = [...(baseline.seeded || []), { reason: seedReason, keys: added.length }];
+  else if (baseline.seeded) doc.seeded = baseline.seeded;
+  return doc;
+}
+
+/** Baseline keys (keys and pending) whose finding no longer occurs. */
+export function staleKeys(res, baseline) {
+  const now = new Set(res.findings.map((f) => f.key));
+  return [...((baseline && baseline.keys) || []), ...((baseline && baseline.pending) || [])].filter((k) => !now.has(k));
+}
+
 async function main(argv) {
-  const opt = { dump: null, registry: DEFAULT_REGISTRY, json: null, write: false, quiet: false, make: null };
+  const opt = { dump: null, registry: DEFAULT_REGISTRY, json: null, write: false, seed: null, quiet: false, make: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--dump') opt.dump = path.resolve(argv[++i]);
     else if (a === '--registry') opt.registry = path.resolve(argv[++i]);
     else if (a === '--json') opt.json = path.resolve(argv[++i]);
     else if (a === '--write-baseline') opt.write = true;
+    else if (a === '--seed-baseline') opt.seed = argv[++i] || '';
     else if (a === '--quiet') opt.quiet = true;
     else if (a === '--make-registry') opt.make = argv[i + 1] && !argv[i + 1].startsWith('--') ? path.resolve(argv[++i]) : DEFAULT_REGISTRY;
     else {
@@ -79,19 +112,22 @@ async function main(argv) {
   }
   const { res } = runAudit({ dumpDir: opt.dump, registryFile: opt.registry });
   const baseline = fs.existsSync(DEFAULT_BASELINE) ? readJson(DEFAULT_BASELINE) : { keys: [] };
-  if (opt.write) {
-    // MAX+ findings new against the old baseline are in flight (XP-G1, XP-Z1b): listed as `pending` for P8-H, not as baseline
-    const old = new Set(baseline.keys || []);
-    const pend = (f) => f.era === 'maxplus' && !old.has(f.key);
-    const doc = { format: 'gg-process-audit-1', _comment: 'Findings of tools/analysis/process-audit.mjs known when P8-A refreshed it; the audit fails only on keys listed in neither list. Remove a key when its finding is fixed. pending: MAX+ findings of packages still in flight, to be fixed or baselined by P8-H. options.ignore: globs of ids the audit skips.', options: baseline.options || { ignore: [] }, counts: res.counts, keys: res.findings.filter((f) => !pend(f)).map((f) => f.key), pending: res.findings.filter(pend).map((f) => f.key) };
+  if (opt.write || opt.seed) {
+    const doc = rewriteBaseline(res, baseline, opt.seed);
+    if (doc.error) {
+      process.stderr.write(doc.error + '\n');
+      return 1;
+    }
     fs.writeFileSync(DEFAULT_BASELINE, JSON.stringify(doc, null, 1) + '\n');
-    process.stdout.write(`baseline written: ${doc.keys.length} keys, ${doc.pending.length} pending\n`);
+    process.stdout.write(`baseline written: ${doc.keys.length} keys, ${(doc.pending || []).length} pending\n`);
     return 0;
   }
   const fresh = newFindings(res, baseline);
-  process.stdout.write((opt.quiet ? `Process audit: ${res.findings.length} findings, ${fresh.length} new` : renderAuditText(res, baseline)) + '\n');
+  const stale = staleKeys(res, baseline);
+  process.stdout.write((opt.quiet ? `Process audit: ${res.findings.length} findings, ${fresh.length} new, ${stale.length} stale` : renderAuditText(res, baseline)) + '\n');
+  for (const k of stale.slice(0, 15)) process.stdout.write(`  STALE ${k} (fixed: remove it with --write-baseline)\n`);
   if (opt.json) fs.writeFileSync(opt.json, JSON.stringify(res.findings, null, 1));
-  return fresh.length > 0 ? 1 : 0;
+  return fresh.length > 0 || stale.length > 0 ? 1 : 0;
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

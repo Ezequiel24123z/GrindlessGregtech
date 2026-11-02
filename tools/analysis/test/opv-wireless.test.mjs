@@ -21,8 +21,8 @@ const CELL = 'grindless:opv_smes_cell';
 const CELL_EU = 16106127360000;
 const OPV = 13;
 const V_OPV = 536870912;
-// the stand-in's VA[13] is V[13]; in the game GTValues.VA[OpV] is 503,316,480 EU/t (the overlay reads it live)
-const VA_OPV = V_OPV;
+// GTValues.VA[OpV]
+const VA_OPV = 503316480;
 const MACHINE = 'gtceu:opv_assembler';
 const LINK = 'grindless:chain_strand_repeater';
 const PLATE = 'grindless:field_frozen_plate';

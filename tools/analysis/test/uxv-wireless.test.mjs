@@ -101,7 +101,7 @@ test('the UXV hatches and covers: assembler recipes with the link on the 2 A hat
   for (const id of [...HATCHES, ...COVERS]) {
     const r = by(id);
     assert.ok(r, id);
-    assert.equal(r.eut, V_UXV, id);
+    assert.equal(r.eut, 125829120, id + ' at VA[UXV]');
   }
   assert.deepEqual(by('gtceu:uxv_wireless_energy_hatch').inputs, ['1x gtceu:uxv_sensor', '1x gtceu:uxv_energy_input_hatch', '2x #gtceu:circuits/uxv', '1x ' + LINK]);
   assert.deepEqual(by('gtceu:uxv_wireless_energy_hatch_64a').inputs, ['1x gtceu:uxv_wireless_energy_hatch_16a', '2x gtceu:pasta_strand_hex_wire', '6x grindless:lasagna_plate']);
