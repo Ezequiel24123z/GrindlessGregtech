@@ -224,8 +224,8 @@ export function write(root, { packDir = null } = {}) {
     const values = assign(items.map((it) => it.value));
     items.forEach((it, i) => {
       if (it.value === values[i]) return;
-      for (const loc of it.locs) {
-        if (packDir && loc.root !== ROOTS[0]) continue;
+      const locs = it.locs.filter((loc) => !packDir || loc.root === ROOTS[0]);
+      for (const loc of locs) {
         const text = fs.readFileSync(loc.abs, 'utf8');
         const eol = text.includes('\r\n') ? '\r\n' : '\n';
         const first = text.split(/\r?\n/, 1)[0];
@@ -233,7 +233,7 @@ export function write(root, { packDir = null } = {}) {
         const rest = /^\/\/\s*priority\s*[:=]?\s*-?\w*\s*$/.test(first) ? text.slice(first.length) : eol + text;
         fs.writeFileSync(loc.abs, line + rest);
       }
-      changed++;
+      if (locs.length) changed++;
     });
   }
   return changed;
