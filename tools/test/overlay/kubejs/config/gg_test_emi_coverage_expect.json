@@ -4,6 +4,7 @@
   "items": [
     {"id":"gtceu:acrylate_coating","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor"],"used":["gtceu:assembler","gtceu:chemical_reactor","gtceu:fibre_draw"]},
     {"id":"gtceu:actinide_raffinate","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:waste_retrieval"],"used":["gtceu:actinide_partitioning"]},
+    {"id":"gtceu:aerozine_50","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:mixer"],"used":["gtceu:mixer"]},
     {"id":"gtceu:arsine","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:mocvd","gtceu:space_photovoltaics"],"used":["gtceu:mocvd","gtceu:molecular_beam_epitaxy"]},
     {"id":"gtceu:berkelium_californium_nitrate","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:transuranium_processing"],"used":["gtceu:actinide_partitioning"]},
     {"id":"gtceu:berkelium_nitrate","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:actinide_partitioning"],"used":["gtceu:chemical_reactor"]},
