@@ -302,7 +302,7 @@
 			y: 1.5d
 		}
 		{
-			dependencies: ["4B8E2D6A1F9C3057"]
+			dependencies: ["376295DE4FA3B31E"]
 			description: [
 				"Iron ore is ground and washed first, so the sinter plant gets clean feed. Iron ore from the drill, the steam macerator and an ore washer. Purified ore for the sinter plant. Drill, macerator and washer in a row on one conveyor."
 				"Hematite, goethite or magnetite all work."
@@ -315,7 +315,7 @@
 			tasks: [{ id: "4B6D8F2C0E315A79", item: "gtceu:purified_hematite_ore", type: "item" }]
 			title: "Washed Iron Ore"
 			x: 14.0d
-			y: 1.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["3A5C7E1B9D204F68"]
@@ -331,7 +331,7 @@
 			tasks: [{ id: "6D8F1B3A5C7E2094", item: "grindless:iron_sinter", type: "item" }]
 			title: "Iron Sinter"
 			x: 16.0d
-			y: 1.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["2C4E6A8B1D3F5079"]
@@ -347,7 +347,7 @@
 			tasks: [{ id: "0E2A4C6B8D1F3597", item: "grindless:pig_iron", type: "item" }]
 			title: "Pig Iron"
 			x: 18.0d
-			y: 1.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["1D3F5B7A9C2E4086"]
@@ -363,7 +363,7 @@
 			tasks: [{ id: "5A7C9E1B3D2F4086", item: "gtceu:steel_ingot", type: "item" }]
 			title: "Bessemer Steel"
 			x: 20.0d
-			y: 1.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["376295DE4FA3B31E"]

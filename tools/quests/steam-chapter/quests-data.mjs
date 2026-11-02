@@ -184,7 +184,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5D9B3F7A1C2E6048", xp: 40 }],
   },
   {
-    key: "STEAM_IRON_WASHING", id: "3A5C7E1B9D204F68", title: "Washed Iron Ore", icon: "gtceu:purified_hematite_ore", kind: "process", deps: ["STEAM_STEAM_BLAST_FURNACE"], x: 14, y: 1.5,
+    key: "STEAM_IRON_WASHING", id: "3A5C7E1B9D204F68", title: "Washed Iron Ore", icon: "gtceu:purified_hematite_ore", kind: "process", deps: ["STEAM_PRIMITIVE_BLAST_FURNACE"], x: 14, y: -1.5,
     teach: {
       for: "Iron ore is ground and washed first, so the sinter plant gets clean feed.",
       needs: "Iron ore from the drill, the steam macerator and an ore washer.",
@@ -198,7 +198,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5C7E9A3D1F4B2068", xp: 20 }],
   },
   {
-    key: "STEAM_IRON_SINTER", id: "2C4E6A8B1D3F5079", title: "Iron Sinter", icon: "grindless:iron_sinter", kind: "process", deps: ["STEAM_IRON_WASHING"], x: 16, y: 1.5,
+    key: "STEAM_IRON_SINTER", id: "2C4E6A8B1D3F5079", title: "Iron Sinter", icon: "grindless:iron_sinter", kind: "process", deps: ["STEAM_IRON_WASHING"], x: 16, y: -1.5,
     teach: {
       for: "Fine ore won't survive a blast furnace, so it is baked into hard lumps first.",
       needs: "Purified iron ore, coke dust and calcite, in the steam blast furnace.",
@@ -212,7 +212,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "7A9C1E3B5D2F4068", xp: 25 }],
   },
   {
-    key: "STEAM_PIG_IRON", id: "1D3F5B7A9C2E4086", title: "Pig Iron", icon: "grindless:pig_iron", kind: "process", deps: ["STEAM_IRON_SINTER"], x: 18, y: 1.5,
+    key: "STEAM_PIG_IRON", id: "1D3F5B7A9C2E4086", title: "Pig Iron", icon: "grindless:pig_iron", kind: "process", deps: ["STEAM_IRON_SINTER"], x: 18, y: -1.5,
     teach: {
       for: "Sinter smelted with coke gives brittle, carbon-heavy iron, the stuff steel is made from.",
       needs: "Sinter, coke and calcite, and steam for the blast furnace.",
@@ -226,7 +226,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "6F1B3D5A7C9E2048", xp: 25 }],
   },
   {
-    key: "STEAM_BESSEMER_STEEL", id: "4F6A8C1B3D5E7092", title: "Bessemer Steel", icon: "gtceu:steel_ingot", kind: "process", deps: ["STEAM_PIG_IRON"], x: 20, y: 1.5,
+    key: "STEAM_BESSEMER_STEEL", id: "4F6A8C1B3D5E7092", title: "Bessemer Steel", icon: "gtceu:steel_ingot", kind: "process", deps: ["STEAM_PIG_IRON"], x: 20, y: -1.5,
     teach: {
       for: "Blowing air through molten pig iron burns the carbon out and leaves steel.",
       needs: "Pig iron and steam, in the same steam blast furnace.",
