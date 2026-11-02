@@ -775,7 +775,7 @@ export default gate({
         n('wbat', 0, 0, I('gtceu:lv_lithium_battery'), 'Batteries', { kind: 'raw', sub: 'Any battery of the cell\'s tier' }),
         E('eqSMES', 0, 4, 'luv_age', '5933ADF51C8949BD', { pkg: 'A4' }),
         n('wcell', 2.25, 0, I('grindless:lv_capacitor_cell'), 'Capacitor Cell', {
-          kind: 'info', from: ['wbat'], sub: 'The weakest cell in any tower sets the network\'s voltage',
+          kind: 'info', from: ['wbat'], sub: 'The strongest cell in any tower sets the network\'s voltage',
           desc: 'Batteries of its tier in a block. An empty slot takes the tower\'s casing.',
           figs: [P.wcell('grindless:lv_capacitor_cell', 'LV', 720000), P.wcell('grindless:mv_capacitor_cell', 'MV', 2520000),
             P.wcell('grindless:hv_capacitor_cell', 'HV', 10800000), P.wcell('grindless:ev_capacitor_cell', 'EV', 61440000),
@@ -844,7 +844,7 @@ export default gate({
         }),
         n('wenH', 6.75, 0.75, I('gtceu:lv_wireless_energy_hatch'), 'Wireless Energy Hatch', {
           kind: 'info', from: [network('wtower')], sub: 'Multiblocks draw from the network through it',
-          desc: 'Above the network\'s voltage it gets nothing; shift-right-click it with an empty hand to see why.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'max')],
+          desc: 'Fed whenever the network\'s voltage is at least its own, so one MAX cell feeds every tier; shift-right-click it with an empty hand to see the network.', figs: [P.wamps([2, 4, 16, 64], 'lv', 'max')],
         }),
         n('wenC', 6.75, 2.25, I('grindless:lv_wireless_energy_cover'), 'Wireless Energy Cover', {
           kind: 'info', from: [network('wtower')], sub: 'Single machines draw through it, on any side but the front',
