@@ -255,39 +255,30 @@
     },
     {
       "id": "site-vela",
-      "label": "Site: the pasta extractor, phase sorter, draw bench, laminator and polar cap tap only at Vela pulsar orbit",
+      "label": "Site: the pasta extractor and polar cap tap only at Vela pulsar orbit (they take the crust and the pulsar); the sorter, draw bench and laminator run anywhere",
       "kind": "site",
-      "types": ["gtceu:pasta_extraction", "gtceu:pasta_sorting", "gtceu:pasta_drawing", "gtceu:pasta_lamination", "gtceu:polar_cap_tapping"],
+      "types": ["gtceu:pasta_extraction", "gtceu:polar_cap_tapping"],
       "dimensions": ["grindless:vela_pulsar_orbit"],
       "exceptRecipes": [
         "grindless:pasta_extraction/chain_crust",
         "grindless:pasta_extraction/ni_chain",
-        "grindless:pasta_extraction/chain_lattice",
-        "grindless:pasta_sorting/chain_caging",
-        "grindless:pasta_sorting/ni_chain_caging",
-        "grindless:pasta_sorting/lattice_caging",
-        "grindless:pasta_drawing/chain_strand_drawing",
-        "grindless:pasta_drawing/chain_wire_drawing",
-        "grindless:pasta_lamination/chain_lamina",
-        "grindless:pasta_lamination/chain_lamina_stack",
-        "grindless:pasta_lamination/chain_mesh_weave",
-        "grindless:pasta_drawing/horizon_strand_preform",
-        "grindless:pasta_drawing/horizon_wire_drawing",
-        "grindless:pasta_drawing/horizon_ingot_drawing",
-        "grindless:pasta_drawing/kerr_strand_drawing"
+        "grindless:pasta_extraction/chain_lattice"
       ],
       "package": "B4",
-      "note": "OpV-A0's chain matter modes run at SGR 1806-20 orbit (site-sgr-chain-matter); MAX-A0's horizon strand preform and wire drawing run there too (site-max-horizon-strand)."
+      "note": "The same check as opv.json's (SITE-D, 2026-11-02): OpV-A0's chain matter extractions run at SGR 1806-20 orbit (site-sgr-chain-matter), and MAX-A0's horizon strand rows there are site-max-horizon-strand."
     },
     {
       "id": "site-opv-terzan5",
-      "label": "Site: the debris harvester, refinery, foundry, node works and bulge collector only at the Terzan 5 core",
+      "label": "Site: the debris harvester, the node pack deploy and the bulge light collector only at the Terzan 5 core; the refinery and foundry run anywhere",
       "kind": "site",
-      "types": ["gtceu:debris_harvesting", "gtceu:replication_refining", "gtceu:self_replication", "gtceu:collector_node_assembly", "gtceu:bulge_light_collection"],
+      "recipe": [
+        "grindless:debris_harvesting/bulge_debris_harvest",
+        "grindless:collector_node_assembly/node_pack_deploy",
+        "grindless:bulge_light_collection/*"
+      ],
       "dimensions": ["grindless:terzan5_core"],
-      "exceptRecipes": ["grindless:debris_harvesting/nsc_planetesimal_harvest"],
       "package": "R1",
-      "note": "nsc_planetesimal_harvest is MAX's debris harvester row at the NSC belt (site-max-nsc-harvest)."
+      "note": "The same check as opv.json's (SITE-D, 2026-11-02). MAX's debris harvester row at the NSC belt is site-max-nsc-harvest."
     },
     {
       "id": "site-max-sgra",

@@ -37,7 +37,7 @@ test('c7 keeps the four stacks and fits the gate (6 item slots with the circuit)
     { id: 'grindless:superheavy_census_ii', count: 1 },
     { id: 'grindless:ns_eos_chart', count: 1 },
     { id: 'grindless:recovered_half_sled', count: 1 },
-    { id: 'gtnn:optical_mainframe', count: 4 }
+    { id: '#gtceu:circuits/uiv', count: 4 }
   ]);
   assert.equal(hold.itemsIn.length + hold.kept.length + 1, 6);
 });
@@ -63,7 +63,7 @@ test('the UXV casing is researched only with the Kerr chart and keeps the GTM id
 });
 
 test('the casing recipe takes the UIV parts one tier up from UEV-B5', () => {
-  for (const id of ['gtceu:uiv_machine_casing', 'gtceu:uiv_field_generator', 'gtceu:uiv_emitter', 'gtnn:optical_mainframe']) {
+  for (const id of ['gtceu:uiv_machine_casing', 'gtceu:uiv_field_generator', 'gtceu:uiv_emitter', '#gtceu:circuits/uiv']) {
     assert.ok(code.includes(id), id);
   }
   assert.match(code, /itemOutputs\('2x ' \+ CASING\)/);

@@ -24,12 +24,12 @@
     add('gtceu.recipe.grindless_rtg_hours', 'A pellet lasts about %s h of running, used up at random: %s EU per pellet')
 
     add('item.grindless.venusian_quantum_seed', 'Venusian Quantum Seed')
-    add('tooltip.grindless.venusian_quantum_seed.0', 'The Venusian half of an Earth-Venus quantum pair. Made only on Venus: chemical reactor, Venusian regolith + ender pearl + helium-3.')
+    add('tooltip.grindless.venusian_quantum_seed.0', 'The Venusian half of an Earth-Venus quantum pair. Made anywhere from shipped inputs: chemical reactor, Venusian regolith + ender pearl + helium-3.')
     add('tooltip.grindless.venusian_quantum_seed.1', 'Throw it into an explosion with an AE2 singularity (the Earth half): two entangled singularities that also link the Earth and Venus.')
     add('tooltip.grindless.entangled_planet.venus', 'Earth-Venus pair: one end may sit on Venus.')
 
     add('item.grindless.hermean_quantum_seed', 'Hermean Quantum Seed')
-    add('tooltip.grindless.hermean_quantum_seed.0', 'The Hermean half of an Earth-Mercury quantum pair. Made only on Mercury: chemical reactor, Hermean regolith dust + ender pearl + helium-3.')
+    add('tooltip.grindless.hermean_quantum_seed.0', 'The Hermean half of an Earth-Mercury quantum pair. Made anywhere from shipped inputs: chemical reactor, Hermean regolith dust + ender pearl + helium-3.')
     add('tooltip.grindless.hermean_quantum_seed.1', 'Throw it into an explosion with an AE2 singularity (the Earth half): two entangled singularities that also link the Earth and Mercury.')
     add('tooltip.grindless.entangled_planet.mercury', 'Earth-Mercury pair: one end may sit on Mercury.')
 

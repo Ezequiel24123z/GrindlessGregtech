@@ -5,8 +5,8 @@
 //                                    and the regolith (volatiles). Same idea as the Earth samples (not consumed, selects the vein
 //                                    in the Lunar Drill), with their own two-layer icon (item/lunar_vein_sample_frame +
 //                                    item/lunar_vein_sample_core, tinted). Crafted from what the first visit brings back by hand.
-//   grindless:lunar_quantum_seed     the Moon's half of an Earth-Moon quantum pair: made only on the Moon (chemical reactor with
-//                                    .dimension('gcyr:luna'), ender pearl + helium-3). Blown up with an AE2 singularity it makes two
+//   grindless:lunar_quantum_seed     the Moon's half of an Earth-Moon quantum pair: made anywhere (chemical reactor with no dimension
+//                                    condition, ender pearl + helium-3). Blown up with an AE2 singularity it makes two
 //                                    entangled singularities that also work between the Earth and the Moon (server_scripts/
 //                                    grindless/moon/quantum_bridge.js).
 // It also loads the lunar table into global.grindless.tables.veins_moon, so startup and server scripts share one copy.

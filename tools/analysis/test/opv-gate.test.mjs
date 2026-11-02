@@ -50,7 +50,7 @@ test('c13 burns the core and the seed, keeps the six, writes the Sgr A* chart; 9
     { id: 'grindless:tetron_array', count: 1 },
     { id: 'grindless:superheavy_census_iv', count: 1 },
     { id: 'grindless:bulge_chart', count: 1 },
-    { id: 'gtnn:cosmic_mainframe', count: 4 }
+    { id: '#gtceu:circuits/opv', count: 4 }
   ]);
   assert.deepEqual(c13.itemsOut, [{ id: 'grindless:sgr_a_chart', count: 1 }]);
   assert.equal(c13.itemsIn.length + c13.kept.length + 1, 9);

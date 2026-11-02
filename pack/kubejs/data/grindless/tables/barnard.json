@@ -64,7 +64,6 @@
           "_why": "MAX-R1 (max.md, L13 step 2, c2): the belt bloom carbonylated in CO; the Fe and Ni carbonyls are formed and cracked inside the vessel, so the CO returns whole (contained, nets to zero).",
           "name": "bloom_carbonyl",
           "circuit": 2,
-          "site": "barnard_b",
           "eut": 1966080,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:metal_rich_bloom", "count": 1 }],
@@ -111,7 +110,6 @@
         {
           "name": "rhenium_pellet",
           "circuit": 0,
-          "site": "barnard_b",
           "eut": 120,
           "duration": 100,
           "itemsIn": [{ "id": "gtceu:rhenium_dust", "count": 1 }],
@@ -127,7 +125,6 @@
         {
           "name": "rhenium_ingot",
           "circuit": 0,
-          "site": "barnard_b",
           "temp": 2700,
           "eut": 480,
           "duration": 400,

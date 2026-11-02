@@ -41,6 +41,7 @@ test('circuits: the contract numbers, each taken once in its type', () => {
   assert.equal(row('sirius.json', 'degenerate_harvesting', 'degenerate_slug').circuit, 2);
   assert.equal(row('tfln_femtosecond.json', 'femtosecond_writing', 'droplet_nozzle_plate').circuit, 8);
   // c9 is OpV-B1's bent_ge_rebend, c10 D4's: D1 takes the next free number
+  for (const n of ['hot_flow_filter', 'load_flux_frc']) assert.ok(!L16.find((x) => x.name === n).site, n);
   assert.equal(row('megabar.json', 'megabar_synthesis', 'payload_core_press').circuit, 11);
   for (const f of ['cygnus_disk.json', 'cygnus_lift.json', 'megabar.json', 'cygnus.json', 'sirius.json']) {
     for (const t of Object.values(json(f).types)) {
@@ -51,15 +52,17 @@ test('circuits: the contract numbers, each taken once in its type', () => {
 });
 
 test('every Sgr A* row carries the string site; the home rows carry none', () => {
-  for (const r of [...L16, row('matrioshka.json', 'droplet_radiator_assembly', 'shell_droplet_radiator'), row('cygnus.json', 'penrose_extraction', 'payload_penrose'),
+  assert.equal(row('matrioshka.json', 'droplet_radiator_assembly', 'shell_droplet_radiator').site, undefined);
+  for (const r of [...L16.filter((x) => !['hot_flow_filter', 'load_flux_frc'].includes(x.name)), row('cygnus.json', 'penrose_extraction', 'payload_penrose'),
     row('sirius.json', 'degenerate_harvesting', 'degenerate_slug')]) {
     assert.equal(r.site, SITE, r.name);
   }
+  for (const n of ['hot_flow_filter', 'load_flux_frc']) assert.ok(!L16.find((x) => x.name === n).site, n);
   assert.equal(row('megabar.json', 'megabar_synthesis', 'payload_core_press').site, undefined);
 });
 
 test('limits: every row at most VA[MAX], generators at most VH[MAX]', () => {
-  for (const r of [...L16, row('cygnus.json', 'penrose_extraction', 'payload_penrose')]) assert.ok(r.eut <= VA_MAX, r.name);
+  for (const r of [...L16.filter((x) => !['hot_flow_filter', 'load_flux_frc'].includes(x.name)), row('cygnus.json', 'penrose_extraction', 'payload_penrose')]) assert.ok(r.eut <= VA_MAX, r.name);
   assert.equal(disk('frc_spin_down').generator, true);
   assert.ok(disk('frc_spin_down').eut <= VH_MAX);
   assert.ok(row('cygnus.json', 'penrose_extraction', 'payload_penrose').eut <= VH_MAX);

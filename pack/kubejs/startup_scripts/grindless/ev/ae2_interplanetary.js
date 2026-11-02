@@ -4,8 +4,8 @@
 // backbone between planets, and each quantum bridge has one half built at each end).
 //
 //   grindless:martian_quantum_seed   the Martian half of an Earth-Mars quantum pair, the way the Lunar Quantum Seed is the Moon's half
-//                                    of an Earth-Moon one (startup_scripts/grindless/moon/items.js). Made only on Mars: chemical
-//                                    reactor with .dimension('gcyr:mars'), merrillite dust (the rare-earth phosphate only Mars has) +
+//                                    of an Earth-Moon one (startup_scripts/grindless/moon/items.js). Made anywhere (no dimension condition): chemical
+//                                    reactor, merrillite dust (the rare-earth phosphate only Mars has) +
 //                                    ender pearl + helium-3. Blown up with an AE2 singularity it makes two entangled singularities marked
 //                                    grindless_planet: "mars" (server_scripts/grindless/ev/ae2_interplanetary.js), which a quantum link
 //                                    chamber on Mars keeps (server_scripts/grindless/moon/quantum_bridge.js, data/grindless/tables/

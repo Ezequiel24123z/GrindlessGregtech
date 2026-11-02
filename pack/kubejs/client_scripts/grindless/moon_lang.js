@@ -25,7 +25,7 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.vein_sample.moon', 'Moon: craft it with an empty vein probe and two things of the vein brought back by hand on the first visit.')
 
     add('item.grindless.lunar_quantum_seed', 'Lunar Quantum Seed')
-    add('tooltip.grindless.lunar_quantum_seed.0', 'The Moon\'s half of an Earth-Moon quantum pair. Made only on the Moon: chemical reactor, programmed circuit 1 + ender pearl + helium-3.')
+    add('tooltip.grindless.lunar_quantum_seed.0', 'The Moon\'s half of an Earth-Moon quantum pair. Made anywhere from shipped inputs: chemical reactor, programmed circuit 1 + ender pearl + helium-3.')
     add('tooltip.grindless.lunar_quantum_seed.1', 'Throw it into an explosion with an AE2 singularity (the Earth half): two entangled singularities that also link the Earth and the Moon.')
     add('tooltip.grindless.entangled_planet.moon', 'Earth-Moon pair: one end may sit on the Moon.')
 

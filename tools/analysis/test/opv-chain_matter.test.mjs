@@ -62,7 +62,7 @@ test('8 items registered by opv/chain_matter.js, named and tooltipped in en_us, 
   }
 });
 
-test('the 11 OpV-A0 rows: circuits 3-5 on each pasta machine, all at SGR 1806-20 with the dimension lock and a circuit in the recipe', () => {
+test('the 11 OpV-A0 rows: circuits 3-5 on each pasta machine, SGR 1806-20 only on extraction and lamination, a circuit in the recipe', () => {
   const rows = mine();
   assert.deepEqual(rows.map((r) => [r.type, r.name, r.circuit]), [
     ['pasta_extraction', 'chain_crust', 3], ['pasta_extraction', 'ni_chain', 4], ['pasta_extraction', 'chain_lattice', 5],
@@ -70,12 +70,13 @@ test('the 11 OpV-A0 rows: circuits 3-5 on each pasta machine, all at SGR 1806-20
     ['pasta_drawing', 'chain_strand_drawing', 3], ['pasta_drawing', 'chain_wire_drawing', 4],
     ['pasta_lamination', 'chain_lamina', 3], ['pasta_lamination', 'chain_lamina_stack', 4], ['pasta_lamination', 'chain_mesh_weave', 5]]);
   for (const r of rows) {
-    assert.equal(r.site, SGR, r.name);
+    const KEEP = ['chain_crust', 'ni_chain', 'chain_lattice', 'chain_lamina', 'chain_lamina_stack'].includes(r.name);
+    assert.equal((r.site || undefined), KEEP ? SGR : undefined, r.name);
     assert.ok(Number.isInteger(r.eut) && r.eut > 0 && r.eut <= 134217728, `${r.name}: a UXV energy hatch carries it`);
     assert.ok(Number.isInteger(r.duration) && r.duration > 0 && r.duration <= 1200, r.name);
     const g = find(`grindless:${r.type}/${r.name}`);
     assert.ok(g && g.t === `gtceu:${r.type}`, `recipe grindless:${r.type}/${r.name}`);
-    assert.ok(JSON.stringify(g.j.recipeConditions || []).includes(SGR), `${r.name} carries the SGR dimension lock`);
+    assert.equal(JSON.stringify(g.j.recipeConditions || []).includes(SGR), KEEP, `${r.name} carries the SGR dimension lock only if it takes the crust`);
     assert.ok(side(g, 'inputs').includes(`"configuration":${r.circuit}`), `${r.name} takes circuit ${r.circuit}`);
   }
   for (const type of ['pasta_extraction', 'pasta_sorting', 'pasta_drawing', 'pasta_lamination']) {

@@ -1491,11 +1491,10 @@
     },
     {
       "id": "site-mercury-matrioshka",
-      "label": "Site: the Matrioshka computer and the droplet radiator works only in Mercury orbit",
+      "label": "Site: the Matrioshka computer only in Mercury orbit",
       "kind": "site",
       "types": [
-        "gtceu:matrioshka_computing",
-        "gtceu:droplet_radiator_assembly"
+        "gtceu:matrioshka_computing"
       ],
       "dimensions": [
         "gcyr:mercury_orbit"
@@ -1504,14 +1503,10 @@
     },
     {
       "id": "site-rx",
-      "label": "Site: the crust lift, drip separator, cage, decompressor and decay heat vault only at RX J1856.5-3754",
+      "label": "Site: the crust lift only at RX J1856.5-3754",
       "kind": "site",
       "types": [
-        "gtceu:crust_lifting",
-        "gtceu:neutron_drip_separation",
-        "gtceu:neutronium_caging",
-        "gtceu:r_process_decompression",
-        "gtceu:decay_heat"
+        "gtceu:crust_lifting"
       ],
       "dimensions": [
         "grindless:rx_j1856_orbit"
@@ -1520,7 +1515,7 @@
     },
     {
       "id": "site-j0437",
-      "label": "Site: the wind trap, the condensate lab and the X-ray profiler only at PSR J0437-4715 (except UXV-B5's Ti-44 map row)",
+      "label": "Site: the wind trap, the condensate lab and the X-ray profiler only at PSR J0437-4715 (except the rows that work shipped inputs)",
       "kind": "site",
       "types": [
         "gtceu:pulsar_wind_trapping",
@@ -1531,14 +1526,17 @@
         "grindless:psr_j0437_orbit"
       ],
       "exceptRecipes": [
-        "grindless:xray_pulse_profiling/ti44_map"
+        "grindless:xray_pulse_profiling/ti44_map",
+        "grindless:xray_pulse_profiling/pulsar_navigation_solution",
+        "grindless:positronium_condensation/ps_in_aerogel",
+        "grindless:positronium_condensation/laser_cooled_ps"
       ],
       "package": "B3",
       "note": "TP-V, as uxv.json's site-j0437: the dump holds UXV-B5's older-mode row (tables/j0437.json:55, knot dust -> ti44_map) with no dimension condition, as built (the profiler's controller is carried home); its input is Cas A knot dust, so UXV's checks hold it to uxv-cas-a."
     },
     {
       "id": "site-cygnus",
-      "label": "Site: the probe bay and the Penrose engine only at Cygnus X-1",
+      "label": "Site: the probe bay (the kerr probe and the relay seed) and the Penrose engine only at Cygnus X-1",
       "kind": "site",
       "types": [
         "gtceu:ergosphere_probing",
@@ -1546,6 +1544,11 @@
       ],
       "dimensions": [
         "grindless:cygnus_x1_orbit"
+      ],
+      "exceptRecipes": [
+        "grindless:ergosphere_probing/sled_hull",
+        "grindless:ergosphere_probing/split_sled",
+        "grindless:ergosphere_probing/refit_sled"
       ],
       "package": "B4"
     },

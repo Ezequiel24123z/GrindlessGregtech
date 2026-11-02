@@ -2,8 +2,7 @@
 // -----------------------------------------------------------------------------------------------
 // gtceu:regolith_processing recipes of the Regolith Cell (gtceu:regolith_cell, startup_scripts/grindless/ev/regolith_cell.js) and the
 // recipe that makes the cell (EV era, docs/eras/ev.md "Regolith cell"). GTM has no lunar chemistry, so these five recipes are ours,
-// written from the real processes in a table. Every recipe carries the Moon's dimension condition (the dimension of
-// data/grindless/tables/veins_moon.json, like every lunar recipe): the cell only works on the Moon. The programmed circuit picks the mode:
+// written from the real processes in a table. The cell has no dimension condition: it processes shipped regolith and ilmenite, so it works anywhere. The programmed circuit picks the mode:
 //
 //   circuit 1  volatiles            16 lunar regolith dust -> 2,000 mB hydrogen + 250 helium + 200 nitrogen + 1 helium-3
 //   circuit 2  regolith electrolysis 16 lunar regolith dust + platinum anode -> 7,000 mB oxygen + 3 silicon dust + 1 iron dust
@@ -63,7 +62,7 @@
 // Published in global.grindless.regolithCell for the smoke test:
 //   .recipes   [{ name, recipeId, mode, circuit, itemsIn: [{ id, count, chance }], itemsOut: [{ id, count }], fluidsOut: [{ id, amount }],
 //                 eut, duration, energy, vented }]
-//   .stages, .krollEnergy, .dimension, .craftingRecipes, .craftingParts
+//   .stages, .krollEnergy, .craftingRecipes, .craftingParts
 (function () {
   const G = global.grindless || (global.grindless = {})
   const RC = G.regolithCell || (G.regolithCell = {})
@@ -151,11 +150,6 @@
     }
   }
 
-  function moonDimension() {
-    var table = G.tables && G.tables.veins_moon
-    return table && table.dimension ? table.dimension : 'gcyr:luna'
-  }
-
   RC.electrode = ELECTRODE
   RC.electrodeWear = ELECTRODE_WEAR
   RC.charge = CHARGE
@@ -192,8 +186,6 @@
       console.error('[grindless/ev] regolith cell recipes skipped, unknown id(s): ' + missing.join(', '))
       return
     }
-    var dimension = moonDimension()
-    RC.dimension = dimension
     var added = 0
     RC.recipes.forEach(function (r) {
       var unknown = r.itemsIn.concat(r.itemsOut).filter(function (x) { return !Item.exists(x.id) }).map(function (x) { return x.id })
@@ -211,10 +203,9 @@
       recipe.circuit(r.circuit)
       r.itemsOut.forEach(function (o) { recipe.itemOutputs(o.count + 'x ' + o.id) })
       r.fluidsOut.forEach(function (f) { recipe.outputFluids(Fluid.of(f.id, f.amount)) })
-      recipe.dimension(dimension)
       recipe.EUt(r.eut).duration(r.duration)
     })
-    console.info('[grindless/ev] regolith cell recipes added: ' + added + ' (only in ' + dimension + '; titanium at ' +
+    console.info('[grindless/ev] regolith cell recipes added: ' + added + '; titanium at ' +
       KROLL_ENERGY + ' EU, the Kroll stages)')
   }
 

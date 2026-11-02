@@ -31,7 +31,7 @@
         ['emi.grindless.info.stellar_elevator.1',
             'The helium is not lost: 900 mB leave warm, the LuV refrigerator recondenses them and they return to the UV cold works. The elevator log is the record of a lift, kept for the pack\'s data work.'],
         ['emi.grindless.info.plasma_mass_filter.0',
-            'Stellar plasma from the Cygnus X-1 donor star is lifted by the stellar elevator and sorted here, in Cygnus X-1 orbit: hydrogen, helium, CNO and heavy cuts. The disk row also sorts accretion-disk plasma.'],
+            'Stellar plasma from the Cygnus X-1 donor star is lifted by the stellar elevator and sorted here, anywhere: hydrogen, helium, CNO and heavy cuts. The disk row also sorts accretion-disk plasma.'],
         ['emi.grindless.info.plasma_mass_filter.1',
             'Every cut has a use: the helium cut becomes triple-alpha fuel for the Mk6 fusion ring, the hydrogen and CNO cuts feed the ring directly, the hydrogen cut also carries the volatiles in the condensation tower, and the heavy cut is condensed there.'],
         ['emi.grindless.info.stellar_condensation_tower.0',

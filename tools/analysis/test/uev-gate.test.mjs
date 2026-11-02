@@ -33,7 +33,7 @@ test('c3 holds the stored items and fits the gate (6 item inputs)', () => {
   for (const id of ['grindless:tennessine_sample', 'grindless:degenerate_pellet', 'grindless:degenerate_eos_model']) {
     assert.match(hold, new RegExp(`kept:[\\s\\S]*${id}`), id);
   }
-  assert.match(hold, /id: 'gtnn:optical_computer', count: 4/);
+  assert.match(hold, /id: '#gtceu:circuits\/uev', count: 4/);
   const stacks = (hold.match(/\{ id: /g) || []).length;
   assert.equal(stacks, 4);
   assert.ok(stacks + 1 <= 6, `${stacks} stacks and the circuit exceed the gate's 6 item slots`);

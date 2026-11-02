@@ -192,7 +192,7 @@ test('controllers: UIV hull, 2 UIV parts and 2 optical mainframes', () => {
   assert.match(src, /event\.recipes\.gtceu\.assembly_line\('grindless:' \+ d\.name\)/);
   assert.match(src, /grindless:assembly_line\/' \+ d\.name/);
   assert.match(src, /d\.parts\.forEach\(function \(p\) \{ b\.itemInputs\('3x ' \+ p\) \}\)/);
-  assert.match(src, /b\.itemInputs\('2x ' \+ MAINFRAME\)/);
+  assert.match(src, /b\.itemInputs\('2x #gtceu:circuits\/uiv'\)/);
   assert.match(src, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
   assert.match(src, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
   assert.match(src, /stationResearch/);

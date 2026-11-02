@@ -15,7 +15,6 @@
       "recipes": [
         {
           "name": "strangelet_seed", "circuit": 2, "eut": 268435456, "duration": 1600,
-          "site": "grindless:cygnus_x1_orbit",
           "_wear": "Nominal 1/32 catalyst wear, rounded to 312/10000 (3.12%) by GTM's integer chance API.",
           "chancedIn": [{"id": "grindless:pasta_core_sample", "count": 1, "chance": 312}],
           "fluidsIn": [{"id": "gtceu:fireball_distillate", "amount": 1000}],
@@ -24,7 +23,6 @@
         },
         {
           "name": "dispose_negative_strangelets", "circuit": 3, "eut": 268435456, "duration": 400,
-          "site": "grindless:cygnus_x1_orbit",
           "itemsIn": [{"id": "grindless:negative_strangelet_residue", "count": 1}],
           "disposal": true
         }

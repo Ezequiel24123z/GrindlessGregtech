@@ -36,8 +36,8 @@
 // plates (the shield) + 4 titanium plates (the radiator fins) + 8 nichrome and 8 cupronickel wires (a chromel-constantan thermopile)
 // + 2 EV circuits. Every part is EV: the cell is simple, its plutonium is IV.
 //
-// AE2, the IV step. Earth-Venus and Earth-Mercury pairs like the Mars one (ev/ae2_interplanetary.js): the far half is made on that planet
-// (chemical reactor with its dimension condition, the first dimension of planets.json's entry), from the planet's own material, an ender
+// AE2, the IV step. Earth-Venus and Earth-Mercury pairs like the Mars one (ev/ae2_interplanetary.js): the far half is made from that planet's own material
+// (chemical reactor, anywhere: no dimension condition, its inputs are shipped), an ender
 // pearl and helium-3 at the lunar seed's HV numbers, and AE2's explosion ritual marks the pair with planets.json's pairTag, which the
 // quantum link chambers there keep (moon/quantum_bridge.js). Power crosses as EU over eup2p's EU P2P tunnels: the tunnel has no cap of its
 // own, so 16 A IV hatches at both ends carry the reactor's 131,072 EU/t; no recipe of ours, and no laser tunnel in IV.
@@ -231,8 +231,8 @@
     var added = []
     ;(TN.seeds || []).forEach(function (s) {
       var def = planets[s.planet]
-      if (!def || !def.pairTag || !def.dimensions || def.dimensions.length === 0) {
-        console.error(LOG + 'Earth-' + s.planet + ' pair skipped: planets.json has no ' + s.planet + ' pairTag or dimension')
+      if (!def || !def.pairTag) {
+        console.error(LOG + 'Earth-' + s.planet + ' pair skipped: planets.json has no ' + s.planet + ' pairTag')
         return
       }
       var missing = missingItems([s.seed, s.local, TN.ids.singularity, TN.ids.entangled, 'minecraft:ender_pearl'])
@@ -245,7 +245,6 @@
         .itemInputs(s.local, '#forge:ender_pearls')
         .inputFluids(Fluid.of(TN.ids.helium3, TN.seedHelium3))
         .itemOutputs(s.seed)
-        .dimension(def.dimensions[0])
         .EUt(TN.seedEut)
         .duration(TN.seedDuration)
 
@@ -257,7 +256,7 @@
         ingredients: [{ item: TN.ids.singularity }, { item: s.seed }],
         result: { item: TN.ids.entangled, count: 2, nbt: nbt }
       }).id(s.pair)
-      added.push(s.planet + ' (' + def.dimensions[0] + ', ' + PAIR_NBT_KEY + ': ' + def.pairTag + ')')
+      added.push(s.planet + ' (' + PAIR_NBT_KEY + ': ' + def.pairTag + ')')
     })
     return added
   }

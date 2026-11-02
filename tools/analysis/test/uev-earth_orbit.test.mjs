@@ -53,7 +53,10 @@ test('names do not collide with A6 rows on the same type', () => {
 });
 
 test('every recipe of the two orbit types is flagged for the Earth-orbit dimension and the script applies it', () => {
-  for (const type of ORBIT_TYPES) assert.equal(T.types[type].dimension, true, type);
+  assert.equal(T.types.quantum_degenerate_gas.dimension, true);
+  // only the rows that use the place keep it: the gravity survey is data analysis and the repeater node is an open type
+  assert.equal(row('quantum_degenerate_gas', 'barnard_gravity_survey').dimension, false);
+  assert.ok(!T.types.entanglement_distribution.dimension);
   assert.match(server, /G\.orbits \? G\.orbits\.earth : 'gcyr:overworld_orbit'/);
   assert.match(server, /\.dimension\(ORBIT\)/);
   for (const [type, t] of Object.entries(T.types)) if (!ORBIT_TYPES.includes(type)) assert.ok(!t.dimension, `${type} is a plain GTM type`);

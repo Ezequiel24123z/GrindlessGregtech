@@ -7,7 +7,7 @@
 //   gtceu:positron_accumulation / gtceu:casimir_cavity   one recipe per table entry, id grindless:<type>/<name>; the programmed circuit
 //                          picks the recipe; every recipe carries the data key of its type = <name> (its EMI line). "kept" entries are
 //                          GTM's non-consumed item inputs, "charge" the same for fluids; a chance below 10,000 is a chanced input or
-//                          output. A type with orbit: true (the Casimir array) adds .dimension(Earth orbit).
+//                          output. A type with orbit: true (the Casimir array) adds .dimension(Earth orbit); a row's own orbit (true or false) overrides it (the strip row works shipped stacks anywhere).
 //     line 27: magnesium-24 target (GTM assembler) -> UV's synchrotron (circuit 5, uv/accelerators.js): sodium-22 target -> moderated
 //              source (c1, under the cryogenic plant's 99.999 % neon) -> accumulate (c2: the Surko trap fills an empty Penning trap;
 //              the source wears 1 in 16 runs) -> positron cartridge -> UV's antimatter trap (circuit 3) -> antihydrogen cartridge
@@ -74,7 +74,7 @@
           return { id: String(f.id), amount: Number(f.amount) }
         }
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration,
-          dataKey: def.dataKey ? String(def.dataKey) : '', orbit: def.orbit === true,
+          dataKey: def.dataKey ? String(def.dataKey) : '', orbit: r.orbit === undefined ? def.orbit === true : r.orbit === true,
           itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack), fluidsIn: list(r.fluidsIn).map(fluid), charge: list(r.charge).map(fluid),
           itemsOut: list(r.itemsOut).map(stack), fluidsOut: list(r.fluidsOut).map(fluid) }
         if (bad || (rec.itemsOut.length === 0 && rec.fluidsOut.length === 0) || (rec.itemsIn.length === 0 && rec.fluidsIn.length === 0)) {

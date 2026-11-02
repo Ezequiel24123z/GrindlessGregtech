@@ -438,7 +438,7 @@ From UHV (`DECISIONS.md:426-451`, `docs/STATUS.md`; the ids are `pack/kubejs/sta
 - **Crossings:** UV fibre draw tower, UHV crystal furnace.
 - **Source:** Yin 2017 (Micius); Zhong 2015 (Eu:YSO memory).
 
-### 18. Nebula collector: `gtceu:nebula_collector`, type `gtceu:nebula_collection` (Alpha Centauri AB orbit)
+### 18. Nebula collector: `gtceu:nebula_collector`, type `gtceu:nebula_collection` (no place needed)
 
 - **What it gains:** a magnetic scoop (a Bussard concept, at stated fiction scale) and aerogel dust traps (real: Stardust).
 - **Recipes:**
@@ -448,7 +448,7 @@ From UHV (`DECISIONS.md:426-451`, `docs/STATUS.md`; the ids are `pack/kubejs/sta
 - **Crossings:** EV cryogenic plant (gas separation, line 26).
 - **Source:** Bussard 1960; NASA Stardust.
 
-### 19. Interstellar dust lab: `gtceu:interstellar_dust_lab`, type `gtceu:interstellar_dust_analysis` (Alpha Centauri AB orbit)
+### 19. Interstellar dust lab: `gtceu:interstellar_dust_lab`, type `gtceu:interstellar_dust_analysis` (no place needed)
 
 - **What it gains:** grain extraction, HF demineralisation, presolar grains and accelerator mass spectrometry. This gives the iron-60 supernova record (real: Koll 2019; Wallner 2016, 2021).
 - **Recipes:**
@@ -460,7 +460,7 @@ From UHV (`DECISIONS.md:426-451`, `docs/STATUS.md`; the ids are `pack/kubejs/sta
 - **Crossings:** IV fluorspar kiln.
 - **Source:** Koll 2019; Wallner 2021.
 
-### 20. Pulsar timing station: `gtceu:pulsar_timing_station`, type `gtceu:pulsar_timing` (Alpha Centauri AB orbit)
+### 20. Pulsar timing station: `gtceu:pulsar_timing_station`, type `gtceu:pulsar_timing` (no place needed)
 
 - **What it gains:** observatory step 10. X-ray pulsar timing with lobster-eye optics and silicon drift detectors (real: NICER/SEXTANT 2017), on UHV's nuclear clock, over a 4.37 ly baseline.
 - **Recipes:**
@@ -833,7 +833,7 @@ In English, each with a proportionate reward that never skips a production line.
   - it is at `uev`, and `gtnn:optical_mainframe` stays hidden;
   - GT--'s own recipe for it stays removed.
 - **The Mk4's plasmas only from the Mk4. The Mk4, the DEC rows and the swarm's Alpha Centauri row are written final and not in `power/generators.js`'s list.**
-- **Interstellar gas, dust and the pulsar navigation chart only from Alpha Centauri AB orbit. Barnard core rock and carbonyl iron only from Barnard b. Degenerate matter, the mass–radius chart and pellets only from Sirius B orbit. The EOS model and the repeater node only from Earth orbit.**
+- **Interstellar gas and the pulsar timing survey only from Alpha Centauri AB orbit (the dust analysis and the navigation chart need no place). Barnard core rock only from Barnard b (the carbonyl bloom and the rhenium chain run anywhere). Degenerate matter, the mass–radius chart only from Sirius B orbit (the pellet is made anywhere). The EOS model only from Earth orbit (the repeater node and the gravity survey are made anywhere).**
 - **Four substages:**
   - `uev` (Earth and Earth orbit);
   - `uev-alpha` and `uev-barnard` (in parallel, after the DFD Mk1);
@@ -1308,7 +1308,7 @@ Wave A packages depend on F1 and on the spikes named. They run two at a time, in
   - machines 16–17 run only in Earth orbit;
   - the ULE cavity is not consumed.
 - **Acceptance:**
-  - the EOS model, the gravity survey and the repeater node come only from Earth orbit;
+  - the EOS model comes only from Earth orbit; the gravity survey and the repeater node are made anywhere;
   - W's link is obtainable.
 - **Tests:** T0; recipe lookup only (the dimension allowlist is proven). T1: none.
 - **Commits:** 2.

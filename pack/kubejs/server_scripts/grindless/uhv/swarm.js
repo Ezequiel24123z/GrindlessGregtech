@@ -117,14 +117,14 @@
   ROWS.push(row('matrioshka_feed', STATION, 4, [item(SEGMENT, 16), item(POD, 16)], [], [item(WORN, 16), item(TANK, 16)], [], 16 * UHV_A, 6000,
     gen([item(SEGMENT, 60), item(MAP, 1)])))
 
-  // MAX-G1 (docs/eras/max.md, machine 8 and line 13): one mirror shell segment, the block the mirror shell is built from. Built at Sgr A*,
-  // where the shell droplet radiator is made. No circuit: the foundry holds 8 item inputs and the row takes eight products (MX-S2 adds the
+  // MAX-G1 (docs/eras/max.md, machine 8 and line 13): one mirror shell segment, the block the mirror shell is built from. Built anywhere
+  // (it only assembles shipped parts). No circuit: the foundry holds 8 item inputs and the row takes eight products (MX-S2 adds the
   // tunable impedance sheet, L50); no other foundry row shares any of its items, so the lookup path stays its own; VA[MAX] = 2,013,265,920 EU/t
   ROWS.push(row('mirror_shell_segment', FOUNDRY, null,
     [item('grindless:segment_truss', 1), item('grindless:superconducting_membrane', 1), item('grindless:albedo_multilayer_panel', 1),
       item('grindless:shell_droplet_radiator', 1), item('grindless:shell_cryocooler', 1), item('grindless:segment_controller', 1),
       item('grindless:halbach_segment_coupler', 1), item('grindless:tunable_impedance_sheet', 1)], [],
-    [item('grindless:mirror_shell_segment', 1)], [], 2013265920, 1200, { site: 'gcyr:black_hole_orbit' }))
+    [item('grindless:mirror_shell_segment', 1)], [], 2013265920, 1200))
 
   function missingIds(r) {
     var missing = []

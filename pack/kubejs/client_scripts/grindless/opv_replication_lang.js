@@ -22,7 +22,7 @@
         ['tooltip.grindless.metal_debris_fraction.1', 'Refined through carbonyl in the replication refinery.'],
 
         ['emi.grindless.info.debris_harvester.0',
-            'The harvester runs only at Terzan 5 core. Its first run needs no input: a sensor head is its only tool and is never used up, so the first debris is gathered without any supply from home. Harvesting debris from a bulge is named fiction.'],
+            'The harvester runs only at Terzan 5 core. Its first run needs no input: a sensor head is its only tool and is never used up, so the first debris is gathered without any supply. Harvesting debris from a bulge is named fiction.'],
         ['emi.grindless.info.debris_harvester.1',
             'Circuit 2 sorts four bulge debris into two metal and two silicate fractions; the refinery turns them into feedstock and casings.'],
 
@@ -64,7 +64,7 @@
         ['grindless.machine.von_neumann_foundry.tooltip.0',
         '\u00a77Builds probe seeds from Terzan 5 feedstock; the seed itself is never used up.'],
         ['emi.grindless.info.von_neumann_foundry.0',
-        'A probe copies itself only with real material: 16 metal feedstock, 8 cluster casings and a vitamin kit from home. The seed is kept in circuit 1 and two seeds come out; nothing is copied from nothing.'],
+        'A probe copies itself only with real material: 16 metal feedstock, 8 cluster casings and a vitamin kit. The seed is kept in circuit 1 and two seeds come out; nothing is copied from nothing.'],
         ['emi.grindless.info.von_neumann_foundry.1',
         'Circuit 2 turns a pathfinder probe core and the same feedstock into one seed.'],
         ['gtceu.recipe.grindless_self_replication.probe_self_copy', 'Circuit 1: the seed is kept; feedstock, casings and a vitamin kit make a second seed.'],

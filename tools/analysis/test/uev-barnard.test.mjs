@@ -35,7 +35,9 @@ test('names unique per type, EU/t and duration positive, circuits unique per typ
 });
 
 test('dimension allowlist: every row is Barnard b only, and the server script locks it with G.places', () => {
-  for (const r of all()) assert.equal(r.site, 'barnard_b', `${r.type}/${r.name}`);
+  // only the rows that use the place keep it: the carbonyl bloom and the rhenium chain are made anywhere
+  const OPEN = ['bloom_carbonyl', 'rhenium_pellet', 'rhenium_ingot'];
+  for (const r of all()) assert.equal(r.site, OPEN.includes(r.name) ? undefined : 'barnard_b', `${r.type}/${r.name}`);
   const srv = read('server_scripts', 'grindless', 'uev', 'barnard.js');
   assert.match(srv, /G\.places\.allow\(recipe, rec\.site\)/);
   assert.match(srv, /SITES = \['barnard_b'\]/);
@@ -114,16 +116,16 @@ test('the HV syngas plant has the CO-rich row at circuit 6 (C + CO2 -> 2 CO)', (
   assert.match(s, /SYN\.recipes\.concat\(SYN\.orbitRecipes, SYN\.uevRecipes(?:, SYN\.uivRecipes)?(?:, SYN\.uxvRecipes)?\)/);
 });
 
-test('the EV platinum plant has the Barnard residue row at circuit 9, locked to Barnard b, no voiding', () => {
+test('the EV platinum plant has the Barnard residue row at circuit 9, no site, no voiding', () => {
   const s = read('server_scripts', 'grindless', 'ev', 'platinum_plant.js');
   const row = /name: 'barnard_residue'[\s\S]*?\n\s*\}/.exec(s);
   assert.ok(row, 'row');
   assert.match(row[0], /circuit: 9/);
-  assert.match(row[0], /site: 'barnard_b'/);
+  assert.doesNotMatch(row[0], /site:/);
   assert.match(row[0], /grindless:barnard_residue/);
   assert.match(row[0], /grindless:crude_ammonium_perrhenate/);
   for (const m of ['osmium', 'iridium', 'platinum']) assert.match(row[0], new RegExp(`gtceu:${m}_dust`));
-  assert.match(s, /global\.grindless\.places\.allow\(recipe, r\.site\)/);
+  assert.doesNotMatch(s, /places\.allow\(recipe, r\.site\)/);
 });
 
 test('rhenium: dust, ingot and the pellet come only from Barnard b rows, in order', () => {
@@ -136,7 +138,7 @@ test('rhenium: dust, ingot and the pellet come only from Barnard b rows, in orde
   assert.deepEqual(ids(by('electric_blast_furnace', 'rhenium_ingot').itemsOut), ['gtceu:rhenium_ingot']);
   assert.equal(by('electric_blast_furnace', 'rhenium_ingot').temp, 2700);
   assert.deepEqual(ids(by('electric_blast_furnace', 'rhenium_ingot').itemsIn), ['grindless:rhenium_pellet']);
-  for (const r of all().filter((x) => ids(x.itemsOut).some((i) => i.startsWith('gtceu:rhenium')))) assert.equal(r.site, 'barnard_b', r.name);
+  for (const r of all().filter((x) => ids(x.itemsOut).some((i) => i.startsWith('gtceu:rhenium')))) assert.equal(r.site, r.name === 'rhenium_ingot' ? undefined : 'barnard_b', r.name);
   // the electron beam consumes exactly what this chain ends in
   assert.match(JSON.stringify(table('electron_beam.json')), /gtceu:rhenium_ingot/);
 });

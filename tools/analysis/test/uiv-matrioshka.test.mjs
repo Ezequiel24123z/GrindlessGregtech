@@ -71,10 +71,10 @@ test('Matrioshka computer: circuits 1-3, 31457280 EU/t, orbit only, research NBT
   }
 });
 
-test('droplet radiator works: circuit 2 for the TPV tile, orbit only; the module is an assembly line with the orifice plate', () => {
+test('droplet radiator works: circuit 2 for the TPV tile, anywhere; the module is an assembly line with the orifice plate', () => {
   const rc = T.types.droplet_radiator_assembly.recipes;
   assert.deepEqual(rc.map((r) => [r.name, r.circuit]), [['tpv_tile', 2], ['shell_droplet_radiator', 5]]); // MAX-D1 appends c5 at Sgr A*
-  for (const r of rc) { assert.equal(r.eut, 31457280, r.name); assert.equal(r.site, r.circuit === 5 ? 'gcyr:black_hole_orbit' : true, r.name); }
+  for (const r of rc) { assert.equal(r.eut, 31457280, r.name); assert.equal(r.site, undefined, r.name); }
   assert.deepEqual(inputs(by('assembly_line', 'radiator_module')),
     ['grindless:orifice_plate', 'grindless:eb_distilled_tin', 'grindless:droplet_collector', 'gtceu:uiv_electric_pump', '#gtceu:circuits/uiv']);
   assert.deepEqual(outputs(by('assembly_line', 'radiator_module')), ['grindless:droplet_radiator_module']);
@@ -195,7 +195,7 @@ test('controllers read the UIV hull, 2 UIV parts and 2 optical mainframes', () =
   assert.match(srv, /grindless:assembly_line\/' \+ d\.name/);
   assert.match(srv, /b\.itemInputs\(HULL\)/);
   assert.match(srv, /d\.parts\.forEach\(function \(p\) \{ b\.itemInputs\('3x ' \+ p\) \}\)/);
-  assert.match(srv, /b\.itemInputs\('2x ' \+ MAINFRAME\)/);
+  assert.match(srv, /b\.itemInputs\('2x #gtceu:circuits\/uiv'\)/);
   assert.match(srv, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
   assert.match(srv, /d\.domain\.forEach/);
   assert.match(srv, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);

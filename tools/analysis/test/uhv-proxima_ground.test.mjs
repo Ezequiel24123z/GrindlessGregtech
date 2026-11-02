@@ -137,10 +137,10 @@ test('recipe lookup: unique names and circuits, no subsets inside a type, every 
   for (const r of rows().filter((x) => GTM.includes(x.type) && !UNKEYED.includes(x.name))) assert.ok(inputs(r).some((i) => i.startsWith('grindless:')), r.name);
 });
 
-test('allowlists: the drill on Proxima b\'s night side only, the heap and the ice-core melt on Proxima b only, the reformer row in Saturn orbit, the rest anywhere', () => {
+test('allowlists: the drill on Proxima b\'s night side only, the heap on Proxima b only, the reformer row in Saturn orbit, the rest anywhere', () => {
   for (const r of rows()) {
     const d = dump(idOf(r));
-    const proxima = OURS.includes(r.type) || r.name === 'proxima_ice_core';
+    const proxima = OURS.includes(r.type) && r.name !== 'lunar_biocement';
     const site = proxima ? 'proxima_b' : r.type === 'tholin_reforming' ? 'saturn_orbit' : undefined;
     assert.equal(r.site, site, r.name);
     assert.deepEqual(dimsOf(d), site ? SITE_DIMS[site] : [], idOf(r));
@@ -251,9 +251,9 @@ test('the older machines\' Proxima rows: each in the dump on a circuit its type 
   assert.equal(prox.charge, true);
   assert.deepEqual(prox.energy.map((s) => s.stage), ['exchange']);
   assert.ok(!has(ins(d.heavy), 'gtceu:steam'));
-  // the cascade takes the REE liquor; the regolith cell takes the tailings on the Moon with its anode, giving silica, iron and oxygen
+  // the cascade takes the REE liquor; the regolith cell takes the tailings, anywhere, with its anode, giving silica, iron and oxygen
   assert.ok(has(ins(d.cascade), 'gtceu:proxima_ree_liquor'));
-  assert.equal(dimsOf(d.regolith).length, 1);
+  assert.equal(dimsOf(d.regolith).length, 0);
   assert.deepEqual(dimsOf(d.regolith), dimsOf(dump('grindless:regolith_processing/ev/regolith_electrolysis')));
   const tail = d.regolith.j.inputs.item.find((i) => JSON.stringify(i).includes('"grindless:leached_tailings"'));
   assert.equal(tail.content.count, 16);

@@ -285,7 +285,7 @@
       if (t.inItems.indexOf('forge:ender_pearls') < 0) problems.push('no ender pearl in ' + t.inItems)
       if (t.inFluids.indexOf(AI.ids.helium3) < 0 || t.inFluids.indexOf('250') < 0) problems.push('fluids ' + t.inFluids)
       if (t.outItems.indexOf(AI.ids.marsSeed) < 0) problems.push('outputs ' + t.outItems)
-      if (c.dims.length !== 1 || c.dims[0].dim !== MARS || c.dims[0].reverse) problems.push('dimension conditions ' + JSON.stringify(c.dims))
+      if (c.dims.length !== 0) problems.push('dimension conditions ' + JSON.stringify(c.dims))
       // the merrillite must come first: the lunar recipe (ender pearl + helium-3) is then not a prefix of this one
       if (t.inItems.indexOf(AI.ids.merrilliteDust) > t.inItems.indexOf('forge:ender_pearls')) problems.push('merrillite is not the first ingredient')
       detail += AI.recipes.marsSeed + ': ' + t.inItems + ' + ' + t.inFluids + ' -> ' + t.outItems + ', ' + eutOf(seed) + ' EU/t, ' + seed.duration +

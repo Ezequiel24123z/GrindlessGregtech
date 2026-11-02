@@ -15,9 +15,9 @@
 //                                 safe on EV cables and accepted by any IV hatch or machine.
 //   gtceu:radioisotope_decay      its recipe type (EU out; 1 item in). One recipe. It is NOT in power/generators.js's list of doubled
 //                                 generator types (the figures here are final), and that script only rebuilds datapack recipes anyway.
-//   grindless:venusian_quantum_seed  the Venusian half of an Earth-Venus quantum pair, made only on Venus from Venusian regolith (IV-B1's
+//   grindless:venusian_quantum_seed  the Venusian half of an Earth-Venus quantum pair, made anywhere (no dimension condition) from Venusian regolith (IV-B1's
 //                                 site casing, the planet's own ground) + ender pearl + helium-3, like the Martian seed from merrillite.
-//   grindless:hermean_quantum_seed   the Hermean half of an Earth-Mercury pair, made only on Mercury from Hermean regolith dust (IV-A1's
+//   grindless:hermean_quantum_seed   the Hermean half of an Earth-Mercury pair, made anywhere (no dimension condition) from Hermean regolith dust (IV-A1's
 //                                 Mercury-only material) + ender pearl + helium-3.
 //
 // Published as global.grindless.travelNetwork for the recipe script and the smoke test (ids, the seeds of each planet, the RTG figures).

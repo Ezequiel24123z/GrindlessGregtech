@@ -50,7 +50,7 @@
         var zeroOk = gtm || def.circuitOptional === true
         var circuitOk = (zeroOk && circuit === 0) || (circuit >= 1 && circuit <= 32 && circuit % 1 === 0 && !circuits[circuit])
         if (!/^[a-z0-9_]+$/.test(n) || names[n] || !circuitOk || !(eut > 0) || eut % 1 !== 0 || !(duration > 0) || duration % 1 !== 0 ||
-          SITES.indexOf(site) < 0 || !(temp >= 0) || (temp > 0 && type !== 'electric_blast_furnace')) {
+          (site !== '' && SITES.indexOf(site) < 0) || !(temp >= 0) || (temp > 0 && type !== 'electric_blast_furnace')) {
           problems.push(type + '/' + n + ': name, circuit ' + r.circuit + ', eut ' + r.eut + ', duration ' + r.duration + ', site ' + site)
           return
         }
@@ -120,7 +120,7 @@
     rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
     if (rec.temp > 0) recipe.blastFurnaceTemp(rec.temp)
-    G.places.allow(recipe, rec.site)
+    if (rec.site !== '') G.places.allow(recipe, rec.site)
     recipe.EUt(rec.eut).duration(rec.duration)
   }
 
@@ -176,7 +176,6 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uev_machine_hull'
-    var O = 'gtnn:optical_computer'
     var PISTON = 'gtceu:uev_electric_piston'
     var PUMP = 'gtceu:uev_electric_pump'
     var SENSOR = 'gtceu:uev_sensor'
@@ -187,9 +186,9 @@
     // the drill opens Barnard core rock (rhenium, iron pentacarbonyl), so it takes the UHV coring head, not rhenium
     var defs = [
       { key: 'drill', research: 'grindless:ffkm_seal', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + O, '3x ' + PISTON, '3x ' + PUMP, '2x ' + SENSOR, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust', 'grindless:cold_trap_coring_head'] },
+        ins: [HULL, '2x #gtceu:circuits/uev', '3x ' + PISTON, '3x ' + PUMP, '2x ' + SENSOR, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust', 'grindless:cold_trap_coring_head'] },
       { key: 'refinery', research: 'gtceu:barnard_core_drill', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + O, '3x ' + PUMP, '3x ' + REG, '2x ' + PISTON, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] }
+        ins: [HULL, '2x #gtceu:circuits/uev', '3x ' + PUMP, '3x ' + REG, '2x ' + PISTON, C, '2x grindless:ffkm_seal', 'grindless:tantalum_pentoxide_dust'] }
     ]
     BA.controllerRecipes = []
     defs.forEach(function (d) {

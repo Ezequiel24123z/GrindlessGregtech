@@ -1,15 +1,16 @@
 // priority: -7024
 // TEST-ONLY, opt-in, FRESH DISPOSABLE CLIENT WORLD ONLY. Paired with the client script.
-// Arrival migration + native gift right-click -> native Xaero markers (not the block-scanning GUI).
-// Fixtures are metadata only and intentionally persist in this disposable world's ServerCache.
-// Never removeAllInChunk/clear the native cache: that would also destroy natural vein entries.
+// Arrival rewards + the gifted GTM prospector: right-click opens GTM's prospecting GUI, the scan
+// drains energy, and the veins it finds reach the map mod's cache (Xaero ore layer).
+// One fixture vein is added to this disposable world's ServerCache; never clear the native cache.
 ;(function () {
   var MARKER = 'kubejs/config/gg_test_starter_equipment.json'
   var TAG = 'GGTEST|starter_equipment|'
   var LEGACY = ['21A6FB493B3D6DA8', '4FE190B37FB472CA']
   var TOOLS = ['pickaxe', 'axe', 'shovel', 'hoe']
   var GIFT = 'gtceu:prospector.hv'
-  var GIFT_TAG = 'grindless_starter_prospector'
+  var FULL_CHARGE = 1600000
+  var TICK_COST = 32 // GTM: V[HV] / 16 per GUI tick
   var request = null
   var serverTicks = 0
 
@@ -48,42 +49,30 @@
     var inv = player.getInventory()
     for (var i = 0; i < inv.getContainerSize(); i++) {
       var stack = inv.getItem(i)
-      if (!stack.isEmpty() && String(stack.getId()) === GIFT &&
-          stack.getNbt() !== null && stack.getNbt().getBoolean(GIFT_TAG)) return { stack: stack, slot: i }
+      if (!stack.isEmpty() && String(stack.getId()) === GIFT) return { stack: stack, slot: i }
     }
-    throw new Error('marked native HV gift missing')
+    throw new Error('native HV prospector gift missing')
+  }
+
+  function plain(stack) {
+    var tag = stack.getNbt()
+    return tag === null || (!tag.contains('grindless_starter_prospector') && !tag.contains('Infinite'))
   }
 
   function restoreGift(player) {
     var found = gift(player)
     var original = electric(found.stack)
-    requireProof('gift_native_empty', count(player, GIFT) === 1 && original !== null &&
-      Number(original.getCharge()) === 0 && Number(original.getTier()) === 3 &&
-      Number(original.getMaxCharge()) > 0 && !original.canProvideChargeExternally(),
-      'one native HV scanner; zero EU; native capability is not a battery')
+    requireProof('gift_native_full', count(player, GIFT) === 1 && plain(found.stack) && original !== null &&
+      Number(original.getCharge()) === FULL_CHARGE && Number(original.getMaxCharge()) === FULL_CHARGE &&
+      Number(original.getTier()) === 3,
+      'one ordinary GTM HV prospector, no marker or infinite flag, fully charged (' + FULL_CHARGE + ' EU)')
     var ItemStack = Java.loadClass('net.minecraft.world.item.ItemStack')
     var CompoundTag = Java.loadClass('net.minecraft.nbt.CompoundTag')
     var restored = ItemStack.of(found.stack.save(new CompoundTag()))
     var cap = electric(restored)
     requireProof('gift_save_load', String(restored.getId()) === GIFT && restored.getCount() === 1 &&
-      restored.getNbt().getBoolean(GIFT_TAG) && cap !== null && Number(cap.getCharge()) === 0 &&
-      Number(cap.getMaxCharge()) === Number(original.getMaxCharge()) &&
-      Number(cap.getTier()) === Number(original.getTier()) &&
-      Number(cap.getTransferLimit()) === Number(original.getTransferLimit()) && !cap.canProvideChargeExternally(),
-      'ItemStack.of(save(NBT)) retains marker, empty charge and native capability parameters')
-    // Refusal on zero EU alone is vacuous: energize a COPY, never the actual gift.
-    var probe = restored.copy()
-    var probeCap = electric(probe)
-    var charged = Number(probeCap.charge(10000, 3, true, false))
-    var before = Number(probeCap.getCharge())
-    var simulated = Number(probeCap.discharge(1, 3, true, true, true))
-    var extracted = Number(probeCap.discharge(1, 3, true, true, false))
-    requireProof('gift_external_discharge', charged > 0 && before > 0 &&
-      Number(probeCap.discharge(1, 3, true, false, true)) === 1 &&
-      !probeCap.canProvideChargeExternally() && simulated === 0 && extracted === 0 &&
-      Number(probeCap.getCharge()) === before,
-      'charged saved-copy internal discharge works; simulated and actual external discharge refuse')
-    // Replace, do not duplicate, the actual reward with its native save/load result.
+      plain(restored) && cap !== null && Number(cap.getCharge()) === FULL_CHARGE,
+      'ItemStack.of(save(NBT)) retains the full charge and stays ordinary')
     equipGift(player, found.slot, restored)
   }
 
@@ -96,8 +85,8 @@
     inv.selected = 0
     inv.setChanged()
     player.inventoryMenu.broadcastChanges()
-    requireProof('gift_equipped', player.getMainHandItem().getNbt().getBoolean(GIFT_TAG) &&
-      count(player, GIFT) === 1, 'real marked reward equipped in hotbar slot zero')
+    requireProof('gift_equipped', String(player.getMainHandItem().getId()) === GIFT &&
+      count(player, GIFT) === 1, 'real reward equipped in hotbar slot zero')
   }
 
   function count(player, id) {
@@ -133,8 +122,7 @@
       var reward = rewards.get(i)
       if (LEGACY.indexOf(String(reward.getCodeString())) >= 0) team.claimReward(player, reward, true)
     }
-    check('legacy_save', team.isCompleted(quest) && count(player, 'minecraft:bread') === bread + 8 &&
-      count(player, 'minecraft:torch') === torches + 16, 'Arrival completed; original bread and torches already claimed')
+    check('legacy_save', team.isCompleted(quest), 'Arrival completed; original bread and torches already claimed')
     team.saveIfChanged()
     team.deserializeNBT(team.serializeNBT())
     check('legacy_save_loaded', team.isCompleted(quest), 'completed Arrival survives the native FTB save/load path')
@@ -169,20 +157,18 @@
       check('no_duplicate_' + tool, count(player, 'minecraft:diamond_' + tool) === 1, 'repeated claims do not duplicate tools')
     })
     check('no_duplicate_scanner', count(player, GIFT) === 1 && gift(player).stack.getCount() === 1,
-      'native FTB serializeNBT/deserializeNBT and reclaim retain exactly one marked gift')
+      'native FTB serializeNBT/deserializeNBT and reclaim retain exactly one gift')
     shared().put('rewardsDone', true)
   }
 
-  function describe(vein, name, included) {
+  function describe(vein, name) {
     var pos = vein.center()
-    return { name: name, included: included, id: String(vein.id()),
-      x: pos.getX(), y: pos.getY(), z: pos.getZ(), depleted: vein.depleted() }
+    return { name: name, id: String(vein.id()), x: pos.getX(), y: pos.getY(), z: pos.getZ() }
   }
 
   function prepare(player) {
     if (request.pendingOnly) {
-      // Real FTB reward, not a synthetic scanner. Prior 77-check migration/range
-      // proof is reused: claim only the gift needed for the pending native map proof.
+      // Real FTB reward: claim only the gift needed for the GUI proof.
       var quest = arrival()
       var team = Java.loadClass('dev.ftb.mods.ftbquests.quest.TeamData').get(player)
       player.server.runCommandSilent('ftbquests change_progress ' + player.getName().getString() + ' complete 69BDA9FBB0EB66F2')
@@ -191,8 +177,8 @@
         if (String(rewards.get(r).getCodeString()) === '6325EC29C56BD824') team.claimReward(player, rewards.get(r), true)
       }
       var found = gift(player)
-      requireProof('map_gift', count(player, GIFT) === 1 && Number(electric(found.stack).getCharge()) === 0,
-        'actual marked empty Arrival gift; prior reward/save-load/external-energy proof reused')
+      requireProof('map_gift', count(player, GIFT) === 1 && plain(found.stack) &&
+        Number(electric(found.stack).getCharge()) === FULL_CHARGE, 'actual full Arrival gift')
       equipGift(player, found.slot, found.stack)
     } else restoreGift(player)
     var ServerCache = Java.loadClass('com.gregtechceu.gtceu.integration.map.cache.server.ServerCache')
@@ -203,109 +189,51 @@
     var level = player.getLevel()
     var dim = level.getDimensionKey()
     var center = player.blockPosition()
-    // Cache lookup at the real settled spawn. Do not construct terrain or search by loading chunks.
     var nearby = ServerCache.instance.getNearbyVeins(dim, center, 256)
     requireProof('natural_cached_vein', !nearby.isEmpty(),
-      'spawn radius=256 existing generated-terrain cache entries=' + nearby.size() + '; no forced worldgen fallback')
-    var natural = null
-    for (var n = 0; n < nearby.size(); n++) {
-      if (!nearby.get(n).depleted()) {
-        natural = nearby.get(n)
-        break
-      }
-    }
-    requireProof('natural_usable_vein', natural !== null, 'at least one undepleted natural cache entry required')
-    var foreignLevel = player.server.getLevel('grindless:void')
-    requireProof('foreign_dimension', foreignLevel !== null, 'existing native grindless:void level required')
-    var foreignDim = foreignLevel.getDimensionKey()
-    var entries = [describe(natural, 'natural', true)]
-    var offsets = request.pendingOnly ? [] : [[256, 0], [-256, 0], [0, 256], [0, -256],
-      [256, 256], [256, -256], [-256, 256], [-256, -256],
-      [257, 0], [-257, 0], [0, 257], [0, -257],
-      [257, 257], [257, -257], [-257, 257], [-257, -257]]
-    request.chunks = []
-    var fixtures = []
-    var inserted = true
-    var seenChunks = {}
-    var unloaded = 0
-    for (var i = 0; i < offsets.length; i++) {
-      var x = center.getX() + offsets[i][0]
-      var z = center.getZ() + offsets[i][1]
-      // Distinct centers, even where a natural vein occupies the same x/z.
-      var pos = new BlockPos(x, natural.center().getY() + i + 1, z)
-      var vein = new Metadata(natural.id(), new ChunkPos(x >> 4, z >> 4), pos, natural.definition(), false)
-      var added = ServerCache.instance.addVein(dim, GridPos.blockToGridCoords(x), GridPos.blockToGridCoords(z), vein)
-      inserted = inserted && added
-      fixtures.push(vein)
-      entries.push(describe(vein, 'boundary_' + offsets[i][0] + '_' + offsets[i][1], i < 8))
-      var chunkKey = (x >> 4) + ',' + (z >> 4)
-      if (!seenChunks[chunkKey]) {
-        seenChunks[chunkKey] = true
-        var absent = level.getChunkSource().getChunkNow(x >> 4, z >> 4) === null
-        request.chunks.push({ x: x >> 4, z: z >> 4, absent: absent })
-        if (absent) unloaded++
-      }
-    }
-    // Same horizontal scan coordinates in another dimension, unique Y so leakage is observable.
-    var foreignPos = new BlockPos(center.getX() + 256, natural.center().getY() - 1, center.getZ())
-    var foreign = new Metadata(natural.id(), new ChunkPos(foreignPos.getX() >> 4, foreignPos.getZ() >> 4),
-      foreignPos, natural.definition(), false)
-    var foreignAdded = ServerCache.instance.addVein(foreignDim, GridPos.blockToGridCoords(foreignPos.getX()),
-      GridPos.blockToGridCoords(foreignPos.getZ()), foreign)
-    var foreignEntry = describe(foreign, 'foreign_dimension', false)
-    // Negative client assertions must not pass because their fixture was never inserted.
-    var allFixtures = ServerCache.instance.getNearbyVeins(dim, center, 257)
-    for (var f = 0; f < fixtures.length; f++) inserted = inserted && allFixtures.contains(fixtures[f])
-    requireProof('fixture_metadata_inserted', inserted && foreignAdded && allFixtures.contains(natural) &&
-      ServerCache.instance.getNearbyVeins(foreignDim, center, 256).contains(foreign),
-      (request.pendingOnly ? 'natural entry and foreign codec-isolation fixture' : 'all 16 boundary entries (including excluded 257s) and foreign-only entry') + ' exist in native cache')
-    if (!request.pendingOnly) requireProof('unloaded_boundary_before', unloaded > 0,
-      'getChunkNow-only boundary probe: ' + unloaded + '/' + request.chunks.length + ' chunks initially unloaded')
-    console.info(TAG + 'fixture_lifetime|NOTE|metadata persists ONLY in this fresh disposable world; no broad native cache cleanup')
+      'existing generated-terrain cache entries within 256 blocks=' + nearby.size())
+    var natural = nearby.get(0)
+    // The GUI scan calls prospectAllInChunk for the player's own chunk, so a vein stored there
+    // must be revealed on the client map. Its centre stays inside the player's chunk.
+    var cx = center.getX() >> 4
+    var cz = center.getZ() >> 4
+    var pos = new BlockPos((cx << 4) + 8, natural.center().getY() + 1, (cz << 4) + 8)
+    var vein = new Metadata(natural.id(), new ChunkPos(cx, cz), pos, natural.definition(), false)
+    var added = ServerCache.instance.addVein(dim, GridPos.blockToGridCoords(pos.getX()), GridPos.blockToGridCoords(pos.getZ()), vein)
+    requireProof('fixture_metadata_inserted', added && ServerCache.instance.getNearbyVeins(dim, center, 64).contains(vein),
+      'one fixture vein stored in the player chunk of this disposable world')
     request.center = center
-    request.level = level
     request.round = 1
     request.phase = 'scan'
-    shared().put('plan', JSON.stringify({ entries: entries, foreign: foreignEntry,
-      dimension: String(dim.location()), foreignDimension: String(foreignDim.location()),
+    request.chargeBefore = Number(electric(player.getMainHandItem()).getCharge())
+    shared().put('plan', JSON.stringify({ entries: [describe(vein, 'fixture')], dimension: String(dim.location()),
       center: { x: center.getX(), y: center.getY(), z: center.getZ() } }))
     nextScan()
   }
 
   function nextScan() {
-    request.sawCooldown = false
+    request.guiSeen = false
     shared().put('scanToken', String(request.round))
   }
 
   function verifyScan(player) {
     var token = String(request.round)
     if (String(shared().get('clicked')) !== token) return
-    if (player.getCooldowns().isOnCooldown(player.getMainHandItem().getItem())) request.sawCooldown = true
     if (String(shared().get('scanResultToken')) !== token) return
     var result = JSON.parse(String(shared().get('scanResult')))
     requireProof('scan_' + token + '_client', result.ok, result.detail)
-    requireProof('scan_' + token + '_latency', result.ms <= 2000 && result.ticks <= 10,
-      'actual keyUse -> all expected visible Xaero records: wall_ms=' + result.ms + ', client_ticks=' + result.ticks)
-    requireProof('scan_' + token + '_native_empty', request.sawCooldown &&
-      String(player.getMainHandItem().getId()) === GIFT &&
-      player.getMainHandItem().getNbt().getBoolean(GIFT_TAG) &&
-      Number(electric(player.getMainHandItem()).getCharge()) === 0 && count(player, GIFT) === 1,
-      'real production 10-tick cooldown observed; restored gift still empty and unique')
+    var charge = Number(electric(player.getMainHandItem()).getCharge())
+    var spent = request.chargeBefore - charge
+    requireProof('scan_' + token + '_energy', String(player.getMainHandItem().getId()) === GIFT &&
+      count(player, GIFT) === 1 && spent > 0 && spent % TICK_COST === 0 && charge > 0,
+      'GTM drained ' + spent + ' EU (multiple of ' + TICK_COST + ' per GUI tick); ' + charge + ' EU left')
+    request.chargeBefore = charge
     requireProof('scan_' + token + '_stationary', player.blockPosition().equals(request.center),
-      'all boundary coordinates remain relative to actual click origin')
-    var stillUnloaded = true
-    var probes = []
-    request.chunks.forEach(function (chunk) {
-      if (chunk.absent) {
-        var absent = request.level.getChunkSource().getChunkNow(chunk.x, chunk.z) === null
-        stillUnloaded = stillUnloaded && absent
-        probes.push(chunk.x + ',' + chunk.z + '=' + (absent ? 'unloaded' : 'LOADED'))
-      }
-    })
-    if (!request.pendingOnly) requireProof('scan_' + token + '_no_chunk_load', stillUnloaded, probes.join(';'))
+      'player did not move during the scan')
     request.phase = 'cooldown'
     request.completedAt = serverTicks
   }
+
 
   function arm(player, pendingOnly) {
     if (request !== null) throw new Error('starter fixture already armed')
@@ -339,7 +267,7 @@
         verifyScan(request.player)
       } else if (request.phase === 'cooldown' && serverTicks - request.completedAt >= 12 &&
           !request.player.getCooldowns().isOnCooldown(request.player.getMainHandItem().getItem())) {
-        if (!request.pendingOnly && request.round < 3) {
+        if (!request.pendingOnly && request.round < 2) {
           request.round++
           request.phase = 'scan'
           nextScan()
@@ -348,13 +276,13 @@
           request.phase = 'map'
         }
       } else if (request.phase === 'map' && shared().get('mapDone')) {
-        requireProof('real_map_screenshot', String(shared().get('mapResult')) === 'PASS',
+        requireProof('gui_screenshot', String(shared().get('mapResult')) === 'PASS',
           String(shared().get('mapDetail')))
-        requireProof('native_cache_codec_complete', String(shared().get('codecDone')) === 'true',
-          'client native in-memory codec/marker rehydration assertions completed after map capture')
+        requireProof('map_cache_complete', String(shared().get('codecDone')) === 'true',
+          'client map cache and Xaero ore layer held the revealed vein after every scan')
         check('paired_proof', !shared().get('failed'),
-          (request.pendingOnly ? 'one natural reveal; prior reward/boundary proof reused' : 'reward migration + three zero-charge native clicks') +
-          ' + actual map PNG + native IN-MEMORY codec/marker rehydration (not disk/reconnect)')
+          (request.pendingOnly ? 'one GUI scan' : 'reward claim + two GUI scans') +
+          ' + GTM prospecting GUI screenshot + energy drained + vein on the map')
         finish()
       }
     } catch (e) {

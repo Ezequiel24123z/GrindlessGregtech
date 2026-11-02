@@ -22,7 +22,7 @@
         circuits[r.circuit] = true
         var id = 'grindless:' + type + '/' + r.name
         var outputs = list(r.itemsOut).concat(list(r.chancedOut), list(r.fluidsOut))
-        var disposal = id === EM.disposalId && r.site === EM.site && r.disposal === true
+        var disposal = id === EM.disposalId && r.disposal === true
         if ((outputs.length === 0) !== disposal) fail(id + ': only exact Cygnus c3 may discard its output')
         if (disposal && (r.circuit !== 3 || list(r.itemsIn).length !== 1 ||
             r.itemsIn[0].id !== 'grindless:negative_strangelet_residue' || r.itemsIn[0].count !== 1)) fail(id + ': invalid disposal input')

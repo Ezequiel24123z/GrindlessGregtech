@@ -26,7 +26,7 @@
         },
         {
           "_why": "MAX-D3 line L20 step 3 (max.md, c3): the strand ribbon is hung in the plasma column to be proof-loaded; 100 mB of the plasma is consumed",
-          "name": "proof_load_ribbon", "circuit": 3, "eut": 8388608, "duration": 400, "site": true,
+          "name": "proof_load_ribbon", "circuit": 3, "eut": 8388608, "duration": 400,
           "itemsIn": [{ "id": "grindless:strand_ribbon", "count": 1 }],
           "kept": [],
           "fluidsIn": [{ "id": "gtceu:stellar_plasma", "amount": 100 }],
@@ -40,7 +40,7 @@
       "recipes": [
         {
           "_why": "machine 11 c1: the solenoid sorts the stellar plasma by mass into four cuts",
-          "name": "stellar_cuts", "circuit": 1, "eut": 67108864, "duration": 400, "site": true,
+          "name": "stellar_cuts", "circuit": 1, "eut": 67108864, "duration": 400,
           "itemsIn": [], "kept": [],
           "fluidsIn": [{ "id": "gtceu:stellar_plasma", "amount": 1000 }],
           "itemsOut": [],
@@ -64,7 +64,7 @@
         },
         {
           "_why": "MAX-D1 (max.md, L16 step 2, c3): at Sgr A* the solenoid sorts the hot flow; 1,350 mB go on to the FRC former, the heavy tenth comes out as the heavy cut",
-          "name": "hot_flow_filter", "circuit": 3, "eut": 67108864, "duration": 400, "site": "gcyr:black_hole_orbit",
+          "name": "hot_flow_filter", "circuit": 3, "eut": 67108864, "duration": 400,
           "itemsIn": [], "kept": [],
           "fluidsIn": [{ "id": "gtceu:hot_flow_plasma", "amount": 1500 }],
           "itemsOut": [],

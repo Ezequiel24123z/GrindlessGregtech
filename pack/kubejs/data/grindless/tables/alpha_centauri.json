@@ -2,7 +2,7 @@
   "_comment": [
     "UEV-B2 (docs/eras/uev.md, machines 18, 19 and 20, lines 26 and 37), read by server_scripts/grindless/uev/alpha_centauri.js.",
     "types.<type>.recipes: name, circuit, eut, duration, itemsIn [{id,count,chance?}], kept [same, never consumed], fluidsIn [{id,amount}], charge [fluid not consumed], itemsOut, fluidsOut.",
-    "chance is out of 10000 (omitted = always). circuit 0 = none (GTM's own types only). 'dimension': true makes every recipe of the type carry the Alpha Centauri orbit dimension (grindless:alpha_centauri_orbit).",
+    "chance is out of 10000 (omitted = always). circuit 0 = none (GTM's own types only). 'dimension': true makes every recipe of the type carry the Alpha Centauri orbit dimension (grindless:alpha_centauri_orbit); a recipe's own 'dimension' (true or false) overrides it. Kept: the collector (it takes the nebula) and the timing survey (the pulsar's X-rays, in vacuum); the dust lab and the chart rows work shipped inputs and run anywhere.",
     "Line 26 (nebula gas): collector c1 (interstellar gas) -> chemical reactor (compression) -> EV cryogenic plant (ev/cryogenic_plant.js, interstellar_gas row: H/D fraction, helium fraction, neon) -> distillation tower (H/D -> deuterium + hydrogen) -> distillation tower (helium fraction -> helium-3 + helium-4).",
     "Line 37 (silica aerogel): SiCl4 + ethanol -> TEOS -> sol -> gel -> aged gel -> aerogel tile (supercritical CO2). The ethanol the gel releases and the CO2 that dries it go back to the line.",
     "Nothing is voided: HCl, hydrogen, helium-4, ethanol, CO2, SiO2 and the neutralised fluorite all have users (HCl and fluorite: the IV fluorspar kiln and the chlorine users; hydrogen and helium: every plant)."
@@ -21,7 +21,7 @@
       ]
     },
     "interstellar_dust_analysis": {
-      "dataKey": "grindless_interstellar_dust_analysis", "dimension": true,
+      "dataKey": "grindless_interstellar_dust_analysis",
       "recipes": [
         { "name": "extract_grains", "circuit": 1, "eut": 1966080, "duration": 400,
           "itemsIn": [{ "id": "grindless:dust_laden_aerogel", "count": 1 }], "kept": [],
@@ -48,11 +48,11 @@
           "itemsIn": [{ "id": "grindless:lobster_eye_mcp", "count": 1 }, { "id": "grindless:sdd", "count": 2 }],
           "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:pulsar_timing_data", "count": 1 }], "fluidsOut": [] },
-        { "name": "pulsar_navigation_chart", "circuit": 2, "eut": 1966080, "duration": 600,
+        { "name": "pulsar_navigation_chart", "dimension": false, "circuit": 2, "eut": 1966080, "duration": 600,
           "itemsIn": [{ "id": "grindless:pulsar_timing_data", "count": 1 }, { "id": "grindless:fe60_record", "count": 1 }], "kept": [],
           "fluidsIn": [], "charge": [],
           "itemsOut": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }], "fluidsOut": [] },
-        { "name": "repeater_discipline", "circuit": 3, "eut": 1966080, "duration": 900,
+        { "name": "repeater_discipline", "dimension": false, "circuit": 3, "eut": 1966080, "duration": 900,
           "_why": "UIV-A7 (uiv.md lines 16 and 44): a repeater clock core is locked to the pulsar chart; the nuclear clock is not consumed",
           "itemsIn": [{ "id": "grindless:pulsar_navigation_chart", "count": 1 }, { "id": "grindless:sdd", "count": 2 }],
           "kept": [{ "id": "grindless:nuclear_clock", "count": 1 }], "fluidsIn": [], "charge": [],

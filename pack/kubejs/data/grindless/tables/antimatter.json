@@ -97,6 +97,7 @@
         },
         {
           "name": "strip_stack",
+          "orbit": false,
           "circuit": 3,
           "eut": 122880,
           "duration": 200,

@@ -312,14 +312,13 @@ test('OpV-B3a: the returns go to honest, separate destinations', () => {
   assert.ok(into('gtceu:krypton').some((i) => i.endsWith('cryogenic_processing/krypton_purification')));
 });
 
-test('home and OpV dynamo requirements are enforced again on cached recipe starts', () => {
+test('OpV dynamo requirements are enforced again on cached recipe starts', () => {
   const opv = (amps) => ({ voltage: 2 ** 29, amps });
-  assert.equal(AM.engineAllowed('minecraft:overworld', [opv(1)], 2 ** 29), true);
-  assert.equal(AM.engineAllowed('minecraft:overworld', [opv(4)], 2 ** 30), true);
-  assert.equal(AM.engineAllowed('minecraft:the_nether', [opv(4)], 2 ** 30), false);
-  assert.equal(AM.engineAllowed('minecraft:overworld', [{ voltage: 2 ** 27, amps: 16 }], 2 ** 30), false);
-  assert.equal(AM.engineAllowed('minecraft:overworld', [opv(1), opv(1)], 2 ** 30), false);
-  assert.equal(AM.engineAllowed('minecraft:overworld', [], 2 ** 29), false);
+  assert.equal(AM.engineAllowed([opv(1)], 2 ** 29), true);
+  assert.equal(AM.engineAllowed([opv(4)], 2 ** 30), true);
+  assert.equal(AM.engineAllowed([{ voltage: 2 ** 27, amps: 16 }], 2 ** 30), false);
+  assert.equal(AM.engineAllowed([opv(1), opv(1)], 2 ** 30), false);
+  assert.equal(AM.engineAllowed([], 2 ** 29), false);
   const source = fs.readFileSync(path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'opv', 'antimatter.js'), 'utf8');
   assert.match(source, /\.beforeWorking\(AM\.engineBeforeWorking\)/);
   assert.match(source, /if \(!engineVeto\(machine, recipe\)\) return true/);

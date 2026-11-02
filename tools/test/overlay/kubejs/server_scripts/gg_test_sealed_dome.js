@@ -296,7 +296,7 @@
         }
         var problems = []
         var conds = conditionsText(r)
-        if (conds.indexOf('"' + site.dimension + '"') < 0) problems.push('no ' + site.dimension + ' condition (' + conds + ')')
+        if (site.dimension ? conds.indexOf('"' + site.dimension + '"') < 0 : conds.indexOf('dimension') >= 0) problems.push('dimension condition mismatch for ' + site.dimension + ' (' + conds + ')')
         if (/"reverse":true/.test(conds)) problems.push('a reversed condition: ' + conds)
         var ins = itemContents(r, false)
         var wantIns = ['circuit ' + site.circuit + ' (not consumed)', entry.catalyst + ' x1 (not consumed)'].sort()

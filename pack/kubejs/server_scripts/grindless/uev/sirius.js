@@ -168,7 +168,6 @@
 
   function addControllers(event) {
     var HULL = 'gtceu:uev_machine_hull'
-    var O = 'gtnn:optical_computer'
     var SENSOR = 'gtceu:uev_sensor'
     var EMITTER = 'gtceu:uev_emitter'
     var ARM = 'gtceu:uev_robot_arm'
@@ -179,11 +178,11 @@
     // QR-R6: assembly line with station research (a component of the line, then the previous machine), the era fluid and domain inputs
     var defs = [
       { m: M.spectrograph, research: 'grindless:snspd', era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + O, '3x ' + SENSOR, '3x ' + EMITTER, '2x ' + PUMP, C, 'grindless:ule_cavity', '2x grindless:snspd', 'grindless:nuclear_clock'] },
+        ins: [HULL, '2x #gtceu:circuits/uev', '3x ' + SENSOR, '3x ' + EMITTER, '2x ' + PUMP, C, 'grindless:ule_cavity', '2x grindless:snspd', 'grindless:nuclear_clock'] },
       { m: M.harvester, research: M.spectrograph.machine, era: 'gtceu:neutronium',
-        ins: [HULL, '2x ' + O, '3x ' + ARM, '3x ' + PUMP, '2x ' + SENSOR, C, 'grindless:degenerate_eos_model', 'grindless:mass_radius_chart', 'grindless:hollow_core_fibre'] },
+        ins: [HULL, '2x #gtceu:circuits/uev', '3x ' + ARM, '3x ' + PUMP, '2x ' + SENSOR, C, 'grindless:degenerate_eos_model', 'grindless:mass_radius_chart', 'grindless:hollow_core_fibre'] },
       { m: M.works, research: M.harvester.machine, era: 'gtceu:tritanium',
-        ins: [HULL, '2x ' + O, '3x ' + EMITTER, '3x ' + PUMP, '2x ' + REG, C, 'grindless:degenerate_containment_casing', 'grindless:faraday_isolator', 'grindless:spdc_source'] }
+        ins: [HULL, '2x #gtceu:circuits/uev', '3x ' + EMITTER, '3x ' + PUMP, '2x ' + REG, C, 'grindless:degenerate_containment_casing', 'grindless:faraday_isolator', 'grindless:spdc_source'] }
     ]
     SI.controllerRecipes = []
     defs.forEach(function (d) {

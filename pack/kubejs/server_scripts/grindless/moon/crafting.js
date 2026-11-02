@@ -6,7 +6,7 @@
 //                               hull, HV circuits and the HV drill bit. Built on Earth, carried up in the rocket.
 //   lunar vein samples          empty vein probe + two things of the vein brought by hand on the first visit: the two most common
 //                               raw ores of an 'ore' vein (ilmenite + olivine), or the two regolith blocks of the 'volatiles' one.
-//   Lunar Quantum Seed          HV chemical reactor ON THE MOON (.dimension('gcyr:luna')): ender pearl + 250 mB of helium-3. It is the
+//   Lunar Quantum Seed          HV chemical reactor, anywhere (no dimension condition: its helium-3 is shipped): ender pearl + 250 mB of helium-3. It is the
 //                               Moon's half of an Earth-Moon quantum pair.
 //   Earth-Moon entangled pair   AE2's own ritual (ae2:transform, explosion): an AE2 singularity (the Earth half: the matter condenser
 //                               of the home network) + a Lunar Quantum Seed -> 2 entangled singularities. AE2 gives the pair its
@@ -26,7 +26,6 @@
   MOON.pair = { seed: SEED, nbtKey: PAIR_NBT_KEY, transformId: 'grindless:transform/lunar_entangled_singularity' }
 
   ServerEvents.recipes(function (event) {
-    var dimension = G.tables.veins_moon.dimension
     var hv = MOON.lunarBit()
 
     var parts = ['gtceu:hv_machine_hull', 'gtceu:hv_electric_motor', 'gtceu:hv_sensor', 'minecraft:daylight_detector', 'grindless:empty_vein_probe']
@@ -50,13 +49,12 @@
       samples++
     })
 
-    // ---- the Moon's half of an Earth-Moon quantum pair
+    // ---- the Moon's half of an Earth-Moon quantum pair (no dimension condition: helium-3 and pearls are shipped)
     event.recipes.gtceu.chemical_reactor('grindless:lunar_quantum_seed')
       .itemInputs('#forge:ender_pearls')
       .circuit(1)
       .inputFluids(Fluid.of('gtceu:helium_3', 250))
       .itemOutputs(SEED)
-      .dimension(dimension)
       .EUt(480)
       .duration(200)
 
@@ -71,6 +69,6 @@
       result: { item: 'ae2:quantum_entangled_singularity', count: 2, nbt: nbt }
     }).id(MOON.pair.transformId)
 
-    console.info('[grindless/moon] crafting: Lunar Drill, ' + samples + ' lunar samples, lunar quantum seed (only in ' + dimension + '), Earth-Moon pair')
+    console.info('[grindless/moon] crafting: Lunar Drill, ' + samples + ' lunar samples, lunar quantum seed, Earth-Moon pair')
   })
 })()

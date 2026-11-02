@@ -59,7 +59,6 @@
         {
           "name": "extremophile",
           "circuit": 3,
-          "site": "earth",
           "eut": 491520,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:proxima_ice_core", "count": 1 }],
@@ -100,7 +99,6 @@
         {
           "name": "pigment",
           "circuit": 3,
-          "site": "proxima_b",
           "eut": 122880,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:xeno_biomass", "count": 8 }],
@@ -130,7 +128,6 @@
         {
           "name": "radioprotectant",
           "circuit": 1,
-          "site": "proxima_b",
           "eut": 491520,
           "duration": 400,
           "itemsIn": [],
@@ -142,7 +139,6 @@
         {
           "name": "infrared_pigment",
           "circuit": 2,
-          "site": "proxima_b",
           "eut": 491520,
           "duration": 400,
           "itemsIn": [],
@@ -154,7 +150,6 @@
         {
           "name": "chitosan",
           "circuit": 3,
-          "site": "proxima_b",
           "eut": 491520,
           "duration": 600,
           "itemsIn": [{ "id": "grindless:xeno_mushroom", "count": 8 }, { "id": "gtceu:sodium_hydroxide_dust", "count": 4 }],
@@ -166,7 +161,6 @@
         {
           "name": "lysate",
           "circuit": 4,
-          "site": "proxima_b",
           "eut": 491520,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:xeno_biomass", "count": 16 }],

@@ -7,7 +7,7 @@
 //   gtceu:stellar_elevator             11 x 11 x 25 funnel and boom, UXV (two UIV energy hatches). Recipe type gtceu:star_lifting
 //                                      (circuit 1 lift, 2 elevator log); the lift is locked to the Cygnus X-1 orbit.
 //   gtceu:plasma_mass_filter           9 x 9 x 15 octagonal solenoid, UXV. Recipe type gtceu:plasma_mass_filtering (circuit 1 stellar cuts,
-//                                      2 disk plasma); c1 is locked to the Cygnus X-1 orbit.
+//                                      2 disk plasma); both run anywhere.
 //   gtceu:stellar_condensation_tower   7 x 7 x 23 seven-stage column, UXV. Recipe type gtceu:stellar_condensation (circuit 1 condense);
 //                                      locked to the Cygnus X-1 orbit.
 //
@@ -209,9 +209,9 @@
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
-          Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.cygnus_x1_orbit')),
+          m.type === 'star_lifting' ? Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.cygnus_x1_orbit')) : null,
           Text.translate('gtceu.multiblock.parallelizable.tooltip')
-        ])
+        ].filter(Boolean))
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
     })
   })

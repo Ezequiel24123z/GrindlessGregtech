@@ -47,9 +47,9 @@ test('elevator: circuit 1 lift (liquid helium -> stellar plasma + 900 mB warm he
   }
 });
 
-test('filter: c1 splits 1,000 mB plasma into 700/270/15/15 at Cygnus X-1; c2 is disk plasma -> 900 filtered + 100 heavy cut', () => {
+test('filter: c1 splits 1,000 mB plasma into 700/270/15/15 anywhere; c2 is disk plasma -> 900 filtered + 100 heavy cut', () => {
   const c1 = rec('plasma_mass_filtering', 'stellar_cuts');
-  assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, 67108864, 400, true]);
+  assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, 67108864, 400, false]);
   assert.equal(fl(c1, 'fluidsIn', 'gtceu:stellar_plasma').amount, 1000);
   const out = Object.fromEntries(c1.fluidsOut.map((f) => [f.id, f.amount]));
   assert.deepEqual(out, { 'gtceu:stellar_hydrogen_cut': 700, 'gtceu:stellar_helium_cut': 270, 'gtceu:stellar_cno_cut': 15, 'gtceu:stellar_heavy_cut': 15 });
@@ -59,7 +59,7 @@ test('filter: c1 splits 1,000 mB plasma into 700/270/15/15 at Cygnus X-1; c2 is 
   assert.equal(fl(c2, 'fluidsIn', 'gtceu:disk_plasma').amount, 1000);
   assert.equal(fl(c2, 'fluidsOut', 'gtceu:filtered_disk_plasma').amount, 900);
   assert.equal(fl(c2, 'fluidsOut', 'gtceu:stellar_heavy_cut').amount, 100);
-  assert.ok(JSON.stringify(find('grindless:plasma_mass_filtering/stellar_cuts').j.recipeConditions || []).includes(SITE));
+  assert.ok(!JSON.stringify(find('grindless:plasma_mass_filtering/stellar_cuts').j.recipeConditions || []).includes(SITE));
 });
 
 test('tower: heavy cut + hydrogen cut -> three condensates + volatile condensate, at Cygnus X-1, 33,554,432 EU/t', () => {
@@ -91,7 +91,7 @@ test('the controllers as the controller table: UIV hull, uxv_sensor, mainframes,
     assert.ok(r && r.t === 'gtceu:assembly_line', m);
     const text = JSON.stringify(r.j);
     assert.ok(text.includes(`gtceu:${m}`), `${m} is its output`);
-    for (const need of ['gtceu:uiv_machine_hull', 'gtnn:spintronic_mainframe', 'gtceu:circuits/uiv', 'gtceu:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', want[m][0], want[m][1]]) {
+    for (const need of ['gtceu:uiv_machine_hull', 'gtceu:circuits/uxv', 'gtceu:circuits/uiv', 'gtceu:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', want[m][0], want[m][1]]) {
       assert.ok(text.includes(need), `${m} takes ${need}`);
     }
     for (const d of want[m][2]) assert.ok(text.includes(d), `${m} takes ${d}`);
@@ -165,6 +165,6 @@ test('lang parity: every key of both languages, names, tooltips, EMI pages and r
   for (const r of CL.recipes) keys.push(`gtceu.recipe.${r.dataKey}.${r.name}`);
   for (const k of keys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang} has ${k}`);
   for (const m of MACHINES) {
-    assert.match(run.lang.en_us[`emi.grindless.info.${m}.0`], /Cygnus X-1/, `${m}'s page names Cygnus X-1`);
+    assert.match(run.lang.en_us[`emi.grindless.info.${m}.0`], /Cygnus X-1|anywhere/, `${m}'s page names Cygnus X-1`);
   }
 });

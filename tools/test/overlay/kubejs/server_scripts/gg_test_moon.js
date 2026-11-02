@@ -349,7 +349,7 @@
     var result = transform !== null ? transform.getResultItem(S.server.registryAccess()) : null
     var tag = result !== null ? result.getNbt() : null
     var mark = tag !== null && tag.contains(PAIR_KEY) ? String(tag.getString(PAIR_KEY)) : ''
-    var ok = missing.length === 0 && seedConds.indexOf('"' + LUNA + '"') >= 0 && seedIn.indexOf(HE3) >= 0 && mark === 'moon' &&
+    var ok = missing.length === 0 && seedConds.indexOf('"' + LUNA + '"') < 0 && seedIn.indexOf(HE3) >= 0 && mark === 'moon' &&
       result.getCount() === 2 && itemIdOf(result) === ENTANGLED
     check(SCOPE, 'crafting', ok, 'recipes=' + (ids.length - missing.length) + '/' + ids.length +
       (missing.length > 0 ? ' missing=' + missing.join(',') : '') + ' seed conditions=' + seedConds + ' seed inputs=' + seedIn +

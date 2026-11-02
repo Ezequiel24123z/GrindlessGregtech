@@ -48,7 +48,7 @@
   var UEV_HOLD = { name: 'hold', circuit: 3, eut: 134217728, duration: 1200, site: 'sirius_b_orbit',
     itemsIn: [],
     kept: [{ id: 'grindless:tennessine_sample', count: 1 }, { id: 'grindless:degenerate_pellet', count: 1 },
-      { id: 'grindless:degenerate_eos_model', count: 1 }, { id: 'gtnn:optical_computer', count: 4 }],
+      { id: 'grindless:degenerate_eos_model', count: 1 }, { id: '#gtceu:circuits/uev', count: 4 }],
     itemsOut: [] }
   var VA_UV = 491520
   var VA_UHV = 1966080
@@ -106,9 +106,10 @@
     return out
   }
 
+  // a '#tag' (any circuit of a tier: AGENTS.md principle 11) is not an item id; GTM resolves it
   function missingIds(rec) {
     var missing = []
-    rec.itemsIn.concat(rec.kept, rec.itemsOut).forEach(function (x) { if (!Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
+    rec.itemsIn.concat(rec.kept, rec.itemsOut).forEach(function (x) { if (x.id.charAt(0) !== '#' && !Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
     return missing
   }
 

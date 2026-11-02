@@ -32,7 +32,7 @@ test('the stand-in runs the OpV-E1 scripts without errors, nothing skipped, no l
   assert.equal(PC.recipes.length, 2);
 });
 
-test('converter c1 (seed plasma + gamma laser module worn at 6.25% -> hot pair plasma, 90% empty trap back) and c2 (plasma + trap -> unsealed cell), at SGR 1806-20 orbit', () => {
+test('converter c1 (seed plasma + gamma laser module worn at 6.25% -> hot pair plasma, 90% empty trap back) and c2 (plasma + trap -> unsealed cell), only the boil is at SGR 1806-20 orbit', () => {
   const c1 = rec('magnetic_pair_production', 'boil_seed_plasma');
   assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, 503316480, 1200, SITE]);
   assert.deepEqual(ids(c1.itemsIn), [['grindless:seed_positron_plasma', 1]]);
@@ -42,11 +42,11 @@ test('converter c1 (seed plasma + gamma laser module worn at 6.25% -> hot pair p
   assert.ok(JSON.stringify(find('grindless:magnetic_pair_production/boil_seed_plasma').j.recipeConditions || []).includes(SITE), 'dimension lock c1');
 
   const c2 = rec('magnetic_pair_production', 'seal_positron_cell');
-  assert.deepEqual([c2.circuit, c2.eut, c2.duration, c2.site], [2, 268435456, 800, SITE]);
+  assert.deepEqual([c2.circuit, c2.eut, c2.duration, (c2.site || undefined)], [2, 268435456, 800, undefined]);
   assert.deepEqual(ids(c2.itemsIn), [['grindless:empty_penning_trap', 1]]);
   assert.deepEqual(plain(c2.fluidsIn.map((f) => [f.id, f.amount])), [['gtceu:hot_pair_plasma', 1000]]);
   assert.deepEqual(ids(c2.itemsOut), [['grindless:unsealed_positron_cell', 1]]);
-  assert.ok(JSON.stringify(find('grindless:magnetic_pair_production/seal_positron_cell').j.recipeConditions || []).includes(SITE), 'dimension lock c2');
+  assert.ok(JSON.stringify(find('grindless:magnetic_pair_production/seal_positron_cell').j.recipeConditions || []).includes(SITE) === false, 'no dimension lock c2');
 });
 
 test('the controller: OpV hull, field generators, emitters, sensor, superfluid He-3, domain parts, researched with the seed plasma', () => {

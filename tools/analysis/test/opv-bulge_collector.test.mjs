@@ -91,10 +91,10 @@ test('each machine is registered on its recipe type with one controller and its 
   assert.ok(JSON.stringify(dynamo.options.find((o) => o.ability === 'energy_output').limits).includes('"max":1'), 'one dynamo hatch');
 });
 
-test('node works c1-c4: ribbon, film, node, deployed pack; 268,435,456 EU/t, Terzan 5 only, no output returns as an input', () => {
+test('node works c1-c4: ribbon, film, node, deployed pack; 268,435,456 EU/t, only the deployment is at Terzan 5, no output returns as an input', () => {
   const t = BC_ROWS.filter((r) => r.type === 'collector_node_assembly');
   assert.deepEqual(plain(t.map((r) => r.circuit)), [1, 2, 3, 4]);
-  for (const r of t) assert.deepEqual([r.eut, r.site, r.duration], [2 * V_UXV, SITE, 400], r.name);
+  for (const r of t) assert.deepEqual([r.eut, (r.site || undefined), r.duration], [2 * V_UXV, r.name === 'node_pack_deploy' ? SITE : undefined, 400], r.name);
   assert.deepEqual(ids(rec('node_si_ribbon').itemsIn), [['grindless:si_alloy_powder', 2]]);
   assert.deepEqual(ids(rec('node_si_ribbon').itemsOut), [['grindless:si_ribbon', 2]]);
   assert.deepEqual(ids(rec('node_pv_film').itemsIn), [['grindless:si_ribbon', 2], ['grindless:silicate_debris_fraction', 1]]);
@@ -139,9 +139,9 @@ test('balance: the shared duration follows from fullCost(pack) and the pack retu
   assert.ok(designRatio < 0.01, 'the design 2,400 t was far below one pack: ' + designRatio);
 });
 
-test('refinery c7: 4 spent nodes -> 8 Si alloy powder (half of their silicon), circuit 7, Terzan 5 only', () => {
+test('refinery c7: 4 spent nodes -> 8 Si alloy powder (half of their silicon), circuit 7, no site', () => {
   const r = run.global.grindless.replication.recipes.find((x) => x.name === 'spent_node_recovery');
-  assert.deepEqual([r.type, r.circuit, r.eut, r.site], ['replication_refining', 7, 2 * V_UXV, SITE]);
+  assert.deepEqual([r.type, r.circuit, r.eut, (r.site || undefined)], ['replication_refining', 7, 2 * V_UXV, undefined]);
   assert.deepEqual(ids(r.itemsIn), [['grindless:spent_collector_node', 4]]);
   assert.deepEqual(ids(r.itemsOut), [['grindless:si_alloy_powder', 8]]);
   // a pack's four nodes hold 4 x 2 films x 2 ribbons x 1 Si = 16 Si; 8 come back

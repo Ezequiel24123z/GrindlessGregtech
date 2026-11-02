@@ -82,7 +82,6 @@
         {
           "name": "lunar_biocement",
           "circuit": 4,
-          "site": "proxima_b",
           "eut": 122880,
           "duration": 400,
           "itemsIn": [
@@ -146,7 +145,6 @@
         {
           "name": "proxima_ice_core",
           "circuit": 0,
-          "site": "proxima_b",
           "eut": 7680,
           "duration": 400,
           "itemsIn": [{ "id": "grindless:proxima_ice_core", "count": 1 }],

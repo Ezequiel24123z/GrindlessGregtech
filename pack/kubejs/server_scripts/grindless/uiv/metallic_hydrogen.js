@@ -180,7 +180,7 @@
     var b = event.recipes.gtceu.assembly_line('grindless:ramp_compression_pulser')
     b.itemInputs(HULL)
     b.itemInputs('2x ' + PISTON)
-    b.itemInputs('2x ' + COMPUTER)
+    b.itemInputs('2x #gtceu:circuits/uev')
     b.itemInputs('4x #gtceu:circuits/uev')
     domain.forEach(function (s) { b.itemInputs(s) })
     b.inputFluids(Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000), Fluid.of('gtceu:neutronium', 576))

@@ -109,7 +109,7 @@ test('recipe lookup: every row is in the manager with its circuit, Mercury (or A
     assert.ok(rec, r.recipeId);
     assert.equal(rec.t, 'gtceu:' + r.type, r.name);
     assert.deepEqual(circuitOf(rec), r.circuit == null ? [] : [r.circuit], r.name);
-    assert.deepEqual(dimsOf(rec), r.type === 'assembler' ? [] : [r.name.startsWith('alpha_') ? ALPHA : r.name === 'mirror_shell_segment' ? 'gcyr:black_hole_orbit' : ORBIT], r.name);
+    assert.deepEqual(dimsOf(rec), r.type === 'assembler' || r.name === 'mirror_shell_segment' ? [] : [r.name.startsWith('alpha_') ? ALPHA : ORBIT], r.name);
     assert.ok(Number.isInteger(r.duration) && r.duration > 0, r.name);
   }
   for (const [m, t] of Object.entries(MACHINES)) {

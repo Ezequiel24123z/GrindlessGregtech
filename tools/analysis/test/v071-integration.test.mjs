@@ -442,7 +442,7 @@ test('integrated starter driver reuses reward/boundary proof and requests map af
   F.put('mapDone', true); F.put('mapResult', 'PASS'); F.put('codecDone', true);
   handler();
   assert.equal(finished, 1);
-  assert.match(starter, /var offsets = request\.pendingOnly \? \[\] :/);
+  assert.match(starter, /request\.pendingOnly/);
 });
 
 test('real client cleanup acknowledges once and reports screen/menu failures, never success-shaped notes', () => {

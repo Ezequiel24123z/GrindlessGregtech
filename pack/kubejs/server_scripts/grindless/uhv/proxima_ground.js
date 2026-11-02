@@ -75,7 +75,7 @@
         var biome = String(r.biome || '')
         var circuitOk = (gtm && circuit === 0) || (!gtm && circuit >= 1 && circuit <= 32 && circuit % 1 === 0 && !circuits[circuit])
         if (!/^[a-z0-9_]+$/.test(n) || names[n] || !circuitOk || !(eut > 0) || eut % 1 !== 0 || !(duration > 0) || duration % 1 !== 0 ||
-          SITES.indexOf(site) < 0 || (!gtm && !hosted && site === '') || (biome !== '' && biome.indexOf(':') < 0)) {
+          SITES.indexOf(site) < 0 || (biome !== '' && biome.indexOf(':') < 0)) {
           problems.push(type + '/' + n + ': name, circuit ' + r.circuit + ', eut ' + r.eut + ', duration ' + r.duration + ', site ' + site +
             ', biome ' + biome)
           return

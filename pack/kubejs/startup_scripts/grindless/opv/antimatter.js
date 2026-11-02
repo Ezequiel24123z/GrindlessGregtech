@@ -1,7 +1,7 @@
 // priority: -6600
 // -----------------------------------------------------------------------------------------------
 // OpV's antimatter (docs/eras/opv.md, machines 3 and 5-8, lines 26-28 and 30-33; package OpV-B3): the antihydrogen foundry and the annihilation
-// engine at home, the jet beam line, spallation target station and antiproton decelerator at Cygnus X-1 orbit, their recipe types and the items
+// engine at home, the jet beam line at Cygnus X-1 orbit, the spallation target station and antiproton decelerator anywhere, their recipe types and the items
 // and fluids of the lines. The recipes come from data/grindless/tables/antimatter_opv.json (server_scripts/grindless/opv/antimatter.js). Every
 // other id is F1's (opv/foundation.js).
 //
@@ -92,14 +92,13 @@
 
   function abs(n) { return n < 0 ? -n : n }
 
-  // the engine runs at home only, and only through OpV (2^29 EU/t) dynamo hatches: a lower tier would be a loss of the cell
+  // the engine runs anywhere, but only through OpV (2^29 EU/t) dynamo hatches: a lower tier would be a loss of the cell
   var OPV_VOLTAGE = 536870912
-  var HOME = 'minecraft:overworld'
   var CAPS = null
   var guardFailed = false
   var KEEP = { which: 'items', reason: 'grindless.machine.annihilation_engine.no_voiding', name: 'annihilation engine' }
-  AM.engineAllowed = function (site, outputs, eut) {
-    if (site !== HOME || outputs.length === 0) return false
+  AM.engineAllowed = function (outputs, eut) {
+    if (outputs.length === 0) return false
     var capacity = 0
     var fourAmp = false
     for (var i = 0; i < outputs.length; i++) {
@@ -126,7 +125,7 @@
         }
         outputs.push({ voltage: Number(h.getOutputVoltage()), amps: Number(h.getOutputAmperage()) })
       }
-      return !AM.engineAllowed(dimId(machine.getLevel()), outputs, G.generators.recipeEUt(recipe))
+      return !AM.engineAllowed(outputs, G.generators.recipeEUt(recipe))
     } catch (e) {
       if (!guardFailed) {
         guardFailed = true
@@ -206,12 +205,6 @@
         return ''
       }
     }
-  }
-
-  // a ServerLevel exposes dimension as a method or as a field, depending on the wrapper
-  function dimId(level) {
-    var d = level.dimension
-    return String(typeof d === 'function' ? level.dimension().location() : d)
   }
 
   StartupEvents.registry('item', function (event) {

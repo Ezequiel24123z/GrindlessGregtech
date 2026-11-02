@@ -34,7 +34,7 @@ test('line L1: stable matter -> 4 foil (vault c4) -> clad strand -> preform (c5)
   assert.deepEqual(ids(foil.itemsOut), [['grindless:exotic_cladding_foil', 4]]);
   const pre = draw.find((r) => r.name === 'horizon_strand_preform');
   const wire = draw.find((r) => r.name === 'horizon_wire_drawing');
-  assert.deepEqual([pre.circuit, pre.site, wire.circuit, wire.site], [5, SGR, 6, SGR]);
+  assert.deepEqual([pre.circuit, pre.site, wire.circuit, wire.site], [5, SGR, 6, undefined]);
   assert.deepEqual(ids(pre.itemsIn), [['grindless:clad_chain_strand', 1]]);
   assert.deepEqual(ids(pre.itemsOut), [['grindless:horizon_strand_preform', 1]]);
   assert.deepEqual(ids(wire.itemsIn), [['grindless:horizon_strand_preform', 1]]);

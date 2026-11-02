@@ -100,7 +100,6 @@
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('gtceu.multiblock.parallelizable.tooltip')
         ].concat(m.name === 'strangelet_distiller' ? [
-          Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.cygnus_x1_orbit')),
           Text.translate('grindless.machine.strangelet_distiller.tooltip.1')
         ] : []))
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)

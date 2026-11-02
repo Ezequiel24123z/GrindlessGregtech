@@ -5,7 +5,7 @@
 //   gtceu:greenhouse, PROGRAMMED CIRCUIT 5 (Moon) or 6 (Mars), the sealed mode, one pair per plant of the family (the steam table of
 //   data/greenhouse.js and the LV extras of lv/greenhouse.js, global.grindless.lv.greenhouseExtras):
 //     grindless:greenhouse/ev/<plant>_sealed_moon   circuit 5 + plant (not consumed) + 200 mB carbon dioxide + 100 mB water
-//                                                    -> x3 the base output + 100 mB oxygen, .dimension('gcyr:luna')
+//                                                    -> x3 the base output + 100 mB oxygen, made anywhere (shipped CO2 and water)
 //     grindless:greenhouse/ev/<plant>_sealed_mars   circuit 6 + plant (not consumed) + 100 mB water
 //                                                    -> x3 the base output + 100 mB oxygen, .dimension('gcyr:mars'): the CO2 is
 //                                                    breathed in from the Martian air, like the gas collector does
@@ -41,7 +41,7 @@
 
   // one circuit per site, so the Mars recipe [circuit 6, plant; water] is never a prefix of the Moon one [circuit 5, plant; CO2, water]
   const SITES = [
-    { name: 'moon', dimension: 'gcyr:luna', co2: true, circuit: 5 },
+    { name: 'moon', dimension: null, co2: true, circuit: 5 },
     { name: 'mars', dimension: 'gcyr:mars', co2: false, circuit: 6 }
   ]
 
@@ -95,7 +95,7 @@
             }
             recipe.outputFluids(Fluid.of(O2, O2_MB))
             addOutputs(recipe, entry.outputs, FACTOR)
-            recipe.dimension(site.dimension)
+            if (site.dimension) recipe.dimension(site.dimension)
             recipe.EUt(EUT).duration(DURATION)
             counts[site.name]++
             ids.push(SD.recipeId(entry.id, site.name))
