@@ -75,7 +75,8 @@ test("offworld_only.json: Barnard b's rhenium belongs to its dimension", () => {
   const w = table('offworld_only.json').worlds.barnard;
   assert.equal(w.dimension, BARNARD);
   assert.ok(w.watched.items.includes('gtceu:rhenium_ingot'));
-  assert.equal(w.watched.inputPattern, 'rhenium');
+  // the perrhenate carries Barnard b's rhenium (AF-E2 made its reduction portable, #197 M3-01), like the asteroid PGM concentrate
+  assert.equal(w.watched.inputPattern, 'rhenium|perrhenat');
   assert.ok(table('offworld_only.json').worlds.mercury);
 });
 

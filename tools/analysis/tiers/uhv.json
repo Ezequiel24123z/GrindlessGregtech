@@ -2549,8 +2549,13 @@
         "grindless:xenobiochemistry/radioprotectant",
         "grindless:xenobiochemistry/infrared_pigment",
         "grindless:xenobiochemistry/chitosan",
-        "grindless:xenobiochemistry/lysate"
+        "grindless:xenobiochemistry/lysate",
+        "grindless:biomining/pgm_leach",
+        "grindless:biomining/ree_leach",
+        "grindless:biomining/biocement",
+        "grindless:xenobiochemistry/transplanted_minimal_cell"
       ],
+      "note": "Portable processing rows (principle 10, M3-01): the leaches, biocement and the transplanted cell are made from shippable inputs; gathering and cultivation rows keep Proxima b.",
       "package": [
         "B4",
         "B5"

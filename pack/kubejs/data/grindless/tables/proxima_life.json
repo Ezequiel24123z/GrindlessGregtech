@@ -50,7 +50,7 @@
           "duration": 400,
           "itemsIn": [{ "id": "grindless:proxima_flora_sample", "count": 1 }],
           "kept": [],
-          "fluidsIn": [],
+          "fluidsIn": [{ "id": "gtceu:sterilized_growth_medium", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:characterised_xeno_strain", "count": 1 }],
           "fluidsOut": []
         },
