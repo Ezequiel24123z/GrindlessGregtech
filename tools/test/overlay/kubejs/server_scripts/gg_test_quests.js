@@ -111,14 +111,7 @@ var GG_QUESTS_EXPECTED = {
   max_machines: [15, 16],
   max_integration: [14, 14],
   max_horizon: [17, 21],
-  maxplus_age_1: [20, 20],
-  maxplus_age_2: [17, 19],
-  maxplus_age_3: [20, 28],
-  maxplus_circuits: [15, 21],
-  maxplus_machines: [24, 27],
-  maxplus_integration: [17, 18],
-  maxplus_creative: [8, 8],
-  maxplus_hyperstargate: [18, 24]
+  maxplus_age: [144, 167]
 }
 // chapters that sit outside every chapter group on purpose (shown above the groups)
 var GG_UNGROUPED = { welcome: true }
