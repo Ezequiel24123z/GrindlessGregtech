@@ -83,7 +83,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ wire and plasma
   gear('WIRE', 'naquadria_magnet_works', 'Magnet Works', ['START'], 2, 3, {
     for: 'The &6Naquadria Magnet Works&r winds the superconducting wire and insert the fusion hall and the large coils need.',
-    needs: 'Its controller, naquadria and the cryostat casing from this chapter's circuits.',
+    needs: 'Its controller, naquadria and the cryostat casing from the circuits earlier in this chapter.',
     unlocks: 'Uranium rhodium dinaquadide wire, and the insert for the next hall.',
     automate: 'Slow and cold: keep the cryostat topped up and let it run beside the refinery.',
   }, [it('gtceu:uranium_rhodium_dinaquadide_single_wire')]),
