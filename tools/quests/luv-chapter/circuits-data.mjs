@@ -182,12 +182,12 @@ export const QUESTS = [
   },
   {
     key: 'QTSUIT', kind: 'process', title: 'QuarkTech Suit', icon: 'gtceu:quarktech_chestplate',
-    deps: ['CASM'], x: 10, y: 1.5,
+    deps: ['CASM'], x: 10, y: 3,
     teach: {
-      for: 'The &6QuarkTech Suit&r holds 100M EU and lets the charged chestplate fly like creative: 2,500 EU/t while flying, nothing on the ground, about 33 minutes per full charge, with a warning at 10%.',
-      needs: 'Each piece is an assembler recipe. The chestplate takes LuV circuits, a lapotronic orb, IV emitters and field generator, iridium plates and ruthenium foil.',
-      unlocks: 'Long-range flight on your own power. The advanced chestplate, from a ZPM circuit and gravitation engine units, adds the jetpack.',
-      automate: 'Recharge in a charger or battery buffer fed from the network; the suit never drains while you stand still.',
+      for: 'The &6QuarkTech Suit&r holds 100M EU. A charged chestplate flies like creative: 2,500 EU/t while flying, nothing on the ground, about 33 minutes per charge.',
+      needs: 'Assembler recipes. The chestplate takes LuV circuits, a lapotronic orb, IV emitters and a field generator.',
+      unlocks: 'Flight on your own power. The advanced chestplate (ZPM circuit) adds the jetpack.',
+      automate: 'Recharge in a charger or battery buffer.',
     },
     desc: [],
     tasks: [it('gtceu:quarktech_chestplate')],
