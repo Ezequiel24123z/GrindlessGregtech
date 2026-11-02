@@ -1,3 +1,4 @@
+// priority: 11950
 // AUD-1: lists every recipe EMI shows (id, category, inputs, outputs) to kubejs/exported/gg_emi_recipes.json, with the tooltip
 // of every output for the scanner and research station pages, so the pack's recipes can be compared with the server dump.
 // Read-only. Armed by kubejs/config/gg_test_research_display.json = {"enabled": true} (the committed marker is false); it runs once,
