@@ -302,10 +302,12 @@ test('the static stand-in runs the pack pass: originals and added recipes end up
     const committed = runPackScripts(pack, { originals: mkOriginals() });
     assert.deepEqual(committed.errors, []);
     const eraOn = (era) => real.find((t) => t.era === era && t.enabled);
+    // the hull's own key factor (AF-CC) multiplies the era's
+    const kOf = (era) => (real.find((t) => t.era === era).keyFactor || {})[`gtceu:${era}_machine_hull`] || 1;
     for (const [era, id, n] of [['mv', 'gtceu:assembler/mv_hull_gtm', 4], ['hv', 'gtceu:assembler/hv_hull_gtm', 5]]) {
       const t = eraOn(era);
       const got = committed.originalsChanged.get(id);
-      if (t) assert.equal(got.inputs.item[0].content.count, rule.scaledCount(n, t.item, 'x:plate'), id);
+      if (t) assert.equal(got.inputs.item[0].content.count, rule.scaledCount(n, t.item * kOf(era), 'x:plate'), id);
       else assert.equal(got, undefined, id);
     }
 
@@ -323,18 +325,18 @@ test('the static stand-in runs the pack pass: originals and added recipes end up
       assert.deepEqual(plain(r.j), want, r.i);
     }
     const ours = run.docs.recipes.recipes.find((r) => r.i.endsWith('mv_hull_ours')).j;
-    assert.equal(ours.inputs.item[0].content.count, 9);
-    assert.equal(ours.inputs.item[1].content.count, 3, 'the plain item is wrapped and scaled');
+    assert.equal(ours.inputs.item[0].content.count, rule.scaledCount(3, 3 * kOf('mv'), 'x:plate'));
+    assert.equal(ours.inputs.item[1].content.count, rule.scaledCount(1, 3 * kOf('mv'), 'x:plain'), 'the plain item is wrapped and scaled');
     assert.equal(ours.inputs.item[2].chance, 0, 'the mold stays a catalyst');
-    assert.equal(ours.inputs.fluid[0].content.amount, 3000);
+    assert.equal(ours.inputs.fluid[0].content.amount, rule.scaledCount(1000, 3 * kOf('mv'), 'gtceu:water'));
 
     const orig = mkOriginals().map((o) => ({ id: o.i, json: plain(o.j) }));
     const expectOrig = applyToRecipes(orig, on);
     assert.deepEqual([...run.originalsChanged.keys()].sort(), [...expectOrig.changed.keys()].sort());
     assert.deepEqual([...run.originalsChanged.keys()].sort(), ['gtceu:assembler/hv_hull_gtm', 'gtceu:assembler/mv_hull_gtm']);
     for (const [id, j] of run.originalsChanged) assert.deepEqual(plain(j), expectOrig.changed.get(id), id);
-    assert.equal(run.originalsChanged.get('gtceu:assembler/mv_hull_gtm').inputs.item[0].content.count, 12);
-    assert.equal(run.originalsChanged.get('gtceu:assembler/hv_hull_gtm').inputs.item[0].content.count, 20);
+    assert.equal(run.originalsChanged.get('gtceu:assembler/mv_hull_gtm').inputs.item[0].content.count, rule.scaledCount(4, 3 * kOf('mv'), 'x:plate'));
+    assert.equal(run.originalsChanged.get('gtceu:assembler/hv_hull_gtm').inputs.item[0].content.count, rule.scaledCount(5, 4 * kOf('hv'), 'x:plate'));
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

@@ -127,8 +127,10 @@ test('hull and the four hatches: assembly lines with station research and 1,000 
     assert.ok(r && r.t === 'gtceu:assembly_line', n);
     const text = JSON.stringify(r.j);
     assert.ok(text.includes(`gtceu:${n}`) && text.includes('gtceu:filtered_disk_plasma') && text.includes('grindless:uxv_voltage_coil') && text.includes('grindless:lasagna_plate'), n);
-    if (n !== 'uxv_machine_hull') assert.ok(text.includes('gtceu:uxv_machine_hull') && text.includes('grindless:ga2o3_power_die') && text.includes('gtceu:pasta_strand_single_wire'), n);
-    else assert.ok(text.includes('gtceu:uxv_machine_casing'));
+    if (n === 'uxv_machine_hull') assert.ok(text.includes('gtceu:uxv_machine_casing'));
+    // AF-CC (M2-03): the 16 A hatch is two 4 A hatches with octal cable; the 2 A ones are built on the hull
+    else if (/_16a$/.test(n)) assert.ok(text.includes(n.replace('_16a', '_4a')) && text.includes('grindless:ga2o3_power_die') && text.includes('gtceu:pasta_strand_octal_cable'), n);
+    else assert.ok(text.includes('gtceu:uxv_machine_hull') && text.includes('grindless:ga2o3_power_die') && text.includes('gtceu:pasta_strand_single_wire'), n);
   }
 });
 
