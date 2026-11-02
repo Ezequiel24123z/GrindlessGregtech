@@ -6,6 +6,7 @@
 //   grindless:vein_sample_<vein>                            one per vein of data/grindless/tables/veins.json;
 //                                                           put in the drill's input bus it selects the vein
 //                                                           (a non-consumed input of the vein_drilling recipes)
+//   grindless:iron_sinter, grindless:pig_iron               ironworks line of the Steam Blast Furnace (names in steam_content_lang.js)
 // Names / tooltips live in assets/grindless/lang/en_us.json.
 // Textures: item/bronze_drill_bit, item/steel_drill_bit, item/empty_vein_probe, and for the samples two
 // layers: item/vein_sample_frame (untinted) + item/vein_sample_core (tinted with the color of the vein).
@@ -29,6 +30,14 @@
       .texture('grindless:item/empty_vein_probe')
       .maxStackSize(16)
       .tooltip(Text.gray(Text.translate('tooltip.grindless.empty_vein_probe')))
+
+    // the ironworks line (server_scripts/grindless/steam/blast_furnace.js): sinter, then pig iron, then Bessemer steel
+    event.create('grindless:iron_sinter')
+      .texture('grindless:item/iron_sinter')
+      .tooltip(Text.gray(Text.translate('tooltip.grindless.iron_sinter')))
+    event.create('grindless:pig_iron')
+      .texture('grindless:item/pig_iron')
+      .tooltip(Text.gray(Text.translate('tooltip.grindless.pig_iron')))
 
     G.tables.veins.veins.forEach(function (vein) {
       var sample = event.create('grindless:vein_sample_' + vein.id)

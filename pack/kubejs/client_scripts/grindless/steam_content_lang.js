@@ -15,8 +15,12 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.steelmaking', 'Steelmaking')
     add('gtceu.coking', 'Coking')
     add('tag.item.grindless.blast_furnace_fluxes', 'Blast Furnace Fluxes')
+    add('item.grindless.iron_sinter', 'Iron Sinter')
+    add('item.grindless.pig_iron', 'Pig Iron')
+    add('tooltip.grindless.iron_sinter', 'Purified iron ore fused with coke dust. Smelt it with circuit 1 in the Steam Blast Furnace.')
+    add('tooltip.grindless.pig_iron', 'Brittle blast furnace iron. Blow it into steel with circuit 2 in the Steam Blast Furnace.')
 
-    add('grindless.machine.steam_blast_furnace.tooltip.0', '§7Turns iron ore straight into steel, four batches at a time.')
+    add('grindless.machine.steam_blast_furnace.tooltip.0', '§7Circuit 1 smelts iron sinter into pig iron, circuit 2 blows pig iron into steel. Four batches at a time.')
 
     add('grindless.machine.coking_battery.tooltip.0', '§7Cokes coal like the coke oven, but keeps the gas.')
 })
