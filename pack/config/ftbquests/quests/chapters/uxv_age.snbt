@@ -11,7 +11,7 @@
 	quests: [
 		{
 			dependencies: ["7C3E8D47479787F5"]
-			description: ["The road of the era, from the first step to the gate that leads on. Everything else hangs from it."]
+			description: ["The road of the era, from the first step to the gate that leads on. Everything else in the era hangs from it."]
 			icon: "minecraft:writable_book"
 			id: "78B28FCF40BA6381"
 			rewards: [ ]
@@ -48,8 +48,8 @@
 			size: 0.75d
 			tasks: [{ id: "1FE5768C3885F799", type: "checkmark" }]
 			title: "Logic From Spin"
-			x: 5.0d
-			y: -3.0d
+			x: 7.5d
+			y: -2.0d
 		}
 		{
 			dependencies: ["78B28FCF40BA6381"]
@@ -62,7 +62,7 @@
 			tasks: [{ id: "3BBC9242BDE1371E", type: "checkmark" }]
 			title: "A Star's Whole Life"
 			x: 5.0d
-			y: -4.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["78B28FCF40BA6381"]
@@ -74,8 +74,8 @@
 			size: 0.75d
 			tasks: [{ id: "7D5D4F7D1B2A77C6", type: "checkmark" }]
 			title: "Past the Last Element"
-			x: 12.5d
-			y: -4.5d
+			x: 7.5d
+			y: -3.5d
 		}
 		{
 			dependencies: ["71359F03B137FB0B"]
@@ -85,8 +85,8 @@
 			rewards: [{ id: "378B5E4D50DA47A9", type: "xp", xp: 150 }]
 			tasks: [{ id: "5378BF521AB70593", item: "grindless:fm257_target", type: "item" }]
 			title: "Fermium-257 Target"
-			x: 17.5d
-			y: -4.5d
+			x: 12.5d
+			y: -3.5d
 		}
 		{
 			dependencies: ["7F876A1037924C13"]
@@ -96,8 +96,8 @@
 			rewards: [{ id: "50A46B3D1F665B91", type: "xp", xp: 150 }]
 			tasks: [{ id: "581D4124E328D8A0", item: "grindless:es254_target", type: "item" }]
 			title: "Einsteinium-254 Target"
-			x: 20.0d
-			y: -4.5d
+			x: 15.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["345D3A6AE9F52B89"]
@@ -107,8 +107,8 @@
 			rewards: [{ id: "5172D8694C05FADB", type: "xp", xp: 200 }]
 			tasks: [{ id: "73381898FF54CFCB", item: "grindless:element_121_recoil", type: "item" }]
 			title: "Element 121"
-			x: 22.5d
-			y: -4.5d
+			x: 17.5d
+			y: -3.5d
 		}
 		{
 			dependencies: ["75CFD23128DE819C"]
@@ -121,8 +121,8 @@
 				{ id: "5278C0C815FA9208", item: "grindless:superheavy_census_iii", type: "item" }
 			]
 			title: "Element 122"
-			x: 25.0d
-			y: -4.5d
+			x: 20.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["5EB2A04DCE181C6C"]
@@ -135,8 +135,8 @@
 				{ id: "7DA854D50204BB5F", item: "grindless:island_chart", type: "item" }
 			]
 			title: "Island Chart"
-			x: 27.5d
-			y: -4.5d
+			x: 22.5d
+			y: -3.5d
 		}
 		{
 			dependencies: ["78B28FCF40BA6381"]
@@ -158,7 +158,7 @@
 			tasks: [{ id: "1C88E209F77FF225", item: "gtceu:stellar_cno_cut_bucket", type: "item" }]
 			title: "Stellar Cuts"
 			x: 7.5d
-			y: -1.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["1D6EA5E7B47D1D45"]
@@ -169,7 +169,7 @@
 			tasks: [{ id: "389537BC8CAD930A", item: "gtceu:filtered_disk_plasma_bucket", type: "item" }]
 			title: "Skim the Disk"
 			x: 10.0d
-			y: -1.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["1F3DBB6C9063CBDB"]
@@ -183,7 +183,7 @@
 			tasks: [{ id: "5201D12D70F5B07A", item: "grindless:frc_cartridge", type: "item" }]
 			title: "FRC Cartridge"
 			x: 12.5d
-			y: -1.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["3A4C403FED5649E0"]
@@ -197,7 +197,7 @@
 			tasks: [{ id: "7B7F5A1A5F192B01", item: "grindless:launched_relay_seed", type: "item" }]
 			title: "The Kerr Sling"
 			x: 15.0d
-			y: -1.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["5D9EECDCAB8F0156"]
@@ -211,7 +211,7 @@
 			tasks: [{ id: "74777C367B47A23F", item: "grindless:cnt_whipple_shield", type: "item" }]
 			title: "Whipple Shield"
 			x: 17.5d
-			y: -3.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["5D9EECDCAB8F0156"]
@@ -225,7 +225,7 @@
 			tasks: [{ dimension: "grindless:vela_pulsar_orbit", id: "3E86065FBFD39A5F", type: "dimension" }]
 			title: "Vela Pulsar"
 			x: 17.5d
-			y: 0.5d
+			y: 2.0d
 		}
 		{
 			dependencies: ["586BAF51DA2477E3"]
@@ -235,8 +235,8 @@
 			rewards: [{ id: "1FE208E9444ADFE1", type: "xp", xp: 250 }]
 			tasks: [{ id: "7A3E936C23703BE1", item: "grindless:raw_pasta", type: "item" }]
 			title: "Raw Pasta"
-			x: 22.5d
-			y: -1.5d
+			x: 20.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["33D08C69A1A4AF87"]
@@ -249,8 +249,8 @@
 				{ id: "71334617363E174F", item: "grindless:lasagna_phase", type: "item" }
 			]
 			title: "Caged Phases"
-			x: 25.0d
-			y: -1.5d
+			x: 22.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["1367407C3410944C"]
@@ -262,8 +262,8 @@
 			size: 0.75d
 			tasks: [{ id: "79E42C5D98AB437F", type: "checkmark" }]
 			title: "Pasta as Cable"
-			x: 27.5d
-			y: -1.5d
+			x: 25.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["58EDB9BA0BF842AF"]
@@ -274,7 +274,7 @@
 			tasks: [{ dimension: "grindless:cas_a_remnant", id: "30A986BDE2DD3F5F", type: "dimension" }]
 			title: "Cassiopeia A"
 			x: 20.0d
-			y: -3.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["5A539FCEC01451BA"]
@@ -285,7 +285,7 @@
 			tasks: [{ id: "3E0AC299C40CEA39", item: "grindless:ejecta_knot_dust", type: "item" }]
 			title: "Knot Dust"
 			x: 22.5d
-			y: -3.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["74AAE7464DB346C0"]
@@ -296,7 +296,7 @@
 			tasks: [{ id: "5FA00BF1D3337E18", item: "grindless:ti44_core", type: "item" }]
 			title: "Titanium-44 Core"
 			x: 25.0d
-			y: -3.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["17623833C3E320FE", "1367407C3410944C"]
@@ -307,7 +307,7 @@
 			tasks: [{ id: "5F17D96620A152C3", item: "grindless:arm_chart", type: "item" }]
 			title: "Arm Chart"
 			x: 27.5d
-			y: -3.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["1351A1703766CFB3"]
@@ -323,7 +323,7 @@
 			tasks: [{ id: "33EF140B320839EC", type: "checkmark" }]
 			title: "Open the Bulge Gate"
 			x: 30.0d
-			y: -3.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["5B7D80D05C71F861"]
@@ -373,7 +373,7 @@
 				{ id: "17F658071C44D8AF", item: "grindless:cofeb_target", type: "item" }
 			]
 			title: "CoFeB Target"
-			x: 15.0d
+			x: 10.0d
 			y: 12.0d
 		}
 		{
@@ -386,7 +386,7 @@
 			size: 1.0d
 			tasks: [{ id: "169FAB1A0BAC3061", item: "grindless:mtj_die", type: "item" }]
 			title: "Magnetic Tunnel Junction Die"
-			x: 17.5d
+			x: 12.5d
 			y: 12.0d
 		}
 		{
@@ -399,8 +399,8 @@
 			size: 1.0d
 			tasks: [{ id: "3F6717F34E6F2A02", item: "grindless:mram_wafer", type: "item" }]
 			title: "MRAM Wafer"
-			x: 20.0d
-			y: 11.5d
+			x: 15.0d
+			y: 12.0d
 		}
 		{
 			dependencies: ["7A0AB21F31B7820B"]
@@ -412,8 +412,8 @@
 			size: 1.0d
 			tasks: [{ id: "3FB1CCB0BD50E23D", item: "grindless:dysco3_substrate", type: "item" }]
 			title: "Scandate Substrate"
-			x: 20.0d
-			y: 13.0d
+			x: 15.0d
+			y: 13.5d
 		}
 		{
 			dependencies: ["3B4ABEFD993C5FE7", "780482A9BF2D46A1"]
@@ -425,8 +425,8 @@
 			size: 1.0d
 			tasks: [{ id: "3C41E39CEEAB7668", item: "grindless:racetrack_chip", type: "item" }]
 			title: "Racetrack Chip"
-			x: 22.5d
-			y: 11.0d
+			x: 17.5d
+			y: 12.0d
 		}
 		{
 			dependencies: ["3044F5740EC5319D", "17F1BEE08FE87731"]
@@ -438,8 +438,8 @@
 			size: 1.0d
 			tasks: [{ id: "5F8DE2F1358366D2", item: "grindless:meso_logic_die", type: "item" }]
 			title: "MESO Logic Die"
-			x: 22.5d
-			y: 13.5d
+			x: 17.5d
+			y: 14.5d
 		}
 		{
 			dependencies: ["33E470E07FDCB9C9", "528E7523EDB83CC3", "7486DF37973BED77"]
@@ -451,8 +451,8 @@
 			size: 1.0d
 			tasks: [{ id: "36D8C64E88D967FC", item: "gtnn:spintronic_mainframe", type: "item" }]
 			title: "Spintronic Mainframe"
-			x: 25.0d
-			y: 14.0d
+			x: 20.0d
+			y: 15.0d
 		}
 		{
 			dependencies: ["75CB408277AF9075"]
@@ -462,7 +462,7 @@
 			rewards: [{ id: "5656D7361817B272", type: "xp", xp: 100 }]
 			tasks: [{ id: "7EC448ED8DB5EA53", item: "grindless:nanoaperture_array", type: "item" }]
 			title: "Nanoaperture Array"
-			x: 10.0d
+			x: 7.5d
 			y: 15.5d
 		}
 		{
@@ -475,8 +475,8 @@
 			size: 1.0d
 			tasks: [{ id: "5DA4F3874226E985", item: "grindless:weak_link_cell", type: "item" }]
 			title: "Weak Link Cell"
-			x: 12.5d
-			y: 15.5d
+			x: 10.0d
+			y: 16.5d
 		}
 		{
 			dependencies: ["1E406BA02A37205D"]
@@ -488,8 +488,8 @@
 			size: 1.0d
 			tasks: [{ id: "725EB4799D1D41A9", item: "grindless:shequid_gyro", type: "item" }]
 			title: "SHeQUID Gyro"
-			x: 15.0d
-			y: 18.0d
+			x: 12.5d
+			y: 16.5d
 		}
 		{
 			dependencies: ["37DA616C29C996F0"]
@@ -501,8 +501,8 @@
 			size: 1.0d
 			tasks: [{ id: "539FFF875D152F3C", item: "gtceu:uxv_sensor", type: "item" }]
 			title: "UXV Sensor"
-			x: 17.5d
-			y: 18.0d
+			x: 25.0d
+			y: 16.5d
 		}
 		{
 			dependencies: ["586BAF51DA2477E3"]
@@ -513,7 +513,7 @@
 			tasks: [{ id: "3AFD3095A3D2A6A7", item: "gtceu:uxv_machine_hull", type: "item" }]
 			title: "UXV Machine Hull"
 			x: 20.0d
-			y: 5.0d
+			y: 7.5d
 		}
 		{
 			dependencies: ["3BB0A93D15E3A2D3"]
@@ -531,8 +531,8 @@
 				{ id: "1E6D429DE8E5DC34", item: "gtceu:uxv_rotor_holder", type: "item" }
 			]
 			title: "UXV Components"
-			x: 22.5d
-			y: 6.0d
+			x: 25.0d
+			y: 8.0d
 		}
 		{
 			dependencies: ["795E541822A26BC7"]
@@ -545,7 +545,7 @@
 			tasks: [{ id: "125E963E8CFADECE", item: "gtceu:uxv_circuit_assembler", type: "item" }]
 			title: "UXV Circuit Assembler"
 			x: 27.5d
-			y: 6.0d
+			y: 8.0d
 		}
 		{
 			dependencies: ["103E024FEAF25DDC", "37FCF1CA912EC06F"]
@@ -555,8 +555,8 @@
 			rewards: [{ id: "70C7F98B85259420", type: "xp", xp: 250 }]
 			tasks: [{ id: "39790D59FAA213DA", item: "gtceu:uxv_emitter", type: "item" }]
 			title: "UXV Emitter"
-			x: 20.0d
-			y: 18.0d
+			x: 32.5d
+			y: 16.5d
 		}
 		{
 			dependencies: ["567A7CE091E678B6"]
@@ -566,8 +566,8 @@
 			rewards: [{ id: "57885FB68C9EBCF7", type: "xp", xp: 200 }]
 			tasks: [{ id: "7CEE5FC8B78C80E0", item: "gtceu:uxv_energy_input_hatch", type: "item" }]
 			title: "UXV Energy Hatch"
-			x: 22.5d
-			y: 18.0d
+			x: 35.0d
+			y: 16.5d
 		}
 		{
 			dependencies: ["78B28FCF40BA6381"]
@@ -580,7 +580,7 @@
 			tasks: [{ id: "16CDBBB8397BFFB8", type: "checkmark" }]
 			title: "Integration"
 			x: 5.0d
-			y: -11.5d
+			y: -12.0d
 		}
 		{
 			dependencies: ["14DD94C79F301330"]
@@ -593,7 +593,7 @@
 			tasks: [{ id: "76FCBE2DBD2CF30B", item: "gtceu:cno_ash_plasma_bucket", type: "item" }]
 			title: "Hot CNO"
 			x: 7.5d
-			y: -9.0d
+			y: -10.0d
 		}
 		{
 			dependencies: ["7B79626CA22F70D0"]
@@ -606,7 +606,7 @@
 			tasks: [{ id: "5DEB7122722E6FF3", item: "gtceu:helium_burning_ash_plasma_bucket", type: "item" }]
 			title: "Triple Alpha"
 			x: 10.0d
-			y: -10.0d
+			y: -11.0d
 		}
 		{
 			dependencies: ["7884A0887B1AEAF8"]
@@ -619,7 +619,7 @@
 			tasks: [{ id: "527015E16C32AE3C", item: "gtceu:carbon_burning_ash_plasma_bucket", type: "item" }]
 			title: "Carbon Burning"
 			x: 12.5d
-			y: -10.0d
+			y: -11.0d
 		}
 		{
 			dependencies: ["58CBCB43698A8853"]
@@ -632,7 +632,7 @@
 			tasks: [{ id: "57D0C572D5862A62", item: "gtceu:oxygen_burning_ash_plasma_bucket", type: "item" }]
 			title: "Oxygen Burning"
 			x: 15.0d
-			y: -10.0d
+			y: -11.0d
 		}
 		{
 			dependencies: ["556B77B76C999DD0"]
@@ -648,7 +648,7 @@
 			]
 			title: "Ash Into Power"
 			x: 17.5d
-			y: -10.0d
+			y: -11.0d
 		}
 		{
 			dependencies: ["3A4C403FED5649E0"]
@@ -664,7 +664,7 @@
 			tasks: [{ id: "16BC00FB573790F3", item: "gtceu:flux_loaded_plasma_bucket", type: "item" }]
 			title: "Spin Down a Black Hole"
 			x: 15.0d
-			y: -2.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["586BAF51DA2477E3"]
@@ -677,7 +677,7 @@
 			tasks: [{ id: "14B612B31A5BD25A", item: "grindless:lasagna_electrode", type: "item" }]
 			title: "Tap the Polar Cap"
 			x: 20.0d
-			y: 0.5d
+			y: 2.0d
 		}
 		{
 			dependencies: ["14B0B5EA38F22432"]
@@ -689,8 +689,8 @@
 			size: 1.0d
 			tasks: [{ id: "5E837776ED089223", item: "gtceu:uxv_parallel_hatch", type: "item" }]
 			title: "Parallel Control"
-			x: 10.0d
-			y: -11.5d
+			x: 7.5d
+			y: -13.0d
 		}
 		{
 			dependencies: ["5B064A6634A46338"]
@@ -702,8 +702,8 @@
 			size: 1.25d
 			tasks: [{ id: "5ABF9A5753B9AE7F", item: "gtceu:stellar_fractionation_hall", type: "item" }]
 			title: "Stellar Fractionation Hall"
-			x: 12.5d
-			y: -11.5d
+			x: 10.0d
+			y: -13.0d
 		}
 		{
 			dependencies: ["14B0B5EA38F22432"]
@@ -716,7 +716,7 @@
 			tasks: [{ id: "3F72A32DFC24D6F2", item: "grindless:uxv_smes_cell", type: "item" }]
 			title: "The UXV Cell"
 			x: 7.5d
-			y: -13.5d
+			y: -14.5d
 		}
 		{
 			dependencies: ["3F5ABDEF2254EC50"]
@@ -732,7 +732,7 @@
 			]
 			title: "The Network Goes UXV"
 			x: 10.0d
-			y: -13.5d
+			y: -14.5d
 		}
 		{
 			dependencies: ["13386736693D927A"]
@@ -745,7 +745,7 @@
 			tasks: [{ id: "14C4D63011B4FAF9", type: "checkmark" }]
 			title: "Sixteen Amps of UXV"
 			x: 12.5d
-			y: -13.5d
+			y: -14.5d
 		}
 		{
 			dependencies: ["14B0B5EA38F22432"]
@@ -765,7 +765,7 @@
 			]
 			title: "Separations and Strip"
 			x: 7.5d
-			y: -12.0d
+			y: -11.5d
 		}
 		{
 			dependencies: ["71359F03B137FB0B"]
@@ -783,8 +783,8 @@
 				{ id: "380FCBC417EE91CE", item: "gtceu:transuranium_facility", type: "item" }
 			]
 			title: "Heavier Cuts"
-			x: 15.0d
-			y: -4.0d
+			x: 10.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["3B0561CB951B62B9"]
@@ -802,8 +802,8 @@
 				{ id: "76BFDF61905FA736", item: "gtceu:powder_bed_printer", type: "item" }
 			]
 			title: "Strands, Rotors and Targets"
-			x: 7.5d
-			y: -4.5d
+			x: 12.5d
+			y: -2.0d
 		}
 		{
 			dependencies: ["3B0561CB951B62B9"]
@@ -822,8 +822,8 @@
 				{ id: "72F25BDF213AD852", item: "gtceu:photonic_foundry", type: "item" }
 			]
 			title: "Films and Crystals"
-			x: 7.5d
-			y: -3.0d
+			x: 10.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["71359F03B137FB0B"]
@@ -844,8 +844,8 @@
 				{ id: "58D882A9249E6C5D", item: "gtceu:photonic_integration_hall", type: "item" }
 			]
 			title: "Heavy Ions and Beams"
-			x: 15.0d
-			y: -5.5d
+			x: 10.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["1351A1703766CFB3"]
@@ -864,7 +864,7 @@
 			]
 			title: "Records for the Arm Chart"
 			x: 30.0d
-			y: -4.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["5D9EECDCAB8F0156"]
@@ -886,7 +886,7 @@
 			]
 			title: "Sling, Cage and Gate"
 			x: 17.5d
-			y: -1.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["78B28FCF40BA6381"]
@@ -898,8 +898,8 @@
 			size: 0.75d
 			tasks: [{ id: "7FE0F44DE0656327", type: "checkmark" }]
 			title: "Machines"
-			x: 7.5d
-			y: 11.0d
+			x: 5.0d
+			y: 10.0d
 		}
 		{
 			dependencies: ["77ECA9A3DDFB480D"]
@@ -914,7 +914,7 @@
 				{ id: "7153D7373D23E2BD", item: "gtceu:plascrete", type: "item" }
 			]
 			title: "MTJ Sputter Cluster"
-			x: 15.0d
+			x: 10.0d
 			y: 10.5d
 		}
 		{
@@ -930,7 +930,7 @@
 				{ id: "78C8443DD1932DF1", item: "gtceu:plascrete", type: "item" }
 			]
 			title: "Racetrack Fab"
-			x: 17.5d
+			x: 15.0d
 			y: 10.5d
 		}
 		{
@@ -947,7 +947,7 @@
 				{ id: "76B59BF64EA9BED2", item: "gtceu:tritanium_coil_block", type: "item" }
 			]
 			title: "Oxide PLD Chamber"
-			x: 17.5d
+			x: 10.0d
 			y: 13.5d
 		}
 		{
@@ -963,8 +963,8 @@
 				{ id: "303ABC678F712DA7", item: "gtceu:clean_machine_casing", type: "item" }
 			]
 			title: "vdW Stacking Cell"
-			x: 12.5d
-			y: 10.0d
+			x: 7.5d
+			y: 8.5d
 		}
 		{
 			dependencies: ["77ECA9A3DDFB480D"]
@@ -979,7 +979,7 @@
 				{ id: "1571A221A995FDFB", item: "gtceu:robust_machine_casing", type: "item" }
 			]
 			title: "YIG LPE Furnace"
-			x: 17.5d
+			x: 10.0d
 			y: 15.0d
 		}
 		{
@@ -995,8 +995,8 @@
 				{ id: "58870364B8D50034", item: "grindless:cryostat_casing", type: "item" }
 			]
 			title: "SHeQUID Works"
-			x: 10.0d
-			y: 13.5d
+			x: 7.5d
+			y: 14.0d
 		}
 		{
 			dependencies: ["77ECA9A3DDFB480D"]
@@ -1027,8 +1027,8 @@
 				{ id: "1772800E567F1E1D", item: "gtceu:uxv_machine_casing", type: "item" }
 			]
 			title: "Stellar Elevator"
-			x: 15.0d
-			y: 8.0d
+			x: 12.5d
+			y: 9.5d
 		}
 		{
 			dependencies: ["1F198C897B7C73D8"]
@@ -1043,8 +1043,8 @@
 				{ id: "351C9F4D367448E1", item: "gtceu:high_power_casing", type: "item" }
 			]
 			title: "Plasma Mass Filter"
-			x: 20.0d
-			y: 8.0d
+			x: 17.5d
+			y: 9.5d
 		}
 		{
 			dependencies: ["344ECF8428D0E972"]
@@ -1059,8 +1059,8 @@
 				{ id: "733253DDA8C281CA", item: "gtceu:uxv_machine_casing", type: "item" }
 			]
 			title: "Accretion Disk Skimmer"
-			x: 27.5d
-			y: 8.0d
+			x: 20.0d
+			y: 9.0d
 		}
 		{
 			dependencies: ["344ECF8428D0E972"]
@@ -1075,8 +1075,8 @@
 				{ id: "3896B93FD6DFDD95", item: "gtceu:uxv_machine_casing", type: "item" }
 			]
 			title: "Stellar Condensation Tower"
-			x: 22.5d
-			y: 9.0d
+			x: 20.0d
+			y: 10.5d
 		}
 		{
 			dependencies: ["110D7283172BA400"]
@@ -1086,8 +1086,8 @@
 			rewards: [{ id: "767E7C5D5EEE5D15", type: "xp", xp: 80 }]
 			tasks: [{ id: "3CEAAB651BEF7351", item: "grindless:refractory_condensate", type: "item" }]
 			title: "Refractory Condensate"
-			x: 25.0d
-			y: 9.0d
+			x: 22.5d
+			y: 10.5d
 		}
 		{
 			dependencies: ["1887C02641FE7714"]
@@ -1103,8 +1103,8 @@
 				{ id: "5B782C13EA8BFF8F", item: "grindless:cryostat_casing", type: "item" }
 			]
 			title: "FRC Former"
-			x: 30.0d
-			y: 8.0d
+			x: 22.5d
+			y: 9.0d
 		}
 		{
 			dependencies: ["518B1C106BB5136F"]
@@ -1119,8 +1119,8 @@
 				{ id: "5BBFE15D6E67C4C8", item: "gtceu:uxv_machine_casing", type: "item" }
 			]
 			title: "BZ Dynamo"
-			x: 32.5d
-			y: 8.0d
+			x: 25.0d
+			y: 9.5d
 		}
 		{
 			dependencies: ["795E541822A26BC7", "344ECF8428D0E972"]
@@ -1136,8 +1136,8 @@
 				{ id: "5255BED4DDC68445", item: "gtceu:fusion_glass", type: "item" }
 			]
 			title: "Mk6 Fusion Ring"
-			x: 25.0d
-			y: 7.0d
+			x: 27.5d
+			y: 10.5d
 		}
 		{
 			dependencies: ["586BAF51DA2477E3"]
@@ -1153,7 +1153,7 @@
 			]
 			title: "Pasta Extractor"
 			x: 20.0d
-			y: 2.5d
+			y: 5.0d
 		}
 		{
 			dependencies: ["1C34EDB89AD1F5C9"]
@@ -1170,7 +1170,7 @@
 			]
 			title: "Pasta Phase Sorter"
 			x: 22.5d
-			y: 3.0d
+			y: 5.0d
 		}
 		{
 			dependencies: ["353D67B60E559EE1"]
@@ -1186,7 +1186,7 @@
 			]
 			title: "Pasta Draw Bench"
 			x: 25.0d
-			y: 3.0d
+			y: 5.0d
 		}
 		{
 			dependencies: ["353D67B60E559EE1"]
@@ -1203,7 +1203,7 @@
 			]
 			title: "Pasta Laminator"
 			x: 25.0d
-			y: 4.5d
+			y: 6.5d
 		}
 		{
 			dependencies: ["3CCB6C8A5332CADD"]
@@ -1214,7 +1214,7 @@
 			tasks: [{ id: "503BA155D586710D", item: "grindless:lasagna_plate", type: "item" }]
 			title: "Lasagna Plate"
 			x: 27.5d
-			y: 4.5d
+			y: 6.5d
 		}
 		{
 			dependencies: ["7A933F3FF611A461"]
@@ -1230,10 +1230,10 @@
 			]
 			title: "Polar Cap Tap"
 			x: 27.5d
-			y: 3.0d
+			y: 5.0d
 		}
 		{
-			dependencies: ["77ECA9A3DDFB480D"]
+			dependencies: ["5A539FCEC01451BA"]
 			description: ["The star's core was thrown out in clumps still rich in what it made as it died. The &6Ejecta Knot Sweeper&r sweeps them up, behind a shield bow. A UIV hull, the Whipple shield casing and a filter collector. Ejecta knot dust, and titanium-44 from it. Shield weave by ME; the dust comes back by hopper."]
 			icon: "gtceu:ejecta_knot_sweeper"
 			id: "12376A5961A338E7"
@@ -1245,8 +1245,8 @@
 				{ id: "1CFA9454DF74F43F", item: "grindless:whipple_shield_casing", type: "item" }
 			]
 			title: "Ejecta Knot Sweeper"
-			x: 12.5d
-			y: 14.0d
+			x: 27.5d
+			y: 3.5d
 		}
 		{
 			dependencies: ["12376A5961A338E7"]
@@ -1261,8 +1261,8 @@
 				{ id: "3D5BB3952F16DA90", item: "gtceu:robust_machine_casing", type: "item" }
 			]
 			title: "Annihilation Laser Works"
-			x: 15.0d
-			y: 16.0d
+			x: 30.0d
+			y: 7.5d
 		}
 		{
 			dependencies: ["37FCF1CA912EC06F"]
@@ -1272,8 +1272,8 @@
 			rewards: [{ id: "3AFF455A942A356F", type: "xp", xp: 80 }]
 			tasks: [{ id: "5A8E57369AFB352C", item: "grindless:gamma_laser_module", type: "item" }]
 			title: "Gamma Laser Module"
-			x: 20.0d
-			y: 16.0d
+			x: 32.5d
+			y: 7.5d
 		}
 	]
 	subtitle: ["Logic that runs on spin, and three strange places: a black hole's companion star, a pulsar's crust and a supernova's ashes."]

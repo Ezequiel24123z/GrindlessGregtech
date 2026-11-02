@@ -11,7 +11,7 @@
 	quests: [
 		{
 			dependencies: ["7C074BF11FC1790D"]
-			description: ["The road of the era, from the first step to the gate that leads on. Everything else hangs from it."]
+			description: ["The road of the era, from the first step to the gate that leads on. Everything else in the era hangs from it."]
 			icon: "minecraft:writable_book"
 			id: "1A9EE7510BD6DBFC"
 			rewards: [ ]
@@ -49,7 +49,7 @@
 			tasks: [{ id: "54400E133A600EA5", type: "checkmark" }]
 			title: "The Way In"
 			x: 5.0d
-			y: -5.5d
+			y: 12.0d
 		}
 		{
 			dependencies: ["1184DDEA5D8984CC"]
@@ -60,7 +60,7 @@
 			tasks: [{ id: "53A5A08F82D1A1BB", item: "grindless:bulge_relay_seed", type: "item" }]
 			title: "Bulge Relay"
 			x: 7.5d
-			y: -5.5d
+			y: 16.0d
 		}
 		{
 			dependencies: ["73394B2C6D508B8A"]
@@ -74,7 +74,7 @@
 			tasks: [{ id: "5685081BFB1C071D", item: "grindless:launched_bulge_seed", type: "item" }]
 			title: "Seed Away"
 			x: 10.0d
-			y: -5.5d
+			y: 16.0d
 		}
 		{
 			dependencies: ["1334D64ED6E948AA"]
@@ -85,7 +85,7 @@
 			tasks: [{ dimension: "grindless:sgr1806_orbit", id: "550CFB430F467A0F", type: "dimension" }]
 			title: "SGR 1806-20"
 			x: 12.5d
-			y: -8.0d
+			y: 16.0d
 		}
 		{
 			dependencies: ["1334D64ED6E948AA"]
@@ -96,7 +96,7 @@
 			tasks: [{ id: "1D29CC0DFA9616E1", item: "grindless:bulge_chart", type: "item" }]
 			title: "Bulge Chart"
 			x: 12.5d
-			y: -5.5d
+			y: 20.5d
 		}
 		{
 			dependencies: ["7F4169BDA6339C6F"]
@@ -107,7 +107,7 @@
 			tasks: [{ id: "3EAB9DDF35F8F1DE", item: "gtceu:chain_strand_ingot", type: "item" }]
 			title: "Chain Strand"
 			x: 15.0d
-			y: -8.5d
+			y: 16.5d
 		}
 		{
 			dependencies: ["7C75640ED457CEA4"]
@@ -118,7 +118,7 @@
 			tasks: [{ id: "358919E74C27DFB3", item: "gtceu:chain_strand_single_cable", type: "item" }]
 			title: "Chain Strand Cable"
 			x: 17.5d
-			y: -10.0d
+			y: 17.5d
 		}
 		{
 			dependencies: ["7C75640ED457CEA4"]
@@ -128,8 +128,8 @@
 			rewards: [{ id: "5B38FBEF46417AE1", type: "xp", xp: 100 }]
 			tasks: [{ id: "7B9BCD4B6E699BFB", item: "grindless:chain_lamina_stack", type: "item" }]
 			title: "Chain Lamina"
-			x: 17.5d
-			y: -8.5d
+			x: 20.0d
+			y: 16.5d
 		}
 		{
 			dependencies: ["592D27E5456D4D25", "3BF1C2F89049EA90"]
@@ -139,8 +139,8 @@
 			rewards: [{ id: "71FCD98513284F86", type: "xp", xp: 150 }]
 			tasks: [{ id: "7626DF10C6668F4D", item: "gtceu:opv_machine_hull", type: "item" }]
 			title: "OpV Hull"
-			x: 20.0d
-			y: -8.5d
+			x: 25.0d
+			y: 16.5d
 		}
 		{
 			dependencies: ["592D27E5456D4D25"]
@@ -151,7 +151,7 @@
 			tasks: [{ id: "765BB9862A2ABFCD", item: "grindless:dense_positron_cell", type: "item" }]
 			title: "Dense Positron Cell"
 			x: 20.0d
-			y: -10.0d
+			y: 18.0d
 		}
 		{
 			dependencies: ["32FA798856B28769"]
@@ -161,8 +161,8 @@
 			rewards: [{ id: "3A00381FA1827FF0", type: "xp", xp: 150 }]
 			tasks: [{ id: "12A4BD4E54A4A564", item: "grindless:tetron_array", type: "item" }]
 			title: "Tetron Array"
-			x: 17.5d
-			y: -4.0d
+			x: 15.0d
+			y: 20.5d
 		}
 		{
 			dependencies: ["32FA798856B28769"]
@@ -173,7 +173,7 @@
 			tasks: [{ dimension: "grindless:cygnus_x1_orbit", id: "51FFA7ACBC795F17", type: "dimension" }]
 			title: "Back to Cygnus X-1"
 			x: 15.0d
-			y: -5.5d
+			y: 22.5d
 		}
 		{
 			dependencies: ["7B1E66BC13548877"]
@@ -184,7 +184,7 @@
 			tasks: [{ id: "1B87B0D1BADDCEC1", item: "grindless:be_beam_window", type: "item" }]
 			title: "Beam Window"
 			x: 17.5d
-			y: -5.5d
+			y: 22.0d
 		}
 		{
 			dependencies: ["58C89E98AE7966A6"]
@@ -195,7 +195,7 @@
 			tasks: [{ id: "7FA6F79EE2BF71DB", item: "grindless:antiproton_stack_opv", type: "item" }]
 			title: "Antiproton Stack"
 			x: 20.0d
-			y: -5.5d
+			y: 21.0d
 		}
 		{
 			dependencies: ["125A9489212645EA", "7BDABCDAEB2DA9E2"]
@@ -206,7 +206,7 @@
 			tasks: [{ id: "7F7A1FE2DC035588", item: "grindless:antihydrogen_ice_cell", type: "item" }]
 			title: "Antihydrogen Ice"
 			x: 22.5d
-			y: -7.0d
+			y: 19.5d
 		}
 		{
 			dependencies: ["7B1E66BC13548877", "391E9FA027FD4A64"]
@@ -216,8 +216,8 @@
 			rewards: [{ id: "5D5EEA5D4C3CEA1C", type: "xp", xp: 200 }]
 			tasks: [{ id: "3A798540A529756A", item: "grindless:strangelet_seed", type: "item" }]
 			title: "Strangelet Seed"
-			x: 20.0d
-			y: -4.0d
+			x: 17.5d
+			y: 20.5d
 		}
 		{
 			dependencies: ["3E5E07D88B48C85B"]
@@ -227,8 +227,8 @@
 			rewards: [{ id: "3D7B85F62B079B78", type: "xp", xp: 250 }]
 			tasks: [{ id: "72F81A4E7795C67F", item: "grindless:stable_exotic_matter", type: "item" }]
 			title: "Stable Exotic Matter"
-			x: 22.5d
-			y: -4.0d
+			x: 20.0d
+			y: 19.5d
 		}
 		{
 			dependencies: ["51C0DDF70D599BE7", "38F0C34A187A7746"]
@@ -239,7 +239,7 @@
 			tasks: [{ id: "7CF1CC6E41D19701", item: "grindless:kugelblitz_core", type: "item" }]
 			title: "Kugelblitz Core"
 			x: 25.0d
-			y: -7.0d
+			y: 19.5d
 		}
 		{
 			dependencies: ["7808A81BF8AA169E"]
@@ -250,7 +250,7 @@
 			tasks: [{ id: "33E7A7C45D2D3C8C", item: "grindless:hawking_drive", type: "item" }]
 			title: "Hawking Drive"
 			x: 27.5d
-			y: -8.0d
+			y: 19.5d
 		}
 		{
 			dependencies: ["1C5A8ECE70B119DD"]
@@ -261,7 +261,7 @@
 			tasks: [{ id: "34324876E068134F", item: "grindless:superheavy_census_iv", type: "item" }]
 			title: "Superheavy Census IV"
 			x: 30.0d
-			y: -8.0d
+			y: 19.5d
 		}
 		{
 			dependencies: ["5D3CA36016CD74E2"]
@@ -272,7 +272,7 @@
 			tasks: [{ id: "146ED91622026A79", item: "grindless:launched_pathfinder", type: "item" }]
 			title: "The Pathfinder"
 			x: 32.5d
-			y: -8.0d
+			y: 19.5d
 		}
 		{
 			dependencies: ["590B0DB9B61FA40E"]
@@ -283,7 +283,7 @@
 			tasks: [{ dimension: "grindless:terzan5_core", id: "770E823F16425015", type: "dimension" }]
 			title: "Terzan 5"
 			x: 35.0d
-			y: -8.0d
+			y: 19.5d
 		}
 		{
 			dependencies: ["34EC6937B4EB1880"]
@@ -294,7 +294,7 @@
 			tasks: [{ id: "1A7A564582E14B9B", item: "grindless:bulge_debris", type: "item" }]
 			title: "Bulge Debris"
 			x: 37.5d
-			y: -8.0d
+			y: 19.5d
 		}
 		{
 			dependencies: ["53687208B5A566FC"]
@@ -305,7 +305,7 @@
 			tasks: [{ id: "5567C58E9D77131A", item: "grindless:probe_seed", type: "item" }]
 			title: "Probe Seed"
 			x: 40.0d
-			y: -8.0d
+			y: 19.0d
 		}
 		{
 			dependencies: ["5FCBAB1702AAE56B"]
@@ -316,7 +316,7 @@
 			tasks: [{ id: "7B7E5BAA6A0A570F", item: "grindless:cluster_sinter_casing", type: "item" }]
 			title: "Sinter Casing"
 			x: 42.5d
-			y: -8.0d
+			y: 19.0d
 		}
 		{
 			dependencies: ["5DB4AECF2C68DD7A"]
@@ -327,7 +327,7 @@
 			tasks: [{ id: "3FE042093BEDCF50", item: "grindless:deployed_node_pack", type: "item" }]
 			title: "Deployed Node Packs"
 			x: 45.0d
-			y: -7.5d
+			y: 19.0d
 		}
 		{
 			dependencies: ["1272CCD5EF9968D8"]
@@ -338,7 +338,7 @@
 			tasks: [{ id: "5C20577FD762E577", item: "grindless:bulge_light_census", type: "item" }]
 			title: "Bulge Light Census"
 			x: 47.5d
-			y: -7.5d
+			y: 19.0d
 		}
 		{
 			dependencies: ["5651A00C576D3D7E"]
@@ -354,7 +354,7 @@
 			tasks: [{ id: "375203E342E9AE31", item: "gtceu:max_machine_casing", type: "item" }]
 			title: "Gate to MAX"
 			x: 50.0d
-			y: -7.5d
+			y: 19.0d
 		}
 		{
 			dependencies: ["1A9EE7510BD6DBFC"]
@@ -366,8 +366,8 @@
 			size: 0.75d
 			tasks: [{ id: "197780D52C5B0EAB", type: "checkmark" }]
 			title: "Circuits"
-			x: 5.0d
-			y: -12.0d
+			x: 10.0d
+			y: 7.0d
 		}
 		{
 			dependencies: ["5DE7C491611D14C0"]
@@ -379,8 +379,8 @@
 			size: 1.0d
 			tasks: [{ id: "3509AF9C7AA4FE39", item: "grindless:si28_soi_wafer", type: "item" }]
 			title: "Silicon-28 SOI Wafer"
-			x: 7.5d
-			y: -24.0d
+			x: 12.5d
+			y: 7.0d
 		}
 		{
 			dependencies: ["7D95B836E06310DB"]
@@ -395,8 +395,8 @@
 				{ id: "32946CDE111E80EB", item: "grindless:cryo_cmos_die", type: "item" }
 			]
 			title: "Cryo-CMOS Wafer"
-			x: 10.0d
-			y: -25.5d
+			x: 15.0d
+			y: 7.0d
 		}
 		{
 			dependencies: ["3AD6042F25DCDFAE"]
@@ -410,8 +410,8 @@
 				{ id: "712C8D7A0D318AB9", item: "grindless:cryo_optical_link", type: "item" }
 			]
 			title: "Cryogenic Links"
-			x: 12.5d
-			y: -26.0d
+			x: 17.5d
+			y: 7.0d
 		}
 		{
 			dependencies: ["328CDB4584A0E113"]
@@ -423,8 +423,8 @@
 			size: 1.0d
 			tasks: [{ id: "7611412123E87135", item: "gtnn:cosmic_mainframe", type: "item" }]
 			title: "Cosmic Mainframe"
-			x: 15.0d
-			y: -26.0d
+			x: 20.0d
+			y: 7.0d
 		}
 		{
 			dependencies: ["5DE7C491611D14C0"]
@@ -434,8 +434,8 @@
 			rewards: [{ id: "1B562FCD3792D51F", type: "xp", xp: 100 }]
 			tasks: [{ id: "7E805A218F31BAC8", item: "grindless:opv_harmonic_drive", type: "item" }]
 			title: "Harmonic Drive"
-			x: 7.5d
-			y: -19.5d
+			x: 17.5d
+			y: 9.0d
 		}
 		{
 			dependencies: ["74C17E229844F7DF"]
@@ -447,11 +447,11 @@
 			size: 1.0d
 			tasks: [{ id: "562FAE7CE1E2707A", item: "gtceu:opv_sensor", type: "item" }]
 			title: "OpV Sensor"
-			x: 17.5d
-			y: -26.0d
+			x: 22.5d
+			y: 7.0d
 		}
 		{
-			dependencies: ["7FD656811E00D002"]
+			dependencies: ["59A06A2C9ADDA9E4", "7FD656811E00D002"]
 			description: ["The &6OpV Electric Motor&r runs on a superconducting winding in a cooled housing, and the &6OpV Electric Pump&r moves fluid with a travelling field. The piston and conveyor run on composite rods and lamina stacks, the robot arm turns on the harmonic drive, and the emitter, sensor and field generator close the set with the fluid regulator."]
 			icon: "gtceu:opv_electric_motor"
 			id: "51B76517CEFC0F97"
@@ -467,8 +467,8 @@
 				{ id: "11B606E21F7B69CE", item: "gtceu:opv_fluid_regulator", type: "item" }
 			]
 			title: "OpV Components"
-			x: 10.0d
-			y: -20.5d
+			x: 27.5d
+			y: 9.0d
 		}
 		{
 			dependencies: ["51B76517CEFC0F97"]
@@ -481,8 +481,8 @@
 				{ id: "3722CFF3D950ED02", item: "gtceu:opv_energy_output_hatch", type: "item" }
 			]
 			title: "OpV Energy Hatches"
-			x: 12.5d
-			y: -21.0d
+			x: 30.0d
+			y: 9.0d
 		}
 		{
 			dependencies: ["500C1E02A6CC0121"]
@@ -494,8 +494,8 @@
 			size: 1.25d
 			tasks: [{ id: "3371D5550DAE8267", item: "gtceu:opv_assembler", type: "item" }]
 			title: "OpV Assembler"
-			x: 15.0d
-			y: -21.0d
+			x: 32.5d
+			y: 9.0d
 		}
 		{
 			dependencies: ["5B22AF4BC1D6F0C9"]
@@ -507,8 +507,8 @@
 			size: 1.25d
 			tasks: [{ id: "7B57AF1F533091BA", item: "gtceu:opv_circuit_assembler", type: "item" }]
 			title: "OpV Circuit Assembler"
-			x: 17.5d
-			y: -21.0d
+			x: 35.0d
+			y: 9.0d
 		}
 		{
 			dependencies: ["1A9EE7510BD6DBFC"]
@@ -524,7 +524,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["187802F892D5F6DF"]
+			dependencies: ["38F0C34A187A7746"]
 			description: ["Matter and antimatter turned entirely into energy. The &6Annihilation Engine&r burns antihydrogen ice or an ACMF pellet with an antiproton stack. Gamma rays stop in &6Gamma Absorber Tiles&r, and a wall of &6TPV Panels&r turns the heat into current. The engine, a ring of absorber tiles and a TPV wall, with OpV dynamo hatches. About half the energy leaves as neutrinos and is lost. The largest source at home, and a share of the gate's draw. Ice and stacks arrive by bus. Worn tiles go back to the hot cell for their metal."]
 			icon: "gtceu:annihilation_engine"
 			id: "71CAE992CEC101E3"
@@ -537,8 +537,8 @@
 				{ id: "793F48A94687CB50", item: "grindless:tpv_panel", type: "item" }
 			]
 			title: "Annihilation Engine"
-			x: 25.0d
-			y: -1.0d
+			x: 27.5d
+			y: 15.0d
 		}
 		{
 			dependencies: ["71CAE992CEC101E3"]
@@ -550,8 +550,8 @@
 			size: 1.0d
 			tasks: [{ id: "16D9C683984B2A65", item: "grindless:acmf_pellet", type: "item" }]
 			title: "ACMF Pellet"
-			x: 27.5d
-			y: -2.0d
+			x: 30.0d
+			y: 14.5d
 		}
 		{
 			dependencies: ["7808A81BF8AA169E", "71CAE992CEC101E3"]
@@ -567,7 +567,7 @@
 			tasks: [{ id: "1807ED7E2B23D582", item: "gtceu:hawking_collector", type: "item" }]
 			title: "Hawking Collector"
 			x: 35.0d
-			y: -2.5d
+			y: 15.0d
 		}
 		{
 			dependencies: ["1272CCD5EF9968D8", "5A2C7819E4CBEA60"]
@@ -580,7 +580,7 @@
 			tasks: [{ id: "5110288310B97D42", item: "gtceu:bulge_collector", type: "item" }]
 			title: "Bulge Collector"
 			x: 47.5d
-			y: -2.5d
+			y: 15.0d
 		}
 		{
 			dependencies: ["1788F6D724E2A1AA"]
@@ -593,7 +593,7 @@
 			tasks: [{ id: "121840CF684B2A6C", type: "checkmark" }]
 			title: "Kardashev III"
 			x: 50.0d
-			y: -1.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["187802F892D5F6DF"]
@@ -606,7 +606,7 @@
 			tasks: [{ id: "3159A894A5176BE3", item: "gtceu:opv_parallel_hatch", type: "item" }]
 			title: "Parallel Control"
 			x: 17.5d
-			y: 0.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["3FE8A9CB0AA1E45D"]
@@ -680,7 +680,7 @@
 			]
 			title: "Cold and Strip"
 			x: 17.5d
-			y: -1.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["53687208B5A566FC"]
@@ -700,7 +700,7 @@
 			]
 			title: "Heavier Cuts"
 			x: 40.0d
-			y: -6.5d
+			y: 20.5d
 		}
 		{
 			dependencies: ["7C75640ED457CEA4"]
@@ -720,7 +720,7 @@
 			]
 			title: "Windings and Preforms"
 			x: 17.5d
-			y: -7.0d
+			y: 16.0d
 		}
 		{
 			dependencies: ["32FA798856B28769"]
@@ -741,7 +741,7 @@
 			]
 			title: "Films and Crystals"
 			x: 15.0d
-			y: -4.0d
+			y: 19.0d
 		}
 		{
 			dependencies: ["7B1E66BC13548877"]
@@ -760,8 +760,8 @@
 				{ id: "381A814E9F9D9CA2", item: "gtceu:electron_beam_furnace", type: "item" }
 			]
 			title: "Heavy Ions and Beams"
-			x: 20.0d
-			y: -7.0d
+			x: 17.5d
+			y: 23.5d
 		}
 		{
 			dependencies: ["391E9FA027FD4A64"]
@@ -782,8 +782,8 @@
 				{ id: "7554AAF719E97A36", item: "gtceu:photonic_integration_hall", type: "item" }
 			]
 			title: "Cryostat and Bonding"
-			x: 20.0d
-			y: -2.5d
+			x: 17.5d
+			y: 19.0d
 		}
 		{
 			dependencies: ["125A9489212645EA"]
@@ -804,7 +804,7 @@
 			]
 			title: "Traps, Clocks and Gates"
 			x: 22.5d
-			y: -5.5d
+			y: 21.0d
 		}
 		{
 			dependencies: ["7F4169BDA6339C6F"]
@@ -823,7 +823,7 @@
 			]
 			title: "Pasta Gains a Magnetar"
 			x: 15.0d
-			y: -7.0d
+			y: 14.5d
 		}
 		{
 			dependencies: ["1A9EE7510BD6DBFC"]
@@ -835,8 +835,8 @@
 			size: 0.75d
 			tasks: [{ id: "5728C5BD2266AB75", type: "checkmark" }]
 			title: "Machines"
-			x: 5.0d
-			y: -10.0d
+			x: 7.5d
+			y: 11.0d
 		}
 		{
 			dependencies: ["32D17A8DE6EDF4A0"]
@@ -853,8 +853,8 @@
 				{ id: "3DFABE985C0AAC85", item: "gtceu:superconducting_coil", type: "item" }
 			]
 			title: "Tetron Fab"
-			x: 7.5d
-			y: -15.0d
+			x: 10.0d
+			y: 11.0d
 		}
 		{
 			dependencies: ["11AA3FE52CF398DB"]
@@ -864,8 +864,8 @@
 			rewards: [{ id: "348D29532DC6ED1A", type: "xp", xp: 80 }]
 			tasks: [{ id: "1E3CBC039DE0A1A5", item: "grindless:gated_2deg_wafer", type: "item" }]
 			title: "Gated 2DEG Wafer"
-			x: 10.0d
-			y: -15.0d
+			x: 12.5d
+			y: 11.0d
 		}
 		{
 			dependencies: ["32D17A8DE6EDF4A0"]
@@ -881,8 +881,8 @@
 				{ id: "1ADC90F202E9D6DD", item: "gtceu:laminated_glass", type: "item" }
 			]
 			title: "Gamma Optics Works"
-			x: 7.5d
-			y: -11.5d
+			x: 10.0d
+			y: 9.5d
 		}
 		{
 			dependencies: ["1F29C7B921EC10C4"]
@@ -892,8 +892,8 @@
 			rewards: [{ id: "728BCE70ACA5C9AB", type: "xp", xp: 80 }]
 			tasks: [{ id: "120AFCF178DB8090", item: "grindless:hpge_compton_crystal", type: "item" }]
 			title: "Compton Crystal"
-			x: 10.0d
-			y: -11.5d
+			x: 12.5d
+			y: 9.5d
 		}
 		{
 			dependencies: ["32D17A8DE6EDF4A0"]
@@ -909,8 +909,8 @@
 				{ id: "1935AEDC98DAC0BB", item: "grindless:annihilation_shield_casing", type: "item" }
 			]
 			title: "Antihydrogen Foundry"
-			x: 7.5d
-			y: -13.0d
+			x: 12.5d
+			y: 12.5d
 		}
 		{
 			dependencies: ["597A9984A1B74479"]
@@ -920,8 +920,8 @@
 			rewards: [{ id: "39E02379AF6E2285", type: "xp", xp: 80 }]
 			tasks: [{ id: "14F2F27C828EC326", item: "grindless:neg_xhv_casing", type: "item" }]
 			title: "Negative-Potential Casing"
-			x: 10.0d
-			y: -13.5d
+			x: 15.0d
+			y: 13.0d
 		}
 		{
 			dependencies: ["597A9984A1B74479"]
@@ -931,8 +931,8 @@
 			rewards: [{ id: "56F11F445A91A568", type: "xp", xp: 80 }]
 			tasks: [{ id: "5CDD797492C45981", item: "grindless:annihilation_shield_casing", type: "item" }]
 			title: "Annihilation Shield Casing"
-			x: 12.5d
-			y: -13.0d
+			x: 15.0d
+			y: 11.5d
 		}
 		{
 			dependencies: ["54B5FC10DC58127A"]
@@ -942,8 +942,8 @@
 			rewards: [{ id: "590EB2C52D3B7EA5", type: "xp", xp: 80 }]
 			tasks: [{ id: "1D229E5913F37891", item: "grindless:th229_lasing_crystal", type: "item" }]
 			title: "Thorium-229 Lasing Crystal"
-			x: 12.5d
-			y: -14.5d
+			x: 17.5d
+			y: 13.0d
 		}
 		{
 			dependencies: ["32D17A8DE6EDF4A0"]
@@ -960,10 +960,10 @@
 			]
 			title: "Strangelet Vault"
 			x: 10.0d
-			y: -10.0d
+			y: 12.5d
 		}
 		{
-			dependencies: ["32D17A8DE6EDF4A0"]
+			dependencies: ["7B1E66BC13548877"]
 			description: ["The &6Jet Beam Line&r draws protons from the base of the Cygnus X-1 jet and bunches them on superconducting cavities into a beam no Earth injector can reach. An OpV hull, the high power casing and the superconducting RF cryomodule blocks. The proton beam for the spallation station, and through it every antiproton. Power and coolant by pipe; the beam is continuous, so give it a dedicated supply."]
 			icon: "gtceu:jet_beam_line"
 			id: "7B82C6325DA8F876"
@@ -976,8 +976,8 @@
 				{ id: "1510099F459EB377", item: "grindless:srf_cryomodule_block", type: "item" }
 			]
 			title: "Jet Beam Line"
-			x: 12.5d
-			y: -11.0d
+			x: 25.0d
+			y: 21.5d
 		}
 		{
 			dependencies: ["7B82C6325DA8F876"]
@@ -987,8 +987,8 @@
 			rewards: [{ id: "72977405F90DC6CB", type: "xp", xp: 80 }]
 			tasks: [{ id: "74A81A67A1C1C63C", item: "grindless:srf_cryomodule_block", type: "item" }]
 			title: "SRF Cryomodule Block"
-			x: 15.0d
-			y: -11.0d
+			x: 27.5d
+			y: 21.0d
 		}
 		{
 			dependencies: ["7B82C6325DA8F876"]
@@ -1003,8 +1003,8 @@
 				{ id: "3358D7352451EDB9", item: "grindless:annihilation_shield_casing", type: "item" }
 			]
 			title: "Spallation Target Station"
-			x: 15.0d
-			y: -13.5d
+			x: 30.0d
+			y: 21.5d
 		}
 		{
 			dependencies: ["5CAB5711F456C75A"]
@@ -1021,8 +1021,8 @@
 				{ id: "3B33786B56C4A343", item: "grindless:srf_cryomodule_block", type: "item" }
 			]
 			title: "Antiproton Decelerator"
-			x: 17.5d
-			y: -13.5d
+			x: 32.5d
+			y: 21.5d
 		}
 		{
 			dependencies: ["1458D096423EA6D4"]
@@ -1038,8 +1038,8 @@
 				{ id: "31F08524567A988C", item: "gtceu:fusion_glass", type: "item" }
 			]
 			title: "Strangelet Distiller"
-			x: 20.0d
-			y: -13.5d
+			x: 35.0d
+			y: 21.5d
 		}
 		{
 			dependencies: ["5ACC310114FACE71"]
@@ -1056,8 +1056,8 @@
 				{ id: "37EE96166B205CBE", item: "gtceu:fusion_coil", type: "item" }
 			]
 			title: "Kugelblitz Forge"
-			x: 22.5d
-			y: -13.5d
+			x: 37.5d
+			y: 21.5d
 		}
 		{
 			dependencies: ["7F4169BDA6339C6F"]
@@ -1073,7 +1073,7 @@
 			]
 			title: "Magnetic Pair Converter"
 			x: 17.5d
-			y: -12.0d
+			y: 14.5d
 		}
 		{
 			dependencies: ["3E86C36587CF8FBB"]
@@ -1090,7 +1090,7 @@
 			]
 			title: "Field-Frozen Press"
 			x: 20.0d
-			y: -12.0d
+			y: 14.5d
 		}
 		{
 			dependencies: ["3EA9271449E0281E"]
@@ -1101,7 +1101,7 @@
 			tasks: [{ id: "5993055E2BEF03F9", item: "grindless:field_frozen_plate", type: "item" }]
 			title: "Field-Frozen Plate"
 			x: 22.5d
-			y: -12.0d
+			y: 14.5d
 		}
 		{
 			dependencies: ["7F7487A3E9823C9A"]
@@ -1112,7 +1112,7 @@
 			tasks: [{ id: "337CAC646870BAC6", item: "grindless:superfluid_he3_seal", type: "item" }]
 			title: "Superfluid Helium-3 Seal"
 			x: 25.0d
-			y: -12.0d
+			y: 14.5d
 		}
 		{
 			dependencies: ["34EC6937B4EB1880"]
@@ -1128,8 +1128,8 @@
 				{ id: "30F8B08B737C5412", item: "gtceu:steel_gearbox", type: "item" }
 			]
 			title: "Debris Harvester"
-			x: 37.5d
-			y: -13.0d
+			x: 40.0d
+			y: 17.5d
 		}
 		{
 			dependencies: ["397BE2355436062F"]
@@ -1146,8 +1146,8 @@
 				{ id: "38447536DB931F6C", item: "gtceu:heat_vent", type: "item" }
 			]
 			title: "Replication Refinery"
-			x: 40.0d
-			y: -13.0d
+			x: 42.5d
+			y: 17.5d
 		}
 		{
 			dependencies: ["1521EF011A60705F"]
@@ -1164,8 +1164,8 @@
 				{ id: "140F416750EC8493", item: "gtceu:assembly_line_grating", type: "item" }
 			]
 			title: "Collector Node Works"
-			x: 42.5d
-			y: -13.0d
+			x: 45.0d
+			y: 17.5d
 		}
 		{
 			dependencies: ["1521EF011A60705F"]
@@ -1181,8 +1181,8 @@
 				{ id: "1BE1AC0C40898713", item: "gtceu:assembly_line_grating", type: "item" }
 			]
 			title: "Von Neumann Foundry"
-			x: 42.5d
-			y: -14.5d
+			x: 45.0d
+			y: 16.0d
 		}
 	]
 	subtitle: ["Chain strand cables, a beam of antiprotons, a Kugelblitz and a fleet of probes: the way to the heart of the Milky Way."]
