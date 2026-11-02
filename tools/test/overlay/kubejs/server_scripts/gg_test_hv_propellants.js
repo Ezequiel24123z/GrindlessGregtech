@@ -22,7 +22,7 @@
   var PLANT = 'gtnn:exxonmobil_chemical_plant'
   var HV_HATCH = 'gtceu:hv_energy_input_hatch'
   var IN_HATCH = 'gtceu:ulv_input_hatch'
-  var EXTRA_HATCHES = 3
+  var NEED_HATCHES = 3
   var STAGE_SLACK = 1500
 
   // the cycle: each stage's inputs, its product and the casing tier its recipe asks for (the dump's recipe rows)
@@ -154,46 +154,41 @@
     return m ? m[1] : 'north'
   }
 
-  // places one preview shape with every energy input hatch swapped for an HV one; returns {ctrl, parts summary} or an error text
-  function place(shape) {
+  // the outward face of a cell on a side wall (edges, corners, top and bottom left alone), or null
+  function faceOf(cut, c) {
+    var inX = c.x >= 1 && c.x <= cut.w - 2
+    var inY = c.y >= 1 && c.y <= cut.h - 2
+    var inZ = c.z >= 1 && c.z <= cut.d - 2
+    if (inY && inZ && c.x === 0) return 'west'
+    if (inY && inZ && c.x === cut.w - 1) return 'east'
+    if (inY && inX && c.z === 0) return 'north'
+    if (inY && inX && c.z === cut.d - 1) return 'south'
+    return null
+  }
+  function keyOf(c) { return c.x + ',' + c.y + ',' + c.z }
+  function worldPos(c) { return pos(ORIGIN.x + c.x, ORIGIN.y + c.y, ORIGIN.z + c.z) }
+  function putHatch(p, face) {
+    command('setblock ' + p.getX() + ' ' + p.getY() + ' ' + p.getZ() + ' ' + IN_HATCH + '[facing=' + face + '] replace')
+  }
+
+  // places one preview shape with every energy input hatch and the preview's own fluid input hatch swapped for HV ones;
+  // 'extra' maps cell keys to a face: those wall cells become HV input hatches too (a player adds them the same way)
+  function place(shape, extra) {
     var cut = shapeCells(shape)
     if (cut.ctrl === null) return { error: 'the preview has no controller block' }
     if (cut.w > X1 - ORIGIN.x || cut.d > Z1 - ORIGIN.z || cut.h > Y1 - ORIGIN.y) {
       return { error: 'the preview ' + cut.w + ' x ' + cut.h + ' x ' + cut.d + ' does not fit the band' }
     }
+    S.cut = cut
     var ctrlPos = null
     var swapped = 0
-    // the preview carries one input hatch and the cycle needs three fluids at once: the commonest casing block on the
-    // faces (edges and corners left alone) gives up EXTRA_HATCHES cells to input hatches (a player adds them the same way)
-    function faceOf(c) {
-      var inX = c.x >= 1 && c.x <= cut.w - 2
-      var inY = c.y >= 1 && c.y <= cut.h - 2
-      var inZ = c.z >= 1 && c.z <= cut.d - 2
-      if (inY && inZ && c.x === 0) return 'west'
-      if (inY && inZ && c.x === cut.w - 1) return 'east'
-      if (inY && inX && c.z === 0) return 'north'
-      if (inY && inX && c.z === cut.d - 1) return 'south'
-      return null
-    }
-    var counts = {}
+    var hatches = 0
     cut.cells.forEach(function (c) {
-      if (c.id.indexOf('casing') >= 0 && faceOf(c)) counts[c.id] = (counts[c.id] || 0) + 1
-    })
-    var casing = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a] })[0]
-    var extra = {}
-    var picked = 0
-    cut.cells.forEach(function (c) {
-      var face = faceOf(c)
-      if (picked >= EXTRA_HATCHES || c.id !== casing || !face) return
-      extra[c.x + ',' + c.y + ',' + c.z] = face
-      picked++
-    })
-    cut.cells.forEach(function (c) {
-      var p = pos(ORIGIN.x + c.x, ORIGIN.y + c.y, ORIGIN.z + c.z)
+      var p = worldPos(c)
       if (c === cut.ctrl) { ctrlPos = p; return }
-      var face = extra[c.x + ',' + c.y + ',' + c.z]
-      if (face) {
-        command('setblock ' + p.getX() + ' ' + p.getY() + ' ' + p.getZ() + ' ' + IN_HATCH + '[facing=' + face + '] replace')
+      if (extra && extra[keyOf(c)]) {
+        putHatch(p, extra[keyOf(c)])
+        hatches++
         return
       }
       if (c.id.indexOf('energy_input_hatch') >= 0 && c.id !== HV_HATCH) {
@@ -201,12 +196,40 @@
         swapped++
         return
       }
+      if (c.id.indexOf('input_hatch') >= 0 && c.id.indexOf('energy') < 0 && c.id !== IN_HATCH) {
+        putHatch(p, facingOf(c.state))
+        hatches++
+        return
+      }
       S.level.setBlock(p, c.state, 18)
     })
     S.level.setBlock(ctrlPos, cut.ctrl.state, 3)
-    return { ctrlPos: ctrlPos, size: cut.w + 'x' + cut.h + 'x' + cut.d, swapped: swapped, casing: casing, extra: picked }
+    return { ctrlPos: ctrlPos, size: cut.w + 'x' + cut.h + 'x' + cut.d, swapped: swapped, hatches: hatches }
   }
 
+  // which wall casing cells accept an HV input hatch: each is swapped one at a time and the pattern asked whether it still matches
+  function probe(ctrl) {
+    var accepted = {}
+    var tried = 0
+    var seen = {}
+    var base = false
+    try { base = ctrl.checkPatternWithLock() === true } catch (e0) { base = false }
+    S.cut.cells.forEach(function (c) {
+      var face = faceOf(S.cut, c)
+      if (c.id.indexOf('casing') < 0 || face === null) return
+      var p = worldPos(c)
+      putHatch(p, face)
+      tried++
+      var ok = false
+      try { ok = ctrl.checkPatternWithLock() === true } catch (e) { ok = false }
+      if (ok) {
+        accepted[keyOf(c)] = face
+        seen[c.id] = (seen[c.id] || 0) + 1
+      }
+      S.level.setBlock(p, c.state, 18)
+    })
+    return { accepted: accepted, tried: tried, seen: seen, base: base }
+  }
   function tierOf(ctrl) {
     try { return Number(ctrl.getCasingTier()) } catch (e) { return -1 }
   }
@@ -364,7 +387,7 @@
       return
     }
     clearBand()
-    var placed = place(S.shapes[S.shapeIx])
+    var placed = place(S.shapes[S.shapeIx], S.extra)
     if (placed.error) {
       check('place_' + S.shapeIx, false, placed.error)
       return
@@ -450,16 +473,38 @@
       var P = classify(ctrl)
       var tier = tierOf(ctrl)
       S.tiers.push(tier)
-      note('shape_' + S.shapeIx, S.placed.size + ', casing tier ' + tier + ', hv hatches ' + S.placed.swapped + ', ' + S.placed.extra + ' extra input hatches cut into ' + S.placed.casing + ', parts: ' + partList(P))
+      note('shape_' + S.shapeIx + (S.extra ? '_with_hatches' : ''), S.placed.size + ', casing tier ' + tier + ', hv hatches ' + S.placed.swapped + ', hv input hatches ' + S.placed.hatches + ', parts: ' + partList(P))
       if (!S.best || tier > S.best.tier) S.best = { ctrl: ctrl, P: P, tier: tier }
+      if (tier >= 3 && !S.extra) {
+        // the preview forms with one fluid input hatch: find the wall cells that take more of them
+        var found = probe(ctrl)
+        var keys = Object.keys(found.accepted)
+        var cap = 0
+        try { cap = Number(P.hatchIn[0].tank.getTankCapacity(0)) } catch (e) { cap = -1 }
+        note('probe', 'unchanged preview matches ' + found.base + '; ' + keys.length + ' of ' + found.tried + ' wall casing cells accept an HV input hatch (' + JSON.stringify(found.seen) + '); first ' + keys.slice(0, 4).join(' | ') + '; preview input hatches ' + P.hatchIn.length + ', one HV hatch holds ' + cap + ' mB')
+        var need = NEED_HATCHES - 1
+        if (keys.length < need) {
+          check('input_hatches', false, 'the plant accepts only ' + keys.length + ' extra HV input hatches on its walls; the peroxide stage needs ' + NEED_HATCHES + ' fluid inputs and an HV player has no multi-fluid hatch')
+          S.ctrl = ctrl
+          S.P = P
+          finish()
+          return
+        }
+        S.extra = {}
+        keys.slice(0, need).forEach(function (k) { S.extra[k] = found.accepted[k] })
+        S.phase = 'shape'
+        S.shapeIx--
+        return
+      }
       if (tier >= 3) {
         S.ctrl = ctrl
         S.P = P
         check('formed', true, S.placed.size + ', casing tier ' + tier + ', parts: ' + partList(P))
+        check('input_hatches', P.hatchIn.length >= NEED_HATCHES, P.hatchIn.length + ' HV input hatches formed, one holds ' + (function () { try { return Number(P.hatchIn[0].tank.getTankCapacity(0)) } catch (e) { return -1 } })() + ' mB')
+        if (P.hatchIn.length < NEED_HATCHES) { finish(); return }
         S.phase = 'stage'
         return
-      }
-      S.phase = 'shape'
+      }      S.phase = 'shape'
       return
     }
     if (S.phase === 'stage') { stageStartChained(); return }

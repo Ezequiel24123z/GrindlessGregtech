@@ -19,7 +19,7 @@
   ],
   "burnAnywhere": [
     { "fluid": "gtceu:methalox", "why": "methane premixed with its oxygen (ev/foundation.js): the fuel of the Moon and Mars" },
-    { "fluid": "gtceu:rocket_fuel", "why": "GTM's rocket fuel: dimethylhydrazine mixed with oxygen or dinitrogen tetroxide" },
+    { "fluid": "gtceu:rocket_fuel", "why": "GTM's rocket fuel, made here only from Aerozine 50 (hydrazine + dimethylhydrazine) and dinitrogen tetroxide" },
     { "fluid": "gtceu:rp_1_mixed_fuel", "why": "GT--: RP-1 mixed with oxygen" },
     { "fluid": "gtceu:methylhydrazine_nitrate_rocket_fuel", "why": "GT--: methylhydrazine mixed with nitric acid" },
     { "fluid": "minecraft:lava", "why": "lava heats a boiler without burning" }
