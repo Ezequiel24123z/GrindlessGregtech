@@ -11,7 +11,8 @@
     var ENTRIES = [
         ['gtceu.pristine_gas_works', 'Pristine Gas Works'],
         ['block.gtceu.pristine_gas_works', 'Pristine Gas Works'],
-        ['grindless.machine.pristine_gas_works.tooltip.0', '\u00a77Scoops pristine gas out of the Magellanic Stream, up to 64 runs at once, each at full cost. Wears a magnetic scoop module per run (1 in 64).'],
+        ['grindless.machine.pristine_gas_works.tooltip.0', '\u00a77Scoops pristine gas out of the Magellanic Stream.'],
+        ['grindless.machine.pristine_gas_works.tooltip.1', 'Runs up to 64 recipes at once, each at full cost.'],
         ['gtceu.primordial_fusion_torus', 'Primordial Fusion Torus'],
         ['block.gtceu.primordial_fusion_torus', 'Primordial Fusion Torus'],
         ['grindless.machine.primordial_fusion_torus.tooltip.0', '\u00a77A generator: deuterium and helium-3 fuse into a MAX 16 A dynamo hatch.'],
