@@ -4,9 +4,9 @@ GregTech progression pack for Minecraft 1.20.1 (Forge) on GregTech Modern 7.5.3.
 
 The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon, Mars, the inner planets, Jupiter's and Saturn's moons, the edge of the Solar System, nearby stars, neutron stars and black holes, the galactic bulge, in MAX Sagittarius A* at the Galactic Centre and, in MAX+, other galaxies and the Hyperstargate, which ends the pack.
 
-**v1.0.0 needs a new world.** There is no save compatibility: worlds from v0.17.0 or older do not work.
+**v1.0.0 needed a new world** (worlds from v0.17.0 or older do not work); v1.0.1 and v1.1.0 keep a v1.0.0 world.
 
-**At a glance:** Minecraft 1.20.1 · Forge 47.4.28 · GregTech Modern 7.5.3 · 224 mods · 16 eras playable (Steam to MAX+) · English only.
+**At a glance:** Minecraft 1.20.1 · Forge 47.4.28 · GregTech Modern 7.5.3 · 223 mods · 16 eras playable (Steam to MAX+) · English only.
 
 **Contents:** [Design rules](#design-rules) · [Current status](#current-status) · [Tier by tier](#tier-by-tier) · [Our multiblocks](#our-multiblocks) · [Multiblocks from other mods](#multiblocks-from-other-mods) · [Ideas from other modpacks](#ideas-from-other-modpacks) · [Other mods](#other-mods) · [Quests](#quests) · [Known issues](#known-issues) · [How to play](#how-to-play-prism-launcher) · [For developers](#for-developers)
 
@@ -23,14 +23,14 @@ The journey starts on Earth, leaves it by rocket in HV and keeps going: the Moon
 
 ## Current status
 
-The current version is **v1.0.0**, the result of Project Reforge. It spans the Steam Age through MAX+, from Earth to the Hyperstargate. The last tagged release before it is v0.17.0.
+The current version is **v1.1.0**. It spans the Steam Age through MAX+, from Earth to the Hyperstargate. v1.0.0 was the result of Project Reforge, v1.0.1 gave 80 more machines their own sounds, and v1.1.0 answers the first round of play feedback: one quest chapter per era, places only where a recipe really uses them, any circuit of the tier, GregTech's own prospector and creative flight with the electric suits.
 
 | Progress | Status |
 |---|---|
 | Steam Age–MAX | Reworked in `v1.0.0`: costs that climb steeply per era from MV, an audited set of process lines, a bigger MAX, a rebuilt quest book, textures and sounds. |
 | MAX+ | New in `v1.0.0`: three stages out of the Galaxy and the Local Group, four new places, 17 multiblocks, 58 lines, and the Hyperstargate. The ending moved here from MAX. |
 
-See the [v1.0.0 release notes](docs/releases/v1.0.0.md) for the full list and the [v0.17.0 notes](docs/releases/v0.17.0.md) for the previous release. The [journey guide](docs/journey.md) describes the progression.
+See the [v1.1.0 release notes](docs/releases/v1.1.0.md) for this version, the [v1.0.0 notes](docs/releases/v1.0.0.md) for the full list of Project Reforge and the [v0.17.0 notes](docs/releases/v0.17.0.md) for the release before it. The [journey guide](docs/journey.md) describes the progression.
 
 ## Tier by tier
 
@@ -112,7 +112,7 @@ Many of our machines start from an idea seen in another pack and are rebuilt her
 
 ## Other mods
 
-The pack has 224 mods ([`pack/mods/`](pack/mods/)). Besides the GregTech addons above:
+The pack has 223 mods ([`pack/mods/`](pack/mods/)). Besides the GregTech addons above:
 
 - **Storage and logistics:** Applied Energistics 2 with ExtendedAE, MEGA Cells, AppFlux and wireless terminals; Sophisticated Storage and Backpacks, Functional Storage, Storage Drawers, Laser IO, Pipez and Modular Routers. AE2 is also the interplanetary backbone: quantum bridges and EU over P2P tunnels.
 - **Travel and teams:** Waystones, FTB Chunks, Teams and Essentials, Xaero's maps, and Ender Chests and Tanks that work across planets.
@@ -121,7 +121,7 @@ The pack has 224 mods ([`pack/mods/`](pack/mods/)). Besides the GregTech addons 
 
 ## Quests
 
-FTB Quests guides the whole journey: Welcome and Workshop chapters, one to nine chapters per era (Steam Age to MAX+, grouped by era, each with six roles from what's new to a capstone), a Processing Lines flowchart for each era, and chapters for Multiblocks, Power, Storage, Applied Energistics and Travel and Teams. Quest design is described in [`docs/quests.md`](docs/quests.md).
+FTB Quests guides the whole journey: Welcome and Workshop chapters, one chapter per era (Steam Age to MAX+, in one Progression group; every quest of an era connects back to its single start, in sections with a heading quest each), a Processing Lines flowchart for each era, and chapters for Multiblocks, Power, Storage, Applied Energistics and Travel and Teams. Quest design is described in [`docs/quests.md`](docs/quests.md).
 
 ## Known issues
 

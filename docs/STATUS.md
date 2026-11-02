@@ -2,7 +2,7 @@
 
 Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Overwrite it at each accepted batch; do not append history.
 
-- **Playable version:** v1.0.1 (`docs/releases/v1.0.1.md`: 80 more machine loops on v1.0.0 "Reforge", `docs/releases/v1.0.0.md`; tag `v1.0.1` is `main`, `releases` and `playable`; GitHub releases with the pinned Prism zips). v1.0.0 needed a new world; v1.0.1 keeps it. The player channel is `releases` (release `releases-channel`, `Gregtech-Grindless-releases.zip`); `playable` is mirrored to it during the transition.
+- **Playable version:** v1.1.0 (`docs/releases/v1.1.0.md`: the owner's first feedback round on v1.0.1; tag `v1.1.0` is `main`, `releases` and `playable`; GitHub releases with the pinned Prism zips). v1.0.0 needed a new world; v1.0.1 and v1.1.0 keep it (quest ids unchanged; Productive Bees items vanish). The player channel is `releases` (release `releases-channel`, `Gregtech-Grindless-releases.zip`); `playable` is mirrored to it during the transition.
 - **Integration branch:** `ezequiel24123z-project-reforge`. Every package branches from it and is merged back with `--no-ff` by the integrator; `main` follows the released tags.
 - **Current milestone:** Project Reforge, done: released as v1.0.0 on 2026-11-01 (DECISIONS.md:695), v0.17.0 to v1.0.0 in ten phases: 0 rules and diagnosis, 1 cost tooling, 2 cost rebalance, 3 era and line audit, 4 research, 5 quests, 6 assets and sounds, 7 MAX+ and the Hyperstargate, 8 cleanup, 9 release. No save compatibility (DECISIONS.md:701): v1.0.0 needs a new world.
 - **Done:**
@@ -15,6 +15,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - Phase 5:
     - the design (`docs/reforge/05_quest_design.md`, RF-5A);
     - one shared chapter writer (`tools/quests/gen-chapters.mjs`, RF-5L1) and Steam to IV imported to data (RF-5L2);
+    - Since v1.1.0 (QB-0 to QB-5) every era is one chapter with sections; the line below is the Phase 5 shape it replaced.
     - Welcome, the side tabs and every era from Steam to MAX in the Phase 5 shape: EV, IV and LuV in three chapters each (age, circuits, machines), ZPM to OpV in four (plus integration), MAX in five (plus `max_horizon`, the capstone), MAX+ in eight (three stages, circuits, machines, integration, creative items and the capstone *Building the Gate*, into which the tree folds; the arrival in `grindless:horizon_city` is the book's last quest); chapter groups per era (Early Ages for Steam to HV, then one per era). Left: the optional Power bands after LuV (RF-5P).
   - Phase 6:
     - the audit;
@@ -34,27 +35,25 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - English only (EN-1): no `es_es` anywhere under `pack/kubejs`; T0's english-only guard keeps it so.
   - Phase 9 so far: the release candidate passes T0 to T3 (batch 16); docs/releases/v1.0.0.md and the README are written.
   - Phase 8: the triage (`docs/reforge/08_cleanup.md`, P8-T) and P8-A to P8-H2 fixed the census and audit false positives, the old-save leftovers, GT--'s component assembly line, the orphan textures and their generators, the trivial steps and the culture seed's gain, the wrong-era quest and byproduct, the era docs' old rules, the MAX+ leftovers (machine info pages, a truthful process baseline) and the gate parts' quality. On the final dump nothing is open (`08_cleanup.md` section 11).
-- **Last accepted integration batch:** Reforge batches 13 to 16 (issues #152 and #154 to #175). Batch 16, the release candidate (`f1066a22`): P9-T3a and P9-T3b (T3), P9-F1 (the parallel hatch models, a gallery of all 452 machines, the city ring at 2048 px), P9-F2a (textures GTM lacks: the atomic casing, the 1,024 A hatch) and P9-F2b (the eight EMI gaps); final dump 6d3a9a6d: reachability PASS for 16 tiers, capacity 0 known violations, 3,807 chart arrows and 0 failing, the census, assets audit and process audit with nothing open; T2 `gg_test_quests`, `_hidden`, `_maxplus_grid` and `_maxplus_hyperstargate` PASS; T3, the client suite with the mandatory EMI audit, PASS with 0 new gaps (run vm-20261101-232005-f1066a22). Batch 15: P8-H1 (MAX+ audit leftovers, 20 machine info pages, the process baseline), P8-H2 (the assets audit's built strings, the gate parts on the tier-15 ladder, `pl_zpm`'s ring ice route), P9-N (the v1.0.0 notes and README); the integrator set the pack version to 1.0.0, regenerated the EMI expect list and retook the capacity snapshot. Final dump 123bae22: reachability PASS for 16 tiers, capacity 0 known violations, 3,806 chart arrows and 0 failing, the quest lint 0 errors, and the census, assets audit and process audit with nothing open.
+- **Last accepted integration batch:** the feedback batch of 2026-11-02 (issues #177 to #195), released as v1.1.0.
   - Packages:
-    - XP-G1: the Hyperstargate (machine 17), its dial at 2^43 for 1,200 t, the charge check, the spent charge's recharge and the open ring;
-    - XP-Z1b: the crossing (one player per dial), the arrival plaza, the credits, the title and the readable epilogue;
-    - XP-C1: the MAX+ validator and tier 15 in our tools, the two shared circuits moved, `kerr_strand` and `condensate_boil_off_gas` removed;
-    - XP-PL: the `pl_maxplus` chart (P1 to K4 and the gate tree);
-    - XP-C2a, XP-C2b, XP-C2c: the eight MAX+ chapters;
-    - P8-T: the Phase 8 triage; P8-A: the census, assets audit and process audit false positives; P8-B: old-save leftovers; P8-C: GT--'s component assembly line; P8-D: orphan textures and the foundation generators; P8-E: the HV vein samples out of the MV chapter and the kiln's alkali sulfate in its era; P8-F: 26 trivial steps made real, the culture seed's gain paid for, the unused OpV chain forms removed; P8-G: the era docs' old rules.
+    - QB-0 (the tools: one chapter per era, sections, the connectivity lint), QB-1 to QB-5: every era is one chapter, all quests connected;
+    - SITE-A to SITE-E: dimension conditions only where the place is used (AGENTS.md principle 10), circuits by tier tag (principle 11);
+    - PR-1: GTM's own prospector and map GUI; EMI-1: dimension markers, wrapped notes, the needs-air line; WL-1: the wireless network runs at its strongest cell;
+    - BEE-1: Productive Bees removed; NANO-1 and NANO-1b: creative flight for the NanoMuscle and QuarkTech chestplates (proven in game);
+    - VIZ-1: the cost tree and the Hyperstargate page; AUD-1: the Scanner page that shows a Nanoprocessor is GTM's display (no bad recipe).
   - Integrator fixes:
-    - the gate wears XP-V2's face; EMI info pages for four gate blocks; the gate's tooltip format;
-    - `pl_maxplus` gains the gate's controller, dial and recharge rows and true ends for the tree; its focus is a quest;
-    - the MAX+ chapter group, the arrival's no-reward exception (lint-config `noRewardQuests`), the capstone renamed *Building the Gate*, and a MAX+ band on the multiblocks map;
-    - `maxplus` is the implemented era (`hidden.js`); `maxplus.md` says P4 ends at insulated Kerr wire in the MAX+ casing;
-    - fixtures: the gate's top-up on an unformed gate, the hidden fixture's terbium and era checks, the quest fixture's wait;
-    - 42 DECISIONS separators restored.
+    - the Horizon Shard is a catalyst in two creative-core rows (the gate was unbuildable); the warp gate's held mainframes take tier tags;
+    - tier site checks follow the opened rows (ev, uiv, uxv, max); the process audit counts generator recipes as power steps; three opened 1:1 steps got real second inputs and the crucible liner's lathe gives swarf;
+    - lint role `era` (120 words) and `allowLayout`; the Power tab and the fixtures follow the merged chapters; the LuV covers and lunar seed fixtures follow WL-1 and SITE-A; the titanium and tungsten ore forms are hidden;
+    - EMI's info boxes fit on the client's recipe sync (`RecipesUpdatedEvent`), before EMI builds its pages, instead of EMI-1's second EMI reload, which failed the client EMI audit on a null level; the AE2 fixture waits for the Earth network to boot.
   - T0: GitHub Actions green on the batch tip.
-  - T1 on the VM: `gg_test_maxplus_hyperstargate` (formed 151 + 9, a charge one EU short refused, 2^43 EU/t for 1,200 t, the 39 x 39 x 1 open box, the spent charge, a broken ring refused) and `gg_test_hidden` PASS; XP-Z1b's client fixture `gg_test_maxplus_ending` passes every check (that run's verdict failed only on the client suite's known EMI audit gaps).
-  - T2 on the VM, dumps 6775f27e and ebd3ff19: reachability PASS for all 16 tiers (Steam to MAX+); capacity 0 known violations; `gg_test_quests` PASS (every chapter's counts and group, MAX+ included); the hide table regenerated.
+  - T2 on the VM (dumps e5e05227 and 613fbaa7): reachability PASS for all 16 tiers; the process audit has no new finding; the hide table hides what it must; capacity 0 known violations; charts 3,807 arrows, 0 failing; book lint 0/0. `gg_test_quests`, `gg_test_hidden`, `gg_test_maxplus_hyperstargate`, `gg_test_moon` and `gg_test_sealed_dome` PASS; `gg_test_wireless_energy` passes its new strongest-cell phase; `gg_test_luv_a4` LUV_COVERS PASS.
+  - T3 on the VM's client: the client suite with the EMI audit PASS (vm-20261102-064729-613fbaa7-2947674); quest book 26/26 with 19 screenshots; suit flight 20/20; starter equipment 60/60.
+  - Stale fixture checks that already failed on v1.0.1 (measured on 9e6e2622): `wireless_energy|recipes`, `luv_a4|mw_recipes`, `regolith_cell|recipes` and `|crafting`, `venus|controllers` and `|engine_recipe`.
 - **In flight:** none.
 
-- **Next:** none queued. Project Reforge is released as v1.0.0. Post-release candidates, each a package only on the owner's word: the Power bands after LuV (RF-5P), loops for the line signatures below UEV that still use GTM sounds, an in-game listen of the flagged loops, and the stale `gtceu` energy-hatch model names in old test overlays (`gg_test_*_s0_parts.js`, test-only).
+- **Next:** the mega audit the owner asked for after this batch (best models, unsparing: progression, recipes and balance, multiblocks, quests, power, EMI and texts, code and performance, tools and tests, docs, licences), then its fixes. Waiting on the owner: the Hyperstargate's balance against the 10x GTNH target (the cost page: plates 6.33M against 15.7k, containment 59k against 6k, Kerr condensate 174G mB against 20G).
 - **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
@@ -79,11 +78,12 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **EMI:** 8 entries in `tools/analysis/emi_runtime_known.json`:
   - 8 previews, likely an audit false positive that the fixed fixture removes on the next 8 GB EMI run.
   - The client suite's EMI audit also reported acquisition and machine-info gaps on XP-Z1b's run; P8-H1 added the machine info pages, and P9-T3b reruns the audit.
+  - EMI-1's wrapped notes: 8 era texts longer than 190 characters still end in "..." (baselined in its T0 check); the 854 x 480 test window clamps the tallest pages (Warp Gate, Black Hole Bomb), which fit at normal window sizes.
 - **The `maxplus` stage** is a world persistentData flag (`grindless_stage_maxplus`, MX-E1): the pack has no stage mod, and MAX+ packages read the flag.
 - **Assets:**
   - MAX+ has its own art (XP-V1, XP-V2), and the Hyperstargate wears its face;
   - 185 of our 310 multiblocks play their own loop (SND-1, #176); the rest run GTM's own recipe types or are not the signature of their line; loop seam and high-end flags need an in-game listen.
-- **Quest generators:** run the Processing Lines writer (`processing-lines/run.ps1 -Write`) before `multiblocks/gen.mjs --write`, because the first rewrites `allowIsolated`. The era chapter groups are hand entries in `chapter_groups.snbt`.
+- **Quest generators:** run the Processing Lines writer (`processing-lines/run.ps1 -Write`) before `multiblocks/gen.mjs --write`, because the first rewrites `allowIsolated`. Every era chapter (`<era>_age`) sits in the one Progression group that `gen-chapters.mjs` writes into `chapter_groups.snbt` (QB-0). The LuV chapter's counts are recorded for the shipped stations mode (tether) only: after flipping `tables/stations.json`, regenerate and record the stations-off counts in `gg_test_quests.js`.
 - **Test environment:**
   - GCYR's configured low gravity is not applied in game (menu only); the design no longer claims it.
   - A same-save reopen in the headless test client deadlocks on our fixture's synchronous Rhino callback (not a persistence defect).
