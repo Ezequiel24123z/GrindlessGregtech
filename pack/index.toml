@@ -34,23 +34,7 @@ hash = "fc9c88ab9c521b954f5dc51578c8dcaaca9ef4d3513437c4550913e87d529c42"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/max_age.snbt"
-hash = "38c74da4a7e1190799ab11903289939dc7bfade99f2b7c00a1991dc73c031c15"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/max_circuits.snbt"
-hash = "1f30106d07f437f7ce6b76dd0cf0bfb99bf331bb006e153dbc3b80f55fd43f07"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/max_horizon.snbt"
-hash = "e8a175642ec71f7a02aa87549a20526d1ae6cad35be6f0a9abd5341c9721210c"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/max_integration.snbt"
-hash = "012c386a9334a536c7eec87578f12d4e41477974b38ceec9ad6c220e32bee0af"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/max_machines.snbt"
-hash = "dbb4d0062127225839700ac90f0bec18a3c0da58e1619bef4dbc4b8874dc147f"
+hash = "8e237758da21ff9f8a6610ab430b83155800ae08f6b3e19748227c22615c16f8"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/maxplus_age.snbt"
@@ -66,19 +50,7 @@ hash = "c4e3a3466d51ce27c1c38c72ac9313c5d7838c82723e7cc9da1e847451c3b92c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/opv_age.snbt"
-hash = "f6ec94a49be36ac2d6a249785346b30c2b1f350a49fa0600a38e4cf8a5107c1a"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/opv_circuits.snbt"
-hash = "6a8623dd69a2f6bc5fd685710b37fb3a767dc3891e8e8611fae4291a12cd06bc"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/opv_integration.snbt"
-hash = "3355dd5923078ebbc277f7827a9a1642a5ca1e0fff49dbaa3f6a681a79db82fe"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/opv_machines.snbt"
-hash = "b2a82caec17f60bdb1413b0aae9bdfbb9c2ccf76bb17ef9b8769dd274e2d98cb"
+hash = "41b36080a1ca5919ea4ec32d5063a810a84667aa496f9b35a8641de7a6959529"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/pl_ev.snbt"
@@ -146,7 +118,7 @@ hash = "d09761fbd8f2d6d26c0b72d1288c69af63a762f3e4869caf313715f3d096b686"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/power.snbt"
-hash = "a96c71823cb07d73b461b5f267741f28e97f09ecc599b9c1d7b80ed3481bf99d"
+hash = "4d43965fa423af5186a7ed9b9764ccd75425d7a663041a0bd9b6fd311c701de2"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/steam_age.snbt"
@@ -178,19 +150,7 @@ hash = "19c9e0ed96a4dd58043f4a6f04324c56311beff02c63f8186ebca32f43913e3c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uxv_age.snbt"
-hash = "3a266857718979ed49471f55352792c694e96cd477443757a47422fa3f3f19ed"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uxv_circuits.snbt"
-hash = "d8cef2aa942e29bacac37dd38f0fee754944b07a8830092822b8ebd544c1d75b"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uxv_integration.snbt"
-hash = "2e23f3fe732112b744d008d8290755cbcd9dd8635c4fc50b09229dcb34b8ee8a"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uxv_machines.snbt"
-hash = "6d8af09a17beea2b830440c0e65f0377e1b1b4a2011f8744c40ad41bdec199ab"
+hash = "28577f7d3e1fbf06232827858bc6c65c32a5dcded49fb50dac21c36d0a264e7d"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/welcome.snbt"
@@ -17618,7 +17578,7 @@ hash = "3e41170e46ef30646c7a48742e07dc8cd4e5f7a31b621ebaf988b15306123c92"
 
 [[files]]
 file = "kubejs/data/grindless/tables/bulge_collector.json"
-hash = "31067e99a920ac153c07ae8354494c1cf79038d24551ce39e52a245b46305125"
+hash = "893b301aa5c79ddd7007c620d3fb3b1928e1b81cad9069627a83ae1fa5533ffe"
 
 [[files]]
 file = "kubejs/data/grindless/tables/cas_a.json"
@@ -17766,7 +17726,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "c6c2747a674c31f5170757967ef86304d9ad23cc0c94689209e415dd6e701a5c"
+hash = "154599a21e0fee7c2d45be5e85b9475200770a23ec0a393c829e9bce17474ece"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_city.json"
@@ -17942,7 +17902,7 @@ hash = "f3a7ed145b099b89bb4a160e72c45e7ff36672bedc861b0e3fdc9ea6453a1985"
 
 [[files]]
 file = "kubejs/data/grindless/tables/replication.json"
-hash = "d8f1bfb1bffe4c7ff9d1cf060d080f866731f95402fec58ab3fdf8f6d51a5690"
+hash = "c9b4b3c29731ace7ae8a098f15bade8c9b371105022db23b3bf8f603d9a59438"
 
 [[files]]
 file = "kubejs/data/grindless/tables/rx_j1856.json"
@@ -18070,7 +18030,7 @@ hash = "c353edb8a8e64de570ad9853a51edc1650bb03007501a25319d6ff53c9f3d836"
 
 [[files]]
 file = "kubejs/data/grindless/tables/vela_pasta.json"
-hash = "ccf62f063af66aa2a7bbdcc6ce67750e3045c62f2b363e50ddf56e2b75e62973"
+hash = "37809b860352a8c0ad12650972dea9ee3733e46a9a6a6f1de5273328010439b4"
 
 [[files]]
 file = "kubejs/data/grindless/tables/venus.json"
