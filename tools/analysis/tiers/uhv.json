@@ -2914,7 +2914,6 @@
       "id": "uhv-mercury-outputs",
       "era": "uhv-mercury",
       "label": "Mercury's ground and orbit",
-      "optional": true,
       "items": [
         "m:gtceu:regolith_excavator",
         "m:gtceu:solar_vapour_furnace",
@@ -2932,7 +2931,6 @@
       "id": "uhv-proxima-outputs",
       "era": "uhv-proxima",
       "label": "Proxima b, its orbit, and what comes home from it",
-      "optional": true,
       "items": [
         "m:gtceu:xenoflora_rover_bay",
         "m:gtceu:xenobotany_greenhouse",
@@ -2962,7 +2960,6 @@
       "items": [
         "gtceu:uev_machine_casing"
       ],
-      "optional": true,
       "note": "UEV starts with the gate's output; UHV may not need it."
     },
     {

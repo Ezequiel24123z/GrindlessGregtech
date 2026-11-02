@@ -79,10 +79,6 @@
     [
       "uev-alpha",
       "uev-barnard"
-    ],
-    [
-      "uiv-rxj1856",
-      "uiv-j0437"
     ]
   ],
   "packages": {
@@ -1804,7 +1800,6 @@
       "id": "uiv-rxj1856-outputs",
       "era": "uiv-rxj1856",
       "label": "RX J1856.5-3754 and what comes home from it",
-      "optional": true,
       "items": [
         "m:gtceu:crust_lift",
         "m:gtceu:neutron_drip_separator",
@@ -1820,7 +1815,6 @@
       "id": "uiv-j0437-outputs",
       "era": "uiv-j0437",
       "label": "PSR J0437-4715 and what comes home from it",
-      "optional": true,
       "items": [
         "m:gtceu:pulsar_wind_trap",
         "m:gtceu:positronium_condensate_lab",
@@ -1835,7 +1829,6 @@
       "id": "uiv-cygnus-outputs",
       "era": "uiv-cygnus",
       "label": "Cygnus X-1 and what comes home from it",
-      "optional": true,
       "items": [
         "m:gtceu:ergosphere_probe_bay",
         "m:gtceu:penrose_engine",
@@ -1849,7 +1842,6 @@
       "id": "output-uiv",
       "era": "uxv",
       "label": "The gate's own output",
-      "optional": true,
       "items": [
         "gtceu:uxv_machine_casing"
       ]
