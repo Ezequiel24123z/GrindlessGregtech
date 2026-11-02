@@ -1,5 +1,7 @@
 # HV era
 
+Long process lines (principle 7): `docs/eras/lines-steam-hv.md`.
+
 Here the pack becomes a real GregTech pack: crude oil is refined, cracked and ends up as plastics; titanium comes from a chlorine and magnesium chain; and EV circuits need a cleanroom. Multiblocks are projects: they are planned before they are placed. Leaving HV hurts because of the production line, not because of hand mining. In the end, the first rocket goes to the Moon, the only place with titanium: you land once, to bring two ores from each vein, and a lunar drill does the rest. One of our multiblocks, the refinery, does in one pass what GTM splits across four distillery passes, four desulfurization reactors and a cracker. HV brings together four of our multiblocks and eight GTM multiblocks that have to be coordinated.
 
 You start HV with what MV leaves you: HV hull (`gtceu:hv_machine_hull`) and HV energy hatch, 8 advanced integrated circuits (`gtceu:advanced_integrated_circuit`), an MV power plant at 2,048 EU/t with a transformer to HV, the ore plant, a running Kanthal EBF and an AE2 network with a 64k CPU.
