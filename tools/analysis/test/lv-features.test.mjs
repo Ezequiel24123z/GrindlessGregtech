@@ -513,7 +513,7 @@ test('energy: with 2 or more hatches of the same tier a multiblock counts one st
   const dump = () => mkDump({ recipes, items: ['t:furnace', 't:dust'] });
   const two = run(dump(), base({ voltage: 32, hatches: 2 }));
   assert.deepEqual(verdicts(two.out.gate), { lv: 'PASS', mv: 'PASS', hv: 'FAIL' });
-  assert.deepEqual(two.model.stats.rolledMachines, [{ machine: 't:furnace', hatches: 2, voltage: 32, maxEUt: 128 }]);
+  assert.deepEqual(two.model.stats.rolledMachines, [{ machine: 't:furnace', hatches: 2, voltage: 32, amperage: 1, maxEUt: 128 }]);
   assert.match(two.text, /2 hatch\(es\) of 32 V -> 128 V/);
   const one = run(dump(), base({ voltage: 32, hatches: 1 }));
   assert.deepEqual(verdicts(one.out.gate), { lv: 'PASS', mv: 'FAIL', hv: 'FAIL' });
