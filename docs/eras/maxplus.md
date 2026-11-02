@@ -287,6 +287,7 @@ Generous, never free (rule 8). MAX+ needs a sustained supply in the 2^37-2^39 EU
 |---|---|---|---|---|
 | Nickel-56 burner c1, c2 | 30 Doradus | `shielded_ni56_cask` (P7), then `co56_cask` | 2^34 then 2^33 EU/t x 4,800 t | ~1.8x *(tune)* |
 | Primordial fusion torus | Magellanic Stream | primordial D + pristine He-3 (P9, P10) | 2^34 EU/t x 2,400 t | ~2.0x *(tune)* |
+| Polarized fusion stellarator (machine 18, below) | anywhere | spin-polarized HD pellets + polarized He-3 (P26, on P9 and P10) | 2^34 EU/t x 3,600 t per run, up to 64 runs at once (2^40) | ~2.37x *(tune)* |
 | MAX's Sgr A\* generators (winch, feeder, BZ, Penrose, shell vent) | Sgr A\* | as max.md *Power* | 2^29-2^30 each, in parallel | as MAX |
 
 **Output.** A generator multiblock emits above 2^30, up to its dynamo hatch's V x A (S0-4): the burner and the torus at 2^34 each take one MAX 16 A dynamo hatch (V x A = 2^35), and the wireless one (`gtceu:max_wireless_dynamo_hatch_16a`, case 14) puts that straight into the network.
@@ -295,7 +296,54 @@ Generous, never free (rule 8). MAX+ needs a sustained supply in the 2^37-2^39 EU
 
 **One dial's charge.** 10,555,311,626,649,600 EU in the store takes 10,555,311,626,649,600 x 20/19 ≈ 1.111e16 EU generated: about 90 nickel-56 casks through the burner (c1 then c2, 1.237e14 EU each) or 270 torus runs (4.123e13 EU each; 270,000 mB each of primordial deuterium and pristine helium-3) *(tune with the balance)*. Filling an empty bank takes about 1.185e16 EU generated.
 
-**Recharge time.** Power, not cost, sets how often the gate can dial. The dial spends in 1,200 ticks what a 2^39 EU/t plant (32 primordial fusion tori) makes in 19,200 ticks; with the loss, that plant refills the bank for one dial in about 20,211 ticks (16.8 minutes), a 2^40 plant in about 10,105 ticks (8.4 minutes), one burner alone (1.5 x 2^33 EU/t on average) in about 12 hours. The dial's own 1,200 ticks never stretch, and no recipe time is inflated. MAX's Sgr A\* generators add to the same store. `gtceu:creative_energy` is never a source: it is an ingredient and cannot be placed (*Creative items*).
+**Recharge time.** Power, not cost, sets how often the gate can dial. The dial spends in 1,200 ticks what a 2^39 EU/t plant (32 primordial fusion tori) makes in 19,200 ticks; with the loss, that plant refills the bank for one dial in about 20,211 ticks (16.8 minutes), a 2^40 plant in about 10,105 ticks (8.4 minutes), one burner alone (1.5 x 2^33 EU/t on average) in about 12 hours. The dial's own 1,200 ticks never stretch, and no recipe time is inflated. MAX's Sgr A\* generators add to the same store. `gtceu:creative_energy` is never a source: it is an ingredient and cannot be placed (*Creative items*). One polarized fusion stellarator at 64 runs is such a 2^40 plant.
+
+### Polarized fusion stellarator (machine 18, B13-PWRD)
+
+**Why.** The torus and the burner make 2^34 EU/t each and run one recipe at a time (`startup_scripts/grindless/maxplus/stream.js:122`, `tarantula.js:163`), while the condensate assembler, the blender, the crystal furnace and the array draw 2^39. One such consumer needs 32 tori gross, 34 through the wireless loss (audit M6-06, #200), and 72 tori with their 72 gas works once the works' own 2^33 is paid. The owner asked for a denser plant (#230, 2026-11-02). The stellarator gets its density from parallel runs limited by its dynamo hatches and its fuel, never from shorter runs, and burns a better fuel than the torus: the same deuterium and helium-3, spin-polarized.
+
+**Physics.** Fusing nuclei whose spins are aligned raises the D-He3 (and D-T) cross-section by about half (Kulsrud, Furth, Valeo and Goldhaber 1982, PRL 49:1248), and the polarization survives long enough in a hot plasma to matter. Fuelling with polarized pellets and checking that the polarization survives in a real machine is current research: Baylor et al. 2023 (Nucl. Fusion 63:076009) weigh pellets of frozen-spin HD (40% vector polarization) and inject optically pumped helium-3 (65%), on the D-He3 reaction itself. Polarized helium-3 is made by metastability-exchange optical pumping with 1,083 nm light (Colegrove, Schearer and Walters 1963, Phys. Rev. 132:2561); polarized deuterium as frozen-spin HD ice, polarized by brute force at millikelvin and high field. The machine is a stellarator because it confines without a plasma current and runs steady (Wendelstein 7-X). *Named fiction*: that the whole polarization survives into the burn, and that the 1.5x cross-section becomes 1.5x energy per fuel (in game, a higher burn-up).
+
+**Line P26, spin-polarized fusion fuel** (5 steps, 2 crossings; the Lines table gets its row when this is merged):
+
+| Step | Machine | In → out | EU/t x t |
+|---|---|---|---|
+| d1 isotope exchange | GTM chemical reactor | 1,000 mB `primordial_deuterium` (P9) + 1,000 mB hydrogen, kept `gtceu:platinum_dust` → 2,000 mB `hd_equilibrium_mix` (25% H2, 50% HD, 25% D2, the statistical equilibrium) | VA[ZPM] x 400 |
+| d2 cryogenic distillation | GTM distillation tower | 2,000 mB `hd_equilibrium_mix` → 1,000 mB `pure_hd` + 500 mB hydrogen + 500 mB `primordial_deuterium` (both back to d1) | VA[ZPM] x 400 |
+| d3 brute-force polarization | millikelvin cryostat works (UIV, `gtceu:nuclear_demagnetisation`; crossing) | 2,000 mB `pure_hd` → 1 `frozen_spin_hd` | VA[MAX] x 2,400 |
+| d4 pellet extrusion | GTM extruder, kept `gtceu:rod_extruder_mold` (ORNL's screw-extruder pellet injectors) | 1 `frozen_spin_hd` → 4 `polarized_hd_pellet` | VA[ZPM] x 200 |
+| h1 optical pumping | photonic foundry (UHV, `gtceu:photonic_foundry`; crossing) | 1,000 mB `pristine_helium_3` (P10) → 1,000 mB `polarized_helium_3`; wears `grindless:max_emitter` 1 in 64 (the 1,083 nm pump) | VA[OpV] x 1,200 |
+
+Net, d1 and d2 turn 500 mB of deuterium and 500 mB of hydrogen into 1,000 mB of HD, so one run's 4 pellets (2,000 mB of HD) hold exactly the deuterium of a torus run (1,000 mB). Circuits: the first free one of each older type when its inputs are not already unique. No row needs a site (rule 10): the fuel ships, and fusion needs no air.
+
+**The plant's row** (`gtceu:polarized_fusion`, circuit 1, no site): 4 `polarized_hd_pellet` + 1,000 mB `polarized_helium_3` → 1,000 mB `helium_4_ash` + 2,000 mB hydrogen, 2^34 EU/t out for 3,600 t; wears `neutral_beam_injector` (P22, heating) 1 in 64, `direct_converter_stack` (P11) 1 in 128 and `sco2_turbine_module` (P17, the thermal cycle for the bremsstrahlung the converter cannot take) 1 in 128. Byproducts: the ash goes to the cryogenic plant (as the torus's), the hydrogen to d1 and GTM's uses; nothing is voided.
+
+**Parallels and output.** `lib/generators.js` (`configure`, `:154`) with `maxParallels: 64`: each start runs n = min(64, dynamo capacity / 2^34, the fuel present) copies, scaling fuel, wear, products and EU together (`:94-120`), so EU per fuel is exactly one run's. Up to 8 dynamo hatches; the best is `gtceu:max_wireless_dynamo_hatch_64a` (V[MAX] x 64 = 2^37 each), so 8 of them carry 2^40 = 64 runs. A cabled dynamo is no use at MAX+ (no cable, *Voltages*). One 64 A hatch gives 8 runs; GTM's 64 A substation dynamo does not fit (`SUBSTATION_OUTPUT_ENERGY`).
+
+**Wireless.** Each wireless dynamo hatch is drained at most V x 64 x 10 = 1,374,389,534,720 EU per settlement (`server_scripts/grindless/lv/wireless_energy.js:517-518`), exactly ten ticks of its share, so 8 hatches pass the full 2^40, and 19/20 of it reaches the store. When the store is full the hatches fill, the run waits and nothing is lost (`regressWhenWaiting(false)`). The plant takes no energy hatch.
+
+**Balance, per run** (*tune*). Out: 2^34 x 3,600 = 61,847,529,062,400 EU, 1.5x a torus run on the same deuterium and helium-3. Paid: the gas works run that gathered it (2^33 x 2,400 = 20,615,843,020,800), d3 (4,831,838,208,000), h1 (603,979,776,000) and the small rows (two calutron runs, d1 and d2 twice, d4: 3,760,128,000): 26,055,421,132,800 EU. Ratio 2.37x, against the torus's 2.0x (rule 8: same fuels, better, in a more complex plant).
+
+**Plants per 2^39 EU/t consumer.**
+
+| | Gross | Through the 5% loss | Net of the fuel chain's own draw |
+|---|---|---|---|
+| Today (torus) | 2^39 / 2^34 = 32 | ceil(32 / 0.95) = 34 | 2^39 / (0.95 x 2^34 − 2^33) = 71.1 → 72 tori + 72 gas works |
+| Stellarator at 64 runs | 2^40 / 2^39 = 2 consumers per plant | 0.95 x 2^40 = 1.9 x 2^39 | fuel chain 64 x 26,055,421,132,800 / 3,600 = 0.843 x 2^39 EU/t, so 1.9 − 0.843 = **1.06 x 2^39: one stellarator per consumer**, fed by 43 gas works (64 x 2,400 / 3,600 = 42.7) and 43 concurrent d3 runs (the cryostat works takes a parallel hatch) |
+
+The gas works stay one run each; the fuel bill falls from 72 to 43 works per consumer through the better fuel alone. Whether the works should also run in parallel is a separate owner decision, outside this machine. Recharge: one stellarator refills the bank for one dial in 10,105 ticks gross (8.4 minutes), 18,157 ticks (15.1 minutes) net of its fuel chain.
+
+**Structure.** 31 x 11 x 31, a hall of `grindless:horizon_machine_casing` with `gtceu:laminated_glass` bands; inside, a vessel ring of `gtceu:atomic_casing` threaded by 20 modular coil frames of `gtceu:superconducting_coil`, at most 192 coils (*Active blocks*, DECISIONS 2026-11-02). Floor front edge: 15 part cells: input bus 1-2, input hatch 1-2, output hatch 1-2, dynamo hatch 1-8. Controller face: the torus's art until a texture package draws its own.
+
+**Controller.** Assembly line at VA[MAX], 4,800 t, research `grindless:frozen_spin_hd` at 64 CWU/t: the base (*Controllers*: MAX hull, 2 `horizon_machine_casing`, 8 `#gtceu:circuits/maxplus`, 4 `#gtceu:circuits/max`, 2,000 mB `kerr_condensate`), 2 each of `maxplus_field_generator`, `maxplus_sensor`, `maxplus_emitter` and `maxplus_electric_pump`, and the domain inputs 1 `gtceu:primordial_fusion_torus` (the plant grows out of the torus), 4 `sco2_turbine_module`, 4 `direct_converter_stack`, 4 `neutral_beam_injector`.
+
+**Crossings.** P26 (millikelvin cryostat works, photonic foundry), P9, P10, P11, P17, P22.
+
+**Quests** (MAX+ chapter, under the torus): what it is (polarized D-He3 in a stellarator, 1.5x the torus's EU per fuel); how it is made (the controller consumes a torus); what it needs (P26: pellets from HD ice polarized at millikelvin, helium-3 pumped by laser; the three worn parts); what it unlocks (one plant per 2^39 consumer, a dial recharge in about 8 minutes); how to automate it (pellets and helium-3 by AE2 from home, no site; more dynamo hatches give more runs, up to 8 x 64 A for 64; the 43 gas works it eats). One line chart, P26, in pl_maxplus.
+
+**Risks.** Parallel generators on a MAX+ type are proven only at one run (S0-4; the T1 below). Chanced wear under 64 parallels must cost about 1 part per 64 runs, not 0 or 64. The torus keeps its Stream site, which rule 10 no longer asks of a fusion plant; that is the torus's own question.
+
+**Sources.** Kulsrud et al. 1982; Baylor et al. 2023; Colegrove et al. 1963; Wendelstein 7-X; research notes in `docs/research/maxplus-power.md`.
 
 ## AE2
 
