@@ -48,10 +48,10 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.steam_alloy_smelter.3', 'Replaces the single-block Low/High Pressure Steam Alloy Smelter: same steam limit, same LV-tier cap, eight times the throughput.')
     add('emi.grindless.info.steam_alloy_smelter.4', 'Needs 1 steam input hatch, 1 steam input bus and 1 steam output bus.')
 
-    add('emi.grindless.info.steam_blast_furnace.0', "The Steam Blast Furnace turns iron straight into steel: iron ore, ingots or dust with coke and calcite flux in, steel and ash out, four batches at a time.")
-    add('emi.grindless.info.steam_blast_furnace.1', "It is the first source of steel in bulk. The hot blast runs on steam. The ash is slag: void it, or keep it for fertilizer at LV.")
-    add('emi.grindless.info.steam_blast_furnace.2', 'Turns iron ore straight into steel: the furnace and the Primitive Blast Furnace in one. Takes raw or crushed iron ores, iron ingots and iron dust.')
-    add('emi.grindless.info.steam_blast_furnace.3', '4 iron + 4 coke + 1 calcite flux (raw, dust or block) -> 4 steel + 1 ash. Runs 4 batches at once: about 5 steel a minute, as much as 6 or 7 Primitive Blast Furnaces.')
+    add('emi.grindless.info.steam_blast_furnace.0', "The Steam Blast Furnace makes steel in two blasts: sintered iron ore and coke become pig iron, and pig iron blown through becomes steel. Four batches at a time.")
+    add('emi.grindless.info.steam_blast_furnace.1', "It is the first source of steel in bulk. The ore is sintered first in the Steam Alloy Smelter. The hot blast runs on steam. The ash is slag: void it, or keep it for fertilizer at LV.")
+    add('emi.grindless.info.steam_blast_furnace.2', 'The ironworks line: 4 purified iron ore + 1 coke dust -> 4 iron sinter in the Steam Alloy Smelter. 4 sinter + 3 coke + 1 calcite flux (raw, dust or block) -> 4 pig iron + 1 ash here. 4 pig iron -> 4 steel + 1 ash blown through here. The furnace picks the step by what you feed it.')
+    add('emi.grindless.info.steam_blast_furnace.3', 'Runs 4 batches at once: 16 pig iron or 16 steel every 90 seconds. A steel takes both blasts, so about 5 steel a minute from one furnace, and it still burns 1 coke per steel (3 coke and a quarter dust per sinter batch).')
     add('emi.grindless.info.steam_blast_furnace.4', 'The hot blast is driven by steam: about 57 mB/t while it works. The ash is the slag: void it, or keep it for fertilizer at LV.')
     add('emi.grindless.info.steam_blast_furnace.5', 'Needs 1 steam input hatch, 1 steam input bus and 1 or 2 steam output buses in the hearth. Keep the shaft empty.')
 

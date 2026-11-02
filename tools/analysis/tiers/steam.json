@@ -310,7 +310,7 @@
         "gtceu:steam_machine_casing", "gtceu:steam_input_hatch", "gtceu:steam_input_bus", "gtceu:steam_output_bus", "gtceu:firebricks",
         ["gtceu:bronze_pipe_casing", "gtceu:steel_pipe_casing"], ["gtceu:bronze_frame", "gtceu:steel_frame"]
       ],
-      "note": "Steam blast furnace (steam/blast_furnace.js): crucible of steam hull with its parts, hollow firebrick bosh and shaft, pipe-casing tuyeres and downcomer, and four frame posts. Iron ore + coke + calcite -> steel + ash."
+      "note": "Steam blast furnace (steam/blast_furnace.js): crucible of steam hull with its parts, hollow firebrick bosh and shaft, pipe-casing tuyeres and downcomer, and four frame posts. Iron sinter + coke + calcite -> pig iron + ash, then pig iron -> steel + ash (the sinter comes from the steam alloy smelter)."
     },
     {
       "machine": "gtceu:coking_battery",
@@ -507,7 +507,7 @@
     { "id": "recipe-coke", "label": "Coke oven recipe -> coke", "kind": "recipe", "type": "gtceu:coke_oven", "output": "gtceu:coke_gem" },
     { "id": "recipe-steel", "label": "Primitive blast furnace recipe -> steel", "kind": "recipe", "type": "gtceu:primitive_blast_furnace", "output": "gtceu:steel_ingot" },
     { "id": "blast-furnace-steam", "label": "Steam blast furnace (ours)", "item": "gtceu:steam_blast_furnace" },
-    { "id": "recipe-steel-blast-furnace-steam", "label": "Steam blast furnace: iron ore + coke + calcite -> steel + ash", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
+    { "id": "recipe-steel-blast-furnace-steam", "label": "Steam blast furnace: pig iron -> steel + ash (Bessemer blowing)", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
     { "id": "hatch-output-ulv", "label": "ULV fluid output hatch (hand-crafted in steam, for the coking battery)", "item": "gtceu:ulv_output_hatch" },
     { "id": "battery-coke", "label": "Coking battery with byproducts (ours)", "item": "gtceu:coking_battery" },
     { "id": "recipe-coal-gas", "label": "Coking battery: coal -> coke + creosote + coal gas", "kind": "recipe", "type": "gtceu:coking", "output": "fluid:gtceu:coal_gas" },
@@ -554,7 +554,7 @@
     { "id": "auto-drilling-fuel", "label": "Drill sustained with only fuel boilers", "kind": "recipe", "type": "gtceu:vein_drilling", "without": ["synthetic:boiler-solar"] },
     { "id": "auto-greenhouse", "label": "Usable and sustained greenhouse recipe", "kind": "recipe", "type": "gtceu:greenhouse" },
     { "id": "auto-greenhouse-fuel", "label": "Greenhouse sustained with only fuel boilers", "kind": "recipe", "type": "gtceu:greenhouse", "without": ["synthetic:boiler-solar"] },
-    { "id": "auto-steel-blast-furnace-steam", "label": "Steel from the steam blast furnace (ore, coke and calcite from the drill and the battery)", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
+    { "id": "auto-steel-blast-furnace-steam", "label": "Steel from the steam blast furnace (sinter, pig iron and steel from ore, coke and calcite of the drill and the battery)", "kind": "recipe", "type": "gtceu:steelmaking", "output": "gtceu:steel_ingot" },
     { "id": "auto-calcite", "label": "Calcite (steam blast furnace flux, lapis lazuli vein)", "anyOf": ["gtceu:raw_calcite", "gtceu:calcite_dust"] },
     { "id": "auto-coal-gas", "label": "Coal gas (coking battery)", "fluid": "gtceu:coal_gas" },
     { "id": "auto-creosote", "label": "Creosote (coke oven and coking battery)", "fluid": "gtceu:creosote" }

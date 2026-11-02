@@ -99,17 +99,21 @@ What it gains: wood, resin and food without felling or planting. No single-block
 
 ### Steam Blast Furnace — `gtceu:steam_blast_furnace`
 
-What it gains: fewer steps and more speed. The furnace and the primitive blast furnace in one machine: it takes ore and gives steel. One structure makes as much steel as 6 or 7 primitive blast furnaces, so the drill's steel bits stop being the bottleneck.
+What it gains: the ironworks in one machine and more speed. It is the heart of a real line (S1 of `docs/eras/lines-steam-hv.md`): ore is sintered, smelted into pig iron and blown into Bessemer steel. One structure makes as much steel as 6 or 7 primitive blast furnaces, so the drill's steel bits stop being the bottleneck.
 
-- **Recipe type:** `gtceu:steelmaking` (steel production).
-- **Recipe:** 4 iron + 4 coke + 1 flux → 4 steel ingots + 1 ash. 8 EU/t and 2,400 ticks per load.
-  - **Iron:** raw or crushed iron ore, magnetite, hematite, goethite or yellow limonite, and iron ingot or iron dust. One recipe per row of the table `kubejs/data/grindless/tables/steam_blast_furnace.json`.
+- **The line:** 6 steps, ore to steel.
+  1. Drill and mine the iron veins; 2. macerate into crushed ore; 3. wash into purified ore; 4. sinter; 5. smelt into pig iron; 6. blow into steel.
+- **Sinter:** the steam alloy smelter (`gtceu:alloy_smelter`) fuses 4 purified iron ore + 1 coke dust → 4 `grindless:iron_sinter`. 8 EU/t. One recipe per row of the table `kubejs/data/grindless/tables/steam_blast_furnace.json`.
+  - **Ores:** iron, magnetite, hematite, goethite or yellow limonite. Pyrite is a sulfide and waits for the LV sulfide roaster.
+- **Recipe type of the furnace:** `gtceu:steelmaking` (steel production), two modes chosen by the input (the type has three input slots, so a programmed circuit does not fit the smelting recipe).
+  - **Smelting:** 4 sinter + 3 coke + 1 flux → 4 `grindless:pig_iron` + 1 ash. 8 EU/t and 1,200 ticks.
+  - **Bessemer blowing:** 4 pig iron → 4 steel ingots + 1 ash. 8 EU/t and 1,200 ticks.
   - **Flux** (`#grindless:blast_furnace_fluxes`): raw, dust or block calcite. Calcite comes from the lapis lazuli vein.
-  - **Left out:** pyrite is a sulfide and waits for the LV sulfide roaster.
-- **Rate:** 4 loads at once and 1.5 times slower: 16 ingots every 180 s, about 5.3 per minute. It uses about 57 mB/t of steam (12,800 mB per ingot).
+  - **Ash:** the slag of each step. It is inert: void it, or keep it for LV fertilizer and centrifuging.
+- **Rate:** 4 loads at once and 1.5 times slower: 16 pig iron every 90 s, then 16 steel every 90 s. It uses about 57 mB/t of steam.
 - **Comparison with GTM.** The primitive blast furnace (`gtceu:primitive_blast_furnace`) makes 1 iron ingot + 1 coke → 1 steel + 1/9 ash in 1,500 ticks, one at a time, and the iron has to be smelted first.
-  - **The yield is GT's.** One raw ore gives 1 steel, just as smelting it gives 1 ingot. A crushed ore also gives 1, and macerating a raw ore gives 2 crushed ores, so 2 steel. It uses 1 coke per steel, like the primitive one.
-  - **What it costs:** steam (the primitive one uses nothing else), a coke line, another calcite line, and a larger structure with steel in the controller.
+  - **The yield is GT's.** One purified ore gives 1 steel, and macerating a raw ore gives 2 crushed ores, so 2 steel per raw ore. It uses 1 coke per steel, like the primitive one (a quarter as dust in the sinter, three quarters in the furnace).
+  - **What it costs:** steam (the primitive one uses nothing else), a coke line and a coke-dust line, another calcite line, a washing step, and a larger structure with steel in the controller.
 - **Structure** (3 × 7 × 3):
   - hearth: steam casing with its parts (steam hatch, input bus and 1 or 2 output buses);
   - bosh: firebricks, three tuyeres (bronze or steel pipes) and the controller;

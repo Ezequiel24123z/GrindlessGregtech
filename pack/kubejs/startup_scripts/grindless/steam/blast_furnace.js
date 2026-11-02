@@ -3,12 +3,15 @@
 // Steam Blast Furnace (gtceu:steam_blast_furnace) and its recipe type gtceu:steelmaking.
 //
 // A SteamParallelMultiblockMachine like the steam drill and greenhouse (GTM's steam multiblock logic: 4 parallels, duration
-// x1.5, steam from a steam hatch, nothing above LV runs). It charges iron ore, coke and a calcite flux at the throat, blows
-// steam-driven hot blast through the tuyeres and taps steel and slag (GTM's ash) at the hearth: the furnace step and the
-// Primitive Blast Furnace in one machine. Recipes: server_scripts/grindless/steam/blast_furnace.js.
+// x1.5, steam from a steam hatch, nothing above LV runs). It takes the iron line's two blasts at the throat, chosen by the input:
+// iron sinter + coke + a calcite flux become pig iron, and pig iron becomes steel; steam-driven hot blast through the tuyeres,
+// steel or pig iron and slag (GTM's ash) tapped at the hearth. The sinter is made in the Steam Alloy Smelter (small_family.js).
+// Recipes: server_scripts/grindless/steam/blast_furnace.js.
 //
-//   gtceu:steelmaking   in : 4 iron feed (raw or crushed ore, iron ingot or dust) + 4 coke + 1 flux (calcite)
-//                       out: 4 steel ingots + 1 ash dust                      max IO 3 items in, 2 items out, no fluids
+//   gtceu:steelmaking   pig iron:  in : 4 grindless:iron_sinter + 3 coke + 1 flux (calcite)
+//                                  out: 4 grindless:pig_iron + 1 ash dust
+//                       steel:     in : 4 grindless:pig_iron
+//                                  out: 4 steel ingots + 1 ash dust          max IO 3 items in, 2 items out, no fluids
 //
 // Structure (3 wide x 7 tall x 3 deep), every pattern goes through global.grindless.patterns (lib/patterns.js):
 //   y0      hearth: bronze plated bricks (gtceu:steam_machine_casing) with the steam hatch, the input bus and 1-2 output buses

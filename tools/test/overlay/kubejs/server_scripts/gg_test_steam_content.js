@@ -7,18 +7,21 @@
 //     -WaitForLog 'GGTEST\|steam_content\|DONE@@900;;GGTEST\|dump\|DONE@@900'
 //
 // Markers: GGTEST|steam_content|<check>|PASS|FAIL|NOTE|<detail>
-//   registry, recipe_types, recipes, crafting, flux_tag, feed_tags   registration and the recipes generated from the table
-//   recipe_numbers      the live recipes carry the documented numbers (batch, coke, flux, EU/t, duration, fluid amounts)
+//   registry, recipe_types, recipes, crafting, flux_tag, feed_inputs   registration and the recipes generated from the table
+//   recipe_numbers      the live recipes carry the documented numbers (batch, coke, flux, EU/t, duration, fluid amounts): a sinter row,
+//                       the pig iron smelting and the Bessemer blowing of the ironworks, and the battery's
 //   yield_vs_gtm        per coal, the battery never beats GTM: coke 1:1, creosote <= the coke oven's, coal gas <= the pyrolyse
-//                       oven's; per steel the blast furnace eats 1 coke like the Primitive Blast Furnace
+//                       oven's; per steel the whole ironworks line (sinter's coke dust + the pig iron's coke) eats as much coke as
+//                       the Primitive Blast Furnace
 //   coal_gas_sinks      coal gas has its LV destinations (gas turbine, distillery) and their machines exist
 //   <m>.DESCRIPTION / PLACED / FORMED / PATTERN / PREVIEW   the structure recorded by lib/patterns.js is placed block by block and
 //                       forms by itself; the preview EMI shows has the controller and every part kind
-//   <m>.PROCESS         blast furnace: 16 raw iron + 16 coke + 4 calcite + steam -> 16 steel + 4 ash (its 3 600 ticks of waiting
-//                       are skipped once it works: FASTFORWARD note; the outputs are the real ones)
+//   <m>.PROCESS         blast furnace: 16 sinter + 12 coke + 4 calcite + steam -> 16 pig iron + 4 ash (its 1 800 ticks of waiting
+//                       are skipped once it works: FASTFORWARD note; the outputs are the real ones; gg_test_steam runs the
+//                       Bessemer blowing too)
 //                       battery: 4 coal + steam -> 4 coke + 2 000 mB creosote + 500 mB coal gas in the two output hatches
 //   <m>.PARALLEL        4 batches / 4 chambers ran at once
-//   <m>.LOOKUP          GTM's lookup finds the right recipe for every feed and every flux form (and for coal)
+//   <m>.LOOKUP          GTM's lookup finds the right recipe for every flux form, the Bessemer blowing, none without coke (and coal)
 //   DONE                last line
 //
 // Band (AGENTS.md): X 3072-3135, Z 0-15, Y 98-112 of the Overworld; chunks 192..195,0 are force-loaded and the band is cleared
@@ -176,11 +179,11 @@
     var cb = SC.cokingBattery
     var rm = S.server.getRecipeManager()
 
-    var machines = [bf.machine, cb.machine]
+    var machines = [bf.machine, bf.sinterMachine, cb.machine]
     var missingMachines = machines.filter(function (id) { return !GTRegistries.MACHINES.get(rl(id)) })
     var items = machines.concat(['gtceu:ulv_output_hatch', 'gtceu:ulv_machine_hull', 'gtceu:firebricks', 'gtceu:coke_oven_bricks',
       'gtceu:bronze_firebox_casing', 'gtceu:steam_machine_casing', 'gtceu:bronze_pipe_casing', 'gtceu:bronze_frame',
-      bf.coke, bf.steel, bf.ash, 'gtceu:raw_calcite', 'gtceu:calcite_dust', 'minecraft:coal'])
+      bf.coke, bf.cokeDust, bf.sinter, bf.pigIron, bf.steel, bf.ash, 'gtceu:raw_calcite', 'gtceu:calcite_dust', 'minecraft:coal'])
     var missingItems = items.filter(function (id) { return !Item.exists(id) })
     var fluids = [cb.creosote, cb.coalGas]
     var missingFluids = fluids.filter(function (id) { return !Fluid.exists(id) })
@@ -195,9 +198,9 @@
     check('recipe_types', !!steel && !!coking, bf.type + '=' + (steel ? 'registered' : 'missing') + ' ' + cb.type + '=' +
       (coking ? 'registered' : 'missing'))
 
-    var want = bf.feeds.map(function (f) { return f.recipe }).concat([cb.recipe])
+    var want = bf.feeds.map(function (f) { return f.recipe }).concat([bf.pigIronRecipe, bf.bessemerRecipe, cb.recipe])
     var absent = want.filter(function (id) { return !rm.byKey(rl(id)).isPresent() })
-    check('recipes', absent.length === 0, 'steelmaking=' + bf.feeds.length + ' (one per feed of the table) coking=1 found=' +
+    check('recipes', absent.length === 0, 'sinter=' + bf.feeds.length + ' (one per feed of the table) pig iron=1 bessemer=1 coking=1 found=' +
       (want.length - absent.length) + '/' + want.length + (absent.length > 0 ? ' missing=' + absent.join(',') : '') +
       ' type totals: steelmaking=' + (steel ? rm.getAllRecipesFor(steel).size() : -1) + ' coking=' +
       (coking ? rm.getAllRecipesFor(coking).size() : -1))
@@ -212,9 +215,9 @@
     check('flux_tag', noFlux.length === 0, '#' + bf.fluxTag + '=[' + flux.join(', ') + ']' +
       (noFlux.length > 0 ? ' missing=' + noFlux.join(',') : ''))
 
-    var emptyFeeds = bf.feeds.filter(function (f) { return tagItems(f.input.substring(1)).length === 0 })
-    check('feed_tags', emptyFeeds.length === 0, 'feeds=' + bf.feeds.length +
-      (emptyFeeds.length > 0 ? ' empty=' + emptyFeeds.map(function (f) { return f.input }).join(',') : ''))
+    var missingFeeds = bf.feeds.filter(function (f) { return !Item.exists(f.input) })
+    check('feed_inputs', missingFeeds.length === 0, 'feeds=' + bf.feeds.length +
+      (missingFeeds.length > 0 ? ' missing=' + missingFeeds.map(function (f) { return f.input }).join(',') : ''))
 
     numberChecks(bf, cb)
     yieldChecks(bf, cb)
@@ -226,20 +229,40 @@
     var problems = []
     var details = []
     try {
-      var r = recipeOf(bf.feeds[0].recipe)
+      var s = recipeOf(bf.feeds[0].recipe)
+      var sin = contentsOf(s, c.ItemCap, false)
+      var sout = contentsOf(s, c.ItemCap, true)
+      var ore = sin.length > 0 ? sin[0].n : -1
+      var dust = amountFor(sin, bf.cokeDust)
+      var sinter = amountFor(sout, bf.sinter)
+      details.push(bf.feeds[0].recipe + ': ore ' + ore + ' coke dust ' + dust + ' -> sinter ' + sinter + ' EU/t ' +
+        s.getInputEUt().getTotalEU() + ' ' + s.duration + ' t')
+      if (ore !== bf.batch || dust !== 1 || sinter !== bf.batch) problems.push('sinter amounts')
+      if (s.duration !== bf.sinterDuration || Number(s.getInputEUt().getTotalEU()) !== bf.eut) problems.push('sinter EU/t or duration')
+
+      var r = recipeOf(bf.pigIronRecipe)
       var ins = contentsOf(r, c.ItemCap, false)
       var outs = contentsOf(r, c.ItemCap, true)
-      var feedN = ins.length > 0 ? ins[0].n : -1
       var coke = amountFor(ins, bf.coke)
-      var steel = amountFor(outs, bf.steel)
-      var ash = amountFor(outs, bf.ash)
       var flux = amountFor(ins, 'gtceu:calcite_dust')
-      details.push(bf.feeds[0].recipe + ': feed ' + feedN + ' coke ' + coke + ' flux ' + flux + ' -> steel ' + steel + ' ash ' + ash +
-        ' EU/t ' + r.getInputEUt().getTotalEU() + ' ' + r.duration + ' t')
-      if (feedN !== bf.batch || coke !== bf.batch || steel !== bf.batch || ash !== 1 || flux !== 1) problems.push('blast furnace amounts')
-      if (r.duration !== bf.duration || Number(r.getInputEUt().getTotalEU()) !== bf.eut) problems.push('blast furnace EU/t or duration')
+      var pigIron = amountFor(outs, bf.pigIron)
+      var ash = amountFor(outs, bf.ash)
+      details.push(bf.pigIronRecipe + ': sinter ' + amountFor(ins, bf.sinter) + ' coke ' + coke + ' flux ' + flux + ' -> pig iron ' +
+        pigIron + ' ash ' + ash + ' EU/t ' + r.getInputEUt().getTotalEU() + ' ' + r.duration + ' t')
+      if (amountFor(ins, bf.sinter) !== bf.batch || coke !== 3 || flux !== 1 || pigIron !== bf.batch || ash !== 1) problems.push('pig iron amounts')
+      if (r.duration !== bf.duration || Number(r.getInputEUt().getTotalEU()) !== bf.eut) problems.push('pig iron EU/t or duration')
+
+      var b = recipeOf(bf.bessemerRecipe)
+      var bins = contentsOf(b, c.ItemCap, false)
+      var bouts = contentsOf(b, c.ItemCap, true)
+      var steel = amountFor(bouts, bf.steel)
+      var bash = amountFor(bouts, bf.ash)
+      details.push(bf.bessemerRecipe + ': pig iron ' + amountFor(bins, bf.pigIron) + ' -> steel ' + steel + ' ash ' + bash + ' EU/t ' +
+        b.getInputEUt().getTotalEU() + ' ' + b.duration + ' t')
+      if (amountFor(bins, bf.pigIron) !== bf.batch || steel !== bf.batch || bash !== 1) problems.push('bessemer amounts')
+      if (b.duration !== bf.duration || Number(b.getInputEUt().getTotalEU()) !== bf.eut) problems.push('bessemer EU/t or duration')
     } catch (e) {
-      problems.push('blast furnace recipe unreadable: ' + e)
+      problems.push('ironworks recipe unreadable: ' + e)
     }
     try {
       var k = recipeOf(cb.recipe)
@@ -259,7 +282,7 @@
     }
     check('recipe_numbers', problems.length === 0, details.join(' ; ') + (problems.length > 0 ? ' problems=' + problems.join(', ') : ''))
     try {
-      note('recipe_contents', bf.feeds[0].recipe + ': ' + contentClasses(recipeOf(bf.feeds[0].recipe)) + ' ; ' + cb.recipe + ': ' +
+      note('recipe_contents', bf.pigIronRecipe + ': ' + contentClasses(recipeOf(bf.pigIronRecipe)) + ' ; ' + cb.recipe + ': ' +
         contentClasses(recipeOf(cb.recipe)))
     } catch (e3) {
       note('recipe_contents', 'unreadable: ' + e3)
@@ -267,7 +290,8 @@
   }
 
   // the GTCA lesson: never more coke than coal, never more creosote than GTM's coke oven, never more coal gas than GTM's
-  // pyrolyse oven, per coal; and the blast furnace eats as much coke per steel as GTM's Primitive Blast Furnace
+  // pyrolyse oven, per coal; and the whole ironworks line eats as much coke per steel as GTM's Primitive Blast Furnace
+  // (the sinter's coke dust counts as coke: GTM macerates one coke gem into one coke dust)
   function yieldChecks(bf, cb) {
     var c = lazy()
     var problems = []
@@ -283,9 +307,12 @@
       var pyro = recipeOf('gtceu:pyrolyse_oven/coal_to_coal_gas')
       var pbf = recipeOf('gtceu:primitive_blast_furnace/steel_from_coke_gem')
       var battery = recipeOf(cb.recipe)
-      var steel = recipeOf(bf.feeds[0].recipe)
-      if (!oven || !pyro || !pbf || !battery || !steel) throw new Error('a reference recipe is missing: coke oven ' + !!oven +
-        ' pyrolyse ' + !!pyro + ' pbf ' + !!pbf + ' battery ' + !!battery + ' steelmaking ' + !!steel)
+      var sinterRecipe = recipeOf(bf.feeds[0].recipe)
+      var pigRecipe = recipeOf(bf.pigIronRecipe)
+      var bessemer = recipeOf(bf.bessemerRecipe)
+      if (!oven || !pyro || !pbf || !battery || !sinterRecipe || !pigRecipe || !bessemer) throw new Error('a reference recipe is missing: coke oven ' + !!oven +
+        ' pyrolyse ' + !!pyro + ' pbf ' + !!pbf + ' battery ' + !!battery + ' sinter ' + !!sinterRecipe + ' pig iron ' + !!pigRecipe +
+        ' bessemer ' + !!bessemer)
       var o = perCoal(oven)
       var p = perCoal(pyro)
       var b = perCoal(battery)
@@ -296,9 +323,16 @@
       if (!(b.gas > 0 && b.creosote >= o.creosote)) problems.push('battery does not win the gas over the coke oven')
       var pbfIn = contentsOf(pbf, c.ItemCap, false)
       var pbfCoke = amountFor(pbfIn, bf.coke) / amountFor(contentsOf(pbf, c.ItemCap, true), bf.steel)
-      var sbfCoke = amountFor(contentsOf(steel, c.ItemCap, false), bf.coke) / amountFor(contentsOf(steel, c.ItemCap, true), bf.steel)
-      details.push('coke per steel: PBF ' + pbfCoke + ' steam blast furnace ' + sbfCoke)
-      if (sbfCoke < pbfCoke) problems.push('the blast furnace eats less coke per steel than the PBF')
+      var sinterCoke = amountFor(contentsOf(sinterRecipe, c.ItemCap, false), bf.cokeDust) / amountFor(contentsOf(sinterRecipe, c.ItemCap, true), bf.sinter)
+      var pigIn = contentsOf(pigRecipe, c.ItemCap, false)
+      var pigOut = contentsOf(pigRecipe, c.ItemCap, true)
+      var cokePerPig = amountFor(pigIn, bf.coke) / amountFor(pigOut, bf.pigIron)
+      var sinterPerPig = amountFor(pigIn, bf.sinter) / amountFor(pigOut, bf.pigIron)
+      var pigPerSteel = amountFor(contentsOf(bessemer, c.ItemCap, false), bf.pigIron) / amountFor(contentsOf(bessemer, c.ItemCap, true), bf.steel)
+      var lineCoke = pigPerSteel * (cokePerPig + sinterPerPig * sinterCoke)
+      details.push('coke per steel: PBF ' + pbfCoke + ' ironworks line ' + lineCoke + ' (pig iron ' + cokePerPig + ' + sinter ' +
+        (pigPerSteel * sinterPerPig * sinterCoke) + ')')
+      if (!(lineCoke >= pbfCoke)) problems.push('the ironworks line eats less coke per steel than the PBF')
     } catch (e) {
       problems.push('exception: ' + e)
     }
@@ -688,21 +722,27 @@
 
   function blastCases() {
     var bf = global.grindless.steamContent.blastFurnace
-    var cases = bf.feeds.map(function (f) {
+    var cases = ['gtceu:calcite_dust', 'gtceu:raw_calcite', 'minecraft:calcite'].map(function (flux) {
       return {
-        label: f.id, want: f.recipe,
-        inputs: [{ id: firstItem(f.input), n: bf.batch }, { id: bf.coke, n: bf.batch }, { id: 'gtceu:calcite_dust', n: 1 }]
+        label: 'sinter+' + flux, want: bf.pigIronRecipe,
+        inputs: [{ id: bf.sinter, n: bf.batch }, { id: bf.coke, n: 3 }, { id: flux, n: 1 }]
       }
     })
-    ;['gtceu:raw_calcite', 'minecraft:calcite'].forEach(function (flux) {
-      cases.push({
-        label: 'raw_iron+' + flux, want: bf.feeds[0].recipe,
-        inputs: [{ id: firstItem(bf.feeds[0].input), n: bf.batch }, { id: bf.coke, n: bf.batch }, { id: flux, n: 1 }]
-      })
+    cases.push({
+      label: 'pig iron', want: bf.bessemerRecipe,
+      inputs: [{ id: bf.pigIron, n: bf.batch }]
     })
     cases.push({
-      label: 'no flux', want: 'none',
-      inputs: [{ id: firstItem(bf.feeds[0].input), n: bf.batch }, { id: bf.coke, n: bf.batch }]
+      label: 'sinter without flux', want: 'none',
+      inputs: [{ id: bf.sinter, n: bf.batch }, { id: bf.coke, n: 3 }]
+    })
+    cases.push({
+      label: 'sinter without coke', want: 'none',
+      inputs: [{ id: bf.sinter, n: bf.batch }, { id: 'gtceu:calcite_dust', n: 1 }]
+    })
+    cases.push({
+      label: 'raw iron', want: 'none',
+      inputs: [{ id: firstItem(bf.feeds[0].input), n: bf.batch }, { id: bf.coke, n: 3 }, { id: 'gtceu:calcite_dust', n: 1 }]
     })
     return cases
   }
@@ -721,16 +761,16 @@
     {
       key: 'steam_blast_furnace', id: 'gtceu:steam_blast_furnace', x: 3080, y: 100, z: 3, tanks: 0, fastForward: true, runTicks: 160,
       previewParts: ['gtceu:steam_input_hatch', 'gtceu:steam_input_bus', 'gtceu:steam_output_bus'],
-      inputs: [{ id: 'minecraft:raw_iron', n: 16 }, { id: 'gtceu:coke_gem', n: 16 }, { id: 'gtceu:calcite_dust', n: 4 }],
+      inputs: [{ id: 'grindless:iron_sinter', n: 16 }, { id: 'gtceu:coke_gem', n: 12 }, { id: 'gtceu:calcite_dust', n: 4 }],
       cases: blastCases,
-      runs: function (counts) { return Math.floor((counts['gtceu:steel_ingot'] || 0) / 4) },
+      runs: function (counts) { return Math.floor((counts['grindless:pig_iron'] || 0) / 4) },
       verify: function (counts, fluids, left) {
-        var steel = counts['gtceu:steel_ingot'] || 0
+        var pig = counts['grindless:pig_iron'] || 0
         var ash = counts['gtceu:ash_dust'] || 0
-        var unexpected = Object.keys(counts).filter(function (id) { return id !== 'gtceu:steel_ingot' && id !== 'gtceu:ash_dust' })
+        var unexpected = Object.keys(counts).filter(function (id) { return id !== 'grindless:pig_iron' && id !== 'gtceu:ash_dust' })
         return {
-          ok: steel === 16 && ash === 4 && unexpected.length === 0 && Object.keys(left).length === 0,
-          detail: 'raw iron x16 + coke x16 + calcite x4: steel=' + steel + ' (16) ash=' + ash + ' (4)' +
+          ok: pig === 16 && ash === 4 && unexpected.length === 0 && Object.keys(left).length === 0,
+          detail: 'sinter x16 + coke x12 + calcite x4: pig iron=' + pig + ' (16) ash=' + ash + ' (4)' +
             (unexpected.length > 0 ? ' unexpected=' + unexpected.join(',') : '')
         }
       }
