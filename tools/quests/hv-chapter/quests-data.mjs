@@ -145,16 +145,67 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5669400C0C30D05F", xp: 30 }],
   },
   {
-    key: "HV_PTFE", id: "720331A06D7F2344", title: "PTFE", icon: "gtceu:inert_machine_casing", deps: ["HV_CRACKING_AND_OLEFINS"], x: 10, y: 0,
-    desc: [
-      "&6PTFE&r is the plastic nothing eats, which is why the large chemical reactor is lined with it. The road runs through chloroform and TFE.",
-      "Methane comes from distilling refinery gas, and the fluorine from topaz, lepidolite or bastnasite.",
-    ],
+    key: "HV_METHANE", title: "Methane", icon: "gtceu:methane_bucket", kind: "process", deps: ["HV_CRACKING_AND_OLEFINS"], x: 10, y: 0,
+    teach: {
+      for: "Starts the PTFE line: &6methane&r split out of refinery gas.",
+      needs: "Refinery gas from the rig, and a distillery.",
+      unlocks: "Chloroform, the next step.",
+      automate: "Pipe the gas in and pipe the methane to the chlorination reactor.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:methane_bucket" }],
+    rewards: [{ type: "xp", xp: 30 }],
+  },
+  {
+    key: "HV_CHLOROFORM", title: "Chloroform", icon: "gtceu:chloroform_bucket", kind: "process", deps: ["HV_METHANE"], x: 12, y: 0,
+    teach: {
+      for: "Chlorinates methane into &6chloroform&r, the carbon skeleton of the fluorinated gases.",
+      needs: "Methane, chlorine and a chemical reactor.",
+      unlocks: "R22, and the hydrochloric acid that comes with it.",
+      automate: "Chlorine and methane by pipe, chloroform out to the next reactor.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:chloroform_bucket" }],
+    rewards: [{ type: "xp", xp: 30 }],
+  },
+  {
+    key: "HV_R22", title: "R22", icon: "gtceu:chlorodifluoromethane_bucket", kind: "process", deps: ["HV_CHLOROFORM"], x: 14, y: 0,
+    teach: {
+      for: "Swaps chlorine for fluorine: &6R22&r is chloroform with two fluorines.",
+      needs: "Chloroform and hydrofluoric acid, from topaz, lepidolite or bastnasite fluorine.",
+      unlocks: "TFE through pyrolysis. Chloroform alone no longer gets there.",
+      automate: "Acid and chloroform by pipe. The spent hydrochloric acid goes to vinyl chloride.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:chlorodifluoromethane_bucket" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_TFE", title: "TFE Pyrolysis", icon: "gtceu:tetrafluoroethylene_bucket", kind: "process", deps: ["HV_R22"], x: 16, y: 0,
+    teach: {
+      for: "Cracks R22 hot to join two carbons: &6tetrafluoroethylene&r, the monomer.",
+      needs: "R22 and a chemical reactor with a strong power feed.",
+      unlocks: "PTFE, and with it the large chemical reactor.",
+      automate: "R22 in by pipe, TFE straight on to the polymer reactor, acid to storage.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:tetrafluoroethylene_bucket" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_PTFE", id: "720331A06D7F2344", title: "PTFE", icon: "gtceu:inert_machine_casing", kind: "process", deps: ["HV_TFE"], x: 18, y: 0,
+    teach: {
+      for: "Polymerizes TFE into &6PTFE&r, the plastic nothing eats.",
+      needs: "TFE and the polymer reactor. The large chemical reactor is lined with the result.",
+      unlocks: "Inert casings, PTFE pipes and the large chemical reactor.",
+      automate: "TFE by pipe, PTFE out by bus to the casing assembler.",
+    },
+    desc: [],
     tasks: [{ type: "item", id: "2B26A5F014E45D2A", item: "gtceu:inert_machine_casing", count: 8 }],
     rewards: [{ type: "xp", id: "2BA86A8E9940CABD", xp: 35 }],
   },
   {
-    key: "HV_GASOLINE", id: "35719B747A75F7B6", title: "Gasoline", icon: "gtceu:large_chemical_reactor", deps: ["HV_PTFE"], x: 12, y: 0,
+    key: "HV_GASOLINE", id: "35719B747A75F7B6", title: "Gasoline", icon: "gtceu:large_chemical_reactor", deps: ["HV_PTFE"], x: 20, y: 0,
     desc: [
       "With PTFE walls, the &6Large Chemical Reactor&r can finally be built. Its big job in HV is gasoline, and the methanol and acetone piling up since MV go straight into it.",
       "Gasoline is also a far better fuel than creosote.",
@@ -163,7 +214,55 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "3EB45CE14A466656", xp: 55 }],
   },
   {
-    key: "HV_COMPOSITE_AUTOCLAVE", id: "3B7E2C9A41D06F85", title: "Composite Autoclave",     icon: "gtceu:composite_autoclave", kind: "machine", deps: ["HV_CRACKING_AND_OLEFINS"], x: 8, y: -1.5,
+    key: "HV_CUMENE", title: "Cumene", icon: "gtceu:cumene_bucket", kind: "process", deps: ["HV_CRACKING_AND_OLEFINS"], x: 8, y: -1.5,
+    teach: {
+      for: "Starts the epoxy line: benzene and propene joined into &6cumene&r.",
+      needs: "Benzene from cracking or the reformer, propene, and phosphoric acid as catalyst.",
+      unlocks: "Phenol. The shortcuts to it are gone.",
+      automate: "Benzene and propene by pipe, with the acid recycled back into the reactor.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:cumene_bucket" }],
+    rewards: [{ type: "xp", xp: 30 }],
+  },
+  {
+    key: "HV_PHENOL", title: "Phenol and Acetone", icon: "gtceu:phenol_bucket", kind: "process", deps: ["HV_CUMENE"], x: 10, y: -1.5,
+    teach: {
+      for: "Oxidizes cumene and splits it into &6phenol&r and acetone in one go.",
+      needs: "Cumene and oxygen in a chemical reactor.",
+      unlocks: "Bisphenol A. The acetone feeds gasoline as well.",
+      automate: "Oxygen from the air line, phenol to the next reactor, acetone to the tank.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:phenol_bucket" }],
+    rewards: [{ type: "xp", xp: 30 }],
+  },
+  {
+    key: "HV_BISPHENOL_A", title: "Bisphenol A", icon: "gtceu:bisphenol_a_bucket", kind: "process", deps: ["HV_PHENOL"], x: 12, y: -1.5,
+    teach: {
+      for: "Condenses phenol with acetone under acid into &6bisphenol A&r, the epoxy backbone.",
+      needs: "Phenol, acetone and hydrochloric acid.",
+      unlocks: "Epoxy resin.",
+      automate: "Phenol and acetone share one pipe loop; the acid comes back from PTFE's chain.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:bisphenol_a_bucket" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_EPOXY", title: "Epoxy", icon: "gtceu:epoxy_bucket", kind: "process", deps: ["HV_BISPHENOL_A"], x: 14, y: -1.5,
+    teach: {
+      for: "Closes the ring with epichlorohydrin and caustic soda: &6epoxy&r resin.",
+      needs: "Bisphenol A, epichlorohydrin and sodium hydroxide.",
+      unlocks: "The composite autoclave and everything cured in it.",
+      automate: "Resin by pipe straight into the autoclave's hatch.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:epoxy_bucket" }],
+    rewards: [{ type: "xp", xp: 40 }],
+  },
+  {
+    key: "HV_COMPOSITE_AUTOCLAVE", id: "3B7E2C9A41D06F85", title: "Composite Autoclave",     icon: "gtceu:composite_autoclave", kind: "machine", deps: ["HV_EPOXY"], x: 16, y: -1.5,
         teach: {
           for: "Cures fiber in epoxy under nitrogen pressure.",
           needs: "Fiber, epoxy and nitrogen through the hatches.",
@@ -175,7 +274,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "2A3D5F1E07C4B926", xp: 60 }],
   },
   {
-    key: "HV_HEAT_SHIELD_TILES", id: "6D0A4F18B2E93C57", title: "Heat-Shield Tiles", icon: "grindless:ablative_heat_shield_tile", deps: ["HV_COMPOSITE_AUTOCLAVE"], x: 10, y: -1.5,
+    key: "HV_HEAT_SHIELD_TILES", id: "6D0A4F18B2E93C57", title: "Heat-Shield Tiles", icon: "grindless:ablative_heat_shield_tile", deps: ["HV_COMPOSITE_AUTOCLAVE"], x: 18, y: -1.5,
     desc: [
       "&6Ablative Heat-Shield Tiles&r are fiberglass soaked in epoxy and cured under nitrogen. They sit at the base of each motor and burn away so the motor doesn't.",
     ],
@@ -183,7 +282,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "2C6E9B0F4D17A853", xp: 45 }],
   },
   {
-    key: "HV_OVERWRAPPED_TANKS", id: "1F8C57E2A6D40B93", title: "Overwrapped Tanks", icon: "grindless:composite_overwrapped_tank", deps: ["HV_GT_DRUMS","HV_COMPOSITE_AUTOCLAVE"], x: 12, y: -3,
+    key: "HV_OVERWRAPPED_TANKS", id: "1F8C57E2A6D40B93", title: "Overwrapped Tanks", icon: "grindless:composite_overwrapped_tank", deps: ["HV_GT_DRUMS","HV_COMPOSITE_AUTOCLAVE"], x: 18, y: -3,
     desc: [
       "An &6Overwrapped Tank&r is a stainless steel drum wrapped in para-aramid and cured in epoxy, light and very hard to burst. The rocket's fuel tanks are built around them.",
     ],
@@ -191,7 +290,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "7F1A4D82B0E6C395", xp: 45 }],
   },
   {
-    key: "HV_UNTESTED_ROCKET_MOTOR", id: "5E26B9D13A7C08F4", title: "Untested Rocket Motor", icon: "grindless:untested_rocket_motor", shape: "gear", size: 1.25, deps: ["HV_HEAT_SHIELD_TILES"], x: 12, y: -1.5,
+    key: "HV_UNTESTED_ROCKET_MOTOR", id: "5E26B9D13A7C08F4", title: "Untested Rocket Motor", icon: "grindless:untested_rocket_motor", shape: "gear", size: 1.25, deps: ["HV_HEAT_SHIELD_TILES"], x: 20, y: -1.5,
     desc: [
       "The &6Untested Rocket Motor&r is where the qualified thrusters and heat-shield tiles come together, on a stainless steel frame. The name is honest.",
     ],
@@ -199,7 +298,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "305E3C97D2A18F64", xp: 50 }],
   },
   {
-    key: "HV_STATIC_FIRE", id: "2A94D7C0E6B15F38", title: "Static Fire", icon: "gtceu:engine_test_stand", shape: "gear", size: 1.25, deps: ["HV_UNTESTED_ROCKET_MOTOR","HV_ROCKET_FUEL","mv:MV_ENGINE_TEST_STAND"], x: 16, y: 0,
+    key: "HV_STATIC_FIRE", id: "2A94D7C0E6B15F38", title: "Static Fire", icon: "gtceu:engine_test_stand", shape: "gear", size: 1.25, deps: ["HV_UNTESTED_ROCKET_MOTOR","HV_ROCKET_FUEL","mv:MV_ENGINE_TEST_STAND"], x: 24, y: 0,
     desc: [
       "Back to the &6Engine Test Stand&r from MV, this time with a whole motor, burning the same rocket fuel it'll fly on. It needs HV power now: an HV energy hatch, or a second MV one.",
       "The motors always pass, but it's nice to know before you're sitting on top of one.",
@@ -208,7 +307,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "4D9A6E2C81F0B375", xp: 60 }],
   },
   {
-    key: "HV_ROCKET_MOTORS", id: "5C1D3FB96A9FB74A", title: "Rocket Motors", icon: "gcyr:basic_rocket_motor", deps: ["HV_STATIC_FIRE"], x: 18, y: 0,
+    key: "HV_ROCKET_MOTORS", id: "5C1D3FB96A9FB74A", title: "Rocket Motors", icon: "gcyr:basic_rocket_motor", deps: ["HV_STATIC_FIRE"], x: 26, y: 0,
     desc: [
       "Each static fire hands you a &6Basic Rocket Motor&r. Make more than the bare minimum: every block of the rocket has weight, and with too few motors it barely leaves the pad.",
       "The rocket's screen shows its speed.",
@@ -217,7 +316,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "71613751FE3583C9", xp: 40 }],
   },
   {
-    key: "HV_FUEL_TANKS", id: "4A6E81ABD8026025", title: "Fuel Tanks", icon: "gcyr:basic_fuel_tank", deps: ["HV_OVERWRAPPED_TANKS"], x: 16, y: -1.5,
+    key: "HV_FUEL_TANKS", id: "4A6E81ABD8026025", title: "Fuel Tanks", icon: "gcyr:basic_fuel_tank", deps: ["HV_OVERWRAPPED_TANKS"], x: 24, y: -1.5,
     desc: [
       "A single &6Basic Fuel Tank&r can't hold enough for a Moon launch, so the first rocket carries a pair.",
     ],
@@ -225,7 +324,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "240589002FC5DF78", xp: 40 }],
   },
   {
-    key: "HV_ROCKET_FUEL", id: "76D281E9D9C6FD20", title: "Rocket Fuel", icon: "gtceu:hv_chemical_reactor", deps: ["HV_GASOLINE"], x: 14, y: 0,
+    key: "HV_ROCKET_FUEL", id: "76D281E9D9C6FD20", title: "Rocket Fuel", icon: "gtceu:hv_chemical_reactor", deps: ["HV_GASOLINE"], x: 22, y: 0,
     desc: [
       "&6Rocket Fuel&r is dimethylhydrazine and oxygen out of the mixer, and the hydrazine comes from methanol, ammonia and hypochlorous acid.",
       "A Moon launch needs at least 8 buckets in the tanks. Make extra, because every static fire burns some too.",
@@ -234,7 +333,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "3E3E25931D1CA960", xp: 40 }],
   },
   {
-    key: "HV_LAUNCH_PAD", id: "7B21622AADB1E1D1", title: "Launch Pad", icon: "gcyr:launch_pad", deps: ["HV_GASOLINE"], x: 16, y: 1.5,
+    key: "HV_LAUNCH_PAD", id: "7B21622AADB1E1D1", title: "Launch Pad", icon: "gcyr:launch_pad", deps: ["HV_GASOLINE"], x: 24, y: 1.5,
     desc: [
       "The rocket stands on a square of &6Launch Pads&r with a short tower of stainless steel frames. The scanner's EMI page shows where every block goes.",
     ],
@@ -242,7 +341,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "559F7D571DE034D2", xp: 30 }],
   },
   {
-    key: "HV_SPACE_SUIT", id: "5615E54AF782990A", title: "Space Suit", icon: "gcyr:space_helmet", deps: ["HV_FUEL_TANKS"], x: 20, y: -1.5,
+    key: "HV_SPACE_SUIT", id: "5615E54AF782990A", title: "Space Suit", icon: "gcyr:space_helmet", deps: ["HV_FUEL_TANKS"], x: 28, y: -1.5,
     desc: [
       "The suit is sewn from the same para-aramid and Kapton as the fuel tanks. Fill the &6Space Chestplate&r with oxygen in a fluid canner before you leave: an empty suit drowns you on the Moon.",
       "Wear all four pieces. The lunar cold finds whichever one you forgot.",
@@ -251,7 +350,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "010BB817D271287F", xp: 40 }],
   },
   {
-    key: "HV_FIRST_ROCKET", id: "5151DE8D3623EDCF", title: "First Rocket", icon: "gcyr:rocket_scanner", shape: "gear", size: 1.25, deps: ["HV_ROCKET_MOTORS","HV_FUEL_TANKS","HV_LAUNCH_PAD"], x: 20, y: 0,
+    key: "HV_FIRST_ROCKET", id: "5151DE8D3623EDCF", title: "First Rocket", icon: "gcyr:rocket_scanner", shape: "gear", size: 1.25, deps: ["HV_ROCKET_MOTORS","HV_FUEL_TANKS","HV_LAUNCH_PAD"], x: 28, y: 0,
     desc: [
       "Motors on the pad, tanks on the motors, the &6Seat&r on top, all in front of the &6Rocket Scanner&r. Right-click the scanner and press Build, and the pile of blocks becomes a rocket.",
     ],
@@ -259,7 +358,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "6C490E4AB37CEB62", xp: 60 }],
   },
   {
-    key: "HV_LIFTOFF", id: "4A672DF7CF424623", title: "Liftoff", icon: "gcyr:id_chip", deps: ["HV_FIRST_ROCKET","mv:MV_LUNAR_LANDING_SITE_CHART"], x: 22, y: 0,
+    key: "HV_LIFTOFF", id: "4A672DF7CF424623", title: "Liftoff", icon: "gcyr:id_chip", deps: ["HV_FIRST_ROCKET","mv:MV_LUNAR_LANDING_SITE_CHART"], x: 30, y: 0,
     desc: [
       "The &6ID Chip&r is written from your landing-site chart, which you get back, and set to the Moon on the planet screen.",
       "Pack the lunar drill, empty vein probes, charged batteries and a waystone. Check the suit has air, load the chip and the fuel, sit down and go.",
@@ -268,7 +367,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "3E3DC37BC58FD75C", xp: 40 }],
   },
   {
-    key: "HV_THE_MOON", id: "2897E3EB8159710C", title: "The Moon", icon: "gcyr:moon_stone", shape: "diamond", size: 1.75, deps: ["HV_LIFTOFF","HV_SPACE_SUIT"], x: 24, y: 0,
+    key: "HV_THE_MOON", id: "2897E3EB8159710C", title: "The Moon", icon: "gcyr:moon_stone", shape: "diamond", size: 1.75, deps: ["HV_LIFTOFF","HV_SPACE_SUIT"], x: 32, y: 0,
     desc: [
       "Hold Space to brake on the way down. A hard landing blows the rocket up, and the walk home is long.",
       "Keep the chestplate topped up with oxygen, then set up camp: the lunar base is where EV begins.",
@@ -411,7 +510,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "290DE13044D4E778", xp: 60 }],
   },
   {
-    key: "HV_COIL_CHEMICAL_PLANT", id: "5731FF20BC9CBDD9", title: "Coil Chemical Plant",     icon: "gtceu:coil_chemical_plant", kind: "plant", deps: ["HV_GASOLINE"], x: 12, y: 1.5,
+    key: "HV_COIL_CHEMICAL_PLANT", id: "5731FF20BC9CBDD9", title: "Coil Chemical Plant",     icon: "gtceu:coil_chemical_plant", kind: "plant", deps: ["HV_GASOLINE"], x: 20, y: 1.5,
         teach: {
           for: "A large chemical reactor heated by coils.",
           needs: "Coils: better ones run more recipes at once.",
@@ -423,12 +522,228 @@ export const QUESTS = [
         rewards: [{ type: "xp", id: "5ADAE012D2D4306D", xp: 60 }],
   },
   {
-    key: "HV_NANOMUSCLE_SUIT", id: "3C71A9D5E04B8F26", title: "NanoMuscle Suit", icon: "gtceu:nanomuscle_chestplate", deps: ["HV_SPACE_SUIT"], x: 22, y: -3,
+    key: "HV_NANOMUSCLE_SUIT", id: "3C71A9D5E04B8F26", title: "NanoMuscle Suit", icon: "gtceu:nanomuscle_chestplate", deps: ["HV_SPACE_SUIT"], x: 30, y: -3,
     desc: [
       "The &6NanoMuscle Chestplate&r is eight carbon fibre plates around an &6Energy Crystal&r. It holds 6.4M EU.",
       "Charged, it lets you &6fly like in creative&r: 175 EU/t while flying, nothing on the ground, about 30 minutes per charge. It warns you at 10%. Recharge it in a charger or battery buffer. The advanced version adds the jetpack.",
     ],
     tasks: [{ type: "item", id: "6D2E8B4107A35C91", item: "gtceu:nanomuscle_chestplate" }],
     rewards: [{ type: "xp", id: "1F5A07C3B9E24D68", xp: 60 }],
+  },
+  {
+    key: "HV_PYROSULFATE_FUSION", title: "Pyrosulfate Fusion", icon: "gtceu:rhodium_sulfate_gas_bucket", kind: "process", deps: ["HV_NICHROME", "mv:MV_PLATINUM_SALT"], x: 16, y: 3,
+    teach: {
+      for: "Starts the rhodium line: the platinum slag from MV is fused in molten potassium pyrosulfate. Rhodium leaves as &6sulfate gas&r, and the &6inert metal mixture&r stays behind for ruthenium.",
+      needs: "Slag, pyrosulfate flux and a blast furnace with two energy hatches.",
+      unlocks: "Rhodium, ruthenium and the gauze.",
+      automate: "Slag in by bus. Gas and mixture leave on separate outputs.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:rhodium_sulfate_gas_bucket" }],
+    rewards: [{ type: "xp", xp: 40 }],
+  },
+  {
+    key: "HV_RHODIUM_SULFATE", title: "Rhodium Sulfate", icon: "gtceu:rhodium_sulfate_bucket", kind: "process", deps: ["HV_PYROSULFATE_FUSION"], x: 18, y: 3,
+    teach: {
+      for: "Dissolves the gas into water: &6rhodium sulfate&r solution.",
+      needs: "The gas, water and a large chemical reactor.",
+      unlocks: "Cementation.",
+      automate: "Gas and water by pipe, solution on to the zinc reactor.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:rhodium_sulfate_bucket" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_CEMENTATION", title: "Cementation", icon: "gtceu:roughly_rhodium_metal_dust", kind: "process", deps: ["HV_RHODIUM_SULFATE"], x: 20, y: 3,
+    teach: {
+      for: "Zinc pushes rhodium out of solution as &6rough rhodium metal&r.",
+      needs: "Zinc dust and the sulfate solution.",
+      unlocks: "Chlorination. The zinc sulfate goes back to electrolysis.",
+      automate: "Zinc by bus, metal out by bus, zinc sulfate to the electrolyzer.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:roughly_rhodium_metal_dust" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_RHODIUM_SALT", title: "Rhodium Salt", icon: "gtceu:rhodium_salt_dust", kind: "process", deps: ["HV_CEMENTATION"], x: 22, y: 3,
+    teach: {
+      for: "Chlorinates the rough metal with salt and chlorine: &6rhodium salt&r.",
+      needs: "Rough metal, salt, chlorine and the blast furnace.",
+      unlocks: "Nitrate complexation.",
+      automate: "Chlorine by pipe, salt and metal by bus.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:rhodium_salt_dust" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_RHODIUM_NITRATE", title: "Rhodium Nitrate", icon: "gtceu:rhodium_nitrate_dust", kind: "process", deps: ["HV_RHODIUM_SALT"], x: 24, y: 3,
+    teach: {
+      for: "Dissolves the salt in a mixer, then reacts it with sodium nitrate: &6rhodium nitrate&r.",
+      needs: "Rhodium salt solution and sodium nitrate.",
+      unlocks: "The sifting step that separates the impurities.",
+      automate: "Mixer and reactor in a short pipe loop.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:rhodium_nitrate_dust" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_FILTER_CAKE", title: "Filter Cake", icon: "gtceu:rhodium_filter_cake_dust", kind: "process", deps: ["HV_RHODIUM_NITRATE"], x: 26, y: 3,
+    teach: {
+      for: "A sifter filters the nitrate into &6filter cake&r, leaving the dross out.",
+      needs: "Rhodium nitrate and a sifter.",
+      unlocks: "Reprecipitation.",
+      automate: "Dust in by bus, cake out by bus.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:rhodium_filter_cake_dust" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_REPRECIPITATION", title: "Reprecipitation", icon: "gtceu:reprecipitated_rhodium_dust", kind: "process", deps: ["HV_FILTER_CAKE"], x: 28, y: 3,
+    teach: {
+      for: "The cake goes back into solution and drops out again, cleaner: &6reprecipitated rhodium&r.",
+      needs: "Filter cake, water and a chemical reactor.",
+      unlocks: "The last reduction.",
+      automate: "A mixer and a reactor on one pipe loop.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:reprecipitated_rhodium_dust" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_RHODIUM", title: "Rhodium", icon: "gtceu:rhodium_dust", kind: "process", deps: ["HV_REPRECIPITATION"], x: 30, y: 3,
+    teach: {
+      for: "Hydrochloric acid reduces the last salt to pure &6rhodium&r.",
+      needs: "Reprecipitated rhodium and hydrochloric acid.",
+      unlocks: "Rhodium foil for the gauze.",
+      automate: "Acid by pipe, dust by bus to the foil bender.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:rhodium_dust" }],
+    rewards: [{ type: "xp", xp: 45 }],
+  },
+  {
+    key: "HV_NITRIC_ACID_GAUZE", title: "Nitric Acid Gauze", icon: "grindless:platinum_rhodium_gauze", kind: "process", deps: ["HV_RHODIUM"], x: 32, y: 3,
+    teach: {
+      for: "A &6platinum-rhodium gauze&r is the catalyst for burning ammonia into nitric acid. Nitric acid no longer comes from the elements.",
+      needs: "Platinum and rhodium foil in an assembler, then the large chemical reactor with ammonia and oxygen.",
+      unlocks: "Nitric acid for explosives, nitrates and what follows.",
+      automate: "Ammonia and oxygen by pipe. Replace the gauze as it wears.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "grindless:platinum_rhodium_gauze" }],
+    rewards: [{ type: "xp", xp: 50 }],
+  },
+  {
+    key: "HV_RUTHENATE", title: "Sodium Rutheniate", icon: "gtceu:sodium_rutheniate_dust", kind: "process", deps: ["HV_PYROSULFATE_FUSION"], x: 18, y: 4.5,
+    teach: {
+      for: "The inert metal mixture is fused with saltpeter into &6sodium rutheniate&r.",
+      needs: "The mixture, saltpeter, salt water and the blast furnace.",
+      unlocks: "Ruthenium tetroxide.",
+      automate: "Mixture by bus from the fusion step.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:sodium_rutheniate_dust" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_RUTHENIUM_TETROXIDE", title: "Ruthenium Tetroxide", icon: "gtceu:ruthenium_tetroxide_bucket", kind: "process", deps: ["HV_RUTHENATE"], x: 20, y: 4.5,
+    teach: {
+      for: "Chlorine turns the rutheniate into &6ruthenium tetroxide&r, a toxic gas. It stays inside the plant.",
+      needs: "Rutheniate, chlorine and a sealed reactor line.",
+      unlocks: "Distillation.",
+      automate: "Pipes only. Never leave it in an open tank.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:ruthenium_tetroxide_bucket" }],
+    rewards: [{ type: "xp", xp: 35 }],
+  },
+  {
+    key: "HV_TETROXIDE_DISTILLATION", title: "Tetroxide Distillation", icon: "gtceu:ruthenium_tetroxide_lq_bucket", kind: "process", deps: ["HV_RUTHENIUM_TETROXIDE"], x: 22, y: 4.5,
+    teach: {
+      for: "A cracker with steam, then the distillation tower, purifies the tetroxide.",
+      needs: "Tetroxide, steam, a cracker and a distillation tower.",
+      unlocks: "Solid tetroxide and ruthenium.",
+      automate: "One closed pipe run from reactor to tower.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:ruthenium_tetroxide_lq_bucket" }],
+    rewards: [{ type: "xp", xp: 40 }],
+  },
+  {
+    key: "HV_RUTHENIUM", title: "Ruthenium", icon: "gtceu:ruthenium_dust", kind: "process", deps: ["HV_TETROXIDE_DISTILLATION"], x: 24, y: 4.5,
+    teach: {
+      for: "A fluid solidifier sets the pure liquid, which is reduced to &6ruthenium&r.",
+      needs: "Purified tetroxide and a fluid solidifier.",
+      unlocks: "Ruthenium for the alloys that ask for it.",
+      automate: "Dust out by bus, no manual handling.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:ruthenium_dust" }],
+    rewards: [{ type: "xp", xp: 45 }],
+  },
+  {
+    key: "HV_ILMENITE_TO_RUTILE", title: "Ilmenite to Rutile", icon: "gtceu:rutile_dust", kind: "process", deps: ["HV_THE_MOON"], x: 34, y: 0,
+    teach: {
+      for: "Starts the titanium line on the Moon: ilmenite is smelted to &6rutile&r, with wrought iron on the side.",
+      needs: "Lunar ilmenite and a blast furnace.",
+      unlocks: "Chlorination. Titanium has no source on Earth.",
+      automate: "Ilmenite by bus from the lunar drills.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:rutile_dust" }],
+    rewards: [{ type: "xp", xp: 40 }],
+  },
+  {
+    key: "HV_CRUDE_TICL4", title: "Crude Tetrachloride", icon: "gtceu:crude_titanium_tetrachloride_bucket", kind: "process", deps: ["HV_ILMENITE_TO_RUTILE"], x: 36, y: 0,
+    teach: {
+      for: "Rutile, carbon and chlorine give &6crude titanium tetrachloride&r and toxic carbon monoxide.",
+      needs: "Rutile, carbon, chlorine and a strong chemical reactor.",
+      unlocks: "Distillation.",
+      automate: "Carbon monoxide goes straight to a burner or a vent scrubber.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:crude_titanium_tetrachloride_bucket" }],
+    rewards: [{ type: "xp", xp: 40 }],
+  },
+  {
+    key: "HV_TICL4_DISTILLATION", title: "Tetrachloride Distillation", icon: "gtceu:titanium_tetrachloride_bucket", kind: "process", deps: ["HV_CRUDE_TICL4"], x: 38, y: 0,
+    teach: {
+      for: "The crude liquid is distilled into clean &6titanium tetrachloride&r. Silica settles out.",
+      needs: "Crude tetrachloride and a distillery.",
+      unlocks: "The Kroll reduction.",
+      automate: "Liquid in by pipe, silica out by bus.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:titanium_tetrachloride_bucket" }],
+    rewards: [{ type: "xp", xp: 40 }],
+  },
+  {
+    key: "HV_KROLL", title: "Kroll Reduction", icon: "gtceu:hot_titanium_ingot", kind: "process", deps: ["HV_TICL4_DISTILLATION"], x: 40, y: 0,
+    teach: {
+      for: "Magnesium takes the chlorine and leaves a &6hot titanium ingot&r. The vacuum freezer cools it.",
+      needs: "Tetrachloride, magnesium and the blast furnace.",
+      unlocks: "Titanium, and magnesium chloride to recycle.",
+      automate: "Magnesium by bus, hot ingots to the freezer by bus.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:hot_titanium_ingot" }],
+    rewards: [{ type: "xp", xp: 50 }],
+  },
+  {
+    key: "HV_MAGNESIUM_RECYCLING", title: "Magnesium Recycling", icon: "gtceu:magnesium_chloride_dust", kind: "process", deps: ["HV_KROLL"], x: 42, y: 0,
+    teach: {
+      for: "Electrolysis splits the magnesium chloride back into magnesium and chlorine.",
+      needs: "Magnesium chloride and an electrolyzer.",
+      unlocks: "A closed loop: no magnesium and no chlorine is lost.",
+      automate: "Magnesium back to the furnace, chlorine back to the reactor.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:magnesium_chloride_dust" }],
+    rewards: [{ type: "xp", xp: 45 }],
   },
 ];
