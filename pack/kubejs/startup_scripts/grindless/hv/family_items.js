@@ -12,6 +12,8 @@
 //                                        and sheldonite ones and GT Community Additions' zirconium; scheelite is on Mars). Same two-layer icon as the Overworld and Nether samples (item/vein_sample_frame +
 //                                        item/vein_sample_core, tinted); put in the input bus of the HV Vein Drill with a drill
 //                                        bit and drilling fluid in its fluid hatch it selects the vein.
+//   grindless:platinum_rhodium_gauze     the Ostwald gauze: 9 platinum foil + 1 rhodium foil (HV assembler); the large chemical reactor's
+//                                        nitric_acid_from_ammonia takes it as a chanced catalyst (server_scripts/grindless/hv/platline.js).
 // It also loads the End vein table into global.grindless.tables.veins_end (the Overworld one is loaded by lib/tables.js, the
 // Nether one by lv/multis_items.js), so startup and server scripts share a single copy.
 // Names / tooltips: client_scripts/grindless/hv_family_lang.js. Textures: item/stainless_steel_drill_bit and item/titanium_drill_bit
@@ -43,6 +45,12 @@
       .texture('grindless:item/titanium_drill_bit')
       .maxStackSize(16)
       .tooltip(Text.gray(Text.translate('tooltip.grindless.titanium_drill_bit')))
+
+    // the catalyst of the integrated nitric acid plant (server_scripts/grindless/hv/platline.js)
+    event.create('grindless:platinum_rhodium_gauze')
+      .texture('grindless:item/platinum_rhodium_gauze')
+      .maxStackSize(16)
+      .tooltip(Text.gray(Text.translate('tooltip.grindless.platinum_rhodium_gauze')))
 
     G.tables.veins_end.veins.forEach(function (vein) {
       var sample = event.create('grindless:vein_sample_' + vein.id)

@@ -1429,6 +1429,7 @@
     {"id":"grindless:plasma_sprayed_tile","kind":"item","needUse":true,"needMade":true,"made":["gtceu:plasma_quench"],"used":["gtceu:assembler"]},
     {"id":"grindless:platinum_electrode","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembler","gtceu:assembly_line","gtceu:pgm_refining","gtceu:photonic_foundry","gtceu:regolith_processing"]},
     {"id":"grindless:platinum_gauze","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:acid_cracking","gtceu:assembler","gtceu:assembly_line"]},
+    {"id":"grindless:platinum_rhodium_gauze","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:large_chemical_reactor"]},
     {"id":"grindless:pluto_kuiper_chart","kind":"item","needUse":false,"needMade":true,"made":["gtceu:telemetry_decoding"],"used":["gtceu:cryotank_winding","gtceu:kuiper_intercept"]},
     {"id":"grindless:plutonian_quantum_seed","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:chemical_reactor"],"used":["ae2:item_transformation","emi:info"]},
     {"id":"grindless:plutonium_244_target","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:heavy_ion_irradiation"]},
