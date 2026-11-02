@@ -30,6 +30,10 @@
   var QUIET_MS = 10000
   var LOADED_AT = Date.now()
   var REQUEST = 'ggTestZpmMagnetWorksRequest'
+  // the wireless tests share the network: they take turns in the order they were asked for (gg_test_luv_a4.js, gg_test_wireless_*.js)
+  var QUEUE = 'ggTestWirelessQueue'
+  var TURN_WAIT_MS = 120000
+  var waitingSince = 0
 
   var MACHINE_ID = 'gtceu:naquadria_magnet_works'
   var TYPE_ID = 'gtceu:naquadria_magnets'
@@ -68,6 +72,23 @@
 
   function note(name, detail) {
     emit(name, 'NOTE', detail)
+  }
+
+  function queueList() {
+    var s = global[QUEUE]
+    s = s === undefined || s === null ? '' : String(s)
+    return s === '' ? [] : s.split(',')
+  }
+  function joinQueue(name) {
+    var q = queueList()
+    if (q.indexOf(name) < 0) q.push(name)
+    global[QUEUE] = q.join(',')
+  }
+  function leaveQueue(name) {
+    global[QUEUE] = queueList().filter(function (n) { return n !== name }).join(',')
+  }
+  function myTurn(name) {
+    return queueList()[0] === name
   }
 
   function asArray(coll) {
@@ -459,6 +480,7 @@
     if (S === null || S.finished) return
     S.finished = true
     cleanup()
+    leaveQueue(SCOPE)
     console.info(TAG + SCOPE + '|DONE')
   }
 
@@ -564,10 +586,27 @@
     startWorks()
   }
 
-  function startIfRequested(server) {
-    if (global[REQUEST] !== true || (S !== null && !S.finished)) return
-    if (Date.now() - LOADED_AT < QUIET_MS) return
+  // no cleanup: another wireless test holds the network and its registry
+  function gaveUp() {
     global[REQUEST] = false
+    waitingSince = 0
+    check('TURN', false, 'asked for and had no turn on the wireless network in ' + (TURN_WAIT_MS / 1000) + ' s: the queue is [' + queueList().join(', ') + ']')
+    leaveQueue(SCOPE)
+    console.info(TAG + SCOPE + '|DONE')
+  }
+
+  function startIfRequested(server) {
+    if (global[REQUEST] !== true || (S !== null && !S.finished)) {
+      if (global[REQUEST] !== true) waitingSince = 0
+      return
+    }
+    if (waitingSince === 0) waitingSince = Date.now()
+    if (Date.now() - LOADED_AT < QUIET_MS || !myTurn(SCOPE)) {
+      if (Date.now() - waitingSince > TURN_WAIT_MS) gaveUp()
+      return
+    }
+    global[REQUEST] = false
+    waitingSince = 0
     try {
       run(server)
     } catch (e) {
@@ -587,6 +626,8 @@
       return 0
     }
     global[REQUEST] = true
+    waitingSince = Date.now()
+    joinQueue(SCOPE)
     return 1
   })
 })()
