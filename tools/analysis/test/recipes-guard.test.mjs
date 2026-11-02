@@ -10,11 +10,12 @@ import { unguardedRecipeHandlers } from '../lib/recipes_guard_rule.mjs';
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 const GUARD = path.join(repo, 'pack/kubejs/server_scripts/grindless/lib/recipes_guard.js');
 
-test('the rule flags a bare handler and accepts the wrapper and a one-try/catch handler', () => {
+test('the rule flags a bare handler and accepts the wrapper and a handler with a try block', () => {
   assert.deepEqual(unguardedRecipeHandlers('ServerEvents.recipes(function (event) {\n  var a = 1\n})\n'), [{ line: 1 }]);
   assert.deepEqual(unguardedRecipeHandlers('ServerEvents.recipes(function (event) {\n  try { a(event) } catch (e) { console.error(e) }\n})'), []);
-  assert.deepEqual(unguardedRecipeHandlers('ServerEvents.recipes(function (event) {\n  try { a(event) } catch (e) { x() }\n  b(event)\n})'), [{ line: 1 }]);
-  assert.deepEqual(unguardedRecipeHandlers('ServerEvents.recipes(function (event) {\n  steps.forEach(function (s) { try { s(event) } catch (e) { x() } })\n})'), [{ line: 1 }]);
+  assert.deepEqual(unguardedRecipeHandlers('ServerEvents.recipes(function (event) {\n  try { a(event) } catch (e) { x() }\n  b(event)\n})'), []);
+  assert.deepEqual(unguardedRecipeHandlers('ServerEvents.recipes(function (event) {\n  steps.forEach(function (s) { try { s(event) } catch (e) { x() } })\n})'), []);
+  assert.deepEqual(unguardedRecipeHandlers('ServerEvents.recipes(function (event) { addKeys(event) })'), [{ line: 1 }]);
   assert.deepEqual(unguardedRecipeHandlers('ServerEvents.recipes(handler)'), [{ line: 1 }]);
   assert.deepEqual(unguardedRecipeHandlers("global.grindless.recipes('x/y', function (event) {\n  a(event)\n})"), []);
   assert.deepEqual(unguardedRecipeHandlers('// ServerEvents.recipes(function (event) {\nvar s = "ServerEvents.recipes(function (e) {"'), []);

@@ -6,7 +6,7 @@ const q = (id) => ({ id });
 
 test('a waiver that suppresses nothing is reported as unused', () => {
   const cfg = { allowLayout: [{ from: 'A', to: 'B', why: 'x' }], allowLongEdges: [{ from: 'C', to: 'D', why: 'y' }] };
-  const book = { groups: [], chapters: [] };
+  const book = { groups: [], chapters: [], objectIds: [] };
   const f = checkBook(book, cfg).filter((x) => x.rule === 'unused-waiver');
   assert.equal(f.length, 2);
   assert.deepEqual(unusedWaivers(cfg).map((w) => w.list), ['allowLayout', 'allowLongEdges']);

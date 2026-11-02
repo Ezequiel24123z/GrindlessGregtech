@@ -1,6 +1,7 @@
 // Guard rule for the pack's recipe handlers (AF-K3, audit M8-07). KubeJS 2001 posts ServerEvents.recipes without an exception handler, so one
 // handler that throws ends the handlers of every script that loads after it. A handler is guarded when it is registered through
-// global.grindless.recipes(name, fn) (server_scripts/grindless/lib/recipes_guard.js) or when its whole body is one try/catch.
+// global.grindless.recipes(name, fn) (server_scripts/grindless/lib/recipes_guard.js) or when its body holds a try block (a whole-body try/catch,
+// or one per step as in uhv/gate.js).
 // unguardedRecipeHandlers(source) -> [{ line }] for every ServerEvents.recipes( call that is neither. Text-based on the masked source
 // (lib/scope_rules.mjs mask: comments, strings and regex literals blanked), so a comment that names the event is not a handler.
 import { mask } from './scope_rules.mjs';
@@ -50,7 +51,7 @@ export function unguardedRecipeHandlers(source) {
     }
     const open = afterParen + fn[0].length - 1;
     const end = closing(m, open, '{', '}');
-    if (end < 0 || !isOneTryCatch(m.slice(open + 1, end))) out.push({ line });
+    if (end < 0 || !/\btry\s*\{/.test(m.slice(open + 1, end))) out.push({ line });
   }
   return out;
 }
