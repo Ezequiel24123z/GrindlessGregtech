@@ -1685,7 +1685,8 @@
         "grindless:frc_forming/confined_vms_plasma",
         "grindless:disk_skimming/skim_hot_flow",
         "grindless:blandford_znajek/frc_spin_down",
-        "grindless:plasma_mass_filtering/cooled_exhaust_return"
+        "grindless:plasma_mass_filtering/cooled_exhaust_return",
+        "grindless:plasma_mass_filtering/reconnection_plasmoid_return"
       ],
       "package": [
         "B2",
