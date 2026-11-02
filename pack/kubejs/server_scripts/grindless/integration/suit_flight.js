@@ -13,8 +13,10 @@
 // respawn and dimension change, because the marker survives them and the abilities may not.
 //
 // Jetpack: on the advanced chestplates GTM's jetpack (the NBT flag 'enabled') would thrust and drain on top of creative flight.
-// While the player is flying on our flight, 'enabled' is switched off and remembered ('gg_suit_jet'); it is switched back on when
-// flight stops. So there is one drain and no jetpack speed on top of creative flight.
+// While the player is flying on our flight, 'enabled' is switched off and the chestplate itself is marked ('gg_jet_off'); whenever a
+// marked chestplate is worn outside our flight, 'enabled' goes back on. So there is one drain and no jetpack speed on top of
+// creative flight. The mark travels with the item: a chestplate taken off mid-flight gets its jetpack back the next time it is
+// worn, and a jetpack its owner had switched off is never switched on.
 ;(function () {
   var CHECK = 5
   var WARN_EVERY = 100
@@ -29,7 +31,7 @@
     'gtceu:advanced_quarktech_chestplate': true
   }
   var K_FLIGHT = 'gg_suit_flight'
-  var K_JET = 'gg_suit_jet'
+  var K_JET_OFF = 'gg_jet_off'
 
   var Helper = Java.loadClass('com.gregtechceu.gtceu.api.capability.GTCapabilityHelper')
   var Slot = Java.loadClass('net.minecraft.world.entity.EquipmentSlot')
@@ -41,19 +43,33 @@
     p.onUpdateAbilities()
   }
 
-  // Puts the advanced chestplate's jetpack back as it was, if we switched it off.
-  function restoreJetpack(p, stack, data) {
-    if (!data.getBoolean(K_JET)) return
-    data.putBoolean(K_JET, false)
-    if (stack !== null && !stack.isEmpty() && JETPACKS[String(stack.id)]) {
-      var tag = stack.getNbt()
-      if (tag !== null && tag !== undefined) tag.putBoolean('enabled', true)
+  // The NBT of a worn advanced chestplate (the ones with GTM's jetpack), or null.
+  function jetTag(stack) {
+    if (stack === null || stack === undefined || stack.isEmpty() || !JETPACKS[String(stack.id)]) return null
+    var tag = stack.getNbt()
+    return tag === null || tag === undefined ? null : tag
+  }
+
+  // Switches the jetpack off for our flight and marks the chestplate, if the jetpack is on.
+  function suppressJetpack(stack) {
+    var tag = jetTag(stack)
+    if (tag !== null && tag.getBoolean('enabled')) {
+      tag.putBoolean('enabled', false)
+      tag.putBoolean(K_JET_OFF, true)
     }
   }
 
-  function revoke(p, stack, data) {
+  // Switches the jetpack of a chestplate we marked back on.
+  function restoreJetpack(stack) {
+    var tag = jetTag(stack)
+    if (tag !== null && tag.getBoolean(K_JET_OFF)) {
+      tag.remove(K_JET_OFF)
+      tag.putBoolean('enabled', true)
+    }
+  }
+
+  function revoke(p, data) {
     data.putBoolean(K_FLIGHT, false)
-    restoreJetpack(p, stack, data)
     setFlight(p, false)
   }
 
@@ -71,10 +87,8 @@
     }
 
     if (p.isCreative() || p.isSpectator()) {
-      if (marked) {
-        data.putBoolean(K_FLIGHT, false)
-        restoreJetpack(p, stack, data)
-      }
+      if (marked) data.putBoolean(K_FLIGHT, false)
+      restoreJetpack(stack)
       return
     }
 
@@ -83,7 +97,8 @@
     var ab = p.getAbilities()
 
     if (!eligible) {
-      if (marked) revoke(p, stack, data)
+      if (marked) revoke(p, data)
+      restoreJetpack(stack)
       return
     }
 
@@ -92,21 +107,16 @@
       data.putBoolean(K_FLIGHT, true)
       marked = true
     } else if (!marked) {
+      restoreJetpack(stack)
       return
     }
 
     if (!ab.flying) {
-      restoreJetpack(p, stack, data)
+      restoreJetpack(stack)
       return
     }
 
-    if (JETPACKS[String(stack.id)]) {
-      var tag = stack.getNbt()
-      if (tag !== null && tag !== undefined && tag.getBoolean('enabled')) {
-        tag.putBoolean('enabled', false)
-        data.putBoolean(K_JET, true)
-      }
-    }
+    suppressJetpack(stack)
     elec.discharge(amount, elec.getTier(), true, false, false)
     var max = Number(elec.getMaxCharge())
     if (max > 0 && Number(elec.getCharge()) <= max / 10 && p.age % WARN_EVERY < CHECK) {
