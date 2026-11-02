@@ -13,7 +13,7 @@
 (function () {
   var LOG = '[grindless/megacells] '
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/megacells', function (event) {
     event.remove({ id: 'megacells:inscriber/accumulation_processor' })
     if (!Item.exists('megacells:accumulation_processor')) {
       console.warn(LOG + 'megacells:accumulation_processor does not exist; nothing added')

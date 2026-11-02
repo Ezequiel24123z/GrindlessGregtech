@@ -956,7 +956,7 @@
 
   W.recipes = recipeList()
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('lv/wireless_energy', function (event) {
     W.recipes.forEach(function (r) {
       event.recipes.gtceu.assembler(r.builderId)
         .itemInputs(r.inputs)

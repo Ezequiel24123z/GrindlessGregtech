@@ -61,7 +61,7 @@
   ROWS.dial = DIAL
   ROWS.recharge = RECHARGE
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('maxplus/hyperstargate', function (event) {
     guarded(CONTROLLER.name, CONTROLLER.items.map(function (x) { return x[0] }).concat(['gtceu:hyperstargate']), [KERR], function () {
       var b = event.recipes.gtceu.hyper_assembly_array('grindless:' + CONTROLLER.name)
       CONTROLLER.items.forEach(function (x) { b.itemInputs(x[1] + 'x ' + (x[0] === 'grindless:horizon_processor' ? '#gtceu:circuits/maxplus' : x[0])) })
