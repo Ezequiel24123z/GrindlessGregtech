@@ -36,7 +36,8 @@
   // the stage recipes of each composed line and how many runs of each the table's batch makes (solved by hand from its given amounts)
   var LINES = [
     { name: 'ptfe', stages: [['gtceu:chemical_reactor/chloroform', 2], ['gtceu:chemical_reactor/hydrofluoric_acid_from_elements', 4],
-      ['gtceu:chemical_reactor/tetrafluoroethylene_from_chloroform', 1], ['gtceu:chemical_reactor/ptfe_from_oxygen', 1000 / 144]] },
+      ['grindless:chemical_reactor/r22_from_chloroform', 2], ['grindless:large_chemical_reactor/tetrafluoroethylene_from_r22_pyrolysis', 1],
+      ['gtceu:chemical_reactor/ptfe_from_oxygen', 1000 / 144]] },
     { name: 'epoxy', stages: [['gtceu:chemical_reactor/phenol_from_cumene', 2], ['gtceu:chemical_reactor/bisphenol_a', 1], ['gtceu:chemical_reactor/allyl_chloride', 1],
       ['gtceu:chemical_reactor/hypochlorous_acid', 1], ['gtceu:chemical_reactor/epichlorohydrin_from_allyl_chloride', 1], ['gtceu:chemical_reactor/epoxy_from_bisphenol_a', 1]] },
     { name: 'para_aramid', stages: [['gcyr:chemical_reactor/nitroaniline', 2], ['gcyr:chemical_reactor/para_phenylenediamine', 2],

@@ -20,15 +20,17 @@ const fluidIn = (tag, amount) => ({ content: { amount, value: [{ tag }] } });
 const fluidOut = (id, amount) => ({ content: { amount, value: [{ fluid: id }] } });
 const circuit = { content: { type: 'gtceu:circuit', configuration: 1 }, chance: 0 };
 const naoh = { content: { type: 'gtceu:sized', count: 3, ingredient: { tag: 'forge:dusts/sodium_hydroxide' } } };
-const stage = (eut, duration, inputs, outputs) => ({ type: 'gtceu:chemical_reactor', duration, tickInputs: { eu: [{ content: eut }] }, inputs, outputs });
+const stage = (eut, duration, inputs, outputs, type = 'gtceu:chemical_reactor') => ({ type, duration, tickInputs: { eu: [{ content: eut }] }, inputs, outputs });
 // GTM 7.5.3's stage recipes as the bench dump holds them
 const STAGES = {
   'gtceu:chemical_reactor/chloroform': stage(30, 80, { item: [circuit], fluid: [fluidIn('forge:chlorine', 6000), fluidIn('forge:methane', 1000)] },
     { fluid: [fluidOut('gtceu:hydrochloric_acid', 3000), fluidOut('gtceu:chloroform', 1000)] }),
   'gtceu:chemical_reactor/hydrofluoric_acid_from_elements': stage(7, 60, { fluid: [fluidIn('forge:hydrogen', 1000), fluidIn('forge:fluorine', 1000)] },
     { fluid: [fluidOut('gtceu:hydrofluoric_acid', 1000)] }),
-  'gtceu:chemical_reactor/tetrafluoroethylene_from_chloroform': stage(240, 480, { fluid: [fluidIn('forge:chloroform', 2000), fluidIn('forge:hydrofluoric_acid', 4000)] },
-    { fluid: [fluidOut('gtceu:hydrochloric_acid', 6000), fluidOut('gtceu:tetrafluoroethylene', 1000)] }),
+  'grindless:chemical_reactor/r22_from_chloroform': stage(240, 240, { fluid: [fluidIn('forge:chloroform', 1000), fluidIn('forge:hydrofluoric_acid', 2000)] },
+    { fluid: [fluidOut('gtceu:chlorodifluoromethane', 1000), fluidOut('gtceu:hydrochloric_acid', 2000)] }),
+  'grindless:large_chemical_reactor/tetrafluoroethylene_from_r22_pyrolysis': stage(480, 240, { fluid: [fluidIn('forge:chlorodifluoromethane', 2000)] },
+    { fluid: [fluidOut('gtceu:tetrafluoroethylene', 1000), fluidOut('gtceu:hydrochloric_acid', 2000)] }, 'gtceu:large_chemical_reactor'),
   'gtceu:chemical_reactor/ptfe_from_oxygen': stage(30, 160, { item: [circuit], fluid: [fluidIn('forge:oxygen', 1000), fluidIn('forge:tetrafluoroethylene', 144)] },
     { fluid: [fluidOut('gtceu:polytetrafluoroethylene', 216)] }),
   'gtceu:chemical_reactor/phenol_from_cumene': stage(30, 160, { fluid: [fluidIn('forge:oxygen', 2000), fluidIn('forge:cumene', 1000)] },
@@ -208,8 +210,8 @@ test('the composed lines equal the sum of their stage recipes (PTFE and epoxy by
   assert.deepEqual(plain(h.G.megaChemicalComplex.skipped.map((s) => s.name)), ['para_aramid'], 'the Gregicality line is skipped, not invented, when its stages are not live');
   assert.equal(out.complex.length, 2);
 
-  // PTFE by hand: 2000 mB methane = 2 runs of chloroform (12000 mB chlorine, 6000 mB HCl, 2000 mB chloroform); 2000 mB chloroform + 4000 mB HF is 1 TFE run
-  // (4 HF runs: 4000 mB hydrogen and fluorine); 1000 mB TFE is 1000 / 144 = 6.9444 runs of PTFE (6945 mB oxygen, 1500 mB PTFE); HCl 3000 x 2 + 6000 = 12000
+  // PTFE by hand: 2000 mB methane = 2 runs of chloroform (12000 mB chlorine, 6000 mB HCl, 2000 mB chloroform); 2000 mB chloroform + 4000 mB HF is 2 R22 runs (2000 R22, 4000 HCl) and 1 pyrolysis run (1000 TFE, 2000 HCl)
+  // (4 HF runs: 4000 mB hydrogen and fluorine); 1000 mB TFE is 1000 / 144 = 6.9444 runs of PTFE (6945 mB oxygen, 1500 mB PTFE); HCl 3000 x 2 + 2000 x 2 + 2000 = 12000
   const P = byName.ptfe;
   assert.deepEqual(plain(fluidMap(P.fluidsIn)), {
     'gtceu:chlorine': 12000, 'gtceu:methane': 2000, 'gtceu:hydrogen': 4000, 'gtceu:fluorine': 4000, 'gtceu:oxygen': Math.ceil(1000 / 144 * 1000) / 1000 * 1000 === 6945 ? 6945 : 6944,
@@ -217,7 +219,7 @@ test('the composed lines equal the sum of their stage recipes (PTFE and epoxy by
   assert.deepEqual(plain(fluidMap(P.fluidsOut)), { 'gtceu:hydrochloric_acid': 12000, 'gtceu:polytetrafluoroethylene': 1500 });
   assert.deepEqual(plain(P.itemsIn), []);
   assert.deepEqual(plain(P.itemsOut), []);
-  const sumP = 30 * 80 * 2 + 7 * 60 * 4 + 240 * 480 * 1 + 30 * 160 * (1000 / 144);
+  const sumP = 30 * 80 * 2 + 7 * 60 * 4 + 240 * 240 * 2 + 480 * 240 + 30 * 160 * (1000 / 144);
   assert.ok(Math.abs(P.sourceEnergy - sumP) < 1e-3, `sourceEnergy ${P.sourceEnergy} vs ${sumP}`);
 
   // epoxy by hand: 2000 mB cumene = 2 phenol runs (4000 mB oxygen, 2000 phenol, 2000 acetone); 1 bisphenol A run takes 2000 phenol, 1000 acetone, 1000 HCl (the HCl of the
@@ -238,7 +240,7 @@ test('the composed lines equal the sum of their stage recipes (PTFE and epoxy by
     assert.ok(rec.eut * rec.duration >= sum - 1e-6, rec.name);
     assert.ok(rec.eut * rec.duration - sum < rec.duration, rec.name);
   }
-  assert.equal(P.duration, 5);
+  assert.equal(P.duration, 9);
   assert.equal(E.duration, 2);
   const built = Object.fromEntries(out.complex.map((r) => [r.id, r]));
   assert.ok(built['grindless:ptfe'] && built['grindless:epoxy']);

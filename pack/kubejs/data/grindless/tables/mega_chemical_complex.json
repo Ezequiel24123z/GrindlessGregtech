@@ -2,7 +2,7 @@
   "_source": "Our own table: the lines of the LuV Mega Chemical Complex, gtceu:mega_chemical_complex (docs/eras/mega.md 4.8). Each line is composed from GTM's live recipes by server_scripts/grindless/lib/compose.js: the recipe takes and gives what the whole line takes and gives, every byproduct leaving as an output (rule 3), with the energy of every stage summed (rule 7) and spent at maxEUt (LuV, 32768 EU/t).",
   "_how_it_is_used": [
     "Read by server_scripts/grindless/luv/mega_chemical_complex.js at every server load. Each entry becomes one gtceu:mega_chemical_complex recipe, id grindless:mega_chemical_complex/<name>. `stages` are recipe ids read from the loaded pack, `given` is the batch (keys 'i:<item>' or 'f:<fluid>'), `linked` are the intermediates that net to zero; given + linked must equal the number of stages.",
-    "PTFE: chlorine + methane -> chloroform (+ HCl), hydrogen + fluorine -> HF, chloroform + HF -> tetrafluoroethylene (+ HCl), tetrafluoroethylene + oxygen -> PTFE. Fluorine and chlorine are inputs; all the HCl leaves as an output.",
+    "PTFE: chlorine + methane -> chloroform (+ HCl), hydrogen + fluorine -> HF, chloroform + HF -> chlorodifluoromethane (+ HCl), 2 R22 -> tetrafluoroethylene (+ HCl, pyrolysis in the large chemical reactor), tetrafluoroethylene + oxygen -> PTFE. Fluorine and chlorine are inputs; all the HCl leaves as an output.",
     "Epoxy: cumene + oxygen -> phenol + acetone, phenol + acetone + HCl -> bisphenol A (+ diluted HCl), propene + chlorine -> allyl chloride (+ HCl), water + chlorine -> hypochlorous acid (+ diluted HCl), allyl chloride + hypochlorous acid + NaOH -> epichlorohydrin (+ salt water), epichlorohydrin + bisphenol A + NaOH -> epoxy (+ salt water). Two cumene runs make the two phenols a batch needs, so one acetone is left over and leaves as an output.",
     "Para-aramid: nitrochlorobenzene + ammonia -> nitroaniline (+ ammonium chloride), nitroaniline + hydrogen -> para-phenylenediamine (+ water), para-xylene + chlorine -> bis(trichloromethyl)benzene (+ HCl), methylbenzaldehyde + oxygen -> terephthalic acid (+ hydrogen), the two -> terephthaloyl chloride (+ HCl), diamine + chloride -> para-aramid (+ HCl, large chemical reactor stage). 2000 mB of nitrochlorobenzene makes whole runs of every stage."
   ],
@@ -13,11 +13,12 @@
       "stages": [
         "gtceu:chemical_reactor/chloroform",
         "gtceu:chemical_reactor/hydrofluoric_acid_from_elements",
-        "gtceu:chemical_reactor/tetrafluoroethylene_from_chloroform",
+        "grindless:chemical_reactor/r22_from_chloroform",
+        "grindless:large_chemical_reactor/tetrafluoroethylene_from_r22_pyrolysis",
         "gtceu:chemical_reactor/ptfe_from_oxygen"
       ],
       "given": { "f:gtceu:methane": 2000 },
-      "linked": ["f:gtceu:chloroform", "f:gtceu:hydrofluoric_acid", "f:gtceu:tetrafluoroethylene"]
+      "linked": ["f:gtceu:chloroform", "f:gtceu:hydrofluoric_acid", "f:gtceu:chlorodifluoromethane", "f:gtceu:tetrafluoroethylene"]
     },
     {
       "name": "epoxy",
