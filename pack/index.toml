@@ -18382,7 +18382,7 @@ hash = "2498da3b1dada91f89f40ee5e4b102cbfb58f9aa92326a356be8da5f2fbfdedb"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lib/wireless_registry.js"
-hash = "dd69004f380e2fead8ee3c2a64d98443206d4f866cd1936b14fffc2dec0813c1"
+hash = "f26b42679dae6eaf114849f6b1b3a9fdb068d959c03305b60481cf2cf577803b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/luv/asteroid_belt.js"
@@ -18494,7 +18494,7 @@ hash = "f793148a54b3319c8a8f42228af2a328cc039cd018b5ddd149d5c5a693fb9c24"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/lv/wireless_energy.js"
-hash = "7519daa87c08a5b45ef1fa2a75f84d5a71f44c75d401c3b344ef84aa570d5398"
+hash = "d703a77556e3b43d51dd21752a426b6124ec6425e8e530d56105345fe06fa22b"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/mars/travel.js"
