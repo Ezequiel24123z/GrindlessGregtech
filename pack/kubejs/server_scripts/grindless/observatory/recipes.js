@@ -12,7 +12,7 @@
 //                            120 EU/t, 600 ticks. Night (the Moon is up) and no thunderstorm (thunder level under 0.2); rain is fine.
 //   gtceu:assembler          (LV)  2 glass plates + 1 small pile of silver dust (the emulsion) -> 2 photographic plates, 16 EU/t, 100 t
 //   crafting (copies)        draft + paper + coal dust -> 2 drafts; map + photographic plate -> 2 maps (a contact print);
-//                            landing chart + paper + coal dust -> 2 (the ephemeris is not copied: the telescope's recipe consumes one)
+//                            landing chart + paper + coal dust -> 2 (the ephemeris is not copied: the telescope keeps it, and every lunar_map run yields another)
 // Every observation recipe carries the data key grindless_sky (steam, optical, radio): the EMI line of its type spells the sky rule out.
 // No inflated times and no chance: an observation is 30 s and always gives its chart. Published for the test:
 // global.grindless.observatory.recipes.
