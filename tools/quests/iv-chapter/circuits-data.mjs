@@ -13,17 +13,13 @@ export const CHAPTER = {
   autofocus: "IVCA",
   title: "IV: Circuits",
   subtitle: ["Naquadah in the wafer, and the first circuits that no hand-built line can feed."],
+  section: { name: "Circuits", origin: { x: 0, y: 0 }, heading: { key: "IV_H_CIRCUITS", x: 64.25, y: 0, deps: ["IV_ASSEMBLY_LINE"], icon: "gtceu:quantum_processor" } },
 };
-
-export const LINKS = [
-  { key: "C_L_IV_ASSEMBLY_LINE", ref: "IV_ASSEMBLY_LINE", x: 0, y: 0 },
-  { key: "C_L_IV_NAQUADAH_INGOT", ref: "IV_NAQUADAH_INGOT", x: 0, y: 1.5 },
-];
 
 export const QUESTS = [
   {
     key: "IVCA", kind: "machine", title: "IV Circuit Assembler", icon: "gtceu:iv_circuit_assembler",
-    deps: ["IV_ASSEMBLY_LINE"], x: 2, y: 0,
+    deps: ["IV_H_CIRCUITS"], x: 67.25, y: -0.75,
     teach: {
       for: "The &6IV Circuit Assembler&r builds the quantum circuits, which the EV assembler cannot.",
       needs: "Nanoprocessor Supercomputers, the EV line's last circuit, and the machine itself.",
@@ -36,7 +32,7 @@ export const QUESTS = [
   },
   {
     key: "IVLE", kind: "machine", title: "IV Laser Engraver", icon: "gtceu:iv_laser_engraver",
-    deps: ["IVCA"], x: 2, y: -1.5,
+    deps: ["IVCA"], x: 69.5, y: 0.75,
     teach: {
       for: "The &6IV Laser Engraver&r etches the quantum wafers with lenses the EV engraver cannot hold.",
       needs: "An IV laser engraver and a cutter beside it, both in the cleanroom.",
@@ -49,7 +45,7 @@ export const QUESTS = [
   },
   {
     key: "IVCAL", kind: "machine", title: "Circuit Assembly Line", icon: "gtnn:circuit_assembly_line",
-    deps: ["IVLE"], x: 4, y: -1.5,
+    deps: ["IVLE"], x: 71, y: 0.75,
     teach: {
       for: "The &6Circuit Assembly Line&r builds quantum circuits in bulk, with several inputs at once.",
       needs: "Its controller, plus the same boards and chips the single assembler uses.",
@@ -62,7 +58,7 @@ export const QUESTS = [
   },
   {
     key: "IVNB", kind: "process", title: "Naquadah Boule", icon: "gtceu:naquadah_boule",
-    deps: ["IV_NAQUADAH_INGOT"], x: 2, y: 1.5,
+    deps: ["IV_NAQUADAH_INGOT"], x: 64.25, y: -1.25,
     teach: {
       for: "Naquadah grows into a boule in the blast furnace, and the cutter slices it into &6Naquadah Wafers&r.",
       needs: "Naquadah from Venus and a blast furnace that reaches the temperature.",
@@ -75,7 +71,7 @@ export const QUESTS = [
   },
   {
     key: "IVSOC", kind: "wafer", title: "SoC Wafer", icon: "gtceu:soc_wafer",
-    deps: ["IVNB"], x: 4, y: 1.5,
+    deps: ["IVNB"], x: 66.5, y: -2.25,
     teach: {
       for: "A naquadah wafer, engraved, becomes the &6SoC Wafer&r and the cutter turns it into &6SoCs&r.",
       needs: "The IV laser engraver and a cleanroom.",
@@ -88,7 +84,7 @@ export const QUESTS = [
   },
   {
     key: "IVQB", kind: "wafer", title: "QBit CPU Wafer", icon: "gtceu:qbit_cpu_wafer",
-    deps: ["IVSOC"], x: 6, y: 1.5,
+    deps: ["IVSOC"], x: 70.25, y: -2.25,
     teach: {
       for: "The &6QBit CPU Wafer&r is a CPU wafer treated with radon, and its chips go into every quantum assembly.",
       needs: "Radon from the air line and a chemical reactor that can take it.",
@@ -101,7 +97,7 @@ export const QUESTS = [
   },
   {
     key: "IVHP", kind: "wafer", title: "HPIC Wafer", icon: "gtceu:hpic_wafer",
-    deps: ["IVQB"], x: 8, y: 1.5,
+    deps: ["IVQB"], x: 71.5, y: -2,
     teach: {
       for: "The &6HPIC Wafer&r carries the high-power chips that every IV energy part asks for.",
       needs: "A large chemical reactor, or the epitaxy route if you have built it.",
@@ -114,7 +110,7 @@ export const QUESTS = [
   },
   {
     key: "IVQP", kind: "circuit", title: "Quantum Processor", icon: "gtceu:quantum_processor",
-    deps: ["IVCA", "IVSOC"], x: 4, y: 0,
+    deps: ["IVCA", "IVSOC"], x: 68.75, y: -0.75,
     teach: {
       for: "The &6Quantum Processor&r is the quantum line's EV circuit, and it needs a SoC to exist.",
       needs: "SoCs, and the IV assembler or the assembly line.",
@@ -127,7 +123,7 @@ export const QUESTS = [
   },
   {
     key: "IVQA", kind: "circuit", title: "Quantum Assembly", icon: "gtceu:quantum_processor_assembly",
-    deps: ["IVQP", "IVQB"], x: 6, y: 0,
+    deps: ["IVQP", "IVQB"], x: 73, y: 0.25,
     teach: {
       for: "The &6Quantum Processor Assembly&r is the quantum line's IV circuit.",
       needs: "Quantum processors and QBit chips.",
@@ -140,7 +136,7 @@ export const QUESTS = [
   },
   {
     key: "IVQC", kind: "circuit", title: "Quantum Processor Computer", icon: "gtceu:quantum_processor_computer",
-    deps: ["IVQA", "IVHP"], x: 8, y: 0,
+    deps: ["IVQA", "IVHP"], x: 75.25, y: 0,
     teach: {
       for: "The &6Quantum Processor Computer&r is the quantum line's LuV circuit and the real wall of IV.",
       needs: "Assemblies and HPIC chips, which means the whole wafer row behind it.",
@@ -153,7 +149,7 @@ export const QUESTS = [
   },
   {
     key: "IVQM", kind: "signature", title: "Quantum Processor Mainframe", icon: "gtceu:quantum_processor_mainframe",
-    deps: ["IVQC"], x: 10, y: 0,
+    deps: ["IVQC"], x: 76.75, y: 0.25,
     teach: {
       for: "The &6Quantum Processor Mainframe&r closes the quantum ladder.",
       needs: "Computers, and the same cleanroom discipline at a larger scale.",
