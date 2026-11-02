@@ -2,7 +2,7 @@
 
 Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Overwrite it at each accepted batch; do not append history.
 
-- **Playable version:** v1.0.0 "Reforge" (`docs/releases/v1.0.0.md`; tag `v1.0.0`, commit 1b4e9b6f, is `main`, `releases` and `playable`; GitHub release v1.0.0 with the pinned Prism zip). A new world is required. The player channel is `releases` (release `releases-channel`, `Gregtech-Grindless-releases.zip`); `playable` is mirrored to it during the transition.
+- **Playable version:** v1.0.1 (`docs/releases/v1.0.1.md`: 80 more machine loops on v1.0.0 "Reforge", `docs/releases/v1.0.0.md`; tag `v1.0.1` is `main`, `releases` and `playable`; GitHub releases with the pinned Prism zips). v1.0.0 needed a new world; v1.0.1 keeps it. The player channel is `releases` (release `releases-channel`, `Gregtech-Grindless-releases.zip`); `playable` is mirrored to it during the transition.
 - **Integration branch:** `ezequiel24123z-project-reforge`. Every package branches from it and is merged back with `--no-ff` by the integrator; `main` follows the released tags.
 - **Current milestone:** Project Reforge, done: released as v1.0.0 on 2026-11-01 (DECISIONS.md:695), v0.17.0 to v1.0.0 in ten phases: 0 rules and diagnosis, 1 cost tooling, 2 cost rebalance, 3 era and line audit, 4 research, 5 quests, 6 assets and sounds, 7 MAX+ and the Hyperstargate, 8 cleanup, 9 release. No save compatibility (DECISIONS.md:701): v1.0.0 needs a new world.
 - **Done:**
@@ -54,7 +54,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
   - T2 on the VM, dumps 6775f27e and ebd3ff19: reachability PASS for all 16 tiers (Steam to MAX+); capacity 0 known violations; `gg_test_quests` PASS (every chapter's counts and group, MAX+ included); the hide table regenerated.
 - **In flight:** none.
 
-- **Next:** none queued. Project Reforge is released as v1.0.0. Post-release candidates, each a package only on the owner's word: the Power bands after LuV (RF-5P), the 220 multiblocks without a loop sound of their own, an in-game listen of the flagged loops, and the stale `gtceu` energy-hatch model names in old test overlays (`gg_test_*_s0_parts.js`, test-only).
+- **Next:** none queued. Project Reforge is released as v1.0.0. Post-release candidates, each a package only on the owner's word: the Power bands after LuV (RF-5P), loops for the line signatures below UEV that still use GTM sounds, an in-game listen of the flagged loops, and the stale `gtceu` energy-hatch model names in old test overlays (`gg_test_*_s0_parts.js`, test-only).
 - **Workstation rule** (owner, 2026-11-01): the workstation only edits; T0 runs in GitHub Actions on every push or on the VM, and the analysis suite, cost solves, dump-based tools and Minecraft run on the VM (`tools/vm/gg-vm-exec.sh`, `docs/testing/usage.md`). Up to 10 nested sessions at once (AGENTS.md:42); the workstation holds about 6 with headroom. Package sessions use the default agent: the `implementer` agent has no cross-session messaging, so its handoffs never reach the orchestrator.
 - **Repository:** unmerged historical branches are kept only as `archive/*` tags; finished package branches are deleted after integration.
 
@@ -82,7 +82,7 @@ Integrator-owned. Read this instead of `DECISIONS.md` and the session notes. Ove
 - **The `maxplus` stage** is a world persistentData flag (`grindless_stage_maxplus`, MX-E1): the pack has no stage mod, and MAX+ packages read the flag.
 - **Assets:**
   - MAX+ has its own art (XP-V1, XP-V2), and the Hyperstargate wears its face;
-  - sound loop-seam and harsh flags need an in-game listen at release; 220 multiblocks have no loop of their own (Phase 6 scope).
+  - 185 of our 310 multiblocks play their own loop (SND-1, #176); the rest run GTM's own recipe types or are not the signature of their line; loop seam and high-end flags need an in-game listen.
 - **Quest generators:** run the Processing Lines writer (`processing-lines/run.ps1 -Write`) before `multiblocks/gen.mjs --write`, because the first rewrites `allowIsolated`. The era chapter groups are hand entries in `chapter_groups.snbt`.
 - **Test environment:**
   - GCYR's configured low gravity is not applied in game (menu only); the design no longer claims it.
