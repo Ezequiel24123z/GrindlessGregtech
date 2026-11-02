@@ -11,9 +11,9 @@
 //   hatch / dynamo: k, d, x y z, t tier, a amps
 //   cover:          k 'cover', d, x y z, s side, ck 'energy' | 'dynamo', t tier
 // Reading never drops anything. A compound that is not a valid entry stays in the list as { bad: why, tag } (the network skips it and
-// it is written back as it was). A list in the old string format, or anything else found under the key, is copied to a free backup
-// key first; a JSON string is then converted (its entries that are not valid stay as bad entries), and the list is written back in the
-// new format. Every problem is returned in `notes` for the caller to log as an error.
+// it is written back as it was). Anything else found under the key is copied to a free backup key, and the list starts empty in the
+// new format (the pre-v1.0.0 single-string list is no longer converted: v1.0.0 needed a new world).
+// Every problem is returned in `notes` for the caller to log as an error.
 //
 // Published as global.grindless.wirelessRegistry: FIELDS, canon(entry), toTag(entry), fromTag(compound), write(list), read(persistent
 // data, key, backup key). The NBT classes come from Java.loadClass (a test hands in its own through `using(classes)`).
@@ -134,34 +134,10 @@
         return { list: list, notes: notes, migrated: false, backup: '' }
       }
     }
-    // the old format, or something unexpected: copied aside before anything else
+    // anything else under the key (an unreadable value, such as a pre-v1.0.0 JSON string): copied aside before anything else
     var backup = freeKey(pd, backupKey)
     pd.put(backup, pd.get(key).copy())
-    if (type === ID.s) {
-      var raw = String(pd.getString(key))
-      var parsed = null
-      try {
-        parsed = JSON.parse(raw)
-      } catch (err) {
-        notes.push('the old list (a JSON string of ' + raw.length + ' characters) could not be parsed (' + err + '); it is kept under ' + backup)
-      }
-      if (parsed !== null && !Array.isArray(parsed)) notes.push('the old list is not a JSON array; it is kept under ' + backup)
-      if (Array.isArray(parsed)) {
-        parsed.forEach(function (e, n) {
-          try {
-            list.push(canon(e))
-          } catch (err) {
-            var keep = new (classes().CompoundTag)()
-            keep.putString('json', JSON.stringify(e))
-            list.push({ bad: String(err.message || err), tag: keep })
-            notes.push('old entry ' + n + ' is kept but not used: ' + (err.message || err))
-          }
-        })
-        notes.push('converted ' + list.length + ' entries from the old JSON string; the string is kept under ' + backup)
-      }
-    } else {
-      notes.push('found NBT type ' + type + ' instead of a list of compounds; it is kept under ' + backup)
-    }
+    notes.push('found NBT type ' + type + ' instead of a list of compounds; it is kept under ' + backup)
     pd.put(key, write(list))
     return { list: list, notes: notes, migrated: true, backup: backup }
   }

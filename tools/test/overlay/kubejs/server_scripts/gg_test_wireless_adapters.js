@@ -12,8 +12,6 @@
 // whole script also runs in a simulated server in tools/analysis/test/wireless_network.test.mjs.
 //
 // Markers: GGTEST|wireless_adapters|<check>|PASS|FAIL|NOTE|<detail>; the last line is GGTEST|wireless_adapters|DONE.
-//   LEGACY            an old-format list (one JSON string) under the network's key: read once, converted to an NBT list of
-//                     compounds with the same entries, the string kept aside under the backup key (real NBT classes, not stand-ins)
 //   CLASSIFY          the energy adapter's view: a charger and a battery buffer through their items, a macerator plain, GTM's
 //                     converter unsupported; an energy cover on the converter is refused (cover_unsupported) and nothing goes on
 //   CHARGER_OLD_PATH  the review's repro, on GTM itself: changeEnergy(640) on an LV 4x charger holding a lithium battery at 60,000 EU
@@ -44,7 +42,6 @@
   var TEST_TIMEOUT = 2400
 
   var EARTH = 'minecraft:overworld'
-  var END = 'minecraft:the_end'
   var BAND = { x0: 13312, x1: 13375, z0: 0, z1: 63 }
   var BAND_Y = [98, 112]
   var ROOF_Y = 112
@@ -298,44 +295,6 @@
     return waited > 300 ? 'failed: ' + m.getMultiblockState().error : 'waiting'
   }
 
-  // ---------------------------------------------------------------- checks without the world
-
-  // an old-format list (one JSON string) read through the network: converted, the string kept aside
-  function checkLegacy() {
-    var w = W()
-    var R = global.grindless.wirelessRegistry
-    var pd = S.server.persistentData
-    pd.remove(w.blocksKey)
-    pd.remove(w.legacyKey)
-    w.dropCache()
-    // entries in unloaded End chunks of the band (nothing there): the conversion only, no settlement uses them
-    var old = [
-      { k: 'cover', d: END, x: 13312, y: 100, z: 0, s: 'up', ck: 'energy', t: 1 },
-      { k: 'hatch', d: END, x: 13313, y: 100, z: 0, t: 2, a: 4 },
-      { k: 'tower', d: END, x: 13314, y: 100, z: 0, f: true, c: 2880000, t: 1, n: 4 }
-    ]
-    var json = JSON.stringify(old)
-    pd.putString(w.blocksKey, json)
-    w.dropCache()
-    note('LEGACY_expected_log', 'the next [ERROR] lines of [grindless/wireless] about "the list of wireless blocks" are this check\'s deliberate conversion')
-    var got = w.tracked(S.server)
-    var typeAfter = Number(pd.getTagType(w.blocksKey))
-    var size = typeAfter === 9 ? Number(pd.getList(w.blocksKey, 10).size()) : -1
-    var backupType = Number(pd.getTagType(w.legacyKey))
-    var backup = backupType === 8 ? String(pd.getString(w.legacyKey)) : ''
-    var want = JSON.stringify(old.map(function (e) { return R.canon(e) }))
-    // read again from the written list, not the cache
-    w.dropCache()
-    var again = JSON.stringify(w.tracked(S.server))
-    check('LEGACY', JSON.stringify(got) === want && again === want && typeAfter === 9 && size === 3 && backupType === 8 && backup === json,
-      'a ' + json.length + '-character JSON string under ' + w.blocksKey + ': read as ' + got.length + ' entries (the same as written: ' + (JSON.stringify(got) === want) +
-      '); the key now holds NBT type ' + typeAfter + ' (9 = list) of ' + size + ' compounds, read back the same: ' + (again === want) + '; the string kept under ' +
-      w.legacyKey + ' (type ' + backupType + ', unchanged: ' + (backup === json) + ')')
-    pd.remove(w.blocksKey)
-    pd.remove(w.legacyKey)
-    w.dropCache()
-  }
-
   // ---------------------------------------------------------------- build
 
   function build() {
@@ -580,7 +539,6 @@
     S.server.persistentData.remove(w.blocksKey)
     S.server.persistentData.remove(w.storeKey)
     w.dropCache()
-    guarded('LEGACY', checkLegacy)
     guarded('AREA', prepareWorld)
     var built = false
     try {
