@@ -3,7 +3,7 @@
 // kinds and passes its quests through place(); the x, y and deps written in the file are the old, per-chapter layout.
 
 export const SECTIONS = {
-  'quests': { name: "The Journey", origin: { x: 0, y: 0 }, heading: { key: 'H_MAX_AGE', x: 2.5, y: 0, deps: ["START"], desc: ["The road of the era, from the first step to the gate that leads on. Everything else in this chapter hangs from it."] } },
+  'quests': { name: "The Journey", origin: { x: 0, y: 0 }, heading: { key: 'H_MAX_AGE', x: 2.5, y: 0, deps: ["START"], desc: ["The road of the era, from the first step to the gate that leads on. Everything else hangs from it."] } },
   'machines': { name: "Machines", origin: { x: 0, y: 0 }, heading: { key: 'H_MAX_MACHINES', x: 12.5, y: -2.5, deps: ["H_MAX_AGE"], desc: ["The machines of the era and the first steps that put each one to work."] } },
   'circuits': { name: "Circuits", origin: { x: 0, y: 0 }, heading: { key: 'H_MAX_CIRCUITS', x: 10, y: 2.5, deps: ["H_MAX_AGE"], desc: ["The wafers, chips and circuits of the era, from the first wafer to the mainframe, and the parts built from them."] } },
   'integration': { name: "Integration", origin: { x: 0, y: 0 }, heading: { key: 'H_MAX_INTEGRATION', x: 5, y: 6, deps: ["H_MAX_AGE"], desc: ["Power, networks and processes that tie this era to the lines you already run."] } },
