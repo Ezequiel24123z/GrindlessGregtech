@@ -94,7 +94,7 @@ function Invoke-GGKubeJsCheck {
     $seen = 0
     $errRx = [regex]'^\[[^\]]*\]\s+\[ERROR\]\s+!\s+(?!\s*at\s)(.*)$'
     $warnRx = [regex]'^\[[^\]]*\]\s+\[WARN\]\s+(.*)$'
-    $benignWarn = [regex]'KubeJS. server\.log may not contain everything|You can still see the full log'
+    $benignWarn = [regex]'KubeJS. server\.log may not contain everything|You can still see the full log|Error parsing recipe wcwt:.*(advanced_ae|extendedae|ae2cs|ae2lt)'
     foreach ($t in @('startup', 'server', 'client')) {
         $f = Join-Path $dir "$t.log"
         if (-not (Test-Path $f)) { continue }

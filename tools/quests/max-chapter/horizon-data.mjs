@@ -75,7 +75,8 @@ export const QUESTS = [
     key: 'SEG2', kind: 'step', title: 'Half the Shell', icon: 'grindless:mirror_shell_segment',
     deps: ['SEG1'], x: 10, y: 0,
     desc: [
-      'Half the segments are cut. Charge the cryocoolers.',
+      'Half the segments of the mirror shell are cut. The shell is the reflector around the black hole seed, and it is built a segment at a time, so each half way is a reason to check the line.',
+      'Segments are cut in a long batch job. The cryocoolers hold the shell cold while it is cut, so charge them before each run and keep them charged. Send the segments into the frame by ME as they come; the count is large, so the check is the task below.',
     ],
     tasks: [it('grindless:mirror_shell_segment', 1742)],
     rewards: [xp(100)],

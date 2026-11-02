@@ -1,108 +1,78 @@
 // pl_steam: the steam age's lines. Positions are relative to each cluster (pl-model.mjs places the clusters).
+// S1 ironworks (ore to Bessemer steel, 6 steps), S2 refractories (5), S3 ore dressing (4); the glass chain is short and stays.
 import { I, F, M, n } from './pl-lib.mjs';
 
 export default {
   file: 'pl_steam',
   order: 0,
   title: 'Steam Lines',
-  subtitle: 'Coal turns into coke and steel, and ore and wood start arriving without a pickaxe.',
+  subtitle: 'Coal turns into coke and steel, and ore arrives without a pickaxe.',
   icon: 'gtceu:coke_oven',
   focus: 'coal',
-  bands: [['coke', 'steel', 'sky'], ['drill', 'rubber'], ['glass', 'collector'], ['ore']],
+  bands: [['ironworks'], ['fireclay', 'glass'], ['ore']],
   clusters: {
-    coke: {
-      name: 'Coke and coal gas',
+    ironworks: {
+      name: 'Ironworks: ore to Bessemer steel',
       nodes: [
-        n('coal', 0, 0, I('minecraft:coal'), 'Coal', { kind: 'raw', desc: 'All the steel of the steam age starts as a lump of coal.' }),
-        n('oven', 2, -1.5, M('gtceu:coke_oven'), 'Coke Oven', {
+        n('coal', 0, -1.5, I('minecraft:coal'), 'Coal', { kind: 'raw', desc: 'All the steel of the steam age starts as a lump of coal.' }),
+        n('oven', 2, 0, M('gtceu:coke_oven'), 'Coke Oven', {
           from: ['coal'], sub: 'Coke and creosote; logs give charcoal',
           desc: 'The old faithful. One coal at a time, and the gas goes up the chimney.',
         }),
-        n('battery', 2, 1.5, M('gtceu:coking_battery'), 'Coke Battery', {
+        n('battery', 2, -3, M('gtceu:coking_battery'), 'Coke Battery', {
           kind: 'ours', from: ['coal'],
           desc: ['Three chambers that coke like six ovens and keep the gas the oven loses.', 'It runs on steam and stops if the gas has nowhere to go.'],
         }),
-        n('coke', 4, -1.5, I('gtceu:coke_gem'), 'Coke', { kind: 'product', from: ['oven', 'battery'], sub: 'Steel, and later the arc furnace' }),
-        n('creosote', 4, 0, F('gtceu:creosote'), 'Creosote', { from: ['battery'], sub: 'Both ovens make it' }),
-        n('coalgas', 4, 1.5, F('gtceu:coal_gas'), 'Coal Gas', {
+        n('coke', 4, -1.5, I('gtceu:coke_gem'), 'Coke', { from: ['oven', 'battery'], sub: 'Fuel and reducing agent of the steelworks' }),
+        n('creosote', 4, -4.5, F('gtceu:creosote'), 'Creosote', { from: ['battery'], sub: 'Both ovens make it' }),
+        n('coalgas', 4, -3, F('gtceu:coal_gas'), 'Coal Gas', {
           kind: 'by', from: ['battery'], end: 'tanks until LV',
           desc: 'Flammable and poisonous, so it goes in a tank. LV burns it in the gas turbine or splits it in the distillery.',
         }),
-        n('planks', 6, -0.75, I('gtceu:treated_wood_planks'), 'Treated Planks', { kind: 'dest', from: ['creosote'], sub: 'Planks soaked in creosote' }),
-        n('boiler', 6, 0.75, M('gtceu:lp_steam_liquid_boiler'), 'Liquid Boiler', { from: ['creosote'], sub: 'Creosote is boiler fuel' }),
-      ],
-    },
-    steel: {
-      name: 'Steel, two ways',
-      nodes: [
-        n('ingot', 0, -1.5, I('minecraft:iron_ingot'), 'Iron Ingot', { kind: 'raw' }),
-        n('coke2', 0, 0, I('gtceu:coke_gem'), 'Coke', { kind: 'raw', sub: 'From the ovens' }),
-        n('rawiron', 0, 1.5, I('minecraft:raw_iron'), 'Raw Iron', { kind: 'raw', sub: 'Or magnetite, hematite, goethite, limonite' }),
-        n('calcite', 0, 3, I('gtceu:calcite_dust'), 'Calcite', { kind: 'raw', sub: 'The flux: raw, dust or block' }),
-        n('pbf', 2, -0.75, M('gtceu:primitive_blast_furnace'), 'Primitive Blast Furnace', {
-          from: ['ingot', 'coke2'],
-          desc: 'Iron and coke in, steel out, one ingot at a time. Slow, but it never asks for steam.',
+        n('planks', 6, -5.5, I('gtceu:treated_wood_planks'), 'Treated Planks', { kind: 'dest', from: ['creosote'], sub: 'Planks soaked in creosote' }),
+        n('boiler', 6, -3.5, M('gtceu:lp_steam_liquid_boiler'), 'Liquid Boiler', { from: ['creosote'], sub: 'Creosote is boiler fuel' }),
+        n('sample', 0, 2, I('grindless:vein_sample_iron'), 'Iron Vein Sample', { kind: 'raw', sub: 'A probe on the iron vein', desc: 'Two raw ores from the iron vein and an empty probe make it. After that nobody swings a pickaxe at iron again.' }),
+        n('bit', 0, 3.5, I('grindless:bronze_drill_bit'), 'Bronze Drill Bit', { kind: 'raw', sub: 'Wears out now and then' }),
+        n('drill', 2, 2.75, M('gtceu:steam_vein_drill'), 'Steam Vein Drill', {
+          kind: 'ours', from: ['sample', 'bit'],
+          desc: 'It drills the vein the sample names, forever, wherever you build it. The bit wears out; the sample never does.',
         }),
-        n('sbf', 2, 2.25, M('gtceu:steam_blast_furnace'), 'Steam Blast Furnace', {
-          kind: 'ours', from: ['coke2', 'rawiron', 'calcite'],
-          desc: 'Takes the ore straight from the vein and hands back steel, four loads at once. It drinks a lot of steam for the favour.',
+        n('cobble', 4, 4.5, I('minecraft:cobblestone'), 'Cobblestone', { kind: 'by', from: ['drill'], end: 'inert', sub: 'Inert: void it, or crush it later' }),
+        n('raw', 4, 2.75, I('gtceu:raw_goethite'), 'Raw Goethite, Forever', { from: ['drill'], sub: 'With the vein\'s other ores' }),
+        n('icrushed', 6, 3.5, I('gtceu:crushed_goethite_ore'), 'Crushed Goethite', { from: ['raw'], sub: 'Macerator', by: ['gtceu:macerator'] }),
+        n('ipurified', 8, 3.5, I('gtceu:purified_goethite_ore'), 'Purified Goethite', { from: ['icrushed'], sub: 'Ore washer', by: ['gtceu:ore_washer'] }),
+        n('cokedust', 6, 0.5, I('gtceu:coke_dust'), 'Coke Dust', { from: ['coke'], sub: 'Ground in a mortar' }),
+        n('sinter', 8, 1.5, I('grindless:iron_sinter'), 'Iron Sinter', {
+          from: ['ipurified', 'cokedust'], sub: 'Alloy smelter', by: ['gtceu:alloy_smelter'],
+          desc: 'Purified ore and coke dust baked into lumps the furnace can swallow. Any iron ore sinters the same way.',
         }),
-        n('steel', 4, 0.75, I('gtceu:steel_ingot'), 'Steel', { kind: 'product', from: ['pbf', 'sbf'] }),
-        n('ash', 4, 2.75, I('gtceu:ash_dust'), 'Ash', {
-          kind: 'by', from: ['sbf'], end: 'inert slag; LV fertilizer',
+        n('calcite', 8.5, -3, I('gtceu:calcite_dust'), 'Calcite', { kind: 'raw', sub: 'The flux: raw, dust or block' }),
+        n('pig', 8.5, -1, I('grindless:pig_iron'), 'Pig Iron', {
+          from: ['sinter', 'coke', 'calcite'], sub: 'Steam blast furnace', by: ['gtceu:steelmaking'],
+          desc: 'Sinter, coke and flux in the steam blast furnace: four loads at once, and it drinks a lot of steam for the favour.',
+        }),
+        n('steel', 10.5, -1, I('gtceu:steel_ingot'), 'Steel', { kind: 'product', from: ['pig'], sub: 'Bessemer blow, same furnace', by: ['gtceu:steelmaking'] }),
+        n('ash', 10.5, 0.5, I('gtceu:ash_dust'), 'Ash', {
+          kind: 'by', from: ['pig'], end: 'inert slag; LV fertilizer',
           desc: 'Lime from the flux and ash from the coke. Void it, or keep it: LV mixes it into fertilizer.',
         }),
       ],
     },
-    sky: {
-      name: 'The first Moon chart',
+    fireclay: {
+      name: 'Refractories: clay to firebricks',
       nodes: [
-        n('paper', 0, -0.75, I('minecraft:paper'), 'Paper', { kind: 'raw' }),
-        n('coaldust', 0, 0.75, I('gtceu:coal_dust'), 'Coal Dust', { kind: 'raw', sub: 'The ink' }),
-        n('obs', 2, 0, M('gtceu:steam_observatory'), 'Clockwork Observatory', {
-          kind: 'ours', from: ['paper', 'coaldust'],
-          desc: 'A clear night, the controller at Y 100 or higher, and it draws the Moon. Daylight or rain just make it wait.',
-        }),
-        n('chart', 4, 0, I('grindless:lunar_chart_draft'), 'Lunar Chart (Draft)', {
-          kind: 'product', from: ['obs'], sub: 'LV\'s optical observatory reads it',
-          desc: 'It\'s never used up. Copy it by hand if you want a spare.',
-        }),
-      ],
-    },
-    drill: {
-      name: 'Ore without a pickaxe',
-      nodes: [
-        n('goethite', 0, -0.75, I('gtceu:raw_goethite'), 'Raw Goethite', { kind: 'raw', sub: 'Mined once, by hand', desc: 'Two raw ores from the iron vein, a probe, and that is the last time you swing a pickaxe at it.' }),
-        n('probe', 0, 0.75, I('grindless:empty_vein_probe'), 'Empty Vein Probe', { kind: 'raw' }),
-        n('sample', 2, 0, I('grindless:vein_sample_iron'), 'Iron Vein Sample', { from: ['goethite', 'probe'] }),
-        n('bplate', 0, 2.25, I('gtceu:bronze_plate'), 'Bronze Plate', { kind: 'raw' }),
-        n('bit', 2, 2.25, I('grindless:bronze_drill_bit'), 'Bronze Drill Bit', { from: ['bplate'], sub: 'Wears out now and then' }),
-        n('drill', 4, 0.75, M('gtceu:steam_vein_drill'), 'Steam Vein Drill', {
-          kind: 'ours', from: ['sample', 'bit'],
-          desc: 'It drills the vein the sample names, forever, wherever you build it. The bit wears out; the sample never does.',
-        }),
-        n('goethite2', 6, 0, I('gtceu:raw_goethite'), 'Raw Goethite, Forever', { kind: 'product', from: ['drill'], sub: 'With the vein\'s other ores' }),
-        n('cobble', 6, 1.5, I('minecraft:cobblestone'), 'Cobblestone', { kind: 'by', from: ['drill'], end: 'inert', sub: 'Inert: void it, or crush it later' }),
-      ],
-    },
-    rubber: {
-      name: 'Rubber',
-      nodes: [
-        n('sapling', 0, 0, I('gtceu:rubber_sapling'), 'Rubber Sapling', { kind: 'raw', sub: 'Never used up' }),
-        n('greenhouse', 2, 0, M('gtceu:steam_greenhouse'), 'Steam Greenhouse', {
-          kind: 'ours', from: ['sapling'],
-          desc: 'A sapling in, logs and resin out, and the sapling stays. Chopping trees was never the fun part.',
-        }),
-        n('log', 4, -1.25, I('gtceu:rubber_log'), 'Rubber Log', { kind: 'by', from: ['greenhouse'], end: 'planks, charcoal', sub: 'Planks, or charcoal in the coke oven' }),
-        n('resin', 4, 0.25, I('gtceu:sticky_resin'), 'Sticky Resin', { from: ['greenhouse'] }),
-        n('rawrubber', 6, 0.25, I('gtceu:raw_rubber_dust'), 'Raw Rubber', { from: ['resin'], sub: 'Steam extractor', by: ['gtceu:extractor'] }),
-        n('rawsulfur', 4, 1.75, I('gtceu:raw_sulfur'), 'Raw Sulfur', { kind: 'raw', sub: 'From the Nether', desc: 'The steam age has no other sulfur. Pack a flint and steel.' }),
-        n('sulfur', 6, 1.75, I('gtceu:sulfur_dust'), 'Sulfur', { from: ['rawsulfur'], sub: 'Any furnace' }),
-        n('rubber', 8, 1, I('gtceu:rubber_ingot'), 'Rubber', { kind: 'product', from: ['rawrubber', 'sulfur'], sub: 'Steam alloy smelter', by: ['gtceu:alloy_smelter'], desc: 'Pressed into sheets, it insulates the cable that leaves the steam age.' }),
+        n('clay', 0, 0, I('minecraft:clay'), 'Clay', { kind: 'raw' }),
+        n('brick', 0, 1.5, I('minecraft:brick'), 'Brick', { kind: 'raw' }),
+        n('claydust', 2, 0, I('gtceu:clay_dust'), 'Clay Dust', { from: ['clay'] }),
+        n('brickdust', 2, 1.5, I('gtceu:brick_dust'), 'Brick Dust', { from: ['brick'] }),
+        n('fireclay', 4, 0.75, I('gtceu:fireclay_dust'), 'Fireclay Dust', { from: ['claydust', 'brickdust'] }),
+        n('cfire', 6, 0.75, I('gtceu:compressed_fireclay'), 'Compressed Fireclay', { from: ['fireclay'], sub: 'Steam compressor', by: ['gtceu:compressor'] }),
+        n('firebrick', 8, 0.75, I('gtceu:firebrick'), 'Firebrick', { from: ['cfire'], sub: 'Any furnace' }),
+        n('firebricks', 10, 0.75, I('gtceu:firebricks'), 'Firebricks', { kind: 'product', from: ['firebrick'], sub: 'The blast furnaces are built from these' }),
       ],
     },
     glass: {
-      name: 'Glass and firebricks',
+      name: 'Glass',
       nodes: [
         n('sand', 0, -1.5, I('minecraft:sand'), 'Sand', { kind: 'raw' }),
         n('qsand', 2, -1.5, I('gtceu:quartz_sand_dust'), 'Quartz Sand', { from: ['sand'], sub: 'Mortar or macerator' }),
@@ -111,25 +81,6 @@ export default {
         n('glassdust', 4, -0.75, I('gtceu:glass_dust'), 'Glass Dust', { from: ['qsand', 'flintdust'] }),
         n('mold', 4, 0.75, I('gtceu:block_casting_mold'), 'Block Casting Mold', { kind: 'raw', sub: 'Hammered from a steel mold', desc: 'Sand won\'t melt into glass here: the glass dust has to be cast. The mold is why glass waits for steel.' }),
         n('glass', 6, 0, I('minecraft:glass'), 'Glass', { kind: 'product', from: ['glassdust', 'mold'], sub: 'Steam alloy smelter', by: ['gtceu:alloy_smelter'] }),
-        n('clay', 0, 2.25, I('minecraft:clay'), 'Clay', { kind: 'raw' }),
-        n('brick', 0, 3.75, I('minecraft:brick'), 'Brick', { kind: 'raw' }),
-        n('claydust', 2, 2.25, I('gtceu:clay_dust'), 'Clay Dust', { from: ['clay'] }),
-        n('brickdust', 2, 3.75, I('gtceu:brick_dust'), 'Brick Dust', { from: ['brick'] }),
-        n('fireclay', 4, 3, I('gtceu:fireclay_dust'), 'Fireclay Dust', { from: ['claydust', 'brickdust'] }),
-        n('cfire', 6, 3, I('gtceu:compressed_fireclay'), 'Compressed Fireclay', { from: ['fireclay'], sub: 'Steam compressor', by: ['gtceu:compressor'] }),
-        n('firebrick', 8, 3, I('gtceu:firebrick'), 'Firebrick', { from: ['cfire'], sub: 'Any furnace' }),
-        n('firebricks', 10, 3, I('gtceu:firebricks'), 'Firebricks', { kind: 'product', from: ['firebrick'], sub: 'The blast furnaces are built from these' }),
-      ],
-    },
-    collector: {
-      name: 'Logs from the Horizon Collector',
-      nodes: [
-        n('shard', 0, 0, I('grindless:horizon_shard'), 'Horizon Shard', { kind: 'raw', sub: 'Never used up', desc: 'The Welcome quest gives it once. The machine keeps it.' }),
-        n('hc', 2, 0, M('gtceu:lv_horizon_collector', 'gtceu:horizon_collection'), 'Horizon Collector', {
-          kind: 'ours', from: ['shard'],
-          desc: 'Circuit 1 and the shard: a stack of logs every few seconds, out of nowhere. It is the steam age\'s automatic log source; the greenhouse grows trees where the collector\'s other rows feed other lines.',
-        }),
-        n('clogs', 4, 0, I('minecraft:oak_log'), 'Oak Logs', { kind: 'product', from: ['hc'], sub: 'Charcoal, planks, and the first rubber' }),
       ],
     },
     ore: {

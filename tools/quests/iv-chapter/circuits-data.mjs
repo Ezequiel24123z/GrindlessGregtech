@@ -13,7 +13,7 @@ export const CHAPTER = {
   autofocus: "IVCA",
   title: "IV: Circuits",
   subtitle: ["Naquadah in the wafer, and the first circuits that no hand-built line can feed."],
-  section: { name: "Circuits", origin: { x: 0, y: 0 }, heading: { key: "IV_H_CIRCUITS", x: 64.25, y: 0, deps: ["IV_ASSEMBLY_LINE"], icon: "gtceu:quantum_processor" } },
+  section: { name: "Circuits", origin: { x: 0, y: 0 }, heading: { key: "IV_H_CIRCUITS", x: 64.25, y: 0, deps: ["IV_ASSEMBLY_LINE"], icon: "gtceu:quantum_processor", desc: ["The quantum ladder: the IV wafers, chips and circuits, and the parts built from them, once the assembly line is running."] } },
 };
 
 export const QUESTS = [
@@ -48,7 +48,7 @@ export const QUESTS = [
     deps: ["IVLE"], x: 71, y: 0.75,
     teach: {
       for: "The &6Circuit Assembly Line&r builds quantum circuits in bulk, with several inputs at once.",
-      needs: "Its controller, plus the same boards and chips the single assembler uses.",
+      needs: "Its controller, plus the same boards and chips the single assembler uses. Its recipe draws LuV-tier power, so it is the bridge into the next era: finish the IV circuits, then build it once LuV power is up.",
       unlocks: "Quantum circuits at the rate the IV hulls and the next era demand.",
       automate: "Every slot fed from the network. Stock first, then run.",
     },

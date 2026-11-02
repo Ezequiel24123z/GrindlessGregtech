@@ -74,7 +74,7 @@ export const QUESTS = [
     rewards: [xp(20)],
   },
   {
-    key: 'J_DEEP', kind: 'step', title: 'Deep Neptune', icon: 'grindless:neptunian_quantum_seed',
+    key: 'J_DEEP', kind: 'step', title: 'Neptunian Seed', icon: 'grindless:neptunian_quantum_seed',
     deps: ['STN5'], x: 6, y: 0,
     desc: [
       'The deep siphon scoops hydrogen rich in deuterium, and helium with a trace of helium-3. That helium also grows the &6Neptunian Quantum Seed&r, so pipes reach home.',
@@ -159,7 +159,7 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'J_ICEW', kind: 'reading', title: 'Ices Apart', icon: 'grindless:sputnik_ice_core', size: 0.75,
+    key: 'J_ICEW', kind: 'reading', title: 'Ice by Ice', icon: 'grindless:sputnik_ice_core', size: 0.75,
     deps: ['J_SPUT'], x: 14, y: 0,
     desc: [
       'Every ice boils off at its own temperature. Warmed step by step, one core gives nitrogen, carbon monoxide, methane, water and ammonia apart, and each has a home in your chemistry.',
@@ -213,7 +213,7 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
   {
-    key: 'J_SGR', kind: 'milestone', title: 'The Shadow', icon: 'grindless:sgr_a_star_image', size: 1.25,
+    key: 'J_SGR', kind: 'milestone', title: 'Shadow of the Hole', icon: 'grindless:sgr_a_star_image', size: 1.25,
     deps: ['J_CRAFT'], x: 27, y: -1.5,
     desc: [
       'An interferometer the size of a planet is out of reach, so this one is an extrapolation: the &6Sgr A* Image&r is pieced together from many telescopes. It opens the UHV hatch.',

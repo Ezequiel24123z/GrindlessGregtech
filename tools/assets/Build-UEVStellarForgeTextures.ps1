@@ -57,6 +57,6 @@ $written | ForEach-Object { Write-Host "wrote $_" }
 
 if ($Credits) {
     foreach ($rel in $written) {
-        Write-Output ('| `pack/kubejs/assets/grindless/textures/' + $rel + '` | Generated with tools/assets/Build-UEVStellarForgeTextures.ps1 (procedural pixel art, original) by the UEV-M agent | the pack''s licence (pending; proposed CC BY-SA 4.0) |')
+        Write-Output ('| `pack/kubejs/assets/grindless/textures/' + $rel + '` | Generated with tools/assets/Build-UEVStellarForgeTextures.ps1 (procedural pixel art, original) by the UEV-M agent | the pack''s licence (MIT) |')
     }
 }

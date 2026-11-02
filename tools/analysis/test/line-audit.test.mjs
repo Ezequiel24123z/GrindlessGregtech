@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, LINE_GUIDE, CROSSING_GUIDE, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings, splitChains, parseDesignLines, designReport, checkRole, classify, isFold, tagProblems } from '../line-audit.mjs';
+import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, LINE_GUIDE, CROSSING_GUIDE, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings, splitChains, parseDesignLines, designReport, checkRole, classify, isFold, tagProblems, acceptedRoute } from '../line-audit.mjs';
 
 const n = (key, kind, res, from = [], extra = {}) => ({ key, kind, res, from, cluster: 'a', ...extra });
 const chain = () => [
@@ -314,4 +314,26 @@ test('parseDesignLines reads the first table only; designReport counts the missi
   assert.equal(r.chart, 1);
   assert.equal(r.missing.length, 1);
   assert.equal(r.missing[0].dump, true);
+});
+test('staged lines: a later stage linking to its own earlier stage sums the steps; untagged clusters are unchanged', () => {
+  const m = { chapters: [
+    { file: 'pl_mv', clusters: { a: { name: 'A', line: 'P' } }, nodes: chain() },
+    { file: 'pl_hv', clusters: { b: { name: 'B', line: 'P' }, c: { name: 'C' } }, nodes: [
+      n('lk', 'item', null, [], { link: true, cluster: 'b', target: { chapter: 'pl_mv', cluster: 'a' } }),
+      n('m', 'machine', null, ['lk'], { item: 'gtceu:m', cluster: 'b' }), n('p', 'product', 'gtceu:p', ['m'], { cluster: 'b' }),
+      n('lk2', 'item', null, [], { link: true, cluster: 'c', target: { chapter: 'pl_mv', cluster: 'a' } }),
+      n('m2', 'machine', null, ['lk2'], { item: 'gtceu:m2', cluster: 'c' }), n('p2', 'product', 'gtceu:p2', ['m2'], { cluster: 'c' }),
+    ] },
+  ] };
+  const ls = collectLines(m);
+  assert.equal(ls.find((l) => l.id === 'mv.a').steps, 3);
+  assert.equal(ls.find((l) => l.id === 'hv.b').steps, 4);
+  assert.equal(ls.find((l) => l.id === 'hv.c').steps, 1);
+});
+
+test('accepted bootstrap routes are not skips', () => {
+  const facts = buildFacts([rec('gtceu:primitive_blast_furnace/steel', 'gtceu:primitive_blast_furnace', ['gtceu:sand'], 'gtceu:plate')]);
+  assert.equal(skipRoute(mkLine('ev', { steps: 4 }), 'gtceu:plate', facts), null);
+  assert.equal(acceptedRoute('gtceu:primitive_blast_furnace/x').pattern, 'gtceu:primitive_blast_furnace/*');
+  assert.equal(acceptedRoute('gtceu:other/x'), undefined);
 });

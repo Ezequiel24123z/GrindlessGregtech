@@ -12,6 +12,7 @@
     item/bronze_drill_bit.png, item/steel_drill_bit.png, item/empty_vein_probe.png
     item/vein_sample_frame.png (layer0, untinted), item/vein_sample_core.png (layer1, grayscale, tinted by the game)
     item/void_key.png, item/flat_key.png
+    item/iron_sinter.png, item/pig_iron.png (the ironworks: sinter and pig iron of the Steam Blast Furnace line)
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamTextures.ps1
@@ -26,7 +27,7 @@
   advancing the thread phase one quarter turn per frame.
 
 .PARAMETER Only
-  Subset of: drill, greenhouse, bits, probe, sample, keys. Default: everything.
+  Subset of: drill, greenhouse, bits, probe, sample, keys, ironworks. Default: everything.
 .PARAMETER OutRoot
   Textures root. Default: <repo>/pack/kubejs/assets/grindless/textures
 .PARAMETER Credits
@@ -465,9 +466,69 @@ function New-Key {
     return $c
 }
 
+# Rows are padded on the right with transparent pixels up to 16 columns and down to 16 rows.
+function Get-PaddedRows {
+    param([string[]]$Rows)
+    $r = @()
+    foreach ($x in $Rows) { $r += $x.PadRight(16, '.') }
+    while ($r.Count -lt 16) { $r += ('.' * 16) }
+    return $r
+}
+
+# Iron sinter (S1 ironworks): a porous, clinkered lump of fused ore fines and coke breeze.
+function New-IronSinter {
+    $pal = New-Palette 'a=D2AE92 b=A5755A c=77503E d=52372B e=33231B f=BDB6AC g=8A8A8E'
+    $c = New-Canvas
+    $rows = Get-PaddedRows @(
+        '',
+        '',
+        '.....bbbb',
+        '...bbaabbbbb',
+        '..bbaabbbfbbb',
+        '..baabbbbccbb',
+        '.bbabbfbbcccbb',
+        '.bbbbbbbbcdccb',
+        '..bcbbegcccddc',
+        '..bccbbccdddcc',
+        '...ccgccdeddc',
+        '....cdccdddd',
+        '......dddd')
+    Assert-Map 'iron_sinter' $rows
+    Write-Map $c 0 0 $rows $pal
+    Add-Outline $c
+    return $c
+}
+
+# Pig iron (S1 ironworks): a cast pig with a rough top, a bright edge and the nubs of the sand mould underneath.
+function New-PigIron {
+    $pal = New-Palette 'A=D8DEE6 B=A8B3C2 C=7A889E D=57657F E=3B4663 r=8C6A55 R=6E5040'
+    $c = New-Canvas
+    $rows = Get-PaddedRows @(
+        '',
+        '',
+        '',
+        '....AAAAAAAAAA',
+        '...ABBBBBBBBBBC',
+        '..ABBBBrBBBBBBC',
+        '.ABBBBBBBBBBrBC',
+        '.ACCCCCCCCCCCCCD',
+        '.ACCCCCCCCCCCCDD',
+        '.ADDDDDDDDDDDDDE',
+        '..EDDDDDDDDDDDEE',
+        '...EE..EEE..EEE')
+    Assert-Map 'pig_iron' $rows
+    Write-Map $c 0 0 $rows $pal
+    Add-Outline $c
+    return $c
+}
+
 # ============================================================================================
 #  BUILD
 # ============================================================================================
+if (Test-Want 'ironworks') {
+    Out-Tex (New-IronSinter) 'item/iron_sinter.png'
+    Out-Tex (New-PigIron) 'item/pig_iron.png'
+}
 if (Test-Want 'drill') {
     $frames = @(); $emis = @()
     for ($t = 0; $t -lt 8; $t++) { $f = New-DrillFrame $true $t; $frames += $f.Color; $emis += $f.Emi }
@@ -546,6 +607,6 @@ foreach ($rel in $written) { Write-Host "  $rel" }
 if ($Credits) {
     Write-Host ''
     foreach ($rel in $written) {
-        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generated with tools/assets/$ScriptName (procedural pixel art, original) by the assets agent, 2026-10-24 | the pack's own (pending; proposed CC BY-SA 4.0) |")
+        Write-Host ("| ``pack/kubejs/assets/grindless/textures/$rel`` | Generated with tools/assets/$ScriptName (procedural pixel art, original) by the assets agent, 2026-10-24 | the pack's own (MIT) |")
     }
 }

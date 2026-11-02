@@ -130,7 +130,7 @@ export const QUESTS = [
       "Each suit piece gets the thermal upgrade and a heat shielding fabric: do all four.",
     ],
     tasks: [it("gcyr:elite_fuel_tank", 2), it("gcyr:elite_rocket_motor", 6), it("gcyr:space_suit_thermal_upgrade_smithing_template", 4)],
-    rewards: [xp(100), it("gcyr:heat_shielding_fabric", 4)],
+    rewards: [xp(140)],
   },
   {
     key: "IV_UNDER_THE_CLOUDS", id: "5693331C34A5A291", title: "Under the Clouds", icon: "gcyr:venus_rock", shape: "rsquare", size: 1.25, deps: ["IV_ELITE_ROCKET_THERMAL_SUIT"], x: 44.75, y: -0.25,
@@ -163,7 +163,7 @@ export const QUESTS = [
       "Ender pearls and helium-3 from home, sealed under Venusian regolith in a chemical reactor, make a &6Venusian Quantum Seed&r. The reactor can stand anywhere once the regolith is shipped. Blow it up with a singularity back home for the Venus bridge's pair.",
     ],
     tasks: [it("grindless:venusian_quantum_seed")],
-    rewards: [xp(40), it("minecraft:ender_pearl", 2)],
+    rewards: [xp(60)],
   },
   {
     key: "IV_RAW_NAQUADAH", id: "77FF1E1CF59D10BC", title: "Raw Naquadah", icon: "gtceu:raw_naquadah", deps: ["IV_PRESSURIZED_VEIN_DRILL"], x: 53.5, y: -1,
@@ -197,7 +197,7 @@ export const QUESTS = [
       "Hermean regolith dust, a chemical reactor and the same trick make the &6Hermean Quantum Seed&r in any world, once the dust is shipped. Its pair is the Mercury bridge.",
     ],
     tasks: [it("grindless:hermean_quantum_seed")],
-    rewards: [xp(40), it("minecraft:ender_pearl", 2)],
+    rewards: [xp(60)],
   },
   {
     key: "IV_HEAT_SHIELD_BRICKS", id: "15320440D70D86A7", title: "Heat-Shield Bricks", icon: "grindless:hermean_heat_shield_brick", deps: ["IV_MERCURY_SOLAR_WORKS"], x: 50.25, y: 1,
@@ -222,7 +222,7 @@ export const QUESTS = [
       "Iridium is what IV hatches were waiting for, and osmium only melts at LuV voltage.",
     ],
     tasks: [it("gtceu:iridosmine_dust"), it("gtceu:iridium_dust"), it("gtceu:osmium_dust")],
-    rewards: [xp(80), it("grindless:platinum_electrode", 1)],
+    rewards: [xp(110)],
   },
   {
     key: "IV_ASSEMBLY_LINE", id: "3CF7A4745035119A", title: "Assembly Line", icon: "gtceu:assembly_line", shape: "gear", size: 1.25, deps: ["IV_IRIDIUM_AND_OSMIUM"], x: 61.75, y: 0,

@@ -68,11 +68,24 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
+    key: 'UC_GAAS', kind: 'process', title: 'Gallium Arsenide Boule', icon: 'grindless:gallium_arsenide_boule',
+    deps: ['START'], x: 2, y: -3,
+    teach: {
+      for: 'Gallium arsenide dust melts in a blast furnace under argon and grows into a &6Gallium Arsenide Boule&r, the seed stock of the photonic chips. A cutter slices it into wafers.',
+      needs: 'Gallium arsenide dust, argon, an electric blast furnace that reaches 1600 K, and a cutter with lubricant.',
+      unlocks: 'The gallium arsenide wafer, the InGaAs diodes, and the neutronium boule that grows from it.',
+      automate: 'One boule yields eight wafers. Keep a furnace growing and send the wafers on by ME.',
+    },
+    desc: [],
+    tasks: [it('grindless:gallium_arsenide_boule')],
+    rewards: [xp(60)],
+  },
+  {
     key: 'UC_NBOULE', kind: 'process', title: 'Neutronium Boule', icon: 'gtceu:neutronium_boule',
-    deps: ['START'], x: 2, y: -1.5,
+    deps: ['UC_GAAS'], x: 2, y: -1.5,
     teach: {
       for: 'Neutronium, silicon and gallium arsenide grow into a &6Neutronium Boule&r in a blast furnace under xenon. The cutter slices it into &6Neutronium Wafers&r.',
-      needs: 'Neutronium ingots, silicon blocks, xenon, a blast furnace that reaches the temperature, and a cutter with lubricant or water.',
+      needs: 'Neutronium ingots, silicon blocks, the gallium arsenide boule from the quest before, xenon, a blast furnace that reaches the temperature, and a cutter with lubricant or water.',
       unlocks: 'The Highly Advanced SoC wafer, and the neutronium wafer the Starchip is cut from.',
       automate: 'The boule is slow and one boule yields a great many wafers. Keep one growing and stock the wafers by ME.',
     },

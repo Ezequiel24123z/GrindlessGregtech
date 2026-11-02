@@ -19,10 +19,14 @@
 //                       deep-vein sample with a bronze bit)
 //   <drill>|VETO        the steam drill refuses a recipe filed under a tier folder (the EV tripod's lunar recipe, 8 EU/t) that GTM's
 //                       steam modifier alone would run
+//   <blast furnace>|BLAST_MODES  the steam blast furnace runs both steelmaking modes from its buses: smelting turns 16 iron sinter + 12 coke +
+//                       4 calcite into 16 pig iron + 4 ash, blowing turns that pig iron into 16 steel + 4 ash (4 parallels each,
+//                       fast-forwarded with RecipeLogic#setProgress; the outputs stay GTM's)
+//   steam|ironworks     the sinter, pig iron and Bessemer recipes, the purified ores and the coke dust are all registered
 //   steam|DONE          last line
 //
-// Both machines are built at once around (8, 101, 2) and (24, 102, 2) in the overworld (chunks 0,0 and 1,0 are
-// generated and force-loaded, the area is cleared first) and checked every 20 ticks. Everything is driven by
+// The drill and the greenhouse are built at once around (8, 101, 2) and (24, 102, 2), the blast furnace around (40, 103, 2), in the
+// overworld (chunks 0,0, 1,0 and 2,0 are generated and force-loaded, the area is cleared first) and checked every 20 ticks. Everything is driven by
 // the structure description that lib/patterns.js records (global.grindless.structures), so the test follows the
 // pattern when it changes. var + function everywhere (this Rhino throws "redeclaration of var" for const/let
 // inside functions that run more than once).
@@ -30,6 +34,9 @@
   var TAG = 'GGTEST|'
   var DRILL = 'gtceu:steam_vein_drill'
   var GREENHOUSE = 'gtceu:steam_greenhouse'
+  var BLAST = 'gtceu:steam_blast_furnace'
+  var SINTER = 'grindless:iron_sinter'
+  var PIG_IRON = 'grindless:pig_iron'
   var STEAM_MB = 64000
   var STEP = 20
   var FORM_TIMEOUT = 300
@@ -155,6 +162,21 @@
     var totalGreenhouse = greenhouse ? rm.getAllRecipesFor(greenhouse).size() : -1
     note('steam', 'recipes_other', 'vein_drilling total=' + totalDrilling + ' (other tiers ' + (totalDrilling - wantDrilling.length + missingDrilling.length) +
       ') greenhouse total=' + totalGreenhouse + ' (other tiers ' + (totalGreenhouse - wantGreenhouse.length + missingGreenhouse.length) + ')')
+
+    // the ironworks line of the steam blast furnace (server_scripts/grindless/steam/blast_furnace.js)
+    try {
+      var bf = G.steamContent.blastFurnace
+      var ironItems = [bf.sinter, bf.pigIron, bf.coke, bf.cokeDust, bf.steel, bf.ash].concat(bf.feeds.map(function (f) { return f.input }))
+      var missingIron = ironItems.filter(function (id) { return !Item.exists(id) })
+      var ironIds = [bf.pigIronRecipe, bf.bessemerRecipe].concat(bf.feeds.map(function (f) { return f.recipe }))
+      var missingIronRecipes = ironIds.filter(absent)
+      check('steam', 'ironworks', missingIron.length === 0 && missingIronRecipes.length === 0 && bf.feeds.length === 5,
+        'feeds=' + bf.feeds.length + ' recipes=' + (ironIds.length - missingIronRecipes.length) + '/' + ironIds.length +
+        (missingIron.length > 0 ? ' missing items=' + missingIron.join(',') : '') +
+        (missingIronRecipes.length > 0 ? ' missing recipes=' + missingIronRecipes.join(',') : ''))
+    } catch (eIron) {
+      check('steam', 'ironworks', false, 'exception: ' + eIron)
+    }
 
     var ids = ['grindless:crafting/bronze_drill_bit', 'grindless:crafting/steel_drill_bit',
       'grindless:crafting/empty_vein_probe', 'grindless:crafting/steam_vein_drill',
@@ -632,6 +654,68 @@
       (missing.length > 0 ? ' missing=' + missing.join(',') : ''))
   }
 
+  function blastCases() {
+    var sinterRun = [{ id: SINTER, n: 4 }, { id: 'gtceu:coke_gem', n: 3 }, { id: 'minecraft:calcite', n: 1 }]
+    var bessemerRun = [{ id: PIG_IRON, n: 4 }]
+    return [
+      { label: 'sinter+coke+flux', inputs: sinterRun, want: 'grindless:steelmaking/pig_iron' },
+      { label: 'pig_iron', inputs: bessemerRun, want: 'grindless:steelmaking/bessemer_steel' },
+      { label: 'sinter without coke', inputs: [{ id: SINTER, n: 4 }], want: 'none' }
+    ]
+  }
+
+  function countsOf(m) {
+    var counts = {}
+    m.outs.forEach(function (b) {
+      var c = readBus(b)
+      Object.keys(c).forEach(function (id) { counts[id] = (counts[id] || 0) + c[id] })
+    })
+    return counts
+  }
+
+  // The two modes of the steam blast furnace, one after the other from the same buses. A stage is fast-forwarded once its
+  // recipe runs (the progress jumps to 20 ticks before the end; the outputs stay GTM's), then its outputs are checked, the buses
+  // are emptied and the next stage is fed with what the previous one made.
+  function runStages(m, ctrl) {
+    if (m.stage === undefined) { m.stage = 0; m.tStage = m.tStart; m.ff = false; m.stageNotes = [] }
+    var stage = m.spec.stages[m.stage]
+    var logic = ctrl.getRecipeLogic()
+    if (!m.ff && String(logic.getStatus()) === 'WORKING' && logic.getDuration() > 100) {
+      note(m.id, 'FASTFWD', stage.name + ': duration=' + logic.getDuration() + ' progress=' + logic.getProgress() + ' steam=' + steamIn(m))
+      logic.setProgress(logic.getDuration() - 20)
+      m.ff = true
+    }
+    if (S.t - m.tStage < stage.ticks) return
+
+    var counts = countsOf(m)
+    var verdict = stage.verify(counts)
+    m.stageNotes.push(stage.name + ' ' + (verdict.ok ? 'ok' : 'wrong') + ': ' + verdict.detail + ' items=[' + itemSummary(counts) + '] ' + recipeState(ctrl))
+    if (!verdict.ok || m.stage === m.spec.stages.length - 1) {
+      check(m.id, 'BLAST_MODES', verdict.ok, m.stageNotes.join(' || '))
+      if (verdict.ok) {
+        try {
+          runLookup(m, ctrl, m.spec.cases())
+        } catch (e) {
+          check(m.id, 'LOOKUP', false, 'exception: ' + e)
+        }
+      }
+      m.phase = 'done'
+      return
+    }
+    var next = m.spec.stages[m.stage + 1]
+    m.outs.forEach(function (b) { clearInventory(b.getInventory()) })
+    var bus = m.inBus.getInventory()
+    clearInventory(bus)
+    next.inputs(counts).forEach(function (input, slot) {
+      var left = bus.insertItem(slot, Item.of(input.id, input.n), false)
+      if (!left.isEmpty()) throw new Error('could not insert ' + input.id + ' x' + input.n + ' into slot ' + slot)
+    })
+    fillSteam(m.hatch)
+    m.stage++
+    m.tStage = S.t
+    m.ff = false
+  }
+
   var SPECS = [
     {
       id: DRILL, x: 8, y: 101, z: 2, runTicks: 450,
@@ -661,15 +745,42 @@
         var logs = counts['minecraft:oak_log'] || 0
         return { ok: logs >= 6, detail: 'oak: logs=' + logs }
       }
+    },
+    {
+      id: BLAST, x: 40, y: 103, z: 2, runTicks: 0,
+      inputs: [{ id: SINTER, n: 16 }, { id: 'gtceu:coke_gem', n: 12 }, { id: 'minecraft:calcite', n: 4 }],
+      cases: blastCases,
+      stages: [
+        {
+          name: 'smelting', ticks: 400,
+          verify: function (counts) {
+            var pig = counts[PIG_IRON] || 0
+            var ash = counts['gtceu:ash_dust'] || 0
+            var ids = Object.keys(counts).length
+            return { ok: pig === 16 && ash === 4 && ids === 2, detail: 'pig_iron=' + pig + ' (16) ash=' + ash + ' (4)' }
+          }
+        },
+        {
+          name: 'blowing', ticks: 400,
+          inputs: function (counts) { return [{ id: PIG_IRON, n: counts[PIG_IRON] || 16 }] },
+          verify: function (counts) {
+            var steel = counts['gtceu:steel_ingot'] || 0
+            var ash = counts['gtceu:ash_dust'] || 0
+            var ids = Object.keys(counts).length
+            return { ok: steel === 16 && ash === 4 && ids === 2, detail: 'steel=' + steel + ' (16) ash=' + ash + ' (4)' }
+          }
+        }
+      ]
     }
   ]
 
   function prepareWorld() {
     S.level.getChunk(0, 0)
     S.level.getChunk(1, 0)
-    S.server.runCommandSilent('forceload add 0 0 31 15')
-    var cleared = S.server.runCommandSilent('fill 0 98 0 31 112 15 air')
-    note('steam', 'AREA', 'chunks 0,0 and 1,0 generated and force-loaded, changed ' + cleared + ' blocks while clearing')
+    S.level.getChunk(2, 0)
+    S.server.runCommandSilent('forceload add 0 0 47 15')
+    var cleared = S.server.runCommandSilent('fill 0 98 0 47 112 15 air')
+    note('steam', 'AREA', 'chunks 0,0 to 2,0 generated and force-loaded, changed ' + cleared + ' blocks while clearing')
   }
 
   function startMachine(spec) {
@@ -748,6 +859,10 @@
     }
 
     if (m.phase === 'running') {
+      if (m.spec.stages) {
+        runStages(m, ctrl)
+        return
+      }
       var running = S.t - m.tStart
       if (!m.noted && running >= 60) {
         m.noted = true

@@ -18,6 +18,14 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.mv_greenhouse.tooltip.0', '§7Grows trees, crops, mushrooms and flowers, up to 16 at once.')
 
     add('item.grindless.vanadium_steel_drill_bit', 'Vanadium Steel Drill Bit')
+    add('item.grindless.polysilicon', 'Polysilicon')
+    add('item.grindless.chlorosilane_bottoms', 'Chlorosilane Bottoms')
+    add('tooltip.grindless.chlorosilane_bottoms.0', 'Silicon tetrachloride-rich residue of trichlorosilane distillation; hydrogenated back to crude trichlorosilane.')
+    add('tooltip.grindless.polysilicon.0', 'Electronic-grade silicon deposited on hot rods from trichlorosilane (Siemens process).')
+    add('tooltip.grindless.polysilicon.1', 'Melted into every silicon boule in the electric blast furnace.')
+    add('material.gtceu.crude_trichlorosilane', 'Crude Trichlorosilane')
+    add('material.gtceu.trichlorosilane', 'Trichlorosilane')
+    add('material.gtceu.siemens_feed', 'Siemens Feed Gas')
     add('tooltip.grindless.vanadium_steel_drill_bit', 'Wears out by chance: about 1% of the runs, 0.5% with drilling fluid. Only the MV Vein Drill takes it.')
 })
 

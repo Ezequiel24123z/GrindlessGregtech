@@ -38,3 +38,23 @@ RuntimeDistCleaner/DISTXFORM\]: Attempted to load class .* for invalid dist DEDI
 
 # --- flat world (-Flat) ---
 No key layers in MapLike
+
+# --- boot errors of mods in the pack that are harmless on a clean boot (each pattern is one message) ---
+# Forge TrustManager (any mod): cannot read signature metadata of unsigned jars; only affects the trust label.
+Could not determine mod trust worthiness
+# GTM: GTCA's water purification plant ships two casing recipes with an empty input item (hidden never); GTM drops them.
+Input item 0 of recipe gtceu:(inert_filtration_casing|reactive_gas_cont_cas)\b.* is empty
+# GTM: a third-party recipe names an output that is not an item of its own list (only gtceu:propyne today; the id is on a continuation line, so the entry matches the headline); GTM drops the recipe.
+Output item is not one of:
+# GTM + GCYR: two fuel recipes set EUt to 0 explicitly; GTM refuses it and keeps the rest.
+EUt can't be explicitly set to 0, id: gcyr:(diesel|gasoline)\b
+# ExtendedAE / MEGA Cells: EMC interface loot tables need ProjectE, which the pack does not ship.
+Couldn't parse element loot_tables:(expatternprovider:blocks/ex_emc_interface|megacells:blocks/mega_emc_interface)$
+# Naturalist: its tortoise loot table references minecraft:turtle_scute, which Minecraft 1.20.1 lacks; the loot table is skipped.
+Couldn't parse element loot_tables:naturalist:entities/tortoise$
+# EMI Loot: its mixin config omits minVersion (a mod packaging warning only).
+Mixin config emi_loot\.mixins\.json does not specify "minVersion" property
+# Colossal Chests: the 'uncolossal' advancement has a bad 'location' field; the advancement is skipped.
+Parsing error loading custom advancement colossalchests:uncolossal: Failed to parse 'location' field
+# Create / Struts: the struts:wrenches tag names create:wrench, which this Create version lacks; the tag loads without it.
+Couldn't load tag struts:wrenches

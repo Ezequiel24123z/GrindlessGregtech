@@ -126,7 +126,8 @@ export const QUESTS = [
     'With a gamma laser in hand, the &6UXV Emitter&r can be built. The parallel hatch and the OpV casing both need it.',
   ], [it('gtceu:uxv_emitter')], 250),
   q('HATCH', 'step', 'UXV Energy Hatch', 'gtceu:uxv_energy_input_hatch', ['EMIT'], 12, 11, null, [
-    'The &6UXV Energy Input Hatch&r takes the full UXV voltage.',
+    'The &6UXV Energy Input Hatch&r takes the full UXV voltage into a machine, and it is the door every UXV controller draws its power through.',
+    'It is built in the assembly line on a UXV hull with the emitter parts of this page, UXV circuits and the lasagna cable of the age. Without it the UXV machines of the next chapters do not run. Make hatches in small batches by ME: each machine needs one, and a multiblock with parallel hatches needs more.',
   ], [it('gtceu:uxv_energy_input_hatch')], 200),
 ];
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

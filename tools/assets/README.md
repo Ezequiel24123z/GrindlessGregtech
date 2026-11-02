@@ -20,7 +20,7 @@ Generators for the pack's own textures. Everything is procedural 16x16 pixel art
 | `Build-LVPreview.ps1` | Review sheet at x8 of the LV era: each overlay on its casing or hull, all frames, dark cave view and 3x3 wall. It is only a preview: it is not published. |
 | `Build-LVRoasterHeliostatTextures.ps1` | Writes the reinforced LV textures: faces of the sulfide roaster and of the heliostat tower, the heliostat mirror (block) and the contact catalyst, to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-UXVSpinRowsTextures.ps1` | Writes the 43 UXV spin-row items of `uxv/spin_rows.js` (metal, dust, ingot, band, foil, can, shards or plates, boule or ribbon, slice, wafer per process stage, stack): eleven distinct families, never flat recolours. `-Only`, `-OutRoot`, `-PreviewPath` (sheet outside the repo) and `-Credits`; it checks the names against `spin_rows.js`. |
-| `Build-MVTextures.ps1` | Writes the MV era textures (vein drill, greenhouse, ore plant, biorefinery and vanadium steel drill bit) to `pack/kubejs/assets/grindless/textures/`. |
+| `Build-MVTextures.ps1` | Writes the MV era textures (vein drill, greenhouse, ore plant, biorefinery, vanadium steel drill bit, polysilicon and chlorosilane bottoms) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-MVPreview.ps1` | Review sheet at x8 of the MV era: each overlay on its casing and on the four MV casings, all frames, dark cave view, 3x3 wall and the drill bit next to the bronze and steel ones. It is only a preview: it is not published. |
 | `Build-HVTextures.ps1` | Writes the HV era textures (refinery, reformer, vein drill, greenhouse, End key, catalysts, stainless steel drill bit and the old titanium one) to `pack/kubejs/assets/grindless/textures/`. |
 | `Build-HVPreview.ps1` | Review sheet at x8 of the HV era: each overlay on its casing and on four casings, all frames, dark cave view, 3x3 wall, the End key next to the Void and Flat keys and the drill bit progression. It is only a preview: it is not published. |
@@ -155,6 +155,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-SteamPrev
 | `item/vein_sample_frame.png` | Layer 0, no tint: the same probe with a transparent interior. |
 | `item/vein_sample_core.png` | Layer 1, grays only, so the game tints it with the color of each vein. It does not overwrite any pixel of layer 0. |
 | `item/void_key.png`, `item/flat_key.png` | Void Key (dark metal, star-shaped bit) and Flat Key (bit with layers of grass, dirt and stone). |
+| `item/iron_sinter.png`, `item/pig_iron.png` | The ironworks line of the Steam Blast Furnace (`-Only ironworks`): a porous clinkered lump of sinter (brown ramp with coke specks) and a cast pig of iron (gray-blue ramp, rough top, sand-mould nubs underneath). |
 
 The overlays follow GTM's casing convention: transparent background, details only on the overlay, `_active` animated as a vertical strip and `_emissive` with only the pixels that glow. If `overlay_front_paused` is missing, GTM uses `overlay_front`.
 

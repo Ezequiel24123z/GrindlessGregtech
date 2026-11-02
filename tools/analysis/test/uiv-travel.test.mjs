@@ -475,25 +475,28 @@ test('AF-1: a completed jump survives a restart in the queue, then places its pl
   assert.ok(!Object.hasOwn(store, 'grindless_relay_due'));
 });
 
-test('B13-DIAL: the platform hatches are tracked under the team of the ring that ran the jump, kept in the queue across a restart; no owner is the server team', () => {
+test('FIX-RELAY: the platform hatches are tracked under the team of the player standing in the jump ring, kept in the queue across a restart; nobody in the ring is the server team', () => {
   const store = {};
   const w = makeWorld(store);
   const { ctl } = jumpRing(w);
-  const owned = { ofMachine: (m) => (m === ctl ? 'teamA' : 'server') };
-  boot(w, { teams: owned });
+  const teamOf = (p) => (p.id === 'alice' ? 'teamA' : 'teamB');
+  const at = (id, dx, dim = SIRIUS) => playerOf(id, dim, HOME.x + 0.5 + dx, HOME.y, HOME.z + 7.5);
+  w.players = [at('bob', 40), at('carol', 0, FAR), at('alice', 0)];
+  boot(w, { teams: { ofPlayer: teamOf, ofMachine: () => 'teamZ' } });
   WG0.onFinished(ctl, 'grindless:warp_gate/hold_rx_j1856');
-  assert.equal(JSON.parse(store.grindless_relay_due)[0].t, 'teamA');
+  assert.equal(JSON.parse(store.grindless_relay_due)[0].t, 'teamA', 'the jumping player, not the ring owner nor a player elsewhere');
   const b2 = boot(w);
   b2.tick(10);
   assert.deepEqual(errorsOf(b2), []);
-  assert.deepEqual(w.trackedFor, ['teamA', 'teamA'], 'the energy hatch and the dynamo hatch, both the owner\'s team');
+  assert.deepEqual(w.trackedFor, ['teamA', 'teamA'], 'the energy hatch and the dynamo hatch, both the traveller\'s team');
   const s2 = {};
   const w2 = makeWorld(s2);
   const r2 = jumpRing(w2);
-  const b3 = boot(w2, { teams: { ofMachine: () => 'server' } });
+  w2.players = [at('bob', 40)];
+  const b3 = boot(w2, { teams: { ofPlayer: teamOf, ofMachine: () => 'teamZ' } });
   WG0.onFinished(r2.ctl, 'grindless:warp_gate/hold_rx_j1856');
   b3.tick(10);
-  assert.deepEqual(w2.trackedFor, ['server', 'server'], 'a ring with no owner builds a server platform');
+  assert.deepEqual(w2.trackedFor, ['server', 'server'], 'nobody in the ring builds a server platform');
 });
 
 test('AF-1: a source row is placed by the same placer with its uxv mark; a full bus drops the coordinates in front of the ring; a failure is retried', () => {

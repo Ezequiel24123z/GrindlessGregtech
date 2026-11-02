@@ -117,7 +117,7 @@ In the `client` suite the overlay's server scripts run on the integrated server 
 - **Keeping the client running:** mc-runtime-test exits when the player's `tickCount` reaches 100 with no screen open; the client half lowers it (`age`) while the test runs.
 - **Real right-click:** the client half holds the use key down for one tick (`options.keyUse.setDown`) and Minecraft does the rest, as with the mouse.
 
-`log-allowlist.txt`: one .NET regex per line for the harmless ERROR/WARN lines; keep it short and specific.
+`log-allowlist.txt`: one .NET regex per line for the harmless ERROR/WARN lines; keep it short and specific (each entry names its mod and why it is harmless). `gg-collect.ps1` also ignores KubeJS's `Error parsing recipe wcwt:` warnings for recipes guarded by `forge:item_exists` on mods the pack does not ship.
 
 ## The home PC
 
