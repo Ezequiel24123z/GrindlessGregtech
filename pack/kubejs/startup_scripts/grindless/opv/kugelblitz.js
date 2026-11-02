@@ -8,10 +8,10 @@
 //   gtceu:kugelblitz_forge     15 x 15 x 15 sphere, OpV. Recipe type gtceu:kugelblitz_forming: gamma pulses pumped by positron annihilation are
 //                              focused by Laue lenses and mirrors in an FRC cartridge into a Kugelblitz (Crane & Westmoreland 2009: named
 //                              fiction). The hole never spins (Schwarzschild); it is charged with positrons and held electrostatically in the
-//                              absorber shell. Locked to the Cygnus X-1 orbit.
+//                              absorber shell. Runs anywhere.
 //   gtceu:hawking_collector    11 x 11 x 11 sphere, OpV, a GENERATOR (Gen.configure) on OpV dynamo hatches (two 1 A or one 4 A), one run at a
 //                              time. Recipe type gtceu:hawking_power: a Kugelblitz core is fed and its Hawking radiation collected (Hawking 1974,
-//                              Page 1976; the feed rate is named fiction). Locked to the orbit.
+//                              Page 1976; the feed rate is named fiction). Runs anywhere.
 //   grindless:gamma_pump_charge, kugelblitz_seed, evaporated_core_shell   the forge's intermediates and the collector's spent core.
 //
 // Geometry (lib/patterns.js: a slice has at most 16 rows): a sphere clipped by the front and back plates, so the controller sits in the middle
@@ -194,8 +194,7 @@
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('grindless.machine.' + m.name + '.tooltip.1'),
-          Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
-          Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.cygnus_x1_orbit'))
+          Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type))
         ])
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
     })

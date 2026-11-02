@@ -53,7 +53,7 @@ test('distiller uses only c2/c3; seed is positive, negative residue is contained
   assert.deepEqual(rows[0].chancedIn, [{ id: 'grindless:pasta_core_sample', count: 1, chance: 312 }]);
   assert.match(rows[0]._wear, /1\/32.*312\/10000/);
   assert.deepEqual(rows[0].chancedOut, [{ id: 'grindless:negative_strangelet_residue', count: 1, chance: 2000 }]);
-  for (const r of rows) assert.ok(conditions(find(`strangelet_distillation/${r.name}`)).includes(SITE));
+  for (const r of rows) assert.ok(!conditions(find(`strangelet_distillation/${r.name}`)).includes(SITE));
   const producers = docs.filter((r) => JSON.stringify(r.j.outputs || {}).includes('"gtceu:fireball_distillate"'));
   assert.deepEqual(producers.map((r) => r.i), ['grindless:synchrotron/fireball_distillate'], 'no distiller c1 bypass');
 });
@@ -64,7 +64,7 @@ test('exact c3 is the sole D2 output-free row, and it consumes only negative res
   assert.equal(noOutputs.length, 1);
   const [type, r] = noOutputs[0];
   assert.equal(`grindless:${type}/${r.name}`, EM.disposalId);
-  assert.equal(r.site, SITE);
+  assert.ok(!r.site);
   assert.equal(r.disposal, true);
   assert.deepEqual(r.itemsIn, [{ id: 'grindless:negative_strangelet_residue', count: 1 }]);
   const startup = fs.readFileSync(path.join(pack, 'kubejs/startup_scripts/grindless/opv/exotic_matter.js'), 'utf8');
@@ -129,7 +129,7 @@ test('shapes match 9x9x9 and 7x7x13, keep NEG liners and pass the structure rubr
 test('all new names, containment tooltips and EMI pages have en_us keys', () => {
   const localKeys = Object.keys(run.lang.en_us).filter((k) => /strangelet|fireball_distillate|lead_208|pb208_ion_source|opv_exotic_matter/.test(k));
   for (const k of localKeys) for (const lang of ['en_us']) assert.ok(run.lang[lang][k], `${lang}: ${k}`);
-  assert.match(run.lang.en_us['grindless.machine.strangelet_distiller.tooltip.1'], /negative residue.*Cygnus X-1/);
+  assert.match(run.lang.en_us['grindless.machine.strangelet_distiller.tooltip.1'], /negative residue/);
   assert.match(run.lang.en_us['emi.grindless.info.strangelet_vault.1'], /Witten.*hypothesis.*named fiction/);
   assert.match(run.lang.en_us['emi.grindless.info.opv_exotic_matter_stock.0'], /OpV-D3.*G1.*MAX/);
 });

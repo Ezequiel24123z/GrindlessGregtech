@@ -1,4 +1,4 @@
-﻿// UXV-A4 (spin_deposition): the MTJ sputter cluster and oxide PLD chamber rows, line 41 (the KrF excimer laser), the controllers'
+// UXV-A4 (spin_deposition): the MTJ sputter cluster and oxide PLD chamber rows, line 41 (the KrF excimer laser), the controllers'
 // assembly lines, the items registered by startup_scripts/grindless/uxv/spin_deposition.js and the structures.
 import assert from 'node:assert/strict';
 import path from 'node:path';
@@ -103,7 +103,7 @@ test('the controllers: UIV hull, parts, mainframes, helium, at least 8 distinct 
     const r = find(id);
     assert.ok(r && r.t === 'gtceu:assembly_line', id);
     const text = JSON.stringify(r.j);
-    for (const need of ['gtceu:uiv_machine_hull', 'gtnn:optical_mainframe', 'gtceu:he_6n', 'gtceu:soldering_alloy', 'gtceu:lubricant']) assert.ok(text.includes(need), `${id} takes ${need}`);
+    for (const need of ['gtceu:uiv_machine_hull', 'gtceu:circuits/uiv', 'gtceu:he_6n', 'gtceu:soldering_alloy', 'gtceu:lubricant']) assert.ok(text.includes(need), `${id} takes ${need}`);
     assert.ok(!text.includes('neutronium'), `${id} takes no neutronium`);
     const ids = new Set((text.match(/"(?:id|tag|item)":"[^"]+"/g) || []));
     assert.ok(ids.size >= 8, `${id}: ${ids.size} distinct ingredients`);

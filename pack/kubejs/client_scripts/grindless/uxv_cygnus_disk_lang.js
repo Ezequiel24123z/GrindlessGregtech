@@ -36,7 +36,7 @@
         ['emi.grindless.info.accretion_disk_skimmer.1',
             'Nothing is wasted: the plasma goes to the plasma mass filter, whose filtered disk plasma feeds the FRC former, and from there the cartridges, the field generator and the BZ dynamo\'s fuel.'],
         ['emi.grindless.info.frc_former.0',
-            'Cartridges are formed in Cygnus X-1 orbit, where the disk plasma is, and carry the field-reversed plasmoid for the rest of the game. Flux loading works anywhere the plasma is carried.'],
+            'Cartridges are formed anywhere from carried plasma and carry the field-reversed plasmoid for the rest of the game. Flux loading works anywhere the plasma is carried.'],
         ['emi.grindless.info.frc_former.1',
             'The cartridge makes the field generator\'s strand coil and shields the trip through Vela\'s wind. The plasma lost in flux loading recombines to 100 mB of hydrogen a run, which goes to stock.'],
         ['emi.grindless.info.bz_dynamo.0',

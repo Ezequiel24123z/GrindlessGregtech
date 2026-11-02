@@ -184,7 +184,7 @@
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
       b.itemInputs(HULL)
       b.itemInputs('2x ' + d.part)
-      b.itemInputs('2x ' + MAINFRAME)
+      b.itemInputs('2x #gtceu:circuits/uiv')
       b.itemInputs('4x #gtceu:circuits/uiv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of(HE, 1000), Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000))

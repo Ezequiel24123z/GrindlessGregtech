@@ -29,7 +29,7 @@
       "recipes": [
         {
           "_why": "machine 14 c1: a theta-pinch on four MH windings traps a field-reversed plasmoid in a cartridge; the windings wear 10% a run. Filtered disk plasma is B2's, made from B3's disk plasma",
-          "name": "form_cartridge", "circuit": 1, "eut": 134217728, "duration": 1600, "site": true,
+          "name": "form_cartridge", "circuit": 1, "eut": 134217728, "duration": 1600,
           "itemsIn": [], "kept": [],
           "wear": [{ "id": "grindless:mh_winding", "count": 4, "chance": 1000 }],
           "fluidsIn": [{ "id": "gtceu:filtered_disk_plasma", "amount": 500 }],
@@ -49,7 +49,7 @@
         },
         {
           "_why": "MAX-D1 (max.md, L16 step 3, c3): at Sgr A* the pinch loads 1,350 mB of filtered flow with flux into 1,000 mB of FRC for the BZ dynamo; the 350 mB lost in formation recombines to hydrogen",
-          "name": "load_flux_frc", "circuit": 3, "eut": 134217728, "duration": 1600, "site": "gcyr:black_hole_orbit",
+          "name": "load_flux_frc", "circuit": 3, "eut": 134217728, "duration": 1600,
           "itemsIn": [], "kept": [],
           "wear": [{ "id": "grindless:mh_winding", "count": 4, "chance": 1000 }],
           "fluidsIn": [{ "id": "gtceu:filtered_hot_flow", "amount": 1350 }],

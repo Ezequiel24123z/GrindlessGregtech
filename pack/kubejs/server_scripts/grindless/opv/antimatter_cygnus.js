@@ -37,7 +37,9 @@
         list(r, 'itemsOut').forEach(function (s) { b.itemOutputs(s) })
         list(r, 'chancedOut').forEach(function (s) { b.chancedOutput(s.count + 'x ' + s.id, s.chance, 0) })
         list(r, 'fluidsOut').forEach(function (s) { b.outputFluids(Fluid.of(s.id, s.amount)) })
-        b.dimension(A.site).EUt(r.eut).duration(r.duration)
+        // only the jet itself needs the place; cooling and antiproton production work on shipped matter
+        if (r.type === 'jet_beam_extraction') b.dimension(A.site)
+        b.EUt(r.eut).duration(r.duration)
         circuits[key] = true
         A.recipes.push(r)
       } catch (e) {
@@ -73,7 +75,7 @@
         .itemOutputs(r.itemsOut)
         .chancedOutput('8x grindless:empty_penning_trap', 9000, 0)
         .addDataString('grindless_antimatter_storage', r.name)
-        .dimension(A.site).EUt(r.eut).duration(r.duration)
+        .EUt(r.eut).duration(r.duration)
       A.trap = r
     } catch (e) {
       A.errors.push('antiproton stack: ' + e)

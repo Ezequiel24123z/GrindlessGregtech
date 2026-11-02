@@ -21,16 +21,16 @@
   }
   var pages = {
     jet_beam_line: [
-      'At Cygnus X-1 orbit, jet beam extraction bunches protons on an SRF cavity. A beam window wears about once per 32 runs. Flux-loaded plasma doubles the beam yield. The beam must be processed here.',
+      'At Cygnus X-1 orbit, jet beam extraction bunches protons on an SRF cavity. A beam window wears about once per 32 runs. Flux-loaded plasma doubles the beam yield. Carry the beam to the later machines anywhere.',
       'Feeds the spallation target station and the antiproton line. Jet electrons are dumped back into the black hole; they are not a recoverable item.'
     ],
     spallation_target_station: [
-      'At Cygnus X-1 orbit, antiproton production consumes 4,000 mB of jet beam per 1,000 mB of hot beam. The iridium target wears at 1/16 and the Li-6 hydride shield at about 1/32 per run.',
+      'Antiproton production consumes 4,000 mB of jet beam per 1,000 mB of hot beam. The iridium target wears at 1/16 and the Li-6 hydride shield at about 1/32 per run.',
       'Spent iridium targets go through the IV hot cell to the EV platinum plant for 85% iridium recovery. D1 line 22 bakes spent Li-6 shields, then removes tritium in the IV tritium facility; He-3 feeds the superfluid line. Pions and neutrinos are lost in the dump. The hot beam stays here for cooling.'
     ],
     antiproton_decelerator: [
-      'At Cygnus X-1 orbit, beam cooling first uses a stochastic pickup, then an electron cooler. Both wear about once per 64 runs. NEG vacuum and an octupole magnet hold the cooled antiprotons in a Penning trap. Residual-gas annihilation losses (3%) become heat, not an item.',
-      'Eight cold cells are stacked by the UV antimatter trap at Cygnus X-1 orbit, circuit 6; 90% of the empty Penning traps return. The OpV stack supplies the antihydrogen foundry and annihilation engine. Antiprotons are sourced only here.'
+      'Beam cooling first uses a stochastic pickup, then an electron cooler. Both wear about once per 64 runs. NEG vacuum and an octupole magnet hold the cooled antiprotons in a Penning trap. Residual-gas annihilation losses (3%) become heat, not an item.',
+      'Eight cold cells are stacked by the UV antimatter trap, circuit 6; 90% of the empty Penning traps return. The OpV stack supplies the antihydrogen foundry and annihilation engine. Antiprotons are sourced only here.'
     ]
   }
   ClientEvents.lang('en_us', function (event) {

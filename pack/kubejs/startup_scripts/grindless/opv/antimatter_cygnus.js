@@ -94,15 +94,16 @@
     A.machines.forEach(function (m) {
       var spec = A.spec(m)
       Pat.register('gtceu:' + m.name, spec)
+      var tips = [
+        Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
+        Text.translate('gtceu.multiblock.parallelizable.tooltip')
+      ]
+      if (m.name === 'jet_beam_line') tips.push(Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.cygnus_x1_orbit')))
       event.create(m.name, 'multiblock').rotationState(RotationState.NON_Y_AXIS).recipeType(m.type)
         .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
         .appearanceBlock(function () { return Block.getBlock(m.casing) })
         .pattern(function (def) { return Pat.build(def, spec) })
-        ['tooltips(net.minecraft.network.chat.Component[])']([
-          Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
-          Text.translate('gtceu.multiblock.parallelizable.tooltip'),
-          Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.cygnus_x1_orbit'))
-        ])
+        ['tooltips(net.minecraft.network.chat.Component[])'](tips)
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
     })
   })

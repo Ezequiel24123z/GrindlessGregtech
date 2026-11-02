@@ -70,7 +70,7 @@ test('the trap row (antimatter storage c5, Earth orbit), the emitter line and th
     const r = find(`grindless:assembly_line/${m}`);
     assert.ok(r && r.t === 'gtceu:assembly_line', m);
     const text = JSON.stringify(r.j);
-    for (const need of [`gtceu:${m}`, 'gtceu:uiv_machine_hull', 'gtnn:spintronic_mainframe', 'gtceu:circuits/uiv', 'gtceu:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', research[m]]) {
+    for (const need of [`gtceu:${m}`, 'gtceu:uiv_machine_hull', 'gtceu:circuits/uxv', 'gtceu:circuits/uiv', 'gtceu:uxv_sensor', 'gtceu:soldering_alloy', 'gtceu:lubricant', research[m]]) {
       assert.ok(text.includes(need), `${m} takes ${need}`);
     }
     assert.ok(new Set(text.match(/"(?:id|tag|item)":"[^"]+"/g) || []).size >= 8, `${m}: at least 8 distinct ingredients`);

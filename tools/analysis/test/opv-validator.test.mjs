@@ -89,7 +89,7 @@ test('real tiers (opv): leak checks, sites, the gate and the jumps', () => {
   un('bulge_collector-products-only-bulge_collector', ['operate:gtceu:bulge_collector*'], []);
   assert.ok(Object.keys(t).filter((k) => t[k].expect === 'unreachable' && /-products-only-/.test(k)).length >= 14, 'a leak check per producing multiblock');
   for (const [id, dim] of [['site-opv-cygnus', 'grindless:cygnus_x1_orbit'], ['site-opv-sgr', 'grindless:sgr1806_orbit'], ['site-opv-terzan5', 'grindless:terzan5_core'],
-    ['site-opv-overworld', 'minecraft:overworld'], ['site-antiproton-stack-opv', 'grindless:cygnus_x1_orbit']]) {
+  ]) {
     assert.equal(t[id].kind, 'site', id);
     assert.deepEqual(t[id].dimensions, [dim], id);
   }

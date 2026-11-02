@@ -71,7 +71,7 @@ Existing pack ids UXV reuses instead of making again: `gtceu:tetrataenite` ingot
 | Vela pulsar orbit | `grindless:vela_pulsar_orbit` | 12 (S0-3; fallback 11) | Kerr sling, c8 | nuclear pasta, polar cap tap |
 | Cassiopeia A | `grindless:cas_a_remnant` | 12 (S0-3; fallback 11) | Kerr sling, c9 | Ti-44 |
 
-Site rules (as UIV, DECISIONS.md:498): new places are void datapack dimensions (GCYR 0.2.9 tier from S0-3), with no atmosphere and low gravity (S0-9); each arrival platform is a row in `tables/relay_platforms.json` (UIV-B1). Site-locked machines check `.dimension` in their recipes: elevator, filter c1, condensation tower, skimmer, FRC former c1 and BZ at Cygnus; the four pasta machines and the tap at Vela; the sweeper at Cas A.
+Site rules (as UIV, DECISIONS.md:498): new places are void datapack dimensions (GCYR 0.2.9 tier from S0-3), with no atmosphere and low gravity (S0-9); each arrival platform is a row in `tables/relay_platforms.json` (UIV-B1). Only recipes that use the place check `.dimension` (SITE-D, owner rule): the elevator row, the condensation tower, the skimmer and BZ at Cygnus; pasta extraction and the tap at Vela; the sweeper at Cas A. Cartridge forming, mass filtering, pasta sorting, drawing and lamination run anywhere on carried inputs.
 
 - Vela PSR B0833−45: 89 ms period, 287 pc (Dodson 2003), glitches about every 2.5-3 years with Δν/ν ≈ 10⁻⁶ (Radhakrishnan & Manchester 1969). Pasta sits at 0.5-0.9 of nuclear saturation density in the inner crust's base (Ravenhall, Pethick & Wilson 1983; Hashimoto, Seki & Yamada 1984).
 - Cas A: about 340 years old at 3.4 kpc; NuSTAR mapped about 1.25 x 10⁻⁴ M☉ of Ti-44 in knots (Grefenstette 2014, Nature 506:339); Ti-rich plumes trace neutrino-driven convection (Sato 2021, Nature 592:537). Ti-44 half-life 59 years, to Sc-44 (3.97 h, β+ 94%) to stable Ca-44.
@@ -89,12 +89,12 @@ Site rules (as UIV, DECISIONS.md:498): new places are void datapack dimensions (
 
 | Bridge | From → to | Why it cannot be made there |
 |---|---|---|
-| `grindless:frc_cartridge` | Cygnus → warp gate c8, field generator, gate | disk plasma is site-locked to Cygnus |
+| `grindless:frc_cartridge` | Cygnus → warp gate c8, field generator, gate | disk plasma is taken at Cygnus; the cartridge forms anywhere |
 | `grindless:cnt_whipple_shield` | home → warp gate c9 | assembled from LuV, UEV and UIV parts at home |
 | `grindless:launched_relay_seed` | UIV probe bay (Cygnus) → warp gate c8/c9 | UIV-B1 item, slung by a new probe bay mode |
-| `pasta_strand` wire, `grindless:lasagna_plate` | Vela → home, Cygnus | pasta exists only at Vela |
+| `pasta_strand` wire, `grindless:lasagna_plate` | Vela → home, Cygnus | pasta is extracted only at Vela; drawing and pressing run anywhere |
 | `grindless:ti44_core` | home (from Cas A dust) → annihilation works | Ti-44 exists only in Cas A |
-| stellar H, He-4 and CNO cuts | Cygnus → home Mk6 | stellar plasma is site-locked |
+| stellar H, He-4 and CNO cuts | Cygnus → home Mk6 | stellar plasma is lifted at Cygnus; the cuts are sorted anywhere |
 | `grindless:superheavy_census_iii`, `island_chart` | home → gate | home accelerators only |
 | `grindless:cage_part` | RX J1856 (UIV cage mode) → Vela sorter | the neutronium cage is site-locked at RX J1856 (uiv.md:381) |
 
@@ -1495,7 +1495,7 @@ B1 opens both places. B2 and B3 work at Cygnus X-1 orbit (UIV's platform) and ca
 - **References:** machines 16-20 (uxv.md:424-480); lines 32-33, 39, 48; *Mods and integration* (hull); uiv.md:1627 (`uxv_machine_casing`); S0-8.
 - **Depends on:** F1, B1, A6; A3 (die, anneal), A7 (`finemet_ribbon`); UIV-B2, UIV-B5.
 - **Invariants:**
-  - pasta only at Vela (`.dimension` on 16-20);
+  - pasta extracted only at Vela (`.dimension` on the extraction and tap rows; sorting, drawing and lamination run anywhere);
   - anti-phases → `pasta_core_sample`;
   - the tap is written final;
   - the UEV and UIV hulls are untouched.

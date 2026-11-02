@@ -46,18 +46,18 @@ test('each machine is registered on its recipe type with one controller and its 
   });
 });
 
-test('harvester c1-c2: sensor head kept -> 4 bulge debris; 4 debris -> 2 metal + 2 silicate fractions; 268,435,456 EU/t, Terzan 5 only', () => {
+test('harvester c1-c2: sensor head kept -> 4 bulge debris; 4 debris -> 2 metal + 2 silicate fractions; 268,435,456 EU/t, only the harvest is at Terzan 5', () => {
   const c1 = rec('bulge_debris_harvest');
   assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, 2 * V_UXV, 400, SITE]);
   assert.deepEqual(ids(c1.kept), [['gtceu:opv_sensor', 1]]);
   assert.deepEqual(ids(c1.itemsOut), [['grindless:bulge_debris', 4]]);
   const c2 = rec('debris_fractions');
-  assert.deepEqual([c2.circuit, c2.eut, c2.duration, c2.site], [2, 2 * V_UXV, 200, SITE]);
+  assert.deepEqual([c2.circuit, c2.eut, c2.duration, (c2.site || undefined)], [2, 2 * V_UXV, 200, undefined]);
   assert.deepEqual(ids(c2.itemsIn), [['grindless:bulge_debris', 4]]);
   assert.deepEqual(ids(c2.itemsOut), [['grindless:metal_debris_fraction', 2], ['grindless:silicate_debris_fraction', 2]]);
   for (const r of RP.recipes) {
     assert.ok(r.eut < 2 ** 31, `${r.name}: below 2^31`);
-    assert.ok(JSON.stringify(find(`grindless:${r.type}/${r.name}`).j.recipeConditions || []).includes(SITE), `${r.name}: dimension lock`);
+    assert.ok(JSON.stringify(find(`grindless:${r.type}/${r.name}`).j.recipeConditions || []).includes(SITE) === (r.name === 'bulge_debris_harvest'), `${r.name}: dimension lock only on the harvest`);
   }
 });
 
@@ -75,7 +75,7 @@ test('refinery c1-c6: carbonyl cell (CO returns at 90%) and FFC salt cell; c7 is
   const rows = RP.recipes.filter((r) => r.type === 'replication_refining');
   assert.deepEqual(plain(rows.map((r) => r.circuit)),   [1, 2, 3, 4, 5, 6, 7]);
     assert.equal(rows[6].name, 'spent_node_recovery');
-    for (const r of rows) assert.deepEqual([r.eut, r.site], [2 * V_UXV, SITE], r.name);
+    for (const r of rows) assert.deepEqual([r.eut, (r.site || undefined)], [2 * V_UXV, undefined], r.name);
   const co = (r) => r.fluidsIn.concat(r.fluidsOut).filter((f) => f.id === 'gtceu:carbon_monoxide').map((f) => f.amount);
   assert.deepEqual(plain(co(rec('metal_carbonyl_synthesis'))), [1000]);
   assert.deepEqual(plain(co(rec('carbonyl_decomposition'))), [900]);
@@ -88,7 +88,7 @@ test('refinery c1-c6: carbonyl cell (CO returns at 90%) and FFC salt cell; c7 is
 
 test('foundry c1-c2: the seed is kept (never consumed) and two seeds come out; c2 core + feedstock -> one seed; real feedstock in both', () => {
   const c1 = rec('probe_self_copy');
-  assert.deepEqual([c1.circuit, c1.eut, c1.duration, c1.site], [1, VA_OPV, 2400, SITE]);
+  assert.deepEqual([c1.circuit, c1.eut, c1.duration, (c1.site || undefined)], [1, VA_OPV, 2400, undefined]);
   assert.deepEqual(ids(c1.kept), [['grindless:probe_seed', 1]]);
   assert.deepEqual(ids(c1.itemsIn), [['grindless:metal_feedstock', 16], ['grindless:cluster_sinter_casing', 8], ['grindless:vitamin_kit', 1]]);
   assert.deepEqual(ids(c1.itemsOut), [['grindless:probe_seed', 2]]);

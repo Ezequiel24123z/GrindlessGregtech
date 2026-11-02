@@ -37,7 +37,7 @@
       } else {
         var b = event.recipes.gtceu.assembly_line('grindless:uxv_parallel_hatch')
         b.itemInputs(KEY.H)
-        b.itemInputs('4x ' + KEY.M)
+        b.itemInputs('4x #gtceu:circuits/uxv')
         b.itemInputs(KEY.G)
         b.itemInputs(KEY.E)
         b.itemInputs('4x ' + KEY.C)

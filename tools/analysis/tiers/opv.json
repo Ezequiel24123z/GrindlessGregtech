@@ -949,29 +949,11 @@
       "package": "A2"
     },
     {
-      "id": "site-opv-overworld",
-      "label": "Site: the antihydrogen foundry and annihilation engine only on the overworld",
-      "kind": "site",
-      "types": [
-        "gtceu:antihydrogen_synthesis",
-        "gtceu:annihilation_power"
-      ],
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "package": "B3"
-    },
-    {
       "id": "site-opv-cygnus",
-      "label": "Site: the jet beam line, target station, decelerator, distiller, kugelblitz forge and Hawking collector only at Cygnus X-1 orbit",
+      "label": "Site: the jet beam line only at Cygnus X-1 orbit (it takes the jet); the target station, decelerator, distiller, kugelblitz forge and Hawking collector run anywhere",
       "kind": "site",
       "types": [
-        "gtceu:jet_beam_extraction",
-        "gtceu:antiproton_production",
-        "gtceu:beam_cooling",
-        "gtceu:strangelet_distillation",
-        "gtceu:kugelblitz_forming",
-        "gtceu:hawking_power"
+        "gtceu:jet_beam_extraction"
       ],
       "dimensions": [
         "grindless:cygnus_x1_orbit"
@@ -980,11 +962,15 @@
     },
     {
       "id": "site-opv-sgr",
-      "label": "Site: the pair converter and field-frozen press only at SGR 1806-20 orbit",
+      "label": "Site: the field-frozen press and the magnetar-field plasma boil only at SGR 1806-20 orbit; the rest of the pair converter runs anywhere",
       "kind": "site",
       "types": [
         "gtceu:magnetic_pair_production",
         "gtceu:field_freezing"
+      ],
+      "recipe": [
+        "grindless:field_freezing/*",
+        "grindless:magnetic_pair_production/boil_seed_plasma"
       ],
       "dimensions": [
         "grindless:sgr1806_orbit"
@@ -993,47 +979,38 @@
     },
     {
       "id": "site-vela",
-      "label": "Site: the pasta extractor, phase sorter, draw bench, laminator and polar cap tap only at Vela pulsar orbit",
+      "label": "Site: the pasta extractor and polar cap tap only at Vela pulsar orbit (they take the crust and the pulsar); the sorter, draw bench and laminator run anywhere",
       "kind": "site",
-      "types": ["gtceu:pasta_extraction", "gtceu:pasta_sorting", "gtceu:pasta_drawing", "gtceu:pasta_lamination", "gtceu:polar_cap_tapping"],
+      "types": ["gtceu:pasta_extraction", "gtceu:polar_cap_tapping"],
       "dimensions": ["grindless:vela_pulsar_orbit"],
       "exceptRecipes": [
         "grindless:pasta_extraction/chain_crust",
         "grindless:pasta_extraction/ni_chain",
-        "grindless:pasta_extraction/chain_lattice",
-        "grindless:pasta_sorting/chain_caging",
-        "grindless:pasta_sorting/ni_chain_caging",
-        "grindless:pasta_sorting/lattice_caging",
-        "grindless:pasta_drawing/chain_strand_drawing",
-        "grindless:pasta_drawing/chain_wire_drawing",
-        "grindless:pasta_lamination/chain_lamina",
-        "grindless:pasta_lamination/chain_lamina_stack",
-        "grindless:pasta_lamination/chain_mesh_weave",
-        "grindless:pasta_drawing/horizon_*",
-        "grindless:pasta_drawing/kerr_strand_drawing"
+        "grindless:pasta_extraction/chain_lattice"
       ],
       "package": "B4",
-      "note": "Replaces uxv.json's check: the OpV-A0 chain matter rows run at SGR 1806-20 orbit (site-sgr-chain-matter), and MX-R's horizon strand rows (preform, wire and ingot drawing, UXV voltage) run there too (site-opv-horizon-strand)."
+      "note": "Replaces uxv.json's check: the OpV-A0 chain matter extractions run at SGR 1806-20 orbit (site-sgr-chain-matter), with the chain laminator rows and MX-R's horizon strand preform (site-opv-horizon-strand)."
     },
     {
       "id": "site-opv-horizon-strand",
-      "label": "Site: the horizon strand rows of the draw bench only at SGR 1806-20 orbit",
+      "label": "Site: the horizon strand preform and the chain laminator rows only at SGR 1806-20 orbit",
       "kind": "site",
-      "types": ["gtceu:pasta_drawing"],
-      "recipe": ["grindless:pasta_drawing/horizon_*"],
+      "recipe": [
+        "grindless:pasta_drawing/horizon_strand_preform",
+        "grindless:pasta_lamination/chain_lamina",
+        "grindless:pasta_lamination/chain_lamina_stack"
+      ],
       "dimensions": ["grindless:sgr1806_orbit"],
       "package": "R1"
     },
     {
       "id": "site-opv-terzan5",
-      "label": "Site: the debris harvester, refinery, foundry, node works and bulge collector only at the Terzan 5 core",
+      "label": "Site: the debris harvester, the node pack deploy and the bulge light collector only at the Terzan 5 core; the refinery and foundry run anywhere",
       "kind": "site",
-      "types": [
-        "gtceu:debris_harvesting",
-        "gtceu:replication_refining",
-        "gtceu:self_replication",
-        "gtceu:collector_node_assembly",
-        "gtceu:bulge_light_collection"
+      "recipe": [
+        "grindless:debris_harvesting/bulge_debris_harvest",
+        "grindless:collector_node_assembly/node_pack_deploy",
+        "grindless:bulge_light_collection/*"
       ],
       "dimensions": [
         "grindless:terzan5_core"
@@ -1059,23 +1036,7 @@
         "A12",
         "A5"
       ],
-      "note": "Overrides uv.json: antiproton_stack_opv is the OpV B3 row, run at Cygnus X-1 orbit."
-    },
-    {
-      "id": "site-antiproton-stack-opv",
-      "label": "Site: the OpV antiproton stack row only at Cygnus X-1 orbit",
-      "kind": "site",
-      "types": [
-        "gtceu:antimatter_storage"
-      ],
-      "dimensions": [
-        "grindless:cygnus_x1_orbit"
-      ],
-      "recipe": [
-        "grindless:antimatter_storage/antiproton_stack_opv"
-      ],
-      "exact": true,
-      "package": "B3"
+      "note": "Overrides uv.json: antiproton_stack_opv is the OpV B3 row; it takes nothing from a place and runs anywhere."
     },
     {
       "id": "gate-hold-sgr1806",

@@ -6,7 +6,7 @@
 // Every other id is GTM-native (highTierContent, opv_ids.json) or F1's (opv/foundation.js).
 //
 //   gtceu:magnetic_pair_converter  9 x 9 x 9 open frame, field-aligned along the magnetar's lines, a trap on its axis. Recipe type
-//                                  gtceu:magnetic_pair_production (circuit 1 boil the seed, 2 seal the cell). SGR 1806-20 orbit.
+//                                  gtceu:magnetic_pair_production (circuit 1 boil the seed, 2 seal the cell). Only the boil is locked to SGR 1806-20 orbit.
 //
 // Geometry (lib/patterns.js: a slice has at most 16 rows): the controller sits in the front slice (z = depth - 1), forced by
 // G.uivShapes.T.slices at (mid, 1, depth - 1). The structure is a cube wireframe (edges where 2 of the 3 axes are at their extreme),
@@ -116,8 +116,7 @@
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('grindless.machine.' + m.name + '.tooltip.1'),
-          Text.translate('grindless.machine.' + m.name + '.tooltip.2'),
-          Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.sgr1806_orbit'))
+          Text.translate('grindless.machine.' + m.name + '.tooltip.2')
         ])
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
     })

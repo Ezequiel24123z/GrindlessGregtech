@@ -51,7 +51,7 @@
       "recipes": [
         {
           "_why": "machine 17 c1: a cage part (kept) holds the raw pasta while the density arc sorts it into spaghetti, lasagna, gnocchi and an anti-phase residue",
-          "name": "phase_sorting", "circuit": 1, "eut": 67108864, "duration": 1200, "site": true,
+          "name": "phase_sorting", "circuit": 1, "eut": 67108864, "duration": 1200,
           "itemsIn": [{ "id": "grindless:raw_pasta", "count": 1 }],
           "kept": [{ "id": "grindless:cage_part", "count": 1 }],
           "fluidsIn": [],
@@ -65,7 +65,7 @@
         },
         {
           "_why": "machine 17 c2: sixteen residues sealed in a cage part (consumed) become one core sample, the residue's only use",
-          "name": "core_sample", "circuit": 2, "eut": 134217728, "duration": 2400, "site": true,
+          "name": "core_sample", "circuit": 2, "eut": 134217728, "duration": 2400,
           "itemsIn": [
             { "id": "grindless:anti_phase_residue", "count": 16 },
             { "id": "grindless:cage_part", "count": 1 }
@@ -77,7 +77,7 @@
         },
         {
           "_why": "OpV-A0 line 1, c3 at SGR 1806-20: a crust slab closed in a cage part (consumed: the cage leaves with the phase and is spent when the draw bench opens it); the iron that was never chained falls out as dust",
-          "name": "chain_caging", "circuit": 3, "eut": 67108864, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "name": "chain_caging", "circuit": 3, "eut": 67108864, "duration": 600,
           "itemsIn": [
             { "id": "grindless:chain_crust_slab", "count": 1 },
             { "id": "grindless:cage_part", "count": 1 }
@@ -92,7 +92,7 @@
         },
         {
           "_why": "OpV-A0, c4 at SGR 1806-20: a Ni chain slab closed in a cage part (consumed) for the trip home; OpV-B2's electron beam c23 thaws it",
-          "name": "ni_chain_caging", "circuit": 4, "eut": 67108864, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "name": "ni_chain_caging", "circuit": 4, "eut": 67108864, "duration": 600,
           "itemsIn": [
             { "id": "grindless:ni_chain_slab", "count": 1 },
             { "id": "grindless:cage_part", "count": 1 }
@@ -104,7 +104,7 @@
         },
         {
           "_why": "OpV-A0 line 2, c5 at SGR 1806-20: a lattice slab closed in a cage part (consumed: spent when the laminator presses it); the unchained iron falls out as dust",
-          "name": "lattice_caging", "circuit": 5, "eut": 67108864, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "name": "lattice_caging", "circuit": 5, "eut": 67108864, "duration": 600,
           "itemsIn": [
             { "id": "grindless:chain_lattice_slab", "count": 1 },
             { "id": "grindless:cage_part", "count": 1 }
@@ -124,7 +124,7 @@
       "recipes": [
         {
           "_why": "machine 18 c1: the spaghetti phase is drawn through an aerogel die into eight strands of pasta wire; a cage part (kept) holds the draw",
-          "name": "strand_drawing", "circuit": 1, "eut": 134217728, "duration": 1200, "site": true,
+          "name": "strand_drawing", "circuit": 1, "eut": 134217728, "duration": 1200,
           "itemsIn": [
             { "id": "grindless:spaghetti_phase", "count": 1 },
             { "id": "grindless:silica_aerogel", "count": 1 }
@@ -136,7 +136,7 @@
         },
         {
           "_why": "OpV-A0 line 1, c3 at SGR 1806-20: the caged chain phase is drawn out of its cage (spent) into four chain strand ingots",
-          "name": "chain_strand_drawing", "circuit": 3, "eut": 134217728, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "name": "chain_strand_drawing", "circuit": 3, "eut": 134217728, "duration": 600,
           "itemsIn": [{ "id": "grindless:caged_chain_phase", "count": 1 }],
           "kept": [],
           "fluidsIn": [],
@@ -145,7 +145,7 @@
         },
         {
           "_why": "OpV-A0 line 1, c4 at SGR 1806-20: a chain strand ingot is drawn into two single wires (GTM's own wire ratio is cut by OpV-F2: the strand only draws here)",
-          "name": "chain_wire_drawing", "circuit": 4, "eut": 67108864, "duration": 300, "site": "grindless:sgr1806_orbit",
+          "name": "chain_wire_drawing", "circuit": 4, "eut": 67108864, "duration": 300,
           "itemsIn": [{ "id": "gtceu:chain_strand_ingot", "count": 1 }],
           "kept": [],
           "fluidsIn": [],
@@ -163,7 +163,7 @@
         },
         {
           "_why": "MAX-A0 line L1, c6 at SGR 1806-20: the preform is drawn on into four single wires of gtceu:horizon_strand (named fiction near c^4/4G, Gibbons 2002)",
-          "name": "horizon_wire_drawing", "circuit": 6, "eut": 134217728, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "name": "horizon_wire_drawing", "circuit": 6, "eut": 134217728, "duration": 600,
           "itemsIn": [{ "id": "grindless:horizon_strand_preform", "count": 1 }],
           "kept": [],
           "fluidsIn": [],
@@ -172,7 +172,7 @@
         },
         {
           "_why": "MX-R2: the generic GTM strand rows are cut (max/cuts.js), so gtceu:horizon_strand_ingot, which the MAX 16A hatches, 9x hatches and converters need (tables/max_parts.json), had no maker; c7 at SGR 1806-20 draws the preform into two ingots",
-          "name": "horizon_ingot_drawing", "circuit": 7, "eut": 134217728, "duration": 600, "site": "grindless:sgr1806_orbit",
+          "name": "horizon_ingot_drawing", "circuit": 7, "eut": 134217728, "duration": 600,
           "itemsIn": [{ "id": "grindless:horizon_strand_preform", "count": 1 }],
           "kept": [],
           "fluidsIn": [],
@@ -181,7 +181,7 @@
         },
         {
           "_why": "XP-A1 (maxplus.md, line P4 step 2, c8): the Kerr clad strand drawn at SGR 1806-20 into Kerr strand wire. Circuit 8: the type's highest was 7.",
-          "name": "kerr_strand_drawing", "circuit": 8, "eut": 134217728, "duration": 900, "site": "grindless:sgr1806_orbit",
+          "name": "kerr_strand_drawing", "circuit": 8, "eut": 134217728, "duration": 900,
           "itemsIn": [{ "id": "grindless:kerr_clad_strand", "count": 4 }],
           "kept": [],
           "fluidsIn": [],
@@ -195,7 +195,7 @@
       "recipes": [
         {
           "_why": "machine 19 c1: the lasagna phase is pressed on a rhea billet into four plates; a cage part (kept) holds the press",
-          "name": "plate_pressing", "circuit": 1, "eut": 134217728, "duration": 1200, "site": true,
+          "name": "plate_pressing", "circuit": 1, "eut": 134217728, "duration": 1200,
           "itemsIn": [
             { "id": "grindless:lasagna_phase", "count": 1 },
             { "id": "grindless:wf_rhea_billet", "count": 1 }
@@ -207,7 +207,7 @@
         },
         {
           "_why": "machine 19 c2: a plate carries two strands of pasta wire as the lasagna electrode (UXV-B4's own fuel; UIV's polar_cap_electrode is a different item and is not spent by the tap)",
-          "name": "lasagna_electrode", "circuit": 2, "eut": 33554432, "duration": 400, "site": true,
+          "name": "lasagna_electrode", "circuit": 2, "eut": 33554432, "duration": 400,
           "itemsIn": [
             { "id": "grindless:lasagna_plate", "count": 1 },
             { "id": "gtceu:pasta_strand_single_wire", "count": 2 }
@@ -240,7 +240,7 @@
         },
         {
           "_why": "OpV-A0 for line 6, c5 at SGR 1806-20: four PBO fibres woven around two chain strand wires; OpV-A1's electron beam welds the weave into the mesh belt",
-          "name": "chain_mesh_weave", "circuit": 5, "eut": 67108864, "duration": 400, "site": "grindless:sgr1806_orbit",
+          "name": "chain_mesh_weave", "circuit": 5, "eut": 67108864, "duration": 400,
           "itemsIn": [
             { "id": "grindless:pbo_fibre", "count": 4 },
             { "id": "gtceu:chain_strand_single_wire", "count": 2 }

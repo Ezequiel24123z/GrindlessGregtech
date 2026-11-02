@@ -113,8 +113,7 @@
     rec.chanceOut.forEach(function (x) { recipe.chancedOutput(x.count + 'x ' + x.id, x.chance, 0) })
     rec.fluidsOut.forEach(function (x) { recipe.outputFluids(Fluid.of(x.id, x.amount)) })
     if (rec.dataKey !== '') recipe.addDataString(rec.dataKey, rec.name)
-    if (rec.type === 'antihydrogen_synthesis' || rec.type === 'annihilation_power') recipe.dimension('minecraft:overworld')
-    else if (rec.site) recipe.dimension(SITE)
+    if (rec.site) recipe.dimension(SITE)
     recipe.EUt(rec.generator ? -rec.eut : rec.eut).duration(rec.duration)
   }
 
