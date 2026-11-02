@@ -591,6 +591,7 @@ function jvm(opts = {}) {
     'com.gregtechceu.gtceu.utils.GTUtil': { getTierByVoltage: (v) => { let t = 0; while (t < V.length - 1 && V[t] < v) t++; return t; } },
     'com.gregtechceu.gtceu.utils.FormattingUtil': { formatNumbers: (n) => String(n) },
     'java.util.UUID': {},
+    'java.lang.Long': { toString: (v) => String(v) },
     'com.gregtechceu.gtceu.api.capability.GTCapabilityHelper': { getElectricItem: (s) => s.e || null, getForgeEnergyItem: (s) => s.fe || null },
     'com.gregtechceu.gtceu.api.capability.compat.FeCompat': { insertEu },
     'com.gregtechceu.gtceu.config.ConfigHolder': { INSTANCE: { compat: { energy: { nativeEUToFE: true } } } },
