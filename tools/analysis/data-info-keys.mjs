@@ -44,6 +44,14 @@ export function registeredDataInfos(packDir) {
   let currentFile = '';
   const ctx = {
     global: {}, console: { info() {}, log() {}, warn() {}, error() {}, debug() {} },
+    JsonIO: {
+      readJson: (p) => {
+        const f = path.join(packDir, String(p));
+        try { return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : null; } catch { return null; }
+      },
+      toPrettyString: (j) => JSON.stringify(j, null, 2),
+      toString: (j) => JSON.stringify(j),
+    },
     Platform: { isLoaded: () => true, getMods: () => any, isClientEnvironment: () => false },
     Text: { translate: (k) => ({ getString: () => String(k) }) },
     GTRecipeTypes: {
