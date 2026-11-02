@@ -23,8 +23,37 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 export const STARTUP_DIR = path.join(here, '..', '..', '..', 'pack', 'kubejs', 'startup_scripts', 'grindless');
 const ID_TOKEN = /\b(?:gtceu|grindless|gcyr|minecraft|gtca|extendedfeatures):[a-z0-9_]+/g;
 
-/** Map id -> era index of the first era folder of `dir` that names it (a machine, a recipe type, an item, a dimension). */
-export function scanStartupEras(dir = STARTUP_DIR) {
+export const PLANETS_FILE = path.join(STARTUP_DIR, '..', '..', 'data', 'grindless', 'tables', 'planets.json');
+
+/**
+ * M1-07: the era a player first reaches these places, which the first startup folder naming the id gets wrong (the Moon is named in
+ * EV but reached in HV, the End named in IV, reached in MV, Earth orbit and Io orbit are named nowhere, the Overworld is named only
+ * by a UHV script). The other dimensions of a planet in planets.json take the earliest era of the planet's dated dimensions.
+ */
+export const PLACE_ERAS = {
+  'minecraft:overworld': 'steam',
+  'minecraft:the_nether': 'lv',
+  'minecraft:the_end': 'mv',
+  'gcyr:luna': 'hv',
+  'gcyr:overworld_orbit': 'luv',
+  'grindless:io_orbit': 'luv',
+};
+
+/** Dates the places of `first` (id -> era index, edited in place): PLACE_ERAS, then the undated dimensions of every planet of `planets` ({planets: {key: {dimensions}}}). */
+export function datePlaces(first, planets) {
+  for (const [id, era] of Object.entries(PLACE_ERAS)) first.set(id, ERAS.indexOf(era));
+  for (const p of Object.values((planets && planets.planets) || {})) {
+    const dims = p.dimensions || [];
+    const known = dims.filter((d) => first.has(d)).map((d) => first.get(d));
+    if (!known.length) continue;
+    const e = Math.min(...known);
+    for (const d of dims) if (!first.has(d)) first.set(d, e);
+  }
+  return first;
+}
+
+/** Map id -> era index of the first era folder of `dir` that names it (a machine, a recipe type, an item, a dimension), places dated by datePlaces. */
+export function scanStartupEras(dir = STARTUP_DIR, planetsFile = dir === STARTUP_DIR ? PLANETS_FILE : null) {
   const first = new Map();
   ERAS.forEach((era, idx) => {
     const d = path.join(dir, era);
@@ -33,7 +62,7 @@ export function scanStartupEras(dir = STARTUP_DIR) {
       for (const id of fs.readFileSync(path.join(d, f), 'utf8').match(ID_TOKEN) || []) if (!first.has(id)) first.set(id, idx);
     }
   });
-  return first;
+  return planetsFile && fs.existsSync(planetsFile) ? datePlaces(first, JSON.parse(fs.readFileSync(planetsFile, 'utf8'))) : first;
 }
 
 /**

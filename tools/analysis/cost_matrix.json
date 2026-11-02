@@ -115,6 +115,15 @@
     "gate": {
       "note": "--check fails (exit 1) on any step under minRatio in these series (M2-07): each era must cost at least x1.3 the previous one. AF-CC added the 4 A hatch and the eight components.",
       "minRatio": 1.3,
+      "accepted": [
+        { "series": "machine_casing", "era": "hv", "reason": "Owner, #230 (DECISIONS.md:863): no casing chain; the casing stays under x1.3 (#226)" },
+        { "series": "machine_casing", "era": "uv", "reason": "Owner, #230 (DECISIONS.md:863): no casing chain; the casing stays under x1.3 (#226)" },
+        { "series": "hull", "era": "mv", "reason": "Owner, #230 (DECISIONS.md:863): the hull stays under x1.3 (#226)" },
+        { "series": "hull", "era": "hv", "reason": "Owner, #230 (DECISIONS.md:863): the hull stays under x1.3 (#226)" },
+        { "series": "hull", "era": "ev", "reason": "Owner, #230 (DECISIONS.md:863): the hull stays under x1.3 (#226)" },
+        { "series": "hull", "era": "uv", "reason": "Owner, #230 (DECISIONS.md:863): the hull stays under x1.3 (#226)" },
+        { "series": "energy_hatch", "era": "hv", "reason": "Owner, #230 (DECISIONS.md:863): the 1 A hatch stays under x1.3 (#226)" }
+      ],
       "series": ["hull", "machine_casing", "energy_hatch", "energy_hatch_4a", "energy_hatch_16a", "motor", "pump", "piston", "conveyor", "robot_arm", "emitter", "sensor", "field_generator", "circuit (cheapest)", "controller (median)"]
     }
   }

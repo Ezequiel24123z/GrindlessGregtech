@@ -824,7 +824,7 @@ function renderMarkdown({ cfg, rows, missing, model, recipes, trivial, dump, arg
 
 const eraIdxOf = (tiers, t) => tiers.indexOf(t);
 
-/** Steps of the gated series that grow by less than gate.minRatio. Steps up to LV are only reviewed (principle 2). */
+/** Steps of the gated series that grow by less than gate.minRatio, except the owner-accepted ones (gate.accepted: series + era). Steps up to LV are only reviewed (principle 2). */
 export function gateViolations(series, tiers, gate) {
   const out = [];
   if (!gate) return out;
@@ -836,7 +836,8 @@ export function gateViolations(series, tiers, gate) {
     for (const t of tiers) {
       const v = m.get(t);
       if (v === undefined) continue;
-      if (prev && prev.v > 0 && tiers.indexOf(t) > first && v / prev.v < gate.minRatio) {
+      if (prev && prev.v > 0 && tiers.indexOf(t) > first && v / prev.v < gate.minRatio
+        && !(gate.accepted || []).some((a) => a.series === name && a.era === t)) {
         out.push({ series: name, era: t, from: prev.era, ratio: v / prev.v, prev: prev.v, value: v });
       }
       prev = { era: t, v };

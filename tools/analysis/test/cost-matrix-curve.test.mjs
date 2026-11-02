@@ -188,6 +188,14 @@ test('gateViolations: a step under the ratio fails, one at the ratio passes, and
   const v = gateViolations(series, tiers, { minRatio: 1.3, series: ['good', 'flat', 'early', 'absent'] });
   assert.deepEqual(v.map((x) => `${x.series}:${x.from}>${x.era}`), ['flat:lv>mv', 'flat:mv>hv']);
   assert.deepEqual(gateViolations(series, tiers, null), []);
+  const acc = gateViolations(series, tiers, { minRatio: 1.3, series: ['flat'], accepted: [{ series: 'flat', era: 'mv', reason: 'x' }] });
+  assert.deepEqual(acc.map((x) => `${x.series}:${x.from}>${x.era}`), ['flat:mv>hv'], 'an eighth step still fails');
+});
+
+test('the committed gate accepts exactly the seven owner-accepted steps, each with a reason', () => {
+  const acc = realCfg.outliers.gate.accepted.map((a) => `${a.series}:${a.era}`).sort();
+  assert.deepEqual(acc, ['energy_hatch:hv', 'hull:ev', 'hull:hv', 'hull:mv', 'hull:uv', 'machine_casing:hv', 'machine_casing:uv']);
+  for (const a of realCfg.outliers.gate.accepted) assert.ok(a.reason && a.reason.length > 10, a.series);
 });
 
 test('the committed gate names the key-item series and a ratio above 1', () => {
