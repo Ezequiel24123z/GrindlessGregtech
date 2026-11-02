@@ -10,6 +10,8 @@
       done = true
       var n = global.ggInfoFit(Client.level.getRecipeManager())
       console.info('[grindless/integration] info boxes fitted: ' + n)
+      // EMI copied each page size when it built its displays, so rebuild them with the fitted sizes
+      if (n > 0) Java.loadClass('dev.emi.emi.runtime.EmiReloadManager').reload()
     } catch (e) {
       done = true
       console.error('[grindless/integration] info box fit failed: ' + e)
