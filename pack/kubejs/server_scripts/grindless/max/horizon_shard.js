@@ -1,3 +1,4 @@
+// priority: -19918
 // AF-X (finding M1-02): the Horizon Shard can be made. It is the Horizon Collector's catalyst and a kept input of both creative-core rows, so a
 // world that loses the shard (or a pack that ends without the Welcome quest reward) must be able to make another, or the ending can be locked.
 // One recipe on the mirror shell (gtceu:black_hole_bomb, at Sgr A* like the shell's own recipes): 2 seed wave packets (about 4.5e12 EU along L18),
