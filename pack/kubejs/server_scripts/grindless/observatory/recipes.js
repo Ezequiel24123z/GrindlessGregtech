@@ -10,7 +10,9 @@
 //                            -> 1 Photographic Lunar Map + 1 Lunar Ephemeris. 30 EU/t, 600 ticks. Night, clear sky; any height.
 //   gtceu:radio_astronomy    (Radio Telescope, MV)  the map and the ephemeris, NOT consumed + 2 paper -> 1 Lunar Landing-Site Chart.
 //                            120 EU/t, 600 ticks. Night (the Moon is up) and no thunderstorm (thunder level under 0.2); rain is fine.
-//   gtceu:assembler          (LV)  2 glass plates + 1 small pile of silver dust (the emulsion) -> 2 photographic plates, 16 EU/t, 100 t
+//   gtceu:assembler          (LV)  2 glass plates + 250 mB photographic emulsion -> 2 photographic plates, 16 EU/t, 100 t
+//   line L2 (LV chemical reactor / mixer, 30 EU/t): Ag + 2 HNO3 -> silver nitrate + NO2 + water; silver nitrate + salt -> silver chloride
+//                            + sodium nitrate; silver chloride + 1,000 mB glue -> 1,000 mB emulsion
 //   crafting (copies)        draft + paper + coal dust -> 2 drafts; map + photographic plate -> 2 maps (a contact print);
 //                            landing chart + paper + coal dust -> 2 (the ephemeris is not copied: the telescope keeps it, and every lunar_map run yields another)
 // Every observation recipe carries the data key grindless_sky (steam, optical, radio): the EMI line of its type spells the sky rule out.
@@ -23,7 +25,8 @@
 
   var PAPER = 'minecraft:paper'
   var INK = '#forge:dusts/coal'
-  var NEEDED = [PAPER, 'gtceu:coal_dust', 'gtceu:glass_plate', 'gtceu:small_silver_dust']
+  var NEEDED = [PAPER, 'gtceu:coal_dust', 'gtceu:glass_plate', 'gtceu:silver_dust', 'gtceu:salt_dust',
+    'gtceu:silver_nitrate_dust', 'gtceu:silver_chloride_dust', 'gtceu:sodium_nitrate_dust']
 
   OBS.recipes = {
     draft: 'grindless:stargazing/lunar_chart_draft',
@@ -86,9 +89,31 @@
         .thunder(sky.landing.thunder, true)
         .EUt(120).duration(600)
 
-      // ---- the photographic plate: glass with a silver emulsion
+      // ---- the photographic plate: glass with a silver halide gelatin emulsion (line L2)
+      // Ag + 2 HNO3 -> AgNO3 + NO2 + H2O: the NO2 goes back to nitric acid absorption, the water is voided
+      event.recipes.gtceu.chemical_reactor('grindless:silver_nitrate')
+        .itemInputs('1x #forge:dusts/silver')
+        .inputFluids(Fluid.of('gtceu:nitric_acid', 2000))
+        .itemOutputs('1x gtceu:silver_nitrate_dust')
+        .outputFluids(Fluid.of('gtceu:nitrogen_dioxide', 1000), Fluid.of('minecraft:water', 1000))
+        .EUt(30).duration(120)
+
+      // AgNO3 + NaCl -> AgCl + NaNO3: the sodium nitrate is stored (rhodium nitrate step, fertilizer)
+      event.recipes.gtceu.chemical_reactor('grindless:silver_chloride')
+        .itemInputs('1x gtceu:silver_nitrate_dust', '1x #forge:dusts/salt')
+        .itemOutputs('1x gtceu:silver_chloride_dust', '1x gtceu:sodium_nitrate_dust')
+        .EUt(30).duration(100)
+
+      // animal glue is impure gelatin
+      event.recipes.gtceu.mixer('grindless:photographic_emulsion')
+        .itemInputs('1x gtceu:silver_chloride_dust')
+        .inputFluids(Fluid.of('gtceu:glue', 1000))
+        .outputFluids(Fluid.of('gtceu:photographic_emulsion', 1000))
+        .EUt(30).duration(100)
+
       event.recipes.gtceu.assembler('grindless:photographic_plate')
-        .itemInputs('2x #forge:plates/glass', '1x #forge:small_dusts/silver')
+        .itemInputs('2x #forge:plates/glass')
+        .inputFluids(Fluid.of('gtceu:photographic_emulsion', 250))
         .itemOutputs('2x ' + I.plate)
         .EUt(16).duration(100)
 
@@ -97,7 +122,7 @@
       event.shapeless('2x ' + I.map, [I.map, I.plate]).id('grindless:crafting/lunar_map_copy')
       event.shapeless('2x ' + I.landing, [I.landing, PAPER, INK]).id('grindless:crafting/lunar_landing_chart_copy')
 
-      console.info(LOG + 'observations (draft, map + ephemeris, landing chart), photographic plate and 3 copy recipes added')
+      console.info(LOG + 'observations (draft, map + ephemeris, landing chart), silver halide emulsion line, photographic plate and 3 copy recipes added')
     } catch (e) {
       console.error(LOG + 'observatory recipes failed: ' + e)
     }

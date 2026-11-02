@@ -212,7 +212,7 @@
     { "id": "greenhouse-lv", "label": "LV greenhouse (ours)", "item": "gtceu:lv_greenhouse" },
     { "id": "furnace-arc", "label": "Submerged arc furnace (ours)", "item": "gtceu:submerged_arc_furnace" },
     { "id": "observatory-optical", "label": "Optical observatory (ours)", "item": "gtceu:optical_observatory" },
-    { "id": "plate-photographic", "label": "Photographic plate (LV assembler: glass panes + silver)", "item": "grindless:photographic_plate" },
+    { "id": "plate-photographic", "label": "Photographic plate (LV assembler: glass panes + silver halide emulsion)", "item": "grindless:photographic_plate" },
     { "id": "lunar-map", "label": "Photographic map of the Moon, from the optical observatory", "item": "grindless:lunar_map" },
     { "id": "lunar-ephemeris", "label": "Lunar ephemeris, from the optical observatory", "item": "grindless:lunar_ephemeris" },
     { "id": "recipe-lunar-map", "label": "Astrophotography: the draft (not consumed) + plates + paper -> map and ephemeris (at night, clear sky: not modeled)", "kind": "recipe", "type": "gtceu:astrophotography", "output": "grindless:lunar_map", "input": "grindless:lunar_chart_draft" },
