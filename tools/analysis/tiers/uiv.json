@@ -1021,7 +1021,7 @@
           "gtceu:uev_wireless_energy_hatch_64a"
         ]
       },
-      "package": "AF-V2",
+      "package": "A4",
       "note": "AF-C (#211) runs each mainframe at its own tier's VA (UIV 31,457,280 EU/t): the hall takes UEV hatches in pairs, as @uiv2 and uhv.json's @uhv2. Reachability model only; in game the hall accepts the higher hatches."
     },
     {

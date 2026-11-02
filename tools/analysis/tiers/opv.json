@@ -487,7 +487,7 @@
           "gtceu:uxv_wireless_energy_hatch_64a"
         ]
       },
-      "package": "AF-V2",
+      "package": "B1",
       "note": "OpV mainframes at 503,316,480 EU/t (AF-C): the hall on UXV hatches in pairs, as uiv.json's @uiv."
     },
     {
