@@ -1512,7 +1512,7 @@ test('LuV wireless: a 32-SMES-cell tower\'s capacity (past an int) and a store p
 });
 
 // M8-13: the settlement is a job of W.slice entries per tick, not one walk of the whole list
-function bigNetwork(n) {
+function bigNetwork(n, store = 1e9) {
   const jv = jvm();
   const w = world();
   const server = serverOf(w);
@@ -1525,7 +1525,7 @@ function bigNetwork(n) {
     assert.equal(jv.W.placeCover(w.earth, pos, SIDE.up, item('grindless:lv_wireless_energy_cover'), null).ok, true);
     row.push(m);
   }
-  jv.W.setStored(server, 1e9);
+  jv.W.setStored(server, store);
   let reads = 0;
   const gb = w.earth.getBlock.bind(w.earth);
   w.earth.getBlock = (pos) => { reads++; return gb(pos); };
@@ -1563,6 +1563,21 @@ test('wireless settlement (M8-13): a large network is settled in slices of at mo
   assert.deepEqual(sums(sliced), sums(whole), 'every item holds exactly what the whole settlement gave it');
   assert.equal(W.stored(sliced.server), whole.jv.W.stored(whole.server), 'the store ends identical');
   assert.ok(st.out > 0 && st.faulted === 0);
+  assert.deepEqual(sliced.jv.errors.concat(whole.jv.errors), []);
+});
+
+test('wireless settlement (M8-13 + M6-03): a short store is shared from the frozen opening budget across slices, as in one whole settlement', () => {
+  const N = 800;
+  const whole = bigNetwork(N, 3000);
+  whole.jv.W.paused = true;
+  whole.jv.W.settle(whole.server);
+  whole.jv.W.paused = false;
+  const sliced = bigNetwork(N, 3000);
+  const W = sliced.jv.W;
+  for (let t = 1; t < W.settleTicks; t++) sliced.jv.run(sliced.server, 1);
+  for (let t = 0; t < W.settleTicks; t++) sliced.jv.run(sliced.server, 1);
+  assert.deepEqual(sliced.row.map(sum), whole.row.map(sum), 'every item holds what the whole settlement gave it');
+  assert.equal(W.stored(sliced.server), whole.jv.W.stored(whole.server));
   assert.deepEqual(sliced.jv.errors.concat(whole.jv.errors), []);
 });
 
