@@ -428,8 +428,9 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
   };
   const global_ = {};
 
+  // a grindless: id exists only when a startup script registered it; ids of the mods stay answered true (the stand-in loads no mod)
   const Item = {
-    exists: () => true,
+    exists: (id) => { const s = String(id); return !s.startsWith('grindless:') || registry.items.has(s) || registry.blocks.has(s); },
     of: (id, count) => (id instanceof MockStack ? id : new MockStack(String(id).replace(/^(\d+)x\s+/, ''), count || (/^(\d+)x\s+/.exec(String(id)) || [])[1] || 1)),
     empty: new MockStack('minecraft:air', 0),
     getItem: () => any,
@@ -445,7 +446,7 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
     isIngredient: (x) => x instanceof MockIngredient,
   };
   const Fluid = {
-    exists: () => true,
+    exists: (id) => { const s = String(id); return !s.startsWith('grindless:') || registry.fluids.has(s); },
     of: (id, amount) => new MockFluid(id, amount),
     empty: new MockFluid('minecraft:empty', 0),
     getType: () => any,

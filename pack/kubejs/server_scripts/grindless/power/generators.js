@@ -62,12 +62,10 @@
   var SITE_TABLE = 'kubejs/data/grindless/tables/site_fuels.json'
 
   // gtceu:steam_turbine, combustion_generator, gas_turbine, semi_fluid_generator, plasma_generator (DECISIONS.md list),
-  // plus the addon generator types this pack loads: GT--'s naquadah reactor (single and large) and rocket engine,
-  // and GCYR's Dyson Sphere controller (unreachable today, kept consistent for whenever the journey gets there).
+  // plus the addon generator types this pack loads: GT--'s naquadah reactor (single and large) and rocket engine.
   var TYPES = [
     'gtceu:steam_turbine', 'gtceu:combustion_generator', 'gtceu:gas_turbine', 'gtceu:semi_fluid_generator',
-    'gtceu:plasma_generator', 'gtceu:naquadah_reactor', 'gtceu:large_naquadah_reactor', 'gtceu:rocket_engine',
-    'gcyr:dyson_controller'
+    'gtceu:plasma_generator', 'gtceu:naquadah_reactor', 'gtceu:large_naquadah_reactor', 'gtceu:rocket_engine'
   ]
 
   // ---------------------------------------------------------------- site rules (data/grindless/tables/site_fuels.json)

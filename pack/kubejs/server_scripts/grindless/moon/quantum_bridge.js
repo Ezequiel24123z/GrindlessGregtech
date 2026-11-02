@@ -22,20 +22,42 @@
   const PERIOD = 20
   const CHAMBER = 'ae2:quantum_link'
 
+  // one compound per chamber in a list tag (the old single JSON string stayed under the 65,535-byte string limit by luck); a v1.1.0 string is read once and rewritten
   function list(server) {
-    var raw = server.persistentData.getString(KEY)
-    if (!raw) return []
-    try {
-      return JSON.parse(String(raw))
-    } catch (e) {
-      return []
+    var pd = server.persistentData
+    var out = []
+    if (pd.contains(KEY, 8)) {
+      try {
+        out = JSON.parse(String(pd.getString(KEY)))
+      } catch (e) {
+        out = []
+      }
+      save(server, out)
+      return out
     }
+    var tags = pd.getList(KEY, 10)
+    for (var i = 0; i < tags.size(); i++) {
+      var c = tags.getCompound(i)
+      out.push({ d: String(c.getString('d')), x: Number(c.getInt('x')), y: Number(c.getInt('y')), z: Number(c.getInt('z')) })
+    }
+    return out
   }
 
   function save(server, entries) {
-    server.persistentData.putString(KEY, JSON.stringify(entries))
+    var ListTag = Java.loadClass('net.minecraft.nbt.ListTag')
+    var CompoundTag = Java.loadClass('net.minecraft.nbt.CompoundTag')
+    var tags = new ListTag()
+    entries.forEach(function (e) {
+      var c = new CompoundTag()
+      c.putString('d', e.d)
+      c.putInt('x', e.x)
+      c.putInt('y', e.y)
+      c.putInt('z', e.z)
+      tags.add(c)
+    })
+    server.persistentData.remove(KEY)
+    server.persistentData.put(KEY, tags)
   }
-
   function track(level, pos) {
     var dim = G.planets.dimensionOf(level)
     if (G.planets.isEarth(dim)) return false

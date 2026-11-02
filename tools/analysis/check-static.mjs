@@ -5,18 +5,39 @@
 //             reported as a count only: the stand-in does not model the mods' materials, so some are expected.
 //   lang      counts the en_us keys the scripts add (English is the only language).
 //   english-only  no es_es key, block, column or file anywhere under pack/kubejs (EN-1; the owner's rule: nothing in Spanish).
-//   registry  every machine, recipe type and grindless: item/block the scripts register has an en_us name.
+//   scope     no new top-level declaration in a script and no new const/let in a callback (lib/scope_rules.mjs, AF-K2 M8-15); the\n//             ones that exist are counted per file in scope_baseline.json, which only shrinks: a count above it fails.\n//             --scope-baseline prints the current counts as that file's JSON.\n//   registry  every machine, recipe type and grindless: item/block the scripts register has an en_us name.
 // Prints one line per check; problems follow (at most 8 per check). Exit 0 = clean, 1 = problems, 2 = tool failure.
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { runPackScripts, spanishFindings } from './lib/kubejs_static.mjs';
+import { scopeFindings } from './lib/scope_rules.mjs';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const i = process.argv.indexOf('--pack');
 const packDir = i > 0 ? path.resolve(process.argv[i + 1]) : path.join(repo, 'pack');
 const MAX = 8;
+
+const scopeCounts = () => {
+  const counts = {};
+  const walk = (d) => {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (e.name.endsWith('.js')) {
+        const f = scopeFindings(fs.readFileSync(p, 'utf8'));
+        if (f.topLevel.length || f.callbackLexical.length) counts[path.relative(packDir, p).split(path.sep).join('/')] = { topLevel: f.topLevel.length, callbackLexical: f.callbackLexical.length };
+      }
+    }
+  };
+  for (const k of ['startup_scripts', 'server_scripts', 'client_scripts']) if (fs.existsSync(path.join(packDir, 'kubejs', k))) walk(path.join(packDir, 'kubejs', k));
+  return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => (a < b ? -1 : 1)));
+};
+if (process.argv.includes('--scope-baseline')) {
+  console.log(JSON.stringify(scopeCounts(), null, 2));
+  process.exit(0);
+}
 
 let run;
 try {
@@ -55,6 +76,18 @@ report('scripts', thrown.map(describe),
 const en = run.lang.en_us || {};
 report('lang', [], Object.keys(en).length + ' en_us keys');
 report('english-only', spanishFindings(packDir).map((f) => 'Spanish is not allowed (EN-1): ' + f), 'no es_es text, key, block or file under pack/kubejs');
+
+const baselineFile = path.join(path.dirname(fileURLToPath(import.meta.url)), 'scope_baseline.json');
+const baseline = fs.existsSync(baselineFile) ? JSON.parse(fs.readFileSync(baselineFile, 'utf8')) : {};
+const scopeProblems = [];
+let scopeKnown = 0;
+for (const [file, c] of Object.entries(scopeCounts())) {
+  const b = baseline[file] || { topLevel: 0, callbackLexical: 0 };
+  scopeKnown += Math.min(b.topLevel, c.topLevel) + Math.min(b.callbackLexical, c.callbackLexical);
+  if (c.topLevel > b.topLevel) scopeProblems.push(file + ': ' + c.topLevel + ' top-level declaration(s), ' + b.topLevel + ' allowed (wrap the script in an IIFE)');
+  if (c.callbackLexical > b.callbackLexical) scopeProblems.push(file + ': ' + c.callbackLexical + ' const/let in a callback, ' + b.callbackLexical + ' allowed (use var; this Rhino throws on a redeclaration)');
+}
+report('scope', scopeProblems, scopeKnown + ' known in scope_baseline.json (only shrinks)');
 
 const named = (keys) => keys.some((k) => k in en);
 const unnamed = [];

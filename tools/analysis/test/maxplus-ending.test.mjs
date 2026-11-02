@@ -18,7 +18,7 @@ const E = run.global.grindless.ending;
 const SERVER = read('server_scripts', 'grindless', 'maxplus', 'ending.js');
 
 const box = { minX: 10, minY: 60, minZ: 10, maxX: 12, maxY: 64, maxZ: 10 };
-const gate = (open, x = 0) => ({ dimension: 'minecraft:overworld', pos: { x, y: 60, z: 0 }, facing: 'north', open, box: open ? box : null });
+const gate = (open, x = 0, run = 1) => ({ dimension: 'minecraft:overworld', pos: { x, y: 60, z: 0 }, facing: 'north', open, run, box: open ? box : null });
 const player = (id, over = {}) => ({ id, dim: 'minecraft:overworld', x: 11.5, y: 60, z: 10.5, ok: true, ...over });
 
 test('the script loads and its constants are the horizon_city table', () => {
@@ -47,7 +47,7 @@ test('an open gate admits a player inside its box, not one outside, in another d
   assert.equal(E.claim(gates, [player('low', { y: 50 })], rec), null);
 });
 
-test('one player per opening: once used, the same run admits no one; a new opening admits again', () => {
+test('one player per run: once used, the same run admits no one, not even after a pause or restart; a new dial (run counter) admits again', () => {
   const rec = {};
   const key = E.gateKey(gate(true));
   E.update([gate(true)], rec);
@@ -57,13 +57,16 @@ test('one player per opening: once used, the same run admits no one; a new openi
   assert.equal(E.claim([gate(true)], [player('b')], rec), null);
   assert.equal(E.update([gate(true)], rec), false, 'still the same run');
   assert.equal(rec[key].run, 1);
-  assert.equal(E.update([gate(false)], rec), true, 'closing is recorded');
-  assert.equal(E.update([gate(true)], rec), true, 'reopening starts a new run');
+  assert.equal(E.update([gate(false)], rec), true, 'closing (a pause) is recorded');
+  assert.equal(E.update([gate(true)], rec), true, 'resuming reopens the record');
+  assert.equal(rec[key].run, 1, 'a resume is not a new run');
+  assert.equal(rec[key].used, true, 'a resume keeps the used flag: one crossing per dial');
+  assert.equal(E.claim([gate(true)], [player('b')], rec), null);
+  assert.equal(E.update([gate(true, 0, 2)], rec), true, 'a new recipe start is a new run');
   assert.equal(rec[key].run, 2);
   assert.equal(rec[key].used, false);
-  assert.equal(E.claim([gate(true)], [player('b')], rec).id, 'b');
+  assert.equal(E.claim([gate(true, 0, 2)], [player('b')], rec).id, 'b');
 });
-
 test('records survive a JSON round trip (the persisted form) and each gate has its own run', () => {
   const rec = {};
   E.update([gate(true, 0), gate(true, 50)], rec);

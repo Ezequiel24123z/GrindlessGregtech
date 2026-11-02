@@ -342,6 +342,27 @@
     }
     if (S.phase === 'run') {
       topUp(m)
+      var q0 = S.ctrl
+      // M8-10: a gate forgotten by the script (a reload) is registered again by the running dial, and a pause and resume is the same run
+      if (waited === 30) {
+        var g0 = HS().gateAt(SITE, q0.x, q0.y, q0.z)
+        S.run1 = g0 ? Number(g0.run) : -1
+        check('run_counter', S.run1 >= 1, 'the dial start counted: run ' + S.run1)
+        HS().forget()
+      }
+      if (waited === 33) {
+        var g1 = HS().gateAt(SITE, q0.x, q0.y, q0.z)
+        check('reregistered', !!g1 && g1.open === true && Number(g1.run) === S.run1, 'after forget(): gate ' + (g1 ? 'known, run ' + g1.run : 'unknown'))
+      }
+      if (waited === 40) m.setWorkingEnabled(false)
+      if (waited === 45) {
+        check('paused', !HS().isOpen(m), 'controller off: open ' + HS().isOpen(m))
+        m.setWorkingEnabled(true)
+      }
+      if (waited === 55) {
+        var g2 = HS().gateAt(SITE, q0.x, q0.y, q0.z)
+        check('resume_same_run', HS().isOpen(m) && !!g2 && Number(g2.run) === S.run1, 'controller on again: open ' + HS().isOpen(m) + ', run ' + (g2 ? g2.run : 'none') + ' (want ' + S.run1 + ')')
+      }
       if (waited === 60) m.getRecipeLogic().setProgress(DIAL_TICKS - 20)
       if (waited > 60 && !m.getRecipeLogic().isWorking()) {
         var spent = countIn(m, SPENT)

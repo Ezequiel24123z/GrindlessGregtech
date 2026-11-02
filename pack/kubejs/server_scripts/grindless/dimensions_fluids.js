@@ -20,6 +20,7 @@
 // Config: pack/config/gtceu.yaml now also sets worldgen.oreVeins.infiniteBedrockOresFluids: true,
 // so none of these veins (anywhere, including the Overworld) ever deplete.
 
+;(function () {
 var OUR_FLUID_VEIN_IDS = [
     'gtceu:heavy_oil_deposit',
     'gtceu:light_oil_deposit',
@@ -60,3 +61,4 @@ function addDimsToFluidVeinFilter(def, voidKey, flatKey) {
     updated.add(flatKey)
     def.dimensionFilter = updated
 }
+})()
