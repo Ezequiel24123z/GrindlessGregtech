@@ -8,11 +8,6 @@
   ],
   "note": "UHV era per docs/eras/uhv.md (\"Validator (-Tier uhv)\", \"Gate to UEV\"), in three substages: uhv (home and Earth orbit), then uhv-mercury (Mercury and its orbit, the swarm) and uhv-proxima (Proxima b and its orbit, the gate), reached by different trips and siblings of each other. Dimension ids come from tables/orbits.json and tables/places.json through the orbit and place tokens (gcyr:mercury is IV's). UV's \"nothing UHV\" circuit check is dropped: UHV recipes use the mainframe. \"Nothing in UHV asks for UEV\" is the era rule with the UEV items as a resource.",
   "conditions": {
-    "ae2_circumstance_explosion": {
-      "needs": [
-        "minecraft:tnt"
-      ]
-    },
     "dimension": {
       "asKeysFor": [
         "gcyr:luna",
@@ -2270,23 +2265,10 @@
         "dim:minecraft:the_nether"
       ],
       "note": "The Nether (a portal from the start; LV's era report already lists its veins as a hand trip): GTM's nether air collector runs there, and the factory's vacuum freezer and distillation tower make its neon (UHV escalation, 2026-10-28)."
-    },
-    {
-      "id": "ae2-condenser",
-      "capital": [
-        "ae2:condenser",
-        "ae2:cell_component_256k"
-      ],
-      "consumes": [
-        "minecraft:cobblestone"
-      ],
-      "produces": [
-        "ae2:singularity"
-      ],
-      "note": "AE2's matter condenser with a 256k storage component makes a singularity from 256,000 voided items (CondenserOutput.SINGULARITY): a machine mode, not a recipe, so the dump has none (UHV escalation, 2026-10-28)."
     }
   ],
   "targets": [
+    { "id": "pair-hermean", "label": "A1b-05: the hermean entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/hermean_entangled_singularity"], "package": "A1b-05" },
     {
       "id": "site-offworld",
       "label": "Site: the solar array only runs off Earth (the Moon, Mars or Proxima b)",

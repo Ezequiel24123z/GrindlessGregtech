@@ -75,6 +75,8 @@
     {"id":"direct-converter","package":"A7","recipesOf":["gtceu:direct_conversion"],"produces":["eu:luv","eu:zpm"],"note":"The direct energy converter (machine 8) as an EU source into the network: plasma back into EU."}
   ],
   "targets": [
+    { "id": "pair-saturnian", "label": "A1b-05: the saturnian entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/saturnian_entangled_singularity"], "package": "A1b-05" },
+    { "id": "pair-uranian", "label": "A1b-05: the uranian entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/uranian_entangled_singularity"], "package": "A1b-05" },
     {"id":"europium-only-mk1-or-reductor","label":"Europium only from the Mk1 or the reductor (GTCA's froth stops at the chlorides)","anyOf":["fluid:gtceu:europium","gtceu:europium_ingot","gtceu:europium_dust"],"without":["operate:gtceu:luv_fusion_reactor","operate:gtceu:europium_reductor"],"expect":"unreachable","package":["A3","A7"]},
     {"id":"mk2-only-metals","label":"Duranium, tritanium and darmstadtium only from the Mk2","anyOf":["fluid:gtceu:duranium","gtceu:duranium_ingot","gtceu:duranium_dust","fluid:gtceu:tritanium","gtceu:tritanium_ingot","gtceu:tritanium_dust","fluid:gtceu:darmstadtium","gtceu:darmstadtium_ingot","gtceu:darmstadtium_dust"],"without":["operate:gtceu:zpm_fusion_reactor"],"expect":"unreachable","package":"A7"},
     {"id":"tholin-only-titan","label":"Tholins only from Titan (the entry probe bay)","anyOf":["grindless:tholin"],"without":["operate:gtceu:entry_probe_bay"],"expect":"unreachable","package":"B3"},

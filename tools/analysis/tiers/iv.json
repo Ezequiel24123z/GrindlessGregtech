@@ -815,6 +815,7 @@
     }
   ],
   "targets": [
+    { "id": "pair-venusian", "label": "A1b-05: the venusian entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/venusian_entangled_singularity"], "package": "A1b-05" },
     { "id": "energy-luv", "label": "LuV energy available (IV -> LuV transformer on the IV grid)", "item": "eu:luv" },
     { "id": "transformer-iv-luv", "label": "IV -> LuV transformer (4 A -> 1 A)", "item": "gtceu:iv_transformer_4a" },
     { "id": "buffer-battery-iv", "label": "IV battery buffer", "item": "gtceu:iv_battery_buffer_4x" },

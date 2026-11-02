@@ -282,6 +282,7 @@
   ],
 
   "targets": [
+    { "id": "pair-lunar", "label": "A1b-05: the lunar entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/lunar_entangled_singularity"], "package": "A1b-05" },
     { "id": "hatch-energy-hv", "label": "HV energy hatch (HV assembler at 480 EU/t + the clean room's LPIC chip)", "item": "gtceu:hv_energy_input_hatch" },
     { "id": "chip-lpic", "label": "LPIC chip (HV cutter inside the clean room)", "item": "gtceu:lpic_chip" },
     { "id": "coil-voltage-hv", "label": "HV-voltage coil (HV assembler)", "item": "gtceu:hv_voltage_coil" },

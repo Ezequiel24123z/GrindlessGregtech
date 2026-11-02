@@ -232,6 +232,7 @@
   ],
 
   "targets": [
+    { "id": "pair-martian", "label": "A1b-05: the martian entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/martian_entangled_singularity"], "package": "A1b-05" },
     { "id": "energy-iv", "label": "IV energy available (EV -> IV transformer on the EV grid)", "item": "eu:iv" },
     { "id": "transformer-ev-iv", "label": "EV -> IV transformer (4 A -> 1 A)", "item": "gtceu:ev_transformer_4a" },
     { "id": "buffer-battery-ev", "label": "EV battery buffer", "item": "gtceu:ev_battery_buffer_4x" },

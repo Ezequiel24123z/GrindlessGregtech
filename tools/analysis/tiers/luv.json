@@ -92,6 +92,10 @@
     {"id":"naquadah-reactor","recipesOf":["gtceu:naquadah_reactor"],"produces":["eu:ev","eu:iv"],"note":"GT--'s naquadah reactor III (the config only lists the LuV reactor): a long enriched naquadah rod (mode 2's sulfate) a run."}
   ],
   "targets": [
+    { "id": "pair-asteroid", "label": "A1b-05: the asteroid entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/asteroid_entangled_singularity"], "package": "A1b-05" },
+    { "id": "pair-ionian", "label": "A1b-05: the ionian entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/ionian_entangled_singularity"], "package": "A1b-05" },
+    { "id": "pair-europan", "label": "A1b-05: the europan entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/europan_entangled_singularity"], "package": "A1b-05" },
+    { "id": "pair-ganymedean", "label": "A1b-05: the ganymedean entangled singularity pair (AE2 explosion transform)", "kind": "recipe", "type": "ae2:transform", "recipe": ["grindless:transform/ganymedean_entangled_singularity"], "package": "A1b-05" },
     {"id":"luv-mixer","label":"LuV mixer (single block on an IV -> LuV transformer): osmiridium","item":"gtceu:luv_mixer"},
     {"id":"luv-assembler","label":"LuV assembler","item":"gtceu:luv_assembler"},
     {"id":"osmiridium","label":"Osmiridium ingot (1 Os + 3 Ir: Mercury)","item":"gtceu:osmiridium_ingot"},

@@ -8,7 +8,7 @@
   "unconditionalTypes": ["ae2:transform"],
 
   "conditions": {
-    "ae2_circumstance_explosion": { "unsupported": true }
+    "ae2_circumstance_explosion": { "needs": ["minecraft:tnt"] }
   },
 
   "contexts": ["minecraft:overworld", "grindless:flat", "grindless:void"],
@@ -165,6 +165,13 @@
       "capital": ["ae2:energy_acceptor"],
       "produces": ["ae:power"],
       "note": "AE2 energy from the LV grid: GTM's EU -> FE converter + AE2's energy acceptor."
+    },
+    {
+      "id": "ae2-condenser",
+      "capital": ["ae2:condenser", "ae2:cell_component_256k"],
+      "consumes": ["minecraft:cobblestone"],
+      "produces": ["ae2:singularity"],
+      "note": "AE2's matter condenser with a 256k storage component makes a singularity from 256,000 voided items (CondenserOutput.SINGULARITY): a machine mode, not a recipe, so the dump has none. Declared here, not at UHV, so the interplanetary pairs are checked in the era they ship (A1b-05); the explosion ritual needs TNT, first made at MV."
     }
   ],
 
