@@ -1483,6 +1483,12 @@
     var mac = machineAt(EARTH, LUV_MAC)
     var buf = machineAt(EARTH, LUV_BUF)
     if (mac === null || buf === null) return
+    // WL-1: the network is LuV from the start (its strongest cell), so the energy cover has run the macerator since setup and its
+    // ingots are done: fresh ingots, an empty output and an empty buffer, so the window sees the cover fill it and the macerator work
+    emptyInv(mac.exportItems)
+    mac.importItems.setStackInSlot(0, Item.of(MAC_INPUT, 64))
+    var held = storedIn(mac)
+    if (held > 0) mac.energyContainer.changeEnergy(-held)
     S.cw = { start: S.t, mac: storedIn(mac), macFlow: copyFlow(flowAt(EARTH, LUV_MAC, 'up')), macOut: totalIn(mac.exportItems), macWork: 0,
       buf: batteryCharge(buf), bufFlow: copyFlow(flowAt(EARTH, LUV_BUF, 'up')), settlements: W().totals.settlements }
   }
