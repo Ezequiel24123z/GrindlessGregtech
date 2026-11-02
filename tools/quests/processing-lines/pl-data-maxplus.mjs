@@ -1154,13 +1154,13 @@ function line(num, y, x0 = 0) {
     dy[i] = k === 0 ? 0 : (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 2.25;
   });
   // a by-product takes the nearest free spot beside its source
-  const free = (px, py) => x.every((ox, j) => ox === undefined || Math.max(Math.abs(ox - px), Math.abs(dy[j] - py)) >= 2.1);
+  const free = (px, py, me) => x.every((ox, j) => j === me || ox === undefined || Math.max(Math.abs(ox - px), Math.abs(dy[j] - py)) >= 2.1);
   nodes.forEach(([t, , from, by], i) => {
     if (t === 'x' || !by) return;
     const s = from[0];
     x[i] = x[s] + 1.25;
     const cand = [1.5, -1.5, 2.75, -2.75, 4, -4, 5.25, -5.25, 6.5, -6.5, 7.75, -7.75];
-    const pick = cand.find((c) => free(x[i], dy[s] + c));
+    const pick = cand.find((c) => free(x[i], dy[s] + c, i));
     if (pick === undefined) throw new Error(`${num}: no room for by-product ${i}`);
     dy[i] = dy[s] + pick;
   });
