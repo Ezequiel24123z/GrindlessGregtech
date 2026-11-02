@@ -399,6 +399,27 @@
     return typeof n === 'number' && n % 1 === 0 && n >= 0 && n <= max
   }
 
+  // AF-W (#199 M8-13): towerInfo/bankInfo walk every block of the structure; a settlement did that for every tower and bank each cycle.
+  // GTM's structure cache is a new object whenever the structure is checked again, and the info is re-read every INFO_REFRESH settlements
+  // either way, so a cell swapped in place is seen within that many cycles.
+  const INFO_REFRESH = 20
+  var infoCache = {}
+
+  function cachedInfo(kind, e, ctrl, read) {
+    if (ctrl === null || ctrl === undefined || typeof ctrl.isFormed !== 'function' || !ctrl.isFormed()) return read(ctrl)
+    var key = kind + '|' + e.d + '|' + e.x + '|' + e.y + '|' + e.z
+    var cache = ctrl.getMultiblockState().cache
+    if (cache === null || cache === undefined) return read(ctrl)
+    var hit = infoCache[key]
+    if (hit && hit.cache === cache && hit.age < INFO_REFRESH) {
+      hit.age++
+      return hit.info
+    }
+    var info = read(ctrl)
+    infoCache[key] = { cache: cache, age: 0, info: info }
+    return info
+  }
+
   function settle(server) {
     var L = lazy()
     var ad = adapter()
@@ -426,7 +447,7 @@
       var id = String(level.getBlock(pos).id)
       if (e.k === 'bank') {
         if (id !== W.bankId) { changed = true; out.forgotten++; return }
-        var binfo = bankInfo(machineAt(level, pos))
+        var binfo = cachedInfo('bank', e, machineAt(level, pos), bankInfo)
         if (!binfo.pending && (binfo.formed !== e.f || binfo.capacitors !== e.n)) {
           e = R.canon({ k: 'bank', d: e.d, x: e.x, y: e.y, z: e.z, f: binfo.formed, n: binfo.capacitors })
           changed = true
@@ -438,7 +459,7 @@
       }
       if (e.k === 'tower') {
         if (id !== W.towerId) { changed = true; out.forgotten++; return }
-        var info = towerInfo(machineAt(level, pos))
+        var info = cachedInfo('tower', e, machineAt(level, pos), towerInfo)
         if (!info.pending && (info.formed !== e.f || info.capacity !== e.c || info.tier !== e.t || info.cells !== e.n)) {
           e = R.canon({ k: 'tower', d: e.d, x: e.x, y: e.y, z: e.z, f: info.formed, c: info.capacity, t: info.tier, n: info.cells })
           changed = true
@@ -557,8 +578,10 @@
         // while both are exact Numbers the share is the float it always was; above 2^53 it is exact: floor(need x bank / total)
         var plain = isNum(bank) && isNum(total)
         var share = enough ? 1 : plain ? bank / total : 0
+        // every share is cut from the budget the cycle opened with; `bank` shrinks as takers are served (AF-W, #200 M6-03)
+        var budget = bank
         takers.forEach(function (w, i) {
-          var give = enough ? needs[i] : plain ? Math.floor(needs[i] * share) : norm(toBig(needs[i]).multiply(toBig(bank)).divide(toBig(total)))
+          var give = enough ? needs[i] : plain ? Math.floor(needs[i] * share) : norm(toBig(needs[i]).multiply(toBig(budget)).divide(toBig(total)))
           if (give <= 0) return
           var got = 0
           try {
@@ -700,6 +723,33 @@
     return { ok: true, message: Text.translate('message.grindless.wireless.cover_placed', tierName(cover.tier)) }
   }
 
+  // AF-W (#199 M8-05): a cover is a change to someone else's machine, so a claim (spawn protection, FTB Chunks and the like, which cancel
+  // Forge's RightClickBlock or answer mayInteract) must be able to refuse it. KubeJS' own listener would see the event we post, hence the guard.
+  var posting = false
+  function claimAllows(player, level, pos, side) {
+    if (posting) return true
+    try {
+      if (!level.mayInteract(player, pos)) return false
+      var Hit = Java.loadClass('net.minecraft.world.phys.BlockHitResult')
+      var Vec3 = Java.loadClass('net.minecraft.world.phys.Vec3')
+      var Ev = Java.loadClass('net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickBlock')
+      var Hand = Java.loadClass('net.minecraft.world.InteractionHand')
+      var Forge = Java.loadClass('net.minecraftforge.common.MinecraftForge')
+      var hit = new Hit(new Vec3(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5), side, pos, false)
+      var ev = new Ev(player, Hand.MAIN_HAND, pos, hit)
+      posting = true
+      try {
+        Forge.EVENT_BUS.post(ev)
+      } finally {
+        posting = false
+      }
+      return !ev.isCanceled() && String(ev.getUseBlock()) !== 'DENY'
+    } catch (err) {
+      console.error(LOG + 'claim check failed, falling back to mayInteract only: ' + err)
+      return true
+    }
+  }
+
   function onCoverClick(event, cover) {
     var p = event.player
     var level = event.level
@@ -709,6 +759,7 @@
     // GTM's own cover items pick the side the player looks at; with no such side, the clicked face
     var side = lazy().ICoverable.rayTraceCoverableSide(holder, p)
     if (side === null || side === undefined) side = event.facing
+    if (!claimAllows(p, level, pos, side)) return true
     var stack = event.item
     var r = placeCover(level, pos, side, stack, p)
     if (r.ok && !p.isCreative()) stack.shrink(1)
@@ -838,6 +889,7 @@
   W.forget = forget
   W.tracked = function (server) { return blocks(server).slice() }
   W.settle = settle
+  W.dropInfoCache = function () { infoCache = {} }
   W.status = status
   W.towerInfo = towerInfo
   W.bankInfo = bankInfo

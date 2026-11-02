@@ -47,9 +47,13 @@
     var GTCap = Java.loadClass('com.gregtechceu.gtceu.api.capability.GTCapabilityHelper')
     var FeCompat = Java.loadClass('com.gregtechceu.gtceu.api.capability.compat.FeCompat')
     var ConfigHolder = Java.loadClass('com.gregtechceu.gtceu.config.ConfigHolder')
+    var Long = Java.loadClass('java.lang.Long')
     var amps = {}
     return {
       V: function (tier) { return Number(GTValues.V[tier]) },
+      // a long getter's result is a double here above 2^53, but Long.toString keeps its exact digits (checked natively:
+      // gg_test_wireless_precision); BigInteger.valueOf(long).toString() is exact too
+      exact: function (v) { return String(Long.toString(v)) },
       nativeEUToFE: function () { return ConfigHolder.INSTANCE.compat.energy.nativeEUToFE === true },
       electricItem: function (stack) { var e = GTCap.getElectricItem(stack); return e === undefined ? null : e },
       feItem: function (stack) { var s = GTCap.getForgeEnergyItem(stack); return s === undefined ? null : s },
@@ -82,6 +86,54 @@
       return typeof n === 'number' && n % 1 === 0 && n >= 0
     }
 
+    // Exact balances (AF-W, #200 M6-02). A long getter's result is a JS double once it passes 2^53, so every stored, capacity and charge
+    // figure is read as its decimal digits (deps.exact: GTM's Long.toString in the game; the stand-ins' own String) and compared and
+    // subtracted as digit strings; only a bounded difference is turned into a Number.
+    var exact = typeof deps.exact === 'function' ? deps.exact : function (v) { return String(v) }
+
+    function digits(v) {
+      var s = String(exact(v))
+      return /^[0-9]+$/.test(s) ? s.replace(/^0+(?=[0-9])/, '') : null
+    }
+
+    function cmpDigits(a, b) {
+      if (a.length !== b.length) return a.length < b.length ? -1 : 1
+      return a < b ? -1 : a > b ? 1 : 0
+    }
+
+    // a - b for digit strings with a >= b
+    function subDigits(a, b) {
+      var out = ''
+      var borrow = 0
+      for (var i = 1; i <= a.length; i++) {
+        var d = Number(a.charAt(a.length - i)) - borrow - (i <= b.length ? Number(b.charAt(b.length - i)) : 0)
+        borrow = d < 0 ? 1 : 0
+        out = String(d + borrow * 10) + out
+      }
+      return out.replace(/^0+(?=[0-9])/, '')
+    }
+
+    // after - before as a signed decimal string; a figure that is not a whole number falls back to plain arithmetic (a liar's fraction)
+    function deltaOf(before, after) {
+      if (before === null || after === null) return String(Number(after === null ? NaN : after) - Number(before === null ? NaN : before))
+      var c = cmpDigits(after, before)
+      if (c === 0) return '0'
+      return c > 0 ? subDigits(after, before) : '-' + subDigits(before, after)
+    }
+
+    // the stored EU as digits; an unreadable balance is refused before anything is mutated
+    function snapshot(a) {
+      var s = digits(a.c.getEnergyStored())
+      if (s === null) throw failure('stored EU of ' + a.cls + ' is not a whole number: ' + String(a.c.getEnergyStored()), 0)
+      return s
+    }
+
+    // what is left of `top` above `base`, at most `limit` (both digit strings; a bounded Number comes out)
+    function aboveCapped(top, base, limit) {
+      if (top === null || base === null) return 0
+      return cmpDigits(top, base) <= 0 ? 0 : Math.min(limit, Number(subDigits(top, base)))
+    }
+
     // an error that carries what the stored EU really did (`measured`: EU in for a fill, out for a drain), so the caller can count it
     function failure(message, measured) {
       var err = new Error(message)
@@ -91,15 +143,16 @@
 
     // the amount moved must be a whole number within what was asked, and the stored EU must have changed by exactly that much
     function checked(a, what, asked, got, before, after) {
-      var change = what === 'in' ? after - before : before - after
-      if (!whole(asked) || !whole(got) || got > asked || change !== got) {
-        throw failure(what + ' ' + a.cls + ': asked ' + asked + ', moved ' + got + ', stored ' + before + ' -> ' + after, change)
+      var change = what === 'in' ? deltaOf(before, after) : deltaOf(after, before)
+      if (!whole(asked) || !whole(got) || got > asked || change !== String(got)) {
+        throw failure(what + ' ' + a.cls + ': asked ' + asked + ', moved ' + got + ', stored ' + before + ' -> ' + after, Number(change))
       }
       return got
     }
 
+    // the stored EU as digits now, or null when it is not a whole number (a failure then falls back to plain arithmetic)
     function stored(a) {
-      return Number(a.c.getEnergyStored())
+      return digits(a.c.getEnergyStored())
     }
 
     function enabled(a) {
@@ -115,7 +168,9 @@
         if (stack.isEmpty()) continue
         var e = deps.electricItem(stack)
         if (e !== null) {
-          if (Number(e.getCharge()) < Number(e.getMaxCharge())) out.push({ e: e })
+          var charge = digits(e.getCharge())
+          var max = digits(e.getMaxCharge())
+          if (charge === null || max === null || cmpDigits(charge, max) < 0) out.push({ e: e })
           continue
         }
         if (deps.nativeEUToFE()) {
@@ -162,7 +217,7 @@
 
     // what the machine can take now, at most `limit`
     function room(a, limit, ticks) {
-      if (a.kind === 'plain') return Math.max(0, Math.min(limit, Number(a.c.getEnergyCapacity()) - stored(a)))
+      if (a.kind === 'plain') return aboveCapped(digits(a.c.getEnergyCapacity()), stored(a), limit)
       if (a.kind !== 'items') throw new Error('no energy adapter for ' + (a.cls || 'a machine without an energy container'))
       if (!enabled(a)) return 0
       var sum = 0
@@ -176,7 +231,7 @@
     function fill(a, amount, ticks) {
       if (amount <= 0) return 0
       if (a.kind !== 'plain' && a.kind !== 'items') throw failure('no energy adapter for ' + (a.cls || 'a machine without an energy container'), 0)
-      var before = stored(a)
+      var before = snapshot(a)
       var moved = 0
       try {
         if (a.kind === 'plain') moved = Number(a.c.changeEnergy(amount))
@@ -193,14 +248,14 @@
         }
       } catch (err) {
         var after = stored(a)
-        throw failure('in ' + a.cls + ': ' + (err.message || err) + ' (stored ' + before + ' -> ' + after + ')', after - before)
+        throw failure('in ' + a.cls + ': ' + (err.message || err) + ' (stored ' + before + ' -> ' + after + ')', Number(deltaOf(before, after)))
       }
       return checked(a, 'in', amount, moved, before, stored(a))
     }
 
     // what the machine can give now, at most `limit`
     function available(a, limit, ticks) {
-      if (a.kind === 'plain') return Math.max(0, Math.min(limit, stored(a)))
+      if (a.kind === 'plain') return aboveCapped(stored(a), '0', limit)
       if (a.kind !== 'items' || !a.spec.gives) throw new Error('no energy adapter gives EU from ' + (a.cls || 'a machine without an energy container'))
       if (!enabled(a)) return 0
       var sum = 0
@@ -216,7 +271,7 @@
       if (a.kind !== 'plain' && !(a.kind === 'items' && a.spec.gives)) {
         throw failure('no energy adapter gives EU from ' + (a.cls || 'a machine without an energy container'), 0)
       }
-      var before = stored(a)
+      var before = snapshot(a)
       var moved = 0
       try {
         if (a.kind === 'plain') moved = -Number(a.c.changeEnergy(-amount))
@@ -233,7 +288,7 @@
         }
       } catch (err) {
         var after = stored(a)
-        throw failure('out ' + a.cls + ': ' + (err.message || err) + ' (stored ' + before + ' -> ' + after + ')', before - after)
+        throw failure('out ' + a.cls + ': ' + (err.message || err) + ' (stored ' + before + ' -> ' + after + ')', Number(deltaOf(after, before)))
       }
       return checked(a, 'out', amount, moved, before, stored(a))
     }
