@@ -11,12 +11,12 @@
 //   The bottoms are gtca's silicon tetrachloride dust, which the pack already uses.
 //
 // Every GTM boule recipe (silicon, phosphorus, naquadah, neutronium) takes polysilicon where it took silicon: dust 1:1, silicon block as 9
-// polysilicon (rebuilt from GTM's own recipe, so the counts, circuit, temperature and time stay GTM's). Nothing else of the silicon dust changes.
+// polysilicon (the silicon boule is written out with GTM's own numbers so EMI shows it; the other three are rebuilt from GTM's recipe at load). Nothing else of the silicon dust changes.
 (function () {
   const G = global.grindless || (global.grindless = {})
   const SI = G.mvSilicon || (G.mvSilicon = {})
   const POLY = 'grindless:polysilicon'
-  const BOULES = ['silicon_boule', 'phosphorus_boule', 'naquadah_boule', 'neutronium_boule']
+  const BOULES = ['phosphorus_boule', 'naquadah_boule', 'neutronium_boule']
 
   SI.boules = []
 
@@ -74,6 +74,14 @@
       .outputFluids(Fluid.of('gtceu:hydrogen_chloride', 3000))
       .blastFurnaceTemp(1800)
       .EUt(120).duration(400)
+    event.remove({ id: 'gtceu:electric_blast_furnace/silicon_boule' })
+    event.recipes.gtceu.electric_blast_furnace('grindless:silicon_boule')
+      .itemInputs('32x ' + POLY, '1x gtceu:small_gallium_arsenide_dust')
+      .circuit(2)
+      .itemOutputs('1x gtceu:silicon_boule')
+      .blastFurnaceTemp(1784)
+      .EUt(120).duration(9000)
+
     var wanted = {}
     BOULES.forEach(function (name) { wanted['gtceu:electric_blast_furnace/' + name] = true })
     var found = []
