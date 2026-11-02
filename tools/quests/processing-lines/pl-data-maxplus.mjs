@@ -13,7 +13,8 @@ const ROWS = {
     ["m", "gtceu:condensate_refinery", [4]],
     ["f", "fluid:gtceu:settled_condensate", [5]],
     ["i", "grindless:condensate_boil_off", [5], 1],
-    ["i", "grindless:jacketed_condensate_cell", [6]],
+    ["l", "pl_opv:l5_6", []],
+    ["i", "grindless:jacketed_condensate_cell", [6, 8]],
   ],
   P2: [
     ["l", "pl_uiv:l30_5", []],
@@ -200,7 +201,7 @@ const ROWS = {
     ["i", "grindless:thorium_nav_clock", [7]],
     ["m", "gtceu:photonic_foundry", [8]],
     ["i", "grindless:optical_nav_core", [9]],
-    ["i", "grindless:ig_relay_probe", [10]],
+    ["i", "grindless:ig_relay_probe", [2, 5, 10]],
   ],
   P17: [
     ["i", "gtceu:hastelloy_x_plate", []],
@@ -214,7 +215,7 @@ const ROWS = {
     ["i", "gtceu:stainless_steel_plate", []],
     ["m", "gtceu:hot_strip_mill", [8]],
     ["i", "grindless:pche_recuperator_foil", [9]],
-    ["i", "grindless:sco2_turbine_module", [10]],
+    ["i", "grindless:sco2_turbine_module", [4, 7, 10]],
   ],
   P18: [
     ["i", "gtceu:hastelloy_c_276_plate", []],
@@ -325,7 +326,7 @@ const ROWS = {
     ["i", "grindless:gd_hfb2_cermet", []],
     ["m", "gtceu:spark_plasma_sinterer", [3]],
     ["i", "grindless:graded_z_billet", [4]],
-    ["m", "gtceu:bound_matter_press", [5]],
+    ["m", "gtceu:bound_matter_press", [2, 5]],
     ["i", "grindless:laminated_containment_core", [6]],
     ["f", "fluid:gtceu:kerr_condensate", [6], 1],
     ["m", "gtceu:condensate_assembler", [7]],
@@ -341,7 +342,7 @@ const ROWS = {
     ["i", "grindless:zone_plate_wafer", []],
     ["m", "gtceu:gamma_optics_works", [5]],
     ["i", "grindless:gamma_focus_element", [6]],
-    ["m", "gtceu:condensate_assembler", [7]],
+    ["m", "gtceu:condensate_assembler", [4, 7]],
     ["i", "grindless:chevron_core", [8]],
     ["i", "grindless:condensate_boil_off", [8], 1],
   ],
@@ -438,7 +439,7 @@ const ROWS = {
     ["i", "gtceu:sapphire_dust", []],
     ["m", "gtceu:condensate_refinery", [4]],
     ["i", "grindless:condensate_doped_dust", [5]],
-    ["m", "gtceu:horizon_crystal_furnace", [6]],
+    ["m", "gtceu:horizon_crystal_furnace", [2, 6]],
     ["i", "grindless:core_crystal_boule", [7]],
     ["m", "gtceu:femtosecond_writer", [8]],
     ["i", "grindless:inscribed_core_crystal", [9]],
@@ -548,7 +549,7 @@ const ROWS = {
     ["i", "grindless:sic_mirror_blank", []],
     ["m", "gtceu:mtj_sputter_cluster", [8]],
     ["i", "grindless:coated_telescope_optic", [9], 0, 1],
-    ["i", "grindless:horizon_comm_terminal", [10], 0, 1],
+    ["i", "grindless:horizon_comm_terminal", [7, 10], 0, 1],
   ],
   C1: [
     ["i", "grindless:insulated_kerr_wire", []],
@@ -558,7 +559,7 @@ const ROWS = {
     ["i", "grindless:cmc_coil_former", [3]],
     ["f", "fluid:gtceu:hydrochloric_acid", [3], 1],
     ["m", "gtceu:hts_magnet_works", [4]],
-    ["i", "grindless:kerr_coil_winding", [6]],
+    ["i", "grindless:kerr_coil_winding", [1, 6]],
     ["i", "grindless:impregnated_kerr_coil", [7]],
     ["m", "gtceu:helium_refrigerator", [8]],
     ["i", "grindless:kerr_field_coil", [9]],
@@ -586,7 +587,7 @@ const ROWS = {
     ["i", "grindless:gan_laser_array", [7]],
     ["f", "fluid:gtceu:methane", [7], 1],
     ["f", "fluid:gtceu:hydrogen", [7], 1],
-    ["m", "gtceu:beuv_scanner", [8]],
+    ["m", "gtceu:beuv_scanner", [4, 8]],
     ["i", "grindless:patterned_engine_wafer", [11]],
     ["i", "grindless:fouled_beuv_mirror", [11], 1],
     ["m", "gtceu:photonic_foundry", [12]],
@@ -1097,6 +1098,30 @@ const shortId = (id) => id.replace(/^(fluid:)?[a-z0-9_]+:/, '');
 const BY_Y = [1.5, -1.5, 2.75, -2.75];
 const TREE = new Set(['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19']);
 
+// A gate-grid craft is one step: it is the branch end of the line that makes its main input.
+const ext = (cl) => ({ extends: cl });
+const TAGS = {
+  H1: ext('pl_maxplus:tg2'),
+  H2: ext('pl_maxplus:tg1'),
+  H3: ext('pl_maxplus:tg1'),
+  H4: ext('pl_maxplus:tg1'),
+  H5: ext('pl_maxplus:tg1'),
+  H6: ext('pl_maxplus:tg4'),
+  H7: ext('pl_maxplus:tg1'),
+  H8: ext('pl_maxplus:tg4'),
+  H9: ext('pl_maxplus:tg4'),
+  H10: ext('pl_maxplus:qa'),
+  H11: ext('pl_maxplus:comp'),
+  H12: ext('pl_maxplus:creative'),
+  H13: ext('pl_maxplus:creative'),
+  H14: ext('pl_maxplus:creative'),
+  H15: ext('pl_maxplus:creative'),
+  H16: ext('pl_maxplus:comp'),
+  H17: ext('pl_maxplus:hg1'),
+  H18: ext('pl_max:lock'),
+  H19: ext('pl_maxplus:cond'),
+};
+
 // one line at row y: main nodes at 2.5 columns per step, by-products beside their source
 function line(num, y) {
   const nodes = ROWS[num];
@@ -1139,10 +1164,11 @@ function tree(num, y) {
     const py = i < k ? y + (i - (k - 1) / 2) * 1.5 : y;
     const opt = { kind: t === 'm' ? 'ours' : peek ? 'peek' : i < k ? 'raw' : 'product' };
     if (from.length) opt.from = from.map(key);
-    if (i === nodes.length - 1) opt.end = ENDS[num];
+    if (i === nodes.length - 1) { opt.end = ENDS[num]; Object.assign(opt, TAGS[num]); }
     return n(key(i), px, py, res, title(id), opt);
   });
-}const cluster = (name, nums) => ({ name, nodes: nums.flatMap((num, i) => (TREE.has(num) ? tree(num, 7.5 * i) : line(num, 6 * i))) });
+}
+const cluster = (name, nums) => ({ name, nodes: nums.flatMap((num, i) => (TREE.has(num) ? tree(num, 7.5 * i) : line(num, 6 * i))) });
 
 export default {
   file: 'pl_maxplus',
