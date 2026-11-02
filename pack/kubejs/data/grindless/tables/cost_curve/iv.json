@@ -62,7 +62,11 @@
     "gtceu:shaped/sensor_iv"
   ],
   "override": {},
-  "keyFactor": {},
+  "keyFactor": {
+    "gtceu:iv_energy_input_hatch": 1.528,
+    "gtceu:iv_energy_input_hatch_4a": 1.147,
+    "gtceu:iv_machine_casing": 1.55
+  },
   "pin": {
     "gtceu:*_machine_hull": {
       "gtceu:*_machine_casing": 1

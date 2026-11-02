@@ -56,7 +56,15 @@
   "exclude": [],
   "remove": [],
   "override": {},
-  "keyFactor": {},
+  "keyFactor": {
+    "gtceu:levitation_melter": 3.22,
+    "gtceu:ramp_compression_pulser": 3.342,
+    "gtceu:uiv_electric_piston": 1.432,
+    "gtceu:uiv_emitter": 1.436,
+    "gtceu:uiv_energy_input_hatch": 3.032,
+    "gtceu:uiv_energy_input_hatch_16a": 2.373,
+    "gtceu:uiv_sensor": 1.428
+  },
   "pin": {
     "gtceu:*_machine_hull": {
       "gtceu:*_machine_casing": 1

@@ -59,7 +59,17 @@
     "gtceu:shaped/sensor_mv"
   ],
   "override": {},
-  "keyFactor": {},
+  "keyFactor": {
+    "gtceu:advanced_multi_smelter": 1.087,
+    "gtceu:mv_electric_motor": 1.112,
+    "gtceu:mv_electric_piston": 1.959,
+    "gtceu:mv_energy_input_hatch": 2.257,
+    "gtceu:mv_greenhouse": 2.206,
+    "gtceu:mv_machine_casing": 2.685,
+    "gtceu:mv_machine_hull": 2.539,
+    "gtceu:mv_vein_drill": 2.947,
+    "gtceu:weather_controller": 1.2
+  },
   "pin": {
     "gtceu:*_machine_hull": {
       "gtceu:*_machine_casing": 1

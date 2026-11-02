@@ -39,7 +39,10 @@
   "exclude": [],
   "remove": [],
   "override": {},
-  "keyFactor": {},
+  "keyFactor": {
+    "grindless:max_electric_motor": 1.376,
+    "gtceu:max_energy_input_hatch_16a": 1.291
+  },
   "pin": {
     "gtceu:*_machine_hull": {
       "gtceu:*_machine_casing": 1

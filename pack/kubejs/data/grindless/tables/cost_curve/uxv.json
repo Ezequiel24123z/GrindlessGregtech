@@ -57,7 +57,29 @@
   "exclude": [],
   "remove": [],
   "override": {},
-  "keyFactor": {},
+  "keyFactor": {
+    "gtceu:accretion_disk_skimmer": 2.435,
+    "gtceu:annihilation_laser_works": 1.249,
+    "gtceu:bz_dynamo": 1.324,
+    "gtceu:ejecta_knot_sweeper": 2.442,
+    "gtceu:frc_former": 1.294,
+    "gtceu:mnt_collider": 1.294,
+    "gtceu:mtj_sputter_cluster": 3.477,
+    "gtceu:oxide_pld_chamber": 3.058,
+    "gtceu:pasta_draw_bench": 2.316,
+    "gtceu:pasta_extractor": 1.249,
+    "gtceu:pasta_laminator": 2.264,
+    "gtceu:pasta_phase_sorter": 2.442,
+    "gtceu:plasma_mass_filter": 1.249,
+    "gtceu:polar_cap_tap": 2.459,
+    "gtceu:racetrack_fab": 3.651,
+    "gtceu:shequid_works": 1.467,
+    "gtceu:stellar_condensation_tower": 2.442,
+    "gtceu:stellar_elevator": 1.294,
+    "gtceu:uxv_energy_input_hatch_16a": 1.963,
+    "gtceu:vdw_stacking_cell": 3.02,
+    "gtceu:yig_lpe_furnace": 3.815
+  },
   "pin": {
     "gtceu:*_machine_hull": {
       "gtceu:*_machine_casing": 1

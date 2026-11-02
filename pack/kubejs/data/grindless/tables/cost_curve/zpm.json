@@ -64,7 +64,29 @@
     "gtceu:shaped/zpm_machine_hull"
   ],
   "override": {},
-  "keyFactor": {},
+  "keyFactor": {
+    "gtceu:actinide_partitioning_plant": 2.411,
+    "gtceu:aerogel_works": 4.519,
+    "gtceu:entry_probe_bay": 1.437,
+    "gtceu:europium_reductor": 4.519,
+    "gtceu:gas_giant_siphon": 2.515,
+    "gtceu:ice_giant_siphon": 1.89,
+    "gtceu:isotope_column": 4.519,
+    "gtceu:methane_pyrolyser": 4.519,
+    "gtceu:naquadah_fuel_works": 4.519,
+    "gtceu:naquadria_magnet_works": 1.676,
+    "gtceu:naquadria_refinery": 1.427,
+    "gtceu:plasma_quench_caster": 4.519,
+    "gtceu:ring_harvester": 4.519,
+    "gtceu:slurry_separator": 3.657,
+    "gtceu:tholin_reformer": 2.752,
+    "gtceu:vent_bioreactor": 4.519,
+    "gtceu:waste_retrieval_plant": 2.491,
+    "gtceu:zpm_conveyor_module": 1.305,
+    "gtceu:zpm_electric_piston": 1.675,
+    "gtceu:zpm_electric_pump": 2.184,
+    "gtceu:zpm_robot_arm": 2.722
+  },
   "pin": {
     "gtceu:*_machine_hull": {
       "gtceu:*_machine_casing": 1

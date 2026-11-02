@@ -68,7 +68,24 @@
     "gtceu:shaped/uhv_machine_hull"
   ],
   "override": {},
-  "keyFactor": {},
+  "keyFactor": {
+    "gtceu:biomining_heap": 1.223,
+    "gtceu:cold_trap_drill": 1.619,
+    "gtceu:organoid_array": 1.103,
+    "gtceu:pbo_plant": 1.985,
+    "gtceu:regolith_excavator": 1.632,
+    "gtceu:solar_probe_bay": 1.166,
+    "gtceu:uhv_emitter": 1.127,
+    "gtceu:uhv_energy_input_hatch": 3.085,
+    "gtceu:uhv_energy_input_hatch_16a": 3.25,
+    "gtceu:uhv_energy_input_hatch_4a": 3.042,
+    "gtceu:uhv_machine_hull": 3.9,
+    "gtceu:uhv_sensor": 1.068,
+    "gtceu:ultrapure_water_plant": 1.102,
+    "gtceu:xenobiochem_plant": 1.219,
+    "gtceu:xenoflora_rover_bay": 1.187,
+    "gtceu:zblan_draw_tower": 1.521
+  },
   "pin": {
     "gtceu:*_machine_hull": {
       "gtceu:*_machine_casing": 1

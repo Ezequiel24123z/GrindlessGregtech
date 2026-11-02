@@ -68,7 +68,20 @@
     "gtceu:shaped/uv_machine_hull"
   ],
   "override": {},
-  "keyFactor": {},
+  "keyFactor": {
+    "gtceu:fibre_draw_tower": 1.404,
+    "gtceu:powder_in_tube_line": 1.709,
+    "gtceu:uv_emitter": 2.486,
+    "gtceu:uv_energy_input_hatch": 2.675,
+    "gtceu:uv_energy_input_hatch_16a": 2.902,
+    "gtceu:uv_energy_input_hatch_4a": 2.794,
+    "gtceu:uv_field_generator": 1.476,
+    "gtceu:uv_machine_casing": 2.917,
+    "gtceu:uv_machine_hull": 2.917,
+    "gtceu:uv_sensor": 2.486,
+    "gtceu:zone_refining_tower": 1.368,
+    "gtnn:optical_processor": 2.526
+  },
   "pin": {
     "gtceu:*_machine_hull": {
       "gtceu:*_machine_casing": 1
