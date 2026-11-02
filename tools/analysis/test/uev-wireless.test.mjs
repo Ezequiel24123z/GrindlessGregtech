@@ -30,8 +30,8 @@ const UV_NAQUADRIA_EU = 2621440000;
 const UEV = 10;
 const V_UEV = 8388608;
 const VA_UEV = 7864320;
-// the static runner stands V in for VA (tools/analysis/lib/kubejs_static.mjs): GTM's VA[UEV] is checked in game (T1)
-const STUB_VA_UEV = V_UEV;
+// the static runner models GTValues.VA exactly (M9-06)
+const STUB_VA_UEV = VA_UEV;
 const MACHINE = 'gtceu:naquadria_magnet_works';
 const LINK = 'grindless:quantum_repeater_node';
 const WIRE = 'gtceu:lay_superhydride_';

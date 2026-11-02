@@ -57,8 +57,7 @@ test('the probe line, the kit and the node transmitter produce the F1 ids at OpV
   for (const id of out.filter((id) => id !== 'grindless:pathfinder_probe_core_unpack')) {
     const r = recipes.find((r) => r.i === id);
     assert.ok(r, id);
-    // The stand-in maps VA and V to the same table; native VA[OpV] is 503,316,480.
-    assert.equal(r.j.tickInputs.eu[0].content, 536870912, `${id} tier 13 in the stand-in`);
+    assert.equal(r.j.tickInputs.eu[0].content, 503316480, `${id} at VA[OpV]`);
   }
   const source = fs.readFileSync(path.join(pack, 'kubejs', 'server_scripts', 'grindless', 'opv', 'pathfinder.js'), 'utf8');
   assert.equal((source.match(/Number\(GTValues\.VA\[OPV\]\)/g) || []).length, 2);
