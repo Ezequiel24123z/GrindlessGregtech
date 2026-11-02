@@ -12,8 +12,8 @@
 //   3. The platform: the warp gate ring with every structure symbol lib/patterns.js emits (frames included), a floor under it and its kit, the
 //      wireless dynamo hatch and an AE2 controller with a drive beside it, its chunks force-loaded. Its input bus holds the circuit of the
 //      sustain, the stocked exotic matter cells and the coordinates of the ring that sent the jump (the way back). Both wireless hatches are
-//      tracked by the network (global.grindless.wireless.track) under the team of the ring's owner, the player whose travel built the platform
-//      ('server' when the ring has none; the queue entry carries it as `t`: B13-DIAL, #238). The ring starts paused, so its cells wait for a traveller: the transit wakes
+//      tracked by the network (global.grindless.wireless.track) under the team of the player whose jump built the platform
+//      (the first player standing in the ring that ran it, 'server' when none; the queue entry carries it as `t`: FIX-RELAY, #255). The ring starts paused, so its cells wait for a traveller: the transit wakes
 //      it for one sustain when a player steps into it.
 // Relay coordinates: the table's selector item (GTM's data stick, no new item) with NBT grindless_relay = "dim|x|y|z|fx|fz" (the controller
 // of the ring it names) and a display name. A sustaining ring with coordinates in an input bus carries a player standing in it there.
@@ -280,12 +280,27 @@
     cmd(server, dim, 'setblock ' + p.x + ' ' + p.y + ' ' + p.z + ' ' + id + (facing ? '[facing=north]' : '') + ' replace')
   }
 
-  // the team a platform's hatches are tracked under (B13-DIAL, #238): the team of the player whose travel built it, which is the owner of the warp
-  // gate ring that ran the jump (GTM records the placing player), 'server' when the ring has none
+  // the team a platform's hatches are tracked under (FIX-RELAY, #255): the team of the player whose jump built it, the first player standing in
+  // the ring that ran the jump (the ring is 15 x 15, the same box the transit uses); 'server' when nobody stands in it or the player has no team
+  var RING_HALF = 7
+
   function teamOfRing(machine) {
     try {
       var T = G.teams
-      return T && typeof T.ofMachine === 'function' ? String(T.ofMachine(machine)) : 'server'
+      var ring = typeof WG.ringOf === 'function' ? WG.ringOf(machine) : null
+      var server = machine.getLevel().getServer()
+      if (!ring || !T || typeof T.ofPlayer !== 'function') return 'server'
+      var cx = ring.x - ring.fx * RING_HALF + 0.5
+      var cz = ring.z - ring.fz * RING_HALF + 0.5
+      var team = 'server'
+      server.getPlayers().forEach(function (p) {
+        if (team !== 'server') return
+        if (String(p.getLevel().getDimension()) !== String(ring.dim)) return
+        if (Math.abs(p.getX() - cx) > RING_HALF - 0.5 || Math.abs(p.getZ() - cz) > RING_HALF - 0.5) return
+        if (p.getY() < ring.y - 1 || p.getY() > ring.y + 3) return
+        team = String(T.ofPlayer(p) || 'server')
+      })
+      return team
     } catch (e) {
       return 'server'
     }
