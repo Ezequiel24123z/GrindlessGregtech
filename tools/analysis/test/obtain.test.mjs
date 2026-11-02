@@ -32,6 +32,8 @@ function pack({ drillRecipe = true, extraRecipes = [], classes, tagsItem = {}, t
     gt('t:mac_hot', 'gtceu:macerator', { ins: [gi('gtceu:alpha_dust')], outs: [gi('gtceu:hot_dust')], eut: 600 }),
     gt('t:big', 'gtceu:big_smelting', { ins: [gi('gtceu:alpha_dust')], outs: [gi('gtceu:big_dust')], eut: 100000 }),
     gt('t:lost', 'gtceu:lost_type', { ins: [gi('gtceu:alpha_dust')], outs: [gi('gtceu:omega_dust')] }),
+    gt('t:lost_eps', 'gtceu:lost_type', { ins: [gi('gtceu:alpha_dust')], outs: [gi('gtceu:epsilon_dust')] }),
+    gt('t:iota', 'gtceu:mixer', { ins: [gi('gtceu:epsilon_dust')], outs: [gi('gtceu:iota_dust')] }),
     // perlite: only packs itself; its electrolysis gives obsidian dust (which also comes from grinding obsidian)
     shaped('t:perlite_pack', ['SSS', 'SSS', 'SSS'], { S: { item: 'gtceu:small_perlite_dust' } }, 'gtceu:perlite_dust'),
     shaped('t:perlite_unpack', ['P'], { P: { item: 'gtceu:perlite_dust' } }, 'gtceu:small_perlite_dust', 4),
