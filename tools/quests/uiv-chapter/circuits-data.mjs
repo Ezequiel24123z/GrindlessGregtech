@@ -109,13 +109,13 @@ export const QUESTS = [
   }, [it('grindless:six_hour_memory')], 140),
 
   // ------------------------------------------------------------------ the die and the processor
-  q('CH_STM', 'wafer', 'STM-Patterned Wafer', 'grindless:stm_patterned_wafer', ['H_LADDER'], 3.5, 10.75, {
+  q('CH_STM', 'wafer', 'STM-Patterned Wafer', 'grindless:stm_patterned_wafer', ['H_LADDER'], 3.5, 9.75, {
     for: 'A scanning tip peels hydrogen off silicon one atom at a time. The &6STM-Patterned Wafer&r is the silicon with the holes ready.',
     needs: 'The STM lithography cell: a hydrogen-terminated silicon wafer in ultra-high vacuum.',
     unlocks: 'The P:Si die, once phosphine fills the holes.',
     automate: 'Wafers by ME; the cell is slow, so run two.',
   }, [it('grindless:stm_patterned_wafer')], 120),
-  q('CH_DIE', 'circuit', 'P:Si Die', 'grindless:p_si_die', ['CH_STM'], 6, 10.75, {
+  q('CH_DIE', 'circuit', 'P:Si Die', 'grindless:p_si_die', ['CH_STM'], 6, 9.75, {
     for: 'Phosphine fills the holes and silicon-28 grown over them seals them. The &6P:Si Die&r holds qubits made of single phosphorus atoms.',
     needs: 'The patterned wafer dosed with phosphine in the STM cell, then molecular beam epitaxy with silicon-28 and liquid nitrogen. Excess phosphine is scrubbed and kept.',
     unlocks: 'The P:Si processor.',
@@ -123,7 +123,7 @@ export const QUESTS = [
   }, [it('grindless:p_si_die')], 140),
   q('CH_PSI', 'circuit', 'P:Si Processor', 'grindless:p_si_processor', ['CH_DIE', 'CH_MKM'], 8.5, 8.25, {
     for: 'A cooled die makes the &6Characterised P:Si Processor&r. It is the logic of the UIV circuit.',
-    needs: 'The millikelvin cryostat works: a P:Si die, an mK cryostat module and 500 mB of liquid helium, with a circuit 3 program.',
+    needs: 'The millikelvin cryostat works: a P:Si die, an mK cryostat module and liquid helium, with a circuit 3 program.',
     unlocks: 'The optical mainframe.',
     automate: 'Dies and modules in matched numbers by ME; keep one processor per mainframe.',
   }, [it('grindless:p_si_processor')], 200),

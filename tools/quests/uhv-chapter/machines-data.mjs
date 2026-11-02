@@ -256,7 +256,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ proxima b
   gear('SAMPLE', 'sample_receiving_facility', 'Sample Receiving', ['H_ISO'], 3, 3, {
     for: 'The &6Sample Receiving Facility&r opens canisters from another world in a sealed, level-four lab.',
-    needs: 'Its controller and the sealed-lab &6BSL-4 Casing&r.',
+    needs: 'Its controller and the sealed-lab &6BSL-4&r casing.',
     unlocks: 'Safe handling of every alien sample.',
     automate: 'Canisters by ME; nothing leaves unsterilised.',
   }, [it(BSL4)]),

@@ -108,7 +108,7 @@ export const QUESTS = [
     automate: 'Gas by pipe; depolarised gas returns to the source, so close the loop.',
   }, [CRYO, MHCOIL], 180),
   prod('P_PELLET', 'Polarised Pellet', 'grindless:polarised_h_pellet', ['POLSRC'], 3, 1, ['Frozen hydrogen that remembers its spin. Mk5 burns three fuels, and each one starts at this source.']),
-  gear('RING', 'uiv_fusion_reactor', 'Mk5 Fusion Reactor', ['POLSRC', 'HULL'], 5.5, -0.75, {
+  gear('RING', 'uiv_fusion_reactor', 'Mk5 Fusion Reactor', ['POLSRC'], 5.5, -0.75, {
       for: 'The &6Mk5 Fusion Reactor&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches.',
       needs: 'Two UIV hulls, UIV components, UIV circuits, the UIV fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches.',
     unlocks: 'The three polarised burns, and the direct energy converter that turns plasma into power.',

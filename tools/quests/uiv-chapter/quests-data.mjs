@@ -271,7 +271,7 @@ export const QUESTS = [
   },
   {
     key: 'STORE', kind: 'step', title: 'Stored Proof', icon: 'grindless:neutronium_pellet',
-    deps: ['C_HALF', 'R_CENSUS'], x: 37.5, y: 0,
+    deps: ['C_HALF'], x: 37.5, y: 0,
     desc: [
       'Put a neutronium pellet, Census II, the equation of state chart, a half-sled and four UIV circuits of any kind in the gate\'s store. The hold in the next quest needs all of them at once and uses up the pellet.',
     ],

@@ -33,7 +33,7 @@ const q = (key, kind, title, icon, deps, x, y, teach, tasks, xpN) => ({
 export const QUESTS = [
   // ------------------------------------------------------------------ the assembler and the parts
   q('UCH_PARTS', 'process', 'UHV Components', 'gtceu:uhv_robot_arm', ['UCH_MAIN'], 15, -1, {
-    // Parts take UHV circuits (the mainframes), so they stay after UCH_MAIN; the hull takes none and no longer waits for it.
+    // Parts take UHV circuits (the mainframes), so they stay after UCH_MAIN. The hull takes none; it sits beside the parts only for the layout.
     for: 'The eight &6UHV Components&r (emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor) are what every UHV controller, the UHV circuit assembler and the parallel hatch are built from. Each is an assembly line recipe on top of its UV part, the motor goes into most of the others.',
     needs: 'The UV component of the same kind, neutronium, naquadria and europium cable; the emitter, sensor, field generator and arm also take UHV circuits, the mainframes made above.',
     unlocks: 'The UHV circuit assembler, which takes an arm, an emitter and two conveyors, and the controllers of the machines chapter.',
@@ -42,7 +42,7 @@ export const QUESTS = [
     it('gtceu:uhv_emitter'), it('gtceu:uhv_sensor'), it('gtceu:uhv_field_generator'), it('gtceu:uhv_robot_arm'), it('gtceu:uhv_conveyor_module'),
     it('gtceu:uhv_electric_pump'), it('gtceu:uhv_electric_piston'), it('gtceu:uhv_electric_motor'),
   ], 100),
-  q('UCH_HULL', 'step', 'The UHV Hull', 'gtceu:uhv_machine_hull', ['H_CIRC'], 15, 1, {
+  q('UCH_HULL', 'step', 'The UHV Hull', 'gtceu:uhv_machine_hull',   ['UCH_MAIN'], 15, 1, {
     for: 'The &6UHV Machine Hull&r is the frame of every UHV hatch and of the UHV circuit assembler. It is made in an assembler from two UHV machine casings, polybenzimidazole and europium cable; it takes no circuit.',
     needs: 'Two UHV machine casings, polybenzimidazole and europium cable.',
     unlocks: 'The UHV circuit assembler and the UHV hatches.',
@@ -115,7 +115,7 @@ export const QUESTS = [
   }, [it('grindless:eu_yso_boule')], 100),
   q('UCH_QMEM', 'circuit', 'Quantum Memory Chip', 'grindless:quantum_memory_chip', ['UCH_EUY'], 7, 1, {
     for: 'A slab cut from the boule and patterned in the photonic foundry becomes a &6Quantum Memory Chip&r that holds light as an excitation.',
-    needs: 'An Eu:YSO boule and the photonic foundry: one boule and 1,000 mB of ultrapure water make four chips.',
+    needs: 'An Eu:YSO boule and the photonic foundry: one boule and ultrapure water make four chips.',
     unlocks: 'The optical assembly, which takes three.',
     automate: 'One boule cuts several slabs; send chips on by ME.',
   }, [it('grindless:quantum_memory_chip')], 120),

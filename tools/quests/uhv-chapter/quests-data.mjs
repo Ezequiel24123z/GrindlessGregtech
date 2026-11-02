@@ -106,7 +106,7 @@ export const QUESTS = [
     deps: ['ICAN'], x: 10, y: 4,
     teach: {
       for: 'The level 8 rocket carries its fuel in the &6BNNT Fuel Tank&r: an aerogel tank wound in boron nitride and carbon nanotube yarn, light and tight enough for the trip.',
-      needs: 'The cryotank winder: an aerogel fuel tank, 16 BNNT yarn, 16 carbon nanotube yarn, 4 hexagonal boron nitride dust, 1,000 mB epoxy, the Pluto-Kuiper chart and circuit program 1.',
+      needs: 'The cryotank winder: an aerogel fuel tank, 16 BNNT yarn, 16 carbon nanotube yarn, 4 hexagonal boron nitride dust, epoxy, the Pluto-Kuiper chart and circuit program 1.',
       unlocks: 'The level 8 rocket, built with the ICAN motor, which reaches Proxima b.',
       automate: 'Yarns and aerogel tanks by ME; the winder takes a long time per tank, so run several.',
     },
