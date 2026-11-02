@@ -75,7 +75,7 @@
         },
         {
           "_why": "MAX-D1 (max.md, L16 step 4 return, c4): the BZ dynamo's cooled exhaust is sorted again; it is consumed here, never returned to the line, and comes out as hydrogen and the heavy cut",
-          "name": "cooled_exhaust_return", "circuit": 4, "eut": 67108864, "duration": 400,
+          "name": "cooled_exhaust_return", "circuit": 4, "eut": 67108864, "duration": 400, "site": "gcyr:black_hole_orbit",
           "itemsIn": [], "kept": [],
           "fluidsIn": [{ "id": "gtceu:cooled_exhaust", "amount": 800 }],
           "itemsOut": [],
@@ -86,7 +86,7 @@
         },
         {
           "_why": "MX-S3 (max.md, machine 13 byproduct, c5): the clamp's captured reconnection plasmoid is sorted here, never returned to the flux-loaded FRC line; it comes out as filtered hot flow and the heavy cut",
-          "name": "reconnection_plasmoid_return", "circuit": 5, "eut": 67108864, "duration": 400,
+          "name": "reconnection_plasmoid_return", "circuit": 5, "eut": 67108864, "duration": 400, "site": "gcyr:black_hole_orbit",
           "itemsIn": [{ "id": "grindless:reconnection_plasmoid", "count": 1 }], "kept": [],
           "fluidsIn": [],
           "itemsOut": [],

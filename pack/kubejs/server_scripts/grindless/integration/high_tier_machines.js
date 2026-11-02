@@ -122,6 +122,7 @@
       if (i[0].indexOf('#gtceu:circuits/') === 0) circ = true
     })
     if (parts < 2 && first >= 0) inputs[first][1] += 2 - parts
+    else if (parts < 2) inputs.push(['gtceu:' + tier + '_electric_motor', 2 - parts])
     if (!circ) inputs.push(['#gtceu:circuits/' + tier, 1])
     // the tier below's same machine is upgraded, which also keeps the sets of ingredients of sibling machines distinct (GTM's recipe lookup)
     if (!inputs.some(function (i) { return i[0] === research })) inputs.push([research, 1])
