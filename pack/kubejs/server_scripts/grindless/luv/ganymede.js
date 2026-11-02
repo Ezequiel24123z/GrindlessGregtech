@@ -40,7 +40,7 @@
   }
   var I = GY.items
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('luv/ganymede', function (event) {
     function onGanymede(type, id) {
       return G.places.allow(event.recipes.gtceu[type]('grindless:luv/' + id), 'ganymede')
     }

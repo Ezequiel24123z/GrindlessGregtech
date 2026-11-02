@@ -21,7 +21,7 @@
     'grindless:empty_vein_probe']
   LV.craftingParts = PARTS
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('lv/crafting_multis', function (event) {
     var missing = PARTS.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error('[grindless/lv] LV controller recipes skipped, unknown item(s): ' + missing.join(', '))

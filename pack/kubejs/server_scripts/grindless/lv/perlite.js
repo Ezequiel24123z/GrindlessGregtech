@@ -16,7 +16,7 @@
 //
 // Era: LV. Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('lv/perlite', function (event) {
     event.recipes.gtceu.sifter('grindless:lv/basalt_perlite')
       .itemInputs('3x #forge:dusts/basalt')
       .itemOutputs('1x gtceu:perlite_dust', '2x gtceu:flint_dust')

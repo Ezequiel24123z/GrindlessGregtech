@@ -1,7 +1,7 @@
 // priority: -19878
 // Gregtech Grindless - MAX-T1 "Gate c14 to Sgr A*" (docs/eras/max.md, Bridges). The warp gate's c14 row (hold_sgr_a_probe) is in
 // data/grindless/tables/gate.json, read by server_scripts/grindless/uhv/gate.js; the platform it places is the sgra row of
-// tables/relay_platforms.json, placed by uxv/kerr_sling.js (its poller matches the run's name to the row's jump); the max-sgra substage
+// tables/relay_platforms.json, placed by lib/relay_platforms.js (its poller matches the run's name to the row's jump); the max-sgra substage
 // is the tier model's grant of the arrival (tools/analysis/tiers), not a script.
 //
 //   grindless:gc_relay_probe   gtceu:assembly_line at VA[OpV], researched with the Hawking drive: the galactic-centre probe. OpV hardware

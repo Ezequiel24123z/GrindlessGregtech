@@ -52,7 +52,7 @@
     event.add(FLUX_TAG, table.fluxes)
   })
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('steam/blast_furnace', function (event) {
     var count = 0
     table.feeds.forEach(function (feed) {
       event.recipes.gtceu.steelmaking('grindless:' + feed.id)

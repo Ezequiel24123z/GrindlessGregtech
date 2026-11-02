@@ -24,7 +24,7 @@
   ]
   MW.rows = ROWS
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('max/wireless', function (event) {
     var eut = Number(GTValues.VA[MAXT])
     ROWS.forEach(function (r) {
       var ids = r.items.map(function (s) { return s.replace(/^\d+x /, '') }).concat([r.out])

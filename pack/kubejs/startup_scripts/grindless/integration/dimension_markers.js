@@ -9,6 +9,7 @@
 // ROWS: [dimension id, icon item, tier (sorting and the T<n> overlay), ...]. One row per dimension of pack/kubejs/data/grindless/dimension
 // plus the GCYR dimensions the pack names. GTM and GCYR already mark the Overworld, Nether, End, Luna, Mars, Mercury and Venus: no row.
 // dimension-markers.test.mjs checks that every dimension of ours has a row and a name.
+;(function () {
 var GG_DIMENSION_MARKER_ROWS = [
   ['grindless:flat', 'minecraft:grass_block', 0],
   ['grindless:void', 'minecraft:black_stained_glass', 0],
@@ -75,3 +76,4 @@ GTCEuStartupEvents.registry('gtceu:dimension_marker', function (event) {
   })
   console.info('[grindless/integration] dimension markers registered: ' + made)
 })
+})()

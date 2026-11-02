@@ -7,7 +7,7 @@
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/pipez', function (event) {
     event.remove({ id: 'pipez:energy_pipe' })
     event.remove({ id: 'pipez:universal_pipe' })
   })

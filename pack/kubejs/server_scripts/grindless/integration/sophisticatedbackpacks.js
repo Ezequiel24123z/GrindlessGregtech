@@ -12,7 +12,7 @@
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/sophisticatedbackpacks', function (event) {
     var SWAPS = {
       'forge:ingots/gold': 'forge:plates/aluminium',
       'forge:storage_blocks/gold': 'forge:plates/aluminium',

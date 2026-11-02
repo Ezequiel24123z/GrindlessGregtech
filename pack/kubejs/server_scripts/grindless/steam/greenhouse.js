@@ -11,7 +11,7 @@
 (function () {
   const G = global.grindless
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('steam/greenhouse', function (event) {
     var table = G.greenhouse
     var count = 0
 

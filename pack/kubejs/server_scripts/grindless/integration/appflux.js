@@ -14,7 +14,7 @@
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/appflux', function (event) {
     var ids = ['appflux:energy_processor', 'appflux:printed_energy_processor', 'appflux:core_1k', 'appflux:flux_accessor', 'ae2:printed_silicon', 'ae2:energy_acceptor']
     var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {

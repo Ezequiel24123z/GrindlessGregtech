@@ -4,7 +4,7 @@
 // block; its assembly-line recipe is UEV's gate (uev/gate.js, researched with the pulsar navigation chart), so it is not made twice here.
 // Every other UIV recipe is made by the package that makes its parts. Ids: startup_scripts/grindless/uiv/foundation.js. All run at
 // UEV voltage (V[UEV] = 8,388,608 EU/t, one tier under the UIV hull they make).
-ServerEvents.recipes(function (event) {
+global.grindless.recipes('uiv/foundation', function (event) {
   var UEV_EUT = 8388608
 
   // metallic hydrogen is a grindless: material (S0-7); its cable items sit under the material's namespace, with gtceu: as the fallback

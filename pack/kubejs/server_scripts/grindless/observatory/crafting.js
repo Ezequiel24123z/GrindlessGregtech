@@ -21,7 +21,7 @@
   OBS.controllerRecipes = ['grindless:crafting/steam_observatory', 'grindless:crafting/optical_observatory',
     'grindless:crafting/radio_telescope']
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('observatory/crafting', function (event) {
     var missing = PARTS.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error(LOG + 'observatory controller recipes skipped, unknown item(s): ' + missing.join(', '))

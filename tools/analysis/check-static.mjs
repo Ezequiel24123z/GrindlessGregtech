@@ -7,7 +7,11 @@
 //             --write-baselines drops fixed entries; --seed-baselines "<reason>" is the only way to add (recorded in the file).
 //   lang      counts the en_us keys the scripts add (English is the only language).
 //   english-only  no es_es key, block, column or file anywhere under pack/kubejs (EN-1; the owner's rule: nothing in Spanish).
-//   scope     no new top-level declaration in a script and no new const/let in a callback (lib/scope_rules.mjs, AF-K2 M8-15); the\n//             ones that exist are counted per file in scope_baseline.json, which only shrinks: a count above it fails.\n//             --scope-baseline prints the current counts as that file's JSON.\n//   registry  every machine, recipe type and grindless: item/block the scripts register has an en_us name.
+//   scope     no new top-level declaration in a script and no new const/let in a callback (lib/scope_rules.mjs, AF-K2 M8-15); the
+//             ones that exist are counted per file in scope_baseline.json, which only shrinks: a count above it fails.
+//             --scope-baseline prints the current counts as that file's JSON.
+//   recipe-guard  every ServerEvents.recipes handler is registered through global.grindless.recipes (lib/recipes_guard.js) or is one try/catch (AF-K3, M8-07).
+//   registry  every machine, recipe type and grindless: item/block the scripts register has an en_us name.
 // Prints one line per check; problems follow (at most 8 per check). Exit 0 = clean, 1 = problems, 2 = tool failure.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -15,6 +19,7 @@ import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { runPackScripts, spanishFindings } from './lib/kubejs_static.mjs';
 import { scopeFindings } from './lib/scope_rules.mjs';
+import { unguardedRecipeHandlers } from './lib/recipes_guard_rule.mjs';
 import { layoutOverflows, ratchetDiff } from './lib/capacity.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -146,6 +151,22 @@ for (const [file, c] of Object.entries(scopeCounts())) {
   if (c.callbackLexical > b.callbackLexical) scopeProblems.push(file + ': ' + c.callbackLexical + ' const/let in a callback, ' + b.callbackLexical + ' allowed (use var; this Rhino throws on a redeclaration)');
 }
 report('scope', scopeProblems, scopeKnown + ' known in scope_baseline.json (only shrinks)');
+
+const guardProblems = [];
+let handlers = 0;
+const walkServer = (d) => {
+  for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+    const p = path.join(d, e.name);
+    if (e.isDirectory()) walkServer(p);
+    else if (e.name.endsWith('.js')) {
+      const src = fs.readFileSync(p, 'utf8');
+      handlers += (src.match(/\bServerEvents\s*\.\s*recipes\s*\(|\bglobal\.grindless\.recipes\s*\(/g) || []).length;
+      for (const h of unguardedRecipeHandlers(src)) guardProblems.push(path.relative(packDir, p).split(path.sep).join('/') + ':' + h.line + ': ServerEvents.recipes handler is not guarded (register it with global.grindless.recipes(name, fn), lib/recipes_guard.js)');
+    }
+  }
+};
+if (fs.existsSync(path.join(packDir, 'kubejs', 'server_scripts'))) walkServer(path.join(packDir, 'kubejs', 'server_scripts'));
+report('recipe-guard', guardProblems, handlers + ' recipe handler registrations, none unguarded (a throw in one cannot end the others)');
 
 const named = (keys) => keys.some((k) => k in en);
 const unnamed = [];

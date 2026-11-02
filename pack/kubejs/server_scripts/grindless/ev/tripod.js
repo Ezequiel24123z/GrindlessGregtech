@@ -72,7 +72,7 @@
     if (T && Item.exists(T.bit.item)) event.add('grindless:drill_bits', T.bit.item)
   })
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('ev/tripod', function (event) {
     var T = EV.tripod
     var drilling = LV.drilling
     if (!T || !drilling || !LV.veinTools) {

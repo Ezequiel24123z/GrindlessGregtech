@@ -16,7 +16,7 @@
   var OUT_SLOTS = 4 // setMaxIOSize in startup_scripts/grindless/steam/horizon_collector.js
   var NEVER_OUTPUT = ['gtceu:lv_horizon_collector', 'grindless:horizon_shard']
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('steam/horizon_collector', function (event) {
     var t = G.readJsonTable(TABLE)
     var HC = G.horizonCollector = { recipes: [], skipped: [] }
     var seen = {}

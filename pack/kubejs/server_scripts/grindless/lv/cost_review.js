@@ -13,7 +13,7 @@
 (function () {
   var REMOVE = ['gtceu:assembler/hull_lv', 'gtceu:assembler/energy_hatch_lv']
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('lv/cost_review', function (event) {
     var needed = ['gtceu:lv_machine_casing', 'gtceu:lv_machine_hull', 'gtceu:tin_single_cable', 'gtceu:lv_voltage_coil',
       'gtceu:lv_energy_input_hatch']
     var missing = needed.filter(function (id) { return !Item.exists(id) })

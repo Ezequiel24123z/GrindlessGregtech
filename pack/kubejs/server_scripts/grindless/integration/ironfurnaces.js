@@ -32,7 +32,7 @@
     return names.map(function (n) { return 'ironfurnaces:' + n }).filter(function (id) { return Item.exists(id) })
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/ironfurnaces', function (event) {
     var removed = 0
     ids(REMOVED).forEach(function (id) {
       event.forEachRecipe({ output: id }, function () { removed++ })

@@ -27,7 +27,7 @@
     { name: 'interposer_die', eut: 536870912, duration: 1200, input: 'grindless:piezo_transducer_layer', out: 'grindless:interposer_die', count: 1 }
   ]
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('maxplus/circuits', function (event) {
     ROWS.forEach(function (r) {
       var missing = [r.input, r.out].filter(function (id) { return !Item.exists(id) })
       if (missing.length > 0) {

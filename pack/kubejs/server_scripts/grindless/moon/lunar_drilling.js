@@ -118,7 +118,7 @@
     if (chance >= 1) recipe.chancedOutput('1x ' + item, Math.min(chance, 9999), 0)
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('moon/lunar_drilling', function (event) {
     MOON.checkTables().forEach(function (problem) {
       console.error('[grindless/moon] lunar vein table: ' + problem)
     })

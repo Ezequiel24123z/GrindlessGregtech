@@ -60,7 +60,7 @@
   LV.arc.neededItems = NEEDED_ITEMS
   LV.arc.neededFluids = NEEDED_FLUIDS
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('lv/arc_furnace', function (event) {
     var missing = NEEDED_ITEMS.filter(function (id) { return !Item.exists(id) })
       .concat(NEEDED_FLUIDS.filter(function (id) { return !Fluid.exists(id) }))
     if (missing.length > 0) {

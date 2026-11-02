@@ -36,7 +36,7 @@
     { id: 'large_steam_ore_washer', core: 'gtceu:primitive_pump', type: 'gtceu:ore_washer' }
   ]
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('steam/large_family', function (event) {
     var family = {}
     SPECS.forEach(function (spec) {
       var machineId = 'gtceu:' + spec.id

@@ -33,7 +33,7 @@
     parallels: 8
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('steam/small_family', function (event) {
     // item-only trio: controller built around the GTM Steam single-block machine it replaces
     event.recipes.gtceu.shaped('gtceu:steam_forge_hammer', ['DTP', 'GBG', 'CwC'], {
       D: 'grindless:steel_drill_bit',

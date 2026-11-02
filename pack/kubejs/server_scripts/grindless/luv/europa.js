@@ -32,7 +32,7 @@
     'grindless:assembly_line/cryobot', 'grindless:assembly_line/algae_bioreactor'
   ]
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('luv/europa', function (event) {
     E.surface = G.places.surface('europa')
     function onEuropa(recipe) {
       return G.places.allow(recipe, 'europa')

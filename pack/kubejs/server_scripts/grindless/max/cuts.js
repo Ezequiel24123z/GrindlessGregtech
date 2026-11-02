@@ -1,6 +1,6 @@
 // priority: -19822
 // MAX cuts (MAX-F2, docs/eras/max.md "Cuts"): GT--'s supracausal processor, assembly, computer, mainframe and SMDs and
-// gtnn:max_wrap_circuit (S0-8: GT-- registers them in Kotlin, so these filters find none and stay as a guard; EMI and the obtain
+// gtnn:max_wrap_circuit (S0-8: GT-- registers them in Kotlin, so these filters remove nothing today and are live code that only acts if a GT-- version adds such a recipe; EMI and the obtain
 // rule are what hide GT--'s routes), and the horizon strand's generic wiremill, extruder, bender, cable assembler, macerator and
 // arc furnace rows (only our draw bench and PBO rows make it). GTM's 28 gtceu:max_* hull, hatch, bus, converter, buffer and
 // charger recipes are already removed by opv/cuts.js; gtceu:max_battery is kept because GTM makes it at UHV and the released UHV

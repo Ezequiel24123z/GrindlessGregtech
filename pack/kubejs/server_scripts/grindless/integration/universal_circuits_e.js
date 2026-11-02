@@ -12,7 +12,7 @@
   var ROWS = []
   U.rows = ROWS
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/universal_circuits_e', function (event) {
     ROWS.forEach(function (r) {
       event.replaceInput({ id: r.id }, r.item, r.tag)
     })

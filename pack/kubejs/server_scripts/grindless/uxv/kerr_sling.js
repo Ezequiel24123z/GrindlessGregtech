@@ -20,7 +20,7 @@
 
   var SHIELD_PARTS = ['grindless:whipple_shield_casing', 'gtceu:rhea_plate', 'grindless:cnt_bumper_weave', 'grindless:cnt_whipple_shield']
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('uxv/kerr_sling', function (event) {
     var missing = SHIELD_PARTS.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       K.skipped.push({ name: 'whipple_shield', reason: 'unknown id(s) ' + missing.join(', ') })

@@ -19,7 +19,7 @@
   ]
   SH.skipped = []
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('uxv/superheavy', function (event) {
     SH.sintering.forEach(function (r) {
       var missing = []
       if (!Item.exists(r.input)) missing.push(r.input)

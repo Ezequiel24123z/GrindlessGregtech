@@ -26,7 +26,7 @@
       fluids: [{ id: 'gtceu:liquid_helium', amount: 1000 }], out: 'grindless:max_penrose_payload' }
   ]
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('max/sgra_modes', function (event) {
     ROWS.forEach(function (r) {
       var ids = r.items.map(function (s) { return s.replace(/^\d+x /, '') }).concat([r.out])
       var missing = ids.filter(function (id) { return !Item.exists(id) })

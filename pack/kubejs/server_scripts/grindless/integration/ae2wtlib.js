@@ -13,7 +13,7 @@
 //
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('integration/ae2wtlib', function (event) {
     var ids = ['ae2wtlib:wireless_pattern_access_terminal', 'ae2wtlib:wireless_pattern_encoding_terminal', 'gtceu:mv_sodium_battery', 'gtceu:mv_lithium_battery', 'gtceu:mv_cadmium_battery']
     var missing = ids.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {

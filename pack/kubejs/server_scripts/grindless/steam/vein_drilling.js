@@ -35,7 +35,7 @@
     if (chance >= 1) recipe.chancedOutput('1x ' + item, Math.min(chance, 9999), 0)
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('steam/vein_drilling', function (event) {
     G.checkVeinTable().forEach(function (problem) {
       console.error('[grindless/steam] vein table: ' + problem)
     })

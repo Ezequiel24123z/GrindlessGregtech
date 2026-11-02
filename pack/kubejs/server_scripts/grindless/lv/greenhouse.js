@@ -99,7 +99,7 @@
     })
   }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('lv/greenhouse', function (event) {
     var table = G.greenhouse
     var baseDuration = table.duration
     var baseEut = table.eut

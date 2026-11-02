@@ -3,7 +3,7 @@
 (function () {
   var G = global.grindless
   var CleanroomType = Java.loadClass('com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType')
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('luv/orbital_biology', function (event) {
     function orbital(type, id) {
       return G.orbits.allow(event.recipes.gtceu[type]('grindless:luv/' + id))
     }

@@ -19,7 +19,7 @@
   // published for the smoke test (the machine data itself is POWER.generatorArray, set at startup)
   POWER.generatorArrayRecipe = { id: RECIPE_ID, needed: NEEDED }
 
-  ServerEvents.recipes(function (event) {
+  global.grindless.recipes('power/generator_array', function (event) {
     var missing = NEEDED.filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {
       console.error('[grindless/power] generator array controller recipe skipped, unknown item(s): ' + missing.join(', '))
