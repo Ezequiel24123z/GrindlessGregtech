@@ -149,10 +149,10 @@
       if (rr < 4) return dz === -3 ? 'X' : 'P'
       if (rr > 8) return 'X'
     }
-    // integer spoke test: the Rhino Math.atan2/Math.round angle test vanished in game (static model and dump disagreed)
+    // integer spoke test (8 axes and diagonals plus the 2:1 lines): the Rhino Math.atan2/Math.round angle test vanished in game (static model and dump disagreed)
     var adx = Math.abs(dx)
     var adz = Math.abs(dz)
-    if ((adx === 0 || adz === 0 || adx === adz) && Math.abs(y - 3) !== 3) return 'Q'
+    if ((adx === 0 || adz === 0 || adx === adz || adx === 2 * adz || adz === 2 * adx) && Math.abs(y - 3) !== 3) return 'Q'
     return 'F'
   }
 
