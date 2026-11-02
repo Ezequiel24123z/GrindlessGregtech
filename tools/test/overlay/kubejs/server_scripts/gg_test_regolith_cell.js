@@ -12,7 +12,7 @@
 //   regolith_cell|registration    recipe type gtceu:regolith_processing with its IO sizes, the machine, the structure description
 //   regolith_cell|recipes         the 4 recipes under their final ids (GTM's builder puts the type in front: grindless:regolith_processing/
 //                                 ev/<name>), with their inputs, chances, circuit, outputs, duration and EU/t, and the gcyr:luna condition
-//   regolith_cell|kroll_stages    the 4 GTM recipes the titanium mode replaces have the figures the cell's energy was summed from, and
+//   regolith_cell|kroll_stages    the 6 live Kroll recipes (hv/kroll.js) the titanium mode replaces have the figures the cell's energy was summed from, and
 //                                 the titanium recipe costs exactly their sum
 //   regolith_cell|crafting        the controller recipe
 //   regolith_cell@moon|DESCRIPTION / PLACED / FORMED / PATTERN / PARTS   the registered description placed block by block on the Moon,
@@ -61,7 +61,7 @@
       fluidsOut: { 'gtceu:oxygen': 7000 }
     },
     titanium_from_ilmenite: {
-      circuit: 2, duration: 1408, eut: 1920,
+      circuit: 2, duration: 1483, eut: 1920,
       itemsIn: { 'gtceu:ilmenite_dust': [5, 10000], 'grindless:platinum_electrode': [1, 10], 'grindless:molten_salt_charge': [1, 0] },
       itemsOut: { 'gtceu:titanium_ingot': 3, 'gtceu:iron_dust': 1 },
       fluidsOut: { 'gtceu:oxygen': 3000 }
@@ -346,7 +346,7 @@
       ' (each with its inputs, chances, circuit, outputs, ticks, EU/t and the ' + LUNA + ' condition)' +
       (problems.length > 0 ? ' problems(' + problems.length + ')=' + problems.slice(0, 12).join(' ; ') : ''))
 
-    // the energy of the titanium mode: the four GTM stages it replaces, read back from the recipe manager
+    // the energy of the titanium mode: the six live Kroll stages it replaces, read back from the recipe manager
     var stageProblems = []
     var sum = 0
     var parts = []
