@@ -26,7 +26,7 @@
 			dependencies: ["1753F1FE9C989F6C"]
 			description: [
 				"The &6Saturn Transfer Chart&r from the Jovian flyby points at rings, a hazy moon and two ice giants. Nothing out there is walkable, so the trip starts in orbit and stays there."
-				"The other ZPM chapters hold the machines, the circuits and the power. This one keeps the trip."
+				"The machines, circuits and power for ZPM sit in the later quests. This branch keeps the trip."
 			]
 			icon: "grindless:saturn_transfer_chart"
 			id: "7B0EFFD4E295AFAD"
@@ -56,14 +56,11 @@
 		}
 		{
 			dependencies: ["760580173FC8670D"]
-			description: ["A &6Naquadah Fuel Tank&r and a &6Saturnian Quantum Seed&r are what the rocket to Saturn needs."]
+			description: ["A &6Naquadah Fuel Tank&r is what the rocket to Saturn needs. Everything else out there is made on the spot, in orbit."]
 			icon: "grindless:naquadah_fuel_tank"
 			id: "7B7F696C0E4DF709"
 			rewards: [{ id: "5CC2FE364CA17C96", type: "xp", xp: 100 }]
-			tasks: [
-				{ id: "5C9F7843BB96F43A", item: "grindless:naquadah_fuel_tank", type: "item" }
-				{ id: "33606149899472DC", item: "grindless:saturnian_quantum_seed", type: "item" }
-			]
+			tasks: [{ id: "5C9F7843BB96F43A", item: "grindless:naquadah_fuel_tank", type: "item" }]
 			title: "Level Five"
 			x: 8.0d
 			y: 1.5d
@@ -110,11 +107,14 @@
 		}
 		{
 			dependencies: ["3CBBA765447C908A"]
-			description: ["Nobody mines a ring by hand. A net sweeps through it and brings back a &6Ring Ice Sample&r, and the samples are the start of everything the rings teach you."]
+			description: ["Nobody mines a ring by hand. A net sweeps through it and brings back a &6Ring Ice Sample&r. A chemical reactor in orbit turns one, with an ender pearl and helium-3, into the &6Saturnian Quantum Seed&r, your half of the Saturn link."]
 			icon: "grindless:ring_ice_sample"
 			id: "1DC36D16DBF0BC03"
 			rewards: [{ id: "5A019FB8D83F8FC5", type: "xp", xp: 100 }]
-			tasks: [{ id: "12EAC45737D9063B", item: "grindless:ring_ice_sample", type: "item" }]
+			tasks: [
+				{ id: "12EAC45737D9063B", item: "grindless:ring_ice_sample", type: "item" }
+				{ id: "388F17E4CC698EE9", item: "grindless:saturnian_quantum_seed", type: "item" }
+			]
 			title: "Ring Ice"
 			x: 15.5d
 			y: 0.0d
@@ -192,14 +192,11 @@
 		}
 		{
 			dependencies: ["5934DC53BB683C7F"]
-			description: ["The next tank is built round aerogel, and the &6Uranian Quantum Seed&r comes from the new chart. Bring plenty of fuel: nothing out there refuels you."]
+			description: ["The next tank is built round aerogel. Bring plenty of fuel: nothing out there refuels you."]
 			icon: "grindless:aerogel_fuel_tank"
 			id: "3F7C9D7577EC9E61"
 			rewards: [{ id: "188FE67046DD0268", type: "xp", xp: 120 }]
-			tasks: [
-				{ id: "7149935F0949546C", item: "grindless:aerogel_fuel_tank", type: "item" }
-				{ id: "74AC49F8FE952A35", item: "grindless:uranian_quantum_seed", type: "item" }
-			]
+			tasks: [{ id: "7149935F0949546C", item: "grindless:aerogel_fuel_tank", type: "item" }]
 			title: "Level Six"
 			x: 20.0d
 			y: 2.0d
@@ -219,7 +216,7 @@
 		}
 		{
 			dependencies: ["53764AAB65F5DEA2"]
-			description: ["Uranus rolls round the Sun on its side, so a day there lasts decades. The station doesn't care, but the chart did, which is why it took a seed of its own."]
+			description: ["Uranus rolls round the Sun on its side, so its poles see years of daylight, then years of dark. The station doesn't care, but the chart did, which is why it took a seed of its own."]
 			icon: "grindless:uranian_quantum_seed"
 			id: "3B5CFC18324973AA"
 			rewards: [{ id: "5D1E4DA15CF9644D", type: "xp", xp: 40 }]
@@ -232,11 +229,14 @@
 		}
 		{
 			dependencies: ["53764AAB65F5DEA2"]
-			description: ["Under a hull rated for it, a siphon reaches far deeper than the one at Saturn. What it brings up includes an &6Ice Giant Atmosphere Sample&r."]
+			description: ["Under a hull rated for it, a siphon reaches far deeper than the one at Saturn. What it brings up includes an &6Ice Giant Atmosphere Sample&r, which a chemical reactor in orbit turns into the &6Uranian Quantum Seed&r."]
 			icon: "grindless:ice_giant_atmosphere_sample"
 			id: "3F41824BAF2F1DC7"
 			rewards: [{ id: "3158DF01B93F4A2B", type: "xp", xp: 120 }]
-			tasks: [{ id: "1A27932001992774", item: "grindless:ice_giant_atmosphere_sample", type: "item" }]
+			tasks: [
+				{ id: "1A27932001992774", item: "grindless:ice_giant_atmosphere_sample", type: "item" }
+				{ id: "7D927CD0ADA2ACF5", item: "grindless:uranian_quantum_seed", type: "item" }
+			]
 			title: "Deep Gas"
 			x: 25.0d
 			y: 0.5d
@@ -254,7 +254,7 @@
 		}
 		{
 			dependencies: ["5ACE6AC220A748F1"]
-			description: ["The seed sits at the head of the qubit line: diamond plate, implanted wafer, cold fab. The circuits chapter walks you through it."]
+			description: ["The seed sits at the head of the qubit line: diamond plate, implanted wafer, cold fab. The circuits that follow walk you through it."]
 			icon: "grindless:cvd_diamond_plate"
 			id: "3901A3BCDA2DE086"
 			rewards: [{ id: "14BF12004E40B868", type: "xp", xp: 40 }]
@@ -390,20 +390,23 @@
 		}
 		{
 			dependencies: ["7A980F3B74DBF079"]
-			description: ["The &6ZPM Circuit Assembler&r is the first assembler that can build the circuits ZPM machines are made of. ZPM components for its hull, a cleanroom you already run, and the LuV circuits that feed it. The crystal computer and the quantum mainframe below, and every controller of this era. Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns."]
+			description: ["The &6ZPM Circuit Assembler&r is the first assembler that can build the circuits ZPM machines are made of. ZPM components for its hull, a cleanroom you already run, and the UV-tier circuits that feed it: the Crystal Processor Mainframe from the LuV assembly line, or a UV universal circuit. The Wetware Processor Assembly, which only this assembler builds, and the circuits the controllers of this era ask for. Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns."]
 			icon: "gtceu:zpm_circuit_assembler"
 			id: "77DE04F713EEBE61"
 			rewards: [{ id: "5FC15E60BB7CE99E", type: "xp", xp: 100 }]
 			shape: "gear"
 			size: 1.25d
-			tasks: [{ id: "136C049EB81F6601", item: "gtceu:zpm_circuit_assembler", type: "item" }]
+			tasks: [
+				{ id: "3A40F1AE368FBA9D", item: "gtceu:crystal_processor_mainframe", type: "item" }
+				{ id: "570680B6B5AC4E4F", item: "gtceu:zpm_circuit_assembler", type: "item" }
+			]
 			title: "ZPM Circuit Assembler"
 			x: 3.5d
 			y: -10.5d
 		}
 		{
 			dependencies: ["77DE04F713EEBE61"]
-			description: ["Crystal processor assemblies on a larger board make the &6Crystal Processor Computer&r, the first ZPM circuit. Several crystal assemblies for each, the ZPM assembler, and research from the station you built at LuV. ZPM hulls and the controllers of this era that ask for a circuit. Crystal assemblies come from the LuV line by ME; let the ZPM assembler draw them on demand."]
+			description: ["Crystal processor assemblies on a larger board make       the &6Crystal Processor Computer&r, a ZPM-tier circuit that the LuV assembler builds. Several crystal assemblies for each and a LuV circuit assembler or assembly line. The ZPM assembler is not needed. ZPM hulls and the controllers of this era that ask for a circuit. Crystal assemblies come from the LuV line by ME; let the LuV assembler draw them on demand."]
 			icon: "gtceu:crystal_processor_computer"
 			id: "1D98852F1AB675C2"
 			rewards: [{ id: "17A9CB0334DE9233", type: "xp", xp: 120 }]
@@ -416,7 +419,7 @@
 		}
 		{
 			dependencies: ["7A980F3B74DBF079"]
-			description: ["A &6Qubit CPU Wafer&r is a wafer treated with radon so that its structure can hold a quantum state. Radon from the waste retrieval plant, which is why home comes first in this era. The qubit CPU chip, and through it the quantum mainframe. Radon is a loop: take it from the plant by ME and let the reactor return the rest."]
+			description: ["A &6Qubit CPU Wafer&r is a wafer treated with radon so that its structure can hold a quantum state. Nano CPU wafers and radon from the waste retrieval plant, which is why home comes first in this era. The qubit CPU chip, and through it the quantum processors the mainframe is built from. Every wafer uses its radon up. Pipe it from the plant continuously and keep a spare tank."]
 			icon: "gtceu:qbit_cpu_wafer"
 			id: "1000B35476B6FAC2"
 			rewards: [{ id: "1B15AB89BB048686", type: "xp", xp: 80 }]
@@ -429,7 +432,7 @@
 		}
 		{
 			dependencies: ["1000B35476B6FAC2"]
-			description: ["Cut from the wafer, the &6Qubit CPU Chip&r is the part of a quantum circuit that does the counting. A cleanroom and the laser cutting GregTech asks for. The quantum mainframe. One wafer, many chips: keep a stock by ME so the assembler never waits."]
+			description: ["Cut from the wafer, the &6Qubit CPU Chip&r is the part of a quantum circuit that does the counting. A cleanroom and a cutter fed with lubricant or water. The quantum mainframe. One wafer, many chips: keep a stock by ME so the assembler never waits."]
 			icon: "gtceu:qbit_cpu_chip"
 			id: "154A85EE43809FA1"
 			rewards: [{ id: "79F1DA7C1CA9D838", type: "xp", xp: 80 }]
@@ -441,8 +444,8 @@
 			y: -9.0d
 		}
 		{
-			dependencies: ["154A85EE43809FA1", "1D98852F1AB675C2"]
-			description: ["The &6Quantum Processor Mainframe&r is the biggest circuit ZPM builds, and the one the Mk2 and the research stations lean on. Quantum chips and a computer-grade board by the stack, and the ZPM assembler to put them together. ZPM machine hulls and the hatches that open the gate to UV. Make it in the assembly line from stocked parts; ME keeps the mainframes in a dedicated chest."]
+			dependencies: ["154A85EE43809FA1"]
+			description: ["The &6Quantum Processor Mainframe&r is a ZPM-tier circuit made from Quantum Processor Computers, frames and SMD parts. Its quantum chips come in through those computers. Quantum Processor Computers from the IV line, HSS-G frames and RAM, in a circuit assembler of IV tier or better. ZPM machine hulls and the hatches that open the gate to UV. Keep a stock of computers by ME; the assembler draws them and the mainframes go to a dedicated chest."]
 			icon: "gtceu:quantum_processor_mainframe"
 			id: "5353B2E6D14E53D3"
 			rewards: [{ id: "31FA823ACF23F80F", type: "xp", xp: 180 }]
@@ -500,7 +503,7 @@
 		}
 		{
 			dependencies: ["1D7FE3922B3DBF22", "5F0C09AC946B3ECA"]
-			description: ["Qubits only hold their state when almost nothing is moving. The &6Cryostat Casing&r keeps the fab that cold. Aerogel and gold-plated copper for the casing, and a helium-3 and helium-4 mixture to run the cold. The qubit fab, and every cryogenic hall that comes after. The mixture is not consumed: top it up with a little helium-3 by ME."]
+			description: ["Qubits only hold their state when almost nothing is moving. The &6Cryostat Casing&r keeps the fab that cold. Aerogel and gold-plated copper for the casing,       and liquid helium to run the cold, with a little Saturn helium on top. The qubit fab, and every cryogenic hall that comes after. Every fab batch draws liquid helium and a little Saturn helium. Pipe both in."]
 			icon: "grindless:cryostat_casing"
 			id: "119B62380F5F76FC"
 			rewards: [{ id: "1FAA0F12448553D4", type: "xp", xp: 80 }]
@@ -556,7 +559,7 @@
 		}
 		{
 			dependencies: ["5741B1B194B47EB5"]
-			description: ["Fuel only gets worth burning once the Mk2 has excited it with radon. That's a big start for a small amount, so in practice the Mk2 comes before the reactor."]
+			description: ["Fuel only gets worth burning once the Mk2 has excited it with radon. That's a big start for a small amount, so the order is the network, then the Mk2, then the reactor."]
 			icon: "gtceu:radon_bucket"
 			id: "5331DFDEAD7A36A2"
 			rewards: [{ id: "5D6F6C796DAB4E2C", type: "xp", xp: 30 }]
@@ -568,23 +571,7 @@
 		}
 		{
 			dependencies: ["5331DFDEAD7A36A2"]
-			description: ["GT--'s &6Large Naquadah Reactor&r burns excited fuel and is the era's main plant. Duranium frames are part of its price. Excited fuel from the Mk2, and a fuel works ready to take the spent fuel back. Power on a scale ZPM's machines expect, with a fuel loop that never leaves the base. Pipe spent fuel straight back to the fuel works and let ME top up the radon."]
-			icon: "gtnn:large_naquadah_reactor"
-			id: "54B43A225E11111F"
-			rewards: [{ id: "36B2389775956097", type: "xp", xp: 150 }]
-			shape: "gear"
-			size: 1.5d
-			tasks: [
-				{ id: "1900BFBD83C15B01", item: "gtnn:large_naquadah_reactor", type: "item" }
-				{ id: "3349030F79E58618", item: "gtceu:duranium_frame", type: "item" }
-			]
-			title: "The Big Reactor"
-			x: 7.0d
-			y: 16.0d
-		}
-		{
-			dependencies: ["54B43A225E11111F"]
-			description: ["A &6ZPM SMES cell&r and a wireless hatch put another tier on the network. Sunlight is a rumour at Saturn, so everything out there draws from it. The cold room that winds the wire, and a reactor worth storing. Stations at Saturn and Uranus that run on power made at home. Nothing to feed: size the cells for your busiest hour and add more when it dips."]
+			description: ["A &6ZPM SMES cell&r and a wireless hatch put another tier on the network. Sunlight is a rumour at Saturn, so everything out there draws from it. The cold room that winds the wire, and enough cells to carry the Mk2 start. The Mk2 next, and stations at Saturn and Uranus that run on power made at home. Nothing to feed: size the cells for your busiest hour and add more when it dips."]
 			icon: "grindless:zpm_smes_cell"
 			id: "57720D544EAFA2F9"
 			rewards: [{ id: "3BD20C011F89364F", type: "xp", xp: 100 }]
@@ -595,12 +582,12 @@
 				{ id: "3CD3FF55887D41DB", item: "gtceu:zpm_wireless_energy_hatch", type: "item" }
 			]
 			title: "The Network Goes ZPM"
-			x: 9.0d
+			x: 7.0d
 			y: 16.0d
 		}
 		{
 			dependencies: ["57720D544EAFA2F9"]
-			description: ["The &6Fusion Reactor Mk2&r makes duranium, excites fuel and runs the aneutronic burn. Its start is huge, so give it plenty of ZPM hatches. Four ZPM energy hatches on the network, and gallium and radon for the first batches. Duranium, excited fuel, and the metals UV asks for early. Feed it from tanks by pipe, and keep the hatches topped from the network."]
+			description: ["The &6Fusion Reactor Mk2&r makes duranium, excites fuel and runs the aneutronic burn. Its start is huge, so give it plenty of ZPM hatches. Four ZPM energy hatches on the network, and gallium and radon for the first batches. Duranium and excited fuel for the large reactor, and the metals UV asks for early. Feed it from tanks by pipe, and keep the hatches topped from the network."]
 			icon: "gtceu:zpm_fusion_reactor"
 			id: "38199670D4113E48"
 			rewards: [{ id: "1014D26A05E4BDFE", type: "xp", xp: 150 }]
@@ -612,6 +599,22 @@
 				{ id: "39D334A75BD56C7E", item: "gtceu:duranium_ingot", type: "item" }
 			]
 			title: "Second Ring"
+			x: 9.0d
+			y: 16.0d
+		}
+		{
+			dependencies: ["38199670D4113E48"]
+			description: ["GT--'s &6Large Naquadah Reactor&r burns excited fuel and is the era's main plant. Duranium frames are part of its price. Excited fuel from the Mk2, and a fuel works ready to take the spent fuel back. Power on a scale ZPM's machines expect, with a fuel loop that never leaves the base. Pipe spent fuel straight back to the fuel works and let ME top up the radon."]
+			icon: "gtnn:large_naquadah_reactor"
+			id: "54B43A225E11111F"
+			rewards: [{ id: "36B2389775956097", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.5d
+			tasks: [
+				{ id: "1900BFBD83C15B01", item: "gtnn:large_naquadah_reactor", type: "item" }
+				{ id: "3349030F79E58618", item: "gtceu:duranium_frame", type: "item" }
+			]
+			title: "The Big Reactor"
 			x: 10.5d
 			y: 18.0d
 		}
@@ -788,7 +791,7 @@
 		}
 		{
 			dependencies: ["32D2F83CE86E19AF"]
-			description: ["The &6Naquadah Fuel Works&r turns naquadria into the fuel that the integration plants burn. The same containment casing as the refinery, plus its controller. Fuel for the large reactors in the integration chapter. A fuel line off the refinery by pipe; buffer it in a tank so the reactors never starve."]
+			description: ["The &6Naquadah Fuel Works&r turns naquadria into the fuel that the integration plants burn. The same containment casing as the refinery, plus its controller. Fuel for the large reactors later on. A fuel line off the refinery by pipe; buffer it in a tank so the reactors never starve."]
 			icon: "gtceu:naquadah_fuel_works"
 			id: "372A1C15CAD94A3D"
 			rewards: [{ id: "36BACFC12B031878", type: "xp", xp: 120 }]
@@ -864,7 +867,7 @@
 		}
 		{
 			dependencies: ["1CDA67742969FBD5"]
-			description: ["The &6Naquadria Magnet Works&r winds the superconducting wire and insert the fusion hall and the large coils need. Its controller, naquadria and the cryostat casing from the circuits chapter. Uranium rhodium dinaquadide wire, and the insert for the next hall. Slow and cold: keep the cryostat topped up and let it run beside the refinery."]
+			description: ["The &6Naquadria Magnet Works&r winds the superconducting wire and insert the fusion hall and the large coils need. Its controller, naquadria and the cryostat casing from the circuits further up. Uranium rhodium dinaquadide wire, and the insert for the next hall. Slow and cold: keep the cryostat topped up and let it run beside the refinery."]
 			icon: "gtceu:naquadria_magnet_works"
 			id: "1E01844B88F24C23"
 			rewards: [{ id: "5C536CBAA400CCB2", type: "xp", xp: 120 }]
@@ -904,7 +907,7 @@
 		}
 		{
 			dependencies: ["1CDA67742969FBD5"]
-			description: ["The &6Methane Pyrolyser&r cracks methane into graphene and hydrogen, with the carbon coming out as a sheet. Its controller and methane from the gas network. Graphene for the diamond lattice and for the circuits chapter. Methane by pipe; keep the hydrogen moving so it never blocks."]
+			description: ["The &6Methane Pyrolyser&r cracks methane into graphene and hydrogen, with the carbon coming out as a sheet. Its controller and methane from the gas network. Graphene for the diamond lattice and for the circuits further on. Methane by pipe; keep the hydrogen moving so it never blocks."]
 			icon: "gtceu:methane_pyrolyser"
 			id: "375C05ABC626E037"
 			rewards: [{ id: "7DD936739291AC4F", type: "xp", xp: 120 }]
@@ -936,7 +939,7 @@
 		}
 		{
 			dependencies: ["57B256A0532B609A"]
-			description: ["The &6Ion Implanter&r fires single atoms into a wafer or plate and places them where a qubit has to sit. Its controller, a cleanroom and silicon-28 or doped diamond. The donor qubit wafer and the NV diamond chip of the circuits chapter. One batch at a time: feed by ME and queue the output."]
+			description: ["The &6Ion Implanter&r fires single atoms into a wafer or plate and places them where a qubit has to sit. Its controller, a cleanroom and silicon-28 or doped diamond. The donor qubit wafer and the NV diamond chip, further along. One batch at a time: feed by ME and queue the output."]
 			icon: "gtceu:ion_implanter"
 			id: "74C7DC8E103131DB"
 			rewards: [{ id: "113AF4BC0C22E6E1", type: "xp", xp: 120 }]
@@ -952,7 +955,7 @@
 		}
 		{
 			dependencies: ["74C7DC8E103131DB"]
-			description: ["The &6Qubit Fab&r assembles qubits into an array under cryogenic conditions. Its controller and the &6Cryostat Casing&r. The qubit array that the circuits chapter uses. Keep the cryostat topped up and send the arrays on by ME."]
+			description: ["The &6Qubit Fab&r assembles qubits into an array under cryogenic conditions. Its controller and the &6Cryostat Casing&r. The qubit array that the circuits further on use. Keep the cryostat topped up and send the arrays on by ME."]
 			icon: "gtceu:qubit_fab"
 			id: "32049634C73ABDE1"
 			rewards: [{ id: "52EA48C2FB46B4F1", type: "xp", xp: 150 }]
@@ -1112,7 +1115,7 @@
 		}
 		{
 			dependencies: ["578143AE95F4EB8D"]
-			description: ["The &6Isotope Column&r separates helium-3 from the gas the siphon brings up. Its controller and a stream of Saturn gas. Helium-3 for the aneutronic route in the integration chapter and the cold of the cryostat. Run the column continuously; bucket or pipe the helium-3 off."]
+			description: ["The &6Isotope Column&r separates helium-3 from the gas the siphon brings up. Its controller and a stream of Saturn gas. Helium-3 for the aneutronic route later on and the cold of the cryostat. Run the column continuously; bucket or pipe the helium-3 off."]
 			icon: "gtceu:isotope_column"
 			id: "13DF11331D65FE28"
 			rewards: [{ id: "5FA4622C1A460EA5", type: "xp", xp: 120 }]

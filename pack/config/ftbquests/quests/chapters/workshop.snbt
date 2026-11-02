@@ -105,7 +105,7 @@
 			tasks: [{ id: "4C4F2A6E1D39B057", item: "toolbelt:belt", type: "item" }]
 			title: "Tool Belt"
 			x: -10.0d
-			y: 1.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["7A5D031021239B63"]
