@@ -15,7 +15,7 @@
 //                       30 uraninite + 40 000 mB HF -> 1 U-235 + 9 U-238 + 40 000 mB F2 + 20 000 mB water for 1 020 000 EU of stages;
 //                       1 U-238 + 10 000 mB air -> 1 000 mB radon for 1 926 400 EU (4 000 t x 480 + 8 smelts x 200 t x 4); each spent
 //                       at no more than 7 680 EU/t and at most one EU/t over the stages' energy
-//   own_recipes         the table's six recipes (MOX, breeder, RTG pellet, Pu-Be source, the two reprocessings) were built, none skipped
+//   own_recipes         every recipe of the script's table (MOX, breeder, RTG pellet, Pu-Be source, the reprocessings...) was built, none skipped; counts the rows other scripts add
 //   live_contents       every recipe of the script is in the recipe manager under grindless:hot_cell/<name> with exactly its published
 //                       contents: items (counts, chances), circuit, fluids, EU/t, duration and the EMI data key
 //   lookup_safety       no recipe of the type takes a subset of another's ingredients (static; gg_test_recipe_lookup asks GTM's lookup)
@@ -363,6 +363,18 @@
     return true
   }
 
+  // the hot cell rows other scripts register (maxplus/tarantula.js, maxplus/assembler.js), read from their published row tables
+  function foreignRows() {
+    var G = global.grindless
+    var rows = []
+    ;[G.maxPlusTarantula, G.maxPlusAssembler].forEach(function (src) {
+      ;((src && src.rows) || []).forEach(function (r) {
+        if (r.type === 'hot_cell') rows.push({ name: r.name, recipeId: 'grindless:hot_cell/' + r.name, circuit: Number(r.circuit) })
+      })
+    })
+    return rows
+  }
+
   function staticChecks() {
     safely('registration', function () {
       var problems = []
@@ -417,7 +429,9 @@
     safely('own_recipes', function () {
       var names = (HC().recipes || []).filter(function (r) { return r.kind === 'own' }).map(function (r) { return r.name })
       var missing = WANT_OWN.filter(function (n) { return names.indexOf(n) < 0 })
-      check('own_recipes', missing.length === 0 && names.length === WANT_OWN.length, names.length + ' own recipes [' + names.join(', ') + ']' +
+      var skippedOwn = (HC().skipped || []).length
+      check('own_recipes', missing.length === 0 && skippedOwn === 0, names.length + ' own recipes [' + names.join(', ') + '], ' + foreignRows().length +
+        ' more from other scripts [' + foreignRows().map(function (f) { return f.name }).join(', ') + ']' +
         (missing.length > 0 ? ' | missing: ' + missing.join(', ') : ''))
     })
 
@@ -456,9 +470,24 @@
         sets.push({ name: rec.name, keys: ins.map(function (x) { return 'i:' + x.id }).concat(fluidContents(r, true).map(function (f) { return 'f:' + f.id }))
           .concat(['circuit:' + rec.circuit]) })
       })
+      var foreign = foreignRows()
+      foreign.forEach(function (f) {
+        var r = liveRecipe(f.recipeId)
+        if (r === null) {
+          problems.push(f.recipeId + ' not in the recipe manager')
+          return
+        }
+        var ins = itemContents(r, true).filter(function (x) { return x.circuit === 0 })
+        var circuit = itemContents(r, true).filter(function (x) { return x.circuit > 0 })
+        if (circuit.length !== 1 || circuit[0].circuit !== f.circuit) problems.push(f.name + ' circuit ' + JSON.stringify(circuit))
+        sets.push({ name: f.name, keys: ins.map(function (x) { return 'i:' + x.id }).concat(fluidContents(r, true).map(function (x) { return 'f:' + x.id }))
+          .concat(['circuit:' + f.circuit]) })
+      })
       var live = asArray(S.server.getRecipeManager().getAllRecipesFor(GTRegistries.RECIPE_TYPES.get(rl(TYPE)))).length
-      if (live !== recipes.length) problems.push(live + ' live ' + TYPE + ' recipes for ' + recipes.length + ' published')
-      check('live_contents', problems.length === 0 && recipes.length === 8, recipes.length + ' recipes checked against the recipe manager' +
+      var expected = recipes.length + foreign.length
+      if (live !== expected) problems.push(live + ' live ' + TYPE + ' recipes for ' + recipes.length + ' published + ' + foreign.length + ' from other scripts')
+      check('live_contents', problems.length === 0 && recipes.length >= WANT_OWN.length + Object.keys(WANT_COMPOSED).length,
+        recipes.length + ' published + ' + foreign.length + ' foreign recipes checked against the recipe manager' +
         (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
       S.sets = sets
     })
@@ -475,7 +504,7 @@
         }
       }
       var script = HC().clashes || []
-      check('lookup_safety', sets.length === 8 && clashes.length === 0 && script.length === 0, sets.length + ' input sets, none a subset of another' +
+      check('lookup_safety', sets.length === (HC().recipes || []).length + foreignRows().length && clashes.length === 0 && script.length === 0, sets.length + ' input sets, none a subset of another' +
         (clashes.length + script.length > 0 ? ' | clashes: ' + clashes.concat(script).join('; ') : ''))
     })
 

@@ -1,3 +1,4 @@
+// priority: -21274
 // -----------------------------------------------------------------------------------------------
 // MV Platline I: GT--'s platinum line taught and usable at MV (docs/eras/lines-steam-hv.md, section 4, step 6 and 7).
 //

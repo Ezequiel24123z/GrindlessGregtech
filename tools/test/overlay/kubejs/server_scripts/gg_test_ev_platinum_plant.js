@@ -74,12 +74,12 @@
     platinum: {
       duration: 2314, eut: 1920, circuit: 2,
       itemsIn: { 'gtceu:platinum_group_sludge_dust': [1, 10000], 'gtceu:calcium_dust': [3, 10000], 'grindless:platinum_electrode': [1, 10] },
-      fluidsIn: { 'gtceu:nitration_mixture': 54000, 'gtceu:ammonium_chloride': 10800 },
+      fluidsIn: {       'gtceu:aqua_regia': 54000, 'gtceu:ammonium_chloride': 10800 },
       itemsOut: {
         'gtceu:platinum_dust': [6, 0], 'gtceu:gold_dust': [3, 0], 'gtceu:silicon_dioxide_dust': [3, 0], 'gtceu:platinum_slag_dust': [6, 0],
         'gtceu:palladium_metal_dust': [0, 9500], 'gtceu:calcium_chloride_dust': [9, 0]
       },
-      fluidsOut: { 'gtceu:palladium_rich_ammonia': 10800, 'gtceu:nitrogen_dioxide': 27000, 'gtceu:diluted_sulfuric_acid': 27000 }
+      fluidsOut: { 'gtceu:palladium_rich_ammonia': 10800, 'gtceu:nitrogen_dioxide': 27000,       'gtceu:diluted_hydrochloric_acid': 27000 }
     },
     palladium: {
       duration: 891, eut: 1919, circuit: 2,
@@ -282,15 +282,27 @@
     var ast = PP.recipes.filter(function (p) { return p.mode === 'asteroid' })
     var have = recipeCount(TYPE_ID)
     var absent = PP.recipes.filter(function (p) { return liveRecipe(p.recipeId) === null }).map(function (p) { return p.recipeId })
-    // LuV A2's mode 4 (asteroid) adds a 7th recipe and no live stage (its opening is virtual, its chain is mode 3's); UHV-B5's Proxima row (c6,
-    // tables/proxima_ground.json) is live but not in PP.recipes, so the type has one more recipe than the script publishes
+    // the plant's own recipes must be in the recipe manager; the type also holds IV's, LuV's and UHV-B5's pgm_refining recipes, so its total is no fixture count
     check(SCOPE, 'counts', attack.length === 2 && sep.length === 3 && iri.length === 1 && ast.length === 1 && PP.skipped.length === 0 &&
-      PP.stages === STAGE_COUNT && have === 9 && absent.length === 0,
-      'pgm_refining=' + have + ' (' + attack.length + ' attack + ' + sep.length + ' separation + ' + iri.length + ' iridosmine + ' + ast.length + ' asteroid) from ' +
+      PP.stages === STAGE_COUNT && have >= PP.recipes.length && absent.length === 0,
+      'pgm_refining=' + have + ' in the type, ' + PP.recipes.length + ' of the plant (' + attack.length + ' attack + ' + sep.length + ' separation + ' + iri.length + ' iridosmine + ' + ast.length + ' asteroid) from ' +
       PP.stages +
       ' stages of the live line (want ' + STAGE_COUNT + '), skipped=' + PP.skipped.length +
       (PP.skipped.length > 0 ? ' (' + PP.skipped.map(function (s) { return s.name + ': ' + s.reason }).join('; ') + ')' : '') +
       ' ids=' + PP.recipes.map(function (p) { return p.recipeId }).join(',') + (absent.length > 0 ? ' not in the recipe manager=' + absent.join(',') : ''))
+
+    // D1-PGM-MV edits the line in place (mv/platline.js): the plant reads it live, so the dissolution takes aqua regia and the precipitation gives diluted hydrochloric acid
+    var plat = null
+    try {
+      plat = planNamed('platinum')
+    } catch (e) {
+      plat = null
+    }
+    var hasIn = function (id) { return plat !== null && plat.fluidsIn.some(function (f) { return f.id === id }) }
+    var hasOut = function (id) { return plat !== null && plat.fluidsOut.some(function (f) { return f.id === id }) }
+    check(SCOPE, 'aqua_regia', hasIn('gtceu:aqua_regia') && hasOut('gtceu:diluted_hydrochloric_acid') && !hasIn('gtceu:nitration_mixture') && !hasOut('gtceu:diluted_sulfuric_acid'),
+      'platinum separation fluids in=[' + (plat === null ? 'no plan' : plat.fluidsIn.map(function (f) { return f.amount + ' ' + short(f.id) }).join(' ')) + '] out=[' +
+      (plat === null ? '' : plat.fluidsOut.map(function (f) { return f.amount + ' ' + short(f.id) }).join(' ')) + ']')
 
     var problems = []
     Object.keys(REFERENCE).forEach(function (name) {
