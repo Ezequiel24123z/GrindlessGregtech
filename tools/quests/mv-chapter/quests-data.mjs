@@ -5,6 +5,7 @@ export const CHAPTER = {
   order: 2,
   icon: "gtceu:mv_machine_hull",
   autofocus: "MV_MV_FACTORY",
+  section: { name: 'MV: The Far End', origin: { x: 0, y: 0 } },
   title: "MV: The Far End",
   subtitle: ["The End for ore, silicon and plastics at home, and a landing site picked by radar."],
 };

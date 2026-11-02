@@ -5,6 +5,7 @@ export const CHAPTER = {
   order: 0,
   icon: "gtceu:bronze_gear",
   autofocus: "STEAM_STEAM_AGE",
+  section: { name: 'Steam Age: Escape Velocity', origin: { x: 0, y: 0 } },
   title: "Steam Age: Escape Velocity",
   subtitle: ["Still no electricity: coal, steam and bronze, until ore and wood start turning up on their own."],
 };

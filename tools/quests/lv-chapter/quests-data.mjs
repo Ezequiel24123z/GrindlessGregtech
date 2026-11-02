@@ -5,6 +5,7 @@ export const CHAPTER = {
   order: 1,
   icon: "gtceu:lv_machine_hull",
   autofocus: "LV_LV_FACTORY",
+  section: { name: 'LV: The First Spark', origin: { x: 0, y: 0 } },
   title: "LV: The First Spark",
   subtitle: ["Electricity at last: ore lines, a little chemistry, AE2, and the Moon on film."],
 };
