@@ -160,7 +160,7 @@ export function buildModel(dump, rawCfg0) {
   const warnings = [...pk.warnings];
   const st = { unresolved: new Set() };
   const stats = {
-    recipes: dump.recipes.size, ignoredByType: {}, deadByType: {}, emptyIngredient: 0, badIngredient: 0,
+    recipes: dump.recipes.size, ignoredByType: {}, deadByType: {}, unmodelledConditions: {}, emptyIngredient: 0, badIngredient: 0,
     templateMissing: 0, rules: 0, structureMachines: 0, structureMachineIds: [], rolledMachines: [], veinTargets: 0, veinsWithoutItem: [],
     partsNotRequired: [], packages: pk.packages, generatedResearch: 0,
   };
@@ -589,7 +589,19 @@ export function buildModel(dump, rawCfg0) {
     for (const c of n.conditions) {
       if (dimGroup.includes(c)) continue;
       const rule = cfg.conditions[c.type] || cfg.conditions['*'];
-      if (!rule || rule.ignore || c.reverse === true) continue;
+      // Fail closed: a condition type with no rule is an unmodelled gate, never a free pass. Only an explicit `ignore` (with a
+      // reason in the tier config) skips a condition.
+      if (!rule) {
+        stats.unmodelledConditions[c.type] = (stats.unmodelledConditions[c.type] || 0) + 1;
+        slots.push(slotOf([], false, `unmodelled condition ${c.type}`, 'cond'));
+        continue;
+      }
+      if (rule.ignore) continue;
+      // A reversed condition ("not X") is only skipped by an `ignore` rule; otherwise the model can't prove it holds.
+      if (c.reverse === true) {
+        slots.push(slotOf([], false, `reversed condition ${c.type} is not modelled`, 'cond'));
+        continue;
+      }
       if (rule.researchKeys) {
         // GTM's assembly line research (ResearchCondition; with machines.enableResearch the line's data access hatch only offers
         // the recipes its data sticks name): met once the research exists, the research:<id> key a scanner recipe's data stick

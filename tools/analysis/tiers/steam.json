@@ -55,7 +55,18 @@
     "cleanroom": { "unsupported": true },
     "research": { "unsupported": true },
     "environmental_hazard": { "unsupported": true },
-    "*": { "ignore": true }
+    "ebf_temp": { "ignore": true, "reason": "the coil temperature is checked against the machine's maxTemp" },
+    "eu_to_start": { "ignore": true, "reason": "the start-up EU cost is paid from the hatch buffer; tiers with a cap override this" },
+    "pcb_factory": { "ignore": true, "reason": "a machine-internal tier lock, not a world or item gate" },
+    "plant_casing_condition": { "ignore": true, "reason": "met by the plant's own casing in the formed multiblock" },
+    "neutron_activator_condition": { "ignore": true, "reason": "met by the activator's own structure" },
+    "daytime": { "ignore": true, "reason": "a clock condition; the factory is automated around it" },
+    "rain": { "ignore": true, "reason": "weather; the recipe is not blocked in the model" },
+    "thunder": { "ignore": true, "reason": "weather; the recipe is not blocked in the model" },
+    "orbit": { "ignore": true, "reason": "orbital placement is carried by the dimension condition" },
+    "dyson_sphere": { "ignore": true, "reason": "the sphere's state is an in-world condition of the Dyson machine" },
+    "pos_y": { "ignore": true, "reason": "a height window inside the dimension" },
+    "ae2_circumstance_explosion": { "ignore": true, "reason": "the explosion source is a world action" }
   },
 
   "partAbilities": {
