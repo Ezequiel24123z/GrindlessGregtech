@@ -68,6 +68,13 @@ test('task-hidden and task-no-recipe: fire on a hidden or recipe-less task item,
   assert.equal(rule(run(t('gtceu:ghost'), {}, { newClasses: true }), 'task-no-recipe').length, 0, 'no recipe data, no check');
 });
 
+test('recipeOutputIds reads fluid outputs as fluid and bucket ids, not fluid inputs', () => {
+  const out = recipeOutputIds([
+    { inputs: { fluid: [{ content: { value: [{ fluid: 'a:nitrogen' }] } }] }, outputs: { fluid: [{ content: { value: [{ fluid: 'a:liquid_nitrogen' }] } }] } },
+  ]);
+  assert.deepEqual([...out].sort(), ['a:liquid_nitrogen', 'a:liquid_nitrogen_bucket']);
+});
+
 test('recipeOutputIds reads GT, vanilla and KubeJS outputs and not inputs', () => {
   const out = recipeOutputIds([
     { outputs: { item: [{ content: { ingredient: { item: 'a:gt_out' } } }] }, inputs: { item: [{ content: { ingredient: { item: 'a:gt_in' } } }] } },

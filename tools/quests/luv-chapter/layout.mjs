@@ -70,7 +70,7 @@ const LAYOUT = {
   HARPQ: [14, -1, null],
   MOND: [16.5, -2, null],
   RING: [18, -1, null],
-  RINGQ: [21, -1.5, null],
+  RINGQ: [12, -3.5, null],
   ORGANOID: [23.5, -0.5, null],
   ORGQ: [26, -0.5, null],
   BOULDER: [12, -0.5, null],

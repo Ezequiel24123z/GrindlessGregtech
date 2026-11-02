@@ -47,7 +47,7 @@ export const QUESTS = [
       "Until there's a bridge to Earth, it runs on the batteries you packed. You did pack batteries.",
     ],
     tasks: [it("gtceu:lunar_drill", 1, "5B07A5D98BA69B39")],
-    rewards: [xp(80, "7451BE7DAFCDCDCC"), ri("grindless:stainless_steel_drill_bit", 2, "731EAC7375E702A5")],
+    rewards: [xp(100, "7451BE7DAFCDCDCC")],
   },
   {
     key: "TI", id: "14DF849D657D6AEF", title: "Titanium", icon: "gtceu:titanium_ingot",
@@ -165,7 +165,7 @@ export const QUESTS = [
       "Mars's atmosphere processor wears them out slowly, so pack a few for the trip.",
     ],
     tasks: [it("grindless:ruthenium_catalyst", 4, "7CD60D931DAFDC14")],
-    rewards: [xp(40, "5067394C445994B8"), ri("grindless:ruthenium_catalyst", 1, "7E2ADEECDA9F8A70")],
+    rewards: [xp(60, "5067394C445994B8")],
   },
   {
     key: "MC", id: "319C39AD99B5E4A8", title: "The Way to Mars", icon: "grindless:mars_chart",
@@ -225,7 +225,7 @@ export const QUESTS = [
       "Tungsten only comes from Mars, and from now on it reaches home without you.",
     ],
     tasks: [it("gtceu:raw_scheelite", 16, "7391930490146D70")],
-    rewards: [xp(80, "3977177DF1BB38B0"), ri("grindless:titanium_drill_bit", 8, "7DA8045ABC20D814")],
+    rewards: [xp(120, "3977177DF1BB38B0")],
   },
   {
     key: "ICE", id: "148A0854C671B0AC", title: "Deuterium-Rich Ice", icon: "gtceu:raw_deuterium_rich_ice", size: 0.75, optional: true,

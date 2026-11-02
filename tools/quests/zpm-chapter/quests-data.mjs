@@ -86,7 +86,7 @@ export const QUESTS = [
     rewards: [xp(40)],
   },
   {
-    key: 'J_RICE', kind: 'step', title: 'Ring Ice', icon: 'grindless:ring_ice_sample',
+    key: 'J_RICE', kind: 'step', title: 'Ring Ice Sample', icon: 'grindless:ring_ice_sample',
     deps: ['STN3'], x: 8, y: -1.5,
     desc: [
       'Nobody mines a ring by hand. A net sweeps through it and brings back a &6Ring Ice Sample&r. A chemical reactor in orbit turns one, with an ender pearl and helium-3, into the &6Saturnian Quantum Seed&r, your half of the Saturn link.',
@@ -104,10 +104,10 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'J_THOL', kind: 'step', title: 'Tholins', icon: 'grindless:tholin',
+    key: 'J_THOL', kind: 'step', title: 'Tholin Sample', icon: 'grindless:tholin',
     deps: ['J_TIT'], x: 12, y: -1.5,
     desc: [
-      "Titan's haze is organic: &6Tholin&r, a tarry mix of nitriles that the chemistry back home can use.",
+      "Titan's haze is organic: &6Tholin&r, a tarry mix of nitriles that the chemistry back home can use. The tholin reformer makes it from the Titan recording, so you need that line running first. It unlocks carbon fibre, bacteria food and the organics ahead. Keep the reformer fed by ME and store the output in a tank.",
     ],
     tasks: [it('grindless:tholin')],
     rewards: [xp(100)],
@@ -140,7 +140,7 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'J_SIM', kind: 'step', title: 'Ring Song', icon: 'grindless:saturn_interior_model',
+    key: 'J_SIM', kind: 'step', title: 'Saturn''s Interior', icon: 'grindless:saturn_interior_model',
     deps: ['J_CART'], x: 10, y: 0,
     desc: [
       'The rings ring like a bell when something hits them. Listen long enough and you get a &6Saturn Interior Model&r, and from it a &6Uranus Transfer Chart&r.',
@@ -154,7 +154,7 @@ export const QUESTS = [
     key: 'LVL6', kind: 'step', title: 'Level Six', icon: 'grindless:aerogel_fuel_tank',
     deps: ['J_SIM'], x: 12, y: 0,
     desc: [
-      'The next tank is built round aerogel. Bring plenty of fuel: nothing out there refuels you.',
+      'The next tank is built round aerogel, which is made from the archaeal culture at the aerogel works, so keep that line running. It unlocks Uranus and the ice-giant trips. Bring plenty of fuel: nothing out there refuels you. Build tanks in the assembler and let ME stock a few for every launch.',
     ],
     tasks: [it('grindless:aerogel_fuel_tank')],
     rewards: [xp(120)],
@@ -178,7 +178,7 @@ export const QUESTS = [
     rewards: [xp(40)],
   },
   {
-    key: 'J_ICE', kind: 'step', title: 'Deep Gas', icon: 'grindless:ice_giant_atmosphere_sample',
+    key: 'J_ICE', kind: 'step', title: 'Deep Gas Sample', icon: 'grindless:ice_giant_atmosphere_sample',
     deps: ['STN4'], x: 16, y: 0,
     desc: [
       'Under a hull rated for it, a siphon reaches far deeper than the one at Saturn. What it brings up includes an &6Ice Giant Atmosphere Sample&r, which a chemical reactor in orbit turns into the &6Uranian Quantum Seed&r.',
@@ -187,7 +187,7 @@ export const QUESTS = [
     rewards: [xp(120)],
   },
   {
-    key: 'J_DIA', kind: 'step', title: 'Diamond Rain', icon: 'grindless:ice_giant_diamond_seed',
+    key: 'J_DIA', kind: 'step', title: 'The Diamond Rain Seed', icon: 'grindless:ice_giant_diamond_seed',
     deps: ['STN4'], x: 16, y: -1.5,
     desc: [
       'Deep in the ice giants carbon is squeezed into diamond. A seed grown from that slurry makes a better qubit plate than anything you can cut.',
@@ -205,7 +205,7 @@ export const QUESTS = [
     rewards: [xp(40)],
   },
   {
-    key: 'J_NEP', kind: 'step', title: 'Past Neptune', icon: 'grindless:neptune_flyby_probe',
+    key: 'J_NEP', kind: 'step', title: 'Neptune Flyby', icon: 'grindless:neptune_flyby_probe',
     deps: ['J_ICE'], x: 18, y: 0,
     desc: [
       "A flyby probe passes Neptune and Triton and doesn't stop. It reports back late, and what it reports is the last step to the next chart.",
@@ -243,7 +243,7 @@ export const QUESTS = [
     rewards: [xp(120)],
   },
   {
-    key: 'J_KUI', kind: 'step', title: 'Kuiper Targets', icon: 'grindless:kuiper_target_list',
+    key: 'J_KUI', kind: 'step', title: 'The Kuiper List', icon: 'grindless:kuiper_target_list',
     deps: ['J_FLY'], x: 24, y: 0,
     desc: [
       'The survey picks out the small icy worlds past Neptune and writes them into a &6Kuiper Target List&r.',

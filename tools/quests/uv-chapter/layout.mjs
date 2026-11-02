@@ -41,7 +41,8 @@ const LAYOUT = {
   UC_WCOMP: [4.5, -9.5, ['H_UV_CIRCUITS']],
   UC_MAIN: [7, -9.5, null],
   UC_ASM: [9.5, -9.5, null],
-  UC_NBOULE: [4, -11, ['H_UV_CIRCUITS']],
+  UC_GAAS: [4, -11, ['H_UV_CIRCUITS']],
+  UC_NBOULE: [7.5, -11, null],
   UC_HASOC: [11.5, -11, null],
   UC_XMASK: [4, -7, ['H_UV_CIRCUITS']],
   UC_PWAF: [6.5, -7.5, null],
@@ -110,6 +111,8 @@ const LAYOUT = {
   KUIPER: [23.5, 4, null],
   P_SAMPLE: [25.5, 4.5, null],
   ANNEAL: [27, 4.5, null],
+  NANO: [3.5, 21.5, ['H_UV_MACHINES']],
+  PCBF: [6, 21.5, ['H_UV_MACHINES']],
   HELIO: [24, 9, null],
   SHADOW: [26, 9.5, null],
 };

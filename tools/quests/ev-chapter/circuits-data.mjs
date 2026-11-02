@@ -13,7 +13,7 @@ export const CHAPTER = {
   autofocus: "ECA",
   title: "EV: Circuits",
   subtitle: ["Phosphorus, patience and the first circuits that need a cleanroom twice."],
-  section: { name: "EV: Circuits", origin: { x: 0, y: 0 }, heading: { key: "H_CIRCUITS", x: 11, y: 2.25, deps: ["MP"], icon: "gtceu:nano_processor" } },
+  section: { name: "EV: Circuits", origin: { x: 0, y: 0 }, heading: { key: "H_CIRCUITS", x: 11, y: 2.25, deps: ["MP"], icon: "gtceu:nano_processor", desc: ["The nano ladder: wafers, chips and the circuits an EV circuit assembler builds from them, up to the supercomputer that gates IV."] } },
 };
 
 export const LINKS = [];
@@ -42,7 +42,7 @@ export const QUESTS = [
       automate: "Cleanroom hatches take wafers from the ME network and return chips to it.",
     },
     desc: [],
-    tasks: [it("gtceu:nano_cpu_wafer", 1), it("gtceu:nano_cpu_chip", 1)],
+    tasks: [it("gtceu:carbon_fibers", 1), it("gtceu:nano_cpu_wafer", 1), it("gtceu:nano_cpu_chip", 1)],
     rewards: [xp(50)],
   },
   {
@@ -99,12 +99,12 @@ export const QUESTS = [
     deps: ["ECA", "NCPU"], x: 22, y: 3,
     teach: {
       for: "The &6Nanoprocessor&r is the nano line's HV circuit, and only the EV circuit assembler can put one together.",
-      needs: "Nano CPU chips, carbon fibers and the usual SMD parts.",
+      needs: "Nano CPU chips, the carbon fibers from the wafer quest and the usual SMD parts.",
       unlocks: "The assembly, and every EV machine that wants circuits.",
       automate: "Run it from the assembler's own pattern, with the chips delivered by ME.",
     },
     desc: [],
-    tasks: [it("gtceu:carbon_fibers", 1), it("gtceu:nano_processor", 1)],
+    tasks: [it("gtceu:nano_processor", 1)],
     rewards: [xp(50)],
   },
   {

@@ -131,7 +131,7 @@ export const QUESTS = [
     automate: 'The culture is not consumed in small runs; keep a seed batch alive in ME.',
   }, []),
   prod('ARCH', 'Archaea', 'grindless:archaeal_culture', ['VENT'], 4, 6,
-    'A culture that thrives where nothing else survives. It is the biology behind the aerogel recipes.',
+    '&6Archaea&r are a culture that thrives where nothing else survives, and the biology behind the aerogel recipes. The vent bioreactor grows them from a seed batch, with heat and nutrients. They unlock the aerogel works. A seed batch survives small runs, so keep one alive in ME and draw from it.',
     [it('grindless:archaeal_culture')]),
   gear('AERO', 'aerogel_works', 'Aerogel', ['ARCH'], 6, 6, {
     for: 'The &6Aerogel Works&r dries silica gel so slowly that it stays as a foam that is almost all air.',
@@ -146,7 +146,7 @@ export const QUESTS = [
     automate: 'It needs no tending. Collect the survey by ME when it finishes.',
   }, [it('grindless:photomultiplier_casing')]),
   prod('SURVEY', 'Solar Core Survey', 'grindless:solar_core_survey', ['NEUT'], 10, 6,
-    'The neutrino count, written up as a map of the sun\'s core. The gate to UV asks for it.',
+    'The neutrino count, written up as a map of the sun\'s core, is what the &6Solar Core Survey&r is for: it is the proof of work the gate to UV asks for. It is made from the neutrino detector''s readings in the survey line, so keep the detector fed and running. Nothing else uses it, so make one and hand it in. Detector output reaches the line by ME, so the whole run can be left unattended.',
     [it('grindless:solar_core_survey')], 120),
 
   // ------------------------------------------------------------------ Saturn
@@ -163,7 +163,7 @@ export const QUESTS = [
     automate: 'Probes are launched, not driven: stock them by ME.',
   }, [it('grindless:probe_bay_casing')]),
   prod('CART', 'Aerogel Cartridge', 'grindless:aerogel_cartridge', ['PLUME'], 6, 9,
-    'A sample sealed in aerogel so that it reaches home unchanged.',
+    'The &6Aerogel Cartridge&r seals a sample in aerogel so that it reaches home unchanged. It is made in an assembler from aerogel and polyethylene, with the aerogel works supplying the first. Every Saturn and Uranus sample asks for one, so it unlocks the whole sample run. Keep a stock in ME and let the assembler refill it on demand.',
     [it('grindless:aerogel_cartridge')]),
   gear('RSONG', 'ring_seismometer', 'Ring Song', ['CART'], 8, 9, {
     for: 'The &6Ring Seismometer&r listens to the rings ring: tiny quakes in Saturn that tell you what is inside.',
@@ -191,7 +191,7 @@ export const QUESTS = [
     automate: 'Probes are single use; build them by the dozen.',
   }, [it('grindless:probe_bay_casing'), it('grindless:titan_entry_probe')]),
   prod('TREC', 'Titan Recording', 'grindless:titan_probe_recording', ['TITAN'], 8, 10.5,
-    'What the probe saw as it fell, stored as a recording.',
+    'The &6Titan Recording&r is what the entry probe saw as it fell, stored for the lab. It comes from a probe launched through the Titan line, so you need a probe, a launch and a working station. It unlocks the tholin reformer, which needs the recording to work. Probes are single use, so automate probe building and let ME collect each recording.',
     [it('grindless:titan_probe_recording')]),
   gear('THOL', 'tholin_reformer', 'Tholins', ['TREC'], 10, 10.5, {
     for: 'The &6Tholin Reformer&r turns the haze of Titan into tholin, a tar that is rich in carbon and nitrogen.',
@@ -238,10 +238,10 @@ export const QUESTS = [
   }, [it('grindless:kuiper_target_list'), it('grindless:pluto_kuiper_chart')], 150),
 
   prod('TRIT', 'Tritanium', 'gtceu:tritanium_ingot', ['START'], 2, 16.5,
-    'Titanium and duranium fuse into &6Tritanium&r in the Mk2. It is a UV metal, made here first.',
+    '&6Tritanium&r is the first UV metal, made here early. Titanium and duranium fuse into it in the Mk2 reactor, so the Second Ring must be running with plenty of hatches. It unlocks darmstadtium, the assembly hall and the UV machine hulls. Feed the reactor by tank and pipe and pull the ingots by ME.',
     [it('gtceu:tritanium_ingot')], 100),
   prod('DARM', 'Darmstadtium', 'gtceu:darmstadtium_ingot', ['TRIT'], 4, 16.5,
-    'Arsenic and ruthenium make &6Darmstadtium&r in the same reactor. Another UV metal you will need early.',
+    '&6Darmstadtium&r is another UV metal you will need early. Arsenic and ruthenium fuse into it in the same Mk2 reactor, after tritanium. It unlocks the assembly hall and the metal parts of UV machines. Keep both feeds on tanks and send the ingots on by ME.',
     [it('gtceu:darmstadtium_ingot')], 100),
   gear('ASMH', 'assembly_hall', 'Assembly Hall', ['DARM'], 6, 16.5, {
     for: 'The &6Assembly Hall&r runs assembler and circuit assembler recipes in parallel.',
