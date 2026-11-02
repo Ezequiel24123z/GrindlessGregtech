@@ -223,6 +223,19 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
   {
+    key: 'AE_LASER', kind: 'wafer', title: 'Laser Array Wafer', icon: 'grindless:laser_array_wafer',
+    deps: ['AE_A1'], x: 38, y: 4.5,
+    teach: {
+      for: 'A wafer of grown laser emitters is the light source of the &6Photonic Coprocessor&r, and of the creative cores of the last stage. The &6Laser Array Wafer&r is made two at a time.',
+      needs: 'The MOCVD reactor with a circuit of the last tier, and the gallium, indium and arsenic feed it grows from. It draws MAX+ power.',
+      unlocks: 'The photonic coprocessor of the next quest and the creative cores of the end of the era.',
+      automate: 'Feed the metal-organic precursors by pipe and take the wafers by ME; the coprocessor takes one wafer each, so keep a small stock.',
+    },
+    desc: [],
+    tasks: [it('grindless:laser_array_wafer')],
+    rewards: [xp(150)],
+  },
+  {
     key: 'AE_A2', kind: 'process', title: 'Crafting at a Billion', icon: 'megacells:256m_crafting_storage',
     deps: ['AE_A1'], x: 40.5, y: 4.5,
     teach: {

@@ -67,6 +67,12 @@ export const QUESTS = [
     unlocks: 'The EO transceiver of the pulsar-timed repeater and the UIV wireless hatches.',
     automate: 'LNOI wafers and nitride wafers by ME; the fab returns wafers to a chest.',
   }, [it('grindless:ln_on_sin_wafer')], 120),
+  q('CH_SOI', 'wafer', 'Ion-Sliced Silicon-28', 'grindless:si28_donor_wafer', ['CH_LNSIN'], 8, 0.25, {
+    for: 'The TFLN Fab implants hydrogen into an isotopically pure silicon-28 wafer and slices off a thin film onto a handle wafer. The film is the &6Si-28 SOI Wafer&r that the quiet-qubit row needs; what remains is the &6Si-28 Donor Wafer&r.',
+    needs: 'The TFLN Fab with a circuit of any UIV kind, and a silicon-28 wafer to slice. It draws UIV power.',
+    unlocks: 'The silicon-28 SOI wafer of the later chapters. The donor wafer goes back to zone refining and is regrown, so no silicon-28 is lost.',
+    automate: 'Feed handle wafers by ME and send the donors straight to the zone refiner; one loop keeps the isotope in circulation.',
+  }, [it('grindless:si28_donor_wafer')], 120),
 
   // ------------------------------------------------------------------ BEUV
   q('CH_BEUV', 'wafer', 'BEUV Exposure', 'grindless:beuv_exposed_wafer', ['H_LADDER'], 3.5, 3.25, {
