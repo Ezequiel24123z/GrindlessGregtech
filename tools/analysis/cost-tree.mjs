@@ -13,7 +13,7 @@ import { loadTierConfig } from './lib/config.mjs';
 import { globMatcher } from './lib/cost.mjs';
 import { ERAS, loadEraContext, recipeEra } from './lib/era.mjs';
 import { priceDump } from './cost-matrix.mjs';
-import { HYPERSTARGATE_PRESET, parseTargetSpec, structureBom, cheapestOf, buildCostTree, compareRows, explainPath } from './lib/cost_tree.mjs';
+import { HYPERSTARGATE_PRESET, parseTargetSpec, structureBom, cheapestOf, buildCostTree, compareRows } from './lib/cost_tree.mjs';
 import { renderHtml } from './lib/cost_tree_html.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -121,27 +121,24 @@ function main() {
   for (const p of res.checks.problems.slice(0, 10)) console.log(`  problem: ${p}`);
 
   if (args.explain) {
-    const byId = new Map(recipes.map((r) => [r.id, r]));
-    const keys = [...new Set(args.explain.flatMap((e) => (e === 'top' ? [
-      ...res.bases.filter((b) => !b.free).slice(0, 3).map((b) => b.key),
-      [...res.items].sort((a, b) => b.runs - a.runs)[0].key,
-    ] : [e])))];
-    const rf = (n) => (n >= 1e4 ? n.toExponential(2) : String(Number(n.toPrecision(4))));
+    const top = [...res.bases].filter((b) => !b.free).sort((a, b) => b.qty - a.qty).slice(0, 3).map((b) => b.key);
+    const topCrafts = [...res.items].sort((a, b) => b.runs - a.runs)[0].key;
+    const keys = [...new Set(args.explain.flatMap((e) => (e === 'top' ? [...top, topCrafts] : [e])))];
+    const rf = (n) => (n >= 1e4 || (n > 0 && n < 0.01) ? n.toExponential(2) : String(Number(n.toPrecision(4))));
     const lines = [];
     for (const k of keys) {
-      const ex = explainPath(res.tree, res.tables, k);
-      lines.push(`== ${k}: ${rf(ex.total)} in the tree`);
+      const ex = res.chain(k);
+      lines.push(`== ${k}: ${rf(ex.total)} in the whole expansion`);
       ex.steps.forEach((s, i) => {
-        lines.push(`${'  '.repeat(i)}${s.n} q=${rf(s.q)}${s.runs !== null ? ` runs=${rf(s.runs)}` : ''}${s.per !== null ? ` (x${rf(s.per)} per parent run)` : ''} [${(100 * s.share).toFixed(1)}% of ${k}]${s.recipe ? ` via ${s.recipe}` : ''}`);
-        const r = s.recipe && byId.get(s.recipe);
-        if (r) lines.push(`${'  '.repeat(i)}  ${r.inputs.filter((x) => !x.cap && x.consume > 0).map((x) => `${x.alts[0]}${x.alts.length > 1 ? '|..' : ''}*${x.count}`).join(' + ')} -> ${r.outputs.map((o) => `${o.key}*${o.count}${o.chance < 1 ? `@${o.chance}` : ''}`).join(' + ')}  (${r.eut}x${r.amp || 1} EU/t, ${r.duration}t)`);
+        const pad = '  '.repeat(i);
+        lines.push(`${pad}${s.key} q=${rf(s.q)} (x${rf(s.mult)} from ${s.via}) [${(100 * s.share).toFixed(1)}% of the total]${s.recipe ? ` runs=${rf(s.runs)} via ${s.recipe}` : ''}`);
+        if (s.recipe) lines.push(`${pad}  ${s.inputs.join(' + ')} -> ${s.outputs.join(' + ')}`);
       });
     }
     res.explain = lines;
     if (args.explainOut) fs.writeFileSync(args.explainOut, lines.join('\n') + '\n');
     else console.log(lines.join('\n'));
-  }
-  if (args.json) fs.writeFileSync(args.json, JSON.stringify({ ...res, comparison }));
+  }  if (args.json) fs.writeFileSync(args.json, JSON.stringify({ ...res, comparison }));
   if (args.html) {
     fs.writeFileSync(args.html, renderHtml(res, {
       comparison, options: describeOptions(cfg), title: `${res.name}: cost tree`,

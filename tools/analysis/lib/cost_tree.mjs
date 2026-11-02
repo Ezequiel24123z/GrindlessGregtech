@@ -405,9 +405,49 @@ export function buildCostTree(o) {
   for (const r of crafted) { if (!byRecipe.has(r.recipe)) byRecipe.set(r.recipe, []); byRecipe.get(r.recipe).push(r.key); }
   for (const [id, keys] of byRecipe) if (keys.length > 1) sharedRuns.push({ recipe: id, items: keys });
 
-  return {
-    name: o.name || 'Total',
-    summary, consistency, tree, tables, treeThreshold: thr, treeNodes: nodeCount,
+  /**
+   * The chain from the roots down to `key` that carries most of it ('@crafts' follows crafts instead): per step the multiplier
+   * (child units per unit of the parent), the quantity, the runs and the share of the total that flows through that step.
+   */
+  const chain = (key) => {
+    const per = new Map();
+    const unitOfTarget = (k) => {
+      if (per.has(k)) return per.get(k);
+      const f = infoOf(k);
+      let v;
+      if (key === '@crafts') v = f.kind === 'crafted' ? unitTotals(k).crafts : 0;
+      else if (k === key) v = 1;
+      else if (f.kind !== 'crafted') v = 0;
+      else { per.set(k, 0); v = 0; for (const [c, a] of f.inputs) v += f.runsPer * a * unitOfTarget(c); }
+      per.set(k, v);
+      return v;
+    };
+    let total = 0;
+    for (const b of branches) for (const e of b.entries) total += e.qty * unitOfTarget(e.key);
+    if (key === '@crafts') total = rootU.crafts;
+    const steps = [];
+    let cur = null;
+    let best = 0;
+    for (const b of branches) for (const e of b.entries) { const s = e.qty * unitOfTarget(e.key); if (s > best) { best = s; cur = { key: e.key, q: e.qty, mult: e.qty, via: b.label }; } }
+    while (cur) {
+      const f = infoOf(cur.key);
+      const step = { key: cur.key, q: cur.q, mult: cur.mult, via: cur.via, share: total > 0 ? cur.q * unitOfTarget(cur.key) / total : 0 };
+      if (f.kind === 'crafted') {
+        step.recipe = f.id; step.runs = cur.q * f.runsPer;
+        step.inputs = f.inputs.map(([k, a]) => `${k}*${Number(a.toPrecision(4))}`);
+        step.outputs = f.recipe.outputs.map((x) => `${x.key}*${x.count}${x.chance < 1 ? `@${x.chance}` : ''}`);
+      }
+      steps.push(step);
+      if (cur.key === key || f.kind !== 'crafted') break;
+      let next = null;
+      let nb = 0;
+      for (const [k, a] of f.inputs) { const m = f.runsPer * a; const s = cur.q * m * unitOfTarget(k); if (s > nb) { nb = s; next = { key: k, q: cur.q * m, mult: m, via: cur.key }; } }
+      cur = next;
+    }
+    return { key, total, steps };
+  };
+
+  const result = { tree, tables, treeThreshold: thr, treeNodes: nodeCount,
     items: crafted, bases, creative, types, eras,
     branches: branches.map((b) => ({ label: b.label, recipe: b.recipe ? b.recipe.id : null, ownEu: b.own.eu, entries: b.entries.length })),
     checks: {
@@ -417,37 +457,8 @@ export function buildCostTree(o) {
     rows: Object.fromEntries(itemRows.map((r) => [r.key, { count: r.count, runs: r.runs ?? 0, base: r.base, creative: r.creative }])),
     branchEu: Object.fromEntries(branches.map((b) => [b.label, b.own.eu])),
   };
-}
-
-/**
- * The chain from the root down to `key` that carries most of it: at each node it follows the child whose subtree holds the largest
- * quantity of `key`. Steps: {n, q, runs, recipe, per (q per run of the parent), share (of all `key` in the tree)}.
- */
-export function explainPath(tree, tables, key) {
-  const memo = new Map();
-  const sum = (n) => {
-    if (memo.has(n)) return memo.get(n);
-    let s = n.n === key ? n.q : 0;
-    for (const c of n.c || []) s += sum(c);
-    memo.set(n, s);
-    return s;
-  };
-  const total = sum(tree);
-  const steps = [];
-  let parent = null;
-  let n = tree;
-  while (n) {
-    steps.push({
-      n: n.n, q: n.q, runs: n.r ?? null, recipe: n.i !== undefined ? tables.recipes[n.i] : null,
-      per: parent && parent.r ? n.q / parent.r : null, share: total > 0 ? sum(n) / total : 0,
-    });
-    parent = n;
-    let next = null;
-    let bestS = 0;
-    for (const c of n.c || []) { const s = sum(c); if (s > bestS) { bestS = s; next = c; } }
-    n = n.n === key ? null : next;
-  }
-  return { key, total, steps };
+  Object.defineProperty(result, 'chain', { value: chain, enumerable: false });
+  return result;
 }
 
 /** Value of one comparison spec on a result (null when the item is not in the expansion). */
