@@ -15,7 +15,9 @@
 // The open state, for XP-Z1b (which does the player check and the teleport): global.grindless.hyperstargate
 //   isOpen(machine)            formed and running its dial
 //   box(pos, facing)           the interior plane in world coordinates { minX, minY, minZ, maxX, maxY, maxZ } (inclusive block coordinates)
-//   gates()                    [{ dimension, pos: { x, y, z }, facing, open, box }] of every formed gate that has been asked to start a dial
+//   gates()                    [{ dimension, pos: { x, y, z }, facing, open, run, team, box }] of every formed gate that has been asked to start a dial;
+//                              team is the controller owner's team id ('server' when it has none): the dial draws on that team's wireless store
+//                              and the crossing admits that team (B13-DIAL, #238)
 //   gateAt(dimension, x, y, z) one of those or null
 //
 // Rhino: var + function inside every callback that runs more than once; GTM and wireless things are looked up at run time.
@@ -197,11 +199,23 @@
   }
   HS.forget = function () { known = {} }
 
+  // the team of the controller's owner (lib/teams.js, GTM's machine owner), 'server' when it has none or the team lib is not loaded. The dial's
+  // charge and the crossing both go by it (B13-DIAL, #238).
+  function teamOf(machine) {
+    try {
+      var T = G.teams
+      return T && typeof T.ofMachine === 'function' ? String(T.ofMachine(machine)) : 'server'
+    } catch (e) {
+      return 'server'
+    }
+  }
+  HS.teamOf = teamOf
+
   function describe(entry) {
     var m = entry.machine
     var p = m.getPos()
     var facing = String(m.getFrontFacing()).toLowerCase()
-    return { dimension: dimensionOf(entry.level), pos: { x: coord(p, 'x'), y: coord(p, 'y'), z: coord(p, 'z') }, facing: facing, open: isOpen(m), run: runOf(entry.level, entry.key), box: box(p, facing) }
+    return { dimension: dimensionOf(entry.level), pos: { x: coord(p, 'x'), y: coord(p, 'y'), z: coord(p, 'z') }, facing: facing, open: isOpen(m), run: runOf(entry.level, entry.key), team: teamOf(m), box: box(p, facing) }
   }
 
   HS.gates = function () {
@@ -259,7 +273,7 @@
     var W = G.wireless
     if (!W || !W.big || typeof W.dialCharge !== 'function' || !W.table || !W.table.maxplusBank) return { kind: 'no_network', args: [] }
     var need = dialNeed(W)
-    var dc = W.dialCharge(level.getServer())
+    var dc = W.dialCharge(level.getServer(), teamOf(machine))
     if (W.big.cmp(dc.bankCapacity, need) < 0) return { kind: 'bank', args: [W.fmt(dc.bankCapacity), W.fmt(need)] }
     var short = W.big.sub(need, heldByHatches(W, machine))
     if (W.big.cmp(dc.stored, short) < 0) return { kind: 'charge', args: [W.fmt(dc.stored), W.fmt(short)] }
@@ -310,7 +324,7 @@
       if (r) list.add(Text.translate('grindless.machine.hyperstargate.refused.' + r.kind, r.args[0], r.args[1]).red())
       var W = G.wireless
       if (W && typeof W.dialCharge === 'function' && W.table && W.table.maxplusBank) {
-        var dc = W.dialCharge(level.getServer())
+        var dc = W.dialCharge(level.getServer(), teamOf(controller))
         list.add(Text.translate('grindless.machine.hyperstargate.network', W.fmt(dialNeed(W)), W.fmt(dc.bankCapacity), W.fmt(dc.stored)))
       }
     } catch (e) {

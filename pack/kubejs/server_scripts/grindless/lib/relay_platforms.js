@@ -12,7 +12,8 @@
 //   3. The platform: the warp gate ring with every structure symbol lib/patterns.js emits (frames included), a floor under it and its kit, the
 //      wireless dynamo hatch and an AE2 controller with a drive beside it, its chunks force-loaded. Its input bus holds the circuit of the
 //      sustain, the stocked exotic matter cells and the coordinates of the ring that sent the jump (the way back). Both wireless hatches are
-//      tracked by the network (global.grindless.wireless.track). The ring starts paused, so its cells wait for a traveller: the transit wakes
+//      tracked by the network (global.grindless.wireless.track) under the team of the ring's owner, the player whose travel built the platform
+//      ('server' when the ring has none; the queue entry carries it as `t`: B13-DIAL, #238). The ring starts paused, so its cells wait for a traveller: the transit wakes
 //      it for one sustain when a player steps into it.
 // Relay coordinates: the table's selector item (GTM's data stick, no new item) with NBT grindless_relay = "dim|x|y|z|fx|fz" (the controller
 // of the ring it names) and a display name. A sustaining ring with coordinates in an input bus carries a player standing in it there.
@@ -279,7 +280,18 @@
     cmd(server, dim, 'setblock ' + p.x + ' ' + p.y + ' ' + p.z + ' ' + id + (facing ? '[facing=north]' : '') + ' replace')
   }
 
-  function track(level, list) {
+  // the team a platform's hatches are tracked under (B13-DIAL, #238): the team of the player whose travel built it, which is the owner of the warp
+  // gate ring that ran the jump (GTM records the placing player), 'server' when the ring has none
+  function teamOfRing(machine) {
+    try {
+      var T = G.teams
+      return T && typeof T.ofMachine === 'function' ? String(T.ofMachine(machine)) : 'server'
+    } catch (e) {
+      return 'server'
+    }
+  }
+
+  function track(level, list, team) {
     var W = G.wireless
     if (!W || typeof W.track !== 'function') {
       console.error(LOG + 'the wireless network is not loaded: the platform hatches are not tracked')
@@ -288,7 +300,7 @@
     var n = 0
     list.forEach(function (p) {
       try {
-        if (W.track(level, blockPos(p))) n++
+        if (W.track(level, blockPos(p), team ? String(team) : 'server')) n++
       } catch (e) {
         console.error(LOG + 'could not track the hatch at ' + p.x + ',' + p.y + ',' + p.z + ': ' + e)
       }
@@ -296,7 +308,7 @@
     return n
   }
 
-  function place(server, row, home) {
+  function place(server, row, home, team) {
     var t = table()
     if (!t) throw new Error('no table')
     var ring = t.ring
@@ -319,7 +331,7 @@
     put(server, dim, dynamo, ring.dynamo, true)
     var ae2 = ring.ae2 || []
     ae2.forEach(function (id, i) { put(server, dim, { x: kitX, y: origin.y + i, z: origin.z }, id, false) })
-    var tracked = track(level, [built.at.energy, dynamo])
+    var tracked = track(level, [built.at.energy, dynamo], team)
     var bus = cls().Meta.getMachine(level, blockPos(built.at.bus))
     if (!bus) throw new Error('no input bus at ' + built.at.bus.x + ',' + built.at.bus.y + ',' + built.at.bus.z)
     var inv = bus.getInventory()
@@ -359,9 +371,9 @@
     data.putString(DUE_KEY, JSON.stringify(list))
   }
 
-  function enqueue(server, place, ring) {
+  function enqueue(server, place, ring, team) {
     var list = due(server)
-    list.push({ p: String(place), r: ring ? plainRing(ring) : null })
+    list.push({ p: String(place), r: ring ? plainRing(ring) : null, t: team ? String(team) : 'server' })
     saveDue(server, list)
   }
 
@@ -371,7 +383,7 @@
     var row = rowOfJump(name)
     if (row === null) return
     var ring = typeof WG.ringOf === 'function' ? WG.ringOf(machine) : null
-    enqueue(machine.getLevel().getServer(), row.place, ring)
+    enqueue(machine.getLevel().getServer(), row.place, ring, teamOfRing(machine))
     console.info(LOG + 'jump ' + name + ' completed' + (ring ? ' at ' + ringText(ring) : '') + ': ' + row.place + ' queued')
   }
   WG.onFinished = onFinished
@@ -384,7 +396,7 @@
       return
     }
     var fresh = !server.persistentData.contains(keyOf(row))
-    if (fresh) place(server, row, e.r)
+    if (fresh) place(server, row, e.r, e.t)
     var where = deliver(server, e.r, coordinates(String(row.place), ringOfRow(row)), row.place)
     console.info(LOG + row.place + (fresh ? '' : ' already has its platform') + ': coordinates to the ' + where)
   }

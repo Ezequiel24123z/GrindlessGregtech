@@ -21,7 +21,7 @@ export const CHAPTER = {
   autofocus: 'TR_BLEND',
   section: SECTIONS.hyperstargate,
   title: 'MAX+: Building the Gate',
-  subtitle: ['Six machines, eight kinds of part, one dial and a ring that opens for one crossing at a time.'],
+  subtitle: ['Six machines, eight kinds of part, one dial and a ring that opens once for a whole team.'],
 };
 
 export const LINKS = [
@@ -198,7 +198,7 @@ export const QUESTS = [
     deps: ['HG_MACH'], x: 16, y: 2,
     teach: {
       for: 'The dial opens the ring for a minute. It eats the genome archive, the cloud phase map, a stack of phase locks and a crate of jacketed cells, and keeps the &6Horizon Lock&r in the controller.',
-      needs: 'The full charge in the capacitor banks for the whole opening; EMI shows the draw. The dial will not start on a charge it cannot finish.',
+      needs: 'The full charge in your team\'s capacitor banks for the whole opening (the wireless network is per team); EMI shows the draw. The dial will not start on a charge it cannot finish.',
       unlocks: 'The crossing, and a spent charge to recharge.',
       automate: 'Stock every input and keep the banks full. The next opening costs the same.',
     },
@@ -216,10 +216,10 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
-    key: 'HG_CROSS', kind: 'reading', title: 'One at a Time', icon: 'gtceu:hyperstargate',
+    key: 'HG_CROSS', kind: 'reading', title: 'One Dial, One Team', icon: 'gtceu:hyperstargate',
     deps: ['HG_DIAL'], x: 17.5, y: 2,
     desc: [
-      'The ring is open only while the dial runs, and one player crosses per opening. A second crossing pays for its own archive and charge. Nothing else goes through.',
+      'The ring is open only while the dial runs, and one dial takes the whole team: every member of the team that owns the controller crosses once per opening, and nobody from another team does. A solo player is a team of one. A second crossing, for anyone, pays for its own archive and charge. Nothing else goes through.',
     ],
     tasks: [ck()],
     rewards: [xp(100)],
