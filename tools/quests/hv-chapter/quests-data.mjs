@@ -394,7 +394,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "5B177DB0EA38B7DC", xp: 40 }],
   },
   {
-    key: "HV_GT_DRUMS", id: "471A024EBFCA8459", title: "GT Drums", icon: "gtceu:stainless_steel_drum", deps: ["mv:MV_STAINLESS_STEEL","HV_STAINLESS_STEEL_DRILL_BIT"], x: 10, y: -3,
+    key: "HV_GT_DRUMS", id: "471A024EBFCA8459", title: "GT Drums", icon: "gtceu:stainless_steel_drum", deps: ["mv:MV_STAINLESS_STEEL","HV_STAINLESS_STEEL_DRILL_BIT"], x: 8, y: -4.5,
     desc: [
       "A &6Stainless Steel Drum&r holds a lot of fluid and keeps it when you pick it up. It's also the liner inside the rocket's overwrapped tanks, so make a few extra.",
     ],
