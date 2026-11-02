@@ -31,7 +31,13 @@
     "vela_pulsar": { "dimensions": ["grindless:vela_pulsar_orbit"], "pairTag": "vela_pulsar", "name": { "en_us": "Vela Pulsar" } },
     "cas_a": { "dimensions": ["grindless:cas_a_remnant"], "pairTag": "cas_a", "name": { "en_us": "Cassiopeia A" } },
     "sgr1806": { "dimensions": ["grindless:sgr1806_orbit"], "pairTag": "sgr1806", "name": { "en_us": "SGR 1806-20" } },
-    "terzan5": { "dimensions": ["grindless:terzan5_core"], "pairTag": "terzan5", "name": { "en_us": "Terzan 5" } }
+    "terzan5": { "dimensions": ["grindless:terzan5_core"], "pairTag": "terzan5", "name": { "en_us": "Terzan 5" } },
+    "sgra": { "dimensions": ["gcyr:black_hole_orbit"], "pairTag": "sgra", "name": { "en_us": "Sagittarius A*" } },
+    "nsc": { "dimensions": ["grindless:nsc_belt"], "pairTag": "nsc", "name": { "en_us": "the nuclear star cluster belt" } },
+    "tarantula": { "dimensions": ["grindless:tarantula_orbit"], "pairTag": "tarantula", "name": { "en_us": "30 Doradus" } },
+    "magellanic_stream": { "dimensions": ["grindless:magellanic_stream"], "pairTag": "magellanic_stream", "name": { "en_us": "the Magellanic Stream" } },
+    "m31": { "dimensions": ["grindless:m31_nucleus_orbit"], "pairTag": "m31", "name": { "en_us": "the M31 nucleus" } },
+    "local_group_filament": { "dimensions": ["grindless:local_group_filament"], "pairTag": "local_group_filament", "name": { "en_us": "the Local Group filament" } }
   },
   "dryOnEarth": ["gcyr:overworld_orbit"]
 }

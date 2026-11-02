@@ -10,7 +10,7 @@
     // [key, text]
     var ENTRIES = [
         ['gtceu.recipe.grindless_warp_gate.hold_galactic_bulge',
-            'Hold the Cygnus X-1 ring open for a minute at 2^31 EU/t: an FRC cartridge burns; census III, the island chart, the arm chart, a core sample and four spintronic mainframes stay in the bus; the bulge chart comes out'],
+            'Hold the Cygnus X-1 ring open for a minute at 2^31 EU/t: an FRC cartridge burns; census III, the island and arm charts, a core sample and 4 mainframes stay; the bulge chart comes out'],
         ['gtceu.recipe.grindless_matrioshka_computing.arm_chart',
             'Compute the arm chart from the Vela strain record, the Ti-44 line map, the Cygnus elevator log and the EHT VLBI record'],
         ['emi.grindless.info.uxv_gate_stock.0',

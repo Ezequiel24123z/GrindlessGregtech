@@ -138,10 +138,11 @@
   var PUMP = 'grindless:maxplus_electric_pump'
   var PISTON = 'grindless:maxplus_electric_piston'
   var EMITTER = 'grindless:maxplus_emitter'
-  var CPU = '2x grindless:horizon_processor'
+  var CPU = '2x #gtceu:circuits/maxplus'
   var COIL = 'grindless:kerr_field_coil'
 
-  // name, research stack, inputs, fluids in
+  // name, research stack, inputs, fluids in. The emitter, sensor, field generator and conveyor module take 3 of their MAX parts (M2-12:
+  // they were only about x1.1 to x1.4 the MAX cost); their cost now sits above x3 the MAX part.
   var COMPONENTS = [
     { name: 'maxplus_electric_motor', research: 'grindless:max_electric_motor',
       items: ['2x ' + COIL, 'grindless:bound_matter_rotor', 'grindless:max_electric_motor'] },
@@ -152,13 +153,13 @@
     { name: 'maxplus_robot_arm', research: 'grindless:max_robot_arm',
       items: ['2x ' + MOTOR, PISTON, CPU, 'grindless:max_robot_arm'] },
     { name: 'maxplus_emitter', research: 'grindless:max_emitter',
-      items: ['grindless:horizon_photonic_engine', 'grindless:max_emitter', CPU] },
+      items: ['grindless:horizon_photonic_engine', '3x grindless:max_emitter', CPU] },
     { name: 'maxplus_sensor', research: 'grindless:max_sensor',
-      items: ['grindless:horizon_phase_sensor_core', 'grindless:max_sensor', CPU] },
+      items: ['grindless:horizon_phase_sensor_core', '3x grindless:max_sensor', CPU] },
     { name: 'maxplus_field_generator', research: 'grindless:max_field_generator',
-      items: ['grindless:condensate_field_cell', EMITTER, '2x ' + COIL, 'grindless:max_field_generator'] },
+      items: ['grindless:condensate_field_cell', EMITTER, '2x ' + COIL, '3x grindless:max_field_generator'] },
     { name: 'maxplus_conveyor_module', research: 'grindless:max_conveyor_module',
-      items: ['2x ' + MOTOR, 'grindless:horizon_belt', 'grindless:max_conveyor_module'] },
+      items: ['2x ' + MOTOR, 'grindless:horizon_belt', '3x grindless:max_conveyor_module'] },
     { name: 'maxplus_fluid_regulator', research: 'grindless:max_fluid_regulator',
       items: [PUMP, 'grindless:horizon_valve', CPU, 'grindless:max_fluid_regulator'] }
   ]

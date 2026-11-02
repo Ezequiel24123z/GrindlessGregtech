@@ -135,7 +135,7 @@ export const QUESTS = [
   {
     key: "IV_UNDER_THE_CLOUDS", id: "5693331C34A5A291", title: "Under the Clouds", icon: "gcyr:venus_rock", shape: "rsquare", size: 1.25, deps: ["IV_ELITE_ROCKET_THERMAL_SUIT"], x: 44.75, y: -0.25,
     desc: [
-      "Ninety bar of carbon dioxide, sulfuric acid clouds and ground hot enough to melt lead. Nothing burns here, so land with an RTG cell or charged batteries.",
+      "Ninety bar of carbon dioxide, sulfuric acid clouds and ground hot enough to melt lead. Nothing burns for lack of air here, so land with an RTG cell or charged batteries; self-oxidising fuels like methalox still run.",
       "Bring ender pearls, helium-3 and a waystone for the ride home.",
     ],
     tasks: [{ type: "dimension", dimension: "gcyr:venus" }],
@@ -185,7 +185,7 @@ export const QUESTS = [
   {
     key: "IV_DAY_OF_FIRE", id: "55613604E4C62B5F", title: "Day of Fire", icon: "gcyr:mercury_rock", shape: "rsquare", size: 1.25, deps: ["IV_ELITE_ROCKET_THERMAL_SUIT"], x: 43.75, y: 1.25,
     desc: [
-      "Mercury keeps Earth's clock: a scorching day and a cold, dark night. There's no air and nothing burns, so an RTG cell or charged batteries keep the first base going until the sun returns.",
+      "Mercury keeps Earth's clock: a scorching day and a cold, dark night. There's no air, so ordinary fuel won't burn; an RTG cell, charged batteries or a self-oxidising fuel keep the first base going until the sun returns.",
       "Bring a waystone and an empty vein probe.",
     ],
     tasks: [{ type: "dimension", dimension: "gcyr:mercury" }],

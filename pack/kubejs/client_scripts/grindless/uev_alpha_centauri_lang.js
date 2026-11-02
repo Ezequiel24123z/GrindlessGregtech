@@ -30,9 +30,9 @@
 
         ['grindless.machine.interstellar_dust_lab.tooltip.0',
             '§7Analyses captured dust grains for iron-60 and silicate residue.'],
-        ['grindless.machine.interstellar_dust_lab.tooltip.1', 'Works in Alpha Centauri orbit only.'],
+        ['grindless.machine.interstellar_dust_lab.tooltip.1', 'Washes captured grains out of aerogel.'],
         ['emi.grindless.info.interstellar_dust_lab.1',
-            'Washes captured grains out of the aerogel, strips their silicate shell and reads the iron-60 record of a nearby supernova. Alpha Centauri orbit only.'],
+            'Washes captured grains out of the aerogel, strips their silicate shell and reads the iron-60 record of a nearby supernova.'],
         ['emi.grindless.info.interstellar_dust_lab.2',
             'Circuit 1 extract grains, 2 demineralise, 3 Fe-60 record (the sensor is not consumed), 4 silicate residue.'],
         ['emi.grindless.info.interstellar_dust_lab.3',
@@ -51,7 +51,7 @@
         ['emi.grindless.info.nebula_collector.0',
             'Works only in the Alpha Centauri orbit. Interstellar gas then goes to a chemical reactor (compression), the cryogenic plant (hydrogen-deuterium fraction, helium fraction, neon) and two distillation towers (deuterium, helium-3). The scoop yield is named fiction.'],
         ['emi.grindless.info.interstellar_dust_lab.0',
-            'Works only in the Alpha Centauri orbit. Spent hydrofluoric acid leaves as silicon tetrafluoride and is neutralised with calcium hydroxide into fluorite; silicate residue is electrolysed into silicon, iron and magnesium.'],
+            'Spent hydrofluoric acid leaves as silicon tetrafluoride and is neutralised with calcium hydroxide into fluorite; silicate residue is electrolysed into silicon, iron and magnesium.'],
         ['emi.grindless.info.pulsar_timing_station.0',
             'Works only in the Alpha Centauri orbit. Makes the pulsar navigation chart, needed later for UIV casing research.'],
 

@@ -8,7 +8,7 @@
     // [key, text]
     var ENTRIES = [
         ['gtceu.recipe.grindless_warp_gate.hold_sgr_a_probe',
-            'Hold the Cygnus X-1 ring open for a minute at 2^33 EU/t: the galactic-centre relay probe is thrown and leaves launched; the Sgr A* chart stays in the bus; the platform at Sgr A* orbit unfolds on arrival']
+            'Hold the Cygnus X-1 ring open for a minute at 2^33 EU/t: the galactic-centre relay probe is thrown and leaves launched; the Sgr A* chart stays in the bus']
     ]
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {

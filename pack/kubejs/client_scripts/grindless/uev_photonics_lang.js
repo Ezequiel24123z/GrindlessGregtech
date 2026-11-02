@@ -80,6 +80,11 @@
         ENTRIES.push(['tooltip.grindless.' + i[0] + '.1', i[3]])
     })
 
+    ENTRIES.push(['gtceu.recipe.grindless_snspd_fabrication.detector_layer_wafer',
+        'Circuit 9: 2 photonic QPU wafers, 16 nanowire wafers, 16 SNSPD dies and 32 electronic grade silicon in 16000 mB of helium make 2 detector layer wafers'])
+    ENTRIES.push(['gtceu.recipe.grindless_photonic_integration.photonic_qpu',
+        'Circuit 15: 4 detector layer wafers, 16 SNSPD link wafers, 8 horizon logic dies and 4 quantum photonic chips bonded with 2304 mB of epoxy make 1 photonic QPU'])
+
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {
             event.add('grindless', e[0], e[1])

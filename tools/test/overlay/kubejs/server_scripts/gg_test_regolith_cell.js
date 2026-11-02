@@ -77,6 +77,13 @@
       itemsIn: { 'gtceu:lunar_regolith_dust': [16, 10000] },
       itemsOut: { 'grindless:sintered_regolith': 4 },
       fluidsOut: {}
+    },
+    // added by MAX-E1; the type's recipe count below is derived from this table, so a later addition is a deliberate edit here
+    slag_reduction: {
+      circuit: 5, duration: 200, eut: 1920,
+      itemsIn: { 'grindless:devolatilised_slag': [4, 10000], 'grindless:platinum_electrode': [1, 10] },
+      itemsOut: { 'grindless:ca_al_oxide_residue': 2, 'gtceu:silicon_dust': 1 },
+      fluidsOut: { 'gtceu:oxygen': 3000 }
     }
   }
 
@@ -297,7 +304,8 @@
 
     var problems = []
     var have = type ? S.server.getRecipeManager().getAllRecipesFor(type).size() : -1
-    if (have !== 5) problems.push('the type has ' + have + ' recipes, wanted 5')
+    var wantCount = Object.keys(WANT).length
+    if (have !== wantCount) problems.push('the type has ' + have + ' recipes, wanted ' + wantCount)
     Object.keys(WANT).forEach(function (name) {
       var w = WANT[name]
       var p = null
@@ -360,12 +368,11 @@
     check(SCOPE, 'kroll_stages', stageProblems.length === 0, parts.join(' + ') + ' = ' + sum + ' EU; titanium recipe ' + ti.duration + ' t x ' + ti.eut +
       ' EU/t = ' + ti.energy + ' EU' + (stageProblems.length > 0 ? ' problems=' + stageProblems.join(' ; ') : ''))
 
-    // a crafting-table recipe, not a GT one: its result comes from the vanilla recipe
+    // an assembler recipe: GTRecipe#getResultItem is empty, so its result is read through the item capability
     var craft = liveRecipe(RC.craftingRecipes.cell)
     var craftOut = ''
     if (craft !== null) {
-      var res = craft.getResultItem(S.server.registryAccess())
-      craftOut = String(res.getId()) + ' x' + res.getCount()
+      craftOut = itemSummary(liveItemsOut(craft))
     }
     check(SCOPE, 'crafting', craft !== null && craftOut === CELL_ID + ' x1', RC.craftingRecipes.cell + ' gives ' + (craftOut || 'nothing'))
   }

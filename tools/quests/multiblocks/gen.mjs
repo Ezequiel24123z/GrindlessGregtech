@@ -15,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { CHAPTER, gateTiers, ERA_FOLDERS, TIERS, OVERRIDES } from './mb-data.mjs';
+import { CHAPTER, gateTiers, ERA_FOLDERS, TIERS, OVERRIDES, OURS_UNDETECTED } from './mb-data.mjs';
 import { layoutBands, chapterSnbt, tierName, hid } from './mb-lib.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -242,6 +242,7 @@ async function main() {
   }
   const conflicts = [];
   const ours = oursFromScripts(STARTUP, machines.filter((m) => m.mb === 1).map((m) => m.id), langByFolder, undefined, conflicts);
+  for (const [id, folder] of Object.entries(OURS_UNDETECTED)) if (!ours.has(id)) ours.set(id, folder);
   for (const c of conflicts) console.log(`ownership conflict: ${c.id} in ${c.folders.join(', ')} -> ${c.chosen}`);
   const candidates = machines.filter((m) => m.mb === 1 && !hidden.has(m.id) && items.has(m.id)).map((m) => m.id);
   const tiers = gateTiers(implemented, (t) => fs.existsSync(path.join(REPO, 'tools', 'analysis', 'tiers', `${t}.json`)));

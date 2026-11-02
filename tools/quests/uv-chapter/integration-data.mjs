@@ -110,7 +110,7 @@ export const QUESTS = [
     deps: ['START'], x: 2, y: 2,
     teach: {
       for: 'Thorium assemblies feed the accelerator-driven reactor: about six an hour, four and a half on nitride. IV\'s stored thorium and its live output decide how many reactors run.',
-      needs: 'The reactor from the machines chapter, and assemblies from the fuel fabrication plant.',
+      needs: 'The reactor from further up, and assemblies from the fuel fabrication plant.',
       unlocks: 'The biggest steady power of the era, with fission products as the only waste.',
       automate: 'Spent assemblies go to the pyroprocessing cell and come back as fuel: close the loop before you scale.',
     },
@@ -136,7 +136,7 @@ export const QUESTS = [
     deps: ['START'], x: 6, y: 2,
     teach: {
       for: 'A &6Muon Fusion Cell&r burns liquid deuterium and tritium, and its lithium blanket breeds most of the tritium back. The rest is IV\'s tritium removal facility\'s work.',
-      needs: 'The cell from the machines chapter, deuterium and tritium by pipe, and a linac behind it.',
+      needs: 'The cell from further up, deuterium and tritium by pipe, and a linac behind it.',
       unlocks: 'Power with no fission and almost no waste. The cell is an extrapolation: real muons are lost too soon.',
       automate: 'Watch the make-up tritium: when the facility lags, the cell starves.',
     },
@@ -148,7 +148,7 @@ export const QUESTS = [
     key: 'I_LASER', kind: 'process', title: 'A Capsule a Shot', icon: 'gtceu:laser_fusion_chamber',
     deps: ['CAPS'], x: 8, y: 2,
     teach: {
-      for: 'The &6Laser Fusion Chamber&r burns one fuel capsule per shot, about 180 an hour, and helium-4 is the only exhaust.',
+      for: 'The &6Laser Fusion Chamber&r burns one fuel capsule per shot. Lead-boron capsules take 400 ticks, about 180 an hour; deuterium and helium-3 capsules take 600, about 120 an hour, and also give off hydrogen.',
       needs: 'Capsules from the lattice fab, and fibre laser modules that wear by about two percent a shot.',
       unlocks: 'The largest single plant of the era, and a reason to scale the lattice fab.',
       automate: 'The fab\'s throughput is the cap by design: store capsules in ME and keep spare modules.',

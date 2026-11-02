@@ -25,10 +25,10 @@
     var ENTRIES = [
         ['gtceu.multi_plasma_blender', 'Multi-Plasma Blender'],
         ['block.gtceu.multi_plasma_blender', 'Multi-Plasma Blender'],
-        ['grindless.machine.multi_plasma_blender.tooltip.0', '\u00a77Blends eight plasmas into horizon crystal slurry at Sgr A* orbit.'],
+        ['grindless.machine.multi_plasma_blender.tooltip.0', '\u00a77Blends eight plasmas into horizon crystal slurry.'],
         ['gtceu.horizon_crystal_furnace', 'Horizon Crystal Furnace'],
         ['block.gtceu.horizon_crystal_furnace', 'Horizon Crystal Furnace'],
-        ['grindless.machine.horizon_crystal_furnace.tooltip.0', '\u00a77Grows core and controller crystals in slurry at Sgr A* orbit.'],
+        ['grindless.machine.horizon_crystal_furnace.tooltip.0', '\u00a77Grows core and controller crystals in slurry.'],
         ['gtceu.recipe.grindless_multi_plasma_blender.horizon_crystal_slurry', T.blender],
         ['gtceu.recipe.grindless_horizon_crystal_furnace.core_crystal_boule', T.core],
         ['gtceu.recipe.grindless_horizon_crystal_furnace.controller_crystal_boule', T.controller],

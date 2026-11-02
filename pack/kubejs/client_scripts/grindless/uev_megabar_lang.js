@@ -17,7 +17,7 @@
             '§7Squeezes matter past a million atmospheres: superhydride and diamond.'],
 
         ['gtceu.recipe.grindless_megabar.superhydride',
-            'Fiction: real (La,Y)H10 exists only above ~100 GPa and falls apart on release; here the press quenches it so the ingot survives at one atmosphere. Anvil wear: 10 % per run. Hydrogen is voidable.'],
+            'Fiction: real (La,Y)H10 exists only above ~100 GPa and falls apart on release; here the press quenches it so the ingot survives. Anvil wear: 10 % per run. Hydrogen is voidable.'],
         ['gtceu.recipe.grindless_megabar.nanotwinned_diamond',
             'Onion carbon pressed at high temperature becomes nanotwinned diamond, harder than any single crystal (Huang et al., Nature 2014).']
     ]

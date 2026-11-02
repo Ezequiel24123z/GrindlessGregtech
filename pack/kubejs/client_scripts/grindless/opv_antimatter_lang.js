@@ -132,7 +132,7 @@
         ['item.grindless.gasb_kerf_dust', 'GaSb Kerf Dust'],
         ['tooltip.grindless.gasb_kerf_dust.0', 'The powder the wire saw leaves from a boule.'],
         ['tooltip.grindless.gasb_kerf_dust.1', 'A centrifuge gives back gallium and antimony.'],
-        ['item.grindless.ingaassb_epi_wafer', 'InGaAsSb Epi Wafer'],
+        ['item.grindless.ingaassb_epi_wafer', 'InGaAsSb TPV Epi Wafer'],
         ['tooltip.grindless.ingaassb_epi_wafer.0', 'A narrow-bandgap absorber grown lattice-matched on GaSb.'],
         ['tooltip.grindless.ingaassb_epi_wafer.1', 'The electron beam brazes it to a copper spreader into the TPV panel.'],
 

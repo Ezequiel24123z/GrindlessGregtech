@@ -19,7 +19,7 @@
         ['la_bfo_target', 'La-BFO Target', 'La-doped bismuth ferrite, a multiferroic.', 'Used up in the oxide PLD chamber.'],
         ['cofeb_ingot', 'CoFeB Ingot', 'A glassy magnetic alloy, melted levitated.', 'Ground to powder for targets.'],
         ['heusler_ingot', 'Heusler Ingot', 'Co2MnSi melted levitated.', 'Ground to powder for targets.'],
-        ['terfenol_d_ingot', 'Terfenol-D Ingot', 'The most magnetostrictive alloy known.', 'Grown into a rod in a Bridgman furnace.'],
+        ['terfenol_d_ingot', 'Terfenol-D Bridgman Ingot', 'The most magnetostrictive alloy known.', 'Grown into a rod in a Bridgman furnace.'],
         ['ni_mn_ga_ingot', 'Ni-Mn-Ga Ingot', 'A shape-memory alloy with a magnetic trigger.', 'Grown into a crystal in a Bridgman furnace.'],
         ['ta_foil', 'Ta Foil', 'Tantalum foil for spin-orbit torque layers.', 'Rolled from a Ta ingot.'],
         ['pt_sheet', 'Pt Sheet', 'A thin platinum sheet for antennas and crucibles.', 'The offcuts go back to the platinum plant.'],
