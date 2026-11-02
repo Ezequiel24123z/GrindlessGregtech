@@ -458,8 +458,8 @@ export const QUESTS = [
     desc: [
       "Plain silver dust no longer makes a plate.",
     ],
-    tasks: [{ type: "item", id: "8B1D3F5A7C9E2046", item: "gtceu:silver_nitrate_dust" }],
-    rewards: [{ type: "xp", id: "9C2E4A6B8D1F3057", xp: 25 }],
+    tasks: [{ type: "item", id: "465D741C205950BD", item: "gtceu:silver_nitrate_dust" }],
+    rewards: [{ type: "xp", id: "2D0BF2B4848716C0", xp: 25 }],
   },
   {
     key: "LV_SILVER_CHLORIDE", id: "6B8D1F3A5C7E4092", title: "Silver Chloride", icon: "gtceu:silver_chloride_dust", kind: "process", deps: ["LV_SILVER_NITRATE"], x: 14, y: -6,
@@ -557,7 +557,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "6A1E3C0D9B2F4E58", xp: 35 }],
   },
   {
-    key: "LV_SODIUM_PERSULFATE", id: "8D1F3A5C7E9B2046", title: "Sodium Persulfate", icon: "gtceu:sodium_persulfate_bucket", kind: "process", deps: ["LV_SULFIDE_ROASTER"], x: 14, y: 4.5,
+    key: "LV_SODIUM_PERSULFATE", id: "427041EFB45AE2E6", title: "Sodium Persulfate", icon: "gtceu:sodium_persulfate_bucket", kind: "process", deps: ["LV_SULFIDE_ROASTER"], x: 14, y: 4.5,
     teach: {
       for: "Sulfuric acid makes bisulfate, and electrolysis turns that into the etching bath for circuit boards.",
       needs: "Sulfuric acid, salt, a reactor and an electrolyzer.",
@@ -567,7 +567,7 @@ export const QUESTS = [
     desc: [
       "Boards are etched in it, with silver foil for the traces.",
     ],
-    tasks: [{ type: "item", id: "9E2A4C6B8D1F3057", item: "gtceu:sodium_persulfate_bucket" }],
+    tasks: [{ type: "item", id: "286C9327A8DABC2C", item: "gtceu:sodium_persulfate_bucket" }],
     rewards: [{ type: "xp", id: "1F3B5D7A9C2E4068", xp: 25 }],
   },
   {

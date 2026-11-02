@@ -139,10 +139,10 @@ export const QUESTS = [
       "Store it only in acid-proof tanks.",
     ],
     tasks: [{ type: "item", id: "7D9F2B4A6C8E1035", item: "gtceu:aqua_regia_bucket" }],
-    rewards: [{ type: "xp", id: "8E1A3C5B7D9F2046", xp: 30 }],
+    rewards: [{ type: "xp", id: "7ED4D0785CE4164B", xp: 30 }],
   },
   {
-    key: "MV_PLATINUM_SALT", id: "9F2B4D6A8C1E3057", title: "Platinum Salt", icon: "gtceu:platinum_salt_dust", kind: "process", deps: ["MV_AQUA_REGIA"], x: 14, y: -4.5,
+    key: "MV_PLATINUM_SALT", id: "4D9BFAC8F46827EE", title: "Platinum Salt", icon: "gtceu:platinum_salt_dust", kind: "process", deps: ["MV_AQUA_REGIA"], x: 14, y: -4.5,
     teach: {
       for: "Ammonium chloride precipitates the platinum out of the solution as a salt.",
       needs: "The dissolved platinum and ammonium chloride, in a reactor.",
@@ -197,7 +197,7 @@ export const QUESTS = [
     desc: [
       "Silicon dust no longer goes into a boule.",
     ],
-    tasks: [{ type: "item", id: "4D6F8B1A3C5E7092", item: "grindless:polysilicon" }],
+    tasks: [{ type: "item", id: "55DF3631A3A38AF7", item: "grindless:polysilicon" }],
     rewards: [{ type: "xp", id: "5E7A9C1B3D2F4068", xp: 35 }],
   },
   {
@@ -322,7 +322,7 @@ export const QUESTS = [
     rewards: [{ type: "xp", id: "609D15E06779863F", xp: 30 }],
   },
   {
-    key: "MV_DICHLOROETHANE", id: "6F8B1D3A5C7E2094", title: "Dichloroethane", icon: "gtceu:dichloroethane_bucket", kind: "process", deps: ["MV_BRINE_AND_CHLORINE"], x: 12, y: 3,
+    key: "MV_DICHLOROETHANE", id: "75D2882DC43B48B4", title: "Dichloroethane", icon: "gtceu:dichloroethane_bucket", kind: "process", deps: ["MV_BRINE_AND_CHLORINE"], x: 12, y: 3,
     teach: {
       for: "Chlorine and ethylene combine into 1,2-dichloroethane, the first half of PVC.",
       needs: "Chlorine from the brine line and ethylene from the biorefinery.",
@@ -333,10 +333,10 @@ export const QUESTS = [
       "Chlorine no longer goes straight into vinyl chloride.",
     ],
     tasks: [{ type: "item", id: "7A9C1E3B5D2F4086", item: "gtceu:dichloroethane_bucket" }],
-    rewards: [{ type: "xp", id: "8B1D3F5A7C9E2064", xp: 30 }],
+    rewards: [{ type: "xp", id: "2A91E82D8F25EB6C", xp: 30 }],
   },
   {
-    key: "MV_VINYL_CHLORIDE", id: "9C2E4A6B8D1F3075", title: "Vinyl Chloride", icon: "gtceu:lv_chemical_reactor", kind: "process", deps: ["MV_DICHLOROETHANE"], x: 12, y: 1.5,
+    key: "MV_VINYL_CHLORIDE", id: "412605CA790945C0", title: "Vinyl Chloride", icon: "gtceu:lv_chemical_reactor", kind: "process", deps: ["MV_DICHLOROETHANE"], x: 12, y: 1.5,
     teach: {
       for: "Heat cracks dichloroethane into vinyl chloride and hydrogen chloride.",
       needs: "Dichloroethane and a heated reactor.",
@@ -346,7 +346,7 @@ export const QUESTS = [
     desc: [
       "A gas, so keep it piped and tanked.",
     ],
-    tasks: [{ type: "checkmark", id: "1D3F5B7A9C2E4086" }],
+    tasks: [{ type: "checkmark", id: "78C3E2C622C30C78" }],
     rewards: [{ type: "xp", id: "2E4A6C8B1D3F5097", xp: 30 }],
   },
   {

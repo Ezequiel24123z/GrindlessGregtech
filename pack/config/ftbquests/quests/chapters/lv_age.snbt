@@ -660,10 +660,10 @@
 			]
 			icon: "gtceu:silver_nitrate_dust"
 			id: "7A9C1E3B5D4F2068"
-			rewards: [{ id: "9C2E4A6B8D1F3057", type: "xp", xp: 25 }]
+			rewards: [{ id: "2D0BF2B4848716C0", type: "xp", xp: 25 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "8B1D3F5A7C9E2046", item: "gtceu:silver_nitrate_dust", type: "item" }]
+			tasks: [{ id: "465D741C205950BD", item: "gtceu:silver_nitrate_dust", type: "item" }]
 			title: "Silver Nitrate"
 			x: 12.0d
 			y: -6.0d
@@ -791,11 +791,11 @@
 				"Boards are etched in it, with silver foil for the traces."
 			]
 			icon: "gtceu:sodium_persulfate_bucket"
-			id: "8D1F3A5C7E9B2046"
+			id: "427041EFB45AE2E6"
 			rewards: [{ id: "1F3B5D7A9C2E4068", type: "xp", xp: 25 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "9E2A4C6B8D1F3057", item: "gtceu:sodium_persulfate_bucket", type: "item" }]
+			tasks: [{ id: "286C9327A8DABC2C", item: "gtceu:sodium_persulfate_bucket", type: "item" }]
 			title: "Sodium Persulfate"
 			x: 14.0d
 			y: 4.5d

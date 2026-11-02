@@ -187,7 +187,7 @@
 			]
 			icon: "gtceu:aqua_regia_bucket"
 			id: "6C8E1A3B5D7F2094"
-			rewards: [{ id: "8E1A3C5B7D9F2046", type: "xp", xp: 30 }]
+			rewards: [{ id: "7ED4D0785CE4164B", type: "xp", xp: 30 }]
 			shape: "hexagon"
 			size: 1.0d
 			tasks: [{ id: "7D9F2B4A6C8E1035", item: "gtceu:aqua_regia_bucket", type: "item" }]
@@ -202,7 +202,7 @@
 				"The slag left over is kept for the HV platinum chapter."
 			]
 			icon: "gtceu:platinum_salt_dust"
-			id: "9F2B4D6A8C1E3057"
+			id: "4D9BFAC8F46827EE"
 			rewards: [{ id: "2B4D6F8A1C3E5079", type: "xp", xp: 30 }]
 			shape: "hexagon"
 			size: 1.0d
@@ -212,7 +212,7 @@
 			y: -4.5d
 		}
 		{
-			dependencies: ["9F2B4D6A8C1E3057"]
+			dependencies: ["4D9BFAC8F46827EE"]
 			description: [
 				"The salts are reduced to metal: platinum by heat, palladium from its ammine salt with formate. Platinum salt, the palladium liquor and formic acid or formate. Platinum catalysts for later chemistry. Salts by bus, reductant by pipe, metal dust out by bus."
 				"Nothing in this line skips a step."
@@ -266,7 +266,7 @@
 			rewards: [{ id: "5E7A9C1B3D2F4068", type: "xp", xp: 35 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "4D6F8B1A3C5E7092", item: "grindless:polysilicon", type: "item" }]
+			tasks: [{ id: "55DF3631A3A38AF7", item: "grindless:polysilicon", type: "item" }]
 			title: "Siemens Polysilicon"
 			x: 10.0d
 			y: 1.5d
@@ -434,8 +434,8 @@
 				"Chlorine no longer goes straight into vinyl chloride."
 			]
 			icon: "gtceu:dichloroethane_bucket"
-			id: "6F8B1D3A5C7E2094"
-			rewards: [{ id: "8B1D3F5A7C9E2064", type: "xp", xp: 30 }]
+			id: "75D2882DC43B48B4"
+			rewards: [{ id: "2A91E82D8F25EB6C", type: "xp", xp: 30 }]
 			shape: "hexagon"
 			size: 1.0d
 			tasks: [{ id: "7A9C1E3B5D2F4086", item: "gtceu:dichloroethane_bucket", type: "item" }]
@@ -444,17 +444,17 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["6F8B1D3A5C7E2094"]
+			dependencies: ["75D2882DC43B48B4"]
 			description: [
 				"Heat cracks dichloroethane into vinyl chloride and hydrogen chloride. Dichloroethane and a heated reactor. PVC, and the hydrogen chloride goes back to the silicon line. Return the acid by pipe to the polysilicon plant."
 				"A gas, so keep it piped and tanked."
 			]
 			icon: "gtceu:lv_chemical_reactor"
-			id: "9C2E4A6B8D1F3075"
+			id: "412605CA790945C0"
 			rewards: [{ id: "2E4A6C8B1D3F5097", type: "xp", xp: 30 }]
 			shape: "hexagon"
 			size: 1.0d
-			tasks: [{ id: "1D3F5B7A9C2E4086", type: "checkmark" }]
+			tasks: [{ id: "78C3E2C622C30C78", type: "checkmark" }]
 			title: "Vinyl Chloride"
 			x: 12.0d
 			y: 1.5d
@@ -471,7 +471,7 @@
 			y: 4.5d
 		}
 		{
-			dependencies: ["0D69D5BBC371A5B7", "9C2E4A6B8D1F3075"]
+			dependencies: ["0D69D5BBC371A5B7", "412605CA790945C0"]
 			description: ["Vinyl chloride polymerizes into PVC. The hazmat suit is mostly PVC."]
 			icon: "gtceu:mv_mixer"
 			id: "0F6966AED46B5795"
