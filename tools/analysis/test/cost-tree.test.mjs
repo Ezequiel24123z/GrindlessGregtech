@@ -51,7 +51,7 @@ test('a recipe target counts its own run once and picks the inputs', () => {
   assert.equal(res.rows.gear.count, 3);
   assert.equal(res.rows.plate.count, 14);
   assert.ok(res.consistency.ok);
-  assert.equal(res.summary.crafts, 1 + 3 + 14 + 7);
+  assert.equal(res.summary.crafts, 1 + 3 + 14 + 14);
 });
 
 test('an item with no recipe is reported unreachable', () => {

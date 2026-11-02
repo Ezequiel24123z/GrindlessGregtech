@@ -22,7 +22,7 @@ export const HYPERSTARGATE_PRESET = {
   targets: [
     'Build=gtceu:hyperstargate',
     'Capacitor bank=gtceu:horizon_capacitor_bank',
-    'One dial=recipe:grindless:hyperstargate_dial',
+    'One dial=recipe:grindless:hyperstargate_dial/hyperstargate_dial',
   ],
   gridKeys: [
     'grindless:hyperstargate_ring_block', 'grindless:hyperstargate_chevron_upgrade', 'grindless:hyperstargate_chevron_block',

@@ -47,6 +47,7 @@ function describeOptions(cfg) {
     `Base resources: ${list(b.items)} (items); unproduced items ${list(b.unproducedItems)}; unproduced fluids ${list(b.unproducedFluids)}.`,
     `Weights: ${(b.weights || []).map((w) => `${w.match} = ${w.weight}`).join('; ') || 'all 1'}. Free resources (weight 0): ${list(b.free)}.`,
     'The tree follows the solver: ONE recipe per item (the cheapest), tag inputs take the cheapest alternative, non-consumed inputs and circuits cost nothing.',
+    'Creative stand-ins (<code>grindless:creative_*</code>, <code>gtceu:creative_*</code>) are free base resources: counted in the creative total, priced at 0.',
     'The dial branch counts one dial run and its inputs; the recharge loop (spent dial charge) is not included.',
   ];
 }
@@ -60,6 +61,9 @@ function main() {
   if (!specs.length) throw new Error('give --preset or at least one --target');
 
   const cfg = JSON.parse(fs.readFileSync(path.join(here, 'cost_matrix.json'), 'utf8'));
+  // Creative stand-ins have no recipe by design: they are base resources here, free (a count, not a cost), so the recipes that take them price.
+  cfg.base.items = [...(cfg.base.items || []), 'grindless:creative_*', 'gtceu:creative_*'];
+  cfg.base.free = [...(cfg.base.free || []), 'grindless:creative_*', 'gtceu:creative_*'];
   const dump = loadDump(args.dump, { log: null });
   const { recipes, model, weight } = priceDump(dump, cfg);
   const ctx = loadEraContext(dump);
