@@ -251,7 +251,14 @@
       { planet: 'cas_a', seed: 'grindless:cnt_whipple_shield', name: 'cas_a_entangled_singularity' },
       // OpV (integrator): the SGR and Terzan 5 platforms; each seed is a product made only at that place (opv.md "Places and site rules")
       { planet: 'sgr1806', seed: 'grindless:field_frozen_plate', name: 'sgr1806_entangled_singularity' },
-      { planet: 'terzan5', seed: 'grindless:cluster_sinter_casing', name: 'terzan5_entangled_singularity' }
+      { planet: 'terzan5', seed: 'grindless:cluster_sinter_casing', name: 'terzan5_entangled_singularity' },
+      // AF-X: the last six places (M1-03); each seed is a product of that place or its line, distinct from every jump and gate input
+      { planet: 'sgra', seed: 'grindless:reconnection_plasmoid', name: 'sgra_entangled_singularity' },
+      { planet: 'nsc', seed: 'grindless:metal_rich_bloom', name: 'nsc_entangled_singularity' },
+      { planet: 'tarantula', seed: 'grindless:ni56_slug', name: 'tarantula_entangled_singularity' },
+      { planet: 'magellanic_stream', seed: 'grindless:scoop_coil', name: 'magellanic_stream_entangled_singularity' },
+      { planet: 'm31', seed: 'grindless:p_nuclide_concentrate', name: 'm31_entangled_singularity' },
+      { planet: 'local_group_filament', seed: 'grindless:void_grown_diamond', name: 'local_group_filament_entangled_singularity' }
     ]
     uev.forEach(function (p) {
       var d = table.planets[p.planet]

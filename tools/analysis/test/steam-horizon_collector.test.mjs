@@ -91,13 +91,13 @@ test('the duration of every row is 160 ticks and the recipe type has 4 output sl
   assert.match(start, /\.setMaxIOSize\(2, 4, 0, 0\)/);
 });
 
-test('no recipe outputs the machine or the shard', () => {
+test('no recipe outputs the machine; only the MAX mirror-shell recipe outputs the shard (AF-X)', () => {
   for (const id of [MACHINE, SHARD]) {
     const makers = recipes.filter((r) => {
       const out = JSON.stringify([r.j.outputs, r.j.result, r.j.results, r.j.output]);
       return out.includes(`"${id}"`);
     });
-    assert.deepEqual(makers.map((r) => r.i), [], id);
+    assert.deepEqual(makers.map((r) => r.i), id === SHARD ? ['grindless:black_hole_bomb/horizon_shard'] : [], id);
   }
 });
 
