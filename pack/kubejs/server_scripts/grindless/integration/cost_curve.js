@@ -474,6 +474,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     var started = Date.now()
     var tables = []
     ERAS.forEach(function (era) {
@@ -514,6 +515,9 @@
       S.selected.added + ' added, changed ' + S.changed.original + ' + ' + S.changed.added + ' (' + S.items + ' item and ' + S.fluids +
       ' fluid inputs), removed ' + S.removed.original + ' + ' + S.removed.added + ', errors ' + S.errors + ', ' + S.ms + ' ms')
     if (S.firstError) console.error(LOG + 'first error: ' + S.firstError)
+    } catch (e) {
+      console.error(LOG + 'recipes handler failed: ' + e)
+    }
   })
 
   G.costCurve = {

@@ -263,6 +263,7 @@
 
   // an uncaught error here would stop the recipe handlers of every script that loads after this one
   ServerEvents.recipes(function (event) {
+    try {
     var done = []
     ;['tank', 'motor', 'template'].forEach(function (key) {
       try {
@@ -290,5 +291,8 @@
     TN.done = done
     TN.pairs = pairs
     console.info(LOG + 'travel and network: ' + done.join(', ') + '; Earth pairs: ' + pairs.join(', '))
+    } catch (e) {
+      console.error('[grindless/iv/travel_network] recipes failed: ' + e)
+    }
   })
 })()

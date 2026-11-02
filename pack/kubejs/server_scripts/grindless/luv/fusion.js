@@ -40,6 +40,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     var report = { removed: [], rebuilt: [], unaudited: [], missing: [], errors: [] }
     try {
       var listed = {}
@@ -87,5 +88,8 @@
     report.missing.forEach(function (s) { console.warn(LOG + s + ' is in the audit but not in the recipe manager') })
     report.errors.forEach(function (s) { console.error(LOG + s) })
     console.info(LOG + 'cut ' + report.removed.length + ', moved to the Mk2 ' + report.rebuilt.length + ', kept ' + F.kept.length)
+    } catch (e) {
+      console.error('[grindless/luv/fusion] recipes failed: ' + e)
+    }
   })
 })()

@@ -87,6 +87,7 @@
 
   ServerEvents.recipes(function (event) {
     try {
+    try {
       var m1 = missingOf(C1.items.concat(C1.outs), [])
       if (m1.length > 0) {
         skip(C1.name, m1)
@@ -158,5 +159,8 @@
       console.error(LOG + 'reclamation controller failed: ' + e)
     }
     console.info(LOG + 'reclamation: ' + MR.recipes.length + ' recipes; skipped ' + MR.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/reclamation] recipes failed: ' + e)
+    }
   })
 })()

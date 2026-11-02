@@ -174,6 +174,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     CL.retiered = []
     CL.skipped = []
     RETIER.forEach(function (plan) {
@@ -198,6 +199,9 @@
     if (whyMelt !== null) {
       CL.skipped.push({ from: MELT.from, reason: whyMelt })
       console.error(LOG + 'circuit assembly line: no ' + MELT.molten + ' route, so the line cannot be built: ' + whyMelt)
+    }
+    } catch (e) {
+      console.error('[grindless/luv/circuit_line] recipes failed: ' + e)
     }
   })
 })()

@@ -88,6 +88,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     ROWS.forEach(function (r) {
       try {
         var missing = missingOf(r.items.concat(r.outs), r.fluid === null ? [] : [r.fluid])
@@ -145,5 +146,8 @@
       console.error(LOG + 'rydberg controller failed: ' + e)
     }
     console.info(LOG + 'rydberg: ' + MR.recipes.length + ' recipes; skipped ' + MR.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/rydberg] recipes failed: ' + e)
+    }
   })
 })()

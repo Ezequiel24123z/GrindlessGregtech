@@ -102,6 +102,7 @@
   function fluidIds(list) { return list.map(function (f) { return f[0] }) }
 
   ServerEvents.recipes(function (event) {
+    try {
     ROWS.forEach(function (r) {
       try {
         var missing = missingOf(r.items.concat(r.kept || [], r.outs), fluidIds(r.fluids).concat(fluidIds(r.fluidOuts)))
@@ -163,5 +164,8 @@
       }
     })
     console.info(LOG + 'condensate: ' + MC.recipes.length + ' recipes; skipped ' + MC.skipped.length)
+    } catch (e) {
+      console.error('[grindless/maxplus/condensate] recipes failed: ' + e)
+    }
   })
 })()

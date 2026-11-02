@@ -527,6 +527,7 @@
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
+    try {
     var started = Date.now()
     var sets = null
     try {
@@ -552,5 +553,8 @@
       console.error(LOG + 'combined-cycle plant and hot strip mill controller recipes failed: ' + e3)
     }
     console.info(LOG + 'combined-cycle and hot strip mill recipes done in ' + (Date.now() - started) + ' ms')
+    } catch (e) {
+      console.error('[grindless/ev/combined_cycle_and_hot_mill] recipes failed: ' + e)
+    }
   })
 })()

@@ -42,6 +42,7 @@
   ML.rows = ROWS
 
   ServerEvents.recipes(function (event) {
+    try {
     var vaMax = Number(GTValues.VA[MAXT])
     ROWS.forEach(function (r) {
       var strip = function (s) { return s.replace(/^\d+x /, '') }
@@ -65,5 +66,8 @@
       }
     })
     console.info(LOG + ML.recipes.length + ' recipes; skipped ' + ML.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/components_late] recipes failed: ' + e)
+    }
   })
 })()

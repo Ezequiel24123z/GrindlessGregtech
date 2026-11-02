@@ -81,6 +81,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     ROWS.forEach(function (r) {
       try {
         var missing = missingOf(r.items.concat(r.outs.map(function (o) { return o[0] })),
@@ -151,5 +152,8 @@
       console.error(LOG + 'injector controller failed: ' + e)
     }
     console.info(LOG + 'injector: ' + MD.recipes.length + ' recipes; skipped ' + MD.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/injector] recipes failed: ' + e)
+    }
   })
 })()

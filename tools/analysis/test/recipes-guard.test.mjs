@@ -33,27 +33,20 @@ test('strict rule: a throwing call outside the try leaves the handler unguarded,
   assert.deepEqual(unguardedRecipeHandlers('ServerEvents.recipes(function (event) {\n  try { a(event) } catch (e) { x() }\n  b(event)\n})'), [], 'the lenient rule check-static runs still accepts it');
 });
 
-// The pack's partial handlers today (strict rule): pack/ is not this package's to edit, so the count is a ceiling that only goes down.
-// When it reaches 0, switch check-static to the strict rule and delete this ceiling.
-const KNOWN_PARTIAL_HANDLERS = 50;
-
-test('no recipe handler of the pack is unguarded; partial ones stay at or under the known ceiling', () => {
+test('no recipe handler of the pack has a call outside its try', () => {
   const bad = [];
-  const partial = [];
   const walk = (d) => {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {
       const p = path.join(d, e.name);
       if (e.isDirectory()) walk(p);
       else if (e.name.endsWith('.js')) {
         const src = fs.readFileSync(p, 'utf8');
-        if (unguardedRecipeHandlers(src).length) bad.push(path.relative(repo, p));
-        for (const h of unguardedRecipeHandlers(src, { strict: true })) partial.push(`${path.relative(repo, p)}:${h.line}`);
+        for (const h of unguardedRecipeHandlers(src, { strict: true })) bad.push(`${path.relative(repo, p)}:${h.line}`);
       }
     }
   };
   walk(path.join(repo, 'pack/kubejs/server_scripts'));
   assert.deepEqual(bad, []);
-  assert.ok(partial.length <= KNOWN_PARTIAL_HANDLERS, `${partial.length} handlers with a call outside their try (ceiling ${KNOWN_PARTIAL_HANDLERS}):\n${partial.join('\n')}`);
 });
 
 test('the wrapper logs and counts a throwing handler and the next handler still runs', () => {

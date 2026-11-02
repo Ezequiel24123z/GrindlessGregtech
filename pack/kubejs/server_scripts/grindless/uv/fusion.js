@@ -53,6 +53,7 @@
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
+    try {
     var report = { audited: [], unaudited: [], missing: [], luvCutsLive: [], errors: [] }
     try {
       report = audit(event)
@@ -70,6 +71,9 @@
     report.missing.forEach(function (s) { console.warn(LOG + s + ' is in the audit but not in the recipe manager') })
     report.errors.forEach(function (s) { console.error(LOG + s) })
     console.info(LOG + 'audited ' + report.audited.length + ', unaudited ' + report.unaudited.length + ', missing ' + report.missing.length)
+    } catch (e) {
+      console.error(LOG + 'audit handler failed: ' + e)
+    }
   })
 
   // ---------------------------------------------------------------- the laser fusion chamber (machine 4)
@@ -145,9 +149,12 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     try { F.chamber = addChamber(event) } catch (e) { F.chamber = []; console.error(LOG + 'laser fusion chamber recipes failed: ' + e) }
     try { addCrafting(event) } catch (e2) { console.error(LOG + 'laser fusion chamber crafting failed: ' + e2) }
     try { F.chemistry = addDecaborane(event) } catch (e3) { F.chemistry = []; console.error(LOG + 'decaborane recipe failed: ' + e3) }
-    console.info(LOG + 'chamber recipes ' + F.chamber.length + ', decaborane recipes ' + F.chemistry.length)
+    } catch (e) {
+      console.error(LOG + 'laser fusion chamber handler failed: ' + e)
+    }
   })
 })()

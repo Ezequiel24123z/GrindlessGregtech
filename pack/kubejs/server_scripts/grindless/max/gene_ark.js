@@ -60,6 +60,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     ROWS.forEach(function (r) {
       try {
         var missing = missingOf(r.items.concat(r.outs, r.kept || []), r.fluid === null ? [] : [r.fluid])
@@ -100,5 +101,8 @@
       console.error(LOG + 'gene ark controller failed: ' + e)
     }
     console.info(LOG + 'gene ark: ' + MG.recipes.length + ' recipes; skipped ' + MG.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/gene_ark] recipes failed: ' + e)
+    }
   })
 })()

@@ -69,6 +69,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     ROWS.forEach(function (r) {
       try {
         var missing = missingOf(r.items.concat(r.outs), r.fluids.map(function (f) { return f[0] }))
@@ -128,5 +129,8 @@
       console.error(LOG + 'flux clamp controller failed: ' + e)
     }
     console.info(LOG + 'flux clamp: ' + MD.recipes.length + ' recipes; skipped ' + MD.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/flux_clamp] recipes failed: ' + e)
+    }
   })
 })()

@@ -154,6 +154,7 @@
 
   // an uncaught error here would stop the recipe handlers of every script that loads after this one
   ServerEvents.recipes(function (event) {
+    try {
     var done = []
     try {
       if (addMotor(event)) done.push('basic rocket motor (assembler + static fire)')
@@ -171,5 +172,8 @@
       console.error(LOG + 'ID chip recipe failed: ' + e)
     }
     console.info(LOG + 'GCYR parts on the road to the first rocket: ' + (done.length > 0 ? done.join(', ') : 'none'))
+    } catch (e) {
+      console.error('[grindless/integration/gcyr_launch_road] recipes failed: ' + e)
+    }
   })
 })()

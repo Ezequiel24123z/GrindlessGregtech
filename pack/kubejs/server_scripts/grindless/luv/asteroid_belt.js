@@ -264,6 +264,7 @@
   }
   // one thrown error would stop the recipe handlers of every script that loads after this one
   ServerEvents.recipes(function (event) {
+    try {
     var made = []
     var steps = [['tetrataenite cut', cutTetrataenite], ['drilling', addDrilling], ['samples', addSamples], ['processor', addProcessor], ['miner', addMiner],
       ['parts', addParts], ['seed', addSeed], ['controllers', addControllers]]
@@ -276,6 +277,9 @@
     })
     B.made = made
     console.info(LOG + 'asteroid belt: ' + made.length + ' recipes')
+    } catch (e) {
+      console.error('[grindless/luv/asteroid_belt] recipes failed: ' + e)
+    }
   })
 
   // ---------------------------------------------------------------- world generation

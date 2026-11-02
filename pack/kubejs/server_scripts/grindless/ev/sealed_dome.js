@@ -66,6 +66,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     // ---- the sealed recipes
     var missingFluids = [WATER, CO2, O2].filter(function (id) { return !Fluid.exists(id) })
     if (missingFluids.length > 0) {
@@ -120,6 +121,9 @@
         .inputFluids(Fluid.of('gtceu:distilled_water', 2000))
         .itemOutputs('gtceu:sealed_dome')
         .EUt(120).duration(400)
+    }
+    } catch (e) {
+      console.error('[grindless/ev/sealed_dome] recipes failed: ' + e)
     }
   })
 })()

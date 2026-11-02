@@ -78,10 +78,11 @@
   })
 
   ServerEvents.recipes(function (event) {
+    try {
     var table = readTable()
     var stats = { removed: 0, gt: 0, custom: 0, skipped: 0 }
 
-    function remove(id) {
+    var remove = function (id) {
       event.remove({ id: id })
       stats.removed++
     }
@@ -132,5 +133,8 @@
     })
 
     console.info(LOG + 'removed=' + stats.removed + ' gtceu=' + stats.gt + ' custom=' + stats.custom + ' skipped=' + stats.skipped)
+    } catch (e) {
+      console.error('[grindless/integration/ae2] recipes failed: ' + e)
+    }
   })
 })()

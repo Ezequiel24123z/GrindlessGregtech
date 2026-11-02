@@ -76,6 +76,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     ISO.recipes = []
     ISO.skipped = []
     try {
@@ -99,5 +100,8 @@
       console.error(LOG + 'isotopes failed: ' + e)
     }
     console.info(LOG + 'isotopes: ' + ISO.recipes.length + ' recipes; skipped ' + ISO.skipped.length)
+    } catch (e) {
+      console.error('[grindless/uiv/isotopes] recipes failed: ' + e)
+    }
   })
 })()

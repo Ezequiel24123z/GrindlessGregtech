@@ -228,6 +228,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     var t = G.creatureTable()
     G.checkCreatureTable().forEach(function (problem) {
       console.error('[grindless/creatures] table: ' + problem)
@@ -278,5 +279,8 @@
 
     console.info('[grindless/creatures] recipes: creature_simulation=' + counts.simulation + ' prints=' + counts.print +
       ' blank=' + counts.blank + ' machines=' + counts.machines)
+    } catch (e) {
+      console.error('[grindless/lv/creatures] recipes failed: ' + e)
+    }
   })
 })()

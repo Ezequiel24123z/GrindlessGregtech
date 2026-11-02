@@ -53,6 +53,7 @@
   })
 
   ServerEvents.recipes(function (event) {
+    try {
     var added = 0
     RECIPES.forEach(function (r) {
       try {
@@ -73,5 +74,8 @@
       }
     })
     console.info('[grindless/mv] universal factories: ' + added + ' controller recipes added')
+    } catch (e) {
+      console.error('[grindless/mv/leisure_factories] recipes failed: ' + e)
+    }
   })
 })()

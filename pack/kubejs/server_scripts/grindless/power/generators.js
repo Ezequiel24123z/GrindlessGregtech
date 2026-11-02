@@ -288,6 +288,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     var report = { doubled: [], skipped: [], failed: [], perType: {} }
     var site = { airDimensions: SITE.airDimensions, conditioned: 0, perType: {}, anywhere: [], kept: [], failed: [], newFuels: [] }
 
@@ -373,6 +374,9 @@
       '; burn anywhere: ' + site.anywhere.join(', ') + (site.kept.length > 0 ? '; kept with their own conditions: ' + site.kept.join(', ') : '') +
       '; new fuels: ' + site.newFuels.map(function (f) { return f.id + ' (' + f.amount + ' mB, ' + f.duration + ' t, ' + f.eut + ' EU/t)' }).join(', '))
     if (site.failed.length > 0) console.error(LOG + 'site rules not applied to: ' + site.failed.join('; '))
+    } catch (e) {
+      console.error('[grindless/power/generators] recipes failed: ' + e)
+    }
   })
 })()
 

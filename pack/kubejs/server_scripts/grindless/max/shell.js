@@ -67,6 +67,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     SHELL.forEach(function (r) {
       try {
         var chanced = r.chanced || []
@@ -116,5 +117,8 @@
       console.error(LOG + 'shell controller failed: ' + e)
     }
     console.info(LOG + 'shell: ' + MS.recipes.length + ' recipes; skipped ' + MS.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/shell] recipes failed: ' + e)
+    }
   })
 })()
