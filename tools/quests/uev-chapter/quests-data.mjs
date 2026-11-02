@@ -101,7 +101,7 @@ export const QUESTS = [
     key: 'ALPHA', kind: 'step', title: 'First Light of Another Star', icon: 'gtceu:uev_machine_casing',
     deps: ['LVL9'], x: 8, y: -2,
     desc: [
-      'Park in orbit round &6Alpha Centauri&r A and B and build station nine. Every machine of the star lives in that orbit.',
+      'Park in orbit round &6Alpha Centauri&r A and B and build station nine. The nebula collector and the pulsar timing survey need that orbit.',
     ],
     tasks: [dim('grindless:alpha_centauri_orbit')],
     rewards: [xp(200)],
@@ -119,7 +119,7 @@ export const QUESTS = [
     key: 'A_GAS', kind: 'reading', title: 'Thin Gas, Old Dust', icon: 'gtceu:nebula_collector',
     deps: ['ALPHA'], x: 10, y: -2,
     desc: [
-      'The orbit holds gas and dust between the stars, and the collectors and the dust lab work it. Real interstellar gas is a few atoms in a cubic metre; the yield here is a game number.',
+      'The orbit holds gas and dust between the stars. The collector works the gas and the dust lab studies the grains. Real interstellar gas is a few atoms in a cubic metre; the yield here is a game number.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -157,7 +157,7 @@ export const QUESTS = [
     key: 'B_CORE', kind: 'step', title: 'An Iron World', icon: 'grindless:barnard_core_rock',
     deps: ['BARN'], x: 10, y: 2,
     desc: [
-      'Barnard b is mostly iron, with nickel, cobalt and a rhenium-rich residue. The &6Barnard Core Rock&r is what the carbonyl route starts from, and the rhenium goes home for the Mk2 drive.',
+      'Barnard b is mostly iron, with nickel, cobalt and a rhenium-rich residue. The &6Barnard Core Rock&r is what the carbonyl route starts from. The platinum plant at home turns the residue into a crude rhenium salt, and the rhenium rows run here for the Mk2 drive.',
     ],
     tasks: [it('grindless:barnard_core_rock')],
     rewards: [xp(150)],

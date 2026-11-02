@@ -18,7 +18,7 @@ export const CHAPTER = {
   icon: 'gtnn:optical_computer',
   autofocus: 'CH_ASM',
   title: 'UEV: Circuits',
-  subtitle: ['A wafer that bends light, a chip that counts single photons, and the optical computer every UEV machine is built around.'],
+  subtitle: ['A wafer that bends light, a chip that counts single photons, and the optical computer that is the UEV circuit.'],
 };
 
 export const LINKS = [];
@@ -34,7 +34,7 @@ const q = (key, kind, title, icon, deps, x, y, teach, tasks, xpN) => ({
 export const QUESTS = [
   // ------------------------------------------------------------------ the assembler and the moving parts
   q('CH_ASM', 'machine', 'UEV Circuit Assembler', 'gtceu:uev_circuit_assembler', ['H_CIRC'], 3, -5, {
-    for: 'The &6UEV Circuit Assembler&r is the first assembler that can put together the optical computers that UEV machines are built around.',
+    for: 'The &6UEV Circuit Assembler&r is the first assembler that can put together the UEV circuits that UEV machines are built around.',
     needs: 'A UEV hull and UEV components, and the cleanroom you already run.',
     unlocks: 'The optical computer on the rows below, and the controller of every machine past the UEV hull.',
     automate: 'Boards and chips arrive from the cleanroom by ME; keep a small stock of what it returns.',
@@ -108,8 +108,8 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the repeater
   q('CH_REP', 'circuit', 'Quantum Repeater Node', 'grindless:quantum_repeater_node', ['H_CIRC'], 3, 3.5, {
     for: 'Two photons entangled over a distance let a network stay in step. A &6Quantum Repeater Node&r keeps one end of the link.',
-    needs: 'The entanglement station in Earth orbit, an Eu:YSO memory crystal, quantum dots, SNSPDs and hollow-core fibre.',
+    needs: 'The entanglement station, an Eu:YSO memory crystal, quantum dots, SNSPDs and hollow-core fibre.',
     unlocks: 'The UEV wireless link, and the cell that the quantum repeater keeps in step.',
-    automate: 'Ship the parts to orbit by ME and bring the nodes back; one node is worth a long run.',
+    automate: 'Parts by ME and nodes back by ME; one node is worth a long run.',
   }, [it('grindless:quantum_repeater_node')], 180),
 ];

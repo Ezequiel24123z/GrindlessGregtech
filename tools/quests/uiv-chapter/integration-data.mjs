@@ -112,7 +112,7 @@ export const QUESTS = [
     deps: ['CELL'], x: 5, y: -0.75,
     teach: {
       for: 'Move your towers onto &6UIV SMES Cells&r and the wireless network carries UIV to every station, out to the black hole.',
-      needs: 'Every formed tower holding UIV cells: until then the network stays at UEV.',
+      needs: 'One formed tower holding a UIV cell: the network runs at its strongest cell, so until then it stays at UEV.',
       unlocks: 'The wireless hatches at UIV, and the gate\'s load for UXV.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
@@ -135,7 +135,7 @@ export const QUESTS = [
     key: 'I_MATR', kind: 'milestone', title: 'Written in Shells', icon: 'gtceu:matrioshka_computer',
     deps: ['H_MERC'], x: 5.5, y: -33.5,
     desc: [
-      'The &6Matrioshka Computer&r is the only place the charts of this era are written: the equation of state, the navigation solution and the Kerr chart. It runs for a long time on a lot of power, so give it its own tower and a quiet bus. Tick this box once it has made a chart.',
+      'The &6Matrioshka Computer&r is the only place the UIV research is written, and it makes the equation of state chart and the Kerr chart. It runs for a long time on a lot of power, so give it its own tower and a quiet bus. Tick this box once it has made a chart.',
     ],
     tasks: [ck()],
     rewards: [xp(100)],

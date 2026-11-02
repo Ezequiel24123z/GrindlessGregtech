@@ -99,7 +99,7 @@ export const QUESTS = [
     deps: ['CELL'], x: 5, y: -0.75,
     teach: {
       for: 'Move your towers onto &6UEV SMES Cells&r and the wireless network carries UEV to every station, out to Alpha Centauri and beyond.',
-      needs: 'Every formed tower holding UEV cells: until then the network stays at UHV.',
+      needs: 'One formed tower holding a UEV cell: the network runs at its strongest cell, so until then it stays at UHV.',
       unlocks: 'The wireless hatches at UEV, and the gate\'s load at Sirius B.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },

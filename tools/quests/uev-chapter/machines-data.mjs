@@ -121,7 +121,7 @@ export const QUESTS = [
   prod('COIL', 'HfTaCN Coil', 'grindless:hftacn_coil_block', ['CVI'], 8.5, 6, ['The hottest coil in the pack. The UEV Lines chart shows what it gives.']),
   gear('FORGE', 'stellar_forge', 'Stellar Forge', ['COIL'], 11, 6, {
     for: 'The &6Stellar Forge&r is a furnace that holds a fragment of a star.',
-    needs: 'A UEV hull, two UEV components, two optical computers and the HfTaCN coil block.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits and the HfTaCN coil block.',
     unlocks: 'The hottest recipes in the pack, which the Mk4 plasma line runs on.',
     automate: 'Fuel and heat sinks by ME; plan for the byproducts before you start.',
   }, [it('grindless:hftacn_coil_block')], 150),
@@ -156,7 +156,7 @@ export const QUESTS = [
   prod('HE3', 'Polarised Helium-3', 'gtceu:polarised_helium_3_bucket', ['POL'], 3.5, 14.5, ['A bucket of polarised helium-3. Fusion at Mk4 starts from this.']),
   gear('MK4', 'uev_fusion_reactor', 'Mk4 Fusion Reactor', ['POL'], 6, 13, {
     for: 'The &6Mk4 Fusion Reactor&r is a ring that burns polarised helium-3 and deuterium into the most energy a reactor makes.',
-    needs: 'A UEV hull, two UEV components, two optical computers, the UEV fusion casing and the HfTaCN coil block.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits, the UEV fusion casing and the HfTaCN coil block.',
     unlocks: 'The plasma and burn quests in the integration chapter.',
     automate: 'Fuel and coolant by pipe; build the plant before you light it.',
   }, [it('grindless:uev_fusion_casing'), it('grindless:hftacn_coil_block')], 180),
@@ -170,28 +170,28 @@ export const QUESTS = [
   }, [PHOTO]),
   prod('COOL', 'Cold Atoms', 'grindless:li_cooling_laser', ['QGL'], 6, 16.5, ['The cooling laser that gets atoms cold. The UEV Lines chart shows its line.']),
   gear('ENT', 'entanglement_station', 'Entanglement Station', ['COOL'], 8.5, 16.5, {
-    for: 'The &6Entanglement Station&r in Earth orbit ties two photons together across a distance.',
-    needs: 'A UEV hull, two UEV components, two optical computers and the photonic casing.',
+    for: 'The &6Entanglement Station&r ties two photons together across a distance.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits and the photonic casing.',
     unlocks: 'The quantum repeater node in the circuits chapter.',
-    automate: 'Ship the parts to orbit by ME and bring the nodes back.',
+    automate: 'Parts by ME; send the nodes on by ME.',
   }, [PHOTO], 150),
 
   // ------------------------------------------------------------------ Alpha Centauri
   gear('NEB', 'nebula_collector', 'Nebula Collector', ['H_ALPHA'], 8, -36, {
     for: 'The &6Nebula Collector&r gathers gas from a nebula and sorts it by element.',
-    needs: 'A UEV hull, two UEV components, two optical computers and the photonic casing.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits and the photonic casing.',
     unlocks: 'Gas streams that the Alpha Centauri lines consume.',
     automate: 'Run it on a pipe loop to the plant and send the surplus to a tank.',
   }, [PHOTO], 150),
   gear('DUST', 'interstellar_dust_lab', 'Interstellar Dust Lab', ['H_ALPHA'], 8, -34, {
     for: 'The &6Interstellar Dust Lab&r studies grains of dust that formed around other stars.',
-    needs: 'A UEV hull, two UEV components, two optical computers and the photonic casing.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits and the photonic casing.',
     unlocks: 'The iron-60 record and the dust data the star charts use.',
     automate: 'Dust by ME; log the records and store the rest.',
   }, [PHOTO], 150),
   gear('PULS', 'pulsar_timing_station', 'Pulsar Timing Station', ['H_ALPHA'], 8, -32, {
     for: 'The &6Pulsar Timing Station&r keeps time with a pulsar and finds the way by it.',
-    needs: 'A UEV hull, two UEV components, two optical computers and the photonic casing.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits and the photonic casing.',
     unlocks: 'The pulsar navigation chart that the way to Sirius B needs.',
     automate: 'The station asks for little by ME; keep a stock of charts for the gate.',
   }, [PHOTO], 150),
@@ -199,7 +199,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Barnard b
   gear('MOND', 'carbonyl_refinery', 'Carbonyl Refinery', ['H_BARN'], 7.5, -20, {
     for: 'The &6Carbonyl Refinery&r turns iron and carbon monoxide into a liquid and back, leaving a very pure metal.',
-    needs: 'A UEV hull, two UEV components, two optical computers and the inert casing.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits and the inert casing.',
     unlocks: 'Iron pentacarbonyl and pure iron, for the nitride magnets.',
     automate: 'Contain the carbon monoxide; keep the loop sealed and vented to a scrubber.',
   }, [it('gtceu:inert_machine_casing')], 150),
@@ -208,19 +208,19 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Sirius B
   gear('SPEC', 'white_dwarf_spectrograph', 'White Dwarf Spectrograph', ['H_SIRIUS'], 18, -32, {
     for: 'The &6White Dwarf Spectrograph&r reads a dead star\'s light and from it the mass and radius.',
-    needs: 'A UEV hull, two UEV components, two optical computers and the photonic casing.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits and the photonic casing.',
     unlocks: 'The mass-radius chart and the degenerate harvester.',
     automate: 'The station asks for little by ME; keep a stock of charts.',
   }, [PHOTO], 150),
   gear('DEG', 'degenerate_harvester', 'Degenerate Harvester', ['SPEC'], 20.5, -32, {
     for: 'The &6Degenerate Harvester&r takes matter from a white dwarf, in which atoms are crushed together.',
-    needs: 'A UEV hull, two UEV components, two optical computers and the degenerate containment casing.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits and the degenerate containment casing.',
     unlocks: 'Degenerate matter, which the containment works bottles.',
     automate: 'Put the plant behind a safe containment loop; never route this matter by plain pipe.',
   }, [it('grindless:degenerate_containment_casing')], 150),
   gear('PEL', 'containment_works', 'Containment Works', ['DEG'], 23, -32, {
     for: 'The &6Containment Works&r bottles degenerate matter into a pellet that can be carried safely.',
-    needs: 'A UEV hull, two UEV components, two optical computers and the degenerate containment casing.',
+    needs: 'A UEV hull, two UEV components, two UEV circuits and the degenerate containment casing.',
     unlocks: 'The degenerate pellet, the last item the gate at UEV asks for.',
     automate: 'Feed the matter from the harvester by hatch; ship pellets by ME.',
   }, [it('grindless:degenerate_containment_casing')], 150),

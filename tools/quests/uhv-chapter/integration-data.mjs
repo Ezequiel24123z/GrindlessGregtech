@@ -111,7 +111,7 @@ export const QUESTS = [
     deps: ['CELL'], x: 5, y: -0.75,
     teach: {
       for: 'Move your towers onto &6UHV SMES Cells&r and the wireless network carries UHV, out to the stations and now to Mercury and Proxima.',
-      needs: 'Every formed tower holding UHV cells: until then the network stays at UV.',
+      needs: 'One formed tower holding a UHV cell: the network runs at its strongest cell, so until then it stays at UV.',
       unlocks: 'Stations that run on power made at home, and the wireless hatches and covers at UHV.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
@@ -147,7 +147,7 @@ export const QUESTS = [
     key: 'AE_MERC', kind: 'step', title: 'Mercury on AE2', icon: 'ae2:quantum_ring',
     deps: ['H_MERCURY'], x: 7, y: -49.25,
     desc: [
-      'The seed for the Mercury bridge is made in Mercury orbit, with the first swarm segment as the catalyst. Once linked, the foundry\'s output reaches home through ME.',
+      'The seed for the Mercury bridge is made with the first swarm segment as the catalyst, and it needs no place. Once linked, the foundry\'s output reaches home through ME.',
     ],
     tasks: [it('grindless:swarm_segment')],
     rewards: [xp(100)],

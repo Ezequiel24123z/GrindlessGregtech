@@ -109,7 +109,7 @@ export const QUESTS = [
   prod('P_PELLET', 'Polarised Pellet', 'grindless:polarised_h_pellet', ['POLSRC'], 3, 1, ['Frozen hydrogen that remembers its spin. Mk5 burns three fuels, and each one starts at this source.']),
   gear('RING', 'uiv_fusion_reactor', 'Mk5 Fusion Ring', ['POLSRC'], 5.5, -0.75, {
     for: 'The &6Mk5 Fusion Ring&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches.',
-    needs: 'A UIV hull, UIV components, optical mainframes, the Mk5 fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches.',
+    needs: 'A UIV hull, UIV components, UIV circuits, the Mk5 fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches.',
     unlocks: 'The three polarised burns, and the direct energy converter that turns plasma into power.',
     automate: 'Build the fuel plant before you light the ring; helium-3 and protons return to their lines.',
   }, [it('grindless:uiv_fusion_casing'), MHCOIL], 250),
@@ -117,13 +117,13 @@ export const QUESTS = [
   // ------------------------------------------------------------------ Mercury
   gear('MATR', 'matrioshka_computer', 'Matrioshka Computer', ['H_MACH1'], 3, 3, {
     for: 'A computer built in shells, in nine times Earth\'s sunlight, running logic that makes barely any heat. The &6Matrioshka Computer&r is where UIV research is written.',
-    needs: 'A UIV hull, UIV components, optical mainframes and the UIV casing, in Mercury orbit.',
+    needs: 'A UIV hull, UIV components, UIV circuits and the UIV casing. Its chart and research rows run in Mercury orbit.',
     unlocks: 'Verified writes, the Kerr and equation of state charts, and the radiators that carry its heat.',
     automate: 'Logic tiles are among the longest builds here: stock them by ME and send the waste heat to the radiators.',
   }, [UIV], 250),
   gear('RAD', 'droplet_radiator_works', 'Droplet Radiators', ['MATR'], 5.5, 3, {
     for: 'Heat has nowhere to go in space but out. Liquid tin droplets falling in free fall carry it away, which only works in orbit. The &6Droplet Radiator Works&r builds the modules.',
-    needs: 'A UIV hull, UIV components and the UIV casing; the modules are assembled in Mercury orbit.',
+    needs: 'A UIV hull, UIV components and the UIV casing; the modules need no particular place.',
     unlocks: 'Radiator modules, and the TPV tiles of the Matrioshka shell.',
     automate: 'Tin overflow returns to stock; ship modules down by ME.',
   }, [UIV], 200),
