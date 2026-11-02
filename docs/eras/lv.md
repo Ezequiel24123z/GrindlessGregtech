@@ -1,5 +1,7 @@
 # LV era
 
+Long process lines (principle 7): `docs/eras/lines-steam-hv.md`.
+
 The first electric factory: cables, single-block machines, small chemistry, centrifuging, ore washing and the first real circuits. Resources become electric and faster, AE2 unlocks in full, and the era ends when MV can be powered without cutting it close.
 
 You enter with what steam leaves you: an LV steam turbine (`gtceu:lv_steam_turbine`), the first LV circuit, an LV machine hull and tin cable with rubber.

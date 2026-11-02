@@ -1,5 +1,7 @@
 # Steam era
 
+Long process lines (principle 7): `docs/eras/lines-steam-hv.md`.
+
 The game starts here, without electricity. Coke, bricks, bronze, boilers and steel. Steam machines do the dirty work, and before you leave, ore and wood already arrive on their own.
 
 ## Route

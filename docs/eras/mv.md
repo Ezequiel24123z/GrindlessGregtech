@@ -1,5 +1,7 @@
 # MV era
 
+Long process lines (principle 7): `docs/eras/lines-steam-hv.md`.
+
 The factory no longer fits in one room. Polymers, fuels and crossing lines appear: silicon gives off CO that ends up as methanol, wood yields acetic acid and carbon, ethylene comes from ethanol, and spent acid gets distilled again. One of our multiblocks replaces ten loose machines. The era ends when the HV circuit comes out of its own line and the power plant can handle HV.
 
 You enter with what LV leaves: MV hull (`gtceu:mv_machine_hull`), MV energy hatch, 8 MV electronic circuits (`gtceu:good_electronic_circuit`), a cupronickel EBF running at 120 EU/t, and an AE2 network with a 16k CPU.
