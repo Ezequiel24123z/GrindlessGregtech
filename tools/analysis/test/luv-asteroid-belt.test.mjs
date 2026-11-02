@@ -78,6 +78,7 @@ function harness() {
     ServerEvents: { recipes: (cb) => serverRecipeHandlers.push(cb) },
     GTCEuServerEvents: { oreVeins: (cb) => oreHandlers.push(cb) },
   });
+  G.recipes = (n, fn) => context.ServerEvents.recipes(fn);
   vm.runInContext(script('startup_scripts', 'lib/patterns.js'), context);
   vm.runInContext(script('startup_scripts', 'lib/places.js'), context);
   vm.runInContext(script('server_scripts', 'data/veins.js'), context);

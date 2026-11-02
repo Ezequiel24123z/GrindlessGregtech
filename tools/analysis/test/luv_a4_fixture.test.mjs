@@ -748,7 +748,7 @@ function jvm({ server = true, fixture = true } = {}) {
     FactoryBlockPattern: any, Block: any, GTMaterials: any, SoundType: any, GTRecipeModifiers: any, ModifierFunction: any, JsonIO: any,
   };
   sandbox.global = kubejsGlobal();
-  sandbox.global.grindless = { tables: {}, readJsonTable: (p) => JSON.parse(fs.readFileSync(path.join(PACK, p), 'utf8')) };
+  sandbox.global.grindless = { tables: {}, recipes: (n, fn) => sandbox.ServerEvents.recipes(fn), readJsonTable: (p) => JSON.parse(fs.readFileSync(path.join(PACK, p), 'utf8')) };
   vm.createContext(sandbox);
   // this Rhino's String#charCodeAt answers a java.lang.Character, NaN in arithmetic (wireless_network.test.mjs)
   vm.runInContext(`(function () { var proto = ('').constructor.prototype; var charAt = proto.charAt;

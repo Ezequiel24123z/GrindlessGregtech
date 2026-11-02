@@ -28,6 +28,7 @@ function harness() {
     GuiTextures: {}, FillDirection: {}, RotationState: {}, Text: { translate: x => x },
     Fluid: { of: (id, amount) => ({ id, amount }) }
   });
+  G.recipes = (n, fn) => context.ServerEvents.recipes(fn);
   vm.runInContext(source('pack/kubejs/startup_scripts/grindless/lib/orbits.js'), context);
   vm.runInContext(source('pack/kubejs/startup_scripts/grindless/luv/orbital_solar.js'), context);
   registry['gtceu:recipe_type']({ create: () => builder });

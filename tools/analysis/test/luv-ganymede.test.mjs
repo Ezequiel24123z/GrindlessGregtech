@@ -48,6 +48,7 @@ function harness() {
       cb({ recipes: { gtceu }, shapeless });
     } },
   });
+  G.recipes = (n, fn) => context.ServerEvents.recipes(fn);
   vm.runInContext(script('startup_scripts', 'lib/patterns.js'), context);
   vm.runInContext(script('startup_scripts', 'lib/places.js'), context);
   vm.runInContext(script('startup_scripts', 'luv/ganymede.js'), context);

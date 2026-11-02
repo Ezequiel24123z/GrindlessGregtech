@@ -280,7 +280,7 @@ const Item = { of: (id) => ({ getItem: () => ({ getDescriptionId: () => descr('i
 function loadProjector() {
   const errors = [];
   const context = {
-    global: {},
+    global: { grindless: { recipes() {} } },
     Java: {
       loadClass: (name) => {
         if (!(name in CLASSES)) throw new Error(`class not stubbed: ${name}`);

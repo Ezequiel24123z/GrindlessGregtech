@@ -90,7 +90,7 @@ function runCircuits() {
   const dir = path.join(kube, 'server_scripts', 'grindless', 'maxplus');
   const tags = [];
   const context = vm.createContext({
-    global: {}, console: { info() {}, error() {} },
+    global: { grindless: { recipes() {} } }, console: { info() {}, error() {} },
     Item: { exists: () => true }, Fluid: { of: (id, amount) => ({ id, amount }) },
     ServerEvents: { recipes() {}, tags(_type, fn) { fn({ add: (tag, id) => tags.push([tag, id]) }); } },
   });

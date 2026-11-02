@@ -25,6 +25,7 @@ function harness() {
     } },
     Fluid: { of: (id, amount) => ({ id, amount }) }
   });
+  G.recipes = (n, fn) => context.ServerEvents.recipes(fn);
   vm.runInContext(read(startup + 'lib/patterns.js'), context);
   // Deliberately different fake IDs: a hardcoded dimension in B3 must not pass.
   G.orbits = { earth: 'test:earth_orbit', dimensions: ['test:earth_orbit', 'test:outer_orbit'],

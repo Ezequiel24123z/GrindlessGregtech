@@ -169,6 +169,7 @@ function startupHarness() {
     GuiTextures: {}, FillDirection: {}, RotationState: {}, GTSoundEntries: {}, Text: { translate: (x) => x },
     Block: { getBlock: (id) => id },
   });
+  G.recipes = (n, fn) => ctx.ServerEvents.recipes(fn);
   vm.runInContext(read('kubejs/startup_scripts/grindless/lib/places.js'), ctx);
   vm.runInContext(read(STARTUP), ctx);
   registry['gtceu:recipe_type']({ create: () => builder });

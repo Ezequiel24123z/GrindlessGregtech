@@ -92,7 +92,7 @@ function run(mode, opts = {}) {
   };
   const G = {
     readJsonTable,
-    structures: {},
+    recipes: (n, fn) => sandbox.ServerEvents.recipes(fn),
     patterns: new Proxy({ register() {}, build() {} }, { get: (t, k) => (k in t ? t[k] : (...args) => ({ kind: String(k), args })) }),
     noVoiding: { modifier: () => ({}), beforeWorking: () => ({}) },
     generators: { modifier: () => ({}), display: () => () => {}, recipeEUt: () => 0 },

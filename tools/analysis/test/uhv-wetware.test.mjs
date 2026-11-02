@@ -55,6 +55,7 @@ function harness() {
       cb({ recipes: { gtceu } });
     } },
   });
+  G.recipes = (n, fn) => context.ServerEvents.recipes(fn);
   vm.runInContext(script('startup_scripts', 'lib/patterns.js'), context);
   vm.runInContext(script('startup_scripts', 'luv/orbital_biology.js'), context);
   vm.runInContext(script('startup_scripts', 'uhv/wetware.js'), context);
