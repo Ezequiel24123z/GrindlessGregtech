@@ -161,7 +161,7 @@ const walkServer = (d) => {
     else if (e.name.endsWith('.js')) {
       const src = fs.readFileSync(p, 'utf8');
       handlers += (src.match(/\bServerEvents\s*\.\s*recipes\s*\(|\bglobal\.grindless\.recipes\s*\(/g) || []).length;
-      for (const h of unguardedRecipeHandlers(src)) guardProblems.push(path.relative(packDir, p).split(path.sep).join('/') + ':' + h.line + ': ServerEvents.recipes handler is not guarded (register it with global.grindless.recipes(name, fn), lib/recipes_guard.js)');
+      for (const h of unguardedRecipeHandlers(src, { strict: true })) guardProblems.push(path.relative(packDir, p).split(path.sep).join('/') + ':' + h.line + ': ServerEvents.recipes handler is not guarded (register it with global.grindless.recipes(name, fn), lib/recipes_guard.js)');
     }
   }
 };
