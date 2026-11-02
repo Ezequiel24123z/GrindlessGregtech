@@ -323,8 +323,18 @@ const ROWS = {
     ["f", "fluid:gtceu:superfluid_helium_4", [6]],
     ["i", "grindless:he4_dewar", [7]],
   ],
+  P26: [
+    ["f", "fluid:gtceu:primordial_deuterium", []],
+    ["f", "fluid:gtceu:hd_equilibrium_mix", [0]],
+    ["f", "fluid:gtceu:pure_hd", [1]],
+    ["m", "gtceu:millikelvin_cryostat_works", [2]],
+    ["i", "grindless:frozen_spin_hd", [3]],
+    ["i", "grindless:polarized_hd_pellet", [4]],
+    ["f", "fluid:gtceu:pristine_helium_3", []],
+    ["m", "gtceu:photonic_foundry", [6]],
+    ["f", "fluid:gtceu:polarized_helium_3", [7]],
+  ],
   T1: [
-    ["i", "gtceu:gadolinium_oxide_dust", []],
     ["m", "gtceu:hot_cell", [0]],
     ["i", "grindless:gd_absorber_tile", [1]],
     ["i", "grindless:hafnium_sponge", []],
@@ -949,6 +959,7 @@ const NAMES = {
   P23: "Magnetic scoop",
   P24: "Beryllium gamma window",
   P25: "Helium-4 supply",
+  P26: "Spin-polarized fusion fuel (Kulsrud 1982)",
   T1: "Containment plate core",
   T2: "Chevron core",
   T3: "Horizon mesh",
@@ -1029,6 +1040,7 @@ const ENDS = {
   P23: 'The gas-works scoop',
   P24: 'The blueshift forge',
   P25: 'The condensate assembler',
+  P26: 'The polarized fusion stellarator',
 };
 const grp = (ids, text) => ids.forEach((id) => { ENDS[id] = text; });
 grp(['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17'], 'The Hyperstargate grid crafts');
@@ -1224,7 +1236,7 @@ export default {
   clusters: {
     cond: cluster('Condensate, bound matter and the cable', ['P1', 'P2', 'P3', 'P4', 'P5']),
     tara: cluster('Stars, casks and ash', ['P6', 'P7', 'P8', 'P17']),
-    stream: cluster('Streams and the torus', ['P9', 'P10', 'P11', 'P12', 'P22', 'P23', 'P24']),
+    stream: cluster('Streams and the torus', ['P9', 'P10', 'P11', 'P12', 'P22', 'P23', 'P24', 'P26']),
     sling: cluster('Tether, void and slingshot', ['P13', 'P14', 'P15', 'P16']),
     cryo: cluster('Cryo parts', ['P18', 'P19', 'P20', 'P21', 'P25']),
     tg1: cluster('Plates, mesh and frame', ['T2', 'T1', 'T3', 'T14', 'T15', 'T16', 'T17']),
