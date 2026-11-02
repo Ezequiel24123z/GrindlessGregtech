@@ -234,6 +234,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     ROWS.concat(OLD).forEach(function (r) { addRow(event, r) })
     addCool(event)
 
@@ -260,5 +261,8 @@
       }
     })
     console.info(LOG + 'components: ' + MP.recipes.length + ' rows, ' + MP.componentRecipes.length + ' components; skipped ' + MP.skipped.length)
+    } catch (e) {
+      console.error('[grindless/maxplus/components] recipes failed: ' + e)
+    }
   })
 })()

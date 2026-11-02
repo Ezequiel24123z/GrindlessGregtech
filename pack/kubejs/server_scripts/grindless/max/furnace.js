@@ -75,6 +75,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     FURNACE.forEach(function (r) {
       try {
         var missing = missingOf(r.items.concat(r.outs, r.wear ? [r.wear] : []), [])
@@ -159,5 +160,8 @@
       console.error(LOG + 'furnace controller failed: ' + e)
     }
     console.info(LOG + 'furnace: ' + MF.recipes.length + ' recipes; skipped ' + MF.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/furnace] recipes failed: ' + e)
+    }
   })
 })()

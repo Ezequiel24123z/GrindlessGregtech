@@ -96,6 +96,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     var wanted = {}
     GATED_HV.forEach(function (name) { wanted['expatternprovider:' + name] = 'hv' })
     GATED_LV.forEach(function (name) { wanted['expatternprovider:' + name] = 'lv' })
@@ -128,5 +129,8 @@
     REMOVED.forEach(function (name) { event.remove({ id: 'expatternprovider:' + name }) })
     console.info(LOG + 'HV circuit added to ' + gatedHv + ' recipes, LV circuit added to ' + gatedLv + ' recipes (' + missing +
       ' of the list not found); removed ' + REMOVED.join(', '))
+    } catch (e) {
+      console.error('[grindless/integration/expatternprovider] recipes failed: ' + e)
+    }
   })
 })()

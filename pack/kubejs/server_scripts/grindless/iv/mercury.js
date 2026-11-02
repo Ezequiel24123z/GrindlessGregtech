@@ -99,6 +99,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     var D = M.drill
     var BIT = G.ivDrillBit
     var IVF = G.ivFoundation
@@ -283,5 +284,8 @@
 
     console.info(LOG + 'Mercury: ' + (D.drilling ? D.drilling.dry + ' dry and ' + D.drilling.cooled + ' cooled drilling recipes (' + D.drilling.veins.join(', ') + ')' : 'no drilling recipes') +
       ', 3 solar works recipes, the solar field, 2 interferometer observations, the lunar VLBI recording, the chart copy, the IV lathe bit and 4 controllers')
+    } catch (e) {
+      console.error('[grindless/iv/mercury] recipes failed: ' + e)
+    }
   })
 })()

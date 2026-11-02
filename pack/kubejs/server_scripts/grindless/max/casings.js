@@ -27,6 +27,7 @@
   ]
 
   ServerEvents.recipes(function (event) {
+    try {
     CASINGS.forEach(function (c) {
       try {
         var out = 'grindless:' + c.name
@@ -54,5 +55,8 @@
       }
     })
     console.info(LOG + 'casings: ' + MC.recipes.length + ' recipes; skipped ' + MC.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/casings] recipes failed: ' + e)
+    }
   })
 })()

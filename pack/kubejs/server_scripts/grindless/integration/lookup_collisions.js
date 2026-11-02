@@ -203,6 +203,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     var report = { removed: [], rebuilt: [], kept: [], failed: [], missing: [] }
     G.lookupCollisions = report
     try {
@@ -219,5 +220,8 @@
       report.rebuilt.map(function (r) { return r.to + ' circuit ' + r.circuit }).join(', ') + ')' +
       (report.missing.length > 0 ? '; not in this pack: ' + report.missing.join(', ') : ''))
     if (report.failed.length > 0) console.error(LOG + 'recipe lookup collisions not fixed: ' + report.failed.join('; '))
+    } catch (e) {
+      console.error('[grindless/integration/lookup_collisions] recipes failed: ' + e)
+    }
   })
 })()

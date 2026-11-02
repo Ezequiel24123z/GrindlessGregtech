@@ -100,6 +100,7 @@
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
+    try {
     FR.recipes = []
     FR.skipped = []
     try {
@@ -125,5 +126,8 @@
     console.info(LOG + 'fission reactor: ' + FR.recipes.length + ' core recipes (' + FR.recipes.map(function (p) {
       return p.core + ' c' + p.circuit + ' ' + p.eut + ' EU/t'
     }).join(', ') + ') and the controller recipe')
+    } catch (e) {
+      console.error('[grindless/iv/fission_reactor] recipes failed: ' + e)
+    }
   })
 })()

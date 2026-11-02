@@ -126,6 +126,7 @@
 
   // an uncaught error here would stop the recipe handlers of every script that loads after this one
   ServerEvents.recipes(function (event) {
+    try {
     var done = []
     try {
       done = done.concat(addTanks(event))
@@ -139,5 +140,8 @@
     }
     T.done = done
     console.info(LOG + 'travel: ' + done.join(', '))
+    } catch (e) {
+      console.error('[grindless/zpm/travel] recipes failed: ' + e)
+    }
   })
 })()

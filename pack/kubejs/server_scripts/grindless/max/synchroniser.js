@@ -107,6 +107,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     LOCK_ROWS.forEach(function (r) {
       try {
         var ids = r.items.concat(r.outs).concat(r.chanced.map(function (c) { return c.id }))
@@ -170,5 +171,8 @@
       console.error(LOG + 'synchroniser controller failed: ' + e)
     }
     console.info(LOG + 'synchroniser: ' + MS.recipes.length + ' recipes; skipped ' + MS.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/synchroniser] recipes failed: ' + e)
+    }
   })
 })()

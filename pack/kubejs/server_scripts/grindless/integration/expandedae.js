@@ -100,6 +100,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     var captured = []
     event.forEachRecipe({ mod: 'expandedae' }, function (r) {
       var id = String(r.getId())
@@ -159,6 +160,9 @@
       console.info(LOG + 'MAX+: giga pattern provider re-gated with the photonic coprocessor and pattern memory units')
     } else {
       console.warn(LOG + 'line A2/A3 products do not exist; the giga pattern provider keeps its recipe')
+    }
+    } catch (e) {
+      console.error('[grindless/integration/expandedae] recipes failed: ' + e)
     }
   })
 })()

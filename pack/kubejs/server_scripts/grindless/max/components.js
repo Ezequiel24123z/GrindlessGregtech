@@ -91,6 +91,7 @@
   MC.rows = ROWS
 
   ServerEvents.recipes(function (event) {
+    try {
     var vaMax = Number(GTValues.VA[MAXT])
     ROWS.forEach(function (r) {
       var strip = function (s) { return s.replace(/^\d+x /, '') }
@@ -114,5 +115,8 @@
       }
     })
     console.info(LOG + MC.recipes.length + ' recipes; skipped ' + MC.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/components] recipes failed: ' + e)
+    }
   })
 })()

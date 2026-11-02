@@ -93,6 +93,7 @@
 
   // an uncaught error here would stop the recipe handlers of every script that loads after this one
   ServerEvents.recipes(function (event) {
+    try {
     var done = []
     ;['tank', 'motor'].forEach(function (key) {
       try {
@@ -103,5 +104,8 @@
     })
     MR.gcyr.done = done
     console.info(LOG + 'tier 2 rocket parts in EV with titanium and the Mars chart: ' + (done.length > 0 ? done.join(', ') : 'none'))
+    } catch (e) {
+      console.error('[grindless/integration/gcyr_mars_road] recipes failed: ' + e)
+    }
   })
 })()

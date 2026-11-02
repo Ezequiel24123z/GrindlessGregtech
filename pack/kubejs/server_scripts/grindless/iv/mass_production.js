@@ -97,6 +97,7 @@
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
+    try {
     RECIPES.forEach(function (r) {
       try {
         replace(event, r)
@@ -108,5 +109,8 @@
     console.info(LOG + 'mass production: ' + RECIPES.map(function (r) {
       return r.output + ' (' + (MP.removed[r.output] || 0) + ' removed)'
     }).join(', ') + ' at IV')
+    } catch (e) {
+      console.error('[grindless/iv/mass_production] recipes failed: ' + e)
+    }
   })
 })()

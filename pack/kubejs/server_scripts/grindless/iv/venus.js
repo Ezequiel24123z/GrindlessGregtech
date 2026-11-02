@@ -283,6 +283,7 @@
   // ---------------------------------------------------------------- load
 
   ServerEvents.recipes(function (event) {
+    try {
     var out = { drilling: [], engine: null, works: [], collector: [], casing: null, controllers: [], problems: [] }
     V.recipes = out
     var T = null
@@ -292,7 +293,7 @@
       console.error(LOG + 'Venus recipes skipped: cannot read ' + TABLE + ': ' + e)
       return
     }
-    function step(name, fn) {
+    var step = function (name, fn) {
       try {
         fn(event, T, out)
       } catch (e) {
@@ -310,5 +311,8 @@
       (out.engine ? 'the heat engine, ' : 'no heat engine, ') + out.works.length + ' acid works recipes (' +
       out.works.map(function (w) { return w.name + ' ' + w.eut + ' EU/t x ' + w.duration + ' t' }).join(', ') + '), ' + out.collector.length +
       ' gas collector recipes (cloud base Y ' + T.site.cloudBase + '), ' + (out.casing ? 'the regolith hammer, ' : '') + out.controllers.length + ' controllers')
+    } catch (e) {
+      console.error('[grindless/iv/venus] recipes failed: ' + e)
+    }
   })
 })()

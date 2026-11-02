@@ -147,6 +147,7 @@
 
   // an uncaught error here would stop the recipe handlers of every script that loads after this one
   ServerEvents.recipes(function (event) {
+    try {
     var done = []
     var steps = [['tank', addTank], ['truss', addTruss]]
     steps.forEach(function (step) {
@@ -164,5 +165,8 @@
     }
     T.done = done
     console.info(LOG + 'travel: ' + done.join(', '))
+    } catch (e) {
+      console.error('[grindless/luv/travel] recipes failed: ' + e)
+    }
   })
 })()

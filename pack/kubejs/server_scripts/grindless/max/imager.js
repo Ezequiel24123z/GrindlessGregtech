@@ -95,6 +95,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     ROWS.forEach(function (r) {
       try {
         var missing = missingOf(r.items.concat(r.kept, r.outs), r.fluids.concat(r.fluidOuts).map(function (f) { return f[0] }))
@@ -155,5 +156,8 @@
       console.error(LOG + 'imager controller failed: ' + e)
     }
     console.info(LOG + 'imager: ' + MD.recipes.length + ' recipes; skipped ' + MD.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/imager] recipes failed: ' + e)
+    }
   })
 })()

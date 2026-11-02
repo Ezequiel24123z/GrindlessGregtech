@@ -82,6 +82,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     FEEDER.forEach(function (r) {
       try {
         var missing = missingOf(r.items.concat(r.outs).map(function (o) { return o[0] }), [])
@@ -139,5 +140,8 @@
       console.error(LOG + 'feeder controller failed: ' + e)
     }
     console.info(LOG + 'feeder: ' + MF.recipes.length + ' recipes; skipped ' + MF.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/feeder] recipes failed: ' + e)
+    }
   })
 })()

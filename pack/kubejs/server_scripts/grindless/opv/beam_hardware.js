@@ -126,6 +126,7 @@
 
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
+    try {
     OPVB.added = []
     OPVB.skipped = []
     OPVB.rows.forEach(function (r) {
@@ -137,5 +138,8 @@
       }
     })
     console.info(LOG + 'beam_hardware recipes added: ' + OPVB.added.length + '; skipped ' + OPVB.skipped.length)
+    } catch (e) {
+      console.error('[grindless/opv/beam_hardware] recipes failed: ' + e)
+    }
   })
 })()

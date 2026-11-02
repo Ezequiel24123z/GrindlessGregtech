@@ -12,6 +12,7 @@
     if (!Fluid.exists(f.id)) throw new Error('unknown fluid ' + f.id)
   }
   ServerEvents.recipes(function (event) {
+    try {
     A.recipes = []
     A.errors = []
     A.controllers = []
@@ -80,6 +81,9 @@
     } catch (e) {
       A.errors.push('antiproton stack: ' + e)
       console.error(LOG + 'antiproton stack: ' + e)
+    }
+    } catch (e) {
+      console.error('[grindless/opv/antimatter_cygnus] recipes failed: ' + e)
     }
   })
 })()

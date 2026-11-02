@@ -92,6 +92,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     var table = G.readJsonTable('kubejs/data/grindless/tables/offworld_only.json')
     var report = { stripped: [], removed: [], failed: [], missing: [] }
 
@@ -138,5 +139,8 @@
     console.info(LOG + 'resources of other worlds cut on Earth: stripped ' + report.stripped.length + '/' + table.strip.length + ', removed ' + report.removed.length + '/' +
       table.remove.length + (report.missing.length > 0 ? '; not in this pack: ' + report.missing.join(', ') : ''))
     if (report.failed.length > 0) console.error(LOG + 'resources of other worlds: could not rebuild ' + report.failed.join('; '))
+    } catch (e) {
+      console.error('[grindless/moon/offworld_only] recipes failed: ' + e)
+    }
   })
 })()

@@ -83,6 +83,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     WINCH.forEach(function (r) {
       try {
         var missing = missingOf(r.items.concat(r.outs).map(function (o) { return o[0] }), [])
@@ -149,5 +150,8 @@
       console.error(LOG + 'winch controller failed: ' + e)
     }
     console.info(LOG + 'winch: ' + MW.recipes.length + ' recipes; skipped ' + MW.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/winch] recipes failed: ' + e)
+    }
   })
 })()

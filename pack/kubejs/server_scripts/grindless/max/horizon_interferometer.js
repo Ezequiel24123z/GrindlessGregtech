@@ -120,6 +120,7 @@
   }
 
   ServerEvents.recipes(function (event) {
+    try {
     ROWS.forEach(function (r) {
       try {
         var chancedStacks = r.chanced.map(function (c) { return c[0] })
@@ -200,5 +201,8 @@
       console.error(LOG + 'horizon interferometer controller failed: ' + e)
     }
     console.info(LOG + 'horizon interferometer: ' + MD.recipes.length + ' recipes; skipped ' + MD.skipped.length)
+    } catch (e) {
+      console.error('[grindless/max/horizon_interferometer] recipes failed: ' + e)
+    }
   })
 })()

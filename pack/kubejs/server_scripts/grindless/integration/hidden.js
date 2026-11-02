@@ -126,6 +126,7 @@
   })
 
   ServerEvents.recipes(function (event) {
+    try {
     var started = Date.now()
     var ids = H.removeRecipes
     if (ids.length === 0) return
@@ -154,5 +155,8 @@
     H.removed = { listed: ids.length, original: original, added: added, missing: ids.length - original - added, ms: Date.now() - started }
     console.info(LOG + 'removed ' + (original + added) + ' junk recipes (' + original + ' from datapacks, ' + added + ' added by scripts; ' +
       H.removed.missing + ' listed ids no longer exist) in ' + H.removed.ms + ' ms')
+    } catch (e) {
+      console.error('[grindless/integration/hidden] recipes failed: ' + e)
+    }
   })
 })()
