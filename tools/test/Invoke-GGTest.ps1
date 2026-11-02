@@ -749,7 +749,7 @@ if ($script:beFallback -and -not $script:OomHit -and -not (FExists (J (J $OutDir
 
 [Console]::Out.WriteLine('')
 $showArgs = @{ OutDir = $OutDir }
-if ($Strict) { $showArgs.Strict = $true }
+if ($Strict -or $env:GG_STRICT -eq '1') { $showArgs.Strict = $true }   # GG_STRICT=1: release and batch runs are strict without repeating the switch
 if ($ShowWarnings) { $showArgs.ShowWarnings = $true }
 & (J $PSScriptRoot 'Show-GGResults.ps1') @showArgs
 $final = $LASTEXITCODE

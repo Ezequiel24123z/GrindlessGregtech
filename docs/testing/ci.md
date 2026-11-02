@@ -7,7 +7,7 @@ an agent or the integrator ([architecture.md](architecture.md)).
 
 | Workflow | File | Triggers | Jobs | Typical time |
 |---|---|---|---|---|
-| T0 | `.github/workflows/t0.yml` | every push, every PR, manual | `tools/Check-Fast.ps1` on `ubuntu-24.04` with Node 22 (static KubeJS load, lang parity, quest lint, zones, analysis suite) | under 1 min |
+| T0 | `.github/workflows/t0.yml` | every push, every PR, manual | `tools/Check-Fast.ps1` on `ubuntu-24.04` with Node 22 (static KubeJS load, lang parity, quest lint `--strict`, zones, analysis suite including the quest tests) | about 100 s measured (run 41414886563: 98 s; analysis 93 s, every other step 1-2 s) |
 | Harness | `.github/workflows/harness.yml` | push/PR touching `tools/test/**`, `tools/vm/**`, `tools/Check-Fast.ps1` or itself; manual | `linux`: shellcheck + `Test-LinuxHelpers.ps1` (the VM's runner code); `windows`: `Test-ResourcePolicy.ps1` (home lock policy) | about 1 min |
 
 - Permissions: `contents: read`; checkout with `persist-credentials: false`. Actions are pinned by commit SHA.
@@ -17,6 +17,15 @@ an agent or the integrator ([architecture.md](architecture.md)).
 - The `windows` Harness job is informational (`continue-on-error`): on hosted `windows-2022` the restart dry run's
   fake server never stops within 30 s (runs 40564601817, 40564995189), while it passes on workstations. The home
   bench stays the authority for that test.
+
+## Strict native verdicts and release gates
+
+- `Invoke-GGTest.ps1 -Strict` (or `GG_STRICT=1`) makes the summary FAIL on zero `GGTEST` PASS lines, a declared check
+  (a `waitForLog` tag) with no PASS, a missing stage, or a dump without `lookup_unreachable.json`. Dump and gallery
+  utility runs and client-only suites are exempt from the check count. Use it for release and batch runs.
+- `pwsh tools/release/Test-Promotion.ps1 -Sha <40-hex> -Version <x.y.z> [-SkipRelease]` must pass before a channel moves
+  (exact SHA, `pack/pack.toml` version, green T0 for that SHA, Prism zip on the release). It is read-only.
+- `Get-Packwiz.ps1` and `Build-PrismInstance.ps1` verify pinned SHA-256 digests (packwiz run 38494029406, bootstrap v0.0.3).
 
 ## Required and optional checks
 
