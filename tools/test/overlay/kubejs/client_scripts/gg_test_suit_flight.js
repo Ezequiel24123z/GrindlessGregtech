@@ -1,3 +1,4 @@
+// priority: 11875
 // TEST ONLY, NANO-1 suit flight (#181). Client half; partner of server_scripts/gg_test_suit_flight.js (asleep unless it sets 'hold'
 // in global.ggSuitFlight; the client suite runs both in one JVM). Keeps mc-runtime-test in the world: it quits at tickCount 100
 // with no screen open, so the player's age is lowered while the test runs.

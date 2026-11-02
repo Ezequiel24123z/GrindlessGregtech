@@ -1,3 +1,4 @@
+// priority: -7474
 // TEST ONLY, NANO-1 suit flight (#181). Server half; partner of client_scripts/gg_test_suit_flight.js (keeps the client in the world).
 // Client suite, integrated server with the real player. Only with kubejs/config/gg_test_suit_flight.json {"enabled": true}.
 // Checks integration/suit_flight.js: a charged NanoMuscle chestplate grants flight, flying drains the stated EU (175 EU/t in

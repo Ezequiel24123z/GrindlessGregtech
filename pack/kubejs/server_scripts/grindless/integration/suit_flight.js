@@ -1,3 +1,4 @@
+// priority: -16074
 // Creative flight for GTM's powered chestplates (NANO-1, #181).
 // A charged chestplate lets a survival player fly; flying drains the chestplate through GTM's own electric-item
 // capability, the same call GTM's suits use. Nothing is drained on the ground or while not flying.

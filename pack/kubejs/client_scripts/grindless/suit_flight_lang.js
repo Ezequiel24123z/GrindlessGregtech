@@ -1,3 +1,4 @@
+// priority: 5250
 // Tooltip line for the chestplates that grant creative flight (server_scripts/grindless/integration/suit_flight.js; costs must match).
 ItemEvents.tooltip(function (event) {
   var line = function (id, eut) {

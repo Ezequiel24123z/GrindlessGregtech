@@ -77,36 +77,8 @@ file = "config/ftbquests/quests/chapters/max_machines.snbt"
 hash = "dbb4d0062127225839700ac90f0bec18a3c0da58e1619bef4dbc4b8874dc147f"
 
 [[files]]
-file = "config/ftbquests/quests/chapters/maxplus_age_1.snbt"
-hash = "b1112ea6f96414f5535f565adf9970e090c6b934a5ad583f0f9a91db2adce422"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/maxplus_age_2.snbt"
-hash = "7d62d5a23a11351e1b0d9edef23a03b9fb0a1328a88e523373103b46c5cc7bdd"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/maxplus_age_3.snbt"
-hash = "427a0f906d0906ecace2a21471f99a125884a26da937c25007276879c91a0198"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/maxplus_circuits.snbt"
-hash = "eb101e1c52cbf2d9bedb7baa3f285aa18e23718bf4a103ece7b211bba96d0366"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/maxplus_creative.snbt"
-hash = "9f14215d3c4280aaa3639105b328345c803801e67af075a3610b861bd03c2b27"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/maxplus_hyperstargate.snbt"
-hash = "d184140d167201377892ed5e47eb3d7784e848561e94c5ce8da65dc0c57a5ce8"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/maxplus_integration.snbt"
-hash = "13a82b6c00c498b2e4a9fbade070420f6d5d8fec153fd2fb4535fd3eb5502eb1"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/maxplus_machines.snbt"
-hash = "fe0179ea4cd7c4872efde1f9e44a7b0f4d058f1d514a07b9ec1580d8e6182106"
+file = "config/ftbquests/quests/chapters/maxplus_age.snbt"
+hash = "12d6d2f92f04d4df20407ae88fa568482d2203f9e60edf548137dc433fde0b75"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
@@ -294,7 +266,7 @@ hash = "6d8af09a17beea2b830440c0e65f0377e1b1b4a2011f8744c40ad41bdec199ab"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/welcome.snbt"
-hash = "2cd27d1b2f571358c94df1da0b1bfc31fc34e73b30f27042f6487874aab346cb"
+hash = "eb2648b88be6d3196a563b0863065da43e30f6988fcd556bcbff177454bb1ff3"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/workshop.snbt"
@@ -16829,6 +16801,10 @@ file = "kubejs/client_scripts/grindless/steam_small_family_lang.js"
 hash = "adbb385e1156603926691661de133c6073206be3428b44427f540f34b1e88202"
 
 [[files]]
+file = "kubejs/client_scripts/grindless/suit_flight_lang.js"
+hash = "82ad84d946d4fa96479ca6279116e4e51d901b6021843b123725a29de999b776"
+
+[[files]]
 file = "kubejs/client_scripts/grindless/syngas_lang.js"
 hash = "036f2570869a85e715568e58d634d24d6d66d262b9bed046e9479e8214c0c9f4"
 
@@ -18443,6 +18419,10 @@ hash = "875ab2628e5ba74878aae46f587b67d6332035297d0e889a26d63a806dfe95ef"
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/storagedrawers.js"
 hash = "87e1d078df51b094714056a0694e3b535719597ff30945dcfd1a6cb9aaac14d3"
+
+[[files]]
+file = "kubejs/server_scripts/grindless/integration/suit_flight.js"
+hash = "ea0e78b61a2010c7895a73f9f3e2a1a955bb8f750b3abb6868c6d5803a48fa23"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/integration/tag_leaks.js"
