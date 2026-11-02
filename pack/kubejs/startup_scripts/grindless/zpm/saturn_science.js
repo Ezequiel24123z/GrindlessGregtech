@@ -136,7 +136,7 @@
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     SC.machines.forEach(function (m) {
       Pat.register('gtceu:' + m.name, m.spec)
-      const tips = [
+      var tips = [
         Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + String(m.type).replace('gtceu:', '')))
       ]

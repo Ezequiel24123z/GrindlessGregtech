@@ -39,12 +39,12 @@
   // A hollow shell: row 0 the floor (ports or casing), the top row the roof, the walls between, the controller at the middle of the front wall's
   // first row; centre(x, z, y) says what stands inside (' ' for air).
   function shellSlice(w, d, h, z, centre) {
-    const rows = []
-    for (let y = 0; y < h; y++) {
-      let row = ''
-      for (let x = 0; x < w; x++) {
+    var rows = []
+    for (var y = 0; y < h; y++) {
+      var row = ''
+      for (var x = 0; x < w; x++) {
         var edge = x === 0 || x === w - 1 || z === 0 || z === d - 1
-        let c = ' '
+        var c = ' '
         if (y === 0) c = 'X'
         else if (y === h - 1) c = 'C'
         else if (edge) c = z === d - 1 && y === 1 ? (x === (w - 1) / 2 ? 'S' : 'X') : 'C'
@@ -218,7 +218,7 @@
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     UR.machines.forEach(function (m) {
       Pat.register('gtceu:' + m.name, m.spec)
-      const tips = [
+      var tips = [
         Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + String(m.type).replace('gtceu:', '')))
       ]

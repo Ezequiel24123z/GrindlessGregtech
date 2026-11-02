@@ -165,7 +165,7 @@
 
   StartupEvents.registry('item', function (event) {
     Object.keys(ITEMS).forEach(function (name) {
-      const item = event.create('grindless:' + name)
+      var item = event.create('grindless:' + name)
         .texture('grindless:item/' + name)
         .maxStackSize(ITEMS[name].stack)
       item.tooltip(Text.gray(Text.translate('tooltip.grindless.' + name + '.0')))
@@ -187,7 +187,7 @@
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     E.machines.forEach(function (m) {
       Pat.register('gtceu:' + m.name, m.spec)
-      const tips = [
+      var tips = [
         Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + String(m.type).replace('gtceu:', '')))
       ]

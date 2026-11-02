@@ -1,0 +1,46 @@
+{
+  "kubejs/server_scripts/grindless/quest_book.js": {
+    "topLevel": 1,
+    "callbackLexical": 0
+  },
+  "kubejs/server_scripts/grindless/uev/foundation.js": {
+    "topLevel": 0,
+    "callbackLexical": 1
+  },
+  "kubejs/server_scripts/grindless/uiv/foundation.js": {
+    "topLevel": 0,
+    "callbackLexical": 1
+  },
+  "kubejs/startup_scripts/grindless/integration/dimension_markers.js": {
+    "topLevel": 1,
+    "callbackLexical": 0
+  },
+  "kubejs/startup_scripts/grindless/integration/recipe_info_wrap.js": {
+    "topLevel": 12,
+    "callbackLexical": 0
+  },
+  "kubejs/startup_scripts/grindless/uv/edge.js": {
+    "topLevel": 0,
+    "callbackLexical": 2
+  },
+  "kubejs/startup_scripts/grindless/uv/kuiper.js": {
+    "topLevel": 0,
+    "callbackLexical": 2
+  },
+  "kubejs/startup_scripts/grindless/zpm/saturn_science.js": {
+    "topLevel": 0,
+    "callbackLexical": 1
+  },
+  "kubejs/startup_scripts/grindless/zpm/saturn_siphon.js": {
+    "topLevel": 0,
+    "callbackLexical": 1
+  },
+  "kubejs/startup_scripts/grindless/zpm/titan_probes.js": {
+    "topLevel": 0,
+    "callbackLexical": 2
+  },
+  "kubejs/startup_scripts/grindless/zpm/uranus.js": {
+    "topLevel": 0,
+    "callbackLexical": 1
+  }
+}
