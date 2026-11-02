@@ -72,6 +72,7 @@
     add('message.grindless.wireless.cover_unsupported', 'Wireless covers can\'t use this machine\'s energy storage (%s)')
     add('message.grindless.wireless.fault', 'This wireless block was stopped after an energy error (see the server log). Place it or its cover again, or restart the server, to retry')
     add('message.grindless.wireless.cover_placed', '%s wireless cover on')
+    add('message.grindless.wireless.cover_claimed', 'This chunk is claimed: you may not put a wireless cover here')
   })
 
 })()

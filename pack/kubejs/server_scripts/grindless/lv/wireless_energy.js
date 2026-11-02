@@ -981,6 +981,7 @@
   var posting = false
   function claimAllows(player, level, pos, side) {
     if (posting) return true
+    if (teams().claimRefuses(player, level, pos)) return false
     try {
       if (!level.mayInteract(player, pos)) return false
       var Hit = Java.loadClass('net.minecraft.world.phys.BlockHitResult')
@@ -1012,7 +1013,10 @@
     // GTM's own cover items pick the side the player looks at; with no such side, the clicked face
     var side = lazy().ICoverable.rayTraceCoverableSide(holder, p)
     if (side === null || side === undefined) side = event.facing
-    if (!claimAllows(p, level, pos, side)) return true
+    if (!claimAllows(p, level, pos, side)) {
+      p.setStatusMessage(Text.translate('message.grindless.wireless.cover_claimed').red())
+      return true
+    }
     var stack = event.item
     var r = placeCover(level, pos, side, stack, p)
     if (r.ok && !p.isCreative()) stack.shrink(1)
