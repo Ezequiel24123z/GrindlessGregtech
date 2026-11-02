@@ -33,7 +33,7 @@ const gear = (key, id, title, deps, x, y, teach, tasks, xpN = 120) => ({
 
 // One product or material quest that closes a row.
 const prod = (key, title, icon, deps, x, y, text, tasks, xpN = 80) => ({
-  key, title, icon, deps: deps_(deps), x, y, desc: [text], tasks, rewards: [xp(xpN)],
+  key, title, icon, deps: deps_(deps), x, y, desc: Array.isArray(text) ? text : [text], tasks, rewards: [xp(xpN)],
 });
 
 const UVC = 'gtceu:uv_machine_casing';
@@ -89,7 +89,7 @@ export const QUESTS = [
     automate: 'Thorium-229 targets come by ME; the clock leaves by ME.',
   }, [it(HULL), it(CLEAN)]),
   prod('P_CLK', 'The Clock', 'grindless:nuclear_clock', ['CLOCK'], 5, -1,
-    'The &6Nuclear Clock&r keeps every later machine honest.',
+    ['The &6Nuclear Clock&r is a thorium-229 target locked to a laser: it keeps time to a part in a quintillion, and every later machine that must agree on the second is timed from it.', 'It is made in the Nuclear Clock Lab from thorium-229 and a UHV circuit. It is a component of the gate and of the swarm control station, so build one early. Make them in the lab by ME and keep a small stock.'],
     [it('grindless:nuclear_clock')]),
 
   // ------------------------------------------------------------------ betavoltaics
@@ -100,7 +100,7 @@ export const QUESTS = [
     automate: 'Nickel-63 targets by ME; cells leave by ME.',
   }, [it(INERT), it(CLEAN)]),
   prod('P_BETA', 'A Cell That Never Ends', 'grindless:betavoltaic_cell', ['BETA'], 5, 1,
-    'A &6Betavoltaic Cell&r gives microwatts for fifty years.',
+    ['A &6Betavoltaic Cell&r turns the beta decay of nickel-63 straight into current: microwatts for fifty years, with nothing to refuel.', 'The fab makes it from a nickel-63 target and clean-room parts. It powers sensors and probes that cannot be recharged, and the solar probe carries one. Automate it with a nickel-63 target feed from the driver line and a chest of finished cells.'],
     [it('grindless:betavoltaic_cell')]),
 
   // ------------------------------------------------------------------ photonics
@@ -154,7 +154,7 @@ export const QUESTS = [
     automate: 'Scaffolds and nutrient by ME and pipe; discard cultures on a schedule.',
   }, [it(HULL), it(FILTER), it(PTFE), it(COMP)]),
   prod('P_ORG', 'A Living Processor', 'grindless:neural_organoid', ['ORG'], 5.5, 12,
-    'A &6Neural Organoid&r is grown, not assembled.',
+    ['A &6Neural Organoid&r is grown, not assembled: neurons on a scaffold, fed and kept sterile until they work as a processor.', 'The organoid array grows it from a scaffold and nutrient, and the cultures are discarded on a schedule. It is the core of the wetware circuit row and one of the gate\'s five ingredients. Automate it with scaffolds and nutrient by ME and pipe, and never leave a culture unwatched.'],
     [it('grindless:neural_organoid')]),
 
   // ------------------------------------------------------------------ tether
@@ -177,7 +177,7 @@ export const QUESTS = [
     automate: 'Powders by ME; the dies cool before the tiles leave.',
   }, [it(ROBUST)]),
   prod('P_UHTC', 'A Tile for Reentry', 'grindless:uhtc_tile', ['UHTC'], 6, 16.5,
-    'A &6UHTC Tile&r survives a heat that melts steel.',
+    ['A &6UHTC Tile&r is an ultra-high-temperature ceramic that survives a heat that melts steel. The &6UHTC Nozzle&r is the same ceramic cast as the throat of a rocket motor.', 'Both come from the spark plasma sinterer, from ceramic powders pressed under pulsed current. The tile lines the reentry capsule and the nozzle goes into the ICAN rocket motor. Automate it with powders by ME and let the dies cool before the parts leave.'],
     [it('grindless:uhtc_tile'), it('grindless:uhtc_nozzle')]),
 
   // ------------------------------------------------------------------ gate
@@ -209,7 +209,7 @@ export const QUESTS = [
     automate: 'Preforms by ME; the fibre spools out to a chest.',
   }, [it(TRUSS)]),
   prod('P_ZB', 'Fibre Without Loss', 'grindless:zblan_fibre', ['ZBLAN'], 5.5, 10,
-    '&6ZBLAN Fibre&r carries light for the whole circuit stack.',
+    ['&6ZBLAN Fibre&r is a fluoride glass drawn in microgravity, where it cannot crystallise, so it is the lowest-loss optical fibre there is.', 'The ZBLAN draw tower pulls it from a preform on the station. It is the light path of the photonic circuit stack and of the optical links of the ages after this. Automate it with preforms by ME and a chest on the spool.'],
     [it('grindless:zblan_fibre')]),
 
   // ------------------------------------------------------------------ mercury
@@ -235,7 +235,7 @@ export const QUESTS = [
     automate: 'Metals by ME; segments go to the control station.',
   }, [it(HULL), it(TRUSS)]),
   prod('P_SEG', 'A Swarm Segment', 'grindless:swarm_segment', ['SEG'], 12.5, -29,
-    'A &6Swarm Segment&r is one panel of thousands.',
+    ['A &6Swarm Segment&r is one mirror-and-collector panel of the thousands that make a star-powered swarm.', 'The foundry builds it from Mercury metals and a UHV hull. The control station needs a steady stream of them to steer the swarm and collect its power, which UEV asks for. Automate it with metals by ME and send segments straight to the station.'],
     [it('grindless:swarm_segment')]),
   gear('M_SWARM', 'swarm_control_station', 'Swarm Control Station', ['SEG'], 14.5, -30.5, {
     for: 'The &6Swarm Control Station&r steers the segments and collects their power.',
@@ -250,7 +250,7 @@ export const QUESTS = [
     automate: 'Probes by ME; maps leave by ME.',
   }, [it(HEATP), it(TRUSS)]),
   prod('P_PROBE', 'A Probe in the Corona', 'grindless:solar_probe', ['M_PROBE'], 18.5, -30.5,
-    'A &6Solar Probe&r survives where nothing else does.',
+    ['A &6Solar Probe&r survives where nothing else does: it flies through the corona and measures the field of the Sun\'s outer atmosphere.', 'The solar probe bay builds it from heat-shielded parts, and the swarm control station guides it. The returned &6Coronal Field Map&r is part of the Gate to UEV. Automate it with probes by ME, and let the maps leave by ME.'],
     [it('grindless:solar_probe'), it('grindless:coronal_field_map')]),
 
   // ------------------------------------------------------------------ proxima b
@@ -261,7 +261,7 @@ export const QUESTS = [
     automate: 'Canisters by ME; nothing leaves unsterilised.',
   }, [it(BSL4)]),
   prod('P_SAMP', 'A Canister Opened', 'grindless:sample_canister', ['SAMPLE'], 5, 3,
-    'A &6Sample Canister&r is the proof that the trip worked.',
+    ['A &6Sample Canister&r holds rock and soil from another world and is the proof that the trip worked. It is opened only in a sealed lab.', 'The sample receiving facility opens it behind BSL-4 walls and sorts what it holds. Those samples feed the surface machines on Proxima b and the life rows of UEV. Automate it with canisters by ME and keep nothing unsterilised outside the lab.'],
     [it('grindless:sample_canister')]),
   gear('ROVER', 'xenoflora_rover_bay', 'Rover', ['H_PROXIMA'], 19.5, -27.5, {
     for: 'The &6Xenoflora Rover Bay&r builds and sends rovers across the surface of Proxima b.',

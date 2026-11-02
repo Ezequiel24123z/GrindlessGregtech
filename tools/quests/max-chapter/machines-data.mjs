@@ -87,7 +87,8 @@ export const QUESTS = [
     automate: 'Genomes arrive by ME; one archive is enough, so cap it.',
   }),
   prod('M_GENOME', 'Genome Archive', 'grindless:genome_archive', ['M_ARK'], 10, 1.5, [
-    'What is written there is what the new universe remembers.',
+    'The &6Genome Archive&r is every genome the pack has met, written to crystal: what is written there is what the new universe remembers.',
+    'The Gene Ark makes it from the genomes you have collected on the way, in its sealed cold vault. The last seed needs it, and so do the gates and MAX+ after it. One archive is enough: bring the genomes in by ME and cap the output.',
   ]),
 
   // ------------------------------------------------------------------ Sgr A* orbit

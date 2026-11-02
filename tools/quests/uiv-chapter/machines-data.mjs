@@ -152,7 +152,7 @@ export const QUESTS = [
     automate: 'Drip neutrons by pipe; keep pellets by ME, as the hall never uses them up.',
   }, [UIV, SITE], 300),
   {
-    key: 'P_PELLET_N', kind: 'reading', title: 'Neutronium Pellet', icon: 'grindless:neutronium_pellet',
+    key: 'P_PELLET_N', kind: 'reading', title: 'What the Pellet Is', icon: 'grindless:neutronium_pellet',
     deps: ['NEUT'], x: 19, y: -37,
     desc: ['It is not the neutronium of the other mods: it is a pellet of neutron matter. The journey asks for it once; keep one for the hall and one for the stored proof.'],
     tasks: [{ type: 'checkmark' }], rewards: [xp(25)],

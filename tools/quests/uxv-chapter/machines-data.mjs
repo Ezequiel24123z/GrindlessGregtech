@@ -170,7 +170,9 @@ export const QUESTS = [
     unlocks: 'Lasagna plate, then the UXV hull.',
     automate: 'Phase and billets by ME; plates stack up, so send them on.',
   }, [SITE, ROBUST]),
-  prod('LASP', 'Lasagna Plate', 'grindless:lasagna_plate', ['PLATE'], 9.5, 16.5, ['The plate every UXV hull and part is cut from.']),
+  prod('LASP', 'Lasagna Plate', 'grindless:lasagna_plate', ['PLATE'], 9.5, 16.5, [
+  'The &6Lasagna Plate&r is the structural plate of the UXV hull and of every UXV part: a tungsten-fibre billet with a lasagna phase pressed onto it.',
+  'The Pasta Laminator makes it from the phase and a billet, which the sorting row of this chapter supplies. It unlocks the UXV hull and, through it, every UXV machine. Plates stack quickly, so feed phase and billets by ME and send the plates on to the hull line.']),
   gear('TAP', 'polar_cap_tap', 'Polar Cap Tap', ['WIRE'], 9.5, 15, {
     for: 'Above a pulsar\'s magnetic poles the field tears charges off the surface. The &6Polar Cap Tap&r lowers an electrode into that current and burns through it, at Vela only.',
     needs: 'A UIV hull, the neutron star site casing and a mast of insulator rings.',

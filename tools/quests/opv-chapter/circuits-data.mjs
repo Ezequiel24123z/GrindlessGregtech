@@ -64,6 +64,12 @@ export const QUESTS = [
   q('DRIVE', 'step', 'Harmonic Drive', 'grindless:opv_harmonic_drive', ['C_L_DRIVE'], 2, 3, null, [
     'A flexible steel cup that deforms against a ring of teeth turns with no backlash at all. The &6OpV Harmonic Drive&r is the gear of the OpV robot arm and holds position to a fraction of an arc second.',
   ], [it('grindless:opv_harmonic_drive')], 100),
+  q('TISAPH', 'wafer', 'Ti:Sapphire Boule', 'grindless:ti_sapphire_boule', ['H_OPV_CIRCUITS'], 12.5, 9, {
+    for: 'A sapphire crystal doped with titanium is the gain medium of a tunable laser. The &6Ti:Sapphire Boule&r is the crystal that the Lyman-alpha laser of the antihydrogen line is built round.',
+    needs: 'The crystal growth furnace, two sapphire dust, a titanium dust and an iridium crucible, with a circuit of any kind. It draws OpV power.',
+    unlocks: 'The Lyman-alpha laser, which cools the antihydrogen atoms before they freeze into a cell, beside the krypton tripler cell.',
+    automate: 'Feed the dusts by ME and keep a spare crucible; one boule is used up per laser, so stock only a few.',
+  }, [], [it('grindless:ti_sapphire_boule')], 120),
   q('SENSOR', 'circuit', 'OpV Sensor', 'gtceu:opv_sensor', ['COSMIC'], 12, 0, {
     for: 'The &6OpV Sensor&r measures what the detectors of the age need to see: single photons, charge and spin. The emitter, the field generator and many controllers use one.',
     needs: 'An HPGE Compton crystal, a chain lamina stack, a cryo optical link, chain strand cable, a UXV sensor and OpV circuits, in an assembler.',

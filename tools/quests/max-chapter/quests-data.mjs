@@ -73,9 +73,9 @@ export const QUESTS = [
   },
   {
     key: 'PROBE', kind: 'step', title: 'Relay Probe', icon: 'grindless:gc_relay_probe',
-    deps: ['SGRCHART'], x: 10, y: 0,
+    deps: ['SGRCHART', 'M_FURN'], x: 10, y: 0,
     desc: [
-      'A relay probe for the Galactic Centre. It is an assembly-line recipe researched at the Hawking drive, and it takes metal feedstock, so make that first. The ring at Cygnus X-1 throws it, with the Sagittarius A* chart kept in its store.',
+      'A relay probe for the Galactic Centre. It is an assembly-line recipe researched at the Hawking drive, and it takes metal feedstock, so make that first. Its sinter casing comes from the Cluster-Light Furnace line. The ring at Cygnus X-1 throws it, with the Sagittarius A* chart kept in its store.',
     ],
     tasks: [it('grindless:gc_relay_probe')],
     rewards: [xp(150)],
@@ -138,9 +138,9 @@ export const QUESTS = [
   },
   {
     key: 'NSCSEED', kind: 'step', title: 'Belt Seed', icon: 'grindless:nsc_belt_seed',
-    deps: ['J_WARP'], x: 24, y: 0,
+    deps: ['J_WARP', 'M_FURN'], x: 24, y: 0,
     desc: [
-      'A seed for a belt of planetesimals at the centre. It is an assembly-line recipe researched with the cluster ephemeris, and it takes metal feedstock. The gate\'s hold here takes it with the launched probe.',
+      'A seed for a belt of planetesimals at the centre. It is an assembly-line recipe researched with the cluster ephemeris, and it takes metal feedstock and sinter casing from the Cluster-Light Furnace line. The gate\'s hold here takes it with the launched probe.',
     ],
     tasks: [it('grindless:nsc_belt_seed')],
     rewards: [xp(150)],
