@@ -410,9 +410,11 @@ export function buildModel(dump, rawCfg0) {
         hatches = 1;
       }
       if (typeof e0.energy.voltage !== 'number') warnings.push(`${id}: energy.voltage must be a number (the hatch's voltage)`);
-      const maxEUt = hatches >= 2 ? e0.energy.voltage * 4 : e0.energy.voltage;
+      const amperage = e0.energy.amperage === undefined ? 1 : Number(e0.energy.amperage);
+      if (!(amperage >= 1)) warnings.push(`${id}: energy.amperage must be a number of at least 1`);
+      const maxEUt = (hatches >= 2 ? e0.energy.voltage * 4 : e0.energy.voltage) * (amperage >= 1 ? amperage : 1);
       e = { ...e0, maxEUt };
-      stats.rolledMachines.push({ machine: id, hatches, voltage: e0.energy.voltage, maxEUt });
+      stats.rolledMachines.push({ machine: id, hatches, voltage: e0.energy.voltage, amperage, maxEUt });
     }
     // coilTemp: an EBF's coil temperature. GTM adds 100 K per voltage step above MV
     // (GTRecipeModifiers.ebfOverclock) and rejects recipes whose ebf_temp is higher.
@@ -628,6 +630,11 @@ export function buildModel(dump, rawCfg0) {
         // a numeric condition with a cap in this tier (e.g. the EBF's coil temperature): above it, the recipe doesn't apply
         const value = Number(c[rule.field]);
         if (value > rule.max) slots.push(slotOf([], false, `${c.type} ${value} (this tier reaches ${rule.max})`, 'cond'));
+      } else if (rule.keyFrom) {
+        // a place-bound condition met by a key a tier rule (a trip) produces: <prefix>:<field value> (the biome the rocket reaches)
+        const value = c[rule.keyFrom.field];
+        if (typeof value !== 'string' || value === '') slots.push(slotOf([], false, `condition ${c.type} with no ${rule.keyFrom.field}`, 'cond'));
+        else slots.push(slotOf([`${rule.keyFrom.prefix}:${value}`], true, `${c.type} ${value}`, 'cond'));
       } else if (rule.fluidsFrom) {
         for (const f of asArray(c[rule.fluidsFrom])) {
           slots.push(slotOf(resolve('fluid:' + f, `condition ${c.type}`), true, `next to ${f}`, 'cond'));

@@ -66,7 +66,8 @@
     "orbit": { "ignore": true, "reason": "orbital placement is carried by the dimension condition" },
     "dyson_sphere": { "ignore": true, "reason": "the sphere's state is an in-world condition of the Dyson machine" },
     "pos_y": { "ignore": true, "reason": "a height window inside the dimension" },
-    "ae2_circumstance_explosion": { "ignore": true, "reason": "the explosion source is a world action" }
+    "ae2_circumstance_explosion": { "ignore": true, "reason": "the explosion source is a world action" },
+    "biome": { "keyFrom": { "field": "biome", "prefix": "biome" } }
   },
 
   "partAbilities": {

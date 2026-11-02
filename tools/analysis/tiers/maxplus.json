@@ -25,22 +25,125 @@
     "hyperfactory": { "label": "hyperfactory", "landedWhen": ["gtceu:hyperfactory"] }
   },
   "machines": [
-    { "machine": "gtceu:condensate_assembler", "types": ["gtceu:condensate_assembler"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "condensate_assembler" },
-    { "machine": "gtceu:blueshift_forge", "types": ["gtceu:blueshift_forge"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "blueshift_forge" },
-    { "machine": "gtceu:condensate_refinery", "types": ["gtceu:condensate_refinery"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "condensate_refinery" },
-    { "machine": "gtceu:bound_matter_press", "types": ["gtceu:bound_matter_press"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "bound_matter_press" },
-    { "machine": "gtceu:multi_plasma_blender", "types": ["gtceu:multi_plasma_blender"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "multi_plasma_blender" },
-    { "machine": "gtceu:horizon_crystal_furnace", "types": ["gtceu:horizon_crystal_furnace"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "horizon_crystal_furnace" },
-    { "machine": "gtceu:hyper_assembly_array", "types": ["gtceu:hyper_assembly_array"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "hyper_assembly_array" },
-    { "machine": "gtceu:meta_material_loom", "types": ["gtceu:meta_material_loom"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "meta_material_loom" },
-    { "machine": "gtceu:hills_slingshot", "types": ["gtceu:hills_slingshot"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "hills_slingshot" },
-    { "machine": "gtceu:pristine_gas_works", "types": ["gtceu:pristine_gas_works"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "pristine_gas_works" },
-    { "machine": "gtceu:primordial_fusion_torus", "types": ["gtceu:primordial_fusion_torus"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "primordial_fusion_torus" },
-    { "machine": "gtceu:tarantula_stellar_lift", "types": ["gtceu:tarantula_stellar_lift"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "tarantula_stellar_lift" },
-    { "machine": "gtceu:pair_instability_crucible", "types": ["gtceu:pair_instability_crucible"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "pair_instability_crucible" },
-    { "machine": "gtceu:nickel_56_burner", "types": ["gtceu:nickel_56_burner"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "nickel_56_burner" },
-    { "machine": "gtceu:void_crystal_fab", "types": ["gtceu:void_crystal_fab"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "void_crystal_fab" },
-    { "machine": "gtceu:hyperstargate", "types": ["gtceu:hyperstargate_dial"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "hyperstargate" },
-    { "id": "gtceu:hyperfactory@maxplus", "machine": "gtceu:hyperfactory", "types": ["gtceu:assembler", "gtceu:circuit_assembler", "gtceu:assembly_line", "gtceu:forming_press", "gtceu:laser_engraver"], "energy": { "voltage": 2147483648, "hatches": 2 }, "needs": ["eu:max"], "package": "hyperfactory" }
+    { "machine": "gtceu:condensate_assembler", "types": ["gtceu:condensate_assembler"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "condensate_assembler" },
+    { "machine": "gtceu:blueshift_forge", "types": ["gtceu:blueshift_forge"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "blueshift_forge" },
+    { "machine": "gtceu:condensate_refinery", "types": ["gtceu:condensate_refinery"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "condensate_refinery" },
+    { "machine": "gtceu:bound_matter_press", "types": ["gtceu:bound_matter_press"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "bound_matter_press" },
+    { "machine": "gtceu:multi_plasma_blender", "types": ["gtceu:multi_plasma_blender"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "multi_plasma_blender" },
+    { "machine": "gtceu:horizon_crystal_furnace", "types": ["gtceu:horizon_crystal_furnace"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "horizon_crystal_furnace" },
+    { "machine": "gtceu:hyper_assembly_array", "types": ["gtceu:hyper_assembly_array"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "hyper_assembly_array" },
+    { "machine": "gtceu:meta_material_loom", "types": ["gtceu:meta_material_loom"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "meta_material_loom" },
+    { "machine": "gtceu:hills_slingshot", "types": ["gtceu:hills_slingshot"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "hills_slingshot" },
+    { "machine": "gtceu:pristine_gas_works", "types": ["gtceu:pristine_gas_works"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "pristine_gas_works" },
+    { "machine": "gtceu:primordial_fusion_torus", "types": ["gtceu:primordial_fusion_torus"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "primordial_fusion_torus" },
+    { "machine": "gtceu:tarantula_stellar_lift", "types": ["gtceu:tarantula_stellar_lift"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "tarantula_stellar_lift" },
+    { "machine": "gtceu:pair_instability_crucible", "types": ["gtceu:pair_instability_crucible"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "pair_instability_crucible" },
+    { "machine": "gtceu:nickel_56_burner", "types": ["gtceu:nickel_56_burner"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "nickel_56_burner" },
+    { "machine": "gtceu:void_crystal_fab", "types": ["gtceu:void_crystal_fab"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "void_crystal_fab" },
+    { "machine": "gtceu:hyperstargate", "types": ["gtceu:hyperstargate_dial"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 4096 }, "needs": ["eu:max"], "package": "hyperstargate" },
+    { "id": "gtceu:hyperfactory@maxplus", "machine": "gtceu:hyperfactory", "types": ["gtceu:assembler", "gtceu:circuit_assembler", "gtceu:assembly_line", "gtceu:forming_press", "gtceu:laser_engraver"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "hyperfactory" },
+    { "id": "gtceu:warp_gate@maxplus", "machine": "gtceu:warp_gate", "types": ["gtceu:warp_gate"], "maxEUt": 137438953472, "needs": ["eu:max"], "package": "XP-T1", "note": "V[MAX] x 64 A on a 1,024 A MAX+ hatch (gate.json c16 to c19: 2^37 EU/t)." }
+  ],
+  "conditions": {
+    "dimension": {
+      "asKeysFor": ["gcyr:luna", "gcyr:mars", "gcyr:venus", "gcyr:mercury", "minecraft:the_end", "minecraft:the_nether", "${orbits}", "${places}", "gcyr:black_hole_orbit", "grindless:nsc_belt", "grindless:tarantula_orbit", "grindless:magellanic_stream", "grindless:m31_nucleus_orbit", "grindless:local_group_filament"],
+      "note": "The four Local Group places are in no orbit or place table: a recipe valid there needs the dim: key of gates c16 to c19 (the jump synthetics below)."
+    }
+  },
+  "world": [
+    {
+      "id": "horizon-shard",
+      "mode": "manual",
+      "items": ["grindless:horizon_shard"],
+      "note": "The catalyst of the creative cores (K1 to K4) has no recipe and no source in the pack yet (finding M1-02, an owner decision). Until it has one this stand-in marks it as found by hand, so the MAX+ gate proves everything else."
+    }
+  ],
+  "synthetic": [
+    {
+      "id": "tarantula-jump",
+      "package": "XP-T1",
+      "capital": ["gtceu:warp_gate"],
+      "consumes": ["dim:gcyr:black_hole_orbit", "eu:max"],
+      "produces": ["dim:grindless:tarantula_orbit"],
+      "note": "Gate c16 (hold_tarantula): Sgr A* orbit to 30 Doradus. The probe and the horizon lock are checked by the recipe target gate-hold-tarantula."
+    },
+    {
+      "id": "stream-jump",
+      "package": "XP-T2",
+      "capital": ["gtceu:warp_gate"],
+      "consumes": ["dim:grindless:tarantula_orbit", "eu:max"],
+      "produces": ["dim:grindless:magellanic_stream"],
+      "note": "Gate c17 (hold_magellanic_stream)."
+    },
+    {
+      "id": "m31-jump",
+      "package": "XP-T2",
+      "capital": ["gtceu:warp_gate"],
+      "consumes": ["dim:grindless:tarantula_orbit", "eu:max"],
+      "produces": ["dim:grindless:m31_nucleus_orbit"],
+      "note": "Gate c18 (hold_m31_nucleus)."
+    },
+    {
+      "id": "filament-jump",
+      "package": "XP-T2",
+      "capital": ["gtceu:warp_gate"],
+      "consumes": ["dim:grindless:m31_nucleus_orbit", "eu:max"],
+      "produces": ["dim:grindless:local_group_filament"],
+      "note": "Gate c19 (hold_local_group_filament)."
+    },
+    {
+      "id": "ae2-matter-condenser",
+      "package": "XP-K",
+      "capital": ["ae2:condenser"],
+      "consumes": ["eu:max"],
+      "produces": ["ae2:matter_ball", "ae2:singularity"],
+      "note": "The AE2 matter condenser makes the matter ball and the singularity the creative cores use; it is a machine of the pack's AE2, not a recipe of a type the model reads."
+    }
+  ],
+  "autoTargets": [
+    { "id": "k1-horizon-cloud-core", "label": "K1: the horizon cloud core", "item": "grindless:horizon_cloud_core", "package": "XP-K" },
+    { "id": "k2-bottomless-store-core", "label": "K2: the bottomless store core", "item": "grindless:bottomless_store_core", "package": "XP-K" },
+    { "id": "k3-bottomless-tank-core", "label": "K3: the bottomless tank core", "item": "grindless:bottomless_tank_core", "package": "XP-K" },
+    { "id": "k4-horizon-computation-core", "label": "K4: the horizon computation core", "item": "grindless:horizon_computation_core", "package": "XP-K" }
+  ],
+  "targets": [
+    { "id": "mxp-condensate-assembler", "label": "MAX+ controller: condensate assembler", "item": "gtceu:condensate_assembler", "package": "condensate_assembler" },
+    { "id": "mxp-blueshift-forge", "label": "MAX+ controller: blueshift forge", "item": "gtceu:blueshift_forge", "package": "blueshift_forge" },
+    { "id": "mxp-condensate-refinery", "label": "MAX+ controller: condensate refinery", "item": "gtceu:condensate_refinery", "package": "condensate_refinery" },
+    { "id": "mxp-bound-matter-press", "label": "MAX+ controller: bound matter press", "item": "gtceu:bound_matter_press", "package": "bound_matter_press" },
+    { "id": "mxp-multi-plasma-blender", "label": "MAX+ controller: multi plasma blender", "item": "gtceu:multi_plasma_blender", "package": "multi_plasma_blender" },
+    { "id": "mxp-horizon-crystal-furnace", "label": "MAX+ controller: horizon crystal furnace", "item": "gtceu:horizon_crystal_furnace", "package": "horizon_crystal_furnace" },
+    { "id": "mxp-hyper-assembly-array", "label": "MAX+ controller: hyper assembly array", "item": "gtceu:hyper_assembly_array", "package": "hyper_assembly_array" },
+    { "id": "mxp-meta-material-loom", "label": "MAX+ controller: meta material loom", "item": "gtceu:meta_material_loom", "package": "meta_material_loom" },
+    { "id": "mxp-hills-slingshot", "label": "MAX+ controller: hills slingshot", "item": "gtceu:hills_slingshot", "package": "hills_slingshot" },
+    { "id": "mxp-pristine-gas-works", "label": "MAX+ controller: pristine gas works", "item": "gtceu:pristine_gas_works", "package": "pristine_gas_works" },
+    { "id": "mxp-primordial-fusion-torus", "label": "MAX+ controller: primordial fusion torus", "item": "gtceu:primordial_fusion_torus", "package": "primordial_fusion_torus" },
+    { "id": "mxp-tarantula-stellar-lift", "label": "MAX+ controller: tarantula stellar lift", "item": "gtceu:tarantula_stellar_lift", "package": "tarantula_stellar_lift" },
+    { "id": "mxp-pair-instability-crucible", "label": "MAX+ controller: pair instability crucible", "item": "gtceu:pair_instability_crucible", "package": "pair_instability_crucible" },
+    { "id": "mxp-nickel-56-burner", "label": "MAX+ controller: nickel 56 burner", "item": "gtceu:nickel_56_burner", "package": "nickel_56_burner" },
+    { "id": "mxp-void-crystal-fab", "label": "MAX+ controller: void crystal fab", "item": "gtceu:void_crystal_fab", "package": "void_crystal_fab" },
+    { "id": "mxp-horizon-capacitor-bank", "label": "MAX+ controller: horizon capacitor bank", "item": "gtceu:horizon_capacitor_bank", "package": "horizon_capacitor_bank" },
+    { "id": "mxp-hyperstargate", "label": "MAX+ controller: hyperstargate", "item": "gtceu:hyperstargate", "package": "hyperstargate" },
+    { "id": "mxp-hyperfactory", "label": "MAX+ controller: hyperfactory", "item": "gtceu:hyperfactory", "package": "hyperfactory" },
+    { "id": "mxp-gate-ring", "label": "Hyperstargate: ring block", "item": "grindless:hyperstargate_ring_block", "package": "hyperstargate" },
+    { "id": "mxp-gate-locked-chevron", "label": "Hyperstargate: locked chevron", "item": "grindless:hyperstargate_locked_chevron", "package": "hyperstargate" },
+    { "id": "mxp-gate-power-unit", "label": "Hyperstargate: power unit", "item": "grindless:hyperstargate_power_unit", "package": "hyperstargate" },
+    { "id": "mxp-gate-base", "label": "Hyperstargate: base", "item": "grindless:hyperstargate_base", "package": "hyperstargate" },
+    { "id": "mxp-gate-iris", "label": "Hyperstargate: horizon iris", "item": "grindless:horizon_iris", "package": "hyperstargate" },
+    { "id": "mxp-dial-run", "label": "Gate: one hyperstargate dial run", "kind": "recipe", "type": "gtceu:hyperstargate_dial", "package": "hyperstargate" },
+    { "id": "mxp-creative-energy", "label": "Creative energy", "kind": "recipe", "type": "gtceu:hyper_assembly_array", "recipe": ["grindless:hyper_assembly_array/creative_energy"], "package": "hyper_assembly_array" },
+    { "id": "mxp-creative-chest", "label": "Creative chest", "kind": "recipe", "type": "gtceu:hyper_assembly_array", "recipe": ["grindless:hyper_assembly_array/creative_chest"], "package": "hyper_assembly_array" },
+    { "id": "mxp-creative-tank", "label": "Creative tank", "kind": "recipe", "type": "gtceu:hyper_assembly_array", "recipe": ["grindless:hyper_assembly_array/creative_tank"], "package": "hyper_assembly_array" },
+    { "id": "mxp-creative-computation", "label": "Creative computation provider", "kind": "recipe", "type": "gtceu:hyper_assembly_array", "recipe": ["grindless:hyper_assembly_array/creative_computation_provider"], "package": "hyper_assembly_array" },
+    { "id": "mxp-creative-data-hatch", "label": "Creative data access hatch", "kind": "recipe", "type": "gtceu:hyper_assembly_array", "recipe": ["grindless:hyper_assembly_array/creative_data_access_hatch"], "package": "hyper_assembly_array" },
+    { "id": "mxp-creative-energy-cell", "label": "Creative energy cell", "kind": "recipe", "type": "gtceu:hyper_assembly_array", "recipe": ["grindless:hyper_assembly_array/creative_energy_cell"], "package": "hyper_assembly_array" },
+    { "id": "gate-hold-tarantula", "label": "Gate c16: the hold row for 30 Doradus", "kind": "recipe", "type": "gtceu:warp_gate", "recipe": ["grindless:warp_gate/hold_tarantula"], "package": "XP-T1" },
+    { "id": "gate-hold-magellanic-stream", "label": "Gate c17: the hold row for the Magellanic Stream", "kind": "recipe", "type": "gtceu:warp_gate", "recipe": ["grindless:warp_gate/hold_magellanic_stream"], "package": "XP-T2" },
+    { "id": "gate-hold-m31-nucleus", "label": "Gate c18: the hold row for the M31 nucleus", "kind": "recipe", "type": "gtceu:warp_gate", "recipe": ["grindless:warp_gate/hold_m31_nucleus"], "package": "XP-T2" },
+    { "id": "gate-hold-local-group-filament", "label": "Gate c19: the hold row for the Local Group filament", "kind": "recipe", "type": "gtceu:warp_gate", "recipe": ["grindless:warp_gate/hold_local_group_filament"], "package": "XP-T2" },
+    { "id": "place-tarantula-orbit", "label": "Place: 30 Doradus orbit", "allOf": ["dim:grindless:tarantula_orbit"], "package": "XP-T1" },
+    { "id": "place-magellanic-stream", "label": "Place: the Magellanic Stream", "allOf": ["dim:grindless:magellanic_stream"], "package": "XP-T2" },
+    { "id": "place-m31-nucleus-orbit", "label": "Place: the M31 nucleus orbit", "allOf": ["dim:grindless:m31_nucleus_orbit"], "package": "XP-T2" },
+    { "id": "place-local-group-filament", "label": "Place: the Local Group filament", "allOf": ["dim:grindless:local_group_filament"], "package": "XP-T2" }
   ]
 }

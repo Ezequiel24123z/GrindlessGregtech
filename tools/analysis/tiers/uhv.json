@@ -2249,9 +2249,11 @@
       ],
       "produces": [
         "dim:${place:proxima_b}",
-        "dim:${orbit:proxima_b}"
+        "dim:${orbit:proxima_b}",
+        "biome:gcyr:proxima_centauri_b_star_side",
+        "biome:gcyr:proxima_centauri_b_opp_side"
       ],
-      "note": "The level 8 rocket (A8, B1): the ICAN motor (GCYR motor tier 6) and the tier 11 BNNT tank; reaches Proxima b and its orbit (the eighth station)."
+      "note": "The level 8 rocket (A8, B1): the ICAN motor (GCYR motor tier 6) and the tier 11 BNNT tank; reaches Proxima b and its orbit (the eighth station) and both its biomes (the biome condition of the B5 and cold-trap rows)."
     },
     {
       "id": "nether-trip",
