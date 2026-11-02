@@ -28,10 +28,10 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the assembler and the ladder
   {
     key: 'ZC_ASM', kind: 'machine', title: 'ZPM Circuit Assembler', icon: 'gtceu:zpm_circuit_assembler',
-    deps: ['START'], x: 2, y: 0,
+    deps: ['ZC_CCOMP'], x: 4, y: 0,
     teach: {
       for: 'The &6ZPM Circuit Assembler&r is the first assembler that can build the circuits ZPM machines are made of.',
-      needs: 'ZPM components for its hull, a cleanroom you already run, and the UV-tier circuits that feed it: the Crystal Processor Mainframe from the LuV assembly line, or a UV universal circuit.',
+      needs: 'ZPM components for its hull, a cleanroom you already run, and the circuits that feed it: the Crystal Processor Computer from the quest before, the Crystal Processor Mainframe from the LuV assembly line, or a UV universal circuit.',
       unlocks: 'The Wetware Processor Assembly, which only this assembler builds, and the circuits the controllers of this era ask for.',
       automate: 'Boards and chips arrive by ME from the cleanroom; keep a stock of what it returns.',
     },
@@ -41,7 +41,7 @@ export const QUESTS = [
   },
   {
     key: 'ZC_CCOMP', kind: 'circuit', title: 'Crystal Computer', icon: 'gtceu:crystal_processor_computer',
-    deps: ['ZC_ASM'], x: 4, y: 0,
+    deps: ['START'], x: 2, y: 0,
     teach: {
       for: 'Crystal processor assemblies on a larger board make       the &6Crystal Processor Computer&r, a ZPM-tier circuit that the LuV assembler builds.',
             needs: 'Several crystal assemblies for each and a LuV circuit assembler or assembly line. The ZPM assembler is not needed.',

@@ -44,12 +44,12 @@ export const QUESTS = [
     deps: ['EXC'], x: 4, y: 0,
     teach: {
       for: 'A &6ZPM SMES cell&r and a wireless hatch put another tier on the network. Sunlight is a rumour at Saturn, so everything out there draws from it.',
-      needs: 'The cold room that winds the wire, and enough cells to carry the Mk2 start.',
+      needs: 'The cold room that winds the wire, a ZPM energy hatch for each cell bank, and enough cells to carry the Mk2 start.',
       unlocks: 'The Mk2 next, and stations at Saturn and Uranus that run on power made at home.',
       automate: 'Nothing to feed: size the cells for your busiest hour and add more when it dips.',
     },
     desc: [],
-    tasks: [it('grindless:zpm_smes_cell'), it('gtceu:zpm_wireless_energy_hatch')],
+    tasks: [it('grindless:zpm_smes_cell'), it('gtceu:zpm_energy_input_hatch'), it('gtceu:zpm_wireless_energy_hatch')],
     rewards: [xp(100)],
   },
   {

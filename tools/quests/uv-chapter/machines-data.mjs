@@ -44,8 +44,8 @@ const deps_ = (d) => d.map((k) => REF[k] || k);
 
 // One multiblock gear: controller plus the casings and parts new in this era.
 const gear = (key, id, title, deps, x, y, teach, tasks, xpN = 120) => ({
-  key, kind: 'machine', title, icon: `gtceu:${id}`, deps: deps_(deps), x, y,
-  teach, desc: [], tasks: [it(`gtceu:${id}`), ...tasks], rewards: [xp(xpN)],
+  key, kind: 'machine', title, icon: id.includes(':') ? id : `gtceu:${id}`, deps: deps_(deps), x, y,
+  teach, desc: [], tasks: [it(id.includes(':') ? id : `gtceu:${id}`), ...tasks], rewards: [xp(xpN)],
 });
 
 // One product or material quest that closes a row.
@@ -108,10 +108,10 @@ export const QUESTS = [
   // ------------------------------------------------------------------ cold and accelerators
   gear('HE2', 'superfluid_helium_plant', 'Superfluid Helium', ['M_L_COLD'], 2, 4.5, {
     for: 'The &6Superfluid Helium Plant&r cools helium below its lambda point, where it flows without friction, and splits Neptune\'s helium with a superleak.',
-    needs: 'Its controller, the &6Cryostat Casing&r and the stainless gearboxes that run the cold compressors.',
+    needs: 'Its controller, the &6Cryostat Casing&r, a &6Mu-Metal Shield&r that keeps stray fields off the cold stage, and the stainless gearboxes that run the cold compressors.',
     unlocks: 'Helium II for the cryomodules and the cavity works.',
     automate: 'Gas arrives by pipe; stock helium II in a dedicated tank.',
-  }, [it(CRYOSTAT)]),
+  }, [it(CRYOSTAT), it('grindless:mu_metal_shield')]),
   gear('CAV', 'srf_cavity_works', 'Cavity Works', ['HE2'], 4, 4.5, {
     for: 'The &6SRF Cavity Works&r forms, polishes and anneals niobium into cavities that carry a beam with almost no loss.',
     needs: 'Its controller and clean room casing; niobium sheet and helium II run through it.',
@@ -155,7 +155,7 @@ export const QUESTS = [
     automate: 'Arsenic is contained; keep the scrubber supplied and the diodes going out by ME.',
   }, [it(CLEAN), it('gtceu:inert_machine_casing')]),
   prod('P_DIODE', 'Pump Diode Module', 'grindless:ingaas_pump_module', ['PUMP'], 8, 7.5,
-    'Diode bars stacked in a cooled mount make the &6InGaAs Pump Module&r that lights the fibre laser.',
+    'Diode bars stacked in a cooled mount make the &6InGaAs Pump Module&r that lights the fibre laser. The diode line builds it from InGaAs bars and a cooled mount, so it needs the pump line running. It unlocks the fibre laser and what that laser powers. Diodes go out by ME, a few at a time.',
     [it('grindless:ingaas_pump_module')]),
 
   // ------------------------------------------------------------------ detectors
@@ -180,16 +180,16 @@ export const QUESTS = [
     automate: 'Boron-10 comes from the hot cell; send the yarn on by ME.',
   }, [it(UVC)]),
   prod('P_YARN', 'BNNT Yarn', 'grindless:bnnt_yarn', ['BNNT'], 4, 10.5,
-    'Spin the tubes and you get &6BNNT Yarn&r: light, strong and transparent to neutrons.',
+    'Spin the tubes and you get &6BNNT Yarn&r: light, strong and transparent to neutrons, so it is the fibre of the lightest parts. The yarn spinner makes it from boron nitride nanotubes, which need boron-10 from the hot cell. It unlocks the powder-in-tube line. Keep the tubes coming by ME and send the yarn on the same way.',
     [it('grindless:bnnt_yarn'), it('grindless:hbn_dust')]),
   gear('PIT', 'powder_in_tube_line', 'Powder-in-Tube Line', ['P_YARN'], 6, 10.5, {
     for: 'The &6Powder-in-Tube Line&r packs a wire powder into a silver sheath and draws it down, turning one ingot of material into four.',
     needs: 'Its controller and UV casing, a drawing bench and a furnace coil.',
     unlocks: 'EnTED wire for the UV network.',
     automate: 'Each billet eats one silver tube; the wire step returns silver dust. Remelt it into tubes and keep them stocked.',
-  }, [it(UVC)]),
+  }, [it(UVC), it('grindless:silver_tube')]),
   prod('P_BILLET', 'Powder Billet', 'grindless:pit_billet', ['PIT'], 8, 10.5,
-    'A drawn &6PIT Billet&r is a sheath filled with powder, ready to be rolled into wire.',
+    'A drawn &6PIT Billet&r is a silver sheath filled with powder, ready to be rolled into wire. The powder-in-tube line makes it, and each one eats a silver tube. It unlocks the wire step and EnTED wire for the UV network. Remelt the returned silver into tubes and keep them stocked by ME.',
     [it('grindless:pit_billet'), it('grindless:silver_tube')]),
 
   gear('PRINT', 'powder_bed_printer', 'Powder Bed Printer', ['M_L_PRINT'], 2, 12, {
@@ -199,7 +199,7 @@ export const QUESTS = [
     automate: 'Printing consumes most of its powder, and atomising loses a little argon. Keep both stocked and store the parts by ME.',
   }, [it(UVC)]),
   prod('P_PRINT', 'Printed Probe Frame', 'grindless:printed_probe_frame', ['PRINT'], 4, 12,
-    'The &6Printed Probe Frame&r is the lightest rigid thing you build; the probe hangs from it.',
+    'The &6Printed Probe Frame&r is the lightest rigid thing you build; the probe hangs from it. The powder bed printer prints it from atomised metal powder under argon. It unlocks the cryotank winder and every probe after it. Keep powder and argon stocked and store the frames in ME.',
     [it('grindless:printed_probe_frame')]),
   gear('TANK', 'cryotank_winder', 'Cryotank Winder', ['P_PRINT'], 6, 12, {
     for: 'The &6Cryotank Winder&r winds BNNT yarn round a liner into the tier 11 tank that level 7 rockets need.',
@@ -241,7 +241,7 @@ export const QUESTS = [
     automate: 'Xenon and silicon tetrafluoride are kept: loop them; sails go out by ME.',
   }, [it(TRUSS)]),
   prod('P_SAIL', 'Light Sail', 'grindless:light_sail', ['SAIL'], 4, 16.5,
-    'A &6Light Sail&r weighs almost nothing and reflects almost everything.',
+    'A &6Light Sail&r weighs almost nothing and reflects almost everything, so light alone can push a probe to another star. It is made at the sail line from thin reflective film, in an orbital build with a truss casing. It unlocks the Starchip Fab and the launch. Sails go out by ME, one for each run.',
     [it('grindless:light_sail')]),
   gear('SCFAB', 'starchip_fab', 'Starchip Fab', ['P_SAIL'], 6, 16.5, {
     for: 'The &6Starchip Fab&r bonds and dices a photonic chip, a qubit and a source into a probe that weighs a gram.',
@@ -277,7 +277,7 @@ export const QUESTS = [
     automate: 'A cartridge per run by ME; collect the core and the nitrogen from the hatches.',
   }, [it(TRUSS)]),
   prod('P_TRITON', 'Triton Ice Core', 'grindless:triton_ice_core', ['TRITON'], 6, 21,
-    'A &6Triton Ice Core&r is the catalyst the Pluto penetrator drills with.',
+    'A &6Triton Ice Core&r is the catalyst the Pluto penetrator drills with, cut from Triton ice. It is made in the Triton line from the ice a probe brings back, so it needs that run first. It unlocks the Pluto penetrator. Keep the line stocked by ME, since the penetrator uses a core for every bore.',
     [it('grindless:triton_ice_core')]),
 
   // ------------------------------------------------------------------ Pluto
@@ -304,7 +304,7 @@ export const QUESTS = [
     automate: 'Probes by ME; the sample comes out in a canister.',
   }, [it(TRUSS)]),
   prod('P_SAMPLE', 'Planetesimal Sample', 'grindless:planetesimal_sample', ['KUIPER'], 4, 25.5,
-    'A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed.',
+    'A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed, so it is the one thing that shows what the young system was made of. A probe brings it back from the Kuiper Belt in a canister, so you need the probe line and a launch. It unlocks the annealer that keeps the ice as it was. Probes go out by ME and the canister comes back the same way.',
     [it('grindless:planetesimal_sample')]),
   gear('ANNEAL', 'amorphous_ice_annealer', 'Trapped Since the Beginning', ['P_SAMPLE'], 6, 25.5, {
     for: 'The &6Amorphous Ice Annealer&r warms a sample through its crystallisation at about 140 K, and the trapped noble gases escape.',
@@ -325,5 +325,17 @@ export const QUESTS = [
     unlocks: 'The Sgr A* image, the end of the Pluto row.',
     automate: 'Catalogue and data by ME; it needs no other input.',
   }, [it(TRUSS), it(HULL), it('gtceu:advanced_computer_casing')], 150),
+  gear('NANO', 'gtca:nano_forge', 'Nano Forge', ['M_L_FAC'], 2, 21, {
+    for: 'The &6Nano Forge&r is the UV hall that works matter by the atom, building nanoscale parts that no assembler can place.',
+    needs: 'Its controller, built on an assembly line, and a UV energy hatch: it draws about 491,520 EU/t while it runs.',
+    unlocks: 'The nanoscale parts of the late-game lines.',
+    automate: 'Feed inputs by ME and pull the parts out by bus; give it its own power line.',
+  }, [it(UVC)]),
+  gear('PCBF', 'gtca:pcb_factory_mki', 'PCB Factory Mk I', ['M_L_FAC'], 2, 21, {
+    for: 'The &6PCB Factory Mk I&r prints circuit boards in bulk, so the board and chip lines keep up with UV demand.',
+    needs: 'Its controller, built on an assembly line, a cleanroom and a UV energy hatch: it draws about 491,520 EU/t while it runs.',
+    unlocks: 'Boards at a rate the single assembler cannot hold, for every era after this one.',
+    automate: 'Feed the inputs by ME and send the finished boards on by bus.',
+  }, [it(UVC)]),
 ];
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

@@ -126,7 +126,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it('gtceu:orbital_solar_station'), it('grindless:orbital_solar_panel')],
-    rewards: [xp(100), ri('gcyr:photovoltaic_cell', 2)],
+    rewards: [xp(140)],
   },
   {
     key: 'FIBRE', kind: 'machine', title: 'Fibre from Nothing', icon: 'gtceu:microgravity_smelter', pkg: ['S03'],
@@ -198,7 +198,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ the belt
   {
     key: 'HARP', kind: 'machine', title: 'Harpoon', icon: 'gtceu:harpoon_anchor_drill', pkg: ['B1', 'B5'],
-    deps: ['BELT'], x: 2, y: 10.5,
+    deps: ['BELT', 'RINGQ'], x: 2, y: 10.5,
     teach: {
       for: "The belt's veins answer to one drill: the &6Harpoon Anchor Drill&r, pinned to the rock by harpoons while its HSS-S bit works.",
       needs: 'Bits and harpoons, which both wear slowly. No drilling fluid: it is vacuum, same as Mercury.',
@@ -233,7 +233,7 @@ export const QUESTS = [
   },
   {
     key: 'RING', kind: 'machine', title: 'Molecular Farm', icon: 'gtceu:hydroponic_ring', pkg: ['B1', 'B5', 'B8', 'S03'],
-    deps: ['MOND'], x: 8, y: 10.5,
+    deps: ['MOND', 'RINGQ'], x: 8, y: 10.5,
     teach: {
       for: 'The &6Rotating Hydroponic Ring&r spins for gravity, keeps the Sun on all the time and seals engineered crops away from the wild.',
       needs: "A hub on magnetic bearings of tetrataenite from the processor, wound at the magnet works, and the engineered seeds from home.",
@@ -246,16 +246,16 @@ export const QUESTS = [
   },
   {
     key: 'RINGQ', title: 'Bearings', icon: 'grindless:magnetic_bearing', pkg: ['B1', 'B5', 'B8', 'S03'],
-    deps: ['RING'], x: 10, y: 10.5,
+    deps: ['BELT'], x: 2, y: 9,
     desc: [
-      'The ring turns on &6Magnetic Bearings&r, so nothing touches and nothing wears. Make a few spare ones at the magnet works.',
+      '&6Magnetic Bearings&r let a shaft turn with nothing touching, so nothing wears. The harpoon drill and the asteroid processor each take two, and the hydroponic ring later turns on them too. Make them at the magnet works.',
     ],
     tasks: [it('grindless:magnetic_bearing', 4)],
     rewards: [xp(60)],
   },
   {
     key: 'ORGANOID', kind: 'machine', title: 'Organoid', icon: 'gtceu:organoid_lab', pkg: ['B1', 'B5', 'B8', 'S03'],
-    deps: ['RINGQ'], x: 12, y: 10.5,
+    deps: ['RING'], x: 12, y: 10.5,
     teach: {
       for: 'In orbit, neurons grow in three dimensions without a scaffold. The &6Organoid Lab&r turns stem cells, growth medium and the ring\'s neurotrophic factor into a neural organoid.',
       needs: 'Stem cells from the biofoundry, and factor from the ring.',

@@ -374,14 +374,19 @@ export function checkBook(book, cfg, options = {}) {
 
 // Item ids whose use in a recipe-less or hidden way a quest task must not depend on: recipe outputs read from a dump's recipes.json.
 // Walks every key named result(s) / output(s) and collects the item ids under it (GT `outputs.item[].content.ingredient.item`,
-// vanilla `result.item`, KubeJS `output`, ...).
+// vanilla `result.item`, KubeJS `output`, ...). A fluid output (`outputs.fluid[].content.value[].fluid`) also adds its bucket id
+// (`<fluid>_bucket`), because a task item can be a bucket.
 export function recipeOutputIds(recipeJsons) {
   const out = new Set();
-  const grab = (v) => {
+  const idRe = /^[a-z0-9_.-]+:[a-z0-9_.\/-]+$/;
+  const grab = (v, key) => {
     if (!v) return;
-    if (typeof v === 'string') { if (/^[a-z0-9_.-]+:[a-z0-9_.\/-]+$/.test(v)) out.add(v); return; }
-    if (Array.isArray(v)) { v.forEach(grab); return; }
-    if (typeof v === 'object') for (const [k, x] of Object.entries(v)) { if (k === 'item' || k === 'id' || typeof x === 'object') grab(x); }
+    if (typeof v === 'string') {
+      if (idRe.test(v)) { out.add(v); if (key === 'fluid') out.add(`${v}_bucket`); }
+      return;
+    }
+    if (Array.isArray(v)) { v.forEach((x) => grab(x, key)); return; }
+    if (typeof v === 'object') for (const [k, x] of Object.entries(v)) { if (k === 'item' || k === 'id' || k === 'fluid' || typeof x === 'object') grab(x, k); }
   };
   const walk = (v) => {
     if (!v || typeof v !== 'object') return;

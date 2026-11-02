@@ -13,16 +13,16 @@ export const CHAPTER = {
   autofocus: "IV_HOT_CELL",
   title: "IV: Machines",
   subtitle: ["Reactors, drills, mirrors and the parts that let them talk to the network."],
-  section: { name: "Machines", origin: { x: 0, y: 0 }, heading: { key: "IV_H_MACHINES", x: 2.5, y: -2, deps: ["IV_INNER_PLANETS"], icon: "gtceu:hot_cell" } },
+  section: { name: "Machines", origin: { x: 0, y: 0 }, heading: { key: "IV_H_MACHINES", x: 2.5, y: -2, deps: ["IV_INNER_PLANETS"], icon: "gtceu:hot_cell", desc: ["The IV halls: fuel, fission, enrichment and the heavy plants of Venus and Mercury, each with the first steps that put it to work."] } },
 };
 
 export const QUESTS = [
   {
     key: "IV_HOT_CELL", id: "30D78F6EB49AF27B", kind: "machine", title: "Hot Cell", icon: "gtceu:hot_cell",
-    deps: ["IV_H_MACHINES"], x: 5.5, y: -1.5,
+    deps: ["IV_H_MACHINES", "IV_FUEL_FABRICATION_PLANT"], x: 5.5, y: -1.5,
     teach: {
       for: "The &6Hot Cell&r is where uranium stops being something you carry around.",
-      needs: "Its controller and Radiation-Proof Machine Casing, lead-heavy blocks from the IV assembler, set in concrete.",
+      needs: "Its controller, which takes a Zircaloy cladding tube pressed at the Fuel Fabrication Plant, and Radiation-Proof Machine Casing, lead-heavy blocks from the IV assembler, set in concrete.",
       unlocks: "Enrichment, fuel, reprocessing and every radioactive step after it.",
       automate: "It rides in and out on buses, and the programmed circuit picks the job.",
     },
@@ -80,7 +80,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("grindless:ion_exchange_resin", 4), it("gtceu:isr_wellfield", 1), it("gtceu:uraninite_dust", 30)],
-    rewards: [xp(80), it("grindless:ion_exchange_resin", 2)],
+    rewards: [xp(120)],
   },
   {
     key: "IV_HEAVY_WATER_PLANT", id: "5A1DBDF9E739CEF2", kind: "machine", title: "Heavy-Water Plant", icon: "gtceu:heavy_water_plant",

@@ -14,7 +14,7 @@ export const CHAPTER = {
   autofocus: "TRP",
   title: "EV: Machines",
   subtitle: ["Eleven halls of ours, and the rules that let them run on two worlds."],
-  section: { name: "EV: Machines", origin: { x: 0, y: 0 }, heading: { key: "H_MACHINES", x: 1, y: -4.5, deps: ["LB"], icon: "gtceu:regolith_cell" } },
+  section: { name: "EV: Machines", origin: { x: 0, y: 0 }, heading: { key: "H_MACHINES", x: 1, y: -4.5, deps: ["LB"], icon: "gtceu:regolith_cell", desc: ["The halls of the Moon base: oxygen, cold, power and the bridge home. Each machine here makes the next part of the journey work without you."] } },
 };
 
 export const LINKS = [];
@@ -194,7 +194,7 @@ export const QUESTS = [
     },
     desc: [],
     tasks: [it("gtceu:sealed_dome", 1, "7D87303BAEF28490")],
-    rewards: [xp(60, "320FD462BCBA4081"), ri("minecraft:dirt", 9, "77DB74D40CF625D1")],
+    rewards: [xp(80, "320FD462BCBA4081")],
   },
   {
     key: "DSA", id: "5940CA99055BAF42", kind: "machine", title: "Deep Space Antenna", icon: "gtceu:deep_space_antenna",
@@ -225,6 +225,7 @@ export const QUESTS = [
     desc: [
       "Two &6EU P2P Tunnels&r on one frequency, one on a cable at home and one on a hatch up here, and the power plant on Earth runs the Moon.",
       "The tunnels pass whatever voltage you feed them, so match it to the hatch at the far end. AE2 charges a small toll in AE energy for the delivery.",
+      "There is no recipe for the tunnel: craft an ordinary ME P2P Tunnel and right-click it with a GregTech wire or cable. That attunes it to EU, and the cable you choose is the voltage it carries. Make a pair, set both to one frequency, and keep the home end next to the generators and the far end next to the Moon base's main hatch.",
     ],
     tasks: [it("eup2p:eu_p2p_tunnel", 2, "751D67F4EBA6DE8C")],
     rewards: [xp(60, "5D6B28FB61E42CBD")],
@@ -237,7 +238,7 @@ export const QUESTS = [
       "The seed travels home over the bridge, the explosion happens there, and one half travels back. Nobody has to fly.",
     ],
     tasks: [it("grindless:lunar_quantum_seed", 1, "11691B6B87A0E83E"), it("ae2:quantum_link", 2, "1BCF50880C918E54"), it("ae2:quantum_ring", 16, "172A4B25DF6871FF")],
-    rewards: [xp(50, "5D23F1FDA315072E"), ri("minecraft:ender_pearl", 4, "3CA3C104FB1DDB7B")],
+    rewards: [xp(70, "5D23F1FDA315072E")],
   },
   {
     key: "EMB", id: "53893FAB153254B8", title: "Earth-Mars Bridge", icon: "ae2:quantum_ring", shape: "gear", size: 1.25,
