@@ -22,6 +22,7 @@
   var PLANT = 'gtnn:exxonmobil_chemical_plant'
   var HV_HATCH = 'gtceu:hv_energy_input_hatch'
   var IN_HATCH = 'gtceu:hv_input_hatch'
+  var CATALYST_HATCH = 'gtnn:catalyst_hatch'
   var NEED_HATCHES = 3
   var STAGE_SLACK = 1500
 
@@ -168,8 +169,8 @@
     return null
   }  function keyOf(c) { return c.x + ',' + c.y + ',' + c.z }
   function worldPos(c) { return pos(ORIGIN.x + c.x, ORIGIN.y + c.y, ORIGIN.z + c.z) }
-  function putHatch(p, face) {
-    command('setblock ' + p.getX() + ' ' + p.getY() + ' ' + p.getZ() + ' ' + IN_HATCH + '[facing=' + face + '] replace')
+  function putHatch(p, face, id) {
+    command('setblock ' + p.getX() + ' ' + p.getY() + ' ' + p.getZ() + ' ' + (id || IN_HATCH) + '[facing=' + face + '] replace')
   }
 
   // places one preview shape with every energy input hatch and the preview's own fluid input hatch swapped for HV ones;
@@ -188,7 +189,7 @@
       var p = worldPos(c)
       if (c === cut.ctrl) { ctrlPos = p; return }
       if (extra && extra[keyOf(c)]) {
-        putHatch(p, extra[keyOf(c)])
+        putHatch(p, extra[keyOf(c)][1], extra[keyOf(c)][0])
         hatches++
         return
       }
@@ -209,7 +210,7 @@
   }
 
   // which wall casing cells accept an HV input hatch: each is swapped one at a time and the pattern asked whether it still matches
-  function probe(ctrl) {
+  function probe(ctrl, blockId) {
     var accepted = {}
     var tried = 0
     var seen = {}
@@ -223,12 +224,12 @@
       var face = faceOf(S.cut, c)
       if (face === null || c === S.cut.ctrl || c.id.indexOf('casing') < 0) return
       var p = worldPos(c)
-      putHatch(p, face)
+      putHatch(p, face, blockId)
       tried++
       var ok = false
       try { ok = ctrl.checkPatternWithLock() === true } catch (e) { ok = false }
       if (ok) {
-        accepted[keyOf(c)] = face
+        accepted[keyOf(c)] = [blockId, face]
         seen[c.id] = (seen[c.id] || 0) + 1
       }
       S.level.setBlock(p, c.state, 18)
@@ -435,7 +436,10 @@
     check('stage_' + st.name, ok, ok
       ? st.out[1] + ' mB ' + st.out[0] + ' in ' + (S.tick - S.stageStart) + ' ticks at casing tier ' + tierOf(S.ctrl) + '; output ' + JSON.stringify(got)
       : 'no ' + st.out[0] + ' after ' + (S.tick - S.stageStart) + ' ticks; output ' + JSON.stringify(got) + '; casing tier ' + tierOf(S.ctrl) + '; failures=' + failureText(S.ctrl))
-    if (!ok) { S.stage = STAGES.length; finish(); return true }
+    if (!ok) {
+      note('stage_' + st.name + '_state', 'inputs ' + JSON.stringify(fluidsIn(S.P.hatchIn)) + '; bus ' + S.P.busIn.map(function (b) { return String(b.getInventory().getStackInSlot(0)) }).join(',') + '; catalyst hatches ' + S.P.catalyst.length + '; recipe status ' + (function () { try { return String(S.ctrl.getRecipeLogic().getStatus()) } catch (e) { return 'unreadable' } })())
+      S.stage = STAGES.length; finish(); return true
+    }
     // the next stage starts from what this one made: move the product into the carried pool
     S.carried = { id: st.out[0], amount: takeFluid(S.P.hatchOut, st.out[0], st.out[1]) }
     return true
@@ -482,14 +486,17 @@
       if (!S.best || tier > S.best.tier) S.best = { ctrl: ctrl, P: P, tier: tier }
       if (tier >= 3 && !S.extra) {
         // the preview forms with one fluid input hatch: find the wall cells that take more of them
-        var found = probe(ctrl)
+        var found = probe(ctrl, IN_HATCH)
+        var cat = probe(ctrl, CATALYST_HATCH)
         var keys = Object.keys(found.accepted)
+        var catKeys = Object.keys(cat.accepted)
         var cap = 0
         try { cap = Number(P.hatchIn[0].tank.getTankCapacity(0)) } catch (e) { cap = -1 }
-        note('probe', 'unchanged preview matches ' + found.base + '; ' + keys.length + ' of ' + found.tried + ' wall casing cells accept an HV input hatch (' + JSON.stringify(found.seen) + '); first ' + keys.slice(0, 4).join(' | ') + '; preview input hatches ' + P.hatchIn.length + ', one HV hatch holds ' + cap + ' mB')
+        note('probe', 'unchanged preview matches ' + found.base + '; ' + keys.length + ' of ' + found.tried + ' open-side casing cells accept an HV input hatch (' + JSON.stringify(found.seen) + '), ' +
+          catKeys.length + ' accept a catalyst hatch (' + JSON.stringify(cat.seen) + '); first ' + keys.slice(0, 3).join(' | ') + '; preview input hatches ' + P.hatchIn.length + ', one HV hatch holds ' + cap + ' mB')
         var need = NEED_HATCHES - 1
-        if (keys.length < need) {
-          check('input_hatches', false, 'the plant accepts only ' + keys.length + ' extra HV input hatches on its walls; the peroxide stage needs ' + NEED_HATCHES + ' fluid inputs and an HV player has no multi-fluid hatch')
+        if (keys.length < need || catKeys.length < 1) {
+          check('input_hatches', false, 'the plant accepts ' + keys.length + ' extra HV input hatches and ' + catKeys.length + ' catalyst hatches; the cycle needs ' + NEED_HATCHES + ' fluid inputs and a catalyst hatch')
           S.ctrl = ctrl
           S.P = P
           finish()
@@ -497,6 +504,8 @@
         }
         S.extra = {}
         keys.slice(0, need).forEach(function (k) { S.extra[k] = found.accepted[k] })
+        var catKey = catKeys.filter(function (k) { return !S.extra[k] })[0]
+        if (catKey) S.extra[catKey] = cat.accepted[catKey]
         S.phase = 'shape'
         S.shapeIx--
         return
