@@ -227,7 +227,7 @@ export const QUESTS = [
   },
   {
     key: 'PHE3', kind: 'process', title: 'Pristine Helium-3', icon: 'gtceu:pristine_helium_3_bucket',
-    deps: ['J_STR', 'MA_GAS'], x: 21.5, y: -5,
+    deps: ['J_STR', 'MA_GAS'], x: 22.5, y: -0.5,
     teach: {
       for: 'Helium-3 from the same gas. The superfluid plant lets helium-4 flow through its leak and keeps the lighter isotope behind.',
       needs: 'The plant at home, and a calutron to finish.',
