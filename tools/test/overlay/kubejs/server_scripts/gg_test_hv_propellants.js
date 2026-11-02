@@ -21,6 +21,8 @@
   var DIM = 'minecraft:overworld'
   var PLANT = 'gtnn:exxonmobil_chemical_plant'
   var HV_HATCH = 'gtceu:hv_energy_input_hatch'
+  var IN_HATCH = 'gtceu:ulv_input_hatch'
+  var EXTRA_HATCHES = 3
   var STAGE_SLACK = 1500
 
   // the cycle: each stage's inputs, its product and the casing tier its recipe asks for (the dump's recipe rows)
@@ -161,9 +163,29 @@
     }
     var ctrlPos = null
     var swapped = 0
+    // the preview carries one input hatch and the cycle needs three fluids at once: the commonest casing block on the two
+    // side walls gives up EXTRA_HATCHES cells to input hatches (a player adds them the same way)
+    var counts = {}
+    cut.cells.forEach(function (c) { counts[c.id] = (counts[c.id] || 0) + 1 })
+    var casing = Object.keys(counts).filter(function (id) { return id.indexOf('hatch') < 0 && id.indexOf('bus') < 0 && id !== PLANT })
+      .sort(function (a, b) { return counts[b] - counts[a] })[0]
+    var extra = {}
+    var picked = 0
+    cut.cells.forEach(function (c) {
+      if (picked >= EXTRA_HATCHES || c.id !== casing || c.y < 1 || c.y > cut.h - 2 || c.z < 1 || c.z > cut.d - 2) return
+      if (c.x === 0 || c.x === cut.w - 1) {
+        extra[c.x + ',' + c.y + ',' + c.z] = c.x === 0 ? 'west' : 'east'
+        picked++
+      }
+    })
     cut.cells.forEach(function (c) {
       var p = pos(ORIGIN.x + c.x, ORIGIN.y + c.y, ORIGIN.z + c.z)
       if (c === cut.ctrl) { ctrlPos = p; return }
+      var face = extra[c.x + ',' + c.y + ',' + c.z]
+      if (face) {
+        command('setblock ' + p.getX() + ' ' + p.getY() + ' ' + p.getZ() + ' ' + IN_HATCH + '[facing=' + face + '] replace')
+        return
+      }
       if (c.id.indexOf('energy_input_hatch') >= 0 && c.id !== HV_HATCH) {
         command('setblock ' + p.getX() + ' ' + p.getY() + ' ' + p.getZ() + ' ' + HV_HATCH + '[facing=' + facingOf(c.state) + '] replace')
         swapped++
@@ -172,7 +194,7 @@
       S.level.setBlock(p, c.state, 18)
     })
     S.level.setBlock(ctrlPos, cut.ctrl.state, 3)
-    return { ctrlPos: ctrlPos, size: cut.w + 'x' + cut.h + 'x' + cut.d, swapped: swapped }
+    return { ctrlPos: ctrlPos, size: cut.w + 'x' + cut.h + 'x' + cut.d, swapped: swapped, casing: casing, extra: picked }
   }
 
   function tierOf(ctrl) {
@@ -418,7 +440,7 @@
       var P = classify(ctrl)
       var tier = tierOf(ctrl)
       S.tiers.push(tier)
-      note('shape_' + S.shapeIx, S.placed.size + ', casing tier ' + tier + ', hv hatches ' + S.placed.swapped + ', parts: ' + partList(P))
+      note('shape_' + S.shapeIx, S.placed.size + ', casing tier ' + tier + ', hv hatches ' + S.placed.swapped + ', ' + S.placed.extra + ' extra input hatches cut into ' + S.placed.casing + ', parts: ' + partList(P))
       if (!S.best || tier > S.best.tier) S.best = { ctrl: ctrl, P: P, tier: tier }
       if (tier >= 3) {
         S.ctrl = ctrl
