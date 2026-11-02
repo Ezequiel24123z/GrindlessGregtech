@@ -82,36 +82,30 @@
       .blastFurnaceTemp(1784)
       .EUt(120).duration(9000)
 
-    var wanted = {}
-    BOULES.forEach(function (name) { wanted['gtceu:electric_blast_furnace/' + name] = true })
-    var found = []
-    event.originalRecipes.values().forEach(function (r) {
-      var id = recipeId(r)
-      if (wanted[id] && r.json !== null && r.json !== undefined) found.push({ id: id, json: JSON.parse(String(r.json)) })
-    })
     SI.boules = []
-    found.forEach(function (f) {
-      var changed = 0
-      var items = f.json.inputs && f.json.inputs.item ? f.json.inputs.item : []
-      items.forEach(function (entry) {
-        var c = entry.content
-        if (!c || !c.ingredient) return
-        var kind = siliconKind(c.ingredient)
-        if (kind === 0) return
-        c.count = Number(c.count) * kind
-        c.ingredient = { item: POLY }
-        changed++
+    var missing3 = []
+    BOULES.forEach(function (name) {
+      var id = 'gtceu:electric_blast_furnace/' + name
+      var edits = 0
+      event.forEachRecipe({ id: id }, function (r) {
+        var j = JSON.parse(String(r.json))
+        var items = j.inputs && j.inputs.item ? j.inputs.item : []
+        items.forEach(function (entry) {
+          var c = entry.content
+          if (!c || !c.ingredient) return
+          var kind = siliconKind(c.ingredient)
+          if (kind === 0) return
+          c.count = Number(c.count) * kind
+          c.ingredient = { item: POLY }
+          edits++
+        })
+        if (edits === 0) return
+        r.json.add('inputs', JsonIO.parseRaw(JSON.stringify(j.inputs)))
+        r.save()
       })
-      if (changed === 0) {
-        console.info('[grindless/mv] boule ' + f.id + ' has no silicon input to replace')
-        return
-      }
-      event.remove({ id: f.id })
-      event.custom(f.json).id(f.id)
-      SI.boules.push(f.id)
+      if (edits > 0) SI.boules.push(id)
+      else missing3.push(id)
     })
-    if (SI.boules.length !== BOULES.length) {
-      console.info('[grindless/mv] polysilicon boules rebuilt: ' + SI.boules.length + ' of ' + BOULES.length)
-    }
-  })
+    if (missing3.length > 0) console.error('[grindless/mv] boules not edited: ' + missing3.join(', '))
+    console.info('[grindless/mv] polysilicon boules rebuilt: ' + SI.boules.length + ' of ' + BOULES.length)  })
 })()
