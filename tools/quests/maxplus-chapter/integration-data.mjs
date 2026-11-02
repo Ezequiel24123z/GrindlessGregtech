@@ -168,7 +168,7 @@ export const QUESTS = [
   },
   {
     key: 'PW_TORUS', kind: 'plant', title: 'Power from Fusion Fuel', icon: 'gtceu:primordial_deuterium_bucket',
-    deps: ['PD'], x: 24.5, y: -5,
+    deps: ['PD'], x: 24.5, y: -3.5,
     teach: {
       for: 'Primordial deuterium and pristine helium-3 fuel a torus on the platform. The fusion reactions are not new; the fuel comes from the Stream.',
       needs: 'Both fuels in bulk, and a torus.',

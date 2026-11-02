@@ -131,16 +131,16 @@ export const QUESTS = [
   prod('MA_SCOOP', 'Magnetic Scoop Module', 'grindless:magnetic_scoop_module', ['MA_GAS'], 21.5, -3.5, [
     'A cold coil on a long arm. It gathers the gas, and without one the works makes nothing.',
   ]),
-  gear('MA_TORUS', 'primordial_fusion_torus', 'Primordial Fusion Torus', ['MA_L_PD', 'MA_L_PHE3'], 23, -6.5, {
+  gear('MA_TORUS', 'primordial_fusion_torus', 'Primordial Fusion Torus', ['MA_L_PD', 'MA_L_PHE3'], 21, -6.5, {
     for: 'Deuterium and helium-3 fuse with few neutrons, and a direct converter catches their charged products. It is a generator of ours, not a GTM fusion tier.',
     needs: 'The MAX hull, a torus of atomic casing, deuterium and helium-3 together, a beam injector and a converter stack.',
     unlocks: 'A second generator of the era. How it feeds the network is in the Integration section.',
     automate: 'Both fuels arrive by pipe from the works; each runs 2,400 ticks.',
   }),
-  prod('MA_NBI', 'Neutral Beam Injector', 'grindless:neutral_beam_injector', ['MA_TORUS'], 23, -8, [
+  prod('MA_NBI', 'Neutral Beam Injector', 'grindless:neutral_beam_injector', ['MA_TORUS'], 21, -8, [
     'It heats the fuel to ignition and wears one in sixty-four runs.',
   ]),
-  prod('MA_DCS', 'Direct Converter Stack', 'grindless:direct_converter_stack', ['MA_TORUS'], 24.5, -6.5, [
+  prod('MA_DCS', 'Direct Converter Stack', 'grindless:direct_converter_stack', ['MA_TORUS'], 22.5, -6.5, [
     'The stack turns the charged products of the fusion straight into current. It wears one in a hundred and twenty-eight runs.',
   ]),
 
