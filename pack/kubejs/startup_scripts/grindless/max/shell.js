@@ -20,6 +20,9 @@
 
   const SEGMENT = 'grindless:mirror_shell_segment'
   const BUNDLE = 'grindless:stream_bundle_block'
+  // not gtceu:superconducting_coil: a GTM ActiveBlock, and GTM 7.5.3 relights its active blocks one recursive structure check per
+  // block when a working multiblock breaks (WorkableMultiblockMachine.onStructureInvalid); 1,528 of them overflowed the server stack
+  const COIL = 'grindless:feeder_coil_casing'
   const SEGMENT_TEXTURE = 'grindless:block/max/mirror_shell_segment'
   const N = 33
   const MID = 16
@@ -32,7 +35,7 @@
   ]
 
   // x left to right, y bottom to top, z back to front. Two stream bundle block rings run round the four side faces (y 8 and 24); every face
-  // is otherwise tiled 8 x 8: a cleanroom glass window ringed by superconducting coil, segment between; the core is empty.
+  // is otherwise tiled 8 x 8: a cleanroom glass window ringed by feeder coil casings, segment between; the core is empty.
   // The hatch cells are on the front face, two rows of seven round the controller at the equator.
   function shellCell(x, y, z) {
     var edge = x === 0 || x === N - 1 || y === 0 || y === N - 1 || z === 0 || z === N - 1
@@ -88,7 +91,7 @@
         F: casing,
         A: Pat.block(BUNDLE),
         L: Pat.block('gtceu:cleanroom_glass'),
-        C: Pat.block('gtceu:superconducting_coil'),
+        C: Pat.block(COIL),
         '#': Pat.air()
       }
     }

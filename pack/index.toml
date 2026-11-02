@@ -34,7 +34,7 @@ hash = "fc9c88ab9c521b954f5dc51578c8dcaaca9ef4d3513437c4550913e87d529c42"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/max_age.snbt"
-hash = "9e3cc533d1ae969ab89a1005b5852403ef7756dfefc760199dcb803c58aa2277"
+hash = "98c4bac3c84b1d3d4e529ad1a0c3b4fb5d7e5e5790ddcee7b2ea448d36a0991f"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/maxplus_age.snbt"
@@ -19658,7 +19658,7 @@ hash = "7ad8720723441793fda0a0878480d5e250bf1e8180621a054d4ddc0476fe0dc6"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/shell.js"
-hash = "97bc41bfdee429eb4060861c7bea8f5f80b5970d20392a86318d378b0b47f80c"
+hash = "3c520b22f12d4f31c2f8a366920cc216a3f65b71064404139a17ea0b6e917b27"
 
 [[files]]
 file = "kubejs/startup_scripts/grindless/max/synchroniser.js"

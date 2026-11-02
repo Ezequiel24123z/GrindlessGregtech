@@ -472,7 +472,7 @@
 		}
 		{
 			dependencies: ["327C37975E5EFBA1"]
-			description: ["The &6Mirror Shell&r wraps the black hole in mirrors and sends its light back in. &oFiction:&r a shell like this cannot be built; the hole and its light are real. It is the largest structure in the pack. A hollow box of mirror shell segments thirty-three blocks a side at Sgr A* orbit, ringed twice with stream bundle blocks and set with glass windows and superconducting coils, with two MAX 16 A input hatches and a dynamo hatch round the controller. Every segment is a swarm-segment craft with a cooler of its own. The segments, the four horizon machines and the last recipe. Segments leave the line on a belt; plan the bus before you place the controller."]
+			description: ["The &6Mirror Shell&r wraps the black hole in mirrors and sends its light back in. &oFiction:&r a shell like this cannot be built; the hole and its light are real. It is the largest structure in the pack. A hollow box of mirror shell segments thirty-three blocks a side at Sgr A* orbit, ringed twice with stream bundle blocks and set with glass windows ringed by feeder coil casings, with two MAX 16 A input hatches and a dynamo hatch round the controller. Every segment is a swarm-segment craft with a cooler of its own. The segments, the four horizon machines and the last recipe. Segments leave the line on a belt; plan the bus before you place the controller."]
 			icon: "gtceu:mirror_shell"
 			id: "3AD1F00AD8DB5003"
 			rewards: [{ id: "16DE76451B228310", type: "xp", xp: 150 }]

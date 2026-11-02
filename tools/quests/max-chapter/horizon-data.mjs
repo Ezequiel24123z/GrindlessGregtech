@@ -54,7 +54,7 @@ export const QUESTS = [
     deps: ['CRYO'], x: 6, y: 0,
     teach: {
       for: 'The &6Mirror Shell&r wraps the black hole in mirrors and sends its light back in. &oFiction:&r a shell like this cannot be built; the hole and its light are real. It is the largest structure in the pack.',
-      needs: 'A hollow box of mirror shell segments thirty-three blocks a side at Sgr A* orbit, ringed twice with stream bundle blocks and set with glass windows and superconducting coils, with two MAX 16 A input hatches and a dynamo hatch round the controller. Every segment is a swarm-segment craft with a cooler of its own.',
+      needs: 'A hollow box of mirror shell segments thirty-three blocks a side at Sgr A* orbit, ringed twice with stream bundle blocks and set with glass windows ringed by feeder coil casings, with two MAX 16 A input hatches and a dynamo hatch round the controller. Every segment is a swarm-segment craft with a cooler of its own.',
       unlocks: 'The segments, the four horizon machines and the last recipe.',
       automate: 'Segments leave the line on a belt; plan the bus before you place the controller.',
     },
