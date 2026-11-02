@@ -26,9 +26,7 @@
   "trivial_step|fluid:gtceu:superfluid_helium_3",
   "trivial_step|fluid:gtceu:superfluid_helium_4",
   "trivial_step|grindless:pathfinder_probe_core",
-  "trivial_step|grindless:laser_cooled_ps",
-  "uncraftable|gtceu:chain_strand_foil",
-  "uncraftable|gtceu:double_chain_strand_plate"
+  "trivial_step|grindless:laser_cooled_ps"
  ],
  "pending": []
 }

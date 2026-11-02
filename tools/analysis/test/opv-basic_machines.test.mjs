@@ -26,7 +26,7 @@ const LAMINA = 'grindless:chain_lamina_stack';
 const SOLDER = 'gtceu:soldering_alloy';
 const V_UXV = 134217728;
 // the stand-in's VA[13] is V[13]; in the game GTValues.VA[OpV] is 503,316,480 EU/t
-const VA_OPV = 536870912;
+const VA_OPV = 503316480;
 const COMPONENT = /^gtceu:opv_(electric_motor|electric_pump|conveyor_module|electric_piston|robot_arm|emitter|sensor|field_generator)$/;
 const LOWER = /^(gtceu|grindless):(ulv|lv|mv|hv|ev|iv|luv|zpm|uv|uhv|uev|uiv|uxv)_(electric_motor|electric_pump|conveyor_module|electric_piston|robot_arm|emitter|sensor|field_generator|fluid_regulator)$/;
 

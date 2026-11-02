@@ -29,7 +29,7 @@
         return
       }
       var a = event.recipes.gtceu.assembly_line('grindless:horizon_capacitor_bank')
-      a.itemInputs(HULL, '2x ' + CASING, '8x grindless:horizon_processor', '4x #gtceu:circuits/max')
+      a.itemInputs(HULL, '2x ' + CASING, '8x #gtceu:circuits/maxplus', '4x #gtceu:circuits/max')
       COMPS.concat(EXTRA).forEach(function (s) { a.itemInputs(s) })
       a.inputFluids(Fluid.of(KERR, 2000))
       a.itemOutputs(MACHINE)

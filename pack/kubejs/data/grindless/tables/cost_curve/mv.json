@@ -47,6 +47,7 @@
     "gtceu:shaped/electric_pump_mv_styrene_butadiene_rubber",
     "gtceu:shaped/emitter_mv",
     "gtceu:shaped/field_generator_mv",
+    "gtceu:shaped/mv_machine_hull",
     "gtceu:shaped/robot_arm_mv",
     "gtceu:shaped/sensor_mv"
   ],

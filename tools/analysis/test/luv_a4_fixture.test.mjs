@@ -700,6 +700,7 @@ function jvm({ server = true, fixture = true } = {}) {
     'net.minecraftforge.registries.ForgeRegistries': { ITEMS: { getKey: (i) => i.id }, FLUIDS: { getKey: (f) => f.id } },
     'net.minecraftforge.fluids.FluidStack': { EMPTY: FLUID_EMPTY },
     'java.util.ArrayList': AL,
+    'java.lang.Long': { toString: (v) => String(v) },
     'java.util.UUID': {},
     'com.gregtechceu.gtceu.api.machine.MetaMachine': { getMachine: (level, pos) => level.machines.get(key(pos.getX(), pos.getY(), pos.getZ())) || null },
     'com.gregtechceu.gtceu.api.registry.GTRegistries': GTRegistries,

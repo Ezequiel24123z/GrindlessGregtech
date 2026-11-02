@@ -7,7 +7,11 @@
     "outputBus": "gtceu:uhv_output_bus",
     "stock": { "id": "grindless:exotic_matter_cell", "count": 8 },
     "dynamo": "gtceu:uiv_wireless_dynamo_hatch_16a",
-    "ae2": ["ae2:controller", "ae2:drive"]
+    "ae2": ["ae2:controller", "ae2:drive"],
+    "_why_af1": "AF-1 (server lib/relay_platforms.js places every row): a floor under the ring and its kit, so a traveller lands on something; the selector is the item that carries relay coordinates (an existing GTM data stick with our NBT, no new item); the ring holds a circuit 2 and starts paused until a traveller steps in",
+    "floor": "grindless:station_truss_casing",
+    "selector": "gtceu:data_stick",
+    "circuit": 2
   },
   "platforms": [
     { "place": "rx_j1856", "jump": "hold_rx_j1856", "dimension": "grindless:rx_j1856_orbit", "x": 64, "y": 100, "z": 64 },

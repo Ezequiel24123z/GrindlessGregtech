@@ -3,17 +3,17 @@
 // Recipes of UHV's organoid array (docs/eras/uhv.md, machine 11 and line 12; package UHV-B6) and the organoid lab's UHV row
 // (uhv.md, "Older machines": the LuV lab's medium). Machine and type: startup_scripts/grindless/uhv/wetware.js; the organoid
 // processor, the chitosan scaffold, the SiC power module, ultrapure water and the sterilised growth medium: F1
-// (startup_scripts/grindless/uhv/foundation.js); the optical assembly: A4 (startup_scripts/grindless/uhv/photonics.js).
+// (startup_scripts/grindless/uhv/foundation.js); 
 // VA[LuV] = 30,720 EU/t, VA[UHV] = 1,966,080 EU/t.
 //
-//   Organoid array (type gtceu:organoid_computing; Earth only: .dimension('minecraft:overworld'); the circuit picks the step)
+//   Organoid array (type gtceu:organoid_computing; the circuit picks the step; only the organoid culture is Earth-only: .dimension('minecraft:overworld'))
 //     1 organoid    4 stem cells (UV's neural culture vat) + 1 chitosan scaffold (Proxima's chitin, line 28) + 1,000 mB ultrapure
 //                   water + 1,000 mB sterilised growth medium -> 1 organoid processor + 250 mB bacterial sludge (the spent
 //                   medium). Cortical organoids grown on a microelectrode array, perfused for weeks.   1,966,080 x 1,200 t (tune)
-//     2 mainframe   4 organoid processors + 4 neuro processing units + 1 SiC power module + 1 optical assembly -> 4 wetware
+//     2 mainframe   4 organoid processors + 4 neuro processing units + 1 SiC power module + 4 UHV circuits (#gtceu:circuits/uhv, any; the\n//                   cost curve scales the input past the 4 made, so the step never makes UHV circuits) -> 4 wetware
 //                   processor mainframes (GTM's UHV circuit, four at a time; GTM's assembly line recipe stays)
 //                                                                                                       1,966,080 x 600 t (tune)
-//   Organoid lab (LuV; type gtceu:organoid_assembly, circuit 3; orbit only like the lab's other rows: G.orbits.allow; cleanroom)
+//   Organoid lab (LuV; type gtceu:organoid_assembly, circuit 3; no dimension: it only treats a medium; cleanroom)
 //     sterilised    1 xeno radioprotectant (Proxima b's xenobiochemistry, B4) + 1,000 mB sterilized growth medium (the biofoundry's)
 //                   -> 1,000 mB sterilised growth medium. Written here, not in luv/orbital_biology.js: the LuV test pins that
 //                   file's lab rows; the type's fluid output comes from this package's startup.            30,720 x 600 t (tune)
@@ -33,7 +33,6 @@
   var G = global.grindless || (global.grindless = {})
   var W = G.wetware || (G.wetware = {})
   var UHVF = G.uhvFoundation && G.uhvFoundation.ids ? G.uhvFoundation.ids : {}
-  var PH = G.photonics && G.photonics.ids ? G.photonics.ids : {}
 
   var LUV = 30720
   var UHV = 1966080
@@ -46,7 +45,7 @@
   var ORGANOID = UHVF.organoidProcessor || 'grindless:organoid_processor'
   var RADIOPROTECTANT = UHVF.xenoRadioprotectant || 'grindless:xeno_radioprotectant'
   var SIC = UHVF.sicPowerModule || 'grindless:sic_power_module'
-  var OPTICAL = PH.opticalAssembly || 'gtnn:optical_assembly'
+  var UHV_CIRCUIT = '#gtceu:circuits/uhv'
   var NPU = 'gtceu:neuro_processing_unit'
   var MAINFRAME = 'gtceu:wetware_processor_mainframe'
   var SPENT = 'gtceu:bacterial_sludge'
@@ -59,10 +58,10 @@
     { name: 'organoid', type: 'organoid_computing', circuit: 1, site: 'earth', cleanroom: false,
       itemsIn: [item(STEM, 4), item(SCAFFOLD, 1)], fluidsIn: [fluid(ULTRAPURE, 1000), fluid(STERILISED, 1000)],
       itemsOut: [item(ORGANOID, 1)], fluidsOut: [fluid(SPENT, 250)], eut: UHV, duration: 1200 },
-    { name: 'mainframe', type: 'organoid_computing', circuit: 2, site: 'earth', cleanroom: false,
-      itemsIn: [item(ORGANOID, 4), item(NPU, 4), item(SIC, 1), item(OPTICAL, 1)], fluidsIn: [],
+    { name: 'mainframe', type: 'organoid_computing', circuit: 2, site: null, cleanroom: false,
+      itemsIn: [item(ORGANOID, 4), item(NPU, 4), item(SIC, 1), item(UHV_CIRCUIT, 4)], fluidsIn: [],
       itemsOut: [item(MAINFRAME, 4)], fluidsOut: [], eut: UHV, duration: 600 },
-    { name: 'uhv/sterilised_growth_medium', type: 'organoid_assembly', circuit: 3, site: 'orbit', cleanroom: true,
+    { name: 'uhv/sterilised_growth_medium', type: 'organoid_assembly', circuit: 3, site: null, cleanroom: true,
       itemsIn: [item(RADIOPROTECTANT, 1)], fluidsIn: [fluid(STERILIZED, 1000)],
       itemsOut: [], fluidsOut: [fluid(STERILISED, 1000)], eut: LUV, duration: 600 }
   ]
@@ -106,7 +105,7 @@
 
   function missingIds(r) {
     var missing = []
-    r.itemsIn.concat(r.itemsOut).forEach(function (x) { if (!Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
+    r.itemsIn.concat(r.itemsOut).forEach(function (x) { if (x.id.charAt(0) !== '#' && !Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
     r.fluidsIn.concat(r.fluidsOut).forEach(function (x) { if (!Fluid.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
     return missing
   }

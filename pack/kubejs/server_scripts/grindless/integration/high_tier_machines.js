@@ -20,7 +20,7 @@
     plate: '#forge:plates/neutronium', glass: 'gtceu:fusion_glass', rotor: '#forge:rotors/darmstadtium', spring: '#forge:springs/naquadah_alloy',
     blade: 'gtceu:neutronium_buzz_saw_blade', head: 'gtceu:tungsten_grinding_head', chest: '#forge:chests/wooden', anvil: 'minecraft:anvil',
     bars: 'minecraft:iron_bars', fluidfilter: 'gtceu:fluid_filter', itemfilter: 'gtceu:item_filter', ptfe: 'gtceu:polytetrafluoroethylene_huge_fluid_pipe',
-    pipe: NEUTRONIUM_PIPE, rodvg: '#forge:rods/vanadium_gallium', octal: 'gtceu:europium_octal_cable', quad: 'gtceu:europium_quadruple_cable'
+    pipe: NEUTRONIUM_PIPE, rodvg: '#forge:rods/vanadium_gallium', graphite: '#forge:dusts/graphite', octal: 'gtceu:europium_octal_cable', quad: 'gtceu:europium_quadruple_cable'
   }
   var COMPONENT = { motor: 'electric_motor', pump: 'electric_pump', piston: 'electric_piston', conveyor: 'conveyor_module', robot: 'robot_arm',
     emitter: 'emitter', sensor: 'sensor', field: 'field_generator' }
@@ -61,11 +61,19 @@
     ['thermal_centrifuge', 'CEC|OMO|WEW', 'C:circ E:motor O:quad M:hull W:cable'],
     ['wiremill', 'EWE|CMC|EWE', 'E:motor W:cable C:circ M:hull']
   ]
-  // the UXV circuit assembler and scanner: the same shapes, one tier up
-  var UXV_MACHINES = [UHV_MACHINES[8], UHV_MACHINES[29]]
-
+  // GTM's UHV recipes that need no component, remade at UEV-UXV from the tier's own hull and cables (the shaped rows take LV-grade copper, iron and red alloy)
+  var EXTRA_MACHINES = [
+    ['alloy_smelter', 'ECE|CMC|W.W', 'E:circ C:quad M:hull W:cable'],
+    ['arc_furnace', 'WCW|GMG|PPP', 'W:cable C:circ G:graphite M:hull P:plate'],
+    ['electric_furnace', 'ECE|WMW', 'E:circ C:quad M:hull W:cable'],
+    ['electrolyzer', 'CIC|GMG|WWW', 'C:circ I:quad G:glass M:hull W:cable'],
+    ['polarizer', 'ZWZ|SMS|ZWZ', 'Z:octal W:cable S:rodvg M:hull']
+  ]
+  var ALL_MACHINES = UHV_MACHINES.concat(EXTRA_MACHINES)
   var PROFILES = {
     uhv: { cable: 'gtceu:europium_single_cable', plate: '#forge:plates/neutronium' },
+    uev: { cable: 'gtceu:lay_superhydride_single_cable', plate: '#forge:plates/neutronium' },
+    uiv: { cable: 'gtceu:metallic_hydrogen_single_cable', plate: 'gtceu:rhea_plate' },
     uxv: { cable: 'gtceu:metallic_hydrogen_single_cable', plate: '#forge:plates/neutronium' }
   }
 
@@ -96,8 +104,8 @@
     console.error(LOG + 'high_tier_machines skipped ' + name + ': unknown id(s) ' + ms.join(', '))
   }
 
-  var VA = { uhv: 1966080, uev: 7864320, uiv: 31457280, uxv: 125829120 }
-  var PREV = { uhv: 'uv', uev: 'uhv', uiv: 'uev', uxv: 'uiv' }
+  var VA = { uhv: 1966080, uev: 7864320, uiv: 31457280, uxv: 125829120, opv: 503316480 }
+  var PREV = { uhv: 'uv', uev: 'uhv', uiv: 'uev', uxv: 'uiv', opv: 'uxv' }
   var COMPONENT_RE = /_(electric_motor|electric_pump|electric_piston|conveyor_module|robot_arm|emitter|sensor|field_generator)$/
 
   // Above UV every hatch and single is an assembly line with station research of the tier below's same machine (docs/quality/recipes.md H-FORM, S-FORM)
@@ -114,6 +122,7 @@
       if (i[0].indexOf('#gtceu:circuits/') === 0) circ = true
     })
     if (parts < 2 && first >= 0) inputs[first][1] += 2 - parts
+    else if (parts < 2) inputs.push(['gtceu:' + tier + '_electric_motor', 2 - parts])
     if (!circ) inputs.push(['#gtceu:circuits/' + tier, 1])
     // the tier below's same machine is upgraded, which also keeps the sets of ingredients of sibling machines distinct (GTM's recipe lookup)
     if (!inputs.some(function (i) { return i[0] === research })) inputs.push([research, 1])
@@ -174,13 +183,63 @@
     })
   }
 
+  // AF-E2 (M2-03, M2-04): every wired power part above UHV is chained from the tier's own parts, never from lead, iron and red alloy.
+  //   4 A = 2 x 1 A + the tier's quadruple cable and plates; 16 A (foundation.js, still a hull line) is left for a follow-up; 64 A = 2 x 16 A + hex cable.
+  var FAMILY = { uev: 'lay_superhydride', uiv: 'metallic_hydrogen', uxv: 'pasta_strand', opv: 'chain_strand' }
+  var SIZE = { single: 'single', double: 'double', quad: 'quadruple', octal: 'octal', hex: 'hex' }
+  function cableOf(tier, size) { return 'gtceu:' + FAMILY[tier] + '_' + SIZE[size] + '_cable' }
+  function plateOf(tier) { return tier === 'uev' ? '#forge:plates/neutronium' : 'gtceu:rhea_plate' }
+  function hullOf(tier) { return 'gtceu:' + tier + '_machine_hull' }
+
+  function addEnergy(event) {
+    ;['uev', 'uiv', 'uxv'].forEach(function (tier) {
+      ;['input', 'output'].forEach(function (d) {
+        var base = 'gtceu:' + tier + '_energy_' + d + '_hatch'
+        line(event, tier, tier + '_energy_' + d + '_hatch_4a', base + '_4a', [[base, 2], [cableOf(tier, 'quad'), 2], [plateOf(tier), 4]])
+      })
+      event.remove({ id: 'gtceu:assembler/energy_hatch_4a_' + tier })
+      event.remove({ id: 'gtceu:assembler/dynamo_hatch_4a_' + tier })
+    })
+    ;['uev', 'uiv', 'uxv', 'opv'].forEach(function (tier) {
+      ;[['input', 'energy'], ['output', 'dynamo']].forEach(function (d) {
+        var h16 = 'gtceu:' + tier + '_energy_' + d[0] + '_hatch_16a'
+        line(event, tier, tier + '_substation_' + d[0] + '_hatch_64a', 'gtceu:' + tier + '_substation_' + d[0] + '_hatch_64a', [[h16, 2], [cableOf(tier, 'hex'), 2], [plateOf(tier), 6]])
+        event.remove({ id: 'gtceu:assembler/substation_' + d[1] + '_hatch_' + tier })
+      })
+      var mot = 'gtceu:' + tier + '_electric_motor'
+      var t1 = 'gtceu:' + tier + '_transformer_1a'
+      var t2 = 'gtceu:' + tier + '_transformer_2a'
+      var t4 = 'gtceu:' + tier + '_transformer_4a'
+      line(event, tier, tier + '_transformer_1a', t1, [[hullOf(tier), 1], [cableOf(tier, 'single'), 4], [mot, 2]])
+      line(event, tier, tier + '_transformer_2a', t2, [[t1, 2], [cableOf(tier, 'double'), 2], [plateOf(tier), 2]])
+      line(event, tier, tier + '_transformer_4a', t4, [[t2, 2], [cableOf(tier, 'quad'), 2], [plateOf(tier), 4]])
+      line(event, tier, tier + '_transformer_16a', 'gtceu:' + tier + '_transformer_16a', [[t4, 2], [cableOf(tier, 'octal'), 2], [plateOf(tier), 6]])
+      ;['assembler/' + tier + '_transformer', 'assembler/' + tier + '_hi_amp_2a_transformer', 'assembler/' + tier + '_hi_amp_4a_transformer',
+        'assembler/' + tier + '_power_transformer', 'shaped/' + tier + '_diode', 'shaped/' + tier + '_muffler_hatch'].forEach(function (id) { event.remove({ id: 'gtceu:' + id }) })
+      ;[['4x', 'quad'], ['8x', 'octal'], ['16x', 'hex']].forEach(function (b) {
+        line(event, tier, tier + '_battery_buffer_' + b[0], 'gtceu:' + tier + '_battery_buffer_' + b[0], [[hullOf(tier), 1], [cableOf(tier, b[1]), 2], [plateOf(tier), 2]])
+        event.remove({ id: 'gtceu:shaped/' + tier + '_battery_buffer_' + b[0] })
+      })
+      line(event, tier, tier + '_diode', 'gtceu:' + tier + '_diode', [[hullOf(tier), 1], [cableOf(tier, 'quad'), 2], [plateOf(tier), 2]])
+      if (tier === 'opv') {
+        line(event, tier, 'opv_muffler_hatch', 'gtceu:opv_muffler_hatch', [[hullOf(tier), 1], [mot, 2], [FIXED.pipe, 1], [FIXED.rotor, 1]])
+      }
+    })
+    ;['uev', 'uiv', 'uxv'].forEach(function (tier) {
+      line(event, tier, tier + '_charger_4x', 'gtceu:' + tier + '_charger_4x', [[hullOf(tier), 1], [cableOf(tier, 'quad'), 2], [plateOf(tier), 2]])
+      event.remove({ id: 'gtceu:shaped/' + tier + '_charger_4x' })
+      ALL_MACHINES.forEach(function (m) { event.remove({ id: 'gtceu:shaped/' + tier + '_' + m[0] }) })
+    })
+  }
+
   function generate(event) {
     HM.recipes = []
     HM.skipped = []
     event.remove({ id: 'gtceu:shaped/uxv_circuit_assembler' })
     event.remove({ id: 'gtceu:shaped/uxv_scanner' })
     addMachines(event, 'uhv', UHV_MACHINES)
-    addMachines(event, 'uxv', UXV_MACHINES)
+    ;['uev', 'uiv', 'uxv'].forEach(function (tier) { addMachines(event, tier, ALL_MACHINES) })
+    addEnergy(event)
     addLasers(event)
     addHatches(event)
     addStorage(event)

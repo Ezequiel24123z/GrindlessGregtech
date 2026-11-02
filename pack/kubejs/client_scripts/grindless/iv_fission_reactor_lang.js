@@ -21,6 +21,8 @@ ClientEvents.lang('en_us', event => {
     add('gtceu.recipe.grindless_core.mox_heavy_water', 'MOX in heavy water: an assembly lasts %s channel-cycles (about %s min in one channel) and gives %s G EU; the heavy water comes out tritiated')
     add('gtceu.recipe.grindless_core.breeder', 'Breeder: an assembly lasts %s channel-cycles (about %s min in one channel) and gives %s G EU; the spent assembly holds more plutonium than went in')
 
+    add('gtceu.recipe.grindless_core.u233_heavy_water', 'U-233 in heavy water: a rod lasts %s channel-cycles (about %s min in one channel) and gives %s G EU; the heavy water comes out tritiated')
+
     add('grindless.machine.fission_reactor.no_voiding', 'The reactor keeps all it makes: spent fuel and tritiated heavy water leave through their bus and hatch. Turn voiding off')
     add('grindless.machine.fission_reactor.scram', 'SCRAM: shut down with fuel loaded. It restarts by itself once it has water (and heavy water for circuits 2 and 3), room for the spent fuel and the tritiated heavy water, and the circuit of a core')
 })

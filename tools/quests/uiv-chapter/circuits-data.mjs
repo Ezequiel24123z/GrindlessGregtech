@@ -7,15 +7,15 @@ const xp = (n) => ({ type: 'xp', xp: n });
 
 export const CHAPTER = {
   section: { name: 'UIV Circuits', origin: { x: 4, y: 10.25 }, heading: { key: 'H_CIRC', x: 0, y: 0, deps: ['J_HOME'], icon: 'gtceu:uiv_circuit_assembler', desc: [
-      'The photonic chips of this age.',
-      'The assembler and the first lithium niobate line.',
+      'The photonic chips of this age, then the parts, the circuit assembler and the hatches built from them.',
+      'The lithium niobate wafers come first.',
     ] } },
   filename: 'uiv_circuits',
   era: 'uiv',
   role: 'circuits',
   order: 1,
   icon: 'gtnn:optical_mainframe',
-  autofocus: 'CH_ASM',
+  autofocus: 'CH_LNOI',
   title: 'UIV: Circuits',
   subtitle: ['A wafer with light on it, an exposure at 6.7 nanometres, a crystal that outlives the Sun and a processor of single phosphorus atoms.'],
 };
@@ -32,84 +32,106 @@ const q = (key, kind, title, icon, deps, x, y, teach, tasks, xpN) => ({
 
 export const QUESTS = [
   // ------------------------------------------------------------------ the assembler and the moving parts
-  q('CH_ASM', 'machine', 'UIV Circuit Assembler', 'gtceu:uiv_circuit_assembler', ['H_CIRC'], 3, -1.75, {
-    for: 'The &6UIV Circuit Assembler&r puts the UIV components and the controllers of this era together from the circuits on this page.',
-    needs: 'A UIV hull and UIV components, and the cleanroom you already run.',
-    unlocks: 'The parts and hatches on the next two quests, and every controller past the UIV hull.',
-    automate: 'Boards and chips come from the cleanroom by ME; stock what it returns.',
-  }, [it('gtceu:uiv_circuit_assembler')], 150),
-  q('PUMP', 'step', 'UIV Parts', 'gtceu:uiv_electric_pump', ['CH_ASM'], 5.5, -1.75, {}, [
+  q('PUMP', 'step', 'UIV Parts', 'gtceu:uiv_electric_pump', ['MAIN'], 16, 5.75, {
+    for: 'The UIV emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor are the parts of this era. The circuit assembler, the hatches and the controllers past them are built from these.',
+    needs: 'The UEV part of the same kind (two for the motor, pump and field generator), plus UIV circuits of any kind from the optical mainframe. The motor also takes metallic hydrogen cable, windings and superconducting coils; the pump takes RHEA impellers and plates; the emitter takes two gamma laser cavities.',
+    unlocks: 'The UIV circuit assembler and the UIV hatches.',
+    automate: 'Stock each part by ME; a controller draws several of the same kind.',
+  }, [
     it('gtceu:uiv_emitter'), it('gtceu:uiv_sensor'), it('gtceu:uiv_field_generator'), it('gtceu:uiv_robot_arm'), it('gtceu:uiv_conveyor_module'),
     it('gtceu:uiv_electric_pump'), it('gtceu:uiv_electric_piston'), it('gtceu:uiv_electric_motor'),
   ], 120),
-  q('HATCH', 'step', 'UIV Hatches and Cable', 'gtceu:uiv_energy_input_hatch', ['PUMP'], 8, -1.75, {}, [it('gtceu:uiv_energy_input_hatch'), it('gtceu:uiv_energy_output_hatch'), it('gtceu:metallic_hydrogen_single_cable')], 100),
+  q('CH_ASM', 'machine', 'UIV Circuit Assembler', 'gtceu:uiv_circuit_assembler', ['PUMP', 'HULL'], 18.5, 7.25, {
+    for: 'The &6UIV Circuit Assembler&r puts the UIV controllers together from the circuits of this page.',
+    needs: 'A UIV machine hull, a UIV robot arm, an emitter and two conveyor modules, with a circuit of a high tier and red alloy cable.',
+    unlocks: 'The UIV hatches and the controllers of this era.',
+    automate: 'Boards and chips come from the cleanroom by ME; stock what it returns.',
+  }, [it('gtceu:uiv_circuit_assembler')], 150),
+  q('HATCH', 'step', 'UIV Hatches and Cable', 'gtceu:uiv_energy_input_hatch', ['PUMP'], 21, 5.75, {
+    for: 'The &6UIV Energy Hatch&r and &6UIV Dynamo Hatch&r are assembly line recipes on two UIV hulls, with metallic hydrogen cable, RHEA plates and FFKM seals. &6Metallic Hydrogen Single Cable&r carries the power.',
+    needs: 'Two UIV machine hulls, three metallic hydrogen cables, six RHEA plates, six FFKM seals, three UIV circuits of any kind, three UIV sensors and a UIV motor.',
+    unlocks: 'Every UIV machine that takes power from a hatch.',
+    automate: 'Craft hatches and cable by ME in small batches; each machine takes one.',
+  }, [it('gtceu:uiv_energy_input_hatch'), it('gtceu:uiv_energy_output_hatch'), it('gtceu:metallic_hydrogen_single_cable')], 100),
 
   // ------------------------------------------------------------------ light on a wafer
-  q('CH_LNSIN', 'wafer', 'Lithium Niobate on Nitride', 'grindless:ln_on_sin_wafer', ['H_CIRC'], 3, 0.25, {
-    for: 'A thin crystal of lithium niobate bonded onto silicon nitride makes the &6LN-on-SiN Wafer&r: one wafer that steers light and tunes it.',
-    needs: 'The TFLN fab, a lithium niobate boule and silicon nitride wafers, in the cleanroom.',
-    unlocks: 'The comb that the optical mainframe is built round.',
-    automate: 'Boules and nitride wafers by ME; the fab returns wafers to a chest.',
+  q('CH_LNOI', 'wafer', 'Lithium Niobate on Insulator', 'grindless:lnoi_wafer', ['H_CIRC'], 3, 0.25, {
+    for: 'A thin film of lithium niobate on silicon makes the &6LNOI Wafer&r. The photonic foundry cuts it into thin-film modulators, and it is the base of the optical processor and of the nitride wafer next to it.',
+    needs: 'An ion-implanted lithium niobate wafer, a silicon wafer and quicklime in the photonic foundry.',
+    unlocks: 'The LN-on-Si3N4 wafer, the optical processors of the mainframe and the thin-film modulators of the tensor core.',
+    automate: 'Implanted wafers by ME; one LNOI wafer gives many modulators, so stock modulators, not wafers.',
+  }, [it('grindless:lnoi_wafer')], 120),
+  q('CH_LNSIN', 'wafer', 'Lithium Niobate on Nitride', 'grindless:ln_on_sin_wafer', ['CH_LNOI'], 5.5, 0.25, {
+    for: 'The TFLN Fab slices an LNOI wafer onto a silicon nitride coated wafer and makes the &6LN-on-Si3N4 Wafer&r. It does not go into the mainframe: thinned and tipped with platinum it becomes the EO transceiver of the pulsar-timed repeater.',
+    needs: 'The TFLN Fab, an LNOI wafer and a silicon nitride coated wafer.',
+    unlocks: 'The EO transceiver of the pulsar-timed repeater and the UIV wireless hatches.',
+    automate: 'LNOI wafers and nitride wafers by ME; the fab returns wafers to a chest.',
   }, [it('grindless:ln_on_sin_wafer')], 120),
 
   // ------------------------------------------------------------------ BEUV
   q('CH_BEUV', 'wafer', 'BEUV Exposure', 'grindless:beuv_exposed_wafer', ['H_LADDER'], 3.5, 3.25, {
-    for: 'A wafer exposed at 6.7 nanometres holds finer lines than any light before it: the &6BEUV Exposed Wafer&r.',
-    needs: 'The BEUV scanner, a resist-coated wafer and clean mirrors. The terbium debris is caught and recycled.',
-    unlocks: 'The driver ASIC next to it, and through it the P:Si processor.',
+    for: 'A wafer exposed at 6.7 nanometres holds finer lines than any light before it: the &6BEUV-Exposed Wafer&r.',
+    needs: 'The BEUV scanner (a UIV hull, UEV circuits), a tin-terbium droplet target, an HfO2 resist wafer and a BEUV mirror. The debris is caught and recycled.',
+    unlocks: 'The BEUV driver ASIC next to it.',
     automate: 'Wafers by ME; send the fouled mirrors to the cleaning line, not to the bin.',
   }, [it('grindless:beuv_exposed_wafer')], 120),
   q('CH_ASIC', 'circuit', 'Driver ASIC', 'grindless:beuv_driver_asic', ['CH_BEUV'], 7.5, 3.25, {
-    for: 'Cut from the exposed wafer, the &6BEUV Driver ASIC&r is the logic that steers the single-atom writer.',
-    needs: 'A BEUV exposed wafer and a circuit 1 program in the cleanroom.',
-    unlocks: 'The P:Si processor.',
-    automate: 'One wafer yields many chips; stock them in a chest by ME.',
+    for: 'Cut from the exposed wafer, the &6BEUV Driver ASIC&r is the logic that drives the photonic tensor core.',
+    needs: 'A BEUV-exposed wafer, a VUV frequency comb and ethanol in the BEUV lithography line.',
+    unlocks: 'The photonic tensor core.',
+    automate: 'One wafer yields several chips; stock them in a chest by ME.',
   }, [it('grindless:beuv_driver_asic')], 140),
+  q('CH_TENSOR', 'circuit', 'Photonic Tensor Core', 'grindless:photonic_tensor_core', ['CH_ASIC', 'CH_LNOI'], 11, 3.25, {
+    for: 'Matrix products done in light: the &6Photonic Tensor Core&r is the arithmetic of the optical mainframe.',
+    needs: 'In the photonic integration hall (a circuit 4 program): a BEUV driver ASIC, a Quantum Photonic Chip and four thin-film LN modulators from the photonic foundry.',
+    unlocks: 'The optical mainframe.',
+    automate: 'Modulators and ASICs by ME; the tensor core is made one at a time and goes straight to the mainframe line.',
+  }, [it('grindless:photonic_tensor_core')], 160),
 
   // ------------------------------------------------------------------ memory
   q('CH_5D', 'wafer', 'Five-Dimensional Crystal', 'grindless:data_crystal_5d', ['H_LADDER'], 3.5, 5.75, {
     for: 'A laser pulse a millionth of a millionth of a second long writes inside glass. The &65D Data Crystal&r keeps what it holds longer than the Sun will shine.',
-    needs: 'The femtosecond writer and a block of fused silica.',
-    unlocks: 'The research data that Matrioshka runs and the six-hour memory.',
-    automate: 'Silica blanks by ME; written crystals go to the research store.',
+    needs: 'A silica storage preform written by the femtosecond laser, engraved with a UHV circuit, then annealed in the electric blast furnace at 9,001 K.',
+    unlocks: 'The Matrioshka research writes in Mercury orbit, the ergosphere probe bay and the Kerr probe.',
+    automate: 'Silica preforms by ME; written crystals go to the research store.',
   }, [it('grindless:data_crystal_5d')], 120),
-  q('CH_SIXH', 'circuit', 'Six-Hour Memory', 'grindless:six_hour_memory', ['CH_5D'], 6, 5.75, {
-    for: 'A crystal of one europium isotope remembers a light pulse for hours when the right comb is burned in. That is the &6Six-Hour Memory&r.',
-    needs: 'The spectral hole burner, a 5D crystal and superfluid helium.',
-    unlocks: 'The P:Si processor, which holds its state in this memory.',
-    automate: 'Crystals by ME, helium by pipe; a few stocked memories are enough.',
+  q('CH_MKM', 'circuit', 'Millikelvin Cryostat Module', 'grindless:mk_cryostat_module', ['H_LADDER'], 3.5, 8.25, {
+    for: 'The die has to be cold before it works. The &6mK Cryostat Module&r wets a rare-earth stage with a helium-3 mixture and holds the die at millikelvin.',
+    needs: 'The nuclear demagnetisation stage: a nuclear stage, a cold plate and a helium-3/helium-4 mixture, with a circuit 2 program.',
+    unlocks: 'The six-hour memory and the P:Si processor.',
+    automate: 'The helium mixture returns to the works; send finished modules on by ME.',
+  }, [it('grindless:mk_cryostat_module')], 150),
+  q('CH_SIXH', 'circuit', 'Six-Hour Memory', 'grindless:six_hour_memory', ['CH_MKM'], 6, 5.75, {
+    for: 'A crystal of one europium isotope remembers a light pulse for hours when the right comb is burned in. That is the &6Six-Hour Quantum Memory&r.',
+    needs: 'In an assembler: a hole-burned Eu-151:YSO slab (spectral hole burning with superfluid helium), an mK cryostat module, a UEV sensor and a circuit 20 program.',
+    unlocks: 'The optical mainframe.',
+    automate: 'Slabs by ME, helium by pipe; a few stocked memories are enough.',
   }, [it('grindless:six_hour_memory')], 140),
 
   // ------------------------------------------------------------------ the die and the processor
-  q('CH_STM', 'wafer', 'STM-Patterned Wafer', 'grindless:stm_patterned_wafer', ['H_LADDER'], 3.5, 8.25, {
+  q('CH_STM', 'wafer', 'STM-Patterned Wafer', 'grindless:stm_patterned_wafer', ['H_LADDER'], 3.5, 9.75, {
     for: 'A scanning tip peels hydrogen off silicon one atom at a time. The &6STM-Patterned Wafer&r is the silicon with the holes ready.',
-    needs: 'The STM lithography cell, a clean silicon wafer and ultra-high vacuum.',
+    needs: 'The STM lithography cell: a hydrogen-terminated silicon wafer in ultra-high vacuum.',
     unlocks: 'The P:Si die, once phosphine fills the holes.',
     automate: 'Wafers by ME; the cell is slow, so run two.',
   }, [it('grindless:stm_patterned_wafer')], 120),
-  q('CH_DIE', 'circuit', 'P:Si Die', 'grindless:p_si_die', ['CH_STM'], 6, 8.25, {
-    for: 'Phosphine fills the holes and a cap seals them. The &6P:Si Die&r holds qubits made of single phosphorus atoms.',
-    needs: 'A patterned wafer in the STM lithography cell. The excess phosphine is scrubbed and kept.',
-    unlocks: 'The cryostat module and the P:Si processor.',
+  q('CH_DIE', 'circuit', 'P:Si Die', 'grindless:p_si_die', ['CH_STM'], 6, 9.75, {
+    for: 'Phosphine fills the holes and silicon-28 grown over them seals them. The &6P:Si Die&r holds qubits made of single phosphorus atoms.',
+    needs: 'The patterned wafer dosed with phosphine in the STM cell, then molecular beam epitaxy with silicon-28 and liquid nitrogen. Excess phosphine is scrubbed and kept.',
+    unlocks: 'The P:Si processor.',
     automate: 'Phosphine by pipe in a contained loop; dies back by ME.',
   }, [it('grindless:p_si_die')], 140),
-  q('CH_MKM', 'circuit', 'Millikelvin Cryostat Module', 'grindless:mk_cryostat_module', ['CH_DIE'], 8.5, 8.25, {
-    for: 'The die has to be cold before it works. The &6mK Cryostat Module&r wets a rare-earth stage with helium-3 and holds the die at millikelvin.',
-    needs: 'The millikelvin cryostat works, a P:Si die and helium-3.',
-    unlocks: 'The P:Si processor.',
-    automate: 'The helium mixture returns to the works; send finished modules on by ME.',
-  }, [it('grindless:mk_cryostat_module')], 150),
-  q('CH_PSI', 'circuit', 'P:Si Processor', 'grindless:p_si_processor', ['CH_ASIC', 'CH_SIXH', 'CH_MKM'], 11, 5.75, {
-    for: 'A cooled die, a driver and a memory make the &6P:Si Processor&r. It is the logic of the UIV circuit.',
-    needs: 'The millikelvin cryostat works, a cryostat module, a driver ASIC and a six-hour memory.',
+  q('CH_PSI', 'circuit', 'P:Si Processor', 'grindless:p_si_processor', ['CH_DIE', 'CH_MKM'], 8.5, 8.25, {
+    for: 'A cooled die makes the &6Characterised P:Si Processor&r. It is the logic of the UIV circuit.',
+    needs: 'The millikelvin cryostat works: a P:Si die, an mK cryostat module and liquid helium, with a circuit 3 program.',
     unlocks: 'The optical mainframe.',
-    automate: 'Parts in matched counts by ME; keep one processor per mainframe.',
+    automate: 'Dies and modules in matched numbers by ME; keep one processor per mainframe.',
   }, [it('grindless:p_si_processor')], 200),
-  q('MAIN', 'circuit', 'Optical Mainframe', 'gtnn:optical_mainframe', ['CH_PSI'], 13.5, 5.75, {
-    for: 'A processor, a crossbar, a glass interposer and a comb on a LN-on-SiN wafer make the &6Optical Mainframe&r, the UIV circuit.',
-    needs: 'The photonic integration hall, a P:Si processor and a LN-on-SiN wafer.',
-    unlocks: 'The controllers of Mk5, Matrioshka and every dead-star machine, and the gate store.',
-    automate: 'Keep a dedicated chest and never a big stock; one processor and one wafer go into each.',
+  q('MAIN', 'circuit', 'Optical Mainframe', 'gtnn:optical_mainframe', ['CH_PSI', 'CH_SIXH', 'CH_TENSOR'], 13.5, 5.75, {
+    for: 'A processor, a memory, a tensor core, a crossbar on a glass interposer and two optical assemblies make the &6Optical Mainframe&r, the UIV circuit.',
+    needs: 'The photonic integration hall: a Characterised P:Si Processor, a Six-Hour Quantum Memory, a Photonic Tensor Core, a Crossbar on Interposer and two optical assemblies. The assemblies come from the photonic foundry (optical processors from LNOI wafers, plus quantum memory chips).',
+    unlocks: 'The UIV parts, the controllers of Mk5 and Matrioshka and the stored proof of the gate.',
+    automate: 'Keep a dedicated chest and never a big stock; every part goes into each.',
   }, [it('gtnn:optical_mainframe')], 250),
   {
     key: 'H_LADDER', kind: 'reading', title: 'The Light Ladder', icon: 'grindless:beuv_exposed_wafer',

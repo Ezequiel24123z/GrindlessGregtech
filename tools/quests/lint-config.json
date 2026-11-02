@@ -1,5 +1,9 @@
 {
   "_doc": "Configuration of tools/quests/lint.mjs. Rules and their reasons: docs/quests.md.",
+  "classLevels": {
+    "_why": "AF-A2 classes. creative-reward is clean on the v1.1.0 book, so it is an error. The others find work for the quest packages (lint.mjs --new-classes lists them as warnings: count-stack 8, task-hidden 5, task-no-recipe 525, same-title 951, empty-description 4136, v1.1.0 book with its dump) and stay info (listed, never counted) until those packages fix them; set each to warn or error then.",
+    "creative-reward": "error"
+  },
   "maxEdge": 5.0,
   "maxVerticalDrop": 3.0,
   "minGap": 0.25,

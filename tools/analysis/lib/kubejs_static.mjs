@@ -23,6 +23,9 @@ import { makeDump } from './dump.mjs';
 
 const TIERS = ['ULV', 'LV', 'MV', 'HV', 'EV', 'IV', 'LuV', 'ZPM', 'UV', 'UHV', 'UEV', 'UIV', 'UXV', 'OpV', 'MAX'];
 const VOLTAGE = TIERS.map((_, i) => 8 * Math.pow(4, i));
+// GTValues.VA and VHA of GTM 7.5.3: the voltage adjusted for cable loss (what recipes should draw), not V.
+const GTM_VA = [7, 30, 120, 480, 1920, 7680, 30720, 122880, 491520, 1966080, 7864320, 31457280, 125829120, 503316480, 2013265920];
+const GTM_VHA = [3, 15, 60, 240, 960, 3840, 15360, 61440, 245760, 983040, 3932160, 15728640, 62914560, 251658240, 1006632960];
 const CALLBACK_TIMEOUT_MS = 20000;
 
 // ------------------------------------------------------------------------------------------------ inert stand-in
@@ -409,10 +412,13 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
       if (i >= 0) return i;
       const iu = TIERS.map((x) => x.toUpperCase()).indexOf(prop);
       if (iu >= 0) return iu;
-      if (prop === 'V' || prop === 'VA') return VOLTAGE;
+      if (prop === 'V') return VOLTAGE;
+      if (prop === 'VA') return GTM_VA;
+      if (prop === 'VH') return VOLTAGE.map((v) => v / 2);
+      if (prop === 'VHA') return GTM_VHA;
       if (prop === 'VN') return TIERS.map((x) => x.toUpperCase());
       if (prop === 'VNF') return TIERS;
-      if (prop === 'VLVH' || prop === 'VLVT' || prop === 'VHA') return VOLTAGE;
+      if (prop === 'VLVH' || prop === 'VLVT') return VOLTAGE;
       return any;
     },
   });
@@ -473,6 +479,12 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
   function baseContext() {
     const ctx = {
       global: global_, console: console_, JsonIO: jsonIO, Java, GTValues, Item, Ingredient, Fluid,
+      // GTRecipeTypes.get(name).setMaxIOSize(...) widens a registered type after creation (lv/multis.js, orbital_biology.js, europa.js)
+      GTRecipeTypes: { get: (n) => {
+        const id = String(n).includes(':') ? String(n) : 'gtceu:' + n;
+        const entry = registry.recipeTypes.get(id);
+        return recorder({ setMaxIOSize: (p, a) => { if (entry) entry.maxIO = a.slice(0, 4).map((x) => Number(x) || 0); } });
+      } },
       Text: makeText(), Component: makeText(), Utils: any, NBT: any, Platform: { isLoaded: () => true, getMods: () => any, isClientEnvironment: () => false },
     };
     for (const g of EVENT_GROUPS) ctx[g] = eventGroup(g);
@@ -546,8 +558,9 @@ export function runPackScripts(packDir, { originals = [] } = {}) {
     fire(sctx, l, {
       create: (name) => {
         const id = String(name).includes(':') ? String(name) : 'gtceu:' + name;
-        registry.recipeTypes.set(id, { id, file: l.file });
-        return recorder({});
+        const entry = { id, file: l.file, maxIO: null };
+        registry.recipeTypes.set(id, entry);
+        return recorder({ setMaxIOSize: (p, a) => { entry.maxIO = a.slice(0, 4).map((n) => Number(n) || 0); } });
       },
     }, 'gtceu:recipe_type registry');
   }

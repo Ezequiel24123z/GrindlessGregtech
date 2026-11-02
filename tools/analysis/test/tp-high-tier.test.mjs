@@ -42,7 +42,7 @@ test('each tier removes exactly GTM\'s three duplicates and keeps our recipe as 
     assert.match(src, new RegExp(`\\['shaped/${t}_machine_hull', 'assembler/energy_hatch_16a_${t}', 'assembler/dynamo_hatch_16a_${t}'\\]`));
   }
   assert.equal(GTM_DUPLICATES.length, 9);
-  const ours = run.docs.recipes.recipes.filter((r) => /^grindless:assembly_line\/(uev|uiv|uxv)_(machine_hull|energy_)/.test(r.i));
+  const ours = run.docs.recipes.recipes.filter((r) => /^grindless:assembly_line\/(uev|uiv|uxv)_(machine_hull|energy_(input|output)_hatch(_16a)?$)/.test(r.i));
   assert.equal(ours.length, 15);
   for (const id of GTM_DUPLICATES) assert.ok(!run.docs.recipes.recipes.some((r) => r.i === id), `${id} should not exist`);
 });

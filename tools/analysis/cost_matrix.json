@@ -50,6 +50,7 @@
   "groups": {
     "note": "Per-tier key items. `${t}` is the tier. The first candidate that exists in the dump and is reachable is used.",
     "hull": ["gtceu:${t}_machine_hull"],
+    "machine_casing": ["gtceu:${t}_machine_casing"],
     "motor": ["gtceu:${t}_electric_motor", "grindless:${t}_electric_motor"],
     "pump": ["gtceu:${t}_electric_pump", "grindless:${t}_electric_pump"],
     "piston": ["gtceu:${t}_electric_piston", "grindless:${t}_electric_piston"],
@@ -66,8 +67,8 @@
   "circuits": {
     "note": "Every member of the dump's tag gtceu:circuits/<tier> is a key item of that tier.",
     "tagPrefix": "gtceu:circuits/",
-    "skipNote": "Dead or hidden GT-- families (Phase 8 removes them): cosmic, gooware, spintronic and supracausal assembly/computer/processor/mainframe (gtnn:*, ZPM-OpV) and extendedfeatures:opv_universal_circuit (no recipe; consumers use the gtnn alternative).",
-    "skip": ["gtnn:*", "extendedfeatures:opv_universal_circuit"]
+    "skipNote": "Only a circuit that has no recipe and no consumer is skipped (extendedfeatures:opv_universal_circuit: consumers use the gtnn alternative). Circuits hidden by hidden_until.json `never` are already dropped as key items; the live gtnn OpV and MAX circuits must stay visible.",
+    "skip": ["extendedfeatures:opv_universal_circuit"]
   },
 
   "superconductorWire": {
@@ -110,6 +111,11 @@
     "eraMedianRatioBand": [1.0, 12],
     "dominanceShare": 0.8,
     "lvCheapScore": 6,
-    "maxLvFlags": 12
+    "maxLvFlags": 12,
+    "gate": {
+      "note": "--check fails (exit 1) on any step under minRatio in these series (M2-07): each era must cost at least x1.3 the previous one.",
+      "minRatio": 1.3,
+      "series": ["hull", "machine_casing", "energy_hatch", "energy_hatch_16a", "circuit (cheapest)", "controller (median)"]
+    }
   }
 }

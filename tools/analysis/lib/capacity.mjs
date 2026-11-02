@@ -8,7 +8,9 @@
 //    The programmed circuit has its own slot and is not counted.
 //  - Hatches: FluidHatchPartMachine.java:63-65,106-107 (initial * 2^min(9,tier)), ItemBusPartMachine.java:106-108 ((1+min(9,tier))^2 slots),
 //    DualHatchPartMachine.java (2 tanks, (tier-4)^2 slots). The snapshot holds the values the game reported, not these formulas.
-//  - GTRecipeSchema.java:136-142 only WARNS when a recipe has more inputs than the type supports, so we enforce it here.
+//  - GTRecipeSchema.java:136-142 only WARNS when a recipe has more inputs than the type supports ("... than its recipe type can support"),
+//    so we enforce it here. The builder counts every item entry, the programmed circuit included, whether it is raw or sized; the circuit
+//    needs no ordinary slot (singleblocks have a circuit slot, buses/hatches a circuit-capable inventory), so the slot check skips it.
 // Verdicts per recipe: ok | warn (fits only a multiblock hatch although a singleblock exists, or the type is unknown) | error (fits nothing).
 
 export const V = [8, 32, 128, 512, 2048, 8192, 32768, 131072, 524288, 2097152, 8388608, 33554432, 134217728, 536870912, 2147483647];
@@ -28,16 +30,32 @@ const eutOf = (json) => {
   return typeof c === 'number' ? c : 0;
 };
 
-/** Item stacks of one side: [{count}] without circuits; fluid entries: [{amount, name}]. */
+/** A programmed-circuit ingredient, raw (the stand-in's form) or inside a sized/provider wrapper (GTM's serialization). */
+export const isCircuit = (c) => !!c && typeof c === 'object' && (c.type === 'gtceu:circuit' || ((c.type === 'gtceu:sized' || c.type === 'gtceu:int_provider') && isCircuit(c.ingredient)));
+
+/** Item stacks of one side: [{count}] without circuits (they have their own slot); fluid entries: [{amount, name}]. */
 export const itemsOf = (list) => {
   const out = [];
   for (const e of list || []) {
     const c = e && e.content;
-    if (!c || c.type === 'gtceu:circuit') continue;
+    if (!c || isCircuit(c)) continue;
     out.push({ count: Math.max(1, Number(c.count) || 1) });
   }
   return out;
 };
+/** How many circuit entries a side holds. GTM's builder counts them against the type's max item inputs. */
+export const circuitsOf = (list) => (list || []).filter((e) => e && isCircuit(e.content)).length;
+/**
+ * Parses GTM's capacity warning ("Recipe <id> is trying to add more inputs than its recipe type can support, Max item inputs: N").
+ * Returns {recipe, side, kind, max} or null when the line is not one.
+ */
+export function parseCapacityWarning(line) {
+  if (!/more (inputs|outputs)\b.*\bthan (its recipe type|RecipeType) can support/i.test(line)) return null;
+  const rec = /Recipe\s+([a-z0-9_.-]+:[a-z0-9_\/.-]+)/i.exec(line);
+  const lim = /Max\s+(item|fluid)\s+(inputs|outputs)\s*:\s*(\d+)/i.exec(line);
+  const side = /more (inputs|outputs)/i.exec(line)[1].toLowerCase();
+  return { recipe: rec ? rec[1] : '', side, kind: lim ? lim[1].toLowerCase() : '', max: lim ? Number(lim[3]) : null };
+}
 export const fluidsOf = (list) => {
   const out = [];
   for (const e of list || []) {
@@ -49,6 +67,33 @@ export const fluidsOf = (list) => {
   return out;
 };
 export const slotsFor = (stacks) => stacks.reduce((n, s) => n + Math.ceil(s.count / STACK), 0);
+
+/**
+ * M8-04: entries per side beyond the recipe type's layout [itemsIn, itemsOut, fluidsIn, fluidsOut] (GTRecipeTypeUI lays out
+ * exactly that many slots; the programmed circuit takes one of the item inputs, so EMI shows no slot for the last entry).
+ * `recipes` = [{id, type, json}], `ioOf(typeId)` -> [4 numbers] | null (unknown layouts are skipped). Returns {id: reason}.
+ */
+export function layoutOverflows(recipes, ioOf) {
+  const out = {};
+  for (const r of recipes) {
+    const io = ioOf(r.type);
+    if (!io) continue;
+    const j = r.json || {};
+    const n = [(j.inputs && j.inputs.item || []).length, (j.outputs && j.outputs.item || []).length, (j.inputs && j.inputs.fluid || []).length, (j.outputs && j.outputs.fluid || []).length];
+    const names = ['item inputs', 'item outputs', 'fluid inputs', 'fluid outputs'];
+    // GTRecipeSchema#input/output warn only when the side already has an entry and one more exceeds the max, so a lone entry never warns
+    const why = n.map((v, k) => (v > io[k] && v >= 2 ? `${v} ${names[k]} > layout ${io[k]}` : '')).filter(Boolean);
+    if (why.length) out[r.id] = `${r.type}: ${why.join('; ')}`;
+  }
+  return out;
+}
+
+/** Ratchet diff of two key sets: {fresh: keys not in the known list, stale: known keys no longer found}. */
+export function ratchetDiff(current, known) {
+  const cur = new Set(current);
+  const kn = new Set(known);
+  return { fresh: [...cur].filter((k) => !kn.has(k)).sort(), stale: [...kn].filter((k) => !cur.has(k)).sort() };
+}
 
 const atTier = (byTier, t) => {
   for (let i = Math.min(t, MAX_TIER); i >= 0; i--) if (byTier && byTier[i] !== undefined) return byTier[i];
@@ -95,7 +140,8 @@ export function checkRecipe(recipe, snap) {
   };
   const [mi, mo, mfi, mfo] = type.io;
   const count = [];
-  if (r.iIn.length > mi) count.push(`${r.iIn.length} item inputs > type max ${mi}`);
+  const circuits = circuitsOf(json.inputs && json.inputs.item);
+  if (r.iIn.length + circuits > mi) count.push(`${r.iIn.length + circuits} item inputs${circuits ? ` (${circuits} circuit)` : ''} > type max ${mi}`);
   if (r.iOut.length > mo) count.push(`${r.iOut.length} item outputs > type max ${mo}`);
   if (r.fIn.length > mfi) count.push(`${r.fIn.length} fluid inputs > type max ${mfi}`);
   if (r.fOut.length > mfo) count.push(`${r.fOut.length} fluid outputs > type max ${mfo}`);

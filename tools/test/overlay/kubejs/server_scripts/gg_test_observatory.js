@@ -312,7 +312,7 @@
     var allowed = {}
     allowed[DRAFT] = [R.draft, 'grindless:crafting/lunar_chart_draft_copy']
     allowed[MAP] = [R.map, 'grindless:crafting/lunar_map_copy']
-    allowed[EPHEMERIS] = [R.map, 'grindless:crafting/lunar_ephemeris_copy']
+    allowed[EPHEMERIS] = [R.map]
     allowed[LANDING] = [R.landing, 'grindless:crafting/lunar_landing_chart_copy']
     var found = {}
     CHARTS.forEach(function (id) { found[id] = [] })

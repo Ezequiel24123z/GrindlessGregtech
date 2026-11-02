@@ -32,6 +32,11 @@
         ['gtceu.recipe.grindless_black_hole_bomb.condensate_tap', 'Circuit 4: a seed wave packet taps the stationary cloud while the horizon lock is held (never consumed); a horizon phase lock wears 1 time in 32. Gives 16,000 mB of Kerr condensate (line P1).']
     ]
 
+    ENTRIES.push(['gtceu.recipe.grindless_condensate_refinery.cloud_loaded_cage',
+        'Circuit 8: 2 pair-confined cages and 64 horizon tethers soak in 64000 mB of settled condensate: 1 cloud-loaded cage; 8 boil-off return to the recompress row'])
+    ENTRIES.push(['gtceu.recipe.grindless_condensate_refinery.condensate_wetted_core',
+        'Circuit 9: 2 superfluid reservoir cores and 32 metal condensate soak in 64000 mB of settled condensate: 1 wetted core; 8 boil-off return to the recompress row'])
+
     ClientEvents.lang('en_us', function (event) {
         ENTRIES.forEach(function (e) {
             event.add('grindless', e[0], e[1])

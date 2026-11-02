@@ -17,6 +17,16 @@ ClientEvents.lang('en_us', event => {
     add('grindless.machine.fluorspar_kiln.tooltip.0', '§7A rotary kiln that digests fluorspar into hydrofluoric acid.')
 
     add('gtceu.recipe.grindless_fluorspar_kiln.hydrofluoric_acid_from_fluorite', 'One charge: the kiln runs up to 256 at once, 64 ticks each, with no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.hf_from_alkali_fluoride', 'One charge: 4 alkali fluoride and 1000 mB of sulfuric acid give 7 alkali sulfate and 2000 mB of hydrofluoric acid; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.calcium_fluoride_return', 'One charge: 1 calcium dust takes 2000 mB of hydrofluoric acid back into 3 fluorite and 2000 mB of hydrogen; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.five_n_magnesia', 'One charge: 2 magnesium hydroxide fired under 1000 mB of argon give 2 5N magnesia and 2000 mB of steam; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.dysco3_calcine', 'One charge: 2 DyScO3 charge calcined in 1000 mB of oxygen give 2 oxide and 1000 mB of steam; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.la_bfo_calcine', 'One charge: 2 La-BFO charge calcined in 1000 mB of oxygen give 2 oxide and 1000 mB of steam; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.ggg_calcine', 'One charge: 2 GGG charge calcined in 1000 mB of oxygen give 2 oxide and 1000 mB of steam; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.srruo3_calcine', 'One charge: 2 SrRuO3 charge calcined in 1000 mB of oxygen give 2 SrRuO3 and 1000 mB of carbon dioxide; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.fluorine_from_hf', 'One charge: 1 alkali fluoride (returned) and 2000 mB of hydrofluoric acid give 1000 mB of fluorine; the hydrogen is flared; 64 ticks')
+    add('gtceu.recipe.grindless_fluorspar_kiln.be_fluoride_from_beryllium', 'One charge: 1 beryllium and 2000 mB of hydrofluoric acid give 3 beryllium fluoride and 2000 mB of hydrogen; 64 ticks, no overclock')
+    add('gtceu.recipe.grindless_fluorspar_kiln.be_fluoride_from_window_scrap', 'One charge: 1 beryllium window scrap and 2000 mB of hydrofluoric acid give 3 beryllium fluoride and 2000 mB of hydrogen; 64 ticks')
 
     add('grindless.machine.fluorspar_kiln.no_voiding', 'The scrubber keeps all the hydrofluoric acid: it leaves through the output hatches. Turn fluid voiding off')
 

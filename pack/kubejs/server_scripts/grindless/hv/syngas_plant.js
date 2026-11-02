@@ -54,8 +54,8 @@
   const ID_PREFIX = 'grindless:hv/'
 
   const FEED_TAG = 'grindless:gasifier_feed'
-  const FEED_ITEMS = ['gtceu:coal_dust', 'gtceu:coke_dust', 'gtceu:charcoal_dust', 'gtceu:carbon_dust']
-  const FEED_SOURCES = ['#forge:dusts/coal', '#forge:dusts/coke', '#forge:dusts/charcoal', '#forge:dusts/carbon']
+  const FEED_ITEMS = ['gtceu:coal_dust', 'gtceu:coke_dust', 'gtceu:charcoal_dust']
+  const FEED_SOURCES = ['#forge:dusts/coal', '#forge:dusts/coke', '#forge:dusts/charcoal']
   const ASH = 'gtceu:ash_dust'
   const ASH_PER_MOLE = 1111
 
@@ -188,7 +188,7 @@
   SYN.craftingParts = PLANT_PARTS.concat(CATALYST_PARTS)
   SYN.craftingRecipes = { plant: 'grindless:crafting/syngas_plant', catalyst: 'grindless:mixer/shift_catalyst' }
 
-  // the feed: the four pulverized carbons, through their forge tags (the Ore Plant gives coal dust, a macerator the rest)
+  // the feed: the three pulverized coals (pure carbon dust is not feed: its ash would be minerals from nothing), through their forge tags (the Ore Plant gives coal dust, a macerator the rest)
   ServerEvents.tags('item', function (event) {
     try {
       event.add(FEED_TAG, FEED_SOURCES)

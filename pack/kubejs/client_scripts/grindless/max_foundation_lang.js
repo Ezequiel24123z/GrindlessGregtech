@@ -210,7 +210,7 @@
         ['cu111_foil', 'Cu(111) Foil', 'Step 3 of 4 in line L34.', 'Goes on to Electropolished Cu(111) Foil.'],
         ['electropolished_cu111_foil', 'Electropolished Cu(111) Foil', 'Step 4 of 4 in line L34.', 'The finished product of its line.'],
         ['tb_dy_oxide', 'Tb Dy Oxide', 'Step 1 of 4 in line L35.', 'Goes on to Terfenol-D Ingot.'],
-        ['terfenol_ingot', 'Terfenol-D Ingot', 'Step 2 of 4 in line L35.', 'Goes on to Oriented Terfenol-D Rod.'],
+        ['terfenol_ingot', 'Terfenol-D Alloy Ingot', 'Step 2 of 4 in line L35.', 'Goes on to Oriented Terfenol-D Rod.'],
         ['oriented_terfenol_rod', 'Oriented Terfenol-D Rod', 'Step 3 of 4 in line L35.', 'Goes on to Laminated Terfenol-D Stack.'],
         ['laminated_terfenol_stack', 'Laminated Terfenol-D Stack', 'Step 4 of 4 in line L35.', 'The finished product of its line.'],
         ['hafnium_tantalum_oxide', 'Hafnium Tantalum Oxide', 'Step 1 of 4 in line L36.', 'Goes on to Ta Hf C Powder.'],
@@ -329,7 +329,7 @@
         ['calibrated_oscillator_bank', 'Calibrated Oscillator Bank', 'An oscillator bank tuned to the cloud phase.', 'Goes to the Ergoregion Synchroniser.'],
         ['horizon_phase_lock', 'Horizon Phase Lock', 'Holds the trapped wave at the horizon rotation.', 'Made by the Ergoregion Synchroniser.'],
         ['spent_phase_lock', 'Spent Phase Lock', 'A phase lock whose oscillator has drifted.', 'Can be relocked.'],
-        ['horizon_flux_clamp', 'Horizon Flux Clamp', 'A coil winding that holds the horizon flux down.', 'Made by the Horizon Flux Clamp.'],
+        ['horizon_flux_clamp', 'Horizon Flux-Clamp Winding', 'A coil winding that holds the horizon flux down.', 'Made by the Horizon Flux Clamp.'],
         ['reconnection_plasmoid', 'Reconnection Plasmoid', 'Plasma captured from a suppressed flare.', 'Goes to the plasma mass filter.'],
         ['ablated_shell_segment', 'Ablated Shell Segment', 'A mirror shell segment worn out by the vent.', 'Goes to Segment Reclamation Works.'],
         ['coupler_scrap', 'Coupler Scrap', 'A demagnetised tetrataenite coupler.', 'Goes to the electromagnetic separator.'],
@@ -361,7 +361,7 @@
     var CONTROLLERS = [
         ['horizon_interferometer', 'Horizon Interferometer'],
         ['ergoregion_synchroniser', 'Ergoregion Synchroniser'],
-        ['horizon_flux_clamp', 'Horizon Flux Clamp'],
+        ['horizon_flux_clamp', 'Horizon Flux-Clamp Winding'],
         ['segment_reclamation_works', 'Segment Reclamation Works']
     ]
 

@@ -31,8 +31,8 @@ const CELL_EU = 62914560000;
 const UV_NAQUADRIA_EU = 2621440000;
 const UHV = 9;
 const UHV_VA = 1966080;
-// the static runner stands V in for VA (tools/analysis/lib/kubejs_static.mjs:381): GTM's VA[UHV] 1,966,080 is checked in game (T1)
-const STUB_VA_UHV = 2097152;
+// the static runner models GTValues.VA exactly (M9-06)
+const STUB_VA_UHV = 1966080;
 const MACHINE = 'gtceu:naquadria_magnet_works';
 const CLOCK = 'grindless:nuclear_clock';
 const RTAN = 'gtceu:ruthenium_trinium_americium_neutronate_';

@@ -4027,6 +4027,17 @@
 			y: 81.0d
 		}
 		{
+			icon: "gtceu:antiproton_decelerator"
+			id: "6B4CBA2EBFBECA5C"
+			rewards: [{ id: "59C40C9F7E6DAE46", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "4DE680BC28AD2AED", item: "gtceu:antiproton_decelerator", type: "item" }]
+			x: 6.0d
+			y: 81.0d
+		}
+		{
 			icon: "gtceu:assembly_line_array"
 			id: "38C70C2FE52EBDA0"
 			rewards: [{ id: "6BDF1DC4F2CCE6A0", type: "xp", xp: 10 }]
@@ -4034,7 +4045,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "4FF8BA8FA5A300F8", item: "gtceu:assembly_line_array", type: "item" }]
-			x: 6.0d
+			x: 8.0d
 			y: 81.0d
 		}
 		{
@@ -4045,7 +4056,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "3E1174AA65738E36", item: "gtceu:bulge_collector", type: "item" }]
-			x: 8.0d
+			x: 10.0d
 			y: 81.0d
 		}
 		{
@@ -4056,7 +4067,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "3BC12B9A47D5D9CE", item: "gtceu:collector_node_works", type: "item" }]
-			x: 10.0d
+			x: 12.0d
 			y: 81.0d
 		}
 		{
@@ -4067,7 +4078,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "239642A3CC73BF67", item: "gtceu:debris_harvester", type: "item" }]
-			x: 12.0d
+			x: 14.0d
 			y: 81.0d
 		}
 		{
@@ -4078,7 +4089,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "6BB16C5371F5186E", item: "gtceu:field_frozen_press", type: "item" }]
-			x: 14.0d
+			x: 16.0d
 			y: 81.0d
 		}
 		{
@@ -4089,7 +4100,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "4EA3D94A51DEEF69", item: "gtceu:gamma_optics_works", type: "item" }]
-			x: 16.0d
+			x: 18.0d
 			y: 81.0d
 		}
 		{
@@ -4100,7 +4111,18 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "360910147A33543B", item: "gtceu:hawking_collector", type: "item" }]
-			x: 18.0d
+			x: 20.0d
+			y: 81.0d
+		}
+		{
+			icon: "gtceu:jet_beam_line"
+			id: "1EC28119A12A47A8"
+			rewards: [{ id: "422B1466B837B583", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "3059F771F0DEDF52", item: "gtceu:jet_beam_line", type: "item" }]
+			x: 22.0d
 			y: 81.0d
 		}
 		{
@@ -4111,7 +4133,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "1059145BBF4EA0FA", item: "gtceu:kugelblitz_forge", type: "item" }]
-			x: 20.0d
+			x: 24.0d
 			y: 81.0d
 		}
 		{
@@ -4122,8 +4144,8 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "42C8E9A2AF6EAE2C", item: "gtceu:magnetic_pair_converter", type: "item" }]
-			x: 22.0d
-			y: 81.0d
+			x: 2.0d
+			y: 83.0d
 		}
 		{
 			icon: "gtceu:replication_refinery"
@@ -4133,8 +4155,19 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "7B9ED2B060762152", item: "gtceu:replication_refinery", type: "item" }]
-			x: 24.0d
-			y: 81.0d
+			x: 4.0d
+			y: 83.0d
+		}
+		{
+			icon: "gtceu:spallation_target_station"
+			id: "2BCED42201F2E2AB"
+			rewards: [{ id: "158FB99FD4D4FC1E", type: "xp", xp: 10 }]
+			shape: "gear"
+			size: 1.5d
+			subtitle: "OpV, Grindless"
+			tasks: [{ id: "63E2B999A251F4B6", item: "gtceu:spallation_target_station", type: "item" }]
+			x: 6.0d
+			y: 83.0d
 		}
 		{
 			icon: "gtceu:strangelet_distiller"
@@ -4144,7 +4177,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "705FF24EF928D6F9", item: "gtceu:strangelet_distiller", type: "item" }]
-			x: 2.0d
+			x: 8.0d
 			y: 83.0d
 		}
 		{
@@ -4155,7 +4188,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "749B40E26D9E1802", item: "gtceu:strangelet_vault", type: "item" }]
-			x: 4.0d
+			x: 10.0d
 			y: 83.0d
 		}
 		{
@@ -4166,7 +4199,7 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "4FEB2A0E932FC6CD", item: "gtceu:tetron_fab", type: "item" }]
-			x: 6.0d
+			x: 12.0d
 			y: 83.0d
 		}
 		{
@@ -4177,39 +4210,6 @@
 			size: 1.5d
 			subtitle: "OpV, Grindless"
 			tasks: [{ id: "1A6280F946C8A78B", item: "gtceu:von_neumann_foundry", type: "item" }]
-			x: 8.0d
-			y: 83.0d
-		}
-		{
-			icon: "gtceu:antiproton_decelerator"
-			id: "6B4CBA2EBFBECA5C"
-			rewards: [{ id: "59C40C9F7E6DAE46", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "OpV, GregTech"
-			tasks: [{ id: "4DE680BC28AD2AED", item: "gtceu:antiproton_decelerator", type: "item" }]
-			x: 10.0d
-			y: 83.0d
-		}
-		{
-			icon: "gtceu:jet_beam_line"
-			id: "1EC28119A12A47A8"
-			rewards: [{ id: "422B1466B837B583", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "OpV, GregTech"
-			tasks: [{ id: "3059F771F0DEDF52", item: "gtceu:jet_beam_line", type: "item" }]
-			x: 12.0d
-			y: 83.0d
-		}
-		{
-			icon: "gtceu:spallation_target_station"
-			id: "2BCED42201F2E2AB"
-			rewards: [{ id: "158FB99FD4D4FC1E", type: "xp", xp: 10 }]
-			shape: "gear"
-			size: 1.25d
-			subtitle: "OpV, GregTech"
-			tasks: [{ id: "63E2B999A251F4B6", item: "gtceu:spallation_target_station", type: "item" }]
 			x: 14.0d
 			y: 83.0d
 		}

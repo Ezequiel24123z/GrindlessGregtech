@@ -119,6 +119,31 @@ export function checkBook(book, cfg, options = {}) {
   const quantityOkChapters = new Set((cfg.quantityOk || []).filter((e) => e.chapter).map((e) => e.chapter));
   const banned = (cfg.bannedPhrases || []).map((s) => s.toLowerCase());
 
+  // New classes (AF-A2): their level comes from lint-config.json classLevels ('error' | 'warn' | 'info', default 'info' = listed in
+  // the export, never counted), or 'warn' for all of them with options.newClasses (lint.mjs --new-classes) to list what they find.
+  const classLevel = (rule) => (options.newClasses ? 'warn' : ((cfg.classLevels || {})[rule] || 'info'));
+  const cr = cfg.creativeRewards || {};
+  const creativeRe = new RegExp((cr.patterns || ['creative', 'debug', 'command_block', 'structure_block', 'jigsaw', 'barrier']).join('|'), 'i');
+  const creativeOkChapters = new Set(cr.allowChapters || []);
+  const creativeOkQuests = new Set(cr.allowQuests || []);
+  const stackOf = (id) => ((cfg.stackSizes || {})[id] ?? cfg.defaultMaxStack ?? 64);
+  const stackFactor = cfg.maxStacks ?? 36;
+  const recipeLessOk = new Set(cfg.recipeLessOk || []);
+  const checkRewardsAndTasks = (ch, q) => {
+    for (const r of q.rewards) {
+      if (r.itemId && creativeRe.test(r.itemId) && !creativeOkChapters.has(ch.filename) && !creativeOkQuests.has(q.id)) {
+        add(classLevel('creative-reward'), 'creative-reward', ch, q, `reward ${r.itemId} is a creative or debug item: only designated endgame quests (lint-config creativeRewards) may give one`);
+      }
+    }
+    for (const t of q.tasks) {
+      const n = Number(t.count ?? (t.item && t.item.Count) ?? 1);
+      if (t.itemId && n > stackFactor * stackOf(t.itemId)) add(classLevel('count-stack'), 'count-stack', ch, q, `task of ${n} ${t.itemId}: more than ${stackFactor} stacks (${stackFactor * stackOf(t.itemId)})`);
+      if (!t.itemId || t.itemId === 'minecraft:air') continue;
+      if (options.hidden && options.hidden.has(t.itemId)) add(classLevel('task-hidden'), 'task-hidden', ch, q, `task item ${t.itemId} is hidden (grindless:hidden_with_recipes or never obtainable)`);
+      else if (options.recipeOutputs && !options.recipeOutputs.has(t.itemId) && !recipeLessOk.has(t.itemId)) add(classLevel('task-no-recipe'), 'task-no-recipe', ch, q, `task item ${t.itemId} is the output of no recipe`);
+    }
+  };
+
   // ids used more than once anywhere in the book
   for (const [id, uses] of book.objectIds) {
     if (uses.length > 1) {
@@ -303,7 +328,36 @@ export function checkBook(book, cfg, options = {}) {
         if (r.type === 'item' && n > 64) add('warn', 'reward-size', ch, q, `reward of ${n} ${r.itemId}`);
       }
       if (q.tasks.length === 0) add('error', 'no-task', ch, q, 'quest without tasks');
+      if (lines.length === 0 && !infoOnly) add(classLevel('empty-description'), 'empty-description', ch, q, 'the description is empty: say what the quest is for');
+      checkRewardsAndTasks(ch, q);
+    }
+    const seenTitles = new Map();
+    for (const q of ch.quests) {
+      const t = stripCodes(q.title).trim().toLowerCase();
+      if (!t) continue;
+      if (seenTitles.has(t)) add(classLevel('same-title'), 'same-title', ch, q, `same title as another quest of the chapter ("${stripCodes(q.title).trim()}")`, seenTitles.get(t));
+      else seenTitles.set(t, q);
     }
   }
   return findings;
+}
+
+// Item ids whose use in a recipe-less or hidden way a quest task must not depend on: recipe outputs read from a dump's recipes.json.
+// Walks every key named result(s) / output(s) and collects the item ids under it (GT `outputs.item[].content.ingredient.item`,
+// vanilla `result.item`, KubeJS `output`, ...).
+export function recipeOutputIds(recipeJsons) {
+  const out = new Set();
+  const grab = (v) => {
+    if (!v) return;
+    if (typeof v === 'string') { if (/^[a-z0-9_.-]+:[a-z0-9_.\/-]+$/.test(v)) out.add(v); return; }
+    if (Array.isArray(v)) { v.forEach(grab); return; }
+    if (typeof v === 'object') for (const [k, x] of Object.entries(v)) { if (k === 'item' || k === 'id' || typeof x === 'object') grab(x); }
+  };
+  const walk = (v) => {
+    if (!v || typeof v !== 'object') return;
+    if (Array.isArray(v)) { v.forEach(walk); return; }
+    for (const [k, x] of Object.entries(v)) { if (/^(results?|outputs?)$/i.test(k)) grab(x); else walk(x); }
+  };
+  recipeJsons.forEach(walk);
+  return out;
 }

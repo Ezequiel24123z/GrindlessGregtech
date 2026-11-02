@@ -13,7 +13,7 @@ Verbatim, from their messages:
 - The first hour has to go step by step, with real dependencies: wood and stone → GT tools (what each one is for) → copper and tin (veins, surface rocks) → dusts with the mortar, and mixing → bronze → coke oven → boilers and steam machines → our drill (and why) → steel → gate to LV.
 - An early quest gives the full set of unbreakable neutronium tools, to remove the tool grind.
 - Take inspiration from the quest books of other packs, and copy from those whose license allows it.
-- **2026-10-31, Project Reforge (owner decision; it supersedes "short" and "a small reward" in the first quote):** "Quests may be longer and more numerous in advanced eras, in the style of Star Technology and GTNH. Each era must teach its new wafers, circuit generations, processes and multiblocks." Each era teaches six roles: What's new, Materials processing, Wafers and circuits, Machines and multiblocks, Integration, and Capstone project; `docs/reforge/05_quest_design.md` maps them onto chapters (one chapter from Steam to HV, three from EV to LuV, four from ZPM to OpV, five for MAX, nine for MAX+). Every new mechanic explains what it's for, how it's made, what it needs, what it unlocks and how to automate it. Phase 5 of the Reforge rebuilds the book around this; until then, the sections below describe the current book.
+- **2026-10-31, Project Reforge (owner decision; it supersedes "short" and "a small reward" in the first quote):** "Quests may be longer and more numerous in advanced eras, in the style of Star Technology and GTNH. Each era must teach its new wafers, circuit generations, processes and multiblocks." Each era teaches six roles: What's new, Materials processing, Wafers and circuits, Machines and multiblocks, Integration, and Capstone project, as sections of one chapter (section 4b; `docs/reforge/05_quest_design.md` describes the roles, but its chapter split was replaced by QB-0). Every new mechanic explains what it's for, how it's made, what it needs, what it unlocks and how to automate it. The book is generated from data files (sections 4b and 14).
 
 ## 2. Sources
 
@@ -269,10 +269,12 @@ The data is the source for the Steam chapter, as for the other era chapters: `to
 
 Phase 5 of Project Reforge rebuilds the progression chapters to rule 5. The plan is `docs/reforge/05_quest_design.md` (RF-5A): read its section 2 row for your era, its section 3 for the rules it adds, and its section 5 row for your package.
 
-- **Shape.** Six roles per era (what's new, materials processing, wafers and circuits, machines and multiblocks, integration, capstone), mapped onto chapters by size: one chapter each for Steam to HV; three for EV to LuV (`<era>_age`, `<era>_circuits`, `<era>_machines`); four for ZPM to OpV (adding `<era>_integration`); five for MAX (adding `max_horizon`); nine for MAX+. Materials processing stays the era's Processing Lines chart (section 17).
-- **Nothing taught twice.** Each thing is taught in one progression chapter; any other chapter shows it as a quest link. Role chapters start each row at a link to the age-chapter quest that opens it. The charts own line intermediates, the Multiblocks index owns where, Power owns figures and the AE2 tab owns the mod (design, section 2.6).
-- **Generated.** Every progression chapter from Steam to MAX+ comes from data in `tools/quests/<era>-chapter/` through one shared writer, `tools/quests/gen-chapters.mjs` (RF-5L1 and RF-5L2); Welcome and the Quality of Life tabs stay hand-written.
+- **Shape.** One chapter per era, `<era>_age`, however large (section 4b). The six roles (what's new, materials processing, wafers and circuits, machines and multiblocks, integration, capstone) are sections of that chapter, one per data file; never split an era into several chapters. Materials processing stays the era's Processing Lines chart (section 17).
+- **Nothing taught twice.** Each thing is taught in one progression chapter; any other chapter shows it as a quest link. Role sections start each row at a link to the quest that opens it. The charts own line intermediates, the Multiblocks index owns where, Power owns figures and the AE2 tab owns the mod (design, section 2.6).
+- **Generated.** Every progression chapter from Steam to MAX+ comes from data in `tools/quests/<era>-chapter/` through one shared writer, `tools/quests/gen-chapters.mjs`: edit the data files, regenerate with `node tools\quests\gen-chapters.mjs --era <era>`, and never hand-edit a generated chapter (the next run overwrites it). Welcome and the Quality of Life tabs stay hand-written.
 - **Still in force from the v0.17.0 plan** (moved unchanged to the design's Appendix A): the sky row and its rules, MV's fixed End row, HV's fixed rocket block, LuV's package gate and stations switch, and the regeneration order that Power needs.
+
+**Archival note.** Phase 5 first planned one to nine chapters per era (`_circuits`, `_machines`, `_integration`, `max_horizon`...); QB-0 (2026-11-02) merged them into one chapter per era. The older design text may still mention the split.
 
 **Phase 5 note (2026-11-01).** The other sections describe the book as of v0.17.0 and the rules Phase 5 keeps. Where the design adds a rule (the five teaching questions, longer text in teaching chapters, the reward rule, English only), its section 3 applies until the integrator folds it into this guide.
 
@@ -291,34 +293,18 @@ In all five: almost every reward is XP (put in something small and useful instea
 
 **Status (2026-10-25).** v0.5.1 rewrote the five (section 16), and the voice pass (section 8) rewrote them again: none has a linter warning, and the counts in the table are today's. Storage and AE2 now start from an age quest; most rewards are still XP. The AE2 tab went from 42 quests to 19. It starts at LV's *ME Network Access* and only covers what LV's AE2 branch doesn't: powering the network, the wireless terminals, GregTech's ME hatches and the addons. The column under *ME Controller* went with the controller quest, and the bridge between planets is still only named, in *Beyond This World*.
 
-## 16. Chunks to write in parallel
+## 16. Working on the book in packages
 
-Done in v0.5.1: the eight chunks and the incoming machines. Six writers in parallel with a cheap model and then a review of the LV, MV and HV logic with a more capable model. The cheap model writes well, but it does not reason through the progression: the spine and the dependencies of the age chapters always need that review.
-
-On 2026-10-25 two sessions rewrote every chapter in the new voice (section 8) and cut the quests that teach nothing new. Welcome to MV plus Storage, Travel and Teams and Workshop went from 235 quests to 225, HV from 43 to 32, EV from 66 to 55 and the AE2 tab from 42 to 19. The book has 331 quests, with 0 linter errors and 5 layout warnings, all in LV and MV.
-
-A chunk is one chapter, written by one person. The contract is this guide and the linter:
+A work package owns only the files its contract lists: normally one era's data files in `tools/quests/<era>-chapter/`, and that chapter's line in `GG_QUESTS_EXPECTED` in `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js` when the contract allows it. Never split an era into several chapters, and never hand-edit a generated chapter: it is an output.
 
 1. Read `AGENTS.md`, the sections of this guide that `.github/instructions/quests.instructions.md` lists for your task, and the two reference chapters (`welcome.snbt`, `steam_age.snbt`).
-2. Touch only your chapter file (or its data file, if the chapter is generated) and its line in `GG_QUESTS_EXPECTED` in `tools/test/overlay/kubejs/server_scripts/gg_test_quests.js`. If you adapt anything from another pack, propose the `CREDITS.md` line in the handoff.
+2. Edit the era's data files, then regenerate: `node tools\quests\gen-chapters.mjs --era <era>`. The generated `<era>_age.snbt` and the integrator-owned files (`lint-config.json` `eraChapters.enabled`, shared aggregates) are not yours unless the contract says so. If you adapt anything from another pack, propose the `CREDITS.md` line in the handoff.
 3. Keep the blocks marked as fixed in section 14. Keeping the ids of quests that still mean the same thing is optional (section 10); new ids follow section 10.
-4. Check every fact against the recipe dump (`files/test-runs/hidden-moon-dump1/results/server/kubejs-exported/`), not from memory.
-5. No quests or text about the incoming machines in section 14.
-6. Done = linter with 0 errors and 0 warnings in your chapter (or warnings explained in `lint-config.json`), preview from left to right with no crossings, and `gg_test_quests` on the test bench with a copy of `pack/`.
-7. LF and no BOM. No commits and no `Update-PackIndex`.
+4. Check every fact against the latest recipe dump, `$GG_DUMP` on the VM (run it through `tools/vm/gg-vm-exec.sh`, see `docs/testing/usage.md`), not from memory.
+5. Done = linter with 0 errors and 0 warnings in your chapter (or warnings explained in `lint-config.json`), preview from left to right with no crossings, and the T0/T1 the contract names. The workstation only edits: run checks on the VM or in Actions.
+6. LF and no BOM. Commit on your own branch and push; the integrator runs `Update-PackIndex` and merges.
 
-| Chunk | File | Per the linter, before v0.5.1 | Plan |
-|---|---|---|---|
-| 1 | `lv_age.snbt` | 8 long lines, 2 crossings, 20 under another quest, 33 dashes, "for good" | Section 14, LV |
-| 2 | `mv_age.snbt` | 12 long, 1 backward, 13 crossings, 16 under another quest, 29 dashes | Section 14, MV (fixed End row) |
-| 3 | `hv_age.snbt` | 8 long, 1 backward, 2 crossings, 5 under another quest, 20 dashes | Section 14, HV (fixed rocket block) |
-| 4 | `storage.snbt` | 7 backward, 3 long, 7 dashes | Section 15 |
-| 5 | `applied_energistics.snbt` | 2 long, 13 dashes, 1 banned phrase | Section 15 |
-| 6 | `travel_and_teams.snbt` | 5 backward, 7 dashes, 1 banned phrase | Section 15 |
-| 7 | `workshop.snbt` | 5 backward, 11 dashes, 1 quantity | Section 15 |
-| 8 | `productive_bees.snbt` | 5 dashes | Section 15 |
-
-Welcome, Steam and EV are not split up: they are done. The incoming machines and the Moon are added by the book team when the coordinator says so.
+History: v0.5.1 and the 2026-10-25 voice pass rewrote the Steam to HV chapters and the five Quality of Life tabs by hand; those chapters are now generated from data.
 
 ## 17. Processing Lines
 
@@ -342,7 +328,7 @@ The `power` chapter ("Power") sits in Quality of Life after Workshop. It compare
 - **Links:** fuels import the Processing Lines nodes that make them; generators import their introduction quests. Links never receive an arrow. Do not import a quest if its inherited dependencies would draw a long line across the chart.
 - **Source:** `tools/quests/processing-lines/power-data.mjs`, the shared generator and `pl-check.mjs`. Counts go in `GG_QUESTS_EXPECTED.power`; stable node keys preserve quest ids.
 - **Figures:** the checker recomputes EU per unit of fuel, output, steam, capacities, cable loss and AE2's P2P tax from the recipe dump, `electric.json`, pack config and scripts. Wireless figures also check the current table, structure slots and registered ids. An unverifiable number does not go in.
-- **Wireless:** the band runs LV to LuV and requires the wireless implementation. Its covers follow the exact-class support boundary: normal GTM machines, chargers and battery buffers, not converters or multiblock controllers. LuV's cell, the SMES cell, comes from the LuV chart's HTS magnet works, and its node states the jump (LuV only when every formed tower holds SMES cells; before it, two IV wireless hatches on one multiblock). `WITH_WIRELESS = false` is a fallback for a release without wireless (83 quests and 93 dependencies), not the assembled candidate.
+- **Wireless:** the band runs LV to LuV and requires the wireless implementation. Its covers follow the exact-class support boundary: normal GTM machines, chargers and battery buffers, not converters or multiblock controllers. LuV's cell, the SMES cell, comes from the LuV chart's HTS magnet works, and its node states the jump (WL-1, 2026-11-02: the network runs at the tier of its strongest cell, so one tower holding a SMES cell makes it LuV; before it, two IV wireless hatches on one multiblock). `WITH_WIRELESS = false` is a fallback for a release without wireless (83 quests and 93 dependencies), not the assembled candidate.
 - **LuV band:** GT--'s naquadah reactor III (machine tier, EU per long rod from the dump, what reaches the network from the wireless table's loss), the orbital solar station (630 EU/t a lit panel recomputed from B2's script constants, `tables/sunlight.json` and `tables/orbits.json`; 64 panels from the script; 38,304 into the network), the Mk1 with D + T and GTCA's calcium plasma into GTM's plasma turbine (turbine and helium plasma figures from the dump), and B6's volcanic intake (EU/t a module and the module count from B6's scripts, EU per bundle from the dump). The calcium plasma has no figure: its net power waits for the bench (decision 19).
 - **The LANDED gate:** every LuV node or cluster names its packages (`pkg`, `docs/eras/luv.md` "Build order", with the LuV chapter's names: `B7T` the tether, `B7S` the sulfur-iodine plant). `gate()` leaves out anything whose packages are not all in `LANDED`, with every arrow into it and any band left empty, so landing a package is adding it to that set. Written and waiting: the flux-tube tether (`B1` + `B7T`), the sulfur-iodine plant (`B1` + `B7S`) and the intake's link to the book's *Patera* (`B1` + `B6`).
 - **Newer than the dump:** `pl-check.mjs` reports what a dump taken before a package cannot prove (ids this checkout's startup scripts register and the dump's pack did not) as pending, not failed, while still checking every figure that comes from scripts and tables. `--strict` counts pending as issues: use it on the integrated run's dump.

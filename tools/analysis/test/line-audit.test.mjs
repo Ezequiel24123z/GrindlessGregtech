@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings, splitChains, parseDesignLines, designReport, checkRole, classify, isFold, tagProblems } from '../line-audit.mjs';
+import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, LINE_GUIDE, CROSSING_GUIDE, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings, splitChains, parseDesignLines, designReport, checkRole, classify, isFold, tagProblems } from '../line-audit.mjs';
 
 const n = (key, kind, res, from = [], extra = {}) => ({ key, kind, res, from, cluster: 'a', ...extra });
 const chain = () => [
@@ -230,6 +230,19 @@ test('toCsv and eraSummary carry roles and kinds', () => {
   const s = eraSummary(rows).get('ev');
   assert.equal(s.role, 1);
   assert.equal(s.real, 0);
+});
+
+test('eraSummary counts deep crossings (back >= 2) of real production lines, and the guide is in lines and crossings', () => {
+  const l = line({ cluster: 'a', name: 'A', mbs: [], ours: [] });
+  l.era = 'zpm';
+  l.crossings = [{ back: 2 }, { back: 1 }];
+  l.content = [{ back: 3 }];
+  const mk = (real, kind) => ({ line: l, real, reach: 0, used: new Set(), skipText: [], endInfo: new Map(), dup: null, verdict: 'keep', reason: 'ok', kind });
+  const s = eraSummary([mk(true, 'production'), mk(false, 'production'), mk(true, 'role')]).get('zpm');
+  assert.equal(s.deep, 2, 'only the real production line counts, 2 of its 3 crossings reach back 2 eras');
+  assert.equal(s.real, 1);
+  assert.deepEqual(LINE_GUIDE, { zpm: 14, uv: 21 });
+  assert.deepEqual(CROSSING_GUIDE, { zpm: 13, uv: 20 });
 });
 
 const io = (alts, count = 1) => ({ alts, count, cap: false });
