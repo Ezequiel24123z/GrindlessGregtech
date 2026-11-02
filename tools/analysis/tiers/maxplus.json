@@ -42,6 +42,7 @@
     { "machine": "gtceu:void_crystal_fab", "types": ["gtceu:void_crystal_fab"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "void_crystal_fab" },
     { "machine": "gtceu:hyperstargate", "types": ["gtceu:hyperstargate_dial"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 4096 }, "needs": ["eu:max"], "package": "hyperstargate" },
     { "id": "gtceu:hyperfactory@maxplus", "machine": "gtceu:hyperfactory", "types": ["gtceu:assembler", "gtceu:circuit_assembler", "gtceu:assembly_line", "gtceu:forming_press", "gtceu:laser_engraver"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "hyperfactory" },
+    { "id": "gtceu:photonic_foundry@maxplus", "machine": "gtceu:photonic_foundry", "types": ["gtceu:photonic_foundry"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "XP-T1", "note": "The foundry pattern accepts an energy hatch of any tier; MAX+ recipes (optical_nav_core VA[12], optical_matrix_die VA[13]) need MAX hatches." },
     { "id": "gtceu:warp_gate@maxplus", "machine": "gtceu:warp_gate", "types": ["gtceu:warp_gate"], "maxEUt": 137438953472, "needs": ["eu:max"], "package": "XP-T1", "note": "V[MAX] x 64 A on a 1,024 A MAX+ hatch (gate.json c16 to c19: 2^37 EU/t)." }
   ],
   "conditions": {
