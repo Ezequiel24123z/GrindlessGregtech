@@ -9,7 +9,7 @@
     // [key, text]
     var ENTRIES = [
         ['gtceu.recipe.grindless_warp_gate.hold_sgr_a',
-            'Hold the Cygnus X-1 ring open for a minute at 2^33 EU/t: a Kugelblitz core and the launched bulge seed burn; the census, exotic matter, tetron array, census IV, bulge chart and 4 cosmic mainframes stay; the Sgr A* chart comes out'],
+            'Hold the Cygnus X-1 ring open for a minute at 2^33 EU/t: a Kugelblitz core and the bulge seed burn; the census, tetron array and 4 cosmic mainframes stay; the Sgr A* chart comes out'],
         ['emi.grindless.info.opv_gate_stock.0',
             'Made by the warp gate at Cygnus X-1 (circuit 13: 2^33 EU/t for a minute on two OpV 16 A hatches, burning a Kugelblitz core and the launched bulge seed). It researches the MAX machine casing and is stock for MAX.']
     ]
