@@ -40,7 +40,7 @@
           "fluidsOut": [ { "id": "gtceu:neutron_superfluid", "amount": 1000 }, { "id": "gtceu:protium", "amount": 1000 } ]
         },
         {
-          "name": "neutronium_pellet", "circuit": 2, "eut": 31457280, "duration": 2400, "site": true,
+          "name": "neutronium_pellet", "circuit": 2, "eut": 31457280, "duration": 2400,
           "_why": "UIV-B2 line 30: the neutron superfluid is caged in a Ni-58 cage part inside the metallic-hydrogen coil; a neutronium pellet is never gtceu:neutronium.",
           "itemsIn": [ { "id": "grindless:cage_part", "count": 1 } ],
           "fluidsIn": [ { "id": "gtceu:neutron_superfluid", "amount": 2000 } ],
