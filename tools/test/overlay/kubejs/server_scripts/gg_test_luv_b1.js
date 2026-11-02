@@ -23,7 +23,7 @@
 //   tank_block             grindless:cryogenic_fuel_tank is GCYR's FuelTankBlock, getTier() 5, getTankProperties().getFuelStorage() 16000
 //   tank_recipe            grindless:assembler/cryogenic_fuel_tank exists and makes the tank
 //   recipes_done           every B1 recipe id below is in luvTravel.done
-//   seed_<key>             grindless:chemical_reactor/<adj>_quantum_seed exists, only on that moon (its surface, or its orbit)
+//   seed_<key>             grindless:chemical_reactor/<adj>_quantum_seed exists with no dimension condition (made anywhere)
 //   pair_<key>             grindless:transform/<adj>_entangled_singularity: 2 entangled singularities marked grindless_planet=<key>,
 //                          from the seed. The AE2 ritual itself is proven since EV and is not run.
 //   truss_recipe           grindless:assembler/station_truss_casing exists
@@ -348,9 +348,8 @@
         var names = dims.map(function (d) { return d.dim })
         var outText = contentJson(seed.getOutputContents(L.ItemCap))
         seedItems = itemIdsIn(outText)
-        check('seed_' + key, dims.length > 0 && names.indexOf(surface) >= 0 && dims.every(function (d) { return !d.reverse && own.indexOf(d.dim) >= 0 }) &&
-          seedItems.length > 0, seedId + ' -> ' + outText + '; dimension conditions ' + JSON.stringify(dims) + ' (want ' + surface + ', only ' +
-          own.join('/') + ')')
+        check('seed_' + key, names.length === 0 && seedItems.length > 0, seedId + ' -> ' + outText + '; dimension conditions ' +
+          JSON.stringify(dims) + ' (want none: the seed is made from shipped inputs, anywhere)')
       }
       var pair = liveRecipe(pairId)
       if (pair === null) {
