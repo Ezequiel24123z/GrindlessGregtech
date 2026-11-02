@@ -65,7 +65,7 @@ export default {
       name: 'The platinum plant',
       line: 'platline',
       nodes: [
-        L('rhline', 8.5, -1.5, 'pl_hv:rh'),
+        L('rhline', 10.5, 0.75, 'pl_hv:rh'),
         n('crushed', -2, 0, I('gtceu:crushed_pentlandite_ore'), 'Crushed Pentlandite', { kind: 'raw', sub: 'Or crushed chalcopyrite' }),
         n('ore', 0, 0, I('gtceu:purified_pentlandite_ore'), 'Purified Pentlandite', { from: ['crushed'], by: ['gtceu:ore_washer'], sub: 'Ore washer' }),
         n('electrode2', 0, 1.5, I('grindless:platinum_electrode'), 'Platinum Electrode', { kind: 'raw', sub: 'The first ones use End platinum' }),

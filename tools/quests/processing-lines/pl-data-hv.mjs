@@ -8,7 +8,7 @@ export default {
   subtitle: 'Crude oil goes through the refinery, hydrogen comes from carbon, and the rocket\'s parts get cured and fired.',
   icon: 'gtceu:refinery',
   focus: 'oil',
-  bands: [['platline2'], ['kroll'], ['refinery', 'aromatics'], ['syngas', 'gasoline', 'ptfe'], ['rocket', 'sbr'], ['nichrome']],
+  bands: [['platline2'], ['kroll', 'epoxyline'], ['refinery', 'aromatics'], ['syngas', 'gasoline', 'ptfe'], ['rocket', 'sbr'], ['nichrome']],
   clusters: {
     platline2: {
       name: 'H1: Platline II, slag to rhodium and the gauze',
@@ -57,6 +57,19 @@ export default {
         }),
         n('mgcl2', 8, 1.5, I('gtceu:magnesium_chloride_dust'), 'Magnesium Chloride', { from: ['ticl4'], by: ['gtceu:electric_blast_furnace'] }),
         n('mgback', 10, 1.5, I('gtceu:magnesium_dust'), 'Magnesium, Back', { kind: 'ret', from: ['mgcl2'], by: ['gtceu:electrolyzer'], sub: 'Electrolyzer; the chlorine goes back too' }),
+      ],
+    },
+    epoxyline: {
+      name: 'H3: Epoxy from cumene',
+      nodes: [
+        n('cbenzene', 0, -0.75, F('gtceu:benzene'), 'Benzene', { kind: 'raw', sub: 'From the reformer' }),
+        n('cpropene', 0, 0.75, F('gtceu:propene'), 'Propene', { kind: 'raw', sub: 'Steam cracking' }),
+        n('cumene', 2, 0, F('gtceu:cumene'), 'Cumene', { from: ['cbenzene', 'cpropene'], by: ['gtceu:chemical_reactor'], sub: 'Chemical reactor, with phosphoric acid' }),
+        n('phenol', 4, 0, F('gtceu:phenol'), 'Phenol', { from: ['cumene'], by: ['gtceu:chemical_reactor'], sub: 'With oxygen' }),
+        n('cacetone', 4, 1.5, F('gtceu:acetone'), 'Acetone', { kind: 'by', from: ['cumene'], by: ['gtceu:chemical_reactor'], end: 'BPA, gasoline', sub: 'Back into the next step' }),
+        n('bpa', 6, 0, F('gtceu:bisphenol_a'), 'Bisphenol A', { from: ['phenol', 'cacetone'], by: ['gtceu:chemical_reactor'], sub: 'With hydrochloric acid' }),
+        n('epich', 6, -1.5, F('gtceu:epichlorohydrin'), 'Epichlorohydrin', { kind: 'raw' }),
+        n('epoxyp', 8, 0, F('gtceu:epoxy'), 'Epoxy', { kind: 'product', from: ['bpa', 'epich'], by: ['gtceu:chemical_reactor'], end: 'composite autoclave', sub: 'With sodium hydroxide' }),
       ],
     },
     refinery: {
