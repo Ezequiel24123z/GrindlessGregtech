@@ -419,6 +419,37 @@ export function buildCostTree(o) {
   };
 }
 
+/**
+ * The chain from the root down to `key` that carries most of it: at each node it follows the child whose subtree holds the largest
+ * quantity of `key`. Steps: {n, q, runs, recipe, per (q per run of the parent), share (of all `key` in the tree)}.
+ */
+export function explainPath(tree, tables, key) {
+  const memo = new Map();
+  const sum = (n) => {
+    if (memo.has(n)) return memo.get(n);
+    let s = n.n === key ? n.q : 0;
+    for (const c of n.c || []) s += sum(c);
+    memo.set(n, s);
+    return s;
+  };
+  const total = sum(tree);
+  const steps = [];
+  let parent = null;
+  let n = tree;
+  while (n) {
+    steps.push({
+      n: n.n, q: n.q, runs: n.r ?? null, recipe: n.i !== undefined ? tables.recipes[n.i] : null,
+      per: parent && parent.r ? n.q / parent.r : null, share: total > 0 ? sum(n) / total : 0,
+    });
+    parent = n;
+    let next = null;
+    let bestS = 0;
+    for (const c of n.c || []) { const s = sum(c); if (s > bestS) { bestS = s; next = c; } }
+    n = n.n === key ? null : next;
+  }
+  return { key, total, steps };
+}
+
 /** Value of one comparison spec on a result (null when the item is not in the expansion). */
 export function metricValue(res, spec, preset = HYPERSTARGATE_PRESET) {
   const rows = res.rows;

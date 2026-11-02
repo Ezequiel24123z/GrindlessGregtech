@@ -13,10 +13,12 @@ import { loadTierConfig } from './lib/config.mjs';
 import { globMatcher } from './lib/cost.mjs';
 import { ERAS, loadEraContext, recipeEra } from './lib/era.mjs';
 import { priceDump } from './cost-matrix.mjs';
-import { HYPERSTARGATE_PRESET, parseTargetSpec, structureBom, cheapestOf, buildCostTree, compareRows } from './lib/cost_tree.mjs';
+import { HYPERSTARGATE_PRESET, parseTargetSpec, structureBom, cheapestOf, buildCostTree, compareRows, explainPath } from './lib/cost_tree.mjs';
 import { renderHtml } from './lib/cost_tree_html.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
+
+const ASSUMED_BASE = ['grindless:horizon_shard', 'ae2:matter_ball'];
 
 function parseArgs(argv) {
   const a = { targets: [], maxNodes: 5000 };
@@ -30,6 +32,10 @@ function parseArgs(argv) {
     else if (k === '--html') a.html = v();
     else if (k === '--json') a.json = v();
     else if (k === '--max-nodes') a.maxNodes = Number(v());
+    else if (k === '--explain') a.explain = v().split(',');
+    else if (k === '--explain-out') a.explainOut = v();
+    else if (k === '--assume-base') a.assumeBase = v().split(',');
+    else if (k === '--as-base') a.asBase = v().split(',');
     else throw new Error(`unknown argument ${k}`);
   }
   return a;
@@ -48,6 +54,7 @@ function describeOptions(cfg) {
     `Weights: ${(b.weights || []).map((w) => `${w.match} = ${w.weight}`).join('; ') || 'all 1'}. Free resources (weight 0): ${list(b.free)}.`,
     'The tree follows the solver: ONE recipe per item (the cheapest), tag inputs take the cheapest alternative, non-consumed inputs and circuits cost nothing.',
     'Creative stand-ins (<code>grindless:creative_*</code>, <code>gtceu:creative_*</code>) are free base resources: counted in the creative total, priced at 0.',
+    `Assumed base (no recipe in the dump makes them): ${ASSUMED_BASE.join(', ')}, free.`,
     'The dial branch counts one dial run and its inputs; the recharge loop (spent dial charge) is not included.',
   ];
 }
@@ -64,7 +71,13 @@ function main() {
   // Creative stand-ins have no recipe by design: they are base resources here, free (a count, not a cost), so the recipes that take them price.
   cfg.base.items = [...(cfg.base.items || []), 'grindless:creative_*', 'gtceu:creative_*'];
   cfg.base.free = [...(cfg.base.free || []), 'grindless:creative_*', 'gtceu:creative_*'];
+  // No recipe in the dump makes these; the Hyperstargate base needs them, so they are assumed obtainable (see the handoff).
+  const assumed = args.assumeBase || ASSUMED_BASE;
+  cfg.base.items.push(...assumed);
+  cfg.base.free.push(...assumed);
   const dump = loadDump(args.dump, { log: null });
+  const cfg2 = args.asBase ? JSON.parse(JSON.stringify(cfg)) : null;
+  if (cfg2) { cfg2.base.items.push(...args.asBase); cfg2.base.free.push(...args.asBase); }
   const { recipes, model, weight } = priceDump(dump, cfg);
   const ctx = loadEraContext(dump);
   const abilityItems = loadTierConfig({ tier: 'maxplus' }, path.join(here, 'tiers')).raw.partAbilities || {};
@@ -85,13 +98,19 @@ function main() {
     return { ...t, entries: [...entries].map(([key, qty]) => ({ key, qty })) };
   });
 
-  const res = buildCostTree({
-    model, weight, recipes, targets, name: args.name || (preset && !args.targets.length ? preset.name : 'Total'),
+  const build = (p) => buildCostTree({
+    model: p.model, weight: p.weight, recipes: p.recipes, targets, name: args.name || (preset && !args.targets.length ? preset.name : 'Total'),
     fluidUnitMb: cfg.settings.fluidUnitMb, maxNodes: args.maxNodes, allocation: cfg.settings.allocation, chance: cfg.settings.chance,
     noShare: globMatcher(cfg.base.noShareOutputs),
     eraOf: (r) => ERAS[recipeEra(r, ctx)] ?? '-',
     machineOf: (type) => (ctx.mbOfType.get(type) || [])[0] || type,
   });
+  const res = build({ model, weight, recipes });
+  if (cfg2) {
+    const r2 = build(priceDump(dump, cfg2));
+    res.asBase = { keys: args.asBase, crafts: r2.summary.crafts, eu: r2.summary.eu, types: r2.summary.recipeTypes };
+    console.log(`with ${args.asBase.join(', ')} as base inputs: crafts ${Math.round(r2.summary.crafts)}, EU ${r2.summary.eu.toExponential(3)}, types ${r2.summary.recipeTypes}`);
+  }
   res.checks.problems.push(...problems);
 
   const comparison = preset ? compareRows(res, preset) : [];
@@ -101,6 +120,27 @@ function main() {
   for (const c of comparison) console.log(`  ${c.flag ? '!' : ' '} ${c.id.padEnd(10)} ${String(c.value === null ? '-' : Number(c.value.toPrecision(4))).padStart(12)} docs ${c.docs}${c.gap === null ? '' : ` (${(100 * c.gap).toFixed(1)}%)`}`);
   for (const p of res.checks.problems.slice(0, 10)) console.log(`  problem: ${p}`);
 
+  if (args.explain) {
+    const byId = new Map(recipes.map((r) => [r.id, r]));
+    const keys = [...new Set(args.explain.flatMap((e) => (e === 'top' ? [
+      ...res.bases.filter((b) => !b.free).slice(0, 3).map((b) => b.key),
+      [...res.items].sort((a, b) => b.runs - a.runs)[0].key,
+    ] : [e])))];
+    const rf = (n) => (n >= 1e4 ? n.toExponential(2) : String(Number(n.toPrecision(4))));
+    const lines = [];
+    for (const k of keys) {
+      const ex = explainPath(res.tree, res.tables, k);
+      lines.push(`== ${k}: ${rf(ex.total)} in the tree`);
+      ex.steps.forEach((s, i) => {
+        lines.push(`${'  '.repeat(i)}${s.n} q=${rf(s.q)}${s.runs !== null ? ` runs=${rf(s.runs)}` : ''}${s.per !== null ? ` (x${rf(s.per)} per parent run)` : ''} [${(100 * s.share).toFixed(1)}% of ${k}]${s.recipe ? ` via ${s.recipe}` : ''}`);
+        const r = s.recipe && byId.get(s.recipe);
+        if (r) lines.push(`${'  '.repeat(i)}  ${r.inputs.filter((x) => !x.cap && x.consume > 0).map((x) => `${x.alts[0]}${x.alts.length > 1 ? '|..' : ''}*${x.count}`).join(' + ')} -> ${r.outputs.map((o) => `${o.key}*${o.count}${o.chance < 1 ? `@${o.chance}` : ''}`).join(' + ')}  (${r.eut}x${r.amp || 1} EU/t, ${r.duration}t)`);
+      });
+    }
+    res.explain = lines;
+    if (args.explainOut) fs.writeFileSync(args.explainOut, lines.join('\n') + '\n');
+    else console.log(lines.join('\n'));
+  }
   if (args.json) fs.writeFileSync(args.json, JSON.stringify({ ...res, comparison }));
   if (args.html) {
     fs.writeFileSync(args.html, renderHtml(res, {
