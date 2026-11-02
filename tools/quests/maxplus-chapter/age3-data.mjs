@@ -91,18 +91,18 @@ export const QUESTS = [
     key: 'S3_PLATE', kind: 'step', title: 'Containment Plates', icon: 'grindless:horizon_containment_plate',
     deps: ['S3_TREE'], x: 9, y: -1,
     desc: [
-      'A plate of bound condensate, pressed until it stops leaking light. The gate eats them by the thousand.',
+      'A plate of bound condensate, pressed until it stops leaking light. The gate eats them in great numbers; a stack in hand proves the line, and the rest stay in AE2.',
     ],
-    tasks: [it('grindless:horizon_containment_plate', 6000)],
+    tasks: [it('grindless:horizon_containment_plate', 64)],
     rewards: [xp(400)],
   },
   {
     key: 'S3_CHEV', kind: 'step', title: 'Chevron Cores', icon: 'grindless:chevron_core',
     deps: ['S3_TREE'], x: 7, y: 0,
     desc: [
-      'The small knot of field that makes a chevron a chevron. Ring blocks and upgrades both carry some.',
+      'The small knot of field that makes a chevron a chevron. Ring blocks and upgrades both carry some. A stack in hand proves the line; the rest stay in AE2.',
     ],
-    tasks: [it('grindless:chevron_core', 2496)],
+    tasks: [it('grindless:chevron_core', 64)],
     rewards: [xp(400)],
   },
   {
@@ -118,9 +118,9 @@ export const QUESTS = [
     key: 'S3_FRAME', kind: 'step', title: 'Frame Parts', icon: 'grindless:horizon_frame_part',
     deps: ['S3_PLATE', 'S3_MESH', 'S3_CHEV'], x: 10.5, y: -0.5,
     desc: [
-      'The loom\'s four meta-materials, a mesh and plates, assembled into the part that every ring block is made of.',
+      'The loom\'s four meta-materials, a mesh and plates, assembled into the part that every ring block is made of. A stack in hand proves the line; the rest stay in AE2.',
     ],
-    tasks: [it('grindless:horizon_frame_part', 13440)],
+    tasks: [it('grindless:horizon_frame_part', 64)],
     rewards: [xp(500)],
   },
 
@@ -138,27 +138,27 @@ export const QUESTS = [
     key: 'S3_COMP', kind: 'step', title: 'Compressed Plates', icon: 'grindless:horizon_compressed_plate',
     deps: ['S3_HOME'], x: 16, y: -3,
     desc: [
-      'Upgrades and ring blocks use them most, and the iris blades use them too.',
+      'Upgrades and ring blocks use them most, and the iris blades use them too. A stack in hand proves the line; the rest stay in AE2.',
     ],
-    tasks: [it('grindless:horizon_compressed_plate', 15744)],
+    tasks: [it('grindless:horizon_compressed_plate', 64)],
     rewards: [xp(500)],
   },
   {
     key: 'S3_FIELD', kind: 'step', title: 'Field Generators', icon: 'grindless:maxplus_field_generator',
     deps: ['S3_HOME'], x: 17.5, y: -2,
     desc: [
-      'A field generator sits inside nearly every part of the gate. Build the line once and leave it running.',
+      'A field generator sits inside nearly every part of the gate. Build the line once and leave it running; a stack in hand proves it, the rest stay in AE2.',
     ],
-    tasks: [it('grindless:maxplus_field_generator', 4192)],
+    tasks: [it('grindless:maxplus_field_generator', 64)],
     rewards: [xp(500)],
   },
   {
     key: 'S3_PROC', kind: 'step', title: 'Horizon Processors', icon: 'grindless:horizon_processor',
     deps: ['S3_HOME'], x: 19, y: -1.5,
     desc: [
-      'Frame parts and plates take them in bulk, which makes this the biggest circuit order of the pack. Plan the Hyperfactory\'s bus before you start.',
+      'Frame parts and plates take them in bulk, which makes this the biggest circuit order of the pack. A stack in hand proves the line; the rest stay in AE2, so plan the Hyperfactory\'s bus before you start.',
     ],
-    tasks: [it('grindless:horizon_processor', 155000)],
+    tasks: [it('grindless:horizon_processor', 64)],
     rewards: [xp(600)],
   },
   {

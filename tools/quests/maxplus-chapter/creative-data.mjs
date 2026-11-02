@@ -1,7 +1,7 @@
 // Quest data for maxplus_creative ("MAX+: Creative Items"): the four K cores and the six creative stand-ins, made on the hyper assembly array
 // (docs/reforge/05_quest_design.md; docs/eras/maxplus.md, "Creative items").
 // They are ingredients only: not placeable and no source of anything. The array itself is taught in maxplus_hyperstargate (HG_ARRAY).
-// Counts follow the gate: 4 creative energy (one per power unit), 40 creative energy cells (one per capacitor), 1 of each of the rest.
+// Counts follow the gate: 4 creative energy (one per power unit), one creative energy cell in hand (40 are used, one per capacitor; the item stacks to 1), 1 of each of the rest.
 // The row starts at a link to the stage's grid quest. Positions: columns every 2, rows every 2.
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
@@ -63,12 +63,12 @@ export const QUESTS = [
     deps: ['CR_CORES'], x: 1, y: 1.5,
     teach: {
       for: 'The &6Creative Energy Cell&r sits inside every horizon capacitor, as one of its parts. Drives will not take it.',
-      needs: 'A cloud core and the array. A tenth of the cost of a creative block, and a great deal more of them.',
+      needs: 'A cloud core and the array. A tenth of the cost of a creative block, and one for every capacitor of the bank. A cell holds one item to the stack, so a single cell in hand proves the craft.',
       unlocks: 'The capacitors of the bank.',
       automate: 'Queue it with the capacitor patterns so the bank never waits on it.',
     },
     desc: [],
-    tasks: [it('grindless:creative_energy_cell', 40)],
+    tasks: [it('grindless:creative_energy_cell')],
     rewards: [xp(800)],
   },
   {

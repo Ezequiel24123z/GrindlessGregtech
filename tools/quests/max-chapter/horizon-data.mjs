@@ -66,7 +66,7 @@ export const QUESTS = [
     key: 'SEG1', kind: 'step', title: 'A Quarter of the Shell', icon: 'grindless:mirror_shell_segment',
     deps: ['SHELL'], x: 8, y: 0,
     desc: [
-      'The first quarter of the shell is up. The tether lines hold.',
+      'About a quarter of the shell\'s segments are cut. The tether lines hold.',
     ],
     tasks: [it('grindless:mirror_shell_segment', 871)],
     rewards: [xp(100)],
@@ -84,18 +84,18 @@ export const QUESTS = [
     key: 'SEG3', kind: 'step', title: 'Three Quarters', icon: 'grindless:mirror_shell_segment',
     deps: ['SEG2'], x: 12, y: 0,
     desc: [
-      'Three quarters of the segments are cut. The light starts to come back.',
+      'Three quarters of the segments are cut and most of them are set in the frame. A stack holds only 64 and an inventory far fewer than the shell needs, so no count is asked here: check it off once the frame is that far along.',
     ],
-    tasks: [it('grindless:mirror_shell_segment', 2612)],
+    tasks: [ck()],
     rewards: [xp(100)],
   },
   {
     key: 'SEG4', kind: 'step', title: 'The Shell Is Closed', icon: 'grindless:mirror_shell_segment',
     deps: ['SEG3'], x: 14, y: 0,
     desc: [
-      'Every segment is cut. The shell closes.',
+      'Every segment is set and the last gap in the frame is closed. Check it off once the controller says the shell has formed.',
     ],
-    tasks: [it('grindless:mirror_shell_segment', 3483)],
+    tasks: [ck()],
     rewards: [xp(150)],
   },
 
