@@ -41,7 +41,7 @@ export const QUESTS = [
     it('gtceu:uiv_emitter'), it('gtceu:uiv_sensor'), it('gtceu:uiv_field_generator'), it('gtceu:uiv_robot_arm'), it('gtceu:uiv_conveyor_module'),
     it('gtceu:uiv_electric_pump'), it('gtceu:uiv_electric_piston'), it('gtceu:uiv_electric_motor'),
   ], 120),
-  q('CH_ASM', 'machine', 'UIV Circuit Assembler', 'gtceu:uiv_circuit_assembler', ['PUMP', 'HULL'], 18.5, 5.75, {
+  q('CH_ASM', 'machine', 'UIV Circuit Assembler', 'gtceu:uiv_circuit_assembler', ['PUMP', 'HULL'], 18.5, 7.25, {
     for: 'The &6UIV Circuit Assembler&r puts the UIV controllers together from the circuits of this page.',
     needs: 'A UIV machine hull, a UIV robot arm, an emitter and two conveyor modules, with a circuit of a high tier and red alloy cable.',
     unlocks: 'The UIV hatches and the controllers of this era.',
