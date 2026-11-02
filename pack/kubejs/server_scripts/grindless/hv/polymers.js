@@ -1,3 +1,4 @@
+// priority: -13499
 // -----------------------------------------------------------------------------------------------
 // Polymer chains made of real steps (docs/eras/lines-steam-hv.md M3, H3, H5; package D1-POLY). GTM 7.5.3 shortcuts the three of them;
 // each shortcut goes and the real process goes in:

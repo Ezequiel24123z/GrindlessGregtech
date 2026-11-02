@@ -211,12 +211,12 @@
     function take(r, added) {
       var id = recipeId(r)
       if (wanted[id] !== true) return
-      if (r.removed) {
+      if (r.removed === true) {
         removed[id] = true
         return
       }
       try {
-        if (added || r.hasChanged()) r.serialize()
+        if (added || (typeof r.hasChanged === 'function' && r.hasChanged())) r.serialize()
         if (r.json === null || r.json === undefined) return
         var j = JSON.parse(String(r.json))
         if (opts && typeof opts.patch === 'function') j = opts.patch(id, j) || j
@@ -228,7 +228,7 @@
       }
     }
     event.originalRecipes.values().forEach(function (r) { take(r, false) })
-    event.addedRecipes.forEach(function (r) { take(r, true) })
+    if (event.addedRecipes) event.addedRecipes.forEach(function (r) { take(r, true) })
     Object.keys(removed).forEach(function (id) {
       if (steps[id] === undefined) steps[id] = { id: id, error: 'removed by a script' }
     })
