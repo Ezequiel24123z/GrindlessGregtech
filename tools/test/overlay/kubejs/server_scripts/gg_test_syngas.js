@@ -428,11 +428,11 @@
     }
     check(SCOPE, 'methanol_ratio', ratioOk, ratioDetail)
 
-    // the rocket: GTM's rocket fuel through methanol and ammonia, and GCYR's own hydrogen fuel
+    // the rocket: rocket fuel from Aerozine 50 and N2O4 (methanol, ammonia and the peroxide cycle), and GCYR's own hydrogen fuel
     var chain = ['grindless:mixer/rocket_fuel', 'grindless:mixer/aerozine_50', 'gtceu:chemical_plant/hydrazine',
       'gtceu:chemical_plant/hydrogen_peroxide_air', 'gtceu:chemical_plant/ethyl_anthra_hydro_quinone',
       'gtceu:chemical_reactor/dimethylhydrazine_from_dimethylamine', 'gtceu:chemical_reactor/dimethylamine', 'gtceu:chemical_reactor/monochloramine',
-      'gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia', 'gtceu:chemical_reactor/ammonia_from_elements',
+      'gtceu:chemical_reactor/hypochlorous_acid', 'gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia', 'gtceu:chemical_reactor/ammonia_from_elements',
       'gtceu:chemical_reactor/methanol_from_monoxide', 'gcyr:rocket_fuel/hydrogen', 'gcyr:rocket_fuel/rocket_fuel']
     var missingChain = present(chain)
     check(SCOPE, 'rocket_chain', missingChain.length === 0, 'rocket fuel = Aerozine 50 (hydrazine from the plant: ammonia + peroxide; UDMH from dimethylamine and monochloramine) + N2O4 (ammonia), and GCYR burns hydrogen as a tier 1 fuel' +
@@ -473,6 +473,7 @@
     var eahq = readRecipe('gtceu:chemical_plant/ethyl_anthra_hydro_quinone')
     var perox = readRecipe('gtceu:chemical_plant/hydrogen_peroxide_air')
     var dma = readRecipe('gtceu:chemical_reactor/dimethylamine')
+    var mcl = readRecipe('gtceu:chemical_reactor/monochloramine')
     var udmh = readRecipe('gtceu:chemical_reactor/dimethylhydrazine_from_dimethylamine')
     var n2o4 = readRecipe('gtceu:chemical_reactor/dinitrogen_tetroxide_from_ammonia')
     var nh3 = readRecipe('gtceu:chemical_reactor/ammonia_from_elements')
@@ -492,8 +493,10 @@
     var runsUdmh = udmhNeed / fluidAmount(udmh, 'fluidsOut', 'dimethylhydrazine')
     var methanolNeed = runsUdmh * fluidAmount(dma, 'fluidsIn', 'methanol') * fluidAmount(udmh, 'fluidsIn', 'dimethylamine') / fluidAmount(dma, 'fluidsOut', 'dimethylamine')
     var runsN2o4 = n2o4Need / fluidAmount(n2o4, 'fluidsOut', 'dinitrogen_tetroxide')
+    // UDMH takes ammonia twice: once in its dimethylamine, once in its monochloramine
     var ammoniaNeed = runsHz * fluidAmount(hz, 'fluidsIn', 'ammonia') + runsN2o4 * fluidAmount(n2o4, 'fluidsIn', 'ammonia') +
-      runsUdmh * (fluidAmount(udmh, 'fluidsIn', 'dimethylamine') / fluidAmount(dma, 'fluidsOut', 'dimethylamine') * fluidAmount(dma, 'fluidsIn', 'ammonia'))
+      runsUdmh * (fluidAmount(udmh, 'fluidsIn', 'dimethylamine') / fluidAmount(dma, 'fluidsOut', 'dimethylamine') * fluidAmount(dma, 'fluidsIn', 'ammonia') +
+        fluidAmount(udmh, 'fluidsIn', 'monochloramine') / fluidAmount(mcl, 'fluidsOut', 'monochloramine') * fluidAmount(mcl, 'fluidsIn', 'ammonia'))
     var runsMeoh = methanolNeed / fluidAmount(meoh, 'fluidsOut', 'methanol')
     var runsNh3 = ammoniaNeed / fluidAmount(nh3, 'fluidsOut', 'ammonia')
     var h = h2Perox + runsMeoh * fluidAmount(meoh, 'fluidsIn', 'hydrogen') + runsNh3 * fluidAmount(nh3, 'fluidsIn', 'hydrogen')
