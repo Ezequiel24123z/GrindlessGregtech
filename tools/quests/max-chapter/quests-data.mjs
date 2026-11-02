@@ -48,7 +48,7 @@ export const QUESTS = [
     key: 'LOOK', kind: 'reading', title: 'The Way In', icon: 'gtceu:max_machine_hull',
     deps: ['HULL'], x: 4, y: 0,
     desc: [
-      'Four ways lead out of the hull: the strand, the circuits and components, the home machines, and the probe to Sagittarius A*. This one follows the probe. The Machines, Circuits and Integration sections of this chapter have the rest.',
+      'Four ways lead out of the hull: the strand, the circuits and components, the home machines, and the probe to Sagittarius A*. This one follows the probe. The Machines, Circuits and Integration sections have the rest.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -96,7 +96,7 @@ export const QUESTS = [
       'The warp gate opens on the orbit of Sagittarius A*.       Machines for the orbit start here.',
     ],
     tasks: [dim('gcyr:black_hole_orbit')],
-          rewards: [],
+          rewards: [xp(25)],
   },
 
   // ------------------------------------------------------------------ Sagittarius A*
@@ -104,7 +104,7 @@ export const QUESTS = [
     key: 'J_SGRA', kind: 'reading', title: 'Platforms at the Hole', icon: 'grindless:sgr_a_star_image',
     deps: ['GATE14'], x: 16, y: 0,
     desc: [
-      'The platforms hang at the orbit of Sagittarius A*, in the light of the disc. Imaging, spin and the belt are worked from here; the machines for each are in the Machines section of this chapter.',
+      'The platforms hang at the orbit of Sagittarius A*, in the light of the disc. Imaging, spin and the belt are worked from here; the machines for each are in the Machines section.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -163,13 +163,13 @@ export const QUESTS = [
       'The warp gate opens on the nuclear star cluster belt. &oFiction:&r a belt of planetesimals the pack makes up for the centre.',
     ],
     tasks: [dim('grindless:nsc_belt')],
-    rewards: [],
+    rewards: [xp(25)],
   },
   {
     key: 'J_BELT', kind: 'reading', title: 'Rock to Shell', icon: 'grindless:nsc_planetesimal',
     deps: ['GATE15'], x: 30, y: 0,
     desc: [
-      'The belt is the shell\'s quarry. Rock is melted and cut into truss billets for the segments. The Machines section of this chapter has each step.',
+      'The belt is the shell\'s quarry. Rock is melted and cut into truss billets for the segments. The Machines section has each step.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -196,7 +196,7 @@ export const QUESTS = [
     key: 'J_EXIT', kind: 'exit', title: 'To the Horizon', icon: 'gtceu:mirror_shell',
     deps: ['J_FEED'], x: 36, y: 0,
     desc: [
-      'The belt feeds the shell. The shell, the four horizon machines and the last recipe wait in The Horizon section of this chapter.',
+      'The belt feeds the shell. The shell, the four horizon machines and the last recipe wait in The Horizon section.',
     ],
     tasks: [ck()],
     rewards: [xp(200)],

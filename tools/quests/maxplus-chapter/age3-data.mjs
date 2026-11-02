@@ -80,7 +80,7 @@ export const QUESTS = [
   },
   {
     key: 'S3_CAPS', kind: 'step', title: 'Capacitors for the Bank', icon: 'grindless:horizon_capacitor',
-    deps: ['S3_HOME', 'CR_CELL'], x: 16, y: -0.5,
+    deps: ['S3_HOME', 'CR_CELL'], x: 19.5, y: 0.5,
     desc: [
       'Each capacitor holds a slice of the dial\'s charge. The bank is a ring of them, built into the gate at Sgr A* orbit.',
     ],
@@ -174,7 +174,7 @@ export const QUESTS = [
     key: 'S3_LOCKS', kind: 'step', title: 'Locks and Cells for the Dial', icon: 'grindless:jacketed_condensate_cell',
     deps: ['S3_GATE'], x: 22, y: -2,
     desc: [
-      'Every opening uses up sixteen phase locks and a crate of jacketed cells. The locks are gone for good; the refinery recharges the spent charge into most of the cells again.',
+      'Every opening uses up sixteen phase locks and a crate of jacketed cells. The locks are not returned; the refinery recharges the spent charge into most of the cells again.',
     ],
     tasks: [it('grindless:horizon_phase_lock', 16), it('grindless:jacketed_condensate_cell', 64)],
     rewards: [xp(500)],

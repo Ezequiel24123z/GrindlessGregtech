@@ -212,7 +212,7 @@ export const QUESTS = [
     deps: ['SCALE'], x: 40, y: 1,
     teach: {
       for: 'The 256M cell component and a horizon storage die make cells that hold the stage\'s item and fluid counts.',
-      needs: 'The &6Horizon Storage Die&r from the Circuits section of this chapter, and the 256M component.',
+      needs: 'The &6Horizon Storage Die&r from the Circuits section, and the 256M component.',
       unlocks: 'Storage that does not run out at a million of anything.',
       automate: 'One cell type per network; fluids get their own.',
     },
@@ -239,7 +239,7 @@ export const QUESTS = [
     teach: {
       for: 'The assembler matrix keeps hundreds of patterns in one block, and two pattern providers push them out. A pattern memory unit holds the plan.',
       needs: 'The matrix crafter, frame and walls, an extended provider, an expanded provider and the memory unit.',
-      unlocks: 'Autocrafting of every item in this chapter.',
+      unlocks: 'Autocrafting of every item of the era.',
       automate: 'Group patterns by line, and name them.',
     },
     desc: [],

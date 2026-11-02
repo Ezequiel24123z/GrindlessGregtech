@@ -60,7 +60,7 @@ export const QUESTS = [
       'The gate opens on the nucleus of Andromeda, bathed in gamma light.',
     ],
     tasks: [dim('grindless:m31_nucleus_orbit')],
-    rewards: [],
+    rewards: [xp(25)],
   },
   {
     key: 'J_M31', kind: 'reading', title: 'The Platform at M31', icon: 'gtceu:blueshift_forge',
@@ -124,7 +124,7 @@ export const QUESTS = [
       'Almost nothing here: cold, clean and dark.',
     ],
     tasks: [dim('grindless:local_group_filament')],
-    rewards: [],
+    rewards: [xp(25)],
   },
   {
     key: 'J_VOID', kind: 'reading', title: 'The Platform in the Dark', icon: 'gtceu:void_crystal_fab',
@@ -163,7 +163,7 @@ export const QUESTS = [
     key: 'SCALE', kind: 'reading', title: 'Scale', icon: 'gtceu:hyperfactory',
     deps: ['J_VOID'], x: 18, y: 0,
     desc: [
-      'The stage after this one wants millions of parts, and no one builds millions by hand. A bigger factory, a wider hatch and a grid that can hold the plan are coming. The Machines and Integration sections of this chapter have them.',
+      'The stage after this one wants millions of parts, and no one builds millions by hand. A bigger factory, a wider hatch and a grid that can hold the plan are coming. The Machines and Integration sections have them.',
     ],
     tasks: [ck()],
     rewards: [xp(50)],

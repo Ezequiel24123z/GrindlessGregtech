@@ -105,7 +105,7 @@ export const QUESTS = [
     key: 'PROBE', kind: 'step', title: 'Intergalactic Relay Probe', icon: 'grindless:ig_relay_probe',
     deps: ['CW'], x: 8, y: 0,
     desc: [
-      'The old galactic-centre probe will not leave the Galaxy. This one carries a Hawking drive and its own navigation. The Circuits section of this chapter says how it gets its brains.',
+      'The old galactic-centre probe will not leave the Galaxy. This one carries a Hawking drive and its own navigation. The Circuits section says how it gets its brains.',
     ],
     tasks: [it('grindless:probe_seed'), it('grindless:hawking_drive'), it('grindless:ig_relay_probe')],
     rewards: [xp(200)],
@@ -135,7 +135,7 @@ export const QUESTS = [
       '      The gate opens in the Tarantula Nebula, beside the heaviest stars known.',
     ],
     tasks: [dim('grindless:tarantula_orbit')],
-          rewards: [],
+          rewards: [xp(25)],
   },
 
   // ------------------------------------------------------------------ the Tarantula
@@ -201,7 +201,7 @@ export const QUESTS = [
       '      A river of gas torn from the Clouds, older than any star here.',
     ],
     tasks: [dim('grindless:magellanic_stream')],
-          rewards: [],
+          rewards: [xp(25)],
   },
   {
     key: 'J_STR', kind: 'reading', title: 'The Platform in the Stream', icon: 'gtceu:pristine_gas_works',
@@ -227,7 +227,7 @@ export const QUESTS = [
   },
   {
     key: 'PHE3', kind: 'process', title: 'Pristine Helium-3', icon: 'gtceu:pristine_helium_3_bucket',
-    deps: ['J_STR', 'MA_GAS'], x: 21.5, y: -3.5,
+    deps: ['J_STR', 'MA_GAS'], x: 24.5, y: -3.5,
     teach: {
       for: 'Helium-3 from the same gas. The superfluid plant lets helium-4 flow through its leak and keeps the lighter isotope behind.',
       needs: 'The plant at home, and a calutron to finish.',

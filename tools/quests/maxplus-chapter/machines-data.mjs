@@ -59,7 +59,7 @@ export const QUESTS = [
     automate: 'Its boil-off goes back into the first recipe, and spent cells go to the helium plant, so nothing is vented.',
   }, [it('grindless:condensate_vessel_casing')]),
   prod('MA_CLAD', 'Strand Cladding', 'grindless:kerr_clad_strand', ['MA_REF'], 11, 4.5, [
-    'Its fourth recipe clads a strand of strange matter in condensate. It is the start of the cable line, which the Circuits section of this chapter finishes at the wire.',
+    'Its fourth recipe clads a strand of strange matter in condensate. It is the start of the cable line, which the Circuits section finishes at the wire.',
   ]),
   prod('MA_CELL', 'Jacketed Condensate Cell', 'grindless:jacketed_condensate_cell', ['MA_REF'], 7, 2, [
     'Condensate will not travel loose, so the helium plant jackets it in a cell. This is the form in which it leaves the shell.',
