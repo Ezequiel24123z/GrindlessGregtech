@@ -176,11 +176,12 @@
 
   function addController(event) {
     var HULL = 'gtceu:uhv_machine_hull'
-    var PISTON = 'gtceu:uv_electric_piston'
     var machine = MB.machine.machine
     MB.controllerRecipes = []
     // QR-R6: assembly line with station research (the La-Y alloy), the era fluid and domain inputs of the (La,Y)H10 line
-    var ins = [HULL, '2x ' + PISTON, '4x #gtceu:circuits/uhv', '2x grindless:la_y_foil', '2x grindless:ammonia_borane_charge', 'grindless:nanodiamond_pellet']
+    // AF-CC (M2-05): built before the UEV hull, so like a UHV controller: 3 UHV component families x 3 (it took 2 UV pistons)
+    var ins = [HULL, '3x gtceu:uhv_electric_piston', '3x gtceu:uhv_electric_motor', '3x gtceu:uhv_electric_pump', '4x #gtceu:circuits/uhv',
+      '2x grindless:la_y_foil', '2x grindless:ammonia_borane_charge', 'grindless:nanodiamond_pellet']
     var research = 'grindless:la_y_alloy_ingot'
     var missing = ins.map(function (s) { return s.replace(/^[0-9]+x /, '') }).filter(function (id) { return id.charAt(0) !== '#' }).concat([machine, research]).filter(function (id) { return !Item.exists(id) })
     if (missing.length > 0) {

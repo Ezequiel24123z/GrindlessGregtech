@@ -57,8 +57,6 @@
   "remove": [],
   "override": {},
   "keyFactor": {
-    "gtceu:levitation_melter": 3.22,
-    "gtceu:ramp_compression_pulser": 3.342,
     "gtceu:uiv_electric_piston": 1.432,
     "gtceu:uiv_emitter": 1.436,
     "gtceu:uiv_energy_input_hatch": 3.032,
