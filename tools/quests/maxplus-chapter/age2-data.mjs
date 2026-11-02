@@ -19,6 +19,7 @@ export const CHAPTER = {
   order: 1,
   icon: 'grindless:optical_nav_core',
   autofocus: 'STAGE2',
+  section: { name: 'Stage II: The Local Group', origin: { x: 22, y: 0 } },
   title: 'MAX+: The Local Group',
   subtitle: ['A probe to Andromeda, another to the dark between the galaxies and the first meta-materials of the loom.'],
 };
@@ -72,7 +73,7 @@ export const QUESTS = [
   },
   {
     key: 'TETHER', kind: 'process', title: 'A Deep Horizon Tether', icon: 'grindless:deep_horizon_tether',
-    deps: ['J_M31'], x: 10, y: 2,
+    deps: ['J_M31'], x: 8.5, y: 1.5,
     teach: {
       for: 'The &6Deep Horizon Tether&r holds the blueshift forge at the right depth in the nucleus\'s pull. Too shallow and it burns; too deep and it never comes back.',
       needs: 'Kerr ribbon from the strand line, condensate for the coating, and a stellar elevator for the proof load.',
@@ -85,7 +86,7 @@ export const QUESTS = [
   },
   {
     key: 'PNUC', kind: 'process', title: 'Photonuclear Isotopes', icon: 'gtceu:photonuclear_mix_bucket',
-    deps: ['J_M31'], x: 10, y: -2,
+    deps: ['J_M31'], x: 8, y: -1.5,
     teach: {
       for: 'In the nucleus\'s photon bath a target is cracked into a mix of rare isotopes; the stellar forge then burns the mix into p-process plasma.',
       needs: 'The forge on its tether, and a calutron\'s enriched targets from home.',
@@ -136,7 +137,7 @@ export const QUESTS = [
   },
   {
     key: 'VDIA', kind: 'process', title: 'Void-Grown Diamond', icon: 'grindless:void_grown_diamond',
-    deps: ['J_VOID'], x: 18, y: -2,
+    deps: ['J_VOID'], x: 18.5, y: -1.5,
     teach: {
       for: 'A diamond grown in the dark has no flaws to speak of. The fab grows it on a seed plate cut at home from older stock.',
       needs: 'The lattice fab at home for the plate, and the void crystal fab here.',
@@ -149,7 +150,7 @@ export const QUESTS = [
   },
   {
     key: 'VLAT', kind: 'step', title: 'Void Crystal Lattice', icon: 'grindless:void_crystal_lattice',
-    deps: ['VDIA'], x: 20, y: -2,
+    deps: ['VDIA'], x: 20, y: -1.5,
     desc: [
       'An implanter dopes the diamond and a femtosecond writer cuts the lattice. Home work again; the diamond only had to come from the dark.',
     ],
@@ -182,7 +183,7 @@ export const QUESTS = [
   },
   {
     key: 'META_B', kind: 'process', title: 'Meta-Materials: Conduit and Valve', icon: 'grindless:horizon_valve',
-    deps: ['SCALE'], x: 20, y: 2,
+    deps: ['SCALE'], x: 21.5, y: 4,
     teach: {
       for: 'The loom\'s other two weaves: a conduit for current and a valve that lets only helium through.',
       needs: 'Coated tape from the HTS line, and the aerogel works for the superleak plug.',
@@ -195,7 +196,7 @@ export const QUESTS = [
   },
   {
     key: 'STAGE2_END', kind: 'exit', title: 'The Local Group Is Yours', icon: 'grindless:void_crystal_lattice',
-    deps: ['VLAT', 'META_A', 'META_B'], x: 24, y: 0,
+    deps: ['VLAT', 'META_A', 'META_B'], x: 22, y: 0,
     desc: [
       'You have crystals from the dark and meta-materials from the loom. The last stage turns them into a gate, and into a great many creative parts.',
     ],

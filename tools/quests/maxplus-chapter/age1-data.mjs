@@ -22,7 +22,8 @@ export const CHAPTER = {
   order: 0,
   icon: 'grindless:horizon_lock',
   autofocus: 'START',
-  title: 'MAX+: Out of the Galaxy',
+  section: { name: 'Stage I: Out of the Galaxy', origin: { x: 0, y: 0 } },
+  title: 'MAX+: Beyond the Galaxy',
   subtitle: ['A kept lock that taps the stilled horizon, a slingshot past the Galaxy\'s rim, the Tarantula Nebula and the Magellanic Stream.'],
 };
 
@@ -43,7 +44,7 @@ export const QUESTS = [
     deps: ['START'], x: 2, y: 0,
     teach: {
       for: 'The &6Mirror Shell&r can now tap &6Kerr Condensate&r from the still cloud around the hole, with a wave packet to seed it and the lock kept as catalyst.',
-      needs: 'The shell at Sagittarius A*, and a Kugelblitz forge sending packets.',
+      needs: 'The shell, and a Kugelblitz forge sending packets.',
       unlocks: 'Every horizon-bound material.',
       automate: 'Packets come in by belt, and the lock never leaves the shell.',
     },
@@ -64,7 +65,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ horizon-bound matter
   {
     key: 'KS', kind: 'step', title: 'Kerr Strange Alloy', icon: 'grindless:kerr_strange_plate',
-    deps: ['SETTLED'], x: 6, y: -4,
+    deps: ['SETTLED'], x: 4, y: -1.5,
     desc: [
       'Strange matter from the strangelet vault, melted and bound in condensate. The &6Kerr Strange Plate&r is the hardest sheet you will press.',
     ],
@@ -73,7 +74,7 @@ export const QUESTS = [
   },
   {
     key: 'BN', kind: 'step', title: 'Horizon-Bound Neutronium', icon: 'grindless:horizon_compressed_plate',
-    deps: ['SETTLED'], x: 6, y: -2,
+    deps: ['SETTLED'], x: 13, y: 4,
     desc: [
       'Neutronium bound into an ingot, then pressed. The &6Horizon Compressed Plate&r is the densest plate in the pack, and only the bound-matter press makes it.',
     ],
@@ -82,7 +83,7 @@ export const QUESTS = [
   },
   {
     key: 'BDEG', kind: 'step', title: 'Bound Degenerate Billet', icon: 'grindless:bound_degenerate_billet',
-    deps: ['SETTLED'], x: 6, y: 2,
+    deps: ['SETTLED'], x: 16, y: 4.5,
     desc: [
       'A white dwarf\'s matter, ground and bound. It feeds the older lines that still ask for degenerate stock.',
     ],
@@ -149,7 +150,7 @@ export const QUESTS = [
   },
   {
     key: 'RAW', kind: 'process', title: 'Plasma from the Heaviest Stars', icon: 'gtceu:confined_vms_plasma_bucket',
-    deps: ['J_TAR'], x: 18, y: -2,
+    deps: ['J_TAR'], x: 18, y: -5,
     teach: {
       for: 'The &6stellar lift&r draws plasma from R136\'s very massive stars; a filter and a former turn it into confined core plasma.',
       needs: 'A nozzle coil for the lift, and a platform here: the plasma stays where it is made.',
@@ -162,7 +163,7 @@ export const QUESTS = [
   },
   {
     key: 'NI56', kind: 'process', title: 'Nickel-56', icon: 'grindless:ni56_slug',
-    deps: ['RAW'], x: 20, y: -2,
+    deps: ['RAW'], x: 20, y: -6.5,
     teach: {
       for: 'The &6pair-instability crucible&r burns the core plasma into nickel-56 slugs and ash from the star\'s heavier half.',
       needs: 'A liner for the crucible, and confined plasma in bulk.',
@@ -175,7 +176,7 @@ export const QUESTS = [
   },
   {
     key: 'CASK', kind: 'step', title: 'Shielded Nickel-56 Cask', icon: 'grindless:shielded_ni56_cask',
-    deps: ['NI56'], x: 22, y: -2,
+    deps: ['NI56'], x: 21.5, y: -7,
     desc: [
       'Nickel-56 decays within weeks, so the slug is canned and shielded the day it is made. The burner takes the finished cask.',
     ],
@@ -204,7 +205,7 @@ export const QUESTS = [
   },
   {
     key: 'J_STR', kind: 'reading', title: 'The Platform in the Stream', icon: 'gtceu:pristine_gas_works',
-    deps: ['STREAM'], x: 22, y: 0,
+    deps: ['STREAM'], x: 20.5, y: -2,
     desc: [
       'Gas this pristine has never been inside a star. A magnetic scoop sweeps it up, and what it holds is worth carrying home.',
     ],
@@ -213,7 +214,7 @@ export const QUESTS = [
   },
   {
     key: 'PD', kind: 'process', title: 'Primordial Deuterium', icon: 'gtceu:primordial_deuterium_bucket',
-    deps: ['J_STR'], x: 24, y: -2,
+    deps: ['J_STR'], x: 23, y: -3.5,
     teach: {
       for: 'Deuterium from the first minutes of the universe, left in the Stream\'s gas. The works sweeps it up, a tower fractionates it and a calutron picks the heavy half.',
       needs: 'The gas works here, then the cryogenic plant and the calutron.',
@@ -226,7 +227,7 @@ export const QUESTS = [
   },
   {
     key: 'PHE3', kind: 'process', title: 'Pristine Helium-3', icon: 'gtceu:pristine_helium_3_bucket',
-    deps: ['J_STR'], x: 24, y: 2,
+    deps: ['J_STR'], x: 21.5, y: -3.5,
     teach: {
       for: 'Helium-3 from the same gas. The superfluid plant lets helium-4 flow through its leak and keeps the lighter isotope behind.',
       needs: 'The plant at home, and a calutron to finish.',
