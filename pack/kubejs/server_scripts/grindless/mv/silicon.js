@@ -37,7 +37,7 @@
   G.recipes('mv/silicon', function (event) {
     var ids = SI.ids
     var missing = [ids.polysilicon, ids.bottoms].filter(function (id) { return !Item.exists(id) })
-      .concat([ids.crude, ids.trichlorosilane, ids.feed, 'gtceu:hydrogen_chloride', 'gtceu:hydrogen']
+      .concat([ids.crude, ids.trichlorosilane, ids.feed, 'gtceu:hydrochloric_acid', 'gtceu:hydrogen']
         .filter(function (id) { return !Fluid.exists(id) }))
     if (missing.length > 0) {
       console.error('[grindless/mv] silicon line skipped, unknown: ' + missing.join(', '))
@@ -46,7 +46,7 @@
 
     event.recipes.gtceu.chemical_reactor('grindless:hydrochlorination')
       .itemInputs('1x gtceu:silicon_dust')
-      .inputFluids(Fluid.of('gtceu:hydrogen_chloride', 3000))
+      .inputFluids(Fluid.of('gtceu:hydrochloric_acid', 3000))
       .outputFluids(Fluid.of(ids.crude, 1000), Fluid.of('gtceu:hydrogen', 1000))
       .EUt(30).duration(200)
 
@@ -71,7 +71,7 @@
     event.recipes.gtceu.electric_blast_furnace('grindless:siemens_polysilicon')
       .inputFluids(Fluid.of(ids.feed, 2000))
       .itemOutputs('1x ' + POLY)
-      .outputFluids(Fluid.of('gtceu:hydrogen_chloride', 3000))
+      .outputFluids(Fluid.of('gtceu:hydrochloric_acid', 3000))
       .blastFurnaceTemp(1800)
       .EUt(120).duration(400)
     event.remove({ id: 'gtceu:electric_blast_furnace/silicon_boule' })
