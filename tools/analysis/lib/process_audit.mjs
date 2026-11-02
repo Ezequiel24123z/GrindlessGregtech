@@ -207,12 +207,12 @@ export function auditProcesses({ dump, registry, cfg = {}, emi = { pages: [], di
       add('hidden_with_recipes', k, era, file, `hidden from the index only, yet ${prod.length} recipes make it and ${cons.length} use it (hide with grindless:hidden_with_recipes or drop the recipes)`);
     }
     // trivial step: the only producer is a 1:1 recipe from one other item of ours
-    // a direct_conversion recipe is a generator (plasma in, EU out), not a process step
+    // a generator recipe (EU out: direct_conversion's plasma, a decay or burner cask) is a power step, not a process step
     if (!hidden && prod.length === 1 && prod[0].added && prod[0].type !== 'gtceu:direct_conversion') {
       const rec = norm.find((x) => x.r.id === prod[0].id);
       const ins = rec.n.inputs.filter((i) => !i.cap && i.consume > 0 && !i.alts.includes('gtceu:programmed_circuit'));
       const outs = rec.n.outputs;
-      if (ins.length === 1 && outs.length === 1 && ins[0].alts.length === 1 && ins[0].count === outs[0].count && outs[0].chance >= 1 && ins[0].alts[0] !== k && rec.n.shape !== 'shaped' && rec.n.conditions.length === 0 && (ours.items.has(ins[0].alts[0]) || ours.fluids.has(ins[0].alts[0]))) {
+      if (!(rec.n.euOut > 0) && ins.length === 1 && outs.length === 1 && ins[0].alts.length === 1 && ins[0].count === outs[0].count && outs[0].chance >= 1 && ins[0].alts[0] !== k && rec.n.shape !== 'shaped' && rec.n.conditions.length === 0 && (ours.items.has(ins[0].alts[0]) || ours.fluids.has(ins[0].alts[0]))) {
         add('trivial_step', k, era, file, `only made by ${prod[0].id}: ${ins[0].alts[0]} x${ins[0].count} -> ${k} x${outs[0].count}, one trivial step`);
       }
     }

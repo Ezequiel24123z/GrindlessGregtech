@@ -131,6 +131,20 @@ test('a direct_conversion generator recipe is not a trivial_step, a 1:1 fluid st
   assert.ok(!run('gtceu:direct_conversion').includes('trivial_step|fluid:grindless:ash'));
 });
 
+test('any generator recipe (EU out) is a power step, not a trivial_step', () => {
+  const run = (generator) => {
+    const r = { ...gt('grindless:burner/cask', 'gtceu:cask_burner', { ins: [gi('grindless:full_cask', 1)], outs: [gi('grindless:spent_cask', 1)] }), added: true };
+    if (generator) {
+      delete r.json.tickInputs;
+      r.json.tickOutputs = { eu: [{ content: 2048, chance: 10000, maxChance: 10000, tierChanceBoost: 0 }] };
+    }
+    const dump = mkDump({ recipes: [r], recipeTypes: ['gtceu:cask_burner'], items: ['grindless:full_cask', 'grindless:spent_cask'] });
+    return auditProcesses({ dump, registry: reg({ items: ['grindless:full_cask', 'grindless:spent_cask'] }) }).findings.map((f) => f.key);
+  };
+  assert.ok(run(false).includes('trivial_step|grindless:spent_cask'));
+  assert.ok(!run(true).includes('trivial_step|grindless:spent_cask'));
+});
+
 test('KINDS lists each finding kind once', () => {
   assert.equal(new Set(KINDS).size, KINDS.length);
 });

@@ -86,7 +86,7 @@
     { type: 'megabar_synthesis', name: 'densified_liner', circuit: 15, eut: va(10), duration: 900, key: 'grindless_megabar',
       items: [['grindless:sealed_liner', 1], ['grindless:graded_z_billet', 2]], outs: [['grindless:densified_liner', 1]] },
     { type: 'lathe', name: 'crucible_liner', eut: va(7), duration: 400,
-      items: [['grindless:densified_liner', 1]], outs: [['grindless:crucible_liner', 1]] },
+      items: [['grindless:densified_liner', 1]], outs: [['grindless:crucible_liner', 1], ['gtceu:small_tungsten_dust', 2]] },
     // casings (the machines' blocks)
     { type: 'assembler', name: 'lift_nozzle_casing', circuit: 29, eut: va(12), duration: 300,
       items: [['grindless:vms_lift_nozzle', 1], ['gtceu:hastelloy_x_plate', 8], ['gtceu:titanium_plate', 4]], fluids: [['gtceu:soldering_alloy', 1152]],
