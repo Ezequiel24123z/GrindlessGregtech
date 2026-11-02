@@ -105,9 +105,9 @@ What it gains: the ironworks in one machine and more speed. It is the heart of a
   1. Drill and mine the iron veins; 2. macerate into crushed ore; 3. wash into purified ore; 4. sinter; 5. smelt into pig iron; 6. blow into steel.
 - **Sinter:** the steam alloy smelter (`gtceu:alloy_smelter`) fuses 4 purified iron ore + 1 coke dust → 4 `grindless:iron_sinter`. 8 EU/t. One recipe per row of the table `kubejs/data/grindless/tables/steam_blast_furnace.json`.
   - **Ores:** iron, magnetite, hematite, goethite or yellow limonite. Pyrite is a sulfide and waits for the LV sulfide roaster.
-- **Recipe type of the furnace:** `gtceu:steelmaking` (steel production), two modes chosen by the programmed circuit in the input bus.
-  - **Circuit 1, smelting:** 4 sinter + 3 coke + 1 flux → 4 `grindless:pig_iron` + 1 ash. 8 EU/t and 1,200 ticks.
-  - **Circuit 2, Bessemer blowing:** 4 pig iron → 4 steel ingots + 1 ash. 8 EU/t and 1,200 ticks.
+- **Recipe type of the furnace:** `gtceu:steelmaking` (steel production), two modes chosen by the input (the type has three input slots, so a programmed circuit does not fit the smelting recipe).
+  - **Smelting:** 4 sinter + 3 coke + 1 flux → 4 `grindless:pig_iron` + 1 ash. 8 EU/t and 1,200 ticks.
+  - **Bessemer blowing:** 4 pig iron → 4 steel ingots + 1 ash. 8 EU/t and 1,200 ticks.
   - **Flux** (`#grindless:blast_furnace_fluxes`): raw, dust or block calcite. Calcite comes from the lapis lazuli vein.
   - **Ash:** the slag of each step. It is inert: void it, or keep it for LV fertilizer and centrifuging.
 - **Rate:** 4 loads at once and 1.5 times slower: 16 pig iron every 90 s, then 16 steel every 90 s. It uses about 57 mB/t of steam.

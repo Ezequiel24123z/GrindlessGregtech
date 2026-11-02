@@ -19,8 +19,8 @@
 //                       deep-vein sample with a bronze bit)
 //   <drill>|VETO        the steam drill refuses a recipe filed under a tier folder (the EV tripod's lunar recipe, 8 EU/t) that GTM's
 //                       steam modifier alone would run
-//   <blast furnace>|BLAST_MODES  the steam blast furnace runs both circuit modes from its buses: circuit 1 turns 16 iron sinter + 12 coke +
-//                       4 calcite into 16 pig iron + 4 ash, circuit 2 turns that pig iron into 16 steel + 4 ash (4 parallels each,
+//   <blast furnace>|BLAST_MODES  the steam blast furnace runs both steelmaking modes from its buses: smelting turns 16 iron sinter + 12 coke +
+//                       4 calcite into 16 pig iron + 4 ash, blowing turns that pig iron into 16 steel + 4 ash (4 parallels each,
 //                       fast-forwarded with RecipeLogic#setProgress; the outputs stay GTM's)
 //   steam|ironworks     the sinter, pig iron and Bessemer recipes, the purified ores and the coke dust are all registered
 //   steam|DONE          last line
@@ -493,7 +493,6 @@
       if (!left.isEmpty()) throw new Error('could not insert ' + input.id + ' x' + input.n + ' into slot ' + slot)
     })
     var steam = fillSteam(hatch)
-    if (m.spec.stages) setCircuit(m, m.spec.stages[0].circuit)
     m.steamStart = steamIn(m)
     note(m.id, 'INPUT', 'bus=[' + itemSummary(readBus(inBus)) + '] steam=' + m.steamStart + ' mB (' + steam.report +
       ') output buses=' + outs.length)
@@ -535,20 +534,6 @@
     for (var i = 0; i < inv.getSlots(); i++) inv.setStackInSlot(i, Item.empty)
   }
 
-  // the programmed circuit of the steam input bus: its circuit slot, else a programmed circuit in the last bus slot
-  function setCircuit(m, n) {
-    try {
-      var circuit = Java.loadClass('com.gregtechceu.gtceu.common.item.IntCircuitBehaviour')
-      var slot = m.inBus.getCircuitInventory()
-      clearInventory(slot)
-      slot.setStackInSlot(0, circuit.stack(n))
-    } catch (e) {
-      var inv = m.inBus.getInventory()
-      inv.setStackInSlot(inv.getSlots() - 1, Item.of('gtceu:programmed_circuit', '{Configuration:' + n + '}'))
-      note(m.id, 'CIRCUIT', 'no circuit slot (' + e + '), the circuit is in the last bus slot')
-    }
-  }
-
   // GTM's lookup picks the expected recipe for every sample / sapling (and none for a deep-vein sample with a bronze
   // bit). Every case replaces the contents of the input bus (the output buses are emptied first: a recipe is only
   // found when its outputs fit), then asks the recipe database about the formed machine.
@@ -560,7 +545,6 @@
     m.outs.forEach(function (b) { clearInventory(b.getInventory()) })
     cases.forEach(function (c) {
       clearInventory(bus)
-      if (c.circuit) setCircuit(m, c.circuit)
       c.inputs.forEach(function (input, slot) {
         bus.insertItem(slot, Item.of(input.id, input.n), false)
       })
@@ -674,10 +658,9 @@
     var sinterRun = [{ id: SINTER, n: 4 }, { id: 'gtceu:coke_gem', n: 3 }, { id: 'minecraft:calcite', n: 1 }]
     var bessemerRun = [{ id: PIG_IRON, n: 4 }]
     return [
-      { label: 'circuit1+sinter', circuit: 1, inputs: sinterRun, want: 'grindless:steelmaking/pig_iron' },
-      { label: 'circuit2+pig_iron', circuit: 2, inputs: bessemerRun, want: 'grindless:steelmaking/bessemer_steel' },
-      { label: 'circuit2+sinter', circuit: 2, inputs: sinterRun, want: 'none' },
-      { label: 'circuit1+pig_iron', circuit: 1, inputs: bessemerRun, want: 'none' }
+      { label: 'sinter+coke+flux', inputs: sinterRun, want: 'grindless:steelmaking/pig_iron' },
+      { label: 'pig_iron', inputs: bessemerRun, want: 'grindless:steelmaking/bessemer_steel' },
+      { label: 'sinter without coke', inputs: [{ id: SINTER, n: 4 }], want: 'none' }
     ]
   }
 
@@ -690,7 +673,7 @@
     return counts
   }
 
-  // The two circuit modes of the steam blast furnace, one after the other from the same buses. A stage is fast-forwarded once its
+  // The two modes of the steam blast furnace, one after the other from the same buses. A stage is fast-forwarded once its
   // recipe runs (the progress jumps to 20 ticks before the end; the outputs stay GTM's), then its outputs are checked, the buses
   // are emptied and the next stage is fed with what the previous one made.
   function runStages(m, ctrl) {
@@ -727,7 +710,6 @@
       var left = bus.insertItem(slot, Item.of(input.id, input.n), false)
       if (!left.isEmpty()) throw new Error('could not insert ' + input.id + ' x' + input.n + ' into slot ' + slot)
     })
-    setCircuit(m, next.circuit)
     fillSteam(m.hatch)
     m.stage++
     m.tStage = S.t
@@ -770,7 +752,7 @@
       cases: blastCases,
       stages: [
         {
-          name: 'circuit1', circuit: 1, ticks: 400,
+          name: 'smelting', ticks: 400,
           verify: function (counts) {
             var pig = counts[PIG_IRON] || 0
             var ash = counts['gtceu:ash_dust'] || 0
@@ -779,7 +761,7 @@
           }
         },
         {
-          name: 'circuit2', circuit: 2, ticks: 400,
+          name: 'blowing', ticks: 400,
           inputs: function (counts) { return [{ id: PIG_IRON, n: counts[PIG_IRON] || 16 }] },
           verify: function (counts) {
             var steel = counts['gtceu:steel_ingot'] || 0

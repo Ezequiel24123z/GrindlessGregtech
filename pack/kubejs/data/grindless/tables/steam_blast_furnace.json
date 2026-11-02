@@ -1,8 +1,8 @@
 {
   "_doc": [
     "Ironworks of the Steam Age (docs/eras/lines-steam-hv.md, S1): the steam alloy smelter sinters purified iron ore with coke dust,",
-    "then the Steam Blast Furnace (gtceu:steam_blast_furnace, recipe type gtceu:steelmaking) runs two modes: circuit 1 smelts the",
-    "sinter into pig iron, circuit 2 blows the pig iron into Bessemer steel.",
+    "then the Steam Blast Furnace (gtceu:steam_blast_furnace, recipe type gtceu:steelmaking) runs two modes chosen by the input: the",
+    "sinter becomes pig iron, the pig iron becomes Bessemer steel. (The type has three input slots, so no programmed circuit.)",
     "server_scripts/grindless/steam/blast_furnace.js makes one sinter recipe per row of `feeds`: 4 of `input` + 1 coke dust -> 4 sinter.",
     "Only iron ores that GTM 7.5.3 smelts straight into iron (furnace recipes of their raw ore): the oxides and hydroxides of",
     "the Steam Age veins (iron, magnetite, hematite, goethite, yellow limonite). Pyrite is a sulfide: it waits for the LV",

@@ -6,9 +6,9 @@
 //   1. Sintering, gtceu:alloy_smelter (the steam alloy smelter), one recipe per feed of
 //      kubejs/data/grindless/tables/steam_blast_furnace.json:
 //        4 purified iron ore + 1 coke dust -> 4 grindless:iron_sinter                       8 EU/t, 300 ticks
-//   2. Smelting, gtceu:steelmaking, circuit 1 (blast furnace):
+//   2. Smelting, gtceu:steelmaking (blast furnace; the type has three input slots, so no circuit selects the mode):
 //        4 sinter + 3 coke + 1 flux (#grindless:blast_furnace_fluxes) -> 4 grindless:pig_iron + 1 ash dust   8 EU/t, 1 200 ticks
-//   3. Bessemer blowing, gtceu:steelmaking, circuit 2 (the same furnace):
+//   3. Bessemer blowing, gtceu:steelmaking (the same furnace, chosen by its input):
 //        4 pig iron -> 4 steel ingots + 1 ash dust                                                           8 EU/t, 1 200 ticks
 // The steam multiblock runs 4 batches at once and 1.5x slower: 16 pig iron every 1 800 ticks, then 16 steel every 1 800 ticks,
 // drawing about 57 mB/t of steam.
@@ -21,8 +21,8 @@
 // inert: void it, or keep it for LV, where GTM's chemical reactor makes fertilizer from calcite + 3 ash + water and its
 // centrifuge splits it. The top gas (CO2, CO) leaves through the downcomer.
 //
-// Lookup note (GTM's RecipeDB): no two recipes of one type share a first ingredient and circuit: the sinter rows start with
-// different ores, the furnace modes carry circuits 1 and 2.
+// Lookup note (GTM's RecipeDB): no two recipes of one type share a first ingredient: the sinter rows start with different ores,
+// the furnace modes start with sinter and with pig iron.
 (function () {
   const G = global.grindless
 
@@ -79,12 +79,10 @@
     })
 
     event.recipes.gtceu.steelmaking('grindless:pig_iron')
-      .circuit(1)
       .itemInputs('4x ' + SINTER, '3x ' + COKE, '1x #' + FLUX_TAG)
       .itemOutputs('4x ' + PIG_IRON, '1x ' + ASH)
       .EUt(EUT).duration(FURNACE_DURATION)
     event.recipes.gtceu.steelmaking('grindless:bessemer_steel')
-      .circuit(2)
       .itemInputs('4x ' + PIG_IRON)
       .itemOutputs('4x ' + STEEL, '1x ' + ASH)
       .EUt(EUT).duration(FURNACE_DURATION)
