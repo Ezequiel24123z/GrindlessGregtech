@@ -1159,7 +1159,8 @@ function line(num, y, x0 = 0) {
     if (t === 'x' || !by) return;
     const s = from[0];
     x[i] = x[s] + 1.25;
-    const cand = [1.5, -1.5, 2.75, -2.75, 4, -4, 5.25, -5.25, 6.5, -6.5, 7.75, -7.75];
+    const cand = [];
+    for (let m = 1.5; m <= 7.5; m += 0.25) cand.push(m, -m);
     const pick = cand.find((c) => free(x[i], dy[s] + c, i));
     if (pick === undefined) throw new Error(`${num}: no room for by-product ${i}`);
     dy[i] = dy[s] + pick;
@@ -1201,7 +1202,7 @@ const cluster = (name, nums) => {
   const out = [];
   for (const num of nums) {
     const alias = ROWS[num].find((r) => r[0] === 'x');
-    const x0 = alias ? (out.find((nd) => nd.key === alias[1])?.x ?? 0) : 0;
+    const x0 = alias ? ((out.find((nd) => nd.key === alias[1]) ?? line(alias[1].split('_')[0].toUpperCase(), 0).find((nd) => nd.key === alias[1]))?.x ?? 0) : 0;
     const ns = line(num, 0, x0);
     const lo = Math.min(...ns.map((nd) => nd.y));
     const hi = Math.max(...ns.map((nd) => nd.y));
@@ -1226,7 +1227,7 @@ export default {
     stream: cluster('Streams and the torus', ['P9', 'P10', 'P11', 'P12', 'P22', 'P23', 'P24']),
     sling: cluster('Tether, void and slingshot', ['P13', 'P14', 'P15', 'P16']),
     cryo: cluster('Cryo parts', ['P18', 'P19', 'P20', 'P21', 'P25']),
-    tg1: cluster('Plates, mesh and frame', ['T1', 'T2', 'T3', 'T14', 'T15', 'T16', 'T17']),
+    tg1: cluster('Plates, mesh and frame', ['T2', 'T1', 'T3', 'T14', 'T15', 'T16', 'T17']),
     tg2: cluster('Shielding, waveguide and conduit', ['T4', 'T5', 'T6', 'T7']),
     tg3: cluster('Crystals', ['T8', 'T9', 'T10']),
     tg4: cluster('Iris, matrix and chamber', ['T11', 'T12', 'T13']),
