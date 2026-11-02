@@ -1,4 +1,4 @@
-// priority: -11731
+// priority: -374
 // TEST ONLY, AF-M. Command: kubejs custom_command gg_test_af_m
 // Reserved band ONLY: X48384-48447, Z0-63; Overworld Y98-112.
 // Doubt: the plasma quench caster took no input bus and the megabar press no input hatch, though plasma_sprayed_tile needs a billet and
