@@ -159,7 +159,7 @@
       ;['source', 'target'].forEach(function (side) {
         var name = tier + '_' + l.a + '_laser_' + side + '_hatch'
         var part = 'gtceu:' + tier + '_' + (side === 'source' ? 'emitter' : 'sensor')
-        var cable = tier === 'uhv' ? 'gtceu:europium_' + l.cable + '_cable' : 'gtceu:' + FAMILY[tier] + '_' + l.cable + '_cable'
+        var cable = tier === 'uhv' ? 'gtceu:europium_' + l.cable + '_cable' : cableOf(tier, l.cable === 'quadruple' ? 'quad' : l.cable)
         if (tier !== 'uhv') {
           event.remove({ id: 'gtceu:assembler/' + name })
           if (l.a === '4096a' && side === 'source') event.remove({ id: 'gtceu:assembler/' + tier + '_4096a_laser_output_hatch' })
@@ -221,7 +221,12 @@
   //   4 A = 2 x 1 A + the tier's quadruple cable and plates; 16 A = 2 x 4 A (uev, uiv, uxv foundation.js; AF-CC); 64 A = 2 x 16 A + hex cable.
   var FAMILY = { uev: 'lay_superhydride', uiv: 'metallic_hydrogen', uxv: 'pasta_strand', opv: 'chain_strand' }
   var SIZE = { single: 'single', double: 'double', quad: 'quadruple', octal: 'octal', hex: 'hex' }
-  function cableOf(tier, size) { return 'gtceu:' + FAMILY[tier] + '_' + SIZE[size] + '_cable' }
+  // OpV's chain strand has single cables only (OpV-F2 cuts the cable assembler rows; hidden_until holds the larger cables "never"):
+  // its larger sizes are the bare wires, which the OpV parts' own lines make
+  function cableOf(tier, size) {
+    if (tier === 'opv' && size !== 'single') return 'gtceu:chain_strand_' + SIZE[size] + '_wire'
+    return 'gtceu:' + FAMILY[tier] + '_' + SIZE[size] + '_cable'
+  }
   function plateOf(tier) { return tier === 'uev' ? '#forge:plates/neutronium' : 'gtceu:rhea_plate' }
   function hullOf(tier) { return 'gtceu:' + tier + '_machine_hull' }
 
