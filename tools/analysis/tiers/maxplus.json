@@ -22,7 +22,11 @@
     "nickel_56_burner": { "label": "nickel_56_burner", "landedWhen": ["gtceu:nickel_56_burner"] },
     "void_crystal_fab": { "label": "void_crystal_fab", "landedWhen": ["gtceu:void_crystal_fab"] },
     "hyperstargate": { "label": "hyperstargate", "landedWhen": ["gtceu:hyperstargate"] },
-    "hyperfactory": { "label": "hyperfactory", "landedWhen": ["gtceu:hyperfactory"] }
+    "hyperfactory": { "label": "hyperfactory", "landedWhen": ["gtceu:hyperfactory"] },
+    "horizon_capacitor_bank": { "label": "horizon_capacitor_bank", "landedWhen": ["gtceu:horizon_capacitor_bank"] },
+    "XP-T1": { "label": "MAX+ voltage variants of the photonic machines, landed with the hyper_assembly_array", "landedWhen": ["gtceu:hyper_assembly_array"] },
+    "XP-T2": { "label": "MAX+ target and shard chains, landed with the hyperstargate", "landedWhen": ["gtceu:hyperstargate"] },
+    "XP-K": { "label": "MAX+ keycard chain, landed with the hyperstargate", "landedWhen": ["gtceu:hyperstargate"] }
   },
   "machines": [
     {"partsFromStructure":true, "machine": "gtceu:condensate_assembler", "types": ["gtceu:condensate_assembler"], "energy": { "voltage": 2147483648, "hatches": 2, "amperage": 1024 }, "needs": ["eu:max"], "package": "condensate_assembler" },
