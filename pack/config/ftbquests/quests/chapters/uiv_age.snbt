@@ -12,7 +12,7 @@
 		{
 			dependencies: ["5316E435F8496672"]
 			description: [
-				"The warp gate left you the &6UIV Machine Hull&r and a stack of casings. The stars you can reach now are the ones that already died: a neutron star, a pulsar and a black hole."
+				"The stars you can reach now are the ones that already died: a neutron star, a pulsar and a black hole. The &6UIV Machine Casing&r is the first step: the assembly line joins 2 UEV casings, 2 UEV field generators, 4 UEV emitters and 2 UEV circuits, and the Pulsar Navigation Chart from the UEV gate is its research."
 				"Home first. Nothing out there is built without metallic hydrogen and a very hard alloy."
 			]
 			icon: "gtceu:uiv_machine_hull"
@@ -20,17 +20,14 @@
 			rewards: [{ id: "71F6AAE8444EDFE3", type: "xp", xp: 50 }]
 			shape: "rsquare"
 			size: 1.5d
-			tasks: [
-				{ id: "3260891837D92C37", item: "gtceu:uiv_machine_hull", type: "item" }
-				{ id: "1848D2F73920097E", item: "gtceu:uiv_machine_casing", type: "item" }
-			]
+			tasks: [{ id: "3CC1306BA0249AC5", item: "gtceu:uiv_machine_casing", type: "item" }]
 			title: "Dead Stars"
 			x: 0.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["7B955176F4E8579C"]
-			description: ["Most of UIV is built at home. The jumps, the stations and the gate all need what three home lanes make, so the machine tabs come before the rockets."]
+			description: ["Most of UIV is built at home. The jumps, the stations and the gate all need what three home lanes make, so the home machines come before the rockets."]
 			icon: "gtceu:uiv_machine_hull"
 			id: "5DFADD2C1B09AF2E"
 			rewards: [{ id: "7EDEBE78DFC06BD2", type: "xp", xp: 25 }]
@@ -120,7 +117,10 @@
 		}
 		{
 			dependencies: ["510D744971D43851"]
-			description: ["The three stars are hundreds of light years away and no drive crosses that. A seed rides the warp gate along the chart, one jump to each place, and the orbit is real only in the game."]
+			description: [
+				"The three stars are hundreds of light years away and no drive crosses that. A seed rides the warp gate along the chart, one jump to each place, and the orbit is real only in the game."
+				"A completed jump places that star's relay platform once per world and leaves &6Relay Coordinates&r, a data stick, in the jump ring's output bus. Put them in the input bus of a sustaining ring and a player standing in it rides there."
+			]
 			icon: "gtceu:warp_gate"
 			id: "540014628249AE32"
 			rewards: [{ id: "56DDA1A7B1B1EA77", type: "xp", xp: 50 }]
@@ -134,7 +134,8 @@
 		{
 			dependencies: ["540014628249AE32"]
 			description: [
-				"The first jump. A seed carries a probe to a lone neutron star and opens a ring there."
+				"The first jump. A seed carries a probe to a lone neutron star and opens a ring there. The jump leaves its Relay Coordinates in the jump ring's output bus."
+				"At the platform, step out and back in: the paused ring wakes for one sustain, paid by its stocked cells and the network's EU, and carries you home."
 				"The jump is fiction, as every jump is. The star, a cold X-ray emitter, is real."
 			]
 			icon: "grindless:neutron_star_site_casing"
@@ -160,7 +161,7 @@
 		}
 		{
 			dependencies: ["1A781FD07AF49721"]
-			description: ["A spoonful of neutron matter held at ordinary pressure by a field is fiction: it is not the neutronium of the other mods. A &6Neutronium Pellet&r goes in the stored proof at the gate."]
+			description: ["A spoonful of neutron matter held at ordinary pressure by a field is fiction: it is not the neutronium of the other mods. A &6Neutronium Pellet&r is kept for the stored proof and used up when the gate is held open."]
 			icon: "grindless:neutronium_pellet"
 			id: "11F139AEE6C06EAA"
 			rewards: [{ id: "5DFED322F33B281D", type: "xp", xp: 300 }]
@@ -170,8 +171,8 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["1A781FD07AF49721"]
-			description: ["Neutrons leaking out of the crust build the heavy elements, as in a kilonova. The &6Element 119 Recoil&r and &6Census II&r are the proof that the chain made new atoms."]
+			dependencies: ["15768CF69A20F736"]
+			description: ["Neutrons leaking out of the crust build the heavy elements, as in a kilonova. The &6Element 119 Recoil Record&r and the &6Element 120 Recoil Record&r from the quest before go with a sealed capsule into &6Superheavy Census II&r, the proof that the chain made new atoms."]
 			icon: "grindless:superheavy_census_ii"
 			id: "7722F5C4A39F92D7"
 			rewards: [{ id: "3B480CA24FC3435C", type: "xp", xp: 300 }]
@@ -180,23 +181,23 @@
 				{ id: "3B9F051A93467905", item: "grindless:superheavy_census_ii", type: "item" }
 			]
 			title: "Census II"
-			x: 17.5d
+			x: 20.0d
 			y: 2.0d
 		}
 		{
-			dependencies: ["7722F5C4A39F92D7"]
-			description: ["A titanium beam on a californium wheel leaves a few atoms of something new. The &6Element 120 Recoil&r is one more entry for the census. Real element 120 has never been made, so this one is a recipe and a hope."]
+			dependencies: ["1A781FD07AF49721"]
+			description: ["A titanium beam on a californium wheel leaves a few atoms of something new. The &6Element 120 Recoil Record&r is one of the two entries Census II needs. Real element 120 has never been made, so this one is a recipe and a hope."]
 			icon: "grindless:element_120_recoil"
 			id: "15768CF69A20F736"
 			rewards: [{ id: "789CAAB84BD0C8B7", type: "xp", xp: 200 }]
 			tasks: [{ id: "5A3A79B88B9907F6", item: "grindless:element_120_recoil", type: "item" }]
 			title: "Element 120"
-			x: 20.0d
+			x: 17.5d
 			y: 2.0d
 		}
 		{
 			dependencies: ["11F139AEE6C06EAA"]
-			description: ["The second jump: a pulsar close enough to time. A seed rides there on a course worked out with the neutron star, and the jump is fiction here too."]
+			description: ["The second jump: a pulsar close enough to time. A seed rides there on a course worked out with the neutron star, and the jump is fiction here too. Its Relay Coordinates come out in the jump ring's output bus."]
 			icon: "grindless:rad_hard_controller"
 			id: "5E8A4728A85047DF"
 			rewards: [{ id: "5278320F4FD6E8F7", type: "xp", xp: 250 }]
@@ -242,7 +243,7 @@
 		}
 		{
 			dependencies: ["19A46B977973EEEB"]
-			description: ["Pulse profiles go into the Matrioshka, and the &6Neutron Star EOS Chart&r comes out. It tells you how hard a star pushes back. The computer decides on a long run."]
+			description: ["Pulse profiles go into the Matrioshka, and the &6Neutron-Star EOS Chart&r comes out. It tells you how hard a star pushes back. The computer decides on a long run."]
 			icon: "grindless:ns_eos_chart"
 			id: "13EE47D6E75307D4"
 			rewards: [{ id: "3FFDC8CF597C8D76", type: "xp", xp: 250 }]
@@ -264,7 +265,7 @@
 		}
 		{
 			dependencies: ["7DFD7F7638FC1526", "7D914530B001FB81"]
-			description: ["The last jump: a black hole of many Suns, spinning fast enough to matter. The jump is fiction, and the black hole is real."]
+			description: ["The last jump: a black hole of many Suns, spinning fast enough to matter. The jump is fiction, and the black hole is real. Its Relay Coordinates come out in the jump ring's output bus."]
 			icon: "grindless:probe_bay_casing"
 			id: "1E0EB4DDEE39CB3B"
 			rewards: [{ id: "37702A5CBB519885", type: "xp", xp: 300 }]
@@ -312,8 +313,8 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["12FFA92FECF3F365"]
-			description: ["Drop a sled into the ergosphere and it splits: one half falls in, the other comes out with more energy than it took. The &6Recovered Half-Sled&r goes back to the bay for a refit."]
+			dependencies: ["12FFA92FECF3F365", "566EAB127E413589"]
+			description: ["Drop a sled into the ergosphere (the Penrose extraction needs the Kerr Chart) and it splits: one half falls in, the other comes out with more energy than it took. The &6Recovered Half-Sled&r goes back to the bay for a refit."]
 			icon: "grindless:recovered_half_sled"
 			id: "162EE3C9E5DE3F97"
 			rewards: [{ id: "1477D08938E518E1", type: "xp", xp: 300 }]
@@ -323,27 +324,24 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["566EAB127E413589", "162EE3C9E5DE3F97"]
-			description: [
-				"Hold the warp gate open at the UIV load for sixty seconds in Cygnus X-1 orbit, then tick this box. Take care of your power first: the Penrose engine is the cheaper way to pay for it, not the only one."
-				"The gate's casing is never a reward: it is a product of the run."
-			]
+			dependencies: ["1724E39CDD53C2A2"]
+			description: ["Run the warp gate's Cygnus hold in Cygnus X-1 orbit: it lasts 60 seconds and takes the stored proof. The gate leaves no item, so tick this box when it ends. Plan your power first: the Penrose engine is the cheaper way to pay for it, not the only one."]
 			icon: "gtceu:warp_gate"
 			id: "58ADF60AC2BD2DD7"
-			rewards: [{ id: "17D1275E9DB77E3C", type: "xp", xp: 300 }]
+			rewards: [{ id: "17D1275E9DB77E3C", type: "xp", xp: 25 }]
 			shape: "diamond"
 			size: 1.75d
 			tasks: [{ id: "58A3BA5AB23D6BF4", type: "checkmark" }]
 			title: "Open the Cygnus Gate"
-			x: 37.5d
+			x: 40.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["58ADF60AC2BD2DD7"]
-			description: ["Keep a neutronium pellet, census II, the equation of state chart, a half-sled and four UIV circuits of any kind in the store. The gate looks for them before it opens further, and the hold uses up the pellet."]
+			dependencies: ["162EE3C9E5DE3F97"]
+			description: ["Put a neutronium pellet, Census II, the equation of state chart, a half-sled and four UIV circuits of any kind in the gate's store. The hold in the next quest needs all of them at once and uses up the pellet."]
 			icon: "grindless:neutronium_pellet"
 			id: "1724E39CDD53C2A2"
-			rewards: [{ id: "5FA246B7981D85E4", type: "xp", xp: 300 }]
+			rewards: [{ id: "5FA246B7981D85E4", type: "xp", xp: 600 }]
 			tasks: [
 				{ id: "5C619E1ADFDD6672", item: "grindless:neutronium_pellet", type: "item" }
 				{ id: "1153A2B225D2307E", item: "grindless:superheavy_census_ii", type: "item" }
@@ -362,12 +360,12 @@
 							}
 			]
 			title: "Stored Proof"
-			x: 40.0d
+			x: 37.5d
 			y: 0.0d
 		}
 		{
-			dependencies: ["1724E39CDD53C2A2"]
-			description: ["The &6Kerr Chart&r is the research for the UXV machine casing. Build it and the next voltage is open."]
+			dependencies: ["58ADF60AC2BD2DD7"]
+			description: ["The &6Kerr Chart&r is the research for the UXV machine casing: the assembly line joins 2 UIV casings, 2 UIV field generators, 4 UIV emitters and 2 UIV circuits. Build it and the next voltage is open."]
 			icon: "gtceu:uxv_machine_casing"
 			id: "1433B6EB4860DF3C"
 			rewards: [{ id: "5AD37D60450403DA", type: "xp", xp: 400 }]
@@ -383,8 +381,8 @@
 		{
 			dependencies: ["5DFADD2C1B09AF2E"]
 			description: [
-				"The photonic chips of this age."
-				"The assembler and the first lithium niobate line."
+				"The photonic chips of this age, then the parts, the circuit assembler and the hatches built from them."
+				"The lithium niobate wafers come first."
 			]
 			icon: "gtceu:uiv_circuit_assembler"
 			id: "32309B41A96F01BE"
@@ -397,21 +395,8 @@
 			y: 10.25d
 		}
 		{
-			dependencies: ["32309B41A96F01BE"]
-			description: ["The &6UIV Circuit Assembler&r puts the UIV components and the controllers of this era together from the circuits on this page. A UIV hull and UIV components, and the cleanroom you already run. The parts and hatches on the next two quests, and every controller past the UIV hull. Boards and chips come from the cleanroom by ME; stock what it returns."]
-			icon: "gtceu:uiv_circuit_assembler"
-			id: "5F0ADBEB1F3839D6"
-			rewards: [{ id: "5501DBD81F3DF096", type: "xp", xp: 150 }]
-			shape: "gear"
-			size: 1.25d
-			tasks: [{ id: "13689E3A76730312", item: "gtceu:uiv_circuit_assembler", type: "item" }]
-			title: "UIV Circuit Assembler"
-			x: 7.0d
-			y: 8.5d
-		}
-		{
-			dependencies: ["5F0ADBEB1F3839D6"]
-			description: ["The &6UIV Parts&r are the emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor of this era. The UIV hull, the hatches and every controller past them are built from these. The UEV part of the same kind (two for the motor), made in assemblers. The motor also takes a UIV circuit, metallic hydrogen cable, an MH winding and superconducting coils. The UIV hatches and the controllers of this era. Stock each part by ME; a controller draws several of the same kind."]
+			dependencies: ["58A76179A3648724"]
+			description: ["The UIV emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor are the parts of this era. The circuit assembler, the hatches and the controllers past them are built from these. The UEV part of the same kind (two for the motor, pump and field generator), plus UIV circuits of any kind from the optical mainframe. The motor also takes metallic hydrogen cable, windings and superconducting coils; the pump takes RHEA impellers and plates; the emitter takes two gamma laser cavities. The UIV circuit assembler and the UIV hatches. Stock each part by ME; a controller draws several of the same kind."]
 			icon: "gtceu:uiv_electric_pump"
 			id: "17C0F46C21B9CD13"
 			rewards: [{ id: "366424FA6A7C7F5A", type: "xp", xp: 120 }]
@@ -426,12 +411,25 @@
 				{ id: "57B642F3EC7C6479", item: "gtceu:uiv_electric_motor", type: "item" }
 			]
 			title: "UIV Parts"
-			x: 9.5d
-			y: 8.5d
+			x: 20.0d
+			y: 16.0d
+		}
+		{
+			dependencies: ["17C0F46C21B9CD13", "54AF39C42293C4E7"]
+			description: ["The &6UIV Circuit Assembler&r puts the UIV controllers together from the circuits of this page. A UIV machine hull, a UIV robot arm, an emitter and two conveyor modules, with a circuit of a high tier and red alloy cable. The UIV hatches and the controllers of this era. Boards and chips come from the cleanroom by ME; stock what it returns."]
+			icon: "gtceu:uiv_circuit_assembler"
+			id: "5F0ADBEB1F3839D6"
+			rewards: [{ id: "5501DBD81F3DF096", type: "xp", xp: 150 }]
+			shape: "gear"
+			size: 1.25d
+			tasks: [{ id: "13689E3A76730312", item: "gtceu:uiv_circuit_assembler", type: "item" }]
+			title: "UIV Circuit Assembler"
+			x: 22.5d
+			y: 17.5d
 		}
 		{
 			dependencies: ["17C0F46C21B9CD13"]
-			description: ["The &6UIV Energy Input Hatch&r is an assembly line recipe on two UIV hulls, with three UIV sensors and a UIV motor. &6Metallic Hydrogen Cable&r carries the power; it is also the cable of the hull itself, which takes RHEA plate and FFKM seals. Two UIV machine hulls, metallic hydrogen cable, RHEA plates, UIV circuits, FFKM seals, three UIV sensors and a UIV motor. Every UIV machine that takes power from a hatch. Craft hatches and cable by ME in small batches; each machine takes one."]
+			description: ["The &6UIV Energy Hatch&r and &6UIV Dynamo Hatch&r are assembly line recipes on two UIV hulls, with metallic hydrogen cable, RHEA plates and FFKM seals. &6Metallic Hydrogen Single Cable&r carries the power. Two UIV machine hulls, three metallic hydrogen cables, six RHEA plates, six FFKM seals, three UIV circuits of any kind, three UIV sensors and a UIV motor. Every UIV machine that takes power from a hatch. Craft hatches and cable by ME in small batches; each machine takes one."]
 			icon: "gtceu:uiv_energy_input_hatch"
 			id: "3D4BC3A7590B186D"
 			rewards: [{ id: "5F3A576C2576D7CD", type: "xp", xp: 100 }]
@@ -441,12 +439,25 @@
 				{ id: "7CDFB1EB2153A1EA", item: "gtceu:metallic_hydrogen_single_cable", type: "item" }
 			]
 			title: "UIV Hatches and Cable"
-			x: 12.0d
-			y: 8.5d
+			x: 25.0d
+			y: 16.0d
 		}
 		{
 			dependencies: ["32309B41A96F01BE"]
-			description: ["A thin crystal of lithium niobate bonded onto silicon nitride makes the &6LN-on-SiN Wafer&r: one wafer that steers light and tunes it. The TFLN fab, a lithium niobate boule and silicon nitride wafers, in the cleanroom. The comb that the optical mainframe is built round. Boules and nitride wafers by ME; the fab returns wafers to a chest."]
+			description: ["A thin film of lithium niobate on silicon makes the &6LNOI Wafer&r. The photonic foundry cuts it into thin-film modulators, and it is the base of the optical processor and of the nitride wafer next to it. An ion-implanted lithium niobate wafer, a silicon wafer and quicklime in the photonic foundry. The LN-on-Si3N4 wafer, the optical processors of the mainframe and the thin-film modulators of the tensor core. Implanted wafers by ME; one LNOI wafer gives many modulators, so stock modulators, not wafers."]
+			icon: "grindless:lnoi_wafer"
+			id: "1D71A54AB9C8A2EB"
+			rewards: [{ id: "5B63C17F0B9709EF", type: "xp", xp: 120 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5C757D3165C9C771", item: "grindless:lnoi_wafer", type: "item" }]
+			title: "Lithium Niobate on Insulator"
+			x: 7.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["1D71A54AB9C8A2EB"]
+			description: ["The TFLN Fab slices an LNOI wafer onto a silicon nitride coated wafer and makes the &6LN-on-Si3N4 Wafer&r. It does not go into the mainframe: thinned and tipped with platinum it becomes the EO transceiver of the pulsar-timed repeater. The TFLN Fab, an LNOI wafer and a silicon nitride coated wafer. The EO transceiver of the pulsar-timed repeater and the UIV wireless hatches. LNOI wafers and nitride wafers by ME; the fab returns wafers to a chest."]
 			icon: "grindless:ln_on_sin_wafer"
 			id: "5F3FD5DD9FD7DBAA"
 			rewards: [{ id: "3CA2E756FC79E223", type: "xp", xp: 120 }]
@@ -454,12 +465,12 @@
 			size: 1.0d
 			tasks: [{ id: "71264424E4B1A667", item: "grindless:ln_on_sin_wafer", type: "item" }]
 			title: "Lithium Niobate on Nitride"
-			x: 7.0d
+			x: 9.5d
 			y: 10.5d
 		}
 		{
 			dependencies: ["3B27271078AAEDC7"]
-			description: ["A wafer exposed at 6.7 nanometres holds finer lines than any light before it: the &6BEUV Exposed Wafer&r. The BEUV scanner, a resist-coated wafer and clean mirrors. The terbium debris is caught and recycled. The driver ASIC next to it, and through it the P:Si processor. Wafers by ME; send the fouled mirrors to the cleaning line, not to the bin."]
+			description: ["A wafer exposed at 6.7 nanometres holds finer lines than any light before it: the &6BEUV-Exposed Wafer&r. The BEUV scanner (a UIV hull, UEV circuits), a tin-terbium droplet target, an HfO2 resist wafer and a BEUV mirror. The debris is caught and recycled. The BEUV driver ASIC next to it. Wafers by ME; send the fouled mirrors to the cleaning line, not to the bin."]
 			icon: "grindless:beuv_exposed_wafer"
 			id: "127106AB450BDD99"
 			rewards: [{ id: "1EF0814AE2DDE468", type: "xp", xp: 120 }]
@@ -472,7 +483,7 @@
 		}
 		{
 			dependencies: ["127106AB450BDD99"]
-			description: ["Cut from the exposed wafer, the &6BEUV Driver ASIC&r is the logic that steers the single-atom writer. A BEUV exposed wafer and a circuit 1 program in the cleanroom. The P:Si processor. One wafer yields many chips; stock them in a chest by ME."]
+			description: ["Cut from the exposed wafer, the &6BEUV Driver ASIC&r is the logic that drives the photonic tensor core. A BEUV-exposed wafer, a VUV frequency comb and ethanol in the BEUV lithography line. The photonic tensor core. One wafer yields several chips; stock them in a chest by ME."]
 			icon: "grindless:beuv_driver_asic"
 			id: "1667D9ECE9C63D16"
 			rewards: [{ id: "3344372EEA8AEA05", type: "xp", xp: 140 }]
@@ -484,8 +495,21 @@
 			y: 13.5d
 		}
 		{
+			dependencies: ["1667D9ECE9C63D16", "1D71A54AB9C8A2EB"]
+			description: ["Matrix products done in light: the &6Photonic Tensor Core&r is the arithmetic of the optical mainframe. In the photonic integration hall (a circuit 4 program): a BEUV driver ASIC, a Quantum Photonic Chip and four thin-film LN modulators from the photonic foundry. The optical mainframe. Modulators and ASICs by ME; the tensor core is made one at a time and goes straight to the mainframe line."]
+			icon: "grindless:photonic_tensor_core"
+			id: "3F6512C5FF0EBF55"
+			rewards: [{ id: "56D249260071D23F", type: "xp", xp: 160 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "74CD0791FB6F00A6", item: "grindless:photonic_tensor_core", type: "item" }]
+			title: "Photonic Tensor Core"
+			x: 15.0d
+			y: 13.5d
+		}
+		{
 			dependencies: ["3B27271078AAEDC7"]
-			description: ["A laser pulse a millionth of a millionth of a second long writes inside glass. The &65D Data Crystal&r keeps what it holds longer than the Sun will shine. The femtosecond writer and a block of fused silica. The research data that Matrioshka runs and the six-hour memory. Silica blanks by ME; written crystals go to the research store."]
+			description: ["A laser pulse a millionth of a millionth of a second long writes inside glass. The &65D Data Crystal&r keeps what it holds longer than the Sun will shine. A silica storage preform written by the femtosecond laser, engraved with a UHV circuit, then annealed in the electric blast furnace at 9,001 K. The Matrioshka research writes in Mercury orbit, the ergosphere probe bay and the Kerr probe. Silica preforms by ME; written crystals go to the research store."]
 			icon: "grindless:data_crystal_5d"
 			id: "5F6361D2A096AE06"
 			rewards: [{ id: "10D504AFB6BB5530", type: "xp", xp: 120 }]
@@ -497,8 +521,21 @@
 			y: 16.0d
 		}
 		{
-			dependencies: ["5F6361D2A096AE06"]
-			description: ["A crystal of one europium isotope remembers a light pulse for hours when the right comb is burned in. That is the &6Six-Hour Memory&r. The spectral hole burner, a 5D crystal and superfluid helium. The P:Si processor, which holds its state in this memory. Crystals by ME, helium by pipe; a few stocked memories are enough."]
+			dependencies: ["3B27271078AAEDC7"]
+			description: ["The die has to be cold before it works. The &6mK Cryostat Module&r wets a rare-earth stage with a helium-3 mixture and holds the die at millikelvin. The nuclear demagnetisation stage: a nuclear stage, a cold plate and a helium-3/helium-4 mixture, with a circuit 2 program. The six-hour memory and the P:Si processor. The helium mixture returns to the works; send finished modules on by ME."]
+			icon: "grindless:mk_cryostat_module"
+			id: "741A4E00415BD039"
+			rewards: [{ id: "115633C9C90A480F", type: "xp", xp: 150 }]
+			shape: "hexagon"
+			size: 1.0d
+			tasks: [{ id: "5E6D3465F76B4438", item: "grindless:mk_cryostat_module", type: "item" }]
+			title: "Millikelvin Cryostat Module"
+			x: 7.5d
+			y: 18.5d
+		}
+		{
+			dependencies: ["741A4E00415BD039"]
+			description: ["A crystal of one europium isotope remembers a light pulse for hours when the right comb is burned in. That is the &6Six-Hour Quantum Memory&r. In an assembler: a hole-burned Eu-151:YSO slab (spectral hole burning with superfluid helium), an mK cryostat module, a UEV sensor and a circuit 20 program. The optical mainframe. Slabs by ME, helium by pipe; a few stocked memories are enough."]
 			icon: "grindless:six_hour_memory"
 			id: "53A536B775F9CA25"
 			rewards: [{ id: "3DBE1A212FF60EE2", type: "xp", xp: 140 }]
@@ -511,7 +548,7 @@
 		}
 		{
 			dependencies: ["3B27271078AAEDC7"]
-			description: ["A scanning tip peels hydrogen off silicon one atom at a time. The &6STM-Patterned Wafer&r is the silicon with the holes ready. The STM lithography cell, a clean silicon wafer and ultra-high vacuum. The P:Si die, once phosphine fills the holes. Wafers by ME; the cell is slow, so run two."]
+			description: ["A scanning tip peels hydrogen off silicon one atom at a time. The &6STM-Patterned Wafer&r is the silicon with the holes ready. The STM lithography cell: a hydrogen-terminated silicon wafer in ultra-high vacuum. The P:Si die, once phosphine fills the holes. Wafers by ME; the cell is slow, so run two."]
 			icon: "grindless:stm_patterned_wafer"
 			id: "32D6BBEFBFA91930"
 			rewards: [{ id: "17AF2F6E34C9BFB3", type: "xp", xp: 120 }]
@@ -520,11 +557,11 @@
 			tasks: [{ id: "155D7B8A6158F5CE", item: "grindless:stm_patterned_wafer", type: "item" }]
 			title: "STM-Patterned Wafer"
 			x: 7.5d
-			y: 18.5d
+			y: 20.0d
 		}
 		{
 			dependencies: ["32D6BBEFBFA91930"]
-			description: ["Phosphine fills the holes and a cap seals them. The &6P:Si Die&r holds qubits made of single phosphorus atoms. A patterned wafer in the STM lithography cell. The excess phosphine is scrubbed and kept. The cryostat module and the P:Si processor. Phosphine by pipe in a contained loop; dies back by ME."]
+			description: ["Phosphine fills the holes and silicon-28 grown over them seals them. The &6P:Si Die&r holds qubits made of single phosphorus atoms. The patterned wafer dosed with phosphine in the STM cell, then molecular beam epitaxy with silicon-28 and liquid nitrogen. Excess phosphine is scrubbed and kept. The P:Si processor. Phosphine by pipe in a contained loop; dies back by ME."]
 			icon: "grindless:p_si_die"
 			id: "5DB68611D99B3EB9"
 			rewards: [{ id: "72A4D6369184985F", type: "xp", xp: 140 }]
@@ -533,24 +570,11 @@
 			tasks: [{ id: "7F0A9CC9D347E680", item: "grindless:p_si_die", type: "item" }]
 			title: "P:Si Die"
 			x: 10.0d
-			y: 18.5d
+			y: 20.0d
 		}
 		{
-			dependencies: ["5DB68611D99B3EB9"]
-			description: ["The die has to be cold before it works. The &6mK Cryostat Module&r wets a rare-earth stage with helium-3 and holds the die at millikelvin. The millikelvin cryostat works, a P:Si die and helium-3. The P:Si processor. The helium mixture returns to the works; send finished modules on by ME."]
-			icon: "grindless:mk_cryostat_module"
-			id: "741A4E00415BD039"
-			rewards: [{ id: "115633C9C90A480F", type: "xp", xp: 150 }]
-			shape: "hexagon"
-			size: 1.0d
-			tasks: [{ id: "5E6D3465F76B4438", item: "grindless:mk_cryostat_module", type: "item" }]
-			title: "Millikelvin Cryostat Module"
-			x: 12.5d
-			y: 18.5d
-		}
-		{
-			dependencies: ["1667D9ECE9C63D16", "53A536B775F9CA25", "741A4E00415BD039"]
-			description: ["A cooled die, a driver and a memory make the &6P:Si Processor&r. It is the logic of the UIV circuit. The millikelvin cryostat works, a cryostat module, a driver ASIC and a six-hour memory. The optical mainframe. Parts in matched counts by ME; keep one processor per mainframe."]
+			dependencies: ["5DB68611D99B3EB9", "741A4E00415BD039"]
+			description: ["A cooled die makes the &6Characterised P:Si Processor&r. It is the logic of the UIV circuit. The millikelvin cryostat works: a P:Si die, an mK cryostat module and liquid helium, with a circuit 3 program. The optical mainframe. Dies and modules in matched numbers by ME; keep one processor per mainframe."]
 			icon: "grindless:p_si_processor"
 			id: "5F5A39AD463A9E68"
 			rewards: [{ id: "306A140944DC4CA9", type: "xp", xp: 200 }]
@@ -558,12 +582,12 @@
 			size: 1.0d
 			tasks: [{ id: "3A63AF8E8D0E294B", item: "grindless:p_si_processor", type: "item" }]
 			title: "P:Si Processor"
-			x: 15.0d
-			y: 16.0d
+			x: 12.5d
+			y: 18.5d
 		}
 		{
-			dependencies: ["5F5A39AD463A9E68"]
-			description: ["A processor, a crossbar, a glass interposer and a comb on a LN-on-SiN wafer make the &6Optical Mainframe&r, the UIV circuit. The photonic integration hall, a P:Si processor and a LN-on-SiN wafer. The controllers of Mk5, Matrioshka and every dead-star machine, and the gate store. Keep a dedicated chest and never a big stock; one processor and one wafer go into each."]
+			dependencies: ["5F5A39AD463A9E68", "53A536B775F9CA25", "3F6512C5FF0EBF55"]
+			description: ["A processor, a memory, a tensor core, a crossbar on a glass interposer and two optical assemblies make the &6Optical Mainframe&r, the UIV circuit. The photonic integration hall: a Characterised P:Si Processor, a Six-Hour Quantum Memory, a Photonic Tensor Core, a Crossbar on Interposer and two optical assemblies. The assemblies come from the photonic foundry (optical processors from LNOI wafers, plus quantum memory chips). The UIV parts, the controllers of Mk5 and Matrioshka and the stored proof of the gate. Keep a dedicated chest and never a big stock; every part goes into each."]
 			icon: "gtnn:optical_mainframe"
 			id: "58A76179A3648724"
 			rewards: [{ id: "18518FAE64E1C23C", type: "xp", xp: 250 }]
@@ -644,20 +668,20 @@
 		}
 		{
 			dependencies: ["16B25F9750E5C09E"]
-			description: ["The &6Direct Energy Converter&r takes the three Mk5 plasmas as new rows. Its output is written final, so no generator array doubles it. The converter from ZPM and a plasma line for each burn. The Mk5 figures on the Power tab. Plasma by pipe from the ring; keep the converter's hatches free of anything else."]
+			description: ["The &6Direct Energy Converter&r takes the three Mk5 plasmas as new recipes. Its output is final: a generator array does not double it. The converter from ZPM and a plasma line for each burn. Mk5 power for the hatches and the wireless network. Plasma by pipe from the ring; keep the converter's hatches free of anything else."]
 			icon: "gtceu:direct_energy_converter"
 			id: "360709C0A42E7094"
 			rewards: [{ id: "592BB1C698306BA7", type: "xp", xp: 150 }]
 			shape: "hexagon"
 			size: 1.0d
 			tasks: [{ id: "7BEF3B769EB21ECE", item: "gtceu:direct_energy_converter", type: "item" }]
-			title: "Written Final"
+			title: "Plasma to Current"
 			x: 16.0d
 			y: 53.25d
 		}
 		{
 			dependencies: ["17B06879E2354DD6"]
-			description: ["The &6UIV Parallel Control Hatch&r lets a mega machine run more copies of a recipe at once than the UEV one. Energy is still the limit: every copy pays its own EU/t. A machine with a parallel slot and the power for every copy. Wide runs on the Neutronium Compression Hall and the other mega machines. Feed the machine a bus wide enough for the copies it runs."]
+			description: ["The &6Insane Parallel Control Hatch&r lets a mega machine run more copies of a recipe at once than the UEV one. Energy is still the limit: every copy pays its own EU/t. A machine with a parallel slot and the power for every copy. Wide runs on the Neutronium Compression Hall and the other mega machines. Feed the machine a bus wide enough for the copies it runs."]
 			icon: "gtceu:uiv_parallel_hatch"
 			id: "36B8D9937001B17B"
 			rewards: [{ id: "533D3582C8F64093", type: "xp", xp: 150 }]
@@ -670,31 +694,29 @@
 		}
 		{
 			dependencies: ["17B06879E2354DD6"]
-			description: ["The &6UIV SMES Cell&r holds four times what the UEV cell does, in metallic hydrogen windings. The nitride magnet works from UEV and a pulsar-timed repeater to keep the network in step. The UIV wireless tier. Nothing to feed. Size the towers for your busiest hour."]
+			description: ["The &6UIV SMES Cell&r holds four times what the UEV cell does, in metallic hydrogen wire. The Nitride Magnet Works from UEV: four UEV SMES cells, metallic hydrogen single wire and helium. The UIV wireless tier. Nothing to feed. Size the towers for your busiest hour."]
 			icon: "grindless:uiv_smes_cell"
 			id: "5FB006B879741A02"
 			rewards: [{ id: "34D47AB6E85C7F74", type: "xp", xp: 200 }]
 			shape: "gear"
 			size: 1.25d
-			tasks: [
-				{ id: "58CF3B6EE938CE16", item: "grindless:uiv_smes_cell", type: "item" }
-				{ id: "578E496B41D9D69C", item: "grindless:pulsar_timed_repeater", type: "item" }
-			]
+			tasks: [{ id: "58CF3B6EE938CE16", item: "grindless:uiv_smes_cell", type: "item" }]
 			title: "The UIV Cell"
 			x: 9.0d
 			y: 37.25d
 		}
 		{
 			dependencies: ["5FB006B879741A02"]
-			description: ["Move your towers onto &6UIV SMES Cells&r and the wireless network carries UIV to every station, out to the black hole. One formed tower holding a UIV cell: the network runs at its strongest cell, so until then it stays at UEV. The wireless hatches at UIV, and the gate's load for UXV. Add cells when the network dips at your busiest hour."]
+			description: ["Move your towers onto &6UIV SMES Cells&r and the wireless network carries UIV to every station, out to the black hole. One formed tower holding a UIV cell: the network runs at its strongest cell, so until then it stays at UEV. Each wireless hatch also takes a &6Pulsar-Timed Repeater&r (photonic integration hall) to keep the network in step. The wireless hatches at UIV, and the gate's load for UXV. Add cells when the network dips at your busiest hour."]
 			icon: "gtceu:uiv_wireless_energy_hatch"
 			id: "7099122F58BD069C"
 			rewards: [{ id: "38CA6305A7C48B92", type: "xp", xp: 200 }]
 			shape: "hexagon"
 			size: 1.0d
 			tasks: [
-				{ id: "39D503CFF6676726", item: "gtceu:uiv_wireless_energy_hatch", type: "item" }
-				{ id: "32EA26BD8F6C35EE", item: "gtceu:uiv_wireless_dynamo_hatch", type: "item" }
+				{ id: "3AC58E780BA67627", item: "grindless:pulsar_timed_repeater", type: "item" }
+				{ id: "5374F987A996106F", item: "gtceu:uiv_wireless_energy_hatch", type: "item" }
+				{ id: "7AA1FB43832F3534", item: "gtceu:uiv_wireless_dynamo_hatch", type: "item" }
 			]
 			title: "The Network Goes UIV"
 			x: 11.0d
@@ -702,7 +724,7 @@
 		}
 		{
 			dependencies: ["7099122F58BD069C"]
-			description: ["The gate to UXV needs 536,870,912 EU/t for sixty seconds, and the bank loses five per cent on the way in. Two Mk5 rings and a Penrose engine close the sum; four rings do it without the engine. The Power tab shows each source."]
+			description: ["The gate to UXV holds for sixty seconds at a very high UIV load, and the bank loses five per cent on the way in. Two Mk5 rings and a Penrose engine close the sum; four rings do it without the engine. Tick this box once your bank and rings can carry it."]
 			icon: "gtceu:uiv_wireless_energy_hatch"
 			id: "122504D2A2BC2235"
 			rewards: [{ id: "5E3CF3C809F8C206", type: "xp", xp: 100 }]
@@ -728,7 +750,7 @@
 		}
 		{
 			dependencies: ["17B06879E2354DD6"]
-			description: ["The &6Hot Strip Mill&r, &6Powder Bed Printer&r, &6Electron-Beam Furnace&r, &6Plasma Quench Caster&r, &6Megabar Press&r and &6CVI Furnace&r each take a mode: a canned RHEA slab, an impeller, refined niobium and tin, a sprayed first wall, compacted canisters and a tungsten fibre preform. The controllers you already own and the new alloys. The RHEA parts, the Mk5 first wall and the sleds. Slabs and preforms by bus; recycle the powder that is not sintered."]
+			description: ["The &6Hot Strip Mill&r, &6Powder Bed Printer&r, &6Electron Beam Furnace&r, &6Plasma Quench Caster&r, &6Megabar Press&r and &6CVI Furnace&r each take a mode: a canned RHEA slab, an impeller, refined niobium and tin, a sprayed first wall, compacted canisters and a tungsten fibre preform. The controllers you already own and the new alloys. The RHEA parts, the Mk5 first wall and the sleds. Slabs and preforms by bus; recycle the powder that is not sintered."]
 			icon: "gtceu:hot_strip_mill"
 			id: "36380573A891A925"
 			rewards: [{ id: "7D27ECFF54D8BC9E", type: "xp", xp: 120 }]
@@ -748,7 +770,7 @@
 		}
 		{
 			dependencies: ["10002E5C148ECC4B"]
-			description: ["The &6Extraction Cascade&r, &6Platinum Plant&r, &6Syngas Plant&r, &6Methane Pyrolyser&r, &6Europium Reductor&r, &6Aerogel Works&r and &6Fluorspar Kiln&r take a new mode each: niobium split, r-process ash cuts, methanation of fusion ash, shock graphite, rare-earth oxides, positronium aerogel and thorium fluoride. The controllers you own and the ash from the fusion burns. The platinum-group cut, the carbon for diamond and the lanthanides. Each plant hands its product on by pipe; send the spent ash back to its plant."]
+			description: ["The &6Rare Earth Extraction Cascade&r, &6Platinum Plant&r, &6Syngas and Shift Plant&r, &6Methane Pyrolyser&r, &6Europium Reductor&r, &6Aerogel Works&r and &6Fluorspar Kiln&r take a new mode each: niobium split, r-process ash cuts, methanation of fusion ash, shock graphite, rare-earth oxides, positronium aerogel and thorium fluoride. The controllers you own and the ash from the fusion burns. The platinum-group cut, the carbon for diamond and the lanthanides. Each plant hands its product on by pipe; send the spent ash back to its plant."]
 			icon: "gtceu:extraction_cascade"
 			id: "1DBC7EB3198DD765"
 			rewards: [{ id: "525DC96B1525F2AD", type: "xp", xp: 120 }]
@@ -769,7 +791,7 @@
 		}
 		{
 			dependencies: ["10002E5C148ECC4B"]
-			description: ["The &6Cryogenic Plant&r, &6Heavy Water Plant&r, &6Tritium Removal Facility&r, &6Superfluid Helium Plant&r, &6Calutron&r and &6Pyroprocessing Cell&r take a mode each: para hydrogen, depleted protium, a polish, a solid target, new isotopes and titanium sponge. The older controllers and the isotope feeds. The polarised fuels, the titanium-50 bullet and the cold targets. Isotopes by bus; return the helium ash to the plant."]
+			description: ["The &6Cryogenic Plant&r, &6Heavy-Water Plant&r, &6Tritium Removal Facility&r, &6Superfluid Helium Plant&r, &6Calutron&r and &6Pyroprocessing Cell&r take a mode each: para hydrogen, depleted protium, a polish, a solid target, new isotopes and titanium sponge. The older controllers and the isotope feeds. The polarised fuels, the titanium-50 bullet and the cold targets. Isotopes by bus; return the helium ash to the plant."]
 			icon: "gtceu:superfluid_helium_plant"
 			id: "139392B7A794DB65"
 			rewards: [{ id: "7C155DAACBF916E0", type: "xp", xp: 120 }]
@@ -789,7 +811,7 @@
 		}
 		{
 			dependencies: ["16C6567C657A75F5"]
-			description: ["The &6Fuel Fabrication Plant&r, &6Hot Cell&r, &6Actinide Partitioning Plant&r, &6Transuranium Facility&r, &6Waste Retrieval Plant&r, &6Heavy-Ion Cyclotron&r, &6Recoil Separator&r and &6Superheavy Chemistry Lab&r take new rows: zirconium and flash targets, canisters, einsteinium cuts, synroc and the elements 119 and 120. The UEV superheavy chain and the hot-cell feeds. The californium wheel, census II and the sled canisters. Targets and cuts move by bus; the waste canisters go to the sled line."]
+			description: ["The &6Fuel Fabrication Plant&r, &6Hot Cell&r, &6Actinide Partitioning Plant&r, &6Transuranium Facility&r, &6Waste Retrieval Plant&r, &6Heavy Ion Cyclotron&r, &6Recoil Separator&r and &6Superheavy Chemistry Lab&r take new rows: zirconium and flash targets, canisters, einsteinium cuts, synroc and the elements 119 and 120. The UEV superheavy chain and the hot-cell feeds. The californium wheel, census II and the sled canisters. Targets and cuts move by bus; the waste canisters go to the sled line."]
 			icon: "gtceu:hot_cell"
 			id: "35F4DCD71E516B24"
 			rewards: [{ id: "5E66188B74BDAF05", type: "xp", xp: 150 }]
@@ -978,7 +1000,7 @@
 		}
 		{
 			dependencies: ["50ED516A490F0DF7"]
-			description: ["The &6Ramp Compression Pulser&r squeezes cold hydrogen until it turns metallic. The squeeze is real; the quench is fiction, as nobody has kept metallic hydrogen once the pressure is gone. A UIV hull, the UEV casing and the coilgun coil casing that pulses the pressure. Metallic hydrogen, and lonsdaleite and cubic gauche nitrogen beside it. Hydrogen by pipe; spent shards return to the cryogenic plant, so loop them."]
+			description: ["The &6Ramp Compression Pulser&r squeezes cold hydrogen until it turns metallic. The squeeze is real; the quench is fiction, as nobody has kept metallic hydrogen once the pressure is gone. A UEV machine hull, three UEV pistons, UEV circuits, three balanced RHEA impellers, two strain-wave gears and three FFKM seals; the UEV casing and the coilgun coil casing that pulses the pressure. Metallic hydrogen, and lonsdaleite and cubic gauche nitrogen beside it. Hydrogen by pipe; spent shards return to the cryogenic plant, so loop them."]
 			icon: "gtceu:ramp_compression_pulser"
 			id: "13765E3D3D991767"
 			rewards: [{ id: "331AA54A80D9B591", type: "xp", xp: 150 }]
@@ -1006,7 +1028,7 @@
 		}
 		{
 			dependencies: ["50ED516A490F0DF7"]
-			description: ["A melt held in the air by a magnetic field never touches a crucible, so nothing dissolves into it. The &6Levitation Melter&r pours RHEA and the alloys that crucibles ruin. A UIV hull, the UEV casing and a levitation trap. The RHEA ingot, and the glass and tile lines that start from it. Alloy powders by ME; the beryllium fume is captured, so route the scrubber output."]
+			description: ["A melt held in the air by a magnetic field never touches a crucible, so nothing dissolves into it. The &6Levitation Melter&r pours RHEA and the alloys that crucibles ruin. A UEV machine hull, three UEV pistons, UEV circuits, halbach arrays, impregnated GdBCO and iridium crucibles; the UEV casing and a levitation trap. The RHEA ingot, and the glass and tile lines that start from it. Alloy powders by ME; the beryllium fume is captured, so route the scrubber output."]
 			icon: "gtceu:levitation_melter"
 			id: "386B4A8A0B37927E"
 			rewards: [{ id: "1424676B3192C7DE", type: "xp", xp: 150 }]
@@ -1032,8 +1054,19 @@
 			y: 23.5d
 		}
 		{
+			dependencies: ["702BC74A807FB921", "5252C7B0FBB2EE93"]
+			description: ["The assembly line joins 2 UIV casings, 3 metallic hydrogen cables, 6 RHEA plates, 3 FFKM seals (compressed from FFKM dust, and the research) with soldering alloy, lubricant and neutronium. It takes no circuit. Every UIV controller, hatch and the circuit assembler is built on it."]
+			icon: "gtceu:uiv_machine_hull"
+			id: "54AF39C42293C4E7"
+			rewards: [{ id: "1BDFEC70063CB73B", type: "xp", xp: 150 }]
+			tasks: [{ id: "31CC74FB28E318EB", item: "gtceu:uiv_machine_hull", type: "item" }]
+			title: "UIV Machine Hull"
+			x: 13.0d
+			y: 22.5d
+		}
+		{
 			dependencies: ["5E947FF2A2CF1FC2"]
-			description: ["The &6TFLN Fab&r bonds a thin crystal of lithium niobate onto a silicon nitride chip, in a cleanroom. A UIV hull, the UEV casing and the photonic casing. The LN-on-SiN wafer in the circuits chapter. Boules and nitride wafers by ME; the donor silicon goes back to refining."]
+			description: ["The &6TFLN Fab&r slices thin lithium niobate onto silicon nitride, and also makes silicon-28 wafers, poled niobate and the electro-optic comb, in a cleanroom. A UIV hull, the UEV casing and the photonic casing. The LN-on-Si3N4 wafer on the UIV circuits page. LNOI and nitride wafers by ME; the donor silicon goes back to refining."]
 			icon: "gtceu:tfln_fab"
 			id: "512711409DE69322"
 			rewards: [{ id: "73647ED04344133A", type: "xp", xp: 150 }]
@@ -1067,7 +1100,7 @@
 		}
 		{
 			dependencies: ["1BE7613A33089960"]
-			description: ["A terbium plasma gives light at a wavelength nobody built a scanner for before. The &6BEUV Scanner&r exposes wafers at 6.7 nanometres. A UIV hull, the UEV casing and the photonic casing. The exposed wafer and the driver ASIC. Terbium debris returns by pipe after the mirrors are cleaned; wafers by ME."]
+			description: ["A terbium plasma gives light at a wavelength nobody built a scanner for before. The &6BEUV Scanner&r exposes wafers at 6.7 nanometres. A UIV hull, the UEV casing and the photonic casing. The BEUV-exposed wafer and the driver ASIC. Terbium debris returns by pipe after the mirrors are cleaned; wafers by ME."]
 			icon: "gtceu:beuv_scanner"
 			id: "3BD8AB33F973A029"
 			rewards: [{ id: "33C99DE86066A9E9", type: "xp", xp: 150 }]
@@ -1084,7 +1117,7 @@
 		}
 		{
 			dependencies: ["3BD8AB33F973A029"]
-			description: ["The &6Spectral Hole Burner&r burns a comb of holes into a rare-earth crystal, so it remembers light for hours. A UIV hull and the cryostat casing, on superfluid helium. The six-hour memory. Crystals by ME and helium by pipe; it gives off nothing else."]
+			description: ["The &6Spectral Hole Burner&r burns a comb of holes into a europium-doped YSO crystal slab with superfluid helium, so it remembers light for hours. A UIV hull and the cryostat casing, on superfluid helium. The slab of the six-hour memory. Crystals by ME and helium by pipe; it gives off nothing else."]
 			icon: "gtceu:spectral_hole_burner"
 			id: "5EA79DAD9574D598"
 			rewards: [{ id: "7495E19AEDFFF02B", type: "xp", xp: 150 }]
@@ -1100,7 +1133,7 @@
 		}
 		{
 			dependencies: ["5EA79DAD9574D598"]
-			description: ["The &6STM Lithography Cell&r writes a pattern on silicon one atom at a time with a scanning tip, and fills it with phosphorus. A UIV hull, the UEV casing and the photonic casing around an ultra-high vacuum chamber. The patterned wafer and the P:Si die. Phosphine is contained, then scrubbed to phosphoric acid; run two cells, the tip is slow."]
+			description: ["The &6STM Lithography Cell&r peels hydrogen off silicon one atom at a time with a scanning tip, and a second step doses the holes with phosphine. A UIV hull, the UEV casing and the photonic casing around an ultra-high vacuum chamber. The patterned wafer; the P:Si die follows in molecular beam epitaxy. Phosphine is contained, then scrubbed to phosphoric acid; run two cells, the tip is slow."]
 			icon: "gtceu:stm_lithography_cell"
 			id: "7C69DFF0AE7530B7"
 			rewards: [{ id: "52F31FA5843D6624", type: "xp", xp: 150 }]
@@ -1117,7 +1150,7 @@
 		}
 		{
 			dependencies: ["7C69DFF0AE7530B7"]
-			description: ["Colder than the superfluid helium plant ever gets. The &6Millikelvin Cryostat Works&r wets a rare-earth stage with helium-3 and finishes the P:Si processor. A UIV hull, the cryostat casing and metallic hydrogen coil blocks for the magnet. The cryostat module and the P:Si processor. The helium mixture returns to the works; send modules on by ME."]
+			description: ["Colder than the superfluid helium plant ever gets. The &6Millikelvin Cryostat Works&r makes the mK cryostat module and finishes the P:Si processor. A UIV hull, the cryostat casing and metallic hydrogen coil blocks for the magnet. The cryostat module and the P:Si processor. The helium mixture returns to the works; send modules on by ME."]
 			icon: "gtceu:millikelvin_cryostat_works"
 			id: "5B6546A94A7A177E"
 			rewards: [{ id: "575ABBA6D471C1AF", type: "xp", xp: 180 }]
@@ -1162,7 +1195,7 @@
 		}
 		{
 			dependencies: ["57862F697D22D7F2"]
-			description: ["The &6Mk5 Fusion Ring&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches. A UIV hull, UIV components, UIV circuits, the Mk5 fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches. The three polarised burns, and the direct energy converter that turns plasma into power. Build the fuel plant before you light the ring; helium-3 and protons return to their lines."]
+			description: ["The &6Mk5 Fusion Reactor&r has an octagon of casing round an empty channel, lined with metallic hydrogen coils. It holds a very large buffer and takes sixteen hatches. Two UIV hulls, UIV components, UIV circuits, the UIV fusion casing, metallic hydrogen coil blocks and sixteen UIV energy hatches. The three polarised burns, and the direct energy converter that turns plasma into power. Build the fuel plant before you light the ring; helium-3 and protons return to their lines."]
 			icon: "gtceu:uiv_fusion_reactor"
 			id: "72D797E3DDE7ED0E"
 			rewards: [{ id: "1FC1422722F775DB", type: "xp", xp: 250 }]
@@ -1173,13 +1206,13 @@
 				{ id: "53473C5B47FD0440", item: "grindless:uiv_fusion_casing", type: "item" }
 				{ id: "7CDEE0EEBF355CAF", item: "grindless:metallic_hydrogen_coil_block", type: "item" }
 			]
-			title: "Mk5 Fusion Ring"
+			title: "Mk5 Fusion Reactor"
 			x: 10.5d
 			y: 25.5d
 		}
 		{
 			dependencies: ["50ED516A490F0DF7"]
-			description: ["A computer built in shells, in nine times Earth's sunlight, running logic that makes barely any heat. The &6Matrioshka Computer&r is where UIV research is written. A UIV hull, UIV components, UIV circuits and the UIV casing. Its chart and research rows run in Mercury orbit. Verified writes, the Kerr and equation of state charts, and the radiators that carry its heat. Logic tiles are among the longest builds here: stock them by ME and send the waste heat to the radiators."]
+			description: ["A computer built in shells, in nine times Earth's sunlight, running logic that makes barely any heat. The &6Matrioshka Computer&r is where UIV research is written. Two UIV hulls, UIV components, UIV circuits and the UIV casing. Its chart and research rows run in Mercury orbit. Verified writes, the Kerr and equation of state charts, and the radiators that carry its heat. Logic tiles are among the longest builds here: stock them by ME and send the waste heat to the radiators."]
 			icon: "gtceu:matrioshka_computer"
 			id: "7E2EF99503F9DB02"
 			rewards: [{ id: "79DC492E9F485905", type: "xp", xp: 250 }]
@@ -1278,7 +1311,7 @@
 		}
 		{
 			dependencies: ["3B397C1EFE90548C"]
-			description: ["Cool the drip neutrons into a superfluid and shut it in a cage. The &6Neutronium Cage&r makes the pellet, which is fiction: a spoonful of neutron matter held at ordinary pressure by a field. A UIV hull, the UIV casing, the neutron star site casing and a coil cage. The neutronium pellet, which the gate store asks for and the compression hall reads. Drip neutrons by pipe; keep pellets by ME, as the hall never uses them up."]
+			description: ["Cool the drip neutrons into a superfluid and shut it in a cage. The &6Neutronium Cage&r makes the pellet, which is fiction: a spoonful of neutron matter held at ordinary pressure by a field. A UIV hull, the UIV casing, the neutron star site casing and a coil cage. The neutronium pellet, which the stored proof asks for and the compression hall reads. Drip neutrons by pipe; keep pellets by ME, as the hall never uses them up."]
 			icon: "gtceu:neutronium_cage"
 			id: "7B6BAE4236338966"
 			rewards: [{ id: "5116545605605FDD", type: "xp", xp: 300 }]
@@ -1295,11 +1328,13 @@
 		}
 		{
 			dependencies: ["7B6BAE4236338966"]
-			description: ["It is not the neutronium of the other mods: it is a pellet of neutron matter. Keep one for the hall and one for the gate."]
+			description: ["It is not the neutronium of the other mods: it is a pellet of neutron matter. The journey asks for it once; keep one for the hall and one for the stored proof."]
 			icon: "grindless:neutronium_pellet"
 			id: "39FBA237010D5C97"
-			rewards: [{ id: "548ECF5E1DB1674F", type: "xp", xp: 120 }]
-			tasks: [{ id: "163201266116BC7F", item: "grindless:neutronium_pellet", type: "item" }]
+			rewards: [{ id: "548ECF5E1DB1674F", type: "xp", xp: 25 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "105417D1EEAAC26F", type: "checkmark" }]
 			title: "Neutronium Pellet"
 			x: 24.0d
 			y: -10.75d
@@ -1322,7 +1357,7 @@
 		}
 		{
 			dependencies: ["3B397C1EFE90548C"]
-			description: ["Decompress a bit of crust and the heavy elements are born, as in a kilonova. The &6R-Process Decompressor&r also hits uranium with the same neutrons, for einsteinium and fermium. A UIV hull, the UIV casing and the neutron star site casing, with a neutron guide. The element 119 recoil, census II and the sealed kilonova capsule. Sort the output by element; ash goes to the platinum plant."]
+			description: ["Decompress a bit of crust and the heavy elements are born, as in a kilonova. The &6R-Process Decompressor&r also hits uranium with the same neutrons, for einsteinium and fermium. A UIV hull, the UIV casing and the neutron star site casing, with a neutron guide. The Element 119 Recoil Record, Census II and the sealed kilonova capsule. Sort the output by element; ash goes to the platinum plant."]
 			icon: "gtceu:r_process_decompressor"
 			id: "1993F92869A4278F"
 			rewards: [{ id: "752A42505F5B10F8", type: "xp", xp: 300 }]
@@ -1459,11 +1494,13 @@
 		}
 		{
 			dependencies: ["773D4D794D1EA7A1"]
-			description: ["The half that comes back. It goes to the bay for a refit, and one of them goes into the gate store."]
+			description: ["The half that comes back. It goes to the bay for a refit, and one goes into the stored proof; the journey asks for it once."]
 			icon: "grindless:recovered_half_sled"
 			id: "1D71F368BD952EFF"
-			rewards: [{ id: "5044D445F057E354", type: "xp", xp: 120 }]
-			tasks: [{ id: "525C31CBD4261503", item: "grindless:recovered_half_sled", type: "item" }]
+			rewards: [{ id: "5044D445F057E354", type: "xp", xp: 25 }]
+			shape: "circle"
+			size: 0.75d
+			tasks: [{ id: "15A7CE069BD905E3", type: "checkmark" }]
 			title: "Recovered Half-Sled"
 			x: 36.5d
 			y: -8.5d

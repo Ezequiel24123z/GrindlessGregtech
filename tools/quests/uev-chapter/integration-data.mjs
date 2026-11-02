@@ -54,13 +54,13 @@ export const QUESTS = [
     rewards: [xp(150)],
   },
   {
-    key: 'I_OM_DEC', kind: 'process', title: 'Written Final', icon: 'gtceu:direct_energy_converter',
+    key: 'I_OM_DEC', kind: 'process', title: 'Plasma to Current', icon: 'gtceu:direct_energy_converter',
     deps: ['PB'], x: 8, y: 13.25,
     teach: {
-      for: 'The &6Direct Energy Converter&r takes three Mk4 plasmas and the &6Naquadria Magnet Works&r makes the UEV cell. Both are older machines with a new row.',
-      needs: 'The Mk4 plasma buckets and the magnet works from ZPM. The converter\'s output is written final, so no generator array doubles it.',
-      unlocks: 'The Mk4 figures on the Power tab and the cell below.',
-      automate: 'Plasma by pipe from the ring; leave the converter\'s hatches empty of anything else.',
+      for: 'The &6Direct Energy Converter&r turns Mk4 plasma straight into current, leaving helium-4 ash, and the &6Naquadria Magnet Works&r builds the UEV cell. Both are older machines with a new row.',
+      needs: 'The Mk4 plasma buckets, the converter and the magnet works from ZPM.',
+      unlocks: 'Power from the Mk4 ring, and the UEV cell below.',
+      automate: 'Plasma by pipe from the ring; send the helium ash back to the Cryogenic Plant.',
     },
     desc: [],
     tasks: [it('gtceu:direct_energy_converter'), it('gtceu:naquadria_magnet_works')],
@@ -73,7 +73,7 @@ export const QUESTS = [
     deps: ['H_POWER'], x: 3, y: -2.75,
     teach: {
       for: 'The &6Ultimate Parallel Control Hatch&r lets a mega machine run up to 4,096 copies of a recipe at once. Energy is still the limit: every copy pays its own EU/t.',
-      needs: 'A machine with a parallel slot, and the power for every copy. The first copies cost the same as the last.',
+      needs: 'A UEV hull, a UEV sensor, two UEV emitters, four UEV circuits of any kind, two superhydride double cables and a neutronium gear, on an assembly line researched with the UEV emitter.',
       unlocks: 'The Stellar Forge at full width, and every mega machine of the era.',
       automate: 'Feed the machine a bus wide enough for the copies it will run.',
     },
@@ -85,8 +85,8 @@ export const QUESTS = [
     key: 'CELL', kind: 'machine', title: 'The UEV Cell', icon: 'grindless:uev_smes_cell',
     deps: ['H_POWER'], x: 3, y: -0.75,
     teach: {
-      for: 'The &6UEV SMES Cell&r holds ninety-six UV naquadria batteries, about 250 billion EU. The quantum repeater keeps the network in step.',
-      needs: 'The naquadria magnet works, and the quantum repeater node from the photonic lane.',
+      for: 'The &6UEV SMES Cell&r stores the power of the UEV wireless network.',
+      needs: 'Four UHV SMES cells, sixteen lanthanum superhydride wires, eight plates and liquid helium, made in the Naquadria Magnet Works.',
       unlocks: 'The UEV wireless tier.',
       automate: 'Nothing to feed. Size the towers for your busiest hour.',
     },
@@ -99,7 +99,7 @@ export const QUESTS = [
     deps: ['CELL'], x: 5, y: -0.75,
     teach: {
       for: 'Move your towers onto &6UEV SMES Cells&r and the wireless network carries UEV to every station, out to Alpha Centauri and beyond.',
-      needs: 'One formed tower holding a UEV cell: the network runs at its strongest cell, so until then it stays at UHV.',
+      needs: 'A UEV Energy Hatch, a UEV sensor, two UEV circuits of any kind and a quantum repeater node for each wireless hatch, and one formed tower holding a UEV cell: the network runs at its strongest cell, so until then it stays at UHV. The repeater node also goes into the wireless covers.',
       unlocks: 'The wireless hatches at UEV, and the gate\'s load at Sirius B.',
       automate: 'Add cells when the network dips at your busiest hour.',
     },
@@ -108,13 +108,13 @@ export const QUESTS = [
     rewards: [xp(200)],
   },
   {
-    key: 'I_GATELOAD', kind: 'milestone', title: 'Sixteen Amps of UEV', icon: 'gtceu:uev_wireless_energy_hatch',
+    key: 'I_GATELOAD', kind: 'milestone', title: 'Power for the Gate', icon: 'gtceu:uev_wireless_energy_hatch',
     deps: ['NETUEV'], x: 7, y: -0.75,
     desc: [
-      'The gate to UIV needs 134,217,728 EU/t for sixty seconds, and the bank loses five per cent on the way in. Four Mk4 rings on the polarised fuel and two swarm stations at Alpha Centauri close the sum; the Power tab shows each source.',
+      'The gate to UIV draws far more than one ring makes, and the bank loses a little on the way in. Add Mk4 rings and the swarm stations at Alpha Centauri until the bank holds through a whole hold.',
     ],
     tasks: [ck()],
-    rewards: [xp(100)],
+    rewards: [xp(25)],
   },
 
   // ------------------------------------------------------------------ the drives
@@ -122,13 +122,13 @@ export const QUESTS = [
     key: 'I_DFD', kind: 'process', title: 'Drives for the Stars', icon: 'gtceu:thruster_works',
     deps: ['H_POWER'], x: 3, y: 1.25,
     teach: {
-      for: 'The &6Thruster Works&r makes two drives now, the Mk1 and the Mk2. Neither runs a real fusion: they hold a plasma in fiction only, as blocks.',
-      needs: 'The UEV emitter and motor for the antenna, and single-crystal turbine wheels for the Mk2.',
+      for: 'The &6Thruster Works&r makes the Direct Fusion Drive Mk1 and Mk2, the motors of level 9 and level 10 rockets.',
+      needs: 'Mk1: Wf/W tiles, SiC/SiC plates, HfTaCN ingots, D-He3 fuel mix, a UEV emitter and a circuit 6 program. Mk2: a Mk1 motor, a Brayton turbine wheel, eight bonded magnets, a UEV motor and a circuit 7 program.',
       unlocks: 'Level 9 and level 10 rockets.',
-      automate: 'Motors go to ME; the Mk2 wheels come from the single-crystal foundry.',
+      automate: 'Motors go to ME; the Mk2 wheels come from the Single-Crystal Foundry.',
     },
     desc: [],
-    tasks: [it('gtceu:thruster_works'), it('grindless:dfd_mk1_motor'), it('grindless:dfd_mk2_motor')],
+    tasks: [it('gtceu:thruster_works')],
     rewards: [xp(150)],
   },
 
@@ -138,12 +138,12 @@ export const QUESTS = [
     deps: ['H_ALPHA_NET'], x: 7, y: -63.25,
     teach: {
       for: 'A &6Warp Gate&r built again in Alpha Centauri orbit seeds an AE2 bridge home, so the collectors\' gas and the dust lab\'s records reach ME without a trip.',
-      needs: 'A second warp gate at station nine, with the first run as its catalyst.',
+      needs: 'A second Warp Gate at station nine, built the way the first one was.',
       unlocks: 'The star\'s output in your network, and the seed Barnard b is fed from.',
       automate: 'Never carry a stack: let ME move gas home and goods back.',
     },
     desc: [],
-    tasks: [it('gtceu:warp_gate'), ck()],
+    tasks: [ck()],
     rewards: [xp(100)],
   },
   {
@@ -161,7 +161,7 @@ export const QUESTS = [
     desc: [
       'The tenth station gets its own relay from the Alpha Centauri one. Pellets and samples come home sealed, and the gate\'s hold is ordered from ME.',
     ],
-    tasks: [it('gtceu:warp_gate')],
+    tasks: [ck()],
     rewards: [xp(100)],
   },
 
@@ -170,7 +170,7 @@ export const QUESTS = [
     key: 'I_OM_CHEM', kind: 'process', title: 'Separations and Syngas', icon: 'gtceu:extraction_cascade',
     deps: ['H_ROWS'], x: 3.5, y: 4.25,
     teach: {
-      for: 'The &6Extraction Cascade&r, &6Cryogenic Plant&r, &6Platinum Plant&r, &6Fluorspar Kiln&r, &6Syngas Plant&r and &6Methane Pyrolyser&r each take a new mode: hafnium and tantalum thiocyanate, interstellar gas distillation, barnard residue, hydrogen fluoride, CO-rich syngas and carbon nanotubes.',
+      for: 'The &6Rare Earth Extraction Cascade&r, &6Cryogenic Plant&r, &6Platinum Plant&r, &6Fluorspar Kiln&r, &6Syngas and Shift Plant&r and &6Methane Pyrolyser&r each take a new mode: hafnium and tantalum thiocyanate, interstellar gas distillation, barnard residue, hydrogen fluoride, CO-rich syngas and carbon nanotubes.',
       needs: 'The controllers you already own, and the gas and residue from the stars.',
       unlocks: 'Pure refractory metals, xenon and helium-3, ruthenium and iridium, the Mond route on Barnard b.',
       automate: 'Each plant hands its product on by pipe. Return the helium ash and the calcium fluoride.',
@@ -240,7 +240,7 @@ export const QUESTS = [
       automate: 'Segments and probes ride the relay; keep the bank sized for the gate\'s hold.',
     },
     desc: [],
-    tasks: [it('gtceu:swarm_control_station'), it('gtceu:solar_probe_bay'), it('gtceu:warp_gate')],
+    tasks: [it('gtceu:swarm_control_station'), it('gtceu:solar_probe_bay')],
     rewards: [xp(150)],
   },
   {
