@@ -94,7 +94,7 @@ test('every row is Vela-locked (OpV-A0\'s, MAX-A0\'s and XP-A1\'s rows SGR-locke
     assert.ok(JSON.stringify(find(`grindless:${r.type}/${r.name}`).j.recipeConditions || []).includes(site(r)), `${r.name} carries the dimension lock`);
   }
   const c = rec('neutronium_caging', 'cage_part_pressing');
-  assert.deepEqual([c.circuit, c.site, c.eut, c.duration], [0, undefined, 31457280, 2400]);
+  assert.deepEqual([c.circuit, c.site, c.eut, c.duration], [0, '', 31457280, 2400]);
   assert.deepEqual(ids(c.itemsIn), [['grindless:neutronium_pellet', 1], ['grindless:mh_winding', 1]]);
   assert.deepEqual(ids(c.itemsOut), [['grindless:cage_part', 1]]);
   assert.ok(find('grindless:neutronium_caging/cage_part_pressing'));
