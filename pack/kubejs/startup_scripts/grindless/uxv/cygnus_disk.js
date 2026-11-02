@@ -217,9 +217,9 @@
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type)),
-          Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.cygnus_x1_orbit')),
+          ['disk_skimming', 'blandford_znajek'].indexOf(m.type) >= 0 ? Text.translate('grindless.tooltip.site', Text.translate('dimension.grindless.cygnus_x1_orbit')) : null,
           m.generator ? Text.translate('grindless.machine.' + m.name + '.tooltip.1') : Text.translate('gtceu.multiblock.parallelizable.tooltip')
-        ])
+        ].filter(Boolean))
         .workableCasingModel(m.texture, 'grindless:block/multiblock/' + m.name)
     })
   })

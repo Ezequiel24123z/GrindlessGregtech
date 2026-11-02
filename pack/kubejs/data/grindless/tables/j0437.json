@@ -29,7 +29,7 @@
           "itemsOut": [ { "id": "grindless:laser_cooled_ps", "count": 1 } ], "fluidsOut": []
         },
         {
-          "name": "gamma_laser_cavity", "circuit": 3, "eut": 31457280, "duration": 1600, "site": true,
+          "name": "gamma_laser_cavity", "circuit": 3, "eut": 31457280, "duration": 1600,
           "_why": "UIV-B3 machine 19 c3 (lines 34 and 38): the Ps BEC between a pair of gamma Bragg mirrors is a gamma-ray laser cavity.",
           "itemsIn": [ { "id": "grindless:ps_bec", "count": 1 }, { "id": "grindless:gamma_bragg_mirror", "count": 2 } ], "kept": [], "fluidsIn": [],
           "itemsOut": [ { "id": "grindless:gamma_laser_cavity", "count": 1 } ], "fluidsOut": []

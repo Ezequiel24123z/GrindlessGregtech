@@ -20,7 +20,7 @@
         ['hold_cas_a', 'Jump to Cassiopeia A: a launched relay seed and a Whipple shield']
     ]
     var INFO = [
-        ['vela', 'Spent at the warp gate (circuit 8) with a launched relay seed to jump from Cygnus X-1 to the Vela Pulsar. A relay platform forms there. The cartridge is formed from filtered disk plasma at Cygnus X-1.'],
+        ['vela', 'Spent at the warp gate (circuit 8) with a launched relay seed to jump from Cygnus X-1 to the Vela Pulsar. A relay platform forms there. The cartridge is formed from filtered disk plasma.'],
         ['cas_a', 'Spent at the warp gate (circuit 9) with a launched relay seed to jump from Cygnus X-1 to Cassiopeia A, where the expanding shell throws dust and fragments at the ring. A relay platform forms there. Assembled at home on a Whipple shield casing with a RHEA plate and a CNT bumper weave.']
     ]
     var ROWS = [
