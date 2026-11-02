@@ -42,7 +42,7 @@ const LAYOUT = {
   UC_MAIN: [7, -9.5, null],
   UC_ASM: [9.5, -9.5, null],
   UC_NBOULE: [4, -11, ['H_UV_CIRCUITS']],
-  UC_HASOC: [8, -11.5, null],
+  UC_HASOC: [11.5, -11, null],
   UC_XMASK: [4, -7, ['H_UV_CIRCUITS']],
   UC_PWAF: [6.5, -7.5, null],
   UC_PCHIP: [8, -8, null],

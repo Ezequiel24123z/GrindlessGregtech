@@ -18,7 +18,7 @@ export const CHAPTER = {
   icon: 'grindless:pluto_kuiper_chart',
   autofocus: 'START',
   title: 'UV: Pluto and the Edge',
-  subtitle: ['Neptune, Pluto, the heliopause and a sail to the next star. The plants and circuits that get you there are in this chapter too.'],
+  subtitle: ['Neptune, Pluto, the heliopause and a sail to the next star. The plants and circuits that get you there are here too.'],
 };
 
 export const LINKS = [];

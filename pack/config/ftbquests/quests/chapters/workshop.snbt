@@ -61,7 +61,7 @@
 			tasks: [{ id: "6836C6359062B7B3", type: "checkmark" }]
 			title: "Carry On"
 			x: -10.0d
-			y: -4.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["7A5D031021239B63"]
@@ -90,8 +90,8 @@
 			rewards: [{ id: "4B46EE2BDF08B7EB", type: "xp", xp: 10 }]
 			tasks: [{ id: "4DFF1C89F8BEEEC4", type: "checkmark" }]
 			title: "FTB Ultimine"
-			x: -7.5d
-			y: 3.0d
+			x: -10.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["7A5D031021239B63"]
@@ -104,7 +104,7 @@
 			rewards: [{ id: "5A7E1C3D9B02F846", type: "xp", xp: 10 }]
 			tasks: [{ id: "4C4F2A6E1D39B057", item: "toolbelt:belt", type: "item" }]
 			title: "Tool Belt"
-			x: -10.0d
+			x: -8.75d
 			y: 3.0d
 		}
 		{

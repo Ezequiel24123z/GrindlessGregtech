@@ -53,7 +53,7 @@ export const QUESTS = [
   gear('FUEL', 'naquadah_fuel_works', 'Fuel Works', ['NAQD'], 4, 0, {
     for: 'The &6Naquadah Fuel Works&r turns naquadria into the fuel that the integration plants burn.',
     needs: 'The same containment casing as the refinery, plus its controller.',
-    unlocks: 'Fuel for the large reactors later in this chapter.',
+    unlocks: 'Fuel for the large reactors later on.',
     automate: 'A fuel line off the refinery by pipe; buffer it in a tank so the reactors never starve.',
   }, [it('grindless:naquadria_containment_casing')]),
 
@@ -83,7 +83,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ wire and plasma
   gear('WIRE', 'naquadria_magnet_works', 'Magnet Works', ['START'], 2, 3, {
     for: 'The &6Naquadria Magnet Works&r winds the superconducting wire and insert the fusion hall and the large coils need.',
-    needs: 'Its controller, naquadria and the cryostat casing from the circuits earlier in this chapter.',
+    needs: 'Its controller, naquadria and the cryostat casing from the circuits further up.',
     unlocks: 'Uranium rhodium dinaquadide wire, and the insert for the next hall.',
     automate: 'Slow and cold: keep the cryostat topped up and let it run beside the refinery.',
   }, [it('gtceu:uranium_rhodium_dinaquadide_single_wire')]),
@@ -181,7 +181,7 @@ export const QUESTS = [
   gear('HE3', 'isotope_column', 'Helium-3', ['SCOOP'], 4, 10.5, {
     for: 'The &6Isotope Column&r separates helium-3 from the gas the siphon brings up.',
     needs: 'Its controller and a stream of Saturn gas.',
-    unlocks: 'Helium-3 for the aneutronic route later in this chapter and the cold of the cryostat.',
+    unlocks: 'Helium-3 for the aneutronic route later on and the cold of the cryostat.',
     automate: 'Run the column continuously; bucket or pipe the helium-3 off.',
   }, [it('gtceu:helium_3_bucket')]),
   gear('TITAN', 'entry_probe_bay', 'Titan', ['HE3'], 6, 10.5, {

@@ -113,7 +113,7 @@ export const QUESTS = [
     deps: ['UC_XMASK'], x: 4, y: 1.5,
     teach: {
       for: 'A wafer coated in resist, exposed to the synchrotron through the mask and developed is a &6Patterned Wafer&r.',
-      needs: 'The Synchrotron from earlier in this chapter, a mask, and PMMA-coated wafers.',
+      needs: 'The Synchrotron from further up, a mask, and PMMA-coated wafers.',
       unlocks: 'The photonic chip.',
       automate: 'Coating and developing run in plain machines by ME; only the exposure waits for the beam.',
     },
@@ -141,7 +141,7 @@ export const QUESTS = [
     deps: ['START'], x: 2, y: 3,
     teach: {
       for: 'The &6HPGe Crystal&r is germanium refined past thirteen nines. It is the detector eye that probes and the interferometer carry.',
-      needs: 'Germanium tetrachloride from the photonics line and the zone refining tower from earlier in this chapter.',
+      needs: 'Germanium tetrachloride from the photonics line and the zone refining tower from further up.',
       unlocks: 'The SNSPD array beside it and the detector parts of the Starshot.',
       automate: 'The tower is slow; keep its feed topped up by ME and stock the crystals.',
     },
@@ -169,7 +169,7 @@ export const QUESTS = [
     deps: ['START', 'UC_PCHIP', 'SNSPD'], x: 8, y: 3,
     teach: {
       for: 'A photonic chip, a diamond qubit, an americium source and a neutronium wafer become one &6Starchip&r. Mounted on a sail it is a probe about as heavy as a paperclip.',
-      needs: 'The Starchip Fab from earlier in this chapter, and every part on the light row above.',
+      needs: 'The Starchip Fab from further up, and every part on the light row above.',
       unlocks: 'The sailcraft, and with it the launch and the long coast to Proxima.',
       automate: 'The fab dices in batches and wastes only kerf. Send the chips on by ME to the sail line.',
     },

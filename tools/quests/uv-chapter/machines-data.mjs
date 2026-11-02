@@ -162,7 +162,7 @@ export const QUESTS = [
   gear('HPGE', 'zone_refining_tower', 'Zone Refining Tower', ['M_L_DET'], 2, 9, {
     for: 'The &6Zone Refining Tower&r sweeps germanium\'s impurities to the ends of a bar, over and over, until it is purer than almost anything you make.',
     needs: 'Its controller and clean room casing; eight RF coils ring the tower.',
-    unlocks: 'The HPGe crystal, further along this chapter.',
+    unlocks: 'The HPGe crystal, further along.',
     automate: 'Germanium bars in and crystals out by ME; the tower runs for a long time per bar.',
   }, [it(CLEAN)]),
   gear('PROX', 'optical_ground_station', 'Optical Ground Station', ['HPGE'], 4, 9, {
@@ -229,7 +229,7 @@ export const QUESTS = [
   gear('NEURO', 'neural_culture_vat', 'Neural Culture Vat', ['ARK'], 4, 15, {
     for: 'The &6Neural Culture Vat&r grows stem cells and neuro processing units in a single run.',
     needs: 'Its controller, plascrete, filter casing hoods and robust casing for the bioprinter.',
-    unlocks: 'The wetware computer, further along this chapter.',
+    unlocks: 'The wetware computer, further along.',
     automate: 'Media and stem cells by ME; the vat ships the units out.',
   }, [it('gtceu:plascrete')]),
 
@@ -246,7 +246,7 @@ export const QUESTS = [
   gear('SCFAB', 'starchip_fab', 'Starchip Fab', ['P_SAIL'], 6, 16.5, {
     for: 'The &6Starchip Fab&r bonds and dices a photonic chip, a qubit and a source into a probe that weighs a gram.',
     needs: 'Its controller, clean room casing and a filter hood; kerf is voidable.',
-    unlocks: 'The starchip, further along this chapter.',
+    unlocks: 'The starchip, further along.',
     automate: 'Parts by ME; dicing waste goes to a void.',
   }, [it(CLEAN)]),
   gear('LAUNCH', 'laser_sail_launcher', 'Laser Sail Launcher', ['SCFAB'], 8, 16.5, {

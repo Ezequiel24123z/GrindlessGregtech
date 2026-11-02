@@ -32,7 +32,7 @@ export const QUESTS = [
     deps: ['X:1753F1FE9C989F6C'], x: 0, y: 0,
     desc: [
       'The &6Saturn Transfer Chart&r from the Jovian flyby points at rings, a hazy moon and two ice giants. Nothing out there is walkable, so the trip starts in orbit and stays there.',
-      'The machines, circuits and power for ZPM sit in the later quests of this chapter. This branch keeps the trip.',
+      'The machines, circuits and power for ZPM sit in the later quests. This branch keeps the trip.',
     ],
     tasks: [ck()],
     rewards: [xp(50)],

@@ -259,7 +259,7 @@ export const QUESTS = [
     teach: {
       for: 'In orbit, neurons grow in three dimensions without a scaffold. The &6Organoid Lab&r turns stem cells, growth medium and the ring\'s neurotrophic factor into a neural organoid.',
       needs: 'Stem cells from the biofoundry, and factor from the ring.',
-      unlocks: 'The neuro processing unit, further along this chapter. Nothing else makes one before ZPM.',
+      unlocks: 'The neuro processing unit, further along. Nothing else makes one before ZPM.',
       automate: 'Feed the lab by ME and let the organoids go straight to the assembler.',
     },
     desc: [],

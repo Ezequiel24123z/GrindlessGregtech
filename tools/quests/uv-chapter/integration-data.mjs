@@ -110,7 +110,7 @@ export const QUESTS = [
     deps: ['START'], x: 2, y: 2,
     teach: {
       for: 'Thorium assemblies feed the accelerator-driven reactor: about six an hour, four and a half on nitride. IV\'s stored thorium and its live output decide how many reactors run.',
-      needs: 'The reactor from earlier in this chapter, and assemblies from the fuel fabrication plant.',
+      needs: 'The reactor from further up, and assemblies from the fuel fabrication plant.',
       unlocks: 'The biggest steady power of the era, with fission products as the only waste.',
       automate: 'Spent assemblies go to the pyroprocessing cell and come back as fuel: close the loop before you scale.',
     },
@@ -136,7 +136,7 @@ export const QUESTS = [
     deps: ['START'], x: 6, y: 2,
     teach: {
       for: 'A &6Muon Fusion Cell&r burns liquid deuterium and tritium, and its lithium blanket breeds most of the tritium back. The rest is IV\'s tritium removal facility\'s work.',
-      needs: 'The cell from earlier in this chapter, deuterium and tritium by pipe, and a linac behind it.',
+      needs: 'The cell from further up, deuterium and tritium by pipe, and a linac behind it.',
       unlocks: 'Power with no fission and almost no waste. The cell is an extrapolation: real muons are lost too soon.',
       automate: 'Watch the make-up tritium: when the facility lags, the cell starves.',
     },
