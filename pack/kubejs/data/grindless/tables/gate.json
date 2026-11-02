@@ -65,7 +65,7 @@
             { "id": "grindless:superheavy_census_ii", "count": 1 },
             { "id": "grindless:ns_eos_chart", "count": 1 },
             { "id": "grindless:recovered_half_sled", "count": 1 },
-            { "id": "gtnn:optical_mainframe", "count": 4 }
+            { "id": "#gtceu:circuits/uiv", "count": 4 }
           ],
           "itemsOut": []
         },
@@ -101,7 +101,7 @@
             { "id": "grindless:island_chart", "count": 1 },
             { "id": "grindless:arm_chart", "count": 1 },
             { "id": "grindless:pasta_core_sample", "count": 1 },
-            { "id": "gtnn:spintronic_mainframe", "count": 4 }
+            { "id": "#gtceu:circuits/uxv", "count": 4 }
           ],
           "itemsOut": [{ "id": "grindless:bulge_chart", "count": 1 }]
         },
@@ -135,7 +135,7 @@
             { "id": "grindless:tetron_array", "count": 1 },
             { "id": "grindless:superheavy_census_iv", "count": 1 },
             { "id": "grindless:bulge_chart", "count": 1 },
-            { "id": "gtnn:cosmic_mainframe", "count": 4 }
+            { "id": "#gtceu:circuits/opv", "count": 4 }
           ],
           "itemsOut": [{ "id": "grindless:sgr_a_chart", "count": 1 }]
         },

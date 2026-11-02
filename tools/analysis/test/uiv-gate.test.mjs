@@ -37,7 +37,7 @@ test('c7 keeps the four stacks and fits the gate (6 item slots with the circuit)
     { id: 'grindless:superheavy_census_ii', count: 1 },
     { id: 'grindless:ns_eos_chart', count: 1 },
     { id: 'grindless:recovered_half_sled', count: 1 },
-    { id: 'gtnn:optical_mainframe', count: 4 }
+    { id: '#gtceu:circuits/uiv', count: 4 }
   ]);
   assert.equal(hold.itemsIn.length + hold.kept.length + 1, 6);
 });

@@ -106,9 +106,10 @@
     return out
   }
 
+  // a '#tag' (any circuit of a tier: AGENTS.md principle 11) is not an item id; GTM resolves it
   function missingIds(rec) {
     var missing = []
-    rec.itemsIn.concat(rec.kept, rec.itemsOut).forEach(function (x) { if (!Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
+    rec.itemsIn.concat(rec.kept, rec.itemsOut).forEach(function (x) { if (x.id.charAt(0) !== '#' && !Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
     return missing
   }
 

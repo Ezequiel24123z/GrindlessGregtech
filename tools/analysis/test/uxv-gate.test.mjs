@@ -50,7 +50,7 @@ test('c10 keeps four charts/samples and four mainframes; fits 7 slots; circuits 
     { id: 'grindless:island_chart', count: 1 },
     { id: 'grindless:arm_chart', count: 1 },
     { id: 'grindless:pasta_core_sample', count: 1 },
-    { id: 'gtnn:spintronic_mainframe', count: 4 }
+    { id: '#gtceu:circuits/uxv', count: 4 }
   ]);
   assert.equal(c10.itemsIn.length + c10.kept.length + 1, 7);
   const circuits = gate.map((r) => r.circuit).filter((c) => c > 0);
