@@ -2506,7 +2506,8 @@
         "grindless:tarantula_orbit",
         "grindless:magellanic_stream",
         "grindless:m31_nucleus_orbit",
-        "grindless:local_group_filament"
+        "grindless:local_group_filament",
+        "gcyr:black_hole_orbit"
       ],
       "exceptRecipes": [
         "grindless:warp_gate/hold*"
