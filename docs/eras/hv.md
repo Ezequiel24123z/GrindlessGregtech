@@ -190,6 +190,8 @@ The first rocket stops being an assembler recipe and becomes a project that cros
 
 - **Cleaning maintenance hatch at HV** (2026-10-25, a GregTech Leisure idea). GTM's `gtceu:cleaning_maintenance_hatch` moves from its UV recipe to an HV assembler recipe: auto maintenance hatch + 4 filter casings + 2 HV motors + 2 stainless steel rotors + 2 HV circuits. It gives a cleanroom to the multiblocks that take a maintenance part, which are GTM's own; ours don't take one.
 
+- **NanoMuscle suit flight** (NANO-1, `integration/suit_flight.js`). The NanoMuscle chestplate (8 carbon fibre plates + an energy crystal, 6.4M EU) is an HV item. A charged chestplate gives creative flight for 175 EU/t while flying (about 30 minutes per full charge, nothing on the ground, an action-bar warning at 10%). Creative and spectator players and flight from other sources are never touched. The advanced chestplate (IV circuits, arrives at the end of EV) has the same flight, and its jetpack is switched off while creative flight is in use. Quest `HV_NANOMUSCLE_SUIT`.
+
 ## New crossings (complexity audit)
 
 - **Sulfide roaster, H₂S burner:** 1,000 mB of hydrogen sulfide from the refinery + the air and water of the sulfur burner → 1,000 mB of acid, steam and 500 mB of extra hydrogen, at 30 EU/t and 60 ticks (`grindless:sulfide_roasting/h2s`). It needs 3 input hatches and 3 output hatches, the roaster's maximum.
