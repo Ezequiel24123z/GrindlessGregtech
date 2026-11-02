@@ -81,7 +81,8 @@ export function layoutOverflows(recipes, ioOf) {
     const j = r.json || {};
     const n = [(j.inputs && j.inputs.item || []).length, (j.outputs && j.outputs.item || []).length, (j.inputs && j.inputs.fluid || []).length, (j.outputs && j.outputs.fluid || []).length];
     const names = ['item inputs', 'item outputs', 'fluid inputs', 'fluid outputs'];
-    const why = n.map((v, k) => (v > io[k] ? `${v} ${names[k]} > layout ${io[k]}` : '')).filter(Boolean);
+    // GTRecipeSchema#input/output warn only when the side already has an entry and one more exceeds the max, so a lone entry never warns
+    const why = n.map((v, k) => (v > io[k] && v >= 2 ? `${v} ${names[k]} > layout ${io[k]}` : '')).filter(Boolean);
     if (why.length) out[r.id] = `${r.type}: ${why.join('; ')}`;
   }
   return out;

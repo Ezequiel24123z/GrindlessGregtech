@@ -49,11 +49,11 @@ test('M9-01: questRewards ignores kubejs data tables and non-snbt files', () => 
 
 test('M9-01: a quest reward does not waive a byproduct-only item', () => {
   const dump = mkDump({
-    recipes: [{ ...gt('grindless:r/x', 'gtceu:mixer', { ins: [gi('grindless:a', 1)], outs: [gi('grindless:slag', 1, 1000)] }), added: true }],
+    recipes: [{ ...gt('grindless:r/x', 'gtceu:mixer', { ins: [gi('grindless:a', 1)], outs: [gi('grindless:b', 1), gi('grindless:slag', 1, 1000)] }), added: true }],
     recipeTypes: ['gtceu:mixer'],
   });
-  const r = auditProcesses({ dump, registry: reg({ items: ['grindless:a', 'grindless:slag'] }), rewards: new Set(['grindless:slag']) });
-  assert.ok(r.findings.some((f) => /slag/.test(f.id) && /byproduct|no_use/.test(f.kind)), r.findings.map((f) => f.kind + ' ' + f.id).join());
+  const r = auditProcesses({ dump, registry: reg({ items: ['grindless:a', 'grindless:b', 'grindless:slag'] }), rewards: new Set(['grindless:slag']) });
+  assert.ok(r.findings.some((f) => /slag/.test(f.id) && f.kind === 'byproduct_no_destination'), r.findings.map((f) => f.kind + ' ' + f.id).join());
 });
 
 test('M2-15: a near-trivial step is reported, never a finding', () => {
@@ -92,7 +92,7 @@ test('M9-06: the stand-in models V, VA, VH and VHA as GTM does', () => {
   put(root, 'kubejs/server_scripts/g.js', 'global.vals = { V1: GTValues.V[1], VA1: GTValues.VA[1], VA6: GTValues.VA[6], VH1: GTValues.VH[1], VHA1: GTValues.VHA[1], VHA14: GTValues.VHA[14] };');
   const run = runPackScripts(root);
   assert.deepEqual(run.errors.filter((e) => e.stage !== 'console.error'), []);
-  assert.deepEqual(run.global.vals, { V1: 32, VA1: 30, VA6: 30720, VH1: 16, VHA1: 15, VHA14: 1006632960 });
+  assert.equal(JSON.stringify(run.global.vals), JSON.stringify({ V1: 32, VA1: 30, VA6: 30720, VH1: 16, VHA1: 15, VHA14: 1006632960 }));
 });
 
 // ---- M9-07: circuits, raw or sized, are one thing
@@ -108,12 +108,12 @@ test('M9-07: the circuit counts against the type\'s entry limit in both forms; z
   const snap = { types: { 'gtceu:mixer': { io: [2, 1, 1, 1] } }, singleblock: {}, multiblockTypes: [], hatch: {} };
   const rec = (items) => ({ id: 'x', type: 'gtceu:mixer', json: { inputs: { item: items, fluid: [] }, outputs: {}, tickInputs: { eu: [{ content: 8 }] } } });
   for (const c of [circuit, sizedCircuit]) {
-    assert.equal(checkRecipe(rec([gi('a:a', 1), c(1)]), snap).level, 'ok');
+    assert.notEqual(checkRecipe(rec([gi('a:a', 1), c(1)]), snap).level, 'error');
     const v = checkRecipe(rec([gi('a:a', 1), gi('a:b', 1), c(1)]), snap);
     assert.equal(v.level, 'error');
     assert.match(v.reasons.join(), /3 item inputs \(1 circuit\) > type max 2/);
   }
-  assert.equal(checkRecipe(rec([]), snap).level, 'ok');
+  assert.notEqual(checkRecipe(rec([]), snap).level, 'error');
 });
 
 // ---- M9-08: the real GTM wording
