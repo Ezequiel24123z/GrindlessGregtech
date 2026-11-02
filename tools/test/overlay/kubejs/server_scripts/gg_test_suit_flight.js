@@ -86,6 +86,8 @@
   function answeredOk() { return answer().indexOf('ok|') === 0 }
   function flew(p) { return answer() !== '' && flying(p) }
   function landed(p) { return answer() !== '' && !flying(p) }
+  // The client applies the server's abilities packet a few ticks later, more when the server is catching up after a stall.
+  function clientGrounded() { return cval('cFlying') === 'false' && cval('cMayfly') === 'false' }
 
   // ---- sustained flight: sampled every tick while a watch is open
   function watch(p) { st.watch = { last: charge(p), t: 0, at: 0, drops: [], gaps: [], serverOff: 0, clientOff: 0, jetOn: 0 } }
@@ -163,7 +165,7 @@
       lift(p)
     } },
     { d: 3, f: function () { ask('fly') } },
-    { until: flew, max: 60, f: function (p, ok, n) {
+    { until: flew, max: 100, f: function (p, ok, n) {
       check('nano_takeoff', ok, 'client: ' + answer() + '; server flying ' + flying(p) + ' after ' + n + ' ticks, ' + height(p) + ' blocks up')
       watch(p)
     } },
@@ -174,7 +176,7 @@
       ground(p)
     } },
     { d: 3, f: function () { ask('land') } },
-    { until: landed, max: 90, f: function (p, ok, n) {
+    { until: landed, max: 120, f: function (p, ok, n) {
       check('nano_landing', ok && answeredOk() && mayfly(p) && marked(p), 'client: ' + answer() + '; server flying ' + flying(p) + ', mayfly ' + mayfly(p) + ' after ' + n + ' ticks')
       st.mem.c2 = charge(p)
     } },
@@ -185,15 +187,15 @@
     // ---- taking the chestplate off in flight
     { d: 5, f: function (p) { lift(p) } },
     { d: 3, f: function () { ask('fly') } },
-    { until: flew, max: 60, f: function (p, ok) {
+    { until: flew, max: 100, f: function (p, ok) {
       st.mem.flew = ok
       st.mem.flewText = 'took off: ' + answer()
       bare(p)
     } },
     { until: function (p) { return !mayfly(p) }, max: 15, f: function () { } },
-    { d: 3, f: function (p) {
-      check('remove_ends', st.mem.flew && !mayfly(p) && !flying(p) && !marked(p) && !cFlying(),
-        st.mem.flewText + '; taken off: server mayfly ' + mayfly(p) + ' flying ' + flying(p) + ' marker ' + marked(p) + ', ' + client())
+    { until: clientGrounded, max: 100, f: function (p, ok, n) {
+      check('remove_ends', st.mem.flew && !mayfly(p) && !flying(p) && !marked(p) && ok,
+        st.mem.flewText + '; taken off: server mayfly ' + mayfly(p) + ' flying ' + flying(p) + ' marker ' + marked(p) + '; ' + n + ' ticks later ' + client())
       ground(p)
     } },
 
@@ -204,16 +206,16 @@
       lift(p)
     } },
     { d: 3, f: function () { ask('fly') } },
-    { until: flew, max: 60, f: function (p, ok) {
+    { until: flew, max: 100, f: function (p, ok) {
       st.mem.flew = ok
       st.mem.flewText = 'took off: ' + answer()
     } },
     { until: function (p) { return !mayfly(p) }, max: 40, f: function (p, ok, n) { st.mem.dryTicks = n } },
-    { d: 3, f: function (p) {
+    { until: clientGrounded, max: 100, f: function (p, ok, n) {
       var want = LOW - 2 * NANO
-      check('dry_ends', st.mem.flew && !mayfly(p) && !flying(p) && !marked(p) && !cFlying() && charge(p) === want,
+      check('dry_ends', st.mem.flew && !mayfly(p) && !flying(p) && !marked(p) && ok && charge(p) === want,
         st.mem.flewText + '; flight ended ' + st.mem.dryTicks + ' ticks later with ' + charge(p) + ' EU left (want ' + want +
-        '); server mayfly ' + mayfly(p) + ' flying ' + flying(p) + ' marker ' + marked(p) + ', ' + client())
+        '); server mayfly ' + mayfly(p) + ' flying ' + flying(p) + ' marker ' + marked(p) + '; ' + n + ' ticks later ' + client())
       ground(p)
       bare(p)
     } },
@@ -246,7 +248,7 @@
       lift(p)
     } },
     { d: 3, f: function () { ask('fly') } },
-    { until: flew, max: 60, f: function (p, ok, n) {
+    { until: flew, max: 100, f: function (p, ok, n) {
       check('quark_takeoff', ok, 'client: ' + answer() + '; server flying ' + flying(p) + ' after ' + n + ' ticks, ' + height(p) + ' blocks up')
       watch(p)
     } },
@@ -258,7 +260,7 @@
       ground(p)
     } },
     { d: 3, f: function () { ask('land') } },
-    { until: landed, max: 90, f: function (p, ok, n) {
+    { until: landed, max: 120, f: function (p, ok, n) {
       st.mem.landed = ok && answeredOk()
       st.mem.landText = 'client: ' + answer() + '; server flying ' + flying(p) + ' after ' + n + ' ticks'
     } },
@@ -270,7 +272,7 @@
     // ---- the advanced chestplate taken off mid-flight: flight ends, and the jetpack comes back when it is worn again
     { d: 5, f: function (p) { lift(p) } },
     { d: 3, f: function () { ask('fly') } },
-    { until: function (p) { return flew(p) && !jetOn(chest(p)) }, max: 60, f: function (p, ok) {
+    { until: function (p) { return flew(p) && !jetOn(chest(p)) }, max: 100, f: function (p, ok) {
       st.mem.flew = ok
       st.mem.held = chest(p)
       bare(p)
@@ -279,9 +281,9 @@
       st.mem.heldOff = !jetOn(st.mem.held) && jetMarked(st.mem.held)
       st.mem.heldText = 'taken off in flight with the jetpack enabled ' + jetOn(st.mem.held) + ', marked ' + jetMarked(st.mem.held)
     } },
-    { d: 3, f: function (p) {
-      check('quark_remove_ends', st.mem.flew && !mayfly(p) && !flying(p) && !marked(p) && !cFlying(),
-        'server mayfly ' + mayfly(p) + ' flying ' + flying(p) + ' marker ' + marked(p) + ', ' + client())
+    { until: clientGrounded, max: 100, f: function (p, ok, n) {
+      check('quark_remove_ends', st.mem.flew && !mayfly(p) && !flying(p) && !marked(p) && ok,
+        'server mayfly ' + mayfly(p) + ' flying ' + flying(p) + ' marker ' + marked(p) + '; ' + n + ' ticks later ' + client())
       ground(p)
     } },
     { d: 10, f: function (p) { p.setItemSlot(Slot.CHEST, st.mem.held) } },
@@ -306,7 +308,7 @@
       ground(p)
     } },
     { d: 3, f: function () { ask('land') } },
-    { until: landed, max: 90, f: function (p) { bare(p) } },
+    { until: landed, max: 120, f: function (p) { bare(p) } },
 
     // ---- cleanup
     { d: 5, f: function (p) {
