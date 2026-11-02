@@ -213,7 +213,41 @@ export function collectLines(model) {
       }
     }
   }
+  addStagedSteps(model, lines);
   return lines;
+}
+
+// A staged line (docs/eras/lines-steam-hv.md section 0) counts its later stage from its own start: a link node whose target
+// cluster carries the same `line` id adds that earlier stage's steps (itself staged, recursively) to the stage that links to it.
+function addStagedSteps(model, lines) {
+  const lineOf = new Map();
+  for (const ch of model.chapters) for (const [ck, cl] of Object.entries(ch.clusters || {})) if (cl.line !== undefined) lineOf.set(`${ch.file}:${ck}`, cl.line);
+  const own = new Map();
+  for (const l of lines) for (const c of l.clusters) own.set(`pl_${l.era}:${c}`, Math.max(own.get(`pl_${l.era}:${c}`) || 0, l.steps));
+  const stageLinks = new Map();
+  for (const l of lines) {
+    if (l.lineId === '') continue;
+    for (const nd of l.nodes) {
+      if (!nd.link || !nd.target) continue;
+      const to = `${nd.target.chapter}:${nd.target.cluster}`;
+      if (lineOf.get(to) === l.lineId && !l.clusters.some((c) => `pl_${l.era}:${c}` === to)) {
+        for (const c of l.clusters) { const k = `pl_${l.era}:${c}`; if (!stageLinks.has(k)) stageLinks.set(k, new Set()); stageLinks.get(k).add(to); }
+      }
+    }
+  }
+  const total = (k, seen = new Set()) => {
+    if (seen.has(k)) return 0;
+    seen.add(k);
+    let up = 0;
+    for (const t of stageLinks.get(k) || []) up = Math.max(up, total(t, seen));
+    return (own.get(k) || 0) + up;
+  };
+  for (const l of lines) {
+    if (l.lineId === '') continue;
+    let up = 0;
+    for (const c of l.clusters) for (const t of stageLinks.get(`pl_${l.era}:${c}`) || []) up = Math.max(up, total(t, new Set([`pl_${l.era}:${c}`])));
+    l.steps += up;
+  }
 }
 // Other lines that take this line's items: a link into one of its nodes, or the same item appearing in their nodes.
 export function usedBy(lines) {
@@ -432,6 +466,13 @@ export function isNoVein(k, never) {
   return false;
 }
 
+// Bootstrap routes that are not skips: a stock recipe the line is itself built from (docs/eras/lines-steam-hv.md section 2, S1).
+// Patterns are recipe ids; a trailing `/*` matches every recipe of that type.
+export const ACCEPTED_ROUTES = [
+  { pattern: 'gtceu:primitive_blast_furnace/*', reason: 'the primitive blast furnace makes the steel the steam blast furnace is built from' },
+];
+export const acceptedRoute = (id) => ACCEPTED_ROUTES.find((a) => (a.pattern.endsWith('/*') ? String(id).startsWith(a.pattern.slice(0, -1)) : a.pattern === id));
+
 // A recipe of the dump that makes `key` without any of the line's intermediates, in fewer steps than the line takes.
 export function skipRoute(line, key, facts, eraCtx = null, x = {}) {
   const lineBase = Math.max(0, ...[...line.raws].map((k) => facts.dOf(k) ?? 0));
@@ -439,7 +480,7 @@ export function skipRoute(line, key, facts, eraCtx = null, x = {}) {
   const own = ownedTypes(line, facts);
   let best = null;
   for (const r of facts.producers.get(key) || []) {
-    if (line.machines.has(r.type) || own.ids.has(r.id)) continue;
+    if (line.machines.has(r.type) || own.ids.has(r.id) || acceptedRoute(r.id)) continue;
     // a recipe of a later era is not a way round the line for a player of the line's era
     if (eraCtx && recipeEra(r, eraCtx) > eraIdx(line.era)) continue;
     // a type the line itself runs (a custom machine's own recipes are the line, not a way round it)
