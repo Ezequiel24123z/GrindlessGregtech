@@ -65,11 +65,11 @@ export const QUESTS = [
   gear('BK', 'transuranium_facility', 'Berkelium', ['HFR'], 5, -3, {
     for: 'The &6Transuranium Facility&r separates the irradiated targets into berkelium and californium.',
     needs: 'Its controller, radiation-proof casing and tungstensteel pipe casing.',
-    unlocks: 'Berkelium-249 and the californium-252 source the clock lab and the gate ask for.',
+    unlocks: 'Berkelium-249 and the californium-252 source that cold-trap drilling and YBCO irradiation use as a catalyst.',
     automate: 'Keep the targets in sealed buses; leftovers go to the partitioning plant.',
   }, [it(SHIELD), it('gtceu:tungstensteel_pipe_casing')]),
   prod('CF', 'A Californium Source', 'grindless:californium_252_source', ['BK'], 7, -3,
-    'One more neutron capture and berkelium becomes &6Californium-252&r, a source that emits neutrons by itself. It starts the reactors that cannot start alone.',
+    'One more neutron capture and berkelium becomes &6Californium-252&r, a source that emits neutrons by itself. It is the catalyst of cold-trap drilling and of YBCO irradiation, and it is not used up.',
     [it('grindless:californium_252'), it('grindless:californium_252_source')], 120),
   prod('TH229', 'Thorium-229', 'grindless:thorium_229', ['CF'], 9, -3,
     'A trace of &6thorium-229&r comes out of the uranium-233 line. It is rare, and it has the lowest nuclear excited state known.',
@@ -193,7 +193,7 @@ export const QUESTS = [
     unlocks: 'Casimir cavity stacks for the warp gate.',
     automate: 'Plates by ME; the stacks leave by ME to the gate.',
   }, [it(TRUSS), it(CRYOSTAT)]),
-  gear('M_GATE', 'warp_gate', 'The Gate Opens', ['CAS'], 10, 18.5, {
+  gear('M_GATE', 'warp_gate', 'The Warp Gate', ['CAS'], 10, 18.5, {
     for: 'The &6Warp Gate&r is the first door to another star.',
     needs: 'Its controller, warp gate casing and field ring casing.',
     unlocks: 'The gate seed and the trip to Proxima b.',
@@ -237,13 +237,13 @@ export const QUESTS = [
   prod('P_SEG', 'A Swarm Segment', 'grindless:swarm_segment', ['SEG'], 12.5, -29,
     'A &6Swarm Segment&r is one panel of thousands.',
     [it('grindless:swarm_segment')]),
-  gear('M_SWARM', 'swarm_control_station', 'The Swarm', ['SEG'], 14.5, -30.5, {
+  gear('M_SWARM', 'swarm_control_station', 'Swarm Control Station', ['SEG'], 14.5, -30.5, {
     for: 'The &6Swarm Control Station&r steers the segments and collects their power.',
     needs: 'Its controller, station truss casing and a UHV hull.',
     unlocks: 'Stellar power for UHV and the coronal map.',
     automate: 'Segments by ME; the station needs a steady stream.',
   }, [it(HULL), it(TRUSS)], 160),
-  gear('M_PROBE', 'solar_probe_bay', 'Coronal Map', ['M_SWARM'], 16.5, -30.5, {
+  gear('M_PROBE', 'solar_probe_bay', 'Solar Probe Bay', ['M_SWARM'], 16.5, -30.5, {
     for: 'The &6Solar Probe Bay&r launches probes into the corona to map its field.',
     needs: 'Its controller, heatproof casing and station truss casing.',
     unlocks: 'The coronal field map for the Kardashev goal.',
@@ -256,7 +256,7 @@ export const QUESTS = [
   // ------------------------------------------------------------------ proxima b
   gear('SAMPLE', 'sample_receiving_facility', 'Sample Receiving', ['H_ISO'], 3, 3, {
     for: 'The &6Sample Receiving Facility&r opens canisters from another world in a sealed, level-four lab.',
-    needs: 'Its controller and the sealed-lab &6BSL Casing&r.',
+    needs: 'Its controller and the sealed-lab &6BSL-4 Casing&r.',
     unlocks: 'Safe handling of every alien sample.',
     automate: 'Canisters by ME; nothing leaves unsterilised.',
   }, [it(BSL4)]),
@@ -287,7 +287,7 @@ export const QUESTS = [
     unlocks: 'Melanised biomass for shielding.',
     automate: 'Fungus cultures by ME; keep the radiation source inside.',
   }, [it(BASEC), it(SHIELD)]),
-  gear('M_ASTRO', 'baseline_astrometer', 'Four Light Years of Baseline', ['H_PROXIMA'], 19.5, -25.5, {
+  gear('M_ASTRO', 'baseline_astrometer', 'Baseline Astrometer', ['H_PROXIMA'], 19.5, -25.5, {
     for: 'The &6Baseline Astrometer&r measures the sky from two stars at once.',
     needs: 'Its controller, Proxima base casing and clean machine casing.',
     unlocks: 'The survey that points toward the next gate.',

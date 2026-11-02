@@ -33,6 +33,7 @@ const q = (key, kind, title, icon, deps, x, y, teach, tasks, xpN) => ({
 export const QUESTS = [
   // ------------------------------------------------------------------ the assembler and the parts
   q('UCH_PARTS', 'process', 'UHV Components', 'gtceu:uhv_robot_arm', ['UCH_MAIN'], 15, -1, {
+    // Parts take UHV circuits (the mainframes), so they stay after UCH_MAIN; the hull takes none and no longer waits for it.
     for: 'The eight &6UHV Components&r (emitter, sensor, field generator, robot arm, conveyor module, pump, piston and motor) are what every UHV controller, the UHV circuit assembler and the parallel hatch are built from. Each is an assembly line recipe on top of its UV part, the motor goes into most of the others.',
     needs: 'The UV component of the same kind, neutronium, naquadria and europium cable; the emitter, sensor, field generator and arm also take UHV circuits, the mainframes made above.',
     unlocks: 'The UHV circuit assembler, which takes an arm, an emitter and two conveyors, and the controllers of the machines chapter.',
@@ -41,7 +42,7 @@ export const QUESTS = [
     it('gtceu:uhv_emitter'), it('gtceu:uhv_sensor'), it('gtceu:uhv_field_generator'), it('gtceu:uhv_robot_arm'), it('gtceu:uhv_conveyor_module'),
     it('gtceu:uhv_electric_pump'), it('gtceu:uhv_electric_piston'), it('gtceu:uhv_electric_motor'),
   ], 100),
-  q('UCH_HULL', 'step', 'The UHV Hull', 'gtceu:uhv_machine_hull', ['UCH_MAIN'], 15, 1, {
+  q('UCH_HULL', 'step', 'The UHV Hull', 'gtceu:uhv_machine_hull', ['H_CIRC'], 15, 1, {
     for: 'The &6UHV Machine Hull&r is the frame of every UHV hatch and of the UHV circuit assembler. It is made in an assembler from two UHV machine casings, polybenzimidazole and europium cable; it takes no circuit.',
     needs: 'Two UHV machine casings, polybenzimidazole and europium cable.',
     unlocks: 'The UHV circuit assembler and the UHV hatches.',
@@ -80,7 +81,7 @@ export const QUESTS = [
     automate: 'One wafer fills a stack of modulators: stock them by ME and send them to the foundry that makes processors.',
   }, [it('grindless:thin_film_ln_modulator')], 120),
   q('UCH_OPT', 'circuit', 'Optical Processor', 'gtnn:optical_processor', ['UCH_PCM', 'UCH_QCL', 'UCH_TFLN'], 11, -2, {
-    for: 'A processor that thinks in light and runs cold: the &6Optical Processor&r is the circuit that comes after the wetware computer.',
+    for: 'A processor that thinks in light and runs cold: the &6Optical Processor&r is the light half of the optical assembly that goes into the wetware mainframe.',
     needs: 'In the photonic foundry: three LNOI wafers, six phase-change dies, three quantum cascade lasers, ten thin-film lithium niobate modulators, ultrapure water and a circuit program. Two processors come out.',
     unlocks: 'The optical assembly, which takes three processors.',
     automate: 'Foundry inputs by ME; processors go into their own chest, one stack per assembly.',
@@ -94,14 +95,14 @@ export const QUESTS = [
 
   // ------------------------------------------------------------------ the laser and the memory
   q('UCH_INP', 'wafer', 'Indium Phosphide Wafer', 'grindless:inp_wafer', ['H_CIRC'], 3, -0.5, {
-    for: 'An &6InP Wafer&r is the substrate a mid-infrared laser is grown on. Its lattice matches the layers the molecular beam reactor lays down.',
+      for: 'An &6Indium Phosphide Wafer&r is the substrate a mid-infrared laser is grown on. Its lattice matches the layers the molecular beam reactor lays down.',
     needs: 'An InP boule from the crystal growth furnace, indium and red phosphorus, and the cleanroom.',
     unlocks: 'The quantum cascade laser next to it.',
     automate: 'The boule is slow. Keep indium and phosphorus topped up by ME and stock the wafers.',
   }, [it('grindless:inp_wafer')], 100),
   q('UCH_QCL', 'circuit', 'Quantum Cascade Laser', 'grindless:quantum_cascade_laser', ['UCH_INP'], 7, -0.5, {
     for: 'An electron falls down a staircase of thin layers and gives up a photon at every step. The &6Quantum Cascade Laser&r is hundreds of those layers on InP.',
-    needs: 'The MBE reactor, an InP wafer and arsenic, which is contained.',
+    needs: 'The MBE reactor: a quantum cascade superlattice wafer and gold dust make eight lasers. Arsenic is contained.',
     unlocks: 'The optical processor, and the sensors of the astrometer and the swarm.',
     automate: 'Contain the arsenic loop; stock lasers by ME.',
   }, [it('grindless:quantum_cascade_laser')], 120),
@@ -114,21 +115,21 @@ export const QUESTS = [
   }, [it('grindless:eu_yso_boule')], 100),
   q('UCH_QMEM', 'circuit', 'Quantum Memory Chip', 'grindless:quantum_memory_chip', ['UCH_EUY'], 7, 1, {
     for: 'A slab cut from the boule and patterned in the photonic foundry becomes a &6Quantum Memory Chip&r that holds light as an excitation.',
-    needs: 'An Eu:YSO boule and the photonic foundry.',
-    unlocks: 'The optical processor.',
+    needs: 'An Eu:YSO boule and the photonic foundry: one boule and 1,000 mB of ultrapure water make four chips.',
+    unlocks: 'The optical assembly, which takes three.',
     automate: 'One boule cuts several slabs; send chips on by ME.',
   }, [it('grindless:quantum_memory_chip')], 120),
 
   // ------------------------------------------------------------------ life: the UHV circuit
   q('UCH_ORG', 'circuit', 'Organoid Processor', 'grindless:organoid_processor', ['H_CIRC'], 3, 2.5, {
     for: 'Neurons grown on a chitosan scaffold in ultrapure water make an &6Organoid Processor&r, tissue that learns on a board.',
-    needs: 'The organoid array, stem cells from UV\'s vat, a scaffold, ultrapure water and sterile growth medium.',
+    needs: 'The organoid array, stem cells from UV\'s vat, a scaffold, ultrapure water and sterile growth medium. It runs only in the Overworld.',
     unlocks: 'The wetware mainframe, four organoids at a time.',
     automate: 'Medium and water by pipe; a tissue line fed by ME runs without a hand.',
   }, [it('grindless:organoid_processor')], 120),
   q('UCH_MAIN', 'circuit', 'Four Mainframes', 'gtceu:wetware_processor_mainframe', ['UCH_ORG', 'UCH_OASM'], 13, 1, {
     for: 'The &6Wetware Processor Mainframe&r is the UHV circuit. The organoid array makes four at once from organoid processors, neuro processing units and optical assemblies.',
-    needs: 'Per batch of four: six organoid processors, six neuro processing units, two SiC power modules and two optical assemblies.',
+    needs: 'Per batch of four: six organoid processors, six neuro processing units, two SiC power modules and two optical assemblies. Like the organoid, it runs only in the Overworld.',
     unlocks: 'Every UHV controller, the UHV components and the UHV circuit assembler.',
     automate: 'Run the array in batches of four by ME and keep a dedicated mainframe chest.',
   }, [it('gtceu:wetware_processor_mainframe', 4)], 220),

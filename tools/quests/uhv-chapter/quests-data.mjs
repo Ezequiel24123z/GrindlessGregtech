@@ -38,7 +38,7 @@ export const QUESTS = [
     key: 'J_HOME', kind: 'reading', title: 'Home First', icon: 'gtceu:uhv_machine_hull',
     deps: ['START'], x: 2, y: 0,
     desc: [
-      'Most of UHV is built at home: isotopes, light, silicon carbide, life. The gate and the stations need all of it, so the machine tabs come before the rockets.',
+      'Most of UHV is built at home: isotopes, light, silicon carbide, life. The gate and the stations need all of it, so the machines chapters come before the rockets.',
     ],
     tasks: [ck()],
     rewards: [xp(25)],
@@ -96,25 +96,35 @@ export const QUESTS = [
     key: 'ICAN', kind: 'step', title: 'The Motor', icon: 'grindless:ican_rocket_motor',
     deps: ['LVL8'], x: 8, y: 2,
     desc: [
-      'An antimatter-catalysed fission motor behind a heat-proof nozzle. The &6ICAN Rocket Motor&r is the engine that makes a four-year trip possible at all.',
+      'An antimatter-catalysed fission motor behind a heat-proof nozzle. The &6ICAN Rocket Motor&r, built in the thruster assembly from an ICAN pellet, a UHTC nozzle, two SiC power modules and a stage, is the engine of the level 8 rocket.',
     ],
     tasks: [it('grindless:ican_rocket_motor')],
+    rewards: [xp(150)],
+  },
+  {
+    key: 'BNNT', kind: 'machine', title: 'The Long-Haul Tank', icon: 'grindless:bnnt_fuel_tank',
+    deps: ['ICAN'], x: 10, y: 4,
+    teach: {
+      for: 'The level 8 rocket carries its fuel in the &6BNNT Fuel Tank&r: an aerogel tank wound in boron nitride and carbon nanotube yarn, light and tight enough for the trip.',
+      needs: 'The cryotank winder: an aerogel fuel tank, 16 BNNT yarn, 16 carbon nanotube yarn, 4 hexagonal boron nitride dust, 1,000 mB epoxy, the Pluto-Kuiper chart and circuit program 1.',
+      unlocks: 'The level 8 rocket, built with the ICAN motor, which reaches Proxima b.',
+      automate: 'Yarns and aerogel tanks by ME; the winder takes a long time per tank, so run several.',
+    },
+    desc: [],
+    tasks: [it('grindless:bnnt_fuel_tank')],
     rewards: [xp(150)],
   },
 
   // ------------------------------------------------------------------ the gate
   {
-    key: 'GATEOPEN', kind: 'machine', title: 'The Gate Opens', icon: 'gtceu:warp_gate',
+    key: 'GATEOPEN', kind: 'step', title: 'The Gate Opens', icon: 'gtceu:warp_gate',
     deps: ['LVL8'], x: 8, y: 0,
-    teach: {
-      for: 'The &6Warp Gate&r is a ring built at both ends: one in Earth orbit, one at Proxima b. A first run opens it, a second holds it open.',
-      needs: 'Exotic matter and antihydrogen cartridges for the opening, and the warp gate casing.',
-      unlocks: 'The second station and the base at Proxima b.',
-      automate: 'Antihydrogen and exotic matter by pipe and bus from their own lines; the shells come back after each run.',
-    },
-    desc: [],
-    tasks: [it('gtceu:warp_gate'), it('grindless:warp_gate_casing')],
-    rewards: [xp(250)],
+    desc: [
+      'The &6Warp Gate&r is a ring built at both ends: one in Earth orbit, one at Proxima b. Opening it takes four exotic matter cells, four antihydrogen cartridges, the approach data, a nuclear clock and an organoid processor; one exotic matter cell per run keeps it open. Build the gate itself in the machines chapter.',
+      'Antihydrogen and exotic matter come from their own lines; the empty cartridges come back after each run.',
+    ],
+    tasks: [ck()],
+    rewards: [xp(50)],
   },
   {
     key: 'G_FICTION', kind: 'reading', title: 'Fiction, Mostly', icon: 'gtceu:casimir_array',
@@ -216,9 +226,9 @@ export const QUESTS = [
     key: 'GATE', kind: 'exit', title: 'Gate to UEV', icon: 'gtceu:uev_machine_casing',
     deps: ['BASE'], x: 18, y: 0,
     desc: [
-      'The &6Stellar Neighbourhood Chart&r is the research for the UEV machine casing, and the hull comes with it. Keep the gate and the swarm running: UEV asks for both.',
+      'The &6Stellar Neighbourhood Chart&r is the research for the assembly line that builds the &6UEV Machine Casing&r; the UEV hull has its own research. Keep the gate and the swarm running: UEV asks for both.',
     ],
     tasks: [it('gtceu:uev_machine_casing'), it('grindless:stellar_neighbourhood_chart'), it('grindless:coronal_field_map')],
-    rewards: [xp(300)],
+    rewards: [xp(100)],
   },
 ];
