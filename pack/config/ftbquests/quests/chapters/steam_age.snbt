@@ -330,7 +330,7 @@
 			size: 1.0d
 			tasks: [{ id: "6D8F1B3A5C7E2094", item: "grindless:iron_sinter", type: "item" }]
 			title: "Iron Sinter"
-			x: 16.0d
+			x: 15.25d
 			y: -1.5d
 		}
 		{
@@ -346,7 +346,7 @@
 			size: 1.0d
 			tasks: [{ id: "0E2A4C6B8D1F3597", item: "grindless:pig_iron", type: "item" }]
 			title: "Pig Iron"
-			x: 18.0d
+			x: 16.5d
 			y: -1.5d
 		}
 		{
@@ -362,7 +362,7 @@
 			size: 1.0d
 			tasks: [{ id: "5A7C9E1B3D2F4086", item: "gtceu:steel_ingot", type: "item" }]
 			title: "Bessemer Steel"
-			x: 20.0d
+			x: 17.75d
 			y: -1.5d
 		}
 		{
