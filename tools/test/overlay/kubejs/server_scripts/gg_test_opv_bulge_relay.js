@@ -225,6 +225,12 @@
     check('static_chain_strand', ok, detail)
     check('static_fresh_world', !S.server.persistentData.contains(PLATFORM_KEY) && !queued(),
       'no SGR platform and no queued jump before the test')
+    // AF-X (M1-03): a quantum link in the black hole's orbit keeps its singularity; a link of another place's pair does not
+    var Q = S.G.moon && S.G.moon.quantum
+    var qs = Item.of('ae2:quantum_entangled_singularity', '{grindless_planet:"sgra"}')
+    var qn = Item.of('ae2:quantum_entangled_singularity', '{grindless_planet:"nsc"}')
+    check('static_quantum_link', !!Q && Q.allowed(qs, 'gcyr:black_hole_orbit') === true && Q.allowed(qn, 'gcyr:black_hole_orbit') === false &&
+      Q.allowed(qn, 'grindless:nsc_belt') === true, 'sgra pair stays in gcyr:black_hole_orbit, nsc pair does not')
   }
   function load() {
     var ctrl = at(ORIGIN)
