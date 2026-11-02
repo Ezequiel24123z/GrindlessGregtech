@@ -4,7 +4,10 @@
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.machines,
   filename: 'zpm_machines',
   era: 'zpm',
   role: 'machines',
@@ -247,3 +250,4 @@ export const QUESTS = [
     automate: 'Feed it by ME and let the hall fill the output chests.',
   }, [], 150),
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

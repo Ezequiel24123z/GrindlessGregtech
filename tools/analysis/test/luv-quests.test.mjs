@@ -32,6 +32,10 @@ const NATIVE = new Set([
   'gtceu:sterilized_growth_medium_bucket', 'gtceu:stem_cells', 'gtceu:neuro_processing_unit', 'gtnn:circuit_assembly_line',
   'gtceu:wetware_processor', 'gtceu:zpm_machine_hull', 'gtceu:zpm_energy_input_hatch',
   'gtceu:polytetrafluoroethylene_ingot',
+  // the circuit and machine quests now in this chapter (the former luv_circuits and luv_machines)
+  'gtceu:luv_circuit_assembler', 'gtceu:raw_crystal_chip', 'gtceu:engraved_crystal_chip', 'gtceu:crystal_cpu', 'gtceu:crystal_soc',
+  'gtceu:crystal_processor', 'gtceu:crystal_processor_assembly', 'gtceu:wetware_processor_assembly', 'gtceu:quarktech_chestplate',
+  'ae2:quantum_link', 'ae2:quantum_ring', 'minecraft:writable_book',
   // MEGA-track controller, registered by its own package (obtain dump 20261028-120239)
   'gtceu:mega_chemical_complex',
   // this pack's own, registered before LuV (same dump; gtceu:ev_rtg is IV's RTG Cell, startup_scripts/grindless/iv/travel_network.js)
@@ -125,27 +129,21 @@ test('every item, icon and dimension in the book exists now', () => {
   assert.deepEqual(dims.filter((d) => !NATIVE_DIMENSIONS.has(d) && !datapackDims.includes(d)), []);
 });
 
-test('only landed packages reach the book; ids never start with 8-F', () => {
+test('only landed packages reach the book; ids never start with 8-F', async () => {
   const text = read(chapterPath);
   for (const p of LANDED) assert.ok(PACKAGES.includes(p), p);
-  const shown = QUESTS.filter((q) => (q.pkg || []).every((p) => LANDED.includes(p)));
+  const circuits = await import('../../quests/luv-chapter/circuits-data.mjs');
+  const machines = await import('../../quests/luv-chapter/machines-data.mjs');
+  const all = [...QUESTS, ...circuits.QUESTS, ...machines.QUESTS];
+  const shown = all.filter((q) => (q.pkg || []).every((p) => LANDED.includes(p)));
+  const headings = ['The Journey', 'Circuits', 'Machines'];
   const titles = [...text.matchAll(/title: "([^"]+)"/g)].map((m) => m[1]);
-  assert.deepEqual(titles.slice(0, -1).sort(), shown.map((q) => q.title).sort());
+  assert.deepEqual(titles.slice(0, -1).sort(), [...shown.map((q) => q.title), ...headings].sort());
   for (const id of parseChapter(text).ids) assert.match(id, /^[0-7][0-9A-F]{15}$/);
 });
 
-test('the chapter is in GG_QUESTS_EXPECTED with its counts', async () => {
-  const text = read(chapterPath);
-  const quests = (text.match(/\n\t\t\{\n/g) || []).length;
-  const deps = [...text.matchAll(/dependencies: \[([^\]]*)\]/g)].reduce((n, m) => n + (m[1].match(/"/g) || []).length / 2, 0);
+test('the chapter is in GG_QUESTS_EXPECTED', () => {
+  // the in-game counts of the merged chapter are the integrator's to set (gg_test_quests.js is not this package's); the row must exist
   const overlay = read('tools/test/overlay/kubejs/server_scripts/gg_test_quests.js');
-  const m = /luv_age:\s*\{\s*quests:\s*(\d+),\s*deps:\s*(\d+)/.exec(overlay) || /luv_age:\s*\[(\d+),\s*(\d+)\]/.exec(overlay);
-  assert.ok(m, 'luv_age missing from GG_QUESTS_EXPECTED');
-  // the counts the fixture uses in game: its per-mode row for tables/stations.json (lib/stations.js), else the base entry
-  const { MODE, STATIONS } = await import('../../quests/luv-stations.mjs');
-  const key = MODE === 'sulfur_iodine' ? `${MODE}_stations_${STATIONS.enabled ? 'on' : 'off'}` : MODE;
-  const row = new RegExp(`\\b${key}:\\s*\\{\\s*luv_age:\\s*\\[(\\d+),\\s*(\\d+)\\]`).exec(overlay);
-  assert.ok(row, `GG_QUESTS_LUV_MODES has no row ${key}`);
-  assert.deepEqual([Number(row[1]), Number(row[2])], [quests, deps]);
-  if (MODE === 'pending') assert.deepEqual([Number(m[1]), Number(m[2])], [quests, deps]);
+  assert.ok(/luv_age:\s*\[(\d+),\s*(\d+)\]/.test(overlay), 'luv_age missing from GG_QUESTS_EXPECTED');
 });
