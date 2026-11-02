@@ -26,15 +26,7 @@ hash = "26f2809c06950fbd4225dde29c39ac4a4025e8af1be6cc4d319033f8f16f279b"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/luv_age.snbt"
-hash = "14c9b1b5d8a62bc1923788da8ddfe2c75a3387515f3baeac812f3b3a62b2f331"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/luv_circuits.snbt"
-hash = "b2de7a84268e49e41ce3b91eb636ab80975446615759e919a3c02dcb7940bda9"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/luv_machines.snbt"
-hash = "1f955129301858f56ce160383a6aa134ebf65cb2f83671ce987bb4c6fd8a9446"
+hash = "43e6d8ffd04bba7f12e5982466eef1343d7a057e5881af7be8e0f7cce37f4876"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/lv_age.snbt"
@@ -182,19 +174,7 @@ hash = "dc2bceb31bfe8bf562c05f6ffe7cf43817aa1d14a27c9a2f87e40e598af4dfc4"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uv_age.snbt"
-hash = "cd714a12b2c8fec238d96c8ff5857442c5c7b6b2c67a5b3083d42f458cc808c2"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uv_circuits.snbt"
-hash = "58fee244f79ad70fdb4213e5aa84f772233a50a9c4c3e17d0104ffbb0c752a11"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uv_integration.snbt"
-hash = "40fb8e965d14e2e964479f37e5bef7e700dfee7c9865e9c1d421ad4c2c9d9adf"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/uv_machines.snbt"
-hash = "0d54bda496e95ba6343711e2178933f0de0d2371d778a2bc3d0911dab8c2d3fe"
+hash = "19c9e0ed96a4dd58043f4a6f04324c56311beff02c63f8186ebca32f43913e3c"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/uxv_age.snbt"
@@ -222,19 +202,7 @@ hash = "14a33e2267c5a5a450319228aa7e6dcd86681978f89c95769bd90e90628c28d6"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/zpm_age.snbt"
-hash = "35bcad846767d7bbc14c8970c6f7e537aceaa4616c6113e28dee7a3b68d6c91b"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/zpm_circuits.snbt"
-hash = "cd06081557a1ae7d7a7abcf0a6cbd2d133577a481785e9ceb9740609316dca2c"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/zpm_integration.snbt"
-hash = "5171598df51959ff2d73a279d286505903df5523c35e22d510a5f99225529b62"
-
-[[files]]
-file = "config/ftbquests/quests/chapters/zpm_machines.snbt"
-hash = "a6dcb6bc9d181a6b0b1ff956e7c5c7831b592cfb983531ccdd30acae73f59b5e"
+hash = "1eb60609642c11403d26b330acc548bd840a6c87854c55e20a6025e2edc1c012"
 
 [[files]]
 file = "config/ftbquests/quests/data.snbt"
