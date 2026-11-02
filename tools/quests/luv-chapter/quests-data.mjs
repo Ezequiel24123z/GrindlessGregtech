@@ -26,7 +26,10 @@ export const LANDED = PACKAGES.filter((p) => STATIC.includes(p) || STATION_PACKA
 // what gen-chapters.mjs --every-package draws: everything, with the tether
 export const ALL_STATE = PACKAGES.filter((p) => p !== 'B7S');
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.quests,
   era: 'luv',
   role: 'age',
   order: 0,
@@ -325,3 +328,4 @@ export const QUESTS = [
     rewards: [xp(300)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

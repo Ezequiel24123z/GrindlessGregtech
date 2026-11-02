@@ -5,7 +5,10 @@ const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 const ri = (item, count) => ({ type: 'item', item, count });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.circuits,
   filename: 'luv_circuits',
   era: 'luv',
   role: 'circuits',
@@ -194,3 +197,4 @@ export const QUESTS = [
     rewards: [xp(200)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

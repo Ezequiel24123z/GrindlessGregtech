@@ -6,7 +6,10 @@ const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
 const ri = (item, count) => ({ type: 'item', item, count });
 
+import { SECTIONS, place } from './layout.mjs';
+
 export const CHAPTER = {
+  section: SECTIONS.machines,
   filename: 'luv_machines',
   era: 'luv',
   role: 'machines',
@@ -478,3 +481,4 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
 ];
+QUESTS.splice(0, QUESTS.length, ...place(QUESTS));
