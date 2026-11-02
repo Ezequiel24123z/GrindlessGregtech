@@ -5,8 +5,8 @@
 //   3. distillery (new)                               1,250 crude -> 1,000 TiCl4 + 1 silica dust. The bottoms are the real impurities, VOCl3 and
 //                                                     SiCl4; the distillery has one fluid output, so they leave hydrolysed as silica (glass, silicon)
 //   4. titanium_from_tetrachloride (GTM, unchanged)   TiCl4 + 2 Mg -> hot titanium + 6 MgCl2, the vacuum freezer cools it
-//   + magnesium loop (new): 3 MgCl2 -> Mg + 4,000 Cl2 in the electrolyzer (GTM's own sodium route salt_from_magnesium_chloride stays, same 3 -> 1);
-//     the chlorine goes back to step 2, the surplus chlorine to every other chlorine consumer.
+//   + magnesium loop (new): 3 MgCl2 -> Mg + 2,000 Cl2 in the electrolyzer (GTM's own sodium route salt_from_magnesium_chloride stays, same 3 -> 1);
+//     step 4's 6 MgCl2 give 2 Mg + 4,000 Cl2, so the loop closes exactly: the chlorine goes back to step 2.
 // CO: methanol or tank (toxic, contained). Both chemical-reactor copies (small and large) are replaced, so no route skips the distillation.
 // Titanium gains no Earth source: crude TiCl4 needs rutile, and rutile needs lunar ilmenite (data/grindless/tables/offworld_only.json).
 (function () {
@@ -44,7 +44,7 @@
       event.recipes.gtceu.electrolyzer('grindless:magnesium_chloride_electrolysis')
         .itemInputs('3x gtceu:magnesium_chloride_dust')
         .itemOutputs('1x gtceu:magnesium_dust')
-        .outputFluids(Fluid.of('gtceu:chlorine', 4000))
+        .outputFluids(Fluid.of('gtceu:chlorine', 2000))
         .EUt(120).duration(150)
     } catch (e) {
       console.error(LOG + 'recipes failed: ' + e)
