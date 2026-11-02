@@ -1098,6 +1098,10 @@ They are 5 EU/t × 100 t with nothing in and nothing out.
 - LuV assembler, 30,720 EU/t × 400 t: GCYR's elite fuel tank + 6 HSS-S plates + 8 Kapton K plates + a LuV pump, with the Outer System Chart as a catalyst (`grindless:assembler/cryogenic_fuel_tank`).
 - Its model is a vertical column (`models/block/luv/cryogenic_fuel_tank.json`, textures from `tools/assets/Build-LuVTravelTextures.ps1`), as rocket tanks stand.
 
+### QuarkTech suit: creative flight
+
+GTM's QuarkTech chestplate (assembler, LuV circuits, a lapotronic orb and IV parts; 100M EU) lets a charged wearer fly like in creative for 2,500 EU/t, only while flying, about 33 minutes per charge (`integration/suit_flight.js`, NANO-1). The advanced chestplate arrives in ZPM (it needs a ZPM circuit) with the same flight: its jetpack is switched off while creative flight is in use, so there is one drain and no extra speed. The quest `QTSUIT` follows Crystal Assembly.
+
 ## Family steps
 
 - **Vein drill, step 7:** the harpoon anchor drill (belt) and the cryobot (Europa).

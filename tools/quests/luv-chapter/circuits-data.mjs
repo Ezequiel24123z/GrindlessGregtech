@@ -180,4 +180,17 @@ export const QUESTS = [
     tasks: [it('gtceu:data_orb')],
     rewards: [xp(150), ri('gtceu:data_orb', 2)],
   },
+  {
+    key: 'QTSUIT', kind: 'process', title: 'QuarkTech Suit', icon: 'gtceu:quarktech_chestplate',
+    deps: ['CASM'], x: 10, y: 1.5,
+    teach: {
+      for: 'The &6QuarkTech Suit&r holds 100M EU and lets the charged chestplate fly like creative: 2,500 EU/t while flying, nothing on the ground, about 33 minutes per full charge, with a warning at 10%.',
+      needs: 'Each piece is an assembler recipe. The chestplate takes LuV circuits, a lapotronic orb, IV emitters and field generator, iridium plates and ruthenium foil.',
+      unlocks: 'Long-range flight on your own power. The advanced chestplate, from a ZPM circuit and gravitation engine units, adds the jetpack.',
+      automate: 'Recharge in a charger or battery buffer fed from the network; the suit never drains while you stand still.',
+    },
+    desc: [],
+    tasks: [it('gtceu:quarktech_chestplate')],
+    rewards: [xp(200)],
+  },
 ];
