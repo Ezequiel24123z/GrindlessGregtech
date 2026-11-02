@@ -99,8 +99,8 @@ test('the controllers: UIV hull, parts, mainframes, helium, at least 8 distinct 
     const ids = new Set((text.match(/"(?:id|tag|item)":"[^"]+"/g) || []));
     assert.ok(ids.size >= 8, `${id}: ${ids.size} distinct ingredients`);
   }
-  assert.ok(JSON.stringify(find('grindless:assembly_line/shequid_works').j).includes('optical_mainframe'));
-  assert.ok(JSON.stringify(find('grindless:assembly_line/mnt_collider').j).includes('spintronic_mainframe'));
+  assert.ok(JSON.stringify(find('grindless:assembly_line/shequid_works').j).includes('circuits/uiv'));
+  assert.ok(JSON.stringify(find('grindless:assembly_line/mnt_collider').j).includes('circuits/uxv'));
   assert.ok(JSON.stringify(find('grindless:assembly_line/mnt_collider').j).includes('gtceu:uxv_sensor'));
 });
 

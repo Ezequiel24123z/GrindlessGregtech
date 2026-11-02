@@ -111,7 +111,7 @@ test('the controllers: UIV hull, parts, mainframes, helium, domain inputs, at le
     const r = find(`grindless:assembly_line/${m}`);
     assert.ok(r && r.t === 'gtceu:assembly_line', m);
     const text = JSON.stringify(r.j);
-    for (const id of ['gtceu:uiv_machine_hull', 'gtnn:optical_mainframe', 'gtceu:he_6n', 'gtceu:soldering_alloy', 'gtceu:lubricant', ...need[m]]) assert.ok(text.includes(id), `${m} takes ${id}`);
+    for (const id of ['gtceu:uiv_machine_hull', 'gtceu:circuits/uiv', 'gtceu:he_6n', 'gtceu:soldering_alloy', 'gtceu:lubricant', ...need[m]]) assert.ok(text.includes(id), `${m} takes ${id}`);
     assert.ok(!text.includes('neutronium'), `${m} takes no neutronium`);
     assert.ok(new Set(text.match(/"(?:id|tag|item)":"[^"]+"/g) || []).size >= 8, `${m}: at least 8 distinct ingredients`);
   }

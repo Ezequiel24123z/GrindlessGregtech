@@ -160,10 +160,10 @@
     var HULL = 'gtceu:uiv_machine_hull'
     var HE = 'gtceu:he_6n'
     var defs = [
-      { name: 'shequid_works', mainframe: 'gtnn:optical_mainframe', research: 'grindless:nanoaperture_array',
+      { name: 'shequid_works', mainframe: 'gtnn:optical_mainframe', tier: 'uiv', research: 'grindless:nanoaperture_array',
         parts: ['2x gtceu:uiv_field_generator', '2x gtceu:uiv_electric_pump'],
         domain: ['2x grindless:mu_metal_foil', '2x grindless:sin_membrane', '2x grindless:mtj_die'] },
-      { name: 'mnt_collider', mainframe: 'gtnn:spintronic_mainframe', research: 'grindless:cm248_target',
+      { name: 'mnt_collider', mainframe: 'gtnn:spintronic_mainframe', tier: 'uxv', research: 'grindless:cm248_target',
         parts: ['gtceu:uxv_sensor', '2x gtceu:uiv_field_generator', '2x gtceu:uiv_electric_pump'],
         domain: ['2x grindless:gas_stopping_cell', '2x grindless:u238_ion_source', '2x grindless:mu_metal_foil'] }
     ]
@@ -181,7 +181,7 @@
       var b = event.recipes.gtceu.assembly_line('grindless:' + d.name)
       b.itemInputs(HULL)
       d.parts.forEach(function (s) { b.itemInputs(s) })
-      b.itemInputs('2x ' + d.mainframe)
+      b.itemInputs('2x #gtceu:circuits/' + d.tier)
       b.itemInputs('4x #gtceu:circuits/uiv')
       d.domain.forEach(function (s) { b.itemInputs(s) })
       b.inputFluids(Fluid.of(HE, 1000), Fluid.of('gtceu:soldering_alloy', 2304), Fluid.of('gtceu:lubricant', 2000))
