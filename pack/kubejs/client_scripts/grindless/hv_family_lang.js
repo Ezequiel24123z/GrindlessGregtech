@@ -4,6 +4,7 @@
 //   gtceu:hv_vein_drill, gtceu:hv_greenhouse   (machine names + tooltips)
 //   grindless:stainless_steel_drill_bit        (drill bit; HV has no titanium)
 //   grindless:titanium_drill_bit               (the EV Tripod Drill's bit, ev/tripod.js)
+//   grindless:platinum_rhodium_gauze           (catalyst of the nitric acid plant, hv/platline.js)
 //   grindless:vein_sample_<end vein>           (the 4 End vein samples)
 //
 // Kept out of pack/kubejs/assets/grindless/lang/* (owned by another agent), like lv_multis_lang.js and mv_family_lang.js:
@@ -23,6 +24,9 @@ ClientEvents.lang('en_us', event => {
     add('tooltip.grindless.stainless_steel_drill_bit', 'Wears out by chance: about 0.5% of the runs, 0.25% with drilling fluid. Only the HV Vein Drill and better take it.')
     add('item.grindless.titanium_drill_bit', 'Titanium Drill Bit')
     add('tooltip.grindless.titanium_drill_bit', 'The bit of the EV Tripod Drill, turned on an EV lathe. Wears out by chance: about 1% of the runs drilling dry, 0.25% cooled with liquid nitrogen.')
+
+    add('item.grindless.platinum_rhodium_gauze', 'Platinum-Rhodium Gauze')
+    add('tooltip.grindless.platinum_rhodium_gauze', 'Woven platinum-rhodium wire. Goes in the input bus of the Large Chemical Reactor for ammonia to nitric acid; used up in about 0.05% of the runs.')
 
     add('tooltip.grindless.vein_sample.drill_hv', 'Put it in the input bus of the MV Vein Drill (vanadium steel bit) or the HV one (vanadium steel or stainless steel bit), with drilling fluid in its fluid hatch. It is never used up.')
     add('tooltip.grindless.vein_sample.end', 'End vein: it only drills with drilling fluid, in the MV Vein Drill and better. Craft it with an empty vein probe and two raw ores of the vein: one trip to the End is enough.')

@@ -13,6 +13,7 @@
     block/multiblock/hv_greenhouse/...     (same three)
     item/end_key.png
     item/hydrotreating_catalyst.png, item/reforming_catalyst.png
+    item/platinum_rhodium_gauze.png        (the catalyst of the integrated nitric acid plant: a platinum wire mesh)
     item/stainless_steel_drill_bit.png     (the HV drill's bit: HV has no titanium, every HV part is stainless steel)
     item/titanium_drill_bit.png            (the old HV bit: hv/family_items.js keeps the item, hidden, so worlds made before
                                             the stainless decision load their bits; same pixels as before)
@@ -41,7 +42,7 @@
   a dark reflection band down the body (-Chrome), the polished look of GTM's SHINY stainless steel.
 
 .PARAMETER Only
-  Subset of: refinery, reformer, drill, greenhouse, keys, catalysts, bit, legacy. Default: everything.
+  Subset of: refinery, reformer, drill, greenhouse, keys, catalysts, gauze, bit, legacy. Default: everything.
 .PARAMETER OutRoot
   Textures root. Default: <repo>/pack/kubejs/assets/grindless/textures
 .PARAMETER Credits
@@ -806,6 +807,41 @@ function New-Catalyst {
     return $c
 }
 
+# --- platinum-rhodium gauze: the woven wire mesh of an Ostwald burner, a dark frame around bright platinum wires with a few
+# rhodium (bluer, whiter) crossings ---
+$GauzeFrame = @((Hex '8C93A3'), (Hex '646B7B'), (Hex '3E4452'))
+$GauzePt = @((Hex 'FFFFFF'), (Hex 'E4E7EE'), (Hex 'BFC4D0'), (Hex '8F95A6'))
+$GauzeRh = @((Hex 'F4FBFF'), (Hex 'CBE4F4'), (Hex '9CC2DC'), (Hex '6F92AE'))
+$GauzeHole = Hex '2A2F3A'
+
+function New-Gauze {
+    $c = New-Canvas
+    foreach ($y in 2..13) { foreach ($x in 2..13) { Set-Px $c $x $y $GauzeHole } }
+    foreach ($i in 2..13) {
+        Set-Px $c $i 2 $GauzeFrame[0]; Set-Px $c 2 $i $GauzeFrame[0]
+        Set-Px $c $i 13 $GauzeFrame[2]; Set-Px $c 13 $i $GauzeFrame[2]
+    }
+    Set-Px $c 13 2 $GauzeFrame[1]; Set-Px $c 2 13 $GauzeFrame[1]
+    $wires = @(4, 7, 10)
+    foreach ($w in $wires) {
+        foreach ($i in 3..12) {
+            Set-Px $c $i $w $GauzePt[1]
+            Set-Px $c $w $i $GauzePt[2]
+        }
+    }
+    # weave: horizontal wires pass over the vertical ones at alternate crossings
+    $k = 0
+    foreach ($wy in $wires) {
+        foreach ($wx in $wires) {
+            if (($k % 2) -eq 0) { Set-Px $c $wx $wy $GauzePt[0] } else { Set-Px $c $wx $wy $GauzePt[3] }
+            $k++
+        }
+    }
+    foreach ($p in @(@(7, 4), @(4, 10), @(10, 7))) { Set-Px $c $p[0] $p[1] $GauzeRh[0]; Set-Px $c ($p[0] + 1) $p[1] $GauzeRh[1] }
+    Set-Px $c 3 3 $GauzeFrame[0]
+    return $c
+}
+
 # ============================================================================================
 #  BUILD
 # ============================================================================================
@@ -828,6 +864,7 @@ if (Test-Want 'catalysts') {
     Out-Tex (New-Catalyst @($PelCobalt, $PelCobalt, $PelMoly, $PelSilica) @((Hex '8FA4FF'), (Hex '4057DC'), (Hex '1F2B7A')) 0) 'item/hydrotreating_catalyst.png'
     Out-Tex (New-Catalyst @($PelIvory, $PelIvory, $PelPlat) @((Hex 'FFE98A'), (Hex 'D9A92A'), (Hex '7A5A10')) 3) 'item/reforming_catalyst.png'
 }
+if (Test-Want 'gauze') { Out-Tex (New-Gauze) 'item/platinum_rhodium_gauze.png' }
 if (Test-Want 'bit') { Out-Tex (New-StainlessSteelBit) 'item/stainless_steel_drill_bit.png' }
 if (Test-Want 'legacy') { Out-Tex (New-TitaniumBit) 'item/titanium_drill_bit.png' }
 
