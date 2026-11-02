@@ -183,7 +183,7 @@
   }
 
   // AF-E2 (M2-03, M2-04): every wired power part above UHV is chained from the tier's own parts, never from lead, iron and red alloy.
-  //   4 A = 2 x 1 A + the tier's quadruple cable and plates; 16 A = 2 x 4 A + octal cable; 64 A = 2 x 16 A + hex cable.
+  //   4 A = 2 x 1 A + the tier's quadruple cable and plates; 16 A (foundation.js, still a hull line) is left for a follow-up; 64 A = 2 x 16 A + hex cable.
   var FAMILY = { uev: 'lay_superhydride', uiv: 'metallic_hydrogen', uxv: 'pasta_strand', opv: 'chain_strand' }
   var SIZE = { single: 'single', double: 'double', quad: 'quadruple', octal: 'octal', hex: 'hex' }
   function cableOf(tier, size) { return 'gtceu:' + FAMILY[tier] + '_' + SIZE[size] + '_cable' }
@@ -195,7 +195,6 @@
       ;['input', 'output'].forEach(function (d) {
         var base = 'gtceu:' + tier + '_energy_' + d + '_hatch'
         line(event, tier, tier + '_energy_' + d + '_hatch_4a', base + '_4a', [[base, 2], [cableOf(tier, 'quad'), 2], [plateOf(tier), 4]])
-        line(event, tier, tier + '_energy_' + d + '_hatch_16a', base + '_16a', [[base + '_4a', 2], [cableOf(tier, 'octal'), 2], [plateOf(tier), 4]])
       })
       event.remove({ id: 'gtceu:assembler/energy_hatch_4a_' + tier })
       event.remove({ id: 'gtceu:assembler/dynamo_hatch_4a_' + tier })

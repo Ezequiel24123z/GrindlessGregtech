@@ -58,7 +58,8 @@ ServerEvents.recipes(function (event) {
 
   hatch('uiv_energy_input_hatch', SINGLE, 'gtceu:uiv_electric_motor', 4, 100)
   hatch('uiv_energy_output_hatch', SINGLE, 'gtceu:uiv_electric_pump', 4, 100)
-  // the 4 A and 16 A hatches are chained from these in integration/high_tier_machines.js (AF-E2)
+  hatch('uiv_energy_input_hatch_16a', QUADRUPLE, 'gtceu:uiv_robot_arm', 8, 200)
+  hatch('uiv_energy_output_hatch_16a', QUADRUPLE, 'gtceu:uiv_conveyor_module', 8, 200)
 
   // highTierContent is on (TP-S0F): GTM's own hull and 16 A hatch recipes for gtceu:uiv_* would be a second way to make them
   ;['shaped/uiv_machine_hull', 'assembler/energy_hatch_16a_uiv', 'assembler/dynamo_hatch_16a_uiv'].forEach(function (id) {
