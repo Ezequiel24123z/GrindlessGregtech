@@ -17726,7 +17726,7 @@ hash = "1f4b256531a0b42a6ecf399e9b692d9e4730bd4102e53aab3e1fa2c999b69e9d"
 
 [[files]]
 file = "kubejs/data/grindless/tables/hidden_until.json"
-hash = "154599a21e0fee7c2d45be5e85b9475200770a23ec0a393c829e9bce17474ece"
+hash = "26af627dabc2aeec77e7da025bbac183603088c62383e60fd62929c287df412a"
 
 [[files]]
 file = "kubejs/data/grindless/tables/horizon_city.json"
@@ -18682,7 +18682,7 @@ hash = "1a9c9d95f6aa41d92f5c5b3583c1688ba9a7d65a3299af7420e4dc1398ff9bb0"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/tarantula.js"
-hash = "ba3b4b4a9f8c09877d3b23347bddf97cf3b0d795069252d6bccc155c897e53b4"
+hash = "165a7ff91d44cacb91c54046f0c7e5eecb97f0116c70958025bf9b4de5795cb6"
 
 [[files]]
 file = "kubejs/server_scripts/grindless/maxplus/void_fab.js"
