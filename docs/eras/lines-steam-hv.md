@@ -121,15 +121,15 @@ L3 sapphire to aluminium (4) and L4 drilling fluid (4) stay. Leaving the LV char
 | 3 | Ore washer | crushed → purified pentlandite | flotation stand-in |
 | 4 | Chemical reactor, 30 EU/t (`platinum_group_sludge_dust1_lv`) | purified pentlandite + 1,000 mB H2SO4 → PGM sludge (chance) + 2,000 mB sulfuric nickel solution | sulfuric leach |
 | 5 | Centrifuge (`grindless:centrifuge/offworld_only/platinum_group_sludge_dust`) | 1 sludge → 6 platinum metal dust, 0.95 palladium metal dust, 3 gold, 3 SiO2 | separation |
-| 6 | Chemical reactor, 30 EU/t (`dissolve_platinum_metallic_powder`) | platinum metal dust + aqua regia (adapted, see below) → concentrated platinum + platinum slag | aqua regia dissolution |
-| 7 | Chemical reactor, MV (new variant of `large_platinum_dusts`) | concentrated platinum + NH4Cl → platinum salt + raw platinum + palladium-rich ammonia + NO2 + dilute acid | ammonium chloroplatinate precipitation |
+| 6 | Chemical reactor, 30 EU/t (`dissolve_platinum_metallic_powder`) | platinum metal dust + aqua regia (adapted, see below) → concentrated platinum + platinum slag + NO2 (0.5 mB per mB of aqua regia) | aqua regia dissolution |
+| 7 | Chemical reactor, MV, 120 EU/t (new `platinum_salt_mv`: half a `large_platinum_dusts` batch, since a chemical reactor holds 2 fluid outputs) | concentrated platinum + NH4Cl → platinum salt + raw platinum + palladium-rich ammonia + dilute hydrochloric acid | ammonium chloroplatinate precipitation |
 | 8 | Chemical reactor, 30 EU/t (`large_palladium_dusts`) | palladium metal dust + palladium-rich ammonia → palladium salt + raw palladium | ammine salt |
 | 9 | Chemical reactor, 30 EU/t (`raw_palladium_separation`) | raw palladium + formic acid → palladium + NH3 | formate reduction |
 
 - Platinum: raw platinum + calcium → platinum + CaCl2 (chemical reactor, 30 EU/t; step 8); the salt goes sifter → EBF 900 K → platinum metal dust and back to step 6 (GT--'s loop).
 - End ore entry (MV since v0.5.0): sheldonite vein → ore plant → platinum and palladium metal dust (steps 1, 2, then 6): shorter, so it is the critical path's start (8).
 - Feeders: aqua regia (mixer: L2's HNO3 + 2 HCl); NH4Cl (NH3 + HCl); formic acid (brine electrolysis → NaOH; NaOH + CO from M2's arc furnace → sodium formate; + H2SO4 → formic acid, all 30 EU/t); calcium (CaCl2 electrolysis closes the loop).
-- Adaptation (realism): GT-- dissolves platinum in nitration mixture (HNO3 + H2SO4), which does not dissolve platinum. The dissolve stages take aqua regia instead, and the precipitation's dilute sulfuric acid becomes dilute hydrochloric acid. The platinum plant reads the live stages, so it follows; package D1-PGM-MV re-runs its test.
+- Adaptation (realism): GT-- dissolves platinum in nitration mixture (HNO3 + H2SO4), which does not dissolve platinum. The dissolve stages take aqua regia instead, and the precipitation's dilute sulfuric acid becomes dilute hydrochloric acid. The platinum plant composes the live stages (its composer reads script changes since FIX-COMPOSE), so it follows them.
 - The new MV variant of step 7 is the only gate change: the large chemical reactor's PTFE gate added no step.
 - Byproducts: sulfuric nickel solution → electrolysis → nickel + O2 + H2SO4 (acid comes back); gold → electrum; SiO2 → glass or silicon; NO2 → L2 step 5; dilute acid → distillery; NH3 → NH4Cl; CaCl2 → electrolysis; **platinum slag → stored for H1** (its stated future use, principle 3).
 - Consumers at MV and HV: the HV reformer's platinum catalyst, the palladium hydrogenation catalyst of H2, the HCN catalyst, the MV wireless transmitter cover, then the EV platinum electrode, emitter and sensor rods and nano-circuit bolts.

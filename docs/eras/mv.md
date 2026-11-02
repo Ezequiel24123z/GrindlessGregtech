@@ -140,6 +140,10 @@ What it gains: it is the only machine that makes the **Lunar Landing-Site Chart*
 | Ethylene → PE and PVC | biomass (brewery) → distillery → 600 mB of ethanol per 1,000; ethanol + H₂SO₄ → ethylene (120 EU/t) → PE; 2 Cl₂ + ethylene → vinyl chloride → PVC | Dilute acid: distillery, 2/3 acid + water (loop). HCl: recycled (O₂ + HCl + ethylene → vinyl chloride). NaOH: bisulfate → persulfate (plates) or biodiesel catalyst. H₂: methanol and desulfurization. Wood dust from distillation (50%): phenolic board |
 | Ore → plant | vein drill → plant (water) → dusts → alloys and EBF | Stone dust (4 per ore): drilling fluid or MV centrifuge. Secondary outputs: sulfur, gallium, indium, cobalt… each to its own line |
 
+### Platline I: platinum and palladium (D1-PGM-MV)
+
+Platinum metal dust (vein drill or ore plant) is dissolved in aqua regia (mixer: 1 HNO₃ + 2 HCl → 3 aqua regia) in the chemical reactor, 1:1 per batch (also a ×9 variant); the nitric acid's NO₂ comes off here, 0.5 mB per mB of aqua regia. The solution (concentrated platinum) is precipitated with ammonium chloride into platinum salt and raw platinum, leaving palladium-rich ammonia (→ palladium) and diluted hydrochloric acid (→ distillery). At MV a chemical reactor does half a large batch at 120 EU/t (`grindless:chemical_reactor/platline/platinum_salt_mv`, circuit 3), as fast as the large chemical reactor. The whole line: `docs/eras/lines-steam-hv.md`, M1.
+
 ## Convenience (counted apart from rule 7)
 
 GregTech Leisure ideas with our code (2026-10-25). They save space and buses, but no line loses a step.
