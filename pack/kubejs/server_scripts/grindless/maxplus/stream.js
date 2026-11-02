@@ -13,7 +13,9 @@
 //                           magnet winding c18 -> scoop_coil; closed-loop cooling -> cold_scoop_coil; assembler -> magnetic_scoop_module
 //
 // One gas works run (64,000 mB) makes 1,000 mB of deuterium and 1,000 mB of helium-3, which is exactly one torus run: the torus c1 makes 2^34 x 2,400
-// EU, the gas works c1 uses 2^33 x 2,400 (a net of 2.0 x). The gas works wears a magnetic scoop module (1 in 64); the torus a neutral beam injector (1 in 64)
+// EU, the gas works c1 uses 2^33 x 2,400 (a net of 2.0 x). The gas works runs up to 64 copies of c1 at once (B14-GAS, startup_scripts/grindless/maxplus/stream.js),
+// each with this row's EU/t, duration and amounts, so one gas works feeds one polarized fusion stellarator at full load; the torus stays one run. The gas works
+// wears a magnetic scoop module (1 in 64, rolled per run); the torus a neutral beam injector (1 in 64)
 // and a direct converter stack (1 in 128). The two machines run only at the Stream; every older machine keeps its own site (the cryogenic plant on the
 // Moon, the field press at SGR 1806-20, the jet beam line at Cygnus X-1, the rest at home).
 // Circuits: the first free one of each older machine type (an assembler has only 27 free, so the other two assembler rows carry none).

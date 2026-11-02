@@ -36,6 +36,22 @@ test('machine rows: the gas works takes 2^33 EU/t, the torus makes 2^34 EU/t; we
   assert.deepEqual(t.wear.map((w) => w[0]).sort(), ['grindless:direct_converter_stack', 'grindless:neutral_beam_injector']);
 });
 
+test('B14-GAS: the gas works runs up to 64 recipes at once, the c1 row and the torus stay as they were', () => {
+  const works = plain(MS.works);
+  assert.equal(works.maxParallels, 64);
+  const c1 = row('pristine_gas_works', 'pristine_gas');
+  assert.equal(c1.circuit, 1);
+  assert.equal(c1.eut, 2 ** 33);
+  assert.equal(c1.duration, 2400);
+  assert.deepEqual(c1.wear, [['grindless:magnetic_scoop_module', 156]]);
+  assert.deepEqual(c1.fluidOuts, [['gtceu:pristine_gas', 64000]]);
+  const startup = read(kube, 'startup_scripts', 'grindless', 'maxplus', 'stream.js');
+  assert.match(startup, /getParallelAmountWithoutEU/);
+  assert.match(startup, /\.parallels\(runs\)/);
+  assert.match(startup, /maxParallels: 1, name: m\.name/, 'the torus stays one run');
+  assert.doesNotMatch(startup, /\.duration\(|durationMultiplier|setDuration/, 'no run is ever shortened');
+});
+
 test('each line is one chain: every step feeds the next', () => {
   const fl = (r, k) => (r[k] || []).map((f) => f[0]);
   assert.ok(fl(row('cryogenic_processing', 'liquid_pristine_hydrogen'), 'fluids').includes('gtceu:pristine_gas'), 'P9 gas into the cryo row');

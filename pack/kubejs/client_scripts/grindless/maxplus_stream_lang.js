@@ -11,12 +11,13 @@
     var ENTRIES = [
         ['gtceu.pristine_gas_works', 'Pristine Gas Works'],
         ['block.gtceu.pristine_gas_works', 'Pristine Gas Works'],
-        ['grindless.machine.pristine_gas_works.tooltip.0', '\u00a77Scoops pristine gas out of the Magellanic Stream. Wears a magnetic scoop module.'],
+        ['grindless.machine.pristine_gas_works.tooltip.0', '\u00a77Scoops pristine gas out of the Magellanic Stream.'],
+        ['grindless.machine.pristine_gas_works.tooltip.1', 'Runs up to 64 recipes at once, each at full cost.'],
         ['gtceu.primordial_fusion_torus', 'Primordial Fusion Torus'],
         ['block.gtceu.primordial_fusion_torus', 'Primordial Fusion Torus'],
         ['grindless.machine.primordial_fusion_torus.tooltip.0', '\u00a77A generator: deuterium and helium-3 fuse into a MAX 16 A dynamo hatch.'],
 
-        ['gtceu.recipe.grindless_pristine_gas_works.pristine_gas', 'Circuit 1: 64,000 mB of pristine gas scooped at 2^33 EU/t; wears a magnetic scoop module 1 in 64 (lines P9 and P10).'],
+        ['gtceu.recipe.grindless_pristine_gas_works.pristine_gas', 'Circuit 1: 64,000 mB of pristine gas scooped per run at 2^33 EU/t, up to 64 runs at once (2^39 EU/t); wears a magnetic scoop module 1 in 64 per run (lines P9 and P10).'],
         ['gtceu.recipe.grindless_primordial_fusion_torus.helium_4_ash', 'Circuit 1: 1,000 mB each of deuterium and helium-3 fuse into helium-4 ash and hydrogen and make 2^34 EU/t; wears a neutral beam injector 1 in 64 and a direct converter stack 1 in 128.'],
 
         ['gtceu.recipe.grindless_calutron_separation.primordial_deuterium', 'Circuit 20: heavy-hydrogen fraction separated into primordial deuterium (line P9).'],
