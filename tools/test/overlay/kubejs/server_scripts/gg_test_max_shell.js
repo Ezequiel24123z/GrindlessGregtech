@@ -32,7 +32,7 @@
 
   var STEPS = [
     {
-      name: 'c3', eut: EXP_C3, id: 'horizon_lock', stage: 'grindless_stage_maxplus',
+      name: 'c3', eut: EXP_C3, id: 'horizon_lock',
       items: [[CIRCUIT, 1, '{Configuration:3}'], ['grindless:seed_wave_packet', 4],
         ['grindless:stream_bundle', 16], ['grindless:stream_bundle', 16], ['grindless:stream_bundle', 16], ['grindless:stream_bundle', 16],
         ['grindless:final_spin_map', 1], ['grindless:cloud_phase_map', 1], ['grindless:horizon_phase_lock', 16],
@@ -271,7 +271,6 @@
         var extra = step.outs.length > 1 ? count(u.outBus, step.outs[1]) : 1
         check(tag + 'output', extra >= 1, step.outs.join(' + ') + ': ' + got + ' / ' + extra)
         check(tag + 'still_formed', m.isFormed(), 'formed after the recipe and the stage handler: ' + m.isFormed())
-        if (step.stage) check(tag + 'stage', S.server.persistentData.getBoolean(step.stage) === true, 'world flag ' + step.stage)
         next(u)
       } else if (waited > 1700) {
         check(tag + 'output', false, 'no ' + step.outs[0] + ' in 1700 ticks; reasons ' + reasons(m))

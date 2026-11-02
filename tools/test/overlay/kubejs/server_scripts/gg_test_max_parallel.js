@@ -27,6 +27,8 @@
   var COIL = 'grindless:hftacn_coil_block'
   var ENERGY16 = 'gtceu:opv_energy_input_hatch_16a'
   var RECIPE = 'grindless:assembly_line/max_parallel_hatch'
+  var MAXPLUS = 'gtceu:max_maxplus_parallel_hatch'
+  var MAXPLUS_X = 39340
   var PROBE_EUT = 64
   var DISCOUNT_FLOOR = 0.80
   var CEILING = 256 * 1048576
@@ -231,6 +233,7 @@
     } catch (e) { note('recipe_lookup', errText(e)) }
     check('recipe', found && H.recipeId === RECIPE && madeOut === HATCH + ' x1' && H.done === true && String(H.missing) === '', RECIPE + ' in the recipe manager: ' + found + ' making ' + madeOut + '; max/parallel.js publishes ' + H.recipeId + ', done ' + H.done + ', missing [' + H.missing + ']')
     PROBES.forEach(function (p) { put(p.x, 100, 5, p.id + '[facing=north]') })
+    put(MAXPLUS_X, 100, 5, MAXPLUS + '[facing=north]')
     S.hatchTick = 40
     try { S.forge = { phase: 'forming', started: S.tick, pos: placeForge(CX, CY, 40) } } catch (e) { check('forge_build', false, errText(e)); S.forge = null }
     try {
@@ -248,6 +251,18 @@
     var opv = got[5]
     var older = got.slice(0, 5)
     check('reports', opv.got === 1048576, 'MAX hatch reports ' + opv.got + ' (expected 1048576), class ' + opv.cls)
+    // M8-11: a screen edit clamps to x1,048,576 (GTM) or lower; the next read of the formed hatch (lib/mega.js hatchParallel) puts x4,194,304 back
+    var mp = machine(pos(MAXPLUS_X, 100, 5))
+    var before = mp ? Number(mp.getCurrentParallel()) : NaN
+    var pressed = NaN
+    var kept = NaN
+    if (mp) {
+      mp.setCurrentParallel(Number(mp.getCurrentParallel()) + 1)
+      pressed = Number(mp.getCurrentParallel())
+      global.grindless.parallelHatch.keepMaxplus(mp)
+      kept = Number(mp.getCurrentParallel())
+    }
+    check('maxplus_hatch', before === 4194304 && pressed < 4194304 && kept === 4194304, 'MAX+ hatch reports ' + before + ', after +1 in the screen ' + pressed + ' (clamped), after the next read ' + kept + ' (expected 4194304)')
     check('older_hatches', older.every(function (g) { return g.got === g.want }), older.map(function (g) { return g.id + ' ' + g.got + ' (expected ' + g.want + ')' }).join(', '))
   }
 

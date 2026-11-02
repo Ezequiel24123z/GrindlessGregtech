@@ -8,6 +8,8 @@
 //     refused   the network answers one EU short of a dial: no run, and the controller's refusal is 'charge'
 //     eut       with the dial covered the run starts at exactly 2^43 EU/t for 1,200 t
 //     open      the gate reads open while the dial runs (and its box is the 39 x 39 x 1 plane)
+//     run_counter, reregistered, resume_same_run   (M8-10) the dial start counts run 1; after forget() the running dial registers the gate again in the same run;
+//                                                   switching the controller off and on again keeps run 1 (paused is a NOTE)
 //     spent     the dial's end puts one spent charge in the output bus, keeps the horizon lock and reads closed again
 //     broken    a ring block taken out: the next dial does not start (refused 'structure', or the machine unformed)
 // The bank's capacity and the store are the network's own numbers in production; here W.dialCharge is replaced for the run by a fixed answer (put
@@ -342,6 +344,27 @@
     }
     if (S.phase === 'run') {
       topUp(m)
+      var q0 = S.ctrl
+      // M8-10: a gate forgotten by the script (a reload) is registered again by the running dial, and a pause and resume is the same run
+      if (waited === 30) {
+        var g0 = HS().gateAt(SITE, q0.x, q0.y, q0.z)
+        S.run1 = g0 ? Number(g0.run) : -1
+        check('run_counter', S.run1 >= 1, 'the dial start counted: run ' + S.run1)
+        HS().forget()
+      }
+      if (waited === 33) {
+        var g1 = HS().gateAt(SITE, q0.x, q0.y, q0.z)
+        check('reregistered', !!g1 && g1.open === true && Number(g1.run) === S.run1, 'after forget(): gate ' + (g1 ? 'known, run ' + g1.run : 'unknown'))
+      }
+      if (waited === 40) m.setWorkingEnabled(false)
+      if (waited === 45) {
+        note('paused', 'controller off: open ' + HS().isOpen(m))
+        m.setWorkingEnabled(true)
+      }
+      if (waited === 55) {
+        var g2 = HS().gateAt(SITE, q0.x, q0.y, q0.z)
+        check('resume_same_run', HS().isOpen(m) && !!g2 && Number(g2.run) === S.run1, 'controller on again: open ' + HS().isOpen(m) + ', run ' + (g2 ? g2.run : 'none') + ' (want ' + S.run1 + ')')
+      }
       if (waited === 60) m.getRecipeLogic().setProgress(DIAL_TICKS - 20)
       if (waited > 60 && !m.getRecipeLogic().isWorking()) {
         var spent = countIn(m, SPENT)

@@ -143,6 +143,7 @@
 
   var known = {}
   var refusals = {}
+  var K_RUNS = 'grindless_hyperstargate_runs'
 
   function remember(machine, level) {
     var k = keyOf(level, machine)
@@ -150,11 +151,57 @@
     return k
   }
 
+  // the run counter of a gate lives in the world's persistent data (one int per gate key), so a dial that was running at a save is still
+  // the same run after the reload, and a pause and resume (SUSPEND) is not a new one: only a recipe start adds one
+  function runOf(level, key) {
+    try {
+      return Number(level.getServer().persistentData.getCompound(K_RUNS).getInt(key))
+    } catch (e) {
+      return 0
+    }
+  }
+
+  var hookFailed = false
+
+  // beforeWorking: a dial starts (never on a resume); onWorking: every tick of a running dial, which after a reload puts the gate back in `known`
+  function startRun(machine) {
+    try {
+      var level = machine.getLevel()
+      if (level !== null && level !== undefined && !level.isClientSide()) {
+        var k = remember(machine, level)
+        var pd = level.getServer().persistentData
+        var t = pd.getCompound(K_RUNS)
+        t.putInt(k, t.getInt(k) + 1)
+        pd.put(K_RUNS, t)
+      }
+    } catch (e) {
+      if (!hookFailed) {
+        hookFailed = true
+        console.error(LOG + 'run counter failed: ' + e)
+      }
+    }
+    return true
+  }
+
+  function watch(machine) {
+    try {
+      var level = machine.getLevel()
+      if (level !== null && level !== undefined && !level.isClientSide() && known[keyOf(level, machine)] === undefined) remember(machine, level)
+    } catch (e) {
+      if (!hookFailed) {
+        hookFailed = true
+        console.error(LOG + 'gate registration failed: ' + e)
+      }
+    }
+    return true
+  }
+  HS.forget = function () { known = {} }
+
   function describe(entry) {
     var m = entry.machine
     var p = m.getPos()
     var facing = String(m.getFrontFacing()).toLowerCase()
-    return { dimension: dimensionOf(entry.level), pos: { x: coord(p, 'x'), y: coord(p, 'y'), z: coord(p, 'z') }, facing: facing, open: isOpen(m), box: box(p, facing) }
+    return { dimension: dimensionOf(entry.level), pos: { x: coord(p, 'x'), y: coord(p, 'y'), z: coord(p, 'z') }, facing: facing, open: isOpen(m), run: runOf(entry.level, entry.key), box: box(p, facing) }
   }
 
   HS.gates = function () {
@@ -318,6 +365,8 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(TYPE)
       .recipeModifier(dialModifier, true)
+      .beforeWorking(function (machine, recipe) { return startRun(machine) })
+      .onWorking(function (machine) { return watch(machine) })
       // a refused start is looked at again by a fresh search (lib/fresh_run.js)
       .afterWorking(function (machine) { fresh(machine) })
       .appearanceBlock(function () { return Block.getBlock(CASING) })

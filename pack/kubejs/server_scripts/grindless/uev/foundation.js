@@ -3,7 +3,7 @@
 // recipe is made by the package that makes its parts. Ids: startup_scripts/grindless/uev/foundation.js. All run in GTM's assembler at UHV
 // voltage (V[UHV] = 2,097,152 EU/t, one tier under the UEV hull they make).
 ServerEvents.recipes(function (event) {
-  const UHV_EUT = 2097152
+  var UHV_EUT = 2097152
 
   event.recipes.gtceu.assembler('grindless:uev_machine_casing')
     .itemInputs('6x gtceu:tritanium_plate', '2x grindless:sic_sic_plate')

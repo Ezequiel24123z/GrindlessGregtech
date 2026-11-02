@@ -31,28 +31,29 @@
 // Level#getGameTime is getTime, Entity#level() is hidden (use getLevel()). Calling getYRot() on a real
 // player threw "Cannot find function getYRot" and the keys did nothing (v0.4.0).
 
-const VOID_DIM = 'grindless:void'
-const FLAT_DIM = 'grindless:flat'
-const END_DIM = 'minecraft:the_end'
-const OVERWORLD_DIM = 'minecraft:overworld'
-const PD_KEY = 'grindless_dimensions'
-const COOLDOWN_TICKS = 20 // 1 second, on top of the vanilla item-cooldown overlay
-const VOID_PLATFORM_BLOCK = 'minecraft:stone_bricks'
-const VOID_LANDING_Y = 64
-const FLAT_LANDING_Y = 64 // grindless:flat is identical in every chunk (5-layer flat preset), so the
+;(function () {
+var VOID_DIM = 'grindless:void'
+var FLAT_DIM = 'grindless:flat'
+var END_DIM = 'minecraft:the_end'
+var OVERWORLD_DIM = 'minecraft:overworld'
+var PD_KEY = 'grindless_dimensions'
+var COOLDOWN_TICKS = 20 // 1 second, on top of the vanilla item-cooldown overlay
+var VOID_PLATFORM_BLOCK = 'minecraft:stone_bricks'
+var VOID_LANDING_Y = 64
+var FLAT_LANDING_Y = 64 // grindless:flat is identical in every chunk (5-layer flat preset), so the
                           // surface is always y=63 by construction: no need for a heightmap lookup,
                           // which is unreliable on a chunk that has not finished generating yet.
-const END_LANDING_X = 2000 // Far enough from the central island/dragon/void chasms around 0,0 that
-const END_LANDING_Z = 0    // real end stone there (if any) is just outer-island scenery, not danger;
-const END_LANDING_Y = 64   // fixed regardless of the player's Overworld position, unlike void/flat.
-const SAFE_Y_SEARCH_RANGE = 192
-const TRAVEL_DIMS = [VOID_DIM, FLAT_DIM, END_DIM]
+var END_LANDING_X = 2000 // Far enough from the central island/dragon/void chasms around 0,0 that
+var END_LANDING_Z = 0    // real end stone there (if any) is just outer-island scenery, not danger;
+var END_LANDING_Y = 64   // fixed regardless of the player's Overworld position, unlike void/flat.
+var SAFE_Y_SEARCH_RANGE = 192
+var TRAVEL_DIMS = [VOID_DIM, FLAT_DIM, END_DIM]
 
-const $HashSet = Java.loadClass('java.util.HashSet')
-const $ResourceKey = Java.loadClass('net.minecraft.resources.ResourceKey')
-const $Registries = Java.loadClass('net.minecraft.core.registries.Registries')
-const $ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
-const $GTConfigHolder = Java.loadClass('com.gregtechceu.gtceu.config.ConfigHolder')
+var $HashSet = Java.loadClass('java.util.HashSet')
+var $ResourceKey = Java.loadClass('net.minecraft.resources.ResourceKey')
+var $Registries = Java.loadClass('net.minecraft.core.registries.Registries')
+var $ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
+var $GTConfigHolder = Java.loadClass('com.gregtechceu.gtceu.config.ConfigHolder')
 
 function isTravelDim(dimId) {
     for (var i = 0; i < TRAVEL_DIMS.length; i++) {
@@ -193,6 +194,15 @@ function returnToSavedPosition(player, server) {
     } else {
         dest = fallbackSpawn(player, server)
     }
+    // the saved spot may have been built over while the player was away: climb to the first 2-block air pocket
+    var destLevel = server.getLevel(dest.dim)
+    if (destLevel) {
+        var sx = Math.floor(dest.x)
+        var sz = Math.floor(dest.z)
+        var sy = Math.floor(dest.y)
+        var safeY = findSafeY(destLevel, sx, sy, sz)
+        if (safeY !== sy) dest.y = safeY
+    }
     return teleportSafely(player, dest.dim, dest.x, dest.y, dest.z, dest.yaw, dest.pitch)
 }
 
@@ -332,3 +342,4 @@ function addFlatToVeinFilter(vein, flatKey) {
     updated.add(flatKey)
     vein.dimensionFilter(updated)
 }
+})()

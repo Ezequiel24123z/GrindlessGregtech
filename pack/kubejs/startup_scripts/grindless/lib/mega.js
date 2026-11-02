@@ -136,7 +136,11 @@
   function hatchParallel(machine) {
     try {
       var o = machine.getParallelHatch()
-      if (o !== null && o !== undefined && o.isPresent()) return Number(o.get().getCurrentParallel())
+      if (o !== null && o !== undefined && o.isPresent()) {
+        var hatch = o.get()
+        if (G.parallelHatch && typeof G.parallelHatch.keepMaxplus === 'function') G.parallelHatch.keepMaxplus(hatch)
+        return Number(hatch.getCurrentParallel())
+      }
     } catch (e) { }
     return 1
   }

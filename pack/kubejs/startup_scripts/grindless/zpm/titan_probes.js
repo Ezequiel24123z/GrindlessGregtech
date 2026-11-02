@@ -130,7 +130,7 @@
   ]
 
   StartupEvents.registry('item', function (event) {
-    const item = event.create(ZT.recording)
+    var item = event.create(ZT.recording)
       .texture('grindless:item/titan_probe_recording')
       .maxStackSize(16)
     item.tooltip(Text.gray(Text.translate('tooltip.grindless.titan_probe_recording.0')))
@@ -159,7 +159,7 @@
   GTCEuStartupEvents.registry('gtceu:machine', function (event) {
     ZT.machines.forEach(function (m) {
       Pat.register('gtceu:' + m.name, m.spec)
-      const tips = [
+      var tips = [
         Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + String(m.type).replace('gtceu:', '')))
       ]
