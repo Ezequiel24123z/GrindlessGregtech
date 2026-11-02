@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
@@ -60,7 +61,7 @@ test('the horizon processor joins on the hall at VA[MAX]', () => {
   assert.equal(r.eut, VA_MAX);
   assert.deepEqual(r.itemsIn.map((x) => [x.id, x.count]), [
     ['grindless:horizon_logic_die', 2], ['grindless:horizon_interposer', 1], ['grindless:quantum_memory_node', 1],
-    ['grindless:rydberg_logic_array', 1], ['gtnn:supracausal_mainframe', 2]]);
+    ['grindless:rydberg_logic_array', 1], ['#gtceu:circuits/max', 2]]);
   assert.deepEqual(r.fluidsIn, [{ id: 'gtceu:kerr_condensate', amount: 1000 }]);
 });
 
