@@ -6,10 +6,13 @@
 // past about 700 covers. A list of compounds has no such limit: each string in it is one field (a dimension id, a side, a kind).
 //
 // Entries (field, NBT type); every copy of an entry keeps this order, so equal entries print the same:
-//   tower:          k 'tower', d dimension, x y z, f formed (byte), c capacity (long), t tier (0 = no cells), n cells
-//   bank:           k 'bank', d, x y z, f formed (byte), n capacitors (XP-H5: a bank's capacity, n x 2^48, passes a safe long, so it is derived)
-//   hatch / dynamo: k, d, x y z, t tier, a amps
-//   cover:          k 'cover', d, x y z, s side, ck 'energy' | 'dynamo', t tier
+//   tower:          k 'tower', o team, d dimension, x y z, f formed (byte), c capacity (long), t tier (0 = no cells), n cells
+//   bank:           k 'bank', o, d, x y z, f formed (byte), n capacitors (XP-H5: a bank's capacity, n x 2^48, passes a safe long, so it is derived)
+//   hatch / dynamo: k, o, d, x y z, t tier, a amps
+//   cover:          k 'cover', o, d, x y z, s side, ck 'energy' | 'dynamo', t tier
+// o is the network the block belongs to (B13-WTEAM, #235): the FTB team id (a UUID string) of whoever placed it, or 'server' for a block no
+// player placed. canon() gives an entry without `o` the 'server' network (a test's entry); a saved compound without `o` is not valid: it
+// was written before per-team networks, is kept as { bad } and never used (no migration of the old single network).
 // Reading never drops anything. A compound that is not a valid entry stays in the list as { bad: why, tag } (the network skips it and
 // it is written back as it was). Anything else found under the key is copied to a free backup key, and the list starts empty in the
 // new format (the pre-v1.0.0 single-string list is no longer converted: v1.0.0 needed a new world).
@@ -22,7 +25,8 @@
   var G = global.grindless || (global.grindless = {})
   // NBT tag type ids: byte, int, long, string, list, compound
   var ID = { b: 1, i: 3, l: 4, s: 8, list: 9, compound: 10 }
-  var COMMON = [['k', 's'], ['d', 's'], ['x', 'i'], ['y', 'i'], ['z', 'i']]
+  var SERVER = 'server'
+  var COMMON = [['k', 's'], ['o', 's'], ['d', 's'], ['x', 'i'], ['y', 'i'], ['z', 'i']]
   var FIELDS = {
     tower: COMMON.concat([['f', 'b'], ['c', 'l'], ['t', 'i'], ['n', 'i']]),
     bank: COMMON.concat([['f', 'b'], ['n', 'i']]),
@@ -62,9 +66,11 @@
     if (!f) throw new Error('unknown kind ' + JSON.stringify(e.k) + ' in ' + JSON.stringify(e))
     var out = {}
     for (var i = 0; i < f.length; i++) {
-      var why = problem(f[i][0], f[i][1], e[f[i][0]])
+      var name = f[i][0]
+      var v = name === 'o' && e.o === undefined ? SERVER : e[name]
+      var why = problem(name, f[i][1], v)
       if (why) throw new Error(e.k + ' entry ' + JSON.stringify(e) + ': ' + why)
-      out[f[i][0]] = e[f[i][0]]
+      out[name] = v
     }
     return out
   }
@@ -92,7 +98,7 @@
     for (var i = 0; i < f.length; i++) {
       var name = f[i][0]
       var type = f[i][1]
-      if (!t.contains(name, ID[type])) return { bad: k + ' without ' + name, tag: t.copy() }
+      if (!t.contains(name, ID[type])) return { bad: name === 'o' ? k + ' without an owner (saved before per-team networks)' : k + ' without ' + name, tag: t.copy() }
       if (type === 's') e[name] = String(t.getString(name))
       else if (type === 'i') e[name] = Number(t.getInt(name))
       else if (type === 'l') e[name] = Number(t.getLong(name))
@@ -143,6 +149,7 @@
   }
 
   G.wirelessRegistry = {
+    SERVER: SERVER,
     FIELDS: FIELDS,
     canon: canon,
     toTag: toTag,

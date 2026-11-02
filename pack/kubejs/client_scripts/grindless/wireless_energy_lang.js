@@ -52,8 +52,8 @@
     add('tooltip.grindless.wireless_cell.made_by', 'Made in the %s')
     add('grindless.machine.wireless_energy_hatch.tooltip.0', 'Energy input for multiblocks, filled from the wireless network whenever a formed tower holds a cell of its tier or higher.')
     add('grindless.machine.wireless_dynamo_hatch.tooltip.0', 'Energy output for generator multiblocks: everything it gets goes into the wireless network (5% loss).')
-    add('grindless.machine.wireless.tooltip.network', 'One network for every world, stored in Wireless Energy Towers. Its chunk must be loaded.')
-    add('grindless.machine.wireless.tooltip.readout', 'Shift + right-click with an empty hand: the network\'s EU and flow')
+    add('grindless.machine.wireless.tooltip.network', 'One network per FTB team, for every world, stored in Wireless Energy Towers: it belongs to the team of the player who placed it. Its chunk must be loaded.')
+    add('grindless.machine.wireless.tooltip.readout', 'Shift + right-click with an empty hand: the team network\'s EU and flow')
     add('tooltip.grindless.wireless_energy_cover.0', 'Feeds the single-block machine it is on from the wireless network, whenever a formed tower holds a cell of its tier or higher.')
     add('tooltip.grindless.wireless_dynamo_cover.0', 'Sends a generator\'s or battery buffer\'s stored EU into the wireless network (5% loss).')
     add('tooltip.grindless.wireless_cover.rate', '%s: up to %s EU/t (%s A)')
@@ -72,6 +72,7 @@
     add('message.grindless.wireless.cover_unsupported', 'Wireless covers can\'t use this machine\'s energy storage (%s)')
     add('message.grindless.wireless.fault', 'This wireless block was stopped after an energy error (see the server log). Place it or its cover again, or restart the server, to retry')
     add('message.grindless.wireless.cover_placed', '%s wireless cover on')
+    add('message.grindless.wireless.cover_claimed', 'This chunk is claimed: you may not put a wireless cover here')
   })
 
 })()

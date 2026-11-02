@@ -162,8 +162,11 @@ const dynamo = { k: 'dynamo', d: 'minecraft:overworld', x: 13348, y: 99, z: 4, t
 
 test('wireless registry: canon gives every kind its fields in one order and refuses anything else', () => {
   const shuffled = { t: 1, ck: 'energy', s: 'up', z: 5, y: 100, x: 13312, d: 'minecraft:overworld', k: 'cover', extra: 'dropped' };
-  assert.deepEqual(plain(Object.keys(R.canon(shuffled))), ['k', 'd', 'x', 'y', 'z', 's', 'ck', 't']);
-  assert.deepEqual(plain(Object.keys(R.canon(tower))), ['k', 'd', 'x', 'y', 'z', 'f', 'c', 't', 'n']);
+  assert.deepEqual(plain(Object.keys(R.canon(shuffled))), ['k', 'o', 'd', 'x', 'y', 'z', 's', 'ck', 't']);
+  assert.deepEqual(plain(Object.keys(R.canon(tower))), ['k', 'o', 'd', 'x', 'y', 'z', 'f', 'c', 't', 'n']);
+  assert.equal(R.canon(tower).o, 'server', 'an entry with no owner is the server network\'s');
+  assert.equal(R.canon({ ...tower, o: 'b3a4' }).o, 'b3a4');
+  assert.throws(() => R.canon({ ...tower, o: 7 }), /o is not a text/);
   assert.throws(() => R.canon({ ...cover(0), t: '1' }), /t is not a whole number/);
   assert.throws(() => R.canon({ ...cover(0), x: 1.5 }), /x is not a whole number/);
   assert.throws(() => R.canon({ ...tower, f: 1 }), /f is not true or false/);
@@ -185,8 +188,8 @@ test('wireless registry: the old JSON string cannot be saved past ~700 covers; t
   const big = Array.from({ length: 1000 }, (_, i) => R.canon(cover(i)));
   // the old format: the whole list in one string tag
   let firstTooBig = 0;
-  for (let n = 600; n <= 1000 && !firstTooBig; n++) if (Buffer.byteLength(JSON.stringify(big.slice(0, n))) > 65535) firstTooBig = n;
-  assert.ok(firstTooBig > 600 && firstTooBig < 800, 'the old single string passes 65,535 bytes at ' + firstTooBig + ' covers');
+  for (let n = 500; n <= 1000 && !firstTooBig; n++) if (Buffer.byteLength(JSON.stringify(big.slice(0, n))) > 65535) firstTooBig = n;
+  assert.ok(firstTooBig > 500 && firstTooBig < 800, 'the old single string passes 65,535 bytes at ' + firstTooBig + ' covers');
   const old = new CompoundTag();
   old.putString('grindless_wireless_blocks', JSON.stringify(big));
   assert.throws(() => writeNbt(old), /UTFDataFormatException/);
@@ -218,6 +221,7 @@ test('wireless registry: nothing unreadable is dropped (a string under the key, 
   // a compound that is not an entry stays as it was
   const odd = new CompoundTag();
   odd.putString('k', 'cover');
+  odd.putString('o', 'server');
   odd.putString('d', 'minecraft:overworld');
   const list = R.write([cover(2)]);
   list.add(odd);
@@ -227,6 +231,22 @@ test('wireless registry: nothing unreadable is dropped (a string under the key, 
   assert.equal(r3.migrated, false);
   assert.ok(r3.list[1].bad && /without x/.test(r3.list[1].bad));
   assert.equal(R.write(r3.list).getCompound(1).getString('d'), 'minecraft:overworld');
+  // a block saved before per-team networks has no owner: kept as it was, never used, and not migrated to any team
+  const old1 = new CompoundTag();
+  old1.putString('k', 'hatch');
+  old1.putString('d', 'minecraft:overworld');
+  old1.putInt('x', 1);
+  old1.putInt('y', 2);
+  old1.putInt('z', 3);
+  old1.putInt('t', 1);
+  old1.putInt('a', 2);
+  const oldList = R.write([]);
+  oldList.add(old1);
+  const pd5 = new CompoundTag();
+  pd5.put('grindless_wireless_blocks', oldList);
+  const r5 = R.read(pd5, 'grindless_wireless_blocks', 'grindless_wireless_blocks_legacy');
+  assert.match(r5.list[0].bad, /without an owner/);
+  assert.equal(R.write(r5.list).getCompound(0).contains('o', 8), false, 'written back as it was: no owner invented');
   // any other tag type under the key: kept aside
   const pd4 = new CompoundTag();
   pd4.putInt('grindless_wireless_blocks', 7);
@@ -615,7 +635,9 @@ function jvm(opts = {}) {
   // what GTM's machine registration does through Pat.build: the tower's structure described for the tests
   G.patterns.register(W.towerId, W.towerSpec);
   Object.values(W.covers).forEach((c) => { W.coverDefinitions[c.def] = { id: c.def }; });
-  for (const f of [path.join(LIB, 'wireless_registry.js'), path.join(LIB, 'wireless_adapters.js'), SERVER_SCRIPT].concat(opts.overlays || [])) runFile(f);
+  for (const f of [path.join(LIB, 'wireless_registry.js'), path.join(LIB, 'wireless_adapters.js'), path.join(LIB, 'teams.js'), SERVER_SCRIPT].concat(opts.overlays || [])) runFile(f);
+  // FTB Teams and FTB Chunks are not here: no claims, no machine owners, a player's team is the one the test names
+  G.teams.using({ teamOfPlayer: (p) => (p.fake ? 'server' : p.team), teamOfUuid: (u) => String(u), claimTeam: () => null, claimRefuses: () => false, machineOwner: () => null, ...(opts.teams || {}) });
   // the game's tick: the server script's handler settles every settleTicks ticks unless paused
   const run = (server, n) => { for (let i = 0; i < n; i++) { server.tick++; ticks.forEach((fn) => fn({ server })); } };
   return { W, G, run, errors, lines, commands, ticks, sandbox, global: sandbox.global };
@@ -1592,4 +1614,200 @@ test('wireless settlement (M8-13): a cell swapped in place still sets the tier o
   const st = W.settle(n.server);
   assert.ok(st.faulted >= 1, 'the broken machine is counted, not fatal');
   assert.equal(st.up, true);
+});
+// ---------------------------------------------------------------- one network per FTB team (B13-WTEAM, #235)
+
+const LV_CELL = 'grindless:lv_capacitor_cell';
+const IV_HATCH = 'gtceu:iv_wireless_energy_hatch';
+
+// two teams, each with a tower and hatches of its own, on one server: A has IV cells, B has LV cells
+function twoTeams(jvOpts = {}) {
+  const jv = jvm(jvOpts);
+  const w = luvWorld();
+  const server = serverOf(w);
+  const { W } = jv;
+  w.tower(LX, 0, cells(4, IV_CELL));
+  w.tower(LX + 8, 0, cells(2, LV_CELL));
+  const hatches = {
+    a: w.hatch(LX + 16, IV_HATCH, 8192 * 16 * 2),
+    b: w.hatch(LX + 18, IV_HATCH, 8192 * 16 * 2),
+    bLv: w.hatch(LX + 20, 'gtceu:lv_wireless_energy_hatch', 32 * 16 * 2),
+    unowned: w.hatch(LX + 22, IV_HATCH, 8192 * 16 * 2),
+  };
+  W.paused = true;
+  W.track(w.earth, new Pos(LX, 100, 0), 'teamA');
+  W.track(w.earth, new Pos(LX + 8, 100, 0), 'teamB');
+  W.track(w.earth, new Pos(LX + 16, 100, 40), 'teamA');
+  W.track(w.earth, new Pos(LX + 18, 100, 40), 'teamB');
+  W.track(w.earth, new Pos(LX + 20, 100, 40), 'teamB');
+  W.track(w.earth, new Pos(LX + 22, 100, 40));
+  return { jv, W, w, server, hatches };
+}
+
+test('wireless per team: two teams keep their own store, tier, capacity and flow; nothing moves between them', () => {
+  const { jv, W, w, server, hatches } = twoTeams();
+  assert.deepEqual(plain(W.tracked(server).map((e) => e.o)), ['teamA', 'teamB', 'teamA', 'teamB', 'teamB', 'server']);
+  W.setStored(server, 1000000000, 'teamA');
+  W.setStored(server, 500000000, 'teamB');
+  assert.equal(W.stored(server, 'teamA'), 1000000000);
+  assert.equal(W.stored(server, 'teamB'), 500000000);
+  assert.equal(W.serverTeamOf(server), 'server', 'two teams have towers: the unowned blocks are a network of their own');
+  const main = W.settle(server);
+  assert.equal(main.team, 'server');
+  assert.equal(main.up, false, 'the unowned network has no tower');
+  const a = W.lastByTeam.teamA;
+  const b = W.lastByTeam.teamB;
+  assert.deepEqual([a.up, a.tier, a.towers, a.capacity], [true, 5, 1, 4 * IV_EU]);
+  assert.deepEqual([b.up, b.tier, b.towers], [true, 1, 1], 'B\'s strongest cell is LV');
+  assert.ok(b.capacity < a.capacity);
+  assert.equal(hatches.a.energyContainer.getEnergyStored(), 163840, 'A\'s IV hatch is filled from A\'s store');
+  assert.equal(hatches.b.energyContainer.getEnergyStored(), 0, 'B\'s IV hatch is above B\'s LV network: nothing');
+  assert.equal(b.skippedAbove, 1);
+  assert.equal(hatches.bLv.energyContainer.getEnergyStored(), 640, 'B\'s LV hatch is filled from B\'s store');
+  assert.equal(hatches.unowned.energyContainer.getEnergyStored(), 0, 'a block no team owns gets nothing from either');
+  assert.equal(W.stored(server, 'teamA'), 1000000000 - 163840);
+  assert.equal(W.stored(server, 'teamB'), 500000000 - 640);
+  assert.equal(a.out, 163840);
+  assert.equal(b.out, 640);
+  assert.equal(a.tracked, 2);
+  assert.equal(b.tracked, 3);
+  // each team's status and flow window are its own
+  assert.equal(W.status(server, 'teamA').outPerSecond, 163840);
+  assert.equal(W.status(server, 'teamB').outPerSecond, 640);
+  assert.equal(W.status(server).team, 'server');
+  assert.equal(W.status(server).up, false);
+  // the stores are where they should be: the server's old key is untouched, each team has its own long in the stores compound
+  const stores = server.persistentData.getCompound(W.storesKey);
+  assert.equal(stores.getLong('teamA'), 1000000000 - 163840);
+  assert.equal(stores.getLong('teamB'), 500000000 - 640);
+  assert.equal(server.persistentData.getLong(W.storeKey), 0);
+  // B's tower is broken: B's network is down and its store stays; A is as it was
+  w.earth.blocks.delete((LX + 8) + ',100,0');
+  w.earth.machines.delete((LX + 8) + ',100,0');
+  W.settle(server);
+  assert.equal(W.lastByTeam.teamB.up, false);
+  assert.equal(W.lastByTeam.teamA.up, true);
+  assert.equal(W.stored(server, 'teamB'), 500000000 - 640, 'B\'s EU stays where it was');
+  assert.ok(W.stored(server, 'teamA') < 1000000000 - 163840, 'A kept feeding its own hatch');
+  assert.deepEqual(jv.errors, []);
+});
+
+test('wireless per team: the unowned blocks join the only team that has a tower, and leave when a second team forms one', () => {
+  const { W, w, server, hatches } = twoTeams();
+  w.earth.blocks.delete((LX + 8) + ',100,0');
+  w.earth.machines.delete((LX + 8) + ',100,0');
+  W.setStored(server, 1000000000, 'teamA');
+  W.settle(server);
+  W.settle(server);
+  assert.equal(W.serverTeamOf(server), 'teamA', 'only A has a formed tower once the settlement has forgotten B\'s');
+  assert.equal(W.settle(server).up, true, 'the unowned blocks now belong to A\'s network');
+  assert.equal(W.status(server).team, 'teamA', 'a call with no team means A');
+  assert.equal(W.stored(server), W.stored(server, 'teamA'));
+  assert.equal(W.dialCharge(server).stored, W.stored(server, 'teamA'));
+  assert.ok(hatches.unowned.energyContainer.getEnergyStored() > 0, 'the unowned hatch is fed from A\'s store');
+  // team B builds a tower again: the unowned blocks are on their own again
+  w.tower(LX + 8, 0, cells(2, LV_CELL));
+  W.track(w.earth, new Pos(LX + 8, 100, 0), 'teamB');
+  W.settle(server);
+  assert.equal(W.serverTeamOf(server), 'server');
+  hatches.unowned.energyContainer.setEnergyStored(0);
+  W.settle(server);
+  assert.equal(hatches.unowned.energyContainer.getEnergyStored(), 0);
+});
+
+test('wireless per team: a block belongs to its placer\'s team, else its machine\'s owner, else its claim, else the server; a re-track keeps it', () => {
+  const claimed = LX + 30;
+  const { W, w, server } = twoTeams({ teams: {
+    machineOwner: (m) => m.owner || null,
+    claimTeam: (l, pos) => (pos.x === claimed ? 'teamZ' : null),
+  } });
+  const hatchAt = (x) => w.hatch(x, IV_HATCH, 8192 * 16 * 2);
+  const ownerAt = (x, who) => { const e = W.track(w.earth, new Pos(x, 100, 40), who); return e && e.o; };
+  hatchAt(LX + 24);
+  assert.equal(ownerAt(LX + 24, { team: 'teamC' }), 'teamC', 'the placing player\'s team');
+  assert.equal(ownerAt(LX + 24), 'teamC', 'a shift-click (no player) keeps the owner');
+  assert.equal(ownerAt(LX + 24, { fake: true }), 'teamC', 'a fake player changes nothing');
+  assert.equal(ownerAt(LX + 24, { team: 'teamD' }), 'teamD', 'a block placed again is the new placer\'s');
+  hatchAt(LX + 26).owner = 'uuid-7';
+  assert.equal(ownerAt(LX + 26, { fake: true }), 'uuid-7', 'a fake player: the machine\'s recorded owner');
+  hatchAt(claimed);
+  assert.equal(ownerAt(claimed), 'teamZ', 'no player and no owner: the team that claimed the chunk');
+  hatchAt(LX + 28);
+  assert.equal(ownerAt(LX + 28), 'server', 'nobody at all');
+});
+
+test('wireless per team: a cover is refused on a chunk FTB Chunks protects from the player, and nothing else changes', () => {
+  const { W, w } = twoTeams({ teams: { claimRefuses: (p) => p.team === 'intruder' } });
+  const pos = new Pos(LX + 16, 100, 40);
+  w.earth.mayInteract = () => true;
+  assert.equal(W.claimAllows({ team: 'intruder' }, w.earth, pos, SIDE.up), false);
+  assert.equal(W.claimAllows({ team: 'owner' }, w.earth, pos, SIDE.up), true);
+  w.earth.mayInteract = () => false;
+  assert.equal(W.claimAllows({ team: 'owner' }, w.earth, pos, SIDE.up), false, 'the old spawn-protection check still applies');
+});
+
+test('wireless per team: the teams helper maps players, UUIDs and machines to team ids and degrades to the UUID or the server', () => {
+  const warnings = [];
+  const optional = (id) => ({ isPresent: () => id !== null, get: () => ({ getId: () => id }) });
+  const teamOf = { 'uuid-p': 'party-1' };
+  const classes = {
+    'dev.ftb.mods.ftbteams.api.FTBTeamsAPI': { api: () => ({ isManagerLoaded: () => true, getManager: () => ({
+      getTeamForPlayer: (p) => optional(teamOf[p.getUUID()] || null),
+      getTeamForPlayerID: (u) => optional(teamOf[u] || null),
+    }) }) },
+    'net.minecraftforge.common.util.FakePlayer': { [Symbol.hasInstance]: (p) => !!p.fake },
+    'dev.ftb.mods.ftbchunks.api.FTBChunksAPI': { api: () => ({ isManagerLoaded: () => true, getManager: () => ({
+      getChunk: (c) => (c.pos.x === 1 ? { getTeamData: () => ({ getTeam: () => ({ getId: () => 'claimer' }) }) } : null),
+      shouldPreventInteraction: (p) => p.getUUID() === 'uuid-x',
+    }) }) },
+    'dev.ftb.mods.ftblibrary.math.ChunkDimPos': class { constructor(level, pos) { this.pos = pos; } },
+    'dev.ftb.mods.ftbchunks.api.Protection': { EDIT_AND_INTERACT_BLOCK: 'edit' },
+    'net.minecraft.world.InteractionHand': { MAIN_HAND: 'main' },
+  };
+  const sandbox = { console: { error: (m) => warnings.push(String(m)) }, String, Java: { loadClass: (n) => classes[n] } };
+  sandbox.global = sandbox;
+  vm.runInNewContext(fs.readFileSync(path.join(LIB, 'teams.js'), 'utf8'), sandbox, { filename: 'teams.js' });
+  const T = sandbox.grindless.teams;
+  const player = (uuid, fake) => ({ fake, getUUID: () => uuid });
+  assert.equal(T.ofPlayer(player('uuid-p')), 'party-1', 'a party member: the party');
+  assert.equal(T.ofPlayer(player('uuid-q')), 'uuid-q', 'no team recorded: the player\'s own UUID');
+  assert.equal(T.ofPlayer(player('uuid-p', true)), 'server', 'a fake player acts for nobody');
+  assert.equal(T.ofPlayer(null), 'server');
+  assert.equal(T.ofUuid('uuid-p'), 'party-1');
+  assert.equal(T.ofUuid(null), 'server');
+  assert.equal(T.ofMachine({}), 'server', 'a machine type with no owner');
+  assert.equal(T.ofMachine({ getOwnerUUID: () => 'uuid-p' }), 'party-1');
+  assert.equal(T.ofMachine({ getOwnerUUID: () => '00000000-0000-0000-0000-000000000000' }), 'server');
+  assert.equal(T.claimOwner({}, { x: 1 }), 'claimer');
+  assert.equal(T.claimOwner({}, { x: 2 }), null, 'unclaimed');
+  assert.equal(T.claimRefuses(player('uuid-x'), {}, { x: 1 }), true);
+  assert.equal(T.claimRefuses(player('uuid-p'), {}, { x: 1 }), false);
+  // a test's lookups, partially: what it leaves out is still the real one
+  T.using({ teamOfUuid: () => 'injected' });
+  assert.equal(T.ofUuid('uuid-p'), 'injected');
+  assert.equal(T.ofPlayer(player('uuid-p')), 'party-1');
+  T.using(null);
+  assert.equal(T.ofUuid('uuid-p'), 'party-1');
+  // FTB Teams and FTB Chunks missing: the UUID is the team, and nothing is refused
+  delete classes['dev.ftb.mods.ftbteams.api.FTBTeamsAPI'];
+  delete classes['dev.ftb.mods.ftbchunks.api.FTBChunksAPI'];
+  assert.equal(T.ofPlayer(player('uuid-p')), 'uuid-p');
+  assert.equal(T.claimRefuses(player('uuid-x'), {}, { x: 1 }), false);
+  assert.equal(T.claimOwner({}, { x: 1 }), null);
+  assert.equal(warnings.length, 2, 'each missing mod is said once');
+});
+
+test('wireless per team: every team\'s store survives a cold restart, each in its own place', () => {
+  const { W, w, server } = twoTeams();
+  W.setStored(server, 123456789012, 'teamA');
+  W.setStored(server, 42, 'teamB');
+  W.setStored(server, 7);
+  const disk = readNbt(writeNbt(server.persistentData));
+  const again = jvm();
+  const server2 = serverOf(w, disk);
+  assert.equal(again.W.stored(server2, 'teamA'), 123456789012);
+  assert.equal(again.W.stored(server2, 'teamB'), 42);
+  assert.equal(again.W.stored(server2, 'nobody'), 0);
+  assert.deepEqual(plain(again.W.tracked(server2).map((e) => e.o)), ['teamA', 'teamB', 'teamA', 'teamB', 'teamB', 'server']);
+  assert.equal(again.W.settle(server2).tracked, 1, 'the server network counts its own one block');
 });

@@ -28,7 +28,7 @@ const KJS = path.join(PACK, 'kubejs');
 const FIXTURE = path.join(ROOT, 'tools', 'test', 'overlay', 'kubejs', 'server_scripts', 'gg_test_luv_a4.js');
 const STARTUP = ['lib/patterns.js', 'lib/generators.js', 'lib/parallel_hatch.js', 'lv/wireless_energy.js', 'luv/foundation.js', 'luv/hts_magnet_works.js',
   'power/generator_array.js'].map((f) => path.join(KJS, 'startup_scripts', 'grindless', f));
-const SERVER = ['lib/wireless_registry.js', 'lib/wireless_adapters.js', 'lv/wireless_energy.js', 'luv/hts_magnet_works.js']
+const SERVER = ['lib/wireless_registry.js', 'lib/wireless_adapters.js', 'lib/teams.js', 'lv/wireless_energy.js', 'luv/hts_magnet_works.js']
   .map((f) => path.join(KJS, 'server_scripts', 'grindless', f));
 
 const EARTH = 'minecraft:overworld';
@@ -696,6 +696,9 @@ function jvm({ server = true, fixture = true } = {}) {
     'net.minecraft.world.item.ItemStack': { EMPTY },
     'net.minecraft.core.registries.BuiltInRegistries': { BLOCK: { getKey: (b) => b.id, containsKey: (rl) => sim.blockIds.has(rl.id) } },
     'net.minecraftforge.common.util.FakePlayerFactory': { getMinecraft: (level) => sim.fakePlayer(level) },
+    'net.minecraftforge.common.util.FakePlayer': { [Symbol.hasInstance]: () => true },
+    'dev.ftb.mods.ftbteams.api.FTBTeamsAPI': { api: () => ({ isManagerLoaded: () => false }) },
+    'dev.ftb.mods.ftbchunks.api.FTBChunksAPI': { api: () => ({ isManagerLoaded: () => false }) },
     'net.minecraftforge.common.ForgeHooks': { onRightClickBlock: (fp, hand, pos, hit) => sim.click(fp, hand, pos, hit) },
     'net.minecraftforge.registries.ForgeRegistries': { ITEMS: { getKey: (i) => i.id }, FLUIDS: { getKey: (f) => f.id } },
     'net.minecraftforge.fluids.FluidStack': { EMPTY: FLUID_EMPTY },

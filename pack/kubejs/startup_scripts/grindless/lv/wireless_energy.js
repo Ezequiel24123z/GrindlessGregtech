@@ -1,7 +1,7 @@
 // priority: -5300
 // -----------------------------------------------------------------------------------------------
-// LV: the wireless energy network (DECISIONS.md 2026-10-25, "Wireless energy"; docs/eras/lv.md, "Wireless energy"). One network for
-// the whole server: every dimension puts EU in and takes EU out of the same store, with 5% lost on the way in. Registrations only;
+// LV: the wireless energy network (DECISIONS.md 2026-10-25, "Wireless energy"; docs/eras/lv.md, "Wireless energy"). One network per FTB team
+// (B13-WTEAM): every dimension puts EU in and takes EU out of the team's own store, with 5% lost on the way in. Registrations only;
 // the network itself (the store, the settlement, the readout, the covers' placing) and the recipes are in
 // server_scripts/grindless/lv/wireless_energy.js. The numbers are in kubejs/data/grindless/tables/wireless_energy.json.
 //
@@ -282,7 +282,7 @@
       if (level === null || level === undefined || level.isClientSide()) return
       if (typeof W.towerInfo !== 'function' || typeof W.status !== 'function' || typeof W.perTick !== 'function') return
       var info = W.towerInfo(controller)
-      var st = W.status(level.getServer())
+      var st = W.status(level.getServer(), typeof W.teamAt === 'function' ? W.teamAt(level, controller.getPos()) : undefined)
       var FU = Java.loadClass('com.gregtechceu.gtceu.utils.FormattingUtil')
       if (info.pending) {
         // just loaded: GTM checks the structure again within a second

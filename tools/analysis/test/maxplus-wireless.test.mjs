@@ -78,5 +78,6 @@ test('the exact store keeps its Number path and adds a BigInteger one above 2^53
   assert.match(src, /W\.big = \{/);
   assert.match(src, /java\.math\.BigInteger/);
   assert.match(src, /putLong\(big\.longValue\(\)\)/);
-  assert.match(src, /putLong\(STORE_KEY,\s*Math\.max\(0, Math\.floor\(eu\)\)\)/);
+  assert.match(src, /pd\.putLong\(STORE_KEY, long\)/);
+  assert.match(src, /getCompound\(STORES_KEY\)\.putLong\(team, long\)/);
 });

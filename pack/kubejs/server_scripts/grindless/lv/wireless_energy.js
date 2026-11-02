@@ -5,8 +5,14 @@
 // kubejs/data/grindless/tables/wireless_energy.json. This script is the network: its store, the settlement, the readout, the covers'
 // placing and the recipes.
 //
-// One network for the whole server, no teams and no frequencies: its stored EU is a long in the server's persistent data, so every
-// world (the Overworld, the void, the Nether, the End, the Moon, Mars, Venus, Mercury) puts EU into and takes EU out of the same store.
+// One network per FTB team (B13-WTEAM, #235; the owner's answer on #230, superseding the old "no teams"): towers, cells, hatches, covers,
+// the stored EU and the tier all belong to a team, every world (the Overworld, the void, the Nether, the End, the Moon, Mars, Venus,
+// Mercury) puts EU into and takes EU out of that team's store, and no EU ever moves between teams. A block belongs to the team of the
+// player who placed it (lib/teams.js: FTB Teams' team of that player, a solo player's personal team); a block no player placed (a command,
+// the relay platforms) belongs to 'server', which joins the one team that has a formed tower when only one does, and is its own network
+// otherwise. Joining or leaving a party moves nothing: what a player built stays with the team it was built for (its store included), and
+// what they build from then on goes to their new team. A save from before this change is not carried over: its list has no owners, so
+// every entry is kept as unusable and the old stored EU is not read.
 // The store is the Wireless Energy Towers:
 //   - a formed tower adds the capacity of its capacitor cells (read from the formed structure, MultiblockState#getCache), and several
 //     towers add up. An unloaded tower keeps counting (what it had the last time it was loaded is recorded); a broken or unformed one
@@ -28,7 +34,8 @@
 // against the stored EU; a block whose move fails is set aside with an error in the log, and a failure can lose EU, never make it.
 // The covers: a cover item right-clicked on a single-block machine goes on through GTM's own ICoverable#placeCoverOnSide (the side
 // GTM's own cover items pick, ICoverable#rayTraceCoverableSide); an energy cover needs a machine that takes EU at its tier or above, a
-// dynamo cover a machine that gives EU at its tier or below. A crowbar takes it off and GTM gives the item back.
+// dynamo cover a machine that gives EU at its tier or below. A crowbar takes it off and GTM gives the item back. A cover goes only where
+// FTB Chunks lets the player edit (a claim of another team refuses it, G.teams.claimRefuses) and Forge's own claim check agrees.
 // The readout: shift + right-click a wireless hatch, a tower or a covered machine with an empty hand: the network's stored EU,
 // capacity and tier, and the last second's flow in and out, in the action bar.
 // Tracking: BlockEvents.placed (hatches, towers), the covers' placing, the shift-click (a block the list does not have yet); a block
@@ -39,8 +46,9 @@
 //
 // Published on global.grindless.wireless (the startup object) for the tower's display and the smoke tests
 // (tools/test/overlay/kubejs/server_scripts/gg_test_wireless_*.js): track, trackCover, placeCover, forget, tracked, settle, status,
-// towerInfo, stored, setStored, totals, flows, faults, perTick, readout, recipes, classify, blocksFromTag, dropCache, and the keys
-// blocksKey, storeKey, legacyKey.
+// towerInfo, stored, setStored, totals, flows, faults, perTick, readout, recipes, classify, blocksFromTag, dropCache, lastByTeam, teamArg,
+// serverTeamOf, claimAllows, and the keys blocksKey, storeKey, storesKey, legacyKey. status, stored, setStored, settle's result and dialCharge
+// take an optional team id (none: the server network, see serverTeam); track and trackCover take an optional player or team id.
 // Rhino: var + function inside every callback that runs more than once.
 (function () {
   const G = global.grindless || (global.grindless = {})
@@ -48,16 +56,20 @@
   if (!W || !W.table || !W.hatches || !W.covers) throw new Error('[grindless/wireless] startup_scripts/grindless/lv/wireless_energy.js did not run')
   const LOG = '[grindless/wireless] '
   const BLOCKS_KEY = 'grindless_wireless_blocks'
+  // the 'server' network's store is a long under STORE_KEY; every team's is a long under its id in the compound STORES_KEY
   const STORE_KEY = 'grindless_wireless_stored'
+  const STORES_KEY = 'grindless_wireless_stores'
   const WINDOW = Math.max(1, Math.round(20 / W.settleTicks))
 
   W.blocksKey = BLOCKS_KEY
   W.storeKey = STORE_KEY
+  W.storesKey = STORES_KEY
   // running totals since the server started (or the smoke test reset them): EU drained from producers, EU that reached the store, the
   // 5% lost, EU handed to consumers; flows: the same per tracked block (key d|x|y|z|side)
   W.totals = W.totals || { drained: 0, in: 0, lost: 0, out: 0, settlements: 0 }
   W.flows = W.flows || {}
-
+  // the last settlement of each network, by team id (W.last is the server network's)
+  W.lastByTeam = W.lastByTeam || {}
   function flowKey(e) {
     return e.d + '|' + e.x + '|' + e.y + '|' + e.z + '|' + (e.s || '')
   }
@@ -107,14 +119,22 @@
 
   // ---------------------------------------------------------------- the list
   // lib/wireless_registry.js keeps it in persistent data as an NBT list of compounds (no size limit) and gives every entry its field
-  // order: towers { k: 'tower', d, x, y, z, f: formed, c: capacity, t: tier (0 = no cells), n: cells }; hatches { k: 'hatch' | 'dynamo',
-  // d, x, y, z, t: tier, a: amps }; covers { k: 'cover', d, x, y, z, s: side, ck: 'energy' | 'dynamo', t: tier }. An entry it cannot use
+  // order: towers { k: 'tower', o: owner team, d, x, y, z, f: formed, c: capacity, t: tier (0 = no cells), n: cells }; hatches { k: 'hatch' | 'dynamo',
+  // o, d, x, y, z, t: tier, a: amps }; covers { k: 'cover', o, d, x, y, z, s: side, ck: 'energy' | 'dynamo', t: tier }. An entry it cannot use
   // is kept as { bad, tag } and written back unchanged; the network skips it.
 
   const R = G.wirelessRegistry
   if (!R) throw new Error('[grindless/wireless] server_scripts/grindless/lib/wireless_registry.js did not run')
   const LEGACY_KEY = 'grindless_wireless_blocks_legacy'
+  const SERVER_TEAM = R.SERVER
   W.legacyKey = LEGACY_KEY
+  W.serverTeam = SERVER_TEAM
+
+  // lib/teams.js (looked up when used, so the load order does not matter)
+  function teams() {
+    if (!G.teams) throw new Error('[grindless/wireless] server_scripts/grindless/lib/teams.js did not run')
+    return G.teams
+  }
 
   // the parsed list and the persistent-data tag it was read from or written as
   var cache = { tag: null, list: null }
@@ -123,7 +143,9 @@
     var pd = server.persistentData
     if (cache.list !== null && pd.get(BLOCKS_KEY) === cache.tag) return cache.list
     var r = R.read(pd, BLOCKS_KEY, LEGACY_KEY)
-    r.notes.forEach(function (n) { console.error(LOG + 'the list of wireless blocks: ' + n) })
+    // a save from before per-team networks has one unusable entry per block: the first few are named, the rest counted
+    r.notes.slice(0, 10).forEach(function (n) { console.error(LOG + 'the list of wireless blocks: ' + n) })
+    if (r.notes.length > 10) console.error(LOG + 'the list of wireless blocks: ' + (r.notes.length - 10) + ' more notes like those')
     cache.tag = pd.get(BLOCKS_KEY)
     cache.list = r.list
     return r.list
@@ -138,6 +160,17 @@
 
   function same(e, d, x, y, z, s) {
     return e.d === d && e.x === x && e.y === y && e.z === z && (s === undefined || e.s === s)
+  }
+
+  // the entry already tracked for this block (a cover is matched by side too), or undefined
+  function findEntry(server, entry) {
+    var list = blocks(server)
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i]
+      if (e.bad) continue
+      if (same(e, entry.d, entry.x, entry.y, entry.z, entry.k === 'cover' ? entry.s : undefined) && (e.k === 'cover') === (entry.k === 'cover')) return e
+    }
+    return undefined
   }
 
   // adds or updates one entry (matched by place, and by side for covers); the entry is checked and put in its field order first
@@ -159,8 +192,26 @@
     return entry
   }
 
-  // the block at pos (a wireless hatch or a tower controller): adds it. Returns the entry, or null when it is neither.
-  function track(level, pos) {
+  // the network a block at pos belongs to. In order: the team asked for (a team id, or a player, whose team is used); the team it was
+  // already tracked for (a shift-click never moves a block); the team of the player GTM recorded as the machine's owner; the team that
+  // claimed its chunk (FTB Chunks); 'server'.
+  function ownerOf(level, pos, who, known) {
+    if (typeof who === 'string' && who !== '') return who
+    if (who !== undefined && who !== null && typeof who === 'object') {
+      var byPlayer = String(teams().ofPlayer(who))
+      if (byPlayer !== SERVER_TEAM) return byPlayer
+    }
+    if (known) return known.o
+    var m = machineAt(level, pos)
+    var byMachine = m === null ? SERVER_TEAM : String(teams().ofMachine(m))
+    if (byMachine !== SERVER_TEAM) return byMachine
+    var claim = teams().claimOwner(level, pos)
+    return claim === null || claim === undefined ? SERVER_TEAM : String(claim)
+  }
+
+  // the block at pos (a wireless hatch or a tower controller): adds it. who: a player or a team id, when known (see ownerOf).
+  // Returns the entry, or null when it is neither.
+  function track(level, pos, who) {
     var id = String(level.getBlock(pos).id)
     var base = { d: dimensionOf(level), x: Number(pos.getX()), y: Number(pos.getY()), z: Number(pos.getZ()) }
     if (id === W.towerId) {
@@ -172,6 +223,7 @@
         info = { formed: false, cells: 0, capacity: 0, tier: 0 }
       }
       base.k = 'tower'
+      base.o = ownerOf(level, pos, who, findEntry(level.server, { k: 'tower', d: base.d, x: base.x, y: base.y, z: base.z }))
       base.f = info.formed
       base.c = info.capacity
       base.t = info.tier
@@ -186,6 +238,7 @@
         binfo = { formed: false, capacitors: 0 }
       }
       base.k = 'bank'
+      base.o = ownerOf(level, pos, who, findEntry(level.server, { k: 'bank', d: base.d, x: base.x, y: base.y, z: base.z }))
       base.f = binfo.formed
       base.n = binfo.capacitors
       return upsert(level.server, base)
@@ -193,14 +246,16 @@
     var h = W.hatches[id]
     if (!h) return null
     base.k = h.kind
+    base.o = ownerOf(level, pos, who, findEntry(level.server, { k: h.kind, d: base.d, x: base.x, y: base.y, z: base.z }))
     base.t = h.tier
     base.a = h.amps
     return upsert(level.server, base)
   }
 
-  function trackCover(level, pos, side, cover) {
-    return upsert(level.server, { k: 'cover', d: dimensionOf(level), x: Number(pos.getX()), y: Number(pos.getY()), z: Number(pos.getZ()),
-      s: String(side.getName()), ck: cover.kind, t: cover.tier })
+  function trackCover(level, pos, side, cover, who) {
+    var at = { k: 'cover', d: dimensionOf(level), x: Number(pos.getX()), y: Number(pos.getY()), z: Number(pos.getZ()), s: String(side.getName()) }
+    return upsert(level.server, { k: 'cover', o: ownerOf(level, pos, who, findEntry(level.server, at)), d: at.d, x: at.x, y: at.y, z: at.z,
+      s: at.s, ck: cover.kind, t: cover.tier })
   }
 
   // forgets what is at pos (every side's cover too)
@@ -258,23 +313,79 @@
   function minOf(a, b) { return cmp(a, b) <= 0 ? a : b }
   W.big = { add: add, sub: sub, cmp: cmp, toBig: toBig, norm: norm, SAFE: SAFE }
 
-  function stored(server) {
-    var pd = server.persistentData
-    var n = Number(pd.getLong(STORE_KEY))
-    if (n <= SAFE) return n
-    var digits = String(pd.get(STORE_KEY).getAsString()).replace(/L$/, '')
-    return /^[0-9]+$/.test(digits) ? norm(new (bi())(digits)) : n
+  // ---------------------------------------------------------------- the networks
+  // The network of the 'server' owner (blocks no player placed) is the one team's network when exactly one team has a formed tower or
+  // bank on the list, so a solo player's relay platform and commands feed their own network; with two or more it stays its own network
+  // and, with none, it is the only one. The calls that take no team (the dial, the displays, a test) mean this network.
+  function serverTeam(server) {
+    var found = null
+    var list = blocks(server)
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i]
+      if (e.bad || e.o === SERVER_TEAM || (e.k !== 'tower' && e.k !== 'bank') || !e.f || !(e.n > 0)) continue
+      if (found === null) found = e.o
+      else if (found !== e.o) return SERVER_TEAM
+    }
+    return found === null ? SERVER_TEAM : found
   }
 
-  function setStored(server, eu) {
-    if (isNum(eu)) {
-      server.persistentData.putLong(STORE_KEY, Math.max(0, Math.floor(eu)))
+  // the network a call means: no team, or 'server', is the server network (see serverTeam)
+  function teamArg(server, team) {
+    return team === undefined || team === null || team === SERVER_TEAM ? serverTeam(server) : String(team)
+  }
+
+  function netOfEntry(job, e) { return e.o === SERVER_TEAM ? job.serverTeam : e.o }
+  W.serverTeamOf = serverTeam
+
+  // the stored EU of a network. 'server' keeps the single long it always had; a team's is a long under its id in the stores compound.
+  function readStore(pd, team) {
+    if (team === SERVER_TEAM) {
+      var n = Number(pd.getLong(STORE_KEY))
+      if (n <= SAFE) return n
+      return exactDigits(pd.get(STORE_KEY), n)
+    }
+    if (!pd.contains(STORES_KEY, 10) || !pd.getCompound(STORES_KEY).contains(team, 4)) return 0
+    var c = pd.getCompound(STORES_KEY)
+    var v = Number(c.getLong(team))
+    if (v <= SAFE) return v
+    return exactDigits(c.get(team), v)
+  }
+
+  function exactDigits(tag, fallback) {
+    var digits = String(tag.getAsString()).replace(/L$/, '')
+    return /^[0-9]+$/.test(digits) ? norm(new (bi())(digits)) : fallback
+  }
+
+  function writeStore(pd, team, long) {
+    if (team === SERVER_TEAM) {
+      pd.putLong(STORE_KEY, long)
       return
     }
-    var big = eu.signum() < 0 ? toBig(0) : eu
-    var top = new (bi())('9223372036854775807')
-    if (big.compareTo(top) > 0) big = top
-    server.persistentData.putLong(STORE_KEY, big.longValue())
+    if (!pd.contains(STORES_KEY, 10)) pd.put(STORES_KEY, new (Java.loadClass('net.minecraft.nbt.CompoundTag'))())
+    pd.getCompound(STORES_KEY).putLong(team, long)
+  }
+
+  // the stored EU of a network (no team: the server network)
+  function stored(server, team) {
+    return readStore(server.persistentData, teamArg(server, team))
+  }
+
+  function setStored(server, eu, team) {
+    putStore(server, teamArg(server, team), eu)
+  }
+
+  // team: the network as it is (an id from teamArg or a job's net)
+  function putStore(server, team, eu) {
+    var long
+    if (isNum(eu)) {
+      long = Math.max(0, Math.floor(eu))
+    } else {
+      var big = eu.signum() < 0 ? toBig(0) : eu
+      var top = new (bi())('9223372036854775807')
+      if (big.compareTo(top) > 0) big = top
+      long = big.longValue()
+    }
+    writeStore(server.persistentData, team, long)
   }
 
   // ---------------------------------------------------------------- towers
@@ -393,8 +504,21 @@
 
   // ---------------------------------------------------------------- the settlement
 
-  var windowIn = []
-  var windowOut = []
+  // per network (the team id): the EU that went in and out in each of the last WINDOW settlements
+  var windows = {}
+
+  function windowOf(team) {
+    if (!windows[team]) windows[team] = { inn: [], out: [] }
+    return windows[team]
+  }
+
+  function pushWindow(team, inn, out) {
+    var w = windowOf(team)
+    w.inn.push(inn)
+    w.out.push(out)
+    while (w.inn.length > WINDOW) w.inn.shift()
+    while (w.out.length > WINDOW) w.out.shift()
+  }
 
   // returns what it did: { tracked, loaded, forgotten, faulted, up, tier, capacity, stored, in, out, lost, drained, towers, skippedAbove }
   function sane(n, max) {
@@ -406,37 +530,54 @@
 
   // #224 M8-13: the settlement is a job that step() advances by a budget of entries per tick (SLICE), so a large network never costs one
   // long tick in interpreted Rhino. Phases, each in the order the list had: scan (reads every entry once: prunes what is gone, refreshes
-  // towers and banks, collects the covers and hatches that move EU), deposit, needs (what each taker has room for), fill, finish.
-  // settle(server) runs a whole job at once. The store is read at the start of each slice and written at its end, so nothing else that
-  // changes it between two slices is overwritten; a job that outlasts one period makes the next start when it ends, and its limits
-  // grow with the ticks since the previous job began. The info is still read from the machine every cycle (see cachedInfo).
+  // towers and banks, sorts the covers and hatches that move EU into their team's network), then for each network in turn: deposit, needs
+  // (what each taker has room for), fill, finish. settle(server) runs a whole job at once. The store is read at the start of each slice and
+  // written at its end, so nothing else that changes it between two slices is overwritten; a job that outlasts one period makes the next
+  // start when it ends, and its limits grow with the ticks since the previous job began. The info is still read from the machine every
+  // cycle (see cachedInfo). B13-WTEAM: every network (team) has its own tally, store, tier and flows; nothing moves between them.
   var SLICE = 400
 
   function entryKey(e) {
     return e.k + '|' + e.d + '|' + e.x + '|' + e.y + '|' + e.z + '|' + (e.s || '')
   }
 
-  function startJob(server, ticks) {
-    var list = blocks(server)
-    return { server: server, ticks: ticks, ad: adapter(), list: list, i: 0, phase: 'scan', changes: {}, nChanges: 0, deposits: [], withdrawals: [],
-      takers: [], needs: [], plan: null, best: 0, anyBank: false,
-      out: { tracked: list.length, loaded: 0, forgotten: 0, faulted: 0, up: false, tier: 0, capacity: 0, stored: 0, in: 0, out: 0, lost: 0,
+  function newNet(team, ticks) {
+    return { team: team, deposits: [], withdrawals: [], takers: [], needs: [], plan: null, best: 0, anyBank: false, entries: 0,
+      out: { team: team, tracked: 0, loaded: 0, forgotten: 0, faulted: 0, up: false, tier: 0, capacity: 0, stored: 0, in: 0, out: 0, lost: 0,
         drained: 0, towers: 0, skippedAbove: 0, banks: 0, bankCapacity: 0 } }
   }
 
-  // a tower or bank (loaded or not) joins the network's tally
-  function tally(job, e) {
-    var out = job.out
+  function startJob(server, ticks) {
+    var list = blocks(server)
+    var sTeam = serverTeam(server)
+    var job = { server: server, ticks: ticks, ad: adapter(), list: list, i: 0, phase: 'scan', changes: {}, nChanges: 0, serverTeam: sTeam, nets: {},
+      order: [], cur: 0, main: null }
+    // the server network always exists, so a list with nothing in it still answers (and the unreadable entries are counted there)
+    job.main = netFor(job, sTeam)
+    return job
+  }
+
+  function netFor(job, team) {
+    if (!job.nets[team]) {
+      job.nets[team] = newNet(team, job.ticks)
+      job.order.push(team)
+    }
+    return job.nets[team]
+  }
+
+  // a tower or bank (loaded or not) joins its network's tally
+  function tally(net, e) {
+    var out = net.out
     if (e.k === 'tower') {
       if (!e.f || !(e.n > 0)) return
       out.towers++
       out.capacity = add(out.capacity, e.c)
-      if (e.t > job.best) job.best = e.t
+      if (e.t > net.best) net.best = e.t
     } else if (e.k === 'bank') {
       if (!e.f || !(e.n > 0) || !W.bank || e.d !== W.bank.site) return
       out.banks++
       out.bankCapacity = add(out.bankCapacity, bankCapacityOf(e.n))
-      job.anyBank = true
+      net.anyBank = true
     }
   }
 
@@ -445,19 +586,25 @@
     var L = lazy()
     var ad = job.ad
     var ticks = job.ticks
-    var out = job.out
-    var deposits = job.deposits
-    var withdrawals = job.withdrawals
     var orig = e
+    var net = null
+    var out = null
+    var deposits = null
+    var withdrawals = null
     function forgotten() { job.changes[entryKey(orig)] = null; job.nChanges++; out.forgotten++ }
     function refreshed(ne) { job.changes[entryKey(orig)] = ne; job.nChanges++ }
     {
       // an entry the list could not read is kept as it was and never used
       if (e.bad) return
+      net = netFor(job, netOfEntry(job, e))
+      out = net.out
+      deposits = net.deposits
+      withdrawals = net.withdrawals
+      net.entries++
       var level = server.getLevel(e.d)
       var pos = new L.BlockPos(e.x, e.y, e.z)
       if (level === null || level === undefined || !level.isLoaded(pos)) {
-        tally(job, e)
+        tally(net, e)
         return
       }
       var id = String(level.getBlock(pos).id)
@@ -465,10 +612,10 @@
         if (id !== W.bankId) { forgotten(); return }
         var binfo = cachedInfo('bank', e, machineAt(level, pos), bankInfo)
         if (!binfo.pending && (binfo.formed !== e.f || binfo.capacitors !== e.n)) {
-          e = R.canon({ k: 'bank', d: e.d, x: e.x, y: e.y, z: e.z, f: binfo.formed, n: binfo.capacitors })
+          e = R.canon({ k: 'bank', o: e.o, d: e.d, x: e.x, y: e.y, z: e.z, f: binfo.formed, n: binfo.capacitors })
           refreshed(e)
         }
-        tally(job, e)
+        tally(net, e)
         out.loaded++
         return
       }
@@ -476,10 +623,10 @@
         if (id !== W.towerId) { forgotten(); return }
         var info = cachedInfo('tower', e, machineAt(level, pos), towerInfo)
         if (!info.pending && (info.formed !== e.f || info.capacity !== e.c || info.tier !== e.t || info.cells !== e.n)) {
-          e = R.canon({ k: 'tower', d: e.d, x: e.x, y: e.y, z: e.z, f: info.formed, c: info.capacity, t: info.tier, n: info.cells })
+          e = R.canon({ k: 'tower', o: e.o, d: e.d, x: e.x, y: e.y, z: e.z, f: info.formed, c: info.capacity, t: info.tier, n: info.cells })
           refreshed(e)
         }
-        tally(job, e)
+        tally(net, e)
         out.loaded++
         return
       }
@@ -535,8 +682,8 @@
 
   // deposits: whole multiples of 20 EU, as far as the network has room; any tier. A move that fails its check counts what the
   // machine really gave (`measured`), or nothing when that is not a sane number: a failure can lose EU, never make it.
-  function depositOne(job, d, bank) {
-    var out = job.out
+  function depositOne(job, net, d, bank) {
+    var out = net.out
     var ad = job.ad
     var ticks = job.ticks
     var room = sub(out.capacity, bank)
@@ -566,8 +713,8 @@
     return bank
   }
 
-  function fillOne(job, w, give, bank) {
-    var out = job.out
+  function fillOne(job, net, w, give, bank) {
+    var out = net.out
     var got = 0
     try {
       got = job.ad.fill(w.a, give, job.ticks)
@@ -586,7 +733,6 @@
   // advances the job by up to `budget` entries; true when it is finished
   function step(job, budget) {
     var server = job.server
-    var out = job.out
     while (budget > 0 && job.phase !== 'done') {
       var n = 0
       if (job.phase === 'scan') {
@@ -595,108 +741,141 @@
         for (; job.i < end; job.i++) scan(job, job.list[job.i])
         if (job.i >= job.list.length) {
           commitScan(job)
-          // the network: the formed towers with cells, and the banks at their site (XP-H5: a bank counts as tier 14: it raises the network's
-          // tier to MAX); loss, cadence and caps stay as they are
-          out.up = out.towers > 0
-          out.tier = out.up ? job.best : 0
-          if (out.up && job.anyBank) out.tier = 14
-          out.capacity = add(out.capacity, out.bankCapacity)
-          job.phase = out.up ? 'deposit' : 'finish'
-          job.i = 0
+          closeScan(job)
+          job.cur = 0
+          enterNet(job)
         }
       } else if (job.phase === 'finish') {
-        finish(job)
+        finish(job, job.nets[job.order[job.cur]])
       } else {
-        var bank = stored(server)
+        var net = job.nets[job.order[job.cur]]
+        var out = net.out
+        var bank = readStore(server.persistentData, net.team)
         var start = bank
-        var lim = Math.min(job.phase === 'deposit' ? job.deposits.length : job.phase === 'needs' ? job.withdrawals.length : job.takers.length, job.i + budget)
+        var lim = Math.min(job.phase === 'deposit' ? net.deposits.length : job.phase === 'needs' ? net.withdrawals.length : net.takers.length, job.i + budget)
         n = lim - job.i
         if (job.phase === 'deposit') {
-          for (; job.i < lim; job.i++) bank = depositOne(job, job.deposits[job.i], bank)
-          if (job.i >= job.deposits.length) { job.phase = 'needs'; job.i = 0 }
+          for (; job.i < lim; job.i++) bank = depositOne(job, net, net.deposits[job.i], bank)
+          if (job.i >= net.deposits.length) { job.phase = 'needs'; job.i = 0 }
         } else if (job.phase === 'needs') {
           // withdrawals at or below the network's tier: topped up, shared in proportion when the store is short
           for (; job.i < lim; job.i++) {
-            var w = job.withdrawals[job.i]
+            var w = net.withdrawals[job.i]
             if (w.tier > out.tier) { out.skippedAbove++; continue }
             try {
-              job.needs.push(job.ad.room(w.a, w.limit, job.ticks))
-              job.takers.push(w)
+              net.needs.push(job.ad.room(w.a, w.limit, job.ticks))
+              net.takers.push(w)
             } catch (err) {
               fault(w.e, err.message || err)
               out.faulted++
             }
           }
-          if (job.i >= job.withdrawals.length) { job.phase = 'fill'; job.i = 0; job.plan = null }
+          if (job.i >= net.withdrawals.length) { job.phase = 'fill'; job.i = 0; net.plan = null }
         } else {
-          if (job.plan === null) {
-            var total = job.needs.reduce(function (a, b) { return add(a, b) }, 0)
+          if (net.plan === null) {
+            var total = net.needs.reduce(function (a, b) { return add(a, b) }, 0)
             if (cmp(total, 0) > 0 && cmp(bank, 0) > 0) {
               var enough = cmp(bank, total) >= 0
               // while both are exact Numbers the share is the float it always was; above 2^53 it is exact: floor(need x budget / total)
               var plainShare = isNum(bank) && isNum(total)
               // every share is cut from the budget the cycle opened with (frozen here); the store shrinks as takers are served (AF-W, #200 M6-03)
-              job.plan = { total: total, budget: bank, enough: enough, plain: plainShare, share: enough ? 1 : plainShare ? bank / total : 0 }
+              net.plan = { total: total, budget: bank, enough: enough, plain: plainShare, share: enough ? 1 : plainShare ? bank / total : 0 }
             } else {
-              job.plan = false
+              net.plan = false
             }
           }
-          if (job.plan === false) {
-            job.i = job.takers.length
+          if (net.plan === false) {
+            job.i = net.takers.length
           } else {
-            var plan = job.plan
+            var plan = net.plan
             for (; job.i < lim; job.i++) {
-              var t = job.takers[job.i]
-              var need = job.needs[job.i]
+              var t = net.takers[job.i]
+              var need = net.needs[job.i]
               var give = plan.enough ? need : plan.plain ? Math.floor(need * plan.share) : norm(toBig(need).multiply(toBig(plan.budget)).divide(toBig(plan.total)))
               if (give <= 0) continue
-              bank = fillOne(job, t, give, bank)
+              bank = fillOne(job, net, t, give, bank)
             }
           }
-          if (job.i >= job.takers.length) job.phase = 'finish'
+          if (job.i >= net.takers.length) job.phase = 'finish'
         }
-        if (cmp(bank, start) !== 0) setStored(server, bank)
+        if (cmp(bank, start) !== 0) putStore(server, net.team, bank)
       }
       budget -= Math.max(n, 1)
     }
     return job.phase === 'done'
   }
 
-  function finish(job) {
-    var server = job.server
-    var out = job.out
-    out.stored = stored(server)
+  // the scan is over: each network's tally becomes its state (the formed towers with cells, and the banks at their site (XP-H5: a bank
+  // counts as tier 14: it raises the network's tier to MAX); loss, cadence and caps stay as they are)
+  function closeScan(job) {
+    var bad = job.list.filter(function (e) { return e.bad }).length
+    job.order.forEach(function (team) {
+      var net = job.nets[team]
+      var out = net.out
+      out.tracked = net.entries + (net === job.main ? bad : 0)
+      out.up = out.towers > 0
+      out.tier = out.up ? net.best : 0
+      if (out.up && net.anyBank) out.tier = 14
+      out.capacity = add(out.capacity, out.bankCapacity)
+    })
+  }
+
+  // the next network's turn, or the end of the job
+  function enterNet(job) {
+    if (job.cur >= job.order.length) {
+      endJob(job)
+      return
+    }
+    var net = job.nets[job.order[job.cur]]
+    job.phase = net.out.up ? 'deposit' : 'finish'
+    job.i = 0
+  }
+
+  function finish(job, net) {
+    var out = net.out
+    out.stored = readStore(job.server.persistentData, net.team)
     W.totals.drained = add(W.totals.drained, out.drained)
     W.totals.in = add(W.totals.in, out.in)
     W.totals.lost = add(W.totals.lost, out.lost)
     W.totals.out = add(W.totals.out, out.out)
+    pushWindow(net.team, out.in, out.out)
+    W.lastByTeam[net.team] = out
+    if (net === job.main) W.last = out
+    job.cur++
+    enterNet(job)
+  }
+
+  // a network with no block left on the list reads as down, and its flow window drains
+  function endJob(job) {
+    Object.keys(windows).forEach(function (team) {
+      if (job.nets[team]) return
+      pushWindow(team, 0, 0)
+      delete W.lastByTeam[team]
+    })
     W.totals.settlements++
-    windowIn.push(out.in)
-    windowOut.push(out.out)
-    while (windowIn.length > WINDOW) windowIn.shift()
-    while (windowOut.length > WINDOW) windowOut.shift()
-    W.last = out
     job.phase = 'done'
   }
 
   function settle(server) {
     var job = startJob(server, W.settleTicks)
     step(job, Infinity)
-    return job.out
+    return job.main.out
   }
 
-  // the network now: { up, tier, capacity, stored, towers, inPerSecond, outPerSecond } (EU over the last second)
-  function status(server) {
-    var last = W.last || { up: false, tier: 0, capacity: 0, towers: 0, banks: 0, bankCapacity: 0 }
-    var sumIn = windowIn.reduce(function (a, b) { return add(a, b) }, 0)
-    var sumOut = windowOut.reduce(function (a, b) { return add(a, b) }, 0)
-    return { up: !!last.up, tier: last.tier, capacity: last.capacity, towers: last.towers, banks: last.banks || 0, bankCapacity: last.bankCapacity || 0,
-      stored: stored(server), inPerSecond: sumIn, outPerSecond: sumOut }
+  // a network now: { team, up, tier, capacity, stored, towers, inPerSecond, outPerSecond } (EU over the last second). No team: the server network.
+  function status(server, team) {
+    var t = teamArg(server, team)
+    var last = W.lastByTeam[t] || { up: false, tier: 0, capacity: 0, towers: 0, banks: 0, bankCapacity: 0 }
+    var w = windowOf(t)
+    var sumIn = w.inn.reduce(function (a, b) { return add(a, b) }, 0)
+    var sumOut = w.out.reduce(function (a, b) { return add(a, b) }, 0)
+    return { team: t, up: !!last.up, tier: last.tier, capacity: last.capacity, towers: last.towers, banks: last.banks || 0, bankCapacity: last.bankCapacity || 0,
+      stored: readStore(server.persistentData, t), inPerSecond: sumIn, outPerSecond: sumOut }
   }
 
-  // what the Hyperstargate's dial may draw on (XP-G1): the banks' exact capacity and the exact store
-  function dialCharge(server) {
-    var st = status(server)
+  // what the Hyperstargate's dial may draw on (XP-G1): the banks' exact capacity and the exact store of a network (no team: the server network)
+  function dialCharge(server, team) {
+    var st = status(server, team)
     return { bankCapacity: st.bankCapacity, stored: st.stored }
   }
 
@@ -723,26 +902,27 @@
     return fmt(whole) + (tenth > 0 ? '.' + tenth : '')
   }
 
-  // the action bar line; tier: the tier of the block asked about (0 = none), withdraws: whether it takes from the network
-  function readout(server, tier, withdraws) {
-    var st = status(server)
+  // the action bar line; tier: the tier of the block asked about (0 = none), withdraws: whether it takes from the network, team: the
+  // network of that block (none: the server network)
+  function readout(server, tier, withdraws, team) {
+    var st = status(server, team)
     if (!st.up) return Text.translate('message.grindless.wireless.no_tower').gold()
     if (withdraws && tier > st.tier) return Text.translate('message.grindless.wireless.above_tier', tierName(tier), tierName(st.tier)).gold()
     return Text.translate('message.grindless.wireless.readout', tierName(st.tier), fmt(st.stored), fmt(st.capacity), perTick(st.inPerSecond),
       perTick(st.outPerSecond)).aqua()
   }
 
-  // what a shift-click on this block reads: { tier, withdraws, fault } or null when it is no wireless block
+  // what a shift-click on this block reads: { tier, withdraws, fault, team } or null when it is no wireless block
   function readoutTarget(level, pos, side) {
     var id = String(level.getBlock(pos).id)
     if (id === W.towerId || (W.bankId && id === W.bankId)) {
-      track(level, pos)
-      return { tier: 0, withdraws: false, fault: '' }
+      var te = track(level, pos)
+      return { tier: 0, withdraws: false, fault: '', team: te ? te.o : undefined }
     }
     var h = W.hatches[id]
     if (h) {
       var he = track(level, pos)
-      return { tier: h.tier, withdraws: h.kind === 'hatch', fault: he ? (W.faults[flowKey(he)] || '') : '' }
+      return { tier: h.tier, withdraws: h.kind === 'hatch', fault: he ? (W.faults[flowKey(he)] || '') : '', team: he ? he.o : undefined }
     }
     var m = machineAt(level, pos)
     if (m === null) return null
@@ -754,7 +934,7 @@
       var cover = W.covers[String(on.coverDefinition.getId())]
       if (!cover) continue
       var ce = trackCover(level, pos, dirs[i], cover)
-      if (found === null || dirs[i] === side) found = { tier: cover.tier, withdraws: cover.kind === 'energy', fault: W.faults[flowKey(ce)] || '' }
+      if (found === null || dirs[i] === side) found = { tier: cover.tier, withdraws: cover.kind === 'energy', fault: W.faults[flowKey(ce)] || '', team: ce.o }
     }
     return found
   }
@@ -763,7 +943,7 @@
     var p = event.player
     var target = readoutTarget(event.level, event.block.pos, event.facing)
     if (target === null) return
-    var text = target.fault ? Text.translate('message.grindless.wireless.fault').red() : readout(event.level.server, target.tier, target.withdraws)
+    var text = target.fault ? Text.translate('message.grindless.wireless.fault').red() : readout(event.level.server, target.tier, target.withdraws, target.team)
     p.setStatusMessage(text)
     var key = ''
     var args = []
@@ -789,17 +969,19 @@
     var holder = m.getCoverContainer()
     if (holder.getCoverAtSide(side) !== null) return { ok: false, message: Text.translate('message.grindless.wireless.cover_side_taken') }
     if (!holder.placeCoverOnSide(side, stack, def, player)) return { ok: false, message: Text.translate('message.grindless.wireless.cover_cannot') }
-    var placed = trackCover(level, pos, side, cover)
+    var placed = trackCover(level, pos, side, cover, player)
     // a cover placed again starts over: whatever set the old one aside is forgiven
     delete W.faults[flowKey(placed)]
     return { ok: true, message: Text.translate('message.grindless.wireless.cover_placed', tierName(cover.tier)) }
   }
 
-  // AF-W (#199 M8-05): a cover is a change to someone else's machine, so a claim (spawn protection, FTB Chunks and the like, which cancel
-  // Forge's RightClickBlock or answer mayInteract) must be able to refuse it. KubeJS' own listener would see the event we post, hence the guard.
+  // AF-W (#199 M8-13, M8-05; B13-WTEAM): a cover is a change to someone else's machine, so a claim must be able to refuse it. FTB Chunks is
+  // asked directly (lib/teams.js: its own protection rules, deterministic), and then, for spawn protection and other claim mods, Forge's
+  // mayInteract and a posted RightClickBlock event (KubeJS' own listener would see that event, hence the guard).
   var posting = false
   function claimAllows(player, level, pos, side) {
     if (posting) return true
+    if (teams().claimRefuses(player, level, pos)) return false
     try {
       if (!level.mayInteract(player, pos)) return false
       var Hit = Java.loadClass('net.minecraft.world.phys.BlockHitResult')
@@ -831,7 +1013,10 @@
     // GTM's own cover items pick the side the player looks at; with no such side, the clicked face
     var side = lazy().ICoverable.rayTraceCoverableSide(holder, p)
     if (side === null || side === undefined) side = event.facing
-    if (!claimAllows(p, level, pos, side)) return true
+    if (!claimAllows(p, level, pos, side)) {
+      p.setStatusMessage(Text.translate('message.grindless.wireless.cover_claimed').red())
+      return true
+    }
     var stack = event.item
     var r = placeCover(level, pos, side, stack, p)
     if (r.ok && !p.isCreative()) stack.shrink(1)
@@ -861,7 +1046,9 @@
     BlockEvents.placed(id, function (event) {
       try {
         // a block placed again starts over: whatever set the old one aside is forgiven
-        var e = track(event.level, event.block.pos)
+        // a block belongs to the team of the player who placed it (nobody: its machine's owner, its chunk's claim, else 'server')
+        var placer = event.entity
+        var e = track(event.level, event.block.pos, placer !== null && placer !== undefined && placer.isPlayer() ? placer : undefined)
         if (e) delete W.faults[flowKey(e)]
       } catch (err) {
         console.error(LOG + 'could not track a placed ' + id + ': ' + err)
@@ -971,6 +1158,18 @@
   W.placeCover = placeCover
   W.forget = forget
   W.tracked = function (server) { return blocks(server).slice() }
+  // the network of the tower, bank or hatch at pos (a tracked block), or undefined when it is not tracked (the server network then)
+  W.teamAt = function (level, pos) {
+    var d = dimensionOf(level)
+    var x = Number(pos.getX())
+    var y = Number(pos.getY())
+    var z = Number(pos.getZ())
+    var list = blocks(level.getServer())
+    for (var i = 0; i < list.length; i++) {
+      if (!list[i].bad && list[i].k !== 'cover' && same(list[i], d, x, y, z)) return list[i].o
+    }
+    return undefined
+  }
   W.settle = settle
   W.dropInfoCache = function () {}
   W.status = status
@@ -979,6 +1178,8 @@
   W.dialCharge = dialCharge
   W.stored = stored
   W.setStored = setStored
+  W.teamArg = teamArg
+  W.claimAllows = claimAllows
   W.perTick = perTick
   W.readout = readout
   W.coverMisfit = coverMisfit
