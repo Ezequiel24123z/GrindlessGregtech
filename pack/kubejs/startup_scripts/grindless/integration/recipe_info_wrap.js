@@ -112,9 +112,11 @@ GTCEuStartupEvents.registry('gtceu:dimension_marker', function (event) {
   console.info('[grindless/integration] recipe info wrapped for ' + wrapped + ' recipe types')
 })
 
-// Client, once the recipes are synced (client_scripts/grindless/recipe_info_fit.js): the page height was fixed at startup for the
+// Client, once the recipes are synced (the RecipesUpdatedEvent hook below): the page height was fixed at startup for the
 // worst case; shrink each type's cached box to the longest text its recipes really have, and leave three blank lines under the text
-// when a recipe has a dimension marker (GTRecipeWidget puts that slot 32 px above the bottom edge, right of the text).
+// when a recipe has a dimension marker (GTRecipeWidget puts that slot 32 px above the bottom edge, right of the text). Each type's
+// startup height is kept, so a later sync (another world, /reload) fits from it again instead of shrinking twice.
+var ggInfoBaseHeight = {}
 global.ggInfoFit = function (recipeManager) {
   var Registries = Java.loadClass('com.gregtechceu.gtceu.api.registry.GTRegistries')
   var ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
@@ -140,7 +142,8 @@ global.ggInfoFit = function (recipeManager) {
       }
     }
     var size = type.getRecipeUI().getJEISize()
-    var before = size.height
+    if (ggInfoBaseHeight[id] === undefined) ggInfoBaseHeight[id] = size.height
+    var before = ggInfoBaseHeight[id]
     var cut = 0
     groups.forEach(function (g, gi) { cut += g.cap - need[gi] })
     var heightField = size.getClass().getDeclaredField('height')
@@ -150,4 +153,16 @@ global.ggInfoFit = function (recipeManager) {
     console.info('[grindless/integration] info box ' + id + ': ' + before + ' -> ' + type.getRecipeUI().getJEISize().height + ' (lines ' + need.join('/') + (withMarker ? ', marker' : '') + ')')
   })
   return fitted
+}
+
+// The fit runs when the client receives the recipes, before EMI builds its pages, so EMI never needs a second reload (a forced
+// reload doubled EMI's load time and, when the player left the world during it, failed on the missing level).
+if (Platform.isClientEnvironment()) {
+  ForgeEvents.onEvent('net.minecraftforge.client.event.RecipesUpdatedEvent', function (event) {
+    try {
+      console.info('[grindless/integration] info boxes fitted: ' + global.ggInfoFit(event.getRecipeManager()))
+    } catch (e) {
+      console.error('[grindless/integration] info box fit failed: ' + e)
+    }
+  })
 }
