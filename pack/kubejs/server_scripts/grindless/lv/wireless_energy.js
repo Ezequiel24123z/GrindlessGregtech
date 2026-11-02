@@ -33,7 +33,9 @@
 // capacity and tier, and the last second's flow in and out, in the action bar.
 // Tracking: BlockEvents.placed (hatches, towers), the covers' placing, the shift-click (a block the list does not have yet); a block
 // that is gone, a cover that is off, and BlockEvents.broken are forgotten. The list lives in persistent data as an NBT list of
-// compounds (lib/wireless_registry.js: no size limit; the first version's single JSON string is converted once, and kept aside).
+// compounds (lib/wireless_registry.js: no size limit; an unreadable value under the key is kept aside, never converted).
+//
+// Per-tick work is bounded (M8-13): the settlement is a job advanced W.slice (400) entries per tick, see startJob and step.
 //
 // Published on global.grindless.wireless (the startup object) for the tower's display and the smoke tests
 // (tools/test/overlay/kubejs/server_scripts/gg_test_wireless_*.js): track, trackCover, placeCover, forget, tracked, settle, status,
@@ -399,52 +401,82 @@
     return typeof n === 'number' && n % 1 === 0 && n >= 0 && n <= max
   }
 
-  function settle(server) {
-    var L = lazy()
-    var ad = adapter()
-    var ticks = W.settleTicks
+  // M8-13: the settlement is a job that step() advances by a budget of entries per tick (SLICE), so a large network never costs one long
+  // tick in interpreted Rhino. Phases, each in the order the list had: scan (reads every entry once: prunes what is gone, refreshes towers
+  // and banks, collects the covers and hatches that move EU), deposit, needs (what each taker has room for), fill, finish. settle(server)
+  // runs a whole job at once, as before. The store is read at the start of each slice and written at its end, so nothing else that
+  // changes it between two slices is overwritten; a job that takes longer than one period makes the next one start when it ends, and
+  // the limits grow with the ticks since the previous job began.
+  var SLICE = 400
+
+  function entryKey(e) {
+    return e.k + '|' + e.d + '|' + e.x + '|' + e.y + '|' + e.z + '|' + (e.s || '')
+  }
+
+  function startJob(server, ticks) {
     var list = blocks(server)
-    var keep = []
-    var changed = false
-    var out = { tracked: list.length, loaded: 0, forgotten: 0, faulted: 0, up: false, tier: 0, capacity: 0, stored: 0, in: 0, out: 0, lost: 0,
-      drained: 0, towers: 0, skippedAbove: 0, banks: 0, bankCapacity: 0 }
-    var deposits = []
-    var withdrawals = []
-    var towers = []
-    var banks = []
-    list.forEach(function (e) {
+    return { server: server, ticks: ticks, ad: adapter(), list: list, i: 0, phase: 'scan', changes: {}, nChanges: 0, deposits: [], withdrawals: [],
+      takers: [], needs: [], plan: null, towerList: 0, best: 0,
+      out: { tracked: list.length, loaded: 0, forgotten: 0, faulted: 0, up: false, tier: 0, capacity: 0, stored: 0, in: 0, out: 0, lost: 0,
+        drained: 0, towers: 0, skippedAbove: 0, banks: 0, bankCapacity: 0 }, anyBank: false, before: 0 }
+  }
+
+  // a tower or bank (loaded or not) joins the network's tally
+  function tally(job, e) {
+    var out = job.out
+    if (e.k === 'tower') {
+      if (!e.f || !(e.n > 0)) return
+      out.towers++
+      out.capacity = add(out.capacity, e.c)
+      if (e.t > job.best) job.best = e.t
+    } else if (e.k === 'bank') {
+      if (!e.f || !(e.n > 0) || !W.bank || e.d !== W.bank.site) return
+      out.banks++
+      out.bankCapacity = add(out.bankCapacity, bankCapacityOf(e.n))
+      job.anyBank = true
+    }
+  }
+
+  function scan(job, e) {
+    var server = job.server
+    var L = lazy()
+    var ad = job.ad
+    var ticks = job.ticks
+    var out = job.out
+    var deposits = job.deposits
+    var withdrawals = job.withdrawals
+    var orig = e
+    function forgotten() { job.changes[entryKey(orig)] = null; job.nChanges++; out.forgotten++ }
+    function refreshed(ne) { job.changes[entryKey(orig)] = ne; job.nChanges++ }
+    {
       // an entry the list could not read is kept as it was and never used
-      if (e.bad) { keep.push(e); return }
+      if (e.bad) return
       var level = server.getLevel(e.d)
       var pos = new L.BlockPos(e.x, e.y, e.z)
       if (level === null || level === undefined || !level.isLoaded(pos)) {
-        keep.push(e)
-        if (e.k === 'tower') towers.push(e)
-        if (e.k === 'bank') banks.push(e)
+        tally(job, e)
         return
       }
       var id = String(level.getBlock(pos).id)
       if (e.k === 'bank') {
-        if (id !== W.bankId) { changed = true; out.forgotten++; return }
+        if (id !== W.bankId) { forgotten(); return }
         var binfo = bankInfo(machineAt(level, pos))
         if (!binfo.pending && (binfo.formed !== e.f || binfo.capacitors !== e.n)) {
           e = R.canon({ k: 'bank', d: e.d, x: e.x, y: e.y, z: e.z, f: binfo.formed, n: binfo.capacitors })
-          changed = true
+          refreshed(e)
         }
-        keep.push(e)
-        banks.push(e)
+        tally(job, e)
         out.loaded++
         return
       }
       if (e.k === 'tower') {
-        if (id !== W.towerId) { changed = true; out.forgotten++; return }
+        if (id !== W.towerId) { forgotten(); return }
         var info = towerInfo(machineAt(level, pos))
         if (!info.pending && (info.formed !== e.f || info.capacity !== e.c || info.tier !== e.t || info.cells !== e.n)) {
           e = R.canon({ k: 'tower', d: e.d, x: e.x, y: e.y, z: e.z, f: info.formed, c: info.capacity, t: info.tier, n: info.cells })
-          changed = true
+          refreshed(e)
         }
-        keep.push(e)
-        towers.push(e)
+        tally(job, e)
         out.loaded++
         return
       }
@@ -454,11 +486,9 @@
         var side = L.Direction.byName(e.s)
         var on = m === null || side === null ? null : m.getCoverContainer().getCoverAtSide(side)
         if (!cover || on === null || on === undefined || String(on.coverDefinition.getId()) !== cover.def) {
-          changed = true
-          out.forgotten++
+          forgotten()
           return
         }
-        keep.push(e)
         out.loaded++
         if (W.faults[flowKey(e)]) { out.faulted++; return }
         var misfit = coverMisfit(m, cover)
@@ -474,11 +504,9 @@
       }
       var h = W.hatches[id]
       if (!h || h.kind !== e.k || h.tier !== e.t || h.amps !== e.a || m === null) {
-        changed = true
-        out.forgotten++
+        forgotten()
         return
       }
-      keep.push(e)
       out.loaded++
       if (W.faults[flowKey(e)]) { out.faulted++; return }
       var ha = ad.classify(m)
@@ -486,97 +514,154 @@
       var hlimit = W.rate(e.t, h.amps) * ticks
       if (h.kind === 'dynamo') deposits.push({ a: ha, limit: hlimit, e: e })
       else withdrawals.push({ a: ha, limit: hlimit, tier: e.t, e: e })
-    })
-    if (changed) saveBlocks(server, keep)
-
-    // the network: the formed towers with cells
-    var best = 0
-    towers.forEach(function (t) {
-      if (!t.f || !(t.n > 0)) return
-      out.towers++
-      out.capacity = add(out.capacity, t.c)
-      if (t.t > best) best = t.t
-    })
-    out.up = out.towers > 0
-    out.tier = out.up ? best : 0
-    // XP-H5: formed banks at their site add capacity (a bank counts as tier 14: it raises the network's tier to MAX); loss, cadence and caps stay as they are
-    banks.forEach(function (b) {
-      if (!b.f || !(b.n > 0) || !W.bank || b.d !== W.bank.site) return
-      out.banks++
-      out.bankCapacity = add(out.bankCapacity, bankCapacityOf(b.n))
-      if (out.up) out.tier = 14
-    })
-    out.capacity = add(out.capacity, out.bankCapacity)
-    var bank = stored(server)
-    var before = bank
-    if (out.up) {
-      // deposits: whole multiples of 20 EU, as far as the network has room; any tier. A move that fails its check counts what the
-      // machine really gave (`measured`), or nothing when that is not a sane number: a failure can lose EU, never make it.
-      deposits.forEach(function (d) {
-        var room = sub(out.capacity, bank)
-        if (cmp(room, 0) <= 0) return
-        var gave = 0
-        var take = 0
-        try {
-          var fits = isNum(room) && room * W.lossDenominator <= SAFE ? Math.floor(room * W.lossDenominator / W.lossNumerator)
-            : norm(toBig(room).multiply(toBig(W.lossDenominator)).divide(toBig(W.lossNumerator)))
-          take = minOf(ad.available(d.a, d.limit, ticks), fits)
-          take -= take % W.lossDenominator
-          if (take <= 0) return
-          gave = ad.drain(d.a, take, ticks)
-        } catch (err) {
-          fault(d.e, err.message || err)
-          out.faulted++
-          gave = sane(err.measured, take) ? err.measured : 0
-        }
-        var put = Math.floor(gave * W.lossNumerator / W.lossDenominator)
-        bank = add(bank, put)
-        out.drained = add(out.drained, gave)
-        out.in = add(out.in, put)
-        out.lost = add(out.lost, gave - put)
-        var fd = flow(d.e)
-        fd.drained += gave
-        fd.in += put
-      })
-      // withdrawals at or below the network's tier: topped up, shared in proportion when the store is short
-      var takers = []
-      var needs = []
-      withdrawals.forEach(function (w) {
-        if (w.tier > out.tier) { out.skippedAbove++; return }
-        try {
-          needs.push(ad.room(w.a, w.limit, ticks))
-          takers.push(w)
-        } catch (err) {
-          fault(w.e, err.message || err)
-          out.faulted++
-        }
-      })
-      var total = needs.reduce(function (a, b) { return add(a, b) }, 0)
-      if (cmp(total, 0) > 0 && cmp(bank, 0) > 0) {
-        var enough = cmp(bank, total) >= 0
-        // while both are exact Numbers the share is the float it always was; above 2^53 it is exact: floor(need x bank / total)
-        var plain = isNum(bank) && isNum(total)
-        var share = enough ? 1 : plain ? bank / total : 0
-        takers.forEach(function (w, i) {
-          var give = enough ? needs[i] : plain ? Math.floor(needs[i] * share) : norm(toBig(needs[i]).multiply(toBig(bank)).divide(toBig(total)))
-          if (give <= 0) return
-          var got = 0
-          try {
-            got = ad.fill(w.a, give, ticks)
-          } catch (err) {
-            fault(w.e, err.message || err)
-            out.faulted++
-            // what the machine really took; when that is not a sane number, all of it is charged (the network never gives more than it pays)
-            got = sane(err.measured, give) ? err.measured : give
-          }
-          bank = sub(bank, got)
-          out.out = add(out.out, got)
-          flow(w.e).filled += got
-        })
-      }
     }
-    if (cmp(bank, before) !== 0) setStored(server, bank)
-    out.stored = bank
+  }
+
+  // applies the scan's prunes and refreshes to the list as it is now (a block placed while the job ran is kept)
+  function commitScan(job) {
+    if (job.nChanges === 0) return
+    var next = []
+    blocks(job.server).forEach(function (e) {
+      if (e.bad) { next.push(e); return }
+      var k = entryKey(e)
+      if (!Object.prototype.hasOwnProperty.call(job.changes, k)) next.push(e)
+      else if (job.changes[k] !== null) next.push(job.changes[k])
+    })
+    saveBlocks(job.server, next)
+  }
+
+  function depositOne(job, d, bank) {
+    var out = job.out
+    var ad = job.ad
+    var ticks = job.ticks
+    var room = sub(out.capacity, bank)
+    if (cmp(room, 0) <= 0) return bank
+    var gave = 0
+    var take = 0
+    try {
+      var fits = isNum(room) && room * W.lossDenominator <= SAFE ? Math.floor(room * W.lossDenominator / W.lossNumerator)
+        : norm(toBig(room).multiply(toBig(W.lossDenominator)).divide(toBig(W.lossNumerator)))
+      take = minOf(ad.available(d.a, d.limit, ticks), fits)
+      take -= take % W.lossDenominator
+      if (take <= 0) return bank
+      gave = ad.drain(d.a, take, ticks)
+    } catch (err) {
+      fault(d.e, err.message || err)
+      out.faulted++
+      gave = sane(err.measured, take) ? err.measured : 0
+    }
+    var put = Math.floor(gave * W.lossNumerator / W.lossDenominator)
+    bank = add(bank, put)
+    out.drained = add(out.drained, gave)
+    out.in = add(out.in, put)
+    out.lost = add(out.lost, gave - put)
+    var fd = flow(d.e)
+    fd.drained += gave
+    fd.in += put
+    return bank
+  }
+
+  function fillOne(job, w, give, bank) {
+    var out = job.out
+    var got = 0
+    try {
+      got = job.ad.fill(w.a, give, job.ticks)
+    } catch (err) {
+      fault(w.e, err.message || err)
+      out.faulted++
+      // what the machine really took; when that is not a sane number, all of it is charged (the network never gives more than it pays)
+      got = sane(err.measured, give) ? err.measured : give
+    }
+    bank = sub(bank, got)
+    out.out = add(out.out, got)
+    flow(w.e).filled += got
+    return bank
+  }
+
+  // advances the job by up to `budget` entries; true when it is finished
+  function step(job, budget) {
+    var server = job.server
+    var out = job.out
+    while (budget > 0 && job.phase !== 'done') {
+      var n = 0
+      if (job.phase === 'scan') {
+        var end = Math.min(job.list.length, job.i + budget)
+        n = end - job.i
+        for (; job.i < end; job.i++) scan(job, job.list[job.i])
+        if (job.i >= job.list.length) {
+          commitScan(job)
+          // the network: the formed towers with cells, and the banks at their site (XP-H5: a bank counts as tier 14: it raises the network's tier
+          // to MAX); loss, cadence and caps stay as they are
+          out.up = out.towers > 0
+          out.tier = out.up ? job.best : 0
+          if (out.up && job.anyBank) out.tier = 14
+          out.capacity = add(out.capacity, out.bankCapacity)
+          job.phase = out.up ? 'deposit' : 'finish'
+          job.i = 0
+        }
+      } else if (job.phase === 'finish') {
+        finish(job)
+      } else {
+        var bank = stored(server)
+        var start = bank
+        var lim = Math.min(job.phase === 'deposit' ? job.deposits.length : job.phase === 'needs' ? job.withdrawals.length : job.takers.length, job.i + budget)
+        n = lim - job.i
+        if (job.phase === 'deposit') {
+          // deposits: whole multiples of 20 EU, as far as the network has room; any tier. A move that fails its check counts what the
+          // machine really gave (`measured`), or nothing when that is not a sane number: a failure can lose EU, never make it.
+          for (; job.i < lim; job.i++) bank = depositOne(job, job.deposits[job.i], bank)
+          if (job.i >= job.deposits.length) { job.phase = 'needs'; job.i = 0 }
+        } else if (job.phase === 'needs') {
+          // withdrawals at or below the network's tier: topped up, shared in proportion when the store is short
+          for (; job.i < lim; job.i++) {
+            var w = job.withdrawals[job.i]
+            if (w.tier > out.tier) { out.skippedAbove++; continue }
+            try {
+              job.needs.push(job.ad.room(w.a, w.limit, job.ticks))
+              job.takers.push(w)
+            } catch (err) {
+              fault(w.e, err.message || err)
+              out.faulted++
+            }
+          }
+          if (job.i >= job.withdrawals.length) { job.phase = 'fill'; job.i = 0; job.plan = null }
+        } else {
+          if (job.plan === null) {
+            var total = job.needs.reduce(function (a, b) { return add(a, b) }, 0)
+            if (cmp(total, 0) > 0 && cmp(bank, 0) > 0) {
+              var enough = cmp(bank, total) >= 0
+              // while both are exact Numbers the share is the float it always was; above 2^53 it is exact: floor(need x bank / total)
+              var plainShare = isNum(bank) && isNum(total)
+              job.plan = { total: total, enough: enough, plain: plainShare, share: enough ? 1 : plainShare ? bank / total : 0 }
+            } else {
+              job.plan = false
+            }
+          }
+          if (job.plan === false) {
+            lim = job.i = job.takers.length
+          } else {
+            var plan = job.plan
+            for (; job.i < lim; job.i++) {
+              var t = job.takers[job.i]
+              var need = job.needs[job.i]
+              var give = plan.enough ? need : plan.plain ? Math.floor(need * plan.share) : norm(toBig(need).multiply(toBig(bank)).divide(toBig(plan.total)))
+              if (give <= 0) continue
+              bank = fillOne(job, t, give, bank)
+            }
+          }
+          if (job.i >= job.takers.length) job.phase = 'finish'
+        }
+        if (cmp(bank, start) !== 0) setStored(server, bank)
+      }
+      budget -= Math.max(n, 1)
+    }
+    return job.phase === 'done'
+  }
+
+  function finish(job) {
+    var server = job.server
+    var out = job.out
+    out.stored = stored(server)
     W.totals.drained = add(W.totals.drained, out.drained)
     W.totals.in = add(W.totals.in, out.in)
     W.totals.lost = add(W.totals.lost, out.lost)
@@ -587,7 +672,13 @@
     while (windowIn.length > WINDOW) windowIn.shift()
     while (windowOut.length > WINDOW) windowOut.shift()
     W.last = out
-    return out
+    job.phase = 'done'
+  }
+
+  function settle(server) {
+    var job = startJob(server, W.settleTicks)
+    step(job, Infinity)
+    return job.out
   }
 
   // the network now: { up, tier, capacity, stored, towers, inPerSecond, outPerSecond } (EU over the last second)
@@ -754,13 +845,24 @@
   })
 
   var failedTick = false
+  var job = null
+  var lastStart = null
+  W.slice = SLICE
   ServerEvents.tick(function (event) {
     var server = event.server
-    if (W.paused || server.getTickCount() % W.settleTicks !== 0) return
+    if (W.paused) { job = null; lastStart = null; return }
+    var now = server.getTickCount()
+    if (job === null) {
+      if (now % W.settleTicks !== 0) return
+      var period = lastStart === null ? W.settleTicks : Math.max(W.settleTicks, now - lastStart)
+      job = startJob(server, period)
+      lastStart = now
+    }
     try {
-      settle(server)
+      if (step(job, W.slice)) job = null
       failedTick = false
     } catch (e) {
+      job = null
       if (!failedTick) {
         failedTick = true
         console.error(LOG + 'settlement failed: ' + e)
