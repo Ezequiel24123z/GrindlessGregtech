@@ -74,12 +74,12 @@
     platinum: {
       duration: 2314, eut: 1920, circuit: 2,
       itemsIn: { 'gtceu:platinum_group_sludge_dust': [1, 10000], 'gtceu:calcium_dust': [3, 10000], 'grindless:platinum_electrode': [1, 10] },
-      fluidsIn: { 'gtceu:nitration_mixture': 54000, 'gtceu:ammonium_chloride': 10800 },
+      fluidsIn: {       'gtceu:aqua_regia': 54000, 'gtceu:ammonium_chloride': 10800 },
       itemsOut: {
         'gtceu:platinum_dust': [6, 0], 'gtceu:gold_dust': [3, 0], 'gtceu:silicon_dioxide_dust': [3, 0], 'gtceu:platinum_slag_dust': [6, 0],
         'gtceu:palladium_metal_dust': [0, 9500], 'gtceu:calcium_chloride_dust': [9, 0]
       },
-      fluidsOut: { 'gtceu:palladium_rich_ammonia': 10800, 'gtceu:nitrogen_dioxide': 27000, 'gtceu:diluted_sulfuric_acid': 27000 }
+      fluidsOut: { 'gtceu:palladium_rich_ammonia': 10800, 'gtceu:nitrogen_dioxide': 27000,       'gtceu:diluted_hydrochloric_acid': 27000 }
     },
     palladium: {
       duration: 891, eut: 1919, circuit: 2,
