@@ -95,7 +95,7 @@ test('luv_age.snbt is what the shared writer makes from the data', () => {
     // the book still holds the pre-QB-0 split (luv_age + luv_circuits + luv_machines): until the integrator regenerates it, the
     // merged chapter must hold exactly the quests of the three
     const dir = path.dirname(legacy);
-    const questIds = (text) => [...text.matchAll(/^\t\t\tid: "([0-9A-F]{16})"/gm)].map((m) => m[1]);
+    const questIds = (text) => [...text.slice(Math.max(0, text.indexOf('\n\tquests: ['))).matchAll(/^\t\t\tid: "([0-9A-F]{16})"/gm)].map((m) => m[1]);
     const old = ['luv_age', 'luv_circuits', 'luv_machines'].filter((n) => fs.existsSync(path.join(dir, n + '.snbt')))
       .flatMap((n) => questIds(fs.readFileSync(path.join(dir, n + '.snbt'), 'utf8')));
     const now = new Set(questIds(made));
