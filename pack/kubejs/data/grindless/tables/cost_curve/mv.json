@@ -64,10 +64,10 @@
     "gtceu:mv_electric_motor": 1.112,
     "gtceu:mv_electric_piston": 1.959,
     "gtceu:mv_energy_input_hatch": 2.257,
-    "gtceu:mv_greenhouse": 2.206,
+    "gtceu:mv_greenhouse": 3.192,
     "gtceu:mv_machine_casing": 2.685,
     "gtceu:mv_machine_hull": 2.539,
-    "gtceu:mv_vein_drill": 2.947,
+    "gtceu:mv_vein_drill": 4.77,
     "gtceu:weather_controller": 1.2
   },
   "pin": {
