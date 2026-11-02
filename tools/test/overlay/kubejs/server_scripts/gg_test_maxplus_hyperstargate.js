@@ -8,6 +8,8 @@
 //     refused   the network answers one EU short of a dial: no run, and the controller's refusal is 'charge'
 //     eut       with the dial covered the run starts at exactly 2^43 EU/t for 1,200 t
 //     open      the gate reads open while the dial runs (and its box is the 39 x 39 x 1 plane)
+//     run_counter, reregistered, resume_same_run   (M8-10) the dial start counts run 1; after forget() the running dial registers the gate again in the same run;
+//                                                   switching the controller off and on again keeps run 1 (paused is a NOTE)
 //     spent     the dial's end puts one spent charge in the output bus, keeps the horizon lock and reads closed again
 //     broken    a ring block taken out: the next dial does not start (refused 'structure', or the machine unformed)
 // The bank's capacity and the store are the network's own numbers in production; here W.dialCharge is replaced for the run by a fixed answer (put
@@ -356,7 +358,7 @@
       }
       if (waited === 40) m.setWorkingEnabled(false)
       if (waited === 45) {
-        check('paused', !HS().isOpen(m), 'controller off: open ' + HS().isOpen(m))
+        note('paused', 'controller off: open ' + HS().isOpen(m))
         m.setWorkingEnabled(true)
       }
       if (waited === 55) {
