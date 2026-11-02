@@ -207,7 +207,7 @@ const ROWS = {
   ],
   P17: [
     ["i", "gtceu:hastelloy_x_ingot", []],
-    ["m", "gtceu:bender", [0]],
+    ["m", "gtceu:ev_forge_hammer", [0]],
     ["i", "gtceu:hastelloy_x_plate", [1]],
     ["m", "gtceu:single_crystal_foundry", [2]],
     ["i", "grindless:sx_turbine_blade", [3]],

@@ -100,8 +100,8 @@ const chapter = {
         n('chamber', 26, -1.5, M('gtceu:laser_fusion_chamber'), 'Laser Fusion Chamber', {
           kind: 'ours', from: ['pb11', 'dhe3', 'laser'], desc: 'Fires a ring of fibre lasers at one capsule a shot. The lasers wear.',
         }),
-        n('alpha', 28.5, -2.25, F('gtceu:helium'), 'Helium', { kind: 'product', from: ['chamber'], end: 'the network: nothing is vented' }),
-        n('spentL', 28.5, -0.75, I('grindless:spent_laser_module'), 'Spent Laser Module', { kind: 'ret', from: ['chamber'], sub: 'Refurbished in the fibre draw tower' }),
+        n('alpha', 28.5, -2.25, F('gtceu:helium'), 'Helium', { kind: 'by', from: ['chamber'], end: 'the network: nothing is vented' }),
+        n('spentL', 28.5, -0.75, I('grindless:spent_laser_module'), 'Spent Laser Module', { kind: 'product', from: ['chamber'], end: 'refurbished in the fibre draw tower' }),
         // fibre lasers
         n('preform', 16, 6, I('grindless:yb_doped_preform'), 'Doped Preform', { kind: 'raw', sub: 'Ytterbium glass laid inside a tube' }),
         n('tower', 18.5, 6, M('gtceu:fibre_draw_tower'), 'Fibre Draw Tower', {
@@ -160,7 +160,7 @@ const chapter = {
     americium: {
       name: 'Americium and neutronium',
       nodes: [
-        n('pu', 0, -0.75, I('gtceu:plutonium_241_dust'), 'Plutonium-241', { kind: 'raw', sub: 'From IV\'s fission reactor' }),
+        n('pu', 0, -0.75, F('gtceu:plutonium_241'), 'Molten Plutonium-241', { kind: 'raw', sub: 'From IV\'s fission reactor' }),
         n('h2', 0, 0.75, F('gtceu:hydrogen'), 'Hydrogen', { kind: 'raw' }),
         n('mk3', 2.5, 0, M('gtceu:uv_fusion_reactor', 'gtceu:fusion_reactor'), 'Fusion Reactor Mk3', {
           kind: 'ours', from: ['pu', 'h2'], desc: 'Fuses plutonium-241 with hydrogen into americium plasma.',
@@ -174,7 +174,12 @@ const chapter = {
         n('mk3b', 12.5, 0.75, M('gtceu:uv_fusion_reactor', 'gtceu:fusion_reactor'), 'Fusion Reactor Mk3', {
           kind: 'ours', from: ['amf', 'naq'], desc: 'Fuses americium with naquadria into neutronium.',
         }),
-        n('neut', 15, 0.75, F('gtceu:neutronium'), 'Molten Neutronium', { kind: 'product', from: ['mk3b'], end: 'the UIV fusion reactor and the gravi star' }),
+        n('neut', 15, 0.75, F('gtceu:neutronium'), 'Molten Neutronium', { kind: 'product', from: ['mk3b'], sub: 'Cast in the fluid solidifier' }),
+        n('cast', 17.5, 0.75, M('gtceu:ev_fluid_solidifier', 'gtceu:fluid_solidifier'), 'Fluid Solidifier', { kind: 'machine', from: ['neut'], desc: 'Casts the neutronium into an ingot.' }),
+        n('nging', 20, 0.75, I('gtceu:neutronium_ingot'), 'Neutronium Ingot', { kind: 'product', from: ['cast'] }),
+        n('qstar', 20, 2.25, I('gtceu:quantum_star'), 'Quantum Star', { kind: 'raw' }),
+        n('acl', 22.5, 1.5, M('gtceu:iv_autoclave', 'gtceu:autoclave'), 'Autoclave', { kind: 'machine', from: ['nging', 'qstar'], desc: 'Grows a gravi star around a quantum star.' }),
+        n('gravi', 25, 1.5, I('gtceu:gravi_star'), 'Gravi Star', { kind: 'product', from: ['acl'], end: 'the UIV fusion reactor' }),
       ],
     },    ented: {
       name: 'EnTED wire',
@@ -227,10 +232,8 @@ const chapter = {
           kind: 'ours', from: ['sample'], desc: 'Warms the old ice slowly until it lets go of its gas. The inert dust is voided.',
         }),
         n('kwater', 30, 1.5, F('minecraft:water'), 'Water', { kind: 'by', from: ['anneal'], end: 'the network' }),
-        n('noble', 30, 3, F('gtceu:kuiper_noble_gas'), 'Kuiper Noble Gas', { kind: 'product', from: ['anneal'], sub: 'Split in the cryogenic plant' }),
+        n('noble', 30, 3, F('gtceu:kuiper_noble_gas'), 'Kuiper Noble Gas', { kind: 'product', from: ['anneal'], end: 'split in the cryogenic plant: krypton for the Hall thruster, xenon for the ion thruster' }),
         n('kco', 30, 4.5, F('gtceu:carbon_monoxide'), 'Carbon Monoxide', { kind: 'by', from: ['anneal'], end: 'the syngas plant' }),
-        n('kr', 32.5, 2.25, F('gtceu:krypton'), 'Krypton', { kind: 'product', from: ['noble'], end: 'the Hall thruster' }),
-        n('xe', 32.5, 3.75, F('gtceu:xenon'), 'Xenon', { kind: 'product', from: ['noble'], end: 'the ion thruster' }),
         // high-purity germanium
         L('lgedust', 0, 9, 'pl_luv:gedust'),
         n('zrt', 2.5, 9, M('gtceu:zone_refining_tower'), 'Zone Refining Tower', {
@@ -324,8 +327,7 @@ const TOGETHER = {
   ti: [11, 6.25], pbp: [12.75, 5.75], tipow: [15, 4.75], near: [15.5, 3.25],
   pchamber: [18.5, 3.25], tw: [19.5, 6.5], ion: [20, 10.25], pod: [20, 12.25],
   craft: [22.75, 14.5], ibay: [26.25, 14], sample: [27.5, 12.25], anneal: [28.75, 15],
-  kwater: [32.75, 14.75], noble: [29.5, 19.75], kco: [30.5, 12.5], kr: [32, 18.5],
-  xe: [33.5, 20.25], lgedust: [27.5, 33.75], zrt: [30.75, 32.75], gecl4: [34.5, 33.5],
+  kwater: [32.75, 14.75], noble: [29.5, 19.75], kco: [30.5, 12.5], lgedust: [27.5, 33.75], zrt: [30.75, 32.75], gecl4: [34.5, 33.5],
   gein: [38, 35], hpge: [42, 36.75], b2o3: [-5.25, 15.5], bnr: [-1.75, 14.25],
   hbn: [3, 13], bnntd: [5.75, 15.5], yarn: [7.5, 17], winder: [12, 18.75], laer: [8, 20.25], lct: [9.25, 23.75], agt: [10.5, 21.75],
   tank: [14.5, 18], lsw: [-9.25, 12.25], wsf: [-7, 11], sepi: [-4.5, 10.75],
@@ -341,7 +343,7 @@ const TOGETHER = {
   lsailC: [14, 5.25],
 };
 const PARTS = new Set(['cmox', 'am', 'hs', 'pellet', 'gphs', 'rtg', 'micro', 'ti', 'pbp', 'tipow', 'near', 'pchamber', 'tw', 'ion', 'pod',
-  'craft', 'ibay', 'sample', 'anneal', 'kwater', 'noble', 'kco', 'kr', 'xe', 'lgedust', 'zrt', 'gecl4', 'gein', 'hpge',
+  'craft', 'ibay', 'sample', 'anneal', 'kwater', 'noble', 'kco', 'lgedust', 'zrt', 'gecl4', 'gein', 'hpge',
   'b2o3', 'bnr', 'hbn', 'bnntd', 'yarn', 'winder', 'laer', 'lct', 'agt', 'tank', 'lsw', 'wsf', 'sepi', 'lsf', 'film', 'pat', 'lsail']);
 const fusion = chapter.clusters.cold.nodes;
 const parts = chapter.clusters.starshot.nodes.filter((nd) => PARTS.has(nd.key));
