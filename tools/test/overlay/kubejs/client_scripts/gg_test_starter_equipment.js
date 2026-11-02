@@ -145,7 +145,6 @@
       // HV radius 4 scans 7x7 chunks, one per tick; allow the client queue to drain.
       if (waited < 70) return
       var seen = fixtureVisible(mc)
-      c.allVisible = c.allVisible && seen
       if (!seen) {
         if (waited > 200) throw new Error('fixture vein never reached the map layer after the GUI scan')
         return
