@@ -25,3 +25,13 @@ applyTo: "pack/pack.toml,pack/index.toml,pack/mods/**,pack/.gitattributes,tools/
 - When moving it, send the user a short summary of what is new and what changes in their game.
 - Every `vX.Y.Z` tag becomes a GitHub release with short English notes (new, and what changes in the game) and the Prism zip pinned to that version (`tools/prism/Build-PrismInstance.ps1 -Channel vX.Y.Z`). The `releases-channel` release note is updated too.
 - The Prism instance (`tools/prism/Build-PrismInstance.ps1`, release `releases-channel`, `Gregtech-Grindless-releases.zip`) updates itself through packwiz-installer-bootstrap; rebuild it only if the channel URL or the bootstrap changes. The old `playable-channel` release stays, marked as moved.
+
+## Release checklist (in order)
+1. Every package of the batch is merged and regenerated (`script-order.mjs --write`, `emi-coverage.mjs --expect`). The batch dump and the post-dump outputs are committed. T2 (strict) and T3 (client EMI audit and quest book) pass on the candidate.
+2. Bump `version` in `pack/pack.toml`, run `tools/Update-PackIndex.ps1`, write `docs/releases/vX.Y.Z.md` (short: what is new, what changes in the game, an `Upgrading:` line, the `Full changelog` compare link) and update the README's version strings. Commit, push, and wait for that commit's T0.
+3. Tag: `git tag -a vX.Y.Z -m "vX.Y.Z: <summary>" <sha>`, then `git push origin vX.Y.Z`. Pushing the tag starts its own T0 run on the same SHA; wait for it, because Test-Promotion reads the newest run for the SHA.
+4. `powershell -NoProfile -File tools\release\Test-Promotion.ps1 -Sha <40-hex> -Version X.Y.Z -SkipRelease`: every check except the Prism asset.
+5. `tools\prism\Build-PrismInstance.ps1 -Channel vX.Y.Z -OutDir <dir>`, then `gh release create vX.Y.Z --verify-tag --latest --title "vX.Y.Z: <summary>" --notes-file docs/releases/vX.Y.Z.md <zip>`.
+6. Test-Promotion again without `-SkipRelease`: it now checks the Prism asset too, and must pass.
+7. Move the channels to the tag's commit: `git push origin vX.Y.Z^{commit}:refs/heads/releases`, the same for `playable`, and `main` (or `main` ahead by docs-only commits).
+8. Edit the `releases-channel` release note to say `Current version: vX.Y.Z`. Update `docs/STATUS.md` and `DECISIONS.md`, and send the owner the short summary.
