@@ -399,26 +399,8 @@
     return typeof n === 'number' && n % 1 === 0 && n >= 0 && n <= max
   }
 
-  // AF-W (#199 M8-13): towerInfo/bankInfo walk every block of the structure; a settlement did that for every tower and bank each cycle.
-  // GTM's structure cache is a new object whenever the structure is checked again, and the info is re-read every INFO_REFRESH settlements
-  // either way, so a cell swapped in place is seen within that many cycles.
-  const INFO_REFRESH = 20
-  var infoCache = {}
-
-  function cachedInfo(kind, e, ctrl, read) {
-    if (ctrl === null || ctrl === undefined || typeof ctrl.isFormed !== 'function' || !ctrl.isFormed()) return read(ctrl)
-    var key = kind + '|' + e.d + '|' + e.x + '|' + e.y + '|' + e.z
-    var cache = ctrl.getMultiblockState().cache
-    if (cache === null || cache === undefined) return read(ctrl)
-    var hit = infoCache[key]
-    if (hit && hit.cache === cache && hit.age < INFO_REFRESH) {
-      hit.age++
-      return hit.info
-    }
-    var info = read(ctrl)
-    infoCache[key] = { cache: cache, age: 0, info: info }
-    return info
-  }
+  // AF-W (#199 M8-13): an info cache keyed on GTM's structure cache missed in-place cell swaps (native STRONGEST_TIER), so info is read every cycle.
+  function cachedInfo(kind, e, ctrl, read) { return read(ctrl) }
 
   function settle(server) {
     var L = lazy()
@@ -889,7 +871,7 @@
   W.forget = forget
   W.tracked = function (server) { return blocks(server).slice() }
   W.settle = settle
-  W.dropInfoCache = function () { infoCache = {} }
+  W.dropInfoCache = function () {}
   W.status = status
   W.towerInfo = towerInfo
   W.bankInfo = bankInfo
