@@ -1569,8 +1569,10 @@
         "${place:barnard_b}"
       ],
       "exceptRecipes": [
-        "grindless:carbonyl_refining/bloom_carbonyl"
+        "grindless:carbonyl_refining/bloom_carbonyl",
+        "grindless:carbonyl_refining/mond"
       ],
+      "note": "The Mond step is portable processing (principle 10): it refines shippable nickel; only the core drilling needs Barnard b.",
       "package": "B3"
     },
     {
