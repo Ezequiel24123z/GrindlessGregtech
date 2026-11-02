@@ -1,6 +1,6 @@
 // OBTAIN STEP: audit of what is never obtained, in any era.
 // Starts from every world source the pack already has (per-dimension vein tables, fluid deposits, GT trees and
-// stones, bees, whatever other mods give) and every recipe of any tier (each registered machine with its tier's EU/t
+// stones, whatever other mods give) and every recipe of any tier (each registered machine with its tier's EU/t
 // cap, multiblocks with no cap, energy and parts taken as obtainable), and lists the items and
 // fluids of the audited namespaces that aren't reached, grouped by material. Each group is classified:
 //   A  deserves a source: opens a line or an automation (the config decides, with its reason);
@@ -9,7 +9,6 @@
 // Whatever no rule classifies comes out as «?» and fails: it's new material nobody has looked at.
 import { lfp } from './engine.mjs';
 import { buildModel } from './model.mjs';
-import { BEE_TYPES, beeKey } from './normalize.mjs';
 import { asArray, makeGlobMatcher } from './util.mjs';
 
 const nsOf = (id) => {
@@ -26,7 +25,6 @@ const pathOf = (id) => {
 export const DEFAULT_DIMENSIONS = ['minecraft:overworld', 'minecraft:the_nether', 'minecraft:the_end', 'grindless:flat', 'grindless:void'];
 /** The pack's eras in order (the ones in docs/journey.md); class B's `until` is one of them, and class C's is "never". */
 export const ERA_IDS = ['steam', 'lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv', 'uhv', 'uev', 'uiv', 'uxv', 'opv', 'max', 'maxplus'];
-const DEFAULT_NBT_TYPED = ['productivebees:configurable_honeycomb', 'productivebees:configurable_comb', 'productivebees:spawn_egg_configurable_bee'];
 const HIDDEN_TAG = 'c:hidden_from_recipe_viewers';
 
 /** Raw ore of a vein material ("gtceu:ilmenite", "gcyr:xyz"): the material's own namespace, GT's, vanilla's, or any other. */
@@ -39,32 +37,9 @@ function rawOreIds(dump, material) {
   return any.sort();
 }
 
-/** Bees named by Productive Bees recipes (hive, crossbreeding, conversion, nests, fishing). */
-function beeIds(dump) {
-  const set = new Set();
-  const add = (b) => {
-    const id = typeof b === 'string' ? b : b && typeof b.bee === 'string' ? b.bee : null;
-    if (id) set.add(id);
-  };
-  for (const r of dump.recipes.values()) {
-    if (!BEE_TYPES.has(r.type)) continue;
-    const j = r.json || {};
-    if (r.type === 'productivebees:advanced_beehive') add(j.ingredient);
-    add(j.parent1);
-    add(j.parent2);
-    asArray(j.offspring).forEach(add);
-    add(j.source);
-    add(j.result);
-    if (r.type === 'productivebees:bee_spawning') asArray(j.results).forEach(add);
-    add(j.bee);
-  }
-  return [...set].sort();
-}
-
-/**
- * Config derived for buildModel: the audit's world, every registered machine, recipe types with no GT machine
+/** Raw ore derived for buildModel: the audit's world, every registered machine, recipe types with no GT machine
  * (crafting table, furnace, other mods) with no condition, conditions ignored except dimension (dim:<id> key),
- * each fluid's buckets, and, with `bees`, the bees.
+ * each fluid's buckets.
  */
 export function obtainConfig(dump, raw) {
   const ob = raw.obtain || {};
@@ -74,7 +49,7 @@ export function obtainConfig(dump, raw) {
   const notFree = makeGlobMatcher(ob.notFree || []);
   const warnings = [];
 
-  // 1) whatever other mods give (vanilla, decoration, AE2, Productive Bees...): taken as obtainable except `notFree`
+  // 1) whatever other mods give (vanilla, decoration, AE2...): taken as obtainable except `notFree`
   const free = [];
   for (const id of dump.items) {
     const ns = nsOf(id);
@@ -121,31 +96,8 @@ export function obtainConfig(dump, raw) {
     synthetic.push({ id: `empty:${id}`, consumes: [id], produces: ['fluid:' + fluid] });
   }
 
-  // 5) bees: an egg gives its bee, and the incubator gives the egg of a bee you already have (egg + treat with the gene)
-  const bees = ob.bees === undefined ? true : !!ob.bees;
   const extraFacts = reach.map((d) => 'dim:' + d);
-  const nbtTyped = bees ? asArray((ob.beeOptions || {}).nbtTyped).concat(DEFAULT_NBT_TYPED) : [];
-  if (bees) {
-    const opts = ob.beeOptions || {};
-    for (const b of asArray(opts.worldBees === undefined ? ['minecraft:bee'] : opts.worldBees)) extraFacts.push(beeKey(b));
-    for (const b of beeIds(dump)) {
-      const name = pathOf(b);
-      let egg = null;
-      if (b === 'minecraft:bee') egg = dump.items.has('minecraft:bee_spawn_egg') ? 'minecraft:bee_spawn_egg' : null;
-      else if (dump.items.has(`${nsOf(b)}:spawn_egg_${name}`)) egg = `${nsOf(b)}:spawn_egg_${name}`;
-      else if (dump.items.has('productivebees:spawn_egg_configurable_bee')) egg = `productivebees:spawn_egg_configurable_bee#${b}`;
-      if (egg) {
-        synthetic.push({ id: `egg:${b}`, consumes: [egg], produces: [beeKey(b)] });
-        synthetic.push({ id: `incubator:${b}`, capital: [beeKey(b)], consumes: ['minecraft:egg'], produces: [egg] });
-      }
-      if (dump.items.has('productivebees:configurable_comb') && dump.items.has('productivebees:configurable_honeycomb')) {
-        synthetic.push({ id: `honeycomb-block:${b}`, consumes: [`productivebees:configurable_honeycomb#${b}`], produces: [`productivebees:configurable_comb#${b}`] });
-        synthetic.push({ id: `honeycomb:${b}`, consumes: [`productivebees:configurable_comb#${b}`], produces: [`productivebees:configurable_honeycomb#${b}`] });
-      }
-    }
-  }
-
-  // 6) recipe types with no GT machine: made by hand or with another mod's block (obtainable); GT's types need their machine
+  const nbtTyped = asArray(ob.nbtTyped); with no GT machine: made by hand or with another mod's block (obtainable); GT's types need their machine
   const aliases = raw.typeAliases || {};
   const gtTypes = new Set(dump.recipeTypes.keys());
   const freeTypes = new Set(asArray(raw.unconditionalTypes));
@@ -155,7 +107,7 @@ export function obtainConfig(dump, raw) {
   }
   const ignoreTypes = [...asArray(raw.ignoreTypes), ...[...skipNs].map((ns) => `${ns}:*`)];
 
-  // 7) keys for later-era sources (created before closing the graph; the facts are given on each pass)
+  // 6) keys for later-era sources (created before closing the graph; the facts are given on each pass)
   const later = laterStages(dump, ob);
   const extraKeys = later.flatMap((s) => s.keys);
 
@@ -170,7 +122,7 @@ export function obtainConfig(dump, raw) {
     machinesFromRegistry: [{ prefix: '', multiblocks: true, maxEUtByTier: true, includeTypeless: true, excludeTypes: ['gtceu:dummy'] }],
     synthetic,
     targets: [], autoTargets: [], targetsFromVeins: [], autoTargetsFromVeins: [], eraItems: [], eraResources: [],
-    nbtTyped, bees, extraFacts, extraKeys,
+    nbtTyped, extraFacts, extraKeys,
   };
   return { derived, later, warnings, reach };
 }
@@ -830,7 +782,7 @@ export function renderObtainMarkdown(res, meta = {}) {
   }
   L.push('## How it is computed');
   L.push('');
-  L.push(`- **World sources:** the drill's table veins (the ones with a drilling recipe) in ${(meta.dimensions || []).map((d) => `\`${d}\``).join(', ')}; weighted fluid deposits; rubber trees, marble and red granite; bees (nests, crossbreeding, conversions, fishing and incubator eggs); everything from the unaudited mods, except spawn eggs and creative items.`);
+  L.push(`- **World sources:** the drill's table veins (the ones with a drilling recipe) in ${(meta.dimensions || []).map((d) => `\`${d}\``).join(', ')}; weighted fluid deposits; rubber trees, marble and red granite; everything from the unaudited mods, except spawn eggs and creative items.`);
   L.push("- **Recipes:** all of them, of any tier. Each registered machine runs recipes up to its tier's voltage; multiblocks, with no cap; energy, multiblock parts, the clean room and the other conditions are taken as obtainable, except dimension.");
   L.push("- **Groups:** each item goes to the longest material whose name it carries (dust, ingot, plate... of the same material together); whatever belongs to no material goes alone. \u00abLoose forms\u00bb = the material is obtainable, but those forms aren't. Ore blocks (stone + material) aren't listed: they're world blocks.");
   L.push(`- **Automatic B:** the group is obtained once a later era's sources are added (${res.later.map((st) => `${st.label}: ${st.era}`).join('; ')}).`);

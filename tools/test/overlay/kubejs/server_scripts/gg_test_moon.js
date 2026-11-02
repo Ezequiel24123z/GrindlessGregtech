@@ -17,7 +17,6 @@
 //                       or is a late line of allowedLate
 //     byproducts        no ore but ilmenite, rutile and titanium has a titanium byproduct (GTM builds every ore chain from them)
 //     end_mv            the End is MV: vanadium steel bit recipes under mv/, no titanium or tungsten ore, the eye bath and the blaze at MV
-//     bees, bees_mars   Productive Bees combs of the Moon's (titanium, ilmenite) and Mars' (tungsten, scheelite, tungstate)
 //                       materials only process in their own world
 //     planets           GCYR: a tier 1 rocket reaches the Moon and nothing else
 //     travel_config     Waystones and FTB Essentials: crossing dimensions allowed and free, 10 homes
@@ -621,27 +620,6 @@
       ' eye bath=' + bathEut + ' EU/t blaze rods at ' + blaze.join(',') + ' EU/t' + (bad.length > 0 ? ' problems=' + bad.join(' | ') : ''))
   }
 
-  // Productive Bees combs of another world's materials only process in that world (offworld_only.json worlds.<world>.combs):
-  // 'bees' for the Moon (titanium, ilmenite), 'bees_<world>' for the others
-  function checkBees() {
-    var table = global.grindless.readJsonTable('kubejs/data/grindless/tables/offworld_only.json')
-    var pb = recipesOfType('gtceu:centrifuge').filter(function (r) { return String(r.getId()).indexOf('grindless:centrifuge/pb/') === 0 })
-    Object.keys(table.worlds).forEach(function (name) {
-      var world = table.worlds[name]
-      var key = name === 'moon' ? 'bees' : 'bees_' + name
-      var re = new RegExp('"gtceu:[a-z_]*(' + world.watched.inputPattern + ')[a-z_]*"')
-      var mine = pb.filter(function (r) { return re.test(gtItemsOut(r).join(' ')) })
-      var earthly = mine.filter(function (r) { return conditionsText(r).indexOf('"' + world.dimension + '"') < 0 }).map(function (r) { return String(r.getId()) })
-      if (mine.length === 0) {
-        note(SCOPE, key, 'no Productive Bees comb gives an output of ' + name + ' (' + pb.length + ' comb recipes)')
-        return
-      }
-      check(SCOPE, key, earthly.length === 0, mine.length + ' comb recipes of ' + pb.length + ' give an output of ' + name + ': ' +
-        mine.map(function (r) { return String(r.getId()).replace('grindless:centrifuge/pb/', '') + '@' + eutOf(r) }).join(',') +
-        (earthly.length > 0 ? ' without the ' + world.dimension + ' condition: ' + earthly.join(',') : ', all only in ' + world.dimension))
-    })
-  }
-
   function checkPlanets() {
     var PlanetData = Java.loadClass('argent_matter.gcyr.data.loader.PlanetData')
     var reach = []
@@ -702,7 +680,6 @@
     guarded('earth_scan', earthScan)
     guarded('byproducts', checkByproducts)
     guarded('end_mv', checkEndMv)
-    guarded('bees', checkBees)
     guarded('planets', checkPlanets)
     guarded('travel_config', checkTravelConfig)
   }

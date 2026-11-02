@@ -31,7 +31,6 @@
 //   worldgen          GTM's live vein registry: our Venus, Mercury and fluorite veins with their layer, dimensions and materials; GTM's End
 //                     naquadah vein gone, the End's pitchblende vein still there; nothing else generates only on Venus or Mercury
 //   planets           planets.json: Venus and Mercury carry their pair tags
-//   bee_combs         the naquadah, osmium and radioactive combs still have no recipe at all
 // var + function everywhere (this Rhino throws "redeclaration of var" for const/let inside functions that run more than once).
 (function () {
   var SCOPE = 'iv_foundation'
@@ -530,30 +529,6 @@
         P.planetOf('gcyr:venus') === 'venus' && P.planetOf('gcyr:mercury_orbit') === 'mercury' && !!t.venus.name && !!t.mercury.name
       check('planets', ok, 'venus pairTag=' + (t.venus && t.venus.pairTag) + ', mercury pairTag=' + (t.mercury && t.mercury.pairTag) +
         ', planetOf(gcyr:venus)=' + P.planetOf('gcyr:venus') + ', planetOf(gcyr:mercury_orbit)=' + P.planetOf('gcyr:mercury_orbit'))
-    })
-
-    safely('bee_combs', function () {
-      var BEES = ['productivebees:naquadah', 'productivebees:osmium', 'productivebees:radioactive']
-      var takers = []
-      var scanned = 0
-      var types = asArray(GTRegistries.RECIPE_TYPES.keys()).map(String).concat(['productivebees:centrifuge'])
-      types.forEach(function (typeId) {
-        var list = null
-        if (typeId.indexOf('productivebees:') === 0) {
-          var RT = Java.loadClass('net.minecraftforge.registries.ForgeRegistries').RECIPE_TYPES.getValue(rl(typeId))
-          list = RT == null ? [] : asArray(server.getRecipeManager().getAllRecipesFor(RT))
-        } else {
-          list = recipesOfType(server, typeId)
-        }
-        list.forEach(function (r) {
-          scanned++
-          var text = typeId.indexOf('productivebees:') === 0 ? ingredientsText(r) :
-            asArray(r.getInputContents(caps().item)).map(function (c) { return String(c.content.toJson()) }).join(' ')
-          if (text.indexOf('configurable_honeycomb') < 0) return
-          if (BEES.some(function (b) { return text.indexOf(b) >= 0 })) takers.push(String(r.getId()))
-        })
-      })
-      check('bee_combs', takers.length === 0, scanned + ' GT and Productive Bees centrifuge recipes; ones that take the naquadah, osmium or radioactive comb: ' + (takers.join(', ') || 'none'))
     })
   }
 

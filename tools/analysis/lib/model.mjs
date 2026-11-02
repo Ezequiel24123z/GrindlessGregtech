@@ -35,10 +35,9 @@ export function prepareConfig(raw) {
   cfg.eraSiblings = raw.eraSiblings || [];
   cfg.eraResources = raw.eraResources || [];
   cfg.eraItems = raw.eraItems || [];
-  // Obtainability audit (lib/obtain.mjs): items with NBT by type, bee recipes as rules, and keys/facts with no item
-  // in the registry (dim:<id> for dimensions, bee:<id> for bees).
+  // Obtainability audit (lib/obtain.mjs): items with NBT by type, and keys/facts with no item
+  // in the registry (dim:<id> for dimensions).
   cfg.nbtTyped = raw.nbtTyped ? new Set(raw.nbtTyped) : null;
-  cfg.bees = !!raw.bees;
   cfg.extraFacts = raw.extraFacts || [];
   cfg.extraKeys = raw.extraKeys || [];
   return cfg;

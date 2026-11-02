@@ -3,7 +3,7 @@
 // shipped with the pack): IV's Naquadah Plant (gtceu:naquadah_plant, recipe type gtceu:naquadah_refining; startup_scripts/grindless/iv/
 // naquadah_plant.js, server_scripts/grindless/iv/naquadah_plant.js, data/grindless/tables/naquadah_plant.json) and the EV platinum
 // plant's mode 3 (server_scripts/grindless/ev/platinum_plant.js: Mercury's iridosmine -> iridium and osmium), both composed by
-// server_scripts/grindless/lib/compose.js; and Productive Bees' naquadah bee recipe, removed.
+// server_scripts/grindless/lib/compose.js.
 //
 //   powershell -File tools\test\Invoke-GGTest.ps1 -Suite server `
 //     -Commands 'kubejs custom_command gg_test_naquadah_plant;;kubejs custom_command gg_test_recipe_lookup;;kubejs custom_command gg_dump' `
@@ -27,7 +27,6 @@
 //   lookup_sets           gtceu:naquadah_refining holds the published recipes (3 since LuV A2, checked in gg_test_luv_a2); every live
 //                         gtceu:pgm_refining recipe is published and none takes a subset of another's ingredients
 //                         (static; gg_test_recipe_lookup asks GTM's lookup)
-//   bee_removed           Productive Bees' gcteu:electric_blast_furnace/naquadah_bee is gone
 //   controller_recipe     grindless:assembler/naquadah_plant exists and holds its parts
 //   parallel_hatch_option both plants take GTM's Parallel Control Hatch (IV-B6's lib/parallel_hatch.js) as one more option of their part
 //                         cells, at most one, with the same size and part cells as before; the option has no tier restriction and
@@ -104,7 +103,6 @@
   var SALT_WATER = 'gtceu:salt_water'
   var HCL = 'gtceu:hydrochloric_acid'
   var STEAM = 'gtceu:steam'
-  var BEE = 'gcteu:electric_blast_furnace/naquadah_bee'
   var FUSION = 'grindless:solar_processing/iridosmine_fusion'
   var SHARED_ITEMS = [SOURCE, IRIDOSMINE, ELECTRODE, 'gtnn:radiation_proof_machine_casing', 'gtceu:ptfe_pipe_casing', 'gtceu:inert_machine_casing']
 
@@ -570,10 +568,6 @@
       if (sets.length < 6 || sets.length !== pgmLive) problems.push(sets.length + ' published ' + PGM_TYPE + ' recipes, ' + pgmLive + ' live')
       check('lookup_sets', problems.length === 0, NAQ_TYPE + ' holds ' + naqLive + ' (' + naqPublished + ' published); ' + sets.length + ' ' + PGM_TYPE +
         ' input sets, none a subset of another' + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
-    })
-
-    safely('bee_removed', function () {
-      check('bee_removed', liveRecipe(BEE) === null, BEE + (liveRecipe(BEE) === null ? ' is gone' : ' is still in the recipe manager'))
     })
 
     safely('controller_recipe', function () {

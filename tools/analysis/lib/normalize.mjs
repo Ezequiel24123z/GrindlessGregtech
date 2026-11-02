@@ -16,8 +16,8 @@ function labelOf(tags, alts, fallback) {
 }
 
 /**
- * Type that holds a "configurable" item's NBT (Productive Bees' honeycombs, honeycomb blocks and eggs carry the bee
- * in EntityTag.type). The NBT arrives as an object or as SNBT/JSON text: {EntityTag:{type:"productivebees:iron"}}.
+ * Type that holds a "configurable" item's NBT (EntityTag.type). The NBT arrives as an object or as SNBT/JSON text:
+ * {EntityTag:{type:"x:y"}}.
  */
 export function nbtType(nbt) {
   if (!nbt) return null;
@@ -28,7 +28,7 @@ export function nbtType(nbt) {
 
 /**
  * An item's key: with `nbtTyped` (a Set of ids, only for the obtainability audit) items on that list with an NBT type
- * are split by type ("productivebees:configurable_honeycomb#productivebees:iron"); the rest of the analysis merges them into one id.
+ * are split by type ("x:configurable#x:y"); the rest of the analysis merges them into one id.
  */
 export function itemKey(item, nbt, nbtTyped) {
   if (!nbtTyped || !nbtTyped.has(item)) return item;
@@ -248,7 +248,7 @@ function normalizeGT(out, j, ctx) {
 const typedOf = (ctx) => (ctx.cfg && ctx.cfg.nbtTyped instanceof Set ? ctx.cfg.nbtTyped : null);
 
 /**
- * Output of a non-GT recipe. Productive Bees nests the item ({item: {type: 'forge:nbt', item, nbt}} or
+ * Output of a non-GT recipe. Some mods nest the item ({item: {type: 'forge:nbt', item, nbt}} or
  * {item: {tag}}); a tag output gives the first member (whatever the game hands over).
  */
 function resultOf(r, ctx) {
@@ -328,94 +328,6 @@ function normalizeGeneric(out, j, ctx) {
   return out;
 }
 
-/** Productive Bees types read as bee rules when the config asks for `bees` (obtainability audit). */
-export const BEE_TYPES = new Set([
-  'productivebees:advanced_beehive', 'productivebees:bee_breeding', 'productivebees:bee_conversion', 'productivebees:bee_spawning',
-  'productivebees:bee_fishing', 'productivebees:block_conversion', 'productivebees:centrifuge', 'productivebees:bottler',
-]);
-export const beeKey = (id) => 'bee:' + id;
-
-/**
- * Productive Bees: bees are "bee:<id>" keys (capital: not consumed). The hive gives the bee's honeycombs (an
- * NBT-less configurable honeycomb is the bee's own), crossbreeding gives offspring, conversion changes a bee with
- * an item, nests drop bees, and fishing pulls them out of water (biomes are taken as reachable).
- */
-function normalizeBees(out, j, ctx) {
-  const { tags, st } = ctx;
-  const nbtTyped = typedOf(ctx);
-  const bee = (b) => (typeof b === 'string' ? b : b && typeof b.bee === 'string' ? b.bee : null);
-  const beeIn = (b) => {
-    const id = bee(b);
-    if (id) out.inputs.push({ kind: 'bee', alts: [beeKey(id)], label: 'bee ' + id, count: 1, cap: true, consume: 0, tags: [] });
-    else out.warn.push('bee with no id');
-  };
-  const beeOut = (b) => {
-    const id = bee(b);
-    if (id) out.outputs.push({ key: beeKey(id), chance: 1, count: 1 });
-  };
-  const itemIn = (ing, cap = false) => {
-    const p = parseItemIngredient(ing, tags, st, nbtTyped);
-    out.inputs.push({
-      kind: 'item', alts: p.alts, label: labelOf(p.tags, p.alts, p.bad), count: p.count, cap, consume: cap ? 0 : 1, bad: p.bad, tags: p.tags,
-    });
-  };
-  const fluidOut = (f, amount) => {
-    const id = f.fluid || (f.tag ? tags.fluids(f.tag)[0] : null);
-    if (id) out.outputs.push({ key: fluidKey(id), chance: 1, count: amount || 0 });
-  };
-  switch (out.type) {
-    case 'productivebees:advanced_beehive':
-      beeIn(j.ingredient);
-      for (const r of asArray(j.results)) {
-        for (const o of resultOf(r, ctx)) {
-          const key = nbtTyped && nbtTyped.has(o.key) && bee(j.ingredient) ? `${o.key}#${bee(j.ingredient)}` : o.key;
-          out.outputs.push({ key, chance: (r.chance || 100) / 100, count: o.count });
-        }
-      }
-      break;
-    case 'productivebees:bee_breeding':
-      beeIn(j.parent1);
-      beeIn(j.parent2);
-      asArray(j.offspring).forEach(beeOut);
-      break;
-    case 'productivebees:bee_conversion':
-      beeIn(j.source);
-      if (j.item) itemIn(j.item);
-      beeOut(j.result);
-      break;
-    case 'productivebees:bee_spawning':
-      itemIn(j.ingredient, true);
-      asArray(j.results).forEach(beeOut);
-      break;
-    case 'productivebees:bee_fishing':
-      beeOut(j.bee);
-      break;
-    case 'productivebees:block_conversion':
-      beeIn(j.bee);
-      if (j.from && j.from.Name) itemIn({ item: j.from.Name });
-      if (j.to && j.to.Name) out.outputs.push({ key: j.to.Name, chance: (j.chance || 100) / 100, count: 1 });
-      break;
-    case 'productivebees:centrifuge':
-      itemIn(j.ingredient);
-      for (const o of asArray(j.outputs)) {
-        if (o.fluid) fluidOut(o.fluid, o.amount);
-        else for (const r of resultOf(o, ctx)) out.outputs.push({ key: r.key, chance: (o.chance || 100) / 100, count: r.count });
-      }
-      break;
-    case 'productivebees:bottler': {
-      itemIn(j.input);
-      const p = parseFluidIngredient(j.fluid, tags, st);
-      out.inputs.push({ kind: 'fluid', alts: p.alts, label: 'fluid:' + labelOf(p.tags, p.alts.map((a) => a.slice(6)), p.bad), count: p.amount, cap: false, consume: 1, bad: p.bad, tags: p.tags });
-      for (const r of resultOf(j.output, ctx)) out.outputs.push({ key: r.key, chance: 1, count: r.count });
-      break;
-    }
-    default:
-      break;
-  }
-  out.shape = 'bees';
-  return out;
-}
-
 /**
  * ctx = {tags: TagIndex, st: stats, cfg: config with typeAliases and toolTagSet, gtTypes: Set of GT types}
  * Returns the normalized recipe (always an object).
@@ -427,7 +339,6 @@ export function normalizeRecipe(rec, ctx) {
     conditions: [], shape: '', warn: [], otherCaps: new Set(),
   };
   const j = rec.json || {};
-  if (ctx.cfg && ctx.cfg.bees && BEE_TYPES.has(rec.type)) return normalizeBees(out, j, ctx);
   const gtLike = ctx.gtTypes.has(rec.type) || ctx.gtTypes.has(type) ||
     (!j.pattern && !Array.isArray(j.ingredients) && (j.inputs || j.outputs || j.tickInputs || j.tickOutputs));
   return gtLike ? normalizeGT(out, j, ctx) : normalizeGeneric(out, j, ctx);

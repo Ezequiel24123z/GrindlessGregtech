@@ -280,25 +280,24 @@ Phase 5 of Project Reforge rebuilds the progression chapters to rule 5. The plan
 
 ## 15. Quality of life tabs: what to fix
 
-The five are in the *Quality of Life* group and were written before this guide. The ids are already fixed (section 10), and the texts that v0.5.0 left false are already corrected (bees: the blaze is MV, and the ilmenite and titanium honeycombs are only processed on the Moon; AE2: the bridge between planets is EV). What still sounds like AI is mostly " - " as a dash, recited recipes and design voice. Linter count as of 24-10-2026:
+The five are in the *Quality of Life* group and were written before this guide. The ids are already fixed (section 10), and the texts that v0.5.0 left false are already corrected (AE2: the bridge between planets is EV). What still sounds like AI is mostly " - " as a dash, recited recipes and design voice. Linter count as of 24-10-2026:
 
 | Tab | Layout | Text | Fix |
 |---|---|---|---|
 | **Storage** (21) | Star-shaped layout around *Storage*: 7 lines backward, 3 longer than 5 squares. | 7 dashes; recipes written as prose ("Aluminium plates and an MV circuit around the pouch"), design voice ("Every byproduct in this pack has an honest end"). | From left to right in the order they are obtained: chests and backpacks → drawers → Sophisticated → ender chests and tanks (they work between planets: the small, cheap link; the industrial one is EV's AE2 bridge) → drums and GT crates → exit toward AE2. Each mod's side quests go in their own row. |
 | **Applied Energistics** (19; 40 on 24-10-2026) | The best: spine from left to right. Two long lines (*Wireless Access*, *ExtendedAE*) and a column under *ME Controller* that reads from top to bottom. | 13 dashes, "runs on its own", recipes recited ("Three 1k components, a calculation processor…"). | The start depends on the last AE2 step in LV; the column under the controller becomes a row; the bridge between planets stays in EV and is only named here. |
-| **Productive Bees** (12) | Clean. | 5 dashes. | Start depends on the age it opens in; rewards that are more than just XP. It is the shortest chunk. |
 | **Travel and Teams** (16) | Star-shaped layout around *Getting Around*: 5 lines backward. | 7 dashes, "the heart of". | Travel row (hang glider, Waystones, scrolls) and team row (teams, homes, claiming, loading chunks) that leave the start to the right; *Other Worlds* as a milestone, without repeating what *Lunar Base* (EV) says. EV's *Waystone on the Moon* was cut on 2026-10-25, so waystones between worlds are this tab's job. |
 | **Workshop** (17; 15 on 24-10-2026) | Star-shaped layout around *Workshop*: 5 lines backward; mixes three topics. | 11 dashes, "32 blocks" in the text. | Three rows: building (Effortless, Carry On, Ultimine, decoration), logistics (Pipez, LaserIO, Modular Routers, collectors) and GT aids (terminal, memory card, structure manager). |
 
 In all five: almost every reward is XP (put in something small and useful instead), and none is tied to the age where it opens. The text must follow the rules in section 8.
 
-**Status (2026-10-25).** v0.5.1 rewrote the five (section 16), and the voice pass (section 8) rewrote them again: none has a linter warning, and the counts in the table are today's. Storage, AE2 and Productive Bees now start from an age quest; most rewards are still XP. The AE2 tab went from 42 quests to 19. It starts at LV's *ME Network Access* and only covers what LV's AE2 branch doesn't: powering the network, the wireless terminals, GregTech's ME hatches and the addons. The column under *ME Controller* went with the controller quest, and the bridge between planets is still only named, in *Beyond This World*.
+**Status (2026-10-25).** v0.5.1 rewrote the five (section 16), and the voice pass (section 8) rewrote them again: none has a linter warning, and the counts in the table are today's. Storage and AE2 now start from an age quest; most rewards are still XP. The AE2 tab went from 42 quests to 19. It starts at LV's *ME Network Access* and only covers what LV's AE2 branch doesn't: powering the network, the wireless terminals, GregTech's ME hatches and the addons. The column under *ME Controller* went with the controller quest, and the bridge between planets is still only named, in *Beyond This World*.
 
 ## 16. Chunks to write in parallel
 
 Done in v0.5.1: the eight chunks and the incoming machines. Six writers in parallel with a cheap model and then a review of the LV, MV and HV logic with a more capable model. The cheap model writes well, but it does not reason through the progression: the spine and the dependencies of the age chapters always need that review.
 
-On 2026-10-25 two sessions rewrote every chapter in the new voice (section 8) and cut the quests that teach nothing new. Welcome to MV plus Storage, Productive Bees, Travel and Teams and Workshop went from 235 quests to 225, HV from 43 to 32, EV from 66 to 55 and the AE2 tab from 42 to 19. The book has 331 quests, with 0 linter errors and 5 layout warnings, all in LV and MV.
+On 2026-10-25 two sessions rewrote every chapter in the new voice (section 8) and cut the quests that teach nothing new. Welcome to MV plus Storage, Travel and Teams and Workshop went from 235 quests to 225, HV from 43 to 32, EV from 66 to 55 and the AE2 tab from 42 to 19. The book has 331 quests, with 0 linter errors and 5 layout warnings, all in LV and MV.
 
 A chunk is one chapter, written by one person. The contract is this guide and the linter:
 

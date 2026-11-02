@@ -287,7 +287,7 @@ export function renderText(model, res, out, opts = {}) {
     const e = out.eras;
     L.push('');
     L.push(`STEP 3 · ERAS — nothing from an era needs a resource that comes from a later era   [${e.counts.pass}/${e.counts.total} PASS${e.counts.warn ? `, ${e.counts.warn} warnings` : ''}]`);
-    L.push('  resources per era (removed from every source: veins, byproducts, bees, addons, and the sources of its dimension):');
+    L.push('  resources per era (removed from every source: veins, byproducts, addons, and the sources of its dimension):');
     for (const r of e.resources) {
       const what = [];
       if (r.keys > 0) what.push(`${r.keys} items and fluids`);

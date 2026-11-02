@@ -116,12 +116,12 @@ The pack has 224 mods ([`pack/mods/`](pack/mods/)). Besides the GregTech addons 
 
 - **Storage and logistics:** Applied Energistics 2 with ExtendedAE, MEGA Cells, AppFlux and wireless terminals; Sophisticated Storage and Backpacks, Functional Storage, Storage Drawers, Laser IO, Pipez and Modular Routers. AE2 is also the interplanetary backbone: quantum bridges and EU over P2P tunnels.
 - **Travel and teams:** Waystones, FTB Chunks, Teams and Essentials, Xaero's maps, and Ender Chests and Tanks that work across planets.
-- **Extras:** Productive Bees, Farmer's Delight, Quark, Supplementaries and decorative mods; world generation from Biomes O' Plenty, YUNG's and several structure mods.
+- **Extras:** Farmer's Delight, Quark, Supplementaries and decorative mods; world generation from Biomes O' Plenty, YUNG's and several structure mods.
 - **Interface:** EMI as the recipe viewer (with GregTech multiblock previews), Jade and FTB Quests.
 
 ## Quests
 
-FTB Quests guides the whole journey: Welcome and Workshop chapters, one to nine chapters per era (Steam Age to MAX+, grouped by era, each with six roles from what's new to a capstone), a Processing Lines flowchart for each era, and chapters for Multiblocks, Power, Storage, Applied Energistics, Productive Bees and Travel and Teams. Quest design is described in [`docs/quests.md`](docs/quests.md).
+FTB Quests guides the whole journey: Welcome and Workshop chapters, one to nine chapters per era (Steam Age to MAX+, grouped by era, each with six roles from what's new to a capstone), a Processing Lines flowchart for each era, and chapters for Multiblocks, Power, Storage, Applied Energistics and Travel and Teams. Quest design is described in [`docs/quests.md`](docs/quests.md).
 
 ## Known issues
 

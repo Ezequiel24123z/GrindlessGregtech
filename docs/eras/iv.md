@@ -249,8 +249,8 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 
 ## Validator (`-Tier iv`)
 
-- **Naquadah only from Venus.** Every recipe that yields naquadah, enriched naquadah, naquadria or their oxides comes from the Venus vein: no vein in the End and no bee (the naquadah honeycomb and the bee made in the EBF with a naquadah block are removed). The GTCA alloys that decompose into naquadah require it first: they are loops.
-- **Iridium and osmium only from Mercury.** Earth's platline stops giving `iridium_metal_residue` and `rarest_metal_mixture` (in centrifuging the sludge and in `rarest_metal_residue`, which keeps the ruthenate). No osmium bee. GTCA's platinum foam is ZPM tier. The decompositions (HSS-S, ruridit, osmiridium and Naquadah Alloy) are loops.
+- **Naquadah only from Venus.** Every recipe that yields naquadah, enriched naquadah, naquadria or their oxides comes from the Venus vein: no vein in the End and no other source (the naquadah honeycomb and the bee made in the EBF with a naquadah block no longer exist). The GTCA alloys that decompose into naquadah require it first: they are loops.
+- **Iridium and osmium only from Mercury.** Earth's platline stops giving `iridium_metal_residue` and `rarest_metal_mixture` (in centrifuging the sludge and in `rarest_metal_residue`, which keeps the ruthenate). GTCA's platinum foam is ZPM tier. The decompositions (HSS-S, ruridit, osmiridium and Naquadah Alloy) are loops.
 - **Tungsten only from Mars:** without the tungstotitanate vein on Venus.
 - **Titanium:** from the Moon and, from IV on, also the titanium from the TiF₃ of Venus's naquadah (declared exception).
 - **IV in three sub-stages:** home, Venus and Mercury, as EV is split into Moon and Mars. Nothing on the way to Venus and Mercury (level 3 rocket, thermal upgrade, site casings and bridge halves) asks for naquadah, iridium or osmium.
@@ -270,7 +270,6 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 |---|---|---|
 | GCYR | `gcyr` | its own elite fuel tank and rocket motor remade in the IV assembler (Venus and Mercury at level 3: `ev.md` datapack; Proxima b at 4), thermal upgrade (IV) and IV oxygen spreader; Venus and Mercury veins removed |
 | GT-- | `gtnn` | live naquadah line (the plant composes it), loose activator, naquadah reactors (LuV), radiation-proof casing and radioactive waste |
-| Productive Bees | `productivebees` | PB's naquadah bee recipe removed (IV-B3); the osmium bee still breeds, but its comb has no recipe (IV-A1) |
 | MEGA Cells, Expanded AE | `mega`, `expanded-ae` | IV (decided) |
 | EU P2P Tunnel | `eup2p` | power between planets as EU, no converters |
 | GTM Extended Features | `gtm-extended-features` | large collector (End air: Rn and Xe); Expanded Assembly Line as plan B |
@@ -279,7 +278,7 @@ It unlocks LuV: hulls, hatches and LuV components (assembly line); LuV mixer and
 No new mods.
 
 - **Startup:** types `fission_core`, `hot_cell` and `naquadah_refining`; machines `fission_reactor`, `hot_cell`, `naquadah_plant`, `pressurized_vein_drill`, `mercury_vein_drill`, `venus_heat_engine`, `mercury_solar_field`, `interferometer` (the multiblocks, with the pattern helper) and `ev_rtg` (the RTG cell); material `gtceu:iridosmine` and fluid `gtceu:heavy_water` (both registered by IV-A1); GCYR's elite tank and motor remade by id (its KubeJS motor builder makes a fuel tank); items for assemblies, spent fuel, RTG pellet, Pu-Be source, site casings and samples; reactor channel modifier.
-- **Server:** recipes composed from the live ones (hot cell, modes 1 and 4; naquadah plant; platinum, mode 3) and ours in tables. Veins: `naquadah_vein` to Venus, iridosmine on Mercury, GCYR's veins on Venus and Mercury removed, `veins_venus.json` and `veins_mercury.json`, and the End's pitchblende vein read by the leach field (no drill takes it). Platline without Ir/Os, bees removed, and dimension, altitude and night conditions.
+- **Server:** recipes composed from the live ones (hot cell, modes 1 and 4; naquadah plant; platinum, mode 3) and ours in tables. Veins: `naquadah_vein` to Venus, iridosmine on Mercury, GCYR's veins on Venus and Mercury removed, `veins_venus.json` and `veins_mercury.json`, and the End's pitchblende vein read by the leach field (no drill takes it). Platline without Ir/Os, and dimension, altitude and night conditions.
 - **Config:** nothing new. Venus and Mercury go into EV's planet table.
 - **Tests:** (1) it starts; (2) reactor, hot cell and naquadah plant form and process (plant and IV multiblock strips); (3) on Venus and Mercury (new strips after EV's: Venus X 3072–3135 and Mercury X 3328–3391, Y 98–112) the drills, heat engine and solar field form and only work there, and the level 3 rocket arrives; and `-Tier iv` with no orphans.
 
@@ -298,8 +297,8 @@ Credits to note in `CREDITS.md`: designed-core reactor (Grindless campaign, T5, 
 1. **IV is the nuclear era.** Our fission reactor, with designed cores, takes the place of the first fusion, which stays in LuV (GTM's). The extreme combustion engines remain as the alternative. It replaces the previous version's power plant of 4 extreme engines.
 2. **Three new multiblocks:** reactor, hot cell and naquadah plant. The plant reads GT--'s live recipes and swaps the activator's window for a Pu-Be source; its mode 2 (enriched) is a LuV recipe with two IV hatches.
 3. **Family steps:** pressurized drill (Venus, and Mars with dust filters) and Mercury drill (night side), with a Tungstensteel drill bit and a cap of 128; Venus heat engine and Mercury solar field; RTG cell; interferometer; and the platinum plant's mode 3. At home there is no IV drill: the End's pitchblende is leached in place (decision 2).
-4. **Naquadah only from Venus:** `gtceu:naquadah_vein` moves from the End to Venus (generation and table), and the naquadah bees are removed.
-5. **Iridium and osmium only from Mercury:** new material `gtceu:iridosmine` in a Mercury vein. Earth's platline stops releasing the Ir/Os mixture and the iridium residue, so open question 10 in `ev.md` is closed: there is nothing to refine on Earth. The osmium bees are removed.
+4. **Naquadah only from Venus:** `gtceu:naquadah_vein` moves from the End to Venus (generation and table).
+5. **Iridium and osmium only from Mercury:** new material `gtceu:iridosmine` in a Mercury vein. Earth's platline stops releasing the Ir/Os mixture and the iridium residue, so open question 10 in `ev.md` is closed: there is nothing to refine on Earth.
    - *As built (IV-B3):* two strips in `offworld_only.json` (with a new Mercury world) rebuild GT--'s platinum group sludge centrifuge without the iridium metal residue and the rarest metal mixture, and its inert metal mixture leach without the mixture (as `grindless:centrifuge/offworld_only/platinum_group_sludge_dust` and `grindless:electric_blast_furnace/offworld_only/rarest_metal_residue`; silicon dioxide, gold, platinum and palladium metal dust, sodium rutheniate and steam stay). The EV platinum plant reads its stages through the same strips, so its platinum and rhodium-ruthenium recipes lose the same outputs, with their energy unchanged. Iridium and osmium come only from Mercury's iridosmine. GT--'s loose refining recipes stay, so stored residues still refine. Proof: `gg_test_naquadah_plant`'s `earth_mercury` and the Moon test's Earth scan find no Earth recipe that gives the residues, iridium or osmium.
 6. **Travel:** Venus and Mercury at level 3 (`ev.md` datapack), with GCYR's elite tank and motor remade in IV with the antenna's chart (superseded by decision 10: GCYR's KubeJS plugin isn't used); GCYR's thermal upgrade (IV) is the other half of the gate. The first visit is by hand, with an RTG cell and casings made there; after that, Waystones. GCYR's veins on Venus and Mercury are removed.
 7. **AE2 in IV:** pairs to Venus and Mercury, power as EU over P2P (`eup2p`) instead of FE with converters, 131,072 EU/t crossing, MEGA and Expanded AE's 32k coprocessors.
@@ -696,7 +695,7 @@ The shared ids of `PACKAGES-IV.md` are registered in `startup_scripts/grindless/
 - **Tritium:** only from the reactor through the Moon's removal facility. Liquid ender air no longer gives it and GTM's `deuterium_separation` is removed; until IV-B4 nothing makes it (fusion, its consumer, is LuV), and GTCA's zinc plasma (fusion of copper and tritium) is B LuV.
 - **Radiation-proof casing:** GT--'s own IV assembler recipe (6 dense lead plates, a tungsten steel frame and 1,296 mB concrete), unchanged.
 - **Ion-exchange resin:** sulfonated polystyrene (styrene + sulfuric acid). Real acid in-situ leaching uses strong-base anion resins; that could become styrene + chloromethane + dimethylamine if realism matters.
-- **Productive Bees:** the naquadah, osmium and radioactive combs keep no recipe for good. PB's own EBF recipe for the naquadah bee (osmium bee egg + naquadah block) was a dead end; IV-B3 removed it (`integration/productivebees.js`).
+- **Productive Bees:** not in the pack (removed in BEE-1, 2026-11); there are no bee combs to close.
 
 ## Reforge line design (RF-3S)
 

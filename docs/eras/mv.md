@@ -188,7 +188,6 @@ It opens HV: HV hull and hatches, cleanroom (`gtceu:cleanroom`: HV hull, HV circ
 | Applied Flux | `appflux` | FE on the AE2 network; recipes with MV circuits and aluminium, EU→FE with GTM's converters |
 | AE2WTLib and crafting terminal | `applied-energistics-2-wireless-terminals`, `ae2-wcwt` | wireless terminals: GT battery + MV circuit (lv.md sets this: MV) |
 | EnderChests and EnderTanks | `enderchests`, `endertanks` | Ender pearl from the LV simulator (automatic source) + aluminium plates and MV circuit |
-| Productive Bees | `productivebees` | hives with MV circuit; honeycombs via GT centrifuge and mixer, no direct ores |
 | Sophisticated Backpacks and GregTech Storage Drawers | `sophisticated-backpacks`, `gregtech-storage-drawers` | tier 2: aluminium and steel plates |
 | Create and Greate | `create`, `greate` | no changes: no MV recipe goes through Create |
 
@@ -227,4 +226,4 @@ The six proposals are approved, with these clarifications:
 - **Maintenance:** disabled across the whole pack (see `DECISIONS.md`). GTM multiblocks do not ask for a maintenance hatch.
 
 - **Oil in Flat and Void.** If GTM's data-driven deposits do not work in our own dimensions, a deposit sample is used with our drill (same family as the veins). No new fluid drill is added.
-- **Productive Bees in MV.** Honeycombs only give materials through GT machines (centrifuge and mixer). No bee gives ores, ingots or dusts directly. It is a second way to automate, not a shortcut.
+- **No Productive Bees.** The pack does not include it (removed in BEE-1); no bee route to materials exists.

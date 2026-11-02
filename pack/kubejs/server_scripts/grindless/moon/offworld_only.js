@@ -7,8 +7,7 @@
 //            or fluid outputs; new id grindless:<type>/offworld_only/<old path>
 //   remove   the recipe goes away (its only product was a resource of another world)
 // The ore byproducts are changed at startup (startup_scripts/grindless/moon/earth_byproducts.js), the End bauxite vein loses its
-// ilmenite and the End its scheelite vein (moon/worldgen.js, data/grindless/tables/veins_end.json) and the Productive Bees combs of
-// those materials only run in their own world (integration/productivebees.js, the table's "worlds"). The smoke test (gg_test_moon.js)
+// ilmenite and the End its scheelite vein (moon/worldgen.js, data/grindless/tables/veins_end.json). The smoke test (gg_test_moon.js)
 // also scans every loaded recipe for a new Earth source of each world's watched resources.
 // Published as global.grindless.moon.offworldOnly for the test.
 //
