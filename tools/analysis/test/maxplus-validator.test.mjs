@@ -236,15 +236,15 @@ function recount() {
   };
 }
 
-test('re-count: 58 lines (265 steps), 185 crossings on 56 older machines, 17 MAX+ machines (a gap is reported, never padded)', (t) => {
+test('re-count: 59 lines (270 steps), 187 crossings on 56 older machines, 17 MAX+ machines (a gap is reported, never padded)', (t) => {
   const c = recount();
   t.diagnostic(`lines ${c.lines}, steps ${c.stepSum}, min ${c.min}; crossings Cr column ${c.crSum}, era rows ${c.eraSum}, total ${c.total}; machines ${c.machines} (stated ${c.totalMachines})`);
   assert.ok(c.min >= 4, 'no line under 4 steps');
-  assert.equal(c.lines, 58);
-  assert.equal(c.stepSum, 265);
-  assert.equal(c.crSum, 185);
+  assert.equal(c.lines, 59);
+  assert.equal(c.stepSum, 270);
+  assert.equal(c.crSum, 187);
   assert.equal(c.total, c.eraSum, 'the Crossings total is the sum of its rows');
-  assert.equal(c.total, 185);
+  assert.equal(c.total, 187);
   assert.equal(c.machines, 56);
   assert.equal(c.totalMachines, 56);
   assert.equal(IDS().controllers.ids.length, 17, '17 MAX+ machines in the id table');

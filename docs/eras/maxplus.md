@@ -22,19 +22,19 @@ Places (named fiction only where marked):
 
 | | MAX (max.md, RF-7A) | MAX+ (this design) | Guideline (rule 7) |
 |---|---|---|---|
-| Progression multiblocks (ours) | 14 | **17** (the Hyperstargate included) | 19 (x1.35 of MAX as built); 32 (x1.35 of MAX's guide) |
+| Progression multiblocks (ours) | 14 | **18** (the Hyperstargate included) | 19 (x1.35 of MAX as built); 32 (x1.35 of MAX's guide) |
 | Mega members (counted apart, mega.md 4.1 rule 8) | 0 | 1 (the Hyperfactory) | — |
-| Process lines (at least 4 steps each) | 57 (292 steps) | **58** (265 steps, average 4.6) | 86 (x1.5 of 57) |
-| Crossings with lines two or more eras back | 204 (UXV and older) | **185** (OpV and older, 56 machines) | 306 (x1.5 of 204) |
+| Process lines (at least 4 steps each) | 57 (292 steps) | **59** (270 steps, average 4.6) | 86 (x1.5 of 57) |
+| Crossings with lines two or more eras back | 204 (UXV and older) | **187** (OpV and older, 56 machines) | 306 (x1.5 of 204) |
 | Places | 2 new + Cygnus + SGR + home | 4 new + Sgr A\* + home | — |
 | Recipe types in the Hyperstargate tree | — | about 120 | 100-150 (gtnh-stargate.md 7.1) |
 | Components | 9 `grindless:max_*` | **9** `grindless:maxplus_*` | — |
 | Circuit | `gtnn:supracausal_mainframe` | **1** `grindless:horizon_processor` | — |
 | Cost index target (DECISIONS.md:708, x5 per era) | 178,814 | stage I 894,070; II 4,470,350; III 22,351,750 | — |
 
-**Why 17.** Each machine has a route only it gives: three use the stabilised horizon (condensate refinery, bound-matter press, Hills slingshot); three exist only at the most massive stars known (stellar lift, pair-instability crucible, nickel-56 burner); two need the Stream's pristine gas (gas works, primordial fusion torus); one needs a horizon gentle enough to hang a factory at (blueshift forge); one needs the intergalactic dark (void crystal fab); six make the Hyperstargate's tree (meta-material loom, multi-plasma blender, horizon crystal furnace, condensate assembler, hyper assembly array, horizon capacitor bank); one is the Hyperstargate. Two short of the x1.35 guide; *Considered and dropped* names the candidates.
+**Why 18.** Each machine has a route only it gives: three use the stabilised horizon (condensate refinery, bound-matter press, Hills slingshot); three exist only at the most massive stars known (stellar lift, pair-instability crucible, nickel-56 burner); two need the Stream's pristine gas (gas works, primordial fusion torus); one burns that gas spin-polarized, many runs at once (polarized fusion stellarator, B13-PWRD); one needs a horizon gentle enough to hang a factory at (blueshift forge); one needs the intergalactic dark (void crystal fab); six make the Hyperstargate's tree (meta-material loom, multi-plasma blender, horizon crystal furnace, condensate assembler, hyper assembly array, horizon capacitor bank); one is the Hyperstargate. One short of the x1.35 guide; *Considered and dropped* names the candidates.
 
-**Why 58, and the gap.** MAX+ is bigger than MAX in machines, places, recipe types and, above all, quantity: rule 2 makes each stage x5 the last and the Hyperstargate is 10x GTNH's Stargate in crafts and parts. In lines it only matches MAX (58 against 57), and crossings fall (185 against 204) because MAX+ can only cross OpV and older (its own two-eras-back rule) and the OpV era has fewer machines to cross than UXV. The gap to the x1.5 guide (28 lines, 121 crossings) is real; *Considered and dropped* lists what was rejected and open question 2 asks whether a second line pass should run after stage I is built, when bottlenecks are measured instead of guessed.
+**Why 59, and the gap.** MAX+ is bigger than MAX in machines, places, recipe types and, above all, quantity: rule 2 makes each stage x5 the last and the Hyperstargate is 10x GTNH's Stargate in crafts and parts. In lines it only matches MAX (59 against 57), and crossings fall (187 against 204) because MAX+ can only cross OpV and older (its own two-eras-back rule) and the OpV era has fewer machines to cross than UXV. The gap to the x1.5 guide (27 lines, 119 crossings) is real; *Considered and dropped* lists what was rejected and open question 2 asks whether a second line pass should run after stage I is built, when bottlenecks are measured instead of guessed.
 
 ## Route
 
@@ -254,6 +254,10 @@ Format as in max.md, shortened: gains, recipes, byproducts, structure, crossings
 
 The final multiblock: *The Hyperstargate* below.
 
+### 18. Polarized fusion stellarator (anywhere, generator)
+
+**Gains.** Spin-polarized D-He3 (Kulsrud 1982): 1.5x the torus's EU per fuel and up to 64 runs at once, limited by its dynamo hatches, so one plant carries a 2^39 consumer. **Recipes.** c1 4 `polarized_hd_pellet` + 1,000 mB `polarized_helium_3` → 2^34 EU/t x 3,600 t per run (*Power*, machine 18). **Structure.** 31 x 11 x 31. **Crossings.** P9-P11, P17, P22, P26.
+
 ### Mega member (counted apart)
 
 **Hyperfactory** (home): the mega family's top member (mega.md 4.1): assembler, circuit assembler, assembly line (unordered), forming press and laser engraver at `4,096 x hatch` parallels with the MAX+ parallel hatch (`grindless:maxplus_parallel_hatch`, x4,194,304 = 4^11, int-safe; S0-5). Quality of life for the millions of components the tree needs; counted apart from rule 7.
@@ -270,9 +274,9 @@ Rows are added to each machine's own table by the named package, at a circuit re
 | Field press, jet beam line, gamma optics works, magnetic pair converter (OpV) | P23; P22, T8 (jet plasma row); T2; K1 | their OpV sites |
 | Plasma mass filter, FRC former (UXV) | P6 (30 Doradus string row), P25, T8; P6 (30 Doradus) | 30 Doradus, Sgr A\* |
 | Pasta draw bench, MTJ, oxide PLD, SHeQUID, racetrack fab, stellar elevator (UXV) | P4; P4, P19, P23, P24, T2, T5, T13, T17, C2, C5, C7, Q1, A1; P18, T6, T14; P19, T7, C2, K3; Q1, A1; P13, T8 | home, SGR, Cygnus |
-| Neutron drip separator, levitation melter, TFLN, femto, BEUV, mK cryostat, spectral hole burner (UIV) | P2; P3, P24, T10; T12, C3, Q2, A2, K4; P14, T9, T12, Q2, A3, K2; T2, T10, C3, C4, Q1, A1; T5, T9, T12, T13, C4, C5, Q2, K1, K2, K4; A3, K2 | home |
+| Neutron drip separator, levitation melter, TFLN, femto, BEUV, mK cryostat, spectral hole burner (UIV) | P2; P3, P24, T10; T12, C3, Q2, A2, K4; P14, T9, T12, Q2, A3, K2; T2, T10, C3, C4, Q1, A1; P26, T5, T9, T12, T13, C4, C5, Q2, K1, K2, K4; A3, K2 | home |
 | Megabar, degenerate harvester, calutron, CVI, EB furnace, single crystal foundry, nitride works, SNSPD foundry, photonic hall, stellar forge (UEV) | P2, P5, P15, P21, T11, T16; P5; P9, P10, P12, Q1; P20, P21, T3, T5, T13, C1; P11, P17, P21, T3, T11, T16, C6; P17, T11; T15; C4, K4; A2, K4; P12, T8 | home, Sirius B |
-| PBO plant, SPS, crystal growth, clock lab, photonic foundry, MBE, tether ribbon works (UHV) | P4, P23, T3, C6; P5, P11, P17, T1, T4; T9, T10, C7, Q1, A3; P16, T12; P16, T12, T17, C3, C4, A2; Q2; P13 | home |
+| PBO plant, SPS, crystal growth, clock lab, photonic foundry, MBE, tether ribbon works (UHV) | P4, P23, T3, C6; P5, P11, P17, T1, T4; T9, T10, C7, Q1, A3; P16, T12; P16, P26, T12, T17, C3, C4, A2; Q2; P13 | home |
 | Superfluid He plant, SRF works, zone refining, MOCVD, fibre draw (UV) | P1, P10, P19, P25, T7, K3; P22, T13, C5; P8, P19, P22; T17, C3, A2; T17, A3 | home |
 | Diamond lattice fab, ion implanter, aerogel works, magnet works (ZPM) | P14, C3; P14; T7, K3; T14 | home |
 | Coated conductor, HTS works, He refrigerator (LuV) | P18, P20, T6; P18, P20, P23, T6, T14, T15, C1; P18, P20, P23, T6, T14, T15, C1 | home |
@@ -387,6 +391,7 @@ Each step is a real transformation; a line counts with at least 4 transformation
 | P23 | Magnetic scoop | PBO plant (chain strand braid) → `scoop_web`; field press (OpV, SGR) → `field_frozen_hoop`; MTJ → `insulated_hoop`; HTS works → `scoop_coil`; He refrigerator → `cold_scoop_coil`; GTM assembler → `magnetic_scoop_module` | 6 | 5 | XP-B2 |
 | P24 | Beryllium gamma window | extraction cascade → `beryllium_hydroxide`; GTM electric blast furnace → `be_pebbles`; levitation melter → `be_ingot`; hot strip mill → `be_foil`; MTJ → `coated_be_window` | 5 | 4 | XP-B3 |
 | P25 | Helium-4 supply | plasma mass filter (30 Dor) → `he_rich_fraction`; cryogenic plant → `liquid_helium_4`; superfluid He plant → `superfluid_helium_4`; GTM canner → `he4_dewar` (→ condensate assembler frame part c4, the coolant charge) | 4 | 3 | XP-H3 |
+| P26 | Spin-polarized fusion fuel (Kulsrud 1982; Baylor 2023) | GTM chemical reactor → `hd_equilibrium_mix`; GTM distillation tower → `pure_hd`; mK cryostat → `frozen_spin_hd`; GTM extruder → `polarized_hd_pellet`; photonic foundry (P10's helium-3) → `polarized_helium_3` | 5 | 2 | B13-STEL |
 | T1 | Containment plate core | hot cell → `gd_absorber_tile`; SPS → `graded_z_billet`; press c3 (+ P2 plate) → `laminated_containment_core`; condensate assembler c1 → `horizon_containment_plate` | 4 | 2 | XP-H3 |
 | T2 | Chevron core | BEUV → `zone_plate_wafer`; MTJ → `multilayer_xray_mirror`; gamma optics works (OpV) → `gamma_focus_element`; condensate assembler c2 → `chevron_core` | 4 | 3 | XP-H3 |
 | T3 | Horizon mesh | PBO plant (P4 wire) → `kerr_mesh_preform`; CVI → `infiltrated_mesh`; EB furnace → `coated_mesh`; condensate assembler c3 → `horizon_mesh` | 4 | 3 | XP-H3 |
@@ -420,7 +425,7 @@ Each step is a real transformation; a line counts with at least 4 transformation
 | K2 | Store core (creative chest) | void crystal fab c2 → `void_holographic_block`; femto writer → `addressed_holo_block`; spectral hole burner → `burned_store_block`; mK cryostat → `bottomless_store_core` | 4 | 3 | XP-K |
 | K3 | Tank core (creative tank) | aerogel works → `condensate_aerogel`; SHeQUID → `superfluid_reservoir_core`; refinery c9 → `condensate_wetted_core`; superfluid He plant → `bottomless_tank_core` | 4 | 3 | XP-K |
 | K4 | Computation core (creative computation provider, data access hatch) | TFLN → `photonic_qpu_wafer`; SNSPD foundry → `detector_layer_wafer`; photonic integration hall → `photonic_qpu`; mK cryostat → `horizon_computation_core` | 4 | 4 | XP-K |
-| | **Total** | | **265** | **185** | |
+| | **Total** | | **270** | **187** | |
 
 **Fiction marks.** *Pack fiction*: Kerr condensate and everything bound in it (P1-P5, T1-T10, C5, K1-K3), the stationary horizon, the Hyperstargate and the final dimension. *Named fiction*: the pair-instability pinch (P6), lifting rates, the deep tether's reach (P13), the filament station and void-crystal perfection (P14), intergalactic warp catches, creative "bottomless" cores (K2, K3). Everything else cites a paper or a real process; each package checks its older-machine row against that machine's real recipe type first (max.md S0-12 rule).
 
@@ -430,15 +435,15 @@ Each step is a real transformation; a line counts with at least 4 transformation
 |---|---|---|
 | OpV | 11 | Kugelblitz forge 3, strangelet vault 2, debris harvester 1, replication refinery 1, jet beam line 1, field press 1, gamma optics works 1, magnetic pair converter 1 (8) |
 | UXV | 29 | MTJ 13, SHeQUID 4, oxide PLD 3, plasma mass filter 3, stellar elevator 2, racetrack fab 2, pasta draw bench 1, FRC former 1 (8) |
-| UIV | 33 | mK cryostat 10, femto writer 6, BEUV 6, TFLN 5, levitation melter 3, spectral hole burner 2, neutron drip separator 1 (7) |
+| UIV | 34 | mK cryostat 11, femto writer 6, BEUV 6, TFLN 5, levitation melter 3, spectral hole burner 2, neutron drip separator 1 (7) |
 | UEV | 33 | EB furnace 7, megabar 6, CVI 6, calutron 4, stellar forge 2, single crystal foundry 2, SNSPD foundry 2, photonic integration hall 2, degenerate harvester 1, nitride magnet works 1 (10) |
-| UHV | 24 | photonic foundry 6, SPS 5, crystal growth 5, PBO plant 4, clock lab 2, tether ribbon works 1, MBE 1 (7) |
+| UHV | 25 | photonic foundry 7, SPS 5, crystal growth 5, PBO plant 4, clock lab 2, tether ribbon works 1, MBE 1 (7) |
 | UV | 17 | superfluid He plant 6, zone refining 3, SRF works 3, MOCVD 3, fibre draw 2 (5) |
 | ZPM | 6 | diamond lattice fab 2, aerogel works 2, ion implanter 1, magnet works 1 (4) |
 | LuV | 17 | HTS works 7, He refrigerator 7, coated conductor 3 (3) |
 | IV | 2 | hot cell (1) |
 | EV | 13 | extraction cascade 7, cryogenic plant 3, hot strip mill 3 (3) |
-| **Total** | **185** | **56 machines** |
+| **Total** | **187** | **56 machines** |
 
 Recomputed from the *Lines* table by machine name (RF-7A; the integrator re-sums it). The weight sits in UIV, UEV and UXV, the eras whose fabs make the pack's finest parts; OpV is thin (11) because OpV built few process machines.
 
