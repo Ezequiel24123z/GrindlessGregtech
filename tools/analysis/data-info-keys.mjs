@@ -123,7 +123,8 @@ export function unresolvedDataInfoKeys({ packDir, recipes, lang }) {
 }
 
 export function loadDumpRecipes(dumpDir) {
-  return JSON.parse(fs.readFileSync(path.join(dumpDir, 'recipes.json'), 'utf8')).recipes;
+  // each entry is a JSON string of {i, t, a?, j}
+  return JSON.parse(fs.readFileSync(path.join(dumpDir, 'recipes.json'), 'utf8')).recipes.map((e) => (typeof e === 'string' ? JSON.parse(e) : e));
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
