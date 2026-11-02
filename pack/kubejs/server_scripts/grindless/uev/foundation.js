@@ -36,13 +36,7 @@ ServerEvents.recipes(function (event) {
     ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_single_cable', '2x grindless:faraday_isolator', '1x grindless:ule_cavity', '2x gtceu:trinium_spring', '2x gtceu:uev_field_generator', '2x #gtceu:circuits/uev'],
     'gtceu:uev_energy_output_hatch')
 
-  line('uev_energy_input_hatch_16a', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity', '4x gtceu:uv_voltage_coil', '4x gtceu:uev_field_generator', '4x #gtceu:circuits/uev'],
-    'gtceu:uev_energy_input_hatch_16a')
-
-  line('uev_energy_output_hatch_16a', 'gtceu:uev_machine_hull',
-    ['gtceu:uev_machine_hull', '2x gtceu:lay_superhydride_quadruple_cable', '4x grindless:faraday_isolator', '2x grindless:ule_cavity', '4x gtceu:trinium_spring', '4x gtceu:uev_field_generator', '4x #gtceu:circuits/uev'],
-    'gtceu:uev_energy_output_hatch_16a')
+  // the 4 A and 16 A hatches are chained from these in integration/high_tier_machines.js (AF-E2)
 
   // highTierContent is on (TP-S0F): GTM's own hull and 16 A hatch recipes for gtceu:uev_* would be a second way to make them
   ;['shaped/uev_machine_hull', 'assembler/energy_hatch_16a_uev', 'assembler/dynamo_hatch_16a_uev'].forEach(function (id) {
