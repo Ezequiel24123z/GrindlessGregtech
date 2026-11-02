@@ -16,9 +16,11 @@
 //   gtceu:assembly_line       the UEV machine casing (GTM registers it without a recipe), after the station research of the chart.
 //   gtceu:assembler           the ring's gate casing (F1's block): neutronium plates and frame, MgB2 wire, circuit 6.
 //   crafting                  the two controllers: UHV hull + 3 UHV component families (3 of each) + UHV circuits + 3 domain items, assembly lines grindless:assembly_line/<machine>.
-//   transit (tick)            while a gate's c2 run lasts and the other end's c2 run lasts too, a player standing inside the ring is
-//                             teleported to the other ring's centre (player.teleportTo, server side: spike S0-7). One trip per
-//                             stay: the player is not carried back until they have left the ring they arrived in.
+//   transit (tick)            while a gate holds (formed, WORKING on its c2 run), a player standing inside the ring is teleported to the
+//                             centre of the ring that the relay coordinates in its input bus name, else to another holding ring
+//                             (player.teleportTo, server side: spike S0-7). One trip per stay: the player is not carried back until
+//                             they have left the ring they arrived in. Placed relay platforms (lib/relay_platforms.js) wake for one
+//                             sustain when a player steps in.
 // Published for the tests: global.grindless.warpGate.recipes, .skipped, .clashes, .controllerRecipes, .pair, .casing, .transit.
 // Rhino: var + function inside every callback that runs more than once (this Rhino throws "redeclaration of var").
 (function () {
@@ -309,9 +311,31 @@
     })
   })
 
-  // ---------------------------------------------------------------- transit
+  // ---------------------------------------------------------------- transit (AF-1, issue #203)
 
-  var T = WG.transit = { moved: {}, trips: 0 }
+  // A ring holds while its controller is formed and WORKING on the sustain row. That is read from the machine, so a paused or starved sustain
+  // carries nobody, and a sustain GTM resumed after a restart does. The rings are WG.gates (every ring that started a run, kept in persistent
+  // data by the startup hook) and the placed relay platforms (lib/relay_platforms.js). A player standing in a holding ring who has not just
+  // arrived is carried, paid by that ring's sustain alone:
+  //   - to the ring that the first relay coordinates in its input buses name;
+  //   - else to another holding ring in another dimension, the first by key (the Earth - Proxima pairing; always the same choice).
+  // A placed platform starts paused: a player stepping into it wakes it for one sustain (its stocked cell and the network's EU), after which it
+  // carries them by its coordinates and pauses again. One trip per stay: a carried player is not carried again until they have left every
+  // ring. The flag is also kept in the player's persistent data, so a restart does not send anyone back.
+  var GATE_ID = 'gtceu:warp_gate'
+  var MOVED_KEY = 'grindlessWarpMoved'
+  var T = WG.transit = { moved: {}, woke: {}, trips: 0, wakes: 0 }
+  var TC = null
+
+  function transitClasses() {
+    if (TC !== null) return TC
+    TC = { Meta: Java.loadClass('com.gregtechceu.gtceu.api.machine.MetaMachine'), Pos: Java.loadClass('net.minecraft.core.BlockPos') }
+    return TC
+  }
+
+  function keyOf(rec) {
+    return rec.dim + '|' + rec.x + '|' + rec.y + '|' + rec.z
+  }
 
   function centreOf(rec) {
     return { x: rec.x - rec.fx * RING_HALF + 0.5, y: rec.y, z: rec.z - rec.fz * RING_HALF + 0.5 }
@@ -323,53 +347,158 @@
       player.getY() >= rec.y - 1 && player.getY() <= rec.y + 3
   }
 
-  // the runs that still last at game time `now` (the sustain row), by dimension; expired records are dropped
-  function liveGates(server) {
-    var live = []
-    Object.keys(WG.gates || {}).forEach(function (k) {
-      var rec = WG.gates[k]
-      var level = server.getLevel(rec.dim)
-      if (!level || !rec.sustain || Number(level.getTime()) >= rec.until) {
-        if (level && Number(level.getTime()) >= rec.until) delete WG.gates[k]
-        return
-      }
-      live.push(rec)
-    })
-    return live
+  // every known ring in key order; placed platforms carry `platform`
+  function rings(server) {
+    var byKey = {}
+    Object.keys(WG.gates || {}).forEach(function (k) { byKey[k] = WG.gates[k] })
+    var R = G.relayPlatforms
+    if (R && typeof R.placedRings === 'function') R.placedRings(server).forEach(function (r) { byKey[keyOf(r)] = r })
+    return Object.keys(byKey).sort().map(function (k) { return byKey[k] })
+  }
+
+  // the ring's controller if its chunk is loaded; a loaded block that is no longer a warp gate is forgotten (placed platforms excepted)
+  function controllerOf(server, rec) {
+    var level = server.getLevel(rec.dim)
+    if (!level) return null
+    var pos = new (transitClasses().Pos)(rec.x, rec.y, rec.z)
+    if (!level.isLoaded(pos)) return null
+    var m = transitClasses().Meta.getMachine(level, pos)
+    if (!m || String(m.getDefinition().getId()) !== GATE_ID) {
+      if (!rec.platform && server.persistentData && typeof WG.forgetRing === 'function') WG.forgetRing(server, keyOf(rec))
+      return null
+    }
+    return m
+  }
+
+  function holding(server, rec) {
+    var m = controllerOf(server, rec)
+    if (!m || !m.isFormed()) return null
+    var logic = m.getRecipeLogic()
+    if (!logic.isWorking()) return null
+    var last = logic.getLastRecipe()
+    if (last === null || last === undefined || String(last.id).indexOf('/sustain') < 0) return null
+    return m
+  }
+
+  function persistentOf(player) {
+    try {
+      return player.persistentData || null
+    } catch (e) {
+      return null
+    }
+  }
+
+  function wasMoved(player, uuid) {
+    if (T.moved[uuid]) return true
+    var pd = persistentOf(player)
+    return !!pd && pd.getBoolean(MOVED_KEY)
+  }
+
+  function setMoved(player, uuid, on) {
+    if (on) T.moved[uuid] = true
+    else delete T.moved[uuid]
+    var pd = persistentOf(player)
+    if (!pd) return
+    if (on) pd.putBoolean(MOVED_KEY, true)
+    else if (pd.contains(MOVED_KEY)) pd.remove(MOVED_KEY)
+  }
+
+  function nameOf(player) {
+    try {
+      return String(player.getName().getString())
+    } catch (e) {
+      return '?'
+    }
+  }
+
+  function tell(player, key) {
+    try {
+      if (typeof player.displayClientMessage === 'function') player.displayClientMessage(Text.translate(key), true)
+    } catch (e) {
+      console.error(LOG + 'warp gate: could not tell ' + nameOf(player) + ' ' + key + ': ' + e)
+    }
+  }
+
+  // where a holding ring sends a player: its coordinates (or { bad } when they name no warp gate), else the first other holding ring
+  function destination(server, here, m, all, holds) {
+    var R = G.relayPlatforms
+    var sel = R && typeof R.selectorIn === 'function' ? R.selectorIn(m) : null
+    if (sel !== null) {
+      if (keyOf(sel) === keyOf(here)) return null
+      var level = server.getLevel(sel.dim)
+      if (!level || String(level.getBlock(sel.x, sel.y, sel.z).id) !== GATE_ID) return { bad: keyOf(sel) }
+      return sel
+    }
+    for (var i = 0; i < all.length; i++) if (all[i].dim !== here.dim && holds(all[i])) return all[i]
+    return null
+  }
+
+  // a paused placed platform under a player wakes for one sustain (once per stay)
+  function wake(server, player, uuid, mine) {
+    if (T.woke[uuid]) return
+    for (var i = 0; i < mine.length; i++) {
+      var rec = mine[i]
+      if (!rec.platform) continue
+      var m = controllerOf(server, rec)
+      if (!m || !m.isFormed()) continue
+      var logic = m.getRecipeLogic()
+      if (!logic.isSuspend()) continue
+      logic.setWorkingEnabled(true)
+      logic.setSuspendAfterFinish(true)
+      T.woke[uuid] = keyOf(rec)
+      T.wakes++
+      tell(player, 'grindless.warp_gate.waking')
+      console.info(LOG + 'warp gate: ' + nameOf(player) + ' woke the relay ring at ' + keyOf(rec))
+      return
+    }
   }
 
   function transit(server) {
-    var live = liveGates(server)
+    var all = rings(server)
+    var seen = {}
+    function holds(rec) {
+      var k = keyOf(rec)
+      if (seen[k] === undefined) seen[k] = holding(server, rec) || false
+      return seen[k]
+    }
     var inAny = {}
+    var online = []
     server.getPlayers().forEach(function (player) {
       var uuid = String(player.getUuid())
+      online.push({ p: player, u: uuid })
       var dim = String(player.getLevel().getDimension())
+      var mine = all.filter(function (rec) { return rec.dim === dim && inside(player, rec) })
+      if (mine.length === 0) return
+      inAny[uuid] = true
+      if (wasMoved(player, uuid)) return
       var here = null
-      live.forEach(function (rec) { if (here === null && rec.dim === dim && inside(player, rec)) here = rec })
-      if (here !== null) inAny[uuid] = true
-      if (here === null || T.moved[uuid]) return
-      var there = null
-      live.forEach(function (rec) { if (there === null && rec.dim !== here.dim) there = rec })
+      mine.forEach(function (rec) { if (here === null && holds(rec)) here = rec })
+      if (here === null) {
+        wake(server, player, uuid, mine)
+        return
+      }
+      var there = destination(server, here, holds(here), all, holds)
       if (there === null) return
+      setMoved(player, uuid, true)
+      if (there.bad) {
+        tell(player, 'grindless.warp_gate.no_ring')
+        console.info(LOG + 'warp gate: the coordinates in the ring at ' + keyOf(here) + ' name no warp gate (' + there.bad + ')')
+        return
+      }
       var c = centreOf(there)
-      T.moved[uuid] = true
       try {
         player.teleportTo(there.dim, c.x, c.y, c.z, player.getYaw(), player.getPitch())
         T.trips++
-        console.info(LOG + 'warp gate: ' + player.getName().getString() + ' ' + here.dim + ' -> ' + there.dim)
+        console.info(LOG + 'warp gate: ' + nameOf(player) + ' ' + keyOf(here) + ' -> ' + keyOf(there))
       } catch (e) {
-        delete T.moved[uuid]
+        setMoved(player, uuid, false)
         console.error(LOG + 'warp gate transit failed: ' + e)
       }
     })
-    // a player who left every live ring may be carried again
-    Object.keys(T.moved).forEach(function (u) {
-      var stillIn = false
-      server.getPlayers().forEach(function (p) {
-        if (String(p.getUuid()) === u && inAny[u]) stillIn = true
-      })
-      if (!stillIn) delete T.moved[u]
-    })
+    // a player who left every ring may be carried (and wake a ring) again
+    online.forEach(function (o) { if (!inAny[o.u]) setMoved(o.p, o.u, false) })
+    Object.keys(T.moved).forEach(function (u) { if (!inAny[u]) delete T.moved[u] })
+    Object.keys(T.woke).forEach(function (u) { if (!inAny[u]) delete T.woke[u] })
   }
   T.step = transit
 
@@ -377,6 +506,11 @@
     var server = event.server
     if (server.getTickCount() % PERIOD !== 0) return
     try {
+      // the first tick of a world (a restart, or another world in the same game): the rings come back from persistent data
+      if (T.server !== server) {
+        T.server = server
+        if (typeof WG.loadRings === 'function') WG.loadRings(server)
+      }
       transit(server)
     } catch (e) {
       console.error(LOG + 'warp gate transit tick failed: ' + e)

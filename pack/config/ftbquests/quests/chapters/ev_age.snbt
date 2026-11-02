@@ -485,7 +485,7 @@
 		}
 		{
 			dependencies: ["3C5EB45848DA6797"]
-			description: ["A CPU wafer treated in an EV chemical reactor becomes a &6Nano CPU Wafer&r, and the laser engraver cuts it into chips. A working cleanroom, carbon fibers and the HV wafer line behind you. The nanoprocessor, and with it the whole nano ladder. Cleanroom hatches take wafers from the ME network and return chips to it."]
+			description: ["A CPU wafer treated in an EV chemical reactor becomes a &6Nano CPU Wafer&r,       and a cutter in the cleanroom slices it into chips. A working cleanroom, carbon fibers and the HV wafer line behind you. The nanoprocessor, and with it the whole nano ladder. Cleanroom hatches take wafers from the ME network and return chips to it."]
 			icon: "gtceu:nano_cpu_wafer"
 			id: "7ECBC918EE387EB6"
 			rewards: [{ id: "396BB82FD12CBA44", type: "xp", xp: 50 }]
@@ -517,7 +517,7 @@
 		}
 		{
 			dependencies: ["5AB977D135E31355"]
-			description: ["The phosphorus wafer becomes an &6MPIC Wafer&r and the engraver cuts the &6MPIC Chips&r out of it. A laser engraver and the right lens. Real EV energy and dynamo hatches. A wafer in, chips out. Let ME feed the engraver and store the chips."]
+			description: ["The phosphorus wafer becomes an &6MPIC Wafer&r       and a cutter slices the &6MPIC Chips&r out of it. A cutter in a working cleanroom. Real EV energy and dynamo hatches. A wafer in, chips out. Let ME feed the cutter and store the chips."]
 			icon: "gtceu:mpic_chip"
 			id: "75CF49B21980A604"
 			rewards: [{ id: "3070107D3B5F2047", type: "xp", xp: 50 }]
@@ -634,10 +634,7 @@
 			description: ["The lunar drill was a visitor; the &6EV Tripod Drill&r moves in, on titanium legs with a solar wing on each side. It is crafted from the old lunar drill, and titanium bits off an EV lathe: a full cycle can wear out one per bore. It only drills the veins of the Moon and Mars, and it is where all your titanium and tungsten come from. Let a lathe keep bits flowing by ME, and ship the ore home."]
 			icon: "gtceu:ev_vein_drill"
 			id: "5107982325BE34B7"
-			rewards: [
-				{ id: "7D0D9D1EEC42BBEB", type: "xp", xp: 100 }
-				{ count: 8, id: "7C99B717F081DB18", item: "grindless:titanium_drill_bit", type: "item" }
-			]
+			rewards: [{ id: "7D0D9D1EEC42BBEB", type: "xp", xp: 100 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
@@ -668,10 +665,7 @@
 			description: ["The &6Regolith Cell&r cooks moon dirt until it gives up oxygen and metal. A hall of sintered brick around a crucible ringed with nichrome coils, and a platinum electrode in the input bus as its anode. Circuit 1 releases solar wind gases, circuit 2 gives oxygen and iron, and on circuit 3 it bakes bricks faster than a furnace. Give each gas its own output hatch, or let one ME output hatch take the lot."]
 			icon: "gtceu:regolith_cell"
 			id: "5BEACE3F7A414F40"
-			rewards: [
-				{ id: "138B6A7977750137", type: "xp", xp: 80 }
-				{ id: "55ADFF45989716A6", item: "grindless:platinum_electrode", type: "item" }
-			]
+			rewards: [{ id: "138B6A7977750137", type: "xp", xp: 80 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [{ id: "3955EAB8FBFF6100", item: "gtceu:regolith_cell", type: "item" }]
@@ -741,10 +735,7 @@
 			description: ["The platinum line is about forty recipes across a dozen machines; the &6Platinum Plant&r packs it into one hall, loops and all. Nitration mixture and ammonium chloride flowing first, and an electrode that wears out rarely: after the first one, made from End platinum, the plant pays for its own. Platinum, rhodium, ruthenium and palladium. Iridium and osmium from Earth's ore don't exist: those wait for Mercury. A battery buffer, plenty of output hatches and a place for every fluid."]
 			icon: "gtceu:platinum_plant"
 			id: "1F70EF41E5F8ED95"
-			rewards: [
-				{ id: "3EACE716001AFAEB", type: "xp", xp: 100 }
-				{ id: "1E92FF3E0CABF2CA", item: "grindless:platinum_electrode", type: "item" }
-			]
+			rewards: [{ id: "3EACE716001AFAEB", type: "xp", xp: 100 }]
 			shape: "gear"
 			size: 1.5d
 			tasks: [
@@ -760,10 +751,7 @@
 			description: ["The &6Cryogenic Plant&r liquefies gases at night for half the vacuum freezer's energy, and only runs on the Moon. A frostproof tower on sintered brick with a wing of &6Night-Sky Radiators&r on each side. Keep the radiators uncovered. Liquid nitrogen, liquid oxygen and the stockpile IV will ask for. Gas from the cell goes in by hatch, liquids go out to tanks."]
 			icon: "gtceu:cryogenic_plant"
 			id: "79EE0C54F2D89358"
-			rewards: [
-				{ id: "12ED220DB70AD3CF", type: "xp", xp: 80 }
-				{ count: 2, id: "1E34767BB12D9536", item: "grindless:night_sky_radiator", type: "item" }
-			]
+			rewards: [{ id: "12ED220DB70AD3CF", type: "xp", xp: 80 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [
@@ -823,10 +811,7 @@
 			description: ["The &6Lunar Solar Array&r is rows of wing panels on titanium posts over sintered brick. With circuit 1 in its input bus, every panel that sees open sky pays out by day. Wing panels, a clear sky and brick footings. Moon power that needs no fuel. At night it rests, so buffers or Earth over the bridge keep the lights on. Wire it to a battery buffer and let the bridge fill the gap."]
 			icon: "gtceu:lunar_solar_array"
 			id: "734B97375A3121C4"
-			rewards: [
-				{ id: "75E155745FD05519", type: "xp", xp: 80 }
-				{ count: 3, id: "1D1C45A97E81AA5B", item: "grindless:solar_wing_panel", type: "item" }
-			]
+			rewards: [{ id: "75E155745FD05519", type: "xp", xp: 80 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [{ id: "32C9AF4491B411D4", item: "gtceu:lunar_solar_array", type: "item" }]
@@ -963,10 +948,7 @@
 			description: ["The &6Atmosphere Processor&r breathes Martian air, splits water and joins the hydrogen to the carbon dioxide: three machines in one, and it only runs on Mars. Water sent from home and a ruthenium catalyst. Save the Martian ice for IV. Circuit 1 makes methane and oxygen; circuit 2 only collects carbon dioxide. Water over the bridge, products home by ME."]
 			icon: "gtceu:atmosphere_processor"
 			id: "58BBEC58FB5953BD"
-			rewards: [
-				{ id: "7A0B13C332E8056B", type: "xp", xp: 80 }
-				{ id: "7CFB02E1A78ECD9E", item: "grindless:ruthenium_catalyst", type: "item" }
-			]
+			rewards: [{ id: "7A0B13C332E8056B", type: "xp", xp: 80 }]
 			shape: "gear"
 			size: 1.25d
 			tasks: [{ id: "78097613D42E5A43", item: "gtceu:atmosphere_processor", type: "item" }]
