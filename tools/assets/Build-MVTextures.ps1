@@ -12,6 +12,7 @@
     block/multiblock/ore_plant/...         (same three)
     block/multiblock/biorefinery/...       (same three)
     item/vanadium_steel_drill_bit.png
+    item/polysilicon.png, item/chlorosilane_bottoms.png
 
   Run from the repo root (PowerShell 5.1 blocks unsigned scripts by default; this bypass only affects that process):
     powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-MVTextures.ps1
@@ -702,6 +703,42 @@ function New-VanadiumSteelBit {
     return $c
 }
 
+$RampPolysilicon = @((Hex 'E4EAF2'), (Hex 'B9C4D4'), (Hex '8C99AE'), (Hex '5F6B82'), (Hex '3A4358'))
+$RampBottoms = @((Hex 'C9C2A8'), (Hex 'A39B80'), (Hex '7D765E'), (Hex '575141'))
+
+# a few broken chunks of Siemens rod: flat facets lit from the top left, darker lower right
+function New-PolysiliconChunks {
+    $c = New-Canvas
+    $chunks = @(@(2, 7, 7, 6), @(8, 3, 5, 5), @(9, 9, 5, 4))
+    foreach ($k in $chunks) {
+        $x = $k[0]; $y = $k[1]; $w = $k[2]; $h = $k[3]
+        Set-Rect $c $x $y $w $h $RampPolysilicon[2]
+        Set-Rect $c $x $y $w 1 $RampPolysilicon[0]
+        Set-Rect $c $x $y 1 $h $RampPolysilicon[1]
+        Set-Rect $c $x ($y + $h - 1) $w 1 $RampPolysilicon[3]
+        Set-Rect $c ($x + $w - 1) $y 1 $h $RampPolysilicon[3]
+        Set-Px $c ($x + 2) ($y + 2) $RampPolysilicon[1]
+    }
+    Add-Outline $c -LitArgb (Hex '6E7A93') -ShadeArgb (Hex '1E2433')
+    return $c
+}
+
+# a heap of murky chlorosilane residue
+function New-ChlorosilaneBottoms {
+    $c = New-Canvas
+    $rows = @(@(7, 2), @(5, 6), @(3, 10), @(2, 12))
+    $y = 5
+    foreach ($r in $rows) {
+        Set-Rect $c $r[0] $y $r[1] 2 $RampBottoms[1]
+        Set-Rect $c $r[0] $y $r[1] 1 $RampBottoms[0]
+        Set-Px $c ($r[0] + $r[1] - 1) ($y + 1) $RampBottoms[2]
+        $y += 2
+    }
+    Set-Rect $c 2 11 12 1 $RampBottoms[2]
+    Set-Rect $c 3 12 10 1 $RampBottoms[3]
+    Add-Outline $c -LitArgb (Hex '8A8368') -ShadeArgb (Hex '2A2720')
+    return $c
+}
 # ============================================================================================
 #  BUILD
 # ============================================================================================
@@ -720,6 +757,7 @@ if (Test-Want 'greenhouse') { Out-Overlay 'block/multiblock/mv_greenhouse' ${fun
 if (Test-Want 'plant') { Out-Overlay 'block/multiblock/ore_plant' ${function:New-PlantFrame} 3 }
 if (Test-Want 'bio') { Out-Overlay 'block/multiblock/biorefinery' ${function:New-BioFrame} 4 }
 if (Test-Want 'bit') { Out-Tex (New-VanadiumSteelBit) 'item/vanadium_steel_drill_bit.png' }
+if (Test-Want 'silicon') { Out-Tex (New-PolysiliconChunks) 'item/polysilicon.png'; Out-Tex (New-ChlorosilaneBottoms) 'item/chlorosilane_bottoms.png' }
 
 # ============================================================================================
 #  VERIFY what was written (size, binary alpha, no pure black, mcmeta vs frames, empty casing ring, emissive subset,
