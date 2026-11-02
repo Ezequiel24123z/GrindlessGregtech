@@ -1,10 +1,10 @@
-// AUD-1: lists every recipe EMI shows (id, category, inputs, outputs) to kubejs/exported/gg_emi_recipes.ndjson, with the tooltip
+// AUD-1: lists every recipe EMI shows (id, category, inputs, outputs) to kubejs/exported/gg_emi_recipes.json, with the tooltip
 // of every output for the scanner and research station pages, so the pack's recipes can be compared with the server dump.
 // Read-only. Armed by kubejs/config/gg_test_research_display.json = {"enabled": true} (the committed marker is false); it runs once,
 // in the tick after EMI has loaded, while the EMI coverage fixture still holds the client in the world.
 ;(function () {
   var MARKER = 'kubejs/config/gg_test_research_display.json'
-  var OUT = 'kubejs/exported/gg_emi_recipes.ndjson'
+  var OUT = 'kubejs/exported/gg_emi_recipes.json'
   var T = 'GGTEST|research_display|'
   var TOOLTIP_CATEGORIES = ['gtceu:scanner', 'gtceu:research_station']
   var state = { armed: null, done: false }
@@ -57,17 +57,12 @@
   function dump() {
     var EmiApi = Java.loadClass('dev.emi.emi.api.EmiApi')
     var ArrayList = Java.loadClass('java.util.ArrayList')
-    var File = Java.loadClass('java.io.File')
-    var PrintWriter = Java.loadClass('java.io.PrintWriter')
+    var JsonParser = Java.loadClass('com.google.gson.JsonParser')
     var rm = EmiApi.getRecipeManager()
-    var dir = Client.gameDirectory || Client.f_91069_
-    var file = new File(dir, OUT)
-    file.getParentFile().mkdirs()
-    var w = new PrintWriter(file, 'UTF-8')
+    var all = []
     var cats = new ArrayList(rm.getCategories())
     var total = 0
-    try {
-      for (var ci = 0; ci < cats.size(); ci++) {
+    for (var ci = 0; ci < cats.size(); ci++) {
         var cat = cats.get(ci)
         var cid = String(cat.getId())
         var tip = TOOLTIP_CATEGORIES.indexOf(cid) >= 0
@@ -83,13 +78,11 @@
           } catch (e) {
             rec.error = String(e)
           }
-          w.println(JSON.stringify(rec))
+          all.push(rec)
           total++
         }
       }
-    } finally {
-      w.close()
-    }
+    JsonIO.write(OUT, JsonParser.parseString(JSON.stringify(all)))
     log('dump', 'PASS', total + ' recipes in ' + cats.size() + ' categories -> ' + OUT)
   }
 
