@@ -1503,7 +1503,8 @@
         "grindless:tarantula_orbit",
         "grindless:magellanic_stream",
         "grindless:m31_nucleus_orbit",
-        "grindless:local_group_filament"
+        "grindless:local_group_filament",
+        "gcyr:black_hole_orbit"
       ],
       "package": "B5",
       "note": "Every warp gate row, hold rows included (tables/gate.json `orbits` and relay_platforms.json); UXV-B1 adds the two UXV ends to open and sustain (uhv/gate.js:36), as uxv.json; XP-T2 adds the four MAX+ places. UHV's target checks that open and sustain name every end."
@@ -1583,7 +1584,11 @@
       "dimensions": [
         "grindless:sirius_b_orbit"
       ],
-      "package": "B4"
+      "exceptRecipes": [
+        "grindless:degenerate_harvesting/degenerate_slug"
+      ],
+      "package": "B4",
+      "note": "The slug row is MAX's: it runs at the Sgr A* platform (sirius.json, site gcyr:black_hole_orbit), where its input is made."
     },
     {
       "id": "gate-uiv-casing",
