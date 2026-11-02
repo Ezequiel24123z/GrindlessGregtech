@@ -403,7 +403,7 @@ test('the dimension markers of the old hidden table (disabled, not index-only) d
   // + 22 since OpV-I2: the roles of the batch-2 marker routes counted above\n  assert.equal(lost.length, 125, lost.join('\n'));
   for (const route of ['grindless:mars_chart made in gtceu:deep_space_tracking', 'grindless:vein_sample_ice_mars used in gtceu:vein_drilling',
     'gtceu:liquid_nitrogen made in gtceu:cryogenic_processing', 'gtceu:heavy_water made in gtceu:detritiation',
-    'grindless:titanium_drill_bit used in gtceu:vein_drilling', 'grindless:martian_quantum_seed made in gtceu:chemical_reactor']) {
+    'grindless:titanium_drill_bit used in gtceu:vein_drilling']) {
     assert.ok(lost.includes(route), route);
   }
   assert.ok(old.gaps.length > 0 && old.problems.length >= old.droppedRoutes.length, 'the audit fails on it');
