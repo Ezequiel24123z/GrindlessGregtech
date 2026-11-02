@@ -180,7 +180,7 @@ function listJs(dir, out = []) {
  */
 export function locateAll(ids, packDir) {
   const root = path.join(packDir, 'kubejs', 'startup_scripts', 'grindless');
-  const files = fs.existsSync(root) ? listJs(root).filter((f) => !/[\\/]lib[\\/]/.test(f)) : [];
+  const files = fs.existsSync(root) ? listJs(root).filter((f) => !/(^|[\\/])lib[\\/]/.test(path.relative(root, f))) : [];
   const texts = files.map((f) => ({ f, lines: fs.readFileSync(f, 'utf8').split(/\r?\n/) }));
   const out = {};
   for (const id of ids) {
@@ -250,6 +250,32 @@ export function analyzeAll(structures, packDir) {
     const m = measure(structures[id]);
     out[id] = { era: eraOf(id, where[id]), where: where[id] || null, ...m, violations: violations(m), score: scoreOf(m) };
   }
+  return out;
+}
+
+/** Cell count per symbol of a description (the slices as the pattern builders produced them). */
+function cellCounts(desc) {
+  const n = {};
+  for (const rows of desc.slices || []) for (const r of rows) for (const ch of String(r)) n[ch] = (n[ch] || 0) + 1;
+  return n;
+}
+
+/**
+ * Structures whose static (Node) description differs from the one the game built: a pattern builder that behaves differently in
+ * Rhino (floating-point or const-in-loop traps) shows here and nowhere else. Compares the cell count of every symbol.
+ */
+export function diffStructures(staticDocs, dumpDocs) {
+  const out = [];
+  for (const id of Object.keys(dumpDocs).sort()) {
+    const a = staticDocs[id];
+    if (!a) { out.push(`${id}: in the dump, not in the static run`); continue; }
+    const x = cellCounts(a);
+    const y = cellCounts(dumpDocs[id]);
+    const diffs = [...new Set([...Object.keys(x), ...Object.keys(y)])].filter((ch) => (x[ch] || 0) !== (y[ch] || 0)).sort()
+      .map((ch) => `'${ch}' ${x[ch] || 0} static vs ${y[ch] || 0} dump`);
+    if (diffs.length) out.push(`${id}: ${diffs.join(', ')}`);
+  }
+  for (const id of Object.keys(staticDocs).sort()) if (!dumpDocs[id]) out.push(`${id}: in the static run, not in the dump`);
   return out;
 }
 

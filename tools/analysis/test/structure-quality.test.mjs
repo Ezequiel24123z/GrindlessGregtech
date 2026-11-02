@@ -7,10 +7,34 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { measure, violations, compare, findLoopConsts, scanLoopConsts, analyzeAll, baselineEntry } from '../lib/structure_quality.mjs';
+import { measure, violations, compare, findLoopConsts, scanLoopConsts, analyzeAll, baselineEntry, locateAll, diffStructures } from '../lib/structure_quality.mjs';
 import { loadStructures } from '../structure-quality.mjs';
+
+test('locateAll finds registrations in a pack whose absolute path contains /lib/ (the VM checkout)', () => {
+  const base = fs.mkdtempSync(path.join(os.tmpdir(), 'sq-'));
+  const pack = path.join(base, 'lib', 'grindless', 'pack');
+  const era = path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'uxv');
+  fs.mkdirSync(era, { recursive: true });
+  fs.mkdirSync(path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'lib'), { recursive: true });
+  fs.writeFileSync(path.join(era, 'a.js'), "event.create('gtceu:zz_unit', 'multiblock')\n");
+  fs.writeFileSync(path.join(pack, 'kubejs', 'startup_scripts', 'grindless', 'lib', 'h.js'), "'zz_helper'\n");
+  const w = locateAll(['gtceu:zz_unit', 'gtceu:zz_helper'], pack);
+  assert.equal(w['gtceu:zz_unit'], 'kubejs/startup_scripts/grindless/uxv/a.js:1');
+  assert.equal(w['gtceu:zz_helper'], null);
+});
+
+test('diffStructures reports a structure whose cells differ between the static run and the dump', () => {
+  const mk = (n) => ({ slices: [['CCC', 'C@C', 'QCC'.slice(0, 3 - n) + 'C'.repeat(n)]], symbols: {} });
+  const same = { slices: [['CC', 'C@']], symbols: {} };
+  const d = diffStructures({ a: same, b: mk(1) }, { a: same, b: mk(3) });
+  assert.equal(d.length, 1);
+  assert.match(d[0], /^b: 'Q' 1 static vs 0 dump/);
+  assert.deepEqual(diffStructures({ a: same }, { a: same }), []);
+  assert.equal(diffStructures({}, { x: same }).length, 1);
+});
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const PACK = path.resolve(here, '..', '..', '..', 'pack');

@@ -52,7 +52,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.join(here, '..', '..');
 const BEGIN = '<!-- cost-matrix:begin -->';
 const END = '<!-- cost-matrix:end -->';
-const USAGE = 'usage: node tools/analysis/cost-matrix.mjs --dump <dir> --out <dir> [--compare <old.csv>] [--config <file>]\n       node tools/analysis/cost-matrix.mjs --dump <dir> (--table <dir> [--factors <solved.json>] | --solve [--table <dir>] [--era <list>] | --write-tables <dir>) [--out <dir>] [--compare <old.csv>]';
+const USAGE = 'usage: node tools/analysis/cost-matrix.mjs --dump <dir> --out <dir> [--compare <old.csv>] [--config <file>] [--check]\n       node tools/analysis/cost-matrix.mjs --dump <dir> (--table <dir> [--factors <solved.json>] | --solve [--table <dir>] [--era <list>] | --write-tables <dir>) [--out <dir>] [--compare <old.csv>]'; tools/analysis/cost-matrix.mjs --dump <dir> (--table <dir> [--factors <solved.json>] | --solve [--table <dir>] [--era <list>] | --write-tables <dir>) [--out <dir>] [--compare <old.csv>]';
 
 function parseArgs(argv) {
   const a = { config: path.join(here, 'cost_matrix.json') };
@@ -60,11 +60,13 @@ function parseArgs(argv) {
     const k = argv[i];
     if (['--dump', '--out', '--compare', '--config', '--why', '--trace', '--table', '--factors', '--era', '--write-tables'].includes(k)) a[k.slice(2)] = argv[++i];
     else if (k === '--solve') a.solve = true;
+    else if (k === '--check') a.check = true;
     else throw new Error(`unknown argument ${k}`);
   }
   a.curveMode = Boolean(a.table || a.solve || a['write-tables']);
   const light = a.trace || a.why || a.curveMode;
   if (!a.dump || (!a.out && !light)) throw new Error(USAGE);
+  if (a.check && (light || !a.out)) throw new Error('--check goes with the matrix run (--dump and --out)');
   if (a.factors && !a.table && !a['write-tables']) throw new Error('--factors goes with --table or --write-tables');
   return a;
 }
@@ -332,8 +334,9 @@ export function priceDump(dump, cfg, opts = {}) {
   const isBase = (k) => {
     if (explicit.has(k)) return true;
     if (notBase(k)) return false;
-    if (baseItems(k)) return true;
+    if (free(k)) return true;
     if (produced.has(k)) return false;
+    if (baseItems(k)) return true;
     return k.startsWith('fluid:') ? unprodFluids(k.slice(6)) : unprodItems(k);
   };
   const s = cfg.settings;
@@ -669,7 +672,7 @@ function main() {
   const { recipes, model, weight, trivial, rows: keyRows, missing } = pricedRows(dump, cfg);
   const rows = keyRows;
   const eraIdx = new Map(cfg.tiers.map((t, i) => [t, i]));
-  const groupOrder = ['hull', 'motor', 'pump', 'piston', 'conveyor', 'robot_arm', 'emitter', 'sensor', 'field_generator', 'energy_hatch', 'energy_hatch_4a', 'energy_hatch_16a', 'superconductor_wire', 'circuit', 'capstone', 'controller', 'lv_item'];
+  const groupOrder = ['hull', 'motor', 'pump', 'piston', 'conveyor', 'robot_arm', 'emitter', 'sensor', 'field_generator', 'machine_casing', 'energy_hatch', 'energy_hatch_4a', 'energy_hatch_16a', 'superconductor_wire', 'circuit', 'capstone', 'controller', 'lv_item'];
   rows.sort((a, b) => eraIdx.get(a.era) - eraIdx.get(b.era) || groupOrder.indexOf(a.group) - groupOrder.indexOf(b.group) || (a.item < b.item ? -1 : 1));
 
   fs.mkdirSync(args.out, { recursive: true });
@@ -696,6 +699,12 @@ function main() {
   const ok = rows.filter((r) => r.status !== 'unreachable').length;
   console.log(`cost matrix: ${ok}/${rows.length} key items priced, ${rows.length - ok} unreachable, ${model.recipesUsed} recipes, non-loop improvements left: ${model.improvementsLeft} (${model.improvements} applied, ${model.evaluations} evaluations)`);
   if (args.compare) console.log('\n' + compareReport(args.compare, rows));
+  if (args.check) {
+    const bad = gateViolations(seriesOf(rows, cfg.tiers), cfg.tiers, cfg.outliers.gate);
+    for (const b of bad) console.log(`gate: ${b.series} ${b.from} -> ${b.era} x${fmt(b.ratio)} (${fmt(b.prev)} -> ${fmt(b.value)}), under x${cfg.outliers.gate.minRatio}`);
+    console.log(`cost-matrix gate: ${bad.length} step(s) under x${cfg.outliers.gate.minRatio}`);
+    if (bad.length) process.exitCode = 1;
+  }
 }
 
 function renderMarkdown({ cfg, rows, missing, model, recipes, trivial, dump, args, weight }) {
@@ -714,7 +723,7 @@ function renderMarkdown({ cfg, rows, missing, model, recipes, trivial, dump, arg
   L.push(`- **Self-check**: non-loop improvements left: ${model.improvementsLeft} (${model.improvements.toLocaleString('en-US')} applied in ${model.evaluations.toLocaleString('en-US')} recipe evaluations; ${model.relaxations.toLocaleString('en-US')} items priced by the first pass). ${model.improvementsLeft === 0 ? 'Fixed point reached.' : '**Not a fixed point.**'}`, '');
 
   const series = seriesOf(rows, tiers);
-  const names = ['hull', 'motor', 'pump', 'piston', 'conveyor', 'robot_arm', 'emitter', 'sensor', 'field_generator', 'energy_hatch', 'energy_hatch_4a', 'energy_hatch_16a', 'superconductor_wire', 'circuit (cheapest)', 'circuit (median)', 'capstone', 'controller (median)'].filter((n) => series.has(n));
+  const names = ['hull', 'motor', 'pump', 'piston', 'conveyor', 'robot_arm', 'emitter', 'sensor', 'field_generator', 'machine_casing', 'energy_hatch', 'energy_hatch_4a', 'energy_hatch_16a', 'superconductor_wire', 'circuit (cheapest)', 'circuit (median)', 'capstone', 'controller (median)'].filter((n) => series.has(n));
   L.push('## Cost per era (score)', '');
   L.push('| Era | ' + names.join(' | ') + ' |', '|---|' + names.map(() => '---:').join('|') + '|');
   for (const t of tiers) {
@@ -814,5 +823,26 @@ function renderMarkdown({ cfg, rows, missing, model, recipes, trivial, dump, arg
 }
 
 const eraIdxOf = (tiers, t) => tiers.indexOf(t);
+
+/** Steps of the gated series that grow by less than gate.minRatio. Steps up to LV are only reviewed (principle 2). */
+export function gateViolations(series, tiers, gate) {
+  const out = [];
+  if (!gate) return out;
+  const first = tiers.indexOf('lv');
+  for (const name of gate.series) {
+    const m = series.get(name);
+    if (!m) continue;
+    let prev = null;
+    for (const t of tiers) {
+      const v = m.get(t);
+      if (v === undefined) continue;
+      if (prev && prev.v > 0 && tiers.indexOf(t) > first && v / prev.v < gate.minRatio) {
+        out.push({ series: name, era: t, from: prev.era, ratio: v / prev.v, prev: prev.v, value: v });
+      }
+      prev = { era: t, v };
+    }
+  }
+  return out;
+}
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

@@ -137,6 +137,10 @@ test('textures named by built strings (cover renderer, tiered overlay, dormant w
   const dir = path.join(root, 'pack', 'kubejs', 'startup_scripts', 'grindless', 'lv');
   const tex = path.join(root, 'pack', 'kubejs', 'assets', 'grindless', 'textures', 'block');
   for (const d of ['cover', 'machines/hv_hatch', 'multiblock/dormant']) fs.mkdirSync(path.join(tex, ...d.split('/')), { recursive: true });
+  const mdl = path.join(root, 'pack', 'kubejs', 'assets', 'grindless', 'models', 'block', 'machines');
+  fs.mkdirSync(mdl, { recursive: true });
+  fs.writeFileSync(path.join(mdl, 'lv_hatch.json'), JSON.stringify({ parent: 'gtceu:block/machine/template/hatch' }));
+  fs.writeFileSync(path.join(mdl, 'hv_hatch.json'), JSON.stringify({ parent: 'gtceu:block/machine/template/hatch', textures: { overlay: 'grindless:block/machines/hv_hatch/overlay_front' } }));
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'b.js'), [
     "ForgeModEvents.onGenericEvent('x.Event', 'x.CoverDefinition', function (event) {",
@@ -164,6 +168,35 @@ test('textures named by built strings (cover renderer, tiered overlay, dormant w
   const { rows } = auditTextures({ root, packDir: 'pack' });
   const orphans = rows.filter((r) => r.categories.includes('orphan')).map((r) => r.path);
   assert.deepEqual(orphans, []);
+  assert.deepEqual(rows.filter((r) => r.categories.includes('missing')).map((r) => r.path), []);
+});
+
+test('overlayTieredHullModel names a model: existing models are not missing textures, a missing model or texture is reported', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'aa-pack-'));
+  const dir = path.join(root, 'pack', 'kubejs', 'startup_scripts', 'grindless', 'lv');
+  const assets = path.join(root, 'pack', 'kubejs', 'assets', 'grindless');
+  const mdl = path.join(assets, 'models', 'block', 'machines');
+  fs.mkdirSync(dir, { recursive: true });
+  fs.mkdirSync(mdl, { recursive: true });
+  fs.mkdirSync(path.join(assets, 'textures', 'block', 'machines'), { recursive: true });
+  const call = (name) => `    b['overlayTieredHullModel(net.minecraft.resources.ResourceLocation)'](new RL('grindless', 'block/machines/${name}'))`;
+  fs.writeFileSync(path.join(dir, 'b.js'), [
+    "GTCEuStartupEvents.registry('gtceu:machine', function (event) {",
+    "  var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')",
+    "  event.create('hatch', 'custom').tiers(6).definition(function (tier, b) {",
+    call('good'), call('absent'), call('child'),
+    '  })',
+    '})',
+  ].join('\n'));
+  const px = png(16, 16, (x, y) => [x * 10, y * 10, 100, 255]);
+  fs.writeFileSync(path.join(assets, 'textures', 'block', 'machines', 'tex.png'), px);
+  fs.writeFileSync(path.join(mdl, 'good.json'), JSON.stringify({ parent: 'gtceu:block/machine/template/hatch', textures: { a: 'grindless:block/machines/tex' } }));
+  fs.writeFileSync(path.join(mdl, 'base.json'), JSON.stringify({ textures: { b: 'grindless:block/machines/lost' } }));
+  fs.writeFileSync(path.join(mdl, 'child.json'), JSON.stringify({ parent: 'grindless:block/machines/base' }));
+  const { rows } = auditTextures({ root, packDir: 'pack' });
+  const missing = rows.filter((r) => r.categories.includes('missing')).map((r) => r.path).sort();
+  assert.deepEqual(missing, ['grindless:block/machines/absent', 'grindless:block/machines/lost']);
+  assert.deepEqual(rows.filter((r) => r.categories.includes('orphan')).map((r) => r.path), []);
 });
 
 test('analyseSamples reports level, peak and a short envelope cycle', () => {

@@ -423,6 +423,27 @@ export function collectReferences(startup, assetsDir, { root = ROOT, startupDir 
     try { const j = JSON.parse(fs.readFileSync(f, 'utf8')); return Object.values(j.textures || {}).filter((v) => typeof v === 'string' && !v.startsWith('#')); } catch { return []; }
   };
   const add = (b, kind, ref, extra = {}) => refs.push({ ref, owner: b.id, kind, era: b.era, file: b.file, ...extra });
+  // A model resource and the concrete textures of it and of its parents that live in the pack. Another namespace's model is external.
+  const addModel = (b, modelRl) => {
+    const seenModels = new Set();
+    let cur = modelRl;
+    let first = true;
+    while (cur && !seenModels.has(cur)) {
+      seenModels.add(cur);
+      const [ns, p] = nsPath(cur);
+      const f = path.join(assetsDir, ns, 'models', ...p.split('/')) + '.json';
+      if (!fs.existsSync(f)) {
+        if (first) add(b, 'model', cur, ns === 'grindless' ? {} : { external: true });
+        else if (ns === 'grindless') add(b, 'model', cur);
+        return;
+      }
+      first = false;
+      let j;
+      try { j = JSON.parse(fs.readFileSync(f, 'utf8')); } catch { add(b, 'model', cur); return; }
+      for (const v of Object.values(j.textures || {})) if (typeof v === 'string' && !v.startsWith('#')) add(b, 'model_texture', v);
+      cur = typeof j.parent === 'string' && !j.parent.startsWith('builtin/') && !/^minecraft:/.test(j.parent) ? j.parent : null;
+    }
+  };
   for (const kind of ['item', 'block']) {
     for (const b of startup[kind]) {
       const explicit = [];
@@ -450,6 +471,11 @@ export function collectReferences(startup, assetsDir, { root = ROOT, startupDir 
   }
   for (const b of startup.machine) {
     for (const c of b.calls) {
+      if (baseMethod(c.method) === 'overlayTieredHullModel' && c.args.some((a) => a && typeof a === 'object' && typeof a.__rl === 'string')) {
+        // GTM 7.5.3 loads this argument as an existing block model and sets a parent: it is a model resource, not a texture directory
+        for (const s of strings(c.args)) addModel(b, s);
+        continue;
+      }
       if (!/(Model|Renderer)$/.test(baseMethod(c.method))) continue;
       const ss = strings(c.args);
       if (!ss.length) continue;
