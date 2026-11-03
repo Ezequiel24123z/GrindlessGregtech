@@ -330,10 +330,10 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
   [n('o2_engine', 0, 0, M('gtceu:annihilation_engine'), 'Annihilation Engine', { kind: 'ours', sub: 'Stack, ACMF pellet, absorber tile and TPV panel', from: [] })],
 ], [
   ['o2_1', 'o2_0'],
-  ['o2_1', 'o2i_7'],
-  ['o2_1', 'o2h_11'],
-  ['o2_3', 'o2p_7'],
-  ['o2_5', 'o2c_6'],
+  ['o2_1', 'o2r0'],
+  ['o2_1', 'o2r1'],
+  ['o2_3', 'o2r2'],
+  ['o2_5', 'o2r3'],
   ['o2_7', 'o2t_0'],
   ['o2_9', 'o2d_0'],
   ['o2_9', 'o2o_6'],
@@ -477,7 +477,6 @@ const o6 = cluster('O6 Probes, nodes and the bulge', [
     ['m', hotcell, 'Hot Cell'],
     ['i', 'grindless:tested_mmic_tile', 'Tested MMIC Tile'],
     ['m', eb, 'Electron Beam Furnace'],
-    ['i', 'grindless:sealed_mmic_tile', 'Sealed MMIC Tile'],
     ['i', 'grindless:node_power_transmitter', 'Node Power Transmitter'],
     ['m', nodeWorks, 'Collector Node Works'],
     ['i', 'grindless:collector_node', 'Collector Node'],
@@ -552,9 +551,6 @@ const o7 = cluster('O7 OpV components', [
     ['i', 'gtceu:opv_robot_arm', 'OpV Robot Arm', { end: 'the OpV machines' }],
   ]),
   path('o7r_', [
-    ['i', 'grindless:green_sic_fibre', 'Green SiC Fibre'],
-    ['m', 'gtceu:sic_fibre_plant', 'SiC Fibre Plant'],
-    ['i', 'grindless:cured_sic_fibre', 'Cured SiC Fibre'],
     ['i', 'grindless:sic_fibre', 'SiC Fibre'],
     ['i', 'grindless:chain_sic_preform', 'Chain SiC Preform'],
     ['m', cvi, 'CVI Furnace'],
@@ -651,6 +647,8 @@ const o8 = cluster('O8 Superheavy census IV', [
 // O9: the AlN power die.
 const o9 = cluster('O9 AlN power die', [
   path('o9_', [
+    ['i', 'gtceu:aluminium_dust', 'Aluminium'],
+    ['m', 'gtceu:nitride_magnet_works', 'Nitride Magnet Works'],
     ['i', 'grindless:aln_powder', 'AlN Powder'],
     ['i', 'grindless:aln_boule', 'AlN Boule'],
     ['i', 'grindless:aln_wafer', 'AlN Wafer'],
