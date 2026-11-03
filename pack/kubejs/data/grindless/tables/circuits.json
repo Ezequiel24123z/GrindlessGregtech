@@ -13,7 +13,7 @@
           "itemsIn": [{ "id": "grindless:si_inp_boule", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:si_inp_wafer", "count": 14 }, { "id": "grindless:inp_scrap", "count": 2 }], "fluidsOut": [] },
         { "_why": "line 13: the metallised cryo-CMOS wafer diced into dies, still untested at 4 K", "name": "untested_cryo_cmos_dies", "circuit": 0, "eut": 30720, "duration": 400,
-          "itemsIn": [{ "id": "grindless:cryo_cmos_metal_wafer", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
+          "itemsIn": [{ "id": "grindless:interconnected_cmos_wafer", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:untested_cryo_cmos_die", "count": 4 }], "fluidsOut": [] },
         { "_why": "line 16: the isolated HEMT wafer diced into cryogenic low-noise amplifiers; the edge goes to the InP scrap", "name": "hemt_amplifiers", "circuit": 0, "eut": 30720, "duration": 400,
           "itemsIn": [{ "id": "grindless:isolated_hemt_wafer", "count": 1 }], "fluidsIn": [{ "id": "minecraft:water", "amount": 1000 }],

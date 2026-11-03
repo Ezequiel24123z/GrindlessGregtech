@@ -74,6 +74,26 @@
           "fluidsOut": []
         },
         {
+          "_why": "D5-QPU-OPV (lines-opv-maxplus.md O1 step 16): the vias and top metal of the cryo-CMOS patterned over the gold interconnect; the mirror comes out fouled (c3 cleans it)",
+          "name": "cmos_via_exposure",
+          "circuit": 17,
+          "eut": 31457280,
+          "duration": 2000,
+          "itemsIn": [
+            { "id": "grindless:tb_droplet_target", "count": 1 },
+            { "id": "grindless:cryo_cmos_metal_wafer", "count": 1 },
+            { "id": "grindless:beuv_mirror", "count": 1 }
+          ],
+          "kept": [],
+          "fluidsIn": [],
+          "charge": [],
+          "itemsOut": [
+            { "id": "grindless:interconnected_cmos_wafer", "count": 1 },
+            { "id": "grindless:fouled_beuv_mirror", "count": 1 }
+          ],
+          "fluidsOut": []
+        },
+        {
           "_why": "OpV-A2 (opv.md line 14): the through-silicon vias of the Nb interposer patterned on float-zone silicon",
           "name": "tsv_exposure",
           "circuit": 5,

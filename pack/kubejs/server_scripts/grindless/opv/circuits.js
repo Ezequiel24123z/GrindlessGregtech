@@ -164,12 +164,48 @@
     console.info(LOG + 'circuit line recipes: ' + OC.recipes.length + '; skipped ' + OC.skipped.length)
   }
 
+  // D5-QPU-OPV (lines-opv-maxplus.md O1): the steps and the chlorosilane loop that have no table type here (distillation tower,
+  // electric blast furnace, chemical reactor); every output has a destination: TCS -> step 3, tetrachloride -> the loop, purge -> hydrolysis
+  var DIRECT = [
+    { type: 'distillation_tower', name: 'si28_chlorosilane_split', eut: 268435456, duration: 200,
+      fluidsIn: [['gtceu:crude_si28_trichlorosilane', 1000]],
+      fluidsOut: [['gtceu:si28_trichlorosilane', 900], ['gtceu:si28_tetrachloride', 90], ['gtceu:chlorosilane_purge', 10]] },
+    { type: 'electric_blast_furnace', name: 'si28_soi_anneal', eut: 268435456, duration: 400, temp: 1373,
+      itemsIn: ['1x grindless:si28_soi_wafer'], fluidsIn: [['gtceu:nitrogen', 1000]], itemsOut: ['1x grindless:annealed_soi_wafer'] },
+    { type: 'chemical_reactor', name: 'si28_tetrachloride_loop', eut: 268435456, duration: 100,
+      fluidsIn: [['gtceu:si28_tetrachloride', 1000], ['gtceu:hydrogen', 1000]],
+      fluidsOut: [['gtceu:crude_si28_trichlorosilane', 1000], ['gtceu:hydrochloric_acid', 1000]] },
+    { type: 'chemical_reactor', name: 'chlorosilane_purge_hydrolysis', eut: 268435456, duration: 100,
+      fluidsIn: [['gtceu:chlorosilane_purge', 1000], ['minecraft:water', 3000]],
+      itemsOut: ['1x gtceu:silicon_dioxide_dust', '1x gtceu:sulfur_dust'],
+      fluidsOut: [['gtceu:phosphoric_acid', 300], ['gtceu:hydrochloric_acid', 2000]] }
+  ]
+
+  function generateDirect(event) {
+    OC.direct = []
+    DIRECT.forEach(function (d) {
+      var recipe = event.recipes.gtceu[d.type]('grindless:' + d.name)
+      ;(d.itemsIn || []).forEach(function (x) { recipe.itemInputs(x) })
+      ;(d.fluidsIn || []).forEach(function (f) { recipe.inputFluids(Fluid.of(f[0], f[1])) })
+      ;(d.itemsOut || []).forEach(function (x) { recipe.itemOutputs(x) })
+      ;(d.fluidsOut || []).forEach(function (f) { recipe.outputFluids(Fluid.of(f[0], f[1])) })
+      if (d.temp) recipe.blastFurnaceTemp(d.temp)
+      recipe.EUt(d.eut).duration(d.duration)
+      OC.direct.push('grindless:' + d.type + '/' + d.name)
+    })
+  }
+
   // an uncaught error here would stop KubeJS from running the recipe handlers of the scripts that load after this one
   ServerEvents.recipes(function (event) {
     try {
       generate(event)
     } catch (e) {
       console.error(LOG + 'circuit line recipes failed: ' + e)
+    }
+    try {
+      generateDirect(event)
+    } catch (e) {
+      console.error(LOG + 'chlorosilane loop recipes failed: ' + e)
     }
   })
 })()

@@ -97,7 +97,9 @@ $items = @(
     @('si_inp_boule', 'boule', '6A5A7A'), @('si_inp_wafer', 'wafer', '7A6A8C'), @('inp_scrap', 'scrap', '5E5070'),
     @('inas_qw_wafer', 'wafer', '8A6A9A'), @('hbn_capped_2deg_wafer', 'wafer', 'C8C8D8'),
     # line 13
-    @('gate_stack_soi_wafer', 'wafer', '6C7890'), @('cryo_cmos_litho_wafer', 'wafer', '5A70A8'), @('cryo_cmos_implanted_wafer', 'wafer', '4A6090'),
+    @('gate_stack_soi_wafer', 'wafer', '6C7890'), @('annealed_soi_wafer', 'wafer', '7C88A0'), @('back_gated_soi_wafer', 'wafer', '687CA8'),
+    @('activated_cmos_wafer', 'wafer', '5078B8'), @('contacted_cmos_wafer', 'wafer', '708098'), @('interconnected_cmos_wafer', 'wafer', 'B09860'),
+    @('cryo_cmos_litho_wafer', 'wafer', '5A70A8'), @('cryo_cmos_implanted_wafer', 'wafer', '4A6090'),
     @('cryo_cmos_metal_wafer', 'wafer', 'C0A050'), @('untested_cryo_cmos_die', 'die', '5070A0'), @('gold_overspray', 'scrap', 'E0B840'),
     # line 14
     @('rrr_nb_target', 'target', '9098B0'), @('tsv_via_wafer', 'wafer', '707888'), @('nb_filled_tsv_wafer', 'wafer', '8890B8'),
