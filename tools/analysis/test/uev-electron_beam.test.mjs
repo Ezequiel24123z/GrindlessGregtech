@@ -328,6 +328,8 @@ test('every new item is named and tooltipped in en_us, and every item the table 
     // OpV-A3's c22 rows (W-Re can and re-melt): the can items in opv/field_press.js, the chain lamina stack in opv/foundation.js
     + read(path.join(kube, 'startup_scripts', 'grindless', 'uiv', 'foundation.js'))
     + read(path.join(kube, 'startup_scripts', 'grindless', 'max', 'foundation.js')) // MAX-A2's c25 bulk and c27 rod, registered by MAX-F
+    // batch 16: D5-QPU-OPV's flash anneal (c29) wears the LaB6 cathode registered by UV propulsion
+    + read(path.join(kube, 'startup_scripts', 'grindless', 'uv', 'propulsion.js'))
     + fs.readdirSync(path.join(kube, 'startup_scripts', 'grindless', 'opv')).filter((f) => f.endsWith('.js')).map((f) => read(path.join(kube, 'startup_scripts', 'grindless', 'opv', f))).join('\n');
   // OpV-B2's c23 thaws OpV-A0's caged_ni_chain and OpV-A1's c21 takes A0's chain_mesh_weave: both registered in opv/chain_matter.js
   for (const [, r] of allRows().filter(([w]) => w.startsWith('electron_beam.json'))) {
