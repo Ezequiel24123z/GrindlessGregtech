@@ -145,7 +145,7 @@ export const QUESTS = [
     key: 'J_CYG', kind: 'step', title: 'Back to Cygnus X-1', icon: 'gtceu:annihilation_engine',
     deps: ['BCHART'], x: 10, y: 0,
     desc: [
-      'Back at Cygnus X-1, only the jet itself has to be tapped here: the jet beam line works at this orbit. The spallation station, the decelerator, the antihydrogen foundry and the Kugelblitz forge behind it can stand at home.',
+      'Back at Cygnus X-1, only the jet itself has to be tapped here: the jet beam line works at this orbit. The antiproton complex, the antihydrogen foundry and the Kugelblitz forge behind it can stand at home.',
     ],
     tasks: [dim('grindless:cygnus_x1_orbit')],
     rewards: [xp(100)],

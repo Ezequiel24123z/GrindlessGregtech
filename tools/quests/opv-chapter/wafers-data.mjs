@@ -62,37 +62,6 @@ export const QUESTS = [
     desc: [], tasks: [it("grindless:hbn_capped_2deg_wafer")], rewards: [xp(50)],
   },
   {
-    key: "W_GATE_STACK_SOI", kind: "wafer", title: "Gate Stack SOI Wafer", icon: "grindless:gate_stack_soi_wafer", deps: ["H_WAF"], x: 2, y: 3,
-    teach: {
-      for: "The &6Gate Stack SOI Wafer&r is a wafer stage on the way to the Cryo CMOS Litho Wafer.",
-      needs: "Made by the first machine of its line; the cleanroom and EMI show the exact recipe.",
-      unlocks: "The Cryo CMOS Litho Wafer and Fouled BEUV Mirror in the BEUV Lithography.",
-      automate: "Feed it by ME from the machine before it; keep a few spare wafers in stock.",
-    },
-    desc: [], tasks: [it("grindless:gate_stack_soi_wafer")], rewards: [xp(50)],
-  },
-  {
-    key: "W_CRYO_CMOS_LITHO", kind: "wafer", title: "Cryo-CMOS Litho Wafer", icon: "grindless:cryo_cmos_litho_wafer", deps: ["H_WAF"], x: 2, y: 4.5,
-    teach: {
-      for: "The &6Cryo-CMOS Litho Wafer&r is a wafer stage on the way to the Cryo CMOS Implanted Wafer.",
-      needs: "Made in the &6BEUV Lithography&r from the Tb Droplet Target and Gate Stack SOI Wafer, in the cleanroom.",
-      unlocks: "The Cryo CMOS Implanted Wafer in the Ion Implantation.",
-      automate: "A pattern provider on the machine of the step before keeps it supplied.",
-    },
-    desc: [], tasks: [it("grindless:cryo_cmos_litho_wafer")], rewards: [xp(50)],
-    raw: { hide_dependency_lines: 'true' },
-  },
-  {
-    key: "W_CRYO_CMOS_IMPLANTED", kind: "wafer", title: "Cryo-CMOS Implanted Wafer", icon: "grindless:cryo_cmos_implanted_wafer", deps: ["W_CRYO_CMOS_LITHO"], x: 4, y: 4.5,
-    teach: {
-      for: "The &6Cryo-CMOS Implanted Wafer&r is a wafer stage on the way to the Cryo CMOS Metal Wafer.",
-      needs: "Made in the &6Ion Implantation&r from the Cryo-CMOS Litho Wafer and Arsenic, in the cleanroom.",
-      unlocks: "The Cryo CMOS Metal Wafer and Gold Overspray in the MTJ Sputtering.",
-      automate: "A pattern provider on the machine of the step before keeps it supplied.",
-    },
-    desc: [], tasks: [it("grindless:cryo_cmos_implanted_wafer")], rewards: [xp(50)],
-  },
-  {
     key: "W_TSV_VIA", kind: "wafer", title: "TSV Via Wafer", icon: "grindless:tsv_via_wafer", deps: ["H_WAF"], x: 2, y: 6,
     teach: {
       for: "The &6TSV Via Wafer&r is a wafer stage on the way to the Nb Filled TSV Wafer.",

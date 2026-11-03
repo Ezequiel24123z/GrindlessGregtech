@@ -3,7 +3,7 @@
 // "Our multiblocks", "Family steps"). Rows start at a link to an opv_age quest (START, or the hull step that opv_age keeps). The machines that make
 // these parts are in opv_machines, so the chip quests ask for products only, and charts own the line intermediates. The tetron array stays a product
 // step in opv_age (TETRON), the hull is HULL there, and the generators, parallel hatch and old controllers are in opv_integration.
-// Moved here from opv_age with their keys: SOI, CMOS, LINK, COSMIC. New: DRIVE, SENSOR, COMP, HATCH, ASM and CH_ASM. MOTOR, ARM, EMIT, FIELD and PUMP
+// Moved here from opv_age with their keys: LINK, COSMIC (SOI and CMOS are now steps 7 to 18 of qubit-data.mjs). New: DRIVE, SENSOR, COMP, HATCH, ASM and CH_ASM. MOTOR, ARM, EMIT, FIELD and PUMP
 // are merged into COMP, and HATCH (the old connector quest) is now the energy hatches.
 const it = (item, count) => ({ type: 'item', item, count });
 const xp = (n) => ({ type: 'xp', xp: n });
@@ -17,13 +17,12 @@ export const CHAPTER = {
   role: 'circuits',
   order: 1,
   icon: 'gtnn:cosmic_mainframe',
-  autofocus: 'SOI',
+  autofocus: 'LINK',
   title: 'OpV: Circuits',
   subtitle: ['Logic that runs at the temperature of space, and the sensor, drive, parts and assembler that put it to work.'],
 };
 
 export const LINKS = [
-  { key: 'C_L_SOI', ref: 'START', x: 0, y: 0 },
   { key: 'C_L_DRIVE', ref: 'START', x: 0, y: 3 },
   { key: 'C_L_HULL', ref: 'HULL', x: 0, y: 6 },
 ];
@@ -38,19 +37,7 @@ const q = (key, kind, title, icon, deps, x, y, teach, desc, tasks, xpN) => ({
 
 export const QUESTS = [
   // ------------------------------------------------------------------ cryogenic logic: wafer, chip, parts, mainframe
-  q('SOI', 'wafer', 'Si-28 SOI Wafer', 'grindless:si28_soi_wafer', ['C_L_SOI'], 2, 0, {
-    for: 'Natural silicon carries a few percent of silicon-29, whose nuclear spin disturbs a cold qubit. Purified silicon-28 on an insulating layer gives the &6Si-28 SOI Wafer&r that every cold chip is cut from.',
-    needs: 'Silicon-28 from the centrifuge cascade, an oxide layer and the wafer bonder you already run.',
-    unlocks: 'The cryo-CMOS wafer and the tetron chain.',
-    automate: 'Keep a chest of wafers behind the bonder, since every later chip row draws from it.',
-  }, [], [it('grindless:si28_soi_wafer')], 120),
-  q('CMOS', 'wafer', 'Metallised Cryo-CMOS Wafer', 'grindless:cryo_cmos_metal_wafer', ['SOI'], 4.5, 0, {
-    for: 'Ordinary transistors stop working well near absolute zero, so the doping and the metal are tuned for the cold. The &6Metallised Cryo-CMOS Wafer&r is exposed, implanted and metallised in that order, and cut into dies.',
-    needs: 'The lithography and implant lines of the age, and a silicon-28 wafer.',
-    unlocks: 'The cryo-CMOS die, the logic of the cosmic mainframe.',
-    automate: 'Stage by stage in one line, with the cut dies sent straight to the mainframe row.',
-  }, [], [it('grindless:cryo_cmos_metal_wafer'), it('grindless:cryo_cmos_die')], 150),
-  q('LINK', 'step', 'Cryogenic Links', 'grindless:cryo_optical_link', ['CMOS'], 7, 0, null, [
+  q('LINK', 'step', 'Cryogenic Links', 'grindless:cryo_optical_link', ['Q18'], 7, 0, null, [
     'A niobium interposer carries the signals through the die, a HEMT amplifier lifts them out of the noise, and an optical link takes them out of the cold without carrying heat in. The &6Nb TSV Interposer&r is tested cold in the helium refrigerator, the &6HEMT Amplifier&r is cut from its wafer and the &6Cryo Optical Link&r is drawn on the fibre tower.',
   ], [it('grindless:nb_tsv_interposer'), it('grindless:hemt_amplifier'), it('grindless:cryo_optical_link')], 120),
   q('COSMIC', 'circuit', 'Cosmic Mainframe', 'gtnn:cosmic_mainframe', ['LINK'], 9.5, 0, {
