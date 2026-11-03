@@ -2,6 +2,8 @@
 
 Ten named uncertainties of `docs/eras/uxv.md` "Spikes (S0)", answered on the native bench (Linux VM backend, no fallback) before any permanent UXV id exists. Everything here is overlay-only: `tools/test/overlay/kubejs/{startup_scripts/gg_test_uxv_s0_parts.js, server_scripts/gg_test_uxv_s0_dump.js, server_scripts/gg_test_uxv_s0_machines.js, config/gg_test_uxv_s0.json}`, off unless the marker is `{"enabled": true}`. Throwaway ids are `gtceu:gg_uxv_s0_*` and `grindless:gg_uxv_s0_*`. Zones row `uxv_s0` (X 36128-36191, Z 0-63, Y 70-100, Overworld).
 
+Batch 16 (2026-11-03) retired `gg_test_uxv_s0_machines.js`: its answers stand, and the reshaped UXV structures are proven by their own fixtures.
+
 ## Temp pack copies (never committed)
 
 - **E1** (S0-1, used by every run but the baseline): in `startup_scripts/grindless/uev/foundation.js` both `.tiers(UEV, GTValues.UIV)` (:180 hull, :193 hatch builder) become `.tiers(UEV, GTValues.UIV, GTValues.UXV)`.

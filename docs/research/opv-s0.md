@@ -2,6 +2,8 @@
 
 Twelve named uncertainties of `docs/eras/opv.md` "S0 spikes", answered on the native bench (Linux VM backend, no fallback) before any permanent OpV id exists. Everything is overlay-only: `tools/test/overlay/kubejs/{startup_scripts/gg_test_opv_s0_parts.js, server_scripts/gg_test_opv_s0_{dump,machines,pasta,relay_1,relay_2}.js, config/gg_test_opv_s0.json}`, off unless the marker is `{"enabled": true}`. Overlay data (S0-3, S0-8): `data/grindless/gcyr/planets/s0_sgr1806_orbit.json`, `data/grindless/gcyr/planets/s0_terzan5_core.json`, `data/grindless/dimension/s0_sgr1806_orbit.json`, `data/grindless/dimension/s0_terzan5_core.json` (final ids are F1's and are not used). The integrator dropped these four data files at merge, because overlay data loads in every bench run; to re-run S0-3, S0-8, S0-9 or S0-12, restore them from commit c3953415. Throwaway ids: `gtceu:gg_opv_s0_*`, `grindless:s0_*`. Zones row `opv_s0` (X 37376-37439, Z 0-63, Y 70-100, Overworld).
 
+Batch 16 (2026-11-03) retired `gg_test_opv_s0_{machines,pasta,relay_1,relay_2}.js`: their answers stand, and the OpV machines, the pasta line and the bulge relay are proven by their own fixtures; only the dump spike remains.
+
 ## Temp pack copy (never committed)
 
 - **E** (every run): `startup_scripts/grindless/lv/wireless_energy.js` `withTiers` gets `case 13:` (thirteen tiers); `data/grindless/tables/wireless_energy.json` gets a tier-13 row (`opv`, cell `grindless:opv_smes_cell`, capacity 16,106,127,360,000); `tables/gate.json` gets `hold_s0_terzan5` (circuit 12, 536,870,912 EU/t, 1,200 t, site `cygnus_x1_orbit`, one `launched_relay_seed`); `tables/relay_platforms.json` gets the row `s0_terzan5` (dimension `grindless:s0_terzan5_core`, source `grindless:cygnus_x1_orbit`, 64,100,64).
