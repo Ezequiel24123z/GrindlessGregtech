@@ -105,6 +105,8 @@
               var h = chevron(c, si)
               if (h > 0 && r < 6 + h) ch = 'F'
             }
+            // a relay platform sets a wireless dynamo hatch 9 east of the controller and an AE2 controller and drive 12 east (lib/relay_platforms.js)
+            if (si === last && ((dx === 9 && r === 1) || (dx === 12 && (r === 1 || r === 2)))) ch = ' '
           } else if (d < RING) ch = r < 5 ? '#' : ' '
           else if (r > 4) ch = ' '
           else {
