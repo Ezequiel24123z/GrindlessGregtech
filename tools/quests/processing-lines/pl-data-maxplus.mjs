@@ -5,7 +5,7 @@ import { I, F, M, L, n } from './pl-lib.mjs';
 
 const ROWS = {
   P1: [
-    ["l", "pl_max:l18_7", []],
+    ["l", "pl_max:lkx18_7", []],
     ["m", "gtceu:kugelblitz_forge", [0]],
     ["i", "grindless:seed_wave_packet", [1]],
     ["m", "gtceu:mirror_shell", [2]],
@@ -45,7 +45,7 @@ const ROWS = {
     ["f", "fluid:gtceu:kerr_condensate", [9], 1],
   ],
   P4: [
-    ["l", "pl_max:l1_8", []],
+    ["l", "pl_max:m2x1_7", []],
     ["m", "gtceu:condensate_refinery", [0]],
     ["i", "grindless:kerr_clad_strand", [1]],
     ["i", "grindless:condensate_boil_off", [1], 1],
@@ -389,7 +389,7 @@ const ROWS = {
     ["i", "grindless:condensate_boil_off", [7], 1],
   ],
   T5: [
-    ["l", "pl_max:l10_2", []],
+    ["l", "pl_max:m5x10_2", []],
     ["m", "gtceu:cvi_furnace", [0]],
     ["i", "grindless:sic_waveguide_tube", [1]],
     ["f", "fluid:gtceu:hydrochloric_acid", [1], 1],
@@ -545,7 +545,7 @@ const ROWS = {
     ["f", "fluid:gtceu:nitrogen", [8], 1],
   ],
   T16: [
-    ["l", "pl_max:l13_6", []],
+    ["l", "pl_max:m4x13_6", []],
     ["m", "gtceu:cluster_light_furnace", [0]],
     ["i", "grindless:segment_truss_billet", [1]],
     ["m", "gtceu:megabar_press", [2]],
@@ -696,7 +696,7 @@ const ROWS = {
     ["i", "grindless:horizon_interposer", [10]],
   ],
   A1: [
-    ["l", "pl_max:l38_6", []],
+    ["l", "pl_max:m4x38_6", []],
     ["m", "gtceu:mtj_sputter_cluster", [0]],
     ["i", "grindless:mram_stack_plus", [1]],
     ["m", "gtceu:beuv_scanner", [2]],
@@ -944,9 +944,10 @@ const join = (...rows) => rows.reduce((a, b) => {
 });
 const cut = (r, i, j = r.length) => r.slice(i, j).map(([t, id, from, by, peek], k) => [k === 0 && t === 'm' ? 'i' : t, id, k === 0 ? [] : from.map((f) => f - i), by, peek]);
 
-// X1: the qubit stage after the shielded quantum module (steps 30-34); the logic die (Q1) and the interposer (Q2) are its feeders
+// X1: the qubit stage after the shielded quantum module (steps 30-34), linked from pl_max's M1 and tagged as the same si28 line; the logic die (Q1)
+// and the interposer (Q2) are its feeders
 ROWS.X1 = [
-  ['i', 'grindless:shielded_quantum_module', []],
+  ['l', 'pl_max:m1_8', []],
   ['m', 'gtceu:mtj_sputter_cluster', [0]],
   ['i', 'grindless:stacked_horizon_module', [1]],
   ['i', 'grindless:horizon_module_scrap', [1], 1],
@@ -1236,7 +1237,7 @@ function tree(num, y) {
     return n(key(i), px, py, res, title(id), opt);
   });
 }
-const cluster = (name, nums) => {
+const cluster = (name, nums, extra = {}) => {
   // the first row is the trunk; the others are branches that end as dest nodes. Each row gets the height its stacked columns need
   let cursor = 0;
   const out = [];
@@ -1255,7 +1256,7 @@ const cluster = (name, nums) => {
     for (const nd of ns) out.push(ends.includes(nd) && nd !== sink ? { ...nd, kind: 'dest', end: nd.end || ENDS[num] } : nd);
     cursor += hi - lo + 2.5;
   });
-  return { name, nodes: out };
+  return { name, ...extra, nodes: out };
 };
 const tall = (nums) => [...nums].sort((a, b) => ROWS[b].length - ROWS[a].length);
 
@@ -1265,10 +1266,10 @@ export default {
   title: 'MAX+ Lines',
   subtitle: 'The horizon qubit stage, the gate tree, the Kerr strand, bound matter, 30 Doradus, the primordial fuels, the relay and the components',
   icon: 'gtceu:hyper_assembly_array',
-  focus: 'x1_0',
+  focus: 'x1_1',
   bands: [['x1', 'x4', 'x7'], ['x3', 'x5'], ['x6', 'x8'], ['a1', 'a2', 'a3'], ['x2']],
   clusters: {
-    x1: cluster('X1: the horizon processor', ['X1', 'Q1', 'Q2']),
+    x1: cluster('X1: the horizon processor', ['X1', 'Q1', 'Q2'], { line: 'si28' }),
     x2: cluster('X2: the Hyperstargate tree', ['X2', 'P12', 'P19', 'P24', 'T2', 'T1', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T12', 'T13', 'T14', 'T15', 'T16', 'T17', 'K1', 'K2', 'K3', 'K4', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19']),
     x3: cluster('X3: the Kerr strand and the tether', ['X3', 'X3B', 'C1', 'C6', 'P18']),
     x4: cluster('X4: horizon-bound matter', ['P1', 'P2', 'P5']),

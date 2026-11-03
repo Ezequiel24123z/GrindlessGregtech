@@ -283,7 +283,7 @@ const o1 = cluster('O1 Si-28 qubit line', [
   ['o1_hall', 'o1nr_0'],
   ['o1_hall', 'o1l_8'],
   ['o1_hall', 'o1h_6'],
-], [], { line: 'si28', extends: 'pl_uxv:stars' });
+], [], { line: 'si28', extends: 'pl_uxv:X4' });
 
 // O2: the antiproton complex. The spallation station merged into the decelerator: its rows are the four cooling and capture
 // steps (spallation, stochastic cooling, electron cooling, ELENA), then the three antihydrogen foundry rows.
