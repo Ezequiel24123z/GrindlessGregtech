@@ -143,7 +143,7 @@ export function checkBook(book, cfg, options = {}) {
 
   // New classes (AF-A2): their level comes from lint-config.json classLevels ('error' | 'warn' | 'info', default 'info' = listed in
   // the export, never counted), or 'warn' for all of them with options.newClasses (lint.mjs --new-classes) to list what they find.
-  const classLevel = (rule) => (options.newClasses ? 'warn' : ((cfg.classLevels || {})[rule] || 'info'));
+  const classLevel = (rule, ch) => (options.newClasses ? 'warn' : ((cfg.classLevels || {})[ch ? `${rule}:${ch.filename}` : rule] || (cfg.classLevels || {})[rule] || 'info'));
   const cr = cfg.creativeRewards || {};
   const creativeRe = new RegExp((cr.patterns || ['creative', 'debug', 'command_block', 'structure_block', 'jigsaw', 'barrier']).join('|'), 'i');
   const creativeOkChapters = new Set(cr.allowChapters || []);
@@ -355,7 +355,7 @@ export function checkBook(book, cfg, options = {}) {
         if (r.type === 'item' && n > 64) add('warn', 'reward-size', ch, q, `reward of ${n} ${r.itemId}`);
       }
       if (q.tasks.length === 0) add('error', 'no-task', ch, q, 'quest without tasks');
-      if (lines.length === 0 && !infoOnly) add(classLevel('empty-description'), 'empty-description', ch, q, 'the description is empty: say what the quest is for');
+      if (lines.length === 0 && !infoOnly) add(classLevel('empty-description', ch), 'empty-description', ch, q, 'the description is empty: say what the quest is for');
       checkRewardsAndTasks(ch, q);
     }
     const seenTitles = new Map();

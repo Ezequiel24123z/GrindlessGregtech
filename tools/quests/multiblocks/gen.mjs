@@ -16,7 +16,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { CHAPTER, gateTiers, ERA_FOLDERS, TIERS, OVERRIDES, OURS_UNDETECTED } from './mb-data.mjs';
-import { layoutBands, chapterSnbt, tierName, hid } from './mb-lib.mjs';
+import { layoutBands, chapterSnbt, tierName, hid, describeAll, tooltipsFromLang } from './mb-lib.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(here, '..', '..', '..');
@@ -249,6 +249,12 @@ async function main() {
   const reach = await reachTiers(dumpDir, candidates, tiers);
   const nominal = nominalTiers(read('recipes.json').recipes, candidates);
   const { controllers, excluded, mismatches, shifted } = classify({ machines, items, hidden, ours, reach, nominal, implemented });
+  const recipeList = read('recipes.json').recipes.map((r) => (typeof r === 'string' ? JSON.parse(r) : r));
+  const descs = describeAll({
+    controllers, machines, recipeTypes: read('machines.json').recipeTypes, recipes: recipeList,
+    structures: read('structures.json').structures, tooltips: tooltipsFromLang([...langByFolder.values()].join('\n')),
+  });
+  for (const c of controllers) c.desc = descs.get(c.id);
   const bands = layoutBands(controllers);
   const out = chapterSnbt(bands);
 
