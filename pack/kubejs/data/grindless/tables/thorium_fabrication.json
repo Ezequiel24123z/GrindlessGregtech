@@ -1,7 +1,7 @@
 {
   "_source": "UV-A1 (docs/eras/uv.md, 'A1. Thorium' and 'Older machines, new modes'): the three thorium rows of IV's fuel fabrication plant. Real processes: ThO2 fuel for light-water and accelerator-driven cores (Shippingport, MYRRHA studies), carbothermal nitridation of an actinide oxide (ThO2 + 2 C + N2 -> ThN + 2 CO, as for uranium nitride fuel), and the U-233 rod of the thorium cycle.",
   "_how_it_is_used": [
-    "Read by server_scripts/grindless/iv/uranium_cycle.js after the steps of uranium_cycle.json; the same format (itemsIn, fluidsIn, fluidsKept, itemsOut) plus fluidsOut (the plant's type holds one). Circuits 4-6: 1-3 are IV's.",
+    "Read by server_scripts/grindless/iv/uranium_cycle.js after the steps of uranium_cycle.json; the same format (itemsIn, fluidsIn, fluidsKept, itemsOut) plus fluidsOut (the plant's type holds one). Circuits 4-6 and 13-18: 1-3 are IV's, 7-12 other fronts'. The thorium rows chain thoria (tables/thorium_refining.json) -> nitride -> pellets -> pins (15-15Ti tube + helium) -> assemblies (2 pins + 2 stainless plates; 8 thorium per assembly).",
     "energy: plain stages, no 'from' (they are design figures, not GTM recipes): each is one IV assembler stage (1,536,000 EU, as the LEU assembly) or a multiple of it, spent at the plant's maxEUt like every row of uranium_cycle.json."
   ],
   "fabrication": [
@@ -9,39 +9,142 @@
       "name": "thorium_oxide_assembly",
       "circuit": 4,
       "itemsIn": [
-        { "id": "gtceu:thorium_dust", "count": 8 }
+        { "id": "grindless:thoria_fuel_pin", "count": 2 },
+        { "id": "gtceu:stainless_steel_plate", "count": 2 }
       ],
-      "fluidsIn": [
-        { "id": "gtceu:oxygen", "amount": 4000 }
-      ],
+      "fluidsIn": [],
       "fluidsKept": [],
       "fluidsOut": [],
       "itemsOut": [
         { "id": "grindless:thorium_oxide_fuel_assembly", "count": 1 }
       ],
       "energy": [
-        { "stage": "burning the metal to ThO2, pressing and sintering the pellets and loading the assembly: two IV assembler stages", "eu": 1536000, "times": 2 }
+        { "stage": "bundling two pins with their grids and closing the assembly: one IV assembler stage", "eu": 1536000, "times": 1 }
       ]
     },
     {
       "name": "thorium_nitride_assembly",
       "circuit": 5,
       "itemsIn": [
-        { "id": "gtceu:thorium_dust", "count": 8 },
+        { "id": "grindless:thorium_nitride_fuel_pin", "count": 2 },
+        { "id": "gtceu:stainless_steel_plate", "count": 2 }
+      ],
+      "fluidsIn": [],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:thorium_nitride_fuel_assembly", "count": 1 }
+      ],
+      "energy": [
+        { "stage": "bundling two pins with their grids and closing the assembly: one IV assembler stage", "eu": 1536000, "times": 1 }
+      ]
+    },
+    {
+      "name": "thorium_nitridation",
+      "circuit": 13,
+      "itemsIn": [
+        { "id": "gtceu:thoria_dust", "count": 2 },
         { "id": "gtceu:carbon_dust", "count": 4 }
       ],
       "fluidsIn": [
-        { "id": "gtceu:nitrogen_15", "amount": 2000 }
+        { "id": "gtceu:nitrogen_15", "amount": 500 }
       ],
       "fluidsKept": [],
       "fluidsOut": [
         { "id": "gtceu:carbon_monoxide", "amount": 4000 }
       ],
       "itemsOut": [
-        { "id": "grindless:thorium_nitride_fuel_assembly", "count": 1 }
+        { "id": "gtceu:thorium_nitride_dust", "count": 2 }
       ],
       "energy": [
-        { "stage": "carbothermal nitridation in the furnace and loading the assembly: three IV assembler stages", "eu": 1536000, "times": 3 }
+        { "stage": "carbothermal nitridation of the thoria under 15N (ThO2 + 2 C + 1/2 N2 -> ThN + 2 CO): three IV assembler stages", "eu": 1536000, "times": 3 }
+      ]
+    },
+    {
+      "name": "thorium_nitride_pellet",
+      "circuit": 14,
+      "itemsIn": [
+        { "id": "gtceu:thorium_nitride_dust", "count": 8 }
+      ],
+      "fluidsIn": [],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:thorium_nitride_pellet", "count": 8 }
+      ],
+      "energy": [
+        { "stage": "pressing and sintering the nitride pellets: two IV assembler stages", "eu": 1536000, "times": 2 }
+      ]
+    },
+    {
+      "name": "thoria_pellet",
+      "circuit": 15,
+      "itemsIn": [
+        { "id": "gtceu:thoria_dust", "count": 8 }
+      ],
+      "fluidsIn": [],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:thoria_pellet", "count": 8 }
+      ],
+      "energy": [
+        { "stage": "pressing and sintering the thoria pellets: two IV assembler stages", "eu": 1536000, "times": 2 }
+      ]
+    },
+    {
+      "name": "thorium_nitride_pin",
+      "circuit": 16,
+      "itemsIn": [
+        { "id": "grindless:thorium_nitride_pellet", "count": 4 },
+        { "id": "grindless:cladding_tube_15_15ti", "count": 1 }
+      ],
+      "fluidsIn": [
+        { "id": "gtceu:helium", "amount": 1000 }
+      ],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:thorium_nitride_fuel_pin", "count": 1 }
+      ],
+      "energy": [
+        { "stage": "stacking the pellets, helium-filling the tube and welding the end plugs: one IV assembler stage", "eu": 1536000, "times": 1 }
+      ]
+    },
+    {
+      "name": "thoria_pin",
+      "circuit": 17,
+      "itemsIn": [
+        { "id": "grindless:thoria_pellet", "count": 4 },
+        { "id": "grindless:cladding_tube_15_15ti", "count": 1 }
+      ],
+      "fluidsIn": [
+        { "id": "gtceu:helium", "amount": 1000 }
+      ],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:thoria_fuel_pin", "count": 1 }
+      ],
+      "energy": [
+        { "stage": "stacking the pellets, helium-filling the tube and welding the end plugs: one IV assembler stage", "eu": 1536000, "times": 1 }
+      ]
+    },
+    {
+      "name": "cladding_tube_15_15ti",
+      "circuit": 18,
+      "itemsIn": [
+        { "id": "gtceu:stainless_steel_ingot", "count": 1 },
+        { "id": "gtceu:titanium_dust", "count": 1 }
+      ],
+      "fluidsIn": [],
+      "fluidsKept": [],
+      "fluidsOut": [],
+      "itemsOut": [
+        { "id": "grindless:cladding_tube_15_15ti", "count": 2 }
+      ],
+      "energy": [
+        { "stage": "alloying the titanium-stabilised 15Cr-15Ni steel and drawing it to tube: half an IV assembler stage", "eu": 768000, "times": 1 }
       ]
     },
     {
