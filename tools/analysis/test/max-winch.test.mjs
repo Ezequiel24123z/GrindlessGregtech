@@ -98,7 +98,7 @@ test('the shape, textures and EMI page exist', () => {
   const s = read(kube, 'startup_scripts', 'grindless', 'max', 'winch.js');
   assert.match(s, /geroch_winch/);
   assert.match(s, /geroch_power/);
-  assert.match(s, /height: 33/);
+  assert.match(s, /height: 45/);
   assert.match(s, /generators\.configure/);
   const dir = path.join(kube, 'assets', 'grindless', 'textures', 'block', 'multiblock', 'geroch_winch');
   for (const f of ['overlay_front.png', 'overlay_front_active.png', 'overlay_front_active_emissive.png']) assert.ok(fs.existsSync(path.join(dir, f)), f);

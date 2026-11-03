@@ -1,9 +1,9 @@
-// priority: -5459
+// priority: -5448
 // -----------------------------------------------------------------------------------------------
 // MAX's membrane line (docs/eras/max.md, machine 3, lines L2, L3 and L11; package MAX-B1): the multiblock and its recipe type. The
 // recipes come from data/grindless/tables/membrane_line.json (server_scripts/grindless/max/membrane_line.js).
 //
-//   gtceu:membrane_line   21 x 5 x 5 roller line (grindless:membrane_roller_casing, MAX-F1), a CVD zone in the middle and a cold zone at
+//   gtceu:membrane_line   9 x 9 x 45 roll-to-roll hall: truss ladder frame, glass panels, roller stations (grindless:membrane_roller_casing, MAX-F1), a CVD zone in the middle and a cold zone at
 //                         the front, MAX. Recipe type gtceu:membrane_rolling (circuit 1 superconducting membrane, 2 albedo multilayer
 //                         panel, 3 membrane belt). Two OpV 4 A energy hatches give VA[MAX]. The steps before each last step are rows of
 //                         older machines, in their own files (see the server script).
@@ -37,35 +37,14 @@
     {
       name: 'membrane_line', machine: 'gtceu:membrane_line', type: 'membrane_rolling', dataKey: 'grindless_membrane_rolling',
       lang: 'Membrane Line', maxIO: { itemsIn: 6, itemsOut: 3, fluidsIn: 2, fluidsOut: 0 }, casing: CASING, texture: CASING_TEXTURE,
-      width: 5, height: 5, depth: 21,
-      pal: { F: CASING, L: 'gtceu:laminated_glass', C: 'gtceu:cupronickel_coil_block', P: 'gtceu:tungstensteel_pipe_casing', Q: 'stainless_steel' },
+      width: 9, height: 9, depth: 45,
       parts: parts
     }
   ]
 
-  // x left to right, y bottom to top, z back (0) to front (20). The web runs through the middle of the bay at y 2: a roller pair (y 1 and
-  // y 3) on every second slice, coil blocks either side of it in the CVD zone (z 7-13) and pipe casings in the cold zone (z 15-19); the
-  // side walls are casing with glass windows and a frame post every fourth slice, the end walls and the roof casing, the floor casing
-  // or part cells.
-  function lineCell(x, y, z) {
-    var side = x === 0 || x === 4
-    if (y === 0) return 'X'
-    if (y === 4) return x % 2 === 0 || z % 4 === 0 ? 'Q' : 'F'
-    if (z === 0 || z === 20) return 'F'
-    if (side) {
-      if (z % 4 === 0) return 'Q'
-      return y === 2 && z % 2 === 1 ? 'L' : 'F'
-    }
-    if (x === 2 && y === 2) return '#'
-    if (x === 2 && z % 2 === 0) return 'F'
-    if (y === 2 && z >= 7 && z <= 13) return 'C'
-    if (y === 2 && z >= 15 && z <= 19) return 'P'
-    return '#'
-  }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: max/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: lineCell })
+    return G.maxShapes.build(Pat, m.name, m.casing, m.parts())
   }
 
   // one EMI line per recipe, read from its data

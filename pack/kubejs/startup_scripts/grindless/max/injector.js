@@ -3,8 +3,8 @@
 // MAX's mass stream injector (docs/eras/max.md, machine 7 and line L14; package MAX-D4): the multiblock and its recipe type. No item of its
 // own: every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/injector.js.
 //
-//   gtceu:mass_stream_injector   15 x 7 x 15 of stream turn casing on two OpV 4 A hatches: a bore of superconducting coils along the middle
-//                                with turn rings of atomic casing around it. Recipe type gtceu:mass_stream_injection: circuit 1 packs stream
+//   gtceu:mass_stream_injector   21 x 9 x 21 truss and clamp-coil injector ring with eight stream turn magnets and a beam line, on two OpV 4 A hatches.
+//                                Recipe type gtceu:mass_stream_injection: circuit 1 packs stream
 //                                pellets into a stream bundle (the spent pellets come out), circuit 2 re-casts the spent pellets (7 in 8
 //                                come back). Both recipes run only at Sgr A* (gcyr:black_hole_orbit).
 //
@@ -24,8 +24,7 @@
     {
       name: 'mass_stream_injector', machine: 'gtceu:mass_stream_injector', type: 'mass_stream_injection', dataKey: 'grindless_mass_stream_injection',
       lang: 'Mass Stream Injector', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 }, casing: CASING, texture: CASING_TEXTURE,
-      width: 15, height: 7, depth: 15,
-      pal: { F: CASING, B: 'gtceu:robust_machine_casing', L: 'gtceu:cleanroom_glass', A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil' },
+      width: 21, height: 9, depth: 21,
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -39,27 +38,9 @@
     }
   ]
 
-  // x left to right, y bottom to top, z back to front. Row 0 the floor (hatches front and back), row 6 the roof, rows 1-5 the casing wall, a coil
-  // bore along the middle at row 3 and a turn ring of atomic casing around the bore every fourth slice.
-  function injectorCell(x, y, z) {
-    var dx = x - 7
-    var wall = x === 0 || x === 14 || z === 0 || z === 14
-    if (y === 0) return (z === 0 || z === 14) && x >= 6 && x <= 8 ? 'X' : 'B'
-    if (y === 6) return 'F'
-    if (wall) {
-      var along = x === 0 || x === 14 ? z : x
-      return y >= 2 && y <= 4 && along >= 3 && along <= 11 && along % 4 !== 2 ? 'L' : 'F'
-    }
-    if (y === 3 && dx === 0) return 'C'
-    if (z % 4 === 2 && ((y === 2 || y === 4) && Math.abs(dx) <= 1 || y === 3 && Math.abs(dx) === 1)) return 'A'
-    return '#'
-  }
-
-  var CELLS = { mass_stream_injector: injectorCell }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: max/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.maxShapes.build(Pat, m.name, m.casing, m.parts())
   }
 
   // one EMI line per recipe, read from its data

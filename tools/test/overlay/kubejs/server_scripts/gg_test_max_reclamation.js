@@ -183,7 +183,7 @@
       u.energy = partsLike(m, /opv_energy_input_hatch_4a/)
       u.bus = partsLike(m, /input_bus/)[0]
       u.outBus = partsLike(m, /output_bus/)[0]
-      var ok = !!u.bus && !!u.outBus && u.energy.length === 2 && u.height === 9
+      var ok = !!u.bus && !!u.outBus && u.energy.length === 2 && u.height === 11
       check('formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', OpV 4 A hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
       topUp(u.energy)

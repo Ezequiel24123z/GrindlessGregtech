@@ -1,9 +1,9 @@
-// priority: -5519
+// priority: -5518
 // -----------------------------------------------------------------------------------------------
 // MAX's Geroch winch (docs/eras/max.md, machine 6; package MAX-D3): the multiblock and its generator recipe type. No item of its own: the
 // canister, the tether and the worn segment are F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/winch.js.
 //
-//   gtceu:geroch_winch   9 x 33 x 9 tower of geroch drum casing over a tether well, a GENERATOR (G.generators.configure) on one or two OpV
+//   gtceu:geroch_winch   13 x 45 x 13 truss tower with a clamp-coil tether well, radiator louvres, Geroch drum on top, a GENERATOR (G.generators.configure) on one or two OpV
 //                        dynamo hatches. Recipe type gtceu:geroch_power: circuit 1 lowers a canister (2^30 EU/t out, 2,400 t, the horizon tether worn 1/128 in and a spent
 //                        segment 1/128 out), a worn segment is rebuilt into the tether in an assembler (a generator cannot run a consumer row).
 //
@@ -22,8 +22,7 @@
     {
       name: 'geroch_winch', machine: 'gtceu:geroch_winch', type: 'geroch_power', dataKey: 'grindless_geroch_power',
       lang: 'Geroch Winch', maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }, casing: DRUM, texture: DRUM_TEXTURE,
-      width: 9, height: 33, depth: 9,
-      pal: { F: DRUM, A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil', L: 'gtceu:cleanroom_glass' },
+      width: 13, height: 45, depth: 13,
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -34,30 +33,9 @@
     }
   ]
 
-  // x left to right, y bottom to top, z back to front. Row 0 the floor (hatches at the front), a hollow shaft for the tether in the middle,
-  // accent bands every eighth row, a coil collar every sixteenth, a glass window in each wall between the bands, row 32 the roof.
-  function winchCell(x, y, z) {
-    var edgeX = x === 0 || x === 8
-    var edgeZ = z === 0 || z === 8
-    if (y === 0) return z === 8 && x >= 3 && x <= 5 ? 'X' : 'F'
-    if (y === 32) return 'F'
-    if (!edgeX && !edgeZ) {
-      if (y % 16 === 0) return 'C'
-      return '#'
-    }
-    if (y % 8 === 0) return 'A'
-    if (edgeX && edgeZ) return y % 4 === 2 ? 'C' : 'F'
-    var i = edgeX ? z : x
-    if (i === 2 || i === 6) return 'A'
-    if (i >= 3 && i <= 5 && y % 8 >= 3 && y % 8 <= 5) return 'L'
-    if (y % 8 === 1 || y % 8 === 7) return 'A'
-    return 'F'
-  }
-
-  var CELLS = { geroch_winch: winchCell }
-
+  // built in the machine registry callback: max/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.maxShapes.build(Pat, m.name, m.casing, m.parts())
   }
 
   function infoOf(dataKey) {

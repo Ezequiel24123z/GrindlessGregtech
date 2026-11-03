@@ -3,7 +3,7 @@
 // MAX's accretion feeder (docs/eras/max.md, machine 10; package MAX-E1): the multiblock and its generator recipe type. The items are F1's
 // (max/foundation.js) and the older lines'. The recipes are in server_scripts/grindless/max/feeder.js.
 //
-//   gtceu:accretion_feeder   15 x 9 x 15 ring of feeder coil casing round an open well, a GENERATOR (G.generators.configure) on one or two
+//   gtceu:accretion_feeder   27 x 9 x 27 feeder coil torus on truss pylons round a glass funnel, radiator fins, a GENERATOR (G.generators.configure) on one or two
 //                            OpV dynamo hatches. Recipe type gtceu:accretion_power: circuit 1 burns a slag pellet (2^30 EU/t out, 2,400 t,
 //                            collector panel and Wolter module worn now and then), a spent collector panel is rebuilt on the solar array fab (c5).
 //
@@ -22,8 +22,7 @@
     {
       name: 'accretion_feeder', machine: 'gtceu:accretion_feeder', type: 'accretion_power', dataKey: 'grindless_accretion_power',
       lang: 'Accretion Feeder', maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }, casing: COIL, texture: COIL_TEXTURE,
-      width: 15, height: 9, depth: 15,
-      pal: { F: COIL, A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil', L: 'gtceu:cleanroom_glass' },
+      width: 27, height: 9, depth: 27,
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
@@ -34,23 +33,9 @@
     }
   ]
 
-  // x left to right, y bottom to top, z back to front. A square ring two blocks thick round an open well: floor and roof of casing, the
-  // outer wall banded with accent casing, the inner face alternating coil blocks (the magnetic ring) and glass (the collector window).
-  function ringCell(x, y, z) {
-    var ex = x < 14 - x ? x : 14 - x
-    var ez = z < 14 - z ? z : 14 - z
-    var e = ex < ez ? ex : ez
-    if (e > 1) return y >= 1 && y <= 7 ? '#' : ' '
-    if (y === 0) return 'X'
-    if (y === 8) return 'F'
-    if (e === 0) return y % 2 === 0 ? 'A' : 'F'
-    return y % 2 === 1 ? 'L' : 'C'
-  }
-
-  var CELLS = { accretion_feeder: ringCell }
-
+  // built in the machine registry callback: max/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.maxShapes.build(Pat, m.name, m.casing, m.parts())
   }
 
   function infoOf(dataKey) {

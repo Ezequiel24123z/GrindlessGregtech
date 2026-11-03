@@ -1,9 +1,9 @@
-// priority: -5469
+// priority: -5458
 // -----------------------------------------------------------------------------------------------
 // MAX's segment reclamation works (docs/eras/max.md, machine 14, lines L52 and L53; package MX-S4): the multiblock and its recipe type. No
 // item of its own: every item it makes or takes is F1's (max/foundation.js). The recipes are in server_scripts/grindless/max/reclamation.js.
 //
-//   gtceu:segment_reclamation_works   15 x 9 x 15 docking bay on two OpV 4 A hatches. Recipe type gtceu:segment_reclamation: circuit 1 opens one
+//   gtceu:segment_reclamation_works   19 x 11 x 23 bay hall with truss gantry crane and four membrane-vacuum strip tanks a side, on two OpV 4 A hatches. Recipe type gtceu:segment_reclamation: circuit 1 opens one
 //                                     ablated mirror-shell segment into its seven part streams (truss, membrane, cryocooler, coupler,
 //                                     Sn-Li dross, electronics, VO2 sheet). It runs at Sgr A* orbit only: nothing else can open the part.
 //
@@ -25,8 +25,7 @@
     {
       name: 'segment_reclamation_works', machine: 'gtceu:segment_reclamation_works', type: 'segment_reclamation', dataKey: 'grindless_segment_reclamation',
       lang: 'Segment Reclamation Works', maxIO: { itemsIn: 2, itemsOut: 7, fluidsIn: 0, fluidsOut: 0 }, casing: BAY_CASING, texture: BAY_TEXTURE,
-      width: 15, height: 9, depth: 15,
-      pal: { F: BAY_CASING, D: 'grindless:field_frozen_casing', L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil', Q: 'stainless_steel' },
+      width: 19, height: 11, depth: 23,
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -38,33 +37,9 @@
     }
   ]
 
-  // x left to right, y bottom to top, z back to front. Row 0 the floor (the hatches along the front), rows 1-7 the bay with a glass strip at
-  // row 4 on the side walls, row 8 the roof. Inside: the cold strip line, a bed of field-frozen casing on the floor and a coil rail under
-  // the roof, from the back wall to the controller's wall.
-  function bayCell(x, y, z) {
-    var edgeX = x === 0 || x === 14
-    var edgeZ = z === 0 || z === 14
-    if (y === 0) {
-      if (z === 14 && x >= 1 && x <= 13) return 'X'
-      return !edgeX && !edgeZ ? 'D' : 'F'
-    }
-    if (y === 8) return !edgeX && !edgeZ && x % 2 === 0 ? 'Q' : 'F'
-    if (!edgeX && !edgeZ) {
-      var onLine = x >= 6 && x <= 8 && z >= 2 && z <= 12
-      if (y === 1 && onLine) return 'D'
-      if (y === 7 && x === 7 && onLine) return 'C'
-      return '#'
-    }
-    if (edgeX && edgeZ) return 'Q'
-    if (y === 4 && edgeX && z >= 3 && z <= 11) return 'L'
-    return 'F'
-  }
-
-  var CELLS = { segment_reclamation_works: bayCell }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: max/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.maxShapes.build(Pat, m.name, m.casing, m.parts())
   }
 
   // one EMI line per recipe, read from its data

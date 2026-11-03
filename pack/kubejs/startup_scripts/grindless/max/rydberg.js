@@ -1,10 +1,10 @@
-// priority: -5479
+// priority: -5468
 // -----------------------------------------------------------------------------------------------
 // MAX's Rydberg array works (docs/eras/max.md, machine 1, lines L19, L23, L29, L40, L43 and L46; package MAX-B3): the multiblock and its
 // recipe type. No item of its own: every item it makes or takes is F1's (max/foundation.js). The recipes are in
 // server_scripts/grindless/max/rydberg.js.
 //
-//   gtceu:rydberg_array_works   9 x 7 x 9 vibration-isolated table on two OpV 4 A hatches. Recipe type gtceu:rydberg_assembly: circuit 1 the
+//   gtceu:rydberg_array_works   15 x 11 x 17 optical lab round a membrane-vacuum cell with Helmholtz coils, on two OpV 4 A hatches. Recipe type gtceu:rydberg_assembly: circuit 1 the
 //                               Rydberg logic array (tweezer die, Rb-87 cartridge, laser die, squeezed-light chip, memory node, locked
 //                               microcomb, UV fibre harness and crossed AOD pair in a superfluid He-3 bath; the spent cartridge comes back
 //                               as getter scrap), circuit 2 refurbishes a spent array with a new cartridge.
@@ -26,8 +26,7 @@
     {
       name: 'rydberg_array_works', machine: 'gtceu:rydberg_array_works', type: 'rydberg_assembly', dataKey: 'grindless_rydberg_assembly',
       lang: 'Rydberg Array Works', maxIO: { itemsIn: 9, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 }, casing: TABLE_CASING, texture: TABLE_TEXTURE,
-      width: 9, height: 7, depth: 9,
-      pal: { F: TABLE_CASING, A: 'gtceu:atomic_casing', C: 'gtceu:superconducting_coil', L: 'gtceu:cleanroom_glass' },
+      width: 15, height: 11, depth: 17,
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 2 }),
@@ -40,31 +39,9 @@
     }
   ]
 
-  // x left to right, y bottom to top, z back to front. Row 0 the optical table (hatches front and back), row 1 a casing plinth around the
-  // chamber, rows 2-4 the atomic-casing vacuum chamber (a glass window in the middle of each wall) with a coil ring inside, row 5 a collar,
-  // row 6 the roof.
-  function arrayCell(x, y, z) {
-    var edgeX = x === 0 || x === 8
-    var edgeZ = z === 0 || z === 8
-    if (y === 0) return (z === 8 || z === 0) && x >= 3 && x <= 5 ? 'X' : 'F'
-    if (y === 6) return 'F'
-    if (!edgeX && !edgeZ) {
-      var inner = x === 1 || x === 7 || z === 1 || z === 7
-      if (y >= 2 && y <= 4 && inner && y === 3) return 'C'
-      return '#'
-    }
-    if (y === 1 || y === 5) return 'F'
-    if (edgeX && edgeZ) return 'F'
-    var mid = (edgeX && z === 4) || (edgeZ && x === 4)
-    if (y === 3 && mid) return 'L'
-    return 'A'
-  }
-
-  var CELLS = { rydberg_array_works: arrayCell }
-
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: max/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: CELLS[m.name] })
+    return G.maxShapes.build(Pat, m.name, m.casing, m.parts())
   }
 
   // one EMI line per recipe, read from its data

@@ -16,7 +16,7 @@
   var X0 = 39960
   var X1 = 40023
   var Y0 = 98
-  var Y1 = 135
+  var Y1 = 143
   var NAME = 'max_winch'
   var DIM = 'gcyr:black_hole_orbit'
   var CX = 39992
@@ -183,7 +183,7 @@ var PARTS = [DYNAMO, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus']
       u.energy = partsLike(m, /energy_output_hatch|dynamo_hatch/)
       u.bus = partsLike(m, /input_bus/)[0]
       u.outBus = partsLike(m, /output_bus/)[0]
-      var ok = !!u.bus && !!u.outBus && u.energy.length === 1 && u.height === 33
+      var ok = !!u.bus && !!u.outBus && u.energy.length === 1 && u.height === 45
       check('formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', dynamo hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
       if (!ok) { u.phase = 'done'; return }
       drain(u.energy)
