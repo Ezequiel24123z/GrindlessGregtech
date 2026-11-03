@@ -48,14 +48,14 @@ test('registration: two recipe types, two machines, nine items, four fluids and 
   }
 });
 
-test('patterns: tower 5 x 15 x 5, reactor 7 x 7 x 7 with an inert gas cabinet, one controller, GTM part limits', () => {
-  for (const [id, depth, height, width] of [['gtceu:fibre_draw_tower', 5, 15, 5], ['gtceu:mocvd_reactor', 7, 7, 7]]) {
+test('patterns: tower hall 19 x 15 x 7, reactor 13 x 6 x 9 with an inert gas cabinet, one controller, GTM part limits', () => {
+  for (const [id, depth, height, width] of [['gtceu:fibre_draw_tower', 7, 15, 19], ['gtceu:mocvd_reactor', 9, 6, 13]]) {
     const s = run.docs.structures.structures[id];
     assert.ok(s, id + ' described');
     assert.equal(s.slices.length, depth, id);
     assert.ok(s.slices.every((sl) => sl.length === height && sl.every((r) => r.length === width)), id + ' uniform slices');
     assert.equal(s.slices.flat().join('').split('').filter((c) => c === 'S').length, 1, id + ' one controller');
-    for (const sl of s.slices) for (const r of sl) for (const c of r) assert.ok(s.symbols[c], `${id} symbol ${c}`);
+    for (const sl of s.slices) for (const r of sl) for (const c of r)     assert.ok(c === ' ' || s.symbols[c], `${id} symbol ${c}`);
     const lim = Object.fromEntries(s.symbols.X.options.filter((o) => o.kind === 'part').map((o) => [o.ability, o.limits]));
     for (const a of ['energy_input', 'input_bus', 'input_hatch', 'output_bus', 'output_hatch']) assert.deepEqual(lim[a], { min: 1, max: 2 }, `${id} ${a}`);
     assert.ok(s.symbols.X.options.some((o) => o.kind === 'blocks' && o.blocks.includes('gtceu:clean_machine_casing')), id + ' casing');

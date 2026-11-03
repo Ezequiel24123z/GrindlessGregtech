@@ -8,9 +8,10 @@
 //                                an induction plasma torch (naquadah coils round a PTFE gas column) and a spinning bench (tungsten steel
 //                                gearboxes); parts on the back and front floor rows.
 //   gtceu:boron_nitride          its recipe type (EU in); circuit 1 hBN, 2 nanotubes, 3 yarn, 4 hBN from boron-10 trifluoride.
-//   gtceu:powder_in_tube_line    EnTED wire, GTM's UV superconductor, drawn from powder in a silver tube (machine 14). A 3 wide x 5 high x
-//                                15 deep line on the UV casing: powder filler (steel pipe casing), swaging bench (tungsten steel
-//                                gearboxes), drawing bench (assembly line units), heat-treat furnace (trinium coils); parts on the floor.
+//   gtceu:powder_in_tube_line    EnTED wire, GTM's UV superconductor, drawn from powder in a silver tube (machine 14). A 17 wide x 5 high x
+//                                5 deep draw-bench hall on the UV casing: powder filler (steel pipe casing), swaging bench (tungsten steel
+//                                gearboxes), drawing bench (assembly line units between die rings), annealing furnace (trinium coils round a
+//                                heatproof tube), a frame rail for the wire; parts on the floor.
 //   gtceu:powder_in_tube         its recipe type (EU in); circuit 1 powder, 2 billet, 3 draw and heat treat.
 //   gtceu:powder_bed_printer     atomised powder, printed and pressed UV parts (machine 15). 7 x 7 x 7 on the UV casing: an EIGA tower
 //                                (naquadah coils under a PTFE column), a print bed (assembly line grating) and a hot isostatic press
@@ -173,16 +174,79 @@
     if (y === 2 || y === 5) return idx % 2 === 1 ? 'W' : null
     return null
   }
-  // line: a long hall: frame rails along the roof edges, frame posts every fourth cell, glass windows, a pipe run on the roof
-  function lineRule(x, y, z, W, H, D) {
-    if (y === 4) {
-      if (x !== 1) return 'Z'
-      return z % 3 === 0 ? 'P' : null
+  // line: a draw-bench hall 17 x 5 x 5 (about 350 cells), built as voxels: grid[z][y][x], z back -> front, y bottom -> top
+  function vGrid(W, H, D) {
+    var g = []
+    for (var z = 0; z < D; z++) {
+      var layer = []
+      for (var y = 0; y < H; y++) {
+        var row = []
+        for (var x = 0; x < W; x++) row.push(' ')
+        layer.push(row)
+      }
+      g.push(layer)
     }
-    if (y === 1) return null
-    if (z % 4 === 0) return 'Z'
-    if (y === 2) return 'W'
-    return null
+    return g
+  }
+  function vFill(g, x0, y0, z0, x1, y1, z1, ch) {
+    for (var z = z0; z <= z1; z++) for (var y = y0; y <= y1; y++) for (var x = x0; x <= x1; x++) g[z][y][x] = ch
+  }
+  // The powder-in-tube line, left to right: the powder packing station (steel pipe casing filler and its hopper), the swaging bench
+  // (tungsten steel gearboxes), the draw bench (assembly line units between die rings of tungsten steel pipe casing) and the annealing
+  // furnace (trinium coils round a heatproof tube); a frame rail carries the wire along the roof line, a PTFE argon run crosses the roof.
+  function lineGrid() {
+    var W = 17
+    var H = 5
+    var D = 5
+    var g = vGrid(W, H, D)
+    var x
+    var y
+    var z
+    for (z = 0; z < D; z++) {
+      for (y = 0; y < H; y++) {
+        for (x = 0; x < W; x++) {
+          if (y === 0) g[z][y][x] = 'X'
+          else if (y === H - 1) g[z][y][x] = 'R'
+          else if (x === 0 || x === W - 1 || z === 0 || z === D - 1) g[z][y][x] = 'R'
+          else g[z][y][x] = '#'
+        }
+      }
+    }
+    for (x = 0; x < W; x += 4) {
+      vFill(g, x, 1, 0, x, 3, 0, 'Z')
+      vFill(g, x, 1, D - 1, x, 3, D - 1, 'Z')
+    }
+    vFill(g, 0, 4, 0, W - 1, 4, 0, 'Z')
+    vFill(g, 0, 4, D - 1, W - 1, 4, D - 1, 'Z')
+    vFill(g, 1, 2, 0, 3, 2, 0, 'W')
+    vFill(g, 5, 2, 0, 7, 2, 0, 'W')
+    vFill(g, 9, 2, 0, 11, 2, 0, 'W')
+    vFill(g, 13, 2, 0, 15, 2, 0, 'W')
+    vFill(g, 1, 2, D - 1, 3, 2, D - 1, 'W')
+    vFill(g, 5, 2, D - 1, 7, 2, D - 1, 'W')
+    vFill(g, 9, 2, D - 1, 11, 2, D - 1, 'W')
+    vFill(g, 13, 2, D - 1, 15, 2, D - 1, 'W')
+    vFill(g, 1, 4, 2, 15, 4, 2, 'P')
+    vFill(g, 1, 3, 2, 15, 3, 2, 'Z')
+    vFill(g, 1, 1, 2, 3, 1, 2, 'F')
+    vFill(g, 2, 2, 2, 2, 2, 2, 'P')
+    vFill(g, 4, 1, 1, 6, 1, 1, 'G')
+    vFill(g, 4, 1, 3, 6, 1, 3, 'G')
+    vFill(g, 5, 2, 1, 5, 2, 1, 'G')
+    vFill(g, 5, 2, 3, 5, 2, 3, 'G')
+    vFill(g, 7, 1, 2, 11, 1, 2, 'A')
+    for (x = 8; x <= 10; x += 2) {
+      vFill(g, x, 1, 1, x, 2, 1, 'P')
+      vFill(g, x, 1, 3, x, 2, 3, 'P')
+    }
+    for (x = 12; x <= 15; x++) {
+      vFill(g, x, 1, 1, x, 2, 1, 'K')
+      vFill(g, x, 1, 3, x, 2, 3, 'K')
+      g[2][1][x] = 'H'
+      g[2][2][x] = 'H'
+    }
+    g[D - 1][1][8] = 'S'
+    return g
   }
   // printer: frame posts and roof edges, a heatproof band, glass print windows, a glass skylight
   function printerRule(x, y, z, W, H, D) {
@@ -216,17 +280,8 @@
   }
   M.reactorSpec = REACTOR_SPEC
 
-  // 3 x 5 line: floor parts at both ends and along the sides, one interior column three high (bottom -> top)
-  function line(interior) { return ['XRX', 'R' + interior[0] + 'R', 'R' + interior[1] + 'R', 'R' + interior[2] + 'R', 'RRR'] }
   const LINE_SPEC = {
-    slices: dress([
-      ['XXX', 'RRR', 'RRR', 'RRR', 'RRR'],
-      line(['F', 'F', '#']), line(['F', '#', '#']), line(['#', '#', '#']),
-      line(['G', '#', '#']), line(['G', '#', '#']), line(['#', '#', '#']),
-      line(['A', '#', '#']), line(['A', '#', '#']), line(['A', '#', '#']), line(['#', '#', '#']),
-      line(['K', 'K', '#']), line(['K', 'K', '#']), line(['K', 'K', '#']),
-      ['XXX', 'RSR', 'RRR', 'RRR', 'RRR']
-    ], 'R', lineRule),
+    slices: lineGrid().map(function (layer) { return layer.map(function (row) { return row.join('') }) }),
     symbols: {
       S: Pat.controller(),
       X: cells(false),
@@ -238,6 +293,7 @@
       G: Pat.block(GEARBOX),
       A: Pat.block(BENCH),
       K: Pat.block(FURNACE_COIL),
+      H: Pat.block('gtceu:heatproof_machine_casing'),
       '#': Pat.air()
     }
   }

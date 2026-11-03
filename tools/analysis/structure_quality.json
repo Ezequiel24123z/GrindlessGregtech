@@ -433,9 +433,9 @@
  },
  "gtceu:fibre_draw_tower": {
   "v": [],
-  "bt": 6,
-  "ds": 0.295,
-  "c": 272
+  "bt": 8,
+  "ds": 0.457,
+  "c": 729
  },
  "gtceu:field_frozen_press": {
   "v": [],
@@ -908,8 +908,8 @@
  "gtceu:mocvd_reactor": {
   "v": [],
   "bt": 8,
-  "ds": 0.365,
-  "c": 245
+  "ds": 0.63,
+  "c": 482
  },
  "gtceu:mtj_sputter_cluster": {
   "v": [],
@@ -1213,9 +1213,9 @@
  },
  "gtceu:powder_in_tube_line": {
   "v": [],
-  "bt": 8,
-  "ds": 0.548,
-  "c": 200
+  "bt": 9,
+  "ds": 0.53,
+  "c": 354
  },
  "gtceu:precursor_probe_bay": {
   "v": [],
@@ -1255,9 +1255,9 @@
  },
  "gtceu:pyroprocessing_cell": {
   "v": [],
-  "bt": 5,
-  "ds": 0.35,
-  "c": 255
+  "bt": 8,
+  "ds": 0.437,
+  "c": 779
  },
  "gtceu:quantum_fabricator": {
   "v": [],
@@ -1855,8 +1855,8 @@
  },
  "gtceu:zone_refining_tower": {
   "v": [],
-  "bt": 6,
-  "ds": 0.389,
-  "c": 114
+  "bt": 7,
+  "ds": 0.515,
+  "c": 358
  }
 }
