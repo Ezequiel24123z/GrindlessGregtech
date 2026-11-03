@@ -139,6 +139,59 @@ foreach ($k in $kinds) {
     Out-Tex (Join-Frames $emi) "$($k.Dir)/overlay_front_active_emissive.png" $FrameTime
 }
 
+# ---------------------------------------------------------------- W11 gate ring coil items (D3-GATERING)
+function Out-Map {
+    param([string]$Name, [string[]]$Map, $Pal)
+    $c = New-Canvas
+    Write-Map $c 0 0 $Map $Pal
+    Out-Tex $c "item/$Name.png"
+}
+
+# the cable, lying diagonally: a MgB2 core (W lit, G body, D shade) with copper stabiliser ends (E, H)
+$cableMap = @(
+    '................',
+    '..........KK....',
+    '.........KWGK...',
+    '........KWGGDK..',
+    '.......KWGGGDK..',
+    '......KWGGGDK...',
+    '.....KWGGGDK....',
+    '....KWGGGDK.....',
+    '...KWGGGDK......',
+    '..KWGGGDK.......',
+    '..KGGGDK........',
+    '..KEHEK.........',
+    '..KEEK..........',
+    '...KK...........',
+    '................',
+    '................'
+)
+Out-Map 'mgb2_cable' $cableMap (New-Palette 'K=1C2A38 W=BCD4E8 G=6C90B4 D=3C5878 E=B87333 H=7A4A20')
+
+# the coil seen at an angle, a ring with a hole; each stage has its own body colour
+$coilMap = @(
+    '................',
+    '................',
+    '.....KKKKKK.....',
+    '...KKLLLLLLKK...',
+    '..KLLBBBBBBDDK..',
+    '.KLBBKKKKKKBDDK.',
+    '.KLBKK....KKBDK.',
+    '.KBBK......KBDK.',
+    '.KBBK......KBDK.',
+    '.KLBKK....KKBDK.',
+    '.KLBBKKKKKKBDDK.',
+    '..KBBDDDDDDDDK..',
+    '...KKDDDDDDKK...',
+    '.....KKKKKK.....',
+    '................',
+    '................'
+)
+Out-Map 'gate_coil_winding' $coilMap (New-Palette 'K=3A2A10 L=F0CC70 B=D8A030 D=96681C')
+Out-Map 'reacted_gate_coil' $coilMap (New-Palette 'K=262C34 L=B4BEC8 B=7A8794 D=4A5460')
+Out-Map 'impregnated_gate_coil' $coilMap (New-Palette 'K=3A2412 L=E8C890 B=B88048 D=7C4E24')
+Out-Map 'qualified_gate_coil' $coilMap (New-Palette 'K=14304A L=C4F0FF B=4FA8D8 D=2A6A94')
+
 # ---------------------------------------------------------------- check
 function Test-Pixels {
     param($Png, [string]$Name)
