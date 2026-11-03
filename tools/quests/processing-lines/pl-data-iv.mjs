@@ -88,15 +88,15 @@ export default {
       nodes: [
         n('spent2', 0, 0, I('grindless:spent_fuel_assembly'), 'Spent Fuel', { kind: 'raw', sub: 'From the reactor' }),
         L('hno3', 0, 1.5, 'pl_ev:hno3'),
-        n('hcr', 2, 0.75, M('gtceu:hot_cell'), 'Hot Cell, Reprocessing', {
+        n('hotcell', 2, 0.75, M('gtceu:hot_cell'), 'Hot Cell, Reprocessing', {
           kind: 'ours', from: ['spent2', 'hno3'], sub: 'Circuit 3',
           desc: 'Nitric acid takes the spent fuel apart. The uranium and plutonium come back, the odd noble gas or rare metal turns up, and what\'s left becomes glassy waste that never leaves your storage.',
         }),
-        n('pu', 4, -0.75, I('gtceu:plutonium_dust'), 'Plutonium', { from: ['hcr'] }),
-        n('u238r', 4, 0.5, I('gtceu:uranium_dust'), 'Uranium-238', { from: ['hcr'], end: 'breeder blankets', sub: 'Comes back too' }),
-        n('xe', 4, 1.75, F('gtceu:xenon'), 'Xenon', { kind: 'by', from: ['hcr'], end: 'LuV naquadah', sub: 'Kept for enriched naquadah' }),
-        n('waste2', 4, 2.75, I('gtnn:radioactive_waste'), 'Radioactive Waste', { kind: 'by', from: ['hcr'], end: 'contained', sub: 'Vitrified and kept' }),
-        n('no2', 4, 3.75, F('gtceu:nitrogen_dioxide'), 'Nitrogen Dioxide', { kind: 'by', from: ['hcr'], end: 'nitric acid', sub: 'Nitric acid again' }),
+        n('pu', 4, -0.75, I('gtceu:plutonium_dust'), 'Plutonium', { from: ['hotcell'] }),
+        n('u238r', 4, 0.5, I('gtceu:uranium_dust'), 'Uranium-238', { from: ['hotcell'], end: 'breeder blankets', sub: 'Comes back too' }),
+        n('xe', 4, 1.75, F('gtceu:xenon'), 'Xenon', { kind: 'by', from: ['hotcell'], end: 'LuV naquadah', sub: 'Kept for enriched naquadah' }),
+        n('waste2', 4, 2.75, I('gtnn:radioactive_waste'), 'Radioactive Waste', { kind: 'by', from: ['hotcell'], end: 'contained', sub: 'Vitrified and kept' }),
+        n('no2', 4, 3.75, F('gtceu:nitrogen_dioxide'), 'Nitrogen Dioxide', { kind: 'by', from: ['hotcell'], end: 'nitric acid', sub: 'Nitric acid again' }),
         n('rtgp', 6, -3, I('grindless:rtg_pellet'), 'RTG Pellet', { from: ['pu'], by: ['gtceu:hot_cell'], sub: 'In platinum and rhodium foil' }),
         n('mox', 6, -1.5, I('grindless:mox_fuel_assembly'), 'MOX Assembly', { from: ['pu'], by: ['gtceu:hot_cell'], sub: 'Burns plutonium' }),
         n('breeder', 6, 0, I('grindless:breeder_fuel_assembly'), 'Breeder Assembly', {
@@ -113,7 +113,7 @@ export default {
         L('benz', 0, -0.75, 'pl_hv:benzene'),
         n('cl2p', 0, 0.75, F('gtceu:chlorine'), 'Chlorine', { kind: 'raw' }),
         n('cbz', 2, 0, F('gtceu:chlorobenzene'), 'Chlorobenzene', { from: ['benz', 'cl2p'], by: ['gtceu:large_chemical_reactor'] }),
-        L('hno3p', 2, 1.5, 'pl_ev:hno3'),
+        n('hno3p', 2, 1.5, F('gtceu:nitric_acid'), 'Nitric Acid', { kind: 'raw' }),
         n('ncb', 4, 0.75, F('gtceu:nitrochlorobenzene'), 'Nitrochlorobenzene', { from: ['cbz', 'hno3p'], by: ['gtceu:large_chemical_reactor'], sub: 'Nitrated' }),
         n('h2p', 4, 2.25, F('gtceu:hydrogen'), 'Hydrogen', { kind: 'raw' }),
         n('dcb', 6, 1.5, F('gtceu:dichlorobenzidine'), 'Dichlorobenzidine', { from: ['ncb', 'h2p'], by: ['gtceu:large_chemical_reactor'], sub: 'Copper catalyst' }),
