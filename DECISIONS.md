@@ -1003,3 +1003,10 @@ One line per decision. The most recent one is at the bottom.
   - GTM's highTierContent stays on (TP-S0F, 2026-10-30): GTM registers the UEV to UXV hulls and hatches; fixtures that pinned it off were stale.
   - Integrator (assembly lines, after T2-FIX-LOW #403): the cost curve splits an assembly-line item input scaled past 64 into entries of at most 64, in order, as GTCEu writes its own recipes (the line matches one input bus per entry and an ME input bus slot holds one stack, so the LuV motor's 128 fine ruridit wire never started). 32 inputs in 20 recipes; totals and cost unchanged; the widest recipe stays under the line's 16 buses. Fixtures count a recipe type per era directory, as later eras add rows to shared types.
   - UV: the Starchip Fab works in any dimension (no dimension condition; its clean room is part of its hall); its EMI note said Earth orbit.
+  - Fixtures after the reshape (#399, #401 to #404, #406):
+    - A fixture on a merged controller selects its recipe type explicitly.
+    - Fixtures place shapes from the structure's minimum corner, never a fixed controller cell.
+    - Wireless fixtures assert the strongest-cell tier (WL-1); fixtures that share the wireless network run alone.
+    - A fixture whose run cannot fit the 600 s native budget skips only the waiting with setProgress (opv_bulge_relay: two boots).
+    - The answered S0 spikes on removed test-only machines are retired (UXV machines; OpV machines, pasta and relay 1 and 2).
+  - Bench: a run holds its checkout's in-use lock, so another run's cleanup never deletes a checkout in use (more distinct SHAs at once than GG_WORKSPACE_KEEP had cost runs their summary).
