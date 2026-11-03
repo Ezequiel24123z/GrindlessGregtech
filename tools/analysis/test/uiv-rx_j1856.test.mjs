@@ -1,4 +1,4 @@
-// UIV-B2 (docs/eras/uiv.md, machines 13-17; lines 30-33; "B2. RX J1856"): the crust lift, the neutron drip separator, the neutronium cage, the r-process
+// UIV-B2 (docs/eras/uiv.md, machines 13-17; lines 30-33; "B2. RX J1856"): the crust lift, the Neutron Drip Works (separator merged in), the neutronium cage, the r-process
 // decompressor and the decay heat vault, plus the older rows the package appends. Static checks only.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -195,7 +195,7 @@ test('lang: every item, fluid, machine and type named in en_us, every row has it
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'item', `${n}.png`)), `texture for ${n}`);
   }
   for (const n of fluidIds) assert.ok(lang.includes(`['${n}', `), `fluid name ${n}`);
-  for (const m of ['crust_lift', 'neutron_drip_separator', 'neutronium_cage', 'r_process_decompressor', 'decay_heat_vault']) {
+  for (const m of ['crust_lift', 'neutronium_cage', 'r_process_decompressor', 'decay_heat_vault']) {
     assert.ok(lang.includes(`block.gtceu.${m}'`), m);
     for (let i = 0; i < 1; i++) assert.ok(lang.includes(`grindless.machine.${m}.tooltip.${i}'`), `${m} tooltip ${i}`);
     assert.ok(fs.existsSync(path.join(kube, 'assets', 'grindless', 'textures', 'block', 'multiblock', m, 'overlay_front_active.png')), m);
@@ -207,7 +207,7 @@ test('lang: every item, fluid, machine and type named in en_us, every row has it
   }
   // en_us: the loop writes the column; every entry has its text
   const entries = [...lang.matchAll(/^\s{8}\['([^']+)',\s*(?:\n\s*)?'/gm)];
-  assert.ok(entries.length > 60);
+  assert.ok(entries.length > 55);
   assert.match(lang, /ClientEvents\.lang\('en_us'/);
   const tex = fs.readFileSync(path.join(root, 'tools', 'assets', 'Build-UIVRx_j1856Textures.ps1'), 'utf8');
   for (const n of itemNames) assert.ok(tex.includes(`'${n}'`), `drawn: ${n}`);
@@ -224,7 +224,7 @@ test('controllers read the UIV hull, 2 UIV parts and 2 optical mainframes', () =
   assert.match(server, /b\.itemInputs\('4x #gtceu:circuits\/uiv'\)/);
   assert.match(server, /inputFluids\(Fluid\.of\('gtceu:soldering_alloy', 2304\), Fluid\.of\('gtceu:lubricant', 2000\), Fluid\.of\('gtceu:neutronium', 576\)\)/);
   assert.match(server, /stationResearch/);
-  for (const m of ['crust_lift\', parts: [\'gtceu:uiv_electric_piston\', \'gtceu:uiv_electric_motor\'', 'neutron_drip_separator\', parts: [\'gtceu:uiv_electric_pump\', \'gtceu:uiv_fluid_regulator\', \'gtceu:uiv_conveyor_module\'',
+  for (const m of ['crust_lift\', parts: [\'gtceu:uiv_electric_piston\', \'gtceu:uiv_electric_motor\'',
     'neutronium_cage\', parts: [\'gtceu:uiv_robot_arm\', \'gtceu:uiv_electric_motor\', \'gtceu:uiv_electric_piston\'', 'r_process_decompressor\', parts: [\'gtceu:uiv_conveyor_module\', \'gtceu:uiv_electric_piston\'', 'decay_heat_vault\', parts: [\'gtceu:uiv_electric_motor\', \'gtceu:uiv_electric_pump\'']) {
     assert.ok(server.includes('name: \'' + m), m);
   }

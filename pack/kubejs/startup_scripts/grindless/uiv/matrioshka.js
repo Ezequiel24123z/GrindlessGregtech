@@ -4,13 +4,13 @@
 // the machines, their recipe types, the five structure blocks and the package's own items. The recipes come from
 // data/grindless/tables/matrioshka.json (server_scripts/grindless/uiv/matrioshka.js).
 //
-//   gtceu:matrioshka_computer     11 x 9 x 11 in UIV casing with rings of the four structure blocks (logic tile, node, emitter shell, TPV
+//   gtceu:matrioshka_computer     29 x 29 x 29 in RHEA casing: four nested lattice spheres of the structure blocks (logic tile, node, emitter shell, TPV
 //                                 shell) and the radiator module, UIV (31,457,280 EU/t). Recipe type gtceu:matrioshka_computing (circuit 1
 //                                 research write, 2 neutron-star EOS chart, 3 Kerr chart). Works only at gcyr:mercury_orbit.
 //   gtceu:droplet_radiator_works  9 x 5 x 13 in UIV casing, one wall open to vacuum, UIV. Recipe type gtceu:droplet_radiator_assembly
 //                                 (circuit 1 droplet radiator module, 2 TPV tile). Works only at gcyr:mercury_orbit.
 //
-// The contract's 15 x 15 x 11 for the computer is tuned down to 11 x 9 x 11 (the figures are marked tune).
+// The computer's silhouette is uiv/shapes_halls.js (D4-SHAPE-UIV-B): no metallic hydrogen or site casing, it makes the rad-hard controller they need.
 // New ids: the items and blocks below (grindless:) and the gas gtceu:stibine. Textures: tools/assets/Build-UIVMatrioshkaTextures.ps1.
 // Names: client_scripts/grindless/uiv_matrioshka_lang.js. Published for the recipe script: global.grindless.matrioshka.
 (function () {
@@ -19,8 +19,8 @@
   const MA = G.matrioshka || (G.matrioshka = {})
   const LOG = '[grindless/uiv] '
 
-  const CASING = 'gtceu:uiv_machine_casing'
-  const CASING_TEXTURE = 'gtceu:block/casings/voltage/uiv/side'
+  const CASING = 'grindless:rhea_casing'
+  const CASING_TEXTURE = 'grindless:block/uiv/rhea_casing'
 const RHEA = 'grindless:rhea_casing'
 const RHEA_TEXTURE = 'grindless:block/uiv/rhea_casing'
 
@@ -77,7 +77,7 @@ const RHEA_TEXTURE = 'grindless:block/uiv/rhea_casing'
       name: 'matrioshka_computer', machine: 'gtceu:matrioshka_computer', type: 'matrioshka_computing', dataKey: 'grindless_matrioshka_computing',
       lang: 'Matrioshka Computer',
       maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },
-      width: 11, height: 9, depth: 11, casing: CASING, texture: CASING_TEXTURE, vacuum: false,
+      width: 29, height: 29, depth: 29, casing: CASING, texture: CASING_TEXTURE, vacuum: false,
       rings: ['grindless:matrioshka_logic_tile', 'grindless:matrioshka_node', 'grindless:matrioshka_emitter_shell', 'grindless:matrioshka_tpv_shell',
         'grindless:droplet_radiator_module']
     },

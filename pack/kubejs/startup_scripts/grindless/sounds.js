@@ -156,7 +156,7 @@
     'gtceu:ramp_compression': 'loop_ramp_compression_press',
     'gtceu:proton_polarisation': 'loop_polarised_proton_source',
     'gtceu:crust_lifting': 'loop_crust_lift',
-    'gtceu:neutron_drip_separation': 'loop_neutron_drip_separator',
+    'gtceu:neutron_drip_separation': 'loop_neutronium_cage',
     'gtceu:neutronium_caging': 'loop_neutronium_cage',
     'gtceu:r_process_decompression': 'loop_r_process_decompressor',
     'gtceu:decay_heat': 'loop_decay_heat_vault',

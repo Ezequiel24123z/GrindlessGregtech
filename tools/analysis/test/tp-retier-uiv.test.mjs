@@ -9,7 +9,7 @@ const facts = factsFromPack();
 const cfg = loadConfig();
 const uiv = (r) => /\/server_scripts\/grindless\/uiv\//.test(String(r.file).replace(/\\/g, '/'));
 const CONTROLLERS = [
-  'crust_lift', 'decay_heat_vault', 'droplet_radiator_works', 'ergosphere_probe_bay', 'matrioshka_computer', 'neutron_drip_separator',
+  'crust_lift', 'decay_heat_vault', 'droplet_radiator_works', 'ergosphere_probe_bay', 'matrioshka_computer',
   'neutronium_cage', 'neutronium_compression_hall', 'penrose_engine', 'polarised_proton_source', 'positronium_condensate_lab',
   'pulsar_wind_trap', 'r_process_decompressor', 'uiv_fusion_reactor', 'xray_pulse_profiler'
 ];

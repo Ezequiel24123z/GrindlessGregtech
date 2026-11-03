@@ -79,7 +79,7 @@ const tagGt = (id, type, tag, out) => { const r = gt(id, type, [], out); r.json.
 const roots = { // controller built from an item only its own products lead to
   'root 4 barnard_core_drill: rhenium_pellet <- rhenium dust only the drill mines': ['gtceu:rhenium_dust', 'grindless:rhenium_pellet'],
   'root 5 levitation_melter: rhea parts <- rhea only the melter makes': ['gtceu:rhea_ingot', 'grindless:rhea_part'],
-  'root 7 neutron_drip_separator: es254_target <- einsteinium only the separator makes': ['gtceu:einsteinium_dust', 'grindless:es254_target'],
+  'root 7 neutronium_cage: es254_target <- einsteinium only the drip works makes': ['gtceu:einsteinium_dust', 'grindless:es254_target'],
   'roots 3 superfluid_helium_plant / accelerator_driven_reactor: a foreign intermediate in the chain': ['gtceu:solid_neon_cone', 'grindless:cone_part'],
 };
 for (const [name, [foreign, ours]] of Object.entries(roots)) {

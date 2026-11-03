@@ -2256,7 +2256,6 @@
       "id": "uiv-rxj1856-outputs",
       "items": [
         "m:gtceu:crust_lift",
-        "m:gtceu:neutron_drip_separator",
         "m:gtceu:neutronium_cage",
         "m:gtceu:r_process_decompressor",
         "m:gtceu:decay_heat_vault",

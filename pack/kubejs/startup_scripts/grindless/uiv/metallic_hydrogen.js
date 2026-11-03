@@ -4,7 +4,7 @@
 // own items and the three hydrogen fluids. The recipes come from data/grindless/tables/metallic_hydrogen.json
 // (server_scripts/grindless/uiv/metallic_hydrogen.js).
 //
-//   gtceu:ramp_compression_pulser   a 9 x 9 x 9 cylinder, UEV (7,864,320 EU/t). The only maker of metallic hydrogen, lonsdaleite and
+//   gtceu:ramp_compression_pulser   a 31 x 11 x 31 ring of Marx-bank arms round a compression drum, UEV (7,864,320 EU/t). The only maker of metallic hydrogen, lonsdaleite and
 //                                   cubic gauche nitrogen. Its pulsed-power ring is grindless:coilgun_coil_casing.
 //   gtceu:ramp_compression          its recipe type (EU in). Circuit 1 metallic hydrogen (a solid para-H2 target), circuit 2 lonsdaleite
 //                                   (pyrolytic graphite), circuit 3 cubic gauche nitrogen (a laser-heated N2 charge).
@@ -22,8 +22,8 @@
   const MH = G.metallicHydrogen || (G.metallicHydrogen = {})
   const LOG = '[grindless/uiv] '
 
-  const CASING = 'gtceu:uev_machine_casing'
-  const CASING_TEXTURE = 'gtceu:block/casings/voltage/uev/side'
+  const CASING = 'grindless:rhea_casing'
+  const CASING_TEXTURE = 'grindless:block/uiv/rhea_casing'
   const COIL = 'grindless:coilgun_coil_casing'
 
   MH.table = 'kubejs/data/grindless/tables/metallic_hydrogen.json'
@@ -54,7 +54,7 @@
     lang: 'Ramp-Compression Pulser',
     // items in: the target, the circuit and a spare; out: the product and a residue; fluids: the charge and the shards or the N2
     maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-    width: 9, height: 9, depth: 9
+    width: 31, height: 11, depth: 31
   }
 
   // A pressure vessel (uiv/shapes.js): a ribbed drum with pulsed-power coil rings, four rams ending in anvils, a stepped lid. Built in the

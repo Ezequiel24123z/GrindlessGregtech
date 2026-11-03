@@ -5,13 +5,13 @@
 // Both machines work only at grindless:cygnus_x1_orbit (UIV-B1's far place; the recipes carry recipe.dimension(...) like uiv/rx_j1856.js).
 //
 //   gtceu:ergosphere_probe_bay   9 x 7 x 9, UIV (31,457,280 EU/t). Type gtceu:ergosphere_probing (circuit 1 probe, 2 sled, 3 refit).
-//   gtceu:penrose_engine         13 x 9 x 13, a generator written at its final figure (lib/generators.js; NOT in power/generators.js) that sends
+//   gtceu:penrose_engine         39 x 11 x 39, a generator written at its final figure (lib/generators.js; NOT in power/generators.js) that sends
 //                                its EU out through wireless dynamo hatches only. Type gtceu:penrose_extraction (circuit 1 Penrose drop).
 //                                The run makes 268,435,456 EU/t = 8 A at UIV (33,554,432 V), so the dynamo hatches must carry that: two
 //                                gtceu:uiv_wireless_dynamo_hatch_4a (4 A each) or one gtceu:uiv_wireless_dynamo_hatch_16a.
 //
-// The silhouettes are this file's own (uiv/shapes.js is read-only for the package): a probe hall with a drop rail, and a catch ring around a
-// central shaft. Built in the machine registry callback with G.uivShapes.spec.
+// The bay's silhouette is this file's own: a probe hall with a drop rail. The Penrose engine's is uiv/shapes_halls.js: a central shaft with a
+// catch ring, twelve release rails and dynamo houses, in metallic-hydrogen field casing. Built in the machine registry callback with G.uivShapes.spec.
 //
 // New ids: the items below. Textures: tools/assets/Build-UIVCygnusTextures.ps1. Names: client_scripts/grindless/uiv_cygnus_lang.js.
 // Published for the recipe script: global.grindless.cygnus.
@@ -21,8 +21,8 @@
   const CY = G.cygnus || (G.cygnus = {})
   const LOG = '[grindless/uiv] '
 
-  const CASING = 'gtceu:uiv_machine_casing'
-  const CASING_TEXTURE = 'gtceu:block/casings/voltage/uiv/side'
+  const CASING = 'grindless:mh_field_casing'
+  const CASING_TEXTURE = 'grindless:block/uiv/mh_field_casing'
   const BAY_CASING = 'grindless:rhea_casing'
   const BAY_TEXTURE = 'grindless:block/uiv/rhea_casing'
   const COIL = 'grindless:metallic_hydrogen_coil_block'
@@ -52,7 +52,7 @@
       name: 'penrose_engine', machine: 'gtceu:penrose_engine', type: 'penrose_extraction', dataKey: 'grindless_penrose_extraction',
       lang: 'Penrose Engine', maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },
       parts: [['input_bus', 1, 2], ['output_bus', 1, 2], ['energy_output', 1, 2]],
-      width: 13, height: 9, depth: 13, casing: CASING, texture: CASING_TEXTURE, generator: true
+      width: 39, height: 11, depth: 39, casing: CASING, texture: CASING_TEXTURE, generator: true
     }
   ]
 
@@ -96,40 +96,13 @@
     }
   }
 
-  // the Penrose engine: a round hall, a shaft down the middle, a coil catch ring around it at mid height and a rail from the front to the ring
-  function engineFn() {
-    var w = 13
-    var h = 9
-    var c = 6
-    return function (x, y, z) {
-      var dx = x - c
-      var dz = z - c
-      var r = Math.sqrt(dx * dx + dz * dz)
-      if (r > 6.4) return ' '
-      if (y === 0) return 'X'
-      var wall = r >= 5.5
-      if (y === h - 1) {
-        if (wall) return 'A'
-        if (r >= 3.5) return 'L'
-        return ' '
-      }
-      if (wall) {
-        if (y === 1 || y === h - 2) return 'A'
-        return ((x * 3 + z * 5) % 4 === 0) ? 'F' : 'L'
-      }
-      if (dx === 0 && dz === 0) return 'P'
-      if (y === 4 && r >= 3.5 && r < 4.5) return 'C'
-      if (y === 4 && dx === 0 && dz >= 2) return 'P'
-      if (y === 2 && r >= 2.5 && r < 3.5 && cheb(dx, dz) === 2) return 'B'
-      return '#'
-    }
-  }
-
   function spec(m) {
-    var o = { w: m.width, h: m.height, d: m.depth, pal: {}, parts: m.parts.map(function (p) { return Pat.part(p[0], { min: p[1], max: p[2] }) }).concat(m.generator ? [] : [G.parallelHatch.part()]) }
+    var parts = m.parts.map(function (p) { return Pat.part(p[0], { min: p[1], max: p[2] }) })
+    if (m.name === 'penrose_engine') return G.uivShapes.build(Pat, m.name, m.casing, parts)
+    var o = { w: m.width, h: m.height, d: m.depth, pal: {}, parts: parts.concat(m.generator ? [] : [G.parallelHatch.part()]) }
     Object.keys(PAL).forEach(function (k) { o.pal[k] = PAL[k] })
     o.pal.F = m.casing
-    o.fn = m.name === 'penrose_engine' ? engineFn() : bayFn()
+    o.fn = bayFn()
     return G.uivShapes.spec(Pat, o)
   }
 

@@ -134,8 +134,8 @@
  "gtceu:beuv_scanner": {
   "v": [],
   "bt": 6,
-  "ds": 0.443,
-  "c": 768
+  "ds": 0.396,
+  "c": 1862
  },
  "gtceu:biofoundry": {
   "v": [],
@@ -817,9 +817,9 @@
  },
  "gtceu:matrioshka_computer": {
   "v": [],
-  "bt": 7,
-  "ds": 0.342,
-  "c": 597
+  "bt": 8,
+  "ds": 0.537,
+  "c": 2936
  },
  "gtceu:mbe_reactor": {
   "v": [],
@@ -989,23 +989,17 @@
   "ds": 0.452,
   "c": 1117
  },
- "gtceu:neutron_drip_separator": {
-  "v": [],
-  "bt": 7,
-  "ds": 0.36,
-  "c": 415
- },
  "gtceu:neutronium_cage": {
   "v": [],
-  "bt": 5,
-  "ds": 0.662,
-  "c": 365
+  "bt": 7,
+  "ds": 0.38,
+  "c": 1884
  },
  "gtceu:neutronium_compression_hall": {
   "v": [],
   "bt": 7,
-  "ds": 0.38,
-  "c": 624
+  "ds": 0.367,
+  "c": 2290
  },
  "gtceu:nickel_56_burner": {
   "v": [],
@@ -1123,9 +1117,9 @@
  },
  "gtceu:penrose_engine": {
   "v": [],
-  "bt": 6,
-  "ds": 0.427,
-  "c": 491
+  "bt": 5,
+  "ds": 0.525,
+  "c": 2293
  },
  "gtceu:photon_ring_imager": {
   "v": [],
@@ -1304,8 +1298,8 @@
  "gtceu:ramp_compression_pulser": {
   "v": [],
   "bt": 6,
-  "ds": 0.618,
-  "c": 642
+  "ds": 0.509,
+  "c": 2095
  },
  "gtceu:recoil_separator": {
   "v": [],
@@ -1676,8 +1670,8 @@
  "gtceu:uiv_fusion_reactor": {
   "v": [],
   "bt": 6,
-  "ds": 0.403,
-  "c": 756
+  "ds": 0.435,
+  "c": 3106
  },
  "gtceu:ultrapure_water_plant": {
   "v": [],

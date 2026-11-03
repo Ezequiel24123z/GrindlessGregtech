@@ -4,7 +4,7 @@
 // package UIV-A5): the two machines, their recipe types, the package's own items and the phosphine gas. The recipes come from
 // data/grindless/tables/beuv_stm.json (server_scripts/grindless/uiv/beuv_stm.js).
 //
-//   gtceu:beuv_scanner           9 x 5 x 7 in grindless:photonic_casing, UIV (31,457,280 EU/t). Recipe type gtceu:beuv_lithography
+//   gtceu:beuv_scanner           25 x 15 x 23 in grindless:multilayer_optics_casing, UIV (31,457,280 EU/t). Recipe type gtceu:beuv_lithography
 //                                (circuit 1 exposure, 2 driver ASIC, 3 mirror cleaning).
 //   gtceu:stm_lithography_cell   5 x 5 x 5 in gtceu:uev_machine_casing (no dedicated casing yet, as for UEV's femtosecond writer), UIV.
 //                                Recipe type gtceu:stm_lithography (circuit 1 H termination, 2 STM patterning, 3 phosphine dosing).
@@ -19,8 +19,6 @@
   const BS = G.beuvStm || (G.beuvStm = {})
   const LOG = '[grindless/uiv] '
 
-  const PHOTONIC = 'grindless:photonic_casing'
-  const PHOTONIC_TEXTURE = 'grindless:block/uev/photonic_casing'
   const UEV = 'grindless:multilayer_optics_casing'
   const UEV_TEXTURE = 'grindless:block/uiv/multilayer_optics_casing'
 
@@ -52,7 +50,7 @@
     {
       name: 'beuv_scanner', machine: 'gtceu:beuv_scanner', type: 'beuv_lithography', dataKey: 'grindless_beuv_lithography', lang: 'BEUV Scanner',
       maxIO: { itemsIn: 5, itemsOut: 2, fluidsIn: 1, fluidsOut: 0 },
-      width: 9, height: 5, depth: 7, casing: PHOTONIC, texture: PHOTONIC_TEXTURE
+      width: 25, height: 15, depth: 23, casing: UEV, texture: UEV_TEXTURE
     },
     {
       name: 'stm_lithography_cell', machine: 'gtceu:stm_lithography_cell', type: 'stm_lithography', dataKey: 'grindless_stm_lithography',
