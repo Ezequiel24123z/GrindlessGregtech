@@ -290,6 +290,9 @@
   // GTM files a recipe as <namespace>:<type>/<path>: the id handed to it is <namespace>:<path>
   function shortId(id) { return 'grindless:' + id.substring(id.lastIndexOf('/') + 1) }
 
+  // the rows with an EMI text (gtceu.recipe.grindless_<type>.<name>)
+  var EMI_TEXT = ['power_diamond_plate', 'boron_delta_diamond', 'figured_dish_blank', 'collector_diamond_plate', 'pin_diamond_plate']
+
   function addChain(event) {
     Q.clashes = clashes()
     if (Q.clashes.length > 0) console.error(LOG + 'qubit chain recipes clash in the lookup: ' + Q.clashes.join(', '))
@@ -304,7 +307,7 @@
       r.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
       r.notConsumedItems.forEach(function (id) { recipe.notConsumable(id) })
       recipe.circuit(r.circuit)
-      recipe.addDataString('grindless_' + r.type, r.name)
+      if (EMI_TEXT.indexOf(r.name) >= 0) recipe.addDataString('grindless_' + r.type, r.name)
       r.fluidsIn.forEach(function (f) { recipe.inputFluids(Fluid.of(f.id, f.amount)) })
       r.notConsumedFluids.forEach(function (f) { recipe.notConsumableFluid(Fluid.of(f.id, f.amount)) })
       r.itemsOut.forEach(function (x) { recipe.itemOutputs(x.count + 'x ' + x.id) })
