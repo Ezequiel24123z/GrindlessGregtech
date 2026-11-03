@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, LINE_GUIDE, CROSSING_GUIDE, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings, splitChains, parseDesignLines, designReport, checkRole, classify, isFold, tagProblems, acceptedRoute } from '../line-audit.mjs';
+import { lineSteps, collectLines, usedBy, findDuplicates, judge, toCsv, eraSummary, infraSet, structureBlocks, loadKeyItems, buildFacts, skipRoute, recipeEra, buildEraContext, contentCrossings, splitChains, parseDesignLines, designReport, checkRole, classify, isFold, tagProblems, acceptedRoute } from '../line-audit.mjs';
 
 const n = (key, kind, res, from = [], extra = {}) => ({ key, kind, res, from, cluster: 'a', ...extra });
 const chain = () => [
@@ -64,7 +64,10 @@ test('judge verdicts', () => {
   assert.equal(judge(line(), ctx({ skipped: [{ res: 'gtceu:x' }] })).verdict, 'fix');
   const dead = judge(line(), ctx({ used: new Set(), endInfo: new Map([['gtceu:x', { n: 0, reached: [] }]]) }));
   assert.equal(dead.verdict, 'remove');
-  assert.equal(judge(line({ era: 'max' }), ctx()).verdict, 'data-only');
+  // MAX gets the same diagnostics as any implemented era: a defective line is diagnosed, a valid one kept
+  assert.equal(judge(line({ era: 'max' }), ctx()).verdict, 'keep');
+  assert.equal(judge(line({ era: 'max' }), ctx({ used: new Set(), endInfo: new Map([['gtceu:x', { n: 0, reached: [] }]]) })).verdict, 'remove');
+  assert.equal(judge(line({ era: 'max', steps: 2 }), ctx()).verdict, 'fix');
 });
 
 test('a travel key without recipe consumers is not dead', () => {
@@ -232,7 +235,7 @@ test('toCsv and eraSummary carry roles and kinds', () => {
   assert.equal(s.real, 0);
 });
 
-test('eraSummary counts deep crossings (back >= 2) of real production lines, and the guide is in lines and crossings', () => {
+test('eraSummary counts deep crossings (back >= 2) of real production lines, and depth statistics are descriptive', () => {
   const l = line({ cluster: 'a', name: 'A', mbs: [], ours: [] });
   l.era = 'zpm';
   l.crossings = [{ back: 2 }, { back: 1 }];
@@ -241,8 +244,9 @@ test('eraSummary counts deep crossings (back >= 2) of real production lines, and
   const s = eraSummary([mk(true, 'production'), mk(false, 'production'), mk(true, 'role')]).get('zpm');
   assert.equal(s.deep, 2, 'only the real production line counts, 2 of its 3 crossings reach back 2 eras');
   assert.equal(s.real, 1);
-  assert.deepEqual(LINE_GUIDE, { zpm: 14, uv: 21 });
-  assert.deepEqual(CROSSING_GUIDE, { zpm: 13, uv: 20 });
+  assert.equal(s.longest, l.steps);
+  assert.deepEqual(s.depth, { [l.steps]: 1 });
+  assert.deepEqual(s.long, [{ id: l.id, steps: l.steps }]);
 });
 
 const io = (alts, count = 1) => ({ alts, count, cap: false });
@@ -336,4 +340,17 @@ test('accepted bootstrap routes are not skips', () => {
   assert.equal(skipRoute(mkLine('ev', { steps: 4 }), 'gtceu:plate', facts), null);
   assert.equal(acceptedRoute('gtceu:primitive_blast_furnace/x').pattern, 'gtceu:primitive_blast_furnace/*');
   assert.equal(acceptedRoute('gtceu:other/x'), undefined);
+});
+
+test('infrastructure: blocks a structure accepts (oneOf alternatives, wireless table cells) are placed parts, other cells are not', () => {
+  const L = (res) => ({ era: 'zpm', role: 'infrastructure', steps: 2, products: [{ res }], machines: new Set(['gtceu:site']), inner: new Set(), raws: new Set() });
+  const structures = new Map([['gtceu:wireless_energy_tower', { symbols: { C: { kind: 'oneOf', options: [{ kind: 'blocks', blocks: ['grindless:zpm_smes_cell'] }, { kind: 'blocks', blocks: ['grindless:tower_casing'] }] }, K: { kind: 'controller' } } }]]);
+  const wireless = { tiers: [{ cell: 'grindless:uxv_smes_cell' }, { cell: 'grindless:horizon_bank_cell' }] };
+  const infra = infraSet(structures, wireless);
+  assert.ok(infra.has('gtceu:wireless_energy_tower'));
+  assert.deepEqual([...structureBlocks(structures, wireless)].sort(), ['grindless:tower_casing', 'grindless:uxv_smes_cell', 'grindless:zpm_smes_cell']);
+  const facts = buildFacts([]);
+  for (const cell of ['grindless:zpm_smes_cell', 'grindless:uxv_smes_cell']) assert.equal(checkRole(L(cell), facts, { infra }).ok, true, cell);
+  assert.equal(checkRole(L('grindless:orphan_cell'), facts, { infra }).ok, false);
+  assert.equal(checkRole(L('grindless:zpm_smes_cell'), facts, { infra: infraSet(new Map([['gtceu:wireless_energy_tower', {}]])) }).ok, false);
 });

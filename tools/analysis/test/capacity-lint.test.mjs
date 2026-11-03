@@ -1,4 +1,9 @@
 import test from 'node:test';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import { checkRecipe, tierOfEut, buildSnapshot } from '../lib/capacity.mjs';
 import { diffKnown, lintCurve } from '../capacity-lint.mjs';
@@ -88,4 +93,34 @@ test('capacity --dump: the cost-curve pass pushes a LuV recipe over its tank, an
   assert.equal(on.byEra.luv.overflows, 1);
   assert.equal(on.byEra.luv.top[0].biggest, 80000);
   assert.match(on.byEra.luv.top[0].reason, /80000 mB > 64000 mB/);
+});
+
+// CLI exit status of --dump, run as a subprocess with stdout piped (the verdict must survive it)
+const CLI = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'capacity-lint.mjs');
+function dumpDir(mb) {
+  // a LuV mixer recipe that fits a multiblock's 1,024,000 mB hatch until the cost curve doubles it
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cap-dump-'));
+  const recipe = { i: 'gtceu:mixer/cli_probe', t: 'gtceu:mixer', a: true, j: { type: 'gtceu:mixer', duration: 100, inputs: { fluid: [{ content: { amount: mb, value: [{ fluid: 'a:f' }] }, chance: 10000, maxChance: 10000 }] }, outputs: { item: [{ content: { type: 'gtceu:sized', count: 1, ingredient: { item: 'gtceu:luv_electric_motor' } }, chance: 10000, maxChance: 10000 }] }, tickInputs: { eu: [{ content: 30720, chance: 10000, maxChance: 10000 }] } } };
+  fs.writeFileSync(path.join(dir, 'recipes.json'), JSON.stringify({ recipes: [recipe] }));
+  fs.writeFileSync(path.join(dir, 'items.json'), JSON.stringify({ items: [], fluids: ['a:f'] }));
+  fs.writeFileSync(path.join(dir, 'tags.json'), JSON.stringify({ item: {}, fluid: {} }));
+  return dir;
+}
+const runCli = (...args) => spawnSync(process.execPath, [CLI, ...args], { encoding: 'utf8' });
+
+test('capacity --dump: exit 1 on a recipe that fits no machine, 0 when clean, 2 on invalid input', () => {
+  const bad = dumpDir(600000);
+  const good = dumpDir(1000);
+  const factors = path.join(bad, 'factors.json');
+  fs.writeFileSync(factors, JSON.stringify({ factors: { luv: { item: 2, fluid: 2 } } }));
+  try {
+    const rb = runCli('--dump', bad, '--factors', factors);
+    assert.equal(rb.status, 1, rb.stdout + rb.stderr);
+    assert.match(rb.stdout, /FAIL capacity: 1 new error/);
+    assert.equal(runCli('--dump', good, '--factors', factors).status, 0);
+    assert.equal(runCli('--dump', path.join(good, 'missing')).status, 2);
+  } finally {
+    fs.rmSync(bad, { recursive: true, force: true });
+    fs.rmSync(good, { recursive: true, force: true });
+  }
 });
