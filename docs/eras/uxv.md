@@ -250,6 +250,7 @@ Sizes grew where the draft had a box; the machines, types and recipes are unchan
 
 ### 2. Oxide PLD chamber: `gtceu:oxide_pld_chamber`, type `gtceu:pulsed_laser_deposition` (Earth)
 
+- **Merged (D4-SHAPE-UXV-B, 2026-11-03):** the controller is gone; `gtceu:pulsed_laser_deposition` now runs in the Spintronic Cluster Tool (`gtceu:mtj_sputter_cluster`). See `lines-uev-uxv.md`.
 **What it gains:** stoichiometric complex-oxide epitaxy, unit cell by unit cell (RHEED); nothing older grows perovskite heterostructures.
 **Recipes:** c1 `srruo3_target` + `dysco3_substrate` → `srruo3_electrode_wafer` (33,554,432 EU/t, 400 t); c2 + `la_bfo_target` → `bfo_film_wafer` (67,108,864 EU/t, 600 t); c3 + CoFe target (sputter c4 bank) → `me_switch_wafer` (67,108,864 EU/t, 600 t).
 **Byproducts:** ablated plume dust → UV powder bed.
@@ -262,6 +263,7 @@ Sizes grew where the draft had a box; the machines, types and recipes are unchan
 
 ### 3. vdW stacking cell: `gtceu:vdw_stacking_cell`, type `gtceu:vdw_stacking` (Earth)
 
+- **Merged (D4-SHAPE-UXV-B, 2026-11-03):** the controller is gone; `gtceu:vdw_stacking` now runs in UEV's Van der Waals Stacker (`gtceu:vdw_stacker`). See `lines-uev-uxv.md`.
 **What it gains:** robotic dry transfer of exfoliated flakes in argon, with twist control; nothing older assembles air-sensitive 2D stacks.
 **Recipes:** c1 `wte2_crystal` → 4 `wte2_flake` (8,388,608 EU/t, 200 t); c2 `fgt_crystal` → 4 `fgt_flake`; c3 `hbn_crystal` → 8 `hbn_flake`; c4 2 `hbn_flake` + `wte2_flake` + `fgt_flake` → `sot_readout_stack` (67,108,864 EU/t, 900 t).
 *(QR: c1-c3 also take 50 mB argon, the glovebox purge, which is consumed. They give the offcuts below as a real chanced output (25% *(tune)*, a small dust of the crystal) so that the destination exists in EMI.)*
@@ -275,6 +277,7 @@ Sizes grew where the draft had a box; the machines, types and recipes are unchan
 
 ### 4. Racetrack fab: `gtceu:racetrack_fab`, type `gtceu:racetrack_patterning` (Earth)
 
+- **Merged (D4-SHAPE-UXV-B, 2026-11-03):** the controller is gone; `gtceu:racetrack_patterning` now runs in the Spintronic Cluster Tool (`gtceu:mtj_sputter_cluster`). See `lines-uev-uxv.md`.
 **What it gains:** synthetic-antiferromagnet tracks with chiral, DMI-stabilised domain walls that current pulses shift in lockstep; nothing older stores data by moving walls.
 **Recipes:** c1 `saf_track_wafer` → `patterned_track_wafer` (33,554,432 EU/t, 600 t); c2 `patterned_track_wafer` + `mtj_stack_wafer` (read heads) → `racetrack_chip` (67,108,864 EU/t, 900 t).
 *(QR: c1 was 1 in, 1 out. It now also takes 100 mB argon for the ion mill, which is consumed, and gives the etch residue as a real output: 25% `gtceu:platinum_group_sludge_dust`, the EV platinum plant's input as built.)*
@@ -447,6 +450,7 @@ Sizes grew where the draft had a box; the machines, types and recipes are unchan
 
 ### 18. Pasta draw bench: `gtceu:pasta_draw_bench`, type `gtceu:pasta_drawing` (Vela pulsar orbit)
 
+- **Merged (D4-SHAPE-UXV-B, 2026-11-03):** the controller is gone; `gtceu:pasta_drawing` now runs in the Pasta Mill (`gtceu:pasta_phase_sorter`). See `lines-uev-uxv.md`.
 **What it gains:** draws caged spaghetti into a continuous strand inside a field sheath that stands in for crust pressure (named fiction): the UXV superconductor.
 **Recipes:** c1 caged `spaghetti_phase` + aerogel (ZPM, as built) → 8 `gtceu:pasta_strand_single_wire` (134,217,728 EU/t, 1,200 t).
 **Structure (QR):** 5x5x23 draw line. The head and tail are 5x5, with a 3x3 sheathed strand between them and capstan pylons rising every 4 blocks.
@@ -459,6 +463,7 @@ Sizes grew where the draft had a box; the machines, types and recipes are unchan
 
 ### 19. Pasta laminator: `gtceu:pasta_laminator`, type `gtceu:pasta_lamination` (Vela pulsar orbit)
 
+- **Merged (D4-SHAPE-UXV-B, 2026-11-03):** the controller is gone; `gtceu:pasta_lamination` now runs in the Pasta Mill (`gtceu:pasta_phase_sorter`). See `lines-uev-uxv.md`.
 **What it gains:** presses caged lasagna sheets into plate. Pasta is the stiffest material computed: shear modulus near 10³⁰ erg/cm³, breaking strain near 0.1 (Caplan 2018).
 **Recipes:** c1 caged `lasagna_phase` + `grindless:wf_rhea_billet` (frame) → 4 `lasagna_plate` (134,217,728 EU/t, 1,200 t); c2 `lasagna_plate` + 2 strand wire → `grindless:lasagna_electrode` (33,554,432 EU/t, 400 t). Not UIV's `polar_cap_electrode`, which RX J1856 makes cheaply and would make the tap a free-energy loop.
 **Structure (QR):** 9x11x9 portal press: four columns carry a crosshead with rams over a bed.
