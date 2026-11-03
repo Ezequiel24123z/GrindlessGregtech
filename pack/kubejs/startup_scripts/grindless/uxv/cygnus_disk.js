@@ -32,6 +32,9 @@
   const GUM = 'grindless:gum_metal_casing'
   const GUM_TEXTURE = 'grindless:block/uxv/gum_metal_casing'
   const PULSED = 'grindless:pulsed_field_casing'
+  // The skimmer feeds the uxv_machine_hull chain, so it cannot wear gum (bootstrap rule).
+  const SIC = 'grindless:sic_composite_casing'
+  const SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
   CD.table = 'kubejs/data/grindless/tables/cygnus_disk.json'
   CD.site = 'grindless:cygnus_x1_orbit'
@@ -41,9 +44,9 @@
   CD.machines = [
     {
       name: 'accretion_disk_skimmer', machine: 'gtceu:accretion_disk_skimmer', type: 'disk_skimming', dataKey: 'grindless_disk_skimming',
-      lang: 'Accretion Disk Skimmer', maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 1 }, casing: GUM, texture: GUM_TEXTURE,
+      lang: 'Accretion Disk Skimmer', maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 1 }, casing: SIC, texture: SIC_TEXTURE,
       generator: false, width: 19, height: 9, depth: 19,
-      pal: { F: GUM, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing', Q: 'naquadah_alloy' },
+      pal: { F: SIC, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),

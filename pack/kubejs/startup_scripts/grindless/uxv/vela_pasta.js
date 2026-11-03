@@ -35,6 +35,9 @@
   const GUM = 'grindless:gum_metal_casing'
   const GUM_TEXTURE = 'grindless:block/uxv/gum_metal_casing'
   const PULSED = 'grindless:pulsed_field_casing'
+  // The extractor is on the lasagna chain feeding uxv_machine_hull, so it cannot wear gum.
+  const SIC = 'grindless:sic_composite_casing'
+  const SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
   VP.table = 'kubejs/data/grindless/tables/vela_pasta.json'
   VP.site = 'grindless:vela_pulsar_orbit'
@@ -45,8 +48,8 @@
     {
       name: 'pasta_extractor', machine: 'gtceu:pasta_extractor', type: 'pasta_extraction', dataKey: 'grindless_pasta_extraction', lang: 'Pasta Extractor',
       maxIO: { itemsIn: 3, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, generator: false, width: 11, height: 11, depth: 21,
-      casing: GUM, texture: GUM_TEXTURE,
-      pal: { F: GUM, M: PULSED, A: 'gtceu:stable_machine_casing', C: COIL, L: GLASS, Q: 'naquadah_alloy' },
+      casing: SIC, texture: SIC_TEXTURE,
+      pal: { F: SIC, M: PULSED, A: 'gtceu:stable_machine_casing', C: COIL, L: GLASS, Q: 'naquadah_alloy' },
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 1 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
       }

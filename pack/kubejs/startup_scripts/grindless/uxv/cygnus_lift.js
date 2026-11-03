@@ -30,6 +30,9 @@
   const GUM = 'grindless:gum_metal_casing'
   const GUM_TEXTURE = 'grindless:block/uxv/gum_metal_casing'
   const PULSED = 'grindless:pulsed_field_casing'
+  // The filter is on the uxv_machine_hull chain, so it cannot wear gum (bootstrap rule).
+  const SIC = 'grindless:sic_composite_casing'
+  const SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
   CL.table = 'kubejs/data/grindless/tables/cygnus_lift.json'
   CL.site = 'grindless:cygnus_x1_orbit'
@@ -54,9 +57,9 @@
     },
     {
       name: 'plasma_mass_filter', machine: 'gtceu:plasma_mass_filter', type: 'plasma_mass_filtering', dataKey: 'grindless_plasma_mass_filtering',
-      lang: 'Plasma Mass Filter', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 4 }, casing: GUM, texture: GUM_TEXTURE,
+      lang: 'Plasma Mass Filter', maxIO: { itemsIn: 2, itemsOut: 1, fluidsIn: 1, fluidsOut: 4 }, casing: SIC, texture: SIC_TEXTURE,
       width: 15, height: 15, depth: 37,
-      pal: { F: GUM, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing', A: 'gtceu:stable_machine_casing', Q: 'naquadah_alloy' },
+      pal: { F: SIC, M: PULSED, C: 'gtceu:superconducting_coil', L: 'gtceu:fusion_glass', P: 'gtceu:tungstensteel_pipe_casing', A: 'gtceu:stable_machine_casing', Q: 'naquadah_alloy' },
       parts: function () {
         return [
           Pat.part('input_bus', { min: 1, max: 1 }),
