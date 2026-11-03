@@ -7,9 +7,9 @@
  },
  "gtceu:accretion_disk_skimmer": {
   "v": [],
-  "bt": 5,
-  "ds": 0.546,
-  "c": 384
+  "bt": 6,
+  "ds": 0.569,
+  "c": 581
  },
  "gtceu:accretion_feeder": {
   "v": [],
@@ -55,9 +55,9 @@
  },
  "gtceu:annihilation_laser_works": {
   "v": [],
-  "bt": 5,
-  "ds": 0.558,
-  "c": 540
+  "bt": 9,
+  "ds": 0.553,
+  "c": 1226
  },
  "gtceu:antihydrogen_foundry": {
   "v": [],
@@ -361,8 +361,8 @@
  },
  "gtceu:ejecta_knot_sweeper": {
   "v": [],
-  "bt": 6,
-  "ds": 0.469,
+  "bt": 8,
+  "ds": 0.414,
   "c": 622
  },
  "gtceu:electron_beam_furnace": {
@@ -470,8 +470,8 @@
  "gtceu:frc_former": {
   "v": [],
   "bt": 6,
-  "ds": 0.314,
-  "c": 546
+  "ds": 0.445,
+  "c": 1543
  },
  "gtceu:fuel_fabrication_plant": {
   "v": [],
@@ -1093,9 +1093,9 @@
  },
  "gtceu:pasta_extractor": {
   "v": [],
-  "bt": 5,
-  "ds": 0.324,
-  "c": 458
+  "bt": 6,
+  "ds": 0.566,
+  "c": 490
  },
  "gtceu:pasta_laminator": {
   "v": [],
@@ -1147,9 +1147,9 @@
  },
  "gtceu:plasma_mass_filter": {
   "v": [],
-  "bt": 4,
-  "ds": 0.566,
-  "c": 554
+  "bt": 7,
+  "ds": 0.561,
+  "c": 1436
  },
  "gtceu:plasma_quench_caster": {
   "v": [],
@@ -1171,9 +1171,9 @@
  },
  "gtceu:polar_cap_tap": {
   "v": [],
-  "bt": 4,
-  "ds": 0.591,
-  "c": 380
+  "bt": 6,
+  "ds": 0.558,
+  "c": 485
  },
  "gtceu:polarised_proton_source": {
   "v": [],
@@ -1381,9 +1381,9 @@
  },
  "gtceu:shequid_works": {
   "v": [],
-  "bt": 5,
-  "ds": 0.498,
-  "c": 330
+  "bt": 7,
+  "ds": 0.548,
+  "c": 1352
  },
  "gtceu:sic_device_fab": {
   "v": [],
@@ -1525,9 +1525,9 @@
  },
  "gtceu:stellar_condensation_tower": {
   "v": [],
-  "bt": 5,
-  "ds": 0.46,
-  "c": 410
+  "bt": 6,
+  "ds": 0.581,
+  "c": 1482
  },
  "gtceu:stellar_elevator": {
   "v": [],
@@ -1837,9 +1837,9 @@
  },
  "gtceu:yig_lpe_furnace": {
   "v": [],
-  "bt": 5,
-  "ds": 0.551,
-  "c": 266
+  "bt": 8,
+  "ds": 0.461,
+  "c": 1149
  },
  "gtceu:zblan_draw_tower": {
   "v": [],
