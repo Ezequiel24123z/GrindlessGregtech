@@ -589,8 +589,8 @@
  },
  "gtceu:horizon_flux_clamp": {
   "v": [],
-  "bt": 6,
-  "ds": 0.562,
+  "bt": 7,
+  "ds": 0.539,
   "c": 3378
  },
  "gtceu:horizon_interferometer": {
@@ -805,7 +805,7 @@
  },
  "gtceu:mass_stream_injector": {
   "v": [],
-  "bt": 5,
+  "bt": 6,
   "ds": 0.554,
   "c": 2125
  },
