@@ -458,7 +458,7 @@
     {"id":"grindless:chain_composite_rod","kind":"item","needUse":true,"needMade":true,"made":["gtceu:spark_plasma_sintering"],"used":["gtceu:assembler","gtceu:assembly_line","gtceu:spark_plasma_sintering"]},
     {"id":"grindless:chain_composite_rotor","kind":"item","needUse":true,"needMade":true,"made":["gtceu:spark_plasma_sintering"],"used":["gtceu:assembler"]},
     {"id":"grindless:chain_crust_slab","kind":"item","needUse":true,"needMade":true,"made":["gtceu:pasta_extraction"],"used":["gtceu:pasta_sorting"]},
-    {"id":"grindless:chain_field_coil","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembler","gtceu:assembly_line","gtceu:field_freezing"]},
+    {"id":"grindless:chain_field_coil","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembler","gtceu:assembly_line"]},
     {"id":"grindless:chain_flexspline_cup","kind":"item","needUse":true,"needMade":true,"made":["gtceu:megabar_synthesis"],"used":["gtceu:femtosecond_writing"]},
     {"id":"grindless:chain_lamina","kind":"item","needUse":true,"needMade":true,"made":["gtceu:pasta_lamination"],"used":["gtceu:assembly_line","gtceu:pasta_lamination"]},
     {"id":"grindless:chain_lamina_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:assembler","gtceu:multiblock_info"]},
