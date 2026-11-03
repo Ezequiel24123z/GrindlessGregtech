@@ -16,7 +16,7 @@
   var X0 = 36544
   var X1 = 36607
   var Y0 = 98
-  var Y1 = 112
+  var Y1 = 118
   var NAME = 'uxv_spin_logic'
   var CX = 36576
   var CY = 100
@@ -34,19 +34,19 @@
 
   var UNITS = [
     {
-      name: 'stack', id: 'gtceu:vdw_stacker', z: 14, circuit: 4, eut: 67108864, wafer: 'grindless:sot_heterostack',
+      name: 'stack', mode: 1, id: 'gtceu:vdw_stacker', x: 36545, z: 34, circuit: 4, eut: 67108864, wafer: 'grindless:sot_heterostack',
       inputs: [['grindless:hbn_flake', 2], ['grindless:wte2_flake', 1], ['grindless:fgt_flake', 1]],
       fluid: ['gtceu:argon', 4000],
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']
     },
     {
-      name: 'track', id: 'gtceu:mtj_sputter_cluster', z: 34, circuit: 2, eut: 67108864, wafer: 'grindless:racetrack_chip',
+      name: 'track', mode: 2, id: 'gtceu:mtj_sputter_cluster', x: 36545, z: 1, circuit: 2, eut: 67108864, wafer: 'grindless:racetrack_chip',
       inputs: [['grindless:patterned_track_wafer', 1], ['grindless:mtj_die', 1]],
       fluid: ['gtceu:argon', 4000],
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']
     },
     {
-      name: 'lpe', id: 'gtceu:yig_lpe_furnace', z: 56, circuit: 2, eut: 134217728, wafer: 'grindless:yig_film_wafer', kept: 'grindless:pt_lpe_crucible',
+      name: 'lpe', id: 'gtceu:yig_lpe_furnace', x: 36578, z: 34, circuit: 2, eut: 134217728, wafer: 'grindless:yig_film_wafer', kept: 'grindless:pt_lpe_crucible',
       inputs: [['grindless:yttrium_oxide_dust', 3], ['gtceu:hematite_dust', 5], ['grindless:ggg_wafer', 1], ['grindless:pt_lpe_crucible', 1]],
       fluid: ['gtceu:lpe_flux', 4000],
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
@@ -148,6 +148,12 @@
       c.z = u.z - (c.si - ctrl.si)
       if (c.sym.kind === 'oneOf') xs.push(c)
     })
+    // the shapes outgrew fixed anchors: x and z are the low X and Z corner of the unit's box, its low Y is Y0
+    var mnX = 1e9
+    var mnY = 1e9
+    var mnZ = 1e9
+    cells.forEach(function (c) { mnX = Math.min(mnX, c.x); mnY = Math.min(mnY, c.y); mnZ = Math.min(mnZ, c.z) })
+    cells.forEach(function (c) { c.x += u.x - mnX; c.y += Y0 - mnY; c.z += u.z - mnZ })
     xs.sort(function (a, b) { return a.z - b.z || a.x - b.x })
     var chosen = {}
     var n = xs.length
@@ -191,12 +197,14 @@
     u.bus = partsLike(m, /input_bus/)[0]
     u.out = partsLike(m, /output_bus/)[0]
     u.hatch = partsLike(m, /^(?!.*energy).*input_hatch/)[0]
-    var ok = !!u.bus && !!u.out && !!u.hatch && u.energy.length === 2 && u.height <= 16
+    var ok = !!u.bus && !!u.out && !!u.hatch && u.energy.length === 2 && u.height <= Y1 - Y0 + 1
     check(u.name + '_formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', UIV energy hatches ' + u.energy.length + ', parts ' + array(m.getParts()).length)
     return ok
   }
 
   function startRun(u) {
+    u.m.setActiveRecipeType(u.mode)
+    u.m.getRecipeLogic().updateTickSubscription()
     topUp(u.energy)
     var list = u.inputs.map(function (e) { return [e[0], e[1]] })
     list.push([CIRCUIT, 1, '{Configuration:' + u.circuit + '}'])
@@ -267,7 +275,7 @@
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []
     UNITS.forEach(function (def) {
-      var u = { name: def.name, id: def.id, z: def.z, circuit: def.circuit, eut: def.eut, wafer: def.wafer, kept: def.kept, inputs: def.inputs, fluid: def.fluid, parts: def.parts, phase: 'forming', started: S.tick }
+      var u = { mode: def.mode || 0, name: def.name, id: def.id, x: def.x, z: def.z, circuit: def.circuit, eut: def.eut, wafer: def.wafer, kept: def.kept, inputs: def.inputs, fluid: def.fluid, parts: def.parts, phase: 'forming', started: S.tick }
       try {
         var r = place(u)
         u.pos = r.pos

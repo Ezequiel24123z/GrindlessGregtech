@@ -33,13 +33,13 @@
 
   var UNITS = [
     {
-      name: 'sputter', id: 'gtceu:mtj_sputter_cluster', z: 20, circuit: 2, wafer: 'grindless:mram_stack_wafer',
-      inputs: [['grindless:heusler_target', 1], ['grindless:mgo_target', 1], ['grindless:h_si28_wafer', 1]],
+      name: 'sputter', id: 'gtceu:mtj_sputter_cluster', mode: 0, z: 1, circuit: 2, wafer: 'grindless:mram_stack_wafer',
+      inputs: [['grindless:heusler_target', 1], ['grindless:mgo_target', 1], ['grindless:ta_seed_target', 1], ['grindless:si28_m1_wafer', 1]],
       fluid: ['gtceu:argon', 4000], extra: 'grindless:heusler_am_powder',
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
     },
     {
-      name: 'pld', id: 'gtceu:mtj_sputter_cluster', z: 50, circuit: 2, wafer: 'grindless:bfo_film_wafer',
+      name: 'pld', id: 'gtceu:mtj_sputter_cluster', mode: 1, z: 33, circuit: 2, wafer: 'grindless:bfo_film_wafer',
       inputs: [['grindless:srruo3_electrode_wafer', 1], ['grindless:la_bfo_target', 1], ['grindless:krf_excimer_laser', 1]],
       fluid: ['gtceu:oxygen', 4000], extra: 'grindless:bfo_fume', laser: 'grindless:krf_excimer_laser',
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']
@@ -141,6 +141,12 @@
       c.z = u.z - (c.si - ctrl.si)
       if (c.sym.kind === 'oneOf') xs.push(c)
     })
+    // the shape is larger than a fixed anchor allows: slide it so its box starts at the band's low X edge, the unit's z origin and Y0
+    var mnX = 1e9
+    var mnY = 1e9
+    var mnZ = 1e9
+    cells.forEach(function (c) { mnX = Math.min(mnX, c.x); mnY = Math.min(mnY, c.y); mnZ = Math.min(mnZ, c.z) })
+    cells.forEach(function (c) { c.x += X0 + 1 - mnX; c.y += Y0 - mnY; c.z += u.z - mnZ })
     xs.sort(function (a, b) { return a.z - b.z || a.x - b.x })
     var chosen = {}
     var n = xs.length
@@ -189,6 +195,8 @@
 
   function startRun(u) {
     topUp(u.energy)
+    u.m.setActiveRecipeType(u.mode)
+    u.m.getRecipeLogic().updateTickSubscription()
     var list = u.inputs.map(function (e) { return [e[0], e[1]] })
     list.push([CIRCUIT, 1, '{Configuration:' + u.circuit + '}'])
     setBus(u.bus, list)
@@ -259,7 +267,7 @@
     try { registrationChecks() } catch (e) { check('registration_exception', false, errText(e)) }
     S.units = []
     UNITS.forEach(function (def) {
-      var u = { name: def.name, id: def.id, z: def.z, circuit: def.circuit, wafer: def.wafer, inputs: def.inputs, fluid: def.fluid, extra: def.extra, laser: def.laser, parts: def.parts, phase: 'forming', started: S.tick }
+      var u = { mode: def.mode || 0, name: def.name, id: def.id, z: def.z, circuit: def.circuit, wafer: def.wafer, inputs: def.inputs, fluid: def.fluid, extra: def.extra, laser: def.laser, parts: def.parts, phase: 'forming', started: S.tick }
       try {
         var r = place(u)
         u.pos = r.pos
