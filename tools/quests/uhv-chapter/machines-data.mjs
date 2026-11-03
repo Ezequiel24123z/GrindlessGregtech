@@ -72,13 +72,16 @@ export const QUESTS = [
     'One more neutron capture and berkelium becomes &6Californium-252&r, a source that emits neutrons by itself. It is the catalyst of cold-trap drilling and of YBCO irradiation, and it is not used up.',
     [it('grindless:californium_252'), it('grindless:californium_252_source')], 120),
   prod('TH229', 'Thorium-229', 'grindless:thorium_229', ['CF'], 9, -3,
-    'A trace of &6thorium-229&r comes out of the uranium-233 line. It is rare, and it has the lowest nuclear excited state known.',
-    [it('grindless:thorium_229')], 120),
+    ['Uranium-233 decays slowly into &6thorium-229&r, and the Transuranium Facility keeps the uranium in a decay store while the thorium grows in. It is rare, and its nucleus has the lowest excited state known.', 'The hot cell then dissolves it as a nitrate. Keep the store fed by ME and take the thorium out on a schedule.'],
+    [it('grindless:thorium_229'), it('grindless:thorium_229_nitrate')], 120),
+  prod('THF4', 'Laser-Grade Fluoride', 'grindless:thorium_caf2_crystal', ['TH229'], 11, -3,
+    ['The nitrate is fluorinated in the fluorspar kiln to &6laser-grade thorium tetrafluoride&r, pure enough to dope a crystal. Then the crystal growth furnace grows it into calcium fluoride.', 'The Th:CaF2 crystal is what the Nuclear Clock Lab locks its laser onto. Automate it with the nitrate by ME and run the furnace on its own bus: a crystal takes hours.'],
+    [it('grindless:laser_grade_thf4'), it('grindless:thorium_caf2_crystal')], 120),
   prod('DRV', 'Back to the Driver', 'grindless:spent_hfir_driver_element', ['HFR'], 5, -4.5,
     'A spent driver element is not waste: it holds &6uranium-233&r bred in the flux. Reprocess it and a fresh driver goes back in the reactor.',
     [it('grindless:spent_hfir_driver_element')], 100),
   prod('NI63', 'Nickel-63', 'grindless:nickel_63_target', ['DRV'], 7, -4.5,
-    'Irradiate a nickel-62 target and it turns into &6nickel-63&r, a pure beta emitter that is safe behind a thin shield and decays for a century.',
+    'The same reactor that breeds californium breeds &6nickel-63&r: a nickel-62 target captures a neutron beside a driver element. It is a pure beta emitter, safe behind a thin shield, and the betavoltaic fab plates it from a liquor that is cleaned and reused.',
     [it('grindless:nickel_62_target'), it('grindless:nickel_63_target')], 100),
 
   // ------------------------------------------------------------------ clock
@@ -107,9 +110,9 @@ export const QUESTS = [
   gear('LN', 'crystal_growth_furnace', 'Lithium Niobate', ['H_CRYS'], 3.5, 6, {
     for: 'The &6Crystal Growth Furnace&r pulls lithium niobate and other boules out of a melt, slowly.',
     needs: 'Its controller, robust and heatproof casing, computer casing and tritanium coils.',
-    unlocks: 'The lithium niobate wafer and the europium-doped boule behind optical memory.',
+    unlocks: 'The lithium niobate wafer and the europium-doped boule behind optical memory. The wafer is etched into waveguides before any modulator is made.',
     automate: 'Feed seeds and melt by ME; a boule is hours of work, so run several furnaces.',
-  }, [it(ROBUST), it(HEATP), it(COMP), it('gtceu:tritanium_coil_block')]),
+  }, [it(ROBUST), it(HEATP), it(COMP), it('gtceu:tritanium_coil_block'), it('grindless:etched_lnoi_wafer'), it('grindless:thin_film_ln_modulator')]),
   gear('MBE', 'mbe_reactor', 'Molecular Beams', ['LN'], 5.5, 6, {
     for: 'The &6MBE Reactor&r lays a crystal down one atomic layer at a time in ultra-high vacuum.',
     needs: 'Its controller, a UHV hull and clean machine casing.',
@@ -126,16 +129,16 @@ export const QUESTS = [
   // ------------------------------------------------------------------ silicon carbide
   gear('WATER', 'ultrapure_water_plant', 'Eighteen Megohms', ['H_CRYS'], 3.5, 8, {
     for: 'The &6Ultrapure Water Plant&r polishes water until it carries almost no ions at all.',
-    needs: 'Its controller, clean machine casing and filter casing.',
-    unlocks: 'Water clean enough for the carbide fab and the solar array fab.',
-    automate: 'Pipe it straight to the fabs; do not bucket it.',
-  }, [it(CLEAN), it(FILTER)]),
+    needs: 'Its controller, clean machine casing and filter casing. It takes grade 5 water, which five purification stages make from plain water.',
+    unlocks: 'Ultrapure water at eighteen megohms, which the carbide fab, the solar array fab and every foundry recipe drink. Any ion left ruins a wafer.',
+    automate: 'Build the five grades in order, then pipe the result straight to the fabs; do not bucket it.'
+  }, [it(CLEAN), it(FILTER), it('gtca:purified_water_grade_5_bucket'), it('gtceu:ultrapure_water_bucket')]),
   gear('SIC', 'sic_device_fab', 'Silicon Carbide', ['WATER'], 5.5, 8, {
     for: 'The &6SiC Device Fab&r grows and etches silicon carbide into power devices that run hot.',
     needs: 'Its controller, heatproof and robust machine casing.',
-    unlocks: 'SiC power modules for the UHV power stage.',
-    automate: 'Wafers and ultrapure water by pipe and ME; modules leave by ME.',
-  }, [it(HEATP), it(ROBUST)]),
+    unlocks: 'SiC power modules for the UHV power stage. The boule grows from source powder made of polysilicon, graphite and argon, so the silicon line feeds it.',
+    automate: 'Powder, wafers and ultrapure water by pipe and ME; modules leave by ME.'
+  }, [it(HEATP), it(ROBUST), it('grindless:sic_source_powder')]),
   gear('IMM', 'solar_array_fab', 'Inverted Cells', ['SIC'], 7.5, 8, {
     for: 'The &6Solar Array Fab&r builds inverted metamorphic cells and stacks them into an array.',
     needs: 'Its controller and clean machine casing.',
@@ -150,8 +153,8 @@ export const QUESTS = [
   gear('ORG', 'organoid_array', 'Organoids', ['H_CRYS'], 3.5, 12, {
     for: 'The &6Organoid Array&r grows neural tissue on a scaffold under sterile flow.',
     needs: 'Its controller, filter casing, PTFE pipe casing and computer casing.',
-    unlocks: 'Neural organoids, the core of the wetware mainframe.',
-    automate: 'Scaffolds and nutrient by ME and pipe; discard cultures on a schedule.',
+    unlocks: 'Neural organoids, the core of the wetware mainframe. The scaffold is chitosan, from the xenobiochemistry plant at Proxima b.',
+    automate: 'Chitosan scaffolds and nutrient by ME and pipe; discard cultures on a schedule.'
   }, [it(HULL), it(FILTER), it(PTFE), it(COMP)]),
   prod('P_ORG', 'A Living Processor', 'grindless:neural_organoid', ['ORG'], 5.5, 12,
     ['A &6Neural Organoid&r is grown, not assembled: neurons on a scaffold, fed and kept sterile until they work as a processor.', 'The organoid array grows it from a scaffold and nutrient, and the cultures are discarded on a schedule. It is the core of the wetware circuit row and one of the gate\'s five ingredients. Automate it with scaffolds and nutrient by ME and pipe, and never leave a culture unwatched.'],
@@ -193,13 +196,30 @@ export const QUESTS = [
     unlocks: 'Casimir cavity stacks for the warp gate.',
     automate: 'Plates by ME; the stacks leave by ME to the gate.',
   }, [it(TRUSS), it(CRYOSTAT)]),
-  gear('M_GATE', 'warp_gate', 'The Warp Gate', ['CAS'], 10, 18.5, {
-    for: 'The &6Warp Gate&r is the first door to another star.',
-    needs: 'Its controller, warp gate casing and field ring casing.',
+  gear('M_GATE', 'warp_gate', 'The Warp Gate', ['G_CAS'], 20, 20.5, {
+    for: 'The &6Warp Gate&r is the first door to another star: a 15x15 ring of casings round open air, 25x9x20 in all, with a coil band and six UHV mounts for the modulators.',
+    needs: 'Its controller, warp gate casing and field ring casing. The ring holds hundreds of casings and about 350 qualified coils, and the pair is built twice.',
     unlocks: 'The gate seed and the trip to Proxima b.',
     automate: 'Power and cavity stacks by ME; only the seed leaves.',
   }, [it(WARP), it(FIELD)], 160),
-  prod('ANTIH', 'Antihydrogen', 'grindless:antihydrogen_cartridge', ['POS'], 6, 18.5,
+  prod('G_WIRE', 'Superconducting Wire', 'gtceu:magnesium_diboride_single_wire', ['CAS'], 8, 20.5,
+    ['The ring is a magnet, and its wire is &6magnesium diboride&r: Mercury\'s magnesium mixed with boron, packed in an iron tube and drawn by the powder-in-tube line.', 'Braid it into cable in the Naquadria Magnet Works. Automate it with powder by ME and keep the draw line on its own bus.'],
+    [it('gtceu:magnesium_diboride_dust'), it('gtceu:powder_in_tube_line'), it('gtceu:magnesium_diboride_single_wire'), it('grindless:mgb2_cable')], 100),
+  prod('G_WIND', 'Winding the Coil', 'grindless:gate_coil_winding', ['G_WIRE'], 10, 20.5,
+    ['The &6Naquadria Magnet Works&r winds the cable into a gate coil. The winding is still not a superconductor.', 'Keep the cable on a dedicated feed: a winding takes a lot of it.'],
+    [it('gtceu:naquadria_magnet_works'), it('grindless:gate_coil_winding')], 100),
+  prod('G_REACT', 'Reacting the Coil', 'grindless:reacted_gate_coil', ['G_WIND'], 12, 20.5,
+    ['Heated at about 973 K in the electric blast furnace under argon, the powder reacts and the coil turns &6superconducting&r. It is brittle now.', 'Automate it with windings by ME and argon by pipe.'],
+    [it('grindless:reacted_gate_coil')], 100),
+  prod('G_IMP', 'Impregnated', 'grindless:impregnated_gate_coil', ['G_REACT'], 14, 20.5,
+    ['The composite autoclave soaks the brittle coil in epoxy and cures it, so it can bear the field without cracking.', 'Epoxy comes by pipe and the cured coils leave by ME.'],
+    [it('gtceu:composite_autoclave'), it('grindless:impregnated_gate_coil')], 100),
+  prod('G_QUAL', 'Quench Test', 'grindless:qualified_gate_coil', ['G_IMP'], 16, 20.5,
+    ['The Magnet Works cools the coil with helium and tests it at field. Only a &6qualified coil&r goes on; a failure goes back to be rewound.', 'Keep helium on a pipe and route failures back to the winding step.'],
+    [it('grindless:qualified_gate_coil')], 100),
+  prod('G_CAS', 'Warp Gate Casing', 'grindless:warp_gate_casing', ['G_QUAL'], 18, 20.5,
+    ['The UHV assembler seats a qualified coil in a neutronium shell: one coil, four plates and a frame make two &6warp gate casings&r.', 'About 350 coils make a ring, so build the whole chain as one automated line.'],
+    [it('grindless:warp_gate_casing')], 120),  prod('ANTIH', 'Antihydrogen', 'grindless:antihydrogen_cartridge', ['POS'], 6, 18.5,
     'A positron and an antiproton, held together long enough to make an atom. The &6Antihydrogen Cartridge&r holds a handful, and a small leak is expected: keep the cartridges sealed.',
     [it('grindless:antihydrogen_cartridge'), it('grindless:exotic_matter_cell')], 150),
   gear('ZBLAN', 'zblan_draw_tower', 'Glass from Orbit', ['H_CRYS'], 3.5, 10, {
@@ -231,8 +251,8 @@ export const QUESTS = [
   gear('SEG', 'swarm_segment_foundry', 'Segments', ['SOLVAP'], 12.5, -30.5, {
     for: 'The &6Swarm Segment Foundry&r builds the panels of a star-powered swarm.',
     needs: 'Its controller, station truss casing and a UHV hull.',
-    unlocks: 'Swarm segments and the propellant they ride on.',
-    automate: 'Metals by ME; segments go to the control station.',
+    unlocks: 'Swarm segments, built from films, arrays, a laser, a spreader, a power module and cells. The whole swarm is one line, from Mercury regolith to the segment.',
+    automate: 'Films, arrays and cells by ME; segments go to the control station and worn ones come back.'
   }, [it(HULL), it(TRUSS)]),
   prod('P_SEG', 'A Swarm Segment', 'grindless:swarm_segment', ['SEG'], 12.5, -29,
     ['A &6Swarm Segment&r is one mirror-and-collector panel of the thousands that make a star-powered swarm.', 'The foundry builds it from Mercury metals and a UHV hull. The control station needs a steady stream of them to steer the swarm and collect its power, which UEV asks for. Automate it with metals by ME and send segments straight to the station.'],
@@ -278,9 +298,9 @@ export const QUESTS = [
   gear('XBIO', 'xenobiochem_plant', 'Xenobiochemistry', ['XBOT'], 23.5, -27.5, {
     for: 'The &6Xenobiochem Plant&r refines alien biomass into pigments and radioprotectants.',
     needs: 'Its controller, Proxima base casing and PTFE pipe casing.',
-    unlocks: 'Infrared pigment and radioprotectant, and the far-red algae.',
-    automate: 'Biomass by ME; pipe the pigments on.',
-  }, [it(BASEC), it(PTFE)]),
+    unlocks: 'Chitin from the mushrooms, then chitosan and the freeze-cast scaffold that carries organoids, mixed with melanin into the flare shield. Also radioprotectant and the far-red algae. It is portable processing, so it works on any base.',
+    automate: 'Biomass by ME; pipe the chitosan on and send scaffolds home.',
+  }, [it(BASEC), it(PTFE), it('grindless:xeno_chitin'), it('grindless:xeno_chitosan'), it('grindless:chitosan_scaffold')]),
   gear('FUNGI', 'radiotrophic_vat', 'Black Fungi', ['XBIO'], 25.5, -27.5, {
     for: 'The &6Radiotrophic Vat&r feeds fungi on radiation instead of light.',
     needs: 'Its controller, Proxima base casing and radiation-proof casing.',
