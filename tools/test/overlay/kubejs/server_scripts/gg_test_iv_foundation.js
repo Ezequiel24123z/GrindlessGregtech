@@ -25,7 +25,7 @@
 //   tritium           no GTM or GT-- recipe gives tritium (deuterium_separation gone, ender air without it); the Moon's detritiation does
 //                     (later eras' own rows may too)
 //   tables            global.grindless.ivFoundation.checkTables(): Venus, Mercury and leach tables, the fluorite entry, the sample pairs
-//   samples           the vein sample recipes (Venus, Mercury, the End's pitchblende and the fluorite one)
+//   samples           the vein sample recipes (Venus, Mercury and the End's pitchblende in the assembler; LV's fluorite one by hand)
 //   fluorite_drilling the fluorite vein's drilling recipes, from the existing generators; #forge:raw_materials/fluorite holds GCYR's raw ore
 //   fluorite_chain    NOTE only: how many GT recipes process the drill's raw (or crushed) fluorite; none while hidden_until.json keeps
 //                     gcyr:fluorite as junk
@@ -421,17 +421,33 @@
       var details = []
       var veins = IVF.venusVeins().concat(IVF.mercuryVeins()).concat(IVF.leachVeins())
       var fluorite = global.grindless.lv.extraVeins().filter(function (v) { return v.id === 'fluorite' })
+      var BI = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
       veins.concat(fluorite).forEach(function (v) {
-        var id = 'grindless:assembler/vein_sample/' + v.id
+        // IV's three veins: GT assembler recipes (iv/foundation.js addSamples); LV's fluorite: shapeless crafting (lv/crafting_multis.js)
+        var gt = veins.indexOf(v) >= 0
+        var id = (gt ? 'grindless:assembler/vein_sample/' : 'grindless:crafting/vein_sample/') + v.id
         var r = byId(server, id)
         if (r === null) {
           problems.push('missing ' + id)
           return
         }
-        // the sample recipes are GT assembler recipes: read their contents, not the vanilla result (which is air for a GTRecipe)
-        var text = describe(gtItems(r.getInputContents(caps().item)))
-        var outs = gtItems(r.getOutputContents(caps().item))
-        var out = outs.length > 0 ? outs[0].id : 'none'
+        var text
+        var out
+        if (gt) {
+          // a GTRecipe's vanilla result is air: read its GT contents
+          text = describe(gtItems(r.getInputContents(caps().item)))
+          var outs = gtItems(r.getOutputContents(caps().item))
+          out = outs.length > 0 ? outs[0].id : 'none'
+        } else {
+          text = asArray(r.getIngredients()).map(function (ing) {
+            try {
+              return String(ing.toJson())
+            } catch (e) {
+              return '?'
+            }
+          }).join(' ')
+          out = String(BI.ITEM.getKey(r.getResultItem(server.registryAccess()).getItem()))
+        }
         if (text.indexOf('grindless:empty_vein_probe') < 0) problems.push(id + ' has no probe')
         v.samplePair.forEach(function (p) {
           if (text.indexOf(p.replace(/^#/, '')) < 0) problems.push(id + ' lacks ' + p)
