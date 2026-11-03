@@ -1186,6 +1186,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\assets\Build-UHVGateTe
 |---|---|
 | `block/multiblock/warp_gate/overlay_front*.png` | A ring seen edge-on round a dark gap; active, a violet-white shimmer fills the ring and sweeps. |
 | `block/multiblock/baseline_astrometer/overlay_front*.png` | A dish on a mast looking up at two stars; active, the dish scans and the stars blink. |
+| `item/mgb2_cable.png`, `gate_coil_winding.png`, `reacted_gate_coil.png`, `impregnated_gate_coil.png`, `qualified_gate_coil.png` | D3-GATERING, the gate ring's MgB2 coil chain: a cable, then one coil drawing in four body colours (amber winding, steel reacted, epoxy brown, icy blue qualified). |
 
 ## UHV parallel hatch (MEGA-0b)
 

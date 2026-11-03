@@ -14,7 +14,7 @@
 //                             grindless_planet = proxima (the Earth - Proxima b pair; planets.json's pairTag), grindless:transform/
 //                             proxima_entangled_singularity.
 //   gtceu:assembly_line       the UEV machine casing (GTM registers it without a recipe), after the station research of the chart.
-//   gtceu:assembler           the ring's gate casing (F1's block): neutronium plates and frame, MgB2 wire, circuit 6.
+//   gtceu:assembler           the ring's gate casing (F1's block): a qualified MgB2 gate coil (uhv/gate_ring.js) in a neutronium shell, circuit 6.
 //   crafting                  the two controllers: UHV hull + 3 UHV component families (3 of each) + UHV circuits + 3 domain items, assembly lines grindless:assembly_line/<machine>.
 //   transit (tick)            while a gate holds (formed, WORKING on its c2 run), a player standing inside the ring is teleported to the
 //                             centre of the ring that the relay coordinates in its input bus name, else to another holding ring
@@ -291,9 +291,9 @@
       researchEUt: VA_UV, eut: VA_UHV, duration: 600 }
   }
 
-  // F1 registers the ring's casing block (both ends); neutronium shell, Mercury's MgB2 wire for the confinement field
+  // F1 registers the ring's casing block (both ends); neutronium shell round a qualified MgB2 coil (D3-GATERING, uhv/gate_ring.js)
   function addRingCasing(event) {
-    var inputs = ['6x gtceu:neutronium_plate', '1x gtceu:neutronium_frame', '4x gtceu:magnesium_diboride_single_wire']
+    var inputs = ['1x grindless:qualified_gate_coil', '4x gtceu:neutronium_plate', '1x gtceu:neutronium_frame']
     var missing = [WG.ids && WG.ids.casing ? WG.ids.casing : 'grindless:warp_gate_casing'].concat(inputs.map(function (s) {
       return s.substring(s.indexOf(' ') + 1)
     })).filter(function (x) { return !Item.exists(x) })
