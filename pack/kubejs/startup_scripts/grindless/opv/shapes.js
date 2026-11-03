@@ -36,13 +36,13 @@
     return slices
   }
 
-  // o: { w, h, d, fn, pal: { F: casing, any other char: block id }, parts: [Pat.part(...)], ctl: [x, y] }
+  // o: { w, h, d, fn, pal: { F: casing, any other char: block id, or a bare material name for a GT frame }, parts: [Pat.part(...)], ctl: [x, y] }
   T.spec = function (Pat, o) {
     var casing = Pat.block(o.pal.F)
     var symbols = { S: Pat.controller(), X: Pat.oneOf.apply(null, [casing].concat(o.parts)), F: casing, '#': Pat.air() }
     Object.keys(o.pal).forEach(function (ch) {
       if (ch === 'F') return
-      symbols[ch] = Pat.block(o.pal[ch])
+      symbols[ch] = o.pal[ch].indexOf(':') < 0 ? Pat.frame(o.pal[ch]) : Pat.block(o.pal[ch])
     })
     return { slices: T.slices(o.w, o.h, o.d, o.fn, o.ctl), symbols: symbols }
   }
