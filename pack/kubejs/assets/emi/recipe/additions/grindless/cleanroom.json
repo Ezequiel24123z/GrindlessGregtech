@@ -1,0 +1,11 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:gtceu:cleanroom"
+  ],
+  "text": [
+    "emi.grindless.info.cleanroom.0",
+    "emi.grindless.info.cleanroom.1",
+    "emi.grindless.info.cleanroom.2"
+  ]
+}

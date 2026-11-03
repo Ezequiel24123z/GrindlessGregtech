@@ -1,0 +1,10 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:gtceu:central_monitor"
+  ],
+  "text": [
+    "emi.grindless.info.central_monitor.0",
+    "emi.grindless.info.central_monitor.1"
+  ]
+}

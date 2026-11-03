@@ -1,0 +1,11 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:gtceu:data_bank"
+  ],
+  "text": [
+    "emi.grindless.info.data_bank.0",
+    "emi.grindless.info.data_bank.1",
+    "emi.grindless.info.data_bank.2"
+  ]
+}

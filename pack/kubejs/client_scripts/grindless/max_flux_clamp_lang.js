@@ -11,7 +11,7 @@
         ['gtceu.horizon_flux_clamp', 'Horizon Flux Clamp'],
         ['grindless.machine.horizon_flux_clamp.tooltip.0', '\u00a77Winds HTS flux pumps, field coils and stream bundles into a clamp winding.'],
         ['emi.grindless.info.clamp_coil_casing.0', 'A structure block: a coil ring of the Horizon Flux Clamp, held off the floor on stream bundle blocks. Made in the assembler.'],
-        ['gtceu.recipe.grindless_horizon_flux_clamp.horizon_flux_clamp', 'Circuit 1: four HTS flux pumps, eight field coils and four stream bundles are wound into a clamp winding under flux-loaded FRC; the flares it suppresses come out as a reconnection plasmoid. Runs only at Sgr A* (gcyr:black_hole_orbit).'],
+        ['gtceu.recipe.grindless_horizon_flux_clamp.horizon_flux_clamp', 'Circuit 1: four HTS flux pumps, eight field coils and four stream bundles are wound into a clamp winding under flux-loaded FRC; the flares give a reconnection plasmoid.'],
         ['gtceu.recipe.grindless_coated_conductor.pump_buffered_tape', 'Circuit 9: ITBTC coated conductor is laid on the Hastelloy substrate strip under an epoxy bond into the buffered tape of the HTS flux pump (line L54, step 1).'],
         ['gtceu.recipe.grindless_pulsed_laser_deposition.thick_pump_tape', 'Circuit 7: the KrF laser ablates gadolinium barium copper oxide onto the buffered pump tape in oxygen, growing the thick film the pump stator is wound from (line L54, step 2).'],
         ['gtceu.recipe.grindless_magnet_winding.flux_pump_stator', 'Circuit 15: eight turns of thick pump tape are wound with horizon strand wire and potted in epoxy, then ramped in the cold-test helium (line L54, step 3).'],

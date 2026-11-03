@@ -14,7 +14,7 @@
         ['grindless.machine.horizon_interferometer.tooltip.0',
             '\u00a77Three free-falling test masses at Sgr A*: the cloud phase map.'],
 
-        ['gtceu.recipe.grindless_horizon_interferometry.cloud_phase_map', 'Circuit 1: three reference sensors, three bonded optical benches, three stabilised lasers, twelve FEEP thrusters and two phasemeter boards fly the triangle; the final spin map is kept. The thrusters come back as spent crowns, and most of the used sensors and benches come back too.'],
+        ['gtceu.recipe.grindless_horizon_interferometry.cloud_phase_map', 'Circuit 1: three sensors, three optical benches, three lasers, twelve FEEP thrusters and two phasemeter boards fly the triangle; the spin map is kept. Most parts return.'],
         ['gtceu.recipe.grindless_horizon_interferometry.calibrated_oscillator_bank', 'Circuit 2: four phase-lock oscillator banks are calibrated against the cloud phase map (kept).'],
         ['gtceu.recipe.grindless_horizon_interferometry.cloud_phase_map_reuse', 'Circuit 3: the used sensors and optical benches are flown again with one fresh sensor; the final spin map is kept. Nothing is returned.'],
 
