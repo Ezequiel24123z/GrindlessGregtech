@@ -134,6 +134,7 @@ export const QUESTS = [
   {
     key: 'BLANKORB', kind: 'process', title: 'Blank Data Orb', icon: 'gtceu:data_orb', pkg: ['B10'],
     deps: ['FIBQ'], x: 1, y: 4.5,
+    fallback: { unless: ['S03'], x: 16, y: -6.5, deps: ['LCA'] },
     teach: {
       for: 'A blank &6Data Orb&r is the storage the bank and the research station both need.',
       needs: 'Circuit assembler work with epoxy boards, circuits, RAM and platinum wire.',
@@ -199,6 +200,7 @@ export const QUESTS = [
   {
     key: 'QTSUIT', kind: 'process', title: 'QuarkTech Suit', icon: 'gtceu:quarktech_chestplate',
     deps: ['CASM'], x: 10, y: 1.5,
+    fallback: { unless: ['S03'], x: 15, y: -8.5, deps: ['LCA'] },
     teach: {
       for: 'The &6QuarkTech Suit&r holds 100M EU. A charged chestplate flies like creative: 2,500 EU/t while flying, nothing on the ground, about 33 minutes per charge.',
       needs: 'Assembler recipes. The chestplate takes LuV circuits, a lapotronic orb, IV emitters and a field generator.',

@@ -182,6 +182,19 @@ export const QUESTS = [
     rewards: [xp(80)],
   },
   {
+    key: 'TJW', kind: 'wafer', title: 'Triple-Junction Wafer', icon: 'grindless:triple_junction_wafer', pkg: ['S03'],
+    deps: ['WAKE'], x: 10, y: 9,
+    teach: {
+      for: 'Gallium indium phosphide over gallium arsenide over germanium, grown layer by layer in the wake, make a &6Triple-Junction Wafer&r.',
+      needs: 'The Wake Shield Facility and germanium from Io, in a cleanroom.',
+      unlocks: 'Four triple-junction cells from one wafer, cut by an ordinary cutter.',
+      automate: 'Let ME carry the germanium in and the wafers to the cutter.',
+    },
+    desc: [],
+    tasks: [it('grindless:triple_junction_wafer')],
+    rewards: [xp(80)],
+  },
+  {
     key: 'CRYSTAL', kind: 'machine', title: 'Perfect Crystal', icon: 'gtceu:zero_g_crystal_grower', pkg: ['S03'],
     deps: ['STAT'], x: 2, y: 9,
     teach: {
