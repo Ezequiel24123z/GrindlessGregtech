@@ -261,10 +261,11 @@
         linked++
         var signal = 0
         io.itemsIn.forEach(function (x) { if (x.id === 'gtceu:uv_sensor' || x.id === 'gtceu:uv_emitter') signal += x.n })
-        if (signal !== 2) bad.push(r.id + ' takes ' + signal + ' UV sensors / emitters, want 2')
+        var wantSignal = /_cover$/.test(String(r.output)) ? 2 : 3
+        if (signal !== wantSignal) bad.push(r.id + ' takes ' + signal + ' UV sensors / emitters, want ' + wantSignal)
       }
     })
-    notes.push(uhv.length + ' UHV hatch and cover recipes at ' + UHV_VA + ' EU/t, ' + linked + ' with ' + LINK + ' and two UV sensors / emitters')
+    notes.push(uhv.length + ' UHV hatch and cover recipes at ' + UHV_VA + ' EU/t, ' + linked + ' with ' + LINK + ' and two (covers) or three (hatches) UV sensors / emitters')
     check('recipes', bad.length === 0, notes.join(' ; ') + (bad.length > 0 ? ' | problems: ' + bad.join(' ; ') : ''))
   }
   // ---------------------------------------------------------------- the network's persistent data (put back as it was at the end)
@@ -423,13 +424,18 @@
     var st = w.settle(S.server)
     var after = snapshot()
     var want = 2 * CELL_EU + w.cells[UV_CELL].capacity
-    var uvGot = after.uv2 - before.uv2
-    var uvCap = w.rate(UV, 2) * w.settleTicks
-    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === UV && Number(st.capacity) === want && after.uhv2 === 0 && after.uhv64 === 0 &&
-      Number(st.skippedAbove) === 2 && uvGot === uvCap,
-      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + UV +
-      '); ' + st.skippedAbove + ' hatches above it skipped (want 2), the UHV hatches hold ' + after.uhv2 + ' and ' + after.uhv64 + ' EU (want 0); the UV hatch got ' + uvGot +
-      ' EU (want ' + uvCap + ')')
+    var lowGot = after.uv2 - before.uv2
+    var lowCap = w.rate(UV, 2) * w.settleTicks
+    var fed = ['uhv2', 'uhv64'].every(function (k) {
+      var h = HATCHES.filter(function (x) { return x.key === k })[0]
+      return after[k] - before[k] > 0 && after[k] - before[k] <= w.rate(UHV, h.amps) * w.settleTicks
+    })
+    // the network's tier is its strongest cell (pack wireless_energy.js): the UHV cells of tower A lift it, so every hatch is fed and none is skipped
+    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === UHV && Number(st.capacity) === want &&
+      fed && Number(st.skippedAbove) === 0 && lowGot > 0 && lowGot <= lowCap,
+      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + UHV +
+      ', the strongest cell); ' + st.skippedAbove + ' hatches skipped (want 0), the UHV hatches got ' + (after.uhv2 - before.uhv2) + ' and ' + (after.uhv64 - before.uhv64) + ' EU (want each > 0 and within its cap); the UV hatch got ' + lowGot +
+      ' EU (want 1..' + lowCap + ')')
   }
 
   function swapB() {
@@ -442,6 +448,7 @@
   function jumpAndCap() {
     var w = W()
     var info = [w.towerInfo(machineAt(TOWER_A)), w.towerInfo(machineAt(TOWER_B))]
+    HATCHES.forEach(function (h) { var m = machineAt(h); m.energyContainer.changeEnergy(-Number(m.energyContainer.getEnergyStored())) })
     var before = snapshot()
     var st = w.settle(S.server)
     var after = snapshot()

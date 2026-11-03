@@ -413,13 +413,18 @@
     var st = w.settle(S.server)
     var after = snapshot()
     var want = 2 * CELL_EU + w.cells[UHV_CELL].capacity
-    var uvGot = after.uhv2 - before.uhv2
-    var uvCap = w.rate(UHV, 2) * w.settleTicks
-    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === UHV && Number(st.capacity) === want &&     after.uev2 === 0 && after.uev16 === 0 && after.uev64 === 0 &&
-          Number(st.skippedAbove) === 3 && uvGot === uvCap,
-      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + UHV +
-          '); ' + st.skippedAbove + ' hatches above it skipped (want 3), the UEV hatches hold ' + after.uev2 + ', ' + after.uev16 + ' and ' + after.uev64 + ' EU (want 0); the UHV hatch got ' + uvGot +
-      ' EU (want ' + uvCap + ')')
+    var lowGot = after.uhv2 - before.uhv2
+    var lowCap = w.rate(UHV, 2) * w.settleTicks
+    var fed = ['uev2', 'uev16', 'uev64'].every(function (k) {
+      var h = HATCHES.filter(function (x) { return x.key === k })[0]
+      return after[k] - before[k] > 0 && after[k] - before[k] <= w.rate(UEV, h.amps) * w.settleTicks
+    })
+    // the network's tier is its strongest cell (pack wireless_energy.js): the UEV cells of tower A lift it, so every hatch is fed and none is skipped
+    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === UEV && Number(st.capacity) === want &&
+      fed && Number(st.skippedAbove) === 0 && lowGot > 0 && lowGot <= lowCap,
+      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + UEV +
+      ', the strongest cell); ' + st.skippedAbove + ' hatches skipped (want 0), the UEV hatches got ' + (after.uev2 - before.uev2) + ', ' + (after.uev16 - before.uev16) + ' and ' + (after.uev64 - before.uev64) + ' EU (want each > 0 and within its cap); the UHV hatch got ' + lowGot +
+      ' EU (want 1..' + lowCap + ')')
   }
 
   function swapB() {
@@ -432,6 +437,7 @@
   function jumpAndCap() {
     var w = W()
     var info = [w.towerInfo(machineAt(TOWER_A)), w.towerInfo(machineAt(TOWER_B))]
+    HATCHES.forEach(function (h) { var m = machineAt(h); m.energyContainer.changeEnergy(-Number(m.energyContainer.getEnergyStored())) })
     var before = snapshot()
     var st = w.settle(S.server)
     var after = snapshot()

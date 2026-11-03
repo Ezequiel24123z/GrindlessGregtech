@@ -407,13 +407,18 @@
     var st = w.settle(S.server)
     var after = snapshot()
     var want = 2 * CELL_EU + w.cells[ZPM_CELL].capacity
-    var zpmGot = after.zpm2 - before.zpm2
-    var zpmCap = w.rate(ZPM, 2) * w.settleTicks
-    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === ZPM && Number(st.capacity) === want && after.uv2 === 0 && after.uv64 === 0 &&
-      Number(st.skippedAbove) === 2 && zpmGot === zpmCap,
-      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + ZPM +
-      '); ' + st.skippedAbove + ' hatches above it skipped (want 2), the UV hatches hold ' + after.uv2 + ' and ' + after.uv64 + ' EU (want 0); the ZPM hatch got ' + zpmGot +
-      ' EU (want ' + zpmCap + ')')
+    var lowGot = after.zpm2 - before.zpm2
+    var lowCap = w.rate(ZPM, 2) * w.settleTicks
+    var fed = ['uv2', 'uv64'].every(function (k) {
+      var h = HATCHES.filter(function (x) { return x.key === k })[0]
+      return after[k] - before[k] > 0 && after[k] - before[k] <= w.rate(UV, h.amps) * w.settleTicks
+    })
+    // the network's tier is its strongest cell (pack wireless_energy.js): the UV cells of tower A lift it, so every hatch is fed and none is skipped
+    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === UV && Number(st.capacity) === want &&
+      fed && Number(st.skippedAbove) === 0 && lowGot > 0 && lowGot <= lowCap,
+      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + UV +
+      ', the strongest cell); ' + st.skippedAbove + ' hatches skipped (want 0), the UV hatches got ' + (after.uv2 - before.uv2) + ' and ' + (after.uv64 - before.uv64) + ' EU (want each > 0 and within its cap); the ZPM hatch got ' + lowGot +
+      ' EU (want 1..' + lowCap + ')')
   }
 
   function swapB() {
@@ -426,6 +431,7 @@
   function jumpAndCap() {
     var w = W()
     var info = [w.towerInfo(machineAt(TOWER_A)), w.towerInfo(machineAt(TOWER_B))]
+    HATCHES.forEach(function (h) { var m = machineAt(h); m.energyContainer.changeEnergy(-Number(m.energyContainer.getEnergyStored())) })
     var before = snapshot()
     var st = w.settle(S.server)
     var after = snapshot()

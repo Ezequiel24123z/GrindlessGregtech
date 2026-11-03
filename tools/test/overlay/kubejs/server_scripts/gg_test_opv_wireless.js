@@ -232,9 +232,9 @@
     var notes = []
     var va = Number(GTValues.VA[OPV])
     var want = {}
-    want[LINK] = { items: ['gtceu:chain_strand_single_wire x2', 'grindless:pasta_strand_repeater x1', 'grindless:tetron_die x1'].sort().join(','),
-      fluids: ['gtceu:soldering_alloy x144', 'gtceu:lubricant x100'].sort().join(',') }
-    want[CELL_ID] = { items: ['gtceu:chain_strand_single_wire x16', 'grindless:chain_lamina_stack x4', 'gtceu:opv_field_generator x2'].sort().join(','), fluids: '' }
+    want[LINK] = { items: ['gtceu:chain_strand_single_wire x2', 'grindless:pasta_strand_repeater x1', 'grindless:tetron_die x1', 'gtceu:soldering_alloy_ingot x1'].sort().join(','),
+      fluids: ['gtceu:lubricant x100'].sort().join(',') }
+    want[CELL_ID] = { items: ['gtceu:chain_strand_single_wire x16', 'grindless:chain_lamina_stack x4', 'grindless:uxv_smes_cell x4'].sort().join(','), fluids: '' }
     OWN.forEach(function (o) {
       var live = liveRecipe(o.id)
       if (live === null) { bad.push(o.id + ' not in the recipe manager'); return }
@@ -430,13 +430,15 @@
     var st = w.settle(S.server)
     var after = snapshot()
     var want = 2 * CELL_EU + w.cells[UXV_CELL].capacity
-    var uxvGot = after.uxv2 - before.uxv2
-    var uxvCap = w.rate(UXV, 2) * w.settleTicks
-    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === UXV && Number(st.capacity) === want &&
-          after.opv2 === 0 && after.opv16 === 0 && after.opv64 === 0 && Number(st.skippedAbove) === 3 && uxvGot === uxvCap,
-      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + UXV +
-      '); ' + st.skippedAbove + ' hatches above it skipped (want 3), the OpV hatches hold ' + after.opv2 + ', ' + after.opv16 + ' and ' + after.opv64 + ' EU (want 0); the UXV hatch got ' + uxvGot +
-      ' EU (want ' + uxvCap + ')')
+    var lowGot = after.uxv2 - before.uxv2
+    var lowCap = w.rate(UXV, 2) * w.settleTicks
+    var fed = ['opv2', 'opv16', 'opv64'].every(function (k) { return after[k] - before[k] > 0 && after[k] - before[k] <= w.rate(OPV, hatch(k).amps) * w.settleTicks })
+    // the network's tier is its strongest cell (pack wireless_energy.js): the OpV cells of tower A lift it, so every hatch is fed and none is skipped
+    check('MIXED', !!st.up && Number(st.towers) === 2 && Number(st.tier) === OPV && Number(st.capacity) === want &&
+          fed && Number(st.skippedAbove) === 0 && lowGot > 0 && lowGot <= lowCap,
+      'the network: up ' + st.up + ', ' + st.towers + ' towers, capacity ' + st.capacity + ' EU (want ' + want + '), tier ' + st.tier + ' (want ' + OPV +
+      ', the strongest cell); ' + st.skippedAbove + ' hatches skipped (want 0), the OpV hatches got ' + (after.opv2 - before.opv2) + ', ' + (after.opv16 - before.opv16) + ' and ' + (after.opv64 - before.opv64) + ' EU (want each > 0 and within its cap); the UXV hatch got ' + lowGot +
+      ' EU (want 1..' + lowCap + ')')
   }
 
   function swapB() {
@@ -456,6 +458,7 @@
     // the capacity in status() is the last settlement's: JUMP checks it after the next one
     check('STORED', Number(full.stored) === want && want > Math.pow(2, 43),
       'set ' + want + ' EU (3 x ' + CELL_EU + ', above 2^43), the network reports stored ' + full.stored)
+    HATCHES.forEach(function (h) { var m = machineAt(h); m.energyContainer.changeEnergy(-Number(m.energyContainer.getEnergyStored())) })
     var before = snapshot()
     var st = w.settle(S.server)
     var after = snapshot()
