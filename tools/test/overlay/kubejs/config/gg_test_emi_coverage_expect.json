@@ -110,7 +110,7 @@
     {"id":"gtceu:liquid_deuterium_tritium","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:vacuum_freezer"],"used":["gtceu:antimatter_storage","gtceu:muon_catalysed_fusion"]},
     {"id":"gtceu:liquid_helium_3","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:cryogenic_processing"],"used":["gtceu:nuclear_demagnetisation"]},
     {"id":"gtceu:liquid_helium_4","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:cryogenic_processing","gtceu:superfluid_helium"],"used":["gtceu:superfluid_helium"]},
-    {"id":"gtceu:liquid_nitrogen","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:cryogenic_processing"],"used":["gtceu:closed_loop_cooling","gtceu:membrane_rolling","gtceu:mocvd","gtceu:molecular_beam_epitaxy","gtceu:vein_drilling"]},
+    {"id":"gtceu:liquid_nitrogen","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:cryogenic_processing"],"used":["gtceu:assembler","gtceu:closed_loop_cooling","gtceu:membrane_rolling","gtceu:mocvd","gtceu:molecular_beam_epitaxy","gtceu:vein_drilling"]},
     {"id":"gtceu:liquid_para_hydrogen","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:cryogenic_processing"],"used":["gtceu:assembly_line","gtceu:srf_cavity"]},
     {"id":"gtceu:liquid_pristine_hydrogen","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:cryogenic_processing"],"used":["gtceu:distillation_tower"]},
     {"id":"gtceu:livermorium_recoil_gas","kind":"fluid","needUse":true,"needMade":true,"made":["gtceu:heavy_ion_irradiation"],"used":["gtceu:recoil_separation"]},
