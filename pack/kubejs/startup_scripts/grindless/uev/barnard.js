@@ -103,11 +103,25 @@
   }
 
   var M = BA.machines
-  // The refinery: a Mond-process column. A lined base hall carries a banded shaft (PTFE pipe course, glass, tungstensteel pipe rack, gearbox
-  // feed pumps in the base) under a coil-tipped vent mast. Built in the registry callback (shapes.js may load after this file).
-  M.refinery.width = 7
-  M.refinery.height = 12
-  M.refinery.depth = 7
+  var SIC = 'grindless:sic_composite_casing'
+  var SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
+  M.drill.casing = SIC
+  M.drill.texture = SIC_TEXTURE
+  M.refinery.casing = SIC
+  M.refinery.texture = SIC_TEXTURE
+
+  function bodyPal() {
+    var pal = G.uevShapes.palette(SIC)
+    pal.C = TUNGSTEN_PIPE
+    pal.P = PIPE
+    return pal
+  }
+
+  // The refinery: a Mond plant. A lined hall holds the carbonylation reactors (gearbox feed pumps), and two columns rise from it: the
+  // banded decomposer tower with its pipe rack and a slim vent stack. Built in the registry callback (shapes.js may load after this file).
+  M.refinery.width = 11
+  M.refinery.height = 19
+  M.refinery.depth = 13
   M.refinery.makeSpec = function () {
     var m = M.refinery
     return G.uevShapes.spec(Pat, {
@@ -120,28 +134,53 @@
         Pat.part('energy_input', { min: 1, max: 2 }),
         G.parallelHatch.part()
       ],
-      fn: G.uevShapes.tower({
-        w: 7, d: 7, baseH: 3, th: 10, inset: 1, band: 3, bandChar: 'P',
-        baseInner: function (x, y, z) { return (x === 2 || x === 4) && z === 3 && y === 1 ? 'B' : null },
-        core: function (x, y, z) { return x === 3 && z === 3 ? 'C' : null },
-        crown: G.uevShapes.mast(7, 7, 2)
-      }),
-      pal: { F: INERT, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: PIPE, C: TUNGSTEN_PIPE, B: GEARBOX, Q: 'tungsten_steel' }
+      fn: (function () {
+        var s = G.uevShapes.scene(11, 19, 13)
+        s.box(0, 0, 0, 10, 0, 12, 'X')
+        s.room(0, 1, 0, 10, 4, 12, 'F', 't')
+        s.room(0, 3, 0, 10, 4, 12, 'H', 't')
+        s.cyl('y', 3, 4, 2, 5, 17, 'H', true, '#')
+        ;[7, 11, 15].forEach(function (y) { s.cyl('y', 3, 4, 2, y, y, 'P', true, null) })
+        s.box(3, 5, 4, 3, 17, 4, 'C')
+        s.cyl('y', 8, 4, 1, 5, 18, 'F', true, '#')
+        ;[9, 14].forEach(function (y) { s.cyl('y', 8, 4, 1, y, y, 'P', true, null) })
+        s.box(8, 5, 4, 8, 18, 4, 'C')
+        s.box(4, 6, 4, 7, 6, 4, 'C').box(4, 12, 4, 7, 12, 4, 'C')
+        s.box(2, 1, 2, 3, 2, 3, 'B').box(7, 1, 2, 8, 2, 3, 'B').box(5, 1, 7, 5, 3, 7, 'C')
+        ;[3, 7].forEach(function (x) { s.set(x, 3, 0, 'L').set(x, 3, 12, 'L') })
+        return s.booth('F', 3).fn()
+      })(),
+      pal: bodyPal()
     })
   }
-  M.drill.spec = {
-    slices: drillSlices(M.drill),
-    symbols: {
-      S: Pat.controller(),
-      X: Pat.oneOf(Pat.block(ROBUST),
+  // The drill: a derrick. Four lattice legs with ring braces carry a gearbox top drive over the drill string; a PTFE-free pipe rack of
+  // tungstensteel pipe runs beside the pad and a pump room sits at the front.
+  M.drill.width = 9
+  M.drill.height = 15
+  M.drill.depth = 9
+  M.drill.makeSpec = function () {
+    var m = M.drill
+    return G.uevShapes.spec(Pat, {
+      w: m.width, h: m.height, d: m.depth,
+      parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
         Pat.part('energy_input', { min: 1, max: 2 }),
-        G.parallelHatch.part()),
-      F: Pat.frame(['tungsten_steel']),
-      T: Pat.block(TUNGSTEN_PIPE),
-      D: Pat.block(GEARBOX)
-    }
+        G.parallelHatch.part()
+      ],
+      fn: (function () {
+        var s = G.uevShapes.scene(9, 15, 9)
+        s.box(0, 0, 0, 8, 0, 8, 'X')
+        ;[0, 8].forEach(function (x) { [0, 8].forEach(function (z) { s.box(x, 1, z, x, 12, z, 'Q') }) })
+        ;[4, 8].forEach(function (y) { s.edges(0, y, 0, 8, y, 8, y === 4 ? 'H' : 'R') })
+        s.box(4, 1, 4, 4, 13, 4, 'C')
+        s.box(3, 13, 3, 5, 14, 5, 'B')
+        s.box(6, 1, 1, 7, 6, 2, 'H').box(7, 3, 3, 7, 6, 3, 'C')
+        s.box(1, 1, 1, 2, 2, 3, 'B')
+        return s.booth('F', 3).fn()
+      })(),
+      pal: bodyPal()
+    })
   }
   BA.order = ['drill', 'refinery']
 

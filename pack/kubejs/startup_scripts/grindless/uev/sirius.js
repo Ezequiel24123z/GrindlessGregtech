@@ -105,7 +105,21 @@
   }
 
   var SHAPES = {
-    spectrograph: { w: 9, h: 11, d: 9, fn: function () { return G.uevShapes.hall({ w: 9, d: 9, hh: 5, crown: G.uevShapes.dish(9, 9, 3) }) } },
+    spectrograph: {
+      w: 9, h: 13, d: 9,
+      fn: function () {
+        var s = G.uevShapes.scene(9, 13, 9)
+        s.box(0, 0, 0, 8, 0, 8, 'X')
+        s.room(0, 1, 0, 8, 3, 8, 'R', 't')
+        s.cyl('y', 4, 4, 2, 4, 4, 'F', true, null)
+        s.cyl('y', 4, 4, 1, 5, 8, 'F', true, '#')
+        s.set(2, 6, 4, 'L').set(6, 6, 4, 'L')
+        s.cone(4, 4, 4, 9, 11, 1, 'F', true)
+        s.set(4, 12, 4, 'C').box(4, 5, 4, 4, 8, 4, 'Q')
+        s.box(1, 1, 1, 2, 1, 4, 'B')
+        return s.booth('R', 3).fn()
+      }
+    },
     harvester: { w: 9, h: 8, d: 13, fn: function () { return funnelCell(9, 13) } },
     works: { w: 9, h: 7, d: 11, fn: function () { return vaultCell(9, 11) } }
   }
@@ -127,8 +141,7 @@
     if (m.maxIO.fluidsIn > 0) parts.push(Pat.part('input_hatch', { min: 0, max: 1 }))
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(), parts: parts,
-      pal: {
-        F: m.casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
+      pal: k === 'spectrograph' ? G.uevShapes.palette(m.casing) : { F: m.casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
         C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
       }
     })
