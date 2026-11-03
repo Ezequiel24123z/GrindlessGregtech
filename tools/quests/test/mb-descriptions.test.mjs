@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { describeController, describeAll, niceName, structureParts, tooltipsFromLang, DESC_MAX_CHARS, chapterSnbt, layoutBands } from '../multiblocks/mb-lib.mjs';
+import { describeController, describeAll, niceName, mainProducts, structureParts, tooltipsFromLang, DESC_MAX_CHARS, chapterSnbt, layoutBands } from '../multiblocks/mb-lib.mjs';
 
 const base = { name: 'Electric Blast Furnace', ours: false, origin: 'GregTech', tooltip: null, types: ['gtceu:electric_blast_furnace'], io: [3, 3, 1, 1],
   products: [{ id: 'gtceu:hsla_steel_ingot', n: 4 }, { id: 'gtceu:steel_ingot', n: 2 }], parts: { casing: 'gtceu:heatproof_machine_casing', coil: 'gtceu:cupronickel_coil_block' },
@@ -17,7 +17,7 @@ test('a machine without a tooltip says what it is for, what it needs and what it
   assert.match(d, /^A GregTech multiblock for Electric Blast Furnace recipes\./);
   assert.match(d, /Build it mostly from Heatproof Machine Casing, with Cupronickel coils\./);
   assert.match(d, /crafted from MV Machine Hull, Steel plates and MV circuits\./);
-  assert.match(d, /Unlocks Hsla Steel Ingot and Steel Ingot\./);
+  assert.match(d, /Unlocks HSLA Steel Ingot and Steel Ingot\./);
   assert.match(d, /Automate it through input item buses and fluid hatches and output item buses and fluid hatches\./);
 });
 
@@ -57,4 +57,21 @@ test('describeAll is deterministic and feeds the chapter', () => {
   assert.match(a.get('gtceu:ebf'), /Unlocks Steel Ingot\..*Also needed to craft Mixer\./);
   const snbt = chapterSnbt(layoutBands(controllers.map((c) => ({ ...c, desc: a.get(c.id) }))));
   assert.match(snbt, /description: \["A GregTech multiblock for Blast recipes\./);
+});
+
+
+test('names: lang first, then acronyms', () => {
+  const lang = { 'item.grindless.aln_powder': 'AlN Powder', 'material.gtceu.cobalt_iron': 'CoFe Alloy' };
+  assert.equal(niceName('grindless:aln_powder', lang), 'AlN Powder');
+  assert.equal(niceName('gtceu:cobalt_iron_dust', lang), 'CoFe Alloy Dust');
+  assert.equal(niceName('gtceu:advanced_ebf'), 'Advanced EBF');
+  assert.equal(niceName('gtceu:mega_lcr'), 'Mega LCR');
+  assert.equal(niceName('gtceu:ev_vein_drill'), 'EV Vein Drill');
+});
+
+test('products: consumed outputs before nuggets', () => {
+  const rec = (o) => ({ t: 'x', j: { outputs: { item: [{ content: { ingredient: { item: o } } }] } } });
+  const out = mainProducts([rec('gtceu:aluminium_nugget'), rec('gtceu:aluminium_nugget'), rec('gtceu:aluminium_ingot')], ['x'], 4, new Map([['gtceu:aluminium_ingot', 3]]));
+  assert.equal(out[0].id, 'gtceu:aluminium_ingot');
+  assert.equal(out[out.length - 1].id, 'gtceu:aluminium_nugget');
 });

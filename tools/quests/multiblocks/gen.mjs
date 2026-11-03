@@ -250,8 +250,15 @@ async function main() {
   const nominal = nominalTiers(read('recipes.json').recipes, candidates);
   const { controllers, excluded, mismatches, shifted } = classify({ machines, items, hidden, ours, reach, nominal, implemented });
   const recipeList = read('recipes.json').recipes.map((r) => (typeof r === 'string' ? JSON.parse(r) : r));
+  const { runPackScripts } = await import(pathToFileURL(path.join(REPO, 'tools', 'analysis', 'lib', 'kubejs_static.mjs')).href);
+  const log = console.log;
+  console.log = () => {};
+  let packLang;
+  try { packLang = runPackScripts(path.join(REPO, 'pack')).lang; } finally { console.log = log; }
+  const enUs = (packLang instanceof Map ? Object.fromEntries(packLang) : packLang || {}).en_us || {};
+  const lang = enUs instanceof Map ? Object.fromEntries(enUs) : enUs;
   const descs = describeAll({
-    controllers, machines, recipeTypes: read('machines.json').recipeTypes, recipes: recipeList,
+    controllers, machines, recipeTypes: read('machines.json').recipeTypes, recipes: recipeList, lang,
     structures: read('structures.json').structures, tooltips: tooltipsFromLang([...langByFolder.values()].join('\n')),
   });
   for (const c of controllers) c.desc = descs.get(c.id);

@@ -58,17 +58,43 @@ const SENTENCE_QTY = /\b\d+\s*(?:x\s*)?(?:ingots?|plates?|dusts?|blocks?|bricks?
 
 const cap = (w) => w.charAt(0).toUpperCase() + w.slice(1);
 const words = (s) => s.split('_').filter(Boolean);
-const idTitle = (id) => words(id.split(':').pop().replace(/\//g, '_')).map((w) => TIER_NAMES[w] || cap(w)).join(' ');
+// words that are acronyms or have a fixed spelling when a name has to be built from an id
+export const ACRONYMS = {
+  ebf: 'EBF', lcr: 'LCR', cvd: 'CVD', pvd: 'PVD', mocvd: 'MOCVD', mbe: 'MBE', ald: 'ALD', mtj: 'MTJ', mram: 'MRAM', me: 'ME', ae: 'AE', ae2: 'AE2', bfo: 'BFO', cofe: 'CoFe', cofeb: 'CoFeB',
+  aln: 'AlN', pcb: 'PCB', smd: 'SMD', cpu: 'CPU', ram: 'RAM', lpe: 'LPE', led: 'LED', hts: 'HTS', snspd: 'SNSPD', qpu: 'QPU', tbc: 'TBC',
+  pmn: 'PMN', hd: 'HD', fcl: 'FCL', cmos: 'CMOS', sic: 'SiC', si: 'Si', nb: 'Nb', ito: 'ITO', uv: 'UV', ic: 'IC', soc: 'SoC', nand: 'NAND',
+  hsla: 'HSLA', ptfe: 'PTFE', pvc: 'PVC', pbi: 'PBI', yig: 'YIG', zblan: 'ZBLAN', ndfeb: 'NdFeB', smco: 'SmCo', beuv: 'BEUV', euv: 'EUV',
+  ulv: 'ULV', rf: 'RF', dna: 'DNA', rna: 'RNA', ev: 'EV',
+};
+const idTitle = (id) => words(id.split(':').pop().replace(/\//g, '_')).map((w) => TIER_NAMES[w] || ACRONYMS[w] || cap(w)).join(' ');
+export { idTitle };
 
-// a display name for an item, fluid or tag id: "forge:plates/steel" -> "Steel plates", "gtceu:circuits/hv" -> "HV circuits"
-export function niceName(id) {
-  if (id.startsWith('#')) id = id.slice(1);
-  const path = id.split(':').pop();
+// GTM's form words, longest first, for ids like gtceu:<material>_<form> whose material our lang names
+const FORMS = [['tiny_dust', 'Tiny Dust'], ['small_dust', 'Small Dust'], ['long_rod', 'Long Rod'], ['small_gear', 'Small Gear'], ['fine_wire', 'Fine Wire'],
+  ['dust', 'Dust'], ['ingot', 'Ingot'], ['plate', 'Plate'], ['nugget', 'Nugget'], ['gem', 'Gem'], ['rod', 'Rod'], ['foil', 'Foil'], ['ring', 'Ring'],
+  ['bolt', 'Bolt'], ['screw', 'Screw'], ['gear', 'Gear'], ['rotor', 'Rotor'], ['round', 'Round']];
+
+// a display name for an item, block, fluid or tag id. Our lang first (item/block.<ns>.<path>, material.gtceu.<name> plus the form word), then
+// the id with acronyms: "forge:plates/steel" -> "Steel plates", "gtceu:circuits/hv" -> "HV circuits"
+export function niceName(id, lang = {}) {
+  const isTag = id.startsWith('#');
+  if (isTag) id = id.slice(1);
+  const [ns, path] = id.includes(':') ? id.split(':') : ['minecraft', id];
+  if (!isTag) {
+    for (const k of [`item.${ns}.${path}`, `block.${ns}.${path}`, `fluid.${ns}.${path}`]) if (lang[k]) return lang[k];
+    if (ns === 'gtceu') {
+      if (lang[`material.gtceu.${path}`]) return lang[`material.gtceu.${path}`];
+      for (const [form, label] of FORMS) {
+        if (path.endsWith('_' + form) && lang[`material.gtceu.${path.slice(0, -form.length - 1)}`]) return `${lang[`material.gtceu.${path.slice(0, -form.length - 1)}`]} ${label}`;
+      }
+    }
+  }
   if (!path.includes('/')) return idTitle(id);
   const [category, ...rest] = path.split('/');
   const mat = rest.join('/');
   if (category === 'circuits') return `${mat.toUpperCase()} circuits`;
-  return `${words(mat).map(cap).join(' ')} ${category.replace(/_/g, ' ')}`;
+  const matName = lang[`material.gtceu.${mat}`] || words(mat).map((w) => ACRONYMS[w] || cap(w)).join(' ');
+  return `${matName} ${category.replace(/_/g, ' ')}`;
 }
 
 export function joinList(list) {
@@ -147,8 +173,21 @@ export function controllerInputs(recipes, controllers) {
   return out;
 }
 
-// the most common main products of the recipes of some recipe types: [{ id, n }] sorted by count, then id
-export function mainProducts(recipes, typeIds, limit = 4) {
+// how many recipes consume each plain item or fluid id
+export function consumerCounts(recipes) {
+  const n = new Map();
+  for (const r of recipes) {
+    if (!r.j) continue;
+    for (const id of new Set(recipeInputIds(r.j))) if (typeof id === 'string' && !id.startsWith('#')) n.set(id, (n.get(id) || 0) + 1);
+  }
+  return n;
+}
+
+const BY_FORM = /nugget|(?:^|_)(?:tiny|small)_|impure|pure_|_pile|crushed|scrap|slag/;
+
+// the products of the recipes of some recipe types worth naming: [{ id, n }]. Main outputs that other recipes consume come first, nuggets and
+// other by-forms last; then the more recipes make it, then the id
+export function mainProducts(recipes, typeIds, limit = 4, consumers = new Map()) {
   const types = new Set(typeIds);
   const n = new Map();
   for (const r of recipes) {
@@ -156,7 +195,9 @@ export function mainProducts(recipes, typeIds, limit = 4) {
     const id = mainProduct(r.j);
     if (id) n.set(id, (n.get(id) || 0) + 1);
   }
-  return [...n].map(([id, c]) => ({ id, n: c })).sort((a, b) => b.n - a.n || a.id.localeCompare(b.id)).slice(0, limit);
+  const rank = (id) => (BY_FORM.test(id.split(':').pop()) ? 2 : (consumers.get(id) || 0) > 0 ? 0 : 1);
+  return [...n].map(([id, c]) => ({ id, n: c }))
+    .sort((a, b) => rank(a.id) - rank(b.id) || b.n - a.n || (consumers.get(b.id) || 0) - (consumers.get(a.id) || 0) || a.id.localeCompare(b.id)).slice(0, limit);
 }
 
 // the main casing and the heating coil of a structure ({ slices, symbols } of structures.json), by block count
@@ -185,9 +226,10 @@ const endSentence = (s) => (/[.!?]$/.test(s) ? s : s + '.');
 // c: { name, ours, origin, tooltip, types: [id], io: [itemIn, itemOut, fluidIn, fluidOut], products: [id], parts: { casing, coil },
 //      inputs: [id], usedBy: [name] }. Returns one paragraph, at most DESC_MAX_CHARS characters and DESC_MAX_WORDS words.
 export function describeController(c) {
+  const nameOf = c.nameOf || niceName;
   const typeNames = (c.types || []).map(idTitle);
   const shown = typeNames.length > 3 ? [...typeNames.slice(0, 3), 'others'] : typeNames;
-  const clean = (ids) => ids.map(niceName).filter((n) => !SENTENCE_QTY.test(n));
+  const clean = (ids) => ids.map((x) => nameOf(x)).filter((n) => !SENTENCE_QTY.test(n));
   const build = (o) => {
     const out = [];
     const tip = c.tooltip && !SENTENCE_QTY.test(c.tooltip) ? endSentence(part(c.tooltip)) : '';
@@ -196,9 +238,10 @@ export function describeController(c) {
     if (tip && shown.length) out.push(`Runs ${joinList(shown)} recipes.`);
     const p = c.parts || {};
     if (p.casing) {
-      const cn = p.coil ? niceName(p.coil) : '';
+      const cn = p.coil ? nameOf(p.coil) : '';
       const coil = cn && o.coil ? (/ coil block$/i.test(cn) ? `, with ${cn.replace(/ coil block$/i, '')} coils` : `, with ${cn}`) : '';
-      out.push(`Build it mostly from ${niceName(p.casing)}${coil}.`);
+      const casingName = nameOf(p.casing);
+      out.push(`Build it mostly from ${SENTENCE_QTY.test(casingName) ? casingName.replace(/^(.*?)(\d+) (\w+)$/, '$3 type $1$2') : casingName}${coil}.`);
     }
     const ins = clean(c.inputs || []).slice(0, o.inputs);
     if (ins.length) out.push(`The controller is crafted from ${joinList(ins)}.`);
@@ -244,7 +287,9 @@ export function tooltipsFromLang(text) {
 }
 
 // the descriptions of a list of controllers [{ id, name, ours, ... }]: Map id -> text. All inputs are plain data, so a test can feed them.
-export function describeAll({ controllers, machines, recipeTypes, recipes, structures, tooltips }) {
+export function describeAll({ controllers, machines, recipeTypes, recipes, structures, tooltips, lang = {} }) {
+  const nameOf = (id) => niceName(id, lang);
+  const consumers = consumerCounts(recipes);
   const byId = new Map(machines.map((m) => [m.id, m]));
   const ioOf = new Map(recipeTypes.map((t) => [t.id, t.io || [0, 0, 0, 0]]));
   const inputs = controllerInputs(recipes, controllers);
@@ -252,7 +297,7 @@ export function describeAll({ controllers, machines, recipeTypes, recipes, struc
   for (const c of controllers) for (const id of inputs.get(c.id) || []) {
     if (id === c.id) continue;
     if (!usedBy.has(id)) usedBy.set(id, []);
-    usedBy.get(id).push(c.name);
+    usedBy.get(id).push(nameOf(c.id));
   }
   const out = new Map();
   for (const c of controllers) {
@@ -260,13 +305,14 @@ export function describeAll({ controllers, machines, recipeTypes, recipes, struc
     const types = (m.types || []).filter((t) => ioOf.has(t) || recipes.some((r) => r.t === t));
     const io = types.length ? types.reduce((a, t) => a.map((v, i) => v + (ioOf.get(t) || [0, 0, 0, 0])[i]), [0, 0, 0, 0]) : null;
     out.set(c.id, describeController({
-      name: c.name,
+      name: nameOf(c.id),
       ours: c.ours,
       origin: originOf(c.id, c.ours),
       tooltip: c.ours ? tooltips.get(c.id.split(':')[1]) : null,
       types,
       io,
-      products: mainProducts(recipes, types, 3),
+      products: mainProducts(recipes, types, 3, consumers),
+      nameOf,
       parts: structureParts(structures[c.id]),
       inputs: inputs.get(c.id) || [],
       usedBy: (usedBy.get(c.id) || []).slice().sort(),
