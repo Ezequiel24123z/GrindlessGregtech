@@ -8,7 +8,7 @@
 
   Writes (under pack/kubejs/assets/grindless/textures/):
     block/multiblock/mtj_sputter_cluster/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
-    block/multiblock/oxide_pld_chamber/ the same three files
+    (the oxide PLD chamber's face, kind 'pld', is no longer written: D4-SHAPE-UXV-B merged that chamber into the Spintronic Cluster Tool)
     item/<name>.png for each item in $items below (shapes tinted by one base colour)
 
   Sputter face: four target discs round a wafer; working (4 frames, frametime 4) a blue plasma ring lights each disc in turn.
@@ -115,9 +115,9 @@ function New-Face {
     return @{ C = $c; E = $e }
 }
 
-$Dirs = @('block/multiblock/mtj_sputter_cluster', 'block/multiblock/oxide_pld_chamber')
-$Kinds = @('sputter', 'pld')
-for ($m = 0; $m -lt 2; $m++) {
+$Dirs = @('block/multiblock/mtj_sputter_cluster')
+$Kinds = @('sputter')
+for ($m = 0; $m -lt $Dirs.Count; $m++) {
     $idle = New-Face $Kinds[$m] 0 $false
     Out-Tex $idle.C "$($Dirs[$m])/overlay_front.png"
     $col = @(); $emi = @()

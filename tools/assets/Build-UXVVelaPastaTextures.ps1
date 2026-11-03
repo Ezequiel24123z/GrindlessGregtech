@@ -8,7 +8,8 @@
 
   Writes (under pack/kubejs/assets/grindless/textures/):
     block/multiblock/<machine>/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
-    for pasta_extractor, pasta_phase_sorter, pasta_draw_bench, pasta_laminator and polar_cap_tap.
+    for pasta_extractor, pasta_phase_sorter (the Pasta Mill: D4-SHAPE-UXV-B merged the draw bench and the laminator into it, so the 'draw'
+    and 'lam' faces are no longer written) and polar_cap_tap.
 
   Extractor face: a funnel throat over a cage; working, a bead climbs it.
   Sorter face: an arc over five bins; working, a bead sweeps the arc and drops into the bins in turn.
@@ -154,8 +155,8 @@ function New-Face {
     return @{ C = $c; E = $e }
 }
 
-$Dirs = @('block/multiblock/pasta_extractor', 'block/multiblock/pasta_phase_sorter', 'block/multiblock/pasta_draw_bench', 'block/multiblock/pasta_laminator', 'block/multiblock/polar_cap_tap')
-$Kinds = @('extract', 'sort', 'draw', 'lam', 'tap')
+$Dirs = @('block/multiblock/pasta_extractor', 'block/multiblock/pasta_phase_sorter', 'block/multiblock/polar_cap_tap')
+$Kinds = @('extract', 'sort', 'tap')
 for ($m = 0; $m -lt $Dirs.Count; $m++) {
     $idle = New-Face $Kinds[$m] 0 $false
     Out-Tex $idle.C "$($Dirs[$m])/overlay_front.png"

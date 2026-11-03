@@ -7,8 +7,9 @@
   other mod. Output is deterministic. Same method and steel bezel as Build-UXVSpinDepositionTextures.ps1.
 
   Writes (under pack/kubejs/assets/grindless/textures/):
-    block/multiblock/vdw_stacking_cell/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
-    block/multiblock/racetrack_fab/ and block/multiblock/yig_lpe_furnace/ the same three files
+    block/multiblock/yig_lpe_furnace/overlay_front.png, overlay_front_active.png(+.mcmeta), overlay_front_active_emissive.png(+.mcmeta)
+    (the vdW stacking cell's and racetrack fab's faces, kinds 'stack' and 'track', are no longer written: D4-SHAPE-UXV-B merged them into the
+    vdW stacker and the Spintronic Cluster Tool)
     item/<name>.png for each item in $items below (shapes tinted by one base colour)
 
   Stacking face: four flake layers on a stage; working (4 frames, frametime 4) a stamp comes down and a blue glow runs through the stack.
@@ -129,9 +130,9 @@ function New-Face {
     return @{ C = $c; E = $e }
 }
 
-$Dirs = @('block/multiblock/vdw_stacking_cell', 'block/multiblock/racetrack_fab', 'block/multiblock/yig_lpe_furnace')
-$Kinds = @('stack', 'track', 'furnace')
-for ($m = 0; $m -lt 3; $m++) {
+$Dirs = @('block/multiblock/yig_lpe_furnace')
+$Kinds = @('furnace')
+for ($m = 0; $m -lt $Dirs.Count; $m++) {
     $idle = New-Face $Kinds[$m] 0 $false
     Out-Tex $idle.C "$($Dirs[$m])/overlay_front.png"
     $col = @(); $emi = @()
