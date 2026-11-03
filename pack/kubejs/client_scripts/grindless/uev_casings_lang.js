@@ -1,3 +1,4 @@
+// priority: 5123
 // Gregtech Grindless - names and tooltips of the UEV casing family (startup_scripts/grindless/uev/casings.js):
 //   block.grindless.<n> plus two tooltip lines (tooltip.grindless.<n>.0 and .1). Names go in en_us.
 (function () {
