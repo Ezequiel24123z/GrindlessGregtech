@@ -174,7 +174,7 @@
         Number(classes().Helper.getRealEUt(recipe).getTotalEU()) === 122880,
       def.recipe + '; dims=' + dimIds.join(',') + '; circuits=' + circuit.length)
     })
-    ;['grindless:titan_entry/lake_sampling', 'grindless:tholin_reforming/nitrile_fibres', 'grindless:tholin_reforming/nitrile_diaminobenzidine',
+    ;['grindless:titan_entry/lake_sampling', 'grindless:tholin_reforming/nitrile_diaminobenzidine',
       'grindless:telemetry_decoding/titan_lake_sampler', 'grindless:assembler/titan_entry_probe', 'grindless:assembler/probe_bay_casing',
       'grindless:assembly_line/entry_probe_bay', 'grindless:assembly_line/tholin_reformer'].forEach(function (id) {
       check('support_recipe', byId(id) !== null, id)

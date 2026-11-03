@@ -8,7 +8,7 @@
 //     circuit 2  entry probe + lake sampler -> 4,000 mB methane + 2,000 mB ethane (the lake run, Dragonfly)
 //   tholin_reforming (tholin reformer; the HCN stays inside the machine and is never output)
 //     circuit 1  4 tholin + 1,000 mB water -> 1,000 mB nitrile mix
-//     circuit 2  1,000 mB nitrile mix -> 8 carbon fibres + 500 mB ammonia
+//     circuit 2  (retired by D2-PAN: the nitriles are fractionated and spun into carbon fibre by zpm/pan_fibre.js)
 //     circuit 3  1,000 mB nitrile mix + 2,000 mB ammonia + zinc dust (not consumed) -> 1,000 mB diaminobenzidine
 //     circuit 4  (UHV-B5, line 18; added by uhv/proxima_ground.js from tables/proxima_ground.json, so it is not in this table) 4
 //                sterilised ice organics (Proxima b's flare-cooked ice organics, sent up by AE2) + 1,000 mB water -> 1,000 mB nitrile
@@ -16,7 +16,7 @@
 //   telemetry_decoding (the deep space network of ZPM-A9, Earth; circuits 1-3 are A9's)
 //     circuit 4  Titan probe recording + data orb + ZPM sensor + 1,000 mB liquid helium -> a lake sampler (the lake run's payload)
 // Support: entry probe assembler (the PICA heat shields' use), probe bay casing assembler, the two controllers' crafting recipes.
-// Destinations: methane, ethane and ammonia feed the existing chemistry; carbon fibre and diaminobenzidine are the usual materials.
+// Destinations: methane and ethane feed the existing chemistry; diaminobenzidine is the usual material (ammonia is only consumed here).
 // Published: global.grindless.zpmTitanProbes.recipes [{ name, type, recipeId, circuit, ... }], .skipped, .clashes.
 (function () {
   var LOG = '[grindless/zpm] '
@@ -43,9 +43,6 @@
     { name: 'tholin_hydrolysis', type: 'tholin_reforming', circuit: 1,
       itemsIn: [{ id: THOLIN, count: 4 }], notConsumed: [], fluidsIn: [{ id: 'minecraft:water', amount: 1000 }],
       itemsOut: [], fluidsOut: [{ id: NITRILES, amount: 1000 }], orbit: true, eut: ZPM_VA, duration: 200 },
-    { name: 'nitrile_fibres', type: 'tholin_reforming', circuit: 2,
-      itemsIn: [], notConsumed: [], fluidsIn: [{ id: NITRILES, amount: 1000 }],
-      itemsOut: [{ id: 'gtceu:carbon_fibers', count: 8 }], fluidsOut: [{ id: 'gtceu:ammonia', amount: 500 }], orbit: true, eut: ZPM_VA, duration: 200 },
     { name: 'nitrile_diaminobenzidine', type: 'tholin_reforming', circuit: 3,
       itemsIn: [], notConsumed: ['gtceu:zinc_dust'], fluidsIn: [{ id: NITRILES, amount: 1000 }, { id: 'gtceu:ammonia', amount: 2000 }],
       itemsOut: [], fluidsOut: [{ id: 'gtceu:diaminobenzidine', amount: 1000 }], orbit: true, eut: ZPM_VA, duration: 200 },
