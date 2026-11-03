@@ -17,7 +17,7 @@
                         'Two counter-rotating bucket drums dig with no net reaction force, so Mercury\'s low gravity cannot lift the machine. Mercury only.',
                         '1 excavator bucket drum (worn about 1 run in 32) + an iridosmine vein sample from Mercury (never used up) -> 64 Mercury regolith.',
                         'The only source of Mercury regolith, for the Solar Vapour Furnace.',
-                        'Needs a 9 x 5 x 3 Hermean heat-shield brick chassis with bucket drums (tungsten steel gearboxes) on tungsten steel frame arms either side, 1 or 2 energy hatches, an input bus and an output bus.'
+                        'Needs a 9 x 8 x 17 bucket-wheel excavator: Hermean heat-shield brick crawler tracks and chassis, a tungsten steel gearbox bucket wheel on a frame boom with a pipe conveyor, a cab and a heatproof counterweight, 1 or 2 energy hatches, an input bus and an output bus.'
                     ]
                 },
                 solar_vapour_furnace: {
@@ -29,7 +29,7 @@
                         'Heliostats focus Mercury\'s sunlight on a vacuum chamber and boil the regolith\'s oxides off in order. Mercury\'s day side only: the recipes wait for daylight.',
                         'Circuit 1 (1,400 K): 16 Mercury regolith -> sodium-potassium + sulfur + 12 stripped regolith. Circuit 2 (2,300 K): 12 stripped regolith -> magnesium + silicon monoxide + iron + 4 alumina-calcia residue + graphite.',
                         'Both wear the regolith crucible lining (about 1 run in 16). Circuit 3: 4 alumina-calcia residue -> 1 lining. The first lining comes from the blast furnace (sapphire + quicklime).',
-                        'Needs 10 heliostat mirrors on tungsten steel frames, a 5 x 5 x 5 Hermean heat-shield brick chamber under a tungsten steel firebox receiver with a heatproof crucible inside, night-sky radiator condenser plates on its flanks, 1 or 2 energy hatches, input and output buses and 1 output hatch.'
+                        'Needs a 15 x 11 x 21 furnace: a bed of 49 heliostat mirrors on tungsten steel frames, a brick shield, a 9 x 5 x 5 Hermean heat-shield brick chamber under a tungsten steel firebox receiver and tower with a heatproof crucible inside, night-sky radiator condenser plates on its flanks, 1 or 2 energy hatches, input and output buses and 1 output hatch.'
                     ]
                 }
             },
