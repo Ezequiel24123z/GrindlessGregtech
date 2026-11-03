@@ -65,7 +65,7 @@ test('no Vela or Cassiopeia A product goes into the four casings (bootstrap, uxv
   for (const n of NEW) assert.doesNotMatch(recipeOf(n).body, forbidden, n);
   assert.match(recipeOf('pasta_containment_casing').body, /gtceu:uiv_field_generator/);
   assert.match(recipeOf('pulsed_field_casing').body, /gtceu:uiv_emitter/);
-  assert.match(recipeOf('mu_metal_shield_casing').body, /gtceu:uxv_sensor/);
+  assert.match(recipeOf('mu_metal_shield_casing').body, /2x gtceu:uiv_sensor/);
 });
 
 test('every casing is built on gum metal and the families keep to their products', () => {

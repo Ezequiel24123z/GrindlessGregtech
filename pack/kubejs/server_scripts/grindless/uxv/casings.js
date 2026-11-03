@@ -16,8 +16,10 @@ global.grindless.recipes('uxv/casings', function (event) {
     .EUt(UXV_EUT)
     .duration(400)
 
+  // two UIV sensors, not a UXV one: the Spintronic Cluster Tool is built from this casing and makes the MTJ dies every UXV sensor needs
+  // (bootstrap; the UXV gate failed on dump 9f6c318722c0)
   event.recipes.gtceu.assembler('grindless:mu_metal_shield_casing')
-    .itemInputs('16x grindless:annealed_mu_foil', '4x grindless:gum_metal_billet', '4x grindless:w184_cvi_preform', '1x gtceu:uxv_sensor')
+    .itemInputs('16x grindless:annealed_mu_foil', '4x grindless:gum_metal_billet', '4x grindless:w184_cvi_preform', '2x gtceu:uiv_sensor')
     .inputFluids(Fluid.of('gtceu:epoxy', 288))
     .itemOutputs('8x grindless:mu_metal_shield_casing')
     .EUt(UXV_EUT)
