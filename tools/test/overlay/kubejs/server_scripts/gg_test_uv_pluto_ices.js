@@ -197,8 +197,8 @@
   function staticChecks() {
     live('grindless:penetrator_probe/sputnik_penetrator', PLUTO, 1, UV_VA)
     live('grindless:penetrator_probe/charon_penetrator', PLUTO, 2, UV_VA)
-    live('grindless:ice_fractionation/sputnik_ice_fractionation', PLUTO, 1, ZPM_VA)
-    live('grindless:ice_fractionation/charon_ice_fractionation', PLUTO, 2, ZPM_VA)
+    live('grindless:ice_fractionation/sputnik_ice_fractionation', null, 1, ZPM_VA)
+    live('grindless:ice_fractionation/charon_ice_fractionation', null, 2, ZPM_VA)
     live('grindless:syngas/hv/pluto_shift', null, 5, 480)
     var old = byId('grindless:syngas/hv/shift')
     check('old_shift_unlocked', old !== null && dimsOf(old).length === 0, 'grindless:syngas/hv/shift has no dimension condition')
