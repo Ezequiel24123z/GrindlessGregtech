@@ -81,7 +81,7 @@ const o1 = cluster('O1 Si-28 qubit line', [
     ['i', 'grindless:si28_poly_rod', 'Si-28 Poly Rod'],
     ['m', zr, 'Zone Refining Tower'],
     ['i', 'grindless:si28_fz_ingot', 'Si-28 FZ Ingot'],
-    ['m', beuv, 'BEUV Scanner'],
+    ['m', 'gtceu:large_cutter', 'Large Cutter'],
     ['i', 'grindless:si28_fz_wafer', 'Si-28 FZ Wafer'],
     ['m', imp, 'Ion Implanter'],
     ['i', 'grindless:h_si28_wafer', 'H Si-28 Wafer'],
@@ -325,7 +325,7 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
     ['i', 'grindless:gasb_wafer', 'GaSb Wafer'],
     ['m', mbe, 'MBE Reactor'],
     ['i', 'grindless:ingaassb_epi_wafer', 'InGaAsSb Epi Wafer'],
-    ['i', 'grindless:tpv_panel', 'TPV Panel'],
+    ['i', 'grindless:tpv_panel', 'TPV Panel', { end: 'the annihilation shield and the engine cage' }],
   ]),
   [n('o2_engine', 0, 0, M('gtceu:annihilation_engine'), 'Annihilation Engine', { kind: 'ours', sub: 'Stack, ACMF pellet, absorber tile and TPV panel', from: [] })],
 ], [
@@ -343,7 +343,6 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
   ['o2_engine', 'o2s_2'],
   ['o2_engine', 'o2a_7'],
   ['o2_engine', 'o2b_7'],
-  ['o2_engine', 'o2g_6'],
 ], [
   ['o2x0', 'pl_uv:trap'], ['o2x1', 'pl_uhv:sps'], ['o2x2', 'pl_uev:ebf'], ['o2x3', 'pl_uhv:cgf'], ['o2x4', 'pl_uv:sheet'],
   ['o2x5', 'pl_uiv:l31_1'], ['o2x6', 'pl_ev:plate'], ['o2x7', 'pl_uhv:acc'], ['o2x8', 'pl_uhv:mbe'], ['o2x9', 'pl_luv:indium'],
@@ -386,8 +385,6 @@ const o3 = cluster('O3 Positrons to the Kugelblitz', [
     ['i', 'grindless:gamma_multilayer_mirror', 'Gamma Multilayer Mirror'],
   ]),
   path('o3l_', [
-    ['i', 'grindless:ionian_sublimate', 'Ionian Sublimate'],
-    ['m', 'gtceu:fumarole_condenser', 'Fumarole Condenser'],
     ['i', 'gtceu:germanium_dust', 'Germanium'],
     ['m', zr, 'Zone Refining Tower'],
     ['i', 'grindless:seven_n_germanium', '7N Germanium'],
@@ -402,7 +399,7 @@ const o3 = cluster('O3 Positrons to the Kugelblitz', [
   ['o3_3', 'o3g_2'],
   ['o3_8', 'o3g_2'],
   ['o3_10', 'o3m_8'],
-  ['o3_10', 'o3l_8'],
+  ['o3_10', 'o3l_6'],
   ['o3_12', 'o3a_0'],
   ['o3_14', 'o3m_8'],
   ['o3_14', 'o3f_0'],
@@ -477,6 +474,7 @@ const o6 = cluster('O6 Probes, nodes and the bulge', [
     ['m', hotcell, 'Hot Cell'],
     ['i', 'grindless:tested_mmic_tile', 'Tested MMIC Tile'],
     ['m', eb, 'Electron Beam Furnace'],
+    ['i', 'grindless:sealed_mmic_tile', 'Sealed MMIC Tile'],
     ['i', 'grindless:node_power_transmitter', 'Node Power Transmitter'],
     ['m', nodeWorks, 'Collector Node Works'],
     ['i', 'grindless:collector_node', 'Collector Node'],
@@ -517,6 +515,7 @@ const o6 = cluster('O6 Probes, nodes and the bulge', [
     ['i', 'grindless:polycapillary_optic', 'Polycapillary Optic'],
     ['i', 'grindless:xray_timing_head', 'X-ray Timing Head'],
     ['i', 'grindless:clock_locked_head', 'Clock-Locked Head'],
+    ['m', 'gtceu:xray_pulse_profiler', 'X-ray Pulse Profiler'],
     ['i', 'grindless:xnav_unit', 'XNAV Unit', { end: 'the probe fleet' }],
   ]),
   path('o6d_', [
@@ -529,10 +528,10 @@ const o6 = cluster('O6 Probes, nodes and the bulge', [
     ['i', 'grindless:sdd_die', 'SDD Die'],
   ]),
 ], [
-  ['o6_15', 'o6m_8'],
-  ['o6_13', 'o6s_6'],
-  ['o6_13', 'o6f_3'],
-  ['o6x_5', 'o6d_6'],
+  ['o6_16', 'o6m_8'],
+  ['o6_14', 'o6s_6'],
+  ['o6_14', 'o6f_3'],
+  ['o6x_3', 'o6d_6'],
 ], [['o6x0', 'pl_iv:hotcell'], ['o6x1', 'pl_uhv:clock']], {}, 10);
 
 // O7: OpV components. The spine is the REBCO pancake to the robot arm; the rotor and harmonic drive join it.
@@ -556,7 +555,6 @@ const o7 = cluster('O7 OpV components', [
     ['m', cvi, 'CVI Furnace'],
     ['i', 'grindless:densified_chain_preform', 'Densified Chain Preform'],
     ['i', 'grindless:chain_composite_rod', 'Chain Composite Rod'],
-    ['i', 'grindless:chain_composite_rotor', 'Chain Composite Rotor'],
   ]),
   path('o7h_', [
     ['i', 'grindless:gum_metal_billet', 'Gum Metal Billet'],
@@ -616,7 +614,7 @@ const o7 = cluster('O7 OpV components', [
     ['i', 'grindless:hpge_compton_crystal', 'HPGe Compton Crystal', { end: 'the OpV sensor' }],
   ]),
 ], [
-  ['o7_8', 'o7r_5'],
+  ['o7_8', 'o7r_4'],
   ['o7_10', 'o7h_7'],
 ], [], {}, 11);
 
