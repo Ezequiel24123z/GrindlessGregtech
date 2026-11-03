@@ -71,7 +71,7 @@ To move a pinned or older instance to the releases channel without touching its 
 
 Instances that point at `/playable/` still update for now. The old `/jugable/` branch is gone, so those instances need this change to keep updating.
 
-To set up an instance by hand, create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17, put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) in its `minecraft` folder and use the command above. Replace `releases` with a version tag such as `v1.3.0` to stay on one version.
+To set up an instance by hand, create a Minecraft 1.20.1 instance with Forge 47.4.28 and Java 17, put [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases) in its `minecraft` (or `.minecraft`) folder and use the command above. Replace `releases` with a version tag such as `v1.4.0` to stay on one version.
 
 Never open an updated world with an older version of the pack. Restore a backup instead.
 
@@ -89,7 +89,7 @@ curl -fLO https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.
 java -jar forge-1.20.1-47.4.28-installer.jar --installServer
 ```
 
-2. Install the pack in server mode. This skips the client-only mods:
+2. Install the pack in server mode. This skips the client-only mods. The download is about 330 MB in some 5,000 files and takes a few minutes:
 
 ```
 curl -fLO https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar
@@ -109,7 +109,7 @@ echo -Xms8G -Xmx8G >> user_jvm_args.txt
 ./run.sh nogui
 ```
 
-The first boot builds the world and takes several minutes. Teams, wireless energy and travel are handled by the pack's own mods and scripts, so they need nothing extra on the server. Players join with the same pack version as the server.
+The first boot builds the world and takes a couple of minutes; it may log once that `server.properties` could not be loaded, because the file does not exist yet. Teams, wireless energy and travel are handled by the pack's own mods and scripts, so they need nothing extra on the server. Players join with the same pack version as the server.
 
 To move to a new version, stop the server, back up the `world` folder, and run the packwiz command from step 2 again. Replace `releases` in the URL with a version tag such as `v1.4.0` to stay on one version. Never start an updated world with an older version of the pack.
 

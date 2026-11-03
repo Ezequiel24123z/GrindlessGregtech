@@ -78,6 +78,9 @@ The audit needs `-EmiAuditClientXmx 8G -Slots 1 -EmiAuditTimeoutSec 1800`: at 4G
 The full report is collected as `results/client/kubejs-exported/gg_emi_coverage_report.json`: per-stack
 made/used counts and categories, all GTM machines and workstation bindings, all displayable GT categories,
 previews, info pages, and reload warnings. Read that JSON or the summary, not complete logs.
+Limit: the audit reads each GT recipe's own outputs where GTM exposes them; for the rest (38,630 recipes at
+v1.4.0, the `native_outputs` NOTE) it judges extra outputs and byproducts by EMI's index alone. Byproduct
+destinations are proven on the dump instead (the batch's unconsumed-output query and `line-audit.mjs`).
 Expectations are regenerated with `node tools/analysis/emi-coverage.mjs --expect` after content changes.
 The overlay is test-only; the pack shipped to players does not include it.
 

@@ -532,10 +532,10 @@ Self-replication is *named fiction* at this scale. Every copy has a stated feeds
 
 **What it gains:** receives the power beamed by deployed node packs that orbit in the cluster core, where starlight is many thousands of times denser than at the Sun *(tune; Terzan 5's core luminosity density is real, its value here is chosen)*. Nodes degrade under the core's radiation and are consumed.
 **Recipes (generator):**
-- c1 1 `deployed_node_pack` → 2^26 EU/t for 2,400 t.
-- c2 4 packs → 2^28 EU/t for 2,400 t.
-- c3 16 packs (64 nodes) → 2^30 EU/t for 2,400 t + 1 `bulge_light_census`.
-- All *(tune)*; see Power for balance.
+- c1 1 `deployed_node_pack` → 2^26 EU/t for 376,200 t.
+- c2 4 packs → 2^28 EU/t for 376,200 t.
+- c3 16 packs (64 nodes) → 2^30 EU/t for 376,200 t + 1 `bulge_light_census`.
+- One shared duration, ceil(1.5 x the pack's full cost / 2^26 / 100) x 100 = 376,200 t (`tables/bulge_collector.json`; tools/analysis/test/opv-bulge_collector.test.mjs fails when it goes stale): a pack returns 1.5 times what it cost.
 **Byproducts:** spent nodes → machine 15 c7 (Si back as `si_alloy_powder`, 50%; R3 adds the row).
 **Structure (QR):** 13x7x13 rectenna field with a receiver mast.
 - Blocks: `gtceu:high_power_casing` (appearance); `gtceu:laminated_glass`; `gtceu:superconducting_coil`.
