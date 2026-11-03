@@ -45,11 +45,114 @@
       F: casing,
       '#': Pat.air()
     }
-    ;['A', 'L', 'P', 'C', 'B'].forEach(function (ch) {
-      if (o.pal[ch]) symbols[ch] = Pat.block(o.pal[ch])
+    Object.keys(o.pal).forEach(function (ch) {
+      if (ch === 'F' || ch === 'Q' || ch === 'S' || ch === 'X' || !o.pal[ch]) return
+      symbols[ch] = Pat.block(o.pal[ch])
     })
     if (o.pal.Q) symbols.Q = Pat.frame([o.pal.Q])
     return { slices: T.slices(o.w, o.h, o.d, o.fn), symbols: symbols }
+  }
+
+  // The UEV casing families (docs/eras/lines-uev-uxv.md section 9): the body of every UEV structure. R structural (SiC composite),
+  // H thermal (HfTaCN lining), M field (superhydride magnet), O optics (photonic), D containment (degenerate matter).
+  T.family = {
+    R: 'grindless:sic_composite_casing',
+    H: 'grindless:hftacn_lining_casing',
+    M: 'grindless:superhydride_magnet_casing',
+    O: 'grindless:photonic_casing',
+    D: 'grindless:degenerate_containment_casing'
+  }
+  T.palette = function (primary, extra) {
+    var pal = {
+      F: primary, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
+      C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
+    }
+    Object.keys(T.family).forEach(function (ch) { pal[ch] = T.family[ch] })
+    if (extra) Object.keys(extra).forEach(function (ch) { pal[ch] = extra[ch] })
+    return pal
+  }
+
+  // ---------------------------------------------------------------- scene: a voxel canvas the big UEV structures are drawn on
+  // Later strokes paint over earlier ones. Axis 'x', 'y' or 'z' names the axis of a cylinder; (a, b) is its centre in the other two
+  // axes, in the order x, y, z with the axis removed. Unpainted cells are ' ' (anything).
+  T.scene = function (w, h, d) {
+    var g = []
+    for (var i = 0; i < w * h * d; i++) g.push(' ')
+    var s = { w: w, h: h, d: d }
+    s.get = function (x, y, z) {
+      return x < 0 || y < 0 || z < 0 || x >= w || y >= h || z >= d ? ' ' : g[(z * h + y) * w + x]
+    }
+    s.set = function (x, y, z, ch) {
+      if (x < 0 || y < 0 || z < 0 || x >= w || y >= h || z >= d) return s
+      g[(z * h + y) * w + x] = ch
+      return s
+    }
+    s.box = function (x0, y0, z0, x1, y1, z1, ch) {
+      for (var z = z0; z <= z1; z++) for (var y = y0; y <= y1; y++) for (var x = x0; x <= x1; x++) s.set(x, y, z, ch)
+      return s
+    }
+    // walls of ch with an air interior; faces: string of the faces to leave open, from 'lrbtfk' (left, right, bottom, top, front, back)
+    s.room = function (x0, y0, z0, x1, y1, z1, ch, open, inner) {
+      open = open || ''
+      for (var z = z0; z <= z1; z++) for (var y = y0; y <= y1; y++) for (var x = x0; x <= x1; x++) {
+        var wall = (x === x0 && open.indexOf('l') < 0) || (x === x1 && open.indexOf('r') < 0) ||
+          (y === y0 && open.indexOf('b') < 0) || (y === y1 && open.indexOf('t') < 0) ||
+          (z === z0 && open.indexOf('k') < 0) || (z === z1 && open.indexOf('f') < 0)
+        s.set(x, y, z, wall ? ch : (inner === undefined ? '#' : inner))
+      }
+      return s
+    }
+    // the twelve edges of a box
+    s.edges = function (x0, y0, z0, x1, y1, z1, ch) {
+      for (var z = z0; z <= z1; z++) for (var y = y0; y <= y1; y++) for (var x = x0; x <= x1; x++) {
+        var n = (x === x0 || x === x1 ? 1 : 0) + (y === y0 || y === y1 ? 1 : 0) + (z === z0 || z === z1 ? 1 : 0)
+        if (n >= 2) s.set(x, y, z, ch)
+      }
+      return s
+    }
+    function inDisk(da, db, r) { return da * da + db * db <= r * r + r * 0.5 }
+    // a solid cylinder, or a tube (wall ch, interior inner, '#' by default) when hollow is true
+    s.cyl = function (axis, a, b, r, lo, hi, ch, hollow, inner) {
+      for (var u = lo; u <= hi; u++) for (var p = -r; p <= r; p++) for (var q = -r; q <= r; q++) {
+        if (!inDisk(p, q, r)) continue
+        var ring = r > 0 && !inDisk(p, q, r - 1)
+        if (hollow && !ring) { if (inner !== null) put(axis, a + p, b + q, u, inner === undefined ? '#' : inner); continue }
+        put(axis, a + p, b + q, u, ch)
+      }
+      return s
+    }
+    function put(axis, a, b, u, ch) {
+      if (axis === 'y') s.set(a, u, b, ch)
+      else if (axis === 'z') s.set(a, b, u, ch)
+      else s.set(u, a, b, ch)
+    }
+    // a stepped cone along y: radius r0 at y0 shrinking by one every `step` rows (hollow shell when hollow)
+    s.cone = function (cx, cz, r0, y0, y1, step, ch, hollow) {
+      for (var y = y0; y <= y1; y++) {
+        var r = r0 - Math.floor((y - y0) / step)
+        if (r < 0) break
+        s.cyl('y', cx, cz, r, y, y, ch, hollow, hollow ? '#' : undefined)
+      }
+      return s
+    }
+    // the cells of one kind painted into another: replaces every `from` with `to` where pick(x, y, z) is true
+    s.replace = function (from, to, pick) {
+      for (var z = 0; z < d; z++) for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
+        if (s.get(x, y, z) === from && (!pick || pick(x, y, z))) s.set(x, y, z, to)
+      }
+      return s
+    }
+    s.fn = function () { return function (x, y, z) { return s.get(x, y, z) } }
+    // the control booth on the front face: the controller sits in its front wall (T.slices forces it at (middle, 1, front)); the floor
+    // row stays X so the hatches can go there
+    s.booth = function (ch, depth) {
+      var mid = (w - 1) / 2
+      s.room(mid - 2, 0, d - depth, mid + 2, 3, d - 1, ch)
+      s.box(mid - 2, 0, d - depth, mid + 2, 0, d - 1, 'X')
+      s.set(mid - 1, 2, d - 1, 'L').set(mid + 1, 2, d - 1, 'L')
+      return s
+    }
+    return s
   }
 
   // ---------------------------------------------------------------- crowns (k = rows above the hall roof)

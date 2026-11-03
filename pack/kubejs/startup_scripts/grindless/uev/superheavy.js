@@ -126,22 +126,29 @@
     })
     return tube
   }
+  // The lab is a radiation-proof hall: SiC walls, a row of four HfTaCN hot cells with glass windows down the right, and a gas
+  // thermochromatography column rack (pipe over a coil-banded gearbox) on the left, with a ridge skylight over the aisle.
   function benchShape() {
-    return G.uevShapes.hall({
-      w: 9, d: 11, hh: 5, mull: 3, crown: G.uevShapes.ridge(9, 11),
-      inner: function (x, y, z) {
-        var dx = x < 4 ? 4 - x : x - 4
-        if (dx === 2 && y === 1 && z >= 2 && z <= 8) return z % 2 === 0 ? 'B' : 'A'
-        if (dx === 3 && y === 2 && z >= 2 && z <= 8 && z % 3 === 2) return 'L'
-        if (dx === 0 && z >= 3 && z <= 7 && y <= 3) return y === 3 ? 'C' : 'P'
-        return null
-      }
+    var s = G.uevShapes.scene(15, 9, 17)
+    s.room(0, 0, 0, 14, 4, 16, 'R', 't')
+    s.box(0, 0, 0, 14, 0, 16, 'X')
+    ;[0, 8, 16].forEach(function (z) { s.box(0, 5, z, 14, 5, z, 'H') })
+    s.box(5, 6, 2, 9, 6, 14, 'H').box(6, 7, 3, 8, 7, 13, 'H')
+    ;[2, 6, 10].forEach(function (z) {
+      s.box(9, 1, z, 13, 3, z + 3, 'H').box(10, 2, z + 1, 12, 2, z + 2, '#')
+      s.box(9, 2, z + 1, 9, 2, z + 2, 'L')
     })
+    ;[3, 5, 7, 9, 11].forEach(function (z) {
+      s.box(2, 1, z, 2, 1, z, 'B').box(2, 2, z, 2, 5, z, 'P')
+    })
+    ;[4, 8, 12].forEach(function (z) { s.set(2, 3, z, 'C').set(3, 3, z, 'C') })
+    s.box(1, 1, 2, 3, 1, 14, 'H')
+    return s.booth('R', 3).fn()
   }
   var SHAPES = {
     heavy_ion_cyclotron: { w: 17, h: 7, d: 15, fn: ringShape },
     recoil_separator: { w: 9, h: 7, d: 19, fn: gantryShape },
-    superheavy_chemistry_lab: { w: 9, h: 7, d: 11, fn: benchShape }
+    superheavy_chemistry_lab: { w: 15, h: 9, d: 17, fn: benchShape, casing: 'grindless:sic_composite_casing', texture: 'grindless:block/uev/sic_composite_casing' }
   }
   SH.machines.forEach(function (m) {
     m.width = SHAPES[m.name].w
@@ -159,7 +166,7 @@
         Pat.part('output_hatch', { min: 0, max: 2 }),
         Pat.part('energy_input', { min: 1, max: m.energyMax })
       ],
-      pal: {
+      pal: SHAPES[m.name].casing ? G.uevShapes.palette(SHAPES[m.name].casing) : {
         F: SHIELD, A: TANK, L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
         C: COIL, B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
       }
@@ -224,13 +231,13 @@
         .recipeType(m.type)
         .recipeModifier(G.noVoiding.modifier({ which: 'both', reason: m.noVoiding, name: m.name }, G.parallelHatch.overclock), true)
         .beforeWorking(G.noVoiding.beforeWorking({ which: 'both', reason: m.noVoiding, name: m.name }))
-        .appearanceBlock(function () { return Block.getBlock(SHIELD) })
+        .appearanceBlock(function () { return Block.getBlock(SHAPES[m.name].casing || SHIELD) })
         .pattern(function (def) { return Pat.build(def, m.spec) })
         ["tooltips(net.minecraft.network.chat.Component[])"]([
           Text.translate('grindless.machine.' + m.name + '.tooltip.0'),
           Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.' + m.type))
         ])
-        .workableCasingModel(SHIELD_TEXTURE, 'grindless:block/multiblock/' + m.name)
+        .workableCasingModel(SHAPES[m.name].texture || SHIELD_TEXTURE, 'grindless:block/multiblock/' + m.name)
     })
   })
 })()

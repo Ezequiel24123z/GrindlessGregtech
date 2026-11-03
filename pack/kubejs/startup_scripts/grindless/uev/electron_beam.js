@@ -25,10 +25,8 @@
   const EB = G.electronBeam || (G.electronBeam = {})
   const LOG = '[grindless/uev] '
 
-  const CLEAN = 'gtceu:clean_machine_casing'
-  const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
-  const HEAT = 'gtceu:heatproof_machine_casing'
-  const HEAT_TEXTURE = 'gtceu:block/casings/solid/machine_casing_heatproof'
+  const SIC = 'grindless:sic_composite_casing'
+  const SIC_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
   EB.table = 'kubejs/data/grindless/tables/electron_beam.json'
   EB.foundryNoVoiding = 'grindless.machine.single_crystal_foundry.no_voiding'
@@ -94,42 +92,50 @@
     }
   }
 
-  // The furnace is a vacuum chamber under a gun: a long hall with a crucible row and a column of gun coils on the roof. The foundry is a
-  // Czochralski puller: a banded tower with a pull rod down to a crucible. Built in the registry callback (shapes.js may load later).
-  function gunCrown(w, d) {
-    var ridge = G.uevShapes.ridge(w, d)
-    var cx = (w - 1) / 2
-    return function (x, k, z) {
-      if (x === cx && z === 4 && k < 5) return k % 2 === 1 ? 'C' : 'P'
-      if (z === 4 && k === 1 && (x === cx - 1 || x === cx + 1)) return 'A'
-      return ridge(x, k, z)
-    }
-  }
+  // The furnace is a vacuum hall with e-gun towers on its roof, cold hearths down its length, a withdrawal shaft at the back and a
+  // power annex on each side. The foundry is a Bridgman tower: a mould chamber in coil bands over a withdrawal shaft with a baffle
+  // ring between them. Bodies are the UEV casing families (SiC R, HfTaCN H, superhydride M). Built in the registry callback (shapes.js
+  // may load later).
   var SHAPES = {
     furnace: {
-      w: 9, h: 10, d: 13,
+      w: 13, h: 13, d: 19,
       fn: function () {
-        return G.uevShapes.hall({
-          w: 9, d: 13, hh: 5, mull: 2, crown: gunCrown(9, 13),
-          inner: function (x, y, z) {
-            var ax = x < 4 ? 4 - x : x - 4
-            if (z === 4 && ax <= 1 && y === 1) return 'B'
-            if (z === 4 && ax === 0 && y <= 3) return 'P'
-            if (ax === 3 && z % 3 === 0 && z >= 6 && y <= 2) return y === 1 ? 'B' : 'C'
-            return null
-          }
+        var s = G.uevShapes.scene(13, 13, 19)
+        s.room(2, 0, 0, 10, 6, 15, 'R')
+        s.box(2, 0, 0, 10, 0, 15, 'X')
+        ;[3, 5, 7, 9, 11, 13].forEach(function (z) { s.box(2, 2, z, 2, 3, z, 'L').box(10, 2, z, 10, 3, z, 'L') })
+        s.box(4, 1, 4, 4, 1, 13, 'H').box(8, 1, 4, 8, 1, 13, 'H')
+        ;[6, 12].forEach(function (z) {
+          ;[4, 8].forEach(function (x) {
+            s.cyl('y', x, z, 1, 7, 11, 'R', true, null).set(x, 12, z, 'C').set(x, 9, z, 'M')
+            s.box(x, 5, z, x, 6, z, 'P')
+          })
         })
+        s.cyl('y', 6, 3, 2, 7, 12, 'H', true)
+        s.cyl('y', 6, 3, 2, 10, 10, 'M', true, null)
+        s.room(0, 0, 4, 1, 4, 14, 'H').box(1, 1, 6, 1, 2, 12, 'B')
+        s.room(11, 0, 4, 12, 4, 14, 'H').box(11, 1, 6, 11, 2, 12, 'M')
+        s.box(2, 6, 0, 10, 6, 15, 'H')
+        s.box(6, 1, 1, 6, 6, 1, 'P')
+        return s.booth('R', 3).fn()
       }
     },
     foundry: {
-      w: 7, h: 13, d: 7,
+      w: 11, h: 21, d: 11,
       fn: function () {
-        return G.uevShapes.tower({
-          w: 7, d: 7, baseH: 3, th: 11, inset: 1, band: 3, bandChar: 'C',
-          baseInner: function (x, y, z) { return x === 3 && z === 3 && y === 1 ? 'B' : null },
-          core: function (x, y, z) { return x === 3 && z === 3 ? 'Q' : null },
-          crown: G.uevShapes.mast(7, 7, 2)
-        })
+        var s = G.uevShapes.scene(11, 21, 11)
+        s.box(0, 0, 0, 10, 0, 10, 'X')
+        s.room(1, 1, 1, 9, 8, 9, 'H').box(1, 8, 1, 9, 8, 9, 'R').box(3, 1, 3, 3, 2, 3, 'B').box(7, 1, 3, 7, 2, 3, 'B')
+        s.cyl('y', 5, 5, 3, 9, 9, 'H').set(5, 9, 5, '#')
+        s.cyl('y', 5, 5, 4, 10, 16, 'H', true)
+        ;[12, 14].forEach(function (y) { s.cyl('y', 5, 5, 4, y, y, 'C', true, null) })
+        s.cyl('y', 5, 5, 4, 10, 10, 'M', true, null)
+        s.cone(5, 5, 3, 17, 20, 1, 'R', true)
+        s.cyl('y', 5, 5, 0, 20, 20, 'P')
+        ;[[0, 0], [10, 0], [0, 10], [10, 10]].forEach(function (p) { s.box(p[0], 1, p[1], p[0], 8, p[1], 'Q') })
+        ;[3, 6].forEach(function (y) { s.set(5, y, 8, 'L') })
+        s.set(5, 12, 9, 'L').set(5, 14, 9, 'L')
+        return s.booth('R', 3).fn()
       }
     }
   }
@@ -144,15 +150,12 @@
     var m = EB.machines[k]
     return G.uevShapes.spec(Pat, {
       w: m.width, h: m.height, d: m.depth, fn: SHAPES[k].fn(), parts: parts,
-      pal: {
-        F: casing, A: 'gtceu:stable_machine_casing', L: 'gtceu:laminated_glass', P: 'gtceu:tungstensteel_pipe_casing',
-        C: 'gtceu:trinium_coil_block', B: 'gtceu:tungstensteel_gearbox', Q: 'tungsten_steel'
-      }
+      pal: G.uevShapes.palette(casing)
     })
   }
   function makeSpec(k) {
     if (k === 'furnace') {
-      return specOf(k, CLEAN, [
+      return specOf(k, SIC, [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('input_hatch', { min: 0, max: 1 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
@@ -161,7 +164,7 @@
         G.parallelHatch.part()
       ])
     }
-    return specOf(k, HEAT, [
+    return specOf(k, SIC, [
       Pat.part('input_bus', { min: 1, max: 2 }),
       Pat.part('input_hatch', { min: 1, max: 1 }),
       Pat.part('output_bus', { min: 1, max: 2 }),
@@ -247,14 +250,14 @@
       .rotationState(RotationState.NON_Y_AXIS)
       .recipeType(f.type)
       .recipeModifier(G.parallelHatch.modifier(G.parallelHatch.overclock))
-      .appearanceBlock(function () { return Block.getBlock(CLEAN) })
+      .appearanceBlock(function () { return Block.getBlock(SIC) })
       .pattern(function (def) { return Pat.build(def, f.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.electron_beam_furnace.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.electron_beam_refining')),
         Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
-      .workableCasingModel(CLEAN_TEXTURE, 'grindless:block/multiblock/electron_beam_furnace')
+      .workableCasingModel(SIC_TEXTURE, 'grindless:block/multiblock/electron_beam_furnace')
 
     event.create(d.name, 'multiblock')
       .langValue(d.lang)
@@ -262,13 +265,13 @@
       .recipeType(d.type)
       .recipeModifier(G.noVoiding.modifier({ which: 'items', reason: EB.foundryNoVoiding, name: 'single-crystal foundry' }, G.parallelHatch.modifier(G.parallelHatch.overclock)), true)
       .beforeWorking(G.noVoiding.beforeWorking({ which: 'items', reason: EB.foundryNoVoiding, name: 'single-crystal foundry' }))
-      .appearanceBlock(function () { return Block.getBlock(HEAT) })
+      .appearanceBlock(function () { return Block.getBlock(SIC) })
       .pattern(function (def) { return Pat.build(def, d.spec) })
       ["tooltips(net.minecraft.network.chat.Component[])"]([
         Text.translate('grindless.machine.single_crystal_foundry.tooltip.0'),
         Text.translate('gtceu.machine.available_recipe_map_1.tooltip', Text.translate('gtceu.single_crystal_casting')),
         Text.translate('gtceu.multiblock.parallelizable.tooltip')
       ])
-      .workableCasingModel(HEAT_TEXTURE, 'grindless:block/multiblock/single_crystal_foundry')
+      .workableCasingModel(SIC_TEXTURE, 'grindless:block/multiblock/single_crystal_foundry')
   })
 })()

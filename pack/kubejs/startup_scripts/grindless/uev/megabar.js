@@ -21,8 +21,8 @@
   const MB = G.megabar || (G.megabar = {})
   const LOG = '[grindless/uev] '
 
-  const ROBUST = 'gtceu:robust_machine_casing'
-  const ROBUST_TEXTURE = 'gtceu:block/casings/solid/machine_casing_robust_tungstensteel'
+  const ROBUST = 'grindless:sic_composite_casing'
+  const ROBUST_TEXTURE = 'grindless:block/uev/sic_composite_casing'
 
   MB.table = 'kubejs/data/grindless/tables/megabar.json'
   // item name -> stack size; every item carries two tooltip lines (tooltip.grindless.<name>.0 and .1)
@@ -49,45 +49,38 @@
     lang: 'Megabar Press',
     // items in: the foil, the charge, the anvil and the circuit; out: the ingot; fluid out: the hydrogen
     maxIO: { itemsIn: 4, itemsOut: 2, fluidsIn: 1, fluidsOut: 1 },
-    width: 9, height: 9, depth: 9
+    width: 15, height: 15, depth: 15
   }
 
-  // A four-post press frame (9 x 9 x 9): a plinth (X: casing or a part) under the lower anvil (B) and a glass-caged press chamber; the
-  // upper anvil hangs from a crosshead (F ring, P beams, C coil) with the ram (P) on top; S is the controller on the front console (A).
-  function pressCell(x, y, z) {
-    var dx = x - 4
-    var dz = z - 4
-    var m = G.uevShapes.cheb(dx, dz)
-    var ax = dx < 0 ? -dx : dx
-    var az = dz < 0 ? -dz : dz
-    var post = ax === 3 && az === 3
-    if (y === 0) return m <= 3 || (z === 8 && ax <= 1) ? 'X' : ' '
-    if (z === 8) return y === 1 && ax <= 1 ? 'A' : ' '
-    if (post) return y === 1 ? 'A' : (y === 7 ? 'Q' : (y === 8 ? 'P' : 'Q'))
-    if (y === 1) return m <= 1 ? 'B' : (m === 2 ? 'A' : (m === 3 ? 'F' : ' '))
-    if (y === 2) return m <= 1 ? 'B' : ' '
-    if (y >= 3 && y <= 5) {
-      if (m <= 1) return '#'
-      if (m === 2 && (ax <= 1 || az <= 1)) return 'L'
-      if (m === 3 && (ax === 0 || az === 0) && y === 4) return 'P'
-      return ' '
-    }
-    if (y === 6) return m <= 1 ? 'B' : (m === 2 && (ax === 0 || az === 0) ? 'F' : ' ')
-    if (y === 7) {
-      if (m === 3) return 'F'
-      if (m === 0) return 'C'
-      return ax === 0 || az === 0 ? 'P' : ' '
-    }
-    return m === 0 ? 'P' : ' '
+  // A cubic multi-anvil frame (15 x 15 x 15): four 2 x 2 SiC posts joined by HfTaCN beams, six pipe rams reaching in from the six
+  // faces of a central pressure vessel, laser ports (glass) on the diagonals and a SiC control booth at the front.
+  function pressCell() {
+    var s = G.uevShapes.scene(15, 15, 15)
+    s.box(0, 0, 0, 14, 0, 14, 'X')
+    ;[[0, 0], [13, 0], [0, 13], [13, 13]].forEach(function (p) {
+      s.box(p[0], 1, p[1], p[0] + 1, 14, p[1] + 1, 'R')
+    })
+    ;[1, 13].forEach(function (y) {
+      var t = y === 1 ? 0 : 1
+      s.box(2, y, 0, 12, y + t, 1, 'H').box(2, y, 13, 12, y + t, 14, 'H')
+      s.box(0, y, 2, 1, y + t, 12, 'H').box(13, y, 2, 14, y + t, 12, 'H')
+    })
+    s.cyl('y', 7, 7, 3, 5, 9, 'H', true)
+    s.box(5, 5, 5, 9, 9, 9, 'M', true)
+    s.box(6, 6, 6, 8, 8, 8, '#')
+    s.box(2, 7, 7, 4, 7, 7, 'P').box(10, 7, 7, 12, 7, 7, 'P')
+    s.box(7, 7, 2, 7, 7, 4, 'P').box(7, 7, 10, 7, 7, 12, 'P')
+    s.box(7, 10, 7, 7, 12, 7, 'P').box(7, 2, 7, 7, 4, 7, 'P')
+    s.box(6, 12, 6, 8, 12, 8, 'B').box(6, 2, 6, 8, 2, 8, 'B')
+    s.set(3, 7, 7, 'C').set(11, 7, 7, 'C').set(7, 7, 3, 'C').set(7, 7, 11, 'C')
+    ;[[4, 4], [10, 4], [4, 10], [10, 10]].forEach(function (p) { s.set(p[0], 7, p[1], 'L') })
+    return s.booth('R', 3).fn()
   }
 
   function makeSpec(m) {
     return G.uevShapes.spec(Pat, {
-      w: m.width, h: m.height, d: m.depth, fn: pressCell,
-      pal: {
-        F: ROBUST, A: 'gtceu:stable_machine_casing', B: 'gtceu:tungstensteel_gearbox', L: 'gtceu:laminated_glass',
-        P: 'gtceu:tungstensteel_pipe_casing', C: 'gtceu:naquadah_coil_block', Q: 'tungsten_steel'
-      },
+      w: m.width, h: m.height, d: m.depth, fn: pressCell(),
+      pal: G.uevShapes.palette(ROBUST),
       parts: [
         Pat.part('input_bus', { min: 1, max: 2 }),
         Pat.part('output_bus', { min: 1, max: 2 }),
