@@ -220,7 +220,7 @@ const gcd = (a, b) => (b ? gcd(b, a % b) : a);
 
 export const R = {
   rate: (recipe, profile, claims) => ({ t: 'rate', recipe, ...profile, ...claims }),
-  cmp: (key, unit, name, routes, dominates = []) => ({ t: 'cmp', key, unit, name, routes, dominates }),
+  cmp: (key, unit, name, profile, routes, extra = {}) => ({ t: 'cmp', key, unit, name, profile, routes, dominates: [], ...extra }),
   ratio: (prod, cons, key, n, m, claims = {}) => ({ t: 'ratio', prod, cons, key, n, m, ...claims }),
 };
 
@@ -265,7 +265,7 @@ export function checkRate(f, get, readSrc = () => null) {
         if (!r) return fail(`no recipe ${x.recipe}`);
         const bad = profileProblem(r, { ...f.profile, ...x }, readSrc);
         if (bad) return fail(bad);
-        const u = perUnit(r, f.key, f.unit, { ...f.profile, ...x });
+        const u = perUnit(r, x.key || f.key, x.unit || f.unit, { ...f.profile, ...x });
         if (u.perMin !== x.perMin) return fail(`${x.recipe}: ${u.perMin} per min, not ${x.perMin}`);
         if (u.eu !== x.eu) return fail(`${x.recipe}: ${u.eu} EU per ${f.unit}, not ${x.eu}`);
         const bad2 = same(x.ins, u.in, 'takes per unit') || same(x.out, u.out, 'also makes per unit');
@@ -312,5 +312,5 @@ export function rateText(f) {
   if (f.t === 'ratio') return `${f.title ? f.title + ': ' : ''}${num(f.n)} ${f.prodName} to ${num(f.m)} ${f.consName} (${num(f.make)} against ${num(f.take)} ${unitOf(f.key)} per minute of ${short(f.key)}).${f.note ? ' ' + f.note : ''}`;
   const per = f.unit === 1 ? 'item' : f.unit === 1000 ? 'bucket' : `${num(f.unit)} units`;
   const rows = f.routes.map((x) => `${x.label}: ${num(x.perMin)}/min, ${num(x.eu)} EU, takes ${flow(x.ins).join(' + ') || 'nothing'}${Object.keys(x.out || {}).length ? ', also ${flow(x.out).join(' + ')}' : ''}`);
-  return `${f.name} (${prof(f.profile)}, per ${per} of ${short(f.key)}): ${rows.join('; ')}.${f.verdict ? ' ' + f.verdict : ''}`;
+  return `${f.name} (${prof(f.profile)}, per ${per} of ${f.what || short(f.key)}): ${rows.join('; ')}.${f.verdict ? ' ' + f.verdict : ''}`;
 }
