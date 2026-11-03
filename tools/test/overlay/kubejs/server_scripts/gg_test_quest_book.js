@@ -39,7 +39,7 @@
   var WALL = { x: 4646, y0: 99, y1: 101, z0: 7, z1: 9 }
   var WALL_SPOT = { x: 4644.5, y: 99, z: 8.5 }
   // keep equal to the quest counts of gg_test_quests.js' GG_QUESTS_EXPECTED (the linter's numbers)
-  var EXPECTED = { welcome: 16, steam_age: 49 }
+  var EXPECTED = { welcome: 16, steam_age: 52 }
   var ARRIVAL = '69BDA9FBB0EB66F2'
   var TOOLBOX = '047B55ED9C952BC9'
   var TOOLS = [
