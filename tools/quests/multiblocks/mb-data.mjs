@@ -43,7 +43,6 @@ export const MOD_NAMES = {
 // (startup opv/antimatter_cygnus.js, client opv_antimatter_cygnus_lang.js). id -> era folder.
 export const OURS_UNDETECTED = {
   'gtceu:jet_beam_line': 'opv',
-  'gtceu:spallation_target_station': 'opv',
   'gtceu:antiproton_decelerator': 'opv',
 };
 

@@ -33,7 +33,7 @@ function Face {
     } else { Set-Px $c 12 12 (Hex '286040') }
     return @($c, $e)
 }
-$names = @('jet_beam_line', 'spallation_target_station', 'antiproton_decelerator')
+$names = @('jet_beam_line', 'antiproton_decelerator')
 for ($kind = 0; $kind -lt 3; $kind++) {
     $dir = Join-Path $OutRoot ('block\multiblock\' + $names[$kind])
     $idle = Face $kind 0 $false
