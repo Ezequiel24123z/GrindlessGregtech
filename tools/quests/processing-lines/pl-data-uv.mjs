@@ -26,7 +26,7 @@ const chapter = {
         n('th', 7.5, 1.5, I('gtceu:thorium_dust'), 'Thorium', { kind: 'raw', sub: 'From the pitchblende and monazite chains' }),
         n('crude', 10, 1.5, F('gtceu:crude_thorium_nitrate'), 'Crude Thorium Nitrate', { kind: 'product', from: ['th'], sub: 'Dissolved in nitric acid with a little fluoride; the nitrogen dioxide goes to the Ostwald stages' }),
         n('loaded', 12.5, 0, F('gtceu:loaded_tbp_solvent'), 'Loaded Solvent', { kind: 'product', from: ['tsol', 'crude'], sub: 'THOREX extraction: the neutron poisons stay in the raffinate' }),
-        n('lan', 12.5, -1.5, F('gtceu:lanthanide_nitrate'), 'Lanthanide Nitrate', { kind: 'by', from: ['loaded'], end: 'rare-earth chloride, the EV extraction cascade' }),
+        n('lan', 12.5, -1.5, F('gtceu:lanthanide_nitrate'), 'Lanthanide Nitrate', { kind: 'by', from: ['tsol'], sub: 'The THOREX raffinate: the neutron poisons leave with it', end: 'rare-earth chloride, the EV extraction cascade' }),
         n('dw', 12.5, 1.5, F('gtceu:distilled_water'), 'Distilled Water', { kind: 'raw' }),
         n('tnit', 15, 0, F('gtceu:thorium_nitrate'), 'Thorium Nitrate', { kind: 'product', from: ['loaded', 'dw'], sub: 'Stripped: nuclear grade; the solvent goes round' }),
         n('oxa', 17.5, -1.5, F('gtca:oxalate'), 'Oxalate', { kind: 'raw' }),
