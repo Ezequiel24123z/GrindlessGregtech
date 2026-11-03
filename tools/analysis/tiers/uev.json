@@ -1440,12 +1440,13 @@
     },
     {
       "id": "carbonyl-only-refinery",
-      "label": "Carbonyl iron only from the carbonyl refinery",
+      "label": "Iron pentacarbonyl only from carbonyl processes: the carbonyl refinery or the belt's Mond line (D2-TAPE)",
       "anyOf": [
         "fluid:gtceu:iron_pentacarbonyl"
       ],
       "without": [
-        "operate:gtceu:carbonyl_refinery*"
+        "operate:gtceu:carbonyl_refinery*",
+        "grindless:distillation_tower/crude_carbonyl_split"
       ],
       "expect": "unreachable",
       "package": "B3"

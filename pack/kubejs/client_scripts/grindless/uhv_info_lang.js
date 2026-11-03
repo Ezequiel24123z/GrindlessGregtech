@@ -145,10 +145,10 @@ ClientEvents.lang('en_us', event => {
     add('emi.grindless.info.warp_gate.3', 'Circuit 2 holds it open for a minute (one exotic matter cell and its EU). While it holds, a player standing inside is carried once; step out and back in to go again. A relay platform starts paused with 8 cells, circuit 2 and the coordinates of the ring that sent the jump: step out of it and back in to wake it for one hold and ride home. It needs the wireless network\'s EU at UIV.')
     add('emi.grindless.info.warp_gate.4', 'A 15x15x3 ring of warp gate casing round open air; the controller on the front face, six UHV casing mounts on the top row for the modulators, 1-2 input buses, 1-2 output buses and 1-4 energy hatches in the bottom row. Earth and Proxima b orbits only.')
 
-    add('emi.grindless.info.xenobiochem_plant.0', "The Xenobiochemistry Plant. Circuit 1: radioprotectant. 2: infrared pigment. 3: chitosan scaffolds from xeno mushrooms. 4: clarified lysate from xeno biomass.")
+    add('emi.grindless.info.xenobiochem_plant.0', "The Xenobiochemistry Plant. Circuit 1: radioprotectant. 2: infrared pigment. 6: xeno chitin from the mushrooms. 7: chitosan from the chitin. 3: chitosan scaffolds. 4: clarified lysate from xeno biomass.")
     add('emi.grindless.info.xenobiochem_plant.1', "It only works on Proxima b.")
     add('emi.grindless.info.xenobiochem_plant.2', 'Where the life grows, its chemistry is done: a lysate clarified in ultrapure water, a Dsup-like radioprotectant, an infrared pigment and chitosan from the mushrooms.')
-    add('emi.grindless.info.xenobiochem_plant.3', 'Proxima b only. Circuit 1: radioprotectant. 2: infrared pigment. 3: chitosan scaffold (the salt water goes to the electrolyser). 4: clarified lysate.')
+    add('emi.grindless.info.xenobiochem_plant.3', 'Proxima b only. Circuit 1: radioprotectant. 2: infrared pigment. 6: chitin (the salt water goes to the electrolyser). 7: chitosan (its acetyl leaves as acetic acid, which the scaffold row takes). 3: chitosan scaffold. 4: clarified lysate.')
     add('emi.grindless.info.xenobiochem_plant.4', 'Parts go in the bottom layer: 1-2 energy hatches, 1-2 input buses, 1-2 input hatches, 1-2 output buses, 1-2 output hatches. Four PTFE columns round a clean reactor.')
 
     add('emi.grindless.info.xenobotany_greenhouse.0', "The Xenobotany Greenhouse grows a characterised xeno strain with water and CO2. Circuit 1: xeno biomass and oxygen. Circuit 2: xeno mushrooms. Circuit 3: far-red pigment from biomass.")

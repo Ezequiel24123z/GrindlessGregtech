@@ -51,7 +51,7 @@ test('ammonia and water balance', () => {
   assert.equal(nh3In, nh3Out);
   for (const n of ['apt_crystallisation', 'apt_calcination']) assert.equal(row(n).fluidsOut.length, 1, n);
   assert.equal(fl(row('hydrogen_reduction'), 'fluidsIn', 'gtceu:hydrogen'), 6000);
-  assert.equal(fl(row('hydrogen_reduction'), 'fluidsOut', 'gtceu:water'), 3000);
+  assert.equal(fl(row('hydrogen_reduction'), 'fluidsOut', 'minecraft:water'), 3000);
 });
 
 test('EU per tungsten stays near 1 M and the line stays EV', () => {

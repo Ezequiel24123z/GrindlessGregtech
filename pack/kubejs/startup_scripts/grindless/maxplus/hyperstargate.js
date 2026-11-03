@@ -28,6 +28,8 @@
 //
 // Rhino: var + function inside every callback that runs more than once; GTM and wireless things are looked up at run time.
 (function () {
+  // Math.PI is undefined in KubeJS's Rhino (.github/instructions/kubejs.instructions.md), so the constant is a literal
+  var PI = 3.141592653589793
   var G = global.grindless || (global.grindless = {})
   var Pat = G.patterns
   var HS = G.hyperstargate || (G.hyperstargate = {})
@@ -81,7 +83,7 @@
   }
   // a window every 30 degrees, three cells wide, on the outer face (z 8 to 14) and on the front and back faces (z 5 and 17)
   function windowAt(x, y, z, d) {
-    var deg = (Math.atan2(x - MID, y - CY) * 180) / Math.PI
+    var deg = (Math.atan2(x - MID, y - CY) * 180) / PI
     var phase = ((((deg + 15) % 30) + 30) % 30) - 15
     if (Math.abs(phase) > 3) return false
     if (z === 5 || z === 17) return true

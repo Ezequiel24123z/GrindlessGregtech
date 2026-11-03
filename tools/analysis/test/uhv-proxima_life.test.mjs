@@ -1,6 +1,6 @@
 // UHV's Proxima life (package UHV-B4; docs/eras/uhv.md, machines 12, 26, 27, 28 and 30, lines 13, 14 and 15), no game needed. The
 // pack's scripts run in the stand-in of lib/kubejs_static.mjs:
-//   - startup_scripts/grindless/uhv/proxima_life.js: five recipe types and machines, fifteen items, two liquids;
+//   - startup_scripts/grindless/uhv/proxima_life.js: five recipe types and machines, seventeen items, two liquids;
 //   - server_scripts/grindless/uhv/proxima_life.js: data/grindless/tables/proxima_life.json's rows and the five controllers;
 //   - the older rows: LuV's biofoundry circuits 11-16 (biofoundry.json) and the algae bioreactor's far-red row (luv/europa.js);
 //   - en_us text for everything new.
@@ -52,12 +52,12 @@ test('the stand-in runs the Proxima life scripts without errors, nothing clashin
   assert.equal(PL.recipes.length, rows().length);
 });
 
-test('registration: five types and machines, fifteen items, two liquids; F1\'s ids are not registered again', () => {
+test('registration: five types and machines, seventeen items, two liquids; F1\'s ids are not registered again', () => {
   for (const [key, [machine, type]] of Object.entries(MACHINES)) {
     assert.deepEqual(run.registry.machines.get(machine).recipeTypes, [`gtceu:${type}`], key);
     assert.ok(run.registry.recipeTypes.has(`gtceu:${type}`), type);
   }
-  assert.equal(Object.keys(PL.items).length, 15);
+  assert.equal(Object.keys(PL.items).length, 17);
   for (const n of Object.keys(PL.items)) assert.ok(run.registry.items.has(`grindless:${n}`), n);
   for (const n of ['far_red_pigment', 'clarified_xeno_lysate']) assert.ok(run.registry.materials.has(`gtceu:${n}`), n);
   const src = read('startup_scripts/grindless/uhv/proxima_life.js');
@@ -140,7 +140,7 @@ test('allowlists: the rover bay, greenhouse, plant and vat run only on Proxima b
   for (const r of rows()) {
     const d = dump(`grindless:${r.type}/${r.name}`);
     const m = Object.values(MACHINES).find((x) => x[1] === r.type);
-    const OPEN = ['extremophile', 'pigment', 'radioprotectant', 'infrared_pigment', 'chitosan', 'lysate', 'receive', 'isolate', 'transplanted_minimal_cell'];
+    const OPEN = ['extremophile', 'pigment', 'radioprotectant', 'infrared_pigment', 'chitosan', 'xeno_chitin', 'xeno_chitosan', 'lysate', 'receive', 'isolate', 'transplanted_minimal_cell'];
     if (!m || OPEN.includes(r.name)) {
       assert.equal(r.site, undefined, r.name);
       assert.deepEqual(dimsOf(d), [], r.name);
@@ -166,7 +166,7 @@ test('flora samples: only the rover bay makes them and only the receiving facili
 
 test('every intermediate has a destination; the residues go to standing machines', () => {
   const consumed = (id) => recipes.some((r) => has(ins(r), id));
-  for (const id of ['grindless:proxima_rover', 'grindless:xeno_biomass', 'grindless:xeno_mushroom', 'grindless:melanised_biomass',
+  for (const id of ['grindless:proxima_rover', 'grindless:xeno_biomass', 'grindless:xeno_mushroom', 'grindless:xeno_chitin', 'grindless:xeno_chitosan', 'grindless:melanised_biomass',
     'grindless:sterilised_flora_extract', 'grindless:sterilised_ice_organics', 'grindless:melanin_extract',
     'grindless:melanin_chitosan_composite', 'grindless:characterised_xeno_strain', 'grindless:chitosan_scaffold',
     'gtceu:far_red_pigment', 'gtceu:clarified_xeno_lysate', 'gtceu:biomass', 'gtceu:salt_water']) assert.ok(consumed(id), id);

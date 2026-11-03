@@ -3,7 +3,7 @@
 // The Rare Earth Extraction Cascade, an EV multiblock of ours (docs/eras/ev.md, "Rare-earth extraction cascade"), the recipe type it runs
 // and the GT materials of its line.
 //
-//   gtceu:extraction_cascade     3x3x7 line of mixer-settler stages (3 wide, 3 high, 7 deep) in inert PTFE casing with tempered glass
+//   gtceu:extraction_cascade     7x5x13 hall of mixer-settler stages (7 wide, 5 high, 13 deep) in inert PTFE casing with tempered glass
 //                                sides, runs the new gtceu:solvent_extraction
 //
 // What it wins: A SEPARATION GTM DOES NOT DO. The rare earths of Mars sit in merrillite (A1's gtceu:merrillite, with no decomposition),
@@ -33,15 +33,16 @@
 // two circuits, not two machine modes, so no recipe of an inactive mode can be cached (the trap A4 found does not apply).
 //
 // Geometry (slices back -> front, rows bottom -> top, columns left -> right as seen from the front; the controller is in the front slice,
-// middle column, row 1):
-//   row 0   floor: the 16 cells of its edge are `X` (inert casing or a part); under the stages the middle column is inert casing
-//   row 1   the stage line: mixer (titanium gearbox, the agitator), settler (an empty tank), mixer, settler, mixer, between tempered
-//           glass sides; inert casing at both ends, the controller in the middle of the front
-//   row 2   inert casing roof with a PTFE pipe header along the stages
-// The 16 `X` cells hold 1-2 EV energy hatches, 1 input bus (merrillite and the circuit), 1 output bus (the chloride and phosphate
+// middle column, row 1). A hall 7 wide, 5 high and 13 deep, 246 cells (docs/eras/lines-ev-zpm.md section 10):
+//   row 0   floor: inert casing; the two edge columns and both end rows are `X` (inert casing or a part)
+//   rows 1-3 the stage line, eleven slices alternating mixer (a titanium gearbox on each side, the agitators, with titanium frame posts
+//           above) and settler (an empty tank, 5 wide and 3 high), between tempered glass sides; inert end walls with windows, the
+//           controller in the middle of the front
+//   row 4   a stepped inert roof (rows 3-4 narrow to 5 and 3 wide) with a PTFE pipe header along the whole hall
+// The 36 `X` cells hold 1-2 EV energy hatches, 1 input bus (merrillite and the circuit), 1 output bus (the chloride and phosphate
 // dusts), 1-3 input hatches and 1-4 output hatches (one per fluid: the line uses three fluids in and four out across its two modes, and a
 // hatch holds one fluid; a quadruple hatch holds four). At least 5 cells are inert casing. ME buses and hatches have the same abilities
-// as the plain ones and fit the same cells.
+// as the plain ones and fit the same cells. No casing here is made from the cascade's own products (docs/quality/structures.md).
 // docs/eras/ev.md lists no output bus; the chlorides and the tricalcium phosphate are dusts, so the cascade has one.
 //
 // Textures: overlay dir grindless:block/multiblock/extraction_cascade (tools/assets/Build-ExtractionCascadeTextures.ps1), base casing
@@ -85,12 +86,18 @@
 
   // ---------------------------------------------------------------- pattern
 
-  const BACK = ['XXX', 'III', 'III']
-  const STAGE_MIXER = ['XIX', 'GMG', 'IPI']
-  const STAGE_SETTLER = ['XIX', 'G#G', 'IPI']
-  const FRONT = ['XXX', 'ISI', 'III']
+  // 7 wide, 5 high, 13 deep: a mixer-settler hall under a stepped roof, 246 cells. Rows bottom -> top, columns left -> right
+  const BACK = ['XXXXXXX', 'IGIIIGI', 'IIGGGII', ' IIIII ', '  IPI  ']
+  const STAGE_MIXER = ['XIIIIIX', 'GM###MG', 'F#####F', ' G###G ', '  IPI  ']
+  const STAGE_SETTLER = ['XIIIIIX', 'G#####G', 'G#####G', ' G###G ', '  IPI  ']
+  const FRONT = ['XXXXXXX', 'IIISIII', 'IGIIIGI', ' IIIII ', '  III  ']
   const SPEC = {
-    slices: [BACK, STAGE_MIXER, STAGE_SETTLER, STAGE_MIXER, STAGE_SETTLER, STAGE_MIXER, FRONT],
+    slices: [
+      BACK,
+      STAGE_MIXER, STAGE_SETTLER, STAGE_MIXER, STAGE_SETTLER, STAGE_MIXER, STAGE_SETTLER,
+      STAGE_MIXER, STAGE_SETTLER, STAGE_MIXER, STAGE_SETTLER, STAGE_MIXER,
+      FRONT
+    ],
     symbols: {
       S: Pat.controller(),
       X: Pat.oneOf(
@@ -105,6 +112,7 @@
       G: Pat.block(GLASS),
       M: Pat.block(MIXER),
       P: Pat.block(PIPE),
+      F: Pat.frame(['titanium']),
       '#': Pat.air()
     }
   }

@@ -23,7 +23,7 @@
 
   const ACID = 'gtceu:tungstic_acid_dust'
   const NH3 = 'gtceu:ammonia'
-  const WATER = 'gtceu:water'
+  const WATER = 'minecraft:water'
   const SOLUTION = 'gtceu:ammonium_tungstate'
   const APT = 'gtceu:ammonium_paratungstate_dust'
   const WO3 = 'gtceu:tungsten_trioxide_dust'

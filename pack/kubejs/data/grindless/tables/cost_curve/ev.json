@@ -60,7 +60,7 @@
   ],
   "override": {},
   "keyFactor": {
-    "gtceu:ev_conveyor_module": 2.089,
+    "gtceu:ev_conveyor_module": 1.6,
     "gtceu:ev_electric_motor": 1.396,
     "gtceu:ev_electric_piston": 1.496,
     "gtceu:ev_machine_hull": 2.449,

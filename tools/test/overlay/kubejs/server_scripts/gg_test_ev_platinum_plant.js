@@ -27,7 +27,7 @@
 //   ev_platinum_plant|DONE                      last line
 //
 // TEST AREA: this test builds, force-loads and clears ONLY its own band of the overworld, X 5888-5951, Y 98-112, Z 0-15 (tests run at the
-// same time in one server; other bands belong to other tests). The plant faces north with its controller at (5898, 102, 8). Everything is
+// same time in one server; other bands belong to other tests). The plant faces north with its controller at (5898, 102, 6). Everything is
 // driven by the structure description that lib/patterns.js records (global.grindless.structures). var + function everywhere (this Rhino
 // throws "redeclaration of var" for const/let inside functions that run more than once).
 (function () {
@@ -37,7 +37,7 @@
   var STEP = 10
   var FORM_TIMEOUT = 600
   var BAND = { x0: 5888, x1: 5951, y0: 98, y1: 112, z0: 0, z1: 15 }
-  var CONTROLLER = { x: 5898, y: 102, z: 8 }
+  var CONTROLLER = { x: 5898, y: 102, z: 6 }
 
   // The pack's Additional Placements mod reloads the datapacks (so these scripts too) a couple of seconds after the server is up; a test
   // that is running then is lost. The command therefore only leaves a request in `global` (it survives script reloads) and the tick handler

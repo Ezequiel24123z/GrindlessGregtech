@@ -76,6 +76,15 @@
     'gtceu:large_naquadah_reactor/naquadah_based_liquid_fuel_depleted': 690
   }
 
+  // D2-4 also retires GT--'s uranium and thorium liquid fuels (2,500x and 50,000x below fission per input): their two mixers go, so
+  // the fuels are unobtainable and the hidden table (tools/analysis/tiers/obtain.json, class C) hides them and removes what is
+  // downstream; the two large-reactor rows that burn them are removed here and never rebuilt.
+  var RETIRED = [
+    'gtceu:mixer/uranium_based_liquid_fuel', 'gtceu:mixer/thorium_based_liquid_fuel',
+    'gtceu:large_naquadah_reactor/uranium_based_liquid_fuel_depleted', 'gtceu:large_naquadah_reactor/thorium_based_liquid_fuel_depleted'
+  ]
+  POWER.retired = RETIRED
+
   // gtceu:steam_turbine, combustion_generator, gas_turbine, semi_fluid_generator, plasma_generator (DECISIONS.md list),
   // plus the addon generator types this pack loads: GT--'s naquadah reactor (single and large) and rocket engine.
   var TYPES = [
@@ -319,6 +328,7 @@
       var airHere = 0
       captured.forEach(function (c) {
         var json = c.json
+        if (RETIRED.indexOf(c.id) >= 0) return
         if (!producesEu(json) || consumesEu(json)) return
         if (typeof json.duration !== 'number') {
           report.skipped.push(c.id + ' (no duration field)')
@@ -375,6 +385,7 @@
     // heat_water_to_steam (6 mB water -> 960 mB steam, 900 EU) is the same loop with free water: removed too.
     event.remove({ id: 'gtceu:fluid_heater/heat_distilled_to_steam' })
     event.remove({ id: 'gtceu:fluid_heater/heat_water_to_steam' })
+    RETIRED.forEach(function (id) { event.remove({ id: id }) })
 
     POWER.generators = report
     POWER.siteReport = site

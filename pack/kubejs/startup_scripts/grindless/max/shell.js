@@ -13,6 +13,8 @@
 // G.generators.modifier and returns IDENTITY for consumer rows (no overclock, no parallels; NULL would reject the recipe). Names: client_scripts/grindless/max_shell_lang.js.
 // Textures: tools/assets/Build-MaxShellTextures.ps1. Published for the recipe script: global.grindless.maxShell.
 (function () {
+  // Math.PI is undefined in KubeJS's Rhino (.github/instructions/kubejs.instructions.md), so the constant is a literal
+  var PI = 3.141592653589793
   const G = global.grindless
   const Pat = G.patterns
   const MS = G.maxShell || (G.maxShell = {})
@@ -72,7 +74,7 @@
       }
     }
     if (!outer) return 'F'
-    var lat = Math.abs(Math.asin(dy / d)) * 180 / Math.PI
+    var lat = Math.abs(Math.asin(dy / d)) * 180 / PI
     if (lat >= 28 && lat <= 32.5) return 'A'
     return 'T'
   }

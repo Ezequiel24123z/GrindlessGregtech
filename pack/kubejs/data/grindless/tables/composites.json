@@ -149,7 +149,7 @@
         { "name": "hftacn_nitriding", "circuit": 0, "eut": 30720, "duration": 400,
           "itemsIn": [{ "id": "grindless:hftac_dust", "count": 2 }], "kept": [], "fluidsIn": [{ "id": "gtceu:nitrogen", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:hftacn_crude_dust", "count": 2 }], "fluidsOut": [] },
-        { "name": "carbonyl_iron_powder", "circuit": 0, "eut": 7680, "duration": 200,
+        { "name": "carbonyl_iron_powder", "circuit": 2, "eut": 7680, "duration": 200,
           "itemsIn": [], "kept": [], "fluidsIn": [{ "id": "gtceu:iron_pentacarbonyl", "amount": 1000 }], "charge": [],
           "itemsOut": [{ "id": "grindless:carbonyl_iron_powder", "count": 1 }], "fluidsOut": [{ "id": "gtceu:carbon_monoxide", "amount": 5000 }] },
         { "name": "polydimethylsilane", "circuit": 0, "eut": 7680, "duration": 300,

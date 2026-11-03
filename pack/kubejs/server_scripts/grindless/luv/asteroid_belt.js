@@ -196,7 +196,9 @@
       .itemOutputs(M.nickel.dust + 'x gtceu:nickel_dust')
       .outputFluids(Fluid.of(CO, M.nickel.co))
       .EUt(M.nickel.eut).duration(M.nickel.duration)
+    // circuit 1: A5's carbonyl_iron_powder row (tables/composites.json) takes the same Fe(CO)5 alone; this row returns the belt's iron as plain dust
     event.recipes.gtceu.large_chemical_reactor('grindless:iron_carbonyl_decomposition')
+      .circuit(1)
       .inputFluids(Fluid.of('gtceu:iron_pentacarbonyl', M.iron.fluid))
       .itemOutputs(M.iron.dust + 'x gtceu:iron_dust')
       .outputFluids(Fluid.of(CO, M.iron.co))

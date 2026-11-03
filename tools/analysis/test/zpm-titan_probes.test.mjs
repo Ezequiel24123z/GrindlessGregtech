@@ -56,8 +56,9 @@ test('the patterns: one controller in the front slice, uniform size, a symbol fo
   }
 });
 
-test('the six recipes: Saturn orbit only (the decode step is Earth), one circuit per type slot, ZPM VA', () => {
-  assert.equal(ZT.recipes.length, 6);
+test('the five recipes: Saturn orbit only (the decode step is Earth), one circuit per type slot, ZPM VA', () => {
+  assert.equal(ZT.recipes.length, 5);
+  assert.ok(!ZT.recipes.some((p) => p.name === 'nitrile_fibres'), 'c2 retired (D2-PAN: the PAN line makes the carbon fibre)');
   const seen = new Set();
   for (const p of ZT.recipes) {
     const r = byId(p.recipeId);

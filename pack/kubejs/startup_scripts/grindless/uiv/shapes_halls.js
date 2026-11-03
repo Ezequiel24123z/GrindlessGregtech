@@ -5,6 +5,8 @@
 // in the layout's pal. The bodies are the UIV family (rhea, mh_field, multilayer_optics, dilution_cryostat, neutron_star_site, uiv_fusion);
 // T.BOOT in shapes.js swaps the casings of the machines that feed them.
 (function () {
+  // Math.PI is undefined in KubeJS's Rhino (.github/instructions/kubejs.instructions.md), so the constant is a literal
+  var PI = 3.141592653589793
   const G = global.grindless || (global.grindless = {})
   const T = G.uivShapes || (G.uivShapes = {})
   const L = T.layouts || (T.layouts = {})
@@ -27,7 +29,7 @@
   // every third sector over the top and bottom. Floor spokes and a base ring carry it; the controller stands on a pier at the front.
   L.uiv_fusion_reactor = function () {
     var N = 39, c = 19, R = 14, ty = 5
-    var tau = Math.PI / 8
+    var tau = PI / 8
     return {
       w: N, h: 11, d: N, ring: true,
       pal: pal({ C: FUSION, K: COIL_MH, R: RHEA, M: MH, E: FUSION, I: FUSION, O: FUSION, Q: 'tungsten_steel' }),
@@ -40,7 +42,7 @@
         var dr = r - R
         var dy = y - ty
         var dd = rad(dr, dy)
-        var bin = Math.floor((Math.atan2(dz, dx) + Math.PI) / tau) % 16
+        var bin = Math.floor((Math.atan2(dz, dx) + PI) / tau) % 16
         if (dd >= 3.5 && dd < 4.5) {
           var phi = Math.abs(Math.atan2(dy, dr))
           if (phi < 0.7) {
@@ -53,13 +55,13 @@
             if ((y === ty + 1 || y === ty - 1) && bin % 2 === 0) return 'L'
             return 'C'
           }
-          if (phi > 3 * Math.PI / 4) return 'R'
+          if (phi > 3 * PI / 4) return 'R'
           return bin % 3 === 0 ? 'M' : 'R'
         }
         if (dd < 3.5) return dd < 0 ? ' ' : '#'
         if (dd < 5.5 && bin % 3 === 0) {
           var ph = Math.abs(Math.atan2(dy, dr))
-          if (ph > Math.PI / 4 && ph < 3 * Math.PI / 4) return 'M'
+          if (ph > PI / 4 && ph < 3 * PI / 4) return 'M'
         }
         if (y === ty && r < 9.5 && (dx === 0 || dz === 0)) return 'Q'
         if (y === 0) {
@@ -191,9 +193,9 @@
     var rail = {}
     var house = {}
     for (var k = 0; k < 12; k++) {
-      var a = k * Math.PI / 6
+      var a = k * PI / 6
       for (var t = 5; t <= 17; t++) rail[Math.round(c + t * Math.cos(a)) * 64 + Math.round(c + t * Math.sin(a))] = t
-      var b = a + Math.PI / 12
+      var b = a + PI / 12
       var hx = Math.round(c + 13 * Math.cos(b))
       var hz = Math.round(c + 13 * Math.sin(b))
       for (var ix = -2; ix <= 2; ix++) for (var iz = -2; iz <= 2; iz++) house[(hx + ix) * 64 + hz + iz] = [ix, iz]
@@ -249,7 +251,7 @@
     var N = 31, c = 15
     var arm = {}
     for (var k = 0; k < 12; k++) {
-      var a = k * Math.PI / 6
+      var a = k * PI / 6
       var ca = Math.cos(a), sa = Math.sin(a)
       for (var t = 4; t <= 14.5; t += 0.5) {
         var px = c + t * ca, pz = c + t * sa

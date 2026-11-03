@@ -415,9 +415,9 @@
  },
  "gtceu:extraction_cascade": {
   "v": [],
-  "bt": 4,
-  "ds": 0.7,
-  "c": 61
+  "bt": 5,
+  "ds": 0.604,
+  "c": 246
  },
  "gtceu:femtosecond_writer": {
   "v": [],
@@ -589,8 +589,8 @@
  },
  "gtceu:horizon_flux_clamp": {
   "v": [],
-  "bt": 6,
-  "ds": 0.562,
+  "bt": 7,
+  "ds": 0.539,
   "c": 3378
  },
  "gtceu:horizon_interferometer": {
@@ -805,7 +805,7 @@
  },
  "gtceu:mass_stream_injector": {
   "v": [],
-  "bt": 5,
+  "bt": 6,
   "ds": 0.554,
   "c": 2125
  },
@@ -1148,8 +1148,8 @@
  "gtceu:platinum_plant": {
   "v": [],
   "bt": 3,
-  "ds": 0.519,
-  "c": 130
+  "ds": 0.514,
+  "c": 244
  },
  "gtceu:plume_sampler": {
   "v": [],
