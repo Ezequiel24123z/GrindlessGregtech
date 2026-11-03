@@ -63,6 +63,7 @@
     "gtceu:ev_conveyor_module": 1.6,
     "gtceu:ev_electric_motor": 1.396,
     "gtceu:ev_electric_piston": 1.496,
+    "gtceu:ev_machine_casing": 1.7,
     "gtceu:ev_machine_hull": 2.449,
     "gtceu:ev_robot_arm": 1.554
   },
