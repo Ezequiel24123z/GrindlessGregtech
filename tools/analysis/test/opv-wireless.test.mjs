@@ -94,7 +94,7 @@ test('opv/wireless.js: the repeater and the cell in the assembler at VA[OpV], fr
   const cell = find('grindless:assembler/opv_smes_cell');
   assert.ok(cell && cell.t === 'gtceu:assembler', 'the cell');
   const ct = JSON.stringify(cell.j);
-  for (const id of ['gtceu:chain_strand_single_wire', 'grindless:chain_lamina_stack', 'gtceu:opv_field_generator', CELL, String(VA_OPV)]) assert.ok(ct.includes(id), 'cell: ' + id);
+  for (const id of ['gtceu:chain_strand_single_wire', 'grindless:chain_lamina_stack', 'grindless:uxv_smes_cell', CELL, String(VA_OPV)]) assert.ok(ct.includes(id), 'cell: ' + id);
   const making = docs.filter((r) => JSON.stringify((r.j || {}).outputs || {}).includes('"' + CELL + '"'));
   assert.deepEqual(making.map((r) => r.i), ['grindless:assembler/opv_smes_cell'], 'the cell\'s only recipe');
   assert.equal(plain(W.recipes).filter((r) => r.output === CELL).length, 0, 'no table cell recipe (cellMadeBy)');
