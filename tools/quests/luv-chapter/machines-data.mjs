@@ -7,6 +7,7 @@ const xp = (n) => ({ type: 'xp', xp: n });
 const ri = (item, count) => ({ type: 'item', item, count });
 
 import { SECTIONS, place } from './layout.mjs';
+import { TEACH } from './teaching-rows.mjs';
 
 export const CHAPTER = {
   section: SECTIONS.machines,
@@ -179,6 +180,19 @@ export const QUESTS = [
       'The &6UHPIC Wafer&r is the purest slice of silicon the pack makes. The wake shield grows it from less naquadah and indium phosphide per wafer than a cleanroom reactor needs, and the ZPM chips will be cut from it.',
     ],
     tasks: [it('gtceu:uhpic_wafer')],
+    rewards: [xp(80)],
+  },
+  {
+    key: 'TJW', kind: 'wafer', title: 'Triple-Junction Wafer', icon: 'grindless:triple_junction_wafer', pkg: ['S03'],
+    deps: ['WAKE'], x: 10, y: 9,
+    teach: {
+      for: 'Gallium indium phosphide over gallium arsenide over germanium, grown layer by layer in the wake, make a &6Triple-Junction Wafer&r.',
+      needs: 'The Wake Shield Facility and germanium from Io, in a cleanroom.',
+      unlocks: 'Four triple-junction cells from one wafer, cut by an ordinary cutter.',
+      automate: 'Let ME carry the germanium in and the wafers to the cutter.',
+    },
+    desc: [],
+    tasks: [it('grindless:triple_junction_wafer')],
     rewards: [xp(80)],
   },
   {
@@ -480,5 +494,6 @@ export const QUESTS = [
     tasks: [it('ae2:quantum_link'), it('ae2:quantum_ring')],
     rewards: [xp(100)],
   },
+  ...TEACH,
 ];
 QUESTS.splice(0, QUESTS.length, ...place(QUESTS));

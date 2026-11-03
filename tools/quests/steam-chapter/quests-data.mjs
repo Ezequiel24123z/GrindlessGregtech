@@ -494,6 +494,42 @@ export const QUESTS = [
     tasks: [{ type: "item", id: "62538627EA89C8A4", item: "gtceu:large_steam_macerator", raw: { optional_task: "true" } }, { type: "item", id: "5920D0DDED303CFA", item: "gtceu:large_steam_centrifuge", raw: { optional_task: "true" } }, { type: "item", id: "7E94C78253DD1567", item: "gtceu:large_steam_thermal_centrifuge", raw: { optional_task: "true" } }, { type: "item", id: "63F121276C05604F", item: "gtceu:large_steam_chemical_bath", raw: { optional_task: "true" } }, { type: "item", id: "1BB28F8EF6908B4F", item: "gtceu:large_steam_ore_washer", raw: { optional_task: "true" } }],
     rewards: [{ type: "xp", id: "58E1F78F6D22AA8D",     xp: 60 }],
   },
+  {
+    key: "STEAM_CHARCOAL_PILE_IGNITER", title: "Charcoal Pile", icon: "gtceu:charcoal_pile_igniter", kind: "machine", deps: ["STEAM_STEAM_AGE"], x: 2, y: -3,
+    teach: {
+      for: "Logs buried under dirt and lit by the &6Charcoal Pile Igniter&r burn slowly into charcoal, with no coal anywhere in sight.",
+      needs: "The controller, bronze plates, flint and steel and iron rotors, and a heap of logs under earth.",
+      unlocks: "Fuel before the first coke oven, and charcoal for steel later.",
+      automate: "It needs a person to stack the logs, so let a steam miner or a tree farm feed the pile.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:charcoal_pile_igniter" }],
+    rewards: [{ type: "xp", xp: 20 }],
+  },
+  {
+    key: "STEAM_WOODEN_TANK", title: "Wooden Tank", icon: "gtceu:wooden_multiblock_tank", kind: "machine", deps: ["STEAM_LOW_PRESSURE_BOILER"], x: 4, y: 3,
+    teach: {
+      for: "A box of wooden walls around a &6Wooden Tank&r controller holds more water than any bucket chain will.",
+      needs: "The controller, copper rings, wood walls and a crafting mallet.",
+      unlocks: "A buffer that keeps the first boilers drinking.",
+      automate: "Pump into the tank and draw from it with a pipe.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:wooden_multiblock_tank" }],
+    rewards: [{ type: "xp", xp: 20 }],
+  },
+  {
+    key: "STEAM_BRONZE_TANK", title: "Bronze Tank", icon: "gtceu:bronze_multiblock_tank", kind: "machine", deps: ["STEAM_WOODEN_TANK"], x: 6, y: 3,
+    teach: {
+      for: "The &6Bronze Tank&r is the same idea in metal. It holds steam and hot fluids the wooden one would burn.",
+      needs: "The controller, bronze rings, steam machine casing and a crafting hammer.",
+      unlocks: "Storage for steam and for fluids that are too hot for wood.",
+      automate: "Pipe it in and out like any tank.",
+    },
+    desc: [],
+    tasks: [{ type: "item", item: "gtceu:bronze_multiblock_tank" }],
+    rewards: [{ type: "xp", xp: 20 }],
+  },
 ];
 
     export const LINKS = [
