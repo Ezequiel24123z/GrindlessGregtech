@@ -1,4 +1,4 @@
-// priority: -5725
+// priority: -1774
 // TEST ONLY, AUD3-PERF (#306). Command: kubejs custom_command gg_test_factory_load
 // Band ONLY: X 50176-50239, Z 0-63, Overworld Y 98-150 (zone factory_load). Needs a dedicated server on the VM, one exclusive slot,
 // never beside the EMI audit. Config: kubejs/config/gg_test_factory_load.json. Usage and baselines: docs/testing/usage.md.
