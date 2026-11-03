@@ -2,7 +2,7 @@
 // TEST ONLY, UEV-M2 (gtceu:stellar_forge). Command: kubejs custom_command gg_test_uev_stellar_forge
 // Band ONLY: X 35136-35199, Z 0-63, Overworld Y 98-125.
 //   T1 (named uncertainty: the forge's modifier chain on 7.5.3: ebf_temp read, plasma added by the last modifier, veto, clamp):
-//     formed     forge A (no hatch) and forge B (UEV parallel hatch) form <= 16 tall with HfTaCN coils (12,600 K)
+//     formed     forge A (no hatch) and forge B (UEV parallel hatch) form 23 tall with HfTaCN coils (12,600 K)
 //     noplasma   a 9,000 K probe (8 EU/t, non-consumed stick) runs 256 copies, nothing drained
 //     plasma     with 1,000 mB uev_dhe3_plasma the same probe runs 1,024 copies, 250 mB drained once, 250 mB helium_4_ash out
 //     short      with 100 mB plasma it runs 256 copies and the tank is untouched
@@ -205,7 +205,7 @@
     var kelvin = global.grindless.coils.temperature(m)
     var ph = m.getParallelHatch()
     var hatch = ph.isPresent() ? ph.get() : null
-    var ok = !!u.bus && !!u.inH && !!u.outH && u.energy.length === 1 && u.height <= 16 && kelvin === 12600 && (u.hatch ? !!hatch : !hatch)
+    var ok = !!u.bus && !!u.inH && !!u.outH && u.energy.length === 1 && u.height === 23 && kelvin === 12600 && (u.hatch ? !!hatch : !hatch)
     check(u.name + '_formed', ok, 'class ' + m.getClass().getSimpleName() + ', height ' + u.height + ', coil ' + kelvin + ' K, hatch ' + (hatch ? hatch.getCurrentParallel() : 'none'))
     return ok
   }

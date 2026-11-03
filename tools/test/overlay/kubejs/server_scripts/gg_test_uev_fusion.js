@@ -188,10 +188,12 @@
   // ---------------------------------------------------------------- the ring: forms, buffer above the int maximum, starts and runs one recipe
   function ringBuild(u) {
     var e = 0
+    var x = 0
     var i = 0
     var o = 0
     placeCheck(u, placeMachine(RING, u.x, 80, u.run.z, function (c) {
-      if (c.ch === 'E' && e < 16) { e++; return HATCH16 }
+      if (c.ch === 'E' && e < 15) { e++; return HATCH16 }
+      if (c.ch === 'X' && x < 1) { x++; return HATCH16 }
       if (c.ch === 'I' && i < 1) { i++; return 'gtceu:hv_input_hatch' }
       if (c.ch === 'O' && o < 1) { o++; return 'gtceu:hv_output_hatch' }
       return null
