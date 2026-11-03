@@ -304,7 +304,7 @@ export const QUESTS = [
     automate: 'Probes by ME; the sample comes out in a canister.',
   }, [it(TRUSS)]),
   prod('P_SAMPLE', 'Planetesimal Sample', 'grindless:planetesimal_sample', ['KUIPER'], 4, 25.5,
-    'A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed, so it is the one thing that shows what the young system was made of. A probe brings it back from the Kuiper Belt in a canister, so you need the probe line and a launch. It unlocks the fractionator's annealing carousel, which keeps the ice as it was. Probes go out by ME and the canister comes back the same way.',
+    'A &6Planetesimal Sample&r is ice and dust that has not changed since the Solar System formed, so it is the one thing that shows what the young system was made of. A probe brings it back from the Kuiper Belt in a canister, so you need the probe line and a launch. It unlocks the annealing carousel of the fractionator, which keeps the ice as it was. Probes go out by ME and the canister comes back the same way.',
     [it('grindless:planetesimal_sample')]),
   gear('HELIO', 'precursor_probe_bay', 'Heliopause', ['M_L_EDGE'], 2, 27, {
     for: 'The &6Precursor Probe Bay&r sends a probe ahead along a rail to the edge of the Sun\'s wind, and listens to what it finds.',

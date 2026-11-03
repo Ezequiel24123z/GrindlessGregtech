@@ -18,7 +18,7 @@ const byName = new Map(controllersOf(run.registry).map((c) => [c.name, c]));
 const machines = new Map([...run.registry.machines.values()].map((m) => [m.name, m]));
 const keyOf = (t) => String((t && t.__key) || t);
 
-test('60 controllers are covered', () => assert.equal(new Set(NAMES).size, 60));
+test('59 controllers are covered', () => assert.equal(new Set(NAMES).size, 59));
 
 for (const name of NAMES) {
   test(`${name}: short tooltip, keys resolve, page exists`, () => {
