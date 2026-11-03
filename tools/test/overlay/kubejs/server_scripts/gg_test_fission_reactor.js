@@ -406,11 +406,11 @@
       })
       var live = asArray(S.server.getRecipeManager().getAllRecipesFor(GTRegistries.RECIPE_TYPES.get(rl(TYPE)))).length
       if (live !== (F.cores || []).length) problems.push(live + ' live ' + TYPE + ' recipes for ' + (F.cores || []).length + ' cores')
-      check('core_recipes', problems.length === 0 && lines.length === 4, lines.join(' ; ') + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
+      check('core_recipes', problems.length === 0 && lines.length === Object.keys(WANT_CORES).length, lines.join(' ; ') + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
       var report = (global.grindless.power && global.grindless.power.generators) || null
       var touched = report && report.perType ? Object.keys(report.perType).filter(function (t) { return t === TYPE }) : []
       var doubled = durations.filter(function (d) { return d !== CYCLE })
-      check('not_doubled', durations.length === 4 && doubled.length === 0 && touched.length === 0 && report !== null, 'durations ' +
+      check('not_doubled', durations.length === Object.keys(WANT_CORES).length && doubled.length === 0 && touched.length === 0 && report !== null, 'durations ' +
         durations.join(',') + ' (table ' + CYCLE + '); power/generators.js types ' + (report && report.perType ? Object.keys(report.perType).length : '?') +
         ', ' + TYPE + ' among them: ' + (touched.length > 0))
       note('balance', balance.join(' ; '))
@@ -420,11 +420,10 @@
       var F = FR()
       var r = liveRecipe(F.craftingRecipe)
       if (r === null) throw new Error(F.craftingRecipe + ' missing')
-      var out = String(r.getResultItem(S.server.registryAccess()).getId())
+      var outs = itemContents(r, false)
+      var out = outs.length === 1 ? outs[0].id : outs.map(function (o) { return o.id }).join(',')
       var ids = {}
-      asArray(r.getIngredients()).forEach(function (ing) {
-        asArray(ing.getItemIds()).forEach(function (id) { ids[String(id)] = true })
-      })
+      itemContents(r, true).forEach(function (x) { ids[x.id] = true })
       var missing = F.craftingParts.filter(function (id) { return id !== MACHINE && !ids[id] })
       check('controller_recipe', out === MACHINE && missing.length === 0, F.craftingRecipe + ' -> ' + out + (missing.length > 0 ? ' | missing: ' + missing.join(',') : ''))
     })
