@@ -32,7 +32,7 @@
       feed: [[CIRCUIT, 1, '{Configuration:5}'], ['grindless:clad_chain_strand', 1]],
       recipe: 'grindless:pasta_drawing/horizon_strand_preform', out: [['grindless:horizon_strand_preform', 1]], gone: 'grindless:clad_chain_strand' },
     { name: 'draw_c6', id: 'gtceu:pasta_phase_sorter', cx: 39280, z: 4,
-      feed: [[CIRCUIT, 1, '{Configuration:6}'], ['grindless:horizon_strand_preform', 1]],
+      feed: [[CIRCUIT, 1, '{Configuration:6}'], ['grindless:horizon_strand_preform', 2]],
       recipe: 'grindless:pasta_drawing/horizon_wire_drawing', out: [['gtceu:horizon_strand_single_wire', 4]], gone: 'grindless:horizon_strand_preform' }
   ]
   function classes() {
