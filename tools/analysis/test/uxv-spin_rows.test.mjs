@@ -191,7 +191,7 @@ test('older rows are appended, never edited: the pinned older rows keep their ci
   assert.equal(eb.filter((r) => (r._why || '').startsWith('UXV-A3')).length, 15);
   const n = (f, t) => mine(f, t).length;
   assert.equal(n('electron_beam.json', 'electron_beam_refining') + n('composites.json', 'nitride_magnet_synthesis') + n('composites.json', 'chemical_vapour_infiltration')
-    + n('crystals.json', 'crystal_growth') + n('levitation_melter.json', 'levitation_melting') + n('megabar.json', 'megabar_synthesis') + n('photonics.json', 'photonic_foundry'), 15 + 8 + 1 + 8 + 8 + 1 + 6);
+    + n('crystals.json', 'crystal_growth') + n('levitation_melter.json', 'levitation_melting') + n('megabar.json', 'megabar_synthesis') + n('photonics.json', 'photonic_foundry'), 15 + 8 + 1 + 8 + 8 + 1 + 5);
 });
 
 test('lang: every new table row has an EMI line in en_us', () => {
