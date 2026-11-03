@@ -187,7 +187,7 @@
       console.error(LOG + 'cold recipe skipped ' + r.name + ': unknown id(s) ' + missing.join(', '))
       return
     }
-    var recipe = event.recipes.gtceu[r.type](r.recipeId)
+    var recipe = event.recipes.gtceu[r.type]('grindless:' + r.name)
     r.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
     if (r.circuit !== null) recipe.circuit(r.circuit)
     r.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })

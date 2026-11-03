@@ -91,7 +91,7 @@ test('only from: every line part and component has its one producer, and every i
     'grindless:chain_mesh_belt': 'grindless:closed_loop_cooling/chain_mesh_belt',
     'grindless:opv_harmonic_drive': 'grindless:spark_plasma_sintering/opv_harmonic_drive',
     'grindless:chain_field_coil': 'grindless:assembler/chain_field_coil',
-    'grindless:th229_lasing_crystal': 'grindless:nuclear_clock/nuclear_clock/lasing_check',
+    'grindless:th229_lasing_crystal': 'grindless:nuclear_clock/lasing_check',
     'grindless:hpge_compton_crystal': 'grindless:closed_loop_cooling/hpge_compton_crystal',
     'gtceu:superfluid_helium_3': 'grindless:nuclear_demagnetisation/superfluid_he3',
     'gtceu:liquid_helium_3': 'grindless:cryogenic_processing/liquid_helium_3',
@@ -131,7 +131,7 @@ test('the OpV-A1 rows on older machines are in the recipe docs', () => {
   for (const id of ['grindless:chemical_vapour_infiltration/chain_preform_densify', 'grindless:chemical_vapour_infiltration/rebco_potting',
     'grindless:megabar_synthesis/flexspline_cup', 'grindless:femtosecond_writing/flexspline_teeth', 'grindless:magnet_winding/rebco_pancake',
     'grindless:magnet_winding/rebco_training', 'grindless:hot_cell/thorium_229_nitrate', 'grindless:fluorspar_digestion/laser_grade_thf4',
-    'grindless:crystal_growth/crystal_growth/th_caf2_lasing', 'grindless:crystal_growth/crystal_growth/hpge_compton', 'grindless:mocvd/th_caf2_coating',
+    'grindless:crystal_growth/th_caf2_lasing', 'grindless:crystal_growth/hpge_compton', 'grindless:mocvd/th_caf2_coating',
     'grindless:zone_refining/thirteen_n_germanium', 'grindless:ion_implantation/hpge_contacts', 'grindless:nuclear_demagnetisation/superleak_plug',
     'grindless:electron_beam_refining/mesh_belt_weld']) assert.ok(find(id), id);
   const tables = (n) => JSON.parse(fs.readFileSync(path.join(pack, 'kubejs', 'data', 'grindless', 'tables', n + '.json'), 'utf8'));

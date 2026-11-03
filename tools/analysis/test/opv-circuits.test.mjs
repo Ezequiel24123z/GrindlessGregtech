@@ -37,12 +37,12 @@ const SCRIPT_ROWS = [
   ['grindless:solvent_extraction/ev/gan_exhaust_gallium', 'ev/extraction_cascade.js'],
   ['grindless:pgm_refining/opv/gold_overspray', 'ev/platinum_plant.js'],
   ['grindless:zone_refining/si28_poly_fz', 'uv/detectors.js'],
-  ['grindless:srf_cavity/srf_cavity/rrr_nb_target', 'uv/cold.js'],
+  ['grindless:srf_cavity/rrr_nb_target', 'uv/cold.js'],
   ['grindless:mocvd/si28_poly_rod', 'uv/photonics.js'],
   ['grindless:mocvd/inas_al', 'uv/photonics.js'],
   ['grindless:mocvd/gate_stack', 'uv/photonics.js'],
   ['grindless:mocvd/gan_on_sic', 'uv/photonics.js'],
-  ['grindless:fibre_draw/fibre_draw/cryo_optical_link', 'uv/photonics.js']
+  ['grindless:fibre_draw/cryo_optical_link', 'uv/photonics.js']
 ];
 // [table, type, name, circuit, the script that loads it]: the rows appended to older machines' tables
 const TABLE_ROWS = [
@@ -73,7 +73,7 @@ const TABLE_ROWS = [
 // the table types whose rows carry an EMI line (data key grindless_<type>)
 const DATA_KEYED = ['crystal_growth', 'molecular_beam_epitaxy', 'beuv_lithography', 'stm_lithography', 'mtj_sputtering', 'ion_slicing',
   'femtosecond_writing', 'snspd_fabrication', 'chemical_vapour_infiltration', 'silicon_carbide', 'photonic_integration'];
-const tableId = ([, type, name]) => (type === 'crystal_growth' ? `grindless:${type}/${type}/${name}` : `grindless:${type}/${name}`);
+const tableId = ([, type, name]) => `grindless:${type}/${name}`;
 // the items of lines 11-18: each has a producer and a consumer among the recipes (nbtin_film_wafer waits for OpV-D1: made, not yet used)
 const CHAIN = ['si28_poly_rod', 'si_inp_boule', 'si_inp_wafer', 'inp_scrap', 'inas_qw_wafer', 'hbn_capped_2deg_wafer', 'gate_stack_soi_wafer',
   'cryo_cmos_litho_wafer', 'cryo_cmos_implanted_wafer', 'cryo_cmos_metal_wafer', 'untested_cryo_cmos_die', 'gold_overspray', 'rrr_nb_target',
@@ -171,7 +171,7 @@ test('the lines chain: every intermediate is made and used, the fluids too', () 
   assert.ok(producers('grindless:nb_tsv_interposer').some((r) => r.i === 'grindless:closed_loop_cooling/opv_nb_tsv_interposer_test'));
   assert.ok(producers('grindless:gated_2deg_wafer').some((r) => r.i === 'grindless:stm_lithography/gate_2deg'));
   assert.ok(producers('grindless:inas_al_wafer').some((r) => r.i === 'grindless:mocvd/inas_al'));
-  assert.ok(producers('grindless:cryo_optical_link').some((r) => r.i === 'grindless:fibre_draw/fibre_draw/cryo_optical_link'));
+  assert.ok(producers('grindless:cryo_optical_link').some((r) => r.i === 'grindless:fibre_draw/cryo_optical_link'));
   assert.ok(producers('grindless:hemt_amplifier').some((r) => r.i === 'grindless:cutter/hemt_amplifiers'));
   assert.ok(producers('grindless:gan_mmic').some((r) => r.i === 'grindless:silicon_carbide/gan_mmic'));
   assert.ok(producers('grindless:sdd_die').some((r) => r.i === 'grindless:mtj_sputtering/sdd_metal'));

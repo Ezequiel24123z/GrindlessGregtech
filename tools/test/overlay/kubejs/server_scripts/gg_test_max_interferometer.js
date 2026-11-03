@@ -33,7 +33,7 @@
     'atom_interferometry/matter_wave_gradiometer', 'atom_interferometry/shell_gradient_map', 'assembly_line/atom_interferometer_works',
     'calutron_separation/strontium_88', 'calutron_separation/spent_sr_cartridge', 'quantum_degenerate_gas/degenerate_sr_cartridge',
     'shequid_assembly/shequid_rotation_ref', 'ion_slicing/atom_optics_modulator', 'molecular_beam_epitaxy/algaas_bragg_stack',
-    'crystal_growth/crystal_growth/silicon_cavity_spacer', 'chemical_reactor/released_algaas_film', 'laser_engraver/transferred_crystalline_mirror',
+    'crystal_growth/silicon_cavity_spacer', 'chemical_reactor/released_algaas_film', 'laser_engraver/transferred_crystalline_mirror',
     'closed_loop_cooling/cryo_reference_cavity'
   ]
 

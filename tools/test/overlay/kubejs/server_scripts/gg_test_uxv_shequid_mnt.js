@@ -26,7 +26,7 @@
     'shequid_assembly/weak_link_cell', 'shequid_assembly/shequid_gyro',
     'multinucleon_transfer/collision', 'multinucleon_transfer/gas_catcher', 'multinucleon_transfer/mr_tof', 'multinucleon_transfer/island_chart',
     'assembler/gas_stopping_cell', 'assembly_line/shequid_works', 'assembly_line/mnt_collider', 'assembly_line/uxv_sensor',
-    'superfluid_helium/superfluid_helium/he2_heat_flush', 'fuel_fabrication/u238_ion_source', 'synchrotron/synchrotron/u238_beam_charge'
+    'superfluid_helium/he2_heat_flush', 'fuel_fabrication/u238_ion_source', 'synchrotron/u238_beam_charge'
   ]
 
   var UNITS = [

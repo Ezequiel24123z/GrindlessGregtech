@@ -71,7 +71,7 @@ test('the plant: He-II needs liquid helium, the superleak takes only Neptune hel
   }
   // OpV-A1: exact id match, so its superfluid helium-3 (gtceu:superfluid_helium_3) is not counted as a helium-4 maker
   const makers = recipes.filter((r) => !r.i.startsWith('grindless:assembly_line/') && JSON.stringify(r.j.outputs || {}).includes('"gtceu:superfluid_helium"') && !JSON.stringify(r.j.inputs || {}).includes('"gtceu:superfluid_helium"'));
-  assert.deepEqual(makers.map((r) => r.i).sort(), ['grindless:superfluid_helium/superfluid_helium/he2', 'grindless:superfluid_helium/superfluid_helium/superleak']);
+  assert.deepEqual(makers.map((r) => r.i).sort(), ['grindless:superfluid_helium/he2', 'grindless:superfluid_helium/superleak']);
 });
 
 test('the works: four steps on circuits 1 to 4, whole numbers, UV tier bound', () => {

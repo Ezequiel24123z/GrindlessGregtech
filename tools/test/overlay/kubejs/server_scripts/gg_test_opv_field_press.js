@@ -33,8 +33,8 @@
     'grindless:assembly_line/opv_energy_input_hatch', 'grindless:assembly_line/opv_energy_input_hatch_4a', 'grindless:assembly_line/opv_energy_input_hatch_16a',
     'grindless:assembly_line/opv_energy_output_hatch', 'grindless:assembly_line/opv_energy_output_hatch_4a', 'grindless:assembly_line/opv_energy_output_hatch_16a',
     'grindless:electron_beam_refining/field_can', 'grindless:electron_beam_refining/field_can_remelt',
-    'grindless:nitride_magnet_synthesis/aln_powder', 'grindless:nitride_magnet_synthesis/aln_kerf_repress', 'grindless:crystal_growth/crystal_growth/aln_boule',
-    'grindless:cutter/aln_wafer', 'grindless:mocvd/mocvd/algan_epi', 'grindless:beuv_lithography/algan_gates', 'grindless:silicon_carbide/aln_power_die',
+    'grindless:nitride_magnet_synthesis/aln_powder', 'grindless:nitride_magnet_synthesis/aln_kerf_repress', 'grindless:crystal_growth/aln_boule',
+    'grindless:cutter/aln_wafer', 'grindless:mocvd/algan_epi', 'grindless:beuv_lithography/algan_gates', 'grindless:silicon_carbide/aln_power_die',
     'gg_test_opv_field_press:field_freezing/probe'
   ]
 

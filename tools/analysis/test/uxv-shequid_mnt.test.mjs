@@ -105,7 +105,7 @@ test('the controllers: UIV hull, parts, mainframes, helium, at least 8 distinct 
 });
 
 test('older rows: cold he2_heat_flush, uranium u238_ion_source (circuit 11), synchrotron u238_beam_charge (circuit 8)', () => {
-  const flush = find('grindless:superfluid_helium/superfluid_helium/he2_heat_flush');
+  const flush = find('grindless:superfluid_helium/he2_heat_flush');
   assert.ok(flush, 'he2_heat_flush');
   const ft = JSON.stringify(flush.j);
   assert.ok(ft.includes('gtceu:superfluid_helium') && ft.includes('helium_3_concentrate'));
@@ -114,7 +114,7 @@ test('older rows: cold he2_heat_flush, uranium u238_ion_source (circuit 11), syn
   const it = JSON.stringify(ion.j);
   assert.ok(it.includes('"configuration":11'), 'circuit 11');
   assert.ok(it.includes('depleted_uranium_hexafluoride') && it.includes('gtceu:fluorine'), 'fluorine comes back');
-  const beam = find('grindless:synchrotron/synchrotron/u238_beam_charge');
+  const beam = find('grindless:synchrotron/u238_beam_charge');
   assert.ok(beam, 'u238_beam_charge');
   const bt = JSON.stringify(beam.j);
   assert.ok(bt.includes('grindless:u238_ion_source') && bt.includes('liquid_helium') && bt.includes('gtceu:helium'));

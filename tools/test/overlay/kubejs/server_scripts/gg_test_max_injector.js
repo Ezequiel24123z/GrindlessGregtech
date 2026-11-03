@@ -32,7 +32,7 @@
 
   var IDS = [
     'mass_stream_injection/stream_bundle', 'mass_stream_injection/pellet_recast', 'assembly_line/mass_stream_injector',
-    'lathe/turned_pellet_core', 'canner/stream_pellet', 'megabar_synthesis/pellet_press', 'srf_cavity/srf_cavity/pellet_jacket'
+    'lathe/turned_pellet_core', 'canner/stream_pellet', 'megabar_synthesis/pellet_press', 'srf_cavity/pellet_jacket'
   ]
 
   function classes() {
