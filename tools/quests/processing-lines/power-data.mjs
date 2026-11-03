@@ -52,8 +52,8 @@ const largeBoiler = (k) => [
 const COMBUSTION_ANYWHERE = P.anywhere('gtceu:combustion_generator', [['fluid:gtceu:rocket_fuel', 'rocket fuel']]);
 const GAS_ANYWHERE = P.anywhere('gtceu:gas_turbine', [['fluid:gtceu:methalox', 'methalox']]);
 
-const coal = (key, x, y) => n(key, x, y, I('minecraft:coal'), 'Coal', { kind: 'raw', sub: 'Coke and charcoal work too' });
-const steam = (key, x, y) => n(key, x, y, F('gtceu:steam'), 'Steam', { kind: 'raw', sub: 'From any boiler' });
+const coal = (key, x, y, title, desc) => n(key, x, y, I('minecraft:coal'), title, { kind: 'raw', sub: 'Coke and charcoal work too', desc });
+const steam = (key, x, y, title, desc) => n(key, x, y, F('gtceu:steam'), title, { kind: 'raw', sub: 'From any boiler', desc });
 
 // the chapter without what has not landed (LANDED): its clusters and nodes, the arrows into them, and bands left empty
 function gate(ch) {
@@ -110,7 +110,7 @@ export default gate({
       nodes: [
         E('eqLPB', 0, -1.5, 'steam_age', '6D923ADC90127182'),
         L('coke', 0, 0, 'pl_steam:coke'),
-        coal('coal', 0, 1.5),
+        coal('coal', 0, 1.5, 'Coal', 'The cheapest boiler fuel. Any coal-bearing seam, or the coal line you build in the early game, keeps these boilers fed.'),
         n('lpSolid', 2.25, 0, M('gtceu:lp_steam_solid_boiler'), 'Low-Pressure Solid Boiler', {
           tier: 'steam', from: ['eqLPB', 'coke', 'coal'], desc: 'Burns anything a furnace burns.',
           figs: [P.steam(48), P.steamFuel('minecraft:coal', 'coal', 76.8), P.steamFuel('minecraft:charcoal', 'charcoal', 76.8), P.steamFuel('gtceu:coke_gem', 'coke', 153.6)],
@@ -125,7 +125,7 @@ export default gate({
       name: 'Liquid fuel boilers',
       nodes: [
         L('creosote', 0, 0, 'pl_steam:creosote'),
-        n('lava', 0, 1.5, F('minecraft:lava'), 'Lava', { kind: 'raw', sub: 'Pumped in the Nether' }),
+        n('lava', 0, 1.5, F('minecraft:lava'), 'Lava', { kind: 'raw', sub: 'Pumped in the Nether', desc: 'It burns longer than any other boiler fuel, and a pump on a Nether lake never runs dry. It also lets a boiler run where no water-fed fuel would.' }),
         n('lpLiquid', 2.25, 0, M('gtceu:lp_steam_liquid_boiler'), 'Low-Pressure Liquid Boiler', {
           tier: 'steam', from: ['creosote', 'lava'],
           figs: [P.steam(96), P.steamFuel('fluid:minecraft:lava', 'a bucket of lava', 864), P.steamFuel('fluid:gtceu:creosote', 'a bucket of creosote', 134.4), P.anywhere('gtceu:steam_boiler', LAVA_ONLY)],
@@ -139,12 +139,14 @@ export default gate({
     stSolar: {
       name: 'Solar boilers',
       nodes: [
-        n('water0', 0, 0.75, F('minecraft:water'), 'Water', { kind: 'raw', sub: 'Every boiler drinks it' }),
+        n('water0', 0, 0.75, F('minecraft:water'),         'Boiler Water', { kind: 'raw', sub: 'Every boiler drinks it', desc: 'Every boiler turns water into steam, so pipe it in from a pump or a rain collector.' }),
         n('lpSolar', 2.25, 0, M('gtceu:lp_steam_solar_boiler'), 'Low-Pressure Solar Boiler', {
           tier: 'steam', from: [boilerWater('water0')], figs: [P.steam(48)], sub: 'By day, under open sky',
-        }),
-        n('hpSolar', 2.25, 1.5, M('gtceu:hp_steam_solar_boiler'), 'High-Pressure Solar Boiler', {
-          tier: 'steam', from: [boilerWater('water0')], figs: [P.steam(144)], sub: 'By day, under open sky',
+                  desc: 'It burns nothing: sunlight on its panels boils the water. Fine for a first steam line when the fuel is short.',
+                }),
+                n('hpSolar', 2.25, 1.5, M('gtceu:hp_steam_solar_boiler'), 'High-Pressure Solar Boiler', {
+                  tier: 'steam', from: [boilerWater('water0')], figs: [P.steam(144)], sub: 'By day, under open sky',
+                  desc: 'The steel version of the solar boiler: the same free heat, far more steam.',
         }),
       ],
     },
@@ -153,8 +155,8 @@ export default gate({
       name: 'Steam turbine',
       nodes: [
         E('eqLVT', 0, -0.75, 'steam_age', '4996827E4BFC339E'),
-        steam('steam1', 0, 0.75),
-        n('lvTurbine', 2.25, 0, M('gtceu:lv_steam_turbine'), 'Steam Turbine', {
+        steam('steam1', 0, 0.75, 'Steam for the LV Turbine', 'Any boiler\'s steam will turn it. The first electricity most bases make comes from here.'),
+        n('lvTurbine', 2.25, 0, M('gtceu:lv_steam_turbine'), 'LV Steam Turbine', {
           tier: 'lv', from: ['eqLVT', 'steam1'], desc: 'A little of the steam comes back as distilled water.',
           figs: [P.single(32), P.fuel('fluid:gtceu:steam', 'steam', 1)],
         }),
@@ -164,7 +166,7 @@ export default gate({
       name: 'Large Bronze Boiler, and biomass',
       nodes: [
         E('eqLBB', 0, -3, 'steam_age', '36B68B4C2B1E0DBA'),
-        coal('coal2', 0, -1.5),
+        coal('coal2', 0, -1.5, 'Coal for the Bronze Boiler', 'The bronze large boiler takes the same fuels as the small ones, in bulk and with a bigger steam output.'),
         // pl_mv's ethanol hangs off pl_lv's biomass, so FTB draws that line between the two links: biomass -> ethanol
         L('biomass', 0, 0, 'pl_lv:biomass'),
         n('bronzeLB', 2.25, -1.5, M('gtceu:bronze_large_boiler'), 'Large Bronze Boiler', {
@@ -173,7 +175,7 @@ export default gate({
           figs: [P.steam(6400), ...largeBoiler(1)],
         }),
         L('ethanol', 2.25, 0.75, 'pl_mv:ethanol'),
-        n('lvComb', 4.5, 0.75, M('gtceu:lv_combustion'), 'Combustion Generator', {
+        n('lvComb', 4.5, 0.75, M('gtceu:lv_combustion'),         'LV Combustion Generator', {
           tier: 'lv', from: ['ethanol'], desc: 'Every fuel it takes, best first; most of them come with MV.',
           figs: [P.single(32), ...fuels(COMBUSTION), COMBUSTION_ANYWHERE],
         }),
@@ -183,9 +185,10 @@ export default gate({
       name: 'Heliostat tower',
       nodes: [
         E('eqHel', 0, -0.75, 'lv_age', '3A7E2C5F1B9D4061'),
-        n('water1', 0, 0.75, F('minecraft:water'), 'Water', { kind: 'raw' }),
+        n('water1', 0, 0.75, F('minecraft:water'), 'Heliostat Water', { kind: 'raw', desc: 'The mirrors boil it in the tower, so it needs a steady feed from a pump or a rain collector.' }),
         n('heliostat', 2.25, 0, M('gtceu:heliostat_tower'), 'Heliostat Tower', {
           kind: 'ours', tier: 'lv', from: ['eqHel', 'water1'], figs: [P.steam(800), P.uses(16)], sub: 'By day, under an open, dry sky',
+          desc: 'A ring of mirrors focuses the sun on one boiler, so it makes a great deal of steam while burning nothing. The mirrors wear slowly and need replacing.',
         }),
       ],
     },
@@ -193,7 +196,7 @@ export default gate({
       name: 'Generator array',
       nodes: [
         E('eqArr', 0, -0.75, 'lv_age', '1CE11DDA27E5B778'),
-        steam('steam2', 0, 0.75),
+        steam('steam2', 0, 0.75, 'Steam for the Array', 'The array\'s steam generators burn it like any LV turbine would.'),
         n('array', 2.25, 0, M('gtceu:generator_array'), 'Generator Array', {
           kind: 'ours', tier: 'lv', from: ['eqArr', 'steam2'], desc: 'LV generators stacked behind one controller: the same EU per mB, far less cable.',
           figs: [P.run(32, { per: 'a generator' }), P.max(512, 16, 32, { file: 'pack/kubejs/startup_scripts/grindless/power/generator_array.js', re: 'MAX_PARALLELS = (\\d+)' })],
@@ -204,7 +207,7 @@ export default gate({
       name: 'Gas turbine',
       nodes: [
         L('coalgas', 0, 0, 'pl_steam:coalgas'),
-        n('lvGas', 2.25, 0, M('gtceu:lv_gas_turbine'), 'Gas Turbine', {
+        n('lvGas', 2.25, 0, M('gtceu:lv_gas_turbine'),         'LV Gas Turbine', {
           tier: 'lv', from: ['coalgas'], desc: 'Every gas it takes, best first.',
           figs: [P.single(32), ...fuels(GAS), GAS_ANYWHERE],
         }),
@@ -214,8 +217,11 @@ export default gate({
     mvSteam: {
       name: 'MV steam turbine',
       nodes: [
-        steam('steam3', 0, 0),
-        n('mvTurbine', 2.25, 0, M('gtceu:mv_steam_turbine'), 'Steam Turbine', { tier: 'mv', from: ['steam3'], figs: [P.single(128)], sub: 'Same steam, more of it at once' }),
+        steam('steam3', 0, 0, 'Steam for the MV Turbine', 'The same boiler steam as before; the MV turbine just swallows more of it.'),
+        n('mvTurbine', 2.25, 0, M('gtceu:mv_steam_turbine'), 'MV Steam Turbine', {
+          tier: 'mv', from: ['steam3'], figs: [P.single(128)], sub: 'Same steam, more of it at once',
+          desc: 'It burns the steam faster for a higher output, so a few boilers are enough to feed it.',
+        }),
       ],
     },
     mvSolar: {
@@ -224,6 +230,7 @@ export default gate({
         L('wafer', 0, 0, 'pl_mv:wafer'),
         n('solarCover', 2.25, 0, I('gtceu:solar_panel'), 'Solar Panel', {
           kind: 'info', tier: 'mv', from: ['wafer'], figs: [P.cover(1)], sub: 'A cover: it goes on top of a machine and feeds it',
+          desc: 'A silicon wafer, cut and wired, becomes a panel that powers the machine under it in daylight. Good for small, remote machines.',
         }),
       ],
     },
@@ -233,8 +240,8 @@ export default gate({
         L('diesel', 0, -2.25, 'pl_mv:diesel'),
         L('lightmv', 0, -0.75, 'pl_mv:light'),
         L('methanol', 0, 0.75, 'pl_mv:methanol'),
-        n('rawoil', 0, 2.25, F('gtceu:oil_medium'), 'Raw Oil', { kind: 'raw', sub: 'Pumped by the fluid drilling rig' }),
-        n('mvComb', 2.25, 0, M('gtceu:mv_combustion'), 'Combustion Generator', {
+        n('rawoil', 0, 2.25, F('gtceu:oil_medium'), 'Raw Oil', { kind: 'raw', sub: 'Pumped by the fluid drilling rig', desc: 'It burns as it comes, with no refining at all. The weakest fuel here, but nothing is simpler.' }),
+        n('mvComb', 2.25, 0, M('gtceu:mv_combustion'), 'MV Combustion Generator', {
           tier: 'mv', from: ['diesel', 'lightmv', 'methanol', 'rawoil'], desc: 'Diesel is the first fuel worth the trouble.',
           figs: [P.single(128), ...pick(COMBUSTION, 'diesel', 'light_fuel', 'methanol', 'oil_medium'), COMBUSTION_ANYWHERE],
         }),
@@ -245,8 +252,8 @@ export default gate({
       nodes: [
         L('woodgas', 0, -1.5, 'pl_mv:woodgas'),
         L('benzenemv', 0, 0, 'pl_mv:benzene'),
-        n('natgas', 0, 1.5, F('gtceu:natural_gas'), 'Natural Gas', { kind: 'raw', sub: 'From a gas deposit, by fluid drill' }),
-        n('mvGas', 2.25, 0, M('gtceu:mv_gas_turbine'), 'Gas Turbine', {
+        n('natgas', 0, 1.5, F('gtceu:natural_gas'),         'Natural Gas', { kind: 'raw', sub: 'From a gas deposit, by fluid drill', desc: 'Drilled straight from a gas deposit and burned unrefined; the cheapest fuel for a gas turbine.' }),
+                n('mvGas', 2.25, 0, M('gtceu:mv_gas_turbine'), 'MV Gas Turbine', {
           tier: 'mv', from: ['woodgas', 'benzenemv', 'natgas'],
           figs: [P.single(128), ...pick(GAS, 'benzene', 'wood_gas', 'natural_gas'), GAS_ANYWHERE],
         }),
@@ -256,8 +263,11 @@ export default gate({
     hvSteam: {
       name: 'HV steam turbines',
       nodes: [
-        steam('steam4', 0, 0.75),
-        n('hvTurbine', 2.25, 0, M('gtceu:hv_steam_turbine'), 'Steam Turbine', { tier: 'hv', from: ['steam4'], figs: [P.single(512)] }),
+        steam('steam4', 0, 0.75, 'Steam for the HV Turbines', 'Both turbines here run on the same boiler steam; the large one gets far more out of each bucket.'),
+        n('hvTurbine', 2.25, 0, M('gtceu:hv_steam_turbine'), 'HV Steam Turbine', {
+          tier: 'hv', from: ['steam4'], figs: [P.single(512)],
+          desc: 'The single-block turbine at HV. It is a compact way to use surplus steam, while the large turbine below is the serious plant.',
+        }),
         n('lst', 2.25, 1.5, M('gtceu:steam_large_turbine'), 'Large Steam Turbine', {
           tier: 'hv', from: ['steam4'], desc: 'The rotor\'s power sets the output, and its efficiency how far each mB goes.',
           figs: [P.turbine(1024), P.fuel('fluid:gtceu:steam', 'steam', 1)],
@@ -268,7 +278,7 @@ export default gate({
       name: 'Large Steel Boiler',
       nodes: [
         L('heavy', 0, 0, 'pl_hv:heavy'),
-        coal('coal3', 0, 1.5),
+        coal('coal3', 0, 1.5, 'Coal for the Steel Boiler', 'The steel large boiler burns it by the stack and turns it into twice the steam of the bronze one.'),
         n('steelLB', 2.25, 0.75, M('gtceu:steel_large_boiler'), 'Large Steel Boiler', {
           tier: 'hv', from: ['heavy', 'coal3'], figs: [P.steam(12800), ...largeBoiler(2)],
         }),
@@ -280,7 +290,7 @@ export default gate({
         L('gasoline', 0, -1.5, 'pl_hv:gasoline'),
         L('naphtha', 0, 0, 'pl_hv:naphtha'),
         L('toluene', 0, 1.5, 'pl_hv:toluene'),
-        n('hvComb', 2.25, 0, M('gtceu:hv_combustion'), 'Combustion Generator', {
+        n('hvComb', 2.25, 0, M('gtceu:hv_combustion'),         'HV Combustion Generator', {
           tier: 'hv', from: ['gasoline', 'naphtha', 'toluene'], desc: 'Gasoline goes much further than light fuel.',
           figs: [P.single(512), ...pick(COMBUSTION, 'gasoline', 'naphtha', 'toluene'), COMBUSTION_ANYWHERE],
         }),
@@ -293,7 +303,7 @@ export default gate({
         L('ethylene', 0, -0.75, 'pl_hv:ethylene'),
         L('propene', 0, 0.75, 'pl_hv:propene'),
         L('butadiene', 0, 2.25, 'pl_hv:butadiene'),
-        n('hvGas', 2.25, 0, M('gtceu:hv_gas_turbine'), 'Gas Turbine', {
+        n('hvGas', 2.25, 0, M('gtceu:hv_gas_turbine'),         'HV Gas Turbine', {
           tier: 'hv', from: ['refgas', 'ethylene', 'propene', 'butadiene'],
           figs: [P.single(512), ...pick(GAS, 'butadiene', 'propene', 'refinery_gas', 'ethylene'), GAS_ANYWHERE],
         }),
@@ -302,9 +312,10 @@ export default gate({
     hvSolar: {
       name: 'ULV solar panel',
       nodes: [
-        n('phwafer', 0, 0, I('gtceu:phosphorus_wafer'), 'Phosphorus Wafer', { kind: 'raw', sub: 'Cut from a phosphorus boule, in the cleanroom' }),
+        n('phwafer', 0, 0, I('gtceu:phosphorus_wafer'), 'Phosphorus Wafer', { kind: 'raw', sub: 'Cut from a phosphorus boule, in the cleanroom', desc: 'The doped silicon the cell is built on. Grow the boule in a cleanroom and cut it into wafers.' }),
         n('ulvSolar', 2.25, 0, I('gtceu:ulv_solar_panel'), 'ULV Solar Panel', {
           kind: 'info', tier: 'hv', from: ['phwafer'], figs: [P.cover(8)], sub: 'Graphene wire and gallium arsenide go into it',
+          desc: 'A better cover than the MV panel: the same idea, with far more power for the machine it sits on.',
         }),
       ],
     },
@@ -323,7 +334,7 @@ export default gate({
     evBoiler: {
       name: 'Large Titanium Boiler',
       nodes: [
-        coal('coal4', 0, 0),
+        coal('coal4', 0, 0, 'Coal for the Titanium Boiler', 'Titanium doubles the steel boiler\'s output again from the same fuel.'),
         n('tiLB', 2.25, 0, M('gtceu:titanium_large_boiler'), 'Large Titanium Boiler', { tier: 'ev', from: ['coal4'], figs: [P.steam(25600), ...largeBoiler(4)] }),
       ],
     },
@@ -331,8 +342,8 @@ export default gate({
       name: 'Combined-cycle plant',
       nodes: [
         E('eqCC', 0, -1.5, 'ev_age', '1DD071239194961D'),
-        n('dw', 0, 0, F('gtceu:distilled_water'), 'Distilled Water', { kind: 'raw' }),
-        n('refgas2', 0, 1.5, F('gtceu:refinery_gas'), 'Refinery Gas', { kind: 'raw', sub: 'Or any gas turbine fuel' }),
+        n('dw', 0, 0, F('gtceu:distilled_water'), 'Distilled Water', { kind: 'raw', desc: 'The plant boils it with the turbine\'s exhaust, so it wants clean water. Distill it from ordinary water.' }),
+        n('refgas2', 0, 1.5, F('gtceu:refinery_gas'), 'Refinery Gas', { kind: 'raw', sub: 'Or any gas turbine fuel', desc: 'Any gas the turbines take will do; refinery gas is simply the cheapest to make.' }),
         n('cc', 2.25, 0, M('gtceu:combined_cycle_plant'), 'Combined-Cycle Plant', {
           kind: 'ours', tier: 'ev', from: ['eqCC', 'dw', 'refgas2'], desc: 'The gas turbine\'s EU per mB, plus steam from its own exhaust for a Large Steam Turbine.',
           figs: [P.run(32, { per: 'a run' }), P.max(8192, 256, 32, { file: 'pack/kubejs/startup_scripts/grindless/ev/combined_cycle_and_hot_mill.js', re: 'PLANT_MAX_PARALLELS = (\\d+)' }),
@@ -356,8 +367,8 @@ export default gate({
       name: 'Rocket engine',
       nodes: [
         L('rp1', 0, 0, 'pl_mv:rp1'),
-        n('rp1mix', 2, 0, F('gtceu:rp_1_mixed_fuel'), 'RP-1 Mixed Fuel', { from: ['rp1'], sub: 'GT--\'s chemical plant, with oxygen' }),
-        n('evRocket', 4.25, 0, M('gtnn:ev_rocket_engine'), 'Rocket Engine', {
+        n('rp1mix', 2, 0, F('gtceu:rp_1_mixed_fuel'),         'RP-1 Mixed Fuel', { from: ['rp1'], sub: 'GT--\'s chemical plant, with oxygen', desc: 'RP-1 kerosene mixed with oxygen in the chemical plant. It is the fuel the first rocket engine burns.' }),
+                n('evRocket', 4.25, 0, M('gtnn:ev_rocket_engine'), 'EV Rocket Engine', {
           tier: 'ev', from: ['rp1mix'], desc: 'A rocket motor, bolted to the floor.',
           figs: [P.single(2048), P.fuel('fluid:gtceu:methylhydrazine_nitrate_rocket_fuel', 'methylhydrazine nitrate', 12288),
             P.fuel('fluid:gtceu:dense_hydrazine_mixed_fuel', 'dense hydrazine', 6144), P.fuel('fluid:gtceu:rp_1_mixed_fuel', 'RP-1 mixed fuel', 3072),
@@ -369,9 +380,9 @@ export default gate({
     ivEngines: {
       name: 'Large combustion engines',
       nodes: [
-        n('lube', 0, -1.5, F('gtceu:lubricant'), 'Lubricant', { kind: 'raw', sub: 'From creosote or seed oil' }),
+        n('lube', 0, -1.5, F('gtceu:lubricant'), 'Lubricant', { kind: 'raw', sub: 'From creosote or seed oil', desc: 'Without it the engine seizes, so it has to flow in constantly. A small amount lasts a long time.' }),
         L('o2', 0, 0, 'pl_lv:o2'),
-        n('hog', 0, 1.5, F('gtceu:high_octane_gasoline'), 'High-Octane Gasoline', { kind: 'raw', sub: 'Gasoline with additives, in the large chemical reactor' }),
+        n('hog', 0, 1.5, F('gtceu:high_octane_gasoline'), 'High-Octane Gasoline', { kind: 'raw', sub: 'Gasoline with additives, in the large chemical reactor', desc: 'The best fuel the large engine takes by far, made by adding octane boosters to plain gasoline.' }),
         L('lox', 0, 3, 'pl_ev:lox'),
         n('lce', 2.25, 0, M('gtceu:large_combustion_engine'), 'Large Combustion Engine', {
           tier: 'iv', from: [engineFluid('lube'), engineFluid('o2'), 'hog'], sub: 'It wants an IV circuit',
@@ -388,15 +399,15 @@ export default gate({
     ivBoiler: {
       name: 'Large Tungstensteel Boiler',
       nodes: [
-        coal('coal5', 0, 0),
+        coal('coal5', 0, 0, 'Coal for the Tungstensteel Boiler', 'The biggest boiler of the line; it still burns coal, only more of it per second.'),
         n('tsLB', 2.25, 0, M('gtceu:tungstensteel_large_boiler'), 'Large Tungstensteel Boiler', { tier: 'iv', from: ['coal5'], figs: [P.steam(51200), ...largeBoiler(8)] }),
       ],
     },
     ivRocket: {
       name: 'IV rocket engine',
       nodes: [
-        n('rp1mix2', 0, 0, F('gtceu:rp_1_mixed_fuel'), 'RP-1 Mixed Fuel', { kind: 'raw' }),
-        n('ivRocket', 2.25, 0, M('gtnn:iv_rocket_engine'), 'Rocket Engine', { tier: 'iv', from: ['rp1mix2'], figs: [P.single(8192)], sub: 'Same fuels as the EV one' }),
+        n('rp1mix2', 0, 0, F('gtceu:rp_1_mixed_fuel'),         'RP-1 for the IV Rocket', { kind: 'raw', desc: 'The same RP-1 mix as the EV engine, only more of it per second.' }),
+                n('ivRocket', 2.25, 0, M('gtnn:iv_rocket_engine'), 'IV Rocket Engine', { tier: 'iv', from: ['rp1mix2'], figs: [P.single(8192)], sub: 'Same fuels as the EV one' }),
       ],
     },
     ivRTG: {
@@ -476,16 +487,16 @@ export default gate({
           desc: 'One rod keeps it humming for a long while, then comes back spent. The naquadah plant re-enriches part of it, never all of it.',
           figs: [P.single(32768), P.wnet(31130, 32768), P.fuel('gtceu:long_enriched_naquadah_rod', '', 999948288, { unit: 'rod' })],
         }),
-        n('naqSpent', 4.5, 0, I('gtceu:long_naquadah_rod'), 'Spent Rod, Back', { kind: 'ret', from: ['naqReactor'], sub: 'Macerated, then back into the naquadah plant\'s mode 2' }),
+        n('naqSpent', 4.5, 0, I('gtceu:long_naquadah_rod'), 'Spent Rod, Back', { kind: 'ret', from: ['naqReactor'], sub: 'Macerated, then back into the naquadah plant\'s mode 2', desc: 'The burnt rod is not waste: macerate it and the naquadah plant re-enriches part of it.' }),
       ],
     },
     luvSolar: {
       name: 'Orbital solar station',
       pkg: 'B2',
       nodes: [
-        n('ospCell', 0, 0, I('gcyr:photovoltaic_cell'), 'Photovoltaic Cell', { kind: 'raw', sub: 'GCYR\'s LuV cell, on naquadah wafers' }),
+        n('ospCell', 0, 0, I('gcyr:photovoltaic_cell'), 'Photovoltaic Cell', { kind: 'raw', sub: 'GCYR\'s LuV cell, on naquadah wafers', desc: 'The cell the panels are built from. Cut it from naquadah wafers in the cleanroom.' }),
         E('eqOSS', 2.25, -1.5, 'luv_age', '3F2030C8DDEDB9FF', { pkg: 'S03' }),
-        n('ospPanel', 2.25, 0, I('grindless:orbital_solar_panel'), 'Orbital Solar Panel', { from: ['ospCell'], sub: 'The assembler makes it; triple-junction cells give two at once' }),
+        n('ospPanel', 2.25, 0, I('grindless:orbital_solar_panel'), 'Orbital Solar Panel', { from: ['ospCell'], sub: 'The assembler makes it; triple-junction cells give two at once', desc: 'The panel the orbital station is made of. The station counts one only while its top sees open sky, so build it for the station you have.' }),
         n('orbital', 4.5, 0, M('gtceu:orbital_solar_station', 'gtceu:orbital_solar'), 'Orbital Solar Station', {
           kind: 'ours', tier: 'luv', from: ['eqOSS', structure('ospPanel')], sub: 'A LuV wireless dynamo hatch sends it home',
           desc: 'The sky up there is stuck at midnight, and the panels don\'t care: one counts while its top sees open sky. It burns nothing, so no fuel bonus either.',
@@ -498,14 +509,14 @@ export default gate({
       name: 'Fusion',
       nodes: [
         E('eqFus', 0, -2.25, 'luv_age', '543F014BB97A45F4'),
-        n('deut', 0, -0.75, F('gtceu:deuterium'), 'Deuterium', { kind: 'raw', sub: 'Heavy water through the electrolyzer' }),
+        n('deut', 0, -0.75, F('gtceu:deuterium'), 'Deuterium', { kind: 'raw', sub: 'Heavy water through the electrolyzer', desc: 'One half of the fusion fuel. Split it out of heavy water, which the heavy water line already makes.' }),
         L('tritium', 0, 0.75, 'pl_iv:tritium'),
-        n('mg', 0, 2.25, F('gtceu:magnesium'), 'Magnesium', { kind: 'raw', pkg: 'B10', sub: 'Molten, with oxygen beside it' }),
+        n('mg', 0, 2.25, F('gtceu:magnesium'), 'Magnesium', { kind: 'raw', pkg: 'B10', sub: 'Molten, with oxygen beside it', desc: 'The reactor\'s coolant: it carries the heat out of the chamber and is melted again to be reused.' }),
         n('fusion', 2.25, 0, M('gtceu:luv_fusion_reactor'), 'Fusion Reactor Mk1', {
           tier: 'luv', from: ['eqFus', 'deut', 'tritium', 'mg'], sub: 'A materials machine first: europium, lutetium and chromium',
           desc: 'Deuterium and tritium give a little power, and the Moon\'s tritium decides how little.',
         }),
-        n('plasma', 4.5, -0.75, F('gtceu:helium_plasma'), 'Helium Plasma', { from: ['fusion'] }),
+        n('plasma', 4.5, -0.75, F('gtceu:helium_plasma'), 'Helium Plasma', { from: ['fusion'], desc: 'What the Mk1 makes from deuterium and tritium. Send it to a large plasma turbine, and it cools back into helium.' }),
         n('caPlasma', 4.5, 0.75, F('gtca:calcium_plasma_plasma'), 'Calcium Plasma', {
           pkg: 'B10', from: ['fusion'], sub: 'GTCA\'s, and no tritium in it',
           desc: 'The fusion power that doesn\'t wait on the Moon. What it nets after paying the Mk1 gets measured on the bench before it earns a number here.',
@@ -535,8 +546,8 @@ export default gate({
       name: 'Flux-tube tether',
       pkg: ['B1', 'B7T'],
       nodes: [
-        n('spool', 0, -0.75, I('grindless:tether_spool'), 'Tether Spool', { kind: 'raw', sub: 'Used up now and then' }),
-        n('argon', 0, 0.75, F('gtceu:argon'), 'Argon', { kind: 'raw', sub: 'From Mars, for the hollow cathode' }),
+        n('spool', 0, -0.75, I('grindless:tether_spool'),         'Tether Spool', { kind: 'raw', sub: 'Used up now and then', desc: 'The wire the tether pays out. It wears away over time, so keep a stock of spools coming.' }),
+                n('argon', 0, 0.75, F('gtceu:argon'), 'Argon', { kind: 'raw', sub: 'From Mars, for the hollow cathode', desc: 'The tether\'s cathode ionizes it to make contact with the plasma. Bring it from Mars.' }),
         n('tether', 2.25, 0, M('gtceu:flux_tube_tether', 'gtceu:electrodynamic_tether'), 'Flux-Tube Tether', {
           kind: 'ours', tier: 'luv', from: ['spool', 'argon'], sub: 'Io orbit only',
           desc: 'A long bare wire dragged through Jupiter\'s plasma torus, which spins far faster than Io moves. It needs neither ground nor fuel, and its wireless dynamo hatch feeds every base.',
@@ -548,7 +559,7 @@ export default gate({
       name: 'Sulfur-iodine plant',
       pkg: ['B1', 'B7S'],
       nodes: [
-        n('siWater', 0, 0, F('minecraft:water'), 'Water', { kind: 'raw', sub: 'Europa\'s, carried over' }),
+        n('siWater', 0, 0, F('minecraft:water'), 'Plant Water', { kind: 'raw', sub: 'Europa\'s, carried over', desc: 'The plant splits it with Io\'s heat. Haul it over from Europa.' }),
         n('si', 2.25, 0, M('gtceu:sulfur_iodine_plant', 'gtceu:thermochemical_hydrogen'), 'Sulfur-Iodine Plant', {
           kind: 'ours', tier: 'luv', from: ['siWater'], sub: 'Not a generator: hydrogen from Io\'s heat, on Io only',
           desc: 'Io supplies the heat, so its hydrogen costs a fraction of the electrolyzer\'s power. The sulfur and the iodine go round and round.',
@@ -715,15 +726,21 @@ export default gate({
       name: 'Transformers and buffers',
       nodes: [
         E('eqTr', 0, -1.5, 'lv_age', '39A5A5CC76591697'),
-        n('hull', 0, 0, I('gtceu:lv_machine_hull'), 'LV Machine Hull', { kind: 'raw' }),
-        n('transformer', 2.25, -0.75, I('gtceu:lv_transformer_1a'), 'Transformer', { kind: 'info', from: ['eqTr', 'hull'], sub: 'Steps power up or down one tier' }),
-        n('buffer', 2.25, 0.75, I('gtceu:lv_battery_buffer_4x'), 'Battery Buffer', { kind: 'info', from: ['hull'], sub: 'Batteries in a box, wired into the grid' }),
+        n('hull', 0, 0, I('gtceu:lv_machine_hull'),         'LV Machine Hull', { kind: 'raw', desc: 'The bare machine casing. Wiring and a few parts turn it into a transformer or a battery buffer.' }),
+                n('transformer', 2.25, -0.75, I('gtceu:lv_transformer_1a'), 'Transformer', {
+                  kind: 'info', from: ['eqTr', 'hull'], sub: 'Steps power up or down one tier',
+                  desc: 'It joins two tiers of the grid, so a generator can feed a higher-voltage line. Match its wires to both sides.',
+                }),
+                n('buffer', 2.25, 0.75, I('gtceu:lv_battery_buffer_4x'), 'Battery Buffer', {
+                  kind: 'info', from: ['hull'], sub: 'Batteries in a box, wired into the grid',
+                  desc: 'It stores the surplus and gives it back when the grid runs short, so night and stalled boilers hurt less.',
+                }),
       ],
     },
     gBat: {
       name: 'Batteries',
       nodes: [
-        n('bathull', 0, 0, I('gtceu:lv_battery_hull'), 'Battery Hull', { kind: 'raw' }),
+        n('bathull', 0, 0, I('gtceu:lv_battery_hull'),         'Battery Hull', { kind: 'raw', desc: 'The empty shell every battery is built on. Fill it with the cell materials of its tier.' }),
         n('batteries', 2.25, 0, I('gtceu:lv_lithium_battery'), 'Batteries', {
           kind: 'info', from: ['bathull'], desc: 'Battery buffers and your electric tools both run on these.',
           figs: [P.battery('gtceu:lv_sodium_battery', 'LV sodium', 80000), P.battery('gtceu:lv_cadmium_battery', 'LV cadmium', 100000),
@@ -737,7 +754,7 @@ export default gate({
     gCable: {
       name: 'Cables',
       nodes: [
-        n('tinwire', 0, 0, I('gtceu:tin_single_wire'), 'Tin Wire', { kind: 'raw' }),
+        n('tinwire', 0, 0, I('gtceu:tin_single_wire'), 'Tin Wire', { kind: 'raw', desc: 'Drawn from tin ingots on the wiremill. Wrap it in rubber and it becomes a cable.' }),
         n('cables', 2.25, 0, I('gtceu:tin_single_cable'), 'Cables', {
           kind: 'info', from: ['tinwire'], desc: 'Insulated cable loses less than bare wire, and a superconductor loses nothing.',
           figs: [P.cable('gtceu:tin', 'tin', 'lv', 1, 1), P.cable('gtceu:copper', 'copper', 'mv', 1, 2), P.cable('gtceu:gold', 'gold', 'hv', 3, 2),
@@ -756,14 +773,20 @@ export default gate({
           kind: 'info', from: ['eqP2Pae', 'eqP2P'], figs: [P.toll(2.5)],
           desc: 'Any voltage, any distance, and over the quantum bridge, any planet.',
         }),
-        n('bridge', 2.25, 2.25, I('ae2:quantum_link'), 'Quantum Bridge', { kind: 'info', from: ['eqBridge'], sub: 'It carries the network, and the tunnels on it, to the other worlds' }),
+        n('bridge', 2.25, 2.25, I('ae2:quantum_link'), 'Quantum Bridge', {
+          kind: 'info', from: ['eqBridge'], sub: 'It carries the network, and the tunnels on it, to the other worlds',
+          desc: 'A linked pair of quantum rings puts your storage network on another planet. Once it is up, an EU tunnel can cross it too.',
+        }),
       ],
     },
     gBig: {
       name: 'Power substation',
       nodes: [
-        n('lapo', 0, 0, I('gtceu:lapotron_crystal'), 'Lapotron Crystal', { kind: 'raw' }),
-        n('pss', 2.25, 0, I('gtceu:power_substation'), 'Power Substation', { kind: 'info', from: ['lapo'], sub: 'One battery the size of a building; it wants a LuV circuit' }),
+        n('lapo', 0, 0, I('gtceu:lapotron_crystal'),         'Lapotron Crystal', { kind: 'raw', desc: 'The storage cell of the substation. Etch and charge them in bulk from an engraved lapis crystal.' }),
+                n('pss', 2.25, 0, I('gtceu:power_substation'), 'Power Substation', {
+                  kind: 'info', from: ['lapo'], sub: 'One battery the size of a building; it wants a LuV circuit',
+                  desc: 'A large multiblock filled with lapotron crystals that stores far more than any buffer. Use it to carry the base through the night.',
+                }),
         // without the wireless band, the network keeps a marked place here
         ...(WITH_WIRELESS ? [] : [n('wireless', 4.5, 0, I('minecraft:lightning_rod'), 'Wireless Energy Network', { kind: 'slot', alone: true, sub: 'Coming soon, tower and all' })]),
       ],
@@ -772,7 +795,7 @@ export default gate({
     ...(WITH_WIRELESS ? { gWireless: {
       name: 'Wireless energy network',
       nodes: [
-        n('wbat', 0, 0, I('gtceu:lv_lithium_battery'), 'Batteries', { kind: 'raw', sub: 'Any battery of the cell\'s tier' }),
+        n('wbat', 0, 0, I('gtceu:lv_lithium_battery'), 'Cell Batteries', { kind: 'raw', sub: 'Any battery of the cell\'s tier', desc: 'A capacitor cell is made from batteries of one tier, so reuse whatever your battery line already makes.' }),
         E('eqSMES', 0, 4, 'luv_age', '5933ADF51C8949BD', { pkg: 'A4' }),
         n('wcell', 2.25, 0, I('grindless:lv_capacitor_cell'), 'Capacitor Cell', {
           kind: 'info', from: ['wbat'], sub: 'The strongest cell in any tower sets the network\'s voltage',
