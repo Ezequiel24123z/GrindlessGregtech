@@ -50,6 +50,7 @@
 
   var TYPE_PATH = 'closed_loop_cooling'
   var DATA_KEY = HR.dataKey || 'grindless_closed_loop'
+  var TEXT_KEY = HR.textKey || 'grindless_closed_loop_text'
 
   var CONTROLLER = 'gtceu:helium_refrigerator'
   var HULL = 'gtceu:luv_machine_hull'
@@ -354,6 +355,8 @@
     { name: 'cryo_sapphire_oscillator', input: 'grindless:polished_sapphire_disc', output: 'grindless:cryo_sapphire_oscillator', eut: 7864320, duration: 600 }
   ]
   HR.opvRows = OPV_ROWS
+  // the rows with their own EMI text
+  var TEXT_ROWS = ['cryo_tested_lna', 'cryo_milled_core']
   HR.opvSkipped = []
 
   function addOpvRows(event) {
@@ -374,6 +377,7 @@
         .itemOutputs('1x ' + loop.output)
         .outputFluids(Fluid.of(cfg.precoolOut.id, cfg.precoolOut.amount))
         .addDataString(DATA_KEY, 'grindless:closed_loop_cooling/' + loop.name)
+        .addDataString(TEXT_KEY, TEXT_ROWS.indexOf(loop.name) >= 0 ? loop.name : '')
         .EUt(loop.eut).duration(loop.duration)
     })
   }

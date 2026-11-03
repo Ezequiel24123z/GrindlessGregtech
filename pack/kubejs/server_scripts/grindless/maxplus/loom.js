@@ -151,6 +151,7 @@
       .itemOutputs('1x ' + COOL.output)
       .outputFluids(Fluid.of(cfg.precoolOut.id, cfg.precoolOut.amount))
       .addDataString(dataKey, 'grindless:closed_loop_cooling/' + COOL.name)
+      .addDataString('grindless_closed_loop_text', COOL.name)
       .EUt(COOL.eut).duration(COOL.duration)
   }
 
