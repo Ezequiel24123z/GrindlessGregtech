@@ -23,7 +23,7 @@
       items: ['gtceu:mpic_wafer', 'gtceu:indium_gallium_phosphide_dust'],
       fluids: [['gtceu:molten_vanadium_gallium', 144]], output: 'gtceu:hpic_wafer', eut: 7680, duration: 600, cleanroom: true },
     { name: 'triple_junction_wafer', type: 'wake_epitaxy', circuit: 3,
-      items: ['gtceu:germanium_plate', 'gtceu:gallium_arsenide_dust', 'gtceu:indium_gallium_phosphide_dust'],
+      items: ['grindless:germanium_wafer', 'gtceu:gallium_arsenide_dust', 'gtceu:indium_gallium_phosphide_dust'],
       fluids: [], output: 'grindless:triple_junction_wafer', eut: 7680, duration: 400, cleanroom: true }
   ]
   B.recipes = recipes

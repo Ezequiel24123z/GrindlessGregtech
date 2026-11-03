@@ -102,9 +102,9 @@ test('germanium line: circuit 1 makes UV-A6\'s GeCl4 with balanced chlorine; cir
   assert.equal(water(c2.fluidsIn), water(c2.fluidsOut), 'water comes back');
   assert.deepEqual(c2.itemsOut, [{ id: 'gtceu:germanium_ingot', count: 1 }]);
   assert.ok(c2.fluidsOut.some((f) => f.id === 'gtceu:hydrochloric_acid' && f.amount === 4000), 'the four chlorines leave as HCl');
-  // GeCl4 now has a maker: our circuit 1; A6's preform consumes it
-  const makers = recipes.filter((r) => outputsOf(r).includes('gtceu:germanium_tetrachloride')).map((r) => r.i);
-  assert.deepEqual(makers, ['grindless:zone_refining/germanium_tetrachloride']);
+  // GeCl4 has two makers: our circuit 1 (UV's Ge dust + chlorine) and Io's chlorination (LuV germanium line); A6's preform consumes it
+  const makers = recipes.filter((r) => outputsOf(r).includes('gtceu:germanium_tetrachloride')).map((r) => r.i).sort();
+  assert.deepEqual(makers, ['grindless:fumarole_condensing/separate', 'grindless:zone_refining/germanium_tetrachloride']);
   assert.ok(recipes.some((r) => /^grindless:fibre_draw\/(fibre_draw\/)?mcvd_soot$/.test(r.i) && inputsOf(r).includes('gtceu:germanium_tetrachloride')));
 });
 
