@@ -1127,7 +1127,7 @@
     {"id":"grindless:laminated_containment_core","kind":"item","needUse":true,"needMade":true,"made":["gtceu:bound_matter_press"],"used":["gtceu:condensate_assembler"]},
     {"id":"grindless:laminated_terfenol_stack","kind":"item","needUse":true,"needMade":true,"made":["gtceu:cutter"],"used":["gtceu:assembler"]},
     {"id":"grindless:lan_barrier_mirror","kind":"item","needUse":true,"needMade":true,"made":["gtceu:chemical_reactor","gtceu:large_chemical_reactor"],"used":["gtceu:assembler","gtceu:assembly_line"]},
-    {"id":"grindless:lanthanum_hexaboride_cathode","kind":"item","needUse":true,"needMade":true,"made":["gtceu:electric_blast_furnace"],"used":["gtceu:assembly_line","gtceu:thruster_assembly"]},
+    {"id":"grindless:lanthanum_hexaboride_cathode","kind":"item","needUse":true,"needMade":true,"made":["gtceu:electric_blast_furnace"],"used":["gtceu:assembly_line","gtceu:electron_beam_refining","gtceu:thruster_assembly"]},
     {"id":"grindless:lapped_quartz_sphere","kind":"item","needUse":true,"needMade":true,"made":["gtceu:lathe"],"used":["gtceu:mtj_sputtering"]},
     {"id":"grindless:large_grain_nb_disc","kind":"item","needUse":true,"needMade":true,"made":["gtceu:single_crystal_casting"],"used":["gtceu:srf_cavity"]},
     {"id":"grindless:large_resonance_cell","kind":"item","needUse":true,"needMade":true,"made":["gtceu:srf_cavity"],"used":["gtceu:chemical_bath"]},
