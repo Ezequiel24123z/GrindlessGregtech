@@ -55,8 +55,11 @@ test('photonic and degenerate casings are priced at UEV with the new inputs', ()
   for (const r of [ph, de]) {
     assert.ok(r.eut >= VA_UEV);
     assert.ok(!r.itemsIn.some((i) => /machine_casing/.test(i.id)), 'no old machine casing input');
-    assert.ok(r.itemsIn.some((i) => i.id === 'grindless:sic_sic_plate'));
   }
+  assert.ok(de.itemsIn.some((i) => i.id === 'grindless:sic_sic_plate'));
+  // bootstrap: the SNSPD foundry and vdW stacker that feed the CVI furnace's controller are photonic-bodied, so no SiC/SiC here
+  assert.ok(!ph.itemsIn.some((i) => i.id === 'grindless:sic_sic_plate'));
+  assert.ok(ph.itemsIn.some((i) => i.id === 'grindless:sic_mirror_blank'));
   assert.equal(ph.itemsOut[0].count, 16);
   assert.equal(de.itemsOut[0].count, 64);
 });
