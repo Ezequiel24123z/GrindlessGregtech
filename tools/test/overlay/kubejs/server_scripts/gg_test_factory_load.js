@@ -144,7 +144,6 @@
       AABB: Java.loadClass('net.minecraft.world.phys.AABB'),
       ItemEntity: Java.loadClass('net.minecraft.world.entity.item.ItemEntity'),
       ArrayList: Java.loadClass('java.util.ArrayList'),
-      Runtime: Java.loadClass('java.lang.Runtime'),
       FPF: Java.loadClass('net.minecraftforge.common.util.FakePlayerFactory'),
       Meta: Java.loadClass('com.gregtechceu.gtceu.api.machine.MetaMachine'),
       Registries: Java.loadClass('net.minecraftforge.registries.ForgeRegistries')
@@ -225,11 +224,22 @@
     } catch (e) { }
     return NaN
   }
-  function usedMb() {
-    var r = classes().Runtime.getRuntime()
-    return (Number(r.totalMemory()) - Number(r.freeMemory())) / 1048576
+  // java.lang.Runtime is outside KubeJS's class filter on this pack: heap figures are then reported unavailable (null)
+  var RT = undefined
+  function runtime() {
+    if (RT === undefined) {
+      try { RT = Java.loadClass('java.lang.Runtime').getRuntime() } catch (e) { RT = null }
+    }
+    return RT
   }
-  function maxMb() { return Number(classes().Runtime.getRuntime().maxMemory()) / 1048576 }
+  function usedMb() {
+    var r = runtime()
+    return r === null ? null : (Number(r.totalMemory()) - Number(r.freeMemory())) / 1048576
+  }
+  function maxMb() {
+    var r = runtime()
+    return r === null ? null : Number(r.maxMemory()) / 1048576
+  }
   function loadedChunks() {
     try { return Number(S.level.getChunkSource().getLoadedChunksCount()) } catch (e) { return null }
   }
@@ -332,7 +342,7 @@
     var p = {
       name: name, cfg: cfg, tier: cfg.tier, machines: cfg.machines, factories: cfg.factories, endpoints: 0,
       phase: 'build', phaseAt: S.tick, units: [], facs: [], samples: [], tickSource: 'tickTimes', singleItems: 0, factoryItems: 0,
-      requested: cfg.machines > 0 ? cfg.machines * (20 / DURATION) : null, peakMb: 0, maxMb: round(maxMb(), 0), counting: false,
+      requested: cfg.machines > 0 ? cfg.machines * (20 / DURATION) : null, peakMb: null, maxMb: round(maxMb(), 0), counting: false,
       warmupTicks: S.cfg.warmupTicks, windowTicks: S.cfg.windowTicks, nanSamples: 0, recipe: null,
       chunks: { loadedBefore: loadedChunks(), forcedBefore: forcedChunks(), loadedPeak: null }
     }
@@ -471,7 +481,7 @@
     if (S.tick % 20 === 0 && p.built) wireless().setStored(S.server, STORE)
     if (S.tick % every === 0) {
       var mb = usedMb()
-      if (mb > p.peakMb) p.peakMb = round(mb, 1)
+      if (mb !== null && (p.peakMb === null || mb > p.peakMb)) p.peakMb = round(mb, 1)
       var lc = loadedChunks()
       if (lc !== null && (p.chunks.loadedPeak === null || lc > p.chunks.loadedPeak)) p.chunks.loadedPeak = lc
     }
@@ -646,7 +656,7 @@
     try {
       var raw = JsonIO.read(CONFIG)
       if (raw !== null && raw !== undefined) {
-        var o = JSON.parse(String(raw))
+        var o = JSON.parse(String(JsonIO.toPrettyString(raw)))
         ;['warmupTicks', 'windowTicks', 'backpressureTicks', 'cleanupTicks', 'sampleEvery'].forEach(function (k) {
           if (typeof o[k] === 'number' && o[k] > 0) cfg[k] = o[k]
         })
