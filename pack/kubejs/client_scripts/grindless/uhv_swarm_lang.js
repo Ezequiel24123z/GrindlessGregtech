@@ -19,7 +19,7 @@
                         'An assembly gantry over a station truss deck that builds the Dyson swarm\'s solar collectors. Mercury\'s orbit only.',
                         'Circuit 1: 4 aluminium reflector film + 2 IMM solar arrays + a fibre laser module + a C-12 diamond spreader + a SiC power module + 2 betavoltaic cells + a sodium-potassium heat pipe -> 1 swarm segment.',
                         'Circuit 2: a worn swarm segment + 1 reflector film + 1 IMM solar array -> 1 swarm segment + small aluminium dust (the stripped film).',
-                        'Needs a 9 x 7 x 9 station truss deck under tungsten steel frame posts, an assembly line grating bridge and an assembly line unit head, 1 or 2 energy hatches, input buses and output buses.'
+                        'Needs a 15 x 8 x 23 hangar: a station truss floor with a pipe jig rail, hangar casing walls with laminated glass windows, a tungsten steel frame roof carrying an assembly line grating bridge and an assembly line unit head, 1 or 2 energy hatches, input buses and output buses.'
                     ]
                 },
                 swarm_control_station: {
@@ -30,7 +30,7 @@
                         'Steers swarm segments round the Sun and takes their power by laser: a generator. Mercury\'s orbit only. One run at a time; parallel hatches do nothing.',
                         'Circuit 1: 16 swarm segments + 1 oganesson propellant pod (or 1,000 mB krypton, half the run) -> 2,097,152 EU/t; 1 segment wears out and the empty tank returns.',
                         'Circuit 2: 64 swarm segments + a coronal field map (never used up) + 4 pods -> 8,388,608 EU/t; 4 segments wear out. Worn segments go back to the Swarm Segment Foundry.',
-                        'Needs an 11 x 5 x 11 station truss deck with tungsten steel frame posts, a computer casing column and a sapphire laser receiver array on top, 1 to 4 dynamo hatches (a 4 A UHV dynamo carries circuit 2), input buses, an input hatch and output buses.'
+                        'Needs a 41 x 7 x 41 hub and four booms: a pressure hull hub with a computer casing column under a sapphire laser receiver roof and a Hermean brick sunshade, laser module heads on the booms, propellant depot rings, 1 to 4 dynamo hatches (a 4 A UHV dynamo carries circuit 2), input buses, an input hatch and output buses.'
                     ]
                 },
                 solar_probe_bay: {

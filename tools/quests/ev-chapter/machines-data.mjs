@@ -107,7 +107,7 @@ export const QUESTS = [
     deps: ["HSM", "X:004525B795119B1B"], x: 10, y: 6,
     teach: {
       for: "The platinum line is about forty recipes across a dozen machines; the &6Platinum Plant&r packs it into one hall, loops and all.",
-      needs: "Nitration mixture and ammonium chloride flowing first, and an electrode that wears out rarely: after the first one, made from End platinum, the plant pays for its own.",
+      needs: "A 7x7x9 hall of inert casing, tempered glass and titanium pipes around a glass tower. Nitration mixture and ammonium chloride flowing first, and an electrode that wears out rarely: after the first one, made from End platinum, the plant pays for its own.",
       unlocks: "Platinum, rhodium, ruthenium and palladium. Iridium and osmium from Earth's ore don't exist: those wait for Mercury.",
       automate: "A battery buffer, plenty of output hatches and a place for every fluid.",
     },
@@ -278,8 +278,8 @@ export const QUESTS = [
     deps: ["MTR"], x: 20, y: -1.5,
     teach: {
       for: "Merrillite is a phosphate, and no electrolyzer will split it. The &6Extraction Cascade&r leaches it in hydrochloric acid and then pulls the rare earths apart with kerosene, one stage at a time.",
-      needs: "Merrillite dust, hydrochloric acid and kerosene.",
-      unlocks: "Samarium, neodymium and mixed rare-earth chlorides. Circuit 1 leaches, circuit 2 extracts.",
+      needs: "A 7x5x13 hall of mixer-settler stages in inert PTFE casing and tempered glass. Merrillite dust, hydrochloric acid and kerosene for the Martian feed.",
+      unlocks: "Samarium, neodymium and mixed rare-earth chlorides. Circuit 1 leaches, circuit 2 extracts, and circuit 28 makes the SEG cut that strips europium from the Nether line.",
       automate: "Each fluid needs its own output hatch, or the whole cascade stops.",
     },
     desc: [],

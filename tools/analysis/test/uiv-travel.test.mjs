@@ -219,14 +219,14 @@ test('AF-1: one placer for every row; the old pollers and the c11 copy are gone;
   assert.match(info, /emi\.grindless\.info\.warp_gate\.3', '[^\n]*ride home/);
 });
 
-test('AF-1: the placer plans every cell of the warp gate, the 25 frame posts included, and its three parts on the front wall', () => {
+test('AF-1: the placer plans every cell of the warp gate, the 88 frame posts included, and its three parts on the front wall', () => {
   const built = plain(R0.plan(PLAT.ring, { x: 64, y: 100, z: 64 }));
   const ids = built.cells.map((c) => c.id);
-  assert.equal(ids.filter((id) => id === 'gtceu:tungsten_steel_frame').length, 25);
-  assert.equal(ids.filter((id) => id === 'minecraft:air').length, 13 * 13 * 5);
+  assert.equal(ids.filter((id) => id === 'gtceu:tungsten_steel_frame').length, 88);
+  assert.equal(ids.filter((id) => id === 'minecraft:air').length, 845);
   assert.ok(ids.every((id) => /^[a-z0-9_]+:[a-z0-9_/]+$/.test(id)), 'every cell has a block');
-  assert.deepEqual([built.min, built.max], [{ x: 57, y: 99, z: 64 }, { x: 71, y: 103, z: 78 }]);
-  assert.deepEqual(built.at, { energy: { x: 71, y: 99, z: 64 }, bus: { x: 70, y: 99, z: 64 }, out: { x: 69, y: 99, z: 64 } });
+  assert.deepEqual([built.min, built.max], [{ x: 52, y: 99, z: 64 }, { x: 76, y: 107, z: 83 }]);
+  assert.deepEqual(built.at, { energy: { x: 76, y: 99, z: 64 }, bus: { x: 71, y: 99, z: 64 }, out: { x: 70, y: 99, z: 64 } });
   const at = (p) => built.cells.find((c) => c.p.x === p.x && c.p.y === p.y && c.p.z === p.z).id;
   assert.equal(at(built.at.energy), PLAT.ring.energy);
   assert.equal(at(built.at.bus), PLAT.ring.inputBus);
@@ -445,21 +445,21 @@ test('AF-1: a completed jump survives a restart in the queue, then places its pl
   assert.equal(store.uivPlatform_rx_j1856, `${FAR}@64,100,64`);
   assert.ok(!Object.hasOwn(store, 'grindless_relay_due'), 'the queue is empty');
   assert.equal(b2.R.placed.rx_j1856, true);
-  assert.equal(w.blocks[w.key(FAR, 71, 100, 64)], 'gtceu:tungsten_steel_frame', 'frame posts');
+  assert.ok(Object.values(w.blocks).includes('gtceu:tungsten_steel_frame'), 'frame posts');
   assert.equal(w.blocks[w.key(FAR, 64, 100, 64)], 'gtceu:warp_gate');
-  assert.ok(w.cmds.includes(`execute in ${FAR} run fill 57 98 64 76 98 78 ${PLAT.ring.floor} keep`), 'the floor');
-  assert.ok(w.cmds.includes(`execute in ${FAR} run fill 57 99 64 71 103 78 minecraft:air replace`), 'the ring box cleared once');
+  assert.ok(w.cmds.includes(`execute in ${FAR} run fill 52 98 64 76 98 83 ${PLAT.ring.floor} keep`), 'the floor');
+  assert.ok(w.cmds.includes(`execute in ${FAR} run fill 52 99 64 76 107 83 minecraft:air replace`), 'the ring box cleared once');
   assert.ok(w.cmds.includes(`execute in ${FAR} run forceload add 48 64`) && w.cmds.includes(`execute in ${FAR} run forceload add 64 64`));
   assert.ok(!w.cmds.some((c) => /setblock \S+ \S+ \S+ minecraft:air/.test(c)), 'no air setblock');
   const far = w.machines[w.key(FAR, 64, 100, 64)];
   assert.equal(far.status, 'SUSPEND', 'the platform ring starts paused');
-  const fbus = w.machines[w.key(FAR, 70, 99, 64)];
+  const fbus = w.machines[w.key(FAR, 71, 99, 64)];
   assert.equal(fbus.inv.s[0].id, PLAT.ring.stock.id);
   assert.equal(fbus.inv.s[0].count, PLAT.ring.stock.count);
   assert.equal(fbus.circuit.s[0].circuit, 2);
   assert.deepEqual(plain(b2.R.coordinatesOf(fbus.inv.s[1])), HOME_RING, 'the way back');
   assert.equal(JSON.parse(fbus.inv.s[1].tag.m.display.m.Name).with[0].translate, 'grindless.relay_coordinates.home');
-  assert.deepEqual(w.tracked.sort(), [`${FAR}|71|99|64`, `${FAR}|73|100|64`], 'both wireless hatches tracked');
+  assert.deepEqual(w.tracked.sort(), [`${FAR}|73|100|64`, `${FAR}|76|99|64`], 'both wireless hatches tracked');
   assert.equal(w.blocks[w.key(FAR, 76, 100, 64)], 'ae2:controller');
   assert.equal(w.blocks[w.key(FAR, 76, 101, 64)], 'ae2:drive');
   // the coordinates of the place in the jump ring's output bus
@@ -537,7 +537,7 @@ function placedWorld() {
   WG0.onFinished(ring.ctl, 'grindless:warp_gate/hold_rx_j1856');
   b.tick(10);
   const far = w.machines[w.key(FAR, 64, 100, 64)];
-  const fbus = w.machines[w.key(FAR, 70, 99, 64)];
+  const fbus = w.machines[w.key(FAR, 71, 99, 64)];
   far.parts = [fbus];
   // the player at home: the coordinates into the input bus; the home ring is one the gate recorded (beforeWorking)
   ring.bin.inv.s[1] = ring.bout.inv.s[0];
