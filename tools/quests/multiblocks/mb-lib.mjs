@@ -178,7 +178,7 @@ export function consumerCounts(recipes) {
   const n = new Map();
   for (const r of recipes) {
     if (!r.j) continue;
-    for (const id of new Set(recipeInputIds(r.j))) if (!id.startsWith('#')) n.set(id, (n.get(id) || 0) + 1);
+    for (const id of new Set(recipeInputIds(r.j))) if (typeof id === 'string' && !id.startsWith('#')) n.set(id, (n.get(id) || 0) + 1);
   }
   return n;
 }
