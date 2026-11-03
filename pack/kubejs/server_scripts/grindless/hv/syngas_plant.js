@@ -36,7 +36,7 @@
 // used up in 0.05 % of the runs, only in the recipes that shift (modes 2, 3 and 4). Pure gasification needs none.
 //
 // Destinations (docs/eras/hv.md): hydrogen -> the Refinery (heavy crude comes up short), ammonia, HF, methanol and the rocket (GCYR burns it
-// as a tier 1 fuel; GTM's rocket fuel takes about 27 B of it per 8 B through methanol and ammonia); carbon monoxide -> methanol (mode 2 is
+// as a tier 1 fuel; rocket fuel, Aerozine 50 + N2O4, takes about 20.7 B of it per 8 B through methanol and ammonia); carbon monoxide -> methanol (mode 2 is
 // its exact syngas), acetic acid, butyraldehyde, or back as feed in mode 4; CO2 is inert in GTM (no hazard): it can be vented, or feed the
 // MV and HV greenhouses, ethylene from glycerol, methanol from CO2, soda ash, or the electrolyzer; ash -> GTM's centrifuge or fertilizer.
 //

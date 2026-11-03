@@ -58,3 +58,5 @@ Mixin config emi_loot\.mixins\.json does not specify "minVersion" property
 Parsing error loading custom advancement colossalchests:uncolossal: Failed to parse 'location' field
 # Create / Struts: the struts:wrenches tag names create:wrench, which this Create version lacks; the tag loads without it.
 Couldn't load tag struts:wrenches
+# Minecraft: chunks a test generates away from any player log this when a structure's POI block (bell, bed, workstation) was never registered; the POI is rebuilt on load, harmless (seen by D1-HV-PROP, #250).
+POI data mismatch: never registered
