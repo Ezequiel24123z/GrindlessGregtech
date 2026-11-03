@@ -15,6 +15,8 @@ const CONTROLLERS = [
 ];
 const CYCLIC = [
   'grindless:assembler/hftacn_coil_block', 'grindless:assembler/uev_machine_casing',
+  // batch 16 bootstrap: the photonic casing bodies the vdW stacker and SNSPD foundry that make UEV emitters and sensors
+  'grindless:assembler/photonic_casing',
   'grindless:assembly_line/calutron', 'grindless:assembly_line/cvi_furnace', 'grindless:assembly_line/electron_beam_furnace',
   'grindless:assembly_line/entanglement_station', 'grindless:assembly_line/heavy_ion_cyclotron', 'grindless:assembly_line/helium3_polariser',
   'grindless:assembly_line/megabar_press', 'grindless:assembly_line/nitride_magnet_works', 'grindless:assembly_line/photonic_integration_hall',
