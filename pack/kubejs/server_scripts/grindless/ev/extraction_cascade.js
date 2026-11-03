@@ -9,6 +9,8 @@
 //   circuit 2  extraction  1 000 mB rare earth chloride solution + 3 000 mB hydrochloric acid (the strip) + 1 000 mB kerosene ->
 //                          1 samarium chloride + 1 neodymium chloride + 2 mixed rare earth chloride + 950 mB kerosene + 6 000 mB diluted
 //                          hydrochloric acid                                                          1 920 EU/t, 200 t (384 000 EU)
+//   circuit 3  SEG split   (D2-REE, E1 17') 1 000 mB SEG chloride solution + 500 mB hydrochloric acid + 1 000 mB kerosene -> 500 mB europium
+//                          chloride solution + 1 000 mB heavy rare earth chloride solution + 950 mB kerosene     1 920 EU/t, 200 t
 //   circuit 5  ZPM mode    (ZPM-A3, the europium reductor's feed) 4 000 mB GTCA monazite froth + 3 000 mB hydrochloric acid -> 4 000 mB
 //                          europium chloride solution + 1 000 mB phosphoric acid (the froth's phosphate)     122 880 EU/t, 40 t (ZPM hatch)
 //                          The solution goes to the europium reductor (zpm/europium.js); its depleted liquor comes back into circuit 2.
@@ -115,6 +117,17 @@
       itemsOut: [],
       fluidsOut: [{ id: 'gtceu:europium_chloride_solution', amount: 4000 }, { id: PHOSPHORIC, amount: 1000 }],
       eut: 122880, duration: 40
+    },
+    // D2-REE, E1 step 17': the samarium-europium-gadolinium cut of the samaric branch (ev/rare_earths.js): europium is stripped to its own
+    // solution (stored for ZPM's reductor), the heavy chlorides go on to the fluoride precipitation. Circuit 3: no item input, so it
+    // does not clash with the UXV rows that share the circuit
+    {
+      name: 'seg_split', mode: 'seg_split', circuit: 3,
+      itemsIn: [],
+      fluidsIn: [{ id: 'gtceu:seg_chloride_solution', amount: 1000 }, { id: HCL, amount: 500 }, { id: KEROSENE, amount: 1000 }],
+      itemsOut: [],
+      fluidsOut: [{ id: 'gtceu:europium_chloride_solution', amount: 500 }, { id: 'gtceu:heavy_rare_earth_chloride_solution', amount: 1000 }, { id: KEROSENE, amount: 950 }],
+      eut: 1920, duration: 200
     },
     {
       name: 'ytterbium_strip', mode: 'uv', circuit: 6,
