@@ -270,7 +270,7 @@ It already runs at HV: the EV gate's titanium is made on Earth from the lunar il
 | Phenol, epoxy | LCR shortcuts | only the cumene route | composite autoclave inputs |
 | Titanium, rare earths, iridium, osmium | as today | as today (defaults below) | nothing |
 
-Reachability: every new recipe runs at or below its line's era on machines the era already has; the one new machine-level dependency is GT--'s chemical plant for H2 (MV structure; D1-HV-PROP proves it forms and runs).
+Reachability: every new recipe runs at or below its line's era on machines the era already has; the one new machine-level dependency is GT--'s chemical plant for H2 (an HV build: aluminium frostproof plant casings, HV machine casings, steel pipe casings and cupronickel coils, because its 480 EU/t stages need HV casings; D1-HV-PROP, strict fixture group C, ran it: vm-20261103-011222-7ad5d686-2587891, hv_propellants DONE, failures=0).
 
 ## 7. Owner decisions
 
@@ -337,6 +337,6 @@ GT-- (AGPL-3.0) and GTCA (LGPL-3.0) are downloaded mods: their live recipes are 
 
 - The primitive blast furnace stays shorter than S1 and many cheap ones can out-produce one steam blast furnace; S1's gain is automation and buses, as today.
 - Changing GT--'s dissolve and precipitation stages changes the EV platinum plant's composed recipes; the plant test must pass, or the aqua regia adaptation is dropped and only the MV variant ships.
-- Rocket fuel's new recipe reaches every consumer of `gtceu:rocket_fuel`; GT--'s chemical plant has never run in a pack test.
+- Rocket fuel's new recipe reaches every consumer of `gtceu:rocket_fuel`; GT--'s chemical plant ran in the strict fixture group C (vm-20261103-011222-7ad5d686-2587891, hv_propellants DONE, failures=0).
 - Polysilicon raises the price of every circuit from HV up (counts unchanged); the cost gate (x1.3 per era) must still pass.
 - The audit counts charts, not recipes: until D1-AUDIT, H1 reads as 10 and the bootstrap reads as a skip.
