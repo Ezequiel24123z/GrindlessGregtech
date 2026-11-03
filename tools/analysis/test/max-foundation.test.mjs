@@ -45,8 +45,8 @@ test('the stand-in runs the MAX foundation and its names without errors', () => 
   assert.deepEqual(run.errors.filter(mine), [], 'no console.error');
 });
 
-test('the id list is pinned: 327 items, 16 blocks, the strand and 5 fluids; nothing twice', () => {
-  assert.equal(ITEMS.length, 327);
+test('the id list is pinned: 331 items, 16 blocks, the strand and 5 fluids; nothing twice', () => {
+  assert.equal(ITEMS.length, 331);
   assert.deepEqual([...got.controllers], table.ours.controllers);
   assert.deepEqual(table.ours.controllers, ['gtceu:horizon_interferometer', 'gtceu:ergoregion_synchroniser', 'gtceu:horizon_flux_clamp', 'gtceu:segment_reclamation_works']);
   assert.deepEqual([...got.blocks], BLOCKS);

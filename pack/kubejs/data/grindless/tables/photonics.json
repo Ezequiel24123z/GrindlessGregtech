@@ -547,6 +547,19 @@
           "charge": [{ "id": "gtceu:argon", "amount": 1000 }],
           "itemsOut": [{ "id": "grindless:etched_lnoi_wafer", "count": 1 }],
           "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "D5-QPU-MAX (lines-opv-maxplus.md, M1 step 27, c17): two squeezed-light chips attached to the bonded stack, the optical readout of the tetron dies",
+          "name": "photonic_tetron_module",
+          "circuit": 17,
+          "eut": 1073741824,
+          "duration": 1600,
+          "itemsIn": [{ "id": "grindless:transducer_bonded_stack", "count": 1 }, { "id": "grindless:squeezed_light_chip", "count": 2 }],
+          "kept": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "charge": [],
+          "itemsOut": [{ "id": "grindless:photonic_tetron_module", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
         }
         ]
     },

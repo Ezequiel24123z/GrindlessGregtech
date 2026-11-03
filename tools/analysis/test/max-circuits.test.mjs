@@ -113,7 +113,8 @@ test('the join: one photonic hall row, circuit 9, the only maker of gtnn:supraca
   assert.equal(r.circuit, 9);
   assert.equal(new Set(hall.map((x) => x.circuit)).size, hall.length, 'no circuit twice');
   const ids = r.itemsIn.map((x) => x.id);
-  for (const p of ['grindless:squeezed_light_chip', 'grindless:tweezer_array_die', 'grindless:cryo_photonic_interposer', 'grindless:tetron_array']) assert.ok(ids.includes(p), p);
+  for (const p of ['grindless:shielded_quantum_module', 'grindless:tweezer_array_die']) assert.ok(ids.includes(p), p);
+  for (const p of ['grindless:squeezed_light_chip', 'grindless:cryo_photonic_interposer', 'grindless:tetron_array']) assert.ok(!ids.includes(p), `${p} left the join (D5-QPU-MAX)`);
   assert.ok(r.itemsIn.length + 1 <= 8 && r.itemsOut.length <= 2 && (r.fluidsIn || []).length <= 1, 'within the hall slots');
   assert.deepEqual(r.itemsOut, [{ id: 'gtnn:supracausal_mainframe', count: 1 }]);
   assert.deepEqual(plain(producers('gtnn:supracausal_mainframe').map((x) => x.i)), [JOIN]);

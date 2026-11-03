@@ -161,7 +161,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
   const only = {
     'grindless:tetron_die': 'tetron_assembly/tetron_die', 'grindless:tetron_array': 'tetron_assembly/tetron_array',
     'grindless:bumped_tetron_die': 'mtj_sputtering/tetron_bumps', 'grindless:bonded_tetron_die': 'ion_slicing/bonded_tetron_die',
-    'grindless:tested_tetron_die': 'nuclear_demagnetisation/tested_tetron_die', 'grindless:failed_tetron_die': 'tetron_assembly/tetron_array',
+    'grindless:tested_tetron_die': 'nuclear_demagnetisation/tested_tetron_die', 'grindless:failed_tetron_die': ['tetron_assembly/tetron_array', 'ion_slicing/transducer_bonded_stack'],
     'gtceu:tetron_fab': 'assembly_line/tetron_fab',
     'grindless:laue_lens': 'gamma_optics/laue_lens', 'grindless:gamma_multilayer_mirror': 'gamma_optics/gamma_multilayer_mirror',
     'grindless:rejected_laue_tile': 'gamma_optics/laue_lens', 'grindless:rejected_gamma_mirror': 'gamma_optics/gamma_multilayer_mirror',

@@ -61,7 +61,10 @@
           "itemsOut": [{ "id": "grindless:ln_transducer_bonded_blank", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
         { "_why": "XP-A3 (maxplus.md, Q2 step 1, c19): two poled lithium niobate wafers bonded to the Si-28 SOI handle and sliced by hydrogen implantation into the enhanced LN-on-insulator", "name": "ln_on_insulator_plus", "circuit": 19, "eut": 536870912, "duration": 2400,
           "itemsIn": [{ "id": "grindless:poled_lnoi_wafer", "count": 2 }, { "id": "grindless:si28_soi_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "grindless:ln_on_insulator_plus", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] }
+          "itemsOut": [{ "id": "grindless:ln_on_insulator_plus", "count": 1 }], "fluidsOut": [{ "id": "gtceu:hydrogen", "amount": 1000 }] },
+        { "_why": "D5-QPU-MAX (lines-opv-maxplus.md, M1 step 26, c14): four tested tetron dies hybrid-bonded onto the cryo photonic interposer (the transducer); a bond in ten fails and returns one die to the EV extraction cascade (In, Al, Au).", "name": "transducer_bonded_stack", "circuit": 14, "eut": 1073741824, "duration": 2400,
+          "itemsIn": [{ "id": "grindless:tested_tetron_die", "count": 4 }, { "id": "grindless:cryo_photonic_interposer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
+          "itemsOut": [{ "id": "grindless:transducer_bonded_stack", "count": 1 }, { "id": "grindless:failed_tetron_die", "count": 1, "chance": 1000 }], "fluidsOut": [] }
       ]
     },
     "femtosecond_writing": {

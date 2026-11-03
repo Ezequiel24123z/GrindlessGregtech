@@ -91,6 +91,12 @@
     piezo_optomech_layer: { stack: 16 },
     transducer_wafer: { stack: 64 },
     cryo_photonic_interposer: { stack: 16 },
+    // D5-QPU-MAX (docs/eras/lines-opv-maxplus.md, M1): the qubit line's MAX stage; names max_qpu_lang.js, rows in tfln_femtosecond,
+    // photonics, memories_cryostat and membrane_line tables
+    transducer_bonded_stack: { stack: 16 },
+    photonic_tetron_module: { stack: 16 },
+    calibrated_photonic_module: { stack: 16 },
+    shielded_quantum_module: { stack: 16 },
     power_diamond_plate: { stack: 64 },
     boron_delta_diamond: { stack: 16 },
     metallised_diamond: { stack: 16 },
