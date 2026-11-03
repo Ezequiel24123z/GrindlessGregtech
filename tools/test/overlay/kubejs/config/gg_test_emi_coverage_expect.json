@@ -433,7 +433,7 @@
     {"id":"grindless:chain_field_coil","kind":"item","needUse":true,"needMade":true,"made":["gtceu:assembler"],"used":["gtceu:assembler","gtceu:assembly_line","gtceu:field_freezing"]},
     {"id":"grindless:chain_flexspline_cup","kind":"item","needUse":true,"needMade":true,"made":["gtceu:megabar_synthesis"],"used":["gtceu:femtosecond_writing"]},
     {"id":"grindless:chain_lamina","kind":"item","needUse":true,"needMade":true,"made":["gtceu:pasta_lamination"],"used":["gtceu:assembly_line","gtceu:pasta_lamination"]},
-    {"id":"grindless:chain_lamina_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info"]},
+    {"id":"grindless:chain_lamina_casing","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:assembler"],"used":["emi:info","gtceu:multiblock_info"]},
     {"id":"grindless:chain_lamina_stack","kind":"item","needUse":true,"needMade":true,"made":["gtceu:pasta_lamination"],"used":["gtceu:assembler","gtceu:assembly_line","gtceu:canner","gtceu:electron_beam_refining","gtceu:megabar_synthesis","gtceu:spark_plasma_sintering"]},
     {"id":"grindless:chain_lattice_slab","kind":"item","needUse":true,"needMade":true,"made":["gtceu:pasta_extraction"],"used":["gtceu:pasta_sorting"]},
     {"id":"grindless:chain_mesh_belt","kind":"item","needUse":true,"needMade":true,"made":["gtceu:closed_loop_cooling"],"used":["gtceu:assembler"]},
