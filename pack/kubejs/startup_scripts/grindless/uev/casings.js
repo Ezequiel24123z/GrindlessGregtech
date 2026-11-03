@@ -1,4 +1,3 @@
-// priority: -7549
 // -----------------------------------------------------------------------------------------------
 // UEV casing family (package D4-CASE-UEV, docs/eras/lines-uev-uxv.md section 9): the three new structure blocks a UEV multiblock's
 // body is made of. A multiblock's body is its era's own family of casings, each needing a product only that era makes

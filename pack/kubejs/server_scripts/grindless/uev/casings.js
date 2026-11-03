@@ -1,4 +1,3 @@
-// priority: -23075
 // UEV casing family recipes (package D4-CASE-UEV, docs/eras/lines-uev-uxv.md section 9). Ids: startup_scripts/grindless/uev/casings.js.
 // All at VA[UEV] = 7,864,320 EU/t. photonic_casing (tables/photonics_uev.json) and degenerate_containment_casing (tables/sirius.json)
 // are rows of their own tables. The composite casing is an assembler recipe because the infiltration furnace takes at most 2 items.
