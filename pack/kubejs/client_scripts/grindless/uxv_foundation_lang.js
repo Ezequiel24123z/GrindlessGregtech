@@ -36,7 +36,6 @@
         ['srruo3_electrode_wafer', 'SrRuO3 Electrode Wafer', 'An oxide electrode grown on a substrate.', 'Made in the oxide PLD chamber.'],
         ['me_switch_wafer', 'ME Switch Wafer', 'A magnetoelectric switch film on an oxide stack.', 'Made in the oxide PLD chamber.'],
         ['sot_readout_stack', 'SOT Readout Stack', 'A stack that reads a spin by its torque.', 'Made in the vdW stacking cell.'],
-        ['meso_logic_die', 'MESO Logic Die', 'A magnetoelectric spin-orbit logic die.', 'Part of the spintronic circuits.'],
         ['racetrack_chip', 'Racetrack Chip', 'A memory where domain walls run along a track.', 'Made in the racetrack fab.'],
         ['magnonic_bus', 'Magnonic Bus', 'A YIG waveguide that carries spin waves.', 'Made in the YIG LPE furnace line.'],
         ['sin_membrane', 'SiN Membrane', 'A thin silicon nitride film that holds an aperture.', 'Back-etched before use.'],

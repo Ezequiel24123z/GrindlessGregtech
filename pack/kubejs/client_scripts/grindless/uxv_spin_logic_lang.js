@@ -57,7 +57,7 @@
         ['gtceu.recipe.grindless_liquid_phase_epitaxy.flux_skim',
             'Circuit 3: the used flux is skimmed; lead and boron oxides return and the dross goes to solvent extraction.'],
         ['gtceu.recipe.grindless_photonic_integration.spintronic_mainframe',
-            'Circuit 7: the spintronic mainframe, the only recipe for it; the logic die, racetrack chip, MRAM wafer, magnonic bus, MTJ die and shielded interposer are bonded.']
+            'Circuit 7: the spintronic mainframe, the only recipe for it; a spintronic die, an MTJ die and a shielded interposer are bonded.']
     ]
 
     // [name, en, tooltip 0 en, tooltip 1 en]

@@ -70,12 +70,12 @@ export const QUESTS = [
     unlocks: 'The spintronic mainframe, as its storage.',
     automate: 'Wafers by ME; the fab returns chips in a chest, so stock a few.',
   }, [], [it('grindless:racetrack_chip')], 150),
-  q('MESOD', 'circuit', 'MESO Logic Die', 'grindless:meso_logic_die', ['DSO', 'C_L_MESO'], 9.5, 4.5, {
-    for: 'A multiferroic film flips a magnet with voltage instead of current, and a spin-orbit stack reads it back. Joined in the photonic foundry they make the &6MESO Logic Die&r.',
-    needs: 'The oxide PLD chamber, the vdW stacking cell, a scandate substrate and the photonic foundry.',
-    unlocks: 'The spintronic mainframe, as its logic.',
-    automate: 'Substrates by ME; send the dies on as soon as they come out of the foundry.',
-  }, [], [it('grindless:meso_logic_die')], 150),
+  q('MESOD', 'circuit', 'Spintronic Die', 'grindless:spintronic_die', ['DSO', 'C_L_MESO'], 9.5, 4.5, {
+    for: 'One 28Si wafer carries the CMOS layer, the memory, the racetrack, the spin-wave bus and a multiferroic switch read by a spin-orbit stack. Cut in four, it makes the &6Spintronic Die&r.',
+    needs: 'The MOCVD reactor, the photonic foundry, the vdW stacker, the MRAM wafer, the racetrack chip and the magnonic bus.',
+    unlocks: 'The spintronic mainframe, as its logic, memory and bus in one.',
+    automate: 'Run the wafer line as one chain by ME; the cutter returns four dies per wafer.',
+  }, [], [it('grindless:spintronic_die')], 150),
   q('MAINF', 'circuit', 'Spintronic Mainframe', 'gtnn:spintronic_mainframe', ['RACED', 'MESOD', 'C_L_YIG'], 12, 3.75, {
     for: 'Spin waves in a garnet film carry signals between the chips with almost no heat. Logic, memory and that bus together are the &6Spintronic Mainframe&r, the UXV circuit.',
     needs: 'The photonic integration hall, a racetrack chip, a MESO logic die, an MRAM wafer, an MTJ die, a shielded interposer and a magnonic bus from the YIG furnace.',

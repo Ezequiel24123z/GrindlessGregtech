@@ -7582,7 +7582,7 @@
  "gtnn:radioactive_waste": [[["f:gtceu:fission_product_liquor"]],[["f:gtceu:licl_salt"],["grindless:spent_hfir_driver_element"]],[["f:gtceu:loaded_licl_salt"]],[["f:gtceu:nitric_acid"],["grindless:spent_breeder_assembly"]],[["f:gtceu:nitric_acid"],["grindless:spent_fuel_assembly"]],[["grindless:hfir_driver_element"],["grindless:nickel_62_target"]],[["grindless:hfir_driver_element"],["grindless:plutonium_oxide_target"]],[["grindless:hfir_driver_element"],["grindless:transcurium_target"]],[["grindless:ion_exchange_resin"],["grindless:vein_sample_pitchblende_end"]],[["grindless:spent_ir_target"]],[["grindless:spent_positron_source"]]],
  "gtnn:resin_wrap_circuit_board": [[["f:gtceu:polyethylene"]]],
  "gtnn:resin_wrap_printed_circuit_board": [[["f:gtceu:polyethylene"]]],
- "gtnn:spintronic_mainframe": [[["extendedfeatures:uiv_universal_circuit","gtnn:optical_mainframe"],["grindless:magnonic_bus"],["grindless:meso_logic_die"],["grindless:mram_wafer"],["grindless:mtj_die"],["grindless:racetrack_chip"],["grindless:shielded_interposer"]]],
+ "gtnn:spintronic_mainframe": [[["extendedfeatures:uiv_universal_circuit","gtnn:optical_mainframe"],["grindless:mtj_die"],["grindless:shielded_interposer"],["grindless:spintronic_die"]]],
  "gtnn:supracausal_mainframe": [[["f:gtceu:superfluid_helium_3"],["grindless:cryo_photonic_interposer"],["grindless:squeezed_light_chip"],["grindless:tetron_array"],["grindless:tweezer_array_die"],["gtnn:cosmic_mainframe"]]],
  "gtnn:uev_wrap_circuit": [[["extendedfeatures:uev_universal_circuit","gtnn:optical_computer"],["f:gtceu:polyethylene"]]],
  "gtnn:uhv_wrap_circuit": [[["extendedfeatures:uhv_universal_circuit","gtceu:wetware_processor_mainframe","gtnn:optical_assembly"],["f:gtceu:polyethylene"]]],

@@ -8,7 +8,8 @@
 //                                 come off as their GT dusts).
 //   gtceu:racetrack_patterning    racetrack fab, circuit 1 patterned track wafer, 2 racetrack chip.
 //   gtceu:liquid_phase_epitaxy    YIG LPE furnace, circuit 1 lead-borate flux, 2 YIG film wafer (platinum crucible kept), 3 flux skim.
-//   lathe, assembler              line 42's platinum crucible (shell, weld) and the magnonic bus (ids grindless:<type>/<name>).
+//   lathe, assembler, cutter      line 42's platinum crucible (shell, weld), the magnonic bus and the spintronic die's dicing (ids grindless:<type>/<name>).
+//   mocvd, photonic_foundry, vdw_assembly   D4-UXV-SPIN's X1 steps 7, 8, 25, 26 and 27 on the older machines' types (own circuits).
 //   assembly_line                 the three controllers (UIV hull + 2 UIV parts + 2 optical mainframes + UIV circuits + 3 domain items,
 //                                 6N helium, soldering alloy, lubricant, behind station research), grindless:assembly_line/<name>.
 //
@@ -20,7 +21,13 @@
   var G = global.grindless || (global.grindless = {})
   var SL = G.spinLogic || (G.spinLogic = {})
   var TABLE = SL.table || 'kubejs/data/grindless/tables/spin_logic.json'
-  var GTM_TYPES = { assembler: true, lathe: true }
+  var GTM_TYPES = { assembler: true, lathe: true, cutter: true }
+  // types made by older machines: their slot limits (the machines' maxIO, startup_scripts/grindless/uv, uhv and uev photonics.js)
+  var OLDER_IO = {
+    mocvd: { itemsIn: 4, itemsOut: 1, fluidsIn: 3, fluidsOut: 2 },
+    photonic_foundry: { itemsIn: 6, itemsOut: 3, fluidsIn: 3, fluidsOut: 1 },
+    vdw_assembly: { itemsIn: 4, itemsOut: 1, fluidsIn: 1, fluidsOut: 0 }
+  }
 
   function list(x) {
     return Array.isArray(x) ? x : []
@@ -84,8 +91,8 @@
 
   function sizeProblem(rec) {
     if (GTM_TYPES[rec.type] === true) return null
-    var io = null
-    ;(SL.machines || []).forEach(function (m) { if (m.type === rec.type) io = m.maxIO })
+    var io = OLDER_IO[rec.type] || null
+    if (io === null) (SL.machines || []).forEach(function (m) { if (m.type === rec.type) io = m.maxIO })
     if (io === null) return 'no slots known for type ' + rec.type
     var circuit = rec.circuit > 0 ? 1 : 0
     if (rec.itemsIn.length + rec.kept.length + circuit > io.itemsIn) return 'too many item inputs (the type holds ' + io.itemsIn + ')'

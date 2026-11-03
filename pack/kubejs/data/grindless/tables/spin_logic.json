@@ -165,6 +165,77 @@
           "fluidsOut": []
         }
       ]
+    },
+    "mocvd": {
+      "dataKey": "grindless_mocvd",
+      "recipes": [
+        {
+          "_why": "D4-UXV-SPIN X1 step 7: MOCVD grows the HfO2 gate dielectric and TiN gate on the 28Si wafer from hafnia, TiCl4 and ammonia; the reaction gives off HCl",
+          "name": "si28_cmos_wafer", "circuit": 10, "eut": 1966080, "duration": 700,
+          "itemsIn": [{ "id": "grindless:h_si28_wafer", "count": 1 }, { "id": "grindless:hafnia_dust", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:titanium_tetrachloride", "amount": 250 }, { "id": "gtceu:ammonia", "amount": 500 }, { "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:si28_cmos_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "gtceu:hydrochloric_acid", "amount": 1000 }, { "id": "minecraft:water", "amount": 1000 }]
+        }
+      ]
+    },
+    "photonic_foundry": {
+      "dataKey": "grindless_photonic_foundry",
+      "recipes": [
+        {
+          "_why": "D4-UXV-SPIN X1 step 8: tungsten vias and the first copper metal layer on the 28Si CMOS wafer, rinsed in ultrapure water",
+          "name": "si28_m1_wafer", "circuit": 17, "eut": 7864320, "duration": 600,
+          "itemsIn": [{ "id": "grindless:si28_cmos_wafer", "count": 1 }, { "id": "gtceu:tungsten_foil", "count": 1 }, { "id": "gtceu:copper_foil", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:si28_m1_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        },
+        {
+          "_why": "D4-UXV-SPIN X1 step 27: the top copper and gold pad layers close the MESO spin wafer into the spintronic wafer",
+          "name": "spintronic_wafer", "circuit": 30, "eut": 7864320, "duration": 800,
+          "itemsIn": [{ "id": "grindless:meso_spin_wafer", "count": 1 }, { "id": "gtceu:copper_foil", "count": 1 }, { "id": "gtceu:gold_foil", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:ultrapure_water", "amount": 1000 }],
+          "itemsOut": [{ "id": "grindless:spintronic_wafer", "count": 1 }],
+          "fluidsOut": [{ "id": "minecraft:water", "amount": 1000 }]
+        }
+      ]
+    },
+    "vdw_assembly": {
+      "dataKey": "grindless_vdw_assembly",
+      "recipes": [
+        {
+          "_why": "D4-UXV-SPIN X1 step 25: the BFO/CoFe magnetoelectric membrane is transferred onto the magnonic bus wafer",
+          "name": "me_on_spin_wafer", "circuit": 7, "eut": 1966080, "duration": 700,
+          "itemsIn": [{ "id": "grindless:magnonic_bus", "count": 1 }, { "id": "grindless:me_switch_wafer", "count": 1 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:me_on_spin_wafer", "count": 1 }],
+          "fluidsOut": []
+        },
+        {
+          "_why": "D4-UXV-SPIN X1 step 26: the hBN/WTe2/FGT SOT readout stack is laid over the magnetoelectric layer: the MESO spin wafer",
+          "name": "meso_spin_wafer", "circuit": 8, "eut": 1966080, "duration": 700,
+          "itemsIn": [{ "id": "grindless:me_on_spin_wafer", "count": 1 }, { "id": "grindless:sot_readout_stack", "count": 1 }],
+          "kept": [], "charge": [], "fluidsIn": [],
+          "itemsOut": [{ "id": "grindless:meso_spin_wafer", "count": 1 }],
+          "fluidsOut": []
+        }
+      ]
+    },
+    "cutter": {
+      "recipes": [
+        {
+          "_why": "D4-UXV-SPIN X1 step 28: the spintronic wafer is diced into four spintronic dies",
+          "name": "spintronic_die", "circuit": 0, "eut": 1966080, "duration": 600,
+          "itemsIn": [{ "id": "grindless:spintronic_wafer", "count": 1 }],
+          "kept": [], "charge": [],
+          "fluidsIn": [{ "id": "gtceu:lubricant", "amount": 100 }],
+          "itemsOut": [{ "id": "grindless:spintronic_die", "count": 4 }],
+          "fluidsOut": []
+        }
+      ]
     }
   }
 }

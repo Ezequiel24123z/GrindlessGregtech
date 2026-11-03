@@ -1237,7 +1237,6 @@
     {"id":"grindless:membrane_scrap","kind":"item","needUse":true,"needMade":true,"made":["gtceu:membrane_rolling"],"used":["gtceu:macerator"]},
     {"id":"grindless:memory_fibre_pigtail","kind":"item","needUse":true,"needMade":true,"made":["gtceu:fibre_draw"],"used":["gtceu:assembler","gtceu:fibre_draw"]},
     {"id":"grindless:mercury_regolith","kind":"item","needUse":true,"needMade":true,"made":["gtceu:regolith_excavation"],"used":["gtceu:solar_vaporisation"]},
-    {"id":"grindless:meso_logic_die","kind":"item","needUse":true,"needMade":true,"made":["gtceu:photonic_foundry"],"used":["gtceu:photonic_integration"]},
     {"id":"grindless:metal_condensate","kind":"item","needUse":true,"needMade":true,"made":["emi:info","gtceu:stellar_condensation"],"used":["emi:info","gtceu:condensate_refinery"]},
     {"id":"grindless:metal_debris_fraction","kind":"item","needUse":true,"needMade":true,"made":["gtceu:debris_harvesting"],"used":["gtceu:replication_refining"]},
     {"id":"grindless:metal_feedstock","kind":"item","needUse":true,"needMade":true,"made":["gtceu:replication_refining"],"used":["gtceu:assembly_line","gtceu:self_replication"]},

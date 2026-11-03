@@ -79,7 +79,6 @@ $Items = [ordered]@{
     srruo3_electrode_wafer  = @('card', '3A3038', 'C0A0D8')
     me_switch_wafer         = @('card', '5A3A58', 'F890D0')
     sot_readout_stack       = @('card', '2E4A58', '70F0E0')
-    meso_logic_die          = @('chip', '4A3470', 'D080FF')
     racetrack_chip          = @('chip', '30445A', 'FFE070')
     magnonic_bus            = @('module', '2E5A48', '90FFC0')
     sin_membrane            = @('sail', '5A6A78', 'B8D0E0')
