@@ -5,7 +5,7 @@
 // tables/vela_pasta.json are locked to. gg_test_opv_bulge_relay uses the same band in grindless:cygnus_x1_orbit; the SGR platform (64,100,64) is far.
 // Doubt: UXV-B4's four pasta machines form at SGR 1806-20 with UXV hatches and run the new circuit 3-5 rows there (the rows existed only at Vela).
 //   lookup      the 11 OpV-A0 rows, the PBO plant's c8 braid and the strand cable covering are in the recipe manager
-//   formed      the extractor, phase sorter, draw bench and laminator form (one UXV energy hatch, HV buses)
+//   formed      the extractor and the Pasta Mill (sorter, draw bench and laminator cells) form (one UXV energy hatch, HV buses)
 //   <unit>_run  each runs its circuit 3 row: extractor chain_crust (bulge chart kept), sorter chain_caging (cage part consumed),
 //               draw bench chain_strand_drawing, laminator chain_lamina
 //   <unit>_out  the row's products reach the output bus; the kept chart stays and the cage part is gone
@@ -41,10 +41,10 @@
     { name: 'sorter', id: 'gtceu:pasta_phase_sorter', cx: 37842, z: 8,
       feed: [[CIRCUIT, 1, C3], ['grindless:chain_crust_slab', 1], ['grindless:cage_part', 1]],
       recipe: 'grindless:pasta_sorting/chain_caging', out: [['grindless:caged_chain_phase', 1], ['gtceu:iron_dust', 2]], gone: 'grindless:cage_part' },
-    { name: 'draw_bench', id: 'gtceu:pasta_draw_bench', cx: 37852, z: 8,
+    { name: 'draw_bench', id: 'gtceu:pasta_phase_sorter', cx: 37852, z: 8,
       feed: [[CIRCUIT, 1, C3], ['grindless:caged_chain_phase', 1]],
       recipe: 'grindless:pasta_drawing/chain_strand_drawing', out: [['gtceu:chain_strand_ingot', 4]], gone: 'grindless:caged_chain_phase' },
-    { name: 'laminator', id: 'gtceu:pasta_laminator', cx: 37862, z: 8,
+    { name: 'laminator', id: 'gtceu:pasta_phase_sorter', cx: 37862, z: 8,
       feed: [[CIRCUIT, 1, C3], ['grindless:caged_chain_lattice', 1]],
       recipe: 'grindless:pasta_lamination/chain_lamina', out: [['grindless:chain_lamina', 4]], gone: 'grindless:caged_chain_lattice' }
   ]

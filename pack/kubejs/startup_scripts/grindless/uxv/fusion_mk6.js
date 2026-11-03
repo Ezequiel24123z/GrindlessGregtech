@@ -5,7 +5,7 @@
 // from zpm/fusion.js). The casing block and the other F1 ids are uxv/foundation.js's.
 //
 //   gtceu:uxv_fusion_reactor   GTM's gtceu:fusion_reactor type at tier 12 (FusionReactorMachine.registerFusionTier, as the Mk4 and Mk5):
-//                              16 energy hatches x 2^6 x 10,000,000 = 10,240,000,000 EU of storage, a long; a 15 x 7 x 17 octagonal annulus of
+//                              16 energy hatches x 2^6 x 10,000,000 = 10,240,000,000 EU of storage, a long; a 45 x 11 x 45 octagonal torus of
 //                              grindless:uxv_fusion_casing lined with the Mk5's metallic hydrogen coil and fusion glass.
 //
 // New ids: the gases gtceu:helium_burning_ash, gtceu:carbon_burning_ash and gtceu:oxygen_burning_ash (the converter's ash, split by the

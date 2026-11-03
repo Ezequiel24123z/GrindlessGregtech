@@ -1,10 +1,10 @@
 // priority: -9953
-// TEST ONLY, UXV-A4 (gtceu:mtj_sputter_cluster, gtceu:oxide_pld_chamber). Command: kubejs custom_command gg_test_uxv_spin_deposition
+// TEST ONLY, UXV-A4 (gtceu:mtj_sputter_cluster). Command: kubejs custom_command gg_test_uxv_spin_deposition
 // Band ONLY: X 36480-36543, Z 0-63, Overworld Y 98-112.
 //   T1 (named uncertainty: a 67,108,864 EU/t row, twice V[UIV] and the first of the line, is accepted by two UIV energy hatches, and the
 //   multiblock modifier (parallel hatch overclock) leaves it running):
 //     lookup     every table row, the controllers' and the laser's assembly lines are in the recipe manager
-//     formed     sputter cluster and PLD chamber form with two UIV energy hatches
+//     formed     sputter cluster forms (twice, one per recipe flow) with two UIV energy hatches
 //     sputter    c2 (heusler_target + mgo_target + wafer, circuit 2): starts at 67,108,864 EU/t and delivers the MRAM stack wafer
 //     pld        c2 (electrode + La-BFO target, circuit 2, the laser not consumed): starts at 67,108,864 EU/t, delivers the BFO film
 //                wafer and the BFO fume, and the laser is still in the bus
@@ -27,7 +27,7 @@
     'mtj_sputtering/mtj_stack', 'mtj_sputtering/mram_stack', 'mtj_sputtering/saf_track', 'mtj_sputtering/stno_stack',
     'pulsed_laser_deposition/srruo3_electrode', 'pulsed_laser_deposition/bfo_film', 'pulsed_laser_deposition/me_switch',
     'mixer/kr_f2_premix', 'assembler/krf_discharge_tube_blank', 'assembler/pulsed_power_head', 'assembler/cofe_target',
-    'chemical_reactor/krf_discharge_tube', 'assembly_line/mtj_sputter_cluster', 'assembly_line/oxide_pld_chamber',
+    'chemical_reactor/krf_discharge_tube', 'assembly_line/mtj_sputter_cluster',
     'assembly_line/krf_excimer_laser'
   ]
 
@@ -39,7 +39,7 @@
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch', 'gtceu:hv_output_hatch']
     },
     {
-      name: 'pld', id: 'gtceu:oxide_pld_chamber', z: 50, circuit: 2, wafer: 'grindless:bfo_film_wafer',
+      name: 'pld', id: 'gtceu:mtj_sputter_cluster', z: 50, circuit: 2, wafer: 'grindless:bfo_film_wafer',
       inputs: [['grindless:srruo3_electrode_wafer', 1], ['grindless:la_bfo_target', 1], ['grindless:krf_excimer_laser', 1]],
       fluid: ['gtceu:oxygen', 4000], extra: 'grindless:bfo_fume', laser: 'grindless:krf_excimer_laser',
       parts: [ENERGY, ENERGY, 'gtceu:hv_input_bus', 'gtceu:hv_output_bus', 'gtceu:hv_input_hatch']

@@ -23,7 +23,7 @@
         ['grindless.machine.pasta_extractor.tooltip.0',
             '\u00a77Catches the nuclear pasta a glitching Vela pulsar sheds.'],
         ['grindless.machine.pasta_phase_sorter.tooltip.0',
-            '\u00a77Sorts raw pasta into phases, draws the spaghetti into pasta wire and presses the lasagna into plates and electrodes.'],
+            '\u00a77Sorts raw pasta into phases, draws strand wire, presses lasagna plates.'],
         ['grindless.machine.polar_cap_tap.tooltip.0',
             '\u00a77Generator: taps the pulsar\'s polar cap through lasagna electrodes.'],
         ['grindless.machine.polar_cap_tap.tooltip.1',

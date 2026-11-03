@@ -89,16 +89,16 @@ export const QUESTS = [
 
   // ------------------------------------------------------------------ home rows
   {
-    key: 'OM_UXV', kind: 'machine', title: 'Home Rows: UXV', icon: 'gtceu:pasta_draw_bench',
+    key: 'OM_UXV', kind: 'machine', title: 'Home Rows: UXV', icon: 'gtceu:pasta_phase_sorter',
     deps: ['START'], x: 1, y: 1.5,
     teach: {
-      for: 'The UXV controllers at home, and the MAX+ row each one takes: the MTJ cluster, oxide PLD chamber and racetrack fab make coated tapes, x-ray mirrors and the logic and storage dies; the stellar elevator loads the ribbon of the deep horizon tether. The draw bench and the shequid works join those lines.',
-      needs: 'All six controllers: draw bench, sputter cluster, PLD chamber, shequid works, racetrack fab and stellar elevator.',
+      for: 'The UXV controllers at home, and the MAX+ row each one takes:       the Spintronic Cluster Tool makes coated tapes, x-ray mirrors and the logic and storage dies; the stellar elevator loads the ribbon of the deep horizon tether. The Pasta Mill and the shequid works join those lines.',
+            needs: 'All four controllers: Pasta Mill, Spintronic Cluster Tool, shequid works and stellar elevator.',
       unlocks: 'The ribbon, tether and conduit lines of stage II.',
       automate: 'They share one hub; lay it out once.',
     },
     desc: [],
-    tasks: [it('gtceu:pasta_draw_bench'), it('gtceu:mtj_sputter_cluster'), it('gtceu:oxide_pld_chamber'), it('gtceu:shequid_works'), it('gtceu:racetrack_fab'), it('gtceu:stellar_elevator')],
+    tasks: [it('gtceu:pasta_phase_sorter'), it('gtceu:mtj_sputter_cluster'), it('gtceu:shequid_works'), it('gtceu:stellar_elevator')],
     rewards: [xp(100)],
   },
   {

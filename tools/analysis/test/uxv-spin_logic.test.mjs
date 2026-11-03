@@ -22,7 +22,7 @@ const rec = (type, name) => SL.recipes.find((r) => r.type === type && r.name ===
 const ids = (xs) => xs.map((x) => x.id);
 
 const ITEMS = ['wte2_flake', 'fgt_flake', 'hbn_flake', 'patterned_track_wafer', 'pt_crucible_shell'];
-const MACHINES = ['vdw_stacking_cell', 'racetrack_fab', 'yig_lpe_furnace'];
+const MACHINES = ['yig_lpe_furnace'];
 
 test('the stand-in runs the UXV-A5 scripts without errors, nothing skipped, no lookup clash', () => {
   const mine = run.errors.filter((e) => /spin_logic|sounds/.test(String(e.file)));
@@ -103,8 +103,6 @@ test('line 42 and line 12: the crucible takes a lathe and a weld step, the magno
 test('the controllers: UIV hull, parts, mainframes, helium, domain inputs, at least 8 distinct ingredients', () => {
   assert.deepEqual(plain(SL.controllerRecipes), MACHINES.map((m) => `grindless:assembly_line/${m}`));
   const need = {
-    vdw_stacking_cell: ['gtceu:uiv_robot_arm', 'grindless:wte2_crystal', 'grindless:terfenol_d_rod', 'grindless:sin_membrane', 'grindless:vuv_caf2_optic'],
-    racetrack_fab: ['gtceu:uiv_electric_motor', 'grindless:saf_track_wafer', 'grindless:mtj_die', 'grindless:pt_sheet', 'grindless:ga2o3_power_die'],
     yig_lpe_furnace: ['gtceu:uiv_electric_piston', 'grindless:ggg_wafer', 'grindless:pt_lpe_crucible', 'grindless:w184_cvi_preform', 'grindless:pt_sheet']
   };
   for (const m of MACHINES) {
@@ -138,7 +136,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
     'grindless:sot_heterostack': 'vdw_stacking/sot_heterostack', 'grindless:patterned_track_wafer': 'racetrack_patterning/pattern_track',
     'grindless:racetrack_chip': 'racetrack_patterning/racetrack_chip', 'grindless:yig_film_wafer': 'liquid_phase_epitaxy/yig_film',
     'grindless:pt_crucible_shell': 'lathe/pt_crucible_shell', 'grindless:pt_lpe_crucible': 'assembler/pt_lpe_crucible', 'grindless:magnonic_bus': 'assembler/magnonic_bus',
-    'gtceu:vdw_stacking_cell': 'assembly_line/vdw_stacking_cell', 'gtceu:racetrack_fab': 'assembly_line/racetrack_fab', 'gtceu:yig_lpe_furnace': 'assembly_line/yig_lpe_furnace'
+    'gtceu:yig_lpe_furnace': 'assembly_line/yig_lpe_furnace'
   };
   for (const [id, tail] of Object.entries(only)) {
     const ps = producers(id);
@@ -157,7 +155,7 @@ test('"only from": nothing else in the pack makes these ids', () => {
 
 test('older rows: only the hall row sits outside this package\'s files', () => {
   const mine = recipes.filter((r) => /uxv[\\/]spin_logic\.js$/.test(fileOf(r)));
-  assert.equal(mine.length, 12 + 1 + 1 + 1 + 1 + 6 + 3, 'rows, XP-A3\'s racetrack c6, MAX-B1\'s vdW c5, MAX-H1\'s racetrack c3, MAX-A2\'s LPE c4, D4-UXV-SPIN\'s six X1 rows and three controllers');
+  assert.equal(mine.length, 12 + 1 + 1 + 1 + 1 + 6 + 1, 'rows, XP-A3\'s racetrack c6, MAX-B1\'s vdW c5, MAX-H1\'s racetrack c3, MAX-A2\'s LPE c4, D4-UXV-SPIN\'s six X1 rows and the furnace controller');
 });
 
 test('the held F1 ids are free: the A5 hold rules are deleted, the pending EMI entries too', () => {

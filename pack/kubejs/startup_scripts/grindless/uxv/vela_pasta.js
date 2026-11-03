@@ -29,7 +29,6 @@
   const GEARBOX = 'gtceu:tungstensteel_gearbox'
   const ROBUST = 'gtceu:robust_machine_casing'
   const VENT = 'gtceu:computer_heat_vent'
-  const HSSS = 'gtceu:hsss_frame'
   // pasta_extractor and polar_cap_tap wear the UXV gum-metal body with pulsed-field magnets (uxv/casings.js); the pasta containment casing is
   // NOT used (its inputs frc_cartridge and cage_part come from the former and the extractor chain)
   const GUM = 'grindless:gum_metal_casing'

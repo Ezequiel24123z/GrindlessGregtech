@@ -16,7 +16,7 @@
         ['gtceu.pulsed_laser_deposition', 'Pulsed Laser Deposition'],
 
         ['grindless.machine.mtj_sputter_cluster.tooltip.0',
-            '\u00a77Sputters the MTJ, MRAM, SAF and STNO stacks, deposits oxide films by pulsed laser and patterns racetracks.'],
+            '\u00a77Sputters MTJ and SAF stacks, deposits oxide films, patterns racetracks.'],
 
         ['emi.grindless.info.mtj_sputter_cluster.0',
             'A central vacuum wafer handler feeds eight radial chambers: magnetron guns, a KrF pulsed-laser deposition chamber with its beam line, the racetrack e-beam bay, etch, anneal and the load locks. It needs two UIV energy hatches and a 6N helium-cooled controller.'],

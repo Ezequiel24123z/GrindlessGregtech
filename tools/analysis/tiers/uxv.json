@@ -122,15 +122,13 @@
     "A4": {
       "label": "deposition",
       "landedWhen": [
-        "gtceu:mtj_sputter_cluster",
-        "gtceu:oxide_pld_chamber"
+        "gtceu:mtj_sputter_cluster"
       ]
     },
     "A5": {
       "label": "logic and the mainframe",
       "landedWhen": [
-        "gtceu:vdw_stacking_cell",
-        "gtceu:racetrack_fab",
+        "gtceu:vdw_stacker",
         "gtceu:yig_lpe_furnace",
         "recipe:grindless:photonic_integration/spintronic_mainframe"
       ]
@@ -182,8 +180,6 @@
       "landedWhen": [
         "gtceu:pasta_extractor",
         "gtceu:pasta_phase_sorter",
-        "gtceu:pasta_draw_bench",
-        "gtceu:pasta_laminator",
         "gtceu:polar_cap_tap"
       ]
     },
@@ -438,7 +434,9 @@
     {
       "machine": "gtceu:mtj_sputter_cluster",
       "types": [
-        "gtceu:mtj_sputtering"
+        "gtceu:mtj_sputtering",
+        "gtceu:pulsed_laser_deposition",
+        "gtceu:racetrack_patterning"
       ],
       "energy": {
         "voltage": 33554432,
@@ -470,41 +468,7 @@
       "note": "Machine 1 (home, H): two UIV hatches give V[UXV] (docs/eras/uxv.md \"Voltages and controllers\")."
     },
     {
-      "machine": "gtceu:oxide_pld_chamber",
-      "types": [
-        "gtceu:pulsed_laser_deposition"
-      ],
-      "energy": {
-        "voltage": 33554432,
-        "hatches": 2
-      },
-      "needs": [
-        "eu:uiv"
-      ],
-      "partsFromStructure": true,
-      "partAbilities": {
-        "energy_input": [
-          "gtceu:uiv_energy_input_hatch",
-          "gtceu:uiv_energy_input_hatch_4a",
-          "gtceu:uiv_energy_input_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch",
-          "gtceu:uiv_wireless_energy_hatch_4a",
-          "gtceu:uiv_wireless_energy_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch_64a",
-          "gtceu:uxv_energy_input_hatch",
-          "gtceu:uxv_energy_input_hatch_4a",
-          "gtceu:uxv_energy_input_hatch_16a",
-          "gtceu:uxv_wireless_energy_hatch",
-          "gtceu:uxv_wireless_energy_hatch_4a",
-          "gtceu:uxv_wireless_energy_hatch_16a",
-          "gtceu:uxv_wireless_energy_hatch_64a"
-        ]
-      },
-      "package": "A4",
-      "note": "Machine 2 (home, H)."
-    },
-    {
-      "machine": "gtceu:vdw_stacking_cell",
+      "machine": "gtceu:vdw_stacker",
       "types": [
         "gtceu:vdw_stacking"
       ],
@@ -536,40 +500,6 @@
       },
       "package": "A5",
       "note": "Machine 3 (home, H)."
-    },
-    {
-      "machine": "gtceu:racetrack_fab",
-      "types": [
-        "gtceu:racetrack_patterning"
-      ],
-      "energy": {
-        "voltage": 33554432,
-        "hatches": 2
-      },
-      "needs": [
-        "eu:uiv"
-      ],
-      "partsFromStructure": true,
-      "partAbilities": {
-        "energy_input": [
-          "gtceu:uiv_energy_input_hatch",
-          "gtceu:uiv_energy_input_hatch_4a",
-          "gtceu:uiv_energy_input_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch",
-          "gtceu:uiv_wireless_energy_hatch_4a",
-          "gtceu:uiv_wireless_energy_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch_64a",
-          "gtceu:uxv_energy_input_hatch",
-          "gtceu:uxv_energy_input_hatch_4a",
-          "gtceu:uxv_energy_input_hatch_16a",
-          "gtceu:uxv_wireless_energy_hatch",
-          "gtceu:uxv_wireless_energy_hatch_4a",
-          "gtceu:uxv_wireless_energy_hatch_16a",
-          "gtceu:uxv_wireless_energy_hatch_64a"
-        ]
-      },
-      "package": "A5",
-      "note": "Machine 4 (home, H)."
     },
     {
       "machine": "gtceu:yig_lpe_furnace",
@@ -969,74 +899,8 @@
     {
       "machine": "gtceu:pasta_phase_sorter",
       "types": [
-        "gtceu:pasta_sorting"
-      ],
-      "energy": {
-        "voltage": 33554432,
-        "hatches": 2
-      },
-      "needs": [
-        "eu:uiv"
-      ],
-      "partsFromStructure": true,
-      "partAbilities": {
-        "energy_input": [
-          "gtceu:uiv_energy_input_hatch",
-          "gtceu:uiv_energy_input_hatch_4a",
-          "gtceu:uiv_energy_input_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch",
-          "gtceu:uiv_wireless_energy_hatch_4a",
-          "gtceu:uiv_wireless_energy_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch_64a",
-          "gtceu:uxv_energy_input_hatch",
-          "gtceu:uxv_energy_input_hatch_4a",
-          "gtceu:uxv_energy_input_hatch_16a",
-          "gtceu:uxv_wireless_energy_hatch",
-          "gtceu:uxv_wireless_energy_hatch_4a",
-          "gtceu:uxv_wireless_energy_hatch_16a",
-          "gtceu:uxv_wireless_energy_hatch_64a"
-        ]
-      },
-      "package": "B4",
-      "note": "Machine 17 (Vela pulsar orbit, S)."
-    },
-    {
-      "machine": "gtceu:pasta_draw_bench",
-      "types": [
-        "gtceu:pasta_drawing"
-      ],
-      "energy": {
-        "voltage": 33554432,
-        "hatches": 2
-      },
-      "needs": [
-        "eu:uiv"
-      ],
-      "partsFromStructure": true,
-      "partAbilities": {
-        "energy_input": [
-          "gtceu:uiv_energy_input_hatch",
-          "gtceu:uiv_energy_input_hatch_4a",
-          "gtceu:uiv_energy_input_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch",
-          "gtceu:uiv_wireless_energy_hatch_4a",
-          "gtceu:uiv_wireless_energy_hatch_16a",
-          "gtceu:uiv_wireless_energy_hatch_64a",
-          "gtceu:uxv_energy_input_hatch",
-          "gtceu:uxv_energy_input_hatch_4a",
-          "gtceu:uxv_energy_input_hatch_16a",
-          "gtceu:uxv_wireless_energy_hatch",
-          "gtceu:uxv_wireless_energy_hatch_4a",
-          "gtceu:uxv_wireless_energy_hatch_16a",
-          "gtceu:uxv_wireless_energy_hatch_64a"
-        ]
-      },
-      "package": "B4",
-      "note": "Machine 18 (Vela pulsar orbit, S)."
-    },
-    {
-      "machine": "gtceu:pasta_laminator",
-      "types": [
+        "gtceu:pasta_sorting",
+        "gtceu:pasta_drawing",
         "gtceu:pasta_lamination"
       ],
       "energy": {
@@ -1066,7 +930,7 @@
         ]
       },
       "package": "B4",
-      "note": "Machine 19 (Vela pulsar orbit, S)."
+      "note": "Machine 17 (Vela pulsar orbit, S)."
     },
     {
       "machine": "gtceu:polar_cap_tap",
@@ -1430,7 +1294,7 @@
         "grindless:bfo_film_wafer"
       ],
       "without": [
-        "operate:gtceu:oxide_pld_chamber*"
+        "operate:gtceu:mtj_sputter_cluster*"
       ],
       "expect": "unreachable",
       "package": "A4"
@@ -1445,7 +1309,7 @@
         "grindless:sot_heterostack"
       ],
       "without": [
-        "operate:gtceu:vdw_stacking_cell*"
+        "operate:gtceu:vdw_stacker*"
       ],
       "expect": "unreachable",
       "package": "A5"
@@ -1457,7 +1321,7 @@
         "grindless:racetrack_chip"
       ],
       "without": [
-        "operate:gtceu:racetrack_fab*"
+        "operate:gtceu:mtj_sputter_cluster*"
       ],
       "expect": "unreachable",
       "package": "A5"
@@ -1614,7 +1478,7 @@
         "gtceu:pasta_strand_single_wire"
       ],
       "without": [
-        "operate:gtceu:pasta_draw_bench*"
+        "operate:gtceu:pasta_phase_sorter*"
       ],
       "expect": "unreachable",
       "package": "B4"
@@ -1627,7 +1491,7 @@
         "grindless:lasagna_electrode"
       ],
       "without": [
-        "operate:gtceu:pasta_laminator*"
+        "operate:gtceu:pasta_phase_sorter*"
       ],
       "expect": "unreachable",
       "package": "B4"
@@ -1977,9 +1841,7 @@
       "label": "UXV on Earth, in Earth and Mercury orbit and at Cygnus X-1: nothing of it needs Vela, Cas A or OpV",
       "items": [
         "m:gtceu:mtj_sputter_cluster",
-        "m:gtceu:oxide_pld_chamber",
-        "m:gtceu:vdw_stacking_cell",
-        "m:gtceu:racetrack_fab",
+        "m:gtceu:vdw_stacker",
         "m:gtceu:yig_lpe_furnace",
         "m:gtceu:shequid_works",
         "m:gtceu:mnt_collider",
@@ -1992,8 +1854,6 @@
         "m:gtceu:bz_dynamo",
         "gtceu:pasta_extractor",
         "gtceu:pasta_phase_sorter",
-        "gtceu:pasta_draw_bench",
-        "gtceu:pasta_laminator",
         "gtceu:polar_cap_tap",
         "gtceu:ejecta_knot_sweeper",
         "gtceu:uxv_sensor",
@@ -2110,8 +1970,6 @@
       "items": [
         "m:gtceu:pasta_extractor",
         "m:gtceu:pasta_phase_sorter",
-        "m:gtceu:pasta_draw_bench",
-        "m:gtceu:pasta_laminator",
         "m:gtceu:polar_cap_tap",
         "m:gtceu:uxv_fusion_reactor",
         "m:gtceu:stellar_fractionation_hall",

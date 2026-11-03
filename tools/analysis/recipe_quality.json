@@ -183,16 +183,12 @@
   "grindless:assembly_line/mnt_collider|gtceu:mnt_collider": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/mtj_sputter_cluster|gtceu:mtj_sputter_cluster": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/nitride_magnet_works|gtceu:nitride_magnet_works": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/oxide_pld_chamber|gtceu:oxide_pld_chamber": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/pasta_draw_bench|gtceu:pasta_draw_bench": ["T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/pasta_extractor|gtceu:pasta_extractor": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/pasta_laminator|gtceu:pasta_laminator": ["T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/pasta_phase_sorter|gtceu:pasta_phase_sorter": ["T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/photonic_integration_hall|gtceu:photonic_integration_hall": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/plasma_mass_filter|gtceu:plasma_mass_filter": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/polar_cap_tap|gtceu:polar_cap_tap": ["T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/quantum_gas_lab|gtceu:quantum_gas_lab": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/racetrack_fab|gtceu:racetrack_fab": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/ramp_compression_pulser|gtceu:ramp_compression_pulser": ["T-CIRC","T-COMP","T-COUNT","T-HULL"],
   "grindless:assembly_line/shequid_works|gtceu:shequid_works": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/sic_fibre_plant|gtceu:sic_fibre_plant": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
@@ -206,7 +202,6 @@
   "grindless:assembly_line/tfln_fab|gtceu:tfln_fab": ["T-CIRC","T-COMP","T-COUNT"],
   "grindless:assembly_line/uiv_machine_hull|gtceu:uiv_machine_hull": ["T-CIRC","T-COUNT"],
   "grindless:assembly_line/vdw_stacker|gtceu:vdw_stacker": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
-  "grindless:assembly_line/vdw_stacking_cell|gtceu:vdw_stacking_cell": ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"],
   "grindless:assembly_line/yig_lpe_furnace|gtceu:yig_lpe_furnace":   ["T-CIRC","T-COMP","T-COUNT","T-HULL","T-VOLT"]
    }
 }
