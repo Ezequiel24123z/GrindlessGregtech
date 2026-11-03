@@ -183,7 +183,7 @@
     {"id":"tetrataenite","label":"Tetrataenite (magnetic split)","item":"gtceu:tetrataenite_dust","package":["B1","B5"]},
     {"id":"recipe-bearing","label":"Magnet works c4: the magnetic bearing (tetrataenite)","kind":"recipe","recipe":"grindless:magnet_winding/magnetic_bearing","package":["A4","B1","B5"]},
     {"id":"recipe-platinum-mode4","label":"Platinum plant mode 4: asteroid platinum metals","kind":"recipe","recipe":"grindless:pgm_refining/luv/asteroid","package":["A2","B1","B5"]},
-    {"id":"concentrate-only-processor","label":"The PGM concentrate only comes from the asteroid processor","item":"grindless:asteroid_pgm_concentrate","without":["operate:gtceu:asteroid_processor*"],"expect":"unreachable","package":"B5"},
+    {"id":"concentrate-only-processor","label":"The PGM concentrate only comes from belt ore (the asteroid processor or the belt's Mond carbonylation, D2-TAPE)","item":"grindless:asteroid_pgm_concentrate","without":["operate:gtceu:asteroid_processor*","grindless:large_chemical_reactor/mond_*"],"expect":"unreachable","package":"B5"},
     {"id":"optical-miner","label":"Optical miner (ours, belt)","item":"gtceu:optical_miner","package":"B5"},
     {"id":"optical-miner-formed","label":"Optical miner formed","item":"m:gtceu:optical_miner","package":"B5"},
     {"id":"chondritic-extract","label":"Chondritic extract (optical mining)","item":"grindless:chondritic_extract","package":["B1","B5"]},

@@ -4,10 +4,11 @@
 // they use is XP-F1's (maxplus/foundation.js). The recipes, with lines P9, P10, P11, P22 and P23's older-machine rows, are in
 // server_scripts/grindless/maxplus/stream.js.
 //
-//   gtceu:pristine_gas_works        41 x 9 x 41 of bound lattice and Kerr coil casing (no cryostat: bootstrap), a scoop ring round a gas hall, running up to 64 copies of its row at once (B14-GAS), limited by what its
+//   gtceu:pristine_gas_works        41 x 9 x 41 of bound lattice and Kerr coil casing (no cryostat, no Fe-56: bootstrap), a scoop ring round a gas hall, running up to 64 copies of its row at once (B14-GAS), limited by what its
 //                                   energy hatches carry, its inputs and the room for its output. c1 scoops 64,000 mB of pristine gas per run
 //                                   (each run wears a magnetic scoop module 1 in 64, rolled per run)
-//   gtceu:primordial_fusion_torus   35 x 11 x 35 of bound lattice, Kerr coil and Fe-56 shield casing, a GENERATOR (lib/generators.js; S0-4): c1 burns 1,000 mB deuterium and 1,000 mB helium-3 into helium-4 ash and
+//   gtceu:primordial_fusion_torus   35 x 11 x 35 of bound lattice, Kerr coil, atomic and cryostat casing (bootstrap: the Fe-56 shield and the primordial
+//                                   cryostat come home from 30 Doradus and the Stream after it is built), a GENERATOR (lib/generators.js; S0-4): c1 burns 1,000 mB deuterium and 1,000 mB helium-3 into helium-4 ash and
 //                                   hydrogen at 2^34 EU/t out, on one MAX 16 A dynamo hatch (V x A = 2^35). GTM's 64 A substation hatches do not fit the
 //                                   multiblock's energy slot, so no 64 A hatch is used. Wears a neutral beam injector (1 in 64) and a direct converter stack (1 in 128)
 //
@@ -29,14 +30,16 @@
   const LATTICE = 'grindless:bound_lattice_casing'
   const LATTICE_TEXTURE = 'grindless:block/maxplus/bound_lattice_casing'
   const KERR = 'grindless:kerr_coil_casing'
-  const FE56 = 'grindless:fe56_shield_casing'
+  // bootstrap (docs/quality/structures.md): both machines are built before the Fe-56 shield and the primordial cryostat exist
+  const SHIELD = 'gtceu:atomic_casing'
+  const CRYO = 'grindless:cryostat_casing'
 
   MS.works = {
     name: 'pristine_gas_works', machine: 'gtceu:pristine_gas_works', type: 'pristine_gas_works', dataKey: 'grindless_pristine_gas_works',
     lang: 'Pristine Gas Works', maxIO: { itemsIn: 2, itemsOut: 0, fluidsIn: 0, fluidsOut: 1 }, casing: LATTICE,
     texture: LATTICE_TEXTURE, overlay: 'grindless:block/multiblock/pristine_gas_works',
     width: 41, height: 9, depth: 41, generator: false, maxParallels: 64,
-    pal: { F: LATTICE, K: KERR, E: FE56, P: 'gtceu:tungstensteel_pipe_casing', L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil' },
+    pal: { F: LATTICE, K: KERR, E: SHIELD, P: 'gtceu:tungstensteel_pipe_casing', L: 'gtceu:cleanroom_glass', C: 'gtceu:superconducting_coil' },
     parts: function () {
       return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_hatch', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 })]
     }
@@ -47,7 +50,7 @@
     texture: LATTICE_TEXTURE, overlay: 'grindless:block/multiblock/primordial_fusion_torus',
     width: 35, height: 11, depth: 35, generator: true,
     pal: {
-      F: LATTICE, K: KERR, E: FE56, Y: 'grindless:primordial_cryostat_casing', A: 'gtceu:atomic_casing', L: 'gtceu:cleanroom_glass',
+      F: LATTICE, K: KERR, E: SHIELD, Y: CRYO, A: 'gtceu:atomic_casing', L: 'gtceu:cleanroom_glass',
       C: 'gtceu:superconducting_coil'
     },
     parts: function () {

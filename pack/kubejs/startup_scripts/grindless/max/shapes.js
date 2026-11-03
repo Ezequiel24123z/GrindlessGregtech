@@ -11,6 +11,8 @@
 // radiator, made at Sgr A*) appears only in the five machines section 7.2 lists: clamp, winch, imager, feeder, furnace.
 // Rhino: ES5 only, var, no const in loops.
 (function () {
+  // Math.PI is undefined in KubeJS's Rhino (.github/instructions/kubejs.instructions.md), so the constant is a literal
+  var PI = 3.141592653589793
   var G = global.grindless || (global.grindless = {})
   var T = G.maxShapes || (G.maxShapes = {})
 
@@ -69,7 +71,7 @@
   }
   // spokes: n rays from (cx, cz), half width hw, radius rin..rout, rows y0..y1
   Cv.prototype.spokes = function (cx, cz, n, phase, hw, rin, rout, y0, y1, ch, fn) {
-    var step = 2 * Math.PI / n
+    var step = 2 * PI / n
     this.ring(cx, cz, rin, rout, y0, y1, ch, function (x, y, z, r) {
       var a = Math.atan2(z - cz, x - cx) - phase
       var k = Math.round(a / step)
@@ -130,7 +132,7 @@
     }
     // the sixteen superconducting cores
     for (var k = 0; k < 16; k++) {
-      var a = k * Math.PI / 8
+      var a = k * PI / 8
       cv.put(c + Math.round(10.5 * Math.cos(a)), 5, c + Math.round(10.5 * Math.sin(a)), 'K')
     }
     return { cv: cv, ctl: [c, 1] }
@@ -177,14 +179,14 @@
     cv.ring(c, c, 12, 13, 8, 8, 'T')
     cv.ring(c, c, 0, 12, 1, 7, '#')
     cv.ring(c, c, 8, 11, 2, 6, 'F')
-    cv.spokes(c, c, 8, Math.PI / 8, 2.0, 2.5, 8, 2, 6, 'C')
+    cv.spokes(c, c, 8, PI / 8, 2.0, 2.5, 8, 2, 6, 'C')
     cv.ring(c, c, 0, 2.5, 1, 7, 'M')
     cv.ring(c, c, 0, 1.5, 2, 6, '#')
     cv.ring(c, c, 6, 7.2, 3, 5, 'M', function (x, y, z, r) { return y === 3 || y === 5 ? 'M' : undefined })
     cv.ring(c, c, 11.2, 12, 1, 8, 'T', function (x, y, z, r) { return y === 7 ? 'T' : undefined })
     cv.spokes(c, c, 16, 0, 0.5, 11, 12, 1, 7, 'T')
     for (var k = 0; k < 16; k++) {
-      var a = k * Math.PI / 8
+      var a = k * PI / 8
       cv.put(c + Math.round(9.5 * Math.cos(a)), 4, c + Math.round(9.5 * Math.sin(a)), 'K')
     }
     return { cv: cv, ctl: [c, 1] }
@@ -215,7 +217,7 @@
       return y === h + 2 && r < 9 && (x + z) % 3 === 0 ? 'T' : undefined
     })
     for (k = 0; k < 8; k++) {
-      var a = k * Math.PI / 4 + Math.PI / 8
+      var a = k * PI / 4 + PI / 8
       var sx = c + Math.round(8.8 * Math.cos(a))
       var sz = c + Math.round(8.8 * Math.sin(a))
       cv.ring(sx, sz, 0, 3.4, 1, 1, 'T')
@@ -243,14 +245,14 @@
     cv.ring(c, c, 5.2, 6.4, 3, 5, 'K')
     cv.ring(c, c, 11.8, 13, 7, 8, 'T')
     for (k = 0; k < 12; k++) {
-      var a = k * Math.PI / 6
+      var a = k * PI / 6
       var px = c + Math.round(12 * Math.cos(a))
       var pz = c + Math.round(12 * Math.sin(a))
       cv.box(px - 1, 1, pz - 1, px, 8, pz, 'T')
     }
-    cv.spokes(c, c, 12, Math.PI / 12, 0.6, 7, 12.4, 1, 2, 'T')
-    cv.spokes(c, c, 12, Math.PI / 12, 1.2, 12.5, 13, 2, 7, 'R')
-    cv.spokes(c, c, 24, Math.PI / 24, 0.5, 6.6, 12.5, 6, 6, 'R')
+    cv.spokes(c, c, 12, PI / 12, 0.6, 7, 12.4, 1, 2, 'T')
+    cv.spokes(c, c, 12, PI / 12, 1.2, 12.5, 13, 2, 7, 'R')
+    cv.spokes(c, c, 24, PI / 24, 0.5, 6.6, 12.5, 6, 6, 'R')
     return { cv: cv, ctl: [c, 1] }
   }
 
@@ -306,7 +308,7 @@
     })
     cv.ring(c, c, 10, 11.3, 13, 14, 'T')
     for (k = 0; k < 6; k++) {
-      var a = k * Math.PI / 3
+      var a = k * PI / 3
       var px = c + Math.round(9.5 * Math.cos(a))
       var pz = c + Math.round(9.5 * Math.sin(a))
       cv.box(px, 1, pz, px + 1, 12, pz + 1, 'T')
@@ -333,7 +335,7 @@
     cv.ring(c, c, 6.2, 7, 3, 5, 'C')
     cv.ring(c, c, 9.6, 10, 3, 5, 'C')
     for (k = 0; k < 8; k++) {
-      var a = k * Math.PI / 4 + Math.PI / 8
+      var a = k * PI / 4 + PI / 8
       var mx = c + Math.round(8.2 * Math.cos(a))
       var mz = c + Math.round(8.2 * Math.sin(a))
       cv.box(mx - 1, 2, mz - 1, mx + 1, 6, mz + 1, 'F')
@@ -343,9 +345,9 @@
     cv.box(9, 4, 12, 11, 4, 16, 'G')
     cv.box(9, 4, 17, 11, 4, 20, '#')
     cv.ring(c, c, 0, 5.5, 0, 8, 'T', function (x, y, z, r) { return y === 8 && r > 4.5 || y === 0 && r < 4 ? 'T' : undefined })
-    cv.spokes(c, c, 8, Math.PI / 8, 0.6, 4, 7, 4, 4, 'Q')
+    cv.spokes(c, c, 8, PI / 8, 0.6, 4, 7, 4, 4, 'Q')
     for (k = 0; k < 16; k++) {
-      var b = k * Math.PI / 8
+      var b = k * PI / 8
       cv.put(c + Math.round(5 * Math.cos(b)), 4, c + Math.round(5 * Math.sin(b)), 'K')
     }
     return { cv: cv, ctl: [c, 1] }
