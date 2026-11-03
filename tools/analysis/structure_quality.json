@@ -115,8 +115,8 @@
  },
  "gtceu:barnard_core_drill": {
   "v": [],
-  "bt": 7,
-  "ds": 0.399,
+  "bt": 6,
+  "ds": 0.59,
   "c": 294
  },
  "gtceu:baseline_astrometer": {

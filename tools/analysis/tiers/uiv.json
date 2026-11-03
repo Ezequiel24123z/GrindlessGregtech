@@ -82,6 +82,13 @@
     ]
   ],
   "packages": {
+    "B16": {
+      "label": "batch 16: UIV voltage on two UEV hatches for the powder bed printer and the magnet works (the casing families' bootstrap)",
+      "landedWhen": [
+        "gtceu:powder_bed_printer",
+        "gtceu:naquadria_magnet_works"
+      ]
+    },
     "A1": {
       "label": "isotopes and element 120",
       "landedWhen": [
