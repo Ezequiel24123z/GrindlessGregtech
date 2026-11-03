@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:superhydride_magnet_casing"],
+  "text": ["emi.grindless.info.superhydride_magnet_casing.0"]
+}

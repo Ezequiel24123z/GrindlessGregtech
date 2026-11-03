@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:hftacn_lining_casing"],
+  "text": ["emi.grindless.info.hftacn_lining_casing.0"]
+}

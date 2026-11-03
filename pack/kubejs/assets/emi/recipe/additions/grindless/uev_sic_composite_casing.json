@@ -1,0 +1,5 @@
+{
+  "type": "emi:info",
+  "stacks": ["item:grindless:sic_composite_casing"],
+  "text": ["emi.grindless.info.sic_composite_casing.0"]
+}
