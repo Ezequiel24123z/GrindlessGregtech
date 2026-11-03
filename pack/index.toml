@@ -42,7 +42,7 @@ hash = "8e02c120de96f5c25055ce850bfd26cc648e75eafe4651291144da94222fc292"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/multiblocks.snbt"
-hash = "e58c9ff77f37bd04ebe6ae42488886ce1b210765a8a771ca566dfc96b3777521"
+hash = "14bc87ffe76002fb394a28aa2bc24310e943ede153a7c14d5295ed8687bd42c1"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/mv_age.snbt"
