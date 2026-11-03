@@ -109,9 +109,9 @@ GG_QUESTS_EXPECTED.multiblocks = [417, 0]
 // LuV is one chapter (luv_age); the stations-off modes' merged count is not recorded yet: regenerate in that mode and record it here.
 var GG_QUESTS_LUV_MODES = {
   pending: { pl_luv: [198, 197], power: [113, 124] },
-  tether: { luv_age: [82, 88], pl_luv: [201, 199], power: [116, 127] },
+  tether: { luv_age: [82, 90], pl_luv: [201, 199], power: [116, 127] },
   sulfur_iodine_stations_off: { pl_luv: [204, 202], power: [116, 126] },
-  sulfur_iodine_stations_on: { luv_age: [82, 88], pl_luv: [204, 202], power: [116, 127] }
+  sulfur_iodine_stations_on: { luv_age: [82, 90], pl_luv: [204, 202], power: [116, 127] }
 }
 ;(function () {
   var st = global.grindless && global.grindless.stations

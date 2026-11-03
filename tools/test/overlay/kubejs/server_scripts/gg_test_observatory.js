@@ -16,8 +16,10 @@
 //     recipes        the three observations: inputs, outputs, the non-consumed charts, EU/t, duration and the sky conditions
 //                    (night = daytime reversed, rain / thunder reversed under 0.2, pos_y 100..319 on the Clockwork Observatory only)
 //     single_source  no loaded recipe makes a chart but its observatory and its own copy recipe (which takes the chart)
-//     crafting       photographic plate (LV assembler), 4 copies, 3 controllers; the Steam controller only takes Steam-era items
-//     sky_info       each type has its EMI sky line and it reads the recipe's grindless_sky key
+//     crafting       photographic plate (LV assembler), 3 copies (draft, map, landing chart: the ephemeris is not copied since AF-E1),
+//                    3 controllers; the Steam controller only takes Steam-era items
+//     sky_info       each type has its one EMI sky line (EMI-1's integration/recipe_info_wrap.js splits it into INFO_SLOTS wrapped
+//                    slots) and it reads the recipe's grindless_sky key
 //   in the world: the Overworld band X 3584..3647, Y 98..112, Z 0..15
 //     <machine> DESCRIPTION / PLACED / FORMED / PATTERN / PREVIEW for the four structures (the Clockwork Observatory twice: on high
 //     ground, controller at Y 101, and low, controller at Y 98)
@@ -54,6 +56,8 @@
   var PAPER = 'minecraft:paper'
   var COAL = 'gtceu:coal_dust'
   var CHARTS = [DRAFT, MAP, EPHEMERIS, LANDING]
+  // integration/recipe_info_wrap.js (EMI-1): each data info line of a recipe type becomes GG_INFO_MAX_LINES wrapped slots
+  var INFO_SLOTS = 8
 
   var STEAM_PARTS = { steam: 'gtceu:steam_input_hatch', steam_input_bus: 'gtceu:steam_input_bus', steam_output_bus: 'gtceu:steam_output_bus' }
   var LV_PARTS = { energy_input: 'gtceu:lv_energy_input_hatch', input_bus: 'gtceu:lv_input_bus', output_bus: 'gtceu:lv_output_bus' }
@@ -377,8 +381,8 @@
         bad.push(R.plate + ' is not glass plates + photographic emulsion -> plates in an LV assembler')
       }
     }
-    var pairs = [[DRAFT, R.copies && R.copies[0]], [MAP, R.copies && R.copies[1]], [EPHEMERIS, R.copies && R.copies[2]],
-      [LANDING, R.copies && R.copies[3]]]
+    var pairs = [[DRAFT, R.copies && R.copies[0]], [MAP, R.copies && R.copies[1]], [LANDING, R.copies && R.copies[2]]]
+    if ((R.copies || []).length !== pairs.length) bad.push((R.copies || []).length + ' copy recipes published, ' + pairs.length + ' expected')
     pairs.forEach(function (p) {
       var r = p[1] ? byId(p[1]) : null
       if (r === null) {
@@ -413,8 +417,8 @@
         return
       }
       var infos = asArray(type.getDataInfos())
-      if (infos.length !== 1) bad.push(p[0] + ' has ' + infos.length + ' data info lines')
-      var text = infos.length > 0 ? String(infos[0].apply(r.data)) : ''
+      if (infos.length !== INFO_SLOTS) bad.push(p[0] + ' has ' + infos.length + ' data info slots (one line wrapped into ' + INFO_SLOTS + ' expected)')
+      var text = infos.map(function (f) { return String(f.apply(r.data)) }).filter(function (s) { return s !== '' }).join(' ')
       if (text === '') bad.push(p[0] + ' sky line is empty for ' + p[1])
       texts.push(p[0].replace('gtceu:', '') + '="' + text + '" (data ' + r.data + ')')
     })

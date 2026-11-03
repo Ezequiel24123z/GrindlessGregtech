@@ -24,8 +24,9 @@
 //   fusion_live           the fusion stage mode 3 read from global.grindless.mercury.fusion equals IV-B2's live recipe
 //                         grindless:solar_processing/iridosmine_fusion (items, fluids, EU/t and duration)
 //   live_contents         both recipes are in the recipe manager under their final ids with exactly their published contents
-//   lookup_sets           gtceu:naquadah_refining holds the published recipes (3 since LuV A2, checked in gg_test_luv_a2); every live
-//                         gtceu:pgm_refining recipe is published and none takes a subset of another's ingredients
+//   lookup_sets           gtceu:naquadah_refining holds the published recipes (the 3 composed since LuV A2, checked in gg_test_luv_a2, and
+//                         the table's direct ones); every live gtceu:pgm_refining recipe is composed or a later era's row
+//                         (grindless:pgm_refining/<uhv..opv>/), and none takes a subset of another's ingredients
 //                         (static; gg_test_recipe_lookup asks GTM's lookup)
 //   controller_recipe     grindless:assembler/naquadah_plant exists and holds its parts
 //   parallel_hatch_option both plants take GTM's Parallel Control Hatch (IV-B6's lib/parallel_hatch.js) as one more option of their part
@@ -79,6 +80,8 @@
   var NAQ_TYPE = 'gtceu:naquadah_refining'
   var PLANT = 'gtceu:platinum_plant'
   var PGM_TYPE = 'gtceu:pgm_refining'
+  // the platinum plant's rows of UHV and later eras (circuits 5 and up), added by their own scripts beside the composed modes 1 to 4
+  var PGM_LATE_ROW = /^grindless:pgm_refining\/(uhv|uev|uiv|uxv|opv)\//
   var NAQ_MAX_EUT = 7680
   var PGM_MAX_EUT = 1920
 
@@ -470,6 +473,14 @@
     return { problems: problems, keys: keys }
   }
 
+  // a live recipe's lookup keys, read from the recipe manager alone: its item and fluid inputs and its programmed circuit
+  function liveKeys(r) {
+    var items = itemContents(r, true)
+    return items.filter(function (x) { return x.circuit === 0 }).map(function (x) { return 'i:' + x.id })
+      .concat(fluidContents(r, true).map(function (f) { return 'f:' + f.id }))
+      .concat(items.filter(function (x) { return x.circuit > 0 }).map(function (x) { return 'circuit:' + x.circuit }))
+  }
+
   function staticChecks() {
     safely('registration', function () {
       var problems = []
@@ -552,10 +563,20 @@
     safely('lookup_sets', function () {
       var problems = []
       var naqLive = asArray(S.server.getRecipeManager().getAllRecipesFor(GTRegistries.RECIPE_TYPES.get(rl(NAQ_TYPE)))).length
-      var naqPublished = (NP().recipes || []).length
+      var naqPublished = (NP().recipes || []).length + (NP().directRecipes || []).length
       if (naqLive !== naqPublished) problems.push(naqLive + ' live ' + NAQ_TYPE + ' recipes, ' + naqPublished + ' published')
-      var pgmLive = asArray(S.server.getRecipeManager().getAllRecipesFor(GTRegistries.RECIPE_TYPES.get(rl(PGM_TYPE)))).length
-      var sets = (PP().recipes || []).map(function (rec) { return { name: rec.name, keys: liveProblems(rec, null).keys } })
+      var composed = PP().recipes || []
+      var composedIds = composed.map(function (rec) { return String(rec.recipeId) })
+      composedIds.forEach(function (id) { if (liveRecipe(id) === null) problems.push(id + ' not in the recipe manager') })
+      var late = 0
+      var sets = asArray(S.server.getRecipeManager().getAllRecipesFor(GTRegistries.RECIPE_TYPES.get(rl(PGM_TYPE)))).map(function (r) {
+        var id = String(r.getId())
+        if (composedIds.indexOf(id) < 0) {
+          if (PGM_LATE_ROW.test(id)) late++
+          else problems.push(id + ' is neither composed nor a later era\'s row')
+        }
+        return { name: id.replace('grindless:pgm_refining/', ''), keys: liveKeys(r) }
+      })
       function subset(x, y) {
         return x.keys.length > 0 && x.keys.every(function (k) { return y.keys.indexOf(k) >= 0 })
       }
@@ -564,10 +585,11 @@
           if (subset(sets[i], sets[j]) || subset(sets[j], sets[i])) problems.push(sets[i].name + ' / ' + sets[j].name)
         }
       }
-      // 6 until LuV A2's mode 4 (7 with it): every live pgm_refining recipe is a published one
-      if (sets.length < 6 || sets.length !== pgmLive) problems.push(sets.length + ' published ' + PGM_TYPE + ' recipes, ' + pgmLive + ' live')
+      // 6 composed until LuV A2's mode 4 (7 with it); the later eras' rows come on top
+      if (composed.length < 6) problems.push(composed.length + ' composed ' + PGM_TYPE + ' recipes')
       check('lookup_sets', problems.length === 0, NAQ_TYPE + ' holds ' + naqLive + ' (' + naqPublished + ' published); ' + sets.length + ' ' + PGM_TYPE +
-        ' input sets, none a subset of another' + (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
+        ' input sets (' + composed.length + ' composed, ' + late + ' later rows), none a subset of another' +
+        (problems.length > 0 ? ' | problems: ' + problems.join('; ') : ''))
     })
 
     safely('controller_recipe', function () {

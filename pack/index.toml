@@ -17890,7 +17890,7 @@ hash = "dc2e6a7f4f8e6ad758fb37d2a095bbf71296ade1f3edfb4c39036f9e34fb188f"
 
 [[files]]
 file = "kubejs/data/grindless/tables/offworld_only.json"
-hash = "a64b952d7a825322864d33f8ae58306bd7d457d5f20c36ed9c9f3d4299d88b34"
+hash = "cec32d15f5cb36b24713b67376d967c1f56992cc5df74b060921d55ce7ecc7df"
 
 [[files]]
 file = "kubejs/data/grindless/tables/opv_basic_machines.json"

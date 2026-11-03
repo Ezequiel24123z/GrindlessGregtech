@@ -44,7 +44,8 @@
   "allowedLate": [
     { "pattern": "naquad", "why": "IV naquadah lines: their titanium trifluoride is a byproduct of a later era (naquadah comes after the Moon)." },
     { "pattern": "fusion_reactor/", "why": "LuV fusion makes plasmas, not ore." },
-    { "pattern": "thermal_reactor/[a-z_]+_froth", "why": "GT Community Additions' froth flotation, finished in its thermal reactor at 30,720 EU/t (LuV): the grossular froth gives tungsten long after Mars." }
+    { "pattern": "thermal_reactor/[a-z_]+_froth", "why": "GT Community Additions' froth flotation, finished in its thermal reactor at 30,720 EU/t (LuV): the grossular froth gives tungsten long after Mars." },
+    { "pattern": "pgm_refining/(uhv|uev|uiv|uxv|opv)/", "why": "The platinum plant's rows of UHV and later (circuits 5 and up) refine what only those eras' lines make: Proxima's liquor, the electron beam's skull, Barnard b's residue, the r-process ash, the spallation cores and the bloom's residue. Their iridium and osmium come long after Mercury." }
   ],
   "byproducts": {
     "aluminium": ["bauxite", "bauxite", "gallium"],
