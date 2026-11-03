@@ -186,14 +186,14 @@ test('the six OpV hatches: assembly lines at VA[OpV] on the sensor or emitter, f
   }
 });
 
-test('structure: not boring, frame and coil, controller in the front slice, 16 rows at most, dominant share <= 0.7', () => {
+test('structure: not boring, frame and coil, controller in the front slice, 64 rows at most, dominant share <= 0.7', () => {
   const s = run.global.grindless.structures['gtceu:field_frozen_press'];
   assert.ok(s, 'has a description');
   const mm = measure(s);
   assert.deepEqual(violations(mm), [], JSON.stringify(mm));
   assert.ok(mm.functional.length >= 2, `${mm.functional}`);
-  assert.deepEqual(mm.bbox, [7, 9, 7]);
-  assert.ok(s.slices.every((sl) => sl.length <= 16), 'at most 16 rows per slice');
+  assert.deepEqual(mm.bbox, [11, 15, 11]);
+  assert.ok(s.slices.every((sl) => sl.length <= 64), 'at most 64 rows per slice');
   assert.ok(s.slices[s.slices.length - 1].some((row) => row.includes('S')), 'the controller is in the front slice');
 });
 

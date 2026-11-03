@@ -400,6 +400,269 @@
     }
   }
 
+  // ---- D5-SHAPE-OPV-B: the SGR and Terzan 5 machines. F is the chain lamina casing; the other chars are per machine (see each pal).
+
+  // Magnetic pair converter: an open frame along the field lines, 13 x 17 x 13. Field-frozen (K) pylons, hoops and base carry a lamina (F)
+  // deck at each end; on the axis the trap: a NEG (N) vessel inside a lamina jacket with glass viewports (G), the field coils (C) on the
+  // jacket and tie struts (Q) from the hoops to it. Hatches sit in the front of the base.
+  L.magnetic_pair_converter = function () {
+    return {
+      w: 13, h: 17, d: 13, ctl: [6, 1],
+      fn: function (x, y, z) {
+        var dx = x - 6
+        var dz = z - 6
+        var ax = abs(dx)
+        var az = abs(dz)
+        var m = cheb(dx, dz)
+        if (y === 0) return (z === 12 && ax <= 3) ? 'X' : 'K'
+        if (y === 16) return m <= 1 && dx === 0 && dz === 0 ? 'G' : 'F'
+        if (ax === 6 && az === 6) return (y % 4 === 0) ? 'Q' : 'K'
+        if (y === 1) return m === 6 ? 'K' : (m <= 2 ? 'F' : '#')
+        if (y === 2 || y === 14) return m <= 5 ? (y === 2 ? 'K' : 'F') : '#'
+        if (y === 15) return m === 6 ? 'F' : (m <= 1 ? 'N' : '#')
+        if ((y === 4 || y === 8 || y === 12) && m === 6) return 'F'
+        if (m === 3 && y >= 3 && y <= 13) {
+          if (y === 8 && (dx === 0 || dz === 0)) return 'G'
+          if (y % 2 === 1 && (dx === 0 || dz === 0)) return 'C'
+          return y % 2 === 0 ? 'K' : 'F'
+        }
+        if (m <= 2 && m >= 1 && y >= 3 && y <= 13) return m === 1 && dx !== 0 && dz !== 0 ? '#' : (m === 2 ? 'N' : 'N')
+        if ((y === 4 || y === 8 || y === 12) && (dx === 0 || dz === 0 || ax === az) && m >= 4 && m <= 5) return 'Q'
+        return '#'
+      }
+    }
+  }
+
+  // Field-frozen press: a press frame aligned with the field, 11 x 15 x 11. Lamina (F) bed and head, four GTM high-power casing (H)
+  // columns, a ram (Q) with platens through a coil stack (C), a lamina shell with glass (G) viewports round it, and a can bay of
+  // framed bays on the front wall. No field-frozen casing: the press makes the plates that casing needs.
+  L.field_frozen_press = function () {
+    return {
+      w: 11, h: 15, d: 11, ctl: [5, 1],
+      fn: function (x, y, z) {
+        var dx = x - 5
+        var dz = z - 5
+        var ax = abs(dx)
+        var az = abs(dz)
+        var m = cheb(dx, dz)
+        if (y <= 2) return (y === 0 && z === 10 && ax <= 3) ? 'X' : (y === 2 ? 'H' : 'F')
+        if (y >= 12) return (y === 14 && m <= 1) ? 'Q' : (y === 12 ? 'H' : 'F')
+        if (ax >= 4 && az >= 4) return 'Q'
+        if (m === 0) return 'Q'
+        if ((y === 3 || y === 11) && m <= 3) return 'F'
+        if (m === 2 && (y === 5 || y === 7 || y === 9)) return 'C'
+        if (m === 3) {
+          if (dx === 0 || dz === 0) return (y % 2 === 1 && y >= 5 && y <= 9) ? 'G' : 'P'
+          return 'P'
+        }
+        if (m === 1 && (y === 4 || y === 10)) return 'F'
+        if (z === 0 && ax <= 3) return 'F'
+        if (ax === 5 && az <= 3 && y % 2 === 1) return 'Q'
+        if (ax === 5 && az <= 3) return 'F'
+        if (z === 10 && ax <= 3 && y <= 7) return y % 4 === 0 ? 'Q' : (ax === 3 ? 'F' : '#')
+        return '#'
+      }
+    }
+  }
+
+  // Debris harvester (the field unit): a sweep frame round a sorter drum, 15 x 7 x 15. A lamina (F) sweep ring and arms on the ground,
+  // frame (Q) posts and an upper ring, and across the middle the sorter drum, a lamina shell with glass (G) windows driven by steel
+  // gearboxes (B) at both ends.
+  L.debris_harvester = function () {
+    return {
+      w: 15, h: 7, d: 15, ctl: [7, 1],
+      fn: function (x, y, z) {
+        var dx = x - 7
+        var dz = z - 7
+        var ax = abs(dx)
+        var az = abs(dz)
+        var m = cheb(dx, dz)
+        var dy = y - 3
+        var r2 = dy * dy + dz * dz
+        if (y === 0) {
+          if (z === 14 && ax <= 3) return 'X'
+          return m === 7 ? 'F' : ((dx === 0 || dz === 0 || m === 4 || (ax === az && m <= 4)) ? 'R' : (m <= 3 ? 'R' : '#'))
+        }
+        if (ax >= 3 && ax <= 11 - 0 && x >= 3 && x <= 11 && r2 <= 6) {
+          if (r2 <= 1) return (dy === 0 && dz === 0) ? 'B' : '#'
+          if (r2 === 5 || r2 === 6) return 'F'
+          return (x % 3 === 1 && dy === 0) ? 'G' : 'F'
+        }
+        if ((x === 2 || x === 12) && r2 <= 6) return 'F'
+        if (dz === 0 && dy === 0 && (x <= 1 || x >= 13)) return 'B'
+        if (dz === 0 && dy === 0 && (x === 0 || x === 14)) return 'Q'
+        if (ax === 7 && az === 7) return y === 6 ? 'F' : 'Q'
+        if (m === 7 && y === 6) return 'Q'
+        if (m === 7 && y === 4 && (ax === 0 || az === 0)) return 'Q'
+        if (y === 1 && (m === 6 || m === 5) && az >= 3) return 'F'
+        if (y === 2 && m === 6 && az >= 3 && ax % 2 === 0) return 'F'
+        if ((z === 2 || z === 12) && y === 2 && x >= 2 && x <= 12) return 'R'
+        if ((z === 1 || z === 13) && y === 1 && x >= 2 && x <= 12) return 'F'
+        if ((z === 1 || z === 13) && y === 3 && ax <= 5) return 'Q'
+        if (y === 5 && m <= 6 && m >= 5 && ax >= 3) return 'F'
+        return '#'
+      }
+    }
+  }
+
+  // Replication refinery: a carbonyl column beside the field-frozen cells, 13 x 15 x 13. A lamina (F) bed and roof, the column (a
+  // TPV-walled tower, T, with pipe (P) risers, tray decks and vent crown V) at the right, a bank of field-frozen cell boxes (K) at the
+  // left linked by pipe runs, and frame (Q) columns.
+  L.replication_refinery = function () {
+    return {
+      w: 13, h: 15, d: 13, ctl: [6, 1],
+      fn: function (x, y, z) {
+        var dx = x - 6
+        var dz = z - 6
+        var ax = abs(dx)
+        var az = abs(dz)
+        var m = cheb(dx, dz)
+        if (y <= 1) return (y === 0 && z === 12 && ax <= 3) ? 'X' : 'F'
+        if (y === 14) return (dx >= 1 && dx <= 5 && abs(dz) <= 2) ? ((dx === 3 && dz === 0) ? 'V' : 'T') : 'F'
+        if (y === 13) {
+          if (dx >= 1 && dx <= 5 && az <= 2) return (dx % 2 === 1 && az % 2 === 0) ? 'V' : 'T'
+          if (dx <= -1 && dx >= -5 && az <= 4) return 'K'
+          return m === 6 ? 'F' : '#'
+        }
+        var cx = dx - 3
+        var cm = cheb(cx, dz)
+        if (cm <= 2) {
+          if (cm === 2) return (y % 4 === 3 && (cx === 0 || dz === 0)) ? 'G' : 'T'
+          if (cm === 0) return 'P'
+          return y % 3 === 0 ? 'F' : '#'
+        }
+        if (dx <= -1 && dx >= -5 && az <= 4) {
+          var bx = (dx + 5) % 4
+          var bz = (dz + 4) % 4
+          var by = (y - 2) % 4
+          if (y <= 12 && bx !== 3 && bz !== 3 && by !== 3) {
+            if (bx === 0 || bx === 2 && false) return 'K'
+            return (bx === 1 && bz === 1 && by === 1) ? '#' : 'K'
+          }
+          if (y === 5 && dz === 0) return 'P'
+          return '#'
+        }
+        if (y === 6 && dz === 0 && dx >= -1 && dx <= 1) return 'P'
+        if (ax === 6 && az === 6) return 'Q'
+        if (z === 0 && ax <= 5 && y <= 9) return 'N'
+        if (x === 0 && az <= 5 && y <= 9) return (y + z) % 4 === 0 ? 'G' : 'F'
+        if (x === 12 && az <= 5 && y <= 9) return 'N'
+        return '#'
+      }
+    }
+  }
+
+  // Von Neumann foundry: a replicator bay, 17 x 13 x 17. A seed core (K, field-frozen shell) hangs in the middle of the hall on four
+  // frame (Q) rails; four assembly cradles (lamina decks, F) with frame gantries stand round it, the hall is a lamina shell with a
+  // glass (G) clerestory and frame piers.
+  L.von_neumann_foundry = function () {
+    return {
+      w: 17, h: 13, d: 17, ctl: [8, 1],
+      fn: function (x, y, z) {
+        var dx = x - 8
+        var dz = z - 8
+        var ax = abs(dx)
+        var az = abs(dz)
+        var m = cheb(dx, dz)
+        var dy = y - 6
+        if (y <= 1) return (y === 0 && z === 16 && ax <= 3) ? 'X' : (y === 0 ? 'F' : 'R')
+        if (y === 12) return m <= 7 ? 'F' : '#'
+        var r2 = dx * dx + dy * dy + dz * dz
+        if (r2 <= 26) {
+          if (r2 <= 6) return '#'
+          if (r2 <= 18) return 'K'
+          return (dx === 0 || dz === 0 || dy === 0) ? 'Q' : '#'
+        }
+        if (m === 8) {
+          if (ax === 8 && az === 8) return 'Q'
+          if (y === 11) return 'F'
+          if (y >= 8 && y <= 10) return ((ax + az) % 3 === 0 ? 'G' : 'F')
+          return y === 2 ? 'F' : ((ax + az) % 4 === 0 ? 'Q' : 'F')
+        }
+        if (m === 7 && (ax + az) % 5 === 0 && y <= 11) return 'Q'
+        if (ax >= 4 && ax <= 6 && az >= 4 && az <= 6) {
+          if (y === 2) return 'E'
+          if (y === 3 && (ax === 4 || az === 4 || ax === 6 || az === 6)) return 'B'
+          if (y >= 4 && y <= 7 && ax === 6 && az === 6) return 'Q'
+          if (y === 8 && ax >= 5 && az >= 5) return 'Q'
+          return '#'
+        }
+        if (y === 5 && (dx === 0 || dz === 0 || ax === az) && m >= 4) return 'Q'
+        if (y === 2 && m >= 3 && m <= 7 && (ax + az) % 2 === 0) return 'E'
+        if ((y === 4 || y === 10) && m === 7) return 'F'
+        if (y === 7 && m === 7) return 'F'
+        if (y === 11 && m === 7) return 'F'
+        if (y === 8 && (m === 6 || m === 5) && (ax === 0 || az === 0)) return 'Q'
+        return '#'
+      }
+    }
+  }
+
+  // Collector node works: a film line hall, 13 x 9 x 21. A lamina (F) floor and roof, a TPV (T) skin along one side and the roof strips,
+  // glass (G) clerestory, and down the middle the line itself: two frame (Q) conveyor beds with roller pipes (P) every third slice.
+  L.collector_node_works = function () {
+    return {
+      w: 13, h: 9, d: 21, ctl: [6, 1],
+      fn: function (x, y, z) {
+        var dx = x - 6
+        var ax = abs(dx)
+        var ex = x === 0 || x === 12
+        var ez = z === 0 || z === 20
+        if (y === 0) return (z === 20 && ax <= 3) ? 'X' : 'F'
+        if (y === 8) return (ex || ez || x % 4 === 2) ? 'F' : ((x % 4 === 0 || z % 4 === 2) ? 'T' : 'G')
+        if (ex || ez) {
+          if (ex && ez) return 'Q'
+          if (z === 20 && ax <= 3 && y <= 2) return 'X'
+          if (y >= 5 && y <= 6) return ex ? 'G' : (ax <= 3 ? 'G' : 'F')
+          return (x === 12) ? 'T' : 'F'
+        }
+        if (y === 1 && (ax === 3 || ax === 4) && z >= 2) return 'Q'
+        if (y === 1 && ax <= 2 && z >= 2 && z <= 18 && z % 6 !== 3) return 'D'
+        if (y === 1 && ax === 5 && z >= 1 && z <= 19) return 'D'
+        if (y === 4 && ax >= 4 && ax <= 5 && z >= 2 && z <= 18) return 'F'
+        if (y === 2 && ax === 3 && z % 3 === 1) return 'P'
+        if (y === 2 && ax === 4 && z % 3 === 1) return 'P'
+        if (y === 3 && ax <= 4 && ax >= 3 && z % 3 === 1) return 'Q'
+        if (y === 1 && ax <= 2 && z % 6 === 3) return 'F'
+        if (y <= 6 && ax === 5 && z % 5 === 2) return 'Q'
+        if (y === 7 && ax <= 5 && z % 4 === 2) return 'Q'
+        return '#'
+      }
+    }
+  }
+
+  // Bulge collector: a receiving dish ring, 31 x 9 x 31. A bowl rising from the hub to the rim, its collecting skin of TPV wall (T)
+  // over a lamina (F) backing, a glass (G) lens ring over the skin, a hub tower of lamina with a coil (C) collar, frame (Q) spokes
+  // and a ring of legs under the bowl; hatches on the front rim.
+  L.bulge_collector = function () {
+    return {
+      w: 31, h: 9, d: 31, ctl: [15, 1],
+      fn: function (x, y, z) {
+        var dx = x - 15
+        var dz = z - 15
+        var r2 = dx * dx + dz * dz
+        var r = Math.sqrt(r2)
+        var ax = abs(dx)
+        if (r > 15.6) return ' '
+        if (r <= 2.5) {
+          if (y === 8) return r2 <= 2 ? 'G' : 'C'
+          if (y === 7) return r2 >= 5 ? 'C' : 'G'
+          if (r2 === 0) return y <= 6 ? 'Q' : '#'
+          return y <= 1 ? 'F' : (y % 2 === 0 ? 'F' : (r2 <= 2 ? '#' : 'F'))
+        }
+        if (r >= 13.5 && y <= 1) return (z === 30 && ax <= 3) ? 'X' : (y === 0 ? 'F' : ((x + z) % 3 === 0 ? 'Q' : 'F'))
+        if (r < 4.5) return (y === 1 && (dx === 0 || dz === 0 || ax === abs(dz))) ? 'Q' : '#'
+        var s = 2 + Math.floor((r - 4.5) * 4.9 / 11)
+        if (y === s) return 'T'
+        if (y === s - 1) return r >= 9 ? 'T' : 'F'
+        if (y === s - 2 && r >= 5.5) return ((ax + abs(dz)) % 3 === 0 || r < 6) ? 'F' : '#'
+        if (y === s + 1 && r >= 7.5 && r <= 12.5) return (r2 % 5 === 0) ? 'G' : '#'
+        if (y < s - 2 && r > 5 && ((dx === 0 || dz === 0) || (ax === abs(dz)) || r >= 12 && r < 14.5 && (x + z) % 4 === 0)) return (y % 3 === 0) ? 'Q' : 'F'
+        return '#'
+      }
+    }
+  }
+
   T.build = function (Pat, name, pal, parts) {
     var lay = L[name]()
     return T.spec(Pat, { w: lay.w, h: lay.h, d: lay.d, pal: pal, parts: parts, fn: lay.fn, ctl: lay.ctl })
