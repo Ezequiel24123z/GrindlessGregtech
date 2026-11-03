@@ -942,7 +942,7 @@ const join = (...rows) => rows.reduce((a, b) => {
   if (a[li][1] !== b[0][1]) throw new Error(`join: ${a[li][1]} is not ${b[0][1]}`);
   return [...a, ...b.slice(1).map(([t, id, from, by, peek]) => [t, id, from.map((f) => (f === 0 ? li : a.length - 1 + f)), by, peek])];
 });
-const cut = (r, i, j = r.length) => r.slice(i, j).map(([t, id, from, by, peek], k) => [k === 0 ? 'i' : t, id, k === 0 ? [] : from.map((f) => f - i), by, peek]);
+const cut = (r, i, j = r.length) => r.slice(i, j).map(([t, id, from, by, peek], k) => [k === 0 && t === 'm' ? 'i' : t, id, k === 0 ? [] : from.map((f) => f - i), by, peek]);
 
 // X1: the qubit stage after the shielded quantum module (steps 30-34); the logic die (Q1) and the interposer (Q2) are its feeders
 ROWS.X1 = [
