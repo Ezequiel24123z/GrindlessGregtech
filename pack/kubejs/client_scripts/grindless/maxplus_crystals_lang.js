@@ -8,7 +8,7 @@
 // Kept out of pack/kubejs/assets/grindless/lang/* like the other *_lang.js scripts. English only.
 (function () {
     var T = {
-        blender: 'Circuit 3: eight plasmas, 1,000 mB each (stellar, lifted, filtered, very-massive-star, p-process, jet, hot flow) and kerr condensate, blended into 1,000 mB of horizon crystal slurry at V[MAX] x 64 A (line T8).',
+        blender: 'Circuit 3: seven plasmas and kerr condensate, 1,000 mB each, blended into 1,000 mB of slurry at V[MAX] x 64 A.',
         core: 'Circuit 1: a sapphire seed plate and condensate-doped dust grown in 4,000,000 mB of slurry, lined with kerr strange plate, at V[MAX] x 256 A (line T9). Kerr condensate carries the heat.',
         controller: 'Circuit 2: a controller seed and condensate-doped dust grown in 1,000,000 mB of slurry, lined with kerr strange plate, at V[MAX] x 256 A (line T10).',
         lifted: 'Circuit 5: stellar plasma lifted out of the star at Cygnus X-1 (line T8).',
