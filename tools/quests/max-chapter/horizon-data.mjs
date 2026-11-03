@@ -54,7 +54,7 @@ export const QUESTS = [
     deps: ['CRYO'], x: 6, y: 0,
     teach: {
       for: 'The &6Mirror Shell&r wraps the black hole in mirrors and sends its light back in. &oFiction:&r a shell like this cannot be built; the hole and its light are real. It is the largest structure in the pack.',
-      needs: 'A two-layer sphere in a 35-block box at Sgr A* orbit, about 7,060 blocks: mirror shell segments inside, a tensegrity truss outside with two stream bundle belts, and 26 cleanroom glass ports ringed by shell window coil casings. Two MAX 16 A input hatches and one or two dynamo hatches sit round the controller, at the equator of the front. Every segment is a swarm-segment craft with a cooler of its own.',
+      needs: 'A two-layer sphere in a 35-block box at Sgr A* orbit, about 7,060 blocks: mirror shell segments inside, a tensegrity truss outside with two stream bundle belts, and 26 cleanroom glass ports ringed by shell window coil casings. Two MAX 16 A input hatches and one or two dynamo hatches sit round the controller, at the equator of the front. Every segment is a swarm-segment craft with a cooler of its own. The Terminal needs 4 passes (a pass places up to 2,300 blocks): 2,922 truss blocks, 3,072 segments, 459 glass, 398 window coil casings and 208 stream bundle blocks.',
       unlocks: 'The segments, the four horizon machines and the last recipe.',
       automate: 'Segments leave the line on a belt; plan the bus before you place the controller.',
     },
@@ -91,8 +91,34 @@ export const QUESTS = [
     rewards: [xp(100)],
   },
   {
+    key: 'PORT1', kind: 'process', title: 'Shell Window Coils', icon: 'grindless:shell_window_coil_casing',
+    deps: ['SHELL'], x: 6, y: 2,
+    teach: {
+      for: 'The shell has 26 ports where light goes in and out and where the hatches sit. Each port is a cleanroom glass pane ringed by a loop of coil and membrane, which keeps the opening shielded and tuned. The ports stand on the faces, the edges and the corners of the box, in the same pattern as the Terminal\'s ghost.',
+      needs: 'The 398 &6Shell Window Coil Casings&r of the shell, from the casing quest of the Sagittarius casings section: two per batch, so about two hundred batches. Place them first with the Terminal, then the glass.',
+      unlocks: 'The glass ports and the closed shell.',
+      automate: 'Run a dedicated line for the casing; its coil and membrane inputs come from the cold-metrology and membrane lines.',
+    },
+    desc: [],
+    tasks: [it('grindless:shell_window_coil_casing', 398)],
+    rewards: [xp(100)],
+  },
+  {
+    key: 'PORT2', kind: 'process', title: 'Cleanroom Glass Ports', icon: 'gtceu:cleanroom_glass',
+    deps: ['PORT1'], x: 8, y: 2,
+    teach: {
+      for: 'The panes of the 26 ports are &6Cleanroom Glass&r, the same glass as a cleanroom wall. They let the controller and the hatches see through the shell while the rest of it stays closed. The controller itself sits in the middle of the front port.',
+      needs: '459 cleanroom glass blocks, set inside the rings of window coil casings: the Terminal places them in the same four passes as the segments. Hatches go in the two rows beside the controller.',
+      unlocks: 'A shell that can form: the last segments close it.',
+      automate: 'Glass is a common GTM block; keep a stack in ME and let the Terminal draw it.',
+    },
+    desc: [],
+    tasks: [it('gtceu:cleanroom_glass', 64)],
+    rewards: [xp(100)],
+  },
+  {
     key: 'SEG4', kind: 'step', title: 'The Shell Is Closed', icon: 'grindless:mirror_shell_segment',
-    deps: ['SEG3'], x: 14, y: 0,
+    deps: ['SEG3', 'PORT2'], x: 14, y: 0,
     desc: [
       'Every segment is set and the last gap in the frame is closed. Check it off once the controller says the shell has formed.',
     ],
