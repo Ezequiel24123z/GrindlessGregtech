@@ -30,7 +30,7 @@
     { name: 'membrane_vacuum_casing', out: 2, duration: 400,
       items: ['grindless:superconducting_membrane', '2x grindless:neg_xhv_casing', TRUSS, 'grindless:max_electric_pump', '2x grindless:ffkm_seal'] },
     { name: 'droplet_radiator_casing', out: 2, duration: 400,
-      items: ['2x grindless:shell_droplet_radiator', TRUSS, 'grindless:max_fluid_regulator', '2x grindless:ffkm_seal'] },
+      items: ['2x grindless:shell_droplet_radiator', TRUSS, 'grindless:max_fluid_regulator', 'grindless:max_electric_pump', '4x gtceu:tungsten_steel_plate', '2x grindless:ffkm_seal'] },
     { name: 'shell_window_coil_casing', out: 2, duration: 400,
       items: ['grindless:max_field_coil', 'grindless:superconducting_membrane', '2x ' + STRAND, TRUSS, 'grindless:max_sensor', '2x grindless:ffkm_seal'] },
     { name: 'membrane_roller_casing', circuit: 15,
