@@ -58,6 +58,12 @@
           if (String(x.id || '').indexOf(':') < 0 || !(Number(x.count) >= 1)) bad = true
           return { id: String(x.id), count: Number(x.count) }
         }
+        var chanced = function (x) {
+          if (!(Number(x.chance) >= 1 && Number(x.chance) <= 10000)) bad = true
+          var s = stack(x)
+          s.chance = Number(x.chance)
+          return s
+        }
         var fluid = function (f) {
           if (String(f.id || '').indexOf(':') < 0 || !(Number(f.amount) >= 1)) bad = true
           return { id: String(f.id), amount: Number(f.amount) }
@@ -66,7 +72,7 @@
         if (dimension !== '' && dimension.indexOf(':') < 0) bad = true
         var rec = { type: type, name: n, circuit: circuit, eut: eut, duration: duration, dimension: dimension,
           dataKey: t.types[type].dataKey ? String(t.types[type].dataKey) : '',
-          itemsIn: list(r.itemsIn).map(stack), kept: list(r.kept).map(stack), fluidsIn: list(r.fluidsIn).map(fluid), charge: list(r.charge).map(fluid),
+          itemsIn: list(r.itemsIn).map(stack), chanced: list(r.chanced).map(chanced), kept: list(r.kept).map(stack), fluidsIn: list(r.fluidsIn).map(fluid), charge: list(r.charge).map(fluid),
           itemsOut: list(r.itemsOut).map(stack), fluidsOut: list(r.fluidsOut).map(fluid) }
         if (bad || (rec.itemsOut.length === 0 && rec.fluidsOut.length === 0) || (rec.itemsIn.length === 0 && rec.fluidsIn.length === 0)) {
           problems.push(type + '/' + n + ': contents')
@@ -84,7 +90,7 @@
 
   function missingIds(rec) {
     var missing = []
-    rec.itemsIn.concat(rec.kept, rec.itemsOut).forEach(function (x) { if (!Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
+    rec.itemsIn.concat(rec.chanced, rec.kept, rec.itemsOut).forEach(function (x) { if (!Item.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
     rec.fluidsIn.concat(rec.charge, rec.fluidsOut).forEach(function (x) { if (!Fluid.exists(x.id) && missing.indexOf(x.id) < 0) missing.push(x.id) })
     return missing
   }
@@ -100,7 +106,7 @@
     if (rec.type === 'chemical_reactor') return null
     var io = ioOf(rec.type)
     if (io === null) return 'no machine for type ' + rec.type
-    if (rec.itemsIn.length + rec.kept.length + 1 > io.itemsIn) return 'too many item inputs (the type holds ' + io.itemsIn + ')'
+    if (rec.itemsIn.length + rec.chanced.length + rec.kept.length + 1 > io.itemsIn) return 'too many item inputs (the type holds ' + io.itemsIn + ')'
     if (rec.fluidsIn.length + rec.charge.length > io.fluidsIn) return 'too many fluid inputs (the type holds ' + io.fluidsIn + ')'
     if (rec.itemsOut.length > io.itemsOut) return rec.itemsOut.length + ' item outputs (the type holds ' + io.itemsOut + ')'
     if (rec.fluidsOut.length > io.fluidsOut) return rec.fluidsOut.length + ' fluid outputs (the type holds ' + io.fluidsOut + ')'
@@ -111,6 +117,7 @@
     // GTM puts the type's path in front: 'grindless:<name>' becomes grindless:<type>/<name> (= rec.recipeId)
     var recipe = event.recipes.gtceu[rec.type]('grindless:' + rec.name)
     rec.itemsIn.forEach(function (x) { recipe.itemInputs(x.count + 'x ' + x.id) })
+    rec.chanced.forEach(function (x) { recipe.chancedInput(x.count + 'x ' + x.id, x.chance, 0) })
     rec.kept.forEach(function (x) { recipe.notConsumable(x.count + 'x ' + x.id) })
     recipe.circuit(rec.circuit)
     rec.fluidsIn.forEach(function (x) { recipe.inputFluids(Fluid.of(x.id, x.amount)) })
@@ -124,7 +131,7 @@
 
   function keysOf(rec) {
     var keys = {}
-    rec.itemsIn.concat(rec.kept).forEach(function (x) { keys['i:' + x.id] = true })
+    rec.itemsIn.concat(rec.chanced, rec.kept).forEach(function (x) { keys['i:' + x.id] = true })
     rec.fluidsIn.concat(rec.charge).forEach(function (x) { keys['f:' + x.id] = true })
     keys['circuit:' + rec.circuit] = true
     return keys

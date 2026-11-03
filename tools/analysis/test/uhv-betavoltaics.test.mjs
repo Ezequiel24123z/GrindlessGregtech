@@ -106,7 +106,7 @@ test('the recipes fit the machines\' slots (startup maxIO; the circuit takes an 
     if (m) assert.ok(startup.includes(`maxIO: { itemsIn: ${m.itemsIn}, itemsOut: ${m.itemsOut}, fluidsIn: ${m.fluidsIn}, fluidsOut: ${m.fluidsOut} }`), type);
     else assert.ok(startup.includes("type: 'cryogenic_isotope_separation', io: [1, 0, 1, 2]"), type);
     for (const r of rowsOf(type)) {
-      assert.ok(r.itemsIn.length + r.kept.length + 1 <= max.itemsIn, `${r.name} items in`);
+      assert.ok(r.itemsIn.length + (r.chanced || []).length + r.kept.length + 1 <= max.itemsIn, `${r.name} items in`);
       assert.ok(r.fluidsIn.length + r.charge.length <= max.fluidsIn, `${r.name} fluids in`);
       assert.ok(r.itemsOut.length <= max.itemsOut, `${r.name} items out`);
       assert.ok(r.fluidsOut.length <= max.fluidsOut, `${r.name} fluids out`);
@@ -114,20 +114,16 @@ test('the recipes fit the machines\' slots (startup maxIO; the circuit takes an 
   }
 });
 
-test('ultrapure water comes only from the plant, made from plain water', () => {
+test('ultrapure water comes only from the plant\'s polishing row, from grade 5 purified water', () => {
   const p = producers('gtceu:ultrapure_water');
-  assert.deepEqual(p.map(([w]) => w), ['betavoltaics.json:.types.ultrapure_water.recipes[0]']);
+  assert.deepEqual(p.map(([, r]) => r.name), ['ultrapure_water']);
   const made = run.docs.recipes.recipes.filter((r) => JSON.stringify(r.j.outputs || {}).includes('"gtceu:ultrapure_water"'));
   assert.deepEqual(made.map((r) => r.i), ['grindless:ultrapure_water/ultrapure_water']);
   const w = by('ultrapure_water', 'ultrapure_water');
-  assert.ok(inputs(w).includes('minecraft:water'));
-  assert.ok(!inputs(w).includes('gtceu:water'));
+  assert.ok(inputs(w).includes('gtca:purified_water_grade_5'));
   assert.ok(ids(w.kept).includes('grindless:ion_exchange_resin'), 'the resin is kept');
-  // the reverse osmosis concentrate leaves as salt water (GTM's electrolyser takes it)
-  const water = w.fluidsIn.find((f) => f.id === 'minecraft:water').amount;
-  assert.equal(w.fluidsOut.reduce((s, f) => s + f.amount, 0), water);
+  assert.equal(w.fluidsOut.find((f) => f.id === 'gtceu:ultrapure_water').amount, 6000);
 });
-
 test('the betavoltaic cell holds nickel-63 from the HFIR on diamond diodes from the diamond lattice fab', () => {
   assert.deepEqual(producers('grindless:betavoltaic_cell').map(([, r]) => r.name), ['betavoltaic_cell']);
   const cell = by('betavoltaic', 'betavoltaic_cell');
