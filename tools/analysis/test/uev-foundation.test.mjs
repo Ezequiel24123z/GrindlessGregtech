@@ -24,7 +24,7 @@ const COIL = 'grindless:hftacn_coil_block';
 const MATERIALS = {
   calcium_48: 'dust', potassium_40: 'dust', lithium_6: 'dust', plutonium_244: 'dust', curium_248: 'dust', californium_249: 'dust',
   lay_superhydride: 'ingot', ammonia_borane: 'dust', fe16n2: 'dust', iron_pentacarbonyl: 'liquid', hftacn: 'ingot', sic_sic: 'dust',
-  tungsten_silicide: 'dust', tgg: 'dust', ppktp: 'dust', ffkm: 'dust', polycarbonate: 'dust', ule_glass: 'dust',
+  tungsten_silicide: 'dust', tgg: 'dust', ffkm: 'dust', polycarbonate: 'dust', ule_glass: 'dust',
   interstellar_gas: 'gas', compressed_interstellar_gas: 'gas', hydrogen_deuterium_fraction: 'gas', helium_fraction: 'gas',
   dhe3_fuel_mix: 'gas', pb11_fuel: 'gas', polarised_dhe3_fuel: 'gas',
 };

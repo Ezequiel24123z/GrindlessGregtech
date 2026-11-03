@@ -146,13 +146,6 @@
           "itemsOut": [{ "id": "grindless:drawn_hollow_fibre", "count": 2 }], "fluidsOut": [] }
       ]
     },
-    "polarizer": {
-      "recipes": [
-        { "name": "ppktp_poling", "circuit": 0, "eut": 122880, "duration": 300,
-          "itemsIn": [{ "id": "grindless:ktp_electroded_wafer", "count": 1 }], "kept": [], "fluidsIn": [], "charge": [],
-          "itemsOut": [{ "id": "gtceu:ppktp_dust", "count": 2 }], "fluidsOut": [] }
-      ]
-    },
     "assembler": {
       "recipes": [
         { "name": "cnt_twist", "circuit": 1, "eut": 491520, "duration": 200,
