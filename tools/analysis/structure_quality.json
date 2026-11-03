@@ -176,8 +176,8 @@
  "gtceu:bulge_collector": {
   "v": [],
   "bt": 5,
-  "ds": 0.673,
-  "c": 478
+  "ds": 0.473,
+  "c": 2549
  },
  "gtceu:bz_dynamo": {
   "v": [],
@@ -242,8 +242,8 @@
  "gtceu:collector_node_works": {
   "v": [],
   "bt": 6,
-  "ds": 0.62,
-  "c": 354
+  "ds": 0.498,
+  "c": 1400
  },
  "gtceu:combined_cycle_plant": {
   "v": [],
@@ -313,9 +313,9 @@
  },
  "gtceu:debris_harvester": {
   "v": [],
-  "bt": 4,
-  "ds": 0.641,
-  "c": 302
+  "bt": 5,
+  "ds": 0.59,
+  "c": 540
  },
  "gtceu:decay_heat_vault": {
   "v": [],
@@ -439,9 +439,9 @@
  },
  "gtceu:field_frozen_press": {
   "v": [],
-  "bt": 3,
-  "ds": 0.666,
-  "c": 288
+  "bt": 6,
+  "ds": 0.506,
+  "c": 1411
  },
  "gtceu:fission_reactor": {
   "v": [],
@@ -805,9 +805,9 @@
  },
  "gtceu:magnetic_pair_converter": {
   "v": [],
-  "bt": 4,
-  "ds": 0.535,
-  "c": 102
+  "bt": 6,
+  "ds": 0.433,
+  "c": 1426
  },
  "gtceu:mass_stream_injector": {
   "v": [],
@@ -895,9 +895,9 @@
  },
  "gtceu:mirror_shell": {
   "v": [],
-  "bt": 4,
-  "ds": 0.569,
-  "c": 6146
+  "bt": 5,
+  "ds": 0.435,
+  "c": 7060
  },
  "gtceu:mnt_collider": {
   "v": [],
@@ -1339,9 +1339,9 @@
  },
  "gtceu:replication_refinery": {
   "v": [],
-  "bt": 4,
-  "ds": 0.566,
-  "c": 365
+  "bt": 8,
+  "ds": 0.447,
+  "c": 1404
  },
  "gtceu:ring_harvester": {
   "v": [],
@@ -1765,9 +1765,9 @@
  },
  "gtceu:von_neumann_foundry": {
   "v": [],
-  "bt": 3,
-  "ds": 0.624,
-  "c": 565
+  "bt": 7,
+  "ds": 0.526,
+  "c": 2232
  },
  "gtceu:wake_shield_facility": {
   "v": [],

@@ -23,7 +23,7 @@ const V_UXV = 2 ** 27;
 const VA_OPV = 503316480;
 const MACHINES = ['debris_harvester', 'replication_refinery', 'von_neumann_foundry'];
 const TYPES = ['debris_harvesting', 'replication_refining', 'self_replication'];
-const DIMS = [[11, 5, 11], [9, 9, 9], [11, 11, 11]];
+const DIMS = [[15, 7, 15], [13, 15, 13], [17, 13, 17]];
 
 test('the stand-in runs the OpV-R2 scripts without errors, nothing skipped, no lookup clash', () => {
   const mine = run.errors.filter((e) => /replication/.test(String(e.file)));

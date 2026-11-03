@@ -234,7 +234,7 @@
     machine: FIELD,
     recipeType: 'gtceu:' + FIELD_TYPE,
     dimension: END,
-    maxIO: { itemsIn: 2, itemsOut: 2, fluidsIn: 2, fluidsOut: 0 },
+    maxIO: { itemsIn: 2, itemsOut: 2, fluidsIn: 2, fluidsOut: 1 },
     parts: FIELD_PARTS,
     noVoiding: NO_VOIDING,
     notEnd: NOT_END,

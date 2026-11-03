@@ -6,9 +6,9 @@
 // registers only what no other package makes: metal_debris_fraction, carbonyl_iron_nickel, ffc_pellet, spent_graphite_anode and the fluid
 // metal_carbonyl.
 //
-//   gtceu:debris_harvester       11 x 5 x 11 robust hall, OpV. Recipe type gtceu:debris_harvesting (c1 bulge debris, c2 the two fractions).
-//   gtceu:replication_refinery    9 x 9 x 9 clean two-cell plant, OpV. Type gtceu:replication_refining (Mond carbonyl cell + FFC salt bath).
-//   gtceu:von_neumann_foundry    11 x 11 x 11 gantry hall, OpV. Type gtceu:self_replication (c1 and c2: a probe copies itself).
+//   gtceu:debris_harvester       15 x 7 x 15 sweep frame round a sorter drum, OpV. Recipe type gtceu:debris_harvesting (c1 bulge debris, c2 the two fractions).
+//   gtceu:replication_refinery   13 x 15 x 13 carbonyl column beside the field-frozen cells, OpV. Type gtceu:replication_refining (Mond carbonyl cell + FFC salt bath).
+//   gtceu:von_neumann_foundry    17 x 13 x 17 replicator bay, OpV. Type gtceu:self_replication (c1 and c2: a probe copies itself).
 //
 // Only the debris harvester is locked to Terzan 5 core; all three run on two UXV 4 A energy hatches or OpV hatches. Textures: tools/assets/Build-OpVReplicationTextures.ps1.
 // Names: client_scripts/grindless/opv_replication_lang.js. Published for the recipe script: global.grindless.replication.
@@ -18,100 +18,49 @@
   const R = G.replication || (G.replication = {})
   const LOG = '[grindless/opv] '
 
-  const ROBUST = 'gtceu:robust_machine_casing'
-  const ROBUST_TEXTURE = 'gtceu:block/casings/solid/machine_casing_robust_tungstensteel'
-  const CLEAN = 'gtceu:clean_machine_casing'
-  const CLEAN_TEXTURE = 'gtceu:block/casings/solid/machine_casing_clean_stainless_steel'
+  const LAMINA = 'grindless:chain_lamina_casing'
+  const LAMINA_TEXTURE = 'grindless:block/opv/chain_lamina_casing'
 
   R.table = 'kubejs/data/grindless/tables/replication.json'
   R.site = 'grindless:terzan5_core'
 
-  function abs(n) { return n < 0 ? -n : n }
-  function max(a, b) { return a > b ? a : b }
-
-  // x left to right, y bottom to top, z back to front; 'X' floor (casing or a part), F casing, Q frame, '#' air, ' ' anything
-  // 14: a robust hall, frame posts at the corners, gearbox towers at the ring r = 2 and a gear course around the walls
-  function harvesterCell(x, y, z) {
-    var dx = x - 5
-    var dz = z - 5
-    var r = max(abs(dx), abs(dz))
-    if (y === 0) return 'X'
-    if (y === 4) return r === 5 ? (abs(dx) === 5 && abs(dz) === 5 ? 'Q' : ((x + z) % 2 === 0 ? 'G' : 'F')) : (r <= 1 ? 'F' : ' ')
-    if (r === 5) return abs(dx) === 5 && abs(dz) === 5 ? 'Q' : (y === 2 ? ((x + z) % 2 === 0 ? 'B' : 'F') : ((x + z) % 3 !== 0 ? 'G' : 'F'))
-    if (r === 2 && abs(dx) === 2 && abs(dz) === 2) return 'B'
-    return '#'
+  function parts(withHatches) {
+    var list = [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 })]
+    if (withHatches) list.splice(2, 0, Pat.part('input_hatch', { min: 1, max: 2 }), Pat.part('output_hatch', { min: 1, max: 2 }))
+    list.push(G.parallelHatch.part())
+    return list
   }
 
-  // 15: a clean 9 x 9 x 9 plant, a titanium-pipe carbonyl column at x = 2, vent windows on the side walls, a low divider to the salt bath
-  function refineryCell(x, y, z) {
-    var dx = x - 4
-    var dz = z - 4
-    var r = max(abs(dx), abs(dz))
-    if (y === 0) return 'X'
-    if (r === 4) {
-      if (y === 8) return 'F'
-      if ((y === 3 || y === 5) && abs(dx) === 4 && abs(dz) <= 2) return 'V'
-      if (y === 2 || y === 6) return 'P'
-      if (y === 4) return (x + z) % 2 === 0 ? 'P' : 'F'
-      return (x + z) % 2 === 0 ? 'B' : 'F'
-    }
-    if (dx === -2 && dz === 0 && y <= 7) return 'P'
-    if (dx === 1 && y <= 3 && abs(dz) <= 3) return 'F'
-    return '#'
-  }
-
-  // 16: an 11 x 11 x 11 gantry hall: frame posts at the corners and at (+-2, +-2), a grating ring beam at y = 8, grating windows in the walls
-  function foundryCell(x, y, z) {
-    var dx = x - 5
-    var dz = z - 5
-    var r = max(abs(dx), abs(dz))
-    if (y === 0) return 'X'
-    if (r === 5) {
-      if (abs(dx) === 5 && abs(dz) === 5) return 'Q'
-      if (y === 10) return (x + z) % 2 === 0 ? 'G' : 'F'
-      if (y <= 2) return 'F'
-      return (x + z) % 2 === 0 ? 'G' : 'F'
-    }
-    if (abs(dx) === 2 && abs(dz) === 2 && y <= 7) return 'Q'
-    if (y === 8 && r === 2) return 'G'
-    return '#'
-  }
-
+  // shapes: opv/shapes.js. Bootstrap: none of their casings (lamina, TPV wall, NEG, field-frozen) is made from a product of these machines.
   R.machines = [
     {
       name: 'debris_harvester', machine: 'gtceu:debris_harvester', type: 'debris_harvesting', dataKey: 'grindless_debris_harvesting', lang: 'Debris Harvester',
-      maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }, width: 11, height: 5, depth: 11, casing: ROBUST, texture: ROBUST_TEXTURE,
-      pal: { F: ROBUST, Q: 'tungsten_steel', B: 'gtceu:steel_gearbox', G: 'gtceu:assembly_line_grating' }, fn: harvesterCell,
-      parts: function () {
-        return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
-      }
+      maxIO: { itemsIn: 3, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }, width: 15, height: 7, depth: 15, casing: LAMINA, texture: LAMINA_TEXTURE,
+      pal: { F: LAMINA, R: 'gtceu:robust_machine_casing', Q: 'tungsten_steel', B: 'gtceu:steel_gearbox', G: 'gtceu:assembly_line_grating' },
+      parts: function () { return parts(false) }
     },
     {
       name: 'replication_refinery', machine: 'gtceu:replication_refinery', type: 'replication_refining', dataKey: 'grindless_replication_refining', lang: 'Replication Refinery',
-      maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 2, fluidsOut: 2 }, width: 9, height: 9, depth: 9, casing: CLEAN, texture: CLEAN_TEXTURE,
-      pal: { F: CLEAN, P: 'gtceu:titanium_pipe_casing', V: 'gtceu:heat_vent', B: 'gtceu:steel_gearbox' }, fn: refineryCell,
-      parts: function () {
-        return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('input_hatch', { min: 1, max: 2 }),
-          Pat.part('output_hatch', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
-      }
+      maxIO: { itemsIn: 4, itemsOut: 3, fluidsIn: 2, fluidsOut: 2 }, width: 13, height: 15, depth: 13, casing: LAMINA, texture: LAMINA_TEXTURE,
+      pal: { F: LAMINA, T: 'grindless:tpv_wall_casing', K: 'grindless:field_frozen_casing', N: 'grindless:neg_xhv_casing', P: 'gtceu:titanium_pipe_casing',
+        V: 'gtceu:heat_vent', Q: 'tungsten_steel', G: 'gtceu:laminated_glass' },
+      parts: function () { return parts(true) }
     },
     {
       name: 'von_neumann_foundry', machine: 'gtceu:von_neumann_foundry', type: 'self_replication', dataKey: 'grindless_self_replication', lang: 'Von Neumann Foundry',
-      maxIO: { itemsIn: 5, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, width: 11, height: 11, depth: 11, casing: ROBUST, texture: ROBUST_TEXTURE,
-      pal: { F: ROBUST, Q: 'tungsten_steel', G: 'gtceu:assembly_line_grating' }, fn: foundryCell,
-      parts: function () {
-        return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 }),
-          G.parallelHatch.part()]
-      }
+      maxIO: { itemsIn: 5, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, width: 17, height: 13, depth: 17, casing: LAMINA, texture: LAMINA_TEXTURE,
+      pal: { F: LAMINA, K: 'grindless:field_frozen_casing', R: 'gtceu:robust_machine_casing', E: 'gtceu:assembly_line_grating', B: 'gtceu:steel_gearbox',
+        Q: 'tungsten_steel', G: 'gtceu:laminated_glass' },
+      parts: function () { return parts(false) }
     }
   ]
 
   R.items = ['metal_debris_fraction', 'carbonyl_iron_nickel', 'ffc_pellet', 'spent_graphite_anode']
   R.materials = { 'grindless:metal_carbonyl': { colour: 0xB8C4D8, formula: 'Fe(CO)5' } }
 
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback: opv/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: m.fn })
+    return G.opvShapes.build(Pat, m.name, m.pal, m.parts())
   }
 
   // one EMI line per recipe, read from its data

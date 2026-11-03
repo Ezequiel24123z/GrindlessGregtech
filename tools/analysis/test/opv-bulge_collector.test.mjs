@@ -25,7 +25,7 @@ const V_UXV = 2 ** 27;
 const VA_OPV = 503316480;
 const MACHINES = ['collector_node_works', 'bulge_collector'];
 const TYPES = ['collector_node_assembly', 'bulge_light_collection'];
-const DIMS = [[9, 5, 13], [13, 7, 13]];
+const DIMS = [[13, 9, 21], [31, 9, 31]];
 
 const rows = new Map();
 for (const file of ['replication', 'bulge_collector']) {

@@ -23,13 +23,14 @@
       "name": "enrichment",
       "circuit": 1,
       "stages": [
-        "gtceu:chemical_reactor/uranium_hexafluoride",
+        "grindless:large_chemical_reactor/uranium_tetrafluoride",
+        "grindless:large_chemical_reactor/uranium_hexafluoride",
         "gtceu:centrifuge/uranium_hexafluoride_separation",
-        "gtceu:electrolyzer/enriched_uranium_hexafluoride_separation",
-        "gtceu:electrolyzer/depleted_uranium_hexafluoride_separation"
+        "grindless:large_chemical_reactor/enriched_uranium_deconversion",
+        "grindless:large_chemical_reactor/depleted_uranium_deconversion"
       ],
       "given": { "i:gtceu:uraninite_dust": 30 },
-      "linked": ["f:gtceu:uranium_hexafluoride", "f:gtceu:enriched_uranium_hexafluoride", "f:gtceu:depleted_uranium_hexafluoride"]
+      "linked": ["i:gtceu:uranium_tetrafluoride_dust", "f:gtceu:uranium_hexafluoride", "f:gtceu:enriched_uranium_hexafluoride", "f:gtceu:depleted_uranium_hexafluoride"]
     },
     {
       "name": "radon",

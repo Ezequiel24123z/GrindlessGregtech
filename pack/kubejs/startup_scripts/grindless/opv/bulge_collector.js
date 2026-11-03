@@ -5,8 +5,8 @@
 // the shared ids (collector_node, spent_collector_node, deployed_node_pack, bulge_light_census, node_power_transmitter...); this package registers
 // only si_ribbon and pv_collector_film.
 //
-//   gtceu:collector_node_works   9 x 5 x 13 clean line, OpV. Type gtceu:collector_node_assembly (c1 ribbon, c2 film, c3 node, c4 deployed pack).
-//   gtceu:bulge_collector        13 x 7 x 13 dish hall, OpV, a GENERATOR on one OpV 4 A dynamo hatch. Type gtceu:bulge_light_collection
+//   gtceu:collector_node_works   13 x 9 x 21 node assembly line, OpV. Type gtceu:collector_node_assembly (c1 ribbon, c2 film, c3 node, c4 deployed pack).
+//   gtceu:bulge_collector        31 x 9 x 31 collector field, OpV, a GENERATOR on one OpV 4 A dynamo hatch. Type gtceu:bulge_light_collection
 //                                (c1 / c2 / c3: 1, 4, 16 packs -> 2^26, 2^28, 2^30 EU/t for one shared duration; the packs are consumed).
 //
 // The collector and the node deploy row are locked to Terzan 5 core; the rest runs anywhere. Textures: tools/assets/Build-OpVBulgeCollectorTextures.ps1. Names: client_scripts/grindless/opv_bulge_collector_lang.js.
@@ -17,59 +17,18 @@
   const B = G.bulgeCollector || (G.bulgeCollector = {})
   const LOG = '[grindless/opv] '
 
-  const PLASCRETE = 'gtceu:plascrete'
-  const PLASCRETE_TEXTURE = 'gtceu:block/casings/cleanroom/plascrete'
-  const HPC = 'gtceu:high_power_casing'
-  const HPC_TEXTURE = 'gtceu:block/casings/hpca/high_power_casing'
+  const LAMINA = 'grindless:chain_lamina_casing'
+  const LAMINA_TEXTURE = 'grindless:block/opv/chain_lamina_casing'
 
   B.table = 'kubejs/data/grindless/tables/bulge_collector.json'
   B.site = 'grindless:terzan5_core'
-
-  function abs(n) { return n < 0 ? -n : n }
-  function max(a, b) { return a > b ? a : b }
-
-  // x left to right, y bottom to top, z back to front; 'X' floor (casing or a part), F casing, L glass, G grating, C coil, '#' air, ' ' anything
-  // 17: a plascrete line, cleanroom-glass windows on the long walls, a grating roof strip over every second bay
-  function worksCell(x, y, z) {
-    var dx = x - 4
-    if (y === 0) return 'X'
-    if (abs(dx) === 4 && (z === 0 || z === 12)) return 'Q'
-    if (abs(dx) === 4 || z === 0 || z === 12) {
-      if (y === 4) return 'F'
-      if (y === 2 && abs(dx) === 4 && z % 2 === 1) return 'L'
-      if (y === 1 && z % 2 === 0) return 'N'
-      if (y === 3 && z % 4 === 2 && abs(dx) === 4) return 'P'
-      return 'F'
-    }
-    if (y === 4) return 'G'
-    return '#'
-  }
-
-  // 18: a 13 x 13 dish hall: high power casing wall with laminated-glass windows, a coil spine in the middle and four coil pylons at (+-3, +-3)
-  function bulgeCell(x, y, z) {
-    var dx = x - 6
-    var dz = z - 6
-    var r = max(abs(dx), abs(dz))
-    if (y === 0) return 'X'
-    if (r === 6) {
-      if (y === 6) return 'F'
-      if (abs(dx) === 6 && abs(dz) === 6) return 'Q'
-      if (y >= 2 && y <= 4) return (x + z) % 3 === 0 ? 'F' : 'L'
-      if (y === 1 && (x + z) % 2 === 0) return 'N'
-      return 'F'
-    }
-    if (y === 6) return ' '
-    if (dx === 0 && dz === 0 && y <= 5) return 'C'
-    if (abs(dx) === 3 && abs(dz) === 3 && y <= 4) return 'C'
-    return '#'
-  }
 
   B.machines = [
     {
       name: 'collector_node_works', machine: 'gtceu:collector_node_works', type: 'collector_node_assembly', dataKey: 'grindless_collector_node_assembly',
       lang: 'Collector Node Works', generator: false,
-      maxIO: { itemsIn: 5, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 }, width: 9, height: 5, depth: 13, casing: PLASCRETE, texture: PLASCRETE_TEXTURE,
-      pal: { F: PLASCRETE, L: 'gtceu:cleanroom_glass', G: 'gtceu:assembly_line_grating', N: 'gtceu:filter_casing', P: 'gtceu:tungstensteel_pipe_casing', Q: 'stainless_steel' }, fn: worksCell,
+      maxIO: { itemsIn: 5, itemsOut: 1, fluidsIn: 0, fluidsOut: 0 },       width: 13, height: 9, depth: 21, casing: LAMINA, texture: LAMINA_TEXTURE,
+            pal: { F: LAMINA, T: 'grindless:tpv_wall_casing', D: 'gtceu:plascrete', Q: 'tungsten_steel', P: 'gtceu:tungstensteel_pipe_casing', G: 'gtceu:cleanroom_glass' },
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 2 }), Pat.part('output_bus', { min: 1, max: 2 }), Pat.part('energy_input', { min: 1, max: 2 }), G.parallelHatch.part()]
       }
@@ -77,8 +36,8 @@
     {
       name: 'bulge_collector', machine: 'gtceu:bulge_collector', type: 'bulge_light_collection', dataKey: 'grindless_bulge_light_collection',
       lang: 'Bulge Collector', generator: true,
-      maxIO: { itemsIn: 2, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 }, width: 13, height: 7, depth: 13, casing: HPC, texture: HPC_TEXTURE,
-      pal: { F: HPC, L: 'gtceu:laminated_glass', C: 'gtceu:superconducting_coil', N: 'gtceu:filter_casing', Q: 'stainless_steel' }, fn: bulgeCell,
+      maxIO: { itemsIn: 2, itemsOut: 2, fluidsIn: 0, fluidsOut: 0 },       width: 31, height: 9, depth: 31, casing: LAMINA, texture: LAMINA_TEXTURE,
+            pal: { F: LAMINA, T: 'grindless:tpv_wall_casing', Q: 'tungsten_steel', G: 'gtceu:laminated_glass', C: 'gtceu:superconducting_coil' },
       parts: function () {
         return [Pat.part('input_bus', { min: 1, max: 1 }), Pat.part('output_bus', { min: 1, max: 1 }), Pat.part('energy_output', { min: 1, max: 1 })]
       }
@@ -90,9 +49,9 @@
     pv_collector_film: { stack: 64 }
   }
 
-  // built in the machine registry callback: uiv/shapes.js may load after this file
+  // built in the machine registry callback:   opv/shapes.js may load after this file
   function spec(m) {
-    return G.uivShapes.spec(Pat, { w: m.width, h: m.height, d: m.depth, pal: m.pal, parts: m.parts(), fn: m.fn })
+      return G.opvShapes.build(Pat, m.name, m.pal, m.parts())
   }
 
   // one EMI line per recipe, read from its data
