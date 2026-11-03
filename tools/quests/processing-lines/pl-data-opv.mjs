@@ -215,7 +215,7 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
     ['i', 'grindless:ir_target_rod', 'Ir Target Rod'],
     ['m', sput, 'MTJ Sputter Cluster'],
     ['i', 'grindless:ta_clad_ir_rod', 'Ta-Clad Ir Rod'],
-    ['i', 'grindless:ir_spallation_target', 'Ir Spallation Target'],
+    ['i', 'grindless:ir_spallation_target', 'Ir Spallation Target', { end: 'the first antiproton complex row' }],
   ]),
   path('o2h_', [
     ['i', 'gtceu:lithium_chloride_dust', 'Lithium Chloride'],
@@ -229,7 +229,7 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
     ['i', 'grindless:li6h_tile', 'Li-6 Hydride Tile'],
     ['m', eb, 'Electron Beam Furnace'],
     ['i', 'grindless:canned_li6h_block', 'Canned Li-6 Hydride Block'],
-    ['i', 'grindless:li6_hydride_shield', 'Li-6 Hydride Shield'],
+    ['i', 'grindless:li6_hydride_shield', 'Li-6 Hydride Shield', { end: 'the first antiproton complex row' }],
   ]),
   path('o2p_', [
     ['i', 'grindless:rrr_nb_target', 'RRR Nb Target'],
@@ -239,7 +239,7 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
     ['i', 'grindless:pickup_array', 'Pickup Array'],
     ['i', 'grindless:brazed_pickup_tank', 'Brazed Pickup Tank'],
     ['m', he, 'Helium Refrigerator'],
-    ['i', 'grindless:stochastic_cooling_pickup', 'Stochastic Cooling Pickup'],
+    ['i', 'grindless:stochastic_cooling_pickup', 'Stochastic Cooling Pickup', { end: 'the stochastic cooling row' }],
   ]),
   path('o2c_', [
     ['i', 'grindless:ceb6_powder', 'CeB6 Powder'],
@@ -248,7 +248,7 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
     ['i', 'grindless:ceb6_cathode', 'CeB6 Cathode'],
     ['i', 'grindless:cooler_electron_gun', 'Cooler Electron Gun'],
     ['m', he, 'Helium Refrigerator'],
-    ['i', 'grindless:electron_cooler', 'Electron Cooler'],
+    ['i', 'grindless:electron_cooler', 'Electron Cooler', { end: 'the electron cooling row' }],
   ]),
   path('o2n_', [
     ['i', 'grindless:tizrv_ingot', 'TiZrV Ingot'],
@@ -260,6 +260,10 @@ const o2 = cluster('O2 Antiprotons to antihydrogen', [
     ['i', 'grindless:activated_neg_chamber', 'Activated NEG Chamber'],
     ['i', 'grindless:neg_xhv_casing', 'NEG XHV Casing', { end: 'the beam line casing and the ELENA rings' }],
   ]),
+  [n('o2r0', 0, 0, I('grindless:ir_spallation_target'), 'Ir Spallation Target', { kind: 'raw', sub: 'Made in its own line, left' })],
+  [n('o2r1', 0, 0, I('grindless:li6_hydride_shield'), 'Li-6 Hydride Shield', { kind: 'raw', sub: 'Made in its own line, left' })],
+  [n('o2r2', 0, 0, I('grindless:stochastic_cooling_pickup'), 'Stochastic Cooling Pickup', { kind: 'raw', sub: 'Made in its own line, left' })],
+  [n('o2r3', 0, 0, I('grindless:electron_cooler'), 'Electron Cooler', { kind: 'raw', sub: 'Made in its own line, left' })],
   [n('o2t_0', 0, 0, I('grindless:empty_penning_trap'), 'Empty Penning Trap', { kind: 'raw', sub: 'Catches the cold antiprotons' })],
   [n('o2d_0', 0, 0, I('grindless:dense_positron_cell'), 'Dense Positron Cell', { kind: 'raw', sub: 'O3: the positron line' })],
   path('o2l_', [
@@ -526,9 +530,9 @@ const o6 = cluster('O6 Probes, nodes and the bulge', [
     ['i', 'grindless:sdd_die', 'SDD Die'],
   ]),
 ], [
-  ['o6_16', 'o6m_8'],
-  ['o6_14', 'o6s_6'],
-  ['o6_14', 'o6f_3'],
+  ['o6_15', 'o6m_8'],
+  ['o6_13', 'o6s_6'],
+  ['o6_13', 'o6f_3'],
   ['o6x_5', 'o6d_6'],
 ], [['o6x0', 'pl_iv:hotcell'], ['o6x1', 'pl_uhv:clock']], {}, 10);
 
@@ -616,7 +620,7 @@ const o7 = cluster('O7 OpV components', [
     ['i', 'grindless:hpge_compton_crystal', 'HPGe Compton Crystal', { end: 'the OpV sensor' }],
   ]),
 ], [
-  ['o7_8', 'o7r_8'],
+  ['o7_8', 'o7r_5'],
   ['o7_10', 'o7h_7'],
 ], [], {}, 11);
 
